@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright (C) 2008 The Android Open Source Project
+
+     Licensed under the Apache License, Version 2.0 (the "License");
+     you may not use this file except in compliance with the License.
+     You may obtain a copy of the License at
+  
+          http://www.apache.org/licenses/LICENSE-2.0
+  
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+-->
+
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:settings="http://schemas.android.com/apk/res/com.android.settings">
+        
+    <PreferenceCategory
+            android:title="@string/sound_settings">
+            
+        <CheckBoxPreference
+                android:key="silent"
+                android:title="@string/silent_mode_title"
+                android:summary="@string/silent_mode_summary"
+                android:persistent="false"
+                android:disableDependentsState="true" />
+    
+        <VolumePreference
+                android:key="ring_volume"
+                android:title="@string/ring_volume_title"
+                android:summary="@string/ring_volume_summary"
+                android:dialogTitle="@string/ring_volume_title"
+                android:persistent="false"
+                android:dependency="silent"
+                android:streamType="ring" />
+    
+        <VolumePreference
+                android:key="media_volume"
+                android:title="@string/media_volume_title"
+                android:summary="@string/media_volume_summary"
+                android:dialogTitle="@string/media_volume_title"
+                android:persistent="false"
+                android:dependency="silent"
+                android:streamType="music" />
+    
+        <com.android.settings.DefaultRingtonePreference
+                android:key="ringtone"
+                android:title="@string/ringtone_title"
+                android:summary="@string/ringtone_summary"
+                android:dialogTitle="@string/ringtone_title"
+                android:persistent="false"
+                android:dependency="silent"
+                android:ringtoneType="ringtone" />
+    
+        <CheckBoxPreference
+                android:key="vibrate"
+                android:title="@string/vibrate_title"
+                android:summary="@string/vibrate_summary"
+                android:persistent="false"
+                android:dependency="silent" />
+    
+        <com.android.settings.DefaultRingtonePreference
+                android:key="notification_sound"
+                android:title="@string/notification_sound_title"
+                android:summary="@string/notification_sound_summary"
+                android:dialogTitle="@string/notification_sound_dialog_title"
+                android:dependency="silent"
+                android:persistent="false"
+                android:ringtoneType="notification" />
+                
+        <CheckBoxPreference
+                android:key="dtmf_tone"
+                android:title="@string/dtmf_tone_enable_title"
+                android:summaryOn="@string/dtmf_tone_enable_summary_on"
+                android:summaryOff="@string/dtmf_tone_enable_summary_off"
+                android:dependency="silent"
+                android:defaultValue="true" />
+
+        <CheckBoxPreference
+                android:key="sound_effects"
+                android:title="@string/sound_effects_enable_title"
+                android:summaryOn="@string/sound_effects_enable_summary_on"
+                android:summaryOff="@string/sound_effects_enable_summary_off"
+                android:dependency="silent"
+                android:defaultValue="true" />
+
+    </PreferenceCategory>
+
+    <PreferenceCategory
+            android:title="@string/display_settings">
+    
+        <com.android.settings.BrightnessPreference
+                android:key="brightness"
+                android:title="@string/brightness"
+                android:dialogIcon="@drawable/ic_popup_brightness"
+                android:dialogTitle="@string/brightness" />
+            
+        <ListPreference
+                android:key="screen_timeout"
+                android:title="@string/screen_timeout"
+                android:persistent="false"
+                android:entries="@array/screen_timeout_entries"
+                android:entryValues="@array/screen_timeout_values" />
+
+    </PreferenceCategory>
+
+</PreferenceScreen>   
