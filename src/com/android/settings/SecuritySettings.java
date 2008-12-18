@@ -44,11 +44,13 @@ public class SecuritySettings extends PreferenceActivity
     
     private static final String KEY_LOCK_ENABLED = "lockenabled";
     private static final String KEY_VISIBLE_PATTERN = "visiblepattern";
+    private static final String KEY_TACTILE_FEEDBACK_ENABLED = "tactilefeedback";
     private static final int CONFIRM_PATTERN_REQUEST_CODE = 55;
 
     private LockPatternUtils mLockPatternUtils;
     private CheckBoxPreference mLockEnabled;
     private CheckBoxPreference mVisiblePattern;
+    private CheckBoxPreference mTactileFeedback;
     private Preference mChoosePattern;
 
     private CheckBoxPreference mShowPassword;
@@ -103,6 +105,12 @@ public class SecuritySettings extends PreferenceActivity
         mVisiblePattern.setTitle(R.string.lockpattern_settings_enable_visible_pattern_title);
         inlinePrefCat.addPreference(mVisiblePattern);
 
+        // tactile feedback
+        mTactileFeedback = new CheckBoxPreference(this);
+        mTactileFeedback.setKey(KEY_TACTILE_FEEDBACK_ENABLED);
+        mTactileFeedback.setTitle(R.string.lockpattern_settings_enable_tactile_feedback_title);
+        inlinePrefCat.addPreference(mTactileFeedback);
+
         // change pattern lock
         Intent intent = new Intent();
         intent.setClassName("com.android.settings",
@@ -146,9 +154,11 @@ public class SecuritySettings extends PreferenceActivity
         boolean patternExists = mLockPatternUtils.savedPatternExists();
         mLockEnabled.setEnabled(patternExists);
         mVisiblePattern.setEnabled(patternExists);
+        mTactileFeedback.setEnabled(patternExists);
 
         mLockEnabled.setChecked(mLockPatternUtils.isLockPatternEnabled());
         mVisiblePattern.setChecked(mLockPatternUtils.isVisiblePatternEnabled());
+        mTactileFeedback.setChecked(mLockPatternUtils.isTactileFeedbackEnabled());
 
         int chooseStringRes = mLockPatternUtils.savedPatternExists() ?
                 R.string.lockpattern_settings_change_lock_pattern :
@@ -169,6 +179,8 @@ public class SecuritySettings extends PreferenceActivity
             mLockPatternUtils.setLockPatternEnabled(isToggled(preference));
         } else if (KEY_VISIBLE_PATTERN.equals(key)) {
             mLockPatternUtils.setVisiblePatternEnabled(isToggled(preference));
+        } else if (KEY_TACTILE_FEEDBACK_ENABLED.equals(key)) {
+            mLockPatternUtils.setTactileFeedbackEnabled(isToggled(preference));
         } else if (preference == mShowPassword) {
             Settings.System.putInt(getContentResolver(), Settings.System.TEXT_SHOW_PASSWORD,
                     mShowPassword.isChecked() ? 1 : 0);
@@ -198,9 +210,9 @@ public class SecuritySettings extends PreferenceActivity
     }
 
     private void setProviders(String providers) {
-        // Update the system setting LOCATION_PROVIDERS_ALLOWED
-        Settings.System.putString(getContentResolver(),
-                Settings.System.LOCATION_PROVIDERS_ALLOWED, providers);
+        // Update the secure setting LOCATION_PROVIDERS_ALLOWED
+        Settings.Secure.putString(getContentResolver(),
+            Settings.Secure.LOCATION_PROVIDERS_ALLOWED, providers);
         if (Config.LOGV) {
             Log.v("Location Accuracy", "Setting LOCATION_PROVIDERS_ALLOWED = " + providers);
         }
@@ -213,8 +225,8 @@ public class SecuritySettings extends PreferenceActivity
      */
     private String getAllowedProviders() {
         String allowedProviders =
-            Settings.System.getString(getContentResolver(),
-                Settings.System.LOCATION_PROVIDERS_ALLOWED);
+            Settings.Secure.getString(getContentResolver(),
+                Settings.Secure.LOCATION_PROVIDERS_ALLOWED);
         if (allowedProviders == null) {
             allowedProviders = "";
         }

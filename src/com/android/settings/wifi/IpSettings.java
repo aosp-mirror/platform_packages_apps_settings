@@ -19,12 +19,16 @@ package com.android.settings.wifi;
 import com.android.settings.R;
 
 import android.content.ContentResolver;
+import android.net.wifi.WifiInfo;
+import android.net.wifi.WifiManager;
 import android.os.Bundle;
 import android.preference.CheckBoxPreference;
 import android.preference.EditTextPreference;
+import android.preference.ListPreference;
 import android.preference.Preference;
 import android.preference.PreferenceActivity;
 import android.provider.Settings.System;
+import android.text.TextUtils;
 import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -32,8 +36,10 @@ import android.widget.Toast;
 
 public class IpSettings extends PreferenceActivity implements Preference.OnPreferenceChangeListener {
 
+    private static final String KEY_MAC_ADDRESS = "mac_address";
     private static final String KEY_USE_STATIC_IP = "use_static_ip";
-
+    private static final String KEY_NUM_CHANNELS = "num_channels";
+    
     private String[] mSettingNames = {
             System.WIFI_STATIC_IP, System.WIFI_STATIC_GATEWAY, System.WIFI_STATIC_NETMASK,
             System.WIFI_STATIC_DNS1, System.WIFI_STATIC_DNS2
@@ -61,12 +67,46 @@ public class IpSettings extends PreferenceActivity implements Preference.OnPrefe
             preference.setOnPreferenceChangeListener(this);
         }
     }
-
+    
     @Override
     protected void onResume() {
         super.onResume();
         
         updateUi();
+        initNumChannelsPreference();
+        refreshMacAddress();
+    }
+
+    private void initNumChannelsPreference() {
+        ListPreference pref = (ListPreference) findPreference(KEY_NUM_CHANNELS);
+        pref.setOnPreferenceChangeListener(this);
+
+        WifiManager wifiManager = (WifiManager) getSystemService(WIFI_SERVICE);
+        /*
+         * Generate the list of valid channel counts to show in the ListPreference.
+         * The values are numerical, so the only text to be localized is the
+         * "channel_word" resource.
+         */
+        int[] validChannelCounts = wifiManager.getValidChannelCounts();
+        if (validChannelCounts == null) {
+            Toast.makeText(this, R.string.wifi_setting_num_channels_error,
+                           Toast.LENGTH_SHORT).show();
+            return;
+        }
+        String[] entries = new String[validChannelCounts.length];
+        String[] entryValues = new String[validChannelCounts.length];
+
+        for (int i = 0; i < validChannelCounts.length; i++) {
+            entryValues[i] = String.valueOf(validChannelCounts[i]);
+            entries[i] = getString(R.string.wifi_setting_num_channels_channel_phrase,
+                                   validChannelCounts[i]);
+        }
+        pref.setEntries(entries);
+        pref.setEntryValues(entryValues);
+        int numChannels = wifiManager.getNumAllowedChannels();
+        if (numChannels >= 0) {
+            pref.setValue(String.valueOf(numChannels));
+        }
     }
 
     @Override
@@ -80,14 +120,34 @@ public class IpSettings extends PreferenceActivity implements Preference.OnPrefe
     }
 
     public boolean onPreferenceChange(Preference preference, Object newValue) {
-        String value = (String) newValue;
-        
-        if (!isIpAddress(value)) {
-            Toast.makeText(this, R.string.wifi_ip_settings_invalid_ip, Toast.LENGTH_LONG).show();
-            return false;
+        String key = preference.getKey();
+        if (key == null) return true;
+
+        if (key.equals(KEY_NUM_CHANNELS)) {
+            try {
+                int numChannels = Integer.parseInt((String) newValue);
+                WifiManager wifiManager = (WifiManager) getSystemService(WIFI_SERVICE);
+                if (!wifiManager.setNumAllowedChannels(numChannels)) {
+                    Toast.makeText(this, R.string.wifi_setting_num_channels_error,
+                            Toast.LENGTH_SHORT).show();
+                }
+            } catch (NumberFormatException e) {
+                Toast.makeText(this, R.string.wifi_setting_num_channels_error,
+                        Toast.LENGTH_SHORT).show();
+                return false;
+            }
+            
+        } else {
+            String value = (String) newValue;
+            
+            if (!isIpAddress(value)) {
+                Toast.makeText(this, R.string.wifi_ip_settings_invalid_ip, Toast.LENGTH_LONG).show();
+                return false;
+            }
+            
+            preference.setSummary(value);
         }
         
-        preference.setSummary(value);
         return true;
     }
 
@@ -175,6 +235,16 @@ public class IpSettings extends PreferenceActivity implements Preference.OnPrefe
             EditTextPreference preference = (EditTextPreference) findPreference(mPreferenceKeys[i]);
             System.putString(contentResolver, mSettingNames[i], preference.getText());
         }
+    }
+    
+    private void refreshMacAddress() {
+        WifiManager wifiManager = (WifiManager) getSystemService(WIFI_SERVICE);
+        WifiInfo wifiInfo = wifiManager.getConnectionInfo();
+
+        Preference wifiMacAddressPref = findPreference(KEY_MAC_ADDRESS);
+        String macAddress = wifiInfo == null ? null : wifiInfo.getMacAddress();
+        wifiMacAddressPref.setSummary(!TextUtils.isEmpty(macAddress) ? macAddress 
+                : getString(R.string.status_unavailable));
     }
     
 }

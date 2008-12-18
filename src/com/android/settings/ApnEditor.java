@@ -63,6 +63,8 @@ public class ApnEditor extends PreferenceActivity
     private EditTextPreference mMmsProxy;
     private EditTextPreference mMmsPort;
     private EditTextPreference mApnType;
+    private String mCurMnc;
+    private String mCurMcc;
     
     private Uri mUri;
     private Cursor mCursor;
@@ -210,6 +212,8 @@ public class ApnEditor extends PreferenceActivity
                     // Auto populate MNC and MCC for new entries, based on what SIM reports
                     mMcc.setText(mcc);
                     mMnc.setText(mnc);
+                    mCurMnc = mnc;
+                    mCurMcc = mcc;
                 }
             }
         }
@@ -337,6 +341,12 @@ public class ApnEditor extends PreferenceActivity
         values.put(Telephony.Carriers.MNC, mnc);
         
         values.put(Telephony.Carriers.NUMERIC, mcc + mnc);
+        
+        if (mCurMnc != null && mCurMcc != null) {
+            if (mCurMnc.equals(mnc) && mCurMcc.equals(mcc)) {
+                values.put(Telephony.Carriers.CURRENT, 1);
+            }
+        }
         
         getContentResolver().update(mUri, values, null, null);
         

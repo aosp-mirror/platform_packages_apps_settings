@@ -29,7 +29,6 @@ import android.content.IntentFilter;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.IPackageDataObserver;
 import android.content.pm.IPackageStatsObserver;
-import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.PackageStats;
 import android.content.pm.PackageManager.NameNotFoundException;
@@ -37,6 +36,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.text.format.Formatter;
 import android.util.Config;
 import android.util.Log;
 import java.util.ArrayList;
@@ -50,32 +50,61 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 /**
- * Activity to display application information from Settings
- * 
+ * Activity to display application information from Settings. This activity presents
+ * extended information associated with a package like code, data, total size, permissions
+ * used by the application and also the set of default launchable activities.
+ * For system applications, an option to clear user data is displayed only if data size is > 0.
+ * System applications that do not want clear user data do not have this option.
+ * For non-system applications, there is no option to clear data. Instead there is an option to
+ * uninstall the application.
  */
 public class InstalledAppDetails extends Activity implements View.OnClickListener, DialogInterface.OnClickListener  {
     private static final String TAG="InstalledAppDetails";
     private static final int _UNKNOWN_APP=R.string.unknown;
-   //wait times used for the async package manager api
     private ApplicationInfo mAppInfo;
-    private Button mUninstallButton;
+    private Button mAppButton;
     private Button mActivitiesButton;
-    private boolean mSysPackage;
-    private boolean localLOGV=Config.LOGV || true;
+    private boolean mCanUninstall;
+    private boolean localLOGV=Config.LOGV || false;
     private TextView mTotalSize;
     private TextView mAppSize;
     private TextView mDataSize;
+    private PkgSizeObserver mSizeObserver;
+    private ClearUserDataObserver mClearDataObserver;
+    // Views related to cache info
+    private View mCachePanel;
+    private TextView mCacheSize;
+    private Button mClearCacheButton;
+    private ClearCacheObserver mClearCacheObserver;
+    
     PackageStats mSizeInfo;
     private Button mManageSpaceButton;
     private PackageManager mPm;
-    private String mBStr, mKbStr, mMbStr;
     
     //internal constants used in Handler
-    private static final int CLEAR_USER_DATA = 1;
     private static final int OP_SUCCESSFUL = 1;
     private static final int OP_FAILED = 2;
+    private static final int CLEAR_USER_DATA = 1;
     private static final int GET_PKG_SIZE = 2;
+    private static final int CLEAR_CACHE = 3;
     private static final String ATTR_PACKAGE_STATS="PackageStats";
+    
+    // invalid size value used initially and also when size retrieval through PackageManager
+    // fails for whatever reason
+    private static final int SIZE_INVALID = -1;
+    
+    // Resource strings
+    private CharSequence mInvalidSizeStr;
+    private CharSequence mComputingStr;
+    private CharSequence mAppButtonText;
+    
+    // Possible btn states
+    private enum AppButtonStates {
+        CLEAR_DATA,
+        UNINSTALL,
+        NONE
+    } 
+    private AppButtonStates mAppButtonState;
     
     private Handler mHandler = new Handler() {
         public void handleMessage(Message msg) {
@@ -86,17 +115,22 @@ public class InstalledAppDetails extends Activity implements View.OnClickListene
                 case GET_PKG_SIZE:
                     refreshSizeInfo(msg);
                     break;
+                case CLEAR_CACHE:
+                    // Refresh size info
+                    mPm.getPackageSizeInfo(mAppInfo.packageName, mSizeObserver);
+                    break;
                 default:
                     break;
             }
         }
     };
     
-    private boolean isSystemPackage() {
-        if ((mAppInfo.flags&ApplicationInfo.FLAG_SYSTEM) != 0) {
-            return true;
+    private boolean isUninstallable() {
+        if (((mAppInfo.flags&ApplicationInfo.FLAG_SYSTEM) != 0) && 
+                ((mAppInfo.flags & ApplicationInfo.FLAG_UPDATED_SYSTEM_APP) == 0)) {
+            return false;
         }
-        return false;
+        return true;
     }
     
     class ClearUserDataObserver extends IPackageDataObserver.Stub {
@@ -119,28 +153,46 @@ public class InstalledAppDetails extends Activity implements View.OnClickListene
          }
      }
     
+    class ClearCacheObserver extends IPackageDataObserver.Stub {
+        public void onRemoveCompleted(final String packageName, final boolean succeeded) {
+            final Message msg = mHandler.obtainMessage(CLEAR_CACHE);
+            msg.arg1 = succeeded?OP_SUCCESSFUL:OP_FAILED;
+            mHandler.sendMessage(msg);
+         }
+     }
+    
     private String getSizeStr(long size) {
-        String retStr = "";
-        if(size < 1024) {
-            return String.valueOf(size)+mBStr;
+        if (size == SIZE_INVALID) {
+            return mInvalidSizeStr.toString();
         }
-        long kb, mb, rem;
-        kb = size >> 10;
-        rem = size - (kb << 10);
-        if(kb < 1024) {
-            if(rem > 512) {
-                kb++;
+        return Formatter.formatFileSize(this, size);
+    }
+    
+    private void setAppBtnState() {
+        boolean visible = false;
+        if(mCanUninstall) {
+            //app can clear user data
+            if((mAppInfo.flags & ApplicationInfo.FLAG_ALLOW_CLEAR_USER_DATA) 
+                    == ApplicationInfo.FLAG_ALLOW_CLEAR_USER_DATA) {
+                mAppButtonText = getText(R.string.clear_user_data_text);
+               mAppButtonState = AppButtonStates.CLEAR_DATA;
+               visible = true;
+            } else {
+                //hide button if diableClearUserData is set
+                visible = false;
+                mAppButtonState = AppButtonStates.NONE;
             }
-            retStr += String.valueOf(kb)+mKbStr;
-            return retStr;
+        } else {
+            visible = true;
+            mAppButtonState = AppButtonStates.UNINSTALL;
+            mAppButtonText = getText(R.string.uninstall_text);
         }
-        mb = kb >> 10;
-        if(kb >= 512) {
-            //round off
-            mb++;
-       }
-       retStr += String.valueOf(mb)+ mMbStr;
-       return retStr;
+        if(visible) {
+            mAppButton.setText(mAppButtonText);
+            mAppButton.setVisibility(View.VISIBLE);
+        } else {
+            mAppButton.setVisibility(View.GONE);
+        }
     }
     
     /** Called when the activity is first created. */
@@ -152,45 +204,25 @@ public class InstalledAppDetails extends Activity implements View.OnClickListene
         //get application's name from intent
         Intent intent = getIntent();
         final String packageName = intent.getStringExtra(ManageApplications.APP_PKG_NAME);
-        mSizeInfo = intent.getParcelableExtra(ManageApplications.APP_PKG_SIZE);
-        long total = -1;
-        long code = -1;
-        long data = -1;
-        if(mSizeInfo != null) {
-            total = mSizeInfo.cacheSize+mSizeInfo.codeSize+mSizeInfo.dataSize;
-            code = mSizeInfo.codeSize;
-            data = mSizeInfo.dataSize+mSizeInfo.cacheSize;
-        }
-        String unknownStr = getString(_UNKNOWN_APP);
-        mBStr = getString(R.string.b_text);
-        mKbStr = getString(R.string.kb_text);
-        mMbStr = getString(R.string.mb_text);
-        String totalSizeStr = unknownStr;
-        if(total != -1) {
-            totalSizeStr = getSizeStr(total);
-        }
-        String appSizeStr = unknownStr;
-        if(code != -1) {
-            appSizeStr = getSizeStr(code);
-        }
-        String dataSizeStr = unknownStr;
-        if(data != -1) {
-            dataSizeStr = getSizeStr(data);
-        }
-        if(localLOGV) Log.i(TAG, "packageName:"+packageName+", total="+total+
-                "code="+code+", data="+data);
+        mComputingStr = getText(R.string.computing_size);
+        // Try retrieving package stats again
+        CharSequence totalSizeStr, appSizeStr, dataSizeStr;
+        totalSizeStr = appSizeStr = dataSizeStr = mComputingStr;
+        if(localLOGV) Log.i(TAG, "Have to compute package sizes");
+        mSizeObserver = new PkgSizeObserver();
+        mPm.getPackageSizeInfo(packageName, mSizeObserver);
+
         try {
-            mAppInfo = mPm.getApplicationInfo(packageName, 0);
+            mAppInfo = mPm.getApplicationInfo(packageName, 
+                    PackageManager.GET_UNINSTALLED_PACKAGES);
         } catch (NameNotFoundException e) {
-           Throwable th = e.fillInStackTrace();
             Log.e(TAG, "Exception when retrieving package:"+packageName, e);
             displayErrorDialog(R.string.app_not_found_dlg_text, true, true);
         }
-        setContentView(R.layout.installed_app_details);
-        ((ImageView)findViewById(R.id.app_icon)).setImageDrawable(mPm.
-                getApplicationIcon(mAppInfo));
+        setContentView(R.layout.installed_app_details);       
+        ((ImageView)findViewById(R.id.app_icon)).setImageDrawable(mAppInfo.loadIcon(mPm));
         //set application name TODO version
-        CharSequence appName = mPm.getApplicationLabel(mAppInfo);
+        CharSequence appName = mAppInfo.loadLabel(mPm);
         if(appName == null) {
             appName = getString(_UNKNOWN_APP);
         }
@@ -208,33 +240,22 @@ public class InstalledAppDetails extends Activity implements View.OnClickListene
         mDataSize = (TextView)findViewById(R.id.data_size_text);
         mDataSize.setText(dataSizeStr);
          
-         mUninstallButton = ((Button)findViewById(R.id.uninstall_button));
+         mAppButton = ((Button)findViewById(R.id.uninstall_button));
         //determine if app is a system app
-         mSysPackage = isSystemPackage();
-         if(localLOGV) Log.i(TAG, "Is systemPackage "+mSysPackage);
-         int btnText;
-         boolean btnClickable = true;
-         
-         if(mSysPackage) {
-             //app can clear user data
-             if((mAppInfo.flags & ApplicationInfo.FLAG_ALLOW_CLEAR_USER_DATA) 
-                     == ApplicationInfo.FLAG_ALLOW_CLEAR_USER_DATA) {
-                 mUninstallButton.setText(R.string.clear_user_data_text);
-                 //disable button if data is 0
-                 if(data == 0) {
-                     mUninstallButton.setEnabled(false);
-                 } else {
-                     //enable button
-                     mUninstallButton.setOnClickListener(this);
-                 }
-             } else {
-                 //hide button if diableClearUserData is set
-                 mUninstallButton.setVisibility(View.GONE);
-             }
-         } else {
-             mUninstallButton.setText(R.string.uninstall_text);
-             mUninstallButton.setOnClickListener(this);
+         mCanUninstall = !isUninstallable();
+         if(localLOGV) Log.i(TAG, "Is systemPackage "+mCanUninstall);
+         setAppBtnState();
+         mManageSpaceButton = (Button)findViewById(R.id.manage_space_button);
+         if(mAppInfo.manageSpaceActivityName != null) {
+             mManageSpaceButton.setVisibility(View.VISIBLE);
+             mManageSpaceButton.setOnClickListener(this);
          }
+         
+         // Cache section
+         mCachePanel = findViewById(R.id.cache_panel);
+         mCacheSize = (TextView) findViewById(R.id.cache_size_text);
+         mClearCacheButton = (Button) findViewById(R.id.clear_cache_button);
+         
          //clear activities
          mActivitiesButton = (Button)findViewById(R.id.clear_activities_button);
          List<ComponentName> prefActList = new ArrayList<ComponentName>();
@@ -251,23 +272,19 @@ public class InstalledAppDetails extends Activity implements View.OnClickListene
              autoLaunchView.setText(R.string.auto_launch_enable_text);
              mActivitiesButton.setOnClickListener(this);
          }
-         mManageSpaceButton = (Button)findViewById(R.id.manage_space_button);
-         if(mAppInfo.manageSpaceActivityName != null) {
-             mManageSpaceButton.setVisibility(View.VISIBLE);
-             mManageSpaceButton.setOnClickListener(this);
+         
+         // security permissions section
+         LinearLayout permsView = (LinearLayout) findViewById(R.id.permissions_section);
+         AppSecurityPermissions asp = new AppSecurityPermissions(this, packageName);
+         if(asp.getPermissionCount() > 0) {
+             permsView.setVisibility(View.VISIBLE);
+             // Make the security sections header visible
+             LinearLayout securityList = (LinearLayout) permsView.findViewById(
+                     R.id.security_settings_list);
+             securityList.addView(asp.getPermissionsView());
+         } else {
+             permsView.setVisibility(View.GONE);
          }
-         //security permissions section
-         AppSecurityPermissions asp = new AppSecurityPermissions(this);
-         PackageInfo pkgInfo;
-        try {
-            pkgInfo = mPm.getPackageInfo(packageName, PackageManager.GET_PERMISSIONS);
-        } catch (NameNotFoundException e) {
-            Log.w(TAG, "Couldnt retrieve permissions for package:"+packageName);
-            return;
-        }
-         asp.setSecurityPermissionsView(pkgInfo);
-         LinearLayout securityList = (LinearLayout) findViewById(R.id.security_settings_list);
-         securityList.addView(asp.getPermissionsView());
     }
     
     private void displayErrorDialog(int msgId, final boolean finish, final boolean changed) {
@@ -292,7 +309,7 @@ public class InstalledAppDetails extends Activity implements View.OnClickListene
         Intent intent = new Intent();
         intent.putExtra(ManageApplications.APP_CHG, appChanged);
         setResult(ManageApplications.RESULT_OK, intent);
-        mUninstallButton.setEnabled(false);
+        mAppButton.setEnabled(false);
         if(finish) {
             finish();
         }
@@ -305,29 +322,53 @@ public class InstalledAppDetails extends Activity implements View.OnClickListene
      */
     private void refreshSizeInfo(Message msg) {
         boolean changed = false;
-        Intent intent = new Intent();
         PackageStats newPs = msg.getData().getParcelable(ATTR_PACKAGE_STATS);
         long newTot = newPs.cacheSize+newPs.codeSize+newPs.dataSize;
-        long oldTot = mSizeInfo.cacheSize+mSizeInfo.codeSize+mSizeInfo.dataSize;
-        if(newTot != oldTot) {
-            mTotalSize.setText(getSizeStr(newTot));
-            changed = true;
-        }
-        if(newPs.codeSize != mSizeInfo.codeSize) {
-            mAppSize.setText(getSizeStr(newPs.codeSize));
-            changed = true;
-        }
-        if((newPs.dataSize != mSizeInfo.dataSize) || (newPs.cacheSize != mSizeInfo.cacheSize)) {
-            mDataSize.setText(getSizeStr(newPs.dataSize+newPs.cacheSize));
-            changed = true;
-        }
-        if(changed) {
-            mUninstallButton.setText(R.string.clear_user_data_text);
+        if(mSizeInfo == null) {
             mSizeInfo = newPs;
-            intent.putExtra(ManageApplications.APP_PKG_SIZE, mSizeInfo);
+            mTotalSize.setText(getSizeStr(newTot));
+            mAppSize.setText(getSizeStr(newPs.codeSize));
+            mDataSize.setText(getSizeStr(newPs.dataSize+newPs.cacheSize));
+        } else {
+            long oldTot = mSizeInfo.cacheSize+mSizeInfo.codeSize+mSizeInfo.dataSize;
+            if(newTot != oldTot) {
+                mTotalSize.setText(getSizeStr(newTot));
+                changed = true;
+            }
+            if(newPs.codeSize != mSizeInfo.codeSize) {
+                mAppSize.setText(getSizeStr(newPs.codeSize));
+                changed = true;
+            }
+            if((newPs.dataSize != mSizeInfo.dataSize) || (newPs.cacheSize != mSizeInfo.cacheSize)) {
+                mDataSize.setText(getSizeStr(newPs.dataSize+newPs.cacheSize));
+            }
+            if(changed) {
+                mSizeInfo = newPs;
+            }
         }
-        intent.putExtra(ManageApplications.APP_CHG, changed);
-        setResult(ManageApplications.RESULT_OK, intent);
+        
+        long data = mSizeInfo.dataSize+mSizeInfo.cacheSize;
+        // Disable button if data is 0
+        if(mAppButtonState != AppButtonStates.NONE){
+            mAppButton.setText(mAppButtonText);
+            if((mAppButtonState == AppButtonStates.CLEAR_DATA) && (data == 0)) {
+                mAppButton.setEnabled(false);
+            } else {
+                mAppButton.setEnabled(true);
+                mAppButton.setOnClickListener(this);
+            }            
+        }
+        refreshCacheInfo(newPs.cacheSize);
+    }
+    
+    private void refreshCacheInfo(long cacheSize) {
+        // Set cache info
+        mCacheSize.setText(getSizeStr(cacheSize));
+        if (cacheSize <= 0) {
+            mClearCacheButton.setEnabled(false);
+        } else {
+            mClearCacheButton.setOnClickListener(this);
+        }
     }
     
     /*
@@ -339,11 +380,10 @@ public class InstalledAppDetails extends Activity implements View.OnClickListene
         String packageName = mAppInfo.packageName;
         if(result == OP_SUCCESSFUL) {
             Log.i(TAG, "Cleared user data for system package:"+packageName);
-            PkgSizeObserver observer = new PkgSizeObserver();
-            mPm.getPackageSizeInfo(packageName, observer);
+            mPm.getPackageSizeInfo(packageName, mSizeObserver);
         } else {
-            mUninstallButton.setText(R.string.clear_user_data_text);
-            mUninstallButton.setEnabled(true);
+            mAppButton.setText(R.string.clear_user_data_text);
+            mAppButton.setEnabled(true);
         }
     }
     
@@ -352,20 +392,21 @@ public class InstalledAppDetails extends Activity implements View.OnClickListene
      * button for a system package
      */
     private  void initiateClearUserDataForSysPkg() {
-        mUninstallButton.setEnabled(false);
+        mAppButton.setEnabled(false);
         //invoke uninstall or clear user data based on sysPackage
-        boolean recomputeSizes = false;
         String packageName = mAppInfo.packageName;
         Log.i(TAG, "Clearing user data for system package");
-        ClearUserDataObserver observer = new ClearUserDataObserver();
+        if(mClearDataObserver == null) {
+            mClearDataObserver = new ClearUserDataObserver();
+        }
         ActivityManager am = (ActivityManager) getSystemService(Context.ACTIVITY_SERVICE);
-        boolean res = am.clearApplicationUserData(packageName, observer);
+        boolean res = am.clearApplicationUserData(packageName, mClearDataObserver);
         if(!res) {
             //doesnt initiate clear. some error. should not happen but just log error for now
             Log.i(TAG, "Couldnt clear application user data for package:"+packageName);
             displayErrorDialog(R.string.clear_data_failed, false, false);
         } else {
-                mUninstallButton.setText(R.string.recompute_size);
+                mAppButton.setText(R.string.recompute_size);
         }
     }
     
@@ -375,8 +416,8 @@ public class InstalledAppDetails extends Activity implements View.OnClickListene
      */
     public void onClick(View v) {
         String packageName = mAppInfo.packageName;
-        if(v == mUninstallButton) {
-            if(mSysPackage) {
+        if(v == mAppButton) {
+            if(mCanUninstall) {
                 //display confirmation dialog
                 new AlertDialog.Builder(this)
                 .setTitle(getString(R.string.clear_data_dlg_title))
@@ -399,11 +440,17 @@ public class InstalledAppDetails extends Activity implements View.OnClickListene
             Intent intent = new Intent(Intent.ACTION_DEFAULT);
             intent.setClassName(mAppInfo.packageName, mAppInfo.manageSpaceActivityName);
             startActivityForResult(intent, -1);
+        } else if (v == mClearCacheButton) {
+            // Lazy initialization of observer
+            if (mClearCacheObserver == null) {
+                mClearCacheObserver = new ClearCacheObserver();
+            }
+            mPm.deleteApplicationCacheFiles(packageName, mClearCacheObserver);
         }
     }
 
     public void onClick(DialogInterface dialog, int which) {
-        if(which == AlertDialog.BUTTON1) {
+        if(which == AlertDialog.BUTTON_POSITIVE) {
             //invoke uninstall or clear user data based on sysPackage
             initiateClearUserDataForSysPkg();
         } else {

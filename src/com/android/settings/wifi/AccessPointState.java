@@ -538,7 +538,13 @@ public final class AccessPointState implements Comparable<AccessPointState>, Par
             
             // If password is empty, it should be left untouched
             if (!TextUtils.isEmpty(mPassword)) {
-                config.preSharedKey = convertToQuotedString(mPassword);
+                if (mPassword.length() == 64 && isHex(mPassword)) {
+                    // Goes unquoted as hex
+                    config.preSharedKey = mPassword;
+                } else {
+                    // Goes quoted as ASCII
+                    config.preSharedKey = convertToQuotedString(mPassword);
+                }
             }
             
         } else if (security.equals(OPEN)) {
@@ -554,8 +560,12 @@ public final class AccessPointState implements Comparable<AccessPointState>, Par
             return false;
         }
         
-        for (int i = len - 1; i >= 0; i--) {
-            final char c = wepKey.charAt(i);
+        return isHex(wepKey);
+    }
+    
+    private static boolean isHex(String key) {
+        for (int i = key.length() - 1; i >= 0; i--) {
+            final char c = key.charAt(i);
             if (!(c >= '0' && c <= '9' || c >= 'A' && c <= 'F' || c >= 'a' && c <= 'f')) {
                 return false;
             }

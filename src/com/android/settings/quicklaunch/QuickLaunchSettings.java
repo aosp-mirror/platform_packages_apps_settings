@@ -263,7 +263,7 @@ public class QuickLaunchSettings extends PreferenceActivity implements
         KeyCharacterMap keyMap = KeyCharacterMap.load(KeyCharacterMap.BUILT_IN_KEYBOARD);
 
         // Go through all the key codes and create a preference for the appropriate keys
-        for (int keyCode = KeyEvent.MAX_KEYCODE - 1; keyCode >= 0; keyCode--) {
+        for (int keyCode = KeyEvent.getMaxKeyCode() - 1; keyCode >= 0; keyCode--) {
             // Get the label for the primary char on the key that produces this key code
             char shortcut = (char) Character.toLowerCase(keyMap.getDisplayLabel(keyCode));
             if (shortcut == 0 || shortcutSeen.get(shortcut, false)) continue;

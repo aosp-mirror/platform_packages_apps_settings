@@ -31,13 +31,14 @@ import android.os.Message;
 import android.os.RemoteException;
 import android.os.ServiceManager;
 import android.os.SystemProperties;
-import android.pim.DateUtils;
 import android.preference.PreferenceManager;
 import android.telephony.CellLocation;
 import android.telephony.PhoneStateListener;
 import android.telephony.ServiceState;
 import android.telephony.TelephonyManager;
+import android.telephony.NeighboringCellInfo;
 import android.telephony.gsm.GsmCellLocation;
+import android.text.format.DateUtils;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -66,6 +67,7 @@ import java.io.ByteArrayOutputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
 import java.net.UnknownHostException;
+import java.util.ArrayList;
 import java.util.List;
 
 public class RadioInfo extends Activity {
@@ -210,7 +212,7 @@ public class RadioInfo extends Activity {
                 case EVENT_QUERY_NEIGHBORING_CIDS_DONE:
                     ar= (AsyncResult) msg.obj;
                     if (ar.exception == null) {
-                        updateNeighboringCids((String[])ar.result);
+                        updateNeighboringCids((ArrayList<NeighboringCellInfo>)ar.result);
                     } else {
                         mNeighboringCids.setText("unknown");
                     }
@@ -651,23 +653,21 @@ public class RadioInfo extends Activity {
                 + ((cid == -1) ? "unknown" : Integer.toHexString(cid)));
     }
 
-    private final void updateNeighboringCids(String[] cids) {
-        if (cids != null && cids.length > 0 && cids[0] != null) {
-            int size = Integer.parseInt(cids[0]);
-            String neiborings;
-            if (size > 0) {
-                neiborings = "{";
-                for (int i=1; i<=size; i++) {
-                    neiborings += cids[i] + ", ";
-                }
-                neiborings += "}";
+    private final void updateNeighboringCids(ArrayList<NeighboringCellInfo> cids) {
+        String neighborings = "";
+        if (cids != null) {
+            if ( cids.isEmpty() ) {
+                neighborings = "no neighboring cells";
             } else {
-                neiborings = "none";
+                for (NeighboringCellInfo cell : cids) {
+                    neighborings += "{" + Integer.toHexString(cell.getCid()) 
+                    + "@" + cell.getRssi() + "} ";
+                }
             }
-            mNeighboringCids.setText(neiborings);
         } else {
-            mNeighboringCids.setText("unknown");
+            neighborings = "unknown";
         }
+        mNeighboringCids.setText(neighborings);
     }
 
     private final void
@@ -952,13 +952,15 @@ public class RadioInfo extends Activity {
                   .append("\n    to ")
                   .append(pdp.getApn().toString())
                   .append("\ninterface: ")
-                  .append(phone.getInterfaceName(phone.getActiveApn()))
+                  .append(phone.getInterfaceName(phone.getActiveApnTypes()[0]))
                   .append("\naddress: ")
-                  .append(phone.getIpAddress(phone.getActiveApn()))
+                  .append(phone.getIpAddress(phone.getActiveApnTypes()[0]))
                   .append("\ngateway: ")
-                  .append(phone.getGateway(phone.getActiveApn()));
-                String[] dns = phone.getDnsServers(phone.getActiveApn()); 
-                sb.append("\ndns: ").append(dns[0]).append(", ").append(dns[1]);
+                  .append(phone.getGateway(phone.getActiveApnTypes()[0]));
+                String[] dns = phone.getDnsServers(phone.getActiveApnTypes()[0]);
+                if (dns != null) {
+                    sb.append("\ndns: ").append(dns[0]).append(", ").append(dns[1]);
+                }
             } else if (pdp.getState().isInactive()) {
                 sb.append("    disconnected with last try at ")
                   .append(DateUtils.timeString(pdp.getLastFailTime()))

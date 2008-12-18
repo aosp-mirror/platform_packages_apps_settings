@@ -45,6 +45,17 @@ import java.util.List;
  */
 public class ChooseLockPattern extends Activity implements View.OnClickListener{
 
+    /**
+     * Used by the choose lock pattern wizard to indicate the wizard is
+     * finished, and each activity in the wizard should finish.
+     * <p>
+     * Previously, each activity in the wizard would finish itself after
+     * starting the next activity. However, this leads to broken 'Back'
+     * behavior. So, now an activity does not finish itself until it gets this
+     * result.
+     */
+    static final int RESULT_FINISHED = RESULT_FIRST_USER;
+    
     // how long after a confirmation message is shown before moving on
     static final int INFORMATION_MSG_TIMEOUT_MS = 3000;
 
@@ -298,6 +309,8 @@ public class ChooseLockPattern extends Activity implements View.OnClickListener{
                 mLockPatternView.clearPattern();
                 updateStage(Stage.Introduction);
             } else if (mUiStage.leftMode == LeftButtonMode.Cancel) {
+                // They are canceling the entire wizard
+                setResult(RESULT_FINISHED);
                 finish();
             } else {
                 throw new IllegalStateException("left footer button pressed, but stage of " +
@@ -368,6 +381,7 @@ public class ChooseLockPattern extends Activity implements View.OnClickListener{
         }
 
         if (resultCode != Activity.RESULT_OK) {
+            setResult(RESULT_FINISHED);
             finish();
         }
         updateStage(Stage.Introduction);
@@ -475,6 +489,8 @@ public class ChooseLockPattern extends Activity implements View.OnClickListener{
             mLockPatternUtils.setLockPatternEnabled(true);
             mLockPatternUtils.setVisiblePatternEnabled(true);
         }
+        
+        setResult(RESULT_FINISHED);
         finish();
     }
 }

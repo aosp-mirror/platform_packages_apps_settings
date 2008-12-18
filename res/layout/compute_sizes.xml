@@ -14,25 +14,25 @@
      limitations under the License.
 -->
 
-<RelativeLayout
+<LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent">
-
-    <TextView
-        android:id="@+id/center_text"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerVertical="true"
-        android:textSize="18sp"
-        android:textStyle="bold"
-        android:padding="2dip"
-        android:text="@string/computing_size"/>
     <ListView 
         android:id="@android:id/list"
+        android:layout_weight="1"
+        android:drawSelectorOnTop="false"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent">
     </ListView>
-</RelativeLayout>
+    <TextView android:id="@android:id/empty"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:paddingLeft="20dip"
+        android:paddingTop="5dip"
+        android:text="@string/empty_list_msg"
+        android:textSize="15sp" />
+</LinearLayout>
 
 

@@ -222,7 +222,7 @@ public class ProxySelector extends Activity
         if (!TextUtils.isEmpty(hostname)) {
             hostname += ':' + portStr;
         }
-        Settings.System.putString(res, Settings.System.HTTP_PROXY, hostname);
+        Settings.Secure.putString(res, Settings.Secure.HTTP_PROXY, hostname);
         sendBroadcast(new Intent(Proxy.PROXY_CHANGE_ACTION));
 
         return true;

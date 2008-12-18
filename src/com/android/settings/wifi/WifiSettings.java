@@ -134,8 +134,8 @@ public class WifiSettings extends PreferenceActivity implements WifiLayer.Callba
         
         mOpenNetworkNotificationsEnabled = (CheckBoxPreference) preferenceScreen
                 .findPreference(KEY_OPEN_NETWORK_NOTIFICATIONS_ENABLED);
-        mOpenNetworkNotificationsEnabled.setChecked(Settings.System.getInt(getContentResolver(),
-                Settings.System.WIFI_NETWORKS_AVAILABLE_NOTIFICATION_ON, 0) == 1);        
+        mOpenNetworkNotificationsEnabled.setChecked(Settings.Secure.getInt(getContentResolver(),
+            Settings.Secure.WIFI_NETWORKS_AVAILABLE_NOTIFICATION_ON, 0) == 1);        
         
         mAddOtherNetwork = preferenceScreen.findPreference(KEY_ADD_OTHER_NETWORK);
         
@@ -323,9 +323,9 @@ public class WifiSettings extends PreferenceActivity implements WifiLayer.Callba
         if (preference == mAddOtherNetwork) {
             showAddOtherNetworkDialog();
         } else if (preference == mOpenNetworkNotificationsEnabled) {
-            Settings.System.putInt(getContentResolver(),
-                    Settings.System.WIFI_NETWORKS_AVAILABLE_NOTIFICATION_ON,
-                    mOpenNetworkNotificationsEnabled.isChecked() ? 1 : 0);
+            Settings.Secure.putInt(getContentResolver(),
+                Settings.Secure.WIFI_NETWORKS_AVAILABLE_NOTIFICATION_ON,
+                mOpenNetworkNotificationsEnabled.isChecked() ? 1 : 0);
         } else if (preference instanceof AccessPointPreference) {
             AccessPointState state = ((AccessPointPreference) preference).getAccessPointState();
             showAccessPointDialog(state, AccessPointDialog.MODE_INFO);

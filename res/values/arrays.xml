@@ -20,76 +20,106 @@
 <resources>
     <!-- Choices for timezone picker first level.
          These values will be used as search terms for TimeZone displayName
-         strings. -->
+         strings. --> <skip />
+    <!-- The time zone picker screen has two levels.  The first level allows the user to choose a region. -->
     <string-array name="timezone_filters">
+	<!-- The next level of the time zoner picker should show time zones from the Americas. -->
         <item>America</item>
+	<!-- The next level of the time zoner picker should show time zones from Europe. -->
         <item>Europe</item>
+	<!-- The next level of the time zoner picker should show time zones from Africa. -->
         <item>Africa</item>
+	<!-- The next level of the time zoner picker should show time zones from Asia. -->
         <item>Asia</item>
+	<!-- The next level of the time zoner picker should show time zones from Australia. -->
         <item>Australia</item>
+	<!-- The next level of the time zoner picker should show time zones from Pacific. -->
         <item>Pacific</item>
+	<!-- The next level of the time zoner picker should show time zones from ALL regions. -->
         <item>All</item>
     </string-array>
 
-    <!-- List of formats for date display to display
-         in Date & Time Settings screen -->
+    <!-- There is a setting to control the format of dates displayed throughout the system.  This is in the Date & Time Settings screen.  Unfortunately, these cannot be changed at all. --> <skip />
+    <!-- Do not translate.  This is fed directly to the formatter. -->
     <string-array name="date_format_values">
+        <!-- Do not translate.  This is fed directly to the formatter. -->
         <item>MM-dd-yyyy</item>
+        <!-- Do not translate.  This is fed directly to the formatter. -->
         <item>dd-MM-yyyy</item>
+        <!-- Do not translate.  This is fed directly to the formatter. -->
         <item>MMM dd, yyyy</item>
+        <!-- Do not translate.  This is fed directly to the formatter. -->
         <item>dd-MMM-yyyy</item>
+        <!-- Do not translate.  This is fed directly to the formatter. -->
         <item>yyyy-MM-dd</item>
     </string-array>
 
-    <!-- Display settings -->
+    <!-- Display settings.  The delay in inactivity before the screen is turned off. These are shown ain a list dialog. -->
     <string-array name="screen_timeout_entries">
         <item>15 seconds</item>
         <item>30 seconds</item>
         <item>1 minute</item>
         <item>2 minutes</item>
         <item>10 minutes</item>
+        <!-- Choosing this means the screen will only turn off after the user manually does so.  There will be no inactivity check. -->
         <item>Never timeout</item>
     </string-array>
 
+    <!-- Do not translate. -->
     <string-array name="screen_timeout_values">
+        <!-- Do not translate. -->
         <item>15000</item>
+        <!-- Do not translate. -->
         <item>30000</item>
+        <!-- Do not translate. -->
         <item>60000</item>
+        <!-- Do not translate. -->
         <item>120000</item>
+        <!-- Do not translate. -->
         <item>600000</item>
+        <!-- Do not translate. -->
         <item>-1</item>
     </string-array>
 
     <!-- Wi-Fi settings -->
 
-    <!-- Match this with code. -->
+    <!-- Match this with code. --> <skip />
+    <!-- Wi-Fi settings.  The type of security a Wi-Fi network has.  The user can choose this when he adds a manual network, or configures an existing network. -->
     <string-array name="wifi_security_entries">
+        <!-- Let the phone figure out the security type auutomatically. -->
         <item>Auto</item>
+        <!-- The Wi-Fi network does not have any security. -->
         <item>None</item>
+        <!-- Do not translate. The Wi-Fi network has WEP security. -->
         <item>WEP</item>
+        <!-- The Wi-Fi network has WPA personal security. WPA Personal is a tech term, and might be better left untranslated? -->
         <item>WPA Personal</item>
+        <!-- The Wi-Fi network has WPA2 personal security. WPA Personal is a tech term, and might be better left untranslated? -->
         <item>WPA2 Personal</item>
     </string-array>
 
-    <!-- Match this with code. -->
+    <!-- Match this with code. --> <skip />
+    <!-- Wi-Fi settings.  The type of security a Wi-Fi network has.  The user can choose this when he adds a manual network, or configures an existing network. -->
     <string-array name="wifi_security_without_auto_entries">
+        <!-- The Wi-Fi network does not have any security. -->
         <item>None</item>
+        <!-- Do not translate. The Wi-Fi network has WEP security. -->
         <item>WEP</item>
+        <!-- The Wi-Fi network has WPA personal security. WPA Personal is a tech term, and might be better left untranslated? -->
         <item>WPA Personal</item>
+        <!-- The Wi-Fi network has WPA2 personal security. WPA Personal is a tech term, and might be better left untranslated? -->
         <item>WPA2 Personal</item>
     </string-array>
 
-    <!-- Match this with code. -->
+    <!-- Match this with code. --> <skip />
+    <!-- Wi-Fi settings.  Presented as a list dialog to the user.  He chooses the type of WEP key he entered. -->
     <string-array name="wifi_wep_type">
+        <!-- This means the phone should figure out the type automatically the best it can. -->
         <item>Auto</item>
+        <!-- Do not translate. -->
         <item>WEP ASCII</item>
+        <!-- WEP key that is in hexadecimal. -->
         <item>WEP hexadecimal</item>
-    </string-array>
-
-    <string-array name="friction_values">
-        <item>normal</item>
-        <item>no friction</item>
-        <item>no inertia</item>
     </string-array>
 
 </resources>

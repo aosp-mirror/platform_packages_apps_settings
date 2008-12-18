@@ -27,7 +27,6 @@ import android.content.SharedPreferences;
 import android.content.SharedPreferences.OnSharedPreferenceChangeListener;
 import android.os.Bundle;
 import android.os.SystemClock;
-import android.pim.DateFormat;
 import android.preference.CheckBoxPreference;
 import android.preference.ListPreference;
 import android.preference.Preference;
@@ -35,6 +34,7 @@ import android.preference.PreferenceActivity;
 import android.preference.PreferenceScreen;
 import android.provider.Settings;
 import android.provider.Settings.SettingNotFoundException;
+import android.text.format.DateFormat;
 import android.widget.DatePicker;
 import android.widget.TimePicker;
 
@@ -281,9 +281,7 @@ public class DateTimeSettings
     /*  Get & Set values from the system settings  */
     
     private boolean is24Hour() {
-        String setting = Settings.System.getString(getContentResolver(),
-                Settings.System.TIME_12_24);
-        return HOURS_24.equals(setting);
+        return DateFormat.is24HourFormat(this);
     }
     
     private void set24Hour(boolean is24Hour) {

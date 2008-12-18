@@ -22,6 +22,7 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.res.Resources;
 import android.os.Bundle;
+import android.os.IBinder;
 import android.os.RemoteException;
 import android.os.Environment;
 import android.os.IMountService;
@@ -30,6 +31,7 @@ import android.os.StatFs;
 import android.preference.Preference;
 import android.preference.PreferenceActivity;
 import android.preference.PreferenceScreen;
+import android.util.Log;
 
 import com.android.settings.R;
 
@@ -37,6 +39,8 @@ import java.io.File;
 import java.text.DecimalFormat;
 
 public class Memory extends PreferenceActivity {
+    
+    private static final String TAG = "Memory";
 
     private static final String MEMORY_SD_SIZE = "memory_sd_size";
 
@@ -50,15 +54,14 @@ public class Memory extends PreferenceActivity {
     private Preference mSdAvail;
     private Preference mSdUnmount;
     
-    private IMountService   mMountService;
+    // Access using getMountService()
+    private IMountService mMountService = null;
 
     @Override
     protected void onCreate(Bundle icicle) {
         super.onCreate(icicle);
         
         addPreferencesFromResource(R.xml.device_info_memory);
-
-        mMountService = IMountService.Stub.asInterface(ServiceManager.getService("mount"));
         
         mRes = getResources();
         mSdSize = findPreference(MEMORY_SD_SIZE);
@@ -89,6 +92,18 @@ public class Memory extends PreferenceActivity {
         unregisterReceiver(mReceiver);
     }
     
+    private synchronized IMountService getMountService() {
+       if (mMountService == null) {
+           IBinder service = ServiceManager.getService("mount");
+           if (service != null) {
+               mMountService = IMountService.Stub.asInterface(service);
+           } else {
+               Log.e(TAG, "Can't get mount service");
+           }
+       }
+       return mMountService;
+    }
+    
     @Override
     public boolean onPreferenceTreeClick(PreferenceScreen preferenceScreen, Preference preference) {
         if (preference == mSdUnmount) {
@@ -107,8 +122,13 @@ public class Memory extends PreferenceActivity {
     };
 
     private void unmount() {
+        IMountService mountService = getMountService();
         try {
-            mMountService.unmountMedia(Environment.getExternalStorageDirectory().toString());
+            if (mountService != null) {
+                mountService.unmountMedia(Environment.getExternalStorageDirectory().toString());
+            } else {
+                Log.e(TAG, "Mount service is null, can't unmount");
+            }
         } catch (RemoteException ex) {
             // Failed for some reason, try to update UI to actual state
             updateMemoryStatus();

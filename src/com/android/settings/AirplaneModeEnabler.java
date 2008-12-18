@@ -100,9 +100,10 @@ public class AirplaneModeEnabler implements Preference.OnPreferenceChangeListene
      */
     private void onAirplaneModeChanged() {
         ServiceState serviceState = mPhoneStateReceiver.getServiceState();
-        boolean isPhoneOff = serviceState.getState() == ServiceState.STATE_POWER_OFF;
-        mCheckBoxPref.setChecked(isPhoneOff);
-        mCheckBoxPref.setSummary(R.string.airplane_mode_summary);            
+        boolean airplaneModeEnabled = serviceState.getState() == ServiceState.STATE_POWER_OFF;
+        mCheckBoxPref.setChecked(airplaneModeEnabled);
+        mCheckBoxPref.setSummary(airplaneModeEnabled ? null : 
+                mContext.getString(R.string.airplane_mode_summary));            
         mCheckBoxPref.setEnabled(true);
     }
     

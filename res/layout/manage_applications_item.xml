@@ -27,10 +27,19 @@
         android:layout_width="@android:dimen/app_icon_size"
         android:layout_height="@android:dimen/app_icon_size"
         android:layout_alignParentLeft="true"
-        android:paddingLeft="6dip"
-        android:paddingTop="6dip"
-        android:paddingBottom="6dip"
-        android:scaleType="fitCenter" />
+        android:layout_marginTop="6dip"
+        android:layout_marginBottom="6dip"
+        android:background="@drawable/border_item_thumbnail" />
+
+    <TextView android:id="@+id/app_size"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:layout_alignParentRight="true"
+        android:paddingRight="6dip"
+        android:paddingLeft="12dip"
+        android:paddingTop="16dip"
+        android:maxLines="1" />
 
     <TextView android:id="@+id/app_name"
         android:layout_width="wrap_content"
@@ -38,25 +47,9 @@
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:textColor="?android:attr/textColorPrimary"
         android:layout_toRightOf="@id/app_icon"
-        android:paddingLeft="6dip"
+        android:layout_toLeftOf="@id/app_size"
+        android:layout_alignTop="@id/app_icon"
+        android:paddingLeft="2dip"
         android:paddingTop="6dip"/>
-
-    <TextView android:id="@+id/app_description"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceSmall"
-        android:layout_below="@+id/app_name"
-        android:layout_toRightOf="@id/app_icon"
-        android:paddingLeft="6dip"
-        android:paddingBottom="6dip"/>
-    <TextView android:id="@+id/app_size"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceSmall"
-        android:layout_alignParentRight="true"
-        android:layout_below="@+id/app_name"
-        android:paddingRight="6dip"
-        android:maxLines="1" />
-
 </RelativeLayout>
 

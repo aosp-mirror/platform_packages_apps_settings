@@ -30,6 +30,7 @@
             android:persistent="false" />
         
     <PreferenceScreen
+            android:key="quick_launch"
             android:title="@string/quick_launch_title"
             android:summary="@string/quick_launch_summary">
         <intent android:action="android.intent.action.MAIN"

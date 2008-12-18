@@ -21,11 +21,10 @@
             android:key="language_category"
             android:title="@string/language_category">
      <!--
-    <ListPreference
+        <ListPreference
             android:title="@string/phone_language"/>
       --> 
             
-    
         <PreferenceScreen
                 android:title="@string/phone_language">
             <intent android:action="android.intent.action.MAIN"
@@ -36,6 +35,13 @@
     
     <PreferenceCategory
             android:title="@string/text_category" />
+    <PreferenceScreen 
+            android:title="@string/input_methods_settings_title" 
+            android:summary="@string/input_methods_settings_summary">
+        <intent android:action="android.intent.action.MAIN"
+                android:targetPackage="com.android.settings"
+                android:targetClass="com.android.settings.InputMethodsSettings" />
+    </PreferenceScreen>
     <CheckBoxPreference
             android:key="auto_replace"
             android:title="@string/auto_replace"

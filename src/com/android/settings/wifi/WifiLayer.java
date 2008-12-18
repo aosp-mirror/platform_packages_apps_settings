@@ -94,7 +94,7 @@ public class WifiLayer {
     private boolean mIsObtainingAddress;
 
     /**
-     * See {@link Settings.System#WIFI_NUM_OPEN_NETWORKS_KEPT}.
+     * See {@link android.provider.Settings.Secure#WIFI_NUM_OPEN_NETWORKS_KEPT}.
      */
     private int WIFI_NUM_OPEN_NETWORKS_KEPT;
     /**
@@ -229,8 +229,8 @@ public class WifiLayer {
         mIntentFilter.addAction(WifiManager.RSSI_CHANGED_ACTION);
         mIntentFilter.addAction(WifiManager.NETWORK_IDS_CHANGED_ACTION);
         
-        WIFI_NUM_OPEN_NETWORKS_KEPT = Settings.System.getInt(mContext.getContentResolver(),
-                Settings.System.WIFI_NUM_OPEN_NETWORKS_KEPT, 10);
+        WIFI_NUM_OPEN_NETWORKS_KEPT = Settings.Secure.getInt(mContext.getContentResolver(),
+            Settings.Secure.WIFI_NUM_OPEN_NETWORKS_KEPT, 10);
     }
     
     /**

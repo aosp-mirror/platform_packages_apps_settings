@@ -46,6 +46,7 @@ public class DeviceInfoSettings extends PreferenceActivity {
     private static final String KEY_TERMS = "terms";
     private static final String KEY_LICENSE = "license";
     private static final String KEY_COPYRIGHT = "copyright";
+    private static final String KEY_SYSTEM_UPDATE_SETTINGS = "system_update_settings";
     
     @Override
     protected void onCreate(Bundle icicle) {
@@ -56,7 +57,7 @@ public class DeviceInfoSettings extends PreferenceActivity {
         setSummary("firmware_version", "ro.build.version.release");
         setSummary("baseband_version", "gsm.version.baseband");
         setSummary("device_model", "ro.product.model");
-        setSummary("build_number", "ro.build.description");
+        setSummary("build_number", "ro.build.version.incremental");
         findPreference("kernel_version").setSummary(getFormattedKernelVersion());
 
         /*
@@ -73,6 +74,8 @@ public class DeviceInfoSettings extends PreferenceActivity {
         Utils.updatePreferenceToSpecificActivityOrRemove(this, parentPreference, KEY_COPYRIGHT,
                 Utils.UPDATE_PREFERENCE_FLAG_SET_TITLE_TO_MATCHING_ACTIVITY);
         Utils.updatePreferenceToSpecificActivityOrRemove(this, parentPreference, KEY_TEAM,
+                Utils.UPDATE_PREFERENCE_FLAG_SET_TITLE_TO_MATCHING_ACTIVITY);
+        Utils.updatePreferenceToSpecificActivityOrRemove(this, parentPreference, KEY_SYSTEM_UPDATE_SETTINGS,
                 Utils.UPDATE_PREFERENCE_FLAG_SET_TITLE_TO_MATCHING_ACTIVITY);
     }
     

@@ -29,7 +29,7 @@ import android.os.Message;
 import android.os.RemoteException;
 import android.os.ServiceManager;
 import android.os.SystemClock;
-import android.pim.DateUtils;
+import android.text.format.DateUtils;
 import android.widget.TextView;
 
 import com.android.internal.app.IBatteryStats;

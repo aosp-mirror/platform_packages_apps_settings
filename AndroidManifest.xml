@@ -5,9 +5,11 @@
     <uses-permission android:name="com.google.android.providers.gmail.permission.WRITE_GMAIL" />
     <uses-permission android:name="com.google.android.providers.gmail.permission.READ_GMAIL" />
     <uses-permission android:name="android.permission.WRITE_SETTINGS" />
+    <uses-permission android:name="android.permission.WRITE_SECURE_SETTINGS" />
     <uses-permission android:name="android.permission.CHANGE_CONFIGURATION" />
     <uses-permission android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS" />
     <uses-permission android:name="android.permission.VIBRATE" />
+    <uses-permission android:name="android.permission.BLUETOOTH" />
     <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
     <uses-permission android:name="android.permission.HARDWARE_TEST" />
     <uses-permission android:name="android.permission.CALL_PHONE" />
@@ -51,7 +53,9 @@
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <action android:name="android.settings.WIRELESS_SETTINGS" />
+                <action android:name="android.settings.AIRPLANE_MODE_SETTINGS" />
                 <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.VOICE_LAUNCH" />
             </intent-filter>
         </activity>
 
@@ -65,6 +69,7 @@
                 <action android:name="android.settings.WIFI_SETTINGS" />
                 <action android:name="android.net.wifi.PICK_WIFI_NETWORK" />
                 <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.VOICE_LAUNCH" />
             </intent-filter>
         </activity>
 
@@ -72,6 +77,8 @@
                 android:theme="@android:style/Theme.NoTitleBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+                <action android:name="android.settings.WIFI_IP_SETTINGS" />
+                <category android:name="android.intent.category.VOICE_LAUNCH" />
             </intent-filter>
         </activity>
 
@@ -81,16 +88,17 @@
                 <action android:name="android.intent.action.MAIN" />
                 <action android:name="android.settings.APN_SETTINGS" />
                 <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.VOICE_LAUNCH" />
             </intent-filter>
         </activity>
 
-        <activity android:name="BluetoothSettings"
+        <activity android:name=".bluetooth.BluetoothSettings"
                   android:label="@string/bluetooth_settings_title"
-                  android:configChanges="keyboardHidden|orientation"
                   android:theme="@android:style/Theme.NoTitleBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <action android:name="android.settings.BLUETOOTH_SETTINGS" />
+                <category android:name="android.intent.category.VOICE_LAUNCH" />
             </intent-filter>
         </activity>
 
@@ -99,6 +107,7 @@
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <action android:name="android.settings.DATE_SETTINGS" />
+                <category android:name="android.intent.category.VOICE_LAUNCH" />
             </intent-filter>
         </activity>
 
@@ -114,6 +123,7 @@
                 <action android:name="android.intent.action.MAIN" />
                 <action android:name="android.settings.LOCALE_SETTINGS" />
                 <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.VOICE_LAUNCH" />
             </intent-filter>
         </activity>
         
@@ -131,6 +141,15 @@
             </intent-filter>
         </activity>
 
+        <activity android:name="InputMethodsSettings" android:icon="@drawable/app_settings"
+                android:label="@string/input_methods_settings_title"
+                android:theme="@android:style/Theme.NoTitleBar">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.VOICE_LAUNCH" />
+            </intent-filter>
+        </activity>
+
         <activity android:name="SoundAndDisplaySettings" android:label="@string/sound_and_display_settings"
                 android:theme="@android:style/Theme.NoTitleBar">
             <intent-filter>
@@ -138,6 +157,7 @@
                 <action android:name="com.android.settings.SOUND_SETTINGS" />
                 <action android:name="com.android.settings.DISPLAY_SETTINGS" />
                 <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.VOICE_LAUNCH" />
             </intent-filter>
         </activity>
 
@@ -146,6 +166,7 @@
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.VOICE_LAUNCH" />
             </intent-filter>
         </activity>
 
@@ -164,6 +185,7 @@
                 <action android:name="android.intent.action.MAIN" />
                 <action android:name="android.settings.APPLICATION_SETTINGS" />
                 <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.VOICE_LAUNCH" />
             </intent-filter>
         </activity>
 
@@ -171,8 +193,10 @@
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <action android:name="android.intent.action.MANAGE_PACKAGE_STORAGE" />
+                <action android:name="android.settings.MANAGE_APPLICATIONS_SETTINGS" />
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.MONKEY" />
+                <category android:name="android.intent.category.VOICE_LAUNCH" />
             </intent-filter>
         </activity>
         
@@ -180,6 +204,7 @@
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
                 <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.VOICE_LAUNCH" />
             </intent-filter>
         </activity>
 
@@ -190,6 +215,7 @@
                 <action android:name="android.settings.SECURITY_SETTINGS" />
                 <action android:name="android.settings.LOCATION_SOURCE_SETTINGS" />
                 <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.VOICE_LAUNCH" />
             </intent-filter>
         </activity>
 
@@ -199,6 +225,7 @@
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.VOICE_LAUNCH" />
             </intent-filter>
         </activity>
 
@@ -233,12 +260,13 @@
 
         <activity android:name="ZoneList" android:label="@string/choose_timezone" />
 
-        <activity android:name=".deviceinfo.Status" android:label="@string/device_status"
+        <activity android:name=".deviceinfo.Status" android:label="@string/device_status_activity_title"
                 android:process="com.android.phone"
                 android:theme="@android:style/Theme.NoTitleBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.VOICE_LAUNCH" />
             </intent-filter>
         </activity>
 
@@ -246,7 +274,10 @@
                 android:theme="@android:style/Theme.NoTitleBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+                <action android:name="android.settings.INTERNAL_STORAGE_SETTINGS" />
+                <action android:name="android.settings.MEMORY_CARD_SETTINGS" />
                 <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.VOICE_LAUNCH" />
             </intent-filter>
         </activity>
 
@@ -275,12 +306,15 @@
                 android:theme="@android:style/Theme.NoTitleBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+                <action android:name="com.android.settings.QUICK_LAUNCH_SETTINGS" />
+                <category android:name="android.intent.category.VOICE_LAUNCH" />
             </intent-filter>
         </activity>
         
         <activity android:name=".quicklaunch.BookmarkPicker" android:label="@string/quick_launch_title">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.VOICE_LAUNCH" />
             </intent-filter>
         </activity>
 
@@ -289,6 +323,7 @@
                 android:theme="@android:style/Theme.NoTitleBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+                <action android:name="com.android.settings.APPLICATION_DEVELOPMENT_SETTINGS" />
             </intent-filter>
         </activity>
 
@@ -308,22 +343,26 @@
             </intent-filter>
         </receiver>
 
-        <activity android:name="BluetoothPINEntry"
-                  android:label="@string/bluetooth_pin_entry"
-                  android:theme="@android:style/Theme.Dialog">
-            <!--intent-filter>
-                <action android:name="android.bluetooth.intent.action.PAIRING_REQUEST" />
-                <category android:name="android.intent.category.DEFAULT" />
-            </intent-filter-->
-        </activity>
+        <!-- Bluetooth stuff -->
 
-        <!-- Ignore Bluetooth Pairing Requests when not in BluetoothSettings
-        <receiver android:name="BluetoothPinRequest">
+        <activity android:name=".bluetooth.ConnectSpecificProfilesActivity"
+                  android:label="@string/bluetooth_connect_specific_profiles_title" />
+
+        <activity android:name=".bluetooth.BluetoothPinDialog"
+                  android:label="@string/bluetooth_pin_entry"
+                  android:theme="@*android:style/Theme.Dialog.Alert">
             <intent-filter>
                 <action android:name="android.bluetooth.intent.action.PAIRING_REQUEST" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+
+        <receiver android:name=".bluetooth.BluetoothPinRequest">
+            <intent-filter>
+                <action android:name="android.bluetooth.intent.action.PAIRING_REQUEST" />
+                <action android:name="android.bluetooth.intent.action.PAIRING_CANCEL" />
             </intent-filter>
         </receiver>
-        -->
 
         <activity android:name="ActivityPicker" android:label="@string/activity_picker_label">
             <intent-filter>
@@ -349,6 +388,7 @@
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.DEVELOPMENT_PREFERENCE" />
+                <category android:name="android.intent.category.VOICE_LAUNCH" />
             </intent-filter>
         </activity>
 
@@ -363,6 +403,7 @@
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.DEVELOPMENT_PREFERENCE" />
+                <category android:name="android.intent.category.VOICE_LAUNCH" />
             </intent-filter>
         </activity>
 
@@ -386,6 +427,7 @@
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.DEVELOPMENT_PREFERENCE" />
+                <category android:name="android.intent.category.VOICE_LAUNCH" />
             </intent-filter>
         </activity>
 
@@ -394,6 +436,7 @@
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.DEVELOPMENT_PREFERENCE" />
+                <category android:name="android.intent.category.VOICE_LAUNCH" />
             </intent-filter>
         </activity>
 
@@ -404,6 +447,7 @@
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.VOICE_LAUNCH" />
             </intent-filter>
         </activity>
 

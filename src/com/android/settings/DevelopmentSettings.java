@@ -16,6 +16,7 @@
 
 package com.android.settings;
 
+import android.os.BatteryManager;
 import android.os.Bundle;
 import android.os.SystemProperties;
 import android.preference.Preference;
@@ -32,9 +33,11 @@ public class DevelopmentSettings extends PreferenceActivity {
 
     private static final String ENABLE_ADB = "enable_adb";
     private static final String KEEP_SCREEN_ON = "keep_screen_on";
+    private static final String ALLOW_MOCK_LOCATION = "allow_mock_location";
 
     private CheckBoxPreference mEnableAdb;
     private CheckBoxPreference mKeepScreenOn;
+    private CheckBoxPreference mAllowMockLocation;
 
     @Override
     protected void onCreate(Bundle icicle) {
@@ -44,16 +47,19 @@ public class DevelopmentSettings extends PreferenceActivity {
 
         mEnableAdb = (CheckBoxPreference) findPreference(ENABLE_ADB);
         mKeepScreenOn = (CheckBoxPreference) findPreference(KEEP_SCREEN_ON);
+        mAllowMockLocation = (CheckBoxPreference) findPreference(ALLOW_MOCK_LOCATION);
     }
 
     @Override
     protected void onResume() {
         super.onResume();
         
-        mEnableAdb.setChecked(Settings.System.getInt(getContentResolver(),
-                Settings.System.ADB_ENABLED, 0) != 0);
+        mEnableAdb.setChecked(Settings.Secure.getInt(getContentResolver(),
+                Settings.Secure.ADB_ENABLED, 0) != 0);
         mKeepScreenOn.setChecked(Settings.System.getInt(getContentResolver(),
                 Settings.System.STAY_ON_WHILE_PLUGGED_IN, 0) != 0);
+        mAllowMockLocation.setChecked(Settings.Secure.getInt(getContentResolver(),
+                Settings.Secure.ALLOW_MOCK_LOCATION, 0) != 0);
     }
 
     @Override
@@ -66,11 +72,15 @@ public class DevelopmentSettings extends PreferenceActivity {
         }
 
         if (preference == mEnableAdb) {
-            Settings.System.putInt(getContentResolver(), Settings.System.ADB_ENABLED, 
+            Settings.Secure.putInt(getContentResolver(), Settings.Secure.ADB_ENABLED, 
                     mEnableAdb.isChecked() ? 1 : 0);
         } else if (preference == mKeepScreenOn) {
             Settings.System.putInt(getContentResolver(), Settings.System.STAY_ON_WHILE_PLUGGED_IN, 
-                    mKeepScreenOn.isChecked() ? 1 : 0);
+                    mKeepScreenOn.isChecked() ? 
+                    (BatteryManager.BATTERY_PLUGGED_AC | BatteryManager.BATTERY_PLUGGED_USB) : 0);
+        } else if (preference == mAllowMockLocation) {
+            Settings.Secure.putInt(getContentResolver(), Settings.Secure.ALLOW_MOCK_LOCATION,
+                    mAllowMockLocation.isChecked() ? 1 : 0);
         }
         
         return false;

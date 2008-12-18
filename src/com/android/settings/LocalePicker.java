@@ -63,30 +63,55 @@ public class LocalePicker extends ListActivity {
         setContentView(getContentView());
 
         String[] locales = getAssets().getLocales();
-        final int N = locales.length;
-        mLocales = new Loc[N];
-        for (int i = 0; i < N; i++) {
-            Locale locale = null;
+        Arrays.sort(locales);
+
+        final int origSize = locales.length;
+        Loc[] preprocess = new Loc[origSize];
+        int finalSize = 0;
+        for (int i = 0 ; i < origSize; i++ ) {
             String s = locales[i];
             int len = s.length();
-            if (len == 0) {
-                locale = new Locale("en", "US");
-            } else if (len == 2) {
-                locale = new Locale(s);
+            if (len == 2) {
+                Locale l = new Locale(s);
+                preprocess[finalSize++] = new Loc(l.getDisplayLanguage(), l);
             } else if (len == 5) {
-                locale = new Locale(s.substring(0, 2), s.substring(3, 5));
-            }
-            String displayName = "";
-            if (locale != null) {
-                displayName = locale.getDisplayName();
-            }
-            if ("zz_ZZ".equals(s)) {
-                displayName = "Pseudo...";
-            }
+                String language = s.substring(0, 2);
+                String country = s.substring(3, 5);
+                Locale l = new Locale(language, country);
 
-            mLocales[i] = new Loc(displayName, locale);
+                if (finalSize == 0) {
+                    preprocess[finalSize++] = new Loc(l.getDisplayLanguage(), l);
+                } else {
+                    // check previous entry:
+                    //  same lang and no country -> overwrite it with a lang-only name
+                    //  same lang and a country -> upgrade to full name and 
+                    //    insert ours with full name
+                    //  diff lang -> insert ours with lang-only name
+                    if (preprocess[finalSize-1].locale.getLanguage().equals(language)) {
+                       String prevCountry = preprocess[finalSize-1].locale.getCountry();
+                       if (prevCountry.length() == 0) {
+                            preprocess[finalSize-1].locale = l;
+                            preprocess[finalSize-1].label = l.getDisplayLanguage();
+                        } else {
+                            preprocess[finalSize-1].label = preprocess[finalSize-1].locale.getDisplayName();
+                            preprocess[finalSize++] = new Loc(l.getDisplayName(), l);
+                        }
+                    } else {
+                        String displayName;
+                        if (s.equals("zz_ZZ")) {
+                            displayName = "Pseudo...";
+                        } else {
+                            displayName = l.getDisplayLanguage();
+                        }
+                        preprocess[finalSize++] = new Loc(displayName, l);
+                    }
+                }
+            }
         }
-
+        mLocales = new Loc[finalSize];
+        for (int i = 0; i < finalSize ; i++) {
+            mLocales[i] = preprocess[i];
+        }
         int layoutId = R.layout.locale_picker_item;
         int fieldId = R.id.locale;
         ArrayAdapter<Loc> adapter = new ArrayAdapter<Loc>(this, layoutId, fieldId, mLocales);
@@ -107,25 +132,11 @@ public class LocalePicker extends ListActivity {
 
             Loc loc = mLocales[position];
             config.locale = loc.locale;
-            final String language = loc.locale.getLanguage();
-            final String region = loc.locale.getCountry();
+
+            // indicate this isn't some passing default - the user wants this remembered
+            config.userSetLocale = true;
 
             am.updateConfiguration(config);
-            
-            // Update the System properties
-            SystemProperties.set("user.language", language);
-            SystemProperties.set("user.region", region);
-            // Write to file for persistence across reboots
-            try {
-                BufferedWriter bw = new BufferedWriter(new java.io.FileWriter(
-                        System.getenv("ANDROID_DATA") + "/locale"));
-                bw.write(language + "_" + region);
-                bw.close();
-            } catch (java.io.IOException ioe) {
-                Log.e(TAG, 
-                        "Unable to persist locale. Error writing to locale file." 
-                        + ioe);
-            }    
         } catch (RemoteException e) {
             // Intentionally left blank
         }

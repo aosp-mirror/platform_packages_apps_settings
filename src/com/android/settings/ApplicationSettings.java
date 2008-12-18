@@ -18,6 +18,7 @@ package com.android.settings;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.content.res.Configuration;
 import android.os.Bundle;
 import android.preference.CheckBoxPreference;
 import android.preference.Preference;
@@ -29,6 +30,7 @@ public class ApplicationSettings extends PreferenceActivity implements
         DialogInterface.OnClickListener {
     
     private static final String KEY_TOGGLE_INSTALL_APPLICATIONS = "toggle_install_applications";
+    private static final String KEY_QUICK_LAUNCH = "quick_launch";
 
     private CheckBoxPreference mToggleAppInstallation;
     
@@ -42,7 +44,12 @@ public class ApplicationSettings extends PreferenceActivity implements
 
         mToggleAppInstallation = (CheckBoxPreference) findPreference(KEY_TOGGLE_INSTALL_APPLICATIONS);
         mToggleAppInstallation.setChecked(isNonMarketAppsAllowed());
-        
+
+        if (getResources().getConfiguration().keyboard == Configuration.KEYBOARD_NOKEYS) {
+            // No hard keyboard, remove the setting for quick launch
+            Preference quickLaunchSetting = findPreference(KEY_QUICK_LAUNCH);
+            getPreferenceScreen().removePreference(quickLaunchSetting);
+        }
     }
 
     @Override
@@ -68,13 +75,13 @@ public class ApplicationSettings extends PreferenceActivity implements
 
     private void setNonMarketAppsAllowed(boolean enabled) {
         // Change the system setting
-        Settings.System.putInt(getContentResolver(), Settings.System.INSTALL_NON_MARKET_APPS, 
+        Settings.Secure.putInt(getContentResolver(), Settings.Secure.INSTALL_NON_MARKET_APPS, 
                                 enabled ? 1 : 0);
     }
     
     private boolean isNonMarketAppsAllowed() {
-            return Settings.System.getInt(getContentResolver(), 
-                                           Settings.System.INSTALL_NON_MARKET_APPS, 0) > 0;
+        return Settings.Secure.getInt(getContentResolver(), 
+                                      Settings.Secure.INSTALL_NON_MARKET_APPS, 0) > 0;
     }
 
     private void warnAppInstallation() {

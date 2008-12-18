@@ -27,7 +27,7 @@
                 android:persistent="false"
                 android:disableDependentsState="true" />
     
-        <VolumePreference
+        <com.android.settings.RingerVolumePreference
                 android:key="ring_volume"
                 android:title="@string/ring_volume_title"
                 android:summary="@string/ring_volume_summary"
@@ -42,7 +42,6 @@
                 android:summary="@string/media_volume_summary"
                 android:dialogTitle="@string/media_volume_title"
                 android:persistent="false"
-                android:dependency="silent"
                 android:streamType="music" />
     
         <com.android.settings.DefaultRingtonePreference
@@ -90,6 +89,14 @@
 
     <PreferenceCategory
             android:title="@string/display_settings">
+
+        <CheckBoxPreference
+                android:key="animations"
+                android:title="@string/animations_title"
+                android:summaryOn="@string/animations_summary_on"
+                android:summaryOff="@string/animations_summary_off"
+                android:dependency="silent" />
+
     
         <com.android.settings.BrightnessPreference
                 android:key="brightness"

@@ -25,6 +25,8 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.media.AudioManager;
 import android.os.Bundle;
+import android.os.RemoteException;
+import android.os.ServiceManager;
 import android.preference.ListPreference;
 import android.preference.Preference;
 import android.preference.PreferenceActivity;
@@ -32,6 +34,7 @@ import android.preference.PreferenceScreen;
 import android.preference.CheckBoxPreference;
 import android.provider.Settings;
 import android.util.Log;
+import android.view.IWindowManager;
 
 public class SoundAndDisplaySettings extends PreferenceActivity implements
         Preference.OnPreferenceChangeListener {
@@ -45,14 +48,19 @@ public class SoundAndDisplaySettings extends PreferenceActivity implements
     private static final String KEY_SCREEN_TIMEOUT = "screen_timeout";
     private static final String KEY_DTMF_TONE = "dtmf_tone";
     private static final String KEY_SOUND_EFFECTS = "sound_effects";
+    private static final String KEY_ANIMATIONS = "animations";
     
     private CheckBoxPreference mSilent;
     private CheckBoxPreference mVibrate;
     private CheckBoxPreference mDtmfTone;
     private CheckBoxPreference mSoundEffects;
+    private CheckBoxPreference mAnimations;
+    private float[] mAnimationScales;
     
     private AudioManager mAudioManager;
     
+    private IWindowManager mWindowManager;
+
     private BroadcastReceiver mReceiver = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
@@ -73,6 +81,7 @@ public class SoundAndDisplaySettings extends PreferenceActivity implements
         ContentResolver resolver = getContentResolver();
         
         mAudioManager = (AudioManager) getSystemService(Context.AUDIO_SERVICE);
+        mWindowManager = IWindowManager.Stub.asInterface(ServiceManager.getService("window"));
         
         addPreferencesFromResource(R.xml.sound_and_display_settings);
         
@@ -86,11 +95,13 @@ public class SoundAndDisplaySettings extends PreferenceActivity implements
         mSoundEffects.setPersistent(false);
         mSoundEffects.setChecked(Settings.System.getInt(resolver,
                 Settings.System.SOUND_EFFECTS_ENABLED, 0) != 0);
+        mAnimations = (CheckBoxPreference) findPreference(KEY_ANIMATIONS);
+        mAnimations.setPersistent(false);
         
         ListPreference screenTimeoutPreference =
             (ListPreference) findPreference(KEY_SCREEN_TIMEOUT);
         screenTimeoutPreference.setValue(String.valueOf(Settings.System.getInt(
-                getContentResolver(), SCREEN_OFF_TIMEOUT, FALLBACK_SCREEN_TIMEOUT_VALUE)));
+                resolver, SCREEN_OFF_TIMEOUT, FALLBACK_SCREEN_TIMEOUT_VALUE)));
         screenTimeoutPreference.setOnPreferenceChangeListener(this);
     }
     
@@ -124,6 +135,23 @@ public class SoundAndDisplaySettings extends PreferenceActivity implements
         if (phoneVibrate != mVibrate.isChecked() || force) {
             mVibrate.setChecked(phoneVibrate);
         }
+        
+        boolean animations = true;
+        try {
+            mAnimationScales = mWindowManager.getAnimationScales();
+        } catch (RemoteException e) {
+        }
+        if (mAnimationScales != null) {
+            for (int i=0; i<mAnimationScales.length; i++) {
+                if (mAnimationScales[i] == 0) {
+                    animations = false;
+                    break;
+                }
+            }
+        }
+        if (animations != mAnimations.isChecked() || force) {
+            mAnimations.setChecked(animations);
+        }
     }
 
     @Override
@@ -151,6 +179,15 @@ public class SoundAndDisplaySettings extends PreferenceActivity implements
             }
             Settings.System.putInt(getContentResolver(), Settings.System.SOUND_EFFECTS_ENABLED,
                     mSoundEffects.isChecked() ? 1 : 0);
+            
+        } else if (preference == mAnimations) {
+            for (int i=0; i<mAnimationScales.length; i++) {
+                mAnimationScales[i] = mAnimations.isChecked() ? 1 : 0;
+            }
+            try {
+                mWindowManager.setAnimationScales(mAnimationScales);
+            } catch (RemoteException e) {
+            }
         }
         return true;
     }

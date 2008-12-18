@@ -27,6 +27,7 @@ import android.preference.PreferenceActivity;
 import android.preference.PreferenceCategory;
 import android.preference.PreferenceScreen;
 import android.provider.Telephony;
+import android.text.TextUtils;
 import android.view.Menu;
 import android.view.MenuItem;
 
@@ -68,12 +69,16 @@ public class ApnSettings extends PreferenceActivity {
             String name = mCursor.getString(NAME_INDEX);
             String apn = mCursor.getString(APN_INDEX);
             
-            Preference pref = new Preference((Context) this);
-            pref.setKey(mCursor.getString(ID_INDEX));
-            pref.setTitle(name);
-            pref.setSummary(apn);
-            pref.setPersistent(false);
-            apnList.addPreference(pref);
+            if (name != null && apn != null && TextUtils.getTrimmedLength(name) > 0
+                    && TextUtils.getTrimmedLength(apn) > 0) {
+                Preference pref = new Preference((Context) this);
+                pref.setKey(mCursor.getString(ID_INDEX));
+                pref.setTitle(name);
+                pref.setSummary(apn);
+                pref.setPersistent(false);
+                apnList.addPreference(pref);
+            }
+            
             mCursor.moveToNext();
         }
     }

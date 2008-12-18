@@ -28,12 +28,9 @@ import android.widget.Toast;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
-import java.io.UnsupportedEncodingException;
 
 import com.android.internal.app.AlertActivity;
 import com.android.internal.app.AlertController;
-
-import org.apache.commons.codec.binary.Base64;
 
 /**
  * The "dialog" that shows from "License" in the Settings app.
@@ -92,27 +89,8 @@ public class SettingsLicenseActivity extends AlertActivity {
         
         WebView webView = new WebView(this);
 
-        if (LOGV) Log.v(TAG, "Started encode at " + System.currentTimeMillis());
-        // Need to encode to base64 for WebView to load the contents properly
-        String dataStr;
-        try {
-            byte[] base64Bytes = Base64.encodeBase64(data.toString().getBytes("ISO8859_1"));
-            dataStr = new String(base64Bytes);
-        } catch (UnsupportedEncodingException e) {
-            Log.e(TAG, "Could not convert to base64", e);
-            showErrorAndFinish();
-            return;
-        }
-        if (LOGV) Log.v(TAG, "Ended encode at " + System.currentTimeMillis());
-        if (LOGV) {
-            Log.v(TAG, "Started test decode at " + System.currentTimeMillis());
-            Base64.decodeBase64(dataStr.getBytes());
-            Log.v(TAG, "Ended decode at " + System.currentTimeMillis());
-        }
-
-        
         // Begin the loading.  This will be done in a separate thread in WebView.
-        webView.loadData(dataStr, "text/html", "base64");
+        webView.loadDataWithBaseURL(null, data.toString(), "text/html", "utf-8", null);
         webView.setWebViewClient(new WebViewClient() {
             @Override
             public void onPageFinished(WebView view, String url) {

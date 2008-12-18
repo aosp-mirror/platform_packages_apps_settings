@@ -240,9 +240,11 @@ public class Status extends PreferenceActivity {
     }
 
     private void setSummaryText(String preference, String text) {
-        if (text != null) {
-            findPreference(preference).setSummary(text);
+        if (TextUtils.isEmpty(text)) {
+            text = sUnknown;
         }
+        
+        findPreference(preference).setSummary(text);
     }
     
     private void updateNetworkType() {

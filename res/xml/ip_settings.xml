@@ -17,6 +17,22 @@
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
 
     <PreferenceCategory
+            android:title="@string/wifi_advanced_titlebar"
+            />
+
+    <ListPreference
+            android:key="num_channels"
+            android:title="@string/wifi_setting_num_channels_title"
+            android:summary="@string/wifi_setting_num_channels_summary"
+            android:persistent="false"
+            />
+    
+    <Preference android:key="mac_address" 
+        style="?android:attr/preferenceInformationStyle" 
+        android:title="@string/wifi_advanced_mac_address_title"
+        />
+    
+    <PreferenceCategory
             android:title="@string/wifi_ip_settings_titlebar"
             />
     

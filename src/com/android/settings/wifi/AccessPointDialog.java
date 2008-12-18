@@ -25,6 +25,7 @@ import android.net.wifi.WifiInfo;
 import android.net.wifi.WifiManager;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.text.format.Formatter;
 import android.text.method.PasswordTransformationMethod;
 import android.text.method.TransformationMethod;
 import android.util.Log;
@@ -303,7 +304,7 @@ public class AccessPointDialog extends AlertDialog implements DialogInterface.On
             }
     
             if (mState.primary && mState.ipAddress != 0) {
-                addInfoRow(R.string.ip_address, ipAddressToString(mState.ipAddress));
+                addInfoRow(R.string.ip_address, Formatter.formatIpAddress(mState.ipAddress));
             }
             
         } else if (mMode == MODE_CONFIGURE) {
@@ -579,14 +580,6 @@ public class AccessPointDialog extends AlertDialog implements DialogInterface.On
         return 0;
     }
     
-    private static String ipAddressToString(int addr) {
-        StringBuffer buf = new StringBuffer();
-        buf.append(addr  & 0xff).append('.').
-            append((addr >>>= 8) & 0xff).append('.').
-            append((addr >>>= 8) & 0xff).append('.').
-            append((addr >>>= 8) & 0xff);
-        return buf.toString();
-    }
 
     public void onClick(View v) {
         if (v == mShowPasswordCheckBox) {

@@ -24,8 +24,10 @@ import android.os.Bundle;
 import android.view.View;
 
 public class ChooseLockPatternTutorial extends Activity implements View.OnClickListener {
-    protected View mNextButton;
-    protected View mSkipButton;
+    private static final int REQUESTCODE_EXAMPLE = 1;
+    
+    private View mNextButton;
+    private View mSkipButton;
     
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,11 +54,22 @@ public class ChooseLockPatternTutorial extends Activity implements View.OnClickL
 
     public void onClick(View v) {
         if (v == mSkipButton) {
+            // Canceling, so finish all
+            setResult(ChooseLockPattern.RESULT_FINISHED);
             finish();
         } else if (v == mNextButton) {
-            startActivity(new Intent(this, ChooseLockPatternExample.class));
+            startActivityForResult(new Intent(this, ChooseLockPatternExample.class),
+                    REQUESTCODE_EXAMPLE);
+        }
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (requestCode == REQUESTCODE_EXAMPLE && resultCode == ChooseLockPattern.RESULT_FINISHED) {
+            setResult(resultCode);
             finish();
         }
     }
+    
 }
 
