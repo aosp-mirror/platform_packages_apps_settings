@@ -291,7 +291,7 @@ public class InstalledAppDetails extends Activity implements View.OnClickListene
         //display confirmation dialog
         new AlertDialog.Builder(this)
         .setTitle(getString(R.string.app_not_found_dlg_title))
-        .setIcon(R.drawable.ic_dialog_alert)
+        .setIcon(android.R.drawable.ic_dialog_alert)
         .setMessage(getString(msgId))
         .setNeutralButton(getString(R.string.dlg_ok), 
                 new DialogInterface.OnClickListener() {
@@ -421,7 +421,7 @@ public class InstalledAppDetails extends Activity implements View.OnClickListene
                 //display confirmation dialog
                 new AlertDialog.Builder(this)
                 .setTitle(getString(R.string.clear_data_dlg_title))
-                .setIcon(R.drawable.ic_dialog_alert)
+                .setIcon(android.R.drawable.ic_dialog_alert)
                 .setMessage(getString(R.string.clear_data_dlg_text))
                 .setPositiveButton(R.string.dlg_ok, this)
                 .setNegativeButton(R.string.dlg_cancel, this)

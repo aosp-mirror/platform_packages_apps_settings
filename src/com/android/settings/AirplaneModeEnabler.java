@@ -63,7 +63,7 @@ public class AirplaneModeEnabler implements Preference.OnPreferenceChangeListene
         
         // This is the widget enabled state, not the preference toggled state
         mCheckBoxPref.setEnabled(true);
-        mCheckBoxPref.setChecked(isAirplaneModeOn());
+        mCheckBoxPref.setChecked(isAirplaneModeOn(mContext));
 
         mPhoneStateReceiver.registerIntent();
         mCheckBoxPref.setOnPreferenceChangeListener(this);
@@ -74,8 +74,8 @@ public class AirplaneModeEnabler implements Preference.OnPreferenceChangeListene
         mCheckBoxPref.setOnPreferenceChangeListener(null);
     }
     
-    private boolean isAirplaneModeOn() {
-        return Settings.System.getInt(mContext.getContentResolver(),
+    static boolean isAirplaneModeOn(Context context) {
+        return Settings.System.getInt(context.getContentResolver(),
                 Settings.System.AIRPLANE_MODE_ON, 0) != 0;
     }
 
