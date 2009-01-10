@@ -80,8 +80,8 @@ public class InputMethodsSettings extends PreferenceActivity {
             if (null != property.getSettingsActivity()) {
                 PreferenceScreen prefScreen = new PreferenceScreen(this, null);
                 prefScreen.setKey(property.getSettingsActivity());
-                // XXX TODO: handle localization properly.
-                prefScreen.setTitle(label + " settings");
+                prefScreen.setTitle(getResources().getString(
+                        R.string.input_methods_settings_label_format, label));
                 getPreferenceScreen().addPreference(prefScreen);
             }
         }

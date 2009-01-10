@@ -111,7 +111,7 @@ public class ZoneList extends ListActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         menu.add(0, MENU_ALPHABETICAL, 0, R.string.zone_list_menu_sort_alphabetically)
-            .setIcon(R.drawable.ic_menu_sort_alphabetically);
+            .setIcon(android.R.drawable.ic_menu_sort_alphabetically);
         menu.add(0, MENU_TIMEZONE, 0, R.string.zone_list_menu_sort_by_timezone)
             .setIcon(R.drawable.ic_menu_3d_globe);
         

@@ -39,13 +39,8 @@ public class Settings extends PreferenceActivity {
     
     @Override
     protected void onResume() {
-        findPreference(KEY_CALL_SETTINGS).setEnabled(!isAirplaneMode());
         super.onResume();
+        findPreference(KEY_CALL_SETTINGS).setEnabled(!AirplaneModeEnabler.isAirplaneModeOn(this));
     }
-
-    private boolean isAirplaneMode() {
-        return System.getInt(getContentResolver(), 
-                              System.AIRPLANE_MODE_ON, 0) > 0;
-    }   
 
 }

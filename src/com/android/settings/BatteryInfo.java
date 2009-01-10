@@ -184,8 +184,8 @@ public class BatteryInfo extends Activity {
         
         if (mBatteryStats != null) {
             try {
-                long awakeTimeBattery = mBatteryStats.getAwakeTimeBattery();
-                long awakeTimePluggedIn = mBatteryStats.getAwakeTimePlugged();
+                long awakeTimeBattery = mBatteryStats.getAwakeTimeBattery() / 1000;
+                long awakeTimePluggedIn = mBatteryStats.getAwakeTimePlugged() / 1000;
                 mAwakeBattery.setText(DateUtils.formatElapsedTime(awakeTimeBattery / 1000) 
                         + " (" + (100 * awakeTimeBattery / uptime) + "%)");
                 mAwakePlugged.setText(DateUtils.formatElapsedTime(awakeTimePluggedIn / 1000)

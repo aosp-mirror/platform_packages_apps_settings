@@ -176,7 +176,7 @@ public class WifiSettings extends PreferenceActivity implements WifiLayer.Callba
             .setIcon(R.drawable.ic_menu_scan_network);
         
         menu.add(0, MENU_ID_ADVANCED, 0, R.string.wifi_menu_advanced)
-            .setIcon(R.drawable.ic_menu_manage);
+            .setIcon(android.R.drawable.ic_menu_manage);
         
         return true;
     }

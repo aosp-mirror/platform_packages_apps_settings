@@ -140,7 +140,7 @@ public class QuickLaunchSettings extends PreferenceActivity implements
                 // Create the dialog for clearing a shortcut
                 return new AlertDialog.Builder(this)
                         .setTitle(getString(R.string.quick_launch_clear_dialog_title))
-                        .setIcon(R.drawable.ic_dialog_alert)
+                        .setIcon(android.R.drawable.ic_dialog_alert)
                         .setMessage(getString(R.string.quick_launch_clear_dialog_message,
                                 mClearDialogShortcut, mClearDialogBookmarkTitle))
                         .setPositiveButton(R.string.quick_launch_clear_ok_button, this)

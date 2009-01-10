@@ -407,6 +407,13 @@
             </intent-filter>
         </activity>
 
+        <activity android:name="BatteryHistory" android:label="@string/battery_history_label">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.DEVELOPMENT_PREFERENCE" />
+            </intent-filter>
+        </activity>
+
         <activity android:name="Display" android:label="@string/display_label"
                 android:configChanges="fontScale">
             <intent-filter>
