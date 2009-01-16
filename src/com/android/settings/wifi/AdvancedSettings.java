@@ -27,6 +27,7 @@ import android.preference.EditTextPreference;
 import android.preference.ListPreference;
 import android.preference.Preference;
 import android.preference.PreferenceActivity;
+import android.provider.Settings;
 import android.provider.Settings.System;
 import android.text.TextUtils;
 import android.view.KeyEvent;
@@ -34,11 +35,13 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
 
-public class IpSettings extends PreferenceActivity implements Preference.OnPreferenceChangeListener {
+public class AdvancedSettings extends PreferenceActivity
+        implements Preference.OnPreferenceChangeListener {
 
     private static final String KEY_MAC_ADDRESS = "mac_address";
     private static final String KEY_USE_STATIC_IP = "use_static_ip";
     private static final String KEY_NUM_CHANNELS = "num_channels";
+    private static final String KEY_SLEEP_POLICY = "sleep_policy";
     
     private String[] mSettingNames = {
             System.WIFI_STATIC_IP, System.WIFI_STATIC_GATEWAY, System.WIFI_STATIC_NETMASK,
@@ -58,7 +61,7 @@ public class IpSettings extends PreferenceActivity implements Preference.OnPrefe
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         
-        addPreferencesFromResource(R.xml.ip_settings);
+        addPreferencesFromResource(R.xml.wifi_advanced_settings);
         
         mUseStaticIpCheckBox = (CheckBoxPreference) findPreference(KEY_USE_STATIC_IP);
 
@@ -74,6 +77,7 @@ public class IpSettings extends PreferenceActivity implements Preference.OnPrefe
         
         updateUi();
         initNumChannelsPreference();
+        initSleepPolicyPreference();
         refreshMacAddress();
     }
 
@@ -108,6 +112,14 @@ public class IpSettings extends PreferenceActivity implements Preference.OnPrefe
             pref.setValue(String.valueOf(numChannels));
         }
     }
+    
+    private void initSleepPolicyPreference() {
+        ListPreference pref = (ListPreference) findPreference(KEY_SLEEP_POLICY);
+        pref.setOnPreferenceChangeListener(this);
+        int value = Settings.System.getInt(getContentResolver(),
+                Settings.System.WIFI_SLEEP_POLICY,Settings. System.WIFI_SLEEP_POLICY_DEFAULT);
+        pref.setValue(String.valueOf(value));
+    }
 
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
@@ -137,6 +149,16 @@ public class IpSettings extends PreferenceActivity implements Preference.OnPrefe
                 return false;
             }
             
+        } else if (key.equals(KEY_SLEEP_POLICY)) {
+            try {
+                Settings.System.putInt(getContentResolver(),
+                        Settings.System.WIFI_SLEEP_POLICY, Integer.parseInt(((String) newValue)));
+            } catch (NumberFormatException e) {
+                Toast.makeText(this, R.string.wifi_setting_sleep_policy_error,
+                        Toast.LENGTH_SHORT).show();
+                return false;
+            }
+                
         } else {
             String value = (String) newValue;
             

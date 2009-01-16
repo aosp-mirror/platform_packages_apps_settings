@@ -922,6 +922,13 @@
     <!-- Wi-Fi settings screen, label to be appended to the count in displaying the list of valid channel counts -->
     <string name="wifi_setting_num_channels_channel_phrase"><xliff:g id="num_channels">%1$d</xliff:g> channels</string>
 
+    <!-- Wi-Fi settings screen, setting title for setting the wifi sleep policy -->
+    <string name="wifi_setting_sleep_policy_title">Wi-Fi sleep policy</string>
+    <!-- Wi-Fi settings screen, setting summary for setting the wifi sleep policy -->
+    <string name="wifi_setting_sleep_policy_summary">Specify when to switch from Wi-Fi to mobile data</string>
+    <!-- Wi-Fi settings screen, generic error message when the sleep policy could not be set. -->
+    <string name="wifi_setting_sleep_policy_error">There was a problem setting the sleep policy.</string>
+    
     <!-- Wi-Fi settings screen, advanced, title of the item to show the Wi-Fi device's MAC address. -->
     <string name="wifi_advanced_mac_address_title">MAC address</string>
 
@@ -1151,9 +1158,9 @@
     <!-- About phone, status item title.  The phone number of the current device.-->
     <string name="status_number">Phone number</string>
     <!-- About phone, status item title for the type of data phone network we're connected to, for example 3G or Edge or GPRS -->
-    <string name="status_network_type">Network type</string>
+    <string name="status_network_type">Mobile network type</string>
     <!-- About phone, status item title. The status of data access.  For example, the value may be "Connected" -->
-    <string name="status_data_state">Data access</string>
+    <string name="status_data_state">Mobile network state</string>
     <!-- About phone, status item title. The status of whether we have service.  for example, the value may be "In service" -->
     <string name="status_service_state">Service state</string>
     <!-- About phone, status item title. The  current cell tower signal strength -->

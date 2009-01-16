@@ -25,9 +25,12 @@ import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.Toast;
 
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
+import java.util.zip.GZIPInputStream;
 
 import com.android.internal.app.AlertActivity;
 import com.android.internal.app.AlertController;
@@ -39,10 +42,10 @@ public class SettingsLicenseActivity extends AlertActivity {
 
     private static final String TAG = "SettingsLicenseActivity";
     private static final boolean LOGV = false || Config.LOGV;
-    
-    private static final String DEFAULT_LICENSE_PATH = "/system/etc/NOTICE.html";
+
+    private static final String DEFAULT_LICENSE_PATH = "/system/etc/NOTICE.html.gz";
     private static final String PROPERTY_LICENSE_PATH = "ro.config.license_path";
-    
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -54,14 +57,19 @@ public class SettingsLicenseActivity extends AlertActivity {
             return;
         }
 
-        FileReader fileReader = null;
+        InputStreamReader inputReader = null;
         StringBuilder data = null;
         try {
-            data = new StringBuilder(2048); 
+            data = new StringBuilder(2048);
             char tmp[] = new char[2048];
             int numRead;
-            fileReader = new FileReader(fileName);
-            while ((numRead = fileReader.read(tmp)) >= 0) {
+            if (fileName.endsWith(".gz")) {
+                inputReader = new InputStreamReader(
+                    new GZIPInputStream(new FileInputStream(fileName)));
+            } else {
+                inputReader = new FileReader(fileName);
+            }
+            while ((numRead = inputReader.read(tmp)) >= 0) {
                 data.append(tmp, 0, numRead);
             }
         } catch (FileNotFoundException e) {
@@ -74,19 +82,19 @@ public class SettingsLicenseActivity extends AlertActivity {
             return;
         } finally {
             try {
-                if (fileReader != null) {
-                    fileReader.close();
+                if (inputReader != null) {
+                    inputReader.close();
                 }
             } catch (IOException e) {
             }
         }
-    
+
         if (TextUtils.isEmpty(data)) {
             Log.e(TAG, "License HTML is empty (from " + fileName + ")");
             showErrorAndFinish();
             return;
         }
-        
+
         WebView webView = new WebView(this);
 
         // Begin the loading.  This will be done in a separate thread in WebView.
@@ -98,7 +106,7 @@ public class SettingsLicenseActivity extends AlertActivity {
                 mAlert.setTitle(getString(R.string.settings_license_activity_title));
             }
         });
-        
+
         final AlertController.AlertParams p = mAlertParams;
         p.mTitle = getString(R.string.settings_license_activity_loading);
         p.mView = webView;
@@ -111,5 +119,5 @@ public class SettingsLicenseActivity extends AlertActivity {
                 .show();
         finish();
     }
-    
+
 }

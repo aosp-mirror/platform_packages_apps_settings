@@ -24,7 +24,7 @@
     <string name="radioInfo_roaming_in">"漫游"</string>
     <string name="radioInfo_roaming_not">"无漫游"</string>
     <string name="radioInfo_phone_idle">"空闲"</string>
-    <string name="radioInfo_phone_ringing">"铃声"</string>
+    <string name="radioInfo_phone_ringing">"正在响铃"</string>
     <string name="radioInfo_phone_offhook">"正在通话"</string>
     <string name="radioInfo_data_disconnected">"已断开连接"</string>
     <string name="radioInfo_data_connecting">"正在连接"</string>
@@ -74,37 +74,30 @@
     <string name="battery_info_health_unspecified_failure">"未知错误"</string>
     <string name="bluetooth">"蓝牙"</string>
     <string name="bluetooth_stopping">"蓝牙正在停止..."</string>
-    <!-- no translation found for bluetooth_disabled (3281654100455454605) -->
-    <skip />
+    <string name="bluetooth_disabled">"打开蓝牙"</string>
     <!-- no translation found for bluetooth_enabled (314506563815464155) -->
     <skip />
     <string name="bluetooth_enabling">"正在打开蓝牙..."</string>
     <string name="bluetooth_visibility">"可发现"</string>
     <string name="bluetooth_is_discoverable">"<xliff:g id="DISCOVERABLE_TIME_PERIOD">%1$s</xliff:g> 秒内可发现..."</string>
-    <!-- no translation found for bluetooth_not_discoverable (128269993123955177) -->
-    <skip />
+    <string name="bluetooth_not_discoverable">"让设备能被搜索到"</string>
     <string name="bluetooth_devices">"蓝牙设备"</string>
     <string name="bluetooth_device_name">"设备名称"</string>
     <string name="bluetooth_name_not_set">"无名称集，使用帐户名"</string>
-    <string name="bluetooth_scan_for_devices">"扫描以获取设备"</string>
+    <string name="bluetooth_scan_for_devices">"扫描以找到设备"</string>
     <string name="bluetooth_clear_list">"清除设备列表"</string>
-    <!-- no translation found for bluetooth_disconnect_blank (8102076504922229274) -->
-    <skip />
+    <string name="bluetooth_disconnect_blank">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g>会断开连接。"</string>
     <string name="bluetooth_connected">"已连接"</string>
-    <!-- no translation found for bluetooth_disconnected (6557104142667339895) -->
-    <skip />
-    <!-- no translation found for bluetooth_disconnecting (8913264760027764974) -->
-    <skip />
+    <string name="bluetooth_disconnected">"已断开连接"</string>
+    <string name="bluetooth_disconnecting">"正在断开连接..."</string>
     <string name="bluetooth_connecting">"正在连接..."</string>
     <!-- no translation found for bluetooth_unknown (644716244548801421) -->
     <skip />
     <string name="bluetooth_not_connected">"与此设备配对"</string>
     <string name="bluetooth_failed_to_enable">"无法打开蓝牙"</string>
     <string name="bluetooth_pairing">"正在配对..."</string>
-    <!-- no translation found for failed_to_pair (7648018965110976948) -->
-    <skip />
-    <!-- no translation found for failed_to_connect (4770209428036813667) -->
-    <skip />
+    <string name="failed_to_pair">"无法与<xliff:g id="DEVICE_NAME">%1$s</xliff:g>配对。"</string>
+    <string name="failed_to_connect">"无法连接至<xliff:g id="DEVICE_NAME">%1$s</xliff:g>。"</string>
     <string name="bluetooth_paired">"已配对"</string>
     <string name="bluetooth_paired_not_nearby">"已配对"</string>
     <string name="bluetooth_device">"免持听筒/耳机"</string>
@@ -114,11 +107,10 @@
     <string name="bluetooth_pair">"配对"</string>
     <string name="progress_scanning">"正在扫描"</string>
     <string name="bluetooth_notif_ticker">"蓝牙配对请求"</string>
-    <!-- no translation found for bluetooth_notif_title (2485175521845371514) -->
-    <skip />
+    <string name="bluetooth_notif_title">"配对请求"</string>
     <string name="bluetooth_notif_message">"选择以与以下对象配对"</string>
     <string name="date_and_time">"日期和时间设置"</string>
-    <string name="date_time_12_hour_sample">"1:00 pm"</string>
+    <string name="date_time_12_hour_sample">"下午 1:00"</string>
     <string name="date_time_24_hour_sample">"13:00"</string>
     <string name="choose_timezone">"选择时区"</string>
     <string name="display_preview_label">"预览："</string>
@@ -131,9 +123,9 @@
     <string name="intent_sender_resource_label">"<xliff:g id="RESOURCE">Resource</xliff:g>："</string>
     <string name="intent_sender_account_label">"帐户："</string>
     <string name="keyguard_pw_mod_text">"选择锁定图案"</string>
-    <string name="keyguard_pin_mod_text">"更改 PIN"</string>
+    <string name="keyguard_pin_mod_text">"更改 PIN 码"</string>
     <string name="keyguard_label">"键盘锁"</string>
-    <string name="keyguard_sim_pin_label">"SIM PIN"</string>
+    <string name="keyguard_sim_pin_label">"SIM 卡 PIN 码"</string>
     <string name="keyguard_password_old_password_error_text">"您键入的旧密码不正确。请重试。"</string>
     <string name="keyguard_password_button_text">"确定"</string>
     <string name="keyguard_password_confirm_new_label">"确认新密码："</string>
@@ -159,7 +151,7 @@
     <string name="radio_info_roaming_label">"漫游："</string>
     <string name="radio_info_imei_label">"IMEI："</string>
     <string name="radio_info_call_redirect_label">"呼叫重定向："</string>
-    <string name="radio_info_ppp_resets_label">"引导后已重设的 PPP 数量："</string>
+    <string name="radio_info_ppp_resets_label">"引导后已重设的 PPP 数："</string>
     <string name="radio_info_gsm_disconnects_label">"GSM 断开连接："</string>
     <string name="radio_info_current_network_label">"当前网络："</string>
     <string name="radio_info_data_successes_label">"数据成功："</string>
@@ -168,7 +160,7 @@
     <string name="radio_info_signal_strength_label">"信号强度："</string>
     <string name="radio_info_call_status_label">"呼叫状态："</string>
     <string name="radio_info_ppp_sent_label">"已发送 PPP："</string>
-    <string name="radio_info_radio_resets_label">"收音机复位："</string>
+    <string name="radio_info_radio_resets_label">"收音机重设："</string>
     <string name="radio_info_message_waiting_label">"消息等待："</string>
     <string name="radio_info_phone_number_label">"手机号："</string>
     <string name="radio_info_band_mode_label">"选择收音机波段"</string>
@@ -190,7 +182,7 @@
     <string name="ringer_volume_ringer_mode_label">"响铃模式"</string>
     <string name="ringer_volume_screen_increasing_text">"铃声渐强"</string>
     <string name="ringer_volume_ringtone_label">"铃声"</string>
-    <string name="ringer_volume_instructions">"使用音量按钮调节铃声音量"</string>
+    <string name="ringer_volume_instructions">"使用音量按钮调节振铃音量"</string>
     <string name="sdcard_changes_instructions">"更改会在重新连接 USB 电缆后生效"</string>
     <string name="sdcard_settings_screen_mass_storage_text">"启用 USB 大容量存储"</string>
     <string name="sdcard_settings_total_bytes_label">"字节总数："</string>
@@ -202,7 +194,7 @@
     <string name="sdcard_settings_used_bytes_label">"使用的字节数："</string>
     <string name="sdcard_settings_scanning_status">"正在扫描 SD 卡以获取媒体..."</string>
     <string name="sdcard_settings_read_only_status">"装载的 SD 卡为只读"</string>
-    <string name="sdcard_removal_alert_title">"卸下 SD 卡不安全！"</string>
+    <string name="sdcard_removal_alert_title">"卸下 SD 卡的操作不安全！"</string>
     <string name="sdcard_unmountable_alert_title">"SD 卡不可读"</string>
     <string name="telephony_user_label">"用户："</string>
     <string name="telephony_server_label">"服务器："</string>
@@ -222,6 +214,8 @@
     <string name="activity_picker_label">"选择活动"</string>
     <string name="device_info_label">"设备信息"</string>
     <string name="battery_info_label">"电池信息"</string>
+    <!-- no translation found for battery_history_label (8242244969757414501) -->
+    <skip />
     <string name="display_label">"显示"</string>
     <string name="phone_info_label">"手机信息"</string>
     <string name="sd_card_settings_label">"SD 卡"</string>
@@ -229,8 +223,7 @@
     <string name="cancel">"取消"</string>
     <string name="settings_label">"设置"</string>
     <string name="airplane_mode">"飞航模式"</string>
-    <!-- no translation found for airplane_mode_summary (3154817401368780988) -->
-    <skip />
+    <string name="airplane_mode_summary">"禁用所有无线连接"</string>
     <string name="airplane_mode_turning_on">"正在禁用无线连接..."</string>
     <string name="airplane_mode_turning_off">"正在启用无线连接..."</string>
     <string name="radio_controls_title">"无线控件"</string>
@@ -242,96 +235,61 @@
     <string name="date_time_auto_summaryOff">"使用网络提供的值"</string>
     <string name="date_time_24hour">"使用 24 小时格式"</string>
     <string name="date_time_set_time">"设置时间"</string>
-    <!-- no translation found for date_time_set_timezone (5045627174274377814) -->
-    <skip />
+    <string name="date_time_set_timezone">"选择时区"</string>
     <string name="date_time_set_date">"设置日期"</string>
     <string name="date_time_date_format">"选择日期格式"</string>
-    <!-- no translation found for zone_list_menu_sort_alphabetically (5683377702671088588) -->
-    <skip />
-    <!-- no translation found for zone_list_menu_sort_by_timezone (2720190443744884114) -->
-    <skip />
+    <string name="zone_list_menu_sort_alphabetically">"按字母顺序排序"</string>
+    <string name="zone_list_menu_sort_by_timezone">"按时区排序"</string>
     <string name="security_settings_title">"安全性和位置"</string>
-    <!-- no translation found for security_settings_summary (8145883103362174000) -->
-    <skip />
+    <string name="security_settings_summary">"设置我的位置、屏幕解锁、SIM 卡锁定"</string>
     <string name="security_passwords_title">"密码"</string>
     <string name="bluetooth_quick_toggle_title">"蓝牙"</string>
-    <!-- no translation found for bluetooth_quick_toggle_summary (5293641680139873341) -->
-    <skip />
+    <string name="bluetooth_quick_toggle_summary">"打开蓝牙"</string>
     <string name="bluetooth_settings">"蓝牙设置"</string>
     <string name="bluetooth_settings_title">"蓝牙设置"</string>
     <string name="bluetooth_settings_summary">"管理连接，设置设备名称和可发现性"</string>
-    <!-- no translation found for bluetooth_pin_entry (5627349871303455279) -->
-    <skip />
+    <string name="bluetooth_pin_entry">"蓝牙配对请求"</string>
     <string name="bluetooth_device_info">"蓝牙设备信息"</string>
     <string name="bluetooth_pairing_msg">"正在配对..."</string>
-    <!-- no translation found for bluetooth_enter_pin_msg (7551139612735632370) -->
-    <skip />
-    <!-- no translation found for bluetooth_error_title (538287072376677166) -->
-    <skip />
-    <!-- no translation found for bluetooth_pairing_error_message (2852744547246910349) -->
-    <skip />
-    <!-- no translation found for bluetooth_pairing_alternate_error_message (1731286765420671521) -->
-    <skip />
-    <!-- no translation found for bluetooth_pairing_pin_error_message (6938408362011024289) -->
-    <skip />
-    <!-- no translation found for bluetooth_connecting_error_message (1779660510084746802) -->
-    <skip />
+    <string name="bluetooth_enter_pin_msg">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g>"\n\n"键入 PIN 码以配对。"\n"（尝试键入 0000 或 1234。）"</string>
+    <string name="bluetooth_error_title">"注意"</string>
+    <string name="bluetooth_pairing_error_message">"与<xliff:g id="DEVICE_NAME">%1$s</xliff:g>配对时出现问题。"</string>
+    <string name="bluetooth_pairing_alternate_error_message">"与<xliff:g id="DEVICE_NAME">%1$s</xliff:g>配对时出现问题。请尝试使用其他 PIN 码。"</string>
+    <string name="bluetooth_pairing_pin_error_message">"与<xliff:g id="DEVICE_NAME">%1$s</xliff:g>配对时出现问题，因为键入的 PIN 码不正确。"</string>
+    <string name="bluetooth_connecting_error_message">"连接至<xliff:g id="DEVICE_NAME">%1$s</xliff:g>时出现问题。"</string>
     <string name="bluetooth_new_data">"键入新数据"</string>
     <string name="bluetooth_new_data_confirm">"确定"</string>
     <string name="bluetooth_new_data_cancel">"取消"</string>
-    <string name="bluetooth_scan_for_new_devices">"正在扫描以获取新设备..."</string>
+    <string name="bluetooth_scan_for_new_devices">"正在扫描以找到新设备..."</string>
     <string name="bluetooth_discoverability_panel_title">"让我..."</string>
     <string name="bluetooth_discoverable">"<xliff:g id="DISCOVERABLE_TIME_PERIOD">%1$s</xliff:g> 秒内可发现"</string>
     <string name="bluetooth_connectable">"只可连接"</string>
     <string name="bluetooth_neither">"既不可发现也不可连接"</string>
-    <!-- no translation found for bluetooth_preference_scan_title (2277464653118896016) -->
-    <skip />
-    <!-- no translation found for bluetooth_preference_scan_summary (2368330460781052669) -->
-    <skip />
-    <!-- no translation found for bluetooth_device_context_connect (3997659895003244941) -->
-    <skip />
-    <!-- no translation found for bluetooth_device_context_disconnect (8220072022970148683) -->
-    <skip />
-    <!-- no translation found for bluetooth_device_context_pair_connect (7611522504813927727) -->
-    <skip />
-    <!-- no translation found for bluetooth_device_context_unpair (662992425948536144) -->
-    <skip />
-    <!-- no translation found for bluetooth_device_context_disconnect_unpair (7644014238070043798) -->
-    <skip />
-    <!-- no translation found for bluetooth_device_context_connect_advanced (2643129703569788771) -->
-    <skip />
-    <!-- no translation found for bluetooth_connect_specific_profiles_title (6952214406025825164) -->
-    <skip />
-    <!-- no translation found for bluetooth_profile_a2dp (3259633293424539529) -->
-    <skip />
-    <!-- no translation found for bluetooth_profile_headset (1874975688666658946) -->
-    <skip />
-    <!-- no translation found for bluetooth_summary_connected_to_a2dp (510833839847758664) -->
-    <skip />
-    <!-- no translation found for bluetooth_summary_connected_to_headset (4876496372728623918) -->
-    <skip />
-    <!-- no translation found for bluetooth_summary_connected_to_a2dp_headset (3045032710457800891) -->
-    <skip />
-    <!-- no translation found for bluetooth_device_advanced_title (528816860793581131) -->
-    <skip />
-    <!-- no translation found for bluetooth_device_advanced_online_mode_title (3689050071425683114) -->
-    <skip />
-    <!-- no translation found for bluetooth_device_advanced_online_mode_summary (1204424107263248336) -->
-    <skip />
-    <!-- no translation found for bluetooth_device_advanced_profile_header_title (3764437426089639639) -->
-    <skip />
-    <!-- no translation found for bluetooth_a2dp_profile_summary_connected (963376081347721598) -->
-    <skip />
-    <!-- no translation found for bluetooth_headset_profile_summary_connected (7661070206715520671) -->
-    <skip />
-    <!-- no translation found for bluetooth_a2dp_profile_summary_use_for (4630849022250168427) -->
-    <skip />
-    <!-- no translation found for bluetooth_headset_profile_summary_use_for (8705753622443862627) -->
-    <skip />
+    <string name="bluetooth_preference_scan_title">"扫描以找到设备"</string>
+    <string name="bluetooth_preference_scan_summary">"查找要配对的设备"</string>
+    <string name="bluetooth_device_context_connect">"连接"</string>
+    <string name="bluetooth_device_context_disconnect">"断开连接"</string>
+    <string name="bluetooth_device_context_pair_connect">"配对和连接"</string>
+    <string name="bluetooth_device_context_unpair">"取消配对"</string>
+    <string name="bluetooth_device_context_disconnect_unpair">"断开连接并取消配对"</string>
+    <string name="bluetooth_device_context_connect_advanced">"选项..."</string>
+    <string name="bluetooth_connect_specific_profiles_title">"连接至..."</string>
+    <string name="bluetooth_profile_a2dp">"媒体"</string>
+    <string name="bluetooth_profile_headset">"手机"</string>
+    <string name="bluetooth_summary_connected_to_a2dp">"已连接至媒体音频"</string>
+    <string name="bluetooth_summary_connected_to_headset">"已连接至手机音频"</string>
+    <string name="bluetooth_summary_connected_to_a2dp_headset">"已连接至手机和媒体音频"</string>
+    <string name="bluetooth_device_advanced_title">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g>选项"</string>
+    <string name="bluetooth_device_advanced_online_mode_title">"连接"</string>
+    <string name="bluetooth_device_advanced_online_mode_summary">"连接至蓝牙设备"</string>
+    <string name="bluetooth_device_advanced_profile_header_title">"个人资料"</string>
+    <string name="bluetooth_a2dp_profile_summary_connected">"已连接至媒体音频"</string>
+    <string name="bluetooth_headset_profile_summary_connected">"已连接至手机音频"</string>
+    <string name="bluetooth_a2dp_profile_summary_use_for">"用于媒体音频"</string>
+    <string name="bluetooth_headset_profile_summary_use_for">"用于手机音频"</string>
     <string name="wifi">"Wi-Fi"</string>
     <string name="wifi_quick_toggle_title">"Wi-Fi"</string>
-    <!-- no translation found for wifi_quick_toggle_summary (1047950931623694366) -->
-    <skip />
+    <string name="wifi_quick_toggle_summary">"打开 Wi-Fi"</string>
     <string name="wifi_settings">"Wi-Fi 设置"</string>
     <string name="wifi_settings_category">"Wi-Fi 设置"</string>
     <string name="wifi_settings_summary">"设置和管理无线接入点"</string>
@@ -363,24 +321,22 @@
     <string name="error_connecting">"无法连接至网络"</string>
     <string name="error_saving">"无法保存网络"</string>
     <string name="connect">"连接"</string>
-    <string name="connect_to_blank">"连接至<xliff:g id="NETWORK_NAME">%1$s</xliff:g>"</string>
+    <string name="connect_to_blank">"连接至 <xliff:g id="NETWORK_NAME">%1$s</xliff:g>"</string>
     <string name="please_type_passphrase">"无线密码"</string>
     <string name="please_type_hex_key">"WEP 十六进制键（0-9、A-F）"</string>
     <string name="wifi_show_password">"显示密码。"</string>
     <string name="scan_wifi">"扫描"</string>
     <string name="summary_not_in_range">"不在范围之内"</string>
     <string name="summary_remembered">"已记忆"</string>
-    <string name="summary_connection_failed">"连接失败，请选择重试"</string>
+    <string name="summary_connection_failed">"连接失败，请选择以重试"</string>
     <string name="wifi_access_points">"Wi-Fi 网络"</string>
-    <!-- no translation found for wifi_type_ssid (1326839657083292017) -->
-    <skip />
+    <string name="wifi_type_ssid">"网络 SSID"</string>
     <string name="wifi_security">"安全性"</string>
     <string name="wifi_save_config">"保存"</string>
     <string name="wifi_password_unchanged">"（未更改）"</string>
-    <!-- no translation found for wifi_add_other_network (5499063300755575893) -->
-    <skip />
+    <string name="wifi_add_other_network">"添加 Wi-Fi 网络"</string>
     <string name="wifi_notify_open_networks">"网络通知"</string>
-    <string name="wifi_notify_open_networks_summary">"当有开放网络时通知我"</string>
+    <string name="wifi_notify_open_networks_summary">"当有开放网络可用时通知我"</string>
     <string name="wifi_password_incorrect_error">"您键入的网络密码不正确。请重试。"</string>
     <string name="wifi_generic_connection_error">"连接至网络时出现问题。请重试。"</string>
     <string name="wifi_menu_advanced">"高级"</string>
@@ -402,14 +358,19 @@
     <string name="wifi_setting_num_channels_summary">"设置要使用的频道数"</string>
     <string name="wifi_setting_num_channels_error">"设置调节域时出现问题。"</string>
     <string name="wifi_setting_num_channels_channel_phrase">"<xliff:g id="NUM_CHANNELS">%1$d</xliff:g> 个频道"</string>
-    <!-- no translation found for wifi_advanced_mac_address_title (6571335466330978393) -->
+    <!-- no translation found for wifi_setting_sleep_policy_title (1367731352485585528) -->
     <skip />
+    <!-- no translation found for wifi_setting_sleep_policy_summary (7573693311804602041) -->
+    <skip />
+    <!-- no translation found for wifi_setting_sleep_policy_error (5103670439972135148) -->
+    <skip />
+    <string name="wifi_advanced_mac_address_title">"MAC 地址"</string>
     <string name="fragment_status_scanning">"正在扫描..."</string>
-    <string name="fragment_status_connecting">"正在连接至<xliff:g id="NETWORK_NAME">%1$s</xliff:g>..."</string>
-    <string name="fragment_status_authenticating">"正通过<xliff:g id="NETWORK_NAME">%1$s</xliff:g>验证..."</string>
+    <string name="fragment_status_connecting">"正在连接至 <xliff:g id="NETWORK_NAME">%1$s</xliff:g>..."</string>
+    <string name="fragment_status_authenticating">"正在通过 <xliff:g id="NETWORK_NAME">%1$s</xliff:g> 验证..."</string>
     <string name="fragment_status_obtaining_ip">"正在从 <xliff:g id="NETWORK_NAME">%1$s</xliff:g> 获取 IP 地址..."</string>
-    <string name="fragment_status_connected">"已连接至<xliff:g id="NETWORK_NAME">%1$s</xliff:g>"</string>
-    <string name="fragment_status_disconnecting">"正在断开与<xliff:g id="NETWORK_NAME">%1$s</xliff:g>的连接..."</string>
+    <string name="fragment_status_connected">"已连接至 <xliff:g id="NETWORK_NAME">%1$s</xliff:g>"</string>
+    <string name="fragment_status_disconnecting">"正在断开与 <xliff:g id="NETWORK_NAME">%1$s</xliff:g> 的连接..."</string>
     <string name="fragment_status_disconnected">"已断开连接"</string>
     <string name="fragment_status_failed">"失败"</string>
     <string name="status_scanning">"正在扫描..."</string>
@@ -424,23 +385,18 @@
     <string name="sound_settings">"声音设置"</string>
     <string name="sound_and_display_settings_summary">"设置铃声、通知、屏幕亮度"</string>
     <string name="silent_mode_title">"静音模式"</string>
-    <!-- no translation found for silent_mode_summary (9081534746589616108) -->
-    <skip />
+    <string name="silent_mode_summary">"除媒体和闹钟之外的所有声音都被静音"</string>
     <string name="ringtone_title">"手机铃声"</string>
-    <string name="ringtone_summary">"设置默认来电铃声"</string>
-    <string name="ring_volume_title">"铃声音量"</string>
-    <!-- no translation found for ring_volume_summary (8370699933709381329) -->
-    <skip />
+    <string name="ringtone_summary">"设置默认的来电铃声"</string>
+    <string name="ring_volume_title">"响铃音量"</string>
+    <string name="ring_volume_summary">"设置来电音量和通知音量"</string>
     <string name="vibrate_title">"手机振动"</string>
     <string name="vibrate_summary">"手机来电时振动"</string>
     <string name="notification_sound_title">"通知铃声"</string>
     <string name="notification_sound_summary">"设置默认的通知铃声"</string>
-    <!-- no translation found for incoming_call_volume_title (6144314834963494752) -->
-    <skip />
-    <!-- no translation found for notification_volume_title (3363351773121138717) -->
-    <skip />
-    <!-- no translation found for checkbox_notification_same_as_incoming_call (1073644356290338921) -->
-    <skip />
+    <string name="incoming_call_volume_title">"来电音量"</string>
+    <string name="notification_volume_title">"通知音量"</string>
+    <string name="checkbox_notification_same_as_incoming_call">"使用来电音量作为通知音量"</string>
     <string name="notification_sound_dialog_title">"选择通知铃声"</string>
     <string name="media_volume_title">"媒体音量"</string>
     <string name="media_volume_summary">"设置音乐和视频的音量"</string>
@@ -452,10 +408,8 @@
     <string name="sound_effects_enable_summary_off">"进行屏幕选择时发出声音"</string>
     <string name="sync_settings">"数据同步"</string>
     <string name="sync_settings_summary">"选择同步哪些应用程序"</string>
-    <!-- no translation found for sync_settings_header_general_settings (1940413055002651212) -->
-    <skip />
-    <!-- no translation found for sync_settings_header_application_settings (7055646124074397344) -->
-    <skip />
+    <string name="sync_settings_header_general_settings">"常规同步设置"</string>
+    <string name="sync_settings_header_application_settings">"应用程序同步设置"</string>
     <string name="sync_too_many_deletes">"超出了删除限制"</string>
     <string name="sync_automatically">"自动同步"</string>
     <string name="sync_enabled">"自动同步数据"</string>
@@ -465,19 +419,16 @@
     <string name="sync_gmail">"Gmail"</string>
     <string name="sync_calendar">"日历"</string>
     <string name="sync_contacts">"联系人"</string>
-    <string name="sync_too_many_deletes_desc">"对于<xliff:g id="TYPE_OF_SYNC">%2$s</xliff:g>、帐户<xliff:g id="ACCOUNT_NAME">%3$s</xliff:g>，有 <xliff:g id="NUMBER_OF_DELETED_ITEMS">%1$d</xliff:g> 个删除的项目。您希望执行什么操作？"</string>
+    <string name="sync_too_many_deletes_desc">"对于<xliff:g id="TYPE_OF_SYNC">%2$s</xliff:g>、帐户 <xliff:g id="ACCOUNT_NAME">%3$s</xliff:g>，有 <xliff:g id="NUMBER_OF_DELETED_ITEMS">%1$d</xliff:g> 个删除的项目。您希望执行什么操作？"</string>
     <string name="sync_really_delete">"删除这些项目。"</string>
     <string name="sync_undo_deletes">"撤消删除操作。"</string>
     <string name="sync_do_nothing">"现在什么都不做。"</string>
     <string name="sync_is_failing">"同步操作当前遇到了一些问题，很快便可恢复。"</string>
     <string name="sync_plug"><font fgcolor="#ffffffff">"欢迎使用 Google Sync！"</font>\n"这是一种同步数据以允许您从任何位置访问您的联系人、约会以及更多信息的 Google 方法。"</string>
     <string name="display_settings">"显示设置"</string>
-    <!-- no translation found for animations_title (1062189037402346023) -->
-    <skip />
-    <!-- no translation found for animations_summary_on (5690787466633824737) -->
-    <skip />
-    <!-- no translation found for animations_summary_off (8847573219383668092) -->
-    <skip />
+    <string name="animations_title">"动画"</string>
+    <string name="animations_summary_on">"打开/关闭窗口时显示动画"</string>
+    <string name="animations_summary_off">"打开/关闭窗口时显示动画"</string>
     <string name="brightness">"亮度"</string>
     <string name="screen_timeout">"屏幕待机"</string>
     <string name="dim_screen">"屏幕变暗"</string>
@@ -485,28 +436,21 @@
     <string name="sim_lock_settings_category">"设置 SIM 卡锁定"</string>
     <string name="sim_lock_settings_title">"SIM 卡锁定"</string>
     <string name="sim_pin_toggle">"锁定 SIM 卡"</string>
-    <string name="sim_lock_on">"需要 PIN 才能使用手机"</string>
-    <string name="sim_lock_off">"需要 PIN 才能使用手机"</string>
-    <!-- no translation found for sim_pin_change (6311414184279932368) -->
-    <skip />
-    <!-- no translation found for sim_enter_pin (6608715137008508432) -->
-    <skip />
-    <!-- no translation found for sim_enable_sim_lock (4517742794997166918) -->
-    <skip />
-    <!-- no translation found for sim_disable_sim_lock (7664729528754784824) -->
-    <skip />
-    <!-- no translation found for sim_enter_old (6074196344494634348) -->
-    <skip />
-    <!-- no translation found for sim_enter_new (8742727032729243562) -->
-    <skip />
-    <string name="sim_reenter_new">"重新键入新 PIN"</string>
-    <!-- no translation found for sim_change_pin (7328607264898359112) -->
-    <skip />
-    <string name="sim_bad_pin">"PIN 不正确！"</string>
-    <string name="sim_pins_dont_match">"PIN 不匹配！"</string>
-    <string name="sim_change_failed">"无法更改 PIN。"\n"PIN 可能不正确。"</string>
-    <string name="sim_change_succeeded">"SIM PIN 更改成功"</string>
-    <string name="sim_lock_failed">"无法更改 SIM 卡锁定状态。"\n"PIN 可能不正确。"</string>
+    <string name="sim_lock_on">"需要 PIN 码才能使用手机"</string>
+    <string name="sim_lock_off">"需要 PIN 码才能使用手机"</string>
+    <string name="sim_pin_change">"更改 SIM 卡 PIN 码"</string>
+    <string name="sim_enter_pin">"SIM 卡 PIN 码"</string>
+    <string name="sim_enable_sim_lock">"锁定 SIM 卡"</string>
+    <string name="sim_disable_sim_lock">"解锁 SIM 卡"</string>
+    <string name="sim_enter_old">"旧 SIM 卡 PIN 码"</string>
+    <string name="sim_enter_new">"新 SIM 卡 PIN 码"</string>
+    <string name="sim_reenter_new">"重新键入新 PIN 码"</string>
+    <string name="sim_change_pin">"SIM 卡 PIN 码"</string>
+    <string name="sim_bad_pin">"PIN 码不正确！"</string>
+    <string name="sim_pins_dont_match">"PIN 码不匹配！"</string>
+    <string name="sim_change_failed">"无法更改 PIN 码。"\n"PIN 码可能不正确。"</string>
+    <string name="sim_change_succeeded">"SIM 卡 PIN 码更改成功"</string>
+    <string name="sim_lock_failed">"无法更改 SIM 卡锁定状态。"\n"PIN 码可能不正确。"</string>
     <string name="sim_enter_ok">"确定"</string>
     <string name="sim_enter_cancel">"取消"</string>
     <string name="device_info_settings">"手机状态"</string>
@@ -524,8 +468,10 @@
     <string name="storage_settings_title">"SD 卡和手机存储"</string>
     <string name="storage_settings_summary">"卸下 SD 卡，查看可用的存储空间"</string>
     <string name="status_number">"手机号"</string>
-    <string name="status_network_type">"网络类型"</string>
-    <string name="status_data_state">"数据访问"</string>
+    <!-- no translation found for status_network_type (3279383550222116235) -->
+    <skip />
+    <!-- no translation found for status_data_state (5503181397066522950) -->
+    <skip />
     <string name="status_service_state">"服务状态"</string>
     <string name="status_signal_strength">"信号强度"</string>
     <string name="status_roaming">"漫游"</string>
@@ -575,8 +521,7 @@
     <string name="master_clear_button_text">"重设手机"</string>
     <string name="master_clear_final_desc">"是否要重设手机以清除所有数据和应用程序？该操作无法撤消！"</string>
     <string name="master_clear_final_button_text">"清除全部内容"</string>
-    <!-- no translation found for master_clear_gesture_prompt (1428645764883536750) -->
-    <skip />
+    <string name="master_clear_gesture_prompt">"绘制解锁图案"</string>
     <string name="master_clear_gesture_explanation">"您必须绘制解锁图案才能确认手机重设。"</string>
     <string name="master_clear_failed">"未执行重设，因为 System Clear 服务不可用。"</string>
     <string name="call_settings_title">"通话设置"</string>
@@ -589,9 +534,9 @@
     <string name="location_neighborhood_level">"通过 Wi-Fi 和/或移动网络确定的位置"</string>
     <string name="location_gps">"启用 GPS 卫星设置"</string>
     <string name="location_street_level">"定位时，精确到街道级别（取消选择可节约电量）"</string>
-    <string name="location_gps_disabled">"定位到街道水平（需要更多电量来观看天空）"</string>
+    <string name="location_gps_disabled">"定位到街道级别（需要更多电量来观看天空）"</string>
     <string name="about_settings">"关于手机"</string>
-    <string name="about_settings_summary">"查看法律信息、手机状态、软件版本"</string>
+    <string name="about_settings_summary">"查看法律信息、手机状态和软件版本"</string>
     <string name="legal_information">"法律信息"</string>
     <string name="contributors_title">"赞助商"</string>
     <string name="copyright_title">"版权"</string>
@@ -602,11 +547,9 @@
     <string name="settings_license_activity_loading">"正在载入..."</string>
     <string name="lock_settings_title">"屏幕解锁图案"</string>
     <string name="lockpattern_change_lock_pattern_label">"更改解锁图案"</string>
-    <!-- no translation found for lockpattern_need_to_unlock (757935356911054465) -->
-    <skip />
+    <string name="lockpattern_need_to_unlock">"确认保存的图案"</string>
     <string name="lockpattern_need_to_unlock_wrong">"很抱歉，请重试："</string>
-    <!-- no translation found for lockpattern_recording_intro_header (308287052221942814) -->
-    <skip />
+    <string name="lockpattern_recording_intro_header">"绘制解锁图案"</string>
     <string name="lockpattern_recording_intro_footer">"按“菜单”获取帮助。"</string>
     <string name="lockpattern_recording_inprogress">"完成后松开手指。"</string>
     <string name="lockpattern_recording_incorrect_too_short">"连接至少 <xliff:g id="NUMBER">%d</xliff:g> 个点。请重试："</string>
@@ -621,18 +564,16 @@
     <string name="lockpattern_settings_enable_title">"需要图案"</string>
     <string name="lockpattern_settings_enable_summary">"必须绘制图案才能解锁屏幕"</string>
     <string name="lockpattern_settings_enable_visible_pattern_title">"使用可见的图案"</string>
-    <!-- no translation found for lockpattern_settings_enable_tactile_feedback_title (972174133075372341) -->
-    <skip />
+    <string name="lockpattern_settings_enable_tactile_feedback_title">"使用触觉反馈"</string>
     <string name="lockpattern_settings_choose_lock_pattern">"设置解锁图案"</string>
     <string name="lockpattern_settings_change_lock_pattern">"更改解锁图案"</string>
-    <!-- no translation found for lockpattern_settings_help_how_to_record (2614673439060830433) -->
-    <skip />
+    <string name="lockpattern_settings_help_how_to_record">"如何绘制解锁图案"</string>
     <string name="lockpattern_too_many_failed_confirmation_attempts_header">"错误尝试的次数太多！"</string>
     <string name="lockpattern_too_many_failed_confirmation_attempts_footer">"<xliff:g id="NUMBER">%d</xliff:g> 秒后重试。"</string>
     <string name="skip_button_label">"取消"</string>
     <string name="next_button_label">"下一步"</string>
     <string name="lock_title">"保护您的手机"</string>
-    <string name="lock_intro_message"><font size="17">"通过创建私人屏幕解锁图案来保护您的手机不受未经授权的使用。"\n<font height="17">\n</font><b>"1"</b>"  在下一屏幕上观看示例图案的绘制。"\n<font height="17">\n</font><b>"2"</b>"  准备就绪后，绘制您自己的私人解锁图案。体验不同的图案，但至少要连接四个点。"\n<font height="17">\n</font><b>"3"</b>"  重新绘制您的图案以进行确认。"\n<font height="17">\n</font><b>"可以开始了吗？选择“下一步”"</b>"。"\n<font height="3">\n</font>"要使手机处于不受保护状态，请选择“取消”。"</font></string>
+    <string name="lock_intro_message"><font size="17">"通过创建个人屏幕解锁图案来保护您的手机不受未经授权的使用。"\n<font height="17">\n</font><b>"1"</b>"  在下一屏幕上，观看示例图案的绘制。"\n<font height="17">\n</font><b>"2"</b>"  准备就绪后，绘制您自己的个人解锁图案。尝试不同的图案，但至少要连接四个点。"\n<font height="17">\n</font><b>"3"</b>"  重新绘制您的图案以进行确认。"\n<font height="17">\n</font><b>"可以开始了吗？选择“下一步”"</b>"。"\n<font height="3">\n</font>"要让手机处于不受保护的状态，请选择“取消”。"</font></string>
     <string name="lock_example_title">"示例图案"</string>
     <string name="lock_example_message">"连接至少四个点。"\n\n"准备好绘制自己的图案后选择“下一步”。"</string>
     <string name="manageapplications_settings_title">"管理应用程序"</string>
@@ -641,7 +582,7 @@
     <string name="applications_settings_header">"应用程序设置"</string>
     <string name="install_applications">"未知源"</string>
     <string name="install_unknown_applications">"允许安装非市场应用程序"</string>
-    <string name="install_all_warning">"您的手机和私人数据很容易受到来自未知源的应用程序的攻击。您同意单方面承担由于使用这些应用程序而可能对您的手机造成的任何损害或数据丢失。"</string>
+    <string name="install_all_warning">"您的手机和个人数据很容易受到来自未知源的应用程序的攻击。您同意单方面承担由于使用这些应用程序而可能对您的手机造成的任何损坏或数据丢失的责任。"</string>
     <string name="manage_applications_title">"管理应用程序"</string>
     <string name="application_info_label">"应用程序信息"</string>
     <string name="storage_label">"存储"</string>
@@ -656,50 +597,36 @@
     <string name="auto_launch_disable_text">"未设置默认值。"</string>
     <string name="clear_activities">"清除默认值"</string>
     <string name="unknown">"未知"</string>
-    <!-- no translation found for sort_order_alpha (8622029358896599842) -->
-    <skip />
-    <!-- no translation found for sort_order_size (7024513286636502362) -->
-    <skip />
+    <string name="sort_order_alpha">"排序"</string>
+    <string name="sort_order_size">"按大小排序"</string>
     <string name="manage_space_text">"管理空间"</string>
-    <!-- no translation found for filter_apps_all (5142129378749391876) -->
-    <skip />
-    <!-- no translation found for filter_apps_third_party (1096017647285183437) -->
-    <skip />
-    <!-- no translation found for filter_apps_running (7767071454371350486) -->
-    <skip />
-    <!-- no translation found for loading (3200408047793887917) -->
-    <skip />
+    <string name="filter_apps_all">"全部"</string>
+    <string name="filter_apps_third_party">"第三方"</string>
+    <string name="filter_apps_running">"正在运行"</string>
+    <string name="loading">"正在载入..."</string>
     <string name="recompute_size">"正在重新计算大小..."</string>
     <string name="clear_data_dlg_title">"删除"</string>
     <string name="clear_data_dlg_text">"您保存在此应用程序中的所有信息都会永久删除。"</string>
     <string name="dlg_ok">"确定"</string>
     <string name="dlg_cancel">"取消"</string>
     <string name="app_not_found_dlg_title">"未找到应用程序"</string>
-    <string name="app_not_found_dlg_text">"未在安装的应用程序的列表中找到该应用程序。"</string>
+    <string name="app_not_found_dlg_text">"未在已安装的应用程序的列表中找到该应用程序。"</string>
     <string name="clear_data_failed">"无法清除应用程序数据。"</string>
-    <!-- no translation found for security_settings_desc (3116027624526915561) -->
-    <skip />
-    <!-- no translation found for computing_size (8865983009275200301) -->
-    <skip />
-    <!-- no translation found for invalid_size_value (1901940003700269523) -->
-    <skip />
-    <!-- no translation found for empty_list_msg (1883660401486953588) -->
-    <skip />
-    <!-- no translation found for cache_header_label (1877197634162461830) -->
-    <skip />
-    <!-- no translation found for clear_cache_btn_text (5756314834291116325) -->
-    <skip />
-    <!-- no translation found for cache_size_label (7505481393108282913) -->
-    <skip />
+    <string name="security_settings_desc">"此应用程序可访问您手机上的以下内容："</string>
+    <string name="computing_size">"仍在计算..."</string>
+    <string name="invalid_size_value">"无法计算包大小"</string>
+    <string name="empty_list_msg">"您尚未安装任何第三方应用程序。"</string>
+    <string name="cache_header_label">"缓存"</string>
+    <string name="clear_cache_btn_text">"清除缓存"</string>
+    <string name="cache_size_label">"缓存"</string>
     <string name="language_settings">"区域和文本"</string>
-    <!-- no translation found for language_settings_summary (595647729475399987) -->
-    <skip />
+    <string name="language_settings_summary">"设置区域（语言和区域）、文本输入和自动纠错选项"</string>
     <string name="language_category">"区域设置"</string>
     <string name="text_category">"文本设置"</string>
     <string name="phone_language">"选择区域"</string>
     <string name="auto_replace">"自动替换"</string>
     <string name="auto_replace_summary">"纠正错误键入的词"</string>
-    <string name="auto_caps">"自动锁定"</string>
+    <string name="auto_caps">"自动大写"</string>
     <string name="auto_caps_summary">"将句子中的首字母大写"</string>
     <string name="auto_punctuate">"自动加标点"</string>
     <string name="auto_punctuate_summary">"按两次空格键来插入“。”"</string>
@@ -708,6 +635,8 @@
     <string name="testing">"测试"</string>
     <string name="testing_phone_info">"手机信息"</string>
     <string name="testing_battery_info">"电池信息"</string>
+    <!-- no translation found for testing_battery_history (3043329445810695647) -->
+    <skip />
     <string name="quick_launch_title">"快速启动"</string>
     <string name="quick_launch_summary">"设置启动应用程序的键盘快捷键"</string>
     <string name="quick_launch_assign_application">"分配应用程序"</string>
@@ -719,19 +648,16 @@
     <string name="quick_launch_clear_cancel_button">"取消"</string>
     <string name="quick_launch_display_mode_applications">"应用程序"</string>
     <string name="quick_launch_display_mode_shortcuts">"快捷键"</string>
-    <!-- no translation found for input_methods_settings_title (6800066636850553887) -->
-    <skip />
-    <!-- no translation found for input_methods_settings_summary (7571173442946675205) -->
+    <string name="input_methods_settings_title">"文本输入"</string>
+    <string name="input_methods_settings_summary">"管理文本输入选项"</string>
+    <!-- no translation found for input_methods_settings_label_format (4882768027634191074) -->
     <skip />
     <string name="development_settings_title">"开发"</string>
-    <!-- no translation found for development_settings_summary (2151320488701538355) -->
-    <skip />
+    <string name="development_settings_summary">"设置应用程序开发选项"</string>
     <string name="enable_adb">"USB 调试"</string>
     <string name="enable_adb_summary">"连接 USB 后启用调试模式"</string>
     <string name="keep_screen_on">"保持唤醒状态"</string>
     <string name="keep_screen_on_summary">"充电时屏幕不会休眠"</string>
-    <!-- no translation found for allow_mock_location (2787962564578664888) -->
-    <skip />
-    <!-- no translation found for allow_mock_location_summary (317615105156345626) -->
-    <skip />
+    <string name="allow_mock_location">"允许模仿位置"</string>
+    <string name="allow_mock_location_summary">"允许模仿位置"</string>
 </resources>

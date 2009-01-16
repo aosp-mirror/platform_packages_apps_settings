@@ -192,7 +192,7 @@ public class WifiSettings extends PreferenceActivity implements WifiLayer.Callba
                 return true;
                 
             case MENU_ID_ADVANCED:
-                Intent intent = new Intent(this, IpSettings.class);
+                Intent intent = new Intent(this, AdvancedSettings.class);
                 startActivity(intent);
                 return true;
                 
