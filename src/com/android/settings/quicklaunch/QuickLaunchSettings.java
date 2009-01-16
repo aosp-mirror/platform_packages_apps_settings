@@ -59,14 +59,15 @@ public class QuickLaunchSettings extends PreferenceActivity implements
 
     private static final int COLUMN_SHORTCUT = 0;
     private static final int COLUMN_TITLE = 1;
+    private static final int COLUMN_INTENT = 2;
     private static final String[] sProjection = new String[] {
-            Bookmarks.SHORTCUT, Bookmarks.TITLE
+            Bookmarks.SHORTCUT, Bookmarks.TITLE, Bookmarks.INTENT
     };
     private static final String sShortcutSelection = Bookmarks.SHORTCUT + "=?";
     
     private Handler mUiHandler = new Handler();
     
-    private static final String DEFAULT_BOOKMARK_FOLDER = "@default";
+    private static final String DEFAULT_BOOKMARK_FOLDER = "@quicklaunch";
     /** Cursor for Bookmarks provider. */
     private Cursor mBookmarksCursor;
     /** Listens for changes to Bookmarks provider. */
@@ -225,18 +226,18 @@ public class QuickLaunchSettings extends PreferenceActivity implements
             
             String title = data.getStringExtra(BookmarkPicker.EXTRA_TITLE);
             char shortcut = data.getCharExtra(BookmarkPicker.EXTRA_SHORTCUT, (char) 0);
-            updateShortcut(shortcut, title, data);
+            updateShortcut(shortcut, data);
             
         } else {
             super.onActivityResult(requestCode, resultCode, data);
         }
     }
 
-    private void updateShortcut(char shortcut, String title, Intent intent) {
-        
+    private void updateShortcut(char shortcut, Intent intent) {
         // Update the bookmark for a shortcut
-        Bookmarks.add(getContentResolver(), intent, title.toString(), DEFAULT_BOOKMARK_FOLDER,
-                shortcut, 0);
+        // Pass an empty title so it gets resolved each time this bookmark is
+        // displayed (since the locale could change after we insert into the provider).
+        Bookmarks.add(getContentResolver(), intent, "", DEFAULT_BOOKMARK_FOLDER, shortcut, 0);
     }
     
     private ShortcutPreference getOrCreatePreference(char shortcut) {
@@ -300,7 +301,7 @@ public class QuickLaunchSettings extends PreferenceActivity implements
             if (shortcut == 0) continue;
             
             ShortcutPreference pref = getOrCreatePreference(shortcut);
-            pref.setTitle(c.getString(COLUMN_TITLE));
+            pref.setTitle(Bookmarks.getTitle(this, c));
             pref.setSummary(getString(R.string.quick_launch_shortcut,
                     String.valueOf(shortcut)));
             pref.setHasBookmark(true);

@@ -24,6 +24,8 @@ import android.bluetooth.BluetoothHeadset;
 import android.bluetooth.BluetoothClass;
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.os.Handler;
+import android.text.TextUtils;
 
 import java.util.HashMap;
 import java.util.List;
@@ -141,9 +143,7 @@ public abstract class LocalBluetoothProfileManager {
         
         public A2dpProfileManager(LocalBluetoothManager localManager) {
             super(localManager);
-            
             mService = new BluetoothA2dp(localManager.getContext());
-            // TODO: block until connection?
         }
 
         @Override
@@ -213,37 +213,32 @@ public abstract class LocalBluetoothProfileManager {
     /**
      * HeadsetProfileManager is an abstraction for the {@link BluetoothHeadset} service. 
      */
-    private static class HeadsetProfileManager extends LocalBluetoothProfileManager {
+    private static class HeadsetProfileManager extends LocalBluetoothProfileManager
+            implements BluetoothHeadset.ServiceListener {
         private BluetoothHeadset mService;
+        private Handler mUiHandler = new Handler();
         
         public HeadsetProfileManager(LocalBluetoothManager localManager) {
             super(localManager);
-            
-//            final boolean[] isServiceConnected = new boolean[1];
-//            BluetoothHeadset.ServiceListener l = new BluetoothHeadset.ServiceListener() {
-//                public void onServiceConnected() {
-//                    synchronized (this) {
-//                        isServiceConnected[0] = true;
-//                        notifyAll();
-//                    }
-//                }
-//                public void onServiceDisconnected() {
-//                    mService = null;
-//                }
-//            };
-            
-            // TODO: block, but can't on UI thread
-            mService = new BluetoothHeadset(localManager.getContext(), null);
+            mService = new BluetoothHeadset(localManager.getContext(), this);
+        }
 
-//            synchronized (l) {
-//                while (!isServiceConnected[0]) {
-//                    try {
-//                        l.wait(100);
-//                    } catch (InterruptedException e) {
-//                        throw new IllegalStateException(e);
-//                    }
-//                }
-//            }
+        public void onServiceConnected() {
+            // This could be called on a non-UI thread, funnel to UI thread.
+            mUiHandler.post(new Runnable() {
+                public void run() {
+                    /*
+                     * We just bound to the service, so refresh the UI of the
+                     * headset device.
+                     */
+                    String address = mService.getHeadsetAddress();
+                    if (TextUtils.isEmpty(address)) return;
+                    mLocalManager.getLocalDeviceManager().onProfileStateChanged(address);
+                }
+            });
+        }
+
+        public void onServiceDisconnected() {
         }
 
         @Override
