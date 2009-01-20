@@ -101,9 +101,9 @@ public class BookmarkPicker extends ListActivity implements SimpleAdapter.ViewBi
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         menu.add(0, DISPLAY_MODE_LAUNCH, 0, R.string.quick_launch_display_mode_applications)
-                .setIcon(R.drawable.ic_menu_archive);
+                .setIcon(com.android.internal.R.drawable.ic_menu_archive);
         menu.add(0, DISPLAY_MODE_SHORTCUT, 0, R.string.quick_launch_display_mode_shortcuts)
-                .setIcon(R.drawable.ic_menu_goto);
+                .setIcon(com.android.internal.R.drawable.ic_menu_goto);
         return true;
     }
     

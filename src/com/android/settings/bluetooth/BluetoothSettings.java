@@ -147,7 +147,7 @@ public class BluetoothSettings extends PreferenceActivity
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         menu.add(0, MENU_SCAN, 0, R.string.bluetooth_scan_for_devices)
-                .setIcon(android.R.drawable.ic_menu_refresh)
+                .setIcon(com.android.internal.R.drawable.ic_menu_refresh)
                 .setAlphabeticShortcut('r');
         return true;
     }

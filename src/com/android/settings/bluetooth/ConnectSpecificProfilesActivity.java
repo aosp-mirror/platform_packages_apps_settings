@@ -181,8 +181,9 @@ public class ConnectSpecificProfilesActivity extends PreferenceActivity
             }
         }
         
-        LocalBluetoothProfileManager.setPreferredProfile(this, mDevice.getAddress(), profile,
-                checked);
+        LocalBluetoothProfileManager profileManager = LocalBluetoothProfileManager
+                .getProfileManager(mManager, profile);
+        profileManager.setPreferred(mDevice.getAddress(), checked);
     }
     
     public void onDeviceAttributesChanged(LocalBluetoothDevice device) {
@@ -252,8 +253,7 @@ public class ConnectSpecificProfilesActivity extends PreferenceActivity
         profilePref.setSummary(getProfileSummary(profileManager, profile, address,
                 connectionStatus, mOnlineMode));
         
-        profilePref.setChecked(
-                LocalBluetoothProfileManager.isPreferredProfile(this, address, profile));
+        profilePref.setChecked(profileManager.isPreferred(address));
     }
 
     private Profile getProfileOf(Preference pref) {
