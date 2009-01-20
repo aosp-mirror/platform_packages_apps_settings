@@ -147,7 +147,9 @@ public class LocalBluetoothDevice implements Comparable<LocalBluetoothDevice> {
         Context context = mLocalManager.getContext();
         boolean hasAtLeastOnePreferredProfile = false;
         for (Profile profile : mProfiles) {
-            if (LocalBluetoothProfileManager.isPreferredProfile(context, mAddress, profile)) {
+            LocalBluetoothProfileManager profileManager =
+                    LocalBluetoothProfileManager.getProfileManager(mLocalManager, profile);
+            if (profileManager.isPreferred(mAddress)) {
                 hasAtLeastOnePreferredProfile = true;
                 connect(profile);
             }
@@ -163,7 +165,9 @@ public class LocalBluetoothDevice implements Comparable<LocalBluetoothDevice> {
         
         Context context = mLocalManager.getContext();
         for (Profile profile : mProfiles) {
-            LocalBluetoothProfileManager.setPreferredProfile(context, mAddress, profile, true);
+            LocalBluetoothProfileManager profileManager =
+                    LocalBluetoothProfileManager.getProfileManager(mLocalManager, profile);
+            profileManager.setPreferred(mAddress, true);
             connect(profile);
         }
     }
