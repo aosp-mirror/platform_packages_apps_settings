@@ -60,7 +60,7 @@ public class LocalBluetoothDevice implements Comparable<LocalBluetoothDevice> {
     
     private boolean mVisible;
     
-    private int mPairingStatus;
+    private int mBondState;
     
     private final LocalBluetoothManager mLocalManager;
     
@@ -85,13 +85,13 @@ public class LocalBluetoothDevice implements Comparable<LocalBluetoothDevice> {
     }
     
     public void onClicked() {
-        int pairingStatus = getPairingStatus();
+        int bondState = getBondState();
         
         if (isConnected()) {
             askDisconnect();
-        } else if (pairingStatus == SettingsBtStatus.PAIRING_STATUS_PAIRED) {
+        } else if (bondState == BluetoothDevice.BOND_BONDED) {
             connect();
-        } else if (pairingStatus == SettingsBtStatus.PAIRING_STATUS_UNPAIRED) {
+        } else if (bondState == BluetoothDevice.BOND_NOT_BONDED) {
             pair();
         }
     }
@@ -195,55 +195,54 @@ public class LocalBluetoothDevice implements Comparable<LocalBluetoothDevice> {
     }
     
     private boolean ensurePaired() {
-        if (getPairingStatus() == SettingsBtStatus.PAIRING_STATUS_UNPAIRED) {
+        if (getBondState() == BluetoothDevice.BOND_NOT_BONDED) {
             pair();
             return false;
         } else {
             return true;
         }
     }
-    
+
     public void pair() {
         BluetoothDevice manager = mLocalManager.getBluetoothManager();
-        
-        // Pairing doesn't work if scanning, so cancel
+
+        // Pairing is unreliable while scanning, so cancel discovery
         if (manager.isDiscovering()) {
             manager.cancelDiscovery();
         }
-        
+
         if (mLocalManager.createBonding(mAddress)) {
-            setPairingStatus(SettingsBtStatus.PAIRING_STATUS_PAIRING);
+            //TODO: consider removing this line - UI will update through Intent
+            setBondState(BluetoothDevice.BOND_BONDING);
         }
     }
-    
+
     public void unpair() {
         BluetoothDevice manager = mLocalManager.getBluetoothManager();
-        
-        switch (getPairingStatus()) {
-            case SettingsBtStatus.PAIRING_STATUS_PAIRED:
-                manager.removeBonding(mAddress);
-                break;
-                
-            case SettingsBtStatus.PAIRING_STATUS_PAIRING:
-                manager.cancelBondingProcess(mAddress);
-                break;
+
+        switch (getBondState()) {
+        case BluetoothDevice.BOND_BONDED:
+            manager.removeBond(mAddress);
+            break;
+
+        case BluetoothDevice.BOND_BONDING:
+            manager.cancelBondProcess(mAddress);
+            break;
         }
     }
-    
+
     private void fillData() {
         BluetoothDevice manager = mLocalManager.getBluetoothManager();
-            
-        fetchName();        
+
+        fetchName();
         mBtClass = manager.getRemoteClass(mAddress);
 
         LocalBluetoothProfileManager.fill(mBtClass, mProfiles);
-            
-        mPairingStatus = manager.hasBonding(mAddress)
-                ? SettingsBtStatus.PAIRING_STATUS_PAIRED
-                : SettingsBtStatus.PAIRING_STATUS_UNPAIRED;
-            
+
+        mBondState = manager.getBondState(mAddress);
+
         mVisible = false;
-        
+
         dispatchAttributesChanged();
     }
     
@@ -283,17 +282,17 @@ public class LocalBluetoothDevice implements Comparable<LocalBluetoothDevice> {
         }
     }
 
-    public int getPairingStatus() {
-        return mPairingStatus;
+    public int getBondState() {
+        return mBondState;
     }
 
-    void setPairingStatus(int pairingStatus) {
-        if (mPairingStatus != pairingStatus) {
-            mPairingStatus = pairingStatus;
+    void setBondState(int bondState) {
+        if (mBondState != bondState) {
+            mBondState = bondState;
             dispatchAttributesChanged();
         }
     }
-    
+
     void setRssi(short rssi) {
         if (mRssi != rssi) {
             mRssi = rssi;
@@ -327,7 +326,7 @@ public class LocalBluetoothDevice implements Comparable<LocalBluetoothDevice> {
             }
         }
         
-        if (getPairingStatus() == SettingsBtStatus.PAIRING_STATUS_PAIRING) {
+        if (getBondState() == BluetoothDevice.BOND_BONDING) {
             return true;
         }
         
@@ -374,9 +373,8 @@ public class LocalBluetoothDevice implements Comparable<LocalBluetoothDevice> {
                 return SettingsBtStatus.getConnectionStatusSummary(connectionStatus);
             }
         }
-        
-        int pairingStatus = getPairingStatus();
-        return SettingsBtStatus.getPairingStatusSummary(pairingStatus); 
+
+        return SettingsBtStatus.getPairingStatusSummary(getBondState());
     }
 
     /**
@@ -430,7 +428,7 @@ public class LocalBluetoothDevice implements Comparable<LocalBluetoothDevice> {
         // No context menu if there are no profiles
         if (mProfiles.size() == 0) return;
         
-        int pairingStatus = getPairingStatus();
+        int bondState = getBondState();
         boolean isConnected = isConnected();
         
         menu.setHeaderTitle(getName());
@@ -439,13 +437,13 @@ public class LocalBluetoothDevice implements Comparable<LocalBluetoothDevice> {
             menu.add(0, CONTEXT_ITEM_DISCONNECT, 0, R.string.bluetooth_device_context_disconnect);
         } else {
             // For connection action, show either "Connect" or "Pair & connect"
-            int connectString = pairingStatus == SettingsBtStatus.PAIRING_STATUS_UNPAIRED
+            int connectString = (bondState == BluetoothDevice.BOND_NOT_BONDED)
                     ? R.string.bluetooth_device_context_pair_connect
                     : R.string.bluetooth_device_context_connect;
             menu.add(0, CONTEXT_ITEM_CONNECT, 0, connectString);
         }
         
-        if (pairingStatus == SettingsBtStatus.PAIRING_STATUS_PAIRED) {
+        if (bondState == BluetoothDevice.BOND_BONDED) {
             // For unpair action, show either "Unpair" or "Disconnect & unpair"
             int unpairString = isConnected
                     ? R.string.bluetooth_device_context_disconnect_unpair
@@ -540,8 +538,8 @@ public class LocalBluetoothDevice implements Comparable<LocalBluetoothDevice> {
         if (comparison != 0) return comparison;
         
         // Paired above not paired
-        comparison = (another.mPairingStatus == SettingsBtStatus.PAIRING_STATUS_PAIRED ? 1 : 0) -
-            (mPairingStatus == SettingsBtStatus.PAIRING_STATUS_PAIRED ? 1 : 0);
+        comparison = (another.mBondState == BluetoothDevice.BOND_BONDED ? 1 : 0) -
+            (mBondState == BluetoothDevice.BOND_BONDED ? 1 : 0);
         if (comparison != 0) return comparison;
 
         // Visible above not visible
