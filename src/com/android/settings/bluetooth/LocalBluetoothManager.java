@@ -227,7 +227,7 @@ public class LocalBluetoothManager {
     }
 
     public boolean createBonding(String address) {
-        return mManager.createBonding(address, mEventRedirector.getBluetoothDeviceCallback());
+        return mManager.createBond(address);
     }
     
     public void showError(String address, int titleResId, int messageResId) {

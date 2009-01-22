@@ -21,13 +21,12 @@ import com.android.settings.bluetooth.LocalBluetoothManager.ExtendedBluetoothSta
 import android.bluetooth.BluetoothA2dp;
 import android.bluetooth.BluetoothDevice;
 import android.bluetooth.BluetoothHeadset;
+import android.bluetooth.BluetoothError;
 import android.bluetooth.BluetoothIntent;
-import android.bluetooth.IBluetoothDeviceCallback;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
-import android.os.Handler;
 import android.util.Log;
 
 /**
@@ -40,29 +39,6 @@ public class BluetoothEventRedirector {
     private static final boolean V = LocalBluetoothManager.V;
     
     private LocalBluetoothManager mManager;
-    private Handler mUiHandler = new Handler();
-    
-    private IBluetoothDeviceCallback mBtDevCallback = new IBluetoothDeviceCallback.Stub() {
-        public void onCreateBondingResult(final String address, final int result) {
-            if (V) {
-                Log.v(TAG, "onCreateBondingResult(" + address + ", " + result + ")");
-            }
-            
-            mUiHandler.post(new Runnable() {
-                public void run() {
-                    boolean wasSuccess = result == BluetoothDevice.RESULT_SUCCESS; 
-                    LocalBluetoothDeviceManager deviceManager = mManager.getLocalDeviceManager();
-                    deviceManager.onBondingStateChanged(address, wasSuccess);
-                    if (!wasSuccess) {
-                        deviceManager.onBondingError(address);
-                    }
-                }
-            });
-        }
-
-        public void onEnableResult(int result) { }
-        public void onGetRemoteServiceChannelResult(String address, int channel) { }
-    };
     
     private BroadcastReceiver mBroadcastReceiver = new BroadcastReceiver() {
         @Override
@@ -86,17 +62,21 @@ public class BluetoothEventRedirector {
                     
             } else if (action.equals(BluetoothIntent.REMOTE_DEVICE_FOUND_ACTION)) {
                 short rssi = intent.getShortExtra(BluetoothIntent.RSSI, Short.MIN_VALUE);
-                mManager.getLocalDeviceManager().onDeviceAppeared(address, rssi);                    
+                mManager.getLocalDeviceManager().onDeviceAppeared(address, rssi);
             } else if (action.equals(BluetoothIntent.REMOTE_DEVICE_DISAPPEARED_ACTION)) {
                 mManager.getLocalDeviceManager().onDeviceDisappeared(address);
             } else if (action.equals(BluetoothIntent.REMOTE_NAME_UPDATED_ACTION)) {
                 mManager.getLocalDeviceManager().onDeviceNameUpdated(address);
-                
-            } else if (action.equals(BluetoothIntent.BONDING_CREATED_ACTION)) {
-                mManager.getLocalDeviceManager().onBondingStateChanged(address, true);
-            } else if (action.equals(BluetoothIntent.BONDING_REMOVED_ACTION)) {
-                mManager.getLocalDeviceManager().onBondingStateChanged(address, false);
-                
+            } else if (action.equals(BluetoothIntent.BOND_STATE_CHANGED_ACTION)) {
+                int bondState = intent.getIntExtra(BluetoothIntent.BOND_STATE,
+                                                   BluetoothError.ERROR);
+                mManager.getLocalDeviceManager().onBondingStateChanged(address, bondState);
+                if (bondState == BluetoothDevice.BOND_NOT_BONDED) {
+                    int reason = intent.getIntExtra(BluetoothIntent.REASON, BluetoothError.ERROR);
+                    Log.w(TAG, address + " unbonded with reason " + reason +
+                          ", TODO: handle this nicely in the UI");  //TODO
+                    mManager.getLocalDeviceManager().onBondingError(address);
+                }
             } else if (action.equals(BluetoothIntent.HEADSET_STATE_CHANGED_ACTION)) {
                 mManager.getLocalDeviceManager().onProfileStateChanged(address);
 
@@ -139,8 +119,7 @@ public class BluetoothEventRedirector {
         filter.addAction(BluetoothIntent.REMOTE_NAME_UPDATED_ACTION);
         
         // Pairing broadcasts
-        filter.addAction(BluetoothIntent.BONDING_CREATED_ACTION);
-        filter.addAction(BluetoothIntent.BONDING_REMOVED_ACTION);
+        filter.addAction(BluetoothIntent.BOND_STATE_CHANGED_ACTION);
         
         // Fine-grained state broadcasts
         filter.addAction(BluetoothA2dp.SINK_STATE_CHANGED_ACTION);
@@ -151,9 +130,5 @@ public class BluetoothEventRedirector {
     
     public void stop() {
         mManager.getContext().unregisterReceiver(mBroadcastReceiver);   
-    }
-    
-    public IBluetoothDeviceCallback getBluetoothDeviceCallback() { 
-        return mBtDevCallback;
     }
 }

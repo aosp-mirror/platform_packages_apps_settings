@@ -28,6 +28,8 @@
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
     <uses-permission android:name="android.permission.WRITE_APN_SETTINGS"/>
     <uses-permission android:name="android.permission.ACCESS_CHECKIN_PROPERTIES"/>
+    <uses-permission android:name="android.permission.READ_USER_DICTIONARY"/>
+    <uses-permission android:name="android.permission.WRITE_USER_DICTIONARY"/>
 
     <application android:label="@string/settings_label" android:icon="@drawable/ic_launcher_settings">
 
@@ -144,6 +146,14 @@
         <activity android:name="InputMethodsSettings" android:icon="@drawable/app_settings"
                 android:label="@string/input_methods_settings_title"
                 android:theme="@android:style/Theme.NoTitleBar">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.VOICE_LAUNCH" />
+            </intent-filter>
+        </activity>
+
+        <activity android:name="UserDictionarySettings" android:icon="@drawable/app_settings"
+                android:label="@string/user_dict_settings_titlebar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.VOICE_LAUNCH" />

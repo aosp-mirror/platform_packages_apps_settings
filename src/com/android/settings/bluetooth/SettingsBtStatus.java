@@ -16,6 +16,8 @@
 
 package com.android.settings.bluetooth;
 
+import android.bluetooth.BluetoothDevice;
+
 import com.android.settings.R;
 
 /**
@@ -64,19 +66,13 @@ public class SettingsBtStatus {
                 || connectionStatus == CONNECTION_STATUS_DISCONNECTING;
     }
     
-    // Pairing status
-    
-    public static final int PAIRING_STATUS_UNPAIRED = 0;
-    public static final int PAIRING_STATUS_PAIRED = 1;
-    public static final int PAIRING_STATUS_PAIRING = 2;
-
-    public static final int getPairingStatusSummary(int pairingStatus) {
-        switch (pairingStatus) {
-        case PAIRING_STATUS_PAIRED:
+    public static final int getPairingStatusSummary(int bondState) {
+        switch (bondState) {
+        case BluetoothDevice.BOND_BONDED:
             return R.string.bluetooth_paired;
-        case PAIRING_STATUS_PAIRING:
+        case BluetoothDevice.BOND_BONDING:
             return R.string.bluetooth_pairing;
-        case PAIRING_STATUS_UNPAIRED:
+        case BluetoothDevice.BOND_NOT_BONDED:
             return R.string.bluetooth_not_connected;
         default:
             return 0;

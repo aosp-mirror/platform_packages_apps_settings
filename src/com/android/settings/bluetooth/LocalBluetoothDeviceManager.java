@@ -47,7 +47,7 @@ public class LocalBluetoothDeviceManager {
 
     private synchronized void readPairedDevices() {
         BluetoothDevice manager = mLocalManager.getBluetoothManager();
-        String[] bondedAddresses = manager.listBondings();
+        String[] bondedAddresses = manager.listBonds();
         if (bondedAddresses == null) return;
         
         for (String address : bondedAddresses) {
@@ -97,7 +97,7 @@ public class LocalBluetoothDeviceManager {
     }
     
     private void checkForDeviceRemoval(LocalBluetoothDevice device) {
-        if (device.getPairingStatus() == SettingsBtStatus.PAIRING_STATUS_UNPAIRED &&
+        if (device.getBondState() == BluetoothDevice.BOND_NOT_BONDED &&
                 !device.isVisible()) {
             // If device isn't paired, remove it altogether
             mDevices.remove(device);
@@ -154,19 +154,18 @@ public class LocalBluetoothDeviceManager {
         }
     }
 
-    public synchronized void onBondingStateChanged(String address, boolean created) {
+    public synchronized void onBondingStateChanged(String address, int bondState) {
         LocalBluetoothDevice device = findDevice(address);
         if (device == null) {
             Log.e(TAG, "Got bonding state changed for " + address +
                     ", but we have no record of that device.");
             return;
         }
-        
-        device.setPairingStatus(created ? SettingsBtStatus.PAIRING_STATUS_PAIRED
-                : SettingsBtStatus.PAIRING_STATUS_UNPAIRED);
+
+        device.setBondState(bondState);  //TODO: might be unecessary
         checkForDeviceRemoval(device);
 
-        if (created) {
+        if (bondState == BluetoothDevice.BOND_BONDED) {
             // Auto-connect after pairing
             device.connect();
         }
