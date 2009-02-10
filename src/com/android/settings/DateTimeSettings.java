@@ -192,6 +192,7 @@ public class DateTimeSettings
         }
     }
 
+    @Override
     public Dialog onCreateDialog(int id) {
         Dialog d;
 
@@ -226,6 +227,7 @@ public class DateTimeSettings
         return d;
     }
 
+    @Override
     public void onPrepareDialog(int id, Dialog d) {
         switch (id) {
         case DIALOG_DATEPICKER: {
@@ -250,10 +252,13 @@ public class DateTimeSettings
         }
     }
     
+    @Override
     public boolean onPreferenceTreeClick(PreferenceScreen preferenceScreen, Preference preference) {
         if (preference == mDatePref) {
             showDialog(DIALOG_DATEPICKER);
         } else if (preference == mTimePref) {
+            // The 24-hour mode may have changed, so recreate the dialog
+            removeDialog(DIALOG_TIMEPICKER);
             showDialog(DIALOG_TIMEPICKER);
         } else if (preference == mTime24Pref) {
             set24Hour(((CheckBoxPreference)mTime24Pref).isChecked());

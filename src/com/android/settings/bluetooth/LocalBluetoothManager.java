@@ -226,10 +226,6 @@ public class LocalBluetoothManager {
         }
     }
 
-    public boolean createBonding(String address) {
-        return mManager.createBond(address);
-    }
-    
     public void showError(String address, int titleResId, int messageResId) {
         LocalBluetoothDevice device = mLocalDeviceManager.findDevice(address);
         if (device == null) return;

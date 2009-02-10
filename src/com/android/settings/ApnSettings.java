@@ -25,6 +25,7 @@ import android.os.Bundle;
 import android.preference.Preference;
 import android.preference.PreferenceActivity;
 import android.preference.PreferenceCategory;
+import android.preference.PreferenceGroup;
 import android.preference.PreferenceScreen;
 import android.provider.Telephony;
 import android.text.TextUtils;
@@ -61,7 +62,7 @@ public class ApnSettings extends PreferenceActivity {
         mCursor = managedQuery(Telephony.Carriers.CONTENT_URI, new String[] {
                 "_id", "name", "apn"}, null, Telephony.Carriers.DEFAULT_SORT_ORDER);
 
-        PreferenceCategory apnList = (PreferenceCategory) findPreference("apn_list");
+        PreferenceGroup apnList = (PreferenceGroup) findPreference("apn_list");
         apnList.removeAll();
         
         mCursor.moveToFirst();

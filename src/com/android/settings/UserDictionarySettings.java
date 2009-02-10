@@ -21,6 +21,7 @@ import android.app.Dialog;
 import android.app.ListActivity;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.provider.UserDictionary;
@@ -54,6 +55,8 @@ public class UserDictionarySettings extends ListActivity {
             + UserDictionary.Words.LOCALE + " is null";
 
     private static final String DELETE_SELECTION = UserDictionary.Words.WORD + "=?";
+
+    private static final String EXTRA_WORD = "word";
     
     private static final int CONTEXT_MENU_EDIT = Menu.FIRST;
     private static final int CONTEXT_MENU_DELETE = Menu.FIRST + 1;
@@ -86,6 +89,16 @@ public class UserDictionarySettings extends ListActivity {
         registerForContextMenu(listView);
     }
     
+    @Override
+    protected void onResume() {
+        super.onResume();
+        if (getIntent().getAction().equals("com.android.settings.USER_DICTIONARY_INSERT")) {
+            String word = getIntent().getStringExtra(EXTRA_WORD);
+            if (word != null) {
+                showAddOrEditDialog(word);
+            }
+        }
+    }
     @Override
     protected void onRestoreInstanceState(Bundle state) {
         super.onRestoreInstanceState(state);
@@ -207,7 +220,7 @@ public class UserDictionarySettings extends ListActivity {
         
         // TODO: present UI for picking whether to add word to all locales, or current.
         UserDictionary.Words.addWord(this, word.toString(),
-                1, UserDictionary.Words.LOCALE_TYPE_ALL);
+                128, UserDictionary.Words.LOCALE_TYPE_ALL);
         mCursor.requery();
     }
 

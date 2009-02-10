@@ -14,9 +14,9 @@
      limitations under the License.
 -->
 
-<!--  Layout for system settings that require an expandable list -->
-<ExpandableListView xmlns:android="http://schemas.android.com/apk/res/android"
-        android:id="@+id/system_settings"
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent">
-</ExpandableListView>
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+
+    <!-- Applications settings summary, on main settings screen. The summary for the "Applications" item on the main settings screen. Describes what settings are accessible from the "Applications" screen. This is the string to use for devices without a keyboard (so for example, there is no "Quick launch" settings here since that feature requires a keyboard) -->
+    <string name="applications_settings_summary">Manage applications</string>
+    
+</resources>

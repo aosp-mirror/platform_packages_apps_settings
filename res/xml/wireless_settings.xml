@@ -14,10 +14,8 @@
      limitations under the License.
 -->
 
-<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
-
-            <PreferenceCategory
-                android:title="@string/radio_controls_title">
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+        android:title="@string/radio_controls_title">
 
                 <!-- Programmatically will have dynamic summary, but we provide the fallback summary. -->
                 <CheckBoxPreference
@@ -54,13 +52,6 @@
                         android:targetClass="com.android.settings.bluetooth.BluetoothSettings" />
                 </PreferenceScreen>
 
-                <CheckBoxPreference
-                    android:key="toggle_airplane"
-                    android:title="@string/airplane_mode"
-                    android:summary="@string/airplane_mode_summary"
-                    android:persistent="false"
-                    android:disableDependentsState="true" />
-
                 <PreferenceScreen
                     android:title="@string/network_settings_title"
                     android:summary="@string/network_settings_summary"
@@ -71,6 +62,12 @@
                         android:targetClass="com.android.phone.Settings" />
                 </PreferenceScreen>
 
-            </PreferenceCategory>
+                <CheckBoxPreference
+                    android:key="toggle_airplane"
+                    android:title="@string/airplane_mode"
+                    android:summary="@string/airplane_mode_summary"
+                    android:persistent="false"
+                    android:disableDependentsState="true" />
+
 
 </PreferenceScreen>

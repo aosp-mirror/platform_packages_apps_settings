@@ -73,14 +73,14 @@ public class LocalePicker extends ListActivity {
             int len = s.length();
             if (len == 2) {
                 Locale l = new Locale(s);
-                preprocess[finalSize++] = new Loc(l.getDisplayLanguage(), l);
+                preprocess[finalSize++] = new Loc(toTitleCase(l.getDisplayLanguage()), l);
             } else if (len == 5) {
                 String language = s.substring(0, 2);
                 String country = s.substring(3, 5);
                 Locale l = new Locale(language, country);
 
                 if (finalSize == 0) {
-                    preprocess[finalSize++] = new Loc(l.getDisplayLanguage(), l);
+                    preprocess[finalSize++] = new Loc(toTitleCase(l.getDisplayLanguage()), l);
                 } else {
                     // check previous entry:
                     //  same lang and no country -> overwrite it with a lang-only name
@@ -91,17 +91,17 @@ public class LocalePicker extends ListActivity {
                        String prevCountry = preprocess[finalSize-1].locale.getCountry();
                        if (prevCountry.length() == 0) {
                             preprocess[finalSize-1].locale = l;
-                            preprocess[finalSize-1].label = l.getDisplayLanguage();
+                            preprocess[finalSize-1].label = toTitleCase(l.getDisplayLanguage());
                         } else {
-                            preprocess[finalSize-1].label = preprocess[finalSize-1].locale.getDisplayName();
-                            preprocess[finalSize++] = new Loc(l.getDisplayName(), l);
+                            preprocess[finalSize-1].label = toTitleCase(preprocess[finalSize-1].locale.getDisplayName());
+                            preprocess[finalSize++] = new Loc(toTitleCase(l.getDisplayName()), l);
                         }
                     } else {
                         String displayName;
                         if (s.equals("zz_ZZ")) {
                             displayName = "Pseudo...";
                         } else {
-                            displayName = l.getDisplayLanguage();
+                            displayName = toTitleCase(l.getDisplayLanguage());
                         }
                         preprocess[finalSize++] = new Loc(displayName, l);
                     }
@@ -116,6 +116,14 @@ public class LocalePicker extends ListActivity {
         int fieldId = R.id.locale;
         ArrayAdapter<Loc> adapter = new ArrayAdapter<Loc>(this, layoutId, fieldId, mLocales);
         getListView().setAdapter(adapter);
+    }
+
+    private static String toTitleCase(String s) {
+        if (s.length() == 0) {
+            return s;
+        }
+
+        return Character.toUpperCase(s.charAt(0)) + s.substring(1);
     }
 
     @Override

@@ -26,7 +26,11 @@
             android:title="@string/memory_available"
             android:summary="00"/>
         <Preference android:key="memory_sd_unmount"
-            android:title="@string/sd_eject"/>
+            android:title="@string/sd_eject"
+            android:summary="@string/sd_eject_summary"/>
+        <Preference android:key="memory_sd_format"
+            android:title="@string/sd_format"
+            android:summary="@string/sd_format_summary"/>
     </PreferenceCategory>
 
     <PreferenceCategory android:title="@string/internal_memory">

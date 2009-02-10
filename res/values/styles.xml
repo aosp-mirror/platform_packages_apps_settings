@@ -54,38 +54,17 @@
         <item name="android:layout_height">wrap_content</item>
     </style>
     
-	<style name="form_label">
-        <item name="android:layout_height">wrap_content</item>
-        <item name="android:layout_width">fill_parent</item>
-        <item name="android:textAppearance">@style/TextAppearance.form_label</item>
-    </style>
-
     <style name="form_value">
         <item name="android:layout_height">wrap_content</item>
         <item name="android:layout_width">fill_parent</item>
     </style>
 
-    <style name="form_layout">
-        <item name="android:orientation">vertical</item>
-        <item name="android:paddingLeft">10dip</item>
-        <item name="android:paddingTop">0dip</item>
-        <item name="android:paddingRight">10dip</item>
-        <item name="android:paddingBottom">0dip</item>
-        <item name="android:layout_width">fill_parent</item>
-        <item name="android:layout_height">fill_parent</item>
-    </style>
-    
-    
 
     <style name="TextAppearance" parent="android:TextAppearance">
     </style>
 
     <style name="TextAppearance.info_label">
         <item name="android:textSize">14sp</item>
-        <item name="android:textStyle">bold</item>
-    </style>
-
-    <style name="TextAppearance.form_label">
         <item name="android:textStyle">bold</item>
     </style>
 
@@ -98,15 +77,5 @@
         <item name="android:textSize">14sp</item>
         <item name="android:textStyle">normal</item>
     </style>
-   <style name="SubCategoryHeader">
-       <item name="android:background">@*android:drawable/title_bar</item>
-       <item name="android:singleLine">true</item>
-        <item name="android:textAppearance">@style/android:TextAppearance.WindowTitle</item>
-        <item name="android:shadowColor">#BB000000</item>
-        <item name="android:shadowRadius">2.75</item>
-        <item name="android:paddingBottom">3dip</item>
-        <item name="android:paddingTop">3dip</item>
-        <item name="android:paddingLeft">4dip</item>
-   </style> 
 
 </resources>

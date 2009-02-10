@@ -16,9 +16,6 @@
 <resources xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
     <string name="device_info_default">"不明"</string>
-    <string name="device_info_uptime">"起動時間"</string>
-    <string name="device_info_awaketime">"使用時間"</string>
-    <string name="device_info_asleeptime">"スリープ時間"</string>
     <string name="turn_on_radio">"無線通信をオン"</string>
     <string name="turn_off_radio">"無線通信をオフ"</string>
     <string name="turn_on_qxdm">"QXDM SDログを有効にする"</string>
@@ -52,14 +49,13 @@
     <string name="radioInfo_lac">"LAC"</string>
     <string name="radioInfo_cid">"CID"</string>
     <string name="sdcard_unmount">"SDカードのマウント解除"</string>
+    <!-- no translation found for sdcard_format (362497552060004057) -->
+    <skip />
     <string name="small_font">"小"</string>
     <string name="medium_font">"中"</string>
     <string name="large_font">"大"</string>
     <string name="font_size_save">"OK"</string>
     <string name="sdcard_setting">"SDカード"</string>
-    <string name="screen_off_timeout_label">"充電中はタイムアウトにしない"</string>
-    <string name="stay_on">"充電中に画面をスリープにしない"</string>
-    <string name="app_launcher_newView_text">"新しいAppLauncher"</string>
     <string name="battery_info_status_label">"バッテリステータス:"</string>
     <string name="battery_info_scale_label">"バッテリ残量表示:"</string>
     <string name="battery_info_level_label">"バッテリレベル:"</string>
@@ -87,11 +83,6 @@
     <string name="battery_info_health_over_voltage">"過電圧"</string>
     <string name="battery_info_health_unspecified_failure">"不明なエラー"</string>
     <string name="bluetooth">"Bluetooth"</string>
-    <string name="bluetooth_stopping">"Bluetoothを停止中..."</string>
-    <string name="bluetooth_disabled">"Bluetoothをオン"</string>
-    <!-- no translation found for bluetooth_enabled (314506563815464155) -->
-    <skip />
-    <string name="bluetooth_enabling">"Bluetoothをオンにしています..."</string>
     <string name="bluetooth_visibility">"検出可能"</string>
     <string name="bluetooth_is_discoverable">"<xliff:g id="DISCOVERABLE_TIME_PERIOD">%1$s</xliff:g>秒間検出可能..."</string>
     <string name="bluetooth_not_discoverable">"デバイスを検出可能にする"</string>
@@ -99,7 +90,6 @@
     <string name="bluetooth_device_name">"デバイス名"</string>
     <string name="bluetooth_name_not_set">"名前が設定されていない場合、アカウント名を使用する"</string>
     <string name="bluetooth_scan_for_devices">"デバイスのスキャン"</string>
-    <string name="bluetooth_clear_list">"デバイスリストをクリア"</string>
     <string name="bluetooth_disconnect_blank">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g>の接続を解除します"</string>
     <string name="bluetooth_connected">"接続"</string>
     <string name="bluetooth_disconnected">"切断"</string>
@@ -108,17 +98,9 @@
     <!-- no translation found for bluetooth_unknown (644716244548801421) -->
     <skip />
     <string name="bluetooth_not_connected">"このデバイスをペアに設定する"</string>
-    <string name="bluetooth_failed_to_enable">"Bluetoothをオンにできません"</string>
     <string name="bluetooth_pairing">"ペアとして設定中..."</string>
-    <string name="failed_to_pair">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g>をペアとして設定できません"</string>
-    <string name="failed_to_connect">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g>に接続できません"</string>
     <string name="bluetooth_paired">"ペア設定"</string>
-    <string name="bluetooth_paired_not_nearby">"ペア設定"</string>
     <string name="bluetooth_device">"ハンズフリー/ヘッドセット"</string>
-    <string name="bluetooth_disconnect">"接続を解除"</string>
-    <string name="bluetooth_connect">"接続"</string>
-    <string name="bluetooth_unpair">"ペアを解除"</string>
-    <string name="bluetooth_pair">"ペアに設定"</string>
     <string name="progress_scanning">"スキャン中"</string>
     <string name="bluetooth_notif_ticker">"Bluetoothペア設定リクエスト"</string>
     <string name="bluetooth_notif_title">"ペア設定リクエスト"</string>
@@ -136,16 +118,6 @@
     <string name="intent_sender_startactivity_text">"<xliff:g id="ACTIVITY">activity</xliff:g>を開始"</string>
     <string name="intent_sender_resource_label">"<xliff:g id="RESOURCE">Resource</xliff:g>:"</string>
     <string name="intent_sender_account_label">"アカウント:"</string>
-    <string name="keyguard_pw_mod_text">"ロックパターンの選択"</string>
-    <string name="keyguard_pin_mod_text">"PINの変更"</string>
-    <string name="keyguard_label">"キーガード"</string>
-    <string name="keyguard_sim_pin_label">"SIM PIN"</string>
-    <string name="keyguard_password_old_password_error_text">"入力した古いパスワードは正しくありません。再入力してください。"</string>
-    <string name="keyguard_password_button_text">"OK"</string>
-    <string name="keyguard_password_confirm_new_label">"新しいパスワードの確認入力:"</string>
-    <string name="keyguard_password_new_label">"新しいパスワード:"</string>
-    <string name="keyguard_password_old_label">"古いパスワード:"</string>
-    <string name="keyguard_password_mismatch_error_text">"2つのパスワードが一致しません。再入力してください。"</string>
     <string name="proxy_clear_text">"クリア"</string>
     <string name="proxy_port_label">"ポート"</string>
     <string name="proxy_defaultView_text">"デフォルトに戻す"</string>
@@ -188,15 +160,13 @@
     <string name="radio_info_smsc_label">"SMSC:"</string>
     <string name="radio_info_smsc_update_label">"更新"</string>
     <string name="radio_info_smsc_refresh_label">"更新"</string>
+    <!-- no translation found for radio_info_toggle_dns_check_label (8292252930563286858) -->
+    <skip />
     <string name="band_mode_title">"GSM/UMTSバンドの設定"</string>
     <string name="band_mode_loading">"バンドリストを読み込み中..."</string>
     <string name="band_mode_set">"設定"</string>
     <string name="band_mode_failed">"失敗"</string>
     <string name="band_mode_succeeded">"成功"</string>
-    <string name="ringer_volume_ringer_mode_label">"着信音のモード"</string>
-    <string name="ringer_volume_screen_increasing_text">"音量を徐々にアップ"</string>
-    <string name="ringer_volume_ringtone_label">"着信音"</string>
-    <string name="ringer_volume_instructions">"音量ボタンで着信音の音量を調整します"</string>
     <string name="sdcard_changes_instructions">"USBケーブルの再接続時に変更が有効になります"</string>
     <string name="sdcard_settings_screen_mass_storage_text">"USBマスストレージを有効にする"</string>
     <string name="sdcard_settings_total_bytes_label">"合計バイト数:"</string>
@@ -208,20 +178,6 @@
     <string name="sdcard_settings_used_bytes_label">"使用済みバイト数:"</string>
     <string name="sdcard_settings_scanning_status">"メディア用のSDカードをスキャン中..."</string>
     <string name="sdcard_settings_read_only_status">"読み取り専用としてSDカードをマウントしました"</string>
-    <string name="sdcard_removal_alert_title">"安全でないSDカードの取り外し"</string>
-    <string name="sdcard_unmountable_alert_title">"SDカードが読み取れません"</string>
-    <string name="telephony_user_label">"ユーザー:"</string>
-    <string name="telephony_server_label">"サーバー:"</string>
-    <string name="telephony_name_label">"名前:"</string>
-    <string name="telephony_mmsc_label">"MMSC:"</string>
-    <string name="telephony_apn_label">"APN:"</string>
-    <string name="telephony_mcc_label">"MCC:"</string>
-    <string name="telephony_port_label">"ポート:"</string>
-    <string name="telephony_password_label">"パスワード:"</string>
-    <string name="telephony_proxy_label">"プロキシ:"</string>
-    <string name="telephony_mnc_label">"MNC:"</string>
-    <string name="telephony_mmsproxy_label">"MMSプロキシ:"</string>
-    <string name="telephony_mmsport_label">"MMSポート:"</string>
     <string name="next_label">"次へ"</string>
     <string name="language_picker_title">"ロケール"</string>
     <string name="select_your_language">"言語を選択"</string>
@@ -264,23 +220,12 @@
     <string name="bluetooth_settings_summary">"接続を管理、デイバイス名を設定、検出可能に設定"</string>
     <string name="bluetooth_pin_entry">"Bluetoothペア設定リクエスト"</string>
     <string name="bluetooth_device_info">"Bluetoothデバイス情報"</string>
-    <string name="bluetooth_pairing_msg">"ペアとして設定中..."</string>
     <string name="bluetooth_enter_pin_msg">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g>"\n\n"ペアにするPINを入力してください。"\n"(0000か1234を試してください)"</string>
     <string name="bluetooth_error_title">"注意"</string>
     <string name="bluetooth_pairing_error_message">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g>とのペアリングで問題が発生しました。"</string>
-    <string name="bluetooth_pairing_alternate_error_message">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g>とのペアリングで問題が発生しました。他のPINを指定してください。"</string>
     <string name="bluetooth_pairing_pin_error_message">"入力されたPINが正しくないため、<xliff:g id="DEVICE_NAME">%1$s</xliff:g>とのペアリングで問題が発生しました。"</string>
     <string name="bluetooth_connecting_error_message">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g>への接続で問題が発生しました。"</string>
-    <string name="bluetooth_new_data">"新しいデータの入力"</string>
-    <string name="bluetooth_new_data_confirm">"OK"</string>
-    <string name="bluetooth_new_data_cancel">"キャンセル"</string>
-    <string name="bluetooth_scan_for_new_devices">"新しいデバイスのスキャン中..."</string>
-    <string name="bluetooth_discoverability_panel_title">"携帯電話側で設定..."</string>
-    <string name="bluetooth_discoverable">"<xliff:g id="DISCOVERABLE_TIME_PERIOD">%1$s</xliff:g>秒間検出可能"</string>
-    <string name="bluetooth_connectable">"接続可能時のみ"</string>
-    <string name="bluetooth_neither">"検出できないか、接続できません"</string>
     <string name="bluetooth_preference_scan_title">"デバイスのスキャン"</string>
-    <string name="bluetooth_preference_scan_summary">"ペアとして設定するデバイスを検出"</string>
     <string name="bluetooth_device_context_connect">"接続"</string>
     <string name="bluetooth_device_context_disconnect">"接続を解除"</string>
     <string name="bluetooth_device_context_pair_connect">"ペアに設定して接続"</string>
@@ -420,32 +365,24 @@
     <string name="sound_effects_enable_title">"選択の効果音"</string>
     <string name="sound_effects_enable_summary_on">"画面での選択時に音を鳴らす"</string>
     <string name="sound_effects_enable_summary_off">"画面での選択時に音を鳴らす"</string>
+    <!-- no translation found for play_media_notification_sounds_enable_title (1008791464029179529) -->
+    <skip />
+    <!-- no translation found for play_media_notification_sounds_enable_summary_on (426729807044947187) -->
+    <skip />
+    <!-- no translation found for play_media_notification_sounds_enable_summary_off (803791141563778934) -->
+    <skip />
     <string name="sync_settings">"データの同期化"</string>
     <string name="sync_settings_summary">"同期するアプリケーションを選択"</string>
-    <string name="sync_settings_header_general_settings">"同期の全般設定"</string>
-    <string name="sync_settings_header_application_settings">"アプリケーションの同期設定"</string>
-    <string name="sync_too_many_deletes">"削除の制限を超えました"</string>
-    <string name="sync_automatically">"自動同期化"</string>
-    <string name="sync_enabled">"自動的にデータを同期"</string>
-    <string name="sync_disabled">"自動的にデータを同期"</string>
-    <string name="sync_menu_sync_now">"今すぐ同期"</string>
-    <string name="sync_menu_sync_cancel">"同期をキャンセル"</string>
-    <string name="sync_gmail">"Gmail"</string>
-    <string name="sync_calendar">"カレンダー"</string>
-    <string name="sync_contacts">"連絡先"</string>
-    <string name="sync_too_many_deletes_desc">"アカウント「<xliff:g id="ACCOUNT_NAME">%3$s</xliff:g>」で<xliff:g id="TYPE_OF_SYNC">%2$s</xliff:g>の<xliff:g id="NUMBER_OF_DELETED_ITEMS">%1$d</xliff:g>個の項目が削除されています。処理を選択してください。"</string>
-    <string name="sync_really_delete">"項目を削除します。"</string>
-    <string name="sync_undo_deletes">"削除を元に戻します。"</string>
-    <string name="sync_do_nothing">"今は何もしません。"</string>
-    <string name="sync_is_failing">"現在同期で問題が発生しています。しばらくお待ちください。"</string>
-    <string name="sync_plug"><font fgcolor="#ffffffff">"Google Syncへようこそ"</font>" "\n"このサービスを使用すると、データを同期して、どこからでも連絡先や予定などにアクセスできます。"</string>
     <string name="display_settings">"表示設定"</string>
     <string name="animations_title">"アニメーション"</string>
     <string name="animations_summary_on">"ウィンドウのオープン/クローズ時にアニメーションを表示"</string>
     <string name="animations_summary_off">"ウィンドウのオープン/クローズ時にアニメーションを表示"</string>
     <string name="brightness">"輝度"</string>
+    <!-- no translation found for brightness_summary (838917350127550703) -->
+    <skip />
     <string name="screen_timeout">"画面のタイムアウト"</string>
-    <string name="dim_screen">"画面を暗くする"</string>
+    <!-- no translation found for screen_timeout_summary (2905757633140605334) -->
+    <skip />
     <string name="sim_lock_settings">"SIMカードのロック設定"</string>
     <string name="sim_lock_settings_category">"SIMカードのロックを設定"</string>
     <string name="sim_lock_settings_title">"SIMカードのロック"</string>
@@ -493,13 +430,24 @@
     <string name="status_wifi_mac_address">"Wi-Fi MACアドレス"</string>
     <string name="status_bt_address">"Bluetoothアドレス"</string>
     <string name="status_unavailable">"不明"</string>
+    <!-- no translation found for status_network_traffic_stats (2089739529980224804) -->
+    <skip />
+    <!-- no translation found for status_network_traffic_summary (1456797220417923108) -->
+    <skip />
     <string name="status_up_time">"稼働時間"</string>
     <string name="status_awake_time">"使用時間"</string>
     <string name="internal_memory">"携帯電話内部メモリ"</string>
     <string name="sd_memory">"SDカード"</string>
     <string name="memory_available">"空き容量"</string>
     <string name="memory_size">"合計容量"</string>
-    <string name="sd_eject">"SDカードをマウント解除/取り出す"</string>
+    <!-- no translation found for sd_eject (6915293408836853020) -->
+    <skip />
+    <!-- no translation found for sd_eject_summary (3315557796211542962) -->
+    <skip />
+    <!-- no translation found for sd_format (5448738337382712203) -->
+    <skip />
+    <!-- no translation found for sd_format_summary (6616491027883134004) -->
+    <skip />
     <string name="sd_unavailable">"使用不可"</string>
     <string name="read_only">"(読み取り専用)"</string>
     <string name="battery_status_title">"バッテリの状態"</string>
@@ -538,6 +486,22 @@
     <string name="master_clear_gesture_prompt">"ロック解除パターンを入力してください"</string>
     <string name="master_clear_gesture_explanation">"携帯電話をリセットするには、ロック解除パターンを入力する必要があります。"</string>
     <string name="master_clear_failed">"System Clearサービスが利用できないため、リセットされませんでした。"</string>
+    <!-- no translation found for media_format_title (4671276096695789895) -->
+    <skip />
+    <!-- no translation found for media_format_summary (3805714639375830120) -->
+    <skip />
+    <!-- no translation found for media_format_desc (1142563222357820834) -->
+    <skip />
+    <!-- no translation found for media_format_button_text (370856400090190151) -->
+    <skip />
+    <!-- no translation found for media_format_final_desc (1776666694910717198) -->
+    <skip />
+    <!-- no translation found for media_format_final_button_text (4881713344315923175) -->
+    <skip />
+    <!-- no translation found for media_format_gesture_prompt (3109349468816856670) -->
+    <skip />
+    <!-- no translation found for media_format_gesture_explanation (4239529439389660159) -->
+    <skip />
     <string name="call_settings_title">"通話設定"</string>
     <string name="call_settings_summary">"ボイスメール、電話転送、通話中着信、発信者番号を設定する"</string>
     <string name="network_settings_title">"モバイルネットワーク"</string>
@@ -591,17 +555,25 @@
     <string name="lock_example_title">"パターン例"</string>
     <string name="lock_example_message">"少なくとも4つの点を結びます。"\n" "\n"独自のパターンを考えたら、[次へ]を選択します。"</string>
     <string name="manageapplications_settings_title">"アプリケーションを管理"</string>
+    <!-- no translation found for manageapplications_settings_summary (6097117021500651232) -->
+    <skip />
     <string name="applications_settings">"アプリケーション"</string>
     <string name="applications_settings_summary">"アプリケーションを管理し、クイック起動のショートカットを設定する"</string>
     <string name="applications_settings_header">"アプリケーション設定"</string>
     <string name="install_applications">"不明な提供元"</string>
     <string name="install_unknown_applications">"Android Market以外のアプリケーションのインストールを許可する"</string>
     <string name="install_all_warning">"提供元が不明のアプリケーションから、携帯電話や個人データが攻撃を受ける可能性が高くなります。このようなアプリケーションの使用により生じた携帯電話への損害やデータの損失については、お客様がすべての責任を負うことに同意するものとします。"</string>
-    <string name="manage_applications_title">"アプリケーションを管理"</string>
     <string name="application_info_label">"アプリケーション情報"</string>
     <string name="storage_label">"メモリ"</string>
     <string name="auto_launch_label">"デフォルトで起動"</string>
     <string name="permissions_label">"許可"</string>
+    <string name="cache_header_label">"キャッシュ"</string>
+    <string name="clear_cache_btn_text">"キャッシュをクリア"</string>
+    <string name="cache_size_label">"キャッシュ"</string>
+    <!-- no translation found for controls_label (7611113077086853799) -->
+    <skip />
+    <!-- no translation found for force_stop (7435006169872876756) -->
+    <skip />
     <string name="total_size_label">"合計"</string>
     <string name="application_size_label">"アプリケーション"</string>
     <string name="data_size_label">"データ"</string>
@@ -614,6 +586,10 @@
     <string name="sort_order_alpha">"並べ替え"</string>
     <string name="sort_order_size">"サイズ順に並べ替え"</string>
     <string name="manage_space_text">"容量を管理"</string>
+    <!-- no translation found for filter (2018011724373033887) -->
+    <skip />
+    <!-- no translation found for filter_dlg_title (6507663329723966854) -->
+    <skip />
     <string name="filter_apps_all">"すべて"</string>
     <string name="filter_apps_third_party">"サードパーティ"</string>
     <string name="filter_apps_running">"実行中"</string>
@@ -627,22 +603,24 @@
     <string name="app_not_found_dlg_text">"インストール済みアプリケーションのリストに、このアプリケーションはありません。"</string>
     <string name="clear_data_failed">"アプリケーションデータを消去できませんでした。"</string>
     <string name="security_settings_desc">"このアプリケーションでアクセスできる携帯電話の項目:"</string>
-    <string name="computing_size">"計算中..."</string>
+    <!-- no translation found for computing_size (1599186977475211186) -->
+    <skip />
     <string name="invalid_size_value">"パッケージのサイズを計算できません"</string>
     <string name="empty_list_msg">"サードパーティ製のアプリケーションはインストールされていません。"</string>
-    <string name="cache_header_label">"キャッシュ"</string>
-    <string name="clear_cache_btn_text">"キャッシュをクリア"</string>
-    <string name="cache_size_label">"キャッシュ"</string>
     <string name="language_settings">"ロケールとテキスト"</string>
     <string name="language_settings_summary">"ロケール (言語と地域)、テキスト入力、自動修正オプションを設定する"</string>
     <string name="language_category">"ロケール設定"</string>
     <string name="text_category">"テキスト設定"</string>
     <string name="phone_language">"ロケールを選択"</string>
+    <!-- no translation found for phone_language_summary (1809580675831352352) -->
+    <skip />
     <string name="auto_replace">"自動修正"</string>
     <string name="auto_replace_summary">"誤字脱字を修正する"</string>
     <string name="auto_caps">"大文字の自動入力"</string>
     <string name="auto_caps_summary">"文の最初の文字を大文字にする"</string>
     <string name="auto_punctuate">"句読点を自動入力"</string>
+    <!-- no translation found for hardkeyboard_category (5957168411305769899) -->
+    <skip />
     <string name="auto_punctuate_summary">"Spaceキーを2回押して「。」を挿入"</string>
     <string name="show_password">"パスワードを表示"</string>
     <string name="show_password_summary">"入力中のパスワードを表示"</string>
@@ -690,4 +668,68 @@
     <string name="keep_screen_on_summary">"充電中に画面をスリープにしない"</string>
     <string name="allow_mock_location">"仮の位置情報を許可する"</string>
     <string name="allow_mock_location_summary">"仮の位置情報を許可する"</string>
+    <!-- no translation found for battery_history_known_apps (6907374478255786240) -->
+    <skip />
+    <!-- no translation found for gadget_picker_title (4335873961457985189) -->
+    <skip />
+    <!-- no translation found for battery_history_details_for (5189636461798594740) -->
+    <skip />
+    <!-- no translation found for battery_history_uid (1016606150528436298) -->
+    <skip />
+    <!-- no translation found for battery_history_network_usage (8010852371665217020) -->
+    <skip />
+    <!-- no translation found for battery_history_bytes_received (980307569180518302) -->
+    <skip />
+    <!-- no translation found for battery_history_bytes_sent (2501748768602119159) -->
+    <skip />
+    <!-- no translation found for battery_history_bytes_total (4444807574361642753) -->
+    <skip />
+    <!-- no translation found for battery_history_cpu_usage (2597353713014790877) -->
+    <skip />
+    <!-- no translation found for battery_history_user_time (6227507614894791359) -->
+    <skip />
+    <!-- no translation found for battery_history_system_time (2015862072724507547) -->
+    <skip />
+    <!-- no translation found for battery_history_total_time (3618703970098556104) -->
+    <skip />
+    <!-- no translation found for battery_history_starts (9137453931978571696) -->
+    <skip />
+    <!-- no translation found for battery_history_days (6387593985264923377) -->
+    <skip />
+    <!-- no translation found for battery_history_hours (2593055276272350197) -->
+    <skip />
+    <!-- no translation found for battery_history_minutes (5608990219891318138) -->
+    <skip />
+    <!-- no translation found for battery_history_seconds (7397664460929461350) -->
+    <skip />
+    <!-- no translation found for battery_history_packages_sharing_this_uid (4101596071379250050) -->
+    <skip />
+    <!-- no translation found for battery_history_no_data (1177238743237067617) -->
+    <skip />
+    <!-- no translation found for battery_history_sensor (2333488996028993982) -->
+    <skip />
+    <!-- no translation found for battery_history_used_by_packages (3000711380023436470) -->
+    <skip />
+    <!-- no translation found for battery_history_sensor_usage (3593133338613209024) -->
+    <skip />
+    <!-- no translation found for battery_history_sensor_usage_multi (4536084375991014508) -->
+    <skip />
+    <!-- no translation found for battery_history_screen_on (1377240025275657277) -->
+    <skip />
+    <!-- no translation found for battery_history_screen_on_battery (536058210445081888) -->
+    <skip />
+    <!-- no translation found for battery_history_screen_on_plugged (5019127390021871260) -->
+    <skip />
+    <!-- no translation found for usage_stats_label (5890846333487083609) -->
+    <skip />
+    <!-- no translation found for testing_usage_stats (7823048598893937339) -->
+    <skip />
+    <!-- no translation found for display_order_text (8592776965827565271) -->
+    <skip />
+    <!-- no translation found for app_name_label (2000949925256858308) -->
+    <skip />
+    <!-- no translation found for launch_count_label (4019444833263957024) -->
+    <skip />
+    <!-- no translation found for usage_time_label (295954901452833058) -->
+    <skip />
 </resources>

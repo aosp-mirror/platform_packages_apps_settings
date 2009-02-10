@@ -17,8 +17,8 @@
 package com.android.settings;
 
 import com.android.settings.R;
-import android.app.Activity;
 import android.app.ActivityManager;
+import android.app.AlertDialog;
 import android.app.ListActivity;
 import android.app.ProgressDialog;
 import android.content.BroadcastReceiver;
@@ -90,7 +90,8 @@ import java.util.TreeMap;
  *  InstalledAppDetailsActivity to avoid recomputation of the package size information.
  */
 public class ManageApplications extends ListActivity implements
-        OnItemClickListener, DialogInterface.OnCancelListener {
+        OnItemClickListener, DialogInterface.OnCancelListener,
+        DialogInterface.OnClickListener {
     // TAG for this activity
     private static final String TAG = "ManageApplications";
     
@@ -119,6 +120,9 @@ public class ManageApplications extends ListActivity implements
     public static final int FILTER_APPS_ALL = MENU_OPTIONS_BASE + 2;
     public static final int FILTER_APPS_THIRD_PARTY = MENU_OPTIONS_BASE + 3;
     public static final int FILTER_APPS_RUNNING = MENU_OPTIONS_BASE + 4;
+    public static final int FILTER_OPTIONS = MENU_OPTIONS_BASE + 5;
+    // Alert Dialog presented to user to find out the filter option
+    AlertDialog.Builder mAlertDlgBuilder;
     // sort order
     private int mSortOrder = SORT_ORDER_ALPHA;
     // Filter value
@@ -295,11 +299,7 @@ public class ManageApplications extends ListActivity implements
                         // end computation here
                         mDoneIniting = true;
                         mAppInfoAdapter.sortList(mSortOrder);
-                        //load resources now
-                        if(mResourceThread.isAlive()) {
-                            mResourceThread.interrupt();
-                        }
-                        mResourceThread.loadAllResources(mAppInfoAdapter.getAppList());
+                        setProgressBarIndeterminateVisibility(false);
                     }
                 }
                 break;
@@ -381,7 +381,15 @@ public class ManageApplications extends ListActivity implements
                     Log.w(TAG, "Error loading icons for applications");
                 } else {
                     mAppInfoAdapter.updateAppsResourceInfo(iconMap);
-                    setProgressBarIndeterminateVisibility(false);
+                }
+                // initiate compute pkg sizes
+                if (localLOGV) Log.i(TAG, "Initiating compute sizes for first time");
+                mObserver = new PkgSizeObserver();
+                if (mAppInfoAdapter.getCount() > 0) {
+                    mObserver.invokeGetSizeInfo(mAppInfoAdapter.getApplicationInfo(0),
+                            COMPUTE_PKG_SIZE_DONE);
+                } else {
+                    mDoneIniting = true;
                 }
             default:
                 break;
@@ -398,7 +406,15 @@ public class ManageApplications extends ListActivity implements
         if (filterOption == FILTER_APPS_THIRD_PARTY) {
             List<ApplicationInfo> appList =new ArrayList<ApplicationInfo> ();
             for (ApplicationInfo appInfo : installedAppList) {
+                boolean flag = false;
                 if ((appInfo.flags & ApplicationInfo.FLAG_UPDATED_SYSTEM_APP) != 0) {
+                    // Updated system app
+                    flag = true;
+                } else if ((appInfo.flags & ApplicationInfo.FLAG_SYSTEM) == 0) {
+                    // Non-system app
+                    flag = true;
+                }
+                if (flag) {
                     appList.add(appInfo);
                 }
             }
@@ -457,14 +473,11 @@ public class ManageApplications extends ListActivity implements
         // register receiver
         mReceiver = new PackageIntentReceiver();
         mReceiver.registerReceiver();
-        // initiate compute pkg sizes
-        if (localLOGV) Log.i(TAG, "Initiating compute sizes for first time");
-        mObserver = new PkgSizeObserver();
-        if(appList.size() > 0) {
-            mObserver.invokeGetSizeInfo(appList.get(0), COMPUTE_PKG_SIZE_DONE);
-        } else {
-            mDoneIniting = true;
+        //load resources now
+        if(mResourceThread.isAlive()) {
+            mResourceThread.interrupt();
         }
+        mResourceThread.loadAllResources(appList);
     }
     
     // internal structure used to track added and deleted packages when
@@ -717,7 +730,9 @@ public class ManageApplications extends ListActivity implements
                 if(mInfo.appIcon != null) {
                     holder.appIcon.setImageDrawable(mInfo.appIcon);
                 }
-                holder.appSize.setText(mInfo.appSize);
+                if (mInfo.appSize != null) {
+                    holder.appSize.setText(mInfo.appSize);
+                }
             } else {
                 Log.w(TAG, "No info for package:"+appInfo.packageName+" in property map");
             }
@@ -1123,9 +1138,7 @@ public class ManageApplications extends ListActivity implements
                 .setIcon(android.R.drawable.ic_menu_sort_alphabetically);
         menu.add(0, SORT_ORDER_SIZE, 2, R.string.sort_order_size)
                 .setIcon(android.R.drawable.ic_menu_sort_by_size); 
-        menu.add(0, FILTER_APPS_ALL, 3, R.string.filter_apps_all);
-        menu.add(0, FILTER_APPS_RUNNING, 4, R.string.filter_apps_running);
-        menu.add(0, FILTER_APPS_THIRD_PARTY, 5, R.string.filter_apps_third_party);        
+        menu.add(0, FILTER_OPTIONS, 3, R.string.filter);
         return true;
     }
     
@@ -1134,11 +1147,7 @@ public class ManageApplications extends ListActivity implements
         if (mDoneIniting) {
             menu.findItem(SORT_ORDER_ALPHA).setVisible(mSortOrder != SORT_ORDER_ALPHA);
             menu.findItem(SORT_ORDER_SIZE).setVisible(mSortOrder != SORT_ORDER_SIZE);
-            menu.findItem(FILTER_APPS_ALL).setVisible(mFilterApps != FILTER_APPS_ALL);
-            menu.findItem(FILTER_APPS_THIRD_PARTY).setVisible(
-                    mFilterApps != FILTER_APPS_THIRD_PARTY);
-            menu.findItem(FILTER_APPS_RUNNING).setVisible(
-                    mFilterApps != FILTER_APPS_RUNNING);
+            menu.findItem(FILTER_OPTIONS).setVisible(true);
             return true;
         } 
         return false;
@@ -1147,7 +1156,20 @@ public class ManageApplications extends ListActivity implements
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         int menuId = item.getItemId();
-        sendMessageToHandler(REORDER_LIST, menuId);
+        if ((menuId == SORT_ORDER_ALPHA) || (menuId == SORT_ORDER_SIZE)) {
+            sendMessageToHandler(REORDER_LIST, menuId);
+        } else if (menuId == FILTER_OPTIONS) {
+            if (mAlertDlgBuilder == null) {
+                mAlertDlgBuilder = new AlertDialog.Builder(this).
+                setTitle(R.string.filter_dlg_title).
+                setNeutralButton(R.string.cancel, this).
+                setSingleChoiceItems(new CharSequence[] {getText(R.string.filter_apps_all),
+                        getText(R.string.filter_apps_running),
+                        getText(R.string.filter_apps_third_party)},
+                        -1, this);
+            }
+            mAlertDlgBuilder.show();
+        }
         return true;
     }
 
@@ -1161,5 +1183,25 @@ public class ManageApplications extends ListActivity implements
     public void onCancel(DialogInterface dialog) {
         mLoadingDlg = null;
         finish();
+    }
+
+    public void onClick(DialogInterface dialog, int which) {
+        int newOption;
+        switch (which) {
+        // Make sure that values of 0, 1, 2 match options all, running, third_party when
+        // created via the AlertDialog.Builder
+        case 0:
+            newOption = FILTER_APPS_ALL;
+            break;
+        case 1:
+            newOption = FILTER_APPS_RUNNING;
+            break;
+        case 2:
+            newOption = FILTER_APPS_THIRD_PARTY;
+            break;
+        default:
+            return;
+        }
+        sendMessageToHandler(REORDER_LIST, newOption);
     }
 }

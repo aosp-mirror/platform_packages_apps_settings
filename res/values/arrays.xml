@@ -143,4 +143,30 @@
         <item>2</item>
     </string-array>
 
+    <!-- Match with constants in BatteryHistory class -->
+    <string-array name="battery_history_type_spinner">
+        <item>CPU Usage</item>
+        <item>Network Usage</item>
+        <item>Sensor Usage</item>
+        <item>Screen On Time</item>
+<!--
+        <item>Wake Locks</item>
+-->
+    </string-array>
+
+    <!-- Match with constants in BatteryStats class -->
+    <string-array name="battery_history_which_spinner">
+        <item>Since device reset</item>
+        <item>Before last boot</item>
+        <item>Since last boot</item>
+        <item>Since last unplugged</item>
+    </string-array>
+
+    <!-- Display options for UsageStats class -->
+    <string-array name="usage_stats_display_order_types">
+        <item>Usage Time</item>
+        <item>Launch Count</item>
+        <item>Application Name</item>
+    </string-array>
+
 </resources>

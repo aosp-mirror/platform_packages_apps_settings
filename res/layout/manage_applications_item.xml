@@ -17,39 +17,43 @@
 */
 -->
 
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="wrap_content"
-    android:layout_gravity="center_vertical"
-    android:minHeight="?android:attr/listPreferredItemHeight">
+    android:minHeight="?android:attr/listPreferredItemHeight"
+    android:orientation="horizontal"
+    android:paddingRight="6dip"
+    android:paddingLeft="6dip"
+    android:paddingTop="5dip"
+    android:paddingBottom="5dip"
+    android:gravity="center_vertical" >
 
     <ImageView android:id="@+id/app_icon"
         android:layout_width="@android:dimen/app_icon_size"
         android:layout_height="@android:dimen/app_icon_size"
-        android:layout_alignParentLeft="true"
-        android:layout_marginTop="6dip"
-        android:layout_marginBottom="6dip"
-        android:background="@drawable/border_item_thumbnail" />
+        android:layout_marginLeft="5dip"
+        android:layout_marginRight="11dip"
+        android:layout_gravity="center_vertical"
+        android:scaleType="fitCenter"/>
 
-    <TextView android:id="@+id/app_size"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:layout_alignParentRight="true"
-        android:paddingRight="6dip"
-        android:paddingLeft="12dip"
-        android:paddingTop="16dip"
-        android:maxLines="1" />
-
-    <TextView android:id="@+id/app_name"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:textColor="?android:attr/textColorPrimary"
-        android:layout_toRightOf="@id/app_icon"
-        android:layout_toLeftOf="@id/app_size"
-        android:layout_alignTop="@id/app_icon"
-        android:paddingLeft="2dip"
-        android:paddingTop="6dip"/>
-</RelativeLayout>
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content" >
+        <TextView android:id="@+id/app_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:textStyle="bold"
+            android:singleLine="true"
+            android:ellipsize="marquee"
+            android:layout_marginBottom="2dip" />
+        <TextView android:id="@+id/app_size"
+            android:layout_marginTop="-4dip"
+            android:layout_gravity="center_vertical"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceSmall" />
+    </LinearLayout>
+</LinearLayout>
 

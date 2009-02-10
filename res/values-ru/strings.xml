@@ -16,9 +16,6 @@
 <resources xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
     <string name="device_info_default">"Неизвестно"</string>
-    <string name="device_info_uptime">"Время работы"</string>
-    <string name="device_info_awaketime">"Время активности"</string>
-    <string name="device_info_asleeptime">"Время простоя"</string>
     <string name="turn_on_radio">"Включить радиосвязь"</string>
     <string name="turn_off_radio">"Отключить радиосвязь"</string>
     <string name="turn_on_qxdm">"Включить журнал QXDM SD"</string>
@@ -52,14 +49,13 @@
     <string name="radioInfo_lac">"LAC"</string>
     <string name="radioInfo_cid">"CID"</string>
     <string name="sdcard_unmount">"Отключиться от карты SD"</string>
+    <!-- no translation found for sdcard_format (362497552060004057) -->
+    <skip />
     <string name="small_font">"Мелкий"</string>
     <string name="medium_font">"Средний"</string>
     <string name="large_font">"Крупный"</string>
     <string name="font_size_save">"ОК"</string>
     <string name="sdcard_setting">"Карта SD"</string>
-    <string name="screen_off_timeout_label">"Не отключать экран при зарядке"</string>
-    <string name="stay_on">"При зарядке экран всегда включен"</string>
-    <string name="app_launcher_newView_text">"Новый AppLauncher"</string>
     <string name="battery_info_status_label">"Состояние батареи:"</string>
     <string name="battery_info_scale_label">"Шкала батареи:"</string>
     <string name="battery_info_level_label">"Уровень заряда батареи:"</string>
@@ -87,11 +83,6 @@
     <string name="battery_info_health_over_voltage">"Скачок напряжения"</string>
     <string name="battery_info_health_unspecified_failure">"Неизвестная ошибка"</string>
     <string name="bluetooth">"Bluetooth"</string>
-    <string name="bluetooth_stopping">"Остановка Bluetooth..."</string>
-    <string name="bluetooth_disabled">"Включить Bluetooth"</string>
-    <!-- no translation found for bluetooth_enabled (314506563815464155) -->
-    <skip />
-    <string name="bluetooth_enabling">"Включение Bluetooth…"</string>
     <string name="bluetooth_visibility">"Видно другим"</string>
     <string name="bluetooth_is_discoverable">"Виден в течение <xliff:g id="DISCOVERABLE_TIME_PERIOD">%1$s</xliff:g> сек…"</string>
     <string name="bluetooth_not_discoverable">"Сделать устройство видимым"</string>
@@ -99,7 +90,6 @@
     <string name="bluetooth_device_name">"Название устройства"</string>
     <string name="bluetooth_name_not_set">"Имя не задано, используется имя аккаунта"</string>
     <string name="bluetooth_scan_for_devices">"Поиск устройств"</string>
-    <string name="bluetooth_clear_list">"Очистить список устройств"</string>
     <string name="bluetooth_disconnect_blank">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> будет отключено."</string>
     <string name="bluetooth_connected">"Подключено"</string>
     <string name="bluetooth_disconnected">"Отключено"</string>
@@ -108,17 +98,9 @@
     <!-- no translation found for bluetooth_unknown (644716244548801421) -->
     <skip />
     <string name="bluetooth_not_connected">"Создать пару с этим устройством"</string>
-    <string name="bluetooth_failed_to_enable">"Не удается включить Bluetooth"</string>
     <string name="bluetooth_pairing">"Идет создание пары..."</string>
-    <string name="failed_to_pair">"Не удается соединиться с <xliff:g id="DEVICE_NAME">%1$s</xliff:g>."</string>
-    <string name="failed_to_connect">"Не удается подключиться к <xliff:g id="DEVICE_NAME">%1$s</xliff:g>."</string>
     <string name="bluetooth_paired">"Соединено"</string>
-    <string name="bluetooth_paired_not_nearby">"Соединено"</string>
     <string name="bluetooth_device">"гарнитура/наушники"</string>
-    <string name="bluetooth_disconnect">"Отключить"</string>
-    <string name="bluetooth_connect">"Подключиться"</string>
-    <string name="bluetooth_unpair">"Отсоединить"</string>
-    <string name="bluetooth_pair">"Создать пару"</string>
     <string name="progress_scanning">"Сканирование"</string>
     <string name="bluetooth_notif_ticker">"Запрос на соединение Bluetooth"</string>
     <string name="bluetooth_notif_title">"Запрос на соединение"</string>
@@ -136,16 +118,6 @@
     <string name="intent_sender_startactivity_text">"Запустить <xliff:g id="ACTIVITY">activity</xliff:g>"</string>
     <string name="intent_sender_resource_label">"<xliff:g id="RESOURCE">Resource</xliff:g>:"</string>
     <string name="intent_sender_account_label">"Аккаунт:"</string>
-    <string name="keyguard_pw_mod_text">"Выбор комбинации блокировки"</string>
-    <string name="keyguard_pin_mod_text">"Изменить PIN"</string>
-    <string name="keyguard_label">"Keyguard"</string>
-    <string name="keyguard_sim_pin_label">"PIN SIM-карты"</string>
-    <string name="keyguard_password_old_password_error_text">"Указан неверный старый пароль. Попробуйте еще раз."</string>
-    <string name="keyguard_password_button_text">"ОК"</string>
-    <string name="keyguard_password_confirm_new_label">"Подтвердите новый пароль:"</string>
-    <string name="keyguard_password_new_label">"Новый пароль:"</string>
-    <string name="keyguard_password_old_label">"Старый пароль:"</string>
-    <string name="keyguard_password_mismatch_error_text">"Пароли не совпадают. Введите их еще раз."</string>
     <string name="proxy_clear_text">"Очистить"</string>
     <string name="proxy_port_label">"Порт"</string>
     <string name="proxy_defaultView_text">"Восстановить значения по умолчанию"</string>
@@ -188,15 +160,13 @@
     <string name="radio_info_smsc_label">"SMSC:"</string>
     <string name="radio_info_smsc_update_label">"Обновить"</string>
     <string name="radio_info_smsc_refresh_label">"Обновить"</string>
+    <!-- no translation found for radio_info_toggle_dns_check_label (8292252930563286858) -->
+    <skip />
     <string name="band_mode_title">"Установить диапазон GSM/UMTS"</string>
     <string name="band_mode_loading">"Загрузка списка диапазонов…"</string>
     <string name="band_mode_set">"Установить"</string>
     <string name="band_mode_failed">"Ошибка"</string>
     <string name="band_mode_succeeded">"Успешно"</string>
-    <string name="ringer_volume_ringer_mode_label">"Режим звонка"</string>
-    <string name="ringer_volume_screen_increasing_text">"Нарастающий звонок"</string>
-    <string name="ringer_volume_ringtone_label">"Мелодия звонка"</string>
-    <string name="ringer_volume_instructions">"Отрегулируйте громкость звонка с помощью кнопок громкости"</string>
     <string name="sdcard_changes_instructions">"Изменения вступят в силу после повторного подключения кабеля USB"</string>
     <string name="sdcard_settings_screen_mass_storage_text">"Включить устройство хранения USB"</string>
     <string name="sdcard_settings_total_bytes_label">"Всего байт:"</string>
@@ -208,20 +178,6 @@
     <string name="sdcard_settings_used_bytes_label">"Занято, байт:"</string>
     <string name="sdcard_settings_scanning_status">"Поиск мультимедиа на карте SD…"</string>
     <string name="sdcard_settings_read_only_status">"Подключение к карте SD только для чтения"</string>
-    <string name="sdcard_removal_alert_title">"Небезопасное удаление карты SD!"</string>
-    <string name="sdcard_unmountable_alert_title">"Карта SD не читается"</string>
-    <string name="telephony_user_label">"Пользователь:"</string>
-    <string name="telephony_server_label">"Сервер:"</string>
-    <string name="telephony_name_label">"Название:"</string>
-    <string name="telephony_mmsc_label">"MMSC:"</string>
-    <string name="telephony_apn_label">"APN:"</string>
-    <string name="telephony_mcc_label">"MCC:"</string>
-    <string name="telephony_port_label">"Порт:"</string>
-    <string name="telephony_password_label">"Пароль:"</string>
-    <string name="telephony_proxy_label">"Прокси:"</string>
-    <string name="telephony_mnc_label">"MNC:"</string>
-    <string name="telephony_mmsproxy_label">"Прокси MMS:"</string>
-    <string name="telephony_mmsport_label">"Порт MMS:"</string>
     <string name="next_label">"Далее"</string>
     <string name="language_picker_title">"Локаль"</string>
     <string name="select_your_language">"Выберите язык"</string>
@@ -264,23 +220,12 @@
     <string name="bluetooth_settings_summary">"Управление подключениями, установка названия и видимости устройства"</string>
     <string name="bluetooth_pin_entry">"Запрос на соединение Bluetooth"</string>
     <string name="bluetooth_device_info">"Сведения об устройстве Bluetooth"</string>
-    <string name="bluetooth_pairing_msg">"Идет создание пары..."</string>
     <string name="bluetooth_enter_pin_msg">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g>"\n\n"Для создания пары укажите PIN."\n"(Попробуйте 0000 или 1234.)"</string>
     <string name="bluetooth_error_title">"Внимание"</string>
     <string name="bluetooth_pairing_error_message">"Не удалось создать пару с устройством <xliff:g id="DEVICE_NAME">%1$s</xliff:g>."</string>
-    <string name="bluetooth_pairing_alternate_error_message">"Не удалось создать пару с устройством <xliff:g id="DEVICE_NAME">%1$s</xliff:g>. Попробуйте другой PIN."</string>
     <string name="bluetooth_pairing_pin_error_message">"Не удалось создать пару с устройством <xliff:g id="DEVICE_NAME">%1$s</xliff:g>, поскольку указан неверный PIN."</string>
     <string name="bluetooth_connecting_error_message">"Не удалось подключиться к устройству <xliff:g id="DEVICE_NAME">%1$s</xliff:g>."</string>
-    <string name="bluetooth_new_data">"Ввести новые данные"</string>
-    <string name="bluetooth_new_data_confirm">"ОК"</string>
-    <string name="bluetooth_new_data_cancel">"Отмена"</string>
-    <string name="bluetooth_scan_for_new_devices">"Идет поиск новых устройств…"</string>
-    <string name="bluetooth_discoverability_panel_title">"Сделать…"</string>
-    <string name="bluetooth_discoverable">"Виден в течение <xliff:g id="DISCOVERABLE_TIME_PERIOD">%1$s</xliff:g> сек."</string>
-    <string name="bluetooth_connectable">"Только при возможности подключения"</string>
-    <string name="bluetooth_neither">"Не является обнаруживаемым или доступным для подключения"</string>
     <string name="bluetooth_preference_scan_title">"Поиск устройств"</string>
-    <string name="bluetooth_preference_scan_summary">"Найти устройства для создания пары"</string>
     <string name="bluetooth_device_context_connect">"Подключиться"</string>
     <string name="bluetooth_device_context_disconnect">"Отключить"</string>
     <string name="bluetooth_device_context_pair_connect">"Создать пару и подключиться"</string>
@@ -420,32 +365,24 @@
     <string name="sound_effects_enable_title">"Звук при выборе"</string>
     <string name="sound_effects_enable_summary_on">"Воспроизвести звук при выборе на экране"</string>
     <string name="sound_effects_enable_summary_off">"Воспроизвести звук при выборе на экране"</string>
+    <!-- no translation found for play_media_notification_sounds_enable_title (1008791464029179529) -->
+    <skip />
+    <!-- no translation found for play_media_notification_sounds_enable_summary_on (426729807044947187) -->
+    <skip />
+    <!-- no translation found for play_media_notification_sounds_enable_summary_off (803791141563778934) -->
+    <skip />
     <string name="sync_settings">"Синхронизация данных"</string>
     <string name="sync_settings_summary">"Выбрать синхронизируемые приложения"</string>
-    <string name="sync_settings_header_general_settings">"Общие настройки синхронизации"</string>
-    <string name="sync_settings_header_application_settings">"Настройки синхронизации приложений"</string>
-    <string name="sync_too_many_deletes">"Превышен предел удаления"</string>
-    <string name="sync_automatically">"Синхронизировать автоматически"</string>
-    <string name="sync_enabled">"Синхронизировать данные автоматически"</string>
-    <string name="sync_disabled">"Выберите для автоматической синхронизации данных"</string>
-    <string name="sync_menu_sync_now">"Синхронизировать"</string>
-    <string name="sync_menu_sync_cancel">"Отменить синхронизацию"</string>
-    <string name="sync_gmail">"Gmail"</string>
-    <string name="sync_calendar">"Календарь"</string>
-    <string name="sync_contacts">"Контакты"</string>
-    <string name="sync_too_many_deletes_desc">"Для <xliff:g id="TYPE_OF_SYNC">%2$s</xliff:g> имеется <xliff:g id="NUMBER_OF_DELETED_ITEMS">%1$d</xliff:g> удаленных объектов (аккаунт <xliff:g id="ACCOUNT_NAME">%3$s</xliff:g>). Что нужно сделать?"</string>
-    <string name="sync_really_delete">"Удалить элементы."</string>
-    <string name="sync_undo_deletes">"Отменить удаления."</string>
-    <string name="sync_do_nothing">"Ничего не делать сейчас."</string>
-    <string name="sync_is_failing">"Проблемы с синхронизацией. Скоро все снова будет работать."</string>
-    <string name="sync_plug"><font fgcolor="#ffffffff">"Добро пожаловать в Google Sync!"</font>" "\n"Решение Google для синхронизации данных, которое обеспечивает доступ к данным о контактах, встречах и многом другом, где бы вы ни были."</string>
     <string name="display_settings">"Настройки экрана"</string>
     <string name="animations_title">"Анимация"</string>
     <string name="animations_summary_on">"Показывать анимацию при открытии и закрытии окон"</string>
     <string name="animations_summary_off">"Показывать анимацию при открытии и закрытии окон"</string>
     <string name="brightness">"Яркость"</string>
+    <!-- no translation found for brightness_summary (838917350127550703) -->
+    <skip />
     <string name="screen_timeout">"Время до отключения экрана"</string>
-    <string name="dim_screen">"Затемнение экрана"</string>
+    <!-- no translation found for screen_timeout_summary (2905757633140605334) -->
+    <skip />
     <string name="sim_lock_settings">"Настройки блокировки SIM-карты"</string>
     <string name="sim_lock_settings_category">"Установить блокировку SIM-карты"</string>
     <string name="sim_lock_settings_title">"Блокировка SIM-карты"</string>
@@ -493,13 +430,24 @@
     <string name="status_wifi_mac_address">"MAC-адрес Wi-Fi"</string>
     <string name="status_bt_address">"Адрес Bluetooth"</string>
     <string name="status_unavailable">"Недоступно"</string>
+    <!-- no translation found for status_network_traffic_stats (2089739529980224804) -->
+    <skip />
+    <!-- no translation found for status_network_traffic_summary (1456797220417923108) -->
+    <skip />
     <string name="status_up_time">"Время работы"</string>
     <string name="status_awake_time">"Время активности"</string>
     <string name="internal_memory">"Хранение в памяти телефона"</string>
     <string name="sd_memory">"Карта SD"</string>
     <string name="memory_available">"Доступное место"</string>
     <string name="memory_size">"Всего места"</string>
-    <string name="sd_eject">"Отключить/извлечь карту SD"</string>
+    <!-- no translation found for sd_eject (6915293408836853020) -->
+    <skip />
+    <!-- no translation found for sd_eject_summary (3315557796211542962) -->
+    <skip />
+    <!-- no translation found for sd_format (5448738337382712203) -->
+    <skip />
+    <!-- no translation found for sd_format_summary (6616491027883134004) -->
+    <skip />
     <string name="sd_unavailable">"Недоступно"</string>
     <string name="read_only">"(Только для чтения)"</string>
     <string name="battery_status_title">"Состояние батареи"</string>
@@ -538,6 +486,22 @@
     <string name="master_clear_gesture_prompt">"Воспроизведите комбинацию разблокировки"</string>
     <string name="master_clear_gesture_explanation">"Для подтверждения сброса телефона нужно воспроизвести комбинацию разблокировки."</string>
     <string name="master_clear_failed">"Сброс не произведен, так как служба очистки системы недоступна."</string>
+    <!-- no translation found for media_format_title (4671276096695789895) -->
+    <skip />
+    <!-- no translation found for media_format_summary (3805714639375830120) -->
+    <skip />
+    <!-- no translation found for media_format_desc (1142563222357820834) -->
+    <skip />
+    <!-- no translation found for media_format_button_text (370856400090190151) -->
+    <skip />
+    <!-- no translation found for media_format_final_desc (1776666694910717198) -->
+    <skip />
+    <!-- no translation found for media_format_final_button_text (4881713344315923175) -->
+    <skip />
+    <!-- no translation found for media_format_gesture_prompt (3109349468816856670) -->
+    <skip />
+    <!-- no translation found for media_format_gesture_explanation (4239529439389660159) -->
+    <skip />
     <string name="call_settings_title">"Настройки вызовов"</string>
     <string name="call_settings_summary">"Настройка голосовой почты, перенаправления звонков, удержания звонков, идентификатора звонящего"</string>
     <string name="network_settings_title">"Мобильные сети"</string>
@@ -591,17 +555,25 @@
     <string name="lock_example_title">"Пример комбинации"</string>
     <string name="lock_example_message">"Соедините не меньше четырех точек."\n" "\n"Выберите \"Далее\", когда будете готовы создать свою комбинацию."</string>
     <string name="manageapplications_settings_title">"Управление приложениями"</string>
+    <!-- no translation found for manageapplications_settings_summary (6097117021500651232) -->
+    <skip />
     <string name="applications_settings">"Приложения"</string>
     <string name="applications_settings_summary">"Управление приложениями, настройка горячих клавиш"</string>
     <string name="applications_settings_header">"Настройки приложений"</string>
     <string name="install_applications">"Неизвестные источники"</string>
     <string name="install_unknown_applications">"Разрешить установку приложений не из Android Маркет"</string>
     <string name="install_all_warning">"Атака приложений из неизвестных источников более опасна для телефона и личных данных. Вы соглашаетесь, что несете всю ответственность за ущерб телефону или потерю данных, которые могут произойти от использования таких приложений."</string>
-    <string name="manage_applications_title">"Управление приложениями"</string>
     <string name="application_info_label">"Сведения о приложении"</string>
     <string name="storage_label">"Хранение"</string>
     <string name="auto_launch_label">"Запускать по умолчанию"</string>
     <string name="permissions_label">"Разрешения"</string>
+    <string name="cache_header_label">"Кэш"</string>
+    <string name="clear_cache_btn_text">"Очистить кэш"</string>
+    <string name="cache_size_label">"Кэш"</string>
+    <!-- no translation found for controls_label (7611113077086853799) -->
+    <skip />
+    <!-- no translation found for force_stop (7435006169872876756) -->
+    <skip />
     <string name="total_size_label">"Всего"</string>
     <string name="application_size_label">"Приложение"</string>
     <string name="data_size_label">"Данные"</string>
@@ -614,6 +586,10 @@
     <string name="sort_order_alpha">"Сортировать"</string>
     <string name="sort_order_size">"Сортировать по размеру"</string>
     <string name="manage_space_text">"Управление памятью"</string>
+    <!-- no translation found for filter (2018011724373033887) -->
+    <skip />
+    <!-- no translation found for filter_dlg_title (6507663329723966854) -->
+    <skip />
     <string name="filter_apps_all">"Все"</string>
     <string name="filter_apps_third_party">"Сторонние"</string>
     <string name="filter_apps_running">"Выполняемые"</string>
@@ -627,22 +603,24 @@
     <string name="app_not_found_dlg_text">"Приложение не найдено в списке установленных приложений."</string>
     <string name="clear_data_failed">"Не удается очистить данные приложения."</string>
     <string name="security_settings_desc">"Это приложение имеет доступ к следующему на телефоне:"</string>
-    <string name="computing_size">"Идет расчет…"</string>
+    <!-- no translation found for computing_size (1599186977475211186) -->
+    <skip />
     <string name="invalid_size_value">"Невозможно вычислить размер пакета"</string>
     <string name="empty_list_msg">"У вас не установлено приложений сторонних разработчиков."</string>
-    <string name="cache_header_label">"Кэш"</string>
-    <string name="clear_cache_btn_text">"Очистить кэш"</string>
-    <string name="cache_size_label">"Кэш"</string>
     <string name="language_settings">"Локаль и текст"</string>
     <string name="language_settings_summary">"Выбор локали (языка и региона), параметров ввода текста и автоисправлений"</string>
     <string name="language_category">"Настройки локали"</string>
     <string name="text_category">"Настройки текста"</string>
     <string name="phone_language">"Выбрать локаль"</string>
+    <!-- no translation found for phone_language_summary (1809580675831352352) -->
+    <skip />
     <string name="auto_replace">"Автозамена"</string>
     <string name="auto_replace_summary">"Исправлять слова с опечатками"</string>
     <string name="auto_caps">"Автоматически заменять заглавной буквой"</string>
     <string name="auto_caps_summary">"Большие буквы в начале предложений"</string>
     <string name="auto_punctuate">"Автоматическая пунктуация"</string>
+    <!-- no translation found for hardkeyboard_category (5957168411305769899) -->
+    <skip />
     <string name="auto_punctuate_summary">"Чтобы вставить символ \".\", дважды нажмите пробел."</string>
     <string name="show_password">"Показывать пароли"</string>
     <string name="show_password_summary">"Показывать пароль при вводе"</string>
@@ -690,4 +668,68 @@
     <string name="keep_screen_on_summary">"При зарядке экран не отключается"</string>
     <string name="allow_mock_location">"Разрешить фиктивные местоположения"</string>
     <string name="allow_mock_location_summary">"Разрешить фиктивные местоположения"</string>
+    <!-- no translation found for battery_history_known_apps (6907374478255786240) -->
+    <skip />
+    <!-- no translation found for gadget_picker_title (4335873961457985189) -->
+    <skip />
+    <!-- no translation found for battery_history_details_for (5189636461798594740) -->
+    <skip />
+    <!-- no translation found for battery_history_uid (1016606150528436298) -->
+    <skip />
+    <!-- no translation found for battery_history_network_usage (8010852371665217020) -->
+    <skip />
+    <!-- no translation found for battery_history_bytes_received (980307569180518302) -->
+    <skip />
+    <!-- no translation found for battery_history_bytes_sent (2501748768602119159) -->
+    <skip />
+    <!-- no translation found for battery_history_bytes_total (4444807574361642753) -->
+    <skip />
+    <!-- no translation found for battery_history_cpu_usage (2597353713014790877) -->
+    <skip />
+    <!-- no translation found for battery_history_user_time (6227507614894791359) -->
+    <skip />
+    <!-- no translation found for battery_history_system_time (2015862072724507547) -->
+    <skip />
+    <!-- no translation found for battery_history_total_time (3618703970098556104) -->
+    <skip />
+    <!-- no translation found for battery_history_starts (9137453931978571696) -->
+    <skip />
+    <!-- no translation found for battery_history_days (6387593985264923377) -->
+    <skip />
+    <!-- no translation found for battery_history_hours (2593055276272350197) -->
+    <skip />
+    <!-- no translation found for battery_history_minutes (5608990219891318138) -->
+    <skip />
+    <!-- no translation found for battery_history_seconds (7397664460929461350) -->
+    <skip />
+    <!-- no translation found for battery_history_packages_sharing_this_uid (4101596071379250050) -->
+    <skip />
+    <!-- no translation found for battery_history_no_data (1177238743237067617) -->
+    <skip />
+    <!-- no translation found for battery_history_sensor (2333488996028993982) -->
+    <skip />
+    <!-- no translation found for battery_history_used_by_packages (3000711380023436470) -->
+    <skip />
+    <!-- no translation found for battery_history_sensor_usage (3593133338613209024) -->
+    <skip />
+    <!-- no translation found for battery_history_sensor_usage_multi (4536084375991014508) -->
+    <skip />
+    <!-- no translation found for battery_history_screen_on (1377240025275657277) -->
+    <skip />
+    <!-- no translation found for battery_history_screen_on_battery (536058210445081888) -->
+    <skip />
+    <!-- no translation found for battery_history_screen_on_plugged (5019127390021871260) -->
+    <skip />
+    <!-- no translation found for usage_stats_label (5890846333487083609) -->
+    <skip />
+    <!-- no translation found for testing_usage_stats (7823048598893937339) -->
+    <skip />
+    <!-- no translation found for display_order_text (8592776965827565271) -->
+    <skip />
+    <!-- no translation found for app_name_label (2000949925256858308) -->
+    <skip />
+    <!-- no translation found for launch_count_label (4019444833263957024) -->
+    <skip />
+    <!-- no translation found for usage_time_label (295954901452833058) -->
+    <skip />
 </resources>

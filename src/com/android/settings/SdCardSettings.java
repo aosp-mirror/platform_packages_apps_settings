@@ -60,6 +60,9 @@ public class SdCardSettings extends Activity
         Button unmountButton = (Button)findViewById(R.id.sdcard_unmount);
         unmountButton.setOnClickListener(mUnmountButtonHandler);
 
+        Button formatButton = (Button)findViewById(R.id.sdcard_format);
+        formatButton.setOnClickListener(mFormatButtonHandler);
+
         mTotalSize = (TextView)findViewById(R.id.total);
         mUsedSize = (TextView)findViewById(R.id.used);
         mAvailableSize = (TextView)findViewById(R.id.available);
@@ -69,6 +72,8 @@ public class SdCardSettings extends Activity
         intentFilter.addAction(Intent.ACTION_MEDIA_UNMOUNTED);
         intentFilter.addAction(Intent.ACTION_MEDIA_MOUNTED);
         intentFilter.addAction(Intent.ACTION_MEDIA_SHARED);
+        intentFilter.addAction(Intent.ACTION_MEDIA_CHECKING);
+        intentFilter.addAction(Intent.ACTION_MEDIA_NOFS);
         intentFilter.addAction(Intent.ACTION_MEDIA_BAD_REMOVAL);
         intentFilter.addAction(Intent.ACTION_MEDIA_SCANNER_STARTED);
         intentFilter.addAction(Intent.ACTION_MEDIA_SCANNER_FINISHED);
@@ -193,6 +198,15 @@ public class SdCardSettings extends Activity
         public void onClick(View v) {
             try {
                 mMountService.unmountMedia(Environment.getExternalStorageDirectory().toString());
+            } catch (RemoteException ex) {
+            }
+        }
+    };
+
+    OnClickListener mFormatButtonHandler = new OnClickListener() {
+        public void onClick(View v) {
+            try {
+                mMountService.formatMedia(Environment.getExternalStorageDirectory().toString());
             } catch (RemoteException ex) {
             }
         }

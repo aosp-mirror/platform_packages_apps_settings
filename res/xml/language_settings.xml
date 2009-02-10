@@ -15,24 +15,17 @@
 -->
 
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:settings="http://schemas.android.com/apk/res/com.android.settings">
-    
-    <PreferenceCategory
-            android:key="language_category"
-            android:title="@string/language_category">
-     <!--
-        <ListPreference
-            android:title="@string/phone_language"/>
-      --> 
-            
-        <PreferenceScreen
-                android:title="@string/phone_language">
-            <intent android:action="android.intent.action.MAIN"
-                    android:targetPackage="com.android.settings"
-                    android:targetClass="com.android.settings.LocalePicker"/>
-        </PreferenceScreen>
-    </PreferenceCategory>
-    
+        xmlns:settings="http://schemas.android.com/apk/res/com.android.settings"
+        android:title="@string/language_settings">
+
+    <PreferenceScreen
+            android:title="@string/phone_language"
+            android:summary="@string/phone_language_summary">
+        <intent android:action="android.intent.action.MAIN"
+                android:targetPackage="com.android.settings"
+                android:targetClass="com.android.settings.LocalePicker"/>
+    </PreferenceScreen>
+
     <PreferenceCategory
             android:title="@string/text_category" />
     <PreferenceScreen 
@@ -49,22 +42,26 @@
                 android:targetPackage="com.android.settings"
                 android:targetClass="com.android.settings.UserDictionarySettings" />
     </PreferenceScreen>
-    <CheckBoxPreference
-            android:key="auto_replace"
-            android:title="@string/auto_replace"
-            android:summaryOn="@string/auto_replace_summary"
-            android:summaryOff="@string/auto_replace_summary"
-            android:persistent="false"/>
-    <CheckBoxPreference
-            android:key="auto_caps"
-            android:title="@string/auto_caps"
-            android:summaryOn="@string/auto_caps_summary"
-            android:summaryOff="@string/auto_caps_summary"
-            android:persistent="false"/>
-    <CheckBoxPreference
-            android:key="auto_punctuate"
-            android:title="@string/auto_punctuate"
-            android:summaryOn="@string/auto_punctuate_summary"
-            android:summaryOff="@string/auto_punctuate_summary"
-            android:persistent="false"/>
+    <PreferenceCategory
+            android:key="hardkeyboard_category"
+            android:title="@string/hardkeyboard_category">
+        <CheckBoxPreference
+                android:key="auto_replace"
+                android:title="@string/auto_replace"
+                android:summaryOn="@string/auto_replace_summary"
+                android:summaryOff="@string/auto_replace_summary"
+                android:persistent="false"/>
+        <CheckBoxPreference
+                android:key="auto_caps"
+                android:title="@string/auto_caps"
+                android:summaryOn="@string/auto_caps_summary"
+                android:summaryOff="@string/auto_caps_summary"
+                android:persistent="false"/>
+        <CheckBoxPreference
+                android:key="auto_punctuate"
+                android:title="@string/auto_punctuate"
+                android:summaryOn="@string/auto_punctuate_summary"
+                android:summaryOff="@string/auto_punctuate_summary"
+                android:persistent="false"/>
+    </PreferenceCategory>
 </PreferenceScreen>

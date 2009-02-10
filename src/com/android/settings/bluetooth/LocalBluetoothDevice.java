@@ -60,8 +60,6 @@ public class LocalBluetoothDevice implements Comparable<LocalBluetoothDevice> {
     
     private boolean mVisible;
     
-    private int mBondState;
-    
     private final LocalBluetoothManager mLocalManager;
     
     private List<Callback> mCallbacks = new ArrayList<Callback>();
@@ -144,6 +142,9 @@ public class LocalBluetoothDevice implements Comparable<LocalBluetoothDevice> {
     public void connect() {
         if (!ensurePaired()) return;
         
+        // Reset the only-show-one-error-dialog tracking variable
+        mIsConnectingErrorPossible = true;
+
         Context context = mLocalManager.getContext();
         boolean hasAtLeastOnePreferredProfile = false;
         for (Profile profile : mProfiles) {
@@ -151,7 +152,7 @@ public class LocalBluetoothDevice implements Comparable<LocalBluetoothDevice> {
                     LocalBluetoothProfileManager.getProfileManager(mLocalManager, profile);
             if (profileManager.isPreferred(mAddress)) {
                 hasAtLeastOnePreferredProfile = true;
-                connect(profile);
+                connectInt(profile);
             }
         }
         
@@ -163,23 +164,31 @@ public class LocalBluetoothDevice implements Comparable<LocalBluetoothDevice> {
     private void connectAndPreferAllProfiles() {
         if (!ensurePaired()) return;
         
+        // Reset the only-show-one-error-dialog tracking variable
+        mIsConnectingErrorPossible = true;
+        
         Context context = mLocalManager.getContext();
         for (Profile profile : mProfiles) {
             LocalBluetoothProfileManager profileManager =
                     LocalBluetoothProfileManager.getProfileManager(mLocalManager, profile);
             profileManager.setPreferred(mAddress, true);
-            connect(profile);
+            connectInt(profile);
         }
     }
     
     public void connect(Profile profile) {
+        // Reset the only-show-one-error-dialog tracking variable
+        mIsConnectingErrorPossible = true;
+        connectInt(profile);
+    }
+    
+    public void connectInt(Profile profile) {
         if (!ensurePaired()) return;
         
         LocalBluetoothProfileManager profileManager =
                 LocalBluetoothProfileManager.getProfileManager(mLocalManager, profile); 
         int status = profileManager.getConnectionStatus(mAddress);
         if (!SettingsBtStatus.isConnectionStatusConnected(status)) {
-            mIsConnectingErrorPossible = true;
             if (profileManager.connect(mAddress) != BluetoothDevice.RESULT_SUCCESS) {
                 showConnectingError();
             }
@@ -211,9 +220,9 @@ public class LocalBluetoothDevice implements Comparable<LocalBluetoothDevice> {
             manager.cancelDiscovery();
         }
 
-        if (mLocalManager.createBonding(mAddress)) {
-            //TODO: consider removing this line - UI will update through Intent
-            setBondState(BluetoothDevice.BOND_BONDING);
+        if (!mLocalManager.getBluetoothManager().createBond(mAddress)) {
+            mLocalManager.showError(mAddress, R.string.bluetooth_error_title,
+                    R.string.bluetooth_pairing_error_message);
         }
     }
 
@@ -235,11 +244,7 @@ public class LocalBluetoothDevice implements Comparable<LocalBluetoothDevice> {
         BluetoothDevice manager = mLocalManager.getBluetoothManager();
 
         fetchName();
-        mBtClass = manager.getRemoteClass(mAddress);
-
-        LocalBluetoothProfileManager.fill(mBtClass, mProfiles);
-
-        mBondState = manager.getBondState(mAddress);
+        fetchBtClass();
 
         mVisible = false;
 
@@ -283,14 +288,7 @@ public class LocalBluetoothDevice implements Comparable<LocalBluetoothDevice> {
     }
 
     public int getBondState() {
-        return mBondState;
-    }
-
-    void setBondState(int bondState) {
-        if (mBondState != bondState) {
-            mBondState = bondState;
-            dispatchAttributesChanged();
-        }
+        return mLocalManager.getBluetoothManager().getBondState(mAddress);
     }
 
     void setRssi(short rssi) {
@@ -355,6 +353,24 @@ public class LocalBluetoothDevice implements Comparable<LocalBluetoothDevice> {
         }
     }
 
+    /**
+     * Fetches a new value for the cached BT class.
+     */
+    private void fetchBtClass() {
+        mBtClass = mLocalManager.getBluetoothManager().getRemoteClass(mAddress);
+        mProfiles.clear();
+        LocalBluetoothProfileManager.fill(mBtClass, mProfiles);
+    }
+
+    /**
+     * Refreshes the UI for the BT class, including fetching the latest value
+     * for the class.
+     */
+    public void refreshBtClass() {
+        fetchBtClass();
+        dispatchAttributesChanged();
+    }
+    
     public int getSummary() {
         // TODO: clean up
         int oneOffSummary = getOneOffSummary();
@@ -425,17 +441,15 @@ public class LocalBluetoothDevice implements Comparable<LocalBluetoothDevice> {
         // No context menu if it is busy (none of these items are applicable if busy)
         if (isBusy()) return;
         
-        // No context menu if there are no profiles
-        if (mProfiles.size() == 0) return;
-        
         int bondState = getBondState();
         boolean isConnected = isConnected();
+        boolean hasProfiles = mProfiles.size() > 0;
         
         menu.setHeaderTitle(getName());
         
         if (isConnected) {
             menu.add(0, CONTEXT_ITEM_DISCONNECT, 0, R.string.bluetooth_device_context_disconnect);
-        } else {
+        } else if (hasProfiles) {
             // For connection action, show either "Connect" or "Pair & connect"
             int connectString = (bondState == BluetoothDevice.BOND_NOT_BONDED)
                     ? R.string.bluetooth_device_context_pair_connect
@@ -538,8 +552,8 @@ public class LocalBluetoothDevice implements Comparable<LocalBluetoothDevice> {
         if (comparison != 0) return comparison;
         
         // Paired above not paired
-        comparison = (another.mBondState == BluetoothDevice.BOND_BONDED ? 1 : 0) -
-            (mBondState == BluetoothDevice.BOND_BONDED ? 1 : 0);
+        comparison = (another.getBondState() == BluetoothDevice.BOND_BONDED ? 1 : 0) -
+            (getBondState() == BluetoothDevice.BOND_BONDED ? 1 : 0);
         if (comparison != 0) return comparison;
 
         // Visible above not visible

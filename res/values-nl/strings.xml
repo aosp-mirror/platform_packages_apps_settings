@@ -16,9 +16,6 @@
 <resources xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
     <string name="device_info_default">"Onbekend"</string>
-    <string name="device_info_uptime">"Bedrijfstijd"</string>
-    <string name="device_info_awaketime">"Stand-bytijd"</string>
-    <string name="device_info_asleeptime">"Slaaptijd"</string>
     <string name="turn_on_radio">"Radio inschakelen"</string>
     <string name="turn_off_radio">"Radio uitschakelen"</string>
     <string name="turn_on_qxdm">"QXDM SD-logboek inschakelen"</string>
@@ -52,14 +49,13 @@
     <string name="radioInfo_lac">"LAC"</string>
     <string name="radioInfo_cid">"CID"</string>
     <string name="sdcard_unmount">"SD-kaart ontkoppelen"</string>
+    <!-- no translation found for sdcard_format (362497552060004057) -->
+    <skip />
     <string name="small_font">"Klein"</string>
     <string name="medium_font">"Gemiddeld"</string>
     <string name="large_font">"Groot"</string>
     <string name="font_size_save">"OK"</string>
     <string name="sdcard_setting">"SD-kaart"</string>
-    <string name="screen_off_timeout_label">"Nooit time-out tijdens opladen"</string>
-    <string name="stay_on">"Scherm altijd aan tijdens het opladen"</string>
-    <string name="app_launcher_newView_text">"Nieuwe AppLauncher"</string>
     <string name="battery_info_status_label">"Accustatus:"</string>
     <string name="battery_info_scale_label">"Accuschaal:"</string>
     <string name="battery_info_level_label">"Accuniveau:"</string>
@@ -87,11 +83,6 @@
     <string name="battery_info_health_over_voltage">"Overspanning"</string>
     <string name="battery_info_health_unspecified_failure">"Onbekende fout"</string>
     <string name="bluetooth">"Bluetooth"</string>
-    <string name="bluetooth_stopping">"Bluetooth wordt gestopt..."</string>
-    <string name="bluetooth_disabled">"Bluetooth inschakelen"</string>
-    <!-- no translation found for bluetooth_enabled (314506563815464155) -->
-    <skip />
-    <string name="bluetooth_enabling">"Bluetooth inschakelen…"</string>
     <string name="bluetooth_visibility">"Kan worden gevonden"</string>
     <string name="bluetooth_is_discoverable">"Kan gedurende <xliff:g id="DISCOVERABLE_TIME_PERIOD">%1$s</xliff:g> seconden worden gevonden…"</string>
     <string name="bluetooth_not_discoverable">"Zorgen dat het apparaat kan worden gevonden"</string>
@@ -99,7 +90,6 @@
     <string name="bluetooth_device_name">"Apparaatnaam"</string>
     <string name="bluetooth_name_not_set">"Geen naam ingesteld, accountnaam wordt gebruikt"</string>
     <string name="bluetooth_scan_for_devices">"Scannen naar apparaten"</string>
-    <string name="bluetooth_clear_list">"Apparaatlijst wissen"</string>
     <string name="bluetooth_disconnect_blank">"Verbinding met <xliff:g id="DEVICE_NAME">%1$s</xliff:g> wordt verbroken."</string>
     <string name="bluetooth_connected">"Verbonden"</string>
     <string name="bluetooth_disconnected">"Verbinding verbroken"</string>
@@ -108,17 +98,9 @@
     <!-- no translation found for bluetooth_unknown (644716244548801421) -->
     <skip />
     <string name="bluetooth_not_connected">"Koppelen met dit apparaat"</string>
-    <string name="bluetooth_failed_to_enable">"Kan Bluetooth niet inschakelen"</string>
     <string name="bluetooth_pairing">"Koppelen..."</string>
-    <string name="failed_to_pair">"Kan niet koppelen met <xliff:g id="DEVICE_NAME">%1$s</xliff:g>."</string>
-    <string name="failed_to_connect">"Kan geen verbinding maken met <xliff:g id="DEVICE_NAME">%1$s</xliff:g>."</string>
     <string name="bluetooth_paired">"Gekoppeld"</string>
-    <string name="bluetooth_paired_not_nearby">"Gekoppeld"</string>
     <string name="bluetooth_device">"handsfree/headset"</string>
-    <string name="bluetooth_disconnect">"Verbinding verbreken"</string>
-    <string name="bluetooth_connect">"Verbinden"</string>
-    <string name="bluetooth_unpair">"Koppeling ongedaan maken"</string>
-    <string name="bluetooth_pair">"Koppelen"</string>
     <string name="progress_scanning">"Scannen"</string>
     <string name="bluetooth_notif_ticker">"Bluetooth-koppelingsverzoek"</string>
     <string name="bluetooth_notif_title">"Koppelingsverzoek"</string>
@@ -136,16 +118,6 @@
     <string name="intent_sender_startactivity_text">"<xliff:g id="ACTIVITY">activity</xliff:g> starten"</string>
     <string name="intent_sender_resource_label">"<xliff:g id="RESOURCE">Resource</xliff:g>:"</string>
     <string name="intent_sender_account_label">"Account:"</string>
-    <string name="keyguard_pw_mod_text">"Blokkeringspatroon selecteren"</string>
-    <string name="keyguard_pin_mod_text">"PIN-code wijzigen"</string>
-    <string name="keyguard_label">"Toetsblokkering"</string>
-    <string name="keyguard_sim_pin_label">"SIM PIN-code"</string>
-    <string name="keyguard_password_old_password_error_text">"Het oude wachtwoord dat u heeft ingevoerd, is onjuist. Probeer het opnieuw."</string>
-    <string name="keyguard_password_button_text">"OK"</string>
-    <string name="keyguard_password_confirm_new_label">"Nieuw wachtwoord bevestigen:"</string>
-    <string name="keyguard_password_new_label">"Nieuw wachtwoord:"</string>
-    <string name="keyguard_password_old_label">"Oud wachtwoord:"</string>
-    <string name="keyguard_password_mismatch_error_text">"De twee wachtwoorden komen niet overeen. Probeer het opnieuw."</string>
     <string name="proxy_clear_text">"Wissen"</string>
     <string name="proxy_port_label">"Poort"</string>
     <string name="proxy_defaultView_text">"Standaardwaarden herstellen"</string>
@@ -188,15 +160,13 @@
     <string name="radio_info_smsc_label">"SMSC:"</string>
     <string name="radio_info_smsc_update_label">"Bijwerken"</string>
     <string name="radio_info_smsc_refresh_label">"Vernieuwen"</string>
+    <!-- no translation found for radio_info_toggle_dns_check_label (8292252930563286858) -->
+    <skip />
     <string name="band_mode_title">"GSM/UMTS-band instellen"</string>
     <string name="band_mode_loading">"Bandlijst laden..."</string>
     <string name="band_mode_set">"Instellen"</string>
     <string name="band_mode_failed">"Mislukt"</string>
     <string name="band_mode_succeeded">"Geslaagd"</string>
-    <string name="ringer_volume_ringer_mode_label">"Beltoonmodus"</string>
-    <string name="ringer_volume_screen_increasing_text">"Belvolume verhogen"</string>
-    <string name="ringer_volume_ringtone_label">"Beltoon"</string>
-    <string name="ringer_volume_instructions">"Volumetoetsen gebruiken voor aanpassing belvolume"</string>
     <string name="sdcard_changes_instructions">"Wijzigingen worden van kracht als de USB-kabel opnieuw wordt aangesloten"</string>
     <string name="sdcard_settings_screen_mass_storage_text">"USB-massaopslag inschakelen"</string>
     <string name="sdcard_settings_total_bytes_label">"Totaal aantal bytes:"</string>
@@ -208,20 +178,6 @@
     <string name="sdcard_settings_used_bytes_label">"Gebruikte bytes:"</string>
     <string name="sdcard_settings_scanning_status">"SD-kaart scannen op media..."</string>
     <string name="sdcard_settings_read_only_status">"Gekoppelde SD-kaart alleen-lezen"</string>
-    <string name="sdcard_removal_alert_title">"Verwijdering onveilige SD-kaart!"</string>
-    <string name="sdcard_unmountable_alert_title">"SD-kaart onleesbaar"</string>
-    <string name="telephony_user_label">"Gebruiker:"</string>
-    <string name="telephony_server_label">"Server:"</string>
-    <string name="telephony_name_label">"Naam:"</string>
-    <string name="telephony_mmsc_label">"MMSC:"</string>
-    <string name="telephony_apn_label">"APN:"</string>
-    <string name="telephony_mcc_label">"MCC:"</string>
-    <string name="telephony_port_label">"Poort:"</string>
-    <string name="telephony_password_label">"Wachtwoord:"</string>
-    <string name="telephony_proxy_label">"Proxy:"</string>
-    <string name="telephony_mnc_label">"MNC:"</string>
-    <string name="telephony_mmsproxy_label">"MMS-proxy:"</string>
-    <string name="telephony_mmsport_label">"MMS-poort:"</string>
     <string name="next_label">"Volgende"</string>
     <string name="language_picker_title">"Landinstelling"</string>
     <string name="select_your_language">"Uw taal selecteren"</string>
@@ -264,23 +220,12 @@
     <string name="bluetooth_settings_summary">"Verbindingen beheren, apparaatnaam en vindbaarheid instellen"</string>
     <string name="bluetooth_pin_entry">"Bluetooth-koppelingsverzoek"</string>
     <string name="bluetooth_device_info">"Bluetooth-apparaatinfo"</string>
-    <string name="bluetooth_pairing_msg">"Koppelen..."</string>
     <string name="bluetooth_enter_pin_msg">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g>"\n\n"Typ de PIN-code om te koppelen."\n"(Probeer 0000 of 1234.)"</string>
     <string name="bluetooth_error_title">"Let op"</string>
     <string name="bluetooth_pairing_error_message">"Er is een probleem opgetreden bij het koppelen met <xliff:g id="DEVICE_NAME">%1$s</xliff:g>."</string>
-    <string name="bluetooth_pairing_alternate_error_message">"Er is een probleem opgetreden bij het koppelen met <xliff:g id="DEVICE_NAME">%1$s</xliff:g>. Probeer een andere PIN-code."</string>
     <string name="bluetooth_pairing_pin_error_message">"Er is een probleem opgetreden bij het koppelen met <xliff:g id="DEVICE_NAME">%1$s</xliff:g>, omdat de opgegeven PIN-code onjuist is."</string>
     <string name="bluetooth_connecting_error_message">"Er is een probleem opgetreden bij het verbinden met <xliff:g id="DEVICE_NAME">%1$s</xliff:g>."</string>
-    <string name="bluetooth_new_data">"Nieuwe gegevens invoeren"</string>
-    <string name="bluetooth_new_data_confirm">"OK"</string>
-    <string name="bluetooth_new_data_cancel">"Annuleren"</string>
-    <string name="bluetooth_scan_for_new_devices">"Scannen naar nieuwe apparaten..."</string>
-    <string name="bluetooth_discoverability_panel_title">"Maken..."</string>
-    <string name="bluetooth_discoverable">"Kan gedurende <xliff:g id="DISCOVERABLE_TIME_PERIOD">%1$s</xliff:g> seconden worden gevonden"</string>
-    <string name="bluetooth_connectable">"Alleen voor verbinding"</string>
-    <string name="bluetooth_neither">"Kan niet worden gevonden of verbonden"</string>
     <string name="bluetooth_preference_scan_title">"Scannen naar apparaten"</string>
-    <string name="bluetooth_preference_scan_summary">"Apparaten zoeken om mee te koppelen"</string>
     <string name="bluetooth_device_context_connect">"Verbinden"</string>
     <string name="bluetooth_device_context_disconnect">"Verbinding verbreken"</string>
     <string name="bluetooth_device_context_pair_connect">"Koppelen en verbinden"</string>
@@ -420,32 +365,24 @@
     <string name="sound_effects_enable_title">"Hoorbare selectie"</string>
     <string name="sound_effects_enable_summary_on">"Geluid afspelen bij schermselectie"</string>
     <string name="sound_effects_enable_summary_off">"Geluid afspelen bij schermselectie"</string>
+    <!-- no translation found for play_media_notification_sounds_enable_title (1008791464029179529) -->
+    <skip />
+    <!-- no translation found for play_media_notification_sounds_enable_summary_on (426729807044947187) -->
+    <skip />
+    <!-- no translation found for play_media_notification_sounds_enable_summary_off (803791141563778934) -->
+    <skip />
     <string name="sync_settings">"Gegevenssynchronisatie"</string>
     <string name="sync_settings_summary">"Selecteren welke toepassingen worden gesynchroniseerd"</string>
-    <string name="sync_settings_header_general_settings">"Algemene instellingen voor synchronisatie"</string>
-    <string name="sync_settings_header_application_settings">"Synchronatie-instellingen van de toepassing"</string>
-    <string name="sync_too_many_deletes">"Verwijderingslimiet overschreden"</string>
-    <string name="sync_automatically">"Automatische synchronisatie"</string>
-    <string name="sync_enabled">"Gegevens automatisch synchroniseren"</string>
-    <string name="sync_disabled">"Selecteer dit om gegevens automatisch te synchroniseren"</string>
-    <string name="sync_menu_sync_now">"Nu synchroniseren"</string>
-    <string name="sync_menu_sync_cancel">"Synchronisatie annuleren"</string>
-    <string name="sync_gmail">"Gmail"</string>
-    <string name="sync_calendar">"Agenda"</string>
-    <string name="sync_contacts">"Contactpersonen"</string>
-    <string name="sync_too_many_deletes_desc">"Er zijn <xliff:g id="NUMBER_OF_DELETED_ITEMS">%1$d</xliff:g> verwijderde items voor <xliff:g id="TYPE_OF_SYNC">%2$s</xliff:g>, account <xliff:g id="ACCOUNT_NAME">%3$s</xliff:g>. Wat wilt u doen?"</string>
-    <string name="sync_really_delete">"De items verwijderen."</string>
-    <string name="sync_undo_deletes">"Verwijderingen ongedaan maken."</string>
-    <string name="sync_do_nothing">"Nu niets doen."</string>
-    <string name="sync_is_failing">"Er zijn momenteel problemen met de synchronisatie. Synchronisatie wordt snel opnieuw uitgevoerd."</string>
-    <string name="sync_plug"><font fgcolor="#ffffffff">"Welkom bij Google Sync!"</font>" "\n"Een benadering van Google voor de synchronisatie van gegevens, zodat u altijd en overal toegang heeft tot uw contactpersonen, afspraken en nog veel meer."</string>
     <string name="display_settings">"Instellingen weergeven"</string>
     <string name="animations_title">"Animatie"</string>
     <string name="animations_summary_on">"Animatie weergeven bij het openen/sluiten van vensters"</string>
     <string name="animations_summary_off">"Animatie weergeven bij het openen/sluiten van vensters"</string>
     <string name="brightness">"Helderheid"</string>
+    <!-- no translation found for brightness_summary (838917350127550703) -->
+    <skip />
     <string name="screen_timeout">"Time-out scherm"</string>
-    <string name="dim_screen">"Scherm dimmen"</string>
+    <!-- no translation found for screen_timeout_summary (2905757633140605334) -->
+    <skip />
     <string name="sim_lock_settings">"Instellingen SIM-kaartblokkering"</string>
     <string name="sim_lock_settings_category">"SIM-kaartblokkering instellen"</string>
     <string name="sim_lock_settings_title">"SIM-kaartblokkering"</string>
@@ -493,13 +430,24 @@
     <string name="status_wifi_mac_address">"Wi-Fi MAC-adres"</string>
     <string name="status_bt_address">"Bluetooth-adres"</string>
     <string name="status_unavailable">"Niet beschikbaar"</string>
+    <!-- no translation found for status_network_traffic_stats (2089739529980224804) -->
+    <skip />
+    <!-- no translation found for status_network_traffic_summary (1456797220417923108) -->
+    <skip />
     <string name="status_up_time">"Bedrijfstijd"</string>
     <string name="status_awake_time">"Stand-bytijd"</string>
     <string name="internal_memory">"Intern telefoongeheugen"</string>
     <string name="sd_memory">"SD-kaart"</string>
     <string name="memory_available">"Beschikbare ruimte"</string>
     <string name="memory_size">"Totale ruimte"</string>
-    <string name="sd_eject">"SD-kaart loskoppelen/verwijderen"</string>
+    <!-- no translation found for sd_eject (6915293408836853020) -->
+    <skip />
+    <!-- no translation found for sd_eject_summary (3315557796211542962) -->
+    <skip />
+    <!-- no translation found for sd_format (5448738337382712203) -->
+    <skip />
+    <!-- no translation found for sd_format_summary (6616491027883134004) -->
+    <skip />
     <string name="sd_unavailable">"Niet beschikbaar"</string>
     <string name="read_only">"(Alleen-lezen)"</string>
     <string name="battery_status_title">"Accustatus"</string>
@@ -538,6 +486,22 @@
     <string name="master_clear_gesture_prompt">"Teken uw deblokkeringspatroon"</string>
     <string name="master_clear_gesture_explanation">"U moet uw deblokkeringspatroon tekenen om het opnieuw instellen van de telefoon te bevestigen."</string>
     <string name="master_clear_failed">"Niet opnieuw ingesteld, omdat de service \'Systeem wissen\' niet beschikbaar is."</string>
+    <!-- no translation found for media_format_title (4671276096695789895) -->
+    <skip />
+    <!-- no translation found for media_format_summary (3805714639375830120) -->
+    <skip />
+    <!-- no translation found for media_format_desc (1142563222357820834) -->
+    <skip />
+    <!-- no translation found for media_format_button_text (370856400090190151) -->
+    <skip />
+    <!-- no translation found for media_format_final_desc (1776666694910717198) -->
+    <skip />
+    <!-- no translation found for media_format_final_button_text (4881713344315923175) -->
+    <skip />
+    <!-- no translation found for media_format_gesture_prompt (3109349468816856670) -->
+    <skip />
+    <!-- no translation found for media_format_gesture_explanation (4239529439389660159) -->
+    <skip />
     <string name="call_settings_title">"Oproepinstellingen"</string>
     <string name="call_settings_summary">"Voicemail, oproepen doorschakelen, wisselgesprek, beller-id instellen."</string>
     <string name="network_settings_title">"Mobiele netwerken"</string>
@@ -591,17 +555,25 @@
     <string name="lock_example_title">"Voorbeeldpatroon"</string>
     <string name="lock_example_message">"Verbind minimaal vier punten. "\n" "\n"Selecteer \'Volgende\' als u klaar bent om uw eigen patroon te tekenen."</string>
     <string name="manageapplications_settings_title">"Toepassingen beheren"</string>
+    <!-- no translation found for manageapplications_settings_summary (6097117021500651232) -->
+    <skip />
     <string name="applications_settings">"Toepassingen"</string>
     <string name="applications_settings_summary">"Toepassingen beheren, sneltoetsen voor snelstarten instellen"</string>
     <string name="applications_settings_header">"Toepassingsinstellingen"</string>
     <string name="install_applications">"Onbekende bronnen"</string>
     <string name="install_unknown_applications">"Installatie van andere toepassingen dan Market-toepassingen toestaan"</string>
     <string name="install_all_warning">"Uw telefoon en persoonlijke gegevens zijn gevoeliger voor aanvallen door toepassingen van onbekende bronnen. U gaat ermee akkoord dat u alleen verantwoordelijk bent voor enige schade aan uw telefoon of verlies van gegevens die voortkomen uit het gebruik van deze toepassingen."</string>
-    <string name="manage_applications_title">"Toepassingen beheren"</string>
     <string name="application_info_label">"Toepassingsinfo"</string>
     <string name="storage_label">"Opslagruimte"</string>
     <string name="auto_launch_label">"Standaard starten"</string>
     <string name="permissions_label">"Machtigingen"</string>
+    <string name="cache_header_label">"Cachegeheugen"</string>
+    <string name="clear_cache_btn_text">"Cache wissen"</string>
+    <string name="cache_size_label">"Cachegeheugen"</string>
+    <!-- no translation found for controls_label (7611113077086853799) -->
+    <skip />
+    <!-- no translation found for force_stop (7435006169872876756) -->
+    <skip />
     <string name="total_size_label">"Totaal"</string>
     <string name="application_size_label">"Toepassing"</string>
     <string name="data_size_label">"Gegevens"</string>
@@ -614,6 +586,10 @@
     <string name="sort_order_alpha">"Sorteren"</string>
     <string name="sort_order_size">"Sorteren op grootte"</string>
     <string name="manage_space_text">"Ruimte beheren"</string>
+    <!-- no translation found for filter (2018011724373033887) -->
+    <skip />
+    <!-- no translation found for filter_dlg_title (6507663329723966854) -->
+    <skip />
     <string name="filter_apps_all">"Alles"</string>
     <string name="filter_apps_third_party">"Derden"</string>
     <string name="filter_apps_running">"Wordt uitgevoerd"</string>
@@ -627,22 +603,24 @@
     <string name="app_not_found_dlg_text">"De toepassing is niet gevonden in de lijst met geïnstalleerde toepassingen."</string>
     <string name="clear_data_failed">"Kan toepassingsgegevens niet wissen."</string>
     <string name="security_settings_desc">"Deze toepassing heeft toegang tot de volgende opties van uw telefoon:"</string>
-    <string name="computing_size">"Bezig met berekenen..."</string>
+    <!-- no translation found for computing_size (1599186977475211186) -->
+    <skip />
     <string name="invalid_size_value">"Kan grootte van pakket niet berekenen"</string>
     <string name="empty_list_msg">"U heeft geen toepassingen van derden geïnstalleerd."</string>
-    <string name="cache_header_label">"Cachegeheugen"</string>
-    <string name="clear_cache_btn_text">"Cache wissen"</string>
-    <string name="cache_size_label">"Cachegeheugen"</string>
     <string name="language_settings">"Landinstelling en tekst"</string>
     <string name="language_settings_summary">"Instellingen voor taal en regio, tekstinvoer en autocorrectieopties opgeven"</string>
     <string name="language_category">"Landinstelling"</string>
     <string name="text_category">"Tekstinstellingen"</string>
     <string name="phone_language">"Landinstelling selecteren"</string>
+    <!-- no translation found for phone_language_summary (1809580675831352352) -->
+    <skip />
     <string name="auto_replace">"Automatisch vervangen"</string>
     <string name="auto_replace_summary">"Corrigeer verkeerd getypte woorden"</string>
     <string name="auto_caps">"Automatische hoofdletters"</string>
     <string name="auto_caps_summary">"Eerste letters in zinnen met hoofdletter"</string>
     <string name="auto_punctuate">"Automatische interpunctie"</string>
+    <!-- no translation found for hardkeyboard_category (5957168411305769899) -->
+    <skip />
     <string name="auto_punctuate_summary">"Druk twee keer op de spatiebalk om \'.\' in te voegen"</string>
     <string name="show_password">"Zichtbare wachtwoorden"</string>
     <string name="show_password_summary">"Wachtwoord weergeven tijdens het typen"</string>
@@ -690,4 +668,68 @@
     <string name="keep_screen_on_summary">"Scherm gaat nooit uit tijdens het opladen"</string>
     <string name="allow_mock_location">"Neplocaties toestaan"</string>
     <string name="allow_mock_location_summary">"Neplocaties toestaan"</string>
+    <!-- no translation found for battery_history_known_apps (6907374478255786240) -->
+    <skip />
+    <!-- no translation found for gadget_picker_title (4335873961457985189) -->
+    <skip />
+    <!-- no translation found for battery_history_details_for (5189636461798594740) -->
+    <skip />
+    <!-- no translation found for battery_history_uid (1016606150528436298) -->
+    <skip />
+    <!-- no translation found for battery_history_network_usage (8010852371665217020) -->
+    <skip />
+    <!-- no translation found for battery_history_bytes_received (980307569180518302) -->
+    <skip />
+    <!-- no translation found for battery_history_bytes_sent (2501748768602119159) -->
+    <skip />
+    <!-- no translation found for battery_history_bytes_total (4444807574361642753) -->
+    <skip />
+    <!-- no translation found for battery_history_cpu_usage (2597353713014790877) -->
+    <skip />
+    <!-- no translation found for battery_history_user_time (6227507614894791359) -->
+    <skip />
+    <!-- no translation found for battery_history_system_time (2015862072724507547) -->
+    <skip />
+    <!-- no translation found for battery_history_total_time (3618703970098556104) -->
+    <skip />
+    <!-- no translation found for battery_history_starts (9137453931978571696) -->
+    <skip />
+    <!-- no translation found for battery_history_days (6387593985264923377) -->
+    <skip />
+    <!-- no translation found for battery_history_hours (2593055276272350197) -->
+    <skip />
+    <!-- no translation found for battery_history_minutes (5608990219891318138) -->
+    <skip />
+    <!-- no translation found for battery_history_seconds (7397664460929461350) -->
+    <skip />
+    <!-- no translation found for battery_history_packages_sharing_this_uid (4101596071379250050) -->
+    <skip />
+    <!-- no translation found for battery_history_no_data (1177238743237067617) -->
+    <skip />
+    <!-- no translation found for battery_history_sensor (2333488996028993982) -->
+    <skip />
+    <!-- no translation found for battery_history_used_by_packages (3000711380023436470) -->
+    <skip />
+    <!-- no translation found for battery_history_sensor_usage (3593133338613209024) -->
+    <skip />
+    <!-- no translation found for battery_history_sensor_usage_multi (4536084375991014508) -->
+    <skip />
+    <!-- no translation found for battery_history_screen_on (1377240025275657277) -->
+    <skip />
+    <!-- no translation found for battery_history_screen_on_battery (536058210445081888) -->
+    <skip />
+    <!-- no translation found for battery_history_screen_on_plugged (5019127390021871260) -->
+    <skip />
+    <!-- no translation found for usage_stats_label (5890846333487083609) -->
+    <skip />
+    <!-- no translation found for testing_usage_stats (7823048598893937339) -->
+    <skip />
+    <!-- no translation found for display_order_text (8592776965827565271) -->
+    <skip />
+    <!-- no translation found for app_name_label (2000949925256858308) -->
+    <skip />
+    <!-- no translation found for launch_count_label (4019444833263957024) -->
+    <skip />
+    <!-- no translation found for usage_time_label (295954901452833058) -->
+    <skip />
 </resources>

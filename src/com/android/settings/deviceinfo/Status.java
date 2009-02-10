@@ -30,6 +30,7 @@ import android.os.Handler;
 import android.os.Message;
 import android.os.SystemClock;
 import android.os.SystemProperties;
+import android.os.NetStat;
 import android.preference.Preference;
 import android.preference.PreferenceActivity;
 import android.telephony.PhoneStateListener;
@@ -64,10 +65,11 @@ public class Status extends PreferenceActivity {
 
     private static final String KEY_WIFI_MAC_ADDRESS = "wifi_mac_address";
     private static final String KEY_BT_ADDRESS = "bt_address";
+    private static final String KEY_NETWORK_TRAFFIC_STATS = "network_traffic_stats";
     private static final int EVENT_SIGNAL_STRENGTH_CHANGED = 200;
     private static final int EVENT_SERVICE_STATE_CHANGED = 300;
-    
-    private static final int EVENT_FIX_UPTIME = 500;
+
+    private static final int EVENT_UPDATE_STATS = 500;
 
     private TelephonyManager mTelephonyManager;
     private Phone mPhone = null;
@@ -108,9 +110,10 @@ public class Status extends PreferenceActivity {
                     status.updateServiceState(serviceState);
                     break;
 
-                case EVENT_FIX_UPTIME:
+                case EVENT_UPDATE_STATS:
                     status.updateTimes();
-                    sendMessageDelayed(obtainMessage(EVENT_FIX_UPTIME), 1000);
+                    status.setNetworkTrafficStats();
+                    sendEmptyMessageDelayed(EVENT_UPDATE_STATS, 1000);
                     break;
             }
         }
@@ -196,7 +199,7 @@ public class Status extends PreferenceActivity {
         
         setWifiStatus();
         setBtStatus();
-    }   
+    }
     
     @Override
     protected void onResume() {
@@ -212,7 +215,7 @@ public class Status extends PreferenceActivity {
         mTelephonyManager.listen(mPhoneStateListener,
                   PhoneStateListener.LISTEN_DATA_CONNECTION_STATE);
 
-        mHandler.sendMessageDelayed(mHandler.obtainMessage(EVENT_FIX_UPTIME), 0);
+        mHandler.sendEmptyMessage(EVENT_UPDATE_STATS);
     }
     
     @Override
@@ -222,7 +225,7 @@ public class Status extends PreferenceActivity {
         mPhoneStateReceiver.unregisterIntent();
         mTelephonyManager.listen(mPhoneStateListener, PhoneStateListener.LISTEN_NONE);
         unregisterReceiver(mBatteryInfoReceiver);
-        mHandler.removeMessages(EVENT_FIX_UPTIME);
+        mHandler.removeMessages(EVENT_UPDATE_STATS);
     }
 
     /**
@@ -347,6 +350,17 @@ public class Status extends PreferenceActivity {
             btAddressPref.setSummary(!TextUtils.isEmpty(address) ? address
                     : getString(R.string.status_unavailable));
         }
+    }
+
+    private void setNetworkTrafficStats() {
+        long txPkts = NetStat.getTotalTxPkts();
+        long txBytes = NetStat.getTotalTxBytes();
+        long rxPkts = NetStat.getTotalRxPkts();
+        long rxBytes = NetStat.getTotalRxBytes();
+
+        Preference netStatsPref = findPreference(KEY_NETWORK_TRAFFIC_STATS);
+        netStatsPref.setSummary(getString(R.string.status_network_traffic_summary,
+                txPkts, txBytes, rxPkts, rxBytes));
     }
 
     void updateTimes() {

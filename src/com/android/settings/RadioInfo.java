@@ -119,10 +119,12 @@ public class RadioInfo extends Activity {
     private TextView mPingHostname;
     private TextView mHttpClientTest;
     private TextView cipherState;
+    private TextView dnsCheckState;
     private EditText smsc;
     private Button radioPowerButton;
     private Button qxdmLogButton;
     private Button cipherToggleButton;
+    private Button dnsCheckToggleButton;
     private Button pingTestButton;
     private Button updateSmscButton;
     private Button refreshSmscButton;
@@ -428,6 +430,7 @@ public class RadioInfo extends Activity {
         received = (TextView) findViewById(R.id.received);
         cipherState = (TextView) findViewById(R.id.ciphState);
         smsc = (EditText) findViewById(R.id.smsc);
+        dnsCheckState = (TextView) findViewById(R.id.dnsCheckState);
 
         mPingIpAddr = (TextView) findViewById(R.id.pingIpAddr);
         mPingHostname = (TextView) findViewById(R.id.pingHostname);
@@ -454,6 +457,8 @@ public class RadioInfo extends Activity {
         updateSmscButton.setOnClickListener(mUpdateSmscButtonHandler);
         refreshSmscButton = (Button) findViewById(R.id.refresh_smsc);
         refreshSmscButton.setOnClickListener(mRefreshSmscButtonHandler);
+        dnsCheckToggleButton = (Button) findViewById(R.id.dns_check_toggle);
+        dnsCheckToggleButton.setOnClickListener(mDnsCheckButtonHandler);
         
         mPhoneStateReceiver = new PhoneStateIntentReceiver(this, mHandler);
         mPhoneStateReceiver.notifySignalStrength(EVENT_SIGNAL_STRENGTH_CHANGED);
@@ -490,6 +495,7 @@ public class RadioInfo extends Activity {
         updateQxdmState(null);
         updateProperties();
         updateCiphState();
+        updateDnsCheckState();
 
         Log.i(TAG, "[RadioInfo] onResume: register phone & data intents");
 
@@ -614,6 +620,12 @@ public class RadioInfo extends Activity {
         cipherState.setText(getCiphPref() ? "Ciphering ON" : "Ciphering OFF");
     }
 
+    private void updateDnsCheckState() {
+        GSMPhone gsmPhone = (GSMPhone) phone;
+        dnsCheckState.setText(gsmPhone.isDnsCheckDisabled() ?
+                "0.0.0.0 allowed" :"0.0.0.0 not allowed");
+    }
+    
     private final void
     updateSignalStrength() {
         int state =
@@ -806,10 +818,10 @@ public class RadioInfo extends Activity {
         Resources r = getResources();
 
         try {
-            int txPackets = netstat.getTxPackets();
-            int rxPackets = netstat.getRxPackets();
-            int txBytes   = netstat.getTxBytes();
-            int rxBytes   = netstat.getRxBytes();
+            long txPackets = netstat.getMobileTxPackets();
+            long rxPackets = netstat.getMobileRxPackets();
+            long txBytes   = netstat.getMobileTxBytes();
+            long rxBytes   = netstat.getMobileRxBytes();
     
             String packets = r.getString(R.string.radioInfo_display_packets);
             String bytes   = r.getString(R.string.radioInfo_display_bytes);
@@ -1111,6 +1123,14 @@ public class RadioInfo extends Activity {
             cipherState.setText("Setting...");
             phone.invokeOemRilRequestRaw(data,
                     mHandler.obtainMessage(EVENT_SET_CIPHER_DONE));
+        }
+    };
+    
+    OnClickListener mDnsCheckButtonHandler = new OnClickListener() {
+        public void onClick(View v) {
+            GSMPhone gsmPhone = (GSMPhone) phone;
+            gsmPhone.disableDnsCheck(!gsmPhone.isDnsCheckDisabled());
+            updateDnsCheckState();
         }
     };
     

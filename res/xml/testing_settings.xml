@@ -14,10 +14,8 @@
      limitations under the License.
 -->
 
-<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
-
-    <PreferenceCategory
-            android:title="@string/testing" />
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+        android:title="@string/testing" >
             
     <PreferenceScreen
             android:title="@string/testing_phone_info">
@@ -38,9 +36,15 @@
             android:title="@string/testing_battery_history">
         <intent android:action="android.intent.action.MAIN"
                 android:targetPackage="com.android.settings"
-                android:targetClass="com.android.settings.BatteryHistory" />
+                android:targetClass="com.android.settings.battery_history.BatteryHistory" />
     </PreferenceScreen>
 
+    <PreferenceScreen
+            android:title="@string/testing_usage_stats">
+        <intent android:action="android.intent.action.MAIN"
+                android:targetPackage="com.android.settings"
+                android:targetClass="com.android.settings.UsageStats" />
+    </PreferenceScreen>
     <!--    
     <PreferenceScreen
             android:title="@string/testing_sim_toolkit">

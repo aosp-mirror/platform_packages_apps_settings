@@ -16,8 +16,6 @@
 
 package com.android.settings.quicklaunch;
 
-import com.android.settings.R;
-
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.DialogInterface;
@@ -28,10 +26,9 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.preference.Preference;
 import android.preference.PreferenceActivity;
-import android.preference.PreferenceCategory;
+import android.preference.PreferenceGroup;
 import android.preference.PreferenceScreen;
 import android.provider.Settings.Bookmarks;
-import android.text.TextUtils;
 import android.util.Log;
 import android.util.SparseArray;
 import android.util.SparseBooleanArray;
@@ -39,6 +36,8 @@ import android.view.KeyCharacterMap;
 import android.view.KeyEvent;
 import android.view.View;
 import android.widget.AdapterView;
+
+import com.android.settings.R;
 
 /**
  * Settings activity for quick launch.
@@ -76,7 +75,7 @@ public class QuickLaunchSettings extends PreferenceActivity implements
     private SparseBooleanArray mBookmarkedShortcuts;
     
     /** Preference category to hold the shortcut preferences. */
-    private PreferenceCategory mShortcutCategory;
+    private PreferenceGroup mShortcutGroup;
     /** Mapping of a shortcut to its preference. */
     private SparseArray<ShortcutPreference> mShortcutToPreference;
 
@@ -93,7 +92,7 @@ public class QuickLaunchSettings extends PreferenceActivity implements
         
         addPreferencesFromResource(R.xml.quick_launch_settings);
         
-        mShortcutCategory = (PreferenceCategory) findPreference(KEY_SHORTCUT_CATEGORY);
+        mShortcutGroup = (PreferenceGroup) findPreference(KEY_SHORTCUT_CATEGORY);
         mShortcutToPreference = new SparseArray<ShortcutPreference>();
         mBookmarksObserver = new BookmarksObserver(mUiHandler);
         initShortcutPreferences();
@@ -252,7 +251,7 @@ public class QuickLaunchSettings extends PreferenceActivity implements
     
     private ShortcutPreference createPreference(char shortcut) {
         ShortcutPreference pref = new ShortcutPreference(QuickLaunchSettings.this, shortcut);
-        mShortcutCategory.addPreference(pref);
+        mShortcutGroup.addPreference(pref);
         mShortcutToPreference.put(shortcut, pref);
         return pref;
     }

@@ -17,6 +17,7 @@
 package com.android.settings;
 
 import android.content.ContentResolver;
+import android.content.res.Configuration;
 import android.os.Bundle;
 import android.preference.Preference;
 import android.preference.PreferenceActivity;
@@ -58,11 +59,17 @@ public class LanguageSettings extends PreferenceActivity {
                 removePreference(findPreference("language_category"));
         }
     
-        ContentResolver resolver = getContentResolver();
-        for (int i = 0; i < mSettingsUiKey.length; i++) {
-            CheckBoxPreference pref = (CheckBoxPreference) findPreference(mSettingsUiKey[i]);
-            pref.setChecked(System.getInt(resolver, mSettingsSystemId[i],
-                                          mSettingsDefault[i]) > 0);
+        Configuration config = getResources().getConfiguration();
+        if (config.keyboard != Configuration.KEYBOARD_QWERTY) {
+            getPreferenceScreen().removePreference(
+                    getPreferenceScreen().findPreference("hardkeyboard_category"));
+        } else {
+            ContentResolver resolver = getContentResolver();
+            for (int i = 0; i < mSettingsUiKey.length; i++) {
+                CheckBoxPreference pref = (CheckBoxPreference) findPreference(mSettingsUiKey[i]);
+                pref.setChecked(System.getInt(resolver, mSettingsSystemId[i],
+                                              mSettingsDefault[i]) > 0);
+            }
         }
     }
     

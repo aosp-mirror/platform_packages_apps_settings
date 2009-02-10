@@ -16,9 +16,6 @@
 <resources xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
     <string name="device_info_default">"Inconnu"</string>
-    <string name="device_info_uptime">"Durée d\'activité"</string>
-    <string name="device_info_awaketime">"Temps en activité"</string>
-    <string name="device_info_asleeptime">"Temps en veille"</string>
     <string name="turn_on_radio">"Allumer la radio"</string>
     <string name="turn_off_radio">"Éteindre la radio"</string>
     <string name="turn_on_qxdm">"Activer le journal SD QXDM"</string>
@@ -52,14 +49,13 @@
     <string name="radioInfo_lac">"LAC"</string>
     <string name="radioInfo_cid">"CID"</string>
     <string name="sdcard_unmount">"Retirer la carte SD"</string>
+    <!-- no translation found for sdcard_format (362497552060004057) -->
+    <skip />
     <string name="small_font">"Petite"</string>
     <string name="medium_font">"Moyenne"</string>
     <string name="large_font">"Grande"</string>
     <string name="font_size_save">"OK"</string>
     <string name="sdcard_setting">"Carte SD"</string>
-    <string name="screen_off_timeout_label">"Ne jamais se déconnecter pendant le chargement"</string>
-    <string name="stay_on">"L\'écran reste toujours allumé lors du chargement."</string>
-    <string name="app_launcher_newView_text">"Nouvel AppLauncher"</string>
     <string name="battery_info_status_label">"État de la batterie :"</string>
     <string name="battery_info_scale_label">"Batterie :"</string>
     <string name="battery_info_level_label">"Niveau de la batterie :"</string>
@@ -87,11 +83,6 @@
     <string name="battery_info_health_over_voltage">"Voltage dépassé"</string>
     <string name="battery_info_health_unspecified_failure">"Erreur inconnue"</string>
     <string name="bluetooth">"Bluetooth"</string>
-    <string name="bluetooth_stopping">"Arrêt du Bluetooth..."</string>
-    <string name="bluetooth_disabled">"Activer Bluetooth"</string>
-    <!-- no translation found for bluetooth_enabled (314506563815464155) -->
-    <skip />
-    <string name="bluetooth_enabling">"Activation du mode Bluetooth..."</string>
     <string name="bluetooth_visibility">"Identifiable"</string>
     <string name="bluetooth_is_discoverable">"Identifiable pendant <xliff:g id="DISCOVERABLE_TIME_PERIOD">%1$s</xliff:g> secondes..."</string>
     <string name="bluetooth_not_discoverable">"Permettre l\'identification de l\'appareil"</string>
@@ -99,7 +90,6 @@
     <string name="bluetooth_device_name">"Nom du périphérique"</string>
     <string name="bluetooth_name_not_set">"Aucun nom n\'a été défini. Utilisation du nom du compte..."</string>
     <string name="bluetooth_scan_for_devices">"Rechercher des périphériques"</string>
-    <string name="bluetooth_clear_list">"Effacer la liste de périphériques"</string>
     <string name="bluetooth_disconnect_blank">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> va être déconnecté."</string>
     <string name="bluetooth_connected">"Connecté"</string>
     <string name="bluetooth_disconnected">"Déconnecté"</string>
@@ -108,17 +98,9 @@
     <!-- no translation found for bluetooth_unknown (644716244548801421) -->
     <skip />
     <string name="bluetooth_not_connected">"Associer à ce périphérique"</string>
-    <string name="bluetooth_failed_to_enable">"Impossible d\'activer le mode Bluetooth"</string>
     <string name="bluetooth_pairing">"Association…"</string>
-    <string name="failed_to_pair">"Association à <xliff:g id="DEVICE_NAME">%1$s</xliff:g> impossible."</string>
-    <string name="failed_to_connect">"Impossible de se connecter à <xliff:g id="DEVICE_NAME">%1$s</xliff:g>."</string>
     <string name="bluetooth_paired">"Associé"</string>
-    <string name="bluetooth_paired_not_nearby">"Associé(s)"</string>
     <string name="bluetooth_device">"mains libres/casque"</string>
-    <string name="bluetooth_disconnect">"Déconnecter"</string>
-    <string name="bluetooth_connect">"Se connecter"</string>
-    <string name="bluetooth_unpair">"Dissocier"</string>
-    <string name="bluetooth_pair">"Associer"</string>
     <string name="progress_scanning">"Recherche"</string>
     <string name="bluetooth_notif_ticker">"Demande d\'association Bluetooth"</string>
     <string name="bluetooth_notif_title">"Demande d\'association"</string>
@@ -136,16 +118,6 @@
     <string name="intent_sender_startactivity_text">"Lancer <xliff:g id="ACTIVITY">activity</xliff:g>"</string>
     <string name="intent_sender_resource_label">"<xliff:g id="RESOURCE">Resource</xliff:g> :"</string>
     <string name="intent_sender_account_label">"Compte :"</string>
-    <string name="keyguard_pw_mod_text">"Sélectionner un motif de déverrouillage"</string>
-    <string name="keyguard_pin_mod_text">"Modifier le code PIN"</string>
-    <string name="keyguard_label">"Protection des touches"</string>
-    <string name="keyguard_sim_pin_label">"Code PIN de la carte SIM"</string>
-    <string name="keyguard_password_old_password_error_text">"L\'ancien mot de passe saisi est incorrect. Veuillez réessayer."</string>
-    <string name="keyguard_password_button_text">"OK"</string>
-    <string name="keyguard_password_confirm_new_label">"Confirmer le nouveau mot de passe :"</string>
-    <string name="keyguard_password_new_label">"Nouveau mot de passe :"</string>
-    <string name="keyguard_password_old_label">"Ancien mot de passe :"</string>
-    <string name="keyguard_password_mismatch_error_text">"Les deux mots de passe ne correspondent pas. Veuillez les ressaisir."</string>
     <string name="proxy_clear_text">"Effacer"</string>
     <string name="proxy_port_label">"Port"</string>
     <string name="proxy_defaultView_text">"Rétablir les paramètres par défaut"</string>
@@ -188,15 +160,13 @@
     <string name="radio_info_smsc_label">"SMSC :"</string>
     <string name="radio_info_smsc_update_label">"Mettre à jour"</string>
     <string name="radio_info_smsc_refresh_label">"Actualiser"</string>
+    <!-- no translation found for radio_info_toggle_dns_check_label (8292252930563286858) -->
+    <skip />
     <string name="band_mode_title">"Définir la bande GSM/UMTS"</string>
     <string name="band_mode_loading">"Chargement de la liste de bandes..."</string>
     <string name="band_mode_set">"Définir"</string>
     <string name="band_mode_failed">"Échec"</string>
     <string name="band_mode_succeeded">"Terminé"</string>
-    <string name="ringer_volume_ringer_mode_label">"Mode de sonnerie"</string>
-    <string name="ringer_volume_screen_increasing_text">"Volume de sonnerie croissant"</string>
-    <string name="ringer_volume_ringtone_label">"Sonnerie"</string>
-    <string name="ringer_volume_instructions">"Utiliser les boutons de volume pour régler le volume de la sonnerie"</string>
     <string name="sdcard_changes_instructions">"Les modifications prendront effet lors de la prochaine connexion du câble USB."</string>
     <string name="sdcard_settings_screen_mass_storage_text">"Activer le stockage de masse USB"</string>
     <string name="sdcard_settings_total_bytes_label">"Octets au total :"</string>
@@ -208,20 +178,6 @@
     <string name="sdcard_settings_used_bytes_label">"Octets utilisés :"</string>
     <string name="sdcard_settings_scanning_status">"Recherche de médias sur la carte SD…"</string>
     <string name="sdcard_settings_read_only_status">"Carte SD montée en lecture seule"</string>
-    <string name="sdcard_removal_alert_title">"Attention ! Ne retirez pas la carte SD !"</string>
-    <string name="sdcard_unmountable_alert_title">"Impossible de lire la carte SD"</string>
-    <string name="telephony_user_label">"Utilisateur :"</string>
-    <string name="telephony_server_label">"Serveur :"</string>
-    <string name="telephony_name_label">"Nom :"</string>
-    <string name="telephony_mmsc_label">"MMSC :"</string>
-    <string name="telephony_apn_label">"APN :"</string>
-    <string name="telephony_mcc_label">"MCC :"</string>
-    <string name="telephony_port_label">"Port "</string>
-    <string name="telephony_password_label">"Mot de passe :"</string>
-    <string name="telephony_proxy_label">"Proxy :"</string>
-    <string name="telephony_mnc_label">"MNC :"</string>
-    <string name="telephony_mmsproxy_label">"Proxy MMS :"</string>
-    <string name="telephony_mmsport_label">"Port MMS :"</string>
     <string name="next_label">"Suivant"</string>
     <string name="language_picker_title">"Paramètres régionaux"</string>
     <string name="select_your_language">"Choisir la langue"</string>
@@ -255,7 +211,7 @@
     <string name="zone_list_menu_sort_alphabetically">"Trier par ordre alphabétique"</string>
     <string name="zone_list_menu_sort_by_timezone">"Trier par fuseau horaire"</string>
     <string name="security_settings_title">"Sécurité et position géographique"</string>
-    <string name="security_settings_summary">"Définir Ma position géographique, le déverrouillage de l\'écran et le blocage de la carte SIM"</string>
+    <string name="security_settings_summary">"Définir Ma position, le déverrouillage de l\'écran et le blocage de la carte SIM"</string>
     <string name="security_passwords_title">"Mots de passe"</string>
     <string name="bluetooth_quick_toggle_title">"Bluetooth"</string>
     <string name="bluetooth_quick_toggle_summary">"Activer Bluetooth"</string>
@@ -264,23 +220,12 @@
     <string name="bluetooth_settings_summary">"Gérer les connexions, configurer le nom et l\'identification de l\'appareil"</string>
     <string name="bluetooth_pin_entry">"Demande d\'association Bluetooth"</string>
     <string name="bluetooth_device_info">"Informations sur le périphérique Bluetooth"</string>
-    <string name="bluetooth_pairing_msg">"Association…"</string>
     <string name="bluetooth_enter_pin_msg">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g>"\n\n"Saisissez le code PIN pour associer l\'appareil."\n"(Essayez avec 0000 ou 1234.)"</string>
     <string name="bluetooth_error_title">"Attention"</string>
     <string name="bluetooth_pairing_error_message">"Un problème est survenu lors de l\'association à <xliff:g id="DEVICE_NAME">%1$s</xliff:g>."</string>
-    <string name="bluetooth_pairing_alternate_error_message">"Un problème est survenu lors de l\'association à <xliff:g id="DEVICE_NAME">%1$s</xliff:g>. Veuillez essayer un autre code PIN."</string>
     <string name="bluetooth_pairing_pin_error_message">"Un problème est survenu lors de l\'association à <xliff:g id="DEVICE_NAME">%1$s</xliff:g> car le PIN saisi est incorrect."</string>
     <string name="bluetooth_connecting_error_message">"Un problème est survenu lors de la connexion à <xliff:g id="DEVICE_NAME">%1$s</xliff:g>."</string>
-    <string name="bluetooth_new_data">"Saisir de nouvelles données"</string>
-    <string name="bluetooth_new_data_confirm">"OK"</string>
-    <string name="bluetooth_new_data_cancel">"Annuler"</string>
-    <string name="bluetooth_scan_for_new_devices">"Recherche de nouveaux périphériques…"</string>
-    <string name="bluetooth_discoverability_panel_title">"Faites-moi..."</string>
-    <string name="bluetooth_discoverable">"Identifiable pendant <xliff:g id="DISCOVERABLE_TIME_PERIOD">%1$s</xliff:g> secondes"</string>
-    <string name="bluetooth_connectable">"Uniquement les périphériques pouvant être connectés"</string>
-    <string name="bluetooth_neither">"Ne peut être ni repéré, ni connecté"</string>
     <string name="bluetooth_preference_scan_title">"Rechercher des périphériques"</string>
-    <string name="bluetooth_preference_scan_summary">"Rechercher les appareils à associer"</string>
     <string name="bluetooth_device_context_connect">"Se connecter"</string>
     <string name="bluetooth_device_context_disconnect">"Déconnecter"</string>
     <string name="bluetooth_device_context_pair_connect">"Associer et connecter"</string>
@@ -420,32 +365,24 @@
     <string name="sound_effects_enable_title">"Sélection audible"</string>
     <string name="sound_effects_enable_summary_on">"Lire les sons lors des sélections à l\'écran"</string>
     <string name="sound_effects_enable_summary_off">"Lire le son lors des sélections à l\'écran"</string>
+    <!-- no translation found for play_media_notification_sounds_enable_title (1008791464029179529) -->
+    <skip />
+    <!-- no translation found for play_media_notification_sounds_enable_summary_on (426729807044947187) -->
+    <skip />
+    <!-- no translation found for play_media_notification_sounds_enable_summary_off (803791141563778934) -->
+    <skip />
     <string name="sync_settings">"Synchronisation des données"</string>
     <string name="sync_settings_summary">"Sélectionner les applications à synchroniser"</string>
-    <string name="sync_settings_header_general_settings">"Paramètres généraux de synchronisation"</string>
-    <string name="sync_settings_header_application_settings">"Paramètres de synchronisation de l\'application"</string>
-    <string name="sync_too_many_deletes">"Limite de suppressions dépassée"</string>
-    <string name="sync_automatically">"Synchronisation automatique"</string>
-    <string name="sync_enabled">"Synchroniser automatiquement les données"</string>
-    <string name="sync_disabled">"Sélectionner cette option pour synchroniser automatiquement les données"</string>
-    <string name="sync_menu_sync_now">"Synchroniser maintenant"</string>
-    <string name="sync_menu_sync_cancel">"Annuler la synchronisation"</string>
-    <string name="sync_gmail">"Gmail"</string>
-    <string name="sync_calendar">"Calendrier"</string>
-    <string name="sync_contacts">"Contacts"</string>
-    <string name="sync_too_many_deletes_desc">"Le compte <xliff:g id="ACCOUNT_NAME">%3$s</xliff:g> contient <xliff:g id="NUMBER_OF_DELETED_ITEMS">%1$d</xliff:g> éléments supprimés pour <xliff:g id="TYPE_OF_SYNC">%2$s</xliff:g>. Que souhaitez-vous faire ?"</string>
-    <string name="sync_really_delete">"Supprimer les éléments."</string>
-    <string name="sync_undo_deletes">"Annuler les suppressions."</string>
-    <string name="sync_do_nothing">"Ne rien faire pour l\'instant."</string>
-    <string name="sync_is_failing">"La synchronisation rencontre des problèmes et sera bientôt rétablie."</string>
-    <string name="sync_plug"><font fgcolor="#ffffffff">"Bienvenue à Google Sync ! "</font>" "\n"Cette application Google vous permet de synchroniser vos données afin d\'accéder à vos contacts, rendez-vous et bien plus encore, où que vous soyez !"</string>
     <string name="display_settings">"Afficher les paramètres"</string>
     <string name="animations_title">"Animation"</string>
     <string name="animations_summary_on">"Afficher l\'animation lors de l\'ouverture/fermeture de fenêtres"</string>
     <string name="animations_summary_off">"Afficher l\'animation lors de l\'ouverture/fermeture de fenêtres"</string>
     <string name="brightness">"Luminosité"</string>
+    <!-- no translation found for brightness_summary (838917350127550703) -->
+    <skip />
     <string name="screen_timeout">"Mise en veille de l\'écran"</string>
-    <string name="dim_screen">"Assombrir l\'écran"</string>
+    <!-- no translation found for screen_timeout_summary (2905757633140605334) -->
+    <skip />
     <string name="sim_lock_settings">"Paramètres de blocage de la carte SIM"</string>
     <string name="sim_lock_settings_category">"Configurer le blocage de la carte SIM"</string>
     <string name="sim_lock_settings_title">"Blocage de la carte SIM"</string>
@@ -493,13 +430,24 @@
     <string name="status_wifi_mac_address">"Adresse MAC Wi-Fi"</string>
     <string name="status_bt_address">"Adresse Bluetooth"</string>
     <string name="status_unavailable">"Non disponible"</string>
+    <!-- no translation found for status_network_traffic_stats (2089739529980224804) -->
+    <skip />
+    <!-- no translation found for status_network_traffic_summary (1456797220417923108) -->
+    <skip />
     <string name="status_up_time">"Durée d\'activité"</string>
     <string name="status_awake_time">"Temps en activité"</string>
     <string name="internal_memory">"Mémoire interne du téléphone"</string>
     <string name="sd_memory">"Carte SD"</string>
     <string name="memory_available">"Espace disponible"</string>
     <string name="memory_size">"Espace total"</string>
-    <string name="sd_eject">"Démonter/éjecter la carte SD"</string>
+    <!-- no translation found for sd_eject (6915293408836853020) -->
+    <skip />
+    <!-- no translation found for sd_eject_summary (3315557796211542962) -->
+    <skip />
+    <!-- no translation found for sd_format (5448738337382712203) -->
+    <skip />
+    <!-- no translation found for sd_format_summary (6616491027883134004) -->
+    <skip />
     <string name="sd_unavailable">"Non disponible"</string>
     <string name="read_only">"(Lecture seule)"</string>
     <string name="battery_status_title">"État de la batterie"</string>
@@ -538,11 +486,27 @@
     <string name="master_clear_gesture_prompt">"Saisissez votre motif de déverrouillage"</string>
     <string name="master_clear_gesture_explanation">"Vous devez dessiner votre motif de déverrouillage pour confirmer la réinitialisation du téléphone."</string>
     <string name="master_clear_failed">"Les données n\'ont pas été réinitialisées car le service de nettoyage du système n\'est pas disponible."</string>
+    <!-- no translation found for media_format_title (4671276096695789895) -->
+    <skip />
+    <!-- no translation found for media_format_summary (3805714639375830120) -->
+    <skip />
+    <!-- no translation found for media_format_desc (1142563222357820834) -->
+    <skip />
+    <!-- no translation found for media_format_button_text (370856400090190151) -->
+    <skip />
+    <!-- no translation found for media_format_final_desc (1776666694910717198) -->
+    <skip />
+    <!-- no translation found for media_format_final_button_text (4881713344315923175) -->
+    <skip />
+    <!-- no translation found for media_format_gesture_prompt (3109349468816856670) -->
+    <skip />
+    <!-- no translation found for media_format_gesture_explanation (4239529439389660159) -->
+    <skip />
     <string name="call_settings_title">"Paramètres d\'appel"</string>
     <string name="call_settings_summary">"Configurer la messagerie vocale, les transferts d\'appel, les mises en attente, les identifiants d\'appelant"</string>
     <string name="network_settings_title">"Réseaux mobiles"</string>
     <string name="network_settings_summary">"Définir les options d\'itinérance, réseaux, noms de points d\'accès"</string>
-    <string name="location_title">"Sources pour Ma position géographique"</string>
+    <string name="location_title">"Sources pour Ma position"</string>
     <string name="location_network_based">"Utiliser les réseaux sans fil"</string>
     <string name="location_networks_disabled">"Afficher la position géographique dans les applications (comme Google Maps) lors de l\'utilisation de réseaux sans fil"</string>
     <string name="location_neighborhood_level">"Position géographique déterminée par réseaux Wi-Fi et/ou mobile"</string>
@@ -591,17 +555,25 @@
     <string name="lock_example_title">"Exemple de motif"</string>
     <string name="lock_example_message">"Reliez au moins quatre points."\n" "\n"Sélectionnez \"Suivant\" lorsque vous voulez créer votre propre motif."</string>
     <string name="manageapplications_settings_title">"Gérer les applications"</string>
+    <!-- no translation found for manageapplications_settings_summary (6097117021500651232) -->
+    <skip />
     <string name="applications_settings">"Applications"</string>
     <string name="applications_settings_summary">"Gérer les applications, configurer des raccourcis de lancement rapide"</string>
     <string name="applications_settings_header">"Paramètres de l\'application"</string>
     <string name="install_applications">"Sources inconnues"</string>
     <string name="install_unknown_applications">"Autoriser l\'installation d\'applications ne provenant pas d\'Android Market"</string>
     <string name="install_all_warning">"Votre téléphone et vos données personnelles sont très vulnérables face à des applications provenant de sources inconnues. Vous acceptez d\'être le seul responsable de tout dommage causé à votre téléphone ou de toute perte de données pouvant découler de l\'utilisation de telles applications."</string>
-    <string name="manage_applications_title">"Gérer les applications"</string>
     <string name="application_info_label">"Informations sur l\'application"</string>
     <string name="storage_label">"Mémoire"</string>
     <string name="auto_launch_label">"Lancer par défaut"</string>
     <string name="permissions_label">"Autorisations"</string>
+    <string name="cache_header_label">"Cache"</string>
+    <string name="clear_cache_btn_text">"Effacer le cache"</string>
+    <string name="cache_size_label">"Cache"</string>
+    <!-- no translation found for controls_label (7611113077086853799) -->
+    <skip />
+    <!-- no translation found for force_stop (7435006169872876756) -->
+    <skip />
     <string name="total_size_label">"Total"</string>
     <string name="application_size_label">"Application"</string>
     <string name="data_size_label">"Données"</string>
@@ -614,6 +586,10 @@
     <string name="sort_order_alpha">"Trier"</string>
     <string name="sort_order_size">"Trier par taille"</string>
     <string name="manage_space_text">"Gérer l\'espace"</string>
+    <!-- no translation found for filter (2018011724373033887) -->
+    <skip />
+    <!-- no translation found for filter_dlg_title (6507663329723966854) -->
+    <skip />
     <string name="filter_apps_all">"Tous"</string>
     <string name="filter_apps_third_party">"Tiers"</string>
     <string name="filter_apps_running">"En cours d\'exécution"</string>
@@ -627,22 +603,24 @@
     <string name="app_not_found_dlg_text">"L\'application n\'a pas été trouvée dans la liste des applications installées."</string>
     <string name="clear_data_failed">"Impossible d\'effacer les données de l\'application."</string>
     <string name="security_settings_desc">"Cette application peut accéder aux applications suivantes de votre téléphone :"</string>
-    <string name="computing_size">"Calcul toujours en cours…"</string>
+    <!-- no translation found for computing_size (1599186977475211186) -->
+    <skip />
     <string name="invalid_size_value">"Impossible de calculer la taille du paquet."</string>
     <string name="empty_list_msg">"Aucune application tierce n\'est installée sur votre téléphone."</string>
-    <string name="cache_header_label">"Cache"</string>
-    <string name="clear_cache_btn_text">"Effacer le cache"</string>
-    <string name="cache_size_label">"Cache"</string>
     <string name="language_settings">"Paramètres régionaux et texte"</string>
     <string name="language_settings_summary">"Définir les paramètres régionaux (langue et région), la saisie de texte et les options de correction automatique"</string>
     <string name="language_category">"Paramètres régionaux"</string>
     <string name="text_category">"Paramètres du texte"</string>
     <string name="phone_language">"Sélectionner les paramètres régionaux"</string>
+    <!-- no translation found for phone_language_summary (1809580675831352352) -->
+    <skip />
     <string name="auto_replace">"Remplacer automatiquement"</string>
     <string name="auto_replace_summary">"Corriger les mots mal saisis"</string>
     <string name="auto_caps">"Maj auto"</string>
     <string name="auto_caps_summary">"Mettre une majuscule en début de phrase"</string>
     <string name="auto_punctuate">"Ponctuation automatique"</string>
+    <!-- no translation found for hardkeyboard_category (5957168411305769899) -->
+    <skip />
     <string name="auto_punctuate_summary">"Appuyez deux fois sur la touche Espace pour insérer \".\""</string>
     <string name="show_password">"Mots de passe visibles"</string>
     <string name="show_password_summary">"Afficher le mot de passe lors de la saisie"</string>
@@ -690,4 +668,68 @@
     <string name="keep_screen_on_summary">"L\'écran ne se met jamais en veille lors du chargement"</string>
     <string name="allow_mock_location">"Autoriser les positions géographiques fictives"</string>
     <string name="allow_mock_location_summary">"Autoriser les positions géographiques fictives"</string>
+    <!-- no translation found for battery_history_known_apps (6907374478255786240) -->
+    <skip />
+    <!-- no translation found for gadget_picker_title (4335873961457985189) -->
+    <skip />
+    <!-- no translation found for battery_history_details_for (5189636461798594740) -->
+    <skip />
+    <!-- no translation found for battery_history_uid (1016606150528436298) -->
+    <skip />
+    <!-- no translation found for battery_history_network_usage (8010852371665217020) -->
+    <skip />
+    <!-- no translation found for battery_history_bytes_received (980307569180518302) -->
+    <skip />
+    <!-- no translation found for battery_history_bytes_sent (2501748768602119159) -->
+    <skip />
+    <!-- no translation found for battery_history_bytes_total (4444807574361642753) -->
+    <skip />
+    <!-- no translation found for battery_history_cpu_usage (2597353713014790877) -->
+    <skip />
+    <!-- no translation found for battery_history_user_time (6227507614894791359) -->
+    <skip />
+    <!-- no translation found for battery_history_system_time (2015862072724507547) -->
+    <skip />
+    <!-- no translation found for battery_history_total_time (3618703970098556104) -->
+    <skip />
+    <!-- no translation found for battery_history_starts (9137453931978571696) -->
+    <skip />
+    <!-- no translation found for battery_history_days (6387593985264923377) -->
+    <skip />
+    <!-- no translation found for battery_history_hours (2593055276272350197) -->
+    <skip />
+    <!-- no translation found for battery_history_minutes (5608990219891318138) -->
+    <skip />
+    <!-- no translation found for battery_history_seconds (7397664460929461350) -->
+    <skip />
+    <!-- no translation found for battery_history_packages_sharing_this_uid (4101596071379250050) -->
+    <skip />
+    <!-- no translation found for battery_history_no_data (1177238743237067617) -->
+    <skip />
+    <!-- no translation found for battery_history_sensor (2333488996028993982) -->
+    <skip />
+    <!-- no translation found for battery_history_used_by_packages (3000711380023436470) -->
+    <skip />
+    <!-- no translation found for battery_history_sensor_usage (3593133338613209024) -->
+    <skip />
+    <!-- no translation found for battery_history_sensor_usage_multi (4536084375991014508) -->
+    <skip />
+    <!-- no translation found for battery_history_screen_on (1377240025275657277) -->
+    <skip />
+    <!-- no translation found for battery_history_screen_on_battery (536058210445081888) -->
+    <skip />
+    <!-- no translation found for battery_history_screen_on_plugged (5019127390021871260) -->
+    <skip />
+    <!-- no translation found for usage_stats_label (5890846333487083609) -->
+    <skip />
+    <!-- no translation found for testing_usage_stats (7823048598893937339) -->
+    <skip />
+    <!-- no translation found for display_order_text (8592776965827565271) -->
+    <skip />
+    <!-- no translation found for app_name_label (2000949925256858308) -->
+    <skip />
+    <!-- no translation found for launch_count_label (4019444833263957024) -->
+    <skip />
+    <!-- no translation found for usage_time_label (295954901452833058) -->
+    <skip />
 </resources>
