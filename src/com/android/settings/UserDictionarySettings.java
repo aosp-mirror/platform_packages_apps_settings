@@ -44,6 +44,7 @@ import java.util.Locale;
 public class UserDictionarySettings extends ListActivity {
 
     private static final String INSTANCE_KEY_DIALOG_EDITING_WORD = "DIALOG_EDITING_WORD";
+    private static final String INSTANCE_KEY_ADDED_WORD = "DIALOG_ADDED_WORD";
 
     private static final String[] QUERY_PROJECTION = {
         UserDictionary.Words._ID, UserDictionary.Words.WORD
@@ -70,6 +71,9 @@ public class UserDictionarySettings extends ListActivity {
     
     private Cursor mCursor;
     
+    private boolean mAddedWordAlready;
+    private boolean mAutoReturn;
+    
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -85,15 +89,17 @@ public class UserDictionarySettings extends ListActivity {
         ListView listView = getListView();
         listView.setFastScrollEnabled(true);
         listView.setEmptyView(emptyView);
-        
+
         registerForContextMenu(listView);
     }
     
     @Override
     protected void onResume() {
         super.onResume();
-        if (getIntent().getAction().equals("com.android.settings.USER_DICTIONARY_INSERT")) {
+        if (!mAddedWordAlready 
+                && getIntent().getAction().equals("com.android.settings.USER_DICTIONARY_INSERT")) {
             String word = getIntent().getStringExtra(EXTRA_WORD);
+            mAutoReturn = true;
             if (word != null) {
                 showAddOrEditDialog(word);
             }
@@ -103,12 +109,14 @@ public class UserDictionarySettings extends ListActivity {
     protected void onRestoreInstanceState(Bundle state) {
         super.onRestoreInstanceState(state);
         mDialogEditingWord = state.getString(INSTANCE_KEY_DIALOG_EDITING_WORD);
+        mAddedWordAlready = state.getBoolean(INSTANCE_KEY_ADDED_WORD, false);
     }
 
     @Override
     protected void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
         outState.putString(INSTANCE_KEY_DIALOG_EDITING_WORD, mDialogEditingWord);
+        outState.putBoolean(INSTANCE_KEY_ADDED_WORD, mAddedWordAlready);
     }
 
     private Cursor createCursor() {
@@ -196,9 +204,13 @@ public class UserDictionarySettings extends ListActivity {
                 .setView(content)
                 .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int which) {
-                        onAddOrEditFinished(editText.getText().toString());                        
+                        onAddOrEditFinished(editText.getText().toString());
+                        if (mAutoReturn) finish();
                     }})
-                .setNegativeButton(android.R.string.cancel, null)
+                .setNegativeButton(android.R.string.cancel, new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        if (mAutoReturn) finish();                        
+                    }})
                 .create();
     }
 
@@ -220,8 +232,9 @@ public class UserDictionarySettings extends ListActivity {
         
         // TODO: present UI for picking whether to add word to all locales, or current.
         UserDictionary.Words.addWord(this, word.toString(),
-                128, UserDictionary.Words.LOCALE_TYPE_ALL);
+                250, UserDictionary.Words.LOCALE_TYPE_ALL);
         mCursor.requery();
+        mAddedWordAlready = true;
     }
 
     private void deleteWord(String word) {

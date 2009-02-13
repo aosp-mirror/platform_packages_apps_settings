@@ -229,9 +229,12 @@ public class ConnectSpecificProfilesActivity extends PreferenceActivity
         for (Profile profile : mDevice.getProfiles()) {
             CheckBoxPreference profilePref =
                     (CheckBoxPreference) findPreference(profile.toString());
-            if (profilePref == null) continue;
-            
-            refreshProfilePreference(profilePref, profile);
+            if (profilePref == null) {
+                profilePref = createProfilePreference(profile);
+                mProfileContainer.addPreference(profilePref);
+            } else {
+                refreshProfilePreference(profilePref, profile);
+            }
         }
     }
     

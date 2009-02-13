@@ -20,7 +20,7 @@ import android.app.LauncherActivity;
 import android.content.ComponentName;
 import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.gadget.GadgetInfo;
+import android.gadget.GadgetProviderInfo;
 import android.gadget.GadgetManager;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
@@ -28,8 +28,11 @@ import android.view.View;
 import android.widget.ListView;
 import android.util.Log;
 
+import java.text.Collator;
 import java.util.List;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 
 public class GadgetPickActivity extends LauncherActivity
 {
@@ -37,7 +40,6 @@ public class GadgetPickActivity extends LauncherActivity
 
     GadgetManager mGadgetManager;
     int mGadgetId;
-    int mHostId;
     
     public GadgetPickActivity() {
         mGadgetManager = GadgetManager.getInstance(this);
@@ -48,7 +50,6 @@ public class GadgetPickActivity extends LauncherActivity
         super.onCreate(icicle);
 
         Bundle extras = getIntent().getExtras();
-        mHostId = extras.getInt(GadgetManager.EXTRA_HOST_ID);
         mGadgetId = extras.getInt(GadgetManager.EXTRA_GADGET_ID);
 
         setResultData(RESULT_CANCELED);
@@ -65,7 +66,7 @@ public class GadgetPickActivity extends LauncherActivity
     
     @Override
     public List<ListItem> makeListItems() {
-        List<GadgetInfo> installed = mGadgetManager.getInstalledProviders();
+        List<GadgetProviderInfo> installed = mGadgetManager.getInstalledProviders();
         PackageManager pm = getPackageManager();
 
         Drawable defaultIcon = null;
@@ -74,7 +75,7 @@ public class GadgetPickActivity extends LauncherActivity
         ArrayList<ListItem> result = new ArrayList();
         final int N = installed.size();
         for (int i=0; i<N; i++) {
-            GadgetInfo info = installed.get(i);
+            GadgetProviderInfo info = installed.get(i);
 
             LauncherActivity.ListItem item = new LauncherActivity.ListItem();
             item.packageName = info.provider.getPackageName();
@@ -100,9 +101,16 @@ public class GadgetPickActivity extends LauncherActivity
             
             result.add(item);
         }
+
+        Collections.sort(result, new Comparator<ListItem>() {
+                Collator mCollator = Collator.getInstance();
+                public int compare(ListItem lhs, ListItem rhs) {
+                    return mCollator.compare(lhs.label, rhs.label);
+                }
+            });
         return result;
     }
-    
+
     void setResultData(int code) {
         Intent result = new Intent();
         result.putExtra(GadgetManager.EXTRA_GADGET_ID, mGadgetId);

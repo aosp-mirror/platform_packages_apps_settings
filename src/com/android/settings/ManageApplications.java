@@ -133,13 +133,14 @@ public class ManageApplications extends ListActivity implements
     
     // messages posted to the handler
     private static final int HANDLER_MESSAGE_BASE = 0;
-    private static final int COMPUTE_PKG_SIZE_START = HANDLER_MESSAGE_BASE+1;
+    private static final int INIT_PKG_INFO = HANDLER_MESSAGE_BASE+1;
     private static final int COMPUTE_PKG_SIZE_DONE = HANDLER_MESSAGE_BASE+2;
     private static final int REMOVE_PKG = HANDLER_MESSAGE_BASE+3;
     private static final int REORDER_LIST = HANDLER_MESSAGE_BASE+4;
     private static final int ADD_PKG_START = HANDLER_MESSAGE_BASE+5;
     private static final int ADD_PKG_DONE = HANDLER_MESSAGE_BASE+6;
     private static final int REFRESH_ICONS = HANDLER_MESSAGE_BASE+7;
+    private static final int NEXT_LOAD_STEP = HANDLER_MESSAGE_BASE+8;
     
     // observer object used for computing pkg sizes
     private PkgSizeObserver mObserver;
@@ -150,7 +151,7 @@ public class ManageApplications extends ListActivity implements
     private PackageIntentReceiver mReceiver;
     // atomic variable used to track if computing pkg sizes is in progress. should be volatile?
     
-    private boolean mDoneIniting = false;
+    private boolean mComputeSizes = false;
     // default icon thats used when displaying applications initially before resource info is
     // retrieved
     private Drawable mDefaultAppIcon;
@@ -188,6 +189,13 @@ public class ManageApplications extends ListActivity implements
     
     //TODO implement a cache system
     private Map<String, AppInfo> mAppPropCache;
+    
+    // empty message displayed when list is empty
+    private TextView mEmptyView;
+    
+    // Boolean variables indicating state
+    private boolean mLoadLabels = false;
+    private boolean mSizesFirst = false;
     
     /*
      * Handler class to handle messages for various operations
@@ -232,11 +240,13 @@ public class ManageApplications extends ListActivity implements
                 pkgName = data.getString(ATTR_PKG_NAME);
             }
             switch (msg.what) {
-            case COMPUTE_PKG_SIZE_START:
-                if(localLOGV) Log.i(TAG, "Message COMPUTE_PKG_SIZE_START");
+            case INIT_PKG_INFO:
+                if(localLOGV) Log.i(TAG, "Message INIT_PKG_INFO");
                 setProgressBarIndeterminateVisibility(true);
                 mComputeIndex = 0;
+                // Retrieve the package list and init some structures
                 initAppList(mFilterApps);
+                mHandler.sendEmptyMessage(NEXT_LOAD_STEP);
                 break;
             case COMPUTE_PKG_SIZE_DONE:
                 if(localLOGV) Log.i(TAG, "Message COMPUTE_PKG_SIZE_DONE");
@@ -297,9 +307,9 @@ public class ManageApplications extends ListActivity implements
                                 COMPUTE_PKG_SIZE_DONE);
                     } else {
                         // end computation here
-                        mDoneIniting = true;
+                        mComputeSizes = true;
                         mAppInfoAdapter.sortList(mSortOrder);
-                        setProgressBarIndeterminateVisibility(false);
+                        mHandler.sendEmptyMessage(NEXT_LOAD_STEP);
                     }
                 }
                 break;
@@ -309,7 +319,7 @@ public class ManageApplications extends ListActivity implements
                     Log.w(TAG, "Ignoring message:REMOVE_PKG for null pkgName");
                     break;
                 }
-                if (!mDoneIniting) {
+                if (!mComputeSizes) {
                     Boolean currB = mAddRemoveMap.get(pkgName);
                     if (currB == null || (currB.equals(Boolean.TRUE))) {
                         mAddRemoveMap.put(pkgName, Boolean.FALSE);
@@ -340,7 +350,7 @@ public class ManageApplications extends ListActivity implements
                         // Reset cache
                         mAppPropCache = null;
                         mFilterApps = FILTER_APPS_ALL;
-                        mHandler.sendEmptyMessage(COMPUTE_PKG_SIZE_START);
+                        mHandler.sendEmptyMessage(INIT_PKG_INFO);
                         sendMessageToHandler(REORDER_LIST, menuOption);
                     }
                 }
@@ -351,7 +361,7 @@ public class ManageApplications extends ListActivity implements
                     Log.w(TAG, "Ignoring message:ADD_PKG_START for null pkgName");
                     break;
                 }
-                if (!mDoneIniting) {
+                if (!mComputeSizes) {
                     Boolean currB = mAddRemoveMap.get(pkgName);
                     if (currB == null || (currB.equals(Boolean.FALSE))) {
                         mAddRemoveMap.put(pkgName, Boolean.TRUE);
@@ -380,22 +390,42 @@ public class ManageApplications extends ListActivity implements
                 if(iconMap == null) {
                     Log.w(TAG, "Error loading icons for applications");
                 } else {
-                    mAppInfoAdapter.updateAppsResourceInfo(iconMap);
+                    mAppInfoAdapter.updateAppsResourceInfo(iconMap);   
                 }
-                // initiate compute pkg sizes
-                if (localLOGV) Log.i(TAG, "Initiating compute sizes for first time");
-                mObserver = new PkgSizeObserver();
-                if (mAppInfoAdapter.getCount() > 0) {
-                    mObserver.invokeGetSizeInfo(mAppInfoAdapter.getApplicationInfo(0),
-                            COMPUTE_PKG_SIZE_DONE);
+                mLoadLabels = true;
+                mHandler.sendEmptyMessage(NEXT_LOAD_STEP);
+                break;
+            case NEXT_LOAD_STEP:
+                if (mComputeSizes && mLoadLabels) {
+                    doneLoadingData();
+                } else if (!mComputeSizes && !mLoadLabels) {
+                     // Either load the package labels or initiate get size info
+                    if (mSizesFirst) {
+                        initComputeSizes();
+                    } else {
+                        initResourceThread();
+                    }
                 } else {
-                    mDoneIniting = true;
+                    // Create list view from the adapter here. Wait till the sort order
+                    // of list is defined. its either by label or by size. so atleast one of the
+                    // first steps should be complete before creating the list
+                    createListView();
+                    if (!mComputeSizes) {
+                        initComputeSizes();
+                    } else if (!mLoadLabels) {
+                        initResourceThread();
+                    }
                 }
+                break;
             default:
                 break;
             }
         }
     };
+    
+    private void doneLoadingData() {
+        setProgressBarIndeterminateVisibility(false);
+    }
     
     List<ApplicationInfo> getInstalledApps(int filterOption) {
         List<ApplicationInfo> installedAppList = mPm.getInstalledApplications(
@@ -457,27 +487,54 @@ public class ManageApplications extends ListActivity implements
     
     // some initialization code used when kicking off the size computation
     private void initAppList(int filterOption) {
-        mDoneIniting = false;
+        mComputeSizes = false;
         // Initialize lists
         List<ApplicationInfo> appList = getInstalledApps(filterOption);
         mAddRemoveMap = new TreeMap<String, Boolean>();
-        mAppInfoAdapter = new AppInfoAdapter(this, appList);
-        dismissLoadingMsg();
-        // get list and set listeners and adapter
-        ListView lv= (ListView) findViewById(android.R.id.list);
-        lv.setOnItemClickListener(this);
-        lv.setSaveEnabled(true);
-        lv.setItemsCanFocus(true);
-        lv.setOnItemClickListener(this);
-        lv.setAdapter(mAppInfoAdapter);
+        mAppInfoAdapter = new AppInfoAdapter(this, appList);       
         // register receiver
-        mReceiver = new PackageIntentReceiver();
         mReceiver.registerReceiver();
+    }
+    
+    // Utility method to start a thread to read application labels and icons
+    private void initResourceThread() {
         //load resources now
         if(mResourceThread.isAlive()) {
             mResourceThread.interrupt();
         }
-        mResourceThread.loadAllResources(appList);
+        mResourceThread.loadAllResources(mAppInfoAdapter.getAppList());
+    }
+    
+    private void initComputeSizes() {
+         // initiate compute pkg sizes
+        if (localLOGV) Log.i(TAG, "Initiating compute sizes for first time");
+        if (mAppInfoAdapter.getCount() > 0) {
+            mObserver.invokeGetSizeInfo(mAppInfoAdapter.getApplicationInfo(0),
+                    COMPUTE_PKG_SIZE_DONE);
+        } else {
+            mComputeSizes = true;
+        }
+    }
+    
+    private void showEmptyViewIfListEmpty() {
+        if (localLOGV) Log.i(TAG, "Checking for empty view");
+        if (mAppInfoAdapter.getCount() > 0) {
+            mEmptyView.setVisibility(View.GONE);
+        } else {
+            mEmptyView.setVisibility(View.VISIBLE);
+        }
+    }
+
+    private void createListView() {
+        dismissLoadingMsg();
+        // get list and set listeners and adapter
+        ListView lv= (ListView) findViewById(android.R.id.list);
+        lv.setAdapter(mAppInfoAdapter);
+        lv.setOnItemClickListener(this);
+        lv.setSaveEnabled(true);
+        lv.setItemsCanFocus(true);
+        lv.setOnItemClickListener(this);
+        showEmptyViewIfListEmpty();
     }
     
     // internal structure used to track added and deleted packages when
@@ -495,21 +552,21 @@ public class ManageApplications extends ListActivity implements
         List<ApplicationInfo> mAppList;
         
         void loadAllResources(List<ApplicationInfo> appList) {
-            if(appList == null || appList.size() <= 0) {
-                Log.w(TAG, "Empty or null application list");
-                return;
-            }
             mAppList = appList;
             start();
         }
 
         public void run() {
             Map<String, AppInfo> iconMap = new HashMap<String, AppInfo>();
-            for (ApplicationInfo appInfo : mAppList) {
-                CharSequence appName = appInfo.loadLabel(mPm);
-                Drawable appIcon = appInfo.loadIcon(mPm);
-                iconMap.put(appInfo.packageName, 
-                        new AppInfo(appInfo.packageName, appName, appIcon));
+            if(mAppList == null || mAppList.size() <= 0) {
+                Log.w(TAG, "Empty or null application list");
+            } else {
+                for (ApplicationInfo appInfo : mAppList) {
+                    CharSequence appName = appInfo.loadLabel(mPm);
+                    Drawable appIcon = appInfo.loadIcon(mPm);
+                    iconMap.put(appInfo.packageName, 
+                            new AppInfo(appInfo.packageName, appName, appIcon));
+                }
             }
             Message msg = mHandler.obtainMessage(REFRESH_ICONS);
             msg.obj = iconMap;
@@ -697,6 +754,10 @@ public class ManageApplications extends ListActivity implements
         }
         
         public View getView(int position, View convertView, ViewGroup parent) {
+            if (position >= mAppLocalList.size()) {
+                Log.w(TAG, "Invalid view position:"+position+", actual size is:"+mAppLocalList.size());
+                return null;
+            }
             // A ViewHolder keeps references to children views to avoid unneccessary calls
             // to findViewById() on each row.
             AppViewHolder holder;
@@ -773,7 +834,12 @@ public class ManageApplications extends ListActivity implements
                    mAppPropMap.put(applicationInfo.packageName, rInfo);
                }
            }
-           sortList(mSortOrder);
+           if (mAppLocalList.size() > 0) {
+               sortList(mSortOrder);
+           } else {
+               notifyDataSetChanged();
+           }
+           showEmptyViewIfListEmpty();
            return true;
         }
         
@@ -927,7 +993,7 @@ public class ManageApplications extends ListActivity implements
      * posts a message, we do a cursory check of validity on mAppInfoAdapter's applist
      */
     private void clearMessagesInHandler() {
-        mHandler.removeMessages(COMPUTE_PKG_SIZE_START);
+        mHandler.removeMessages(INIT_PKG_INFO);
         mHandler.removeMessages(COMPUTE_PKG_SIZE_DONE);
         mHandler.removeMessages(REMOVE_PKG);
         mHandler.removeMessages(REORDER_LIST);
@@ -1040,12 +1106,14 @@ public class ManageApplications extends ListActivity implements
         String action = lIntent.getAction();
         if (action.equals(Intent.ACTION_MANAGE_PACKAGE_STORAGE)) {
             mSortOrder = SORT_ORDER_SIZE;
+            mSizesFirst = true;
         }
         mPm = getPackageManager();
         // initialize some window features
         requestWindowFeature(Window.FEATURE_RIGHT_ICON);
         requestWindowFeature(Window.FEATURE_PROGRESS);
         requestWindowFeature(Window.FEATURE_INDETERMINATE_PROGRESS);
+        setContentView(R.layout.compute_sizes);
         // init mLoadingDlg
         mLoadingDlg = new ProgressDialog(this);
         mLoadingDlg.setProgressStyle(ProgressDialog.STYLE_SPINNER);
@@ -1058,6 +1126,9 @@ public class ManageApplications extends ListActivity implements
         mComputingSizeStr = getText(R.string.computing_size);
         // initialize the inflater
         mInflater = (LayoutInflater)getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        mReceiver = new PackageIntentReceiver();
+        mEmptyView = (TextView) findViewById(R.id.empty_view);
+        mObserver = new PkgSizeObserver();
     }
     
     private void showLoadingMsg() {
@@ -1077,11 +1148,10 @@ public class ManageApplications extends ListActivity implements
     @Override
     public void onStart() {
         super.onStart();
-        setContentView(R.layout.compute_sizes);
         showLoadingMsg();
         // Create a thread to load resources
         mResourceThread = new ResourceLoaderThread();
-        sendMessageToHandler(COMPUTE_PKG_SIZE_START);
+        sendMessageToHandler(INIT_PKG_INFO);
     }
 
     @Override
@@ -1138,13 +1208,14 @@ public class ManageApplications extends ListActivity implements
                 .setIcon(android.R.drawable.ic_menu_sort_alphabetically);
         menu.add(0, SORT_ORDER_SIZE, 2, R.string.sort_order_size)
                 .setIcon(android.R.drawable.ic_menu_sort_by_size); 
-        menu.add(0, FILTER_OPTIONS, 3, R.string.filter);
+        menu.add(0, FILTER_OPTIONS, 3, R.string.filter)
+                .setIcon(R.drawable.ic_menu_filter_settings);
         return true;
     }
     
     @Override
     public boolean onPrepareOptionsMenu(Menu menu) {
-        if (mDoneIniting) {
+        if (mComputeSizes) {
             menu.findItem(SORT_ORDER_ALPHA).setVisible(mSortOrder != SORT_ORDER_ALPHA);
             menu.findItem(SORT_ORDER_SIZE).setVisible(mSortOrder != SORT_ORDER_SIZE);
             menu.findItem(FILTER_OPTIONS).setVisible(true);
