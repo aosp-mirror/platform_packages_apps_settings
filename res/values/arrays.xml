@@ -147,19 +147,17 @@
     <string-array name="battery_history_type_spinner">
         <item>CPU Usage</item>
         <item>Network Usage</item>
+        <item>GPS Usage</item>
         <item>Sensor Usage</item>
-        <item>Screen On Time</item>
-<!--
         <item>Wake Locks</item>
--->
+        <item>Screen On Time</item>
     </string-array>
 
     <!-- Match with constants in BatteryStats class -->
     <string-array name="battery_history_which_spinner">
-        <item>Since device reset</item>
-        <item>Before last boot</item>
-        <item>Since last boot</item>
         <item>Since last unplugged</item>
+        <item>Total since boot</item>
+        <item>Total in all time</item>
     </string-array>
 
     <!-- Display options for UsageStats class -->

@@ -28,8 +28,8 @@
     <item>"15秒"</item>
     <item>"30秒"</item>
     <item>"1分"</item>
-    <item>"2分間"</item>
-    <item>"10分間"</item>
+    <item>"2分"</item>
+    <item>"10分"</item>
     <item>"タイムアウトなし"</item>
   </string-array>
   <string-array name="wifi_security_entries">
@@ -50,18 +50,26 @@
     <item>"WEP ASCII"</item>
     <item>"16進のWEP"</item>
   </string-array>
-    <!-- no translation found for wifi_sleep_policy_entries:0 (3804733751095821976) -->
-    <!-- no translation found for wifi_sleep_policy_entries:1 (1549288661423279207) -->
-    <!-- no translation found for wifi_sleep_policy_entries:2 (1986753720941888596) -->
-    <!-- no translation found for battery_history_type_spinner:0 (2372160040893842611) -->
-    <!-- no translation found for battery_history_type_spinner:1 (7042951832385599110) -->
-    <!-- no translation found for battery_history_type_spinner:2 (7643330117743172161) -->
-    <!-- no translation found for battery_history_type_spinner:3 (7984071435080498080) -->
-    <!-- no translation found for battery_history_which_spinner:0 (8777827398176661463) -->
-    <!-- no translation found for battery_history_which_spinner:1 (2351620008414691945) -->
-    <!-- no translation found for battery_history_which_spinner:2 (1233325583071371898) -->
-    <!-- no translation found for battery_history_which_spinner:3 (524850874274605031) -->
-    <!-- no translation found for usage_stats_display_order_types:0 (9077371706468756228) -->
-    <!-- no translation found for usage_stats_display_order_types:1 (1908750532762193304) -->
-    <!-- no translation found for usage_stats_display_order_types:2 (1213951670006606353) -->
+  <string-array name="wifi_sleep_policy_entries">
+    <item>"画面がOFFになったとき"</item>
+    <item>"電源接続時はスリープしない"</item>
+    <item>"スリープしない"</item>
+  </string-array>
+  <string-array name="battery_history_type_spinner">
+    <item>"CPU使用状況"</item>
+    <item>"ネットワーク使用状況"</item>
+    <item>"センサー使用状況"</item>
+    <item>"画面をONにした時刻"</item>
+  </string-array>
+  <string-array name="battery_history_which_spinner">
+    <item>"デバイスリセットからの経過時間"</item>
+    <item>"前回起動時より前"</item>
+    <item>"起動時からの経過時間"</item>
+    <item>"バッテリ使用開始からの経過時間"</item>
+  </string-array>
+  <string-array name="usage_stats_display_order_types">
+    <item>"使用時間"</item>
+    <item>"起動回数"</item>
+    <item>"アプリケーション名"</item>
+  </string-array>
 </resources>

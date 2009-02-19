@@ -254,6 +254,7 @@ public class InstalledAppDetails extends Activity implements View.OnClickListene
          // Cache section
          mCachePanel = findViewById(R.id.cache_panel);
          mCacheSize = (TextView) findViewById(R.id.cache_size_text);
+         mCacheSize.setText(mComputingStr);
          mClearCacheButton = (Button) findViewById(R.id.clear_cache_button);
          mForceStopButton = (Button) findViewById(R.id.force_stop_button);
          mForceStopButton.setOnClickListener(this);
@@ -332,7 +333,8 @@ public class InstalledAppDetails extends Activity implements View.OnClickListene
             mTotalSize.setText(str);
             mAppSnippetSize.setText(str);
             mAppSize.setText(getSizeStr(newPs.codeSize));
-            mDataSize.setText(getSizeStr(newPs.dataSize+newPs.cacheSize));
+            mDataSize.setText(getSizeStr(newPs.dataSize));
+            mCacheSize.setText(getSizeStr(newPs.cacheSize));
         } else {
             long oldTot = mSizeInfo.cacheSize+mSizeInfo.codeSize+mSizeInfo.dataSize;
             if(newTot != oldTot) {
@@ -345,15 +347,20 @@ public class InstalledAppDetails extends Activity implements View.OnClickListene
                 mAppSize.setText(getSizeStr(newPs.codeSize));
                 changed = true;
             }
-            if((newPs.dataSize != mSizeInfo.dataSize) || (newPs.cacheSize != mSizeInfo.cacheSize)) {
-                mDataSize.setText(getSizeStr(newPs.dataSize+newPs.cacheSize));
+            if(newPs.dataSize != mSizeInfo.dataSize) {
+                mDataSize.setText(getSizeStr(newPs.dataSize));
+                changed = true;
+            }
+            if(newPs.cacheSize != mSizeInfo.cacheSize) {
+                mCacheSize.setText(getSizeStr(newPs.cacheSize));
+                changed = true;
             }
             if(changed) {
                 mSizeInfo = newPs;
             }
         }
         
-        long data = mSizeInfo.dataSize+mSizeInfo.cacheSize;
+        long data = mSizeInfo.dataSize;
         // Disable button if data is 0
         if(mAppButtonState != AppButtonStates.NONE){
             mAppButton.setText(mAppButtonText);

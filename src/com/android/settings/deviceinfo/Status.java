@@ -52,7 +52,6 @@ import java.lang.ref.WeakReference;
  * # Network
  * # Roaming
  * # IMEI
- * # IMSI
  * # Network type
  * # Signal Strength
  * # Battery Strength  : TODO
@@ -190,7 +189,6 @@ public class Status extends PreferenceActivity {
         setSummaryText("imei_sv",
                 ((TelephonyManager) getSystemService(TELEPHONY_SERVICE))
                         .getDeviceSoftwareVersion());
-        setSummaryText("imsi", mPhone.getSubscriberId());
         setSummaryText("number", mPhone.getLine1Number());
 
         mPhoneStateReceiver = new PhoneStateIntentReceiver(this, mHandler);

@@ -103,6 +103,7 @@ public class ConfirmLockPattern extends Activity {
             mFooterWrongText = intent.getCharSequenceExtra(FOOTER_WRONG_TEXT);
         }
 
+        mLockPatternView.setTactileFeedbackEnabled(mLockPatternUtils.isTactileFeedbackEnabled());
         mLockPatternView.setOnPatternListener(mConfirmExistingLockPatternListener);
         updateStage(Stage.NeedToUnlock);
 
@@ -220,10 +221,9 @@ public class ConfirmLockPattern extends Activity {
                 setResult(RESULT_OK);
                 finish();
             } else {
-                if (pattern.size() >= LockPatternUtils.MIN_LOCK_PATTERN_SIZE &&
+                if (pattern.size() >= LockPatternUtils.MIN_PATTERN_REGISTER_FAIL &&
                         ++mNumWrongConfirmAttempts >= LockPatternUtils.FAILED_ATTEMPTS_BEFORE_TIMEOUT) {
-                    long deadline = SystemClock.elapsedRealtime() + LockPatternUtils.FAILED_ATTEMPT_TIMEOUT_MS;
-                    mLockPatternUtils.setLockoutAttemptDeadline(deadline);
+                    long deadline = mLockPatternUtils.setLockoutAttemptDeadline();
                     handleAttemptLockout(deadline);
                 } else {
                     updateStage(Stage.NeedToUnlockWrong);

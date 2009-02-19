@@ -45,7 +45,8 @@ public class SecuritySettings extends PreferenceActivity
     private static final String KEY_LOCK_ENABLED = "lockenabled";
     private static final String KEY_VISIBLE_PATTERN = "visiblepattern";
     private static final String KEY_TACTILE_FEEDBACK_ENABLED = "tactilefeedback";
-    private static final int CONFIRM_PATTERN_REQUEST_CODE = 55;
+    private static final int CONFIRM_PATTERN_THEN_DISABLE_REQUEST_CODE = 55;
+    private static final int CONFIRM_PATTERN_THEN_ENABLE_REQUEST_CODE = 56;
 
     private LockPatternUtils mLockPatternUtils;
     private CheckBoxPreference mLockEnabled;
@@ -256,12 +257,22 @@ public class SecuritySettings extends PreferenceActivity
 
         @Override
         protected void onClick() {
-            if (isChecked() && mLockPatternUtils.savedPatternExists()) {
-                confirmPatternThenDisable();
+            if (mLockPatternUtils.savedPatternExists()) {
+                if (isChecked()) {
+                    confirmPatternThenDisable();
+                } else {
+                    confirmPatternThenEnable();
+                }
             } else {
                 super.onClick();
             }
         }
+    }
+
+    private void confirmPatternThenEnable() {
+        final Intent intent = new Intent();
+        intent.setClassName("com.android.settings", "com.android.settings.ConfirmLockPattern");
+        startActivityForResult(intent, CONFIRM_PATTERN_THEN_ENABLE_REQUEST_CODE);
     }
 
     /**
@@ -271,7 +282,7 @@ public class SecuritySettings extends PreferenceActivity
     private void confirmPatternThenDisable() {
         final Intent intent = new Intent();
         intent.setClassName("com.android.settings", "com.android.settings.ConfirmLockPattern");
-        startActivityForResult(intent, CONFIRM_PATTERN_REQUEST_CODE);
+        startActivityForResult(intent, CONFIRM_PATTERN_THEN_DISABLE_REQUEST_CODE);
     }
 
     /**
@@ -282,12 +293,12 @@ public class SecuritySettings extends PreferenceActivity
             Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
-        if (requestCode != CONFIRM_PATTERN_REQUEST_CODE) {
-            return;
-        }
+        final boolean resultOk = resultCode == Activity.RESULT_OK;
 
-        if (resultCode == Activity.RESULT_OK) {
-            mLockPatternUtils.setLockPatternEnabled(false);                
+        if ((requestCode == CONFIRM_PATTERN_THEN_DISABLE_REQUEST_CODE) && resultOk) {
+            mLockPatternUtils.setLockPatternEnabled(false);
+        } else if ((requestCode == CONFIRM_PATTERN_THEN_ENABLE_REQUEST_CODE) && resultOk) {
+            mLockPatternUtils.setLockPatternEnabled(true);
         }
     }
 }

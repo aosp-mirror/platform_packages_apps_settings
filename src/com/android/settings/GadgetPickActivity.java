@@ -59,8 +59,19 @@ public class GadgetPickActivity extends LauncherActivity
     public void onListItemClick(ListView l, View v, int position, long id)
     {
         Intent intent = intentForPosition(position);
-        mGadgetManager.bindGadgetId(mGadgetId, intent.getComponent());
-        setResultData(RESULT_OK);
+        int result;
+        try {
+            mGadgetManager.bindGadgetId(mGadgetId, intent.getComponent());
+            result = RESULT_OK;
+        } catch (IllegalArgumentException e) {
+            // This is thrown if they're already bound, or otherwise somehow
+            // bogus.  Set the result to canceled, and exit.  The app *should*
+            // clean up at this point.  We could pass the error along, but
+            // it's not clear that that's useful -- the gadget will simply not
+            // appear.
+            result = RESULT_CANCELED;
+        }
+        setResultData(result);
         finish();
     }
     

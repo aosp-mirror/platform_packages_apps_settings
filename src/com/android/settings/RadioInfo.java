@@ -95,7 +95,6 @@ public class RadioInfo extends Activity {
     private static final int MENU_ITEM_TOGGLE_DATA_ON_BOOT = 6;
 
     private TextView mImei;
-    private TextView mImsi;
     private TextView number;
     private TextView callState;
     private TextView operatorName;
@@ -407,7 +406,6 @@ public class RadioInfo extends Activity {
         phone = PhoneFactory.getDefaultPhone();
 
         mImei = (TextView) findViewById(R.id.imei);
-        mImsi = (TextView) findViewById(R.id.imsi);
         number = (TextView) findViewById(R.id.number);
         callState = (TextView) findViewById(R.id.call);
         operatorName = (TextView) findViewById(R.id.operator);
@@ -786,10 +784,6 @@ public class RadioInfo extends Activity {
         if (s == null) s = r.getString(R.string.radioInfo_unknown); 
         mImei.setText(s);
         
-        s = phone.getSubscriberId();
-        if (s == null) s = r.getString(R.string.radioInfo_unknown); 
-        mImsi.setText(s);
-
         s = phone.getLine1Number();
         if (s == null) s = r.getString(R.string.radioInfo_unknown); 
         number.setText(s);

@@ -18,7 +18,6 @@ package com.android.settings.battery_history;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
@@ -28,16 +27,19 @@ import com.android.settings.R;
 
 import android.app.Activity;
 import android.content.pm.ApplicationInfo;
+import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.PackageManager.NameNotFoundException;
 import android.os.BatteryStats;
 import android.os.Bundle;
+import android.os.Parcel;
 import android.os.RemoteException;
 import android.os.ServiceManager;
 import android.os.SystemClock;
 import android.os.BatteryStats.Timer;
 import android.os.BatteryStats.Uid;
 import android.util.Log;
+import android.util.LogPrinter;
 import android.util.SparseArray;
 import android.view.KeyEvent;
 import android.view.View;
@@ -59,12 +61,15 @@ public class BatteryHistory extends Activity implements OnClickListener, OnItemS
     // Must be in sync with the values in res/values/array.xml (id battery_history_type_spinner)
     private static final int CPU_USAGE = 0;
     private static final int NETWORK_USAGE = 1;
-    private static final int SENSOR_USAGE = 2;
-    private static final int SCREEN_ON = 3;
+    private static final int GPS_USAGE = 2;
+    private static final int SENSOR_USAGE = 3;
     private static final int WAKE_LOCKS = 4;
+    private static final int SCREEN_ON = 5;
 
-    // App names to use as labels for the shared UIDs that contain them
-    private final HashSet<String> mKnownApps = new HashSet<String>();
+    // Must be in sync with the values in res/values/array.xml (id battery_history_which_spinner)
+    private static final int UNPLUGGED = 0;
+    private static final int CURRENT = 1;
+    private static final int TOTAL = 2;
     
     private BatteryStats mStats;
     private int mWhich = BatteryStats.STATS_UNPLUGGED;
@@ -76,7 +81,11 @@ public class BatteryHistory extends Activity implements OnClickListener, OnItemS
     private List<CpuUsage> mCpuUsage = new ArrayList<CpuUsage>();
     private List<NetworkUsage> mNetworkUsage = new ArrayList<NetworkUsage>();
     private List<SensorUsage> mSensorUsage = new ArrayList<SensorUsage>();
-    private long mScreenOnTime;
+    private List<SensorUsage> mGpsUsage = new ArrayList<SensorUsage>();
+    private List<WakelockUsage> mWakelockUsage = new ArrayList<WakelockUsage>();
+    
+    private boolean mHaveCpuUsage, mHaveNetworkUsage, mHaveSensorUsage,
+            mHaveWakelockUsage, mHaveScreenOnTime;
     
     private LinearLayout mGraphLayout;
     private LinearLayout mTextLayout;
@@ -131,7 +140,9 @@ public class BatteryHistory extends Activity implements OnClickListener, OnItemS
     
     abstract class Graphable implements Comparable<Graphable> {        
         protected String mName;
+        protected String mNamePackage;
         protected boolean mUniqueName;
+        protected String[] mPackages;
         protected String[] mPackageNames;
         
         public abstract String getLabel();
@@ -155,22 +166,40 @@ public class BatteryHistory extends Activity implements OnClickListener, OnItemS
         // Side effects: sets mName and mUniqueName
         void getNameForUid(int uid) {
             PackageManager pm = getPackageManager();
-            mPackageNames = pm.getPackagesForUid(uid);
+            mPackages = pm.getPackagesForUid(uid);
+            if (mPackages == null) {
+                mName = Integer.toString(uid);
+                mNamePackage = null;
+                return;
+            }
+            
+            mPackageNames = new String[mPackages.length];
+            System.arraycopy(mPackages, 0, mPackageNames, 0, mPackages.length);
+            
             // Convert package names to user-facing labels where possible
             for (int i = 0; i < mPackageNames.length; i++) {
                 mPackageNames[i] = BatteryHistory.getLabel(mPackageNames[i], pm);
             }
 
             if (mPackageNames.length == 1) {
+                mNamePackage = mPackages[0];
                 mName = mPackageNames[0];
                 mUniqueName = true;
             } else {
                 mName = getString(R.string.battery_history_uid, uid); // Default name
-                // If one of the names for this UID is in mKnownApps, use it
-                for (String name : mPackageNames) {
-                    if (mKnownApps.contains(name)) {
-                        mName = name;
-                        break;
+                // Look for an official name for this UID.
+                for (String name : mPackages) {
+                    try {
+                        PackageInfo pi = pm.getPackageInfo(name, 0);
+                        if (pi.sharedUserLabel != 0) {
+                            CharSequence nm = pm.getText(name,
+                                    pi.sharedUserLabel, pi.applicationInfo);
+                            if (nm != null) {
+                                mName = nm.toString();
+                                break;
+                            }
+                        }
+                    } catch (PackageManager.NameNotFoundException e) {
                     }
                 }
             }
@@ -178,12 +207,15 @@ public class BatteryHistory extends Activity implements OnClickListener, OnItemS
     }
 
     class CpuUsage extends Graphable {
+        String mProcess;
         double[] mUsage;
         long mStarts;
         
-        public CpuUsage(String name, long userTime, long systemTime, long starts) {
+        public CpuUsage(int uid, String process, long userTime, long systemTime, long starts) {
+            getNameForUid(uid);
+            mProcess = process;
             PackageManager pm = BatteryHistory.this.getPackageManager();
-            mName = BatteryHistory.getLabel(name, pm);
+            mName = BatteryHistory.getLabel(process, pm);
             mUsage = new double[2];
             
             mUsage[0] = userTime;
@@ -204,7 +236,7 @@ public class BatteryHistory extends Activity implements OnClickListener, OnItemS
         }
         
         public void getInfo(StringBuilder info) {
-            info.append(getString(R.string.battery_history_cpu_usage, mName));
+            info.append(getString(R.string.battery_history_cpu_usage, mProcess));
             info.append("\n\n");
             info.append(getString(R.string.battery_history_user_time));
             formatTime(mUsage[0] * 10, info);
@@ -273,19 +305,16 @@ public class BatteryHistory extends Activity implements OnClickListener, OnItemS
     }
     
     class SensorUsage extends Graphable {
-        int mSensorNumber;
         double[] mUsage;
-        HashMap<Integer,Integer> mCounts;
+        int mCount;
         
-        public SensorUsage(int sensorNumber, String sensorName, long totalTime,
-                HashMap<Integer,Integer> counts) {
-            mName = sensorName;
-            mSensorNumber = sensorNumber;
+        public SensorUsage(int uid, long time, int count) {
+            getNameForUid(uid);
             
             mUsage = new double[1];
-            mUsage[0] = totalTime;
+            mUsage[0] = time;
             
-            mCounts = counts;
+            mCount = count;
         }
         
         public String getLabel() {
@@ -307,28 +336,42 @@ public class BatteryHistory extends Activity implements OnClickListener, OnItemS
             info.append(getString(R.string.battery_history_total_time));
             formatTime(mUsage[0], info);
             info.append("\n\n");
+        }
+    }
+    
+    
+    class WakelockUsage extends Graphable {
+        double[] mUsage;
+        int mCount;
+        
+        public WakelockUsage(int uid, long time, int count) {
+            getNameForUid(uid);
             
-            PackageManager pm = getPackageManager();
-            String[] packageNames = null;
-            for (Map.Entry<Integer,Integer> ent : mCounts.entrySet()) {
-                int uid = ent.getKey().intValue();
-                int count = ent.getValue().intValue();
-                packageNames = pm.getPackagesForUid(uid).clone();
-                
-                if (packageNames.length == 1) {
-                    info.append(getString(R.string.battery_history_sensor_usage,
-                            count, packageNames[0]));
-                } else {
-                    info.append(getString(R.string.battery_history_sensor_usage_multi, count));
-                    info.append("\n");
-                    // Convert package names to user-facing labels where possible
-                    for (int i = 0; i < packageNames.length; i++) {
-                        info.append("    ");
-                        info.append(BatteryHistory.getLabel(packageNames[i], pm));
-                        info.append("\n");
-                    }
-                }
-            }
+            mUsage = new double[1];
+            mUsage[0] = time;
+            
+            mCount = count;
+        }
+        
+        public String getLabel() {
+            return mName;
+        }
+        
+        public double getSortValue() {
+            return mUsage[0];
+        }
+        
+        public double[] getValues() {
+            return mUsage;
+        }
+        
+        public void getInfo(StringBuilder info) {
+            info.append(getString(R.string.battery_history_wakelock));
+            info.append(mName);
+            info.append("\n\n");
+            info.append(getString(R.string.battery_history_total_time));
+            formatTime(mUsage[0], info);
+            info.append("\n\n");
         }
     }
     
@@ -337,8 +380,9 @@ public class BatteryHistory extends Activity implements OnClickListener, OnItemS
             case CPU_USAGE: return mCpuUsage;
             case NETWORK_USAGE : return mNetworkUsage;
             case SENSOR_USAGE: return mSensorUsage;
+            case GPS_USAGE: return mGpsUsage;
+            case WAKE_LOCKS: return mWakelockUsage;
             case SCREEN_ON: return null;
-            case WAKE_LOCKS:
             default:
                 return (List<? extends Graphable>) null; // TODO
         }
@@ -363,6 +407,8 @@ public class BatteryHistory extends Activity implements OnClickListener, OnItemS
     private void displayGraph() {
         Log.i(TAG, "displayGraph");
 
+        collectStatistics();
+        
         // Hide the UI and selectively enable it below
         mMessageText.setVisibility(View.GONE);
         for (int i = 0; i < mButtons.length; i++) {
@@ -446,7 +492,8 @@ public class BatteryHistory extends Activity implements OnClickListener, OnItemS
                     long starts = ps.getStarts(mWhich);
 
                     if (userTime != 0 || systemTime != 0) {
-                        mCpuUsage.add(new CpuUsage(ent.getKey(), userTime, systemTime, starts));
+                        mCpuUsage.add(new CpuUsage(u.getUid(), ent.getKey(),
+                                userTime, systemTime, starts));
                     }
                 }
             }
@@ -471,16 +518,9 @@ public class BatteryHistory extends Activity implements OnClickListener, OnItemS
         Collections.sort(mNetworkUsage);
     }
     
-    class SensorRecord {
-        String name;
-        long totalTime;
-        HashMap<Integer,Integer> counts = new HashMap<Integer,Integer>();
-    }
-    
     private void processSensorUsage() {
+        mGpsUsage.clear();
         mSensorUsage.clear();
-        
-        HashMap<Integer,SensorRecord> records = new HashMap<Integer,SensorRecord>();
         
         long uSecTime = SystemClock.elapsedRealtime() * 1000;
         final long uSecNow = mStats.getBatteryUptime(uSecTime);
@@ -492,43 +532,79 @@ public class BatteryHistory extends Activity implements OnClickListener, OnItemS
             int uid = u.getUid();
             
             Map<Integer, ? extends BatteryStats.Uid.Sensor> sensorStats = u.getSensorStats();
+            long timeGps = 0;
+            int countGps = 0;
+            long timeOther = 0;
+            int countOther = 0;
             if (sensorStats.size() > 0) {
                 for (Map.Entry<Integer, ? extends BatteryStats.Uid.Sensor> ent
                         : sensorStats.entrySet()) {
 
                     Uid.Sensor se = ent.getValue();
-                    String name = se.getName();
-                    int sensorNumber = ent.getKey();
+                    int handle = se.getHandle();
                     Timer timer = se.getSensorTime();
                     if (timer != null) {
                         // Convert from microseconds to milliseconds with rounding
                         long totalTime = (timer.getTotalTime(uSecNow, mWhich) + 500) / 1000;
                         int count = timer.getCount(mWhich);
-                        
-                        SensorRecord record = records.get(sensorNumber);
-                        if (record == null) {
-                            record = new SensorRecord();
-                        }
-                        record.name = name;
-                        record.totalTime += totalTime;
-                        Integer c = record.counts.get(uid);
-                        if (c == null) {
-                            record.counts.put(uid, count);
+                        if (handle == BatteryStats.Uid.Sensor.GPS) {
+                            timeGps += totalTime;
+                            countGps += count;
                         } else {
-                            record.counts.put(uid, c.intValue() + count);
+                            timeOther += totalTime;
+                            countOther += count;
                         }
-                        records.put(sensorNumber, record);
                     }
                 }
             }
+            
+            if (timeGps > 0) {
+                mGpsUsage.add(new SensorUsage(uid, timeGps, countGps));
+            }
+            if (timeOther > 0) {
+                mSensorUsage.add(new SensorUsage(uid, timeOther, countOther));
+            }
         }
         
-        for (Map.Entry<Integer,SensorRecord> record : records.entrySet()) {
-            int sensorNumber = record.getKey().intValue();
-            SensorRecord r = record.getValue();
-            mSensorUsage.add(new SensorUsage(sensorNumber, r.name, r.totalTime, r.counts));
-        }
+        Collections.sort(mGpsUsage);
         Collections.sort(mSensorUsage);
+    }
+    
+    private void processWakelockUsage() {
+        mWakelockUsage.clear();
+        
+        long uSecTime = SystemClock.elapsedRealtime() * 1000;
+        final long uSecNow = mStats.getBatteryUptime(uSecTime);
+        
+        SparseArray<? extends Uid> uidStats = mStats.getUidStats();
+        final int NU = uidStats.size();
+        for (int iu = 0; iu < NU; iu++) {
+            Uid u = uidStats.valueAt(iu);
+            int uid = u.getUid();
+            
+            Map<String, ? extends BatteryStats.Uid.Wakelock> wakelockStats = u.getWakelockStats();
+            long time = 0;
+            int count = 0;
+            if (wakelockStats.size() > 0) {
+                for (Map.Entry<String, ? extends BatteryStats.Uid.Wakelock> ent
+                        : wakelockStats.entrySet()) {
+
+                    Uid.Wakelock wl = ent.getValue();
+                    Timer timer = wl.getWakeTime(BatteryStats.WAKE_TYPE_PARTIAL);
+                    if (timer != null) {
+                        // Convert from microseconds to milliseconds with rounding
+                        time += (timer.getTotalTime(uSecNow, mWhich) + 500) / 1000;
+                        count += timer.getCount(mWhich);
+                    }
+                }
+            }
+            
+            if (time > 0) {
+                mWakelockUsage.add(new WakelockUsage(uid, time, count));
+            }
+        }
+        
+        Collections.sort(mWakelockUsage);
     }
     
     private void processScreenOn() {
@@ -536,17 +612,52 @@ public class BatteryHistory extends Activity implements OnClickListener, OnItemS
     }
     
     private void collectStatistics() {
-        processCpuUsage();
-        processNetworkUsage();
-        processSensorUsage();
-        processScreenOn();
+        if (mType == CPU_USAGE) {
+            if (!mHaveCpuUsage) {
+                mHaveCpuUsage = true;
+                processCpuUsage();
+            }
+        }
+        if (mType == NETWORK_USAGE) {
+            if (!mHaveNetworkUsage) {
+                mHaveNetworkUsage = true;
+                processNetworkUsage();
+            }
+        }
+        if (mType == GPS_USAGE || mType == SENSOR_USAGE) {
+            if (!mHaveSensorUsage) {
+                mHaveSensorUsage = true;
+                processSensorUsage();
+            }
+        }
+        if (mType == WAKE_LOCKS) {
+            if (!mHaveWakelockUsage) {
+                mHaveWakelockUsage = true;
+                processWakelockUsage();
+            }
+        }
+        if (mType == SCREEN_ON) {
+            if (!mHaveScreenOnTime) {
+                mHaveScreenOnTime = true;
+                processScreenOn();
+            }
+        }
     }
     
-    private void refresh() {
+    private void load() {
         try {
-            mStats = mBatteryInfo.getStatistics();
-            collectStatistics();
-            displayGraph();
+            byte[] data = mBatteryInfo.getStatistics();
+            Parcel parcel = Parcel.obtain();
+            //Log.i(TAG, "Got data: " + data.length + " bytes");
+            parcel.unmarshall(data, 0, data.length);
+            parcel.setDataPosition(0);
+            mStats = com.android.internal.os.BatteryStatsImpl.CREATOR
+                    .createFromParcel(parcel);
+            //Log.i(TAG, "RECEIVED BATTERY INFO:");
+            //mStats.dumpLocked(new LogPrinter(Log.INFO, TAG));
+            
+            mHaveCpuUsage =  mHaveNetworkUsage =  mHaveSensorUsage
+                    = mHaveWakelockUsage = mHaveScreenOnTime = false;
         } catch (RemoteException e) {
             Log.e(TAG, "RemoteException:", e);
         }
@@ -571,6 +682,8 @@ public class BatteryHistory extends Activity implements OnClickListener, OnItemS
     }
 
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+        int oldWhich = mWhich;
+        
         if (parent.equals(mTypeSpinner)) {
             mType = position;
             switch (position) {
@@ -580,20 +693,39 @@ public class BatteryHistory extends Activity implements OnClickListener, OnItemS
                 case NETWORK_USAGE:
                     mWhichSpinner.setEnabled(true);
                     break;
+                case GPS_USAGE:
+                    mWhichSpinner.setEnabled(true);
+                    break;
                 case SENSOR_USAGE:
+                    mWhichSpinner.setEnabled(true);
+                    break;
+                case WAKE_LOCKS:
                     mWhichSpinner.setEnabled(true);
                     break;
                 case SCREEN_ON:
                     mWhichSpinner.setEnabled(false);
                     break;
-                case WAKE_LOCKS:
-                    break;
             }
         } else if (parent.equals(mWhichSpinner)) {
-            mWhich = position;
+            switch (position) {
+                case UNPLUGGED:
+                    mWhich = BatteryStats.STATS_UNPLUGGED;
+                    break;
+                case CURRENT:
+                    mWhich = BatteryStats.STATS_CURRENT;
+                    break;
+                case TOTAL:
+                    mWhich = BatteryStats.STATS_TOTAL;
+                    break;
+            }
         }
         
-        refresh();
+        if (oldWhich != mWhich) {
+            mHaveCpuUsage =  mHaveNetworkUsage =  mHaveSensorUsage
+                    = mHaveWakelockUsage = mHaveScreenOnTime = false;
+        }
+        
+        displayGraph();
     }
 
     public void onNothingSelected(AdapterView<?> parent) {
@@ -601,15 +733,26 @@ public class BatteryHistory extends Activity implements OnClickListener, OnItemS
     }
     
     @Override
+    public Object onRetainNonConfigurationInstance() {
+        BatteryStats stats = mStats;
+        mStats = null;
+        return stats;
+    }
+
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        if (mStats != null) {
+            outState.putParcelable("stats", mStats);
+        }
+        outState.putInt("type", mType);
+        outState.putInt("which", mWhich);
+    }
+
+    @Override
     public void onCreate(Bundle icicle) {
         super.onCreate(icicle);
         Log.i(TAG, "onCreate");
-        
-        String knownApps = getString(R.string.battery_history_known_apps);
-        String[] knownAppNames = knownApps.split(";");
-        for (String name : knownAppNames) {
-            mKnownApps.add(name);
-        }
         
         setContentView(R.layout.battery_history);
         
@@ -639,7 +782,20 @@ public class BatteryHistory extends Activity implements OnClickListener, OnItemS
             mButtons[i].setOnClickListener(this);
         }
         
-        mBatteryInfo = IBatteryStats.Stub.asInterface(ServiceManager.getService("batteryinfo"));
-        refresh();
+        mBatteryInfo = IBatteryStats.Stub.asInterface(
+                ServiceManager.getService("batteryinfo"));
+        
+        mStats = (BatteryStats)getLastNonConfigurationInstance();
+        if (icicle != null) {
+            if (mStats == null) {
+                mStats = (BatteryStats)icicle.getParcelable("stats");
+            }
+            mType = icicle.getInt("type");
+            mWhich = icicle.getInt("which");
+        }
+        if (mStats == null) {
+            load();
+        }
+        displayGraph();
     }
 }

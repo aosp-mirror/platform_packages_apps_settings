@@ -291,8 +291,6 @@
     <!-- Radio Info screen. Label for a status item.  Used for diagnostic info screens, precise translation isn't needed -->
     <string name="radio_info_data_attempts_label">Data attempts:</string>
     <!-- Radio Info screen. Label for a status item.  Used for diagnostic info screens, precise translation isn't needed -->
-    <string name="radio_info_imsi_label">IMSI:</string>
-    <!-- Radio Info screen. Label for a status item.  Used for diagnostic info screens, precise translation isn't needed -->
     <string name="radio_info_gprs_service_label">GPRS service:</string>
     <!-- Radio Info screen. Label for a status item.  Used for diagnostic info screens, precise translation isn't needed -->
     <string name="radio_info_roaming_label">Roaming:</string>
@@ -903,8 +901,6 @@
     <string name="status_imei">IMEI</string>
     <!-- Do not translate. About phone, status item title -->
     <string name="status_imei_sv">IMEI SV</string>
-    <!-- Do not translate. About phone, status item title -->
-    <string name="status_imsi">IMSI</string>
     <!-- About phone, status item title.  The phone number of the current device.-->
     <string name="status_number">Phone number</string>
     <!-- About phone, status item title for the type of data phone network we're connected to, for example 3G or Edge or GPRS -->
@@ -1386,9 +1382,6 @@ found in the list of installed applications.</string>
     <!-- setting Checkbox summary whether to allow mock locations  -->
     <string name="allow_mock_location_summary">Allow mock locations</string>
 
-    <!-- List of application labels to be used to represent shared UIDs -->
-    <string name="battery_history_known_apps">Android System;Dialer;Calendar;Camera;Google Apps;Contacts;</string>
-
     <!-- Title for the screen that lets the user choose a gadget to add to the home screen
     (or other screens that can host gadgets) -->
     <string name="gadget_picker_title">Choose Gadget</string>
@@ -1446,6 +1439,9 @@ found in the list of installed applications.</string>
         
     <!-- Used for Sensor detail screen in BatteryHistory -->
     <string name="battery_history_sensor">Sensor:</string>
+    
+    <!-- Used for Wakelock detail screen in BatteryHistory -->
+    <string name="battery_history_wakelock">Partial Wakelock:</string>
     
     <!-- Used for Sensor detail screen in BatteryHistory -->
     <string name="battery_history_used_by_packages">Sensor used by packages:</string>

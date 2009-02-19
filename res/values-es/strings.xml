@@ -49,8 +49,7 @@
     <string name="radioInfo_lac">"LAC"</string>
     <string name="radioInfo_cid">"CID"</string>
     <string name="sdcard_unmount">"Desmontar tarjeta SD"</string>
-    <!-- no translation found for sdcard_format (362497552060004057) -->
-    <skip />
+    <string name="sdcard_format">"Formatear tarjeta SD"</string>
     <string name="small_font">"Pequeño"</string>
     <string name="medium_font">"Mediano"</string>
     <string name="large_font">"Grande"</string>
@@ -132,7 +131,6 @@
     <string name="radio_info_signal_location_label">"Ubicación:"</string>
     <string name="radio_info_neighboring_location_label">"CID anexo"</string>
     <string name="radio_info_data_attempts_label">"Intentos de datos:"</string>
-    <string name="radio_info_imsi_label">"IMSI:"</string>
     <string name="radio_info_gprs_service_label">"Servicio GPRS:"</string>
     <string name="radio_info_roaming_label">"Itinerancia:"</string>
     <string name="radio_info_imei_label">"IMEI:"</string>
@@ -160,8 +158,7 @@
     <string name="radio_info_smsc_label">"SMSC:"</string>
     <string name="radio_info_smsc_update_label">"Actualizar"</string>
     <string name="radio_info_smsc_refresh_label">"Actualizar"</string>
-    <!-- no translation found for radio_info_toggle_dns_check_label (8292252930563286858) -->
-    <skip />
+    <string name="radio_info_toggle_dns_check_label">"alternar comprobación de DNS"</string>
     <string name="band_mode_title">"Establecer banda GSM/UMTS"</string>
     <string name="band_mode_loading">"Cargando lista de bandas..."</string>
     <string name="band_mode_set">"Establecer"</string>
@@ -179,24 +176,23 @@
     <string name="sdcard_settings_scanning_status">"Buscando medios en tarjeta SD..."</string>
     <string name="sdcard_settings_read_only_status">"Tarjeta SD montada en modo de sólo lectura"</string>
     <string name="next_label">"Siguiente"</string>
-    <string name="language_picker_title">"Configuración regional"</string>
+    <string name="language_picker_title">"Configuración local"</string>
     <string name="select_your_language">"Selecciona el idioma que prefieras."</string>
     <string name="activity_picker_label">"Seleccionar actividad"</string>
     <string name="device_info_label">"Información del dispositivo"</string>
     <string name="battery_info_label">"Información sobre la batería"</string>
-    <!-- no translation found for battery_history_label (8242244969757414501) -->
-    <skip />
+    <string name="battery_history_label">"Historial de la batería"</string>
     <string name="display_label">"Pantalla"</string>
     <string name="phone_info_label">"Información sobre el teléfono"</string>
     <string name="sd_card_settings_label">"Tarjeta SD"</string>
     <string name="proxy_settings_label">"Configuración de proxy"</string>
     <string name="cancel">"Cancelar"</string>
-    <string name="settings_label">"Configuración"</string>
+    <string name="settings_label">"Ajustes"</string>
     <string name="airplane_mode">"Modo avión"</string>
     <string name="airplane_mode_summary">"Inhabilitar todas las conexiones inalámbricas"</string>
     <string name="airplane_mode_turning_on">"Inhabilitando conexiones inalámbricas..."</string>
     <string name="airplane_mode_turning_off">"Habilitando conexiones inalámbricas..."</string>
-    <string name="radio_controls_title">"Controles de conexión inalámbrica"</string>
+    <string name="radio_controls_title">"Conexiones inalámbricas"</string>
     <string name="radio_controls_summary">"Administrar Wi-Fi, Bluetooth, modo avión y redes móviles"</string>
     <string name="date_and_time_settings_title">"Fecha y hora"</string>
     <string name="date_and_time_settings_summary">"Establecer fecha, hora, zona horaria y formatos"</string>
@@ -215,7 +211,7 @@
     <string name="security_passwords_title">"Contraseñas"</string>
     <string name="bluetooth_quick_toggle_title">"Bluetooth"</string>
     <string name="bluetooth_quick_toggle_summary">"Activar Bluetooth"</string>
-    <string name="bluetooth_settings">"Configuración de Bluetooth"</string>
+    <string name="bluetooth_settings">"Bluetooth"</string>
     <string name="bluetooth_settings_title">"Configuración de Bluetooth"</string>
     <string name="bluetooth_settings_summary">"Administrar conexiones, establecer el nombre del dispositivo y la visibilidad"</string>
     <string name="bluetooth_pin_entry">"Solicitud de sincronización de Bluetooth"</string>
@@ -317,12 +313,9 @@
     <string name="wifi_setting_num_channels_summary">"Establecer el número de canales que se van a utilizar"</string>
     <string name="wifi_setting_num_channels_error">"Se ha producido un problema al intentar establecer el dominio regulador."</string>
     <string name="wifi_setting_num_channels_channel_phrase">"<xliff:g id="NUM_CHANNELS">%1$d</xliff:g> canales"</string>
-    <!-- no translation found for wifi_setting_sleep_policy_title (1367731352485585528) -->
-    <skip />
-    <!-- no translation found for wifi_setting_sleep_policy_summary (7573693311804602041) -->
-    <skip />
-    <!-- no translation found for wifi_setting_sleep_policy_error (5103670439972135148) -->
-    <skip />
+    <string name="wifi_setting_sleep_policy_title">"Política de suspensión de Wi-Fi"</string>
+    <string name="wifi_setting_sleep_policy_summary">"Especificar cuándo cambiar de Wi-Fi a datos móviles"</string>
+    <string name="wifi_setting_sleep_policy_error">"Se ha producido un problema al intentar establecer la política de suspensión."</string>
     <string name="wifi_advanced_mac_address_title">"Dirección MAC"</string>
     <string name="fragment_status_scanning">"Buscando..."</string>
     <string name="fragment_status_connecting">"Conectando con <xliff:g id="NETWORK_NAME">%1$s</xliff:g>..."</string>
@@ -365,12 +358,9 @@
     <string name="sound_effects_enable_title">"Selección sonora"</string>
     <string name="sound_effects_enable_summary_on">"Reproducir sonido cuando se realiza una selección de pantalla"</string>
     <string name="sound_effects_enable_summary_off">"Reproducir sonido cuando se realiza una selección de pantalla"</string>
-    <!-- no translation found for play_media_notification_sounds_enable_title (1008791464029179529) -->
-    <skip />
-    <!-- no translation found for play_media_notification_sounds_enable_summary_on (426729807044947187) -->
-    <skip />
-    <!-- no translation found for play_media_notification_sounds_enable_summary_off (803791141563778934) -->
-    <skip />
+    <string name="play_media_notification_sounds_enable_title">"Notificaciones de la tarjeta SD"</string>
+    <string name="play_media_notification_sounds_enable_summary_on">"Inhabilitar sonidos de notificación de la tarjeta SD"</string>
+    <string name="play_media_notification_sounds_enable_summary_off">"Habilitar sonidos de notificación de la tarjeta SD"</string>
     <string name="sync_settings">"Sincronización de datos"</string>
     <string name="sync_settings_summary">"Seleccionar las aplicaciones que están sincronizadas"</string>
     <string name="display_settings">"Configuración de pantalla"</string>
@@ -378,11 +368,9 @@
     <string name="animations_summary_on">"Mostrar animación al abrir o cerrar ventanas"</string>
     <string name="animations_summary_off">"Mostrar animación al abrir o cerrar ventanas"</string>
     <string name="brightness">"Brillo"</string>
-    <!-- no translation found for brightness_summary (838917350127550703) -->
-    <skip />
-    <string name="screen_timeout">"Tiempo de espera de la pantalla"</string>
-    <!-- no translation found for screen_timeout_summary (2905757633140605334) -->
-    <skip />
+    <string name="brightness_summary">"Ajustar el brillo de la pantalla"</string>
+    <string name="screen_timeout">"Tiempo de espera de pantalla"</string>
+    <string name="screen_timeout_summary">"Ajustar el tiempo de retraso antes de que la pantalla se apague automáticamente"</string>
     <string name="sim_lock_settings">"Configuración de bloqueo de tarjeta SIM"</string>
     <string name="sim_lock_settings_category">"Configurar bloqueo de tarjeta SIM"</string>
     <string name="sim_lock_settings_title">"Bloqueo de tarjeta SIM"</string>
@@ -416,13 +404,11 @@
     <string name="device_status_activity_title">"Estado"</string>
     <string name="device_status">"Estado"</string>
     <string name="device_status_summary">"IMEI, número de teléfono, señal, etc."</string>
-    <string name="storage_settings_title">"Almacenamiento en teléfono y en tarjeta SD"</string>
+    <string name="storage_settings_title">"Almacenamiento"</string>
     <string name="storage_settings_summary">"Tarjeta de SD sin montar, ver almacenamiento disponible"</string>
     <string name="status_number">"Número de teléfono"</string>
-    <!-- no translation found for status_network_type (3279383550222116235) -->
-    <skip />
-    <!-- no translation found for status_data_state (5503181397066522950) -->
-    <skip />
+    <string name="status_network_type">"Tipo de red móvil"</string>
+    <string name="status_data_state">"Estado de red móvil"</string>
     <string name="status_service_state">"Estado del servicio"</string>
     <string name="status_signal_strength">"Intensidad de la señal"</string>
     <string name="status_roaming">"Itinerancia"</string>
@@ -430,24 +416,18 @@
     <string name="status_wifi_mac_address">"Dirección MAC de la red Wi-Fi"</string>
     <string name="status_bt_address">"Dirección de Bluetooth"</string>
     <string name="status_unavailable">"No disponible"</string>
-    <!-- no translation found for status_network_traffic_stats (2089739529980224804) -->
-    <skip />
-    <!-- no translation found for status_network_traffic_summary (1456797220417923108) -->
-    <skip />
+    <string name="status_network_traffic_stats">"Uso de red"</string>
+    <string name="status_network_traffic_summary">"Enviado: <xliff:g id="NETWORK_TRAFFIC_0">%1$d packets, %2$d bytes%n</xliff:g>Recibido: <xliff:g id="NETWORK_TRAFFIC_1">%3$d packets, %4$d bytes</xliff:g>"</string>
     <string name="status_up_time">"Tiempo de actividad"</string>
     <string name="status_awake_time">"Tiempo de actividad"</string>
     <string name="internal_memory">"Almacenamiento interno del teléfono"</string>
     <string name="sd_memory">"Tarjeta SD"</string>
     <string name="memory_available">"Espacio disponible"</string>
     <string name="memory_size">"Espacio total"</string>
-    <!-- no translation found for sd_eject (6915293408836853020) -->
-    <skip />
-    <!-- no translation found for sd_eject_summary (3315557796211542962) -->
-    <skip />
-    <!-- no translation found for sd_format (5448738337382712203) -->
-    <skip />
-    <!-- no translation found for sd_format_summary (6616491027883134004) -->
-    <skip />
+    <string name="sd_eject">"Desmontar tarjeta SD"</string>
+    <string name="sd_eject_summary">"Desmonta la tarjeta SD para extraerla con seguridad"</string>
+    <string name="sd_format">"Formatear tarjeta SD"</string>
+    <string name="sd_format_summary">"Formatear (borrar) la tarjeta SD"</string>
     <string name="sd_unavailable">"No disponible"</string>
     <string name="read_only">"(Sólo lectura)"</string>
     <string name="battery_status_title">"Estado de la batería"</string>
@@ -486,32 +466,24 @@
     <string name="master_clear_gesture_prompt">"Crea tu patrón de desbloqueo."</string>
     <string name="master_clear_gesture_explanation">"Debes crear un patrón de desbloqueo para confirmar el reinicio del teléfono."</string>
     <string name="master_clear_failed">"No se ha reiniciado el sistema porque el servicio Borrado del sistema no está disponible."</string>
-    <!-- no translation found for media_format_title (4671276096695789895) -->
-    <skip />
-    <!-- no translation found for media_format_summary (3805714639375830120) -->
-    <skip />
-    <!-- no translation found for media_format_desc (1142563222357820834) -->
-    <skip />
-    <!-- no translation found for media_format_button_text (370856400090190151) -->
-    <skip />
-    <!-- no translation found for media_format_final_desc (1776666694910717198) -->
-    <skip />
-    <!-- no translation found for media_format_final_button_text (4881713344315923175) -->
-    <skip />
-    <!-- no translation found for media_format_gesture_prompt (3109349468816856670) -->
-    <skip />
-    <!-- no translation found for media_format_gesture_explanation (4239529439389660159) -->
-    <skip />
-    <string name="call_settings_title">"Configuración de llamada"</string>
-    <string name="call_settings_summary">"Configurar buzón de voz, desvío de llamadas, llamada en espera, identificador de llamada"</string>
+    <string name="media_format_title">"Formatear tarjeta SD"</string>
+    <string name="media_format_summary">"Borra todos los datos de la tarjeta SD."</string>
+    <string name="media_format_desc">"Esta acción borrará el contenido de la tarjeta SD del teléfono. Perderás TODOS los datos de la tarjeta."</string>
+    <string name="media_format_button_text">"Formatear tarjeta SD"</string>
+    <string name="media_format_final_desc">"¿Quieres formatear la tarjeta SD y borrar todos los datos? Esta acción no se puede deshacer."</string>
+    <string name="media_format_final_button_text">"Borrar todo"</string>
+    <string name="media_format_gesture_prompt">"Crea tu patrón de desbloqueo."</string>
+    <string name="media_format_gesture_explanation">"Debes crear un patrón de desbloqueo para confirmar el formato de la tarjeta SD."</string>
+    <string name="call_settings_title">"Ajustes de llamadas"</string>
+    <string name="call_settings_summary">"Configurar buzón, llamada en espera, desvío e identificador"</string>
     <string name="network_settings_title">"Redes móviles"</string>
     <string name="network_settings_summary">"Establecer opciones para itinerancia, redes, APN"</string>
     <string name="location_title">"Fuentes de Mi Ubicación"</string>
     <string name="location_network_based">"Utilizar redes inalámbricas"</string>
-    <string name="location_networks_disabled">"Utilizar redes inalámbricas para ver una ubicación en aplicaciones (como, por ejemplo, Google Maps)"</string>
+    <string name="location_networks_disabled">"Para ver una ubicación en aplicaciones (por ejemplo, Google Maps)"</string>
     <string name="location_neighborhood_level">"Ubicación determinada por redes móviles o Wi-Fi"</string>
     <string name="location_gps">"Habilitar satélites GPS"</string>
-    <string name="location_street_level">"Durante la localización, preciso en el nivel de calle (anula la selección para ahorrar batería)"</string>
+    <string name="location_street_level">"Preciso en el nivel de calle (anula la selección para ahorrar batería)"</string>
     <string name="location_gps_disabled">"Localizar en nivel de calle (requiere más batería además de la vista aérea)"</string>
     <string name="about_settings">"Acerca del teléfono"</string>
     <string name="about_settings_summary">"Ver información legal, estado del teléfono, versión del software"</string>
@@ -528,7 +500,7 @@
     <string name="lockpattern_need_to_unlock">"Confirmar patrón guardado"</string>
     <string name="lockpattern_need_to_unlock_wrong">"Inténtalo de nuevo:"</string>
     <string name="lockpattern_recording_intro_header">"Crear un patrón de desbloqueo"</string>
-    <string name="lockpattern_recording_intro_footer">"Pulsa Menú para obtener ayuda."</string>
+    <string name="lockpattern_recording_intro_footer">"Pulsa MENU para obtener ayuda."</string>
     <string name="lockpattern_recording_inprogress">"Levanta el dedo cuando termines."</string>
     <string name="lockpattern_recording_incorrect_too_short">"Une al menos <xliff:g id="NUMBER">%d</xliff:g> puntos. Inténtalo de nuevo:"</string>
     <string name="lockpattern_pattern_entered_header">"Patrón grabado"</string>
@@ -555,14 +527,13 @@
     <string name="lock_example_title">"Patrón de ejemplo"</string>
     <string name="lock_example_message">"Une al menos cuatro puntos."\n" "\n"Selecciona \"Siguiente\" cuando estés preparado para crear tu propio patrón."</string>
     <string name="manageapplications_settings_title">"Administrar aplicaciones"</string>
-    <!-- no translation found for manageapplications_settings_summary (6097117021500651232) -->
-    <skip />
+    <string name="manageapplications_settings_summary">"Administrar y eliminar aplicaciones instaladas"</string>
     <string name="applications_settings">"Aplicaciones"</string>
     <string name="applications_settings_summary">"Administrar aplicaciones, configurar accesos directos de inicio rápido"</string>
     <string name="applications_settings_header">"Configuración de aplicaciones"</string>
     <string name="install_applications">"Orígenes desconocidos"</string>
     <string name="install_unknown_applications">"Permitir la instalación de aplicaciones distintas de Market"</string>
-    <string name="install_all_warning">"El teléfono y los datos personales son más vulnerables a los ataques de aplicaciones de origen desconocido. El usuario acuerda ser el único responsable de cualquier daño en el teléfono o pérdida de datos que se pueda derivar del uso de estas aplicaciones."</string>
+    <string name="install_all_warning">"El teléfono y los datos personales son más vulnerables a los ataques de aplicaciones de origen desconocido. El usuario acepta ser el único responsable de cualquier daño en el teléfono o pérdida de datos que se pueda derivar del uso de estas aplicaciones."</string>
     <string name="application_info_label">"Información de la aplicación"</string>
     <string name="storage_label">"Almacenamiento"</string>
     <string name="auto_launch_label">"Ejecutar de forma predeterminada"</string>
@@ -570,10 +541,8 @@
     <string name="cache_header_label">"Caché"</string>
     <string name="clear_cache_btn_text">"Borrar caché"</string>
     <string name="cache_size_label">"Caché"</string>
-    <!-- no translation found for controls_label (7611113077086853799) -->
-    <skip />
-    <!-- no translation found for force_stop (7435006169872876756) -->
-    <skip />
+    <string name="controls_label">"Controles"</string>
+    <string name="force_stop">"Forzar detención"</string>
     <string name="total_size_label">"Total"</string>
     <string name="application_size_label">"Aplicación"</string>
     <string name="data_size_label">"Datos"</string>
@@ -586,10 +555,8 @@
     <string name="sort_order_alpha">"Ordenar"</string>
     <string name="sort_order_size">"Ordenar por tamaño"</string>
     <string name="manage_space_text">"Administrar espacio"</string>
-    <!-- no translation found for filter (2018011724373033887) -->
-    <skip />
-    <!-- no translation found for filter_dlg_title (6507663329723966854) -->
-    <skip />
+    <string name="filter">"Filtrar"</string>
+    <string name="filter_dlg_title">"Seleccionar opciones de filtrado"</string>
     <string name="filter_apps_all">"Todas"</string>
     <string name="filter_apps_third_party">"Externas"</string>
     <string name="filter_apps_running">"En ejecución"</string>
@@ -603,48 +570,36 @@
     <string name="app_not_found_dlg_text">"No se ha encontrado la aplicación en la lista de aplicaciones instaladas."</string>
     <string name="clear_data_failed">"No se han podido borrar los datos de aplicación."</string>
     <string name="security_settings_desc">"Esta aplicación puede acceder a los siguientes elementos del teléfono:"</string>
-    <!-- no translation found for computing_size (1599186977475211186) -->
-    <skip />
+    <string name="computing_size">"Calculando…"</string>
     <string name="invalid_size_value">"No se ha podido calcular el tamaño del paquete."</string>
     <string name="empty_list_msg">"No tienes instalada ninguna aplicación externa."</string>
-    <string name="language_settings">"Configuración regional y texto"</string>
-    <string name="language_settings_summary">"Establecer opciones de autocorrección, introducción de texto y configuración regional (idioma y región)"</string>
-    <string name="language_category">"Configuración regional"</string>
+    <string name="language_settings">"Ajuste regional y de texto"</string>
+    <string name="language_settings_summary">"Establecer opciones de autocorrección, introducción de texto y configuración local (idioma y país)"</string>
+    <string name="language_category">"Configuración local"</string>
     <string name="text_category">"Configuración de texto"</string>
     <string name="phone_language">"Seleccionar configuración local"</string>
-    <!-- no translation found for phone_language_summary (1809580675831352352) -->
-    <skip />
+    <string name="phone_language_summary">"Seleccionar idioma y región"</string>
     <string name="auto_replace">"Reemplazar automáticamente"</string>
     <string name="auto_replace_summary">"Corregir palabras con errores de escritura"</string>
     <string name="auto_caps">"Mayúsculas automáticas"</string>
     <string name="auto_caps_summary">"Escribir en mayúsculas la primera letra de las frases"</string>
     <string name="auto_punctuate">"Puntuación automática"</string>
-    <!-- no translation found for hardkeyboard_category (5957168411305769899) -->
-    <skip />
-    <string name="auto_punctuate_summary">"Pulse la tecla Espacio dos veces para insertar el carácter \".\"."</string>
+    <string name="hardkeyboard_category">"Configuración del teclado físico"</string>
+    <string name="auto_punctuate_summary">"Pulsa la barra espaciadora dos veces para insertar el carácter \".\""</string>
     <string name="show_password">"Contraseñas visibles"</string>
     <string name="show_password_summary">"Mostrar contraseña mientras se escribe"</string>
-    <!-- no translation found for user_dict_settings_titlebar (765659257455000490) -->
-    <skip />
-    <!-- no translation found for user_dict_settings_title (8357027437499042191) -->
-    <skip />
-    <!-- no translation found for user_dict_settings_summary (2460427065601355471) -->
-    <skip />
-    <!-- no translation found for user_dict_settings_add_menu_title (4056762757149923551) -->
-    <skip />
-    <!-- no translation found for user_dict_settings_add_dialog_title (4702613990174126482) -->
-    <skip />
-    <!-- no translation found for user_dict_settings_context_menu_edit_title (2210564879320004837) -->
-    <skip />
-    <!-- no translation found for user_dict_settings_context_menu_delete_title (9140703913776549054) -->
-    <skip />
-    <!-- no translation found for user_dict_settings_empty_text (6209268025109242806) -->
-    <skip />
+    <string name="user_dict_settings_titlebar">"Diccionario del usuario"</string>
+    <string name="user_dict_settings_title">"Diccionario del usuario"</string>
+    <string name="user_dict_settings_summary">"Añadir y eliminar palabras del diccionario del usuario"</string>
+    <string name="user_dict_settings_add_menu_title">"Añadir"</string>
+    <string name="user_dict_settings_add_dialog_title">"Añadir al usuario"</string>
+    <string name="user_dict_settings_context_menu_edit_title">"Editar"</string>
+    <string name="user_dict_settings_context_menu_delete_title">"Suprimir"</string>
+    <string name="user_dict_settings_empty_text">"No tienes ninguna palabra en el diccionario del usuario. Puedes añadir una palabra a través del menú."</string>
     <string name="testing">"Prueba"</string>
     <string name="testing_phone_info">"Información sobre el teléfono"</string>
     <string name="testing_battery_info">"Información sobre la batería"</string>
-    <!-- no translation found for testing_battery_history (3043329445810695647) -->
-    <skip />
+    <string name="testing_battery_history">"Historial de la batería"</string>
     <string name="quick_launch_title">"Inicio rápido"</string>
     <string name="quick_launch_summary">"Establecer accesos rápidos del teclado para ejecutar aplicaciones"</string>
     <string name="quick_launch_assign_application">"Asignar aplicación"</string>
@@ -658,78 +613,44 @@
     <string name="quick_launch_display_mode_shortcuts">"Accesos directos"</string>
     <string name="input_methods_settings_title">"Introducción de texto"</string>
     <string name="input_methods_settings_summary">"Administrar opciones de introducción de texto"</string>
-    <!-- no translation found for input_methods_settings_label_format (4882768027634191074) -->
-    <skip />
+    <string name="input_methods_settings_label_format">"Configuración de %s"</string>
     <string name="development_settings_title">"Desarrollo"</string>
     <string name="development_settings_summary">"Establecer opciones de desarrollo de aplicaciones"</string>
     <string name="enable_adb">"Depuración USB"</string>
     <string name="enable_adb_summary">"Modo de depuración cuando está conectado el dispositivo USB"</string>
-    <string name="keep_screen_on">"Mantener activa"</string>
+    <string name="keep_screen_on">"Pantalla activa"</string>
     <string name="keep_screen_on_summary">"La pantalla nunca entra en modo de suspensión durante la carga"</string>
     <string name="allow_mock_location">"Permitir ubicaciones simuladas"</string>
     <string name="allow_mock_location_summary">"Permitir ubicaciones simuladas"</string>
-    <!-- no translation found for battery_history_known_apps (6907374478255786240) -->
-    <skip />
-    <!-- no translation found for gadget_picker_title (4335873961457985189) -->
-    <skip />
-    <!-- no translation found for battery_history_details_for (5189636461798594740) -->
-    <skip />
-    <!-- no translation found for battery_history_uid (1016606150528436298) -->
-    <skip />
-    <!-- no translation found for battery_history_network_usage (8010852371665217020) -->
-    <skip />
-    <!-- no translation found for battery_history_bytes_received (980307569180518302) -->
-    <skip />
-    <!-- no translation found for battery_history_bytes_sent (2501748768602119159) -->
-    <skip />
-    <!-- no translation found for battery_history_bytes_total (4444807574361642753) -->
-    <skip />
-    <!-- no translation found for battery_history_cpu_usage (2597353713014790877) -->
-    <skip />
-    <!-- no translation found for battery_history_user_time (6227507614894791359) -->
-    <skip />
-    <!-- no translation found for battery_history_system_time (2015862072724507547) -->
-    <skip />
-    <!-- no translation found for battery_history_total_time (3618703970098556104) -->
-    <skip />
-    <!-- no translation found for battery_history_starts (9137453931978571696) -->
-    <skip />
-    <!-- no translation found for battery_history_days (6387593985264923377) -->
-    <skip />
-    <!-- no translation found for battery_history_hours (2593055276272350197) -->
-    <skip />
-    <!-- no translation found for battery_history_minutes (5608990219891318138) -->
-    <skip />
-    <!-- no translation found for battery_history_seconds (7397664460929461350) -->
-    <skip />
-    <!-- no translation found for battery_history_packages_sharing_this_uid (4101596071379250050) -->
-    <skip />
-    <!-- no translation found for battery_history_no_data (1177238743237067617) -->
-    <skip />
-    <!-- no translation found for battery_history_sensor (2333488996028993982) -->
-    <skip />
-    <!-- no translation found for battery_history_used_by_packages (3000711380023436470) -->
-    <skip />
-    <!-- no translation found for battery_history_sensor_usage (3593133338613209024) -->
-    <skip />
-    <!-- no translation found for battery_history_sensor_usage_multi (4536084375991014508) -->
-    <skip />
-    <!-- no translation found for battery_history_screen_on (1377240025275657277) -->
-    <skip />
-    <!-- no translation found for battery_history_screen_on_battery (536058210445081888) -->
-    <skip />
-    <!-- no translation found for battery_history_screen_on_plugged (5019127390021871260) -->
-    <skip />
-    <!-- no translation found for usage_stats_label (5890846333487083609) -->
-    <skip />
-    <!-- no translation found for testing_usage_stats (7823048598893937339) -->
-    <skip />
-    <!-- no translation found for display_order_text (8592776965827565271) -->
-    <skip />
-    <!-- no translation found for app_name_label (2000949925256858308) -->
-    <skip />
-    <!-- no translation found for launch_count_label (4019444833263957024) -->
-    <skip />
-    <!-- no translation found for usage_time_label (295954901452833058) -->
-    <skip />
+    <string name="gadget_picker_title">"Seleccionar gadget"</string>
+    <string name="battery_history_details_for">"Detalles del ID único %d"</string>
+    <string name="battery_history_uid">"ID único <xliff:g id="USER_ID">%1$d</xliff:g>"</string>
+    <string name="battery_history_network_usage">"Detalles de uso de red para <xliff:g id="APP_NAME">%1$s</xliff:g>:"</string>
+    <string name="battery_history_bytes_received">"Bytes recibidos: <xliff:g id="BYTES">%1$d</xliff:g>"</string>
+    <string name="battery_history_bytes_sent">"Bytes enviados: <xliff:g id="BYTES">%1$d</xliff:g>"</string>
+    <string name="battery_history_bytes_total">"Bytes totales: <xliff:g id="BYTES">%1$d</xliff:g>"</string>
+    <string name="battery_history_cpu_usage">"Detalles de uso de CPU para <xliff:g id="APP_NAME">%1$s</xliff:g>:"</string>
+    <string name="battery_history_user_time">"Tiempo de usuario:"</string>
+    <string name="battery_history_system_time">"Tiempo del sistema:"</string>
+    <string name="battery_history_total_time">"Tiempo total"</string>
+    <string name="battery_history_starts">"Inicios: <xliff:g id="STARTS">%1$d</xliff:g>"</string>
+    <string name="battery_history_days">"<xliff:g id="DAYS">%1$d</xliff:g> días, <xliff:g id="HOURS">%2$d</xliff:g> horas, <xliff:g id="MINUTES">%3$d</xliff:g> minutos, <xliff:g id="SECONDS">%4$d</xliff:g> segundos"</string>
+    <string name="battery_history_hours">"<xliff:g id="HOURS">%1$d</xliff:g> horas, <xliff:g id="MINUTES">%2$d</xliff:g> minutos, <xliff:g id="SECONDS">%3$d</xliff:g> segundos"</string>
+    <string name="battery_history_minutes">"<xliff:g id="MINUTES">%1$d</xliff:g> minutos, <xliff:g id="SECONDS">%2$d</xliff:g> segundos"</string>
+    <string name="battery_history_seconds">"<xliff:g id="SECONDS">%1$d</xliff:g> segundos"</string>
+    <string name="battery_history_packages_sharing_this_uid">"Paquetes que comparten este ID único:"</string>
+    <string name="battery_history_no_data">"No hay datos disponibles sobre el uso de la batería."</string>
+    <string name="battery_history_sensor">"Sensor:"</string>
+    <string name="battery_history_used_by_packages">"Sensor utilizado por paquetes:"</string>
+    <string name="battery_history_sensor_usage">"Utilizado <xliff:g id="COUNT">%1$d</xliff:g> veces por <xliff:g id="PACKAGE">%2$s</xliff:g>"</string>
+    <string name="battery_history_sensor_usage_multi">"Utilizado <xliff:g id="COUNT">%1$d</xliff:g> veces por uno de:"</string>
+    <string name="battery_history_screen_on">"Tiempo transcurrido con la pantalla encendida:"</string>
+    <string name="battery_history_screen_on_battery">"En la batería:"</string>
+    <string name="battery_history_screen_on_plugged">"Conectado:"</string>
+    <string name="usage_stats_label">"Estadísticas de uso"</string>
+    <string name="testing_usage_stats">"Estadísticas de uso"</string>
+    <string name="display_order_text">"Ordenar por:"</string>
+    <string name="app_name_label">"Aplicación"</string>
+    <string name="launch_count_label">"Número"</string>
+    <string name="usage_time_label">"Tiempo de uso"</string>
 </resources>
