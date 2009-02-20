@@ -30,6 +30,7 @@ import android.content.res.Resources;
 import android.os.IBinder;
 import android.os.RemoteException;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.ContextMenu;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -190,7 +191,7 @@ public class LocalBluetoothDevice implements Comparable<LocalBluetoothDevice> {
         int status = profileManager.getConnectionStatus(mAddress);
         if (!SettingsBtStatus.isConnectionStatusConnected(status)) {
             if (profileManager.connect(mAddress) != BluetoothDevice.RESULT_SUCCESS) {
-                showConnectingError();
+                Log.i(TAG, "Failed to connect " + profile.toString() + " to " + mName);
             }
         }
     }

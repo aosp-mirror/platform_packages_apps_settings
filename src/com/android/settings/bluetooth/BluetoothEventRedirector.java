@@ -92,7 +92,7 @@ public class BluetoothEventRedirector {
                 int oldState = intent.getIntExtra(BluetoothIntent.HEADSET_PREVIOUS_STATE, 0);
                 if (newState == BluetoothHeadset.STATE_DISCONNECTED &&
                         oldState == BluetoothHeadset.STATE_CONNECTING) {
-                    mManager.getLocalDeviceManager().onConnectingError(address);
+                    Log.i(TAG, "Failed to connect BT headset");
                 }
                 
             } else if (action.equals(BluetoothA2dp.SINK_STATE_CHANGED_ACTION)) {
@@ -102,7 +102,7 @@ public class BluetoothEventRedirector {
                 int oldState = intent.getIntExtra(BluetoothA2dp.SINK_PREVIOUS_STATE, 0);
                 if (newState == BluetoothA2dp.STATE_DISCONNECTED &&
                         oldState == BluetoothA2dp.STATE_CONNECTING) {
-                    mManager.getLocalDeviceManager().onConnectingError(address);
+                    Log.i(TAG, "Failed to connect BT A2DP");
                 }
                 
             } else if (action.equals(BluetoothIntent.REMOTE_DEVICE_CLASS_UPDATED_ACTION)) {
