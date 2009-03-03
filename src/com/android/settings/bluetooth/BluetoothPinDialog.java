@@ -157,12 +157,11 @@ public class BluetoothPinDialog extends AlertActivity implements DialogInterface
         messageView.setText(getString(R.string.bluetooth_pairing_error_message,
                 mLocalManager.getLocalDeviceManager().getName(mAddress)));
         
-        mPinView.setVisibility(View.GONE);
+        mPinView.setEnabled(false);
         mPinView.clearFocus();
         mPinView.removeTextChangedListener(this);
-
-        mOkButton.setEnabled(true);
-        mAlert.getButton(DialogInterface.BUTTON_NEGATIVE).setVisibility(View.GONE);
+        
+        mAlert.getButton(DialogInterface.BUTTON_POSITIVE).setEnabled(false);
     }
     
     private void onPair(String pin) {

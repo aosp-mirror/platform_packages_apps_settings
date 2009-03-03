@@ -95,7 +95,6 @@ public class AdvancedSettings extends PreferenceActivity
         if (validChannelCounts == null) {
             Toast.makeText(this, R.string.wifi_setting_num_channels_error,
                            Toast.LENGTH_SHORT).show();
-            pref.setEnabled(false);
             return;
         }
         String[] entries = new String[validChannelCounts.length];
@@ -108,7 +107,6 @@ public class AdvancedSettings extends PreferenceActivity
         }
         pref.setEntries(entries);
         pref.setEntryValues(entryValues);
-        pref.setEnabled(true);
         int numChannels = wifiManager.getNumAllowedChannels();
         if (numChannels >= 0) {
             pref.setValue(String.valueOf(numChannels));

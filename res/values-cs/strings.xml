@@ -94,24 +94,23 @@
     <string name="bluetooth_disconnected">"Odpojeno"</string>
     <string name="bluetooth_disconnecting">"Odpojování..."</string>
     <string name="bluetooth_connecting">"Připojování..."</string>
-    <!-- no translation found for bluetooth_unknown (1905151516611093010) -->
+    <!-- no translation found for bluetooth_unknown (644716244548801421) -->
     <skip />
     <string name="bluetooth_not_connected">"Párovat s tímto zařízením"</string>
     <string name="bluetooth_pairing">"Párování..."</string>
-    <!-- no translation found for bluetooth_paired (1247541089000057726) -->
-    <skip />
+    <string name="bluetooth_paired">"Párováno. Odpojeno."</string>
     <string name="bluetooth_device">"Náhlavní souprava či handsfree"</string>
     <string name="progress_scanning">"Vyhledávání"</string>
     <string name="bluetooth_notif_ticker">"Požadavek na párování zařízení Bluetooth"</string>
     <string name="bluetooth_notif_title">"Požadavek na párování"</string>
-    <string name="bluetooth_notif_message">"Povolit párování se zařízením "</string>
+    <string name="bluetooth_notif_message">"Povolit párování se zařízením"</string>
     <string name="date_and_time">"Nastavení data a času"</string>
     <string name="date_time_12_hour_sample">"13:00"</string>
     <string name="date_time_24_hour_sample">"13:00"</string>
     <string name="choose_timezone">"Volba časového pásma"</string>
     <string name="display_preview_label">"Náhled:"</string>
     <string name="display_font_size_label">"Velikost písma:"</string>
-    <!-- no translation found for intent_sender_data_label (8363026381459131554) -->
+    <!-- no translation found for intent_sender_data_label (6332324780477289261) -->
     <skip />
     <string name="intent_sender_sendbroadcast_text">"Odeslat <xliff:g id="BROADCAST">broadcast</xliff:g>"</string>
     <string name="intent_sender_action_label">"<xliff:g id="ACTION">Action</xliff:g>:"</string>
@@ -322,7 +321,7 @@
     <string name="fragment_status_connecting">"Připojování k síti <xliff:g id="NETWORK_NAME">%1$s</xliff:g>..."</string>
     <string name="fragment_status_authenticating">"Ověřování v síti <xliff:g id="NETWORK_NAME">%1$s</xliff:g>..."</string>
     <string name="fragment_status_obtaining_ip">"Získávání adresy IP ze sítě <xliff:g id="NETWORK_NAME">%1$s</xliff:g>..."</string>
-    <string name="fragment_status_connected">"Připojeno k síti <xliff:g id="NETWORK_NAME">%1$s</xliff:g>"</string>
+    <string name="fragment_status_connected">"Připojeno k síti <xliff:g id="NETWORK_NAME">%1$s</xliff:g>."</string>
     <string name="fragment_status_disconnecting">"Odpojování od sítě <xliff:g id="NETWORK_NAME">%1$s</xliff:g>..."</string>
     <string name="fragment_status_disconnected">"Odpojeno"</string>
     <string name="fragment_status_failed">"Připojení se nezdařilo."</string>
@@ -430,14 +429,14 @@
     <string name="sd_format">"Formátovat kartu SD"</string>
     <string name="sd_format_summary">"Formátovat (vymazat) kartu SD"</string>
     <string name="sd_unavailable">"Nedostupný údaj"</string>
-    <string name="read_only">" (Pouze pro čtení)"</string>
+    <string name="read_only">"(Pouze pro čtení)"</string>
     <string name="battery_status_title">"Stav baterie"</string>
     <string name="battery_level_title">"Stav baterie"</string>
-    <string name="apn_settings">"Přístupové body"</string>
+    <string name="apn_settings">"Názvy AP"</string>
     <string name="apn_edit">"Upravit přístupový bod"</string>
     <string name="apn_not_set">"&lt;Nenastaveno&gt;"</string>
     <string name="apn_name">"Jméno"</string>
-    <string name="apn_apn">"Název přístupvého bodu (APN)"</string>
+    <string name="apn_apn">"Název AP"</string>
     <string name="apn_http_proxy">"Proxy"</string>
     <string name="apn_http_port">"Port"</string>
     <string name="apn_user">"Uživatelské jméno"</string>
@@ -448,11 +447,11 @@
     <string name="apn_mms_port">"Port systému MMS"</string>
     <string name="apn_mcc">"MCC"</string>
     <string name="apn_mnc">"MNC"</string>
-    <string name="apn_type">"typ APN"</string>
-    <string name="menu_delete">"Smazat APN"</string>
-    <string name="menu_new">"Nový APN"</string>
+    <string name="apn_type">"Typ názvu AP"</string>
+    <string name="menu_delete">"Smazat název přístupového bodu"</string>
+    <string name="menu_new">"Nový název AP"</string>
     <string name="menu_save">"Uložit"</string>
-    <string name="menu_cancel">"Zrušit"</string>
+    <string name="menu_cancel">"Zahodit"</string>
     <string name="error_title">"Upozornění"</string>
     <string name="error_name_empty">"Pole Název nemůže být prázdné."</string>
     <string name="error_apn_empty">"Název AP nemůže být prázdný."</string>
@@ -464,8 +463,8 @@
     <string name="master_clear_button_text">"Resetovat telefon"</string>
     <string name="master_clear_final_desc">"Opravdu chcete resetovat telefon? Smažete veškerá data a aplikace. Proces nelze zvrátit."</string>
     <string name="master_clear_final_button_text">"Odstranit vše"</string>
-    <string name="master_clear_gesture_prompt">"Nakreslete své bezpečnostní gesto"</string>
-    <string name="master_clear_gesture_explanation">"Chcete-li potvrdit resetování telefonu, musíte nakreslit bezpečnostní gesto."</string>
+    <string name="master_clear_gesture_prompt">"Proveďte gesto odemknutí"</string>
+    <string name="master_clear_gesture_explanation">"Chcete-li potvrdit reset telefonu, musíte provést gesto odemknutí."</string>
     <string name="master_clear_failed">"Pokus o reset se nezdařil, protože služba System Clear není dostupná."</string>
     <string name="media_format_title">"Formátovat kartu SD"</string>
     <string name="media_format_summary">"Vymaže všechna data na kartě SD"</string>
@@ -473,12 +472,12 @@
     <string name="media_format_button_text">"Formátovat kartu SD"</string>
     <string name="media_format_final_desc">"Formátování karty SD. Chcete smazat všechna svoje média? Akci nelze vrátit zpět."</string>
     <string name="media_format_final_button_text">"Smazat vše"</string>
-    <string name="media_format_gesture_prompt">"Nakreslete své bezpečnostní gesto"</string>
-    <string name="media_format_gesture_explanation">"Formátování karty SD je potřeba potvrdit nakreslením bezpečnostního gesta."</string>
+    <string name="media_format_gesture_prompt">"Nakreslete odemykací obrazec"</string>
+    <string name="media_format_gesture_explanation">"Formátování karty SD je potřeba potvrdit nakreslením odemykacího obrazce."</string>
     <string name="call_settings_title">"Nastavení hovorů"</string>
     <string name="call_settings_summary">"Umožňuje nastavit hlasovou schránku, přesměrování hovorů, další hovory na lince a ID volajícího"</string>
     <string name="network_settings_title">"Mobilní sítě"</string>
-    <string name="network_settings_summary">"Umožňuje nastavit možnosti roamingu, sítí a názvy přístupových bodů"</string>
+    <string name="network_settings_summary">"Umožňuje nastavit možnosti roamingu, sítí a názvy AP"</string>
     <string name="location_title">"Zdroje polohy"</string>
     <string name="location_network_based">"Zaměření přes bezdrátové sítě"</string>
     <string name="location_networks_disabled">"Zobrazuje polohu v aplikacích (jako Mapy) pomocí bezdrátových sítí"</string>
@@ -496,37 +495,37 @@
     <string name="settings_license_activity_title">"Licence open source"</string>
     <string name="settings_license_activity_unavailable">"Při načítání licencí došlo k chybě."</string>
     <string name="settings_license_activity_loading">"Načítání..."</string>
-    <string name="lock_settings_title">"Gesto pro odemknutí obrazovky"</string>
-    <string name="lockpattern_change_lock_pattern_label">"Změna bezpečnostního gesta"</string>
+    <string name="lock_settings_title">"Gesto odemknutí obrazovky"</string>
+    <string name="lockpattern_change_lock_pattern_label">"Změna gesta odemknutí"</string>
     <string name="lockpattern_need_to_unlock">"Potvrďte uložené gesto"</string>
     <string name="lockpattern_need_to_unlock_wrong">"Zkuste to prosím znovu:"</string>
-    <string name="lockpattern_recording_intro_header">"Nakreslete své bezpečnostní gesto."</string>
+    <string name="lockpattern_recording_intro_header">"Proveďte gesto odemknutí"</string>
     <string name="lockpattern_recording_intro_footer">"Nápovědu zobrazíte stisknutím klávesy Menu."</string>
     <string name="lockpattern_recording_inprogress">"Na závěr zdvihněte prst z obrazovky."</string>
     <string name="lockpattern_recording_incorrect_too_short">"Minimální počet spojených teček je <xliff:g id="NUMBER">%d</xliff:g>. Zkuste to znovu:"</string>
     <string name="lockpattern_pattern_entered_header">"Gesto bylo zaznamenáno."</string>
-    <string name="lockpattern_need_to_confirm">"Pro potvrzení nakreslete gesto znovu:"</string>
-    <string name="lockpattern_pattern_confirmed_header">"Nové bezpečnostní gesto:"</string>
+    <string name="lockpattern_need_to_confirm">"Proveďte gesto znovu pro potvrzení:"</string>
+    <string name="lockpattern_pattern_confirmed_header">"Nové gesto odemknutí:"</string>
     <string name="lockpattern_confirm_button_text">"Potvrdit"</string>
     <string name="lockpattern_restart_button_text">"Nakreslit znovu"</string>
     <string name="lockpattern_retry_button_text">"Zkusit znovu"</string>
     <string name="lockpattern_continue_button_text">"Pokračovat"</string>
-    <string name="lockpattern_settings_title">"Bezpečnostní gesto"</string>
+    <string name="lockpattern_settings_title">"Gesto odemknutí"</string>
     <string name="lockpattern_settings_enable_title">"Požadovat gesto"</string>
-    <string name="lockpattern_settings_enable_summary">"Obrazovku je nutné odemknout pomocí bezpečnostního gesta"</string>
-    <string name="lockpattern_settings_enable_visible_pattern_title">"Použití viditelného gesta"</string>
+    <string name="lockpattern_settings_enable_summary">"Obrazovku je nutné odemknout gestem ruky"</string>
+    <string name="lockpattern_settings_enable_visible_pattern_title">"Použití viditelného vzoru"</string>
     <string name="lockpattern_settings_enable_tactile_feedback_title">"Použití dotykového ověření"</string>
-    <string name="lockpattern_settings_choose_lock_pattern">"Nastavení bezpečnostního gesta"</string>
-    <string name="lockpattern_settings_change_lock_pattern">"Změna bezpečnostního gesta"</string>
-    <string name="lockpattern_settings_help_how_to_record">"Bezpečnostní gesto nakreslíte takto"</string>
+    <string name="lockpattern_settings_choose_lock_pattern">"Nastavení gesta odemknutí"</string>
+    <string name="lockpattern_settings_change_lock_pattern">"Změna gesta odemknutí"</string>
+    <string name="lockpattern_settings_help_how_to_record">"Gesto odemknutí obrazovky proveďte tímto způsobem"</string>
     <string name="lockpattern_too_many_failed_confirmation_attempts_header">"Příliš mnoho neplatných pokusů."</string>
     <string name="lockpattern_too_many_failed_confirmation_attempts_footer">"Sekundy zbývající do dalšího pokusu: <xliff:g id="NUMBER">%d</xliff:g>."</string>
     <string name="skip_button_label">"Zrušit"</string>
     <string name="next_button_label">"Další"</string>
     <string name="lock_title">"Zabezpečení telefonu"</string>
-    <string name="lock_intro_message"><font size="17">"Chraňte svůj telefon před nepovoleným použitím vytvořením osobního bezpečnostního gesta. "\n<font height="17">\n</font><b>"1"</b>"  Příklad takového gesta uvidíte na dalším snímku. "\n<font height="17">\n</font><b>"2"</b>"  Až budete připraveni, nakreslete své osobní bezpečnostní gesto. Vyzkoušejte více gest, ale vždy spojte alespoň čtyři tečky. "\n<font height="17">\n</font><b>"3"</b>"  Chcete-li gesto potvrdit, zopakujte je. "\n<font height="17">\n</font><b>"Jste připraveni začít? Zvolte tlačítko Další "</b>". "\n<font height="3">\n</font>"Chcete-li ponechat telefon nezabezpečený, zvolte tlačítko Zrušit."</font></string>
+    <string name="lock_intro_message"><font size="17">"Chraňte svůj telefon před nepovoleným použitím vytvořením osobního gesta odemknutí. "\n<font height="17">\n</font><b>"1"</b>"  Na dalším snímku uvidíte příklad takového gesta. "\n<font height="17">\n</font><b>"2"</b>"  Až budete připraveni, proveďte své osobní gesto odemknutí. Vyzkoušejte více gest, ale vždy spojte alespoň čtyři tečky. "\n<font height="17">\n</font><b>"3"</b>"  Opakujte gesto pro potvrzení. "\n<font height="17">\n</font><b>"Jste připraveni začít? Zvolte tlačítko Další "</b>". "\n<font height="3">\n</font>"Chcete-li ponechat telefon nezabezpečený, zvolte tlačítko Storno."</font></string>
     <string name="lock_example_title">"Příklad gesta"</string>
-    <string name="lock_example_message">"Spojte alespoň čtyři tečky."\n" "\n"Až budete připraveni nakreslit vlastní gesto, zvolte tlačítko Další."</string>
+    <string name="lock_example_message">"Spojte alespoň čtyři tečky."\n" "\n"Až budete připraveni provést vlastní gesto, zvolte tlačítko Další."</string>
     <string name="manageapplications_settings_title">"Správa aplikací"</string>
     <string name="manageapplications_settings_summary">"Spravovat a odebrat instalované aplikace"</string>
     <string name="applications_settings">"Aplikace"</string>
@@ -623,10 +622,7 @@
     <string name="keep_screen_on_summary">"Obrazovka se při nabíjení nepřepne do režimu spánku"</string>
     <string name="allow_mock_location">"Povoluje simulované polohy"</string>
     <string name="allow_mock_location_summary">"Povoluje simulované polohy"</string>
-    <!-- no translation found for gadget_picker_title (98374951396755811) -->
-    <skip />
-    <!-- no translation found for widget_picker_title (9130684134213467557) -->
-    <skip />
+    <string name="gadget_picker_title">"Zvolte gadget"</string>
     <string name="battery_history_details_for">"Podrobnosti pro UID %d"</string>
     <string name="battery_history_uid">"UID <xliff:g id="USER_ID">%1$d</xliff:g>"</string>
     <string name="battery_history_network_usage">"Podrobnosti o používání sítě aplikací <xliff:g id="APP_NAME">%1$s</xliff:g>:"</string>
@@ -645,22 +641,10 @@
     <string name="battery_history_packages_sharing_this_uid">"Balíčky sdílející toto UID:"</string>
     <string name="battery_history_no_data">"Údaje o využití baterie nejsou k dispozici"</string>
     <string name="battery_history_sensor">"Senzor:"</string>
-    <!-- no translation found for battery_history_wakelock (608683447522396293) -->
-    <skip />
     <string name="battery_history_used_by_packages">"Senzor je používán následujícími balíčky:"</string>
     <string name="battery_history_sensor_usage">"Použito <xliff:g id="COUNT">%1$d</xliff:g>krát balíčkem <xliff:g id="PACKAGE">%2$s</xliff:g>"</string>
     <string name="battery_history_sensor_usage_multi">"Použito <xliff:g id="COUNT">%1$d</xliff:g>krát některým z následujících:"</string>
-    <!-- no translation found for battery_history_awake_label (8449792868990080882) -->
-    <skip />
-    <!-- no translation found for battery_history_screen_on_label (1848936521786339362) -->
-    <skip />
-    <!-- no translation found for battery_history_phone_on_label (700191958853142297) -->
-    <skip />
-    <!-- no translation found for battery_history_awake (4350886665719031057) -->
-    <skip />
     <string name="battery_history_screen_on">"Doba se zapnutou obrazovkou:"</string>
-    <!-- no translation found for battery_history_phone_on (4891504401623839532) -->
-    <skip />
     <string name="battery_history_screen_on_battery">"Na baterii:"</string>
     <string name="battery_history_screen_on_plugged">"Připojeno:"</string>
     <string name="usage_stats_label">"Statistika použití"</string>

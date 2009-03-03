@@ -23,7 +23,6 @@ import java.util.List;
 
 import android.app.Activity;
 import android.app.AlertDialog;
-import android.bluetooth.BluetoothA2dp;
 import android.bluetooth.BluetoothDevice;
 import android.content.Context;
 import android.content.Intent;
@@ -52,13 +51,11 @@ public class LocalBluetoothManager {
     private Context mContext;
     /** If a BT-related activity is in the foreground, this will be it. */
     private Activity mForegroundActivity;
-    private AlertDialog mErrorDialog = null;
-
+    
     private BluetoothDevice mManager;
 
     private LocalBluetoothDeviceManager mLocalDeviceManager;
     private BluetoothEventRedirector mEventRedirector;
-    private BluetoothA2dp mBluetoothA2dp;
     
     public static enum ExtendedBluetoothState { ENABLED, ENABLING, DISABLED, DISABLING, UNKNOWN }
     private ExtendedBluetoothState mState = ExtendedBluetoothState.UNKNOWN;
@@ -98,9 +95,7 @@ public class LocalBluetoothManager {
 
         mEventRedirector = new BluetoothEventRedirector(this);
         mEventRedirector.start();
-
-        mBluetoothA2dp = new BluetoothA2dp(context);
-
+       
         return true;
     }
     
@@ -117,10 +112,6 @@ public class LocalBluetoothManager {
     }
     
     public void setForegroundActivity(Activity activity) {
-        if (mErrorDialog != null) {
-            mErrorDialog.dismiss();
-            mErrorDialog = null;
-        }
         mForegroundActivity = activity;
     }
     
@@ -158,23 +149,9 @@ public class LocalBluetoothManager {
              */ 
             dispatchScanningStateChanged(true);
         } else {
-            if (!force) {
-                // Don't scan more than frequently than SCAN_EXPIRATION_MS,
-                // unless forced
-                if (mLastScan + SCAN_EXPIRATION_MS > System.currentTimeMillis()) {
-                    return;
-                }
-
-                // If we are playing music, don't scan unless forced.
-                List<String> sinks = mBluetoothA2dp.listConnectedSinks();
-                if (sinks != null) {
-                    for (String address : sinks) {
-                        if (mBluetoothA2dp.getSinkState(address) == BluetoothA2dp.STATE_PLAYING) {
-                            return;
-                        }
-                    }
-                }
-            }
+            
+            // Don't scan more than frequently than SCAN_EXPIRATION_MS, unless forced
+            if (!force && mLastScan + SCAN_EXPIRATION_MS > System.currentTimeMillis()) return;
             
             if (mManager.startDiscovery(true)) {
                 mLastScan = System.currentTimeMillis();
@@ -258,7 +235,7 @@ public class LocalBluetoothManager {
 
         if (mForegroundActivity != null) {
             // Need an activity context to show a dialog
-            mErrorDialog = new AlertDialog.Builder(mForegroundActivity)
+            AlertDialog ad = new AlertDialog.Builder(mForegroundActivity)
                 .setIcon(android.R.drawable.ic_dialog_alert)
                 .setTitle(titleResId)
                 .setMessage(message)

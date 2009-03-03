@@ -444,7 +444,7 @@ public class InstalledAppDetails extends Activity implements View.OnClickListene
                 Uri packageURI = Uri.parse("package:"+packageName);
                 Intent uninstallIntent = new Intent(Intent.ACTION_DELETE, packageURI);
                 startActivity(uninstallIntent);
-                setIntentAndFinish(true, true);
+                setIntentAndFinish(true, false);
             }
         } else if(v == mActivitiesButton) {
             mPm.clearPackagePreferredActivities(packageName);
