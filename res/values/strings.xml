@@ -1005,6 +1005,12 @@
     <string name="error_mcc_not3">MCC field must be 3 digits.</string>
     <!-- APN error dialog messages: -->
     <string name="error_mnc_not23">MNC field must be 2 or 3 digits.</string>
+    <!-- The message of dialog indicated restoring default APN settings in progress -->
+    <string name="restore_default_apn">Restoring default APN settings</string>
+    <!-- APNs screen menu option to reset default APN settings --> 
+    <string name="menu_restore">Reset to default</string>    
+    <!-- APNs screen toast message to inform reset default APN settings is completed -->     
+    <string name="restore_default_apn_completed">Reset default APN settings completed</string>    
 
     <!-- Master Clear -->
     <!-- SD card & phone storage settings screen, setting option name under Internal phone storage heading -->
@@ -1383,8 +1389,13 @@ found in the list of installed applications.</string>
     <string name="allow_mock_location_summary">Allow mock locations</string>
 
     <!-- Title for the screen that lets the user choose a gadget to add to the home screen
-    (or other screens that can host gadgets) -->
-    <string name="gadget_picker_title">Choose Gadget</string>
+         (or other screens that can host gadgets).  Note to translators: we're still determining
+         the final name for Gadgets/Widgets, so please translate both for now. -->
+    <string name="gadget_picker_title">Choose gadget</string>
+    <!-- Title for the screen that lets the user choose a widget to add to the home screen
+         (or other screens that can host widgets).  Note to translators: we're still determining
+         the final name for Gadgets/Widgets, so please translate both for now. -->
+    <string name="widget_picker_title">Choose widget</string>
 
     <!-- Used to display "Details for UID 1234" in BatteryHistory -->
     <string name="battery_history_details_for">Details for UID %d</string>
@@ -1452,17 +1463,33 @@ found in the list of installed applications.</string>
     <!-- Used for Sensor detail screen in BatteryHistory -->
     <string name="battery_history_sensor_usage_multi">Used <xliff:g id="count">%1$d</xliff:g> times by one of:</string>
     
+    <!-- Used for label of awake bar in BatteryHistory -->
+    <string name="battery_history_awake_label">Running</string>
+    
+    <!-- Used for label of screen on bar in BatteryHistory -->
+    <string name="battery_history_screen_on_label">Screen on</string>
+    
+    <!-- Used for label of phone on bar in BatteryHistory -->
+    <string name="battery_history_phone_on_label">Phone on</string>
+    
+    <!-- Used for awake time message in BatteryHistory -->
+    <string name="battery_history_awake">Time spent without sleeping:</string>
+    
     <!-- Used for Screen on time message in BatteryHistory -->
     <string name="battery_history_screen_on">Time spent with screen on:</string>
+    
+    <!-- Used for Phone on time message in BatteryHistory -->
+    <string name="battery_history_phone_on">Time spent with phone on:</string>
     
     <!-- Used for Screen on time message in BatteryHistory -->
     <string name="battery_history_screen_on_battery">On battery:</string>
     
-    <!-- Used for Screen on time message in BatteryHistory -->
+    <!-- XXX remove? Used for Screen on time message in BatteryHistory -->
     <string name="battery_history_screen_on_plugged">Plugged in:</string>
 
-    <!-- Strings used for displaying usage statistics -->
+    <!-- XXX remove? Strings used for displaying usage statistics -->
     <string name="usage_stats_label">Usage statistics</string>
+    
     <!-- In the Testing screen. The item title of the activity that shows usage statistics.  -->
     <string name="testing_usage_stats">Usage statistics</string>
     <!-- label for text to indicate sort options -->

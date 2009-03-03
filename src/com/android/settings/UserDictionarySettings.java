@@ -21,10 +21,10 @@ import android.app.Dialog;
 import android.app.ListActivity;
 import android.content.Context;
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.provider.UserDictionary;
+import android.text.InputType;
 import android.view.ContextMenu;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -198,6 +198,9 @@ public class UserDictionarySettings extends ListActivity {
     protected Dialog onCreateDialog(int id) {
         View content = getLayoutInflater().inflate(R.layout.dialog_edittext, null);
         final EditText editText = (EditText) content.findViewById(R.id.edittext);
+        // No prediction in soft keyboard mode. TODO: Create a better way to disable prediction
+        editText.setInputType(InputType.TYPE_CLASS_TEXT 
+                | InputType.TYPE_TEXT_FLAG_AUTO_COMPLETE);
         
         return new AlertDialog.Builder(this)
                 .setTitle(R.string.user_dict_settings_add_dialog_title)

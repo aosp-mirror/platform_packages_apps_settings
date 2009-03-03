@@ -63,8 +63,8 @@ public class BatteryHistory extends Activity implements OnClickListener, OnItemS
     private static final int NETWORK_USAGE = 1;
     private static final int GPS_USAGE = 2;
     private static final int SENSOR_USAGE = 3;
-    private static final int WAKE_LOCKS = 4;
-    private static final int SCREEN_ON = 5;
+    private static final int WAKELOCK_USAGE = 4;
+    private static final int MISC_USAGE = 5;
 
     // Must be in sync with the values in res/values/array.xml (id battery_history_which_spinner)
     private static final int UNPLUGGED = 0;
@@ -83,9 +83,10 @@ public class BatteryHistory extends Activity implements OnClickListener, OnItemS
     private List<SensorUsage> mSensorUsage = new ArrayList<SensorUsage>();
     private List<SensorUsage> mGpsUsage = new ArrayList<SensorUsage>();
     private List<WakelockUsage> mWakelockUsage = new ArrayList<WakelockUsage>();
+    private List<MiscUsage> mMiscUsage = new ArrayList<MiscUsage>();
     
     private boolean mHaveCpuUsage, mHaveNetworkUsage, mHaveSensorUsage,
-            mHaveWakelockUsage, mHaveScreenOnTime;
+            mHaveWakelockUsage, mHaveMiscUsage;
     
     private LinearLayout mGraphLayout;
     private LinearLayout mTextLayout;
@@ -150,6 +151,10 @@ public class BatteryHistory extends Activity implements OnClickListener, OnItemS
         public abstract double[] getValues();
         public abstract void getInfo(StringBuilder info);
         
+        public double getMaxValue() {
+            return -Double.MAX_VALUE;            
+        }
+        
         public int compareTo(Graphable o) {
             double t = getSortValue();
             double ot = o.getSortValue();
@@ -209,9 +214,11 @@ public class BatteryHistory extends Activity implements OnClickListener, OnItemS
     class CpuUsage extends Graphable {
         String mProcess;
         double[] mUsage;
+        double mTotalRuntime;
         long mStarts;
         
-        public CpuUsage(int uid, String process, long userTime, long systemTime, long starts) {
+        public CpuUsage(int uid, String process, long userTime, long systemTime,
+                long starts, long totalRuntime) {
             getNameForUid(uid);
             mProcess = process;
             PackageManager pm = BatteryHistory.this.getPackageManager();
@@ -220,6 +227,7 @@ public class BatteryHistory extends Activity implements OnClickListener, OnItemS
             
             mUsage[0] = userTime;
             mUsage[1] = userTime + systemTime;
+            mTotalRuntime = totalRuntime;
             mStarts = starts;
         }
         
@@ -233,6 +241,10 @@ public class BatteryHistory extends Activity implements OnClickListener, OnItemS
         
         public double[] getValues() {
             return mUsage;
+        }
+        
+        public double getMaxValue() {
+            return mTotalRuntime;            
         }
         
         public void getInfo(StringBuilder info) {
@@ -306,13 +318,15 @@ public class BatteryHistory extends Activity implements OnClickListener, OnItemS
     
     class SensorUsage extends Graphable {
         double[] mUsage;
+        double mTotalRealtime;
         int mCount;
         
-        public SensorUsage(int uid, long time, int count) {
+        public SensorUsage(int uid, long time, int count, long totalRealtime) {
             getNameForUid(uid);
             
             mUsage = new double[1];
             mUsage[0] = time;
+            mTotalRealtime = totalRealtime;
             
             mCount = count;
         }
@@ -327,6 +341,10 @@ public class BatteryHistory extends Activity implements OnClickListener, OnItemS
         
         public double[] getValues() {
             return mUsage;
+        }
+        
+        public double getMaxValue() {
+            return mTotalRealtime;            
         }
         
         public void getInfo(StringBuilder info) {
@@ -342,13 +360,15 @@ public class BatteryHistory extends Activity implements OnClickListener, OnItemS
     
     class WakelockUsage extends Graphable {
         double[] mUsage;
+        double mTotalRealtime;
         int mCount;
         
-        public WakelockUsage(int uid, long time, int count) {
+        public WakelockUsage(int uid, long time, int count, long totalRealtime) {
             getNameForUid(uid);
             
             mUsage = new double[1];
             mUsage[0] = time;
+            mTotalRealtime = totalRealtime;
             
             mCount = count;
         }
@@ -365,6 +385,10 @@ public class BatteryHistory extends Activity implements OnClickListener, OnItemS
             return mUsage;
         }
         
+        public double getMaxValue() {
+            return mTotalRealtime;            
+        }
+        
         public void getInfo(StringBuilder info) {
             info.append(getString(R.string.battery_history_wakelock));
             info.append(mName);
@@ -375,33 +399,59 @@ public class BatteryHistory extends Activity implements OnClickListener, OnItemS
         }
     }
     
+    class MiscUsage extends Graphable {
+        int mInfoLabelRes;
+        double[] mUsage;
+        double mTotalRealtime;
+        
+        public MiscUsage(String name, int infoLabelRes, long value,
+                long totalRealtime) {
+            mName = name;
+            
+            mInfoLabelRes = infoLabelRes;
+            
+            mUsage = new double[2];
+            mUsage[0] = value;
+            mTotalRealtime = totalRealtime;
+        }
+        
+        public String getLabel() {
+            return mName;
+        }
+        
+        public double getSortValue() {
+            return mUsage[1];
+        }
+        
+        public double[] getValues() {
+            return mUsage;
+        }
+        
+        public double getMaxValue() {
+            return mTotalRealtime;            
+        }
+        
+        public void getInfo(StringBuilder info) {
+            info.append(getString(mInfoLabelRes));
+            info.append(' ');
+            formatTime(mUsage[0], info);
+            info.append(" (");
+            info.append((mUsage[0]*100)/mTotalRealtime);
+            info.append("%)");
+        }
+    }
+    
     private List<? extends Graphable> getGraphRecords() {
         switch (mType) {
             case CPU_USAGE: return mCpuUsage;
             case NETWORK_USAGE : return mNetworkUsage;
             case SENSOR_USAGE: return mSensorUsage;
             case GPS_USAGE: return mGpsUsage;
-            case WAKE_LOCKS: return mWakelockUsage;
-            case SCREEN_ON: return null;
+            case WAKELOCK_USAGE: return mWakelockUsage;
+            case MISC_USAGE: return mMiscUsage;
             default:
                 return (List<? extends Graphable>) null; // TODO
         }
-    }
-    
-    private void displayScreenUsage() {
-        mMessageText.setVisibility(View.VISIBLE);
-        StringBuilder sb = new StringBuilder();
-        sb.append(getString(R.string.battery_history_screen_on));
-        sb.append("\n\n");
-        sb.append(getString(R.string.battery_history_screen_on_battery));
-        sb.append(' ');
-        formatTime((double) mStats.getBatteryScreenOnTime(), sb);
-        sb.append('\n');
-        sb.append(getString(R.string.battery_history_screen_on_plugged));
-        sb.append(' ');
-        formatTime((double) mStats.getPluggedScreenOnTime(), sb);
-        sb.append('\n');
-        mMessageText.setText(sb.toString());
     }
     
     private void displayGraph() {
@@ -415,17 +465,13 @@ public class BatteryHistory extends Activity implements OnClickListener, OnItemS
             mButtons[i].setVisibility(View.INVISIBLE);
         }
         
-        if (mType == SCREEN_ON) {
-            displayScreenUsage();
-            return;
-        }
-        
         double maxValue = -Double.MAX_VALUE;
         
         List<? extends Graphable> records = getGraphRecords();
         for (Graphable g : records) {
             double[] values = g.getValues();
             maxValue = Math.max(maxValue, values[values.length - 1]);
+            maxValue = Math.max(maxValue, g.getMaxValue());
         }
         
         int[] colors = new int[2];
@@ -476,6 +522,9 @@ public class BatteryHistory extends Activity implements OnClickListener, OnItemS
     private void processCpuUsage() {
         mCpuUsage.clear();
         
+        long uSecTime = SystemClock.uptimeMillis() * 1000;
+        final long uSecNow = mStats.computeBatteryUptime(uSecTime, mWhich) / 1000;
+        
         SparseArray<? extends Uid> uidStats = mStats.getUidStats();
         final int NU = uidStats.size();
         for (int iu = 0; iu < NU; iu++) {
@@ -493,7 +542,7 @@ public class BatteryHistory extends Activity implements OnClickListener, OnItemS
 
                     if (userTime != 0 || systemTime != 0) {
                         mCpuUsage.add(new CpuUsage(u.getUid(), ent.getKey(),
-                                userTime, systemTime, starts));
+                                userTime, systemTime, starts, uSecNow));
                     }
                 }
             }
@@ -523,7 +572,7 @@ public class BatteryHistory extends Activity implements OnClickListener, OnItemS
         mSensorUsage.clear();
         
         long uSecTime = SystemClock.elapsedRealtime() * 1000;
-        final long uSecNow = mStats.getBatteryUptime(uSecTime);
+        final long uSecNow = mStats.computeBatteryRealtime(uSecTime, mWhich) / 1000;
         
         SparseArray<? extends Uid> uidStats = mStats.getUidStats();
         final int NU = uidStats.size();
@@ -559,10 +608,10 @@ public class BatteryHistory extends Activity implements OnClickListener, OnItemS
             }
             
             if (timeGps > 0) {
-                mGpsUsage.add(new SensorUsage(uid, timeGps, countGps));
+                mGpsUsage.add(new SensorUsage(uid, timeGps, countGps, uSecNow));
             }
             if (timeOther > 0) {
-                mSensorUsage.add(new SensorUsage(uid, timeOther, countOther));
+                mSensorUsage.add(new SensorUsage(uid, timeOther, countOther, uSecNow));
             }
         }
         
@@ -574,7 +623,7 @@ public class BatteryHistory extends Activity implements OnClickListener, OnItemS
         mWakelockUsage.clear();
         
         long uSecTime = SystemClock.elapsedRealtime() * 1000;
-        final long uSecNow = mStats.getBatteryUptime(uSecTime);
+        final long uSecNow = mStats.computeBatteryRealtime(uSecTime, mWhich) / 1000;
         
         SparseArray<? extends Uid> uidStats = mStats.getUidStats();
         final int NU = uidStats.size();
@@ -600,15 +649,45 @@ public class BatteryHistory extends Activity implements OnClickListener, OnItemS
             }
             
             if (time > 0) {
-                mWakelockUsage.add(new WakelockUsage(uid, time, count));
+                mWakelockUsage.add(new WakelockUsage(uid, time, count, uSecNow));
             }
         }
         
         Collections.sort(mWakelockUsage);
     }
     
-    private void processScreenOn() {
-        // Do nothing
+    private void processMiscUsage() {
+        mMiscUsage.clear();
+        
+        long rawRealtime = SystemClock.elapsedRealtime() * 1000;
+        final long batteryRealtime = mStats.getBatteryRealtime(rawRealtime);
+        final long whichRealtime = mStats.computeBatteryRealtime(rawRealtime, mWhich) / 1000;
+        
+        long time = mStats.computeBatteryUptime(SystemClock.uptimeMillis() * 1000, mWhich) / 1000;
+        if (time > 0) {
+            mMiscUsage.add(new MiscUsage(getString(
+                    R.string.battery_history_awake_label),
+                    R.string.battery_history_awake,
+                    time, whichRealtime)); 
+        }
+        
+        time = mStats.getScreenOnTime(batteryRealtime, mWhich) / 1000;
+        if (time > 0) {
+            mMiscUsage.add(new MiscUsage(getString(
+                    R.string.battery_history_screen_on_label),
+                    R.string.battery_history_screen_on,
+                    time, whichRealtime)); 
+        }
+        
+        time = mStats.getPhoneOnTime(batteryRealtime, mWhich) / 1000;
+        if (time > 0) {
+            mMiscUsage.add(new MiscUsage(getString(
+                    R.string.battery_history_phone_on_label),
+                    R.string.battery_history_phone_on,
+                    time, whichRealtime)); 
+        }
+        
+        Collections.sort(mMiscUsage);
     }
     
     private void collectStatistics() {
@@ -630,16 +709,16 @@ public class BatteryHistory extends Activity implements OnClickListener, OnItemS
                 processSensorUsage();
             }
         }
-        if (mType == WAKE_LOCKS) {
+        if (mType == WAKELOCK_USAGE) {
             if (!mHaveWakelockUsage) {
                 mHaveWakelockUsage = true;
                 processWakelockUsage();
             }
         }
-        if (mType == SCREEN_ON) {
-            if (!mHaveScreenOnTime) {
-                mHaveScreenOnTime = true;
-                processScreenOn();
+        if (mType == MISC_USAGE) {
+            if (!mHaveMiscUsage) {
+                mHaveMiscUsage = true;
+                processMiscUsage();
             }
         }
     }
@@ -657,7 +736,7 @@ public class BatteryHistory extends Activity implements OnClickListener, OnItemS
             //mStats.dumpLocked(new LogPrinter(Log.INFO, TAG));
             
             mHaveCpuUsage =  mHaveNetworkUsage =  mHaveSensorUsage
-                    = mHaveWakelockUsage = mHaveScreenOnTime = false;
+                    = mHaveWakelockUsage = mHaveMiscUsage = false;
         } catch (RemoteException e) {
             Log.e(TAG, "RemoteException:", e);
         }
@@ -686,26 +765,6 @@ public class BatteryHistory extends Activity implements OnClickListener, OnItemS
         
         if (parent.equals(mTypeSpinner)) {
             mType = position;
-            switch (position) {
-                case CPU_USAGE:
-                    mWhichSpinner.setEnabled(true);
-                    break;
-                case NETWORK_USAGE:
-                    mWhichSpinner.setEnabled(true);
-                    break;
-                case GPS_USAGE:
-                    mWhichSpinner.setEnabled(true);
-                    break;
-                case SENSOR_USAGE:
-                    mWhichSpinner.setEnabled(true);
-                    break;
-                case WAKE_LOCKS:
-                    mWhichSpinner.setEnabled(true);
-                    break;
-                case SCREEN_ON:
-                    mWhichSpinner.setEnabled(false);
-                    break;
-            }
         } else if (parent.equals(mWhichSpinner)) {
             switch (position) {
                 case UNPLUGGED:
@@ -722,7 +781,7 @@ public class BatteryHistory extends Activity implements OnClickListener, OnItemS
         
         if (oldWhich != mWhich) {
             mHaveCpuUsage =  mHaveNetworkUsage =  mHaveSensorUsage
-                    = mHaveWakelockUsage = mHaveScreenOnTime = false;
+                    = mHaveWakelockUsage = mHaveMiscUsage = false;
         }
         
         displayGraph();
@@ -766,6 +825,7 @@ public class BatteryHistory extends Activity implements OnClickListener, OnItemS
         
         mWhichSpinner = (Spinner) findViewById(R.id.whichSpinner);
         mWhichSpinner.setOnItemSelectedListener(this);
+        mWhichSpinner.setEnabled(true);
         
         mButtons = new GraphableButton[8];
         mButtons[0] = (GraphableButton) findViewById(R.id.button0);

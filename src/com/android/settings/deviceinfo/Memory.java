@@ -81,6 +81,8 @@ public class Memory extends PreferenceActivity {
         intentFilter.addAction(Intent.ACTION_MEDIA_MOUNTED);
         intentFilter.addAction(Intent.ACTION_MEDIA_SHARED);
         intentFilter.addAction(Intent.ACTION_MEDIA_BAD_REMOVAL);
+        intentFilter.addAction(Intent.ACTION_MEDIA_UNMOUNTABLE);
+        intentFilter.addAction(Intent.ACTION_MEDIA_NOFS);
         intentFilter.addAction(Intent.ACTION_MEDIA_SCANNER_STARTED);
         intentFilter.addAction(Intent.ACTION_MEDIA_SCANNER_FINISHED);
         intentFilter.addDataScheme("file");

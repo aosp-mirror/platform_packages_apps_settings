@@ -26,15 +26,9 @@
                 android:targetClass="com.android.settings.LocalePicker"/>
     </PreferenceScreen>
 
-    <PreferenceCategory
+    <PreferenceCategory android:key="text_category"
             android:title="@string/text_category" />
-    <PreferenceScreen 
-            android:title="@string/input_methods_settings_title" 
-            android:summary="@string/input_methods_settings_summary">
-        <intent android:action="android.intent.action.MAIN"
-                android:targetPackage="com.android.settings"
-                android:targetClass="com.android.settings.InputMethodsSettings" />
-    </PreferenceScreen>
+
     <PreferenceScreen 
             android:title="@string/user_dict_settings_title" 
             android:summary="@string/user_dict_settings_summary">
@@ -42,6 +36,7 @@
                 android:targetPackage="com.android.settings"
                 android:targetClass="com.android.settings.UserDictionarySettings" />
     </PreferenceScreen>
+
     <PreferenceCategory
             android:key="hardkeyboard_category"
             android:title="@string/hardkeyboard_category">

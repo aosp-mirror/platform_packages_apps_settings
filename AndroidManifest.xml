@@ -33,6 +33,8 @@
     <uses-permission android:name="android.permission.RESTART_PACKAGES"/>
     <uses-permission android:name="android.permission.PACKAGE_USAGE_STATS"/>
     <uses-permission android:name="android.permission.BATTERY_STATS"/>
+    <uses-permission android:name="com.android.launcher.permission.READ_SETTINGS" />
+    <uses-permission android:name="com.android.launcher.permission.WRITE_SETTINGS" />
 
     <application android:label="@string/settings_label" android:icon="@drawable/ic_launcher_settings">
 
@@ -87,6 +89,8 @@
         </activity>
 
         <activity android:name="ApnSettings" android:label="@string/apn_settings"
+                  android:configChanges="orientation|keyboardHidden"
+                  android:launchMode="singleInstance" 
                 >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -205,7 +209,9 @@
             </intent-filter>
         </activity>
 
-        <activity android:name="ManageApplications" android:label="@string/manageapplications_settings_title">
+        <activity android:name="ManageApplications"
+                  android:label="@string/manageapplications_settings_title"
+                  android:configChanges="orientation|keyboardHidden">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <action android:name="android.intent.action.MANAGE_PACKAGE_STORAGE" />
@@ -476,13 +482,18 @@
        </receiver>
 
         <!-- Standard picker for gadgets -->
-
-        <activity android:name="GadgetPickActivity" android:label="@string/gadget_picker_title">
+        <activity android:name="GadgetPickActivity" android:label="@string/widget_picker_title">
             <intent-filter>
                 <action android:name="android.gadget.action.GADGET_PICK" />
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
+
+        <!-- Helper to bind any unbound gadgets in Launcher, used as
+             part of initialization and upgrade process -->
+        <activity android:name="LauncherGadgetBinder"
+                android:permission="com.android.launcher.permission.WRITE_SETTINGS"
+                android:theme="@android:style/Theme.NoDisplay" android:exported="true" />
 
         <activity android:name="UsageStats" android:label="@string/usage_stats_label">
             <intent-filter>

@@ -217,6 +217,9 @@ public class ConnectSpecificProfilesActivity extends PreferenceActivity
     private void refreshOnlineModePreference() {
         mOnlineModePreference.setChecked(mOnlineMode);
 
+        /* Gray out checkbox while connecting and disconnecting */
+        mOnlineModePreference.setEnabled(!mDevice.isBusy());
+
         /**
          * If the device is online, show status. Otherwise, show a summary that
          * describes what the checkbox does.
@@ -244,7 +247,10 @@ public class ConnectSpecificProfilesActivity extends PreferenceActivity
                 .getProfileManager(mManager, profile);
         
         int connectionStatus = profileManager.getConnectionStatus(address);
-        
+
+        /* Gray out checkbox while connecting and disconnecting */
+        profilePref.setEnabled(!mDevice.isBusy());
+
         profilePref.setSummary(getProfileSummary(profileManager, profile, address,
                 connectionStatus, mOnlineMode));
         

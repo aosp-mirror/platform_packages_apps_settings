@@ -19,6 +19,7 @@ package com.android.settings;
 import com.android.settings.R;
 import android.app.ActivityManager;
 import android.app.AlertDialog;
+import android.app.Dialog;
 import android.app.ListActivity;
 import android.app.ProgressDialog;
 import android.content.BroadcastReceiver;
@@ -31,6 +32,7 @@ import android.content.pm.IPackageStatsObserver;
 import android.content.pm.PackageManager;
 import android.content.pm.PackageStats;
 import android.content.pm.PackageManager.NameNotFoundException;
+import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
@@ -86,8 +88,6 @@ import java.util.TreeMap;
  *  ACTION_MANAGE_PACKAGE_STORAGE) the list is sorted per size.
  *  If the user selects an application, extended info(like size, uninstall/clear data options,
  *  permissions info etc.,) is displayed via the InstalledAppDetails activity.
- *  This activity passes the package name and size information to the 
- *  InstalledAppDetailsActivity to avoid recomputation of the package size information.
  */
 public class ManageApplications extends ListActivity implements
         OnItemClickListener, DialogInterface.OnCancelListener,
@@ -95,13 +95,12 @@ public class ManageApplications extends ListActivity implements
     // TAG for this activity
     private static final String TAG = "ManageApplications";
     
-    // log information boolean
+    // Log information boolean
     private boolean localLOGV = Config.LOGV || false;
     
     // attributes used as keys when passing values to InstalledAppDetails activity
     public static final String APP_PKG_PREFIX = "com.android.settings.";
     public static final String APP_PKG_NAME = APP_PKG_PREFIX+"ApplicationPkgName";
-    public static final String APP_PKG_SIZE = APP_PKG_PREFIX+"size";
     public static final String APP_CHG = APP_PKG_PREFIX+"changed";
     
     // attribute name used in receiver for tagging names of added/deleted packages
@@ -122,7 +121,7 @@ public class ManageApplications extends ListActivity implements
     public static final int FILTER_APPS_RUNNING = MENU_OPTIONS_BASE + 4;
     public static final int FILTER_OPTIONS = MENU_OPTIONS_BASE + 5;
     // Alert Dialog presented to user to find out the filter option
-    AlertDialog.Builder mAlertDlgBuilder;
+    AlertDialog mAlertDlg;
     // sort order
     private int mSortOrder = SORT_ORDER_ALPHA;
     // Filter value
@@ -157,7 +156,8 @@ public class ManageApplications extends ListActivity implements
     private Drawable mDefaultAppIcon;
     
     // temporary dialog displayed while the application info loads
-    private ProgressDialog mLoadingDlg = null;
+    private static final int DLG_BASE = 0;
+    private static final int DLG_LOADING = DLG_BASE + 1;
     
     // compute index used to track the application size computations
     private int mComputeIndex;
@@ -196,6 +196,12 @@ public class ManageApplications extends ListActivity implements
     // Boolean variables indicating state
     private boolean mLoadLabels = false;
     private boolean mSizesFirst = false;
+    // ListView used to display list
+    private ListView mListView;
+    // State variables used to figure out menu options and also
+    // initiate the first computation and loading of resources
+    private boolean mJustCreated = true;
+    private boolean mFirst = false;
     
     /*
      * Handler class to handle messages for various operations
@@ -242,8 +248,6 @@ public class ManageApplications extends ListActivity implements
             switch (msg.what) {
             case INIT_PKG_INFO:
                 if(localLOGV) Log.i(TAG, "Message INIT_PKG_INFO");
-                setProgressBarIndeterminateVisibility(true);
-                mComputeIndex = 0;
                 // Retrieve the package list and init some structures
                 initAppList(mFilterApps);
                 mHandler.sendEmptyMessage(NEXT_LOAD_STEP);
@@ -308,6 +312,7 @@ public class ManageApplications extends ListActivity implements
                     } else {
                         // end computation here
                         mComputeSizes = true;
+                        mFirst = true;
                         mAppInfoAdapter.sortList(mSortOrder);
                         mHandler.sendEmptyMessage(NEXT_LOAD_STEP);
                     }
@@ -408,8 +413,13 @@ public class ManageApplications extends ListActivity implements
                 } else {
                     // Create list view from the adapter here. Wait till the sort order
                     // of list is defined. its either by label or by size. so atleast one of the
-                    // first steps should be complete before creating the list
-                    createListView();
+                    // first steps should be complete before filling the list
+                    if (mJustCreated) {
+                        // Set the adapter here.
+                        mJustCreated = false;
+                        mListView.setAdapter(mAppInfoAdapter);
+                        dismissLoadingMsg();
+                    }
                     if (!mComputeSizes) {
                         initComputeSizes();
                     } else if (!mLoadLabels) {
@@ -422,6 +432,8 @@ public class ManageApplications extends ListActivity implements
             }
         }
     };
+    
+    
     
     private void doneLoadingData() {
         setProgressBarIndeterminateVisibility(false);
@@ -487,13 +499,14 @@ public class ManageApplications extends ListActivity implements
     
     // some initialization code used when kicking off the size computation
     private void initAppList(int filterOption) {
+        setProgressBarIndeterminateVisibility(true);
+        mComputeIndex = 0;
         mComputeSizes = false;
+        mLoadLabels = false;
         // Initialize lists
         List<ApplicationInfo> appList = getInstalledApps(filterOption);
         mAddRemoveMap = new TreeMap<String, Boolean>();
-        mAppInfoAdapter = new AppInfoAdapter(this, appList);       
-        // register receiver
-        mReceiver.registerReceiver();
+        mAppInfoAdapter.resetAppList(filterOption, appList);
     }
     
     // Utility method to start a thread to read application labels and icons
@@ -519,22 +532,12 @@ public class ManageApplications extends ListActivity implements
     private void showEmptyViewIfListEmpty() {
         if (localLOGV) Log.i(TAG, "Checking for empty view");
         if (mAppInfoAdapter.getCount() > 0) {
+            mListView.setVisibility(View.VISIBLE);
             mEmptyView.setVisibility(View.GONE);
         } else {
+            mListView.setVisibility(View.GONE);
             mEmptyView.setVisibility(View.VISIBLE);
         }
-    }
-
-    private void createListView() {
-        dismissLoadingMsg();
-        // get list and set listeners and adapter
-        ListView lv= (ListView) findViewById(android.R.id.list);
-        lv.setAdapter(mAppInfoAdapter);
-        lv.setOnItemClickListener(this);
-        lv.setSaveEnabled(true);
-        lv.setItemsCanFocus(true);
-        lv.setOnItemClickListener(this);
-        showEmptyViewIfListEmpty();
     }
     
     // internal structure used to track added and deleted packages when
@@ -868,7 +871,11 @@ public class ManageApplications extends ListActivity implements
                 AppInfo pInfo = iconMap.get(info.packageName);
                 if(pInfo != null) {
                     AppInfo aInfo = mAppPropMap.get(info.packageName);
-                    aInfo.refreshIcon(pInfo);
+                    if (aInfo != null) {
+                        aInfo.refreshIcon(pInfo);
+                    } else {
+                        mAppPropMap.put(info.packageName, pInfo);
+                    }
                     changed = true;
                 }
             }
@@ -1114,12 +1121,6 @@ public class ManageApplications extends ListActivity implements
         requestWindowFeature(Window.FEATURE_PROGRESS);
         requestWindowFeature(Window.FEATURE_INDETERMINATE_PROGRESS);
         setContentView(R.layout.compute_sizes);
-        // init mLoadingDlg
-        mLoadingDlg = new ProgressDialog(this);
-        mLoadingDlg.setProgressStyle(ProgressDialog.STYLE_SPINNER);
-        mLoadingDlg.setMessage(getText(R.string.loading));
-        mLoadingDlg.setIndeterminate(true);        
-        mLoadingDlg.setOnCancelListener(this);
         mDefaultAppIcon =Resources.getSystem().getDrawable(
                 com.android.internal.R.drawable.sym_def_app_icon);
         mInvalidSizeStr = getText(R.string.invalid_size_value);
@@ -1129,29 +1130,51 @@ public class ManageApplications extends ListActivity implements
         mReceiver = new PackageIntentReceiver();
         mEmptyView = (TextView) findViewById(R.id.empty_view);
         mObserver = new PkgSizeObserver();
+        // Create adapter and list view here
+        List<ApplicationInfo> appList = getInstalledApps(mSortOrder);
+        mAppInfoAdapter = new AppInfoAdapter(this, appList);
+        ListView lv= (ListView) findViewById(android.R.id.list);
+        //lv.setAdapter(mAppInfoAdapter);
+        lv.setOnItemClickListener(this);
+        lv.setSaveEnabled(true);
+        lv.setItemsCanFocus(true);
+        lv.setOnItemClickListener(this);
+        mListView = lv;
+        showLoadingMsg();
     }
     
-    private void showLoadingMsg() {
-        if (mLoadingDlg != null) {
-            if(localLOGV) Log.i(TAG, "Displaying Loading message");
-            mLoadingDlg.show();
+    @Override
+    public Dialog onCreateDialog(int id) {
+        if (id == DLG_LOADING) {
+            ProgressDialog dlg = new ProgressDialog(this);
+            dlg.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+            dlg.setMessage(getText(R.string.loading));
+            dlg.setIndeterminate(true);        
+            dlg.setOnCancelListener(this);
+            return dlg;
         }
+        return null;
+    }
+    
+    
+    private void showLoadingMsg() {
+        showDialog(DLG_LOADING);
+        if(localLOGV) Log.i(TAG, "Displaying Loading message");
     }
     
     private void dismissLoadingMsg() {
-        if ((mLoadingDlg != null) && (mLoadingDlg.isShowing())) {
-            if(localLOGV) Log.i(TAG, "Dismissing Loading message");
-            mLoadingDlg.dismiss();
-        }
+        if(localLOGV) Log.i(TAG, "Dismissing Loading message");
+        dismissDialog(DLG_LOADING);
     }
     
     @Override
     public void onStart() {
         super.onStart();
-        showLoadingMsg();
         // Create a thread to load resources
         mResourceThread = new ResourceLoaderThread();
         sendMessageToHandler(INIT_PKG_INFO);
+        // register receiver
+        mReceiver.registerReceiver();
     }
 
     @Override
@@ -1162,6 +1185,12 @@ public class ManageApplications extends ListActivity implements
         // register receiver here
         unregisterReceiver(mReceiver);        
         mAppPropCache = mAppInfoAdapter.mAppPropMap;
+    }
+    
+    // Avoid the restart and pause when orientation changes
+    @Override
+    public void onConfigurationChanged(Configuration newConfig) {
+        super.onConfigurationChanged(newConfig);
     }
     
     /*
@@ -1191,13 +1220,11 @@ public class ManageApplications extends ListActivity implements
     }
      
     // utility method used to start sub activity
-    private void startApplicationDetailsActivity(ApplicationInfo info, PackageStats ps) {
+    private void startApplicationDetailsActivity() {
         // Create intent to start new activity
         Intent intent = new Intent(Intent.ACTION_VIEW);
         intent.setClass(this, InstalledAppDetails.class);
-        mCurrentPkgName = info.packageName;
         intent.putExtra(APP_PKG_NAME, mCurrentPkgName);
-        intent.putExtra(APP_PKG_SIZE, ps);
         // start new activity to display extended information
         startActivityForResult(intent, INSTALLED_APP_DETAILS);
     }
@@ -1215,12 +1242,12 @@ public class ManageApplications extends ListActivity implements
     
     @Override
     public boolean onPrepareOptionsMenu(Menu menu) {
-        if (mComputeSizes) {
+        if (mFirst) {
             menu.findItem(SORT_ORDER_ALPHA).setVisible(mSortOrder != SORT_ORDER_ALPHA);
             menu.findItem(SORT_ORDER_SIZE).setVisible(mSortOrder != SORT_ORDER_SIZE);
             menu.findItem(FILTER_OPTIONS).setVisible(true);
             return true;
-        } 
+        }
         return false;
     }
 
@@ -1230,16 +1257,17 @@ public class ManageApplications extends ListActivity implements
         if ((menuId == SORT_ORDER_ALPHA) || (menuId == SORT_ORDER_SIZE)) {
             sendMessageToHandler(REORDER_LIST, menuId);
         } else if (menuId == FILTER_OPTIONS) {
-            if (mAlertDlgBuilder == null) {
-                mAlertDlgBuilder = new AlertDialog.Builder(this).
-                setTitle(R.string.filter_dlg_title).
-                setNeutralButton(R.string.cancel, this).
-                setSingleChoiceItems(new CharSequence[] {getText(R.string.filter_apps_all),
-                        getText(R.string.filter_apps_running),
-                        getText(R.string.filter_apps_third_party)},
-                        -1, this);
+            if (mAlertDlg == null) {
+                mAlertDlg = new AlertDialog.Builder(this).
+                        setTitle(R.string.filter_dlg_title).
+                        setNeutralButton(R.string.cancel, this).
+                        setSingleChoiceItems(new CharSequence[] {getText(R.string.filter_apps_all),
+                                getText(R.string.filter_apps_running),
+                                getText(R.string.filter_apps_third_party)},
+                                -1, this).
+                        create();
             }
-            mAlertDlgBuilder.show();
+            mAlertDlg.show();
         }
         return true;
     }
@@ -1247,12 +1275,12 @@ public class ManageApplications extends ListActivity implements
     public void onItemClick(AdapterView<?> parent, View view, int position,
             long id) {
         ApplicationInfo info = (ApplicationInfo)mAppInfoAdapter.getItem(position);
-        startApplicationDetailsActivity(info, mAppInfoAdapter.getAppStats(info.packageName));
+        mCurrentPkgName = info.packageName;
+        startApplicationDetailsActivity();
     }
     
-    // onCancel call back for dialog thats displayed when data is being loaded
+    // Finish the activity if the user presses the back button to cancel the activity
     public void onCancel(DialogInterface dialog) {
-        mLoadingDlg = null;
         finish();
     }
 
@@ -1273,6 +1301,7 @@ public class ManageApplications extends ListActivity implements
         default:
             return;
         }
+        mAlertDlg.dismiss();
         sendMessageToHandler(REORDER_LIST, newOption);
     }
 }

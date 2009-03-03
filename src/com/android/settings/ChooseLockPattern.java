@@ -292,6 +292,7 @@ public class ChooseLockPattern extends Activity implements View.OnClickListener{
 
         mLockPatternView = (LockPatternView) findViewById(R.id.lockPattern);
         mLockPatternView.setOnPatternListener(mChooseNewLockPatternListener);
+        mLockPatternView.setTactileFeedbackEnabled(mLockPatternUtils.isTactileFeedbackEnabled());        
 
         mFooterText = (TextView) findViewById(R.id.footerText);
 
