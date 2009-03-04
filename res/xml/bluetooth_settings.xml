@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright (C) 2008 The Android Open Source Project
+
+     Licensed under the Apache License, Version 2.0 (the "License");
+     you may not use this file except in compliance with the License.
+     You may obtain a copy of the License at
+  
+          http://www.apache.org/licenses/LICENSE-2.0
+  
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+-->
+
+<PreferenceScreen
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:title="@string/bluetooth_settings" >
+
+    <CheckBoxPreference
+        android:key="bt_checkbox"
+        android:title="@string/bluetooth"
+        android:summary="@string/bluetooth_quick_toggle_summary" />
+
+    <com.android.settings.bluetooth.BluetoothNamePreference
+        android:key="bt_name"
+        android:title="@string/bluetooth_device_name"
+        android:summary="@string/bluetooth_name_not_set"
+        android:dialogTitle="@string/bluetooth_device_name"
+        android:dependency="bt_checkbox"
+        android:persistent="false"
+        android:singleLine="true" />
+
+    <CheckBoxPreference
+        android:key="bt_discoverable"
+        android:title="@string/bluetooth_visibility"
+        android:dependency="bt_checkbox"
+        android:summaryOn="@string/bluetooth_is_discoverable"
+        android:summaryOff="@string/bluetooth_not_discoverable"
+        android:persistent="false" />
+
+    <Preference
+        android:key="bt_scan"
+        android:dependency="bt_checkbox"
+        android:title="@string/bluetooth_preference_scan_title" />
+
+    <com.android.settings.ProgressCategory
+        android:key="bt_device_list"
+        android:title="@string/bluetooth_devices"
+        android:dependency="bt_checkbox"
+        android:orderingFromXml="false" />
+
+</PreferenceScreen>

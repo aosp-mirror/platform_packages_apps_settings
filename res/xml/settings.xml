@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright (C) 2008 The Android Open Source Project
+
+     Licensed under the Apache License, Version 2.0 (the "License");
+     you may not use this file except in compliance with the License.
+     You may obtain a copy of the License at
+  
+          http://www.apache.org/licenses/LICENSE-2.0
+  
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+-->
+
+<PreferenceScreen
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:title="@string/settings_label"
+    android:key="parent">
+            
+        <PreferenceScreen
+            android:title="@string/radio_controls_title"
+            android:summary="@string/radio_controls_summary">
+            <intent
+                android:action="android.intent.action.MAIN"
+                android:targetPackage="com.android.settings"
+                android:targetClass="com.android.settings.WirelessSettings" />
+        </PreferenceScreen>
+
+        <PreferenceScreen
+            android:key="call_settings"
+            android:title="@string/call_settings_title"
+            android:summary="@string/call_settings_summary">
+            <intent
+                android:action="android.intent.action.MAIN"
+                android:targetPackage="com.android.phone"
+                android:targetClass="com.android.phone.CallFeaturesSetting" />
+        </PreferenceScreen>
+
+        <!-- Sound and Display -->
+        
+        <PreferenceScreen
+            android:title="@string/sound_and_display_settings"
+            android:summary="@string/sound_and_display_settings_summary">
+            <intent
+                android:action="android.intent.action.MAIN"
+                android:targetPackage="com.android.settings"
+                android:targetClass="com.android.settings.SoundAndDisplaySettings" />
+        </PreferenceScreen>
+
+        <!-- Data Sync. The settings activity will ensure this is resolved to an
+             activity on the system image, otherwise it will remove this
+             preference. -->
+        
+        <PreferenceScreen
+            android:title="@string/sync_settings"
+            android:summary="@string/sync_settings_summary"
+            android:key="sync_settings">
+            <intent android:action="android.settings.SYNC_SETTINGS" />
+        </PreferenceScreen>
+
+        <!-- Security & Privacy -->
+        
+        <PreferenceScreen
+            android:title="@string/security_settings_title"
+            android:summary="@string/security_settings_summary">
+            <intent
+                android:action="android.intent.action.MAIN"
+                android:targetPackage="com.android.settings"
+                android:targetClass="com.android.settings.SecuritySettings" />
+        </PreferenceScreen>
+
+        <!-- Application Settings -->
+        
+        <PreferenceScreen
+            android:title="@string/applications_settings"
+            android:summary="@string/applications_settings_summary"
+            android:key="applications_settings">
+            <intent
+                android:action="android.intent.action.MAIN"
+                android:targetPackage="com.android.settings"
+                android:targetClass="com.android.settings.ApplicationSettings" />
+        </PreferenceScreen>
+
+        <!-- Storage -->
+        
+        <PreferenceScreen 
+            android:title="@string/storage_settings_title" 
+            android:summary="@string/storage_settings_summary">
+            <intent android:action="android.intent.action.MAIN"
+                android:targetPackage="com.android.settings"
+                android:targetClass="com.android.settings.deviceinfo.Memory" />
+        </PreferenceScreen>
+
+        <!-- Date & Time -->
+        
+        <PreferenceScreen
+            android:title="@string/date_and_time_settings_title"
+            android:summary="@string/date_and_time_settings_summary">
+            <intent
+                android:action="android.intent.action.MAIN"
+                android:targetPackage="com.android.settings"
+                android:targetClass="com.android.settings.DateTimeSettings" />
+        </PreferenceScreen>
+
+        <!-- Language -->
+
+        <PreferenceScreen
+            android:title="@string/language_settings"
+            android:summary="@string/language_settings_summary">
+            <intent
+                android:action="android.intent.action.MAIN"
+                android:targetPackage="com.android.settings"
+                android:targetClass="com.android.settings.LanguageSettings" />
+        </PreferenceScreen>
+
+        <!-- About Device -->
+ 
+        <PreferenceScreen
+            android:title="@string/about_settings"
+            android:summary="@string/about_settings_summary">
+            <intent
+                android:action="android.intent.action.MAIN"
+                android:targetPackage="com.android.settings"
+                android:targetClass="com.android.settings.DeviceInfoSettings" />
+        </PreferenceScreen>
+
+</PreferenceScreen>

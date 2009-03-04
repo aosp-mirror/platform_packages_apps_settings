@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+/* //device/apps/Settings/res/layout/sdcard_settings_screen.xml
+**
+** Copyright 2007, The Android Open Source Project
+**
+** Licensed under the Apache License, Version 2.0 (the "License"); 
+** you may not use this file except in compliance with the License. 
+** You may obtain a copy of the License at 
+**
+**     http://www.apache.org/licenses/LICENSE-2.0 
+**
+** Unless required by applicable law or agreed to in writing, software 
+** distributed under the License is distributed on an "AS IS" BASIS, 
+** WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. 
+** See the License for the specific language governing permissions and 
+** limitations under the License.
+*/
+-->
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent">
+
+    <LinearLayout android:id="@+id/list"
+        android:orientation="vertical"
+        android:padding="10dip"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content">
+    
+        <LinearLayout android:id="@+id/usb"
+            android:orientation="vertical"
+            android:paddingBottom="10dip"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content">
+
+            <CheckBox android:id="@+id/mass_storage"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" 
+                android:text="@string/sdcard_settings_screen_mass_storage_text">
+                <requestFocus/>
+            </CheckBox>
+            
+            <TextView android:text="@string/sdcard_changes_instructions" style="@style/info_small" />
+        </LinearLayout>
+        
+        <!-- divider line -->
+        <View android:background="#FF000000"
+            android:layout_width="fill_parent"
+            android:layout_height="1dip" />
+    
+        <LinearLayout android:id="@+id/mounted" 
+            android:orientation="vertical" 
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:paddingTop="10dip">
+            
+            <TextView android:id="@+id/read_only"
+                android:text="@string/sdcard_settings_read_only_status" 
+                style="@style/info_label" />
+            
+            <Button android:id="@+id/sdcard_unmount"
+                android:text="@string/sdcard_unmount" 
+                android:textSize="14sp"
+                android:layout_marginTop="8dip"
+                android:layout_width="wrap_content" android:layout_height="wrap_content" />
+
+            <Button android:id="@+id/sdcard_format"
+                android:text="@string/sdcard_format" 
+                android:textSize="14sp"
+                android:layout_marginTop="8dip"
+                android:layout_width="wrap_content" android:layout_height="wrap_content" />
+    
+            <TableLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:paddingTop="10dip">
+                <TableRow>
+                    <TextView android:text="@string/sdcard_settings_total_bytes_label" style="@style/info_label" />
+                    <TextView android:id="@+id/total" style="@style/info_value" />
+                </TableRow>
+                <TableRow>
+                    <TextView android:text="@string/sdcard_settings_used_bytes_label" style="@style/info_label" />
+                    <TextView android:id="@+id/used" style="@style/info_value" />
+                </TableRow>
+                <TableRow>
+                    <TextView android:text="@string/sdcard_settings_available_bytes_label" style="@style/info_label" />
+                    <TextView android:id="@+id/available" style="@style/info_value" />
+                </TableRow>
+            </TableLayout>
+    
+        </LinearLayout>
+    
+        <LinearLayout style="@style/entry_layout" 
+            android:id="@+id/scanning" 
+            android:paddingTop="10dip">
+            <TextView android:text="@string/sdcard_settings_scanning_status" style="@style/info_label" />
+        </LinearLayout>
+
+        <LinearLayout style="@style/entry_layout" 
+            android:id="@+id/removed" 
+            android:paddingTop="10dip">
+            <TextView android:text="@string/sdcard_settings_not_present_status" style="@style/info_label" />
+        </LinearLayout>
+
+        <LinearLayout android:id="@+id/shared" 
+            android:orientation="vertical" 
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content" 
+            android:paddingTop="10dip">
+        
+            <LinearLayout style="@style/entry_layout" >
+                <TextView android:text="@string/sdcard_settings_mass_storage_status" style="@style/info_label" />
+            </LinearLayout>
+ 
+        </LinearLayout>
+
+        <LinearLayout style="@style/entry_layout" 
+            android:id="@+id/unmounted" 
+            android:paddingTop="10dip">
+            <TextView android:text="@string/sdcard_settings_unmounted_status" style="@style/info_label" />
+        </LinearLayout>
+
+        <LinearLayout style="@style/entry_layout" 
+            android:id="@+id/bad_removal" 
+            android:paddingTop="10dip">
+            <TextView android:text="@string/sdcard_settings_bad_removal_status" style="@style/info_label" />
+        </LinearLayout>
+    
+    </LinearLayout>
+</ScrollView>
+

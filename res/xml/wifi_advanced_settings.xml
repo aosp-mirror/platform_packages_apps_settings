@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright (C) 2008 The Android Open Source Project
+
+     Licensed under the Apache License, Version 2.0 (the "License");
+     you may not use this file except in compliance with the License.
+     You may obtain a copy of the License at
+  
+          http://www.apache.org/licenses/LICENSE-2.0
+  
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+-->
+
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+        android:title="@string/wifi_advanced_titlebar">
+
+    <ListPreference
+            android:key="num_channels"
+            android:title="@string/wifi_setting_num_channels_title"
+            android:summary="@string/wifi_setting_num_channels_summary"
+            android:persistent="false"
+            />
+    
+    <ListPreference
+            android:key="sleep_policy"
+            android:title="@string/wifi_setting_sleep_policy_title"
+            android:summary="@string/wifi_setting_sleep_policy_summary"
+            android:persistent="false"
+            android:entries="@array/wifi_sleep_policy_entries"
+            android:entryValues="@array/wifi_sleep_policy_values"
+            />
+    
+    <Preference android:key="mac_address" 
+        style="?android:attr/preferenceInformationStyle" 
+        android:title="@string/wifi_advanced_mac_address_title"
+        />
+    
+    <PreferenceCategory
+            android:title="@string/wifi_ip_settings_titlebar"
+            />
+    
+    <CheckBoxPreference
+            android:key="use_static_ip"
+            android:title="@string/wifi_use_static_ip"
+            android:persistent="false"
+            />    
+    
+    <EditTextPreference
+            android:dependency="use_static_ip"
+            android:key="ip_address"
+            android:title="@string/wifi_ip_address"
+            android:persistent="false"
+            android:singleLine="true"
+            />    
+    
+    <EditTextPreference
+            android:dependency="use_static_ip"
+            android:key="gateway"
+            android:title="@string/wifi_gateway"
+            android:persistent="false"
+            android:singleLine="true"
+            />    
+    
+    <EditTextPreference
+            android:dependency="use_static_ip"
+            android:key="netmask"
+            android:title="@string/wifi_netmask"
+            android:persistent="false"
+            android:singleLine="true"
+            />    
+
+    <EditTextPreference
+            android:dependency="use_static_ip"
+            android:key="dns1"
+            android:title="@string/wifi_dns1"
+            android:persistent="false"
+            android:singleLine="true"
+            />    
+    
+    <EditTextPreference
+            android:dependency="use_static_ip"
+            android:key="dns2"
+            android:title="@string/wifi_dns2"
+            android:persistent="false"
+            android:singleLine="true"
+            />    
+    
+</PreferenceScreen>   
