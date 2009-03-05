@@ -1,5 +1,5 @@
 /**
- * Copyright (C) 2007 Google Inc.
+ * Copyright (C) 2009 Google Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy
@@ -136,7 +136,7 @@ public class UserDictionarySettings extends ListActivity {
     
     @Override
     protected void onListItemClick(ListView l, View v, int position, long id) {
-        showAddOrEditDialog(getWord(position));
+        openContextMenu(v);
     }
 
     @Override
@@ -145,8 +145,10 @@ public class UserDictionarySettings extends ListActivity {
         
         AdapterContextMenuInfo adapterMenuInfo = (AdapterContextMenuInfo) menuInfo;
         menu.setHeaderTitle(getWord(adapterMenuInfo.position));
-        menu.add(0, CONTEXT_MENU_EDIT, 0, R.string.user_dict_settings_context_menu_edit_title);
-        menu.add(0, CONTEXT_MENU_DELETE, 0, R.string.user_dict_settings_context_menu_delete_title);
+        menu.add(0, CONTEXT_MENU_EDIT, 0, 
+                R.string.user_dict_settings_context_menu_edit_title);
+        menu.add(0, CONTEXT_MENU_DELETE, 0, 
+                R.string.user_dict_settings_context_menu_delete_title);
     }
     
     @Override
@@ -203,7 +205,9 @@ public class UserDictionarySettings extends ListActivity {
                 | InputType.TYPE_TEXT_FLAG_AUTO_COMPLETE);
         
         return new AlertDialog.Builder(this)
-                .setTitle(R.string.user_dict_settings_add_dialog_title)
+                .setTitle(mDialogEditingWord != null 
+                        ? R.string.user_dict_settings_edit_dialog_title 
+                        : R.string.user_dict_settings_add_dialog_title)
                 .setView(content)
                 .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int which) {
@@ -216,10 +220,12 @@ public class UserDictionarySettings extends ListActivity {
                     }})
                 .create();
     }
-
     @Override
     protected void onPrepareDialog(int id, Dialog d) {
         AlertDialog dialog = (AlertDialog) d;
+        d.setTitle(mDialogEditingWord != null 
+                        ? R.string.user_dict_settings_edit_dialog_title 
+                        : R.string.user_dict_settings_add_dialog_title);
         EditText editText = (EditText) dialog.findViewById(R.id.edittext);
         editText.setText(mDialogEditingWord);
     }

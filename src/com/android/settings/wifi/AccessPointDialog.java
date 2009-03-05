@@ -24,6 +24,7 @@ import android.content.DialogInterface;
 import android.net.wifi.WifiInfo;
 import android.net.wifi.WifiManager;
 import android.os.Bundle;
+import android.text.InputType;
 import android.text.TextUtils;
 import android.text.format.Formatter;
 import android.text.method.PasswordTransformationMethod;
@@ -589,11 +590,9 @@ public class AccessPointDialog extends AlertDialog implements DialogInterface.On
     
     private void setShowPassword(boolean showPassword) {
         if (mPasswordEdit != null) {
-            // Toggle password
-            mPasswordEdit.setTransformationMethod(
-                    showPassword ?
-                            null :
-                            PasswordTransformationMethod.getInstance());
+            mPasswordEdit.setInputType(InputType.TYPE_CLASS_TEXT |
+                    (showPassword ? InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD
+                            : InputType.TYPE_TEXT_VARIATION_PASSWORD));
         }
     }
     

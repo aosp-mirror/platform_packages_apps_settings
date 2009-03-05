@@ -16,7 +16,6 @@
 
 package com.android.settings;
 
-import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.Configuration;
@@ -28,37 +27,20 @@ import android.preference.PreferenceActivity;
 import android.preference.PreferenceGroup;
 import android.preference.PreferenceScreen;
 import android.provider.Settings;
-import android.provider.Settings.System;
 import android.text.TextUtils;
 import android.view.inputmethod.InputMethodInfo;
 import android.view.inputmethod.InputMethodManager;
 
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 
 public class LanguageSettings extends PreferenceActivity {
     
-    private final String[] mSettingsUiKey = {
-            "auto_caps",
-            "auto_replace",
-            "auto_punctuate",
-    };
-    
-    // Note: Order of this array should correspond to the order of the above array
-    private final String[] mSettingsSystemId = {
-            System.TEXT_AUTO_CAPS,
-            System.TEXT_AUTO_REPLACE,
-            System.TEXT_AUTO_PUNCTUATE,
-    };
+    private boolean mHaveHardKeyboard;
 
-    // Note: Order of this array should correspond to the order of the above array
-    private final int[] mSettingsDefault = {
-            1,
-            1,
-            1,
-    };
-    
     private List<InputMethodInfo> mInputMethodProperties;
+    private List<CheckBoxPreference> mCheckboxes;
 
     final TextUtils.SimpleStringSplitter mStringColonSplitter
             = new TextUtils.SimpleStringSplitter(':');
@@ -80,20 +62,15 @@ public class LanguageSettings extends PreferenceActivity {
             getPreferenceScreen().
                 removePreference(findPreference("language_category"));
         }
-    
+
         Configuration config = getResources().getConfiguration();
         if (config.keyboard != Configuration.KEYBOARD_QWERTY) {
             getPreferenceScreen().removePreference(
                     getPreferenceScreen().findPreference("hardkeyboard_category"));
         } else {
-            ContentResolver resolver = getContentResolver();
-            for (int i = 0; i < mSettingsUiKey.length; i++) {
-                CheckBoxPreference pref = (CheckBoxPreference) findPreference(mSettingsUiKey[i]);
-                pref.setChecked(System.getInt(resolver, mSettingsSystemId[i],
-                                              mSettingsDefault[i]) > 0);
-            }
+            mHaveHardKeyboard = true;
         }
-
+        mCheckboxes = new ArrayList<CheckBoxPreference>();
         onCreateIMM();
     }
     
@@ -116,18 +93,27 @@ public class LanguageSettings extends PreferenceActivity {
             CharSequence label = property.loadLabel(getPackageManager());
             
             // Add a check box.
-            CheckBoxPreference chkbxPref = new CheckBoxPreference(this);
-            chkbxPref.setKey(prefKey);
-            chkbxPref.setTitle(label);
-            textCategory.addPreference(chkbxPref);
+            // Don't show the toggle if it's the only keyboard in the system
+            if (mHaveHardKeyboard || N > 1) {
+                CheckBoxPreference chkbxPref = new CheckBoxPreference(this);
+                chkbxPref.setKey(prefKey);
+                chkbxPref.setTitle(label);
+                textCategory.addPreference(chkbxPref);
+                mCheckboxes.add(chkbxPref);
+            }
 
             // If setting activity is available, add a setting screen entry.
             if (null != property.getSettingsActivity()) {
                 PreferenceScreen prefScreen = new PreferenceScreen(this, null);
                 prefScreen.setKey(property.getSettingsActivity());
-                CharSequence settingsLabel = getResources().getString(
-                        R.string.input_methods_settings_label_format, label);
-                prefScreen.setTitle(settingsLabel);
+                prefScreen.setTitle(label);
+                if (N == 1) {
+                    prefScreen.setSummary(getString(R.string.onscreen_keyboard_settings_summary));
+                } else {
+                    CharSequence settingsLabel = getResources().getString(
+                            R.string.input_methods_settings_label_format, label);
+                    prefScreen.setSummary(settingsLabel);
+                }
                 textCategory.addPreference(prefScreen);
             }
         }
@@ -154,8 +140,11 @@ public class LanguageSettings extends PreferenceActivity {
             final String id = mInputMethodProperties.get(i).getId();
             CheckBoxPreference pref = (CheckBoxPreference) findPreference(mInputMethodProperties
                     .get(i).getId());
-            pref.setChecked(enabled.contains(id));
+            if (pref != null) {
+                pref.setChecked(enabled.contains(id));
+            }
         }
+        updateCheckboxes();
         mLastTickedInputMethodId = null;
     }
 
@@ -173,7 +162,7 @@ public class LanguageSettings extends PreferenceActivity {
             final String id = mInputMethodProperties.get(i).getId();
             CheckBoxPreference pref = (CheckBoxPreference) findPreference(id);
             boolean hasIt = id.equals(mLastInputMethodId);
-            if (pref.isChecked()) {
+            if ((N == 1 && !mHaveHardKeyboard) || (pref != null && pref.isChecked())) {
                 if (builder.length() > 0) builder.append(':');
                 builder.append(id);
                 if (firstEnabled < 0) {
@@ -200,18 +189,30 @@ public class LanguageSettings extends PreferenceActivity {
             Settings.Secure.DEFAULT_INPUT_METHOD, mLastInputMethodId);
     }
 
-    @Override
-    public boolean onPreferenceTreeClick(PreferenceScreen preferenceScreen, Preference preference) {
-
-        // Physical keyboard stuff
-        for (int i = 0; i < mSettingsUiKey.length; i++) {
-            if (mSettingsUiKey[i].equals(preference.getKey())) {
-                System.putInt(getContentResolver(), mSettingsSystemId[i], 
-                        ((CheckBoxPreference)preference).isChecked()? 1 : 0);
-                return true;
+    private void updateCheckboxes() {
+        final int count = mCheckboxes.size();
+        int nChecked = 0;
+        int iChecked = -1;
+        // See how many are checked and note the only or last checked one
+        for (int i = 0; i < count; i++) {
+            if (mCheckboxes.get(i).isChecked()) {
+                iChecked = i;
+                nChecked++;
             }
         }
-
+        // 
+        if (nChecked == 1) {
+            mCheckboxes.get(iChecked).setEnabled(false);
+        } else {
+            for (int i = 0; i < count; i++) {
+                mCheckboxes.get(i).setEnabled(true);
+            }
+        }
+    }
+    
+    @Override
+    public boolean onPreferenceTreeClick(PreferenceScreen preferenceScreen, Preference preference) {
+        
         // Input Method stuff
         // Those monkeys kept committing suicide, so we add this property
         // to disable this functionality
@@ -240,7 +241,7 @@ public class LanguageSettings extends PreferenceActivity {
                 }
             }
         }
-
+        updateCheckboxes();
         return super.onPreferenceTreeClick(preferenceScreen, preference);
     }
 

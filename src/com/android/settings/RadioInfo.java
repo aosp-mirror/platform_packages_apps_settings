@@ -560,7 +560,7 @@ public class RadioInfo extends Activity {
 
         // Get the toggle-data-on-boot menu item in the right state.
         item = menu.findItem(MENU_ITEM_TOGGLE_DATA_ON_BOOT);
-        SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(this.getApplication());
+        SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(phone.getContext());
         boolean value = sp.getBoolean(GSMPhone.DATA_DISABLED_ON_BOOT_KEY, false);
         if (value) {
             item.setTitle(R.string.radioInfo_menu_enableDataOnBoot);
@@ -584,7 +584,7 @@ public class RadioInfo extends Activity {
 
     private void updateQxdmState(Boolean newQxdmStatus) {
         SharedPreferences sp = 
-          PreferenceManager.getDefaultSharedPreferences(this.getApplication());
+          PreferenceManager.getDefaultSharedPreferences(phone.getContext());
         mQxdmLogEnabled = sp.getBoolean("qxdmstatus", false);
         // This is called from onCreate, onResume, and the handler when the status
         // is updated. 
@@ -602,14 +602,14 @@ public class RadioInfo extends Activity {
     }
 
     private void setCiphPref(boolean value) {
-        SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(this.getApplication());
+        SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(phone.getContext());
         SharedPreferences.Editor editor = sp.edit();
         editor.putBoolean(GSMPhone.CIPHERING_KEY, value);
         editor.commit();
     }
 
     private boolean getCiphPref() {
-        SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(this.getApplication());
+        SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(phone.getContext());
         boolean ret = sp.getBoolean(GSMPhone.CIPHERING_KEY, true);
         return ret;
     }
@@ -1044,7 +1044,7 @@ public class RadioInfo extends Activity {
     };
 
     private void toggleDataDisabledOnBoot() {
-        SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(this.getApplication());
+        SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(phone.getContext());
         SharedPreferences.Editor editor = sp.edit();
         boolean value = sp.getBoolean(GSMPhone.DATA_DISABLED_ON_BOOT_KEY, false);
         editor.putBoolean(GSMPhone.DATA_DISABLED_ON_BOOT_KEY, !value);
