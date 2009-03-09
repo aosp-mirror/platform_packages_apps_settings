@@ -127,7 +127,10 @@ public class BluetoothDiscoverableEnabler implements Preference.OnPreferenceChan
 
             int timeout = getDiscoverableTimeout();
             manager.setDiscoverableTimeout(timeout);
-            
+
+            mCheckBoxPreference.setSummaryOn(
+                    mContext.getResources().getString(R.string.bluetooth_is_discoverable, timeout));
+
             long endTimestamp = System.currentTimeMillis() + timeout * 1000;
             persistDiscoverableEndTimestamp(endTimestamp);
             

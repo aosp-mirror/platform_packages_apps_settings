@@ -97,13 +97,18 @@
     <PreferenceCategory
             android:title="@string/display_settings">
 
+        <CheckBoxPreference 
+            android:key="accelerometer" 
+            android:title="@string/accelerometer_title" 
+            android:summaryOn="@string/accelerometer_summary_on"
+            android:summaryOff="@string/accelerometer_summary_off"/>
+    
         <CheckBoxPreference
                 android:key="animations"
                 android:title="@string/animations_title"
                 android:summaryOn="@string/animations_summary_on"
                 android:summaryOff="@string/animations_summary_off" />
 
-    
         <com.android.settings.BrightnessPreference
                 android:key="brightness"
                 android:title="@string/brightness"

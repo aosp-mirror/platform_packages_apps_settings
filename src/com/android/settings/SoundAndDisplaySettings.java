@@ -50,6 +50,7 @@ public class SoundAndDisplaySettings extends PreferenceActivity implements
     private static final String KEY_DTMF_TONE = "dtmf_tone";
     private static final String KEY_SOUND_EFFECTS = "sound_effects";
     private static final String KEY_ANIMATIONS = "animations";
+    private static final String KEY_ACCELEROMETER = "accelerometer";
     private static final String KEY_PLAY_MEDIA_NOTIFICATION_SOUNDS = "play_media_notification_sounds";
     
     private CheckBoxPreference mSilent;
@@ -69,6 +70,7 @@ public class SoundAndDisplaySettings extends PreferenceActivity implements
     private CheckBoxPreference mDtmfTone;
     private CheckBoxPreference mSoundEffects;
     private CheckBoxPreference mAnimations;
+    private CheckBoxPreference mAccelerometer;
     private float[] mAnimationScales;
     
     private AudioManager mAudioManager;
@@ -108,6 +110,8 @@ public class SoundAndDisplaySettings extends PreferenceActivity implements
                 Settings.System.SOUND_EFFECTS_ENABLED, 0) != 0);
         mAnimations = (CheckBoxPreference) findPreference(KEY_ANIMATIONS);
         mAnimations.setPersistent(false);
+        mAccelerometer = (CheckBoxPreference) findPreference(KEY_ACCELEROMETER);
+        mAccelerometer.setPersistent(false);
         
         ListPreference screenTimeoutPreference =
             (ListPreference) findPreference(KEY_SCREEN_TIMEOUT);
@@ -174,6 +178,9 @@ public class SoundAndDisplaySettings extends PreferenceActivity implements
         if (animations != mAnimations.isChecked() || force) {
             mAnimations.setChecked(animations);
         }
+        mAccelerometer.setChecked(Settings.System.getInt(
+                getContentResolver(), 
+                Settings.System.ACCELEROMETER_ROTATION, 0) != 0);
     }
 
     @Override
@@ -224,6 +231,11 @@ public class SoundAndDisplaySettings extends PreferenceActivity implements
                 mWindowManager.setAnimationScales(mAnimationScales);
             } catch (RemoteException e) {
             }
+            
+        } else if (preference == mAccelerometer) {
+            Settings.System.putInt(getContentResolver(),
+                    Settings.System.ACCELEROMETER_ROTATION,
+                    mAccelerometer.isChecked() ? 1 : 0);
         }
         return true;
     }

@@ -132,6 +132,12 @@ public abstract class LocalBluetoothProfileManager {
 
         @Override
         public int connect(String address) {
+            List<String> sinks = mService.listConnectedSinks();
+            if (sinks != null) {
+                for (String sinkAddress : sinks) {
+                    mService.disconnectSink(sinkAddress);
+                }
+            }
             return mService.connectSink(address);
         }
 
