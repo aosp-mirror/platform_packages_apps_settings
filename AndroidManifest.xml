@@ -481,17 +481,17 @@
             </intent-filter>
        </receiver>
 
-        <!-- Standard picker for gadgets -->
-        <activity android:name="GadgetPickActivity" android:label="@string/widget_picker_title">
+        <!-- Standard picker for widgets -->
+        <activity android:name="AppWidgetPickActivity" android:label="@string/widget_picker_title">
             <intent-filter>
-                <action android:name="android.gadget.action.GADGET_PICK" />
+                <action android:name="android.appwidget.action.APPWIDGET_PICK" />
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
 
-        <!-- Helper to bind any unbound gadgets in Launcher, used as
+        <!-- Helper to bind any unbound widgets in Launcher, used as
              part of initialization and upgrade process -->
-        <activity android:name="LauncherGadgetBinder"
+        <activity android:name="LauncherAppWidgetBinder"
                 android:permission="com.android.launcher.permission.WRITE_SETTINGS"
                 android:theme="@android:style/Theme.NoDisplay" android:exported="true" />
 

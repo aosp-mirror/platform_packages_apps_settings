@@ -20,6 +20,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Bundle;
+import android.os.Environment;
 import android.os.SystemProperties;
 import android.preference.CheckBoxPreference;
 import android.preference.Preference;
@@ -47,6 +48,8 @@ public class LanguageSettings extends PreferenceActivity {
     
     private String mLastInputMethodId;
     private String mLastTickedInputMethodId;
+    
+    private String mRootDirectory;
 
     static public String getInputMethodIdFromKey(String key) {
         return key;
@@ -71,7 +74,12 @@ public class LanguageSettings extends PreferenceActivity {
             mHaveHardKeyboard = true;
         }
         mCheckboxes = new ArrayList<CheckBoxPreference>();
+        mRootDirectory = Environment.getRootDirectory().getAbsolutePath();
         onCreateIMM();
+    }
+    
+    private boolean isSystemIme(InputMethodInfo property) {
+        return property.getServiceInfo().applicationInfo.sourceDir.startsWith(mRootDirectory);
     }
     
     private void onCreateIMM() {
@@ -91,10 +99,10 @@ public class LanguageSettings extends PreferenceActivity {
             String prefKey = property.getId();
 
             CharSequence label = property.loadLabel(getPackageManager());
-            
+            boolean systemIME = isSystemIme(property);
             // Add a check box.
-            // Don't show the toggle if it's the only keyboard in the system
-            if (mHaveHardKeyboard || N > 1) {
+            // Don't show the toggle if it's the only keyboard in the system, or it's a system IME.
+            if (mHaveHardKeyboard || (N > 1 && !systemIME)) {
                 CheckBoxPreference chkbxPref = new CheckBoxPreference(this);
                 chkbxPref.setKey(prefKey);
                 chkbxPref.setTitle(label);
@@ -118,7 +126,7 @@ public class LanguageSettings extends PreferenceActivity {
             }
         }
     }
-    
+
     @Override
     protected void onResume() {
         super.onResume();
@@ -144,7 +152,6 @@ public class LanguageSettings extends PreferenceActivity {
                 pref.setChecked(enabled.contains(id));
             }
         }
-        updateCheckboxes();
         mLastTickedInputMethodId = null;
     }
 
@@ -159,10 +166,13 @@ public class LanguageSettings extends PreferenceActivity {
         int firstEnabled = -1;
         int N = mInputMethodProperties.size();
         for (int i = 0; i < N; ++i) {
-            final String id = mInputMethodProperties.get(i).getId();
+            final InputMethodInfo property = mInputMethodProperties.get(i);
+            final String id = property.getId();
             CheckBoxPreference pref = (CheckBoxPreference) findPreference(id);
             boolean hasIt = id.equals(mLastInputMethodId);
-            if ((N == 1 && !mHaveHardKeyboard) || (pref != null && pref.isChecked())) {
+            boolean systemIme = isSystemIme(property); 
+            if (((N == 1 || systemIme) && !mHaveHardKeyboard) 
+                    || (pref != null && pref.isChecked())) {
                 if (builder.length() > 0) builder.append(':');
                 builder.append(id);
                 if (firstEnabled < 0) {
@@ -189,27 +199,6 @@ public class LanguageSettings extends PreferenceActivity {
             Settings.Secure.DEFAULT_INPUT_METHOD, mLastInputMethodId);
     }
 
-    private void updateCheckboxes() {
-        final int count = mCheckboxes.size();
-        int nChecked = 0;
-        int iChecked = -1;
-        // See how many are checked and note the only or last checked one
-        for (int i = 0; i < count; i++) {
-            if (mCheckboxes.get(i).isChecked()) {
-                iChecked = i;
-                nChecked++;
-            }
-        }
-        // 
-        if (nChecked == 1) {
-            mCheckboxes.get(iChecked).setEnabled(false);
-        } else {
-            for (int i = 0; i < count; i++) {
-                mCheckboxes.get(i).setEnabled(true);
-            }
-        }
-    }
-    
     @Override
     public boolean onPreferenceTreeClick(PreferenceScreen preferenceScreen, Preference preference) {
         
@@ -241,7 +230,6 @@ public class LanguageSettings extends PreferenceActivity {
                 }
             }
         }
-        updateCheckboxes();
         return super.onPreferenceTreeClick(preferenceScreen, preference);
     }
 

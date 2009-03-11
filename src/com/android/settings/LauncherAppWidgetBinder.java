@@ -17,6 +17,7 @@
 package com.android.settings;
 
 import android.app.Activity;
+import android.appwidget.AppWidgetManager;
 import android.content.ContentResolver;
 import android.content.ContentUris;
 import android.content.ContentValues;
@@ -24,7 +25,6 @@ import android.content.Intent;
 import android.content.ComponentName;
 import android.database.Cursor;
 import android.database.SQLException;
-import android.gadget.GadgetManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
@@ -34,8 +34,8 @@ import android.util.Log;
 
 import java.util.ArrayList;
 
-public class LauncherGadgetBinder extends Activity {
-    private static final String TAG = "LauncherGadgetBinder";
+public class LauncherAppWidgetBinder extends Activity {
+    private static final String TAG = "LauncherAppWidgetBinder";
     private static final boolean LOGD = true;
     
     static final String AUTHORITY = "com.android.launcher.settings";
@@ -44,7 +44,7 @@ public class LauncherGadgetBinder extends Activity {
     static final String EXTRA_BIND_SOURCES = "com.android.launcher.settings.bindsources";
     static final String EXTRA_BIND_TARGETS = "com.android.launcher.settings.bindtargets";
 
-    static final String EXTRA_GADGET_BITMAPS = "com.android.camera.gadgetbitmaps";
+    static final String EXTRA_APPWIDGET_BITMAPS = "com.android.camera.appwidgetbitmaps";
     
     /**
      * {@link ContentProvider} constants pulled over from Launcher
@@ -53,10 +53,10 @@ public class LauncherGadgetBinder extends Activity {
         static final Uri CONTENT_URI = Uri.parse("content://" + AUTHORITY + "/" + TABLE_FAVORITES);
 
         static final String ITEM_TYPE = "itemType";
-        static final String GADGET_ID = "gadgetId";
+        static final String APPWIDGET_ID = "gadgetId";
         static final String ICON = "icon";
 
-        static final int ITEM_TYPE_GADGET = 4;
+        static final int ITEM_TYPE_APPWIDGET = 4;
         static final int ITEM_TYPE_WIDGET_CLOCK = 1000;
         static final int ITEM_TYPE_WIDGET_SEARCH = 1001;
         static final int ITEM_TYPE_WIDGET_PHOTO_FRAME = 1002;
@@ -65,17 +65,17 @@ public class LauncherGadgetBinder extends Activity {
     static final String[] BIND_PROJECTION = new String[] {
         LauncherProvider._ID,
         LauncherProvider.ITEM_TYPE,
-        LauncherProvider.GADGET_ID,
+        LauncherProvider.APPWIDGET_ID,
         LauncherProvider.ICON,
     };
     
     static final int INDEX_ID = 0;
     static final int INDEX_ITEM_TYPE = 1;
-    static final int INDEX_GADGET_ID = 2;
+    static final int INDEX_APPWIDGET_ID = 2;
     static final int INDEX_ICON = 3;
     
-    static final ComponentName BIND_PHOTO_GADGET = new ComponentName("com.android.camera",
-            "com.android.camera.PhotoGadgetBind");
+    static final ComponentName BIND_PHOTO_APPWIDGET = new ComponentName("com.android.camera",
+            "com.android.camera.PhotoAppWidgetBind");
 
     @Override
     protected void onCreate(Bundle icicle) {
@@ -83,7 +83,7 @@ public class LauncherGadgetBinder extends Activity {
         finish();
 
         // This helper reaches into the Launcher database and binds any unlinked
-        // gadgets. If will remove any items that can't be bound successfully.
+        // widgets. If will remove any items that can't be bound successfully.
         // We protect this binder at the manifest level by asserting the caller
         // has the Launcher WRITE_SETTINGS permission.
         
@@ -110,10 +110,10 @@ public class LauncherGadgetBinder extends Activity {
         final String selectWhere = buildOrWhereString(LauncherProvider.ITEM_TYPE, bindSources);
         
         final ContentResolver resolver = getContentResolver();
-        final GadgetManager gadgetManager = GadgetManager.getInstance(this);
+        final AppWidgetManager appWidgetManager = AppWidgetManager.getInstance(this);
         
-        boolean foundPhotoGadgets = false;
-        final ArrayList<Integer> photoGadgetIds = new ArrayList<Integer>();
+        boolean foundPhotoAppWidgets = false;
+        final ArrayList<Integer> photoAppWidgetIds = new ArrayList<Integer>();
         final ArrayList<Bitmap> photoBitmaps = new ArrayList<Bitmap>();
         
         Cursor c = null;
@@ -128,37 +128,37 @@ public class LauncherGadgetBinder extends Activity {
             while (c != null && c.moveToNext()) {
                 long favoriteId = c.getLong(INDEX_ID);
                 int itemType = c.getInt(INDEX_ITEM_TYPE);
-                int gadgetId = c.getInt(INDEX_GADGET_ID);
+                int appWidgetId = c.getInt(INDEX_APPWIDGET_ID);
                 byte[] iconData = c.getBlob(INDEX_ICON);
                 
                 // Find the binding target for this type
-                ComponentName targetGadget = null;
+                ComponentName targetAppWidget = null;
                 for (int i = 0; i < bindSources.length; i++) {
                     if (bindSources[i] == itemType) {
-                        targetGadget = bindTargets.get(i);
+                        targetAppWidget = bindTargets.get(i);
                         break;
                     }
                 }
                 
-                if (LOGD) Log.d(TAG, "found matching targetGadget="+targetGadget.toString()+" for favoriteId="+favoriteId);
+                if (LOGD) Log.d(TAG, "found matching targetAppWidget="+targetAppWidget.toString()+" for favoriteId="+favoriteId);
                 
                 boolean bindSuccess = false;
                 try {
-                    gadgetManager.bindGadgetId(gadgetId, targetGadget);
+                    appWidgetManager.bindAppWidgetId(appWidgetId, targetAppWidget);
                     bindSuccess = true;
                 } catch (RuntimeException ex) {
-                    Log.w(TAG, "Problem binding gadget", ex);
+                    Log.w(TAG, "Problem binding widget", ex);
                 }
                 
-                // Handle special case of photo gadget by loading bitmap and
+                // Handle special case of photo widget by loading bitmap and
                 // preparing for later binding
                 if (bindSuccess && iconData != null &&
                         itemType == LauncherProvider.ITEM_TYPE_WIDGET_PHOTO_FRAME) {
                     Bitmap bitmap = BitmapFactory.decodeByteArray(iconData, 0, iconData.length);
                     
-                    photoGadgetIds.add(gadgetId);
+                    photoAppWidgetIds.add(appWidgetId);
                     photoBitmaps.add(bitmap);
-                    foundPhotoGadgets = true;
+                    foundPhotoAppWidgets = true;
                 }
 
                 if (LOGD) Log.d(TAG, "after finished, success="+bindSuccess);
@@ -167,7 +167,7 @@ public class LauncherGadgetBinder extends Activity {
                 Uri favoritesUri = ContentUris.withAppendedId(LauncherProvider.CONTENT_URI, favoriteId);
                 if (bindSuccess) {
                     values.clear();
-                    values.put(LauncherProvider.ITEM_TYPE, LauncherProvider.ITEM_TYPE_GADGET);
+                    values.put(LauncherProvider.ITEM_TYPE, LauncherProvider.ITEM_TYPE_APPWIDGET);
                     values.putNull(LauncherProvider.ICON);
                     resolver.update(favoritesUri, values, null, null);
                 } else {
@@ -176,29 +176,29 @@ public class LauncherGadgetBinder extends Activity {
                     
             }
         } catch (SQLException ex) {
-            Log.w(TAG, "Problem while binding gadgetIds for Launcher", ex);
+            Log.w(TAG, "Problem while binding appWidgetIds for Launcher", ex);
         } finally {
             if (c != null) {
                 c.close();
             }
         }
         
-        if (foundPhotoGadgets) {
-            // Convert gadgetIds into int[]
-            final int N = photoGadgetIds.size();
-            final int[] photoGadgetIdsArray = new int[N];
+        if (foundPhotoAppWidgets) {
+            // Convert appWidgetIds into int[]
+            final int N = photoAppWidgetIds.size();
+            final int[] photoAppWidgetIdsArray = new int[N];
             for (int i = 0; i < N; i++) {
-                photoGadgetIdsArray[i] = photoGadgetIds.get(i);
+                photoAppWidgetIdsArray[i] = photoAppWidgetIds.get(i);
             }
             
             // Launch intent over to handle bitmap binding, but we don't need to
             // wait around for the result.
             final Intent bindIntent = new Intent();
-            bindIntent.setComponent(BIND_PHOTO_GADGET);
+            bindIntent.setComponent(BIND_PHOTO_APPWIDGET);
             
             final Bundle bindExtras = new Bundle();
-            bindExtras.putIntArray(GadgetManager.EXTRA_GADGET_IDS, photoGadgetIdsArray);
-            bindExtras.putParcelableArrayList(EXTRA_GADGET_BITMAPS, photoBitmaps);
+            bindExtras.putIntArray(AppWidgetManager.EXTRA_APPWIDGET_IDS, photoAppWidgetIdsArray);
+            bindExtras.putParcelableArrayList(EXTRA_APPWIDGET_BITMAPS, photoBitmaps);
             bindIntent.putExtras(bindExtras);
             
             startActivity(bindIntent);

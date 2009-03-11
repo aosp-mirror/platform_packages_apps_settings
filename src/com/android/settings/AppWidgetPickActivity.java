@@ -17,11 +17,11 @@
 package com.android.settings;
 
 import android.app.LauncherActivity;
+import android.appwidget.AppWidgetManager;
+import android.appwidget.AppWidgetProviderInfo;
 import android.content.ComponentName;
 import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.gadget.GadgetProviderInfo;
-import android.gadget.GadgetManager;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.View;
@@ -34,15 +34,15 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 
-public class GadgetPickActivity extends LauncherActivity
+public class AppWidgetPickActivity extends LauncherActivity
 {
-    private static final String TAG = "GadgetPickActivity";
+    private static final String TAG = "AppWidgetPickActivity";
 
-    GadgetManager mGadgetManager;
-    int mGadgetId;
+    AppWidgetManager mAppWidgetManager;
+    int mAppWidgetId;
     
-    public GadgetPickActivity() {
-        mGadgetManager = GadgetManager.getInstance(this);
+    public AppWidgetPickActivity() {
+        mAppWidgetManager = AppWidgetManager.getInstance(this);
     }
 
     @Override
@@ -50,7 +50,7 @@ public class GadgetPickActivity extends LauncherActivity
         super.onCreate(icicle);
 
         Bundle extras = getIntent().getExtras();
-        mGadgetId = extras.getInt(GadgetManager.EXTRA_GADGET_ID);
+        mAppWidgetId = extras.getInt(AppWidgetManager.EXTRA_APPWIDGET_ID);
 
         setResultData(RESULT_CANCELED);
     }
@@ -61,13 +61,13 @@ public class GadgetPickActivity extends LauncherActivity
         Intent intent = intentForPosition(position);
         int result;
         try {
-            mGadgetManager.bindGadgetId(mGadgetId, intent.getComponent());
+            mAppWidgetManager.bindAppWidgetId(mAppWidgetId, intent.getComponent());
             result = RESULT_OK;
         } catch (IllegalArgumentException e) {
             // This is thrown if they're already bound, or otherwise somehow
             // bogus.  Set the result to canceled, and exit.  The app *should*
             // clean up at this point.  We could pass the error along, but
-            // it's not clear that that's useful -- the gadget will simply not
+            // it's not clear that that's useful -- the widget will simply not
             // appear.
             result = RESULT_CANCELED;
         }
@@ -77,7 +77,7 @@ public class GadgetPickActivity extends LauncherActivity
     
     @Override
     public List<ListItem> makeListItems() {
-        List<GadgetProviderInfo> installed = mGadgetManager.getInstalledProviders();
+        List<AppWidgetProviderInfo> installed = mAppWidgetManager.getInstalledProviders();
         PackageManager pm = getPackageManager();
 
         Drawable defaultIcon = null;
@@ -86,7 +86,7 @@ public class GadgetPickActivity extends LauncherActivity
         ArrayList<ListItem> result = new ArrayList();
         final int N = installed.size();
         for (int i=0; i<N; i++) {
-            GadgetProviderInfo info = installed.get(i);
+            AppWidgetProviderInfo info = installed.get(i);
 
             LauncherActivity.ListItem item = new LauncherActivity.ListItem();
             item.packageName = info.provider.getPackageName();
@@ -124,7 +124,7 @@ public class GadgetPickActivity extends LauncherActivity
 
     void setResultData(int code) {
         Intent result = new Intent();
-        result.putExtra(GadgetManager.EXTRA_GADGET_ID, mGadgetId);
+        result.putExtra(AppWidgetManager.EXTRA_APPWIDGET_ID, mAppWidgetId);
         setResult(code, result);
     }
 }
