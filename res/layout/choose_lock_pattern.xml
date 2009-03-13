@@ -56,8 +56,9 @@
         <!-- left button: skip, or retry -->
         <Button android:id="@+id/footerLeftButton"
             android:layout_height="wrap_content"
-            android:layout_width="0dip"
-            android:layout_weight="1"
+            android:layout_width="140dip"
+            android:ellipsize="marquee"
+            android:singleLine="true"
             android:text="@string/lockpattern_restart_button_text"/>
 
         <!-- Placeholder to get blank space between the two buttons -->
@@ -70,8 +71,9 @@
         <!-- right button: confirm or ok -->
         <Button android:id="@+id/footerRightButton"
             android:layout_height="wrap_content"
-            android:layout_width="0dip"
-            android:layout_weight="1"
+            android:layout_width="140dip"
+            android:ellipsize="marquee"
+            android:singleLine="true"
             android:drawableRight="@drawable/ic_btn_next"
             android:drawablePadding="3dip"
             android:text="@string/lockpattern_confirm_button_text"/>

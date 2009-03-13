@@ -53,7 +53,7 @@ public class LauncherAppWidgetBinder extends Activity {
         static final Uri CONTENT_URI = Uri.parse("content://" + AUTHORITY + "/" + TABLE_FAVORITES);
 
         static final String ITEM_TYPE = "itemType";
-        static final String APPWIDGET_ID = "gadgetId";
+        static final String APPWIDGET_ID = "appWidgetId";
         static final String ICON = "icon";
 
         static final int ITEM_TYPE_APPWIDGET = 4;

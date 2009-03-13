@@ -481,15 +481,8 @@ public class ChooseLockPattern extends Activity implements View.OnClickListener{
     }
 
     private void saveChosenPatternAndFinish() {
-        boolean patternExistedBefore = mLockPatternUtils.savedPatternExists();
         mLockPatternUtils.saveLockPattern(mChosenPattern);
-
-        // if setting pattern for first time, enable the lock gesture.  otherwise,
-        // keep the user's setting.
-        if (!patternExistedBefore) {
-            mLockPatternUtils.setLockPatternEnabled(true);
-            mLockPatternUtils.setVisiblePatternEnabled(true);
-        }
+        mLockPatternUtils.setLockPatternEnabled(true);
         
         setResult(RESULT_FINISHED);
         finish();

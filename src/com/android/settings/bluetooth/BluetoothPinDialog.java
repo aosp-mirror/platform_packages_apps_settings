@@ -46,6 +46,7 @@ public class BluetoothPinDialog extends AlertActivity implements DialogInterface
         TextWatcher {
     private static final String TAG = "BluetoothPinDialog";
 
+    private final int BLUETOOTH_PIN_MAX_LENGTH = 16;
     private LocalBluetoothManager mLocalManager;
     private String mAddress;
     private EditText mPinView;
@@ -138,8 +139,8 @@ public class BluetoothPinDialog extends AlertActivity implements DialogInterface
         
         mPinView = (EditText) view.findViewById(R.id.text);
         mPinView.addTextChangedListener(this);
-        // Maximum of 10 characters in a PIN
-        mPinView.setFilters(new InputFilter[] { new LengthFilter(10) });
+        // Maximum of 16 characters in a PIN
+        mPinView.setFilters(new InputFilter[] { new LengthFilter(BLUETOOTH_PIN_MAX_LENGTH) });
         
         return view;
     }

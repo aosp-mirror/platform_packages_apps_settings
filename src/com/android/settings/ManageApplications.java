@@ -248,6 +248,38 @@ public class ManageApplications extends ListActivity implements
             switch (msg.what) {
             case INIT_PKG_INFO:
                 if(localLOGV) Log.i(TAG, "Message INIT_PKG_INFO");
+                if (!mJustCreated) {
+                    // Add or delete newly created packages by comparing lists
+                    List<ApplicationInfo> newList = getInstalledApps(FILTER_APPS_ALL);
+                    int oldCount = mAppPropCache.size();
+                    boolean idxArr[] = new boolean[oldCount];
+                    for ( int i = 0; i < oldCount; i++) {
+                        idxArr[i] = false;
+                    }
+                        
+                    if (newList != null) {
+                        for (ApplicationInfo app : newList) {
+                            AppInfo aInfo = mAppPropCache.get(app.packageName);
+                            if ( aInfo == null) {
+                                // New package. post an ADD_PKG message
+                                if(localLOGV) Log.i(TAG, "Adding pkg: "+app.packageName);
+                                updatePackageList(Intent.ACTION_PACKAGE_ADDED, app.packageName);
+                            } else {
+                                idxArr[aInfo.index] = true;
+                            }
+                        }
+                        Set<String> keyList = mAppPropCache.keySet();
+                        for (String key : keyList) {
+                            AppInfo aInfo = mAppPropCache.get(key);
+                            int idx = aInfo.index;
+                            if (!idxArr[idx]) {
+                                String pkg = aInfo.pkgName; 
+                                if(localLOGV) Log.i(TAG, "Deleting pkg: " + pkg);
+                                updatePackageList(Intent.ACTION_PACKAGE_REMOVED, pkg);
+                            }
+                        }
+                    }
+                }
                 // Retrieve the package list and init some structures
                 initAppList(mFilterApps);
                 mHandler.sendEmptyMessage(NEXT_LOAD_STEP);
@@ -499,12 +531,18 @@ public class ManageApplications extends ListActivity implements
     
     // some initialization code used when kicking off the size computation
     private void initAppList(int filterOption) {
+        // Initialize lists
+        List<ApplicationInfo> appList = getInstalledApps(filterOption);
+        initAppList(appList, filterOption);
+    }
+    
+     // some initialization code used when kicking off the size computation
+    private void initAppList(List<ApplicationInfo> appList, int filterOption) {
         setProgressBarIndeterminateVisibility(true);
         mComputeIndex = 0;
         mComputeSizes = false;
         mLoadLabels = false;
         // Initialize lists
-        List<ApplicationInfo> appList = getInstalledApps(filterOption);
         mAddRemoveMap = new TreeMap<String, Boolean>();
         mAppInfoAdapter.resetAppList(filterOption, appList);
     }
@@ -860,11 +898,18 @@ public class ManageApplications extends ListActivity implements
             }
             return mSizeComparator;
         }
-        
-        public void updateAppsResourceInfo(Map<String, AppInfo> iconMap) {
+
+        /*
+         * This method updates resource information in the package map.
+         * 
+         *  @param iconMap a map of package names and attributes
+         *  @return A boolean value to indicate if the property map has to be
+         *  refreshed completely
+         */
+        public boolean updateAppsResourceInfo(Map<String, AppInfo> iconMap) {
             if(iconMap == null) {
                 Log.w(TAG, "Null iconMap when refreshing icon in List Adapter");
-                return;
+                return true;
             }
             boolean changed = false;
             for (ApplicationInfo info : mAppLocalList) {
@@ -874,7 +919,7 @@ public class ManageApplications extends ListActivity implements
                     if (aInfo != null) {
                         aInfo.refreshIcon(pInfo);
                     } else {
-                        mAppPropMap.put(info.packageName, pInfo);
+                        return false;
                     }
                     changed = true;
                 }
@@ -882,14 +927,56 @@ public class ManageApplications extends ListActivity implements
             if(changed) {
                 notifyDataSetChanged();
             }
+            return true;
         }
         
+        private boolean shouldBeInList(int filterOption, ApplicationInfo info) {
+            // Match filter here
+            boolean addToCurrList = false;
+            if (filterOption == FILTER_APPS_RUNNING) {
+                List<ApplicationInfo> runningList = getInstalledApps(FILTER_APPS_RUNNING);
+                for (ApplicationInfo running : runningList) {
+                    if (running.packageName.equalsIgnoreCase(info.packageName)) {
+                        addToCurrList = true;
+                        break;
+                    }
+                }
+            } else if (filterOption == FILTER_APPS_THIRD_PARTY) {
+                if ((info.flags & ApplicationInfo.FLAG_SYSTEM) == 0) {
+                    addToCurrList = true;
+                } else if ((info.flags & ApplicationInfo.FLAG_UPDATED_SYSTEM_APP) != 0) {
+                    addToCurrList = true;
+                }
+            } else {
+                return true;
+            }
+            return addToCurrList;
+        }
+        
+        /*
+         * Add a package to the current list.
+         * The package is only added to the displayed list
+         * based on the filter value. The package is always added to the property map.
+         * @param pkgName name of package to be added
+         * @param ps PackageStats of new package
+         */
         public void addToList(String pkgName, PackageStats ps) {
             if(pkgName == null) {
                 Log.w(TAG, "Adding null pkg to List Adapter");
                 return;
             }
-            ApplicationInfo info;
+            boolean notInList = true;
+            int newIdx = getIndex(pkgName);
+            if (newIdx != -1) {
+                notInList = false;
+                if (mAppPropMap.get(pkgName) != null) {
+                    // weird. just ignore entry
+                    Log.i(TAG, "Package:"+pkgName+" already added");
+                    return;
+                }
+            }
+            // Get ApplicationInfo
+            ApplicationInfo info = null;
             try {
                 info = mPm.getApplicationInfo(pkgName, 0);
             } catch (NameNotFoundException e) {
@@ -901,21 +988,26 @@ public class ManageApplications extends ListActivity implements
                 Log.i(TAG, "Null ApplicationInfo for package:"+pkgName);
                 return;
             }
-            // Binary search returns a negative index (ie --index) of the position where
-            // this might be inserted. 
-            int newIdx = Collections.binarySearch(mAppLocalList, info, 
-                    getAppComparator(mSortOrder));
-            if(newIdx >= 0) {
-                Log.i(TAG, "Strange. Package:"+pkgName+" is not new");
-                return;
-            }
-            // New entry
-            newIdx = -newIdx-1;
-            mAppLocalList.add(newIdx, info);
-            mAppPropMap.put(info.packageName, new AppInfo(pkgName, newIdx,
+            // Add entry to map
+            mAppPropMap.put(pkgName, new AppInfo(pkgName, newIdx,
                     info.loadLabel(mPm), info.loadIcon(mPm), ps));
-            adjustIndex();
-            notifyDataSetChanged();
+            // Add to list
+            if (notInList && (shouldBeInList(mFilterApps, info))) {
+                // Binary search returns a negative index (ie -index) of the position where
+                // this might be inserted. 
+                newIdx = Collections.binarySearch(mAppLocalList, info, 
+                        getAppComparator(mSortOrder));
+                if(newIdx >= 0) {
+                    Log.i(TAG, "Strange. Package:"+pkgName+" is not new");
+                    return;
+                }
+                // New entry
+                newIdx = -newIdx-1;
+                mAppLocalList.add(newIdx, info);
+                // Adjust index
+                adjustIndex();
+                notifyDataSetChanged();
+            }
         }
         
         public void removeFromList(List<String> pkgNames) {
@@ -1134,7 +1226,6 @@ public class ManageApplications extends ListActivity implements
         List<ApplicationInfo> appList = getInstalledApps(mSortOrder);
         mAppInfoAdapter = new AppInfoAdapter(this, appList);
         ListView lv= (ListView) findViewById(android.R.id.list);
-        //lv.setAdapter(mAppInfoAdapter);
         lv.setOnItemClickListener(this);
         lv.setSaveEnabled(true);
         lv.setItemsCanFocus(true);

@@ -171,7 +171,10 @@ public class DateTimeSettings
             SystemClock.setCurrentTimeMillis(when);
         }
         updateTimeAndDateDisplay();
-        timeUpdated();
+        
+        // We don't need to call timeUpdated() here because the TIME_CHANGED
+        // broadcast is sent by the AlarmManager as a side effect of setting the
+        // SystemClock time.
     }
 
     public void onSharedPreferenceChanged(SharedPreferences preferences, String key) {

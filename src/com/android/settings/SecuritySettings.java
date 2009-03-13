@@ -45,8 +45,7 @@ public class SecuritySettings extends PreferenceActivity
     private static final String KEY_LOCK_ENABLED = "lockenabled";
     private static final String KEY_VISIBLE_PATTERN = "visiblepattern";
     private static final String KEY_TACTILE_FEEDBACK_ENABLED = "tactilefeedback";
-    private static final int CONFIRM_PATTERN_THEN_DISABLE_REQUEST_CODE = 55;
-    private static final int CONFIRM_PATTERN_THEN_ENABLE_REQUEST_CODE = 56;
+    private static final int CONFIRM_PATTERN_THEN_DISABLE_AND_CLEAR_REQUEST_CODE = 55;
 
     private LockPatternUtils mLockPatternUtils;
     private CheckBoxPreference mLockEnabled;
@@ -64,7 +63,7 @@ public class SecuritySettings extends PreferenceActivity
     private CheckBoxPreference mNetwork;
     private CheckBoxPreference mGps;
     private LocationManager mLocationManager;
-    
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -257,36 +256,26 @@ public class SecuritySettings extends PreferenceActivity
 
         @Override
         protected void onClick() {
-            if (mLockPatternUtils.savedPatternExists()) {
-                if (isChecked()) {
-                    confirmPatternThenDisable();
-                } else {
-                    confirmPatternThenEnable();
-                }
+            if (mLockPatternUtils.savedPatternExists() && isChecked()) {
+                confirmPatternThenDisableAndClear();
             } else {
                 super.onClick();
             }
         }
     }
 
-    private void confirmPatternThenEnable() {
-        final Intent intent = new Intent();
-        intent.setClassName("com.android.settings", "com.android.settings.ConfirmLockPattern");
-        startActivityForResult(intent, CONFIRM_PATTERN_THEN_ENABLE_REQUEST_CODE);
-    }
-
     /**
      * Launch screen to confirm the existing lock pattern.
      * @see #onActivityResult(int, int, android.content.Intent)
      */
-    private void confirmPatternThenDisable() {
+    private void confirmPatternThenDisableAndClear() {
         final Intent intent = new Intent();
         intent.setClassName("com.android.settings", "com.android.settings.ConfirmLockPattern");
-        startActivityForResult(intent, CONFIRM_PATTERN_THEN_DISABLE_REQUEST_CODE);
+        startActivityForResult(intent, CONFIRM_PATTERN_THEN_DISABLE_AND_CLEAR_REQUEST_CODE);
     }
 
     /**
-     * @see #confirmPatternThenDisable
+     * @see #confirmPatternThenDisableAndClear
      */
     @Override
     protected void onActivityResult(int requestCode, int resultCode,
@@ -295,10 +284,9 @@ public class SecuritySettings extends PreferenceActivity
 
         final boolean resultOk = resultCode == Activity.RESULT_OK;
 
-        if ((requestCode == CONFIRM_PATTERN_THEN_DISABLE_REQUEST_CODE) && resultOk) {
+        if ((requestCode == CONFIRM_PATTERN_THEN_DISABLE_AND_CLEAR_REQUEST_CODE) && resultOk) {
             mLockPatternUtils.setLockPatternEnabled(false);
-        } else if ((requestCode == CONFIRM_PATTERN_THEN_ENABLE_REQUEST_CODE) && resultOk) {
-            mLockPatternUtils.setLockPatternEnabled(true);
+            mLockPatternUtils.saveLockPattern(null);
         }
     }
 }

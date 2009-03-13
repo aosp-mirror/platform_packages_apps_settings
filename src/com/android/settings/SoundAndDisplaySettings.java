@@ -168,7 +168,9 @@ public class SoundAndDisplaySettings extends PreferenceActivity implements
         } catch (RemoteException e) {
         }
         if (mAnimationScales != null) {
-            for (int i=0; i<mAnimationScales.length; i++) {
+            // We will leave the window animations alone (always set),
+            // and only use this to change the transition animations.
+            for (int i=1; i<mAnimationScales.length; i++) {
                 if (mAnimationScales[i] == 0) {
                     animations = false;
                     break;
@@ -224,7 +226,11 @@ public class SoundAndDisplaySettings extends PreferenceActivity implements
                     mSoundEffects.isChecked() ? 1 : 0);
             
         } else if (preference == mAnimations) {
-            for (int i=0; i<mAnimationScales.length; i++) {
+            if (mAnimationScales.length > 0) {
+                // Window animations are always on.
+                mAnimationScales[0] = 1;
+            }
+            for (int i=1; i<mAnimationScales.length; i++) {
                 mAnimationScales[i] = mAnimations.isChecked() ? 1 : 0;
             }
             try {
