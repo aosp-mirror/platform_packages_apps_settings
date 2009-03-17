@@ -47,24 +47,7 @@ public final class AccessPointState implements Comparable<AccessPointState>, Par
     private static final String ADHOC_CAPABILITY = "[IBSS]";
     /** String present in capabilities if the scan result is enterprise secured */
     private static final String ENTERPRISE_CAPABILITY = "-EAP-";
-    
-    // Localized strings for different security types
-    private static String LOCALIZED_WPA2;
-    private static String LOCALIZED_WPA;
-    private static String LOCALIZED_WEP;
-    private static String LOCALIZED_OPEN;
-    private static String LOCALIZED_UNKNOWN;
-    private static String LOCALIZED_VERBOSE_WPA2;
-    private static String LOCALIZED_VERBOSE_WPA;
-    private static String LOCALIZED_VERBOSE_WEP;
-    private static String LOCALIZED_VERBOSE_OPEN;
 
-    
-    // Localized strings for various messages
-    private static String SUMMARY_NOT_IN_RANGE;
-    private static String SUMMARY_REMEMBERED;
-    private static String SUMMARY_CONNECTION_FAILED;
-    
     public static final String BSSID_ANY = "any";
     public static final int NETWORK_ID_NOT_SET = -1;
     /** This should be used with care! */
@@ -147,31 +130,8 @@ public final class AccessPointState implements Comparable<AccessPointState>, Par
 
     void setContext(Context context) {
         mContext = context;
-        setStrings();
     }
 
-    private void setStrings() {
-        final Context c = mContext;
-
-        if (SUMMARY_NOT_IN_RANGE == null && c != null) {
-            SUMMARY_NOT_IN_RANGE = c.getString(R.string.summary_not_in_range);
-            SUMMARY_REMEMBERED = c.getString(R.string.summary_remembered);
-            SUMMARY_CONNECTION_FAILED = c.getString(R.string.summary_connection_failed);
-            
-            LOCALIZED_OPEN = c.getString(R.string.wifi_security_open);
-            LOCALIZED_WEP = c.getString(R.string.wifi_security_wep);
-            LOCALIZED_WPA = c.getString(R.string.wifi_security_wpa);
-            LOCALIZED_WPA2 = c.getString(R.string.wifi_security_wpa2);
-
-            LOCALIZED_VERBOSE_OPEN = c.getString(R.string.wifi_security_verbose_open);
-            LOCALIZED_VERBOSE_WEP = c.getString(R.string.wifi_security_verbose_wep);
-            LOCALIZED_VERBOSE_WPA = c.getString(R.string.wifi_security_verbose_wpa);
-            LOCALIZED_VERBOSE_WPA2 = c.getString(R.string.wifi_security_verbose_wpa2);
-
-            LOCALIZED_UNKNOWN = c.getString(R.string.wifi_security_unknown);
-        }
-    }
-    
     public void setNetworkId(int networkId) {
         this.networkId = networkId;
     }
@@ -311,12 +271,12 @@ public final class AccessPointState implements Comparable<AccessPointState>, Par
     }
     
     public String getHumanReadableSecurity() {
-        if (security.equals(OPEN)) return LOCALIZED_OPEN;
-        else if (security.equals(WEP)) return LOCALIZED_WEP;
-        else if (security.equals(WPA)) return LOCALIZED_WPA;
-        else if (security.equals(WPA2)) return LOCALIZED_WPA2;
+        if (security.equals(OPEN)) return mContext.getString(R.string.wifi_security_open);
+        else if (security.equals(WEP)) return mContext.getString(R.string.wifi_security_wep);
+        else if (security.equals(WPA)) return mContext.getString(R.string.wifi_security_wpa);
+        else if (security.equals(WPA2)) return mContext.getString(R.string.wifi_security_wpa2);
         
-        return LOCALIZED_UNKNOWN;
+        return mContext.getString(R.string.wifi_security_unknown);
     }
     
     public void updateFromScanResult(ScanResult scanResult) {
@@ -719,22 +679,22 @@ public final class AccessPointState implements Comparable<AccessPointState>, Par
             buildSummary(sb, WifiStatus.getPrintable(mContext, status), true);
             
         } else if (!seen) {
-            buildSummary(sb, SUMMARY_NOT_IN_RANGE, true);
+            buildSummary(sb, mContext.getString(R.string.summary_not_in_range), true);
 
             // Remembered comes second in this case
             if (!primary && configured) {
-                buildSummary(sb, SUMMARY_REMEMBERED, true);
+                buildSummary(sb, mContext.getString(R.string.summary_remembered), true);
             }
             
         } else {
             if (configured && disabled) {
                 // The connection failure overrides all in this case
-                return SUMMARY_CONNECTION_FAILED;
+                return mContext.getString(R.string.summary_connection_failed);
             }
 
             // Remembered comes first in this case
             if (!primary && configured) {
-                buildSummary(sb, SUMMARY_REMEMBERED, true);
+                buildSummary(sb, mContext.getString(R.string.summary_remembered), true);
             }
             
             // If it is seen (and not the primary), show the security type
@@ -749,13 +709,13 @@ public final class AccessPointState implements Comparable<AccessPointState>, Par
     
     private String getVerboseSecurity() {
         if (WEP.equals(security)) {
-            return LOCALIZED_VERBOSE_WEP;
+            return mContext.getString(R.string.wifi_security_verbose_wep);
         } else if (WPA.equals(security)) {
-            return LOCALIZED_VERBOSE_WPA;
+            return mContext.getString(R.string.wifi_security_verbose_wpa);
         } else if (WPA2.equals(security)) {
-            return LOCALIZED_VERBOSE_WPA2;
+            return mContext.getString(R.string.wifi_security_verbose_wpa2);
         } else if (OPEN.equals(security)) {
-            return LOCALIZED_VERBOSE_OPEN;
+            return mContext.getString(R.string.wifi_security_verbose_open);
         } else {
             return null;
         }

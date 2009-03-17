@@ -16,11 +16,8 @@
 <resources xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
     <string name="device_info_default">"Sconosciuto"</string>
-    <string name="device_info_uptime">"Tempo di attività"</string>
-    <string name="device_info_awaketime">"Tempo di attività"</string>
-    <string name="device_info_asleeptime">"Tempo di inattività"</string>
-    <string name="turn_on_radio">"Accendi radio"</string>
-    <string name="turn_off_radio">"Disattiva radio"</string>
+    <string name="turn_on_radio">"Attiva segnale cellulare"</string>
+    <string name="turn_off_radio">"Disattiva segnale cellulare"</string>
     <string name="turn_on_qxdm">"Attiva log SD QXDM"</string>
     <string name="turn_off_qxdm">"Disattiva log SD QXDM"</string>
     <string name="radioInfo_menu_viewADN">"Visualizza rubrica SIM"</string>
@@ -34,7 +31,7 @@
     <string name="radioInfo_service_in">"In servizio"</string>
     <string name="radioInfo_service_out">"Fuori servizio"</string>
     <string name="radioInfo_service_emergency">"Solo chiamate di emergenza"</string>
-    <string name="radioInfo_service_off">"Radio disattivata"</string>
+    <string name="radioInfo_service_off">"Segnale cellulare disattivato"</string>
     <string name="radioInfo_roaming_in">"Roaming"</string>
     <string name="radioInfo_roaming_not">"Non roaming"</string>
     <string name="radioInfo_phone_idle">"Inattivo"</string>
@@ -52,14 +49,12 @@
     <string name="radioInfo_lac">"LAC"</string>
     <string name="radioInfo_cid">"CID"</string>
     <string name="sdcard_unmount">"Smonta scheda SD"</string>
+    <string name="sdcard_format">"Formatta scheda SD"</string>
     <string name="small_font">"Piccole"</string>
     <string name="medium_font">"Medie"</string>
     <string name="large_font">"Grandi"</string>
     <string name="font_size_save">"OK"</string>
     <string name="sdcard_setting">"Scheda SD"</string>
-    <string name="screen_off_timeout_label">"Mai timeout quando sotto carica"</string>
-    <string name="stay_on">"Schermo sempre attivo quando sotto carica"</string>
-    <string name="app_launcher_newView_text">"Nuovo AppLauncher"</string>
     <string name="battery_info_status_label">"Stato batteria:"</string>
     <string name="battery_info_scale_label">"Scala batteria:"</string>
     <string name="battery_info_level_label">"Livello batteria:"</string>
@@ -70,8 +65,8 @@
     <string name="battery_info_temperature_label">"Temperatura batteria:"</string>
     <string name="battery_info_temperature_units">"°C"</string>
     <string name="battery_info_uptime">"Tempo dall\'avvio:"</string>
-    <string name="battery_info_awake_battery">"Tempo riattivazione batteria:"</string>
-    <string name="battery_info_awake_plugged">"Tempo riattivazione durante la carica:"</string>
+    <string name="battery_info_awake_battery">"Tempo di attività con batteria:"</string>
+    <string name="battery_info_awake_plugged">"Tempo di attività sotto carica:"</string>
     <string name="battery_info_screen_on">"Tempo accensione schermo:"</string>
     <string name="battery_info_status_unknown">"Sconosciuta"</string>
     <string name="battery_info_status_charging">"In carica"</string>
@@ -87,11 +82,6 @@
     <string name="battery_info_health_over_voltage">"Sovratensione"</string>
     <string name="battery_info_health_unspecified_failure">"Errore sconosciuto"</string>
     <string name="bluetooth">"Bluetooth"</string>
-    <string name="bluetooth_stopping">"Interruzione Bluetooth..."</string>
-    <string name="bluetooth_disabled">"Attiva Bluetooth"</string>
-    <!-- no translation found for bluetooth_enabled (314506563815464155) -->
-    <skip />
-    <string name="bluetooth_enabling">"Attivazione Bluetooth…"</string>
     <string name="bluetooth_visibility">"Rilevabile"</string>
     <string name="bluetooth_is_discoverable">"Rilevabile per <xliff:g id="DISCOVERABLE_TIME_PERIOD">%1$s</xliff:g> secondi..."</string>
     <string name="bluetooth_not_discoverable">"Rendi rilevabile il dispositivo"</string>
@@ -99,53 +89,34 @@
     <string name="bluetooth_device_name">"Nome dispositivo"</string>
     <string name="bluetooth_name_not_set">"Nessun nome impostato, utilizzando il nome dell\'account"</string>
     <string name="bluetooth_scan_for_devices">"Cerca dispositivi"</string>
-    <string name="bluetooth_clear_list">"Cancella elenco dispositivi"</string>
     <string name="bluetooth_disconnect_blank">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> verrà disconnesso."</string>
     <string name="bluetooth_connected">"Connesso"</string>
     <string name="bluetooth_disconnected">"Disconnesso"</string>
     <string name="bluetooth_disconnecting">"Disconnessione..."</string>
     <string name="bluetooth_connecting">"Connessione..."</string>
-    <!-- no translation found for bluetooth_unknown (644716244548801421) -->
+    <!-- no translation found for bluetooth_unknown (1905151516611093010) -->
     <skip />
     <string name="bluetooth_not_connected">"Accoppia con il dispositivo"</string>
-    <string name="bluetooth_failed_to_enable">"Impossibile attivare Bluetooth"</string>
     <string name="bluetooth_pairing">"Accoppiamento..."</string>
-    <string name="failed_to_pair">"Impossibile eseguire l\'accoppiamento con <xliff:g id="DEVICE_NAME">%1$s</xliff:g>."</string>
-    <string name="failed_to_connect">"Impossibile connettersi a <xliff:g id="DEVICE_NAME">%1$s</xliff:g>."</string>
-    <string name="bluetooth_paired">"Accoppiato"</string>
-    <string name="bluetooth_paired_not_nearby">"Accoppiato"</string>
+    <string name="bluetooth_paired">"Accoppiati ma non connessi"</string>
     <string name="bluetooth_device">"vivavoce/auricolare"</string>
-    <string name="bluetooth_disconnect">"Disconnetti"</string>
-    <string name="bluetooth_connect">"Connetti"</string>
-    <string name="bluetooth_unpair">"Disaccoppia"</string>
-    <string name="bluetooth_pair">"Accoppia"</string>
     <string name="progress_scanning">"Ricerca"</string>
     <string name="bluetooth_notif_ticker">"Richiesta accoppiamento Bluetooth"</string>
     <string name="bluetooth_notif_title">"Richiesta accoppiamento"</string>
-    <string name="bluetooth_notif_message">"Seleziona per accoppiare"</string>
+    <string name="bluetooth_notif_message">"Seleziona per accoppiare "</string>
     <string name="date_and_time">"Impostazioni data e ora"</string>
     <string name="date_time_12_hour_sample">"1:00 pm"</string>
     <string name="date_time_24_hour_sample">"13:00"</string>
     <string name="choose_timezone">"Seleziona fuso orario"</string>
     <string name="display_preview_label">"Anteprima:"</string>
     <string name="display_font_size_label">"Dimensioni carattere:"</string>
-    <!-- no translation found for intent_sender_data_label (6332324780477289261) -->
+    <!-- no translation found for intent_sender_data_label (8363026381459131554) -->
     <skip />
     <string name="intent_sender_sendbroadcast_text">"Invia <xliff:g id="BROADCAST">broadcast</xliff:g>"</string>
     <string name="intent_sender_action_label">"<xliff:g id="ACTION">Action</xliff:g>:"</string>
     <string name="intent_sender_startactivity_text">"Inizia <xliff:g id="ACTIVITY">activity</xliff:g>"</string>
     <string name="intent_sender_resource_label">"<xliff:g id="RESOURCE">Resource</xliff:g>:"</string>
     <string name="intent_sender_account_label">"Account:"</string>
-    <string name="keyguard_pw_mod_text">"Seleziona sequenza di blocco"</string>
-    <string name="keyguard_pin_mod_text">"Cambia PIN"</string>
-    <string name="keyguard_label">"Coperchio"</string>
-    <string name="keyguard_sim_pin_label">"PIN della SIM"</string>
-    <string name="keyguard_password_old_password_error_text">"La vecchia password digitata è errata. Riprova."</string>
-    <string name="keyguard_password_button_text">"OK"</string>
-    <string name="keyguard_password_confirm_new_label">"Conferma nuova password:"</string>
-    <string name="keyguard_password_new_label">"Nuova password:"</string>
-    <string name="keyguard_password_old_label">"Vecchia password:"</string>
-    <string name="keyguard_password_mismatch_error_text">"Le due password non corrispondono. Digitale di nuovo."</string>
     <string name="proxy_clear_text">"Cancella"</string>
     <string name="proxy_port_label">"Porta"</string>
     <string name="proxy_defaultView_text">"Ripristina predefinite"</string>
@@ -160,7 +131,6 @@
     <string name="radio_info_signal_location_label">"Posizione:"</string>
     <string name="radio_info_neighboring_location_label">"CID adiacente:"</string>
     <string name="radio_info_data_attempts_label">"Tentativi dati:"</string>
-    <string name="radio_info_imsi_label">"IMSI:"</string>
     <string name="radio_info_gprs_service_label">"Servizio GPRS:"</string>
     <string name="radio_info_roaming_label">"Roaming:"</string>
     <string name="radio_info_imei_label">"IMEI:"</string>
@@ -174,7 +144,7 @@
     <string name="radio_info_signal_strength_label">"Intensità segnale:"</string>
     <string name="radio_info_call_status_label">"Stato chiamata:"</string>
     <string name="radio_info_ppp_sent_label">"PPP inviato:"</string>
-    <string name="radio_info_radio_resets_label">"Reimpostazioni radio:"</string>
+    <string name="radio_info_radio_resets_label">"Reimpostaz. segnale cellulare:"</string>
     <string name="radio_info_message_waiting_label">"Messaggio in attesa:"</string>
     <string name="radio_info_phone_number_label">"Numero di telefono:"</string>
     <string name="radio_info_band_mode_label">"Seleziona banda radio"</string>
@@ -188,15 +158,12 @@
     <string name="radio_info_smsc_label">"SMSC:"</string>
     <string name="radio_info_smsc_update_label">"Aggiorna"</string>
     <string name="radio_info_smsc_refresh_label">"Aggiorna"</string>
+    <string name="radio_info_toggle_dns_check_label">"Attiva o disattiva verifica DNS"</string>
     <string name="band_mode_title">"Imposta banda GSM/UMTS"</string>
     <string name="band_mode_loading">"Caricamento lista bande..."</string>
     <string name="band_mode_set">"Imposta"</string>
     <string name="band_mode_failed">"Non riuscita"</string>
     <string name="band_mode_succeeded">"Riuscita"</string>
-    <string name="ringer_volume_ringer_mode_label">"Modalità suoneria"</string>
-    <string name="ringer_volume_screen_increasing_text">"Suoneria crescente"</string>
-    <string name="ringer_volume_ringtone_label">"Suoneria"</string>
-    <string name="ringer_volume_instructions">"Usa i pulsanti del volume per regolare la suoneria"</string>
     <string name="sdcard_changes_instructions">"Le modifiche saranno effettive alla riconnessione del cavo USB"</string>
     <string name="sdcard_settings_screen_mass_storage_text">"Attiva archiviazione di massa USB"</string>
     <string name="sdcard_settings_total_bytes_label">"Byte totali:"</string>
@@ -208,28 +175,13 @@
     <string name="sdcard_settings_used_bytes_label">"Byte utilizzati:"</string>
     <string name="sdcard_settings_scanning_status">"Ricerca di media nella scheda SD..."</string>
     <string name="sdcard_settings_read_only_status">"La scheda SD montata è di sola lettura"</string>
-    <string name="sdcard_removal_alert_title">"Rimozione scheda SD non sicura."</string>
-    <string name="sdcard_unmountable_alert_title">"Scheda SD non leggibile"</string>
-    <string name="telephony_user_label">"Utente:"</string>
-    <string name="telephony_server_label">"Server:"</string>
-    <string name="telephony_name_label">"Nome:"</string>
-    <string name="telephony_mmsc_label">"MMSC:"</string>
-    <string name="telephony_apn_label">"APN:"</string>
-    <string name="telephony_mcc_label">"MCC:"</string>
-    <string name="telephony_port_label">"Porta:"</string>
-    <string name="telephony_password_label">"Password:"</string>
-    <string name="telephony_proxy_label">"Proxy:"</string>
-    <string name="telephony_mnc_label">"MNC:"</string>
-    <string name="telephony_mmsproxy_label">"Proxy MMS:"</string>
-    <string name="telephony_mmsport_label">"Porta MMS:"</string>
     <string name="next_label">"Avanti"</string>
     <string name="language_picker_title">"Impostazioni internazionali"</string>
     <string name="select_your_language">"Seleziona la lingua"</string>
     <string name="activity_picker_label">"Seleziona attività"</string>
     <string name="device_info_label">"Info dispositivo"</string>
     <string name="battery_info_label">"Info batteria"</string>
-    <!-- no translation found for battery_history_label (8242244969757414501) -->
-    <skip />
+    <string name="battery_history_label">"Cronologia batteria"</string>
     <string name="display_label">"Display"</string>
     <string name="phone_info_label">"Info telefono"</string>
     <string name="sd_card_settings_label">"Scheda SD"</string>
@@ -264,23 +216,12 @@
     <string name="bluetooth_settings_summary">"Gestisci le connessioni, imposta il nome e la rilevabilità del dispositivo"</string>
     <string name="bluetooth_pin_entry">"Richiesta accoppiamento Bluetooth"</string>
     <string name="bluetooth_device_info">"Info dispositivo Bluetooth"</string>
-    <string name="bluetooth_pairing_msg">"Accoppiamento..."</string>
     <string name="bluetooth_enter_pin_msg">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g>"\n\n"Digita il PIN per l\'accoppiamento."\n"Prova a usare 0000 o 1234."</string>
     <string name="bluetooth_error_title">"Attenzione"</string>
     <string name="bluetooth_pairing_error_message">"Errore durante l\'accoppiamento con <xliff:g id="DEVICE_NAME">%1$s</xliff:g>."</string>
-    <string name="bluetooth_pairing_alternate_error_message">"Errore durante l\'accoppiamento con <xliff:g id="DEVICE_NAME">%1$s</xliff:g>. Prova a usare un altro PIN."</string>
     <string name="bluetooth_pairing_pin_error_message">"Errore durante l\'accoppiamento con <xliff:g id="DEVICE_NAME">%1$s</xliff:g>. Il PIN digitato è errato."</string>
     <string name="bluetooth_connecting_error_message">"Errore durante la connessione a <xliff:g id="DEVICE_NAME">%1$s</xliff:g>."</string>
-    <string name="bluetooth_new_data">"Digita i nuovi dati"</string>
-    <string name="bluetooth_new_data_confirm">"OK"</string>
-    <string name="bluetooth_new_data_cancel">"Annulla"</string>
-    <string name="bluetooth_scan_for_new_devices">"Ricerca di nuovi dispositivi..."</string>
-    <string name="bluetooth_discoverability_panel_title">"Rendimi..."</string>
-    <string name="bluetooth_discoverable">"Rilevabile per <xliff:g id="DISCOVERABLE_TIME_PERIOD">%1$s</xliff:g> secondi"</string>
-    <string name="bluetooth_connectable">"Solo collegabile"</string>
-    <string name="bluetooth_neither">"Non rilevabile e non collegabile"</string>
     <string name="bluetooth_preference_scan_title">"Cerca dispositivi"</string>
-    <string name="bluetooth_preference_scan_summary">"Trova dispositivi per accoppiamento"</string>
     <string name="bluetooth_device_context_connect">"Connetti"</string>
     <string name="bluetooth_device_context_disconnect">"Disconnetti"</string>
     <string name="bluetooth_device_context_pair_connect">"Accoppia e connetti"</string>
@@ -307,12 +248,12 @@
     <string name="wifi_settings">"Impostazioni Wi-Fi"</string>
     <string name="wifi_settings_category">"Impostazioni Wi-Fi"</string>
     <string name="wifi_settings_summary">"Configura e gestisci punti di accesso wireless"</string>
-    <string name="forget_network">"Ignora"</string>
+    <string name="forget_network">"Elimina"</string>
     <string name="wifi_status">"Stato"</string>
     <string name="wifi_link_speed">"Velocità"</string>
     <string name="wifi_signal_3">"Eccellente"</string>
     <string name="wifi_signal_2">"Buona"</string>
-    <string name="wifi_signal_1">"Mediocre"</string>
+    <string name="wifi_signal_1">"Discreta"</string>
     <string name="wifi_signal_0">"Scarsa"</string>
     <string name="security">"Protezione"</string>
     <string name="wifi_security_open">"Apri"</string>
@@ -341,7 +282,7 @@
     <string name="wifi_show_password">"Mostra password."</string>
     <string name="scan_wifi">"Scansione"</string>
     <string name="summary_not_in_range">"Fuori portata"</string>
-    <string name="summary_remembered">"Memorizzato"</string>
+    <string name="summary_remembered">"Memorizzata"</string>
     <string name="summary_connection_failed">"Connessione non riuscita. Seleziona per riprovare"</string>
     <string name="wifi_access_points">"Reti Wi-Fi"</string>
     <string name="wifi_type_ssid">"SSID rete"</string>
@@ -365,24 +306,21 @@
     <string name="wifi_gateway">"Gateway"</string>
     <string name="wifi_netmask">"Maschera di rete"</string>
     <string name="wifi_context_menu_connect">"Connetti a rete"</string>
-    <string name="wifi_context_menu_forget">"Ignora rete"</string>
+    <string name="wifi_context_menu_forget">"Elimina rete"</string>
     <string name="wifi_context_menu_change_password">"Cambia password"</string>
     <string name="wifi_advanced_titlebar">"Avanzate"</string>
     <string name="wifi_setting_num_channels_title">"Dominio regolatore"</string>
     <string name="wifi_setting_num_channels_summary">"Imposta il numero di canali da usare"</string>
     <string name="wifi_setting_num_channels_error">"Errore durante l\'impostazione del dominio regolatore."</string>
     <string name="wifi_setting_num_channels_channel_phrase">"<xliff:g id="NUM_CHANNELS">%1$d</xliff:g> canali"</string>
-    <!-- no translation found for wifi_setting_sleep_policy_title (1367731352485585528) -->
-    <skip />
-    <!-- no translation found for wifi_setting_sleep_policy_summary (7573693311804602041) -->
-    <skip />
-    <!-- no translation found for wifi_setting_sleep_policy_error (5103670439972135148) -->
-    <skip />
+    <string name="wifi_setting_sleep_policy_title">"Criteri di sospensione Wi-Fi"</string>
+    <string name="wifi_setting_sleep_policy_summary">"Specifica quando passare da Wi-Fi a dati cellulare"</string>
+    <string name="wifi_setting_sleep_policy_error">"Errore durante l\'impostazione dei criteri di sospensione."</string>
     <string name="wifi_advanced_mac_address_title">"Indirizzo MAC"</string>
     <string name="fragment_status_scanning">"Ricerca..."</string>
     <string name="fragment_status_connecting">"Connessione a <xliff:g id="NETWORK_NAME">%1$s</xliff:g>..."</string>
     <string name="fragment_status_authenticating">"Autenticazione con <xliff:g id="NETWORK_NAME">%1$s</xliff:g>..."</string>
-    <string name="fragment_status_obtaining_ip">"Ottenimento indirizzo IP da <xliff:g id="NETWORK_NAME">%1$s</xliff:g>..."</string>
+    <string name="fragment_status_obtaining_ip">"Acquisizione indirizzo IP da <xliff:g id="NETWORK_NAME">%1$s</xliff:g>..."</string>
     <string name="fragment_status_connected">"Connesso a <xliff:g id="NETWORK_NAME">%1$s</xliff:g>"</string>
     <string name="fragment_status_disconnecting">"Disconnessione da <xliff:g id="NETWORK_NAME">%1$s</xliff:g>..."</string>
     <string name="fragment_status_disconnected">"Disconnesso"</string>
@@ -390,13 +328,13 @@
     <string name="status_scanning">"Ricerca..."</string>
     <string name="status_connecting">"Connessione..."</string>
     <string name="status_authenticating">"Autenticazione..."</string>
-    <string name="status_obtaining_ip">"Ottenimento indirizzo..."</string>
-    <string name="status_connected">"Connessa"</string>
+    <string name="status_obtaining_ip">"Acquisizione indirizzo..."</string>
+    <string name="status_connected">"Connesso"</string>
     <string name="status_disconnecting">"Disconnessione..."</string>
     <string name="status_disconnected">"Disconnesso"</string>
     <string name="status_failed">"Non riuscita"</string>
-    <string name="sound_and_display_settings">"Toni e display"</string>
-    <string name="sound_settings">"Impostazioni toni"</string>
+    <string name="sound_and_display_settings">"Audio e display"</string>
+    <string name="sound_settings">"Impostazioni audio"</string>
     <string name="sound_and_display_settings_summary">"Imposta suonerie, notifiche e luminosità dello schermo"</string>
     <string name="silent_mode_title">"Modalità silenziosa"</string>
     <string name="silent_mode_summary">"Tutti i suoni eccetto quelli multimediali verranno disattivati"</string>
@@ -412,7 +350,7 @@
     <string name="notification_volume_title">"Volume notifiche"</string>
     <string name="checkbox_notification_same_as_incoming_call">"Usa volume chiamate in entrata per le notifiche"</string>
     <string name="notification_sound_dialog_title">"Seleziona suoneria notifica"</string>
-    <string name="media_volume_title">"Volume media"</string>
+    <string name="media_volume_title">"Volume app. multimediali"</string>
     <string name="media_volume_summary">"Imposta il volume di musica e video"</string>
     <string name="dtmf_tone_enable_title">"Toni udibili al tocco"</string>
     <string name="dtmf_tone_enable_summary_on">"Riproduci toni durante la composizione"</string>
@@ -420,34 +358,21 @@
     <string name="sound_effects_enable_title">"Selezione sonora"</string>
     <string name="sound_effects_enable_summary_on">"Riproduci toni durante una selezione sullo schermo"</string>
     <string name="sound_effects_enable_summary_off">"Riproduci toni durante una selezione sullo schermo"</string>
+    <string name="play_media_notification_sounds_enable_title">"Notifiche scheda SD"</string>
+    <string name="play_media_notification_sounds_enable_summary_on">"Disattiva i suoni di notifica della scheda SD"</string>
+    <string name="play_media_notification_sounds_enable_summary_off">"Attiva suoni di notifica della scheda SD"</string>
     <string name="sync_settings">"Sincronizzazione dati"</string>
     <string name="sync_settings_summary">"Seleziona le applicazioni da sincronizzare"</string>
-    <string name="sync_settings_header_general_settings">"Impostazioni sincr. generali"</string>
-    <string name="sync_settings_header_application_settings">"Impostazioni sincr. applicazione"</string>
-    <string name="sync_too_many_deletes">"Limite di eliminazioni superato"</string>
-    <string name="sync_automatically">"Sincronizzazione automatica"</string>
-    <string name="sync_enabled">"Sincronizza i dati automaticamente"</string>
-    <string name="sync_disabled">"Seleziona per sincronizzare i dati automaticamente"</string>
-    <string name="sync_menu_sync_now">"Sincronizza ora"</string>
-    <string name="sync_menu_sync_cancel">"Annulla sincronizzazione"</string>
-    <string name="sync_gmail">"Gmail"</string>
-    <string name="sync_calendar">"Calendario"</string>
-    <string name="sync_contacts">"Contatti"</string>
-    <string name="sync_too_many_deletes_desc">"Esistono <xliff:g id="NUMBER_OF_DELETED_ITEMS">%1$d</xliff:g> elementi eliminati per <xliff:g id="TYPE_OF_SYNC">%2$s</xliff:g>, account <xliff:g id="ACCOUNT_NAME">%3$s</xliff:g>. Specifica l\'operazione da eseguire."</string>
-    <string name="sync_really_delete">"Elimina gli elementi."</string>
-    <string name="sync_undo_deletes">"Annulla le eliminazioni."</string>
-    <string name="sync_do_nothing">"Non fare nulla per ora."</string>
-    <string name="sync_is_failing">"La sincronizzazione presenta dei problemi. L\'operazione verrà presto ripristinata."</string>
-    <string name="sync_plug"><font fgcolor="#ffffffff">"Benvenuto in Google Sync."</font>" "\n"L\'approccio di Google alla sincronizzazione di dati per consentirti l\'accesso ai tuoi contatti, appuntamenti e altro ancora, dovunque tu sia."</string>
     <string name="display_settings">"Impostazioni display"</string>
     <string name="animations_title">"Animazione"</string>
     <string name="animations_summary_on">"Mostra animazioni durante apertura/chiusura di finestre"</string>
     <string name="animations_summary_off">"Mostra animazioni durante apertura/chiusura di finestre"</string>
     <string name="brightness">"Luminosità"</string>
+    <string name="brightness_summary">"Regola la luminosità dello schermo"</string>
     <string name="screen_timeout">"Timeout schermo"</string>
-    <string name="dim_screen">"Oscura schermo"</string>
+    <string name="screen_timeout_summary">"Regola il tempo che deve trascorrere prima che lo schermo si spenga automaticamente"</string>
     <string name="sim_lock_settings">"Impostazioni blocco SIM"</string>
-    <string name="sim_lock_settings_category">"Configurazione blocco SIM"</string>
+    <string name="sim_lock_settings_category">"Impostazioni blocco SIM"</string>
     <string name="sim_lock_settings_title">"Blocco della SIM"</string>
     <string name="sim_pin_toggle">"Blocca SIM"</string>
     <string name="sim_lock_on">"Richiedi il PIN per l\'uso del telefono"</string>
@@ -468,7 +393,7 @@
     <string name="sim_enter_ok">"OK"</string>
     <string name="sim_enter_cancel">"Annulla"</string>
     <string name="device_info_settings">"Stato telefono"</string>
-    <string name="system_update_settings_list_item_title">"Aggiornamenti di sistema"</string>
+    <string name="system_update_settings_list_item_title">"Aggiornamenti sistema"</string>
     <string name="system_update_settings_list_item_summary">"Verifica aggiornamenti di sistema"</string>
     <string name="firmware_version">"Versione firmware"</string>
     <string name="model_number">"Numero modello"</string>
@@ -478,14 +403,12 @@
     <string name="device_info_not_available">"Non disponibile"</string>
     <string name="device_status_activity_title">"Stato"</string>
     <string name="device_status">"Stato"</string>
-    <string name="device_status_summary">"IMEI, numero di telefono, segnale etc."</string>
-    <string name="storage_settings_title">"Scheda SD e memoria telefono"</string>
-    <string name="storage_settings_summary">"Smonta la scheda SD, visualizza lo spazio di archiviazione disponibile"</string>
+    <string name="device_status_summary">"IMEI, numero di telefono, segnale ecc."</string>
+    <string name="storage_settings_title">"Scheda SD e memoria"</string>
+    <string name="storage_settings_summary">"Smonta la scheda SD, visualizza spazio di archiviazione disponibile"</string>
     <string name="status_number">"Numero di telefono"</string>
-    <!-- no translation found for status_network_type (3279383550222116235) -->
-    <skip />
-    <!-- no translation found for status_data_state (5503181397066522950) -->
-    <skip />
+    <string name="status_network_type">"Tipo di rete cellulare"</string>
+    <string name="status_data_state">"Stato rete cellulare"</string>
     <string name="status_service_state">"Stato servizio"</string>
     <string name="status_signal_strength">"Intensità segnale"</string>
     <string name="status_roaming">"Roaming"</string>
@@ -499,9 +422,12 @@
     <string name="sd_memory">"Scheda SD"</string>
     <string name="memory_available">"Spazio disponibile"</string>
     <string name="memory_size">"Spazio totale"</string>
-    <string name="sd_eject">"Smonta/espelli scheda SD"</string>
+    <string name="sd_eject">"Smonta scheda SD"</string>
+    <string name="sd_eject_summary">"Smonta la scheda SD per una rimozione sicura"</string>
+    <string name="sd_format">"Formatta scheda SD"</string>
+    <string name="sd_format_summary">"Formatta (cancella) la scheda SD"</string>
     <string name="sd_unavailable">"Non disponibile"</string>
-    <string name="read_only">"(Sola lettura)"</string>
+    <string name="read_only">" (Sola lettura)"</string>
     <string name="battery_status_title">"Stato batteria"</string>
     <string name="battery_level_title">"Livello batteria"</string>
     <string name="apn_settings">"APN"</string>
@@ -538,13 +464,21 @@
     <string name="master_clear_gesture_prompt">"Inserisci la sequenza di sblocco"</string>
     <string name="master_clear_gesture_explanation">"Per confermare un ripristino del telefono occorre inserire la sequenza di sblocco."</string>
     <string name="master_clear_failed">"Nessun ripristino eseguito perché il servizio System Clear non è disponibile."</string>
+    <string name="media_format_title">"Formatta scheda SD."</string>
+    <string name="media_format_summary">"Cancella tutti i dati sulla scheda SD"</string>
+    <string name="media_format_desc">"Questa azione cancellerà TUTTI i dati della scheda SD del telefono, che andranno persi."</string>
+    <string name="media_format_button_text">"Formatta scheda SD"</string>
+    <string name="media_format_final_desc">"Formattare la scheda SD, cancellando tutti i media? Questa azione è irreversibile."</string>
+    <string name="media_format_final_button_text">"Cancella tutto"</string>
+    <string name="media_format_gesture_prompt">"Inserisci la sequenza di sblocco"</string>
+    <string name="media_format_gesture_explanation">"Per confermare la formattazione della scheda SD devi inserire la sequenza di sblocco."</string>
     <string name="call_settings_title">"Impostazioni chiamate"</string>
     <string name="call_settings_summary">"Imposta segreteria, deviazione chiamate, avviso di chiamata, ID chiamante"</string>
     <string name="network_settings_title">"Reti mobili"</string>
     <string name="network_settings_summary">"Imposta le opzioni per roaming, reti e APN"</string>
     <string name="location_title">"Fonti localizzazione personali"</string>
     <string name="location_network_based">"Usa reti wireless"</string>
-    <string name="location_networks_disabled">"Visualizza la posizione nelle applicazioni (ad esempio Mappe) utilizzando le reti wireless"</string>
+    <string name="location_networks_disabled">"Visualizza la posizione nelle applicazioni (ad esempio Maps) utilizzando le reti wireless"</string>
     <string name="location_neighborhood_level">"Posizione determinata dalle reti mobili e/o Wi-Fi"</string>
     <string name="location_gps">"Attiva satelliti GPS"</string>
     <string name="location_street_level">"Durante localizzazione, accuratezza a livello stradale (deselezionare per risparmiare batteria)"</string>
@@ -579,7 +513,7 @@
     <string name="lockpattern_settings_enable_summary">"Devi inserire la sequenza per sbloccare lo schermo"</string>
     <string name="lockpattern_settings_enable_visible_pattern_title">"Usa sequenza visibile"</string>
     <string name="lockpattern_settings_enable_tactile_feedback_title">"Usa reazione tattile"</string>
-    <string name="lockpattern_settings_choose_lock_pattern">"Imposta sequenza di sblocco"</string>
+    <string name="lockpattern_settings_choose_lock_pattern">"Imposta sequenza"</string>
     <string name="lockpattern_settings_change_lock_pattern">"Cambia sequenza di sblocco"</string>
     <string name="lockpattern_settings_help_how_to_record">"Procedura per l\'impostazione di una sequenza di sblocco"</string>
     <string name="lockpattern_too_many_failed_confirmation_attempts_header">"Troppi tentativi errati."</string>
@@ -591,17 +525,22 @@
     <string name="lock_example_title">"Sequenza di esempio"</string>
     <string name="lock_example_message">"Collega almeno quattro punti."\n" "\n"Seleziona \"Avanti\" quando sei pronto a creare la tua sequenza."</string>
     <string name="manageapplications_settings_title">"Gestisci applicazioni"</string>
+    <string name="manageapplications_settings_summary">"Gestisci e rimuovi applicazioni installate"</string>
     <string name="applications_settings">"Applicazioni"</string>
-    <string name="applications_settings_summary">"Gestisci le applicazioni, imposta i collegamenti di avvio rapido"</string>
+    <string name="applications_settings_summary">"Gestisci le applicazioni, imposta le scorciatoie di avvio rapido"</string>
     <string name="applications_settings_header">"Impostazioni applicazione"</string>
     <string name="install_applications">"Origini sconosciute"</string>
     <string name="install_unknown_applications">"Consenti l\'installazione di applicazioni non commerciali"</string>
     <string name="install_all_warning">"Il telefono e i dati personali sono più vulnerabili agli attacchi da parte di applicazioni\n di origini sconosciute. L\'utente accetta di essere il solo responsabile degli eventuali\n danni al telefono o della perdita dei dati che potrebbero derivare dall\'utilizzo di\n queste applicazioni."</string>
-    <string name="manage_applications_title">"Gestisci applicazioni"</string>
     <string name="application_info_label">"Info applicazione"</string>
     <string name="storage_label">"Archiviazione"</string>
     <string name="auto_launch_label">"Avvia per impostazione predefinita"</string>
     <string name="permissions_label">"Autorizzazioni"</string>
+    <string name="cache_header_label">"Cache"</string>
+    <string name="clear_cache_btn_text">"Cancella cache"</string>
+    <string name="cache_size_label">"Cache"</string>
+    <string name="controls_label">"Controlli"</string>
+    <string name="force_stop">"Termina"</string>
     <string name="total_size_label">"Totale"</string>
     <string name="application_size_label">"Applicazione"</string>
     <string name="data_size_label">"Dati"</string>
@@ -614,6 +553,8 @@
     <string name="sort_order_alpha">"Ordina"</string>
     <string name="sort_order_size">"Ordina per dimensioni"</string>
     <string name="manage_space_text">"Gestisci spazio"</string>
+    <string name="filter">"Filtra"</string>
+    <string name="filter_dlg_title">"Seleziona opzioni di filtro"</string>
     <string name="filter_apps_all">"Tutte"</string>
     <string name="filter_apps_third_party">"Terze parti"</string>
     <string name="filter_apps_running">"In esecuzione"</string>
@@ -626,68 +567,103 @@
     <string name="app_not_found_dlg_title">"Applicazione non trovata"</string>
     <string name="app_not_found_dlg_text">"Impossibile trovare l\'applicazione \nnell\'elenco di applicazioni installate."</string>
     <string name="clear_data_failed">"Impossibile cancellare i dati dell\'applicazione."</string>
-    <string name="security_settings_desc">"Contenuto a cui può accedere l\'applicazione sul telefono:"</string>
-    <string name="computing_size">"Calcolo ancora in corso"</string>
+    <string name="security_settings_desc">"Contenuti a cui può accedere l\'applicazione sul telefono:"</string>
+    <string name="computing_size">"Elaborazione..."</string>
     <string name="invalid_size_value">"Impossibile stabilire le dimensioni del pacchetto"</string>
     <string name="empty_list_msg">"Nessuna applicazione di terze parti installata."</string>
-    <string name="cache_header_label">"Cache"</string>
-    <string name="clear_cache_btn_text">"Cancella cache"</string>
-    <string name="cache_size_label">"Cache"</string>
-    <string name="language_settings">"Impostazioni internazionali e testo"</string>
-    <string name="language_settings_summary">"Imposta opzioni internazionali (lingua e regione), di inserimento e correzione automatica del testo"</string>
-    <string name="language_category">"Impostazione locale"</string>
+    <string name="language_settings">"Lingua e testo"</string>
+    <string name="language_settings_summary">"Impostazioni internazionali (lingua e regione), di inserimento e correzione automatica del testo"</string>
+    <string name="language_category">"Impostazioni lingua"</string>
     <string name="text_category">"Impostazioni testo"</string>
-    <string name="phone_language">"Seleziona impost. internaz."</string>
+    <string name="phone_language">"Seleziona lingua"</string>
+    <string name="phone_language_summary">"Seleziona lingua e regione"</string>
     <string name="auto_replace">"Sostituzione automatica"</string>
     <string name="auto_replace_summary">"Corregge le parole con errori di ortografia"</string>
     <string name="auto_caps">"Maiuscola automatica"</string>
     <string name="auto_caps_summary">"Usa la maiuscola a inizio frase"</string>
     <string name="auto_punctuate">"Punteggiatura automatica"</string>
+    <string name="hardkeyboard_category">"Impostazioni tastiera fisica"</string>
     <string name="auto_punctuate_summary">"Premi due volte la barra spaziatrice per inserire \".\""</string>
     <string name="show_password">"Password visibili"</string>
     <string name="show_password_summary">"Mostra la password durante la digitazione"</string>
-    <!-- no translation found for user_dict_settings_titlebar (765659257455000490) -->
-    <skip />
-    <!-- no translation found for user_dict_settings_title (8357027437499042191) -->
-    <skip />
-    <!-- no translation found for user_dict_settings_summary (2460427065601355471) -->
-    <skip />
-    <!-- no translation found for user_dict_settings_add_menu_title (4056762757149923551) -->
-    <skip />
-    <!-- no translation found for user_dict_settings_add_dialog_title (4702613990174126482) -->
-    <skip />
-    <!-- no translation found for user_dict_settings_context_menu_edit_title (2210564879320004837) -->
-    <skip />
-    <!-- no translation found for user_dict_settings_context_menu_delete_title (9140703913776549054) -->
-    <skip />
-    <!-- no translation found for user_dict_settings_empty_text (6209268025109242806) -->
-    <skip />
+    <string name="user_dict_settings_titlebar">"Dizionario utente"</string>
+    <string name="user_dict_settings_title">"Dizionario utente"</string>
+    <string name="user_dict_settings_summary">"Aggiungi e rimuovi parole dal dizionario utente"</string>
+    <string name="user_dict_settings_add_menu_title">"Aggiungi"</string>
+    <string name="user_dict_settings_add_dialog_title">"Aggiungi al dizionario"</string>
+    <string name="user_dict_settings_context_menu_edit_title">"Modifica"</string>
+    <string name="user_dict_settings_context_menu_delete_title">"Elimina"</string>
+    <string name="user_dict_settings_empty_text">"Non sono presenti parole nel dizionario utente. Puoi aggiungere una parola mediante il menu."</string>
     <string name="testing">"Verifica in corso"</string>
     <string name="testing_phone_info">"Informazioni telefono"</string>
     <string name="testing_battery_info">"Informazioni batteria"</string>
-    <!-- no translation found for testing_battery_history (3043329445810695647) -->
-    <skip />
+    <string name="testing_battery_history">"Cronologia batteria"</string>
     <string name="quick_launch_title">"Avvio rapido"</string>
-    <string name="quick_launch_summary">"Imposta tasti di scelta rapida per avviare le applicazioni"</string>
+    <string name="quick_launch_summary">"Imposta scorciatoie da tastiera per avviare le applicazioni"</string>
     <string name="quick_launch_assign_application">"Assegna applicazione"</string>
-    <string name="quick_launch_no_shortcut">"Nessun collegamento"</string>
+    <string name="quick_launch_no_shortcut">"Nessuna scorciatoia"</string>
     <string name="quick_launch_shortcut">"Cerca + <xliff:g id="SHORTCUT_LETTER">%1$s</xliff:g>"</string>
     <string name="quick_launch_clear_dialog_title">"Cancella"</string>
-    <string name="quick_launch_clear_dialog_message">"Il collegamento per <xliff:g id="SHORTCUT_LETTER">%1$s</xliff:g> (<xliff:g id="APPLICATION_NAME">%2$s</xliff:g>) verrà cancellato."</string>
+    <string name="quick_launch_clear_dialog_message">"La scorciatoia per <xliff:g id="SHORTCUT_LETTER">%1$s</xliff:g> (<xliff:g id="APPLICATION_NAME">%2$s</xliff:g>) verrà cancellata."</string>
     <string name="quick_launch_clear_ok_button">"OK"</string>
     <string name="quick_launch_clear_cancel_button">"Annulla"</string>
     <string name="quick_launch_display_mode_applications">"Applicazioni"</string>
-    <string name="quick_launch_display_mode_shortcuts">"Collegamenti"</string>
-    <string name="input_methods_settings_title">"Inserim. testo"</string>
+    <string name="quick_launch_display_mode_shortcuts">"Scorciatoie"</string>
+    <string name="input_methods_settings_title">"Inserimento testo"</string>
     <string name="input_methods_settings_summary">"Gestisci opzioni inserimento testo"</string>
-    <!-- no translation found for input_methods_settings_label_format (4882768027634191074) -->
-    <skip />
+    <string name="input_methods_settings_label_format">"Impostazioni %s"</string>
     <string name="development_settings_title">"Sviluppo"</string>
     <string name="development_settings_summary">"Imposta opzioni per lo sviluppo di applicazioni"</string>
     <string name="enable_adb">"Debug USB"</string>
     <string name="enable_adb_summary">"Modalità debug quando è connesso USB"</string>
     <string name="keep_screen_on">"Rimani attivo"</string>
-    <string name="keep_screen_on_summary">"Lo schermo non diventa mai inattivo sotto carica"</string>
-    <string name="allow_mock_location">"Consenti posizioni fittizie"</string>
+    <string name="keep_screen_on_summary">"Lo schermo non va mai in stand-by se sotto carica"</string>
+    <string name="allow_mock_location">"Posizioni fittizie"</string>
     <string name="allow_mock_location_summary">"Consenti posizioni fittizie"</string>
+    <!-- no translation found for gadget_picker_title (98374951396755811) -->
+    <skip />
+    <!-- no translation found for widget_picker_title (9130684134213467557) -->
+    <skip />
+    <string name="battery_history_details_for">"Dettagli per UID %d"</string>
+    <string name="battery_history_uid">"UID <xliff:g id="USER_ID">%1$d</xliff:g>"</string>
+    <string name="battery_history_network_usage">"Dettagli di utilizzo della rete per <xliff:g id="APP_NAME">%1$s</xliff:g>:"</string>
+    <string name="battery_history_bytes_received">"Byte ricevuti: <xliff:g id="BYTES">%1$d</xliff:g>"</string>
+    <string name="battery_history_bytes_sent">"Byte inviati: <xliff:g id="BYTES">%1$d</xliff:g>"</string>
+    <string name="battery_history_bytes_total">"Byte totali: <xliff:g id="BYTES">%1$d</xliff:g>"</string>
+    <string name="battery_history_cpu_usage">"Dettagli di utilizzo della CPU per <xliff:g id="APP_NAME">%1$s</xliff:g>:"</string>
+    <string name="battery_history_user_time">"Tempo utente:"</string>
+    <string name="battery_history_system_time">"Tempo sistema:"</string>
+    <string name="battery_history_total_time">"Tempo totale:"</string>
+    <string name="battery_history_starts">"Avvii: <xliff:g id="STARTS">%1$d</xliff:g>"</string>
+    <string name="battery_history_days">"<xliff:g id="DAYS">%1$d</xliff:g> giorni, <xliff:g id="HOURS">%2$d</xliff:g> ore, <xliff:g id="MINUTES">%3$d</xliff:g> minuti, <xliff:g id="SECONDS">%4$d</xliff:g> secondi"</string>
+    <string name="battery_history_hours">"<xliff:g id="HOURS">%1$d</xliff:g> ore, <xliff:g id="MINUTES">%2$d</xliff:g> minuti, <xliff:g id="SECONDS">%3$d</xliff:g> secondi"</string>
+    <string name="battery_history_minutes">"<xliff:g id="MINUTES">%1$d</xliff:g> minuti, <xliff:g id="SECONDS">%2$d</xliff:g> secondi"</string>
+    <string name="battery_history_seconds">"<xliff:g id="SECONDS">%1$d</xliff:g> secondi"</string>
+    <string name="battery_history_packages_sharing_this_uid">"Pacchetti che condividono questo UID:"</string>
+    <string name="battery_history_no_data">"Dati sull\'utilizzo della batteria non disponibili"</string>
+    <string name="battery_history_sensor">"Sensore:"</string>
+    <!-- no translation found for battery_history_wakelock (608683447522396293) -->
+    <skip />
+    <string name="battery_history_used_by_packages">"Sensore usato dai pacchetti:"</string>
+    <string name="battery_history_sensor_usage">"Usato <xliff:g id="COUNT">%1$d</xliff:g> volte da <xliff:g id="PACKAGE">%2$s</xliff:g>"</string>
+    <string name="battery_history_sensor_usage_multi">"Usato <xliff:g id="COUNT">%1$d</xliff:g> volte da uno di:"</string>
+    <!-- no translation found for battery_history_awake_label (8449792868990080882) -->
+    <skip />
+    <!-- no translation found for battery_history_screen_on_label (1848936521786339362) -->
+    <skip />
+    <!-- no translation found for battery_history_phone_on_label (700191958853142297) -->
+    <skip />
+    <!-- no translation found for battery_history_awake (4350886665719031057) -->
+    <skip />
+    <string name="battery_history_screen_on">"Tempo trascorso con schermo acceso:"</string>
+    <!-- no translation found for battery_history_phone_on (4891504401623839532) -->
+    <skip />
+    <string name="battery_history_screen_on_battery">"A batteria:"</string>
+    <string name="battery_history_screen_on_plugged">"Collegato:"</string>
+    <string name="usage_stats_label">"Statistiche di utilizzo"</string>
+    <string name="testing_usage_stats">"Statistiche di utilizzo"</string>
+    <string name="display_order_text">"Ordina per:"</string>
+    <string name="app_name_label">"Applicazione"</string>
+    <string name="launch_count_label">"Conteggio"</string>
+    <string name="usage_time_label">"Tempo di utilizzo"</string>
 </resources>

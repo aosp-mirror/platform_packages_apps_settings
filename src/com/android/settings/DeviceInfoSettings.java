@@ -20,6 +20,7 @@ import android.content.Intent;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.SystemProperties;
 import android.preference.Preference;
@@ -54,38 +55,53 @@ public class DeviceInfoSettings extends PreferenceActivity {
         
         addPreferencesFromResource(R.xml.device_info_settings);
        
-        setSummary("firmware_version", "ro.build.version.release");
-        setSummary("baseband_version", "gsm.version.baseband");
-        setSummary("device_model", "ro.product.model");
-        setSummary("build_number", "ro.build.version.incremental");
+        setStringSummary("firmware_version", Build.VERSION.RELEASE);
+        setValueSummary("baseband_version", "gsm.version.baseband");
+        setStringSummary("device_model", Build.MODEL);
+        setStringSummary("build_number", Build.DISPLAY);
         findPreference("kernel_version").setSummary(getFormattedKernelVersion());
 
         /*
          * Settings is a generic app and should not contain any device-specific
          * info.
          */
+        
+        // These are contained in the "container" preference group
         PreferenceGroup parentPreference = (PreferenceGroup) findPreference(KEY_CONTAINER);
         Utils.updatePreferenceToSpecificActivityOrRemove(this, parentPreference, KEY_TERMS,
                 Utils.UPDATE_PREFERENCE_FLAG_SET_TITLE_TO_MATCHING_ACTIVITY);
         Utils.updatePreferenceToSpecificActivityOrRemove(this, parentPreference, KEY_LICENSE,
                 Utils.UPDATE_PREFERENCE_FLAG_SET_TITLE_TO_MATCHING_ACTIVITY);
-        Utils.updatePreferenceToSpecificActivityOrRemove(this, parentPreference, KEY_CONTRIBUTORS,
-                Utils.UPDATE_PREFERENCE_FLAG_SET_TITLE_TO_MATCHING_ACTIVITY);
         Utils.updatePreferenceToSpecificActivityOrRemove(this, parentPreference, KEY_COPYRIGHT,
                 Utils.UPDATE_PREFERENCE_FLAG_SET_TITLE_TO_MATCHING_ACTIVITY);
         Utils.updatePreferenceToSpecificActivityOrRemove(this, parentPreference, KEY_TEAM,
                 Utils.UPDATE_PREFERENCE_FLAG_SET_TITLE_TO_MATCHING_ACTIVITY);
-        Utils.updatePreferenceToSpecificActivityOrRemove(this, parentPreference, KEY_SYSTEM_UPDATE_SETTINGS,
+        
+        // These are contained by the root preference screen
+        parentPreference = getPreferenceScreen();
+        Utils.updatePreferenceToSpecificActivityOrRemove(this, parentPreference,
+                KEY_SYSTEM_UPDATE_SETTINGS,
+                Utils.UPDATE_PREFERENCE_FLAG_SET_TITLE_TO_MATCHING_ACTIVITY);
+        Utils.updatePreferenceToSpecificActivityOrRemove(this, parentPreference, KEY_CONTRIBUTORS,
                 Utils.UPDATE_PREFERENCE_FLAG_SET_TITLE_TO_MATCHING_ACTIVITY);
     }
     
-    private void setSummary(String preference, String property) {
+    private void setStringSummary(String preference, String value) {
+        try {
+            findPreference(preference).setSummary(value);
+        } catch (RuntimeException e) {
+            findPreference(preference).setSummary(
+                getResources().getString(R.string.device_info_default));
+        }
+    }
+    
+    private void setValueSummary(String preference, String property) {
         try {
             findPreference(preference).setSummary(
                     SystemProperties.get(property, 
                             getResources().getString(R.string.device_info_default)));
         } catch (RuntimeException e) {
-            
+
         }
     }
 

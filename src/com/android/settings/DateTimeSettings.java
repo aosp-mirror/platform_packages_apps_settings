@@ -171,7 +171,10 @@ public class DateTimeSettings
             SystemClock.setCurrentTimeMillis(when);
         }
         updateTimeAndDateDisplay();
-        timeUpdated();
+        
+        // We don't need to call timeUpdated() here because the TIME_CHANGED
+        // broadcast is sent by the AlarmManager as a side effect of setting the
+        // SystemClock time.
     }
 
     public void onSharedPreferenceChanged(SharedPreferences preferences, String key) {
@@ -192,6 +195,7 @@ public class DateTimeSettings
         }
     }
 
+    @Override
     public Dialog onCreateDialog(int id) {
         Dialog d;
 
@@ -226,6 +230,7 @@ public class DateTimeSettings
         return d;
     }
 
+    @Override
     public void onPrepareDialog(int id, Dialog d) {
         switch (id) {
         case DIALOG_DATEPICKER: {
@@ -250,10 +255,13 @@ public class DateTimeSettings
         }
     }
     
+    @Override
     public boolean onPreferenceTreeClick(PreferenceScreen preferenceScreen, Preference preference) {
         if (preference == mDatePref) {
             showDialog(DIALOG_DATEPICKER);
         } else if (preference == mTimePref) {
+            // The 24-hour mode may have changed, so recreate the dialog
+            removeDialog(DIALOG_TIMEPICKER);
             showDialog(DIALOG_TIMEPICKER);
         } else if (preference == mTime24Pref) {
             set24Hour(((CheckBoxPreference)mTime24Pref).isChecked());

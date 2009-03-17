@@ -48,11 +48,13 @@ public class Memory extends PreferenceActivity {
 
     private static final String MEMORY_SD_UNMOUNT = "memory_sd_unmount";
 
+    private static final String MEMORY_SD_FORMAT = "memory_sd_format";
     private Resources mRes;
 
     private Preference mSdSize;
     private Preference mSdAvail;
     private Preference mSdUnmount;
+    private Preference mSdFormat;
     
     // Access using getMountService()
     private IMountService mMountService = null;
@@ -67,6 +69,7 @@ public class Memory extends PreferenceActivity {
         mSdSize = findPreference(MEMORY_SD_SIZE);
         mSdAvail = findPreference(MEMORY_SD_AVAIL);
         mSdUnmount = findPreference(MEMORY_SD_UNMOUNT);
+        mSdFormat = findPreference(MEMORY_SD_FORMAT);
     }
     
     @Override
@@ -78,6 +81,8 @@ public class Memory extends PreferenceActivity {
         intentFilter.addAction(Intent.ACTION_MEDIA_MOUNTED);
         intentFilter.addAction(Intent.ACTION_MEDIA_SHARED);
         intentFilter.addAction(Intent.ACTION_MEDIA_BAD_REMOVAL);
+        intentFilter.addAction(Intent.ACTION_MEDIA_UNMOUNTABLE);
+        intentFilter.addAction(Intent.ACTION_MEDIA_NOFS);
         intentFilter.addAction(Intent.ACTION_MEDIA_SCANNER_STARTED);
         intentFilter.addAction(Intent.ACTION_MEDIA_SCANNER_FINISHED);
         intentFilter.addDataScheme("file");
@@ -109,6 +114,11 @@ public class Memory extends PreferenceActivity {
         if (preference == mSdUnmount) {
             unmount();
             return true;
+        } else if (preference == mSdFormat) {
+            Intent intent = new Intent(Intent.ACTION_VIEW);
+            intent.setClass(this, com.android.settings.MediaFormat.class);
+            startActivity(intent);
+            return true;
         }
         
         return false;
@@ -134,7 +144,7 @@ public class Memory extends PreferenceActivity {
             updateMemoryStatus();
         }
     }
-    
+
     private void updateMemoryStatus() {
         String status = Environment.getExternalStorageState();
         String readOnly = "";
@@ -143,6 +153,8 @@ public class Memory extends PreferenceActivity {
             readOnly = mRes.getString(R.string.read_only);
         }
  
+        mSdFormat.setEnabled(false);
+
         if (status.equals(Environment.MEDIA_MOUNTED)) {
             try {
                 File path = Environment.getExternalStorageDirectory();
@@ -164,6 +176,14 @@ public class Memory extends PreferenceActivity {
             mSdSize.setSummary(mRes.getString(R.string.sd_unavailable));
             mSdAvail.setSummary(mRes.getString(R.string.sd_unavailable));
             mSdUnmount.setEnabled(false);
+
+            if (status.equals(Environment.MEDIA_UNMOUNTED) ||
+                status.equals(Environment.MEDIA_NOFS) ||
+                status.equals(Environment.MEDIA_UNMOUNTABLE) ) {
+                mSdFormat.setEnabled(true);
+            }
+
+            
         }
 
         File path = Environment.getDataDirectory();

@@ -20,19 +20,17 @@
     android:layout_height="fill_parent">
     <ListView 
         android:id="@android:id/list"
-        android:layout_weight="1"
         android:drawSelectorOnTop="false"
         android:layout_width="fill_parent"
-        android:layout_height="fill_parent">
-    </ListView>
-    <TextView android:id="@android:id/empty"
+        android:layout_height="wrap_content" />
+    <TextView android:id="@+id/empty_view"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_weight="1"
         android:paddingLeft="20dip"
         android:paddingTop="5dip"
         android:text="@string/empty_list_msg"
-        android:textSize="15sp" />
+        android:gravity="center"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
 </LinearLayout>
 
 

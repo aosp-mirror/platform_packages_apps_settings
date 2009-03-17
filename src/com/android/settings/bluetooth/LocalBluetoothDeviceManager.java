@@ -45,19 +45,23 @@ public class LocalBluetoothDeviceManager {
         readPairedDevices();
     }
 
-    private synchronized void readPairedDevices() {
+    private synchronized boolean readPairedDevices() {
         BluetoothDevice manager = mLocalManager.getBluetoothManager();
         String[] bondedAddresses = manager.listBonds();
-        if (bondedAddresses == null) return;
+        if (bondedAddresses == null) return false;
         
+        boolean deviceAdded = false;
         for (String address : bondedAddresses) {
             LocalBluetoothDevice device = findDevice(address);
             if (device == null) {
                 device = new LocalBluetoothDevice(mLocalManager.getContext(), address);
                 mDevices.add(device);
-                dispatchDeviceAdded(device);                
+                dispatchDeviceAdded(device);
+                deviceAdded = true;
             }
         }
+        
+        return deviceAdded;
     }
     
     public synchronized List<LocalBluetoothDevice> getDevicesCopy() {
@@ -157,23 +161,33 @@ public class LocalBluetoothDeviceManager {
     public synchronized void onBondingStateChanged(String address, int bondState) {
         LocalBluetoothDevice device = findDevice(address);
         if (device == null) {
-            Log.e(TAG, "Got bonding state changed for " + address +
-                    ", but we have no record of that device.");
+            if (!readPairedDevices()) {
+                Log.e(TAG, "Got bonding state changed for " + address +
+                        ", but we have no record of that device.");
+            }
             return;
         }
 
-        device.setBondState(bondState);  //TODO: might be unecessary
-        checkForDeviceRemoval(device);
+        device.refresh();
 
         if (bondState == BluetoothDevice.BOND_BONDED) {
             // Auto-connect after pairing
             device.connect();
         }
     }
-    
-    public synchronized void onBondingError(String address) {
+
+    /**
+     * Called when there is a bonding error.
+     * 
+     * @param address The address of the remote device.
+     * @param reason The reason, one of the error reasons from
+     *            BluetoothDevice.UNBOND_REASON_*
+     */
+    public synchronized void onBondingError(String address, int reason) {
         mLocalManager.showError(address, R.string.bluetooth_error_title,
-                R.string.bluetooth_pairing_error_message);
+                (reason == BluetoothDevice.UNBOND_REASON_AUTH_FAILED) ?
+                        R.string.bluetooth_pairing_pin_error_message :
+                        R.string.bluetooth_pairing_error_message);
     }
     
     public synchronized void onProfileStateChanged(String address) {
@@ -203,6 +217,13 @@ public class LocalBluetoothDeviceManager {
             LocalBluetoothDevice device = mDevices.get(i);
             device.setVisible(false);
             checkForDeviceRemoval(device);
+        }
+    }
+    
+    public synchronized void onBtClassChanged(String address) {
+        LocalBluetoothDevice device = findDevice(address);
+        if (device != null) {
+            device.refreshBtClass();
         }
     }
 }

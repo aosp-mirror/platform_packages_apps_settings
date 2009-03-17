@@ -15,10 +15,9 @@
 -->
 
 <PreferenceScreen
-    xmlns:android="http://schemas.android.com/apk/res/android">
-
-    <PreferenceCategory android:title="@string/settings_label"
-            android:key="parent">
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:title="@string/settings_label"
+    android:key="parent">
             
         <PreferenceScreen
             android:title="@string/radio_controls_title"
@@ -126,7 +125,5 @@
                 android:targetPackage="com.android.settings"
                 android:targetClass="com.android.settings.DeviceInfoSettings" />
         </PreferenceScreen>
-
-    </PreferenceCategory>
 
 </PreferenceScreen>

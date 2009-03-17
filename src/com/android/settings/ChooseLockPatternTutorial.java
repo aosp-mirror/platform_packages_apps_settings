@@ -34,7 +34,7 @@ public class ChooseLockPatternTutorial extends Activity implements View.OnClickL
         super.onCreate(savedInstanceState);
         // Don't show the tutorial if the user has seen it before.
         LockPatternUtils lockPatternUtils = new LockPatternUtils(getContentResolver());
-        if (savedInstanceState == null && lockPatternUtils.savedPatternExists()) {
+        if (savedInstanceState == null && lockPatternUtils.isPatternEverChosen()) {
             Intent intent = new Intent();
             intent.setClassName("com.android.settings", "com.android.settings.ChooseLockPattern");
             startActivity(intent);

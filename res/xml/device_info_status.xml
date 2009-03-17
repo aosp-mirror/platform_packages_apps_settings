@@ -14,9 +14,9 @@
      limitations under the License.
 -->
 
-<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
-    <PreferenceCategory android:title="@string/device_status_activity_title"/>
-    
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+        android:title="@string/device_status_activity_title">
+
     <Preference android:key="battery_status" 
         style="?android:attr/preferenceInformationStyle" 
         android:title="@string/battery_status_title"
@@ -70,11 +70,6 @@
     <Preference android:key="imei_sv" 
         style="?android:attr/preferenceInformationStyle" 
         android:title="@string/status_imei_sv"
-        android:summary="@string/device_info_not_available"
-        android:persistent="false" />
-    <Preference android:key="imsi" 
-        style="?android:attr/preferenceInformationStyle" 
-        android:title="@string/status_imsi"
         android:summary="@string/device_info_not_available"
         android:persistent="false" />
     <Preference android:key="wifi_mac_address"

@@ -25,10 +25,7 @@ import android.preference.CheckBoxPreference;
 import android.preference.Preference;
 import android.preference.PreferenceActivity;
 import android.preference.PreferenceGroup;
-import android.preference.PreferenceScreen;
 import android.text.TextUtils;
-import android.widget.ImageView;
-import android.widget.TextView;
 import android.util.Log;
 
 /**
@@ -114,7 +111,7 @@ public class ConnectSpecificProfilesActivity extends PreferenceActivity
         mManager.setForegroundActivity(this);
         mDevice.registerCallback(this);
 
-        refresh(true);
+        refresh();
     }
 
     @Override
@@ -169,7 +166,7 @@ public class ConnectSpecificProfilesActivity extends PreferenceActivity
     }
 
     private void onOnlineModeCheckedStateChanged(boolean checked) {
-        switchModes(checked, false);
+        setOnlineMode(checked, true);
     }
     
     private void onProfileCheckedStateChanged(Profile profile, boolean checked) {
@@ -187,43 +184,41 @@ public class ConnectSpecificProfilesActivity extends PreferenceActivity
     }
     
     public void onDeviceAttributesChanged(LocalBluetoothDevice device) {
-        refresh(false);
+        refresh();
     }
 
-    private void refresh(boolean forceRefresh) {
-        // The online mode could have changed
-        updateOnlineMode(forceRefresh);
+    private void refresh() {
+        // We are in 'online mode' if we are connected, connecting, or disconnecting
+        setOnlineMode(mDevice.isConnected() || mDevice.isBusy(), false);
         refreshProfiles();
-        refreshOnlineModePreference();
     }
 
-    private void updateOnlineMode(boolean force) {
-        // Connected or Connecting (and Disconnecting, which is fine)
-        boolean onlineMode = mDevice.isConnected() || mDevice.isBusy();
-        switchModes(onlineMode, force);
-    }
-    
     /**
      * Switches between online/offline mode.
      * 
      * @param onlineMode Whether to be in online mode, or offline mode.
+     * @param takeAction Whether to take action (i.e., connect or disconnect)
+     *            based on the new online mode.
      */
-    private void switchModes(boolean onlineMode, boolean force) {
-        if (mOnlineMode != onlineMode || force) {
-            mOnlineMode = onlineMode;
+    private void setOnlineMode(boolean onlineMode, boolean takeAction) {
+        mOnlineMode = onlineMode;
             
+        if (takeAction) {
             if (onlineMode) {
                 mDevice.connect();
             } else {
                 mDevice.disconnect();
             }
-
-            refreshOnlineModePreference();
         }
+            
+        refreshOnlineModePreference();
     }
     
     private void refreshOnlineModePreference() {
         mOnlineModePreference.setChecked(mOnlineMode);
+
+        /* Gray out checkbox while connecting and disconnecting */
+        mOnlineModePreference.setEnabled(!mDevice.isBusy());
 
         /**
          * If the device is online, show status. Otherwise, show a summary that
@@ -237,9 +232,12 @@ public class ConnectSpecificProfilesActivity extends PreferenceActivity
         for (Profile profile : mDevice.getProfiles()) {
             CheckBoxPreference profilePref =
                     (CheckBoxPreference) findPreference(profile.toString());
-            if (profilePref == null) continue;
-            
-            refreshProfilePreference(profilePref, profile);
+            if (profilePref == null) {
+                profilePref = createProfilePreference(profile);
+                mProfileContainer.addPreference(profilePref);
+            } else {
+                refreshProfilePreference(profilePref, profile);
+            }
         }
     }
     
@@ -249,7 +247,10 @@ public class ConnectSpecificProfilesActivity extends PreferenceActivity
                 .getProfileManager(mManager, profile);
         
         int connectionStatus = profileManager.getConnectionStatus(address);
-        
+
+        /* Gray out checkbox while connecting and disconnecting */
+        profilePref.setEnabled(!mDevice.isBusy());
+
         profilePref.setSummary(getProfileSummary(profileManager, profile, address,
                 connectionStatus, mOnlineMode));
         

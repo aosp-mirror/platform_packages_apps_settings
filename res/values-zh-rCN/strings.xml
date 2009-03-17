@@ -16,9 +16,6 @@
 <resources xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
     <string name="device_info_default">"未知"</string>
-    <string name="device_info_uptime">"正常使用时间"</string>
-    <string name="device_info_awaketime">"唤醒时间"</string>
-    <string name="device_info_asleeptime">"休眠时间"</string>
     <string name="turn_on_radio">"打开收音机"</string>
     <string name="turn_off_radio">"关闭收音机"</string>
     <string name="turn_on_qxdm">"启用 QXDM SD 日志"</string>
@@ -52,14 +49,12 @@
     <string name="radioInfo_lac">"LAC"</string>
     <string name="radioInfo_cid">"CID"</string>
     <string name="sdcard_unmount">"卸下 SD 卡"</string>
+    <string name="sdcard_format">"格式化 SD 卡"</string>
     <string name="small_font">"小"</string>
     <string name="medium_font">"中"</string>
     <string name="large_font">"大"</string>
     <string name="font_size_save">"确定"</string>
     <string name="sdcard_setting">"SD 卡"</string>
-    <string name="screen_off_timeout_label">"充电时从不待机"</string>
-    <string name="stay_on">"充电时屏幕始终处于开启状态"</string>
-    <string name="app_launcher_newView_text">"新 AppLauncher"</string>
     <string name="battery_info_status_label">"电池状态："</string>
     <string name="battery_info_scale_label">"电池容量："</string>
     <string name="battery_info_level_label">"电池级别："</string>
@@ -87,11 +82,6 @@
     <string name="battery_info_health_over_voltage">"过电压"</string>
     <string name="battery_info_health_unspecified_failure">"未知错误"</string>
     <string name="bluetooth">"蓝牙"</string>
-    <string name="bluetooth_stopping">"蓝牙正在停止..."</string>
-    <string name="bluetooth_disabled">"打开蓝牙"</string>
-    <!-- no translation found for bluetooth_enabled (314506563815464155) -->
-    <skip />
-    <string name="bluetooth_enabling">"正在打开蓝牙..."</string>
     <string name="bluetooth_visibility">"可发现"</string>
     <string name="bluetooth_is_discoverable">"<xliff:g id="DISCOVERABLE_TIME_PERIOD">%1$s</xliff:g> 秒内可发现..."</string>
     <string name="bluetooth_not_discoverable">"让设备能被搜索到"</string>
@@ -99,53 +89,35 @@
     <string name="bluetooth_device_name">"设备名称"</string>
     <string name="bluetooth_name_not_set">"无名称集，使用帐户名"</string>
     <string name="bluetooth_scan_for_devices">"扫描以找到设备"</string>
-    <string name="bluetooth_clear_list">"清除设备列表"</string>
     <string name="bluetooth_disconnect_blank">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g>会断开连接。"</string>
     <string name="bluetooth_connected">"已连接"</string>
     <string name="bluetooth_disconnected">"已断开连接"</string>
     <string name="bluetooth_disconnecting">"正在断开连接..."</string>
     <string name="bluetooth_connecting">"正在连接..."</string>
-    <!-- no translation found for bluetooth_unknown (644716244548801421) -->
+    <!-- no translation found for bluetooth_unknown (1905151516611093010) -->
     <skip />
     <string name="bluetooth_not_connected">"与此设备配对"</string>
-    <string name="bluetooth_failed_to_enable">"无法打开蓝牙"</string>
     <string name="bluetooth_pairing">"正在配对..."</string>
-    <string name="failed_to_pair">"无法与<xliff:g id="DEVICE_NAME">%1$s</xliff:g>配对。"</string>
-    <string name="failed_to_connect">"无法连接至<xliff:g id="DEVICE_NAME">%1$s</xliff:g>。"</string>
-    <string name="bluetooth_paired">"已配对"</string>
-    <string name="bluetooth_paired_not_nearby">"已配对"</string>
+    <!-- no translation found for bluetooth_paired (1247541089000057726) -->
+    <skip />
     <string name="bluetooth_device">"免持听筒/耳机"</string>
-    <string name="bluetooth_disconnect">"断开连接"</string>
-    <string name="bluetooth_connect">"连接"</string>
-    <string name="bluetooth_unpair">"取消配对"</string>
-    <string name="bluetooth_pair">"配对"</string>
     <string name="progress_scanning">"正在扫描"</string>
     <string name="bluetooth_notif_ticker">"蓝牙配对请求"</string>
     <string name="bluetooth_notif_title">"配对请求"</string>
-    <string name="bluetooth_notif_message">"选择以与以下对象配对"</string>
+    <string name="bluetooth_notif_message">"选择以与以下对象配对 "</string>
     <string name="date_and_time">"日期和时间设置"</string>
     <string name="date_time_12_hour_sample">"下午 1:00"</string>
     <string name="date_time_24_hour_sample">"13:00"</string>
     <string name="choose_timezone">"选择时区"</string>
     <string name="display_preview_label">"预览："</string>
     <string name="display_font_size_label">"字体大小："</string>
-    <!-- no translation found for intent_sender_data_label (6332324780477289261) -->
+    <!-- no translation found for intent_sender_data_label (8363026381459131554) -->
     <skip />
     <string name="intent_sender_sendbroadcast_text">"发送<xliff:g id="BROADCAST">broadcast</xliff:g>"</string>
     <string name="intent_sender_action_label">"<xliff:g id="ACTION">Action</xliff:g>："</string>
     <string name="intent_sender_startactivity_text">"开始 <xliff:g id="ACTIVITY">activity</xliff:g>"</string>
     <string name="intent_sender_resource_label">"<xliff:g id="RESOURCE">Resource</xliff:g>："</string>
     <string name="intent_sender_account_label">"帐户："</string>
-    <string name="keyguard_pw_mod_text">"选择锁定图案"</string>
-    <string name="keyguard_pin_mod_text">"更改 PIN 码"</string>
-    <string name="keyguard_label">"键盘锁"</string>
-    <string name="keyguard_sim_pin_label">"SIM 卡 PIN 码"</string>
-    <string name="keyguard_password_old_password_error_text">"您键入的旧密码不正确。请重试。"</string>
-    <string name="keyguard_password_button_text">"确定"</string>
-    <string name="keyguard_password_confirm_new_label">"确认新密码："</string>
-    <string name="keyguard_password_new_label">"新密码："</string>
-    <string name="keyguard_password_old_label">"旧密码："</string>
-    <string name="keyguard_password_mismatch_error_text">"两个密码不一致。请重新键入。"</string>
     <string name="proxy_clear_text">"清除"</string>
     <string name="proxy_port_label">"端口"</string>
     <string name="proxy_defaultView_text">"恢复默认值"</string>
@@ -160,7 +132,6 @@
     <string name="radio_info_signal_location_label">"位置："</string>
     <string name="radio_info_neighboring_location_label">"相邻的 CID："</string>
     <string name="radio_info_data_attempts_label">"数据尝试："</string>
-    <string name="radio_info_imsi_label">"IMSI："</string>
     <string name="radio_info_gprs_service_label">"GPRS 服务："</string>
     <string name="radio_info_roaming_label">"漫游："</string>
     <string name="radio_info_imei_label">"IMEI："</string>
@@ -188,15 +159,12 @@
     <string name="radio_info_smsc_label">"SMSC："</string>
     <string name="radio_info_smsc_update_label">"更新"</string>
     <string name="radio_info_smsc_refresh_label">"刷新"</string>
+    <string name="radio_info_toggle_dns_check_label">"切换 DNS 检查"</string>
     <string name="band_mode_title">"设置 GSM/UMTS 波段"</string>
     <string name="band_mode_loading">"正在载入波段列表..."</string>
     <string name="band_mode_set">"设置"</string>
     <string name="band_mode_failed">"失败"</string>
     <string name="band_mode_succeeded">"成功"</string>
-    <string name="ringer_volume_ringer_mode_label">"响铃模式"</string>
-    <string name="ringer_volume_screen_increasing_text">"铃声渐强"</string>
-    <string name="ringer_volume_ringtone_label">"铃声"</string>
-    <string name="ringer_volume_instructions">"使用音量按钮调节振铃音量"</string>
     <string name="sdcard_changes_instructions">"更改会在重新连接 USB 电缆后生效"</string>
     <string name="sdcard_settings_screen_mass_storage_text">"启用 USB 大容量存储"</string>
     <string name="sdcard_settings_total_bytes_label">"字节总数："</string>
@@ -208,28 +176,13 @@
     <string name="sdcard_settings_used_bytes_label">"使用的字节数："</string>
     <string name="sdcard_settings_scanning_status">"正在扫描 SD 卡以获取媒体..."</string>
     <string name="sdcard_settings_read_only_status">"装载的 SD 卡为只读"</string>
-    <string name="sdcard_removal_alert_title">"卸下 SD 卡的操作不安全！"</string>
-    <string name="sdcard_unmountable_alert_title">"SD 卡不可读"</string>
-    <string name="telephony_user_label">"用户："</string>
-    <string name="telephony_server_label">"服务器："</string>
-    <string name="telephony_name_label">"名称："</string>
-    <string name="telephony_mmsc_label">"MMSC："</string>
-    <string name="telephony_apn_label">"APN："</string>
-    <string name="telephony_mcc_label">"MCC："</string>
-    <string name="telephony_port_label">"端口："</string>
-    <string name="telephony_password_label">"密码："</string>
-    <string name="telephony_proxy_label">"代理："</string>
-    <string name="telephony_mnc_label">"MNC："</string>
-    <string name="telephony_mmsproxy_label">"彩信代理："</string>
-    <string name="telephony_mmsport_label">"彩信端口："</string>
     <string name="next_label">"下一步"</string>
     <string name="language_picker_title">"区域"</string>
     <string name="select_your_language">"选择语言"</string>
     <string name="activity_picker_label">"选择活动"</string>
     <string name="device_info_label">"设备信息"</string>
     <string name="battery_info_label">"电池信息"</string>
-    <!-- no translation found for battery_history_label (8242244969757414501) -->
-    <skip />
+    <string name="battery_history_label">"电池历史记录"</string>
     <string name="display_label">"显示"</string>
     <string name="phone_info_label">"手机信息"</string>
     <string name="sd_card_settings_label">"SD 卡"</string>
@@ -264,23 +217,12 @@
     <string name="bluetooth_settings_summary">"管理连接，设置设备名称和可发现性"</string>
     <string name="bluetooth_pin_entry">"蓝牙配对请求"</string>
     <string name="bluetooth_device_info">"蓝牙设备信息"</string>
-    <string name="bluetooth_pairing_msg">"正在配对..."</string>
     <string name="bluetooth_enter_pin_msg">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g>"\n\n"键入 PIN 码以配对。"\n"（尝试键入 0000 或 1234。）"</string>
     <string name="bluetooth_error_title">"注意"</string>
     <string name="bluetooth_pairing_error_message">"与<xliff:g id="DEVICE_NAME">%1$s</xliff:g>配对时出现问题。"</string>
-    <string name="bluetooth_pairing_alternate_error_message">"与<xliff:g id="DEVICE_NAME">%1$s</xliff:g>配对时出现问题。请尝试使用其他 PIN 码。"</string>
     <string name="bluetooth_pairing_pin_error_message">"与<xliff:g id="DEVICE_NAME">%1$s</xliff:g>配对时出现问题，因为键入的 PIN 码不正确。"</string>
     <string name="bluetooth_connecting_error_message">"连接至<xliff:g id="DEVICE_NAME">%1$s</xliff:g>时出现问题。"</string>
-    <string name="bluetooth_new_data">"键入新数据"</string>
-    <string name="bluetooth_new_data_confirm">"确定"</string>
-    <string name="bluetooth_new_data_cancel">"取消"</string>
-    <string name="bluetooth_scan_for_new_devices">"正在扫描以找到新设备..."</string>
-    <string name="bluetooth_discoverability_panel_title">"让我..."</string>
-    <string name="bluetooth_discoverable">"<xliff:g id="DISCOVERABLE_TIME_PERIOD">%1$s</xliff:g> 秒内可发现"</string>
-    <string name="bluetooth_connectable">"只可连接"</string>
-    <string name="bluetooth_neither">"既不可发现也不可连接"</string>
     <string name="bluetooth_preference_scan_title">"扫描以找到设备"</string>
-    <string name="bluetooth_preference_scan_summary">"查找要配对的设备"</string>
     <string name="bluetooth_device_context_connect">"连接"</string>
     <string name="bluetooth_device_context_disconnect">"断开连接"</string>
     <string name="bluetooth_device_context_pair_connect">"配对和连接"</string>
@@ -372,12 +314,9 @@
     <string name="wifi_setting_num_channels_summary">"设置要使用的频道数"</string>
     <string name="wifi_setting_num_channels_error">"设置调节域时出现问题。"</string>
     <string name="wifi_setting_num_channels_channel_phrase">"<xliff:g id="NUM_CHANNELS">%1$d</xliff:g> 个频道"</string>
-    <!-- no translation found for wifi_setting_sleep_policy_title (1367731352485585528) -->
-    <skip />
-    <!-- no translation found for wifi_setting_sleep_policy_summary (7573693311804602041) -->
-    <skip />
-    <!-- no translation found for wifi_setting_sleep_policy_error (5103670439972135148) -->
-    <skip />
+    <string name="wifi_setting_sleep_policy_title">"Wi-Fi 休眠策略"</string>
+    <string name="wifi_setting_sleep_policy_summary">"指定何时从 Wi-Fi 切换到手机数据"</string>
+    <string name="wifi_setting_sleep_policy_error">"设置休眠策略时出现问题。"</string>
     <string name="wifi_advanced_mac_address_title">"MAC 地址"</string>
     <string name="fragment_status_scanning">"正在扫描..."</string>
     <string name="fragment_status_connecting">"正在连接至 <xliff:g id="NETWORK_NAME">%1$s</xliff:g>..."</string>
@@ -420,32 +359,19 @@
     <string name="sound_effects_enable_title">"操作音选择"</string>
     <string name="sound_effects_enable_summary_on">"进行屏幕选择时发出声音"</string>
     <string name="sound_effects_enable_summary_off">"进行屏幕选择时发出声音"</string>
+    <string name="play_media_notification_sounds_enable_title">"SD 卡通知"</string>
+    <string name="play_media_notification_sounds_enable_summary_on">"禁用 SD 卡通知声音"</string>
+    <string name="play_media_notification_sounds_enable_summary_off">"启用 SD 卡通知声音"</string>
     <string name="sync_settings">"数据同步"</string>
     <string name="sync_settings_summary">"选择同步哪些应用程序"</string>
-    <string name="sync_settings_header_general_settings">"常规同步设置"</string>
-    <string name="sync_settings_header_application_settings">"应用程序同步设置"</string>
-    <string name="sync_too_many_deletes">"超出了删除限制"</string>
-    <string name="sync_automatically">"自动同步"</string>
-    <string name="sync_enabled">"自动同步数据"</string>
-    <string name="sync_disabled">"选择以自动同步数据"</string>
-    <string name="sync_menu_sync_now">"立即同步"</string>
-    <string name="sync_menu_sync_cancel">"取消同步"</string>
-    <string name="sync_gmail">"Gmail"</string>
-    <string name="sync_calendar">"日历"</string>
-    <string name="sync_contacts">"联系人"</string>
-    <string name="sync_too_many_deletes_desc">"对于<xliff:g id="TYPE_OF_SYNC">%2$s</xliff:g>、帐户 <xliff:g id="ACCOUNT_NAME">%3$s</xliff:g>，有 <xliff:g id="NUMBER_OF_DELETED_ITEMS">%1$d</xliff:g> 个删除的项目。您希望执行什么操作？"</string>
-    <string name="sync_really_delete">"删除这些项目。"</string>
-    <string name="sync_undo_deletes">"撤消删除操作。"</string>
-    <string name="sync_do_nothing">"现在什么都不做。"</string>
-    <string name="sync_is_failing">"同步操作当前遇到了一些问题，很快便可恢复。"</string>
-    <string name="sync_plug"><font fgcolor="#ffffffff">"欢迎使用 Google Sync！"</font>\n"这是一种同步数据以允许您从任何位置访问您的联系人、约会以及更多信息的 Google 方法。"</string>
     <string name="display_settings">"显示设置"</string>
     <string name="animations_title">"动画"</string>
     <string name="animations_summary_on">"打开/关闭窗口时显示动画"</string>
     <string name="animations_summary_off">"打开/关闭窗口时显示动画"</string>
     <string name="brightness">"亮度"</string>
+    <string name="brightness_summary">"调整屏幕亮度"</string>
     <string name="screen_timeout">"屏幕待机"</string>
-    <string name="dim_screen">"屏幕变暗"</string>
+    <string name="screen_timeout_summary">"在屏幕自动关闭前调整延迟"</string>
     <string name="sim_lock_settings">"SIM 卡锁定设置"</string>
     <string name="sim_lock_settings_category">"设置 SIM 卡锁定"</string>
     <string name="sim_lock_settings_title">"SIM 卡锁定"</string>
@@ -482,10 +408,8 @@
     <string name="storage_settings_title">"SD 卡和手机存储"</string>
     <string name="storage_settings_summary">"卸下 SD 卡，查看可用的存储空间"</string>
     <string name="status_number">"手机号"</string>
-    <!-- no translation found for status_network_type (3279383550222116235) -->
-    <skip />
-    <!-- no translation found for status_data_state (5503181397066522950) -->
-    <skip />
+    <string name="status_network_type">"手机网络类型"</string>
+    <string name="status_data_state">"手机网络状态"</string>
     <string name="status_service_state">"服务状态"</string>
     <string name="status_signal_strength">"信号强度"</string>
     <string name="status_roaming">"漫游"</string>
@@ -499,9 +423,12 @@
     <string name="sd_memory">"SD 卡"</string>
     <string name="memory_available">"可用的空间"</string>
     <string name="memory_size">"空间总量"</string>
-    <string name="sd_eject">"卸下/弹出 SD 卡"</string>
+    <string name="sd_eject">"删除 SD 卡"</string>
+    <string name="sd_eject_summary">"删除 SD 卡以安全移除"</string>
+    <string name="sd_format">"格式化 SD 卡"</string>
+    <string name="sd_format_summary">"格式化（清除）SD 卡"</string>
     <string name="sd_unavailable">"不可用"</string>
-    <string name="read_only">"（只读）"</string>
+    <string name="read_only">" （只读）"</string>
     <string name="battery_status_title">"电池状态"</string>
     <string name="battery_level_title">"电池级别"</string>
     <string name="apn_settings">"APN"</string>
@@ -538,6 +465,14 @@
     <string name="master_clear_gesture_prompt">"绘制解锁图案"</string>
     <string name="master_clear_gesture_explanation">"您必须绘制解锁图案才能确认手机重设。"</string>
     <string name="master_clear_failed">"未执行重设，因为 System Clear 服务不可用。"</string>
+    <string name="media_format_title">"格式化 SD 卡。"</string>
+    <string name="media_format_summary">"清除 SD 卡上的所有数据"</string>
+    <string name="media_format_desc">"该操作会清除手机上的 SD 卡。您会丢失卡上的所有数据。"</string>
+    <string name="media_format_button_text">"格式化 SD 卡"</string>
+    <string name="media_format_final_desc">"是否要格式化 SD 卡，以清除所有媒质？该操作不能撤消！"</string>
+    <string name="media_format_final_button_text">"清除所有内容"</string>
+    <string name="media_format_gesture_prompt">"绘制您的解锁图案"</string>
+    <string name="media_format_gesture_explanation">"您必须绘制解锁图案才能确认格式化 SD 卡。"</string>
     <string name="call_settings_title">"通话设置"</string>
     <string name="call_settings_summary">"设置语音信箱、呼叫转移、呼叫等待、呼叫者 ID"</string>
     <string name="network_settings_title">"移动网络"</string>
@@ -591,17 +526,22 @@
     <string name="lock_example_title">"示例图案"</string>
     <string name="lock_example_message">"连接至少四个点。"\n\n"准备好绘制自己的图案后选择“下一步”。"</string>
     <string name="manageapplications_settings_title">"管理应用程序"</string>
+    <string name="manageapplications_settings_summary">"管理和删除安装的应用程序"</string>
     <string name="applications_settings">"应用程序"</string>
     <string name="applications_settings_summary">"管理应用程序，设置快速启动快捷键"</string>
     <string name="applications_settings_header">"应用程序设置"</string>
     <string name="install_applications">"未知源"</string>
     <string name="install_unknown_applications">"允许安装非市场应用程序"</string>
     <string name="install_all_warning">"您的手机和个人数据很容易受到来自未知源的应用程序的攻击。您同意单方面承担由于使用这些应用程序而可能对您的手机造成的任何损坏或数据丢失的责任。"</string>
-    <string name="manage_applications_title">"管理应用程序"</string>
     <string name="application_info_label">"应用程序信息"</string>
     <string name="storage_label">"存储"</string>
     <string name="auto_launch_label">"默认情况下启动"</string>
     <string name="permissions_label">"权限"</string>
+    <string name="cache_header_label">"缓存"</string>
+    <string name="clear_cache_btn_text">"清除缓存"</string>
+    <string name="cache_size_label">"缓存"</string>
+    <string name="controls_label">"控件"</string>
+    <string name="force_stop">"强制停止"</string>
     <string name="total_size_label">"总量"</string>
     <string name="application_size_label">"应用程序"</string>
     <string name="data_size_label">"数据"</string>
@@ -614,6 +554,8 @@
     <string name="sort_order_alpha">"排序"</string>
     <string name="sort_order_size">"按大小排序"</string>
     <string name="manage_space_text">"管理空间"</string>
+    <string name="filter">"过滤"</string>
+    <string name="filter_dlg_title">"选择过滤选项"</string>
     <string name="filter_apps_all">"全部"</string>
     <string name="filter_apps_third_party">"第三方"</string>
     <string name="filter_apps_running">"正在运行"</string>
@@ -627,46 +569,36 @@
     <string name="app_not_found_dlg_text">"未在已安装的应用程序的列表中找到该应用程序。"</string>
     <string name="clear_data_failed">"无法清除应用程序数据。"</string>
     <string name="security_settings_desc">"此应用程序可访问您手机上的以下内容："</string>
-    <string name="computing_size">"仍在计算..."</string>
+    <string name="computing_size">"正在计算..."</string>
     <string name="invalid_size_value">"无法计算包大小"</string>
     <string name="empty_list_msg">"您尚未安装任何第三方应用程序。"</string>
-    <string name="cache_header_label">"缓存"</string>
-    <string name="clear_cache_btn_text">"清除缓存"</string>
-    <string name="cache_size_label">"缓存"</string>
     <string name="language_settings">"区域和文本"</string>
     <string name="language_settings_summary">"设置区域（语言和区域）、文本输入和自动纠错选项"</string>
     <string name="language_category">"区域设置"</string>
     <string name="text_category">"文本设置"</string>
     <string name="phone_language">"选择区域"</string>
+    <string name="phone_language_summary">"选择语言和地区"</string>
     <string name="auto_replace">"自动替换"</string>
     <string name="auto_replace_summary">"纠正错误键入的词"</string>
     <string name="auto_caps">"自动大写"</string>
     <string name="auto_caps_summary">"将句子中的首字母大写"</string>
     <string name="auto_punctuate">"自动加标点"</string>
+    <string name="hardkeyboard_category">"物理键盘设置"</string>
     <string name="auto_punctuate_summary">"按两次空格键来插入“。”"</string>
     <string name="show_password">"可见的密码"</string>
     <string name="show_password_summary">"键入时显示密码"</string>
-    <!-- no translation found for user_dict_settings_titlebar (765659257455000490) -->
-    <skip />
-    <!-- no translation found for user_dict_settings_title (8357027437499042191) -->
-    <skip />
-    <!-- no translation found for user_dict_settings_summary (2460427065601355471) -->
-    <skip />
-    <!-- no translation found for user_dict_settings_add_menu_title (4056762757149923551) -->
-    <skip />
-    <!-- no translation found for user_dict_settings_add_dialog_title (4702613990174126482) -->
-    <skip />
-    <!-- no translation found for user_dict_settings_context_menu_edit_title (2210564879320004837) -->
-    <skip />
-    <!-- no translation found for user_dict_settings_context_menu_delete_title (9140703913776549054) -->
-    <skip />
-    <!-- no translation found for user_dict_settings_empty_text (6209268025109242806) -->
-    <skip />
+    <string name="user_dict_settings_titlebar">"用户词典"</string>
+    <string name="user_dict_settings_title">"用户词典"</string>
+    <string name="user_dict_settings_summary">"向用户词典中添加字词以及从用户词典中删除字词"</string>
+    <string name="user_dict_settings_add_menu_title">"添加"</string>
+    <string name="user_dict_settings_add_dialog_title">"添加到词典"</string>
+    <string name="user_dict_settings_context_menu_edit_title">"编辑"</string>
+    <string name="user_dict_settings_context_menu_delete_title">"删除"</string>
+    <string name="user_dict_settings_empty_text">"用户词典中没有您定义的字词。您可以通过菜单添加字词。"</string>
     <string name="testing">"测试"</string>
     <string name="testing_phone_info">"手机信息"</string>
     <string name="testing_battery_info">"电池信息"</string>
-    <!-- no translation found for testing_battery_history (3043329445810695647) -->
-    <skip />
+    <string name="testing_battery_history">"电池历史记录"</string>
     <string name="quick_launch_title">"快速启动"</string>
     <string name="quick_launch_summary">"设置启动应用程序的键盘快捷键"</string>
     <string name="quick_launch_assign_application">"分配应用程序"</string>
@@ -680,8 +612,7 @@
     <string name="quick_launch_display_mode_shortcuts">"快捷键"</string>
     <string name="input_methods_settings_title">"文本输入"</string>
     <string name="input_methods_settings_summary">"管理文本输入选项"</string>
-    <!-- no translation found for input_methods_settings_label_format (4882768027634191074) -->
-    <skip />
+    <string name="input_methods_settings_label_format">"%s 设置"</string>
     <string name="development_settings_title">"开发"</string>
     <string name="development_settings_summary">"设置应用程序开发选项"</string>
     <string name="enable_adb">"USB 调试"</string>
@@ -690,4 +621,50 @@
     <string name="keep_screen_on_summary">"充电时屏幕不会休眠"</string>
     <string name="allow_mock_location">"允许模仿位置"</string>
     <string name="allow_mock_location_summary">"允许模仿位置"</string>
+    <!-- no translation found for gadget_picker_title (98374951396755811) -->
+    <skip />
+    <!-- no translation found for widget_picker_title (9130684134213467557) -->
+    <skip />
+    <string name="battery_history_details_for">"有关用户 ID %d 的详情"</string>
+    <string name="battery_history_uid">"用户 ID <xliff:g id="USER_ID">%1$d</xliff:g>"</string>
+    <string name="battery_history_network_usage">"有关<xliff:g id="APP_NAME">%1$s</xliff:g>的网络使用详情："</string>
+    <string name="battery_history_bytes_received">"收到的字节数：<xliff:g id="BYTES">%1$d</xliff:g>"</string>
+    <string name="battery_history_bytes_sent">"发送的字节数：<xliff:g id="BYTES">%1$d</xliff:g>"</string>
+    <string name="battery_history_bytes_total">"总字节数：<xliff:g id="BYTES">%1$d</xliff:g>"</string>
+    <string name="battery_history_cpu_usage">"有关<xliff:g id="APP_NAME">%1$s</xliff:g>的 CPU 使用详情："</string>
+    <string name="battery_history_user_time">"用户时间："</string>
+    <string name="battery_history_system_time">"系统时间："</string>
+    <string name="battery_history_total_time">"合计时间："</string>
+    <string name="battery_history_starts">"启动次数：<xliff:g id="STARTS">%1$d</xliff:g>"</string>
+    <string name="battery_history_days">"<xliff:g id="DAYS">%1$d</xliff:g> 天 <xliff:g id="HOURS">%2$d</xliff:g> 小时 <xliff:g id="MINUTES">%3$d</xliff:g> 分 <xliff:g id="SECONDS">%4$d</xliff:g> 秒"</string>
+    <string name="battery_history_hours">"<xliff:g id="HOURS">%1$d</xliff:g> 小时 <xliff:g id="MINUTES">%2$d</xliff:g> 分 <xliff:g id="SECONDS">%3$d</xliff:g> 秒"</string>
+    <string name="battery_history_minutes">"<xliff:g id="MINUTES">%1$d</xliff:g> 分 <xliff:g id="SECONDS">%2$d</xliff:g> 秒"</string>
+    <string name="battery_history_seconds">"<xliff:g id="SECONDS">%1$d</xliff:g> 秒"</string>
+    <string name="battery_history_packages_sharing_this_uid">"共享该用户 ID 的数据包："</string>
+    <string name="battery_history_no_data">"没有可用的电池使用数据"</string>
+    <string name="battery_history_sensor">"传感器："</string>
+    <!-- no translation found for battery_history_wakelock (608683447522396293) -->
+    <skip />
+    <string name="battery_history_used_by_packages">"包使用的传感器："</string>
+    <string name="battery_history_sensor_usage">"<xliff:g id="PACKAGE">%2$s</xliff:g>使用了 <xliff:g id="COUNT">%1$d</xliff:g> 次"</string>
+    <string name="battery_history_sensor_usage_multi">"由以下某项使用过 <xliff:g id="COUNT">%1$d</xliff:g> 次："</string>
+    <!-- no translation found for battery_history_awake_label (8449792868990080882) -->
+    <skip />
+    <!-- no translation found for battery_history_screen_on_label (1848936521786339362) -->
+    <skip />
+    <!-- no translation found for battery_history_phone_on_label (700191958853142297) -->
+    <skip />
+    <!-- no translation found for battery_history_awake (4350886665719031057) -->
+    <skip />
+    <string name="battery_history_screen_on">"屏幕开启所花费的时间："</string>
+    <!-- no translation found for battery_history_phone_on (4891504401623839532) -->
+    <skip />
+    <string name="battery_history_screen_on_battery">"正在使用电池："</string>
+    <string name="battery_history_screen_on_plugged">"已插入："</string>
+    <string name="usage_stats_label">"使用情况统计"</string>
+    <string name="testing_usage_stats">"使用情况统计数据"</string>
+    <string name="display_order_text">"排序方式："</string>
+    <string name="app_name_label">"应用程序"</string>
+    <string name="launch_count_label">"次数"</string>
+    <string name="usage_time_label">"使用时间"</string>
 </resources>

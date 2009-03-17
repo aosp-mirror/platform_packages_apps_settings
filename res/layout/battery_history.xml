@@ -1,14 +1,144 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/topLayout"
     android:orientation="vertical"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent">
-    <ScrollView
+
+    <TextView
+        android:id="@+id/title"
         android:layout_width="fill_parent"
-        android:layout_height="wrap_content">
-        <TextView
-            android:id="@+id/text"
+        android:layout_height="wrap_content" />
+
+    <LinearLayout
+        android:id="@+id/graphLayout"
+        android:orientation="vertical"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent" >
+
+        <Spinner
+            android:id="@+id/typeSpinner"
             android:layout_width="fill_parent"
-            android:layout_height="1000dp"/>
-    </ScrollView>
+            android:layout_height="wrap_content"
+            android:entries="@array/battery_history_type_spinner" />
+
+        <Spinner
+            android:id="@+id/whichSpinner"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:entries="@array/battery_history_which_spinner" />
+
+        <ScrollView
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content" >
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content" >
+            
+        <TextView
+            android:id="@+id/messageText"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:textSize="17dp"
+            android:visibility="gone" />
+
+        <com.android.settings.battery_history.GraphableButton
+            android:id="@+id/button0"
+            android:layout_width="fill_parent"
+            android:layout_height="0dp"
+            android:layout_marginLeft="4dp"
+            android:layout_marginRight="4dp"
+            android:layout_marginBottom="4dp"
+            android:layout_weight="1" />
+    
+        <com.android.settings.battery_history.GraphableButton
+            android:id="@+id/button1"
+            android:layout_width="fill_parent"
+            android:layout_height="0dp"
+            android:layout_marginLeft="4dp"
+            android:layout_marginRight="4dp"
+            android:layout_marginBottom="4dp"
+            android:layout_weight="1" />
+    
+        <com.android.settings.battery_history.GraphableButton
+            android:id="@+id/button2"
+            android:layout_width="fill_parent"
+            android:layout_height="0dp"
+            android:layout_marginLeft="4dp"
+            android:layout_marginRight="4dp"
+            android:layout_marginBottom="4dp"
+            android:layout_weight="1" />
+    
+        <com.android.settings.battery_history.GraphableButton
+            android:id="@+id/button3"
+            android:layout_width="fill_parent"
+            android:layout_height="0dp"
+            android:layout_marginLeft="4dp"
+            android:layout_marginRight="4dp"
+            android:layout_marginBottom="4dp"
+            android:layout_weight="1" />
+    
+        <com.android.settings.battery_history.GraphableButton
+            android:id="@+id/button4"
+            android:layout_width="fill_parent"
+            android:layout_height="0dp"
+            android:layout_marginLeft="4dp"
+            android:layout_marginRight="4dp"
+            android:layout_marginBottom="4dp"
+            android:layout_weight="1" />
+    
+        <com.android.settings.battery_history.GraphableButton
+            android:id="@+id/button5"
+            android:layout_width="fill_parent"
+            android:layout_height="0dp"
+            android:layout_marginLeft="4dp"
+            android:layout_marginRight="4dp"
+            android:layout_marginBottom="4dp"
+            android:layout_weight="1" />
+    
+        <com.android.settings.battery_history.GraphableButton
+            android:id="@+id/button6"
+            android:layout_width="fill_parent"
+            android:layout_height="0dp"
+            android:layout_marginLeft="4dp"
+            android:layout_marginRight="4dp"
+            android:layout_marginBottom="4dp"
+            android:layout_weight="1" />
+    
+        <com.android.settings.battery_history.GraphableButton
+            android:id="@+id/button7"
+            android:layout_width="fill_parent"
+            android:layout_height="0dp"
+            android:layout_marginLeft="4dp"
+            android:layout_marginRight="4dp"
+            android:layout_marginBottom="4dp"
+            android:layout_weight="1" />
+
+        </LinearLayout>
+        </ScrollView>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/textLayout"
+        android:visibility="gone"
+        android:orientation="vertical"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent" >
+
+        <ScrollView
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent" >
+            <TextView
+                android:id="@+id/detailsText"
+                android:layout_width="fill_parent"
+                android:textSize="17dp"
+                android:layout_height="1000dp"/>
+        </ScrollView>
+
+    </LinearLayout>
+
 </LinearLayout>

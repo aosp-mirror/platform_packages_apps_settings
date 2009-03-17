@@ -52,31 +52,39 @@ public class BluetoothEventRedirector {
                 
             if (action.equals(BluetoothIntent.ENABLED_ACTION)) {
                 mManager.setBluetoothStateInt(ExtendedBluetoothState.ENABLED);
+                
             } else if (action.equals(BluetoothIntent.DISABLED_ACTION)) {
                 mManager.setBluetoothStateInt(ExtendedBluetoothState.DISABLED);
                     
             } else if (action.equals(BluetoothIntent.DISCOVERY_STARTED_ACTION)) {
                 mManager.onScanningStateChanged(true);
+                
             } else if (action.equals(BluetoothIntent.DISCOVERY_COMPLETED_ACTION)) {
                 mManager.onScanningStateChanged(false);
                     
             } else if (action.equals(BluetoothIntent.REMOTE_DEVICE_FOUND_ACTION)) {
                 short rssi = intent.getShortExtra(BluetoothIntent.RSSI, Short.MIN_VALUE);
                 mManager.getLocalDeviceManager().onDeviceAppeared(address, rssi);
+                
             } else if (action.equals(BluetoothIntent.REMOTE_DEVICE_DISAPPEARED_ACTION)) {
                 mManager.getLocalDeviceManager().onDeviceDisappeared(address);
+                
             } else if (action.equals(BluetoothIntent.REMOTE_NAME_UPDATED_ACTION)) {
                 mManager.getLocalDeviceManager().onDeviceNameUpdated(address);
+                
             } else if (action.equals(BluetoothIntent.BOND_STATE_CHANGED_ACTION)) {
                 int bondState = intent.getIntExtra(BluetoothIntent.BOND_STATE,
                                                    BluetoothError.ERROR);
                 mManager.getLocalDeviceManager().onBondingStateChanged(address, bondState);
                 if (bondState == BluetoothDevice.BOND_NOT_BONDED) {
                     int reason = intent.getIntExtra(BluetoothIntent.REASON, BluetoothError.ERROR);
-                    Log.w(TAG, address + " unbonded with reason " + reason +
-                          ", TODO: handle this nicely in the UI");  //TODO
-                    mManager.getLocalDeviceManager().onBondingError(address);
+                    if (reason == BluetoothDevice.UNBOND_REASON_AUTH_FAILED ||
+                            reason == BluetoothDevice.UNBOND_REASON_AUTH_REJECTED ||
+                            reason == BluetoothDevice.UNBOND_REASON_REMOTE_DEVICE_DOWN) {
+                        mManager.getLocalDeviceManager().onBondingError(address, reason);
+                    }
                 }
+                
             } else if (action.equals(BluetoothIntent.HEADSET_STATE_CHANGED_ACTION)) {
                 mManager.getLocalDeviceManager().onProfileStateChanged(address);
 
@@ -84,7 +92,7 @@ public class BluetoothEventRedirector {
                 int oldState = intent.getIntExtra(BluetoothIntent.HEADSET_PREVIOUS_STATE, 0);
                 if (newState == BluetoothHeadset.STATE_DISCONNECTED &&
                         oldState == BluetoothHeadset.STATE_CONNECTING) {
-                    mManager.getLocalDeviceManager().onConnectingError(address);
+                    Log.i(TAG, "Failed to connect BT headset");
                 }
                 
             } else if (action.equals(BluetoothA2dp.SINK_STATE_CHANGED_ACTION)) {
@@ -94,8 +102,12 @@ public class BluetoothEventRedirector {
                 int oldState = intent.getIntExtra(BluetoothA2dp.SINK_PREVIOUS_STATE, 0);
                 if (newState == BluetoothA2dp.STATE_DISCONNECTED &&
                         oldState == BluetoothA2dp.STATE_CONNECTING) {
-                    mManager.getLocalDeviceManager().onConnectingError(address);
+                    Log.i(TAG, "Failed to connect BT A2DP");
                 }
+                
+            } else if (action.equals(BluetoothIntent.REMOTE_DEVICE_CLASS_UPDATED_ACTION)) {
+                mManager.getLocalDeviceManager().onBtClassChanged(address);
+                
             }
         }
     };
@@ -124,6 +136,7 @@ public class BluetoothEventRedirector {
         // Fine-grained state broadcasts
         filter.addAction(BluetoothA2dp.SINK_STATE_CHANGED_ACTION);
         filter.addAction(BluetoothIntent.HEADSET_STATE_CHANGED_ACTION);
+        filter.addAction(BluetoothIntent.REMOTE_DEVICE_CLASS_UPDATED_ACTION);
         
         mManager.getContext().registerReceiver(mBroadcastReceiver, filter);
     }

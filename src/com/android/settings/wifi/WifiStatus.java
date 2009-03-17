@@ -20,51 +20,9 @@ import com.android.settings.R;
 
 import android.content.Context;
 import android.net.NetworkInfo;
-import android.net.wifi.WifiInfo;
 import android.text.TextUtils;
 
 public class WifiStatus {
-
-    // e.g., "Connecting"
-    public static String sScanning;
-    public static String sConnecting;
-    public static String sAuthenticating;
-    public static String sObtainingIp;
-    public static String sConnected;
-    public static String sDisconnecting;
-    public static String sDisconnected;
-    public static String sFailed;    
-
-    // e.g., "Connecting to %1$s"
-    public static String sScanningFragment;
-    public static String sConnectingFragment;
-    public static String sAuthenticatingFragment;
-    public static String sObtainingIpFragment;
-    public static String sConnectedFragment;
-    public static String sDisconnectingFragment;
-    public static String sDisconnectedFragment;
-    public static String sFailedFragment;    
-
-    private static void fillStrings(Context context) {
-        sScanning = context.getString(R.string.status_scanning);
-        sConnecting = context.getString(R.string.status_connecting);
-        sAuthenticating = context.getString(R.string.status_authenticating);
-        sObtainingIp = context.getString(R.string.status_obtaining_ip);
-        sConnected = context.getString(R.string.status_connected);
-        sDisconnecting = context.getString(R.string.status_disconnecting);
-        sDisconnected = context.getString(R.string.status_disconnected);
-        sFailed = context.getString(R.string.status_failed);
-
-        sScanningFragment = context.getString(R.string.fragment_status_scanning);
-        sConnectingFragment = context.getString(R.string.fragment_status_connecting);
-        sAuthenticatingFragment = context.getString(R.string.fragment_status_authenticating);
-        sObtainingIpFragment = context.getString(R.string.fragment_status_obtaining_ip);
-        sConnectedFragment = context.getString(R.string.fragment_status_connected);
-        sDisconnectingFragment = context.getString(R.string.fragment_status_disconnecting);
-        sDisconnectedFragment = context.getString(R.string.fragment_status_disconnected);
-        sFailedFragment = context.getString(R.string.fragment_status_failed);
-    }
-    
     public static String getStatus(Context context, String ssid,
             NetworkInfo.DetailedState detailedState) {
         
@@ -85,27 +43,23 @@ public class WifiStatus {
     public static String getPrintable(Context context,
             NetworkInfo.DetailedState detailedState) {
         
-        if (sScanning == null) {
-            fillStrings(context);
-        }
-        
         switch (detailedState) {
             case AUTHENTICATING:
-                return sAuthenticating;
+                return context.getString(R.string.status_authenticating);
             case CONNECTED:
-                return sConnected;
+                return context.getString(R.string.status_connected);
             case CONNECTING:
-                return sConnecting;
+                return context.getString(R.string.status_connecting);
             case DISCONNECTED:
-                return sDisconnected;
+                return context.getString(R.string.status_disconnected);
             case DISCONNECTING:
-                return sDisconnecting;
+                return context.getString(R.string.status_disconnecting);
             case FAILED:
-                return sFailed;
+                return context.getString(R.string.status_failed);
             case OBTAINING_IPADDR:
-                return sObtainingIp;
+                return context.getString(R.string.status_obtaining_ip);
             case SCANNING:
-                return sScanning;
+                return context.getString(R.string.status_scanning);
             default:
                 return null;
         }
@@ -114,35 +68,31 @@ public class WifiStatus {
     public static String getPrintableFragment(Context context,
             NetworkInfo.DetailedState detailedState, String apName) {
         
-        if (sScanningFragment == null) {
-            fillStrings(context);
-        }
-
         String fragment = null;
         switch (detailedState) {
             case AUTHENTICATING:
-                fragment = sAuthenticatingFragment;
+                fragment = context.getString(R.string.fragment_status_authenticating);
                 break;
             case CONNECTED:
-                fragment = sConnectedFragment;
+                fragment = context.getString(R.string.fragment_status_connected);
                 break;
             case CONNECTING:
-                fragment = sConnectingFragment;
+                fragment = context.getString(R.string.fragment_status_connecting);
                 break;
             case DISCONNECTED:
-                fragment = sDisconnectedFragment;
+                fragment = context.getString(R.string.fragment_status_disconnected);
                 break;
             case DISCONNECTING:
-                fragment = sDisconnectingFragment;
+                fragment = context.getString(R.string.fragment_status_disconnecting);
                 break;
             case FAILED:
-                fragment = sFailedFragment;
+                fragment = context.getString(R.string.fragment_status_failed);
                 break;
             case OBTAINING_IPADDR:
-                fragment = sObtainingIpFragment;
+                fragment = context.getString(R.string.fragment_status_obtaining_ip);
                 break;
             case SCANNING:
-                fragment = sScanningFragment;
+                fragment = context.getString(R.string.fragment_status_scanning);
                 break;
         }
         

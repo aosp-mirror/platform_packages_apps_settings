@@ -1,5 +1,5 @@
 /**
- * Copyright (C) 2007 Google Inc.
+ * Copyright (C) 2009 Google Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy
@@ -24,6 +24,7 @@ import android.content.DialogInterface;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.provider.UserDictionary;
+import android.text.InputType;
 import android.view.ContextMenu;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -43,6 +44,7 @@ import java.util.Locale;
 public class UserDictionarySettings extends ListActivity {
 
     private static final String INSTANCE_KEY_DIALOG_EDITING_WORD = "DIALOG_EDITING_WORD";
+    private static final String INSTANCE_KEY_ADDED_WORD = "DIALOG_ADDED_WORD";
 
     private static final String[] QUERY_PROJECTION = {
         UserDictionary.Words._ID, UserDictionary.Words.WORD
@@ -54,6 +56,8 @@ public class UserDictionarySettings extends ListActivity {
             + UserDictionary.Words.LOCALE + " is null";
 
     private static final String DELETE_SELECTION = UserDictionary.Words.WORD + "=?";
+
+    private static final String EXTRA_WORD = "word";
     
     private static final int CONTEXT_MENU_EDIT = Menu.FIRST;
     private static final int CONTEXT_MENU_DELETE = Menu.FIRST + 1;
@@ -66,6 +70,9 @@ public class UserDictionarySettings extends ListActivity {
     private String mDialogEditingWord;
     
     private Cursor mCursor;
+    
+    private boolean mAddedWordAlready;
+    private boolean mAutoReturn;
     
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -82,20 +89,34 @@ public class UserDictionarySettings extends ListActivity {
         ListView listView = getListView();
         listView.setFastScrollEnabled(true);
         listView.setEmptyView(emptyView);
-        
+
         registerForContextMenu(listView);
     }
     
     @Override
+    protected void onResume() {
+        super.onResume();
+        if (!mAddedWordAlready 
+                && getIntent().getAction().equals("com.android.settings.USER_DICTIONARY_INSERT")) {
+            String word = getIntent().getStringExtra(EXTRA_WORD);
+            mAutoReturn = true;
+            if (word != null) {
+                showAddOrEditDialog(word);
+            }
+        }
+    }
+    @Override
     protected void onRestoreInstanceState(Bundle state) {
         super.onRestoreInstanceState(state);
         mDialogEditingWord = state.getString(INSTANCE_KEY_DIALOG_EDITING_WORD);
+        mAddedWordAlready = state.getBoolean(INSTANCE_KEY_ADDED_WORD, false);
     }
 
     @Override
     protected void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
         outState.putString(INSTANCE_KEY_DIALOG_EDITING_WORD, mDialogEditingWord);
+        outState.putBoolean(INSTANCE_KEY_ADDED_WORD, mAddedWordAlready);
     }
 
     private Cursor createCursor() {
@@ -115,7 +136,7 @@ public class UserDictionarySettings extends ListActivity {
     
     @Override
     protected void onListItemClick(ListView l, View v, int position, long id) {
-        showAddOrEditDialog(getWord(position));
+        openContextMenu(v);
     }
 
     @Override
@@ -124,8 +145,10 @@ public class UserDictionarySettings extends ListActivity {
         
         AdapterContextMenuInfo adapterMenuInfo = (AdapterContextMenuInfo) menuInfo;
         menu.setHeaderTitle(getWord(adapterMenuInfo.position));
-        menu.add(0, CONTEXT_MENU_EDIT, 0, R.string.user_dict_settings_context_menu_edit_title);
-        menu.add(0, CONTEXT_MENU_DELETE, 0, R.string.user_dict_settings_context_menu_delete_title);
+        menu.add(0, CONTEXT_MENU_EDIT, 0, 
+                R.string.user_dict_settings_context_menu_edit_title);
+        menu.add(0, CONTEXT_MENU_DELETE, 0, 
+                R.string.user_dict_settings_context_menu_delete_title);
     }
     
     @Override
@@ -177,21 +200,32 @@ public class UserDictionarySettings extends ListActivity {
     protected Dialog onCreateDialog(int id) {
         View content = getLayoutInflater().inflate(R.layout.dialog_edittext, null);
         final EditText editText = (EditText) content.findViewById(R.id.edittext);
+        // No prediction in soft keyboard mode. TODO: Create a better way to disable prediction
+        editText.setInputType(InputType.TYPE_CLASS_TEXT 
+                | InputType.TYPE_TEXT_FLAG_AUTO_COMPLETE);
         
         return new AlertDialog.Builder(this)
-                .setTitle(R.string.user_dict_settings_add_dialog_title)
+                .setTitle(mDialogEditingWord != null 
+                        ? R.string.user_dict_settings_edit_dialog_title 
+                        : R.string.user_dict_settings_add_dialog_title)
                 .setView(content)
                 .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int which) {
-                        onAddOrEditFinished(editText.getText().toString());                        
+                        onAddOrEditFinished(editText.getText().toString());
+                        if (mAutoReturn) finish();
                     }})
-                .setNegativeButton(android.R.string.cancel, null)
+                .setNegativeButton(android.R.string.cancel, new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        if (mAutoReturn) finish();                        
+                    }})
                 .create();
     }
-
     @Override
     protected void onPrepareDialog(int id, Dialog d) {
         AlertDialog dialog = (AlertDialog) d;
+        d.setTitle(mDialogEditingWord != null 
+                        ? R.string.user_dict_settings_edit_dialog_title 
+                        : R.string.user_dict_settings_add_dialog_title);
         EditText editText = (EditText) dialog.findViewById(R.id.edittext);
         editText.setText(mDialogEditingWord);
     }
@@ -207,8 +241,9 @@ public class UserDictionarySettings extends ListActivity {
         
         // TODO: present UI for picking whether to add word to all locales, or current.
         UserDictionary.Words.addWord(this, word.toString(),
-                1, UserDictionary.Words.LOCALE_TYPE_ALL);
+                250, UserDictionary.Words.LOCALE_TYPE_ALL);
         mCursor.requery();
+        mAddedWordAlready = true;
     }
 
     private void deleteWord(String word) {

@@ -29,12 +29,6 @@
             <TextView android:id="@+id/imei" style="@style/info_value" />
         </LinearLayout>
 
-        <!-- IMSI -->
-        <LinearLayout style="@style/entry_layout">
-            <TextView android:text="@string/radio_info_imsi_label" style="@style/info_label" />
-            <TextView android:id="@+id/imsi" style="@style/info_value" />
-        </LinearLayout>
-
         <!-- Phone Number -->
         <LinearLayout style="@style/entry_layout">
             <TextView android:text="@string/radio_info_phone_number_label" style="@style/info_label" />
@@ -254,6 +248,18 @@
                       android:layout_toLeftOf="@id/update_smsc"
                       android:layout_toRightOf="@id/smsc_label" />
         </RelativeLayout>
+
+        <!-- Test setting to ignore bad DNS, useful in lab environments -->
+        <LinearLayout style="@style/entry_layout">
+            <Button android:id="@+id/dns_check_toggle"
+                    android:textSize="14sp"
+                    android:layout_marginTop="8dip"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/radio_info_toggle_dns_check_label"
+                    />
+            <TextView android:id="@+id/dnsCheckState" style="@style/info_value" />
+        </LinearLayout>
 
     </LinearLayout>
 </ScrollView>

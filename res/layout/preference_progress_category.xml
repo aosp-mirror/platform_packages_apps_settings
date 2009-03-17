@@ -16,13 +16,18 @@
 
 <!-- Layout used for ProgressCategory in bluetooth settings. -->
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"      
-    android:layout_width="fill_parent"
-    android:layout_height="27dip"
-    android:background="@*android:drawable/settings_header">
+    style="?android:attr/listSeparatorTextViewStyle">
 
+    <!-- This and the other text view have the style of the list separator text view without the background and padding -->
     <TextView 
-        android:id="@+android:id/title"
         style="?android:attr/listSeparatorTextViewStyle"
+        android:background="@null"
+        android:paddingLeft="0dip"
+        android:id="@+android:id/title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_centerVertical="true"
     />
         
     <ProgressBar
@@ -37,13 +42,14 @@
         />
         
     <TextView 
+        style="?android:attr/listSeparatorTextViewStyle"
+        android:background="@null"
+        android:paddingLeft="0dip"
         android:id="@+id/scanning_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerVertical="true"
         android:layout_toLeftOf="@id/scanning_progress"
-        android:textSize="18sp"
-        android:textColor="@android:color/primary_text_light"
         android:layout_marginRight="5sp"
         android:text="@string/progress_scanning"
         />

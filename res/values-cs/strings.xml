@@ -16,9 +16,6 @@
 <resources xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
     <string name="device_info_default">"Neznámé"</string>
-    <string name="device_info_uptime">"Doba provozu"</string>
-    <string name="device_info_awaketime">"Doba provozu"</string>
-    <string name="device_info_asleeptime">"Doba spánku"</string>
     <string name="turn_on_radio">"Zapnout rádio"</string>
     <string name="turn_off_radio">"Vypnout rádio"</string>
     <string name="turn_on_qxdm">"Povolit protokol QXDM SD"</string>
@@ -52,14 +49,12 @@
     <string name="radioInfo_lac">"LAC"</string>
     <string name="radioInfo_cid">"CID"</string>
     <string name="sdcard_unmount">"Odpojit kartu SD"</string>
+    <string name="sdcard_format">"Formátovat kartu SD"</string>
     <string name="small_font">"Malá"</string>
     <string name="medium_font">"Střední"</string>
     <string name="large_font">"Velká"</string>
     <string name="font_size_save">"OK"</string>
     <string name="sdcard_setting">"Karta SD"</string>
-    <string name="screen_off_timeout_label">"Nevypínat při nabíjení"</string>
-    <string name="stay_on">"Obrazovka je při nabíjení vždy zapnuta"</string>
-    <string name="app_launcher_newView_text">"Nový AppLauncher"</string>
     <string name="battery_info_status_label">"Stav baterie:"</string>
     <string name="battery_info_scale_label">"Měřítko baterie:"</string>
     <string name="battery_info_level_label">"Stav baterie:"</string>
@@ -87,11 +82,6 @@
     <string name="battery_info_health_over_voltage">"Přepětí"</string>
     <string name="battery_info_health_unspecified_failure">"Neznámá chyba"</string>
     <string name="bluetooth">"Bluetooth"</string>
-    <string name="bluetooth_stopping">"Vypínání zařízení Bluetooth..."</string>
-    <string name="bluetooth_disabled">"Zapnout Bluetooth"</string>
-    <!-- no translation found for bluetooth_enabled (314506563815464155) -->
-    <skip />
-    <string name="bluetooth_enabling">"Zapínání zařízení Bluetooth..."</string>
     <string name="bluetooth_visibility">"Viditelné"</string>
     <string name="bluetooth_is_discoverable">"Zařízení je viditelné v intervalu <xliff:g id="DISCOVERABLE_TIME_PERIOD">%1$s</xliff:g> s."</string>
     <string name="bluetooth_not_discoverable">"Přepne zařízení do viditelného režimu"</string>
@@ -99,53 +89,35 @@
     <string name="bluetooth_device_name">"Název zařízení"</string>
     <string name="bluetooth_name_not_set">"Název není nastaven, použit název účtu"</string>
     <string name="bluetooth_scan_for_devices">"Vyhledat zařízení"</string>
-    <string name="bluetooth_clear_list">"Vymazat seznam zařízení"</string>
     <string name="bluetooth_disconnect_blank">"Zařízení <xliff:g id="DEVICE_NAME">%1$s</xliff:g> bude odpojeno."</string>
     <string name="bluetooth_connected">"Připojeno"</string>
     <string name="bluetooth_disconnected">"Odpojeno"</string>
     <string name="bluetooth_disconnecting">"Odpojování..."</string>
     <string name="bluetooth_connecting">"Připojování..."</string>
-    <!-- no translation found for bluetooth_unknown (644716244548801421) -->
+    <!-- no translation found for bluetooth_unknown (1905151516611093010) -->
     <skip />
     <string name="bluetooth_not_connected">"Párovat s tímto zařízením"</string>
-    <string name="bluetooth_failed_to_enable">"Bluetooth nelze zapnout"</string>
     <string name="bluetooth_pairing">"Párování..."</string>
-    <string name="failed_to_pair">"Párování se zařízením <xliff:g id="DEVICE_NAME">%1$s</xliff:g> se nezdařilo."</string>
-    <string name="failed_to_connect">"K zařízení <xliff:g id="DEVICE_NAME">%1$s</xliff:g> se nepodařilo připojit."</string>
-    <string name="bluetooth_paired">"Párováno"</string>
-    <string name="bluetooth_paired_not_nearby">"Párováno"</string>
+    <!-- no translation found for bluetooth_paired (1247541089000057726) -->
+    <skip />
     <string name="bluetooth_device">"Náhlavní souprava či handsfree"</string>
-    <string name="bluetooth_disconnect">"Odpojit"</string>
-    <string name="bluetooth_connect">"Připojit"</string>
-    <string name="bluetooth_unpair">"Zrušit párování"</string>
-    <string name="bluetooth_pair">"Párovat"</string>
     <string name="progress_scanning">"Vyhledávání"</string>
     <string name="bluetooth_notif_ticker">"Požadavek na párování zařízení Bluetooth"</string>
     <string name="bluetooth_notif_title">"Požadavek na párování"</string>
-    <string name="bluetooth_notif_message">"Povolit párování se zařízením"</string>
+    <string name="bluetooth_notif_message">"Povolit párování se zařízením "</string>
     <string name="date_and_time">"Nastavení data a času"</string>
     <string name="date_time_12_hour_sample">"13:00"</string>
     <string name="date_time_24_hour_sample">"13:00"</string>
     <string name="choose_timezone">"Volba časového pásma"</string>
     <string name="display_preview_label">"Náhled:"</string>
     <string name="display_font_size_label">"Velikost písma:"</string>
-    <!-- no translation found for intent_sender_data_label (6332324780477289261) -->
+    <!-- no translation found for intent_sender_data_label (8363026381459131554) -->
     <skip />
     <string name="intent_sender_sendbroadcast_text">"Odeslat <xliff:g id="BROADCAST">broadcast</xliff:g>"</string>
     <string name="intent_sender_action_label">"<xliff:g id="ACTION">Action</xliff:g>:"</string>
     <string name="intent_sender_startactivity_text">"Spustit činnost <xliff:g id="ACTIVITY">activity</xliff:g>"</string>
     <string name="intent_sender_resource_label">"<xliff:g id="RESOURCE">Resource</xliff:g>:"</string>
     <string name="intent_sender_account_label">"Účet:"</string>
-    <string name="keyguard_pw_mod_text">"Zvolit gesto odemknutí"</string>
-    <string name="keyguard_pin_mod_text">"Změna kódu PIN"</string>
-    <string name="keyguard_label">"Uzamčení kláves"</string>
-    <string name="keyguard_sim_pin_label">"Kód PIN karty SIM"</string>
-    <string name="keyguard_password_old_password_error_text">"Původní heslo bylo zadáno nesprávně. Zkuste to znovu."</string>
-    <string name="keyguard_password_button_text">"OK"</string>
-    <string name="keyguard_password_confirm_new_label">"Potvrďte nové heslo:"</string>
-    <string name="keyguard_password_new_label">"Nové heslo:"</string>
-    <string name="keyguard_password_old_label">"Staré heslo:"</string>
-    <string name="keyguard_password_mismatch_error_text">"Zadaná hesla se neshodují. Zadejte je znovu."</string>
     <string name="proxy_clear_text">"Vymazat"</string>
     <string name="proxy_port_label">"Port"</string>
     <string name="proxy_defaultView_text">"Obnovit výchozí nastavení"</string>
@@ -160,7 +132,6 @@
     <string name="radio_info_signal_location_label">"Poloha:"</string>
     <string name="radio_info_neighboring_location_label">"Sousední identifikátor CID:"</string>
     <string name="radio_info_data_attempts_label">"Pokusy dat:"</string>
-    <string name="radio_info_imsi_label">"IMSI:"</string>
     <string name="radio_info_gprs_service_label">"Služba GPRS:"</string>
     <string name="radio_info_roaming_label">"Roaming:"</string>
     <string name="radio_info_imei_label">"IMEI:"</string>
@@ -188,15 +159,12 @@
     <string name="radio_info_smsc_label">"SMSC:"</string>
     <string name="radio_info_smsc_update_label">"Aktualizovat"</string>
     <string name="radio_info_smsc_refresh_label">"Obnovit"</string>
+    <string name="radio_info_toggle_dns_check_label">"Přepnout kontrolu DNS"</string>
     <string name="band_mode_title">"Nastavit pásmo pro GSM a UMTS"</string>
     <string name="band_mode_loading">"Načítání seznamu pásem..."</string>
     <string name="band_mode_set">"Nastavit"</string>
     <string name="band_mode_failed">"Pásmo nenastaveno."</string>
     <string name="band_mode_succeeded">"Pásmo nastaveno."</string>
-    <string name="ringer_volume_ringer_mode_label">"Režim vyzvánění"</string>
-    <string name="ringer_volume_screen_increasing_text">"Rostoucí hlasitost vyzvánění"</string>
-    <string name="ringer_volume_ringtone_label">"Vyzváněcí tón"</string>
-    <string name="ringer_volume_instructions">"Hlasitost vyzvánění nastavíte pomocí tlačítek hlasitosti."</string>
     <string name="sdcard_changes_instructions">"Změna se projeví při příštím připojení kabelu USB."</string>
     <string name="sdcard_settings_screen_mass_storage_text">"Povolit velkokapacitní paměťové zařízení USB"</string>
     <string name="sdcard_settings_total_bytes_label">"Celková paměť (bajty):"</string>
@@ -208,28 +176,13 @@
     <string name="sdcard_settings_used_bytes_label">"Obsazená paměť (bajty):"</string>
     <string name="sdcard_settings_scanning_status">"Vyhledávání mediálních souborů na kartě SD..."</string>
     <string name="sdcard_settings_read_only_status">"Karta SD byla připojena pouze pro čtení."</string>
-    <string name="sdcard_removal_alert_title">"Nebezpečné odebrání karty SD."</string>
-    <string name="sdcard_unmountable_alert_title">"Kartu SD nelze číst."</string>
-    <string name="telephony_user_label">"Uživatel:"</string>
-    <string name="telephony_server_label">"Server:"</string>
-    <string name="telephony_name_label">"Jméno:"</string>
-    <string name="telephony_mmsc_label">"MMSC:"</string>
-    <string name="telephony_apn_label">"Název AP:"</string>
-    <string name="telephony_mcc_label">"MCC:"</string>
-    <string name="telephony_port_label">"Port:"</string>
-    <string name="telephony_password_label">"Heslo:"</string>
-    <string name="telephony_proxy_label">"Proxy server:"</string>
-    <string name="telephony_mnc_label">"MNC:"</string>
-    <string name="telephony_mmsproxy_label">"Proxy MMS:"</string>
-    <string name="telephony_mmsport_label">"Port MMS:"</string>
     <string name="next_label">"Další"</string>
     <string name="language_picker_title">"Národní prostředí"</string>
     <string name="select_your_language">"Zvolte jazyk"</string>
     <string name="activity_picker_label">"Zvolit činnost"</string>
     <string name="device_info_label">"Info o zařízení"</string>
     <string name="battery_info_label">"Info o baterii"</string>
-    <!-- no translation found for battery_history_label (8242244969757414501) -->
-    <skip />
+    <string name="battery_history_label">"Historie baterie"</string>
     <string name="display_label">"Zobrazení"</string>
     <string name="phone_info_label">"Info o telefonu"</string>
     <string name="sd_card_settings_label">"Karta SD"</string>
@@ -264,23 +217,12 @@
     <string name="bluetooth_settings_summary">"Umožňuje spravovat připojení, nastavit název zařízení a viditelnost"</string>
     <string name="bluetooth_pin_entry">"Požadavek na párování zařízení Bluetooth"</string>
     <string name="bluetooth_device_info">"Info o zařízení Bluetooth"</string>
-    <string name="bluetooth_pairing_msg">"Párování..."</string>
     <string name="bluetooth_enter_pin_msg">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g>"\n\n"Párování začnete zadáním kódu PIN."\n"(Zkuste 0000 nebo 1234.)"</string>
     <string name="bluetooth_error_title">"Upozornění"</string>
     <string name="bluetooth_pairing_error_message">"Při párování se zařízením <xliff:g id="DEVICE_NAME">%1$s</xliff:g> došlo k potížím."</string>
-    <string name="bluetooth_pairing_alternate_error_message">"Při pokusu o párování se zařízením <xliff:g id="DEVICE_NAME">%1$s</xliff:g> došlo k chybě. Zkuste jiný kód PIN."</string>
     <string name="bluetooth_pairing_pin_error_message">"Při párování se zařízením <xliff:g id="DEVICE_NAME">%1$s</xliff:g> došlo k potížím. Zadaný kód PIN je nesprávný."</string>
     <string name="bluetooth_connecting_error_message">"Při připojování k zařízení <xliff:g id="DEVICE_NAME">%1$s</xliff:g> došlo k potížím."</string>
-    <string name="bluetooth_new_data">"Zadejte nové údaje"</string>
-    <string name="bluetooth_new_data_confirm">"OK"</string>
-    <string name="bluetooth_new_data_cancel">"Zrušit"</string>
-    <string name="bluetooth_scan_for_new_devices">"Vyhledávání nových zařízení..."</string>
-    <string name="bluetooth_discoverability_panel_title">"Nastavit režim"</string>
-    <string name="bluetooth_discoverable">"Zařízení je viditelné v intervalu <xliff:g id="DISCOVERABLE_TIME_PERIOD">%1$s</xliff:g> s"</string>
-    <string name="bluetooth_connectable">"Pouze připojitelná zařízení"</string>
-    <string name="bluetooth_neither">"Zařízení není viditelné a nelze se k němu připojit"</string>
     <string name="bluetooth_preference_scan_title">"Vyhledat zařízení"</string>
-    <string name="bluetooth_preference_scan_summary">"Vyhledá zařízení pro párování"</string>
     <string name="bluetooth_device_context_connect">"Připojit"</string>
     <string name="bluetooth_device_context_disconnect">"Odpojit"</string>
     <string name="bluetooth_device_context_pair_connect">"Párovat a připojit"</string>
@@ -372,18 +314,15 @@
     <string name="wifi_setting_num_channels_summary">"Umožňuje nastavit počet použitých kanálů"</string>
     <string name="wifi_setting_num_channels_error">"Při nastavení regulační domény došlo k chybě."</string>
     <string name="wifi_setting_num_channels_channel_phrase">"Kanály: <xliff:g id="NUM_CHANNELS">%1$d</xliff:g>"</string>
-    <!-- no translation found for wifi_setting_sleep_policy_title (1367731352485585528) -->
-    <skip />
-    <!-- no translation found for wifi_setting_sleep_policy_summary (7573693311804602041) -->
-    <skip />
-    <!-- no translation found for wifi_setting_sleep_policy_error (5103670439972135148) -->
-    <skip />
+    <string name="wifi_setting_sleep_policy_title">"Zásady používání sítě Wi-Fi v režimu spánku"</string>
+    <string name="wifi_setting_sleep_policy_summary">"Určit, kdy přepnout ze sítě Wi-Fi na mobilní datový přenos"</string>
+    <string name="wifi_setting_sleep_policy_error">"Při nastavení zásad pro režim spánku došlo k problému."</string>
     <string name="wifi_advanced_mac_address_title">"Adresa MAC"</string>
     <string name="fragment_status_scanning">"Vyhledávání..."</string>
     <string name="fragment_status_connecting">"Připojování k síti <xliff:g id="NETWORK_NAME">%1$s</xliff:g>..."</string>
     <string name="fragment_status_authenticating">"Ověřování v síti <xliff:g id="NETWORK_NAME">%1$s</xliff:g>..."</string>
     <string name="fragment_status_obtaining_ip">"Získávání adresy IP ze sítě <xliff:g id="NETWORK_NAME">%1$s</xliff:g>..."</string>
-    <string name="fragment_status_connected">"Připojeno k síti <xliff:g id="NETWORK_NAME">%1$s</xliff:g>."</string>
+    <string name="fragment_status_connected">"Připojeno k síti <xliff:g id="NETWORK_NAME">%1$s</xliff:g>"</string>
     <string name="fragment_status_disconnecting">"Odpojování od sítě <xliff:g id="NETWORK_NAME">%1$s</xliff:g>..."</string>
     <string name="fragment_status_disconnected">"Odpojeno"</string>
     <string name="fragment_status_failed">"Připojení se nezdařilo."</string>
@@ -420,32 +359,19 @@
     <string name="sound_effects_enable_title">"Výběr se zvuky"</string>
     <string name="sound_effects_enable_summary_on">"Výběr na obrazovce je provázen zvuky"</string>
     <string name="sound_effects_enable_summary_off">"Výběr na obrazovce je provázen zvuky"</string>
+    <string name="play_media_notification_sounds_enable_title">"Oznámení karty SD"</string>
+    <string name="play_media_notification_sounds_enable_summary_on">"Vypnout zvuky oznámení karty SD"</string>
+    <string name="play_media_notification_sounds_enable_summary_off">"Povolit zvuky oznámení karty SD"</string>
     <string name="sync_settings">"Synchronizace dat"</string>
     <string name="sync_settings_summary">"Umožňuje vybrat aplikace pro synchronizaci"</string>
-    <string name="sync_settings_header_general_settings">"Obecná nastavení synchronizace"</string>
-    <string name="sync_settings_header_application_settings">"Nastavení synchronizace aplikace"</string>
-    <string name="sync_too_many_deletes">"Byl překročen limit mazání."</string>
-    <string name="sync_automatically">"Automatická synchronizace"</string>
-    <string name="sync_enabled">"Data jsou synchronizována automaticky"</string>
-    <string name="sync_disabled">"Umožňuje automatickou synchronizaci dat"</string>
-    <string name="sync_menu_sync_now">"Synchronizovat nyní"</string>
-    <string name="sync_menu_sync_cancel">"Zrušit synchronizaci"</string>
-    <string name="sync_gmail">"Gmail"</string>
-    <string name="sync_calendar">"Kalendář"</string>
-    <string name="sync_contacts">"Kontakty"</string>
-    <string name="sync_too_many_deletes_desc">"Smazané předměty: <xliff:g id="NUMBER_OF_DELETED_ITEMS">%1$d</xliff:g>, typ synchronizace: <xliff:g id="TYPE_OF_SYNC">%2$s</xliff:g>, účet: <xliff:g id="ACCOUNT_NAME">%3$s</xliff:g>. Jaká akce má být provedena?"</string>
-    <string name="sync_really_delete">"Smazat položky."</string>
-    <string name="sync_undo_deletes">"Vrátit mazání zpět."</string>
-    <string name="sync_do_nothing">"Neprovádět akci."</string>
-    <string name="sync_is_failing">"Nastaly potíže se synchronizací. Služba bude brzy obnovena."</string>
-    <string name="sync_plug"><font fgcolor="#ffffffff">"Vítá vás aplikace Google Sync"</font>" "\n"Nový pohled na synchronizaci dat v režii Google. Poskytuje vám přístup ke kontaktům, schůzkám a dalším náležitostem, ať jste kdekoli."</string>
     <string name="display_settings">"Nastavení zobrazení"</string>
     <string name="animations_title">"Animace"</string>
     <string name="animations_summary_on">"Zobrazit animace otevírání a zavírání oken"</string>
     <string name="animations_summary_off">"Animuje otevírání a zavírání oken"</string>
     <string name="brightness">"Jas"</string>
+    <string name="brightness_summary">"Nastavte jas displeje"</string>
     <string name="screen_timeout">"Interval vypnutí obrazovky"</string>
-    <string name="dim_screen">"Ztlumení obrazovky"</string>
+    <string name="screen_timeout_summary">"Upravte prodlevu, po které se obrazovka automaticky vypne"</string>
     <string name="sim_lock_settings">"Nastavení zámku karty SIM"</string>
     <string name="sim_lock_settings_category">"Nastavení zámku karty SIM"</string>
     <string name="sim_lock_settings_title">"Zámek karty SIM"</string>
@@ -482,10 +408,8 @@
     <string name="storage_settings_title">"Karta SD a paměť telefonu"</string>
     <string name="storage_settings_summary">"Odpojuje kartu SD a zobrazuje dostupnou paměť"</string>
     <string name="status_number">"Telefonní číslo"</string>
-    <!-- no translation found for status_network_type (3279383550222116235) -->
-    <skip />
-    <!-- no translation found for status_data_state (5503181397066522950) -->
-    <skip />
+    <string name="status_network_type">"Typ mobilní sítě"</string>
+    <string name="status_data_state">"Stav mobilní sítě"</string>
     <string name="status_service_state">"Stav služby"</string>
     <string name="status_signal_strength">"Síla signálu"</string>
     <string name="status_roaming">"Roaming"</string>
@@ -499,16 +423,19 @@
     <string name="sd_memory">"Karta SD"</string>
     <string name="memory_available">"Dostupná paměť"</string>
     <string name="memory_size">"Celková paměť"</string>
-    <string name="sd_eject">"Odpojit či vysunout kartu SD"</string>
+    <string name="sd_eject">"Odpojit kartu SD"</string>
+    <string name="sd_eject_summary">"Odpojit kartu SD za účelem bezpečného odebrání"</string>
+    <string name="sd_format">"Formátovat kartu SD"</string>
+    <string name="sd_format_summary">"Formátovat (vymazat) kartu SD"</string>
     <string name="sd_unavailable">"Nedostupný údaj"</string>
-    <string name="read_only">"(Pouze pro čtení)"</string>
+    <string name="read_only">" (Pouze pro čtení)"</string>
     <string name="battery_status_title">"Stav baterie"</string>
     <string name="battery_level_title">"Stav baterie"</string>
-    <string name="apn_settings">"Názvy AP"</string>
+    <string name="apn_settings">"Přístupové body"</string>
     <string name="apn_edit">"Upravit přístupový bod"</string>
     <string name="apn_not_set">"&lt;Nenastaveno&gt;"</string>
     <string name="apn_name">"Jméno"</string>
-    <string name="apn_apn">"Název AP"</string>
+    <string name="apn_apn">"Název přístupvého bodu (APN)"</string>
     <string name="apn_http_proxy">"Proxy"</string>
     <string name="apn_http_port">"Port"</string>
     <string name="apn_user">"Uživatelské jméno"</string>
@@ -519,11 +446,11 @@
     <string name="apn_mms_port">"Port systému MMS"</string>
     <string name="apn_mcc">"MCC"</string>
     <string name="apn_mnc">"MNC"</string>
-    <string name="apn_type">"Typ názvu AP"</string>
-    <string name="menu_delete">"Smazat název přístupového bodu"</string>
-    <string name="menu_new">"Nový název AP"</string>
+    <string name="apn_type">"typ APN"</string>
+    <string name="menu_delete">"Smazat APN"</string>
+    <string name="menu_new">"Nový APN"</string>
     <string name="menu_save">"Uložit"</string>
-    <string name="menu_cancel">"Zahodit"</string>
+    <string name="menu_cancel">"Zrušit"</string>
     <string name="error_title">"Upozornění"</string>
     <string name="error_name_empty">"Pole Název nemůže být prázdné."</string>
     <string name="error_apn_empty">"Název AP nemůže být prázdný."</string>
@@ -535,13 +462,21 @@
     <string name="master_clear_button_text">"Resetovat telefon"</string>
     <string name="master_clear_final_desc">"Opravdu chcete resetovat telefon? Smažete veškerá data a aplikace. Proces nelze zvrátit."</string>
     <string name="master_clear_final_button_text">"Odstranit vše"</string>
-    <string name="master_clear_gesture_prompt">"Proveďte gesto odemknutí"</string>
-    <string name="master_clear_gesture_explanation">"Chcete-li potvrdit reset telefonu, musíte provést gesto odemknutí."</string>
+    <string name="master_clear_gesture_prompt">"Nakreslete své bezpečnostní gesto"</string>
+    <string name="master_clear_gesture_explanation">"Chcete-li potvrdit resetování telefonu, musíte nakreslit bezpečnostní gesto."</string>
     <string name="master_clear_failed">"Pokus o reset se nezdařil, protože služba System Clear není dostupná."</string>
+    <string name="media_format_title">"Formátovat kartu SD"</string>
+    <string name="media_format_summary">"Vymaže všechna data na kartě SD"</string>
+    <string name="media_format_desc">"Tato akce smaže kartu SD v telefonu. VŠECHNA data na kartě budou ztracena."</string>
+    <string name="media_format_button_text">"Formátovat kartu SD"</string>
+    <string name="media_format_final_desc">"Formátování karty SD. Chcete smazat všechna svoje média? Akci nelze vrátit zpět."</string>
+    <string name="media_format_final_button_text">"Smazat vše"</string>
+    <string name="media_format_gesture_prompt">"Nakreslete své bezpečnostní gesto"</string>
+    <string name="media_format_gesture_explanation">"Formátování karty SD je potřeba potvrdit nakreslením bezpečnostního gesta."</string>
     <string name="call_settings_title">"Nastavení hovorů"</string>
     <string name="call_settings_summary">"Umožňuje nastavit hlasovou schránku, přesměrování hovorů, další hovory na lince a ID volajícího"</string>
     <string name="network_settings_title">"Mobilní sítě"</string>
-    <string name="network_settings_summary">"Umožňuje nastavit možnosti roamingu, sítí a názvy AP"</string>
+    <string name="network_settings_summary">"Umožňuje nastavit možnosti roamingu, sítí a názvy přístupových bodů"</string>
     <string name="location_title">"Zdroje polohy"</string>
     <string name="location_network_based">"Zaměření přes bezdrátové sítě"</string>
     <string name="location_networks_disabled">"Zobrazuje polohu v aplikacích (jako Mapy) pomocí bezdrátových sítí"</string>
@@ -559,49 +494,54 @@
     <string name="settings_license_activity_title">"Licence open source"</string>
     <string name="settings_license_activity_unavailable">"Při načítání licencí došlo k chybě."</string>
     <string name="settings_license_activity_loading">"Načítání..."</string>
-    <string name="lock_settings_title">"Gesto odemknutí obrazovky"</string>
-    <string name="lockpattern_change_lock_pattern_label">"Změna gesta odemknutí"</string>
+    <string name="lock_settings_title">"Gesto pro odemknutí obrazovky"</string>
+    <string name="lockpattern_change_lock_pattern_label">"Změna bezpečnostního gesta"</string>
     <string name="lockpattern_need_to_unlock">"Potvrďte uložené gesto"</string>
     <string name="lockpattern_need_to_unlock_wrong">"Zkuste to prosím znovu:"</string>
-    <string name="lockpattern_recording_intro_header">"Proveďte gesto odemknutí"</string>
+    <string name="lockpattern_recording_intro_header">"Nakreslete své bezpečnostní gesto."</string>
     <string name="lockpattern_recording_intro_footer">"Nápovědu zobrazíte stisknutím klávesy Menu."</string>
     <string name="lockpattern_recording_inprogress">"Na závěr zdvihněte prst z obrazovky."</string>
     <string name="lockpattern_recording_incorrect_too_short">"Minimální počet spojených teček je <xliff:g id="NUMBER">%d</xliff:g>. Zkuste to znovu:"</string>
     <string name="lockpattern_pattern_entered_header">"Gesto bylo zaznamenáno."</string>
-    <string name="lockpattern_need_to_confirm">"Proveďte gesto znovu pro potvrzení:"</string>
-    <string name="lockpattern_pattern_confirmed_header">"Nové gesto odemknutí:"</string>
+    <string name="lockpattern_need_to_confirm">"Pro potvrzení nakreslete gesto znovu:"</string>
+    <string name="lockpattern_pattern_confirmed_header">"Nové bezpečnostní gesto:"</string>
     <string name="lockpattern_confirm_button_text">"Potvrdit"</string>
     <string name="lockpattern_restart_button_text">"Nakreslit znovu"</string>
     <string name="lockpattern_retry_button_text">"Zkusit znovu"</string>
     <string name="lockpattern_continue_button_text">"Pokračovat"</string>
-    <string name="lockpattern_settings_title">"Gesto odemknutí"</string>
+    <string name="lockpattern_settings_title">"Bezpečnostní gesto"</string>
     <string name="lockpattern_settings_enable_title">"Požadovat gesto"</string>
-    <string name="lockpattern_settings_enable_summary">"Obrazovku je nutné odemknout gestem ruky"</string>
-    <string name="lockpattern_settings_enable_visible_pattern_title">"Použití viditelného vzoru"</string>
+    <string name="lockpattern_settings_enable_summary">"Obrazovku je nutné odemknout pomocí bezpečnostního gesta"</string>
+    <string name="lockpattern_settings_enable_visible_pattern_title">"Použití viditelného gesta"</string>
     <string name="lockpattern_settings_enable_tactile_feedback_title">"Použití dotykového ověření"</string>
-    <string name="lockpattern_settings_choose_lock_pattern">"Nastavení gesta odemknutí"</string>
-    <string name="lockpattern_settings_change_lock_pattern">"Změna gesta odemknutí"</string>
-    <string name="lockpattern_settings_help_how_to_record">"Gesto odemknutí obrazovky proveďte tímto způsobem"</string>
+    <string name="lockpattern_settings_choose_lock_pattern">"Nastavení bezpečnostního gesta"</string>
+    <string name="lockpattern_settings_change_lock_pattern">"Změna bezpečnostního gesta"</string>
+    <string name="lockpattern_settings_help_how_to_record">"Bezpečnostní gesto nakreslíte takto"</string>
     <string name="lockpattern_too_many_failed_confirmation_attempts_header">"Příliš mnoho neplatných pokusů."</string>
     <string name="lockpattern_too_many_failed_confirmation_attempts_footer">"Sekundy zbývající do dalšího pokusu: <xliff:g id="NUMBER">%d</xliff:g>."</string>
     <string name="skip_button_label">"Zrušit"</string>
     <string name="next_button_label">"Další"</string>
     <string name="lock_title">"Zabezpečení telefonu"</string>
-    <string name="lock_intro_message"><font size="17">"Chraňte svůj telefon před nepovoleným použitím vytvořením osobního gesta odemknutí. "\n<font height="17">\n</font><b>"1"</b>"  Na dalším snímku uvidíte příklad takového gesta. "\n<font height="17">\n</font><b>"2"</b>"  Až budete připraveni, proveďte své osobní gesto odemknutí. Vyzkoušejte více gest, ale vždy spojte alespoň čtyři tečky. "\n<font height="17">\n</font><b>"3"</b>"  Opakujte gesto pro potvrzení. "\n<font height="17">\n</font><b>"Jste připraveni začít? Zvolte tlačítko Další "</b>". "\n<font height="3">\n</font>"Chcete-li ponechat telefon nezabezpečený, zvolte tlačítko Storno."</font></string>
+    <string name="lock_intro_message"><font size="17">"Chraňte svůj telefon před nepovoleným použitím vytvořením osobního bezpečnostního gesta. "\n<font height="17">\n</font><b>"1"</b>"  Příklad takového gesta uvidíte na dalším snímku. "\n<font height="17">\n</font><b>"2"</b>"  Až budete připraveni, nakreslete své osobní bezpečnostní gesto. Vyzkoušejte více gest, ale vždy spojte alespoň čtyři tečky. "\n<font height="17">\n</font><b>"3"</b>"  Chcete-li gesto potvrdit, zopakujte je. "\n<font height="17">\n</font><b>"Jste připraveni začít? Zvolte tlačítko Další "</b>". "\n<font height="3">\n</font>"Chcete-li ponechat telefon nezabezpečený, zvolte tlačítko Zrušit."</font></string>
     <string name="lock_example_title">"Příklad gesta"</string>
-    <string name="lock_example_message">"Spojte alespoň čtyři tečky."\n" "\n"Až budete připraveni provést vlastní gesto, zvolte tlačítko Další."</string>
+    <string name="lock_example_message">"Spojte alespoň čtyři tečky."\n" "\n"Až budete připraveni nakreslit vlastní gesto, zvolte tlačítko Další."</string>
     <string name="manageapplications_settings_title">"Správa aplikací"</string>
+    <string name="manageapplications_settings_summary">"Spravovat a odebrat instalované aplikace"</string>
     <string name="applications_settings">"Aplikace"</string>
     <string name="applications_settings_summary">"Umožňuje spravovat aplikace a nastavit klávesové zkratky rychlého spuštění"</string>
     <string name="applications_settings_header">"Nastavení aplikace"</string>
     <string name="install_applications">"Neznámé zdroje"</string>
     <string name="install_unknown_applications">"Povoluje instalaci aplikací mimo službu Market"</string>
     <string name="install_all_warning">"Váš telefon a osobní údaje jsou zranitelnější vůči útoku aplikací z neznámých zdrojů. Vyjadřujete souhlas, že nesete osobní odpovědnost za jakékoli škody způsobené na vašem telefonu nebo za ztrátu dat v důsledku používání těchto aplikací."</string>
-    <string name="manage_applications_title">"Spravovat aplikace"</string>
     <string name="application_info_label">"Info o aplikaci"</string>
     <string name="storage_label">"Paměť"</string>
     <string name="auto_launch_label">"Spustit jako výchozí"</string>
     <string name="permissions_label">"Povolení"</string>
+    <string name="cache_header_label">"Mezipaměť"</string>
+    <string name="clear_cache_btn_text">"Vymazat mezipaměť"</string>
+    <string name="cache_size_label">"Mezipaměť"</string>
+    <string name="controls_label">"Ovládací prvky"</string>
+    <string name="force_stop">"Vynutit ukončení"</string>
     <string name="total_size_label">"Celkem"</string>
     <string name="application_size_label">"Aplikace"</string>
     <string name="data_size_label">"Data"</string>
@@ -614,6 +554,8 @@
     <string name="sort_order_alpha">"Řadit"</string>
     <string name="sort_order_size">"Řadit podle velikosti"</string>
     <string name="manage_space_text">"Správa paměti"</string>
+    <string name="filter">"Filtrovat"</string>
+    <string name="filter_dlg_title">"Vyberte možnosti filtru"</string>
     <string name="filter_apps_all">"Všechny"</string>
     <string name="filter_apps_third_party">"Aplikace třetí strany"</string>
     <string name="filter_apps_running">"Spuštěné"</string>
@@ -627,46 +569,36 @@
     <string name="app_not_found_dlg_text">"Aplikaci se nepodařilo najít na seznamu nainstalovaných aplikací."</string>
     <string name="clear_data_failed">"Nepodařilo se vymazat data aplikace."</string>
     <string name="security_settings_desc">"Tato aplikace má přístup k následujícím položkám telefonu:"</string>
-    <string name="computing_size">"Stále se počítá..."</string>
+    <string name="computing_size">"Probíhá výpočet…"</string>
     <string name="invalid_size_value">"Nepodařilo se určit velikost balíčku"</string>
     <string name="empty_list_msg">"Žádné aplikace třetí strany nejsou nainstalovány."</string>
-    <string name="cache_header_label">"Mezipaměť"</string>
-    <string name="clear_cache_btn_text">"Vymazat mezipaměť"</string>
-    <string name="cache_size_label">"Mezipaměť"</string>
     <string name="language_settings">"Národní prostředí a text"</string>
     <string name="language_settings_summary">"Nastavení národního prostředí (jazyka a oblasti) a možností zadávání a automatických oprav textu"</string>
     <string name="language_category">"Nastavení národního prostředí"</string>
     <string name="text_category">"Nastavení textu"</string>
     <string name="phone_language">"Volba národního prostředí"</string>
+    <string name="phone_language_summary">"Vyberte jazyk a oblast"</string>
     <string name="auto_replace">"Automatické nahrazování"</string>
     <string name="auto_replace_summary">"Opravuje pravopisné chyby"</string>
     <string name="auto_caps">"Automatická velká písmena"</string>
     <string name="auto_caps_summary">"První písmeno ve větě je automaticky velké"</string>
     <string name="auto_punctuate">"Automatická interpunkce"</string>
+    <string name="hardkeyboard_category">"Nastavení fyzické klávesnice"</string>
     <string name="auto_punctuate_summary">"Znak „.“ lze vložit dvěma stisky klávesy Mezerník."</string>
     <string name="show_password">"Zobrazování hesel"</string>
     <string name="show_password_summary">"Zadávané heslo je zobrazováno"</string>
-    <!-- no translation found for user_dict_settings_titlebar (765659257455000490) -->
-    <skip />
-    <!-- no translation found for user_dict_settings_title (8357027437499042191) -->
-    <skip />
-    <!-- no translation found for user_dict_settings_summary (2460427065601355471) -->
-    <skip />
-    <!-- no translation found for user_dict_settings_add_menu_title (4056762757149923551) -->
-    <skip />
-    <!-- no translation found for user_dict_settings_add_dialog_title (4702613990174126482) -->
-    <skip />
-    <!-- no translation found for user_dict_settings_context_menu_edit_title (2210564879320004837) -->
-    <skip />
-    <!-- no translation found for user_dict_settings_context_menu_delete_title (9140703913776549054) -->
-    <skip />
-    <!-- no translation found for user_dict_settings_empty_text (6209268025109242806) -->
-    <skip />
+    <string name="user_dict_settings_titlebar">"Uživatelský slovník"</string>
+    <string name="user_dict_settings_title">"Uživatelský slovník"</string>
+    <string name="user_dict_settings_summary">"Přidat nebo odebrat slova z uživatelského slovníku"</string>
+    <string name="user_dict_settings_add_menu_title">"Přidat"</string>
+    <string name="user_dict_settings_add_dialog_title">"Přidat do slovníku"</string>
+    <string name="user_dict_settings_context_menu_edit_title">"Upravit"</string>
+    <string name="user_dict_settings_context_menu_delete_title">"Smazat"</string>
+    <string name="user_dict_settings_empty_text">"V uživatelském slovníku nejsou žádná slova. Slovo můžete přidat pomocí nabídky."</string>
     <string name="testing">"Testování"</string>
     <string name="testing_phone_info">"Info o telefonu"</string>
     <string name="testing_battery_info">"Info o baterii"</string>
-    <!-- no translation found for testing_battery_history (3043329445810695647) -->
-    <skip />
+    <string name="testing_battery_history">"Historie baterie"</string>
     <string name="quick_launch_title">"Rychlé spuštění"</string>
     <string name="quick_launch_summary">"Umožňuje nastavit klávesové zkratky pro spouštění aplikací"</string>
     <string name="quick_launch_assign_application">"Přiřadit aplikaci"</string>
@@ -680,8 +612,7 @@
     <string name="quick_launch_display_mode_shortcuts">"Klávesové zkratky"</string>
     <string name="input_methods_settings_title">"Zadávání textu"</string>
     <string name="input_methods_settings_summary">"Správa možností zadávání textu"</string>
-    <!-- no translation found for input_methods_settings_label_format (4882768027634191074) -->
-    <skip />
+    <string name="input_methods_settings_label_format">"%s: nastavení"</string>
     <string name="development_settings_title">"Vývoj"</string>
     <string name="development_settings_summary">"Umožňuje nastavit možnosti pro vývoj aplikace"</string>
     <string name="enable_adb">"Ladění USB"</string>
@@ -690,4 +621,50 @@
     <string name="keep_screen_on_summary">"Obrazovka se při nabíjení nepřepne do režimu spánku"</string>
     <string name="allow_mock_location">"Povoluje simulované polohy"</string>
     <string name="allow_mock_location_summary">"Povoluje simulované polohy"</string>
+    <!-- no translation found for gadget_picker_title (98374951396755811) -->
+    <skip />
+    <!-- no translation found for widget_picker_title (9130684134213467557) -->
+    <skip />
+    <string name="battery_history_details_for">"Podrobnosti pro UID %d"</string>
+    <string name="battery_history_uid">"UID <xliff:g id="USER_ID">%1$d</xliff:g>"</string>
+    <string name="battery_history_network_usage">"Podrobnosti o používání sítě aplikací <xliff:g id="APP_NAME">%1$s</xliff:g>:"</string>
+    <string name="battery_history_bytes_received">"Přijato bytů: <xliff:g id="BYTES">%1$d</xliff:g>"</string>
+    <string name="battery_history_bytes_sent">"Odesláno bytů: <xliff:g id="BYTES">%1$d</xliff:g>"</string>
+    <string name="battery_history_bytes_total">"Celkem bytů: <xliff:g id="BYTES">%1$d</xliff:g>"</string>
+    <string name="battery_history_cpu_usage">"Podrobnosti o využívání CPU aplikací <xliff:g id="APP_NAME">%1$s</xliff:g>:"</string>
+    <string name="battery_history_user_time">"Čas uživatele:"</string>
+    <string name="battery_history_system_time">"Systémový čas:"</string>
+    <string name="battery_history_total_time">"Celková doba:"</string>
+    <string name="battery_history_starts">"Počet spuštění: <xliff:g id="STARTS">%1$d</xliff:g>"</string>
+    <string name="battery_history_days">"<xliff:g id="DAYS">%1$d</xliff:g> dní, <xliff:g id="HOURS">%2$d</xliff:g> hod., <xliff:g id="MINUTES">%3$d</xliff:g> min., <xliff:g id="SECONDS">%4$d</xliff:g> s"</string>
+    <string name="battery_history_hours">"<xliff:g id="HOURS">%1$d</xliff:g> hod., <xliff:g id="MINUTES">%2$d</xliff:g> min., <xliff:g id="SECONDS">%3$d</xliff:g> s"</string>
+    <string name="battery_history_minutes">"<xliff:g id="MINUTES">%1$d</xliff:g> min., <xliff:g id="SECONDS">%2$d</xliff:g> s"</string>
+    <string name="battery_history_seconds">"<xliff:g id="SECONDS">%1$d</xliff:g> s"</string>
+    <string name="battery_history_packages_sharing_this_uid">"Balíčky sdílející toto UID:"</string>
+    <string name="battery_history_no_data">"Údaje o využití baterie nejsou k dispozici"</string>
+    <string name="battery_history_sensor">"Senzor:"</string>
+    <!-- no translation found for battery_history_wakelock (608683447522396293) -->
+    <skip />
+    <string name="battery_history_used_by_packages">"Senzor je používán následujícími balíčky:"</string>
+    <string name="battery_history_sensor_usage">"Použito <xliff:g id="COUNT">%1$d</xliff:g>krát balíčkem <xliff:g id="PACKAGE">%2$s</xliff:g>"</string>
+    <string name="battery_history_sensor_usage_multi">"Použito <xliff:g id="COUNT">%1$d</xliff:g>krát některým z následujících:"</string>
+    <!-- no translation found for battery_history_awake_label (8449792868990080882) -->
+    <skip />
+    <!-- no translation found for battery_history_screen_on_label (1848936521786339362) -->
+    <skip />
+    <!-- no translation found for battery_history_phone_on_label (700191958853142297) -->
+    <skip />
+    <!-- no translation found for battery_history_awake (4350886665719031057) -->
+    <skip />
+    <string name="battery_history_screen_on">"Doba se zapnutou obrazovkou:"</string>
+    <!-- no translation found for battery_history_phone_on (4891504401623839532) -->
+    <skip />
+    <string name="battery_history_screen_on_battery">"Na baterii:"</string>
+    <string name="battery_history_screen_on_plugged">"Připojeno:"</string>
+    <string name="usage_stats_label">"Statistika použití"</string>
+    <string name="testing_usage_stats">"Statistika použití"</string>
+    <string name="display_order_text">"Řadit podle:"</string>
+    <string name="app_name_label">"Aplikace"</string>
+    <string name="launch_count_label">"Počet"</string>
+    <string name="usage_time_label">"Doba použití"</string>
 </resources>

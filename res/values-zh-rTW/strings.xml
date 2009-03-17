@@ -16,9 +16,6 @@
 <resources xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
     <string name="device_info_default">"未知的"</string>
-    <string name="device_info_uptime">"已開機時間"</string>
-    <string name="device_info_awaketime">"清醒時間"</string>
-    <string name="device_info_asleeptime">"睡眠時間"</string>
     <string name="turn_on_radio">"開啟無線通訊"</string>
     <string name="turn_off_radio">"關閉無線通訊"</string>
     <string name="turn_on_qxdm">"啟用 QXDM SD 記錄"</string>
@@ -52,14 +49,12 @@
     <string name="radioInfo_lac">"LAC"</string>
     <string name="radioInfo_cid">"CID"</string>
     <string name="sdcard_unmount">"卸載 SD 卡"</string>
+    <string name="sdcard_format">"將 SD 卡格式化"</string>
     <string name="small_font">"小"</string>
     <string name="medium_font">"中"</string>
     <string name="large_font">"大"</string>
     <string name="font_size_save">"確定"</string>
     <string name="sdcard_setting">"SD 卡"</string>
-    <string name="screen_off_timeout_label">"充電時不逾時"</string>
-    <string name="stay_on">"充電時螢幕永遠開啟"</string>
-    <string name="app_launcher_newView_text">"新的程式啟動器"</string>
     <string name="battery_info_status_label">"電池狀態："</string>
     <string name="battery_info_scale_label">"電池計量："</string>
     <string name="battery_info_level_label">"電池計量："</string>
@@ -87,11 +82,6 @@
     <string name="battery_info_health_over_voltage">"電壓過高"</string>
     <string name="battery_info_health_unspecified_failure">"未知的錯誤"</string>
     <string name="bluetooth">"藍牙"</string>
-    <string name="bluetooth_stopping">"停止藍牙中..."</string>
-    <string name="bluetooth_disabled">"開啟藍牙"</string>
-    <!-- no translation found for bluetooth_enabled (314506563815464155) -->
-    <skip />
-    <string name="bluetooth_enabling">"開啟藍牙中..."</string>
     <string name="bluetooth_visibility">"無法測得"</string>
     <string name="bluetooth_is_discoverable">"<xliff:g id="DISCOVERABLE_TIME_PERIOD">%1$s</xliff:g> 秒無法測得..."</string>
     <string name="bluetooth_not_discoverable">"設定裝置為可偵測"</string>
@@ -99,53 +89,35 @@
     <string name="bluetooth_device_name">"裝置名稱"</string>
     <string name="bluetooth_name_not_set">"未設定名稱，使用帳戶名稱"</string>
     <string name="bluetooth_scan_for_devices">"掃描裝置"</string>
-    <string name="bluetooth_clear_list">"清除裝置清單"</string>
     <string name="bluetooth_disconnect_blank">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g>即將斷線。"</string>
     <string name="bluetooth_connected">"已連線"</string>
     <string name="bluetooth_disconnected">"連線中斷"</string>
     <string name="bluetooth_disconnecting">"連線中斷..."</string>
     <string name="bluetooth_connecting">"連線中..."</string>
-    <!-- no translation found for bluetooth_unknown (644716244548801421) -->
+    <!-- no translation found for bluetooth_unknown (1905151516611093010) -->
     <skip />
     <string name="bluetooth_not_connected">"與此裝置配對"</string>
-    <string name="bluetooth_failed_to_enable">"無法開啟藍牙"</string>
     <string name="bluetooth_pairing">"配對中..."</string>
-    <string name="failed_to_pair">"無法與<xliff:g id="DEVICE_NAME">%1$s</xliff:g>配對。"</string>
-    <string name="failed_to_connect">"無法連線到 <xliff:g id="DEVICE_NAME">%1$s</xliff:g>。"</string>
-    <string name="bluetooth_paired">"已配對"</string>
-    <string name="bluetooth_paired_not_nearby">"已配對"</string>
+    <!-- no translation found for bluetooth_paired (1247541089000057726) -->
+    <skip />
     <string name="bluetooth_device">"免持/頭戴式"</string>
-    <string name="bluetooth_disconnect">"斷線"</string>
-    <string name="bluetooth_connect">"連線"</string>
-    <string name="bluetooth_unpair">"解除配對"</string>
-    <string name="bluetooth_pair">"配對"</string>
     <string name="progress_scanning">"掃描中"</string>
     <string name="bluetooth_notif_ticker">"藍牙配對要求"</string>
     <string name="bluetooth_notif_title">"配對要求"</string>
-    <string name="bluetooth_notif_message">"選取要配對的裝置"</string>
+    <string name="bluetooth_notif_message">"選取要配對的裝置 "</string>
     <string name="date_and_time">"日期與時間設定"</string>
     <string name="date_time_12_hour_sample">"下午 1:00"</string>
     <string name="date_time_24_hour_sample">"13:00"</string>
     <string name="choose_timezone">"選取時區"</string>
     <string name="display_preview_label">"預覽："</string>
     <string name="display_font_size_label">"字型大小："</string>
-    <!-- no translation found for intent_sender_data_label (6332324780477289261) -->
+    <!-- no translation found for intent_sender_data_label (8363026381459131554) -->
     <skip />
     <string name="intent_sender_sendbroadcast_text">"傳送 <xliff:g id="BROADCAST">broadcast</xliff:g>"</string>
     <string name="intent_sender_action_label">"<xliff:g id="ACTION">Action</xliff:g>："</string>
     <string name="intent_sender_startactivity_text">"開始 <xliff:g id="ACTIVITY">activity</xliff:g>"</string>
     <string name="intent_sender_resource_label">"<xliff:g id="RESOURCE">Resource</xliff:g>："</string>
     <string name="intent_sender_account_label">"帳戶："</string>
-    <string name="keyguard_pw_mod_text">"選取鎖定圖形"</string>
-    <string name="keyguard_pin_mod_text">"變更 PIN"</string>
-    <string name="keyguard_label">"鍵盤鎖"</string>
-    <string name="keyguard_sim_pin_label">"SIM PIN"</string>
-    <string name="keyguard_password_old_password_error_text">"您輸入的舊密碼不正確。請再試一次。"</string>
-    <string name="keyguard_password_button_text">"確定"</string>
-    <string name="keyguard_password_confirm_new_label">"確認新密碼："</string>
-    <string name="keyguard_password_new_label">"新的密碼："</string>
-    <string name="keyguard_password_old_label">"舊的密碼："</string>
-    <string name="keyguard_password_mismatch_error_text">"兩組密碼不符。請再輸入一次。"</string>
     <string name="proxy_clear_text">"清除"</string>
     <string name="proxy_port_label">"連接埠"</string>
     <string name="proxy_defaultView_text">"還原預設值"</string>
@@ -160,7 +132,6 @@
     <string name="radio_info_signal_location_label">"位置："</string>
     <string name="radio_info_neighboring_location_label">"附近的 CID："</string>
     <string name="radio_info_data_attempts_label">"嘗試資料："</string>
-    <string name="radio_info_imsi_label">"IMSI："</string>
     <string name="radio_info_gprs_service_label">"GPRS 服務："</string>
     <string name="radio_info_roaming_label">"漫遊："</string>
     <string name="radio_info_imei_label">"IMEI："</string>
@@ -188,15 +159,12 @@
     <string name="radio_info_smsc_label">"SMSC："</string>
     <string name="radio_info_smsc_update_label">"更新"</string>
     <string name="radio_info_smsc_refresh_label">"重新整理"</string>
+    <string name="radio_info_toggle_dns_check_label">"切換 DNS 檢查"</string>
     <string name="band_mode_title">"設定 GSM/UMTS 頻道"</string>
     <string name="band_mode_loading">"載入頻道清單..."</string>
     <string name="band_mode_set">"設定"</string>
     <string name="band_mode_failed">"失敗"</string>
     <string name="band_mode_succeeded">"成功"</string>
-    <string name="ringer_volume_ringer_mode_label">"鈴聲模式："</string>
-    <string name="ringer_volume_screen_increasing_text">"鈴聲逐漸增強"</string>
-    <string name="ringer_volume_ringtone_label">"鈴聲"</string>
-    <string name="ringer_volume_instructions">"使用音量鍵調整鈴聲音量"</string>
     <string name="sdcard_changes_instructions">"USB 纜線重新連接時，變更才會生效"</string>
     <string name="sdcard_settings_screen_mass_storage_text">"啟用 USB 大量儲存裝置"</string>
     <string name="sdcard_settings_total_bytes_label">"總容量 (bytes)："</string>
@@ -208,28 +176,13 @@
     <string name="sdcard_settings_used_bytes_label">"使用容量 (bytes)："</string>
     <string name="sdcard_settings_scanning_status">"從 SD 卡掃描媒體中..."</string>
     <string name="sdcard_settings_read_only_status">"SD 卡為唯讀狀態"</string>
-    <string name="sdcard_removal_alert_title">"未正確移除 SD 卡！"</string>
-    <string name="sdcard_unmountable_alert_title">"無法讀取 SD 卡"</string>
-    <string name="telephony_user_label">"使用者："</string>
-    <string name="telephony_server_label">"伺服器："</string>
-    <string name="telephony_name_label">"名稱："</string>
-    <string name="telephony_mmsc_label">"MMSC："</string>
-    <string name="telephony_apn_label">"APN："</string>
-    <string name="telephony_mcc_label">"MCC："</string>
-    <string name="telephony_port_label">"連接埠："</string>
-    <string name="telephony_password_label">"密碼："</string>
-    <string name="telephony_proxy_label">"Proxy："</string>
-    <string name="telephony_mnc_label">"MNC："</string>
-    <string name="telephony_mmsproxy_label">"MMS proxy："</string>
-    <string name="telephony_mmsport_label">"MMS 連接埠："</string>
     <string name="next_label">"下一步"</string>
     <string name="language_picker_title">"地區"</string>
     <string name="select_your_language">"選取語言"</string>
     <string name="activity_picker_label">"選取動作"</string>
     <string name="device_info_label">"裝置資訊"</string>
     <string name="battery_info_label">"電池資訊"</string>
-    <!-- no translation found for battery_history_label (8242244969757414501) -->
-    <skip />
+    <string name="battery_history_label">"電池記錄"</string>
     <string name="display_label">"顯示"</string>
     <string name="phone_info_label">"手機資訊"</string>
     <string name="sd_card_settings_label">"SD 卡"</string>
@@ -264,23 +217,12 @@
     <string name="bluetooth_settings_summary">"管理連線、設定裝置名稱與可偵測性"</string>
     <string name="bluetooth_pin_entry">"藍牙配對要求"</string>
     <string name="bluetooth_device_info">"藍牙裝置資訊"</string>
-    <string name="bluetooth_pairing_msg">"配對中..."</string>
     <string name="bluetooth_enter_pin_msg">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g>"\n\n"輸入 PIN 進行配對。"\n"(請嘗試 0000 或 1234。)"</string>
     <string name="bluetooth_error_title">"注意"</string>
     <string name="bluetooth_pairing_error_message">"與<xliff:g id="DEVICE_NAME">%1$s</xliff:g>配對時發生問題。"</string>
-    <string name="bluetooth_pairing_alternate_error_message">"與<xliff:g id="DEVICE_NAME">%1$s</xliff:g>配對時發生問題。請嘗試其他的 PIN。"</string>
     <string name="bluetooth_pairing_pin_error_message">"由於輸入的 PIN 不正確，因此無法與<xliff:g id="DEVICE_NAME">%1$s</xliff:g>配對。"</string>
     <string name="bluetooth_connecting_error_message">"連接至<xliff:g id="DEVICE_NAME">%1$s</xliff:g>時發生問題。"</string>
-    <string name="bluetooth_new_data">"輸入新資料"</string>
-    <string name="bluetooth_new_data_confirm">"確定"</string>
-    <string name="bluetooth_new_data_cancel">"取消"</string>
-    <string name="bluetooth_scan_for_new_devices">"掃描新裝置..."</string>
-    <string name="bluetooth_discoverability_panel_title">"讓我..."</string>
-    <string name="bluetooth_discoverable">"<xliff:g id="DISCOVERABLE_TIME_PERIOD">%1$s</xliff:g> 秒無法測得"</string>
-    <string name="bluetooth_connectable">"只能連線"</string>
-    <string name="bluetooth_neither">"無法被偵測或連線"</string>
     <string name="bluetooth_preference_scan_title">"掃描裝置"</string>
-    <string name="bluetooth_preference_scan_summary">"尋找要配對的裝置"</string>
     <string name="bluetooth_device_context_connect">"連線"</string>
     <string name="bluetooth_device_context_disconnect">"斷線"</string>
     <string name="bluetooth_device_context_pair_connect">"配對並連線"</string>
@@ -372,12 +314,9 @@
     <string name="wifi_setting_num_channels_summary">"設定要使用的頻道號碼"</string>
     <string name="wifi_setting_num_channels_error">"設定管理網域時發生問題。"</string>
     <string name="wifi_setting_num_channels_channel_phrase">"<xliff:g id="NUM_CHANNELS">%1$d</xliff:g> 頻道"</string>
-    <!-- no translation found for wifi_setting_sleep_policy_title (1367731352485585528) -->
-    <skip />
-    <!-- no translation found for wifi_setting_sleep_policy_summary (7573693311804602041) -->
-    <skip />
-    <!-- no translation found for wifi_setting_sleep_policy_error (5103670439972135148) -->
-    <skip />
+    <string name="wifi_setting_sleep_policy_title">"Wi-Fi 休眠設定"</string>
+    <string name="wifi_setting_sleep_policy_summary">"指定何時要從 Wi-Fi 切換到行動數據"</string>
+    <string name="wifi_setting_sleep_policy_error">"休眠設定時發生問題。"</string>
     <string name="wifi_advanced_mac_address_title">"MAC 位址"</string>
     <string name="fragment_status_scanning">"掃描中..."</string>
     <string name="fragment_status_connecting">"連線到 <xliff:g id="NETWORK_NAME">%1$s</xliff:g>..."</string>
@@ -420,32 +359,19 @@
     <string name="sound_effects_enable_title">"可聽見選項"</string>
     <string name="sound_effects_enable_summary_on">"使用螢幕選取時播放音效"</string>
     <string name="sound_effects_enable_summary_off">"使用螢幕選取時播放音效"</string>
+    <string name="play_media_notification_sounds_enable_title">"SD 卡通知"</string>
+    <string name="play_media_notification_sounds_enable_summary_on">"停用 SD 卡通知音效"</string>
+    <string name="play_media_notification_sounds_enable_summary_off">"啟用 SD 卡通知音效"</string>
     <string name="sync_settings">"資料同步化"</string>
     <string name="sync_settings_summary">"選取要同步處理的應用程式"</string>
-    <string name="sync_settings_header_general_settings">"一般同步處理設定"</string>
-    <string name="sync_settings_header_application_settings">"應用程式同步處理設定"</string>
-    <string name="sync_too_many_deletes">"已達刪除限制"</string>
-    <string name="sync_automatically">"自動同步處理"</string>
-    <string name="sync_enabled">"自動同步處理資料"</string>
-    <string name="sync_disabled">"自動進行資料同步處理"</string>
-    <string name="sync_menu_sync_now">"現在進行同步處理"</string>
-    <string name="sync_menu_sync_cancel">"取消同步處理"</string>
-    <string name="sync_gmail">"Gmail"</string>
-    <string name="sync_calendar">"日曆"</string>
-    <string name="sync_contacts">"聯絡人"</string>
-    <string name="sync_too_many_deletes_desc">"<xliff:g id="ACCOUNT_NAME">%3$s</xliff:g> 帳戶的 <xliff:g id="TYPE_OF_SYNC">%2$s</xliff:g> 有 <xliff:g id="NUMBER_OF_DELETED_ITEMS">%1$d</xliff:g> 個項目即將刪除。您確定要繼續嗎？"</string>
-    <string name="sync_really_delete">"刪除此項目。"</string>
-    <string name="sync_undo_deletes">"復原刪除。"</string>
-    <string name="sync_do_nothing">"目前不做操作。"</string>
-    <string name="sync_is_failing">"目前同步處理發生問題。稍後會回復正常。"</string>
-    <string name="sync_plug"><font fgcolor="#ffffffff">" 歡迎使用 Google Sync！"</font>" "\n" Google 同步資料處理方式讓您無論身在何處，都可存取通訊錄、約會或其他資訊。"</string>
     <string name="display_settings">"顯示設定"</string>
     <string name="animations_title">"動畫"</string>
     <string name="animations_summary_on">"開啟/關閉視窗時顯示動畫"</string>
     <string name="animations_summary_off">"開啟/關閉視窗時顯示動畫"</string>
     <string name="brightness">"亮度"</string>
+    <string name="brightness_summary">"調整螢幕亮度"</string>
     <string name="screen_timeout">"螢幕逾時"</string>
-    <string name="dim_screen">"螢幕調暗"</string>
+    <string name="screen_timeout_summary">"調整螢幕自動關閉前的延遲時間"</string>
     <string name="sim_lock_settings">"SIM 卡鎖定設定"</string>
     <string name="sim_lock_settings_category">"設定 SIM 卡鎖定"</string>
     <string name="sim_lock_settings_title">"SIM 卡鎖定"</string>
@@ -482,10 +408,8 @@
     <string name="storage_settings_title">"SD 卡與手機儲存"</string>
     <string name="storage_settings_summary">"卸載 SD 卡，檢視可用儲存媒體。"</string>
     <string name="status_number">"電話號碼"</string>
-    <!-- no translation found for status_network_type (3279383550222116235) -->
-    <skip />
-    <!-- no translation found for status_data_state (5503181397066522950) -->
-    <skip />
+    <string name="status_network_type">"行動網路類型"</string>
+    <string name="status_data_state">"行動網路狀態"</string>
     <string name="status_service_state">"服務狀態"</string>
     <string name="status_signal_strength">"訊號強度"</string>
     <string name="status_roaming">"漫遊"</string>
@@ -499,9 +423,12 @@
     <string name="sd_memory">"SD 卡"</string>
     <string name="memory_available">"可用空間"</string>
     <string name="memory_size">"總空間"</string>
-    <string name="sd_eject">"卸載/退出 SD 卡"</string>
+    <string name="sd_eject">"卸載 SD 卡"</string>
+    <string name="sd_eject_summary">"必須先卸載 SD 卡，才能安全移除"</string>
+    <string name="sd_format">"將 SD 卡格式化"</string>
+    <string name="sd_format_summary">"將 SD 卡格式化 (清除)"</string>
     <string name="sd_unavailable">"無法取得資訊"</string>
-    <string name="read_only">"(唯讀)"</string>
+    <string name="read_only">" (唯讀)"</string>
     <string name="battery_status_title">"電池狀態"</string>
     <string name="battery_level_title">"電池計量"</string>
     <string name="apn_settings">"APN"</string>
@@ -538,6 +465,14 @@
     <string name="master_clear_gesture_prompt">"畫出解鎖圖形"</string>
     <string name="master_clear_gesture_explanation">"請畫出解鎖圖形，以確認重設手機。"</string>
     <string name="master_clear_failed">"因「系統清除」服務異常，未成功執行重設。"</string>
+    <string name="media_format_title">"將 SD 卡格式化。"</string>
+    <string name="media_format_summary">"清除 SD 卡上的所有資料"</string>
+    <string name="media_format_desc">"此動作將會清除手機中 SD 卡上的所有資料。SD 卡上的所有資料將會遺失！"</string>
+    <string name="media_format_button_text">"將 SD 卡格式化"</string>
+    <string name="media_format_final_desc">"要將 SD 卡格式化、清除所有媒體嗎？此動作無法復原！"</string>
+    <string name="media_format_final_button_text">"全部清除"</string>
+    <string name="media_format_gesture_prompt">"畫出解鎖圖形"</string>
+    <string name="media_format_gesture_explanation">"您必須畫出解鎖圖形，以確認將 SD 卡格式化。"</string>
     <string name="call_settings_title">"通話設定"</string>
     <string name="call_settings_summary">"設定語音信箱、來電指定轉接、話中插接、本機號碼"</string>
     <string name="network_settings_title">"行動網路"</string>
@@ -591,17 +526,22 @@
     <string name="lock_example_title">"範例圖形"</string>
     <string name="lock_example_message">"畫出圖形時，需要至少連接四個點。"\n" "\n"準備好要畫出您的解鎖圖形時，請選取 [下一步]。"</string>
     <string name="manageapplications_settings_title">"管理應用程式"</string>
+    <string name="manageapplications_settings_summary">"管理及移除已安裝的應用程式"</string>
     <string name="applications_settings">"應用程式"</string>
     <string name="applications_settings_summary">"管理應用程式，設定快速啟動捷徑"</string>
     <string name="applications_settings_header">"應用程式設定"</string>
     <string name="install_applications">"未知的來源"</string>
     <string name="install_unknown_applications">"允許安裝非市場應用程式"</string>
     <string name="install_all_warning">"如果是未知來源的應用程式，便比較可能攻擊您的手機與個人資訊。若使用這些應用程式造成手機受損或資料遺失，您必須為此完全負責。"</string>
-    <string name="manage_applications_title">"管理應用程式"</string>
     <string name="application_info_label">"應用程式資訊"</string>
     <string name="storage_label">"儲存"</string>
     <string name="auto_launch_label">"依預設值啟動"</string>
     <string name="permissions_label">"許可"</string>
+    <string name="cache_header_label">"快取"</string>
+    <string name="clear_cache_btn_text">"清除快取"</string>
+    <string name="cache_size_label">"快取"</string>
+    <string name="controls_label">"控制項"</string>
+    <string name="force_stop">"強制停止"</string>
     <string name="total_size_label">"總共"</string>
     <string name="application_size_label">"應用程式"</string>
     <string name="data_size_label">"資料"</string>
@@ -614,6 +554,8 @@
     <string name="sort_order_alpha">"排序"</string>
     <string name="sort_order_size">"依大小排序"</string>
     <string name="manage_space_text">"管理空間"</string>
+    <string name="filter">"篩選"</string>
+    <string name="filter_dlg_title">"選取篩選選項"</string>
     <string name="filter_apps_all">"全部"</string>
     <string name="filter_apps_third_party">"第三方"</string>
     <string name="filter_apps_running">"執行中"</string>
@@ -627,46 +569,36 @@
     <string name="app_not_found_dlg_text">"在已安裝程式清單中找不到此應用程式。"</string>
     <string name="clear_data_failed">"無法清除應用程式資料。"</string>
     <string name="security_settings_desc">"此應用程式可存取您電話中的下列項目："</string>
-    <string name="computing_size">"仍在計算中..."</string>
+    <string name="computing_size">"計算中..."</string>
     <string name="invalid_size_value">"無法計算封裝大小"</string>
     <string name="empty_list_msg">"您尚未安裝任何的第三方應用程式。"</string>
-    <string name="cache_header_label">"快取"</string>
-    <string name="clear_cache_btn_text">"清除快取"</string>
-    <string name="cache_size_label">"快取"</string>
     <string name="language_settings">"地區與文字"</string>
     <string name="language_settings_summary">"設定地區 (語言和地區)、文字輸入和文字自動校正選項"</string>
     <string name="language_category">"地區設定"</string>
     <string name="text_category">"文字設定"</string>
     <string name="phone_language">"選取地區"</string>
+    <string name="phone_language_summary">"選取語言及地區"</string>
     <string name="auto_replace">"自動取代"</string>
     <string name="auto_replace_summary">"修改不正確的字"</string>
     <string name="auto_caps">"自動大寫"</string>
     <string name="auto_caps_summary">"句子首字字母大寫"</string>
     <string name="auto_punctuate">"自動標點"</string>
+    <string name="hardkeyboard_category">"實體鍵盤設定"</string>
     <string name="auto_punctuate_summary">"按空白鍵兩次可插入「.」"</string>
     <string name="show_password">"密碼可見"</string>
     <string name="show_password_summary">"顯示輸入的密碼"</string>
-    <!-- no translation found for user_dict_settings_titlebar (765659257455000490) -->
-    <skip />
-    <!-- no translation found for user_dict_settings_title (8357027437499042191) -->
-    <skip />
-    <!-- no translation found for user_dict_settings_summary (2460427065601355471) -->
-    <skip />
-    <!-- no translation found for user_dict_settings_add_menu_title (4056762757149923551) -->
-    <skip />
-    <!-- no translation found for user_dict_settings_add_dialog_title (4702613990174126482) -->
-    <skip />
-    <!-- no translation found for user_dict_settings_context_menu_edit_title (2210564879320004837) -->
-    <skip />
-    <!-- no translation found for user_dict_settings_context_menu_delete_title (9140703913776549054) -->
-    <skip />
-    <!-- no translation found for user_dict_settings_empty_text (6209268025109242806) -->
-    <skip />
+    <string name="user_dict_settings_titlebar">"使用者字典"</string>
+    <string name="user_dict_settings_title">"使用者字典"</string>
+    <string name="user_dict_settings_summary">"在使用者字典中新增及移除字詞"</string>
+    <string name="user_dict_settings_add_menu_title">"新增"</string>
+    <string name="user_dict_settings_add_dialog_title">"新增至字典"</string>
+    <string name="user_dict_settings_context_menu_edit_title">"編輯"</string>
+    <string name="user_dict_settings_context_menu_delete_title">"刪除"</string>
+    <string name="user_dict_settings_empty_text">"您的使用者字典中沒有任何字詞。您可以透過選單新增字詞。"</string>
     <string name="testing">"測試中"</string>
     <string name="testing_phone_info">"手機資訊"</string>
     <string name="testing_battery_info">"電池資訊"</string>
-    <!-- no translation found for testing_battery_history (3043329445810695647) -->
-    <skip />
+    <string name="testing_battery_history">"電池記錄"</string>
     <string name="quick_launch_title">"快速啟動"</string>
     <string name="quick_launch_summary">"設定啟動應用程式的鍵盤捷徑"</string>
     <string name="quick_launch_assign_application">"分配應用程式"</string>
@@ -680,8 +612,7 @@
     <string name="quick_launch_display_mode_shortcuts">"捷徑"</string>
     <string name="input_methods_settings_title">"文字輸入法"</string>
     <string name="input_methods_settings_summary">"管理輸入法選項"</string>
-    <!-- no translation found for input_methods_settings_label_format (4882768027634191074) -->
-    <skip />
+    <string name="input_methods_settings_label_format">"%s 設定"</string>
     <string name="development_settings_title">"開發"</string>
     <string name="development_settings_summary">"設定應用程式開發的選項"</string>
     <string name="enable_adb">"USB 除錯中"</string>
@@ -690,4 +621,50 @@
     <string name="keep_screen_on_summary">"充電時螢幕不會進入休眠"</string>
     <string name="allow_mock_location">"允許模擬位置"</string>
     <string name="allow_mock_location_summary">"允許模擬位置"</string>
+    <!-- no translation found for gadget_picker_title (98374951396755811) -->
+    <skip />
+    <!-- no translation found for widget_picker_title (9130684134213467557) -->
+    <skip />
+    <string name="battery_history_details_for">"UID %d 的詳細資料"</string>
+    <string name="battery_history_uid">"UID <xliff:g id="USER_ID">%1$d</xliff:g>"</string>
+    <string name="battery_history_network_usage">"<xliff:g id="APP_NAME">%1$s</xliff:g> 的網路使用率詳細資料："</string>
+    <string name="battery_history_bytes_received">"已接收的位元組數：<xliff:g id="BYTES">%1$d</xliff:g>"</string>
+    <string name="battery_history_bytes_sent">"已傳送的位元組數：<xliff:g id="BYTES">%1$d</xliff:g>"</string>
+    <string name="battery_history_bytes_total">"總容量 (bytes)：<xliff:g id="BYTES">%1$d</xliff:g>"</string>
+    <string name="battery_history_cpu_usage">"<xliff:g id="APP_NAME">%1$s</xliff:g> 的 CPU 使用率詳細資料："</string>
+    <string name="battery_history_user_time">"使用者時間："</string>
+    <string name="battery_history_system_time">"系統時間："</string>
+    <string name="battery_history_total_time">"總計時間："</string>
+    <string name="battery_history_starts">"啟動次數：<xliff:g id="STARTS">%1$d</xliff:g>"</string>
+    <string name="battery_history_days">"<xliff:g id="DAYS">%1$d</xliff:g> 天，<xliff:g id="HOURS">%2$d</xliff:g> 小時，<xliff:g id="MINUTES">%3$d</xliff:g> 分鐘，<xliff:g id="SECONDS">%4$d</xliff:g> 秒"</string>
+    <string name="battery_history_hours">"<xliff:g id="HOURS">%1$d</xliff:g> 小時，<xliff:g id="MINUTES">%2$d</xliff:g> 分鐘，<xliff:g id="SECONDS">%3$d</xliff:g> 秒"</string>
+    <string name="battery_history_minutes">"<xliff:g id="MINUTES">%1$d</xliff:g> 分鐘，<xliff:g id="SECONDS">%2$d</xliff:g> 秒"</string>
+    <string name="battery_history_seconds">"<xliff:g id="SECONDS">%1$d</xliff:g> 秒"</string>
+    <string name="battery_history_packages_sharing_this_uid">"共用此 UID 的封裝："</string>
+    <string name="battery_history_no_data">"沒有電池使用資料"</string>
+    <string name="battery_history_sensor">"感應器："</string>
+    <!-- no translation found for battery_history_wakelock (608683447522396293) -->
+    <skip />
+    <string name="battery_history_used_by_packages">"程式使用的感應器："</string>
+    <string name="battery_history_sensor_usage">"使用次數：<xliff:g id="COUNT">%1$d</xliff:g>，使用的封裝：<xliff:g id="PACKAGE">%2$s</xliff:g>"</string>
+    <string name="battery_history_sensor_usage_multi">"使用次數：<xliff:g id="COUNT">%1$d</xliff:g>，使用者為下列其中之一："</string>
+    <!-- no translation found for battery_history_awake_label (8449792868990080882) -->
+    <skip />
+    <!-- no translation found for battery_history_screen_on_label (1848936521786339362) -->
+    <skip />
+    <!-- no translation found for battery_history_phone_on_label (700191958853142297) -->
+    <skip />
+    <!-- no translation found for battery_history_awake (4350886665719031057) -->
+    <skip />
+    <string name="battery_history_screen_on">"螢幕開啟時間："</string>
+    <!-- no translation found for battery_history_phone_on (4891504401623839532) -->
+    <skip />
+    <string name="battery_history_screen_on_battery">"使用電池："</string>
+    <string name="battery_history_screen_on_plugged">"插入時間："</string>
+    <string name="usage_stats_label">"使用統計資料"</string>
+    <string name="testing_usage_stats">"使用統計資料"</string>
+    <string name="display_order_text">"排序依據："</string>
+    <string name="app_name_label">"應用程式"</string>
+    <string name="launch_count_label">"計數"</string>
+    <string name="usage_time_label">"使用時間"</string>
 </resources>

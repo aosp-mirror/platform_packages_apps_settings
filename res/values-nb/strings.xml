@@ -1,0 +1,668 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Copyright (C) 2009 The Android Open Source Project
+
+     Licensed under the Apache License, Version 2.0 (the "License");
+     you may not use this file except in compliance with the License.
+     You may obtain a copy of the License at
+
+          http://www.apache.org/licenses/LICENSE-2.0
+
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+-->
+<resources xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <string name="device_info_default">"Ukjent"</string>
+    <string name="turn_on_radio">"Turn on radio"</string>
+    <string name="turn_off_radio">"Turn off radio"</string>
+    <string name="turn_on_qxdm">"Enable QXDM SD log"</string>
+    <string name="turn_off_qxdm">"Disable QXDM SD log"</string>
+    <string name="radioInfo_menu_viewADN">"View SIM address book"</string>
+    <string name="radioInfo_menu_viewFDN">"View Fixed Dialing Numbers"</string>
+    <string name="radioInfo_menu_viewSDN">"View Service Dialing Numbers"</string>
+    <string name="radioInfo_menu_getPDP">"Get PDP list"</string>
+    <string name="radioInfo_menu_enableData">"Enable data connection"</string>
+    <string name="radioInfo_menu_disableData">"Disable data connection"</string>
+    <string name="radioInfo_menu_enableDataOnBoot">"Enable data on boot"</string>
+    <string name="radioInfo_menu_disableDataOnBoot">"Disable data on boot"</string>
+    <string name="radioInfo_service_in">"In service"</string>
+    <string name="radioInfo_service_out">"Out of service"</string>
+    <string name="radioInfo_service_emergency">"Emergency calls only"</string>
+    <string name="radioInfo_service_off">"Radio off"</string>
+    <string name="radioInfo_roaming_in">"Roaming"</string>
+    <string name="radioInfo_roaming_not">"Not roaming"</string>
+    <string name="radioInfo_phone_idle">"Idle"</string>
+    <string name="radioInfo_phone_ringing">"Ringing"</string>
+    <string name="radioInfo_phone_offhook">"Call in progress"</string>
+    <string name="radioInfo_data_disconnected">"Disconnected"</string>
+    <string name="radioInfo_data_connecting">"Connecting"</string>
+    <string name="radioInfo_data_connected">"Connected"</string>
+    <string name="radioInfo_data_suspended">"Suspended"</string>
+    <string name="radioInfo_unknown">"unknown"</string>
+    <string name="radioInfo_display_packets">"pkts"</string>
+    <string name="radioInfo_display_bytes">"bytes"</string>
+    <string name="radioInfo_display_dbm">"dBm"</string>
+    <string name="radioInfo_display_asu">"asu"</string>
+    <string name="radioInfo_lac">"LAC"</string>
+    <string name="radioInfo_cid">"CID"</string>
+    <string name="sdcard_unmount">"Unmount SD card"</string>
+    <string name="sdcard_format">"Format SD card"</string>
+    <string name="small_font">"Liten"</string>
+    <string name="medium_font">"Middels"</string>
+    <string name="large_font">"Stor"</string>
+    <string name="font_size_save">"OK"</string>
+    <string name="sdcard_setting">"Minnekort"</string>
+    <string name="battery_info_status_label">"Battery status:"</string>
+    <string name="battery_info_scale_label">"Battery scale:"</string>
+    <string name="battery_info_level_label">"Battery level:"</string>
+    <string name="battery_info_health_label">"Battery health:"</string>
+    <string name="battery_info_technology_label">"Battery technology:"</string>
+    <string name="battery_info_voltage_label">"Battery voltage:"</string>
+    <string name="battery_info_voltage_units">"mV"</string>
+    <string name="battery_info_temperature_label">"Battery temperature:"</string>
+    <string name="battery_info_temperature_units">"° C"</string>
+    <string name="battery_info_uptime">"Time since boot:"</string>
+    <string name="battery_info_awake_battery">"Awake time on battery:"</string>
+    <string name="battery_info_awake_plugged">"Awake time when charging:"</string>
+    <string name="battery_info_screen_on">"Screen ON time:"</string>
+    <string name="battery_info_status_unknown">"Unknown"</string>
+    <string name="battery_info_status_charging">"Charging"</string>
+    <string name="battery_info_status_charging_ac">"(AC)"</string>
+    <string name="battery_info_status_charging_usb">"(USB)"</string>
+    <string name="battery_info_status_discharging">"Discharging"</string>
+    <string name="battery_info_status_not_charging">"Not charging"</string>
+    <string name="battery_info_status_full">"Full"</string>
+    <string name="battery_info_health_unknown">"Unknown"</string>
+    <string name="battery_info_health_good">"Good"</string>
+    <string name="battery_info_health_overheat">"Overheat"</string>
+    <string name="battery_info_health_dead">"Dead"</string>
+    <string name="battery_info_health_over_voltage">"Over voltage"</string>
+    <string name="battery_info_health_unspecified_failure">"Unknown error"</string>
+    <string name="bluetooth">"Bluetooth"</string>
+    <string name="bluetooth_visibility">"Synlig"</string>
+    <string name="bluetooth_is_discoverable">"Synlig i <xliff:g id="DISCOVERABLE_TIME_PERIOD">%1$s</xliff:g> sekunder…"</string>
+    <string name="bluetooth_not_discoverable">"Gjør enheten synlig"</string>
+    <string name="bluetooth_devices">"Bluetooth-enheter"</string>
+    <string name="bluetooth_device_name">"Enhetsnavn"</string>
+    <string name="bluetooth_name_not_set">"Ikke noe navn er valgt, bruker kontonavn"</string>
+    <string name="bluetooth_scan_for_devices">"Søk etter enheter"</string>
+    <string name="bluetooth_disconnect_blank">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> vil bli koblet fra."</string>
+    <string name="bluetooth_connected">"Tilkoblet"</string>
+    <string name="bluetooth_disconnected">"Frakoblet"</string>
+    <string name="bluetooth_disconnecting">"Kobler fra…"</string>
+    <string name="bluetooth_connecting">"Kobler til…"</string>
+    <!-- no translation found for bluetooth_unknown (1905151516611093010) -->
+    <skip />
+    <string name="bluetooth_not_connected">"Par med denne enheten"</string>
+    <string name="bluetooth_pairing">"Parer…"</string>
+    <string name="bluetooth_paired">"Paret"</string>
+    <string name="bluetooth_device">"handsfree/håndsett"</string>
+    <string name="progress_scanning">"Søker"</string>
+    <string name="bluetooth_notif_ticker">"Paringsforespørsel for Bluetooth"</string>
+    <string name="bluetooth_notif_title">"Paringsforespørsel"</string>
+    <string name="bluetooth_notif_message">"Velg å pare med "</string>
+    <string name="date_and_time">"Innstillinger for dato og tid"</string>
+    <string name="date_time_12_hour_sample">"1:00 pm"</string>
+    <string name="date_time_24_hour_sample">"13:00"</string>
+    <string name="choose_timezone">"Velg tidssone"</string>
+    <string name="display_preview_label">"Forhåndsvisning:"</string>
+    <string name="display_font_size_label">"Skriftstørrelse:"</string>
+    <!-- no translation found for intent_sender_data_label (8363026381459131554) -->
+    <skip />
+    <string name="intent_sender_sendbroadcast_text">"Send <xliff:g id="BROADCAST">broadcast</xliff:g>"</string>
+    <string name="intent_sender_action_label">"<xliff:g id="ACTION">Action</xliff:g>:"</string>
+    <string name="intent_sender_startactivity_text">"Start <xliff:g id="ACTIVITY">activity</xliff:g>"</string>
+    <string name="intent_sender_resource_label">"<xliff:g id="RESOURCE">Resource</xliff:g>:"</string>
+    <string name="intent_sender_account_label">"Account:"</string>
+    <string name="proxy_clear_text">"Tøm"</string>
+    <string name="proxy_port_label">"Port"</string>
+    <string name="proxy_defaultView_text">"Gjenopprett standardinnstillinger"</string>
+    <string name="proxy_action_text">"Lagre"</string>
+    <string name="proxy_hostname_label">"Vertsnavn"</string>
+    <string name="proxy_error">"NB"</string>
+    <string name="proxy_error_dismiss">"OK"</string>
+    <string name="proxy_error_invalid_host">"Vertsnavnet er ikke gyldig."</string>
+    <string name="proxy_error_empty_port">"Du må skrive inn et portnummer."</string>
+    <string name="proxy_error_empty_host_set_port">"Feltet for portnummer må være tomt om feltet for vertsnavn er tomt."</string>
+    <string name="proxy_error_invalid_port">"Portnummeret er ikke gyldig."</string>
+    <string name="radio_info_signal_location_label">"Location:"</string>
+    <string name="radio_info_neighboring_location_label">"Neighboring CID:"</string>
+    <string name="radio_info_data_attempts_label">"Data attempts:"</string>
+    <string name="radio_info_gprs_service_label">"GPRS service:"</string>
+    <string name="radio_info_roaming_label">"Roaming:"</string>
+    <string name="radio_info_imei_label">"IMEI:"</string>
+    <string name="radio_info_call_redirect_label">"Call redirect:"</string>
+    <string name="radio_info_ppp_resets_label">"Number of PPP reset since boot:"</string>
+    <string name="radio_info_gsm_disconnects_label">"GSM disconnects:"</string>
+    <string name="radio_info_current_network_label">"Current network:"</string>
+    <string name="radio_info_data_successes_label">"Data successes:"</string>
+    <string name="radio_info_ppp_received_label">"PPP received:"</string>
+    <string name="radio_info_gsm_service_label">"GSM service:"</string>
+    <string name="radio_info_signal_strength_label">"Signal strength:"</string>
+    <string name="radio_info_call_status_label">"Call status:"</string>
+    <string name="radio_info_ppp_sent_label">"PPP sent:"</string>
+    <string name="radio_info_radio_resets_label">"Radio resets:"</string>
+    <string name="radio_info_message_waiting_label">"Message waiting:"</string>
+    <string name="radio_info_phone_number_label">"Phone number:"</string>
+    <string name="radio_info_band_mode_label">"Select radio band"</string>
+    <string name="radio_info_network_type_label">"Network type:"</string>
+    <string name="radio_info_set_perferred_label">"Set preferred network type:"</string>
+    <string name="radio_info_ping_ipaddr">"Ping IpAddr:"</string>
+    <string name="radio_info_ping_hostname">"Ping Hostname(www.google.com):"</string>
+    <string name="radio_info_http_client_test">"HTTP Client test:"</string>
+    <string name="radio_info_toggle_ciph_label">"Toggle ciphering"</string>
+    <string name="ping_test_label">"Run ping test"</string>
+    <string name="radio_info_smsc_label">"SMSC:"</string>
+    <string name="radio_info_smsc_update_label">"Update"</string>
+    <string name="radio_info_smsc_refresh_label">"Refresh"</string>
+    <string name="radio_info_toggle_dns_check_label">"Toggle DNS check"</string>
+    <string name="band_mode_title">"Velg GSM/UMTS-bånd"</string>
+    <string name="band_mode_loading">"Henter båndliste…"</string>
+    <string name="band_mode_set">"Velg"</string>
+    <string name="band_mode_failed">"Mislykket"</string>
+    <string name="band_mode_succeeded">"Vellykket"</string>
+    <string name="sdcard_changes_instructions">"Endringene vil tre i kraft når USB-kabelen kobles til på nytt"</string>
+    <string name="sdcard_settings_screen_mass_storage_text">"Skru på USB-masselagring"</string>
+    <string name="sdcard_settings_total_bytes_label">"Totalt antall byte:"</string>
+    <string name="sdcard_settings_not_present_status">"Minnekort mangler"</string>
+    <string name="sdcard_settings_available_bytes_label">"Tilgjengelig antall byte:"</string>
+    <string name="sdcard_settings_mass_storage_status">"Minnekortet blir brukt som en masselagringsenhet"</string>
+    <string name="sdcard_settings_unmounted_status">"Det er trygt å fjerne minnekortet"</string>
+    <string name="sdcard_settings_bad_removal_status">"Minnekortet ble fjernet mens det fortsatt var i bruk!"</string>
+    <string name="sdcard_settings_used_bytes_label">"Brukt antall byte:"</string>
+    <string name="sdcard_settings_scanning_status">"Leter etter media på minnekortet…"</string>
+    <string name="sdcard_settings_read_only_status">"Minnekortet ble montert skrivebeskyttet"</string>
+    <string name="next_label">"Neste"</string>
+    <string name="language_picker_title">"Regionsinnstillinger"</string>
+    <string name="select_your_language">"Språk"</string>
+    <string name="activity_picker_label">"Velg aktivitet"</string>
+    <string name="device_info_label">"Enhetsinformasjon"</string>
+    <string name="battery_info_label">"Batteriinformasjon"</string>
+    <string name="battery_history_label">"Batterihistorikk"</string>
+    <string name="display_label">"Skjerm"</string>
+    <string name="phone_info_label">"Telefoninformasjon"</string>
+    <string name="sd_card_settings_label">"Minnekort"</string>
+    <string name="proxy_settings_label">"Mellomtjener-innstillinger"</string>
+    <string name="cancel">"Avbryt"</string>
+    <string name="settings_label">"Innstillinger"</string>
+    <string name="airplane_mode">"Flymodus"</string>
+    <string name="airplane_mode_summary">"Slå av alle trådløse tilkoblinger"</string>
+    <string name="airplane_mode_turning_on">"Slår av trådløse tilkoblinger…"</string>
+    <string name="airplane_mode_turning_off">"Slår på trådløse tilkoblinger…"</string>
+    <string name="radio_controls_title">"Trådløse nett"</string>
+    <string name="radio_controls_summary">"Trådløse nett, Bluetooth, flymodus mobile nettverk"</string>
+    <string name="date_and_time_settings_title">"Dato og tid"</string>
+    <string name="date_and_time_settings_summary">"Sett dato, tid, tidssone og formater"</string>
+    <string name="date_time_auto">"Automatisk"</string>
+    <string name="date_time_auto_summaryOn">"Bruk verdier fra nettverket"</string>
+    <string name="date_time_auto_summaryOff">"Bruk verdier fra nettverket"</string>
+    <string name="date_time_24hour">"Bruk 24-timers format"</string>
+    <string name="date_time_set_time">"Still klokken"</string>
+    <string name="date_time_set_timezone">"Tidssone"</string>
+    <string name="date_time_set_date">"Sett dato"</string>
+    <string name="date_time_date_format">"Datoformat"</string>
+    <string name="zone_list_menu_sort_alphabetically">"Sorter alfabetisk"</string>
+    <string name="zone_list_menu_sort_by_timezone">"Sorter etter tidssone"</string>
+    <string name="security_settings_title">"Sikkerhet og plassering"</string>
+    <string name="security_settings_summary">"Plassering, skjermlås, SIM-kort-lås"</string>
+    <string name="security_passwords_title">"Passord"</string>
+    <string name="bluetooth_quick_toggle_title">"Bluetooth"</string>
+    <string name="bluetooth_quick_toggle_summary">"Slå på Bluetooth"</string>
+    <string name="bluetooth_settings">"Bluetooth-innstillinger"</string>
+    <string name="bluetooth_settings_title">"Bluetooth-innstillinger"</string>
+    <string name="bluetooth_settings_summary">"Tilkoblinger, enhetsnavn og synlighet"</string>
+    <string name="bluetooth_pin_entry">"Forespørsel om Bluetooth-paring"</string>
+    <string name="bluetooth_device_info">"Bluetooth-enhetsinformasjon"</string>
+    <string name="bluetooth_enter_pin_msg">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g>"\n\n"Skriv inn PIN-kode for å pare."\n"(Prøv 0000 eller 1234.)"</string>
+    <string name="bluetooth_error_title">"NB"</string>
+    <string name="bluetooth_pairing_error_message">"Det oppsto et problem under paring med <xliff:g id="DEVICE_NAME">%1$s</xliff:g>."</string>
+    <string name="bluetooth_pairing_pin_error_message">"Det oppsto et problem under paring med <xliff:g id="DEVICE_NAME">%1$s</xliff:g> fordi PIN-koden du oppga var feil."</string>
+    <string name="bluetooth_connecting_error_message">"Kunne ikke koble til <xliff:g id="DEVICE_NAME">%1$s</xliff:g>."</string>
+    <string name="bluetooth_preference_scan_title">"Let etter enheter"</string>
+    <string name="bluetooth_device_context_connect">"Koble til"</string>
+    <string name="bluetooth_device_context_disconnect">"Koble fra"</string>
+    <string name="bluetooth_device_context_pair_connect">"Par med og koble til"</string>
+    <string name="bluetooth_device_context_unpair">"Fjern paring"</string>
+    <string name="bluetooth_device_context_disconnect_unpair">"Koble fra og fjern paring"</string>
+    <string name="bluetooth_device_context_connect_advanced">"Innstillinger…"</string>
+    <string name="bluetooth_connect_specific_profiles_title">"Koble til…"</string>
+    <string name="bluetooth_profile_a2dp">"Media"</string>
+    <string name="bluetooth_profile_headset">"Telefon"</string>
+    <string name="bluetooth_summary_connected_to_a2dp">"Koblet til medielyd"</string>
+    <string name="bluetooth_summary_connected_to_headset">"Koblet til telefonlyd"</string>
+    <string name="bluetooth_summary_connected_to_a2dp_headset">"Koblet til medie- og telefonlyd"</string>
+    <string name="bluetooth_device_advanced_title">"Innstillinger for <xliff:g id="DEVICE_NAME">%1$s</xliff:g>"</string>
+    <string name="bluetooth_device_advanced_online_mode_title">"Koble til"</string>
+    <string name="bluetooth_device_advanced_online_mode_summary">"Koble til Bluetooth-enhet"</string>
+    <string name="bluetooth_device_advanced_profile_header_title">"Profiler"</string>
+    <string name="bluetooth_a2dp_profile_summary_connected">"Koblet til medielyd"</string>
+    <string name="bluetooth_headset_profile_summary_connected">"Koblet til telefonlyd"</string>
+    <string name="bluetooth_a2dp_profile_summary_use_for">"Bruk for medielyd"</string>
+    <string name="bluetooth_headset_profile_summary_use_for">"Bruk for telefonlyd"</string>
+    <string name="wifi">"Trådløst nett"</string>
+    <string name="wifi_quick_toggle_title">"Trådløst nett"</string>
+    <string name="wifi_quick_toggle_summary">"Slå på trådløst nett"</string>
+    <string name="wifi_settings">"Trådløsinnstillinger"</string>
+    <string name="wifi_settings_category">"Innstillinger for trådløst nett"</string>
+    <string name="wifi_settings_summary">"Sett opp og styr trådløse aksesspunkt"</string>
+    <string name="forget_network">"Glem"</string>
+    <string name="wifi_status">"Status"</string>
+    <string name="wifi_link_speed">"Hastighet"</string>
+    <string name="wifi_signal_3">"Utmerket"</string>
+    <string name="wifi_signal_2">"God"</string>
+    <string name="wifi_signal_1">"OK"</string>
+    <string name="wifi_signal_0">"Dårlig"</string>
+    <string name="security">"Sikkerhet"</string>
+    <string name="wifi_security_open">"Åpen"</string>
+    <string name="wifi_security_wep">"WEP"</string>
+    <string name="wifi_security_wpa">"WPA"</string>
+    <string name="wifi_security_wpa2">"WPA2"</string>
+    <string name="wifi_security_unknown">"Ukjent"</string>
+    <string name="wifi_security_verbose_open">"Åpent nettverk"</string>
+    <string name="wifi_security_verbose_wep">"Sikret med WEP"</string>
+    <string name="wifi_security_verbose_wpa">"Sikret med WPA"</string>
+    <string name="wifi_security_verbose_wpa2">"Sikret med WPA2"</string>
+    <string name="ip_address">"IP-adresse"</string>
+    <string name="signal">"Signalstyrke"</string>
+    <string name="wifi_starting">"Slår på…"</string>
+    <string name="wifi_stopping">"Slår av…"</string>
+    <string name="wifi_error">"Feil"</string>
+    <string name="error_starting">"Kunne ikke starte trådløsnett"</string>
+    <string name="error_stopping">"Kunne ikke slå av trådløsnett"</string>
+    <string name="error_scanning">"Kunne ikke søke etter trådløse nettverk"</string>
+    <string name="error_connecting">"Kunne ikke koble til nettverket"</string>
+    <string name="error_saving">"Kunne ikke lagre nettverket"</string>
+    <string name="connect">"Koble til"</string>
+    <string name="connect_to_blank">"Koble til <xliff:g id="NETWORK_NAME">%1$s</xliff:g>"</string>
+    <string name="please_type_passphrase">"Passord for trådløst nettverk"</string>
+    <string name="please_type_hex_key">"WEP-nøkkel i hex (0-9, A-F)"</string>
+    <string name="wifi_show_password">"Vis passord."</string>
+    <string name="scan_wifi">"Søk"</string>
+    <string name="summary_not_in_range">"Utenfor rekkevidde"</string>
+    <string name="summary_remembered">"Husket"</string>
+    <string name="summary_connection_failed">"Tilkoblingen mislyktes, velg for å prøve på nytt"</string>
+    <string name="wifi_access_points">"Trådløse nettverk"</string>
+    <string name="wifi_type_ssid">"Nettverks-SSID"</string>
+    <string name="wifi_security">"Sikkerhet"</string>
+    <string name="wifi_save_config">"Lagre"</string>
+    <string name="wifi_password_unchanged">"(uendret)"</string>
+    <string name="wifi_add_other_network">"Legg til trådløst nettverk"</string>
+    <string name="wifi_notify_open_networks">"Varsling om nettverk"</string>
+    <string name="wifi_notify_open_networks_summary">"Varsle når et åpent nettverk er tilgjengelig"</string>
+    <string name="wifi_password_incorrect_error">"Nettverkspassordet er ikke riktig. Prøv igjen."</string>
+    <string name="wifi_generic_connection_error">"Kunne ikke koble til nettverket. Prøv igjen."</string>
+    <string name="wifi_menu_advanced">"Avansert"</string>
+    <string name="wifi_ip_settings_titlebar">"IP-innstillinger"</string>
+    <string name="wifi_ip_settings_menu_save">"Lagre"</string>
+    <string name="wifi_ip_settings_menu_cancel">"Avbryt"</string>
+    <string name="wifi_ip_settings_invalid_ip">"Skriv inn en gyldig IP-adresse."</string>
+    <string name="wifi_use_static_ip">"Bruk statisk IP-adresse"</string>
+    <string name="wifi_ip_address">"IP-adresse"</string>
+    <string name="wifi_dns1">"DNS 1"</string>
+    <string name="wifi_dns2">"DNS 2"</string>
+    <string name="wifi_gateway">"Standardruter"</string>
+    <string name="wifi_netmask">"Nettmaske"</string>
+    <string name="wifi_context_menu_connect">"Koble til nettverk"</string>
+    <string name="wifi_context_menu_forget">"Glem nettverk"</string>
+    <string name="wifi_context_menu_change_password">"Endre passord"</string>
+    <string name="wifi_advanced_titlebar">"Avansert"</string>
+    <string name="wifi_setting_num_channels_title">"Juridisk område"</string>
+    <string name="wifi_setting_num_channels_summary">"Velg antall kanaler som skal brukes"</string>
+    <string name="wifi_setting_num_channels_error">"Kunne ikke velge juridisk område."</string>
+    <string name="wifi_setting_num_channels_channel_phrase">"<xliff:g id="NUM_CHANNELS">%1$d</xliff:g> kanaler"</string>
+    <string name="wifi_setting_sleep_policy_title">"Soveinnstillinger for trådløst nett"</string>
+    <string name="wifi_setting_sleep_policy_summary">"Spesifiser når telefonen skal bytte fra trådløsnett til mobiltelefonidata"</string>
+    <string name="wifi_setting_sleep_policy_error">"Det oppsto et problem under setting av soveinnstilling."</string>
+    <string name="wifi_advanced_mac_address_title">"MAC-adresse"</string>
+    <string name="fragment_status_scanning">"Søker…"</string>
+    <string name="fragment_status_connecting">"Kobler til <xliff:g id="NETWORK_NAME">%1$s</xliff:g>…"</string>
+    <string name="fragment_status_authenticating">"Autentiserer mot <xliff:g id="NETWORK_NAME">%1$s</xliff:g>…"</string>
+    <string name="fragment_status_obtaining_ip">"Henter IP-adresse fra <xliff:g id="NETWORK_NAME">%1$s</xliff:g>…"</string>
+    <string name="fragment_status_connected">"Koblet til <xliff:g id="NETWORK_NAME">%1$s</xliff:g>"</string>
+    <string name="fragment_status_disconnecting">"Kobler fra <xliff:g id="NETWORK_NAME">%1$s</xliff:g>…"</string>
+    <string name="fragment_status_disconnected">"Frakoblet"</string>
+    <string name="fragment_status_failed">"Mislykket"</string>
+    <string name="status_scanning">"Søker…"</string>
+    <string name="status_connecting">"Kobler til…"</string>
+    <string name="status_authenticating">"Autentiserer…"</string>
+    <string name="status_obtaining_ip">"Henter adresse…"</string>
+    <string name="status_connected">"Tilkoblet"</string>
+    <string name="status_disconnecting">"Kobler fra…"</string>
+    <string name="status_disconnected">"Frakoblet"</string>
+    <string name="status_failed">"Mislykket"</string>
+    <string name="sound_and_display_settings">"Lyd og skjerm"</string>
+    <string name="sound_settings">"Lydinnstillinger"</string>
+    <string name="sound_and_display_settings_summary">"Ringetoner, varsling, lysstyrke"</string>
+    <string name="silent_mode_title">"Stillemodus"</string>
+    <string name="silent_mode_summary">"Slå av alle lyder unntatt media og alarmer"</string>
+    <string name="ringtone_title">"Ringetone"</string>
+    <string name="ringtone_summary">"Standard ringetone for innkommende anrop"</string>
+    <string name="ring_volume_title">"Ringevolum"</string>
+    <string name="ring_volume_summary">"Volum for innkommende anrop og varslinger"</string>
+    <string name="vibrate_title">"Vibrering"</string>
+    <string name="vibrate_summary">"Vibrer ved innkommende anrop"</string>
+    <string name="notification_sound_title">"Ringetone for varsling"</string>
+    <string name="notification_sound_summary">"Standard ringetone for varsling"</string>
+    <string name="incoming_call_volume_title">"Volum for innkommende anrop"</string>
+    <string name="notification_volume_title">"Varslingsvolum"</string>
+    <string name="checkbox_notification_same_as_incoming_call">"Bruk volum for innkommende anrop også for varslinger"</string>
+    <string name="notification_sound_dialog_title">"Velg ringetone for varsling"</string>
+    <string name="media_volume_title">"Medievolum"</string>
+    <string name="media_volume_summary">"Volum for musikk og video"</string>
+    <string name="dtmf_tone_enable_title">"Hørbare tastetoner"</string>
+    <string name="dtmf_tone_enable_summary_on">"Spill toner når talltastaturet benyttes"</string>
+    <string name="dtmf_tone_enable_summary_off">"Spill toner når talltastaturet benytes"</string>
+    <string name="sound_effects_enable_title">"Hørbart valg"</string>
+    <string name="sound_effects_enable_summary_on">"Lag lyd under skjermvalg"</string>
+    <string name="sound_effects_enable_summary_off">"Lag lyd under skjermvalg"</string>
+    <string name="play_media_notification_sounds_enable_title">"Varsling for minnekort"</string>
+    <string name="play_media_notification_sounds_enable_summary_on">"Deaktiver varslingslyder for minnekort"</string>
+    <string name="play_media_notification_sounds_enable_summary_off">"Aktiver varslingslyder for minnekort"</string>
+    <string name="sync_settings">"Datasynkronisering"</string>
+    <string name="sync_settings_summary">"Applikasjoner som skal synkroniseres"</string>
+    <string name="display_settings">"Skjerminnstillinger"</string>
+    <string name="animations_title">"Animasjon"</string>
+    <string name="animations_summary_on">"Vis animasjon når vinduer åpnes/lukkes"</string>
+    <string name="animations_summary_off">"Vis animasjon når vinduer åpnes/lukkes"</string>
+    <string name="brightness">"Lysstyrke"</string>
+    <string name="brightness_summary">"Juster skjermens lysstyrke"</string>
+    <string name="screen_timeout">"Skjermsparer"</string>
+    <string name="screen_timeout_summary">"Juster hvor lang tid som skal gå før skjermen slås av automatisk"</string>
+    <string name="sim_lock_settings">"Innstillinger for SIM-kort-lås"</string>
+    <string name="sim_lock_settings_category">"Sett opp SIM-kort-lås"</string>
+    <string name="sim_lock_settings_title">"SIM-kort-lås"</string>
+    <string name="sim_pin_toggle">"Lås SIM-kortet"</string>
+    <string name="sim_lock_on">"Krev PIN-kode for å bruke telefonen"</string>
+    <string name="sim_lock_off">"Krev PIN-kode for å bruke telefonen"</string>
+    <string name="sim_pin_change">"Endre SIM-PIN-kode"</string>
+    <string name="sim_enter_pin">"PIN-kode for SIM-kort"</string>
+    <string name="sim_enable_sim_lock">"Lås SIM-kortet"</string>
+    <string name="sim_disable_sim_lock">"Lås opp SIM-kortet"</string>
+    <string name="sim_enter_old">"Gammel PIN-kode for SIM-kort"</string>
+    <string name="sim_enter_new">"Ny PIN-kode for SIM-kort"</string>
+    <string name="sim_reenter_new">"Skriv inn ny PIN-kode en gang til"</string>
+    <string name="sim_change_pin">"SIM-kode for PIN-kort"</string>
+    <string name="sim_bad_pin">"Feil PIN-kode!"</string>
+    <string name="sim_pins_dont_match">"De to PIN-kodene stemmer ikke overens!"</string>
+    <string name="sim_change_failed">"Kunne ikke endre PIN-kode."\n"Det er mulig PIN-koden var gal."</string>
+    <string name="sim_change_succeeded">"PIN-koden for SIM-kortet ble endret."</string>
+    <string name="sim_lock_failed">"Kunne ikke endre låsestatus for SIM-kortet."\n"Det er mulig PIN-koden var gal."</string>
+    <string name="sim_enter_ok">"OK"</string>
+    <string name="sim_enter_cancel">"Avbryt"</string>
+    <string name="device_info_settings">"Telefonstatus"</string>
+    <string name="system_update_settings_list_item_title">"Systemoppdateringer"</string>
+    <string name="system_update_settings_list_item_summary">"Se etter systemoppdateringer"</string>
+    <string name="firmware_version">"Firmware-versjon"</string>
+    <string name="model_number">"Modellnummer"</string>
+    <string name="baseband_version">"Versjon av radioprogramvare"</string>
+    <string name="kernel_version">"Kjerneversjon"</string>
+    <string name="build_number">"Byggenummer"</string>
+    <string name="device_info_not_available">"Ikke tilgjengelig"</string>
+    <string name="device_status_activity_title">"Status"</string>
+    <string name="device_status">"Status"</string>
+    <string name="device_status_summary">"IMEI, telefonnummer, signal, osv."</string>
+    <string name="storage_settings_title">"Minnekort og lagring"</string>
+    <string name="storage_settings_summary">"Avmonter minnekort, vis ledig plass"</string>
+    <string name="status_number">"Telefonnummer"</string>
+    <string name="status_network_type">"Nettverkstype"</string>
+    <string name="status_data_state">"Datatilgang"</string>
+    <string name="status_service_state">"Servicestatus"</string>
+    <string name="status_signal_strength">"Signalstyrke"</string>
+    <string name="status_roaming">"Roaming"</string>
+    <string name="status_operator">"Nettverk"</string>
+    <string name="status_wifi_mac_address">"MAC-adresse for WLAN"</string>
+    <string name="status_bt_address">"Bluetooth-adresse"</string>
+    <string name="status_unavailable">"Ikke tilgjengelig"</string>
+    <string name="status_up_time">"Oppetid"</string>
+    <string name="status_awake_time">"Våken tid"</string>
+    <string name="internal_memory">"Intern lagringsplass"</string>
+    <string name="sd_memory">"Minnekort"</string>
+    <string name="memory_available">"Tilgjengelig plass"</string>
+    <string name="memory_size">"Total plass"</string>
+    <string name="sd_eject">"Avmonter/løs ut minnekort"</string>
+    <string name="sd_eject_summary">"Løs ut minnekortet for trygg fjerning"</string>
+    <string name="sd_format">"Formater minnekort"</string>
+    <string name="sd_format_summary">"Formater (fjern alt fra) minnekortet"</string>
+    <string name="sd_unavailable">"Ikke tilgjengelig"</string>
+    <string name="read_only">" (skrivebeskyttet)"</string>
+    <string name="battery_status_title">"Batteristatus"</string>
+    <string name="battery_level_title">"Batterinivå"</string>
+    <string name="apn_settings">"APN"</string>
+    <string name="apn_edit">"Rediger APN"</string>
+    <string name="apn_not_set">"&lt;Ikke satt&gt;"</string>
+    <string name="apn_name">"Navn"</string>
+    <string name="apn_apn">"APN-navn"</string>
+    <string name="apn_http_proxy">"Mellomtjener"</string>
+    <string name="apn_http_port">"Port"</string>
+    <string name="apn_user">"Brukernavn"</string>
+    <string name="apn_password">"Passord"</string>
+    <string name="apn_server">"Tjener"</string>
+    <string name="apn_mmsc">"MMSC"</string>
+    <string name="apn_mms_proxy">"MMS-mellomtjener"</string>
+    <string name="apn_mms_port">"MMS-port"</string>
+    <string name="apn_mcc">"MCC"</string>
+    <string name="apn_mnc">"MNC"</string>
+    <string name="apn_type">"APN-type"</string>
+    <string name="menu_delete">"Slett APN"</string>
+    <string name="menu_new">"Nytt APN"</string>
+    <string name="menu_save">"Lagre"</string>
+    <string name="menu_cancel">"Forkast"</string>
+    <string name="error_title">"NB"</string>
+    <string name="error_name_empty">"Feltet «navn» kan ikke være tomt."</string>
+    <string name="error_apn_empty">"APNet kan ikke være tomt."</string>
+    <string name="error_mcc_not3">"MCC-feltet må være på tre siffer."</string>
+    <string name="error_mnc_not23">"MNC-feltet må være på to eller tre siffer."</string>
+    <string name="master_clear_title">"Fabrikkinnstillinger"</string>
+    <string name="master_clear_summary">"Fjern alle data fra telefonen"</string>
+    <string name="master_clear_desc">"Dette vil nullstille telefonen til fabrikktilstanden, noe som fjerner alle data og nedlastede applikasjoner!"</string>
+    <string name="master_clear_button_text">"Nullstill telefonen"</string>
+    <string name="master_clear_final_desc">"Nullstill telefonen, noe som vil fjerne alle data og applikasjoner? Dette kan ikke gjøres om!"</string>
+    <string name="master_clear_final_button_text">"Fjern alt"</string>
+    <string name="master_clear_gesture_prompt">"Tegn opplåsingsmønsteret"</string>
+    <string name="master_clear_gesture_explanation">"Du må tegne opplåsingsmønsteret for å bekrefte nullstilling av telefonen."</string>
+    <string name="master_clear_failed">"Telefonen ble ikke nullstilt fordi nullstillingstjenesten ikke er tilgjengelig."</string>
+    <string name="media_format_title">"Formater minnekort"</string>
+    <string name="media_format_summary">"Sletter alle data fra minnekortet"</string>
+    <string name="media_format_desc">"Dette valget vil slette alle data fra minnekortet i telefonen. Du vil miste ALLE data på kortet!"</string>
+    <string name="media_format_button_text">"Formater minnekort"</string>
+    <string name="media_format_final_desc">"Formater minnekortet? Dette vil fjerne alle data, og kan ikke gjøres om!"</string>
+    <string name="media_format_final_button_text">"Slett alt"</string>
+    <string name="media_format_gesture_prompt">"Tegn opplåsingsmønsteret"</string>
+    <string name="media_format_gesture_explanation">"Du må tegne opplåsingsmønsteret for å bekrefte formatering av minnekortet."</string>
+    <string name="call_settings_title">"Samtaleinnstillinger"</string>
+    <string name="call_settings_summary">"Telefonsvarer, viderekobling, samtale venter, nummervisning"</string>
+    <string name="network_settings_title">"Mobile nettverk"</string>
+    <string name="network_settings_summary">"Innstillinger for roaming, nettverk, APN"</string>
+    <string name="location_title">"Kilder for min plassering"</string>
+    <string name="location_network_based">"Bruk trådløse nettverk"</string>
+    <string name="location_networks_disabled">"Se plassering i applikasjoner (som kart) ved hjelp av trådløse nettverk"</string>
+    <string name="location_neighborhood_level">"Plassering bestemmes ved hjelp av trådløse og/eller mobile nettverk"</string>
+    <string name="location_gps">"Bruk GPS-satellitter"</string>
+    <string name="location_street_level">"Nøyaktig til gatenivå (slå av for å spare batteri)"</string>
+    <string name="location_gps_disabled">"Finn plassering på gatenivå (bruker mer batteri, og trenger fri sikt til himmelen)"</string>
+    <string name="about_settings">"Om telefonen"</string>
+    <string name="about_settings_summary">"Vis juridisk informasjon, telefonstatus, programvareversjon"</string>
+    <string name="legal_information">"Juridisk informasjon"</string>
+    <string name="contributors_title">"Medvirkende"</string>
+    <string name="copyright_title">"Opphavsrett"</string>
+    <string name="license_title">"Lisens"</string>
+    <string name="terms_title">"Betingelser"</string>
+    <string name="settings_license_activity_title">"Åpen kildekode-lisenser"</string>
+    <string name="settings_license_activity_unavailable">"Kunne ikke hente lisensene."</string>
+    <string name="settings_license_activity_loading">"henter…"</string>
+    <string name="lock_settings_title">"Opplåsingsmønster for skjerm"</string>
+    <string name="lockpattern_change_lock_pattern_label">"Opplåsingsmønster"</string>
+    <string name="lockpattern_need_to_unlock">"Bekreft lagret mønster"</string>
+    <string name="lockpattern_need_to_unlock_wrong">"Beklager, prøv igjen:"</string>
+    <string name="lockpattern_recording_intro_header">"Tegn et opplåsingsmønster"</string>
+    <string name="lockpattern_recording_intro_footer">"Trykk menyknappen for hjelp."</string>
+    <string name="lockpattern_recording_inprogress">"Slipp fingeren når du er ferdig."</string>
+    <string name="lockpattern_recording_incorrect_too_short">"Tegn et mønster over minst <xliff:g id="NUMBER">%d</xliff:g> prikker. Prøv igjen:"</string>
+    <string name="lockpattern_pattern_entered_header">"Mønster lagret!"</string>
+    <string name="lockpattern_need_to_confirm">"Tegn mønsteret igjen for å bekrefte:"</string>
+    <string name="lockpattern_pattern_confirmed_header">"Ditt nye opplåsingsmønster:"</string>
+    <string name="lockpattern_confirm_button_text">"Bekreft"</string>
+    <string name="lockpattern_restart_button_text">"Tegn på nytt"</string>
+    <string name="lockpattern_retry_button_text">"Prøv igjen"</string>
+    <string name="lockpattern_continue_button_text">"Continue"</string>
+    <string name="lockpattern_settings_title">"Opplåsingsmønster"</string>
+    <string name="lockpattern_settings_enable_title">"Krev mønster"</string>
+    <string name="lockpattern_settings_enable_summary">"Krev mønster for å låse opp skjermen"</string>
+    <string name="lockpattern_settings_enable_visible_pattern_title">"Synlig mønster"</string>
+    <string name="lockpattern_settings_enable_tactile_feedback_title">"Taktil tilbakemelding"</string>
+    <string name="lockpattern_settings_choose_lock_pattern">"Opplåsingsmønster"</string>
+    <string name="lockpattern_settings_change_lock_pattern">"Opplåsingsmønster"</string>
+    <string name="lockpattern_settings_help_how_to_record">"Hvordan tegne et opplåsingsmønster"</string>
+    <string name="lockpattern_too_many_failed_confirmation_attempts_header">"For mange gale forsøk!"</string>
+    <string name="lockpattern_too_many_failed_confirmation_attempts_footer">"Prøv igjen om <xliff:g id="NUMBER">%d</xliff:g> sekunder."</string>
+    <string name="skip_button_label">"Avbryt"</string>
+    <string name="next_button_label">"Neste"</string>
+    <string name="lock_title">"Sikring av telefonen"</string>
+    <string name="lock_intro_message"><font size="17">"Beskytt telefonen fra uautorisert bruk ved å lage et personlig opplåsingsmønster for skjermen. "\n<font height="17">\n</font><b>"1"</b>"  På den neste skjermen, se på mens et eksempelmønster blir tegnet. "\n<font height="17">\n</font><b>"2"</b>"  Når du er klar, tegn ditt eget personlige opplåsingsmønster. Prøv med forskjellige mønster, men tegn over minst fire prikker. "\n<font height="17">\n</font><b>"3"</b>"  Tegn mønsteret på nytt for å bekrefte. "\n<font height="17">\n</font><b>"Klar? Velg «neste»."</b>" "\n<font height="3">\n</font>"For å la telefonen forbli ubeskyttet, velg «Avbryt»."</font></string>
+    <string name="lock_example_title">"Eksempelmønster"</string>
+    <string name="lock_example_message">"Tegn over minst fire prikker."\n" "\n"Velg «Neste» når du er klar til å tegne ditt eget mønster."</string>
+    <string name="manageapplications_settings_title">"Installerte applikasjoner"</string>
+    <string name="manageapplications_settings_summary">"Hold orden på og fjern installerte applikasjoner"</string>
+    <string name="applications_settings">"Applikasjoner"</string>
+    <string name="applications_settings_summary">"Installerte applikasjoner, hurtigtaster"</string>
+    <string name="applications_settings_header">"Innstillinger for applikasjoner"</string>
+    <string name="install_applications">"Ukjente kilder"</string>
+    <string name="install_unknown_applications">"Tillat installasjon av applikasjoner som ikke kommer fra markedet"</string>
+    <string name="install_all_warning">"Telefonen og dine personlige data er mer sårbare mot angrep fra applikasjoner som kommer fra ukjente kilder. Du godtar at du selv er ansvarlig for enhver skade på telefonen eller tap av data som måtte oppstå fra bruk av slike applikasjoner."</string>
+    <string name="application_info_label">"Applikasjonsinformasjon"</string>
+    <string name="storage_label">"Lagring"</string>
+    <string name="auto_launch_label">"Start som standard"</string>
+    <string name="permissions_label">"Rettigheter"</string>
+    <string name="cache_header_label">"Hurtiglager"</string>
+    <string name="clear_cache_btn_text">"Fjern hurtiglager"</string>
+    <string name="cache_size_label">"Hurtiglager"</string>
+    <string name="controls_label">"Kontroller"</string>
+    <string name="force_stop">"Tving avslutning"</string>
+    <string name="total_size_label">"Totalt"</string>
+    <string name="application_size_label">"Applikasjon"</string>
+    <string name="data_size_label">"Data"</string>
+    <string name="uninstall_text">"Avinstaller"</string>
+    <string name="clear_user_data_text">"Fjern data"</string>
+    <string name="auto_launch_enable_text">"Du har valgt å starte denne applikasjonen som standard for noen handlinger."</string>
+    <string name="auto_launch_disable_text">"Ingen standardvalg satt."</string>
+    <string name="clear_activities">"Fjern standardvalg"</string>
+    <string name="unknown">"Ukjent"</string>
+    <string name="sort_order_alpha">"Sorter"</string>
+    <string name="sort_order_size">"Sorter etter størrelse"</string>
+    <string name="manage_space_text">"Styr plass"</string>
+    <string name="filter">"Filter"</string>
+    <string name="filter_dlg_title">"Velg filtreringsinnstillinger"</string>
+    <string name="filter_apps_all">"Alle"</string>
+    <string name="filter_apps_third_party">"Tredjeparts"</string>
+    <string name="filter_apps_running">"Kjører"</string>
+    <string name="loading">"Laster…"</string>
+    <string name="recompute_size">"Beregner størrelse på nytt…"</string>
+    <string name="clear_data_dlg_title">"Slett"</string>
+    <string name="clear_data_dlg_text">"All informasjon du har lagret i denne applikasjonen vil bli fjernet permanent."</string>
+    <string name="dlg_ok">"OK"</string>
+    <string name="dlg_cancel">"Avbryt"</string>
+    <string name="app_not_found_dlg_title">"Fant ikke applikasjonen"</string>
+    <string name="app_not_found_dlg_text">"Applikasjonen ble ikke funnet i listen av installerte applikasjoner."</string>
+    <string name="clear_data_failed">"Kunne ikke fjerne applikasjonadata."</string>
+    <string name="security_settings_desc">"Applikasjonen har disse rettighetene på telefonen:"</string>
+    <string name="computing_size">"Beregner fortsatt…"</string>
+    <string name="invalid_size_value">"Kunne ikke beregne pakkestørrelse"</string>
+    <string name="empty_list_msg">"Ingen tredjepartsapplikasjoner er installert."</string>
+    <string name="language_settings">"Språk og tekst"</string>
+    <string name="language_settings_summary">"Innstillinger for språk, region, skriving av tekst og feilretting"</string>
+    <string name="language_category">"Innstillinger for språk"</string>
+    <string name="text_category">"Tekstinnstillinger"</string>
+    <string name="phone_language">"Språk"</string>
+    <string name="phone_language_summary">"Velg språk og region"</string>
+    <string name="auto_replace">"Automatisk erstatting"</string>
+    <string name="auto_replace_summary">"Rett opp stavefeil"</string>
+    <string name="auto_caps">"Stor forbokstav"</string>
+    <string name="auto_caps_summary">"Start automatisk setninger med stor bokstav"</string>
+    <string name="auto_punctuate">"Autopunktum"</string>
+    <string name="hardkeyboard_category">"Innstillinger for fysisk tastatur"</string>
+    <string name="auto_punctuate_summary">"Trykk mellomromstasten to ganger for å skrive punktum"</string>
+    <string name="show_password">"Synlige passord"</string>
+    <string name="show_password_summary">"Vis passord mens de skrives inn"</string>
+    <string name="user_dict_settings_titlebar">"Ordliste"</string>
+    <string name="user_dict_settings_title">"Ordliste"</string>
+    <string name="user_dict_settings_summary">"Legg til og fjern ord fra ordlisten"</string>
+    <string name="user_dict_settings_add_menu_title">"Legg til"</string>
+    <string name="user_dict_settings_add_dialog_title">"Legg til ordliste"</string>
+    <string name="user_dict_settings_context_menu_edit_title">"Rediger"</string>
+    <string name="user_dict_settings_context_menu_delete_title">"Slett"</string>
+    <string name="user_dict_settings_empty_text">"Ordlisten er tom. Du kan legge til ord i menyen."</string>
+    <string name="testing">"Testing"</string>
+    <string name="testing_phone_info">"Telefoninformasjon"</string>
+    <string name="testing_battery_info">"Batteriinformasjon"</string>
+    <string name="testing_battery_history">"Batterihistorikk"</string>
+    <string name="quick_launch_title">"Hurtigtaster"</string>
+    <string name="quick_launch_summary">"Tastatursnarveier for å starte applikasjoner"</string>
+    <string name="quick_launch_assign_application">"Tilordne applikasjon"</string>
+    <string name="quick_launch_no_shortcut">"Ingen snarvei"</string>
+    <string name="quick_launch_shortcut">"Søk + <xliff:g id="SHORTCUT_LETTER">%1$s</xliff:g>"</string>
+    <string name="quick_launch_clear_dialog_title">"Fjern"</string>
+    <string name="quick_launch_clear_dialog_message">"Snarveien for <xliff:g id="SHORTCUT_LETTER">%1$s</xliff:g> (<xliff:g id="APPLICATION_NAME">%2$s</xliff:g>) will be fjernet."</string>
+    <string name="quick_launch_clear_ok_button">"OK"</string>
+    <string name="quick_launch_clear_cancel_button">"Avbryt"</string>
+    <string name="quick_launch_display_mode_applications">"Applikasjoner"</string>
+    <string name="quick_launch_display_mode_shortcuts">"Snarveier"</string>
+    <string name="input_methods_settings_title">"Skriving av tekst"</string>
+    <string name="input_methods_settings_summary">"Innstillinger for skriving av tekst"</string>
+    <string name="input_methods_settings_label_format">"Innstillinger for %s"</string>
+    <string name="development_settings_title">"Utvikling"</string>
+    <string name="development_settings_summary">"Innstillinger for applikasjonsutvikling"</string>
+    <string name="enable_adb">"USB-debugging"</string>
+    <string name="enable_adb_summary">"Debug-modus når USB er koblet til"</string>
+    <string name="keep_screen_on">"Forbli våken"</string>
+    <string name="keep_screen_on_summary">"Skjermen vil aldri blankes under lading"</string>
+    <string name="allow_mock_location">"Tillat manuell plassering"</string>
+    <string name="allow_mock_location_summary">"Tillat manuell plassering"</string>
+    <string name="gadget_picker_title">"Velg gadget"</string>
+    <!-- no translation found for widget_picker_title (9130684134213467557) -->
+    <skip />
+    <string name="battery_history_details_for">"Detaljer for UID %d"</string>
+    <string name="battery_history_uid">"UID <xliff:g id="USER_ID">%1$d</xliff:g>"</string>
+    <string name="battery_history_network_usage">"Nettbruk av <xliff:g id="APP_NAME">%1$s</xliff:g>:"</string>
+    <string name="battery_history_bytes_received">"Byte mottatt: <xliff:g id="BYTES">%1$d</xliff:g>"</string>
+    <string name="battery_history_bytes_sent">"Byte sendt: <xliff:g id="BYTES">%1$d</xliff:g>"</string>
+    <string name="battery_history_bytes_total">"Totalt antall byte: <xliff:g id="BYTES">%1$d</xliff:g>"</string>
+    <string name="battery_history_cpu_usage">"CPU-bruk av <xliff:g id="APP_NAME">%1$s</xliff:g>:"</string>
+    <string name="battery_history_user_time">"Brukertid:"</string>
+    <string name="battery_history_system_time">"Systemtid:"</string>
+    <string name="battery_history_total_time">"Total tid:"</string>
+    <string name="battery_history_starts">"Oppstarter: <xliff:g id="STARTS">%1$d</xliff:g>"</string>
+    <string name="battery_history_days">"<xliff:g id="DAYS">%1$d</xliff:g> dager, <xliff:g id="HOURS">%2$d</xliff:g> timer, <xliff:g id="MINUTES">%3$d</xliff:g> minutter, <xliff:g id="SECONDS">%4$d</xliff:g> sekunder"</string>
+    <string name="battery_history_hours">"<xliff:g id="HOURS">%1$d</xliff:g> timer, <xliff:g id="MINUTES">%2$d</xliff:g> minutter, <xliff:g id="SECONDS">%3$d</xliff:g> sekunder"</string>
+    <string name="battery_history_minutes">"<xliff:g id="MINUTES">%1$d</xliff:g> minutter, <xliff:g id="SECONDS">%2$d</xliff:g> sekunder"</string>
+    <string name="battery_history_seconds">"<xliff:g id="SECONDS">%1$d</xliff:g> sekunder"</string>
+    <string name="battery_history_packages_sharing_this_uid">"Pakker som deler denne UID-en:"</string>
+    <string name="battery_history_no_data">"Ingen batterihistorikk tilgjengelig"</string>
+    <string name="battery_history_sensor">"Sensor:"</string>
+    <!-- no translation found for battery_history_wakelock (608683447522396293) -->
+    <skip />
+    <string name="battery_history_used_by_packages">"Sensor brukt av pakker:"</string>
+    <string name="battery_history_sensor_usage">"Brukt <xliff:g id="COUNT">%1$d</xliff:g> ganger av <xliff:g id="PACKAGE">%2$s</xliff:g>"</string>
+    <string name="battery_history_sensor_usage_multi">"Brukt <xliff:g id="COUNT">%1$d</xliff:g> ganger av en av:"</string>
+    <!-- no translation found for battery_history_awake_label (8449792868990080882) -->
+    <skip />
+    <!-- no translation found for battery_history_screen_on_label (1848936521786339362) -->
+    <skip />
+    <!-- no translation found for battery_history_phone_on_label (700191958853142297) -->
+    <skip />
+    <!-- no translation found for battery_history_awake (4350886665719031057) -->
+    <skip />
+    <string name="battery_history_screen_on">"Tid brukt med skjermen på:"</string>
+    <!-- no translation found for battery_history_phone_on (4891504401623839532) -->
+    <skip />
+    <string name="battery_history_screen_on_battery">"På batteri:"</string>
+    <string name="battery_history_screen_on_plugged">"På nettstrøm:"</string>
+    <string name="usage_stats_label">"Bruksstatistikk"</string>
+    <string name="testing_usage_stats">"Bruksstatistikk"</string>
+    <string name="display_order_text">"Sorter etter:"</string>
+    <string name="app_name_label">"Applikasjon"</string>
+    <string name="launch_count_label">"Antall"</string>
+    <string name="usage_time_label">"Brukstid"</string>
+</resources>

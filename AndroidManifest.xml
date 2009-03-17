@@ -30,13 +30,17 @@
     <uses-permission android:name="android.permission.ACCESS_CHECKIN_PROPERTIES"/>
     <uses-permission android:name="android.permission.READ_USER_DICTIONARY"/>
     <uses-permission android:name="android.permission.WRITE_USER_DICTIONARY"/>
+    <uses-permission android:name="android.permission.RESTART_PACKAGES"/>
+    <uses-permission android:name="android.permission.PACKAGE_USAGE_STATS"/>
+    <uses-permission android:name="android.permission.BATTERY_STATS"/>
+    <uses-permission android:name="com.android.launcher.permission.READ_SETTINGS" />
+    <uses-permission android:name="com.android.launcher.permission.WRITE_SETTINGS" />
 
     <application android:label="@string/settings_label" android:icon="@drawable/ic_launcher_settings">
 
         <!-- Settings -->
 
         <activity android:name="Settings" android:label="@string/settings_label"
-                android:theme="@android:style/Theme.NoTitleBar"
                 android:clearTaskOnLaunch="true"
                 android:launchMode="singleTop">
             <intent-filter>
@@ -51,7 +55,7 @@
 
         <activity android:name="WirelessSettings" 
                 android:label="@string/radio_controls_title"
-                android:theme="@android:style/Theme.NoTitleBar">
+                >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <action android:name="android.settings.WIRELESS_SETTINGS" />
@@ -65,7 +69,7 @@
         <!-- Top-level settings -->
 
         <activity android:name=".wifi.WifiSettings" android:label="@string/wifi_settings"
-                android:theme="@android:style/Theme.NoTitleBar">
+                >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <action android:name="android.settings.WIFI_SETTINGS" />
@@ -76,7 +80,7 @@
         </activity>
 
         <activity android:name=".wifi.AdvancedSettings" android:label="@string/wifi_ip_settings_titlebar"
-                android:theme="@android:style/Theme.NoTitleBar">
+                >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <action android:name="android.settings.WIFI_IP_SETTINGS" />
@@ -85,7 +89,9 @@
         </activity>
 
         <activity android:name="ApnSettings" android:label="@string/apn_settings"
-                android:theme="@android:style/Theme.NoTitleBar">
+                  android:configChanges="orientation|keyboardHidden"
+                  android:launchMode="singleInstance" 
+                >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <action android:name="android.settings.APN_SETTINGS" />
@@ -96,7 +102,7 @@
 
         <activity android:name=".bluetooth.BluetoothSettings"
                   android:label="@string/bluetooth_settings_title"
-                  android:theme="@android:style/Theme.NoTitleBar">
+                  >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <action android:name="android.settings.BLUETOOTH_SETTINGS" />
@@ -105,7 +111,7 @@
         </activity>
 
         <activity android:name="DateTimeSettings" android:label="@string/date_and_time"
-                android:theme="@android:style/Theme.NoTitleBar">
+                >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <action android:name="android.settings.DATE_SETTINGS" />
@@ -136,7 +142,15 @@
         </activity>
 
         <activity android:name="LanguageSettings" android:label="@string/language_picker_title"
-                android:theme="@android:style/Theme.NoTitleBar">
+                >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+
+        <activity android:name="PhysicalKeyboardSettings" 
+                android:label="@string/builtin_keyboard_settings_title">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.DEFAULT" />
@@ -145,9 +159,10 @@
 
         <activity android:name="InputMethodsSettings" android:icon="@drawable/app_settings"
                 android:label="@string/input_methods_settings_title"
-                android:theme="@android:style/Theme.NoTitleBar">
+                >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+                <action android:name="android.settings.INPUT_METHOD_SETTINGS" />
                 <category android:name="android.intent.category.VOICE_LAUNCH" />
             </intent-filter>
         </activity>
@@ -156,12 +171,15 @@
                 android:label="@string/user_dict_settings_titlebar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+                <action android:name="android.settings.USER_DICTIONARY_SETTINGS" />
+                <action android:name="com.android.settings.USER_DICTIONARY_INSERT" />
+                <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.VOICE_LAUNCH" />
             </intent-filter>
         </activity>
 
         <activity android:name="SoundAndDisplaySettings" android:label="@string/sound_and_display_settings"
-                android:theme="@android:style/Theme.NoTitleBar">
+                >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <action android:name="com.android.settings.SOUND_SETTINGS" />
@@ -172,7 +190,7 @@
         </activity>
 
         <activity android:name="DeviceInfoSettings" android:label="@string/device_info_settings"
-                android:theme="@android:style/Theme.NoTitleBar">
+                >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.DEFAULT" />
@@ -190,7 +208,7 @@
         </activity>
 
         <activity android:name="ApplicationSettings" android:label="@string/applications_settings_header"
-                android:theme="@android:style/Theme.NoTitleBar">
+                >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <action android:name="android.settings.APPLICATION_SETTINGS" />
@@ -199,7 +217,9 @@
             </intent-filter>
         </activity>
 
-        <activity android:name="ManageApplications" android:label="@string/manageapplications_settings_title">
+        <activity android:name="ManageApplications"
+                  android:label="@string/manageapplications_settings_title"
+                  android:configChanges="orientation|keyboardHidden">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <action android:name="android.intent.action.MANAGE_PACKAGE_STORAGE" />
@@ -218,8 +238,7 @@
             </intent-filter>
         </activity>
 
-        <activity android:name="SecuritySettings" android:label="@string/lockpattern_settings_title"
-                android:theme="@android:style/Theme.NoTitleBar">
+        <activity android:name="SecuritySettings" android:label="@string/security_settings_title">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <action android:name="android.settings.SECURITY_SETTINGS" />
@@ -230,8 +249,7 @@
         </activity>
 
         <activity android:name="SimLockSettings" android:label="@string/sim_lock_settings"
-                android:process="com.android.phone"
-                android:theme="@android:style/Theme.NoTitleBar">
+                android:process="com.android.phone">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.DEFAULT" />
@@ -254,15 +272,14 @@
 
         <activity android:name="ChooseLockPatternTutorial" 
             android:label="@string/lockpattern_change_lock_pattern_label"
-            android:theme="@android:style/Theme.NoTitleBar">
+            >
             <intent-filter>
                 <action android:name="android.intent.action.DEFAULT" />
             </intent-filter>
         </activity>
         
         <activity android:name="ChooseLockPatternExample" 
-            android:label="@string/lockpattern_change_lock_pattern_label"
-            android:theme="@android:style/Theme.NoTitleBar">
+            android:label="@string/lockpattern_change_lock_pattern_label">
             <intent-filter>
                 <action android:name="android.intent.action.DEFAULT" />
             </intent-filter>
@@ -271,8 +288,7 @@
         <activity android:name="ZoneList" android:label="@string/choose_timezone" />
 
         <activity android:name=".deviceinfo.Status" android:label="@string/device_status_activity_title"
-                android:process="com.android.phone"
-                android:theme="@android:style/Theme.NoTitleBar">
+                android:process="com.android.phone">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.DEFAULT" />
@@ -280,8 +296,7 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".deviceinfo.Memory" android:label="@string/storage_settings_title"
-                android:theme="@android:style/Theme.NoTitleBar">
+        <activity android:name=".deviceinfo.Memory" android:label="@string/storage_settings_title">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <action android:name="android.settings.INTERNAL_STORAGE_SETTINGS" />
@@ -312,8 +327,14 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".quicklaunch.QuickLaunchSettings" android:label="@string/quick_launch_title"
-                android:theme="@android:style/Theme.NoTitleBar">
+        <activity android:name="MediaFormat" android:label="@string/media_format_title">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+            </intent-filter>
+        </activity>
+
+        <activity android:name=".quicklaunch.QuickLaunchSettings" 
+                android:label="@string/quick_launch_title">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <action android:name="com.android.settings.QUICK_LAUNCH_SETTINGS" />
@@ -329,8 +350,7 @@
         </activity>
 
         <activity android:name="DevelopmentSettings" android:icon="@drawable/app_settings"
-                android:label="@string/development_settings_title"
-                android:theme="@android:style/Theme.NoTitleBar">
+                android:label="@string/development_settings_title">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <action android:name="com.android.settings.APPLICATION_DEVELOPMENT_SETTINGS" />
@@ -339,19 +359,6 @@
 
 
 
-
-        <!-- System-triggered settings -->
-
-        <receiver android:name="SdCardErrorReceiver">
-            <intent-filter>
-                <action android:name="android.intent.action.MEDIA_BAD_REMOVAL" />
-                <data android:scheme="file" />
-            </intent-filter>
-            <intent-filter>
-                <action android:name="android.intent.action.MEDIA_UNMOUNTABLE" />
-                <data android:scheme="file" />
-            </intent-filter>
-        </receiver>
 
         <!-- Bluetooth stuff -->
 
@@ -394,14 +401,6 @@
             </intent-filter>
         </activity>
 
-        <activity android:name="DeviceInfo" android:label="@string/device_info_label">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.DEVELOPMENT_PREFERENCE" />
-                <category android:name="android.intent.category.VOICE_LAUNCH" />
-            </intent-filter>
-        </activity>
-
         <!-- DeviceInfo adds the user's requested build to stats upload.  -->
         <receiver android:name=".DeviceInfo$StatsReportReceiver">
             <intent-filter>
@@ -417,7 +416,7 @@
             </intent-filter>
         </activity>
 
-        <activity android:name="BatteryHistory" android:label="@string/battery_history_label">
+        <activity android:name=".battery_history.BatteryHistory" android:label="@string/battery_history_label">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.DEVELOPMENT_PREFERENCE" />
@@ -468,8 +467,7 @@
             </intent-filter>
         </activity>
 
-        <activity android:name="TestingSettings" android:label="@string/testing"
-                android:theme="@android:style/Theme.NoTitleBar">>
+        <activity android:name="TestingSettings" android:label="@string/testing">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.DEFAULT" />
@@ -483,6 +481,26 @@
             </intent-filter>
        </receiver>
 
+        <!-- Standard picker for widgets -->
+        <activity android:name="AppWidgetPickActivity" android:label="@string/widget_picker_title">
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_PICK" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+
+        <!-- Helper to bind any unbound widgets in Launcher, used as
+             part of initialization and upgrade process -->
+        <activity android:name="LauncherAppWidgetBinder"
+                android:permission="com.android.launcher.permission.WRITE_SETTINGS"
+                android:theme="@android:style/Theme.NoDisplay" android:exported="true" />
+
+        <activity android:name="UsageStats" android:label="@string/usage_stats_label">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.DEVELOPMENT_PREFERENCE" />
+            </intent-filter>
+        </activity>
 
     </application>
 

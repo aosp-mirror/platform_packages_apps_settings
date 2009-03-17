@@ -51,7 +51,6 @@ import java.lang.ref.WeakReference;
  * # Network
  * # Roaming
  * # IMEI
- * # IMSI
  * # Network type
  * # Signal Strength
  * # Battery Strength  : TODO
@@ -66,8 +65,8 @@ public class Status extends PreferenceActivity {
     private static final String KEY_BT_ADDRESS = "bt_address";
     private static final int EVENT_SIGNAL_STRENGTH_CHANGED = 200;
     private static final int EVENT_SERVICE_STATE_CHANGED = 300;
-    
-    private static final int EVENT_FIX_UPTIME = 500;
+
+    private static final int EVENT_UPDATE_STATS = 500;
 
     private TelephonyManager mTelephonyManager;
     private Phone mPhone = null;
@@ -108,9 +107,9 @@ public class Status extends PreferenceActivity {
                     status.updateServiceState(serviceState);
                     break;
 
-                case EVENT_FIX_UPTIME:
+                case EVENT_UPDATE_STATS:
                     status.updateTimes();
-                    sendMessageDelayed(obtainMessage(EVENT_FIX_UPTIME), 1000);
+                    sendEmptyMessageDelayed(EVENT_UPDATE_STATS, 1000);
                     break;
             }
         }
@@ -187,7 +186,6 @@ public class Status extends PreferenceActivity {
         setSummaryText("imei_sv",
                 ((TelephonyManager) getSystemService(TELEPHONY_SERVICE))
                         .getDeviceSoftwareVersion());
-        setSummaryText("imsi", mPhone.getSubscriberId());
         setSummaryText("number", mPhone.getLine1Number());
 
         mPhoneStateReceiver = new PhoneStateIntentReceiver(this, mHandler);
@@ -196,7 +194,7 @@ public class Status extends PreferenceActivity {
         
         setWifiStatus();
         setBtStatus();
-    }   
+    }
     
     @Override
     protected void onResume() {
@@ -212,7 +210,7 @@ public class Status extends PreferenceActivity {
         mTelephonyManager.listen(mPhoneStateListener,
                   PhoneStateListener.LISTEN_DATA_CONNECTION_STATE);
 
-        mHandler.sendMessageDelayed(mHandler.obtainMessage(EVENT_FIX_UPTIME), 0);
+        mHandler.sendEmptyMessage(EVENT_UPDATE_STATS);
     }
     
     @Override
@@ -222,7 +220,7 @@ public class Status extends PreferenceActivity {
         mPhoneStateReceiver.unregisterIntent();
         mTelephonyManager.listen(mPhoneStateListener, PhoneStateListener.LISTEN_NONE);
         unregisterReceiver(mBatteryInfoReceiver);
-        mHandler.removeMessages(EVENT_FIX_UPTIME);
+        mHandler.removeMessages(EVENT_UPDATE_STATS);
     }
 
     /**

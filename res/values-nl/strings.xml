@@ -16,9 +16,6 @@
 <resources xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
     <string name="device_info_default">"Onbekend"</string>
-    <string name="device_info_uptime">"Bedrijfstijd"</string>
-    <string name="device_info_awaketime">"Stand-bytijd"</string>
-    <string name="device_info_asleeptime">"Slaaptijd"</string>
     <string name="turn_on_radio">"Radio inschakelen"</string>
     <string name="turn_off_radio">"Radio uitschakelen"</string>
     <string name="turn_on_qxdm">"QXDM SD-logboek inschakelen"</string>
@@ -52,14 +49,12 @@
     <string name="radioInfo_lac">"LAC"</string>
     <string name="radioInfo_cid">"CID"</string>
     <string name="sdcard_unmount">"SD-kaart ontkoppelen"</string>
+    <string name="sdcard_format">"SD-kaart formatteren"</string>
     <string name="small_font">"Klein"</string>
     <string name="medium_font">"Gemiddeld"</string>
     <string name="large_font">"Groot"</string>
     <string name="font_size_save">"OK"</string>
     <string name="sdcard_setting">"SD-kaart"</string>
-    <string name="screen_off_timeout_label">"Nooit time-out tijdens opladen"</string>
-    <string name="stay_on">"Scherm altijd aan tijdens het opladen"</string>
-    <string name="app_launcher_newView_text">"Nieuwe AppLauncher"</string>
     <string name="battery_info_status_label">"Accustatus:"</string>
     <string name="battery_info_scale_label">"Accuschaal:"</string>
     <string name="battery_info_level_label">"Accuniveau:"</string>
@@ -87,11 +82,6 @@
     <string name="battery_info_health_over_voltage">"Overspanning"</string>
     <string name="battery_info_health_unspecified_failure">"Onbekende fout"</string>
     <string name="bluetooth">"Bluetooth"</string>
-    <string name="bluetooth_stopping">"Bluetooth wordt gestopt..."</string>
-    <string name="bluetooth_disabled">"Bluetooth inschakelen"</string>
-    <!-- no translation found for bluetooth_enabled (314506563815464155) -->
-    <skip />
-    <string name="bluetooth_enabling">"Bluetooth inschakelen…"</string>
     <string name="bluetooth_visibility">"Kan worden gevonden"</string>
     <string name="bluetooth_is_discoverable">"Kan gedurende <xliff:g id="DISCOVERABLE_TIME_PERIOD">%1$s</xliff:g> seconden worden gevonden…"</string>
     <string name="bluetooth_not_discoverable">"Zorgen dat het apparaat kan worden gevonden"</string>
@@ -99,53 +89,35 @@
     <string name="bluetooth_device_name">"Apparaatnaam"</string>
     <string name="bluetooth_name_not_set">"Geen naam ingesteld, accountnaam wordt gebruikt"</string>
     <string name="bluetooth_scan_for_devices">"Scannen naar apparaten"</string>
-    <string name="bluetooth_clear_list">"Apparaatlijst wissen"</string>
     <string name="bluetooth_disconnect_blank">"Verbinding met <xliff:g id="DEVICE_NAME">%1$s</xliff:g> wordt verbroken."</string>
     <string name="bluetooth_connected">"Verbonden"</string>
     <string name="bluetooth_disconnected">"Verbinding verbroken"</string>
     <string name="bluetooth_disconnecting">"Verbinding verbreken..."</string>
     <string name="bluetooth_connecting">"Verbinding maken..."</string>
-    <!-- no translation found for bluetooth_unknown (644716244548801421) -->
+    <!-- no translation found for bluetooth_unknown (1905151516611093010) -->
     <skip />
     <string name="bluetooth_not_connected">"Koppelen met dit apparaat"</string>
-    <string name="bluetooth_failed_to_enable">"Kan Bluetooth niet inschakelen"</string>
     <string name="bluetooth_pairing">"Koppelen..."</string>
-    <string name="failed_to_pair">"Kan niet koppelen met <xliff:g id="DEVICE_NAME">%1$s</xliff:g>."</string>
-    <string name="failed_to_connect">"Kan geen verbinding maken met <xliff:g id="DEVICE_NAME">%1$s</xliff:g>."</string>
-    <string name="bluetooth_paired">"Gekoppeld"</string>
-    <string name="bluetooth_paired_not_nearby">"Gekoppeld"</string>
+    <!-- no translation found for bluetooth_paired (1247541089000057726) -->
+    <skip />
     <string name="bluetooth_device">"handsfree/headset"</string>
-    <string name="bluetooth_disconnect">"Verbinding verbreken"</string>
-    <string name="bluetooth_connect">"Verbinden"</string>
-    <string name="bluetooth_unpair">"Koppeling ongedaan maken"</string>
-    <string name="bluetooth_pair">"Koppelen"</string>
     <string name="progress_scanning">"Scannen"</string>
     <string name="bluetooth_notif_ticker">"Bluetooth-koppelingsverzoek"</string>
     <string name="bluetooth_notif_title">"Koppelingsverzoek"</string>
-    <string name="bluetooth_notif_message">"Selecteer dit om te koppelen met"</string>
+    <string name="bluetooth_notif_message">"Selecteer dit om te koppelen met "</string>
     <string name="date_and_time">"Datum- en tijdinstellingen"</string>
     <string name="date_time_12_hour_sample">"13:00 uur"</string>
-    <string name="date_time_24_hour_sample">"13:00"</string>
+    <string name="date_time_24_hour_sample">"01:00:00 PM"</string>
     <string name="choose_timezone">"Tijdzone selecteren"</string>
     <string name="display_preview_label">"Voorbeeld:"</string>
     <string name="display_font_size_label">"Lettergrootte:"</string>
-    <!-- no translation found for intent_sender_data_label (6332324780477289261) -->
+    <!-- no translation found for intent_sender_data_label (8363026381459131554) -->
     <skip />
     <string name="intent_sender_sendbroadcast_text">"<xliff:g id="BROADCAST">broadcast</xliff:g> verzenden"</string>
     <string name="intent_sender_action_label">"<xliff:g id="ACTION">Action</xliff:g>:"</string>
     <string name="intent_sender_startactivity_text">"<xliff:g id="ACTIVITY">activity</xliff:g> starten"</string>
     <string name="intent_sender_resource_label">"<xliff:g id="RESOURCE">Resource</xliff:g>:"</string>
     <string name="intent_sender_account_label">"Account:"</string>
-    <string name="keyguard_pw_mod_text">"Blokkeringspatroon selecteren"</string>
-    <string name="keyguard_pin_mod_text">"PIN-code wijzigen"</string>
-    <string name="keyguard_label">"Toetsblokkering"</string>
-    <string name="keyguard_sim_pin_label">"SIM PIN-code"</string>
-    <string name="keyguard_password_old_password_error_text">"Het oude wachtwoord dat u heeft ingevoerd, is onjuist. Probeer het opnieuw."</string>
-    <string name="keyguard_password_button_text">"OK"</string>
-    <string name="keyguard_password_confirm_new_label">"Nieuw wachtwoord bevestigen:"</string>
-    <string name="keyguard_password_new_label">"Nieuw wachtwoord:"</string>
-    <string name="keyguard_password_old_label">"Oud wachtwoord:"</string>
-    <string name="keyguard_password_mismatch_error_text">"De twee wachtwoorden komen niet overeen. Probeer het opnieuw."</string>
     <string name="proxy_clear_text">"Wissen"</string>
     <string name="proxy_port_label">"Poort"</string>
     <string name="proxy_defaultView_text">"Standaardwaarden herstellen"</string>
@@ -160,7 +132,6 @@
     <string name="radio_info_signal_location_label">"Locatie:"</string>
     <string name="radio_info_neighboring_location_label">"Naburige CID:"</string>
     <string name="radio_info_data_attempts_label">"Gegevenspogingen:"</string>
-    <string name="radio_info_imsi_label">"IMSI:"</string>
     <string name="radio_info_gprs_service_label">"GPRS-service:"</string>
     <string name="radio_info_roaming_label">"Roaming:"</string>
     <string name="radio_info_imei_label">"IMEI-nummer:"</string>
@@ -188,15 +159,12 @@
     <string name="radio_info_smsc_label">"SMSC:"</string>
     <string name="radio_info_smsc_update_label">"Bijwerken"</string>
     <string name="radio_info_smsc_refresh_label">"Vernieuwen"</string>
+    <string name="radio_info_toggle_dns_check_label">"DNS-controle in-/uitschakelen"</string>
     <string name="band_mode_title">"GSM/UMTS-band instellen"</string>
     <string name="band_mode_loading">"Bandlijst laden..."</string>
     <string name="band_mode_set">"Instellen"</string>
     <string name="band_mode_failed">"Mislukt"</string>
     <string name="band_mode_succeeded">"Geslaagd"</string>
-    <string name="ringer_volume_ringer_mode_label">"Beltoonmodus"</string>
-    <string name="ringer_volume_screen_increasing_text">"Belvolume verhogen"</string>
-    <string name="ringer_volume_ringtone_label">"Beltoon"</string>
-    <string name="ringer_volume_instructions">"Volumetoetsen gebruiken voor aanpassing belvolume"</string>
     <string name="sdcard_changes_instructions">"Wijzigingen worden van kracht als de USB-kabel opnieuw wordt aangesloten"</string>
     <string name="sdcard_settings_screen_mass_storage_text">"USB-massaopslag inschakelen"</string>
     <string name="sdcard_settings_total_bytes_label">"Totaal aantal bytes:"</string>
@@ -208,28 +176,13 @@
     <string name="sdcard_settings_used_bytes_label">"Gebruikte bytes:"</string>
     <string name="sdcard_settings_scanning_status">"SD-kaart scannen op media..."</string>
     <string name="sdcard_settings_read_only_status">"Gekoppelde SD-kaart alleen-lezen"</string>
-    <string name="sdcard_removal_alert_title">"Verwijdering onveilige SD-kaart!"</string>
-    <string name="sdcard_unmountable_alert_title">"SD-kaart onleesbaar"</string>
-    <string name="telephony_user_label">"Gebruiker:"</string>
-    <string name="telephony_server_label">"Server:"</string>
-    <string name="telephony_name_label">"Naam:"</string>
-    <string name="telephony_mmsc_label">"MMSC:"</string>
-    <string name="telephony_apn_label">"APN:"</string>
-    <string name="telephony_mcc_label">"MCC:"</string>
-    <string name="telephony_port_label">"Poort:"</string>
-    <string name="telephony_password_label">"Wachtwoord:"</string>
-    <string name="telephony_proxy_label">"Proxy:"</string>
-    <string name="telephony_mnc_label">"MNC:"</string>
-    <string name="telephony_mmsproxy_label">"MMS-proxy:"</string>
-    <string name="telephony_mmsport_label">"MMS-poort:"</string>
     <string name="next_label">"Volgende"</string>
     <string name="language_picker_title">"Landinstelling"</string>
     <string name="select_your_language">"Uw taal selecteren"</string>
     <string name="activity_picker_label">"Activiteit selecteren"</string>
     <string name="device_info_label">"Apparaatinfo"</string>
     <string name="battery_info_label">"Accu-info"</string>
-    <!-- no translation found for battery_history_label (8242244969757414501) -->
-    <skip />
+    <string name="battery_history_label">"Accugeschiedenis"</string>
     <string name="display_label">"Weergave"</string>
     <string name="phone_info_label">"Telefooninfo"</string>
     <string name="sd_card_settings_label">"SD-kaart"</string>
@@ -255,7 +208,7 @@
     <string name="zone_list_menu_sort_alphabetically">"Alfabetisch sorteren"</string>
     <string name="zone_list_menu_sort_by_timezone">"Sorteren op tijdzone"</string>
     <string name="security_settings_title">"Beveiliging en locatie"</string>
-    <string name="security_settings_summary">"\'Mijn locatie\' instellen, scherm deblokkeren en SIM-kaart blokkeren"</string>
+    <string name="security_settings_summary">"Mijn locatie\' instellen, scherm ontgrendelen en SIM-kaart blokkeren"</string>
     <string name="security_passwords_title">"Wachtwoorden"</string>
     <string name="bluetooth_quick_toggle_title">"Bluetooth"</string>
     <string name="bluetooth_quick_toggle_summary">"Bluetooth inschakelen"</string>
@@ -264,23 +217,12 @@
     <string name="bluetooth_settings_summary">"Verbindingen beheren, apparaatnaam en vindbaarheid instellen"</string>
     <string name="bluetooth_pin_entry">"Bluetooth-koppelingsverzoek"</string>
     <string name="bluetooth_device_info">"Bluetooth-apparaatinfo"</string>
-    <string name="bluetooth_pairing_msg">"Koppelen..."</string>
     <string name="bluetooth_enter_pin_msg">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g>"\n\n"Typ de PIN-code om te koppelen."\n"(Probeer 0000 of 1234.)"</string>
     <string name="bluetooth_error_title">"Let op"</string>
     <string name="bluetooth_pairing_error_message">"Er is een probleem opgetreden bij het koppelen met <xliff:g id="DEVICE_NAME">%1$s</xliff:g>."</string>
-    <string name="bluetooth_pairing_alternate_error_message">"Er is een probleem opgetreden bij het koppelen met <xliff:g id="DEVICE_NAME">%1$s</xliff:g>. Probeer een andere PIN-code."</string>
     <string name="bluetooth_pairing_pin_error_message">"Er is een probleem opgetreden bij het koppelen met <xliff:g id="DEVICE_NAME">%1$s</xliff:g>, omdat de opgegeven PIN-code onjuist is."</string>
     <string name="bluetooth_connecting_error_message">"Er is een probleem opgetreden bij het verbinden met <xliff:g id="DEVICE_NAME">%1$s</xliff:g>."</string>
-    <string name="bluetooth_new_data">"Nieuwe gegevens invoeren"</string>
-    <string name="bluetooth_new_data_confirm">"OK"</string>
-    <string name="bluetooth_new_data_cancel">"Annuleren"</string>
-    <string name="bluetooth_scan_for_new_devices">"Scannen naar nieuwe apparaten..."</string>
-    <string name="bluetooth_discoverability_panel_title">"Maken..."</string>
-    <string name="bluetooth_discoverable">"Kan gedurende <xliff:g id="DISCOVERABLE_TIME_PERIOD">%1$s</xliff:g> seconden worden gevonden"</string>
-    <string name="bluetooth_connectable">"Alleen voor verbinding"</string>
-    <string name="bluetooth_neither">"Kan niet worden gevonden of verbonden"</string>
     <string name="bluetooth_preference_scan_title">"Scannen naar apparaten"</string>
-    <string name="bluetooth_preference_scan_summary">"Apparaten zoeken om mee te koppelen"</string>
     <string name="bluetooth_device_context_connect">"Verbinden"</string>
     <string name="bluetooth_device_context_disconnect">"Verbinding verbreken"</string>
     <string name="bluetooth_device_context_pair_connect">"Koppelen en verbinden"</string>
@@ -365,19 +307,16 @@
     <string name="wifi_gateway">"Gateway"</string>
     <string name="wifi_netmask">"Netmasker"</string>
     <string name="wifi_context_menu_connect">"Verbinding maken met netwerk"</string>
-    <string name="wifi_context_menu_forget">"Netwerk vergeten"</string>
+    <string name="wifi_context_menu_forget">"Netwerk niet gebruiken"</string>
     <string name="wifi_context_menu_change_password">"Wachtwoord wijzigen"</string>
     <string name="wifi_advanced_titlebar">"Geavanceerd"</string>
     <string name="wifi_setting_num_channels_title">"Regulerend domein"</string>
     <string name="wifi_setting_num_channels_summary">"Het aantal te gebruiken kanalen instellen"</string>
     <string name="wifi_setting_num_channels_error">"Er is een probleem opgetreden bij het instellen van het regulerende domein."</string>
     <string name="wifi_setting_num_channels_channel_phrase">"<xliff:g id="NUM_CHANNELS">%1$d</xliff:g> kanalen"</string>
-    <!-- no translation found for wifi_setting_sleep_policy_title (1367731352485585528) -->
-    <skip />
-    <!-- no translation found for wifi_setting_sleep_policy_summary (7573693311804602041) -->
-    <skip />
-    <!-- no translation found for wifi_setting_sleep_policy_error (5103670439972135148) -->
-    <skip />
+    <string name="wifi_setting_sleep_policy_title">"Wi-Fi-slaapbeleid"</string>
+    <string name="wifi_setting_sleep_policy_summary">"Opgeven wanneer wordt overgeschakeld van Wi-Fi naar mobiele gegevens"</string>
+    <string name="wifi_setting_sleep_policy_error">"Er is een probleem opgetreden bij het instellen van het slaapbeleid."</string>
     <string name="wifi_advanced_mac_address_title">"MAC-adres"</string>
     <string name="fragment_status_scanning">"Scannen..."</string>
     <string name="fragment_status_connecting">"Verbinding maken met <xliff:g id="NETWORK_NAME">%1$s</xliff:g>..."</string>
@@ -420,32 +359,19 @@
     <string name="sound_effects_enable_title">"Hoorbare selectie"</string>
     <string name="sound_effects_enable_summary_on">"Geluid afspelen bij schermselectie"</string>
     <string name="sound_effects_enable_summary_off">"Geluid afspelen bij schermselectie"</string>
+    <string name="play_media_notification_sounds_enable_title">"SD-kaartmeldingen"</string>
+    <string name="play_media_notification_sounds_enable_summary_on">"Geluiden voor SD-kaartmeldingen uitschakelen"</string>
+    <string name="play_media_notification_sounds_enable_summary_off">"Geluiden voor SD-kaartmeldingen inschakelen"</string>
     <string name="sync_settings">"Gegevenssynchronisatie"</string>
     <string name="sync_settings_summary">"Selecteren welke toepassingen worden gesynchroniseerd"</string>
-    <string name="sync_settings_header_general_settings">"Algemene instellingen voor synchronisatie"</string>
-    <string name="sync_settings_header_application_settings">"Synchronatie-instellingen van de toepassing"</string>
-    <string name="sync_too_many_deletes">"Verwijderingslimiet overschreden"</string>
-    <string name="sync_automatically">"Automatische synchronisatie"</string>
-    <string name="sync_enabled">"Gegevens automatisch synchroniseren"</string>
-    <string name="sync_disabled">"Selecteer dit om gegevens automatisch te synchroniseren"</string>
-    <string name="sync_menu_sync_now">"Nu synchroniseren"</string>
-    <string name="sync_menu_sync_cancel">"Synchronisatie annuleren"</string>
-    <string name="sync_gmail">"Gmail"</string>
-    <string name="sync_calendar">"Agenda"</string>
-    <string name="sync_contacts">"Contactpersonen"</string>
-    <string name="sync_too_many_deletes_desc">"Er zijn <xliff:g id="NUMBER_OF_DELETED_ITEMS">%1$d</xliff:g> verwijderde items voor <xliff:g id="TYPE_OF_SYNC">%2$s</xliff:g>, account <xliff:g id="ACCOUNT_NAME">%3$s</xliff:g>. Wat wilt u doen?"</string>
-    <string name="sync_really_delete">"De items verwijderen."</string>
-    <string name="sync_undo_deletes">"Verwijderingen ongedaan maken."</string>
-    <string name="sync_do_nothing">"Nu niets doen."</string>
-    <string name="sync_is_failing">"Er zijn momenteel problemen met de synchronisatie. Synchronisatie wordt snel opnieuw uitgevoerd."</string>
-    <string name="sync_plug"><font fgcolor="#ffffffff">"Welkom bij Google Sync!"</font>" "\n"Een benadering van Google voor de synchronisatie van gegevens, zodat u altijd en overal toegang heeft tot uw contactpersonen, afspraken en nog veel meer."</string>
     <string name="display_settings">"Instellingen weergeven"</string>
     <string name="animations_title">"Animatie"</string>
     <string name="animations_summary_on">"Animatie weergeven bij het openen/sluiten van vensters"</string>
     <string name="animations_summary_off">"Animatie weergeven bij het openen/sluiten van vensters"</string>
     <string name="brightness">"Helderheid"</string>
+    <string name="brightness_summary">"Helderheid van het scherm aanpassen"</string>
     <string name="screen_timeout">"Time-out scherm"</string>
-    <string name="dim_screen">"Scherm dimmen"</string>
+    <string name="screen_timeout_summary">"De vertraging voor het automatisch uitschakelen van het scherm aanpassen"</string>
     <string name="sim_lock_settings">"Instellingen SIM-kaartblokkering"</string>
     <string name="sim_lock_settings_category">"SIM-kaartblokkering instellen"</string>
     <string name="sim_lock_settings_title">"SIM-kaartblokkering"</string>
@@ -455,7 +381,7 @@
     <string name="sim_pin_change">"SIM PIN-code wijzigen"</string>
     <string name="sim_enter_pin">"SIM PIN-code"</string>
     <string name="sim_enable_sim_lock">"SIM-kaart blokkeren"</string>
-    <string name="sim_disable_sim_lock">"SIM-kaart deblokkeren"</string>
+    <string name="sim_disable_sim_lock">"SIM-kaart ontgrendelen"</string>
     <string name="sim_enter_old">"Oude SIM PIN-code"</string>
     <string name="sim_enter_new">"Nieuwe SIM PIN-code"</string>
     <string name="sim_reenter_new">"Nieuwe PIN-code nogmaals invoeren"</string>
@@ -480,12 +406,10 @@
     <string name="device_status">"Status"</string>
     <string name="device_status_summary">"IMEI-nummer, telefoonnummer, signaal, enzovoort"</string>
     <string name="storage_settings_title">"SD-kaart en telefoongeheugen"</string>
-    <string name="storage_settings_summary">"SD-kaart ontkoppelen, beschikbar opslagruimte weergeven"</string>
+    <string name="storage_settings_summary">"SD-kaart ontkoppelen, beschikbare opslagruimte weergeven"</string>
     <string name="status_number">"Telefoonnummer"</string>
-    <!-- no translation found for status_network_type (3279383550222116235) -->
-    <skip />
-    <!-- no translation found for status_data_state (5503181397066522950) -->
-    <skip />
+    <string name="status_network_type">"Type mobiel netwerk"</string>
+    <string name="status_data_state">"Status mobiel netwerk"</string>
     <string name="status_service_state">"Servicestatus"</string>
     <string name="status_signal_strength">"Signaalsterkte"</string>
     <string name="status_roaming">"Roaming"</string>
@@ -499,9 +423,12 @@
     <string name="sd_memory">"SD-kaart"</string>
     <string name="memory_available">"Beschikbare ruimte"</string>
     <string name="memory_size">"Totale ruimte"</string>
-    <string name="sd_eject">"SD-kaart loskoppelen/verwijderen"</string>
+    <string name="sd_eject">"SD-kaart ontkoppelen"</string>
+    <string name="sd_eject_summary">"De SD-kaart ontkoppelen zodat u deze veilig kunt verwijderen"</string>
+    <string name="sd_format">"SD-kaart formatteren"</string>
+    <string name="sd_format_summary">"De SD-kaart formatteren (wissen)"</string>
     <string name="sd_unavailable">"Niet beschikbaar"</string>
-    <string name="read_only">"(Alleen-lezen)"</string>
+    <string name="read_only">" (Alleen-lezen)"</string>
     <string name="battery_status_title">"Accustatus"</string>
     <string name="battery_level_title">"Accuniveau"</string>
     <string name="apn_settings">"APN\'s"</string>
@@ -535,9 +462,17 @@
     <string name="master_clear_button_text">"Telefoon opnieuw instellen"</string>
     <string name="master_clear_final_desc">"Telefoon opnieuw instellen en alle gegevens en toepassingen wissen? Actie kan niet ongedaan worden gemaakt!"</string>
     <string name="master_clear_final_button_text">"Alles wissen"</string>
-    <string name="master_clear_gesture_prompt">"Teken uw deblokkeringspatroon"</string>
-    <string name="master_clear_gesture_explanation">"U moet uw deblokkeringspatroon tekenen om het opnieuw instellen van de telefoon te bevestigen."</string>
+    <string name="master_clear_gesture_prompt">"Teken uw ontgrendelingspatroon"</string>
+    <string name="master_clear_gesture_explanation">"U moet uw ontgrendelingspatroon tekenen om het opnieuw instellen van de telefoon te bevestigen."</string>
     <string name="master_clear_failed">"Niet opnieuw ingesteld, omdat de service \'Systeem wissen\' niet beschikbaar is."</string>
+    <string name="media_format_title">"SD-kaart formatteren."</string>
+    <string name="media_format_summary">"Hiermee worden alle gegevens op de SD-kaart gewist"</string>
+    <string name="media_format_desc">"Deze actie wist de gegevens van de SD-kaart die in de telefoon is geplaatst. ALLE gegevens op de kaart gaan dan verloren."</string>
+    <string name="media_format_button_text">"SD-kaart formatteren"</string>
+    <string name="media_format_final_desc">"Wilt u de SD-kaart formatteren en al uw mediabestanden wissen? Deze actie kan niet ongedaan worden gemaakt."</string>
+    <string name="media_format_final_button_text">"Alles wissen"</string>
+    <string name="media_format_gesture_prompt">"Teken uw deblokkeringspatroon"</string>
+    <string name="media_format_gesture_explanation">"U moet uw deblokkeringspatroon tekenen om het formatteren van een SD-kaart te bevestigen."</string>
     <string name="call_settings_title">"Oproepinstellingen"</string>
     <string name="call_settings_summary">"Voicemail, oproepen doorschakelen, wisselgesprek, beller-id instellen."</string>
     <string name="network_settings_title">"Mobiele netwerken"</string>
@@ -559,49 +494,54 @@
     <string name="settings_license_activity_title">"Open-sourcelicenties"</string>
     <string name="settings_license_activity_unavailable">"Er is een probleem bij het laden van de licenties."</string>
     <string name="settings_license_activity_loading">"Laden..."</string>
-    <string name="lock_settings_title">"Deblokkeringspatroon scherm"</string>
-    <string name="lockpattern_change_lock_pattern_label">"Deblokkeringspatroon wijzigen"</string>
+    <string name="lock_settings_title">"Ontgrendelingspatroon scherm"</string>
+    <string name="lockpattern_change_lock_pattern_label">"Ontgrendelingspatroon wijzigen"</string>
     <string name="lockpattern_need_to_unlock">"Opgeslagen patroon bevestigen"</string>
     <string name="lockpattern_need_to_unlock_wrong">"Probeer het opnieuw:"</string>
-    <string name="lockpattern_recording_intro_header">"Teken een deblokkeringspatroon"</string>
+    <string name="lockpattern_recording_intro_header">"Teken een ontgrendelingspatroon"</string>
     <string name="lockpattern_recording_intro_footer">"Druk op \'Menu\' voor hulp."</string>
     <string name="lockpattern_recording_inprogress">"Haal uw vinger van het scherm als u klaar bent."</string>
     <string name="lockpattern_recording_incorrect_too_short">"Verbind minimaal <xliff:g id="NUMBER">%d</xliff:g> punten. Probeer het opnieuw:"</string>
     <string name="lockpattern_pattern_entered_header">"Patroon opgenomen!"</string>
     <string name="lockpattern_need_to_confirm">"Teken patroon nogmaals ter bevestiging:"</string>
-    <string name="lockpattern_pattern_confirmed_header">"Uw nieuwe deblokkeringspatroon:"</string>
+    <string name="lockpattern_pattern_confirmed_header">"Uw nieuwe ontgrendelingspatroon:"</string>
     <string name="lockpattern_confirm_button_text">"Bevestigen"</string>
     <string name="lockpattern_restart_button_text">"Opnieuw tekenen"</string>
     <string name="lockpattern_retry_button_text">"Opnieuw proberen"</string>
     <string name="lockpattern_continue_button_text">"Doorgaan"</string>
     <string name="lockpattern_settings_title">"Deblokkeringspatroon"</string>
     <string name="lockpattern_settings_enable_title">"Patroon vereist"</string>
-    <string name="lockpattern_settings_enable_summary">"U moet een patroon tekenen om het scherm te deblokkeren"</string>
+    <string name="lockpattern_settings_enable_summary">"U moet een patroon tekenen om het scherm te ontgrendelen"</string>
     <string name="lockpattern_settings_enable_visible_pattern_title">"Zichtbaar patroon gebruiken"</string>
     <string name="lockpattern_settings_enable_tactile_feedback_title">"Tastbare feedback gebruiken"</string>
-    <string name="lockpattern_settings_choose_lock_pattern">"Deblokkeringspatroon instellen"</string>
-    <string name="lockpattern_settings_change_lock_pattern">"Deblokkeringspatroon wijzigen"</string>
-    <string name="lockpattern_settings_help_how_to_record">"U tekent als volgt een deblokkeringspatroon"</string>
+    <string name="lockpattern_settings_choose_lock_pattern">"Ontgrendelingspatroon instellen"</string>
+    <string name="lockpattern_settings_change_lock_pattern">"Ontgrendelingspatroon wijzigen"</string>
+    <string name="lockpattern_settings_help_how_to_record">"U tekent als volgt een ontgrendelingspatroon"</string>
     <string name="lockpattern_too_many_failed_confirmation_attempts_header">"Te veel onjuiste pogingen!"</string>
     <string name="lockpattern_too_many_failed_confirmation_attempts_footer">"Probeer het over <xliff:g id="NUMBER">%d</xliff:g> seconden opnieuw."</string>
     <string name="skip_button_label">"Annuleren"</string>
     <string name="next_button_label">"Volgende"</string>
     <string name="lock_title">"Uw telefoon beveiligen"</string>
-    <string name="lock_intro_message"><font size="17">"Beveilig uw telefoon tegen ongeoorloofd gebruik door het instellen van een persoonlijk schermdeblokkeringspatroon. "\n<font height="17">\n</font><b>"1"</b>"  Op het volgende scherm ziet u hoe een voorbeeldpatroon wordt getekend. "\n<font height="17">\n</font><b>"2"</b>"  Teken uw eigen persoonlijke deblokkeringspatroon als het voorbeeld is voltooid. U kunt verschillende patronen uitproberen, maar u moet minimaal vier punten met elkaar verbinden. "\n<font height="17">\n</font><b>"3"</b>"  Teken uw patroon nogmaals ter bevestiging. "\n<font height="17">\n</font><b>"Bent u er klaar voor? Selecteer \'Volgende\'"</b>". "\n<font height="3">\n</font>"Als u uw telefoon niet wilt beveiligen, selecteert u \'Annuleren\'."</font></string>
+    <string name="lock_intro_message"><font size="17">"Beveilig uw telefoon tegen ongeoorloofd gebruik door het instellen van een persoonlijk schermontgrendelingspatroon. "\n<font height="17">\n</font><b>"1"</b>"  Op het volgende scherm ziet u hoe een voorbeeldpatroon wordt getekend. "\n<font height="17">\n</font><b>"2"</b>"  Teken uw eigen persoonlijke deblokkeringspatroon als het voorbeeld is voltooid. U kunt verschillende patronen uitproberen, maar u moet minimaal vier punten met elkaar verbinden. "\n<font height="17">\n</font><b>"3"</b>"  Teken uw patroon nogmaals ter bevestiging. "\n<font height="17">\n</font><b>"Bent u er klaar voor? Selecteer \'Volgende\'"</b>". "\n<font height="3">\n</font>"Als u uw telefoon niet wilt beveiligen, selecteert u \'Annuleren\'."</font></string>
     <string name="lock_example_title">"Voorbeeldpatroon"</string>
     <string name="lock_example_message">"Verbind minimaal vier punten. "\n" "\n"Selecteer \'Volgende\' als u klaar bent om uw eigen patroon te tekenen."</string>
     <string name="manageapplications_settings_title">"Toepassingen beheren"</string>
+    <string name="manageapplications_settings_summary">"Geïnstalleerde toepassingen beheren en verwijderen"</string>
     <string name="applications_settings">"Toepassingen"</string>
     <string name="applications_settings_summary">"Toepassingen beheren, sneltoetsen voor snelstarten instellen"</string>
     <string name="applications_settings_header">"Toepassingsinstellingen"</string>
     <string name="install_applications">"Onbekende bronnen"</string>
     <string name="install_unknown_applications">"Installatie van andere toepassingen dan Market-toepassingen toestaan"</string>
     <string name="install_all_warning">"Uw telefoon en persoonlijke gegevens zijn gevoeliger voor aanvallen door toepassingen van onbekende bronnen. U gaat ermee akkoord dat u alleen verantwoordelijk bent voor enige schade aan uw telefoon of verlies van gegevens die voortkomen uit het gebruik van deze toepassingen."</string>
-    <string name="manage_applications_title">"Toepassingen beheren"</string>
     <string name="application_info_label">"Toepassingsinfo"</string>
     <string name="storage_label">"Opslagruimte"</string>
     <string name="auto_launch_label">"Standaard starten"</string>
     <string name="permissions_label">"Machtigingen"</string>
+    <string name="cache_header_label">"Cachegeheugen"</string>
+    <string name="clear_cache_btn_text">"Cache wissen"</string>
+    <string name="cache_size_label">"Cachegeheugen"</string>
+    <string name="controls_label">"Bedieningselementen"</string>
+    <string name="force_stop">"Nu stoppen"</string>
     <string name="total_size_label">"Totaal"</string>
     <string name="application_size_label">"Toepassing"</string>
     <string name="data_size_label">"Gegevens"</string>
@@ -614,6 +554,8 @@
     <string name="sort_order_alpha">"Sorteren"</string>
     <string name="sort_order_size">"Sorteren op grootte"</string>
     <string name="manage_space_text">"Ruimte beheren"</string>
+    <string name="filter">"Filter"</string>
+    <string name="filter_dlg_title">"Filteropties selecteren"</string>
     <string name="filter_apps_all">"Alles"</string>
     <string name="filter_apps_third_party">"Derden"</string>
     <string name="filter_apps_running">"Wordt uitgevoerd"</string>
@@ -627,46 +569,36 @@
     <string name="app_not_found_dlg_text">"De toepassing is niet gevonden in de lijst met geïnstalleerde toepassingen."</string>
     <string name="clear_data_failed">"Kan toepassingsgegevens niet wissen."</string>
     <string name="security_settings_desc">"Deze toepassing heeft toegang tot de volgende opties van uw telefoon:"</string>
-    <string name="computing_size">"Bezig met berekenen..."</string>
+    <string name="computing_size">"Berekenen…"</string>
     <string name="invalid_size_value">"Kan grootte van pakket niet berekenen"</string>
     <string name="empty_list_msg">"U heeft geen toepassingen van derden geïnstalleerd."</string>
-    <string name="cache_header_label">"Cachegeheugen"</string>
-    <string name="clear_cache_btn_text">"Cache wissen"</string>
-    <string name="cache_size_label">"Cachegeheugen"</string>
     <string name="language_settings">"Landinstelling en tekst"</string>
     <string name="language_settings_summary">"Instellingen voor taal en regio, tekstinvoer en autocorrectieopties opgeven"</string>
     <string name="language_category">"Landinstelling"</string>
     <string name="text_category">"Tekstinstellingen"</string>
     <string name="phone_language">"Landinstelling selecteren"</string>
+    <string name="phone_language_summary">"Taal en regio selecteren"</string>
     <string name="auto_replace">"Automatisch vervangen"</string>
     <string name="auto_replace_summary">"Corrigeer verkeerd getypte woorden"</string>
     <string name="auto_caps">"Automatische hoofdletters"</string>
     <string name="auto_caps_summary">"Eerste letters in zinnen met hoofdletter"</string>
     <string name="auto_punctuate">"Automatische interpunctie"</string>
+    <string name="hardkeyboard_category">"Instellingen voor vast toetsenbord"</string>
     <string name="auto_punctuate_summary">"Druk twee keer op de spatiebalk om \'.\' in te voegen"</string>
     <string name="show_password">"Zichtbare wachtwoorden"</string>
     <string name="show_password_summary">"Wachtwoord weergeven tijdens het typen"</string>
-    <!-- no translation found for user_dict_settings_titlebar (765659257455000490) -->
-    <skip />
-    <!-- no translation found for user_dict_settings_title (8357027437499042191) -->
-    <skip />
-    <!-- no translation found for user_dict_settings_summary (2460427065601355471) -->
-    <skip />
-    <!-- no translation found for user_dict_settings_add_menu_title (4056762757149923551) -->
-    <skip />
-    <!-- no translation found for user_dict_settings_add_dialog_title (4702613990174126482) -->
-    <skip />
-    <!-- no translation found for user_dict_settings_context_menu_edit_title (2210564879320004837) -->
-    <skip />
-    <!-- no translation found for user_dict_settings_context_menu_delete_title (9140703913776549054) -->
-    <skip />
-    <!-- no translation found for user_dict_settings_empty_text (6209268025109242806) -->
-    <skip />
+    <string name="user_dict_settings_titlebar">"Gebruikerswoordenboek"</string>
+    <string name="user_dict_settings_title">"Gebruikerswoordenboek"</string>
+    <string name="user_dict_settings_summary">"Woorden toevoegen aan en verwijderen uit gebruikerswoordenboek"</string>
+    <string name="user_dict_settings_add_menu_title">"Toevoegen"</string>
+    <string name="user_dict_settings_add_dialog_title">"Toevoegen aan woordenboek"</string>
+    <string name="user_dict_settings_context_menu_edit_title">"Bewerken"</string>
+    <string name="user_dict_settings_context_menu_delete_title">"Verwijderen"</string>
+    <string name="user_dict_settings_empty_text">"U heeft geen woorden in het gebruikerswoordenboek. U kunt een woord toevoegen via het menu."</string>
     <string name="testing">"Testen"</string>
     <string name="testing_phone_info">"Telefooninformatie"</string>
     <string name="testing_battery_info">"Accu-informatie"</string>
-    <!-- no translation found for testing_battery_history (3043329445810695647) -->
-    <skip />
+    <string name="testing_battery_history">"Accugeschiedenis"</string>
     <string name="quick_launch_title">"Snelstarten"</string>
     <string name="quick_launch_summary">"Sneltoetsen instellen voor starten toepassingen"</string>
     <string name="quick_launch_assign_application">"Toepassing toewijzen"</string>
@@ -680,8 +612,7 @@
     <string name="quick_launch_display_mode_shortcuts">"Sneltoetsen"</string>
     <string name="input_methods_settings_title">"Tekstinvoer"</string>
     <string name="input_methods_settings_summary">"Opties voor tekstinvoer beheren"</string>
-    <!-- no translation found for input_methods_settings_label_format (4882768027634191074) -->
-    <skip />
+    <string name="input_methods_settings_label_format">"Instellingen voor %s"</string>
     <string name="development_settings_title">"Ontwikkeling"</string>
     <string name="development_settings_summary">"Opties instellen voor toepassingsontwikkeling"</string>
     <string name="enable_adb">"USB-foutopsporing"</string>
@@ -690,4 +621,50 @@
     <string name="keep_screen_on_summary">"Scherm gaat nooit uit tijdens het opladen"</string>
     <string name="allow_mock_location">"Neplocaties toestaan"</string>
     <string name="allow_mock_location_summary">"Neplocaties toestaan"</string>
+    <!-- no translation found for gadget_picker_title (98374951396755811) -->
+    <skip />
+    <!-- no translation found for widget_picker_title (9130684134213467557) -->
+    <skip />
+    <string name="battery_history_details_for">"Details voor UID %d"</string>
+    <string name="battery_history_uid">"UID <xliff:g id="USER_ID">%1$d</xliff:g>"</string>
+    <string name="battery_history_network_usage">"Netwerkgebruiksdetails voor <xliff:g id="APP_NAME">%1$s</xliff:g>:"</string>
+    <string name="battery_history_bytes_received">"Bytes ontvangen: <xliff:g id="BYTES">%1$d</xliff:g>"</string>
+    <string name="battery_history_bytes_sent">"Bytes verzonden: <xliff:g id="BYTES">%1$d</xliff:g>"</string>
+    <string name="battery_history_bytes_total">"Totaal aantal bytes: <xliff:g id="BYTES">%1$d</xliff:g>"</string>
+    <string name="battery_history_cpu_usage">"CPU-gebruiksdetails voor <xliff:g id="APP_NAME">%1$s</xliff:g>:"</string>
+    <string name="battery_history_user_time">"Gebruikerstijd:"</string>
+    <string name="battery_history_system_time">"Systeemtijd:"</string>
+    <string name="battery_history_total_time">"Totale tijdsduur:"</string>
+    <string name="battery_history_starts">"Aantal keren gestart: <xliff:g id="STARTS">%1$d</xliff:g>"</string>
+    <string name="battery_history_days">"<xliff:g id="DAYS">%1$d</xliff:g> dagen, <xliff:g id="HOURS">%2$d</xliff:g> uur, <xliff:g id="MINUTES">%3$d</xliff:g> minuten, <xliff:g id="SECONDS">%4$d</xliff:g> seconden"</string>
+    <string name="battery_history_hours">"<xliff:g id="HOURS">%1$d</xliff:g> uur, <xliff:g id="MINUTES">%2$d</xliff:g> minuten, <xliff:g id="SECONDS">%3$d</xliff:g> seconden"</string>
+    <string name="battery_history_minutes">"<xliff:g id="MINUTES">%1$d</xliff:g> minuten, <xliff:g id="SECONDS">%2$d</xliff:g> seconden"</string>
+    <string name="battery_history_seconds">"<xliff:g id="SECONDS">%1$d</xliff:g> seconden"</string>
+    <string name="battery_history_packages_sharing_this_uid">"Pakketten die deze UID delen:"</string>
+    <string name="battery_history_no_data">"Er zijn geen beschikbare gebruiksgegevens van de accu"</string>
+    <string name="battery_history_sensor">"Sensor:"</string>
+    <!-- no translation found for battery_history_wakelock (608683447522396293) -->
+    <skip />
+    <string name="battery_history_used_by_packages">"De sensor wordt gebruikt door de volgende pakketten:"</string>
+    <string name="battery_history_sensor_usage">"<xliff:g id="COUNT">%1$d</xliff:g> keer gebruikt door <xliff:g id="PACKAGE">%2$s</xliff:g>"</string>
+    <string name="battery_history_sensor_usage_multi">"<xliff:g id="COUNT">%1$d</xliff:g> keer gebruikt door een van de volgende:"</string>
+    <!-- no translation found for battery_history_awake_label (8449792868990080882) -->
+    <skip />
+    <!-- no translation found for battery_history_screen_on_label (1848936521786339362) -->
+    <skip />
+    <!-- no translation found for battery_history_phone_on_label (700191958853142297) -->
+    <skip />
+    <!-- no translation found for battery_history_awake (4350886665719031057) -->
+    <skip />
+    <string name="battery_history_screen_on">"Tijd verstreken met scherm aan:"</string>
+    <!-- no translation found for battery_history_phone_on (4891504401623839532) -->
+    <skip />
+    <string name="battery_history_screen_on_battery">"Op accu:"</string>
+    <string name="battery_history_screen_on_plugged">"Opladen:"</string>
+    <string name="usage_stats_label">"Gebruiksstatistieken"</string>
+    <string name="testing_usage_stats">"Gebruiksstatistieken"</string>
+    <string name="display_order_text">"Sorteren op:"</string>
+    <string name="app_name_label">"Toepassing"</string>
+    <string name="launch_count_label">"Aantal"</string>
+    <string name="usage_time_label">"Gebruikstijd"</string>
 </resources>

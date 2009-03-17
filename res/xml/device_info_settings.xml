@@ -14,8 +14,8 @@
      limitations under the License.
 -->
 
-<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
-    <PreferenceCategory android:title="@string/about_settings">
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+        android:title="@string/about_settings">
 
         <!-- System update settings - launches activity -->
         <PreferenceScreen android:key="system_update_settings"
@@ -105,7 +105,5 @@
                 style="?android:preferenceInformationStyle"
                 android:title="@string/build_number"
                 android:summary="@string/device_info_default"/>
-                
-    </PreferenceCategory>
 
 </PreferenceScreen>

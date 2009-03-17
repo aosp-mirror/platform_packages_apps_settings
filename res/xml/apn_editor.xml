@@ -15,8 +15,8 @@
 -->
 
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:settings="http://schemas.android.com/apk/res/com.android.settings">
-    <PreferenceCategory android:title="@string/apn_edit"/>
+        xmlns:settings="http://schemas.android.com/apk/res/com.android.settings"
+        android:title="@string/apn_edit">
     <EditTextPreference
         android:title="@string/apn_name"
         android:dialogTitle="@string/apn_name"
@@ -52,7 +52,6 @@
         android:dialogTitle="@string/apn_password"
         android:key="apn_password"
         android:singleLine="true"
-        android:password="true"
         />
     <EditTextPreference
         android:title="@string/apn_server"

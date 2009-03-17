@@ -57,8 +57,7 @@
                 android:key="vibrate"
                 android:title="@string/vibrate_title"
                 android:summary="@string/vibrate_summary"
-                android:persistent="false"
-                android:dependency="silent" />
+                android:persistent="false" />
     
         <com.android.settings.DefaultRingtonePreference
                 android:key="notification_sound"
@@ -85,28 +84,42 @@
                 android:dependency="silent"
                 android:defaultValue="true" />
 
+        <CheckBoxPreference
+                android:key="play_media_notification_sounds"
+                android:title="@string/play_media_notification_sounds_enable_title"
+                android:summaryOn="@string/play_media_notification_sounds_enable_summary_on"
+                android:summaryOff="@string/play_media_notification_sounds_enable_summary_off"
+                android:dependency="silent"
+                android:defaultValue="true" />
+
     </PreferenceCategory>
 
     <PreferenceCategory
             android:title="@string/display_settings">
 
+        <CheckBoxPreference 
+            android:key="accelerometer" 
+            android:title="@string/accelerometer_title" 
+            android:summaryOn="@string/accelerometer_summary_on"
+            android:summaryOff="@string/accelerometer_summary_off"/>
+    
         <CheckBoxPreference
                 android:key="animations"
                 android:title="@string/animations_title"
                 android:summaryOn="@string/animations_summary_on"
-                android:summaryOff="@string/animations_summary_off"
-                android:dependency="silent" />
+                android:summaryOff="@string/animations_summary_off" />
 
-    
         <com.android.settings.BrightnessPreference
                 android:key="brightness"
                 android:title="@string/brightness"
+                android:summary="@string/brightness_summary"
                 android:dialogIcon="@drawable/ic_popup_brightness"
                 android:dialogTitle="@string/brightness" />
             
         <ListPreference
                 android:key="screen_timeout"
                 android:title="@string/screen_timeout"
+                android:summary="@string/screen_timeout_summary"
                 android:persistent="false"
                 android:entries="@array/screen_timeout_entries"
                 android:entryValues="@array/screen_timeout_values" />

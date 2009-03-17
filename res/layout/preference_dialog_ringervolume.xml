@@ -14,58 +14,63 @@
      limitations under the License.
 -->
 
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
-        android:orientation="vertical"
-        android:gravity="center_horizontal"
-        android:paddingBottom="20dip">
+        android:layout_height="fill_parent">
         
-    <ImageView android:id="@android:id/icon"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:paddingTop="20dip" />
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:orientation="vertical"
+            android:gravity="center_horizontal"
+            android:paddingBottom="20dip">
             
-    <TextView
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/incoming_call_volume_title"
-            android:paddingTop="20dip"
-            android:paddingLeft="20dip" 
-            android:paddingRight="20dip" />
-    
-    <!-- Used for the ring volume.  This is what the superclass VolumePreference uses. -->
-    <SeekBar android:id="@*android:id/seekbar"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:paddingTop="6dip" 
-            android:paddingLeft="20dip" 
-            android:paddingRight="20dip" />
+        <ImageView android:id="@android:id/icon"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingTop="20dip" />
+                
+        <TextView
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/incoming_call_volume_title"
+                android:paddingTop="20dip"
+                android:paddingLeft="20dip" 
+                android:paddingRight="20dip" />
         
-    <CheckBox android:id="@+id/same_notification_volume"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/checkbox_notification_same_as_incoming_call"
-            android:textAppearance="?android:attr/textAppearanceSmall"
-            android:layout_marginTop="6dip"
-            android:layout_marginLeft="20dip" 
-            android:layout_marginRight="20dip" />
-
-    <TextView android:id="@+id/notification_volume_title"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/notification_volume_title"
-            android:paddingTop="6dip"
-            android:paddingLeft="20dip" 
-            android:paddingRight="20dip" />
+        <!-- Used for the ring volume.  This is what the superclass VolumePreference uses. -->
+        <SeekBar android:id="@*android:id/seekbar"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:paddingTop="6dip" 
+                android:paddingLeft="20dip" 
+                android:paddingRight="20dip" />
+            
+        <CheckBox android:id="@+id/same_notification_volume"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/checkbox_notification_same_as_incoming_call"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:layout_marginTop="6dip"
+                android:layout_marginLeft="20dip" 
+                android:layout_marginRight="20dip" />
     
-    <!-- Used for the notification volume -->
-    <SeekBar android:id="@+id/notification_volume_seekbar"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:paddingTop="6dip" 
-            android:paddingLeft="20dip" 
-            android:paddingRight="20dip" />
-    
-</LinearLayout>
- 
+        <TextView android:id="@+id/notification_volume_title"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/notification_volume_title"
+                android:paddingTop="6dip"
+                android:paddingLeft="20dip" 
+                android:paddingRight="20dip" />
+        
+        <!-- Used for the notification volume -->
+        <SeekBar android:id="@+id/notification_volume_seekbar"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:paddingTop="6dip" 
+                android:paddingLeft="20dip" 
+                android:paddingRight="20dip" />
+        
+    </LinearLayout>
+     
+</ScrollView>    

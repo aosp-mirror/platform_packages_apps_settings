@@ -66,6 +66,7 @@ public class InstalledAppDetails extends Activity implements View.OnClickListene
     private Button mActivitiesButton;
     private boolean mCanUninstall;
     private boolean localLOGV=Config.LOGV || false;
+    private TextView mAppSnippetSize;
     private TextView mTotalSize;
     private TextView mAppSize;
     private TextView mDataSize;
@@ -76,6 +77,7 @@ public class InstalledAppDetails extends Activity implements View.OnClickListene
     private TextView mCacheSize;
     private Button mClearCacheButton;
     private ClearCacheObserver mClearCacheObserver;
+    private Button mForceStopButton;
     
     PackageStats mSizeInfo;
     private Button mManageSpaceButton;
@@ -227,10 +229,8 @@ public class InstalledAppDetails extends Activity implements View.OnClickListene
             appName = getString(_UNKNOWN_APP);
         }
         ((TextView)findViewById(R.id.app_name)).setText(appName);
-        CharSequence appDesc = mAppInfo.loadDescription(mPm);
-        if(appDesc != null) {
-            ((TextView)findViewById(R.id.app_description)).setText(appDesc);
-        }
+        mAppSnippetSize = ((TextView)findViewById(R.id.app_size));
+        mAppSnippetSize.setText(totalSizeStr);
         //TODO download str and download url
         //set values on views
         mTotalSize = (TextView)findViewById(R.id.total_size_text);
@@ -254,7 +254,10 @@ public class InstalledAppDetails extends Activity implements View.OnClickListene
          // Cache section
          mCachePanel = findViewById(R.id.cache_panel);
          mCacheSize = (TextView) findViewById(R.id.cache_size_text);
+         mCacheSize.setText(mComputingStr);
          mClearCacheButton = (Button) findViewById(R.id.clear_cache_button);
+         mForceStopButton = (Button) findViewById(R.id.force_stop_button);
+         mForceStopButton.setOnClickListener(this);
          
          //clear activities
          mActivitiesButton = (Button)findViewById(R.id.clear_activities_button);
@@ -326,28 +329,38 @@ public class InstalledAppDetails extends Activity implements View.OnClickListene
         long newTot = newPs.cacheSize+newPs.codeSize+newPs.dataSize;
         if(mSizeInfo == null) {
             mSizeInfo = newPs;
-            mTotalSize.setText(getSizeStr(newTot));
+            String str = getSizeStr(newTot);
+            mTotalSize.setText(str);
+            mAppSnippetSize.setText(str);
             mAppSize.setText(getSizeStr(newPs.codeSize));
-            mDataSize.setText(getSizeStr(newPs.dataSize+newPs.cacheSize));
+            mDataSize.setText(getSizeStr(newPs.dataSize));
+            mCacheSize.setText(getSizeStr(newPs.cacheSize));
         } else {
             long oldTot = mSizeInfo.cacheSize+mSizeInfo.codeSize+mSizeInfo.dataSize;
             if(newTot != oldTot) {
-                mTotalSize.setText(getSizeStr(newTot));
+                String str = getSizeStr(newTot);
+                mTotalSize.setText(str);
+                mAppSnippetSize.setText(str);
                 changed = true;
             }
             if(newPs.codeSize != mSizeInfo.codeSize) {
                 mAppSize.setText(getSizeStr(newPs.codeSize));
                 changed = true;
             }
-            if((newPs.dataSize != mSizeInfo.dataSize) || (newPs.cacheSize != mSizeInfo.cacheSize)) {
-                mDataSize.setText(getSizeStr(newPs.dataSize+newPs.cacheSize));
+            if(newPs.dataSize != mSizeInfo.dataSize) {
+                mDataSize.setText(getSizeStr(newPs.dataSize));
+                changed = true;
+            }
+            if(newPs.cacheSize != mSizeInfo.cacheSize) {
+                mCacheSize.setText(getSizeStr(newPs.cacheSize));
+                changed = true;
             }
             if(changed) {
                 mSizeInfo = newPs;
             }
         }
         
-        long data = mSizeInfo.dataSize+mSizeInfo.cacheSize;
+        long data = mSizeInfo.dataSize;
         // Disable button if data is 0
         if(mAppButtonState != AppButtonStates.NONE){
             mAppButton.setText(mAppButtonText);
@@ -431,7 +444,7 @@ public class InstalledAppDetails extends Activity implements View.OnClickListene
                 Uri packageURI = Uri.parse("package:"+packageName);
                 Intent uninstallIntent = new Intent(Intent.ACTION_DELETE, packageURI);
                 startActivity(uninstallIntent);
-                setIntentAndFinish(true, false);
+                setIntentAndFinish(true, true);
             }
         } else if(v == mActivitiesButton) {
             mPm.clearPackagePreferredActivities(packageName);
@@ -446,6 +459,10 @@ public class InstalledAppDetails extends Activity implements View.OnClickListene
                 mClearCacheObserver = new ClearCacheObserver();
             }
             mPm.deleteApplicationCacheFiles(packageName, mClearCacheObserver);
+        } else if (v == mForceStopButton) {
+            ActivityManager am = (ActivityManager)getSystemService(
+                    Context.ACTIVITY_SERVICE);
+            am.restartPackage(packageName);
         }
     }
 

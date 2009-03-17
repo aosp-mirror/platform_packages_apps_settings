@@ -253,6 +253,8 @@ public class BluetoothSettings extends PreferenceActivity
         // we should start a scan
         if (bluetoothState == ExtendedBluetoothState.ENABLED) {
             mLocalManager.startScanning(false);
+        } else if (bluetoothState == ExtendedBluetoothState.DISABLED) {
+            mDeviceList.setProgress(false);
         }
     }
 }

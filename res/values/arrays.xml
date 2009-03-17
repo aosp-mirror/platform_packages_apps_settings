@@ -143,4 +143,28 @@
         <item>2</item>
     </string-array>
 
+    <!-- Match with constants in BatteryHistory class -->
+    <string-array name="battery_history_type_spinner">
+        <item>CPU usage</item>
+        <item>Network usage</item>
+        <item>GPS usage</item>
+        <item>Sensor usage</item>
+        <item>Partial wake usage</item>
+        <item>Other usage</item>
+    </string-array>
+
+    <!-- Match with constants in BatteryStats class -->
+    <string-array name="battery_history_which_spinner">
+        <item>Since last unplugged</item>
+        <item>Total since boot</item>
+        <item>Total in all time</item>
+    </string-array>
+
+    <!-- Display options for UsageStats class -->
+    <string-array name="usage_stats_display_order_types">
+        <item>Usage Time</item>
+        <item>Launch Count</item>
+        <item>Application Name</item>
+    </string-array>
+
 </resources>

@@ -24,7 +24,7 @@
     <TextView android:id="@+id/headerText"
         android:layout_width="fill_parent"
         android:layout_height="0dip"
-        android:layout_weight="1.0"
+        android:layout_weight="1"
         android:gravity="center"
         android:textSize="18sp"/>
 
@@ -40,39 +40,44 @@
          android:layout_width="fill_parent"
          android:layout_height="8dip" />
 
-    <!-- footer can show a message, or confirm / restart buttons -->
-    <RelativeLayout
-            android:layout_width="fill_parent"
-            android:layout_height="0dip"
-            android:layout_weight="1.0">
+    <!-- message just above the button bar -->
+    <TextView android:id="@+id/footerText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:textSize="14sp"/>
 
-        <!-- message -->
-        <TextView android:id="@+id/footerText"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentTop="true"
-            android:layout_centerHorizontal="true"
-            android:textSize="14sp"/>
+    <!-- confirm / restart buttons -->
+    <LinearLayout style="@android:style/ButtonBar"
+        android:orientation="horizontal"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content">
 
         <!-- left button: skip, or retry -->
         <Button android:id="@+id/footerLeftButton"
-            android:layout_width="150dip"
             android:layout_height="wrap_content"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentBottom="true"
+            android:layout_width="140dip"
+            android:ellipsize="marquee"
+            android:singleLine="true"
             android:text="@string/lockpattern_restart_button_text"/>
+
+        <!-- Placeholder to get blank space between the two buttons -->
+        <View
+            android:visibility="invisible"
+            android:layout_height="0dip"
+            android:layout_width="1dip"
+            android:layout_weight="1" />
 
         <!-- right button: confirm or ok -->
         <Button android:id="@+id/footerRightButton"
-            android:layout_width="150dip"
             android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:layout_alignParentBottom="true"
+            android:layout_width="140dip"
+            android:ellipsize="marquee"
+            android:singleLine="true"
             android:drawableRight="@drawable/ic_btn_next"
             android:drawablePadding="3dip"
             android:text="@string/lockpattern_confirm_button_text"/>
 
-    </RelativeLayout>
+    </LinearLayout>
 
 </com.android.internal.widget.LinearLayoutWithDefaultTouchRecepient>
-

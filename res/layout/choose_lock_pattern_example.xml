@@ -35,7 +35,6 @@
                 android:layout_height="wrap_content"
                 android:text="@string/lock_example_title"
                 android:gravity="center_horizontal"
-                android:layout_marginTop="5dip"
                 style="?android:attr/textAppearanceLarge"
             />
         
@@ -61,28 +60,34 @@
 
     </ScrollView>
     
-    <RelativeLayout
-        android:layout_height="wrap_content"
-        android:layout_width="fill_parent">
+    <LinearLayout style="@android:style/ButtonBar"
+        android:orientation="horizontal"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content">
         
         <Button android:id="@+id/skip_button"
-            android:layout_width="150dip"
             android:layout_height="wrap_content"
-            android:layout_margin="5dip"
-            android:layout_alignParentLeft="true"
+            android:layout_width="0dip"
+            android:layout_weight="1"
             android:text="@string/skip_button_label"
         />
       
+        <View
+            android:visibility="invisible"
+            android:layout_height="0dip"
+            android:layout_width="0dip"
+            android:layout_weight="1"
+        />
+
         <Button android:id="@+id/next_button"
-            android:layout_width="150dip"
             android:layout_height="wrap_content"
-            android:layout_margin="5dip"
+            android:layout_width="0dip"
+            android:layout_weight="1"
             android:drawableRight="@drawable/ic_btn_next"
             android:drawablePadding="3dip"
-            android:layout_alignParentRight="true"
             android:text="@string/next_button_label"
         />
         
-    </RelativeLayout>
+    </LinearLayout>
     
-</LinearLayout >
+</LinearLayout>

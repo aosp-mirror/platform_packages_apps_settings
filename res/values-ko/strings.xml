@@ -1,0 +1,670 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Copyright (C) 2009 The Android Open Source Project
+
+     Licensed under the Apache License, Version 2.0 (the "License");
+     you may not use this file except in compliance with the License.
+     You may obtain a copy of the License at
+
+          http://www.apache.org/licenses/LICENSE-2.0
+
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+-->
+<resources xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <string name="device_info_default">"알 수 없음"</string>
+    <string name="turn_on_radio">"무선 켜기"</string>
+    <string name="turn_off_radio">"무선 끄기"</string>
+    <string name="turn_on_qxdm">"QXDM SD 로그 사용"</string>
+    <string name="turn_off_qxdm">"QXDM SD 로그 사용 안 함"</string>
+    <string name="radioInfo_menu_viewADN">"SIM 주소록 보기"</string>
+    <string name="radioInfo_menu_viewFDN">"FDN(전화걸 수 있는 번호) 보기"</string>
+    <string name="radioInfo_menu_viewSDN">"SDN(Service Dialing Numbers) 보기"</string>
+    <string name="radioInfo_menu_getPDP">"PDP 목록 가져오기"</string>
+    <string name="radioInfo_menu_enableData">"데이터 연결 사용"</string>
+    <string name="radioInfo_menu_disableData">"데이터 연결 사용 안 함"</string>
+    <string name="radioInfo_menu_enableDataOnBoot">"부팅할 때 데이터 사용"</string>
+    <string name="radioInfo_menu_disableDataOnBoot">"부팅할 때 데이터 사용 안 함"</string>
+    <string name="radioInfo_service_in">"서비스 상태"</string>
+    <string name="radioInfo_service_out">"서비스 지역 벗어남"</string>
+    <string name="radioInfo_service_emergency">"비상 전화만"</string>
+    <string name="radioInfo_service_off">"무선 연결 끊김"</string>
+    <string name="radioInfo_roaming_in">"로밍"</string>
+    <string name="radioInfo_roaming_not">"로밍 안 함"</string>
+    <string name="radioInfo_phone_idle">"유휴"</string>
+    <string name="radioInfo_phone_ringing">"벨이 울림"</string>
+    <string name="radioInfo_phone_offhook">"진행 중인 통화"</string>
+    <string name="radioInfo_data_disconnected">"연결끊김"</string>
+    <string name="radioInfo_data_connecting">"연결 중"</string>
+    <string name="radioInfo_data_connected">"연결됨"</string>
+    <string name="radioInfo_data_suspended">"일시정지됨"</string>
+    <string name="radioInfo_unknown">"알 수 없음"</string>
+    <string name="radioInfo_display_packets">"pkts"</string>
+    <string name="radioInfo_display_bytes">"바이트"</string>
+    <string name="radioInfo_display_dbm">"dBm"</string>
+    <string name="radioInfo_display_asu">"asu"</string>
+    <string name="radioInfo_lac">"LAC"</string>
+    <string name="radioInfo_cid">"CID"</string>
+    <string name="sdcard_unmount">"SD 카드 마운트 해제"</string>
+    <string name="sdcard_format">"SD 카드가 포맷됩니다."</string>
+    <string name="small_font">"작게"</string>
+    <string name="medium_font">"보통"</string>
+    <string name="large_font">"크게"</string>
+    <string name="font_size_save">"확인"</string>
+    <string name="sdcard_setting">"SD 카드"</string>
+    <string name="battery_info_status_label">"배터리 상태:"</string>
+    <string name="battery_info_scale_label">"배터리 충전 상태:"</string>
+    <string name="battery_info_level_label">"배터리 수준:"</string>
+    <string name="battery_info_health_label">"배터리 상태:"</string>
+    <string name="battery_info_technology_label">"배터리 기술:"</string>
+    <string name="battery_info_voltage_label">"배터리 전압:"</string>
+    <string name="battery_info_voltage_units">"mV"</string>
+    <string name="battery_info_temperature_label">"배터리 온도:"</string>
+    <string name="battery_info_temperature_units">"° C"</string>
+    <string name="battery_info_uptime">"부팅 후 시간:"</string>
+    <string name="battery_info_awake_battery">"배터리 무중단 가동 시간:"</string>
+    <string name="battery_info_awake_plugged">"충전할 때 무중단 가동 시간:"</string>
+    <string name="battery_info_screen_on">"화면 켜짐:"</string>
+    <string name="battery_info_status_unknown">"알 수 없음"</string>
+    <string name="battery_info_status_charging">"충전 중"</string>
+    <string name="battery_info_status_charging_ac">"(AC)"</string>
+    <string name="battery_info_status_charging_usb">"(USB)"</string>
+    <string name="battery_info_status_discharging">"방전 중"</string>
+    <string name="battery_info_status_not_charging">"충전 안 함"</string>
+    <string name="battery_info_status_full">"충전 완료"</string>
+    <string name="battery_info_health_unknown">"알 수 없음"</string>
+    <string name="battery_info_health_good">"좋음"</string>
+    <string name="battery_info_health_overheat">"과열"</string>
+    <string name="battery_info_health_dead">"방전됨"</string>
+    <string name="battery_info_health_over_voltage">"과전압"</string>
+    <string name="battery_info_health_unspecified_failure">"알 수 없는 오류"</string>
+    <string name="bluetooth">"Bluetooth"</string>
+    <string name="bluetooth_visibility">"검색가능"</string>
+    <string name="bluetooth_is_discoverable">"<xliff:g id="DISCOVERABLE_TIME_PERIOD">%1$s</xliff:g>초 동안 검색가능..."</string>
+    <string name="bluetooth_not_discoverable">"장치를 검색가능하게 설정"</string>
+    <string name="bluetooth_devices">"Bluetooth 장치"</string>
+    <string name="bluetooth_device_name">"장치이름"</string>
+    <string name="bluetooth_name_not_set">"이름을 설정하지 않아 계정 이름 사용"</string>
+    <string name="bluetooth_scan_for_devices">"장치 검색"</string>
+    <string name="bluetooth_disconnect_blank">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> 연결이 끊어집니다."</string>
+    <string name="bluetooth_connected">"연결됨"</string>
+    <string name="bluetooth_disconnected">"연결끊김"</string>
+    <string name="bluetooth_disconnecting">"연결을 끊는 중..."</string>
+    <string name="bluetooth_connecting">"연결 중..."</string>
+    <!-- no translation found for bluetooth_unknown (1905151516611093010) -->
+    <skip />
+    <string name="bluetooth_not_connected">"이 장치와 페어링"</string>
+    <string name="bluetooth_pairing">"페어링 중..."</string>
+    <!-- no translation found for bluetooth_paired (1247541089000057726) -->
+    <skip />
+    <string name="bluetooth_device">"핸즈프리/헤드셋"</string>
+    <string name="progress_scanning">"검색 중"</string>
+    <string name="bluetooth_notif_ticker">"Bluetooth 페어링 요청"</string>
+    <string name="bluetooth_notif_title">"페어링 요청"</string>
+    <string name="bluetooth_notif_message">"페어링하려면 선택합니다. "</string>
+    <string name="date_and_time">"날짜 및 시간 설정"</string>
+    <string name="date_time_12_hour_sample">"1:00 pm"</string>
+    <string name="date_time_24_hour_sample">"13:00"</string>
+    <string name="choose_timezone">"표준시간대 선택"</string>
+    <string name="display_preview_label">"미리보기:"</string>
+    <string name="display_font_size_label">"글꼴 크기:"</string>
+    <!-- no translation found for intent_sender_data_label (8363026381459131554) -->
+    <skip />
+    <string name="intent_sender_sendbroadcast_text">"<xliff:g id="BROADCAST">broadcast</xliff:g> 보내기"</string>
+    <string name="intent_sender_action_label">"<xliff:g id="ACTION">Action</xliff:g>:"</string>
+    <string name="intent_sender_startactivity_text">"<xliff:g id="ACTIVITY">activity</xliff:g> 시작"</string>
+    <string name="intent_sender_resource_label">"<xliff:g id="RESOURCE">Resource</xliff:g>:"</string>
+    <string name="intent_sender_account_label">"계정:"</string>
+    <string name="proxy_clear_text">"지우기"</string>
+    <string name="proxy_port_label">"포트"</string>
+    <string name="proxy_defaultView_text">"기본값 복원"</string>
+    <string name="proxy_action_text">"저장"</string>
+    <string name="proxy_hostname_label">"호스트 이름"</string>
+    <string name="proxy_error">"주의"</string>
+    <string name="proxy_error_dismiss">"확인"</string>
+    <string name="proxy_error_invalid_host">"입력한 호스트 이름이 잘못되었습니다."</string>
+    <string name="proxy_error_empty_port">"포트 필드를 입력해야 합니다."</string>
+    <string name="proxy_error_empty_host_set_port">"호스트 필드가 비어 있는 경우 포트 필드에 입력하면 안 됩니다."</string>
+    <string name="proxy_error_invalid_port">"입력한 포트가 올바르지 않습니다."</string>
+    <string name="radio_info_signal_location_label">"위치:"</string>
+    <string name="radio_info_neighboring_location_label">"인접한 CID:"</string>
+    <string name="radio_info_data_attempts_label">"데이터 시도:"</string>
+    <string name="radio_info_gprs_service_label">"GPRS 서비스:"</string>
+    <string name="radio_info_roaming_label">"로밍:"</string>
+    <string name="radio_info_imei_label">"IMEI:"</string>
+    <string name="radio_info_call_redirect_label">"통화 경로 재지정:"</string>
+    <string name="radio_info_ppp_resets_label">"부팅 후 PPP 재설정 횟수:"</string>
+    <string name="radio_info_gsm_disconnects_label">"GSM 연결끊기:"</string>
+    <string name="radio_info_current_network_label">"현재 네트워크:"</string>
+    <string name="radio_info_data_successes_label">"데이터 성공:"</string>
+    <string name="radio_info_ppp_received_label">"PPP 받음:"</string>
+    <string name="radio_info_gsm_service_label">"GSM 서비스:"</string>
+    <string name="radio_info_signal_strength_label">"신호 강도:"</string>
+    <string name="radio_info_call_status_label">"통화 상태:"</string>
+    <string name="radio_info_ppp_sent_label">"PPP 보냄:"</string>
+    <string name="radio_info_radio_resets_label">"무선 재설정:"</string>
+    <string name="radio_info_message_waiting_label">"메시지 대기 중:"</string>
+    <string name="radio_info_phone_number_label">"전화번호:"</string>
+    <string name="radio_info_band_mode_label">"무선 주파수 대역 선택"</string>
+    <string name="radio_info_network_type_label">"네트워크 유형:"</string>
+    <string name="radio_info_set_perferred_label">"기본 네트워크 유형 설정:"</string>
+    <string name="radio_info_ping_ipaddr">"IP 주소 Ping:"</string>
+    <string name="radio_info_ping_hostname">"호스트이름(www.google.com) Ping:"</string>
+    <string name="radio_info_http_client_test">"HTTP 클라이언트 테스트:"</string>
+    <string name="radio_info_toggle_ciph_label">"암호화 토글"</string>
+    <string name="ping_test_label">"Ping 테스트 실행"</string>
+    <string name="radio_info_smsc_label">"SMSC:"</string>
+    <string name="radio_info_smsc_update_label">"업데이트"</string>
+    <string name="radio_info_smsc_refresh_label">"새로고침"</string>
+    <string name="radio_info_toggle_dns_check_label">"DNS 확인 토글"</string>
+    <string name="band_mode_title">"GSM/UMTS 대역 설정"</string>
+    <string name="band_mode_loading">"대역 목록 로드 중..."</string>
+    <string name="band_mode_set">"설정"</string>
+    <string name="band_mode_failed">"실패"</string>
+    <string name="band_mode_succeeded">"성공"</string>
+    <string name="sdcard_changes_instructions">"변경사항을 적용하려면 USB 케이블을 다시 연결해야 합니다."</string>
+    <string name="sdcard_settings_screen_mass_storage_text">"USB 대용량 저장소 사용"</string>
+    <string name="sdcard_settings_total_bytes_label">"총 바이트 수:"</string>
+    <string name="sdcard_settings_not_present_status">"SD 카드 없음"</string>
+    <string name="sdcard_settings_available_bytes_label">"사용가능한 바이트:"</string>
+    <string name="sdcard_settings_mass_storage_status">"SD 카드를 대용량 저장장치로 사용 중"</string>
+    <string name="sdcard_settings_unmounted_status">"이제 SD 카드를 안전하게 제거할 수 있습니다."</string>
+    <string name="sdcard_settings_bad_removal_status">"SD 카드를 사용하는 중에 분리되었습니다."</string>
+    <string name="sdcard_settings_used_bytes_label">"사용 바이트 수:"</string>
+    <string name="sdcard_settings_scanning_status">"SD 카드에서 미디어 검색 중..."</string>
+    <string name="sdcard_settings_read_only_status">"SD 카드가 읽기전용으로 마운트됨"</string>
+    <string name="next_label">"다음"</string>
+    <string name="language_picker_title">"로케일"</string>
+    <string name="select_your_language">"언어 선택"</string>
+    <string name="activity_picker_label">"활동 선택"</string>
+    <string name="device_info_label">"장치정보"</string>
+    <string name="battery_info_label">"배터리 정보"</string>
+    <string name="battery_history_label">"배터리 기록"</string>
+    <string name="display_label">"디스플레이"</string>
+    <string name="phone_info_label">"전화기 정보"</string>
+    <string name="sd_card_settings_label">"SD 카드"</string>
+    <string name="proxy_settings_label">"프록시 설정"</string>
+    <string name="cancel">"취소"</string>
+    <string name="settings_label">"설정"</string>
+    <string name="airplane_mode">"에어플레인 모드"</string>
+    <string name="airplane_mode_summary">"모든 무선 연결 사용 안 함"</string>
+    <string name="airplane_mode_turning_on">"무선 연결을 끊는 중..."</string>
+    <string name="airplane_mode_turning_off">"무선 연결 사용 중..."</string>
+    <string name="radio_controls_title">"무선 제어"</string>
+    <string name="radio_controls_summary">"Wi-Fi, Bluetooth, 에어플레인 모드 및 모바일 네트워크 관리"</string>
+    <string name="date_and_time_settings_title">"날짜 및 시간"</string>
+    <string name="date_and_time_settings_summary">"날짜, 시간, 표준시간대 및 형식 설정"</string>
+    <string name="date_time_auto">"자동"</string>
+    <string name="date_time_auto_summaryOn">"네트워크 제공 값 사용"</string>
+    <string name="date_time_auto_summaryOff">"네트워크 제공 값 사용"</string>
+    <string name="date_time_24hour">"24시간 형식 사용"</string>
+    <string name="date_time_set_time">"시간 설정"</string>
+    <string name="date_time_set_timezone">"표준시간대 선택"</string>
+    <string name="date_time_set_date">"날짜 설정"</string>
+    <string name="date_time_date_format">"날짜형식 선택"</string>
+    <string name="zone_list_menu_sort_alphabetically">"사전순으로 정렬"</string>
+    <string name="zone_list_menu_sort_by_timezone">"시간대별 정렬"</string>
+    <string name="security_settings_title">"보안 및 위치"</string>
+    <string name="security_settings_summary">"내 위치, 화면 잠금해제, SIM 카드 잠금 설정"</string>
+    <string name="security_passwords_title">"비밀번호"</string>
+    <string name="bluetooth_quick_toggle_title">"Bluetooth"</string>
+    <string name="bluetooth_quick_toggle_summary">"Bluetooth 켜기"</string>
+    <string name="bluetooth_settings">"Bluetooth 설정"</string>
+    <string name="bluetooth_settings_title">"Bluetooth 설정"</string>
+    <string name="bluetooth_settings_summary">"연결 관리, 장치이름 및 검색가능 여부 설정"</string>
+    <string name="bluetooth_pin_entry">"Bluetooth 페어링 요청"</string>
+    <string name="bluetooth_device_info">"Bluetooth 장치 정보"</string>
+    <string name="bluetooth_enter_pin_msg">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g>"\n\n"페어링을 위해 PIN 입력"\n"(0000 또는 1234를 입력하세요.)"</string>
+    <string name="bluetooth_error_title">"주의"</string>
+    <string name="bluetooth_pairing_error_message">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g>과(와) 페어링하는 동안 문제가 발생했습니다."</string>
+    <string name="bluetooth_pairing_pin_error_message">"입력한 PIN이 올바르지 않기 때문에 <xliff:g id="DEVICE_NAME">%1$s</xliff:g>과(와) 페어링하는 동안 문제가 발생했습니다."</string>
+    <string name="bluetooth_connecting_error_message">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g>에 연결하는 동안 문제가 발생했습니다."</string>
+    <string name="bluetooth_preference_scan_title">"장치 검색"</string>
+    <string name="bluetooth_device_context_connect">"연결"</string>
+    <string name="bluetooth_device_context_disconnect">"연결끊기"</string>
+    <string name="bluetooth_device_context_pair_connect">"페어링 및 연결"</string>
+    <string name="bluetooth_device_context_unpair">"페어링 해제"</string>
+    <string name="bluetooth_device_context_disconnect_unpair">"연결끊기 및 페어링 끊기"</string>
+    <string name="bluetooth_device_context_connect_advanced">"옵션..."</string>
+    <string name="bluetooth_connect_specific_profiles_title">"연결..."</string>
+    <string name="bluetooth_profile_a2dp">"미디어"</string>
+    <string name="bluetooth_profile_headset">"전화"</string>
+    <string name="bluetooth_summary_connected_to_a2dp">"미디어 오디오에 연결됨"</string>
+    <string name="bluetooth_summary_connected_to_headset">"전화기 오디오에 연결됨"</string>
+    <string name="bluetooth_summary_connected_to_a2dp_headset">"전화기 및 미디어 오디오에 연결됨"</string>
+    <string name="bluetooth_device_advanced_title">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> 옵션"</string>
+    <string name="bluetooth_device_advanced_online_mode_title">"연결"</string>
+    <string name="bluetooth_device_advanced_online_mode_summary">"Bluetooth 장치에 연결"</string>
+    <string name="bluetooth_device_advanced_profile_header_title">"프로필"</string>
+    <string name="bluetooth_a2dp_profile_summary_connected">"미디어 오디오에 연결됨"</string>
+    <string name="bluetooth_headset_profile_summary_connected">"전화기 오디오에 연결됨"</string>
+    <string name="bluetooth_a2dp_profile_summary_use_for">"미디어 오디오에 사용"</string>
+    <string name="bluetooth_headset_profile_summary_use_for">"전화기 오디오에 사용"</string>
+    <string name="wifi">"Wi-Fi"</string>
+    <string name="wifi_quick_toggle_title">"Wi-Fi"</string>
+    <string name="wifi_quick_toggle_summary">"Wi-Fi 켜기"</string>
+    <string name="wifi_settings">"Wi-Fi 설정"</string>
+    <string name="wifi_settings_category">"Wi-Fi 설정"</string>
+    <string name="wifi_settings_summary">"무선 액세스포인트 설정 및 관리"</string>
+    <string name="forget_network">"저장 안 함"</string>
+    <string name="wifi_status">"상태"</string>
+    <string name="wifi_link_speed">"속도"</string>
+    <string name="wifi_signal_3">"우수"</string>
+    <string name="wifi_signal_2">"좋음"</string>
+    <string name="wifi_signal_1">"양호"</string>
+    <string name="wifi_signal_0">"나쁨"</string>
+    <string name="security">"보안"</string>
+    <string name="wifi_security_open">"개방"</string>
+    <string name="wifi_security_wep">"WEP"</string>
+    <string name="wifi_security_wpa">"WPA"</string>
+    <string name="wifi_security_wpa2">"WPA2"</string>
+    <string name="wifi_security_unknown">"알 수 없음"</string>
+    <string name="wifi_security_verbose_open">"개방형 네트워크"</string>
+    <string name="wifi_security_verbose_wep">"WEP로 보안"</string>
+    <string name="wifi_security_verbose_wpa">"WPA로 보안"</string>
+    <string name="wifi_security_verbose_wpa2">"WPA2로 보안"</string>
+    <string name="ip_address">"IP 주소"</string>
+    <string name="signal">"신호 강도"</string>
+    <string name="wifi_starting">"켜는 중..."</string>
+    <string name="wifi_stopping">"끄는 중..."</string>
+    <string name="wifi_error">"오류"</string>
+    <string name="error_starting">"Wi-Fi를 시작할 수 없음"</string>
+    <string name="error_stopping">"Wi-Fi를 중지할 수 없음"</string>
+    <string name="error_scanning">"네트워크를 검색할 수 없음"</string>
+    <string name="error_connecting">"네트워크에 연결할 수 없음"</string>
+    <string name="error_saving">"네트워크를 저장할 수 없음"</string>
+    <string name="connect">"연결"</string>
+    <string name="connect_to_blank">"<xliff:g id="NETWORK_NAME">%1$s</xliff:g>에 연결"</string>
+    <string name="please_type_passphrase">"무선 비밀번호"</string>
+    <string name="please_type_hex_key">"WEP 16진수 키(0-9, A-F)"</string>
+    <string name="wifi_show_password">"비밀번호를 표시합니다."</string>
+    <string name="scan_wifi">"검색"</string>
+    <string name="summary_not_in_range">"범위 내에 없음"</string>
+    <string name="summary_remembered">"저장됨"</string>
+    <string name="summary_connection_failed">"연결하지 못했습니다. 다시 시도하세요."</string>
+    <string name="wifi_access_points">"Wi-Fi 네트워크"</string>
+    <string name="wifi_type_ssid">"네트워크 SSID"</string>
+    <string name="wifi_security">"보안"</string>
+    <string name="wifi_save_config">"저장"</string>
+    <string name="wifi_password_unchanged">"(변경 안 함)"</string>
+    <string name="wifi_add_other_network">"Wi-Fi 네트워크 추가"</string>
+    <string name="wifi_notify_open_networks">"네트워크 알림"</string>
+    <string name="wifi_notify_open_networks_summary">"개방형 네트워크를 사용할 수 있을 때 알림"</string>
+    <string name="wifi_password_incorrect_error">"입력한 네트워크 비밀번호가 올바르지 않습니다. 다시 입력하세요."</string>
+    <string name="wifi_generic_connection_error">"네트워크에 연결하는 동안 문제가 발생했습니다. 다시 시도하세요."</string>
+    <string name="wifi_menu_advanced">"고급"</string>
+    <string name="wifi_ip_settings_titlebar">"IP 설정"</string>
+    <string name="wifi_ip_settings_menu_save">"저장"</string>
+    <string name="wifi_ip_settings_menu_cancel">"취소"</string>
+    <string name="wifi_ip_settings_invalid_ip">"올바른 IP 주소를 입력하세요."</string>
+    <string name="wifi_use_static_ip">"고정 IP 사용"</string>
+    <string name="wifi_ip_address">"IP 주소"</string>
+    <string name="wifi_dns1">"DNS 1"</string>
+    <string name="wifi_dns2">"DNS 2"</string>
+    <string name="wifi_gateway">"게이트웨이"</string>
+    <string name="wifi_netmask">"넷마스크"</string>
+    <string name="wifi_context_menu_connect">"네트워크 연결"</string>
+    <string name="wifi_context_menu_forget">"네트워크 저장 안 함"</string>
+    <string name="wifi_context_menu_change_password">"비밀번호 변경"</string>
+    <string name="wifi_advanced_titlebar">"고급"</string>
+    <string name="wifi_setting_num_channels_title">"규정 도메인"</string>
+    <string name="wifi_setting_num_channels_summary">"사용할 채널 수 설정"</string>
+    <string name="wifi_setting_num_channels_error">"규제 도메인을 설정하는 동안 문제가 발생했습니다."</string>
+    <string name="wifi_setting_num_channels_channel_phrase">"<xliff:g id="NUM_CHANNELS">%1$d</xliff:g>개 채널"</string>
+    <string name="wifi_setting_sleep_policy_title">"Wi-Fi 절전 정책"</string>
+    <string name="wifi_setting_sleep_policy_summary">"Wi-Fi에서 모바일 데이터로 전환될 때 표시"</string>
+    <string name="wifi_setting_sleep_policy_error">"절전 정책을 설정하는 동안 문제가 발행했습니다."</string>
+    <string name="wifi_advanced_mac_address_title">"MAC 주소"</string>
+    <string name="fragment_status_scanning">"검색 중..."</string>
+    <string name="fragment_status_connecting">"<xliff:g id="NETWORK_NAME">%1$s</xliff:g>에 연결 중..."</string>
+    <string name="fragment_status_authenticating">"<xliff:g id="NETWORK_NAME">%1$s</xliff:g>에서 인증하는 중..."</string>
+    <string name="fragment_status_obtaining_ip">"<xliff:g id="NETWORK_NAME">%1$s</xliff:g>에서 IP 주소를 가져오는 중..."</string>
+    <string name="fragment_status_connected">"<xliff:g id="NETWORK_NAME">%1$s</xliff:g>에 연결됨"</string>
+    <string name="fragment_status_disconnecting">"<xliff:g id="NETWORK_NAME">%1$s</xliff:g>에서 연결을 끊는 중..."</string>
+    <string name="fragment_status_disconnected">"연결끊김"</string>
+    <string name="fragment_status_failed">"실패"</string>
+    <string name="status_scanning">"검색 중..."</string>
+    <string name="status_connecting">"연결 중..."</string>
+    <string name="status_authenticating">"인증하는 중..."</string>
+    <string name="status_obtaining_ip">"주소를 가져오는 중..."</string>
+    <string name="status_connected">"연결됨"</string>
+    <string name="status_disconnecting">"연결을 끊는 중..."</string>
+    <string name="status_disconnected">"연결끊김"</string>
+    <string name="status_failed">"실패"</string>
+    <string name="sound_and_display_settings">"소리 및 디스플레이"</string>
+    <string name="sound_settings">"소리 설정"</string>
+    <string name="sound_and_display_settings_summary">"벨소리, 알림, 화면 밝기 설정"</string>
+    <string name="silent_mode_title">"무음 모드"</string>
+    <string name="silent_mode_summary">"미디어 및 알람 외의 모든 소리가 나지 않습니다."</string>
+    <string name="ringtone_title">"전화 벨소리"</string>
+    <string name="ringtone_summary">"수신전화 기본 벨소리 설정"</string>
+    <string name="ring_volume_title">"벨소리 볼륨"</string>
+    <string name="ring_volume_summary">"수신전화 및 알림에 대한 볼륨 설정"</string>
+    <string name="vibrate_title">"전화올 때 진동"</string>
+    <string name="vibrate_summary">"전화 올 때 진동"</string>
+    <string name="notification_sound_title">"알림 벨소리"</string>
+    <string name="notification_sound_summary">"기본 알림 벨소리 설정"</string>
+    <string name="incoming_call_volume_title">"수신전화 볼륨"</string>
+    <string name="notification_volume_title">"알림 볼륨"</string>
+    <string name="checkbox_notification_same_as_incoming_call">"알림을 위해 수신전화 볼륨 사용"</string>
+    <string name="notification_sound_dialog_title">"알림 벨소리 선택"</string>
+    <string name="media_volume_title">"미디어 볼륨"</string>
+    <string name="media_volume_summary">"음악 및 동영상에 대한 볼륨 설정"</string>
+    <string name="dtmf_tone_enable_title">"터치음 듣기"</string>
+    <string name="dtmf_tone_enable_summary_on">"다이얼패드를 사용할 때 신호음 재생"</string>
+    <string name="dtmf_tone_enable_summary_off">"다이얼패드를 사용할 때 신호음 재생"</string>
+    <string name="sound_effects_enable_title">"선택항목 듣기"</string>
+    <string name="sound_effects_enable_summary_on">"화면 선택 시 소리 재생"</string>
+    <string name="sound_effects_enable_summary_off">"화면 선택 시 소리 재생"</string>
+    <string name="play_media_notification_sounds_enable_title">"SD 카드 알림"</string>
+    <string name="play_media_notification_sounds_enable_summary_on">"SD 카드 알림 소리 사용 중지"</string>
+    <string name="play_media_notification_sounds_enable_summary_off">"SD 카드 알림 소리 사용"</string>
+    <string name="sync_settings">"데이터 동기화"</string>
+    <string name="sync_settings_summary">"동기화할 응용프로그램 선택"</string>
+    <string name="display_settings">"디스플레이 설정"</string>
+    <string name="animations_title">"애니메이션"</string>
+    <string name="animations_summary_on">"창을 열거나 닫을 때 애니메이션 표시"</string>
+    <string name="animations_summary_off">"창을 열거나 닫을 때 애니메이션 표시"</string>
+    <string name="brightness">"밝기"</string>
+    <string name="brightness_summary">"화면 밝기 조정"</string>
+    <string name="screen_timeout">"화면 시간제한"</string>
+    <string name="screen_timeout_summary">"화면 자동 꺼짐 시간 간격 조정"</string>
+    <string name="sim_lock_settings">"SIM 카드 잠금 설정"</string>
+    <string name="sim_lock_settings_category">"SIM 카드 잠금 설정"</string>
+    <string name="sim_lock_settings_title">"SIM 카드 잠금"</string>
+    <string name="sim_pin_toggle">"SIM 카드 잠금"</string>
+    <string name="sim_lock_on">"전화기를 사용하려면 PIN 필요"</string>
+    <string name="sim_lock_off">"전화기를 사용하려면 PIN 필요"</string>
+    <string name="sim_pin_change">"SIM PIN 변경"</string>
+    <string name="sim_enter_pin">"SIM PIN"</string>
+    <string name="sim_enable_sim_lock">"SIM 카드 잠금"</string>
+    <string name="sim_disable_sim_lock">"SIM 카드 잠금해제"</string>
+    <string name="sim_enter_old">"이전 SIM PIN"</string>
+    <string name="sim_enter_new">"새 SIM PIN"</string>
+    <string name="sim_reenter_new">"새 PIN 다시 입력"</string>
+    <string name="sim_change_pin">"SIM PIN"</string>
+    <string name="sim_bad_pin">"PIN이 잘못되었습니다."</string>
+    <string name="sim_pins_dont_match">"PIN이 일치하지 않습니다."</string>
+    <string name="sim_change_failed">"PIN을 변경할 수 없습니다."\n"PIN이 잘못된 것 같습니다."</string>
+    <string name="sim_change_succeeded">"SIM PIN 변경됨"</string>
+    <string name="sim_lock_failed">"SIM 카드 잠금 상태를 변경할 수 없습니다."\n"PIN이 잘못된 것 같습니다."</string>
+    <string name="sim_enter_ok">"확인"</string>
+    <string name="sim_enter_cancel">"취소"</string>
+    <string name="device_info_settings">"전화기 상태"</string>
+    <string name="system_update_settings_list_item_title">"시스템 업데이트"</string>
+    <string name="system_update_settings_list_item_summary">"시스템 업데이트 확인"</string>
+    <string name="firmware_version">"펌웨어 버전"</string>
+    <string name="model_number">"모델 번호"</string>
+    <string name="baseband_version">"기저대역 버전"</string>
+    <string name="kernel_version">"커널 버전"</string>
+    <string name="build_number">"빌드 번호"</string>
+    <string name="device_info_not_available">"표시할 수 없음"</string>
+    <string name="device_status_activity_title">"상태"</string>
+    <string name="device_status">"상태"</string>
+    <string name="device_status_summary">"IMEI, 전화번호, 신호 등"</string>
+    <string name="storage_settings_title">"SD 카드 및 전화기 저장공간"</string>
+    <string name="storage_settings_summary">"SD 카드 마운트 해제, 사용가능한 저장공간 보기"</string>
+    <string name="status_number">"전화번호"</string>
+    <string name="status_network_type">"모바일 네트워크 유형"</string>
+    <string name="status_data_state">"모바일 네트워크 상태"</string>
+    <string name="status_service_state">"서비스 상태"</string>
+    <string name="status_signal_strength">"신호 강도"</string>
+    <string name="status_roaming">"로밍"</string>
+    <string name="status_operator">"네트워크"</string>
+    <string name="status_wifi_mac_address">"Wi-Fi MAC 주소"</string>
+    <string name="status_bt_address">"Bluetooth 주소"</string>
+    <string name="status_unavailable">"사용할 수 없음"</string>
+    <string name="status_up_time">"가동 시간"</string>
+    <string name="status_awake_time">"무중단 가동 시간"</string>
+    <string name="internal_memory">"전화기 내부 저장공간"</string>
+    <string name="sd_memory">"SD 카드"</string>
+    <string name="memory_available">"사용가능한 저장공간"</string>
+    <string name="memory_size">"총 공간"</string>
+    <string name="sd_eject">"SD 카드 마운트 해제"</string>
+    <string name="sd_eject_summary">"안전 제거를 위해 SD 카드 마운트 해제"</string>
+    <string name="sd_format">"SD 카드 포맷"</string>
+    <string name="sd_format_summary">"SD 카드 포맷(지우기)"</string>
+    <string name="sd_unavailable">"사용할 수 없음"</string>
+    <string name="read_only">" (읽기전용)"</string>
+    <string name="battery_status_title">"배터리 상태"</string>
+    <string name="battery_level_title">"배터리 수준"</string>
+    <string name="apn_settings">"APN"</string>
+    <string name="apn_edit">"액세스포인트 편집"</string>
+    <string name="apn_not_set">"&lt;설정 안 함&gt;"</string>
+    <string name="apn_name">"이름"</string>
+    <string name="apn_apn">"APN"</string>
+    <string name="apn_http_proxy">"프록시"</string>
+    <string name="apn_http_port">"포트"</string>
+    <string name="apn_user">"사용자 이름"</string>
+    <string name="apn_password">"비밀번호"</string>
+    <string name="apn_server">"서버"</string>
+    <string name="apn_mmsc">"MMSC"</string>
+    <string name="apn_mms_proxy">"MMS 프록시"</string>
+    <string name="apn_mms_port">"MMS 포트"</string>
+    <string name="apn_mcc">"MCC"</string>
+    <string name="apn_mnc">"MNC"</string>
+    <string name="apn_type">"APN 유형"</string>
+    <string name="menu_delete">"APN 삭제"</string>
+    <string name="menu_new">"새 APN"</string>
+    <string name="menu_save">"저장"</string>
+    <string name="menu_cancel">"삭제"</string>
+    <string name="error_title">"주의"</string>
+    <string name="error_name_empty">"이름 필드는 비워둘 수 없습니다."</string>
+    <string name="error_apn_empty">"APN을 비워둘 수 없습니다."</string>
+    <string name="error_mcc_not3">"MCC 필드는 3자리 숫자여야 합니다."</string>
+    <string name="error_mnc_not23">"MNC 필드는 2~3자리 숫자여야 합니다."</string>
+    <string name="master_clear_title">"공장 기본값 데이터 재설정"</string>
+    <string name="master_clear_summary">"전화기의 모든 데이터 지우기"</string>
+    <string name="master_clear_desc">"이 작업을 수행하면 전화기의 모든 데이터 및 다운로드한 응용프로그램이 지워지고 출고시 초기 상태로 재설정됩니다"</string>
+    <string name="master_clear_button_text">"전화기 재설정"</string>
+    <string name="master_clear_final_desc">"모든 데이터 및 응용프로그램을 지우고 전화기를 재설정하시겠습니까? 수행한 후에는 작업을 취소할 수 없습니다."</string>
+    <string name="master_clear_final_button_text">"모두 지우기"</string>
+    <string name="master_clear_gesture_prompt">"잠금해제 패턴 그리기"</string>
+    <string name="master_clear_gesture_explanation">"전화기 재설정을 확인하려면 잠금해제 패턴을 그려야 합니다."</string>
+    <string name="master_clear_failed">"시스템 지우기 서비스를 사용할 수 없어 재설정을 수행하지 못했습니다."</string>
+    <string name="media_format_title">"SD 카드를 포맷합니다."</string>
+    <string name="media_format_summary">"SD 카드의 모든 데이터 지우기"</string>
+    <string name="media_format_desc">"이 작업을 수행하면 전화기의 SD 카드에 저장된 모든 데이터를 잃게 됩니다."</string>
+    <string name="media_format_button_text">"SD 카드 포맷"</string>
+    <string name="media_format_final_desc">"SD 카드를 포맷하여 모든 미디어를 지우시겠습니까? 수행한 작업은 취소할 수 없습니다."</string>
+    <string name="media_format_final_button_text">"모두 지우기"</string>
+    <string name="media_format_gesture_prompt">"잠금해제 패턴을 그리세요."</string>
+    <string name="media_format_gesture_explanation">"SD 카드 포맷을 확인하려면 잠금해제 패턴을 그려야 합니다."</string>
+    <string name="call_settings_title">"통화 설정"</string>
+    <string name="call_settings_summary">"음성메일, 착신전환, 통화중 대기, 발신자 번호 설정"</string>
+    <string name="network_settings_title">"모바일 네트워크"</string>
+    <string name="network_settings_summary">"로밍, 네트워크, APN에 대한 옵션 설정"</string>
+    <string name="location_title">"내 위치 소스"</string>
+    <string name="location_network_based">"무선 네트워크 사용"</string>
+    <string name="location_networks_disabled">"무선 네트워크를 사용하는 응용프로그램(예: 지도)에서 위치 보기"</string>
+    <string name="location_neighborhood_level">"Wi-Fi 및/또는 모바일 네트워크에서 측정된 위치"</string>
+    <string name="location_gps">"GPS 위성 사용"</string>
+    <string name="location_street_level">"도로 수준으로 정확하게 탐색(배터리를 절약하려면 선택 취소)"</string>
+    <string name="location_gps_disabled">"도로 수준으로 탐색(항공사진이 더해져 배터리 추가로 필요)"</string>
+    <string name="about_settings">"전화기 정보"</string>
+    <string name="about_settings_summary">"법률 정보, 전화기 상태, 소프트웨어 버전 보기"</string>
+    <string name="legal_information">"법률정보"</string>
+    <string name="contributors_title">"조력자"</string>
+    <string name="copyright_title">"저작권"</string>
+    <string name="license_title">"라이센스"</string>
+    <string name="terms_title">"약관"</string>
+    <string name="settings_license_activity_title">"오픈소스 라이센스"</string>
+    <string name="settings_license_activity_unavailable">"라이센스를 로드하는 동안 문제가 발생했습니다."</string>
+    <string name="settings_license_activity_loading">"로드 중..."</string>
+    <string name="lock_settings_title">"화면 잠금해제 패턴"</string>
+    <string name="lockpattern_change_lock_pattern_label">"잠금해제 패턴 변경"</string>
+    <string name="lockpattern_need_to_unlock">"저장된 패턴 확인"</string>
+    <string name="lockpattern_need_to_unlock_wrong">"죄송합니다. 다시 시도하세요."</string>
+    <string name="lockpattern_recording_intro_header">"잠금해제 패턴 그리기"</string>
+    <string name="lockpattern_recording_intro_footer">"도움말을 보려면 메뉴를 누르세요."</string>
+    <string name="lockpattern_recording_inprogress">"완료되면 손가락을 뗍니다."</string>
+    <string name="lockpattern_recording_incorrect_too_short">"<xliff:g id="NUMBER">%d</xliff:g>개 이상의 점을 연결합니다. 다시 시도하세요."</string>
+    <string name="lockpattern_pattern_entered_header">"패턴이 기록되었습니다."</string>
+    <string name="lockpattern_need_to_confirm">"확인을 위해 패턴 다시 그리기:"</string>
+    <string name="lockpattern_pattern_confirmed_header">"새 잠금해제 패턴:"</string>
+    <string name="lockpattern_confirm_button_text">"확인"</string>
+    <string name="lockpattern_restart_button_text">"다시 그리기"</string>
+    <string name="lockpattern_retry_button_text">"다시 시도"</string>
+    <string name="lockpattern_continue_button_text">"계속"</string>
+    <string name="lockpattern_settings_title">"잠금해제 패턴"</string>
+    <string name="lockpattern_settings_enable_title">"패턴 필요"</string>
+    <string name="lockpattern_settings_enable_summary">"화면 잠금을 해제하려면 패턴을 그려야 함"</string>
+    <string name="lockpattern_settings_enable_visible_pattern_title">"패턴 표시"</string>
+    <string name="lockpattern_settings_enable_tactile_feedback_title">"촉각 피드백 사용"</string>
+    <string name="lockpattern_settings_choose_lock_pattern">"잠금해제 패턴 설정"</string>
+    <string name="lockpattern_settings_change_lock_pattern">"잠금해제 패턴 변경"</string>
+    <string name="lockpattern_settings_help_how_to_record">"잠금해제 패턴을 그리는 방법"</string>
+    <string name="lockpattern_too_many_failed_confirmation_attempts_header">"잘못된 시도 횟수가 너무 많습니다."</string>
+    <string name="lockpattern_too_many_failed_confirmation_attempts_footer">"<xliff:g id="NUMBER">%d</xliff:g>초 후에 다시 시도하세요."</string>
+    <string name="skip_button_label">"취소"</string>
+    <string name="next_button_label">"다음"</string>
+    <string name="lock_title">"전화기 보안 설정"</string>
+    <string name="lock_intro_message"><font size="17">"개인 화면 잠금해제 패턴을 만들어 전화기 무단 사용을 방지합니다. "\n<font height="17">\n</font><b>"1"</b>"  다음 화면에서 패턴을 예를 들어 그리는 동안 지켜봅니다. "\n<font height="17">\n</font><b>"2"</b>"  준비가 되면 사용자만의 개인 잠금해제 패턴을 그립니다. 여러 개의 패턴을 시험해 볼 수 있지만 4개 이상의 점을 연결해야 합니다. "\n<font height="17">\n</font><b>"3"</b>"  패턴을 다시 그려 확인합니다. "\n<font height="17">\n</font><b>"패턴 그리기를 시작하려면 \'다음\'을 선택하세요"</b>". "\n<font height="3">\n</font>"전화기 보호 화면을 설정하지 않으려면 \'취소\'를 선택하세요."</font></string>
+    <string name="lock_example_title">"패턴 예"</string>
+    <string name="lock_example_message">"4개 이상의 점을 연결합니다."\n\n"고유한 패턴을 그릴 준비가 되면 \'다음\'을 선택합니다."</string>
+    <string name="manageapplications_settings_title">"응용프로그램 관리"</string>
+    <string name="manageapplications_settings_summary">"설치된 응용프로그램 관리 및 제거"</string>
+    <string name="applications_settings">"응용프로그램"</string>
+    <string name="applications_settings_summary">"응용프로그램 관리, 빠른실행 바로가기 설정"</string>
+    <string name="applications_settings_header">"응용프로그램 설정"</string>
+    <string name="install_applications">"알 수 없는 소스"</string>
+    <string name="install_unknown_applications">"시판되지 않은 응용프로그램 설치 허용"</string>
+    <string name="install_all_warning">"전화기 및 개인 정보는 출처를 알 수 없는 응용프로그램의 공격에 더욱 취약합니다. 사용자는 이러한 응용프로그램을 사용하여 발생할 수 있는 전화기 손상이나 데이터 손실에 대해 사용자가 단독으로 책임이 있음을 동의합니다."</string>
+    <string name="application_info_label">"응용프로그램 정보"</string>
+    <string name="storage_label">"저장공간"</string>
+    <string name="auto_launch_label">"기본적으로 시작"</string>
+    <string name="permissions_label">"권한"</string>
+    <string name="cache_header_label">"캐시"</string>
+    <string name="clear_cache_btn_text">"캐시 지우기"</string>
+    <string name="cache_size_label">"캐시"</string>
+    <string name="controls_label">"제어"</string>
+    <string name="force_stop">"강제 종료"</string>
+    <string name="total_size_label">"총 용량"</string>
+    <string name="application_size_label">"응용프로그램"</string>
+    <string name="data_size_label">"데이터"</string>
+    <string name="uninstall_text">"제거"</string>
+    <string name="clear_user_data_text">"데이터 지우기"</string>
+    <string name="auto_launch_enable_text">"이 응용프로그램을 해당 작업에 대한 기본 프로그램으로 실행하도록 선택했습니다."</string>
+    <string name="auto_launch_disable_text">"기본값이 설정되지 않았습니다."</string>
+    <string name="clear_activities">"기본 작업 지우기"</string>
+    <string name="unknown">"알 수 없음"</string>
+    <string name="sort_order_alpha">"정렬"</string>
+    <string name="sort_order_size">"크기별 정렬"</string>
+    <string name="manage_space_text">"공간 관리"</string>
+    <string name="filter">"필터"</string>
+    <string name="filter_dlg_title">"필터 옵션 선택"</string>
+    <string name="filter_apps_all">"모두"</string>
+    <string name="filter_apps_third_party">"제3자"</string>
+    <string name="filter_apps_running">"실행 중인 패키지"</string>
+    <string name="loading">"로드 중..."</string>
+    <string name="recompute_size">"크기 다시 계산 중..."</string>
+    <string name="clear_data_dlg_title">"삭제"</string>
+    <string name="clear_data_dlg_text">"응용프로그램에 저장한 모든 정보가 영구적으로 삭제됩니다."</string>
+    <string name="dlg_ok">"확인"</string>
+    <string name="dlg_cancel">"취소"</string>
+    <string name="app_not_found_dlg_title">"응용프로그램 없음"</string>
+    <string name="app_not_found_dlg_text">"설치된 응용프로그램 목록에서 응용프로그램을 찾을 수 없습니다."</string>
+    <string name="clear_data_failed">"응용프로그램 데이터를 지울 수 없습니다."</string>
+    <string name="security_settings_desc">"이 응용프로그램은 전화기의 다음 항목에 액세스할 수 있습니다."</string>
+    <string name="computing_size">"계산 중..."</string>
+    <string name="invalid_size_value">"패키지 크기를 계산할 수 없습니다."</string>
+    <string name="empty_list_msg">"타사 응용프로그램이 설치되어 있지 않습니다."</string>
+    <string name="language_settings">"로케일 및 텍스트"</string>
+    <string name="language_settings_summary">"로케일(언어 및 지역), 텍스트 입력 및 자동 수정 옵션 설정"</string>
+    <string name="language_category">"로케일 설정"</string>
+    <string name="text_category">"텍스트 설정"</string>
+    <string name="phone_language">"로케일 선택"</string>
+    <string name="phone_language_summary">"언어 및 지역 선택"</string>
+    <string name="auto_replace">"자동 바꾸기"</string>
+    <string name="auto_replace_summary">"오타 교정"</string>
+    <string name="auto_caps">"자동 대문자 입력"</string>
+    <string name="auto_caps_summary">"문장의 첫 글자를 대문자로"</string>
+    <string name="auto_punctuate">"자동 구두점 입력"</string>
+    <string name="hardkeyboard_category">"물리적 키보드 설정"</string>
+    <string name="auto_punctuate_summary">"스페이스바를 두 번 눌러 \'.\' 삽입"</string>
+    <string name="show_password">"비밀번호 표시"</string>
+    <string name="show_password_summary">"입력 시 비밀번호 표시"</string>
+    <string name="user_dict_settings_titlebar">"사용자 사전"</string>
+    <string name="user_dict_settings_title">"사용자 사전"</string>
+    <string name="user_dict_settings_summary">"사용자 사전에서 단어 추가 및 삭제"</string>
+    <string name="user_dict_settings_add_menu_title">"추가"</string>
+    <string name="user_dict_settings_add_dialog_title">"사전에 추가"</string>
+    <string name="user_dict_settings_context_menu_edit_title">"편집"</string>
+    <string name="user_dict_settings_context_menu_delete_title">"삭제"</string>
+    <string name="user_dict_settings_empty_text">"사용자 사전에 단어가 없습니다. 메뉴를 통해 단어를 추가할 수 있습니다."</string>
+    <string name="testing">"테스트 중"</string>
+    <string name="testing_phone_info">"전화기 정보"</string>
+    <string name="testing_battery_info">"배터리 정보"</string>
+    <string name="testing_battery_history">"배터리 기록"</string>
+    <string name="quick_launch_title">"빠른실행"</string>
+    <string name="quick_launch_summary">"응용프로그램을 실행하는 바로가기키 설정"</string>
+    <string name="quick_launch_assign_application">"응용프로그램 할당"</string>
+    <string name="quick_launch_no_shortcut">"바로가기 없음"</string>
+    <string name="quick_launch_shortcut">"검색 + <xliff:g id="SHORTCUT_LETTER">%1$s</xliff:g>"</string>
+    <string name="quick_launch_clear_dialog_title">"지우기"</string>
+    <string name="quick_launch_clear_dialog_message">"<xliff:g id="SHORTCUT_LETTER">%1$s</xliff:g> 바로가기(<xliff:g id="APPLICATION_NAME">%2$s</xliff:g>)가 지워집니다."</string>
+    <string name="quick_launch_clear_ok_button">"확인"</string>
+    <string name="quick_launch_clear_cancel_button">"취소"</string>
+    <string name="quick_launch_display_mode_applications">"응용프로그램"</string>
+    <string name="quick_launch_display_mode_shortcuts">"바로가기"</string>
+    <string name="input_methods_settings_title">"텍스트 입력"</string>
+    <string name="input_methods_settings_summary">"텍스트 입력 옵션 관리"</string>
+    <string name="input_methods_settings_label_format">"%s 설정"</string>
+    <string name="development_settings_title">"개발"</string>
+    <string name="development_settings_summary">"응용프로그램 개발 옵션 설정"</string>
+    <string name="enable_adb">"USB 디버깅"</string>
+    <string name="enable_adb_summary">"USB가 연결된 경우 디버그 모드"</string>
+    <string name="keep_screen_on">"켜진 상태로 유지"</string>
+    <string name="keep_screen_on_summary">"충전하는 동안 화면이 꺼지지 않음"</string>
+    <string name="allow_mock_location">"모의 위치 허용"</string>
+    <string name="allow_mock_location_summary">"모의 위치 허용"</string>
+    <!-- no translation found for gadget_picker_title (98374951396755811) -->
+    <skip />
+    <!-- no translation found for widget_picker_title (9130684134213467557) -->
+    <skip />
+    <string name="battery_history_details_for">"UID %d의 세부정보"</string>
+    <string name="battery_history_uid">"UID <xliff:g id="USER_ID">%1$d</xliff:g>"</string>
+    <string name="battery_history_network_usage">"<xliff:g id="APP_NAME">%1$s</xliff:g>의 네트워크 사용 세부정보"</string>
+    <string name="battery_history_bytes_received">"받은 바이트 수: <xliff:g id="BYTES">%1$d</xliff:g>"</string>
+    <string name="battery_history_bytes_sent">"보낸 바이트 수: <xliff:g id="BYTES">%1$d</xliff:g>"</string>
+    <string name="battery_history_bytes_total">"총 바이트 수: <xliff:g id="BYTES">%1$d</xliff:g>"</string>
+    <string name="battery_history_cpu_usage">"<xliff:g id="APP_NAME">%1$s</xliff:g>의 CPU 사용 세부정보"</string>
+    <string name="battery_history_user_time">"사용자 시간:"</string>
+    <string name="battery_history_system_time">"시스템 시간:"</string>
+    <string name="battery_history_total_time">"시간 합계:"</string>
+    <string name="battery_history_starts">"시작: <xliff:g id="STARTS">%1$d</xliff:g>번"</string>
+    <string name="battery_history_days">"<xliff:g id="DAYS">%1$d</xliff:g>일, <xliff:g id="HOURS">%2$d</xliff:g>시간, <xliff:g id="MINUTES">%3$d</xliff:g>분, <xliff:g id="SECONDS">%4$d</xliff:g>초"</string>
+    <string name="battery_history_hours">"<xliff:g id="HOURS">%1$d</xliff:g>시간, <xliff:g id="MINUTES">%2$d</xliff:g>분, <xliff:g id="SECONDS">%3$d</xliff:g>초"</string>
+    <string name="battery_history_minutes">"<xliff:g id="MINUTES">%1$d</xliff:g>분, <xliff:g id="SECONDS">%2$d</xliff:g>초"</string>
+    <string name="battery_history_seconds">"<xliff:g id="SECONDS">%1$d</xliff:g>초"</string>
+    <string name="battery_history_packages_sharing_this_uid">"이 UID를 공유하는 패키지"</string>
+    <string name="battery_history_no_data">"배터리 사용 데이터가 없습니다."</string>
+    <string name="battery_history_sensor">"센서:"</string>
+    <!-- no translation found for battery_history_wakelock (608683447522396293) -->
+    <skip />
+    <string name="battery_history_used_by_packages">"패키지가 사용한 센서:"</string>
+    <string name="battery_history_sensor_usage">"<xliff:g id="PACKAGE">%2$s</xliff:g>에서 <xliff:g id="COUNT">%1$d</xliff:g>번 사용"</string>
+    <string name="battery_history_sensor_usage_multi">"다음 중 하나가 <xliff:g id="COUNT">%1$d</xliff:g>번 사용:"</string>
+    <!-- no translation found for battery_history_awake_label (8449792868990080882) -->
+    <skip />
+    <!-- no translation found for battery_history_screen_on_label (1848936521786339362) -->
+    <skip />
+    <!-- no translation found for battery_history_phone_on_label (700191958853142297) -->
+    <skip />
+    <!-- no translation found for battery_history_awake (4350886665719031057) -->
+    <skip />
+    <string name="battery_history_screen_on">"화면을 켠 상태에서 소비한 시간:"</string>
+    <!-- no translation found for battery_history_phone_on (4891504401623839532) -->
+    <skip />
+    <string name="battery_history_screen_on_battery">"배터리 켜짐 시간:"</string>
+    <string name="battery_history_screen_on_plugged">"연결됨:"</string>
+    <string name="usage_stats_label">"사용 통계"</string>
+    <string name="testing_usage_stats">"사용 통계"</string>
+    <string name="display_order_text">"정렬 기준:"</string>
+    <string name="app_name_label">"응용프로그램"</string>
+    <string name="launch_count_label">"계수"</string>
+    <string name="usage_time_label">"사용 시간"</string>
+</resources>

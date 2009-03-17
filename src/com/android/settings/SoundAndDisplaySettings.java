@@ -25,6 +25,7 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.media.AudioManager;
 import android.os.Bundle;
+import android.os.IMountService;
 import android.os.RemoteException;
 import android.os.ServiceManager;
 import android.preference.ListPreference;
@@ -49,12 +50,27 @@ public class SoundAndDisplaySettings extends PreferenceActivity implements
     private static final String KEY_DTMF_TONE = "dtmf_tone";
     private static final String KEY_SOUND_EFFECTS = "sound_effects";
     private static final String KEY_ANIMATIONS = "animations";
+    private static final String KEY_ACCELEROMETER = "accelerometer";
+    private static final String KEY_PLAY_MEDIA_NOTIFICATION_SOUNDS = "play_media_notification_sounds";
     
     private CheckBoxPreference mSilent;
+
+    private CheckBoxPreference mPlayMediaNotificationSounds;
+
+    private IMountService mMountService = null;
+
+    /*
+     * If we are currently in one of the silent modes (the ringer mode is set to either
+     * "silent mode" or "vibrate mode"), then toggling the "Phone vibrate"
+     * preference will switch between "silent mode" and "vibrate mode".
+     * Otherwise, it will adjust the normal ringer mode's ring or ring+vibrate
+     * setting.
+     */
     private CheckBoxPreference mVibrate;
     private CheckBoxPreference mDtmfTone;
     private CheckBoxPreference mSoundEffects;
     private CheckBoxPreference mAnimations;
+    private CheckBoxPreference mAccelerometer;
     private float[] mAnimationScales;
     
     private AudioManager mAudioManager;
@@ -64,14 +80,7 @@ public class SoundAndDisplaySettings extends PreferenceActivity implements
     private BroadcastReceiver mReceiver = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
-            
-            int ringerMode = intent
-                    .getIntExtra(AudioManager.EXTRA_RINGER_MODE, AudioManager.RINGER_MODE_NORMAL);
-            boolean isSilentMode = ringerMode != AudioManager.RINGER_MODE_NORMAL;
-            
-            if (mSilent.isChecked() != isSilentMode) {
-                mSilent.setChecked(isSilentMode);
-            }
+            updateState(false);
         }
     };
 
@@ -82,10 +91,14 @@ public class SoundAndDisplaySettings extends PreferenceActivity implements
         
         mAudioManager = (AudioManager) getSystemService(Context.AUDIO_SERVICE);
         mWindowManager = IWindowManager.Stub.asInterface(ServiceManager.getService("window"));
+
+        mMountService = IMountService.Stub.asInterface(ServiceManager.getService("mount"));
         
         addPreferencesFromResource(R.xml.sound_and_display_settings);
         
         mSilent = (CheckBoxPreference) findPreference(KEY_SILENT);
+        mPlayMediaNotificationSounds = (CheckBoxPreference) findPreference(KEY_PLAY_MEDIA_NOTIFICATION_SOUNDS);
+
         mVibrate = (CheckBoxPreference) findPreference(KEY_VIBRATE);
         mDtmfTone = (CheckBoxPreference) findPreference(KEY_DTMF_TONE);
         mDtmfTone.setPersistent(false);
@@ -97,6 +110,8 @@ public class SoundAndDisplaySettings extends PreferenceActivity implements
                 Settings.System.SOUND_EFFECTS_ENABLED, 0) != 0);
         mAnimations = (CheckBoxPreference) findPreference(KEY_ANIMATIONS);
         mAnimations.setPersistent(false);
+        mAccelerometer = (CheckBoxPreference) findPreference(KEY_ACCELEROMETER);
+        mAccelerometer.setPersistent(false);
         
         ListPreference screenTimeoutPreference =
             (ListPreference) findPreference(KEY_SCREEN_TIMEOUT);
@@ -123,17 +138,28 @@ public class SoundAndDisplaySettings extends PreferenceActivity implements
     }
 
     private void updateState(boolean force) {
-        final boolean silent = mAudioManager.getRingerMode() != AudioManager.RINGER_MODE_NORMAL;
-        final boolean phoneVibrate = mAudioManager
-                .getVibrateSetting(AudioManager.VIBRATE_TYPE_RINGER)
-                        == AudioManager.VIBRATE_SETTING_ON;
+        final int ringerMode = mAudioManager.getRingerMode();
+        final boolean silentOrVibrateMode =
+                ringerMode != AudioManager.RINGER_MODE_NORMAL;
         
-        if (silent != mSilent.isChecked() || force) {
-            mSilent.setChecked(silent);
+        if (silentOrVibrateMode != mSilent.isChecked() || force) {
+            mSilent.setChecked(silentOrVibrateMode);
         }
-        
-        if (phoneVibrate != mVibrate.isChecked() || force) {
-            mVibrate.setChecked(phoneVibrate);
+
+        try {
+            mPlayMediaNotificationSounds.setChecked(mMountService.getPlayNotificationSounds());
+        } catch (RemoteException e) {
+        }
+       
+        boolean vibrateSetting;
+        if (silentOrVibrateMode) {
+            vibrateSetting = ringerMode == AudioManager.RINGER_MODE_VIBRATE;
+        } else {
+            vibrateSetting = mAudioManager.getVibrateSetting(AudioManager.VIBRATE_TYPE_RINGER)
+                    == AudioManager.VIBRATE_SETTING_ON;            
+        }
+        if (vibrateSetting != mVibrate.isChecked() || force) {
+            mVibrate.setChecked(vibrateSetting);
         }
         
         boolean animations = true;
@@ -142,7 +168,9 @@ public class SoundAndDisplaySettings extends PreferenceActivity implements
         } catch (RemoteException e) {
         }
         if (mAnimationScales != null) {
-            for (int i=0; i<mAnimationScales.length; i++) {
+            // We will leave the window animations alone (always set),
+            // and only use this to change the transition animations.
+            for (int i=1; i<mAnimationScales.length; i++) {
                 if (mAnimationScales[i] == 0) {
                     animations = false;
                     break;
@@ -152,6 +180,9 @@ public class SoundAndDisplaySettings extends PreferenceActivity implements
         if (animations != mAnimations.isChecked() || force) {
             mAnimations.setChecked(animations);
         }
+        mAccelerometer.setChecked(Settings.System.getInt(
+                getContentResolver(), 
+                Settings.System.ACCELEROMETER_ROTATION, 0) != 0);
     }
 
     @Override
@@ -161,12 +192,26 @@ public class SoundAndDisplaySettings extends PreferenceActivity implements
             final boolean silent = mSilent.isChecked();
             mAudioManager.setRingerMode(silent ? AudioManager.RINGER_MODE_SILENT
                     : AudioManager.RINGER_MODE_NORMAL);
+            updateState(false);
             
+        } else if (preference == mPlayMediaNotificationSounds) {
+            try {
+                mMountService.setPlayNotificationSounds(mPlayMediaNotificationSounds.isChecked());
+            } catch (RemoteException e) {
+            }
         } else if (preference == mVibrate) {
             final boolean vibrate = mVibrate.isChecked();
-            mAudioManager.setVibrateSetting(AudioManager.VIBRATE_TYPE_RINGER,
-                    vibrate ? AudioManager.VIBRATE_SETTING_ON
-                            : AudioManager.VIBRATE_SETTING_OFF);
+            final boolean silent = mSilent.isChecked();
+            
+            if (silent) {
+                mAudioManager.setRingerMode(vibrate ? AudioManager.RINGER_MODE_VIBRATE :
+                    AudioManager.RINGER_MODE_SILENT);                
+            } else {
+                mAudioManager.setVibrateSetting(AudioManager.VIBRATE_TYPE_RINGER,
+                        vibrate ? AudioManager.VIBRATE_SETTING_ON
+                                : AudioManager.VIBRATE_SETTING_OFF);
+            }
+            
         } else if (preference == mDtmfTone) {
             Settings.System.putInt(getContentResolver(), Settings.System.DTMF_TONE_WHEN_DIALING,
                     mDtmfTone.isChecked() ? 1 : 0);
@@ -181,13 +226,22 @@ public class SoundAndDisplaySettings extends PreferenceActivity implements
                     mSoundEffects.isChecked() ? 1 : 0);
             
         } else if (preference == mAnimations) {
-            for (int i=0; i<mAnimationScales.length; i++) {
+            if (mAnimationScales.length > 0) {
+                // Window animations are always on.
+                mAnimationScales[0] = 1;
+            }
+            for (int i=1; i<mAnimationScales.length; i++) {
                 mAnimationScales[i] = mAnimations.isChecked() ? 1 : 0;
             }
             try {
                 mWindowManager.setAnimationScales(mAnimationScales);
             } catch (RemoteException e) {
             }
+            
+        } else if (preference == mAccelerometer) {
+            Settings.System.putInt(getContentResolver(),
+                    Settings.System.ACCELEROMETER_ROTATION,
+                    mAccelerometer.isChecked() ? 1 : 0);
         }
         return true;
     }

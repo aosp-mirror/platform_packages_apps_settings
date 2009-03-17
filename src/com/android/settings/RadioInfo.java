@@ -95,7 +95,6 @@ public class RadioInfo extends Activity {
     private static final int MENU_ITEM_TOGGLE_DATA_ON_BOOT = 6;
 
     private TextView mImei;
-    private TextView mImsi;
     private TextView number;
     private TextView callState;
     private TextView operatorName;
@@ -119,10 +118,12 @@ public class RadioInfo extends Activity {
     private TextView mPingHostname;
     private TextView mHttpClientTest;
     private TextView cipherState;
+    private TextView dnsCheckState;
     private EditText smsc;
     private Button radioPowerButton;
     private Button qxdmLogButton;
     private Button cipherToggleButton;
+    private Button dnsCheckToggleButton;
     private Button pingTestButton;
     private Button updateSmscButton;
     private Button refreshSmscButton;
@@ -405,7 +406,6 @@ public class RadioInfo extends Activity {
         phone = PhoneFactory.getDefaultPhone();
 
         mImei = (TextView) findViewById(R.id.imei);
-        mImsi = (TextView) findViewById(R.id.imsi);
         number = (TextView) findViewById(R.id.number);
         callState = (TextView) findViewById(R.id.call);
         operatorName = (TextView) findViewById(R.id.operator);
@@ -428,6 +428,7 @@ public class RadioInfo extends Activity {
         received = (TextView) findViewById(R.id.received);
         cipherState = (TextView) findViewById(R.id.ciphState);
         smsc = (EditText) findViewById(R.id.smsc);
+        dnsCheckState = (TextView) findViewById(R.id.dnsCheckState);
 
         mPingIpAddr = (TextView) findViewById(R.id.pingIpAddr);
         mPingHostname = (TextView) findViewById(R.id.pingHostname);
@@ -454,6 +455,8 @@ public class RadioInfo extends Activity {
         updateSmscButton.setOnClickListener(mUpdateSmscButtonHandler);
         refreshSmscButton = (Button) findViewById(R.id.refresh_smsc);
         refreshSmscButton.setOnClickListener(mRefreshSmscButtonHandler);
+        dnsCheckToggleButton = (Button) findViewById(R.id.dns_check_toggle);
+        dnsCheckToggleButton.setOnClickListener(mDnsCheckButtonHandler);
         
         mPhoneStateReceiver = new PhoneStateIntentReceiver(this, mHandler);
         mPhoneStateReceiver.notifySignalStrength(EVENT_SIGNAL_STRENGTH_CHANGED);
@@ -490,6 +493,7 @@ public class RadioInfo extends Activity {
         updateQxdmState(null);
         updateProperties();
         updateCiphState();
+        updateDnsCheckState();
 
         Log.i(TAG, "[RadioInfo] onResume: register phone & data intents");
 
@@ -556,7 +560,7 @@ public class RadioInfo extends Activity {
 
         // Get the toggle-data-on-boot menu item in the right state.
         item = menu.findItem(MENU_ITEM_TOGGLE_DATA_ON_BOOT);
-        SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(this.getApplication());
+        SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(phone.getContext());
         boolean value = sp.getBoolean(GSMPhone.DATA_DISABLED_ON_BOOT_KEY, false);
         if (value) {
             item.setTitle(R.string.radioInfo_menu_enableDataOnBoot);
@@ -580,7 +584,7 @@ public class RadioInfo extends Activity {
 
     private void updateQxdmState(Boolean newQxdmStatus) {
         SharedPreferences sp = 
-          PreferenceManager.getDefaultSharedPreferences(this.getApplication());
+          PreferenceManager.getDefaultSharedPreferences(phone.getContext());
         mQxdmLogEnabled = sp.getBoolean("qxdmstatus", false);
         // This is called from onCreate, onResume, and the handler when the status
         // is updated. 
@@ -598,14 +602,14 @@ public class RadioInfo extends Activity {
     }
 
     private void setCiphPref(boolean value) {
-        SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(this.getApplication());
+        SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(phone.getContext());
         SharedPreferences.Editor editor = sp.edit();
         editor.putBoolean(GSMPhone.CIPHERING_KEY, value);
         editor.commit();
     }
 
     private boolean getCiphPref() {
-        SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(this.getApplication());
+        SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(phone.getContext());
         boolean ret = sp.getBoolean(GSMPhone.CIPHERING_KEY, true);
         return ret;
     }
@@ -614,6 +618,12 @@ public class RadioInfo extends Activity {
         cipherState.setText(getCiphPref() ? "Ciphering ON" : "Ciphering OFF");
     }
 
+    private void updateDnsCheckState() {
+        GSMPhone gsmPhone = (GSMPhone) phone;
+        dnsCheckState.setText(gsmPhone.isDnsCheckDisabled() ?
+                "0.0.0.0 allowed" :"0.0.0.0 not allowed");
+    }
+    
     private final void
     updateSignalStrength() {
         int state =
@@ -774,10 +784,6 @@ public class RadioInfo extends Activity {
         if (s == null) s = r.getString(R.string.radioInfo_unknown); 
         mImei.setText(s);
         
-        s = phone.getSubscriberId();
-        if (s == null) s = r.getString(R.string.radioInfo_unknown); 
-        mImsi.setText(s);
-
         s = phone.getLine1Number();
         if (s == null) s = r.getString(R.string.radioInfo_unknown); 
         number.setText(s);
@@ -806,10 +812,10 @@ public class RadioInfo extends Activity {
         Resources r = getResources();
 
         try {
-            int txPackets = netstat.getTxPackets();
-            int rxPackets = netstat.getRxPackets();
-            int txBytes   = netstat.getTxBytes();
-            int rxBytes   = netstat.getRxBytes();
+            long txPackets = netstat.getMobileTxPackets();
+            long rxPackets = netstat.getMobileRxPackets();
+            long txBytes   = netstat.getMobileTxBytes();
+            long rxBytes   = netstat.getMobileRxBytes();
     
             String packets = r.getString(R.string.radioInfo_display_packets);
             String bytes   = r.getString(R.string.radioInfo_display_bytes);
@@ -1038,7 +1044,7 @@ public class RadioInfo extends Activity {
     };
 
     private void toggleDataDisabledOnBoot() {
-        SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(this.getApplication());
+        SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(phone.getContext());
         SharedPreferences.Editor editor = sp.edit();
         boolean value = sp.getBoolean(GSMPhone.DATA_DISABLED_ON_BOOT_KEY, false);
         editor.putBoolean(GSMPhone.DATA_DISABLED_ON_BOOT_KEY, !value);
@@ -1111,6 +1117,14 @@ public class RadioInfo extends Activity {
             cipherState.setText("Setting...");
             phone.invokeOemRilRequestRaw(data,
                     mHandler.obtainMessage(EVENT_SET_CIPHER_DONE));
+        }
+    };
+    
+    OnClickListener mDnsCheckButtonHandler = new OnClickListener() {
+        public void onClick(View v) {
+            GSMPhone gsmPhone = (GSMPhone) phone;
+            gsmPhone.disableDnsCheck(!gsmPhone.isDnsCheckDisabled());
+            updateDnsCheckState();
         }
     };
     

@@ -19,6 +19,7 @@ package com.android.settings.bluetooth;
 import com.android.settings.R;
 
 import android.bluetooth.BluetoothDevice;
+import android.bluetooth.BluetoothError;
 import android.bluetooth.BluetoothIntent;
 import android.content.BroadcastReceiver;
 import android.content.Context;
@@ -56,14 +57,12 @@ public class BluetoothDiscoverableEnabler implements Preference.OnPreferenceChan
     private final BroadcastReceiver mReceiver = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
-            /*
-             * TODO: remove this once the BT framework broadcasts the
-             * MODE_CHANGED action when going into MODE_OFF.
-             */
-            int mode = BluetoothIntent.DISABLED_ACTION.equals(intent.getAction())
-                    ? BluetoothDevice.MODE_OFF                    
-                    : intent.getIntExtra(BluetoothIntent.MODE, BluetoothDevice.MODE_UNKNOWN);
-            handleModeChanged(mode);
+            if (BluetoothIntent.SCAN_MODE_CHANGED_ACTION.equals(intent.getAction())) {
+                int mode = intent.getIntExtra(BluetoothIntent.SCAN_MODE, BluetoothError.ERROR);
+                if (mode != BluetoothError.ERROR) {
+                    handleModeChanged(mode);
+                }
+            }
         }
     };
 
@@ -92,12 +91,12 @@ public class BluetoothDiscoverableEnabler implements Preference.OnPreferenceChan
             return;
         }
 
-        IntentFilter filter = new IntentFilter(BluetoothIntent.MODE_CHANGED_ACTION);
+        IntentFilter filter = new IntentFilter(BluetoothIntent.SCAN_MODE_CHANGED_ACTION);
         filter.addAction(BluetoothIntent.DISABLED_ACTION);
         mContext.registerReceiver(mReceiver, filter);
         mCheckBoxPreference.setOnPreferenceChangeListener(this);
         
-        handleModeChanged(mLocalManager.getBluetoothManager().getMode());
+        handleModeChanged(mLocalManager.getBluetoothManager().getScanMode());
     }
     
     public void pause() {
@@ -128,15 +127,16 @@ public class BluetoothDiscoverableEnabler implements Preference.OnPreferenceChan
 
             int timeout = getDiscoverableTimeout();
             manager.setDiscoverableTimeout(timeout);
-            
+
+            mCheckBoxPreference.setSummaryOn(
+                    mContext.getResources().getString(R.string.bluetooth_is_discoverable, timeout));
+
             long endTimestamp = System.currentTimeMillis() + timeout * 1000;
             persistDiscoverableEndTimestamp(endTimestamp);
             
-            manager.setMode(BluetoothDevice.MODE_DISCOVERABLE);
-            handleModeChanged(BluetoothDevice.MODE_DISCOVERABLE);            
-            
+            manager.setScanMode(BluetoothDevice.SCAN_MODE_CONNECTABLE_DISCOVERABLE);
         } else {
-            manager.setMode(BluetoothDevice.MODE_CONNECTABLE);
+            manager.setScanMode(BluetoothDevice.SCAN_MODE_CONNECTABLE);
         }
     }
 
@@ -160,7 +160,7 @@ public class BluetoothDiscoverableEnabler implements Preference.OnPreferenceChan
             Log.v(TAG, "Got mode changed: " + mode);
         }
         
-        if (mode == BluetoothDevice.MODE_DISCOVERABLE) {
+        if (mode == BluetoothDevice.SCAN_MODE_CONNECTABLE_DISCOVERABLE) {
             mCheckBoxPreference.setChecked(true);
             updateCountdownSummary();
             
@@ -170,8 +170,8 @@ public class BluetoothDiscoverableEnabler implements Preference.OnPreferenceChan
     }
     
     private void updateCountdownSummary() {
-        int mode = mLocalManager.getBluetoothManager().getMode();
-        if (mode != BluetoothDevice.MODE_DISCOVERABLE) {
+        int mode = mLocalManager.getBluetoothManager().getScanMode();
+        if (mode != BluetoothDevice.SCAN_MODE_CONNECTABLE_DISCOVERABLE) {
             return;
         }
             
