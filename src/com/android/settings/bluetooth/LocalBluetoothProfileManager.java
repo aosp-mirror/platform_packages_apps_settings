@@ -72,18 +72,21 @@ public abstract class LocalBluetoothProfileManager {
     /**
      * Temporary method to fill profiles based on a device's class.
      * 
+     * NOTE: This list happens to define the connection order. We should put this logic in a more
+     * well known place when this method is no longer temporary.
+     * 
      * @param btClass The class
      * @param profiles The list of profiles to fill
      */
     public static void fill(int btClass, List<Profile> profiles) {
         profiles.clear();
 
-        if (BluetoothA2dp.doesClassMatchSink(btClass)) {
-            profiles.add(Profile.A2DP);
-        }
-        
         if (BluetoothHeadset.doesClassMatch(btClass)) {
             profiles.add(Profile.HEADSET);
+        }
+        
+        if (BluetoothA2dp.doesClassMatchSink(btClass)) {
+            profiles.add(Profile.A2DP);
         }
     }
 
@@ -214,7 +217,7 @@ public abstract class LocalBluetoothProfileManager {
                      */
                     String address = mService.getHeadsetAddress();
                     if (TextUtils.isEmpty(address)) return;
-                    mLocalManager.getLocalDeviceManager().onProfileStateChanged(address);
+                    mLocalManager.getLocalDeviceManager().onProfileStateChanged(address, true);
                 }
             });
         }

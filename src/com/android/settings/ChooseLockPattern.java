@@ -481,8 +481,15 @@ public class ChooseLockPattern extends Activity implements View.OnClickListener{
     }
 
     private void saveChosenPatternAndFinish() {
+        final boolean lockVirgin = !mLockPatternUtils.isPatternEverChosen();
+
         mLockPatternUtils.saveLockPattern(mChosenPattern);
         mLockPatternUtils.setLockPatternEnabled(true);
+
+        if (lockVirgin) {
+            mLockPatternUtils.setVisiblePatternEnabled(true);
+            mLockPatternUtils.setTactileFeedbackEnabled(false);
+        }
         
         setResult(RESULT_FINISHED);
         finish();

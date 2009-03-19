@@ -18,11 +18,12 @@ package com.android.settings.bluetooth;
 
 import com.android.settings.ProgressCategory;
 import com.android.settings.R;
-import com.android.settings.bluetooth.LocalBluetoothManager.ExtendedBluetoothState;
 
 import java.util.List;
 import java.util.WeakHashMap;
 
+import android.bluetooth.BluetoothDevice;
+import android.bluetooth.BluetoothIntent;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
@@ -117,8 +118,8 @@ public class BluetoothSettings extends PreferenceActivity
         
         mLocalManager.startScanning(false);
 
-        registerReceiver(mReceiver, 
-                new IntentFilter(LocalBluetoothManager.EXTENDED_BLUETOOTH_STATE_CHANGED_ACTION));
+        registerReceiver(mReceiver,
+                new IntentFilter(BluetoothIntent.BLUETOOTH_STATE_CHANGED_ACTION));
         
         mLocalManager.setForegroundActivity(this);
     }
@@ -248,12 +249,12 @@ public class BluetoothSettings extends PreferenceActivity
         mDeviceList.setProgress(started);
     }
     
-    private void onBluetoothStateChanged(ExtendedBluetoothState bluetoothState) {
+    private void onBluetoothStateChanged(int bluetoothState) {
         // When bluetooth is enabled (and we are in the activity, which we are),
         // we should start a scan
-        if (bluetoothState == ExtendedBluetoothState.ENABLED) {
+        if (bluetoothState == BluetoothDevice.BLUETOOTH_STATE_ON) {
             mLocalManager.startScanning(false);
-        } else if (bluetoothState == ExtendedBluetoothState.DISABLED) {
+        } else if (bluetoothState == BluetoothDevice.BLUETOOTH_STATE_OFF) {
             mDeviceList.setProgress(false);
         }
     }

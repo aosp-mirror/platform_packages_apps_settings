@@ -812,9 +812,9 @@
     <!-- Sound & display settings screen, animations check box label -->
     <string name="animations_title">Animation</string>
     <!-- Sound & display settings screen, animations option summary text when check box is selected -->
-    <string name="animations_summary_on">Show screen transition animations</string>
+    <string name="animations_summary_on">Show animation when opening &amp; closing windows</string>
     <!-- Sound & display settings screen, animations option summary text when check box is clear -->
-    <string name="animations_summary_off">Show screen transition animations</string>
+    <string name="animations_summary_off">Show animation when opening &amp; closing windows</string>
     <!-- Sound & display settings screen, accelerometer-based rotation check box label -->
     <string name="accelerometer_title">Orientation</string>
     <!-- Sound & display settings screen, accelerometer-based rotation summary text when check box is selected -->
@@ -1314,6 +1314,13 @@ found in the list of installed applications.</string>
     <string name="show_password">Visible passwords</string>
     <!-- On Security & location settings screen, setting check box summary. Summary for the visible passwords setting. -->
     <string name="show_password_summary">Show password as you type</string>
+    <!-- Warning message about security implications of enabling an input method, displayed as a dialog
+         message when the user selects to enable an IME. -->
+    <string name="ime_security_warning">This input method may be able to collect
+    all the text you type, including personal data like passwords and credit
+    card numbers.  It comes from the application
+    <xliff:g id="ime_application_name">%1$s</xliff:g>.
+    Enable this input method?</string>
     
     <!-- User dictionary settings --><skip />
     <!-- User dictionary settings, The titlebar text of the User dictionary settings screen. -->

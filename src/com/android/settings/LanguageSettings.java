@@ -16,8 +16,12 @@
 
 package com.android.settings;
 
+import android.app.AlertDialog;
+import android.app.Dialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.ApplicationInfo;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.os.Environment;
@@ -29,6 +33,7 @@ import android.preference.PreferenceGroup;
 import android.preference.PreferenceScreen;
 import android.provider.Settings;
 import android.text.TextUtils;
+import android.view.View.OnClickListener;
 import android.view.inputmethod.InputMethodInfo;
 import android.view.inputmethod.InputMethodManager;
 
@@ -74,12 +79,12 @@ public class LanguageSettings extends PreferenceActivity {
             mHaveHardKeyboard = true;
         }
         mCheckboxes = new ArrayList<CheckBoxPreference>();
-        mRootDirectory = Environment.getRootDirectory().getAbsolutePath();
         onCreateIMM();
     }
     
     private boolean isSystemIme(InputMethodInfo property) {
-        return property.getServiceInfo().applicationInfo.sourceDir.startsWith(mRootDirectory);
+        return (property.getServiceInfo().applicationInfo.flags
+                & ApplicationInfo.FLAG_SYSTEM) != 0;
     }
     
     private void onCreateIMM() {
@@ -161,8 +166,6 @@ public class LanguageSettings extends PreferenceActivity {
 
         StringBuilder builder = new StringBuilder(256);
         
-        boolean haveLastInputMethod = false;
-        
         int firstEnabled = -1;
         int N = mInputMethodProperties.size();
         for (int i = 0; i < N; ++i) {
@@ -178,7 +181,6 @@ public class LanguageSettings extends PreferenceActivity {
                 if (firstEnabled < 0) {
                     firstEnabled = i;
                 }
-                if (hasIt) haveLastInputMethod = true;
             } else if (hasIt) {
                 mLastInputMethodId = mLastTickedInputMethodId;
             }
@@ -196,7 +198,8 @@ public class LanguageSettings extends PreferenceActivity {
         Settings.Secure.putString(getContentResolver(),
             Settings.Secure.ENABLED_INPUT_METHODS, builder.toString());
         Settings.Secure.putString(getContentResolver(),
-            Settings.Secure.DEFAULT_INPUT_METHOD, mLastInputMethodId);
+            Settings.Secure.DEFAULT_INPUT_METHOD,
+            mLastInputMethodId != null ? mLastInputMethodId : "");
     }
 
     @Override
@@ -210,10 +213,49 @@ public class LanguageSettings extends PreferenceActivity {
         }
 
         if (preference instanceof CheckBoxPreference) {
-            CheckBoxPreference chkPref = (CheckBoxPreference) preference;
-            String id = getInputMethodIdFromKey(chkPref.getKey());
+            final CheckBoxPreference chkPref = (CheckBoxPreference) preference;
+            final String id = getInputMethodIdFromKey(chkPref.getKey());
             if (chkPref.isChecked()) {
-                mLastTickedInputMethodId = id;
+                InputMethodInfo selImi = null;
+                final int N = mInputMethodProperties.size();
+                for (int i=0; i<N; i++) {
+                    InputMethodInfo imi = mInputMethodProperties.get(i);
+                    if (id.equals(imi.getId())) {
+                        selImi = imi;
+                        if (isSystemIme(imi)) {
+                            // This is a built-in IME, so no need to warn.
+                            mLastTickedInputMethodId = id;
+                            return super.onPreferenceTreeClick(preferenceScreen, preference);
+                        }
+                    }
+                }
+                chkPref.setChecked(false);
+                if (selImi == null) {
+                    return super.onPreferenceTreeClick(preferenceScreen, preference);
+                }
+                AlertDialog d = (new AlertDialog.Builder(this))
+                        .setTitle(android.R.string.dialog_alert_title)
+                        .setIcon(android.R.drawable.ic_dialog_alert)
+                        .setMessage(getString(R.string.ime_security_warning,
+                                selImi.getServiceInfo().applicationInfo.loadLabel(
+                                        getPackageManager())))
+                        .setCancelable(true)
+                        .setPositiveButton(android.R.string.ok,
+                                new DialogInterface.OnClickListener() {
+                                    public void onClick(DialogInterface dialog, int which) {
+                                        chkPref.setChecked(true);
+                                        mLastTickedInputMethodId = id;
+                                    }
+                            
+                        })
+                        .setNegativeButton(android.R.string.cancel,
+                                new DialogInterface.OnClickListener() {
+                                    public void onClick(DialogInterface dialog, int which) {
+                                    }
+                            
+                        })
+                        .create();
+                d.show();
             } else if (id.equals(mLastTickedInputMethodId)) {
                 mLastTickedInputMethodId = null;
             }

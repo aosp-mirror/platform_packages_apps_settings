@@ -17,6 +17,7 @@
 package com.android.settings.bluetooth;
 
 import android.bluetooth.BluetoothDevice;
+import android.bluetooth.BluetoothError;
 import android.bluetooth.BluetoothIntent;
 import android.content.BroadcastReceiver;
 import android.content.Context;
@@ -39,7 +40,14 @@ public class BluetoothNamePreference extends EditTextPreference {
     private BroadcastReceiver mReceiver = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
-            setSummaryToName();
+            String action = intent.getAction();
+            if (action.equals(BluetoothIntent.NAME_CHANGED_ACTION)) {
+                setSummaryToName();
+            } else if (action.equals(BluetoothIntent.BLUETOOTH_STATE_CHANGED_ACTION) &&
+                    (intent.getIntExtra(BluetoothIntent.BLUETOOTH_STATE,
+                    BluetoothError.ERROR) == BluetoothDevice.BLUETOOTH_STATE_ON)) {
+                setSummaryToName();
+            }
         }
     };
     
@@ -53,7 +61,7 @@ public class BluetoothNamePreference extends EditTextPreference {
 
     public void resume() {
         IntentFilter filter = new IntentFilter();
-        filter.addAction(BluetoothIntent.ENABLED_ACTION);
+        filter.addAction(BluetoothIntent.BLUETOOTH_STATE_CHANGED_ACTION);
         filter.addAction(BluetoothIntent.NAME_CHANGED_ACTION);
         getContext().registerReceiver(mReceiver, filter);
     }

@@ -30,7 +30,7 @@
     <string name="radioInfo_menu_disableDataOnBoot">"起動時にデータを無効にする"</string>
     <string name="radioInfo_service_in">"使用中"</string>
     <string name="radioInfo_service_out">"休止中または使用不可"</string>
-    <string name="radioInfo_service_emergency">"緊急呼のみ"</string>
+    <string name="radioInfo_service_emergency">"緊急通報のみ"</string>
     <string name="radioInfo_service_off">"無線通信をオフ"</string>
     <string name="radioInfo_roaming_in">"ローミング"</string>
     <string name="radioInfo_roaming_not">"ローミングなし"</string>
@@ -94,7 +94,7 @@
     <string name="bluetooth_disconnected">"切断"</string>
     <string name="bluetooth_disconnecting">"切断中..."</string>
     <string name="bluetooth_connecting">"接続中..."</string>
-    <!-- no translation found for bluetooth_unknown (1905151516611093010) -->
+    <!-- no translation found for bluetooth_unknown (644716244548801421) -->
     <skip />
     <string name="bluetooth_not_connected">"この端末をペアに設定する"</string>
     <string name="bluetooth_pairing">"ペアとして設定中..."</string>
@@ -111,7 +111,7 @@
     <string name="choose_timezone">"タイムゾーンの選択"</string>
     <string name="display_preview_label">"プレビュー:"</string>
     <string name="display_font_size_label">"フォントサイズ:"</string>
-    <!-- no translation found for intent_sender_data_label (8363026381459131554) -->
+    <!-- no translation found for intent_sender_data_label (6332324780477289261) -->
     <skip />
     <string name="intent_sender_sendbroadcast_text">"<xliff:g id="BROADCAST">broadcast</xliff:g>を送信"</string>
     <string name="intent_sender_action_label">"<xliff:g id="ACTION">Action</xliff:g>:"</string>
@@ -211,7 +211,7 @@
     <string name="security_settings_summary">"現在地情報、画面ロック、SIMカードロック"</string>
     <string name="security_passwords_title">"パスワード"</string>
     <string name="bluetooth_quick_toggle_title">"Bluetooth"</string>
-    <string name="bluetooth_quick_toggle_summary">"Bluetoothをオン"</string>
+    <string name="bluetooth_quick_toggle_summary">"BluetoothをONにする"</string>
     <string name="bluetooth_settings">"Bluetooth設定"</string>
     <string name="bluetooth_settings_title">"Bluetooth設定"</string>
     <string name="bluetooth_settings_summary">"端末の名前、接続や検出設定"</string>
@@ -245,7 +245,7 @@
     <string name="bluetooth_headset_profile_summary_use_for">"携帯電話の音声に使用"</string>
     <string name="wifi">"Wi-Fi"</string>
     <string name="wifi_quick_toggle_title">"Wi-Fi"</string>
-    <string name="wifi_quick_toggle_summary">"Wi-Fiをオン"</string>
+    <string name="wifi_quick_toggle_summary">"Wi-FiをONにする"</string>
     <string name="wifi_settings">"Wi-Fi設定"</string>
     <string name="wifi_settings_category">"Wi-Fi設定"</string>
     <string name="wifi_settings_summary">"ワイヤレスアクセスポイントの設定"</string>
@@ -268,10 +268,10 @@
     <string name="wifi_security_verbose_wpa2">"WPA2により保護"</string>
     <string name="ip_address">"IPアドレス"</string>
     <string name="signal">"電波強度"</string>
-    <string name="wifi_starting">"オンにしています..."</string>
-    <string name="wifi_stopping">"オフにしています..."</string>
+    <string name="wifi_starting">"ONにしています..."</string>
+    <string name="wifi_stopping">"OFFにしています..."</string>
     <string name="wifi_error">"エラー"</string>
-    <string name="error_starting">"Wi-Fiを開始できません"</string>
+    <string name="error_starting">"Wi-Fiを使用できません"</string>
     <string name="error_stopping">"Wi-Fiを停止できません"</string>
     <string name="error_scanning">"ネットワークをスキャンできません"</string>
     <string name="error_connecting">"ネットワークに接続できません"</string>
@@ -283,7 +283,7 @@
     <string name="wifi_show_password">"パスワードを表示"</string>
     <string name="scan_wifi">"スキャン"</string>
     <string name="summary_not_in_range">"圏外"</string>
-    <string name="summary_remembered">"これまでの設定"</string>
+    <string name="summary_remembered">"接続履歴あり"</string>
     <string name="summary_connection_failed">"接続できませんでした。選択すると再試行します。"</string>
     <string name="wifi_access_points">"Wi-Fiネットワーク"</string>
     <string name="wifi_type_ssid">"ネットワークSSID"</string>
@@ -300,7 +300,7 @@
     <string name="wifi_ip_settings_menu_save">"保存"</string>
     <string name="wifi_ip_settings_menu_cancel">"キャンセル"</string>
     <string name="wifi_ip_settings_invalid_ip">"正しいIPアドレスを入力してください。"</string>
-    <string name="wifi_use_static_ip">"静的IPを使用"</string>
+    <string name="wifi_use_static_ip">"静的IPを使用する"</string>
     <string name="wifi_ip_address">"IPアドレス"</string>
     <string name="wifi_dns1">"DNS 1"</string>
     <string name="wifi_dns2">"DNS 2"</string>
@@ -310,12 +310,12 @@
     <string name="wifi_context_menu_forget">"ネットワークへの接続を解除"</string>
     <string name="wifi_context_menu_change_password">"パスワードを変更"</string>
     <string name="wifi_advanced_titlebar">"詳細設定"</string>
-    <string name="wifi_setting_num_channels_title">"規制領域"</string>
-    <string name="wifi_setting_num_channels_summary">"使用するチャンネルの番号を設定する"</string>
-    <string name="wifi_setting_num_channels_error">"規制領域の設定で問題が発生しました。"</string>
-    <string name="wifi_setting_num_channels_channel_phrase">"チャンネル数<xliff:g id="NUM_CHANNELS">%1$d</xliff:g>件"</string>
-    <string name="wifi_setting_sleep_policy_title">"Wi-Fiスリープポリシー"</string>
-    <string name="wifi_setting_sleep_policy_summary">"Wi-Fiからモバイルデータに切り替えるタイミングを指定する"</string>
+    <string name="wifi_setting_num_channels_title">"規制区域"</string>
+    <string name="wifi_setting_num_channels_summary">"使用するチャネル番号を設定する"</string>
+    <string name="wifi_setting_num_channels_error">"規制区域の設定に問題があります。"</string>
+    <string name="wifi_setting_num_channels_channel_phrase">"<xliff:g id="NUM_CHANNELS">%1$d</xliff:g>チャネル"</string>
+    <string name="wifi_setting_sleep_policy_title">"Wi-Fiのスリープ設定"</string>
+    <string name="wifi_setting_sleep_policy_summary">"Wi-Fiをスリープに切り替えるタイミング"</string>
     <string name="wifi_setting_sleep_policy_error">"スリープポリシーの設定で問題が発生しました。"</string>
     <string name="wifi_advanced_mac_address_title">"MACアドレス"</string>
     <string name="fragment_status_scanning">"スキャン中..."</string>
@@ -338,15 +338,15 @@
     <string name="sound_settings">"音の設定"</string>
     <string name="sound_and_display_settings_summary">"着信音、操作音、画面の明るさなど"</string>
     <string name="silent_mode_title">"マナーモード"</string>
-    <string name="silent_mode_summary">"メディア（音楽や動画）、アラーム以外は無音にします"</string>
+    <string name="silent_mode_summary">"音楽、動画メディア、アラーム以外は消音"</string>
     <string name="ringtone_title">"着信音"</string>
-    <string name="ringtone_summary">"端末既定の着信音設定"</string>
-    <string name="ring_volume_title">"着信音の音量"</string>
-    <string name="ring_volume_summary">"着信音と通知音の音量を設定する"</string>
+    <string name="ringtone_summary">"端末の基本着信音を選択"</string>
+    <string name="ring_volume_title">"着信音量"</string>
+    <string name="ring_volume_summary">"着信音と通知音の音量"</string>
     <string name="vibrate_title">"バイブレーション"</string>
-    <string name="vibrate_summary">"着信時のバイブレーションON"</string>
+    <string name="vibrate_summary">"着信時バイブレーションをONにする"</string>
     <string name="notification_sound_title">"通知音"</string>
-    <string name="notification_sound_summary">"端末既定の通知音設定"</string>
+    <string name="notification_sound_summary">"端末の基本通知音を選択"</string>
     <string name="incoming_call_volume_title">"着信音量"</string>
     <string name="notification_volume_title">"通知音量"</string>
     <string name="checkbox_notification_same_as_incoming_call">"通知音にも着信音量を適用"</string>
@@ -357,21 +357,29 @@
     <string name="dtmf_tone_enable_summary_on">"ダイヤルパッドの操作音をONにする"</string>
     <string name="dtmf_tone_enable_summary_off">"ダイヤルパッドの操作音をONにする"</string>
     <string name="sound_effects_enable_title">"選択時の操作音"</string>
-    <string name="sound_effects_enable_summary_on">"メニュー選択時に音を鳴らす"</string>
-    <string name="sound_effects_enable_summary_off">"メニュー選択時に音を鳴らす"</string>
+    <string name="sound_effects_enable_summary_on">"メニュー選択時の操作音をONにする"</string>
+    <string name="sound_effects_enable_summary_off">"メニュー選択時の操作音をONにする"</string>
     <string name="play_media_notification_sounds_enable_title">"SDカードの通知"</string>
-    <string name="play_media_notification_sounds_enable_summary_on">"SDカードの通知音を無効にする"</string>
-    <string name="play_media_notification_sounds_enable_summary_off">"SDカードの通知音を有効にします"</string>
+    <string name="play_media_notification_sounds_enable_summary_on">"SDカード通知音をOFFにする"</string>
+    <string name="play_media_notification_sounds_enable_summary_off">"SDカード通知音をONにする"</string>
     <string name="sync_settings">"データの同期"</string>
-    <string name="sync_settings_summary">"同期するアプリケーションを選択する"</string>
+    <string name="sync_settings_summary">"同期するアプリケーションの選択"</string>
     <string name="display_settings">"画面設定"</string>
     <string name="animations_title">"アニメーション表示"</string>
-    <string name="animations_summary_on">"ウィンドウの開閉をアニメーションで表示する"</string>
-    <string name="animations_summary_off">"ウィンドウの開閉をアニメーションで表示する"</string>
+    <!-- no translation found for animations_summary_on (8843613112130484436) -->
+    <skip />
+    <!-- no translation found for animations_summary_off (2777026828025551983) -->
+    <skip />
+    <!-- no translation found for accelerometer_title (6183763368844793276) -->
+    <skip />
+    <!-- no translation found for accelerometer_summary_on (1133737282813048021) -->
+    <skip />
+    <!-- no translation found for accelerometer_summary_off (5485489363715740761) -->
+    <skip />
     <string name="brightness">"画面の明るさ"</string>
-    <string name="brightness_summary">"画面の明るさを調整します"</string>
-    <string name="screen_timeout">"画面のタイムアウト"</string>
-    <string name="screen_timeout_summary">"画面が自動的にOFFになるまでの時間を調整します"</string>
+    <string name="brightness_summary">"画面の明るさを調整する"</string>
+    <string name="screen_timeout">"バックライト消灯"</string>
+    <string name="screen_timeout_summary">"画面のバックライトを自動消灯するまでの時間"</string>
     <string name="sim_lock_settings">"SIMカードロック設定"</string>
     <string name="sim_lock_settings_category">"SIMカードロック設定"</string>
     <string name="sim_lock_settings_title">"SIMカードロック"</string>
@@ -406,7 +414,7 @@
     <string name="device_status">"端末の状態"</string>
     <string name="device_status_summary">"電話番号、端末識別番号、電波状態など"</string>
     <string name="storage_settings_title">"SDカード &amp; 端末容量"</string>
-    <string name="storage_settings_summary">"SDカードの取り外し、空き容量の表示など"</string>
+    <string name="storage_settings_summary">"SDカードの取り外し、空き容量の表示"</string>
     <string name="status_number">"電話番号"</string>
     <string name="status_network_type">"モバイルネットワークのタイプ"</string>
     <string name="status_data_state">"モバイルネットワークの状態"</string>
@@ -456,6 +464,12 @@
     <string name="error_apn_empty">"APNを空にできません。"</string>
     <string name="error_mcc_not3">"MCCのフィールドには3桁で指定してください。"</string>
     <string name="error_mnc_not23">"MNCのフィールドには2桁か3桁で指定してください。"</string>
+    <!-- no translation found for restore_default_apn (2724583218635739913) -->
+    <skip />
+    <!-- no translation found for menu_restore (8260067415075573273) -->
+    <skip />
+    <!-- no translation found for restore_default_apn_completed (3990449939234957281) -->
+    <skip />
     <string name="master_clear_title">"データの初期化"</string>
     <string name="master_clear_summary">"携帯電話内のすべてのデータを消去"</string>
     <string name="master_clear_desc">"この操作は携帯電話を出荷時の初期状態にリセットし、データとダウンロードしたアプリケーションをすべて消去します。"</string>
@@ -476,16 +490,16 @@
     <string name="call_settings_title">"通話設定"</string>
     <string name="call_settings_summary">"ボイスメール、電話転送、発信者番号などの設定"</string>
     <string name="network_settings_title">"モバイルネットワーク"</string>
-    <string name="network_settings_summary">"ローミング、ネットワーク、APNの設定"</string>
-    <string name="location_title">"現在地情報"</string>
+    <string name="network_settings_summary">"ローミング、ネットワーク、APN設定"</string>
+    <string name="location_title">"位置情報の検出"</string>
     <string name="location_network_based">"ワイヤレスネットワークを使用"</string>
-    <string name="location_networks_disabled">"ワイヤレスネットワークを使用するアプリケーション（地図など）で位置を表示する"</string>
+    <string name="location_networks_disabled">"無線ネットワークを使用するアプリケーション(地図など)で位置を表示する"</string>
     <string name="location_neighborhood_level">"Wi-Fi/モバイルネットワークで位置を検出する"</string>
-    <string name="location_gps">"GPS機能を有効にする"</string>
-    <string name="location_street_level">"高精度測位（電池を節約する場合はOFFを選択）"</string>
-    <string name="location_gps_disabled">"高精度測位（電池消費大、電波が良好な野外使用）"</string>
+    <string name="location_gps">"GPS機能をONにする"</string>
+    <string name="location_street_level">"高精度測位（電池の消費を節約する場合はOFFにしてください）"</string>
+    <string name="location_gps_disabled">"高精度測位（電池消費増、電波が良好な場所で使用）"</string>
     <string name="about_settings">"端末情報"</string>
-    <string name="about_settings_summary">"端末情報、法的情報、バージョン情報など"</string>
+    <string name="about_settings_summary">"端末情報、規約、バージョン情報"</string>
     <string name="legal_information">"法的情報"</string>
     <string name="contributors_title">"貢献者/連携パートナー"</string>
     <string name="copyright_title">"著作権"</string>
@@ -524,7 +538,7 @@
     <string name="lock_title">"携帯電話の保護"</string>
     <string name="lock_intro_message"><font size="17">"画面ロックの解除パターンを作成して携帯電話の不正使用を防ぐことができます。"\n<font height="17">\n</font><b>"1"</b>"  次の画面でパターン作成の例を参考にしてください。"\n<font height="17">\n</font><b>"2"</b>"  ロック解除パターンを決めたら、そのパターンを指でなぞって描きます。さまざまなパターンを作成できますが、最低4つの点を結んでください。"\n<font height="17">\n</font><b>"3"</b>"  確認のためもう一度そのパターンを入力します。"\n<font height="17">\n</font><b>"[次へ]を押すと次に進みます"</b>"。"\n<font height="3">\n</font>"パターンロックを設定しない場合は[キャンセル]を選択してください。"</font></string>
     <string name="lock_example_title">"パターン例"</string>
-    <string name="lock_example_message">"少なくとも4つの点を結んで下さい。"\n" "\n"独自のパターンを決めたら[次へ]を選択します。"</string>
+    <string name="lock_example_message">"少なくとも4つの点を結んで下さい。"\n" "\n"パターンを決めたら[次へ]を選択して進みます。"</string>
     <string name="manageapplications_settings_title">"アプリケーションの管理"</string>
     <string name="manageapplications_settings_summary">"インストール済みアプリケーションを管理/削除します"</string>
     <string name="applications_settings">"アプリケーション"</string>
@@ -535,7 +549,7 @@
     <string name="install_all_warning">"提供元不明のアプリケーションから携帯電話や個人情報データが攻撃を受ける可能性が高くなります。このようなアプリケーションの使用により生じうる携帯電話への損害やデータの損失について、お客様がすべての責任を負うことに同意するものとします。"</string>
     <string name="application_info_label">"アプリケーション情報"</string>
     <string name="storage_label">"メモリ"</string>
-    <string name="auto_launch_label">"いつも起動"</string>
+    <string name="auto_launch_label">"いつもこのアプリケーションを選択する操作"</string>
     <string name="permissions_label">"許可"</string>
     <string name="cache_header_label">"キャッシュ"</string>
     <string name="clear_cache_btn_text">"キャッシュをクリア"</string>
@@ -547,9 +561,9 @@
     <string name="data_size_label">"データ"</string>
     <string name="uninstall_text">"アンインストール"</string>
     <string name="clear_user_data_text">"データを消去"</string>
-    <string name="auto_launch_enable_text">"このアプリケーションはある操作で常に起動するように設定されています。"</string>
-    <string name="auto_launch_disable_text">"端末既定の設定なし"</string>
-    <string name="clear_activities">"既定操作を消去"</string>
+    <string name="auto_launch_enable_text">"特定の操作で使用する既定アプリケーションとして設定されています。"</string>
+    <string name="auto_launch_disable_text">"設定されている操作はありません。"</string>
+    <string name="clear_activities">"設定を消去"</string>
     <string name="unknown">"不明"</string>
     <string name="sort_order_alpha">"並べ替え"</string>
     <string name="sort_order_size">"サイズ順に並べ替え"</string>
@@ -573,7 +587,7 @@
     <string name="invalid_size_value">"パッケージのサイズを計算できません"</string>
     <string name="empty_list_msg">"サードパーティ製のアプリケーションはインストールされていません。"</string>
     <string name="language_settings">"地域/言語 &amp; 文字入力"</string>
-    <string name="language_settings_summary">"地域と言語、文字入力、自動修正の設定"</string>
+    <string name="language_settings_summary">"言語と地域、文字入力の設定"</string>
     <string name="language_category">"地域/言語設定"</string>
     <string name="text_category">"文字入力設定"</string>
     <string name="phone_language">"地域/言語を選択"</string>
@@ -583,15 +597,17 @@
     <string name="auto_caps">"自動大文字変換"</string>
     <string name="auto_caps_summary">"英語: 先頭文字を大文字に変換する"</string>
     <string name="auto_punctuate">"ピリオド自動挿入"</string>
-    <string name="hardkeyboard_category">"物理キーボードの設定"</string>
+    <string name="hardkeyboard_category">"キーボードの設定"</string>
     <string name="auto_punctuate_summary">"英語: Spaceキー2回でピリオド(.)を挿入"</string>
     <string name="show_password">"パスワードを表示"</string>
-    <string name="show_password_summary">"入力中のパスワードを表示する"</string>
+    <string name="show_password_summary">"入力時にパスワードを表示する"</string>
     <string name="user_dict_settings_titlebar">"ユーザー辞書"</string>
     <string name="user_dict_settings_title">"ユーザー辞書"</string>
     <string name="user_dict_settings_summary">"ユーザー辞書への語句の追加と削除"</string>
     <string name="user_dict_settings_add_menu_title">"追加"</string>
     <string name="user_dict_settings_add_dialog_title">"辞書に追加"</string>
+    <!-- no translation found for user_dict_settings_edit_dialog_title (8967476444840548674) -->
+    <skip />
     <string name="user_dict_settings_context_menu_edit_title">"編集"</string>
     <string name="user_dict_settings_context_menu_delete_title">"削除"</string>
     <string name="user_dict_settings_empty_text">"ユーザー辞書に何も登録されていません。語句はメニューから登録できます。"</string>
@@ -612,7 +628,14 @@
     <string name="quick_launch_display_mode_shortcuts">"ショートカット"</string>
     <string name="input_methods_settings_title">"文字入力"</string>
     <string name="input_methods_settings_summary">"テキスト入力オプションを管理"</string>
-    <string name="input_methods_settings_label_format">"%s設定"</string>
+    <!-- no translation found for input_methods_settings_label_format (6002887604815693322) -->
+    <skip />
+    <!-- no translation found for onscreen_keyboard_settings_summary (4919680715154885028) -->
+    <skip />
+    <!-- no translation found for builtin_keyboard_settings_title (8169889453770863227) -->
+    <skip />
+    <!-- no translation found for builtin_keyboard_settings_summary (6404687907454621637) -->
+    <skip />
     <string name="development_settings_title">"開発"</string>
     <string name="development_settings_summary">"アプリケーション開発オプション"</string>
     <string name="enable_adb">"USBデバッグ"</string>
