@@ -126,36 +126,7 @@ public class LocalBluetoothDevice implements Comparable<LocalBluetoothDevice> {
     private void queueCommand(BluetoothJob job) {
         Log.d(TAG, workQueue.toString());
         synchronized (workQueue) {
-            boolean processNow = false;
-            long now = System.currentTimeMillis();
-
-            Iterator<BluetoothJob> it = workQueue.iterator();
-            while (it.hasNext()) {
-                BluetoothJob existingJob = it.next();
-
-                // Remove any pending CONNECTS when we receive a DISCONNECT
-                if (job.command == BluetoothCommand.DISCONNECT) {
-                    if (existingJob.timeSent == 0
-                            && existingJob.command == BluetoothCommand.CONNECT
-                            && existingJob.device.mAddress.equals(job.device.mAddress)
-                            && existingJob.profile == job.profile) {
-                        it.remove();
-                        continue;
-                    }
-                }
-
-                // Defensive Code: Remove any job that older than a preset time.
-                // We never got a call back. It is better to have overlapping
-                // calls than to get stuck.
-                Log.d(TAG, "Age:" + (now - existingJob.timeSent));
-                if (existingJob.timeSent != 0
-                        && (now - existingJob.timeSent) >= MAX_WAIT_TIME_FOR_FRAMEWORK) {
-                    Log.w(TAG, "Timeout. Removing Job:" + existingJob.toString());
-                    it.remove();
-                    processNow = true;
-                    continue;
-                }
-            }
+            boolean processNow = pruneQueue(job);
 
             // Add job to queue
             Log.d(TAG, "Adding: " + job.toString());
@@ -170,6 +141,40 @@ public class LocalBluetoothDevice implements Comparable<LocalBluetoothDevice> {
                 processCommands();
             }
         }
+    }
+    
+    private boolean pruneQueue(BluetoothJob job) {
+        boolean removedStaleItems = false;
+        long now = System.currentTimeMillis();
+        Iterator<BluetoothJob> it = workQueue.iterator();
+        while (it.hasNext()) {
+            BluetoothJob existingJob = it.next();
+
+            // Remove any pending CONNECTS when we receive a DISCONNECT
+            if (job != null && job.command == BluetoothCommand.DISCONNECT) {
+                if (existingJob.timeSent == 0
+                        && existingJob.command == BluetoothCommand.CONNECT
+                        && existingJob.device.mAddress.equals(job.device.mAddress)
+                        && existingJob.profile == job.profile) {
+                    Log.d(TAG, "Removed because of a pending disconnect. " + existingJob);
+                    it.remove();
+                    continue;
+                }
+            }
+
+            // Defensive Code: Remove any job that older than a preset time.
+            // We never got a call back. It is better to have overlapping
+            // calls than to get stuck.
+            Log.d(TAG, "Age:" + (now - existingJob.timeSent));
+            if (existingJob.timeSent != 0
+                    && (now - existingJob.timeSent) >= MAX_WAIT_TIME_FOR_FRAMEWORK) {
+                Log.w(TAG, "Timeout. Removing Job:" + existingJob.toString());
+                it.remove();
+                removedStaleItems = true;
+                continue;
+            }
+        }
+        return removedStaleItems;
     }
 
     private boolean processCommand(BluetoothJob job) {
@@ -199,15 +204,29 @@ public class LocalBluetoothDevice implements Comparable<LocalBluetoothDevice> {
     }
 
     public void onProfileStateChanged() {
-        // Remove the first item and process the next one
-        BluetoothJob job = workQueue.poll();
+        Log.d(TAG, "onProfileStateChanged:" + workQueue.toString());
+        BluetoothJob job = workQueue.peek();
         if (job == null) {
-            Log.w(TAG, "Yikes, onProfileStateChanged called but job queue is empty");
+            Log.v(TAG, "Yikes, onProfileStateChanged called but job queue is empty. "
+                    + "(Okay for device initiated actions and BluetoothA2dpService initiated "
+                    + "Auto-connections)");
+            return;
         } else if (job.device.mAddress != mAddress) {
-            Log.w(TAG, "Yikes, onProfileStateChanged called but the address differ. this.mAddress="
+            // This can happen in 2 cases: 1) BT device initiated pairing and
+            // 2) disconnects of one headset that's triggered by connects of
+            // another.
+            Log.v(TAG, "onProfileStateChanged called. The addresses differ. this.mAddress="
                     + mAddress + " workQueue.head=" + job.toString());
+
+            // Check to see if we need to remove the stale items from the queue
+            if (!pruneQueue(null)) {
+                // nothing in the queue was modify. Just ignore the notification and return.
+                return;
+            }
         } else {
+            // Remove the first item and process the next one
             Log.d(TAG, "LocalBluetoothDevice.onProfileStateChanged() called. MAC addr matched");
+            workQueue.poll();
         }
 
         processCommands();
@@ -221,6 +240,7 @@ public class LocalBluetoothDevice implements Comparable<LocalBluetoothDevice> {
      *    notification when it finishes processing a command
      */
     private void processCommands() {
+        Log.d(TAG, "processCommands:" + workQueue.toString());
         Iterator<BluetoothJob> it = workQueue.iterator();
         while (it.hasNext()) {
             BluetoothJob job = it.next();

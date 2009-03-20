@@ -751,8 +751,10 @@
     <string name="sound_and_display_settings_summary">Set ringtones, notifications, screen brightness</string>
     <!-- Sound settings screen, setting option name checkbox -->
     <string name="silent_mode_title">Silent mode</string>
-    <!-- Sound settings screen, setting option summary text -->
+    <!-- Sound settings screen, setting option summary text when going into silent mode.  Media and alarms sounds WILL NOT be silenced in silent mode. -->
     <string name="silent_mode_summary">All sounds except media &amp; alarms are silenced</string>
+    <!-- Sound settings screen, setting option summary text when going into silent mode.  Media WILL NOT be silenced in silent mode, but alarms WILL be silenced. -->
+    <string name="silent_mode_incl_alarm_summary">All sounds except media are silenced</string>
     <!-- Sound settings screen, setting option name to pick ringtone (a list dialog comes up)-->
     <string name="ringtone_title">Phone ringtone</string>
     <!-- Sound settings screen, setting option summary text -->
