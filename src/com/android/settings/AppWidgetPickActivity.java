@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2008 The Android Open Source Project
+ * Copyright (C) 2009 The Android Open Source Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,17 +16,14 @@
 
 package com.android.settings;
 
-import android.app.LauncherActivity;
 import android.appwidget.AppWidgetManager;
 import android.appwidget.AppWidgetProviderInfo;
-import android.content.ComponentName;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.os.Parcelable;
-import android.view.View;
-import android.widget.ListView;
 import android.util.Log;
 
 import java.text.Collator;
@@ -35,33 +32,59 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 
-public class AppWidgetPickActivity extends LauncherActivity
-{
+/**
+ * Displays a list of {@link AppWidgetProviderInfo} widgets, along with any
+ * injected special widgets specified through
+ * {@link AppWidgetManager#EXTRA_CUSTOM_INFO} and
+ * {@link AppWidgetManager#EXTRA_CUSTOM_EXTRAS}.
+ * <p>
+ * When an installed {@link AppWidgetProviderInfo} is selected, this activity
+ * will bind it to the given {@link AppWidgetManager#EXTRA_APPWIDGET_ID},
+ * otherwise it will return the requested extras.
+ */
+public class AppWidgetPickActivity extends ActivityPicker {
     private static final String TAG = "AppWidgetPickActivity";
+    private static final boolean LOGD = false;
 
-    AppWidgetManager mAppWidgetManager;
-    int mAppWidgetId;
-    ArrayList mCustomInfo;
-    ArrayList mCustomExtras;
-    Drawable mDefaultIcon = null;
+    private PackageManager mPackageManager;
+    private AppWidgetManager mAppWidgetManager;
     
-    public AppWidgetPickActivity() {
-        mAppWidgetManager = AppWidgetManager.getInstance(this);
-    }
-
+    /**
+     * The allocated {@link AppWidgetManager#EXTRA_APPWIDGET_ID} that this
+     * activity is binding.
+     */
+    private int mAppWidgetId;
+    
     @Override
     public void onCreate(Bundle icicle) {
-        Bundle extras = getIntent().getExtras();
-        if (extras == null) {
-            setResultData(RESULT_CANCELED, null);
+        mPackageManager = getPackageManager();
+        mAppWidgetManager = AppWidgetManager.getInstance(this);
+        
+        super.onCreate(icicle);
+        
+        // Set default return data
+        setResultData(RESULT_CANCELED, null);
+        
+        // Read the appWidgetId passed our direction, otherwise bail if not found
+        final Intent intent = getIntent();
+        if (intent.hasExtra(AppWidgetManager.EXTRA_APPWIDGET_ID)) {
+            mAppWidgetId = intent.getIntExtra(AppWidgetManager.EXTRA_APPWIDGET_ID,
+                    AppWidgetManager.INVALID_APPWIDGET_ID);
+        } else {
             finish();
         }
-
-        mAppWidgetId = extras.getInt(AppWidgetManager.EXTRA_APPWIDGET_ID);
-
+    }
+    
+    /**
+     * Create list entries for any custom widgets requested through
+     * {@link AppWidgetManager#EXTRA_CUSTOM_INFO}.
+     */
+    void putCustomAppWidgets(List<PickAdapter.Item> items) {
+        final Bundle extras = getIntent().getExtras();
+        
         // get and validate the extras they gave us
-        ArrayList<Parcelable> customInfo = null;
-        ArrayList<AppWidgetProviderInfo> customExtras = null;
+        ArrayList<AppWidgetProviderInfo> customInfo = null;
+        ArrayList<Bundle> customExtras = null;
         try_custom_items: {
             customInfo = extras.getParcelableArrayList(AppWidgetManager.EXTRA_CUSTOM_INFO);
             if (customInfo == null || customInfo.size() == 0) {
@@ -103,21 +126,19 @@ public class AppWidgetPickActivity extends LauncherActivity
                     break try_custom_items;
                 }
             }
-
-            mCustomInfo = customInfo;
-            mCustomExtras = customExtras;
         }
 
-        // After the stuff with mCustomInfo
-        super.onCreate(icicle);
-
-        setResultData(RESULT_CANCELED, null);
+        if (LOGD) Log.d(TAG, "Using " + customInfo.size() + " custom items");
+        putAppWidgetItems(customInfo, customExtras, items);
     }
-
+    
+    /**
+     * {@inheritDoc}
+     */
     @Override
-    public void onListItemClick(ListView l, View v, int position, long id)
-    {
-        Intent intent = intentForPosition(position);
+    public void onClick(DialogInterface dialog, int which) {
+        Intent intent = getIntentForPosition(which);
+        
         int result;
         if (intent.getExtras() != null) {
             // If there are any extras, it's because this entry is custom.
@@ -140,72 +161,79 @@ public class AppWidgetPickActivity extends LauncherActivity
         finish();
     }
 
-    void makeItems(List<AppWidgetProviderInfo> items, ArrayList<Bundle> extras,
-            ArrayList<ListItem> result, IconResizer resizer, PackageManager pm) {
-        final int N = items.size();
-        for (int i=0; i<N; i++) {
-            AppWidgetProviderInfo info = items.get(i);
+    /**
+     * Create list entries for the given {@link AppWidgetProviderInfo} widgets,
+     * inserting extras if provided.
+     */
+    void putAppWidgetItems(List<AppWidgetProviderInfo> appWidgets,
+            List<Bundle> customExtras, List<PickAdapter.Item> items) {
+        final int size = appWidgets.size();
+        for (int i = 0; i < size; i++) {
+            AppWidgetProviderInfo info = appWidgets.get(i);
+            
+            CharSequence label = info.label;
+            Drawable icon = null;
 
-            LauncherActivity.ListItem item = new LauncherActivity.ListItem();
-            item.packageName = info.provider.getPackageName();
-            item.className = info.provider.getClassName();
-            if (extras != null) {
-                item.extras = extras.get(i);
-            }
-            item.label = info.label;
             if (info.icon != 0) {
-                Drawable d = pm.getDrawable(item.packageName, info.icon, null);
-                if (d != null) {
-                    item.icon = resizer.createIconThumbnail(d);
-                } else {
+                icon = mPackageManager.getDrawable(info.provider.getPackageName(), info.icon, null);
+                if (icon == null) {
                     Log.w(TAG, "Can't load icon drawable 0x" + Integer.toHexString(info.icon)
-                            + " for package: " + item.packageName);
+                            + " for provider: " + info.provider);
                 }
-            }
-            if (item.icon == null) {
-                // (including error case above)
-                if (mDefaultIcon == null) {
-                    // TODO: Load standard icon.
-                }
-                item.icon = mDefaultIcon;
             }
             
-            result.add(item);
+            PickAdapter.Item item = new PickAdapter.Item(this, label, icon);
+            
+            item.packageName = info.provider.getPackageName();
+            item.className = info.provider.getClassName();
+            
+            if (customExtras != null) {
+                item.extras = customExtras.get(i);
+            }
+            
+            items.add(item);
         }
     }
     
+    /**
+     * Build and return list of items to be shown in dialog. This will mix both
+     * installed {@link AppWidgetProviderInfo} and those provided through
+     * {@link AppWidgetManager#EXTRA_CUSTOM_INFO}, sorting them alphabetically.
+     */
     @Override
-    public List<ListItem> makeListItems() {
-        List<AppWidgetProviderInfo> installed = mAppWidgetManager.getInstalledProviders();
-        PackageManager pm = getPackageManager();
-
-        IconResizer resizer = new IconResizer();
-        ArrayList<ListItem> result = new ArrayList();
-
-        // the ones from the package manager
-        makeItems(installed, null, result, resizer, pm);
-
-        // the ones provided in the intent we were launched with
-        if (mCustomInfo != null) {
-            Log.d(TAG, "Using " + mCustomInfo.size() + " custom items");
-            makeItems(mCustomInfo, mCustomExtras, result, resizer, pm);
-        }
-
-        // sort the results by name
-        Collections.sort(result, new Comparator<ListItem>() {
+    protected List<PickAdapter.Item> getItems() {
+        List<PickAdapter.Item> items = new ArrayList<PickAdapter.Item>();
+        
+        putInstalledAppWidgets(items);
+        putCustomAppWidgets(items);
+        
+        // Sort all items together by label
+        Collections.sort(items, new Comparator<PickAdapter.Item>() {
                 Collator mCollator = Collator.getInstance();
-                public int compare(ListItem lhs, ListItem rhs) {
+                public int compare(PickAdapter.Item lhs, PickAdapter.Item rhs) {
                     return mCollator.compare(lhs.label, rhs.label);
                 }
             });
 
-        return result;
+        return items;
     }
 
+    /**
+     * Create list entries for installed {@link AppWidgetProviderInfo} widgets.
+     */
+    void putInstalledAppWidgets(List<PickAdapter.Item> items) {
+        List<AppWidgetProviderInfo> installed = mAppWidgetManager.getInstalledProviders();
+        putAppWidgetItems(installed, null, items);
+    }
+
+    /**
+     * Convenience method for setting the result code and intent. This method
+     * correctly injects the {@link AppWidgetManager#EXTRA_APPWIDGET_ID} that
+     * most hosts expect returned.
+     */
     void setResultData(int code, Intent intent) {
         Intent result = intent != null ? intent : new Intent();
         result.putExtra(AppWidgetManager.EXTRA_APPWIDGET_ID, mAppWidgetId);
         setResult(code, result);
     }
 }
-
