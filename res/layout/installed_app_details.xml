@@ -265,6 +265,24 @@
                  android:layout_height="wrap_content" />
         </RelativeLayout>
 
+        <!-- Other controls section -->
+        <TextView
+            style="?android:attr/listSeparatorTextViewStyle"
+            android:text="@string/controls_label" />
+
+        <RelativeLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical">
+            <Button android:id="@+id/force_stop_button"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentTop="true"
+                android:layout_centerHorizontal="true"
+                android:layout_width="150dip"
+                android:text="@string/force_stop"
+                android:layout_height="wrap_content" />
+        </RelativeLayout>
+
         <!-- Permissions section -->
         <LinearLayout
             android:id="@+id/permissions_section"
@@ -288,24 +306,6 @@
                 android:layout_height="fill_parent"
                 android:orientation="vertical"/>
         </LinearLayout>
-
-        <!-- Prefered activities section -->
-        <TextView
-            style="?android:attr/listSeparatorTextViewStyle"
-            android:text="@string/controls_label" />
-
-        <RelativeLayout
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical">
-            <Button android:id="@+id/force_stop_button"
-                android:layout_alignParentRight="true"
-                android:layout_alignParentTop="true"
-                android:layout_centerHorizontal="true"
-                android:layout_width="150dip"
-                android:text="@string/force_stop"
-                android:layout_height="wrap_content" />
-        </RelativeLayout>
     </LinearLayout>
 </ScrollView>
 
