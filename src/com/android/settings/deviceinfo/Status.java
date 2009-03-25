@@ -178,7 +178,8 @@ public class Status extends PreferenceActivity {
         }
         
         mPhone = PhoneFactory.getDefaultPhone();
-        mSignalStrength = findPreference("signal_strength");
+        // Note - missing in zaku build, be careful later...
+        mSignalStrength = findPreference("signal_strength");			
         mUptime = findPreference("up_time");
         mAwakeTime = findPreference("awake_time");
         
@@ -238,11 +239,13 @@ public class Status extends PreferenceActivity {
     }
 
     private void setSummaryText(String preference, String text) {
-        if (TextUtils.isEmpty(text)) {
-            text = sUnknown;
-        }
-        
-        findPreference(preference).setSummary(text);
+            if (TextUtils.isEmpty(text)) {
+               text = sUnknown;
+             }
+             // some preferences may be missing
+             if (findPreference(preference) != null) {
+                 findPreference(preference).setSummary(text);
+             }
     }
     
     private void updateNetworkType() {
@@ -300,27 +303,30 @@ public class Status extends PreferenceActivity {
     }
     
     void updateSignalStrength() {
-        int state =
-                mPhoneStateReceiver.getServiceState().getState();
-        Resources r = getResources();
+        // not loaded in some versions of the code (e.g., zaku)
+        if (mSignalStrength != null) {
+            int state =
+                    mPhoneStateReceiver.getServiceState().getState();
+            Resources r = getResources();
 
-        if ((ServiceState.STATE_OUT_OF_SERVICE == state) ||
-                (ServiceState.STATE_POWER_OFF == state)) {
-            mSignalStrength.setSummary("0");
+            if ((ServiceState.STATE_OUT_OF_SERVICE == state) ||
+                    (ServiceState.STATE_POWER_OFF == state)) {
+                mSignalStrength.setSummary("0");
+            }
+
+            int signalDbm = mPhoneStateReceiver.getSignalStrengthDbm();
+
+            if (-1 == signalDbm) signalDbm = 0;
+
+            int signalAsu = mPhoneStateReceiver.getSignalStrength();
+
+            if (-1 == signalAsu) signalAsu = 0;
+
+            mSignalStrength.setSummary(String.valueOf(signalDbm) + " "
+                        + r.getString(R.string.radioInfo_display_dbm) + "   "
+                        + String.valueOf(signalAsu) + " "
+                        + r.getString(R.string.radioInfo_display_asu));
         }
-        
-        int signalDbm = mPhoneStateReceiver.getSignalStrengthDbm();
-        
-        if (-1 == signalDbm) signalDbm = 0;
-
-        int signalAsu = mPhoneStateReceiver.getSignalStrength();
-
-        if (-1 == signalAsu) signalAsu = 0;
-
-        mSignalStrength.setSummary(String.valueOf(signalDbm) + " "
-                    + r.getString(R.string.radioInfo_display_dbm) + "   "
-                    + String.valueOf(signalAsu) + " "
-                    + r.getString(R.string.radioInfo_display_asu));
     }
     
     private void setWifiStatus() {
