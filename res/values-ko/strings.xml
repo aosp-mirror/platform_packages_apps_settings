@@ -98,8 +98,7 @@
     <skip />
     <string name="bluetooth_not_connected">"이 장치와 페어링"</string>
     <string name="bluetooth_pairing">"페어링 중..."</string>
-    <!-- no translation found for bluetooth_paired (1247541089000057726) -->
-    <skip />
+    <string name="bluetooth_paired">"페어링된 상태이지만 연결되지 않음"</string>
     <string name="bluetooth_device">"핸즈프리/헤드셋"</string>
     <string name="progress_scanning">"검색 중"</string>
     <string name="bluetooth_notif_ticker">"Bluetooth 페어링 요청"</string>
@@ -339,6 +338,8 @@
     <string name="sound_and_display_settings_summary">"벨소리, 알림, 화면 밝기 설정"</string>
     <string name="silent_mode_title">"무음 모드"</string>
     <string name="silent_mode_summary">"미디어 및 알람 외의 모든 소리가 나지 않습니다."</string>
+    <!-- no translation found for silent_mode_incl_alarm_summary (2088830834182228458) -->
+    <skip />
     <string name="ringtone_title">"전화 벨소리"</string>
     <string name="ringtone_summary">"수신전화 기본 벨소리 설정"</string>
     <string name="ring_volume_title">"벨소리 볼륨"</string>
@@ -366,16 +367,11 @@
     <string name="sync_settings_summary">"동기화할 응용프로그램 선택"</string>
     <string name="display_settings">"디스플레이 설정"</string>
     <string name="animations_title">"애니메이션"</string>
-    <!-- no translation found for animations_summary_on (8843613112130484436) -->
-    <skip />
-    <!-- no translation found for animations_summary_off (2777026828025551983) -->
-    <skip />
-    <!-- no translation found for accelerometer_title (6183763368844793276) -->
-    <skip />
-    <!-- no translation found for accelerometer_summary_on (1133737282813048021) -->
-    <skip />
-    <!-- no translation found for accelerometer_summary_off (5485489363715740761) -->
-    <skip />
+    <string name="animations_summary_on">"창을 열고 닫을 때 애니메이션 표시"</string>
+    <string name="animations_summary_off">"창을 열고 닫을 때 애니메이션 표시"</string>
+    <string name="accelerometer_title">"방향"</string>
+    <string name="accelerometer_summary_on">"휴대전화 회전 시 자동으로 방향 바꾸기"</string>
+    <string name="accelerometer_summary_off">"휴대전화 회전 시 자동으로 방향 바꾸기"</string>
     <string name="brightness">"밝기"</string>
     <string name="brightness_summary">"화면 밝기 조정"</string>
     <string name="screen_timeout">"화면 시간제한"</string>
@@ -464,12 +460,9 @@
     <string name="error_apn_empty">"APN을 비워둘 수 없습니다."</string>
     <string name="error_mcc_not3">"MCC 필드는 3자리 숫자여야 합니다."</string>
     <string name="error_mnc_not23">"MNC 필드는 2~3자리 숫자여야 합니다."</string>
-    <!-- no translation found for restore_default_apn (2724583218635739913) -->
-    <skip />
-    <!-- no translation found for menu_restore (8260067415075573273) -->
-    <skip />
-    <!-- no translation found for restore_default_apn_completed (3990449939234957281) -->
-    <skip />
+    <string name="restore_default_apn">"기본 APN 설정 복원 중"</string>
+    <string name="menu_restore">"기본값으로 재설정"</string>
+    <string name="restore_default_apn_completed">"기본 APN 설정을 재설정했습니다."</string>
     <string name="master_clear_title">"공장 기본값 데이터 재설정"</string>
     <string name="master_clear_summary">"전화기의 모든 데이터 지우기"</string>
     <string name="master_clear_desc">"이 작업을 수행하면 전화기의 모든 데이터 및 다운로드한 응용프로그램이 지워지고 출고시 초기 상태로 재설정됩니다"</string>
@@ -601,13 +594,14 @@
     <string name="auto_punctuate_summary">"스페이스바를 두 번 눌러 \'.\' 삽입"</string>
     <string name="show_password">"비밀번호 표시"</string>
     <string name="show_password_summary">"입력 시 비밀번호 표시"</string>
+    <!-- no translation found for ime_security_warning (3458652708716006477) -->
+    <skip />
     <string name="user_dict_settings_titlebar">"사용자 사전"</string>
     <string name="user_dict_settings_title">"사용자 사전"</string>
     <string name="user_dict_settings_summary">"사용자 사전에서 단어 추가 및 삭제"</string>
     <string name="user_dict_settings_add_menu_title">"추가"</string>
     <string name="user_dict_settings_add_dialog_title">"사전에 추가"</string>
-    <!-- no translation found for user_dict_settings_edit_dialog_title (8967476444840548674) -->
-    <skip />
+    <string name="user_dict_settings_edit_dialog_title">"단어 수정"</string>
     <string name="user_dict_settings_context_menu_edit_title">"편집"</string>
     <string name="user_dict_settings_context_menu_delete_title">"삭제"</string>
     <string name="user_dict_settings_empty_text">"사용자 사전에 단어가 없습니다. 메뉴를 통해 단어를 추가할 수 있습니다."</string>
@@ -628,14 +622,10 @@
     <string name="quick_launch_display_mode_shortcuts">"바로가기"</string>
     <string name="input_methods_settings_title">"텍스트 입력"</string>
     <string name="input_methods_settings_summary">"텍스트 입력 옵션 관리"</string>
-    <!-- no translation found for input_methods_settings_label_format (6002887604815693322) -->
-    <skip />
-    <!-- no translation found for onscreen_keyboard_settings_summary (4919680715154885028) -->
-    <skip />
-    <!-- no translation found for builtin_keyboard_settings_title (8169889453770863227) -->
-    <skip />
-    <!-- no translation found for builtin_keyboard_settings_summary (6404687907454621637) -->
-    <skip />
+    <string name="input_methods_settings_label_format">"<xliff:g id="IME_NAME">%1$s</xliff:g> 설정"</string>
+    <string name="onscreen_keyboard_settings_summary">"화면 키보드 설정"</string>
+    <string name="builtin_keyboard_settings_title">"기기 키보드"</string>
+    <string name="builtin_keyboard_settings_summary">"내장 키보드 설정"</string>
     <string name="development_settings_title">"개발"</string>
     <string name="development_settings_summary">"응용프로그램 개발 옵션 설정"</string>
     <string name="enable_adb">"USB 디버깅"</string>
@@ -644,10 +634,8 @@
     <string name="keep_screen_on_summary">"충전하는 동안 화면이 꺼지지 않음"</string>
     <string name="allow_mock_location">"모의 위치 허용"</string>
     <string name="allow_mock_location_summary">"모의 위치 허용"</string>
-    <!-- no translation found for gadget_picker_title (98374951396755811) -->
-    <skip />
-    <!-- no translation found for widget_picker_title (9130684134213467557) -->
-    <skip />
+    <string name="gadget_picker_title">"가젯 선택"</string>
+    <string name="widget_picker_title">"위젯 선택"</string>
     <string name="battery_history_details_for">"UID %d의 세부정보"</string>
     <string name="battery_history_uid">"UID <xliff:g id="USER_ID">%1$d</xliff:g>"</string>
     <string name="battery_history_network_usage">"<xliff:g id="APP_NAME">%1$s</xliff:g>의 네트워크 사용 세부정보"</string>
@@ -666,22 +654,16 @@
     <string name="battery_history_packages_sharing_this_uid">"이 UID를 공유하는 패키지"</string>
     <string name="battery_history_no_data">"배터리 사용 데이터가 없습니다."</string>
     <string name="battery_history_sensor">"센서:"</string>
-    <!-- no translation found for battery_history_wakelock (608683447522396293) -->
-    <skip />
+    <string name="battery_history_wakelock">"부분적 가동 잠금:"</string>
     <string name="battery_history_used_by_packages">"패키지가 사용한 센서:"</string>
     <string name="battery_history_sensor_usage">"<xliff:g id="PACKAGE">%2$s</xliff:g>에서 <xliff:g id="COUNT">%1$d</xliff:g>번 사용"</string>
     <string name="battery_history_sensor_usage_multi">"다음 중 하나가 <xliff:g id="COUNT">%1$d</xliff:g>번 사용:"</string>
-    <!-- no translation found for battery_history_awake_label (8449792868990080882) -->
-    <skip />
-    <!-- no translation found for battery_history_screen_on_label (1848936521786339362) -->
-    <skip />
-    <!-- no translation found for battery_history_phone_on_label (700191958853142297) -->
-    <skip />
-    <!-- no translation found for battery_history_awake (4350886665719031057) -->
-    <skip />
+    <string name="battery_history_awake_label">"실행 중"</string>
+    <string name="battery_history_screen_on_label">"화면 켜짐"</string>
+    <string name="battery_history_phone_on_label">"휴대전화 켜짐"</string>
+    <string name="battery_history_awake">"절전 모드로 전환되지 않고 사용한 시간:"</string>
     <string name="battery_history_screen_on">"화면을 켠 상태에서 소비한 시간:"</string>
-    <!-- no translation found for battery_history_phone_on (4891504401623839532) -->
-    <skip />
+    <string name="battery_history_phone_on">"휴대전화가 켜진 상태로 사용한 시간:"</string>
     <string name="battery_history_screen_on_battery">"배터리 켜짐 시간:"</string>
     <string name="battery_history_screen_on_plugged">"연결됨:"</string>
     <string name="usage_stats_label">"사용 통계"</string>
