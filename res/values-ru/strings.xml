@@ -98,8 +98,7 @@
     <skip />
     <string name="bluetooth_not_connected">"Создать пару с этим устройством"</string>
     <string name="bluetooth_pairing">"Идет создание пары..."</string>
-    <!-- no translation found for bluetooth_paired (1247541089000057726) -->
-    <skip />
+    <string name="bluetooth_paired">"Соединено, но не подключено"</string>
     <string name="bluetooth_device">"гарнитура/наушники"</string>
     <string name="progress_scanning">"Сканирование"</string>
     <string name="bluetooth_notif_ticker">"Запрос на соединение Bluetooth"</string>
@@ -339,6 +338,8 @@
     <string name="sound_and_display_settings_summary">"Установка мелодий звонка, уведомлений, яркости экрана"</string>
     <string name="silent_mode_title">"Беззвучный режим"</string>
     <string name="silent_mode_summary">"Отключение всех звуков, кроме мультимедиа и будильников"</string>
+    <!-- no translation found for silent_mode_incl_alarm_summary (2088830834182228458) -->
+    <skip />
     <string name="ringtone_title">"Мелодия звонка телефона"</string>
     <string name="ringtone_summary">"Установить мелодию звонка для входящих вызовов по умолчанию"</string>
     <string name="ring_volume_title">"Громкость звонка"</string>
@@ -366,16 +367,11 @@
     <string name="sync_settings_summary">"Выбрать синхронизируемые приложения"</string>
     <string name="display_settings">"Настройки экрана"</string>
     <string name="animations_title">"Анимация"</string>
-    <!-- no translation found for animations_summary_on (8843613112130484436) -->
-    <skip />
-    <!-- no translation found for animations_summary_off (2777026828025551983) -->
-    <skip />
-    <!-- no translation found for accelerometer_title (6183763368844793276) -->
-    <skip />
-    <!-- no translation found for accelerometer_summary_on (1133737282813048021) -->
-    <skip />
-    <!-- no translation found for accelerometer_summary_off (5485489363715740761) -->
-    <skip />
+    <string name="animations_summary_on">"Показывать анимацию при открытии и закрытии окон"</string>
+    <string name="animations_summary_off">"Показывать анимацию при открытии и закрытии окон"</string>
+    <string name="accelerometer_title">"Ориентация"</string>
+    <string name="accelerometer_summary_on">"Автоматически менять ориентацию при повороте телефона"</string>
+    <string name="accelerometer_summary_off">"Автоматически менять ориентацию при повороте телефона"</string>
     <string name="brightness">"Яркость"</string>
     <string name="brightness_summary">"Настроить яркость экрана"</string>
     <string name="screen_timeout">"Время до отключения экрана"</string>
@@ -464,12 +460,9 @@
     <string name="error_apn_empty">"APN не может быть пустым."</string>
     <string name="error_mcc_not3">"Поле MCC должно содержать 3 цифры."</string>
     <string name="error_mnc_not23">"Поле MNC должно содержать 2 или 3 цифры."</string>
-    <!-- no translation found for restore_default_apn (2724583218635739913) -->
-    <skip />
-    <!-- no translation found for menu_restore (8260067415075573273) -->
-    <skip />
-    <!-- no translation found for restore_default_apn_completed (3990449939234957281) -->
-    <skip />
+    <string name="restore_default_apn">"Восстановление настроек APN по умолчанию"</string>
+    <string name="menu_restore">"Восстановить настройки по умолчанию"</string>
+    <string name="restore_default_apn_completed">"Восстановление настроек APN по умолчанию завершено"</string>
     <string name="master_clear_title">"Сброс заводских данных"</string>
     <string name="master_clear_summary">"Удаление всех данных с телефона"</string>
     <string name="master_clear_desc">"Это действие сбросит телефон до исходного заводского состояния, удалив все данные и загруженные приложения!"</string>
@@ -601,13 +594,14 @@
     <string name="auto_punctuate_summary">"Чтобы вставить символ \".\", дважды нажмите пробел."</string>
     <string name="show_password">"Показывать пароли"</string>
     <string name="show_password_summary">"Показывать пароль при вводе"</string>
+    <!-- no translation found for ime_security_warning (3458652708716006477) -->
+    <skip />
     <string name="user_dict_settings_titlebar">"Пользовательский словарь"</string>
     <string name="user_dict_settings_title">"Пользовательский словарь"</string>
     <string name="user_dict_settings_summary">"Добавить или удалить слова из пользовательского словаря"</string>
     <string name="user_dict_settings_add_menu_title">"Добавить"</string>
     <string name="user_dict_settings_add_dialog_title">"Добавление в словарь"</string>
-    <!-- no translation found for user_dict_settings_edit_dialog_title (8967476444840548674) -->
-    <skip />
+    <string name="user_dict_settings_edit_dialog_title">"Изменение слова"</string>
     <string name="user_dict_settings_context_menu_edit_title">"Изменить"</string>
     <string name="user_dict_settings_context_menu_delete_title">"Удалить"</string>
     <string name="user_dict_settings_empty_text">"В пользовательском словаре отсутствуют слова. Добавить слово можно с помощью меню."</string>
@@ -628,14 +622,10 @@
     <string name="quick_launch_display_mode_shortcuts">"Ярлыки"</string>
     <string name="input_methods_settings_title">"Ввод текста"</string>
     <string name="input_methods_settings_summary">"Управление параметрами ввода текста"</string>
-    <!-- no translation found for input_methods_settings_label_format (6002887604815693322) -->
-    <skip />
-    <!-- no translation found for onscreen_keyboard_settings_summary (4919680715154885028) -->
-    <skip />
-    <!-- no translation found for builtin_keyboard_settings_title (8169889453770863227) -->
-    <skip />
-    <!-- no translation found for builtin_keyboard_settings_summary (6404687907454621637) -->
-    <skip />
+    <string name="input_methods_settings_label_format">"Настройки <xliff:g id="IME_NAME">%1$s</xliff:g>"</string>
+    <string name="onscreen_keyboard_settings_summary">"Настройки экранной клавиатуры"</string>
+    <string name="builtin_keyboard_settings_title">"Клавиатура устройства"</string>
+    <string name="builtin_keyboard_settings_summary">"Настройки встроенной клавиатуры"</string>
     <string name="development_settings_title">"Разработка"</string>
     <string name="development_settings_summary">"Выбрать параметры разработки приложений"</string>
     <string name="enable_adb">"Отладка USB"</string>
@@ -644,10 +634,8 @@
     <string name="keep_screen_on_summary">"При зарядке экран не отключается"</string>
     <string name="allow_mock_location">"Разрешить фиктивные местоположения"</string>
     <string name="allow_mock_location_summary">"Разрешить фиктивные местоположения"</string>
-    <!-- no translation found for gadget_picker_title (98374951396755811) -->
-    <skip />
-    <!-- no translation found for widget_picker_title (9130684134213467557) -->
-    <skip />
+    <string name="gadget_picker_title">"Выбор·гаджета"</string>
+    <string name="widget_picker_title">"Выбор виджета"</string>
     <string name="battery_history_details_for">"Сведения для идентификатора пользователя %d"</string>
     <string name="battery_history_uid">"Идентификатор пользователя <xliff:g id="USER_ID">%1$d</xliff:g>"</string>
     <string name="battery_history_network_usage">"Сведения об использовании сети приложением <xliff:g id="APP_NAME">%1$s</xliff:g>:"</string>
@@ -666,22 +654,16 @@
     <string name="battery_history_packages_sharing_this_uid">"Пакеты с этим идентификатором пользователя:"</string>
     <string name="battery_history_no_data">"Данные об использовании батареи недоступны"</string>
     <string name="battery_history_sensor">"Сенсор:"</string>
-    <!-- no translation found for battery_history_wakelock (608683447522396293) -->
-    <skip />
+    <string name="battery_history_wakelock">"Блокировка частичного включения:"</string>
     <string name="battery_history_used_by_packages">"Использования сенсора пакетами:"</string>
     <string name="battery_history_sensor_usage">"Использовано пакетом <xliff:g id="PACKAGE">%2$s</xliff:g>: <xliff:g id="COUNT">%1$d</xliff:g> раз(а)"</string>
     <string name="battery_history_sensor_usage_multi">"Использовано <xliff:g id="COUNT">%1$d</xliff:g> раз(а) одним из:"</string>
-    <!-- no translation found for battery_history_awake_label (8449792868990080882) -->
-    <skip />
-    <!-- no translation found for battery_history_screen_on_label (1848936521786339362) -->
-    <skip />
-    <!-- no translation found for battery_history_phone_on_label (700191958853142297) -->
-    <skip />
-    <!-- no translation found for battery_history_awake (4350886665719031057) -->
-    <skip />
+    <string name="battery_history_awake_label">"Режим работы"</string>
+    <string name="battery_history_screen_on_label">"Экран включен"</string>
+    <string name="battery_history_phone_on_label">"Телефон включен"</string>
+    <string name="battery_history_awake">"Время с последнего перехода в спящий режим:"</string>
     <string name="battery_history_screen_on">"Время пребывания экрана включенным:"</string>
-    <!-- no translation found for battery_history_phone_on (4891504401623839532) -->
-    <skip />
+    <string name="battery_history_phone_on">"Время пребывания телефона включенным:"</string>
     <string name="battery_history_screen_on_battery">"От батареи:"</string>
     <string name="battery_history_screen_on_plugged">"Подключен к питанию:"</string>
     <string name="usage_stats_label">"Статистика использования"</string>
