@@ -74,7 +74,6 @@ public class Status extends PreferenceActivity {
     private Resources mRes;
     private Preference mSignalStrength;
     private Preference mUptime;
-    private Preference mAwakeTime;
 
     private static String sUnknown;
     
@@ -181,7 +180,6 @@ public class Status extends PreferenceActivity {
         // Note - missing in zaku build, be careful later...
         mSignalStrength = findPreference("signal_strength");			
         mUptime = findPreference("up_time");
-        mAwakeTime = findPreference("awake_time");
         
         setSummaryText("imei", mPhone.getDeviceId());
         setSummaryText("imei_sv",
@@ -363,7 +361,6 @@ public class Status extends PreferenceActivity {
         }
 
         mUptime.setSummary(convert(ut));
-        mAwakeTime.setSummary(convert(at) + " (" + (((1000 * at / ut) + 5) / 10) + "%)");
     }
     
     private String pad(int n) {

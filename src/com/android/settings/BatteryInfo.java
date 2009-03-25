@@ -43,9 +43,6 @@ public class BatteryInfo extends Activity {
     private TextView mTemperature;
     private TextView mTechnology;
     private TextView mUptime;
-    private TextView mAwakeBattery;
-    private TextView mAwakePlugged;
-    private TextView mScreenOn;
     private IBatteryStats mBatteryStats;
     private IPowerManager mScreenStats;
     
@@ -58,6 +55,7 @@ public class BatteryInfo extends Activity {
                 case EVENT_TICK:
                     updateBatteryStats();
                     sendEmptyMessageDelayed(EVENT_TICK, 1000);
+                    
                     break;
             }
         }
@@ -157,9 +155,6 @@ public class BatteryInfo extends Activity {
         mVoltage = (TextView)findViewById(R.id.voltage);
         mTemperature = (TextView)findViewById(R.id.temperature);
         mUptime = (TextView) findViewById(R.id.uptime);
-        mAwakeBattery = (TextView) findViewById(R.id.awakeBattery);
-        mAwakePlugged = (TextView) findViewById(R.id.awakePlugged);
-        mScreenOn = (TextView) findViewById(R.id.screenOn);
         
         // Get awake time plugged in and on battery
         mBatteryStats = IBatteryStats.Stub.asInterface(ServiceManager.getService("batteryinfo"));
@@ -182,27 +177,6 @@ public class BatteryInfo extends Activity {
         long uptime = SystemClock.elapsedRealtime();
         mUptime.setText(DateUtils.formatElapsedTime(uptime / 1000));
         
-        if (mBatteryStats != null) {
-            try {
-                long awakeTimeBattery = mBatteryStats.getAwakeTimeBattery() / 1000;
-                long awakeTimePluggedIn = mBatteryStats.getAwakeTimePlugged() / 1000;
-                mAwakeBattery.setText(DateUtils.formatElapsedTime(awakeTimeBattery / 1000) 
-                        + " (" + (100 * awakeTimeBattery / uptime) + "%)");
-                mAwakePlugged.setText(DateUtils.formatElapsedTime(awakeTimePluggedIn / 1000)
-                        + " (" + (100 * awakeTimePluggedIn / uptime) + "%)");
-            } catch (RemoteException re) {
-                mAwakeBattery.setText("Unknown");
-                mAwakePlugged.setText("Unknown");            
-            }
-        }
-        if (mScreenStats != null) {
-            try {
-                long screenOnTime = mScreenStats.getScreenOnTime();
-                mScreenOn.setText(DateUtils.formatElapsedTime(screenOnTime / 1000));
-            } catch (RemoteException re) {
-                mScreenOn.setText("Unknown");
-            }
-        }
     }
     
 }
