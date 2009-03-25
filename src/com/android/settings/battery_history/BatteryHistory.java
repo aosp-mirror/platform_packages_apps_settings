@@ -18,6 +18,7 @@ package com.android.settings.battery_history;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Formatter;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
@@ -73,7 +74,7 @@ public class BatteryHistory extends Activity implements OnClickListener, OnItemS
     
     private BatteryStats mStats;
     private int mWhich = BatteryStats.STATS_UNPLUGGED;
-    private int mType = CPU_USAGE;
+    private int mType = MISC_USAGE;
     
     private GraphableButton[] mButtons;
     IBatteryStats mBatteryInfo;
@@ -401,6 +402,7 @@ public class BatteryHistory extends Activity implements OnClickListener, OnItemS
     
     class MiscUsage extends Graphable {
         int mInfoLabelRes;
+        String mInfoLabel;
         double[] mUsage;
         double mTotalRealtime;
         
@@ -409,6 +411,17 @@ public class BatteryHistory extends Activity implements OnClickListener, OnItemS
             mName = name;
             
             mInfoLabelRes = infoLabelRes;
+            
+            mUsage = new double[2];
+            mUsage[0] = value;
+            mTotalRealtime = totalRealtime;
+        }
+        
+        public MiscUsage(String name, String infoLabel, long value,
+                long totalRealtime) {
+            mName = name;
+            
+            mInfoLabel = infoLabel;
             
             mUsage = new double[2];
             mUsage[0] = value;
@@ -432,7 +445,7 @@ public class BatteryHistory extends Activity implements OnClickListener, OnItemS
         }
         
         public void getInfo(StringBuilder info) {
-            info.append(getString(mInfoLabelRes));
+            info.append(mInfoLabel != null ? mInfoLabel : getString(mInfoLabelRes));
             info.append(' ');
             formatTime(mUsage[0], info);
             info.append(" (");
@@ -656,6 +669,19 @@ public class BatteryHistory extends Activity implements OnClickListener, OnItemS
         Collections.sort(mWakelockUsage);
     }
     
+    private final StringBuilder mFormatBuilder = new StringBuilder(8);
+    private final Formatter mFormatter = new Formatter(mFormatBuilder);
+    
+    private final String formatRatio(long num, long den) {
+        if (den == 0L) {
+            return "---%";
+        }
+        float perc = ((float)num) / ((float)den) * 100;
+        mFormatBuilder.setLength(0);
+        mFormatter.format("%.1f%%", perc);
+        return mFormatBuilder.toString();
+    }
+    
     private void processMiscUsage() {
         mMiscUsage.clear();
         
@@ -666,7 +692,8 @@ public class BatteryHistory extends Activity implements OnClickListener, OnItemS
         long time = mStats.computeBatteryUptime(SystemClock.uptimeMillis() * 1000, mWhich) / 1000;
         if (time > 0) {
             mMiscUsage.add(new MiscUsage(getString(
-                    R.string.battery_history_awake_label),
+                    R.string.battery_history_awake_label)
+                    + " (" + formatRatio(time, whichRealtime) + ")",
                     R.string.battery_history_awake,
                     time, whichRealtime)); 
         }
@@ -674,7 +701,8 @@ public class BatteryHistory extends Activity implements OnClickListener, OnItemS
         time = mStats.getScreenOnTime(batteryRealtime, mWhich) / 1000;
         if (time > 0) {
             mMiscUsage.add(new MiscUsage(getString(
-                    R.string.battery_history_screen_on_label),
+                    R.string.battery_history_screen_on_label)
+                    + " (" + formatRatio(time, whichRealtime) + ")",
                     R.string.battery_history_screen_on,
                     time, whichRealtime)); 
         }
@@ -682,8 +710,33 @@ public class BatteryHistory extends Activity implements OnClickListener, OnItemS
         time = mStats.getPhoneOnTime(batteryRealtime, mWhich) / 1000;
         if (time > 0) {
             mMiscUsage.add(new MiscUsage(getString(
-                    R.string.battery_history_phone_on_label),
+                    R.string.battery_history_phone_on_label)
+                    + " (" + formatRatio(time, whichRealtime) + ")",
                     R.string.battery_history_phone_on,
+                    time, whichRealtime)); 
+        }
+        
+        time = mStats.getWifiOnTime(batteryRealtime, mWhich) / 1000;
+        if (time > 0) {
+            mMiscUsage.add(new MiscUsage("Wifi On ("
+                    + formatRatio(time, whichRealtime) + ")",
+                    "Time spent with Wifi on:",
+                    time, whichRealtime)); 
+        }
+        
+        time = mStats.getWifiRunningTime(batteryRealtime, mWhich) / 1000;
+        if (time > 0) {
+            mMiscUsage.add(new MiscUsage("Wifi Running ("
+                    + formatRatio(time, whichRealtime) + ")",
+                    "Time spent with Wifi running:",
+                    time, whichRealtime)); 
+        }
+        
+        time = mStats.getBluetoothOnTime(batteryRealtime, mWhich) / 1000;
+        if (time > 0) {
+            mMiscUsage.add(new MiscUsage("Bluetooth On ("
+                    + formatRatio(time, whichRealtime) + ")",
+                    "Time spent with Bluetooth on:",
                     time, whichRealtime)); 
         }
         
@@ -815,12 +868,22 @@ public class BatteryHistory extends Activity implements OnClickListener, OnItemS
         
         setContentView(R.layout.battery_history);
         
+        mStats = (BatteryStats)getLastNonConfigurationInstance();
+        if (icicle != null) {
+            if (mStats == null) {
+                mStats = (BatteryStats)icicle.getParcelable("stats");
+            }
+            mType = icicle.getInt("type");
+            mWhich = icicle.getInt("which");
+        }
+        
         mGraphLayout = (LinearLayout) findViewById(R.id.graphLayout);
         mTextLayout = (LinearLayout) findViewById(R.id.textLayout);
         mDetailsText = (TextView) findViewById(R.id.detailsText);
         mMessageText = (TextView) findViewById(R.id.messageText);
         
         mTypeSpinner = (Spinner) findViewById(R.id.typeSpinner);
+        mTypeSpinner.setSelection(mType);
         mTypeSpinner.setOnItemSelectedListener(this);
         
         mWhichSpinner = (Spinner) findViewById(R.id.whichSpinner);
@@ -845,14 +908,6 @@ public class BatteryHistory extends Activity implements OnClickListener, OnItemS
         mBatteryInfo = IBatteryStats.Stub.asInterface(
                 ServiceManager.getService("batteryinfo"));
         
-        mStats = (BatteryStats)getLastNonConfigurationInstance();
-        if (icicle != null) {
-            if (mStats == null) {
-                mStats = (BatteryStats)icicle.getParcelable("stats");
-            }
-            mType = icicle.getInt("type");
-            mWhich = icicle.getInt("which");
-        }
         if (mStats == null) {
             load();
         }
