@@ -1459,8 +1459,12 @@ public class ManageApplications extends ListActivity implements
     public void onStop() {
         super.onStop();
         // Stop the background threads
-        mResourceThread.setAbort();
-        mSizeComputor.setAbort();
+        if (mResourceThread != null) {
+            mResourceThread.setAbort();
+        }
+        if (mSizeComputor != null) {
+            mSizeComputor.setAbort();
+        }
         // clear all messages related to application list
         clearMessagesInHandler();
         // register receiver here
