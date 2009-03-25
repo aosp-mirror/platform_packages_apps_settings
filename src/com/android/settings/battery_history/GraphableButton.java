@@ -15,11 +15,11 @@ public class GraphableButton extends Button {
     static {
         sPaint[0] = new Paint();
         sPaint[0].setStyle(Paint.Style.FILL);
-        sPaint[0].setColor(Color.BLUE);
+        sPaint[0].setColor(0xFF0080FF);
         
         sPaint[1] = new Paint();
         sPaint[1].setStyle(Paint.Style.FILL);
-        sPaint[1].setColor(Color.RED);
+        sPaint[1].setColor(0xFFFF6060);
     }
     
     double[] mValues;
