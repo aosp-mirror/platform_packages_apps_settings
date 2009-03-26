@@ -98,8 +98,7 @@
     <skip />
     <string name="bluetooth_not_connected">"この端末をペアに設定する"</string>
     <string name="bluetooth_pairing">"ペアとして設定中..."</string>
-    <!-- no translation found for bluetooth_paired (1247541089000057726) -->
-    <skip />
+    <string name="bluetooth_paired">"ペア設定、非接続"</string>
     <string name="bluetooth_device">"ハンズフリー/ヘッドセット"</string>
     <string name="progress_scanning">"スキャン中"</string>
     <string name="bluetooth_notif_ticker">"Bluetoothペア設定リクエスト"</string>
@@ -182,7 +181,7 @@
     <string name="activity_picker_label">"操作の選択"</string>
     <string name="device_info_label">"端末情報"</string>
     <string name="battery_info_label">"電池情報"</string>
-    <string name="battery_history_label">"バッテリの履歴"</string>
+    <string name="battery_history_label">"充電池データ"</string>
     <string name="display_label">"ディスプレイ"</string>
     <string name="phone_info_label">"携帯電話情報"</string>
     <string name="sd_card_settings_label">"SDカード"</string>
@@ -368,16 +367,11 @@
     <string name="sync_settings_summary">"同期するアプリケーションの選択"</string>
     <string name="display_settings">"画面設定"</string>
     <string name="animations_title">"アニメーション表示"</string>
-    <!-- no translation found for animations_summary_on (8843613112130484436) -->
-    <skip />
-    <!-- no translation found for animations_summary_off (2777026828025551983) -->
-    <skip />
-    <!-- no translation found for accelerometer_title (6183763368844793276) -->
-    <skip />
-    <!-- no translation found for accelerometer_summary_on (1133737282813048021) -->
-    <skip />
-    <!-- no translation found for accelerometer_summary_off (5485489363715740761) -->
-    <skip />
+    <string name="animations_summary_on">"ウィンドウの開閉をアニメーション表示"</string>
+    <string name="animations_summary_off">"ウィンドウの開閉をアニメーション表示"</string>
+    <string name="accelerometer_title">"画面の向き"</string>
+    <string name="accelerometer_summary_on">"画面の向きに合わせて縦横表示を切り替える"</string>
+    <string name="accelerometer_summary_off">"画面の向きに合わせて縦横表示を切り替える"</string>
     <string name="brightness">"画面の明るさ"</string>
     <string name="brightness_summary">"画面の明るさを調整する"</string>
     <string name="screen_timeout">"バックライト消灯"</string>
@@ -418,7 +412,7 @@
     <string name="storage_settings_title">"SDカード &amp; 端末容量"</string>
     <string name="storage_settings_summary">"SDカードの取り外し、空き容量の表示"</string>
     <string name="status_number">"電話番号"</string>
-    <string name="status_network_type">"モバイルネットワークのタイプ"</string>
+    <string name="status_network_type">"モバイルネットワークの種類"</string>
     <string name="status_data_state">"モバイルネットワークの状態"</string>
     <string name="status_service_state">"サービスの状態"</string>
     <string name="status_signal_strength">"電波強度"</string>
@@ -466,12 +460,9 @@
     <string name="error_apn_empty">"APNを空にできません。"</string>
     <string name="error_mcc_not3">"MCCのフィールドには3桁で指定してください。"</string>
     <string name="error_mnc_not23">"MNCのフィールドには2桁か3桁で指定してください。"</string>
-    <!-- no translation found for restore_default_apn (2724583218635739913) -->
-    <skip />
-    <!-- no translation found for menu_restore (8260067415075573273) -->
-    <skip />
-    <!-- no translation found for restore_default_apn_completed (3990449939234957281) -->
-    <skip />
+    <string name="restore_default_apn">"APN設定をリセットしています"</string>
+    <string name="menu_restore">"初期設定にリセット"</string>
+    <string name="restore_default_apn_completed">"APN設定をリセットしました"</string>
     <string name="master_clear_title">"データの初期化"</string>
     <string name="master_clear_summary">"携帯電話内のすべてのデータを消去"</string>
     <string name="master_clear_desc">"この操作は携帯電話を出荷時の初期状態にリセットし、データとダウンロードしたアプリケーションをすべて消去します。"</string>
@@ -503,7 +494,7 @@
     <string name="about_settings">"端末情報"</string>
     <string name="about_settings_summary">"端末情報、規約、バージョン情報"</string>
     <string name="legal_information">"法的情報"</string>
-    <string name="contributors_title">"貢献者/連携パートナー"</string>
+    <string name="contributors_title">"アライアンスパートナー"</string>
     <string name="copyright_title">"著作権"</string>
     <string name="license_title">"ライセンス"</string>
     <string name="terms_title">"利用規約"</string>
@@ -595,9 +586,9 @@
     <string name="phone_language">"地域/言語を選択"</string>
     <string name="phone_language_summary">"言語と地域の選択"</string>
     <string name="auto_replace">"自動修正"</string>
-    <string name="auto_replace_summary">"英語: タイプミスを自動修正する"</string>
+    <string name="auto_replace_summary">"入力ミスを自動修正する"</string>
     <string name="auto_caps">"自動大文字変換"</string>
-    <string name="auto_caps_summary">"英語: 先頭文字を大文字に変換する"</string>
+    <string name="auto_caps_summary">"先頭文字を大文字に変換する"</string>
     <string name="auto_punctuate">"ピリオド自動挿入"</string>
     <string name="hardkeyboard_category">"キーボードの設定"</string>
     <string name="auto_punctuate_summary">"英語: Spaceキー2回でピリオド(.)を挿入"</string>
@@ -610,15 +601,14 @@
     <string name="user_dict_settings_summary">"ユーザー辞書への語句の追加と削除"</string>
     <string name="user_dict_settings_add_menu_title">"追加"</string>
     <string name="user_dict_settings_add_dialog_title">"辞書に追加"</string>
-    <!-- no translation found for user_dict_settings_edit_dialog_title (8967476444840548674) -->
-    <skip />
+    <string name="user_dict_settings_edit_dialog_title">"語句の編集"</string>
     <string name="user_dict_settings_context_menu_edit_title">"編集"</string>
     <string name="user_dict_settings_context_menu_delete_title">"削除"</string>
     <string name="user_dict_settings_empty_text">"ユーザー辞書に何も登録されていません。語句はメニューから登録できます。"</string>
     <string name="testing">"テスト中"</string>
     <string name="testing_phone_info">"携帯電話情報"</string>
     <string name="testing_battery_info">"電池情報"</string>
-    <string name="testing_battery_history">"バッテリの履歴"</string>
+    <string name="testing_battery_history">"充電池データ"</string>
     <string name="quick_launch_title">"クイック起動"</string>
     <string name="quick_launch_summary">"アプリケーションの起動にショートカットキーを割り当てる"</string>
     <string name="quick_launch_assign_application">"アプリを選択"</string>
@@ -632,14 +622,10 @@
     <string name="quick_launch_display_mode_shortcuts">"ショートカット"</string>
     <string name="input_methods_settings_title">"文字入力"</string>
     <string name="input_methods_settings_summary">"テキスト入力オプションを管理"</string>
-    <!-- no translation found for input_methods_settings_label_format (6002887604815693322) -->
-    <skip />
-    <!-- no translation found for onscreen_keyboard_settings_summary (4919680715154885028) -->
-    <skip />
-    <!-- no translation found for builtin_keyboard_settings_title (8169889453770863227) -->
-    <skip />
-    <!-- no translation found for builtin_keyboard_settings_summary (6404687907454621637) -->
-    <skip />
+    <string name="input_methods_settings_label_format">"<xliff:g id="IME_NAME">%1$s</xliff:g>の設定"</string>
+    <string name="onscreen_keyboard_settings_summary">"画面キーボードの設定"</string>
+    <string name="builtin_keyboard_settings_title">"端末内蔵キーボード"</string>
+    <string name="builtin_keyboard_settings_summary">"端末内蔵キーボードの設定"</string>
     <string name="development_settings_title">"開発"</string>
     <string name="development_settings_summary">"アプリケーション開発オプション"</string>
     <string name="enable_adb">"USBデバッグ"</string>
@@ -648,46 +634,38 @@
     <string name="keep_screen_on_summary">"充電中に画面をスリープにしない"</string>
     <string name="allow_mock_location">"擬似ロケーションを許可"</string>
     <string name="allow_mock_location_summary">"擬似ロケーションを許可"</string>
-    <!-- no translation found for gadget_picker_title (98374951396755811) -->
-    <skip />
-    <!-- no translation found for widget_picker_title (9130684134213467557) -->
-    <skip />
+    <string name="gadget_picker_title">"ガジェットを選択"</string>
+    <string name="widget_picker_title">"ウィジェットを選択"</string>
     <string name="battery_history_details_for">"UID %dの詳細"</string>
     <string name="battery_history_uid">"UID <xliff:g id="USER_ID">%1$d</xliff:g>"</string>
-    <string name="battery_history_network_usage">"<xliff:g id="APP_NAME">%1$s</xliff:g>のネットワーク使用状況の詳細:"</string>
+    <string name="battery_history_network_usage">"<xliff:g id="APP_NAME">%1$s</xliff:g>のネットワーク使用詳細:"</string>
     <string name="battery_history_bytes_received">"受信バイト数:<xliff:g id="BYTES">%1$d</xliff:g>"</string>
     <string name="battery_history_bytes_sent">"送信済みバイト数:<xliff:g id="BYTES">%1$d</xliff:g>"</string>
     <string name="battery_history_bytes_total">"合計バイト数:<xliff:g id="BYTES">%1$d</xliff:g>"</string>
-    <string name="battery_history_cpu_usage">"<xliff:g id="APP_NAME">%1$s</xliff:g>のCPU使用状況の詳細:"</string>
-    <string name="battery_history_user_time">"ユーザー時間:"</string>
-    <string name="battery_history_system_time">"システム時間:"</string>
+    <string name="battery_history_cpu_usage">"<xliff:g id="APP_NAME">%1$s</xliff:g>のCPU使用詳細:"</string>
+    <string name="battery_history_user_time">"ユーザー利用時間:"</string>
+    <string name="battery_history_system_time">"システム利用時間:"</string>
     <string name="battery_history_total_time">"合計時間:"</string>
-    <string name="battery_history_starts">"開始:<xliff:g id="STARTS">%1$d</xliff:g>"</string>
+    <string name="battery_history_starts">"起動: <xliff:g id="STARTS">%1$d</xliff:g>"</string>
     <string name="battery_history_days">"<xliff:g id="DAYS">%1$d</xliff:g>日<xliff:g id="HOURS">%2$d</xliff:g>時間<xliff:g id="MINUTES">%3$d</xliff:g>分<xliff:g id="SECONDS">%4$d</xliff:g>秒"</string>
     <string name="battery_history_hours">"<xliff:g id="HOURS">%1$d</xliff:g>時間<xliff:g id="MINUTES">%2$d</xliff:g>分<xliff:g id="SECONDS">%3$d</xliff:g>秒"</string>
     <string name="battery_history_minutes">"<xliff:g id="MINUTES">%1$d</xliff:g>分<xliff:g id="SECONDS">%2$d</xliff:g>秒"</string>
     <string name="battery_history_seconds">"<xliff:g id="SECONDS">%1$d</xliff:g>秒"</string>
     <string name="battery_history_packages_sharing_this_uid">"このUIDを共有するパッケージ:"</string>
-    <string name="battery_history_no_data">"バッテリ使用状況のデータは利用できません"</string>
+    <string name="battery_history_no_data">"充電池使用データなし"</string>
     <string name="battery_history_sensor">"センサー:"</string>
-    <!-- no translation found for battery_history_wakelock (608683447522396293) -->
-    <skip />
+    <string name="battery_history_wakelock">"部分起動ロック:"</string>
     <string name="battery_history_used_by_packages">"パッケージで使用されるセンサー:"</string>
     <string name="battery_history_sensor_usage">"<xliff:g id="PACKAGE">%2$s</xliff:g>により<xliff:g id="COUNT">%1$d</xliff:g>回使用"</string>
     <string name="battery_history_sensor_usage_multi">"次のいずれかにより<xliff:g id="COUNT">%1$d</xliff:g>回使用:"</string>
-    <!-- no translation found for battery_history_awake_label (8449792868990080882) -->
-    <skip />
-    <!-- no translation found for battery_history_screen_on_label (1848936521786339362) -->
-    <skip />
-    <!-- no translation found for battery_history_phone_on_label (700191958853142297) -->
-    <skip />
-    <!-- no translation found for battery_history_awake (4350886665719031057) -->
-    <skip />
+    <string name="battery_history_awake_label">"実行中"</string>
+    <string name="battery_history_screen_on_label">"画面点灯"</string>
+    <string name="battery_history_phone_on_label">"電源ON"</string>
+    <string name="battery_history_awake">"実動時間(スリープ除く):"</string>
     <string name="battery_history_screen_on">"画面バックライトの点灯時間:"</string>
-    <!-- no translation found for battery_history_phone_on (4891504401623839532) -->
-    <skip />
-    <string name="battery_history_screen_on_battery">"バッテリ使用開始:"</string>
-    <string name="battery_history_screen_on_plugged">"電源に接続:"</string>
+    <string name="battery_history_phone_on">"端末電源入の時間:"</string>
+    <string name="battery_history_screen_on_battery">"充電池使用:"</string>
+    <string name="battery_history_screen_on_plugged">"電源接続:"</string>
     <string name="usage_stats_label">"使用統計情報"</string>
     <string name="testing_usage_stats">"使用統計情報"</string>
     <string name="display_order_text">"並べ替え:"</string>
