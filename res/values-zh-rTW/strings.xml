@@ -94,12 +94,11 @@
     <string name="bluetooth_disconnected">"連線中斷"</string>
     <string name="bluetooth_disconnecting">"連線中斷..."</string>
     <string name="bluetooth_connecting">"連線中..."</string>
-    <!-- no translation found for bluetooth_unknown (1905151516611093010) -->
+    <!-- no translation found for bluetooth_unknown (644716244548801421) -->
     <skip />
     <string name="bluetooth_not_connected">"與此裝置配對"</string>
     <string name="bluetooth_pairing">"配對中..."</string>
-    <!-- no translation found for bluetooth_paired (1247541089000057726) -->
-    <skip />
+    <string name="bluetooth_paired">"已配對，但尚未連接"</string>
     <string name="bluetooth_device">"免持/頭戴式"</string>
     <string name="progress_scanning">"掃描中"</string>
     <string name="bluetooth_notif_ticker">"藍牙配對要求"</string>
@@ -111,7 +110,7 @@
     <string name="choose_timezone">"選取時區"</string>
     <string name="display_preview_label">"預覽："</string>
     <string name="display_font_size_label">"字型大小："</string>
-    <!-- no translation found for intent_sender_data_label (8363026381459131554) -->
+    <!-- no translation found for intent_sender_data_label (6332324780477289261) -->
     <skip />
     <string name="intent_sender_sendbroadcast_text">"傳送 <xliff:g id="BROADCAST">broadcast</xliff:g>"</string>
     <string name="intent_sender_action_label">"<xliff:g id="ACTION">Action</xliff:g>："</string>
@@ -339,6 +338,8 @@
     <string name="sound_and_display_settings_summary">"設定鈴聲、通知與螢幕亮度"</string>
     <string name="silent_mode_title">"靜音模式"</string>
     <string name="silent_mode_summary">"將媒體和鬧鐘以外的所有音效靜音"</string>
+    <!-- no translation found for silent_mode_incl_alarm_summary (2088830834182228458) -->
+    <skip />
     <string name="ringtone_title">"電話鈴聲"</string>
     <string name="ringtone_summary">"設定預設來電鈴聲"</string>
     <string name="ring_volume_title">"鈴聲音量"</string>
@@ -366,8 +367,11 @@
     <string name="sync_settings_summary">"選取要同步處理的應用程式"</string>
     <string name="display_settings">"顯示設定"</string>
     <string name="animations_title">"動畫"</string>
-    <string name="animations_summary_on">"開啟/關閉視窗時顯示動畫"</string>
-    <string name="animations_summary_off">"開啟/關閉視窗時顯示動畫"</string>
+    <string name="animations_summary_on">"開啟和關閉視窗時顯示動畫"</string>
+    <string name="animations_summary_off">"開啟和關閉視窗時顯示動畫"</string>
+    <string name="accelerometer_title">"顯示方向"</string>
+    <string name="accelerometer_summary_on">"旋轉手機時自動改變顯示方向"</string>
+    <string name="accelerometer_summary_off">"旋轉手機時自動改變顯示方向"</string>
     <string name="brightness">"亮度"</string>
     <string name="brightness_summary">"調整螢幕亮度"</string>
     <string name="screen_timeout">"螢幕逾時"</string>
@@ -456,6 +460,9 @@
     <string name="error_apn_empty">"APN 不能空白。"</string>
     <string name="error_mcc_not3">"MCC 欄位必須為 3 位。"</string>
     <string name="error_mnc_not23">"MNC 欄位至少要 2 或 3 位。"</string>
+    <string name="restore_default_apn">"正在還原預設 APN 設定"</string>
+    <string name="menu_restore">"還原為預設狀態"</string>
+    <string name="restore_default_apn_completed">"重設預設 APN 設定已完成"</string>
     <string name="master_clear_title">"出廠資料重設"</string>
     <string name="master_clear_summary">"清除手機上所有資料"</string>
     <string name="master_clear_desc">"此項操作會將手機回復至出廠設定，清除所有資料與下載的應用程式！"</string>
@@ -587,11 +594,14 @@
     <string name="auto_punctuate_summary">"按空白鍵兩次可插入「.」"</string>
     <string name="show_password">"密碼可見"</string>
     <string name="show_password_summary">"顯示輸入的密碼"</string>
+    <!-- no translation found for ime_security_warning (3458652708716006477) -->
+    <skip />
     <string name="user_dict_settings_titlebar">"使用者字典"</string>
     <string name="user_dict_settings_title">"使用者字典"</string>
     <string name="user_dict_settings_summary">"在使用者字典中新增及移除字詞"</string>
     <string name="user_dict_settings_add_menu_title">"新增"</string>
     <string name="user_dict_settings_add_dialog_title">"新增至字典"</string>
+    <string name="user_dict_settings_edit_dialog_title">"編輯文字"</string>
     <string name="user_dict_settings_context_menu_edit_title">"編輯"</string>
     <string name="user_dict_settings_context_menu_delete_title">"刪除"</string>
     <string name="user_dict_settings_empty_text">"您的使用者字典中沒有任何字詞。您可以透過選單新增字詞。"</string>
@@ -612,7 +622,10 @@
     <string name="quick_launch_display_mode_shortcuts">"捷徑"</string>
     <string name="input_methods_settings_title">"文字輸入法"</string>
     <string name="input_methods_settings_summary">"管理輸入法選項"</string>
-    <string name="input_methods_settings_label_format">"%s 設定"</string>
+    <string name="input_methods_settings_label_format">"<xliff:g id="IME_NAME">%1$s</xliff:g> 設定"</string>
+    <string name="onscreen_keyboard_settings_summary">"螢幕小鍵盤設定"</string>
+    <string name="builtin_keyboard_settings_title">"裝置小鍵盤"</string>
+    <string name="builtin_keyboard_settings_summary">"內建小鍵盤設定"</string>
     <string name="development_settings_title">"開發"</string>
     <string name="development_settings_summary">"設定應用程式開發的選項"</string>
     <string name="enable_adb">"USB 除錯中"</string>
@@ -621,10 +634,8 @@
     <string name="keep_screen_on_summary">"充電時螢幕不會進入休眠"</string>
     <string name="allow_mock_location">"允許模擬位置"</string>
     <string name="allow_mock_location_summary">"允許模擬位置"</string>
-    <!-- no translation found for gadget_picker_title (98374951396755811) -->
-    <skip />
-    <!-- no translation found for widget_picker_title (9130684134213467557) -->
-    <skip />
+    <string name="gadget_picker_title">"選擇小工具"</string>
+    <string name="widget_picker_title">"選擇小工具"</string>
     <string name="battery_history_details_for">"UID %d 的詳細資料"</string>
     <string name="battery_history_uid">"UID <xliff:g id="USER_ID">%1$d</xliff:g>"</string>
     <string name="battery_history_network_usage">"<xliff:g id="APP_NAME">%1$s</xliff:g> 的網路使用率詳細資料："</string>
@@ -643,22 +654,16 @@
     <string name="battery_history_packages_sharing_this_uid">"共用此 UID 的封裝："</string>
     <string name="battery_history_no_data">"沒有電池使用資料"</string>
     <string name="battery_history_sensor">"感應器："</string>
-    <!-- no translation found for battery_history_wakelock (608683447522396293) -->
-    <skip />
+    <string name="battery_history_wakelock">"部分喚醒鎖定："</string>
     <string name="battery_history_used_by_packages">"程式使用的感應器："</string>
     <string name="battery_history_sensor_usage">"使用次數：<xliff:g id="COUNT">%1$d</xliff:g>，使用的封裝：<xliff:g id="PACKAGE">%2$s</xliff:g>"</string>
     <string name="battery_history_sensor_usage_multi">"使用次數：<xliff:g id="COUNT">%1$d</xliff:g>，使用者為下列其中之一："</string>
-    <!-- no translation found for battery_history_awake_label (8449792868990080882) -->
-    <skip />
-    <!-- no translation found for battery_history_screen_on_label (1848936521786339362) -->
-    <skip />
-    <!-- no translation found for battery_history_phone_on_label (700191958853142297) -->
-    <skip />
-    <!-- no translation found for battery_history_awake (4350886665719031057) -->
-    <skip />
+    <string name="battery_history_awake_label">"執行"</string>
+    <string name="battery_history_screen_on_label">"螢幕開啟"</string>
+    <string name="battery_history_phone_on_label">"開機"</string>
+    <string name="battery_history_awake">"未休眠的時間："</string>
     <string name="battery_history_screen_on">"螢幕開啟時間："</string>
-    <!-- no translation found for battery_history_phone_on (4891504401623839532) -->
-    <skip />
+    <string name="battery_history_phone_on">"手機處於開啟狀態的時間："</string>
     <string name="battery_history_screen_on_battery">"使用電池："</string>
     <string name="battery_history_screen_on_plugged">"插入時間："</string>
     <string name="usage_stats_label">"使用統計資料"</string>

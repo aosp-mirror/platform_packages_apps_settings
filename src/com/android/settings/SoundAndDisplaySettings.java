@@ -162,6 +162,13 @@ public class SoundAndDisplaySettings extends PreferenceActivity implements
             mVibrate.setChecked(vibrateSetting);
         }
         
+        int silentModeStreams = Settings.System.getInt(getContentResolver(),
+                Settings.System.MODE_RINGER_STREAMS_AFFECTED, 0);
+        boolean isAlarmInclSilentMode = (silentModeStreams & (1 << AudioManager.STREAM_ALARM)) != 0; 
+        mSilent.setSummary(isAlarmInclSilentMode ?
+                R.string.silent_mode_incl_alarm_summary :
+                R.string.silent_mode_summary);
+        
         boolean animations = true;
         try {
             mAnimationScales = mWindowManager.getAnimationScales();

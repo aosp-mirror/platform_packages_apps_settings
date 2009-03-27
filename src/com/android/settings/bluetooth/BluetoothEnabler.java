@@ -17,8 +17,9 @@
 package com.android.settings.bluetooth;
 
 import com.android.settings.R;
-import com.android.settings.bluetooth.LocalBluetoothManager.ExtendedBluetoothState;
 
+import android.bluetooth.BluetoothDevice;
+import android.bluetooth.BluetoothIntent;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
@@ -70,15 +71,15 @@ public class BluetoothEnabler implements Preference.OnPreferenceChangeListener {
             return;
         }
         
-        ExtendedBluetoothState state = mLocalManager.getBluetoothState();
+        int state = mLocalManager.getBluetoothState();
         // This is the widget enabled state, not the preference toggled state
-        mCheckBoxPreference.setEnabled(state == ExtendedBluetoothState.ENABLED ||
-                state == ExtendedBluetoothState.DISABLED);
+        mCheckBoxPreference.setEnabled(state == BluetoothDevice.BLUETOOTH_STATE_ON ||
+                state == BluetoothDevice.BLUETOOTH_STATE_OFF);
         // BT state is not a sticky broadcast, so set it manually
         handleStateChanged(state);
         
         mContext.registerReceiver(mReceiver, 
-                new IntentFilter(LocalBluetoothManager.EXTENDED_BLUETOOTH_STATE_CHANGED_ACTION));
+                new IntentFilter(BluetoothIntent.BLUETOOTH_STATE_CHANGED_ACTION));
         mCheckBoxPreference.setOnPreferenceChangeListener(this);
     }
     
@@ -106,22 +107,24 @@ public class BluetoothEnabler implements Preference.OnPreferenceChangeListener {
         mLocalManager.setBluetoothEnabled(enable);
     }
     
-    private void handleStateChanged(ExtendedBluetoothState state) {
+    private void handleStateChanged(int state) {
 
-        if (state == ExtendedBluetoothState.DISABLED || state == ExtendedBluetoothState.ENABLED) {
-            mCheckBoxPreference.setChecked(state == ExtendedBluetoothState.ENABLED);
-            mCheckBoxPreference
-                    .setSummary(state == ExtendedBluetoothState.DISABLED ? mOriginalSummary : null);
+        if (state == BluetoothDevice.BLUETOOTH_STATE_OFF ||
+                state == BluetoothDevice.BLUETOOTH_STATE_ON) {
+            mCheckBoxPreference.setChecked(state == BluetoothDevice.BLUETOOTH_STATE_ON);
+            mCheckBoxPreference.setSummary(state == BluetoothDevice.BLUETOOTH_STATE_OFF ?
+                                           mOriginalSummary :
+                                           null);
             
             mCheckBoxPreference.setEnabled(isEnabledByDependency());
             
-        } else if (state == ExtendedBluetoothState.ENABLING ||
-                state == ExtendedBluetoothState.DISABLING) {
-            mCheckBoxPreference.setSummary(state == ExtendedBluetoothState.ENABLING
+        } else if (state == BluetoothDevice.BLUETOOTH_STATE_TURNING_ON ||
+                state == BluetoothDevice.BLUETOOTH_STATE_TURNING_OFF) {
+            mCheckBoxPreference.setSummary(state == BluetoothDevice.BLUETOOTH_STATE_TURNING_ON
                     ? R.string.wifi_starting
                     : R.string.wifi_stopping);
             
-        } else if (state == ExtendedBluetoothState.UNKNOWN) {
+        } else {
             mCheckBoxPreference.setChecked(false);
             mCheckBoxPreference.setSummary(R.string.wifi_error);
             mCheckBoxPreference.setEnabled(true);

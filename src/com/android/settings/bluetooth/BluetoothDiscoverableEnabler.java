@@ -92,7 +92,6 @@ public class BluetoothDiscoverableEnabler implements Preference.OnPreferenceChan
         }
 
         IntentFilter filter = new IntentFilter(BluetoothIntent.SCAN_MODE_CHANGED_ACTION);
-        filter.addAction(BluetoothIntent.DISABLED_ACTION);
         mContext.registerReceiver(mReceiver, filter);
         mCheckBoxPreference.setOnPreferenceChangeListener(this);
         

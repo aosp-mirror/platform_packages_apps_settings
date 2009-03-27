@@ -93,7 +93,7 @@ public class BrightnessPreference extends SeekBarPreference implements
             IHardwareService hardware = IHardwareService.Stub.asInterface(
                     ServiceManager.getService("hardware"));
             if (hardware != null) {
-                hardware.setScreenBacklight(brightness);
+                hardware.setBacklights(brightness);
             }
         } catch (RemoteException doe) {
             

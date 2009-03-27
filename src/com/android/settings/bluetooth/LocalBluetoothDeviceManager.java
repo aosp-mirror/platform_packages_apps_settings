@@ -16,11 +16,8 @@
 
 package com.android.settings.bluetooth;
 
-import android.app.AlertDialog;
 import android.bluetooth.BluetoothDevice;
 import android.util.Log;
-import android.widget.Toast;
-import android.content.Context;
 
 import com.android.settings.R;
 import com.android.settings.bluetooth.LocalBluetoothManager.Callback;
@@ -190,10 +187,13 @@ public class LocalBluetoothDeviceManager {
                         R.string.bluetooth_pairing_error_message);
     }
     
-    public synchronized void onProfileStateChanged(String address) {
+    public synchronized void onProfileStateChanged(String address, boolean transientState) {
         LocalBluetoothDevice device = findDevice(address);
         if (device == null) return;
         
+        if (!transientState) {
+            device.onProfileStateChanged();
+        }
         device.refresh();
     }
     

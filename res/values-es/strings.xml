@@ -94,11 +94,11 @@
     <string name="bluetooth_disconnected">"Desconectada"</string>
     <string name="bluetooth_disconnecting">"Desconectando..."</string>
     <string name="bluetooth_connecting">"Estableciendo conexión..."</string>
-    <!-- no translation found for bluetooth_unknown (1905151516611093010) -->
+    <!-- no translation found for bluetooth_unknown (644716244548801421) -->
     <skip />
     <string name="bluetooth_not_connected">"Sincronizar con este dispositivo"</string>
     <string name="bluetooth_pairing">"Sincronizando..."</string>
-    <string name="bluetooth_paired">"Sincronizado pero no conectado"</string>
+    <string name="bluetooth_paired">"Sincronizado, pero sin conexión"</string>
     <string name="bluetooth_device">"manos libres/auriculares"</string>
     <string name="progress_scanning">"Buscando..."</string>
     <string name="bluetooth_notif_ticker">"Solicitud de sincronización de Bluetooth"</string>
@@ -110,7 +110,7 @@
     <string name="choose_timezone">"Seleccionar zona horaria"</string>
     <string name="display_preview_label">"Vista previa:"</string>
     <string name="display_font_size_label">"Tamaño de fuente:"</string>
-    <!-- no translation found for intent_sender_data_label (8363026381459131554) -->
+    <!-- no translation found for intent_sender_data_label (6332324780477289261) -->
     <skip />
     <string name="intent_sender_sendbroadcast_text">"Enviar <xliff:g id="BROADCAST">broadcast</xliff:g>"</string>
     <string name="intent_sender_action_label">"<xliff:g id="ACTION">Action</xliff:g>:"</string>
@@ -338,6 +338,8 @@
     <string name="sound_and_display_settings_summary">"Establecer tonos, notificaciones, brillo de la pantalla"</string>
     <string name="silent_mode_title">"Modo silencio"</string>
     <string name="silent_mode_summary">"Silencio de todos los sonidos (excepto los multimedia y las alarmas)"</string>
+    <!-- no translation found for silent_mode_incl_alarm_summary (2088830834182228458) -->
+    <skip />
     <string name="ringtone_title">"Tono del teléfono"</string>
     <string name="ringtone_summary">"Establecer el tono de llamada entrante predeterminado"</string>
     <string name="ring_volume_title">"Volumen del timbre"</string>
@@ -365,8 +367,11 @@
     <string name="sync_settings_summary">"Seleccionar las aplicaciones que están sincronizadas"</string>
     <string name="display_settings">"Configuración de pantalla"</string>
     <string name="animations_title">"Animación"</string>
-    <string name="animations_summary_on">"Mostrar animación al abrir o cerrar ventanas"</string>
-    <string name="animations_summary_off">"Mostrar animación al abrir o cerrar ventanas"</string>
+    <string name="animations_summary_on">"Mostrar animación al abrir y cerrar ventanas"</string>
+    <string name="animations_summary_off">"Mostrar animación al abrir y cerrar ventanas"</string>
+    <string name="accelerometer_title">"Orientación"</string>
+    <string name="accelerometer_summary_on">"Cambiar orientación automáticamente al girar el teléfono"</string>
+    <string name="accelerometer_summary_off">"Cambiar orientación automáticamente al girar el teléfono"</string>
     <string name="brightness">"Brillo"</string>
     <string name="brightness_summary">"Ajustar el brillo de la pantalla"</string>
     <string name="screen_timeout">"Tiempo de espera de pantalla"</string>
@@ -455,6 +460,9 @@
     <string name="error_apn_empty">"El campo de APN no puede estar vacío."</string>
     <string name="error_mcc_not3">"El campo MMC debe contener 3 dígitos."</string>
     <string name="error_mnc_not23">"El campo MNC debe contener 2 ó 3 dígitos."</string>
+    <string name="restore_default_apn">"Restaurando la configuración de APN predeterminada"</string>
+    <string name="menu_restore">"Restablecer valores predeterminados"</string>
+    <string name="restore_default_apn_completed">"Restablecimiento de la configuración de APN predeterminada completado"</string>
     <string name="master_clear_title">"Restablecer datos de fábrica"</string>
     <string name="master_clear_summary">"Borrar todos los datos del teléfono"</string>
     <string name="master_clear_desc">"Esta acción restablecerá el teléfono a su estado de fábrica inicial y borrará todos los datos y todas las aplicaciones descargadas."</string>
@@ -586,11 +594,14 @@
     <string name="auto_punctuate_summary">"Pulsa la barra espaciadora dos veces para insertar el carácter \".\""</string>
     <string name="show_password">"Contraseñas visibles"</string>
     <string name="show_password_summary">"Mostrar contraseña mientras se escribe"</string>
+    <!-- no translation found for ime_security_warning (3458652708716006477) -->
+    <skip />
     <string name="user_dict_settings_titlebar">"Diccionario del usuario"</string>
     <string name="user_dict_settings_title">"Diccionario del usuario"</string>
     <string name="user_dict_settings_summary">"Añadir y eliminar palabras del diccionario del usuario"</string>
     <string name="user_dict_settings_add_menu_title">"Añadir"</string>
     <string name="user_dict_settings_add_dialog_title">"Añadir al usuario"</string>
+    <string name="user_dict_settings_edit_dialog_title">"Editar palabra"</string>
     <string name="user_dict_settings_context_menu_edit_title">"Editar"</string>
     <string name="user_dict_settings_context_menu_delete_title">"Suprimir"</string>
     <string name="user_dict_settings_empty_text">"No tienes ninguna palabra en el diccionario del usuario. Puedes añadir una palabra a través del menú."</string>
@@ -611,7 +622,10 @@
     <string name="quick_launch_display_mode_shortcuts">"Accesos directos"</string>
     <string name="input_methods_settings_title">"Introducción de texto"</string>
     <string name="input_methods_settings_summary">"Administrar opciones de introducción de texto"</string>
-    <string name="input_methods_settings_label_format">"Configuración de %s"</string>
+    <string name="input_methods_settings_label_format">"Configuración de <xliff:g id="IME_NAME">%1$s</xliff:g>"</string>
+    <string name="onscreen_keyboard_settings_summary">"Configuración del teclado en pantalla"</string>
+    <string name="builtin_keyboard_settings_title">"Teclado del dispositivo"</string>
+    <string name="builtin_keyboard_settings_summary">"Configuración del teclado integrado"</string>
     <string name="development_settings_title">"Desarrollo"</string>
     <string name="development_settings_summary">"Establecer opciones de desarrollo de aplicaciones"</string>
     <string name="enable_adb">"Depuración USB"</string>
@@ -620,10 +634,8 @@
     <string name="keep_screen_on_summary">"La pantalla nunca entra en modo de suspensión durante la carga"</string>
     <string name="allow_mock_location">"Permitir ubicaciones simuladas"</string>
     <string name="allow_mock_location_summary">"Permitir ubicaciones simuladas"</string>
-    <!-- no translation found for gadget_picker_title (98374951396755811) -->
-    <skip />
-    <!-- no translation found for widget_picker_title (9130684134213467557) -->
-    <skip />
+    <string name="gadget_picker_title">"Seleccionar gadget"</string>
+    <string name="widget_picker_title">"Seleccionar widget"</string>
     <string name="battery_history_details_for">"Detalles del ID único %d"</string>
     <string name="battery_history_uid">"ID único <xliff:g id="USER_ID">%1$d</xliff:g>"</string>
     <string name="battery_history_network_usage">"Detalles de uso de red para <xliff:g id="APP_NAME">%1$s</xliff:g>:"</string>
@@ -642,22 +654,16 @@
     <string name="battery_history_packages_sharing_this_uid">"Paquetes que comparten este ID único:"</string>
     <string name="battery_history_no_data">"No hay datos disponibles sobre el uso de la batería."</string>
     <string name="battery_history_sensor">"Sensor:"</string>
-    <!-- no translation found for battery_history_wakelock (608683447522396293) -->
-    <skip />
+    <string name="battery_history_wakelock">"Bloqueo de actividad parcial:"</string>
     <string name="battery_history_used_by_packages">"Sensor utilizado por paquetes:"</string>
     <string name="battery_history_sensor_usage">"Utilizado <xliff:g id="COUNT">%1$d</xliff:g> veces por <xliff:g id="PACKAGE">%2$s</xliff:g>"</string>
     <string name="battery_history_sensor_usage_multi">"Utilizado <xliff:g id="COUNT">%1$d</xliff:g> veces por uno de:"</string>
-    <!-- no translation found for battery_history_awake_label (8449792868990080882) -->
-    <skip />
-    <!-- no translation found for battery_history_screen_on_label (1848936521786339362) -->
-    <skip />
-    <!-- no translation found for battery_history_phone_on_label (700191958853142297) -->
-    <skip />
-    <!-- no translation found for battery_history_awake (4350886665719031057) -->
-    <skip />
+    <string name="battery_history_awake_label">"En ejecución"</string>
+    <string name="battery_history_screen_on_label">"Pantalla encendida"</string>
+    <string name="battery_history_phone_on_label">"Teléfono encendido"</string>
+    <string name="battery_history_awake">"Tiempo transcurrido sin suspensión:"</string>
     <string name="battery_history_screen_on">"Tiempo transcurrido con la pantalla encendida:"</string>
-    <!-- no translation found for battery_history_phone_on (4891504401623839532) -->
-    <skip />
+    <string name="battery_history_phone_on">"Tiempo transcurrido con el teléfono encendido:"</string>
     <string name="battery_history_screen_on_battery">"En la batería:"</string>
     <string name="battery_history_screen_on_plugged">"Conectado:"</string>
     <string name="usage_stats_label">"Estadísticas de uso"</string>

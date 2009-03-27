@@ -20,22 +20,23 @@ import com.android.settings.R;
 import com.android.settings.bluetooth.LocalBluetoothProfileManager.Profile;
 
 import android.app.AlertDialog;
-import android.bluetooth.BluetoothDevice;
 import android.bluetooth.BluetoothClass;
-import android.bluetooth.IBluetoothDeviceCallback;
+import android.bluetooth.BluetoothDevice;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.Resources;
-import android.os.IBinder;
-import android.os.RemoteException;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.ContextMenu;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import java.text.DateFormat;
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.Iterator;
+import java.util.LinkedList;
 import java.util.List;
 
 /**
@@ -71,6 +72,193 @@ public class LocalBluetoothDevice implements Comparable<LocalBluetoothDevice> {
      */
     private boolean mIsConnectingErrorPossible;
 
+    // Max time to hold the work queue if we don't get or missed a response
+    // from the bt framework.
+    private static final long MAX_WAIT_TIME_FOR_FRAMEWORK = 25 * 1000;
+
+    private enum BluetoothCommand {
+        CONNECT, DISCONNECT,
+    }
+
+    class BluetoothJob {
+        final BluetoothCommand command; // CONNECT, DISCONNECT
+        final LocalBluetoothDevice device;
+        final Profile profile; // HEADSET, A2DP, etc
+        // 0 means this command was not been sent to the bt framework.
+        long timeSent;
+
+        public BluetoothJob(BluetoothCommand command,
+                LocalBluetoothDevice device, Profile profile) {
+            this.command = command;
+            this.device = device;
+            this.profile = profile;
+            this.timeSent = 0;
+        }
+        
+        @Override
+        public String toString() {
+            StringBuilder sb = new StringBuilder();
+            sb.append(command.name());
+            sb.append(" Address:").append(device.mAddress);
+            sb.append(" Profile:").append(profile.name());
+            sb.append(" TimeSent:");
+            if (timeSent == 0) {
+                sb.append("not yet");
+            } else {
+                sb.append(DateFormat.getTimeInstance().format(new Date(timeSent)));
+            }
+            return sb.toString();
+        }
+    }
+
+    /**
+     * We want to serialize connect and disconnect calls. http://b/170538
+     * This are some headsets that may have L2CAP resource limitation. We want
+     * to limit the bt bandwidth usage.
+     *
+     * A queue to keep track of asynchronous calls to the bt framework.  The
+     * first item, if exist, should be in progress i.e. went to the bt framework
+     * already, waiting for a notification to come back. The second item and
+     * beyond have not been sent to the bt framework yet.
+     */
+    private static LinkedList<BluetoothJob> workQueue = new LinkedList<BluetoothJob>();
+
+    private void queueCommand(BluetoothJob job) {
+        Log.d(TAG, workQueue.toString());
+        synchronized (workQueue) {
+            boolean processNow = pruneQueue(job);
+
+            // Add job to queue
+            Log.d(TAG, "Adding: " + job.toString());
+            workQueue.add(job);
+
+            // if there's nothing pending from before, send the command to bt
+            // framework immediately.
+            if (workQueue.size() == 1 || processNow) {
+                Log.d(TAG, "workQueue.size() == 1 || TimeOut -> process command now");
+                // If the failed to process, just drop it from the queue.
+                // There will be no callback to remove this from the queue.
+                processCommands();
+            }
+        }
+    }
+    
+    private boolean pruneQueue(BluetoothJob job) {
+        boolean removedStaleItems = false;
+        long now = System.currentTimeMillis();
+        Iterator<BluetoothJob> it = workQueue.iterator();
+        while (it.hasNext()) {
+            BluetoothJob existingJob = it.next();
+
+            // Remove any pending CONNECTS when we receive a DISCONNECT
+            if (job != null && job.command == BluetoothCommand.DISCONNECT) {
+                if (existingJob.timeSent == 0
+                        && existingJob.command == BluetoothCommand.CONNECT
+                        && existingJob.device.mAddress.equals(job.device.mAddress)
+                        && existingJob.profile == job.profile) {
+                    Log.d(TAG, "Removed because of a pending disconnect. " + existingJob);
+                    it.remove();
+                    continue;
+                }
+            }
+
+            // Defensive Code: Remove any job that older than a preset time.
+            // We never got a call back. It is better to have overlapping
+            // calls than to get stuck.
+            Log.d(TAG, "Age:" + (now - existingJob.timeSent));
+            if (existingJob.timeSent != 0
+                    && (now - existingJob.timeSent) >= MAX_WAIT_TIME_FOR_FRAMEWORK) {
+                Log.w(TAG, "Timeout. Removing Job:" + existingJob.toString());
+                it.remove();
+                removedStaleItems = true;
+                continue;
+            }
+        }
+        return removedStaleItems;
+    }
+
+    private boolean processCommand(BluetoothJob job) {
+        boolean successful = false;
+        if (job.timeSent == 0) {
+            job.timeSent = System.currentTimeMillis();                
+            switch (job.command) {
+            case CONNECT:
+                successful = connectInt(job.device, job.profile);
+                break;
+            case DISCONNECT:
+                successful = disconnectInt(job.device, job.profile);
+                break;
+            }
+
+            if (successful) {
+                Log.d(TAG, "Command sent successfully:" + job.toString());
+            } else {
+                Log.d(TAG, "Framework rejected command immediately:" + job.toString());
+            }
+            
+        } else {
+            Log.d(TAG, "Job already has a sent time. Skip. " + job.toString());
+        }
+
+        return successful;
+    }
+
+    public void onProfileStateChanged() {
+        Log.d(TAG, "onProfileStateChanged:" + workQueue.toString());
+        BluetoothJob job = workQueue.peek();
+        if (job == null) {
+            Log.v(TAG, "Yikes, onProfileStateChanged called but job queue is empty. "
+                    + "(Okay for device initiated actions and BluetoothA2dpService initiated "
+                    + "Auto-connections)");
+            return;
+        } else if (job.device.mAddress != mAddress) {
+            // This can happen in 2 cases: 1) BT device initiated pairing and
+            // 2) disconnects of one headset that's triggered by connects of
+            // another.
+            Log.v(TAG, "onProfileStateChanged called. The addresses differ. this.mAddress="
+                    + mAddress + " workQueue.head=" + job.toString());
+
+            // Check to see if we need to remove the stale items from the queue
+            if (!pruneQueue(null)) {
+                // nothing in the queue was modify. Just ignore the notification and return.
+                return;
+            }
+        } else {
+            // Remove the first item and process the next one
+            Log.d(TAG, "LocalBluetoothDevice.onProfileStateChanged() called. MAC addr matched");
+            workQueue.poll();
+        }
+
+        processCommands();
+    }
+
+    /*
+     * This method is called in 2 places:
+     * 1) queryCommand() - when someone or something want to connect or
+     *    disconnect
+     * 2) onProfileStateChanged() - when the framework sends an intent
+     *    notification when it finishes processing a command
+     */
+    private void processCommands() {
+        Log.d(TAG, "processCommands:" + workQueue.toString());
+        Iterator<BluetoothJob> it = workQueue.iterator();
+        while (it.hasNext()) {
+            BluetoothJob job = it.next();
+            if (processCommand(job)) {
+                // Sent to bt framework. Done for now. Will remove this job
+                // from queue when we get an event
+                return;
+            } else {
+                /*
+                 * If the command failed immediately, there will be no event
+                 * callbacks. So delete the job immediately and move on to the
+                 * next one
+                 */
+                it.remove();
+            }
+        }
+    }
+
     LocalBluetoothDevice(Context context, String address) {
         mLocalManager = LocalBluetoothManager.getInstance(context);
         if (mLocalManager == null) {
@@ -102,12 +290,19 @@ public class LocalBluetoothDevice implements Comparable<LocalBluetoothDevice> {
     }
 
     public void disconnect(Profile profile) {
+        queueCommand(new BluetoothJob(BluetoothCommand.DISCONNECT, this, profile));
+    }
+
+    private boolean disconnectInt(LocalBluetoothDevice device, Profile profile) {
         LocalBluetoothProfileManager profileManager =
                 LocalBluetoothProfileManager.getProfileManager(mLocalManager, profile);
-        int status = profileManager.getConnectionStatus(mAddress);
+        int status = profileManager.getConnectionStatus(device.mAddress);
         if (SettingsBtStatus.isConnectionStatusConnected(status)) {
-            profileManager.disconnect(mAddress);
+            if (profileManager.disconnect(device.mAddress) == BluetoothDevice.RESULT_SUCCESS) {
+                return true;
+            }
         }
+        return false;
     }
 
     public void askDisconnect() {
@@ -153,7 +348,7 @@ public class LocalBluetoothDevice implements Comparable<LocalBluetoothDevice> {
                     LocalBluetoothProfileManager.getProfileManager(mLocalManager, profile);
             if (profileManager.isPreferred(mAddress)) {
                 hasAtLeastOnePreferredProfile = true;
-                connectInt(profile);
+                queueCommand(new BluetoothJob(BluetoothCommand.CONNECT, this, profile));
             }
         }
 
@@ -173,27 +368,30 @@ public class LocalBluetoothDevice implements Comparable<LocalBluetoothDevice> {
             LocalBluetoothProfileManager profileManager =
                     LocalBluetoothProfileManager.getProfileManager(mLocalManager, profile);
             profileManager.setPreferred(mAddress, true);
-            connectInt(profile);
+            queueCommand(new BluetoothJob(BluetoothCommand.CONNECT, this, profile));
         }
     }
 
     public void connect(Profile profile) {
         // Reset the only-show-one-error-dialog tracking variable
         mIsConnectingErrorPossible = true;
-        connectInt(profile);
+        queueCommand(new BluetoothJob(BluetoothCommand.CONNECT, this, profile));
     }
 
-    public void connectInt(Profile profile) {
-        if (!ensurePaired()) return;
+    private boolean connectInt(LocalBluetoothDevice device, Profile profile) {
+        if (!device.ensurePaired()) return false;
 
         LocalBluetoothProfileManager profileManager =
                 LocalBluetoothProfileManager.getProfileManager(mLocalManager, profile);
-        int status = profileManager.getConnectionStatus(mAddress);
+        int status = profileManager.getConnectionStatus(device.mAddress);
         if (!SettingsBtStatus.isConnectionStatusConnected(status)) {
-            if (profileManager.connect(mAddress) != BluetoothDevice.RESULT_SUCCESS) {
-                Log.i(TAG, "Failed to connect " + profile.toString() + " to " + mName);
+            if (profileManager.connect(device.mAddress) == BluetoothDevice.RESULT_SUCCESS) {
+                return true;
             }
+            Log.i(TAG, "Failed to connect " + profile.toString() + " to " + device.mName);
         }
+        Log.i(TAG, "Not connected");
+        return false;
     }
 
     public void showConnectingError() {
@@ -228,6 +426,24 @@ public class LocalBluetoothDevice implements Comparable<LocalBluetoothDevice> {
     }
 
     public void unpair() {
+        synchronized (workQueue) {
+            // Remove any pending commands for this device
+            boolean processNow = false;            
+            Iterator<BluetoothJob> it = workQueue.iterator();
+            while (it.hasNext()) {
+                BluetoothJob job = it.next();
+                if (job.device.mAddress.equals(this.mAddress)) {
+                    it.remove();
+                    if (job.timeSent != 0) {
+                        processNow = true;
+                    }
+                }
+            }
+            if (processNow) {
+                processCommands();
+            }
+        }
+
         BluetoothDevice manager = mLocalManager.getBluetoothManager();
 
         switch (getBondState()) {

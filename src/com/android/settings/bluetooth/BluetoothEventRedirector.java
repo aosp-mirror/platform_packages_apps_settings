@@ -16,8 +16,6 @@
 
 package com.android.settings.bluetooth;
 
-import com.android.settings.bluetooth.LocalBluetoothManager.ExtendedBluetoothState;
-
 import android.bluetooth.BluetoothA2dp;
 import android.bluetooth.BluetoothDevice;
 import android.bluetooth.BluetoothHeadset;
@@ -50,12 +48,10 @@ public class BluetoothEventRedirector {
             String action = intent.getAction();
             String address = intent.getStringExtra(BluetoothIntent.ADDRESS);
                 
-            if (action.equals(BluetoothIntent.ENABLED_ACTION)) {
-                mManager.setBluetoothStateInt(ExtendedBluetoothState.ENABLED);
-                
-            } else if (action.equals(BluetoothIntent.DISABLED_ACTION)) {
-                mManager.setBluetoothStateInt(ExtendedBluetoothState.DISABLED);
-                    
+            if (action.equals(BluetoothIntent.BLUETOOTH_STATE_CHANGED_ACTION)) {
+                int state = intent.getIntExtra(BluetoothIntent.BLUETOOTH_STATE,
+                                        BluetoothError.ERROR);
+                mManager.setBluetoothStateInt(state);
             } else if (action.equals(BluetoothIntent.DISCOVERY_STARTED_ACTION)) {
                 mManager.onScanningStateChanged(true);
                 
@@ -86,25 +82,29 @@ public class BluetoothEventRedirector {
                 }
                 
             } else if (action.equals(BluetoothIntent.HEADSET_STATE_CHANGED_ACTION)) {
-                mManager.getLocalDeviceManager().onProfileStateChanged(address);
-
                 int newState = intent.getIntExtra(BluetoothIntent.HEADSET_STATE, 0);
                 int oldState = intent.getIntExtra(BluetoothIntent.HEADSET_PREVIOUS_STATE, 0);
                 if (newState == BluetoothHeadset.STATE_DISCONNECTED &&
                         oldState == BluetoothHeadset.STATE_CONNECTING) {
                     Log.i(TAG, "Failed to connect BT headset");
                 }
-                
-            } else if (action.equals(BluetoothA2dp.SINK_STATE_CHANGED_ACTION)) {
-                mManager.getLocalDeviceManager().onProfileStateChanged(address);
 
+                boolean transientState = !(newState == BluetoothHeadset.STATE_CONNECTED
+                                || newState == BluetoothHeadset.STATE_DISCONNECTED);
+                mManager.getLocalDeviceManager().onProfileStateChanged(address,transientState);
+
+            } else if (action.equals(BluetoothA2dp.SINK_STATE_CHANGED_ACTION)) {
                 int newState = intent.getIntExtra(BluetoothA2dp.SINK_STATE, 0);
                 int oldState = intent.getIntExtra(BluetoothA2dp.SINK_PREVIOUS_STATE, 0);
                 if (newState == BluetoothA2dp.STATE_DISCONNECTED &&
                         oldState == BluetoothA2dp.STATE_CONNECTING) {
                     Log.i(TAG, "Failed to connect BT A2DP");
                 }
-                
+
+                boolean transientState = !(newState == BluetoothA2dp.STATE_CONNECTED
+                        || newState == BluetoothA2dp.STATE_DISCONNECTED);
+                mManager.getLocalDeviceManager().onProfileStateChanged(address, transientState);
+
             } else if (action.equals(BluetoothIntent.REMOTE_DEVICE_CLASS_UPDATED_ACTION)) {
                 mManager.getLocalDeviceManager().onBtClassChanged(address);
                 
@@ -120,8 +120,7 @@ public class BluetoothEventRedirector {
         IntentFilter filter = new IntentFilter();
         
         // Bluetooth on/off broadcasts
-        filter.addAction(BluetoothIntent.ENABLED_ACTION);
-        filter.addAction(BluetoothIntent.DISABLED_ACTION);
+        filter.addAction(BluetoothIntent.BLUETOOTH_STATE_CHANGED_ACTION);
         
         // Discovery broadcasts
         filter.addAction(BluetoothIntent.DISCOVERY_STARTED_ACTION);

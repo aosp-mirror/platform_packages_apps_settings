@@ -25,6 +25,8 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.bluetooth.BluetoothA2dp;
 import android.bluetooth.BluetoothDevice;
+import android.bluetooth.BluetoothError;
+import android.bluetooth.BluetoothIntent;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -40,8 +42,6 @@ public class LocalBluetoothManager {
     private static final String TAG = "LocalBluetoothManager";
     static final boolean V = true;
     
-    public static final String EXTENDED_BLUETOOTH_STATE_CHANGED_ACTION =
-        "com.android.settings.bluetooth.intent.action.EXTENDED_BLUETOOTH_STATE_CHANGED";
     private static final String SHARED_PREFERENCES_NAME = "bluetooth_settings";
     
     private static LocalBluetoothManager INSTANCE;
@@ -60,8 +60,7 @@ public class LocalBluetoothManager {
     private BluetoothEventRedirector mEventRedirector;
     private BluetoothA2dp mBluetoothA2dp;
     
-    public static enum ExtendedBluetoothState { ENABLED, ENABLING, DISABLED, DISABLING, UNKNOWN }
-    private ExtendedBluetoothState mState = ExtendedBluetoothState.UNKNOWN;
+    private int mState = BluetoothError.ERROR;
 
     private List<Callback> mCallbacks = new ArrayList<Callback>();
     
@@ -182,34 +181,27 @@ public class LocalBluetoothManager {
         }
     }
     
-    public ExtendedBluetoothState getBluetoothState() {
+    public int getBluetoothState() {
         
-        if (mState == ExtendedBluetoothState.UNKNOWN) {
+        if (mState == BluetoothError.ERROR) {
             syncBluetoothState();
         }
             
         return mState;
     }
     
-    void setBluetoothStateInt(ExtendedBluetoothState state) {
+    void setBluetoothStateInt(int state) {
         mState = state;
-        
-        /*
-         * TODO: change to callback method. originally it was broadcast to
-         * parallel the framework's method, but it just complicates things here.
-         */
-        // If this were a real API, I'd add as an extra
-        mContext.sendBroadcast(new Intent(EXTENDED_BLUETOOTH_STATE_CHANGED_ACTION));
-        
-        if (state == ExtendedBluetoothState.ENABLED || state == ExtendedBluetoothState.DISABLED) {
-            mLocalDeviceManager.onBluetoothStateChanged(state == ExtendedBluetoothState.ENABLED);
+        if (state == BluetoothDevice.BLUETOOTH_STATE_ON ||
+            state == BluetoothDevice.BLUETOOTH_STATE_OFF) {
+            mLocalDeviceManager.onBluetoothStateChanged(state == BluetoothDevice.BLUETOOTH_STATE_ON);
         }
     }
     
     private void syncBluetoothState() {
         setBluetoothStateInt(mManager.isEnabled()
-                ? ExtendedBluetoothState.ENABLED
-                : ExtendedBluetoothState.DISABLED);
+                ? BluetoothDevice.BLUETOOTH_STATE_ON
+                : BluetoothDevice.BLUETOOTH_STATE_OFF);
     }
 
     public void setBluetoothEnabled(boolean enabled) {
@@ -219,8 +211,8 @@ public class LocalBluetoothManager {
                 
         if (wasSetStateSuccessful) {
             setBluetoothStateInt(enabled
-                    ? ExtendedBluetoothState.ENABLING
-                    : ExtendedBluetoothState.DISABLING);
+                ? BluetoothDevice.BLUETOOTH_STATE_TURNING_ON
+                : BluetoothDevice.BLUETOOTH_STATE_TURNING_OFF);
         } else {
             if (V) {
                 Log.v(TAG,

@@ -94,12 +94,11 @@
     <string name="bluetooth_disconnected">"Verbinding verbroken"</string>
     <string name="bluetooth_disconnecting">"Verbinding verbreken..."</string>
     <string name="bluetooth_connecting">"Verbinding maken..."</string>
-    <!-- no translation found for bluetooth_unknown (1905151516611093010) -->
+    <!-- no translation found for bluetooth_unknown (644716244548801421) -->
     <skip />
     <string name="bluetooth_not_connected">"Koppelen met dit apparaat"</string>
     <string name="bluetooth_pairing">"Koppelen..."</string>
-    <!-- no translation found for bluetooth_paired (1247541089000057726) -->
-    <skip />
+    <string name="bluetooth_paired">"Gekoppeld maar niet verbonden"</string>
     <string name="bluetooth_device">"handsfree/headset"</string>
     <string name="progress_scanning">"Scannen"</string>
     <string name="bluetooth_notif_ticker">"Bluetooth-koppelingsverzoek"</string>
@@ -111,7 +110,7 @@
     <string name="choose_timezone">"Tijdzone selecteren"</string>
     <string name="display_preview_label">"Voorbeeld:"</string>
     <string name="display_font_size_label">"Lettergrootte:"</string>
-    <!-- no translation found for intent_sender_data_label (8363026381459131554) -->
+    <!-- no translation found for intent_sender_data_label (6332324780477289261) -->
     <skip />
     <string name="intent_sender_sendbroadcast_text">"<xliff:g id="BROADCAST">broadcast</xliff:g> verzenden"</string>
     <string name="intent_sender_action_label">"<xliff:g id="ACTION">Action</xliff:g>:"</string>
@@ -339,6 +338,8 @@
     <string name="sound_and_display_settings_summary">"Beltonen, meldingen, schermhelderheid instellen"</string>
     <string name="silent_mode_title">"Stille modus"</string>
     <string name="silent_mode_summary">"Alle geluiden worden uitgeschakeld, behalve media- en alarmtonen"</string>
+    <!-- no translation found for silent_mode_incl_alarm_summary (2088830834182228458) -->
+    <skip />
     <string name="ringtone_title">"Beltoon telefoon"</string>
     <string name="ringtone_summary">"Standaardbeltoon voor inkomende oproepen instellen"</string>
     <string name="ring_volume_title">"Belvolume"</string>
@@ -366,8 +367,11 @@
     <string name="sync_settings_summary">"Selecteren welke toepassingen worden gesynchroniseerd"</string>
     <string name="display_settings">"Instellingen weergeven"</string>
     <string name="animations_title">"Animatie"</string>
-    <string name="animations_summary_on">"Animatie weergeven bij het openen/sluiten van vensters"</string>
-    <string name="animations_summary_off">"Animatie weergeven bij het openen/sluiten van vensters"</string>
+    <string name="animations_summary_on">"Animatie weergeven bij het openen en sluiten van vensters"</string>
+    <string name="animations_summary_off">"Animatie weergeven bij het openen en sluiten van vensters"</string>
+    <string name="accelerometer_title">"Stand"</string>
+    <string name="accelerometer_summary_on">"Stand automatisch wijzigen als telefoon wordt gedraaid"</string>
+    <string name="accelerometer_summary_off">"Stand automatisch wijzigen als telefoon wordt gedraaid"</string>
     <string name="brightness">"Helderheid"</string>
     <string name="brightness_summary">"Helderheid van het scherm aanpassen"</string>
     <string name="screen_timeout">"Time-out scherm"</string>
@@ -456,6 +460,9 @@
     <string name="error_apn_empty">"De APN mag niet leeg zijn."</string>
     <string name="error_mcc_not3">"MCC-veld moet 3 cijfers bevatten."</string>
     <string name="error_mnc_not23">"MNC-veld moet 2 of 3 cijfers bevatten."</string>
+    <string name="restore_default_apn">"Standaard-APN-instellingen herstellen"</string>
+    <string name="menu_restore">"Standaardinstellingen herstellen"</string>
+    <string name="restore_default_apn_completed">"Herstellen van standaard-APN-instellingen voltooid"</string>
     <string name="master_clear_title">"Terugzetten op fabrieksinstellingen"</string>
     <string name="master_clear_summary">"Hiermee worden alle gegevens op de telefoon gewist"</string>
     <string name="master_clear_desc">"Met deze actie wordt de telefoon teruggezet op de fabrieksinstellingen. Alle gegevens en gedownloade toepassingen worden gewist!"</string>
@@ -587,11 +594,14 @@
     <string name="auto_punctuate_summary">"Druk twee keer op de spatiebalk om \'.\' in te voegen"</string>
     <string name="show_password">"Zichtbare wachtwoorden"</string>
     <string name="show_password_summary">"Wachtwoord weergeven tijdens het typen"</string>
+    <!-- no translation found for ime_security_warning (3458652708716006477) -->
+    <skip />
     <string name="user_dict_settings_titlebar">"Gebruikerswoordenboek"</string>
     <string name="user_dict_settings_title">"Gebruikerswoordenboek"</string>
     <string name="user_dict_settings_summary">"Woorden toevoegen aan en verwijderen uit gebruikerswoordenboek"</string>
     <string name="user_dict_settings_add_menu_title">"Toevoegen"</string>
     <string name="user_dict_settings_add_dialog_title">"Toevoegen aan woordenboek"</string>
+    <string name="user_dict_settings_edit_dialog_title">"Woord bewerken"</string>
     <string name="user_dict_settings_context_menu_edit_title">"Bewerken"</string>
     <string name="user_dict_settings_context_menu_delete_title">"Verwijderen"</string>
     <string name="user_dict_settings_empty_text">"U heeft geen woorden in het gebruikerswoordenboek. U kunt een woord toevoegen via het menu."</string>
@@ -612,7 +622,10 @@
     <string name="quick_launch_display_mode_shortcuts">"Sneltoetsen"</string>
     <string name="input_methods_settings_title">"Tekstinvoer"</string>
     <string name="input_methods_settings_summary">"Opties voor tekstinvoer beheren"</string>
-    <string name="input_methods_settings_label_format">"Instellingen voor %s"</string>
+    <string name="input_methods_settings_label_format">"Instellingen voor <xliff:g id="IME_NAME">%1$s</xliff:g>"</string>
+    <string name="onscreen_keyboard_settings_summary">"Instellingen voor schermtoetsenbord"</string>
+    <string name="builtin_keyboard_settings_title">"Apparaattoetsenbord"</string>
+    <string name="builtin_keyboard_settings_summary">"Instellingen voor ingebouwd toetsenbord"</string>
     <string name="development_settings_title">"Ontwikkeling"</string>
     <string name="development_settings_summary">"Opties instellen voor toepassingsontwikkeling"</string>
     <string name="enable_adb">"USB-foutopsporing"</string>
@@ -621,10 +634,8 @@
     <string name="keep_screen_on_summary">"Scherm gaat nooit uit tijdens het opladen"</string>
     <string name="allow_mock_location">"Neplocaties toestaan"</string>
     <string name="allow_mock_location_summary">"Neplocaties toestaan"</string>
-    <!-- no translation found for gadget_picker_title (98374951396755811) -->
-    <skip />
-    <!-- no translation found for widget_picker_title (9130684134213467557) -->
-    <skip />
+    <string name="gadget_picker_title">"Gadget kiezen"</string>
+    <string name="widget_picker_title">"Widget kiezen"</string>
     <string name="battery_history_details_for">"Details voor UID %d"</string>
     <string name="battery_history_uid">"UID <xliff:g id="USER_ID">%1$d</xliff:g>"</string>
     <string name="battery_history_network_usage">"Netwerkgebruiksdetails voor <xliff:g id="APP_NAME">%1$s</xliff:g>:"</string>
@@ -643,22 +654,16 @@
     <string name="battery_history_packages_sharing_this_uid">"Pakketten die deze UID delen:"</string>
     <string name="battery_history_no_data">"Er zijn geen beschikbare gebruiksgegevens van de accu"</string>
     <string name="battery_history_sensor">"Sensor:"</string>
-    <!-- no translation found for battery_history_wakelock (608683447522396293) -->
-    <skip />
+    <string name="battery_history_wakelock">"Gedeeltelijke wakelock:"</string>
     <string name="battery_history_used_by_packages">"De sensor wordt gebruikt door de volgende pakketten:"</string>
     <string name="battery_history_sensor_usage">"<xliff:g id="COUNT">%1$d</xliff:g> keer gebruikt door <xliff:g id="PACKAGE">%2$s</xliff:g>"</string>
     <string name="battery_history_sensor_usage_multi">"<xliff:g id="COUNT">%1$d</xliff:g> keer gebruikt door een van de volgende:"</string>
-    <!-- no translation found for battery_history_awake_label (8449792868990080882) -->
-    <skip />
-    <!-- no translation found for battery_history_screen_on_label (1848936521786339362) -->
-    <skip />
-    <!-- no translation found for battery_history_phone_on_label (700191958853142297) -->
-    <skip />
-    <!-- no translation found for battery_history_awake (4350886665719031057) -->
-    <skip />
+    <string name="battery_history_awake_label">"Wordt uitgevoerd"</string>
+    <string name="battery_history_screen_on_label">"Scherm aan"</string>
+    <string name="battery_history_phone_on_label">"Telefoon aan"</string>
+    <string name="battery_history_awake">"Tijd verstreken zonder slaapstand:"</string>
     <string name="battery_history_screen_on">"Tijd verstreken met scherm aan:"</string>
-    <!-- no translation found for battery_history_phone_on (4891504401623839532) -->
-    <skip />
+    <string name="battery_history_phone_on">"Tijd verstreken met telefoon aan:"</string>
     <string name="battery_history_screen_on_battery">"Op accu:"</string>
     <string name="battery_history_screen_on_plugged">"Opladen:"</string>
     <string name="usage_stats_label">"Gebruiksstatistieken"</string>
