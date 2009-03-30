@@ -199,9 +199,17 @@ public class LocalBluetoothManager {
     }
     
     private void syncBluetoothState() {
-        setBluetoothStateInt(mManager.isEnabled()
-                ? BluetoothDevice.BLUETOOTH_STATE_ON
-                : BluetoothDevice.BLUETOOTH_STATE_OFF);
+        int bluetoothState;
+
+        if (mManager != null) {
+            bluetoothState = mManager.isEnabled()
+                    ? BluetoothDevice.BLUETOOTH_STATE_ON
+                    : BluetoothDevice.BLUETOOTH_STATE_OFF;
+        } else {
+            bluetoothState = BluetoothError.ERROR;
+        }
+
+        setBluetoothStateInt(bluetoothState);
     }
 
     public void setBluetoothEnabled(boolean enabled) {
