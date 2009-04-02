@@ -146,7 +146,7 @@ public class ApnSettings extends PreferenceActivity implements
 
     private void fillList() {
         String where = "numeric=\""
-            + android.os.SystemProperties.get(TelephonyProperties.PROPERTY_SIM_OPERATOR_NUMERIC, "")
+            + android.os.SystemProperties.get(TelephonyProperties.PROPERTY_ICC_OPERATOR_NUMERIC, "")
             + "\"";
 
         Cursor cursor = managedQuery(Telephony.Carriers.CONTENT_URI, new String[] {

@@ -240,7 +240,7 @@
             </intent-filter>
         </activity>
 
-        <activity android:name="SimLockSettings" android:label="@string/sim_lock_settings"
+        <activity android:name="IccLockSettings" android:label="@string/sim_lock_settings"
                 android:process="com.android.phone">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -442,7 +442,7 @@
         </activity>
 
         <activity android:name="ProxySelector" android:label="@string/proxy_settings_label"
-		  android:theme="@android:style/Theme.Dialog">
+                android:theme="@android:style/Theme.Dialog">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.DEVELOPMENT_PREFERENCE" />
@@ -501,4 +501,6 @@
     </application>
 
 </manifest>
+
+
 
