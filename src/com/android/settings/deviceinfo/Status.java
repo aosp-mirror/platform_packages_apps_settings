@@ -50,7 +50,7 @@ import java.lang.ref.WeakReference;
  * # Phone Number
  * # Network
  * # Roaming
- * # IMEI
+ * # Device Id (IMEI in GSM and MEID in CDMA)
  * # Network type
  * # Signal Strength
  * # Battery Strength  : TODO
@@ -181,7 +181,9 @@ public class Status extends PreferenceActivity {
         mSignalStrength = findPreference("signal_strength");			
         mUptime = findPreference("up_time");
         
+        //NOTE "imei" is the "Device ID" since it represents the IMEI in GSM and the MEID in CDMA
         setSummaryText("imei", mPhone.getDeviceId());
+        
         setSummaryText("imei_sv",
                 ((TelephonyManager) getSystemService(TELEPHONY_SERVICE))
                         .getDeviceSoftwareVersion());
@@ -379,3 +381,5 @@ public class Status extends PreferenceActivity {
         return h + ":" + pad(m) + ":" + pad(s);
     }
 }
+
+

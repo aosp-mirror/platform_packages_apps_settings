@@ -124,7 +124,7 @@ public class SecuritySettings extends PreferenceActivity
         simLockPreferences.setTitle(R.string.sim_lock_settings_category);
         // Intent to launch SIM lock settings
         intent = new Intent();
-        intent.setClassName("com.android.settings", "com.android.settings.SimLockSettings");
+        intent.setClassName("com.android.settings", "com.android.settings.IccLockSettings");
         simLockPreferences.setIntent(intent);
         
         PreferenceCategory simLockCat = new PreferenceCategory(this);
