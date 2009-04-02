@@ -291,6 +291,7 @@
     <!-- Radio Info screen. Label for a status item.  Used for diagnostic info screens, precise translation isn't needed -->
     <string name="radio_info_data_attempts_label">Data attempts:</string>
     <!-- Radio Info screen. Label for a status item.  Used for diagnostic info screens, precise translation isn't needed -->
+
     <string name="radio_info_gprs_service_label">GPRS service:</string>
     <!-- Radio Info screen. Label for a status item.  Used for diagnostic info screens, precise translation isn't needed -->
     <string name="radio_info_roaming_label">Roaming:</string>
@@ -432,6 +433,25 @@
     <!-- Main Settings screen settings summary text for the "Wireless controls" setting -->
     <string name="radio_controls_summary">Manage Wi-Fi, Bluetooth, airplane mode, &amp; mobile networks</string>
 
+
+    <!-- mobile network settings screen, setting check box title -->
+    <string name="roaming">Data roaming</string>
+    <!-- mobile network settings screen, setting option summary text when check box is selected -->
+    <string name="roaming_enable">Connect to data services when roaming</string>
+    <!-- mobile network settings screen, setting option summary text when check box is clear -->
+    <string name="roaming_disable">Connect to data services when roaming</string>
+    <!-- mobile network settings screen, dialog message when you are roaming and clear the "Data roaming" check box -->
+    <string name="roaming_reenable_message">You have lost data connectivity because you left your home network with data roaming turned off.</string>
+    <!-- mobile network settings screen, button on dialog box that appears when you are roaming and clear the "Data roaming" check box -->
+    <string name="roaming_turn_it_on_button">Turn it on</string>
+    <!-- mobile network settings screen, message in dialog box that appears when you select the "Data roaming" check box -->
+    <string name="roaming_warning">Allow data roaming? You may incur significant roaming charges!</string>
+    <!-- mobile network settings screen, title of dialog box that appears when you select the "Data roaming" check box -->
+    <string name="roaming_reenable_title">Attention</string>
+    <!-- mobile network settings screen, setting option name -->
+    <string name="networks">Operator selection</string>
+    <!-- mobile network settings screen, setting option summary text -->
+    <string name="sum_carrier_select">Select a network operator</string>
 
     <!-- Date and time settings -->
     <!-- Main Settings screen setting option name to go into the date and time settings-->
@@ -1528,3 +1548,5 @@ found in the list of installed applications.</string>
     <!-- label for usage time -->
     <string name="usage_time_label">Usage time</string>
 </resources>
+
+

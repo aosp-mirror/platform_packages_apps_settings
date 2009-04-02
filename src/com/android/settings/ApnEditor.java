@@ -202,7 +202,7 @@ public class ApnEditor extends PreferenceActivity
             mApnType.setText(mCursor.getString(TYPE_INDEX));
             if (mNewApn) {
                 String numeric = 
-                    SystemProperties.get(TelephonyProperties.PROPERTY_SIM_OPERATOR_NUMERIC);
+                    SystemProperties.get(TelephonyProperties.PROPERTY_ICC_OPERATOR_NUMERIC);
                 // MCC is first 3 chars and then in 2 - 3 chars of MNC
                 if (numeric != null && numeric.length() > 4) {
                     // Country code
