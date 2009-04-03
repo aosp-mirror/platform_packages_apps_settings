@@ -64,7 +64,6 @@ public class SecuritySettings extends PreferenceActivity
 
     private CheckBoxPreference mNetwork;
     private CheckBoxPreference mGps;
-    private LocationManager mLocationManager;
     
     // To track whether Agree was clicked in the Network location warning dialog
     private boolean mOkClicked;
@@ -77,10 +76,6 @@ public class SecuritySettings extends PreferenceActivity
         mLockPatternUtils = new LockPatternUtils(getContentResolver());
 
         createPreferenceHierarchy();
-        
-        // Get the available location providers
-        mLocationManager = (LocationManager)
-            getSystemService(Context.LOCATION_SERVICE);
 
         mNetwork = (CheckBoxPreference) getPreferenceScreen().findPreference(LOCATION_NETWORK);
         mGps = (CheckBoxPreference) getPreferenceScreen().findPreference(LOCATION_GPS);
@@ -202,10 +197,12 @@ public class SecuritySettings extends PreferenceActivity
                         .show()
                         .setOnDismissListener(this);
             } else {
-                updateProviders();
+                Settings.Secure.setLocationProviderEnabled(getContentResolver(),
+                        LocationManager.NETWORK_PROVIDER, false);
             }
         } else if (preference == mGps) {
-            updateProviders();
+            Settings.Secure.setLocationProviderEnabled(getContentResolver(),
+                    LocationManager.GPS_PROVIDER, mGps.isChecked());
         }
 
         return false;
@@ -213,7 +210,8 @@ public class SecuritySettings extends PreferenceActivity
 
     public void onClick(DialogInterface dialog, int which) {
         if (which == DialogInterface.BUTTON_POSITIVE) {
-            updateProviders();
+            Settings.Secure.setLocationProviderEnabled(getContentResolver(),
+                    LocationManager.NETWORK_PROVIDER, true);
             mOkClicked = true;
         } else {
             // Reset the toggle
@@ -232,44 +230,10 @@ public class SecuritySettings extends PreferenceActivity
      * Creates toggles for each available location provider
      */
     private void updateToggles() {
-        String providers = getAllowedProviders();
-        mNetwork.setChecked(providers.contains(LocationManager.NETWORK_PROVIDER));
-        mGps.setChecked(providers.contains(LocationManager.GPS_PROVIDER));
-    }
-
-    private void updateProviders() {
-        String preferredProviders = "";
-        if (mNetwork.isChecked()) {
-            preferredProviders += LocationManager.NETWORK_PROVIDER;
-        }
-        if (mGps.isChecked()) {
-            preferredProviders += "," + LocationManager.GPS_PROVIDER;
-        }
-        setProviders(preferredProviders);
-    }
-
-    private void setProviders(String providers) {
-        // Update the secure setting LOCATION_PROVIDERS_ALLOWED
-        Settings.Secure.putString(getContentResolver(),
-            Settings.Secure.LOCATION_PROVIDERS_ALLOWED, providers);
-        if (Config.LOGV) {
-            Log.v("Location Accuracy", "Setting LOCATION_PROVIDERS_ALLOWED = " + providers);
-        }
-        // Inform the location manager about the changes
-        mLocationManager.updateProviders();
-    }
-
-    /**
-     * @return string containing a list of providers that have been enabled for use
-     */
-    private String getAllowedProviders() {
-        String allowedProviders =
-            Settings.Secure.getString(getContentResolver(),
-                Settings.Secure.LOCATION_PROVIDERS_ALLOWED);
-        if (allowedProviders == null) {
-            allowedProviders = "";
-        }
-        return allowedProviders;
+        mNetwork.setChecked(Settings.Secure.isLocationProviderEnabled(
+                getContentResolver(), LocationManager.NETWORK_PROVIDER));
+        mGps.setChecked(Settings.Secure.isLocationProviderEnabled(
+                getContentResolver(), LocationManager.GPS_PROVIDER));
     }
 
     private boolean isToggled(Preference pref) {
