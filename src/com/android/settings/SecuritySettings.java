@@ -18,7 +18,9 @@ package com.android.settings;
 
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.location.LocationManager;
@@ -38,7 +40,7 @@ import com.android.internal.widget.LockPatternUtils;
  * Gesture lock pattern settings.
  */
 public class SecuritySettings extends PreferenceActivity
-    implements SharedPreferences.OnSharedPreferenceChangeListener {
+    implements DialogInterface.OnClickListener, DialogInterface.OnDismissListener {
 
     // Lock Settings
     
@@ -63,6 +65,9 @@ public class SecuritySettings extends PreferenceActivity
     private CheckBoxPreference mNetwork;
     private CheckBoxPreference mGps;
     private LocationManager mLocationManager;
+    
+    // To track whether Agree was clicked in the Network location warning dialog
+    private boolean mOkClicked;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -79,7 +84,6 @@ public class SecuritySettings extends PreferenceActivity
 
         mNetwork = (CheckBoxPreference) getPreferenceScreen().findPreference(LOCATION_NETWORK);
         mGps = (CheckBoxPreference) getPreferenceScreen().findPreference(LOCATION_GPS);
-        getPreferenceScreen().getSharedPreferences().registerOnSharedPreferenceChangeListener(this);
         updateToggles();
     }
 
@@ -184,9 +188,44 @@ public class SecuritySettings extends PreferenceActivity
         } else if (preference == mShowPassword) {
             Settings.System.putInt(getContentResolver(), Settings.System.TEXT_SHOW_PASSWORD,
                     mShowPassword.isChecked() ? 1 : 0);
+        } else if (preference == mNetwork) {
+            //normally called on the toggle click
+            if (mNetwork.isChecked()) {
+                // Show a warning to the user that location data will be shared 
+                mOkClicked = false;
+                new AlertDialog.Builder(this).setMessage(
+                        getResources().getString(R.string.location_warning_message))
+                        .setTitle(R.string.location_warning_title)
+                        .setIcon(android.R.drawable.ic_dialog_alert)
+                        .setPositiveButton(R.string.agree, this)
+                        .setNegativeButton(R.string.disagree, this)
+                        .show()
+                        .setOnDismissListener(this);
+            } else {
+                updateProviders();
+            }
+        } else if (preference == mGps) {
+            updateProviders();
         }
-        
+
         return false;
+    }
+
+    public void onClick(DialogInterface dialog, int which) {
+        if (which == DialogInterface.BUTTON_POSITIVE) {
+            updateProviders();
+            mOkClicked = true;
+        } else {
+            // Reset the toggle
+            mNetwork.setChecked(false);
+        }
+    }
+    
+    public void onDismiss(DialogInterface dialog) {
+        // Assuming that onClick gets called first
+        if (!mOkClicked) {
+            mNetwork.setChecked(false);
+        }
     }
 
     /*
@@ -231,12 +270,6 @@ public class SecuritySettings extends PreferenceActivity
             allowedProviders = "";
         }
         return allowedProviders;
-    }
-
-    public void onSharedPreferenceChanged(SharedPreferences preferences, String key) {
-        if (LOCATION_NETWORK.equals(key) || LOCATION_GPS.equals(key)) {
-            updateProviders();
-        }
     }
 
     private boolean isToggled(Preference pref) {
