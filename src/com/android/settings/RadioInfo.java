@@ -619,8 +619,7 @@ public class RadioInfo extends Activity {
     }
 
     private void updateDnsCheckState() {
-        GSMPhone gsmPhone = (GSMPhone) phone;
-        dnsCheckState.setText(gsmPhone.isDnsCheckDisabled() ?
+        dnsCheckState.setText(phone.isDnsCheckDisabled() ?
                 "0.0.0.0 allowed" :"0.0.0.0 not allowed");
     }
     
