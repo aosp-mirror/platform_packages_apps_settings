@@ -212,8 +212,6 @@ public class InstalledAppDetails extends Activity implements View.OnClickListene
         totalSizeStr = appSizeStr = dataSizeStr = mComputingStr;
         if(localLOGV) Log.i(TAG, "Have to compute package sizes");
         mSizeObserver = new PkgSizeObserver();
-        mPm.getPackageSizeInfo(packageName, mSizeObserver);
-
         try {
             mAppInfo = mPm.getApplicationInfo(packageName, 
                     PackageManager.GET_UNINSTALLED_PACKAGES);
@@ -288,6 +286,14 @@ public class InstalledAppDetails extends Activity implements View.OnClickListene
          } else {
              permsView.setVisibility(View.GONE);
          }
+    }
+    
+    @Override
+    public void onStart() {
+        super.onStart();
+        if (mAppInfo != null && mAppInfo.packageName != null) {
+            mPm.getPackageSizeInfo(mAppInfo.packageName, mSizeObserver);
+        }
     }
     
     private void displayErrorDialog(int msgId, final boolean finish, final boolean changed) {
