@@ -16,12 +16,12 @@
 <resources xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
     <string name="device_info_default">"Unbekannt"</string>
-    <string name="turn_on_radio">"Radio einschalten"</string>
-    <string name="turn_off_radio">"Radio ausschalten"</string>
+    <string name="turn_on_radio">"Mobilfunkverbindung aktivieren"</string>
+    <string name="turn_off_radio">"Mobilfunkverbindung deaktivieren"</string>
     <string name="turn_on_qxdm">"QXDM-SD-Protokoll aktivieren"</string>
     <string name="turn_off_qxdm">"QXDM-SD-Protokoll deaktivieren"</string>
     <string name="radioInfo_menu_viewADN">"SIM-Adressbuch anzeigen"</string>
-    <string name="radioInfo_menu_viewFDN">"Feste Rufnummern anzeigen"</string>
+    <string name="radioInfo_menu_viewFDN">"Begrenzte Rufnummern anzeigen"</string>
     <string name="radioInfo_menu_viewSDN">"Servicerufnummern anzeigen"</string>
     <string name="radioInfo_menu_getPDP">"PDP-Liste abrufen"</string>
     <string name="radioInfo_menu_enableData">"Datenverbindung aktivieren"</string>
@@ -31,7 +31,7 @@
     <string name="radioInfo_service_in">"In Betrieb"</string>
     <string name="radioInfo_service_out">"Außer Betrieb"</string>
     <string name="radioInfo_service_emergency">"Nur Notrufe"</string>
-    <string name="radioInfo_service_off">"Radio aus"</string>
+    <string name="radioInfo_service_off">"Mobilfunkverbindung aus"</string>
     <string name="radioInfo_roaming_in">"Roaming"</string>
     <string name="radioInfo_roaming_not">"Kein Roaming"</string>
     <string name="radioInfo_phone_idle">"Inaktiv"</string>
@@ -82,7 +82,7 @@
     <string name="battery_info_health_over_voltage">"Überspannung"</string>
     <string name="battery_info_health_unspecified_failure">"Unbekannter Fehler"</string>
     <string name="bluetooth">"Bluetooth"</string>
-    <string name="bluetooth_visibility">"Erkennbar"</string>
+    <string name="bluetooth_visibility">"Sichtbar"</string>
     <string name="bluetooth_is_discoverable">"Für <xliff:g id="DISCOVERABLE_TIME_PERIOD">%1$s</xliff:g> Sekunden sichtbar..."</string>
     <string name="bluetooth_not_discoverable">"Geräteerkennung deaktivieren"</string>
     <string name="bluetooth_devices">"Bluetooth-Geräte"</string>
@@ -107,6 +107,9 @@
     <string name="date_and_time">"Einstellungen"</string>
     <string name="date_time_12_hour_sample">"1:00"</string>
     <string name="date_time_24_hour_sample">"13:00"</string>
+    <string name="date_time_changeTime_text">"Change time"</string>
+    <!-- no translation found for date_time_changeDate_text (5259762626498028057) -->
+    <skip />
     <string name="choose_timezone">"Zeitzone auswählen"</string>
     <string name="display_preview_label">"Vorschau:"</string>
     <string name="display_font_size_label">"Schriftgröße:"</string>
@@ -144,7 +147,7 @@
     <string name="radio_info_signal_strength_label">"Signalstärke:"</string>
     <string name="radio_info_call_status_label">"Rufstatus:"</string>
     <string name="radio_info_ppp_sent_label">"PPP gesendet:"</string>
-    <string name="radio_info_radio_resets_label">"Radiozurücksetzung:"</string>
+    <string name="radio_info_radio_resets_label">"Verbindungszurücksetzung"</string>
     <string name="radio_info_message_waiting_label">"Nachricht liegt vor:"</string>
     <string name="radio_info_phone_number_label">"Telefonnummer:"</string>
     <string name="radio_info_band_mode_label">"Frequenzbereich auswählen"</string>
@@ -401,7 +404,7 @@
     <string name="system_update_settings_list_item_summary">"Nach Systemaktualisierungen suchen"</string>
     <string name="firmware_version">"Firmware-Version"</string>
     <string name="model_number">"Modellnummer"</string>
-    <string name="baseband_version">"Basisband-Version"</string>
+    <string name="baseband_version">"Baseband-Version"</string>
     <string name="kernel_version">"Kernel-Version"</string>
     <string name="build_number">"Build-Nummer"</string>
     <string name="device_info_not_available">"Nicht verfügbar"</string>
@@ -480,7 +483,7 @@
     <string name="media_format_gesture_prompt">"Bitte zeichnen Sie Ihr Entsperrungsmuster."</string>
     <string name="media_format_gesture_explanation">"Sie müssen Ihr Entsperrungsmuster eingeben, um eine SD-Karten-Formatierung zu bestätigen."</string>
     <string name="call_settings_title">"Anrufeinstellungen"</string>
-    <string name="call_settings_summary">"Mailbox, Anrufweiterleitung, Anklopfen, Anruferkennung einrichten"</string>
+    <string name="call_settings_summary">"Mailbox, Rufweiterleitung, Anklopfen, Anruferkennung einrichten"</string>
     <string name="network_settings_title">"Mobile Netzwerke"</string>
     <string name="network_settings_summary">"Optionen für Roaming, Netzwerke, APNs festlegen"</string>
     <string name="location_title">"Standortquellen"</string>
