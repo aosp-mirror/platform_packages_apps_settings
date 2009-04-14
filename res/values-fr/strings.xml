@@ -16,8 +16,8 @@
 <resources xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
     <string name="device_info_default">"Inconnu"</string>
-    <string name="turn_on_radio">"Allumer la radio"</string>
-    <string name="turn_off_radio">"Éteindre la radio"</string>
+    <string name="turn_on_radio">"Allumer le signal radio"</string>
+    <string name="turn_off_radio">"Éteindre le signal radio"</string>
     <string name="turn_on_qxdm">"Activer le journal SD QXDM"</string>
     <string name="turn_off_qxdm">"Désactiver le journal QXMD SD"</string>
     <string name="radioInfo_menu_viewADN">"Afficher le carnet d\'adresses de la carte SIM"</string>
@@ -31,7 +31,7 @@
     <string name="radioInfo_service_in">"Service en cours"</string>
     <string name="radioInfo_service_out">"Hors-service"</string>
     <string name="radioInfo_service_emergency">"Appels d\'urgence uniquement"</string>
-    <string name="radioInfo_service_off">"Radio désactivée"</string>
+    <string name="radioInfo_service_off">"Signal radio désactivé"</string>
     <string name="radioInfo_roaming_in">"Itinérance"</string>
     <string name="radioInfo_roaming_not">"Sans itinérance"</string>
     <string name="radioInfo_phone_idle">"Inactif"</string>
@@ -69,7 +69,7 @@
     <string name="battery_info_awake_plugged">"Temps en activité lors du rechargement :"</string>
     <string name="battery_info_screen_on">"Écran activé :"</string>
     <string name="battery_info_status_unknown">"Inconnu"</string>
-    <string name="battery_info_status_charging">"Chargement"</string>
+    <string name="battery_info_status_charging">"Batterie en charge"</string>
     <string name="battery_info_status_charging_ac">"(AC)"</string>
     <string name="battery_info_status_charging_usb">"(USB)"</string>
     <string name="battery_info_status_discharging">"Baisse du niveau de charge"</string>
@@ -88,7 +88,7 @@
     <string name="bluetooth_devices">"Appareils Bluetooth"</string>
     <string name="bluetooth_device_name">"Nom de l\'appareil"</string>
     <string name="bluetooth_name_not_set">"Aucun nom n\'a été défini. Utilisation du nom du compte..."</string>
-    <string name="bluetooth_scan_for_devices">"Rechercher d\'appareils"</string>
+    <string name="bluetooth_scan_for_devices">"Recherche d\'appareils"</string>
     <string name="bluetooth_disconnect_blank">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> va être déconnecté."</string>
     <string name="bluetooth_connected">"Connecté"</string>
     <string name="bluetooth_disconnected">"Déconnecté"</string>
@@ -107,10 +107,8 @@
     <string name="date_and_time">"Paramètres d\'heure et de date"</string>
     <string name="date_time_12_hour_sample">"13:00 h"</string>
     <string name="date_time_24_hour_sample">"13:00"</string>
-    <!-- no translation found for date_time_changeTime_text (7037437020000867740) -->
-    <skip />
-    <!-- no translation found for date_time_changeDate_text (5259762626498028057) -->
-    <skip />
+    <string name="date_time_changeTime_text">"Changer l\'heure"</string>
+    <string name="date_time_changeDate_text">"Date"</string>
     <string name="choose_timezone">"Choisir fuseau horaire"</string>
     <string name="display_preview_label">"Aperçu :"</string>
     <string name="display_font_size_label">"Taille de police :"</string>
@@ -137,7 +135,7 @@
     <string name="radio_info_data_attempts_label">"Tentatives :"</string>
     <string name="radio_info_gprs_service_label">"Service GPRS :"</string>
     <string name="radio_info_roaming_label">"Itinérance :"</string>
-    <string name="radio_info_imei_label">"IIEM :"</string>
+    <string name="radio_info_imei_label">"Code IMEI :"</string>
     <string name="radio_info_call_redirect_label">"Redirection des appels :"</string>
     <string name="radio_info_ppp_resets_label">"Nombre de réinitialisations PPP depuis le démarrage :"</string>
     <string name="radio_info_gsm_disconnects_label">"Déconnexions GSM :"</string>
@@ -148,7 +146,7 @@
     <string name="radio_info_signal_strength_label">"Intensité du signal :"</string>
     <string name="radio_info_call_status_label">"État de l\'appel :"</string>
     <string name="radio_info_ppp_sent_label">"PPP envoyés :"</string>
-    <string name="radio_info_radio_resets_label">"Réinitialisations de la radio :"</string>
+    <string name="radio_info_radio_resets_label">"Réinitialisations du signal radio :"</string>
     <string name="radio_info_message_waiting_label">"Message en attente :"</string>
     <string name="radio_info_phone_number_label">"Numéro de téléphone :"</string>
     <string name="radio_info_band_mode_label">"Choisir une bande radio"</string>
@@ -197,7 +195,7 @@
     <string name="airplane_mode_turning_on">"Désactivation des connexions sans fil…"</string>
     <string name="airplane_mode_turning_off">"Activation des connexions sans fil…"</string>
     <string name="radio_controls_title">"Connexions sans fil"</string>
-    <string name="radio_controls_summary">"Gérer le Wi-Fi, le mode Bluetooth, le mode avion et les réseaux mobiles"</string>
+    <string name="radio_controls_summary">"Gérer le Wi-Fi, le mode Bluetooth, le mode Avion et les réseaux mobiles"</string>
     <string name="date_and_time_settings_title">"Date et heure"</string>
     <string name="date_and_time_settings_summary">"Configurer la date, l\'heure, le fuseau horaire et les formats"</string>
     <string name="date_time_auto">"Automatique"</string>
@@ -351,7 +349,7 @@
     <string name="vibrate_summary">"Activer le vibreur pour les appels entrants"</string>
     <string name="notification_sound_title">"Sonnerie de notification"</string>
     <string name="notification_sound_summary">"Définir votre sonnerie de notification par défaut"</string>
-    <string name="incoming_call_volume_title">"Volume de l\'appel entrant"</string>
+    <string name="incoming_call_volume_title">"Volume des appels entrants"</string>
     <string name="notification_volume_title">"Volume des notifications"</string>
     <string name="checkbox_notification_same_as_incoming_call">"Utiliser le volume des appels entrants pour les notifications"</string>
     <string name="notification_sound_dialog_title">"Sélectionner une sonnerie de notification"</string>
@@ -407,11 +405,11 @@
     <string name="model_number">"Numéro du modèle"</string>
     <string name="baseband_version">"Version de bande de base"</string>
     <string name="kernel_version">"Version du noyau"</string>
-    <string name="build_number">"Numéro de version"</string>
+    <string name="build_number">"Numéro de build"</string>
     <string name="device_info_not_available">"Non disponible"</string>
     <string name="device_status_activity_title">"État"</string>
     <string name="device_status">"État"</string>
-    <string name="device_status_summary">"IIEM, numéro de téléphone, signal, etc."</string>
+    <string name="device_status_summary">"Code IMEI, numéro de téléphone, signal, etc."</string>
     <string name="storage_settings_title">"Carte SD et mémoire"</string>
     <string name="storage_settings_summary">"Retirer la carte SD, afficher la mémoire disponible"</string>
     <string name="status_number">"Numéro de téléphone"</string>
@@ -472,8 +470,8 @@
     <string name="master_clear_button_text">"Réinitialiser le téléphone"</string>
     <string name="master_clear_final_desc">"Réinitialiser le téléphone et effacer toutes les données et applications ? Cette action ne peut être inversée."</string>
     <string name="master_clear_final_button_text">"Tout effacer"</string>
-    <string name="master_clear_gesture_prompt">"Saisissez votre motif de déverrouillage"</string>
-    <string name="master_clear_gesture_explanation">"Vous devez dessiner votre motif de déverrouillage pour confirmer la réinitialisation du téléphone."</string>
+    <string name="master_clear_gesture_prompt">"Saisissez votre schéma de déverrouillage"</string>
+    <string name="master_clear_gesture_explanation">"Vous devez dessiner votre schéma de déverrouillage pour confirmer la réinitialisation du téléphone."</string>
     <string name="master_clear_failed">"Les données n\'ont pas été réinitialisées car le service de nettoyage du système n\'est pas disponible."</string>
     <string name="media_format_title">"Formater la carte SD."</string>
     <string name="media_format_summary">"Permet d\'effacer toutes les données de la carte SD"</string>
@@ -484,10 +482,10 @@
     <string name="media_format_gesture_prompt">"Créez votre schéma de déverrouillage"</string>
     <string name="media_format_gesture_explanation">"Vous devez créer votre schéma de déverrouillage pour confirmer le format de la carte SD."</string>
     <string name="call_settings_title">"Paramètres d\'appel"</string>
-    <string name="call_settings_summary">"Configurer mess. vocale, transferts d\'appel, mises en attente, ID d\'appelant"</string>
+    <string name="call_settings_summary">"Configurer mess. vocale, transferts d\'appel, mises en attente, numéro de l\'appelant"</string>
     <string name="network_settings_title">"Réseaux mobiles"</string>
     <string name="network_settings_summary">"Définir les options d\'itinérance, réseaux, noms de points d\'accès"</string>
-    <string name="location_title">"Sources pour Ma position"</string>
+    <string name="location_title">"Mes sources de positionnement"</string>
     <string name="location_network_based">"Utiliser réseaux sans fil"</string>
     <string name="location_networks_disabled">"Afficher position dans les applications (comme Google Maps)"</string>
     <string name="location_neighborhood_level">"Position géographique déterminée par réseaux Wi-Fi et/ou mobile"</string>
@@ -505,40 +503,40 @@
     <string name="copyright_title">"Copyright"</string>
     <string name="license_title">"Licence"</string>
     <string name="terms_title">"Conditions d\'utilisation"</string>
-    <string name="system_tutorial_list_item_title">"Didacticiel"</string>
+    <string name="system_tutorial_list_item_title">"Didacticiel sur le système"</string>
     <string name="system_tutorial_list_item_summary">"Comment utiliser votre téléphone ?"</string>
     <string name="settings_license_activity_title">"Licences open source"</string>
     <string name="settings_license_activity_unavailable">"Un problème est survenu lors du chargement des licences."</string>
     <string name="settings_license_activity_loading">"Chargement..."</string>
-    <string name="lock_settings_title">"Motif de déverrouillage de l\'écran"</string>
-    <string name="lockpattern_change_lock_pattern_label">"Modifier le motif de déverrouillage"</string>
+    <string name="lock_settings_title">"Schéma de déverrouillage de l\'écran"</string>
+    <string name="lockpattern_change_lock_pattern_label">"Modifier le schéma de déverrouillage"</string>
     <string name="lockpattern_need_to_unlock">"Confirmer le motif enregistré"</string>
     <string name="lockpattern_need_to_unlock_wrong">"Désolé. Merci de réessayer :"</string>
-    <string name="lockpattern_recording_intro_header">"Dessiner un motif de déverrouillage :"</string>
+    <string name="lockpattern_recording_intro_header">"Dessiner un schéma de déverrouillage :"</string>
     <string name="lockpattern_recording_intro_footer">"Appuyer sur Menu pour obtenir de l\'aide."</string>
     <string name="lockpattern_recording_inprogress">"Ôtez le doigt lorsque vous avez terminé."</string>
     <string name="lockpattern_recording_incorrect_too_short">"Reliez au moins <xliff:g id="NUMBER">%d</xliff:g> points. Veuillez réessayer :"</string>
     <string name="lockpattern_pattern_entered_header">"Motif enregistré !"</string>
     <string name="lockpattern_need_to_confirm">"Redessinez le motif pour confirmer :"</string>
-    <string name="lockpattern_pattern_confirmed_header">"Votre nouveau motif de déverrouillage :"</string>
+    <string name="lockpattern_pattern_confirmed_header">"Votre nouveau schéma de déverrouillage :"</string>
     <string name="lockpattern_confirm_button_text">"Confirmer"</string>
     <string name="lockpattern_restart_button_text">"Redessiner"</string>
     <string name="lockpattern_retry_button_text">"Réessayer"</string>
     <string name="lockpattern_continue_button_text">"Continuer"</string>
-    <string name="lockpattern_settings_title">"Motif de déverrouillage"</string>
-    <string name="lockpattern_settings_enable_title">"Demander un motif"</string>
+    <string name="lockpattern_settings_title">"Schéma de déverrouillage"</string>
+    <string name="lockpattern_settings_enable_title">"Demander un schéma"</string>
     <string name="lockpattern_settings_enable_summary">"Vous devez dessiner le motif pour déverrouiller l\'écran."</string>
     <string name="lockpattern_settings_enable_visible_pattern_title">"Utiliser un motif visible"</string>
     <string name="lockpattern_settings_enable_tactile_feedback_title">"Commentaires tactiles"</string>
-    <string name="lockpattern_settings_choose_lock_pattern">"Créer un motif de déverrouillage"</string>
-    <string name="lockpattern_settings_change_lock_pattern">"Modifier le motif de déverrouillage"</string>
-    <string name="lockpattern_settings_help_how_to_record">"Comment dessiner un motif de déverrouillage :"</string>
+    <string name="lockpattern_settings_choose_lock_pattern">"Créer un schéma de déverrouillage"</string>
+    <string name="lockpattern_settings_change_lock_pattern">"Modifier le schéma de déverrouillage"</string>
+    <string name="lockpattern_settings_help_how_to_record">"Comment dessiner un schéma de déverrouillage :"</string>
     <string name="lockpattern_too_many_failed_confirmation_attempts_header">"Trop de tentatives échouées !"</string>
     <string name="lockpattern_too_many_failed_confirmation_attempts_footer">"Réessayer dans <xliff:g id="NUMBER">%d</xliff:g> secondes."</string>
     <string name="skip_button_label">"Annuler"</string>
     <string name="next_button_label">"Suivant"</string>
     <string name="lock_title">"Sécurisation de votre téléphone"</string>
-    <string name="lock_intro_message"><font size="17">"Protégez votre téléphone contre toute utilisation non autorisée en créant un motif personnel de déverrouillage de l\'écran."\n<font height="17">\n</font><b>"1"</b>" L\'écran suivant vous présente un exemple de motif. "\n<font height="17">\n</font><b>"2"</b>" Lorsque vous êtes prêt, dessinez votre propre motif de déverrouillage. Essayez différents motifs, mais reliez au moins quatre points."\n<font height="17">\n</font><b></b>"Reproduisez votre motif pour confirmer."\n<font height="17">\n</font><b>"Pour commencer, sélectionnez \"Suivant\"."</b>\n<font height="3">\n</font>"Si vous ne souhaitez pas activer cette protection, sélectionnez \"Annuler\"."</font></string>
+    <string name="lock_intro_message"><font size="17">"Protégez votre téléphone contre toute utilisation non autorisée en créant un schéma personnel de déverrouillage de l\'écran."\n<font height="17">\n</font><b>"1"</b>" L\'écran suivant vous présente un exemple de schéma "\n<font height="17">\n</font><b>"2"</b>" Lorsque vous êtes prêt, dessinez votre propre schéma de déverrouillage. Essayez différents schémas, mais reliez au moins quatre points."\n<font height="17">\n</font><b></b>"Reproduisez votre schéma pour confirmer."\n<font height="17">\n</font><b>"Pour commencer, sélectionnez \"Suivant\"."</b>\n<font height="3">\n</font>"Si vous ne souhaitez pas activer cette protection, sélectionnez \"Annuler\"."</font></string>
     <string name="lock_example_title">"Exemple de motif"</string>
     <string name="lock_example_message">"Reliez au moins quatre points."\n" "\n"Sélectionnez \"Suivant\" lorsque vous voulez créer votre propre motif."</string>
     <string name="manageapplications_settings_title">"Gérer les applications"</string>
@@ -596,7 +594,7 @@
     <string name="phone_language_summary">"Sélectionner la langue et le pays"</string>
     <string name="auto_replace">"Remplacement auto"</string>
     <string name="auto_replace_summary">"Corriger les mots mal saisis"</string>
-    <string name="auto_caps">"Majuscules automatiques"</string>
+    <string name="auto_caps">"Majuscules auto"</string>
     <string name="auto_caps_summary">"Mettre une majuscule en début de phrase"</string>
     <string name="auto_punctuate">"Ponctuation automatique"</string>
     <string name="hardkeyboard_category">"Paramètres du clavier physique"</string>
