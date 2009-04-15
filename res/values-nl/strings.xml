@@ -207,7 +207,7 @@
     <string name="zone_list_menu_sort_alphabetically">"Alfabetisch sorteren"</string>
     <string name="zone_list_menu_sort_by_timezone">"Sorteren op tijdzone"</string>
     <string name="security_settings_title">"Beveiliging en locatie"</string>
-    <string name="security_settings_summary">"Mijn locatie\' instellen, scherm ontgrendelen en SIM-kaart blokkeren"</string>
+    <string name="security_settings_summary">"Mijn locatie instellen, scherm ontgrendelen en SIM-kaart vergrendelen"</string>
     <string name="security_passwords_title">"Wachtwoorden"</string>
     <string name="bluetooth_quick_toggle_title">"Bluetooth"</string>
     <string name="bluetooth_quick_toggle_summary">"Bluetooth inschakelen"</string>
@@ -338,8 +338,7 @@
     <string name="sound_and_display_settings_summary">"Beltonen, meldingen, schermhelderheid instellen"</string>
     <string name="silent_mode_title">"Stille modus"</string>
     <string name="silent_mode_summary">"Alle geluiden worden uitgeschakeld, behalve media- en alarmtonen"</string>
-    <!-- no translation found for silent_mode_incl_alarm_summary (2088830834182228458) -->
-    <skip />
+    <string name="silent_mode_incl_alarm_summary">"Alle geluiden, behalve media, worden uitgeschakeld"</string>
     <string name="ringtone_title">"Beltoon telefoon"</string>
     <string name="ringtone_summary">"Standaardbeltoon voor inkomende oproepen instellen"</string>
     <string name="ring_volume_title">"Belvolume"</string>
@@ -376,15 +375,15 @@
     <string name="brightness_summary">"Helderheid van het scherm aanpassen"</string>
     <string name="screen_timeout">"Time-out scherm"</string>
     <string name="screen_timeout_summary">"De vertraging voor het automatisch uitschakelen van het scherm aanpassen"</string>
-    <string name="sim_lock_settings">"Instellingen SIM-kaartblokkering"</string>
-    <string name="sim_lock_settings_category">"SIM-kaartblokkering instellen"</string>
-    <string name="sim_lock_settings_title">"SIM-kaartblokkering"</string>
-    <string name="sim_pin_toggle">"SIM-kaart blokkeren"</string>
+    <string name="sim_lock_settings">"Instellingen SIM-kaartvergrendeling"</string>
+    <string name="sim_lock_settings_category">"SIM-kaartvergrendeling instellen"</string>
+    <string name="sim_lock_settings_title">"SIM-kaartvergrendeling"</string>
+    <string name="sim_pin_toggle">"SIM-kaart vergrendelen"</string>
     <string name="sim_lock_on">"PIN-code vereist voor gebruik van telefoon"</string>
     <string name="sim_lock_off">"PIN-code vereist voor gebruik van telefoon"</string>
     <string name="sim_pin_change">"SIM PIN-code wijzigen"</string>
     <string name="sim_enter_pin">"SIM PIN-code"</string>
-    <string name="sim_enable_sim_lock">"SIM-kaart blokkeren"</string>
+    <string name="sim_enable_sim_lock">"SIM-kaart vergrendelen"</string>
     <string name="sim_disable_sim_lock">"SIM-kaart ontgrendelen"</string>
     <string name="sim_enter_old">"Oude SIM PIN-code"</string>
     <string name="sim_enter_new">"Nieuwe SIM PIN-code"</string>
@@ -394,7 +393,7 @@
     <string name="sim_pins_dont_match">"PIN-codes komen niet overeen!"</string>
     <string name="sim_change_failed">"Kan PIN-code niet wijzigen."\n"PIN-code mogelijk onjuist."</string>
     <string name="sim_change_succeeded">"SIM PIN-code gewijzigd"</string>
-    <string name="sim_lock_failed">"Kan status van SIM-kaartblokkering niet wijzigen."\n"PIN-code mogelijk onjuist."</string>
+    <string name="sim_lock_failed">"Kan status van SIM-kaartvergrendeling niet wijzigen."\n"PIN-code mogelijk onjuist."</string>
     <string name="sim_enter_ok">"OK"</string>
     <string name="sim_enter_cancel">"Annuleren"</string>
     <string name="device_info_settings">"Telefoonstatus"</string>
@@ -478,10 +477,10 @@
     <string name="media_format_button_text">"SD-kaart formatteren"</string>
     <string name="media_format_final_desc">"Wilt u de SD-kaart formatteren en al uw mediabestanden wissen? Deze actie kan niet ongedaan worden gemaakt."</string>
     <string name="media_format_final_button_text">"Alles wissen"</string>
-    <string name="media_format_gesture_prompt">"Teken uw deblokkeringspatroon"</string>
-    <string name="media_format_gesture_explanation">"U moet uw deblokkeringspatroon tekenen om het formatteren van een SD-kaart te bevestigen."</string>
+    <string name="media_format_gesture_prompt">"Teken uw ontgrendelingspatroon"</string>
+    <string name="media_format_gesture_explanation">"U moet uw ontgrendelingspatroon tekenen om het formatteren van een SD-kaart te bevestigen."</string>
     <string name="call_settings_title">"Oproepinstellingen"</string>
-    <string name="call_settings_summary">"Voicemail, oproepen doorschakelen, wisselgesprek, beller-id instellen."</string>
+    <string name="call_settings_summary">"Voicemail, oproepen doorschakelen, wisselgesprek, beller-id instellen"</string>
     <string name="network_settings_title">"Mobiele netwerken"</string>
     <string name="network_settings_summary">"Opties voor roaming, netwerken, APN\'s instellen"</string>
     <string name="location_title">"Mijn locatiebronnen"</string>
@@ -489,8 +488,12 @@
     <string name="location_networks_disabled">"Locatie in toepassingen (zoals Maps) bekijken via draadloze netwerken"</string>
     <string name="location_neighborhood_level">"Locatie bepaald door Wi-Fi en/of mobiele netwerken"</string>
     <string name="location_gps">"GPS-satellieten inschakelen"</string>
-    <string name="location_street_level">"Bij locatie bepalen nauwkeurig tot op straatniveau (deselecteren om acculading te sparen)"</string>
-    <string name="location_gps_disabled">"Locatie bepalen tot op straatniveau (meer stroom nodig en weergave van lucht)"</string>
+    <string name="location_street_level">"Locatie tot op straatniveau (uit om acculading te sparen)"</string>
+    <string name="location_gps_disabled">"Locatie bepalen tot op straatniveau (meer stroom nodig en luchtweergave)"</string>
+    <string name="location_warning_title">"Locatietoestemming"</string>
+    <string name="location_warning_message">"Toestaan dat de locatieservice van Google anonieme, getotaliseerde locatiegegevens verzameld. De gegevens worden verzameld, ongeacht of er toepassingen actief zijn."</string>
+    <string name="agree">"Akkoord"</string>
+    <string name="disagree">"Niet akkoord"</string>
     <string name="about_settings">"Over de telefoon"</string>
     <string name="about_settings_summary">"Juridische info, telefoonstatus, softwareversie weergeven"</string>
     <string name="legal_information">"Juridische informatie"</string>
@@ -498,6 +501,8 @@
     <string name="copyright_title">"Auteursrecht"</string>
     <string name="license_title">"Licentie"</string>
     <string name="terms_title">"Algemene voorwaarden"</string>
+    <string name="system_tutorial_list_item_title">"Systeemzelfstudie"</string>
+    <string name="system_tutorial_list_item_summary">"Meer informatie over het gebruik van uw telefoon"</string>
     <string name="settings_license_activity_title">"Open-sourcelicenties"</string>
     <string name="settings_license_activity_unavailable">"Er is een probleem bij het laden van de licenties."</string>
     <string name="settings_license_activity_loading">"Laden..."</string>
@@ -516,7 +521,7 @@
     <string name="lockpattern_restart_button_text">"Opnieuw tekenen"</string>
     <string name="lockpattern_retry_button_text">"Opnieuw proberen"</string>
     <string name="lockpattern_continue_button_text">"Doorgaan"</string>
-    <string name="lockpattern_settings_title">"Deblokkeringspatroon"</string>
+    <string name="lockpattern_settings_title">"Ontgrendelingspatroon"</string>
     <string name="lockpattern_settings_enable_title">"Patroon vereist"</string>
     <string name="lockpattern_settings_enable_summary">"U moet een patroon tekenen om het scherm te ontgrendelen"</string>
     <string name="lockpattern_settings_enable_visible_pattern_title">"Zichtbaar patroon gebruiken"</string>
@@ -591,14 +596,13 @@
     <string name="auto_caps_summary">"Eerste letters in zinnen met hoofdletter"</string>
     <string name="auto_punctuate">"Automatische interpunctie"</string>
     <string name="hardkeyboard_category">"Instellingen voor vast toetsenbord"</string>
-    <string name="auto_punctuate_summary">"Druk twee keer op de spatiebalk om \'.\' in te voegen"</string>
+    <string name="auto_punctuate_summary">"Druk twee keer op de spatiebalk om een punt (.) in te voegen"</string>
     <string name="show_password">"Zichtbare wachtwoorden"</string>
     <string name="show_password_summary">"Wachtwoord weergeven tijdens het typen"</string>
-    <!-- no translation found for ime_security_warning (3458652708716006477) -->
-    <skip />
+    <string name="ime_security_warning">"Deze invoermethode verzamelt mogelijk alle tekst die u typt, inclusief persoonlijke gegevens zoals wachtwoorden en creditcardnummers. De methode is afkomstig uit de toepassing <xliff:g id="IME_APPLICATION_NAME">%1$s</xliff:g>. Deze invoermethode inschakelen?"</string>
     <string name="user_dict_settings_titlebar">"Gebruikerswoordenboek"</string>
     <string name="user_dict_settings_title">"Gebruikerswoordenboek"</string>
-    <string name="user_dict_settings_summary">"Woorden toevoegen aan en verwijderen uit gebruikerswoordenboek"</string>
+    <string name="user_dict_settings_summary">"Woorden toevoegen en verwijderen"</string>
     <string name="user_dict_settings_add_menu_title">"Toevoegen"</string>
     <string name="user_dict_settings_add_dialog_title">"Toevoegen aan woordenboek"</string>
     <string name="user_dict_settings_edit_dialog_title">"Woord bewerken"</string>

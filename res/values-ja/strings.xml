@@ -204,8 +204,8 @@
     <string name="date_time_set_timezone">"タイムゾーンの選択"</string>
     <string name="date_time_set_date">"日付設定"</string>
     <string name="date_time_date_format">"日付形式"</string>
-    <string name="zone_list_menu_sort_alphabetically">"アルファベット順に並べ替え"</string>
-    <string name="zone_list_menu_sort_by_timezone">"タイムゾーン順に並べ替え"</string>
+    <string name="zone_list_menu_sort_alphabetically">"アルファベット順"</string>
+    <string name="zone_list_menu_sort_by_timezone">"タイムゾーン順"</string>
     <string name="security_settings_title">"セキュリティ &amp; 位置情報"</string>
     <string name="security_settings_summary">"現在地情報、画面ロック、SIMカードロック"</string>
     <string name="security_passwords_title">"パスワード"</string>
@@ -338,8 +338,7 @@
     <string name="sound_and_display_settings_summary">"着信音、操作音、画面の明るさなど"</string>
     <string name="silent_mode_title">"マナーモード"</string>
     <string name="silent_mode_summary">"音楽、動画メディア、アラーム以外は消音"</string>
-    <!-- no translation found for silent_mode_incl_alarm_summary (2088830834182228458) -->
-    <skip />
+    <string name="silent_mode_incl_alarm_summary">"音楽と動画メディア以外は消音"</string>
     <string name="ringtone_title">"着信音"</string>
     <string name="ringtone_summary">"端末の基本着信音を選択"</string>
     <string name="ring_volume_title">"着信音量"</string>
@@ -375,7 +374,7 @@
     <string name="brightness">"画面の明るさ"</string>
     <string name="brightness_summary">"画面の明るさを調整する"</string>
     <string name="screen_timeout">"バックライト消灯"</string>
-    <string name="screen_timeout_summary">"画面のバックライトを自動消灯するまでの時間"</string>
+    <string name="screen_timeout_summary">"画面バックライトを自動消灯するまでの時間"</string>
     <string name="sim_lock_settings">"SIMカードロック設定"</string>
     <string name="sim_lock_settings_category">"SIMカードロック設定"</string>
     <string name="sim_lock_settings_title">"SIMカードロック"</string>
@@ -481,7 +480,7 @@
     <string name="media_format_gesture_prompt">"ロック解除パターンを入力してください"</string>
     <string name="media_format_gesture_explanation">"ロック解除パターンを入力してSDカードのフォーマット実行を確認する必要があります。"</string>
     <string name="call_settings_title">"通話設定"</string>
-    <string name="call_settings_summary">"ボイスメール、電話転送、発信者番号などの設定"</string>
+    <string name="call_settings_summary">"ボイスメール、着信転送、発信者番号など"</string>
     <string name="network_settings_title">"モバイルネットワーク"</string>
     <string name="network_settings_summary">"ローミング、ネットワーク、APN設定"</string>
     <string name="location_title">"位置情報の検出"</string>
@@ -491,6 +490,10 @@
     <string name="location_gps">"GPS機能をONにする"</string>
     <string name="location_street_level">"高精度測位（電池の消費を節約する場合はOFFにしてください）"</string>
     <string name="location_gps_disabled">"高精度測位（電池消費増、電波が良好な場所で使用）"</string>
+    <string name="location_warning_title">"位置情報についての同意"</string>
+    <string name="location_warning_message">"Googleの位置情報サービスによる匿名化された位置データの収集および集計を許可します。データ収集はアプリケーション起動の有無にかかわらず行われます。"</string>
+    <string name="agree">"同意する"</string>
+    <string name="disagree">"同意しない"</string>
     <string name="about_settings">"端末情報"</string>
     <string name="about_settings_summary">"端末情報、規約、バージョン情報"</string>
     <string name="legal_information">"法的情報"</string>
@@ -498,10 +501,8 @@
     <string name="copyright_title">"著作権"</string>
     <string name="license_title">"ライセンス"</string>
     <string name="terms_title">"利用規約"</string>
-    <!-- no translation found for system_tutorial_list_item_title (4315834755909579018) -->
-    <skip />
-    <!-- no translation found for system_tutorial_list_item_summary (3861815254521030201) -->
-    <skip />
+    <string name="system_tutorial_list_item_title">"システムチュートリアル"</string>
+    <string name="system_tutorial_list_item_summary">"携帯電話の使用方法"</string>
     <string name="settings_license_activity_title">"オープンソースライセンス"</string>
     <string name="settings_license_activity_unavailable">"ライセンスの読み込み中に問題が発生しました。"</string>
     <string name="settings_license_activity_loading">"読み込み中..."</string>
@@ -563,7 +564,7 @@
     <string name="clear_activities">"設定を消去"</string>
     <string name="unknown">"不明"</string>
     <string name="sort_order_alpha">"並べ替え"</string>
-    <string name="sort_order_size">"サイズ順に並べ替え"</string>
+    <string name="sort_order_size">"サイズ順"</string>
     <string name="manage_space_text">"容量を管理"</string>
     <string name="filter">"フィルタ"</string>
     <string name="filter_dlg_title">"フィルタオプションを選択"</string>
@@ -598,8 +599,7 @@
     <string name="auto_punctuate_summary">"英語: Spaceキー2回でピリオド(.)を挿入"</string>
     <string name="show_password">"パスワードを表示"</string>
     <string name="show_password_summary">"入力時にパスワードを表示する"</string>
-    <!-- no translation found for ime_security_warning (3458652708716006477) -->
-    <skip />
+    <string name="ime_security_warning">"この入力方法では入力したすべてのテキストの収集を許可します。収集されるテキストには個人情報データやクレジットカード番号などが含まれます。これはアプリケーション<xliff:g id="IME_APPLICATION_NAME">%1$s</xliff:g>によるものです。この入力方法を有効にしますか？"</string>
     <string name="user_dict_settings_titlebar">"ユーザー辞書"</string>
     <string name="user_dict_settings_title">"ユーザー辞書"</string>
     <string name="user_dict_settings_summary">"ユーザー辞書への語句の追加と削除"</string>

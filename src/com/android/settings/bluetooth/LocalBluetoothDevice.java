@@ -575,8 +575,9 @@ public class LocalBluetoothDevice implements Comparable<LocalBluetoothDevice> {
      */
     private void fetchBtClass() {
         mBtClass = mLocalManager.getBluetoothManager().getRemoteClass(mAddress);
-        mProfiles.clear();
-        LocalBluetoothProfileManager.fill(mBtClass, mProfiles);
+        if (mBtClass != BluetoothClass.ERROR) {
+            LocalBluetoothProfileManager.fill(mBtClass, mProfiles);
+        }
     }
 
     /**

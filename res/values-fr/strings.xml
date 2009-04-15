@@ -107,6 +107,10 @@
     <string name="date_and_time">"Paramètres d\'heure et de date"</string>
     <string name="date_time_12_hour_sample">"13:00 h"</string>
     <string name="date_time_24_hour_sample">"13:00"</string>
+    <!-- no translation found for date_time_changeTime_text (7037437020000867740) -->
+    <skip />
+    <!-- no translation found for date_time_changeDate_text (5259762626498028057) -->
+    <skip />
     <string name="choose_timezone">"Choisir fuseau horaire"</string>
     <string name="display_preview_label">"Aperçu :"</string>
     <string name="display_font_size_label">"Taille de police :"</string>
@@ -198,10 +202,10 @@
     <string name="date_and_time_settings_summary">"Configurer la date, l\'heure, le fuseau horaire et les formats"</string>
     <string name="date_time_auto">"Automatique"</string>
     <string name="date_time_auto_summaryOn">"Utiliser les valeurs du réseau"</string>
-    <string name="date_time_auto_summaryOff">"Utiliser les valeurs fournies par le réseau"</string>
+    <string name="date_time_auto_summaryOff">"Utiliser les valeurs du réseau"</string>
     <string name="date_time_24hour">"Utiliser format sur 24 h"</string>
     <string name="date_time_set_time">"Définir l\'heure"</string>
-    <string name="date_time_set_timezone">"Choisir un fuseau horaire"</string>
+    <string name="date_time_set_timezone">"Définir fuseau horaire"</string>
     <string name="date_time_set_date">"Définir la date"</string>
     <string name="date_time_date_format">"Sélectionner format de date"</string>
     <string name="zone_list_menu_sort_alphabetically">"Trier par ordre alphabétique"</string>
@@ -335,11 +339,10 @@
     <string name="status_failed">"Échec"</string>
     <string name="sound_and_display_settings">"Sons et affichage"</string>
     <string name="sound_settings">"Paramètres sonores"</string>
-    <string name="sound_and_display_settings_summary">"Configurer les sonneries, les notifications et la luminosité de l\'écran"</string>
+    <string name="sound_and_display_settings_summary">"Configurer les sonneries, les notifications et la luminosité"</string>
     <string name="silent_mode_title">"Mode silencieux"</string>
     <string name="silent_mode_summary">"Aucun son sauf pour le multimédia et le réveil"</string>
-    <!-- no translation found for silent_mode_incl_alarm_summary (2088830834182228458) -->
-    <skip />
+    <string name="silent_mode_incl_alarm_summary">"Toutes les sonneries seront définies sur Silencieux, sauf les fichiers multimédia."</string>
     <string name="ringtone_title">"Sonnerie du téléphone"</string>
     <string name="ringtone_summary">"Configurer la sonnerie par défaut pour les appels entrants"</string>
     <string name="ring_volume_title">"Volume de la sonnerie"</string>
@@ -358,19 +361,19 @@
     <string name="dtmf_tone_enable_summary_on">"Activer la tonalité des touches du clavier"</string>
     <string name="dtmf_tone_enable_summary_off">"Activer la tonalité des touches du clavier"</string>
     <string name="sound_effects_enable_title">"Sélections audibles"</string>
-    <string name="sound_effects_enable_summary_on">"Lire les sons lors des sélections à l\'écran"</string>
+    <string name="sound_effects_enable_summary_on">"Jouer un son lors des sélections à l\'écran"</string>
     <string name="sound_effects_enable_summary_off">"Jouer un son lors des sélections à l\'écran"</string>
-    <string name="play_media_notification_sounds_enable_title">"Notifications de la carte SD"</string>
+    <string name="play_media_notification_sounds_enable_title">"Notifications carte SD"</string>
     <string name="play_media_notification_sounds_enable_summary_on">"Désactiver les notifications sonores de la carte SD"</string>
     <string name="play_media_notification_sounds_enable_summary_off">"Activer les notifications sonores de la carte SD"</string>
-    <string name="sync_settings">"Synchronisation des données"</string>
+    <string name="sync_settings">"Synchro. des données"</string>
     <string name="sync_settings_summary">"Sélectionner les applications à synchroniser"</string>
-    <string name="display_settings">"Afficher les paramètres"</string>
+    <string name="display_settings">"Paramètres d\'affichage"</string>
     <string name="animations_title">"Animation"</string>
-    <string name="animations_summary_on">"Afficher l\'animation lors de l\'ouverture et de la fermeture des fenêtres"</string>
-    <string name="animations_summary_off">"Afficher l\'animation lors de l\'ouverture et de la fermeture des fenêtres"</string>
+    <string name="animations_summary_on">"Animation lors de l\'ouverture et de la fermeture des fenêtres"</string>
+    <string name="animations_summary_off">"Animation lors de l\'ouverture et de la fermeture des fenêtres"</string>
     <string name="accelerometer_title">"Orientation"</string>
-    <string name="accelerometer_summary_on">"Changer automatiquement d\'orientation lors de la rotation du téléphone"</string>
+    <string name="accelerometer_summary_on">"Changer automatiquement d\'orientation lors de la rotation"</string>
     <string name="accelerometer_summary_off">"Changer automatiquement d\'orientation lors de la rotation du téléphone"</string>
     <string name="brightness">"Luminosité"</string>
     <string name="brightness_summary">"Régler la luminosité de l\'écran"</string>
@@ -486,11 +489,15 @@
     <string name="network_settings_summary">"Définir les options d\'itinérance, réseaux, noms de points d\'accès"</string>
     <string name="location_title">"Sources pour Ma position"</string>
     <string name="location_network_based">"Utiliser réseaux sans fil"</string>
-    <string name="location_networks_disabled">"Afficher la position géographique dans les applications (comme Google Maps) lors de l\'utilisation de réseaux sans fil"</string>
+    <string name="location_networks_disabled">"Afficher position dans les applications (comme Google Maps)"</string>
     <string name="location_neighborhood_level">"Position géographique déterminée par réseaux Wi-Fi et/ou mobile"</string>
     <string name="location_gps">"Activer les satellites GPS"</string>
     <string name="location_street_level">"Localisation précise au niveau de la rue lors du positionnement géographique (désélectionner pour économiser la batterie)"</string>
     <string name="location_gps_disabled">"Localiser au niveau rue (requiert + de batterie et une vue dégagée)"</string>
+    <string name="location_warning_title">"Votre lieu va être enregistré."</string>
+    <string name="location_warning_message">"Autoriser le service de positionnement géographique de Google à collecter des données de lieu ne permettant pas de vous identifier personnellement. Les données seront collectées, quelles que soient les applications activées."</string>
+    <string name="agree">"Accepter"</string>
+    <string name="disagree">"Refuser"</string>
     <string name="about_settings">"À propos du téléphone"</string>
     <string name="about_settings_summary">"Informations légales, état du téléphone et version du logiciel"</string>
     <string name="legal_information">"Informations légales"</string>
@@ -498,7 +505,9 @@
     <string name="copyright_title">"Copyright"</string>
     <string name="license_title">"Licence"</string>
     <string name="terms_title">"Conditions d\'utilisation"</string>
-    <string name="settings_license_activity_title">"Ouvrir licences source"</string>
+    <string name="system_tutorial_list_item_title">"Didacticiel"</string>
+    <string name="system_tutorial_list_item_summary">"Comment utiliser votre téléphone ?"</string>
+    <string name="settings_license_activity_title">"Licences open source"</string>
     <string name="settings_license_activity_unavailable">"Un problème est survenu lors du chargement des licences."</string>
     <string name="settings_license_activity_loading">"Chargement..."</string>
     <string name="lock_settings_title">"Motif de déverrouillage de l\'écran"</string>
@@ -536,7 +545,7 @@
     <string name="manageapplications_settings_summary">"Gérer et supprimer les applications installées"</string>
     <string name="applications_settings">"Applications"</string>
     <string name="applications_settings_summary">"Gérer les applications, configurer des raccourcis de lancement rapide"</string>
-    <string name="applications_settings_header">"Paramètres de l\'application"</string>
+    <string name="applications_settings_header">"Paramètres des applications"</string>
     <string name="install_applications">"Sources inconnues"</string>
     <string name="install_unknown_applications">"Autoriser l\'installation d\'applications ne provenant pas d\'Android Market"</string>
     <string name="install_all_warning">"Votre téléphone et vos données personnelles sont très vulnérables face à des applications provenant de sources inconnues. Vous acceptez d\'être le seul responsable de tout dommage causé à votre téléphone ou de toute perte de données pouvant découler de l\'utilisation de telles applications."</string>
@@ -584,18 +593,17 @@
     <string name="language_category">"Paramètres régionaux"</string>
     <string name="text_category">"Paramètres du texte"</string>
     <string name="phone_language">"Langue et région"</string>
-    <string name="phone_language_summary">"Sélectionner une langue et un pays"</string>
+    <string name="phone_language_summary">"Sélectionner la langue et le pays"</string>
     <string name="auto_replace">"Remplacement auto"</string>
     <string name="auto_replace_summary">"Corriger les mots mal saisis"</string>
-    <string name="auto_caps">"Majuscule auto"</string>
+    <string name="auto_caps">"Majuscules automatiques"</string>
     <string name="auto_caps_summary">"Mettre une majuscule en début de phrase"</string>
-    <string name="auto_punctuate">"Ponctuation auto"</string>
+    <string name="auto_punctuate">"Ponctuation automatique"</string>
     <string name="hardkeyboard_category">"Paramètres du clavier physique"</string>
     <string name="auto_punctuate_summary">"Appuyez deux fois sur la touche Espace pour insérer \".\""</string>
     <string name="show_password">"Mots de passe visibles"</string>
     <string name="show_password_summary">"Afficher le mot de passe lors de la saisie"</string>
-    <!-- no translation found for ime_security_warning (3458652708716006477) -->
-    <skip />
+    <string name="ime_security_warning">"Ce mode de saisie pourrait collecter le texte que vous saisissez, y compris vos données personnelles telles que les mots de passe et les numéros de carte de crédit. Ce mode est propre à l\'application <xliff:g id="IME_APPLICATION_NAME">%1$s</xliff:g>. Voulez-vous vraiment activer ce mode de saisie ?"</string>
     <string name="user_dict_settings_titlebar">"Dictionnaire personnel"</string>
     <string name="user_dict_settings_title">"Dictionnaire personnel"</string>
     <string name="user_dict_settings_summary">"Ajouter et retirer des mots du dictionnaire personnel"</string>
@@ -632,8 +640,8 @@
     <string name="enable_adb_summary">"Mode débogage lorsqu\'un câble USB est connecté"</string>
     <string name="keep_screen_on">"Rester activé"</string>
     <string name="keep_screen_on_summary">"L\'écran ne se met jamais en veille lors du chargement"</string>
-    <string name="allow_mock_location">"Autoriser les positions géographiques fictives"</string>
-    <string name="allow_mock_location_summary">"Positions fictives"</string>
+    <string name="allow_mock_location">"Positions fictives"</string>
+    <string name="allow_mock_location_summary">"Autoriser les positions fictives"</string>
     <string name="gadget_picker_title">"Choisir un gadget"</string>
     <string name="widget_picker_title">"Choisir un widget"</string>
     <string name="battery_history_details_for">"Détails de l\'UID %d"</string>
