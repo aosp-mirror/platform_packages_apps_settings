@@ -607,8 +607,8 @@ public class BatteryHistory extends Activity implements OnClickListener, OnItemS
                     Timer timer = se.getSensorTime();
                     if (timer != null) {
                         // Convert from microseconds to milliseconds with rounding
-                        long totalTime = (timer.getTotalTime(uSecNow, mWhich) + 500) / 1000;
-                        int count = timer.getCount(mWhich);
+                        long totalTime = (timer.getTotalTimeLocked(uSecNow, mWhich) + 500) / 1000;
+                        int count = timer.getCountLocked(mWhich);
                         if (handle == BatteryStats.Uid.Sensor.GPS) {
                             timeGps += totalTime;
                             countGps += count;
@@ -655,8 +655,8 @@ public class BatteryHistory extends Activity implements OnClickListener, OnItemS
                     Timer timer = wl.getWakeTime(BatteryStats.WAKE_TYPE_PARTIAL);
                     if (timer != null) {
                         // Convert from microseconds to milliseconds with rounding
-                        time += (timer.getTotalTime(uSecNow, mWhich) + 500) / 1000;
-                        count += timer.getCount(mWhich);
+                        time += (timer.getTotalTimeLocked(uSecNow, mWhich) + 500) / 1000;
+                        count += timer.getCountLocked(mWhich);
                     }
                 }
             }
