@@ -53,6 +53,14 @@ public class ApplicationSettings extends PreferenceActivity implements
     }
 
     @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        if (mWarnInstallApps != null) {
+            mWarnInstallApps.dismiss();
+        }
+    }
+
+    @Override
     public boolean onPreferenceTreeClick(PreferenceScreen preferenceScreen, Preference preference) {
         if (preference == mToggleAppInstallation) {
             if (mToggleAppInstallation.isChecked()) {
