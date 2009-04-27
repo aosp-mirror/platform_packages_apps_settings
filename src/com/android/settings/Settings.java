@@ -26,6 +26,7 @@ public class Settings extends PreferenceActivity {
     private static final String KEY_PARENT = "parent";
     private static final String KEY_CALL_SETTINGS = "call_settings";
     private static final String KEY_SYNC_SETTINGS = "sync_settings";
+    private static final String KEY_SEARCH_SETTINGS = "search_settings";
     
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,6 +36,7 @@ public class Settings extends PreferenceActivity {
         
         PreferenceGroup parent = (PreferenceGroup) findPreference(KEY_PARENT);
         Utils.updatePreferenceToSpecificActivityOrRemove(this, parent, KEY_SYNC_SETTINGS, 0);
+        Utils.updatePreferenceToSpecificActivityOrRemove(this, parent, KEY_SEARCH_SETTINGS, 0);
     }
     
     @Override

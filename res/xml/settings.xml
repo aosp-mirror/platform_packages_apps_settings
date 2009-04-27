@@ -115,6 +115,22 @@
                 android:targetClass="com.android.settings.LanguageSettings" />
         </PreferenceScreen>
 
+
+        <!-- Search. 
+             The settings activity will ensure that this is resolved to an
+             activity on the system image, otherwise it will remove this
+             preference.
+             The intent action is the same as
+             android.app.SearchManager.INTENT_ACTION_SEARCH_SETTINGS.
+             -->
+
+        <PreferenceScreen
+            android:title="@string/search_settings"
+            android:summary="@string/search_settings_summary"
+            android:key="search_settings">
+            <intent android:action="android.search.action.SEARCH_SETTINGS" />
+        </PreferenceScreen>
+
         <!-- About Device -->
  
         <PreferenceScreen
