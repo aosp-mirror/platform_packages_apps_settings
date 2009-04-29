@@ -270,7 +270,7 @@
     <string name="wifi_starting">"開啟中..."</string>
     <string name="wifi_stopping">"關閉中..."</string>
     <string name="wifi_error">"錯誤"</string>
-    <string name="error_starting">"無法開始 Wi-Fi"</string>
+    <string name="error_starting">"無法啟動 Wi-Fi"</string>
     <string name="error_stopping">"無法停止 Wi-Fi"</string>
     <string name="error_scanning">"無法掃描網路"</string>
     <string name="error_connecting">"無法連線到此網路"</string>
@@ -327,7 +327,7 @@
     <string name="fragment_status_failed">"失敗"</string>
     <string name="status_scanning">"掃描中..."</string>
     <string name="status_connecting">"連線中..."</string>
-    <string name="status_authenticating">"認證中..."</string>
+    <string name="status_authenticating">"驗證中..."</string>
     <string name="status_obtaining_ip">"取得位址中..."</string>
     <string name="status_connected">"已連線"</string>
     <string name="status_disconnecting">"連線中斷..."</string>
@@ -343,8 +343,8 @@
     <string name="ringtone_summary">"設定預設來電鈴聲"</string>
     <string name="ring_volume_title">"鈴聲音量"</string>
     <string name="ring_volume_summary">"設定來電和通知的音量"</string>
-    <string name="vibrate_title">"手機震動"</string>
-    <string name="vibrate_summary">"來電震動"</string>
+    <string name="vibrate_title">"手機振動"</string>
+    <string name="vibrate_summary">"來電振動"</string>
     <string name="notification_sound_title">"通知鈴聲"</string>
     <string name="notification_sound_summary">"設定預設通知鈴聲"</string>
     <string name="incoming_call_volume_title">"來電音量"</string>
@@ -356,13 +356,13 @@
     <string name="dtmf_tone_enable_title">"觸碰音效"</string>
     <string name="dtmf_tone_enable_summary_on">"使用撥號面板時播放按鍵音效"</string>
     <string name="dtmf_tone_enable_summary_off">"使用撥號面板時播放按鍵音效"</string>
-    <string name="sound_effects_enable_title">"可聽見選項"</string>
+    <string name="sound_effects_enable_title">"有聲選項"</string>
     <string name="sound_effects_enable_summary_on">"使用螢幕選取時播放音效"</string>
-    <string name="sound_effects_enable_summary_off">"使用螢幕選取時播放音效"</string>
+    <string name="sound_effects_enable_summary_off">"在螢幕上進行選取時播放音效"</string>
     <string name="play_media_notification_sounds_enable_title">"SD 卡通知"</string>
     <string name="play_media_notification_sounds_enable_summary_on">"停用 SD 卡通知音效"</string>
     <string name="play_media_notification_sounds_enable_summary_off">"啟用 SD 卡通知音效"</string>
-    <string name="sync_settings">"資料同步化"</string>
+    <string name="sync_settings">"資料同步處理"</string>
     <string name="sync_settings_summary">"選取要同步處理的應用程式"</string>
     <string name="display_settings">"顯示設定"</string>
     <string name="animations_title">"動畫"</string>
@@ -464,7 +464,7 @@
     <string name="restore_default_apn_completed">"重設預設 APN 設定已完成"</string>
     <string name="master_clear_title">"出廠資料重設"</string>
     <string name="master_clear_summary">"清除手機上所有資料"</string>
-    <string name="master_clear_desc">"此項操作會將手機回復至出廠設定，清除所有資料與下載的應用程式！"</string>
+    <string name="master_clear_desc">"此項操作會將手機還原至出廠設定，並清除所有資料與下載的應用程式！"</string>
     <string name="master_clear_button_text">"重設手機"</string>
     <string name="master_clear_final_desc">"確定要重設手機，清除所有資料與應用程式？此項操作無法復原！"</string>
     <string name="master_clear_final_button_text">"清除全部"</string>
@@ -488,8 +488,8 @@
     <string name="location_networks_disabled">"使用無線網路，在應用程式中查詢位置 (例如 Google 地圖)"</string>
     <string name="location_neighborhood_level">"位置根據 Wi-Fi 與/或行動網路決定"</string>
     <string name="location_gps">"啟用 GPS 衛星接收器"</string>
-    <string name="location_street_level">"定位時，精準度設定為街道層級 (不選此項較省電)"</string>
-    <string name="location_gps_disabled">"切換到街道檢視 (需要更多電力及天候允許)"</string>
+    <string name="location_street_level">"定位時，精準度設定為街道等級 (取消選取此項可較省電)"</string>
+    <string name="location_gps_disabled">"定位至街道等級 (需要更多電力及天候允許)"</string>
     <string name="location_warning_title">"同意記錄位置資訊"</string>
     <string name="location_warning_message">"允許 Google 的位置服務收集匿名綜合位置資料。無論是否有應用程式處於作用中，均會進行收集。"</string>
     <string name="agree">"同意"</string>
@@ -509,7 +509,7 @@
     <string name="lock_settings_title">"螢幕解鎖圖形"</string>
     <string name="lockpattern_change_lock_pattern_label">"變更解鎖圖形"</string>
     <string name="lockpattern_need_to_unlock">"確認儲存的圖形"</string>
-    <string name="lockpattern_need_to_unlock_wrong">"抱歉，請再試一次："</string>
+    <string name="lockpattern_need_to_unlock_wrong">"很抱歉，請再試一次："</string>
     <string name="lockpattern_recording_intro_header">"畫出解鎖圖形"</string>
     <string name="lockpattern_recording_intro_footer">"按下 [選單] 尋求幫助。"</string>
     <string name="lockpattern_recording_inprogress">"完成後手指離開。"</string>
@@ -597,7 +597,7 @@
     <string name="auto_punctuate">"自動標點"</string>
     <string name="hardkeyboard_category">"實體鍵盤設定"</string>
     <string name="auto_punctuate_summary">"按空白鍵兩次可插入「.」"</string>
-    <string name="show_password">"密碼可見"</string>
+    <string name="show_password">"顯示密碼"</string>
     <string name="show_password_summary">"顯示輸入的密碼"</string>
     <string name="ime_security_warning">"此輸入法可能會收集您輸入的所有文字，包括密碼和信用卡號等個人資料。此輸入法來自 <xliff:g id="IME_APPLICATION_NAME">%1$s</xliff:g> 應用程式。是否啟用此輸入法？"</string>
     <string name="user_dict_settings_titlebar">"使用者字典"</string>
