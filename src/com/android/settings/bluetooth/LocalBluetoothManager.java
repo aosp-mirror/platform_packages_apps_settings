@@ -30,6 +30,7 @@ import android.bluetooth.BluetoothIntent;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.util.Config;
 import android.util.Log;
 import android.widget.Toast;
 
@@ -40,7 +41,8 @@ import android.widget.Toast;
  */
 public class LocalBluetoothManager {
     private static final String TAG = "LocalBluetoothManager";
-    static final boolean V = true;
+    static final boolean V = Config.LOGV;
+    static final boolean D = Config.LOGD && false;
     
     private static final String SHARED_PREFERENCES_NAME = "bluetooth_settings";
     

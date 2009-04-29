@@ -19,6 +19,7 @@ package com.android.settings.bluetooth;
 import com.android.settings.R;
 
 import android.bluetooth.BluetoothDevice;
+import android.bluetooth.BluetoothError;
 import android.bluetooth.BluetoothIntent;
 import android.content.BroadcastReceiver;
 import android.content.Context;
@@ -48,7 +49,9 @@ public class BluetoothEnabler implements Preference.OnPreferenceChangeListener {
     private final BroadcastReceiver mReceiver = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
-            handleStateChanged(mLocalManager.getBluetoothState());
+            int state = intent.getIntExtra(BluetoothIntent.BLUETOOTH_STATE,
+                    BluetoothError.ERROR);
+            handleStateChanged(state);
         }
     };
 
