@@ -42,7 +42,7 @@ import android.widget.Toast;
 public class LocalBluetoothManager {
     private static final String TAG = "LocalBluetoothManager";
     static final boolean V = Config.LOGV;
-    static final boolean D = Config.LOGD && false;
+    static final boolean D = Config.LOGD;
     
     private static final String SHARED_PREFERENCES_NAME = "bluetooth_settings";
     
