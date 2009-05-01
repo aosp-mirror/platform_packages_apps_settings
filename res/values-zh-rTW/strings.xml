@@ -21,7 +21,7 @@
     <string name="turn_on_qxdm">"啟用 QXDM SD 記錄"</string>
     <string name="turn_off_qxdm">"停用 QXDM SD 記錄"</string>
     <string name="radioInfo_menu_viewADN">"檢視 SIM 地址簿"</string>
-    <string name="radioInfo_menu_viewFDN">"檢視限制撥號號碼"</string>
+    <string name="radioInfo_menu_viewFDN">"查看固定撥號"</string>
     <string name="radioInfo_menu_viewSDN">"檢視服務撥號號碼"</string>
     <string name="radioInfo_menu_getPDP">"取得 PDP 清單"</string>
     <string name="radioInfo_menu_enableData">"啟用資料連線"</string>
@@ -175,7 +175,7 @@
     <string name="sdcard_settings_used_bytes_label">"使用容量 (bytes)："</string>
     <string name="sdcard_settings_scanning_status">"從 SD 卡掃描媒體中..."</string>
     <string name="sdcard_settings_read_only_status">"SD 卡為唯讀狀態"</string>
-    <string name="next_label">"下一步"</string>
+    <string name="next_label">"下一頁"</string>
     <string name="language_picker_title">"地區設定"</string>
     <string name="select_your_language">"選取語言"</string>
     <string name="activity_picker_label">"選取動作"</string>
@@ -251,10 +251,10 @@
     <string name="forget_network">"清除"</string>
     <string name="wifi_status">"狀態"</string>
     <string name="wifi_link_speed">"速度"</string>
-    <string name="wifi_signal_3">"極佳"</string>
-    <string name="wifi_signal_2">"好"</string>
-    <string name="wifi_signal_1">"差"</string>
-    <string name="wifi_signal_0">"微弱"</string>
+    <string name="wifi_signal_3">"優"</string>
+    <string name="wifi_signal_2">"良"</string>
+    <string name="wifi_signal_1">"可"</string>
+    <string name="wifi_signal_0">"差"</string>
     <string name="security">"安全性"</string>
     <string name="wifi_security_open">"開啟"</string>
     <string name="wifi_security_wep">"WEP"</string>
@@ -338,13 +338,13 @@
     <string name="sound_and_display_settings_summary">"設定鈴聲、通知與螢幕亮度"</string>
     <string name="silent_mode_title">"靜音模式"</string>
     <string name="silent_mode_summary">"將媒體和鬧鐘以外的所有音效靜音"</string>
-    <string name="silent_mode_incl_alarm_summary">"將所有非媒體聲音設為靜音"</string>
+    <string name="silent_mode_incl_alarm_summary">"將所有非媒體音效設為靜音"</string>
     <string name="ringtone_title">"電話鈴聲"</string>
     <string name="ringtone_summary">"設定預設來電鈴聲"</string>
     <string name="ring_volume_title">"鈴聲音量"</string>
     <string name="ring_volume_summary">"設定來電和通知的音量"</string>
-    <string name="vibrate_title">"手機振動"</string>
-    <string name="vibrate_summary">"來電振動"</string>
+    <string name="vibrate_title">"手機震動"</string>
+    <string name="vibrate_summary">"來電震動"</string>
     <string name="notification_sound_title">"通知鈴聲"</string>
     <string name="notification_sound_summary">"設定預設通知鈴聲"</string>
     <string name="incoming_call_volume_title">"來電音量"</string>
@@ -466,21 +466,21 @@
     <string name="master_clear_summary">"清除手機上所有資料"</string>
     <string name="master_clear_desc">"此項操作會將手機還原至出廠設定，並清除所有資料與下載的應用程式！"</string>
     <string name="master_clear_button_text">"重設手機"</string>
-    <string name="master_clear_final_desc">"確定要重設手機，清除所有資料與應用程式？此項操作無法復原！"</string>
+    <string name="master_clear_final_desc">"確定要重設手機，清除所有資料與應用程式嗎？此項操作將無法復原！"</string>
     <string name="master_clear_final_button_text">"清除全部"</string>
     <string name="master_clear_gesture_prompt">"畫出解鎖圖形"</string>
     <string name="master_clear_gesture_explanation">"請畫出解鎖圖形，以確認重設手機。"</string>
     <string name="master_clear_failed">"因「系統清除」服務異常，未成功執行重設。"</string>
     <string name="media_format_title">"將 SD 卡格式化。"</string>
     <string name="media_format_summary">"清除 SD 卡上的所有資料"</string>
-    <string name="media_format_desc">"此動作將會清除手機中 SD 卡上的所有資料。SD 卡上的所有資料將會遺失！"</string>
+    <string name="media_format_desc">"此項操作將清除手機中 SD 卡上的資料。SD 卡上的全部資料將會消失！"</string>
     <string name="media_format_button_text">"將 SD 卡格式化"</string>
-    <string name="media_format_final_desc">"要將 SD 卡格式化、清除所有媒體嗎？此動作無法復原！"</string>
+    <string name="media_format_final_desc">"確定要將 SD 卡格式化、清除所有媒體嗎？此項操作將無法復原！"</string>
     <string name="media_format_final_button_text">"全部清除"</string>
     <string name="media_format_gesture_prompt">"畫出解鎖圖形"</string>
     <string name="media_format_gesture_explanation">"您必須畫出解鎖圖形，以確認將 SD 卡格式化。"</string>
     <string name="call_settings_title">"通話設定"</string>
-    <string name="call_settings_summary">"設定語音信箱、來電指定轉接、話中插接、本機號碼"</string>
+    <string name="call_settings_summary">"設定語音信箱、來電轉接、來電待接及本機號碼顯示"</string>
     <string name="network_settings_title">"行動網路"</string>
     <string name="network_settings_summary">"設定漫遊、網路、APN 選項"</string>
     <string name="location_title">"我的位置來源"</string>
@@ -511,7 +511,7 @@
     <string name="lockpattern_need_to_unlock">"確認儲存的圖形"</string>
     <string name="lockpattern_need_to_unlock_wrong">"很抱歉，請再試一次："</string>
     <string name="lockpattern_recording_intro_header">"畫出解鎖圖形"</string>
-    <string name="lockpattern_recording_intro_footer">"請按 [選單] 以尋求協助。"</string>
+    <string name="lockpattern_recording_intro_footer">"請按 [選單] 以取得說明。"</string>
     <string name="lockpattern_recording_inprogress">"完成後手指離開。"</string>
     <string name="lockpattern_recording_incorrect_too_short">"請連接至少 <xliff:g id="NUMBER">%d</xliff:g> 點。再試一次："</string>
     <string name="lockpattern_pattern_entered_header">"圖形已記錄！"</string>
@@ -532,7 +532,7 @@
     <string name="lockpattern_too_many_failed_confirmation_attempts_header">"錯誤嘗試太多！"</string>
     <string name="lockpattern_too_many_failed_confirmation_attempts_footer">"<xliff:g id="NUMBER">%d</xliff:g> 秒後再試一次。"</string>
     <string name="skip_button_label">"取消"</string>
-    <string name="next_button_label">"下一步"</string>
+    <string name="next_button_label">"下一頁"</string>
     <string name="lock_title">"手機安全設定"</string>
     <string name="lock_intro_message"><font size="17">" 建立個人螢幕解鎖圖形，避免您的手機在未授權狀態下遭人使用。 "\n<font height="17">\n</font><b>" 1 "</b>"  請在下一個畫面中，檢視範例圖形繪畫示範。"\n<font height="17">\n</font><b>" 2 "</b>"  準備好後，便可畫出個人解鎖圖形。您可以嘗試不同的圖形，但需要至少連接四點。 "\n<font height="17">\n</font><b>" 3 "</b>"  再次畫出圖形以確認。"\n<font height="17">\n</font><b>" 準備開始了嗎？選取 [下一步]"</b>"。"\n<font height="3">\n</font>" 如要維持未保護的狀態，請選取 [取消]。"</font></string>
     <string name="lock_example_title">"範例圖形"</string>
@@ -544,10 +544,10 @@
     <string name="applications_settings_header">"應用程式設定"</string>
     <string name="install_applications">"未知的來源"</string>
     <string name="install_unknown_applications">"允許安裝非 Market 應用程式"</string>
-    <string name="install_all_warning">"未知來源的應用程式可能會攻擊您的手機與個人資訊。若使用這些應用程式而造成手機受損或資料遺失，您必須自行承擔責任。"</string>
+    <string name="install_all_warning">"未知來源的應用程式可能會損害您的手機及個人資訊。如使用這些應用程式而造成手機受損或資料遺失，您必須自行承擔責任。"</string>
     <string name="application_info_label">"應用程式資訊"</string>
     <string name="storage_label">"儲存空間"</string>
-    <string name="auto_launch_label">"依預設值啟動"</string>
+    <string name="auto_launch_label">"預設為啟動"</string>
     <string name="permissions_label">"權限"</string>
     <string name="cache_header_label">"快取"</string>
     <string name="clear_cache_btn_text">"清除快取"</string>
@@ -559,7 +559,7 @@
     <string name="data_size_label">"資料"</string>
     <string name="uninstall_text">"解除安裝"</string>
     <string name="clear_user_data_text">"清除資料"</string>
-    <string name="auto_launch_enable_text">"您已設定在某些動作下啟動此應用程式。"</string>
+    <string name="auto_launch_enable_text">"您已設定在某些操作下啟動此應用程式。"</string>
     <string name="auto_launch_disable_text">"沒有預設值。"</string>
     <string name="clear_activities">"清除預設值"</string>
     <string name="unknown">"未知的"</string>
