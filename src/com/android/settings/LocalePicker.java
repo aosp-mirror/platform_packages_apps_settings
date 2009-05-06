@@ -71,31 +71,34 @@ public class LocalePicker extends ListActivity {
         for (int i = 0 ; i < origSize; i++ ) {
             String s = locales[i];
             int len = s.length();
-            if (len == 2) {
-                Locale l = new Locale(s);
-                preprocess[finalSize++] = new Loc(toTitleCase(l.getDisplayLanguage()), l);
-            } else if (len == 5) {
+            if (len == 5) {
                 String language = s.substring(0, 2);
                 String country = s.substring(3, 5);
                 Locale l = new Locale(language, country);
 
                 if (finalSize == 0) {
-                    preprocess[finalSize++] = new Loc(toTitleCase(l.getDisplayLanguage()), l);
+                    Log.v(TAG, "adding initial "+
+                            toTitleCase(l.getDisplayLanguage()));
+                    preprocess[finalSize++] =
+                            new Loc(toTitleCase(l.getDisplayLanguage()), l);
                 } else {
                     // check previous entry:
-                    //  same lang and no country -> overwrite it with a lang-only name
-                    //  same lang and a country -> upgrade to full name and 
+                    //  same lang and a country -> upgrade to full name and
                     //    insert ours with full name
                     //  diff lang -> insert ours with lang-only name
-                    if (preprocess[finalSize-1].locale.getLanguage().equals(language)) {
-                       String prevCountry = preprocess[finalSize-1].locale.getCountry();
-                       if (prevCountry.length() == 0) {
-                            preprocess[finalSize-1].locale = l;
-                            preprocess[finalSize-1].label = toTitleCase(l.getDisplayLanguage());
-                        } else {
-                            preprocess[finalSize-1].label = toTitleCase(preprocess[finalSize-1].locale.getDisplayName());
-                            preprocess[finalSize++] = new Loc(toTitleCase(l.getDisplayName()), l);
-                        }
+                    if (preprocess[finalSize-1].locale.getLanguage().equals(
+                            language)) {
+                        Log.v(TAG, "backing up and fixing "+
+                                preprocess[finalSize-1].label+" to "+
+                                preprocess[finalSize-1].locale.
+                                getDisplayName());
+                        preprocess[finalSize-1].label = toTitleCase(
+                                preprocess[finalSize-1].
+                                locale.getDisplayName());
+                        Log.v(TAG, "  and adding "+
+                                toTitleCase(l.getDisplayName()));
+                        preprocess[finalSize++] =
+                                new Loc(toTitleCase(l.getDisplayName()), l);
                     } else {
                         String displayName;
                         if (s.equals("zz_ZZ")) {
@@ -103,6 +106,7 @@ public class LocalePicker extends ListActivity {
                         } else {
                             displayName = toTitleCase(l.getDisplayLanguage());
                         }
+                        Log.v(TAG, "adding "+displayName);
                         preprocess[finalSize++] = new Loc(displayName, l);
                     }
                 }
@@ -114,7 +118,8 @@ public class LocalePicker extends ListActivity {
         }
         int layoutId = R.layout.locale_picker_item;
         int fieldId = R.id.locale;
-        ArrayAdapter<Loc> adapter = new ArrayAdapter<Loc>(this, layoutId, fieldId, mLocales);
+        ArrayAdapter<Loc> adapter =
+                new ArrayAdapter<Loc>(this, layoutId, fieldId, mLocales);
         getListView().setAdapter(adapter);
     }
 
