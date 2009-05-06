@@ -722,7 +722,6 @@ public class LocalBluetoothDevice implements Comparable<LocalBluetoothDevice> {
                 break;
 
             case CONTEXT_ITEM_UNPAIR:
-                mLocalManager.getBluetoothManager().disconnectRemoteDeviceAcl(mAddress);
                 unpair();
                 break;
 
