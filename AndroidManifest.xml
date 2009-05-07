@@ -495,7 +495,7 @@
         <!-- Helper to bind any unbound widgets in Launcher, used as
              part of initialization and upgrade process -->
         <activity android:name="LauncherAppWidgetBinder"
-                android:permission="com.android.launcher.permission.WRITE_SETTINGS"
+                android:permission="android.permission.BIND_APPWIDGET"
                 android:theme="@android:style/Theme.NoDisplay" android:exported="true" />
 
         <activity android:name="UsageStats" android:label="@string/usage_stats_label">
