@@ -21,6 +21,7 @@ import android.util.Log;
 
 import com.android.settings.R;
 import com.android.settings.bluetooth.LocalBluetoothManager.Callback;
+import com.android.settings.bluetooth.LocalBluetoothProfileManager.Profile;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -199,13 +200,12 @@ public class LocalBluetoothDeviceManager {
         mLocalManager.showError(address, R.string.bluetooth_error_title, errorMsg);
     }
     
-    public synchronized void onProfileStateChanged(String address, boolean transientState) {
+    public synchronized void onProfileStateChanged(String address, Profile profile,
+            int newProfileState) {
         LocalBluetoothDevice device = findDevice(address);
         if (device == null) return;
-        
-        if (!transientState) {
-            device.onProfileStateChanged();
-        }
+
+        device.onProfileStateChanged(profile, newProfileState);
         device.refresh();
     }
     
