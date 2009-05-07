@@ -18,14 +18,16 @@ package com.android.settings.bluetooth;
 
 import android.bluetooth.BluetoothA2dp;
 import android.bluetooth.BluetoothDevice;
-import android.bluetooth.BluetoothHeadset;
 import android.bluetooth.BluetoothError;
+import android.bluetooth.BluetoothHeadset;
 import android.bluetooth.BluetoothIntent;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.util.Log;
+
+import com.android.settings.bluetooth.LocalBluetoothProfileManager.Profile;
 
 /**
  * BluetoothEventRedirector receives broadcasts and callbacks from the Bluetooth
@@ -89,9 +91,8 @@ public class BluetoothEventRedirector {
                     Log.i(TAG, "Failed to connect BT headset");
                 }
 
-                boolean transientState = !(newState == BluetoothHeadset.STATE_CONNECTED
-                                || newState == BluetoothHeadset.STATE_DISCONNECTED);
-                mManager.getLocalDeviceManager().onProfileStateChanged(address,transientState);
+                mManager.getLocalDeviceManager().onProfileStateChanged(address,
+                        Profile.HEADSET, newState);
 
             } else if (action.equals(BluetoothA2dp.SINK_STATE_CHANGED_ACTION)) {
                 int newState = intent.getIntExtra(BluetoothA2dp.SINK_STATE, 0);
@@ -101,9 +102,8 @@ public class BluetoothEventRedirector {
                     Log.i(TAG, "Failed to connect BT A2DP");
                 }
 
-                boolean transientState = !(newState == BluetoothA2dp.STATE_CONNECTED
-                        || newState == BluetoothA2dp.STATE_DISCONNECTED);
-                mManager.getLocalDeviceManager().onProfileStateChanged(address, transientState);
+                mManager.getLocalDeviceManager().onProfileStateChanged(address,
+                        Profile.A2DP, newState);
 
             } else if (action.equals(BluetoothIntent.REMOTE_DEVICE_CLASS_UPDATED_ACTION)) {
                 mManager.getLocalDeviceManager().onBtClassChanged(address);
