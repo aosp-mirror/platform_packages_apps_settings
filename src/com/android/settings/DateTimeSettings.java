@@ -109,14 +109,14 @@ public class DateTimeSettings
         mTimePref.setEnabled(!autoEnabled);
         mDatePref.setEnabled(!autoEnabled);
         mTimeZone.setEnabled(!autoEnabled);
-
-        getPreferenceScreen().getSharedPreferences().registerOnSharedPreferenceChangeListener(this);        
     }
 
     
     @Override
     protected void onResume() {
         super.onResume();
+        
+        getPreferenceScreen().getSharedPreferences().registerOnSharedPreferenceChangeListener(this);
 
         ((CheckBoxPreference)mTime24Pref).setChecked(is24Hour());
 
@@ -134,6 +134,7 @@ public class DateTimeSettings
     protected void onPause() {
         super.onPause();
         unregisterReceiver(mIntentReceiver);
+        getPreferenceScreen().getSharedPreferences().unregisterOnSharedPreferenceChangeListener(this);
     }
     
     private void updateTimeAndDateDisplay() {
