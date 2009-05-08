@@ -1274,6 +1274,8 @@
     <string name="uninstall_text">Uninstall</string>
     <!-- Manage applications, individual application info screen, button label under Storage heading. Button to clear all data associated with tis app (for exampel, remove all cached emails for an Email app) -->
     <string name="clear_user_data_text">Clear data</string>
+    <!-- Manage applications, restore updated system application to factory version -->
+    <string name="app_factory_reset">Factory reset</string>
     <!-- Manage applications, individual application info screen, screen, message text under Launch by default heading. This is present if the app is set as a default for some actions. -->
     <string name="auto_launch_enable_text">You have selected to launch this application by default for some actions.</string>
     <!-- Manage applications, individual application screen, text under Launch by default heading if the app is NOT a default for actions -->
@@ -1319,12 +1321,22 @@
 found in the list of installed applications.</string>
     <!-- Manage applications, individual application dialog box message. Shown when there was an error trying to clear the data. -->
     <string name="clear_data_failed">Unable to clear application data.</string>
+    <!-- Manage applications, factory reset dialog title for system applications. -->
+    <string name="app_factory_reset_dlg_title">Factory reset system app</string>
+    <!-- Manage applications, factory reset option dialog text for system applications. -->
+    <string name="app_factory_reset_dlg_text">Do you want to fallback to factory version of system application?</string>
+    <!-- Manage applications, title for dialog if clear data fails-->
+    <string name="clear_failed_dlg_title">Clear data</string>
+    <!-- Manage applications, text for dialog if clear data fails-->
+    <string name="clear_failed_dlg_text">Failed clearing data for application</string>
     <!-- Manage applications, individual application info screen, text that appears under the "Permissions" heading. This describes the permissions that the application has. -->
     <string name="security_settings_desc">This application can access the following on your phone:</string>
     <string name="computing_size">Computing\u2026</string>
     <string name="invalid_size_value">Unable to compute package size</string>
     <!-- String displayed when list is empty -->
     <string name="empty_list_msg">You do not have any third-party apps installed.</string>
+    <!-- Manage applications, version string displayed in app snippet -->
+    <string name="version_text">version <xliff:g id="version_num">%1$s</xliff:g></string>
 
     <!-- Language Settings --> <skip />
     <!-- Title of setting on main settings screen.  This item will take the user to the screen to tweak settings realted to locale and text -->
