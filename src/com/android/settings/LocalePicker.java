@@ -30,6 +30,7 @@ import android.widget.ListView;
 
 import java.io.BufferedWriter;
 import java.io.FileOutputStream;
+import java.text.Collator;
 import java.util.Arrays;
 import java.util.Locale;
 
@@ -38,7 +39,9 @@ public class LocalePicker extends ListActivity {
 
     Loc[] mLocales;
 
-    private static class Loc {
+    private static class Loc implements Comparable {
+        static Collator sCollator = Collator.getInstance();
+
         String label;
         Locale locale;
 
@@ -50,6 +53,10 @@ public class LocalePicker extends ListActivity {
         @Override
         public String toString() {
             return this.label;
+        }
+
+        public int compareTo(Object o) {
+            return sCollator.compare(this.label, ((Loc) o).label);
         }
     }
 
@@ -78,9 +85,9 @@ public class LocalePicker extends ListActivity {
 
                 if (finalSize == 0) {
                     Log.v(TAG, "adding initial "+
-                            toTitleCase(l.getDisplayLanguage()));
+                            toTitleCase(l.getDisplayLanguage(l)));
                     preprocess[finalSize++] =
-                            new Loc(toTitleCase(l.getDisplayLanguage()), l);
+                            new Loc(toTitleCase(l.getDisplayLanguage(l)), l);
                 } else {
                     // check previous entry:
                     //  same lang and a country -> upgrade to full name and
@@ -91,20 +98,20 @@ public class LocalePicker extends ListActivity {
                         Log.v(TAG, "backing up and fixing "+
                                 preprocess[finalSize-1].label+" to "+
                                 preprocess[finalSize-1].locale.
-                                getDisplayName());
+                                getDisplayName(l));
                         preprocess[finalSize-1].label = toTitleCase(
                                 preprocess[finalSize-1].
-                                locale.getDisplayName());
+                                locale.getDisplayName(l));
                         Log.v(TAG, "  and adding "+
-                                toTitleCase(l.getDisplayName()));
+                                toTitleCase(l.getDisplayName(l)));
                         preprocess[finalSize++] =
-                                new Loc(toTitleCase(l.getDisplayName()), l);
+                                new Loc(toTitleCase(l.getDisplayName(l)), l);
                     } else {
                         String displayName;
                         if (s.equals("zz_ZZ")) {
                             displayName = "Pseudo...";
                         } else {
-                            displayName = toTitleCase(l.getDisplayLanguage());
+                            displayName = toTitleCase(l.getDisplayLanguage(l));
                         }
                         Log.v(TAG, "adding "+displayName);
                         preprocess[finalSize++] = new Loc(displayName, l);
@@ -116,6 +123,7 @@ public class LocalePicker extends ListActivity {
         for (int i = 0; i < finalSize ; i++) {
             mLocales[i] = preprocess[i];
         }
+        Arrays.sort(mLocales);
         int layoutId = R.layout.locale_picker_item;
         int fieldId = R.id.locale;
         ArrayAdapter<Loc> adapter =
