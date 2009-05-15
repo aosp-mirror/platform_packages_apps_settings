@@ -249,8 +249,15 @@
             </intent-filter>
         </activity>
 
-
-
+        <activity android:name="AccessibilitySettings" android:label="@string/accessibility_settings_title"
+                android:theme="@android:style/Theme.NoTitleBar">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <action android:name="ACCESSIBILITY_FEEDBACK_SETTINGS" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.VOICE_LAUNCH" />
+            </intent-filter>
+        </activity>
 
         <!-- Second and third-level settings -->
 

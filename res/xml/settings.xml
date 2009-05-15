@@ -115,7 +115,6 @@
                 android:targetClass="com.android.settings.LanguageSettings" />
         </PreferenceScreen>
 
-
         <!-- Search. 
              The settings activity will ensure that this is resolved to an
              activity on the system image, otherwise it will remove this
@@ -129,6 +128,17 @@
             android:summary="@string/search_settings_summary"
             android:key="search_settings">
             <intent android:action="android.search.action.SEARCH_SETTINGS" />
+        </PreferenceScreen>
+
+        <!-- Accessibility feedback -->
+
+        <PreferenceScreen
+            android:title="@string/accessibility_settings_title"
+            android:summary="@string/accessibility_settings_summary">
+            <intent
+                android:action="android.intent.action.MAIN"
+                android:targetPackage="com.android.settings"
+                android:targetClass="com.android.settings.AccessibilitySettings" />
         </PreferenceScreen>
 
         <!-- About Device -->
