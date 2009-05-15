@@ -365,8 +365,8 @@ public class WifiSettings extends PreferenceActivity implements WifiLayer.Callba
         }
         
         mDialog = dialog;
-        dialog.setOnDismissListener(this);
         if (dialog != null) {
+            dialog.setOnDismissListener(this);
             dialog.show();
         }
     }

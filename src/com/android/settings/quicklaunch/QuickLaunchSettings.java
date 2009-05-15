@@ -222,8 +222,7 @@ public class QuickLaunchSettings extends PreferenceActivity implements
                 Log.w(TAG, "Result from bookmark picker does not have an intent.");
                 return;
             }
-            
-            String title = data.getStringExtra(BookmarkPicker.EXTRA_TITLE);
+
             char shortcut = data.getCharExtra(BookmarkPicker.EXTRA_SHORTCUT, (char) 0);
             updateShortcut(shortcut, data);
             

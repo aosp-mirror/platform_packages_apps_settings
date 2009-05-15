@@ -356,7 +356,6 @@ public class Status extends PreferenceActivity {
     void updateTimes() {
         long at = SystemClock.uptimeMillis() / 1000;
         long ut = SystemClock.elapsedRealtime() / 1000;
-        long st = ut - at;
 
         if (ut == 0) {
             ut = 1;

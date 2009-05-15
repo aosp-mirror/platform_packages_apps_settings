@@ -160,7 +160,7 @@ public class ZoneList extends ListActivity {
         try {
             XmlResourceParser xrp = getResources().getXml(R.xml.timezones);
             while (xrp.next() != XmlResourceParser.START_TAG)
-                ;
+                continue;
             xrp.next();
             while (xrp.getEventType() != XmlResourceParser.END_TAG) {
                 while (xrp.getEventType() != XmlResourceParser.START_TAG) {

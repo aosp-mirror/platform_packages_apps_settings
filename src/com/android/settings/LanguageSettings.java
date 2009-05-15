@@ -54,8 +54,6 @@ public class LanguageSettings extends PreferenceActivity {
     private String mLastInputMethodId;
     private String mLastTickedInputMethodId;
     
-    private String mRootDirectory;
-
     static public String getInputMethodIdFromKey(String key) {
         return key;
     }

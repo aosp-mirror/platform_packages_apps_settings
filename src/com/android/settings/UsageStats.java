@@ -187,7 +187,7 @@ public class UsageStats extends Activity implements OnItemSelectedListener {
                 holder.launchCount.setText(String.valueOf(pkgStats.launchCount));
                 holder.usageTime.setText(String.valueOf(pkgStats.usageTime)+" ms");
             } else {
-                Log.w(TAG, "No usage stats info for package:"+pkgStats.packageName);
+                Log.w(TAG, "No usage stats info for package:" + position);
             }
             return convertView;
         }

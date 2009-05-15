@@ -426,15 +426,20 @@ public class ManageApplications extends ListActivity implements
         public void onGetStatsCompleted(PackageStats pStats, boolean pSucceeded) {
             AppInfo appInfo = null;
             Bundle data = new Bundle();
-            data.putString(ATTR_PKG_NAME, pStats.packageName);
-            if(pSucceeded && pStats != null) {
-                if (localLOGV) Log.i(TAG, "onGetStatsCompleted::"+pStats.packageName+", ("+
-                        pStats.cacheSize+","+
-                        pStats.codeSize+", "+pStats.dataSize);
-                data.putParcelable(ATTR_APP_PKG_STATS, pStats);
-            } else {
+            if (pStats != null) {
+                data.putString(ATTR_PKG_NAME, pStats.packageName);
+                if(pSucceeded) {
+                    if (localLOGV) Log.i(TAG, "onGetStatsCompleted::"+pStats.packageName+", ("+
+                            pStats.cacheSize+","+
+                            pStats.codeSize+", "+pStats.dataSize);
+                    data.putParcelable(ATTR_APP_PKG_STATS, pStats);
+                }
+            }
+
+            if(!pSucceeded || pStats == null) {
                 Log.w(TAG, "Invalid package stats from PackageManager");
             }
+
             //post message to Handler
             Message msg = mHandler.obtainMessage(mMsgId, data);
             msg.setData(data);
@@ -705,7 +710,7 @@ public class ManageApplications extends ListActivity implements
     
     // internal structure used to track added and deleted packages when
     // the activity has focus
-    class AddRemoveInfo {
+    static class AddRemoveInfo {
         String pkgName;
         boolean add;
         public AddRemoveInfo(String pPkgName, boolean pAdd) {

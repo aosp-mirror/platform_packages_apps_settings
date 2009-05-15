@@ -321,12 +321,12 @@ public class AccessPointDialog extends AlertDialog implements DialogInterface.On
     }
 
     private void updatePasswordCaption(String security) {
-        
-        if (mPasswordText != null && security != null
-                && security.equals(AccessPointState.WEP)) {
-            mPasswordText.setText(R.string.please_type_hex_key);
-        } else {
-            mPasswordText.setText(R.string.please_type_passphrase);
+        if (mPasswordText != null) {
+            if (security != null && security.equals(AccessPointState.WEP)) {
+                mPasswordText.setText(R.string.please_type_hex_key);
+            } else {
+                mPasswordText.setText(R.string.please_type_passphrase);
+            }
         }
     }
     

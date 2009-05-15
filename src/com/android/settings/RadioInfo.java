@@ -257,24 +257,24 @@ public class RadioInfo extends Activity {
         }
     };
 
-    private class OemCommands {
+    static private class OemCommands {
 
-        public  final int OEM_QXDM_SDLOG_DEFAULT_FILE_SIZE = 32;
-        public  final int OEM_QXDM_SDLOG_DEFAULT_MASK = 0;
-        public  final int OEM_QXDM_SDLOG_DEFAULT_MAX_INDEX = 8;
+        public static final int OEM_QXDM_SDLOG_DEFAULT_FILE_SIZE = 32;
+        public static final int OEM_QXDM_SDLOG_DEFAULT_MASK = 0;
+        public static final int OEM_QXDM_SDLOG_DEFAULT_MAX_INDEX = 8;
 
-        final int SIZE_OF_INT = 4;
-        final int OEM_FEATURE_ENABLE = 1;
-        final int OEM_FEATURE_DISABLE = 0;
-        final int OEM_SIMPE_FEAUTURE_LEN = 1;
+        static final int SIZE_OF_INT = 4;
+        static final int OEM_FEATURE_ENABLE = 1;
+        static final int OEM_FEATURE_DISABLE = 0;
+        static final int OEM_SIMPE_FEAUTURE_LEN = 1;
 
-        final int OEM_QXDM_SDLOG_FUNCTAG = 0x00010000;
-        final int OEM_QXDM_SDLOG_LEN = 4;
-        final int OEM_PS_AUTO_ATTACH_FUNCTAG = 0x00020000;
-        final int OEM_CIPHERING_FUNCTAG = 0x00020001;
-        final int OEM_SMSC_UPDATE_FUNCTAG = 0x00020002;
-        final int OEM_SMSC_QUERY_FUNCTAG = 0x00020003;
-        final int OEM_SMSC_QUERY_LEN = 0;
+        static final int OEM_QXDM_SDLOG_FUNCTAG = 0x00010000;
+        static final int OEM_QXDM_SDLOG_LEN = 4;
+        static final int OEM_PS_AUTO_ATTACH_FUNCTAG = 0x00020000;
+        static final int OEM_CIPHERING_FUNCTAG = 0x00020001;
+        static final int OEM_SMSC_UPDATE_FUNCTAG = 0x00020002;
+        static final int OEM_SMSC_QUERY_FUNCTAG = 0x00020003;
+        static final int OEM_SMSC_QUERY_LEN = 0;
         
         /**
          * The OEM interface to store QXDM to SD.
@@ -990,8 +990,7 @@ public class RadioInfo extends Activity {
     private void displayQxdmEnableResult() {
         String status = mQxdmLogEnabled ? "Start QXDM Log" : "Stop QXDM Log";
 
-        DialogInterface mProgressPanel = new AlertDialog.
-                Builder(this).setMessage(status).show();
+        new AlertDialog.Builder(this).setMessage(status).show();
 
         mHandler.postDelayed(
                 new Runnable() {
