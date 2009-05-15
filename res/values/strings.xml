@@ -1572,6 +1572,33 @@ found in the list of installed applications.</string>
     <string name="launch_count_label">Count</string>
     <!-- label for usage time -->
     <string name="usage_time_label">Usage time</string>
+
+    <!-- Accessibility settings -->
+
+    <!-- Settings title for accessibility settings -->
+    <string name="accessibility_settings_title">Accessibility</string>
+    <!-- Settings summary for accessibility settings -->
+    <string name="accessibility_settings_summary">Manage accessibility options</string>
+    <!-- Setting Checkbox title for enabling accessibility -->
+    <string name="toggle_accessibility_title">Accessibility</string>
+    <!-- Setting Checkbox summary for enabling accessiblity - enable -->
+    <string name="enable_accessibility_service_summary">Enable accessibility</string>
+    <!-- Setting Checkbox summary for enabling accessibility - disable -->
+    <string name="disable_accessibility_service_summary">Disable accessibility</string>
+    <!-- Setting accessibility services category -->
+    <string name="accessibility_services_category">Accessibility services</string>
+    <!-- Message for announcing the lack of installed accessibility services. -->
+    <string name="no_accessibility_services_summary">No installed accessibility services.</string>
+    <!-- Warning message about security implications of enabling an accessibility service,
+         displayed as a dialog message when the user selects to enable an accessibility service. -->
+    <string name="accessibility_service_security_warning">This accessibility service may be able to collect
+        all the text you type, including personal data credit card numbers except passwords.
+        It may also log your user interface interactions. It comes from the application
+        <xliff:g id="accessibility_service_name">%1$s</xliff:g>. Enable this accessibility service?</string>
+    <!-- Warning about disabling accessibility displayed as a dialog message when the user
+         selects to disable accessibility. This avoids accidental disabling. -->
+    <string name="accessibility_service_disable_warning">Disable accessibility?</string>
+
 </resources>
 
 
