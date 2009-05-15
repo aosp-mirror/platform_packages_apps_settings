@@ -97,7 +97,7 @@ public class BandMode extends Activity {
                 }
             };
 
-    private class BandListItem {
+    static private class BandListItem {
         private int mBandMode = Phone.BM_UNSPECIFIED;
 
         public BandListItem(int bm) {

@@ -82,7 +82,7 @@ public class LocalBluetoothDevice implements Comparable<LocalBluetoothDevice> {
         CONNECT, DISCONNECT,
     }
 
-    class BluetoothJob {
+    static class BluetoothJob {
         final BluetoothCommand command; // CONNECT, DISCONNECT
         final LocalBluetoothDevice device;
         final Profile profile; // HEADSET, A2DP, etc
@@ -349,7 +349,7 @@ public class LocalBluetoothDevice implements Comparable<LocalBluetoothDevice> {
             }
         };
 
-        AlertDialog ad = new AlertDialog.Builder(context)
+        new AlertDialog.Builder(context)
                 .setTitle(getName())
                 .setMessage(message)
                 .setPositiveButton(android.R.string.ok, disconnectListener)
@@ -363,7 +363,6 @@ public class LocalBluetoothDevice implements Comparable<LocalBluetoothDevice> {
         // Reset the only-show-one-error-dialog tracking variable
         mIsConnectingErrorPossible = true;
 
-        Context context = mLocalManager.getContext();
         boolean hasAtLeastOnePreferredProfile = false;
         for (Profile profile : mProfiles) {
             LocalBluetoothProfileManager profileManager =
@@ -385,7 +384,6 @@ public class LocalBluetoothDevice implements Comparable<LocalBluetoothDevice> {
         // Reset the only-show-one-error-dialog tracking variable
         mIsConnectingErrorPossible = true;
 
-        Context context = mLocalManager.getContext();
         for (Profile profile : mProfiles) {
             LocalBluetoothProfileManager profileManager =
                     LocalBluetoothProfileManager.getProfileManager(mLocalManager, profile);
@@ -480,8 +478,6 @@ public class LocalBluetoothDevice implements Comparable<LocalBluetoothDevice> {
     }
 
     private void fillData() {
-        BluetoothDevice manager = mLocalManager.getBluetoothManager();
-
         fetchName();
         fetchBtClass();
 

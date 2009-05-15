@@ -107,7 +107,7 @@ public class ApnPreference extends Preference implements
         return getKey().equals(mSelectedKey);
     }
 
-    public void setChecked(boolean checked) {
+    public void setChecked() {
         mSelectedKey = getKey();
     }
 
