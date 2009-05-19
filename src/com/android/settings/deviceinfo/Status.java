@@ -303,6 +303,10 @@ public class Status extends PreferenceActivity {
     }
     
     void updateSignalStrength() {
+        // TODO TELECA: PhoneStateIntentReceiver deprecated, use TelephonyManager or
+        // PhoneStateListener instead.
+        // Use new SignalStrength for signal
+
         // not loaded in some versions of the code (e.g., zaku)
         if (mSignalStrength != null) {
             int state =
