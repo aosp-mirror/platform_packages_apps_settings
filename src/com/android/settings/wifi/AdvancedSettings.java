@@ -141,7 +141,7 @@ public class AdvancedSettings extends PreferenceActivity
             try {
                 int numChannels = Integer.parseInt((String) newValue);
                 WifiManager wifiManager = (WifiManager) getSystemService(WIFI_SERVICE);
-                if (!wifiManager.setNumAllowedChannels(numChannels)) {
+                if (!wifiManager.setNumAllowedChannels(numChannels, true)) {
                     Toast.makeText(this, R.string.wifi_setting_num_channels_error,
                             Toast.LENGTH_SHORT).show();
                 }
