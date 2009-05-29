@@ -622,23 +622,21 @@ public class RadioInfo extends Activity {
         dnsCheckState.setText(phone.isDnsCheckDisabled() ?
                 "0.0.0.0 allowed" :"0.0.0.0 not allowed");
     }
-    
+
     private final void
     updateSignalStrength() {
-        // TODO TELECA: PhoneStateIntentReceiver deprecated, use TelephonyManager or
-        // PhoneStateListener instead.
-        // Use new SignalStrength for signal
-        int state =
-                mPhoneStateReceiver.getServiceState().getState();
+        // TODO PhoneStateIntentReceiver is deprecated and PhoneStateListener
+        // should probably used instead.
+        int state = mPhoneStateReceiver.getServiceState().getState();
         Resources r = getResources();
 
         if ((ServiceState.STATE_OUT_OF_SERVICE == state) ||
                 (ServiceState.STATE_POWER_OFF == state)) {
             dBm.setText("0");
         }
-        
+
         int signalDbm = mPhoneStateReceiver.getSignalStrengthDbm();
-        
+
         if (-1 == signalDbm) signalDbm = 0;
 
         int signalAsu = mPhoneStateReceiver.getSignalStrength();
@@ -1188,4 +1186,3 @@ public class RadioInfo extends Activity {
     private String[] mPreferredNetworkLabels = {
             "WCDMA preferred", "GSM only", "WCDMA only", "Unknown"};
 }
-
