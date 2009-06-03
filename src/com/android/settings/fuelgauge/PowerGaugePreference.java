@@ -26,6 +26,7 @@ import android.view.View;
 import android.widget.ImageView;
 
 import com.android.settings.R;
+import com.android.settings.fuelgauge.PowerUsageSummary.BatterySipper;
 
 /**
  * Custom preference for displaying power consumption as a bar and an icon on the left for the
@@ -37,13 +38,15 @@ public class PowerGaugePreference extends Preference {
     private Drawable mIcon;
     private GaugeDrawable mGauge;
     private double mValue;
+    private BatterySipper mInfo;
 
-    public PowerGaugePreference(Context context, Drawable icon) {
+    public PowerGaugePreference(Context context, Drawable icon, BatterySipper info) {
         super(context);
         setLayoutResource(R.layout.preference_powergauge);
         mIcon = icon;
         mGauge = new GaugeDrawable();
         mGauge.bar = context.getResources().getDrawable(R.drawable.app_gauge);
+        mInfo = info;
     }
 
     /**
@@ -53,6 +56,10 @@ public class PowerGaugePreference extends Preference {
     void setGaugeValue(double percent) {
         mValue = percent;
         mGauge.percent = mValue;
+    }
+
+    BatterySipper getInfo() {
+        return mInfo;
     }
 
     @Override

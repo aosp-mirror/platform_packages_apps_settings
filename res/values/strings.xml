@@ -1503,16 +1503,16 @@ found in the list of installed applications.</string>
     <string name="battery_history_starts">Starts: <xliff:g id="starts">%1$d</xliff:g></string>
 
     <!-- Used to show an amount of time in the form "d days, h hours, m minutes, s seconds" in BatteryHistory -->
-    <string name="battery_history_days"><xliff:g id="days">%1$d</xliff:g> days, <xliff:g id="hours">%2$d</xliff:g> hours, <xliff:g id="minutes">%3$d</xliff:g> minutes, <xliff:g id="seconds">%4$d</xliff:g> seconds</string>
+    <string name="battery_history_days"><xliff:g id="days">%1$d</xliff:g> d, <xliff:g id="hours">%2$d</xliff:g> h, <xliff:g id="minutes">%3$d</xliff:g> m, <xliff:g id="seconds">%4$d</xliff:g> s</string>
 
     <!-- Used to show an amount of time in the form "h hours, m minutes, s seconds" in BatteryHistory -->
-    <string name="battery_history_hours"><xliff:g id="hours">%1$d</xliff:g> hours, <xliff:g id="minutes">%2$d</xliff:g> minutes, <xliff:g id="seconds">%3$d</xliff:g> seconds</string>
+    <string name="battery_history_hours"><xliff:g id="hours">%1$d</xliff:g> h, <xliff:g id="minutes">%2$d</xliff:g> m, <xliff:g id="seconds">%3$d</xliff:g> s</string>
 
     <!-- Used to show an amount of time in the form "m minutes, s seconds" in BatteryHistory -->
-    <string name="battery_history_minutes"><xliff:g id="minutes">%1$d</xliff:g> minutes, <xliff:g id="seconds">%2$d</xliff:g> seconds</string>
+    <string name="battery_history_minutes"><xliff:g id="minutes">%1$d</xliff:g> m, <xliff:g id="seconds">%2$d</xliff:g> s</string>
 
     <!-- Used to show an amount of time in the form "s seconds" in BatteryHistory -->
-    <string name="battery_history_seconds"><xliff:g id="seconds">%1$d</xliff:g> seconds</string>
+    <string name="battery_history_seconds"><xliff:g id="seconds">%1$d</xliff:g> s</string>
 
     <!-- Used to head a list of packages that share a given user id BatteryHistory -->
     <string name="battery_history_packages_sharing_this_uid">Packages sharing this UID:</string>
@@ -1604,11 +1604,22 @@ found in the list of installed applications.</string>
     <skip/>
 
     <!-- Activity title for App Fuel Gauge summary -->
-    <string name="power_usage_summary_title">Power usage summary</string>
+    <string name="power_usage_summary_title">Battery usage</string>
+    <!-- Battery usage since unplugged -->
+    <string name="battery_since_unplugged">Battery usage since unplugged</string>
+    <!-- Battery usage since user reset the stats -->
+    <string name="battery_since_reset">Battery usage since reset</string>
     <!-- CPU awake time title -->
     <string name="awake">Device awake time</string>
     <!-- Wifi on time -->
     <string name="wifi_on_time">WiFi on time</string>
+
+    <!-- Activity title for battery usage details for an app. or power consumer -->
+    <string name="details_title">Battery usage details</string>
+    <!-- Subtitle for application/subsystem details -->
+    <string name="details_subtitle">Usage details</string>
+    <!-- Subtitle for possible options -->
+    <string name="controls_subtitle">Controls</string>
 
     <!-- Label for power consumed by the screen -->
     <string name="power_screen">Screen on</string>
@@ -1620,6 +1631,31 @@ found in the list of installed applications.</string>
     <string name="power_phone">Voice</string>
     <!-- Label for power consumed when Idle -->
     <string name="power_idle">Standby</string>
+
+    <!-- Label for CPU usage time -->
+    <string name="usage_type_cpu">CPU total</string>
+    <!-- Label for CPU usage in foreground -->
+    <string name="usage_type_cpu_foreground">CPU foreground</string>
+    <!-- Label for GPU usage time -->
+    <string name="usage_type_gps">GPS</string>
+    <!-- Label for Phone usage time -->
+    <string name="usage_type_phone">Phone</string>
+    <!-- Label for Data sent -->
+    <string name="usage_type_data_send">Data sent</string>
+    <!-- Label for Data received -->
+    <string name="usage_type_data_recv">Data received</string>
+    <!-- Label for Audio usage time -->
+    <string name="usage_type_audio">Audio</string>
+    <!-- Label for Video usage time -->
+    <string name="usage_type_video">Video</string>
+
+    <!-- Menu label for viewing battery usage since unplugged -->
+    <string name="menu_stats_unplugged">Usage since unplugged</string>
+    <!-- Menu label for viewing battery usage total -->
+    <string name="menu_stats_total">Usage totals</string>
+    <!-- Menu label for refreshing with latest usage numbers -->
+    <string name="menu_stats_refresh">Refresh</string>
+
 </resources>
 
 
