@@ -1133,7 +1133,6 @@ public class WifiLayer {
                      * Hidden networks show up with empty SSID.
                      */
                     if (AccessPointState.isAdhoc(scanResult)
-                            || AccessPointState.isEnterprise(scanResult)
                             || TextUtils.isEmpty(scanResult.SSID)) {
                         continue;
                     }

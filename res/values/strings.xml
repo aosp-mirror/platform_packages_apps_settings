@@ -614,6 +614,11 @@
     <string name="wifi_security_wpa">WPA</string>
     <!-- Value for the wifi security -->
     <string name="wifi_security_wpa2">WPA2</string>
+    <!-- Value for the wifi security -->
+    <string name="wifi_security_wpa_eap">WPA-EAP</string>
+    <!-- Value for the wifi security -->
+    <string name="wifi_security_ieee8021x">IEEE8021X</string>
+
     <!-- Value for the wifi security when it is unknown -->
     <string name="wifi_security_unknown">Unknown</string>
     <!-- Verbose security type of a wifi network.  Open means no security. -->
@@ -624,6 +629,10 @@
     <string name="wifi_security_verbose_wpa">Secured with WPA</string>
     <!-- Verbose security type of a wifi network.  -->
     <string name="wifi_security_verbose_wpa2">Secured with WPA2</string>
+    <!-- Verbose security type of a wifi network.  -->
+    <string name="wifi_security_verbose_wpa_eap">Secured with WPA-EAP</string>
+    <!-- Verbose security type of a wifi network.  -->
+    <string name="wifi_security_verbose_ieee8021x">Secured with IEEE 802.1x</string>
     <!-- Wi-Fi IP addrress label -->    
     <string name="ip_address">IP address</string>
     <!-- Label for the signal strength -->
@@ -648,6 +657,22 @@
     <string name="connect">Connect</string>
     <!-- Dialog title for when the user is trying to connect to a particular network-->
     <string name="connect_to_blank">Connect to <xliff:g id="network_name">%1$s</xliff:g></string>
+    <!-- Caption for the eap method -->
+    <string name="please_select_eap">EAP method</string>
+    <!-- Caption for the phase2 -->
+    <string name="please_select_phase2">Phase 2 authentication</string>
+    <!-- Caption for the identity -->
+    <string name="please_type_identity">Identity</string>
+    <!-- Caption for the anonymous_identity -->
+    <string name="please_type_anonymous_identity">Anonymous identity</string>
+    <!-- Caption for the client_certificate -->
+    <string name="please_select_client_certificate">Client certificate</string>
+    <!-- Caption for the ca certificate -->
+    <string name="please_select_ca_certificate">CA certificate</string>
+    <!-- Caption for the Private Key -->
+    <string name="please_select_private_key">Private key</string>
+    <!-- Caption for the private key passwd -->
+    <string name="please_type_private_key_passwd">Private key password</string>
     <!-- Caption for the wireless password -->
     <string name="please_type_passphrase">Wireless password</string>
     <!--Wi-Fi settings screen, connect to network dialog box, field label and hint text -->

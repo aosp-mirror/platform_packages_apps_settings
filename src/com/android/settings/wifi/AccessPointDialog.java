@@ -21,6 +21,7 @@ import com.android.settings.R;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.res.Resources;
 import android.net.wifi.WifiInfo;
 import android.net.wifi.WifiManager;
 import android.os.Bundle;
@@ -71,6 +72,8 @@ public class AccessPointDialog extends AlertDialog implements DialogInterface.On
     private static final int SECURITY_WEP = 2;
     private static final int SECURITY_WPA_PERSONAL = 3;
     private static final int SECURITY_WPA2_PERSONAL = 4;
+    private static final int SECURITY_WPA_EAP = 5;
+    private static final int SECURITY_IEEE8021X = 6;
 
     private static final int[] WEP_TYPE_VALUES = {
             AccessPointState.WEP_PASSWORD_AUTO, AccessPointState.WEP_PASSWORD_ASCII,
@@ -92,15 +95,39 @@ public class AccessPointDialog extends AlertDialog implements DialogInterface.On
     
     // General views
     private View mView;
+    private View mEnterpriseView;
     private TextView mPasswordText;
     private EditText mPasswordEdit;
     private CheckBox mShowPasswordCheckBox;
+
+    // Enterprise fields
+    private TextView mEapText;
+    private Spinner mEapSpinner;
+    private TextView mPhase2Text;
+    private Spinner mPhase2Spinner;
+    private TextView mIdentityText;
+    private EditText mIdentityEdit;
+    private TextView mAnonymousIdentityText;
+    private EditText mAnonymousIdentityEdit;
+    private TextView mClientCertText;
+    private Spinner mClientCertSpinner;
+    private TextView mCaCertText;
+    private Spinner mCaCertSpinner;
+    private TextView mPrivateKeyText;
+    private Spinner mPrivateKeySpinner;
+    private TextView mPrivateKeyPasswdText;
+    private EditText mPrivateKeyPasswdEdit;
+    private EditText[] mEnterpriseTextFields;
+    private Spinner[] mEnterpriseSpinnerFields;
+
     
     // Info-specific views
     private ViewGroup mTable;
     
     // Configure-specific views
     private EditText mSsidEdit;
+    private TextView mSsidText;
+    private TextView mSecurityText;
     private Spinner mSecuritySpinner;
     private Spinner mWepTypeSpinner;
     
@@ -208,9 +235,17 @@ public class AccessPointDialog extends AlertDialog implements DialogInterface.On
 
             positiveButtonResId = R.string.wifi_save_config;
             mSaveButtonPos = POSITIVE_BUTTON;
-            
+
+            setEnterpriseFieldsVisible(false);
+
         } else if (mMode == MODE_INFO) {
-            setLayout(R.layout.wifi_ap_info);
+            if (isEnterprise() && !mState.configured) {
+                setLayout(R.layout.wifi_ap_configure);
+                defaultPasswordVisibility = false;
+                setEnterpriseFieldsVisible(true);
+            } else {
+                setLayout(R.layout.wifi_ap_info);
+            }
 
             if (mState.isConnectable()) {
                 if (mCustomTitle == null) {
@@ -251,41 +286,131 @@ public class AccessPointDialog extends AlertDialog implements DialogInterface.On
         setButtons(positiveButtonResId, negativeButtonResId, neutralButtonResId);
     }
 
+    private boolean isEnterprise() {
+
+        if(AccessPointState.WPA_EAP.equals(mState.security) ||
+            AccessPointState.IEEE8021X.equals(mState.security)) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
     /** Called when we need to set our member variables to point to the views. */
     private void onReferenceViews(View view) {
         mPasswordText = (TextView) view.findViewById(R.id.password_text);
         mPasswordEdit = (EditText) view.findViewById(R.id.password_edit);
-        
+        mSsidText = (TextView) view.findViewById(R.id.ssid_text);
+        mSsidEdit = (EditText) view.findViewById(R.id.ssid_edit);
+        mSecurityText = (TextView) view.findViewById(R.id.security_text);
+        mSecuritySpinner = (Spinner) view.findViewById(R.id.security_spinner);
+        mWepTypeSpinner = (Spinner) view.findViewById(R.id.wep_type_spinner);
+        mEnterpriseView = mView.findViewById(R.id.enterprise_wrapper);
+
         mShowPasswordCheckBox = (CheckBox) view.findViewById(R.id.show_password_checkbox);
         if (mShowPasswordCheckBox != null) {
             mShowPasswordCheckBox.setOnClickListener(this);
         }
-        
         if (mMode == MODE_CONFIGURE) {
-            mSsidEdit = (EditText) view.findViewById(R.id.ssid_edit);
-            mSecuritySpinner = (Spinner) view.findViewById(R.id.security_spinner);
             mSecuritySpinner.setOnItemSelectedListener(this);
-            setSecuritySpinnerAdapter();
-            mWepTypeSpinner = (Spinner) view.findViewById(R.id.wep_type_spinner);
-            
+            mSecuritySpinner.setPromptId(R.string.security);
+            setSpinnerAdapter(mSecuritySpinner, mAutoSecurityAllowed ?
+                R.array.wifi_security_entries
+                : R.array.wifi_security_without_auto_entries);
         } else if (mMode == MODE_INFO) {
             mTable = (ViewGroup) view.findViewById(R.id.table);
         }
-        
+        /* for enterprise one */
+        if (mMode == MODE_CONFIGURE || (isEnterprise() && !mState.configured)) {
+            setEnterpriseFields(view);
+            mEapSpinner.setSelection(getSelectionIndex(
+                    R.array.wifi_eap_entries, mState.getEap()));
+            Keystore ks = Keystore.getInstance();
+            mClientCertSpinner.setSelection(getSelectionIndex(
+                    ks.getAllCertificateKeys(), mState.getEnterpriseField(
+                    AccessPointState.CLIENT_CERT)));
+            mCaCertSpinner.setSelection(getSelectionIndex(
+                    ks.getAllCertificateKeys(), mState.getEnterpriseField(
+                    AccessPointState.CA_CERT)));
+            mPrivateKeySpinner.setSelection(getSelectionIndex(
+                    ks.getAllUserkeyKeys(), mState.getEnterpriseField(
+                    AccessPointState.PRIVATE_KEY)));
+        }
     }
-    
-    private void setSecuritySpinnerAdapter() {
-        Context context = getContext();
-        int arrayResId = mAutoSecurityAllowed ? R.array.wifi_security_entries
-                : R.array.wifi_security_without_auto_entries;         
 
-        ArrayAdapter<CharSequence> adapter = new ArrayAdapter<CharSequence>(context,
-                android.R.layout.simple_spinner_item,
-                context.getResources().getStringArray(arrayResId));
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        mSecuritySpinner.setAdapter(adapter);
+    private void setEnterpriseFields(View view) {
+        mIdentityText = (TextView) view.findViewById(R.id.identity_text);
+        mIdentityEdit = (EditText) view.findViewById(R.id.identity_edit);
+        mAnonymousIdentityText =
+                (TextView) view.findViewById(R.id.anonymous_identity_text);
+        mAnonymousIdentityEdit =
+                (EditText) view.findViewById(R.id.anonymous_identity_edit);
+        mClientCertText =
+                (TextView) view.findViewById(R.id.client_certificate_text);
+        mCaCertText = (TextView) view.findViewById(R.id.ca_certificate_text);
+        mPrivateKeyText = (TextView) view.findViewById(R.id.private_key_text);
+        mPrivateKeyPasswdText =
+                (TextView) view.findViewById(R.id.private_key_passwd_text);
+        mPrivateKeyPasswdEdit =
+                (EditText) view.findViewById(R.id.private_key_passwd_edit);
+        mEapText = (TextView) view.findViewById(R.id.eap_text);
+        mEapSpinner = (Spinner) view.findViewById(R.id.eap_spinner);
+        mEapSpinner.setOnItemSelectedListener(this);
+        mEapSpinner.setPromptId(R.string.please_select_eap);
+        setSpinnerAdapter(mEapSpinner, R.array.wifi_eap_entries);
+
+        mPhase2Text = (TextView) view.findViewById(R.id.phase2_text);
+        mPhase2Spinner = (Spinner) view.findViewById(R.id.phase2_spinner);
+        mPhase2Spinner.setOnItemSelectedListener(this);
+        mPhase2Spinner.setPromptId(R.string.please_select_phase2);
+        setSpinnerAdapter(mPhase2Spinner, R.array.wifi_phase2_entries);
+
+        Keystore ks = Keystore.getInstance();
+
+        mClientCertSpinner =
+                (Spinner) view.findViewById(R.id.client_certificate_spinner);
+        mClientCertSpinner.setOnItemSelectedListener(this);
+        mClientCertSpinner.setPromptId(
+                R.string.please_select_client_certificate);
+        setSpinnerAdapter(mClientCertSpinner, ks.getAllCertificateKeys());
+
+        mCaCertSpinner =
+                (Spinner) view.findViewById(R.id.ca_certificate_spinner);
+        mCaCertSpinner.setOnItemSelectedListener(this);
+        mCaCertSpinner.setPromptId(R.string.please_select_ca_certificate);
+        setSpinnerAdapter(mCaCertSpinner, ks.getAllCertificateKeys());
+
+        mPrivateKeySpinner =
+                (Spinner) view.findViewById(R.id.private_key_spinner);
+        mPrivateKeySpinner.setOnItemSelectedListener(this);
+        mPrivateKeySpinner.setPromptId(R.string.please_select_private_key);
+        setSpinnerAdapter(mPrivateKeySpinner, ks.getAllUserkeyKeys());
+
+        mEnterpriseTextFields = new EditText[] {
+            mIdentityEdit, mAnonymousIdentityEdit, mPrivateKeyPasswdEdit
+        };
+
+        mEnterpriseSpinnerFields = new Spinner[] {
+            mClientCertSpinner, mCaCertSpinner, mPrivateKeySpinner
+        };
+
     }
-    
+
+    private void setSpinnerAdapter(Spinner spinner, String[] items) {
+        if (items != null) {
+            ArrayAdapter<CharSequence> adapter = new ArrayAdapter<CharSequence>(
+                    getContext(), android.R.layout.simple_spinner_item, items);
+            adapter.setDropDownViewResource(
+                    android.R.layout.simple_spinner_dropdown_item);
+            spinner.setAdapter(adapter);
+        }
+    }
+
+    private void setSpinnerAdapter(Spinner spinner, int arrayResId) {
+        setSpinnerAdapter(spinner,
+            getContext().getResources().getStringArray(arrayResId));
+    }
+
     /** Called when the widgets are in-place waiting to be filled with data */
     private void onFill() {
 
@@ -381,39 +506,51 @@ public class AccessPointDialog extends AlertDialog implements DialogInterface.On
         if (!replaceStateWithWifiLayerInstance()) {
             Log.w(TAG, "Assuming connecting to a new network.");
         }
-        
-        /*
-         * If the network is secured and they haven't entered a password, popup
-         * an error. Allow empty passwords if the state already has a password
-         * set (since in that scenario, an empty password means keep the old
-         * password).
-         */
-        String password = getEnteredPassword();
-        boolean passwordIsEmpty = TextUtils.isEmpty(password);
-        
-        /*
-         * When 'retry password', they can not enter a blank password. In any
-         * other mode, we let them enter a blank password if the state already
-         * has a password.
-         */
-        if (passwordIsEmpty && (!mState.hasPassword() || mMode == MODE_RETRY_PASSWORD)
-                && (mState.security != null) && !mState.security.equals(AccessPointState.OPEN)) {
-            new AlertDialog.Builder(getContext())
-                    .setTitle(R.string.error_title)
-                    .setIcon(android.R.drawable.ic_dialog_alert)
-                    .setMessage(R.string.wifi_password_incorrect_error)
-                    .setPositiveButton(android.R.string.ok, null)
-                    .show();
-            return;
+
+        if (isEnterprise()) {
+            if(!mState.configured) {
+                updateEnterpriseFields(
+                        AccessPointState.WPA_EAP.equals(mState.security) ?
+                        SECURITY_WPA_EAP : SECURITY_IEEE8021X);
+            }
+        } else {
+            updatePasswordField();
         }
-        
-        if (!passwordIsEmpty) { 
-            mState.setPassword(password);
-        }
-        
-        mWifiLayer.connectToNetwork(mState);            
+        mWifiLayer.connectToNetwork(mState);
     }
-    
+
+    /*
+     * If the network is secured and they haven't entered a password, popup an
+     * error. Allow empty passwords if the state already has a password set
+     * (since in that scenario, an empty password means keep the old password).
+     */
+    private void updatePasswordField() {
+
+      String password = getEnteredPassword();
+      boolean passwordIsEmpty = TextUtils.isEmpty(password);
+      /*
+       * When 'retry password', they can not enter a blank password. In any
+       * other mode, we let them enter a blank password if the state already
+       * has a password.
+       */
+      if (passwordIsEmpty && (!mState.hasPassword() ||
+              mMode == MODE_RETRY_PASSWORD) &&
+              (mState.security != null) &&
+              !mState.security.equals(AccessPointState.OPEN)) {
+          new AlertDialog.Builder(getContext())
+                  .setTitle(R.string.error_title)
+                  .setIcon(android.R.drawable.ic_dialog_alert)
+                  .setMessage(R.string.wifi_password_incorrect_error)
+                  .setPositiveButton(android.R.string.ok, null)
+                  .show();
+          return;
+      }
+
+      if (!passwordIsEmpty) {
+          mState.setPassword(password);
+      }
+    }
+
     private void handleSave() {
         replaceStateWithWifiLayerInstance();
 
@@ -471,6 +608,61 @@ public class AccessPointDialog extends AlertDialog implements DialogInterface.On
         
     }
     
+    private int getSelectionIndex(String[] array, String selection) {
+        if(selection != null) {
+            for (int i = 0 ; i < array.length ; i++) {
+                if (selection.contains(array[i])) return i;
+            }
+        }
+        return 0;
+    }
+
+    private int getSelectionIndex(int arrayResId, String selection) {
+        return getSelectionIndex(
+            getContext().getResources().getStringArray(arrayResId), selection);
+    }
+
+    private void updateEnterpriseFields(int securityType) {
+            int i;
+            Keystore ks = Keystore.getInstance();
+            for (i = AccessPointState.IDENTITY ;
+                i < AccessPointState.MAX_ENTRPRISE_FIELD ; i++) {
+                String value;
+                if (i <= AccessPointState.PRIVATE_KEY_PASSWD) {
+                    value = mEnterpriseTextFields[i].getText().toString();
+                } else {
+                    Spinner spinner =  mEnterpriseSpinnerFields[i -
+                        AccessPointState.CLIENT_CERT];
+
+                    if (i != AccessPointState.PRIVATE_KEY) {
+                        value = ks.getCertificate(ks.getAllCertificateKeys()
+                            [spinner.getSelectedItemPosition()]);
+                    } else {
+                        value = ks.getUserkey(ks.getAllUserkeyKeys()
+                            [spinner.getSelectedItemPosition()]);
+                    }
+                }
+                if (!TextUtils.isEmpty(value)) {
+                    mState.setEnterpriseField(i, value);
+                }
+            }
+
+            switch (securityType) {
+                case SECURITY_WPA_EAP: {
+                    mState.setSecurity(AccessPointState.WPA_EAP);
+                    mState.setEap(mEapSpinner.getSelectedItemPosition());
+                    break;
+                }
+                case SECURITY_IEEE8021X: {
+                    mState.setSecurity(AccessPointState.IEEE8021X);
+                    mState.setEap(mEapSpinner.getSelectedItemPosition());
+                  break;
+                }
+                default:
+                    mState.setSecurity(AccessPointState.OPEN);
+            }
+    }
+
     /**
      * Replaces our {@link #mState} with the equal WifiLayer instance.  This is useful after
      * we unparceled the state previously and before we are calling methods on {@link #mWifiLayer}.
@@ -516,7 +708,22 @@ public class AccessPointDialog extends AlertDialog implements DialogInterface.On
         mPasswordEdit.setVisibility(visibility);
         mShowPasswordCheckBox.setVisibility(visibility);
     }
-    
+
+    private void setEnterpriseFieldsVisible(boolean visible) {
+        int visibility = visible ? View.VISIBLE : View.GONE;
+        mEnterpriseView.setVisibility(visibility);
+        if (visible) {
+            setWepVisible(false);
+            setGenericPasswordVisible(false);
+        }
+        if (mMode != MODE_CONFIGURE) {
+            mSsidText.setVisibility(View.GONE);
+            mSsidEdit.setVisibility(View.GONE);
+            mSecurityText.setVisibility(View.GONE);
+            mSecuritySpinner.setVisibility(View.GONE);
+        }
+    }
+
     public void onItemSelected(AdapterView parent, View view, int position, long id) {
         if (parent == mSecuritySpinner) {
             handleSecurityChange(getSecurityTypeFromSpinner());
@@ -527,7 +734,7 @@ public class AccessPointDialog extends AlertDialog implements DialogInterface.On
     }
 
     private void handleSecurityChange(int security) {
-        
+        setEnterpriseFieldsVisible(false);
         switch (security) {
             
             case SECURITY_NONE: {
@@ -557,6 +764,11 @@ public class AccessPointDialog extends AlertDialog implements DialogInterface.On
                 setGenericPasswordVisible(true);
                 // Both WPA and WPA2 show the same caption, so either is ok
                 updatePasswordCaption(AccessPointState.WPA);
+                break;
+            }
+            case SECURITY_WPA_EAP:
+            case SECURITY_IEEE8021X: {
+                setEnterpriseFieldsVisible(true);
                 break;
             }
         }
