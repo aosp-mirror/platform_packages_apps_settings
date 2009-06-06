@@ -141,6 +141,17 @@
                 android:targetClass="com.android.settings.AccessibilitySettings" />
         </PreferenceScreen>
 
+        <!-- Text-To-Speech -->
+        
+        <PreferenceScreen
+            android:title="@string/tts_settings"
+            android:summary="@string/tts_settings_summary">
+            <intent
+                android:action="android.intent.action.MAIN"
+                android:targetPackage="com.android.settings"
+                android:targetClass="com.android.settings.TextToSpeechSettings" />
+        </PreferenceScreen>
+
         <!-- About Device -->
  
         <PreferenceScreen
