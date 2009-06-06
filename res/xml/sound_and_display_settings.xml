@@ -124,6 +124,11 @@
                 android:entries="@array/screen_timeout_entries"
                 android:entryValues="@array/screen_timeout_values" />
 
+        <CheckBoxPreference
+                android:key="compatibility_mode"
+                android:title="@string/compatibility_mode_title"
+                android:summaryOn="@string/compatibility_mode_summary_on"
+                android:summaryOff="@string/compatibility_mode_summary_off" />
     </PreferenceCategory>
 
 </PreferenceScreen>   
