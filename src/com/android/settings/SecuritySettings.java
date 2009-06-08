@@ -18,9 +18,7 @@ package com.android.settings;
 
 
 import android.app.Activity;
-import android.app.AlertDialog;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.location.LocationManager;
@@ -39,8 +37,7 @@ import com.android.internal.widget.LockPatternUtils;
 /**
  * Gesture lock pattern settings.
  */
-public class SecuritySettings extends PreferenceActivity
-    implements DialogInterface.OnClickListener, DialogInterface.OnDismissListener {
+public class SecuritySettings extends PreferenceActivity {
 
     // Lock Settings
     
@@ -64,9 +61,6 @@ public class SecuritySettings extends PreferenceActivity
 
     private CheckBoxPreference mNetwork;
     private CheckBoxPreference mGps;
-    
-    // To track whether Agree was clicked in the Network location warning dialog
-    private boolean mOkClicked;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -184,46 +178,14 @@ public class SecuritySettings extends PreferenceActivity
             Settings.System.putInt(getContentResolver(), Settings.System.TEXT_SHOW_PASSWORD,
                     mShowPassword.isChecked() ? 1 : 0);
         } else if (preference == mNetwork) {
-            //normally called on the toggle click
-            if (mNetwork.isChecked()) {
-                // Show a warning to the user that location data will be shared 
-                mOkClicked = false;
-                new AlertDialog.Builder(this).setMessage(
-                        getResources().getString(R.string.location_warning_message))
-                        .setTitle(R.string.location_warning_title)
-                        .setIcon(android.R.drawable.ic_dialog_alert)
-                        .setPositiveButton(R.string.agree, this)
-                        .setNegativeButton(R.string.disagree, this)
-                        .show()
-                        .setOnDismissListener(this);
-            } else {
-                Settings.Secure.setLocationProviderEnabled(getContentResolver(),
-                        LocationManager.NETWORK_PROVIDER, false);
-            }
+            Settings.Secure.setLocationProviderEnabled(getContentResolver(),
+                    LocationManager.NETWORK_PROVIDER, mNetwork.isChecked());
         } else if (preference == mGps) {
             Settings.Secure.setLocationProviderEnabled(getContentResolver(),
                     LocationManager.GPS_PROVIDER, mGps.isChecked());
         }
 
         return false;
-    }
-
-    public void onClick(DialogInterface dialog, int which) {
-        if (which == DialogInterface.BUTTON_POSITIVE) {
-            Settings.Secure.setLocationProviderEnabled(getContentResolver(),
-                    LocationManager.NETWORK_PROVIDER, true);
-            mOkClicked = true;
-        } else {
-            // Reset the toggle
-            mNetwork.setChecked(false);
-        }
-    }
-    
-    public void onDismiss(DialogInterface dialog) {
-        // Assuming that onClick gets called first
-        if (!mOkClicked) {
-            mNetwork.setChecked(false);
-        }
     }
 
     /*
