@@ -18,9 +18,11 @@ package com.android.settings;
 
 
 import android.app.Activity;
+import android.content.ContentQueryMap;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.database.Cursor;
 import android.location.LocationManager;
 import android.os.Bundle;
 import android.preference.CheckBoxPreference;
@@ -31,6 +33,9 @@ import android.preference.PreferenceScreen;
 import android.provider.Settings;
 import android.util.Config;
 import android.util.Log;
+
+import java.util.Observable;
+import java.util.Observer;
 
 import com.android.internal.widget.LockPatternUtils;
 
@@ -62,6 +67,16 @@ public class SecuritySettings extends PreferenceActivity {
     private CheckBoxPreference mNetwork;
     private CheckBoxPreference mGps;
 
+    // These provide support for receiving notification when Location Manager settings change.
+    // This is necessary because the Network Location Provider can change settings
+    // if the user does not confirm enabling the provider.
+    private ContentQueryMap mContentQueryMap;
+    private final class SettingsObserver implements Observer {
+        public void update(Observable o, Object arg) {
+            updateToggles();
+        }
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -74,6 +89,14 @@ public class SecuritySettings extends PreferenceActivity {
         mNetwork = (CheckBoxPreference) getPreferenceScreen().findPreference(LOCATION_NETWORK);
         mGps = (CheckBoxPreference) getPreferenceScreen().findPreference(LOCATION_GPS);
         updateToggles();
+
+        // listen for Location Manager settings changes
+        Cursor settingsCursor = getContentResolver().query(Settings.Secure.CONTENT_URI, null,
+                "(" + Settings.System.NAME + "=?)",
+                new String[]{Settings.Secure.LOCATION_PROVIDERS_ALLOWED},
+                null);
+        mContentQueryMap = new ContentQueryMap(settingsCursor, Settings.System.NAME, true, null);
+        mContentQueryMap.addObserver(new SettingsObserver());
     }
 
     private PreferenceScreen createPreferenceHierarchy() {
