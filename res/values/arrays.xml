@@ -93,9 +93,13 @@
         <!-- Do not translate. The Wi-Fi network has WEP security. -->
         <item>WEP</item>
         <!-- The Wi-Fi network has WPA personal security. WPA Personal is a tech term, and might be better left untranslated? -->
-        <item>WPA Personal</item>
+        <item>WPA personal</item>
         <!-- The Wi-Fi network has WPA2 personal security. WPA Personal is a tech term, and might be better left untranslated? -->
-        <item>WPA2 Personal</item>
+        <item>WPA2 personal</item>
+        <!-- The Wi-Fi network has WPA EAP extensible authentication protocol. -->
+        <item>WPA-EAP</item>
+        <!-- IEEE 802.1X key management -->
+        <item>IEEE 802.1x</item>
     </string-array>
 
     <!-- Match this with code. --> <skip />
@@ -106,9 +110,14 @@
         <!-- Do not translate. The Wi-Fi network has WEP security. -->
         <item>WEP</item>
         <!-- The Wi-Fi network has WPA personal security. WPA Personal is a tech term, and might be better left untranslated? -->
-        <item>WPA Personal</item>
+        <item>WPA personal</item>
         <!-- The Wi-Fi network has WPA2 personal security. WPA Personal is a tech term, and might be better left untranslated? -->
-        <item>WPA2 Personal</item>
+        <item>WPA2 personal</item>
+        <!-- The Wi-Fi network has WPA enterprise security. WPA Enterprise is a tech term, and might be better left untranslated? -->
+        <!-- The Wi-Fi network has WPA EAP extensible authentication protocol. -->
+        <item>WPA-EAP</item>
+        <!-- IEEE 802.1X key management -->
+        <item>IEEE 802.1x</item>
     </string-array>
 
     <!-- Match this with code. --> <skip />
@@ -165,6 +174,22 @@
         <item>Usage Time</item>
         <item>Launch Count</item>
         <item>Application Name</item>
+    </string-array>
+
+    <!-- EAP method -->
+    <string-array name="wifi_eap_entries">
+        <item>PEAP</item>
+        <item>TLS</item>
+        <item>TTLS</item>
+    </string-array>
+
+    <!-- Phase 2 options -->
+    <string-array name="wifi_phase2_entries">
+        <item>None</item>
+        <item>PAP</item>
+        <item>MSCHAP</item>
+        <item>MSCHAP2</item>
+        <item>GTC</item>
     </string-array>
 
 </resources>

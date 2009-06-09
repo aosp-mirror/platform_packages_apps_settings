@@ -24,11 +24,17 @@
             android:padding="8dip"
             android:orientation="vertical"> 
     
-    
+            <LinearLayout
+                android:id="@+id/table"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:orientation="vertical">
+            </LinearLayout>
+
     
         <!-- SSID -->
     
-        <TextView
+        <TextView android:id="@+id/ssid_text"
                 style="?android:attr/textAppearanceSmallInverse"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
@@ -44,7 +50,7 @@
     
         <!-- Security -->
         
-        <TextView
+        <TextView android:id="@+id/security_text"
                 style="?android:attr/textAppearanceSmallInverse"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
@@ -55,9 +61,94 @@
         <Spinner android:id="@+id/security_spinner"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content" />
-                
-                
-        
+
+        <!-- Enterprise Fields -->
+        <LinearLayout android:id="@+id/enterprise_wrapper"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:padding="8dip"
+            android:orientation="vertical">
+                <TextView android:id="@+id/eap_text"
+                        style="?android:attr/textAppearanceSmallInverse"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dip"
+                        android:text="@string/please_select_eap" />
+                <Spinner android:id="@+id/eap_spinner"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content" />
+                <TextView android:id="@+id/phase2_text"
+                        style="?android:attr/textAppearanceSmallInverse"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dip"
+                        android:text="@string/please_select_phase2" />
+                <Spinner android:id="@+id/phase2_spinner"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content" />
+
+                <TextView android:id="@+id/identity_text"
+                        style="?android:attr/textAppearanceSmallInverse"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dip"
+                        android:text="@string/please_type_identity" />
+                <EditText android:id="@+id/identity_edit"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="2dip"
+                        android:singleLine="true" />
+                <TextView android:id="@+id/anonymous_identity_text"
+                        style="?android:attr/textAppearanceSmallInverse"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dip"
+                        android:text="@string/please_type_anonymous_identity" />
+                <EditText android:id="@+id/anonymous_identity_edit"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="2dip"
+                        android:singleLine="true" />
+                <TextView android:id="@+id/client_certificate_text"
+                        style="?android:attr/textAppearanceSmallInverse"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dip"
+                        android:text="@string/please_select_client_certificate" />
+                <Spinner android:id="@+id/client_certificate_spinner"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content" />
+                <TextView android:id="@+id/ca_certificate_text"
+                        style="?android:attr/textAppearanceSmallInverse"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dip"
+                        android:text="@string/please_select_ca_certificate" />
+                <Spinner android:id="@+id/ca_certificate_spinner"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content" />
+                <TextView android:id="@+id/private_key_text"
+                        style="?android:attr/textAppearanceSmallInverse"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dip"
+                        android:text="@string/please_select_private_key" />
+                <Spinner android:id="@+id/private_key_spinner"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content" />
+                <TextView android:id="@+id/private_key_passwd_text"
+                        style="?android:attr/textAppearanceSmallInverse"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dip"
+                        android:text="@string/please_type_private_key_passwd" />
+                <EditText android:id="@+id/private_key_passwd_edit"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="2dip"
+                        android:singleLine="true" />
+        </LinearLayout>
+
         <!-- Password -->
         
         <TextView android:id="@+id/password_text"
