@@ -259,6 +259,13 @@
             </intent-filter>
         </activity>
 
+        <activity android:name="TextToSpeechSettings" android:label="@string/tts_settings">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <action android:name="com.android.settings.TTS_SETTINGS" />
+            </intent-filter>
+        </activity>
+
         <!-- Second and third-level settings -->
 
         <activity android:name="ConfirmLockPattern"/>
