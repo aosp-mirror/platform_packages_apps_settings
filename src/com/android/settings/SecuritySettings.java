@@ -24,6 +24,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.location.LocationManager;
+import android.net.vpn.VpnManager;
 import android.os.Bundle;
 import android.preference.CheckBoxPreference;
 import android.preference.Preference;
@@ -160,6 +161,17 @@ public class SecuritySettings extends PreferenceActivity {
         showPassword.setPersistent(false);
         passwordsCat.addPreference(showPassword);
         
+        PreferenceScreen vpnPreferences = getPreferenceManager()
+                .createPreferenceScreen(this);
+        vpnPreferences.setTitle(R.string.vpn_settings_category);
+        vpnPreferences.setIntent(new VpnManager(this).createSettingsActivityIntent());
+
+        PreferenceCategory vpnCat = new PreferenceCategory(this);
+        vpnCat.setTitle(R.string.vpn_settings_title);
+        vpnCat.setSummary(R.string.vpn_settings_summary);
+        root.addPreference(vpnCat);
+        vpnCat.addPreference(vpnPreferences);
+
         return root;
     }
 

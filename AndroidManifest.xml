@@ -110,6 +110,20 @@
             </intent-filter>
         </activity>
 
+        <activity android:name=".vpn.VpnSettings"
+                android:launchMode="singleTask">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <action android:name="android.net.vpn.SETTINGS" />
+                <action android:name="android.net.vpn.INSTALL_PROFILE" />
+                <category android:name="android.intent.category.LAUNCHER" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+
+        <activity android:name=".vpn.VpnTypeSelection"></activity>
+        <activity android:name=".vpn.VpnEditor"></activity>
+
         <activity android:name="DateTimeSettings" android:label="@string/date_and_time"
                 >
             <intent-filter>
