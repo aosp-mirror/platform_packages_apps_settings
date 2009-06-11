@@ -255,7 +255,6 @@ public class SettingsAppWidgetProvider extends AppWidgetProvider {
             wifiManager.setWifiEnabled(false);
         } else if (wifiState == STATE_DISABLED) {
             wifiManager.setWifiEnabled(true);
-            mLocalBluetoothManager.setBluetoothEnabled(true);
         }
     }
 
