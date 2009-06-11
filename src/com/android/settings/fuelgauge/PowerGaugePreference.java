@@ -24,6 +24,7 @@ import android.graphics.drawable.Drawable;
 import android.preference.Preference;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.android.settings.R;
 import com.android.settings.fuelgauge.PowerUsageSummary.BatterySipper;
@@ -39,6 +40,7 @@ public class PowerGaugePreference extends Preference {
     private GaugeDrawable mGauge;
     private double mValue;
     private BatterySipper mInfo;
+    private double mPercent;
 
     public PowerGaugePreference(Context context, Drawable icon, BatterySipper info) {
         super(context);
@@ -58,8 +60,17 @@ public class PowerGaugePreference extends Preference {
         mGauge.percent = mValue;
     }
 
+    void setPercent(double percent) {
+        mPercent = percent;
+    }
+
     BatterySipper getInfo() {
         return mInfo;
+    }
+
+    void setIcon(Drawable icon) {
+        mIcon = icon;
+        notifyChanged();
     }
 
     @Override
@@ -74,6 +85,9 @@ public class PowerGaugePreference extends Preference {
 
         ImageView appGauge = (ImageView) view.findViewById(R.id.appGauge);
         appGauge.setImageDrawable(mGauge);
+
+        TextView percentView = (TextView) view.findViewById(R.id.percent);
+        percentView.setText((int) (Math.ceil(mPercent)) + "%");
     }
 
     static class GaugeDrawable extends Drawable {

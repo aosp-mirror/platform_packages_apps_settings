@@ -86,5 +86,61 @@
             <!-- Insert detail items here -->
 
         </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/controls_section"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/controls_section_title"
+                style="?android:attr/listSeparatorTextViewStyle"
+                android:text="@string/controls_subtitle" />
+            
+            <RelativeLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content">
+
+                <Button
+                    android:id="@+id/action_button1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="6dip"
+                    android:layout_marginTop="6dip"
+                    android:layout_marginBottom="6dip"
+                    android:layout_marginRight="6dip"
+                    android:layout_alignParentLeft="true"
+                    android:layout_weight="1"/>
+                <Button
+                    android:id="@+id/action_button2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="6dip"
+                    android:layout_marginTop="6dip"
+                    android:layout_marginBottom="6dip"
+                    android:layout_marginRight="6dip"
+                    android:layout_alignParentRight="true"
+                    android:layout_weight="1"/>
+
+            </RelativeLayout>
+
+        </LinearLayout>
+                    
+        <TextView
+            android:id="@+id/packages_section_title"
+            style="?android:attr/listSeparatorTextViewStyle"
+            android:text="@string/packages_subtitle" />
+
+        <LinearLayout
+            android:id="@+id/packages_section"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:paddingLeft="6dip"
+            android:orientation="vertical">
+
+            <!-- Insert detail items here -->
+
+        </LinearLayout>
     </LinearLayout>
 </ScrollView>
