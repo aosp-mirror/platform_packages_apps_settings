@@ -22,6 +22,7 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.res.Resources;
+import android.security.Keystore;
 import android.net.wifi.WifiInfo;
 import android.net.wifi.WifiManager;
 import android.os.Bundle;
@@ -79,7 +80,8 @@ public class AccessPointDialog extends AlertDialog implements DialogInterface.On
             AccessPointState.WEP_PASSWORD_AUTO, AccessPointState.WEP_PASSWORD_ASCII,
             AccessPointState.WEP_PASSWORD_HEX
     };
-    
+    private static final String NOT_APPLICABLE = "N/A";
+
     // Button positions, default to impossible values
     private int mConnectButtonPos = Integer.MAX_VALUE; 
     private int mForgetButtonPos = Integer.MAX_VALUE;
@@ -130,11 +132,13 @@ public class AccessPointDialog extends AlertDialog implements DialogInterface.On
     private TextView mSecurityText;
     private Spinner mSecuritySpinner;
     private Spinner mWepTypeSpinner;
+    private Keystore mKeystore;
     
     public AccessPointDialog(Context context, WifiLayer wifiLayer) {
         super(context);
 
         mWifiLayer = wifiLayer;
+        mKeystore = Keystore.getInstance();
     }
 
     @Override
@@ -325,17 +329,32 @@ public class AccessPointDialog extends AlertDialog implements DialogInterface.On
             setEnterpriseFields(view);
             mEapSpinner.setSelection(getSelectionIndex(
                     R.array.wifi_eap_entries, mState.getEap()));
-            Keystore ks = Keystore.getInstance();
             mClientCertSpinner.setSelection(getSelectionIndex(
-                    ks.getAllCertificateKeys(), mState.getEnterpriseField(
+                    getAllCertificateKeys(), mState.getEnterpriseField(
                     AccessPointState.CLIENT_CERT)));
             mCaCertSpinner.setSelection(getSelectionIndex(
-                    ks.getAllCertificateKeys(), mState.getEnterpriseField(
+                    getAllCertificateKeys(), mState.getEnterpriseField(
                     AccessPointState.CA_CERT)));
             mPrivateKeySpinner.setSelection(getSelectionIndex(
-                    ks.getAllUserkeyKeys(), mState.getEnterpriseField(
+                    getAllUserkeyKeys(), mState.getEnterpriseField(
                     AccessPointState.PRIVATE_KEY)));
         }
+    }
+
+    private String[] getAllCertificateKeys() {
+        return appendEmptyInSelection(mKeystore.getAllCertificateKeys());
+    }
+
+    private String[] getAllUserkeyKeys() {
+        return appendEmptyInSelection(mKeystore.getAllUserkeyKeys());
+    }
+
+    private String[] appendEmptyInSelection(String[] keys) {
+      if (keys.length == 0) return keys;
+      String[] selections = new String[keys.length + 1];
+      System.arraycopy(keys, 0, selections, 0, keys.length);
+      selections[keys.length] = NOT_APPLICABLE;
+      return selections;
     }
 
     private void setEnterpriseFields(View view) {
@@ -365,26 +384,24 @@ public class AccessPointDialog extends AlertDialog implements DialogInterface.On
         mPhase2Spinner.setPromptId(R.string.please_select_phase2);
         setSpinnerAdapter(mPhase2Spinner, R.array.wifi_phase2_entries);
 
-        Keystore ks = Keystore.getInstance();
-
         mClientCertSpinner =
                 (Spinner) view.findViewById(R.id.client_certificate_spinner);
         mClientCertSpinner.setOnItemSelectedListener(this);
         mClientCertSpinner.setPromptId(
                 R.string.please_select_client_certificate);
-        setSpinnerAdapter(mClientCertSpinner, ks.getAllCertificateKeys());
+        setSpinnerAdapter(mClientCertSpinner, getAllCertificateKeys());
 
         mCaCertSpinner =
                 (Spinner) view.findViewById(R.id.ca_certificate_spinner);
         mCaCertSpinner.setOnItemSelectedListener(this);
         mCaCertSpinner.setPromptId(R.string.please_select_ca_certificate);
-        setSpinnerAdapter(mCaCertSpinner, ks.getAllCertificateKeys());
+        setSpinnerAdapter(mCaCertSpinner, getAllCertificateKeys());
 
         mPrivateKeySpinner =
                 (Spinner) view.findViewById(R.id.private_key_spinner);
         mPrivateKeySpinner.setOnItemSelectedListener(this);
         mPrivateKeySpinner.setPromptId(R.string.please_select_private_key);
-        setSpinnerAdapter(mPrivateKeySpinner, ks.getAllUserkeyKeys());
+        setSpinnerAdapter(mPrivateKeySpinner, getAllUserkeyKeys());
 
         mEnterpriseTextFields = new EditText[] {
             mIdentityEdit, mAnonymousIdentityEdit, mPrivateKeyPasswdEdit
@@ -624,7 +641,6 @@ public class AccessPointDialog extends AlertDialog implements DialogInterface.On
 
     private void updateEnterpriseFields(int securityType) {
             int i;
-            Keystore ks = Keystore.getInstance();
             for (i = AccessPointState.IDENTITY ;
                 i < AccessPointState.MAX_ENTRPRISE_FIELD ; i++) {
                 String value;
@@ -633,16 +649,21 @@ public class AccessPointDialog extends AlertDialog implements DialogInterface.On
                 } else {
                     Spinner spinner =  mEnterpriseSpinnerFields[i -
                         AccessPointState.CLIENT_CERT];
-
-                    if (i != AccessPointState.PRIVATE_KEY) {
-                        value = ks.getCertificate(ks.getAllCertificateKeys()
-                            [spinner.getSelectedItemPosition()]);
+                    int index = spinner.getSelectedItemPosition();
+                    if (index == (spinner.getCount() - 1)) {
+                        value = "";
                     } else {
-                        value = ks.getUserkey(ks.getAllUserkeyKeys()
-                            [spinner.getSelectedItemPosition()]);
+                        if (i != AccessPointState.PRIVATE_KEY) {
+                            value = mKeystore.getCertificate(
+                                    getAllCertificateKeys()[index]);
+                        } else {
+                            value = mKeystore.getUserkey(
+                                    getAllUserkeyKeys()[index]);
+                        }
                     }
                 }
-                if (!TextUtils.isEmpty(value)) {
+                if (!TextUtils.isEmpty(value) ||
+                        (i == AccessPointState.PRIVATE_KEY_PASSWD)) {
                     mState.setEnterpriseField(i, value);
                 }
             }
