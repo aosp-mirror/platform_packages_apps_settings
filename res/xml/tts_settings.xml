@@ -41,6 +41,14 @@
                 android:persistent="false"
                 android:entries="@array/tts_pitch_entries"
                 android:entryValues="@array/tts_pitch_values" />
+                
+            <ListPreference
+                android:key="tts_default_lang"
+                android:title="@string/tts_default_lang_title"
+                android:summary="@string/tts_default_lang_summary"
+                android:persistent="false"
+                android:entries="@array/tts_lang_entries"
+                android:entryValues="@array/tts_lang_values" />
 
         </PreferenceCategory>
 

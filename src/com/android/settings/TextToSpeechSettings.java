@@ -19,6 +19,7 @@ package com.android.settings;
 import static android.provider.Settings.Secure.TTS_USE_DEFAULTS;
 import static android.provider.Settings.Secure.TTS_DEFAULT_RATE;
 import static android.provider.Settings.Secure.TTS_DEFAULT_PITCH;
+import static android.provider.Settings.Secure.TTS_DEFAULT_LANG;
 
 import android.content.ContentResolver;
 import android.os.Bundle;
@@ -38,15 +39,18 @@ public class TextToSpeechSettings extends PreferenceActivity implements
     private static final int FALLBACK_TTS_DEFAULT_RATE = 100; // 1x
     private static final int FALLBACK_TTS_DEFAULT_PITCH = 100;// 1x
     private static final int FALLBACK_TTS_USE_DEFAULTS = 1;
+    private static final String FALLBACK_TTS_DEFAULT_LANG = "en-rUS";
 
     private static final String KEY_TTS_USE_DEFAULT =
             "toggle_use_default_tts_settings";
     private static final String KEY_TTS_DEFAULT_RATE = "tts_default_rate";
     private static final String KEY_TTS_DEFAULT_PITCH = "tts_default_pitch";
+    private static final String KEY_TTS_DEFAULT_LANG = "tts_default_lang";
     
     private CheckBoxPreference mUseDefaultPref = null;
     private ListPreference     mDefaultRatePref = null;
     private ListPreference     mDefaultPitchPref = null;
+    private ListPreference     mDefaultLangPref = null;
     
     
     @Override
@@ -65,7 +69,7 @@ public class TextToSpeechSettings extends PreferenceActivity implements
         // "Use Defaults"
         mUseDefaultPref = 
             (CheckBoxPreference) findPreference(KEY_TTS_USE_DEFAULT);
-        mUseDefaultPref.setChecked(Settings.System.getInt(resolver,
+        mUseDefaultPref.setChecked(Settings.Secure.getInt(resolver,
                 TTS_USE_DEFAULTS,
                 FALLBACK_TTS_USE_DEFAULTS) == 1 ? true : false);
         mUseDefaultPref.setOnPreferenceChangeListener(this);
@@ -73,17 +77,30 @@ public class TextToSpeechSettings extends PreferenceActivity implements
         // Default rate
         mDefaultRatePref =
             (ListPreference) findPreference(KEY_TTS_DEFAULT_RATE);
-        mDefaultRatePref.setValue(String.valueOf(Settings.System.getInt(
+        mDefaultRatePref.setValue(String.valueOf(Settings.Secure.getInt(
                 resolver, TTS_DEFAULT_RATE, FALLBACK_TTS_DEFAULT_RATE)));
         mDefaultRatePref.setOnPreferenceChangeListener(this);
 
         // Default pitch
         mDefaultPitchPref =
             (ListPreference) findPreference(KEY_TTS_DEFAULT_PITCH);
-        mDefaultPitchPref.setValue(String.valueOf(Settings.System.getInt(
+        mDefaultPitchPref.setValue(String.valueOf(Settings.Secure.getInt(
                 resolver, TTS_DEFAULT_PITCH, FALLBACK_TTS_DEFAULT_PITCH)));
         mDefaultPitchPref.setOnPreferenceChangeListener(this);
         
+        // Default language
+        mDefaultLangPref =
+                (ListPreference) findPreference(KEY_TTS_DEFAULT_LANG);
+        String defaultLang = String.valueOf(Settings.Secure.getString(resolver, 
+                TTS_DEFAULT_LANG));
+        if (defaultLang.compareTo("null") == 0) {
+            mDefaultLangPref.setValue(FALLBACK_TTS_DEFAULT_LANG);
+            Log.i(TAG, "TTS initDefaultSettings() default lang null ");
+        } else {
+            mDefaultLangPref.setValue(defaultLang);
+            Log.i(TAG, "TTS initDefaultSettings() default lang is "+defaultLang);
+        }
+        mDefaultLangPref.setOnPreferenceChangeListener(this);
     }
 
 
@@ -91,14 +108,14 @@ public class TextToSpeechSettings extends PreferenceActivity implements
         if (KEY_TTS_USE_DEFAULT.equals(preference.getKey())) {
             // "Use Defaults"
             int value = (Boolean)objValue ? 1 : 0;
-            Settings.System.putInt(getContentResolver(), TTS_USE_DEFAULTS,
+            Settings.Secure.putInt(getContentResolver(), TTS_USE_DEFAULTS,
                     value);
             Log.i(TAG, "TTS use default settings is "+objValue.toString());
         } else if (KEY_TTS_DEFAULT_RATE.equals(preference.getKey())) {
             // Default rate
             int value = Integer.parseInt((String) objValue);
             try {
-                Settings.System.putInt(getContentResolver(), 
+                Settings.Secure.putInt(getContentResolver(), 
                         TTS_DEFAULT_RATE, value);
                 Log.i(TAG, "TTS default rate is "+value);
             } catch (NumberFormatException e) {
@@ -108,12 +125,18 @@ public class TextToSpeechSettings extends PreferenceActivity implements
             // Default pitch
             int value = Integer.parseInt((String) objValue);
             try {
-                Settings.System.putInt(getContentResolver(), 
+                Settings.Secure.putInt(getContentResolver(), 
                         TTS_DEFAULT_PITCH, value);
                 Log.i(TAG, "TTS default pitch is "+value);
             } catch (NumberFormatException e) {
                 Log.e(TAG, "could not persist default TTS pitch setting", e);
             }
+        }else if (KEY_TTS_DEFAULT_LANG.equals(preference.getKey())) {
+            // Default language
+            String value = (String) objValue;
+            Settings.Secure.putString(getContentResolver(),
+                        TTS_DEFAULT_LANG, value); 
+            Log.i(TAG, "TTS default lang is "+value);
         }
         
         return true;
