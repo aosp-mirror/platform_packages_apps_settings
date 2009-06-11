@@ -607,7 +607,22 @@ public class AccessPointDialog extends AlertDialog implements DialogInterface.On
                 
             }
         } else {
-            mState.setSecurity(AccessPointState.OPEN);
+            switch (securityType) {
+                case SECURITY_WPA_EAP:
+                    mState.setSecurity(AccessPointState.WPA_EAP);
+                    break;
+                case SECURITY_IEEE8021X:
+                    mState.setSecurity(AccessPointState.IEEE8021X);
+                    break;
+                default:
+                    mState.setSecurity(AccessPointState.OPEN);
+                    break;
+            }
+            if (isEnterprise() && !mState.configured) {
+                updateEnterpriseFields(
+                        AccessPointState.WPA_EAP.equals(mState.security) ?
+                        SECURITY_WPA_EAP : SECURITY_IEEE8021X);
+            }
         }
         
         if (securityType == SECURITY_NONE) {
