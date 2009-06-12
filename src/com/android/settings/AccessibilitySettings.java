@@ -96,9 +96,7 @@ public class AccessibilitySettings extends PreferenceActivity {
         if (!accessibilityServices.isEmpty()) {
             if (serviceState == 1) {
                 mToggleCheckBox.setChecked(true);
-                mToggleCheckBox.setSummaryOn(R.string.disable_accessibility_service_summary);
             } else {
-                mToggleCheckBox.setSummaryOff(R.string.enable_accessibility_service_summary);
                 setAccessibilityServicePreferencesState(false);
             }
             mToggleCheckBox.setEnabled(true);
@@ -109,7 +107,6 @@ public class AccessibilitySettings extends PreferenceActivity {
                     Settings.Secure.ACCESSIBILITY_ENABLED, 0);
                 setAccessibilityServicePreferencesState(false);
             }
-            mToggleCheckBox.setSummaryOff(R.string.no_accessibility_services_summary);
             mToggleCheckBox.setEnabled(false);
         }
     }
