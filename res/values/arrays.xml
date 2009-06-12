@@ -39,18 +39,12 @@
         <item>All</item>
     </string-array>
 
-    <!-- There is a setting to control the format of dates displayed throughout the system.  This is in the Date & Time Settings screen.  Unfortunately, these cannot be changed at all. --> <skip />
-    <!-- Do not translate.  This is fed directly to the formatter. -->
-    <string-array name="date_format_values">
-        <!-- Do not translate.  This is fed directly to the formatter. -->
+    <!-- There is a setting to control the format of dates displayed throughout the system.  This is in the Date & Time Settings screen.  These will be adjusted to use punctuation appropriate to the user's locale. -->
+    <string-array name="date_format_values" translatable="false">
+        <!-- The blank item means to use whatever the locale calls for. -->
+        <item></item>
         <item>MM-dd-yyyy</item>
-        <!-- Do not translate.  This is fed directly to the formatter. -->
         <item>dd-MM-yyyy</item>
-        <!-- Do not translate.  This is fed directly to the formatter. -->
-        <item>MMM d, yyyy</item>
-        <!-- Do not translate.  This is fed directly to the formatter. -->
-        <item>d-MMM-yyyy</item>
-        <!-- Do not translate.  This is fed directly to the formatter. -->
         <item>yyyy-MM-dd</item>
     </string-array>
 
