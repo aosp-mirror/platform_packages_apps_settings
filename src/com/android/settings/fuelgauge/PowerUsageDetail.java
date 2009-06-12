@@ -51,8 +51,8 @@ public class PowerUsageDetail extends Activity implements Button.OnClickListener
     public static final int ACTION_DISPLAY_SETTINGS = 1;
     public static final int ACTION_WIFI_SETTINGS = 2;
     public static final int ACTION_BLUETOOTH_SETTINGS = 3;
-    public static final int ACTION_FORCE_STOP = 4;
-    public static final int ACTION_UNINSTALL = 5;
+    public static final int ACTION_WIRELESS_SETTINGS = 4;
+    public static final int ACTION_APP_DETAILS = 6;
 
     public static final int USAGE_SINCE_UNPLUGGED = 1;
     public static final int USAGE_SINCE_RESET = 2;
@@ -65,10 +65,6 @@ public class PowerUsageDetail extends Activity implements Button.OnClickListener
     public static final String EXTRA_DETAIL_TYPES = "types";
     public static final String EXTRA_DETAIL_VALUES = "values";
     public static final String EXTRA_DRAIN_TYPE = "drainType";
-
-    private static final int SECONDS_PER_MINUTE = 60;
-    private static final int SECONDS_PER_HOUR = 60 * 60;
-    private static final int SECONDS_PER_DAY = 24 * 60 * 60;
 
     private static final boolean DEBUG = true;
     private String mTitle;
@@ -135,10 +131,10 @@ public class PowerUsageDetail extends Activity implements Button.OnClickListener
                 switch (mTypes[i]) {
                     case R.string.usage_type_data_recv:
                     case R.string.usage_type_data_send:
-                        value = formatBytes(mValues[i]);
+                        value = Utils.formatBytes(this, mValues[i]);
                         break;
                     default:
-                        value = formatTime(mValues[i]);
+                        value = Utils.formatElapsedTime(this, mValues[i]);
                 }
                 ViewGroup item = (ViewGroup) inflater.inflate(R.layout.power_usage_detail_item_text,
                         null);
@@ -165,15 +161,12 @@ public class PowerUsageDetail extends Activity implements Button.OnClickListener
                 startActivity(new Intent(Settings.ACTION_DISPLAY_SETTINGS));
                 break;
             case ACTION_WIFI_SETTINGS:
-                startActivity(new Intent(Settings.ACTION_WIFI_SETTINGS));
+                startActivity(new Intent(Settings.ACTION_WIRELESS_SETTINGS));
                 break;
             case ACTION_BLUETOOTH_SETTINGS:
-                startActivity(new Intent(Settings.ACTION_BLUETOOTH_SETTINGS));
+                startActivity(new Intent(Settings.ACTION_WIRELESS_SETTINGS));
                 break;
-            case ACTION_FORCE_STOP:
-                killProcesses();
-                break;
-            case ACTION_UNINSTALL:
+            case ACTION_APP_DETAILS:
                 Intent intent = new Intent(Intent.ACTION_VIEW);
                 intent.setClass(this, InstalledAppDetails.class);
                 intent.putExtra("com.android.settings.ApplicationPkgName", mPackages[0]);
@@ -199,18 +192,17 @@ public class PowerUsageDetail extends Activity implements Button.OnClickListener
         if (uid == 0 || !isSystem) { 
             switch (mDrainType) {
                 case APP:
-                    label1 = getString(R.string.battery_action_stop);
+                    //label1 = getString(R.string.battery_action_stop);
                     label2 = getString(R.string.battery_action_app_details);
-                    mAction1 = ACTION_FORCE_STOP;
-                    mAction2 = ACTION_UNINSTALL;
+                    mAction2 = ACTION_APP_DETAILS;
                     break;
                 case SCREEN:
-                    //label2 = getString(R.string.battery_action_display);
-                    //mAction2 = ACTION_DISPLAY_SETTINGS;
+                    label2 = getString(R.string.battery_action_display);
+                    mAction2 = ACTION_DISPLAY_SETTINGS;
                     break;
                 case WIFI:
                     label2 = getString(R.string.battery_action_wifi);
-                    mAction2 = ACTION_WIFI_SETTINGS;
+                    mAction2 = ACTION_WIRELESS_SETTINGS;
                     break;
                 case BLUETOOTH:
                     //label2 = getString(R.string.battery_action_bluetooth);
@@ -289,46 +281,6 @@ public class PowerUsageDetail extends Activity implements Button.OnClickListener
                 labelView.setText(mPackages[i]);
             } catch (NameNotFoundException e) {
             }
-        }
-    }
-
-    private String formatTime(double millis) {
-        StringBuilder sb = new StringBuilder();
-        int seconds = (int) Math.floor(millis / 1000);
-
-        int days = 0, hours = 0, minutes = 0;
-        if (seconds > SECONDS_PER_DAY) {
-            days = seconds / SECONDS_PER_DAY;
-            seconds -= days * SECONDS_PER_DAY;
-        }
-        if (seconds > SECONDS_PER_HOUR) {
-            hours = seconds / SECONDS_PER_HOUR;
-            seconds -= hours * SECONDS_PER_HOUR;
-        }
-        if (seconds > SECONDS_PER_MINUTE) {
-            minutes = seconds / SECONDS_PER_MINUTE;
-            seconds -= minutes * SECONDS_PER_MINUTE;
-        }
-        if (days > 0) {
-            sb.append(getString(R.string.battery_history_days, days, hours, minutes, seconds));
-        } else if (hours > 0) {
-            sb.append(getString(R.string.battery_history_hours, hours, minutes, seconds));
-        } else if (minutes > 0) {
-            sb.append(getString(R.string.battery_history_minutes, minutes, seconds));
-        } else {
-            sb.append(getString(R.string.battery_history_seconds, seconds));
-        }
-        return sb.toString();
-    }
-
-    private String formatBytes(double bytes) {
-        // TODO: I18N
-        if (bytes > 1000 * 1000) {
-            return String.format("%.2f MB", ((int) (bytes / 1000)) / 1000f);
-        } else if (bytes > 1024) {
-            return String.format("%.2f KB", ((int) (bytes / 10)) / 100f);
-        } else {
-            return String.format("%d bytes", (int) bytes);
         }
     }
 }
