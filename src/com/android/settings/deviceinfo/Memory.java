@@ -31,6 +31,7 @@ import android.os.StatFs;
 import android.preference.Preference;
 import android.preference.PreferenceActivity;
 import android.preference.PreferenceScreen;
+import android.text.format.Formatter;
 import android.util.Log;
 
 import com.android.settings.R;
@@ -194,25 +195,7 @@ public class Memory extends PreferenceActivity {
     }
     
     private String formatSize(long size) {
-        String suffix = null;
-        
-        // add KB or MB suffix if size is greater than 1K or 1M
-        if (size >= 1024) {
-            suffix = " KB";
-            size /= 1024;
-            if (size >= 1024) {
-                suffix = " MB";
-                size /= 1024;
-            }
-        }
-        
-        DecimalFormat formatter = new DecimalFormat();
-        formatter.setGroupingSize(3);
-        String result = formatter.format(size);
-                
-        if (suffix != null)
-            result = result + suffix;
-        return result;
+        return Formatter.formatFileSize(this, size);
     }
     
 }
