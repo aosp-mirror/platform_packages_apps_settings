@@ -163,12 +163,12 @@ public class SecuritySettings extends PreferenceActivity {
         
         PreferenceScreen vpnPreferences = getPreferenceManager()
                 .createPreferenceScreen(this);
-        vpnPreferences.setTitle(R.string.vpn_settings_category);
+        vpnPreferences.setTitle(R.string.vpn_settings_title);
+        vpnPreferences.setSummary(R.string.vpn_settings_summary);
         vpnPreferences.setIntent(new VpnManager(this).createSettingsActivityIntent());
 
         PreferenceCategory vpnCat = new PreferenceCategory(this);
-        vpnCat.setTitle(R.string.vpn_settings_title);
-        vpnCat.setSummary(R.string.vpn_settings_summary);
+        vpnCat.setTitle(R.string.vpn_settings_category);
         root.addPreference(vpnCat);
         vpnCat.addPreference(vpnPreferences);
 
