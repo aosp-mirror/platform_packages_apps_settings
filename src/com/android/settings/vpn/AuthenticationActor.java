@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2007 The Android Open Source Project
+ * Copyright (C) 2009 The Android Open Source Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -18,48 +18,32 @@ package com.android.settings.vpn;
 
 import com.android.settings.R;
 
-import android.app.AlertDialog;
+import android.app.Dialog;
 import android.content.ComponentName;
 import android.content.Context;
-import android.content.DialogInterface;
-import android.content.Intent;
 import android.content.ServiceConnection;
 import android.net.vpn.IVpnService;
 import android.net.vpn.VpnManager;
 import android.net.vpn.VpnProfile;
 import android.net.vpn.VpnState;
-import android.os.Bundle;
 import android.os.IBinder;
-import android.os.Parcelable;
 import android.os.RemoteException;
 import android.util.Log;
 import android.view.View;
-import android.widget.EditText;
+import android.widget.CheckBox;
 import android.widget.TextView;
-import android.widget.Toast;
-
-import java.io.IOException;
 
 /**
+ * A {@link VpnProfileActor} that provides an authentication view for users to
+ * input username and password before connecting to the VPN server.
  */
-public class AuthenticationActor implements VpnProfileActor,
-        DialogInterface.OnClickListener, DialogInterface.OnCancelListener {
+public class AuthenticationActor implements VpnProfileActor {
     private static final String TAG = AuthenticationActor.class.getName();
     private static final int ONE_SECOND = 1000; // ms
 
-    private static final String STATE_IS_DIALOG_OPEN = "is_dialog_open";
-    private static final String STATE_USERNAME = "username";
-    private static final String STATE_PASSWORD = "password";
-
     private Context mContext;
-    private TextView mUsernameView;
-    private TextView mPasswordView;
-
     private VpnProfile mProfile;
-    private View mView;
     private VpnManager mVpnManager;
-    private AlertDialog mConnectDialog;
-    private AlertDialog mDisconnectDialog;
 
     public AuthenticationActor(Context context, VpnProfile p) {
         mContext = context;
@@ -73,77 +57,54 @@ public class AuthenticationActor implements VpnProfileActor,
     }
 
     //@Override
-    public synchronized void connect() {
-        connect("", "");
+    public boolean isConnectDialogNeeded() {
+        return true;
     }
 
     //@Override
-    public void onClick(DialogInterface dialog, int which) {
-        dismissConnectDialog();
-        switch (which) {
-        case DialogInterface.BUTTON1: // connect
-            if (validateInputs()) {
-                broadcastConnectivity(VpnState.CONNECTING);
-                connectInternal();
-            }
-            break;
-
-        case DialogInterface.BUTTON2: // cancel
-            broadcastConnectivity(VpnState.CANCELLED);
-            break;
-        }
-    }
-
-    //@Override
-    public void onCancel(DialogInterface dialog) {
-        dismissConnectDialog();
-        broadcastConnectivity(VpnState.CANCELLED);
-    }
-
-    private void connect(String username, String password) {
+    public String validateInputs(Dialog d) {
+        TextView usernameView = (TextView) d.findViewById(R.id.username_value);
+        TextView passwordView = (TextView) d.findViewById(R.id.password_value);
         Context c = mContext;
-        mConnectDialog = new AlertDialog.Builder(c)
-                .setView(createConnectView(username, password))
-                .setTitle(c.getString(R.string.vpn_connect_to) + " "
-                        + mProfile.getName())
-                .setPositiveButton(c.getString(R.string.vpn_connect_button),
-                        this)
-                .setNegativeButton(c.getString(R.string.vpn_cancel_button),
-                        this)
-                .setOnCancelListener(this)
-                .create();
-        mConnectDialog.show();
-    }
-
-    //@Override
-    public synchronized void onSaveState(Bundle outState) {
-        outState.putBoolean(STATE_IS_DIALOG_OPEN, (mConnectDialog != null));
-        if (mConnectDialog != null) {
-            assert(mConnectDialog.isShowing());
-            outState.putBoolean(STATE_IS_DIALOG_OPEN, (mConnectDialog != null));
-            outState.putString(STATE_USERNAME,
-                    mUsernameView.getText().toString());
-            outState.putString(STATE_PASSWORD,
-                    mPasswordView.getText().toString());
-            dismissConnectDialog();
+        if (Util.isNullOrEmpty(usernameView.getText().toString())) {
+            return c.getString(R.string.vpn_username);
+        } else if (Util.isNullOrEmpty(passwordView.getText().toString())) {
+            return c.getString(R.string.vpn_password);
+        } else {
+            return null;
         }
     }
 
     //@Override
-    public synchronized void onRestoreState(final Bundle savedState) {
-        boolean isDialogOpen = savedState.getBoolean(STATE_IS_DIALOG_OPEN);
-        if (isDialogOpen) {
-            connect(savedState.getString(STATE_USERNAME),
-                    savedState.getString(STATE_PASSWORD));
+    public void connect(Dialog d) {
+        TextView usernameView = (TextView) d.findViewById(R.id.username_value);
+        TextView passwordView = (TextView) d.findViewById(R.id.password_value);
+        CheckBox saveUsername = (CheckBox) d.findViewById(R.id.save_username);
+
+        // save username
+        if (saveUsername.isChecked()) {
+            mProfile.setSavedUsername(usernameView.getText().toString());
+        } else {
+            mProfile.setSavedUsername("");
         }
+        connect(usernameView.getText().toString(),
+                passwordView.getText().toString());
+        passwordView.setText("");
     }
 
-    private synchronized void dismissConnectDialog() {
-        mConnectDialog.dismiss();
-        mConnectDialog = null;
+    //@Override
+    public View createConnectView() {
+        return View.inflate(mContext, R.layout.vpn_connect_dialog_view, null);
     }
 
-    private void connectInternal() {
+    //@Override
+    public void updateConnectView(Dialog d) {
+        String username = mProfile.getSavedUsername();
+        if (username == null) username = "";
+        updateConnectView(d, username, "", !Util.isNullOrEmpty(username));
+    }
+
+    private void connect(final String username, final String password) {
         mVpnManager.startVpnService();
         ServiceConnection c = new ServiceConnection() {
             public void onServiceConnected(ComponentName className,
@@ -151,10 +112,7 @@ public class AuthenticationActor implements VpnProfileActor,
                 boolean success = false;
                 try {
                     success = IVpnService.Stub.asInterface(service)
-                            .connect(mProfile,
-                                    mUsernameView.getText().toString(),
-                                    mPasswordView.getText().toString());
-                    mPasswordView.setText("");
+                            .connect(mProfile, username, password);
                 } catch (Throwable e) {
                     Log.e(TAG, "connect()", e);
                     checkStatus();
@@ -230,59 +188,18 @@ public class AuthenticationActor implements VpnProfileActor,
         return mVpnManager.bindVpnService(c);
     }
 
+    private void updateConnectView(Dialog d, String username,
+            String password, boolean toSaveUsername) {
+        TextView usernameView = (TextView) d.findViewById(R.id.username_value);
+        TextView passwordView = (TextView) d.findViewById(R.id.password_value);
+        CheckBox saveUsername = (CheckBox) d.findViewById(R.id.save_username);
+        usernameView.setText(username);
+        passwordView.setText(password);
+        saveUsername.setChecked(toSaveUsername);
+    }
+
     private void broadcastConnectivity(VpnState s) {
         mVpnManager.broadcastConnectivity(mProfile.getName(), s);
-    }
-
-    // returns true if inputs pass validation
-    private boolean validateInputs() {
-        Context c = mContext;
-        String error = null;
-        if (Util.isNullOrEmpty(mUsernameView.getText().toString())) {
-            error = c.getString(R.string.vpn_username);
-        } else if (Util.isNullOrEmpty(mPasswordView.getText().toString())) {
-            error = c.getString(R.string.vpn_password);
-        }
-        if (error == null) {
-            return true;
-        } else {
-            new AlertDialog.Builder(c)
-                    .setTitle(c.getString(R.string.vpn_you_miss_a_field))
-                    .setMessage(String.format(
-                            c.getString(R.string.vpn_please_fill_up), error))
-                    .setPositiveButton(c.getString(R.string.vpn_back_button),
-                            createBackButtonListener())
-                    .show();
-            return false;
-        }
-    }
-
-    private View createConnectView(String username, String password) {
-        View v = View.inflate(mContext, R.layout.vpn_connect_dialog_view, null);
-        mUsernameView = (TextView) v.findViewById(R.id.username_value);
-        mPasswordView = (TextView) v.findViewById(R.id.password_value);
-        mUsernameView.setText(username);
-        mPasswordView.setText(password);
-        copyFieldsFromOldView(v);
-        mView = v;
-        return v;
-    }
-
-    private void copyFieldsFromOldView(View newView) {
-        if (mView == null) return;
-        mUsernameView.setText(
-                ((TextView) mView.findViewById(R.id.username_value)).getText());
-        mPasswordView.setText(
-                ((TextView) mView.findViewById(R.id.password_value)).getText());
-    }
-
-    private DialogInterface.OnClickListener createBackButtonListener() {
-        return new DialogInterface.OnClickListener() {
-            public void onClick(DialogInterface dialog, int which) {
-                dialog.dismiss();
-                connect();
-            }
-        };
     }
 
     private void wait(Object o, int ms) {
