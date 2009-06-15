@@ -36,25 +36,13 @@
         />
 
         <ImageButton
-            android:id="@+id/btn_brightness"
+            android:id="@+id/btn_bluetooth"
             android:layout_width="wrap_content"
             android:layout_height="fill_parent"
             android:layout_marginLeft="3dip"
             android:layout_marginRight="3dip"
             android:background="@drawable/widget_btn"
             android:layout_gravity="center_horizontal"
-
-        />
-
-        <ImageButton
-            android:id="@+id/btn_sync"
-            android:layout_width="wrap_content"
-            android:layout_height="fill_parent"
-            android:layout_marginLeft="3dip"
-            android:layout_marginRight="3dip"
-            android:background="@drawable/widget_btn"
-            android:layout_gravity="center_horizontal"
-
         />
 
         <ImageButton
@@ -65,17 +53,26 @@
             android:layout_marginRight="3dip"
             android:background="@drawable/widget_btn"
             android:layout_gravity="center_horizontal"
-
         />
 
-            <ImageButton
-            android:id="@+id/btn_bluetooth"
+        <ImageButton
+            android:id="@+id/btn_sync"
             android:layout_width="wrap_content"
             android:layout_height="fill_parent"
             android:layout_marginLeft="3dip"
             android:layout_marginRight="3dip"
             android:background="@drawable/widget_btn"
             android:layout_gravity="center_horizontal"
-
         />
+
+        <ImageButton
+            android:id="@+id/btn_brightness"
+            android:layout_width="wrap_content"
+            android:layout_height="fill_parent"
+            android:layout_marginLeft="3dip"
+            android:layout_marginRight="3dip"
+            android:background="@drawable/widget_btn"
+            android:layout_gravity="center_horizontal"
+        />
+
     </LinearLayout>

@@ -87,19 +87,25 @@ public class DateTimeSettings
         mDatePref = findPreference("date");
         mDateFormat = (ListPreference) findPreference(KEY_DATE_FORMAT);
         
-        int currentFormatIndex = -1;
         String [] dateFormats = getResources().getStringArray(R.array.date_format_values);
         String [] formattedDates = new String[dateFormats.length];
         String currentFormat = getDateFormat();
         // Initialize if DATE_FORMAT is not set in the system settings
         // This can happen after a factory reset (or data wipe)
         if (currentFormat == null) {
-            currentFormat = getResources().getString(R.string.default_date_format);
-            setDateFormat(currentFormat);
+            currentFormat = "";
         }
         for (int i = 0; i < formattedDates.length; i++) {
-            formattedDates[i] = DateFormat.format(dateFormats[i], mDummyDate).toString();
-            if (currentFormat.equals(dateFormats[i])) currentFormatIndex = i;
+            String formatted =
+                DateFormat.getDateFormatForSetting(this, dateFormats[i]).
+                    format(mDummyDate.getTime());
+
+            if (dateFormats[i].length() == 0) {
+                formattedDates[i] = getResources().
+                    getString(R.string.normal_date_format, formatted);
+            } else {
+                formattedDates[i] = formatted;
+            }
         }
         
         mDateFormat.setEntries(formattedDates);
@@ -314,6 +320,10 @@ public class DateTimeSettings
     }
 
     private void setDateFormat(String format) {
+        if (format.length() == 0) {
+            format = null;
+        }
+
         Settings.System.putString(getContentResolver(), Settings.System.DATE_FORMAT, format);        
     }
     

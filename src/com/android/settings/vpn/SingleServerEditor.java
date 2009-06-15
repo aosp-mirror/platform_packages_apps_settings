@@ -50,11 +50,9 @@ class SingleServerEditor implements VpnProfileEditor {
 
     //@Override
     public String validate(Context c) {
-        return (mProfile.isCustomized()
-                ? null
-                : (Util.isNullOrEmpty(mServerName.getText())
+        return (Util.isNullOrEmpty(mServerName.getText())
                         ? c.getString(R.string.vpn_error_server_name_empty)
-                        : null));
+                        : null);
     }
 
     /**

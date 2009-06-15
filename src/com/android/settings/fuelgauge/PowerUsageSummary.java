@@ -100,7 +100,7 @@ public class PowerUsageSummary extends PreferenceActivity implements Runnable {
         addPreferencesFromResource(R.xml.power_usage_summary);
         mBatteryInfo = IBatteryStats.Stub.asInterface(
                 ServiceManager.getService("batteryinfo"));
-        mAppListGroup = getPreferenceScreen();
+        mAppListGroup = (PreferenceGroup) findPreference("app_list");
         mPowerProfile = new PowerProfile(this);
     }
 
@@ -108,7 +108,7 @@ public class PowerUsageSummary extends PreferenceActivity implements Runnable {
     protected void onResume() {
         super.onResume();
         mAbort = false;
-        updateAppsList();
+        refreshStats();
     }
 
     @Override
@@ -207,18 +207,18 @@ public class PowerUsageSummary extends PreferenceActivity implements Runnable {
                 } else {
                     mStatsType = BatteryStats.STATS_TOTAL;
                 }
-                updateAppsList();
+                refreshStats();
                 return true;
             case MENU_STATS_REFRESH:
                 mStats = null;
-                updateAppsList();
+                refreshStats();
                 return true;
             default:
                 return false;
         }
     }
 
-    private void updateAppsList() {
+    private void refreshStats() {
         if (mStats == null) {
             load();
         }
@@ -263,12 +263,19 @@ public class PowerUsageSummary extends PreferenceActivity implements Runnable {
         }
     }
 
+    private void updateStatsPeriod(long duration) {
+        String durationString = Utils.formatElapsedTime(this, duration / 1000);
+        String label = getString(R.string.battery_stats_duration, durationString);
+        mAppListGroup.setTitle(label);
+    }
+
     private void processAppUsage() {
         SensorManager sensorManager = (SensorManager)getSystemService(Context.SENSOR_SERVICE);
         final int which = mStatsType;
         final double powerCpuNormal = mPowerProfile.getAveragePower(PowerProfile.POWER_CPU_NORMAL);
         final double averageCostPerByte = getAverageDataCost();
-        long uSecTime = mStats.computeBatteryRealtime(SystemClock.elapsedRealtime(), which) * 1000;
+        long uSecTime = mStats.computeBatteryRealtime(SystemClock.elapsedRealtime() * 1000, which);
+        updateStatsPeriod(uSecTime);
         SparseArray<? extends Uid> uidStats = mStats.getUidStats();
         final int NU = uidStats.size();
         for (int iu = 0; iu < NU; iu++) {

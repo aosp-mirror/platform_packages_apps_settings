@@ -58,8 +58,6 @@ class L2tpIpsecEditor extends SingleServerEditor {
         String result = super.validate(c);
         if (result != null) {
             return result;
-        } else if (mProfile.isCustomized()) {
-            return null;
         } else if (Util.isNullOrEmpty(mUserkey.getValue())) {
             return c.getString(R.string.vpn_error_userkey_not_selected);
         } else if (Util.isNullOrEmpty(mUserCertificate.getValue())) {
