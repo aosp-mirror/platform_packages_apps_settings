@@ -27,6 +27,7 @@ import android.os.Environment;
 import android.os.IMountService;
 import android.os.ServiceManager;
 import android.os.StatFs;
+import android.text.format.Formatter;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
@@ -146,29 +147,7 @@ public class SdCardSettings extends Activity
     }
 
     private String formatSize(long size) {
-        String suffix = null;
-
-        // add K or M suffix if size is greater than 1K or 1M
-        if (size >= 1024) {
-            suffix = "K";
-            size /= 1024;
-            if (size >= 1024) {
-                suffix = "M";
-                size /= 1024;
-            }
-        }
-
-        StringBuilder resultBuffer = new StringBuilder(Long.toString(size));
-
-        int commaOffset = resultBuffer.length() - 3;
-        while (commaOffset > 0) {
-            resultBuffer.insert(commaOffset, ',');
-            commaOffset -= 3;
-        }
-
-        if (suffix != null)
-            resultBuffer.append(suffix);
-        return resultBuffer.toString();
+        return Formatter.formatFileSize(this, size);
     }
 
     OnClickListener mMassStorageListener = new OnClickListener() {
