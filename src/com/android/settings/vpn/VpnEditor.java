@@ -22,7 +22,6 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.vpn.L2tpIpsecProfile;
-import android.net.vpn.SingleServerProfile;
 import android.net.vpn.VpnProfile;
 import android.net.vpn.VpnType;
 import android.os.Bundle;
