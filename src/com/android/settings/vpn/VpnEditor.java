@@ -158,10 +158,8 @@ public class VpnEditor extends PreferenceActivity {
     private VpnProfileEditor getEditor(VpnProfile p) {
         if (p instanceof L2tpIpsecProfile) {
             return new L2tpIpsecEditor((L2tpIpsecProfile) p);
-        } else if (p instanceof SingleServerProfile) {
-            return new SingleServerEditor((SingleServerProfile) p);
         } else {
-            throw new RuntimeException("Unknown profile type: " + p.getType());
+            return new VpnProfileEditor(p);
         }
     }
 

@@ -29,7 +29,7 @@ import android.security.Keystore;
 /**
  * The class for editing {@link L2tpIpsecProfile}.
  */
-class L2tpIpsecEditor extends SingleServerEditor {
+class L2tpIpsecEditor extends VpnProfileEditor {
     private static final String TAG = L2tpIpsecEditor.class.getSimpleName();
 
     private ListPreference mUserCertificate;
@@ -43,17 +43,15 @@ class L2tpIpsecEditor extends SingleServerEditor {
         mProfile = p;
     }
 
-    //@Override
-    public void loadPreferencesTo(PreferenceGroup subsettings) {
-        super.loadPreferencesTo(subsettings);
-        Context c = subsettings.getContext();
-        subsettings.addPreference(createUserkeyPreference(c));
-        subsettings.addPreference(createUserCertificatePreference(c));
-        subsettings.addPreference(createCaCertificatePreference(c));
-        subsettings.addPreference(createDomainSufficesPreference(c));
+    @Override
+    protected void loadExtraPreferencesTo(PreferenceGroup subpanel) {
+        Context c = subpanel.getContext();
+        subpanel.addPreference(createUserkeyPreference(c));
+        subpanel.addPreference(createUserCertificatePreference(c));
+        subpanel.addPreference(createCaCertificatePreference(c));
     }
 
-    //@Override
+    @Override
     public String validate(Context c) {
         String result = super.validate(c);
         if (result != null) {
