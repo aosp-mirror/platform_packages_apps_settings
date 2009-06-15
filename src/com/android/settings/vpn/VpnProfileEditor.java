@@ -16,20 +16,48 @@
 
 package com.android.settings.vpn;
 
+import com.android.settings.R;
+
 import android.content.Context;
 import android.net.vpn.VpnProfile;
+import android.preference.EditTextPreference;
+import android.preference.Preference;
 import android.preference.PreferenceGroup;
 
 /**
- * The interface to set up preferences for editing a {@link VpnProfile}.
+ * The common class for editing {@link VpnProfile}.
  */
-public interface VpnProfileEditor {
-    VpnProfile getProfile();
+class VpnProfileEditor {
+    private EditTextPreference mServerName;
+    private EditTextPreference mDomainSuffices;
+    private VpnProfile mProfile;
+
+    public VpnProfileEditor(VpnProfile p) {
+        mProfile = p;
+    }
+
+    //@Override
+    public VpnProfile getProfile() {
+        return mProfile;
+    }
 
     /**
-     * Adds the preferences to the panel.
+     * Adds the preferences to the panel. Subclasses should override
+     * {@link #loadExtraPreferencesTo(PreferenceGroup)} instead of this method.
      */
-    void loadPreferencesTo(PreferenceGroup subpanel);
+    public void loadPreferencesTo(PreferenceGroup subpanel) {
+        Context c = subpanel.getContext();
+        subpanel.addPreference(createServerNamePreference(c));
+        loadExtraPreferencesTo(subpanel);
+        subpanel.addPreference(createDomainSufficesPreference(c));
+    }
+
+    /**
+     * Adds the extra preferences to the panel. Subclasses should add
+     * additional preferences in this method.
+     */
+    protected void loadExtraPreferencesTo(PreferenceGroup subpanel) {
+    }
 
     /**
      * Validates the inputs in the preferences.
@@ -37,5 +65,60 @@ public interface VpnProfileEditor {
      * @return an error message that is ready to be displayed in a dialog; or
      *      null if all the inputs are valid
      */
-    String validate(Context c);
+    public String validate(Context c) {
+        return (Util.isNullOrEmpty(mServerName.getText())
+                        ? c.getString(R.string.vpn_error_server_name_empty)
+                        : null);
+    }
+
+    /**
+     * Creates a preference for users to input domain suffices.
+     */
+    protected EditTextPreference createDomainSufficesPreference(Context c) {
+        EditTextPreference pref = mDomainSuffices = new EditTextPreference(c);
+        pref.setTitle(R.string.vpn_dns_search_list_title);
+        pref.setDialogTitle(R.string.vpn_dns_search_list_title);
+        pref.setPersistent(true);
+        pref.setText(mProfile.getDomainSuffices());
+        pref.setSummary(mProfile.getDomainSuffices());
+        pref.setOnPreferenceChangeListener(
+                new Preference.OnPreferenceChangeListener() {
+                    public boolean onPreferenceChange(
+                            Preference pref, Object newValue) {
+                        String v = ((String) newValue).trim();
+                        mProfile.setDomainSuffices(v);
+                        pref.setSummary(checkNull(v, pref.getContext()));
+                        return true;
+                    }
+                });
+        return pref;
+    }
+
+    private Preference createServerNamePreference(Context c) {
+        EditTextPreference serverName = mServerName = new EditTextPreference(c);
+        String title = c.getString(R.string.vpn_server_name_title);
+        serverName.setTitle(title);
+        serverName.setDialogTitle(title);
+        serverName.setSummary(checkNull(mProfile.getServerName(), c));
+        serverName.setText(mProfile.getServerName());
+        serverName.setPersistent(true);
+        serverName.setOnPreferenceChangeListener(
+                new Preference.OnPreferenceChangeListener() {
+                    public boolean onPreferenceChange(
+                            Preference pref, Object newValue) {
+                        String v = ((String) newValue).trim();
+                        mProfile.setServerName(v);
+                        pref.setSummary(checkNull(v, pref.getContext()));
+                        return true;
+                    }
+                });
+        return mServerName;
+    }
+
+
+   String checkNull(String value, Context c) {
+        return ((value != null && value.length() > 0)
+                ? value
+                : c.getString(R.string.vpn_not_set));
+   }
 }
