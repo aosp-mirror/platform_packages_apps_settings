@@ -34,7 +34,6 @@ class L2tpIpsecEditor extends VpnProfileEditor {
 
     private ListPreference mUserCertificate;
     private ListPreference mCaCertificate;
-    private ListPreference mUserkey;
 
     private L2tpIpsecProfile mProfile;
 
@@ -46,7 +45,6 @@ class L2tpIpsecEditor extends VpnProfileEditor {
     @Override
     protected void loadExtraPreferencesTo(PreferenceGroup subpanel) {
         Context c = subpanel.getContext();
-        subpanel.addPreference(createUserkeyPreference(c));
         subpanel.addPreference(createUserCertificatePreference(c));
         subpanel.addPreference(createCaCertificatePreference(c));
     }
@@ -56,8 +54,6 @@ class L2tpIpsecEditor extends VpnProfileEditor {
         String result = super.validate(c);
         if (result != null) {
             return result;
-        } else if (Util.isNullOrEmpty(mUserkey.getValue())) {
-            return c.getString(R.string.vpn_error_userkey_not_selected);
         } else if (Util.isNullOrEmpty(mUserCertificate.getValue())) {
             return c.getString(R.string.vpn_error_user_certificate_not_selected);
         } else if (Util.isNullOrEmpty(mCaCertificate.getValue())) {
@@ -71,7 +67,7 @@ class L2tpIpsecEditor extends VpnProfileEditor {
         mUserCertificate = createListPreference(c,
                 R.string.vpn_user_certificate_title,
                 mProfile.getUserCertificate(),
-                Keystore.getInstance().getAllCertificateKeys(),
+                Keystore.getInstance().getAllUserCertificateKeys(),
                 new Preference.OnPreferenceChangeListener() {
                     public boolean onPreferenceChange(
                             Preference pref, Object newValue) {
@@ -86,7 +82,7 @@ class L2tpIpsecEditor extends VpnProfileEditor {
         mCaCertificate = createListPreference(c,
                 R.string.vpn_ca_certificate_title,
                 mProfile.getCaCertificate(),
-                Keystore.getInstance().getAllCertificateKeys(),
+                Keystore.getInstance().getAllCaCertificateKeys(),
                 new Preference.OnPreferenceChangeListener() {
                     public boolean onPreferenceChange(
                             Preference pref, Object newValue) {
@@ -95,21 +91,6 @@ class L2tpIpsecEditor extends VpnProfileEditor {
                     }
                 });
         return mCaCertificate;
-    }
-
-    private Preference createUserkeyPreference(Context c) {
-        mUserkey = createListPreference(c,
-                R.string.vpn_userkey_title,
-                mProfile.getUserkey(),
-                Keystore.getInstance().getAllUserkeyKeys(),
-                new Preference.OnPreferenceChangeListener() {
-                    public boolean onPreferenceChange(
-                            Preference pref, Object newValue) {
-                        mProfile.setUserkey((String) newValue);
-                        return onPreferenceChangeCommon(pref, newValue);
-                    }
-                });
-        return mUserkey;
     }
 
     private ListPreference createListPreference(Context c, int titleResId,
