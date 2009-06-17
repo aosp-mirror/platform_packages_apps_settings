@@ -111,16 +111,13 @@ public class AccessPointDialog extends AlertDialog implements DialogInterface.On
     private EditText mIdentityEdit;
     private TextView mAnonymousIdentityText;
     private EditText mAnonymousIdentityEdit;
-    private TextView mClientCertText;
-    private Spinner mClientCertSpinner;
     private TextView mCaCertText;
     private Spinner mCaCertSpinner;
-    private TextView mPrivateKeyText;
-    private Spinner mPrivateKeySpinner;
+    private TextView mClientCertText;
+    private Spinner mClientCertSpinner;
     private TextView mPrivateKeyPasswdText;
     private EditText mPrivateKeyPasswdEdit;
     private EditText[] mEnterpriseTextFields;
-    private Spinner[] mEnterpriseSpinnerFields;
 
     
     // Info-specific views
@@ -330,23 +327,20 @@ public class AccessPointDialog extends AlertDialog implements DialogInterface.On
             mEapSpinner.setSelection(getSelectionIndex(
                     R.array.wifi_eap_entries, mState.getEap()));
             mClientCertSpinner.setSelection(getSelectionIndex(
-                    getAllCertificateKeys(), mState.getEnterpriseField(
+                    getAllUserCertificateKeys(), mState.getEnterpriseField(
                     AccessPointState.CLIENT_CERT)));
             mCaCertSpinner.setSelection(getSelectionIndex(
-                    getAllCertificateKeys(), mState.getEnterpriseField(
+                    getAllCaCertificateKeys(), mState.getEnterpriseField(
                     AccessPointState.CA_CERT)));
-            mPrivateKeySpinner.setSelection(getSelectionIndex(
-                    getAllUserkeyKeys(), mState.getEnterpriseField(
-                    AccessPointState.PRIVATE_KEY)));
         }
     }
 
-    private String[] getAllCertificateKeys() {
-        return appendEmptyInSelection(mKeystore.getAllCertificateKeys());
+    private String[] getAllCaCertificateKeys() {
+        return appendEmptyInSelection(mKeystore.getAllCaCertificateKeys());
     }
 
-    private String[] getAllUserkeyKeys() {
-        return appendEmptyInSelection(mKeystore.getAllUserkeyKeys());
+    private String[] getAllUserCertificateKeys() {
+        return appendEmptyInSelection(mKeystore.getAllUserCertificateKeys());
     }
 
     private String[] appendEmptyInSelection(String[] keys) {
@@ -367,9 +361,6 @@ public class AccessPointDialog extends AlertDialog implements DialogInterface.On
         mClientCertText =
                 (TextView) view.findViewById(R.id.client_certificate_text);
         mCaCertText = (TextView) view.findViewById(R.id.ca_certificate_text);
-        mPrivateKeyText = (TextView) view.findViewById(R.id.private_key_text);
-        mPrivateKeyPasswdText =
-                (TextView) view.findViewById(R.id.private_key_passwd_text);
         mPrivateKeyPasswdEdit =
                 (EditText) view.findViewById(R.id.private_key_passwd_edit);
         mEapText = (TextView) view.findViewById(R.id.eap_text);
@@ -389,26 +380,16 @@ public class AccessPointDialog extends AlertDialog implements DialogInterface.On
         mClientCertSpinner.setOnItemSelectedListener(this);
         mClientCertSpinner.setPromptId(
                 R.string.please_select_client_certificate);
-        setSpinnerAdapter(mClientCertSpinner, getAllCertificateKeys());
+        setSpinnerAdapter(mClientCertSpinner, getAllUserCertificateKeys());
 
         mCaCertSpinner =
                 (Spinner) view.findViewById(R.id.ca_certificate_spinner);
         mCaCertSpinner.setOnItemSelectedListener(this);
         mCaCertSpinner.setPromptId(R.string.please_select_ca_certificate);
-        setSpinnerAdapter(mCaCertSpinner, getAllCertificateKeys());
-
-        mPrivateKeySpinner =
-                (Spinner) view.findViewById(R.id.private_key_spinner);
-        mPrivateKeySpinner.setOnItemSelectedListener(this);
-        mPrivateKeySpinner.setPromptId(R.string.please_select_private_key);
-        setSpinnerAdapter(mPrivateKeySpinner, getAllUserkeyKeys());
+        setSpinnerAdapter(mCaCertSpinner, getAllCaCertificateKeys());
 
         mEnterpriseTextFields = new EditText[] {
             mIdentityEdit, mAnonymousIdentityEdit, mPrivateKeyPasswdEdit
-        };
-
-        mEnterpriseSpinnerFields = new Spinner[] {
-            mClientCertSpinner, mCaCertSpinner, mPrivateKeySpinner
         };
 
     }
@@ -655,48 +636,55 @@ public class AccessPointDialog extends AlertDialog implements DialogInterface.On
     }
 
     private void updateEnterpriseFields(int securityType) {
-            int i;
-            for (i = AccessPointState.IDENTITY ;
-                i < AccessPointState.MAX_ENTRPRISE_FIELD ; i++) {
-                String value;
-                if (i <= AccessPointState.PRIVATE_KEY_PASSWD) {
-                    value = mEnterpriseTextFields[i].getText().toString();
-                } else {
-                    Spinner spinner =  mEnterpriseSpinnerFields[i -
-                        AccessPointState.CLIENT_CERT];
-                    int index = spinner.getSelectedItemPosition();
-                    if (index == (spinner.getCount() - 1)) {
-                        value = "";
-                    } else {
-                        if (i != AccessPointState.PRIVATE_KEY) {
-                            value = mKeystore.getCertificate(
-                                    getAllCertificateKeys()[index]);
-                        } else {
-                            value = mKeystore.getUserkey(
-                                    getAllUserkeyKeys()[index]);
-                        }
-                    }
-                }
-                if (!TextUtils.isEmpty(value) ||
-                        (i == AccessPointState.PRIVATE_KEY_PASSWD)) {
-                    mState.setEnterpriseField(i, value);
-                }
+        int i;
+        String value;
+        for (i = AccessPointState.IDENTITY ;
+                i <= AccessPointState.PRIVATE_KEY_PASSWD ; i++) {
+            value = mEnterpriseTextFields[i].getText().toString();
+            if (!TextUtils.isEmpty(value) ||
+                    (i == AccessPointState.PRIVATE_KEY_PASSWD)) {
+                mState.setEnterpriseField(i, value);
             }
-
-            switch (securityType) {
-                case SECURITY_WPA_EAP: {
-                    mState.setSecurity(AccessPointState.WPA_EAP);
-                    mState.setEap(mEapSpinner.getSelectedItemPosition());
-                    break;
-                }
-                case SECURITY_IEEE8021X: {
-                    mState.setSecurity(AccessPointState.IEEE8021X);
-                    mState.setEap(mEapSpinner.getSelectedItemPosition());
-                  break;
-                }
-                default:
-                    mState.setSecurity(AccessPointState.OPEN);
+        }
+        Spinner spinner = mClientCertSpinner;
+        int index = spinner.getSelectedItemPosition();
+        if (index != (spinner.getCount() - 1)) {
+            String key = getAllUserCertificateKeys()[index];
+            value = mKeystore.getUserCertificate(key);
+            if (!TextUtils.isEmpty(value)) {
+                mState.setEnterpriseField(AccessPointState.CLIENT_CERT,
+                        value);
             }
+            value = mKeystore.getUserPrivateKey(key);
+            if (!TextUtils.isEmpty(value)) {
+                mState.setEnterpriseField(AccessPointState.PRIVATE_KEY,
+                        value);
+            }
+        }
+        spinner = mCaCertSpinner;
+        index = spinner.getSelectedItemPosition();
+        if (index != (spinner.getCount() - 1)) {
+            String key = getAllCaCertificateKeys()[index];
+            value = mKeystore.getCaCertificate(key);
+            if (!TextUtils.isEmpty(value)) {
+                mState.setEnterpriseField(AccessPointState.CA_CERT,
+                        value);
+            }
+        }
+        switch (securityType) {
+            case SECURITY_WPA_EAP: {
+                mState.setSecurity(AccessPointState.WPA_EAP);
+                mState.setEap(mEapSpinner.getSelectedItemPosition());
+                break;
+            }
+            case SECURITY_IEEE8021X: {
+                mState.setSecurity(AccessPointState.IEEE8021X);
+                mState.setEap(mEapSpinner.getSelectedItemPosition());
+                break;
+            }
+            default:
+                mState.setSecurity(AccessPointState.OPEN);
+        }
     }
 
     /**
