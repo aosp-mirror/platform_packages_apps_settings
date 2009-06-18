@@ -815,22 +815,23 @@ public final class AccessPointState implements Comparable<AccessPointState>, Par
             return null;
         }
     }
-    
-    private void buildSummary(StringBuilder sb, String string, boolean autoLowerCaseFirstLetter) {
+
+    private void buildSummary(StringBuilder sb, String string, boolean autoUpperCaseFirstLetter) {
         if (sb.length() == 0) {
-            sb.append(string);
-        } else {
-            sb.append(", ");
-            if (autoLowerCaseFirstLetter) {
-                // Convert first letter to lowercase
-                sb.append(Character.toLowerCase(string.charAt(0))).append(string, 1,
+            if (autoUpperCaseFirstLetter && string.length() > 1
+                    && Character.isLowerCase(string.charAt(0))
+                    && !Character.isUpperCase(string.charAt(1))) {
+                sb.append(Character.toUpperCase(string.charAt(0))).append(string, 1,
                         string.length());
             } else {
                 sb.append(string);
             }
+        } else {
+            sb.append(", ");
+            sb.append(string);
         }
     }
-    
+
     public int compareTo(AccessPointState other) {
         // This ranks the states for displaying in the AP list, not for
         // connecting to (wpa_supplicant does that using the WifiConfiguration's
