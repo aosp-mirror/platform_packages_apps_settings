@@ -288,26 +288,7 @@ public class SecuritySettings extends PreferenceActivity implements
         if (force) {
             mUseLocation.setChecked(true);
         }
-        /*
-        Resources res = getResources();
-        CharSequence msg = new SpannableString(
-                res.getText(R.string.use_location_warning_message));
-        SpannableString spannable = (SpannableString) msg;
-        Annotation[] spans = spannable.getSpans(0, spannable.length(), Annotation.class);
-        if (spans != null && spans.length > 0) {
-            SpannableStringBuilder builder = new SpannableStringBuilder(spannable);
-            int start = spannable.getSpanStart(spans[0]);
-            int end = spannable.getSpanEnd(spans[0]);
-            ClickableSpan link = new ClickableSpan() {
-                @Override
-                public void onClick(View view) {
-                    showPrivacyPolicy();
-                }
-            };
-            builder.setSpan(link, start, end, spannable.getSpanFlags(link));
-            msg = builder;
-        }
-        */
+
         CharSequence msg = getResources().getText(R.string.use_location_warning_message);
         mUseLocationDialog = new AlertDialog.Builder(this).setMessage(msg)
                 .setTitle(R.string.use_location_title)
@@ -329,8 +310,8 @@ public class SecuritySettings extends PreferenceActivity implements
                 res, LocationManager.NETWORK_PROVIDER));
         mGps.setChecked(Settings.Secure.isLocationProviderEnabled(
                 res, LocationManager.GPS_PROVIDER));
-        mUseLocation.setChecked(Settings.Gservices.getInt(res,
-                Settings.Gservices.USE_LOCATION_FOR_SERVICES, 2) == 1);
+        mUseLocation.setChecked(Settings.Secure.getInt(res,
+                Settings.Secure.USE_LOCATION_FOR_SERVICES, 2) == 1);
     }
 
     private boolean isToggled(Preference pref) {
@@ -339,8 +320,8 @@ public class SecuritySettings extends PreferenceActivity implements
 
     private void updateUseLocation() {
         boolean use = mUseLocation.isChecked();
-        Settings.Gservices.putString(getContentResolver(),
-                Settings.Gservices.USE_LOCATION_FOR_SERVICES, use ? "1" : "0");
+        Settings.Secure.putInt(getContentResolver(),
+                Settings.Secure.USE_LOCATION_FOR_SERVICES, use ? 1 : 0);
     }
 
 
