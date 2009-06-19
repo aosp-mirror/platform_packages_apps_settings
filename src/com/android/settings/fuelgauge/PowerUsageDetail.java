@@ -27,10 +27,12 @@ import android.content.pm.PackageManager.NameNotFoundException;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.provider.Settings;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.android.settings.InstalledAppDetails;
@@ -48,6 +50,17 @@ public class PowerUsageDetail extends Activity implements Button.OnClickListener
         APP
     }
 
+    // Note: Must match the sequence of the DrainType
+    private static int[] sDrainTypeDesciptions = new int[] {
+        R.string.battery_desc_standby,
+        R.string.battery_desc_radio,
+        R.string.battery_desc_voice,
+        R.string.battery_desc_wifi,
+        R.string.battery_desc_bluetooth,
+        R.string.battery_desc_display,
+        R.string.battery_desc_apps
+    };
+    
     public static final int ACTION_DISPLAY_SETTINGS = 1;
     public static final int ACTION_WIFI_SETTINGS = 2;
     public static final int ACTION_BLUETOOTH_SETTINGS = 3;
@@ -59,16 +72,18 @@ public class PowerUsageDetail extends Activity implements Button.OnClickListener
 
     public static final String EXTRA_TITLE = "title";
     public static final String EXTRA_PERCENT = "percent";
+    public static final String EXTRA_GAUGE = "gauge";
     public static final String EXTRA_UID = "uid";
     public static final String EXTRA_USAGE_SINCE = "since";
     public static final String EXTRA_USAGE_DURATION = "duration";
-    public static final String EXTRA_DETAIL_TYPES = "types";
-    public static final String EXTRA_DETAIL_VALUES = "values";
-    public static final String EXTRA_DRAIN_TYPE = "drainType";
+    public static final String EXTRA_DETAIL_TYPES = "types"; // Array of usage types (cpu, gps, etc)
+    public static final String EXTRA_DETAIL_VALUES = "values"; // Array of doubles
+    public static final String EXTRA_DRAIN_TYPE = "drainType"; // DrainType
+    public static final String EXTRA_ICON_PACKAGE = "iconPackage"; // String
+    public static final String EXTRA_ICON_ID = "iconId"; // Int
 
     private static final boolean DEBUG = true;
     private String mTitle;
-    private double mPercentage;
     private int mUsageSince;
     private int[] mTypes;
     private int mUid;
@@ -79,6 +94,8 @@ public class PowerUsageDetail extends Activity implements Button.OnClickListener
     private DrainType mDrainType;
     private int mAction1;
     private int mAction2;
+    private PercentageBar mGauge;
+    private Drawable mAppIcon;
 
     private static final String TAG = "PowerUsageDetail";
     private Button mButton1;
@@ -106,20 +123,51 @@ public class PowerUsageDetail extends Activity implements Button.OnClickListener
     private void createDetails() {
         final Intent intent = getIntent();
         mTitle = intent.getStringExtra(EXTRA_TITLE);
-        mPercentage = intent.getDoubleExtra(EXTRA_PERCENT, -1);
+        final int percentage = intent.getIntExtra(EXTRA_PERCENT, 1);
+        final int gaugeValue = intent.getIntExtra(EXTRA_GAUGE, 1);
         mUsageSince = intent.getIntExtra(EXTRA_USAGE_SINCE, USAGE_SINCE_UNPLUGGED);
         mUid = intent.getIntExtra(EXTRA_UID, 0);
         mDrainType = (DrainType) intent.getSerializableExtra(EXTRA_DRAIN_TYPE);
+        String iconPackage = intent.getStringExtra(EXTRA_ICON_PACKAGE);
+        int iconId = intent.getIntExtra(EXTRA_ICON_ID, 0);
+        if (!TextUtils.isEmpty(iconPackage)) {
+            try {
+                final PackageManager pm = getPackageManager();
+                ApplicationInfo ai = pm.getPackageInfo(iconPackage, 0).applicationInfo;
+                if (ai != null) {
+                    mAppIcon = ai.loadIcon(pm);
+                }
+            } catch (NameNotFoundException nnfe) {
+                // Use default icon
+            }
+        } else if (iconId != 0) {
+            mAppIcon = getResources().getDrawable(iconId);
+        }
+        if (mAppIcon == null) {
+            mAppIcon = getPackageManager().getDefaultActivityIcon();
+        }
 
+        // Set the description
+        String summary = getDescriptionForDrainType();
+        ((TextView)findViewById(R.id.summary)).setText(summary);
+        
         mTypes = intent.getIntArrayExtra(EXTRA_DETAIL_TYPES);
         mValues = intent.getDoubleArrayExtra(EXTRA_DETAIL_VALUES);
 
         mTitleView = (TextView) findViewById(R.id.name);
         mTitleView.setText(mTitle);
-        // TODO: I18N
         ((TextView)findViewById(R.id.battery_percentage))
-            .setText(String.format("%3.2f%% of battery usage since last unplugged", mPercentage));
+            .setText(String.format("%d%%", percentage));
 
+        ImageView gaugeImage = (ImageView) findViewById(R.id.gauge);
+        mGauge = new PercentageBar();
+        mGauge.percent = gaugeValue;
+        mGauge.bar = getResources().getDrawable(R.drawable.app_gauge);
+        gaugeImage.setImageDrawable(mGauge);
+
+        ImageView iconImage = (ImageView) findViewById(R.id.icon);
+        iconImage.setImageDrawable(mAppIcon);
+        
         mDetailsParent = (ViewGroup) findViewById(R.id.details);
         LayoutInflater inflater = getLayoutInflater();
         if (mTypes != null && mValues != null) {
@@ -181,7 +229,7 @@ public class PowerUsageDetail extends Activity implements Button.OnClickListener
         mAction1 = 0;
         mAction2 = 0;
         PackageManager pm = getPackageManager();
-        String[] packages = pm.getPackagesForUid(mUid);
+        String[] packages = pm.getPackagesForUid(uid);
         PackageInfo pi = null;
         try {
             pi = packages != null ? pm.getPackageInfo(packages[0], 0) : null;
@@ -189,12 +237,14 @@ public class PowerUsageDetail extends Activity implements Button.OnClickListener
         ApplicationInfo ai = pi != null? pi.applicationInfo : null;
         boolean isSystem = ai != null? (ai.flags & ApplicationInfo.FLAG_SYSTEM) != 0 : false;
 
-        if (uid == 0 || !isSystem) { 
+        if (uid < 1000 || !isSystem) { 
             switch (mDrainType) {
                 case APP:
                     //label1 = getString(R.string.battery_action_stop);
-                    label2 = getString(R.string.battery_action_app_details);
-                    mAction2 = ACTION_APP_DETAILS;
+                    if (packages != null) {
+                        label2 = getString(R.string.battery_action_app_details);
+                        mAction2 = ACTION_APP_DETAILS;
+                    }
                     break;
                 case SCREEN:
                     label2 = getString(R.string.battery_action_display);
@@ -246,7 +296,7 @@ public class PowerUsageDetail extends Activity implements Button.OnClickListener
     }
 
     private void fillPackagesSection(int uid) {
-        if (uid == 0) {
+        if (uid < 1) {
             removePackagesSection();
             return;
         }
@@ -282,5 +332,9 @@ public class PowerUsageDetail extends Activity implements Button.OnClickListener
             } catch (NameNotFoundException e) {
             }
         }
+    }
+    
+    private String getDescriptionForDrainType() {
+        return getResources().getString(sDrainTypeDesciptions[mDrainType.ordinal()]);
     }
 }

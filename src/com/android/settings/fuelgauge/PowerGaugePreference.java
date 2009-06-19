@@ -37,7 +37,7 @@ import com.android.settings.fuelgauge.PowerUsageSummary.BatterySipper;
 public class PowerGaugePreference extends Preference {
 
     private Drawable mIcon;
-    private GaugeDrawable mGauge;
+    private PercentageBar mGauge;
     private double mValue;
     private BatterySipper mInfo;
     private double mPercent;
@@ -46,7 +46,7 @@ public class PowerGaugePreference extends Preference {
         super(context);
         setLayoutResource(R.layout.preference_powergauge);
         mIcon = icon;
-        mGauge = new GaugeDrawable();
+        mGauge = new PercentageBar();
         mGauge.bar = context.getResources().getDrawable(R.drawable.app_gauge);
         mInfo = info;
     }
@@ -90,44 +90,4 @@ public class PowerGaugePreference extends Preference {
         percentView.setText((int) (Math.ceil(mPercent)) + "%");
     }
 
-    static class GaugeDrawable extends Drawable {
-        Drawable bar;
-        double percent;
-        int lastWidth = -1;
-
-        @Override
-        public void draw(Canvas canvas) {
-            if (lastWidth == -1) {
-                lastWidth = getBarWidth();
-                bar.setBounds(0, 0, lastWidth, bar.getIntrinsicHeight());
-            }
-            bar.draw(canvas);
-        }
-
-        @Override
-        public int getOpacity() {
-            return PixelFormat.TRANSLUCENT;
-        }
-
-        @Override
-        public void setAlpha(int alpha) {
-            // Ignore
-        }
-
-        @Override
-        public void setColorFilter(ColorFilter cf) {
-            // Ignore
-        }
-
-        private int getBarWidth() {
-            int width = (int) ((this.getBounds().width() * percent) / 100);
-            int intrinsicWidth = bar.getIntrinsicWidth();
-            return Math.max(width, intrinsicWidth);
-        }
-
-        @Override
-        public int getIntrinsicHeight() {
-            return bar.getIntrinsicHeight();
-        }
-    }
 }

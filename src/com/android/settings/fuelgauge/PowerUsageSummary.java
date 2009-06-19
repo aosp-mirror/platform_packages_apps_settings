@@ -85,14 +85,19 @@ public class PowerUsageSummary extends PreferenceActivity implements Runnable {
 
     private PowerProfile mPowerProfile;
 
-    private HashMap<String,String> mNameCache = new HashMap<String,String>();
-    private HashMap<String,Drawable> mIconCache = new HashMap<String,Drawable>();
+    private HashMap<String,UidToDetail> mUidCache = new HashMap<String,UidToDetail>();
 
     /** Queue for fetching name and icon for an application */
     private ArrayList<BatterySipper> mRequestQueue = new ArrayList<BatterySipper>();
     private Thread mRequestThread;
     private boolean mAbort;
     
+    static class UidToDetail {
+        String name;
+        String packageName;
+        Drawable icon;
+    }
+
     @Override
     protected void onCreate(Bundle icicle) {
         super.onCreate(icicle);
@@ -126,7 +131,12 @@ public class PowerUsageSummary extends PreferenceActivity implements Runnable {
         BatterySipper sipper = pgp.getInfo();
         Intent intent = new Intent(this, PowerUsageDetail.class);
         intent.putExtra(PowerUsageDetail.EXTRA_TITLE, sipper.name);
-        intent.putExtra(PowerUsageDetail.EXTRA_PERCENT, sipper.getSortValue() * 100 / mTotalPower);
+        intent.putExtra(PowerUsageDetail.EXTRA_PERCENT, (int)
+                Math.ceil(sipper.getSortValue() * 100 / mTotalPower));
+        intent.putExtra(PowerUsageDetail.EXTRA_GAUGE, (int)
+                Math.ceil(sipper.getSortValue() * 100 / mMaxPower));
+        intent.putExtra(PowerUsageDetail.EXTRA_ICON_PACKAGE, sipper.defaultPackageName);
+        intent.putExtra(PowerUsageDetail.EXTRA_ICON_ID, sipper.iconId);
         if (sipper.uidObj != null) {
             intent.putExtra(PowerUsageDetail.EXTRA_UID, sipper.uidObj.getUid());
         }
@@ -266,7 +276,7 @@ public class PowerUsageSummary extends PreferenceActivity implements Runnable {
     private void updateStatsPeriod(long duration) {
         String durationString = Utils.formatElapsedTime(this, duration / 1000);
         String label = getString(R.string.battery_stats_duration, durationString);
-        mAppListGroup.setTitle(label);
+        setTitle(label);
     }
 
     private void processAppUsage() {
@@ -475,8 +485,7 @@ public class PowerUsageSummary extends PreferenceActivity implements Runnable {
         addWiFiUsage(uSecNow);
         addBluetoothUsage(uSecNow);
         addIdleUsage(uSecNow); // Not including cellular idle power
-        //addRadioUsage(uSecNow); // Cannot include this because airplane mode is not tracked yet
-                                  // and we don't know if the radio is currently running on 2/3G.
+        addRadioUsage(uSecNow);
     }
 
     private void addEntry(String label, DrainType drainType, long time, int iconId, double power) {
@@ -484,6 +493,7 @@ public class PowerUsageSummary extends PreferenceActivity implements Runnable {
         mTotalPower += power;
         BatterySipper bs = new BatterySipper(label, drainType, iconId, null, new double[] {power});
         bs.usageTime = time;
+        bs.iconId = iconId;
         mUsageList.add(bs);
     }
 
@@ -503,6 +513,7 @@ public class PowerUsageSummary extends PreferenceActivity implements Runnable {
     class BatterySipper implements Comparable<BatterySipper> {
         String name;
         Drawable icon;
+        int iconId; // For passing to the detail screen.
         Uid uidObj;
         double value;
         double[] values;
@@ -512,6 +523,7 @@ public class PowerUsageSummary extends PreferenceActivity implements Runnable {
         long gpsTime;
         long cpuFgTime;
         double percent;
+        String defaultPackageName;
 
         BatterySipper(String label, DrainType drainType, int iconId, Uid uid, double[] values) {
             this.values = values;
@@ -548,20 +560,28 @@ public class PowerUsageSummary extends PreferenceActivity implements Runnable {
         void getQuickNameIconForUid(Uid uidObj) {
             final int uid = uidObj.getUid();
             final String uidString = Integer.toString(uid);
-            if (mNameCache.containsKey(uidString)) {
-                name = mNameCache.get(uidString);
-                icon = mIconCache.get(uidString);
+            if (mUidCache.containsKey(uidString)) {
+                UidToDetail utd = mUidCache.get(uidString);
+                defaultPackageName = utd.packageName;
+                name = utd.name;
+                icon = utd.icon;
                 return;
             }
             PackageManager pm = getPackageManager();
             final Drawable defaultActivityIcon = pm.getDefaultActivityIcon();
             String[] packages = pm.getPackagesForUid(uid);
+            icon = pm.getDefaultActivityIcon();
             if (packages == null) {
-                name = Integer.toString(uid);
+                //name = Integer.toString(uid);
+                if (uid == 0) {
+                    name = getResources().getString(R.string.process_kernel_label);
+                } else if (name.equals("mediaserver")) {
+                    name = getResources().getString(R.string.process_mediaserver_label);
+                }
+                return;
             } else {
                 //name = packages[0];
             }
-            icon = pm.getDefaultActivityIcon();
             synchronized (mRequestQueue) {
                 mRequestQueue.add(this);
             }
@@ -596,6 +616,7 @@ public class PowerUsageSummary extends PreferenceActivity implements Runnable {
                         packageLabels[i] = label.toString();
                     }
                     if (ai.icon != 0) {
+                        defaultPackageName = packages[i];
                         icon = ai.loadIcon(pm);
                         break;
                     }
@@ -617,6 +638,7 @@ public class PowerUsageSummary extends PreferenceActivity implements Runnable {
                             if (nm != null) {
                                 name = nm.toString();
                                 if (pi.applicationInfo.icon != 0) {
+                                    defaultPackageName = pkgName;
                                     icon = pi.applicationInfo.loadIcon(pm);
                                 }
                                 break;
@@ -627,8 +649,11 @@ public class PowerUsageSummary extends PreferenceActivity implements Runnable {
                 }
             }
             final String uidString = Integer.toString(uidObj.getUid());
-            mNameCache.put(uidString, name);
-            mIconCache.put(uidString, icon);
+            UidToDetail utd = new UidToDetail();
+            utd.name = name;
+            utd.icon = icon;
+            utd.packageName = defaultPackageName;
+            mUidCache.put(uidString, utd);
             mHandler.sendMessage(mHandler.obtainMessage(MSG_UPDATE_NAME_ICON, this));
         }
     }
