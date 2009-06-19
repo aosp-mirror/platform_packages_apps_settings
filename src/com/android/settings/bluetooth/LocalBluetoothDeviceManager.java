@@ -34,7 +34,7 @@ public class LocalBluetoothDeviceManager {
 
     final LocalBluetoothManager mLocalManager;
     final List<Callback> mCallbacks;
-    
+
     final List<LocalBluetoothDevice> mDevices = new ArrayList<LocalBluetoothDevice>();
 
     public LocalBluetoothDeviceManager(LocalBluetoothManager localManager) {
@@ -47,7 +47,7 @@ public class LocalBluetoothDeviceManager {
         BluetoothDevice manager = mLocalManager.getBluetoothManager();
         String[] bondedAddresses = manager.listBonds();
         if (bondedAddresses == null) return false;
-        
+
         boolean deviceAdded = false;
         for (String address : bondedAddresses) {
             LocalBluetoothDevice device = findDevice(address);
@@ -58,55 +58,58 @@ public class LocalBluetoothDeviceManager {
                 deviceAdded = true;
             }
         }
-        
+
         return deviceAdded;
     }
-    
+
     public synchronized List<LocalBluetoothDevice> getDevicesCopy() {
         return new ArrayList<LocalBluetoothDevice>(mDevices);
     }
-    
+
     void onBluetoothStateChanged(boolean enabled) {
         if (enabled) {
             readPairedDevices();
         }
     }
 
-    public synchronized void onDeviceAppeared(String address, short rssi) {
+    public synchronized void onDeviceAppeared(String address, short rssi, int btClass,
+            String name) {
         boolean deviceAdded = false;
-        
+
         LocalBluetoothDevice device = findDevice(address);
         if (device == null) {
             device = new LocalBluetoothDevice(mLocalManager.getContext(), address);
             mDevices.add(device);
             deviceAdded = true;
         }
-        
+
         device.setRssi(rssi);
+        device.setBtClass(btClass);
+        device.setName(name);
         device.setVisible(true);
-        
+
         if (deviceAdded) {
             dispatchDeviceAdded(device);
         }
     }
-    
+
     public synchronized void onDeviceDisappeared(String address) {
         LocalBluetoothDevice device = findDevice(address);
         if (device == null) return;
-        
+
         device.setVisible(false);
         checkForDeviceRemoval(device);
     }
-    
+
     private void checkForDeviceRemoval(LocalBluetoothDevice device) {
         if (device.getBondState() == BluetoothDevice.BOND_NOT_BONDED &&
                 !device.isVisible()) {
             // If device isn't paired, remove it altogether
             mDevices.remove(device);
             dispatchDeviceDeleted(device);
-        }            
+        }
     }
-    
+
     public synchronized void onDeviceNameUpdated(String address) {
         LocalBluetoothDevice device = findDevice(address);
         if (device != null) {
@@ -115,21 +118,21 @@ public class LocalBluetoothDeviceManager {
     }
 
     public synchronized LocalBluetoothDevice findDevice(String address) {
-        
+
         for (int i = mDevices.size() - 1; i >= 0; i--) {
             LocalBluetoothDevice device = mDevices.get(i);
-            
+
             if (device.getAddress().equals(address)) {
                 return device;
             }
         }
-        
+
         return null;
     }
-    
+
     /**
      * Attempts to get the name of a remote device, otherwise returns the address.
-     * 
+     *
      * @param address The address.
      * @return The name, or if unavailable, the address.
      */
@@ -137,17 +140,17 @@ public class LocalBluetoothDeviceManager {
         LocalBluetoothDevice device = findDevice(address);
         return device != null ? device.getName() : address;
     }
-    
+
     private void dispatchDeviceAdded(LocalBluetoothDevice device) {
         synchronized (mCallbacks) {
             for (Callback callback : mCallbacks) {
                 callback.onDeviceAdded(device);
             }
         }
-        
+
         // TODO: divider between prev paired/connected and scanned
     }
-    
+
     private void dispatchDeviceDeleted(LocalBluetoothDevice device) {
         synchronized (mCallbacks) {
             for (Callback callback : mCallbacks) {
@@ -176,7 +179,7 @@ public class LocalBluetoothDeviceManager {
 
     /**
      * Called when there is a bonding error.
-     * 
+     *
      * @param address The address of the remote device.
      * @param reason The reason, one of the error reasons from
      *            BluetoothDevice.UNBOND_REASON_*
@@ -199,7 +202,7 @@ public class LocalBluetoothDeviceManager {
         }
         mLocalManager.showError(address, R.string.bluetooth_error_title, errorMsg);
     }
-    
+
     public synchronized void onProfileStateChanged(String address, Profile profile,
             int newProfileState) {
         LocalBluetoothDevice device = findDevice(address);
@@ -208,11 +211,11 @@ public class LocalBluetoothDeviceManager {
         device.onProfileStateChanged(profile, newProfileState);
         device.refresh();
     }
-    
+
     public synchronized void onConnectingError(String address) {
         LocalBluetoothDevice device = findDevice(address);
         if (device == null) return;
-        
+
         /*
          * Go through the device's delegate so we don't spam the user with
          * errors connecting to different profiles, and instead make sure the
@@ -220,10 +223,10 @@ public class LocalBluetoothDeviceManager {
          */
         device.showConnectingError();
     }
-    
+
     public synchronized void onScanningStateChanged(boolean started) {
         if (!started) return;
-        
+
         // If starting a new scan, clear old visibility
         for (int i = mDevices.size() - 1; i >= 0; i--) {
             LocalBluetoothDevice device = mDevices.get(i);
@@ -231,7 +234,7 @@ public class LocalBluetoothDeviceManager {
             checkForDeviceRemoval(device);
         }
     }
-    
+
     public synchronized void onBtClassChanged(String address) {
         LocalBluetoothDevice device = findDevice(address);
         if (device != null) {
