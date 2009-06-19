@@ -17,6 +17,12 @@
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
         android:title="@string/tts_settings_title">
 
+        <Preference
+                android:key="tts_play_example"
+                android:persistent="false"
+                android:title="@string/tts_play_example_title" 
+                android:summary="@string/tts_play_example_summary" />
+
         <CheckBoxPreference
             android:key="toggle_use_default_tts_settings"
             android:title="@string/use_default_tts_settings_title"
