@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2007 The Android Open Source Project
+ * Copyright (C) 2009 The Android Open Source Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,8 +16,9 @@
 
 package com.android.settings.vpn;
 
+import android.app.Dialog;
 import android.net.vpn.VpnProfile;
-import android.os.Bundle;
+import android.view.View;
 
 /**
  * The interface to act on a {@link VpnProfile}.
@@ -26,9 +27,34 @@ public interface VpnProfileActor {
     VpnProfile getProfile();
 
     /**
-     * Establishes a VPN connection.
+     * Returns true if a connect dialog is needed before establishing a
+     * connection.
      */
-    void connect();
+    boolean isConnectDialogNeeded();
+
+    /**
+     * Creates the view in the connect dialog.
+     */
+    View createConnectView();
+
+    /**
+     * Updates the view in the connect dialog.
+     * @param dialog the recycled connect dialog.
+     */
+    void updateConnectView(Dialog dialog);
+
+    /**
+     * Validates the inputs in the dialog.
+     * @param dialog the connect dialog
+     * @return an error message if the inputs are not valid
+     */
+    String validateInputs(Dialog dialog);
+
+    /**
+     * Establishes a VPN connection.
+     * @param dialog the connect dialog
+     */
+    void connect(Dialog dialog);
 
     /**
      * Tears down the connection.
@@ -41,14 +67,4 @@ public interface VpnProfileActor {
      * broadcast receiver and to receives the broadcast events.
      */
     void checkStatus();
-
-    /**
-     * Called to save the states when the device is rotated.
-     */
-    void onSaveState(Bundle outState);
-
-    /**
-     * Called to restore the states on the rotated screen.
-     */
-    void onRestoreState(Bundle savedState);
 }
