@@ -1637,44 +1637,38 @@ found in the list of installed applications.</string>
     <skip/>
 
     <!-- Activity title for App Fuel Gauge summary -->
-    <string name="power_usage_summary_title">Battery usage</string>
+    <string name="power_usage_summary_title">Battery use</string>
     <!-- Battery usage since unplugged -->
-    <string name="battery_since_unplugged">Battery usage since unplugged</string>
+    <string name="battery_since_unplugged">Battery use since unplugged</string>
     <!-- Battery usage since user reset the stats -->
-    <string name="battery_since_reset">Battery usage since reset</string>
+    <string name="battery_since_reset">Battery use since reset</string>
     <!-- Battery usage duration -->
-    <string name="battery_stats_duration">Usage duration - <xliff:g id="time">%1$s</xliff:g></string>
-    <!-- CPU awake time title -->
-    <string name="awake">Device awake time</string>
-    <!-- Wifi on time -->
-    <string name="wifi_on_time">WiFi on time</string>
-    <!-- Bluetooth on time -->
-    <string name="bluetooth_on_time">WiFi on time</string>
+    <string name="battery_stats_duration">Use duration - <xliff:g id="time">%1$s</xliff:g></string>
     <!-- Application name and battery usage percentage -->
     <string name="usage_name_percent"><xliff:g id="name">%1$s</xliff:g>" - "
             <xliff:g id="percent">%2$s</xliff:g>"%%"</string>
 
     <!-- Activity title for battery usage details for an app. or power consumer -->
-    <string name="details_title">Battery usage details</string>
+    <string name="details_title">Battery use details</string>
     <!-- Subtitle for application/subsystem details -->
-    <string name="details_subtitle">Usage details</string>
+    <string name="details_subtitle">Use details</string>
     <!-- Subtitle for possible options -->
-    <string name="controls_subtitle">Controls</string>
+    <string name="controls_subtitle">Adjust power use</string>
     <!-- Subtitle for list of packages -->
     <string name="packages_subtitle">Included packages</string>
 
     <!-- Label for power consumed by the screen -->
-    <string name="power_screen">Screen on</string>
+    <string name="power_screen">Display</string>
     <!-- Label for power consumed by WiFi -->
-    <string name="power_wifi">WiFi</string>
+    <string name="power_wifi">Wi-Fi</string>
     <!-- Label for power consumed by Bluetooth -->
     <string name="power_bluetooth">Bluetooth</string>
     <!-- Label for power consumed by Cell idle -->
-    <string name="power_cell">Cell</string>
+    <string name="power_cell">Cell standby</string>
     <!-- Label for power consumed by Calling -->
-    <string name="power_phone">Voice</string>
+    <string name="power_phone">Voice calls</string>
     <!-- Label for power consumed when Idle -->
-    <string name="power_idle">Standby</string>
+    <string name="power_idle">Phone idle</string>
 
     <!-- Label for CPU usage time -->
     <string name="usage_type_cpu">CPU total</string>
@@ -1692,12 +1686,14 @@ found in the list of installed applications.</string>
     <string name="usage_type_audio">Audio</string>
     <!-- Label for Video usage time -->
     <string name="usage_type_video">Video</string>
-    <!-- Label for On time -->
+    <!-- Label for time that a feature has been on -->
     <string name="usage_type_on_time">On time</string>
     <!-- Label for force stop action -->
     <string name="battery_action_stop">Force stop</string>
     <!-- Label for app details action -->
-    <string name="battery_action_app_details">App details</string>
+    <string name="battery_action_app_details">Application info</string>
+    <!-- Label for app settings action -->
+    <string name="battery_action_app_settings">Application settings</string>
     <!-- Label for display settings -->
     <string name="battery_action_display">Display settings</string>
     <!-- Label for wifi settings -->
@@ -1705,8 +1701,44 @@ found in the list of installed applications.</string>
     <!-- Label for bluetooth settings -->
     <string name="battery_action_bluetooth">Bluetooth settings</string>
 
+    <!-- Description for standby detail -->
+    <string name="battery_desc_standby">Battery used when phone is idle</string>
+
+    <!-- Description for cell radio detail -->
+    <string name="battery_desc_radio">Battery used by cell radio</string>
+    <!-- Suggestion to switch to airplane mode to save power -->
+    <string name="battery_sugg_radio">Switch to airplane mode to save power in areas with no cell coverage</string>
+
+    <!-- Description for power consumed by display -->
+    <string name="battery_desc_display">Battery used by the display and backlight</string>
+    <!-- Suggestion for reducing display power -->
+    <string name="battery_sugg_display">Reduce the screen brightness and/or screen timeout</string>
+
+    <!-- Description for wifi connectivity -->
+    <string name="battery_desc_wifi">Battery used by Wi-Fi</string>
+    <!-- Suggestion for wifi connectivity power drain -->
+    <string name="battery_sugg_wifi">Turn off WiFi when not using it or where it is not available</string>
+
+    <!-- Description for bluetooth power consumption detail -->
+    <string name="battery_desc_bluetooth">Battery used by bluetooth</string>
+    <!-- Suggestion for bluetooth -->
+    <string name="battery_sugg_bluetooth_basic">Turn off bluetooth when you aren't using it</string>
+    <!-- Suggestion for bluetooth headset -->
+    <string name="battery_sugg_bluetooth_headset">Try connecting to a different bluetooth device</string>
+
+    <!-- Description for power consumed by applications -->
+    <string name="battery_desc_apps">Battery used by applications when running</string>
+    <!-- Suggestion for exploring application info to stop or uninstall -->
+    <string name="battery_sugg_apps_info">Stop or uninstall the application</string>
+    <!-- Suggestion for getting apps to consume less power due to GPS-->
+    <string name="battery_sugg_apps_gps">Turn off GPS when you're not using it</string>
+    <!-- Suggestion for getting apps to consume less power -->
+    <string name="battery_sugg_apps_settings">The application may offer settings to reduce battery use</string>
+
     <!-- Menu label for viewing battery usage since unplugged -->
-    <string name="menu_stats_unplugged">Usage since unplugged</string>
+    <string name="menu_stats_unplugged"><xliff:g id="unplugged">%1$s</xliff:g> since unplugged</string>
+    <!-- Menu label for viewing battery usage since unplugged -->
+    <string name="menu_stats_last_unplugged">While last unplugged for <xliff:g id="unplugged">%1$s</xliff:g></string>
     <!-- Menu label for viewing battery usage total -->
     <string name="menu_stats_total">Usage totals</string>
     <!-- Menu label for refreshing with latest usage numbers -->
