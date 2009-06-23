@@ -278,13 +278,7 @@ public class SettingsAppWidgetProvider extends AppWidgetProvider {
         ConnectivityManager connManager = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
         boolean sync = getBackgroundDataState(context);
         connManager.setBackgroundDataSetting(!sync);
-
-        IContentService contentService = ContentResolver.getContentService();
-        try {
-            contentService.setListenForNetworkTickles(!sync);
-        } catch (RemoteException e) {
-            Log.d(TAG, "toggleBackgroundData: " + e);
-        }
+        ContentResolver.setMasterSyncAutomatically(!sync);
     }
 
     /**
