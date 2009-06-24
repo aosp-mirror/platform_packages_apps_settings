@@ -94,6 +94,13 @@
 
     </PreferenceCategory>
 
+    <ListPreference
+            android:key="emergency_tone"
+            android:title="@string/emergency_tone_title"
+            android:summary="@string/emergency_tone_summary"
+            android:entries="@array/emergency_tone_entries"
+            android:entryValues="@array/emergency_tone_values" />
+
     <PreferenceCategory
             android:title="@string/display_settings">
 

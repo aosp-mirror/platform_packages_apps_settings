@@ -37,6 +37,7 @@ import android.preference.CheckBoxPreference;
 import android.provider.Settings;
 import android.util.Log;
 import android.view.IWindowManager;
+import android.telephony.TelephonyManager;
 
 public class SoundAndDisplaySettings extends PreferenceActivity implements
         Preference.OnPreferenceChangeListener {
@@ -44,6 +45,7 @@ public class SoundAndDisplaySettings extends PreferenceActivity implements
 
     /** If there is no setting in the provider, use this. */
     private static final int FALLBACK_SCREEN_TIMEOUT_VALUE = 30000;
+    private static final int FALLBACK_EMERGENCY_TONE_VALUE = 0;
     
     private static final String KEY_SILENT = "silent";
     private static final String KEY_VIBRATE = "vibrate";
@@ -54,6 +56,7 @@ public class SoundAndDisplaySettings extends PreferenceActivity implements
     private static final String KEY_ACCELEROMETER = "accelerometer";
     private static final String KEY_PLAY_MEDIA_NOTIFICATION_SOUNDS = "play_media_notification_sounds";
     private static final String KEY_COMPATIBILITY_MODE = "compatibility_mode";
+    private static final String KEY_EMERGENCY_TONE ="emergency_tone";
     
     private CheckBoxPreference mSilent;
 
@@ -91,6 +94,7 @@ public class SoundAndDisplaySettings extends PreferenceActivity implements
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         ContentResolver resolver = getContentResolver();
+        int activePhoneType = TelephonyManager.getDefault().getPhoneType();
         
         mAudioManager = (AudioManager) getSystemService(Context.AUDIO_SERVICE);
         mWindowManager = IWindowManager.Stub.asInterface(ServiceManager.getService("window"));
@@ -99,6 +103,11 @@ public class SoundAndDisplaySettings extends PreferenceActivity implements
         
         addPreferencesFromResource(R.xml.sound_and_display_settings);
         
+        if (TelephonyManager.PHONE_TYPE_CDMA != activePhoneType) {
+            // device is not CDMA, do not display CDMA emergency_tone
+            getPreferenceScreen().removePreference(findPreference(KEY_EMERGENCY_TONE));
+         }
+
         mSilent = (CheckBoxPreference) findPreference(KEY_SILENT);
         mPlayMediaNotificationSounds = (CheckBoxPreference) findPreference(KEY_PLAY_MEDIA_NOTIFICATION_SOUNDS);
 
@@ -125,6 +134,14 @@ public class SoundAndDisplaySettings extends PreferenceActivity implements
         screenTimeoutPreference.setValue(String.valueOf(Settings.System.getInt(
                 resolver, SCREEN_OFF_TIMEOUT, FALLBACK_SCREEN_TIMEOUT_VALUE)));
         screenTimeoutPreference.setOnPreferenceChangeListener(this);
+
+        if (TelephonyManager.PHONE_TYPE_CDMA == activePhoneType) {
+            ListPreference emergencyTonePreference =
+                (ListPreference) findPreference(KEY_EMERGENCY_TONE);
+            emergencyTonePreference.setValue(String.valueOf(Settings.System.getInt(
+                resolver, Settings.System.EMERGENCY_TONE, FALLBACK_EMERGENCY_TONE_VALUE)));
+            emergencyTonePreference.setOnPreferenceChangeListener(this);
+        }
     }
     
     @Override
@@ -272,6 +289,14 @@ public class SoundAndDisplaySettings extends PreferenceActivity implements
                         SCREEN_OFF_TIMEOUT, value);
             } catch (NumberFormatException e) {
                 Log.e(TAG, "could not persist screen timeout setting", e);
+            }
+        } else if (KEY_EMERGENCY_TONE.equals(preference.getKey())) {
+            int value = Integer.parseInt((String) objValue);
+            try {
+                Settings.System.putInt(getContentResolver(),
+                        Settings.System.EMERGENCY_TONE, value);
+            } catch (NumberFormatException e) {
+                Log.e(TAG, "could not persist emergency tone setting", e);
             }
         }
         
