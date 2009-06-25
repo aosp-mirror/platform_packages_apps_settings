@@ -1457,7 +1457,7 @@ found in the list of installed applications.</string>
     <string name="quick_launch_no_shortcut">No shortcut</string>
     <!-- On the Quick launch settings screen, summary text under the item for each assigned letter.  -->
     <string name="quick_launch_shortcut">Search + <xliff:g id="shortcut_letter">%1$s</xliff:g></string>
-    <!-- On the Quick launch settings screen, title of "Clear shortcut" confirmation dialog. This is reached by longpressing an item for a shortcut letter.  This allows the user to clear the assigned applicatino for that shortcut letter. -->
+    <!-- On the Quick launch settings screen, title of "Clear shortcut" confirmation dialog. This is reached by longpressing an item for a shortcut letter.  This allows the user to clear the assigned application for that shortcut letter. -->
     <string name="quick_launch_clear_dialog_title">Clear</string>
     <!-- On the Quick launch settings screen, message in the "Clear shortcut" confirmation dialog.  See the title for this dialog for more info. -->
     <string name="quick_launch_clear_dialog_message">Your shortcut for <xliff:g id="shortcut_letter">%1$s</xliff:g> (<xliff:g id="application_name">%2$s</xliff:g>) will be cleared.</string>
@@ -1498,6 +1498,10 @@ found in the list of installed applications.</string>
     <string name="allow_mock_location">Allow mock locations</string>
     <!-- setting Checkbox summary whether to allow mock locations  -->
     <string name="allow_mock_location_summary">Allow mock locations</string>
+    <!-- Title of warning dialog about the implications of enabling USB debugging -->
+    <string name="adb_warning_title">Enable USB debugging?</string>
+    <!-- Warning text to user about the implications of enabling USB debugging -->
+    <string name="adb_warning_message">USB debugging is intended for development purposes only. It can be used to copy data between your computer and your device, install applications on your device without notification, and read log data.</string>
 
     <!-- Title for the screen that lets the user choose a gadget to add to the home screen
          (or other screens that can host gadgets).  Note to translators: we're still determining
