@@ -33,6 +33,15 @@
                     android:targetClass="com.android.settings.deviceinfo.Status" />
         </PreferenceScreen>
         
+        <PreferenceScreen
+                android:key="power_usage"
+                android:title="@string/power_usage_summary_title"
+                android:summary="@string/power_usage_summary">
+            <intent android:action="android.intent.action.MAIN"
+                    android:targetPackage="com.android.settings"
+                    android:targetClass="com.android.settings.fuelgauge.PowerUsageSummary" />
+        </PreferenceScreen>
+
         <!-- Legal Information -->
         <PreferenceScreen
                 android:key="container"

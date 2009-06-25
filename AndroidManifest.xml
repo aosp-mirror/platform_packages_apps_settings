@@ -36,11 +36,14 @@
     <uses-permission android:name="com.android.launcher.permission.READ_SETTINGS" />
     <uses-permission android:name="com.android.launcher.permission.WRITE_SETTINGS" />
 
-    <application android:label="@string/settings_label" android:icon="@drawable/ic_launcher_settings">
+    <application android:label="@string/settings_label"
+            android:icon="@drawable/ic_launcher_settings"
+            android:taskAffinity="">
 
         <!-- Settings -->
 
         <activity android:name="Settings" android:label="@string/settings_label"
+                android:taskAffinity="com.android.settings"
                 android:clearTaskOnLaunch="true"
                 android:launchMode="singleTop">
             <intent-filter>
@@ -48,6 +51,13 @@
                 <action android:name="android.settings.SETTINGS" />
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <activity android:name="CreateShortcut" android:label="@string/settings_shortcut">
+            <intent-filter>
+                <action android:name="android.intent.action.CREATE_SHORTCUT" />
+                <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
 
@@ -69,6 +79,7 @@
         <!-- Top-level settings -->
 
         <activity android:name=".wifi.WifiSettings" android:label="@string/wifi_settings"
+                android:clearTaskOnLaunch="true"
                 >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -76,6 +87,7 @@
                 <action android:name="android.net.wifi.PICK_WIFI_NETWORK" />
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.VOICE_LAUNCH" />
+                <category android:name="com.android.settings.SHORTCUT" />
             </intent-filter>
         </activity>
 
@@ -102,11 +114,13 @@
 
         <activity android:name=".bluetooth.BluetoothSettings"
                   android:label="@string/bluetooth_settings_title"
+                  android:clearTaskOnLaunch="true"
                   >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <action android:name="android.settings.BLUETOOTH_SETTINGS" />
                 <category android:name="android.intent.category.VOICE_LAUNCH" />
+                <category android:name="com.android.settings.SHORTCUT" />
             </intent-filter>
         </activity>
 
@@ -155,12 +169,14 @@
         </activity>
 
         <activity android:name="LanguageSettings" android:label="@string/language_picker_title"
+                android:clearTaskOnLaunch="true"
                 >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <action android:name="android.settings.INPUT_METHOD_SETTINGS" />
                 <category android:name="android.intent.category.VOICE_LAUNCH" />
                 <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="com.android.settings.SHORTCUT" />
             </intent-filter>
         </activity>
 
@@ -172,18 +188,21 @@
             </intent-filter>
         </activity>
 
-        <activity android:name="UserDictionarySettings" android:icon="@drawable/app_settings"
-                android:label="@string/user_dict_settings_titlebar">
+        <activity android:name="UserDictionarySettings"
+                android:label="@string/user_dict_settings_titlebar"
+                android:clearTaskOnLaunch="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <action android:name="android.settings.USER_DICTIONARY_SETTINGS" />
                 <action android:name="com.android.settings.USER_DICTIONARY_INSERT" />
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.VOICE_LAUNCH" />
+                <category android:name="com.android.settings.SHORTCUT" />
             </intent-filter>
         </activity>
 
         <activity android:name="SoundAndDisplaySettings" android:label="@string/sound_and_display_settings"
+                android:clearTaskOnLaunch="true"
                 >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -192,6 +211,7 @@
                 <action android:name="android.settings.DISPLAY_SETTINGS" />
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.VOICE_LAUNCH" />
+                <category android:name="com.android.settings.SHORTCUT" />
             </intent-filter>
         </activity>
 
@@ -225,6 +245,7 @@
 
         <activity android:name="ManageApplications"
                   android:label="@string/manageapplications_settings_title"
+                  android:clearTaskOnLaunch="true"
                   android:configChanges="orientation|keyboardHidden">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -233,6 +254,7 @@
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.MONKEY" />
                 <category android:name="android.intent.category.VOICE_LAUNCH" />
+                <category android:name="com.android.settings.SHORTCUT" />
             </intent-filter>
         </activity>
         
@@ -244,13 +266,16 @@
             </intent-filter>
         </activity>
 
-        <activity android:name="SecuritySettings" android:label="@string/security_settings_title">
+        <activity android:name="SecuritySettings" android:label="@string/security_settings_title"
+                android:clearTaskOnLaunch="true"
+                >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <action android:name="android.settings.SECURITY_SETTINGS" />
                 <action android:name="android.settings.LOCATION_SOURCE_SETTINGS" />
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.VOICE_LAUNCH" />
+                <category android:name="com.android.settings.SHORTCUT" />
             </intent-filter>
         </activity>
 
@@ -369,7 +394,7 @@
             </intent-filter>
         </activity>
 
-        <activity android:name="DevelopmentSettings" android:icon="@drawable/app_settings"
+        <activity android:name="DevelopmentSettings"
                 android:label="@string/development_settings_title">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -527,10 +552,14 @@
         </activity>
 
         <activity android:name=".fuelgauge.PowerUsageSummary"
-                android:label="@string/power_usage_summary_title">
+                android:label="@string/power_usage_summary_title"
+                android:clearTaskOnLaunch="true"
+                >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+                <action android:name="android.intent.action.POWER_USAGE_SUMMARY" />
                 <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="com.android.settings.SHORTCUT" />
             </intent-filter>
         </activity>
 
