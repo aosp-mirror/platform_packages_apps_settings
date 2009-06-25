@@ -18,10 +18,10 @@ package com.android.settings;
 
 import static android.provider.Settings.Secure.TTS_USE_DEFAULTS;
 import static android.provider.Settings.Secure.TTS_DEFAULT_RATE;
-import static android.provider.Settings.Secure.TTS_DEFAULT_PITCH;
 import static android.provider.Settings.Secure.TTS_DEFAULT_LANG;
 import static android.provider.Settings.Secure.TTS_DEFAULT_COUNTRY;
 import static android.provider.Settings.Secure.TTS_DEFAULT_VARIANT;
+import static android.provider.Settings.Secure.TTS_DEFAULT_SYNTH;
 
 import android.content.ContentResolver;
 import android.content.Intent;
@@ -51,7 +51,6 @@ public class TextToSpeechSettings extends PreferenceActivity implements
     private static final String KEY_TTS_INSTALL_DATA = "tts_install_data";
     private static final String KEY_TTS_USE_DEFAULT = "toggle_use_default_tts_settings";
     private static final String KEY_TTS_DEFAULT_RATE = "tts_default_rate";
-    private static final String KEY_TTS_DEFAULT_PITCH = "tts_default_pitch";
     private static final String KEY_TTS_DEFAULT_LANG = "tts_default_lang";
     private static final String KEY_TTS_DEFAULT_COUNTRY = "tts_default_country";
     private static final String KEY_TTS_DEFAULT_VARIANT = "tts_default_variant";
@@ -65,7 +64,6 @@ public class TextToSpeechSettings extends PreferenceActivity implements
     private Preference         mInstallData = null;
     private CheckBoxPreference mUseDefaultPref = null;
     private ListPreference     mDefaultRatePref = null;
-    private ListPreference     mDefaultPitchPref = null;
     private ListPreference     mDefaultLocPref = null;
     private String             mDefaultLanguage = null;
     private String             mDefaultCountry = null;
@@ -81,6 +79,11 @@ public class TextToSpeechSettings extends PreferenceActivity implements
      * startActivityForResult.
      */
     private static final int VOICE_DATA_INTEGRITY_CHECK = 1977;
+    /**
+     * Request code (arbitrary value) for voice data installation through
+     * startActivityForResult.
+     */
+    private static final int VOICE_DATA_INSTALLATION = 1980;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -88,6 +91,7 @@ public class TextToSpeechSettings extends PreferenceActivity implements
 
         addPreferencesFromResource(R.xml.tts_settings);
 
+        mEnableDemo = false;
         initClickers();
         initDefaultSettings();
     }
@@ -99,7 +103,6 @@ public class TextToSpeechSettings extends PreferenceActivity implements
         // whenever we return to this screen, we don't know the state of the
         // system, so we have to recheck that we can play the demo, or it must be disabled.
         // TODO make the TTS service listen to "changes in the system", i.e. sd card un/mount 
-        mEnableDemo = false;
         initClickers();
         updateWidgetState();
         checkVoiceData();
@@ -144,7 +147,13 @@ public class TextToSpeechSettings extends PreferenceActivity implements
         mUseDefaultPref.setOnPreferenceChangeListener(this);
 
         // Default engine
-        mDefaultEng = FALLBACK_TTS_DEFAULT_SYNTH;
+        String engine = Settings.Secure.getString(resolver, TTS_DEFAULT_SYNTH);
+        if (engine == null) {
+            // TODO move FALLBACK_TTS_DEFAULT_SYNTH to TextToSpeech
+            engine = FALLBACK_TTS_DEFAULT_SYNTH;
+            Settings.Secure.putString(resolver, TTS_DEFAULT_SYNTH, engine);
+        }
+        mDefaultEng = engine;
 
         // Default rate
         mDefaultRatePref = (ListPreference) findPreference(KEY_TTS_DEFAULT_RATE);
@@ -158,26 +167,13 @@ public class TextToSpeechSettings extends PreferenceActivity implements
         mDefaultRatePref.setValue(String.valueOf(intVal));
         mDefaultRatePref.setOnPreferenceChangeListener(this);
 
-        // Default pitch
-        mDefaultPitchPref = (ListPreference) findPreference(KEY_TTS_DEFAULT_PITCH);
-        try {
-            intVal = Settings.Secure.getInt(resolver, TTS_DEFAULT_PITCH);
-        } catch (SettingNotFoundException e) {
-            // default pitch setting not found, initialize it
-            intVal = TextToSpeech.Engine.FALLBACK_TTS_DEFAULT_PITCH;
-            Settings.Secure.putInt(resolver, TTS_DEFAULT_PITCH, intVal);
-        }
-        mDefaultPitchPref.setValue(String.valueOf(intVal));
-        mDefaultPitchPref.setOnPreferenceChangeListener(this);
-
-
         // Default language / country / variant : these three values map to a single ListPref
         // representing the matching Locale
         String language = null;
         String country = null;
         String variant = null;
         mDefaultLocPref = (ListPreference) findPreference(KEY_TTS_DEFAULT_LANG);
-        language = Settings.Secure.getString(resolver, KEY_TTS_DEFAULT_LANG);
+        language = Settings.Secure.getString(resolver, TTS_DEFAULT_LANG);
         if (language != null) {
             mDefaultLanguage = language;
         } else {
@@ -185,9 +181,9 @@ public class TextToSpeechSettings extends PreferenceActivity implements
             language = TextToSpeech.Engine.FALLBACK_TTS_DEFAULT_LANG;
             country  = TextToSpeech.Engine.FALLBACK_TTS_DEFAULT_COUNTRY;
             variant  = TextToSpeech.Engine.FALLBACK_TTS_DEFAULT_VARIANT;
-            Settings.Secure.putString(resolver, KEY_TTS_DEFAULT_LANG, language);
-            Settings.Secure.putString(resolver, KEY_TTS_DEFAULT_COUNTRY, country);
-            Settings.Secure.putString(resolver, KEY_TTS_DEFAULT_VARIANT, variant);
+            Settings.Secure.putString(resolver, TTS_DEFAULT_LANG, language);
+            Settings.Secure.putString(resolver, TTS_DEFAULT_COUNTRY, country);
+            Settings.Secure.putString(resolver, TTS_DEFAULT_VARIANT, variant);
         }
         if (country == null) {
             // country wasn't initialized yet because a default language was found
@@ -198,8 +194,8 @@ public class TextToSpeechSettings extends PreferenceActivity implements
                 // default country setting not found, initialize it, as well as the variant;
                 country  = TextToSpeech.Engine.FALLBACK_TTS_DEFAULT_COUNTRY;
                 variant  = TextToSpeech.Engine.FALLBACK_TTS_DEFAULT_VARIANT;
-                Settings.Secure.putString(resolver, KEY_TTS_DEFAULT_COUNTRY, country);
-                Settings.Secure.putString(resolver, KEY_TTS_DEFAULT_VARIANT, variant);
+                Settings.Secure.putString(resolver, TTS_DEFAULT_COUNTRY, country);
+                Settings.Secure.putString(resolver, TTS_DEFAULT_VARIANT, variant);
             }
         }
         if (variant == null) {
@@ -210,7 +206,7 @@ public class TextToSpeechSettings extends PreferenceActivity implements
             } else {
                 // default variant setting not found, initialize it
                 variant = TextToSpeech.Engine.FALLBACK_TTS_DEFAULT_VARIANT;
-                Settings.Secure.putString(resolver, KEY_TTS_DEFAULT_VARIANT, variant);
+                Settings.Secure.putString(resolver, TTS_DEFAULT_VARIANT, variant);
             }
         }
         // we now have the default lang/country/variant trio, build a string value from it
@@ -230,6 +226,10 @@ public class TextToSpeechSettings extends PreferenceActivity implements
     }
 
 
+    /**
+     * Ask the current default engine to launch the matching CHECK_TTS_DATA activity
+     * to check the required TTS files are properly installed.
+     */
     private void checkVoiceData() {
         PackageManager pm = getPackageManager();
         Intent intent = new Intent();
@@ -241,6 +241,26 @@ public class TextToSpeechSettings extends PreferenceActivity implements
             if (mDefaultEng.equals(currentActivityInfo.packageName)) {
                 intent.setClassName(mDefaultEng, currentActivityInfo.name);
                 this.startActivityForResult(intent, VOICE_DATA_INTEGRITY_CHECK);
+            }
+        }
+    }
+
+
+    /**
+     * Ask the current default engine to launch the matching INSTALL_TTS_DATA activity
+     * so the required TTS files are properly installed.
+     */
+    private void installVoiceData() {
+        PackageManager pm = getPackageManager();
+        Intent intent = new Intent();
+        intent.setAction("android.intent.action.INSTALL_TTS_DATA");
+        List<ResolveInfo> resolveInfos = pm.queryIntentActivities(intent, 0);
+        // query only the package that matches that of the default engine
+        for (int i = 0; i < resolveInfos.size(); i++) {
+            ActivityInfo currentActivityInfo = resolveInfos.get(i).activityInfo;
+            if (mDefaultEng.equals(currentActivityInfo.packageName)) {
+                intent.setClassName(mDefaultEng, currentActivityInfo.name);
+                this.startActivityForResult(intent, VOICE_DATA_INSTALLATION);
             }
         }
     }
@@ -273,7 +293,8 @@ public class TextToSpeechSettings extends PreferenceActivity implements
                 }
             } else {
                 Log.v(TAG, "Voice data check failed");
-
+                mEnableDemo = false;
+                updateWidgetState();
             }
         }
     }
@@ -298,16 +319,6 @@ public class TextToSpeechSettings extends PreferenceActivity implements
                 Log.i(TAG, "TTS default rate is "+value);
             } catch (NumberFormatException e) {
                 Log.e(TAG, "could not persist default TTS rate setting", e);
-            }
-        } else if (KEY_TTS_DEFAULT_PITCH.equals(preference.getKey())) {
-            // Default pitch
-            int value = Integer.parseInt((String) objValue);
-            try {
-                Settings.Secure.putInt(getContentResolver(), 
-                        TTS_DEFAULT_PITCH, value);
-                Log.i(TAG, "TTS default pitch is "+value);
-            } catch (NumberFormatException e) {
-                Log.e(TAG, "could not persist default TTS pitch setting", e);
             }
         } else if (KEY_TTS_DEFAULT_LANG.equals(preference.getKey())) {
             // Default locale
@@ -337,9 +348,9 @@ public class TextToSpeechSettings extends PreferenceActivity implements
             return true;
         }
         if (preference == mInstallData) {
-            // Install data
-            // TODO launch request for installer
-
+            installVoiceData();
+            // quit this activity so it needs to be restarted after installation of the voice data
+            finish();
             return true;
         }
         return false;
@@ -350,7 +361,6 @@ public class TextToSpeechSettings extends PreferenceActivity implements
         mPlayExample.setEnabled(mEnableDemo);
         mUseDefaultPref.setEnabled(mEnableDemo);
         mDefaultRatePref.setEnabled(mEnableDemo);
-        mDefaultPitchPref.setEnabled(mEnableDemo);
         mDefaultLocPref.setEnabled(mEnableDemo);
 
         mInstallData.setEnabled(!mEnableDemo);

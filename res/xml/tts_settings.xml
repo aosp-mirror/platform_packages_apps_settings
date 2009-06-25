@@ -45,14 +45,6 @@
                 android:persistent="false"
                 android:entries="@array/tts_rate_entries"
                 android:entryValues="@array/tts_rate_values" />
-
-            <ListPreference
-                android:key="tts_default_pitch"
-                android:title="@string/tts_default_pitch_title"
-                android:summary="@string/tts_default_pitch_summary"
-                android:persistent="false"
-                android:entries="@array/tts_pitch_entries"
-                android:entryValues="@array/tts_pitch_values" />
                 
             <ListPreference
                 android:key="tts_default_lang"
