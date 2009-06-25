@@ -1647,7 +1647,13 @@ found in the list of installed applications.</string>
     <!-- Battery usage since user reset the stats -->
     <string name="battery_since_reset">Battery use since reset</string>
     <!-- Battery usage duration -->
-    <string name="battery_stats_duration">Use duration - <xliff:g id="time">%1$s</xliff:g></string>
+    <string name="battery_stats_duration"><xliff:g id="time">%1$s</xliff:g> since unplugged</string>
+    <!-- CPU awake time title -->
+    <string name="awake">Device awake time</string>
+    <!-- Wifi on time -->
+    <string name="wifi_on_time">WiFi on time</string>
+    <!-- Bluetooth on time -->
+    <string name="bluetooth_on_time">WiFi on time</string>
     <!-- Application name and battery usage percentage -->
     <string name="usage_name_percent"><xliff:g id="name">%1$s</xliff:g>" - "
             <xliff:g id="percent">%2$s</xliff:g>"%%"</string>
@@ -1705,6 +1711,9 @@ found in the list of installed applications.</string>
     <!-- Label for bluetooth settings -->
     <string name="battery_action_bluetooth">Bluetooth settings</string>
 
+    <!-- Description for voice call detail -->
+    <string name="battery_desc_voice">Battery used by voice calls</string>
+
     <!-- Description for standby detail -->
     <string name="battery_desc_standby">Battery used when phone is idle</string>
 
@@ -1747,7 +1756,12 @@ found in the list of installed applications.</string>
     <string name="menu_stats_total">Usage totals</string>
     <!-- Menu label for refreshing with latest usage numbers -->
     <string name="menu_stats_refresh">Refresh</string>
-    
+
+    <!-- Label for kernel threads -->
+    <string name="process_kernel_label">Android OS</string>
+    <!-- Label for mediaserver process -->
+    <string name="process_mediaserver_label">Mediaserver</string>
+
     <!-- Text-To-Speech (TTS) settings --><skip />
     <!-- Title of setting on main settings screen.  This item will take the user to the screen to tweak settings related to the text-to-speech functionality -->
     <string name="tts_settings">Speech synthesis</string>

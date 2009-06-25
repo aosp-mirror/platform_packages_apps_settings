@@ -22,55 +22,70 @@
         android:id="@+id/all_details"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
-        android:paddingRight="6dip"
         android:paddingTop="5dip"
         android:paddingBottom="5dip"
         android:orientation="vertical">
 
-        <!-- Details header - icon, label and percentage -->
-        <RelativeLayout
+        <LinearLayout
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical">
+            android:minHeight="?android:attr/listPreferredItemHeight"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:paddingLeft="12dip"
+            android:paddingRight="?android:attr/scrollbarSize">
 
-            <LinearLayout
-                android:orientation="vertical"
-                android:layout_alignParentLeft="true"
-                android:layout_width="fill_parent"
+            <ImageView
+                android:id="@+id/icon"
+                android:layout_width="48dip"
                 android:layout_height="wrap_content"
-                android:paddingTop="6dip"
-                android:paddingBottom="6dip"
-                android:paddingRight="6dip"
-                android:paddingLeft="6dip" >
-                <!-- application name -->
+                android:layout_marginRight="6dip"
+                android:layout_gravity="center" />
+
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="8dip"
+                android:layout_marginTop="2dip"
+                android:layout_marginBottom="6dip"
+                android:layout_weight="1">
+
                 <TextView android:id="@+id/name"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textAppearance="?android:attr/textAppearanceMedium"
-                    android:textStyle="bold"
                     android:singleLine="true"
+                    android:layout_marginTop="2dip"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentTop="true"
+                    android:layout_toLeftOf="@+id/battery_percentage"
                     android:ellipsize="marquee"
-                    android:layout_marginBottom="2dip" />
-                <!-- application version -->
+                    android:textAppearance="?android:attr/textAppearanceMedium"/>
                 <TextView android:id="@+id/battery_percentage"
-                    android:layout_marginTop="-4dip"
-                    android:layout_gravity="center_vertical"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textAppearance="?android:attr/textAppearanceSmall" />
-            </LinearLayout>
-
-            <!-- application icon -->
-            <ImageView android:id="@+id/icon"
-                android:layout_width="@android:dimen/app_icon_size"
-                android:layout_height="@android:dimen/app_icon_size"
-                android:layout_alignParentRight="true"
-                android:paddingTop="6dip"
-                android:paddingBottom="6dip"
-                android:paddingRight="6dip"
-                android:scaleType="fitCenter" />
-        </RelativeLayout>
-
+                    android:singleLine="true"
+                    android:layout_alignParentRight="true"
+                    android:layout_alignBottom="@+id/name"
+                    android:layout_gravity="bottom"
+                    android:textAppearance="?android:attr/textAppearanceSmall"
+                    android:textStyle="bold"/>
+                <ImageView
+                    android:id="@+id/gauge"
+                    android:background="#80404040"
+                    android:layout_height="wrap_content"
+                    android:layout_width="fill_parent"
+                    android:layout_marginTop="5dip"
+                    android:layout_below="@id/battery_percentage"
+                    android:layout_gravity="center_vertical" />
+                <TextView android:id="@+id/summary"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignLeft="@id/gauge"
+                    android:layout_below="@id/gauge"
+                    android:textAppearance="?android:attr/textAppearanceSmall"
+                    />
+            </RelativeLayout>
+        </LinearLayout>
 
         <TextView
             style="?android:attr/listSeparatorTextViewStyle"
