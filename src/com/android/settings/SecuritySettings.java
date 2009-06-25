@@ -70,6 +70,7 @@ public class SecuritySettings extends PreferenceActivity implements
     private static final String LOCATION_CATEGORY = "location_category";
     private static final String LOCATION_NETWORK = "location_network";
     private static final String LOCATION_GPS = "location_gps";
+    private static final String ASSISTED_GPS = "assisted_gps";
 
     // Vendor specific
     private static final String GSETTINGS_PROVIDER = "com.google.android.providers.settings";
@@ -81,6 +82,7 @@ public class SecuritySettings extends PreferenceActivity implements
 
     private CheckBoxPreference mNetwork;
     private CheckBoxPreference mGps;
+    private CheckBoxPreference mAssistedGps;
 
     // These provide support for receiving notification when Location Manager settings change.
     // This is necessary because the Network Location Provider can change settings
@@ -103,6 +105,7 @@ public class SecuritySettings extends PreferenceActivity implements
 
         mNetwork = (CheckBoxPreference) getPreferenceScreen().findPreference(LOCATION_NETWORK);
         mGps = (CheckBoxPreference) getPreferenceScreen().findPreference(LOCATION_GPS);
+        mAssistedGps = (CheckBoxPreference) getPreferenceScreen().findPreference(ASSISTED_GPS);
         mUseLocation = (CheckBoxPreference) getPreferenceScreen().findPreference(USE_LOCATION);
 
         // Vendor specific
@@ -263,8 +266,13 @@ public class SecuritySettings extends PreferenceActivity implements
             Settings.Secure.setLocationProviderEnabled(getContentResolver(),
                     LocationManager.NETWORK_PROVIDER, mNetwork.isChecked());
         } else if (preference == mGps) {
+            boolean enabled = mGps.isChecked();
             Settings.Secure.setLocationProviderEnabled(getContentResolver(),
-                    LocationManager.GPS_PROVIDER, mGps.isChecked());
+                    LocationManager.GPS_PROVIDER, enabled);
+            mAssistedGps.setEnabled(enabled);
+        } else if (preference == mAssistedGps) {
+            Settings.Secure.putInt(getContentResolver(), Settings.Secure.ASSISTED_GPS_ENABLED,
+                    mAssistedGps.isChecked() ? 1 : 0);
         } else if (preference == mUseLocation) {
             //normally called on the toggle click
             if (mUseLocation.isChecked()) {
@@ -306,10 +314,14 @@ public class SecuritySettings extends PreferenceActivity implements
      */
     private void updateToggles() {
         ContentResolver res = getContentResolver();
+        boolean gpsEnabled = Settings.Secure.isLocationProviderEnabled(
+                res, LocationManager.GPS_PROVIDER);
         mNetwork.setChecked(Settings.Secure.isLocationProviderEnabled(
                 res, LocationManager.NETWORK_PROVIDER));
-        mGps.setChecked(Settings.Secure.isLocationProviderEnabled(
-                res, LocationManager.GPS_PROVIDER));
+        mGps.setChecked(gpsEnabled);
+        mAssistedGps.setChecked(Settings.Secure.getInt(res,
+                Settings.Secure.ASSISTED_GPS_ENABLED, 2) == 1);
+        mAssistedGps.setEnabled(gpsEnabled);
         mUseLocation.setChecked(Settings.Secure.getInt(res,
                 Settings.Secure.USE_LOCATION_FOR_SERVICES, 2) == 1);
     }
