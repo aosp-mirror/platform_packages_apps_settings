@@ -575,7 +575,7 @@ public class PowerUsageSummary extends PreferenceActivity implements Runnable {
                 //name = Integer.toString(uid);
                 if (uid == 0) {
                     name = getResources().getString(R.string.process_kernel_label);
-                } else if (name.equals("mediaserver")) {
+                } else if ("mediaserver".equals(name)) {
                     name = getResources().getString(R.string.process_mediaserver_label);
                 }
                 return;
