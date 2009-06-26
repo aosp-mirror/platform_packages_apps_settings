@@ -41,6 +41,7 @@ import android.text.method.LinkMovementMethod;
 import android.widget.TextView;
 
 import com.android.internal.widget.LockPatternUtils;
+import android.telephony.TelephonyManager;
 
 import java.util.Observable;
 import java.util.Observer;
@@ -169,18 +170,24 @@ public class SecuritySettings extends PreferenceActivity implements
         mChoosePattern.setIntent(intent);
         inlinePrefCat.addPreference(mChoosePattern);
         
-        PreferenceScreen simLockPreferences = getPreferenceManager()
-                .createPreferenceScreen(this);
-        simLockPreferences.setTitle(R.string.sim_lock_settings_category);
-        // Intent to launch SIM lock settings
-        intent = new Intent();
-        intent.setClassName("com.android.settings", "com.android.settings.IccLockSettings");
-        simLockPreferences.setIntent(intent);
+        int activePhoneType = TelephonyManager.getDefault().getPhoneType();
+
+        // do not display SIM lock for CDMA phone
+        if (TelephonyManager.PHONE_TYPE_CDMA != activePhoneType)
+        {
+            PreferenceScreen simLockPreferences = getPreferenceManager()
+                    .createPreferenceScreen(this);
+            simLockPreferences.setTitle(R.string.sim_lock_settings_category);
+            // Intent to launch SIM lock settings
+            intent = new Intent();
+            intent.setClassName("com.android.settings", "com.android.settings.IccLockSettings");
+            simLockPreferences.setIntent(intent);
         
-        PreferenceCategory simLockCat = new PreferenceCategory(this);
-        simLockCat.setTitle(R.string.sim_lock_settings_title);
-        root.addPreference(simLockCat);
-        simLockCat.addPreference(simLockPreferences);
+            PreferenceCategory simLockCat = new PreferenceCategory(this);
+            simLockCat.setTitle(R.string.sim_lock_settings_title);
+            root.addPreference(simLockCat);
+            simLockCat.addPreference(simLockPreferences);
+        }
 
         // Passwords
         PreferenceCategory passwordsCat = new PreferenceCategory(this);

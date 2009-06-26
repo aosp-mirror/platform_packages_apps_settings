@@ -32,6 +32,24 @@
         android:title="@string/status_number"
         android:summary="@string/device_info_not_available"
         android:persistent="false" />
+    <!-- This menu item is only for CDMA phone -->
+    <Preference android:key="min_number"
+        style="?android:attr/preferenceInformationStyle"
+        android:title="@string/status_min_number"
+        android:summary="@string/device_info_not_available"
+        android:persistent="false" />
+    <!-- This menu item is only for CDMA phone -->
+    <Preference android:key="prl_version"
+        style="?android:attr/preferenceInformationStyle"
+        android:title="@string/status_prl_version"
+        android:summary="@string/device_info_not_available"
+        android:persistent="false" />
+    <!-- This menu item is only for CDMA phone -->
+    <Preference android:key="meid_number"
+        style="?android:attr/preferenceInformationStyle"
+        android:title="@string/status_meid_number"
+        android:summary="@string/device_info_not_available"
+        android:persistent="false" />
     <Preference android:key="operator_name" 
         style="?android:attr/preferenceInformationStyle" 
         android:title="@string/status_operator"

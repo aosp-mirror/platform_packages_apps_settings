@@ -182,11 +182,27 @@ public class Status extends PreferenceActivity {
         mUptime = findPreference("up_time");
         
         //NOTE "imei" is the "Device ID" since it represents the IMEI in GSM and the MEID in CDMA
-        setSummaryText("imei", mPhone.getDeviceId());
-        
-        setSummaryText("imei_sv",
-                ((TelephonyManager) getSystemService(TELEPHONY_SERVICE))
+        if (mPhone.getPhoneName().equals("CDMA")) {
+            setSummaryText("meid_number", mPhone.getMeid());
+            setSummaryText("min_number", mPhone.getCdmaMin());
+            setSummaryText("prl_version", mPhone.getCdmaPrlVersion());
+
+            // device is not GSM/UMTS, do not display GSM/UMTS features
+            getPreferenceScreen().removePreference(findPreference("imei"));
+            getPreferenceScreen().removePreference(findPreference("imei_sv"));
+        } else {
+            setSummaryText("imei", mPhone.getDeviceId());
+
+            setSummaryText("imei_sv",
+                    ((TelephonyManager) getSystemService(TELEPHONY_SERVICE))
                         .getDeviceSoftwareVersion());
+
+            // device is not CDMA, do not display CDMA features
+            getPreferenceScreen().removePreference(findPreference("prl_version"));
+            getPreferenceScreen().removePreference(findPreference("meid_number"));
+            getPreferenceScreen().removePreference(findPreference("min_number"));
+        }
+
         setSummaryText("number", mPhone.getLine1Number());
 
         mPhoneStateReceiver = new PhoneStateIntentReceiver(this, mHandler);
