@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2007 The Android Open Source Project
+ * Copyright (C) 2009 The Android Open Source Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -54,10 +54,13 @@ public class VpnTypeSelection extends PreferenceActivity {
         PreferenceScreen root = getPreferenceScreen();
         for (VpnType t : VpnManager.getSupportedVpnTypes()) {
             String displayName = t.getDisplayName();
-            mTypeMap.put(displayName, t);
+            String message = String.format(
+                    getString(R.string.vpn_edit_title_add), displayName);
+            mTypeMap.put(message, t);
 
             Preference pref = new Preference(this);
-            pref.setTitle(displayName);
+            pref.setTitle(message);
+            pref.setSummary(t.getDescription());
             root.addPreference(pref);
         }
     }

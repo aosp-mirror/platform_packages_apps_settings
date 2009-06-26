@@ -28,7 +28,6 @@ import android.content.Intent;
 import android.content.pm.PackageManager.NameNotFoundException;
 import android.database.Cursor;
 import android.location.LocationManager;
-import android.net.vpn.VpnManager;
 import android.os.Bundle;
 import android.preference.CheckBoxPreference;
 import android.preference.Preference;
@@ -198,17 +197,6 @@ public class SecuritySettings extends PreferenceActivity implements
         showPassword.setPersistent(false);
         passwordsCat.addPreference(showPassword);
         
-        PreferenceScreen vpnPreferences = getPreferenceManager()
-                .createPreferenceScreen(this);
-        vpnPreferences.setTitle(R.string.vpn_settings_title);
-        vpnPreferences.setSummary(R.string.vpn_settings_summary);
-        vpnPreferences.setIntent(new VpnManager(this).createSettingsActivityIntent());
-
-        PreferenceCategory vpnCat = new PreferenceCategory(this);
-        vpnCat.setTitle(R.string.vpn_settings_category);
-        root.addPreference(vpnCat);
-        vpnCat.addPreference(vpnPreferences);
-
         return root;
     }
 

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2007 The Android Open Source Project
+ * Copyright (C) 2009 The Android Open Source Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -22,60 +22,59 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.vpn.L2tpIpsecProfile;
+import android.net.vpn.L2tpProfile;
 import android.net.vpn.VpnProfile;
 import android.net.vpn.VpnType;
 import android.os.Bundle;
 import android.os.Parcelable;
-import android.preference.EditTextPreference;
-import android.preference.Preference;
 import android.preference.PreferenceActivity;
 import android.preference.PreferenceGroup;
+import android.text.TextUtils;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 
 /**
  * The activity class for editing a new or existing VPN profile.
  */
 public class VpnEditor extends PreferenceActivity {
-    private static final String TAG = VpnEditor.class.getSimpleName();
-
     private static final int MENU_SAVE = Menu.FIRST;
     private static final int MENU_CANCEL = Menu.FIRST + 1;
-
-    private EditTextPreference mName;
+    private static final String KEY_PROFILE = "profile";
 
     private VpnProfileEditor mProfileEditor;
+    private boolean mAddingProfile;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        VpnProfile p = (VpnProfile) ((savedInstanceState == null)
+                ? getIntent().getParcelableExtra(VpnSettings.KEY_VPN_PROFILE)
+                : savedInstanceState.getParcelable(KEY_PROFILE));
+        mProfileEditor = getEditor(p);
+        mAddingProfile = TextUtils.isEmpty(p.getName());
 
         // Loads the XML preferences file
         addPreferencesFromResource(R.xml.vpn_edit);
 
-        mName = (EditTextPreference) findPreference("vpn_name");
-        mName.setOnPreferenceChangeListener(
-                new Preference.OnPreferenceChangeListener() {
-                    public boolean onPreferenceChange(
-                            Preference pref, Object newValue) {
-                        setName((String) newValue);
-                        return true;
-                    }
-                });
+        initViewFor(p);
+    }
 
-        if (savedInstanceState == null) {
-            VpnProfile p = getIntent().getParcelableExtra(
-                    VpnSettings.KEY_VPN_PROFILE);
-            initViewFor(p);
-        }
+    @Override
+    protected synchronized void onSaveInstanceState(Bundle outState) {
+        if (mProfileEditor == null) return;
+
+        outState.putParcelable(KEY_PROFILE, getProfile());
     }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         super.onCreateOptionsMenu(menu);
-        menu.add(0, MENU_SAVE, 0, R.string.vpn_menu_save)
+        menu.add(0, MENU_SAVE, 0, R.string.vpn_menu_done)
             .setIcon(android.R.drawable.ic_menu_save);
-        menu.add(0, MENU_CANCEL, 0, R.string.vpn_menu_cancel)
+        menu.add(0, MENU_CANCEL, 0,
+                mAddingProfile ? R.string.vpn_menu_cancel
+                               : R.string.vpn_menu_revert)
             .setIcon(android.R.drawable.ic_menu_close_clear_cancel);
         return true;
     }
@@ -96,33 +95,16 @@ public class VpnEditor extends PreferenceActivity {
     }
 
     private void initViewFor(VpnProfile profile) {
-        VpnProfileEditor editor = getEditor(profile);
-        VpnType type = profile.getType();
-        PreferenceGroup subsettings = getPreferenceScreen();
-
         setTitle(profile);
-        setName(profile.getName());
-
-        editor.loadPreferencesTo(subsettings);
-        mProfileEditor = editor;
+        mProfileEditor.loadPreferencesTo(getPreferenceScreen());
     }
 
     private void setTitle(VpnProfile profile) {
-        if (Util.isNullOrEmpty(profile.getName())) {
-            setTitle(String.format(getString(R.string.vpn_edit_title_add),
-                    profile.getType().getDisplayName()));
-        } else {
-            setTitle(String.format(getString(R.string.vpn_edit_title_edit),
-                    profile.getType().getDisplayName()));
-        }
-    }
-
-    private void setName(String newName) {
-        newName = (newName == null) ? "" : newName.trim();
-        mName.setText(newName);
-        mName.setSummary(Util.isNullOrEmpty(newName)
-                ? getString(R.string.vpn_name_summary)
-                : newName);
+        String formatString = mAddingProfile
+                ? getString(R.string.vpn_edit_title_add)
+                : getString(R.string.vpn_edit_title_edit);
+        setTitle(String.format(formatString,
+                profile.getType().getDisplayName()));
     }
 
     /**
@@ -130,24 +112,18 @@ public class VpnEditor extends PreferenceActivity {
      * @return true if the result is successfully set
      */
     private boolean validateAndSetResult() {
-        String errorMsg = null;
-        if (Util.isNullOrEmpty(mName.getText())) {
-            errorMsg = getString(R.string.vpn_error_name_empty);
-        } else {
-            errorMsg = mProfileEditor.validate(this);
-        }
+        String errorMsg = mProfileEditor.validate();
 
         if (errorMsg != null) {
             Util.showErrorMessage(this, errorMsg);
             return false;
         }
 
-        setResult(mProfileEditor.getProfile());
+        setResult(getProfile());
         return true;
     }
 
     private void setResult(VpnProfile p) {
-        p.setName(mName.getText());
         p.setId(Util.base64Encode(p.getName().getBytes()));
         Intent intent = new Intent(this, VpnSettings.class);
         intent.putExtra(VpnSettings.KEY_VPN_PROFILE, (Parcelable) p);
@@ -155,17 +131,26 @@ public class VpnEditor extends PreferenceActivity {
     }
 
     private VpnProfileEditor getEditor(VpnProfile p) {
-        if (p instanceof L2tpIpsecProfile) {
-            return new L2tpIpsecEditor((L2tpIpsecProfile) p);
-        } else {
-            return new VpnProfileEditor(p);
+        switch (p.getType()) {
+            case L2TP_IPSEC:
+                return new L2tpIpsecEditor((L2tpIpsecProfile) p);
+
+            case L2TP_IPSEC_PSK:
+            case L2TP:
+                return new L2tpEditor((L2tpProfile) p);
+
+            default:
+                return new VpnProfileEditor(p);
         }
     }
 
     private void showCancellationConfirmDialog() {
         new AlertDialog.Builder(this)
-                .setTitle(R.string.vpn_error_title)
-                .setMessage(R.string.vpn_confirm_profile_cancellation)
+                .setTitle(android.R.string.dialog_alert_title)
+                .setIcon(android.R.drawable.ic_dialog_alert)
+                .setMessage(mAddingProfile
+                        ? R.string.vpn_confirm_add_profile_cancellation
+                        : R.string.vpn_confirm_edit_profile_cancellation)
                 .setPositiveButton(R.string.vpn_yes_button,
                         new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int w) {
@@ -174,5 +159,9 @@ public class VpnEditor extends PreferenceActivity {
                         })
                 .setNegativeButton(R.string.vpn_mistake_button, null)
                 .show();
+    }
+
+    private VpnProfile getProfile() {
+        return mProfileEditor.getProfile();
     }
 }

@@ -28,10 +28,13 @@ import android.net.vpn.VpnProfile;
 import android.net.vpn.VpnState;
 import android.os.IBinder;
 import android.os.RemoteException;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.CheckBox;
 import android.widget.TextView;
+
+import java.io.IOException;
 
 /**
  * A {@link VpnProfileActor} that provides an authentication view for users to
@@ -66,9 +69,9 @@ public class AuthenticationActor implements VpnProfileActor {
         TextView usernameView = (TextView) d.findViewById(R.id.username_value);
         TextView passwordView = (TextView) d.findViewById(R.id.password_value);
         Context c = mContext;
-        if (Util.isNullOrEmpty(usernameView.getText().toString())) {
+        if (TextUtils.isEmpty(usernameView.getText().toString())) {
             return c.getString(R.string.vpn_username);
-        } else if (Util.isNullOrEmpty(passwordView.getText().toString())) {
+        } else if (TextUtils.isEmpty(passwordView.getText().toString())) {
             return c.getString(R.string.vpn_password);
         } else {
             return null;
@@ -81,12 +84,14 @@ public class AuthenticationActor implements VpnProfileActor {
         TextView passwordView = (TextView) d.findViewById(R.id.password_value);
         CheckBox saveUsername = (CheckBox) d.findViewById(R.id.save_username);
 
-        // save username
-        if (saveUsername.isChecked()) {
-            mProfile.setSavedUsername(usernameView.getText().toString());
-        } else {
-            mProfile.setSavedUsername("");
+        try {
+            setSavedUsername(saveUsername.isChecked()
+                    ? usernameView.getText().toString()
+                    : "");
+        } catch (IOException e) {
+            Log.e(TAG, "setSavedUsername()", e);
         }
+
         connect(usernameView.getText().toString(),
                 passwordView.getText().toString());
         passwordView.setText("");
@@ -101,7 +106,11 @@ public class AuthenticationActor implements VpnProfileActor {
     public void updateConnectView(Dialog d) {
         String username = mProfile.getSavedUsername();
         if (username == null) username = "";
-        updateConnectView(d, username, "", !Util.isNullOrEmpty(username));
+        updateConnectView(d, username, "", !TextUtils.isEmpty(username));
+    }
+
+    protected Context getContext() {
+        return mContext;
     }
 
     private void connect(final String username, final String password) {
@@ -121,7 +130,6 @@ public class AuthenticationActor implements VpnProfileActor {
 
                     if (!success) {
                         Log.d(TAG, "~~~~~~ connect() failed!");
-                        // TODO: pop up a dialog
                         broadcastConnectivity(VpnState.IDLE);
                     } else {
                         Log.d(TAG, "~~~~~~ connect() succeeded!");
@@ -207,6 +215,13 @@ public class AuthenticationActor implements VpnProfileActor {
             try {
                 o.wait(ms);
             } catch (Exception e) {}
+        }
+    }
+
+    private void setSavedUsername(String name) throws IOException {
+        if (!name.equals(mProfile.getSavedUsername())) {
+            mProfile.setSavedUsername(name);
+            VpnSettings.saveProfileToStorage(mProfile);
         }
     }
 }
