@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2007 The Android Open Source Project
+ * Copyright (C) 2009 The Android Open Source Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -57,10 +57,6 @@ class Util {
     static void showErrorMessage(Context c, String message,
             DialogInterface.OnClickListener listener) {
         createErrorDialog(c, message, listener).show();
-    }
-
-    static boolean isNullOrEmpty(String message) {
-        return ((message == null) || (message.length() == 0));
     }
 
     static String base64Encode(byte[] bytes) {
@@ -132,7 +128,8 @@ class Util {
     private static AlertDialog createErrorDialog(Context c, String message,
             DialogInterface.OnClickListener okListener) {
         AlertDialog.Builder b = new AlertDialog.Builder(c)
-                .setTitle(R.string.vpn_error_title)
+                .setTitle(android.R.string.dialog_alert_title)
+                .setIcon(android.R.drawable.ic_dialog_alert)
                 .setMessage(message);
         if (okListener != null) {
             b.setPositiveButton(R.string.vpn_back_button, okListener);

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2007 The Android Open Source Project
+ * Copyright (C) 2009 The Android Open Source Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -20,14 +20,21 @@ import com.android.settings.R;
 
 import android.content.Context;
 import android.net.vpn.VpnProfile;
+import android.preference.CheckBoxPreference;
 import android.preference.EditTextPreference;
+import android.preference.ListPreference;
 import android.preference.Preference;
 import android.preference.PreferenceGroup;
+import android.text.TextUtils;
+import android.text.method.PasswordTransformationMethod;
 
 /**
  * The common class for editing {@link VpnProfile}.
  */
 class VpnProfileEditor {
+    private static final String KEY_VPN_NAME = "vpn_name";
+
+    private EditTextPreference mName;
     private EditTextPreference mServerName;
     private EditTextPreference mDomainSuffices;
     private VpnProfile mProfile;
@@ -47,6 +54,18 @@ class VpnProfileEditor {
      */
     public void loadPreferencesTo(PreferenceGroup subpanel) {
         Context c = subpanel.getContext();
+
+        mName = (EditTextPreference) subpanel.findPreference(KEY_VPN_NAME);
+        mName.setOnPreferenceChangeListener(
+                new Preference.OnPreferenceChangeListener() {
+                    public boolean onPreferenceChange(
+                            Preference pref, Object newValue) {
+                        setName((String) newValue);
+                        return true;
+                    }
+                });
+        setName(getProfile().getName());
+
         subpanel.addPreference(createServerNamePreference(c));
         loadExtraPreferencesTo(subpanel);
         subpanel.addPreference(createDomainSufficesPreference(c));
@@ -65,60 +84,135 @@ class VpnProfileEditor {
      * @return an error message that is ready to be displayed in a dialog; or
      *      null if all the inputs are valid
      */
-    public String validate(Context c) {
-        return (Util.isNullOrEmpty(mServerName.getText())
-                        ? c.getString(R.string.vpn_error_server_name_empty)
-                        : null);
+    public String validate() {
+        String result = validate(mName, R.string.vpn_name);
+        return ((result != null)
+                ? result
+                : validate(mServerName, R.string.vpn_vpn_server));
+    }
+
+    /**
+     * Saves the secrets in this profile.
+     * @param originalProfileName the original profile name
+     */
+    public void saveSecrets(String originalProfileName) {
     }
 
     /**
      * Creates a preference for users to input domain suffices.
      */
     protected EditTextPreference createDomainSufficesPreference(Context c) {
-        EditTextPreference pref = mDomainSuffices = new EditTextPreference(c);
-        pref.setTitle(R.string.vpn_dns_search_list_title);
-        pref.setDialogTitle(R.string.vpn_dns_search_list_title);
-        pref.setPersistent(true);
-        pref.setText(mProfile.getDomainSuffices());
-        pref.setSummary(mProfile.getDomainSuffices());
-        pref.setOnPreferenceChangeListener(
+        mDomainSuffices = createEditTextPreference(c,
+                R.string.vpn_dns_search_list_title,
+                R.string.vpn_dns_search_list,
+                mProfile.getDomainSuffices(),
                 new Preference.OnPreferenceChangeListener() {
                     public boolean onPreferenceChange(
                             Preference pref, Object newValue) {
                         String v = ((String) newValue).trim();
                         mProfile.setDomainSuffices(v);
-                        pref.setSummary(checkNull(v, pref.getContext()));
+                        setSummary(pref, R.string.vpn_dns_search_list, v, false);
                         return true;
                     }
                 });
-        return pref;
+        return mDomainSuffices;
     }
 
     private Preference createServerNamePreference(Context c) {
-        EditTextPreference serverName = mServerName = new EditTextPreference(c);
-        String title = c.getString(R.string.vpn_server_name_title);
-        serverName.setTitle(title);
-        serverName.setDialogTitle(title);
-        serverName.setSummary(checkNull(mProfile.getServerName(), c));
-        serverName.setText(mProfile.getServerName());
-        serverName.setPersistent(true);
-        serverName.setOnPreferenceChangeListener(
+        mServerName = createEditTextPreference(c,
+                R.string.vpn_vpn_server_title,
+                R.string.vpn_vpn_server,
+                mProfile.getServerName(),
                 new Preference.OnPreferenceChangeListener() {
                     public boolean onPreferenceChange(
                             Preference pref, Object newValue) {
                         String v = ((String) newValue).trim();
                         mProfile.setServerName(v);
-                        pref.setSummary(checkNull(v, pref.getContext()));
+                        setSummary(pref, R.string.vpn_vpn_server, v);
                         return true;
                     }
                 });
         return mServerName;
     }
 
+    protected EditTextPreference createEditTextPreference(Context c, int titleId,
+            int prefNameId, String value,
+            Preference.OnPreferenceChangeListener listener) {
+        EditTextPreference pref = new EditTextPreference(c);
+        pref.setTitle(titleId);
+        pref.setDialogTitle(titleId);
+        setSummary(pref, prefNameId, value);
+        pref.setText(value);
+        pref.setPersistent(true);
+        pref.setOnPreferenceChangeListener(listener);
+        return pref;
+    }
 
-   String checkNull(String value, Context c) {
-        return ((value != null && value.length() > 0)
-                ? value
-                : c.getString(R.string.vpn_not_set));
-   }
+    protected EditTextPreference createSecretPreference(Context c, int titleId,
+            int fieldNameId, String value,
+            Preference.OnPreferenceChangeListener listener) {
+        EditTextPreference pref = new EditTextPreference(c);
+        pref.setTitle(titleId);
+        pref.setDialogTitle(titleId);
+        pref.getEditText().setTransformationMethod(
+                new PasswordTransformationMethod());
+        pref.setText(value);
+        setSecretSummary(pref, fieldNameId, value);
+        pref.setPersistent(true);
+        pref.setOnPreferenceChangeListener(listener);
+        return pref;
+    }
+
+    protected String validate(Preference pref, int fieldNameId) {
+        Context c = pref.getContext();
+        String value = (pref instanceof EditTextPreference)
+                ? ((EditTextPreference) pref).getText()
+                : ((ListPreference) pref).getValue();
+        String formatString = (pref instanceof EditTextPreference)
+                ? c.getString(R.string.vpn_error_miss_entering)
+                : c.getString(R.string.vpn_error_miss_selecting);
+        return (TextUtils.isEmpty(value)
+                ? String.format(formatString, c.getString(fieldNameId))
+                : null);
+    }
+
+    protected void setSummary(Preference pref, int fieldNameId, String v) {
+        setSummary(pref, fieldNameId, v, true);
+    }
+
+    protected void setSummary(Preference pref, int fieldNameId, String v,
+            boolean required) {
+        Context c = pref.getContext();
+        String formatString = required
+                ? c.getString(R.string.vpn_field_not_set)
+                : c.getString(R.string.vpn_field_not_set_optional);
+        pref.setSummary(TextUtils.isEmpty(v)
+                ? String.format(formatString, c.getString(fieldNameId))
+                : v);
+    }
+
+    protected void setSecretSummary(Preference pref, int fieldNameId,
+            String value) {
+        Context c = pref.getContext();
+        String formatString = TextUtils.isEmpty(value)
+                ? c.getString(R.string.vpn_field_not_set)
+                : c.getString(R.string.vpn_field_is_set);
+        pref.setSummary(String.format(formatString, c.getString(fieldNameId)));
+    }
+
+    protected void setSecretTitle(
+            CheckBoxPreference pref, int fieldNameId, boolean enabled) {
+        Context c = pref.getContext();
+        String formatString = enabled
+                ? c.getString(R.string.vpn_disable_field)
+                : c.getString(R.string.vpn_enable_field);
+        pref.setTitle(String.format(formatString, c.getString(fieldNameId)));
+    }
+
+    private void setName(String newName) {
+        newName = (newName == null) ? "" : newName.trim();
+        mName.setText(newName);
+        getProfile().setName(newName);
+        setSummary(mName, R.string.vpn_name, newName);
+    }
 }

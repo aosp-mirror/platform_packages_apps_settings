@@ -1823,74 +1823,150 @@ found in the list of installed applications.</string>
 
     <string name="vpn_settings_activity_title">VPN settings</string>
 
-    <string name="vpn_username_colon">User name:</string>
+    <!-- Title of VPN connect dialog -->
+    <string name="vpn_connect_to">Connect to %s</string>
+    <!-- In VPN connect dialog, for inputing username and password -->
+    <string name="vpn_username_colon">Username:</string>
     <string name="vpn_password_colon">Password:</string>
-    <string name="vpn_username">User name</string>
-    <string name="vpn_password">Password</string>
+    <string name="vpn_username">username</string>
+    <string name="vpn_password">password</string>
+
+    <!-- In VPN connect dialog where user may check to remember the username entered -->
     <string name="vpn_save_username">Remember me</string>
-    <string name="vpn_you_miss_a_field">You missed a field!</string>
-    <string name="vpn_please_fill_up">Please fill up \"%s\".</string>
 
     <string name="vpn_connect_button">Connect</string>
-    <string name="vpn_cancel_button">Cancel</string>
     <string name="vpn_yes_button">Yes</string>
     <string name="vpn_no_button">No</string>
     <string name="vpn_back_button">Back</string>
     <string name="vpn_mistake_button">No, it's a mistake</string>
 
-    <string name="vpn_menu_save">Save</string>
-    <!-- Edit VPN screen menu option to discard the user's changes for this VPN -->
-    <string name="vpn_menu_cancel">Discard</string>
-    <string name="vpn_menu_connect">Connect</string>
-    <string name="vpn_menu_disconnect">Disconnect</string>
-    <string name="vpn_menu_edit">Edit</string>
-    <string name="vpn_menu_delete">Delete</string>
+    <string name="vpn_menu_done">Save</string>
+    <string name="vpn_menu_cancel">Cancel</string>
+    <string name="vpn_menu_revert">Revert</string>
+    <string name="vpn_menu_connect">Connect to network</string>
+    <string name="vpn_menu_disconnect">Disconnect network</string>
+    <string name="vpn_menu_edit">Edit network</string>
+    <string name="vpn_menu_delete">Delete network</string>
 
-    <!-- VPN error dialog title -->
-    <string name="vpn_error_title">Attention</string>
-    <string name="vpn_error_name_empty">VPN Name cannot be empty.</string>
-    <string name="vpn_error_server_name_empty">The Server Name field cannot be empty.</string>
-    <string name="vpn_error_duplicate_name">The VPN Name \'%s\' already exists. Find another name.</string>
-    <string name="vpn_error_user_certificate_not_selected">Need to select a user certificate.</string>
-    <string name="vpn_error_ca_certificate_not_selected">Need to select a CA certificate.</string>
-    <string name="vpn_error_userkey_not_selected">Need to select a userkey.</string>
-    <string name="vpn_confirm_profile_cancellation">Are you sure you don\'t want to create this profile?</string>
+    <!-- VPN error dialog messages -->
+    <string name="vpn_error_miss_entering">You must enter a %s.</string>
+    <string name="vpn_error_miss_selecting">You must select a %s.</string>
+    <string name="vpn_error_duplicate_name">The VPN name \'%s\' already exists. Find another name.</string>
+    <string name="vpn_confirm_profile_deletion">Are you sure you want to delete this VPN?</string>
+    <string name="vpn_confirm_add_profile_cancellation">Are you sure you don\'t want to create this profile?</string>
+    <string name="vpn_confirm_edit_profile_cancellation">Are you sure you want to discard the changes made to this profile?</string>
     <string name="vpn_confirm_reconnect">The previous connection attempt failed. Do you want to try again?</string>
 
-    <string name="vpn_add_new_vpn">Add new VPN</string>
-    <string name="vpn_edit_title_add">Add new %s VPN</string>
-    <string name="vpn_edit_title_edit">Edit %s VPN</string>
-    <string name="vpn_type_title">Select VPN type</string>
-    <string name="vpns">VPN networks</string>
-    <!-- EditTextPreference summary text when no value has been set -->
-    <string name="vpn_not_set">Click to set the value</string>
-    <!-- EditTextPreference summary text when VPN is connecting -->
+    <!-- VPN type selection activity title -->
+    <string name="vpn_type_title">Add VPN</string>
+    <!-- "Add VPN" preference title -->
+    <string name="vpn_add_new_vpn">Add VPN</string>
+    <!-- VPN profile editor title when adding a new profile -->
+    <string name="vpn_edit_title_add">Add %s VPN</string>
+    <!-- VPN profile editor title when editing an existing profile -->
+    <string name="vpn_edit_title_edit">%s details</string>
+    <!-- Preference group title for a list of VPN profiles -->
+    <string name="vpns">VPNs</string>
+    <!-- Preference summary text when VPN is connecting -->
     <string name="vpn_connecting">Connecting...</string>
-    <!-- EditTextPreference summary text when VPN is disconnecting -->
+    <!-- Preference summary text when VPN is disconnecting -->
     <string name="vpn_disconnecting">Disconnecting...</string>
-    <!-- EditTextPreference summary text when VPN is connected -->
+    <!-- Preference summary text when VPN is connected -->
     <string name="vpn_connected">Connected</string>
-    <!-- EditTextPreference summary text when VPN is not connected -->
-    <string name="vpn_connect_hint">Select to connect</string>
-    <!-- dialog title when asking for username and password -->
-    <string name="vpn_connect_to">Connect to %s</string>
+    <!-- Preference summary text when VPN is not connected -->
+    <string name="vpn_connect_hint">Connect to network</string>
+
     <string name="vpn_default_profile_name">nowhere</string>
 
-    <string name="vpn_name">VPN Name</string>
-    <string name="vpn_name_summary">Give a name to this VPN</string>
+    <!-- Name of a VPN profile -->
+    <string name="vpn_name">VPN name</string>
 
-    <string name="vpn_profile_added">'%s' is added</string>
-    <string name="vpn_profile_replaced">Changes are made to '%s'</string>
+    <!-- Toast message shown when a profile is added -->
+    <string name="vpn_profile_added">&#39;%s&#39; is added</string>
+    <!-- Toast message shown when changes of a profile is saved -->
+    <string name="vpn_profile_replaced">Changes are made to &#39;%s&#39;</string>
 
-    <string name="vpn_user_certificate_title">User Certificate</string>
-    <string name="vpn_ca_certificate_title">CA Certificate</string>
-    <string name="vpn_userkey_title">User Key</string>
-    <string name="vpn_server_name_title">Server Name</string>
-    <string name="vpn_dns_search_list_title">DNS Search List</string>
+    <!-- Preference title -->
+    <string name="vpn_user_certificate_title">Set user certificate</string>
+    <!-- Complete term -->
+    <string name="vpn_user_certificate">User certificate</string>
 
-    <string name="vpn_settings_category">VPN</string>
-    <string name="vpn_settings_title">VPN</string>
-    <string name="vpn_settings_summary">Set up &amp; manage VPN configurations, connections</string>
+    <!-- Preference title -->
+    <string name="vpn_ca_certificate_title">Set CA certificate</string>
+    <!-- Complete term -->
+    <string name="vpn_ca_certificate">Certificate authority (CA) certificate</string>
+    <!-- Preference title -->
+    <string name="vpn_l2tp_secret_string_title">Set L2TP secret</string>
+    <!-- Complete term -->
+    <string name="vpn_l2tp_secret">L2TP secret</string>
+
+    <!-- Preference title -->
+    <string name="vpn_psk_title">Set IPSec pre-shared key</string>
+    <!-- Complete term -->
+    <string name="vpn_psk">IPSec pre-shared key</string>
+
+    <!-- Preference title -->
+    <string name="vpn_vpn_server_title">Set VPN server</string>
+    <!-- Complete term -->
+    <string name="vpn_vpn_server">VPN server</string>
+    <!-- Dialog title for setting VPN server name -->
+    <string name="vpn_vpn_server_dialog_title">VPN server name</string>
+
+    <!-- Preference title -->
+    <string name="vpn_dns_search_list_title">DNS search domains</string>
+    <!-- Complete term -->
+    <string name="vpn_dns_search_list">DNS search domains</string>
+
+    <!-- Summary text to hint that the value is set -->
+    <string name="vpn_field_is_set">%s is set</string>
+    <!-- Summary text to hint that the value is not set -->
+    <string name="vpn_field_not_set">%s not set</string>
+    <!-- Summary text to hint that the value is not set but it's not required-->
+    <string name="vpn_field_not_set_optional">%s not set (optional)</string>
+
+    <!-- CheckBoxPreference title to enable something -->
+    <string name="vpn_enable_field">Enable %s</string>
+    <!-- CheckBoxPreference title to disable something -->
+    <string name="vpn_disable_field">Disable %s</string>
+
+    <!-- CheckBoxPreference summary to hint that something is enabled -->
+    <string name="vpn_is_enabled">%s is enabled</string>
+    <!-- CheckBoxPreference summary to hint that something is disabled -->
+    <string name="vpn_is_disabled">%s is disabled</string>
+
+    <!-- Title of preference to enter the VPN settings activity -->
+    <string name="vpn_settings_title">VPN settings</string>
+    <!-- Summary of preference to enter the VPN settings activity -->
+    <string name="vpn_settings_summary">Set up &amp; manage Virtual Private Networks (VPNs)</string>
+
+    <!-- Title of preference group for credential storage settings -->
+    <string name="cstor_settings_category">Credential storage</string>
+    <!-- Title of preference to enable/dislable access to credential storage -->
+    <string name="cstor_access_title">Use secure credentials</string>
+    <!-- Summary of preference to enable/dislable access to credential storage -->
+    <string name="cstor_access_summary">Allow applications to access secure certificates and other credentials</string>
+
+    <!-- Title of preference to set storage password -->
+    <string name="cstor_set_passwd_title">Set storage password</string>
+    <!-- Summary of preference to set storage password -->
+    <string name="cstor_set_passwd_summary">Set or change the secure credential storage password</string>
+    <!-- Title of dialog to set storage password -->
+    <string name="cstor_set_passwd_dialog_title">Set password</string>
+
+    <!-- Title of preference to reset storage -->
+    <string name="cstor_reset_title">Clear storage</string>
+    <!-- Summary of preference to reset storage -->
+    <string name="cstor_reset_summary">Clear credential storage of all contents and reset its password</string>
+    <string name="cstor_reset_hint">Are you sure you want to delete all certificates and other stored credentials and reset the password?</string>
+
+    <!-- Description for the old-password input box -->
+    <string name="cstor_old_password">Current password:</string>
+    <!-- Description for the new-password input box -->
+    <string name="cstor_new_password">New password:</string>
+    <!-- Description for the confirm-new-password input box -->
+    <string name="cstor_confirm_password">Confirm new password:</string>
+    <!-- Description when user set up the storage for the very first time -->
+    <string name="cstor_first_time_hint">You must set a password for credential storage before you can store secure certificates and other credentials in it.</string>
 
     <!-- Sound settings screen, setting check box label -->
     <string name="emergency_tone_title">Emergency tone</string>
