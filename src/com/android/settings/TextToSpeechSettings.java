@@ -188,7 +188,7 @@ public class TextToSpeechSettings extends PreferenceActivity implements
         if (country == null) {
             // country wasn't initialized yet because a default language was found
             country = Settings.Secure.getString(resolver, KEY_TTS_DEFAULT_COUNTRY);
-            if (country.compareTo("null") != 0) {
+            if (country != null) {
                 mDefaultCountry = country;
             } else {
                 // default country setting not found, initialize it, as well as the variant;
@@ -201,7 +201,7 @@ public class TextToSpeechSettings extends PreferenceActivity implements
         if (variant == null) {
             // variant wasn't initialized yet because a default country was found
             variant = Settings.Secure.getString(resolver, KEY_TTS_DEFAULT_VARIANT);
-            if (variant.compareTo("null") != 0) {
+            if (variant != null) {
                 mDefaultLocVariant = variant;
             } else {
                 // default variant setting not found, initialize it
