@@ -36,6 +36,7 @@ import android.os.ServiceManager;
 import android.provider.Settings;
 import android.util.Log;
 import android.widget.RemoteViews;
+import android.widget.Toast;
 import com.android.settings.R;
 import com.android.settings.bluetooth.LocalBluetoothManager;
 
@@ -175,7 +176,8 @@ public class SettingsAppWidgetProvider extends AppWidgetProvider {
                 views.setImageViewResource(R.id.btn_bluetooth, R.drawable.widget_btn_bluetooth);
                 break;
             case STATE_INTERMEDIATE:
-                views.setImageViewResource(R.id.btn_bluetooth, R.drawable.widget_btn_bluetooth_gray);
+                views.setImageViewResource(R.id.btn_bluetooth,
+                        R.drawable.widget_btn_bluetooth_gray);
                 break;
         }
     }
@@ -187,7 +189,8 @@ public class SettingsAppWidgetProvider extends AppWidgetProvider {
      * @param appWidgetId
      * @return
      */
-    private static PendingIntent getLaunchPendingIntent(Context context, int appWidgetId, int buttonId) {
+    private static PendingIntent getLaunchPendingIntent(Context context, int appWidgetId,
+            int buttonId) {
         Intent launchIntent = new Intent();
         launchIntent.setClass(context, SettingsAppWidgetProvider.class);
         launchIntent.addCategory(Intent.CATEGORY_ALTERNATIVE);
@@ -256,6 +259,7 @@ public class SettingsAppWidgetProvider extends AppWidgetProvider {
         } else if (wifiState == STATE_DISABLED) {
             wifiManager.setWifiEnabled(true);
         }
+        Toast.makeText(context, R.string.gadget_toggle_wifi, Toast.LENGTH_SHORT).show();
     }
 
     /**
@@ -265,7 +269,8 @@ public class SettingsAppWidgetProvider extends AppWidgetProvider {
      * @return true if enabled
      */
     private static boolean getBackgroundDataState(Context context) {
-        ConnectivityManager connManager = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
+        ConnectivityManager connManager =
+                (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
         return connManager.getBackgroundDataSetting();
     }
 
@@ -275,7 +280,8 @@ public class SettingsAppWidgetProvider extends AppWidgetProvider {
      * @param context
      */
     private void toggleBackgroundData(Context context) {
-        ConnectivityManager connManager = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
+        ConnectivityManager connManager =
+                (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
         boolean sync = getBackgroundDataState(context);
         connManager.setBackgroundDataSetting(!sync);
         ContentResolver.setMasterSyncAutomatically(!sync);
@@ -300,7 +306,8 @@ public class SettingsAppWidgetProvider extends AppWidgetProvider {
     private void toggleGps(Context context) {
         ContentResolver resolver = context.getContentResolver();
         boolean enabled = getGpsState(context);
-        Settings.Secure.setLocationProviderEnabled(resolver, LocationManager.GPS_PROVIDER, !enabled);
+        Settings.Secure.setLocationProviderEnabled(resolver, LocationManager.GPS_PROVIDER,
+                !enabled);
     }
 
     /**
@@ -393,5 +400,6 @@ public class SettingsAppWidgetProvider extends AppWidgetProvider {
         } else if (state == STATE_DISABLED) {
             mLocalBluetoothManager.setBluetoothEnabled(true);
         }
+        Toast.makeText(context, R.string.gadget_toggle_bluetooth, Toast.LENGTH_SHORT).show();
     }
 }
