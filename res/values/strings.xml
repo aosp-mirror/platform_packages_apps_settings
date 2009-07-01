@@ -1944,11 +1944,13 @@ found in the list of installed applications.</string>
     <string name="cstor_access_title">Use secure credentials</string>
     <!-- Summary of preference to enable/dislable access to credential storage -->
     <string name="cstor_access_summary">Allow applications to access secure certificates and other credentials</string>
+    <!-- Title of dialog to enable/dislable access to credential storage -->
+    <string name="cstor_access_dialog_title">Enter password</string>
 
     <!-- Title of preference to set storage password -->
-    <string name="cstor_set_passwd_title">Set storage password</string>
+    <string name="cstor_set_passwd_title">Set password</string>
     <!-- Summary of preference to set storage password -->
-    <string name="cstor_set_passwd_summary">Set or change the secure credential storage password</string>
+    <string name="cstor_set_passwd_summary">Set or change the credential storage password</string>
     <!-- Title of dialog to set storage password -->
     <string name="cstor_set_passwd_dialog_title">Set password</string>
 
@@ -1956,7 +1958,16 @@ found in the list of installed applications.</string>
     <string name="cstor_reset_title">Clear storage</string>
     <!-- Summary of preference to reset storage -->
     <string name="cstor_reset_summary">Clear credential storage of all contents and reset its password</string>
-    <string name="cstor_reset_hint">Are you sure you want to delete all certificates and other stored credentials and reset the password?</string>
+    <string name="cstor_reset_hint">Are you sure you want to delete all credentials and reset the credential storage password?</string>
+
+    <!-- Title of dialog to name a credential -->
+    <string name="cstor_name_credential_dialog_title">Name the certificate</string>
+    <!-- Description for the credential name input box -->
+    <string name="cstor_credential_name">Certificate name:</string>
+    <!-- Title of the credential info -->
+    <string name="cstor_credential_info">Certificate details:</string>
+    <string name="cstor_name_credential_hint">The name can contain only letters and numbers.</string>
+
 
     <!-- Description for the old-password input box -->
     <string name="cstor_old_password">Current password:</string>
@@ -1965,9 +1976,21 @@ found in the list of installed applications.</string>
     <!-- Description for the confirm-new-password input box -->
     <string name="cstor_confirm_password">Confirm new password:</string>
     <!-- Description when user set up the storage for the very first time -->
-    <string name="cstor_first_time_hint">You must set a password for credential storage before you can store secure certificates and other credentials in it.</string>
-    <string name="cstor_password_error">Passwords do not match.</string>
-    <string name="cstor_password_empty_error">Please fill up all the fields.</string>
+    <string name="cstor_first_time_hint">You must set a password for the credential storage.</string>
+    <string name="cstor_password_error">Please enter the correct password.</string>
+    <string name="cstor_password_error_reset_warning">Please enter the correct password. You have one more try to enter the correct password before the credential storage is erased.</string>
+    <string name="cstor_password_error_reset_warning_plural">Please enter the correct password. You have %d more tries to enter the correct password before the credential storage is erased.</string>
+    <string name="cstor_passwords_error">Passwords do not match.</string>
+    <string name="cstor_passwords_empty_error">You must enter and confirm a password.</string>
+    <string name="cstor_password_empty_error">Please enter the password.</string>
+    <string name="cstor_password_verification_error">Please enter the password again. The password must have at least 8 characters and must not contain spaces.</string>
+    <string name="cstor_name_empty_error">Please enter a name.</string>
+    <string name="cstor_name_char_error">Please enter a name that contains only letters and numbers.</string>
+
+    <!-- toast message -->
+    <string name="cstor_is_enabled">Credential storage is enabled.</string>
+    <!-- toast message -->
+    <string name="cstor_is_added">%s is added.</string>
 
     <!-- Sound settings screen, setting check box label -->
     <string name="emergency_tone_title">Emergency tone</string>
