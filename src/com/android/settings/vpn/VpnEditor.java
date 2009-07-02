@@ -22,6 +22,7 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.vpn.L2tpIpsecProfile;
+import android.net.vpn.L2tpIpsecPskProfile;
 import android.net.vpn.L2tpProfile;
 import android.net.vpn.VpnProfile;
 import android.net.vpn.VpnType;
@@ -41,9 +42,11 @@ public class VpnEditor extends PreferenceActivity {
     private static final int MENU_SAVE = Menu.FIRST;
     private static final int MENU_CANCEL = Menu.FIRST + 1;
     private static final String KEY_PROFILE = "profile";
+    private static final String KEY_ORIGINAL_PROFILE_NAME = "orig_profile_name";
 
     private VpnProfileEditor mProfileEditor;
     private boolean mAddingProfile;
+    private String mOriginalProfileName;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -51,6 +54,9 @@ public class VpnEditor extends PreferenceActivity {
         VpnProfile p = (VpnProfile) ((savedInstanceState == null)
                 ? getIntent().getParcelableExtra(VpnSettings.KEY_VPN_PROFILE)
                 : savedInstanceState.getParcelable(KEY_PROFILE));
+        mOriginalProfileName = (savedInstanceState == null)
+                ? p.getName()
+                : savedInstanceState.getString(KEY_ORIGINAL_PROFILE_NAME);
         mProfileEditor = getEditor(p);
         mAddingProfile = TextUtils.isEmpty(p.getName());
 
@@ -65,6 +71,7 @@ public class VpnEditor extends PreferenceActivity {
         if (mProfileEditor == null) return;
 
         outState.putParcelable(KEY_PROFILE, getProfile());
+        outState.putString(KEY_ORIGINAL_PROFILE_NAME, mOriginalProfileName);
     }
 
     @Override
@@ -119,6 +126,7 @@ public class VpnEditor extends PreferenceActivity {
             return false;
         }
 
+        mProfileEditor.saveSecrets(mOriginalProfileName);
         setResult(getProfile());
         return true;
     }
@@ -136,6 +144,8 @@ public class VpnEditor extends PreferenceActivity {
                 return new L2tpIpsecEditor((L2tpIpsecProfile) p);
 
             case L2TP_IPSEC_PSK:
+                return new L2tpIpsecPskEditor((L2tpIpsecPskProfile) p);
+
             case L2TP:
                 return new L2tpEditor((L2tpProfile) p);
 
