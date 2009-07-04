@@ -80,9 +80,9 @@ public class SecuritySettings extends PreferenceActivity implements
     private static final String LOCATION_GPS = "location_gps";
 
     // Credential storage
-    private static final String ACTION_ADD_CREDENTIAL =
+    public static final String ACTION_ADD_CREDENTIAL =
             "android.security.ADD_CREDENTIAL";
-    private static final String ACTION_UNLOCK_CREDENTIAL_STORAGE =
+    public static final String ACTION_UNLOCK_CREDENTIAL_STORAGE =
             "android.security.UNLOCK_CREDENTIAL_STORAGE";
     private static final String KEY_CSTOR_TYPE_NAME = "typeName";
     private static final String KEY_CSTOR_ITEM = "item";
@@ -514,7 +514,10 @@ public class SecuritySettings extends PreferenceActivity implements
         }
 
         private void addCredential() {
-            String message = String.format(getString(R.string.cstor_is_added),
+            String formatString = mCstorAddCredentialHelper.saveToStorage() < 0
+                    ? getString(R.string.cstor_add_error)
+                    : getString(R.string.cstor_is_added);
+            String message = String.format(formatString,
                     mCstorAddCredentialHelper.getName());
             Toast.makeText(SecuritySettings.this, message, Toast.LENGTH_SHORT)
                     .show();
@@ -865,14 +868,6 @@ public class SecuritySettings extends PreferenceActivity implements
             return mTypeName;
         }
 
-        byte[] getItem(int i) {
-            return mItemList.get(i);
-        }
-
-        String getNamespace(int i) {
-            return mNamespaceList.get(i);
-        }
-
         CharSequence getDescription() {
             return Html.fromHtml(mDescription);
         }
@@ -883,6 +878,16 @@ public class SecuritySettings extends PreferenceActivity implements
 
         String getName() {
             return mName;
+        }
+
+        int saveToStorage() {
+            Keystore ks = Keystore.getInstance();
+            for (int i = 0, count = mItemList.size(); i < count; i++) {
+                byte[] blob = mItemList.get(i);
+                int ret = ks.put(mNamespaceList.get(i), mName, new String(blob));
+                if (ret < 0) return ret;
+            }
+            return 0;
         }
 
         private void parse(Intent intent) {
