@@ -50,13 +50,6 @@ class L2tpIpsecPskEditor extends L2tpEditor {
                 : validate(mPresharedKey, R.string.vpn_ipsec_presharedkey));
     }
 
-    @Override
-    public void saveSecrets(String originalProfileName) {
-        L2tpIpsecPskProfile profile = (L2tpIpsecPskProfile) getProfile();
-        profile.getPresharedKey();
-        // TODO: fill up the implementation after keystore is available
-    }
-
     private Preference createPresharedKeyPreference(Context c) {
         final L2tpIpsecPskProfile profile = (L2tpIpsecPskProfile) getProfile();
         mPresharedKey = createSecretPreference(c,

@@ -589,8 +589,7 @@ public class SecuritySettings extends PreferenceActivity implements
                     : R.string.cstor_password_error);
             if (count <= 3) {
                 if (count == 1) {
-                    v.setText(getString(
-                            R.string.cstor_password_error_reset_warning));
+                    v.setText(R.string.cstor_password_error_reset_warning);
                 } else {
                     String format = getString(
                             R.string.cstor_password_error_reset_warning_plural);
@@ -703,9 +702,13 @@ public class SecuritySettings extends PreferenceActivity implements
             return v;
         }
 
-        private void hideError() {
-            View v = mView.findViewById(R.id.cstor_error);
+        private void hide(int viewId) {
+            View v = mView.findViewById(viewId);
             if (v != null) v.setVisibility(View.GONE);
+        }
+
+        private void hideError() {
+            hide(R.id.cstor_error);
         }
 
         private String getText(int viewId) {
@@ -715,6 +718,11 @@ public class SecuritySettings extends PreferenceActivity implements
         private void setText(int viewId, String text) {
             TextView v = (TextView) mView.findViewById(viewId);
             if (v != null) v.setText(text);
+        }
+
+        private void setText(int viewId, int textId) {
+            TextView v = (TextView) mView.findViewById(viewId);
+            if (v != null) v.setText(textId);
         }
 
         private void enablePreferences(boolean enabled) {
@@ -785,6 +793,12 @@ public class SecuritySettings extends PreferenceActivity implements
                     R.layout.cstor_unlock_dialog_view, null);
             hideError();
 
+            // show extra hint only when the action comes from outside
+            if ((mSpecialIntent == null)
+                    && (mCstorAddCredentialHelper == null)) {
+                hide(R.id.cstor_access_dialog_hint_from_action);
+            }
+
             Dialog d = new AlertDialog.Builder(SecuritySettings.this)
                     .setView(mView)
                     .setTitle(R.string.cstor_access_dialog_title)
@@ -801,6 +815,13 @@ public class SecuritySettings extends PreferenceActivity implements
             mView = View.inflate(SecuritySettings.this,
                     R.layout.cstor_set_password_dialog_view, null);
             hideError();
+
+            // show extra hint only when the action comes from outside
+            if ((mSpecialIntent != null)
+                    || (mCstorAddCredentialHelper != null)) {
+                setText(R.id.cstor_first_time_hint,
+                        R.string.cstor_first_time_hint_from_action);
+            }
 
             switch (id) {
                 case CSTOR_INIT_DIALOG:
@@ -847,9 +868,9 @@ public class SecuritySettings extends PreferenceActivity implements
             hideError();
 
             setText(R.id.cstor_credential_name_title,
-                    getString(R.string.cstor_credential_name));
+                    R.string.cstor_credential_name);
             setText(R.id.cstor_credential_info_title,
-                    getString(R.string.cstor_credential_info));
+                    R.string.cstor_credential_info);
             setText(R.id.cstor_credential_info,
                     mCstorAddCredentialHelper.getDescription().toString());
 

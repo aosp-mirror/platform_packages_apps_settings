@@ -60,12 +60,6 @@ class L2tpEditor extends VpnProfileEditor {
                 : validate(mSecretString, R.string.vpn_l2tp_secret));
     }
 
-    @Override
-    public void saveSecrets(String originalProfileName) {
-        L2tpProfile profile = (L2tpProfile) getProfile();
-        // TODO: fill up the implementation after keystore is available
-    }
-
     private Preference createSecretPreference(Context c) {
         final L2tpProfile profile = (L2tpProfile) getProfile();
         CheckBoxPreference secret = mSecret = new CheckBoxPreference(c);

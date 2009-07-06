@@ -92,13 +92,6 @@ class VpnProfileEditor {
     }
 
     /**
-     * Saves the secrets in this profile.
-     * @param originalProfileName the original profile name
-     */
-    public void saveSecrets(String originalProfileName) {
-    }
-
-    /**
      * Creates a preference for users to input domain suffices.
      */
     protected EditTextPreference createDomainSufficesPreference(Context c) {

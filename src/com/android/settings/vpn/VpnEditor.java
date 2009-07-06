@@ -46,7 +46,6 @@ public class VpnEditor extends PreferenceActivity {
 
     private VpnProfileEditor mProfileEditor;
     private boolean mAddingProfile;
-    private String mOriginalProfileName;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -54,9 +53,6 @@ public class VpnEditor extends PreferenceActivity {
         VpnProfile p = (VpnProfile) ((savedInstanceState == null)
                 ? getIntent().getParcelableExtra(VpnSettings.KEY_VPN_PROFILE)
                 : savedInstanceState.getParcelable(KEY_PROFILE));
-        mOriginalProfileName = (savedInstanceState == null)
-                ? p.getName()
-                : savedInstanceState.getString(KEY_ORIGINAL_PROFILE_NAME);
         mProfileEditor = getEditor(p);
         mAddingProfile = TextUtils.isEmpty(p.getName());
 
@@ -71,7 +67,6 @@ public class VpnEditor extends PreferenceActivity {
         if (mProfileEditor == null) return;
 
         outState.putParcelable(KEY_PROFILE, getProfile());
-        outState.putString(KEY_ORIGINAL_PROFILE_NAME, mOriginalProfileName);
     }
 
     @Override
@@ -126,13 +121,11 @@ public class VpnEditor extends PreferenceActivity {
             return false;
         }
 
-        mProfileEditor.saveSecrets(mOriginalProfileName);
         setResult(getProfile());
         return true;
     }
 
     private void setResult(VpnProfile p) {
-        p.setId(Util.base64Encode(p.getName().getBytes()));
         Intent intent = new Intent(this, VpnSettings.class);
         intent.putExtra(VpnSettings.KEY_VPN_PROFILE, (Parcelable) p);
         setResult(RESULT_OK, intent);
