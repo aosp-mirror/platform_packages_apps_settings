@@ -276,7 +276,12 @@ public final class AccessPointState implements Comparable<AccessPointState>, Par
             requestRefresh();
         }
     }
-    
+
+    public boolean isEnterprise() {
+        return (WPA_EAP.equals(security) ||
+                AccessPointState.IEEE8021X.equals(security));
+    }
+
     public void setSecurity(String security) {
         if (TextUtils.isEmpty(this.security) || !this.security.equals(security)) {
             this.security = security;
@@ -592,14 +597,17 @@ public final class AccessPointState implements Comparable<AccessPointState>, Par
             
         } else if (security.equals(OPEN)) {
             config.allowedKeyManagement.set(KeyMgmt.NONE);
-        } else if (security.equals(WPA_EAP)) {
+        } else if (security.equals(WPA_EAP) || security.equals(IEEE8021X)) {
             config.allowedGroupCiphers.set(GroupCipher.TKIP);
             config.allowedGroupCiphers.set(GroupCipher.CCMP);
-            config.allowedKeyManagement.set(KeyMgmt.WPA_EAP);
-        } else if (security.equals(IEEE8021X)) {
-            config.allowedGroupCiphers.set(GroupCipher.TKIP);
-            config.allowedGroupCiphers.set(GroupCipher.CCMP);
-            config.allowedKeyManagement.set(KeyMgmt.IEEE8021X);
+            if (security.equals(WPA_EAP)) {
+                config.allowedKeyManagement.set(KeyMgmt.WPA_EAP);
+            } else {
+                config.allowedKeyManagement.set(KeyMgmt.IEEE8021X);
+            }
+            if (!TextUtils.isEmpty(mPassword)) {
+                config.password = convertToQuotedString(mPassword);
+            }
         }
     }
     

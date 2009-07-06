@@ -18,6 +18,7 @@ package com.android.settings.wifi;
 
 import com.android.settings.ProgressCategory;
 import com.android.settings.R;
+import com.android.settings.SecuritySettings;
 
 import android.app.Dialog;
 import android.content.DialogInterface;
@@ -29,6 +30,7 @@ import android.preference.PreferenceActivity;
 import android.preference.PreferenceScreen;
 import android.preference.CheckBoxPreference;
 import android.provider.Settings;
+import android.security.Keystore;
 import android.util.Log;
 import android.view.ContextMenu;
 import android.view.Menu;
@@ -259,7 +261,7 @@ public class WifiSettings extends PreferenceActivity implements WifiLayer.Callba
 
     @Override
     public boolean onContextItemSelected(MenuItem item) {
-        
+
         AccessPointState state = getStateFromMenuInfo(item.getMenuInfo());
         if (state == null) {
             return false;
@@ -352,6 +354,12 @@ public class WifiSettings extends PreferenceActivity implements WifiLayer.Callba
     }
     
     public void showAccessPointDialog(AccessPointState state, int mode) {
+        if (state.isEnterprise() &&
+                Keystore.getInstance().getState() != Keystore.UNLOCKED) {
+            startActivity(new Intent(
+                    SecuritySettings.ACTION_UNLOCK_CREDENTIAL_STORAGE));
+            return;
+        }
         AccessPointDialog dialog = new AccessPointDialog(this, mWifiLayer);
         dialog.setMode(mode);
         dialog.setState(state);
