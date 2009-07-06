@@ -407,6 +407,7 @@ public class VpnSettings extends PreferenceActivity implements
                 };
         new AlertDialog.Builder(this)
                 .setTitle(android.R.string.dialog_alert_title)
+                .setIcon(android.R.drawable.ic_dialog_alert)
                 .setMessage(R.string.vpn_confirm_profile_deletion)
                 .setPositiveButton(android.R.string.ok, onClickListener)
                 .setNegativeButton(R.string.vpn_no_button, onClickListener)
@@ -539,6 +540,7 @@ public class VpnSettings extends PreferenceActivity implements
     private void showReconnectDialog(final VpnProfile p) {
         new AlertDialog.Builder(this)
                 .setTitle(android.R.string.dialog_alert_title)
+                .setIcon(android.R.drawable.ic_dialog_alert)
                 .setMessage(R.string.vpn_confirm_reconnect)
                 .setPositiveButton(R.string.vpn_yes_button,
                         new DialogInterface.OnClickListener() {
