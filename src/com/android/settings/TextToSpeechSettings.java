@@ -39,6 +39,7 @@ import android.speech.tts.TextToSpeech;
 import android.util.Log;
 
 import java.util.List;
+import java.util.Locale;
 import java.util.StringTokenizer;
 
 public class TextToSpeechSettings extends PreferenceActivity implements
@@ -95,14 +96,14 @@ public class TextToSpeechSettings extends PreferenceActivity implements
         initClickers();
         initDefaultSettings();
     }
-    
-    
+
+
     @Override
     protected void onStart() {
         super.onStart();
         // whenever we return to this screen, we don't know the state of the
         // system, so we have to recheck that we can play the demo, or it must be disabled.
-        // TODO make the TTS service listen to "changes in the system", i.e. sd card un/mount 
+        // TODO make the TTS service listen to "changes in the system", i.e. sd card un/mount
         initClickers();
         updateWidgetState();
         checkVoiceData();
@@ -174,23 +175,21 @@ public class TextToSpeechSettings extends PreferenceActivity implements
         String variant = null;
         mDefaultLocPref = (ListPreference) findPreference(KEY_TTS_DEFAULT_LANG);
         language = Settings.Secure.getString(resolver, TTS_DEFAULT_LANG);
-        if (language != null) {
-            mDefaultLanguage = language;
-        } else {
-            // default language setting not found, initialize it, as well as the country and variant
-            language = TextToSpeech.Engine.FALLBACK_TTS_DEFAULT_LANG;
-            country  = TextToSpeech.Engine.FALLBACK_TTS_DEFAULT_COUNTRY;
-            variant  = TextToSpeech.Engine.FALLBACK_TTS_DEFAULT_VARIANT;
+        if (language == null) {
+            // the default language property isn't set, use that of the current locale
+            Locale currentLocale = Locale.getDefault();
+            language = currentLocale.getISO3Language();
+            country = currentLocale.getISO3Country();
+            variant = currentLocale.getVariant();
             Settings.Secure.putString(resolver, TTS_DEFAULT_LANG, language);
             Settings.Secure.putString(resolver, TTS_DEFAULT_COUNTRY, country);
             Settings.Secure.putString(resolver, TTS_DEFAULT_VARIANT, variant);
         }
+        mDefaultLanguage = language;
         if (country == null) {
             // country wasn't initialized yet because a default language was found
             country = Settings.Secure.getString(resolver, KEY_TTS_DEFAULT_COUNTRY);
-            if (country != null) {
-                mDefaultCountry = country;
-            } else {
+            if (country == null) {
                 // default country setting not found, initialize it, as well as the variant;
                 country  = TextToSpeech.Engine.FALLBACK_TTS_DEFAULT_COUNTRY;
                 variant  = TextToSpeech.Engine.FALLBACK_TTS_DEFAULT_VARIANT;
@@ -198,30 +197,19 @@ public class TextToSpeechSettings extends PreferenceActivity implements
                 Settings.Secure.putString(resolver, TTS_DEFAULT_VARIANT, variant);
             }
         }
+        mDefaultCountry = country;
         if (variant == null) {
             // variant wasn't initialized yet because a default country was found
             variant = Settings.Secure.getString(resolver, KEY_TTS_DEFAULT_VARIANT);
-            if (variant != null) {
-                mDefaultLocVariant = variant;
-            } else {
+            if (variant == null) {
                 // default variant setting not found, initialize it
                 variant = TextToSpeech.Engine.FALLBACK_TTS_DEFAULT_VARIANT;
                 Settings.Secure.putString(resolver, TTS_DEFAULT_VARIANT, variant);
             }
         }
-        // we now have the default lang/country/variant trio, build a string value from it
-        String localeString = new String(language);
-        if (country.compareTo("") != 0) {
-            localeString += LOCALE_DELIMITER + country;
-        } else {
-            localeString += LOCALE_DELIMITER + " ";
-        }
-        if (variant.compareTo("") != 0) {
-            localeString += LOCALE_DELIMITER + variant;
-        }
-        Log.v(TAG, "In initDefaultSettings: localeString=" + localeString);
-        // TODO handle the case where localeString isn't in the existing entries
-        mDefaultLocPref.setValue(localeString);
+        mDefaultLocVariant = variant;
+
+        setDefaultLocalePref(language, country, variant);
         mDefaultLocPref.setOnPreferenceChangeListener(this);
     }
 
@@ -311,10 +299,10 @@ public class TextToSpeechSettings extends PreferenceActivity implements
             // Default rate
             int value = Integer.parseInt((String) objValue);
             try {
-                Settings.Secure.putInt(getContentResolver(), 
+                Settings.Secure.putInt(getContentResolver(),
                         TTS_DEFAULT_RATE, value);
                 if (mTts != null) {
-                    mTts.setSpeechRate(value);
+                    mTts.setSpeechRate((float)(value/100.0f));
                 }
                 Log.i(TAG, "TTS default rate is "+value);
             } catch (NumberFormatException e) {
@@ -330,10 +318,10 @@ public class TextToSpeechSettings extends PreferenceActivity implements
             Log.v(TAG, "TTS default lang/country/variant set to "
                     + mDefaultLanguage + "/" + mDefaultCountry + "/" + mDefaultLocVariant);
         }
-        
+
         return true;
     }
-    
+
 
     /**
      * Called when mPlayExample or mInstallData is clicked
@@ -383,5 +371,26 @@ public class TextToSpeechSettings extends PreferenceActivity implements
         }
     }
 
+
+    private void setDefaultLocalePref(String language, String country, String variant) {
+        // build a string from the default lang/country/variant trio,
+        String localeString = new String(language);
+        if (country.compareTo("") != 0) {
+            localeString += LOCALE_DELIMITER + country;
+        } else {
+            localeString += LOCALE_DELIMITER + " ";
+        }
+        if (variant.compareTo("") != 0) {
+            localeString += LOCALE_DELIMITER + variant;
+        }
+
+        if (mDefaultLocPref.findIndexOfValue(localeString) > -1) {
+            mDefaultLocPref.setValue(localeString);
+        } else {
+            mDefaultLocPref.setValueIndex(0);
+        }
+
+        Log.v(TAG, "In initDefaultSettings: localeString=" + localeString);
+    }
 
 }
