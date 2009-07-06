@@ -23,8 +23,6 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.widget.Toast;
 
-import org.apache.commons.codec.binary.Base64;
-
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
@@ -57,10 +55,6 @@ class Util {
     static void showErrorMessage(Context c, String message,
             DialogInterface.OnClickListener listener) {
         createErrorDialog(c, message, listener).show();
-    }
-
-    static String base64Encode(byte[] bytes) {
-        return new String(Base64.encodeBase64(bytes));
     }
 
     static void deleteFile(String path) {

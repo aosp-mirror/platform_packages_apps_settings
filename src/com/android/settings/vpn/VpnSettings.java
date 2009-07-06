@@ -17,6 +17,7 @@
 package com.android.settings.vpn;
 
 import com.android.settings.R;
+import com.android.settings.SecuritySettings;
 
 import android.app.AlertDialog;
 import android.app.Dialog;
@@ -24,6 +25,8 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.net.vpn.L2tpIpsecPskProfile;
+import android.net.vpn.L2tpProfile;
 import android.net.vpn.VpnManager;
 import android.net.vpn.VpnProfile;
 import android.net.vpn.VpnState;
@@ -38,6 +41,7 @@ import android.preference.PreferenceCategory;
 import android.preference.PreferenceManager;
 import android.preference.PreferenceScreen;
 import android.preference.Preference.OnPreferenceClickListener;
+import android.security.Keystore;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.ContextMenu;
@@ -54,8 +58,8 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
@@ -113,6 +117,9 @@ public class VpnSettings extends PreferenceActivity implements
     private VpnProfileActor mConnectingActor;
     private boolean mStateSaved = false;
 
+    // states saved for unlocking keystore
+    private Runnable mUnlockAction;
+
     private VpnManager mVpnManager = new VpnManager(this);
 
     private ConnectivityReceiver mConnectivityReceiver =
@@ -169,6 +176,12 @@ public class VpnSettings extends PreferenceActivity implements
     public void onResume() {
         super.onResume();
         mStatusChecker.onResume();
+
+        if ((mUnlockAction != null) && isKeystoreUnlocked()) {
+            Runnable action = mUnlockAction;
+            mUnlockAction = null;
+            runOnUiThread(action);
+        }
     }
 
     @Override
@@ -279,9 +292,9 @@ public class VpnSettings extends PreferenceActivity implements
     }
 
     @Override
-    protected void onActivityResult(int requestCode, int resultCode,
-            Intent data) {
-        int index = mIndexOfEditedProfile;
+    protected void onActivityResult(final int requestCode, final int resultCode,
+            final Intent data) {
+        final int index = mIndexOfEditedProfile;
         mIndexOfEditedProfile = -1;
 
         if ((resultCode == RESULT_CANCELED) || (data == null)) {
@@ -310,6 +323,16 @@ public class VpnSettings extends PreferenceActivity implements
                             }
                         });
                 return;
+            }
+
+            if (needKeystoreToSave(p)) {
+                Runnable action = new Runnable() {
+                    public void run() {
+                        mIndexOfEditedProfile = index;
+                        onActivityResult(requestCode, resultCode, data);
+                    }
+                };
+                if (!unlockKeystore(p, action)) return;
             }
 
             try {
@@ -414,7 +437,27 @@ public class VpnSettings extends PreferenceActivity implements
                 .show();
     }
 
+    // Randomly generates an ID for the profile.
+    // The ID is unique and only set once when the profile is created.
+    private void setProfileId(VpnProfile profile) {
+        String id;
+
+        while (true) {
+            id = String.valueOf(Math.abs(
+                    Double.doubleToLongBits(Math.random())));
+            if (id.length() >= 8) break;
+        }
+        for (VpnProfile p : mVpnProfileList) {
+            if (p.getId().equals(id)) {
+                setProfileId(profile);
+                return;
+            }
+        }
+        profile.setId(id);
+    }
+
     private void addProfile(VpnProfile p) throws IOException {
+        setProfileId(p);
         saveProfileToStorage(p);
         mVpnProfileList.add(p);
         addPreferenceFor(p);
@@ -445,8 +488,11 @@ public class VpnSettings extends PreferenceActivity implements
             throw new RuntimeException("inconsistent state!");
         }
 
-        // TODO: call saveSecret(String) after keystore is available
+        p.setId(oldProfile.getId());
 
+        processSecrets(p);
+
+        // TODO: remove copyFiles once the setId() code propagates.
         // Copy config files and remove the old ones if they are in different
         // directories.
         if (Util.copyFiles(getProfileDir(oldProfile), getProfileDir(p))) {
@@ -463,10 +509,85 @@ public class VpnSettings extends PreferenceActivity implements
         startActivityForResult(intent, REQUEST_SELECT_VPN_TYPE);
     }
 
-    private void startVpnEditor(VpnProfile profile) {
+    private boolean isKeystoreUnlocked() {
+        return (Keystore.getInstance().getState() == Keystore.UNLOCKED);
+    }
+
+
+    // Returns true if the profile needs to access keystore
+    private boolean needKeystoreToSave(VpnProfile p) {
+        return needKeystoreToConnect(p);
+    }
+
+    // Returns true if the profile needs to access keystore
+    private boolean needKeystoreToEdit(VpnProfile p) {
+        switch (p.getType()) {
+            case L2TP_IPSEC:
+            case L2TP_IPSEC_PSK:
+                return true;
+
+            default:
+                return false;
+        }
+    }
+
+    // Returns true if the profile needs to access keystore
+    private boolean needKeystoreToConnect(VpnProfile p) {
+        switch (p.getType()) {
+            case L2TP_IPSEC:
+            case L2TP_IPSEC_PSK:
+                return true;
+
+            case L2TP:
+                return ((L2tpProfile) p).isSecretEnabled();
+
+            default:
+                return false;
+        }
+    }
+
+    // Returns true if keystore is unlocked or keystore is not a concern
+    private boolean unlockKeystore(VpnProfile p, Runnable action) {
+        if (isKeystoreUnlocked()) return true;
+        mUnlockAction = action;
+        startActivity(
+                new Intent(SecuritySettings.ACTION_UNLOCK_CREDENTIAL_STORAGE));
+        return false;
+    }
+
+    private void startVpnEditor(final VpnProfile profile) {
+        if (needKeystoreToEdit(profile)) {
+            Runnable action = new Runnable() {
+                public void run() {
+                    startVpnEditor(profile);
+                }
+            };
+            if (!unlockKeystore(profile, action)) return;
+        }
+
         Intent intent = new Intent(this, VpnEditor.class);
         intent.putExtra(KEY_VPN_PROFILE, (Parcelable) profile);
         startActivityForResult(intent, REQUEST_ADD_OR_EDIT_PROFILE);
+    }
+
+    private synchronized void connect(final VpnProfile p) {
+        if (needKeystoreToConnect(p)) {
+            Runnable action = new Runnable() {
+                public void run() {
+                    connect(p);
+                }
+            };
+            if (!unlockKeystore(p, action)) return;
+        }
+
+        mConnectingActor = getActor(p);
+        if (mConnectingActor.isConnectDialogNeeded()) {
+            removeDialog(DIALOG_CONNECT);
+            showDialog(DIALOG_CONNECT);
+        } else {
+            changeState(p, VpnState.CONNECTING);
+            mConnectingActor.connect(null);
+        }
     }
 
     // Do connect or disconnect based on the current state.
@@ -474,14 +595,7 @@ public class VpnSettings extends PreferenceActivity implements
         VpnPreference pref = mVpnPreferenceMap.get(p.getName());
         switch (p.getState()) {
             case IDLE:
-                mConnectingActor = getActor(p);
-                if (mConnectingActor.isConnectDialogNeeded()) {
-                    removeDialog(DIALOG_CONNECT);
-                    showDialog(DIALOG_CONNECT);
-                } else {
-                    changeState(p, VpnState.CONNECTING);
-                    mConnectingActor.connect(null);
-                }
+                connect(p);
                 break;
 
             case CONNECTING:
@@ -601,7 +715,6 @@ public class VpnSettings extends PreferenceActivity implements
         File root = new File(PROFILES_ROOT);
         String[] dirs = root.list();
         if (dirs == null) return;
-        Arrays.sort(dirs);
         for (String dir : dirs) {
             File f = new File(new File(root, dir), PROFILE_OBJ_FILE);
             if (!f.exists()) continue;
@@ -611,11 +724,21 @@ public class VpnSettings extends PreferenceActivity implements
                 if (!checkIdConsistency(dir, p)) continue;
 
                 mVpnProfileList.add(p);
-                addPreferenceFor(p);
             } catch (IOException e) {
                 Log.e(TAG, "retrieveVpnListFromStorage()", e);
             }
         }
+        Collections.sort(mVpnProfileList, new Comparator<VpnProfile>() {
+            public int compare(VpnProfile p1, VpnProfile p2) {
+                return p1.getName().compareTo(p2.getName());
+            }
+
+            public boolean equals(VpnProfile p) {
+                // not used
+                return false;
+            }
+        });
+        for (VpnProfile p : mVpnProfileList) addPreferenceFor(p);
         disableProfilePreferencesIfOneActive();
     }
 
@@ -666,6 +789,40 @@ public class VpnSettings extends PreferenceActivity implements
 
     private VpnProfile createVpnProfile(String type) {
         return mVpnManager.createVpnProfile(Enum.valueOf(VpnType.class, type));
+    }
+
+    private static final String NAMESPACE_VPN = "vpn";
+    private static final String KEY_PREFIX_IPSEC_PSK = "ipsk000";
+    private static final String KEY_PREFIX_L2TP_SECRET = "lscrt000";
+
+    private void processSecrets(VpnProfile p) {
+        Keystore ks = Keystore.getInstance();
+        switch (p.getType()) {
+            case L2TP_IPSEC_PSK:
+                L2tpIpsecPskProfile pskProfile = (L2tpIpsecPskProfile) p;
+                String keyName = KEY_PREFIX_IPSEC_PSK + p.getId();
+                String presharedKey = pskProfile.getPresharedKey();
+                if (!presharedKey.equals(keyName)) {
+                    ks.put(NAMESPACE_VPN, keyName, presharedKey);
+                    pskProfile.setPresharedKey(NAMESPACE_VPN + "_" + keyName);
+                }
+                // pass through
+
+            case L2TP:
+                L2tpProfile l2tpProfile = (L2tpProfile) p;
+                keyName = KEY_PREFIX_L2TP_SECRET + p.getId();
+                String secret = l2tpProfile.getSecretString();
+                if (l2tpProfile.isSecretEnabled()) {
+                    if (!secret.equals(keyName)) {
+                        ks.put(NAMESPACE_VPN, keyName, secret);
+                        l2tpProfile.setSecretString(
+                                NAMESPACE_VPN + "_" + keyName);
+                    }
+                } else {
+                    ks.remove(NAMESPACE_VPN, keyName);
+                }
+                break;
+        }
     }
 
     private class VpnPreference extends Preference {

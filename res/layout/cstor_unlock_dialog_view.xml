@@ -24,6 +24,13 @@
             android:layout_height="fill_parent"
             android:padding="15dip">
 
+        <TextView android:id="@+id/cstor_access_dialog_hint_from_action"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/vpn_connect_normal_text_size"
+                android:text="@string/cstor_access_dialog_hint_from_action"
+                android:layout_marginBottom="10sp" />
+
         <TextView android:id="@+id/cstor_error"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"

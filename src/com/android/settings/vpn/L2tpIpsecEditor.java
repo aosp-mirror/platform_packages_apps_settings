@@ -24,7 +24,7 @@ import android.preference.EditTextPreference;
 import android.preference.ListPreference;
 import android.preference.Preference;
 import android.preference.PreferenceGroup;
-import android.security.Keystore;
+import android.security.CertTool;
 import android.text.TextUtils;
 
 /**
@@ -67,7 +67,7 @@ class L2tpIpsecEditor extends L2tpEditor {
         mUserCertificate = createListPreference(c,
                 R.string.vpn_user_certificate_title,
                 mProfile.getUserCertificate(),
-                Keystore.getInstance().getAllUserCertificateKeys(),
+                CertTool.getInstance().getAllUserCertificateKeys(),
                 new Preference.OnPreferenceChangeListener() {
                     public boolean onPreferenceChange(
                             Preference pref, Object newValue) {
@@ -86,7 +86,7 @@ class L2tpIpsecEditor extends L2tpEditor {
         mCaCertificate = createListPreference(c,
                 R.string.vpn_ca_certificate_title,
                 mProfile.getCaCertificate(),
-                Keystore.getInstance().getAllCaCertificateKeys(),
+                CertTool.getInstance().getAllCaCertificateKeys(),
                 new Preference.OnPreferenceChangeListener() {
                     public boolean onPreferenceChange(
                             Preference pref, Object newValue) {

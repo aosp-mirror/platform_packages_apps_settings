@@ -437,7 +437,7 @@
     <!-- Main Settings screen settings title for things like Wi-Fi, bluetooth, airplane mode.  This will take you to another screen with those settings. -->
     <string name="radio_controls_title">Wireless controls</string>
     <!-- Main Settings screen settings summary text for the "Wireless controls" setting -->
-    <string name="radio_controls_summary">Manage Wi-Fi, Bluetooth, airplane mode, &amp; mobile networks</string>
+    <string name="radio_controls_summary">Manage Wi-Fi, Bluetooth, airplane mode, mobile networks, &amp; VPNs</string>
 
 
     <!-- mobile network settings screen, setting check box title -->
@@ -488,7 +488,7 @@
     <!-- Main Settings screen setting option title for the item to take you the security and location screen -->
     <string name="security_settings_title">Security &amp; location</string>
     <!-- Main Settings screen setting option summary text for the item tot ake you to the security and location screen -->
-    <string name="security_settings_summary">Set My Location, screen unlock, SIM card lock</string>
+    <string name="security_settings_summary">Set My Location, screen unlock, SIM card lock, credential storage lock</string>
     <!-- In the security screen, the header title for settings related to  Passwords-->
     <string name="security_passwords_title">Passwords</string>
 
@@ -1946,6 +1946,8 @@ found in the list of installed applications.</string>
     <string name="cstor_access_summary">Allow applications to access secure certificates and other credentials</string>
     <!-- Title of dialog to enable/dislable access to credential storage -->
     <string name="cstor_access_dialog_title">Enter password</string>
+    <!-- Description of dialog to enable/dislable access to credential storage from an action that requires the credential storage -->
+    <string name="cstor_access_dialog_hint_from_action">This action requires enabling the credential storage. Please enter the password to enable it.</string>
 
     <!-- Title of preference to set storage password -->
     <string name="cstor_set_passwd_title">Set password</string>
@@ -1977,6 +1979,8 @@ found in the list of installed applications.</string>
     <string name="cstor_confirm_password">Confirm new password:</string>
     <!-- Description when user set up the storage for the very first time -->
     <string name="cstor_first_time_hint">You must set a password for the credential storage.</string>
+    <!-- Description when user set up the storage for the very first time from an action that requires the credential storage-->
+    <string name="cstor_first_time_hint_from_action">This action requires the credential storage but the storage has not been activated before. To activiate it, you must set a password for the credential storage.</string>
     <string name="cstor_password_error">Please enter the correct password.</string>
     <string name="cstor_password_error_reset_warning">Please enter the correct password. You have one more try to enter the correct password before the credential storage is erased.</string>
     <string name="cstor_password_error_reset_warning_plural">Please enter the correct password. You have %d more tries to enter the correct password before the credential storage is erased.</string>
