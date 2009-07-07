@@ -19,6 +19,7 @@ package com.android.settings;
 import android.app.ActivityManagerNative;
 import android.app.IActivityManager;
 import android.app.ListActivity;
+import android.backup.BackupManager;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.os.RemoteException;
@@ -158,6 +159,8 @@ public class LocalePicker extends ListActivity {
             config.userSetLocale = true;
 
             am.updateConfiguration(config);
+            // Trigger the dirty bit for the Settings Provider.
+            BackupManager.dataChanged("com.android.providers.settings");
         } catch (RemoteException e) {
             // Intentionally left blank
         }
