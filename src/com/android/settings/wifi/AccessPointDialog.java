@@ -84,6 +84,7 @@ public class AccessPointDialog extends AlertDialog implements DialogInterface.On
             AccessPointState.WEP_PASSWORD_HEX
     };
     private static final String NOT_APPLICABLE = "N/A";
+    private static final String BLOB_HEADER = "blob://";
 
     // Button positions, default to impossible values
     private int mConnectButtonPos = Integer.MAX_VALUE; 
@@ -528,7 +529,8 @@ public class AccessPointDialog extends AlertDialog implements DialogInterface.On
       if (passwordIsEmpty && (!mState.hasPassword() ||
               mMode == MODE_RETRY_PASSWORD) &&
               (mState.security != null) &&
-              !mState.security.equals(AccessPointState.OPEN)) {
+              !mState.security.equals(AccessPointState.OPEN) &&
+              !mState.isEnterprise()) {
           new AlertDialog.Builder(getContext())
                   .setTitle(R.string.error_title)
                   .setIcon(android.R.drawable.ic_dialog_alert)
@@ -642,12 +644,12 @@ public class AccessPointDialog extends AlertDialog implements DialogInterface.On
             value = mCertTool.getUserCertificate(key);
             if (!TextUtils.isEmpty(value)) {
                 mState.setEnterpriseField(AccessPointState.CLIENT_CERT,
-                        value);
+                        BLOB_HEADER + value);
             }
             value = mCertTool.getUserPrivateKey(key);
             if (!TextUtils.isEmpty(value)) {
                 mState.setEnterpriseField(AccessPointState.PRIVATE_KEY,
-                        value);
+                        BLOB_HEADER + value);
             }
         }
         spinner = mCaCertSpinner;
@@ -657,7 +659,7 @@ public class AccessPointDialog extends AlertDialog implements DialogInterface.On
             value = mCertTool.getCaCertificate(key);
             if (!TextUtils.isEmpty(value)) {
                 mState.setEnterpriseField(AccessPointState.CA_CERT,
-                        value);
+                        BLOB_HEADER + value);
             }
         }
         switch (securityType) {
