@@ -57,7 +57,7 @@ class L2tpEditor extends VpnProfileEditor {
 
         return ((result != null)
                 ? result
-                : validate(mSecretString, R.string.vpn_l2tp_secret));
+                : validate(mSecretString, R.string.vpn_a_l2tp_secret));
     }
 
     private Preference createSecretPreference(Context c) {

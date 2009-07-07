@@ -47,7 +47,7 @@ class L2tpIpsecPskEditor extends L2tpEditor {
 
         return ((result != null)
                 ? result
-                : validate(mPresharedKey, R.string.vpn_ipsec_presharedkey));
+                : validate(mPresharedKey, R.string.vpn_a_ipsec_presharedkey));
     }
 
     private Preference createPresharedKeyPreference(Context c) {
