@@ -55,10 +55,10 @@ class L2tpIpsecEditor extends L2tpEditor {
     public String validate() {
         String result = super.validate();
         if (result == null) {
-            result = validate(mUserCertificate, R.string.vpn_user_certificate);
+            result = validate(mUserCertificate, R.string.vpn_a_user_certificate);
         }
         if (result == null) {
-            result = validate(mCaCertificate, R.string.vpn_ca_certificate);
+            result = validate(mCaCertificate, R.string.vpn_a_ca_certificate);
         }
         return result;
     }
