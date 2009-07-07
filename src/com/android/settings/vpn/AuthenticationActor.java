@@ -70,9 +70,9 @@ public class AuthenticationActor implements VpnProfileActor {
         TextView passwordView = (TextView) d.findViewById(R.id.password_value);
         Context c = mContext;
         if (TextUtils.isEmpty(usernameView.getText().toString())) {
-            return c.getString(R.string.vpn_username);
+            return c.getString(R.string.vpn_a_username);
         } else if (TextUtils.isEmpty(passwordView.getText().toString())) {
-            return c.getString(R.string.vpn_password);
+            return c.getString(R.string.vpn_a_password);
         } else {
             return null;
         }

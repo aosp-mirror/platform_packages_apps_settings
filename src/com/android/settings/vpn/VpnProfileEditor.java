@@ -85,10 +85,10 @@ class VpnProfileEditor {
      *      null if all the inputs are valid
      */
     public String validate() {
-        String result = validate(mName, R.string.vpn_name);
+        String result = validate(mName, R.string.vpn_a_name);
         return ((result != null)
                 ? result
-                : validate(mServerName, R.string.vpn_vpn_server));
+                : validate(mServerName, R.string.vpn_a_vpn_server));
     }
 
     /**

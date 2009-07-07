@@ -1828,8 +1828,8 @@ found in the list of installed applications.</string>
     <!-- In VPN connect dialog, for inputing username and password -->
     <string name="vpn_username_colon">Username:</string>
     <string name="vpn_password_colon">Password:</string>
-    <string name="vpn_username">username</string>
-    <string name="vpn_password">password</string>
+    <string name="vpn_a_username">a username</string>
+    <string name="vpn_a_password">a password</string>
 
     <!-- In VPN connect dialog where user may check to remember the username entered -->
     <string name="vpn_save_username">Remember username</string>
@@ -1849,8 +1849,8 @@ found in the list of installed applications.</string>
     <string name="vpn_menu_delete">Delete network</string>
 
     <!-- VPN error dialog messages -->
-    <string name="vpn_error_miss_entering">You must enter a %s.</string>
-    <string name="vpn_error_miss_selecting">You must select a %s.</string>
+    <string name="vpn_error_miss_entering">You must enter %s.</string>
+    <string name="vpn_error_miss_selecting">You must select %s.</string>
     <string name="vpn_error_duplicate_name">The VPN name \'%s\' already exists. Find another name.</string>
     <string name="vpn_confirm_profile_deletion">Are you sure you want to delete this VPN?</string>
     <string name="vpn_confirm_add_profile_cancellation">Are you sure you don\'t want to create this profile?</string>
@@ -1880,6 +1880,7 @@ found in the list of installed applications.</string>
 
     <!-- Name of a VPN profile -->
     <string name="vpn_name">VPN name</string>
+    <string name="vpn_a_name">a VPN name</string>
 
     <!-- Toast message shown when a profile is added -->
     <string name="vpn_profile_added">&#39;%s&#39; is added</string>
@@ -1890,30 +1891,30 @@ found in the list of installed applications.</string>
     <string name="vpn_user_certificate_title">Set user certificate</string>
     <!-- Complete term -->
     <string name="vpn_user_certificate">User certificate</string>
+    <string name="vpn_a_user_certificate">a user certificate</string>
 
     <!-- Preference title -->
     <string name="vpn_ca_certificate_title">Set CA certificate</string>
     <!-- Complete term -->
     <string name="vpn_ca_certificate">Certificate authority (CA) certificate</string>
+    <string name="vpn_a_ca_certificate">a CA certificate</string>
     <!-- Preference title -->
     <string name="vpn_l2tp_secret_string_title">Set L2TP secret</string>
     <!-- Complete term -->
     <string name="vpn_l2tp_secret">L2TP secret</string>
+    <string name="vpn_a_l2tp_secret">an L2TP secret</string>
 
     <!-- Preference title -->
     <string name="vpn_ipsec_presharedkey_title">Set IPSec pre-shared key</string>
     <!-- Complete term -->
     <string name="vpn_ipsec_presharedkey">IPSec pre-shared key</string>
-
-    <!-- Preference title -->
-    <string name="vpn_psk_title">Set IPSec pre-shared key</string>
-    <!-- Complete term -->
-    <string name="vpn_psk">IPSec pre-shared key</string>
+    <string name="vpn_a_ipsec_presharedkey">an IPSec pre-shared key</string>
 
     <!-- Preference title -->
     <string name="vpn_vpn_server_title">Set VPN server</string>
     <!-- Complete term -->
     <string name="vpn_vpn_server">VPN server</string>
+    <string name="vpn_a_vpn_server">a VPN server</string>
     <!-- Dialog title for setting VPN server name -->
     <string name="vpn_vpn_server_dialog_title">VPN server name</string>
 
@@ -1953,7 +1954,7 @@ found in the list of installed applications.</string>
     <!-- Title of dialog to enable/dislable access to credential storage -->
     <string name="cstor_access_dialog_title">Enter password</string>
     <!-- Description of dialog to enable/dislable access to credential storage from an action that requires the credential storage -->
-    <string name="cstor_access_dialog_hint_from_action">This action requires enabling the credential storage. Please enter the password to enable it.</string>
+    <string name="cstor_access_dialog_hint_from_action">Enter the credential storage password.</string>
 
     <!-- Title of preference to set storage password -->
     <string name="cstor_set_passwd_title">Set password</string>
@@ -1984,9 +1985,9 @@ found in the list of installed applications.</string>
     <!-- Description for the confirm-new-password input box -->
     <string name="cstor_confirm_password">Confirm new password:</string>
     <!-- Description when user set up the storage for the very first time -->
-    <string name="cstor_first_time_hint">You must set a password for the credential storage.</string>
+    <string name="cstor_first_time_hint">Set a password for the credential storage.</string>
     <!-- Description when user set up the storage for the very first time from an action that requires the credential storage-->
-    <string name="cstor_first_time_hint_from_action">This action requires the credential storage but the storage has not been activated before. To activiate it, you must set a password for the credential storage.</string>
+    <string name="cstor_first_time_hint_from_action">Set a password for the credential storage.</string>
     <string name="cstor_password_error">Please enter the correct password.</string>
     <string name="cstor_password_error_reset_warning">Please enter the correct password. You have one more try to enter the correct password before the credential storage is erased.</string>
     <string name="cstor_password_error_reset_warning_plural">Please enter the correct password. You have %d more tries to enter the correct password before the credential storage is erased.</string>
