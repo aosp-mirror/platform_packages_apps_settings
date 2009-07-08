@@ -216,33 +216,29 @@ public class SoundAndDisplaySettings extends PreferenceActivity implements
                 Settings.System.ACCELEROMETER_ROTATION, 0) != 0);
     }
 
+    private void setRingerMode(boolean silent, boolean vibrate) {
+        if (silent) {
+            mAudioManager.setRingerMode(vibrate ? AudioManager.RINGER_MODE_VIBRATE :
+                AudioManager.RINGER_MODE_SILENT);
+        } else {
+            mAudioManager.setRingerMode(AudioManager.RINGER_MODE_NORMAL);
+            mAudioManager.setVibrateSetting(AudioManager.VIBRATE_TYPE_RINGER,
+                    vibrate ? AudioManager.VIBRATE_SETTING_ON
+                            : AudioManager.VIBRATE_SETTING_OFF);
+        }
+    }
+
     @Override
     public boolean onPreferenceTreeClick(PreferenceScreen preferenceScreen, Preference preference) {
 
-        if (preference == mSilent) {
-            final boolean silent = mSilent.isChecked();
-            mAudioManager.setRingerMode(silent ? AudioManager.RINGER_MODE_SILENT
-                    : AudioManager.RINGER_MODE_NORMAL);
-            updateState(false);
-            
+        if (preference == mSilent || preference == mVibrate) {
+            setRingerMode(mSilent.isChecked(), mVibrate.isChecked());
+            if (preference == mSilent) updateState(false);
         } else if (preference == mPlayMediaNotificationSounds) {
             try {
                 mMountService.setPlayNotificationSounds(mPlayMediaNotificationSounds.isChecked());
             } catch (RemoteException e) {
             }
-        } else if (preference == mVibrate) {
-            final boolean vibrate = mVibrate.isChecked();
-            final boolean silent = mSilent.isChecked();
-            
-            if (silent) {
-                mAudioManager.setRingerMode(vibrate ? AudioManager.RINGER_MODE_VIBRATE :
-                    AudioManager.RINGER_MODE_SILENT);                
-            } else {
-                mAudioManager.setVibrateSetting(AudioManager.VIBRATE_TYPE_RINGER,
-                        vibrate ? AudioManager.VIBRATE_SETTING_ON
-                                : AudioManager.VIBRATE_SETTING_OFF);
-            }
-            
         } else if (preference == mDtmfTone) {
             Settings.System.putInt(getContentResolver(), Settings.System.DTMF_TONE_WHEN_DIALING,
                     mDtmfTone.isChecked() ? 1 : 0);
