@@ -191,8 +191,9 @@ public class TextToSpeechSettings extends PreferenceActivity implements
             country = Settings.Secure.getString(resolver, KEY_TTS_DEFAULT_COUNTRY);
             if (country == null) {
                 // default country setting not found, initialize it, as well as the variant;
-                country  = TextToSpeech.Engine.FALLBACK_TTS_DEFAULT_COUNTRY;
-                variant  = TextToSpeech.Engine.FALLBACK_TTS_DEFAULT_VARIANT;
+                Locale currentLocale = Locale.getDefault();
+                country = currentLocale.getISO3Country();
+                variant = currentLocale.getVariant();
                 Settings.Secure.putString(resolver, TTS_DEFAULT_COUNTRY, country);
                 Settings.Secure.putString(resolver, TTS_DEFAULT_VARIANT, variant);
             }
@@ -203,7 +204,8 @@ public class TextToSpeechSettings extends PreferenceActivity implements
             variant = Settings.Secure.getString(resolver, KEY_TTS_DEFAULT_VARIANT);
             if (variant == null) {
                 // default variant setting not found, initialize it
-                variant = TextToSpeech.Engine.FALLBACK_TTS_DEFAULT_VARIANT;
+                Locale currentLocale = Locale.getDefault();
+                variant = currentLocale.getVariant();
                 Settings.Secure.putString(resolver, TTS_DEFAULT_VARIANT, variant);
             }
         }
