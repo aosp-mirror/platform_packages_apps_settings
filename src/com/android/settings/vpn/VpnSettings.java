@@ -458,7 +458,9 @@ public class VpnSettings extends PreferenceActivity implements
 
     private void addProfile(VpnProfile p) throws IOException {
         setProfileId(p);
+        processSecrets(p);
         saveProfileToStorage(p);
+
         mVpnProfileList.add(p);
         addPreferenceFor(p);
         disableProfilePreferencesIfOneActive();
@@ -801,22 +803,27 @@ public class VpnSettings extends PreferenceActivity implements
             case L2TP_IPSEC_PSK:
                 L2tpIpsecPskProfile pskProfile = (L2tpIpsecPskProfile) p;
                 String keyName = KEY_PREFIX_IPSEC_PSK + p.getId();
+                String keyNameForDaemon = NAMESPACE_VPN + "_" + keyName;
                 String presharedKey = pskProfile.getPresharedKey();
-                if (!presharedKey.equals(keyName)) {
-                    ks.put(NAMESPACE_VPN, keyName, presharedKey);
-                    pskProfile.setPresharedKey(NAMESPACE_VPN + "_" + keyName);
+                if (!presharedKey.equals(keyNameForDaemon)) {
+                    int ret = ks.put(NAMESPACE_VPN, keyName, presharedKey);
+                    if (ret < 0) Log.e(TAG, "keystore write failed: key=" + keyName);
+                    pskProfile.setPresharedKey(keyNameForDaemon);
                 }
                 // pass through
 
             case L2TP:
                 L2tpProfile l2tpProfile = (L2tpProfile) p;
                 keyName = KEY_PREFIX_L2TP_SECRET + p.getId();
-                String secret = l2tpProfile.getSecretString();
                 if (l2tpProfile.isSecretEnabled()) {
-                    if (!secret.equals(keyName)) {
-                        ks.put(NAMESPACE_VPN, keyName, secret);
-                        l2tpProfile.setSecretString(
-                                NAMESPACE_VPN + "_" + keyName);
+                    keyNameForDaemon = NAMESPACE_VPN + "_" + keyName;
+                    String secret = l2tpProfile.getSecretString();
+                    if (!secret.equals(keyNameForDaemon)) {
+                        int ret = ks.put(NAMESPACE_VPN, keyName, secret);
+                        if (ret < 0) {
+                            Log.e(TAG, "keystore write failed: key=" + keyName);
+                        }
+                        l2tpProfile.setSecretString(keyNameForDaemon);
                     }
                 } else {
                     ks.remove(NAMESPACE_VPN, keyName);
