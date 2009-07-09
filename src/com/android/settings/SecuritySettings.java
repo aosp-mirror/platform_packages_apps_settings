@@ -525,7 +525,12 @@ public class SecuritySettings extends PreferenceActivity implements
 
         public void onClick(DialogInterface dialog, int which) {
             if (which == DialogInterface.BUTTON_NEGATIVE) {
-                if (mCstorAddCredentialHelper != null) finish();
+                if (mCstorAddCredentialHelper != null) {
+                    // release the object here so that it doesn't get triggerred in
+                    // onDismiss()
+                    mCstorAddCredentialHelper = null;
+                    finish();
+                }
                 return;
             }
 
