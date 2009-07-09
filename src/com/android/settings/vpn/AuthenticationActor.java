@@ -204,6 +204,7 @@ public class AuthenticationActor implements VpnProfileActor {
         usernameView.setText(username);
         passwordView.setText(password);
         saveUsername.setChecked(toSaveUsername);
+        if (toSaveUsername) passwordView.requestFocus();
     }
 
     private void broadcastConnectivity(VpnState s) {
