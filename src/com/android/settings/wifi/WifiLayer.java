@@ -501,7 +501,7 @@ public class WifiLayer {
         
         if (!mWifiManager.isWifiEnabled()) return;
         
-        if (!mWifiManager.startScan()) {
+        if (!mWifiManager.startScanActive()) {
             postAttemptScan();
         } else {
             mScanRetryCount = 0;
