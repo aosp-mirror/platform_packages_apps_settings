@@ -99,7 +99,12 @@ public class VpnSettings extends PreferenceActivity implements
     private static final int CONNECT_BUTTON = DialogInterface.BUTTON1;
     private static final int OK_BUTTON = DialogInterface.BUTTON1;
 
-    private static final int DIALOG_CONNECT = 0;
+    private static final int DIALOG_CONNECT = 1;
+    private static final int DIALOG_RECONNECT = 2;
+    private static final int DIALOG_AUTH_ERROR = 3;
+    private static final int DIALOG_UNKNOWN_SERVER = 4;
+
+    private static final int NO_ERROR = 0;
 
     private PreferenceScreen mAddVpn;
     private PreferenceCategory mVpnListContainer;
@@ -115,7 +120,6 @@ public class VpnSettings extends PreferenceActivity implements
 
     // actor engaged in connecting
     private VpnProfileActor mConnectingActor;
-    private boolean mStateSaved = false;
 
     // states saved for unlocking keystore
     private Runnable mUnlockAction;
@@ -125,7 +129,9 @@ public class VpnSettings extends PreferenceActivity implements
     private ConnectivityReceiver mConnectivityReceiver =
             new ConnectivityReceiver();
 
-    private boolean mConnectingError;
+    private int mConnectingErrorCode = NO_ERROR;
+
+    private Dialog mShowingDialog;
 
     private StatusChecker mStatusChecker = new StatusChecker();
 
@@ -156,11 +162,10 @@ public class VpnSettings extends PreferenceActivity implements
         String profileName = (savedInstanceState == null)
                 ? null
                 : savedInstanceState.getString(STATE_ACTIVE_ACTOR);
-        mStateSaved = !TextUtils.isEmpty(profileName);
         retrieveVpnListFromStorage();
-        if (mStateSaved) {
-            mConnectingActor =
-                    getActor(mVpnPreferenceMap.get(profileName).mProfile);
+        if (!TextUtils.isEmpty(profileName)) {
+            mActiveProfile = mVpnPreferenceMap.get(profileName).mProfile;
+            mConnectingActor = getActor(mActiveProfile);
         } else {
             checkVpnConnectionStatusInBackground();
         }
@@ -188,6 +193,7 @@ public class VpnSettings extends PreferenceActivity implements
     protected synchronized void onSaveInstanceState(Bundle outState) {
         if (mConnectingActor == null) return;
 
+        Log.d(TAG, "   ~~~~~    save connecting actor");
         outState.putString(STATE_ACTIVE_ACTOR,
                 mConnectingActor.getProfile().getName());
     }
@@ -197,6 +203,9 @@ public class VpnSettings extends PreferenceActivity implements
         super.onDestroy();
         unregisterForContextMenu(getListView());
         mVpnManager.unregisterConnectivityReceiver(mConnectivityReceiver);
+        if ((mShowingDialog != null) && mShowingDialog.isShowing()) {
+            mShowingDialog.dismiss();
+        }
     }
 
     @Override
@@ -205,39 +214,76 @@ public class VpnSettings extends PreferenceActivity implements
             case DIALOG_CONNECT:
                 return createConnectDialog();
 
+            case DIALOG_RECONNECT:
+                return createReconnectDialogBuilder().create();
+
+            case DIALOG_AUTH_ERROR:
+                return createAuthErrorDialog();
+
+            case DIALOG_UNKNOWN_SERVER:
+                return createUnknownServerDialog();
+
             default:
-                return null;
+                return super.onCreateDialog(id);
         }
     }
 
     private Dialog createConnectDialog() {
-        if (mConnectingActor == null) {
-            Log.e(TAG, "no connecting actor to create the dialog");
-            return null;
-        }
-        String name = (mConnectingActor == null)
-                ? getString(R.string.vpn_default_profile_name)
-                : mConnectingActor.getProfile().getName();
-        Dialog d = new AlertDialog.Builder(this)
+        return new AlertDialog.Builder(this)
                 .setView(mConnectingActor.createConnectView())
                 .setTitle(String.format(getString(R.string.vpn_connect_to),
-                        name))
+                        mConnectingActor.getProfile().getName()))
                 .setPositiveButton(getString(R.string.vpn_connect_button),
                         this)
                 .setNegativeButton(getString(android.R.string.cancel),
                         this)
                 .create();
-        return d;
     }
 
-    @Override
-    protected void onPrepareDialog (int id, Dialog dialog) {
-        if (mStateSaved) {
-            mStateSaved = false;
-            super.onPrepareDialog(id, dialog);
-        } else if (mConnectingActor != null) {
-            mConnectingActor.updateConnectView(dialog);
-        }
+    private AlertDialog.Builder createReconnectDialogBuilder() {
+        return new AlertDialog.Builder(this)
+                .setTitle(android.R.string.dialog_alert_title)
+                .setIcon(android.R.drawable.ic_dialog_alert)
+                .setMessage(R.string.vpn_confirm_reconnect)
+                .setPositiveButton(R.string.vpn_yes_button,
+                        new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int w) {
+                                connectOrDisconnect(mConnectingActor.getProfile());
+                            }
+                        })
+                .setNegativeButton(R.string.vpn_no_button,
+                        new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int w) {
+                                onIdle();
+                            }
+                        })
+                .setOnCancelListener(new DialogInterface.OnCancelListener() {
+                            public void onCancel(DialogInterface dialog) {
+                                onIdle();
+                            }
+                        });
+    }
+
+    private Dialog createAuthErrorDialog() {
+        return createReconnectDialogBuilder()
+                .setMessage(R.string.vpn_auth_error_dialog_msg)
+                .create();
+    }
+
+    private Dialog createUnknownServerDialog() {
+        return createReconnectDialogBuilder()
+                .setMessage(R.string.vpn_unknown_server_dialog_msg)
+                .setPositiveButton(R.string.vpn_yes_button,
+                        new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int w) {
+                                VpnProfile p = mConnectingActor.getProfile();
+                                onIdle();
+                                mIndexOfEditedProfile =
+                                        mVpnProfileList.indexOf(p);
+                                startVpnEditor(p);
+                            }
+                        })
+                .create();
     }
 
     @Override
@@ -252,8 +298,8 @@ public class VpnSettings extends PreferenceActivity implements
             menu.setHeaderTitle(p.getName());
 
             boolean isIdle = (state == VpnState.IDLE);
-            boolean isNotConnect =
-                    (isIdle || (state == VpnState.DISCONNECTING));
+            boolean isNotConnect = (isIdle || (state == VpnState.DISCONNECTING)
+                    || (state == VpnState.CANCELLED));
             menu.add(0, CONTEXT_MENU_CONNECT_ID, 0, R.string.vpn_menu_connect)
                     .setEnabled(isIdle && (mActiveProfile == null));
             menu.add(0, CONTEXT_MENU_DISCONNECT_ID, 0,
@@ -363,17 +409,18 @@ public class VpnSettings extends PreferenceActivity implements
     // Called when the buttons on the connect dialog are clicked.
     //@Override
     public synchronized void onClick(DialogInterface dialog, int which) {
-        dismissDialog(DIALOG_CONNECT);
         if (which == CONNECT_BUTTON) {
             Dialog d = (Dialog) dialog;
             String error = mConnectingActor.validateInputs(d);
             if (error == null) {
                 changeState(mConnectingActor.getProfile(), VpnState.CONNECTING);
                 mConnectingActor.connect(d);
+                removeDialog(DIALOG_CONNECT);
                 return;
             } else {
+                dismissDialog(DIALOG_CONNECT);
                 // show error dialog
-                new AlertDialog.Builder(this)
+                mShowingDialog = new AlertDialog.Builder(this)
                         .setTitle(android.R.string.dialog_alert_title)
                         .setIcon(android.R.drawable.ic_dialog_alert)
                         .setMessage(String.format(getString(
@@ -385,8 +432,11 @@ public class VpnSettings extends PreferenceActivity implements
                                         showDialog(DIALOG_CONNECT);
                                     }
                                 })
-                        .show();
+                        .create();
+                mShowingDialog.show();
             }
+        } else {
+            removeDialog(DIALOG_CONNECT);
         }
     }
 
@@ -428,13 +478,14 @@ public class VpnSettings extends PreferenceActivity implements
                         }
                     }
                 };
-        new AlertDialog.Builder(this)
+        mShowingDialog = new AlertDialog.Builder(this)
                 .setTitle(android.R.string.dialog_alert_title)
                 .setIcon(android.R.drawable.ic_dialog_alert)
                 .setMessage(R.string.vpn_confirm_profile_deletion)
                 .setPositiveButton(android.R.string.ok, onClickListener)
                 .setNegativeButton(R.string.vpn_no_button, onClickListener)
-                .show();
+                .create();
+        mShowingDialog.show();
     }
 
     // Randomly generates an ID for the profile.
@@ -583,8 +634,8 @@ public class VpnSettings extends PreferenceActivity implements
         }
 
         mConnectingActor = getActor(p);
+        mActiveProfile = p;
         if (mConnectingActor.isConnectDialogNeeded()) {
-            removeDialog(DIALOG_CONNECT);
             showDialog(DIALOG_CONNECT);
         } else {
             changeState(p, VpnState.CONNECTING);
@@ -605,8 +656,6 @@ public class VpnSettings extends PreferenceActivity implements
                 break;
 
             case CONNECTED:
-                mConnectingError = false;
-                // pass through
             case DISCONNECTING:
                 changeState(p, VpnState.DISCONNECTING);
                 getActor(p).disconnect();
@@ -625,16 +674,13 @@ public class VpnSettings extends PreferenceActivity implements
         switch (state) {
         case CONNECTED:
             mConnectingActor = null;
-            // pass through
-        case CONNECTING:
             mActiveProfile = p;
             disableProfilePreferencesIfOneActive();
             break;
 
+        case CONNECTING:
         case DISCONNECTING:
-            if (oldState == VpnState.CONNECTING) {
-                mConnectingError = true;
-            }
+            disableProfilePreferencesIfOneActive();
             break;
 
         case CANCELLED:
@@ -642,31 +688,34 @@ public class VpnSettings extends PreferenceActivity implements
             break;
 
         case IDLE:
-            assert(mActiveProfile != p);
-            mActiveProfile = null;
-            mConnectingActor = null;
-            enableProfilePreferences();
+            assert(mActiveProfile == p);
 
-            if (oldState == VpnState.CONNECTING) mConnectingError = true;
-            if (mConnectingError) showReconnectDialog(p);
+            switch (mConnectingErrorCode) {
+                case NO_ERROR:
+                    onIdle();
+                    break;
+
+                case VpnManager.VPN_ERROR_AUTH:
+                    showDialog(DIALOG_AUTH_ERROR);
+                    break;
+
+                case VpnManager.VPN_ERROR_UNKNOWN_SERVER:
+                    showDialog(DIALOG_UNKNOWN_SERVER);
+                    break;
+
+                default:
+                    showDialog(DIALOG_RECONNECT);
+                    break;
+            }
+            mConnectingErrorCode = NO_ERROR;
             break;
         }
     }
 
-    private void showReconnectDialog(final VpnProfile p) {
-        new AlertDialog.Builder(this)
-                .setTitle(android.R.string.dialog_alert_title)
-                .setIcon(android.R.drawable.ic_dialog_alert)
-                .setMessage(R.string.vpn_confirm_reconnect)
-                .setPositiveButton(R.string.vpn_yes_button,
-                        new DialogInterface.OnClickListener() {
-                            public void onClick(DialogInterface dialog, int w) {
-                                dialog.dismiss();
-                                connectOrDisconnect(p);
-                            }
-                        })
-                .setNegativeButton(R.string.vpn_no_button, null)
-                .show();
+    private void onIdle() {
+        mActiveProfile = null;
+        mConnectingActor = null;
+        enableProfilePreferences();
     }
 
     private void disableProfilePreferencesIfOneActive() {
@@ -674,6 +723,7 @@ public class VpnSettings extends PreferenceActivity implements
 
         for (VpnProfile p : mVpnProfileList) {
             switch (p.getState()) {
+                case CONNECTING:
                 case DISCONNECTING:
                 case IDLE:
                     mVpnPreferenceMap.get(p.getName()).setEnabled(false);
@@ -856,14 +906,20 @@ public class VpnSettings extends PreferenceActivity implements
 
             VpnState s = (VpnState) intent.getSerializableExtra(
                     VpnManager.BROADCAST_CONNECTION_STATE);
+
             if (s == null) {
                 Log.e(TAG, "received null connectivity state");
                 return;
             }
+
+            mConnectingErrorCode = intent.getIntExtra(
+                    VpnManager.BROADCAST_ERROR_CODE, NO_ERROR);
+
             VpnPreference pref = mVpnPreferenceMap.get(profileName);
             if (pref != null) {
                 Log.d(TAG, "received connectivity: " + profileName
-                        + ": connected? " + s);
+                        + ": connected? " + s
+                        + "   err=" + mConnectingErrorCode);
                 changeState(pref.mProfile, s);
             } else {
                 Log.e(TAG, "received connectivity: " + profileName

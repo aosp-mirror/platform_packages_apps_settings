@@ -442,8 +442,9 @@ public class SecuritySettings extends PreferenceActivity implements
         }
     }
 
-    private class CstorHelper implements
-            DialogInterface.OnClickListener, DialogInterface.OnDismissListener {
+    private class CstorHelper implements DialogInterface.OnClickListener,
+            DialogInterface.OnDismissListener,
+            DialogInterface.OnCancelListener {
         private Keystore mKeystore = Keystore.getInstance();
         private View mView;
         private int mDialogId;
@@ -523,14 +524,18 @@ public class SecuritySettings extends PreferenceActivity implements
                     .show();
         }
 
+        public void onCancel(DialogInterface dialog) {
+            if (mCstorAddCredentialHelper != null) {
+                // release the object here so that it doesn't get triggerred in
+                // onDismiss()
+                mCstorAddCredentialHelper = null;
+                finish();
+            }
+        }
+
         public void onClick(DialogInterface dialog, int which) {
             if (which == DialogInterface.BUTTON_NEGATIVE) {
-                if (mCstorAddCredentialHelper != null) {
-                    // release the object here so that it doesn't get triggerred in
-                    // onDismiss()
-                    mCstorAddCredentialHelper = null;
-                    finish();
-                }
+                onCancel(dialog);
                 return;
             }
 
@@ -797,7 +802,7 @@ public class SecuritySettings extends PreferenceActivity implements
                     .setTitle(R.string.cstor_access_dialog_title)
                     .setPositiveButton(android.R.string.ok, this)
                     .setNegativeButton(android.R.string.cancel, this)
-                    .setCancelable(false)
+                    .setOnCancelListener(this)
                     .create();
             d.setOnDismissListener(this);
             return d;
@@ -837,7 +842,7 @@ public class SecuritySettings extends PreferenceActivity implements
                     .setTitle(R.string.cstor_set_passwd_dialog_title)
                     .setPositiveButton(android.R.string.ok, this)
                     .setNegativeButton(android.R.string.cancel, this)
-                    .setCancelable(false)
+                    .setOnCancelListener(this)
                     .create();
             d.setOnDismissListener(this);
             return d;
@@ -872,7 +877,7 @@ public class SecuritySettings extends PreferenceActivity implements
                     .setTitle(R.string.cstor_name_credential_dialog_title)
                     .setPositiveButton(android.R.string.ok, this)
                     .setNegativeButton(android.R.string.cancel, this)
-                    .setCancelable(false)
+                    .setOnCancelListener(this)
                     .create();
             d.setOnDismissListener(this);
             return d;

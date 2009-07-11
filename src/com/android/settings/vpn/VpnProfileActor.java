@@ -38,12 +38,6 @@ public interface VpnProfileActor {
     View createConnectView();
 
     /**
-     * Updates the view in the connect dialog.
-     * @param dialog the recycled connect dialog.
-     */
-    void updateConnectView(Dialog dialog);
-
-    /**
      * Validates the inputs in the dialog.
      * @param dialog the connect dialog
      * @return an error message if the inputs are not valid
