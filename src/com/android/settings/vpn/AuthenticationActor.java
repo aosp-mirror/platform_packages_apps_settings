@@ -195,8 +195,8 @@ public class AuthenticationActor implements VpnProfileActor {
         if (bindService(c)) {
             // wait for a second, let status propagate
             wait(c, ONE_SECOND);
+            mContext.unbindService(c);
         }
-        mContext.unbindService(c);
     }
 
     private boolean bindService(ServiceConnection c) {
