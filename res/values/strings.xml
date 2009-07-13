@@ -1651,6 +1651,8 @@ found in the list of installed applications.</string>
     <string name="battery_since_reset">Battery use since reset</string>
     <!-- Battery usage duration -->
     <string name="battery_stats_duration"><xliff:g id="time">%1$s</xliff:g> since unplugged</string>
+    <!-- Battery usage during last unplugged period -->
+    <string name="battery_stats_last_duration">@string/menu_stats_last_unplugged</string>
     <!-- CPU awake time title -->
     <string name="awake">Device awake time</string>
     <!-- Wifi on time -->
@@ -1700,7 +1702,9 @@ found in the list of installed applications.</string>
     <!-- Label for Video usage time -->
     <string name="usage_type_video">Video</string>
     <!-- Label for time that a feature has been on -->
-    <string name="usage_type_on_time">On time</string>
+    <string name="usage_type_on_time">Time on</string>
+    <!-- Label for time that there was no cell coverage -->
+    <string name="usage_type_no_coverage">Time without a signal</string>
     <!-- Label for force stop action -->
     <string name="battery_action_stop">Force stop</string>
     <!-- Label for app details action -->
@@ -1747,7 +1751,7 @@ found in the list of installed applications.</string>
     <!-- Suggestion for exploring application info to stop or uninstall -->
     <string name="battery_sugg_apps_info">Stop or uninstall the application</string>
     <!-- Suggestion for getting apps to consume less power due to GPS-->
-    <string name="battery_sugg_apps_gps">Turn off GPS when you're not using it</string>
+    <string name="battery_sugg_apps_gps">"Turn off GPS when you're not using it"</string>
     <!-- Suggestion for getting apps to consume less power -->
     <string name="battery_sugg_apps_settings">The application may offer settings to reduce battery use</string>
 
