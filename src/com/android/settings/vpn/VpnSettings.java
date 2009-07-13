@@ -932,7 +932,7 @@ public class VpnSettings extends PreferenceActivity implements
     // managing status check in a background thread
     private class StatusChecker {
         private Set<VpnProfile> mQueue = new HashSet<VpnProfile>();
-        private boolean mPaused;
+        private boolean mPaused = true;
         private ConditionVariable mThreadCv = new ConditionVariable();
 
         void onPause() {
@@ -941,7 +941,6 @@ public class VpnSettings extends PreferenceActivity implements
         }
 
         synchronized void onResume() {
-            mPaused = false;
             start();
         }
 
@@ -961,7 +960,9 @@ public class VpnSettings extends PreferenceActivity implements
             return p;
         }
 
-        private void start() {
+        private synchronized void start() {
+            if (!mPaused) return;
+            mPaused = false;
             mThreadCv.close();
             new Thread(new Runnable() {
                 public void run() {
