@@ -150,9 +150,10 @@ public class SecuritySettings extends PreferenceActivity implements
                 null);
         mContentQueryMap = new ContentQueryMap(settingsCursor, Settings.System.NAME, true, null);
         mContentQueryMap.addObserver(new SettingsObserver());
-        boolean doneUseLocation = savedInstanceState != null
-                && savedInstanceState.getBoolean(KEY_DONE_USE_LOCATION, true);
-        if (getIntent().getBooleanExtra("SHOW_USE_LOCATION", false) && !doneUseLocation) {
+        boolean doneUseLocation = savedInstanceState == null
+                ? false : savedInstanceState.getBoolean(KEY_DONE_USE_LOCATION, true);
+        if (!doneUseLocation && (getIntent().getBooleanExtra("SHOW_USE_LOCATION", false)
+                || savedInstanceState != null)) {
             showUseLocationDialog(true);
         }
 
@@ -261,12 +262,12 @@ public class SecuritySettings extends PreferenceActivity implements
     }
 
     @Override
-    public void onPause() {
+    public void onStop() {
         if (mUseLocationDialog != null && mUseLocationDialog.isShowing()) {
             mUseLocationDialog.dismiss();
         }
         mUseLocationDialog = null;
-        super.onPause();
+        super.onStop();
     }
 
     @Override
