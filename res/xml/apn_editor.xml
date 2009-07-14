@@ -22,72 +22,84 @@
         android:dialogTitle="@string/apn_name"
         android:key="apn_name"
         android:singleLine="true"
+        android:inputType="textEmailAddress"
         />
     <EditTextPreference
         android:title="@string/apn_apn"
         android:dialogTitle="@string/apn_apn"
         android:key="apn_apn"
         android:singleLine="true"
+        android:inputType="textEmailAddress"
         />
     <EditTextPreference
         android:title="@string/apn_http_proxy"
         android:dialogTitle="@string/apn_http_proxy"
         android:key="apn_http_proxy"
         android:singleLine="true"
+        android:inputType="textUri"
         />
     <EditTextPreference
         android:title="@string/apn_http_port"
         android:dialogTitle="@string/apn_http_port"
         android:key="apn_http_port"
         android:singleLine="true"
+        android:inputType="number"
         />
     <EditTextPreference
         android:title="@string/apn_user"
         android:dialogTitle="@string/apn_user"
         android:key="apn_user"
         android:singleLine="true"
+        android:inputType="textEmailAddress"
         />
     <EditTextPreference
         android:title="@string/apn_password"
         android:dialogTitle="@string/apn_password"
         android:key="apn_password"
         android:singleLine="true"
+        android:inputType="textPassword"
         />
     <EditTextPreference
         android:title="@string/apn_server"
         android:dialogTitle="@string/apn_server"
         android:key="apn_server"
         android:singleLine="true"
+        android:inputType="textUri"
         />
     <EditTextPreference
         android:title="@string/apn_mmsc"
         android:dialogTitle="@string/apn_mmsc"
         android:key="apn_mmsc"
         android:singleLine="true"
+        android:inputType="textUri"
         />
     <EditTextPreference
         android:title="@string/apn_mms_proxy"
         android:dialogTitle="@string/apn_mms_proxy"
         android:key="apn_mms_proxy"
         android:singleLine="true"
+        android:inputType="textUri"
         />
     <EditTextPreference
         android:title="@string/apn_mms_port"
         android:dialogTitle="@string/apn_mms_port"
         android:key="apn_mms_port"
         android:singleLine="true"
+        android:inputType="number"
         />
     <EditTextPreference
         android:title="@string/apn_mcc"
         android:dialogTitle="@string/apn_mcc"
         android:key="apn_mcc"
         android:singleLine="true"
+        android:inputType="number"
         />
     <EditTextPreference
         android:title="@string/apn_mnc"
         android:dialogTitle="@string/apn_mnc"
         android:key="apn_mnc"
         android:singleLine="true"
+        android:inputType="number"
         />
     <EditTextPreference
         android:title="@string/apn_type"
