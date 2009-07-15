@@ -423,6 +423,17 @@ public class WifiLayer {
         }
         
         /*
+         * It's necessary to update the network id of this state because the network id
+         * could have changed after the configuration is saved. For example, if there are
+         * more than 10 saved open-networks, some older open-networks will have been be forgotten.
+         */
+        state.setNetworkId(AccessPointState.NETWORK_ID_ANY);
+        config = findConfiguredNetwork(state);
+        if (config != null) {
+            state.setNetworkId(config.networkId);
+        }
+
+        /*
          * We could reload the configured networks, but instead just shortcut
          * and add this state to our list in memory
          */
