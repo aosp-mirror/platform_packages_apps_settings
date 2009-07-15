@@ -578,23 +578,19 @@ public class LocalBluetoothDevice implements Comparable<LocalBluetoothDevice> {
     }
 
     public int getBtClassDrawable() {
-
-        // First try looking at profiles
-        if (mProfiles.contains(Profile.A2DP)) {
-            return R.drawable.ic_bt_headphones_a2dp;
-        } else if (mProfiles.contains(Profile.HEADSET)) {
-            return R.drawable.ic_bt_headset_hfp;
-        }
-
-        // Fallback on class
         switch (BluetoothClass.Device.Major.getDeviceMajor(mBtClass)) {
         case BluetoothClass.Device.Major.COMPUTER:
             return R.drawable.ic_bt_laptop;
 
         case BluetoothClass.Device.Major.PHONE:
             return R.drawable.ic_bt_cellphone;
+        }
 
-        default:
+        if (mProfiles.contains(Profile.A2DP)) {
+            return R.drawable.ic_bt_headphones_a2dp;
+        } else if (mProfiles.contains(Profile.HEADSET)) {
+            return R.drawable.ic_bt_headset_hfp;
+        } else {
             return 0;
         }
     }
