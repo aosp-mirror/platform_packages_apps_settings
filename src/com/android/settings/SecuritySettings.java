@@ -579,6 +579,10 @@ public class SecuritySettings extends PreferenceActivity implements
             } else {
                 removeDialog(mDialogId);
 
+                if (mDialogId == CSTOR_UNLOCK_DIALOG) {
+                    mAccessCheckBox.setChecked(isCstorUnlocked());
+                }
+
                 if (mCstorAddCredentialHelper != null) {
                     if (!isCstorInitialized()) {
                         showDialog(CSTOR_INIT_DIALOG);
