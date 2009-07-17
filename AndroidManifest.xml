@@ -424,7 +424,7 @@
         <activity android:name=".bluetooth.ConnectSpecificProfilesActivity"
                   android:label="@string/bluetooth_connect_specific_profiles_title" />
 
-        <activity android:name=".bluetooth.BluetoothPinDialog"
+        <activity android:name=".bluetooth.BluetoothPairingDialog"
                   android:label="@string/bluetooth_pin_entry"
                   android:theme="@*android:style/Theme.Dialog.Alert">
             <intent-filter>
@@ -433,7 +433,7 @@
             </intent-filter>
         </activity>
 
-        <receiver android:name=".bluetooth.BluetoothPinRequest">
+        <receiver android:name=".bluetooth.BluetoothPairingRequest">
             <intent-filter>
                 <action android:name="android.bluetooth.intent.action.PAIRING_REQUEST" />
                 <action android:name="android.bluetooth.intent.action.PAIRING_CANCEL" />

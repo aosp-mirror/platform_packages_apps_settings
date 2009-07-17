@@ -508,15 +508,20 @@
     <string name="bluetooth_pin_entry">Bluetooth pairing request</string>
     <!-- Title for the bluetooth device info screen. -->
     <string name="bluetooth_device_info">Bluetooth device info</string>
-    <!-- Message when bluetooth dialog for pin entry is shwoing -->
+    <!-- Message when bluetooth dialog for pin entry is showing -->
     <string name="bluetooth_enter_pin_msg"><xliff:g id="device_name">%1$s</xliff:g>\n\nType PIN to pair.\n(Try 0000 or 1234.)</string>
+    <!-- Message when bluetooth dialog for passkey entry is showing -->
+    <string name="bluetooth_enter_passkey_msg"><xliff:g id="device_name">%1$s</xliff:g>\n\nType passkey to pair.\n</string>
+    <!-- Message when bluetooth dialog for confirmation of passkey is showing -->
+    <string name="bluetooth_confirm_passkey_msg">\n Passkey: <xliff:g id="passkey">%2$d</xliff:g>\n\nIs the same passkey displayed on: <xliff:g id="device_name">%1$s</xliff:g> ?\n</string>
 
     <!-- Title for BT error dialogs. -->
     <string name="bluetooth_error_title">Attention</string>
     <!-- Message for the error dialog when BT pairing fails generically. -->
     <string name="bluetooth_pairing_error_message">There was a problem pairing with <xliff:g id="device_name">%1$s</xliff:g>.</string> 
-    <!-- Message for the error dialog when BT pairing fails because the PIN entered is incorrect. -->
-    <string name="bluetooth_pairing_pin_error_message">There was a problem pairing with <xliff:g id="device_name">%1$s</xliff:g> because the typed PIN is incorrect.</string> 
+    <!-- Message for the error dialog when BT pairing fails because the PIN /
+    Passkey entered is incorrect. -->
+    <string name="bluetooth_pairing_pin_error_message">There was a problem pairing with <xliff:g id="device_name">%1$s</xliff:g> because the typed PIN or Passkey is incorrect.</string>
     <!-- Message for the error dialog when BT pairing fails because the other device is down. -->
     <string name="bluetooth_pairing_device_down_error_message">Cannot establish communication with <xliff:g id="device_name">%1$s</xliff:g>.</string>
     <!-- Message for the error dialog when BT pairing fails because the other device rejected the pairing. -->

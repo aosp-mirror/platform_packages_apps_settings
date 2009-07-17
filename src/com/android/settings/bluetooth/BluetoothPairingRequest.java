@@ -21,6 +21,7 @@ import com.android.settings.R;
 import android.app.Notification;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
+import android.bluetooth.BluetoothClass;
 import android.bluetooth.BluetoothDevice;
 import android.bluetooth.BluetoothIntent;
 import android.content.BroadcastReceiver;
@@ -30,35 +31,41 @@ import android.content.res.Resources;
 import android.text.TextUtils;
 
 /**
- * BluetoothPinRequest is a receiver for any Bluetooth pairing PIN request. It
- * checks if the Bluetooth Settings is currently visible and brings up the PIN
- * entry dialog. Otherwise it puts a Notification in the status bar, which can
- * be clicked to bring up the PIN entry dialog.
+ * BluetoothPairingRequest is a receiver for any Bluetooth pairing request. It
+ * checks if the Bluetooth Settings is currently visible and brings up the PIN, the passkey or a
+ * confirmation entry dialog. Otherwise it puts a Notification in the status bar, which can
+ * be clicked to bring up the Pairing entry dialog.
  */
-public class BluetoothPinRequest extends BroadcastReceiver {
+public class BluetoothPairingRequest extends BroadcastReceiver {
 
     public static final int NOTIFICATION_ID = android.R.drawable.stat_sys_data_bluetooth;
-    
+
     @Override
     public void onReceive(Context context, Intent intent) {
         String action = intent.getAction();
         if (action.equals(BluetoothIntent.PAIRING_REQUEST_ACTION)) {
 
-            LocalBluetoothManager localManager = LocalBluetoothManager.getInstance(context);        
-        
+            LocalBluetoothManager localManager = LocalBluetoothManager.getInstance(context);
+
             String address = intent.getStringExtra(BluetoothIntent.ADDRESS);
-            Intent pinIntent = new Intent();
-            pinIntent.setClass(context, BluetoothPinDialog.class);
-            pinIntent.putExtra(BluetoothIntent.ADDRESS, address); 
-            pinIntent.setAction(BluetoothIntent.PAIRING_REQUEST_ACTION);
-            pinIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-            
+            int type = intent.getIntExtra(BluetoothIntent.PAIRING_VARIANT, BluetoothClass.ERROR);
+            Intent pairingIntent = new Intent();
+            pairingIntent.setClass(context, BluetoothPairingDialog.class);
+            pairingIntent.putExtra(BluetoothIntent.ADDRESS, address);
+            pairingIntent.putExtra(BluetoothIntent.PAIRING_VARIANT, type);
+            if (type == BluetoothDevice.PAIRING_VARIANT_CONFIRMATION) {
+                int passkey = intent.getIntExtra(BluetoothIntent.PASSKEY, BluetoothClass.ERROR);
+                pairingIntent.putExtra(BluetoothIntent.PASSKEY, passkey);
+            }
+            pairingIntent.setAction(BluetoothIntent.PAIRING_REQUEST_ACTION);
+            pairingIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+
             if (localManager.getForegroundActivity() != null) {
                 // Since the BT-related activity is in the foreground, just open the dialog
-                context.startActivity(pinIntent);
-                
+                context.startActivity(pairingIntent);
+
             } else {
-                
+
                 // Put up a notification that leads to the dialog
                 Resources res = context.getResources();
                 Notification notification = new Notification(
@@ -66,27 +73,27 @@ public class BluetoothPinRequest extends BroadcastReceiver {
                         res.getString(R.string.bluetooth_notif_ticker),
                         System.currentTimeMillis());
 
-                PendingIntent pending = PendingIntent.getActivity(context, 0, 
-                        pinIntent, PendingIntent.FLAG_ONE_SHOT);
-                
+                PendingIntent pending = PendingIntent.getActivity(context, 0,
+                        pairingIntent, PendingIntent.FLAG_ONE_SHOT);
+
                 String name = intent.getStringExtra(BluetoothIntent.NAME);
                 if (TextUtils.isEmpty(name)) {
                     name = localManager.getLocalDeviceManager().getName(address);
                 }
-                
-                notification.setLatestEventInfo(context, 
-                        res.getString(R.string.bluetooth_notif_title), 
-                        res.getString(R.string.bluetooth_notif_message) + name, 
+
+                notification.setLatestEventInfo(context,
+                        res.getString(R.string.bluetooth_notif_title),
+                        res.getString(R.string.bluetooth_notif_message) + name,
                         pending);
                 notification.flags |= Notification.FLAG_AUTO_CANCEL;
-                
-                NotificationManager manager = (NotificationManager) 
+
+                NotificationManager manager = (NotificationManager)
                         context.getSystemService(Context.NOTIFICATION_SERVICE);
                 manager.notify(NOTIFICATION_ID, notification);
             }
-            
+
         } else if (action.equals(BluetoothIntent.PAIRING_CANCEL_ACTION)) {
-            
+
             // Remove the notification
             NotificationManager manager = (NotificationManager) context
                     .getSystemService(Context.NOTIFICATION_SERVICE);
