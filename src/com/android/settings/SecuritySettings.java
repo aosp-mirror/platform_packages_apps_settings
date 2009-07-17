@@ -37,6 +37,7 @@ import android.preference.PreferenceCategory;
 import android.preference.PreferenceGroup;
 import android.preference.PreferenceScreen;
 import android.provider.Settings;
+import android.security.CertTool;
 import android.security.Keystore;
 import android.text.Html;
 import android.text.TextUtils;
@@ -618,6 +619,17 @@ public class SecuritySettings extends PreferenceActivity implements
             }
 
             mCstorAddCredentialHelper.setName(name);
+
+            if (mCstorAddCredentialHelper.isPkcs12Keystore()) {
+                String password = getText(R.id.cstor_credential_password);
+                if (TextUtils.isEmpty(password)) {
+                    showError(R.string.cstor_password_empty_error);
+                    return false;
+                }
+
+                mCstorAddCredentialHelper.setPassword(password);
+            }
+
             return true;
         }
 
@@ -869,6 +881,9 @@ public class SecuritySettings extends PreferenceActivity implements
             mView = View.inflate(SecuritySettings.this,
                     R.layout.cstor_name_credential_dialog_view, null);
             hideError();
+            if (!mCstorAddCredentialHelper.isPkcs12Keystore()) {
+                hide(R.id.cstor_credential_password_container);
+            }
 
             setText(R.id.cstor_credential_name_title,
                     R.string.cstor_credential_name);
@@ -895,6 +910,7 @@ public class SecuritySettings extends PreferenceActivity implements
         private List<String> mNamespaceList;
         private String mDescription;
         private String mName;
+        private String mPassword;
 
         CstorAddCredentialHelper(Intent intent) {
             parse(intent);
@@ -902,6 +918,10 @@ public class SecuritySettings extends PreferenceActivity implements
 
         String getTypeName() {
             return mTypeName;
+        }
+
+        boolean isPkcs12Keystore() {
+            return CertTool.TITLE_PKCS12_KEYSTORE.equals(mTypeName);
         }
 
         CharSequence getDescription() {
@@ -916,12 +936,26 @@ public class SecuritySettings extends PreferenceActivity implements
             return mName;
         }
 
+        void setPassword(String password) {
+            mPassword = password;
+        }
+
+        String getPassword() {
+            return mPassword;
+        }
+
         int saveToStorage() {
-            Keystore ks = Keystore.getInstance();
-            for (int i = 0, count = mItemList.size(); i < count; i++) {
-                byte[] blob = mItemList.get(i);
-                int ret = ks.put(mNamespaceList.get(i), mName, new String(blob));
-                if (ret < 0) return ret;
+            if (isPkcs12Keystore()) {
+                return CertTool.getInstance().addPkcs12Keystore(
+                        mItemList.get(0), mPassword, mName);
+            } else {
+                Keystore ks = Keystore.getInstance();
+                for (int i = 0, count = mItemList.size(); i < count; i++) {
+                    byte[] blob = mItemList.get(i);
+                    int ret = ks.put(mNamespaceList.get(i), mName,
+                            new String(blob));
+                    if (ret < 0) return ret;
+                }
             }
             return 0;
         }
