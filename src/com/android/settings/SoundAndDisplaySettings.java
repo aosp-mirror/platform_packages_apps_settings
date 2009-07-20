@@ -55,7 +55,6 @@ public class SoundAndDisplaySettings extends PreferenceActivity implements
     private static final String KEY_ANIMATIONS = "animations";
     private static final String KEY_ACCELEROMETER = "accelerometer";
     private static final String KEY_PLAY_MEDIA_NOTIFICATION_SOUNDS = "play_media_notification_sounds";
-    private static final String KEY_COMPATIBILITY_MODE = "compatibility_mode";
     private static final String KEY_EMERGENCY_TONE ="emergency_tone";
     
     private CheckBoxPreference mSilent;
@@ -76,7 +75,6 @@ public class SoundAndDisplaySettings extends PreferenceActivity implements
     private CheckBoxPreference mSoundEffects;
     private CheckBoxPreference mAnimations;
     private CheckBoxPreference mAccelerometer;
-    private CheckBoxPreference mCompatibilityMode;
     private float[] mAnimationScales;
     
     private AudioManager mAudioManager;
@@ -124,10 +122,6 @@ public class SoundAndDisplaySettings extends PreferenceActivity implements
         mAnimations.setPersistent(false);
         mAccelerometer = (CheckBoxPreference) findPreference(KEY_ACCELEROMETER);
         mAccelerometer.setPersistent(false);
-        mCompatibilityMode = (CheckBoxPreference) findPreference(KEY_COMPATIBILITY_MODE);
-        mCompatibilityMode.setPersistent(false);
-        mCompatibilityMode.setChecked(Settings.System.getInt(resolver,
-                Settings.System.COMPATIBILITY_MODE, 1) != 0);
         
         ListPreference screenTimeoutPreference =
             (ListPreference) findPreference(KEY_SCREEN_TIMEOUT);
@@ -269,10 +263,6 @@ public class SoundAndDisplaySettings extends PreferenceActivity implements
             Settings.System.putInt(getContentResolver(),
                     Settings.System.ACCELEROMETER_ROTATION,
                     mAccelerometer.isChecked() ? 1 : 0);
-        } else if (preference == mCompatibilityMode) {
-            Settings.System.putInt(getContentResolver(),
-                    Settings.System.COMPATIBILITY_MODE,
-                    mCompatibilityMode.isChecked() ? 1 : 0);
         }
         return true;
     }
