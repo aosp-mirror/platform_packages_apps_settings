@@ -58,8 +58,8 @@ public class TextToSpeechSettings extends PreferenceActivity implements
 
     private static final String LOCALE_DELIMITER = "-";
 
-    // TODO move this to android.speech.tts.TextToSpeech.Engine
-    private static final String FALLBACK_TTS_DEFAULT_SYNTH = "com.svox.pico";
+    private static final String FALLBACK_TTS_DEFAULT_SYNTH =
+            TextToSpeech.Engine.FALLBACK_TTS_DEFAULT_SYNTH;
 
     private Preference         mPlayExample = null;
     private Preference         mInstallData = null;
@@ -280,6 +280,7 @@ public class TextToSpeechSettings extends PreferenceActivity implements
                 Log.v(TAG, "Voice data check passed");
                 if (mTts == null) {
                     mTts = new TextToSpeech(this, this);
+                    mTts.setLanguage(Locale.getDefault());
                 }
             } else {
                 Log.v(TAG, "Voice data check failed");
@@ -319,6 +320,9 @@ public class TextToSpeechSettings extends PreferenceActivity implements
             Settings.Secure.putString(resolver, TTS_DEFAULT_VARIANT, mDefaultLocVariant);
             Log.v(TAG, "TTS default lang/country/variant set to "
                     + mDefaultLanguage + "/" + mDefaultCountry + "/" + mDefaultLocVariant);
+            if (mTts != null) {
+                mTts.setLanguage(new Locale(mDefaultLanguage, mDefaultCountry));
+            }
         }
 
         return true;
