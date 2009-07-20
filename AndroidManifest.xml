@@ -127,6 +127,7 @@
         </activity>
 
         <activity android:name=".vpn.VpnSettings"
+                android:configChanges="orientation|keyboardHidden"
                 android:launchMode="singleTask">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -136,8 +137,12 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".vpn.VpnTypeSelection"></activity>
-        <activity android:name=".vpn.VpnEditor"></activity>
+        <activity android:name=".vpn.VpnTypeSelection"
+                android:configChanges="orientation|keyboardHidden">
+        </activity>
+        <activity android:name=".vpn.VpnEditor"
+                android:configChanges="orientation|keyboardHidden">
+        </activity>
 
         <activity android:name="DateTimeSettings" android:label="@string/date_and_time"
                 >
@@ -270,6 +275,7 @@
         </activity>
 
         <activity android:name="SecuritySettings" android:label="@string/security_settings_title"
+                android:configChanges="orientation|keyboardHidden"
                 android:clearTaskOnLaunch="true"
                 >
             <intent-filter>
