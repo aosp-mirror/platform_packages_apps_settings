@@ -31,6 +31,7 @@ import android.os.Parcelable;
 import android.preference.PreferenceActivity;
 import android.preference.PreferenceGroup;
 import android.text.TextUtils;
+import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -85,15 +86,24 @@ public class VpnEditor extends PreferenceActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case MENU_SAVE:
-                if (validateAndSetResult()) {
-                    finish();
-                }
+                if (validateAndSetResult()) finish();
                 return true;
+
             case MENU_CANCEL:
                 showCancellationConfirmDialog();
                 return true;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        switch (keyCode) {
+            case KeyEvent.KEYCODE_BACK:
+                if (validateAndSetResult()) finish();
+                return true;
+        }
+        return super.onKeyDown(keyCode, event);
     }
 
     private void initViewFor(VpnProfile profile) {
