@@ -25,6 +25,7 @@ import android.preference.EditTextPreference;
 import android.preference.ListPreference;
 import android.preference.Preference;
 import android.preference.PreferenceGroup;
+import android.text.InputType;
 import android.text.TextUtils;
 import android.text.method.PasswordTransformationMethod;
 
@@ -32,6 +33,9 @@ import android.text.method.PasswordTransformationMethod;
  * The common class for editing {@link VpnProfile}.
  */
 class VpnProfileEditor {
+    static final String SECRET_SET_INDICATOR =
+            new String(new byte[] {(byte) 1, (byte) 0});
+
     private static final String KEY_VPN_NAME = "vpn_name";
 
     private EditTextPreference mName;
@@ -95,7 +99,7 @@ class VpnProfileEditor {
      * Creates a preference for users to input domain suffices.
      */
     protected EditTextPreference createDomainSufficesPreference(Context c) {
-        mDomainSuffices = createEditTextPreference(c,
+        EditTextPreference pref = mDomainSuffices = createEditTextPreference(c,
                 R.string.vpn_dns_search_list_title,
                 R.string.vpn_dns_search_list,
                 mProfile.getDomainSuffices(),
@@ -108,11 +112,12 @@ class VpnProfileEditor {
                         return true;
                     }
                 });
-        return mDomainSuffices;
+        pref.getEditText().setInputType(InputType.TYPE_TEXT_VARIATION_URI);
+        return pref;
     }
 
     private Preference createServerNamePreference(Context c) {
-        mServerName = createEditTextPreference(c,
+        EditTextPreference pref = mServerName = createEditTextPreference(c,
                 R.string.vpn_vpn_server_title,
                 R.string.vpn_vpn_server,
                 mProfile.getServerName(),
@@ -125,7 +130,8 @@ class VpnProfileEditor {
                         return true;
                     }
                 });
-        return mServerName;
+        pref.getEditText().setInputType(InputType.TYPE_TEXT_VARIATION_URI);
+        return pref;
     }
 
     protected EditTextPreference createEditTextPreference(Context c, int titleId,
@@ -147,9 +153,10 @@ class VpnProfileEditor {
         EditTextPreference pref = new EditTextPreference(c);
         pref.setTitle(titleId);
         pref.setDialogTitle(titleId);
+        pref.getEditText().setInputType(InputType.TYPE_TEXT_VARIATION_PASSWORD);
         pref.getEditText().setTransformationMethod(
                 new PasswordTransformationMethod());
-        pref.setText(value);
+        pref.setText(TextUtils.isEmpty(value) ? "" : SECRET_SET_INDICATOR);
         setSecretSummary(pref, fieldNameId, value);
         pref.setPersistent(true);
         pref.setOnPreferenceChangeListener(listener);
