@@ -516,16 +516,6 @@ public class SecuritySettings extends PreferenceActivity implements
             mAccessCheckBox.setChecked(false);
         }
 
-        private void addCredential() {
-            String formatString = mCstorAddCredentialHelper.saveToStorage() < 0
-                    ? getString(R.string.cstor_add_error)
-                    : getString(R.string.cstor_is_added);
-            String message = String.format(formatString,
-                    mCstorAddCredentialHelper.getName());
-            Toast.makeText(SecuritySettings.this, message, Toast.LENGTH_SHORT)
-                    .show();
-        }
-
         public void onCancel(DialogInterface dialog) {
             if (mCstorAddCredentialHelper != null) {
                 // release the object here so that it doesn't get triggerred in
@@ -578,7 +568,12 @@ public class SecuritySettings extends PreferenceActivity implements
                     } else if (!isCstorUnlocked()) {
                         showDialog(CSTOR_UNLOCK_DIALOG);
                     } else {
-                        addCredential();
+                        String formatString =
+                                getString(R.string.cstor_is_added);
+                        String message = String.format(formatString,
+                                mCstorAddCredentialHelper.getName());
+                        Toast.makeText(SecuritySettings.this, message,
+                                Toast.LENGTH_SHORT).show();
                         finish();
                     }
                 } else if (mSpecialIntent != null) {
@@ -628,6 +623,15 @@ public class SecuritySettings extends PreferenceActivity implements
                 }
 
                 mCstorAddCredentialHelper.setPassword(password);
+            }
+
+            if (mCstorAddCredentialHelper.saveToStorage() < 0) {
+                if (mCstorAddCredentialHelper.isPkcs12Keystore()) {
+                    showError(R.string.cstor_password_error);
+                } else {
+                    showError(R.string.cstor_storage_error);
+                }
+                return false;
             }
 
             return true;
