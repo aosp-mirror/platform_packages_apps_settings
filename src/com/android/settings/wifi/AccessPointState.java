@@ -375,10 +375,20 @@ public final class AccessPointState implements Comparable<AccessPointState>, Par
 
     /* For Enterprise Fields */
     public void setEnterpriseField(int field, String value) {
-        if (value != null && field >= 0 && field < MAX_ENTRPRISE_FIELD) {
+        if ((value != null) && (field >= 0) && (field < MAX_ENTRPRISE_FIELD)) {
             this.mEnterpriseFields[field] = value;
             requestRefresh();
         }
+    }
+
+    public void setPhase2(String phase2) {
+        if (!TextUtils.isEmpty(phase2) && (!phase2.equals("None"))) {
+            mPhase2 = phase2;
+        }
+    }
+
+    public String getPhase2() {
+        return mPhase2;
     }
 
     public void setEap(int method) {
@@ -495,6 +505,12 @@ public final class AccessPointState implements Comparable<AccessPointState>, Par
         config.hiddenSSID = hiddenSsid;
         config.SSID = convertToQuotedString(ssid);
         config.eap = mEap;
+
+        if (!TextUtils.isEmpty(mPhase2)) {
+            config.phase2 = convertToQuotedString("auth=" + mPhase2);
+        } else {
+            config.phase2 = null;
+        }
         if (!TextUtils.isEmpty(mEnterpriseFields[IDENTITY])) {
             config.identity =
                     convertToQuotedString(mEnterpriseFields[IDENTITY]);
