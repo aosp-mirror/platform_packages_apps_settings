@@ -463,7 +463,7 @@ public class PowerUsageSummary extends PreferenceActivity implements Runnable {
         btPower += (btPingCount
                 * mPowerProfile.getAveragePower(PowerProfile.POWER_BLUETOOTH_AT_CMD)) / 1000;
 
-        addEntry(getString(R.string.power_bluetooth), DrainType.IDLE, btOnTimeMs,
+        addEntry(getString(R.string.power_bluetooth), DrainType.BLUETOOTH, btOnTimeMs,
                 com.android.internal.R.drawable.ic_volume_bluetooth_in_call, btPower);
     }
 
