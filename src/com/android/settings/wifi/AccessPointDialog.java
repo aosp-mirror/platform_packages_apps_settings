@@ -246,7 +246,6 @@ public class AccessPointDialog extends AlertDialog implements DialogInterface.On
         } else if (mMode == MODE_INFO) {
             if (mState.isEnterprise() && !mState.configured) {
                 setLayout(R.layout.wifi_ap_configure);
-                defaultPasswordVisibility = false;
                 setEnterpriseFieldsVisible(true);
             } else {
                 setLayout(R.layout.wifi_ap_info);
@@ -319,6 +318,8 @@ public class AccessPointDialog extends AlertDialog implements DialogInterface.On
         if (mMode == MODE_CONFIGURE ||
                 (mState.isEnterprise() && !mState.configured)) {
             setEnterpriseFields(view);
+            mPhase2Spinner.setSelection(getSelectionIndex(
+                    R.array.wifi_phase2_entries, mState.getPhase2()));
             mEapSpinner.setSelection(getSelectionIndex(
                     R.array.wifi_eap_entries, mState.getEap()));
             mClientCertSpinner.setSelection(getSelectionIndex(
@@ -663,14 +664,15 @@ public class AccessPointDialog extends AlertDialog implements DialogInterface.On
             }
         }
         switch (securityType) {
+            case SECURITY_IEEE8021X: 
             case SECURITY_WPA_EAP: {
-                mState.setSecurity(AccessPointState.WPA_EAP);
+                if (securityType == SECURITY_WPA_EAP) {
+                    mState.setSecurity(AccessPointState.WPA_EAP);
+                } else {
+                    mState.setSecurity(AccessPointState.IEEE8021X);
+                }
                 mState.setEap(mEapSpinner.getSelectedItemPosition());
-                break;
-            }
-            case SECURITY_IEEE8021X: {
-                mState.setSecurity(AccessPointState.IEEE8021X);
-                mState.setEap(mEapSpinner.getSelectedItemPosition());
+                mState.setPhase2(mPhase2Spinner.getSelectedItem());
                 break;
             }
             default:
