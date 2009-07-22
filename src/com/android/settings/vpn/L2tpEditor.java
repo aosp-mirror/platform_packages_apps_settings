@@ -30,9 +30,7 @@ import android.preference.PreferenceGroup;
  */
 class L2tpEditor extends VpnProfileEditor {
     private CheckBoxPreference mSecret;
-    private EditTextPreference mSecretString;
-    private String mOriginalSecret;
-    private boolean mOriginalSecretEnabled;
+    private SecretHandler mSecretHandler;
 
     public L2tpEditor(L2tpProfile p) {
         super(p);
@@ -43,11 +41,8 @@ class L2tpEditor extends VpnProfileEditor {
         Context c = subpanel.getContext();
         subpanel.addPreference(createSecretPreference(c));
         subpanel.addPreference(createSecretStringPreference(c));
-        mSecretString.setEnabled(mSecret.isChecked());
 
         L2tpProfile profile = (L2tpProfile) getProfile();
-        mOriginalSecret = profile.getSecretString();
-        mOriginalSecretEnabled = profile.isSecretEnabled();
     }
 
     @Override
@@ -55,9 +50,7 @@ class L2tpEditor extends VpnProfileEditor {
         String result = super.validate();
         if (!mSecret.isChecked()) return result;
 
-        return ((result != null)
-                ? result
-                : validate(mSecretString, R.string.vpn_a_l2tp_secret));
+        return ((result != null) ? result : mSecretHandler.validate());
     }
 
     private Preference createSecretPreference(Context c) {
@@ -73,7 +66,7 @@ class L2tpEditor extends VpnProfileEditor {
                             Preference pref, Object newValue) {
                         boolean enabled = (Boolean) newValue;
                         profile.setSecretEnabled(enabled);
-                        mSecretString.setEnabled(enabled);
+                        mSecretHandler.getPreference().setEnabled(enabled);
                         setSecretTitle(mSecret, R.string.vpn_l2tp_secret,
                                 enabled);
                         setSecretSummary(mSecret, enabled);
@@ -84,22 +77,22 @@ class L2tpEditor extends VpnProfileEditor {
     }
 
     private Preference createSecretStringPreference(Context c) {
-        final L2tpProfile profile = (L2tpProfile) getProfile();
-        mSecretString = createSecretPreference(c,
+        SecretHandler sHandler = mSecretHandler = new SecretHandler(c,
                 R.string.vpn_l2tp_secret_string_title,
-                R.string.vpn_l2tp_secret,
-                profile.getSecretString(),
-                new Preference.OnPreferenceChangeListener() {
-                    public boolean onPreferenceChange(
-                            Preference pref, Object newValue) {
-                        profile.setSecretString((String) newValue);
-                        setSecretSummary(mSecretString,
-                                R.string.vpn_l2tp_secret,
-                                (String) newValue);
-                        return true;
-                    }
-                });
-        return mSecretString;
+                R.string.vpn_l2tp_secret) {
+            @Override
+            protected String getSecretFromProfile() {
+                return ((L2tpProfile) getProfile()).getSecretString();
+            }
+
+            @Override
+            protected void saveSecretToProfile(String secret) {
+                ((L2tpProfile) getProfile()).setSecretString(secret);
+            }
+        };
+        Preference pref = sHandler.getPreference();
+        pref.setEnabled(mSecret.isChecked());
+        return pref;
     }
 
     private void setSecretSummary(CheckBoxPreference secret, boolean enabled) {

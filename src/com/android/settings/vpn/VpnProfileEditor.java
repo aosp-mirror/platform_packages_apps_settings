@@ -33,9 +33,6 @@ import android.text.method.PasswordTransformationMethod;
  * The common class for editing {@link VpnProfile}.
  */
 class VpnProfileEditor {
-    static final String SECRET_SET_INDICATOR =
-            new String(new byte[] {(byte) 1, (byte) 0});
-
     private static final String KEY_VPN_NAME = "vpn_name";
 
     private EditTextPreference mName;
@@ -147,22 +144,6 @@ class VpnProfileEditor {
         return pref;
     }
 
-    protected EditTextPreference createSecretPreference(Context c, int titleId,
-            int fieldNameId, String value,
-            Preference.OnPreferenceChangeListener listener) {
-        EditTextPreference pref = new EditTextPreference(c);
-        pref.setTitle(titleId);
-        pref.setDialogTitle(titleId);
-        pref.getEditText().setInputType(InputType.TYPE_TEXT_VARIATION_PASSWORD);
-        pref.getEditText().setTransformationMethod(
-                new PasswordTransformationMethod());
-        pref.setText(TextUtils.isEmpty(value) ? "" : SECRET_SET_INDICATOR);
-        setSecretSummary(pref, fieldNameId, value);
-        pref.setPersistent(true);
-        pref.setOnPreferenceChangeListener(listener);
-        return pref;
-    }
-
     protected String validate(Preference pref, int fieldNameId) {
         Context c = pref.getContext();
         String value = (pref instanceof EditTextPreference)
@@ -191,15 +172,6 @@ class VpnProfileEditor {
                 : v);
     }
 
-    protected void setSecretSummary(Preference pref, int fieldNameId,
-            String value) {
-        Context c = pref.getContext();
-        String formatString = TextUtils.isEmpty(value)
-                ? c.getString(R.string.vpn_field_not_set)
-                : c.getString(R.string.vpn_field_is_set);
-        pref.setSummary(String.format(formatString, c.getString(fieldNameId)));
-    }
-
     protected void setSecretTitle(
             CheckBoxPreference pref, int fieldNameId, boolean enabled) {
         Context c = pref.getContext();
@@ -214,5 +186,70 @@ class VpnProfileEditor {
         mName.setText(newName);
         getProfile().setName(newName);
         setSummary(mName, R.string.vpn_name, newName);
+    }
+
+    // Secret is tricky to handle because empty field may mean "not set" or
+    // "unchanged". This class hides that logic from callers.
+    protected static abstract class SecretHandler {
+        private EditTextPreference mPref;
+        private int mFieldNameId;
+        private boolean mHadSecret;
+
+        protected SecretHandler(Context c, int titleId, int fieldNameId) {
+            String value = getSecretFromProfile();
+            mHadSecret = !TextUtils.isEmpty(value);
+            mFieldNameId = fieldNameId;
+
+            EditTextPreference pref = mPref = new EditTextPreference(c);
+            pref.setTitle(titleId);
+            pref.setDialogTitle(titleId);
+            pref.getEditText().setInputType(
+                    InputType.TYPE_TEXT_VARIATION_PASSWORD);
+            pref.getEditText().setTransformationMethod(
+                    new PasswordTransformationMethod());
+            pref.setText("");
+            pref.getEditText().setHint(mHadSecret
+                    ? R.string.vpn_secret_unchanged
+                    : R.string.vpn_secret_not_set);
+            setSecretSummary(value);
+            pref.setPersistent(true);
+            saveSecretToProfile("");
+            pref.setOnPreferenceChangeListener(
+                    new Preference.OnPreferenceChangeListener() {
+                        public boolean onPreferenceChange(
+                                Preference pref, Object newValue) {
+                            saveSecretToProfile((String) newValue);
+                            setSecretSummary((String) newValue);
+                            return true;
+                        }
+                    });
+        }
+
+        protected EditTextPreference getPreference() {
+            return mPref;
+        }
+
+        protected String validate() {
+            Context c = mPref.getContext();
+            String value = mPref.getText();
+            return ((TextUtils.isEmpty(value) && !mHadSecret)
+                    ? String.format(
+                            c.getString(R.string.vpn_error_miss_entering),
+                            c.getString(mFieldNameId))
+                    : null);
+        }
+
+        private void setSecretSummary(String value) {
+            EditTextPreference pref = mPref;
+            Context c = pref.getContext();
+            String formatString = (TextUtils.isEmpty(value) && !mHadSecret)
+                    ? c.getString(R.string.vpn_field_not_set)
+                    : c.getString(R.string.vpn_field_is_set);
+            pref.setSummary(
+                    String.format(formatString, c.getString(mFieldNameId)));
+        }
+
+        protected abstract String getSecretFromProfile();
+        protected abstract void saveSecretToProfile(String secret);
     }
 }
