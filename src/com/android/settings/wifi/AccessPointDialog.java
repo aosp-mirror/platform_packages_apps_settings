@@ -672,7 +672,7 @@ public class AccessPointDialog extends AlertDialog implements DialogInterface.On
                     mState.setSecurity(AccessPointState.IEEE8021X);
                 }
                 mState.setEap(mEapSpinner.getSelectedItemPosition());
-                mState.setPhase2(mPhase2Spinner.getSelectedItem());
+                mState.setPhase2((String)mPhase2Spinner.getSelectedItem());
                 break;
             }
             default:
