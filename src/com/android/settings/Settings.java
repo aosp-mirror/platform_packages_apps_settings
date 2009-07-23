@@ -20,6 +20,7 @@ import android.os.Bundle;
 import android.preference.PreferenceActivity;
 import android.preference.PreferenceGroup;
 import android.provider.Settings.System;
+import android.telephony.TelephonyManager;
 
 public class Settings extends PreferenceActivity {
 
@@ -34,6 +35,17 @@ public class Settings extends PreferenceActivity {
         
         addPreferencesFromResource(R.xml.settings);
         
+        int activePhoneType = TelephonyManager.getDefault().getPhoneType();
+
+        // do not display SIM lock for CDMA phone
+        if (TelephonyManager.PHONE_TYPE_CDMA == activePhoneType) {
+            findPreference("security_settings").setSummary(
+                    R.string.cdma_security_settings_summary);
+        } else {
+            findPreference("security_settings").setSummary(
+                    R.string.security_settings_summary);
+        }
+
         PreferenceGroup parent = (PreferenceGroup) findPreference(KEY_PARENT);
         Utils.updatePreferenceToSpecificActivityOrRemove(this, parent, KEY_SYNC_SETTINGS, 0);
         Utils.updatePreferenceToSpecificActivityOrRemove(this, parent, KEY_SEARCH_SETTINGS, 0);

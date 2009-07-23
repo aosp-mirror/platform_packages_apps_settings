@@ -70,7 +70,8 @@
         <com.android.settings.IconPreferenceScreen
             settings:icon="@drawable/ic_settings_security"
             android:title="@string/security_settings_title"
-            android:summary="@string/security_settings_summary">
+            android:summary="@string/security_settings_summary"
+            android:key="security_settings">
             <intent
                 android:action="android.intent.action.MAIN"
                 android:targetPackage="com.android.settings"
