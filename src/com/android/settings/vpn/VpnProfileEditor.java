@@ -66,6 +66,8 @@ class VpnProfileEditor {
                     }
                 });
         setName(getProfile().getName());
+        mName.getEditText().setInputType(InputType.TYPE_CLASS_TEXT
+                | InputType.TYPE_TEXT_FLAG_CAP_SENTENCES);
 
         subpanel.addPreference(createServerNamePreference(c));
         loadExtraPreferencesTo(subpanel);
