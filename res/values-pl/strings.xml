@@ -107,8 +107,6 @@
     <string name="date_and_time">"Ustawienia daty i czasu"</string>
     <string name="date_time_12_hour_sample">"1:00 (po południu)"</string>
     <string name="date_time_24_hour_sample">"13:00"</string>
-    <string name="date_time_changeTime_text">"Zmień godzinę"</string>
-    <string name="date_time_changeDate_text">"Data"</string>
     <string name="choose_timezone">"Wybierz strefę czasową"</string>
     <string name="display_preview_label">"Podgląd:"</string>
     <string name="display_font_size_label">"Rozmiar czcionki:"</string>
@@ -199,8 +197,8 @@
     <string name="date_and_time_settings_title">"Data i czas"</string>
     <string name="date_and_time_settings_summary">"Ustaw format daty, czasu i strefę czasową"</string>
     <string name="date_time_auto">"Automatycznie"</string>
-    <string name="date_time_auto_summaryOn">"Używaj wartości dostarczonych przez sieć"</string>
-    <string name="date_time_auto_summaryOff">"Używaj informacji dostarczonych przez operatora"</string>
+    <string name="date_time_auto_summaryOn">"Skorzystaj z wartości dostarczonych przez sieć"</string>
+    <string name="date_time_auto_summaryOff">"Skorzystaj z informacji dostarczonych przez operatora"</string>
     <string name="date_time_24hour">"Format 24-godzinny"</string>
     <string name="date_time_set_time">"Ustaw czas"</string>
     <string name="date_time_set_timezone">"Wybierz strefę czasową"</string>
@@ -292,7 +290,7 @@
     <string name="wifi_save_config">"Zapisz"</string>
     <string name="wifi_password_unchanged">"(niezmienione)"</string>
     <string name="wifi_add_other_network">"Dodaj sieć Wi-Fi"</string>
-    <string name="wifi_notify_open_networks">"Powiadomienie o sieci"</string>
+    <string name="wifi_notify_open_networks">"Powiadomienie sieciowe"</string>
     <string name="wifi_notify_open_networks_summary">"Powiadom mnie, gdy będę w zasięgu otwartej sieci"</string>
     <string name="wifi_password_incorrect_error">"Wprowadzone hasło sieci jest nieprawidłowe. Spróbuj ponownie."</string>
     <string name="wifi_generic_connection_error">"Wystąpił problem podczas łączenia z siecią. Spróbuj ponownie."</string>
@@ -403,9 +401,9 @@
     <string name="system_update_settings_list_item_summary">"Sprawdź aktualizacje systemu"</string>
     <string name="firmware_version">"Wersja oprogramowania"</string>
     <string name="model_number">"Numer modelu"</string>
-    <string name="baseband_version">"Wersja pasma podstawowego"</string>
+    <string name="baseband_version">"Pasmo podstawowe"</string>
     <string name="kernel_version">"Wersja jądra"</string>
-    <string name="build_number">"Numer kompilacji"</string>
+    <string name="build_number">"Numer wersji"</string>
     <string name="device_info_not_available">"Niedostępna"</string>
     <string name="device_status_activity_title">"Informacje o telefonie"</string>
     <string name="device_status">"Informacje o telefonie"</string>
@@ -427,9 +425,9 @@
     <string name="internal_memory">"Pamięć wewnętrzna telefonu"</string>
     <string name="sd_memory">"Karta SD"</string>
     <string name="memory_available">"Dostępne miejsce"</string>
-    <string name="memory_size">"Całkowita pojemność"</string>
-    <string name="sd_eject">"Odłącz kartę SD"</string>
-    <string name="sd_eject_summary">"Odłącz kartę SD, aby bezpiecznie ją usunąć"</string>
+    <string name="memory_size">"Łączna pojemność"</string>
+    <string name="sd_eject">"Odmontuj kartę SD"</string>
+    <string name="sd_eject_summary">"Odmontuj kartę SD, aby bezpiecznie ją usunąć"</string>
     <string name="sd_format">"Formatuj kartę SD"</string>
     <string name="sd_format_summary">"Formatuj (wymaż) kartę SD"</string>
     <string name="sd_unavailable">"Niedostępna"</string>
@@ -479,23 +477,19 @@
     <string name="media_format_button_text">"Formatuj kartę SD"</string>
     <string name="media_format_final_desc">"Czy sformatować kartę SD i wymazać wszystkie multimedia? Nie można cofnąć tej akcji!"</string>
     <string name="media_format_final_button_text">"Wymaż wszystko"</string>
-    <string name="media_format_gesture_prompt">"Narysuj wzór odblokowania"</string>
-    <string name="media_format_gesture_explanation">"Aby potwierdzić formatowanie karty SD, należy narysować swój wzór odblokowania."</string>
+    <string name="media_format_gesture_prompt">"Narysuj wzorzec odblokowania"</string>
+    <string name="media_format_gesture_explanation">"Aby potwierdzić formatowanie karty SD, należy narysować swój wzorzec do odblokowania."</string>
     <string name="call_settings_title">"Ustawienia połączeń"</string>
-    <string name="call_settings_summary">"Poczta głosowa, przekierowania połączeń, poł. oczekujące, ID rozmówcy"</string>
+    <string name="call_settings_summary">"Poczta głosowa, przekierowania połączeń, poł. oczekujące, ID dzwoniącego"</string>
     <string name="network_settings_title">"Sieci komórkowe"</string>
     <string name="network_settings_summary">"Ustaw opcje roamingu, sieci, nazw APN"</string>
     <string name="location_title">"Źródło Mojej lokalizacji"</string>
     <string name="location_network_based">"Użyj sieci Wi-Fi"</string>
     <string name="location_networks_disabled">"Zobacz położenie w aplikacjach (takich jak Mapy), korzystając z sieci bezprzewodowych"</string>
-    <string name="location_neighborhood_level">"Położenie określane jest za pomocą Wi-Fi i/lub sieci komórkowych"</string>
+    <string name="location_neighborhood_level">"Położenie określane jest za pomocą Wi-Fi i/lub sieci komórkowych."</string>
     <string name="location_gps">"Użyj satelit GPS"</string>
     <string name="location_street_level">"Ustalanie położenia z dokładnością do ulicy (wyłącz, aby oszczędzać baterię)"</string>
     <string name="location_gps_disabled">"Podaje dokładne położenie (zużywa więcej baterii, działa na zewnątrz)"</string>
-    <string name="location_warning_title">"Zgoda na usługę lokalizacji"</string>
-    <string name="location_warning_message">"Zezwól usłudze lokalizacji Google na zbieranie anonimowych, zbiorczych danych o lokalizacji. Zbieranie danych będzie się odbywać bez względu na to, czy aktywne są aplikacje."</string>
-    <string name="agree">"Zgadzam się"</string>
-    <string name="disagree">"Nie zgadzam się"</string>
     <string name="about_settings">"Informacje o telefonie"</string>
     <string name="about_settings_summary">"Wyświetl informacje prawne, stan telefonu, wersję oprogramowania"</string>
     <string name="legal_information">"Informacje prawne"</string>
@@ -536,7 +530,7 @@
     <string name="skip_button_label">"Anuluj"</string>
     <string name="next_button_label">"Dalej"</string>
     <string name="lock_title">"Zabezpieczanie telefonu"</string>
-    <string name="lock_intro_message"><font size="17">"Chroń swój telefon przed nieuprawnionym użyciem przez utworzenie osobistego wzoru odblokowania ekranu. "\n<font height="17">\n</font><b>"1"</b>" Obejrzyj rysowanie przykładowego wzoru na następnym ekranie. "\n<font height="17">\n</font><b>"2"</b>" Następnie narysuj swój własny wzór odblokowania. Eksperymentuj z różnymi wzorami, ale połącz co najmniej 4 punkty. "\n<font height="17">\n</font><b>"3"</b>" Narysuj swój wzór ponownie dla potwierdzenia. "\n<font height="17">\n</font><b>"Możemy zaczynać? Wybierz „Dalej”"</b>". "\n<font height="3">\n</font>"Aby zrezygnować z ustawiania blokady, wybierz „Anuluj”."</font></string>
+    <string name="lock_intro_message"><font size="17">"Chroń swój telefon przed nieuprawnionym użyciem przez stworzenie osobistego wzoru odblokowania ekranu. "\n<font height="17">\n</font><b>"1"</b>" Obejrzyj rysowanie przykładowego wzoru na następnym ekranie. "\n<font height="17">\n</font><b>"2"</b>" Następnie narysuj swój własny wzór odblokowania. Eksperymentuj z różnymi wzorami, ale połącz co najmniej 4 punkty. "\n<font height="17">\n</font><b>"3"</b>" Narysuj swój wzór ponownie dla potwierdzenia. "\n<font height="17">\n</font><b>"Możemy zaczynać? Wybierz „Dalej”"</b>". "\n<font height="3">\n</font>"Aby zrezygnować z ustawiania blokady, wybierz „Anuluj”."</font></string>
     <string name="lock_example_title">"Przykładowy wzór"</string>
     <string name="lock_example_message">"Połącz co najmniej cztery kropki."\n" "\n"Wybierz polecenie „Dalej”, aby narysować własny wzór."</string>
     <string name="manageapplications_settings_title">"Zarządzaj aplikacjami"</string>
@@ -595,10 +589,10 @@
     <string name="auto_replace">"Autokorekta"</string>
     <string name="auto_replace_summary">"Poprawiaj błędnie wpisane słowa"</string>
     <string name="auto_caps">"Wielka litera po kropce"</string>
-    <string name="auto_caps_summary">"Zaczynaj zdania wielką literą"</string>
+    <string name="auto_caps_summary">"Zdanie zaczynaj wielką literą"</string>
     <string name="auto_punctuate">"Łatwa interpunkcja"</string>
     <string name="hardkeyboard_category">"Ustawienia klawiatury fizycznej"</string>
-    <string name="auto_punctuate_summary">"Naciśnij dwukrotnie klawisz spacji, aby wstawić kropkę"</string>
+    <string name="auto_punctuate_summary">"Naciśnij klawisz spacji dwukrotnie, aby wstawić kropkę."</string>
     <string name="show_password">"Widoczne hasła"</string>
     <string name="show_password_summary">"Pokazuj hasło podczas wpisywania"</string>
     <string name="ime_security_warning">"Ta metoda wprowadzania może gromadzić cały wpisywany tekst, w tym dane osobiste, takie jak hasła i numery kart kredytowych. Ta metoda pochodzi z aplikacji <xliff:g id="IME_APPLICATION_NAME">%1$s</xliff:g>. Włączyć tę metodę wprowadzania?"</string>

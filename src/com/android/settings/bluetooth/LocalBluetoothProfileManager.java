@@ -16,16 +16,13 @@
 
 package com.android.settings.bluetooth;
 
-import com.android.settings.R;
-
 import android.bluetooth.BluetoothA2dp;
 import android.bluetooth.BluetoothError;
 import android.bluetooth.BluetoothHeadset;
-import android.bluetooth.BluetoothClass;
-import android.content.Context;
-import android.content.SharedPreferences;
 import android.os.Handler;
 import android.text.TextUtils;
+
+import com.android.settings.R;
 
 import java.util.HashMap;
 import java.util.List;
@@ -102,6 +99,8 @@ public abstract class LocalBluetoothProfileManager {
 
     public abstract int getSummary(String address);
 
+    public abstract int convertState(int a2dpState);
+    
     public abstract boolean isPreferred(String address);
 
     public abstract void setPreferred(String address, boolean preferred);
@@ -176,7 +175,8 @@ public abstract class LocalBluetoothProfileManager {
                     preferred ? BluetoothA2dp.PRIORITY_AUTO : BluetoothA2dp.PRIORITY_OFF);
         }
 
-        private static int convertState(int a2dpState) {
+        @Override
+        public int convertState(int a2dpState) {
             switch (a2dpState) {
             case BluetoothA2dp.STATE_CONNECTED:
                 return SettingsBtStatus.CONNECTION_STATUS_CONNECTED;
@@ -217,7 +217,9 @@ public abstract class LocalBluetoothProfileManager {
                      */
                     String address = mService.getHeadsetAddress();
                     if (TextUtils.isEmpty(address)) return;
-                    mLocalManager.getLocalDeviceManager().onProfileStateChanged(address, true);
+                    mLocalManager.getLocalDeviceManager()
+                            .onProfileStateChanged(address, Profile.HEADSET,
+                                    BluetoothHeadset.STATE_CONNECTED);
                 }
             });
         }
@@ -273,7 +275,8 @@ public abstract class LocalBluetoothProfileManager {
                     preferred ? BluetoothHeadset.PRIORITY_AUTO : BluetoothHeadset.PRIORITY_OFF);
         }
 
-        private static int convertState(int headsetState) {
+        @Override
+        public int convertState(int headsetState) {
             switch (headsetState) {
             case BluetoothHeadset.STATE_CONNECTED:
                 return SettingsBtStatus.CONNECTION_STATUS_CONNECTED;

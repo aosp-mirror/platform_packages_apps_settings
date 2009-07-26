@@ -20,6 +20,8 @@ import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.content.pm.ResolveInfo;
 import android.database.ContentObserver;
 import android.database.Cursor;
 import android.os.Bundle;
@@ -38,6 +40,8 @@ import android.view.View;
 import android.widget.AdapterView;
 
 import com.android.settings.R;
+
+import java.net.URISyntaxException;
 
 /**
  * Settings activity for quick launch.
@@ -300,7 +304,27 @@ public class QuickLaunchSettings extends PreferenceActivity implements
             if (shortcut == 0) continue;
             
             ShortcutPreference pref = getOrCreatePreference(shortcut);
-            pref.setTitle(Bookmarks.getTitle(this, c));
+            CharSequence title = Bookmarks.getTitle(this, c);
+
+            /*
+             * The title retrieved from Bookmarks.getTitle() will be in
+             * the original boot locale, not the current locale.
+             * Try to look up a localized title from the PackageManager.
+             */
+            int intentColumn = c.getColumnIndex(Bookmarks.INTENT);
+            String intentUri = c.getString(intentColumn);
+            PackageManager packageManager = getPackageManager();
+            try {
+                Intent intent = Intent.getIntent(intentUri);
+                ResolveInfo info = packageManager.resolveActivity(intent, 0);
+                if (info != null) {
+                    title = info.loadLabel(packageManager);
+                }
+            } catch (URISyntaxException e) {
+                // Just use the non-localized title, then.
+            }
+
+            pref.setTitle(title);
             pref.setSummary(getString(R.string.quick_launch_shortcut,
                     String.valueOf(shortcut)));
             pref.setHasBookmark(true);

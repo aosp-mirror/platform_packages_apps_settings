@@ -43,6 +43,12 @@ public final class AccessPointState implements Comparable<AccessPointState>, Par
     public static final String WEP = "WEP";
     public static final String OPEN = "Open";
 
+    /* For EAP Enterprise fields */
+    public static final String WPA_EAP = "WPA-EAP";
+    public static final String IEEE8021X = "IEEE8021X";
+
+    public static final String[] EAP_METHOD = { "PEAP", "TLS", "TTLS" };
+
     /** String present in capabilities if the scan result is ad-hoc */
     private static final String ADHOC_CAPABILITY = "[IBSS]";
     /** String present in capabilities if the scan result is enterprise secured */
@@ -93,7 +99,19 @@ public final class AccessPointState implements Comparable<AccessPointState>, Par
     public static final int WEP_PASSWORD_ASCII = 1;
     public static final int WEP_PASSWORD_HEX = 2;
     private int mWepPasswordType;
-    
+
+    /* Enterprise Fields */
+    public static final int IDENTITY = 0;
+    public static final int ANONYMOUS_IDENTITY = 1;
+    public static final int PRIVATE_KEY_PASSWD = 2;
+    public static final int CLIENT_CERT = 3;
+    public static final int CA_CERT = 4;
+    public static final int PRIVATE_KEY = 5;
+    public static final int MAX_ENTRPRISE_FIELD = 6;
+    private String mEnterpriseFields[] = new String[MAX_ENTRPRISE_FIELD];
+    private String mEap;
+    private String mPhase2;
+
     private Context mContext;
 
     /**
@@ -258,7 +276,12 @@ public final class AccessPointState implements Comparable<AccessPointState>, Par
             requestRefresh();
         }
     }
-    
+
+    public boolean isEnterprise() {
+        return (WPA_EAP.equals(security) ||
+                AccessPointState.IEEE8021X.equals(security));
+    }
+
     public void setSecurity(String security) {
         if (TextUtils.isEmpty(this.security) || !this.security.equals(security)) {
             this.security = security;
@@ -275,7 +298,9 @@ public final class AccessPointState implements Comparable<AccessPointState>, Par
         else if (security.equals(WEP)) return mContext.getString(R.string.wifi_security_wep);
         else if (security.equals(WPA)) return mContext.getString(R.string.wifi_security_wpa);
         else if (security.equals(WPA2)) return mContext.getString(R.string.wifi_security_wpa2);
-        
+        else if (security.equals(WPA_EAP)) return mContext.getString(R.string.wifi_security_wpa_eap);
+        else if (security.equals(IEEE8021X)) return mContext.getString(R.string.wifi_security_ieee8021x);
+
         return mContext.getString(R.string.wifi_security_unknown);
     }
     
@@ -300,7 +325,7 @@ public final class AccessPointState implements Comparable<AccessPointState>, Par
      */
     public static String getScanResultSecurity(ScanResult scanResult) {
         final String cap = scanResult.capabilities;
-        final String[] securityModes = { WEP, WPA, WPA2 }; 
+        final String[] securityModes = { WEP, WPA, WPA2, WPA_EAP, IEEE8021X };
         for (int i = securityModes.length - 1; i >= 0; i--) {
             if (cap.contains(securityModes[i])) {
                 return securityModes[i];
@@ -347,7 +372,30 @@ public final class AccessPointState implements Comparable<AccessPointState>, Par
         mPassword = password;
         mWepPasswordType = wepPasswordType;
     }
-    
+
+    /* For Enterprise Fields */
+    public void setEnterpriseField(int field, String value) {
+        if (value != null && field >= 0 && field < MAX_ENTRPRISE_FIELD) {
+            this.mEnterpriseFields[field] = value;
+            requestRefresh();
+        }
+    }
+
+    public void setEap(int method) {
+        mEap =  EAP_METHOD[method];
+        requestRefresh();
+    }
+
+    public String getEap() {
+        return mEap;
+    }
+    public String getEnterpriseField(int field) {
+        if(field >=0 && field < MAX_ENTRPRISE_FIELD) {
+            return mEnterpriseFields[field];
+        }
+        return null;
+    }
+
     public boolean hasPassword() {
         return !TextUtils.isEmpty(mPassword) || mConfigHadPassword; 
     }
@@ -382,6 +430,10 @@ public final class AccessPointState implements Comparable<AccessPointState>, Par
             } else {
                 return OPEN;
             }
+        } else if (wifiConfig.allowedKeyManagement.get(KeyMgmt.WPA_EAP)) {
+            return WPA_EAP;
+        } else if (wifiConfig.allowedKeyManagement.get(KeyMgmt.IEEE8021X)) {
+            return IEEE8021X;
         } else if (wifiConfig.allowedProtocols.get(Protocol.RSN)) {
             return WPA2;
         } else if (wifiConfig.allowedProtocols.get(Protocol.WPA)) {
@@ -442,7 +494,43 @@ public final class AccessPointState implements Comparable<AccessPointState>, Par
         config.priority = priority;
         config.hiddenSSID = hiddenSsid;
         config.SSID = convertToQuotedString(ssid);
-        
+        config.eap = mEap;
+        if (!TextUtils.isEmpty(mEnterpriseFields[IDENTITY])) {
+            config.identity =
+                    convertToQuotedString(mEnterpriseFields[IDENTITY]);
+        } else {
+            config.identity = null;
+        }
+        if (!TextUtils.isEmpty(mEnterpriseFields[ANONYMOUS_IDENTITY])) {
+            config.anonymousIdentity = convertToQuotedString(
+                    mEnterpriseFields[ANONYMOUS_IDENTITY]);
+        } else {
+            config.anonymousIdentity = null;
+        }
+        if (!TextUtils.isEmpty(mEnterpriseFields[CLIENT_CERT])) {
+            config.clientCert = convertToQuotedString(
+                    mEnterpriseFields[CLIENT_CERT]);
+        } else {
+            config.clientCert = null;
+        }
+        if (!TextUtils.isEmpty(mEnterpriseFields[CA_CERT])) {
+            config.caCert = convertToQuotedString(
+                    mEnterpriseFields[CA_CERT]);
+        } else {
+            config.caCert = null;
+        }
+        if (!TextUtils.isEmpty(mEnterpriseFields[PRIVATE_KEY])) {
+            config.privateKey = convertToQuotedString(
+                    mEnterpriseFields[PRIVATE_KEY]);
+        } else {
+            config.privateKey = null;
+        }
+        if (!TextUtils.isEmpty(mEnterpriseFields[PRIVATE_KEY_PASSWD])) {
+            config.privateKeyPasswd = convertToQuotedString(
+                    mEnterpriseFields[PRIVATE_KEY_PASSWD]);
+        } else {
+            config.privateKeyPasswd = null;
+        }
         setupSecurity(config);
     }
     
@@ -509,6 +597,17 @@ public final class AccessPointState implements Comparable<AccessPointState>, Par
             
         } else if (security.equals(OPEN)) {
             config.allowedKeyManagement.set(KeyMgmt.NONE);
+        } else if (security.equals(WPA_EAP) || security.equals(IEEE8021X)) {
+            config.allowedGroupCiphers.set(GroupCipher.TKIP);
+            config.allowedGroupCiphers.set(GroupCipher.CCMP);
+            if (security.equals(WPA_EAP)) {
+                config.allowedKeyManagement.set(KeyMgmt.WPA_EAP);
+            } else {
+                config.allowedKeyManagement.set(KeyMgmt.IEEE8021X);
+            }
+            if (!TextUtils.isEmpty(mPassword)) {
+                config.password = convertToQuotedString(mPassword);
+            }
         }
     }
     
@@ -716,26 +815,31 @@ public final class AccessPointState implements Comparable<AccessPointState>, Par
             return mContext.getString(R.string.wifi_security_verbose_wpa2);
         } else if (OPEN.equals(security)) {
             return mContext.getString(R.string.wifi_security_verbose_open);
+        } else if (WPA_EAP.equals(security)) {
+            return mContext.getString(R.string.wifi_security_verbose_wpa_eap);
+        } else if (IEEE8021X.equals(security)) {
+            return mContext.getString(R.string.wifi_security_verbose_ieee8021x);
         } else {
             return null;
         }
     }
-    
-    private void buildSummary(StringBuilder sb, String string, boolean autoLowerCaseFirstLetter) {
+
+    private void buildSummary(StringBuilder sb, String string, boolean autoUpperCaseFirstLetter) {
         if (sb.length() == 0) {
-            sb.append(string);
-        } else {
-            sb.append(", ");
-            if (autoLowerCaseFirstLetter) {
-                // Convert first letter to lowercase
-                sb.append(Character.toLowerCase(string.charAt(0))).append(string, 1,
+            if (autoUpperCaseFirstLetter && string.length() > 1
+                    && Character.isLowerCase(string.charAt(0))
+                    && !Character.isUpperCase(string.charAt(1))) {
+                sb.append(Character.toUpperCase(string.charAt(0))).append(string, 1,
                         string.length());
             } else {
                 sb.append(string);
             }
+        } else {
+            sb.append(", ");
+            sb.append(string);
         }
     }
-    
+
     public int compareTo(AccessPointState other) {
         // This ranks the states for displaying in the AP list, not for
         // connecting to (wpa_supplicant does that using the WifiConfiguration's

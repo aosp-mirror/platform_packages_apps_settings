@@ -39,18 +39,12 @@
         <item>All</item>
     </string-array>
 
-    <!-- There is a setting to control the format of dates displayed throughout the system.  This is in the Date & Time Settings screen.  Unfortunately, these cannot be changed at all. --> <skip />
-    <!-- Do not translate.  This is fed directly to the formatter. -->
-    <string-array name="date_format_values">
-        <!-- Do not translate.  This is fed directly to the formatter. -->
+    <!-- There is a setting to control the format of dates displayed throughout the system.  This is in the Date & Time Settings screen.  These will be adjusted to use punctuation appropriate to the user's locale. -->
+    <string-array name="date_format_values" translatable="false">
+        <!-- The blank item means to use whatever the locale calls for. -->
+        <item></item>
         <item>MM-dd-yyyy</item>
-        <!-- Do not translate.  This is fed directly to the formatter. -->
         <item>dd-MM-yyyy</item>
-        <!-- Do not translate.  This is fed directly to the formatter. -->
-        <item>MMM d, yyyy</item>
-        <!-- Do not translate.  This is fed directly to the formatter. -->
-        <item>d-MMM-yyyy</item>
-        <!-- Do not translate.  This is fed directly to the formatter. -->
         <item>yyyy-MM-dd</item>
     </string-array>
 
@@ -81,6 +75,61 @@
         <item>-1</item>
     </string-array>
 
+    <!-- TTS settings -->
+
+    <!-- Default speech rate choices -->
+    <string-array name="tts_rate_entries">
+        <item>Very slow</item>
+        <item>Slow</item>
+        <item>Normal</item>
+        <item>Fast</item>
+        <item>Very fast</item>
+    </string-array>
+    <!-- Do not translate. -->
+    <string-array name="tts_rate_values">
+        <item>60</item>
+        <item>80</item>
+        <item>100</item>
+        <item>150</item>
+        <item>200</item>
+    </string-array>
+
+    <!-- Default pitch choices -->
+    <string-array name="tts_pitch_entries">
+        <item>Very low</item>
+        <item>Low</item>
+        <item>Normal</item>
+        <item>High</item>
+        <item>Very high</item>
+    </string-array>
+    <!-- Do not translate. -->
+    <string-array name="tts_pitch_values">
+        <item>50</item>
+        <item>80</item>
+        <item>100</item>
+        <item>120</item>
+        <item>150</item>
+    </string-array>
+    
+    <!-- Default language choices -->
+    <string-array name="tts_lang_entries">
+        <item>American English</item>
+        <item>British English</item>
+        <item>French</item>
+        <item>German</item>
+        <item>Italian</item>
+        <item>Spanish</item>
+    </string-array>
+    <!-- Do not translate. -->
+    <string-array name="tts_lang_values">
+        <item>eng-USA</item>
+        <item>eng-GBR</item>
+        <item>fra-FRA</item>
+        <item>deu-DEU</item>
+        <item>ita-ITA</item>
+        <item>spa-ESP</item>
+    </string-array>
+
     <!-- Wi-Fi settings -->
 
     <!-- Match this with code. --> <skip />
@@ -93,9 +142,13 @@
         <!-- Do not translate. The Wi-Fi network has WEP security. -->
         <item>WEP</item>
         <!-- The Wi-Fi network has WPA personal security. WPA Personal is a tech term, and might be better left untranslated? -->
-        <item>WPA Personal</item>
+        <item>WPA personal</item>
         <!-- The Wi-Fi network has WPA2 personal security. WPA Personal is a tech term, and might be better left untranslated? -->
-        <item>WPA2 Personal</item>
+        <item>WPA2 personal</item>
+        <!-- The Wi-Fi network has WPA EAP extensible authentication protocol. -->
+        <item>WPA-EAP</item>
+        <!-- IEEE 802.1X key management -->
+        <item>IEEE 802.1x</item>
     </string-array>
 
     <!-- Match this with code. --> <skip />
@@ -106,9 +159,14 @@
         <!-- Do not translate. The Wi-Fi network has WEP security. -->
         <item>WEP</item>
         <!-- The Wi-Fi network has WPA personal security. WPA Personal is a tech term, and might be better left untranslated? -->
-        <item>WPA Personal</item>
+        <item>WPA personal</item>
         <!-- The Wi-Fi network has WPA2 personal security. WPA Personal is a tech term, and might be better left untranslated? -->
-        <item>WPA2 Personal</item>
+        <item>WPA2 personal</item>
+        <!-- The Wi-Fi network has WPA enterprise security. WPA Enterprise is a tech term, and might be better left untranslated? -->
+        <!-- The Wi-Fi network has WPA EAP extensible authentication protocol. -->
+        <item>WPA-EAP</item>
+        <!-- IEEE 802.1X key management -->
+        <item>IEEE 802.1x</item>
     </string-array>
 
     <!-- Match this with code. --> <skip />
@@ -165,6 +223,36 @@
         <item>Usage Time</item>
         <item>Launch Count</item>
         <item>Application Name</item>
+    </string-array>
+
+    <!-- EAP method -->
+    <string-array name="wifi_eap_entries">
+        <item>PEAP</item>
+        <item>TLS</item>
+        <item>TTLS</item>
+    </string-array>
+
+    <!-- Phase 2 options -->
+    <string-array name="wifi_phase2_entries">
+        <item>None</item>
+        <item>PAP</item>
+        <item>MSCHAP</item>
+        <item>MSCHAP2</item>
+        <item>GTC</item>
+    </string-array>
+
+    <!-- Sound settings for emergency tone. -->
+    <string-array name="emergency_tone_entries">
+        <item>Off</item>
+        <item>Alert</item>
+        <item>Vibrate</item>
+    </string-array>
+
+    <!-- Do not translate. -->
+    <string-array name="emergency_tone_values">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
     </string-array>
 
 </resources>

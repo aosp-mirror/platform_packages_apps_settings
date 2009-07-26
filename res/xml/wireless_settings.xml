@@ -53,6 +53,16 @@
                 </PreferenceScreen>
 
                 <PreferenceScreen
+                    android:title="@string/vpn_settings_title"
+                    android:summary="@string/vpn_settings_summary"
+                    android:dependency="toggle_airplane">
+                    <intent
+                        android:action="android.intent.action.MAIN"
+                        android:targetPackage="com.android.settings"
+                        android:targetClass="com.android.settings.vpn.VpnSettings" />
+                </PreferenceScreen>
+
+                <PreferenceScreen
                     android:title="@string/network_settings_title"
                     android:summary="@string/network_settings_summary"
                     android:dependency="toggle_airplane">

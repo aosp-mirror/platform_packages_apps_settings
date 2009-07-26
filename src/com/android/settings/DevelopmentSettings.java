@@ -16,6 +16,8 @@
 
 package com.android.settings;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.os.BatteryManager;
 import android.os.Bundle;
 import android.os.SystemProperties;
@@ -29,7 +31,8 @@ import android.text.TextUtils;
 /*
  * Displays preferences for application developers.
  */
-public class DevelopmentSettings extends PreferenceActivity {
+public class DevelopmentSettings extends PreferenceActivity
+        implements DialogInterface.OnClickListener, DialogInterface.OnDismissListener {
 
     private static final String ENABLE_ADB = "enable_adb";
     private static final String KEEP_SCREEN_ON = "keep_screen_on";
@@ -38,6 +41,9 @@ public class DevelopmentSettings extends PreferenceActivity {
     private CheckBoxPreference mEnableAdb;
     private CheckBoxPreference mKeepScreenOn;
     private CheckBoxPreference mAllowMockLocation;
+
+    // To track whether Yes was clicked in the adb warning dialog
+    private boolean mOkClicked;
 
     @Override
     protected void onCreate(Bundle icicle) {
@@ -72,8 +78,19 @@ public class DevelopmentSettings extends PreferenceActivity {
         }
 
         if (preference == mEnableAdb) {
-            Settings.Secure.putInt(getContentResolver(), Settings.Secure.ADB_ENABLED, 
-                    mEnableAdb.isChecked() ? 1 : 0);
+            if (mEnableAdb.isChecked()) {
+                mOkClicked = false;
+                new AlertDialog.Builder(this).setMessage(
+                        getResources().getString(R.string.adb_warning_message))
+                        .setTitle(R.string.adb_warning_title)
+                        .setIcon(android.R.drawable.ic_dialog_alert)
+                        .setPositiveButton(android.R.string.yes, this)
+                        .setNegativeButton(android.R.string.no, this)
+                        .show()
+                        .setOnDismissListener(this);
+            } else {
+                Settings.Secure.putInt(getContentResolver(), Settings.Secure.ADB_ENABLED, 0);
+            }
         } else if (preference == mKeepScreenOn) {
             Settings.System.putInt(getContentResolver(), Settings.System.STAY_ON_WHILE_PLUGGED_IN, 
                     mKeepScreenOn.isChecked() ? 
@@ -84,5 +101,22 @@ public class DevelopmentSettings extends PreferenceActivity {
         }
         
         return false;
+    }
+
+    public void onClick(DialogInterface dialog, int which) {
+        if (which == DialogInterface.BUTTON_POSITIVE) {
+            mOkClicked = true;
+            Settings.Secure.putInt(getContentResolver(), Settings.Secure.ADB_ENABLED, 1);
+        } else {
+            // Reset the toggle
+            mEnableAdb.setChecked(false);
+        }
+    }
+
+    public void onDismiss(DialogInterface dialog) {
+        // Assuming that onClick gets called first
+        if (!mOkClicked) {
+            mEnableAdb.setChecked(false);
+        }
     }
 }

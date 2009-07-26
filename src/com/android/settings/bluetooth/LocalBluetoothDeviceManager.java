@@ -21,6 +21,7 @@ import android.util.Log;
 
 import com.android.settings.R;
 import com.android.settings.bluetooth.LocalBluetoothManager.Callback;
+import com.android.settings.bluetooth.LocalBluetoothProfileManager.Profile;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -181,19 +182,30 @@ public class LocalBluetoothDeviceManager {
      *            BluetoothDevice.UNBOND_REASON_*
      */
     public synchronized void onBondingError(String address, int reason) {
-        mLocalManager.showError(address, R.string.bluetooth_error_title,
-                (reason == BluetoothDevice.UNBOND_REASON_AUTH_FAILED) ?
-                        R.string.bluetooth_pairing_pin_error_message :
-                        R.string.bluetooth_pairing_error_message);
+        int errorMsg;
+
+        switch(reason) {
+        case BluetoothDevice.UNBOND_REASON_AUTH_FAILED:
+            errorMsg = R.string.bluetooth_pairing_pin_error_message;
+            break;
+        case BluetoothDevice.UNBOND_REASON_AUTH_REJECTED:
+            errorMsg = R.string.bluetooth_pairing_rejected_error_message;
+            break;
+        case BluetoothDevice.UNBOND_REASON_REMOTE_DEVICE_DOWN:
+            errorMsg = R.string.bluetooth_pairing_device_down_error_message;
+            break;
+        default:
+            errorMsg = R.string.bluetooth_pairing_error_message;
+        }
+        mLocalManager.showError(address, R.string.bluetooth_error_title, errorMsg);
     }
     
-    public synchronized void onProfileStateChanged(String address, boolean transientState) {
+    public synchronized void onProfileStateChanged(String address, Profile profile,
+            int newProfileState) {
         LocalBluetoothDevice device = findDevice(address);
         if (device == null) return;
-        
-        if (!transientState) {
-            device.onProfileStateChanged();
-        }
+
+        device.onProfileStateChanged(profile, newProfileState);
         device.refresh();
     }
     

@@ -94,7 +94,7 @@ public class RadioInfo extends Activity {
     private static final int MENU_ITEM_TOGGLE_DATA  = 5;
     private static final int MENU_ITEM_TOGGLE_DATA_ON_BOOT = 6;
 
-    private TextView mImei;
+    private TextView mDeviceId; //DeviceId is the IMEI in GSM and the MEID in CDMA
     private TextView number;
     private TextView callState;
     private TextView operatorName;
@@ -239,8 +239,7 @@ public class RadioInfo extends Activity {
                     if (ar.exception != null) {
                         smsc.setText("refresh error");
                     } else {
-                        byte[] buf = (byte[]) ar.result;
-                        smsc.setText(new String(buf));
+                        smsc.setText((String)ar.result);
                     }
                     break;
                 case EVENT_UPDATE_SMSC_DONE:
@@ -272,9 +271,6 @@ public class RadioInfo extends Activity {
         final int OEM_QXDM_SDLOG_LEN = 4;
         final int OEM_PS_AUTO_ATTACH_FUNCTAG = 0x00020000;
         final int OEM_CIPHERING_FUNCTAG = 0x00020001;
-        final int OEM_SMSC_UPDATE_FUNCTAG = 0x00020002;
-        final int OEM_SMSC_QUERY_FUNCTAG = 0x00020003;
-        final int OEM_SMSC_QUERY_LEN = 0;
         
         /**
          * The OEM interface to store QXDM to SD.
@@ -339,32 +335,6 @@ public class RadioInfo extends Activity {
             return bos.toByteArray();
         }
 
-        byte[] getSmscQueryData() {
-            ByteArrayOutputStream bos = new ByteArrayOutputStream();
-            DataOutputStream dos = new DataOutputStream(bos);
-            try {
-                writeIntLittleEndian(dos, OEM_SMSC_QUERY_FUNCTAG);
-                writeIntLittleEndian(dos, OEM_SMSC_QUERY_LEN * SIZE_OF_INT);
-            } catch (IOException e) {
-                return null;
-            }
-            return bos.toByteArray();
-        }
-
-        byte[] getSmscUpdateData(String smsc) {
-            ByteArrayOutputStream bos = new ByteArrayOutputStream();
-            DataOutputStream dos = new DataOutputStream(bos);
-            try {
-                byte[] smsc_bytes = smsc.getBytes();
-                writeIntLittleEndian(dos, OEM_SMSC_UPDATE_FUNCTAG);
-                writeIntLittleEndian(dos, smsc_bytes.length);
-                dos.write(smsc_bytes);
-            } catch (IOException e) {
-                return null;
-            }
-            return bos.toByteArray();
-        }
-
         byte[] getPsAutoAttachData(boolean enable) {
             return getSimpleFeatureData(OEM_PS_AUTO_ATTACH_FUNCTAG, enable);
         }
@@ -405,7 +375,7 @@ public class RadioInfo extends Activity {
         mTelephonyManager = (TelephonyManager)getSystemService(TELEPHONY_SERVICE);
         phone = PhoneFactory.getDefaultPhone();
 
-        mImei = (TextView) findViewById(R.id.imei);
+        mDeviceId= (TextView) findViewById(R.id.imei);
         number = (TextView) findViewById(R.id.number);
         callState = (TextView) findViewById(R.id.call);
         operatorName = (TextView) findViewById(R.id.operator);
@@ -518,7 +488,8 @@ public class RadioInfo extends Activity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        menu.add(0, MENU_ITEM_SELECT_BAND, 0, R.string.radio_info_band_mode_label).setOnMenuItemClickListener(mSelectBandCallback)
+        menu.add(0, MENU_ITEM_SELECT_BAND, 0, R.string.radio_info_band_mode_label)
+                .setOnMenuItemClickListener(mSelectBandCallback)
                 .setAlphabeticShortcut('b');
         menu.add(1, MENU_ITEM_VIEW_ADN, 0,
                 R.string.radioInfo_menu_viewADN).setOnMenuItemClickListener(mViewADNCallback);
@@ -531,14 +502,14 @@ public class RadioInfo extends Activity {
         menu.add(1, MENU_ITEM_TOGGLE_DATA,
                 0, R.string.radioInfo_menu_disableData).setOnMenuItemClickListener(mToggleData);
         menu.add(1, MENU_ITEM_TOGGLE_DATA_ON_BOOT,
-                0, R.string.radioInfo_menu_disableDataOnBoot).setOnMenuItemClickListener(mToggleDataOnBoot);
+                0, R.string.radioInfo_menu_disableDataOnBoot).setOnMenuItemClickListener(
+                mToggleDataOnBoot);
         return true;
     }
 
 
     @Override
-    public boolean onPrepareOptionsMenu(Menu menu)
-    {
+    public boolean onPrepareOptionsMenu(Menu menu) {
         // Get the TOGGLE DATA menu item in the right state.
         MenuItem item = menu.findItem(MENU_ITEM_TOGGLE_DATA);
         int state = mTelephonyManager.getDataState();
@@ -575,11 +546,10 @@ public class RadioInfo extends Activity {
     }
     
     private void updatePowerState() {
-    	//log("updatePowerState");
         String buttonText = isRadioOn() ?
                             getString(R.string.turn_off_radio) :
                             getString(R.string.turn_on_radio);
-        radioPowerButton.setText(buttonText);    	
+        radioPowerButton.setText(buttonText);
     }
 
     private void updateQxdmState(Boolean newQxdmStatus) {
@@ -619,24 +589,24 @@ public class RadioInfo extends Activity {
     }
 
     private void updateDnsCheckState() {
-        GSMPhone gsmPhone = (GSMPhone) phone;
-        dnsCheckState.setText(gsmPhone.isDnsCheckDisabled() ?
+        dnsCheckState.setText(phone.isDnsCheckDisabled() ?
                 "0.0.0.0 allowed" :"0.0.0.0 not allowed");
     }
-    
+
     private final void
     updateSignalStrength() {
-        int state =
-                mPhoneStateReceiver.getServiceState().getState();
+        // TODO PhoneStateIntentReceiver is deprecated and PhoneStateListener
+        // should probably used instead.
+        int state = mPhoneStateReceiver.getServiceState().getState();
         Resources r = getResources();
 
         if ((ServiceState.STATE_OUT_OF_SERVICE == state) ||
                 (ServiceState.STATE_POWER_OFF == state)) {
             dBm.setText("0");
         }
-        
+
         int signalDbm = mPhoneStateReceiver.getSignalStrengthDbm();
-        
+
         if (-1 == signalDbm) signalDbm = 0;
 
         int signalAsu = mPhoneStateReceiver.getSignalStrength();
@@ -650,11 +620,15 @@ public class RadioInfo extends Activity {
     }
 
     private final void updateLocation(CellLocation location) {
-        GsmCellLocation loc = (GsmCellLocation)location;
-        Resources r = getResources();
+        int lac = -1;
+        int cid = -1;
+        if (location instanceof GsmCellLocation) {
+            GsmCellLocation loc = (GsmCellLocation)location;
+            lac = loc.getLac();
+            cid = loc.getCid();
+        }
 
-        int lac = loc.getLac();
-        int cid = loc.getCid();
+        Resources r = getResources();
 
         mLocation.setText(r.getString(R.string.radioInfo_lac) + " = "
                           + ((lac == -1) ? "unknown" : Integer.toHexString(lac))
@@ -782,8 +756,9 @@ public class RadioInfo extends Activity {
 
         s = phone.getDeviceId();
         if (s == null) s = r.getString(R.string.radioInfo_unknown); 
-        mImei.setText(s);
+        mDeviceId.setText(s);
         
+
         s = phone.getLine1Number();
         if (s == null) s = r.getString(R.string.radioInfo_unknown); 
         number.setText(s);
@@ -889,10 +864,7 @@ public class RadioInfo extends Activity {
     }
 
     private void refreshSmsc() {
-        byte[] data = mOem.getSmscQueryData();
-        if (data == null) return;
-        phone.invokeOemRilRequestRaw(data,
-                mHandler.obtainMessage(EVENT_QUERY_SMSC_DONE));
+        phone.getSmscAddress(mHandler.obtainMessage(EVENT_QUERY_SMSC_DONE));
     }
 
     private final void updatePingState() {
@@ -1030,7 +1002,7 @@ public class RadioInfo extends Activity {
     private MenuItem.OnMenuItemClickListener mViewSDNCallback = new MenuItem.OnMenuItemClickListener() {
         public boolean onMenuItemClick(MenuItem item) {
             Intent intent = new Intent(
-                Intent.ACTION_VIEW, Uri.parse("content://sim/sdn"));
+                    Intent.ACTION_VIEW, Uri.parse("content://icc/sdn"));
             // XXX We need to specify the component here because if we don't
             // the activity manager will try to resolve the type by calling
             // the content provider, which causes it to be loaded in a process
@@ -1085,7 +1057,7 @@ public class RadioInfo extends Activity {
 
     private MenuItem.OnMenuItemClickListener mGetPdpList = new MenuItem.OnMenuItemClickListener() {
         public boolean onMenuItemClick(MenuItem item) {
-            phone.getPdpContextList(null);
+            phone.getDataCallList(null);
             return true;
         }
     };
@@ -1122,8 +1094,7 @@ public class RadioInfo extends Activity {
     
     OnClickListener mDnsCheckButtonHandler = new OnClickListener() {
         public void onClick(View v) {
-            GSMPhone gsmPhone = (GSMPhone) phone;
-            gsmPhone.disableDnsCheck(!gsmPhone.isDnsCheckDisabled());
+            phone.disableDnsCheck(!phone.isDnsCheckDisabled());
             updateDnsCheckState();
         }
     };
@@ -1137,9 +1108,7 @@ public class RadioInfo extends Activity {
     OnClickListener mUpdateSmscButtonHandler = new OnClickListener() {
         public void onClick(View v) {
             updateSmscButton.setEnabled(false);
-            byte[] data = mOem.getSmscUpdateData(smsc.getText().toString());
-            if (data == null) return;
-            phone.invokeOemRilRequestRaw(data,
+            phone.setSmscAddress(smsc.getText().toString(),
                     mHandler.obtainMessage(EVENT_UPDATE_SMSC_DONE));
         }
     };
@@ -1170,7 +1139,7 @@ public class RadioInfo extends Activity {
             mPreferredNetworkHandler = new AdapterView.OnItemSelectedListener() {
         public void onItemSelected(AdapterView parent, View v, int pos, long id) {
             Message msg = mHandler.obtainMessage(EVENT_SET_PREFERRED_TYPE_DONE);
-            if (pos>=0 && pos<=2) {
+            if (pos>=0 && pos<=7) { //IS THIS NEEDED to extend to the entire range of values
                 phone.setPreferredNetworkType(pos, msg);
             }
         }

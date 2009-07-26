@@ -17,11 +17,12 @@
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
 
     <PreferenceCategory
+        android:key="location_category"
         android:title="@string/location_title">
         
         <CheckBoxPreference 
             android:key="location_network" 
-            android:title="@string/location_network_based" 
+            android:title="@string/location_network_based"
             android:summaryOn="@string/location_neighborhood_level"
             android:summaryOff="@string/location_networks_disabled"/>
         
@@ -30,7 +31,13 @@
             android:title="@string/location_gps"
             android:summaryOn="@string/location_street_level"
             android:summaryOff="@string/location_gps_disabled"/>
-            
+
+        <CheckBoxPreference
+            android:key="use_location"
+            android:title="@string/use_location_title"
+            android:persistent="false"
+            android:summary="@string/use_location_summary"/>
+
     </PreferenceCategory>
             
 </PreferenceScreen>
