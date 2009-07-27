@@ -29,6 +29,7 @@ import android.preference.PreferenceGroup;
  */
 class L2tpIpsecPskEditor extends L2tpEditor {
     private EditTextPreference mPresharedKey;
+    private SecretHandler mPskHandler;
 
     public L2tpIpsecPskEditor(L2tpIpsecPskProfile p) {
         super(p);
@@ -45,27 +46,23 @@ class L2tpIpsecPskEditor extends L2tpEditor {
     public String validate() {
         String result = super.validate();
 
-        return ((result != null)
-                ? result
-                : validate(mPresharedKey, R.string.vpn_a_ipsec_presharedkey));
+        return ((result != null) ? result : mPskHandler.validate());
     }
 
     private Preference createPresharedKeyPreference(Context c) {
-        final L2tpIpsecPskProfile profile = (L2tpIpsecPskProfile) getProfile();
-        mPresharedKey = createSecretPreference(c,
+        SecretHandler pskHandler = mPskHandler = new SecretHandler(c,
                 R.string.vpn_ipsec_presharedkey_title,
-                R.string.vpn_ipsec_presharedkey,
-                profile.getPresharedKey(),
-                new Preference.OnPreferenceChangeListener() {
-                    public boolean onPreferenceChange(
-                            Preference pref, Object newValue) {
-                        profile.setPresharedKey((String) newValue);
-                        setSecretSummary(mPresharedKey,
-                                R.string.vpn_ipsec_presharedkey,
-                                (String) newValue);
-                        return true;
-                    }
-                });
-        return mPresharedKey;
+                R.string.vpn_ipsec_presharedkey) {
+            @Override
+            protected String getSecretFromProfile() {
+                return ((L2tpIpsecPskProfile) getProfile()).getPresharedKey();
+            }
+
+            @Override
+            protected void saveSecretToProfile(String secret) {
+                ((L2tpIpsecPskProfile) getProfile()).setPresharedKey(secret);
+            }
+        };
+        return pskHandler.getPreference();
     }
 }
