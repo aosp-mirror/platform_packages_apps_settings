@@ -69,6 +69,13 @@ public class AdvancedSettings extends PreferenceActivity
             Preference preference = findPreference(mPreferenceKeys[i]);
             preference.setOnPreferenceChangeListener(this);
         }
+
+        /*
+         * Fix the Run-time IllegalStateException that ListPreference requires an entries
+         * array and an entryValues array, this exception occurs when user open/close the
+         * slider in the Regulatory domain dialog.
+         */
+        initNumChannelsPreference();
     }
     
     @Override
