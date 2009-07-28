@@ -1300,7 +1300,7 @@ public class ManageApplications extends ListActivity implements
             for (int i = 0; i < pkgs.length; i++) {
                 AppInfo entry = mCache.getEntry(pkgs[i]);
                 if (entry == null) {
-                    Log.w(TAG, "Entry for package:"+ pkgs[i] +"doesn't exist in map");
+                    if (localLOGV) Log.w(TAG, "Entry for package:"+ pkgs[i] +"doesn't exist in map");
                     continue;
                 }
                 if (entry.setSize(sizes[i], formatted[i])) {
@@ -1318,7 +1318,7 @@ public class ManageApplications extends ListActivity implements
             }
             AppInfo entry = mCache.getEntry(pkgName);
             if (entry == null) {
-                Log.w(TAG, "Entry for package:"+pkgName+"doesnt exist in map");
+                if (localLOGV) Log.w(TAG, "Entry for package:"+pkgName+"doesnt exist in map");
                 return;
             }
             // Copy the index into the newly updated entry
