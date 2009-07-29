@@ -26,6 +26,7 @@ import android.net.vpn.IVpnService;
 import android.net.vpn.VpnManager;
 import android.net.vpn.VpnProfile;
 import android.net.vpn.VpnState;
+import android.os.ConditionVariable;
 import android.os.IBinder;
 import android.os.RemoteException;
 import android.text.TextUtils;
@@ -42,7 +43,6 @@ import java.io.IOException;
  */
 public class AuthenticationActor implements VpnProfileActor {
     private static final String TAG = AuthenticationActor.class.getName();
-    private static final int ONE_SECOND = 1000; // ms
 
     private Context mContext;
     private VpnProfile mProfile;
@@ -99,14 +99,18 @@ public class AuthenticationActor implements VpnProfileActor {
 
     //@Override
     public View createConnectView() {
-        return View.inflate(mContext, R.layout.vpn_connect_dialog_view, null);
-    }
+        View v = View.inflate(mContext, R.layout.vpn_connect_dialog_view, null);
+        TextView usernameView = (TextView) v.findViewById(R.id.username_value);
+        TextView passwordView = (TextView) v.findViewById(R.id.password_value);
+        CheckBox saveUsername = (CheckBox) v.findViewById(R.id.save_username);
 
-    //@Override
-    public void updateConnectView(Dialog d) {
         String username = mProfile.getSavedUsername();
-        if (username == null) username = "";
-        updateConnectView(d, username, "", !TextUtils.isEmpty(username));
+        if (!TextUtils.isEmpty(username)) {
+            usernameView.setText(username);
+            saveUsername.setChecked(true);
+            passwordView.requestFocus();
+        }
+        return v;
     }
 
     protected Context getContext() {
@@ -118,22 +122,20 @@ public class AuthenticationActor implements VpnProfileActor {
         ServiceConnection c = new ServiceConnection() {
             public void onServiceConnected(ComponentName className,
                     IBinder service) {
-                boolean success = false;
                 try {
-                    success = IVpnService.Stub.asInterface(service)
+                    boolean success = IVpnService.Stub.asInterface(service)
                             .connect(mProfile, username, password);
-                } catch (Throwable e) {
-                    Log.e(TAG, "connect()", e);
-                    checkStatus();
-                } finally {
-                    mContext.unbindService(this);
-
                     if (!success) {
                         Log.d(TAG, "~~~~~~ connect() failed!");
-                        broadcastConnectivity(VpnState.IDLE);
                     } else {
                         Log.d(TAG, "~~~~~~ connect() succeeded!");
                     }
+                } catch (Throwable e) {
+                    Log.e(TAG, "connect()", e);
+                    broadcastConnectivity(VpnState.IDLE,
+                            VpnManager.VPN_ERROR_CONNECTION_FAILED);
+                } finally {
+                    mContext.unbindService(this);
                 }
             }
 
@@ -141,7 +143,10 @@ public class AuthenticationActor implements VpnProfileActor {
                 checkStatus();
             }
         };
-        if (!bindService(c)) broadcastConnectivity(VpnState.IDLE);
+        if (!bindService(c)) {
+            broadcastConnectivity(VpnState.IDLE,
+                    VpnManager.VPN_ERROR_CONNECTION_FAILED);
+        }
     }
 
     //@Override
@@ -156,7 +161,6 @@ public class AuthenticationActor implements VpnProfileActor {
                     checkStatus();
                 } finally {
                     mContext.unbindService(this);
-                    broadcastConnectivity(VpnState.IDLE);
                 }
             }
 
@@ -164,58 +168,51 @@ public class AuthenticationActor implements VpnProfileActor {
                 checkStatus();
             }
         };
-        bindService(c);
+        if (!bindService(c)) {
+            checkStatus();
+        }
     }
 
     //@Override
     public void checkStatus() {
+        final ConditionVariable cv = new ConditionVariable();
+        cv.close();
         ServiceConnection c = new ServiceConnection() {
             public synchronized void onServiceConnected(ComponentName className,
                     IBinder service) {
+                cv.open();
                 try {
                     IVpnService.Stub.asInterface(service).checkStatus(mProfile);
-                } catch (Throwable e) {
+                } catch (RemoteException e) {
                     Log.e(TAG, "checkStatus()", e);
+                    broadcastConnectivity(VpnState.IDLE);
                 } finally {
-                    notify();
+                    mContext.unbindService(this);
                 }
             }
 
             public void onServiceDisconnected(ComponentName className) {
-                // do nothing
+                cv.open();
+                broadcastConnectivity(VpnState.IDLE);
+                mContext.unbindService(this);
             }
         };
         if (bindService(c)) {
             // wait for a second, let status propagate
-            wait(c, ONE_SECOND);
+            if (!cv.block(1000)) broadcastConnectivity(VpnState.IDLE);
         }
-        mContext.unbindService(c);
     }
 
     private boolean bindService(ServiceConnection c) {
         return mVpnManager.bindVpnService(c);
     }
 
-    private void updateConnectView(Dialog d, String username,
-            String password, boolean toSaveUsername) {
-        TextView usernameView = (TextView) d.findViewById(R.id.username_value);
-        TextView passwordView = (TextView) d.findViewById(R.id.password_value);
-        CheckBox saveUsername = (CheckBox) d.findViewById(R.id.save_username);
-        usernameView.setText(username);
-        passwordView.setText(password);
-        saveUsername.setChecked(toSaveUsername);
-    }
-
     private void broadcastConnectivity(VpnState s) {
         mVpnManager.broadcastConnectivity(mProfile.getName(), s);
     }
 
-    private void wait(Object o, int ms) {
-        synchronized (o) {
-            try {
-                o.wait(ms);
-            } catch (Exception e) {}
-        }
+    private void broadcastConnectivity(VpnState s, int errorCode) {
+        mVpnManager.broadcastConnectivity(mProfile.getName(), s, errorCode);
     }
 
     private void setSavedUsername(String name) throws IOException {

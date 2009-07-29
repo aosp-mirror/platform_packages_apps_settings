@@ -17,6 +17,8 @@ public class CreateShortcut extends LauncherActivity {
         Intent shortcutIntent = intentForPosition(position);
         shortcutIntent.setFlags(Intent.FLAG_ACTIVITY_RESET_TASK_IF_NEEDED);
         Intent intent = new Intent();
+        intent.putExtra(Intent.EXTRA_SHORTCUT_ICON_RESOURCE,
+                Intent.ShortcutIconResource.fromContext(this, R.drawable.ic_launcher_settings));
         intent.putExtra(Intent.EXTRA_SHORTCUT_INTENT, shortcutIntent);
         intent.putExtra(Intent.EXTRA_SHORTCUT_NAME, itemForPosition(position).label);
         setResult(RESULT_OK, intent);

@@ -890,13 +890,6 @@
     <!-- Sound & display settings screen, setting option summary to change screen timeout -->
     <string name="screen_timeout_summary">Adjust the delay before the screen automatically turns off</string>
 
-    <!-- Sound & display settings screen, compatibility mode check box label -->
-    <string name="compatibility_mode_title">Compatibility Mode</string>
-    <!-- Sound & display settings screen, compatibility mode option summary text when check box is selected -->
-    <string name="compatibility_mode_summary_on">Run older apps in Compatibility mode. This require rebooting. </string>
-    <!-- Sound & display settings screen, compatibility mode option summary text when check box is clear -->
-    <string name="compatibility_mode_summary_off">Run older apps in Compatibility mode. This require rebooting. </string>
-
     <!-- SIM lock settings title -->
     <string name="sim_lock_settings">SIM card lock settings</string>
     <!-- Security & location settings screen, setting option name -->
@@ -1093,7 +1086,7 @@
     <!-- SD card & phone storage settings screen, setting option summary text under Internal phone storage heading -->
     <string name="master_clear_summary">Erases all data on phone</string>
     <!-- SD card & phone storage settings screen, message on screen after user selects Factory data reset -->
-    <string name="master_clear_desc">Factory data reset erases all of your personal information from the phone, including details about your Google account and any other accounts, system and application data and preferences, and any applications that you have downloaded. It does not change the version of the system software and bundled applications. It does not erase any photos, music, or other information stored on an SD card.</string>
+    <string name="master_clear_desc">"This will erase all data from your phone, including:\n<li>Your Google account</li>\n<li>System and application data and settings</li>\n<li>Downloaded applications</li>\nIt will not erase:\n<li>Current system software and bundled applications</li>\n<li>SD card files, such as music or photos</li>"</string>
     <!-- SD card & phone storage settings screen, button on screen after user selects Factory data reset -->
     <string name="master_clear_button_text">Reset phone</string>
     <!-- SD card & phone storage settings screen, message on screen after user selects Reset phone button -->
@@ -1658,6 +1651,8 @@ found in the list of installed applications.</string>
     <string name="battery_since_reset">Battery use since reset</string>
     <!-- Battery usage duration -->
     <string name="battery_stats_duration"><xliff:g id="time">%1$s</xliff:g> since unplugged</string>
+    <!-- Battery usage during last unplugged period -->
+    <string name="battery_stats_last_duration">@string/menu_stats_last_unplugged</string>
     <!-- CPU awake time title -->
     <string name="awake">Device awake time</string>
     <!-- Wifi on time -->
@@ -1707,7 +1702,9 @@ found in the list of installed applications.</string>
     <!-- Label for Video usage time -->
     <string name="usage_type_video">Video</string>
     <!-- Label for time that a feature has been on -->
-    <string name="usage_type_on_time">On time</string>
+    <string name="usage_type_on_time">Time on</string>
+    <!-- Label for time that there was no cell coverage -->
+    <string name="usage_type_no_coverage">Time without a signal</string>
     <!-- Label for force stop action -->
     <string name="battery_action_stop">Force stop</string>
     <!-- Label for app details action -->
@@ -1754,7 +1751,7 @@ found in the list of installed applications.</string>
     <!-- Suggestion for exploring application info to stop or uninstall -->
     <string name="battery_sugg_apps_info">Stop or uninstall the application</string>
     <!-- Suggestion for getting apps to consume less power due to GPS-->
-    <string name="battery_sugg_apps_gps">Turn off GPS when you're not using it</string>
+    <string name="battery_sugg_apps_gps">"Turn off GPS when you're not using it"</string>
     <!-- Suggestion for getting apps to consume less power -->
     <string name="battery_sugg_apps_settings">The application may offer settings to reduce battery use</string>
 
@@ -1850,6 +1847,8 @@ found in the list of installed applications.</string>
     <string name="vpn_confirm_add_profile_cancellation">Are you sure you don\'t want to create this profile?</string>
     <string name="vpn_confirm_edit_profile_cancellation">Are you sure you want to discard the changes made to this profile?</string>
     <string name="vpn_confirm_reconnect">Unable to connect to the network. Do you want to try again?</string>
+    <string name="vpn_unknown_server_dialog_msg">Server name cannot be resolved. Do you want to check your server name setting?</string>
+    <string name="vpn_auth_error_dialog_msg">The username or password you entered is incorrect. Do you want to try again?</string>
 
     <!-- VPN type selection activity title -->
     <string name="vpn_type_title">Add VPN</string>
@@ -1869,8 +1868,6 @@ found in the list of installed applications.</string>
     <string name="vpn_connected">Connected</string>
     <!-- Preference summary text when VPN is not connected -->
     <string name="vpn_connect_hint">Connect to network</string>
-
-    <string name="vpn_default_profile_name">nowhere</string>
 
     <!-- Name of a VPN profile -->
     <string name="vpn_name">VPN name</string>
@@ -1968,6 +1965,8 @@ found in the list of installed applications.</string>
     <!-- Description for the credential name input box -->
     <string name="cstor_credential_name">Certificate name:</string>
     <!-- Title of the credential info -->
+    <!-- Description for the credential password input box -->
+    <string name="cstor_credential_password">Password to extract the certificate:</string>
     <string name="cstor_credential_info">Certificate details:</string>
     <string name="cstor_name_credential_hint">The name can contain only letters and numbers.</string>
 
@@ -1991,12 +1990,12 @@ found in the list of installed applications.</string>
     <string name="cstor_password_verification_error">Please enter the password again. The password must have at least 8 characters and must not contain spaces.</string>
     <string name="cstor_name_empty_error">Please enter a name.</string>
     <string name="cstor_name_char_error">Please enter a name that contains only letters and numbers.</string>
+    <string name="cstor_storage_error">Unable to save the certificate. Click OK to retry.</string>
 
     <!-- toast message -->
     <string name="cstor_is_enabled">Credential storage is enabled.</string>
     <!-- toast message -->
     <string name="cstor_is_added">%s is added.</string>
-    <string name="cstor_add_error">Failed to add %s.</string>
 
     <!-- Sound settings screen, setting check box label -->
     <string name="emergency_tone_title">Emergency tone</string>

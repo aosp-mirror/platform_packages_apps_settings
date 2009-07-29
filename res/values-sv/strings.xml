@@ -1,0 +1,1146 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Copyright (C) 2009 The Android Open Source Project
+
+     Licensed under the Apache License, Version 2.0 (the "License");
+     you may not use this file except in compliance with the License.
+     You may obtain a copy of the License at
+
+          http://www.apache.org/licenses/LICENSE-2.0
+
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+-->
+<resources xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <string name="device_info_default">"Okänd"</string>
+    <string name="turn_on_radio">"Sätt på radio"</string>
+    <string name="turn_off_radio">"Stäng av radio"</string>
+    <string name="turn_on_qxdm">"Aktivera QXDM SD-logg"</string>
+    <string name="turn_off_qxdm">"Inaktivera QXDM SD-logg"</string>
+    <string name="radioInfo_menu_viewADN">"Visa SIM-adressbok"</string>
+    <string name="radioInfo_menu_viewFDN">"Visa Fasta nummer"</string>
+    <string name="radioInfo_menu_viewSDN">"Visa tjänstenummer"</string>
+    <string name="radioInfo_menu_getPDP">"Hämta PDP-lista"</string>
+    <string name="radioInfo_menu_enableData">"Aktivera dataanslutning"</string>
+    <string name="radioInfo_menu_disableData">"Inaktivera dataanslutning"</string>
+    <string name="radioInfo_menu_enableDataOnBoot">"Aktivera data vid start"</string>
+    <string name="radioInfo_menu_disableDataOnBoot">"Inaktivera data vid start"</string>
+    <string name="radioInfo_service_in">"I tjänst"</string>
+    <string name="radioInfo_service_out">"Ur funktion"</string>
+    <string name="radioInfo_service_emergency">"Endast nödsamtal"</string>
+    <string name="radioInfo_service_off">"Radio av"</string>
+    <string name="radioInfo_roaming_in">"Roaming"</string>
+    <string name="radioInfo_roaming_not">"Ingen roaming"</string>
+    <string name="radioInfo_phone_idle">"Inaktiv"</string>
+    <string name="radioInfo_phone_ringing">"Ringer"</string>
+    <string name="radioInfo_phone_offhook">"Samtal pågår"</string>
+    <string name="radioInfo_data_disconnected">"Frånkopplad"</string>
+    <string name="radioInfo_data_connecting">"Ansluter"</string>
+    <string name="radioInfo_data_connected">"Ansluten"</string>
+    <string name="radioInfo_data_suspended">"Pausad"</string>
+    <string name="radioInfo_unknown">"okänd"</string>
+    <string name="radioInfo_display_packets">"paket"</string>
+    <string name="radioInfo_display_bytes">"bytes"</string>
+    <string name="radioInfo_display_dbm">"dBm"</string>
+    <string name="radioInfo_display_asu">"asu"</string>
+    <string name="radioInfo_lac">"LAC"</string>
+    <string name="radioInfo_cid">"CID"</string>
+    <string name="sdcard_unmount">"Montera bort SD-kort"</string>
+    <string name="sdcard_format">"Formatera SD-kort"</string>
+    <string name="small_font">"Liten"</string>
+    <string name="medium_font">"Medium"</string>
+    <string name="large_font">"Stor"</string>
+    <string name="font_size_save">"OK"</string>
+    <string name="sdcard_setting">"SD-kort"</string>
+    <string name="battery_info_status_label">"Batteristatus"</string>
+    <string name="battery_info_scale_label">"Batteriskala:"</string>
+    <string name="battery_info_level_label">"Batterinivå:"</string>
+    <string name="battery_info_health_label">"Batteriets tillstånd:"</string>
+    <string name="battery_info_technology_label">"Batteriteknik:"</string>
+    <string name="battery_info_voltage_label">"Batterispänning:"</string>
+    <string name="battery_info_voltage_units">"mV"</string>
+    <string name="battery_info_temperature_label">"Batteritemperatur:"</string>
+    <string name="battery_info_temperature_units">"° C"</string>
+    <string name="battery_info_uptime">"Tid sedan start:"</string>
+    <string name="battery_info_awake_battery">"Aktiveringstid för batteri:"</string>
+    <string name="battery_info_awake_plugged">"Aktiveringstid vid laddning:"</string>
+    <string name="battery_info_screen_on">"Skärmens PÅ-tid:"</string>
+    <string name="battery_info_status_unknown">"Okänd"</string>
+    <string name="battery_info_status_charging">"Laddar"</string>
+    <string name="battery_info_status_charging_ac">"(AC)"</string>
+    <string name="battery_info_status_charging_usb">"(USB)"</string>
+    <string name="battery_info_status_discharging">"Laddar ur"</string>
+    <string name="battery_info_status_not_charging">"Laddar inte"</string>
+    <string name="battery_info_status_full">"Fullt"</string>
+    <string name="battery_info_health_unknown">"Okänd"</string>
+    <string name="battery_info_health_good">"Bra"</string>
+    <string name="battery_info_health_overheat">"Överhettning"</string>
+    <string name="battery_info_health_dead">"Slut"</string>
+    <string name="battery_info_health_over_voltage">"Överspänning"</string>
+    <string name="battery_info_health_unspecified_failure">"Okänt fel"</string>
+    <string name="bluetooth">"Bluetooth"</string>
+    <string name="bluetooth_visibility">"Synlighet"</string>
+    <string name="bluetooth_is_discoverable">"Synlig i <xliff:g id="DISCOVERABLE_TIME_PERIOD">%1$s</xliff:g> sekunder..."</string>
+    <string name="bluetooth_not_discoverable">"Gör enheten synlig"</string>
+    <string name="bluetooth_devices">"Bluetooth-enheter"</string>
+    <string name="bluetooth_device_name">"Enhetens namn"</string>
+    <string name="bluetooth_name_not_set">"Inget namn har angetts, använder kontonamn"</string>
+    <string name="bluetooth_scan_for_devices">"Sök efter enheter"</string>
+    <string name="bluetooth_disconnect_blank">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> kopplas ifrån."</string>
+    <string name="bluetooth_connected">"Ansluten"</string>
+    <string name="bluetooth_disconnected">"Kopplas ifrån"</string>
+    <string name="bluetooth_disconnecting">"Kopplar ifrån…"</string>
+    <string name="bluetooth_connecting">"Ansluter…"</string>
+    <!-- no translation found for bluetooth_unknown (644716244548801421) -->
+    <skip />
+    <string name="bluetooth_not_connected">"Parkoppla med den här enheten"</string>
+    <string name="bluetooth_pairing">"Parkoppling…"</string>
+    <string name="bluetooth_paired">"Parkopplad men inte ansluten"</string>
+    <string name="bluetooth_device">"handsfree/headset"</string>
+    <string name="progress_scanning">"Skannar"</string>
+    <string name="bluetooth_notif_ticker">"Begäran om parkoppling för Bluetooth"</string>
+    <string name="bluetooth_notif_title">"Begäran om parkoppling"</string>
+    <string name="bluetooth_notif_message">"Välj att parkoppla med "</string>
+    <string name="date_and_time">"Inställningar för datum och tid"</string>
+    <string name="date_time_12_hour_sample">"Kl. 13:00"</string>
+    <string name="date_time_24_hour_sample">"13:00"</string>
+    <string name="date_time_changeTime_text">"Byt tid"</string>
+    <string name="date_time_changeDate_text">"Datum"</string>
+    <string name="choose_timezone">"Välj tidszon"</string>
+    <!-- no translation found for normal_date_format (1982904221918374153) -->
+    <skip />
+    <string name="display_preview_label">"Förhandsgranska:"</string>
+    <string name="display_font_size_label">"Teckenstorlek:"</string>
+    <!-- no translation found for intent_sender_data_label (6332324780477289261) -->
+    <skip />
+    <string name="intent_sender_sendbroadcast_text">"Skicka <xliff:g id="BROADCAST">broadcast</xliff:g>"</string>
+    <string name="intent_sender_action_label">"<xliff:g id="ACTION">Action</xliff:g>:"</string>
+    <string name="intent_sender_startactivity_text">"Starta <xliff:g id="ACTIVITY">activity</xliff:g>"</string>
+    <string name="intent_sender_resource_label">"<xliff:g id="RESOURCE">Resource</xliff:g>:"</string>
+    <string name="intent_sender_account_label">"Konto:"</string>
+    <string name="proxy_clear_text">"Rensa"</string>
+    <string name="proxy_port_label">"Port"</string>
+    <string name="proxy_defaultView_text">"Återställ standardinställningar"</string>
+    <string name="proxy_action_text">"Spara"</string>
+    <string name="proxy_hostname_label">"Värdnamn"</string>
+    <string name="proxy_error">"Obs!"</string>
+    <string name="proxy_error_dismiss">"OK"</string>
+    <string name="proxy_error_invalid_host">"Värdnamnet som du har angett är inte giltigt."</string>
+    <string name="proxy_error_empty_port">"Du måste fylla i portfältet."</string>
+    <string name="proxy_error_empty_host_set_port">"Portfältet måste vara tomt om värdfältet är tomt."</string>
+    <string name="proxy_error_invalid_port">"Porten som du har angett är inte giltig."</string>
+    <string name="radio_info_signal_location_label">"Plats:"</string>
+    <string name="radio_info_neighboring_location_label">"Närliggande CID:"</string>
+    <string name="radio_info_data_attempts_label">"Dataförsök:"</string>
+    <string name="radio_info_gprs_service_label">"GPRS-tjänst:"</string>
+    <string name="radio_info_roaming_label">"Roaming:"</string>
+    <string name="radio_info_imei_label">"IMEI-kod:"</string>
+    <string name="radio_info_call_redirect_label">"Omdirigering av samtal:"</string>
+    <string name="radio_info_ppp_resets_label">"Antal PPP-återställningar sedan start:"</string>
+    <string name="radio_info_gsm_disconnects_label">"GSM kopplas från:"</string>
+    <string name="radio_info_current_network_label">"Aktuellt nätverk:"</string>
+    <string name="radio_info_data_successes_label">"Felfria data:"</string>
+    <string name="radio_info_ppp_received_label">"Mottagen PPP:"</string>
+    <string name="radio_info_gsm_service_label">"GSM-tjänst:"</string>
+    <string name="radio_info_signal_strength_label">"Signalstyrka"</string>
+    <string name="radio_info_call_status_label">"Samtalsstatus"</string>
+    <string name="radio_info_ppp_sent_label">"Skickad PPP:"</string>
+    <string name="radio_info_radio_resets_label">"Radioåterställningar:"</string>
+    <string name="radio_info_message_waiting_label">"Meddelande väntar:"</string>
+    <string name="radio_info_phone_number_label">"Telefonnummer:"</string>
+    <string name="radio_info_band_mode_label">"Välja radioband"</string>
+    <string name="radio_info_network_type_label">"Nätverkstyp"</string>
+    <string name="radio_info_set_perferred_label">"Ställ in önskad nätverkstyp:"</string>
+    <string name="radio_info_ping_ipaddr">"Ping IpAdr:"</string>
+    <string name="radio_info_ping_hostname">"Pinga värdnamn (www.google.com):"</string>
+    <string name="radio_info_http_client_test">"Test av HTTP-klient:"</string>
+    <string name="radio_info_toggle_ciph_label">"Växla kryptering"</string>
+    <string name="ping_test_label">"Köra pingtest"</string>
+    <string name="radio_info_smsc_label">"SMSC:"</string>
+    <string name="radio_info_smsc_update_label">"Uppdatera"</string>
+    <string name="radio_info_smsc_refresh_label">"Uppdatera"</string>
+    <string name="radio_info_toggle_dns_check_label">"Växla mellan DNS-kontroll"</string>
+    <string name="band_mode_title">"Ställ in GSM/UMTS-band"</string>
+    <string name="band_mode_loading">"Läser in bandlista…"</string>
+    <string name="band_mode_set">"Ställ in"</string>
+    <string name="band_mode_failed">"Misslyckades"</string>
+    <string name="band_mode_succeeded">"Lyckades"</string>
+    <string name="sdcard_changes_instructions">"Ändringarna börjar gälla när USB-kabeln har anslutits igen"</string>
+    <string name="sdcard_settings_screen_mass_storage_text">"Aktivera USB-masslagring"</string>
+    <string name="sdcard_settings_total_bytes_label">"Totalt antal bytes:"</string>
+    <string name="sdcard_settings_not_present_status">"Inget SD-kort"</string>
+    <string name="sdcard_settings_available_bytes_label">"Tillgängliga bytes:"</string>
+    <string name="sdcard_settings_mass_storage_status">"SD-kort används som enhet för masslagring"</string>
+    <string name="sdcard_settings_unmounted_status">"Det är nu säkert att ta bort SD-kortet"</string>
+    <string name="sdcard_settings_bad_removal_status">"SD-kortet togs bort medan det användes!"</string>
+    <string name="sdcard_settings_used_bytes_label">"Bytes som har använts:"</string>
+    <string name="sdcard_settings_scanning_status">"Skannar SD-kort för media…"</string>
+    <string name="sdcard_settings_read_only_status">"SD-kortet har monterats som skrivskyddat"</string>
+    <string name="next_label">"Nästa"</string>
+    <string name="language_picker_title">"Språkkod"</string>
+    <string name="select_your_language">"Välj språk"</string>
+    <string name="activity_picker_label">"Välj aktivitet"</string>
+    <string name="device_info_label">"Enhetsinfo"</string>
+    <string name="battery_info_label">"Batteriinformation"</string>
+    <string name="battery_history_label">"Batterihistorik"</string>
+    <string name="display_label">"Skärm"</string>
+    <string name="phone_info_label">"Telefoninformation"</string>
+    <string name="sd_card_settings_label">"SD-kort"</string>
+    <string name="proxy_settings_label">"Proxy-inställningar"</string>
+    <string name="cancel">"Avbryt"</string>
+    <string name="settings_label">"Inställningar"</string>
+    <!-- no translation found for settings_shortcut (3672145147925639262) -->
+    <skip />
+    <string name="airplane_mode">"Flygplansläge"</string>
+    <string name="airplane_mode_summary">"Inaktivera alla trådlösa anslutningar"</string>
+    <string name="airplane_mode_turning_on">"Inaktiverar trådlösa anslutningar…"</string>
+    <string name="airplane_mode_turning_off">"Aktivera trådlösa anslutningar..."</string>
+    <string name="radio_controls_title">"Trådlösa styrenheter"</string>
+    <!-- no translation found for radio_controls_summary (2998818677094465517) -->
+    <skip />
+    <!-- no translation found for roaming (3596055926335478572) -->
+    <skip />
+    <!-- no translation found for roaming_enable (3737380951525303961) -->
+    <skip />
+    <!-- no translation found for roaming_disable (1295279574370898378) -->
+    <skip />
+    <!-- no translation found for roaming_reenable_message (9141007271031717369) -->
+    <skip />
+    <!-- no translation found for roaming_turn_it_on_button (4387601818162120589) -->
+    <skip />
+    <!-- no translation found for roaming_warning (1269870211689178511) -->
+    <skip />
+    <!-- no translation found for roaming_reenable_title (7626425894611573131) -->
+    <skip />
+    <!-- no translation found for networks (6333316876545927039) -->
+    <skip />
+    <!-- no translation found for sum_carrier_select (6648929373316748020) -->
+    <skip />
+    <string name="date_and_time_settings_title">"Datum och tid"</string>
+    <string name="date_and_time_settings_summary">"Ange datum, tidszon och format"</string>
+    <string name="date_time_auto">"Automatiskt"</string>
+    <string name="date_time_auto_summaryOn">"Använd värden som tillhandahålls av nätverket"</string>
+    <string name="date_time_auto_summaryOff">"Använd värden som tillhandahålls av nätverket"</string>
+    <string name="date_time_24hour">"Använd 24-timmarsformat"</string>
+    <string name="date_time_set_time">"Ange tid"</string>
+    <string name="date_time_set_timezone">"Välja tidszon"</string>
+    <string name="date_time_set_date">"Ange datum"</string>
+    <string name="date_time_date_format">"Välj datumformat"</string>
+    <string name="zone_list_menu_sort_alphabetically">"Sortera i bokstavsordning"</string>
+    <string name="zone_list_menu_sort_by_timezone">"Sortera efter tidszon"</string>
+    <string name="security_settings_title">"Säkerhet och plats"</string>
+    <!-- no translation found for security_settings_summary (967393342537986570) -->
+    <skip />
+    <string name="security_passwords_title">"Lösenord"</string>
+    <string name="bluetooth_quick_toggle_title">"Bluetooth"</string>
+    <string name="bluetooth_quick_toggle_summary">"Aktivera Bluetooth"</string>
+    <string name="bluetooth_settings">"Bluetooth-inställningar"</string>
+    <string name="bluetooth_settings_title">"Bluetooth-inställningar"</string>
+    <string name="bluetooth_settings_summary">"Hantera anslutningar, ange inställningar för enhetens namn och synlighet"</string>
+    <string name="bluetooth_pin_entry">"Begäran om Bluetooth-parkoppling"</string>
+    <string name="bluetooth_device_info">"Information om Bluetooth-enhet"</string>
+    <string name="bluetooth_enter_pin_msg">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g>"\n\n" Ange PIN-kod för parkoppling."\n" (Försök med 0000 eller 1234.)"</string>
+    <string name="bluetooth_error_title">"Obs!"</string>
+    <string name="bluetooth_pairing_error_message">"Ett problem inträffade när <xliff:g id="DEVICE_NAME">%1$s</xliff:g> parkopplades."</string>
+    <string name="bluetooth_pairing_pin_error_message">"Det gick inte att parkoppla <xliff:g id="DEVICE_NAME">%1$s</xliff:g> eftersom den angivna PIN-koden är fel."</string>
+    <!-- no translation found for bluetooth_pairing_device_down_error_message (6688215193824686741) -->
+    <skip />
+    <!-- no translation found for bluetooth_pairing_rejected_error_message (1648157108520832454) -->
+    <skip />
+    <string name="bluetooth_connecting_error_message">"Det gick inte att ansluta till <xliff:g id="DEVICE_NAME">%1$s</xliff:g>."</string>
+    <string name="bluetooth_preference_scan_title">"Sök efter enheter"</string>
+    <string name="bluetooth_device_context_connect">"Anslut"</string>
+    <string name="bluetooth_device_context_disconnect">"Koppla ifrån"</string>
+    <string name="bluetooth_device_context_pair_connect">"Parkoppla och anslut"</string>
+    <string name="bluetooth_device_context_unpair">"Ta bort parkoppling"</string>
+    <string name="bluetooth_device_context_disconnect_unpair">"Koppla ifrån och ta bort parkoppling"</string>
+    <string name="bluetooth_device_context_connect_advanced">"Alternativ..."</string>
+    <string name="bluetooth_connect_specific_profiles_title">"Anslut till…"</string>
+    <string name="bluetooth_profile_a2dp">"Media"</string>
+    <string name="bluetooth_profile_headset">"Telefon"</string>
+    <string name="bluetooth_summary_connected_to_a2dp">"Ansluten till medialjud"</string>
+    <string name="bluetooth_summary_connected_to_headset">"Ansluten till telefonens ljud"</string>
+    <string name="bluetooth_summary_connected_to_a2dp_headset">"Ansluten till telefon- och medialjud"</string>
+    <string name="bluetooth_device_advanced_title">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> alternativ"</string>
+    <string name="bluetooth_device_advanced_online_mode_title">"Anslut"</string>
+    <string name="bluetooth_device_advanced_online_mode_summary">"Anslut till Bluetooth-enhet"</string>
+    <string name="bluetooth_device_advanced_profile_header_title">"Profiler"</string>
+    <string name="bluetooth_a2dp_profile_summary_connected">"Ansluten till medialjud"</string>
+    <string name="bluetooth_headset_profile_summary_connected">"Ansluten till telefonens ljud"</string>
+    <string name="bluetooth_a2dp_profile_summary_use_for">"Använd för medialjud"</string>
+    <string name="bluetooth_headset_profile_summary_use_for">"Använd för telefonens ljud"</string>
+    <string name="wifi">"Wi-Fi"</string>
+    <string name="wifi_quick_toggle_title">"Wi-Fi"</string>
+    <string name="wifi_quick_toggle_summary">"Aktivera Wi-Fi"</string>
+    <string name="wifi_settings">"Wi-Fi-inställningar"</string>
+    <string name="wifi_settings_category">"Wi-Fi-inställningar"</string>
+    <string name="wifi_settings_summary">"Ställ in och hantera trådlösa åtkomstpunkter"</string>
+    <string name="forget_network">"Glöm"</string>
+    <string name="wifi_status">"Status"</string>
+    <string name="wifi_link_speed">"Hastighet"</string>
+    <string name="wifi_signal_3">"Utmärkt"</string>
+    <string name="wifi_signal_2">"Bra"</string>
+    <string name="wifi_signal_1">"Medel"</string>
+    <string name="wifi_signal_0">"Dåligt"</string>
+    <string name="security">"Säkerhet"</string>
+    <string name="wifi_security_open">"Öppna"</string>
+    <string name="wifi_security_wep">"WEP"</string>
+    <string name="wifi_security_wpa">"WPA"</string>
+    <string name="wifi_security_wpa2">"WPA2"</string>
+    <!-- no translation found for wifi_security_wpa_eap (7485687331651751101) -->
+    <skip />
+    <!-- no translation found for wifi_security_ieee8021x (8538687609878109005) -->
+    <skip />
+    <string name="wifi_security_unknown">"Okänd"</string>
+    <!-- no translation found for wifi_security_verbose_open (8117878112088901945) -->
+    <skip />
+    <!-- no translation found for wifi_security_verbose_wep (9220757688700421508) -->
+    <skip />
+    <!-- no translation found for wifi_security_verbose_wpa (598697674252714455) -->
+    <skip />
+    <!-- no translation found for wifi_security_verbose_wpa2 (4116236883347875722) -->
+    <skip />
+    <!-- no translation found for wifi_security_verbose_wpa_eap (1984821646949066624) -->
+    <skip />
+    <!-- no translation found for wifi_security_verbose_ieee8021x (5552995793910186310) -->
+    <skip />
+    <string name="ip_address">"IP-adress"</string>
+    <string name="signal">"Signalstyrka"</string>
+    <string name="wifi_starting">"Aktiverar…"</string>
+    <string name="wifi_stopping">"Stänger av…"</string>
+    <string name="wifi_error">"Fel"</string>
+    <string name="error_starting">"Det gick inte att starta Wi-Fi"</string>
+    <string name="error_stopping">"Det gick inte att stoppa Wi-Fi"</string>
+    <string name="error_scanning">"Det går inte att söka efter nätverk"</string>
+    <string name="error_connecting">"Det gick inte att ansluta till nätverket"</string>
+    <string name="error_saving">"Det gick inte att spara nätverket"</string>
+    <string name="connect">"Anslut"</string>
+    <string name="connect_to_blank">"Anslut till <xliff:g id="NETWORK_NAME">%1$s</xliff:g>"</string>
+    <!-- no translation found for please_select_eap (4488240331626456338) -->
+    <skip />
+    <!-- no translation found for please_select_phase2 (5231074529772044898) -->
+    <skip />
+    <!-- no translation found for please_type_identity (7061261155499513089) -->
+    <skip />
+    <!-- no translation found for please_type_anonymous_identity (835061562079965048) -->
+    <skip />
+    <!-- no translation found for please_select_client_certificate (2137906961594663234) -->
+    <skip />
+    <!-- no translation found for please_select_ca_certificate (5010815181914420677) -->
+    <skip />
+    <!-- no translation found for please_type_private_key_passwd (4077744679722504443) -->
+    <skip />
+    <string name="please_type_passphrase">"Lösenord för trådlöst"</string>
+    <string name="please_type_hex_key">"WEP-hextangent (0-9, A-F)"</string>
+    <string name="wifi_show_password">"Visa lösenord."</string>
+    <string name="scan_wifi">"Skanna"</string>
+    <string name="summary_not_in_range">"Inte i intervall"</string>
+    <!-- no translation found for summary_remembered (6079941090549401742) -->
+    <skip />
+    <string name="summary_connection_failed">"Det gick inte att ansluta. Välj om du vill försöka igen."</string>
+    <string name="wifi_access_points">"Wi-Fi-nätverk"</string>
+    <string name="wifi_type_ssid">"Nätverks-SSID"</string>
+    <string name="wifi_security">"Säkerhet"</string>
+    <string name="wifi_save_config">"Spara"</string>
+    <string name="wifi_password_unchanged">"(oförändrat)"</string>
+    <string name="wifi_add_other_network">"Lägg till Wi-Fi-nätverk"</string>
+    <string name="wifi_notify_open_networks">"Nätverksmeddelande"</string>
+    <string name="wifi_notify_open_networks_summary">"Meddela mig när ett öppet nätverk är tillgängligt"</string>
+    <string name="wifi_password_incorrect_error">"Nätverkslösenordet som du angav är fel. Försök igen."</string>
+    <string name="wifi_generic_connection_error">"Ett problem inträffade vid anslutning till nätverket. Försök igen."</string>
+    <string name="wifi_menu_advanced">"Avancerad"</string>
+    <string name="wifi_ip_settings_titlebar">"IP-inställningar"</string>
+    <string name="wifi_ip_settings_menu_save">"Spara"</string>
+    <string name="wifi_ip_settings_menu_cancel">"Avbryt"</string>
+    <string name="wifi_ip_settings_invalid_ip">"Ange en giltig IP-adress."</string>
+    <string name="wifi_use_static_ip">"Använd statisk IP"</string>
+    <string name="wifi_ip_address">"IP-adress"</string>
+    <string name="wifi_dns1">"DNS 1"</string>
+    <string name="wifi_dns2">"DNS 2"</string>
+    <string name="wifi_gateway">"Gateway"</string>
+    <string name="wifi_netmask">"Nätmask"</string>
+    <string name="wifi_context_menu_connect">"Anslut till nätverk"</string>
+    <string name="wifi_context_menu_forget">"Glöm nätverk"</string>
+    <string name="wifi_context_menu_change_password">"Byt lösenord"</string>
+    <string name="wifi_advanced_titlebar">"Avancerad"</string>
+    <string name="wifi_setting_num_channels_title">"Föreskriftsdomän"</string>
+    <string name="wifi_setting_num_channels_summary">"Ange antalet kanaler som ska användas"</string>
+    <string name="wifi_setting_num_channels_error">"Ett problem inträffande när domänen skulle anges."</string>
+    <string name="wifi_setting_num_channels_channel_phrase">"<xliff:g id="NUM_CHANNELS">%1$d</xliff:g>-kanaler"</string>
+    <string name="wifi_setting_sleep_policy_title">"Wi-Fi-policy"</string>
+    <string name="wifi_setting_sleep_policy_summary">"Ange när du vill växla från Wi-Fi till mobildata"</string>
+    <string name="wifi_setting_sleep_policy_error">"Ett problem inträffade när policy för viloläge skulle anges."</string>
+    <string name="wifi_advanced_mac_address_title">"Mac-adress"</string>
+    <string name="fragment_status_scanning">"Skannar…"</string>
+    <string name="fragment_status_connecting">"Ansluter till <xliff:g id="NETWORK_NAME">%1$s</xliff:g>…"</string>
+    <string name="fragment_status_authenticating">"Autentiserar med <xliff:g id="NETWORK_NAME">%1$s</xliff:g>…"</string>
+    <string name="fragment_status_obtaining_ip">"Hämtar IP-adress från <xliff:g id="NETWORK_NAME">%1$s</xliff:g>…"</string>
+    <string name="fragment_status_connected">"Ansluten till: <xliff:g id="NETWORK_NAME">%1$s</xliff:g>"</string>
+    <string name="fragment_status_disconnecting">"Kopplar ifrån <xliff:g id="NETWORK_NAME">%1$s</xliff:g>…"</string>
+    <string name="fragment_status_disconnected">"Frånkopplad"</string>
+    <string name="fragment_status_failed">"Misslyckades"</string>
+    <string name="status_scanning">"Skannar…"</string>
+    <string name="status_connecting">"Ansluter…"</string>
+    <string name="status_authenticating">"Autentiserar…"</string>
+    <string name="status_obtaining_ip">"Hämtar adress…"</string>
+    <string name="status_connected">"Ansluten"</string>
+    <string name="status_disconnecting">"Kopplar ifrån…"</string>
+    <string name="status_disconnected">"Frånkopplad"</string>
+    <string name="status_failed">"Misslyckades"</string>
+    <string name="sound_and_display_settings">"Ljud och skärm"</string>
+    <string name="sound_settings">"Ljudinställningar"</string>
+    <string name="sound_and_display_settings_summary">"Ställ in ringsignaler, aviseringar, skärmens ljusstryka"</string>
+    <string name="silent_mode_title">"Tyst läge"</string>
+    <string name="silent_mode_summary">"Alla ljud utom media och larm tystas"</string>
+    <string name="silent_mode_incl_alarm_summary">"Alla ljud utom media tystas"</string>
+    <string name="ringtone_title">"Telefonens ringsignal"</string>
+    <string name="ringtone_summary">"Ange standardringsignal för inkommande samtal"</string>
+    <string name="ring_volume_title">"Ringvolym"</string>
+    <string name="ring_volume_summary">"Ställ in volym för inkommande samtal och aviseringar"</string>
+    <string name="vibrate_title">"Telefonvibration"</string>
+    <string name="vibrate_summary">"Telefonen vibrerar vid inkommande samtal"</string>
+    <string name="notification_sound_title">"Ringsignal för avisering"</string>
+    <string name="notification_sound_summary">"Ställ in standardsignal för avisering"</string>
+    <string name="incoming_call_volume_title">"Volym för inkommande samtal"</string>
+    <string name="notification_volume_title">"Aviseringsvolym"</string>
+    <string name="checkbox_notification_same_as_incoming_call">"Använd volymen för inkommande samtal vid avisering"</string>
+    <string name="notification_sound_dialog_title">"Välj ringsignal för avisering"</string>
+    <string name="media_volume_title">"Mediavolym"</string>
+    <string name="media_volume_summary">"Ställ in volym för musik och video"</string>
+    <string name="dtmf_tone_enable_title">"Knappljud"</string>
+    <string name="dtmf_tone_enable_summary_on">"Spela upp signaler när knappsatsen används"</string>
+    <string name="dtmf_tone_enable_summary_off">"Spela upp signaler när knappsatsen används"</string>
+    <string name="sound_effects_enable_title">"Välj ljud"</string>
+    <string name="sound_effects_enable_summary_on">"Spela upp ljud när du väljer på skärmen"</string>
+    <string name="sound_effects_enable_summary_off">"Spela upp ljud när du väljer något på skärmen"</string>
+    <string name="play_media_notification_sounds_enable_title">"Aviseringar för SD-kort"</string>
+    <!-- no translation found for play_media_notification_sounds_enable_summary_on (7675466959375667370) -->
+    <skip />
+    <!-- no translation found for play_media_notification_sounds_enable_summary_off (8672617597028744693) -->
+    <skip />
+    <string name="sync_settings">"Datasynkronisering"</string>
+    <string name="sync_settings_summary">"Välj vilka program som ska synkroniserats"</string>
+    <!-- no translation found for search_settings (1910951467596035063) -->
+    <skip />
+    <!-- no translation found for search_settings_summary (9205656546570654169) -->
+    <skip />
+    <string name="display_settings">"Visa inställningar"</string>
+    <string name="animations_title">"Animering"</string>
+    <string name="animations_summary_on">"Visa animering när fönster öppnas och stängs"</string>
+    <string name="animations_summary_off">"Visa animering när fönster öppnas och stängs"</string>
+    <string name="accelerometer_title">"Riktning"</string>
+    <string name="accelerometer_summary_on">"Växla riktning automatiskt när du roterar telefonen"</string>
+    <string name="accelerometer_summary_off">"Byt riktning automatiskt när du roterar telefonen"</string>
+    <string name="brightness">"Ljusstyrka"</string>
+    <string name="brightness_summary">"Ändra skärmens ljusstyrka"</string>
+    <string name="screen_timeout">"Skärmens tidsgräns"</string>
+    <string name="screen_timeout_summary">"Justera fördröjningen innan skärmen stängs av automatiskt"</string>
+    <string name="sim_lock_settings">"Låsinställningar för SIM-kort"</string>
+    <string name="sim_lock_settings_category">"Ställ in lås för SIM-kort"</string>
+    <string name="sim_lock_settings_title">"Lås för SIM-kort"</string>
+    <string name="sim_pin_toggle">"Lås SIM-kort"</string>
+    <string name="sim_lock_on">"PIN-kod krävs för att använda telefonen"</string>
+    <string name="sim_lock_off">"PIN-kod krävs för att använda telefonen"</string>
+    <string name="sim_pin_change">"Byt PIN-kod"</string>
+    <string name="sim_enter_pin">"PIN-kod för SIM-kort"</string>
+    <string name="sim_enable_sim_lock">"Lås SIM-kort"</string>
+    <string name="sim_disable_sim_lock">"Lås upp SIM-kort"</string>
+    <string name="sim_enter_old">"Gammal PIN-kod för SIM-kort"</string>
+    <string name="sim_enter_new">"Ny PIN-kod för SIM-kort"</string>
+    <string name="sim_reenter_new">"Ange den nya PIN-koden igen"</string>
+    <string name="sim_change_pin">"PIN-kod för SIM-kort"</string>
+    <string name="sim_bad_pin">"Fel PIN-kod!"</string>
+    <string name="sim_pins_dont_match">"PIN-koder matchar inte!"</string>
+    <string name="sim_change_failed">"Det går inte att ändra PIN-koden."\n" Förmodligen fel PIN-kod."</string>
+    <string name="sim_change_succeeded">"SIM-kortets PIN-kod har ändrats"</string>
+    <string name="sim_lock_failed">"Det gick inte att ändra SIM-kortets låsstatus."\n"Du kan ha angett fel PIN-kod."</string>
+    <string name="sim_enter_ok">"OK"</string>
+    <string name="sim_enter_cancel">"Avbryt"</string>
+    <string name="device_info_settings">"Telefonens status"</string>
+    <string name="system_update_settings_list_item_title">"Systemuppdateringar"</string>
+    <string name="system_update_settings_list_item_summary">"Leta efter systemuppdateringar"</string>
+    <string name="firmware_version">"Fast programvara"</string>
+    <string name="model_number">"Modellnummer"</string>
+    <string name="baseband_version">"Basbandsversion"</string>
+    <string name="kernel_version">"Kernel-version"</string>
+    <string name="build_number">"Skapa nummer"</string>
+    <string name="device_info_not_available">"Inte tillgänglig"</string>
+    <string name="device_status_activity_title">"Status"</string>
+    <string name="device_status">"Status"</string>
+    <!-- no translation found for device_status_summary (2599162787451519618) -->
+    <skip />
+    <string name="storage_settings_title">"SD-kort och telefonlagr."</string>
+    <string name="storage_settings_summary">"Montera bort SD-kort, visa tillgängligt lagringsutrymme"</string>
+    <!-- no translation found for status_number (5123197324870153205) -->
+    <skip />
+    <!-- no translation found for status_min_number (3519504522179420597) -->
+    <skip />
+    <!-- no translation found for status_prl_version (8499039751817386529) -->
+    <skip />
+    <!-- no translation found for status_meid_number (1751442889111731088) -->
+    <skip />
+    <string name="status_network_type">"Mobil nätverkstyp"</string>
+    <string name="status_data_state">"Status för mobilt nätverk"</string>
+    <string name="status_service_state">"Tjänststatus"</string>
+    <string name="status_signal_strength">"Signalstyrka"</string>
+    <string name="status_roaming">"Roaming"</string>
+    <string name="status_operator">"Nätverk"</string>
+    <string name="status_wifi_mac_address">"Wi-Fi Mac-adress"</string>
+    <string name="status_bt_address">"Bluetooth-adress"</string>
+    <string name="status_unavailable">"Inte tillgängligt"</string>
+    <string name="status_up_time">"Tid sedan systemstart"</string>
+    <string name="status_awake_time">"Aktiveringstid"</string>
+    <string name="internal_memory">"Intern telefonlagring"</string>
+    <string name="sd_memory">"SD-kort"</string>
+    <string name="memory_available">"Tillgängligt utrymme"</string>
+    <string name="memory_size">"Totalt utrymme"</string>
+    <string name="sd_eject">"Montera bort SD-kort"</string>
+    <string name="sd_eject_summary">"Montera bort SD-kortet för säker borttagning"</string>
+    <string name="sd_format">"Formatera SD-kort"</string>
+    <string name="sd_format_summary">"Formatera (radera) SD-kortet"</string>
+    <string name="sd_unavailable">"Inte tillgängligt"</string>
+    <string name="read_only">" (Skrivskyddad)"</string>
+    <string name="battery_status_title">"Batteristatus"</string>
+    <string name="battery_level_title">"Batterinivå"</string>
+    <string name="apn_settings">"APN:er"</string>
+    <string name="apn_edit">"Redigera åtkomstpunkt"</string>
+    <string name="apn_not_set">"&lt;Har inte angetts&gt;"</string>
+    <string name="apn_name">"Namn"</string>
+    <string name="apn_apn">"APN"</string>
+    <string name="apn_http_proxy">"Proxy"</string>
+    <string name="apn_http_port">"Port"</string>
+    <string name="apn_user">"Användarnamn"</string>
+    <string name="apn_password">"Lösenord"</string>
+    <string name="apn_server">"Server"</string>
+    <string name="apn_mmsc">"MMSC"</string>
+    <string name="apn_mms_proxy">"MMS-proxy"</string>
+    <string name="apn_mms_port">"MMS-port"</string>
+    <string name="apn_mcc">"MCC"</string>
+    <string name="apn_mnc">"MNC"</string>
+    <string name="apn_type">"APN-typ"</string>
+    <string name="menu_delete">"Ta bort APN"</string>
+    <string name="menu_new">"Nytt APN"</string>
+    <string name="menu_save">"Spara"</string>
+    <string name="menu_cancel">"Släng"</string>
+    <string name="error_title">"Obs!"</string>
+    <string name="error_name_empty">"Fältet Namn får inte vara tomt"</string>
+    <string name="error_apn_empty">"APN får inte vara tomt"</string>
+    <string name="error_mcc_not3">"MCC-fältet måste bestå av 3 siffror."</string>
+    <string name="error_mnc_not23">"MNC-fältet måste vara 2 eller 3 siffror"</string>
+    <string name="restore_default_apn">"Återställer standardinställning för APN"</string>
+    <string name="menu_restore">"Återställ standardinst."</string>
+    <string name="restore_default_apn_completed">"Återställning av standardinställningar för APN har slutförts"</string>
+    <string name="master_clear_title">"Återställ standardinställningar"</string>
+    <string name="master_clear_summary">"Raderar alla data på telefonen"</string>
+    <!-- no translation found for master_clear_desc (7823268823499739178) -->
+    <skip />
+    <string name="master_clear_button_text">"Återställ telefonen"</string>
+    <!-- no translation found for master_clear_final_desc (6917971132484622696) -->
+    <skip />
+    <string name="master_clear_final_button_text">"Radera allt"</string>
+    <string name="master_clear_gesture_prompt">"Rita ditt grafiska lösenord"</string>
+    <string name="master_clear_gesture_explanation">"Du måste rita ditt grafiska lösenord om du vill återställa telefonen."</string>
+    <string name="master_clear_failed">"Återställningen utfördes inte eftersom tjänsten för systemrensning inte är tillgänglig."</string>
+    <string name="media_format_title">"Formatera SD-kort"</string>
+    <string name="media_format_summary">"Tar bort alla data på SD-kortet"</string>
+    <string name="media_format_desc">"Den här åtgärden raderar SD-kortet i telefonen. ALLA data på kortet försvinner!"</string>
+    <string name="media_format_button_text">"Formatera SD-kort"</string>
+    <string name="media_format_final_desc">"Formatera SD-kort, radera alla mediafiler? Åtgärden kan inte ångras!"</string>
+    <string name="media_format_final_button_text">"Radera allt"</string>
+    <string name="media_format_gesture_prompt">"Rita ditt grafiska lösenord"</string>
+    <string name="media_format_gesture_explanation">"Du måste rita ditt grafiska lösenord för att bekräfta formateringen av SD-kortet."</string>
+    <string name="call_settings_title">"Samtalsinställningar"</string>
+    <string name="call_settings_summary">"Ställ in röstbrevlåda, vidarebefordra samtal, samtal väntar, nummerpres."</string>
+    <string name="network_settings_title">"Mobila nätverk"</string>
+    <string name="network_settings_summary">"Ställ in alternativ för roaming, nätverk, APN:er"</string>
+    <!-- no translation found for location_title (1029961368397484576) -->
+    <skip />
+    <string name="location_network_based">"Använd trådlösa nätverk"</string>
+    <string name="location_networks_disabled">"Se plats i programmen (till exempel kartor) med hjälp av trådlösa nätverk"</string>
+    <string name="location_neighborhood_level">"Plats fastställs av Wi-Fi och/eller mobila nätverk"</string>
+    <string name="location_gps">"Aktivera GPS-satelliter"</string>
+    <string name="location_street_level">"När du söker, korrekt till gatunivå (avmarkera om du vill spara batteri)"</string>
+    <string name="location_gps_disabled">"Hitta till gatunivå (kräver mer batteri och fungerar endast utomhus)"</string>
+    <!-- no translation found for use_location_title (7585990952633568732) -->
+    <skip />
+    <!-- no translation found for use_location_summary (4411467143899877395) -->
+    <skip />
+    <!-- no translation found for use_location_warning_message (5696732842038416151) -->
+    <skip />
+    <string name="agree">"Jag godkänner"</string>
+    <string name="disagree">"Godkänn inte"</string>
+    <string name="about_settings">"Om telefonen"</string>
+    <string name="about_settings_summary">"Visa juridisk information, telefonstatus, programversion"</string>
+    <string name="legal_information">"Juridisk information"</string>
+    <string name="contributors_title">"Medarbetare"</string>
+    <string name="copyright_title">"Upphovsrätt"</string>
+    <string name="license_title">"Licens"</string>
+    <string name="terms_title">"Användarvillkor"</string>
+    <!-- no translation found for system_tutorial_list_item_title (9082844446660969729) -->
+    <skip />
+    <string name="system_tutorial_list_item_summary">"Lär dig hur du använder din telefon"</string>
+    <string name="settings_license_activity_title">"Öppen källkodslicens"</string>
+    <string name="settings_license_activity_unavailable">"Ett problem inträffade när licenserna lästes in."</string>
+    <string name="settings_license_activity_loading">"Läser in…"</string>
+    <string name="lock_settings_title">"Skärmens grafiska lösenord"</string>
+    <string name="lockpattern_change_lock_pattern_label">"Byt grafiskt lösenord"</string>
+    <string name="lockpattern_need_to_unlock">"Bekräfta sparat grafiskt lösenord"</string>
+    <string name="lockpattern_need_to_unlock_wrong">"Försök igen:"</string>
+    <string name="lockpattern_recording_intro_header">"Rita ett grafiskt lösenord"</string>
+    <string name="lockpattern_recording_intro_footer">"Tryck på Meny om du vill ha hjälp."</string>
+    <string name="lockpattern_recording_inprogress">"Lyft fingret när du är klar."</string>
+    <string name="lockpattern_recording_incorrect_too_short">"Anslut minst <xliff:g id="NUMBER">%d</xliff:g> punkter. Försök igen:"</string>
+    <string name="lockpattern_pattern_entered_header">"Det grafiska lösenordet har registrerats!"</string>
+    <string name="lockpattern_need_to_confirm">"Rita ditt grafiska lösenord igen för att bekräfta:"</string>
+    <string name="lockpattern_pattern_confirmed_header">"Ditt nya grafiska lösenord:"</string>
+    <string name="lockpattern_confirm_button_text">"Bekräfta"</string>
+    <string name="lockpattern_restart_button_text">"Rita igen"</string>
+    <string name="lockpattern_retry_button_text">"Försök igen"</string>
+    <string name="lockpattern_continue_button_text">"Fortsätt"</string>
+    <string name="lockpattern_settings_title">"Grafiskt lösenord"</string>
+    <string name="lockpattern_settings_enable_title">"Begär grafiskt lösenord"</string>
+    <string name="lockpattern_settings_enable_summary">"Måste rita grafiskt lösenord för att låsa upp skärmen"</string>
+    <string name="lockpattern_settings_enable_visible_pattern_title">"Anv. synligt graf. lös."</string>
+    <string name="lockpattern_settings_enable_tactile_feedback_title">"Använd känslig feedback"</string>
+    <string name="lockpattern_settings_choose_lock_pattern">"Ange grafiskt lösenord"</string>
+    <string name="lockpattern_settings_change_lock_pattern">"Byt grafiskt lösenord"</string>
+    <string name="lockpattern_settings_help_how_to_record">"Så här ritar du ett grafiskt lösenord"</string>
+    <string name="lockpattern_too_many_failed_confirmation_attempts_header">"För många felaktiga försök!"</string>
+    <string name="lockpattern_too_many_failed_confirmation_attempts_footer">"Försök igen om <xliff:g id="NUMBER">%d</xliff:g> sekunder."</string>
+    <string name="skip_button_label">"Avbryt"</string>
+    <string name="next_button_label">"Nästa"</string>
+    <string name="lock_title">"Skydda din telefon"</string>
+    <string name="lock_intro_message"><font size="17">"Skydda din telefon från obehörig användning genom att skapa ett personligt grafiskt lösenord på skärmen. "\n<font height="17">\n</font>"1"<b></b>"  Se hur ett grafiskt lösenord ritas på nästa skärm. "\n<font height="17">\n</font><b>"2"</b>" Rita ditt eget grafiska lösenord. Experimentera med olika grafiska lösenord men anslut minst fyra punkter. "\n<font height="17">\n</font><b>"3"</b>"  Rita ditt grafiska lösenord igen för att bekräfta. "\n<font height="17">\n</font><b>" Är du redo att börja? Välj Nästa"</b>". "\n<font height="3">\n</font>"Välj Avbryt om du vill lämna telefonen oskyddad."</font></string>
+    <string name="lock_example_title">"Exempel på grafiskt lösenord"</string>
+    <string name="lock_example_message">"Anslut minst fyra punkter."\n" "\n"Välj Nästa när du vill rita ditt eget grafiska lösenord."</string>
+    <string name="manageapplications_settings_title">"Hantera program"</string>
+    <string name="manageapplications_settings_summary">"Hantera och ta bort installerade program"</string>
+    <string name="applications_settings">"Program"</string>
+    <string name="applications_settings_summary">"Hantera program, ställ in genvägar för snabbstart"</string>
+    <string name="applications_settings_header">"Programinställningar"</string>
+    <string name="install_applications">"Okända källor"</string>
+    <string name="install_unknown_applications">"Tillåt installation av program som inte finns i butiken"</string>
+    <string name="install_all_warning">"Din telefon och dina personliga uppgifter är mer känsliga för hot från program från okända källor. Du godkänner att du själv är ansvarig för eventuella skador på din telefon eller förlust av data som kan uppstå när du använder dessa program."</string>
+    <string name="application_info_label">"Programinformation"</string>
+    <string name="storage_label">"Lagring"</string>
+    <string name="auto_launch_label">"Starta som standard"</string>
+    <string name="permissions_label">"Behörigheter"</string>
+    <string name="cache_header_label">"Cacheminne"</string>
+    <string name="clear_cache_btn_text">"Rensa cacheminne"</string>
+    <string name="cache_size_label">"Cacheminne"</string>
+    <string name="controls_label">"Kontroller"</string>
+    <string name="force_stop">"Tvingad avslutning"</string>
+    <string name="total_size_label">"Totalt"</string>
+    <string name="application_size_label">"Program"</string>
+    <string name="data_size_label">"Data"</string>
+    <string name="uninstall_text">"Avinstallera"</string>
+    <string name="clear_user_data_text">"Rensa data"</string>
+    <!-- no translation found for app_factory_reset (6635744722502563022) -->
+    <skip />
+    <string name="auto_launch_enable_text">"Du har valt att starta detta program som standard för vissa åtgärder."</string>
+    <string name="auto_launch_disable_text">"Inga standardinställningar har angetts."</string>
+    <string name="clear_activities">"Rensa standardinställn."</string>
+    <string name="unknown">"Okänd"</string>
+    <string name="sort_order_alpha">"Sortera"</string>
+    <string name="sort_order_size">"Sortera efter storlek"</string>
+    <string name="manage_space_text">"Hantera utrymme"</string>
+    <string name="filter">"Filtrera"</string>
+    <string name="filter_dlg_title">"Välj filteralternativ"</string>
+    <string name="filter_apps_all">"Alla"</string>
+    <string name="filter_apps_third_party">"Tredje part"</string>
+    <string name="filter_apps_running">"Kör"</string>
+    <string name="loading">"Läser in…"</string>
+    <string name="recompute_size">"Räknar om storlek…"</string>
+    <string name="clear_data_dlg_title">"Radera"</string>
+    <string name="clear_data_dlg_text">"All information som du har sparat i detta program tas bort permanent."</string>
+    <string name="dlg_ok">"OK"</string>
+    <string name="dlg_cancel">"Avbryt"</string>
+    <string name="app_not_found_dlg_title">"Programmet hittades inte"</string>
+    <string name="app_not_found_dlg_text">"Programmet fanns inte med i listan över installerade program."</string>
+    <string name="clear_data_failed">"Det gick inte att rensa programdata."</string>
+    <!-- no translation found for app_factory_reset_dlg_title (6116199391150388147) -->
+    <skip />
+    <!-- no translation found for app_factory_reset_dlg_text (438395129140568893) -->
+    <skip />
+    <!-- no translation found for clear_failed_dlg_title (2387060805294783175) -->
+    <skip />
+    <!-- no translation found for clear_failed_dlg_text (7943411157007320290) -->
+    <skip />
+    <string name="security_settings_desc">"Med det här programmet kommer du åt följande på din telefon:"</string>
+    <string name="computing_size">"Beräkningar…"</string>
+    <string name="invalid_size_value">"Det gick inte att räkna ut paketstorlek"</string>
+    <string name="empty_list_msg">"Du har inte installerat några program från tredje part."</string>
+    <!-- no translation found for version_text (9189073826278676425) -->
+    <skip />
+    <string name="language_settings">"Språkkod och text"</string>
+    <string name="language_settings_summary">"Ställ in alternativ för språkkod (land och område), textinmatning och autokorrigering"</string>
+    <string name="language_category">"Språkkodsinställningar"</string>
+    <string name="text_category">"Textinställningar"</string>
+    <string name="phone_language">"Välj språkkod"</string>
+    <string name="phone_language_summary">"Välj språk och område"</string>
+    <string name="auto_replace">"Ersätt automatiskt"</string>
+    <string name="auto_replace_summary">"Rätta felskrivna ord"</string>
+    <string name="auto_caps">"Inled med versal"</string>
+    <string name="auto_caps_summary">"Första bokstaven i meningar ska inledas med versal"</string>
+    <string name="auto_punctuate">"Automatisk punkt"</string>
+    <string name="hardkeyboard_category">"Inställningar för fysiskt tangentbord"</string>
+    <string name="auto_punctuate_summary">"Tryck på blanksteg två gånger om du vill infoga \".\""</string>
+    <string name="show_password">"Synliga lösenord"</string>
+    <string name="show_password_summary">"Visa lösenord när du skriver"</string>
+    <string name="ime_security_warning">"Den här inmatningsmetoden kan samla all text som du anger, inklusive personliga uppgifter som lösenord och kreditkortsnummer. Den kommer från programmet <xliff:g id="IME_APPLICATION_NAME">%1$s</xliff:g>. Ska inmatningsmetoden aktiveras?"</string>
+    <string name="user_dict_settings_titlebar">"Användarens ordlista"</string>
+    <string name="user_dict_settings_title">"Användarens ordlista"</string>
+    <string name="user_dict_settings_summary">"Lägg till och ta bort ord från användarens ordlista"</string>
+    <string name="user_dict_settings_add_menu_title">"Lägga till"</string>
+    <string name="user_dict_settings_add_dialog_title">"Lägga till i ordlista"</string>
+    <string name="user_dict_settings_edit_dialog_title">"Redigera ord"</string>
+    <string name="user_dict_settings_context_menu_edit_title">"Redigera"</string>
+    <string name="user_dict_settings_context_menu_delete_title">"Radera"</string>
+    <string name="user_dict_settings_empty_text">"Det finns inga ord i användarordlistan. Du lägger till ord från menyn."</string>
+    <string name="testing">"Testa"</string>
+    <string name="testing_phone_info">"Telefoninformation"</string>
+    <string name="testing_battery_info">"Batteriinformation"</string>
+    <string name="testing_battery_history">"Batterihistorik"</string>
+    <string name="quick_launch_title">"Snabbstart"</string>
+    <string name="quick_launch_summary">"Ställ in kortkommandon för att starta program"</string>
+    <string name="quick_launch_assign_application">"Tilldela program"</string>
+    <string name="quick_launch_no_shortcut">"Ingen genväg"</string>
+    <string name="quick_launch_shortcut">"Sök + <xliff:g id="SHORTCUT_LETTER">%1$s</xliff:g>"</string>
+    <string name="quick_launch_clear_dialog_title">"Rensa"</string>
+    <string name="quick_launch_clear_dialog_message">"Din genväg för <xliff:g id="SHORTCUT_LETTER">%1$s</xliff:g>(<xliff:g id="APPLICATION_NAME">%2$s</xliff:g>) rensas."</string>
+    <string name="quick_launch_clear_ok_button">"OK"</string>
+    <string name="quick_launch_clear_cancel_button">"Avbryt"</string>
+    <string name="quick_launch_display_mode_applications">"Program"</string>
+    <string name="quick_launch_display_mode_shortcuts">"Genvägar"</string>
+    <string name="input_methods_settings_title">"Textinmatning"</string>
+    <string name="input_methods_settings_summary">"Hantera textinmatningsalternativ"</string>
+    <string name="input_methods_settings_label_format">"<xliff:g id="IME_NAME">%1$s</xliff:g>-inställningar"</string>
+    <string name="onscreen_keyboard_settings_summary">"Inställningar för skärmtangentbord"</string>
+    <string name="builtin_keyboard_settings_title">"Enhetens knappsats"</string>
+    <string name="builtin_keyboard_settings_summary">"Inställningar för inbyggt tangentbord"</string>
+    <string name="development_settings_title">"Utveckling"</string>
+    <string name="development_settings_summary">"Ange alternativ för programutveckling"</string>
+    <string name="enable_adb">"USB-felsökning"</string>
+    <string name="enable_adb_summary">"Felsökningsläge när USB har anslutits"</string>
+    <string name="keep_screen_on">"Håll aktiverad"</string>
+    <string name="keep_screen_on_summary">"Skärmen vilar aldrig när laddning pågår"</string>
+    <string name="allow_mock_location">"Tillåt skenplatser"</string>
+    <string name="allow_mock_location_summary">"Tillåt skenplatser"</string>
+    <!-- no translation found for adb_warning_title (1756027479229533250) -->
+    <skip />
+    <!-- no translation found for adb_warning_message (5352555112049663033) -->
+    <skip />
+    <string name="gadget_picker_title">"Välj gadget"</string>
+    <string name="widget_picker_title">"Välj widget"</string>
+    <string name="battery_history_details_for">"Information för användar-id %d"</string>
+    <string name="battery_history_uid">"Användar-id <xliff:g id="USER_ID">%1$d</xliff:g>"</string>
+    <string name="battery_history_network_usage">"Information om nätverksanvändning för <xliff:g id="APP_NAME">%1$s</xliff:g>:"</string>
+    <string name="battery_history_bytes_received">"Mottagna bytes: <xliff:g id="BYTES">%1$d</xliff:g>"</string>
+    <string name="battery_history_bytes_sent">"Skickade bytes: <xliff:g id="BYTES">%1$d</xliff:g>"</string>
+    <string name="battery_history_bytes_total">"Totalt antal byte: <xliff:g id="BYTES">%1$d</xliff:g>"</string>
+    <string name="battery_history_cpu_usage">"Information om CPU-användning för <xliff:g id="APP_NAME">%1$s</xliff:g>:"</string>
+    <string name="battery_history_user_time">"Användartid"</string>
+    <string name="battery_history_system_time">"Systemtid:"</string>
+    <string name="battery_history_total_time">"Total tid:"</string>
+    <string name="battery_history_starts">"Startar: <xliff:g id="STARTS">%1$d</xliff:g>"</string>
+    <!-- no translation found for battery_history_days (7110262897769622564) -->
+    <skip />
+    <!-- no translation found for battery_history_hours (7525170329826274999) -->
+    <skip />
+    <!-- no translation found for battery_history_minutes (1467775596084148610) -->
+    <skip />
+    <!-- no translation found for battery_history_seconds (4283492130945761685) -->
+    <skip />
+    <string name="battery_history_packages_sharing_this_uid">"Paket som delar denna UID:"</string>
+    <string name="battery_history_no_data">"Ingen information om batterianvändning är tillgänglig"</string>
+    <string name="battery_history_sensor">"Sensor:"</string>
+    <string name="battery_history_wakelock">"Delaktiveringslås:"</string>
+    <string name="battery_history_used_by_packages">"Sensor som används av paket:"</string>
+    <string name="battery_history_sensor_usage">"Har använts <xliff:g id="COUNT">%1$d</xliff:g> gånger av <xliff:g id="PACKAGE">%2$s</xliff:g>"</string>
+    <string name="battery_history_sensor_usage_multi">"Har använts <xliff:g id="COUNT">%1$d</xliff:g> gånger av en av:"</string>
+    <string name="battery_history_awake_label">"Kör"</string>
+    <string name="battery_history_screen_on_label">"Skärm på"</string>
+    <string name="battery_history_phone_on_label">"Telefon på"</string>
+    <string name="battery_history_awake">"Tid som har tillbringats utan vilotid:"</string>
+    <string name="battery_history_screen_on">"Tid då skärmen har varit aktiverad:"</string>
+    <string name="battery_history_phone_on">"Tid då telefonen har varit aktiverad:"</string>
+    <string name="battery_history_screen_on_battery">"På batteri:"</string>
+    <string name="battery_history_screen_on_plugged">"Inkopplad:"</string>
+    <string name="usage_stats_label">"Användningsstatistik"</string>
+    <string name="testing_usage_stats">"Användningsstatistik"</string>
+    <string name="display_order_text">"Sortera efter"</string>
+    <string name="app_name_label">"Program"</string>
+    <string name="launch_count_label">"Räkneverk"</string>
+    <string name="usage_time_label">"Användningstid"</string>
+    <!-- no translation found for accessibility_settings_title (4239640930601071058) -->
+    <skip />
+    <!-- no translation found for accessibility_settings_summary (8185181964847149507) -->
+    <skip />
+    <!-- no translation found for toggle_accessibility_title (650839277066574497) -->
+    <skip />
+    <!-- no translation found for accessibility_services_category (8127851026323672607) -->
+    <skip />
+    <!-- no translation found for no_accessibility_services_summary (694578333333808159) -->
+    <skip />
+    <!-- no translation found for accessibility_service_security_warning (8386156287296967181) -->
+    <skip />
+    <!-- no translation found for accessibility_service_disable_warning (8930591383312775132) -->
+    <skip />
+    <!-- no translation found for power_usage_summary_title (5180282911164282324) -->
+    <skip />
+    <!-- no translation found for power_usage_summary (7237084831082848168) -->
+    <skip />
+    <!-- no translation found for battery_since_unplugged (338073389740738437) -->
+    <skip />
+    <!-- no translation found for battery_since_reset (7464546661121187045) -->
+    <skip />
+    <!-- no translation found for battery_stats_duration (7464501326709469282) -->
+    <skip />
+    <!-- no translation found for awake (387122265874485088) -->
+    <skip />
+    <!-- no translation found for wifi_on_time (4630925382578609056) -->
+    <skip />
+    <!-- no translation found for bluetooth_on_time (4478515071957280711) -->
+    <skip />
+    <!-- no translation found for usage_name_percent (1899151069711662289) -->
+    <skip />
+    <!-- no translation found for details_title (7564809986329021063) -->
+    <skip />
+    <!-- no translation found for details_subtitle (32593908269911734) -->
+    <skip />
+    <!-- no translation found for controls_subtitle (390468421138288702) -->
+    <skip />
+    <!-- no translation found for packages_subtitle (4736416171658062768) -->
+    <skip />
+    <!-- no translation found for power_screen (2353149143338929583) -->
+    <skip />
+    <!-- no translation found for power_wifi (2382791137776486974) -->
+    <skip />
+    <!-- no translation found for power_bluetooth (4373329044379008289) -->
+    <skip />
+    <!-- no translation found for power_cell (6596471490976003056) -->
+    <skip />
+    <!-- no translation found for power_phone (5392641106474567277) -->
+    <skip />
+    <!-- no translation found for power_idle (9055659695602194990) -->
+    <skip />
+    <!-- no translation found for usage_type_cpu (715162150698338714) -->
+    <skip />
+    <!-- no translation found for usage_type_cpu_foreground (6500579611933211831) -->
+    <skip />
+    <!-- no translation found for usage_type_gps (7989688715128160790) -->
+    <skip />
+    <!-- no translation found for usage_type_phone (9108247984998041853) -->
+    <skip />
+    <!-- no translation found for usage_type_data_send (2857401966985425427) -->
+    <skip />
+    <!-- no translation found for usage_type_data_recv (7251090882025234185) -->
+    <skip />
+    <!-- no translation found for usage_type_audio (6957269406840886290) -->
+    <skip />
+    <!-- no translation found for usage_type_video (4295357792078579944) -->
+    <skip />
+    <!-- no translation found for usage_type_on_time (7052979399415080971) -->
+    <skip />
+    <!-- no translation found for battery_action_stop (649958863744041872) -->
+    <skip />
+    <!-- no translation found for battery_action_app_details (3275013531871113681) -->
+    <skip />
+    <!-- no translation found for battery_action_app_settings (350562653472577250) -->
+    <skip />
+    <!-- no translation found for battery_action_display (5302763261448580102) -->
+    <skip />
+    <!-- no translation found for battery_action_wifi (5452076674659927993) -->
+    <skip />
+    <!-- no translation found for battery_action_bluetooth (8374789049507723142) -->
+    <skip />
+    <!-- no translation found for battery_desc_voice (8980322055722959211) -->
+    <skip />
+    <!-- no translation found for battery_desc_standby (3009080001948091424) -->
+    <skip />
+    <!-- no translation found for battery_desc_radio (5479196477223185367) -->
+    <skip />
+    <!-- no translation found for battery_sugg_radio (8211336978326295047) -->
+    <skip />
+    <!-- no translation found for battery_desc_display (5432795282958076557) -->
+    <skip />
+    <!-- no translation found for battery_sugg_display (3370202402045141760) -->
+    <skip />
+    <!-- no translation found for battery_desc_wifi (1702486494565080431) -->
+    <skip />
+    <!-- no translation found for battery_sugg_wifi (3003604969548979254) -->
+    <skip />
+    <!-- no translation found for battery_desc_bluetooth (7535520658674621902) -->
+    <skip />
+    <!-- no translation found for battery_sugg_bluetooth_basic (144393178427277439) -->
+    <skip />
+    <!-- no translation found for battery_sugg_bluetooth_headset (8214816222115517479) -->
+    <skip />
+    <!-- no translation found for battery_desc_apps (8123202939321333639) -->
+    <skip />
+    <!-- no translation found for battery_sugg_apps_info (6065882899391322442) -->
+    <skip />
+    <!-- no translation found for battery_sugg_apps_gps (1834412555123982714) -->
+    <skip />
+    <!-- no translation found for battery_sugg_apps_settings (8021302847272481168) -->
+    <skip />
+    <!-- no translation found for menu_stats_unplugged (8296577130840261624) -->
+    <skip />
+    <!-- no translation found for menu_stats_last_unplugged (5922246077592434526) -->
+    <skip />
+    <!-- no translation found for menu_stats_total (8973377864854807854) -->
+    <skip />
+    <!-- no translation found for menu_stats_refresh (1676215433344981075) -->
+    <skip />
+    <!-- no translation found for process_kernel_label (3916858646836739323) -->
+    <skip />
+    <!-- no translation found for process_mediaserver_label (6500382062945689285) -->
+    <skip />
+    <!-- no translation found for tts_settings (6454363854545277027) -->
+    <skip />
+    <!-- no translation found for tts_settings_summary (2627715231944602766) -->
+    <skip />
+    <!-- no translation found for tts_settings_title (5064947197040356736) -->
+    <skip />
+    <!-- no translation found for use_default_tts_settings_title (1577063839539732930) -->
+    <skip />
+    <!-- no translation found for use_default_tts_settings_summary (4253502106159206276) -->
+    <skip />
+    <!-- no translation found for tts_default_settings_section (5787915620218907443) -->
+    <skip />
+    <!-- no translation found for tts_default_rate_title (6030550998379310088) -->
+    <skip />
+    <!-- no translation found for tts_default_rate_summary (4061815292287182801) -->
+    <skip />
+    <!-- no translation found for tts_default_pitch_title (6135942113172488671) -->
+    <skip />
+    <!-- no translation found for tts_default_pitch_summary (1328298665182885277) -->
+    <skip />
+    <!-- no translation found for tts_default_lang_title (8018087612299820556) -->
+    <skip />
+    <!-- no translation found for tts_default_lang_summary (5219362163902707785) -->
+    <skip />
+    <!-- no translation found for tts_play_example_title (7094780383253097230) -->
+    <skip />
+    <!-- no translation found for tts_play_example_summary (8029071615047894486) -->
+    <skip />
+    <!-- no translation found for tts_install_data_title (4264378440508149986) -->
+    <skip />
+    <!-- no translation found for tts_install_data_summary (5742135732511822589) -->
+    <skip />
+    <!-- no translation found for tts_data_installed_summary (9162111552859972809) -->
+    <skip />
+    <!-- no translation found for tts_demo (405357591189935876) -->
+    <skip />
+    <!-- no translation found for tts_settings_changed_demo (4926518555912328645) -->
+    <skip />
+    <!-- no translation found for gadget_title (7455548605888590466) -->
+    <skip />
+    <!-- no translation found for vpn_settings_activity_title (7276864950701612579) -->
+    <skip />
+    <!-- no translation found for vpn_connect_to (9040615733700098831) -->
+    <skip />
+    <!-- no translation found for vpn_username_colon (7854930370861306247) -->
+    <skip />
+    <!-- no translation found for vpn_password_colon (5716278710848606626) -->
+    <skip />
+    <!-- no translation found for vpn_a_username (6664733641993968692) -->
+    <skip />
+    <!-- no translation found for vpn_a_password (1537213632501483753) -->
+    <skip />
+    <!-- no translation found for vpn_save_username (1408415289165970790) -->
+    <skip />
+    <!-- no translation found for vpn_connect_button (1699007212602470655) -->
+    <skip />
+    <!-- no translation found for vpn_yes_button (8034531001149843119) -->
+    <skip />
+    <!-- no translation found for vpn_no_button (7620339571187119107) -->
+    <skip />
+    <!-- no translation found for vpn_back_button (192036339792734970) -->
+    <skip />
+    <!-- no translation found for vpn_mistake_button (1759404628590603933) -->
+    <skip />
+    <!-- no translation found for vpn_menu_done (93528279226907926) -->
+    <skip />
+    <!-- no translation found for vpn_menu_cancel (7234451214611202868) -->
+    <skip />
+    <!-- no translation found for vpn_menu_revert (4407762442281467659) -->
+    <skip />
+    <!-- no translation found for vpn_menu_connect (1089399414463784218) -->
+    <skip />
+    <!-- no translation found for vpn_menu_disconnect (8254492450022562235) -->
+    <skip />
+    <!-- no translation found for vpn_menu_edit (4526245173583195618) -->
+    <skip />
+    <!-- no translation found for vpn_menu_delete (3326527392609513129) -->
+    <skip />
+    <!-- no translation found for vpn_error_miss_entering (1467455143582547499) -->
+    <skip />
+    <!-- no translation found for vpn_error_miss_selecting (953436717902387192) -->
+    <skip />
+    <!-- no translation found for vpn_error_duplicate_name (2786397299628471911) -->
+    <skip />
+    <!-- no translation found for vpn_confirm_profile_deletion (8679536635364177239) -->
+    <skip />
+    <!-- no translation found for vpn_confirm_add_profile_cancellation (3377869170901609182) -->
+    <skip />
+    <!-- no translation found for vpn_confirm_edit_profile_cancellation (7496760181072204494) -->
+    <skip />
+    <!-- no translation found for vpn_confirm_reconnect (5748535476278674296) -->
+    <skip />
+    <!-- no translation found for vpn_unknown_server_dialog_msg (3080742299823671319) -->
+    <skip />
+    <!-- no translation found for vpn_auth_error_dialog_msg (5476820106624807614) -->
+    <skip />
+    <!-- no translation found for vpn_type_title (6392933604218676224) -->
+    <skip />
+    <!-- no translation found for vpn_add_new_vpn (5438260689052714550) -->
+    <skip />
+    <!-- no translation found for vpn_edit_title_add (2550661826320709266) -->
+    <skip />
+    <!-- no translation found for vpn_edit_title_edit (1769999313158207723) -->
+    <skip />
+    <!-- no translation found for vpns (3148141862835492816) -->
+    <skip />
+    <!-- no translation found for vpn_connecting (8039521381692090116) -->
+    <skip />
+    <!-- no translation found for vpn_disconnecting (7748050200708257066) -->
+    <skip />
+    <!-- no translation found for vpn_connected (7641723116362845781) -->
+    <skip />
+    <!-- no translation found for vpn_connect_hint (7442898962925875181) -->
+    <skip />
+    <!-- no translation found for vpn_name (1550918148476193076) -->
+    <skip />
+    <!-- no translation found for vpn_a_name (8445736942405283509) -->
+    <skip />
+    <!-- no translation found for vpn_profile_added (2157095890825215726) -->
+    <skip />
+    <!-- no translation found for vpn_profile_replaced (384234123486734768) -->
+    <skip />
+    <!-- no translation found for vpn_user_certificate_title (6812545893924071742) -->
+    <skip />
+    <!-- no translation found for vpn_user_certificate (949322691686938888) -->
+    <skip />
+    <!-- no translation found for vpn_a_user_certificate (8943983437956898649) -->
+    <skip />
+    <!-- no translation found for vpn_ca_certificate_title (7846466160795589985) -->
+    <skip />
+    <!-- no translation found for vpn_ca_certificate (465085144064264742) -->
+    <skip />
+    <!-- no translation found for vpn_a_ca_certificate (3374242520974884295) -->
+    <skip />
+    <!-- no translation found for vpn_l2tp_secret_string_title (5039677186748940987) -->
+    <skip />
+    <!-- no translation found for vpn_l2tp_secret (529359749677142076) -->
+    <skip />
+    <!-- no translation found for vpn_a_l2tp_secret (6612042930810981845) -->
+    <skip />
+    <!-- no translation found for vpn_ipsec_presharedkey_title (2184060087690539175) -->
+    <skip />
+    <!-- no translation found for vpn_ipsec_presharedkey (5434316521616673741) -->
+    <skip />
+    <!-- no translation found for vpn_a_ipsec_presharedkey (1255301923217898418) -->
+    <skip />
+    <!-- no translation found for vpn_vpn_server_title (8897005887420358913) -->
+    <skip />
+    <!-- no translation found for vpn_vpn_server (1141754908824209260) -->
+    <skip />
+    <!-- no translation found for vpn_a_vpn_server (5960906152125045853) -->
+    <skip />
+    <!-- no translation found for vpn_vpn_server_dialog_title (7850850940160521918) -->
+    <skip />
+    <!-- no translation found for vpn_dns_search_list_title (1022776976104584251) -->
+    <skip />
+    <!-- no translation found for vpn_dns_search_list (4230034234026605360) -->
+    <skip />
+    <!-- no translation found for vpn_field_is_set (1880980734721258127) -->
+    <skip />
+    <!-- no translation found for vpn_field_not_set (6827205815004809490) -->
+    <skip />
+    <!-- no translation found for vpn_field_not_set_optional (8665901697706781015) -->
+    <skip />
+    <!-- no translation found for vpn_enable_field (3348948489989523325) -->
+    <skip />
+    <!-- no translation found for vpn_disable_field (2286966253789266389) -->
+    <skip />
+    <!-- no translation found for vpn_is_enabled (5128973727115662815) -->
+    <skip />
+    <!-- no translation found for vpn_is_disabled (8028085699769751756) -->
+    <skip />
+    <!-- no translation found for vpn_settings_title (7327468307909556719) -->
+    <skip />
+    <!-- no translation found for vpn_settings_summary (8849924181594963972) -->
+    <skip />
+    <!-- no translation found for cstor_settings_category (2284299080682591107) -->
+    <skip />
+    <!-- no translation found for cstor_access_title (1739505390736236717) -->
+    <skip />
+    <!-- no translation found for cstor_access_summary (4512681868217546677) -->
+    <skip />
+    <!-- no translation found for cstor_access_dialog_title (3024256293191879190) -->
+    <skip />
+    <!-- no translation found for cstor_access_dialog_hint_from_action (679746865623760961) -->
+    <skip />
+    <!-- no translation found for cstor_set_passwd_title (6156763762703061470) -->
+    <skip />
+    <!-- no translation found for cstor_set_passwd_summary (5248560429856597398) -->
+    <skip />
+    <!-- no translation found for cstor_set_passwd_dialog_title (4071157542842979977) -->
+    <skip />
+    <!-- no translation found for cstor_reset_title (6001600882136794382) -->
+    <skip />
+    <!-- no translation found for cstor_reset_summary (7509525030771504833) -->
+    <skip />
+    <!-- no translation found for cstor_reset_hint (5331632794451859788) -->
+    <skip />
+    <!-- no translation found for cstor_name_credential_dialog_title (1723509156126180662) -->
+    <skip />
+    <!-- no translation found for cstor_credential_name (2958936431813760259) -->
+    <skip />
+    <!-- no translation found for cstor_credential_info (6097346149400207440) -->
+    <skip />
+    <!-- no translation found for cstor_name_credential_hint (6889198058976515785) -->
+    <skip />
+    <!-- no translation found for cstor_old_password (979282118063084561) -->
+    <skip />
+    <!-- no translation found for cstor_new_password (6218562692435670047) -->
+    <skip />
+    <!-- no translation found for cstor_confirm_password (8996028123356342466) -->
+    <skip />
+    <!-- no translation found for cstor_first_time_hint (1831593416099224962) -->
+    <skip />
+    <!-- no translation found for cstor_first_time_hint_from_action (4690937025845780557) -->
+    <skip />
+    <!-- no translation found for cstor_password_error (2917326097260402464) -->
+    <skip />
+    <!-- no translation found for cstor_password_error_reset_warning (3336370539045905953) -->
+    <skip />
+    <!-- no translation found for cstor_password_error_reset_warning_plural (6209069679269017200) -->
+    <skip />
+    <!-- no translation found for cstor_passwords_error (956773958408751155) -->
+    <skip />
+    <!-- no translation found for cstor_passwords_empty_error (6062539742626760734) -->
+    <skip />
+    <!-- no translation found for cstor_password_empty_error (7249632576906961482) -->
+    <skip />
+    <!-- no translation found for cstor_password_verification_error (8553930704493511389) -->
+    <skip />
+    <!-- no translation found for cstor_name_empty_error (7499971191993770322) -->
+    <skip />
+    <!-- no translation found for cstor_name_char_error (8048089317968192516) -->
+    <skip />
+    <!-- no translation found for cstor_is_enabled (4054049098081482785) -->
+    <skip />
+    <!-- no translation found for cstor_is_added (794788474010251572) -->
+    <skip />
+    <!-- no translation found for cstor_add_error (7799232544686721435) -->
+    <skip />
+    <!-- no translation found for emergency_tone_title (1055954530111587114) -->
+    <skip />
+    <!-- no translation found for emergency_tone_summary (722259232924572153) -->
+    <skip />
+</resources>

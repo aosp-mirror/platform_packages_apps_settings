@@ -107,7 +107,10 @@
     <string name="date_and_time">"Configuración de fecha y hora"</string>
     <string name="date_time_12_hour_sample">"1:00 p.m."</string>
     <string name="date_time_24_hour_sample">"13:00"</string>
+    <string name="date_time_changeTime_text">"Cambiar hora"</string>
+    <string name="date_time_changeDate_text">"Fecha"</string>
     <string name="choose_timezone">"Seleccionar zona horaria"</string>
+    <string name="normal_date_format">"Normal (<xliff:g id="DATE">%s</xliff:g>)"</string>
     <string name="display_preview_label">"Vista previa:"</string>
     <string name="display_font_size_label">"Tamaño de fuente:"</string>
     <!-- no translation found for intent_sender_data_label (6332324780477289261) -->
@@ -188,18 +191,29 @@
     <string name="proxy_settings_label">"Configuración de proxy"</string>
     <string name="cancel">"Cancelar"</string>
     <string name="settings_label">"Ajustes"</string>
+    <string name="settings_shortcut">"Configuración"</string>
     <string name="airplane_mode">"Modo avión"</string>
     <string name="airplane_mode_summary">"Inhabilitar todas las conexiones inalámbricas"</string>
     <string name="airplane_mode_turning_on">"Inhabilitando conexiones inalámbricas..."</string>
     <string name="airplane_mode_turning_off">"Habilitando conexiones inalámbricas..."</string>
     <string name="radio_controls_title">"Conexiones inalámbricas"</string>
-    <string name="radio_controls_summary">"Administrar Wi-Fi, Bluetooth, modo avión y redes móviles"</string>
+    <!-- no translation found for radio_controls_summary (2998818677094465517) -->
+    <skip />
+    <string name="roaming">"Itinerancia de datos"</string>
+    <string name="roaming_enable">"Establecer conexión con servicios de datos en itinerancia"</string>
+    <string name="roaming_disable">"Establecer conexión con servicios de datos en itinerancia"</string>
+    <string name="roaming_reenable_message">"Has perdido la conectividad de datos porque has dejado desactivada la itinerancia de datos de tu red doméstica."</string>
+    <string name="roaming_turn_it_on_button">"Activarla"</string>
+    <string name="roaming_warning">"¿Permitir itinerancia de datos? Los costes de itinerancia que deberás asumir pueden ser significativos."</string>
+    <string name="roaming_reenable_title">"Atención"</string>
+    <string name="networks">"Selección de operador"</string>
+    <string name="sum_carrier_select">"Seleccionar un operador de red"</string>
     <string name="date_and_time_settings_title">"Fecha y hora"</string>
     <string name="date_and_time_settings_summary">"Establecer fecha, hora, zona horaria y formatos"</string>
     <string name="date_time_auto">"Automático"</string>
     <string name="date_time_auto_summaryOn">"Utilizar valores proporcionados por la red"</string>
     <string name="date_time_auto_summaryOff">"Utilizar valores proporcionados por la red"</string>
-    <string name="date_time_24hour">"Utilizar formato de 24 horas"</string>
+    <string name="date_time_24hour">"Formato de 24 horas"</string>
     <string name="date_time_set_time">"Establecer hora"</string>
     <string name="date_time_set_timezone">"Seleccionar zona horaria"</string>
     <string name="date_time_set_date">"Establecer fecha"</string>
@@ -207,7 +221,8 @@
     <string name="zone_list_menu_sort_alphabetically">"Ordenar alfabéticamente"</string>
     <string name="zone_list_menu_sort_by_timezone">"Ordenar por zona horaria"</string>
     <string name="security_settings_title">"Seguridad y ubicación"</string>
-    <string name="security_settings_summary">"Establecer ubicación, bloqueo de pantalla y bloqueo de tarjeta SIM"</string>
+    <!-- no translation found for security_settings_summary (967393342537986570) -->
+    <skip />
     <string name="security_passwords_title">"Contraseñas"</string>
     <string name="bluetooth_quick_toggle_title">"Bluetooth"</string>
     <string name="bluetooth_quick_toggle_summary">"Activar Bluetooth"</string>
@@ -220,6 +235,8 @@
     <string name="bluetooth_error_title">"Atención"</string>
     <string name="bluetooth_pairing_error_message">"Se ha producido un problema al realizar la sincronización con <xliff:g id="DEVICE_NAME">%1$s</xliff:g>."</string>
     <string name="bluetooth_pairing_pin_error_message">"Se ha producido un problema al realizar la sincronización con <xliff:g id="DEVICE_NAME">%1$s</xliff:g>, porque el PIN introducido es incorrecto."</string>
+    <string name="bluetooth_pairing_device_down_error_message">"No se puede establecer comunicación con <xliff:g id="DEVICE_NAME">%1$s</xliff:g>."</string>
+    <string name="bluetooth_pairing_rejected_error_message">"Sincronización rechazada por <xliff:g id="DEVICE_NAME">%1$s</xliff:g>"</string>
     <string name="bluetooth_connecting_error_message">"Se ha producido un problema al establecer conexión con <xliff:g id="DEVICE_NAME">%1$s</xliff:g>."</string>
     <string name="bluetooth_preference_scan_title">"Buscar dispositivos"</string>
     <string name="bluetooth_device_context_connect">"Establecer conexión"</string>
@@ -260,11 +277,15 @@
     <string name="wifi_security_wep">"WEP"</string>
     <string name="wifi_security_wpa">"WPA"</string>
     <string name="wifi_security_wpa2">"WPA2"</string>
+    <string name="wifi_security_wpa_eap">"WPA-EAP"</string>
+    <string name="wifi_security_ieee8021x">"IEEE8021X"</string>
     <string name="wifi_security_unknown">"Desconocida"</string>
-    <string name="wifi_security_verbose_open">"Red abierta"</string>
-    <string name="wifi_security_verbose_wep">"Protegido con WEP"</string>
-    <string name="wifi_security_verbose_wpa">"Protegida con WPA"</string>
-    <string name="wifi_security_verbose_wpa2">"Protegida con WPA2"</string>
+    <string name="wifi_security_verbose_open">"red abierta"</string>
+    <string name="wifi_security_verbose_wep">"protegida con WEP"</string>
+    <string name="wifi_security_verbose_wpa">"protegida con WPA"</string>
+    <string name="wifi_security_verbose_wpa2">"protegida con WPA2"</string>
+    <string name="wifi_security_verbose_wpa_eap">"protegida con WPA-EAP"</string>
+    <string name="wifi_security_verbose_ieee8021x">"protegida con IEEE 802.1x"</string>
     <string name="ip_address">"Dirección IP"</string>
     <string name="signal">"Intensidad de la señal"</string>
     <string name="wifi_starting">"Activando..."</string>
@@ -277,12 +298,19 @@
     <string name="error_saving">"No se ha podido guardar la red."</string>
     <string name="connect">"Establecer conexión"</string>
     <string name="connect_to_blank">"Establecer conexión con <xliff:g id="NETWORK_NAME">%1$s</xliff:g>"</string>
+    <string name="please_select_eap">"Método EAP"</string>
+    <string name="please_select_phase2">"Autenticación de fase 2"</string>
+    <string name="please_type_identity">"Identidad"</string>
+    <string name="please_type_anonymous_identity">"Identidad anónima"</string>
+    <string name="please_select_client_certificate">"Certificado de cliente"</string>
+    <string name="please_select_ca_certificate">"Certificado de autenticación"</string>
+    <string name="please_type_private_key_passwd">"Contraseña de clave privada"</string>
     <string name="please_type_passphrase">"Contraseña de red inalámbrica"</string>
     <string name="please_type_hex_key">"Clave hex. WEP (0-9, A-F)"</string>
     <string name="wifi_show_password">"Mostrar contraseña"</string>
     <string name="scan_wifi">"Buscar"</string>
     <string name="summary_not_in_range">"Fuera de rango"</string>
-    <string name="summary_remembered">"Recordada"</string>
+    <string name="summary_remembered">"recordada"</string>
     <string name="summary_connection_failed">"La conexión no se ha realizado correctamente; selecciónala para volver a intentarlo."</string>
     <string name="wifi_access_points">"Redes Wi-Fi"</string>
     <string name="wifi_type_ssid">"SSID de red"</string>
@@ -359,11 +387,14 @@
     <string name="sound_effects_enable_title">"Selección sonora"</string>
     <string name="sound_effects_enable_summary_on">"Reproducir sonido cuando se realiza una selección de pantalla"</string>
     <string name="sound_effects_enable_summary_off">"Reproducir sonido cuando se realiza una selección de pantalla"</string>
-    <string name="play_media_notification_sounds_enable_title">"Notificaciones de la tarjeta SD"</string>
-    <string name="play_media_notification_sounds_enable_summary_on">"Inhabilitar sonidos de notificación de la tarjeta SD"</string>
-    <string name="play_media_notification_sounds_enable_summary_off">"Habilitar sonidos de notificación de la tarjeta SD"</string>
+    <string name="play_media_notification_sounds_enable_title">"Notificaciones tarjeta SD"</string>
+    <string name="play_media_notification_sounds_enable_summary_on">"Reproducir sonido para notificaciones de la tarjeta SD"</string>
+    <string name="play_media_notification_sounds_enable_summary_off">"Reproducir sonido para notificaciones de la tarjeta SD"</string>
     <string name="sync_settings">"Sincronización de datos"</string>
     <string name="sync_settings_summary">"Seleccionar las aplicaciones que están sincronizadas"</string>
+    <string name="search_settings">"Buscar"</string>
+    <!-- no translation found for search_settings_summary (9205656546570654169) -->
+    <skip />
     <string name="display_settings">"Configuración de pantalla"</string>
     <string name="animations_title">"Animación"</string>
     <string name="animations_summary_on">"Mostrar animación al abrir y cerrar ventanas"</string>
@@ -373,10 +404,10 @@
     <string name="accelerometer_summary_off">"Cambiar orientación automáticamente al girar el teléfono"</string>
     <string name="brightness">"Brillo"</string>
     <string name="brightness_summary">"Ajustar el brillo de la pantalla"</string>
-    <string name="screen_timeout">"Tiempo de espera de pantalla"</string>
+    <string name="screen_timeout">"Tiempo espera pantalla"</string>
     <string name="screen_timeout_summary">"Ajustar el tiempo de retraso antes de que la pantalla se apague automáticamente"</string>
     <string name="sim_lock_settings">"Configuración de bloqueo de tarjeta SIM"</string>
-    <string name="sim_lock_settings_category">"Configurar bloqueo de tarjeta SIM"</string>
+    <string name="sim_lock_settings_category">"Bloqueo de tarjeta SIM"</string>
     <string name="sim_lock_settings_title">"Bloqueo de tarjeta SIM"</string>
     <string name="sim_pin_toggle">"Bloquear tarjeta SIM"</string>
     <string name="sim_lock_on">"Solicitar PIN para utilizar el teléfono"</string>
@@ -407,17 +438,25 @@
     <string name="device_info_not_available">"No disponible"</string>
     <string name="device_status_activity_title">"Estado"</string>
     <string name="device_status">"Estado"</string>
-    <string name="device_status_summary">"IMEI, número de teléfono, señal, etc."</string>
+    <!-- no translation found for device_status_summary (2599162787451519618) -->
+    <skip />
     <string name="storage_settings_title">"Almacenamiento"</string>
-    <string name="storage_settings_summary">"Tarjeta de SD sin activar, ver almacenamiento disponible"</string>
-    <string name="status_number">"Número de teléfono"</string>
+    <string name="storage_settings_summary">"Desactivar tarjeta SD, ver almacenamiento disponible."</string>
+    <!-- no translation found for status_number (5123197324870153205) -->
+    <skip />
+    <!-- no translation found for status_min_number (3519504522179420597) -->
+    <skip />
+    <!-- no translation found for status_prl_version (8499039751817386529) -->
+    <skip />
+    <!-- no translation found for status_meid_number (1751442889111731088) -->
+    <skip />
     <string name="status_network_type">"Tipo de red móvil"</string>
     <string name="status_data_state">"Estado de red móvil"</string>
     <string name="status_service_state">"Estado del servicio"</string>
     <string name="status_signal_strength">"Intensidad de la señal"</string>
     <string name="status_roaming">"Itinerancia"</string>
     <string name="status_operator">"Red"</string>
-    <string name="status_wifi_mac_address">"Dirección MAC de la red Wi-Fi"</string>
+    <string name="status_wifi_mac_address">"Dirección MAC de Wi-Fi"</string>
     <string name="status_bt_address">"Dirección de Bluetooth"</string>
     <string name="status_unavailable">"No disponible"</string>
     <string name="status_up_time">"Tiempo de actividad"</string>
@@ -462,11 +501,12 @@
     <string name="restore_default_apn">"Restaurando la configuración de APN predeterminada"</string>
     <string name="menu_restore">"Restablecer valores predeterminados"</string>
     <string name="restore_default_apn_completed">"Restablecimiento de la configuración de APN predeterminada completado"</string>
-    <string name="master_clear_title">"Restablecer datos de fábrica"</string>
+    <string name="master_clear_title">"Rest. datos de fábrica"</string>
     <string name="master_clear_summary">"Borrar todos los datos del teléfono"</string>
-    <string name="master_clear_desc">"Esta acción restablecerá el teléfono a su estado de fábrica inicial y borrará todos los datos y todas las aplicaciones descargadas."</string>
+    <!-- no translation found for master_clear_desc (7823268823499739178) -->
+    <skip />
     <string name="master_clear_button_text">"Reiniciar teléfono"</string>
-    <string name="master_clear_final_desc">"¿Deseas reiniciar el teléfono y borrar todos los datos y todas las aplicaciones? Recuerda que esta acción no se puede deshacer."</string>
+    <string name="master_clear_final_desc">"¿Quieres borrar toda tu información personal y las aplicaciones que has descargado? Esta acción no se puede deshacer."</string>
     <string name="master_clear_final_button_text">"Borrar todo"</string>
     <string name="master_clear_gesture_prompt">"Crea tu patrón de desbloqueo."</string>
     <string name="master_clear_gesture_explanation">"Debes crear un patrón de desbloqueo para confirmar el reinicio del teléfono."</string>
@@ -483,13 +523,18 @@
     <string name="call_settings_summary">"Configurar buzón, llamada en espera, desvío e identificador"</string>
     <string name="network_settings_title">"Redes móviles"</string>
     <string name="network_settings_summary">"Establecer opciones para itinerancia, redes, APN"</string>
-    <string name="location_title">"Fuentes de Mi Ubicación"</string>
+    <string name="location_title">"Mi ubicación"</string>
     <string name="location_network_based">"Usar redes inalámbricas"</string>
     <string name="location_networks_disabled">"Para ver una ubicación en aplicaciones (por ejemplo, Google Maps)"</string>
     <string name="location_neighborhood_level">"Ubicación determinada por redes móviles o Wi-Fi"</string>
     <string name="location_gps">"Habilitar satélites GPS"</string>
     <string name="location_street_level">"Preciso en el nivel de calle (anula la selección para ahorrar batería)"</string>
     <string name="location_gps_disabled">"Localizar en nivel de calle (requiere más batería además de la vista aérea)"</string>
+    <string name="use_location_title">"Compartir con Google"</string>
+    <string name="use_location_summary">"Permitir que Google utilice tu ubicación para mejorar las búsquedas y otros servicios"</string>
+    <string name="use_location_warning_message">"Permitir que Google utilice tu ubicación para mejorar los resultados de búsqueda y otros servicios"</string>
+    <string name="agree">"Acepto"</string>
+    <string name="disagree">"No acepto"</string>
     <string name="about_settings">"Acerca del teléfono"</string>
     <string name="about_settings_summary">"Ver información legal, estado del teléfono, versión del software"</string>
     <string name="legal_information">"Información legal"</string>
@@ -499,7 +544,7 @@
     <string name="terms_title">"Términos y condiciones"</string>
     <string name="system_tutorial_list_item_title">"Tutorial del sistema"</string>
     <string name="system_tutorial_list_item_summary">"Aprende a utilizar tu teléfono"</string>
-    <string name="settings_license_activity_title">"Licencias de software libre"</string>
+    <string name="settings_license_activity_title">"Licencias de SW libre"</string>
     <string name="settings_license_activity_unavailable">"Se ha producido un problema al intentar cargar las licencias."</string>
     <string name="settings_license_activity_loading">"Cargando..."</string>
     <string name="lock_settings_title">"Patrón de desbloqueo de pantalla"</string>
@@ -521,8 +566,8 @@
     <string name="lockpattern_settings_enable_title">"Patrón obligatorio"</string>
     <string name="lockpattern_settings_enable_summary">"Se debe crear un patrón para desbloquear la pantalla."</string>
     <string name="lockpattern_settings_enable_visible_pattern_title">"Utilizar patrón visible"</string>
-    <string name="lockpattern_settings_enable_tactile_feedback_title">"Utilizar comentarios al crear patrón"</string>
-    <string name="lockpattern_settings_choose_lock_pattern">"Establecer patrón de desbloqueo"</string>
+    <string name="lockpattern_settings_enable_tactile_feedback_title">"Comentarios al crear patrón"</string>
+    <string name="lockpattern_settings_choose_lock_pattern">"Patrón de desbloqueo"</string>
     <string name="lockpattern_settings_change_lock_pattern">"Cambiar patrón de desbloqueo"</string>
     <string name="lockpattern_settings_help_how_to_record">"Cómo crear un patrón de desbloqueo"</string>
     <string name="lockpattern_too_many_failed_confirmation_attempts_header">"Se han realizado demasiados intentos incorrectos."</string>
@@ -555,6 +600,7 @@
     <string name="data_size_label">"Datos"</string>
     <string name="uninstall_text">"Desinstalar"</string>
     <string name="clear_user_data_text">"Borrar datos"</string>
+    <string name="app_factory_reset">"Desinstalar actualizaciones"</string>
     <string name="auto_launch_enable_text">"Has elegido ejecutar la aplicación de forma predeterminada para algunas acciones."</string>
     <string name="auto_launch_disable_text">"No se han establecido valores predeterminados."</string>
     <string name="clear_activities">"Borrar valores predeterminados"</string>
@@ -576,15 +622,20 @@
     <string name="app_not_found_dlg_title">"No se ha encontrado la aplicación."</string>
     <string name="app_not_found_dlg_text">"No se ha encontrado la aplicación en la lista de aplicaciones instaladas."</string>
     <string name="clear_data_failed">"No se han podido borrar los datos de aplicación."</string>
+    <string name="app_factory_reset_dlg_title">"Desinstalar actualizaciones"</string>
+    <string name="app_factory_reset_dlg_text">"¿Quieres desinstalar todas las actualizaciones de esta aplicación del sistema Android?"</string>
+    <string name="clear_failed_dlg_title">"Borrar datos"</string>
+    <string name="clear_failed_dlg_text">"Error al borrar los datos de la aplicación"</string>
     <string name="security_settings_desc">"Esta aplicación puede acceder a los siguientes elementos del teléfono:"</string>
     <string name="computing_size">"Calculando…"</string>
     <string name="invalid_size_value">"No se ha podido calcular el tamaño del paquete."</string>
     <string name="empty_list_msg">"No tienes instalada ninguna aplicación externa."</string>
+    <string name="version_text">"versión <xliff:g id="VERSION_NUM">%1$s</xliff:g>"</string>
     <string name="language_settings">"Idioma y país"</string>
     <string name="language_settings_summary">"Configuración local, opciones de autocorrección e introducción de texto"</string>
     <string name="language_category">"Configuración local"</string>
     <string name="text_category">"Configuración de texto"</string>
-    <string name="phone_language">"Seleccionar configuración local"</string>
+    <string name="phone_language">"Configuración local"</string>
     <string name="phone_language_summary">"Seleccionar idioma y región"</string>
     <string name="auto_replace">"Corrección automática"</string>
     <string name="auto_replace_summary">"Corregir palabras con errores de escritura"</string>
@@ -600,7 +651,7 @@
     <string name="user_dict_settings_title">"Diccionario del usuario"</string>
     <string name="user_dict_settings_summary">"Añadir y eliminar palabras del diccionario del usuario"</string>
     <string name="user_dict_settings_add_menu_title">"Añadir"</string>
-    <string name="user_dict_settings_add_dialog_title">"Añadir al usuario"</string>
+    <string name="user_dict_settings_add_dialog_title">"Añadir al diccionario"</string>
     <string name="user_dict_settings_edit_dialog_title">"Editar palabra"</string>
     <string name="user_dict_settings_context_menu_edit_title">"Editar"</string>
     <string name="user_dict_settings_context_menu_delete_title">"Suprimir"</string>
@@ -632,8 +683,10 @@
     <string name="enable_adb_summary">"Modo de depuración cuando está conectado el dispositivo USB"</string>
     <string name="keep_screen_on">"Pantalla activa"</string>
     <string name="keep_screen_on_summary">"La pantalla nunca entra en modo de suspensión durante la carga"</string>
-    <string name="allow_mock_location">"Permitir ubicaciones simuladas"</string>
+    <string name="allow_mock_location">"Ubicaciones simuladas"</string>
     <string name="allow_mock_location_summary">"Permitir ubicaciones simuladas"</string>
+    <string name="adb_warning_title">"¿Quieres habilitar la depuración USB?"</string>
+    <string name="adb_warning_message">"La depuración USB sólo está indicada para actividades de desarrollo. Se puede utilizar para intercambiar datos entre el equipo y el dispositivo, para instalar aplicaciones en el dispositivo sin recibir notificaciones y para leer datos de registro."</string>
     <string name="gadget_picker_title">"Seleccionar gadget"</string>
     <string name="widget_picker_title">"Seleccionar widget"</string>
     <string name="battery_history_details_for">"Detalles del ID único %d"</string>
@@ -647,10 +700,10 @@
     <string name="battery_history_system_time">"Tiempo del sistema:"</string>
     <string name="battery_history_total_time">"Tiempo total"</string>
     <string name="battery_history_starts">"Inicios: <xliff:g id="STARTS">%1$d</xliff:g>"</string>
-    <string name="battery_history_days">"<xliff:g id="DAYS">%1$d</xliff:g> días, <xliff:g id="HOURS">%2$d</xliff:g> horas, <xliff:g id="MINUTES">%3$d</xliff:g> minutos, <xliff:g id="SECONDS">%4$d</xliff:g> segundos"</string>
-    <string name="battery_history_hours">"<xliff:g id="HOURS">%1$d</xliff:g> horas, <xliff:g id="MINUTES">%2$d</xliff:g> minutos, <xliff:g id="SECONDS">%3$d</xliff:g> segundos"</string>
-    <string name="battery_history_minutes">"<xliff:g id="MINUTES">%1$d</xliff:g> minutos, <xliff:g id="SECONDS">%2$d</xliff:g> segundos"</string>
-    <string name="battery_history_seconds">"<xliff:g id="SECONDS">%1$d</xliff:g> segundos"</string>
+    <string name="battery_history_days">"<xliff:g id="DAYS">%1$d</xliff:g> d <xliff:g id="HOURS">%2$d</xliff:g> h <xliff:g id="MINUTES">%3$d</xliff:g> min <xliff:g id="SECONDS">%4$d</xliff:g> s"</string>
+    <string name="battery_history_hours">"<xliff:g id="HOURS">%1$d</xliff:g> h <xliff:g id="MINUTES">%2$d</xliff:g> min <xliff:g id="SECONDS">%3$d</xliff:g> s"</string>
+    <string name="battery_history_minutes">"<xliff:g id="MINUTES">%1$d</xliff:g> min <xliff:g id="SECONDS">%2$d</xliff:g> s"</string>
+    <string name="battery_history_seconds">"<xliff:g id="SECONDS">%1$d</xliff:g> s"</string>
     <string name="battery_history_packages_sharing_this_uid">"Paquetes que comparten este ID único:"</string>
     <string name="battery_history_no_data">"No hay datos disponibles sobre el uso de la batería."</string>
     <string name="battery_history_sensor">"Sensor:"</string>
@@ -672,4 +725,277 @@
     <string name="app_name_label">"Aplicación"</string>
     <string name="launch_count_label">"Número"</string>
     <string name="usage_time_label">"Tiempo de uso"</string>
+    <string name="accessibility_settings_title">"Accesibilidad"</string>
+    <string name="accessibility_settings_summary">"Administrar opciones de accesibilidad"</string>
+    <string name="toggle_accessibility_title">"Accesibilidad"</string>
+    <string name="accessibility_services_category">"Servicios de accesibilidad"</string>
+    <string name="no_accessibility_services_summary">"No hay instalado ningún servicio de accesibilidad."</string>
+    <string name="accessibility_service_security_warning">"Este servicio de accesibilidad puede recopilar todo el texto que escribas, desde datos personales hasta números de tarjetas de crédito, a excepción de las contraseñas. También puede registrar las interacciones con la interfaz de usuario. Procede de la aplicación <xliff:g id="ACCESSIBILITY_SERVICE_NAME">%1$s</xliff:g>. ¿Quieres habilitar ese servicio de accesibilidad?"</string>
+    <string name="accessibility_service_disable_warning">"¿Quieres inhabilitar la accesibilidad?"</string>
+    <string name="power_usage_summary_title">"Uso de la batería"</string>
+    <string name="power_usage_summary">"Qué ha estado utilizando la batería"</string>
+    <string name="battery_since_unplugged">"Uso de la batería desde que se desenchufó"</string>
+    <string name="battery_since_reset">"Uso de la batería desde que se restableció"</string>
+    <string name="battery_stats_duration">"<xliff:g id="TIME">%1$s</xliff:g> desde que se desenchufó"</string>
+    <string name="awake">"Tiempo de actividad del dispositivo"</string>
+    <string name="wifi_on_time">"Tiempo de conexión WiFi"</string>
+    <string name="bluetooth_on_time">"Tiempo de conexión WiFi"</string>
+    <string name="usage_name_percent">"<xliff:g id="NAME">%1$s</xliff:g> -  <xliff:g id="PERCENT">%2$s</xliff:g>%%"</string>
+    <string name="details_title">"Detalles de uso de la batería"</string>
+    <string name="details_subtitle">"Detalles de uso"</string>
+    <string name="controls_subtitle">"Ajustar uso de la batería"</string>
+    <string name="packages_subtitle">"Paquetes incluidos"</string>
+    <string name="power_screen">"Pantalla"</string>
+    <string name="power_wifi">"Wi-Fi"</string>
+    <string name="power_bluetooth">"Bluetooth"</string>
+    <string name="power_cell">"Dispositivo inactivo"</string>
+    <string name="power_phone">"Llamadas de voz"</string>
+    <string name="power_idle">"Teléfono inactivo"</string>
+    <string name="usage_type_cpu">"Total de CPU"</string>
+    <string name="usage_type_cpu_foreground">"Primer plano de la CPU"</string>
+    <string name="usage_type_gps">"GPS"</string>
+    <string name="usage_type_phone">"Teléfono"</string>
+    <string name="usage_type_data_send">"Datos enviados"</string>
+    <string name="usage_type_data_recv">"Datos recibidos"</string>
+    <string name="usage_type_audio">"Audio"</string>
+    <string name="usage_type_video">"Vídeo"</string>
+    <string name="usage_type_on_time">"Tiempo de conexión"</string>
+    <string name="battery_action_stop">"Forzar detención"</string>
+    <string name="battery_action_app_details">"Información de la aplicación"</string>
+    <string name="battery_action_app_settings">"Configuración de aplicaciones"</string>
+    <string name="battery_action_display">"Configuración de pantalla"</string>
+    <string name="battery_action_wifi">"Configuración WiFi"</string>
+    <string name="battery_action_bluetooth">"Configuración de Bluetooth"</string>
+    <string name="battery_desc_voice">"Batería utilizada por llamadas de voz"</string>
+    <string name="battery_desc_standby">"Batería utilizada cuando el teléfono está inactivo"</string>
+    <string name="battery_desc_radio">"Batería utilizada por la radio"</string>
+    <string name="battery_sugg_radio">"Cambia a modo avión para ahorrar batería en zonas sin cobertura."</string>
+    <string name="battery_desc_display">"Batería utilizada por la pantalla y por la retroiluminación"</string>
+    <string name="battery_sugg_display">"Reduce el brillo y el tiempo de espera de la pantalla."</string>
+    <string name="battery_desc_wifi">"Batería utilizada por la conexión Wi-Fi"</string>
+    <string name="battery_sugg_wifi">"Desactiva la conexión WiFi cuando no la estés utilizando o cuando no esté disponible."</string>
+    <string name="battery_desc_bluetooth">"Batería utilizada por Bluetooth"</string>
+    <string name="battery_sugg_bluetooth_basic">"Desactiva el Bluetooth cuando no lo estés utilizando."</string>
+    <string name="battery_sugg_bluetooth_headset">"Intenta conectarte a un dispositivo Bluetooth diferente."</string>
+    <string name="battery_desc_apps">"Batería utilizada por aplicaciones en ejecución"</string>
+    <string name="battery_sugg_apps_info">"Detener o desinstalar la aplicación"</string>
+    <string name="battery_sugg_apps_gps">"Desactivar GPS cuando no se esté utilizando"</string>
+    <string name="battery_sugg_apps_settings">"La aplicación puede incluir opciones que permitan reducir el uso de la batería."</string>
+    <string name="menu_stats_unplugged">"<xliff:g id="UNPLUGGED">%1$s</xliff:g> desde que se desenchufó"</string>
+    <string name="menu_stats_last_unplugged">"Desde la última vez que se desenchufó para <xliff:g id="UNPLUGGED">%1$s</xliff:g>"</string>
+    <string name="menu_stats_total">"Total de consumo"</string>
+    <string name="menu_stats_refresh">"Actualizar"</string>
+    <string name="process_kernel_label">"Sistema operativo de Android"</string>
+    <string name="process_mediaserver_label">"Servidor multimedia"</string>
+    <string name="tts_settings">"Síntesis de voz"</string>
+    <string name="tts_settings_summary">"Establecer opciones de síntesis de voz"</string>
+    <string name="tts_settings_title">"Controles del sintetizador de voz"</string>
+    <string name="use_default_tts_settings_title">"Utilizar siempre mi configuración"</string>
+    <string name="use_default_tts_settings_summary">"La configuración predeterminada que aparece a continuación anula la configuración de la aplicación."</string>
+    <string name="tts_default_settings_section">"Configuración predeterminada"</string>
+    <string name="tts_default_rate_title">"Velocidad de voz"</string>
+    <string name="tts_default_rate_summary">"Velocidad a la que se lee el texto"</string>
+    <string name="tts_default_pitch_title">"Tono"</string>
+    <string name="tts_default_pitch_summary">"Afecta al tono del texto hablado."</string>
+    <string name="tts_default_lang_title">"Idioma"</string>
+    <string name="tts_default_lang_summary">"Establece la voz del idioma específico para el texto hablado."</string>
+    <string name="tts_play_example_title">"Escuchar un ejemplo"</string>
+    <string name="tts_play_example_summary">"Reproducir una breve demostración de síntesis de voz"</string>
+    <string name="tts_install_data_title">"Instalar archivos de datos de voz"</string>
+    <string name="tts_install_data_summary">"Instalar los archivos de datos de voz necesarios para la síntesis de voz"</string>
+    <string name="tts_data_installed_summary">"Las voces necesarias para la síntesis de voz ya están instaladas correctamente."</string>
+    <string name="tts_demo">"Este es un ejemplo de síntesis de voz."</string>
+    <string name="tts_settings_changed_demo">"Tu configuración ha cambiado. Este es un ejemplo de cómo suena."</string>
+    <string name="gadget_title">"Control de energía"</string>
+    <string name="vpn_settings_activity_title">"Configuración de red VPN"</string>
+    <string name="vpn_connect_to">"Establecer conexión con %s"</string>
+    <!-- no translation found for vpn_username_colon (7854930370861306247) -->
+    <skip />
+    <string name="vpn_password_colon">"Contraseña:"</string>
+    <!-- no translation found for vpn_a_username (6664733641993968692) -->
+    <skip />
+    <!-- no translation found for vpn_a_password (1537213632501483753) -->
+    <skip />
+    <!-- no translation found for vpn_save_username (1408415289165970790) -->
+    <skip />
+    <string name="vpn_connect_button">"Establecer conexión"</string>
+    <string name="vpn_yes_button">"Sí"</string>
+    <string name="vpn_no_button">"No"</string>
+    <string name="vpn_back_button">"Anterior"</string>
+    <string name="vpn_mistake_button">"No, es un error."</string>
+    <!-- no translation found for vpn_menu_done (93528279226907926) -->
+    <skip />
+    <!-- no translation found for vpn_menu_cancel (7234451214611202868) -->
+    <skip />
+    <!-- no translation found for vpn_menu_revert (4407762442281467659) -->
+    <skip />
+    <!-- no translation found for vpn_menu_connect (1089399414463784218) -->
+    <skip />
+    <!-- no translation found for vpn_menu_disconnect (8254492450022562235) -->
+    <skip />
+    <!-- no translation found for vpn_menu_edit (4526245173583195618) -->
+    <skip />
+    <!-- no translation found for vpn_menu_delete (3326527392609513129) -->
+    <skip />
+    <!-- no translation found for vpn_error_miss_entering (1467455143582547499) -->
+    <skip />
+    <!-- no translation found for vpn_error_miss_selecting (953436717902387192) -->
+    <skip />
+    <!-- no translation found for vpn_error_duplicate_name (2786397299628471911) -->
+    <skip />
+    <!-- no translation found for vpn_confirm_profile_deletion (8679536635364177239) -->
+    <skip />
+    <!-- no translation found for vpn_confirm_add_profile_cancellation (3377869170901609182) -->
+    <skip />
+    <!-- no translation found for vpn_confirm_edit_profile_cancellation (7496760181072204494) -->
+    <skip />
+    <!-- no translation found for vpn_confirm_reconnect (5748535476278674296) -->
+    <skip />
+    <!-- no translation found for vpn_unknown_server_dialog_msg (3080742299823671319) -->
+    <skip />
+    <!-- no translation found for vpn_auth_error_dialog_msg (5476820106624807614) -->
+    <skip />
+    <!-- no translation found for vpn_type_title (6392933604218676224) -->
+    <skip />
+    <!-- no translation found for vpn_add_new_vpn (5438260689052714550) -->
+    <skip />
+    <!-- no translation found for vpn_edit_title_add (2550661826320709266) -->
+    <skip />
+    <!-- no translation found for vpn_edit_title_edit (1769999313158207723) -->
+    <skip />
+    <!-- no translation found for vpns (3148141862835492816) -->
+    <skip />
+    <string name="vpn_connecting">"Estableciendo conexión..."</string>
+    <string name="vpn_disconnecting">"Desconectando..."</string>
+    <string name="vpn_connected">"Conectada"</string>
+    <!-- no translation found for vpn_connect_hint (7442898962925875181) -->
+    <skip />
+    <!-- no translation found for vpn_name (1550918148476193076) -->
+    <skip />
+    <!-- no translation found for vpn_a_name (8445736942405283509) -->
+    <skip />
+    <string name="vpn_profile_added">"%s añadido"</string>
+    <string name="vpn_profile_replaced">"Los cambios se han aplicado en %s."</string>
+    <!-- no translation found for vpn_user_certificate_title (6812545893924071742) -->
+    <skip />
+    <!-- no translation found for vpn_user_certificate (949322691686938888) -->
+    <skip />
+    <!-- no translation found for vpn_a_user_certificate (8943983437956898649) -->
+    <skip />
+    <!-- no translation found for vpn_ca_certificate_title (7846466160795589985) -->
+    <skip />
+    <!-- no translation found for vpn_ca_certificate (465085144064264742) -->
+    <skip />
+    <!-- no translation found for vpn_a_ca_certificate (3374242520974884295) -->
+    <skip />
+    <!-- no translation found for vpn_l2tp_secret_string_title (5039677186748940987) -->
+    <skip />
+    <!-- no translation found for vpn_l2tp_secret (529359749677142076) -->
+    <skip />
+    <!-- no translation found for vpn_a_l2tp_secret (6612042930810981845) -->
+    <skip />
+    <!-- no translation found for vpn_ipsec_presharedkey_title (2184060087690539175) -->
+    <skip />
+    <!-- no translation found for vpn_ipsec_presharedkey (5434316521616673741) -->
+    <skip />
+    <!-- no translation found for vpn_a_ipsec_presharedkey (1255301923217898418) -->
+    <skip />
+    <!-- no translation found for vpn_vpn_server_title (8897005887420358913) -->
+    <skip />
+    <!-- no translation found for vpn_vpn_server (1141754908824209260) -->
+    <skip />
+    <!-- no translation found for vpn_a_vpn_server (5960906152125045853) -->
+    <skip />
+    <!-- no translation found for vpn_vpn_server_dialog_title (7850850940160521918) -->
+    <skip />
+    <!-- no translation found for vpn_dns_search_list_title (1022776976104584251) -->
+    <skip />
+    <!-- no translation found for vpn_dns_search_list (4230034234026605360) -->
+    <skip />
+    <!-- no translation found for vpn_field_is_set (1880980734721258127) -->
+    <skip />
+    <!-- no translation found for vpn_field_not_set (6827205815004809490) -->
+    <skip />
+    <!-- no translation found for vpn_field_not_set_optional (8665901697706781015) -->
+    <skip />
+    <!-- no translation found for vpn_enable_field (3348948489989523325) -->
+    <skip />
+    <!-- no translation found for vpn_disable_field (2286966253789266389) -->
+    <skip />
+    <!-- no translation found for vpn_is_enabled (5128973727115662815) -->
+    <skip />
+    <!-- no translation found for vpn_is_disabled (8028085699769751756) -->
+    <skip />
+    <!-- no translation found for vpn_settings_title (7327468307909556719) -->
+    <skip />
+    <!-- no translation found for vpn_settings_summary (8849924181594963972) -->
+    <skip />
+    <!-- no translation found for cstor_settings_category (2284299080682591107) -->
+    <skip />
+    <!-- no translation found for cstor_access_title (1739505390736236717) -->
+    <skip />
+    <!-- no translation found for cstor_access_summary (4512681868217546677) -->
+    <skip />
+    <!-- no translation found for cstor_access_dialog_title (3024256293191879190) -->
+    <skip />
+    <!-- no translation found for cstor_access_dialog_hint_from_action (679746865623760961) -->
+    <skip />
+    <!-- no translation found for cstor_set_passwd_title (6156763762703061470) -->
+    <skip />
+    <!-- no translation found for cstor_set_passwd_summary (5248560429856597398) -->
+    <skip />
+    <!-- no translation found for cstor_set_passwd_dialog_title (4071157542842979977) -->
+    <skip />
+    <!-- no translation found for cstor_reset_title (6001600882136794382) -->
+    <skip />
+    <!-- no translation found for cstor_reset_summary (7509525030771504833) -->
+    <skip />
+    <!-- no translation found for cstor_reset_hint (5331632794451859788) -->
+    <skip />
+    <!-- no translation found for cstor_name_credential_dialog_title (1723509156126180662) -->
+    <skip />
+    <!-- no translation found for cstor_credential_name (2958936431813760259) -->
+    <skip />
+    <!-- no translation found for cstor_credential_info (6097346149400207440) -->
+    <skip />
+    <!-- no translation found for cstor_name_credential_hint (6889198058976515785) -->
+    <skip />
+    <!-- no translation found for cstor_old_password (979282118063084561) -->
+    <skip />
+    <!-- no translation found for cstor_new_password (6218562692435670047) -->
+    <skip />
+    <!-- no translation found for cstor_confirm_password (8996028123356342466) -->
+    <skip />
+    <!-- no translation found for cstor_first_time_hint (1831593416099224962) -->
+    <skip />
+    <!-- no translation found for cstor_first_time_hint_from_action (4690937025845780557) -->
+    <skip />
+    <!-- no translation found for cstor_password_error (2917326097260402464) -->
+    <skip />
+    <!-- no translation found for cstor_password_error_reset_warning (3336370539045905953) -->
+    <skip />
+    <!-- no translation found for cstor_password_error_reset_warning_plural (6209069679269017200) -->
+    <skip />
+    <!-- no translation found for cstor_passwords_error (956773958408751155) -->
+    <skip />
+    <!-- no translation found for cstor_passwords_empty_error (6062539742626760734) -->
+    <skip />
+    <!-- no translation found for cstor_password_empty_error (7249632576906961482) -->
+    <skip />
+    <!-- no translation found for cstor_password_verification_error (8553930704493511389) -->
+    <skip />
+    <!-- no translation found for cstor_name_empty_error (7499971191993770322) -->
+    <skip />
+    <!-- no translation found for cstor_name_char_error (8048089317968192516) -->
+    <skip />
+    <!-- no translation found for cstor_is_enabled (4054049098081482785) -->
+    <skip />
+    <!-- no translation found for cstor_is_added (794788474010251572) -->
+    <skip />
+    <!-- no translation found for cstor_add_error (7799232544686721435) -->
+    <skip />
+    <!-- no translation found for emergency_tone_title (1055954530111587114) -->
+    <skip />
+    <!-- no translation found for emergency_tone_summary (722259232924572153) -->
+    <skip />
 </resources>

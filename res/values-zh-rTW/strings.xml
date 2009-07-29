@@ -107,7 +107,10 @@
     <string name="date_and_time">"日期與時間設定"</string>
     <string name="date_time_12_hour_sample">"下午 1:00"</string>
     <string name="date_time_24_hour_sample">"13:00"</string>
+    <string name="date_time_changeTime_text">"變更時間"</string>
+    <string name="date_time_changeDate_text">"日期"</string>
     <string name="choose_timezone">"選取時區"</string>
+    <string name="normal_date_format">"適中 (<xliff:g id="DATE">%s</xliff:g>)"</string>
     <string name="display_preview_label">"預覽："</string>
     <string name="display_font_size_label">"字型大小："</string>
     <!-- no translation found for intent_sender_data_label (6332324780477289261) -->
@@ -188,12 +191,23 @@
     <string name="proxy_settings_label">"Proxy 設定"</string>
     <string name="cancel">"取消"</string>
     <string name="settings_label">"設定"</string>
+    <string name="settings_shortcut">"設定"</string>
     <string name="airplane_mode">"飛航模式"</string>
     <string name="airplane_mode_summary">"停用所有的無線網路連線"</string>
     <string name="airplane_mode_turning_on">"停用無線網路連線中..."</string>
     <string name="airplane_mode_turning_off">"啟用無線網路連線中..."</string>
     <string name="radio_controls_title">"無線網路控制"</string>
-    <string name="radio_controls_summary">"管理 Wi-Fi、藍牙、飛航模式與行動網路"</string>
+    <!-- no translation found for radio_controls_summary (2998818677094465517) -->
+    <skip />
+    <string name="roaming">"漫游服務"</string>
+    <string name="roaming_enable">"漫遊時連線到資料傳輸服務"</string>
+    <string name="roaming_disable">"漫遊時連線到資料傳輸服務"</string>
+    <string name="roaming_reenable_message">"由於您不在主要網路蓋涵範圍，且已關閉漫游服務，資料連線已中斷。"</string>
+    <string name="roaming_turn_it_on_button">"開啟"</string>
+    <string name="roaming_warning">"要允許漫遊服務嗎？您可能會需要支付龐大的漫遊費用！"</string>
+    <string name="roaming_reenable_title">"注意"</string>
+    <string name="networks">"選取電信業者"</string>
+    <string name="sum_carrier_select">"選取電信業者"</string>
     <string name="date_and_time_settings_title">"日期與時間"</string>
     <string name="date_and_time_settings_summary">"設定日期、時間、時區與格式"</string>
     <string name="date_time_auto">"自動"</string>
@@ -207,7 +221,8 @@
     <string name="zone_list_menu_sort_alphabetically">"依照字母排序"</string>
     <string name="zone_list_menu_sort_by_timezone">"依時區排序"</string>
     <string name="security_settings_title">"安全性與位置"</string>
-    <string name="security_settings_summary">"設定我的位置、螢幕解鎖、SIM 卡鎖定"</string>
+    <!-- no translation found for security_settings_summary (967393342537986570) -->
+    <skip />
     <string name="security_passwords_title">"密碼"</string>
     <string name="bluetooth_quick_toggle_title">"藍牙"</string>
     <string name="bluetooth_quick_toggle_summary">"開啟藍牙"</string>
@@ -220,6 +235,8 @@
     <string name="bluetooth_error_title">"注意"</string>
     <string name="bluetooth_pairing_error_message">"與<xliff:g id="DEVICE_NAME">%1$s</xliff:g>配對時發生問題。"</string>
     <string name="bluetooth_pairing_pin_error_message">"由於輸入的 PIN 不正確，因此無法與<xliff:g id="DEVICE_NAME">%1$s</xliff:g>配對。"</string>
+    <string name="bluetooth_pairing_device_down_error_message">"無法與「<xliff:g id="DEVICE_NAME">%1$s</xliff:g>」建立通訊。"</string>
+    <string name="bluetooth_pairing_rejected_error_message">"「<xliff:g id="DEVICE_NAME">%1$s</xliff:g>」拒絕配對要求。"</string>
     <string name="bluetooth_connecting_error_message">"連接至<xliff:g id="DEVICE_NAME">%1$s</xliff:g>時發生問題。"</string>
     <string name="bluetooth_preference_scan_title">"掃描裝置"</string>
     <string name="bluetooth_device_context_connect">"連線"</string>
@@ -260,11 +277,15 @@
     <string name="wifi_security_wep">"WEP"</string>
     <string name="wifi_security_wpa">"WPA"</string>
     <string name="wifi_security_wpa2">"WPA2"</string>
+    <string name="wifi_security_wpa_eap">"WPA-EAP"</string>
+    <string name="wifi_security_ieee8021x">"IEEE8021X"</string>
     <string name="wifi_security_unknown">"未知的"</string>
-    <string name="wifi_security_verbose_open">"開啟網路"</string>
-    <string name="wifi_security_verbose_wep">"以 WEP 加密"</string>
-    <string name="wifi_security_verbose_wpa">"以 WPA 保護連線"</string>
-    <string name="wifi_security_verbose_wpa2">"以  WPA2 保護連線"</string>
+    <string name="wifi_security_verbose_open">"開放網路"</string>
+    <string name="wifi_security_verbose_wep">"以 WEP 保護連線安全性"</string>
+    <string name="wifi_security_verbose_wpa">"以 WPA 保護連線安全性"</string>
+    <string name="wifi_security_verbose_wpa2">"以 WPA2 保護連線安全性"</string>
+    <string name="wifi_security_verbose_wpa_eap">"以 WPA-EAP 保護連線安全性"</string>
+    <string name="wifi_security_verbose_ieee8021x">"以 IEEE 802.1x 保護連線安全性"</string>
     <string name="ip_address">"IP 位址"</string>
     <string name="signal">"訊號強度"</string>
     <string name="wifi_starting">"開啟中..."</string>
@@ -277,6 +298,13 @@
     <string name="error_saving">"無法儲存網路"</string>
     <string name="connect">"連線"</string>
     <string name="connect_to_blank">"連線到 <xliff:g id="NETWORK_NAME">%1$s</xliff:g>"</string>
+    <string name="please_select_eap">"EAP 方法"</string>
+    <string name="please_select_phase2">"階段 2 驗證"</string>
+    <string name="please_type_identity">"識別"</string>
+    <string name="please_type_anonymous_identity">"匿名識別"</string>
+    <string name="please_select_client_certificate">"用戶端憑證"</string>
+    <string name="please_select_ca_certificate">"CA 憑證"</string>
+    <string name="please_type_private_key_passwd">"私密金鑰密碼"</string>
     <string name="please_type_passphrase">"無線網路密碼"</string>
     <string name="please_type_hex_key">"WEP hex key (0-9，A-F)"</string>
     <string name="wifi_show_password">"顯示密碼"</string>
@@ -360,10 +388,13 @@
     <string name="sound_effects_enable_summary_on">"使用螢幕選取時播放音效"</string>
     <string name="sound_effects_enable_summary_off">"在螢幕上進行選取時播放音效"</string>
     <string name="play_media_notification_sounds_enable_title">"SD 卡通知"</string>
-    <string name="play_media_notification_sounds_enable_summary_on">"停用 SD 卡通知音效"</string>
-    <string name="play_media_notification_sounds_enable_summary_off">"啟用 SD 卡通知音效"</string>
+    <string name="play_media_notification_sounds_enable_summary_on">"播放 SD 卡通知音效"</string>
+    <string name="play_media_notification_sounds_enable_summary_off">"播放 SD 卡通知音效"</string>
     <string name="sync_settings">"資料同步處理"</string>
     <string name="sync_settings_summary">"選取要同步處理的應用程式"</string>
+    <string name="search_settings">"搜尋"</string>
+    <!-- no translation found for search_settings_summary (9205656546570654169) -->
+    <skip />
     <string name="display_settings">"顯示設定"</string>
     <string name="animations_title">"動畫"</string>
     <string name="animations_summary_on">"開啟和關閉視窗時顯示動畫"</string>
@@ -407,10 +438,18 @@
     <string name="device_info_not_available">"無法取得"</string>
     <string name="device_status_activity_title">"狀態"</string>
     <string name="device_status">"狀態"</string>
-    <string name="device_status_summary">"IMEI、電話號碼、訊號等。"</string>
+    <!-- no translation found for device_status_summary (2599162787451519618) -->
+    <skip />
     <string name="storage_settings_title">"SD 卡與手機儲存"</string>
     <string name="storage_settings_summary">"卸載 SD 卡，檢視可用儲存媒體。"</string>
-    <string name="status_number">"電話號碼"</string>
+    <!-- no translation found for status_number (5123197324870153205) -->
+    <skip />
+    <!-- no translation found for status_min_number (3519504522179420597) -->
+    <skip />
+    <!-- no translation found for status_prl_version (8499039751817386529) -->
+    <skip />
+    <!-- no translation found for status_meid_number (1751442889111731088) -->
+    <skip />
     <string name="status_network_type">"行動網路類型"</string>
     <string name="status_data_state">"行動網路狀態"</string>
     <string name="status_service_state">"服務狀態"</string>
@@ -464,9 +503,10 @@
     <string name="restore_default_apn_completed">"重設預設 APN 設定已完成"</string>
     <string name="master_clear_title">"重設為原廠設定"</string>
     <string name="master_clear_summary">"清除手機上所有資料"</string>
-    <string name="master_clear_desc">"此項操作會將手機還原至出廠設定，並清除所有資料與下載的應用程式！"</string>
+    <!-- no translation found for master_clear_desc (7823268823499739178) -->
+    <skip />
     <string name="master_clear_button_text">"重設手機"</string>
-    <string name="master_clear_final_desc">"確定要重設手機，清除所有資料與應用程式嗎？此項操作將無法復原！"</string>
+    <string name="master_clear_final_desc">"要清除所有個人資料及先前下載的應用程式嗎？這個動作無法復原！"</string>
     <string name="master_clear_final_button_text">"清除全部"</string>
     <string name="master_clear_gesture_prompt">"畫出解鎖圖形"</string>
     <string name="master_clear_gesture_explanation">"請畫出解鎖圖形，以確認重設手機。"</string>
@@ -483,13 +523,18 @@
     <string name="call_settings_summary">"設定語音信箱、來電轉接、來電待接及本機號碼顯示"</string>
     <string name="network_settings_title">"行動網路"</string>
     <string name="network_settings_summary">"設定漫遊、網路、APN 選項"</string>
-    <string name="location_title">"我的位置來源"</string>
+    <string name="location_title">"我的位置"</string>
     <string name="location_network_based">"使用無線網路"</string>
     <string name="location_networks_disabled">"使用無線網路，在應用程式中查詢位置 (例如 Google 地圖)"</string>
     <string name="location_neighborhood_level">"根據 Wi-Fi 與/或行動網路判定位置"</string>
     <string name="location_gps">"啟用 GPS 衛星接收器"</string>
     <string name="location_street_level">"定位時，精準度設定為街道等級 (取消選取此項可較省電)"</string>
     <string name="location_gps_disabled">"定位至街道等級 (需要更多電力及天候允許)"</string>
+    <string name="use_location_title">"與 Google 分享"</string>
+    <string name="use_location_summary">"允許 Google 使用位置資訊來改善搜尋與其他服務"</string>
+    <string name="use_location_warning_message">"允許 Google 使用位置資訊來改善搜尋結果與其他服務"</string>
+    <string name="agree">"同意"</string>
+    <string name="disagree">"不同意"</string>
     <string name="about_settings">"關於手機"</string>
     <string name="about_settings_summary">"檢視法律資訊、手機狀態、軟體版本"</string>
     <string name="legal_information">"法律資訊"</string>
@@ -555,6 +600,7 @@
     <string name="data_size_label">"資料"</string>
     <string name="uninstall_text">"解除安裝"</string>
     <string name="clear_user_data_text">"清除資料"</string>
+    <string name="app_factory_reset">"解除安裝更新"</string>
     <string name="auto_launch_enable_text">"您已設定在某些操作下啟動此應用程式。"</string>
     <string name="auto_launch_disable_text">"沒有預設值。"</string>
     <string name="clear_activities">"清除預設值"</string>
@@ -576,10 +622,15 @@
     <string name="app_not_found_dlg_title">"找不到應用程式"</string>
     <string name="app_not_found_dlg_text">"在已安裝程式清單中找不到此應用程式。"</string>
     <string name="clear_data_failed">"無法清除應用程式資料。"</string>
+    <string name="app_factory_reset_dlg_title">"解除安裝更新"</string>
+    <string name="app_factory_reset_dlg_text">"您想要解除安裝此 Android 系統應用程式的所有更新嗎？"</string>
+    <string name="clear_failed_dlg_title">"清除資料"</string>
+    <string name="clear_failed_dlg_text">"無法清除應用程式資訊"</string>
     <string name="security_settings_desc">"此應用程式可存取您電話中的下列項目："</string>
     <string name="computing_size">"計算中..."</string>
     <string name="invalid_size_value">"無法計算封裝大小"</string>
     <string name="empty_list_msg">"您未安裝任何第三方應用程式。"</string>
+    <string name="version_text">"版本 <xliff:g id="VERSION_NUM">%1$s</xliff:g>"</string>
     <string name="language_settings">"地區設定與文字"</string>
     <string name="language_settings_summary">"選取地區設定 (語言和地區)、文字輸入和自動校正選項"</string>
     <string name="language_category">"地區設定"</string>
@@ -634,6 +685,8 @@
     <string name="keep_screen_on_summary">"充電時螢幕不會進入休眠"</string>
     <string name="allow_mock_location">"允許模擬位置"</string>
     <string name="allow_mock_location_summary">"允許模擬位置"</string>
+    <string name="adb_warning_title">"啟用 USB 偵錯功能嗎？"</string>
+    <string name="adb_warning_message">"USB 偵錯是針對應用程式開發而設計的功能，可讓您在電腦與裝置間複製資料、不用通知即可在裝置上安裝應用程式，以及讀取記錄資料。"</string>
     <string name="gadget_picker_title">"選擇小工具"</string>
     <string name="widget_picker_title">"選擇小工具"</string>
     <string name="battery_history_details_for">"UID %d 的詳細資料"</string>
@@ -647,9 +700,9 @@
     <string name="battery_history_system_time">"系統時間："</string>
     <string name="battery_history_total_time">"總計時間："</string>
     <string name="battery_history_starts">"啟動次數：<xliff:g id="STARTS">%1$d</xliff:g>"</string>
-    <string name="battery_history_days">"<xliff:g id="DAYS">%1$d</xliff:g> 天，<xliff:g id="HOURS">%2$d</xliff:g> 小時，<xliff:g id="MINUTES">%3$d</xliff:g> 分鐘，<xliff:g id="SECONDS">%4$d</xliff:g> 秒"</string>
-    <string name="battery_history_hours">"<xliff:g id="HOURS">%1$d</xliff:g> 小時，<xliff:g id="MINUTES">%2$d</xliff:g> 分鐘，<xliff:g id="SECONDS">%3$d</xliff:g> 秒"</string>
-    <string name="battery_history_minutes">"<xliff:g id="MINUTES">%1$d</xliff:g> 分鐘，<xliff:g id="SECONDS">%2$d</xliff:g> 秒"</string>
+    <string name="battery_history_days">"<xliff:g id="DAYS">%1$d</xliff:g> 天 <xliff:g id="HOURS">%2$d</xliff:g> 小時 <xliff:g id="MINUTES">%3$d</xliff:g> 分 <xliff:g id="SECONDS">%4$d</xliff:g> 秒"</string>
+    <string name="battery_history_hours">"<xliff:g id="HOURS">%1$d</xliff:g> 小時 <xliff:g id="MINUTES">%2$d</xliff:g> 分 <xliff:g id="SECONDS">%3$d</xliff:g> 秒"</string>
+    <string name="battery_history_minutes">"<xliff:g id="MINUTES">%1$d</xliff:g> 分 <xliff:g id="SECONDS">%2$d</xliff:g> 秒"</string>
     <string name="battery_history_seconds">"<xliff:g id="SECONDS">%1$d</xliff:g> 秒"</string>
     <string name="battery_history_packages_sharing_this_uid">"共用此 UID 的封裝："</string>
     <string name="battery_history_no_data">"沒有電池使用資料"</string>
@@ -672,4 +725,277 @@
     <string name="app_name_label">"應用程式"</string>
     <string name="launch_count_label">"計數"</string>
     <string name="usage_time_label">"使用時間"</string>
+    <string name="accessibility_settings_title">"協助工具"</string>
+    <string name="accessibility_settings_summary">"管理協助工具選項"</string>
+    <string name="toggle_accessibility_title">"協助工具"</string>
+    <string name="accessibility_services_category">"協助工具服務"</string>
+    <string name="no_accessibility_services_summary">"尚未安裝協助工具服務。"</string>
+    <string name="accessibility_service_security_warning">"此協助工具服務可能會收集您輸入的所有文字，包括個人資料及信用卡號碼，但並不會收集您輸入的密碼，而且它也可能會記錄您的使用者介面互動行為。該服務是由應用程式「<xliff:g id="ACCESSIBILITY_SERVICE_NAME">%1$s</xliff:g>」所提供，要啟動此協助工具服務嗎？"</string>
+    <string name="accessibility_service_disable_warning">"要停用協助工具嗎？"</string>
+    <string name="power_usage_summary_title">"電池使用狀況"</string>
+    <string name="power_usage_summary">"消耗電池電力的功能"</string>
+    <string name="battery_since_unplugged">"拔除插頭後的電池使用狀況"</string>
+    <string name="battery_since_reset">"重設後的電池使用狀況"</string>
+    <string name="battery_stats_duration">"拔除插頭後已過了 <xliff:g id="TIME">%1$s</xliff:g>"</string>
+    <string name="awake">"裝置甦醒時間"</string>
+    <string name="wifi_on_time">"WiFi 開啟時間"</string>
+    <string name="bluetooth_on_time">"WiFi 開啟時間"</string>
+    <string name="usage_name_percent">"<xliff:g id="NAME">%1$s</xliff:g> -  <xliff:g id="PERCENT">%2$s</xliff:g>%%"</string>
+    <string name="details_title">"電池使用狀況詳細資料"</string>
+    <string name="details_subtitle">"使用狀況詳細資訊"</string>
+    <string name="controls_subtitle">"調整電力使用"</string>
+    <string name="packages_subtitle">"已包含封裝檔案"</string>
+    <string name="power_screen">"顯示"</string>
+    <string name="power_wifi">"Wi-Fi"</string>
+    <string name="power_bluetooth">"藍牙"</string>
+    <string name="power_cell">"手機待命"</string>
+    <string name="power_phone">"語音通話"</string>
+    <string name="power_idle">"手機閒置"</string>
+    <string name="usage_type_cpu">"CPU 總使用時間"</string>
+    <string name="usage_type_cpu_foreground">"CPU 前端使用狀況"</string>
+    <string name="usage_type_gps">"GPS"</string>
+    <string name="usage_type_phone">"手機"</string>
+    <string name="usage_type_data_send">"已傳送資料"</string>
+    <string name="usage_type_data_recv">"已接收資料"</string>
+    <string name="usage_type_audio">"音訊"</string>
+    <string name="usage_type_video">"影片"</string>
+    <string name="usage_type_on_time">"開啟時間"</string>
+    <string name="battery_action_stop">"強制停止"</string>
+    <string name="battery_action_app_details">"應用程式資訊"</string>
+    <string name="battery_action_app_settings">"應用程式設定"</string>
+    <string name="battery_action_display">"顯示設定"</string>
+    <string name="battery_action_wifi">"WiFi 設定"</string>
+    <string name="battery_action_bluetooth">"藍牙設定"</string>
+    <string name="battery_desc_voice">"語音通話耗電量"</string>
+    <string name="battery_desc_standby">"手機閒置時的耗電量"</string>
+    <string name="battery_desc_radio">"手機無線電耗電量"</string>
+    <string name="battery_sugg_radio">"切換到飛行模式，以便裝置不在服務涵蓋範圍時能節省電力"</string>
+    <string name="battery_desc_display">"顯示與背光啟動時的耗電量"</string>
+    <string name="battery_sugg_display">"降低螢幕亮度和/或螢幕逾時時間"</string>
+    <string name="battery_desc_wifi">"Wi-Fi 耗電量"</string>
+    <string name="battery_sugg_wifi">"未使用或無法使用 WiFi 時即關閉 WiFi"</string>
+    <string name="battery_desc_bluetooth">"藍牙耗電量"</string>
+    <string name="battery_sugg_bluetooth_basic">"未使用藍牙時即關閉藍牙"</string>
+    <string name="battery_sugg_bluetooth_headset">"嘗試連線至不同的藍牙裝置"</string>
+    <string name="battery_desc_apps">"應用程式執行時的耗電量"</string>
+    <string name="battery_sugg_apps_info">"停止或解除安裝應用程式"</string>
+    <string name="battery_sugg_apps_gps">"未使用 GPS 時即關閉 GPS"</string>
+    <string name="battery_sugg_apps_settings">"應用程式可能有提供節省電力的設定"</string>
+    <string name="menu_stats_unplugged">"拔除插頭後已過了 <xliff:g id="UNPLUGGED">%1$s</xliff:g>"</string>
+    <string name="menu_stats_last_unplugged">"<xliff:g id="UNPLUGGED">%1$s</xliff:g> 前拔除插頭"</string>
+    <string name="menu_stats_total">"電池整體使用狀況"</string>
+    <string name="menu_stats_refresh">"重新整理"</string>
+    <string name="process_kernel_label">"Android 作業系統"</string>
+    <string name="process_mediaserver_label">"媒體伺服器"</string>
+    <string name="tts_settings">"語音合成"</string>
+    <string name="tts_settings_summary">"設定文字轉語音選項"</string>
+    <string name="tts_settings_title">"語音合成器控制項"</string>
+    <string name="use_default_tts_settings_title">"永遠使用我的設定"</string>
+    <string name="use_default_tts_settings_summary">"下列預設設定會覆寫應用程式設定"</string>
+    <string name="tts_default_settings_section">"預設設定"</string>
+    <string name="tts_default_rate_title">"語音速率"</string>
+    <string name="tts_default_rate_summary">"文字轉換成語音後的播放速度"</string>
+    <string name="tts_default_pitch_title">"音調"</string>
+    <string name="tts_default_pitch_summary">"影響文字轉語音功能的播放音調"</string>
+    <string name="tts_default_lang_title">"語言"</string>
+    <string name="tts_default_lang_summary">"為文字轉語音功能設定所使用的語言"</string>
+    <string name="tts_play_example_title">"聆聽範例"</string>
+    <string name="tts_play_example_summary">"播放簡短的語音合成範例"</string>
+    <string name="tts_install_data_title">"安裝語音資料"</string>
+    <string name="tts_install_data_summary">"安裝語音合成所需的語音資料"</string>
+    <string name="tts_data_installed_summary">"語音合成所需的語音資料已正確安裝"</string>
+    <string name="tts_demo">"請聆聽合成的範例。"</string>
+    <string name="tts_settings_changed_demo">"設定已變更，請聆聽語音範例。"</string>
+    <string name="gadget_title">"電源控制"</string>
+    <string name="vpn_settings_activity_title">"VPN 設定"</string>
+    <string name="vpn_connect_to">"連線至「%s」"</string>
+    <!-- no translation found for vpn_username_colon (7854930370861306247) -->
+    <skip />
+    <string name="vpn_password_colon">"密碼："</string>
+    <!-- no translation found for vpn_a_username (6664733641993968692) -->
+    <skip />
+    <!-- no translation found for vpn_a_password (1537213632501483753) -->
+    <skip />
+    <!-- no translation found for vpn_save_username (1408415289165970790) -->
+    <skip />
+    <string name="vpn_connect_button">"連線"</string>
+    <string name="vpn_yes_button">"是"</string>
+    <string name="vpn_no_button">"否"</string>
+    <string name="vpn_back_button">"返回"</string>
+    <string name="vpn_mistake_button">"不，這是錯誤的決定"</string>
+    <!-- no translation found for vpn_menu_done (93528279226907926) -->
+    <skip />
+    <!-- no translation found for vpn_menu_cancel (7234451214611202868) -->
+    <skip />
+    <!-- no translation found for vpn_menu_revert (4407762442281467659) -->
+    <skip />
+    <!-- no translation found for vpn_menu_connect (1089399414463784218) -->
+    <skip />
+    <!-- no translation found for vpn_menu_disconnect (8254492450022562235) -->
+    <skip />
+    <!-- no translation found for vpn_menu_edit (4526245173583195618) -->
+    <skip />
+    <!-- no translation found for vpn_menu_delete (3326527392609513129) -->
+    <skip />
+    <!-- no translation found for vpn_error_miss_entering (1467455143582547499) -->
+    <skip />
+    <!-- no translation found for vpn_error_miss_selecting (953436717902387192) -->
+    <skip />
+    <!-- no translation found for vpn_error_duplicate_name (2786397299628471911) -->
+    <skip />
+    <!-- no translation found for vpn_confirm_profile_deletion (8679536635364177239) -->
+    <skip />
+    <!-- no translation found for vpn_confirm_add_profile_cancellation (3377869170901609182) -->
+    <skip />
+    <!-- no translation found for vpn_confirm_edit_profile_cancellation (7496760181072204494) -->
+    <skip />
+    <!-- no translation found for vpn_confirm_reconnect (5748535476278674296) -->
+    <skip />
+    <!-- no translation found for vpn_unknown_server_dialog_msg (3080742299823671319) -->
+    <skip />
+    <!-- no translation found for vpn_auth_error_dialog_msg (5476820106624807614) -->
+    <skip />
+    <!-- no translation found for vpn_type_title (6392933604218676224) -->
+    <skip />
+    <!-- no translation found for vpn_add_new_vpn (5438260689052714550) -->
+    <skip />
+    <!-- no translation found for vpn_edit_title_add (2550661826320709266) -->
+    <skip />
+    <!-- no translation found for vpn_edit_title_edit (1769999313158207723) -->
+    <skip />
+    <!-- no translation found for vpns (3148141862835492816) -->
+    <skip />
+    <string name="vpn_connecting">"連線中..."</string>
+    <string name="vpn_disconnecting">"中斷連線中..."</string>
+    <string name="vpn_connected">"已連線"</string>
+    <!-- no translation found for vpn_connect_hint (7442898962925875181) -->
+    <skip />
+    <!-- no translation found for vpn_name (1550918148476193076) -->
+    <skip />
+    <!-- no translation found for vpn_a_name (8445736942405283509) -->
+    <skip />
+    <string name="vpn_profile_added">"已新增「%s」"</string>
+    <string name="vpn_profile_replaced">"已變更「%s」的設定"</string>
+    <!-- no translation found for vpn_user_certificate_title (6812545893924071742) -->
+    <skip />
+    <!-- no translation found for vpn_user_certificate (949322691686938888) -->
+    <skip />
+    <!-- no translation found for vpn_a_user_certificate (8943983437956898649) -->
+    <skip />
+    <!-- no translation found for vpn_ca_certificate_title (7846466160795589985) -->
+    <skip />
+    <!-- no translation found for vpn_ca_certificate (465085144064264742) -->
+    <skip />
+    <!-- no translation found for vpn_a_ca_certificate (3374242520974884295) -->
+    <skip />
+    <!-- no translation found for vpn_l2tp_secret_string_title (5039677186748940987) -->
+    <skip />
+    <!-- no translation found for vpn_l2tp_secret (529359749677142076) -->
+    <skip />
+    <!-- no translation found for vpn_a_l2tp_secret (6612042930810981845) -->
+    <skip />
+    <!-- no translation found for vpn_ipsec_presharedkey_title (2184060087690539175) -->
+    <skip />
+    <!-- no translation found for vpn_ipsec_presharedkey (5434316521616673741) -->
+    <skip />
+    <!-- no translation found for vpn_a_ipsec_presharedkey (1255301923217898418) -->
+    <skip />
+    <!-- no translation found for vpn_vpn_server_title (8897005887420358913) -->
+    <skip />
+    <!-- no translation found for vpn_vpn_server (1141754908824209260) -->
+    <skip />
+    <!-- no translation found for vpn_a_vpn_server (5960906152125045853) -->
+    <skip />
+    <!-- no translation found for vpn_vpn_server_dialog_title (7850850940160521918) -->
+    <skip />
+    <!-- no translation found for vpn_dns_search_list_title (1022776976104584251) -->
+    <skip />
+    <!-- no translation found for vpn_dns_search_list (4230034234026605360) -->
+    <skip />
+    <!-- no translation found for vpn_field_is_set (1880980734721258127) -->
+    <skip />
+    <!-- no translation found for vpn_field_not_set (6827205815004809490) -->
+    <skip />
+    <!-- no translation found for vpn_field_not_set_optional (8665901697706781015) -->
+    <skip />
+    <!-- no translation found for vpn_enable_field (3348948489989523325) -->
+    <skip />
+    <!-- no translation found for vpn_disable_field (2286966253789266389) -->
+    <skip />
+    <!-- no translation found for vpn_is_enabled (5128973727115662815) -->
+    <skip />
+    <!-- no translation found for vpn_is_disabled (8028085699769751756) -->
+    <skip />
+    <!-- no translation found for vpn_settings_title (7327468307909556719) -->
+    <skip />
+    <!-- no translation found for vpn_settings_summary (8849924181594963972) -->
+    <skip />
+    <!-- no translation found for cstor_settings_category (2284299080682591107) -->
+    <skip />
+    <!-- no translation found for cstor_access_title (1739505390736236717) -->
+    <skip />
+    <!-- no translation found for cstor_access_summary (4512681868217546677) -->
+    <skip />
+    <!-- no translation found for cstor_access_dialog_title (3024256293191879190) -->
+    <skip />
+    <!-- no translation found for cstor_access_dialog_hint_from_action (679746865623760961) -->
+    <skip />
+    <!-- no translation found for cstor_set_passwd_title (6156763762703061470) -->
+    <skip />
+    <!-- no translation found for cstor_set_passwd_summary (5248560429856597398) -->
+    <skip />
+    <!-- no translation found for cstor_set_passwd_dialog_title (4071157542842979977) -->
+    <skip />
+    <!-- no translation found for cstor_reset_title (6001600882136794382) -->
+    <skip />
+    <!-- no translation found for cstor_reset_summary (7509525030771504833) -->
+    <skip />
+    <!-- no translation found for cstor_reset_hint (5331632794451859788) -->
+    <skip />
+    <!-- no translation found for cstor_name_credential_dialog_title (1723509156126180662) -->
+    <skip />
+    <!-- no translation found for cstor_credential_name (2958936431813760259) -->
+    <skip />
+    <!-- no translation found for cstor_credential_info (6097346149400207440) -->
+    <skip />
+    <!-- no translation found for cstor_name_credential_hint (6889198058976515785) -->
+    <skip />
+    <!-- no translation found for cstor_old_password (979282118063084561) -->
+    <skip />
+    <!-- no translation found for cstor_new_password (6218562692435670047) -->
+    <skip />
+    <!-- no translation found for cstor_confirm_password (8996028123356342466) -->
+    <skip />
+    <!-- no translation found for cstor_first_time_hint (1831593416099224962) -->
+    <skip />
+    <!-- no translation found for cstor_first_time_hint_from_action (4690937025845780557) -->
+    <skip />
+    <!-- no translation found for cstor_password_error (2917326097260402464) -->
+    <skip />
+    <!-- no translation found for cstor_password_error_reset_warning (3336370539045905953) -->
+    <skip />
+    <!-- no translation found for cstor_password_error_reset_warning_plural (6209069679269017200) -->
+    <skip />
+    <!-- no translation found for cstor_passwords_error (956773958408751155) -->
+    <skip />
+    <!-- no translation found for cstor_passwords_empty_error (6062539742626760734) -->
+    <skip />
+    <!-- no translation found for cstor_password_empty_error (7249632576906961482) -->
+    <skip />
+    <!-- no translation found for cstor_password_verification_error (8553930704493511389) -->
+    <skip />
+    <!-- no translation found for cstor_name_empty_error (7499971191993770322) -->
+    <skip />
+    <!-- no translation found for cstor_name_char_error (8048089317968192516) -->
+    <skip />
+    <!-- no translation found for cstor_is_enabled (4054049098081482785) -->
+    <skip />
+    <!-- no translation found for cstor_is_added (794788474010251572) -->
+    <skip />
+    <!-- no translation found for cstor_add_error (7799232544686721435) -->
+    <skip />
+    <!-- no translation found for emergency_tone_title (1055954530111587114) -->
+    <skip />
+    <!-- no translation found for emergency_tone_summary (722259232924572153) -->
+    <skip />
 </resources>

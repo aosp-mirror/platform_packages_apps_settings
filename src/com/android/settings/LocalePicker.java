@@ -39,6 +39,8 @@ public class LocalePicker extends ListActivity {
     private static final String TAG = "LocalePicker";
 
     Loc[] mLocales;
+    String[] mSpecialLocaleCodes;
+    String[] mSpecialLocaleNames;
 
     private static class Loc implements Comparable {
         static Collator sCollator = Collator.getInstance();
@@ -70,6 +72,9 @@ public class LocalePicker extends ListActivity {
         super.onCreate(icicle);
         setContentView(getContentView());
 
+        mSpecialLocaleCodes = getResources().getStringArray(R.array.special_locale_codes);
+        mSpecialLocaleNames = getResources().getStringArray(R.array.special_locale_names);
+
         String[] locales = getAssets().getLocales();
         Arrays.sort(locales);
 
@@ -98,15 +103,13 @@ public class LocalePicker extends ListActivity {
                             language)) {
                         Log.v(TAG, "backing up and fixing "+
                                 preprocess[finalSize-1].label+" to "+
-                                preprocess[finalSize-1].locale.
-                                getDisplayName(l));
+                                getDisplayName(preprocess[finalSize-1].locale));
                         preprocess[finalSize-1].label = toTitleCase(
-                                preprocess[finalSize-1].
-                                locale.getDisplayName(l));
+                                getDisplayName(preprocess[finalSize-1].locale));
                         Log.v(TAG, "  and adding "+
-                                toTitleCase(l.getDisplayName(l)));
+                                toTitleCase(getDisplayName(l)));
                         preprocess[finalSize++] =
-                                new Loc(toTitleCase(l.getDisplayName(l)), l);
+                                new Loc(toTitleCase(getDisplayName(l)), l);
                     } else {
                         String displayName;
                         if (s.equals("zz_ZZ")) {
@@ -138,6 +141,18 @@ public class LocalePicker extends ListActivity {
         }
 
         return Character.toUpperCase(s.charAt(0)) + s.substring(1);
+    }
+
+    private String getDisplayName(Locale l) {
+        String code = l.toString();
+
+        for (int i = 0; i < mSpecialLocaleCodes.length; i++) {
+            if (mSpecialLocaleCodes[i].equals(code)) {
+                return mSpecialLocaleNames[i];
+            }
+        }
+
+        return l.getDisplayName(l);
     }
 
     @Override

@@ -24,6 +24,7 @@ import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.PackageManager.NameNotFoundException;
+import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.provider.Settings;
@@ -60,12 +61,13 @@ public class PowerUsageDetail extends Activity implements Button.OnClickListener
         R.string.battery_desc_display,
         R.string.battery_desc_apps
     };
-    
+
     public static final int ACTION_DISPLAY_SETTINGS = 1;
     public static final int ACTION_WIFI_SETTINGS = 2;
     public static final int ACTION_BLUETOOTH_SETTINGS = 3;
     public static final int ACTION_WIRELESS_SETTINGS = 4;
-    public static final int ACTION_APP_DETAILS = 6;
+    public static final int ACTION_APP_DETAILS = 5;
+    public static final int ACTION_SECURITY_SETTINGS = 6;
 
     public static final int USAGE_SINCE_UNPLUGGED = 1;
     public static final int USAGE_SINCE_RESET = 2;
@@ -80,6 +82,7 @@ public class PowerUsageDetail extends Activity implements Button.OnClickListener
     public static final String EXTRA_DETAIL_VALUES = "values"; // Array of doubles
     public static final String EXTRA_DRAIN_TYPE = "drainType"; // DrainType
     public static final String EXTRA_ICON_PACKAGE = "iconPackage"; // String
+    public static final String EXTRA_NO_COVERAGE = "noCoverage";
     public static final String EXTRA_ICON_ID = "iconId"; // Int
 
     private static final boolean DEBUG = true;
@@ -90,16 +93,16 @@ public class PowerUsageDetail extends Activity implements Button.OnClickListener
     private double[] mValues;
     private TextView mTitleView;
     private ViewGroup mDetailsParent;
+    private ViewGroup mControlsParent;
     private long mStartTime;
     private DrainType mDrainType;
-    private int mAction1;
-    private int mAction2;
     private PercentageBar mGauge;
     private Drawable mAppIcon;
+    private double mNoCoverage; // Percentage of time that there was no coverage
+
+    private boolean mUsesGps;
 
     private static final String TAG = "PowerUsageDetail";
-    private Button mButton1;
-    private Button mButton2;
     private String[] mPackages;
 
     @Override
@@ -128,6 +131,7 @@ public class PowerUsageDetail extends Activity implements Button.OnClickListener
         mUsageSince = intent.getIntExtra(EXTRA_USAGE_SINCE, USAGE_SINCE_UNPLUGGED);
         mUid = intent.getIntExtra(EXTRA_UID, 0);
         mDrainType = (DrainType) intent.getSerializableExtra(EXTRA_DRAIN_TYPE);
+        mNoCoverage = intent.getDoubleExtra(EXTRA_NO_COVERAGE, 0);
         String iconPackage = intent.getStringExtra(EXTRA_ICON_PACKAGE);
         int iconId = intent.getIntExtra(EXTRA_ICON_ID, 0);
         if (!TextUtils.isEmpty(iconPackage)) {
@@ -167,8 +171,46 @@ public class PowerUsageDetail extends Activity implements Button.OnClickListener
 
         ImageView iconImage = (ImageView) findViewById(R.id.icon);
         iconImage.setImageDrawable(mAppIcon);
-        
+
         mDetailsParent = (ViewGroup) findViewById(R.id.details);
+        mControlsParent = (ViewGroup) findViewById(R.id.controls);
+
+        fillDetailsSection();
+        fillPackagesSection(mUid);
+        fillControlsSection(mUid);
+    }
+
+    public void onClick(View v) {
+        doAction((Integer) v.getTag());
+    }
+
+    private void doAction(int action) {
+        switch (action) {
+            case ACTION_DISPLAY_SETTINGS:
+                startActivity(new Intent(Settings.ACTION_DISPLAY_SETTINGS));
+                break;
+            case ACTION_WIFI_SETTINGS:
+                startActivity(new Intent(Settings.ACTION_WIFI_SETTINGS));
+                break;
+            case ACTION_BLUETOOTH_SETTINGS:
+                startActivity(new Intent(Settings.ACTION_BLUETOOTH_SETTINGS));
+                break;
+            case ACTION_WIRELESS_SETTINGS:
+                startActivity(new Intent(Settings.ACTION_WIRELESS_SETTINGS));
+                break;
+            case ACTION_APP_DETAILS:
+                Intent intent = new Intent(Intent.ACTION_VIEW);
+                intent.setClass(this, InstalledAppDetails.class);
+                intent.putExtra("com.android.settings.ApplicationPkgName", mPackages[0]);
+                startActivity(intent);
+                break;
+            case ACTION_SECURITY_SETTINGS:
+                startActivity(new Intent(Settings.ACTION_SECURITY_SETTINGS));
+                break;
+        }
+    }
+
+    private void fillDetailsSection() {
         LayoutInflater inflater = getLayoutInflater();
         if (mTypes != null && mValues != null) {
             for (int i = 0; i < mTypes.length; i++) {
@@ -181,6 +223,12 @@ public class PowerUsageDetail extends Activity implements Button.OnClickListener
                     case R.string.usage_type_data_send:
                         value = Utils.formatBytes(this, mValues[i]);
                         break;
+                    case R.string.usage_type_no_coverage:
+                        value = String.format("%d%%", (int) Math.floor(mValues[i]));
+                        break;
+                    case R.string.usage_type_gps:
+                        mUsesGps = true;
+                        // Fall through
                     default:
                         value = Utils.formatElapsedTime(this, mValues[i]);
                 }
@@ -193,41 +241,9 @@ public class PowerUsageDetail extends Activity implements Button.OnClickListener
                 valueView.setText(value);
             }
         }
-
-        fillPackagesSection(mUid);
-        fillControlsSection(mUid);
-    }
-
-    public void onClick(View v) {
-        int action = v == mButton1 ? mAction1 : mAction2;
-        doAction(action);
-    }
-
-    private void doAction(int action) {
-        switch (action) {
-            case ACTION_DISPLAY_SETTINGS:
-                startActivity(new Intent(Settings.ACTION_DISPLAY_SETTINGS));
-                break;
-            case ACTION_WIFI_SETTINGS:
-                startActivity(new Intent(Settings.ACTION_WIRELESS_SETTINGS));
-                break;
-            case ACTION_BLUETOOTH_SETTINGS:
-                startActivity(new Intent(Settings.ACTION_WIRELESS_SETTINGS));
-                break;
-            case ACTION_APP_DETAILS:
-                Intent intent = new Intent(Intent.ACTION_VIEW);
-                intent.setClass(this, InstalledAppDetails.class);
-                intent.putExtra("com.android.settings.ApplicationPkgName", mPackages[0]);
-                startActivity(intent);
-                break;
-        }
     }
 
     private void fillControlsSection(int uid) {
-        String label1 = null;
-        String label2 = null;
-        mAction1 = 0;
-        mAction2 = 0;
         PackageManager pm = getPackageManager();
         String[] packages = pm.getPackagesForUid(uid);
         PackageInfo pi = null;
@@ -237,43 +253,66 @@ public class PowerUsageDetail extends Activity implements Button.OnClickListener
         ApplicationInfo ai = pi != null? pi.applicationInfo : null;
         boolean isSystem = ai != null? (ai.flags & ApplicationInfo.FLAG_SYSTEM) != 0 : false;
 
-        if (uid < 1000 || !isSystem) { 
-            switch (mDrainType) {
-                case APP:
-                    //label1 = getString(R.string.battery_action_stop);
-                    if (packages != null) {
-                        label2 = getString(R.string.battery_action_app_details);
-                        mAction2 = ACTION_APP_DETAILS;
-                    }
-                    break;
-                case SCREEN:
-                    label2 = getString(R.string.battery_action_display);
-                    mAction2 = ACTION_DISPLAY_SETTINGS;
-                    break;
-                case WIFI:
-                    label2 = getString(R.string.battery_action_wifi);
-                    mAction2 = ACTION_WIRELESS_SETTINGS;
-                    break;
-                case BLUETOOTH:
-                    //label2 = getString(R.string.battery_action_bluetooth);
-                    //mAction2 = ACTION_BLUETOOTH_SETTINGS;
-                    break;
-            }
+        boolean removeHeader = true;
+        switch (mDrainType) {
+            case APP:
+                // If it is a Java application and it's not a system application
+                if (packages != null && !isSystem) {
+                    addControl(R.string.battery_action_app_details,
+                            R.string.battery_sugg_apps_info, ACTION_APP_DETAILS);
+                    removeHeader = false;
+                    // If the application has a settings screen, jump to  that
+                    // TODO:
+                }
+                if (mUsesGps) {
+                    addControl(R.string.security_settings_title,
+                            R.string.battery_sugg_apps_gps, ACTION_SECURITY_SETTINGS);
+                    removeHeader = false;
+                }
+                break;
+            case SCREEN:
+                addControl(R.string.sound_and_display_settings,
+                        R.string.battery_sugg_display,
+                        ACTION_DISPLAY_SETTINGS);
+                removeHeader = false;
+                break;
+            case WIFI:
+                addControl(R.string.wifi_settings,
+                        R.string.battery_sugg_wifi,
+                        ACTION_WIFI_SETTINGS);
+                removeHeader = false;
+                break;
+            case BLUETOOTH:
+                addControl(R.string.bluetooth_settings,
+                        R.string.battery_sugg_bluetooth_basic,
+                        ACTION_BLUETOOTH_SETTINGS);
+                removeHeader = false;
+                break;
+            case CELL:
+                if (mNoCoverage > 10) {
+                    addControl(R.string.radio_controls_title,
+                            R.string.battery_sugg_radio,
+                            ACTION_WIRELESS_SETTINGS);
+                    removeHeader = false;
+                }
+                break;
         }
-        mButton1 = (Button) findViewById(R.id.action_button1);
-        mButton2 = (Button) findViewById(R.id.action_button2);
-        mButton1.setOnClickListener(this);
-        mButton2.setOnClickListener(this);
-        if (label1 == null) {
-            mButton1.setVisibility(View.GONE);
-        } else {
-            mButton1.setText(label1);
+        if (removeHeader) {
+            mControlsParent.setVisibility(View.GONE);
         }
-        if (label2 == null) {
-            findViewById(R.id.controls_section).setVisibility(View.GONE);
-        } else {
-            mButton2.setText(label2);
-        }
+    }
+
+    private void addControl(int title, int summary, int action) {
+        final Resources res = getResources();
+        LayoutInflater inflater = getLayoutInflater();
+        ViewGroup item = (ViewGroup) inflater.inflate(R.layout.power_usage_action_item,null);
+        mControlsParent.addView(item);
+        Button actionButton = (Button) item.findViewById(R.id.action_button);
+        TextView summaryView = (TextView) item.findViewById(R.id.summary);
+        actionButton.setText(res.getString(title));
+        summaryView.setText(res.getString(summary));
+        actionButton.setOnClickListener(this);
+        actionButton.setTag(new Integer(action));
     }
 
     private void removePackagesSection() {
