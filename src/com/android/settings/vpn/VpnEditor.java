@@ -24,6 +24,7 @@ import android.content.Intent;
 import android.net.vpn.L2tpIpsecProfile;
 import android.net.vpn.L2tpIpsecPskProfile;
 import android.net.vpn.L2tpProfile;
+import android.net.vpn.PptpProfile;
 import android.net.vpn.VpnProfile;
 import android.net.vpn.VpnType;
 import android.os.Bundle;
@@ -161,6 +162,9 @@ public class VpnEditor extends PreferenceActivity {
 
             case L2TP:
                 return new L2tpEditor((L2tpProfile) p);
+
+            case PPTP:
+                return new PptpEditor((PptpProfile) p);
 
             default:
                 return new VpnProfileEditor(p);

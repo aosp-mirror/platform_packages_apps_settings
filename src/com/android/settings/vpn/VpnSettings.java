@@ -109,6 +109,8 @@ public class VpnSettings extends PreferenceActivity implements
     private static final int DIALOG_AUTH_ERROR = 3;
     private static final int DIALOG_UNKNOWN_SERVER = 4;
     private static final int DIALOG_SECRET_NOT_SET = 5;
+    private static final int DIALOG_CHALLENGE_ERROR = 6;
+    private static final int DIALOG_REMOTE_HUNG_UP_ERROR = 7;
 
     private static final int NO_ERROR = 0;
 
@@ -204,6 +206,12 @@ public class VpnSettings extends PreferenceActivity implements
             case DIALOG_AUTH_ERROR:
                 return createAuthErrorDialog();
 
+            case DIALOG_REMOTE_HUNG_UP_ERROR:
+                return createRemoteHungUpErrorDialog();
+
+            case DIALOG_CHALLENGE_ERROR:
+                return createChallengeErrorDialog();
+
             case DIALOG_UNKNOWN_SERVER:
                 return createUnknownServerDialog();
 
@@ -244,17 +252,22 @@ public class VpnSettings extends PreferenceActivity implements
                 .setMessage(R.string.vpn_auth_error_dialog_msg)
                 .create();
     }
-    private Dialog createUnknownServerDialog() {
+
+    private Dialog createRemoteHungUpErrorDialog() {
         return createCommonDialogBuilder()
+                .setMessage(R.string.vpn_remote_hung_up_error_dialog_msg)
+                .create();
+    }
+
+    private Dialog createChallengeErrorDialog() {
+        return createCommonEditDialogBuilder()
+                .setMessage(R.string.vpn_challenge_error_dialog_msg)
+                .create();
+    }
+
+    private Dialog createUnknownServerDialog() {
+        return createCommonEditDialogBuilder()
                 .setMessage(R.string.vpn_unknown_server_dialog_msg)
-                .setPositiveButton(R.string.vpn_yes_button,
-                        new DialogInterface.OnClickListener() {
-                            public void onClick(DialogInterface dialog, int w) {
-                                VpnProfile p = mConnectingActor.getProfile();
-                                onIdle();
-                                startVpnEditor(p);
-                            }
-                        })
                 .create();
     }
 
@@ -269,6 +282,18 @@ public class VpnSettings extends PreferenceActivity implements
                             }
                         })
                 .create();
+    }
+
+    private AlertDialog.Builder createCommonEditDialogBuilder() {
+        return createCommonDialogBuilder()
+                .setPositiveButton(R.string.vpn_yes_button,
+                        new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int w) {
+                                VpnProfile p = mConnectingActor.getProfile();
+                                onIdle();
+                                startVpnEditor(p);
+                            }
+                        });
     }
 
     private AlertDialog.Builder createCommonDialogBuilder() {
@@ -721,6 +746,14 @@ public class VpnSettings extends PreferenceActivity implements
 
                 case VpnManager.VPN_ERROR_AUTH:
                     showDialog(DIALOG_AUTH_ERROR);
+                    break;
+
+                case VpnManager.VPN_ERROR_REMOTE_HUNG_UP:
+                    showDialog(DIALOG_REMOTE_HUNG_UP_ERROR);
+                    break;
+
+                case VpnManager.VPN_ERROR_CHALLENGE:
+                    showDialog(DIALOG_CHALLENGE_ERROR);
                     break;
 
                 case VpnManager.VPN_ERROR_UNKNOWN_SERVER:
