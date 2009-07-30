@@ -355,7 +355,7 @@ public class ManageApplications extends ListActivity implements
                     Log.w(TAG, "Couldnt find application info for:"+pkgName);
                     break;
                 }
-                mObserver.invokeGetSizeInfo(info);
+                mObserver.invokeGetSizeInfo(pkgName);
                 break;
             case ADD_PKG_DONE:
                 if(localLOGV) Log.i(TAG, "Message ADD_PKG_DONE");
@@ -367,7 +367,12 @@ public class ManageApplications extends ListActivity implements
                 if (status) {
                     size = data.getLong(ATTR_PKG_STATS);
                     formattedSize = data.getString(ATTR_PKG_SIZE_STR);
-                    mAppInfoAdapter.addToList(pkgName, size, formattedSize);
+                    int idx = mAppInfoAdapter.getIndex(pkgName);
+                    if (idx == -1) {
+                        mAppInfoAdapter.addToList(pkgName, size, formattedSize);
+                    } else {
+                        mAppInfoAdapter.updatePackage(pkgName, size, formattedSize);
+                    }
                 }
                 break;
             case REFRESH_LABELS:
@@ -1121,7 +1126,7 @@ public class ManageApplications extends ListActivity implements
             }
             return mSizeComparator;
         }
-        
+
         public void bulkUpdateIcons(Map<String, Drawable> icons) {
             if (icons == null) {
                 return;
@@ -1160,19 +1165,6 @@ public class ManageApplications extends ListActivity implements
             if (changed) {
                 notifyDataSetChanged();
             }
-        }
-
-        public boolean updateAppLabel(String pkgName, CharSequence label) {
-            if ((pkgName == null) || (label == null)) {
-                return false;
-            }
-            AppInfo aInfo = mCache.getEntry(pkgName);
-            if (aInfo != null) {
-                aInfo.refreshLabel(label);
-                notifyDataSetChanged();
-                return true;
-            }
-            return false;
         }
 
         private boolean shouldBeInList(int filterOption, ApplicationInfo info) {
@@ -1246,6 +1238,24 @@ public class ManageApplications extends ListActivity implements
             }
         }
 
+        public void updatePackage(String pkgName,
+                long size, String formattedSize) {
+            ApplicationInfo info = null;
+            try {
+                info = mPm.getApplicationInfo(pkgName,
+                        PackageManager.GET_UNINSTALLED_PACKAGES);
+            } catch (NameNotFoundException e) {
+                return;
+            }
+            AppInfo aInfo = mCache.getEntry(pkgName);
+            if (aInfo != null) {
+                aInfo.refreshLabel(info.loadLabel(mPm));
+                aInfo.refreshIcon(info.loadIcon(mPm));
+                aInfo.setSize(size, formattedSize);
+                notifyDataSetChanged();
+            }
+        }
+
         private void removePkgBase(String pkgName) {
             int imax = mAppList.size();
             for (int i = 0; i < imax; i++) {
@@ -1311,21 +1321,6 @@ public class ManageApplications extends ListActivity implements
                 notifyDataSetChanged();
             }
         }
-        
-        public void updateAppSize(String pkgName, long size, String formattedSize) {
-            if(pkgName == null) {
-                return;
-            }
-            AppInfo entry = mCache.getEntry(pkgName);
-            if (entry == null) {
-                if (localLOGV) Log.w(TAG, "Entry for package:"+pkgName+"doesnt exist in map");
-                return;
-            }
-            // Copy the index into the newly updated entry
-            if (entry.setSize(size, formattedSize)) {
-                notifyDataSetChanged();
-            }
-        }
     }
     
     /*
@@ -1371,7 +1366,7 @@ public class ManageApplications extends ListActivity implements
      * and the AppInfo object corresponding to the package name are set on the message
      */
     class PkgSizeObserver extends IPackageStatsObserver.Stub {
-        private ApplicationInfo mAppInfo;
+        String pkgName;
         public void onGetStatsCompleted(PackageStats pStats, boolean pSucceeded) {
             if(DEBUG_PKG_DELAY) {
                 try {
@@ -1379,12 +1374,11 @@ public class ManageApplications extends ListActivity implements
                 } catch (InterruptedException e) {
                 }
             }
-            AppInfo appInfo = null;
             Bundle data = new Bundle();
-            data.putString(ATTR_PKG_NAME, mAppInfo.packageName);
+            data.putString(ATTR_PKG_NAME, pkgName);
             data.putBoolean(ATTR_GET_SIZE_STATUS, pSucceeded);
             if(pSucceeded && pStats != null) {
-                if (localLOGV) Log.i(TAG, "onGetStatsCompleted::"+pStats.packageName+", ("+
+                if (localLOGV) Log.i(TAG, "onGetStatsCompleted::"+pkgName+", ("+
                         pStats.cacheSize+","+
                         pStats.codeSize+", "+pStats.dataSize);
                 long total = getTotalSize(pStats);
@@ -1400,14 +1394,14 @@ public class ManageApplications extends ListActivity implements
             mHandler.sendMessage(msg);
         }
 
-        public void invokeGetSizeInfo(ApplicationInfo pAppInfo) {
-            if(pAppInfo == null || pAppInfo.packageName == null) {
+        public void invokeGetSizeInfo(String packageName) {
+            if (packageName == null) {
                 return;
             }
+            pkgName = packageName;
             if(localLOGV) Log.i(TAG, "Invoking getPackageSizeInfo for package:"+
-                    pAppInfo.packageName);
-            mAppInfo = pAppInfo;
-            mPm.getPackageSizeInfo(pAppInfo.packageName, this);
+                    packageName);
+            mPm.getPackageSizeInfo(packageName, this);
         }
     }
     
