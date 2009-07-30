@@ -134,7 +134,7 @@ public class AccessPointDialog extends AlertDialog implements DialogInterface.On
     private Spinner mSecuritySpinner;
     private Spinner mWepTypeSpinner;
     private CertTool mCertTool;
-    
+
     public AccessPointDialog(Context context, WifiLayer wifiLayer) {
         super(context);
 
@@ -215,6 +215,14 @@ public class AccessPointDialog extends AlertDialog implements DialogInterface.On
     @Override
     public void setTitle(int titleId) {
         setTitle(getContext().getString(titleId));
+    }
+
+    public void enableEnterpriseFields() {
+        setEnterpriseFieldsVisible(true);
+        updateCertificateSelection();
+        setGenericPasswordVisible(true);
+        // Both WPA and WPA2 show the same caption, so either is ok
+        updatePasswordCaption(AccessPointState.WPA);
     }
 
     /** Called after flags are set, the dialog's layout/etc should be set up here */
@@ -318,17 +326,24 @@ public class AccessPointDialog extends AlertDialog implements DialogInterface.On
         if (mMode == MODE_CONFIGURE ||
                 (mState.isEnterprise() && !mState.configured)) {
             setEnterpriseFields(view);
-            mPhase2Spinner.setSelection(getSelectionIndex(
-                    R.array.wifi_phase2_entries, mState.getPhase2()));
-            mEapSpinner.setSelection(getSelectionIndex(
-                    R.array.wifi_eap_entries, mState.getEap()));
-            mClientCertSpinner.setSelection(getSelectionIndex(
-                    getAllUserCertificateKeys(), mState.getEnterpriseField(
-                    AccessPointState.CLIENT_CERT)));
-            mCaCertSpinner.setSelection(getSelectionIndex(
-                    getAllCaCertificateKeys(), mState.getEnterpriseField(
-                    AccessPointState.CA_CERT)));
+            updateCertificateSelection();
         }
+    }
+
+    private void updateCertificateSelection() {
+        setSpinnerAdapter(mClientCertSpinner, getAllUserCertificateKeys());
+        setSpinnerAdapter(mCaCertSpinner, getAllCaCertificateKeys());
+
+        mPhase2Spinner.setSelection(getSelectionIndex(
+                R.array.wifi_phase2_entries, mState.getPhase2()));
+        mEapSpinner.setSelection(getSelectionIndex(
+                R.array.wifi_eap_entries, mState.getEap()));
+        mClientCertSpinner.setSelection(getSelectionIndex(
+                getAllUserCertificateKeys(), mState.getEnterpriseField(
+                AccessPointState.CLIENT_CERT)));
+        mCaCertSpinner.setSelection(getSelectionIndex(
+                getAllCaCertificateKeys(), mState.getEnterpriseField(
+                AccessPointState.CA_CERT)));
     }
 
     private String[] getAllCaCertificateKeys() {
@@ -788,13 +803,9 @@ public class AccessPointDialog extends AlertDialog implements DialogInterface.On
                 if (Keystore.getInstance().getState() != Keystore.UNLOCKED) {
                     getContext().startActivity(new Intent(
                             SecuritySettings.ACTION_UNLOCK_CREDENTIAL_STORAGE));
-                    mSecuritySpinner.setSelection(0);
                     return;
                 }
-                setEnterpriseFieldsVisible(true);
-                setGenericPasswordVisible(true);
-                // Both WPA and WPA2 show the same caption, so either is ok
-                updatePasswordCaption(AccessPointState.WPA);
+                enableEnterpriseFields();
                 break;
             }
         }
