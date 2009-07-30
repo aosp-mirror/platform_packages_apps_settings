@@ -690,7 +690,9 @@ public class LocalBluetoothDevice implements Comparable<LocalBluetoothDevice> {
 
     public void onCreateContextMenu(ContextMenu menu) {
         // No context menu if it is busy (none of these items are applicable if busy)
-        if (isBusy()) return;
+        if (mLocalManager.getBluetoothState() != BluetoothDevice.BLUETOOTH_STATE_ON || isBusy()) {
+            return;
+        }
 
         int bondState = getBondState();
         boolean isConnected = isConnected();

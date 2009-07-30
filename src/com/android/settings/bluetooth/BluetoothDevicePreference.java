@@ -102,10 +102,10 @@ public class BluetoothDevicePreference extends Preference implements LocalBlueto
 
     @Override
     protected void onBindView(View view) {
-        super.onBindView(view);
-
         // Disable this view if the bluetooth enable/disable preference view is off
         setDependency("bt_checkbox");
+
+        super.onBindView(view);
 
         ImageView btClass = (ImageView) view.findViewById(R.id.btClass);
         btClass.setImageResource(mLocalDevice.getBtClassDrawable());
