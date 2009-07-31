@@ -162,6 +162,7 @@ public class Status extends PreferenceActivity {
     @Override
     protected void onCreate(Bundle icicle) {
         super.onCreate(icicle);
+        Preference removablePref;
 
         mHandler = new MyHandler(this);
         
@@ -188,8 +189,15 @@ public class Status extends PreferenceActivity {
             setSummaryText("prl_version", mPhone.getCdmaPrlVersion());
 
             // device is not GSM/UMTS, do not display GSM/UMTS features
-            getPreferenceScreen().removePreference(findPreference("imei"));
-            getPreferenceScreen().removePreference(findPreference("imei_sv"));
+            // check Null in case no specified preference in overlay xml
+            removablePref = findPreference("imei");
+            if (removablePref != null) {
+                getPreferenceScreen().removePreference(removablePref);
+            }
+            removablePref = findPreference("imei_sv");
+            if (removablePref != null) {
+                getPreferenceScreen().removePreference(removablePref);
+            }
         } else {
             setSummaryText("imei", mPhone.getDeviceId());
 
@@ -198,9 +206,19 @@ public class Status extends PreferenceActivity {
                         .getDeviceSoftwareVersion());
 
             // device is not CDMA, do not display CDMA features
-            getPreferenceScreen().removePreference(findPreference("prl_version"));
-            getPreferenceScreen().removePreference(findPreference("meid_number"));
-            getPreferenceScreen().removePreference(findPreference("min_number"));
+            // check Null in case no specified preference in overlay xml
+            removablePref = findPreference("prl_version");
+            if (removablePref != null) {
+                getPreferenceScreen().removePreference(removablePref);
+            }
+            removablePref = findPreference("meid_number");
+            if (removablePref != null) {
+                getPreferenceScreen().removePreference(removablePref);
+            }
+            removablePref = findPreference("min_number");
+            if (removablePref != null) {
+                getPreferenceScreen().removePreference(removablePref);
+            }
         }
 
         setSummaryText("number", mPhone.getLine1Number());
