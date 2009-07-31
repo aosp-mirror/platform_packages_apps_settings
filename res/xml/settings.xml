@@ -16,64 +16,71 @@
 
 <PreferenceScreen
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:settings="http://schemas.android.com/apk/res/com.android.settings"
     android:title="@string/settings_label"
     android:key="parent">
-            
-        <PreferenceScreen
+
+        <com.android.settings.IconPreferenceScreen
             android:title="@string/radio_controls_title"
+            settings:icon="@drawable/ic_settings_wireless"
             android:summary="@string/radio_controls_summary">
             <intent
                 android:action="android.intent.action.MAIN"
                 android:targetPackage="com.android.settings"
                 android:targetClass="com.android.settings.WirelessSettings" />
-        </PreferenceScreen>
+        </com.android.settings.IconPreferenceScreen>
 
-        <PreferenceScreen
+        <com.android.settings.IconPreferenceScreen
             android:key="call_settings"
+            settings:icon="@drawable/ic_settings_call"
             android:title="@string/call_settings_title"
             android:summary="@string/call_settings_summary">
             <intent
                 android:action="android.intent.action.MAIN"
                 android:targetPackage="com.android.phone"
                 android:targetClass="com.android.phone.CallFeaturesSetting" />
-        </PreferenceScreen>
+        </com.android.settings.IconPreferenceScreen>
 
         <!-- Sound and Display -->
-        
-        <PreferenceScreen
+
+        <com.android.settings.IconPreferenceScreen
+            settings:icon="@drawable/ic_settings_sound_display"
             android:title="@string/sound_and_display_settings"
             android:summary="@string/sound_and_display_settings_summary">
             <intent
                 android:action="android.intent.action.MAIN"
                 android:targetPackage="com.android.settings"
                 android:targetClass="com.android.settings.SoundAndDisplaySettings" />
-        </PreferenceScreen>
+        </com.android.settings.IconPreferenceScreen>
 
         <!-- Data Sync. The settings activity will ensure this is resolved to an
              activity on the system image, otherwise it will remove this
              preference. -->
-        
-        <PreferenceScreen
+
+        <com.android.settings.IconPreferenceScreen
+            settings:icon="@drawable/ic_settings_sync"
             android:title="@string/sync_settings"
             android:summary="@string/sync_settings_summary"
             android:key="sync_settings">
             <intent android:action="android.settings.SYNC_SETTINGS" />
-        </PreferenceScreen>
+        </com.android.settings.IconPreferenceScreen>
 
         <!-- Security & Privacy -->
-        
-        <PreferenceScreen
+
+        <com.android.settings.IconPreferenceScreen
+            settings:icon="@drawable/ic_settings_security"
             android:title="@string/security_settings_title"
             android:summary="@string/security_settings_summary">
             <intent
                 android:action="android.intent.action.MAIN"
                 android:targetPackage="com.android.settings"
                 android:targetClass="com.android.settings.SecuritySettings" />
-        </PreferenceScreen>
+        </com.android.settings.IconPreferenceScreen>
 
         <!-- Application Settings -->
-        
-        <PreferenceScreen
+
+        <com.android.settings.IconPreferenceScreen
+            settings:icon="@drawable/ic_settings_applications"
             android:title="@string/applications_settings"
             android:summary="@string/applications_settings_summary"
             android:key="applications_settings">
@@ -81,39 +88,42 @@
                 android:action="android.intent.action.MAIN"
                 android:targetPackage="com.android.settings"
                 android:targetClass="com.android.settings.ApplicationSettings" />
-        </PreferenceScreen>
+        </com.android.settings.IconPreferenceScreen>
 
         <!-- Storage -->
-        
-        <PreferenceScreen 
+
+        <com.android.settings.IconPreferenceScreen 
+            settings:icon="@drawable/ic_settings_storage"
             android:title="@string/storage_settings_title" 
             android:summary="@string/storage_settings_summary">
             <intent android:action="android.intent.action.MAIN"
                 android:targetPackage="com.android.settings"
                 android:targetClass="com.android.settings.deviceinfo.Memory" />
-        </PreferenceScreen>
+        </com.android.settings.IconPreferenceScreen>
 
         <!-- Date & Time -->
-        
-        <PreferenceScreen
+
+        <com.android.settings.IconPreferenceScreen
+            settings:icon="@drawable/ic_settings_date_time"
             android:title="@string/date_and_time_settings_title"
             android:summary="@string/date_and_time_settings_summary">
             <intent
                 android:action="android.intent.action.MAIN"
                 android:targetPackage="com.android.settings"
                 android:targetClass="com.android.settings.DateTimeSettings" />
-        </PreferenceScreen>
+        </com.android.settings.IconPreferenceScreen>
 
         <!-- Language -->
 
-        <PreferenceScreen
+        <com.android.settings.IconPreferenceScreen
+            settings:icon="@drawable/ic_settings_language"
             android:title="@string/language_settings"
             android:summary="@string/language_settings_summary">
             <intent
                 android:action="android.intent.action.MAIN"
                 android:targetPackage="com.android.settings"
                 android:targetClass="com.android.settings.LanguageSettings" />
-        </PreferenceScreen>
+        </com.android.settings.IconPreferenceScreen>
 
         <!-- Search. 
              The settings activity will ensure that this is resolved to an
@@ -123,44 +133,48 @@
              android.app.SearchManager.INTENT_ACTION_SEARCH_SETTINGS.
              -->
 
-        <PreferenceScreen
+        <com.android.settings.IconPreferenceScreen
+            settings:icon="@drawable/ic_settings_search"
             android:title="@string/search_settings"
             android:summary="@string/search_settings_summary"
             android:key="search_settings">
             <intent android:action="android.search.action.SEARCH_SETTINGS" />
-        </PreferenceScreen>
+        </com.android.settings.IconPreferenceScreen>
 
         <!-- Accessibility feedback -->
 
-        <PreferenceScreen
+        <com.android.settings.IconPreferenceScreen
+            settings:icon="@drawable/ic_settings_accessibility"
             android:title="@string/accessibility_settings_title"
             android:summary="@string/accessibility_settings_summary">
             <intent
                 android:action="android.intent.action.MAIN"
                 android:targetPackage="com.android.settings"
                 android:targetClass="com.android.settings.AccessibilitySettings" />
-        </PreferenceScreen>
+        </com.android.settings.IconPreferenceScreen>
 
         <!-- Text-To-Speech -->
-        
-        <PreferenceScreen
+
+        <com.android.settings.IconPreferenceScreen
+            settings:icon="@drawable/ic_settings_speech"
             android:title="@string/tts_settings"
             android:summary="@string/tts_settings_summary">
             <intent
                 android:action="android.intent.action.MAIN"
                 android:targetPackage="com.android.settings"
                 android:targetClass="com.android.settings.TextToSpeechSettings" />
-        </PreferenceScreen>
+        </com.android.settings.IconPreferenceScreen>
 
         <!-- About Device -->
- 
-        <PreferenceScreen
+
+        <com.android.settings.IconPreferenceScreen
+            settings:icon="@drawable/ic_settings_about"
             android:title="@string/about_settings"
             android:summary="@string/about_settings_summary">
             <intent
                 android:action="android.intent.action.MAIN"
                 android:targetPackage="com.android.settings"
                 android:targetClass="com.android.settings.DeviceInfoSettings" />
-        </PreferenceScreen>
+        </com.android.settings.IconPreferenceScreen>
 
 </PreferenceScreen>
