@@ -236,10 +236,10 @@ public class SecuritySettings extends PreferenceActivity implements
         PreferenceCategory credStoreCat = new PreferenceCategory(this);
         credStoreCat.setTitle(R.string.cstor_settings_category);
         root.addPreference(credStoreCat);
-        boolean i = mCstorHelper.isCstorInitialized();
-        credStoreCat.addPreference(mCstorHelper.createAccessCheckBox(i));
+        int s = mCstorHelper.getCstorState();
+        credStoreCat.addPreference(mCstorHelper.createAccessCheckBox(s));
         credStoreCat.addPreference(mCstorHelper.createSetPasswordPreference());
-        credStoreCat.addPreference(mCstorHelper.createResetPreference(i));
+        credStoreCat.addPreference(mCstorHelper.createResetPreference(s));
 
         return root;
     }
@@ -496,6 +496,10 @@ public class SecuritySettings extends PreferenceActivity implements
                 // or CSTOR_UNLOCK_DIALOG
                 mView = mCstorAddCredentialHelper.mView;
             }
+        }
+
+        private int getCstorState() {
+            return mKeystore.getState();
         }
 
         private boolean isCstorUnlocked() {
@@ -806,27 +810,25 @@ public class SecuritySettings extends PreferenceActivity implements
             mResetButton.setEnabled(enabled);
         }
 
-        private Preference createAccessCheckBox(boolean isInitialized) {
+        private Preference createAccessCheckBox(int state) {
             CheckBoxPreference pref = new CheckBoxPreference(
                     SecuritySettings.this);
             pref.setTitle(R.string.cstor_access_title);
             pref.setSummary(R.string.cstor_access_summary);
-            if (isInitialized) pref.setChecked(isCstorUnlocked());
+            pref.setEnabled(state != Keystore.UNINITIALIZED);
+            pref.setChecked(state == Keystore.UNLOCKED);
             pref.setOnPreferenceChangeListener(
                     new Preference.OnPreferenceChangeListener() {
                         public boolean onPreferenceChange(
                                 Preference pref, Object value) {
                             if (((Boolean) value)) {
-                                showCstorDialog(isCstorInitialized()
-                                        ? CSTOR_UNLOCK_DIALOG
-                                        : CSTOR_INIT_DIALOG);
+                                showCstorDialog(CSTOR_UNLOCK_DIALOG);
                             } else {
                                 lockCstor();
                             }
                             return true;
                         }
                     });
-            pref.setEnabled(isInitialized);
             mAccessCheckBox = pref;
             return pref;
         }
@@ -847,7 +849,7 @@ public class SecuritySettings extends PreferenceActivity implements
             return pref;
         }
 
-        private Preference createResetPreference(boolean isInitialized) {
+        private Preference createResetPreference(int state) {
             Preference pref = new Preference(SecuritySettings.this);
             pref.setTitle(R.string.cstor_reset_title);
             pref.setSummary(R.string.cstor_reset_summary);
@@ -858,7 +860,7 @@ public class SecuritySettings extends PreferenceActivity implements
                             return true;
                         }
                     });
-            pref.setEnabled(isInitialized);
+            pref.setEnabled(state != Keystore.UNINITIALIZED);
             mResetButton = pref;
             return pref;
         }
