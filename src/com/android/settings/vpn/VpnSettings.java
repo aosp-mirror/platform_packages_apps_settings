@@ -111,6 +111,7 @@ public class VpnSettings extends PreferenceActivity implements
     private static final int DIALOG_SECRET_NOT_SET = 5;
     private static final int DIALOG_CHALLENGE_ERROR = 6;
     private static final int DIALOG_REMOTE_HUNG_UP_ERROR = 7;
+    private static final int DIALOG_CONNECTION_LOST = 8;
 
     private static final int NO_ERROR = 0;
 
@@ -218,6 +219,9 @@ public class VpnSettings extends PreferenceActivity implements
             case DIALOG_SECRET_NOT_SET:
                 return createSecretNotSetDialog();
 
+            case DIALOG_CONNECTION_LOST:
+                return createConnectionLostDialog();
+
             default:
                 return super.onCreateDialog(id);
         }
@@ -227,7 +231,7 @@ public class VpnSettings extends PreferenceActivity implements
         return new AlertDialog.Builder(this)
                 .setView(mConnectingActor.createConnectView())
                 .setTitle(String.format(getString(R.string.vpn_connect_to),
-                        mConnectingActor.getProfile().getName()))
+                        mActiveProfile.getName()))
                 .setPositiveButton(getString(R.string.vpn_connect_button),
                         this)
                 .setNegativeButton(getString(android.R.string.cancel),
@@ -277,8 +281,7 @@ public class VpnSettings extends PreferenceActivity implements
                 .setPositiveButton(R.string.vpn_yes_button,
                         new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int w) {
-                                VpnProfile p = mConnectingActor.getProfile();
-                                startVpnEditor(p);
+                                startVpnEditor(mActiveProfile);
                             }
                         })
                 .create();
@@ -289,11 +292,17 @@ public class VpnSettings extends PreferenceActivity implements
                 .setPositiveButton(R.string.vpn_yes_button,
                         new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int w) {
-                                VpnProfile p = mConnectingActor.getProfile();
+                                VpnProfile p = mActiveProfile;
                                 onIdle();
                                 startVpnEditor(p);
                             }
                         });
+    }
+
+    private Dialog createConnectionLostDialog() {
+        return createCommonDialogBuilder()
+                .setMessage(R.string.vpn_reconnect_from_lost)
+                .create();
     }
 
     private AlertDialog.Builder createCommonDialogBuilder() {
@@ -303,7 +312,7 @@ public class VpnSettings extends PreferenceActivity implements
                 .setPositiveButton(R.string.vpn_yes_button,
                         new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int w) {
-                                connectOrDisconnect(mConnectingActor.getProfile());
+                                connectOrDisconnect(mActiveProfile);
                             }
                         })
                 .setNegativeButton(R.string.vpn_no_button,
@@ -442,7 +451,7 @@ public class VpnSettings extends PreferenceActivity implements
             Dialog d = (Dialog) dialog;
             String error = mConnectingActor.validateInputs(d);
             if (error == null) {
-                changeState(mConnectingActor.getProfile(), VpnState.CONNECTING);
+                changeState(mActiveProfile, VpnState.CONNECTING);
                 mConnectingActor.connect(d);
                 removeDialog(DIALOG_CONNECT);
                 return;
@@ -758,6 +767,10 @@ public class VpnSettings extends PreferenceActivity implements
 
                 case VpnManager.VPN_ERROR_UNKNOWN_SERVER:
                     showDialog(DIALOG_UNKNOWN_SERVER);
+                    break;
+
+                case VpnManager.VPN_ERROR_CONNECTION_LOST:
+                    showDialog(DIALOG_CONNECTION_LOST);
                     break;
 
                 default:
