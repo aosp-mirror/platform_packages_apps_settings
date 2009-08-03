@@ -59,7 +59,7 @@ public class TextToSpeechSettings extends PreferenceActivity implements
     private static final String LOCALE_DELIMITER = "-";
 
     private static final String FALLBACK_TTS_DEFAULT_SYNTH =
-            TextToSpeech.Engine.FALLBACK_TTS_DEFAULT_SYNTH;
+            TextToSpeech.Engine.DEFAULT_SYNTH;
 
     private Preference         mPlayExample = null;
     private Preference         mInstallData = null;
@@ -141,7 +141,7 @@ public class TextToSpeechSettings extends PreferenceActivity implements
             intVal = Settings.Secure.getInt(resolver, TTS_USE_DEFAULTS);
         } catch (SettingNotFoundException e) {
             // "use default" setting not found, initialize it
-            intVal = TextToSpeech.Engine.FALLBACK_TTS_USE_DEFAULTS;
+            intVal = TextToSpeech.Engine.USE_DEFAULTS;
             Settings.Secure.putInt(resolver, TTS_USE_DEFAULTS, intVal);
         }
         mUseDefaultPref.setChecked(intVal == 1);
@@ -162,7 +162,7 @@ public class TextToSpeechSettings extends PreferenceActivity implements
             intVal = Settings.Secure.getInt(resolver, TTS_DEFAULT_RATE);
         } catch (SettingNotFoundException e) {
             // default rate setting not found, initialize it
-            intVal = TextToSpeech.Engine.FALLBACK_TTS_DEFAULT_RATE;
+            intVal = TextToSpeech.Engine.DEFAULT_RATE;
             Settings.Secure.putInt(resolver, TTS_DEFAULT_RATE, intVal);
         }
         mDefaultRatePref.setValue(String.valueOf(intVal));
@@ -223,7 +223,7 @@ public class TextToSpeechSettings extends PreferenceActivity implements
     private void checkVoiceData() {
         PackageManager pm = getPackageManager();
         Intent intent = new Intent();
-        intent.setAction("android.intent.action.CHECK_TTS_DATA");
+        intent.setAction(TextToSpeech.Engine.ACTION_CHECK_TTS_DATA);
         List<ResolveInfo> resolveInfos = pm.queryIntentActivities(intent, 0);
         // query only the package that matches that of the default engine
         for (int i = 0; i < resolveInfos.size(); i++) {
@@ -243,7 +243,7 @@ public class TextToSpeechSettings extends PreferenceActivity implements
     private void installVoiceData() {
         PackageManager pm = getPackageManager();
         Intent intent = new Intent();
-        intent.setAction("android.intent.action.INSTALL_TTS_DATA");
+        intent.setAction(TextToSpeech.Engine.ACTION_INSTALL_TTS_DATA);
         List<ResolveInfo> resolveInfos = pm.queryIntentActivities(intent, 0);
         // query only the package that matches that of the default engine
         for (int i = 0; i < resolveInfos.size(); i++) {
@@ -260,7 +260,7 @@ public class TextToSpeechSettings extends PreferenceActivity implements
      * Called when the TTS engine is initialized.
      */
     public void onInit(int status) {
-        if (status == TextToSpeech.TTS_SUCCESS) {
+        if (status == TextToSpeech.SUCCESS) {
             Log.v(TAG, "TTS engine for settings screen initialized.");
             mEnableDemo = true;
         } else {
@@ -337,7 +337,7 @@ public class TextToSpeechSettings extends PreferenceActivity implements
             // Play example
             if (mTts != null) {
                 mTts.speak(getResources().getString(R.string.tts_demo),
-                        TextToSpeech.TTS_QUEUE_FLUSH, null);
+                        TextToSpeech.QUEUE_FLUSH, null);
             }
             return true;
         }

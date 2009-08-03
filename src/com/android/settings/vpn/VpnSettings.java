@@ -18,7 +18,6 @@ package com.android.settings.vpn;
 
 import com.android.settings.R;
 import com.android.settings.SecuritySettings;
-import static com.android.settings.vpn.VpnProfileEditor.SECRET_SET_INDICATOR;
 
 import android.app.AlertDialog;
 import android.app.Dialog;
@@ -29,6 +28,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.ServiceConnection;
 import android.net.vpn.IVpnService;
+import android.net.vpn.L2tpIpsecProfile;
 import android.net.vpn.L2tpIpsecPskProfile;
 import android.net.vpn.L2tpProfile;
 import android.net.vpn.VpnManager;
@@ -47,6 +47,7 @@ import android.preference.PreferenceCategory;
 import android.preference.PreferenceManager;
 import android.preference.PreferenceScreen;
 import android.preference.Preference.OnPreferenceClickListener;
+import android.security.CertTool;
 import android.security.Keystore;
 import android.text.TextUtils;
 import android.util.Log;
@@ -107,6 +108,9 @@ public class VpnSettings extends PreferenceActivity implements
     private static final int DIALOG_RECONNECT = 2;
     private static final int DIALOG_AUTH_ERROR = 3;
     private static final int DIALOG_UNKNOWN_SERVER = 4;
+    private static final int DIALOG_SECRET_NOT_SET = 5;
+    private static final int DIALOG_CHALLENGE_ERROR = 6;
+    private static final int DIALOG_REMOTE_HUNG_UP_ERROR = 7;
 
     private static final int NO_ERROR = 0;
 
@@ -197,13 +201,22 @@ public class VpnSettings extends PreferenceActivity implements
                 return createConnectDialog();
 
             case DIALOG_RECONNECT:
-                return createReconnectDialogBuilder().create();
+                return createReconnectDialog();
 
             case DIALOG_AUTH_ERROR:
                 return createAuthErrorDialog();
 
+            case DIALOG_REMOTE_HUNG_UP_ERROR:
+                return createRemoteHungUpErrorDialog();
+
+            case DIALOG_CHALLENGE_ERROR:
+                return createChallengeErrorDialog();
+
             case DIALOG_UNKNOWN_SERVER:
                 return createUnknownServerDialog();
+
+            case DIALOG_SECRET_NOT_SET:
+                return createSecretNotSetDialog();
 
             default:
                 return super.onCreateDialog(id);
@@ -219,14 +232,74 @@ public class VpnSettings extends PreferenceActivity implements
                         this)
                 .setNegativeButton(getString(android.R.string.cancel),
                         this)
+                .setOnCancelListener(new DialogInterface.OnCancelListener() {
+                            public void onCancel(DialogInterface dialog) {
+                                removeDialog(DIALOG_CONNECT);
+                                onIdle();
+                            }
+                        })
                 .create();
     }
 
-    private AlertDialog.Builder createReconnectDialogBuilder() {
+    private Dialog createReconnectDialog() {
+        return createCommonDialogBuilder()
+                .setMessage(R.string.vpn_confirm_reconnect)
+                .create();
+    }
+
+    private Dialog createAuthErrorDialog() {
+        return createCommonDialogBuilder()
+                .setMessage(R.string.vpn_auth_error_dialog_msg)
+                .create();
+    }
+
+    private Dialog createRemoteHungUpErrorDialog() {
+        return createCommonDialogBuilder()
+                .setMessage(R.string.vpn_remote_hung_up_error_dialog_msg)
+                .create();
+    }
+
+    private Dialog createChallengeErrorDialog() {
+        return createCommonEditDialogBuilder()
+                .setMessage(R.string.vpn_challenge_error_dialog_msg)
+                .create();
+    }
+
+    private Dialog createUnknownServerDialog() {
+        return createCommonEditDialogBuilder()
+                .setMessage(R.string.vpn_unknown_server_dialog_msg)
+                .create();
+    }
+
+    private Dialog createSecretNotSetDialog() {
+        return createCommonDialogBuilder()
+                .setMessage(R.string.vpn_secret_not_set_dialog_msg)
+                .setPositiveButton(R.string.vpn_yes_button,
+                        new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int w) {
+                                VpnProfile p = mConnectingActor.getProfile();
+                                startVpnEditor(p);
+                            }
+                        })
+                .create();
+    }
+
+    private AlertDialog.Builder createCommonEditDialogBuilder() {
+        return createCommonDialogBuilder()
+                .setPositiveButton(R.string.vpn_yes_button,
+                        new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int w) {
+                                VpnProfile p = mConnectingActor.getProfile();
+                                onIdle();
+                                startVpnEditor(p);
+                            }
+                        });
+    }
+
+    private AlertDialog.Builder createCommonDialogBuilder() {
         return new AlertDialog.Builder(this)
                 .setTitle(android.R.string.dialog_alert_title)
                 .setIcon(android.R.drawable.ic_dialog_alert)
-                .setMessage(R.string.vpn_confirm_reconnect)
                 .setPositiveButton(R.string.vpn_yes_button,
                         new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int w) {
@@ -244,26 +317,6 @@ public class VpnSettings extends PreferenceActivity implements
                                 onIdle();
                             }
                         });
-    }
-
-    private Dialog createAuthErrorDialog() {
-        return createReconnectDialogBuilder()
-                .setMessage(R.string.vpn_auth_error_dialog_msg)
-                .create();
-    }
-
-    private Dialog createUnknownServerDialog() {
-        return createReconnectDialogBuilder()
-                .setMessage(R.string.vpn_unknown_server_dialog_msg)
-                .setPositiveButton(R.string.vpn_yes_button,
-                        new DialogInterface.OnClickListener() {
-                            public void onClick(DialogInterface dialog, int w) {
-                                VpnProfile p = mConnectingActor.getProfile();
-                                onIdle();
-                                startVpnEditor(p);
-                            }
-                        })
-                .create();
     }
 
     @Override
@@ -413,6 +466,7 @@ public class VpnSettings extends PreferenceActivity implements
             }
         } else {
             removeDialog(DIALOG_CONNECT);
+            onIdle();
         }
     }
 
@@ -629,6 +683,7 @@ public class VpnSettings extends PreferenceActivity implements
 
         mConnectingActor = getActor(p);
         mActiveProfile = p;
+        if (!checkSecrets(p)) return;
         if (mConnectingActor.isConnectDialogNeeded()) {
             showDialog(DIALOG_CONNECT);
         } else {
@@ -693,6 +748,14 @@ public class VpnSettings extends PreferenceActivity implements
                     showDialog(DIALOG_AUTH_ERROR);
                     break;
 
+                case VpnManager.VPN_ERROR_REMOTE_HUNG_UP:
+                    showDialog(DIALOG_REMOTE_HUNG_UP_ERROR);
+                    break;
+
+                case VpnManager.VPN_ERROR_CHALLENGE:
+                    showDialog(DIALOG_CHALLENGE_ERROR);
+                    break;
+
                 case VpnManager.VPN_ERROR_UNKNOWN_SERVER:
                     showDialog(DIALOG_UNKNOWN_SERVER);
                     break;
@@ -707,6 +770,7 @@ public class VpnSettings extends PreferenceActivity implements
     }
 
     private void onIdle() {
+        Log.d(TAG, "   onIdle()");
         mActiveProfile = null;
         mConnectingActor = null;
         enableProfilePreferences();
@@ -847,34 +911,93 @@ public class VpnSettings extends PreferenceActivity implements
         return NAMESPACE_VPN + "_" + keyName;
     }
 
+    private boolean checkSecrets(VpnProfile p) {
+        Keystore ks = Keystore.getInstance();
+        HashSet<String> secretSet = new HashSet<String>();
+        boolean secretMissing = false;
+
+        if (p instanceof L2tpIpsecProfile) {
+            L2tpIpsecProfile certProfile = (L2tpIpsecProfile) p;
+            CertTool certTool = CertTool.getInstance();
+            Collections.addAll(secretSet, certTool.getAllCaCertificateKeys());
+            String cert = certProfile.getCaCertificate();
+            if (TextUtils.isEmpty(cert) || !secretSet.contains(cert)) {
+                certProfile.setCaCertificate(null);
+                secretMissing = true;
+            }
+
+            secretSet.clear();
+            Collections.addAll(secretSet, certTool.getAllUserCertificateKeys());
+            cert = certProfile.getUserCertificate();
+            if (TextUtils.isEmpty(cert) || !secretSet.contains(cert)) {
+                certProfile.setUserCertificate(null);
+                secretMissing = true;
+            }
+        }
+
+        secretSet.clear();
+        Collections.addAll(secretSet, ks.listKeys(NAMESPACE_VPN));
+
+        if (p instanceof L2tpIpsecPskProfile) {
+            L2tpIpsecPskProfile pskProfile = (L2tpIpsecPskProfile) p;
+            String presharedKey = pskProfile.getPresharedKey();
+            String keyName = KEY_PREFIX_IPSEC_PSK + p.getId();
+            if (TextUtils.isEmpty(presharedKey)
+                    || !secretSet.contains(keyName)) {
+                pskProfile.setPresharedKey(null);
+                secretMissing = true;
+            }
+        }
+
+        if (p instanceof L2tpProfile) {
+            L2tpProfile l2tpProfile = (L2tpProfile) p;
+            if (l2tpProfile.isSecretEnabled()) {
+                String secret = l2tpProfile.getSecretString();
+                String keyName = KEY_PREFIX_L2TP_SECRET + p.getId();
+                if (TextUtils.isEmpty(secret)
+                        || !secretSet.contains(keyName)) {
+                    l2tpProfile.setSecretString(null);
+                    secretMissing = true;
+                }
+            }
+        }
+
+        if (secretMissing) {
+            showDialog(DIALOG_SECRET_NOT_SET);
+            return false;
+        } else {
+            return true;
+        }
+    }
+
     private void processSecrets(VpnProfile p) {
         Keystore ks = Keystore.getInstance();
         switch (p.getType()) {
             case L2TP_IPSEC_PSK:
                 L2tpIpsecPskProfile pskProfile = (L2tpIpsecPskProfile) p;
                 String presharedKey = pskProfile.getPresharedKey();
-                if (!presharedKey.equals(SECRET_SET_INDICATOR)) {
-                    String keyName = KEY_PREFIX_IPSEC_PSK + p.getId();
+                String keyName = KEY_PREFIX_IPSEC_PSK + p.getId();
+                if (!TextUtils.isEmpty(presharedKey)) {
                     int ret = ks.put(NAMESPACE_VPN, keyName, presharedKey);
-                    if (ret < 0) {
+                    if (ret != 0) {
                         Log.e(TAG, "keystore write failed: key=" + keyName);
                     }
-                    pskProfile.setPresharedKey(keyNameForDaemon(keyName));
                 }
+                pskProfile.setPresharedKey(keyNameForDaemon(keyName));
                 // pass through
 
             case L2TP:
                 L2tpProfile l2tpProfile = (L2tpProfile) p;
-                String keyName = KEY_PREFIX_L2TP_SECRET + p.getId();
+                keyName = KEY_PREFIX_L2TP_SECRET + p.getId();
                 if (l2tpProfile.isSecretEnabled()) {
                     String secret = l2tpProfile.getSecretString();
-                    if (!secret.equals(SECRET_SET_INDICATOR)) {
+                    if (!TextUtils.isEmpty(secret)) {
                         int ret = ks.put(NAMESPACE_VPN, keyName, secret);
-                        if (ret < 0) {
+                        if (ret != 0) {
                             Log.e(TAG, "keystore write failed: key=" + keyName);
                         }
-                        l2tpProfile.setSecretString(keyNameForDaemon(keyName));
                     }
+                    l2tpProfile.setSecretString(keyNameForDaemon(keyName));
                 } else {
                     ks.remove(NAMESPACE_VPN, keyName);
                 }

@@ -86,6 +86,9 @@ public class WifiSettings extends PreferenceActivity implements WifiLayer.Callba
     private Preference mAddOtherNetwork;
     
     private WeakHashMap<AccessPointState, AccessPointPreference> mAps;
+
+    private AccessPointState mResumeState = null;
+    private int mResumeMode;
     
     //============================
     // Wifi member variables
@@ -152,8 +155,22 @@ public class WifiSettings extends PreferenceActivity implements WifiLayer.Callba
         super.onResume();
         mWifiLayer.onResume();
         mWifiEnabler.resume();
+        // do what we should have after keystore is unlocked.
+        if (mResumeState != null) {
+            if (Keystore.getInstance().getState() == Keystore.UNLOCKED) {
+                showAccessPointDialog(mResumeState, mResumeMode);
+            }
+            mResumeMode = -1;
+            mResumeState = null;
+        } else {
+            if (mResumeMode == AccessPointDialog.MODE_CONFIGURE) {
+                if (Keystore.getInstance().getState() == Keystore.UNLOCKED) {
+                    ((AccessPointDialog) mDialog).enableEnterpriseFields();
+                }
+            }
+        }
     }
-    
+
     @Override
     protected void onPause() {
         super.onPause();
@@ -231,6 +248,7 @@ public class WifiSettings extends PreferenceActivity implements WifiLayer.Callba
     public void onDismiss(DialogInterface dialog) {
         if (dialog == mDialog) {
             mDialog = null;
+            mResumeMode = -1;
         }
     }
 
@@ -350,6 +368,7 @@ public class WifiSettings extends PreferenceActivity implements WifiLayer.Callba
         dialog.setMode(AccessPointDialog.MODE_CONFIGURE);
         dialog.setTitle(R.string.wifi_add_other_network);
         dialog.setAutoSecurityAllowed(false);
+        mResumeMode = AccessPointDialog.MODE_CONFIGURE;
         showDialog(dialog);
     }
     
@@ -358,6 +377,8 @@ public class WifiSettings extends PreferenceActivity implements WifiLayer.Callba
                 Keystore.getInstance().getState() != Keystore.UNLOCKED) {
             startActivity(new Intent(
                     SecuritySettings.ACTION_UNLOCK_CREDENTIAL_STORAGE));
+            mResumeState = state;
+            mResumeMode = mode;
             return;
         }
         AccessPointDialog dialog = new AccessPointDialog(this, mWifiLayer);
