@@ -79,8 +79,7 @@ public class BluetoothEventRedirector {
                 mManager.getLocalDeviceManager().onBondingStateChanged(address, bondState);
                 if (bondState == BluetoothDevice.BOND_NOT_BONDED) {
                     int reason = intent.getIntExtra(BluetoothIntent.REASON, BluetoothError.ERROR);
-                    if (reason == BluetoothDevice.UNBOND_REASON_AUTH_FAILED ||
-                            reason == BluetoothDevice.UNBOND_REASON_AUTH_REJECTED ||
+                    if (reason == BluetoothDevice.UNBOND_REASON_AUTH_REJECTED ||
                             reason == BluetoothDevice.UNBOND_REASON_REMOTE_DEVICE_DOWN) {
                         mManager.getLocalDeviceManager().onBondingError(address, reason);
                     }

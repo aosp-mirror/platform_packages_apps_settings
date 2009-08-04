@@ -160,9 +160,9 @@ public class BluetoothPairingDialog extends AlertActivity implements DialogInter
         p.mIconId = android.R.drawable.ic_dialog_info;
         p.mTitle = getString(R.string.bluetooth_pin_entry);
         p.mView = createView();
-        p.mPositiveButtonText = getString(android.R.string.yes);
+        p.mPositiveButtonText = getString(R.string.bluetooth_pairing_accept);
         p.mPositiveButtonListener = this;
-        p.mNegativeButtonText = getString(android.R.string.no);
+        p.mNegativeButtonText = getString(R.string.bluetooth_pairing_decline);
         p.mNegativeButtonListener = this;
         setupAlert();
     }
@@ -191,8 +191,6 @@ public class BluetoothPairingDialog extends AlertActivity implements DialogInter
         unregisterReceiver(mReceiver);
     }
 
-
-
     public void afterTextChanged(Editable s) {
         if (s.length() > 0) {
             mOkButton.setEnabled(true);
@@ -212,6 +210,7 @@ public class BluetoothPairingDialog extends AlertActivity implements DialogInter
 
         mOkButton = mAlert.getButton(DialogInterface.BUTTON_POSITIVE);
         mOkButton.setEnabled(true);
+        mOkButton.setText(android.R.string.ok);
         mAlert.getButton(DialogInterface.BUTTON_NEGATIVE).setVisibility(View.GONE);
     }
 
