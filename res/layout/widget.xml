@@ -16,8 +16,9 @@
 
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:id="@+id/main"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
+        android:layout_width="@dimen/appwidget_width"
+        android:layout_height="@dimen/appwidget_height"
+        android:gravity="center"
         android:background="@drawable/appwidget_bg" >
 
         <ImageButton
@@ -54,7 +55,7 @@
 
         <ImageButton
             android:id="@+id/btn_brightness"
-            android:layout_width="58dip"
+            android:layout_width="57dip"
             android:layout_height="fill_parent"
             android:background="@drawable/appwidget_inner"
             android:layout_gravity="center_horizontal"
