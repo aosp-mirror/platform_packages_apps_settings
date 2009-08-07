@@ -29,19 +29,19 @@
         android:id="@+id/icon"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="12dip"
+        android:layout_marginLeft="6dip"
         android:layout_marginRight="6dip"
         android:layout_gravity="center" />
 
     <RelativeLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="6dip"
+        android:layout_marginLeft="2dip"
         android:layout_marginRight="6dip"
         android:layout_marginTop="6dip"
         android:layout_marginBottom="6dip"
         android:layout_weight="1">
-    
+
         <TextView android:id="@+android:id/title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -49,7 +49,7 @@
             android:textAppearance="?android:attr/textAppearanceLarge"
             android:ellipsize="marquee"
             android:fadingEdge="horizontal" />
-            
+
         <TextView android:id="@+android:id/summary"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -59,5 +59,5 @@
             android:maxLines="2" />
 
     </RelativeLayout>
-    
+
 </LinearLayout>

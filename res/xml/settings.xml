@@ -53,18 +53,6 @@
                 android:targetClass="com.android.settings.SoundAndDisplaySettings" />
         </com.android.settings.IconPreferenceScreen>
 
-        <!-- Data Sync. The settings activity will ensure this is resolved to an
-             activity on the system image, otherwise it will remove this
-             preference. -->
-
-        <com.android.settings.IconPreferenceScreen
-            settings:icon="@drawable/ic_settings_sync"
-            android:title="@string/sync_settings"
-            android:summary="@string/sync_settings_summary"
-            android:key="sync_settings">
-            <intent android:action="android.settings.SYNC_SETTINGS" />
-        </com.android.settings.IconPreferenceScreen>
-
         <!-- Security & Privacy -->
 
         <com.android.settings.IconPreferenceScreen
@@ -91,6 +79,18 @@
                 android:targetClass="com.android.settings.ApplicationSettings" />
         </com.android.settings.IconPreferenceScreen>
 
+        <!-- Data Sync. The settings activity will ensure this is resolved to an
+             activity on the system image, otherwise it will remove this
+             preference. -->
+
+        <com.android.settings.IconPreferenceScreen
+            settings:icon="@drawable/ic_settings_sync"
+            android:title="@string/sync_settings"
+            android:summary="@string/sync_settings_summary"
+            android:key="sync_settings">
+            <intent android:action="android.settings.SYNC_SETTINGS" />
+        </com.android.settings.IconPreferenceScreen>
+
         <!-- Storage -->
 
         <com.android.settings.IconPreferenceScreen 
@@ -100,30 +100,6 @@
             <intent android:action="android.intent.action.MAIN"
                 android:targetPackage="com.android.settings"
                 android:targetClass="com.android.settings.deviceinfo.Memory" />
-        </com.android.settings.IconPreferenceScreen>
-
-        <!-- Date & Time -->
-
-        <com.android.settings.IconPreferenceScreen
-            settings:icon="@drawable/ic_settings_date_time"
-            android:title="@string/date_and_time_settings_title"
-            android:summary="@string/date_and_time_settings_summary">
-            <intent
-                android:action="android.intent.action.MAIN"
-                android:targetPackage="com.android.settings"
-                android:targetClass="com.android.settings.DateTimeSettings" />
-        </com.android.settings.IconPreferenceScreen>
-
-        <!-- Language -->
-
-        <com.android.settings.IconPreferenceScreen
-            settings:icon="@drawable/ic_settings_language"
-            android:title="@string/language_settings"
-            android:summary="@string/language_settings_summary">
-            <intent
-                android:action="android.intent.action.MAIN"
-                android:targetPackage="com.android.settings"
-                android:targetClass="com.android.settings.LanguageSettings" />
         </com.android.settings.IconPreferenceScreen>
 
         <!-- Search. 
@@ -140,6 +116,18 @@
             android:summary="@string/search_settings_summary"
             android:key="search_settings">
             <intent android:action="android.search.action.SEARCH_SETTINGS" />
+        </com.android.settings.IconPreferenceScreen>
+
+        <!-- Language -->
+
+        <com.android.settings.IconPreferenceScreen
+            settings:icon="@drawable/ic_settings_language"
+            android:title="@string/language_settings"
+            android:summary="@string/language_settings_summary">
+            <intent
+                android:action="android.intent.action.MAIN"
+                android:targetPackage="com.android.settings"
+                android:targetClass="com.android.settings.LanguageSettings" />
         </com.android.settings.IconPreferenceScreen>
 
         <!-- Accessibility feedback -->
@@ -164,6 +152,18 @@
                 android:action="android.intent.action.MAIN"
                 android:targetPackage="com.android.settings"
                 android:targetClass="com.android.settings.TextToSpeechSettings" />
+        </com.android.settings.IconPreferenceScreen>
+
+        <!-- Date & Time -->
+
+        <com.android.settings.IconPreferenceScreen
+            settings:icon="@drawable/ic_settings_date_time"
+            android:title="@string/date_and_time_settings_title"
+            android:summary="@string/date_and_time_settings_summary">
+            <intent
+                android:action="android.intent.action.MAIN"
+                android:targetPackage="com.android.settings"
+                android:targetClass="com.android.settings.DateTimeSettings" />
         </com.android.settings.IconPreferenceScreen>
 
         <!-- About Device -->
