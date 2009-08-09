@@ -559,6 +559,17 @@
                 android:permission="android.permission.BIND_APPWIDGET"
                 android:theme="@android:style/Theme.NoDisplay" android:exported="true" />
 
+        <!-- Standard picker for live wallpapers -->
+        <activity android:name="LiveWallpaperPickActivity"
+                android:label="@string/live_wallpaper_picker_title"
+                android:theme="@*android:style/Theme.Dialog.Alert">
+            <intent-filter>
+                <action android:name="android.service.wallpaper.LIVE_WALLPAPER_CHOOSER" />
+                <action android:name="android.intent.action.SET_WALLPAPER" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+
         <activity android:name="UsageStats" android:label="@string/usage_stats_label">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
