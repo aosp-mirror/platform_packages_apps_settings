@@ -700,26 +700,26 @@ public class LocalBluetoothDevice implements Comparable<LocalBluetoothDevice> {
 
         menu.setHeaderTitle(getName());
 
-        if (isConnected) {
-            menu.add(0, CONTEXT_ITEM_DISCONNECT, 0, R.string.bluetooth_device_context_disconnect);
-        } else if (hasProfiles) {
-            // For connection action, show either "Connect" or "Pair & connect"
-            int connectString = (bondState == BluetoothDevice.BOND_NOT_BONDED)
-                    ? R.string.bluetooth_device_context_pair_connect
-                    : R.string.bluetooth_device_context_connect;
-            menu.add(0, CONTEXT_ITEM_CONNECT, 0, connectString);
-        }
-
-        if (bondState == BluetoothDevice.BOND_BONDED) {
-            // For unpair action, show either "Unpair" or "Disconnect & unpair"
-            int unpairString = isConnected
-                    ? R.string.bluetooth_device_context_disconnect_unpair
-                    : R.string.bluetooth_device_context_unpair;
-            menu.add(0, CONTEXT_ITEM_UNPAIR, 0, unpairString);
+        if (bondState == BluetoothDevice.BOND_NOT_BONDED) { // Not paired and not connected
+            menu.add(0, CONTEXT_ITEM_CONNECT, 0, R.string.bluetooth_device_context_pair_connect);
+        } else { // Paired
+            if (isConnected) { // Paired and connected
+                menu.add(0, CONTEXT_ITEM_DISCONNECT, 0,
+                        R.string.bluetooth_device_context_disconnect);
+                menu.add(0, CONTEXT_ITEM_UNPAIR, 0,
+                        R.string.bluetooth_device_context_disconnect_unpair);
+            } else { // Paired but not connected
+                if (hasProfiles) {
+                    menu.add(0, CONTEXT_ITEM_CONNECT, 0, R.string.bluetooth_device_context_connect);
+                }
+                menu.add(0, CONTEXT_ITEM_UNPAIR, 0, R.string.bluetooth_device_context_unpair);
+            }
 
             // Show the connection options item
-            menu.add(0, CONTEXT_ITEM_CONNECT_ADVANCED, 0,
-                    R.string.bluetooth_device_context_connect_advanced);
+            if (hasProfiles) {
+                menu.add(0, CONTEXT_ITEM_CONNECT_ADVANCED, 0,
+                        R.string.bluetooth_device_context_connect_advanced);
+            }
         }
     }
 
