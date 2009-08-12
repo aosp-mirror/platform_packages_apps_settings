@@ -16,6 +16,8 @@
 
 package com.android.settings.bluetooth;
 
+import android.app.AlertDialog;
+import android.app.Dialog;
 import android.bluetooth.BluetoothDevice;
 import android.bluetooth.BluetoothError;
 import android.bluetooth.BluetoothIntent;
@@ -24,19 +26,22 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.preference.EditTextPreference;
-import android.preference.PreferenceManager;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.AttributeSet;
+import android.widget.Button;
+import android.widget.EditText;
 
 /**
  * BluetoothNamePreference is the preference type for editing the device's
  * Bluetooth name. It asks the user for a name, and persists it via the
  * Bluetooth API.
  */
-public class BluetoothNamePreference extends EditTextPreference {
+public class BluetoothNamePreference extends EditTextPreference implements TextWatcher {
     private static final String TAG = "BluetoothNamePreference";
 
     private LocalBluetoothManager mLocalManager;
-    
+
     private BroadcastReceiver mReceiver = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
@@ -50,13 +55,13 @@ public class BluetoothNamePreference extends EditTextPreference {
             }
         }
     };
-    
+
     public BluetoothNamePreference(Context context, AttributeSet attrs) {
         super(context, attrs);
-        
+
         mLocalManager = LocalBluetoothManager.getInstance(context);
-        
-        setSummaryToName();        
+
+        setSummaryToName();
     }
 
     public void resume() {
@@ -64,12 +69,27 @@ public class BluetoothNamePreference extends EditTextPreference {
         filter.addAction(BluetoothIntent.BLUETOOTH_STATE_CHANGED_ACTION);
         filter.addAction(BluetoothIntent.NAME_CHANGED_ACTION);
         getContext().registerReceiver(mReceiver, filter);
+
+        // Make sure the OK button is disabled (if necessary) after rotation
+        EditText et = getEditText();
+        if (et != null) {
+            et.addTextChangedListener(this);
+            Dialog d = getDialog();
+            if (d instanceof AlertDialog) {
+                Button b = ((AlertDialog) d).getButton(AlertDialog.BUTTON_POSITIVE);
+                b.setEnabled(et.getText().length() > 0);
+            }
+        }
     }
-    
+
     public void pause() {
+        EditText et = getEditText();
+        if (et != null) {
+            et.removeTextChangedListener(this);
+        }
         getContext().unregisterReceiver(mReceiver);
     }
-    
+
     private void setSummaryToName() {
         BluetoothDevice manager = mLocalManager.getBluetoothManager();
         if (manager.isEnabled()) {
@@ -81,7 +101,35 @@ public class BluetoothNamePreference extends EditTextPreference {
     protected boolean persistString(String value) {
         BluetoothDevice manager = mLocalManager.getBluetoothManager();
         manager.setName(value);
-        return true;        
+        return true;
     }
-    
+
+    @Override
+    protected void onClick() {
+        super.onClick();
+
+        // The dialog should be created by now
+        EditText et = getEditText();
+        if (et != null) {
+            et.setText(mLocalManager.getBluetoothManager().getName());
+        }
+    }
+
+    // TextWatcher interface
+    public void afterTextChanged(Editable s) {
+        Dialog d = getDialog();
+        if (d instanceof AlertDialog) {
+            ((AlertDialog) d).getButton(AlertDialog.BUTTON_POSITIVE).setEnabled(s.length() > 0);
+        }
+    }
+
+    // TextWatcher interface
+    public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+        // not used
+    }
+
+    // TextWatcher interface
+    public void onTextChanged(CharSequence s, int start, int before, int count) {
+        // not used
+    }
 }
