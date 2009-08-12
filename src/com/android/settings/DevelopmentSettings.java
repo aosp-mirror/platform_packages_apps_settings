@@ -108,6 +108,7 @@ public class DevelopmentSettings extends PreferenceActivity
     }
 
     private void dismissDialog() {
+        if (mOkDialog == null) return;
         mOkDialog.dismiss();
         mOkDialog = null;
     }
