@@ -97,6 +97,8 @@ public class BluetoothDevicePreference extends Preference implements LocalBlueto
 
     @Override
     public boolean isEnabled() {
+        // Temp fix until we have 2053751 fixed in the framework
+        setEnabled(true);
         return super.isEnabled() && !mIsBusy;
     }
 
