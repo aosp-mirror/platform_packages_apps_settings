@@ -44,7 +44,7 @@ public final class AccessPointState implements Comparable<AccessPointState>, Par
     public static final String OPEN = "Open";
 
     /* For EAP Enterprise fields */
-    public static final String WPA_EAP = "WPA-EAP";
+    public static final String WPA_EAP = "-EAP";
     public static final String IEEE8021X = "IEEE8021X";
 
     public static final String[] EAP_METHOD = { "PEAP", "TLS", "TTLS" };
