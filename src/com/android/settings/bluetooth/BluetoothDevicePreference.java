@@ -28,20 +28,20 @@ import android.widget.ImageView;
  * BluetoothDevicePreference is the preference type used to display each remote
  * Bluetooth device in the Bluetooth Settings screen.
  */
-public class BluetoothDevicePreference extends Preference implements LocalBluetoothDevice.Callback {
+public class BluetoothDevicePreference extends Preference implements CachedBluetoothDevice.Callback {
     private static final String TAG = "BluetoothDevicePreference";
 
     private static int sDimAlpha = Integer.MIN_VALUE;
     
-    private LocalBluetoothDevice mLocalDevice;
+    private CachedBluetoothDevice mCachedDevice;
     
     /**
      * Cached local copy of whether the device is busy. This is only updated
-     * from {@link #onDeviceAttributesChanged(LocalBluetoothDevice)}.
+     * from {@link #onDeviceAttributesChanged(CachedBluetoothDevice)}.
      */ 
     private boolean mIsBusy;
     
-    public BluetoothDevicePreference(Context context, LocalBluetoothDevice localDevice) {
+    public BluetoothDevicePreference(Context context, CachedBluetoothDevice cachedDevice) {
         super(context);
 
         if (sDimAlpha == Integer.MIN_VALUE) {
@@ -50,43 +50,43 @@ public class BluetoothDevicePreference extends Preference implements LocalBlueto
             sDimAlpha = (int) (outValue.getFloat() * 255);
         }
             
-        mLocalDevice = localDevice;
+        mCachedDevice = cachedDevice;
         
         setLayoutResource(R.layout.preference_bluetooth);
         
-        localDevice.registerCallback(this);
+        cachedDevice.registerCallback(this);
         
-        onDeviceAttributesChanged(localDevice);
+        onDeviceAttributesChanged(cachedDevice);
     }
     
-    public LocalBluetoothDevice getDevice() {
-        return mLocalDevice;
+    public CachedBluetoothDevice getCachedDevice() {
+        return mCachedDevice;
     }
 
     @Override
     protected void onPrepareForRemoval() {
         super.onPrepareForRemoval();
-        mLocalDevice.unregisterCallback(this);
+        mCachedDevice.unregisterCallback(this);
     }
 
-    public void onDeviceAttributesChanged(LocalBluetoothDevice device) {
+    public void onDeviceAttributesChanged(CachedBluetoothDevice cachedDevice) {
 
         /*
          * The preference framework takes care of making sure the value has
          * changed before proceeding.
          */
         
-        setTitle(mLocalDevice.getName());
+        setTitle(mCachedDevice.getName());
         
         /*
          * TODO: Showed "Paired" even though it was "Connected". This may be
          * related to BluetoothHeadset not bound to the actual
          * BluetoothHeadsetService when we got here.
          */
-        setSummary(mLocalDevice.getSummary());
+        setSummary(mCachedDevice.getSummary());
 
         // Used to gray out the item
-        mIsBusy = mLocalDevice.isBusy();
+        mIsBusy = mCachedDevice.isBusy();
         
         // Data has changed
         notifyChanged();
@@ -110,7 +110,7 @@ public class BluetoothDevicePreference extends Preference implements LocalBlueto
         super.onBindView(view);
 
         ImageView btClass = (ImageView) view.findViewById(R.id.btClass);
-        btClass.setImageResource(mLocalDevice.getBtClassDrawable());
+        btClass.setImageResource(mCachedDevice.getBtClassDrawable());
         btClass.setAlpha(isEnabled() ? 255 : sDimAlpha);        
     }
 
@@ -121,7 +121,7 @@ public class BluetoothDevicePreference extends Preference implements LocalBlueto
             return 1;
         }
         
-        return mLocalDevice.compareTo(((BluetoothDevicePreference) another).mLocalDevice);
+        return mCachedDevice.compareTo(((BluetoothDevicePreference) another).mCachedDevice);
     }
  
 }

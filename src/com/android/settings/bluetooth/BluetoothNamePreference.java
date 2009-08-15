@@ -18,7 +18,8 @@ package com.android.settings.bluetooth;
 
 import android.app.AlertDialog;
 import android.app.Dialog;
-import android.bluetooth.BluetoothDevice;
+
+import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothError;
 import android.bluetooth.BluetoothIntent;
 import android.content.BroadcastReceiver;
@@ -50,7 +51,7 @@ public class BluetoothNamePreference extends EditTextPreference implements TextW
                 setSummaryToName();
             } else if (action.equals(BluetoothIntent.BLUETOOTH_STATE_CHANGED_ACTION) &&
                     (intent.getIntExtra(BluetoothIntent.BLUETOOTH_STATE,
-                    BluetoothError.ERROR) == BluetoothDevice.BLUETOOTH_STATE_ON)) {
+                    BluetoothError.ERROR) == BluetoothAdapter.BLUETOOTH_STATE_ON)) {
                 setSummaryToName();
             }
         }
@@ -91,16 +92,16 @@ public class BluetoothNamePreference extends EditTextPreference implements TextW
     }
 
     private void setSummaryToName() {
-        BluetoothDevice manager = mLocalManager.getBluetoothManager();
-        if (manager.isEnabled()) {
-            setSummary(manager.getName());
+        BluetoothAdapter adapter = mLocalManager.getBluetoothAdapter();
+        if (adapter.isEnabled()) {
+            setSummary(adapter.getName());
         }
     }
 
     @Override
     protected boolean persistString(String value) {
-        BluetoothDevice manager = mLocalManager.getBluetoothManager();
-        manager.setName(value);
+        BluetoothAdapter adapter = mLocalManager.getBluetoothAdapter();
+        adapter.setName(value);
         return true;
     }
 
@@ -111,7 +112,7 @@ public class BluetoothNamePreference extends EditTextPreference implements TextW
         // The dialog should be created by now
         EditText et = getEditText();
         if (et != null) {
-            et.setText(mLocalManager.getBluetoothManager().getName());
+            et.setText(mLocalManager.getBluetoothAdapter().getName());
         }
     }
 

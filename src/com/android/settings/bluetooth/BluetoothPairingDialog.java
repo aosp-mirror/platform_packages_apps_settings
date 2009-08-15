@@ -51,7 +51,7 @@ public class BluetoothPairingDialog extends AlertActivity implements DialogInter
     private final int BLUETOOTH_PIN_MAX_LENGTH = 16;
     private final int BLUETOOTH_PASSKEY_MAX_LENGTH = 6;
     private LocalBluetoothManager mLocalManager;
-    private String mAddress;
+    private BluetoothDevice mDevice;
     private int mType;
     private int mConfirmationPasskey;
     private EditText mPairingView;
@@ -67,8 +67,8 @@ public class BluetoothPairingDialog extends AlertActivity implements DialogInter
                 return;
             }
 
-            String address = intent.getStringExtra(BluetoothIntent.ADDRESS);
-            if (address == null || address.equals(mAddress)) {
+            BluetoothDevice device = intent.getParcelableExtra(BluetoothIntent.DEVICE);
+            if (device == null || device.equals(mDevice)) {
                 onReceivedPairingCanceled();
             }
         }
@@ -88,7 +88,7 @@ public class BluetoothPairingDialog extends AlertActivity implements DialogInter
         }
 
         mLocalManager = LocalBluetoothManager.getInstance(this);
-        mAddress = intent.getStringExtra(BluetoothIntent.ADDRESS);
+        mDevice = intent.getParcelableExtra(BluetoothIntent.DEVICE);
         mType = intent.getIntExtra(BluetoothIntent.PAIRING_VARIANT, BluetoothClass.ERROR);
         if (mType == BluetoothDevice.PAIRING_VARIANT_PIN) {
             createUserEntryDialog();
@@ -131,7 +131,7 @@ public class BluetoothPairingDialog extends AlertActivity implements DialogInter
     private View createView() {
         View view = getLayoutInflater().inflate(R.layout.bluetooth_pin_entry, null);
 
-        String name = mLocalManager.getLocalDeviceManager().getName(mAddress);
+        String name = mLocalManager.getCachedDeviceManager().getName(mDevice);
         TextView messageView = (TextView) view.findViewById(R.id.message);
         mPairingView = (EditText) view.findViewById(R.id.text);
         mPairingView.addTextChangedListener(this);
@@ -202,7 +202,7 @@ public class BluetoothPairingDialog extends AlertActivity implements DialogInter
 
         TextView messageView = (TextView) findViewById(R.id.message);
         messageView.setText(getString(R.string.bluetooth_pairing_error_message,
-                mLocalManager.getLocalDeviceManager().getName(mAddress)));
+                mDevice.getName()));
 
         mPairingView.setVisibility(View.GONE);
         mPairingView.clearFocus();
@@ -220,20 +220,20 @@ public class BluetoothPairingDialog extends AlertActivity implements DialogInter
             if (pinBytes == null) {
                 return;
             }
-            mLocalManager.getBluetoothManager().setPin(mAddress, pinBytes);
+            mDevice.setPin(pinBytes);
         } else if (mType == BluetoothDevice.PAIRING_VARIANT_PASSKEY) {
             int passkey = Integer.getInteger(value);
-            mLocalManager.getBluetoothManager().setPasskey(mAddress, passkey);
+            mDevice.setPasskey(passkey);
         } else {
-            mLocalManager.getBluetoothManager().setPairingConfirmation(mAddress, true);
+            mDevice.setPairingConfirmation(true);
         }
     }
 
     private void onCancel() {
         if (mType == BluetoothDevice.PAIRING_VARIANT_CONFIRMATION) {
-            mLocalManager.getBluetoothManager().setPairingConfirmation(mAddress, false);
+            mDevice.setPairingConfirmation(false);
         } else {
-            mLocalManager.getBluetoothManager().cancelBondProcess(mAddress);
+            mDevice.cancelBondProcess();
         }
     }
 

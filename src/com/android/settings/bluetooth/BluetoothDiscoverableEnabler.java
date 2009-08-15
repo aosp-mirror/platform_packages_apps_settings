@@ -18,7 +18,7 @@ package com.android.settings.bluetooth;
 
 import com.android.settings.R;
 
-import android.bluetooth.BluetoothDevice;
+import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothError;
 import android.bluetooth.BluetoothIntent;
 import android.content.BroadcastReceiver;
@@ -93,7 +93,7 @@ public class BluetoothDiscoverableEnabler implements Preference.OnPreferenceChan
         mContext.registerReceiver(mReceiver, filter);
         mCheckBoxPreference.setOnPreferenceChangeListener(this);
 
-        handleModeChanged(mLocalManager.getBluetoothManager().getScanMode());
+        handleModeChanged(mLocalManager.getBluetoothAdapter().getScanMode());
     }
 
     public void pause() {
@@ -114,7 +114,7 @@ public class BluetoothDiscoverableEnabler implements Preference.OnPreferenceChan
     }
 
     private void setEnabled(final boolean enable) {
-        BluetoothDevice manager = mLocalManager.getBluetoothManager();
+        BluetoothAdapter manager = mLocalManager.getBluetoothAdapter();
 
         if (enable) {
 
@@ -127,9 +127,9 @@ public class BluetoothDiscoverableEnabler implements Preference.OnPreferenceChan
             long endTimestamp = System.currentTimeMillis() + timeout * 1000;
             persistDiscoverableEndTimestamp(endTimestamp);
 
-            manager.setScanMode(BluetoothDevice.SCAN_MODE_CONNECTABLE_DISCOVERABLE);
+            manager.setScanMode(BluetoothAdapter.SCAN_MODE_CONNECTABLE_DISCOVERABLE);
         } else {
-            manager.setScanMode(BluetoothDevice.SCAN_MODE_CONNECTABLE);
+            manager.setScanMode(BluetoothAdapter.SCAN_MODE_CONNECTABLE);
         }
     }
 
@@ -149,7 +149,7 @@ public class BluetoothDiscoverableEnabler implements Preference.OnPreferenceChan
     }
 
     private void handleModeChanged(int mode) {
-        if (mode == BluetoothDevice.SCAN_MODE_CONNECTABLE_DISCOVERABLE) {
+        if (mode == BluetoothAdapter.SCAN_MODE_CONNECTABLE_DISCOVERABLE) {
             mCheckBoxPreference.setChecked(true);
             updateCountdownSummary();
 
@@ -159,8 +159,8 @@ public class BluetoothDiscoverableEnabler implements Preference.OnPreferenceChan
     }
 
     private void updateCountdownSummary() {
-        int mode = mLocalManager.getBluetoothManager().getScanMode();
-        if (mode != BluetoothDevice.SCAN_MODE_CONNECTABLE_DISCOVERABLE) {
+        int mode = mLocalManager.getBluetoothAdapter().getScanMode();
+        if (mode != BluetoothAdapter.SCAN_MODE_CONNECTABLE_DISCOVERABLE) {
             return;
         }
 

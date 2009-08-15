@@ -18,6 +18,7 @@ package com.android.settings.bluetooth;
 
 import android.app.AlertDialog;
 import android.bluetooth.BluetoothClass;
+import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -40,13 +41,13 @@ import java.util.LinkedList;
 import java.util.List;
 
 /**
- * LocalBluetoothDevice represents a remote Bluetooth device. It contains
+ * CachedBluetoothDevice represents a remote Bluetooth device. It contains
  * attributes of the device (such as the address, name, RSSI, etc.) and
  * functionality that can be performed on the device (connect, pair, disconnect,
  * etc.).
  */
-public class LocalBluetoothDevice implements Comparable<LocalBluetoothDevice> {
-    private static final String TAG = "LocalBluetoothDevice";
+public class CachedBluetoothDevice implements Comparable<CachedBluetoothDevice> {
+    private static final String TAG = "CachedBluetoothDevice";
     private static final boolean D = LocalBluetoothManager.D;
     private static final boolean V = LocalBluetoothManager.V;
 
@@ -55,7 +56,7 @@ public class LocalBluetoothDevice implements Comparable<LocalBluetoothDevice> {
     private static final int CONTEXT_ITEM_UNPAIR = Menu.FIRST + 3;
     private static final int CONTEXT_ITEM_CONNECT_ADVANCED = Menu.FIRST + 4;
 
-    private final String mAddress;
+    private final BluetoothDevice mDevice;
     private String mName;
     private short mRssi;
     private int mBtClass = BluetoothClass.ERROR;
@@ -84,15 +85,15 @@ public class LocalBluetoothDevice implements Comparable<LocalBluetoothDevice> {
 
     static class BluetoothJob {
         final BluetoothCommand command; // CONNECT, DISCONNECT
-        final LocalBluetoothDevice device;
+        final CachedBluetoothDevice cachedDevice;
         final Profile profile; // HEADSET, A2DP, etc
         // 0 means this command was not been sent to the bt framework.
         long timeSent;
 
         public BluetoothJob(BluetoothCommand command,
-                LocalBluetoothDevice device, Profile profile) {
+                CachedBluetoothDevice cachedDevice, Profile profile) {
             this.command = command;
-            this.device = device;
+            this.cachedDevice = cachedDevice;
             this.profile = profile;
             this.timeSent = 0;
         }
@@ -101,7 +102,7 @@ public class LocalBluetoothDevice implements Comparable<LocalBluetoothDevice> {
         public String toString() {
             StringBuilder sb = new StringBuilder();
             sb.append(command.name());
-            sb.append(" Address:").append(device.mAddress);
+            sb.append(" Address:").append(cachedDevice.mDevice);
             sb.append(" Profile:").append(profile.name());
             sb.append(" TimeSent:");
             if (timeSent == 0) {
@@ -159,7 +160,7 @@ public class LocalBluetoothDevice implements Comparable<LocalBluetoothDevice> {
             if (job != null && job.command == BluetoothCommand.DISCONNECT) {
                 if (existingJob.timeSent == 0
                         && existingJob.command == BluetoothCommand.CONNECT
-                        && existingJob.device.mAddress.equals(job.device.mAddress)
+                        && existingJob.cachedDevice.mDevice.equals(job.cachedDevice.mDevice)
                         && existingJob.profile == job.profile) {
                     if (D) {
                         Log.d(TAG, "Removed because of a pending disconnect. " + existingJob);
@@ -189,10 +190,10 @@ public class LocalBluetoothDevice implements Comparable<LocalBluetoothDevice> {
             job.timeSent = System.currentTimeMillis();
             switch (job.command) {
             case CONNECT:
-                successful = connectInt(job.device, job.profile);
+                successful = connectInt(job.cachedDevice, job.profile);
                 break;
             case DISCONNECT:
-                successful = disconnectInt(job.device, job.profile);
+                successful = disconnectInt(job.cachedDevice, job.profile);
                 break;
             }
 
@@ -230,12 +231,12 @@ public class LocalBluetoothDevice implements Comparable<LocalBluetoothDevice> {
             BluetoothJob job = workQueue.peek();
             if (job == null) {
                 return;
-            } else if (job.device.mAddress != mAddress) {
+            } else if (job.cachedDevice.mDevice.equals(mDevice)) {
                 // This can happen in 2 cases: 1) BT device initiated pairing and
                 // 2) disconnects of one headset that's triggered by connects of
                 // another.
                 if (D) {
-                    Log.d(TAG, "mAddresses:" + mAddress + " != head:" + job.toString());
+                    Log.d(TAG, "mDevice:" + mDevice + " != head:" + job.toString());
                 }
 
                 // Check to see if we need to remove the stale items from the queue
@@ -281,14 +282,14 @@ public class LocalBluetoothDevice implements Comparable<LocalBluetoothDevice> {
         }
     }
 
-    LocalBluetoothDevice(Context context, String address) {
+    CachedBluetoothDevice(Context context, BluetoothDevice device) {
         mLocalManager = LocalBluetoothManager.getInstance(context);
         if (mLocalManager == null) {
             throw new IllegalStateException(
-                    "Cannot use LocalBluetoothDevice without Bluetooth hardware");
+                    "Cannot use CachedBluetoothDevice without Bluetooth hardware");
         }
 
-        mAddress = address;
+        mDevice = device;
 
         fillData();
     }
@@ -315,12 +316,13 @@ public class LocalBluetoothDevice implements Comparable<LocalBluetoothDevice> {
         queueCommand(new BluetoothJob(BluetoothCommand.DISCONNECT, this, profile));
     }
 
-    private boolean disconnectInt(LocalBluetoothDevice device, Profile profile) {
+    private boolean disconnectInt(CachedBluetoothDevice cachedDevice, Profile profile) {
         LocalBluetoothProfileManager profileManager =
                 LocalBluetoothProfileManager.getProfileManager(mLocalManager, profile);
-        int status = profileManager.getConnectionStatus(device.mAddress);
+        int status = profileManager.getConnectionStatus(cachedDevice.mDevice);
         if (SettingsBtStatus.isConnectionStatusConnected(status)) {
-            if (profileManager.disconnect(device.mAddress) == BluetoothDevice.RESULT_SUCCESS) {
+            if (profileManager.disconnect(cachedDevice.mDevice) ==
+                        BluetoothAdapter.RESULT_SUCCESS) {
                 return true;
             }
         }
@@ -367,7 +369,7 @@ public class LocalBluetoothDevice implements Comparable<LocalBluetoothDevice> {
         for (Profile profile : mProfiles) {
             LocalBluetoothProfileManager profileManager =
                     LocalBluetoothProfileManager.getProfileManager(mLocalManager, profile);
-            if (profileManager.isPreferred(mAddress)) {
+            if (profileManager.isPreferred(mDevice)) {
                 hasAtLeastOnePreferredProfile = true;
                 queueCommand(new BluetoothJob(BluetoothCommand.CONNECT, this, profile));
             }
@@ -387,7 +389,7 @@ public class LocalBluetoothDevice implements Comparable<LocalBluetoothDevice> {
         for (Profile profile : mProfiles) {
             LocalBluetoothProfileManager profileManager =
                     LocalBluetoothProfileManager.getProfileManager(mLocalManager, profile);
-            profileManager.setPreferred(mAddress, true);
+            profileManager.setPreferred(mDevice, true);
             queueCommand(new BluetoothJob(BluetoothCommand.CONNECT, this, profile));
         }
     }
@@ -398,17 +400,17 @@ public class LocalBluetoothDevice implements Comparable<LocalBluetoothDevice> {
         queueCommand(new BluetoothJob(BluetoothCommand.CONNECT, this, profile));
     }
 
-    private boolean connectInt(LocalBluetoothDevice device, Profile profile) {
-        if (!device.ensurePaired()) return false;
+    private boolean connectInt(CachedBluetoothDevice cachedDevice, Profile profile) {
+        if (!cachedDevice.ensurePaired()) return false;
 
         LocalBluetoothProfileManager profileManager =
                 LocalBluetoothProfileManager.getProfileManager(mLocalManager, profile);
-        int status = profileManager.getConnectionStatus(device.mAddress);
+        int status = profileManager.getConnectionStatus(cachedDevice.mDevice);
         if (!SettingsBtStatus.isConnectionStatusConnected(status)) {
-            if (profileManager.connect(device.mAddress) == BluetoothDevice.RESULT_SUCCESS) {
+            if (profileManager.connect(cachedDevice.mDevice) == BluetoothAdapter.RESULT_SUCCESS) {
                 return true;
             }
-            Log.i(TAG, "Failed to connect " + profile.toString() + " to " + device.mName);
+            Log.i(TAG, "Failed to connect " + profile.toString() + " to " + cachedDevice.mName);
         }
         Log.i(TAG, "Not connected");
         return false;
@@ -418,7 +420,7 @@ public class LocalBluetoothDevice implements Comparable<LocalBluetoothDevice> {
         if (!mIsConnectingErrorPossible) return;
         mIsConnectingErrorPossible = false;
 
-        mLocalManager.showError(mAddress, R.string.bluetooth_error_title,
+        mLocalManager.showError(mDevice, R.string.bluetooth_error_title,
                 R.string.bluetooth_connecting_error_message);
     }
 
@@ -432,15 +434,15 @@ public class LocalBluetoothDevice implements Comparable<LocalBluetoothDevice> {
     }
 
     public void pair() {
-        BluetoothDevice manager = mLocalManager.getBluetoothManager();
+        BluetoothAdapter adapter = mLocalManager.getBluetoothAdapter();
 
         // Pairing is unreliable while scanning, so cancel discovery
-        if (manager.isDiscovering()) {
-            manager.cancelDiscovery();
+        if (adapter.isDiscovering()) {
+            adapter.cancelDiscovery();
         }
 
-        if (!mLocalManager.getBluetoothManager().createBond(mAddress)) {
-            mLocalManager.showError(mAddress, R.string.bluetooth_error_title,
+        if (!mDevice.createBond()) {
+            mLocalManager.showError(mDevice, R.string.bluetooth_error_title,
                     R.string.bluetooth_pairing_error_message);
         }
     }
@@ -452,7 +454,7 @@ public class LocalBluetoothDevice implements Comparable<LocalBluetoothDevice> {
             Iterator<BluetoothJob> it = workQueue.iterator();
             while (it.hasNext()) {
                 BluetoothJob job = it.next();
-                if (job.device.mAddress.equals(this.mAddress)) {
+                if (job.cachedDevice.mDevice.equals(this.mDevice)) {
                     it.remove();
                     if (job.timeSent != 0) {
                         processNow = true;
@@ -464,15 +466,13 @@ public class LocalBluetoothDevice implements Comparable<LocalBluetoothDevice> {
             }
         }
 
-        BluetoothDevice manager = mLocalManager.getBluetoothManager();
-
         switch (getBondState()) {
         case BluetoothDevice.BOND_BONDED:
-            manager.removeBond(mAddress);
+            mDevice.removeBond();
             break;
 
         case BluetoothDevice.BOND_BONDING:
-            manager.cancelBondProcess(mAddress);
+            mDevice.cancelBondProcess();
             break;
         }
     }
@@ -486,8 +486,8 @@ public class LocalBluetoothDevice implements Comparable<LocalBluetoothDevice> {
         dispatchAttributesChanged();
     }
 
-    public String getAddress() {
-        return mAddress;
+    public BluetoothDevice getDevice() {
+        return mDevice;
     }
 
     public String getName() {
@@ -497,7 +497,7 @@ public class LocalBluetoothDevice implements Comparable<LocalBluetoothDevice> {
     public void setName(String name) {
         if (!mName.equals(name)) {
             if (TextUtils.isEmpty(name)) {
-                mName = mAddress;
+                mName = mDevice.getAddress();
             } else {
                 mName = name;
             }
@@ -511,10 +511,10 @@ public class LocalBluetoothDevice implements Comparable<LocalBluetoothDevice> {
     }
 
     private void fetchName() {
-        mName = mLocalManager.getBluetoothManager().getRemoteName(mAddress);
+        mName = mDevice.getName();
 
         if (TextUtils.isEmpty(mName)) {
-            mName = mAddress;
+            mName = mDevice.getAddress();
         }
     }
 
@@ -534,7 +534,7 @@ public class LocalBluetoothDevice implements Comparable<LocalBluetoothDevice> {
     }
 
     public int getBondState() {
-        return mLocalManager.getBluetoothManager().getBondState(mAddress);
+        return mDevice.getBondState();
     }
 
     void setRssi(short rssi) {
@@ -552,7 +552,7 @@ public class LocalBluetoothDevice implements Comparable<LocalBluetoothDevice> {
     public boolean isConnected() {
         for (Profile profile : mProfiles) {
             int status = LocalBluetoothProfileManager.getProfileManager(mLocalManager, profile)
-                    .getConnectionStatus(mAddress);
+                    .getConnectionStatus(mDevice);
             if (SettingsBtStatus.isConnectionStatusConnected(status)) {
                 return true;
             }
@@ -564,7 +564,7 @@ public class LocalBluetoothDevice implements Comparable<LocalBluetoothDevice> {
     public boolean isBusy() {
         for (Profile profile : mProfiles) {
             int status = LocalBluetoothProfileManager.getProfileManager(mLocalManager, profile)
-                    .getConnectionStatus(mAddress);
+                    .getConnectionStatus(mDevice);
             if (SettingsBtStatus.isConnectionStatusBusy(status)) {
                 return true;
             }
@@ -599,7 +599,7 @@ public class LocalBluetoothDevice implements Comparable<LocalBluetoothDevice> {
      * Fetches a new value for the cached BT class.
      */
     private void fetchBtClass() {
-        mBtClass = mLocalManager.getBluetoothManager().getRemoteClass(mAddress);
+        mBtClass = mDevice.getBluetoothClass();
         if (mBtClass != BluetoothClass.ERROR) {
             LocalBluetoothProfileManager.fill(mBtClass, mProfiles);
         }
@@ -632,7 +632,7 @@ public class LocalBluetoothDevice implements Comparable<LocalBluetoothDevice> {
         for (Profile profile : mProfiles) {
             LocalBluetoothProfileManager profileManager = LocalBluetoothProfileManager
                     .getProfileManager(mLocalManager, profile);
-            int connectionStatus = profileManager.getConnectionStatus(mAddress);
+            int connectionStatus = profileManager.getConnectionStatus(mDevice);
 
             if (SettingsBtStatus.isConnectionStatusConnected(connectionStatus) ||
                     connectionStatus == SettingsBtStatus.CONNECTION_STATUS_CONNECTING ||
@@ -656,17 +656,17 @@ public class LocalBluetoothDevice implements Comparable<LocalBluetoothDevice> {
         if (mProfiles.contains(Profile.A2DP)) {
             LocalBluetoothProfileManager profileManager = LocalBluetoothProfileManager
                     .getProfileManager(mLocalManager, Profile.A2DP);
-            isConnecting = profileManager.getConnectionStatus(mAddress) ==
+            isConnecting = profileManager.getConnectionStatus(mDevice) ==
                     SettingsBtStatus.CONNECTION_STATUS_CONNECTING;
-            isA2dpConnected = profileManager.isConnected(mAddress);
+            isA2dpConnected = profileManager.isConnected(mDevice);
         }
 
         if (mProfiles.contains(Profile.HEADSET)) {
             LocalBluetoothProfileManager profileManager = LocalBluetoothProfileManager
                     .getProfileManager(mLocalManager, Profile.HEADSET);
-            isConnecting |= profileManager.getConnectionStatus(mAddress) ==
+            isConnecting |= profileManager.getConnectionStatus(mDevice) ==
                     SettingsBtStatus.CONNECTION_STATUS_CONNECTING;
-            isHeadsetConnected = profileManager.isConnected(mAddress);
+            isHeadsetConnected = profileManager.isConnected(mDevice);
         }
 
         if (isConnecting) {
@@ -690,7 +690,7 @@ public class LocalBluetoothDevice implements Comparable<LocalBluetoothDevice> {
 
     public void onCreateContextMenu(ContextMenu menu) {
         // No context menu if it is busy (none of these items are applicable if busy)
-        if (mLocalManager.getBluetoothState() != BluetoothDevice.BLUETOOTH_STATE_ON || isBusy()) {
+        if (mLocalManager.getBluetoothState() != BluetoothAdapter.BLUETOOTH_STATE_ON || isBusy()) {
             return;
         }
 
@@ -752,7 +752,7 @@ public class LocalBluetoothDevice implements Comparable<LocalBluetoothDevice> {
                     intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 }
                 intent.setClass(context, ConnectSpecificProfilesActivity.class);
-                intent.putExtra(ConnectSpecificProfilesActivity.EXTRA_ADDRESS, mAddress);
+                intent.putExtra(ConnectSpecificProfilesActivity.EXTRA_DEVICE, mDevice);
                 context.startActivity(intent);
                 break;
         }
@@ -780,24 +780,24 @@ public class LocalBluetoothDevice implements Comparable<LocalBluetoothDevice> {
 
     @Override
     public String toString() {
-        return mAddress;
+        return mDevice.toString();
     }
 
     @Override
     public boolean equals(Object o) {
-        if ((o == null) || !(o instanceof LocalBluetoothDevice)) {
+        if ((o == null) || !(o instanceof CachedBluetoothDevice)) {
             throw new ClassCastException();
         }
 
-        return mAddress.equals(((LocalBluetoothDevice) o).mAddress);
+        return mDevice.equals(((CachedBluetoothDevice) o).mDevice);
     }
 
     @Override
     public int hashCode() {
-        return mAddress.hashCode();
+        return mDevice.getAddress().hashCode();
     }
 
-    public int compareTo(LocalBluetoothDevice another) {
+    public int compareTo(CachedBluetoothDevice another) {
         int comparison;
 
         // Connected above not connected
@@ -822,6 +822,6 @@ public class LocalBluetoothDevice implements Comparable<LocalBluetoothDevice> {
     }
 
     public interface Callback {
-        void onDeviceAttributesChanged(LocalBluetoothDevice device);
+        void onDeviceAttributesChanged(CachedBluetoothDevice cachedDevice);
     }
 }

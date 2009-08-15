@@ -18,7 +18,7 @@ package com.android.settings.bluetooth;
 
 import com.android.settings.R;
 
-import android.bluetooth.BluetoothDevice;
+import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothError;
 import android.bluetooth.BluetoothIntent;
 import android.content.BroadcastReceiver;
@@ -76,8 +76,8 @@ public class BluetoothEnabler implements Preference.OnPreferenceChangeListener {
         
         int state = mLocalManager.getBluetoothState();
         // This is the widget enabled state, not the preference toggled state
-        mCheckBoxPreference.setEnabled(state == BluetoothDevice.BLUETOOTH_STATE_ON ||
-                state == BluetoothDevice.BLUETOOTH_STATE_OFF);
+        mCheckBoxPreference.setEnabled(state == BluetoothAdapter.BLUETOOTH_STATE_ON ||
+                state == BluetoothAdapter.BLUETOOTH_STATE_OFF);
         // BT state is not a sticky broadcast, so set it manually
         handleStateChanged(state);
         
@@ -112,18 +112,18 @@ public class BluetoothEnabler implements Preference.OnPreferenceChangeListener {
     
     private void handleStateChanged(int state) {
 
-        if (state == BluetoothDevice.BLUETOOTH_STATE_OFF ||
-                state == BluetoothDevice.BLUETOOTH_STATE_ON) {
-            mCheckBoxPreference.setChecked(state == BluetoothDevice.BLUETOOTH_STATE_ON);
-            mCheckBoxPreference.setSummary(state == BluetoothDevice.BLUETOOTH_STATE_OFF ?
+        if (state == BluetoothAdapter.BLUETOOTH_STATE_OFF ||
+                state == BluetoothAdapter.BLUETOOTH_STATE_ON) {
+            mCheckBoxPreference.setChecked(state == BluetoothAdapter.BLUETOOTH_STATE_ON);
+            mCheckBoxPreference.setSummary(state == BluetoothAdapter.BLUETOOTH_STATE_OFF ?
                                            mOriginalSummary :
                                            null);
             
             mCheckBoxPreference.setEnabled(isEnabledByDependency());
             
-        } else if (state == BluetoothDevice.BLUETOOTH_STATE_TURNING_ON ||
-                state == BluetoothDevice.BLUETOOTH_STATE_TURNING_OFF) {
-            mCheckBoxPreference.setSummary(state == BluetoothDevice.BLUETOOTH_STATE_TURNING_ON
+        } else if (state == BluetoothAdapter.BLUETOOTH_STATE_TURNING_ON ||
+                state == BluetoothAdapter.BLUETOOTH_STATE_TURNING_OFF) {
+            mCheckBoxPreference.setSummary(state == BluetoothAdapter.BLUETOOTH_STATE_TURNING_ON
                     ? R.string.wifi_starting
                     : R.string.wifi_stopping);
             

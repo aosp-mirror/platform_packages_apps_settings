@@ -17,6 +17,7 @@
 package com.android.settings.bluetooth;
 
 import android.bluetooth.BluetoothA2dp;
+import android.bluetooth.BluetoothDevice;
 import android.bluetooth.BluetoothError;
 import android.bluetooth.BluetoothHeadset;
 import android.os.Handler;
@@ -27,6 +28,7 @@ import com.android.settings.R;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 /**
  * LocalBluetoothProfileManager is an abstract class defining the basic
@@ -91,22 +93,22 @@ public abstract class LocalBluetoothProfileManager {
         mLocalManager = localManager;
     }
     
-    public abstract int connect(String address);
+    public abstract int connect(BluetoothDevice device);
     
-    public abstract int disconnect(String address);
+    public abstract int disconnect(BluetoothDevice device);
     
-    public abstract int getConnectionStatus(String address);
+    public abstract int getConnectionStatus(BluetoothDevice device);
 
-    public abstract int getSummary(String address);
+    public abstract int getSummary(BluetoothDevice device);
 
     public abstract int convertState(int a2dpState);
     
-    public abstract boolean isPreferred(String address);
+    public abstract boolean isPreferred(BluetoothDevice device);
 
-    public abstract void setPreferred(String address, boolean preferred);
+    public abstract void setPreferred(BluetoothDevice device, boolean preferred);
 
-    public boolean isConnected(String address) {
-        return SettingsBtStatus.isConnectionStatusConnected(getConnectionStatus(address));
+    public boolean isConnected(BluetoothDevice device) {
+        return SettingsBtStatus.isConnectionStatusConnected(getConnectionStatus(device));
     }
     
     // TODO: int instead of enum
@@ -133,29 +135,29 @@ public abstract class LocalBluetoothProfileManager {
         }
 
         @Override
-        public int connect(String address) {
-            List<String> sinks = mService.listConnectedSinks();
+        public int connect(BluetoothDevice device) {
+            Set<BluetoothDevice> sinks = mService.getConnectedSinks();
             if (sinks != null) {
-                for (String sinkAddress : sinks) {
-                    mService.disconnectSink(sinkAddress);
+                for (BluetoothDevice sink : sinks) {
+                    mService.disconnectSink(sink);
                 }
             }
-            return mService.connectSink(address);
+            return mService.connectSink(device);
         }
 
         @Override
-        public int disconnect(String address) {
-            return mService.disconnectSink(address);
+        public int disconnect(BluetoothDevice device) {
+            return mService.disconnectSink(device);
         }
         
         @Override
-        public int getConnectionStatus(String address) {
-            return convertState(mService.getSinkState(address));
+        public int getConnectionStatus(BluetoothDevice device) {
+            return convertState(mService.getSinkState(device));
         }
         
         @Override
-        public int getSummary(String address) {
-            int connectionStatus = getConnectionStatus(address);
+        public int getSummary(BluetoothDevice device) {
+            int connectionStatus = getConnectionStatus(device);
 
             if (SettingsBtStatus.isConnectionStatusConnected(connectionStatus)) {
                 return R.string.bluetooth_a2dp_profile_summary_connected;
@@ -165,13 +167,13 @@ public abstract class LocalBluetoothProfileManager {
         }
 
         @Override
-        public boolean isPreferred(String address) {
-            return mService.getSinkPriority(address) > BluetoothA2dp.PRIORITY_OFF;
+        public boolean isPreferred(BluetoothDevice device) {
+            return mService.getSinkPriority(device) > BluetoothA2dp.PRIORITY_OFF;
         }
 
         @Override
-        public void setPreferred(String address, boolean preferred) {
-            mService.setSinkPriority(address,
+        public void setPreferred(BluetoothDevice device, boolean preferred) {
+            mService.setSinkPriority(device,
                     preferred ? BluetoothA2dp.PRIORITY_AUTO : BluetoothA2dp.PRIORITY_OFF);
         }
 
@@ -215,11 +217,11 @@ public abstract class LocalBluetoothProfileManager {
                      * We just bound to the service, so refresh the UI of the
                      * headset device.
                      */
-                    String address = mService.getHeadsetAddress();
-                    if (TextUtils.isEmpty(address)) return;
-                    mLocalManager.getLocalDeviceManager()
-                            .onProfileStateChanged(address, Profile.HEADSET,
-                                    BluetoothHeadset.STATE_CONNECTED);
+                    BluetoothDevice device = mService.getCurrentHeadset();
+                    if (device == null) return;
+                    mLocalManager.getCachedDeviceManager()
+                            .onProfileStateChanged(device, Profile.HEADSET,
+                                                   BluetoothHeadset.STATE_CONNECTED);
                 }
             });
         }
@@ -228,34 +230,34 @@ public abstract class LocalBluetoothProfileManager {
         }
 
         @Override
-        public int connect(String address) {
+        public int connect(BluetoothDevice device) {
             // Since connectHeadset fails if already connected to a headset, we
             // disconnect from any headset first
             mService.disconnectHeadset();
-            return mService.connectHeadset(address)
+            return mService.connectHeadset(device)
                     ? BluetoothError.SUCCESS : BluetoothError.ERROR;
         }
 
         @Override
-        public int disconnect(String address) {
-            if (mService.getHeadsetAddress().equals(address)) {
+        public int disconnect(BluetoothDevice device) {
+            if (mService.getCurrentHeadset().equals(device)) {
                 return mService.disconnectHeadset() ? BluetoothError.SUCCESS : BluetoothError.ERROR;
             } else {
                 return BluetoothError.SUCCESS;
             }
         }
-        
+
         @Override
-        public int getConnectionStatus(String address) {
-            String headsetAddress = mService.getHeadsetAddress();
-            return headsetAddress != null && headsetAddress.equals(address)
+        public int getConnectionStatus(BluetoothDevice device) {
+            BluetoothDevice currentDevice = mService.getCurrentHeadset();
+            return currentDevice != null && currentDevice.equals(device)
                     ? convertState(mService.getState())
                     : SettingsBtStatus.CONNECTION_STATUS_DISCONNECTED;
         }
         
         @Override
-        public int getSummary(String address) {
-            int connectionStatus = getConnectionStatus(address);
+        public int getSummary(BluetoothDevice device) {
+            int connectionStatus = getConnectionStatus(device);
             
             if (SettingsBtStatus.isConnectionStatusConnected(connectionStatus)) {
                 return R.string.bluetooth_headset_profile_summary_connected;
@@ -265,13 +267,13 @@ public abstract class LocalBluetoothProfileManager {
         }
 
         @Override
-        public boolean isPreferred(String address) {
-            return mService.getPriority(address) > BluetoothHeadset.PRIORITY_OFF;
+        public boolean isPreferred(BluetoothDevice device) {
+            return mService.getPriority(device) > BluetoothHeadset.PRIORITY_OFF;
         }
 
         @Override
-        public void setPreferred(String address, boolean preferred) {
-            mService.setPriority(address,
+        public void setPreferred(BluetoothDevice device, boolean preferred) {
+            mService.setPriority(device,
                     preferred ? BluetoothHeadset.PRIORITY_AUTO : BluetoothHeadset.PRIORITY_OFF);
         }
 
