@@ -16,7 +16,7 @@
 
 package com.android.settings.deviceinfo;
 
-import android.bluetooth.BluetoothDevice;
+import android.bluetooth.BluetoothAdapter;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
@@ -377,7 +377,7 @@ public class Status extends PreferenceActivity {
     }
 
     private void setBtStatus() {
-        BluetoothDevice bluetooth = (BluetoothDevice) getSystemService(BLUETOOTH_SERVICE);
+        BluetoothAdapter bluetooth = (BluetoothAdapter) getSystemService(BLUETOOTH_SERVICE);
         Preference btAddressPref = findPreference(KEY_BT_ADDRESS);
 
         if (bluetooth == null) {

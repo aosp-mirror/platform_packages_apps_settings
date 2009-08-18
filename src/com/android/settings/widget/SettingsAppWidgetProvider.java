@@ -19,7 +19,7 @@ package com.android.settings.widget;
 import android.app.PendingIntent;
 import android.appwidget.AppWidgetManager;
 import android.appwidget.AppWidgetProvider;
-import android.bluetooth.BluetoothDevice;
+import android.bluetooth.BluetoothAdapter;
 import android.content.ComponentName;
 import android.content.ContentResolver;
 import android.content.Context;
@@ -379,9 +379,9 @@ public class SettingsAppWidgetProvider extends AppWidgetProvider {
             }
         }
         int state = mLocalBluetoothManager.getBluetoothState();
-        if (state == BluetoothDevice.BLUETOOTH_STATE_OFF) {
+        if (state == BluetoothAdapter.BLUETOOTH_STATE_OFF) {
             return STATE_DISABLED;
-        } else if (state == BluetoothDevice.BLUETOOTH_STATE_ON) {
+        } else if (state == BluetoothAdapter.BLUETOOTH_STATE_ON) {
             return STATE_ENABLED;
         } else {
             return STATE_INTERMEDIATE;

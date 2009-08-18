@@ -20,10 +20,12 @@ import com.android.settings.R;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.bluetooth.BluetoothA2dp;
+import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
 import android.bluetooth.BluetoothError;
 import android.bluetooth.BluetoothIntent;
@@ -56,9 +58,9 @@ public class LocalBluetoothManager {
     private Activity mForegroundActivity;
     private AlertDialog mErrorDialog = null;
 
-    private BluetoothDevice mManager;
+    private BluetoothAdapter mAdapter;
 
-    private LocalBluetoothDeviceManager mLocalDeviceManager;
+    private CachedBluetoothDeviceManager mCachedDeviceManager;
     private BluetoothEventRedirector mEventRedirector;
     private BluetoothA2dp mBluetoothA2dp;
 
@@ -90,12 +92,12 @@ public class LocalBluetoothManager {
         // This will be around as long as this process is
         mContext = context.getApplicationContext();
 
-        mManager = (BluetoothDevice) context.getSystemService(Context.BLUETOOTH_SERVICE);
-        if (mManager == null) {
+        mAdapter = (BluetoothAdapter) context.getSystemService(Context.BLUETOOTH_SERVICE);
+        if (mAdapter == null) {
             return false;
         }
 
-        mLocalDeviceManager = new LocalBluetoothDeviceManager(this);
+        mCachedDeviceManager = new CachedBluetoothDeviceManager(this);
 
         mEventRedirector = new BluetoothEventRedirector(this);
         mEventRedirector.start();
@@ -105,8 +107,8 @@ public class LocalBluetoothManager {
         return true;
     }
 
-    public BluetoothDevice getBluetoothManager() {
-        return mManager;
+    public BluetoothAdapter getBluetoothAdapter() {
+        return mAdapter;
     }
 
     public Context getContext() {
@@ -129,8 +131,8 @@ public class LocalBluetoothManager {
         return mContext.getSharedPreferences(SHARED_PREFERENCES_NAME, Context.MODE_PRIVATE);
     }
 
-    public LocalBluetoothDeviceManager getLocalDeviceManager() {
-        return mLocalDeviceManager;
+    public CachedBluetoothDeviceManager getCachedDeviceManager() {
+        return mCachedDeviceManager;
     }
 
     List<Callback> getCallbacks() {
@@ -150,7 +152,7 @@ public class LocalBluetoothManager {
     }
 
     public void startScanning(boolean force) {
-        if (mManager.isDiscovering()) {
+        if (mAdapter.isDiscovering()) {
             /*
              * Already discovering, but give the callback that information.
              * Note: we only call the callbacks, not the same path as if the
@@ -167,17 +169,17 @@ public class LocalBluetoothManager {
                 }
 
                 // If we are playing music, don't scan unless forced.
-                List<String> sinks = mBluetoothA2dp.listConnectedSinks();
+                Set<BluetoothDevice> sinks = mBluetoothA2dp.getConnectedSinks();
                 if (sinks != null) {
-                    for (String address : sinks) {
-                        if (mBluetoothA2dp.getSinkState(address) == BluetoothA2dp.STATE_PLAYING) {
+                    for (BluetoothDevice sink : sinks) {
+                        if (mBluetoothA2dp.getSinkState(sink) == BluetoothA2dp.STATE_PLAYING) {
                             return;
                         }
                     }
                 }
             }
 
-            if (mManager.startDiscovery()) {
+            if (mAdapter.startDiscovery()) {
                 mLastScan = System.currentTimeMillis();
             }
         }
@@ -194,19 +196,20 @@ public class LocalBluetoothManager {
 
     void setBluetoothStateInt(int state) {
         mState = state;
-        if (state == BluetoothDevice.BLUETOOTH_STATE_ON ||
-            state == BluetoothDevice.BLUETOOTH_STATE_OFF) {
-            mLocalDeviceManager.onBluetoothStateChanged(state == BluetoothDevice.BLUETOOTH_STATE_ON);
+        if (state == BluetoothAdapter.BLUETOOTH_STATE_ON ||
+            state == BluetoothAdapter.BLUETOOTH_STATE_OFF) {
+            mCachedDeviceManager.onBluetoothStateChanged(state ==
+                    BluetoothAdapter.BLUETOOTH_STATE_ON);
         }
     }
 
     private void syncBluetoothState() {
         int bluetoothState;
 
-        if (mManager != null) {
-            bluetoothState = mManager.isEnabled()
-                    ? BluetoothDevice.BLUETOOTH_STATE_ON
-                    : BluetoothDevice.BLUETOOTH_STATE_OFF;
+        if (mAdapter != null) {
+            bluetoothState = mAdapter.isEnabled()
+                    ? BluetoothAdapter.BLUETOOTH_STATE_ON
+                    : BluetoothAdapter.BLUETOOTH_STATE_OFF;
         } else {
             bluetoothState = BluetoothError.ERROR;
         }
@@ -216,13 +219,13 @@ public class LocalBluetoothManager {
 
     public void setBluetoothEnabled(boolean enabled) {
         boolean wasSetStateSuccessful = enabled
-                ? mManager.enable()
-                : mManager.disable();
+                ? mAdapter.enable()
+                : mAdapter.disable();
 
         if (wasSetStateSuccessful) {
             setBluetoothStateInt(enabled
-                ? BluetoothDevice.BLUETOOTH_STATE_TURNING_ON
-                : BluetoothDevice.BLUETOOTH_STATE_TURNING_OFF);
+                ? BluetoothAdapter.BLUETOOTH_STATE_TURNING_ON
+                : BluetoothAdapter.BLUETOOTH_STATE_TURNING_OFF);
         } else {
             if (V) {
                 Log.v(TAG,
@@ -239,7 +242,7 @@ public class LocalBluetoothManager {
      */
     void onScanningStateChanged(boolean started) {
         // TODO: have it be a callback (once we switch bluetooth state changed to callback)
-        mLocalDeviceManager.onScanningStateChanged(started);
+        mCachedDeviceManager.onScanningStateChanged(started);
         dispatchScanningStateChanged(started);
     }
 
@@ -251,11 +254,11 @@ public class LocalBluetoothManager {
         }
     }
 
-    public void showError(String address, int titleResId, int messageResId) {
-        LocalBluetoothDevice device = mLocalDeviceManager.findDevice(address);
-        if (device == null) return;
+    public void showError(BluetoothDevice device, int titleResId, int messageResId) {
+        CachedBluetoothDevice cachedDevice = mCachedDeviceManager.findDevice(device);
+        if (cachedDevice == null) return;
 
-        String name = device.getName();
+        String name = cachedDevice.getName();
         String message = mContext.getString(messageResId, name);
 
         if (mForegroundActivity != null) {
@@ -274,8 +277,8 @@ public class LocalBluetoothManager {
 
     public interface Callback {
         void onScanningStateChanged(boolean started);
-        void onDeviceAdded(LocalBluetoothDevice device);
-        void onDeviceDeleted(LocalBluetoothDevice device);
+        void onDeviceAdded(CachedBluetoothDevice cachedDevice);
+        void onDeviceDeleted(CachedBluetoothDevice cachedDevice);
     }
 
 }

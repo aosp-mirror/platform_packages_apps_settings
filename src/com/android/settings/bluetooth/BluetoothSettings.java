@@ -22,7 +22,7 @@ import com.android.settings.R;
 import java.util.List;
 import java.util.WeakHashMap;
 
-import android.bluetooth.BluetoothDevice;
+import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothIntent;
 import android.content.BroadcastReceiver;
 import android.content.Context;
@@ -66,8 +66,8 @@ public class BluetoothSettings extends PreferenceActivity
 
     private ProgressCategory mDeviceList;
 
-    private WeakHashMap<LocalBluetoothDevice, BluetoothDevicePreference> mDevicePreferenceMap =
-            new WeakHashMap<LocalBluetoothDevice, BluetoothDevicePreference>();
+    private WeakHashMap<CachedBluetoothDevice, BluetoothDevicePreference> mDevicePreferenceMap =
+            new WeakHashMap<CachedBluetoothDevice, BluetoothDevicePreference>();
 
     private final BroadcastReceiver mReceiver = new BroadcastReceiver() {
         @Override
@@ -116,7 +116,7 @@ public class BluetoothSettings extends PreferenceActivity
         mNamePreference.resume();
         mLocalManager.registerCallback(this);
 
-        mDeviceList.setProgress(mLocalManager.getBluetoothManager().isDiscovering());
+        mDeviceList.setProgress(mLocalManager.getBluetoothAdapter().isDiscovering());
         mLocalManager.startScanning(false);
 
         registerReceiver(mReceiver,
@@ -140,9 +140,10 @@ public class BluetoothSettings extends PreferenceActivity
     }
 
     private void addDevices() {
-        List<LocalBluetoothDevice> devices = mLocalManager.getLocalDeviceManager().getDevicesCopy();
-        for (LocalBluetoothDevice device : devices) {
-            onDeviceAdded(device);
+        List<CachedBluetoothDevice> cachedDevices =
+                mLocalManager.getCachedDeviceManager().getCachedDevicesCopy();
+        for (CachedBluetoothDevice cachedDevice : cachedDevices) {
+            onDeviceAdded(cachedDevice);
         }
     }
 
@@ -156,7 +157,7 @@ public class BluetoothSettings extends PreferenceActivity
 
     @Override
     public boolean onPrepareOptionsMenu(Menu menu) {
-        menu.findItem(MENU_SCAN).setEnabled(mLocalManager.getBluetoothManager().isEnabled());
+        menu.findItem(MENU_SCAN).setEnabled(mLocalManager.getBluetoothAdapter().isEnabled());
         return true;
     }
 
@@ -184,7 +185,7 @@ public class BluetoothSettings extends PreferenceActivity
 
         if (preference instanceof BluetoothDevicePreference) {
             BluetoothDevicePreference btPreference = (BluetoothDevicePreference) preference;
-            btPreference.getDevice().onClicked();
+            btPreference.getCachedDevice().onClicked();
             return true;
         }
 
@@ -194,22 +195,22 @@ public class BluetoothSettings extends PreferenceActivity
     @Override
     public void onCreateContextMenu(ContextMenu menu, View v,
             ContextMenuInfo menuInfo) {
-        LocalBluetoothDevice device = getDeviceFromMenuInfo(menuInfo);
-        if (device == null) return;
+        CachedBluetoothDevice cachedDevice = getDeviceFromMenuInfo(menuInfo);
+        if (cachedDevice == null) return;
 
-        device.onCreateContextMenu(menu);
+        cachedDevice.onCreateContextMenu(menu);
     }
 
     @Override
     public boolean onContextItemSelected(MenuItem item) {
-        LocalBluetoothDevice device = getDeviceFromMenuInfo(item.getMenuInfo());
-        if (device == null) return false;
+        CachedBluetoothDevice cachedDevice = getDeviceFromMenuInfo(item.getMenuInfo());
+        if (cachedDevice == null) return false;
 
-        device.onContextItemSelected(item);
+        cachedDevice.onContextItemSelected(item);
         return true;
     }
 
-    private LocalBluetoothDevice getDeviceFromMenuInfo(ContextMenuInfo menuInfo) {
+    private CachedBluetoothDevice getDeviceFromMenuInfo(ContextMenuInfo menuInfo) {
         if ((menuInfo == null) || !(menuInfo instanceof AdapterContextMenuInfo)) {
             return null;
         }
@@ -221,26 +222,26 @@ public class BluetoothSettings extends PreferenceActivity
             return null;
         }
 
-        return ((BluetoothDevicePreference) pref).getDevice();
+        return ((BluetoothDevicePreference) pref).getCachedDevice();
     }
 
-    public void onDeviceAdded(LocalBluetoothDevice device) {
+    public void onDeviceAdded(CachedBluetoothDevice cachedDevice) {
 
-        if (mDevicePreferenceMap.get(device) != null) {
-            throw new IllegalStateException("Got onDeviceAdded, but device already exists");
+        if (mDevicePreferenceMap.get(cachedDevice) != null) {
+            throw new IllegalStateException("Got onDeviceAdded, but cachedDevice already exists");
         }
 
-        createDevicePreference(device);
+        createDevicePreference(cachedDevice);
     }
 
-    private void createDevicePreference(LocalBluetoothDevice device) {
-        BluetoothDevicePreference preference = new BluetoothDevicePreference(this, device);
+    private void createDevicePreference(CachedBluetoothDevice cachedDevice) {
+        BluetoothDevicePreference preference = new BluetoothDevicePreference(this, cachedDevice);
         mDeviceList.addPreference(preference);
-        mDevicePreferenceMap.put(device, preference);
+        mDevicePreferenceMap.put(cachedDevice, preference);
     }
 
-    public void onDeviceDeleted(LocalBluetoothDevice device) {
-        BluetoothDevicePreference preference = mDevicePreferenceMap.remove(device);
+    public void onDeviceDeleted(CachedBluetoothDevice cachedDevice) {
+        BluetoothDevicePreference preference = mDevicePreferenceMap.remove(cachedDevice);
         if (preference != null) {
             mDeviceList.removePreference(preference);
         }
@@ -253,9 +254,9 @@ public class BluetoothSettings extends PreferenceActivity
     private void onBluetoothStateChanged(int bluetoothState) {
         // When bluetooth is enabled (and we are in the activity, which we are),
         // we should start a scan
-        if (bluetoothState == BluetoothDevice.BLUETOOTH_STATE_ON) {
+        if (bluetoothState == BluetoothAdapter.BLUETOOTH_STATE_ON) {
             mLocalManager.startScanning(false);
-        } else if (bluetoothState == BluetoothDevice.BLUETOOTH_STATE_OFF) {
+        } else if (bluetoothState == BluetoothAdapter.BLUETOOTH_STATE_OFF) {
             mDeviceList.setProgress(false);
         }
     }

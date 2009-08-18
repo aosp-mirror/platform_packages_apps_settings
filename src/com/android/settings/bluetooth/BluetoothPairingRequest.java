@@ -47,11 +47,12 @@ public class BluetoothPairingRequest extends BroadcastReceiver {
 
             LocalBluetoothManager localManager = LocalBluetoothManager.getInstance(context);
 
-            String address = intent.getStringExtra(BluetoothIntent.ADDRESS);
+            BluetoothDevice device =
+                    intent.getParcelableExtra(BluetoothIntent.DEVICE);
             int type = intent.getIntExtra(BluetoothIntent.PAIRING_VARIANT, BluetoothClass.ERROR);
             Intent pairingIntent = new Intent();
             pairingIntent.setClass(context, BluetoothPairingDialog.class);
-            pairingIntent.putExtra(BluetoothIntent.ADDRESS, address);
+            pairingIntent.putExtra(BluetoothIntent.DEVICE, device);
             pairingIntent.putExtra(BluetoothIntent.PAIRING_VARIANT, type);
             if (type == BluetoothDevice.PAIRING_VARIANT_CONFIRMATION) {
                 int passkey = intent.getIntExtra(BluetoothIntent.PASSKEY, BluetoothClass.ERROR);
@@ -78,7 +79,7 @@ public class BluetoothPairingRequest extends BroadcastReceiver {
 
                 String name = intent.getStringExtra(BluetoothIntent.NAME);
                 if (TextUtils.isEmpty(name)) {
-                    name = localManager.getLocalDeviceManager().getName(address);
+                    name = device.getName();
                 }
 
                 notification.setLatestEventInfo(context,
