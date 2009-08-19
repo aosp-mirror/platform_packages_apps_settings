@@ -51,6 +51,7 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.EditText;
 
+import com.android.internal.telephony.DataConnection;
 import com.android.internal.telephony.Phone;
 import com.android.internal.telephony.PhoneFactory;
 import com.android.internal.telephony.PhoneStateIntentReceiver;
@@ -200,7 +201,7 @@ public class RadioInfo extends Activity {
                         int type = ((int[])ar.result)[0];
                         preferredNetworkType.setSelection(type, true);
                     } else {
-                        preferredNetworkType.setSelection(3, true);
+                        preferredNetworkType.setSelection(8, true);
                     }
                     break;
                 case EVENT_SET_PREFERRED_TYPE_DONE:
@@ -916,20 +917,24 @@ public class RadioInfo extends Activity {
     private final void updatePdpList() {
         StringBuilder sb = new StringBuilder("========DATA=======\n");
 
-        List<PdpConnection> pdps = phone.getCurrentPdpList();
+        List<DataConnection> dcs = phone.getCurrentDataConnectionList();
 
-        for (PdpConnection pdp : pdps) {
-            sb.append("    State: ").append(pdp.getState().toString()).append("\n");
-            if (pdp.getState().isActive()) {
+        for (DataConnection dc : dcs) {
+            sb.append("    State: ").append(dc.getState().toString()).append("\n");
+            if (dc.getState().isActive()) {
                 long timeElapsed =
-                    (System.currentTimeMillis() - pdp.getConnectionTime())/1000;
+                    (System.currentTimeMillis() - dc.getConnectionTime())/1000;
                 sb.append("    connected at ")
-                  .append(DateUtils.timeString(pdp.getConnectionTime()))
+                  .append(DateUtils.timeString(dc.getConnectionTime()))
                   .append(" and elapsed ")
-                  .append(DateUtils.formatElapsedTime(timeElapsed))
-                  .append("\n    to ")
-                  .append(pdp.getApn().toString())
-                  .append("\ninterface: ")
+                  .append(DateUtils.formatElapsedTime(timeElapsed));
+
+                if (dc instanceof PdpConnection) {
+                    PdpConnection pdp = (PdpConnection)dc;
+                    sb.append("\n    to ")
+                      .append(pdp.getApn().toString());
+                }
+                sb.append("\ninterface: ")
                   .append(phone.getInterfaceName(phone.getActiveApnTypes()[0]))
                   .append("\naddress: ")
                   .append(phone.getIpAddress(phone.getActiveApnTypes()[0]))
@@ -939,14 +944,19 @@ public class RadioInfo extends Activity {
                 if (dns != null) {
                     sb.append("\ndns: ").append(dns[0]).append(", ").append(dns[1]);
                 }
-            } else if (pdp.getState().isInactive()) {
+            } else if (dc.getState().isInactive()) {
                 sb.append("    disconnected with last try at ")
-                  .append(DateUtils.timeString(pdp.getLastFailTime()))
+                  .append(DateUtils.timeString(dc.getLastFailTime()))
                   .append("\n    fail because ")
-                  .append(pdp.getLastFailCause().toString());
+                  .append(dc.getLastFailCause().toString());
             } else {
-                sb.append("    is connecting to ")
-                  .append(pdp.getApn().toString());
+                if (dc instanceof PdpConnection) {
+                    PdpConnection pdp = (PdpConnection)dc;
+                    sb.append("    is connecting to ")
+                      .append(pdp.getApn().toString());
+                } else {
+                    sb.append("    is connecting");
+                }
             }
             sb.append("\n===================");
         }
@@ -1148,5 +1158,13 @@ public class RadioInfo extends Activity {
     };
 
     private String[] mPreferredNetworkLabels = {
-            "WCDMA preferred", "GSM only", "WCDMA only", "Unknown"};
+            "WCDMA preferred",
+            "GSM only",
+            "WCDMA only",
+            "GSM auto (PRL)",
+            "CDMA auto (PRL)",
+            "CDMA only",
+            "EvDo only",
+            "GSM/CDMA auto (PRL)",
+            "Unknown"};
 }
