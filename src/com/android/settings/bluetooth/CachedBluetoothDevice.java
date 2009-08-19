@@ -231,7 +231,7 @@ public class CachedBluetoothDevice implements Comparable<CachedBluetoothDevice> 
             BluetoothJob job = workQueue.peek();
             if (job == null) {
                 return;
-            } else if (job.cachedDevice.mDevice.equals(mDevice)) {
+            } else if (!job.cachedDevice.mDevice.equals(mDevice)) {
                 // This can happen in 2 cases: 1) BT device initiated pairing and
                 // 2) disconnects of one headset that's triggered by connects of
                 // another.
