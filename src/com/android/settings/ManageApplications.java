@@ -27,6 +27,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.content.SharedPreferences;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.IPackageStatsObserver;
 import android.content.pm.PackageManager;
@@ -103,6 +104,8 @@ public class ManageApplications extends ListActivity implements
         DialogInterface.OnClickListener {
     // TAG for this activity
     private static final String TAG = "ManageApplications";
+    private static final String PREFS_NAME = "ManageAppsInfo.prefs";
+    private static final String PREF_DISABLE_CACHE = "disableCache";
     
     // Log information boolean
     private boolean localLOGV = Config.LOGV || false;
@@ -1533,7 +1536,7 @@ public class ManageApplications extends ListActivity implements
         private static final String mFileCacheName="ManageAppsInfo.txt";
         private static final int FILE_BUFFER_SIZE = 1024;
         private static final boolean DEBUG_CACHE = false;
-        private static final boolean DEBUG_CACHE_TIME = true;
+        private static final boolean DEBUG_CACHE_TIME = false;
         private Map<String, AppInfo> mAppPropCache = new HashMap<String, AppInfo>();
 
         private boolean isEmpty() {
@@ -1581,6 +1584,10 @@ public class ManageApplications extends ListActivity implements
                 while(fis.available() > 0) {
                     fis.read(lenBytes, 0, 2);
                     int buffLen = (lenBytes[0] << 8) | lenBytes[1];
+                    if ((buffLen <= 0) || (buffLen > byteBuff.length)) {
+                        err = true;
+                        break;
+                    }
                     // Buffer length cannot be great then max.
                     fis.read(byteBuff, 0, buffLen);
                     String buffStr = new String(byteBuff);
@@ -1617,17 +1624,18 @@ public class ManageApplications extends ListActivity implements
                         fis.close();
                     } catch (IOException e) {
                         Log.w(TAG, "Failed to close file " + cacheFile + " with exception : " +e);
+                        err = true;
                     }
                 }
-            }
-            if (err) {
-                Log.i(TAG, "Failed to load cache. Not using cache for now.");
-                // Clear cache and bail out
-                mAppPropCache.clear();
+                if (err) {
+                    Log.i(TAG, "Failed to load cache. Not using cache for now.");
+                    // Clear cache and bail out
+                    mAppPropCache.clear();
+                }
             }
         }
 
-        void writeToFile() {
+        boolean writeToFile() {
             File cacheFile = new File(getFilesDir(), mFileCacheName);
             FileOutputStream fos = null;
             try {
@@ -1662,34 +1670,58 @@ public class ManageApplications extends ListActivity implements
                         fos.write(byteBuff, 0, len);
                     } catch (IOException e) {
                         Log.w(TAG, "Failed to write to file : " + cacheFile + " with exception : " + e);
+                        return false;
                     }
                 }
                 if (DEBUG_CACHE_TIME) {
                     Log.i(TAG, "Took " + (SystemClock.uptimeMillis() - opStartTime) + " ms to write and process from file");
                 }
+                return true;
             } catch (FileNotFoundException e) {
                 Log.w(TAG, "Error opening file for write operation : " + cacheFile+
                         " with exception : " + e);
+                return false;
             } finally {
                 if (fos != null) {
                     try {
                         fos.close();
                     } catch (IOException e) {
                         Log.w(TAG, "Failed closing file : " + cacheFile + " with exception : " + e);
+                        return false;
                     }
                 }
             }
         }
         private void loadCache() {
-            if (FILE_CACHE) {
+             // Restore preferences
+            SharedPreferences settings = getSharedPreferences(PREFS_NAME, 0);
+            boolean disable = settings.getBoolean(PREF_DISABLE_CACHE, true);
+            if (disable) Log.w(TAG, "Cache has been disabled");
+            // Disable cache till the data is loaded successfully
+            SharedPreferences.Editor editor = settings.edit();
+            editor.putBoolean(PREF_DISABLE_CACHE, true);
+            editor.commit();
+            if (FILE_CACHE && !disable) {
                 readFromFile();
+                // Enable cache since the file has been read successfully
+                editor.putBoolean(PREF_DISABLE_CACHE, false);
+                editor.commit();
             }
         }
 
         private void updateCache() {
+            SharedPreferences settings = getSharedPreferences(PREFS_NAME, 0);
+            SharedPreferences.Editor editor = settings.edit();
+            editor.putBoolean(PREF_DISABLE_CACHE, true);
+            editor.commit();
             if (FILE_CACHE) {
-                writeToFile();
+                boolean writeStatus = writeToFile();
                 mAppPropCache.clear();
+                if (writeStatus) {
+                    // Enable cache since the file has been read successfully
+                    editor.putBoolean(PREF_DISABLE_CACHE, false);
+                    editor.commit();
+                }
             }
         }
     }
