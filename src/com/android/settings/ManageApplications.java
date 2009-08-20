@@ -52,6 +52,8 @@ import android.view.ViewGroup;
 import android.view.Window;
 import android.widget.AdapterView;
 import android.widget.BaseAdapter;
+import android.widget.Filter;
+import android.widget.Filterable;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -653,19 +655,29 @@ public class ManageApplications extends ListActivity implements
             return installedAppList;
         }
     }
+
+    private static boolean matchFilter(boolean filter, Map<String, String> filterMap, String pkg) {
+        boolean add = true;
+        if (filter) {
+            if (filterMap == null || !filterMap.containsKey(pkg)) {
+                add = false;
+            }
+        }
+        return add;
+    }
     
     /*
      * Utility method used to figure out list of apps based on filterOption
      * If the framework supports an additional flag to indicate running apps
      *  we can get away with some code here.
      */
-    List<ApplicationInfo> getFilteredApps(List<ApplicationInfo> pAppList, int filterOption) {
+    List<ApplicationInfo> getFilteredApps(List<ApplicationInfo> pAppList, int filterOption, boolean filter,
+            Map<String, String> filterMap) {
         List<ApplicationInfo> retList = new ArrayList<ApplicationInfo>();
         if(pAppList == null) {
             return retList;
         }
         if (filterOption == FILTER_APPS_THIRD_PARTY) {
-            List<ApplicationInfo> appList =new ArrayList<ApplicationInfo> ();
             for (ApplicationInfo appInfo : pAppList) {
                 boolean flag = false;
                 if ((appInfo.flags & ApplicationInfo.FLAG_UPDATED_SYSTEM_APP) != 0) {
@@ -676,15 +688,16 @@ public class ManageApplications extends ListActivity implements
                     flag = true;
                 }
                 if (flag) {
-                    appList.add(appInfo);
+                    if (matchFilter(filter, filterMap, appInfo.packageName)) {
+                        retList.add(appInfo);
+                    }
                 }
             }
-            return appList;
+            return retList;
         } else if (filterOption == FILTER_APPS_RUNNING) {
-            List<ApplicationInfo> appList =new ArrayList<ApplicationInfo> ();
             List<ActivityManager.RunningAppProcessInfo> procList = getRunningAppProcessesList();
             if ((procList == null) || (procList.size() == 0)) {
-                return appList;
+                return retList;
             }
             // Retrieve running processes from ActivityManager
             HashMap<String, ActivityManager.RunningAppProcessInfo> runningMap = 
@@ -700,15 +713,22 @@ public class ManageApplications extends ListActivity implements
             // Query list to find running processes in current list
             for (ApplicationInfo appInfo : pAppList) {
                 if (runningMap.get(appInfo.packageName) != null) {
-                    appList.add(appInfo);
+                    if (matchFilter(filter, filterMap, appInfo.packageName)) {
+                        retList.add(appInfo);
+                    }
                 }
             }
-            return appList;
+            return retList;
         } else {
-            return pAppList;
+            for (ApplicationInfo appInfo : pAppList) {
+                if (matchFilter(filter, filterMap, appInfo.packageName)) {
+                    retList.add(appInfo);
+                }
+            }
+            return retList;
         }
     }
-    
+
     private List<ActivityManager.RunningAppProcessInfo> getRunningAppProcessesList() {
         ActivityManager am = (ActivityManager)getSystemService(Context.ACTIVITY_SERVICE);
         return am.getRunningAppProcesses();
@@ -927,11 +947,63 @@ public class ManageApplications extends ListActivity implements
      * the getId methods via the package name into the internal maps and indices.
      * The order of applications in the list is mirrored in mAppLocalList
      */
-    class AppInfoAdapter extends BaseAdapter {        
+    class AppInfoAdapter extends BaseAdapter implements Filterable {   
         private List<ApplicationInfo> mAppList;
         private List<ApplicationInfo> mAppLocalList;
+        private Map<String, String> mFilterMap = new HashMap<String, String>();
         AlphaComparator mAlphaComparator = new AlphaComparator();
         SizeComparator mSizeComparator = new SizeComparator();
+        private Filter mAppFilter = new AppFilter();
+        final private Object mFilterLock = new Object();
+        private Map<String, String> mCurrentFilterMap = null;
+
+        private void generateFilterListLocked(List<ApplicationInfo> list) {
+            mAppLocalList = new ArrayList<ApplicationInfo>(list);
+            synchronized(mFilterLock) {
+                for (ApplicationInfo info : mAppLocalList) {
+                    String label = info.packageName;
+                    AppInfo aInfo = mCache.getEntry(info.packageName);
+                    if ((aInfo != null) && (aInfo.appName != null)) {
+                        label = aInfo.appName.toString();
+                    }
+                    mFilterMap.put(info.packageName, label.toLowerCase());
+                }
+            }
+        }
+
+        private void addFilterListLocked(int newIdx, ApplicationInfo info, CharSequence pLabel) {
+            mAppLocalList.add(newIdx, info);
+            synchronized (mFilterLock) {
+                String label = info.packageName;
+                if (pLabel != null) {
+                    label = pLabel.toString();
+                }
+                mFilterMap.put(info.packageName, label.toLowerCase());
+            }
+        }
+
+        private boolean removeFilterListLocked(String removePkg) {
+            // Remove from filtered list
+            int N = mAppLocalList.size();
+            int i;
+            for (i = (N-1); i >= 0; i--) {
+                ApplicationInfo info = mAppLocalList.get(i);
+                if (info.packageName.equalsIgnoreCase(removePkg)) {
+                    if (localLOGV) Log.i(TAG, "Removing " + removePkg + " from local list");
+                    mAppLocalList.remove(i);
+                    synchronized (mFilterLock) {
+                        mFilterMap.remove(removePkg);
+                    }
+                    return true;
+                }
+            }
+            return false;
+        }
+
+        private void reverseGenerateList() {
+            generateFilterListLocked(getFilteredApps(mAppList, mFilterApps, mCurrentFilterMap!= null, mCurrentFilterMap));
+            sortListInner(mSortOrder);
+        }
 
         // Make sure the cache or map contains entries for all elements
         // in appList for a valid sort.
@@ -942,11 +1014,11 @@ public class ManageApplications extends ListActivity implements
                 // Just refresh the list
                 appList = mAppList;
             } else {
-                mAppList = pAppList;
+                mAppList = new ArrayList<ApplicationInfo>(pAppList);
                 appList = pAppList;
                 notify = true;
             }
-            mAppLocalList = getFilteredApps(appList, filterOption);
+            generateFilterListLocked(getFilteredApps(appList, filterOption, mCurrentFilterMap!= null, mCurrentFilterMap));
             // This loop verifies and creates new entries for new packages in list
             int imax = appList.size();
             for (int i = 0; i < imax; i++) {
@@ -1083,7 +1155,7 @@ public class ManageApplications extends ListActivity implements
         public void sortBaseList(int sortOrder) {
             if (localLOGV) Log.i(TAG, "Sorting base list based on sortOrder = "+sortOrder);
             sortAppList(mAppList, sortOrder);
-            mAppLocalList = getFilteredApps(mAppList, mFilterApps);
+            generateFilterListLocked(getFilteredApps(mAppList, mFilterApps, mCurrentFilterMap!= null, mCurrentFilterMap));
             adjustIndex();
         }
 
@@ -1106,7 +1178,7 @@ public class ManageApplications extends ListActivity implements
          */
         public boolean resetAppList(int filterOption) {
            // Change application list based on filter option
-           mAppLocalList = getFilteredApps(mAppList, filterOption);
+           generateFilterListLocked(getFilteredApps(mAppList, filterOption, mCurrentFilterMap!= null, mCurrentFilterMap));
            // Check for all properties in map before sorting. Populate values from cache
            for(ApplicationInfo applicationInfo : mAppLocalList) {
                AppInfo appInfo = mCache.getEntry(applicationInfo.packageName);
@@ -1220,8 +1292,9 @@ public class ManageApplications extends ListActivity implements
             mAppList.add(info);
             // Add entry to map. Note that the index gets adjusted later on based on
             // whether the newly added package is part of displayed list
+            CharSequence label = info.loadLabel(mPm);
             mCache.addEntry(new AppInfo(pkgName, -1,
-                    info.loadLabel(mPm), info.loadIcon(mPm), size, formattedSize));
+                    label, info.loadIcon(mPm), size, formattedSize));
             // Add to list
             if (notInList && (shouldBeInList(mFilterApps, info))) {
                 // Binary search returns a negative index (ie -index) of the position where
@@ -1234,7 +1307,7 @@ public class ManageApplications extends ListActivity implements
                 }
                 // New entry
                 newIdx = -newIdx-1;
-                mAppLocalList.add(newIdx, info);
+                addFilterListLocked(newIdx, info, label);
                 // Adjust index
                 adjustIndex();
                 notifyDataSetChanged();
@@ -1286,15 +1359,8 @@ public class ManageApplications extends ListActivity implements
                 if (localLOGV) Log.i(TAG, "Removing " + pkg + " from cache");
                 mCache.removeEntry(pkg);
                 // Remove from filtered list
-                int i = 0;
-                for (ApplicationInfo info : mAppLocalList) {
-                    if (info.packageName.equalsIgnoreCase(pkg)) {
-                        mAppLocalList.remove(i);
-                        if (localLOGV) Log.i(TAG, "Removing " + pkg + " from local list");
-                        found = true;
-                        break;
-                    }
-                    i++;
+                if (removeFilterListLocked(pkg)) {
+                    found = true;
                 }
             }
             // Adjust indices of list entries
@@ -1322,6 +1388,50 @@ public class ManageApplications extends ListActivity implements
             }
             if (changed) {
                 notifyDataSetChanged();
+            }
+        }
+
+        public Filter getFilter() {
+            return mAppFilter;
+        }
+
+        private class AppFilter extends Filter {
+            @Override
+            protected FilterResults performFiltering(CharSequence prefix) {
+                FilterResults results = new FilterResults();
+                if (prefix == null || prefix.length() == 0) {
+                    synchronized (mFilterLock) {
+                        results.values = new HashMap<String, String>(mFilterMap);
+                        results.count = mFilterMap.size();
+                    }
+                } else {
+                    final String prefixString = prefix.toString().toLowerCase();
+                    Map<String, String> newMap = new HashMap<String, String>();
+                    synchronized (mFilterLock) {
+                        Map<String, String> localMap = mFilterMap;
+                        Set<String> keys = mFilterMap.keySet();
+                        for (String key : keys) {
+                            String label = localMap.get(key);
+                            if (label.indexOf(prefixString) != -1) {
+                                newMap.put(key, label);
+                            }
+                        }
+                    }
+                    results.values = newMap;
+                    results.count = newMap.size();
+                }
+                return results;
+            }
+
+            @Override
+            protected void publishResults(CharSequence constraint, FilterResults results) {
+                mCurrentFilterMap = (Map<String, String>) results.values;
+                reverseGenerateList();
+                if (results.count > 0) {
+                    notifyDataSetChanged();
+                } else {
+                    notifyDataSetInvalidated();
+                }
             }
         }
     }
@@ -1481,6 +1591,7 @@ public class ManageApplications extends ListActivity implements
         lv.setSaveEnabled(true);
         lv.setItemsCanFocus(true);
         lv.setOnItemClickListener(this);
+        lv.setTextFilterEnabled(true);
         mListView = lv;
         if (DEBUG_TIME) {
             Log.i(TAG, "Total time in Activity.create:: " +
