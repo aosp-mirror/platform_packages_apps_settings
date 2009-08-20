@@ -105,7 +105,9 @@ public class BluetoothDevicePreference extends Preference implements CachedBluet
     @Override
     protected void onBindView(View view) {
         // Disable this view if the bluetooth enable/disable preference view is off
-        setDependency("bt_checkbox");
+        if (null != findPreferenceInHierarchy("bt_checkbox")){
+            setDependency("bt_checkbox");
+        }
 
         super.onBindView(view);
 

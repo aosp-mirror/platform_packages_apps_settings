@@ -18,6 +18,7 @@ package com.android.settings.bluetooth;
 
 import android.bluetooth.BluetoothA2dp;
 import android.bluetooth.BluetoothDevice;
+import android.bluetooth.BluetoothClass;
 import android.bluetooth.BluetoothError;
 import android.bluetooth.BluetoothHeadset;
 import android.os.Handler;
@@ -59,6 +60,10 @@ public abstract class LocalBluetoothProfileManager {
                 case HEADSET:
                     profileManager = new HeadsetProfileManager(localManager);
                     break;
+
+                case OPP:
+                    profileManager = new OppProfileManager(localManager);
+                    break;
                 }
                 
                 sProfileMap.put(profile, profileManager);    
@@ -80,12 +85,16 @@ public abstract class LocalBluetoothProfileManager {
     public static void fill(int btClass, List<Profile> profiles) {
         profiles.clear();
 
-        if (BluetoothHeadset.doesClassMatch(btClass)) {
+        if (BluetoothClass.doesClassMatch(btClass, BluetoothClass.PROFILE_HEADSET)) {
             profiles.add(Profile.HEADSET);
         }
-        
-        if (BluetoothA2dp.doesClassMatchSink(btClass)) {
+
+        if (BluetoothClass.doesClassMatch(btClass, BluetoothClass.PROFILE_A2DP)) {
             profiles.add(Profile.A2DP);
+        }
+
+        if (BluetoothClass.doesClassMatch(btClass, BluetoothClass.PROFILE_OPP)) {
+            profiles.add(Profile.OPP);
         }
     }
 
@@ -114,7 +123,8 @@ public abstract class LocalBluetoothProfileManager {
     // TODO: int instead of enum
     public enum Profile {
         HEADSET(R.string.bluetooth_profile_headset),
-        A2DP(R.string.bluetooth_profile_a2dp);
+        A2DP(R.string.bluetooth_profile_a2dp),
+        OPP(R.string.bluetooth_profile_opp);
         
         public final int localizedString;
         
@@ -285,6 +295,65 @@ public abstract class LocalBluetoothProfileManager {
             case BluetoothHeadset.STATE_CONNECTING:
                 return SettingsBtStatus.CONNECTION_STATUS_CONNECTING;
             case BluetoothHeadset.STATE_DISCONNECTED:
+                return SettingsBtStatus.CONNECTION_STATUS_DISCONNECTED;
+            default:
+                return SettingsBtStatus.CONNECTION_STATUS_UNKNOWN;
+            }
+        }
+    }
+
+    /**
+     * OppProfileManager
+     */
+    private static class OppProfileManager extends LocalBluetoothProfileManager {
+
+        public OppProfileManager(LocalBluetoothManager localManager) {
+            super(localManager);
+        }
+
+        @Override
+        public int connect(BluetoothDevice device) {
+            return -1;
+        }
+
+        @Override
+        public int disconnect(BluetoothDevice device) {
+            return -1;
+        }
+
+        @Override
+        public int getConnectionStatus(BluetoothDevice device) {
+            return -1;
+        }
+
+        @Override
+        public int getSummary(BluetoothDevice device) {
+            int connectionStatus = getConnectionStatus(device);
+
+            if (SettingsBtStatus.isConnectionStatusConnected(connectionStatus)) {
+                return R.string.bluetooth_opp_profile_summary_connected;
+            } else {
+                return R.string.bluetooth_opp_profile_summary_not_connected;
+            }
+        }
+
+        @Override
+        public boolean isPreferred(BluetoothDevice device) {
+            return false;
+        }
+
+        @Override
+        public void setPreferred(BluetoothDevice device, boolean preferred) {
+        }
+
+        @Override
+        public int convertState(int oppState) {
+            switch (oppState) {
+            case 0:
+                return SettingsBtStatus.CONNECTION_STATUS_CONNECTED;
+            case 1:
+                return SettingsBtStatus.CONNECTION_STATUS_CONNECTING;
+            case 2:
                 return SettingsBtStatus.CONNECTION_STATUS_DISCONNECTED;
             default:
                 return SettingsBtStatus.CONNECTION_STATUS_UNKNOWN;

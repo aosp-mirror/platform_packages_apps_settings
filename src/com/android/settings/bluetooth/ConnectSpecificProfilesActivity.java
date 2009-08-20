@@ -29,6 +29,8 @@ import android.preference.PreferenceGroup;
 import android.text.TextUtils;
 import android.util.Log;
 
+import java.util.List;
+
 /**
  * ConnectSpecificProfilesActivity presents the user with all of the profiles
  * for a particular device, and allows him to choose which should be connected
@@ -43,7 +45,10 @@ public class ConnectSpecificProfilesActivity extends PreferenceActivity
     private static final String KEY_PROFILE_CONTAINER = "profile_container";
 
     public static final String EXTRA_DEVICE = "device";
-    
+
+    public static final String CLASS_NAME_OPP_PROFILE_MANAGER =
+        "com.android.settings.bluetooth.LocalBluetoothProfileManager$OppProfileManager";
+
     private LocalBluetoothManager mManager;
     private CachedBluetoothDevice mCachedDevice;
     
@@ -145,6 +150,19 @@ public class ConnectSpecificProfilesActivity extends PreferenceActivity
         pref.setPersistent(false);
         pref.setOnPreferenceChangeListener(this);
 
+        LocalBluetoothProfileManager profileManager = LocalBluetoothProfileManager
+                .getProfileManager(mManager, profile);
+
+        /**
+         * Gray out checkbox while connecting and disconnecting or this is OPP
+         * profile
+         */
+        if (profileManager.getClass().getName().equals(CLASS_NAME_OPP_PROFILE_MANAGER)) {
+            pref.setEnabled(false);
+        } else {
+            pref.setEnabled(!mCachedDevice.isBusy());
+        }
+
         refreshProfilePreference(pref, profile);
         
         return pref;
@@ -221,6 +239,12 @@ public class ConnectSpecificProfilesActivity extends PreferenceActivity
         /* Gray out checkbox while connecting and disconnecting */
         mOnlineModePreference.setEnabled(!mCachedDevice.isBusy());
 
+        List<Profile> profiles = mCachedDevice.getProfiles();
+        if ((profiles.size() == 1) && (profiles.get(0).name().equals("OPP"))) {
+            Log.w(TAG, "there is only one profile: Opp, disable the connect button.");
+            mOnlineModePreference.setEnabled(false);
+        }
+
         /**
          * If the device is online, show status. Otherwise, show a summary that
          * describes what the checkbox does.
@@ -249,9 +273,16 @@ public class ConnectSpecificProfilesActivity extends PreferenceActivity
         
         int connectionStatus = profileManager.getConnectionStatus(device);
 
-        /* Gray out checkbox while connecting and disconnecting */
-        profilePref.setEnabled(!mCachedDevice.isBusy());
-
+        /*
+         * Gray out checkbox while connecting and disconnecting or this is OPP
+         * profile
+         */
+        if (profileManager.getClass().getName().equals(CLASS_NAME_OPP_PROFILE_MANAGER)) {
+            Log.w(TAG, "this is Opp profile");
+            profilePref.setEnabled(false);
+        } else {
+            profilePref.setEnabled(!mCachedDevice.isBusy());
+        }
         profilePref.setSummary(getProfileSummary(profileManager, profile, device,
                 connectionStatus, mOnlineMode));
         
@@ -291,6 +322,8 @@ public class ConnectSpecificProfilesActivity extends PreferenceActivity
                 return R.string.bluetooth_a2dp_profile_summary_use_for;
             case HEADSET:
                 return R.string.bluetooth_headset_profile_summary_use_for;
+            case OPP:
+                return R.string.bluetooth_opp_profile_summary_use_for;
             default:
                 return 0;
         }
