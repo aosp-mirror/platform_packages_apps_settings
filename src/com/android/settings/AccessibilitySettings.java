@@ -130,7 +130,11 @@ public class AccessibilitySettings extends PreferenceActivity {
 
         int count = mAccessibilityServicesCategory.getPreferenceCount();
         for (int i = 0; i < count; i++) {
-            mAccessibilityServicesCategory.getPreference(i).setEnabled(isEnabled);
+            Preference pref = mAccessibilityServicesCategory.getPreference(i);
+            pref.setEnabled(isEnabled);
+            if (!isEnabled){
+               ((CheckBoxPreference) pref).setChecked(false);
+            }
         }
     }
 
