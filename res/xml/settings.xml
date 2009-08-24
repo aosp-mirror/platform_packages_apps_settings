@@ -22,8 +22,7 @@
 
         <com.android.settings.IconPreferenceScreen
             android:title="@string/radio_controls_title"
-            settings:icon="@drawable/ic_settings_wireless"
-            android:summary="@string/radio_controls_summary">
+            settings:icon="@drawable/ic_settings_wireless">
             <intent
                 android:action="android.intent.action.MAIN"
                 android:targetPackage="com.android.settings"
@@ -33,8 +32,7 @@
         <com.android.settings.IconPreferenceScreen
             android:key="call_settings"
             settings:icon="@drawable/ic_settings_call"
-            android:title="@string/call_settings_title"
-            android:summary="@string/call_settings_summary">
+            android:title="@string/call_settings_title">
             <intent
                 android:action="android.intent.action.MAIN"
                 android:targetPackage="com.android.phone"
@@ -45,8 +43,7 @@
 
         <com.android.settings.IconPreferenceScreen
             settings:icon="@drawable/ic_settings_sound_display"
-            android:title="@string/sound_and_display_settings"
-            android:summary="@string/sound_and_display_settings_summary">
+            android:title="@string/sound_and_display_settings">
             <intent
                 android:action="android.intent.action.MAIN"
                 android:targetPackage="com.android.settings"
@@ -58,7 +55,6 @@
         <com.android.settings.IconPreferenceScreen
             settings:icon="@drawable/ic_settings_security"
             android:title="@string/security_settings_title"
-            android:summary="@string/security_settings_summary"
             android:key="security_settings">
             <intent
                 android:action="android.intent.action.MAIN"
@@ -71,7 +67,6 @@
         <com.android.settings.IconPreferenceScreen
             settings:icon="@drawable/ic_settings_applications"
             android:title="@string/applications_settings"
-            android:summary="@string/applications_settings_summary"
             android:key="applications_settings">
             <intent
                 android:action="android.intent.action.MAIN"
@@ -86,7 +81,6 @@
         <com.android.settings.IconPreferenceScreen
             settings:icon="@drawable/ic_settings_sync"
             android:title="@string/sync_settings"
-            android:summary="@string/sync_settings_summary"
             android:key="sync_settings">
             <intent android:action="android.settings.SYNC_SETTINGS" />
         </com.android.settings.IconPreferenceScreen>
@@ -95,8 +89,7 @@
 
         <com.android.settings.IconPreferenceScreen 
             settings:icon="@drawable/ic_settings_storage"
-            android:title="@string/storage_settings_title" 
-            android:summary="@string/storage_settings_summary">
+            android:title="@string/storage_settings_title">
             <intent android:action="android.intent.action.MAIN"
                 android:targetPackage="com.android.settings"
                 android:targetClass="com.android.settings.deviceinfo.Memory" />
@@ -113,7 +106,6 @@
         <com.android.settings.IconPreferenceScreen
             settings:icon="@drawable/ic_settings_search"
             android:title="@string/search_settings"
-            android:summary="@string/search_settings_summary"
             android:key="search_settings">
             <intent android:action="android.search.action.SEARCH_SETTINGS" />
         </com.android.settings.IconPreferenceScreen>
@@ -122,8 +114,7 @@
 
         <com.android.settings.IconPreferenceScreen
             settings:icon="@drawable/ic_settings_language"
-            android:title="@string/language_settings"
-            android:summary="@string/language_settings_summary">
+            android:title="@string/language_settings">
             <intent
                 android:action="android.intent.action.MAIN"
                 android:targetPackage="com.android.settings"
@@ -134,8 +125,7 @@
 
         <com.android.settings.IconPreferenceScreen
             settings:icon="@drawable/ic_settings_accessibility"
-            android:title="@string/accessibility_settings_title"
-            android:summary="@string/accessibility_settings_summary">
+            android:title="@string/accessibility_settings_title">
             <intent
                 android:action="android.intent.action.MAIN"
                 android:targetPackage="com.android.settings"
@@ -146,8 +136,7 @@
 
         <com.android.settings.IconPreferenceScreen
             settings:icon="@drawable/ic_settings_speech"
-            android:title="@string/tts_settings"
-            android:summary="@string/tts_settings_summary">
+            android:title="@string/tts_settings">
             <intent
                 android:action="android.intent.action.MAIN"
                 android:targetPackage="com.android.settings"
@@ -158,8 +147,7 @@
 
         <com.android.settings.IconPreferenceScreen
             settings:icon="@drawable/ic_settings_date_time"
-            android:title="@string/date_and_time_settings_title"
-            android:summary="@string/date_and_time_settings_summary">
+            android:title="@string/date_and_time_settings_title">
             <intent
                 android:action="android.intent.action.MAIN"
                 android:targetPackage="com.android.settings"
@@ -170,8 +158,7 @@
 
         <com.android.settings.IconPreferenceScreen
             settings:icon="@drawable/ic_settings_about"
-            android:title="@string/about_settings"
-            android:summary="@string/about_settings_summary">
+            android:title="@string/about_settings">
             <intent
                 android:action="android.intent.action.MAIN"
                 android:targetPackage="com.android.settings"
