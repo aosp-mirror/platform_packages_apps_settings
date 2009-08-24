@@ -37,15 +37,6 @@ public class Settings extends PreferenceActivity {
         
         int activePhoneType = TelephonyManager.getDefault().getPhoneType();
 
-        // do not display SIM lock for CDMA phone
-        if (TelephonyManager.PHONE_TYPE_CDMA == activePhoneType) {
-            findPreference("security_settings").setSummary(
-                    R.string.cdma_security_settings_summary);
-        } else {
-            findPreference("security_settings").setSummary(
-                    R.string.security_settings_summary);
-        }
-
         PreferenceGroup parent = (PreferenceGroup) findPreference(KEY_PARENT);
         Utils.updatePreferenceToSpecificActivityOrRemove(this, parent, KEY_SYNC_SETTINGS, 0);
         Utils.updatePreferenceToSpecificActivityOrRemove(this, parent, KEY_SEARCH_SETTINGS, 0);
