@@ -230,11 +230,7 @@ public class BluetoothPairingDialog extends AlertActivity implements DialogInter
     }
 
     private void onCancel() {
-        if (mType == BluetoothDevice.PAIRING_VARIANT_CONFIRMATION) {
-            mDevice.setPairingConfirmation(false);
-        } else {
-            mDevice.cancelPairingUserInput();
-        }
+        mDevice.cancelPairingUserInput();
     }
 
     public void onClick(DialogInterface dialog, int which) {
