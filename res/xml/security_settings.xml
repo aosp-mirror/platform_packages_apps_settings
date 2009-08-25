@@ -32,12 +32,14 @@
             android:summaryOn="@string/location_street_level"
             android:summaryOff="@string/location_gps_disabled"/>
 
+<!-- Disabled to avoid confusion on devices with no AGPS
+     For Google experience devices we want AGPS on by default (if supported) so we don't really need this.
         <CheckBoxPreference
             android:key="assisted_gps"
             android:title="@string/assisted_gps"
             android:summaryOn="@string/assisted_gps_enabled"
             android:summaryOff="@string/assisted_gps_disabled"/>
-
+-->
         <CheckBoxPreference
             android:key="use_location"
             android:title="@string/use_location_title"

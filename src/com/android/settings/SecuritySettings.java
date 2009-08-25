@@ -305,7 +305,9 @@ public class SecuritySettings extends PreferenceActivity implements
             boolean enabled = mGps.isChecked();
             Settings.Secure.setLocationProviderEnabled(getContentResolver(),
                     LocationManager.GPS_PROVIDER, enabled);
-            mAssistedGps.setEnabled(enabled);
+            if (mAssistedGps != null) {
+                mAssistedGps.setEnabled(enabled);
+            }
         } else if (preference == mAssistedGps) {
             Settings.Secure.putInt(getContentResolver(), Settings.Secure.ASSISTED_GPS_ENABLED,
                     mAssistedGps.isChecked() ? 1 : 0);
@@ -355,9 +357,11 @@ public class SecuritySettings extends PreferenceActivity implements
         mNetwork.setChecked(Settings.Secure.isLocationProviderEnabled(
                 res, LocationManager.NETWORK_PROVIDER));
         mGps.setChecked(gpsEnabled);
-        mAssistedGps.setChecked(Settings.Secure.getInt(res,
-                Settings.Secure.ASSISTED_GPS_ENABLED, 2) == 1);
-        mAssistedGps.setEnabled(gpsEnabled);
+        if (mAssistedGps != null) {
+            mAssistedGps.setChecked(Settings.Secure.getInt(res,
+                    Settings.Secure.ASSISTED_GPS_ENABLED, 2) == 1);
+            mAssistedGps.setEnabled(gpsEnabled);
+        }
         mUseLocation.setChecked(Settings.Secure.getInt(res,
                 Settings.Secure.USE_LOCATION_FOR_SERVICES, 2) == 1);
     }
