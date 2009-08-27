@@ -239,7 +239,7 @@ public class VpnSettings extends PreferenceActivity implements
                 .setOnCancelListener(new DialogInterface.OnCancelListener() {
                             public void onCancel(DialogInterface dialog) {
                                 removeDialog(DIALOG_CONNECT);
-                                onIdle();
+                                changeState(mActiveProfile, VpnState.IDLE);
                             }
                         })
                 .create();
@@ -451,7 +451,6 @@ public class VpnSettings extends PreferenceActivity implements
             Dialog d = (Dialog) dialog;
             String error = mConnectingActor.validateInputs(d);
             if (error == null) {
-                changeState(mActiveProfile, VpnState.CONNECTING);
                 mConnectingActor.connect(d);
                 removeDialog(DIALOG_CONNECT);
                 return;
@@ -475,7 +474,7 @@ public class VpnSettings extends PreferenceActivity implements
             }
         } else {
             removeDialog(DIALOG_CONNECT);
-            onIdle();
+            changeState(mActiveProfile, VpnState.IDLE);
         }
     }
 
@@ -690,13 +689,11 @@ public class VpnSettings extends PreferenceActivity implements
             if (!unlockKeystore(p, action)) return;
         }
 
-        mConnectingActor = getActor(p);
-        mActiveProfile = p;
         if (!checkSecrets(p)) return;
+        changeState(p, VpnState.CONNECTING);
         if (mConnectingActor.isConnectDialogNeeded()) {
             showDialog(DIALOG_CONNECT);
         } else {
-            changeState(p, VpnState.CONNECTING);
             mConnectingActor.connect(null);
         }
     }
@@ -737,7 +734,10 @@ public class VpnSettings extends PreferenceActivity implements
             break;
 
         case CONNECTING:
+            mConnectingActor = getActor(p);
+            // pass through
         case DISCONNECTING:
+            mActiveProfile = p;
             disableProfilePreferencesIfOneActive();
             break;
 
@@ -976,6 +976,7 @@ public class VpnSettings extends PreferenceActivity implements
         }
 
         if (secretMissing) {
+            mActiveProfile = p;
             showDialog(DIALOG_SECRET_NOT_SET);
             return false;
         } else {
