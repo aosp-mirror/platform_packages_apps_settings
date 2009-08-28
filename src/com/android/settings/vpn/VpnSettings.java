@@ -104,16 +104,10 @@ public class VpnSettings extends PreferenceActivity implements
     private static final int CONNECT_BUTTON = DialogInterface.BUTTON1;
     private static final int OK_BUTTON = DialogInterface.BUTTON1;
 
-    private static final int DIALOG_CONNECT = 1;
-    private static final int DIALOG_RECONNECT = 2;
-    private static final int DIALOG_AUTH_ERROR = 3;
-    private static final int DIALOG_UNKNOWN_SERVER = 4;
-    private static final int DIALOG_SECRET_NOT_SET = 5;
-    private static final int DIALOG_CHALLENGE_ERROR = 6;
-    private static final int DIALOG_REMOTE_HUNG_UP_ERROR = 7;
-    private static final int DIALOG_CONNECTION_LOST = 8;
+    private static final int DIALOG_CONNECT = VpnManager.VPN_ERROR_LARGEST + 1;
+    private static final int DIALOG_SECRET_NOT_SET = DIALOG_CONNECT + 1;
 
-    private static final int NO_ERROR = 0;
+    private static final int NO_ERROR = VpnManager.VPN_ERROR_NO_ERROR;
 
     private static final String NAMESPACE_VPN = "vpn";
     private static final String KEY_PREFIX_IPSEC_PSK = "ipsk000";
@@ -201,29 +195,17 @@ public class VpnSettings extends PreferenceActivity implements
             case DIALOG_CONNECT:
                 return createConnectDialog();
 
-            case DIALOG_RECONNECT:
-                return createReconnectDialog();
-
-            case DIALOG_AUTH_ERROR:
-                return createAuthErrorDialog();
-
-            case DIALOG_REMOTE_HUNG_UP_ERROR:
-                return createRemoteHungUpErrorDialog();
-
-            case DIALOG_CHALLENGE_ERROR:
-                return createChallengeErrorDialog();
-
-            case DIALOG_UNKNOWN_SERVER:
-                return createUnknownServerDialog();
-
             case DIALOG_SECRET_NOT_SET:
                 return createSecretNotSetDialog();
 
-            case DIALOG_CONNECTION_LOST:
-                return createConnectionLostDialog();
+            case VpnManager.VPN_ERROR_CHALLENGE:
+            case VpnManager.VPN_ERROR_UNKNOWN_SERVER:
+            case VpnManager.VPN_ERROR_PPP_NEGOTIATION_FAILED:
+                return createEditDialog(id);
 
             default:
-                return super.onCreateDialog(id);
+                Log.d(TAG, "create reconnect dialog for event " + id);
+                return createReconnectDialog(id);
         }
     }
 
@@ -245,34 +227,50 @@ public class VpnSettings extends PreferenceActivity implements
                 .create();
     }
 
-    private Dialog createReconnectDialog() {
-        return createCommonDialogBuilder()
-                .setMessage(R.string.vpn_confirm_reconnect)
-                .create();
+    private Dialog createReconnectDialog(int id) {
+        int msgId;
+        switch (id) {
+            case VpnManager.VPN_ERROR_AUTH:
+                msgId = R.string.vpn_auth_error_dialog_msg;
+                break;
+
+            case VpnManager.VPN_ERROR_REMOTE_HUNG_UP:
+                msgId = R.string.vpn_remote_hung_up_error_dialog_msg;
+                break;
+
+            case VpnManager.VPN_ERROR_CONNECTION_LOST:
+                msgId = R.string.vpn_reconnect_from_lost;
+                break;
+
+            case VpnManager.VPN_ERROR_REMOTE_PPP_HUNG_UP:
+                msgId = R.string.vpn_remote_ppp_hung_up_error_dialog_msg;
+                break;
+
+            default:
+                msgId = R.string.vpn_confirm_reconnect;
+        }
+        return createCommonDialogBuilder().setMessage(msgId).create();
     }
 
-    private Dialog createAuthErrorDialog() {
-        return createCommonDialogBuilder()
-                .setMessage(R.string.vpn_auth_error_dialog_msg)
-                .create();
-    }
+    private Dialog createEditDialog(int id) {
+        int msgId;
+        switch (id) {
+            case VpnManager.VPN_ERROR_CHALLENGE:
+                msgId = R.string.vpn_challenge_error_dialog_msg;
+                break;
 
-    private Dialog createRemoteHungUpErrorDialog() {
-        return createCommonDialogBuilder()
-                .setMessage(R.string.vpn_remote_hung_up_error_dialog_msg)
-                .create();
-    }
+            case VpnManager.VPN_ERROR_UNKNOWN_SERVER:
+                msgId = R.string.vpn_unknown_server_dialog_msg;
+                break;
 
-    private Dialog createChallengeErrorDialog() {
-        return createCommonEditDialogBuilder()
-                .setMessage(R.string.vpn_challenge_error_dialog_msg)
-                .create();
-    }
+            case VpnManager.VPN_ERROR_PPP_NEGOTIATION_FAILED:
+                msgId = R.string.vpn_ppp_negotiation_failed_dialog_msg;
+                break;
 
-    private Dialog createUnknownServerDialog() {
-        return createCommonEditDialogBuilder()
-                .setMessage(R.string.vpn_unknown_server_dialog_msg)
-                .create();
+            default:
+                return null;
+        }
+        return createCommonEditDialogBuilder().setMessage(msgId).create();
     }
 
     private Dialog createSecretNotSetDialog() {
@@ -297,12 +295,6 @@ public class VpnSettings extends PreferenceActivity implements
                                 startVpnEditor(p);
                             }
                         });
-    }
-
-    private Dialog createConnectionLostDialog() {
-        return createCommonDialogBuilder()
-                .setMessage(R.string.vpn_reconnect_from_lost)
-                .create();
     }
 
     private AlertDialog.Builder createCommonDialogBuilder() {
@@ -748,36 +740,12 @@ public class VpnSettings extends PreferenceActivity implements
         case IDLE:
             assert(mActiveProfile == p);
 
-            switch (mConnectingErrorCode) {
-                case NO_ERROR:
-                    onIdle();
-                    break;
-
-                case VpnManager.VPN_ERROR_AUTH:
-                    showDialog(DIALOG_AUTH_ERROR);
-                    break;
-
-                case VpnManager.VPN_ERROR_REMOTE_HUNG_UP:
-                    showDialog(DIALOG_REMOTE_HUNG_UP_ERROR);
-                    break;
-
-                case VpnManager.VPN_ERROR_CHALLENGE:
-                    showDialog(DIALOG_CHALLENGE_ERROR);
-                    break;
-
-                case VpnManager.VPN_ERROR_UNKNOWN_SERVER:
-                    showDialog(DIALOG_UNKNOWN_SERVER);
-                    break;
-
-                case VpnManager.VPN_ERROR_CONNECTION_LOST:
-                    showDialog(DIALOG_CONNECTION_LOST);
-                    break;
-
-                default:
-                    showDialog(DIALOG_RECONNECT);
-                    break;
+            if (mConnectingErrorCode == NO_ERROR) {
+                onIdle();
+            } else {
+                showDialog(mConnectingErrorCode);
+                mConnectingErrorCode = NO_ERROR;
             }
-            mConnectingErrorCode = NO_ERROR;
             break;
         }
     }
