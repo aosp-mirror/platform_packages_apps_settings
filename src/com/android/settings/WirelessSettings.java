@@ -19,12 +19,18 @@ package com.android.settings;
 import com.android.settings.bluetooth.BluetoothEnabler;
 import com.android.settings.wifi.WifiEnabler;
 
+import android.content.Intent;
 import android.net.wifi.WifiManager;
 import android.os.Bundle;
+import android.os.SystemProperties;
 import android.preference.CheckBoxPreference;
 import android.preference.Preference;
+import android.preference.PreferenceScreen;
 import android.preference.PreferenceActivity;
 import android.provider.Settings;
+
+import com.android.internal.telephony.TelephonyIntents;
+import com.android.internal.telephony.TelephonyProperties;
 
 public class WirelessSettings extends PreferenceActivity {
 
@@ -33,10 +39,36 @@ public class WirelessSettings extends PreferenceActivity {
     private static final String KEY_TOGGLE_WIFI = "toggle_wifi";
     private static final String KEY_WIFI_SETTINGS = "wifi_settings";
     private static final String KEY_VPN_SETTINGS = "vpn_settings";
+    public static final String EXIT_ECM_RESULT = "exit_ecm_result";
+    public static final int REQUEST_CODE_EXIT_ECM = 1;
 
     private WifiEnabler mWifiEnabler;
     private AirplaneModeEnabler mAirplaneModeEnabler;
     private BluetoothEnabler mBtEnabler;
+    private CheckBoxPreference mAirplaneModePreference;
+
+    /**
+     * Invoked on each preference click in this hierarchy, overrides
+     * PreferenceActivity's implementation.  Used to make sure we track the
+     * preference click events.
+     */
+    @Override
+    public boolean onPreferenceTreeClick(PreferenceScreen preferenceScreen, Preference preference) {
+        if ( (preference == mAirplaneModePreference) &&
+                (Boolean.parseBoolean(
+                    SystemProperties.get(TelephonyProperties.PROPERTY_INECM_MODE))) ) {
+            // In ECM mode launch ECM app dialog
+            startActivityForResult(
+                new Intent(TelephonyIntents.ACTION_SHOW_NOTICE_ECM_BLOCK_OTHERS, null),
+                REQUEST_CODE_EXIT_ECM);
+
+            return true;
+        }
+        else {
+            // Let the intents be launched by the Preference manager
+            return false;
+        }
+    }
     
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,6 +77,7 @@ public class WirelessSettings extends PreferenceActivity {
         addPreferencesFromResource(R.xml.wireless_settings);
 
         initToggles();
+        mAirplaneModePreference = (CheckBoxPreference) findPreference(KEY_TOGGLE_AIRPLANE);
     }
     
     @Override
@@ -87,6 +120,22 @@ public class WirelessSettings extends PreferenceActivity {
             wifiPreference.setDependency(airplanePreference.getKey());
             wifiSettings.setDependency(airplanePreference.getKey());
             vpnSettings.setDependency(airplanePreference.getKey());
+        }
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        switch(requestCode) {
+        case REQUEST_CODE_EXIT_ECM:
+            Boolean isChoiceYes =
+                data.getBooleanExtra(EXIT_ECM_RESULT, false);
+            // Set Airplane mode based on the return value and checkbox state
+            mAirplaneModeEnabler.setAirplaneModeInECM(isChoiceYes,
+                    mAirplaneModePreference.isChecked());
+            break;
+
+        default:
+            break;
         }
     }
 
