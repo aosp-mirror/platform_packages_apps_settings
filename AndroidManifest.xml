@@ -279,6 +279,18 @@
             </intent-filter>
         </activity>
 
+        <activity android:name="RunningServices"
+                  android:label="@string/runningservices_settings_title"
+                  android:clearTaskOnLaunch="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.MONKEY" />
+                <category android:name="android.intent.category.VOICE_LAUNCH" />
+                <category android:name="com.android.settings.SHORTCUT" />
+            </intent-filter>
+        </activity>
+        
         <activity android:name="SecuritySettings" android:label="@string/security_settings_title"
                 android:configChanges="orientation|keyboardHidden"
                 android:clearTaskOnLaunch="true"
