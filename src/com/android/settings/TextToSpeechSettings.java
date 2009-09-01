@@ -265,6 +265,12 @@ public class TextToSpeechSettings extends PreferenceActivity implements
         if (status == TextToSpeech.SUCCESS) {
             Log.v(TAG, "TTS engine for settings screen initialized.");
             mEnableDemo = true;
+            // check to see if the current locale is supported
+            if (mTts.isLanguageAvailable(Locale.getDefault()) == TextToSpeech.LANG_NOT_SUPPORTED) {
+                mTts.setLanguage(Locale.US);
+            } else {
+                mTts.setLanguage(Locale.getDefault());
+            }
         } else {
             Log.v(TAG, "TTS engine for settings screen failed to initialize successfully.");
             mEnableDemo = false;
@@ -282,7 +288,6 @@ public class TextToSpeechSettings extends PreferenceActivity implements
                 Log.v(TAG, "Voice data check passed");
                 if (mTts == null) {
                     mTts = new TextToSpeech(this, this);
-                    mTts.setLanguage(Locale.getDefault());
                 }
             } else {
                 Log.v(TAG, "Voice data check failed");
