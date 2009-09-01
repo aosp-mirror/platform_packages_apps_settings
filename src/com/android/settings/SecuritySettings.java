@@ -25,6 +25,7 @@ import android.content.ContentResolver;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager.NameNotFoundException;
 import android.database.Cursor;
 import android.location.LocationManager;
@@ -67,6 +68,9 @@ public class SecuritySettings extends PreferenceActivity implements
     private static final String KEY_VISIBLE_PATTERN = "visiblepattern";
     private static final String KEY_TACTILE_FEEDBACK_ENABLED = "tactilefeedback";
     private static final int CONFIRM_PATTERN_THEN_DISABLE_AND_CLEAR_REQUEST_CODE = 55;
+
+    private static final String PREFS_NAME = "location_prefs";
+    private static final String PREFS_USE_LOCATION = "use_location";
 
     private LockPatternUtils mLockPatternUtils;
     private CheckBoxPreference mLockEnabled;
@@ -335,6 +339,8 @@ public class SecuritySettings extends PreferenceActivity implements
             mUseLocation.setChecked(true);
         }
 
+        if (hasAgreedToUseLocation()) return;
+
         CharSequence msg = getResources().getText(R.string.use_location_warning_message);
         mUseLocationDialog = new AlertDialog.Builder(this).setMessage(msg)
                 .setTitle(R.string.use_location_title)
@@ -427,6 +433,7 @@ public class SecuritySettings extends PreferenceActivity implements
         if (which == DialogInterface.BUTTON_POSITIVE) {
             //updateProviders();
             mOkClicked = true;
+            setAgreedToUseLocation(true);
         } else {
             // Reset the toggle
             mUseLocation.setChecked(false);
@@ -459,6 +466,23 @@ public class SecuritySettings extends PreferenceActivity implements
 
             default:
                 return null;
+        }
+    }
+
+    private boolean hasAgreedToUseLocation() {
+        SharedPreferences sp = getSharedPreferences(PREFS_NAME, 0);
+        if (sp == null) {
+            return false;
+        }
+        return sp.getBoolean(PREFS_USE_LOCATION, false);
+    }
+
+    private void setAgreedToUseLocation(boolean agreed) {
+        if (agreed) {
+            SharedPreferences settings = getSharedPreferences(PREFS_NAME, 0);
+            SharedPreferences.Editor editor = settings.edit();
+            editor.putBoolean(PREFS_USE_LOCATION, true);
+            editor.commit();
         }
     }
 
