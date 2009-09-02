@@ -85,8 +85,8 @@ public class WirelessSettings extends PreferenceActivity {
         super.onResume();
         
         mWifiEnabler.resume();
-        mAirplaneModeEnabler.resume();
         mBtEnabler.resume();
+        mAirplaneModeEnabler.resume();
     }
     
     @Override
