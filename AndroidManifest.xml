@@ -443,6 +443,7 @@
 
         <activity android:name=".bluetooth.BluetoothPairingDialog"
                   android:label="@string/bluetooth_pin_entry"
+                  android:excludeFromRecents="true"
                   android:theme="@*android:style/Theme.Dialog.Alert">
             <intent-filter>
                 <action android:name="android.bluetooth.intent.action.PAIRING_REQUEST" />
