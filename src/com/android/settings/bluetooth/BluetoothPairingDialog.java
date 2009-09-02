@@ -53,7 +53,7 @@ public class BluetoothPairingDialog extends AlertActivity implements DialogInter
     private LocalBluetoothManager mLocalManager;
     private BluetoothDevice mDevice;
     private int mType;
-    private int mConfirmationPasskey;
+    private String mConfirmationPasskey;
     private EditText mPairingView;
     private Button mOkButton;
 
@@ -95,12 +95,13 @@ public class BluetoothPairingDialog extends AlertActivity implements DialogInter
         } else if (mType == BluetoothDevice.PAIRING_VARIANT_PASSKEY) {
             createUserEntryDialog();
         } else if (mType == BluetoothDevice.PAIRING_VARIANT_CONFIRMATION){
-            mConfirmationPasskey =
+            int passkey =
                 intent.getIntExtra(BluetoothIntent.PASSKEY, BluetoothClass.ERROR);
-            if (mConfirmationPasskey == BluetoothClass.ERROR) {
+            if (passkey == BluetoothClass.ERROR) {
                 Log.e(TAG, "Invalid ConfirmationPasskey received, not showing any dialog");
                 return;
             }
+            mConfirmationPasskey = String.format("%06d", passkey);
             createConfirmationDialog();
         } else {
             Log.e(TAG, "Incorrect pairing type received, not showing any dialog");
