@@ -73,7 +73,7 @@ public class SoundAndDisplaySettings extends PreferenceActivity implements
     private CheckBoxPreference mVibrate;
     private CheckBoxPreference mDtmfTone;
     private CheckBoxPreference mSoundEffects;
-    private CheckBoxPreference mAnimations;
+    private ListPreference mAnimations;
     private CheckBoxPreference mAccelerometer;
     private float[] mAnimationScales;
     
@@ -118,8 +118,8 @@ public class SoundAndDisplaySettings extends PreferenceActivity implements
         mSoundEffects.setPersistent(false);
         mSoundEffects.setChecked(Settings.System.getInt(resolver,
                 Settings.System.SOUND_EFFECTS_ENABLED, 0) != 0);
-        mAnimations = (CheckBoxPreference) findPreference(KEY_ANIMATIONS);
-        mAnimations.setPersistent(false);
+        mAnimations = (ListPreference) findPreference(KEY_ANIMATIONS);
+        mAnimations.setOnPreferenceChangeListener(this);
         mAccelerometer = (CheckBoxPreference) findPreference(KEY_ACCELEROMETER);
         mAccelerometer.setPersistent(false);
         
@@ -187,29 +187,49 @@ public class SoundAndDisplaySettings extends PreferenceActivity implements
                 R.string.silent_mode_incl_alarm_summary :
                 R.string.silent_mode_summary);
         
-        boolean animations = true;
+        int animations = 0;
         try {
             mAnimationScales = mWindowManager.getAnimationScales();
         } catch (RemoteException e) {
         }
         if (mAnimationScales != null) {
-            // We will leave the window animations alone (always set),
-            // and only use this to change the transition animations.
-            for (int i=1; i<mAnimationScales.length; i++) {
-                if (mAnimationScales[i] == 0) {
-                    animations = false;
-                    break;
-                }
+            if (mAnimationScales.length >= 1) {
+                animations = ((int)(mAnimationScales[0]+.5f)) % 10;
+            }
+            if (mAnimationScales.length >= 2) {
+                animations += (((int)(mAnimationScales[1]+.5f)) & 0x7) * 10;
             }
         }
-        if (animations != mAnimations.isChecked() || force) {
-            mAnimations.setChecked(animations);
+        int idx = 0;
+        int best = 0;
+        CharSequence[] aents = mAnimations.getEntryValues();
+        for (int i=0; i<aents.length; i++) {
+            int val = Integer.parseInt(aents[i].toString());
+            if (val <= animations && val > best) {
+                best = val;
+                idx = i;
+            }
         }
+        mAnimations.setValueIndex(idx);
+        updateAnimationsSummary(mAnimations.getValue());
         mAccelerometer.setChecked(Settings.System.getInt(
                 getContentResolver(), 
                 Settings.System.ACCELEROMETER_ROTATION, 0) != 0);
     }
 
+    private void updateAnimationsSummary(Object value) {
+        CharSequence[] summaries = getResources().getTextArray(R.array.animations_summaries);
+        CharSequence[] values = mAnimations.getEntryValues();
+        for (int i=0; i<values.length; i++) {
+            Log.i("foo", "Comparing entry "+ values[i] + " to current "
+                    + mAnimations.getValue());
+            if (values[i].equals(value)) {
+                mAnimations.setSummary(summaries[i]);
+                break;
+            }
+        }
+    }
+    
     private void setRingerMode(boolean silent, boolean vibrate) {
         if (silent) {
             mAudioManager.setRingerMode(vibrate ? AudioManager.RINGER_MODE_VIBRATE :
@@ -224,7 +244,6 @@ public class SoundAndDisplaySettings extends PreferenceActivity implements
 
     @Override
     public boolean onPreferenceTreeClick(PreferenceScreen preferenceScreen, Preference preference) {
-
         if (preference == mSilent || preference == mVibrate) {
             setRingerMode(mSilent.isChecked(), mVibrate.isChecked());
             if (preference == mSilent) updateState(false);
@@ -246,19 +265,6 @@ public class SoundAndDisplaySettings extends PreferenceActivity implements
             Settings.System.putInt(getContentResolver(), Settings.System.SOUND_EFFECTS_ENABLED,
                     mSoundEffects.isChecked() ? 1 : 0);
             
-        } else if (preference == mAnimations) {
-            if (mAnimationScales.length > 0) {
-                // Window animations are always on.
-                mAnimationScales[0] = 1;
-            }
-            for (int i=1; i<mAnimationScales.length; i++) {
-                mAnimationScales[i] = mAnimations.isChecked() ? 1 : 0;
-            }
-            try {
-                mWindowManager.setAnimationScales(mAnimationScales);
-            } catch (RemoteException e) {
-            }
-            
         } else if (preference == mAccelerometer) {
             Settings.System.putInt(getContentResolver(),
                     Settings.System.ACCELEROMETER_ROTATION,
@@ -268,6 +274,25 @@ public class SoundAndDisplaySettings extends PreferenceActivity implements
     }
 
     public boolean onPreferenceChange(Preference preference, Object objValue) {
+        if (KEY_ANIMATIONS.equals(preference.getKey())) {
+            try {
+                int value = Integer.parseInt((String) objValue);
+                if (mAnimationScales.length >= 1) {
+                    mAnimationScales[0] = value%10;
+                }
+                if (mAnimationScales.length >= 2) {
+                    mAnimationScales[1] = (value/10)%10;
+                }
+                try {
+                    mWindowManager.setAnimationScales(mAnimationScales);
+                } catch (RemoteException e) {
+                }
+                updateAnimationsSummary(objValue);
+            } catch (NumberFormatException e) {
+                Log.e(TAG, "could not persist animation setting", e);
+            }
+            
+        }
         if (KEY_SCREEN_TIMEOUT.equals(preference.getKey())) {
             int value = Integer.parseInt((String) objValue);
             try {
