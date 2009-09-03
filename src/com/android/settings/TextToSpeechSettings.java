@@ -55,6 +55,10 @@ public class TextToSpeechSettings extends PreferenceActivity implements
     private static final String KEY_TTS_DEFAULT_LANG = "tts_default_lang";
     private static final String KEY_TTS_DEFAULT_COUNTRY = "tts_default_country";
     private static final String KEY_TTS_DEFAULT_VARIANT = "tts_default_variant";
+    // TODO move default Locale values to TextToSpeech.Engine
+    private static final String DEFAULT_LANG_VAL = "eng";
+    private static final String DEFAULT_COUNTRY_VAL = "USA";
+    private static final String DEFAULT_VARIANT_VAL = "";
 
     private static final String LOCALE_DELIMITER = "-";
 
@@ -70,6 +74,12 @@ public class TextToSpeechSettings extends PreferenceActivity implements
     private String             mDefaultCountry = null;
     private String             mDefaultLocVariant = null;
     private String             mDefaultEng = "";
+    private int                mDefaultRate = TextToSpeech.Engine.DEFAULT_RATE;
+
+    // Array of strings used to demonstrate TTS in the different languages.
+    private String[] mDemoStrings;
+    // Index of the current string to use for the demo.
+    private int      mDemoStringIndex = 0;
 
     private boolean mEnableDemo = false;
 
@@ -91,6 +101,8 @@ public class TextToSpeechSettings extends PreferenceActivity implements
         super.onCreate(savedInstanceState);
 
         addPreferencesFromResource(R.xml.tts_settings);
+
+        mDemoStrings = getResources().getStringArray(R.array.tts_demo_strings);
 
         setVolumeControlStream(TextToSpeech.Engine.DEFAULT_STREAM);
 
@@ -132,21 +144,21 @@ public class TextToSpeechSettings extends PreferenceActivity implements
 
     private void initDefaultSettings() {
         ContentResolver resolver = getContentResolver();
-        int intVal = 0;
 
         // Find the default TTS values in the settings, initialize and store the
         // settings if they are not found.
 
         // "Use Defaults"
+        int useDefault = 0;
         mUseDefaultPref = (CheckBoxPreference) findPreference(KEY_TTS_USE_DEFAULT);
         try {
-            intVal = Settings.Secure.getInt(resolver, TTS_USE_DEFAULTS);
+            useDefault = Settings.Secure.getInt(resolver, TTS_USE_DEFAULTS);
         } catch (SettingNotFoundException e) {
             // "use default" setting not found, initialize it
-            intVal = TextToSpeech.Engine.USE_DEFAULTS;
-            Settings.Secure.putInt(resolver, TTS_USE_DEFAULTS, intVal);
+            useDefault = TextToSpeech.Engine.USE_DEFAULTS;
+            Settings.Secure.putInt(resolver, TTS_USE_DEFAULTS, useDefault);
         }
-        mUseDefaultPref.setChecked(intVal == 1);
+        mUseDefaultPref.setChecked(useDefault == 1);
         mUseDefaultPref.setOnPreferenceChangeListener(this);
 
         // Default engine
@@ -161,59 +173,19 @@ public class TextToSpeechSettings extends PreferenceActivity implements
         // Default rate
         mDefaultRatePref = (ListPreference) findPreference(KEY_TTS_DEFAULT_RATE);
         try {
-            intVal = Settings.Secure.getInt(resolver, TTS_DEFAULT_RATE);
+            mDefaultRate = Settings.Secure.getInt(resolver, TTS_DEFAULT_RATE);
         } catch (SettingNotFoundException e) {
             // default rate setting not found, initialize it
-            intVal = TextToSpeech.Engine.DEFAULT_RATE;
-            Settings.Secure.putInt(resolver, TTS_DEFAULT_RATE, intVal);
+            mDefaultRate = TextToSpeech.Engine.DEFAULT_RATE;
+            Settings.Secure.putInt(resolver, TTS_DEFAULT_RATE, mDefaultRate);
         }
-        mDefaultRatePref.setValue(String.valueOf(intVal));
+        mDefaultRatePref.setValue(String.valueOf(mDefaultRate));
         mDefaultRatePref.setOnPreferenceChangeListener(this);
 
         // Default language / country / variant : these three values map to a single ListPref
         // representing the matching Locale
-        String language = null;
-        String country = null;
-        String variant = null;
         mDefaultLocPref = (ListPreference) findPreference(KEY_TTS_DEFAULT_LANG);
-        language = Settings.Secure.getString(resolver, TTS_DEFAULT_LANG);
-        if (language == null) {
-            // the default language property isn't set, use that of the current locale
-            Locale currentLocale = Locale.getDefault();
-            language = currentLocale.getISO3Language();
-            country = currentLocale.getISO3Country();
-            variant = currentLocale.getVariant();
-            Settings.Secure.putString(resolver, TTS_DEFAULT_LANG, language);
-            Settings.Secure.putString(resolver, TTS_DEFAULT_COUNTRY, country);
-            Settings.Secure.putString(resolver, TTS_DEFAULT_VARIANT, variant);
-        }
-        mDefaultLanguage = language;
-        if (country == null) {
-            // country wasn't initialized yet because a default language was found
-            country = Settings.Secure.getString(resolver, KEY_TTS_DEFAULT_COUNTRY);
-            if (country == null) {
-                // default country setting not found, initialize it, as well as the variant;
-                Locale currentLocale = Locale.getDefault();
-                country = currentLocale.getISO3Country();
-                variant = currentLocale.getVariant();
-                Settings.Secure.putString(resolver, TTS_DEFAULT_COUNTRY, country);
-                Settings.Secure.putString(resolver, TTS_DEFAULT_VARIANT, variant);
-            }
-        }
-        mDefaultCountry = country;
-        if (variant == null) {
-            // variant wasn't initialized yet because a default country was found
-            variant = Settings.Secure.getString(resolver, KEY_TTS_DEFAULT_VARIANT);
-            if (variant == null) {
-                // default variant setting not found, initialize it
-                Locale currentLocale = Locale.getDefault();
-                variant = currentLocale.getVariant();
-                Settings.Secure.putString(resolver, TTS_DEFAULT_VARIANT, variant);
-            }
-        }
-        mDefaultLocVariant = variant;
-
-        setDefaultLocalePref(language, country, variant);
+        initDefaultLang();
         mDefaultLocPref.setOnPreferenceChangeListener(this);
     }
 
@@ -265,12 +237,8 @@ public class TextToSpeechSettings extends PreferenceActivity implements
         if (status == TextToSpeech.SUCCESS) {
             Log.v(TAG, "TTS engine for settings screen initialized.");
             mEnableDemo = true;
-            // check to see if the current locale is supported
-            if (mTts.isLanguageAvailable(Locale.getDefault()) == TextToSpeech.LANG_NOT_SUPPORTED) {
-                mTts.setLanguage(Locale.US);
-            } else {
-                mTts.setLanguage(Locale.getDefault());
-            }
+            mTts.setLanguage(new Locale(mDefaultLanguage, mDefaultCountry));
+            mTts.setSpeechRate((float)(mDefaultRate/100.0f));
         } else {
             Log.v(TAG, "TTS engine for settings screen failed to initialize successfully.");
             mEnableDemo = false;
@@ -307,14 +275,14 @@ public class TextToSpeechSettings extends PreferenceActivity implements
             Log.i(TAG, "TTS use default settings is "+objValue.toString());
         } else if (KEY_TTS_DEFAULT_RATE.equals(preference.getKey())) {
             // Default rate
-            int value = Integer.parseInt((String) objValue);
+            mDefaultRate = Integer.parseInt((String) objValue);
             try {
                 Settings.Secure.putInt(getContentResolver(),
-                        TTS_DEFAULT_RATE, value);
+                        TTS_DEFAULT_RATE, mDefaultRate);
                 if (mTts != null) {
-                    mTts.setSpeechRate((float)(value/100.0f));
+                    mTts.setSpeechRate((float)(mDefaultRate/100.0f));
                 }
-                Log.i(TAG, "TTS default rate is "+value);
+                Log.i(TAG, "TTS default rate is " + mDefaultRate);
             } catch (NumberFormatException e) {
                 Log.e(TAG, "could not persist default TTS rate setting", e);
             }
@@ -330,6 +298,9 @@ public class TextToSpeechSettings extends PreferenceActivity implements
             if (mTts != null) {
                 mTts.setLanguage(new Locale(mDefaultLanguage, mDefaultCountry));
             }
+            int newIndex = mDefaultLocPref.findIndexOfValue((String)objValue);
+            Log.v("Settings", " selected is " + newIndex);
+            mDemoStringIndex = newIndex > -1 ? newIndex : 0;
         }
 
         return true;
@@ -343,8 +314,7 @@ public class TextToSpeechSettings extends PreferenceActivity implements
         if (preference == mPlayExample) {
             // Play example
             if (mTts != null) {
-                mTts.speak(getResources().getString(R.string.tts_demo),
-                        TextToSpeech.QUEUE_FLUSH, null);
+                mTts.speak(mDemoStrings[mDemoStringIndex], TextToSpeech.QUEUE_FLUSH, null);
             }
             return true;
         }
@@ -385,25 +355,77 @@ public class TextToSpeechSettings extends PreferenceActivity implements
     }
 
 
-    private void setDefaultLocalePref(String language, String country, String variant) {
-        // build a string from the default lang/country/variant trio,
-        String localeString = new String(language);
-        if (country.compareTo("") != 0) {
-            localeString += LOCALE_DELIMITER + country;
-        } else {
-            localeString += LOCALE_DELIMITER + " ";
-        }
-        if (variant.compareTo("") != 0) {
-            localeString += LOCALE_DELIMITER + variant;
+    /**
+     *  Initialize the default language in the UI and in the preferences.
+     *  After this method has been invoked, the default language is a supported Locale.
+     */
+    private void initDefaultLang() {
+        // if there isn't already a default language preference
+        if (!hasLangPref()) {
+            // if the current Locale is supported
+            if (isCurrentLocSupported()) {
+                // then use the current Locale as the default language
+                useCurrentLocAsDefault();
+            } else {
+                // otherwise use a default supported Locale as the default language
+                useSupportedLocAsDefault();
+            }
         }
 
-        if (mDefaultLocPref.findIndexOfValue(localeString) > -1) {
-            mDefaultLocPref.setValue(localeString);
-        } else {
-            mDefaultLocPref.setValueIndex(0);
-        }
+        // Update the language preference list with the default language and the matching
+        // demo string (at this stage there is a default language pref)
+        ContentResolver resolver = getContentResolver();
+        mDefaultLanguage = Settings.Secure.getString(resolver, TTS_DEFAULT_LANG);
+        mDefaultCountry = Settings.Secure.getString(resolver, KEY_TTS_DEFAULT_COUNTRY);
+        mDefaultLocVariant = Settings.Secure.getString(resolver, KEY_TTS_DEFAULT_VARIANT);
 
-        Log.v(TAG, "In initDefaultSettings: localeString=" + localeString);
+        // update the demo string
+        mDemoStringIndex = mDefaultLocPref.findIndexOfValue(mDefaultLanguage + LOCALE_DELIMITER
+                + mDefaultCountry);
+        mDefaultLocPref.setValueIndex(mDemoStringIndex);
+    }
+
+    /**
+     * (helper function for initDefaultLang() )
+     * Returns whether there is a default language in the TTS settings.
+     */
+    private boolean hasLangPref() {
+        String language = Settings.Secure.getString(getContentResolver(), TTS_DEFAULT_LANG);
+        return (language != null);
+    }
+
+    /**
+     * (helper function for initDefaultLang() )
+     * Returns whether the current Locale is supported by this Settings screen
+     */
+    private boolean isCurrentLocSupported() {
+        String currentLocID = Locale.getDefault().getISO3Language() + LOCALE_DELIMITER
+                + Locale.getDefault().getISO3Country();
+        return (mDefaultLocPref.findIndexOfValue(currentLocID) > -1);
+    }
+
+    /**
+     * (helper function for initDefaultLang() )
+     * Sets the default language in TTS settings to be the current Locale.
+     * This should only be used after checking that the current Locale is supported.
+     */
+    private void useCurrentLocAsDefault() {
+        Locale currentLocale = Locale.getDefault();
+        ContentResolver resolver = getContentResolver();
+        Settings.Secure.putString(resolver, TTS_DEFAULT_LANG, currentLocale.getISO3Language());
+        Settings.Secure.putString(resolver, TTS_DEFAULT_COUNTRY, currentLocale.getISO3Country());
+        Settings.Secure.putString(resolver, TTS_DEFAULT_VARIANT, currentLocale.getVariant());
+    }
+
+    /**
+     * (helper function for initDefaultLang() )
+     * Sets the default language in TTS settings to be one known to be supported
+     */
+    private void useSupportedLocAsDefault() {
+        ContentResolver resolver = getContentResolver();
+        Settings.Secure.putString(resolver, TTS_DEFAULT_LANG, DEFAULT_LANG_VAL);
+        Settings.Secure.putString(resolver, TTS_DEFAULT_COUNTRY, DEFAULT_COUNTRY_VAL);
+        Settings.Secure.putString(resolver, TTS_DEFAULT_VARIANT, DEFAULT_VARIANT_VAL);
     }
 
 }
