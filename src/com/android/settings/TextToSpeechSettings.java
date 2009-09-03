@@ -92,6 +92,8 @@ public class TextToSpeechSettings extends PreferenceActivity implements
 
         addPreferencesFromResource(R.xml.tts_settings);
 
+        setVolumeControlStream(TextToSpeech.Engine.DEFAULT_STREAM);
+
         mEnableDemo = false;
         initClickers();
         initDefaultSettings();
