@@ -22,6 +22,7 @@ import android.app.ActivityManagerNative;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.ListActivity;
+import android.app.PendingIntent;
 import android.app.ProgressDialog;
 import android.content.BroadcastReceiver;
 import android.content.ComponentName;
@@ -128,7 +129,7 @@ public class RunningServices extends ListActivity
         PackageItemInfo mPackageInfo;
         CharSequence mDisplayLabel;
         String mLabel;
-        String mName;
+        String mDescription;
         
         int mCurSeq;
         
@@ -141,6 +142,7 @@ public class RunningServices extends ListActivity
     static class ServiceItem extends BaseItem {
         ActivityManager.RunningServiceInfo mRunningService;
         ServiceInfo mServiceInfo;
+        boolean mShownAsStarted;
     }
     
     static class ProcessItem extends BaseItem {
@@ -149,8 +151,10 @@ public class RunningServices extends ListActivity
         int mUid;
         int mPid;
         
-        boolean updateService(PackageManager pm,
+        boolean updateService(Context context,
                 ActivityManager.RunningServiceInfo service) {
+            final PackageManager pm = context.getPackageManager();
+            
             boolean changed = false;
             ServiceItem si = mServices.get(service.service);
             if (si == null) {
@@ -183,6 +187,27 @@ public class RunningServices extends ListActivity
                 si.mActiveSince = activeSince;
                 changed = true;
             }
+            if (service.clientPackage != null && service.clientLabel != 0) {
+                if (si.mShownAsStarted) {
+                    si.mShownAsStarted = false;
+                    changed = true;
+                }
+                try {
+                    Resources clientr = pm.getResourcesForApplication(service.clientPackage);
+                    String label = clientr.getString(service.clientLabel);
+                    si.mDescription = context.getResources().getString(
+                            R.string.service_client_name, label);
+                } catch (PackageManager.NameNotFoundException e) {
+                    si.mDescription = null;
+                }
+            } else {
+                if (!si.mShownAsStarted) {
+                    si.mShownAsStarted = true;
+                    changed = true;
+                }
+                si.mDescription = context.getResources().getString(
+                        R.string.service_started_by_app);
+            }
             
             return changed;
         }
@@ -211,9 +236,10 @@ public class RunningServices extends ListActivity
             final int NS = services.size();
             for (int i=0; i<NS; i++) {
                 ActivityManager.RunningServiceInfo si = services.get(i);
-                // We are not interested in non-started services, because
+                // We are not interested in services that have not been started
+                // and don't have a known client, because
                 // there is nothing the user can do about them.
-                if (!si.started) {
+                if (!si.started && si.clientLabel == 0) {
                     continue;
                 }
                 // We likewise don't care about services running in a
@@ -233,7 +259,7 @@ public class RunningServices extends ListActivity
                     changed = true;
                     proc = new ProcessItem();
                     proc.mIsProcess = true;
-                    proc.mName = si.process;
+                    proc.mDescription = si.process;
                     proc.mUid = si.uid;
                     try {
                         ApplicationInfo ai = pm.getApplicationInfo(si.process, 0);
@@ -275,7 +301,7 @@ public class RunningServices extends ListActivity
                     }
                     proc.mCurSeq = mSequence;
                 }
-                changed |= proc.updateService(context.getPackageManager(), si);
+                changed |= proc.updateService(context, si);
                 
                 if (proc.mLabel == null) {
                     // If we couldn't get information about the overall
@@ -364,7 +390,7 @@ public class RunningServices extends ListActivity
         ImageView separator;
         ImageView icon;
         TextView name;
-        TextView runTime;
+        TextView description;
         TextView size;
     }
     
@@ -418,7 +444,7 @@ public class RunningServices extends ListActivity
             h.separator = (ImageView)v.findViewById(R.id.separator);
             h.icon = (ImageView)v.findViewById(R.id.icon);
             h.name = (TextView)v.findViewById(R.id.name);
-            h.runTime = (TextView)v.findViewById(R.id.run_time);
+            h.description = (TextView)v.findViewById(R.id.description);
             h.size = (TextView)v.findViewById(R.id.size);
             v.setTag(h);
             return v;
@@ -433,18 +459,19 @@ public class RunningServices extends ListActivity
             if (item.mIsProcess) {
                 view.setBackgroundColor(mProcessBgColor);
                 vh.icon.setImageDrawable(item.mPackageInfo.loadIcon(getPackageManager()));
-                vh.runTime.setText(item.mName);
+                vh.description.setText(item.mDescription);
                 vh.size.setText(item.mSizeStr);
                 mActiveItems.remove(view);
             } else {
                 view.setBackgroundDrawable(null);
                 vh.icon.setImageDrawable(null);
-                vh.runTime.setText("");
+                vh.description.setText("");
                 ActiveItem ai = new ActiveItem();
                 ai.mRootView = view;
                 ai.mItem = item;
                 ai.mHolder = vh;
                 ai.mFirstRunTime = item.mActiveSince;
+                vh.description.setText(item.mDescription);
                 ai.updateTime(RunningServices.this);
                 mActiveItems.put(view, ai);
             }
@@ -456,7 +483,14 @@ public class RunningServices extends ListActivity
         public void handleMessage(Message msg) {
             switch (msg.what) {
                 case MSG_UPDATE_TIMES:
-                    for (ActiveItem ai : mActiveItems.values()) {
+                    Iterator<ActiveItem> it = mActiveItems.values().iterator();
+                    while (it.hasNext()) {
+                        ActiveItem ai = it.next();
+                        if (ai.mRootView.getWindowToken() == null) {
+                            // Clean out any dead views, just in case.
+                            it.remove();
+                            continue;
+                        }
                         ai.updateTime(RunningServices.this);
                     }
                     removeMessages(MSG_UPDATE_TIMES);
@@ -496,14 +530,28 @@ public class RunningServices extends ListActivity
     protected void onListItemClick(ListView l, View v, int position, long id) {
         BaseItem bi = (BaseItem)l.getAdapter().getItem(position);
         if (!bi.mIsProcess) {
-            mCurSelected = bi;
-            AlertDialog.Builder builder = new AlertDialog.Builder(this);
-            builder.setTitle(R.string.confirm_stop_service);
-            builder.setMessage(R.string.confirm_stop_service_msg);
-            builder.setPositiveButton(R.string.confirm_stop_stop, this);
-            builder.setNegativeButton(R.string.confirm_stop_cancel, null);
-            builder.setCancelable(true);
-            mCurDialog = builder.show();
+            ServiceItem si = (ServiceItem)bi;
+            if (si.mRunningService.clientLabel != 0) {
+                mCurSelected = null;
+                PendingIntent pi = mAm.getRunningServiceControlPanel(
+                        si.mRunningService.service);
+                if (pi != null) {
+                    try {
+                        pi.send();
+                    } catch (PendingIntent.CanceledException e) {
+                        // whatever.
+                    }
+                }
+            } else {
+                mCurSelected = bi;
+                AlertDialog.Builder builder = new AlertDialog.Builder(this);
+                builder.setTitle(R.string.confirm_stop_service);
+                builder.setMessage(R.string.confirm_stop_service_msg);
+                builder.setPositiveButton(R.string.confirm_stop_stop, this);
+                builder.setNegativeButton(R.string.confirm_stop_cancel, null);
+                builder.setCancelable(true);
+                mCurDialog = builder.show();
+            }
         } else {
             mCurSelected = null;
         }
