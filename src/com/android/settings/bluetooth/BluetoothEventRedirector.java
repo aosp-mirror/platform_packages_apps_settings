@@ -17,6 +17,7 @@
 package com.android.settings.bluetooth;
 
 import android.bluetooth.BluetoothA2dp;
+import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothClass;
 import android.bluetooth.BluetoothDevice;
 import android.bluetooth.BluetoothError;
@@ -51,8 +52,8 @@ public class BluetoothEventRedirector {
             String action = intent.getAction();
             BluetoothDevice device = intent.getParcelableExtra(BluetoothIntent.DEVICE);
 
-            if (action.equals(BluetoothIntent.BLUETOOTH_STATE_CHANGED_ACTION)) {
-                int state = intent.getIntExtra(BluetoothIntent.BLUETOOTH_STATE,
+            if (action.equals(BluetoothAdapter.ACTION_STATE_CHANGED)) {
+                int state = intent.getIntExtra(BluetoothAdapter.EXTRA_STATE,
                                         BluetoothError.ERROR);
                 mManager.setBluetoothStateInt(state);
             } else if (action.equals(BluetoothIntent.DISCOVERY_STARTED_ACTION)) {
@@ -123,7 +124,7 @@ public class BluetoothEventRedirector {
         IntentFilter filter = new IntentFilter();
 
         // Bluetooth on/off broadcasts
-        filter.addAction(BluetoothIntent.BLUETOOTH_STATE_CHANGED_ACTION);
+        filter.addAction(BluetoothAdapter.ACTION_STATE_CHANGED);
 
         // Discovery broadcasts
         filter.addAction(BluetoothIntent.DISCOVERY_STARTED_ACTION);
