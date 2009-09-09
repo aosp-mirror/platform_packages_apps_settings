@@ -20,7 +20,6 @@ import android.app.AlertDialog;
 import android.app.Dialog;
 
 import android.bluetooth.BluetoothAdapter;
-import android.bluetooth.BluetoothError;
 import android.bluetooth.BluetoothIntent;
 import android.content.BroadcastReceiver;
 import android.content.Context;
@@ -50,8 +49,8 @@ public class BluetoothNamePreference extends EditTextPreference implements TextW
             if (action.equals(BluetoothIntent.NAME_CHANGED_ACTION)) {
                 setSummaryToName();
             } else if (action.equals(BluetoothAdapter.ACTION_STATE_CHANGED) &&
-                    (intent.getIntExtra(BluetoothAdapter.EXTRA_STATE,
-                    BluetoothError.ERROR) == BluetoothAdapter.STATE_ON)) {
+                    (intent.getIntExtra(BluetoothAdapter.EXTRA_STATE, BluetoothAdapter.ERROR) ==
+                            BluetoothAdapter.STATE_ON)) {
                 setSummaryToName();
             }
         }

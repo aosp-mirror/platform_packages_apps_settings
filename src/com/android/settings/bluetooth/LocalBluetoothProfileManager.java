@@ -19,7 +19,6 @@ package com.android.settings.bluetooth;
 import android.bluetooth.BluetoothA2dp;
 import android.bluetooth.BluetoothDevice;
 import android.bluetooth.BluetoothClass;
-import android.bluetooth.BluetoothError;
 import android.bluetooth.BluetoothHeadset;
 import android.os.Handler;
 import android.text.TextUtils;
@@ -102,9 +101,9 @@ public abstract class LocalBluetoothProfileManager {
         mLocalManager = localManager;
     }
     
-    public abstract int connect(BluetoothDevice device);
+    public abstract boolean connect(BluetoothDevice device);
     
-    public abstract int disconnect(BluetoothDevice device);
+    public abstract boolean disconnect(BluetoothDevice device);
     
     public abstract int getConnectionStatus(BluetoothDevice device);
 
@@ -145,7 +144,7 @@ public abstract class LocalBluetoothProfileManager {
         }
 
         @Override
-        public int connect(BluetoothDevice device) {
+        public boolean connect(BluetoothDevice device) {
             Set<BluetoothDevice> sinks = mService.getConnectedSinks();
             if (sinks != null) {
                 for (BluetoothDevice sink : sinks) {
@@ -156,7 +155,7 @@ public abstract class LocalBluetoothProfileManager {
         }
 
         @Override
-        public int disconnect(BluetoothDevice device) {
+        public boolean disconnect(BluetoothDevice device) {
             return mService.disconnectSink(device);
         }
         
@@ -240,20 +239,19 @@ public abstract class LocalBluetoothProfileManager {
         }
 
         @Override
-        public int connect(BluetoothDevice device) {
+        public boolean connect(BluetoothDevice device) {
             // Since connectHeadset fails if already connected to a headset, we
             // disconnect from any headset first
             mService.disconnectHeadset();
-            return mService.connectHeadset(device)
-                    ? BluetoothError.SUCCESS : BluetoothError.ERROR;
+            return mService.connectHeadset(device);
         }
 
         @Override
-        public int disconnect(BluetoothDevice device) {
+        public boolean disconnect(BluetoothDevice device) {
             if (mService.getCurrentHeadset().equals(device)) {
-                return mService.disconnectHeadset() ? BluetoothError.SUCCESS : BluetoothError.ERROR;
+                return mService.disconnectHeadset();
             } else {
-                return BluetoothError.SUCCESS;
+                return false;
             }
         }
 
@@ -312,13 +310,13 @@ public abstract class LocalBluetoothProfileManager {
         }
 
         @Override
-        public int connect(BluetoothDevice device) {
-            return -1;
+        public boolean connect(BluetoothDevice device) {
+            return false;
         }
 
         @Override
-        public int disconnect(BluetoothDevice device) {
-            return -1;
+        public boolean disconnect(BluetoothDevice device) {
+            return false;
         }
 
         @Override

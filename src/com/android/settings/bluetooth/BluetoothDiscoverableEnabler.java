@@ -19,7 +19,6 @@ package com.android.settings.bluetooth;
 import com.android.settings.R;
 
 import android.bluetooth.BluetoothAdapter;
-import android.bluetooth.BluetoothError;
 import android.bluetooth.BluetoothIntent;
 import android.content.BroadcastReceiver;
 import android.content.Context;
@@ -56,8 +55,9 @@ public class BluetoothDiscoverableEnabler implements Preference.OnPreferenceChan
         @Override
         public void onReceive(Context context, Intent intent) {
             if (BluetoothAdapter.ACTION_SCAN_MODE_CHANGED.equals(intent.getAction())) {
-                int mode = intent.getIntExtra(BluetoothAdapter.EXTRA_SCAN_MODE, BluetoothError.ERROR);
-                if (mode != BluetoothError.ERROR) {
+                int mode = intent.getIntExtra(BluetoothAdapter.EXTRA_SCAN_MODE,
+                        BluetoothAdapter.ERROR);
+                if (mode != BluetoothAdapter.ERROR) {
                     handleModeChanged(mode);
                 }
             }
