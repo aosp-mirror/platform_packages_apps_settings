@@ -26,7 +26,6 @@ import java.util.WeakHashMap;
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
 import android.bluetooth.BluetoothIntent;
-import android.bluetooth.BluetoothError;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
@@ -92,7 +91,7 @@ public class BluetoothSettings extends PreferenceActivity
             } else if (intent.getAction().equals(BluetoothIntent.BOND_STATE_CHANGED_ACTION)
                     && mScreenType == SCREEN_TYPE_DEVICEPICKER) {
                 int bondState = intent
-                        .getIntExtra(BluetoothIntent.BOND_STATE, BluetoothError.ERROR);
+                        .getIntExtra(BluetoothIntent.BOND_STATE, BluetoothDevice.ERROR);
                 if (bondState == BluetoothDevice.BOND_BONDED) {
                     BluetoothDevice device = intent.getParcelableExtra(BluetoothIntent.DEVICE);
                     sendDevicePickedIntent(device);
