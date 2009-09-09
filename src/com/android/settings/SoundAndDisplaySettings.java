@@ -221,8 +221,8 @@ public class SoundAndDisplaySettings extends PreferenceActivity implements
         CharSequence[] summaries = getResources().getTextArray(R.array.animations_summaries);
         CharSequence[] values = mAnimations.getEntryValues();
         for (int i=0; i<values.length; i++) {
-            Log.i("foo", "Comparing entry "+ values[i] + " to current "
-                    + mAnimations.getValue());
+            //Log.i("foo", "Comparing entry "+ values[i] + " to current "
+            //        + mAnimations.getValue());
             if (values[i].equals(value)) {
                 mAnimations.setSummary(summaries[i]);
                 break;
