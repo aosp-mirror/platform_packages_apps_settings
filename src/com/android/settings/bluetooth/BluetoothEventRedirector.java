@@ -20,7 +20,6 @@ import android.bluetooth.BluetoothA2dp;
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothClass;
 import android.bluetooth.BluetoothDevice;
-import android.bluetooth.BluetoothError;
 import android.bluetooth.BluetoothHeadset;
 import android.bluetooth.BluetoothIntent;
 import android.content.BroadcastReceiver;
@@ -54,7 +53,7 @@ public class BluetoothEventRedirector {
 
             if (action.equals(BluetoothAdapter.ACTION_STATE_CHANGED)) {
                 int state = intent.getIntExtra(BluetoothAdapter.EXTRA_STATE,
-                                        BluetoothError.ERROR);
+                                        BluetoothAdapter.ERROR);
                 mManager.setBluetoothStateInt(state);
             } else if (action.equals(BluetoothIntent.DISCOVERY_STARTED_ACTION)) {
                 mManager.onScanningStateChanged(true);
@@ -76,10 +75,10 @@ public class BluetoothEventRedirector {
 
             } else if (action.equals(BluetoothIntent.BOND_STATE_CHANGED_ACTION)) {
                 int bondState = intent.getIntExtra(BluetoothIntent.BOND_STATE,
-                                                   BluetoothError.ERROR);
+                                                   BluetoothDevice.ERROR);
                 mManager.getCachedDeviceManager().onBondingStateChanged(device, bondState);
                 if (bondState == BluetoothDevice.BOND_NOT_BONDED) {
-                    int reason = intent.getIntExtra(BluetoothIntent.REASON, BluetoothError.ERROR);
+                    int reason = intent.getIntExtra(BluetoothIntent.REASON, BluetoothDevice.ERROR);
                     if (reason == BluetoothDevice.UNBOND_REASON_AUTH_REJECTED ||
                             reason == BluetoothDevice.UNBOND_REASON_AUTH_FAILED ||
                             reason == BluetoothDevice.UNBOND_REASON_REMOTE_DEVICE_DOWN) {
