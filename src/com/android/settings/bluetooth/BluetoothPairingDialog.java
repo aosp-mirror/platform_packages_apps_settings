@@ -223,7 +223,7 @@ public class BluetoothPairingDialog extends AlertActivity implements DialogInter
             }
             mDevice.setPin(pinBytes);
         } else if (mType == BluetoothDevice.PAIRING_VARIANT_PASSKEY) {
-            int passkey = Integer.getInteger(value);
+            int passkey = Integer.parseInt(value);
             mDevice.setPasskey(passkey);
         } else {
             mDevice.setPairingConfirmation(true);
