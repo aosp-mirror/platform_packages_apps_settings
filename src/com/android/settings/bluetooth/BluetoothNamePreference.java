@@ -49,9 +49,9 @@ public class BluetoothNamePreference extends EditTextPreference implements TextW
             String action = intent.getAction();
             if (action.equals(BluetoothIntent.NAME_CHANGED_ACTION)) {
                 setSummaryToName();
-            } else if (action.equals(BluetoothIntent.BLUETOOTH_STATE_CHANGED_ACTION) &&
-                    (intent.getIntExtra(BluetoothIntent.BLUETOOTH_STATE,
-                    BluetoothError.ERROR) == BluetoothAdapter.BLUETOOTH_STATE_ON)) {
+            } else if (action.equals(BluetoothAdapter.ACTION_STATE_CHANGED) &&
+                    (intent.getIntExtra(BluetoothAdapter.EXTRA_STATE,
+                    BluetoothError.ERROR) == BluetoothAdapter.STATE_ON)) {
                 setSummaryToName();
             }
         }
@@ -67,7 +67,7 @@ public class BluetoothNamePreference extends EditTextPreference implements TextW
 
     public void resume() {
         IntentFilter filter = new IntentFilter();
-        filter.addAction(BluetoothIntent.BLUETOOTH_STATE_CHANGED_ACTION);
+        filter.addAction(BluetoothAdapter.ACTION_STATE_CHANGED);
         filter.addAction(BluetoothIntent.NAME_CHANGED_ACTION);
         getContext().registerReceiver(mReceiver, filter);
 

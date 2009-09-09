@@ -55,8 +55,8 @@ public class BluetoothDiscoverableEnabler implements Preference.OnPreferenceChan
     private final BroadcastReceiver mReceiver = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
-            if (BluetoothIntent.SCAN_MODE_CHANGED_ACTION.equals(intent.getAction())) {
-                int mode = intent.getIntExtra(BluetoothIntent.SCAN_MODE, BluetoothError.ERROR);
+            if (BluetoothAdapter.ACTION_SCAN_MODE_CHANGED.equals(intent.getAction())) {
+                int mode = intent.getIntExtra(BluetoothAdapter.EXTRA_SCAN_MODE, BluetoothError.ERROR);
                 if (mode != BluetoothError.ERROR) {
                     handleModeChanged(mode);
                 }
@@ -89,7 +89,7 @@ public class BluetoothDiscoverableEnabler implements Preference.OnPreferenceChan
             return;
         }
 
-        IntentFilter filter = new IntentFilter(BluetoothIntent.SCAN_MODE_CHANGED_ACTION);
+        IntentFilter filter = new IntentFilter(BluetoothAdapter.ACTION_SCAN_MODE_CHANGED);
         mContext.registerReceiver(mReceiver, filter);
         mCheckBoxPreference.setOnPreferenceChangeListener(this);
 
