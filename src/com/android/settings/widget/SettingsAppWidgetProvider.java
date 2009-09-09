@@ -379,9 +379,9 @@ public class SettingsAppWidgetProvider extends AppWidgetProvider {
             }
         }
         int state = mLocalBluetoothManager.getBluetoothState();
-        if (state == BluetoothAdapter.BLUETOOTH_STATE_OFF) {
+        if (state == BluetoothAdapter.STATE_OFF) {
             return STATE_DISABLED;
-        } else if (state == BluetoothAdapter.BLUETOOTH_STATE_ON) {
+        } else if (state == BluetoothAdapter.STATE_ON) {
             return STATE_ENABLED;
         } else {
             return STATE_INTERMEDIATE;

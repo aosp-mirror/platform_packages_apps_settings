@@ -196,10 +196,10 @@ public class LocalBluetoothManager {
 
     void setBluetoothStateInt(int state) {
         mState = state;
-        if (state == BluetoothAdapter.BLUETOOTH_STATE_ON ||
-            state == BluetoothAdapter.BLUETOOTH_STATE_OFF) {
+        if (state == BluetoothAdapter.STATE_ON ||
+            state == BluetoothAdapter.STATE_OFF) {
             mCachedDeviceManager.onBluetoothStateChanged(state ==
-                    BluetoothAdapter.BLUETOOTH_STATE_ON);
+                    BluetoothAdapter.STATE_ON);
         }
     }
 
@@ -208,8 +208,8 @@ public class LocalBluetoothManager {
 
         if (mAdapter != null) {
             bluetoothState = mAdapter.isEnabled()
-                    ? BluetoothAdapter.BLUETOOTH_STATE_ON
-                    : BluetoothAdapter.BLUETOOTH_STATE_OFF;
+                    ? BluetoothAdapter.STATE_ON
+                    : BluetoothAdapter.STATE_OFF;
         } else {
             bluetoothState = BluetoothError.ERROR;
         }
@@ -224,8 +224,8 @@ public class LocalBluetoothManager {
 
         if (wasSetStateSuccessful) {
             setBluetoothStateInt(enabled
-                ? BluetoothAdapter.BLUETOOTH_STATE_TURNING_ON
-                : BluetoothAdapter.BLUETOOTH_STATE_TURNING_OFF);
+                ? BluetoothAdapter.STATE_TURNING_ON
+                : BluetoothAdapter.STATE_TURNING_OFF);
         } else {
             if (V) {
                 Log.v(TAG,

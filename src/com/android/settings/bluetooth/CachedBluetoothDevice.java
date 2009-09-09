@@ -20,6 +20,7 @@ import android.app.AlertDialog;
 import android.bluetooth.BluetoothClass;
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
+import android.bluetooth.BluetoothError;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -322,7 +323,7 @@ public class CachedBluetoothDevice implements Comparable<CachedBluetoothDevice> 
         int status = profileManager.getConnectionStatus(cachedDevice.mDevice);
         if (SettingsBtStatus.isConnectionStatusConnected(status)) {
             if (profileManager.disconnect(cachedDevice.mDevice) ==
-                        BluetoothAdapter.RESULT_SUCCESS) {
+                        BluetoothError.SUCCESS) {
                 return true;
             }
         }
@@ -407,7 +408,7 @@ public class CachedBluetoothDevice implements Comparable<CachedBluetoothDevice> 
                 LocalBluetoothProfileManager.getProfileManager(mLocalManager, profile);
         int status = profileManager.getConnectionStatus(cachedDevice.mDevice);
         if (!SettingsBtStatus.isConnectionStatusConnected(status)) {
-            if (profileManager.connect(cachedDevice.mDevice) == BluetoothAdapter.RESULT_SUCCESS) {
+            if (profileManager.connect(cachedDevice.mDevice) == BluetoothError.SUCCESS) {
                 return true;
             }
             Log.i(TAG, "Failed to connect " + profile.toString() + " to " + cachedDevice.mName);
@@ -690,7 +691,7 @@ public class CachedBluetoothDevice implements Comparable<CachedBluetoothDevice> 
 
     public void onCreateContextMenu(ContextMenu menu) {
         // No context menu if it is busy (none of these items are applicable if busy)
-        if (mLocalManager.getBluetoothState() != BluetoothAdapter.BLUETOOTH_STATE_ON || isBusy()) {
+        if (mLocalManager.getBluetoothState() != BluetoothAdapter.STATE_ON || isBusy()) {
             return;
         }
 
