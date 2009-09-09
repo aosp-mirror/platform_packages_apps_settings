@@ -20,7 +20,6 @@ import android.app.AlertDialog;
 import android.bluetooth.BluetoothClass;
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
-import android.bluetooth.BluetoothError;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -322,8 +321,7 @@ public class CachedBluetoothDevice implements Comparable<CachedBluetoothDevice> 
                 LocalBluetoothProfileManager.getProfileManager(mLocalManager, profile);
         int status = profileManager.getConnectionStatus(cachedDevice.mDevice);
         if (SettingsBtStatus.isConnectionStatusConnected(status)) {
-            if (profileManager.disconnect(cachedDevice.mDevice) ==
-                        BluetoothError.SUCCESS) {
+            if (profileManager.disconnect(cachedDevice.mDevice)) {
                 return true;
             }
         }
@@ -408,7 +406,7 @@ public class CachedBluetoothDevice implements Comparable<CachedBluetoothDevice> 
                 LocalBluetoothProfileManager.getProfileManager(mLocalManager, profile);
         int status = profileManager.getConnectionStatus(cachedDevice.mDevice);
         if (!SettingsBtStatus.isConnectionStatusConnected(status)) {
-            if (profileManager.connect(cachedDevice.mDevice) == BluetoothError.SUCCESS) {
+            if (profileManager.connect(cachedDevice.mDevice)) {
                 return true;
             }
             Log.i(TAG, "Failed to connect " + profile.toString() + " to " + cachedDevice.mName);

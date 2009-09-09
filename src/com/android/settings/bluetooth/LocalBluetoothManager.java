@@ -27,7 +27,6 @@ import android.app.AlertDialog;
 import android.bluetooth.BluetoothA2dp;
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
-import android.bluetooth.BluetoothError;
 import android.bluetooth.BluetoothIntent;
 import android.content.Context;
 import android.content.Intent;
@@ -64,7 +63,7 @@ public class LocalBluetoothManager {
     private BluetoothEventRedirector mEventRedirector;
     private BluetoothA2dp mBluetoothA2dp;
 
-    private int mState = BluetoothError.ERROR;
+    private int mState = BluetoothAdapter.ERROR;
 
     private List<Callback> mCallbacks = new ArrayList<Callback>();
 
@@ -187,7 +186,7 @@ public class LocalBluetoothManager {
 
     public int getBluetoothState() {
 
-        if (mState == BluetoothError.ERROR) {
+        if (mState == BluetoothAdapter.ERROR) {
             syncBluetoothState();
         }
 
@@ -211,7 +210,7 @@ public class LocalBluetoothManager {
                     ? BluetoothAdapter.STATE_ON
                     : BluetoothAdapter.STATE_OFF;
         } else {
-            bluetoothState = BluetoothError.ERROR;
+            bluetoothState = BluetoothAdapter.ERROR;
         }
 
         setBluetoothStateInt(bluetoothState);
