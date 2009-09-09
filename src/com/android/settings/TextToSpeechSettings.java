@@ -90,11 +90,6 @@ public class TextToSpeechSettings extends PreferenceActivity implements
      * startActivityForResult.
      */
     private static final int VOICE_DATA_INTEGRITY_CHECK = 1977;
-    /**
-     * Request code (arbitrary value) for voice data installation through
-     * startActivityForResult.
-     */
-    private static final int VOICE_DATA_INSTALLATION = 1980;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -218,13 +213,14 @@ public class TextToSpeechSettings extends PreferenceActivity implements
         PackageManager pm = getPackageManager();
         Intent intent = new Intent();
         intent.setAction(TextToSpeech.Engine.ACTION_INSTALL_TTS_DATA);
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         List<ResolveInfo> resolveInfos = pm.queryIntentActivities(intent, 0);
         // query only the package that matches that of the default engine
         for (int i = 0; i < resolveInfos.size(); i++) {
             ActivityInfo currentActivityInfo = resolveInfos.get(i).activityInfo;
             if (mDefaultEng.equals(currentActivityInfo.packageName)) {
                 intent.setClassName(mDefaultEng, currentActivityInfo.name);
-                this.startActivityForResult(intent, VOICE_DATA_INSTALLATION);
+                this.startActivity(intent);
             }
         }
     }
