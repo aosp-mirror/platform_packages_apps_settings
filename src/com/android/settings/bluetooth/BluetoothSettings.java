@@ -87,7 +87,7 @@ public class BluetoothSettings extends PreferenceActivity
         public void onReceive(Context context, Intent intent) {
             // TODO: put this in callback instead of receiving
 
-            if (intent.getAction().equals(BluetoothIntent.BLUETOOTH_STATE_CHANGED_ACTION)) {
+            if (intent.getAction().equals(BluetoothAdapter.ACTION_STATE_CHANGED)) {
                 onBluetoothStateChanged(mLocalManager.getBluetoothState());
             } else if (intent.getAction().equals(BluetoothIntent.BOND_STATE_CHANGED_ACTION)
                     && mScreenType == SCREEN_TYPE_DEVICEPICKER) {
@@ -175,7 +175,7 @@ public class BluetoothSettings extends PreferenceActivity
         mLocalManager.startScanning(false);
 
         IntentFilter intentFilter = new IntentFilter();
-        intentFilter.addAction(BluetoothIntent.BLUETOOTH_STATE_CHANGED_ACTION);
+        intentFilter.addAction(BluetoothAdapter.ACTION_STATE_CHANGED);
         intentFilter.addAction(BluetoothIntent.BOND_STATE_CHANGED_ACTION);
         registerReceiver(mReceiver, intentFilter);
         mLocalManager.setForegroundActivity(this);
@@ -339,9 +339,9 @@ public class BluetoothSettings extends PreferenceActivity
     private void onBluetoothStateChanged(int bluetoothState) {
         // When bluetooth is enabled (and we are in the activity, which we are),
         // we should start a scan
-        if (bluetoothState == BluetoothAdapter.BLUETOOTH_STATE_ON) {
+        if (bluetoothState == BluetoothAdapter.STATE_ON) {
             mLocalManager.startScanning(false);
-        } else if (bluetoothState == BluetoothAdapter.BLUETOOTH_STATE_OFF) {
+        } else if (bluetoothState == BluetoothAdapter.STATE_OFF) {
             mDeviceList.setProgress(false);
         }
     }
