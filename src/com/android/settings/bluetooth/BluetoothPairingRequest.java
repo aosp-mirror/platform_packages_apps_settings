@@ -23,7 +23,6 @@ import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.bluetooth.BluetoothClass;
 import android.bluetooth.BluetoothDevice;
-import android.bluetooth.BluetoothIntent;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
@@ -43,22 +42,23 @@ public class BluetoothPairingRequest extends BroadcastReceiver {
     @Override
     public void onReceive(Context context, Intent intent) {
         String action = intent.getAction();
-        if (action.equals(BluetoothIntent.PAIRING_REQUEST_ACTION)) {
+        if (action.equals(BluetoothDevice.ACTION_PAIRING_REQUEST)) {
 
             LocalBluetoothManager localManager = LocalBluetoothManager.getInstance(context);
 
             BluetoothDevice device =
-                    intent.getParcelableExtra(BluetoothIntent.DEVICE);
-            int type = intent.getIntExtra(BluetoothIntent.PAIRING_VARIANT, BluetoothClass.ERROR);
+                    intent.getParcelableExtra(BluetoothDevice.EXTRA_DEVICE);
+            int type = intent.getIntExtra(BluetoothDevice.EXTRA_PAIRING_VARIANT,
+                    BluetoothDevice.ERROR);
             Intent pairingIntent = new Intent();
             pairingIntent.setClass(context, BluetoothPairingDialog.class);
-            pairingIntent.putExtra(BluetoothIntent.DEVICE, device);
-            pairingIntent.putExtra(BluetoothIntent.PAIRING_VARIANT, type);
+            pairingIntent.putExtra(BluetoothDevice.EXTRA_DEVICE, device);
+            pairingIntent.putExtra(BluetoothDevice.EXTRA_PAIRING_VARIANT, type);
             if (type == BluetoothDevice.PAIRING_VARIANT_CONFIRMATION) {
-                int passkey = intent.getIntExtra(BluetoothIntent.PASSKEY, BluetoothClass.ERROR);
-                pairingIntent.putExtra(BluetoothIntent.PASSKEY, passkey);
+                int passkey = intent.getIntExtra(BluetoothDevice.EXTRA_PASSKEY, BluetoothDevice.ERROR);
+                pairingIntent.putExtra(BluetoothDevice.EXTRA_PASSKEY, passkey);
             }
-            pairingIntent.setAction(BluetoothIntent.PAIRING_REQUEST_ACTION);
+            pairingIntent.setAction(BluetoothDevice.ACTION_PAIRING_REQUEST);
             pairingIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 
             if (localManager.getForegroundActivity() != null) {
@@ -77,7 +77,7 @@ public class BluetoothPairingRequest extends BroadcastReceiver {
                 PendingIntent pending = PendingIntent.getActivity(context, 0,
                         pairingIntent, PendingIntent.FLAG_ONE_SHOT);
 
-                String name = intent.getStringExtra(BluetoothIntent.NAME);
+                String name = intent.getStringExtra(BluetoothDevice.EXTRA_NAME);
                 if (TextUtils.isEmpty(name)) {
                     name = device.getName();
                 }
@@ -93,7 +93,7 @@ public class BluetoothPairingRequest extends BroadcastReceiver {
                 manager.notify(NOTIFICATION_ID, notification);
             }
 
-        } else if (action.equals(BluetoothIntent.PAIRING_CANCEL_ACTION)) {
+        } else if (action.equals(BluetoothDevice.ACTION_PAIRING_CANCEL)) {
 
             // Remove the notification
             NotificationManager manager = (NotificationManager) context

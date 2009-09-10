@@ -72,7 +72,7 @@ public class SettingsBtStatus {
             return R.string.bluetooth_paired;
         case BluetoothDevice.BOND_BONDING:
             return R.string.bluetooth_pairing;
-        case BluetoothDevice.BOND_NOT_BONDED:
+        case BluetoothDevice.BOND_NONE:
             return R.string.bluetooth_not_connected;
         default:
             return 0;

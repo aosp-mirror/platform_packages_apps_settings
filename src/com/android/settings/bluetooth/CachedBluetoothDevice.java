@@ -59,7 +59,7 @@ public class CachedBluetoothDevice implements Comparable<CachedBluetoothDevice> 
     private final BluetoothDevice mDevice;
     private String mName;
     private short mRssi;
-    private int mBtClass = BluetoothClass.ERROR;
+    private BluetoothClass mBtClass;
 
     private List<Profile> mProfiles = new ArrayList<Profile>();
 
@@ -301,7 +301,7 @@ public class CachedBluetoothDevice implements Comparable<CachedBluetoothDevice> 
             askDisconnect();
         } else if (bondState == BluetoothDevice.BOND_BONDED) {
             connect();
-        } else if (bondState == BluetoothDevice.BOND_NOT_BONDED) {
+        } else if (bondState == BluetoothDevice.BOND_NONE) {
             pair();
         }
     }
@@ -424,7 +424,7 @@ public class CachedBluetoothDevice implements Comparable<CachedBluetoothDevice> 
     }
 
     private boolean ensurePaired() {
-        if (getBondState() == BluetoothDevice.BOND_NOT_BONDED) {
+        if (getBondState() == BluetoothDevice.BOND_NONE) {
             pair();
             return false;
         } else {
@@ -577,7 +577,7 @@ public class CachedBluetoothDevice implements Comparable<CachedBluetoothDevice> 
     }
 
     public int getBtClassDrawable() {
-        switch (BluetoothClass.Device.Major.getDeviceMajor(mBtClass)) {
+        switch (mBtClass.getMajorDeviceClass()) {
         case BluetoothClass.Device.Major.COMPUTER:
             return R.drawable.ic_bt_laptop;
 
@@ -599,7 +599,7 @@ public class CachedBluetoothDevice implements Comparable<CachedBluetoothDevice> 
      */
     private void fetchBtClass() {
         mBtClass = mDevice.getBluetoothClass();
-        if (mBtClass != BluetoothClass.ERROR) {
+        if (mBtClass != null) {
             LocalBluetoothProfileManager.fill(mBtClass, mProfiles);
         }
     }
@@ -613,8 +613,8 @@ public class CachedBluetoothDevice implements Comparable<CachedBluetoothDevice> 
         dispatchAttributesChanged();
     }
 
-    public void setBtClass(int btClass) {
-        if (mBtClass != btClass && btClass != BluetoothClass.ERROR) {
+    public void setBtClass(BluetoothClass btClass) {
+        if (btClass != null && mBtClass != btClass) {
             mBtClass = btClass;
             LocalBluetoothProfileManager.fill(mBtClass, mProfiles);
             dispatchAttributesChanged();
@@ -699,7 +699,7 @@ public class CachedBluetoothDevice implements Comparable<CachedBluetoothDevice> 
 
         menu.setHeaderTitle(getName());
 
-        if (bondState == BluetoothDevice.BOND_NOT_BONDED) { // Not paired and not connected
+        if (bondState == BluetoothDevice.BOND_NONE) { // Not paired and not connected
             menu.add(0, CONTEXT_ITEM_CONNECT, 0, R.string.bluetooth_device_context_pair_connect);
         } else { // Paired
             if (isConnected) { // Paired and connected

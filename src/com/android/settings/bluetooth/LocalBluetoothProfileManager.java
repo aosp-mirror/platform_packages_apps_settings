@@ -81,18 +81,18 @@ public abstract class LocalBluetoothProfileManager {
      * @param btClass The class
      * @param profiles The list of profiles to fill
      */
-    public static void fill(int btClass, List<Profile> profiles) {
+    public static void fill(BluetoothClass btClass, List<Profile> profiles) {
         profiles.clear();
 
-        if (BluetoothClass.doesClassMatch(btClass, BluetoothClass.PROFILE_HEADSET)) {
+        if (btClass.doesClassMatch(BluetoothClass.PROFILE_HEADSET)) {
             profiles.add(Profile.HEADSET);
         }
 
-        if (BluetoothClass.doesClassMatch(btClass, BluetoothClass.PROFILE_A2DP)) {
+        if (btClass.doesClassMatch(BluetoothClass.PROFILE_A2DP)) {
             profiles.add(Profile.A2DP);
         }
 
-        if (BluetoothClass.doesClassMatch(btClass, BluetoothClass.PROFILE_OPP)) {
+        if (btClass.doesClassMatch(BluetoothClass.PROFILE_OPP)) {
             profiles.add(Profile.OPP);
         }
     }
