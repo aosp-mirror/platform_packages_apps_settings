@@ -15,16 +15,46 @@
  * limitations under the License.
  -->
 
-<merge xmlns:android="http://schemas.android.com/apk/res/android">
-    <ListView android:id="@android:id/list"
-            android:layout_width="fill_parent" 
-            android:layout_height="fill_parent"
-            android:drawSelectorOnTop="false"
-            android:fastScrollEnabled="true" />
-    <TextView android:id="@android:id/empty"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	    android:layout_width="fill_parent"
+	    android:layout_height="fill_parent"
+	    android:orientation="vertical">
+    <FrameLayout
+		    android:layout_width="fill_parent"
+		    android:layout_height="0px"
+		    android:layout_weight="1">
+	    <ListView android:id="@android:id/list"
+	            android:layout_width="fill_parent" 
+	            android:layout_height="fill_parent"
+	            android:drawSelectorOnTop="false"
+	            android:fastScrollEnabled="true" />
+	    <TextView android:id="@android:id/empty"
+	            android:layout_width="fill_parent"
+	            android:layout_height="fill_parent"
+	            android:gravity="center"
+	            android:text="@string/no_running_services"
+	            android:textAppearance="?android:attr/textAppearanceLarge" />
+    </FrameLayout>
+    <LinearLayout
             android:layout_width="fill_parent"
-            android:layout_height="fill_parent"
-            android:gravity="center"
-            android:text="@string/no_running_services"
-            android:textAppearance="?android:attr/textAppearanceLarge" />
-</merge>
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:background="?android:attr/colorForeground"
+            android:padding="4dp">
+        <TextView android:id="@+id/backgroundText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:textAppearance="?android:attr/textAppearanceSmallInverse"
+            android:color="?android:attr/textColorPrimaryInverse"
+            android:singleLine="true" />
+        <TextView android:id="@+id/foregroundText"
+            android:layout_gravity="center_vertical|right"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="0"
+            android:textAppearance="?android:attr/textAppearanceSmallInverse"
+            android:color="?android:attr/textColorPrimaryInverse"
+            android:singleLine="true" />
+    </LinearLayout>
+</LinearLayout>
