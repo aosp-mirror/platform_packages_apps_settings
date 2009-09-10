@@ -87,10 +87,6 @@ public class SecuritySettings extends PreferenceActivity implements
     private static final String ASSISTED_GPS = "assisted_gps";
 
     // Credential storage
-    public static final String ACTION_ADD_CREDENTIAL =
-            "android.security.ADD_CREDENTIAL";
-    public static final String ACTION_UNLOCK_CREDENTIAL_STORAGE =
-            "android.security.UNLOCK_CREDENTIAL_STORAGE";
     private static final String KEY_CSTOR_TYPE_NAME = "typeName";
     private static final String KEY_CSTOR_ITEM = "item";
     private static final String KEY_CSTOR_NAMESPACE = "namespace";
@@ -240,10 +236,10 @@ public class SecuritySettings extends PreferenceActivity implements
         PreferenceCategory credStoreCat = new PreferenceCategory(this);
         credStoreCat.setTitle(R.string.cstor_settings_category);
         root.addPreference(credStoreCat);
-        int s = mCstorHelper.getCstorState();
-        credStoreCat.addPreference(mCstorHelper.createAccessCheckBox(s));
+        credStoreCat.addPreference(mCstorHelper.createAccessCheckBox());
+        credStoreCat.addPreference(mCstorHelper.createCertInstallPreference());
         credStoreCat.addPreference(mCstorHelper.createSetPasswordPreference());
-        credStoreCat.addPreference(mCstorHelper.createResetPreference(s));
+        credStoreCat.addPreference(mCstorHelper.createResetPreference());
 
         return root;
     }
@@ -269,6 +265,8 @@ public class SecuritySettings extends PreferenceActivity implements
         mShowPassword
                 .setChecked(Settings.System.getInt(getContentResolver(),
                 Settings.System.TEXT_SHOW_PASSWORD, 1) != 0);
+
+        mCstorHelper.resumeStates();
     }
 
     @Override
@@ -504,15 +502,24 @@ public class SecuritySettings extends PreferenceActivity implements
             if (intent == null) return;
             String action = intent.getAction();
 
-            if (ACTION_ADD_CREDENTIAL.equals(action)) {
-                mCstorAddCredentialHelper = new CstorAddCredentialHelper(intent);
+            if (CertTool.ACTION_ADD_CREDENTIAL.equals(action)) {
+                mCstorAddCredentialHelper =
+                        new CstorAddCredentialHelper(intent);
                 showCstorDialog(CSTOR_NAME_CREDENTIAL_DIALOG);
-            } else if (ACTION_UNLOCK_CREDENTIAL_STORAGE.equals(action)) {
+            } else if (Keystore.ACTION_UNLOCK_CREDENTIAL_STORAGE.equals(
+                    action)) {
                 mSpecialIntent = intent;
                 showCstorDialog(mCstorHelper.isCstorInitialized()
                         ? CSTOR_UNLOCK_DIALOG
                         : CSTOR_INIT_DIALOG);
             }
+        }
+
+        void resumeStates() {
+            int state = mCstorHelper.getCstorState();
+            mAccessCheckBox.setEnabled(state != Keystore.UNINITIALIZED);
+            mAccessCheckBox.setChecked(state == Keystore.UNLOCKED);
+            mResetButton.setEnabled(state != Keystore.UNINITIALIZED);
         }
 
         private void showCstorDialog(int dialogId) {
@@ -732,8 +739,7 @@ public class SecuritySettings extends PreferenceActivity implements
             if (passwd == null) {
                 showError(R.string.cstor_passwords_empty_error);
                 return false;
-            } else if ((passwd.length() < CSTOR_MIN_PASSWORD_LENGTH)
-                    || passwd.contains(" ")) {
+            } else if (passwd.length() < CSTOR_MIN_PASSWORD_LENGTH) {
                 showError(R.string.cstor_password_verification_error);
                 return false;
             } else {
@@ -803,6 +809,11 @@ public class SecuritySettings extends PreferenceActivity implements
             }
         }
 
+        private void installCertFromSdCard() {
+            // TODO: uncomment this when the feature is ready
+            //startActivity(new Intent(CertTool.ACTION_INSTALL_CERT_FROM_SDCARD));
+        }
+
         private TextView showError(int messageId) {
             TextView v = (TextView) mView.findViewById(R.id.cstor_error);
             v.setText(messageId);
@@ -838,13 +849,11 @@ public class SecuritySettings extends PreferenceActivity implements
             mResetButton.setEnabled(enabled);
         }
 
-        private Preference createAccessCheckBox(int state) {
+        private Preference createAccessCheckBox() {
             CheckBoxPreference pref = new CheckBoxPreference(
                     SecuritySettings.this);
             pref.setTitle(R.string.cstor_access_title);
             pref.setSummary(R.string.cstor_access_summary);
-            pref.setEnabled(state != Keystore.UNINITIALIZED);
-            pref.setChecked(state == Keystore.UNLOCKED);
             pref.setOnPreferenceChangeListener(
                     new Preference.OnPreferenceChangeListener() {
                         public boolean onPreferenceChange(
@@ -858,6 +867,20 @@ public class SecuritySettings extends PreferenceActivity implements
                         }
                     });
             mAccessCheckBox = pref;
+            return pref;
+        }
+
+        private Preference createCertInstallPreference() {
+            Preference pref = new Preference(SecuritySettings.this);
+            pref.setTitle(R.string.cstor_cert_install_title);
+            pref.setSummary(R.string.cstor_cert_install_summary);
+            pref.setOnPreferenceClickListener(
+                    new Preference.OnPreferenceClickListener() {
+                        public boolean onPreferenceClick(Preference pref) {
+                            installCertFromSdCard();
+                            return true;
+                        }
+                    });
             return pref;
         }
 
@@ -877,7 +900,7 @@ public class SecuritySettings extends PreferenceActivity implements
             return pref;
         }
 
-        private Preference createResetPreference(int state) {
+        private Preference createResetPreference() {
             Preference pref = new Preference(SecuritySettings.this);
             pref.setTitle(R.string.cstor_reset_title);
             pref.setSummary(R.string.cstor_reset_summary);
@@ -888,7 +911,6 @@ public class SecuritySettings extends PreferenceActivity implements
                             return true;
                         }
                     });
-            pref.setEnabled(state != Keystore.UNINITIALIZED);
             mResetButton = pref;
             return pref;
         }

@@ -652,7 +652,7 @@ public class VpnSettings extends PreferenceActivity implements
         if (isKeystoreUnlocked()) return true;
         mUnlockAction = action;
         startActivity(
-                new Intent(SecuritySettings.ACTION_UNLOCK_CREDENTIAL_STORAGE));
+                new Intent(Keystore.ACTION_UNLOCK_CREDENTIAL_STORAGE));
         return false;
     }
 

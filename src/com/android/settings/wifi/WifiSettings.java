@@ -18,7 +18,6 @@ package com.android.settings.wifi;
 
 import com.android.settings.ProgressCategory;
 import com.android.settings.R;
-import com.android.settings.SecuritySettings;
 
 import android.app.Dialog;
 import android.content.DialogInterface;
@@ -376,7 +375,7 @@ public class WifiSettings extends PreferenceActivity implements WifiLayer.Callba
         if (state.isEnterprise() &&
                 Keystore.getInstance().getState() != Keystore.UNLOCKED) {
             startActivity(new Intent(
-                    SecuritySettings.ACTION_UNLOCK_CREDENTIAL_STORAGE));
+                    Keystore.ACTION_UNLOCK_CREDENTIAL_STORAGE));
             mResumeState = state;
             mResumeMode = mode;
             return;

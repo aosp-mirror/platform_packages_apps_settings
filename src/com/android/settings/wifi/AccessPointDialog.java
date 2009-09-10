@@ -17,7 +17,6 @@
 package com.android.settings.wifi;
 
 import com.android.settings.R;
-import com.android.settings.SecuritySettings;
 
 import android.app.AlertDialog;
 import android.content.Context;
@@ -802,7 +801,7 @@ public class AccessPointDialog extends AlertDialog implements DialogInterface.On
                 // Unlock the keystore if it is not unlocked yet.
                 if (Keystore.getInstance().getState() != Keystore.UNLOCKED) {
                     getContext().startActivity(new Intent(
-                            SecuritySettings.ACTION_UNLOCK_CREDENTIAL_STORAGE));
+                            Keystore.ACTION_UNLOCK_CREDENTIAL_STORAGE));
                     return;
                 }
                 enableEnterpriseFields();
