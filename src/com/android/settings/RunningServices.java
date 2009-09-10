@@ -23,28 +23,17 @@ import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.ListActivity;
 import android.app.PendingIntent;
-import android.app.ProgressDialog;
-import android.content.BroadcastReceiver;
+import android.content.ActivityNotFoundException;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.IntentFilter;
-import android.content.SharedPreferences;
 import android.content.pm.ApplicationInfo;
-import android.content.pm.IPackageStatsObserver;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageItemInfo;
 import android.content.pm.PackageManager;
-import android.content.pm.PackageStats;
 import android.content.pm.ServiceInfo;
-import android.content.pm.PackageManager.NameNotFoundException;
-import android.content.res.Configuration;
 import android.content.res.Resources;
-import android.content.res.TypedArray;
-import android.database.Cursor;
-import android.graphics.drawable.Drawable;
-import android.net.Uri;
 import android.os.Bundle;
 import android.os.Debug;
 import android.os.Handler;
@@ -54,24 +43,16 @@ import android.os.SystemClock;
 import android.text.format.DateUtils;
 import android.text.format.Formatter;
 import android.util.AttributeSet;
-import android.util.Config;
 import android.util.Log;
 import android.util.SparseArray;
 import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.Window;
 import android.widget.AbsListView;
-import android.widget.AdapterView;
 import android.widget.BaseAdapter;
-import android.widget.Filter;
-import android.widget.Filterable;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.AdapterView.OnItemClickListener;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -104,6 +85,12 @@ public class RunningServices extends ListActivity
     
     int mProcessBgColor;
     
+    TextView mBackgroundProcessText;
+    TextView mForegroundProcessText;
+    
+    int mLastNumBackgroundProcesses = -1;
+    int mLastNumForegroundProcesses = -1;
+    
     Dialog mCurDialog;
     
     class ActiveItem {
@@ -114,18 +101,27 @@ public class RunningServices extends ListActivity
         long mFirstRunTime;
         
         void updateTime(Context context) {
-            if (mItem.mActiveSince >= 0) {
-                mHolder.size.setText(DateUtils.formatElapsedTime(mBuilder,
-                        (SystemClock.uptimeMillis()-mFirstRunTime)/1000));
+            if (mItem.mIsProcess) {
+                String size = mItem.mSizeStr != null ? mItem.mSizeStr : "";
+                if (!size.equals(mItem.mCurSizeStr)) {
+                    mItem.mCurSizeStr = size;
+                    mHolder.size.setText(size);
+                }
             } else {
-                mHolder.size.setText(context.getResources().getText(
-                        R.string.service_restarting));
+                if (mItem.mActiveSince >= 0) {
+                    mHolder.size.setText(DateUtils.formatElapsedTime(mBuilder,
+                            (SystemClock.uptimeMillis()-mFirstRunTime)/1000));
+                } else {
+                    mHolder.size.setText(context.getResources().getText(
+                            R.string.service_restarting));
+                }
             }
         }
     }
     
     static class BaseItem {
-        boolean mIsProcess;
+        final boolean mIsProcess;
+        
         PackageItemInfo mPackageInfo;
         CharSequence mDisplayLabel;
         String mLabel;
@@ -136,20 +132,118 @@ public class RunningServices extends ListActivity
         long mActiveSince;
         long mSize;
         String mSizeStr;
+        String mCurSizeStr;
         boolean mNeedDivider;
+        
+        public BaseItem(boolean isProcess) {
+            mIsProcess = isProcess;
+        }
     }
     
     static class ServiceItem extends BaseItem {
         ActivityManager.RunningServiceInfo mRunningService;
         ServiceInfo mServiceInfo;
         boolean mShownAsStarted;
+        
+        public ServiceItem() {
+            super(false);
+        }
     }
     
     static class ProcessItem extends BaseItem {
         final HashMap<ComponentName, ServiceItem> mServices
                 = new HashMap<ComponentName, ServiceItem>();
-        int mUid;
+        final SparseArray<ProcessItem> mDependentProcesses
+                = new SparseArray<ProcessItem>();
+        
+        final int mUid;
+        final String mProcessName;
         int mPid;
+        
+        ProcessItem mClient;
+        int mLastNumDependentProcesses;
+        
+        int mRunningSeq;
+        ActivityManager.RunningAppProcessInfo mRunningProcessInfo;
+        
+        public ProcessItem(int uid, String processName) {
+            super(true);
+            mDescription = processName;
+            mUid = uid;
+            mProcessName = processName;
+        }
+        
+        void ensureLabel(PackageManager pm) {
+            if (mLabel != null) {
+                return;
+            }
+            
+            try {
+                ApplicationInfo ai = pm.getApplicationInfo(mProcessName, 0);
+                if (ai.uid == mUid) {
+                    mDisplayLabel = ai.loadLabel(pm);
+                    mLabel = mDisplayLabel.toString();
+                    mPackageInfo = ai;
+                    return;
+                }
+            } catch (PackageManager.NameNotFoundException e) {
+            }
+            
+            // If we couldn't get information about the overall
+            // process, try to find something about the uid.
+            String[] pkgs = pm.getPackagesForUid(mUid);
+            
+            // If there is one package with this uid, that is what we want.
+            if (pkgs.length == 1) {
+                try {
+                    ApplicationInfo ai = pm.getApplicationInfo(pkgs[0], 0);
+                    mDisplayLabel = ai.loadLabel(pm);
+                    mLabel = mDisplayLabel.toString();
+                    mPackageInfo = ai;
+                    return;
+                } catch (PackageManager.NameNotFoundException e) {
+                }
+            }
+            
+            // If there are multiple, see if one gives us the official name
+            // for this uid.
+            for (String name : pkgs) {
+                try {
+                    PackageInfo pi = pm.getPackageInfo(name, 0);
+                    if (pi.sharedUserLabel != 0) {
+                        CharSequence nm = pm.getText(name,
+                                pi.sharedUserLabel, pi.applicationInfo);
+                        if (nm != null) {
+                            mDisplayLabel = nm;
+                            mLabel = nm.toString();
+                            mPackageInfo = pi.applicationInfo;
+                            return;
+                        }
+                    }
+                } catch (PackageManager.NameNotFoundException e) {
+                }
+            }
+            
+            // If still don't have anything to display, just use the
+            // service info.
+            if (mServices.size() > 0) {
+                mPackageInfo = mServices.values().iterator().next()
+                        .mServiceInfo.applicationInfo;
+                mDisplayLabel = mPackageInfo.loadLabel(pm);
+                mLabel = mDisplayLabel.toString();
+                return;
+            }
+            
+            // Finally... whatever, just pick the first package's name.
+            try {
+                ApplicationInfo ai = pm.getApplicationInfo(pkgs[0], 0);
+                mDisplayLabel = ai.loadLabel(pm);
+                mLabel = mDisplayLabel.toString();
+                mPackageInfo = ai;
+                return;
+            } catch (PackageManager.NameNotFoundException e) {
+            }
+        }
         
         boolean updateService(Context context,
                 ActivityManager.RunningServiceInfo service) {
@@ -211,15 +305,88 @@ public class RunningServices extends ListActivity
             
             return changed;
         }
+        
+        boolean updateSize(Context context) {
+            boolean changed = false;
+            
+            if (mPid != 0 && mSize == 0) {
+                final int NP = mDependentProcesses.size();
+                for (int i=0; i<NP; i++) {
+                    ProcessItem proc = mDependentProcesses.valueAt(i);
+                    changed |= proc.updateSize(context);
+                }
+                
+                Debug.MemoryInfo mi = new Debug.MemoryInfo();
+                // XXX This is a hack...  I really don't want to be
+                // doing a synchronous call into the app, but can't
+                // figure out any other way to get the pss.
+                try {
+                    ActivityManagerNative.getDefault().getProcessMemoryInfo(
+                            mPid, mi);
+                    mSize = (mi.dalvikPss + mi.nativePss
+                            + mi.otherPss) * 1024;
+                    String sizeStr = Formatter.formatFileSize(
+                            context, mSize);
+                    if (!sizeStr.equals(mSizeStr)){
+                        //changed = true;
+                        mSizeStr = sizeStr;
+                    }
+                } catch (RemoteException e) {
+                }
+            }
+            
+            return changed;
+        }
+        
+        boolean buildDependencyChain(Context context, PackageManager pm, int curSeq) {
+            final int NP = mDependentProcesses.size();
+            boolean changed = false;
+            for (int i=0; i<NP; i++) {
+                ProcessItem proc = mDependentProcesses.valueAt(i);
+                if (proc.mClient != this) {
+                    changed = true;
+                    proc.mClient = this;
+                }
+                proc.mCurSeq = curSeq;
+                proc.ensureLabel(pm);
+                changed |= proc.updateSize(context);
+                changed |= proc.buildDependencyChain(context, pm, curSeq);
+            }
+            
+            if (mLastNumDependentProcesses != mDependentProcesses.size()) {
+                changed = true;
+                mLastNumDependentProcesses = mDependentProcesses.size();
+            }
+            
+            return changed;
+        }
+        
+        void addDependentProcesses(ArrayList<BaseItem> dest) {
+            final int NP = mDependentProcesses.size();
+            for (int i=0; i<NP; i++) {
+                ProcessItem proc = mDependentProcesses.valueAt(i);
+                proc.addDependentProcesses(dest);
+                dest.add(proc);
+            }
+        }
     }
     
     static class State {
         final SparseArray<HashMap<String, ProcessItem>> mProcesses
                 = new SparseArray<HashMap<String, ProcessItem>>();
+        final SparseArray<ProcessItem> mActiveProcesses
+                = new SparseArray<ProcessItem>();
+        
+        // Temporary for finding process dependencies.
+        final SparseArray<ProcessItem> mRunningProcesses
+                = new SparseArray<ProcessItem>();
         
         final ArrayList<BaseItem> mItems = new ArrayList<BaseItem>();
         
         int mSequence = 0;
+        
+        int mNumBackgroundProcesses;
+        int mNumForegroundProcesses;
         
         boolean update(Context context, ActivityManager am) {
             final PackageManager pm = context.getPackageManager();
@@ -230,10 +397,7 @@ public class RunningServices extends ListActivity
             
             List<ActivityManager.RunningServiceInfo> services 
                     = am.getRunningServices(MAX_SERVICES);
-            if (services == null) {
-                return false;
-            }
-            final int NS = services.size();
+            final int NS = services != null ? services.size() : 0;
             for (int i=0; i<NS; i++) {
                 ActivityManager.RunningServiceInfo si = services.get(i);
                 // We are not interested in services that have not been started
@@ -257,19 +421,7 @@ public class RunningServices extends ListActivity
                 ProcessItem proc = procs.get(si.process);
                 if (proc == null) {
                     changed = true;
-                    proc = new ProcessItem();
-                    proc.mIsProcess = true;
-                    proc.mDescription = si.process;
-                    proc.mUid = si.uid;
-                    try {
-                        ApplicationInfo ai = pm.getApplicationInfo(si.process, 0);
-                        if (ai.uid == si.uid) {
-                            proc.mDisplayLabel = ai.loadLabel(context.getPackageManager());
-                            proc.mLabel = proc.mDisplayLabel.toString();
-                            proc.mPackageInfo = ai;
-                        }
-                    } catch (PackageManager.NameNotFoundException e) {
-                    }
+                    proc = new ProcessItem(si.uid, si.process);
                     procs.put(si.process, proc);
                 }
                 
@@ -277,75 +429,126 @@ public class RunningServices extends ListActivity
                     int pid = si.restarting == 0 ? si.pid : 0;
                     if (pid != proc.mPid) {
                         changed = true;
-                        proc.mPid = pid;
-                    }
-                    proc.mSize = 0;
-                    if (proc.mPid != 0) {
-                        Debug.MemoryInfo mi = new Debug.MemoryInfo();
-                        // XXX This is a hack...  I really don't want to be
-                        // doing a synchronous call into the app, but can't
-                        // figure out any other way to get the pss.
-                        try {
-                            ActivityManagerNative.getDefault().getProcessMemoryInfo(
-                                    proc.mPid, mi);
-                            proc.mSize = (mi.dalvikPss + mi.nativePss
-                                    + mi.otherPss) * 1024;
-                            String sizeStr = Formatter.formatFileSize(
-                                    context, proc.mSize);
-                            if (!sizeStr.equals(proc.mSizeStr)){
-                                changed = true;
-                                proc.mSizeStr = sizeStr;
+                        if (proc.mPid != pid) {
+                            if (proc.mPid != 0) {
+                                mActiveProcesses.remove(proc.mPid);
                             }
-                        } catch (RemoteException e) {
+                            if (pid != 0) {
+                                mActiveProcesses.put(pid, proc);
+                            }
+                            proc.mPid = pid;
                         }
                     }
+                    proc.mSize = 0;
+                    proc.mDependentProcesses.clear();
                     proc.mCurSeq = mSequence;
                 }
                 changed |= proc.updateService(context, si);
-                
-                if (proc.mLabel == null) {
-                    // If we couldn't get information about the overall
-                    // process, try to find something about the uid.
-                    String[] pkgs = pm.getPackagesForUid(proc.mUid);
-                    for (String name : pkgs) {
-                        try {
-                            PackageInfo pi = pm.getPackageInfo(name, 0);
-                            if (pi.sharedUserLabel != 0) {
-                                CharSequence nm = pm.getText(name,
-                                        pi.sharedUserLabel, pi.applicationInfo);
-                                if (nm != null) {
-                                    proc.mDisplayLabel = nm;
-                                    proc.mLabel = nm.toString();
-                                    proc.mPackageInfo = pi.applicationInfo;
-                                    break;
-                                }
-                            }
-                        } catch (PackageManager.NameNotFoundException e) {
-                        }
+            }
+            
+            // Now update the map of other processes that are running (but
+            // don't have services actively running inside them).
+            List<ActivityManager.RunningAppProcessInfo> processes
+                    = am.getRunningAppProcesses();
+            final int NP = processes != null ? processes.size() : 0;
+            for (int i=0; i<NP; i++) {
+                ActivityManager.RunningAppProcessInfo pi = processes.get(i);
+                ProcessItem proc = mActiveProcesses.get(pi.pid);
+                if (proc == null) {
+                    // This process is not one that is a direct container
+                    // of a service, so look for it in the secondary
+                    // running list.
+                    proc = mRunningProcesses.get(pi.pid);
+                    if (proc == null) {
+                        proc = new ProcessItem(pi.uid, pi.processName);
+                        proc.mPid = pi.pid;
+                        mRunningProcesses.put(pi.pid, proc);
                     }
-                    
-                    // If still don't have anything to display, just use the
-                    // service info.
-                    if (proc.mLabel == null) {
-                        proc.mPackageInfo = proc.mServices.get(si.service)
-                                .mServiceInfo.applicationInfo;
-                        proc.mDisplayLabel = proc.mPackageInfo.loadLabel(pm);
-                        proc.mLabel = proc.mDisplayLabel.toString();
+                    proc.mDependentProcesses.clear();
+                    proc.mSize = 0;
+                }
+                proc.mRunningSeq = mSequence;
+                proc.mRunningProcessInfo = pi;
+            }
+            
+            // Build the chains from client processes to the process they are
+            // dependent on; also remove any old running processes.
+            int NRP = mRunningProcesses.size();
+            for (int i=0; i<NRP; i++) {
+                ProcessItem proc = mRunningProcesses.valueAt(i);
+                if (proc.mRunningSeq == mSequence) {
+                    int clientPid = proc.mRunningProcessInfo.importanceReasonPid;
+                    if (clientPid != 0) {
+                        ProcessItem client = mActiveProcesses.get(clientPid);
+                        if (client == null) {
+                            client = mRunningProcesses.get(clientPid);
+                        }
+                        if (client != null) {
+                            client.mDependentProcesses.put(proc.mPid, proc);
+                        }
+                    } else {
+                        // In this pass the process doesn't have a client.
+                        // Clear to make sure if it later gets the same one
+                        // that we will detect the change.
+                        proc.mClient = null;
+                    }
+                } else {
+                    mRunningProcesses.remove(mRunningProcesses.keyAt(i));
+                }
+            }
+            
+            // Follow the tree from all primary service processes to all
+            // processes they are dependent on, marking these processes as
+            // still being active and determining if anything has changed.
+            final int NAP = mActiveProcesses.size();
+            for (int i=0; i<NAP; i++) {
+                ProcessItem proc = mActiveProcesses.valueAt(i);
+                if (proc.mCurSeq == mSequence) {
+                    changed |= proc.buildDependencyChain(context, pm, mSequence);
+                }
+            }
+            
+            // Count number of interesting other (non-active) processes.
+            mNumBackgroundProcesses = 0;
+            mNumForegroundProcesses = 0;
+            NRP = mRunningProcesses.size();
+            for (int i=0; i<NRP; i++) {
+                ProcessItem proc = mRunningProcesses.valueAt(i);
+                if (proc.mCurSeq != mSequence) {
+                    // We didn't hit this process as a dependency on one
+                    // of our active ones, so add it up if needed.
+                    if (proc.mRunningProcessInfo.importance >=
+                        ActivityManager.RunningAppProcessInfo.IMPORTANCE_BACKGROUND) {
+                        mNumBackgroundProcesses++;
+                    } else if (proc.mRunningProcessInfo.importance <=
+                        ActivityManager.RunningAppProcessInfo.IMPORTANCE_VISIBLE) {
+                        mNumForegroundProcesses++;
                     }
                 }
             }
             
-            // Look for anything that no longer exists...
+            // Look for services and their primary processes that no longer exist...
             for (int i=0; i<mProcesses.size(); i++) {
                 HashMap<String, ProcessItem> procs = mProcesses.valueAt(i);
                 Iterator<ProcessItem> pit = procs.values().iterator();
                 while (pit.hasNext()) {
                     ProcessItem pi = pit.next();
-                    if (pi.mCurSeq != mSequence) {
+                    if (pi.mCurSeq == mSequence) {
+                        pi.ensureLabel(pm);
+                        changed |= pi.updateSize(context);
+                        if (pi.mPid == 0) {
+                            // Sanity: a non-process can't be dependent on
+                            // anything.
+                            pi.mDependentProcesses.clear();
+                        }
+                    } else {
                         changed = true;
                         pit.remove();
                         if (procs.size() == 0) {
                             mProcesses.remove(mProcesses.keyAt(i));
+                        }
+                        if (pi.mPid != 0) {
+                            mActiveProcesses.remove(pi.mPid);
                         }
                         continue;
                     }
@@ -365,7 +568,11 @@ public class RunningServices extends ListActivity
                 for (int i=0; i<mProcesses.size(); i++) {
                     for (ProcessItem pi : mProcesses.valueAt(i).values()) {
                         pi.mNeedDivider = false;
+                        // First add processes we are dependent on.
+                        pi.addDependentProcesses(mItems);
+                        // And add the process itself.
                         mItems.add(pi);
+                        // And finally the services running in it.
                         boolean needDivider = false;
                         for (ServiceItem si : pi.mServices.values()) {
                             si.mNeedDivider = needDivider;
@@ -456,25 +663,25 @@ public class RunningServices extends ListActivity
             vh.name.setText(item.mDisplayLabel);
             vh.separator.setVisibility(item.mNeedDivider
                     ? View.VISIBLE : View.INVISIBLE);
+            ActiveItem ai = new ActiveItem();
+            ai.mRootView = view;
+            ai.mItem = item;
+            ai.mHolder = vh;
+            ai.mFirstRunTime = item.mActiveSince;
+            vh.description.setText(item.mDescription);
             if (item.mIsProcess) {
                 view.setBackgroundColor(mProcessBgColor);
                 vh.icon.setImageDrawable(item.mPackageInfo.loadIcon(getPackageManager()));
                 vh.description.setText(item.mDescription);
-                vh.size.setText(item.mSizeStr);
-                mActiveItems.remove(view);
+                item.mCurSizeStr = null;
             } else {
                 view.setBackgroundDrawable(null);
                 vh.icon.setImageDrawable(null);
-                vh.description.setText("");
-                ActiveItem ai = new ActiveItem();
-                ai.mRootView = view;
-                ai.mItem = item;
-                ai.mHolder = vh;
-                ai.mFirstRunTime = item.mActiveSince;
                 vh.description.setText(item.mDescription);
-                ai.updateTime(RunningServices.this);
-                mActiveItems.put(view, ai);
+                ai.mFirstRunTime = item.mActiveSince;
             }
+            ai.updateTime(RunningServices.this);
+            mActiveItems.put(view, ai);
         }
     }
     
@@ -516,13 +723,26 @@ public class RunningServices extends ListActivity
             mState = new State();
         }
         mProcessBgColor = 0xff505050;
+        setContentView(R.layout.running_services);
         getListView().setDivider(null);
         getListView().setAdapter(new ServiceListAdapter(mState));
+        mBackgroundProcessText = (TextView)findViewById(R.id.backgroundText);
+        mForegroundProcessText = (TextView)findViewById(R.id.foregroundText);
     }
 
     void updateList() {
         if (mState.update(this, mAm)) {
             ((ServiceListAdapter)(getListView().getAdapter())).notifyDataSetChanged();
+        }
+        if (mLastNumBackgroundProcesses != mState.mNumBackgroundProcesses) {
+            mLastNumBackgroundProcesses = mState.mNumBackgroundProcesses;
+            mBackgroundProcessText.setText(getResources().getString(
+                    R.string.service_background_processes, mLastNumBackgroundProcesses));
+        }
+        if (mLastNumForegroundProcesses != mState.mNumForegroundProcesses) {
+            mLastNumForegroundProcesses = mState.mNumForegroundProcesses;
+            mForegroundProcessText.setText(getResources().getString(
+                    R.string.service_foreground_processes, mLastNumForegroundProcesses));
         }
     }
     
@@ -537,9 +757,16 @@ public class RunningServices extends ListActivity
                         si.mRunningService.service);
                 if (pi != null) {
                     try {
-                        pi.send();
+                        this.startActivity(pi, null,
+                                Intent.FLAG_ACTIVITY_NEW_TASK
+                                        | Intent.FLAG_ACTIVITY_CLEAR_WHEN_TASK_RESET,
+                                Intent.FLAG_ACTIVITY_CLEAR_WHEN_TASK_RESET);
                     } catch (PendingIntent.CanceledException e) {
-                        // whatever.
+                        Log.w(TAG, e);
+                    } catch (IllegalArgumentException e) {
+                        Log.w(TAG, e);
+                    } catch (ActivityNotFoundException e) {
+                        Log.w(TAG, e);
                     }
                 }
             } else {
