@@ -27,7 +27,6 @@ import android.app.AlertDialog;
 import android.bluetooth.BluetoothA2dp;
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
-import android.bluetooth.BluetoothIntent;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;

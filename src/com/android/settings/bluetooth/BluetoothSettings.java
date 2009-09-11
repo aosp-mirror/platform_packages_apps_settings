@@ -25,7 +25,7 @@ import java.util.WeakHashMap;
 
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
-import android.bluetooth.BluetoothIntent;
+import android.bluetooth.BluetoothDevicePicker;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
@@ -88,12 +88,12 @@ public class BluetoothSettings extends PreferenceActivity
 
             if (intent.getAction().equals(BluetoothAdapter.ACTION_STATE_CHANGED)) {
                 onBluetoothStateChanged(mLocalManager.getBluetoothState());
-            } else if (intent.getAction().equals(BluetoothIntent.BOND_STATE_CHANGED_ACTION)
+            } else if (intent.getAction().equals(BluetoothDevice.ACTION_BOND_STATE_CHANGED)
                     && mScreenType == SCREEN_TYPE_DEVICEPICKER) {
                 int bondState = intent
-                        .getIntExtra(BluetoothIntent.BOND_STATE, BluetoothDevice.ERROR);
+                        .getIntExtra(BluetoothDevice.EXTRA_BOND_STATE, BluetoothDevice.ERROR);
                 if (bondState == BluetoothDevice.BOND_BONDED) {
-                    BluetoothDevice device = intent.getParcelableExtra(BluetoothIntent.DEVICE);
+                    BluetoothDevice device = intent.getParcelableExtra(BluetoothDevice.EXTRA_DEVICE);
                     sendDevicePickedIntent(device);
                     finish();
                 }
@@ -117,17 +117,17 @@ public class BluetoothSettings extends PreferenceActivity
         // result from the BT list.
         // -DEVICE_PICKER_NEED_AUTH: to show if bonding procedure needed.
 
-        mFilterType = BluetoothDevice.DEVICE_PICKER_FILTER_TYPE_ALL;
+        mFilterType = BluetoothDevicePicker.FILTER_TYPE_ALL;
         Intent intent = getIntent();
         String action = intent.getAction();
 
-        if (action.equals(BluetoothIntent.DEVICE_PICKER_DEVICE_PICKER)) {
+        if (action.equals(BluetoothDevicePicker.ACTION_LAUNCH)) {
             mScreenType = SCREEN_TYPE_DEVICEPICKER;
-            mNeedAuth = intent.getBooleanExtra(BluetoothIntent.DEVICE_PICKER_NEED_AUTH, false);
-            mFilterType = intent.getIntExtra(BluetoothIntent.DEVICE_PICKER_FILTER_TYPE,
-                    BluetoothDevice.DEVICE_PICKER_FILTER_TYPE_ALL);
-            mLaunchPackage = intent.getStringExtra(BluetoothIntent.DEVICE_PICKER_LAUNCH_PACKAGE);
-            mLaunchClass = intent.getStringExtra(BluetoothIntent.DEVICE_PICKER_LAUNCH_CLASS);
+            mNeedAuth = intent.getBooleanExtra(BluetoothDevicePicker.EXTRA_NEED_AUTH, false);
+            mFilterType = intent.getIntExtra(BluetoothDevicePicker.EXTRA_FILTER_TYPE,
+                    BluetoothDevicePicker.FILTER_TYPE_ALL);
+            mLaunchPackage = intent.getStringExtra(BluetoothDevicePicker.EXTRA_LAUNCH_PACKAGE);
+            mLaunchClass = intent.getStringExtra(BluetoothDevicePicker.EXTRA_LAUNCH_CLASS);
 
             setTitle(getString(R.string.device_picker));
             addPreferencesFromResource(R.xml.device_picker);
@@ -175,7 +175,7 @@ public class BluetoothSettings extends PreferenceActivity
 
         IntentFilter intentFilter = new IntentFilter();
         intentFilter.addAction(BluetoothAdapter.ACTION_STATE_CHANGED);
-        intentFilter.addAction(BluetoothIntent.BOND_STATE_CHANGED_ACTION);
+        intentFilter.addAction(BluetoothDevice.ACTION_BOND_STATE_CHANGED);
         registerReceiver(mReceiver, intentFilter);
         mLocalManager.setForegroundActivity(this);
     }
@@ -305,11 +305,11 @@ public class BluetoothSettings extends PreferenceActivity
         }
 
         List<Profile> profiles = cachedDevice.getProfiles();
-        if (mFilterType == BluetoothDevice.DEVICE_PICKER_FILTER_TYPE_TRANSFER){
+        if (mFilterType == BluetoothDevicePicker.FILTER_TYPE_TRANSFER){
             if(profiles.contains(Profile.OPP)){
                 createDevicePreference(cachedDevice);
             }
-        } else if (mFilterType == BluetoothDevice.DEVICE_PICKER_FILTER_TYPE_AUDIO) {
+        } else if (mFilterType == BluetoothDevicePicker.FILTER_TYPE_AUDIO) {
             if((profiles.contains(Profile.A2DP)) || (profiles.contains(Profile.HEADSET))){
                 createDevicePreference(cachedDevice);
             }
@@ -346,11 +346,11 @@ public class BluetoothSettings extends PreferenceActivity
     }
 
     private void sendDevicePickedIntent(BluetoothDevice device) {
-        Intent intent = new Intent(BluetoothIntent.DEVICE_PICKER_DEVICE_SELECTED);
+        Intent intent = new Intent(BluetoothDevicePicker.ACTION_DEVICE_SELECTED);
         if (mLaunchPackage != null && mLaunchClass != null) {
             intent.setClassName(mLaunchPackage, mLaunchClass);
         }
-        intent.putExtra(BluetoothIntent.DEVICE, device);
+        intent.putExtra(BluetoothDevice.EXTRA_DEVICE, device);
         sendBroadcast(intent);
     }
 }

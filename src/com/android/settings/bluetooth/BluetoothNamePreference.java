@@ -20,7 +20,6 @@ import android.app.AlertDialog;
 import android.app.Dialog;
 
 import android.bluetooth.BluetoothAdapter;
-import android.bluetooth.BluetoothIntent;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
@@ -46,7 +45,7 @@ public class BluetoothNamePreference extends EditTextPreference implements TextW
         @Override
         public void onReceive(Context context, Intent intent) {
             String action = intent.getAction();
-            if (action.equals(BluetoothIntent.NAME_CHANGED_ACTION)) {
+            if (action.equals(BluetoothAdapter.ACTION_LOCAL_NAME_CHANGED)) {
                 setSummaryToName();
             } else if (action.equals(BluetoothAdapter.ACTION_STATE_CHANGED) &&
                     (intent.getIntExtra(BluetoothAdapter.EXTRA_STATE, BluetoothAdapter.ERROR) ==
@@ -67,7 +66,7 @@ public class BluetoothNamePreference extends EditTextPreference implements TextW
     public void resume() {
         IntentFilter filter = new IntentFilter();
         filter.addAction(BluetoothAdapter.ACTION_STATE_CHANGED);
-        filter.addAction(BluetoothIntent.NAME_CHANGED_ACTION);
+        filter.addAction(BluetoothAdapter.ACTION_LOCAL_NAME_CHANGED);
         getContext().registerReceiver(mReceiver, filter);
 
         // Make sure the OK button is disabled (if necessary) after rotation
