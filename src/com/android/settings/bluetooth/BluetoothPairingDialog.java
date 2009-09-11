@@ -16,9 +16,7 @@
 
 package com.android.settings.bluetooth;
 
-import android.bluetooth.BluetoothClass;
 import android.bluetooth.BluetoothDevice;
-import android.bluetooth.BluetoothIntent;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -63,11 +61,11 @@ public class BluetoothPairingDialog extends AlertActivity implements DialogInter
     private BroadcastReceiver mReceiver = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
-            if (!BluetoothIntent.PAIRING_CANCEL_ACTION.equals(intent.getAction())) {
+            if (!BluetoothDevice.ACTION_PAIRING_CANCEL.equals(intent.getAction())) {
                 return;
             }
 
-            BluetoothDevice device = intent.getParcelableExtra(BluetoothIntent.DEVICE);
+            BluetoothDevice device = intent.getParcelableExtra(BluetoothDevice.EXTRA_DEVICE);
             if (device == null || device.equals(mDevice)) {
                 onReceivedPairingCanceled();
             }
@@ -79,25 +77,25 @@ public class BluetoothPairingDialog extends AlertActivity implements DialogInter
         super.onCreate(savedInstanceState);
 
         Intent intent = getIntent();
-        if (!intent.getAction().equals(BluetoothIntent.PAIRING_REQUEST_ACTION))
+        if (!intent.getAction().equals(BluetoothDevice.ACTION_PAIRING_REQUEST))
         {
             Log.e(TAG,
                   "Error: this activity may be started only with intent " +
-                  BluetoothIntent.PAIRING_REQUEST_ACTION);
+                  BluetoothDevice.ACTION_PAIRING_REQUEST);
             finish();
         }
 
         mLocalManager = LocalBluetoothManager.getInstance(this);
-        mDevice = intent.getParcelableExtra(BluetoothIntent.DEVICE);
-        mType = intent.getIntExtra(BluetoothIntent.PAIRING_VARIANT, BluetoothClass.ERROR);
+        mDevice = intent.getParcelableExtra(BluetoothDevice.EXTRA_DEVICE);
+        mType = intent.getIntExtra(BluetoothDevice.EXTRA_PAIRING_VARIANT, BluetoothDevice.ERROR);
         if (mType == BluetoothDevice.PAIRING_VARIANT_PIN) {
             createUserEntryDialog();
         } else if (mType == BluetoothDevice.PAIRING_VARIANT_PASSKEY) {
             createUserEntryDialog();
         } else if (mType == BluetoothDevice.PAIRING_VARIANT_CONFIRMATION){
             int passkey =
-                intent.getIntExtra(BluetoothIntent.PASSKEY, BluetoothClass.ERROR);
-            if (passkey == BluetoothClass.ERROR) {
+                intent.getIntExtra(BluetoothDevice.EXTRA_PASSKEY, BluetoothDevice.ERROR);
+            if (passkey == BluetoothDevice.ERROR) {
                 Log.e(TAG, "Invalid ConfirmationPasskey received, not showing any dialog");
                 return;
             }
@@ -111,7 +109,7 @@ public class BluetoothPairingDialog extends AlertActivity implements DialogInter
          * Leave this registered through pause/resume since we still want to
          * finish the activity in the background if pairing is canceled.
          */
-        registerReceiver(mReceiver, new IntentFilter(BluetoothIntent.PAIRING_CANCEL_ACTION));
+        registerReceiver(mReceiver, new IntentFilter(BluetoothDevice.ACTION_PAIRING_CANCEL));
     }
 
     private void createUserEntryDialog() {

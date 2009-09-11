@@ -17,6 +17,7 @@
 package com.android.settings.bluetooth;
 
 import android.bluetooth.BluetoothAdapter;
+import android.bluetooth.BluetoothClass;
 import android.bluetooth.BluetoothDevice;
 import android.util.Log;
 
@@ -74,8 +75,8 @@ public class CachedBluetoothDeviceManager {
         }
     }
 
-    public synchronized void onDeviceAppeared(BluetoothDevice device, short rssi, int btClass,
-            String name) {
+    public synchronized void onDeviceAppeared(BluetoothDevice device, short rssi,
+            BluetoothClass btClass, String name) {
         boolean deviceAdded = false;
 
         CachedBluetoothDevice cachedDevice = findDevice(device);
@@ -104,7 +105,7 @@ public class CachedBluetoothDeviceManager {
     }
 
     private void checkForDeviceRemoval(CachedBluetoothDevice cachedDevice) {
-        if (cachedDevice.getBondState() == BluetoothDevice.BOND_NOT_BONDED &&
+        if (cachedDevice.getBondState() == BluetoothDevice.BOND_NONE &&
                 !cachedDevice.isVisible()) {
             // If device isn't paired, remove it altogether
             mCachedDevices.remove(cachedDevice);
