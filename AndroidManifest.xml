@@ -126,7 +126,7 @@
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
             <intent-filter>
-                <action android:name="android.bluetooth.intent.action.DEVICE_PICKER" />
+                <action android:name="android.bluetooth.devicepicker.action.LAUNCH" />
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
@@ -448,15 +448,15 @@
                   android:excludeFromRecents="true"
                   android:theme="@*android:style/Theme.Dialog.Alert">
             <intent-filter>
-                <action android:name="android.bluetooth.intent.action.PAIRING_REQUEST" />
+                <action android:name="android.bluetooth.device.action.PAIRING_REQUEST" />
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
 
         <receiver android:name=".bluetooth.BluetoothPairingRequest">
             <intent-filter>
-                <action android:name="android.bluetooth.intent.action.PAIRING_REQUEST" />
-                <action android:name="android.bluetooth.intent.action.PAIRING_CANCEL" />
+                <action android:name="android.bluetooth.device.action.PAIRING_REQUEST" />
+                <action android:name="android.bluetooth.device.action.PAIRING_CANCEL" />
             </intent-filter>
         </receiver>
 
@@ -610,7 +610,7 @@
                 <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
                 <action android:name="android.net.wifi.WIFI_STATE_CHANGED" />
                 <action android:name="android.net.conn.BACKGROUND_DATA_SETTING_CHANGED" />
-                <action android:name="android.bluetooth.intent.action.BLUETOOTH_STATE_CHANGED" />
+                <action android:name="android.bluetooth.adapter.action.STATE_CHANGED" />
                 <action android:name="android.intent.action.CLOSE_SYSTEM_DIALOGS" /> <!-- pick up misc changes -->
             </intent-filter>
             <meta-data android:name="android.appwidget.provider" android:resource="@xml/appwidget_info" />
