@@ -45,7 +45,7 @@ class PptpEditor extends VpnProfileEditor {
         final PptpProfile profile = (PptpProfile) getProfile();
         CheckBoxPreference encryption = mEncryption = new CheckBoxPreference(c);
         boolean enabled = profile.isEncryptionEnabled();
-        setSecretTitle(encryption, R.string.vpn_pptp_encryption_title, enabled);
+        setCheckBoxTitle(encryption, R.string.vpn_pptp_encryption_title);
         encryption.setChecked(enabled);
         setEncryptionSummary(encryption, enabled);
         encryption.setOnPreferenceChangeListener(
@@ -54,8 +54,6 @@ class PptpEditor extends VpnProfileEditor {
                             Preference pref, Object newValue) {
                         boolean enabled = (Boolean) newValue;
                         profile.setEncryptionEnabled(enabled);
-                        setSecretTitle(mEncryption,
-                                R.string.vpn_pptp_encryption_title, enabled);
                         setEncryptionSummary(mEncryption, enabled);
                         return true;
                     }
