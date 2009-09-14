@@ -85,7 +85,6 @@ public class CachedBluetoothDeviceManager {
             mCachedDevices.add(cachedDevice);
             deviceAdded = true;
         }
-
         cachedDevice.setRssi(rssi);
         cachedDevice.setBtClass(btClass);
         cachedDevice.setName(name);
@@ -193,17 +192,26 @@ public class CachedBluetoothDeviceManager {
         switch(reason) {
         case BluetoothDevice.UNBOND_REASON_AUTH_FAILED:
             errorMsg = R.string.bluetooth_pairing_pin_error_message;
+            mLocalManager.showError(device, R.string.bluetooth_error_title, errorMsg);
             break;
         case BluetoothDevice.UNBOND_REASON_AUTH_REJECTED:
             errorMsg = R.string.bluetooth_pairing_rejected_error_message;
+            mLocalManager.showError(device, R.string.bluetooth_error_title, errorMsg);
             break;
         case BluetoothDevice.UNBOND_REASON_REMOTE_DEVICE_DOWN:
             errorMsg = R.string.bluetooth_pairing_device_down_error_message;
+            mLocalManager.showError(device, R.string.bluetooth_error_title, errorMsg);
+            break;
+        case BluetoothDevice.UNBOND_REASON_DISCOVERY_IN_PROGRESS:
+        case BluetoothDevice.UNBOND_REASON_AUTH_TIMEOUT:
+        case BluetoothDevice.UNBOND_REASON_REPEATED_ATTEMPTS:
+            errorMsg = R.string.bluetooth_pairing_error_message;
+            mLocalManager.showError(device, R.string.bluetooth_error_title, errorMsg);
             break;
         default:
-            errorMsg = R.string.bluetooth_pairing_error_message;
+            Log.w(TAG, "onBondingError: Not displaying any error message for reason:" + reason);
+            break;
         }
-        mLocalManager.showError(device, R.string.bluetooth_error_title, errorMsg);
     }
 
     public synchronized void onProfileStateChanged(BluetoothDevice device, Profile profile,

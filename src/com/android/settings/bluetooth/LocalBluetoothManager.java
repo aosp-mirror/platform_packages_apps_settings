@@ -254,9 +254,12 @@ public class LocalBluetoothManager {
 
     public void showError(BluetoothDevice device, int titleResId, int messageResId) {
         CachedBluetoothDevice cachedDevice = mCachedDeviceManager.findDevice(device);
-        if (cachedDevice == null) return;
-
-        String name = cachedDevice.getName();
+        String name = null;
+        if (cachedDevice == null) {
+            name = mContext.getString(R.string.bluetooth_remote_device);
+        } else {
+            name = cachedDevice.getName();
+        }
         String message = mContext.getString(messageResId, name);
 
         if (mForegroundActivity != null) {
@@ -269,7 +272,7 @@ public class LocalBluetoothManager {
                 .show();
         } else {
             // Fallback on a toast
-            Toast.makeText(mContext, message, Toast.LENGTH_SHORT).show();
+            Toast.makeText(mContext, message, Toast.LENGTH_LONG).show();
         }
     }
 

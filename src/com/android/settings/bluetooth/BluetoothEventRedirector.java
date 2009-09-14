@@ -27,6 +27,7 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.util.Log;
 
+import com.android.settings.R;
 import com.android.settings.bluetooth.LocalBluetoothProfileManager.Profile;
 
 /**
@@ -78,11 +79,7 @@ public class BluetoothEventRedirector {
                 mManager.getCachedDeviceManager().onBondingStateChanged(device, bondState);
                 if (bondState == BluetoothDevice.BOND_NONE) {
                     int reason = intent.getIntExtra(BluetoothDevice.EXTRA_REASON, BluetoothDevice.ERROR);
-                    if (reason == BluetoothDevice.UNBOND_REASON_AUTH_REJECTED ||
-                            reason == BluetoothDevice.UNBOND_REASON_AUTH_FAILED ||
-                            reason == BluetoothDevice.UNBOND_REASON_REMOTE_DEVICE_DOWN) {
-                        mManager.getCachedDeviceManager().onBondingError(device, reason);
-                    }
+                    mManager.getCachedDeviceManager().onBondingError(device, reason);
                 }
 
             } else if (action.equals(BluetoothHeadset.ACTION_STATE_CHANGED)) {
@@ -110,6 +107,9 @@ public class BluetoothEventRedirector {
             } else if (action.equals(BluetoothDevice.ACTION_CLASS_CHANGED)) {
                 mManager.getCachedDeviceManager().onBtClassChanged(device);
 
+            } else if (action.equals(BluetoothDevice.ACTION_PAIRING_CANCEL)) {
+                int errorMsg = R.string.bluetooth_pairing_error_message;
+                mManager.showError(device, R.string.bluetooth_error_title, errorMsg);
             }
         }
     };
@@ -133,6 +133,7 @@ public class BluetoothEventRedirector {
 
         // Pairing broadcasts
         filter.addAction(BluetoothDevice.ACTION_BOND_STATE_CHANGED);
+        filter.addAction(BluetoothDevice.ACTION_PAIRING_CANCEL);
 
         // Fine-grained state broadcasts
         filter.addAction(BluetoothA2dp.ACTION_SINK_STATE_CHANGED);
