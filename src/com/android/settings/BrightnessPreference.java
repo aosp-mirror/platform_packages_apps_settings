@@ -18,7 +18,7 @@ package com.android.settings;
 
 import android.content.Context;
 import android.os.RemoteException;
-import android.os.IHardwareService;
+import android.os.IPowerManager;
 import android.os.ServiceManager;
 import android.preference.SeekBarPreference;
 import android.provider.Settings;
@@ -130,10 +130,10 @@ public class BrightnessPreference extends SeekBarPreference implements
     
     private void setBrightness(int brightness) {
         try {
-            IHardwareService hardware = IHardwareService.Stub.asInterface(
-                    ServiceManager.getService("hardware"));
-            if (hardware != null) {
-                hardware.setBacklights(brightness);
+            IPowerManager power = IPowerManager.Stub.asInterface(
+                    ServiceManager.getService("power"));
+            if (power != null) {
+                power.setBacklightBrightness(brightness);
             }
         } catch (RemoteException doe) {
             
@@ -147,10 +147,10 @@ public class BrightnessPreference extends SeekBarPreference implements
             mSeekBar.setVisibility(View.VISIBLE);
         }
         try {
-            IHardwareService hardware = IHardwareService.Stub.asInterface(
-                    ServiceManager.getService("hardware"));
-            if (hardware != null) {
-                hardware.setAutoBrightness(automatic != 0);
+            IPowerManager power = IPowerManager.Stub.asInterface(
+                    ServiceManager.getService("power"));
+            if (power != null) {
+                power.setAutoBrightness(automatic != 0);
             }
         } catch (RemoteException doe) {
         }
