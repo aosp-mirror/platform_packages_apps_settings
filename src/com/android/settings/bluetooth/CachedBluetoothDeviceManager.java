@@ -140,7 +140,12 @@ public class CachedBluetoothDeviceManager {
      */
     public String getName(BluetoothDevice device) {
         CachedBluetoothDevice cachedDevice = findDevice(device);
-        return cachedDevice != null ? cachedDevice.getName() : device.getAddress();
+        if (cachedDevice != null) return cachedDevice.getName();
+
+        String name = device.getName();
+        if (name != null) return name;
+
+        return device.getAddress();
     }
 
     private void dispatchDeviceAdded(CachedBluetoothDevice cachedDevice) {
