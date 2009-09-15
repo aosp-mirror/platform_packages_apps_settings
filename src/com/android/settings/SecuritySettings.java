@@ -810,8 +810,7 @@ public class SecuritySettings extends PreferenceActivity implements
         }
 
         private void installCertFromSdCard() {
-            // TODO: uncomment this when the feature is ready
-            //startActivity(new Intent(CertTool.ACTION_INSTALL_CERT_FROM_SDCARD));
+            startActivity(new Intent(CertTool.ACTION_INSTALL_CERT_FROM_SDCARD));
         }
 
         private TextView showError(int messageId) {
