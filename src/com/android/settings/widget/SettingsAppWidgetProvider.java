@@ -30,7 +30,7 @@ import android.location.LocationManager;
 import android.net.ConnectivityManager;
 import android.net.Uri;
 import android.net.wifi.WifiManager;
-import android.os.IHardwareService;
+import android.os.IPowerManager;
 import android.os.RemoteException;
 import android.os.ServiceManager;
 import android.provider.Settings;
@@ -318,9 +318,9 @@ public class SettingsAppWidgetProvider extends AppWidgetProvider {
      */
     private static boolean getBrightness(Context context) {
         try {
-            IHardwareService hardware = IHardwareService.Stub.asInterface(
-                    ServiceManager.getService("hardware"));
-            if (hardware != null) {
+            IPowerManager power = IPowerManager.Stub.asInterface(
+                    ServiceManager.getService("power"));
+            if (power != null) {
                 int brightness = Settings.System.getInt(context.getContentResolver(),
                         Settings.System.SCREEN_BRIGHTNESS);
                 return brightness > 100;
@@ -338,9 +338,9 @@ public class SettingsAppWidgetProvider extends AppWidgetProvider {
      */
     private void toggleBrightness(Context context) {
         try {
-            IHardwareService hardware = IHardwareService.Stub.asInterface(
-                    ServiceManager.getService("hardware"));
-            if (hardware != null) {
+            IPowerManager power = IPowerManager.Stub.asInterface(
+                    ServiceManager.getService("power"));
+            if (power != null) {
                 ContentResolver cr = context.getContentResolver();
                 int brightness = Settings.System.getInt(cr,
                         Settings.System.SCREEN_BRIGHTNESS);
@@ -353,7 +353,7 @@ public class SettingsAppWidgetProvider extends AppWidgetProvider {
                 } else {
                     brightness = MINIMUM_BACKLIGHT;
                 }
-                hardware.setBacklights(brightness);
+                power.setBacklightBrightness(brightness);
                 Settings.System.putInt(cr, Settings.System.SCREEN_BRIGHTNESS, brightness);
                 brightness = Settings.System.getInt(cr,
                         Settings.System.SCREEN_BRIGHTNESS);
