@@ -89,7 +89,7 @@
 
         <com.android.settings.IconPreferenceScreen 
             settings:icon="@drawable/ic_settings_storage"
-            android:title="@string/storage_settings_title">
+            android:title="@string/storage_settings">
             <intent android:action="android.intent.action.MAIN"
                 android:targetPackage="com.android.settings"
                 android:targetClass="com.android.settings.deviceinfo.Memory" />
@@ -125,7 +125,7 @@
 
         <com.android.settings.IconPreferenceScreen
             settings:icon="@drawable/ic_settings_accessibility"
-            android:title="@string/accessibility_settings_title">
+            android:title="@string/accessibility_settings">
             <intent
                 android:action="android.intent.action.MAIN"
                 android:targetPackage="com.android.settings"

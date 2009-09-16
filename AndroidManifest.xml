@@ -66,7 +66,7 @@
         <!-- Wireless Controls -->
 
         <activity android:name="WirelessSettings" 
-                android:label="@string/radio_controls_title"
+                android:label="@string/wireless_networks_settings_title"
                 >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -182,7 +182,8 @@
             </intent-filter>
         </activity>
 
-        <activity android:name="LanguageSettings" android:label="@string/language_picker_title"
+        <activity android:name="LanguageSettings"
+                android:label="@string/language_keyboard_settings_title"
                 android:clearTaskOnLaunch="true"
                 >
             <intent-filter>
@@ -215,7 +216,8 @@
             </intent-filter>
         </activity>
 
-        <activity android:name="SoundAndDisplaySettings" android:label="@string/sound_and_display_settings"
+        <activity android:name="SoundAndDisplaySettings"
+                android:label="@string/sound_and_display_settings_title"
                 android:clearTaskOnLaunch="true"
                 >
             <intent-filter>
@@ -292,7 +294,8 @@
             </intent-filter>
         </activity>
         
-        <activity android:name="SecuritySettings" android:label="@string/security_settings_title"
+        <activity android:name="SecuritySettings"
+                android:label="@string/location_security_settings_title"
                 android:configChanges="orientation|keyboardHidden"
                 android:clearTaskOnLaunch="true"
                 >
@@ -316,8 +319,8 @@
             </intent-filter>
         </activity>
 
-        <activity android:name="AccessibilitySettings" android:label="@string/accessibility_settings_title"
-                android:theme="@android:style/Theme.NoTitleBar">
+        <activity android:name="AccessibilitySettings"
+                android:label="@string/accessibility_settings_title">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <action android:name="android.settings.ACCESSIBILITY_SETTINGS" />
@@ -372,7 +375,8 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".deviceinfo.Memory" android:label="@string/storage_settings_title">
+        <activity android:name=".deviceinfo.Memory"
+                android:label="@string/storage_settings_title">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <action android:name="android.settings.INTERNAL_STORAGE_SETTINGS" />
