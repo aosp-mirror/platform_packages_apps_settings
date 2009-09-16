@@ -256,7 +256,8 @@ public class LocalBluetoothManager {
         CachedBluetoothDevice cachedDevice = mCachedDeviceManager.findDevice(device);
         String name = null;
         if (cachedDevice == null) {
-            name = device.getName();
+            if (device != null) name = device.getName();
+
             if (name == null) {
                 name = mContext.getString(R.string.bluetooth_remote_device);
             }
