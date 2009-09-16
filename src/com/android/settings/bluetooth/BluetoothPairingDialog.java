@@ -51,23 +51,25 @@ public class BluetoothPairingDialog extends AlertActivity implements DialogInter
     private LocalBluetoothManager mLocalManager;
     private BluetoothDevice mDevice;
     private int mType;
-    private String mConfirmationPasskey;
+    private String mPasskey;
     private EditText mPairingView;
     private Button mOkButton;
-
-    private static final String INSTANCE_KEY_PAIRING_CANCELED = "received_pairing_canceled";
-    private boolean mReceivedPairingCanceled;
 
     private BroadcastReceiver mReceiver = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
-            if (!BluetoothDevice.ACTION_PAIRING_CANCEL.equals(intent.getAction())) {
-                return;
-            }
-
-            BluetoothDevice device = intent.getParcelableExtra(BluetoothDevice.EXTRA_DEVICE);
-            if (device == null || device.equals(mDevice)) {
-                onReceivedPairingCanceled();
+            if (BluetoothDevice.ACTION_BOND_STATE_CHANGED.equals(intent.getAction())) {
+                int bondState = intent.getIntExtra(BluetoothDevice.EXTRA_BOND_STATE,
+                                                   BluetoothDevice.ERROR);
+                if (bondState == BluetoothDevice.BOND_BONDED ||
+                        bondState == BluetoothDevice.BOND_NONE) {
+                    dismissDialog();
+                }
+            } else if(BluetoothDevice.ACTION_PAIRING_CANCEL.equals(intent.getAction())) {
+                BluetoothDevice device = intent.getParcelableExtra(BluetoothDevice.EXTRA_DEVICE);
+                if (device == null || device.equals(mDevice)) {
+                    dismissDialog();
+                }
             }
         }
     };
@@ -92,15 +94,26 @@ public class BluetoothPairingDialog extends AlertActivity implements DialogInter
             createUserEntryDialog();
         } else if (mType == BluetoothDevice.PAIRING_VARIANT_PASSKEY) {
             createUserEntryDialog();
-        } else if (mType == BluetoothDevice.PAIRING_VARIANT_CONFIRMATION){
+        } else if (mType == BluetoothDevice.PAIRING_VARIANT_PASSKEY_CONFIRMATION){
             int passkey =
                 intent.getIntExtra(BluetoothDevice.EXTRA_PASSKEY, BluetoothDevice.ERROR);
             if (passkey == BluetoothDevice.ERROR) {
                 Log.e(TAG, "Invalid ConfirmationPasskey received, not showing any dialog");
                 return;
             }
-            mConfirmationPasskey = String.format("%06d", passkey);
+            mPasskey = String.format("%06d", passkey);
             createConfirmationDialog();
+        } else if (mType == BluetoothDevice.PAIRING_VARIANT_CONSENT) {
+            createConsentDialog();
+        } else if (mType == BluetoothDevice.PAIRING_VARIANT_DISPLAY_PASSKEY) {
+            int passkey =
+                intent.getIntExtra(BluetoothDevice.EXTRA_PASSKEY, BluetoothDevice.ERROR);
+            if (passkey == BluetoothDevice.ERROR) {
+                Log.e(TAG, "Invalid ConfirmationPasskey received, not showing any dialog");
+                return;
+            }
+            mPasskey = String.format("%06d", passkey);
+            createDisplayPasskeyDialog();
         } else {
             Log.e(TAG, "Incorrect pairing type received, not showing any dialog");
         }
@@ -110,12 +123,13 @@ public class BluetoothPairingDialog extends AlertActivity implements DialogInter
          * finish the activity in the background if pairing is canceled.
          */
         registerReceiver(mReceiver, new IntentFilter(BluetoothDevice.ACTION_PAIRING_CANCEL));
+        registerReceiver(mReceiver, new IntentFilter(BluetoothDevice.ACTION_BOND_STATE_CHANGED));
     }
 
     private void createUserEntryDialog() {
         final AlertController.AlertParams p = mAlertParams;
         p.mIconId = android.R.drawable.ic_dialog_info;
-        p.mTitle = getString(R.string.bluetooth_pin_entry);
+        p.mTitle = getString(R.string.bluetooth_pairing_request);
         p.mView = createView();
         p.mPositiveButtonText = getString(android.R.string.ok);
         p.mPositiveButtonListener = this;
@@ -143,13 +157,22 @@ public class BluetoothPairingDialog extends AlertActivity implements DialogInter
         } else if (mType == BluetoothDevice.PAIRING_VARIANT_PASSKEY){
             messageView.setText(getString(R.string.bluetooth_enter_passkey_msg, name));
             // Maximum of 6 digits for passkey
-            mPairingView.setInputType(InputType.TYPE_NUMBER_FLAG_SIGNED);
+            mPairingView.setInputType(InputType.TYPE_CLASS_NUMBER |
+                    InputType.TYPE_NUMBER_FLAG_SIGNED);
             mPairingView.setFilters(new InputFilter[] {
                     new LengthFilter(BLUETOOTH_PASSKEY_MAX_LENGTH)});
-        } else {
+        } else if (mType == BluetoothDevice.PAIRING_VARIANT_PASSKEY_CONFIRMATION) {
             mPairingView.setVisibility(View.GONE);
             messageView.setText(getString(R.string.bluetooth_confirm_passkey_msg, name,
-                    mConfirmationPasskey));
+                    mPasskey));
+        } else if (mType == BluetoothDevice.PAIRING_VARIANT_CONSENT) {
+            mPairingView.setVisibility(View.GONE);
+            messageView.setText(getString(R.string.bluetooth_incoming_pairing_msg, name));
+        } else if (mType == BluetoothDevice.PAIRING_VARIANT_DISPLAY_PASSKEY) {
+            mPairingView.setVisibility(View.GONE);
+            messageView.setText(getString(R.string.bluetooth_display_passkey_msg, name, mPasskey));
+        } else {
+            Log.e(TAG, "Incorrect pairing type received, not creating view");
         }
         return view;
     }
@@ -157,7 +180,7 @@ public class BluetoothPairingDialog extends AlertActivity implements DialogInter
     private void createConfirmationDialog() {
         final AlertController.AlertParams p = mAlertParams;
         p.mIconId = android.R.drawable.ic_dialog_info;
-        p.mTitle = getString(R.string.bluetooth_pin_entry);
+        p.mTitle = getString(R.string.bluetooth_pairing_request);
         p.mView = createView();
         p.mPositiveButtonText = getString(R.string.bluetooth_pairing_accept);
         p.mPositiveButtonListener = this;
@@ -166,27 +189,35 @@ public class BluetoothPairingDialog extends AlertActivity implements DialogInter
         setupAlert();
     }
 
-    @Override
-    protected void onRestoreInstanceState(Bundle savedInstanceState) {
-        super.onRestoreInstanceState(savedInstanceState);
-
-        mReceivedPairingCanceled = savedInstanceState.getBoolean(INSTANCE_KEY_PAIRING_CANCELED);
-        if (mReceivedPairingCanceled) {
-            onReceivedPairingCanceled();
-        }
+    private void createConsentDialog() {
+        final AlertController.AlertParams p = mAlertParams;
+        p.mIconId = android.R.drawable.ic_dialog_info;
+        p.mTitle = getString(R.string.bluetooth_pairing_request);
+        p.mView = createView();
+        p.mPositiveButtonText = getString(R.string.bluetooth_pairing_accept);
+        p.mPositiveButtonListener = this;
+        p.mNegativeButtonText = getString(R.string.bluetooth_pairing_decline);
+        p.mNegativeButtonListener = this;
+        setupAlert();
     }
 
-    @Override
-    protected void onSaveInstanceState(Bundle outState) {
-        super.onSaveInstanceState(outState);
+    private void createDisplayPasskeyDialog() {
+        final AlertController.AlertParams p = mAlertParams;
+        p.mIconId = android.R.drawable.ic_dialog_info;
+        p.mTitle = getString(R.string.bluetooth_pairing_request);
+        p.mView = createView();
+        p.mPositiveButtonText = getString(android.R.string.ok);
+        p.mPositiveButtonListener = this;
+        setupAlert();
 
-        outState.putBoolean(INSTANCE_KEY_PAIRING_CANCELED, mReceivedPairingCanceled);
+        // Since its only a notification, send an OK to the framework,
+        // indicating that the dialog has been displayed.
+        mDevice.setPairingConfirmation(true);
     }
 
     @Override
     protected void onDestroy() {
         super.onDestroy();
-
         unregisterReceiver(mReceiver);
     }
 
@@ -196,21 +227,8 @@ public class BluetoothPairingDialog extends AlertActivity implements DialogInter
         }
     }
 
-    private void onReceivedPairingCanceled() {
-        mReceivedPairingCanceled = true;
-
-        TextView messageView = (TextView) findViewById(R.id.message);
-        messageView.setText(getString(R.string.bluetooth_pairing_error_message,
-                mDevice.getName()));
-
-        mPairingView.setVisibility(View.GONE);
-        mPairingView.clearFocus();
-        mPairingView.removeTextChangedListener(this);
-
-        mOkButton = mAlert.getButton(DialogInterface.BUTTON_POSITIVE);
-        mOkButton.setEnabled(true);
-        mOkButton.setText(android.R.string.ok);
-        mAlert.getButton(DialogInterface.BUTTON_NEGATIVE).setVisibility(View.GONE);
+    private void dismissDialog() {
+        this.dismiss();
     }
 
     private void onPair(String value) {
@@ -223,8 +241,14 @@ public class BluetoothPairingDialog extends AlertActivity implements DialogInter
         } else if (mType == BluetoothDevice.PAIRING_VARIANT_PASSKEY) {
             int passkey = Integer.parseInt(value);
             mDevice.setPasskey(passkey);
-        } else {
+        } else if (mType == BluetoothDevice.PAIRING_VARIANT_PASSKEY_CONFIRMATION) {
             mDevice.setPairingConfirmation(true);
+        } else if (mType ==  BluetoothDevice.PAIRING_VARIANT_CONSENT) {
+            mDevice.setPairingConfirmation(true);
+        } else if (mType == BluetoothDevice.PAIRING_VARIANT_DISPLAY_PASSKEY) {
+            // Do Nothing.
+        } else {
+            Log.e(TAG, "Incorrect pairing type received");
         }
     }
 

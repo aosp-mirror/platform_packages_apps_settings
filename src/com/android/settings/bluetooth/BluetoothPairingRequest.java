@@ -54,7 +54,8 @@ public class BluetoothPairingRequest extends BroadcastReceiver {
             pairingIntent.setClass(context, BluetoothPairingDialog.class);
             pairingIntent.putExtra(BluetoothDevice.EXTRA_DEVICE, device);
             pairingIntent.putExtra(BluetoothDevice.EXTRA_PAIRING_VARIANT, type);
-            if (type == BluetoothDevice.PAIRING_VARIANT_CONFIRMATION) {
+            if (type == BluetoothDevice.PAIRING_VARIANT_PASSKEY_CONFIRMATION ||
+                    type == BluetoothDevice.PAIRING_VARIANT_DISPLAY_PASSKEY) {
                 int passkey = intent.getIntExtra(BluetoothDevice.EXTRA_PASSKEY, BluetoothDevice.ERROR);
                 pairingIntent.putExtra(BluetoothDevice.EXTRA_PASSKEY, passkey);
             }
