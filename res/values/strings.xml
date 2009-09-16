@@ -644,13 +644,10 @@
     <!-- Value for the wifi security -->
     <string name="wifi_security_wep">WEP</string>
     <!-- Value for the wifi security -->
-    <string name="wifi_security_wpa">WPA</string>
+    <string name="wifi_security_psk">WPA/WPA2 PSK</string>
     <!-- Value for the wifi security -->
-    <string name="wifi_security_wpa2">WPA2</string>
+    <string name="wifi_security_eap">Enterprise(802.1x)</string>
     <!-- Value for the wifi security -->
-    <string name="wifi_security_wpa_eap">WPA-EAP</string>
-    <!-- Value for the wifi security -->
-    <string name="wifi_security_ieee8021x">IEEE8021X</string>
 
     <!-- Value for the wifi security when it is unknown -->
     <string name="wifi_security_unknown">Unknown</string>
@@ -659,14 +656,10 @@
     <!-- Verbose security type of a wifi network.  Capitalized by app. -->
     <string name="wifi_security_verbose_wep">secured with WEP</string>
     <!-- Verbose security type of a wifi network.  Capitalized by app. -->
-    <string name="wifi_security_verbose_wpa">secured with WPA</string>
+    <string name="wifi_security_verbose_psk">secured with WPA/WPA2 PSK</string>
     <!-- Verbose security type of a wifi network.  Capitalized by app. -->
-    <string name="wifi_security_verbose_wpa2">secured with WPA2</string>
-    <!-- Verbose security type of a wifi network.  Capitalized by app. -->
-    <string name="wifi_security_verbose_wpa_eap">secured with WPA-EAP</string>
-    <!-- Verbose security type of a wifi network.  Capitalized by app. -->
-    <string name="wifi_security_verbose_ieee8021x">secured with IEEE 802.1x</string>
-    <!-- Wi-Fi IP addrress label -->    
+    <string name="wifi_security_verbose_eap">secured with 802.1x EAP</string>
+    <!-- Wi-Fi IP addrress label -->
     <string name="ip_address">IP address</string>
     <!-- Label for the signal strength -->
     <string name="signal">Signal strength</string>
@@ -702,8 +695,6 @@
     <string name="please_select_client_certificate">Client certificate</string>
     <!-- Caption for the ca certificate -->
     <string name="please_select_ca_certificate">CA certificate</string>
-    <!-- Caption for the Private Key -->
-    <string name="please_type_private_key_passwd">Private key password</string>
     <!-- Caption for the wireless password -->
     <string name="please_type_passphrase">Wireless password</string>
     <!--Wi-Fi settings screen, connect to network dialog box, field label and hint text -->

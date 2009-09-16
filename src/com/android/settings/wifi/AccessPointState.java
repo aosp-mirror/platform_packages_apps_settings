@@ -38,14 +38,10 @@ public final class AccessPointState implements Comparable<AccessPointState>, Par
     private static final String TAG = "AccessPointState";
     
     // Constants used for different security types
-    public static final String WPA2 = "WPA2";
-    public static final String WPA = "WPA";
+    public static final String PSK = "PSK";
     public static final String WEP = "WEP";
+    public static final String EAP = "EAP";
     public static final String OPEN = "Open";
-
-    /* For EAP Enterprise fields */
-    public static final String WPA_EAP = "-EAP";
-    public static final String IEEE8021X = "IEEE8021X";
 
     public static final String[] EAP_METHOD = { "PEAP", "TLS", "TTLS" };
 
@@ -103,11 +99,10 @@ public final class AccessPointState implements Comparable<AccessPointState>, Par
     /* Enterprise Fields */
     public static final int IDENTITY = 0;
     public static final int ANONYMOUS_IDENTITY = 1;
-    public static final int PRIVATE_KEY_PASSWD = 2;
-    public static final int CLIENT_CERT = 3;
-    public static final int CA_CERT = 4;
-    public static final int PRIVATE_KEY = 5;
-    public static final int MAX_ENTRPRISE_FIELD = 6;
+    public static final int CLIENT_CERT = 2;
+    public static final int CA_CERT = 3;
+    public static final int PRIVATE_KEY = 4;
+    public static final int MAX_ENTRPRISE_FIELD = 5;
     private String mEnterpriseFields[] = new String[MAX_ENTRPRISE_FIELD];
     private String mEap;
     private String mPhase2;
@@ -278,8 +273,7 @@ public final class AccessPointState implements Comparable<AccessPointState>, Par
     }
 
     public boolean isEnterprise() {
-        return (WPA_EAP.equals(security) ||
-                AccessPointState.IEEE8021X.equals(security));
+        return (AccessPointState.EAP.equals(security));
     }
 
     public void setSecurity(String security) {
@@ -296,10 +290,8 @@ public final class AccessPointState implements Comparable<AccessPointState>, Par
     public String getHumanReadableSecurity() {
         if (security.equals(OPEN)) return mContext.getString(R.string.wifi_security_open);
         else if (security.equals(WEP)) return mContext.getString(R.string.wifi_security_wep);
-        else if (security.equals(WPA)) return mContext.getString(R.string.wifi_security_wpa);
-        else if (security.equals(WPA2)) return mContext.getString(R.string.wifi_security_wpa2);
-        else if (security.equals(WPA_EAP)) return mContext.getString(R.string.wifi_security_wpa_eap);
-        else if (security.equals(IEEE8021X)) return mContext.getString(R.string.wifi_security_ieee8021x);
+        else if (security.equals(PSK)) return mContext.getString(R.string.wifi_security_psk);
+        else if (security.equals(EAP)) return mContext.getString(R.string.wifi_security_eap);
 
         return mContext.getString(R.string.wifi_security_unknown);
     }
@@ -325,7 +317,7 @@ public final class AccessPointState implements Comparable<AccessPointState>, Par
      */
     public static String getScanResultSecurity(ScanResult scanResult) {
         final String cap = scanResult.capabilities;
-        final String[] securityModes = { WEP, WPA, WPA2, WPA_EAP, IEEE8021X };
+        final String[] securityModes = { WEP, PSK, EAP };
         for (int i = securityModes.length - 1; i >= 0; i--) {
             if (cap.contains(securityModes[i])) {
                 return securityModes[i];
@@ -427,31 +419,14 @@ public final class AccessPointState implements Comparable<AccessPointState>, Par
      * @return The security of a given {@link WifiConfiguration}.
      */
     public static String getWifiConfigurationSecurity(WifiConfiguration wifiConfig) {
-
-        if (wifiConfig.allowedKeyManagement.get(KeyMgmt.NONE)) {
-            // If we never set group ciphers, wpa_supplicant puts all of them.
-            // For open, we don't set group ciphers.
-            // For WEP, we specifically only set WEP40 and WEP104, so CCMP
-            // and TKIP should not be there.
-            if (!wifiConfig.allowedGroupCiphers.get(GroupCipher.CCMP)
-                    && (wifiConfig.allowedGroupCiphers.get(GroupCipher.WEP40)
-                            || wifiConfig.allowedGroupCiphers.get(GroupCipher.WEP104))) {
-                return WEP;
-            } else {
-                return OPEN;
-            }
-        } else if (wifiConfig.allowedKeyManagement.get(KeyMgmt.WPA_EAP)) {
-            return WPA_EAP;
-        } else if (wifiConfig.allowedKeyManagement.get(KeyMgmt.IEEE8021X)) {
-            return IEEE8021X;
-        } else if (wifiConfig.allowedProtocols.get(Protocol.RSN)) {
-            return WPA2;
-        } else if (wifiConfig.allowedProtocols.get(Protocol.WPA)) {
-            return WPA;
-        } else {
-            Log.w(TAG, "Unknown security type from WifiConfiguration, falling back on open.");
-            return OPEN;
+        if (!TextUtils.isEmpty(wifiConfig.eap.value())) {
+            return EAP;
+        } else if (!TextUtils.isEmpty(wifiConfig.preSharedKey)) {
+            return PSK;
+        } else if (!TextUtils.isEmpty(wifiConfig.wepKeys[0])) {
+            return WEP;
         }
+        return OPEN;
     }
     
     public void updateFromWifiInfo(WifiInfo wifiInfo, NetworkInfo.DetailedState state) {
@@ -504,51 +479,43 @@ public final class AccessPointState implements Comparable<AccessPointState>, Par
         config.priority = priority;
         config.hiddenSSID = hiddenSsid;
         config.SSID = convertToQuotedString(ssid);
-/*
-        config.eap = mEap;
+        config.eap.setValue(mEap);
 
         if (!TextUtils.isEmpty(mPhase2)) {
-            config.phase2 = convertToQuotedString("auth=" + mPhase2);
+            config.phase2.setValue(convertToQuotedString("auth=" + mPhase2));
         } else {
-            config.phase2 = null;
+            config.phase2.setValue(null);
         }
         if (!TextUtils.isEmpty(mEnterpriseFields[IDENTITY])) {
-            config.identity =
-                    convertToQuotedString(mEnterpriseFields[IDENTITY]);
+            config.identity.setValue(
+                    convertToQuotedString(mEnterpriseFields[IDENTITY]));
         } else {
-            config.identity = null;
+            config.identity.setValue(null);
         }
         if (!TextUtils.isEmpty(mEnterpriseFields[ANONYMOUS_IDENTITY])) {
-            config.anonymousIdentity = convertToQuotedString(
-                    mEnterpriseFields[ANONYMOUS_IDENTITY]);
+            config.anonymous_identity.setValue(convertToQuotedString(
+                    mEnterpriseFields[ANONYMOUS_IDENTITY]));
         } else {
-            config.anonymousIdentity = null;
+            config.anonymous_identity.setValue(null);
         }
         if (!TextUtils.isEmpty(mEnterpriseFields[CLIENT_CERT])) {
-            config.clientCert = convertToQuotedString(
-                    mEnterpriseFields[CLIENT_CERT]);
+            config.client_cert.setValue(convertToQuotedString(
+                    mEnterpriseFields[CLIENT_CERT]));
         } else {
-            config.clientCert = null;
+            config.client_cert.setValue(null);
         }
         if (!TextUtils.isEmpty(mEnterpriseFields[CA_CERT])) {
-            config.caCert = convertToQuotedString(
-                    mEnterpriseFields[CA_CERT]);
+            config.ca_cert.setValue(convertToQuotedString(
+                    mEnterpriseFields[CA_CERT]));
         } else {
-            config.caCert = null;
+            config.ca_cert.setValue(null);
         }
         if (!TextUtils.isEmpty(mEnterpriseFields[PRIVATE_KEY])) {
-            config.privateKey = convertToQuotedString(
-                    mEnterpriseFields[PRIVATE_KEY]);
+            config.private_key.setValue(convertToQuotedString(
+                    mEnterpriseFields[PRIVATE_KEY]));
         } else {
-            config.privateKey = null;
+            config.private_key.setValue(null);
         }
-        if (!TextUtils.isEmpty(mEnterpriseFields[PRIVATE_KEY_PASSWD])) {
-            config.privateKeyPasswd = convertToQuotedString(
-                    mEnterpriseFields[PRIVATE_KEY_PASSWD]);
-        } else {
-            config.privateKeyPasswd = null;
-        }
-*/
         setupSecurity(config);
     }
     
@@ -565,7 +532,6 @@ public final class AccessPointState implements Comparable<AccessPointState>, Par
         }
         
         if (security.equals(WEP)) {
-            
             // If password is empty, it should be left untouched
             if (!TextUtils.isEmpty(mPassword)) {
                 if (mWepPasswordType == WEP_PASSWORD_AUTO) {
@@ -580,28 +546,9 @@ public final class AccessPointState implements Comparable<AccessPointState>, Par
                             : mPassword;
                 }
             }
-            
-            config.wepTxKeyIndex = 0;
-            
-            config.allowedAuthAlgorithms.set(AuthAlgorithm.OPEN);
-            config.allowedAuthAlgorithms.set(AuthAlgorithm.SHARED);
-
             config.allowedKeyManagement.set(KeyMgmt.NONE);
-            
-            config.allowedGroupCiphers.set(GroupCipher.WEP40);
-            config.allowedGroupCiphers.set(GroupCipher.WEP104);
-            
-        } else if (security.equals(WPA) || security.equals(WPA2)){
-            config.allowedGroupCiphers.set(GroupCipher.TKIP);
-            config.allowedGroupCiphers.set(GroupCipher.CCMP);
-            
-            config.allowedKeyManagement.set(KeyMgmt.WPA_PSK);
-            
-            config.allowedPairwiseCiphers.set(PairwiseCipher.CCMP);
-            config.allowedPairwiseCiphers.set(PairwiseCipher.TKIP);
-
-            config.allowedProtocols.set(security.equals(WPA2) ? Protocol.RSN : Protocol.WPA);
-            
+            config.wepTxKeyIndex = 0;
+        } else if (security.equals(PSK)){
             // If password is empty, it should be left untouched
             if (!TextUtils.isEmpty(mPassword)) {
                 if (mPassword.length() == 64 && isHex(mPassword)) {
@@ -612,20 +559,14 @@ public final class AccessPointState implements Comparable<AccessPointState>, Par
                     config.preSharedKey = convertToQuotedString(mPassword);
                 }
             }
-            
+        } else if (security.equals(EAP)) {
+            config.allowedKeyManagement.set(KeyMgmt.WPA_EAP);
+            config.allowedKeyManagement.set(KeyMgmt.IEEE8021X);
+            if (!TextUtils.isEmpty(mPassword)) {
+                config.password.setValue(convertToQuotedString(mPassword));
+            }
         } else if (security.equals(OPEN)) {
             config.allowedKeyManagement.set(KeyMgmt.NONE);
-        } else if (security.equals(WPA_EAP) || security.equals(IEEE8021X)) {
-            config.allowedGroupCiphers.set(GroupCipher.TKIP);
-            config.allowedGroupCiphers.set(GroupCipher.CCMP);
-            if (security.equals(WPA_EAP)) {
-                config.allowedKeyManagement.set(KeyMgmt.WPA_EAP);
-            } else {
-                config.allowedKeyManagement.set(KeyMgmt.IEEE8021X);
-            }
-            if (!TextUtils.isEmpty(mPassword)) {
-//                config.password = convertToQuotedString(mPassword);
-            }
         }
     }
     
@@ -827,16 +768,10 @@ public final class AccessPointState implements Comparable<AccessPointState>, Par
     private String getVerboseSecurity() {
         if (WEP.equals(security)) {
             return mContext.getString(R.string.wifi_security_verbose_wep);
-        } else if (WPA.equals(security)) {
-            return mContext.getString(R.string.wifi_security_verbose_wpa);
-        } else if (WPA2.equals(security)) {
-            return mContext.getString(R.string.wifi_security_verbose_wpa2);
-        } else if (OPEN.equals(security)) {
-            return mContext.getString(R.string.wifi_security_verbose_open);
-        } else if (WPA_EAP.equals(security)) {
-            return mContext.getString(R.string.wifi_security_verbose_wpa_eap);
-        } else if (IEEE8021X.equals(security)) {
-            return mContext.getString(R.string.wifi_security_verbose_ieee8021x);
+        } else if (PSK.equals(security)) {
+            return mContext.getString(R.string.wifi_security_verbose_psk);
+        } else if (EAP.equals(security)) {
+            return mContext.getString(R.string.wifi_security_verbose_eap);
         } else {
             return null;
         }
