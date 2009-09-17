@@ -29,6 +29,7 @@ import android.view.ContextMenu;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.WindowManager;
 import android.view.ContextMenu.ContextMenuInfo;
 import android.widget.AlphabetIndexer;
 import android.widget.EditText;
@@ -195,7 +196,7 @@ public class UserDictionarySettings extends ListActivity {
         return mCursor.getString(
                 mCursor.getColumnIndexOrThrow(UserDictionary.Words.WORD));
     }
-    
+
     @Override
     protected Dialog onCreateDialog(int id) {
         View content = getLayoutInflater().inflate(R.layout.dialog_edittext, null);
@@ -204,7 +205,7 @@ public class UserDictionarySettings extends ListActivity {
         editText.setInputType(InputType.TYPE_CLASS_TEXT 
                 | InputType.TYPE_TEXT_FLAG_AUTO_COMPLETE);
         
-        return new AlertDialog.Builder(this)
+        AlertDialog dialog =  new AlertDialog.Builder(this)
                 .setTitle(mDialogEditingWord != null 
                         ? R.string.user_dict_settings_edit_dialog_title 
                         : R.string.user_dict_settings_add_dialog_title)
@@ -219,7 +220,11 @@ public class UserDictionarySettings extends ListActivity {
                         if (mAutoReturn) finish();                        
                     }})
                 .create();
+        dialog.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE |
+                WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE);
+        return dialog;
     }
+
     @Override
     protected void onPrepareDialog(int id, Dialog d) {
         AlertDialog dialog = (AlertDialog) d;
