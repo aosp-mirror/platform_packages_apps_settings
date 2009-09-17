@@ -90,6 +90,8 @@ public class RunningServices extends ListActivity
     
     int mLastNumBackgroundProcesses = -1;
     int mLastNumForegroundProcesses = -1;
+    long mLastBackgroundProcessMemory = -1;
+    long mLastForegroundProcessMemory = -1;
     
     Dialog mCurDialog;
     
@@ -306,36 +308,20 @@ public class RunningServices extends ListActivity
             return changed;
         }
         
-        boolean updateSize(Context context) {
-            boolean changed = false;
-            
-            if (mPid != 0 && mSize == 0) {
-                final int NP = mDependentProcesses.size();
-                for (int i=0; i<NP; i++) {
-                    ProcessItem proc = mDependentProcesses.valueAt(i);
-                    changed |= proc.updateSize(context);
-                }
-                
-                Debug.MemoryInfo mi = new Debug.MemoryInfo();
-                // XXX This is a hack...  I really don't want to be
-                // doing a synchronous call into the app, but can't
-                // figure out any other way to get the pss.
-                try {
-                    ActivityManagerNative.getDefault().getProcessMemoryInfo(
-                            mPid, mi);
-                    mSize = (mi.dalvikPss + mi.nativePss
-                            + mi.otherPss) * 1024;
-                    String sizeStr = Formatter.formatFileSize(
-                            context, mSize);
-                    if (!sizeStr.equals(mSizeStr)){
-                        //changed = true;
-                        mSizeStr = sizeStr;
-                    }
-                } catch (RemoteException e) {
+        boolean updateSize(Context context, Debug.MemoryInfo mem, int curSeq) {
+            mSize = ((long)mem.getTotalPss()) * 1024;
+            if (mCurSeq == curSeq) {
+                String sizeStr = Formatter.formatFileSize(
+                        context, mSize);
+                if (!sizeStr.equals(mSizeStr)){
+                    mSizeStr = sizeStr;
+                    // We update this on the second tick where we update just
+                    // the text in the current items, so no need to say we
+                    // changed here.
+                    return false;
                 }
             }
-            
-            return changed;
+            return false;
         }
         
         boolean buildDependencyChain(Context context, PackageManager pm, int curSeq) {
@@ -349,7 +335,6 @@ public class RunningServices extends ListActivity
                 }
                 proc.mCurSeq = curSeq;
                 proc.ensureLabel(pm);
-                changed |= proc.updateSize(context);
                 changed |= proc.buildDependencyChain(context, pm, curSeq);
             }
             
@@ -361,12 +346,16 @@ public class RunningServices extends ListActivity
             return changed;
         }
         
-        void addDependentProcesses(ArrayList<BaseItem> dest) {
+        void addDependentProcesses(ArrayList<BaseItem> dest,
+                ArrayList<ProcessItem> destProc) {
             final int NP = mDependentProcesses.size();
             for (int i=0; i<NP; i++) {
                 ProcessItem proc = mDependentProcesses.valueAt(i);
-                proc.addDependentProcesses(dest);
+                proc.addDependentProcesses(dest, destProc);
                 dest.add(proc);
+                if (proc.mPid > 0) {
+                    destProc.add(proc);
+                }
             }
         }
     }
@@ -382,11 +371,15 @@ public class RunningServices extends ListActivity
                 = new SparseArray<ProcessItem>();
         
         final ArrayList<BaseItem> mItems = new ArrayList<BaseItem>();
+        final ArrayList<ProcessItem> mProcessItems = new ArrayList<ProcessItem>();
+        final ArrayList<ProcessItem> mAllProcessItems = new ArrayList<ProcessItem>();
         
         int mSequence = 0;
         
         int mNumBackgroundProcesses;
+        long mBackgroundProcessMemory;
         int mNumForegroundProcesses;
+        long mForegroundProcessMemory;
         
         boolean update(Context context, ActivityManager am) {
             final PackageManager pm = context.getPackageManager();
@@ -439,7 +432,6 @@ public class RunningServices extends ListActivity
                             proc.mPid = pid;
                         }
                     }
-                    proc.mSize = 0;
                     proc.mDependentProcesses.clear();
                     proc.mCurSeq = mSequence;
                 }
@@ -465,7 +457,6 @@ public class RunningServices extends ListActivity
                         mRunningProcesses.put(pi.pid, proc);
                     }
                     proc.mDependentProcesses.clear();
-                    proc.mSize = 0;
                 }
                 proc.mRunningSeq = mSequence;
                 proc.mRunningProcessInfo = pi;
@@ -508,25 +499,6 @@ public class RunningServices extends ListActivity
                 }
             }
             
-            // Count number of interesting other (non-active) processes.
-            mNumBackgroundProcesses = 0;
-            mNumForegroundProcesses = 0;
-            NRP = mRunningProcesses.size();
-            for (int i=0; i<NRP; i++) {
-                ProcessItem proc = mRunningProcesses.valueAt(i);
-                if (proc.mCurSeq != mSequence) {
-                    // We didn't hit this process as a dependency on one
-                    // of our active ones, so add it up if needed.
-                    if (proc.mRunningProcessInfo.importance >=
-                        ActivityManager.RunningAppProcessInfo.IMPORTANCE_BACKGROUND) {
-                        mNumBackgroundProcesses++;
-                    } else if (proc.mRunningProcessInfo.importance <=
-                        ActivityManager.RunningAppProcessInfo.IMPORTANCE_VISIBLE) {
-                        mNumForegroundProcesses++;
-                    }
-                }
-            }
-            
             // Look for services and their primary processes that no longer exist...
             for (int i=0; i<mProcesses.size(); i++) {
                 HashMap<String, ProcessItem> procs = mProcesses.valueAt(i);
@@ -535,7 +507,6 @@ public class RunningServices extends ListActivity
                     ProcessItem pi = pit.next();
                     if (pi.mCurSeq == mSequence) {
                         pi.ensureLabel(pm);
-                        changed |= pi.updateSize(context);
                         if (pi.mPid == 0) {
                             // Sanity: a non-process can't be dependent on
                             // anything.
@@ -565,13 +536,17 @@ public class RunningServices extends ListActivity
             
             if (changed) {
                 mItems.clear();
+                mProcessItems.clear();
                 for (int i=0; i<mProcesses.size(); i++) {
                     for (ProcessItem pi : mProcesses.valueAt(i).values()) {
                         pi.mNeedDivider = false;
                         // First add processes we are dependent on.
-                        pi.addDependentProcesses(mItems);
+                        pi.addDependentProcesses(mItems, mProcessItems);
                         // And add the process itself.
                         mItems.add(pi);
+                        if (pi.mPid > 0) {
+                            mProcessItems.add(pi);
+                        }
                         // And finally the services running in it.
                         boolean needDivider = false;
                         for (ServiceItem si : pi.mServices.values()) {
@@ -581,6 +556,57 @@ public class RunningServices extends ListActivity
                         }
                     }
                 }
+            }
+            
+            // Count number of interesting other (non-active) processes, and
+            // build a list of all processes we will retrieve memory for.
+            mAllProcessItems.clear();
+            mAllProcessItems.addAll(mProcessItems);
+            mNumBackgroundProcesses = 0;
+            mNumForegroundProcesses = 0;
+            NRP = mRunningProcesses.size();
+            for (int i=0; i<NRP; i++) {
+                ProcessItem proc = mRunningProcesses.valueAt(i);
+                if (proc.mCurSeq != mSequence) {
+                    // We didn't hit this process as a dependency on one
+                    // of our active ones, so add it up if needed.
+                    if (proc.mRunningProcessInfo.importance >=
+                            ActivityManager.RunningAppProcessInfo.IMPORTANCE_BACKGROUND) {
+                        mNumBackgroundProcesses++;
+                        mAllProcessItems.add(proc);
+                    } else if (proc.mRunningProcessInfo.importance <=
+                            ActivityManager.RunningAppProcessInfo.IMPORTANCE_VISIBLE) {
+                        mNumForegroundProcesses++;
+                        mAllProcessItems.add(proc);
+                    }
+                }
+            }
+            
+            try {
+                mBackgroundProcessMemory = 0;
+                mForegroundProcessMemory = 0;
+                final int numProc = mAllProcessItems.size();
+                int[] pids = new int[numProc];
+                for (int i=0; i<numProc; i++) {
+                    pids[i] = mAllProcessItems.get(i).mPid;
+                }
+                Debug.MemoryInfo[] mem = ActivityManagerNative.getDefault()
+                        .getProcessMemoryInfo(pids);
+                for (int i=pids.length-1; i>=0; i--) {
+                    ProcessItem proc = mAllProcessItems.get(i);
+                    changed |= proc.updateSize(context, mem[i], mSequence);
+                    if (proc.mCurSeq == mSequence) {
+                        continue;
+                    }
+                    if (proc.mRunningProcessInfo.importance >=
+                            ActivityManager.RunningAppProcessInfo.IMPORTANCE_BACKGROUND) {
+                        mBackgroundProcessMemory += proc.mSize;
+                    } else if (proc.mRunningProcessInfo.importance <=
+                            ActivityManager.RunningAppProcessInfo.IMPORTANCE_VISIBLE) {
+                        mForegroundProcessMemory += proc.mSize;
+                    }
+                }
+            } catch (RemoteException e) {
             }
             
             return changed;
@@ -734,15 +760,21 @@ public class RunningServices extends ListActivity
         if (mState.update(this, mAm)) {
             ((ServiceListAdapter)(getListView().getAdapter())).notifyDataSetChanged();
         }
-        if (mLastNumBackgroundProcesses != mState.mNumBackgroundProcesses) {
+        if (mLastNumBackgroundProcesses != mState.mNumBackgroundProcesses
+                || mLastBackgroundProcessMemory != mState.mBackgroundProcessMemory) {
             mLastNumBackgroundProcesses = mState.mNumBackgroundProcesses;
+            mLastBackgroundProcessMemory = mState.mBackgroundProcessMemory;
+            String sizeStr = Formatter.formatFileSize(this, mLastBackgroundProcessMemory);
             mBackgroundProcessText.setText(getResources().getString(
-                    R.string.service_background_processes, mLastNumBackgroundProcesses));
+                    R.string.service_background_processes, mLastNumBackgroundProcesses, sizeStr));
         }
-        if (mLastNumForegroundProcesses != mState.mNumForegroundProcesses) {
+        if (mLastNumForegroundProcesses != mState.mNumForegroundProcesses
+                || mLastForegroundProcessMemory != mState.mForegroundProcessMemory) {
             mLastNumForegroundProcesses = mState.mNumForegroundProcesses;
+            mLastForegroundProcessMemory = mState.mForegroundProcessMemory;
+            String sizeStr = Formatter.formatFileSize(this, mLastForegroundProcessMemory);
             mForegroundProcessText.setText(getResources().getString(
-                    R.string.service_foreground_processes, mLastNumForegroundProcesses));
+                    R.string.service_foreground_processes, mLastNumForegroundProcesses, sizeStr));
         }
     }
     
