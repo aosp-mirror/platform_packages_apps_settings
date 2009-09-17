@@ -66,7 +66,6 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.text.Collator;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
@@ -178,7 +177,7 @@ public class ManageApplications extends ListActivity implements
     private boolean mComputeSizes = false;
     // default icon thats used when displaying applications initially before resource info is
     // retrieved
-    private Drawable mDefaultAppIcon;
+    private static Drawable mDefaultAppIcon;
     
     // temporary dialog displayed while the application info loads
     private static final int DLG_BASE = 0;
@@ -277,6 +276,7 @@ public class ManageApplications extends ListActivity implements
                 if(localLOGV) Log.i(TAG, "Message INIT_PKG_INFO, justCreated = " + mJustCreated);
                 List<ApplicationInfo> newList = null;
                 if (!mJustCreated) {
+                    if (localLOGV) Log.i(TAG, "List already created");
                     // Add or delete newly created packages by comparing lists
                     newList = getInstalledApps(FILTER_APPS_ALL);
                     updateAppList(newList);
@@ -372,8 +372,7 @@ public class ManageApplications extends ListActivity implements
                 if (status) {
                     size = data.getLong(ATTR_PKG_STATS);
                     formattedSize = data.getString(ATTR_PKG_SIZE_STR);
-                    int idx = mAppInfoAdapter.getIndex(pkgName);
-                    if (idx == -1) {
+                    if (!mAppInfoAdapter.isInstalled(pkgName)) {
                         mAppInfoAdapter.addToList(pkgName, size, formattedSize);
                     } else {
                         mAppInfoAdapter.updatePackage(pkgName, size, formattedSize);
@@ -567,7 +566,9 @@ public class ManageApplications extends ListActivity implements
         Set<String> existingList = new HashSet<String>();
         boolean ret = false;
         // Loop over new list and find out common elements between old and new lists
-        for (ApplicationInfo info : newList) {
+        int N = newList.size();
+        for (int i = (N-1); i >= 0; i--) {
+            ApplicationInfo info = newList.get(i);
             String pkgName = info.packageName;
             AppInfo aInfo = mCache.getEntry(pkgName);
             if (aInfo != null) {
@@ -576,10 +577,14 @@ public class ManageApplications extends ListActivity implements
                 // New package. update info by refreshing
                 if (localLOGV) Log.i(TAG, "New pkg :"+pkgName+" installed when paused");
                 updatePackageList(Intent.ACTION_PACKAGE_ADDED, pkgName);
+                // Remove from current list so that the newly added package can
+                // be handled later
+                newList.remove(i);
                 ret = true;
             }
         }
-        // Loop over old list and figure out state entries
+
+        // Loop over old list and figure out stale entries
         List<String> deletedList = null;
         Set<String> staleList = mCache.getPkgList();
         for (String pkgName : staleList) {
@@ -594,6 +599,7 @@ public class ManageApplications extends ListActivity implements
         }
         // Delete right away
         if (deletedList != null) {
+            if (localLOGV) Log.i(TAG, "Deleting right away");
             mAppInfoAdapter.removeFromList(deletedList);
         }
         return ret;
@@ -867,7 +873,7 @@ public class ManageApplications extends ListActivity implements
     /* Internal class representing an application or packages displayable attributes
      * 
      */
-    class AppInfo {
+    static private class AppInfo {
         public String pkgName;
         int index;
         public  CharSequence appName;
@@ -1049,24 +1055,19 @@ public class ManageApplications extends ListActivity implements
             return mAppLocalList.get(position);
         }
         
-        /*
-         * This method returns the index of the package position in the application list
-         */
-        public int getIndex(String pkgName) {
+        public boolean isInstalled(String pkgName) {
             if(pkgName == null) {
-                Log.w(TAG, "Getting index of null package in List Adapter");
+                if (localLOGV) Log.w(TAG, "Null pkg name when checking if installed");
+                return false;
             }
-            int imax = mAppLocalList.size();
-            ApplicationInfo appInfo;
-            for(int i = 0; i < imax; i++) {
-                appInfo = mAppLocalList.get(i);
-                if(appInfo.packageName.equalsIgnoreCase(pkgName)) {
-                    return i;
+            for (ApplicationInfo info : mAppList) {
+                if (info.packageName.equalsIgnoreCase(pkgName)) {
+                    return true;
                 }
             }
-            return -1;
+            return false;
         }
-        
+
         public ApplicationInfo getApplicationInfo(int position) {
             int imax = mAppLocalList.size();
             if( (position < 0) || (position >= imax)) {
@@ -1274,7 +1275,6 @@ public class ManageApplications extends ListActivity implements
             if (pkgName == null) {
                 return;
             }
-            boolean notInList = true;
             // Get ApplicationInfo
             ApplicationInfo info = null;
             try {
@@ -1288,30 +1288,38 @@ public class ManageApplications extends ListActivity implements
                 Log.i(TAG, "Null ApplicationInfo for package:"+pkgName);
                 return;
             }
-            // Add entry to local list
+            // Add entry to base list
             mAppList.add(info);
             // Add entry to map. Note that the index gets adjusted later on based on
             // whether the newly added package is part of displayed list
             CharSequence label = info.loadLabel(mPm);
             mCache.addEntry(new AppInfo(pkgName, -1,
                     label, info.loadIcon(mPm), size, formattedSize));
+            if (addLocalEntry(info, label)) {
+                notifyDataSetChanged();
+            }
+        }
+
+        private boolean addLocalEntry(ApplicationInfo info, CharSequence label) {
+            String pkgName = info.packageName;
             // Add to list
-            if (notInList && (shouldBeInList(mFilterApps, info))) {
+            if (shouldBeInList(mFilterApps, info)) {
                 // Binary search returns a negative index (ie -index) of the position where
                 // this might be inserted. 
                 int newIdx = Collections.binarySearch(mAppLocalList, info, 
                         getAppComparator(mSortOrder));
                 if(newIdx >= 0) {
-                    Log.i(TAG, "Strange. Package:"+pkgName+" is not new");
-                    return;
+                    if (localLOGV) Log.i(TAG, "Strange. Package:" + pkgName + " is not new");
+                    return false;
                 }
                 // New entry
                 newIdx = -newIdx-1;
                 addFilterListLocked(newIdx, info, label);
                 // Adjust index
                 adjustIndex();
-                notifyDataSetChanged();
+                return true;
             }
+            return false;
         }
 
         public void updatePackage(String pkgName,
@@ -1325,9 +1333,13 @@ public class ManageApplications extends ListActivity implements
             }
             AppInfo aInfo = mCache.getEntry(pkgName);
             if (aInfo != null) {
-                aInfo.refreshLabel(info.loadLabel(mPm));
+                CharSequence label = info.loadLabel(mPm);
+                aInfo.refreshLabel(label);
                 aInfo.refreshIcon(info.loadIcon(mPm));
                 aInfo.setSize(size, formattedSize);
+                // Check if the entry has to be added to the displayed list
+                addLocalEntry(info, label);
+                // Refresh list since size might have changed
                 notifyDataSetChanged();
             }
         }
