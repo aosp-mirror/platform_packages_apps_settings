@@ -39,14 +39,13 @@
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/wifi_type_ssid" />
-            
+
         <EditText android:id="@+id/ssid_edit"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="2dip"
-                android:singleLine="true" />
-    
-    
+                android:singleLine="true"
+                android:inputType="textNoSuggestions" />
     
         <!-- Security -->
         
@@ -115,7 +114,8 @@
                         android:layout_width="fill_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="2dip"
-                        android:singleLine="true" />
+                        android:singleLine="true"
+                        android:inputType="textNoSuggestions" />
                 <TextView android:id="@+id/anonymous_identity_text"
                         style="?android:attr/textAppearanceSmallInverse"
                         android:layout_width="fill_parent"
