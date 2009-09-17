@@ -504,6 +504,7 @@ public final class AccessPointState implements Comparable<AccessPointState>, Par
         config.priority = priority;
         config.hiddenSSID = hiddenSsid;
         config.SSID = convertToQuotedString(ssid);
+/*
         config.eap = mEap;
 
         if (!TextUtils.isEmpty(mPhase2)) {
@@ -547,6 +548,7 @@ public final class AccessPointState implements Comparable<AccessPointState>, Par
         } else {
             config.privateKeyPasswd = null;
         }
+*/
         setupSecurity(config);
     }
     
@@ -622,7 +624,7 @@ public final class AccessPointState implements Comparable<AccessPointState>, Par
                 config.allowedKeyManagement.set(KeyMgmt.IEEE8021X);
             }
             if (!TextUtils.isEmpty(mPassword)) {
-                config.password = convertToQuotedString(mPassword);
+//                config.password = convertToQuotedString(mPassword);
             }
         }
     }
