@@ -121,10 +121,11 @@ public class BrightnessPreference extends SeekBarPreference implements
                         mCheckBox.isChecked() ? 1 : 0);
             }
         } else {
-            setBrightness(mOldBrightness);
             if (mAutomaticAvailable) {
                 setMode(mOldAutomatic);
             }
+            // brightness needs to be restored after restoring ALS mode
+            setBrightness(mOldBrightness);
         }
     }
     
