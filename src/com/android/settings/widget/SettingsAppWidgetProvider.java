@@ -158,7 +158,7 @@ public class SettingsAppWidgetProvider extends AppWidgetProvider {
         } else {
             views.setImageViewResource(R.id.btn_brightness, R.drawable.widget_btn_brightness_off);
         }
-        if (getBackgroundDataState(context)) {
+        if (getSync(context)) {
             views.setImageViewResource(R.id.btn_sync, R.drawable.widget_btn_sync);
         } else {
             views.setImageViewResource(R.id.btn_sync, R.drawable.widget_btn_sync_off);
@@ -217,7 +217,7 @@ public class SettingsAppWidgetProvider extends AppWidgetProvider {
             } else if (buttonId == BUTTON_BRIGHTNESS) {
                 toggleBrightness(context);
             } else if (buttonId == BUTTON_SYNC) {
-                toggleBackgroundData(context);
+                toggleSync(context);
             } else if (buttonId == BUTTON_GPS) {
                 toggleGps(context);
             } else if (buttonId == BUTTON_BLUETOOTH) {
@@ -275,16 +275,51 @@ public class SettingsAppWidgetProvider extends AppWidgetProvider {
     }
 
     /**
-     * Toggle background data and sync tickles.
+     * Gets the state of auto-sync.
+     *
+     * @param context
+     * @return true if enabled
+     */
+    private static boolean getSync(Context context) {
+        boolean backgroundData = getBackgroundDataState(context);
+        boolean sync = ContentResolver.getMasterSyncAutomatically();
+        return backgroundData && sync;
+    }
+
+    /**
+     * Toggle auto-sync
      *
      * @param context
      */
-    private void toggleBackgroundData(Context context) {
+    private void toggleSync(Context context) {
         ConnectivityManager connManager =
                 (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
-        boolean sync = getBackgroundDataState(context);
-        connManager.setBackgroundDataSetting(!sync);
-        ContentResolver.setMasterSyncAutomatically(!sync);
+        boolean backgroundData = getBackgroundDataState(context);
+        boolean sync = ContentResolver.getMasterSyncAutomatically();
+
+        // four cases to handle:
+        // setting toggled from off to on:
+        // 1. background data was off, sync was off: turn on both
+        if (!backgroundData && !sync) {
+            connManager.setBackgroundDataSetting(true);
+            ContentResolver.setMasterSyncAutomatically(true);
+        }
+
+        // 2. background data was off, sync was on: turn on background data
+        if (!backgroundData && sync) {
+            connManager.setBackgroundDataSetting(true);
+        }
+
+        // 3. background data was on, sync was off: turn on sync
+        if (backgroundData && !sync) {
+            ContentResolver.setMasterSyncAutomatically(true);
+        }
+
+        // setting toggled from on to off:
+        // 4. background data was on, sync was on: turn off sync
+        if (backgroundData && sync) {
+            ContentResolver.setMasterSyncAutomatically(false);
+        }
     }
 
     /**
