@@ -64,6 +64,7 @@ public class AdvancedSettings extends PreferenceActivity
         addPreferencesFromResource(R.xml.wifi_advanced_settings);
         
         mUseStaticIpCheckBox = (CheckBoxPreference) findPreference(KEY_USE_STATIC_IP);
+        mUseStaticIpCheckBox.setOnPreferenceChangeListener(this);
 
         for (int i = 0; i < mPreferenceKeys.length; i++) {
             Preference preference = findPreference(mPreferenceKeys[i]);
@@ -167,7 +168,16 @@ public class AdvancedSettings extends PreferenceActivity
                         Toast.LENGTH_SHORT).show();
                 return false;
             }
-                
+
+        } else if (key.equals(KEY_USE_STATIC_IP)) {
+            boolean value = ((Boolean) newValue).booleanValue();
+
+            try {
+                Settings.System.putInt(getContentResolver(),
+                        Settings.System.WIFI_USE_STATIC_IP, value ? 1 : 0);
+            } catch (NumberFormatException e) {
+                return false;
+            }
         } else {
             String value = (String) newValue;
             
@@ -177,6 +187,12 @@ public class AdvancedSettings extends PreferenceActivity
             }
             
             preference.setSummary(value);
+            for (int i = 0; i < mSettingNames.length; i++) {
+                if (key.equals(mPreferenceKeys[i])) {
+                    Settings.System.putString(getContentResolver(), mSettingNames[i], value);
+                    break;
+                }
+            }
         }
         
         return true;
