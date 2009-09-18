@@ -28,6 +28,7 @@ import android.content.ComponentName;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.IntentSender;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageItemInfo;
@@ -789,11 +790,11 @@ public class RunningServices extends ListActivity
                         si.mRunningService.service);
                 if (pi != null) {
                     try {
-                        this.startActivity(pi, null,
+                        this.startIntentSender(pi.getIntentSender(), null,
                                 Intent.FLAG_ACTIVITY_NEW_TASK
                                         | Intent.FLAG_ACTIVITY_CLEAR_WHEN_TASK_RESET,
-                                Intent.FLAG_ACTIVITY_CLEAR_WHEN_TASK_RESET);
-                    } catch (PendingIntent.CanceledException e) {
+                                Intent.FLAG_ACTIVITY_CLEAR_WHEN_TASK_RESET, 0);
+                    } catch (IntentSender.SendIntentException e) {
                         Log.w(TAG, e);
                     } catch (IllegalArgumentException e) {
                         Log.w(TAG, e);
