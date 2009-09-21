@@ -169,9 +169,10 @@ public class RunningServices extends ListActivity
         int mRunningSeq;
         ActivityManager.RunningAppProcessInfo mRunningProcessInfo;
         
-        public ProcessItem(int uid, String processName) {
+        public ProcessItem(Context context, int uid, String processName) {
             super(true);
-            mDescription = processName;
+            mDescription = context.getResources().getString(
+                    R.string.service_process_name, processName);
             mUid = uid;
             mProcessName = processName;
         }
@@ -274,7 +275,7 @@ public class RunningServices extends ListActivity
                     }
                     si.mDisplayLabel = si.mLabel;
                 }
-                si.mPackageInfo = si.mServiceInfo;
+                si.mPackageInfo = si.mServiceInfo.applicationInfo;
                 mServices.put(service.service, si);
             }
             si.mCurSeq = mCurSeq;
@@ -312,7 +313,7 @@ public class RunningServices extends ListActivity
         boolean updateSize(Context context, Debug.MemoryInfo mem, int curSeq) {
             mSize = ((long)mem.getTotalPss()) * 1024;
             if (mCurSeq == curSeq) {
-                String sizeStr = Formatter.formatFileSize(
+                String sizeStr = Formatter.formatShortFileSize(
                         context, mSize);
                 if (!sizeStr.equals(mSizeStr)){
                     mSizeStr = sizeStr;
@@ -415,7 +416,7 @@ public class RunningServices extends ListActivity
                 ProcessItem proc = procs.get(si.process);
                 if (proc == null) {
                     changed = true;
-                    proc = new ProcessItem(si.uid, si.process);
+                    proc = new ProcessItem(context, si.uid, si.process);
                     procs.put(si.process, proc);
                 }
                 
@@ -453,7 +454,7 @@ public class RunningServices extends ListActivity
                     // running list.
                     proc = mRunningProcesses.get(pi.pid);
                     if (proc == null) {
-                        proc = new ProcessItem(pi.uid, pi.processName);
+                        proc = new ProcessItem(context, pi.uid, pi.processName);
                         proc.mPid = pi.pid;
                         mRunningProcesses.put(pi.pid, proc);
                     }
@@ -698,12 +699,14 @@ public class RunningServices extends ListActivity
             vh.description.setText(item.mDescription);
             if (item.mIsProcess) {
                 view.setBackgroundColor(mProcessBgColor);
-                vh.icon.setImageDrawable(item.mPackageInfo.loadIcon(getPackageManager()));
+                vh.icon.setImageDrawable(null);
+                vh.icon.setVisibility(View.GONE);
                 vh.description.setText(item.mDescription);
                 item.mCurSizeStr = null;
             } else {
                 view.setBackgroundDrawable(null);
-                vh.icon.setImageDrawable(null);
+                vh.icon.setImageDrawable(item.mPackageInfo.loadIcon(getPackageManager()));
+                vh.icon.setVisibility(View.VISIBLE);
                 vh.description.setText(item.mDescription);
                 ai.mFirstRunTime = item.mActiveSince;
             }
@@ -765,7 +768,7 @@ public class RunningServices extends ListActivity
                 || mLastBackgroundProcessMemory != mState.mBackgroundProcessMemory) {
             mLastNumBackgroundProcesses = mState.mNumBackgroundProcesses;
             mLastBackgroundProcessMemory = mState.mBackgroundProcessMemory;
-            String sizeStr = Formatter.formatFileSize(this, mLastBackgroundProcessMemory);
+            String sizeStr = Formatter.formatShortFileSize(this, mLastBackgroundProcessMemory);
             mBackgroundProcessText.setText(getResources().getString(
                     R.string.service_background_processes, mLastNumBackgroundProcesses, sizeStr));
         }
@@ -773,7 +776,7 @@ public class RunningServices extends ListActivity
                 || mLastForegroundProcessMemory != mState.mForegroundProcessMemory) {
             mLastNumForegroundProcesses = mState.mNumForegroundProcesses;
             mLastForegroundProcessMemory = mState.mForegroundProcessMemory;
-            String sizeStr = Formatter.formatFileSize(this, mLastForegroundProcessMemory);
+            String sizeStr = Formatter.formatShortFileSize(this, mLastForegroundProcessMemory);
             mForegroundProcessText.setText(getResources().getString(
                     R.string.service_foreground_processes, mLastNumForegroundProcesses, sizeStr));
         }
@@ -806,7 +809,10 @@ public class RunningServices extends ListActivity
                 mCurSelected = bi;
                 AlertDialog.Builder builder = new AlertDialog.Builder(this);
                 builder.setTitle(R.string.confirm_stop_service);
-                builder.setMessage(R.string.confirm_stop_service_msg);
+                String msg = getResources().getString(
+                        R.string.confirm_stop_service_msg,
+                        si.mPackageInfo.loadLabel(getPackageManager()));
+                builder.setMessage(msg);
                 builder.setPositiveButton(R.string.confirm_stop_stop, this);
                 builder.setNegativeButton(R.string.confirm_stop_cancel, null);
                 builder.setCancelable(true);

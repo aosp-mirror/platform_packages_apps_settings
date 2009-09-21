@@ -1422,8 +1422,9 @@ found in the list of installed applications.</string>
     <string name="confirm_stop_service">Stop service?</string>
     <!-- Running services, message of dialog to stop a service -->
     <string name="confirm_stop_service_msg">The service will no longer run until
-            started again by its application.  This may have undesireable
-            consequences.</string>
+            started again.  This may have undesireable
+            consequences on the applicaton
+            <xliff:g id="application">%1$s</xliff:g>.</string>
     <!-- Running services, button to stop a service -->
     <string name="confirm_stop_stop">Stop</string>
     <!-- Running services, button to cancel stopping of a service -->
@@ -1433,9 +1434,11 @@ found in the list of installed applications.</string>
     <!-- Running services, description for a service in the started state -->
     <string name="service_client_name"><xliff:g id="client_name">%1$s</xliff:g>: select to manage</string>
     <!-- Running services, summary of background processes -->
-    <string name="service_background_processes">Bg: <xliff:g id="memory">%2$s</xliff:g> (<xliff:g id="count">%1$d</xliff:g> procs)</string>
+    <string name="service_background_processes">Avail: <xliff:g id="memory">%2$s</xliff:g> (<xliff:g id="count">%1$d</xliff:g> procs)</string>
     <!-- Running services, summary of foreground processes -->
-    <string name="service_foreground_processes">Fg: <xliff:g id="memory">%2$s</xliff:g> (<xliff:g id="count">%1$d</xliff:g> procs)</string>
+    <string name="service_foreground_processes">Other: <xliff:g id="memory">%2$s</xliff:g> (<xliff:g id="count">%1$d</xliff:g> procs)</string>
+    <!-- Text to label a process entry with the process name. -->
+    <string name="service_process_name">Process: <xliff:g id="process">%1$s</xliff:g></string>
     
     <!-- Language Settings --> <skip />
     <!-- Title of setting on main settings screen.  This item will take the user to the screen to tweak settings realted to locale and text -->
