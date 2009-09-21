@@ -142,11 +142,11 @@ public class ManageApplications extends ListActivity implements
     public static final int FILTER_APPS_RUNNING = MENU_OPTIONS_BASE + 4;
     public static final int FILTER_OPTIONS = MENU_OPTIONS_BASE + 5;
     // Alert Dialog presented to user to find out the filter option
-    AlertDialog mAlertDlg;
+    private AlertDialog mAlertDlg;
     // sort order
     private int mSortOrder = SORT_ORDER_ALPHA;
     // Filter value
-    int mFilterApps = FILTER_APPS_ALL;
+    private int mFilterApps = FILTER_APPS_THIRD_PARTY;
     
     // Custom Adapter used for managing items in the list
     private AppInfoAdapter mAppInfoAdapter;
@@ -1577,6 +1577,7 @@ public class ManageApplications extends ListActivity implements
         String action = intent.getAction();
         if (action.equals(Intent.ACTION_MANAGE_PACKAGE_STORAGE)) {
             mSortOrder = SORT_ORDER_SIZE;
+            mFilterApps = FILTER_APPS_ALL;
             mSizesFirst = true;
         }
         mPm = getPackageManager();
