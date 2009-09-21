@@ -295,7 +295,12 @@ public class PowerUsageSummary extends PreferenceActivity implements Runnable {
     private void processAppUsage() {
         SensorManager sensorManager = (SensorManager)getSystemService(Context.SENSOR_SERVICE);
         final int which = mStatsType;
-        final double powerCpuNormal = mPowerProfile.getAveragePower(PowerProfile.POWER_CPU_NORMAL);
+        final int speedSteps = mPowerProfile.getNumSpeedSteps();
+        final double[] powerCpuNormal = new double[speedSteps];
+        final long[] cpuSpeedStepTimes = new long[speedSteps];
+        for (int p = 0; p < speedSteps; p++) {
+            powerCpuNormal[p] = mPowerProfile.getAveragePower(PowerProfile.POWER_CPU_ACTIVE, p);
+        }
         final double averageCostPerByte = getAverageDataCost();
         long uSecTime = mStats.computeBatteryRealtime(SystemClock.elapsedRealtime() * 1000, which);
         updateStatsPeriod(uSecTime);
@@ -322,7 +327,19 @@ public class PowerUsageSummary extends PreferenceActivity implements Runnable {
                     final long foregroundTime = ps.getForegroundTime(which);
                     cpuFgTime += foregroundTime * 10; // convert to millis
                     final long tmpCpuTime = (userTime + systemTime) * 10; // convert to millis
-                    final double processPower = tmpCpuTime * powerCpuNormal;
+                    int totalTimeAtSpeeds = 0;
+                    // Get the total first
+                    for (int step = 0; step < speedSteps; step++) {
+                        cpuSpeedStepTimes[step] = ps.getTimeAtCpuSpeedStep(step, which);
+                        totalTimeAtSpeeds += cpuSpeedStepTimes[step];
+                    }
+                    if (totalTimeAtSpeeds == 0) totalTimeAtSpeeds = 1;
+                    // Then compute the ratio of time spent at each speed
+                    double processPower = 0;
+                    for (int step = 0; step < speedSteps; step++) {
+                        double ratio = (double) cpuSpeedStepTimes[step] / totalTimeAtSpeeds;
+                        processPower += ratio * tmpCpuTime * powerCpuNormal[step];
+                    }
                     cpuTime += tmpCpuTime;
                     power += processPower;
                     if (highestDrain < processPower) {
