@@ -18,10 +18,10 @@ package com.android.settings.bluetooth;
 
 import android.bluetooth.BluetoothA2dp;
 import android.bluetooth.BluetoothDevice;
-import android.bluetooth.BluetoothClass;
 import android.bluetooth.BluetoothHeadset;
+import android.bluetooth.BluetoothUuid;
+import android.bluetooth.ParcelUuid;
 import android.os.Handler;
-import android.text.TextUtils;
 
 import com.android.settings.R;
 
@@ -35,27 +35,42 @@ import java.util.Set;
  * functionality related to a profile.
  */
 public abstract class LocalBluetoothProfileManager {
+    private static final String TAG = "LocalBluetoothProfileManager";
+
+    private static final ParcelUuid[] HEADSET_PROFILE_UUIDS = new ParcelUuid[] {
+        BluetoothUuid.HSP,
+        BluetoothUuid.Handsfree,
+    };
+
+    private static final ParcelUuid[] A2DP_PROFILE_UUIDS = new ParcelUuid[] {
+        BluetoothUuid.AudioSink,
+        BluetoothUuid.AdvAudioDist,
+    };
+
+    private static final ParcelUuid[] OPP_PROFILE_UUIDS = new ParcelUuid[] {
+        BluetoothUuid.ObexObjectPush
+    };
 
     // TODO: close profiles when we're shutting down
     private static Map<Profile, LocalBluetoothProfileManager> sProfileMap =
-            new HashMap<Profile, LocalBluetoothProfileManager>(); 
-    
+            new HashMap<Profile, LocalBluetoothProfileManager>();
+
     protected LocalBluetoothManager mLocalManager;
-    
+
     public static LocalBluetoothProfileManager getProfileManager(LocalBluetoothManager localManager,
             Profile profile) {
-        
+
         LocalBluetoothProfileManager profileManager;
-        
+
         synchronized (sProfileMap) {
             profileManager = sProfileMap.get(profile);
-            
+
             if (profileManager == null) {
                 switch (profile) {
                 case A2DP:
                     profileManager = new A2dpProfileManager(localManager);
                     break;
-                    
+
                 case HEADSET:
                     profileManager = new HeadsetProfileManager(localManager);
                     break;
@@ -64,35 +79,38 @@ public abstract class LocalBluetoothProfileManager {
                     profileManager = new OppProfileManager(localManager);
                     break;
                 }
-                
-                sProfileMap.put(profile, profileManager);    
+
+                sProfileMap.put(profile, profileManager);
             }
         }
-        
+
         return profileManager;
     }
 
     /**
      * Temporary method to fill profiles based on a device's class.
-     * 
+     *
      * NOTE: This list happens to define the connection order. We should put this logic in a more
      * well known place when this method is no longer temporary.
-     * 
-     * @param btClass The class
+     * @param uuids of the remote device
      * @param profiles The list of profiles to fill
      */
-    public static void fill(BluetoothClass btClass, List<Profile> profiles) {
+    public static void updateProfiles(ParcelUuid[] uuids, List<Profile> profiles) {
         profiles.clear();
 
-        if (btClass.doesClassMatch(BluetoothClass.PROFILE_HEADSET)) {
+        if (uuids == null) {
+            return;
+        }
+
+        if (BluetoothUuid.containsAnyUuid(uuids, HEADSET_PROFILE_UUIDS)) {
             profiles.add(Profile.HEADSET);
         }
 
-        if (btClass.doesClassMatch(BluetoothClass.PROFILE_A2DP)) {
+        if (BluetoothUuid.containsAnyUuid(uuids, A2DP_PROFILE_UUIDS)) {
             profiles.add(Profile.A2DP);
         }
 
-        if (btClass.doesClassMatch(BluetoothClass.PROFILE_OPP)) {
+        if (BluetoothUuid.containsAnyUuid(uuids, OPP_PROFILE_UUIDS)) {
             profiles.add(Profile.OPP);
         }
     }
@@ -100,17 +118,17 @@ public abstract class LocalBluetoothProfileManager {
     protected LocalBluetoothProfileManager(LocalBluetoothManager localManager) {
         mLocalManager = localManager;
     }
-    
+
     public abstract boolean connect(BluetoothDevice device);
-    
+
     public abstract boolean disconnect(BluetoothDevice device);
-    
+
     public abstract int getConnectionStatus(BluetoothDevice device);
 
     public abstract int getSummary(BluetoothDevice device);
 
     public abstract int convertState(int a2dpState);
-    
+
     public abstract boolean isPreferred(BluetoothDevice device);
 
     public abstract void setPreferred(BluetoothDevice device, boolean preferred);
@@ -118,26 +136,26 @@ public abstract class LocalBluetoothProfileManager {
     public boolean isConnected(BluetoothDevice device) {
         return SettingsBtStatus.isConnectionStatusConnected(getConnectionStatus(device));
     }
-    
+
     // TODO: int instead of enum
     public enum Profile {
         HEADSET(R.string.bluetooth_profile_headset),
         A2DP(R.string.bluetooth_profile_a2dp),
         OPP(R.string.bluetooth_profile_opp);
-        
+
         public final int localizedString;
-        
+
         private Profile(int localizedString) {
             this.localizedString = localizedString;
         }
     }
 
     /**
-     * A2dpProfileManager is an abstraction for the {@link BluetoothA2dp} service. 
+     * A2dpProfileManager is an abstraction for the {@link BluetoothA2dp} service.
      */
     private static class A2dpProfileManager extends LocalBluetoothProfileManager {
         private BluetoothA2dp mService;
-        
+
         public A2dpProfileManager(LocalBluetoothManager localManager) {
             super(localManager);
             mService = new BluetoothA2dp(localManager.getContext());
@@ -158,12 +176,12 @@ public abstract class LocalBluetoothProfileManager {
         public boolean disconnect(BluetoothDevice device) {
             return mService.disconnectSink(device);
         }
-        
+
         @Override
         public int getConnectionStatus(BluetoothDevice device) {
             return convertState(mService.getSinkState(device));
         }
-        
+
         @Override
         public int getSummary(BluetoothDevice device) {
             int connectionStatus = getConnectionStatus(device);
@@ -204,15 +222,15 @@ public abstract class LocalBluetoothProfileManager {
             }
         }
     }
-    
+
     /**
-     * HeadsetProfileManager is an abstraction for the {@link BluetoothHeadset} service. 
+     * HeadsetProfileManager is an abstraction for the {@link BluetoothHeadset} service.
      */
     private static class HeadsetProfileManager extends LocalBluetoothProfileManager
             implements BluetoothHeadset.ServiceListener {
         private BluetoothHeadset mService;
         private Handler mUiHandler = new Handler();
-        
+
         public HeadsetProfileManager(LocalBluetoothManager localManager) {
             super(localManager);
             mService = new BluetoothHeadset(localManager.getContext(), this);
@@ -262,11 +280,11 @@ public abstract class LocalBluetoothProfileManager {
                     ? convertState(mService.getState())
                     : SettingsBtStatus.CONNECTION_STATUS_DISCONNECTED;
         }
-        
+
         @Override
         public int getSummary(BluetoothDevice device) {
             int connectionStatus = getConnectionStatus(device);
-            
+
             if (SettingsBtStatus.isConnectionStatusConnected(connectionStatus)) {
                 return R.string.bluetooth_headset_profile_summary_connected;
             } else {
