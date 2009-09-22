@@ -303,7 +303,8 @@
                 <action android:name="android.intent.action.MAIN" />
                 <action android:name="android.settings.SECURITY_SETTINGS" />
                 <action android:name="android.settings.LOCATION_SOURCE_SETTINGS" />
-                <action android:name="android.security.UNLOCK_CREDENTIAL_STORAGE" />
+                <action android:name="android.credentials.UNLOCK" />
+                <action android:name="android.credentials.SYSTEM_INSTALL" />
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.VOICE_LAUNCH" />
                 <category android:name="com.android.settings.SHORTCUT" />
