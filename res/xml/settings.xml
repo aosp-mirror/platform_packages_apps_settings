@@ -50,7 +50,7 @@
                 android:targetClass="com.android.settings.SoundAndDisplaySettings" />
         </com.android.settings.IconPreferenceScreen>
 
-        <!-- Security & Privacy -->
+        <!-- Security & Location -->
 
         <com.android.settings.IconPreferenceScreen
             settings:icon="@drawable/ic_settings_security"
@@ -83,6 +83,18 @@
             android:title="@string/sync_settings"
             android:key="sync_settings">
             <intent android:action="android.settings.SYNC_SETTINGS" />
+        </com.android.settings.IconPreferenceScreen>
+
+        <!-- Privacy -->
+
+        <com.android.settings.IconPreferenceScreen
+            settings:icon="@drawable/ic_settings_privacy"
+            android:title="@string/privacy_settings"
+            android:key="privacy_settings">
+            <intent
+                android:action="android.intent.action.MAIN"
+                android:targetPackage="com.android.settings"
+                android:targetClass="com.android.settings.PrivacySettings" />
         </com.android.settings.IconPreferenceScreen>
 
         <!-- Storage -->
