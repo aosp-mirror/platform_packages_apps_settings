@@ -47,8 +47,8 @@ import android.preference.PreferenceCategory;
 import android.preference.PreferenceManager;
 import android.preference.PreferenceScreen;
 import android.preference.Preference.OnPreferenceClickListener;
-import android.security.CertTool;
-import android.security.Keystore;
+import android.security.Credentials;
+import android.security.KeyStore;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.ContextMenu;
@@ -109,9 +109,8 @@ public class VpnSettings extends PreferenceActivity implements
 
     private static final int NO_ERROR = VpnManager.VPN_ERROR_NO_ERROR;
 
-    private static final String NAMESPACE_VPN = "vpn";
-    private static final String KEY_PREFIX_IPSEC_PSK = "ipsk000";
-    private static final String KEY_PREFIX_L2TP_SECRET = "lscrt000";
+    private static final String KEY_PREFIX_IPSEC_PSK = Credentials.VPN + 'i';
+    private static final String KEY_PREFIX_L2TP_SECRET = Credentials.VPN + 'l';
 
     private PreferenceScreen mAddVpn;
     private PreferenceCategory mVpnListContainer;
@@ -128,6 +127,8 @@ public class VpnSettings extends PreferenceActivity implements
 
     // states saved for unlocking keystore
     private Runnable mUnlockAction;
+
+    private KeyStore mKeyStore = KeyStore.getInstance();
 
     private VpnManager mVpnManager = new VpnManager(this);
 
@@ -172,7 +173,7 @@ public class VpnSettings extends PreferenceActivity implements
     public void onResume() {
         super.onResume();
 
-        if ((mUnlockAction != null) && isKeystoreUnlocked()) {
+        if ((mUnlockAction != null) && isKeyStoreUnlocked()) {
             Runnable action = mUnlockAction;
             mUnlockAction = null;
             runOnUiThread(action);
@@ -402,13 +403,13 @@ public class VpnSettings extends PreferenceActivity implements
                 return;
             }
 
-            if (needKeystoreToSave(p)) {
+            if (needKeyStoreToSave(p)) {
                 Runnable action = new Runnable() {
                     public void run() {
                         onActivityResult(requestCode, resultCode, data);
                     }
                 };
-                if (!unlockKeystore(p, action)) return;
+                if (!unlockKeyStore(p, action)) return;
             }
 
             try {
@@ -610,22 +611,26 @@ public class VpnSettings extends PreferenceActivity implements
         startActivityForResult(intent, REQUEST_SELECT_VPN_TYPE);
     }
 
-    private boolean isKeystoreUnlocked() {
-        return (Keystore.getInstance().getState() == Keystore.UNLOCKED);
-    }
-
-
-    // Returns true if the profile needs to access keystore
-    private boolean needKeystoreToSave(VpnProfile p) {
-        return needKeystoreToConnect(p);
+    private boolean isKeyStoreUnlocked() {
+        return mKeyStore.test() == KeyStore.NO_ERROR;
     }
 
     // Returns true if the profile needs to access keystore
-    private boolean needKeystoreToEdit(VpnProfile p) {
+    private boolean needKeyStoreToSave(VpnProfile p) {
         switch (p.getType()) {
-            case L2TP_IPSEC:
             case L2TP_IPSEC_PSK:
-                return true;
+                L2tpIpsecPskProfile pskProfile = (L2tpIpsecPskProfile) p;
+                String presharedKey = pskProfile.getPresharedKey();
+                if (!TextUtils.isEmpty(presharedKey)) return true;
+                // pass through
+
+            case L2TP:
+                L2tpProfile l2tpProfile = (L2tpProfile) p;
+                if (l2tpProfile.isSecretEnabled() &&
+                        !TextUtils.isEmpty(l2tpProfile.getSecretString())) {
+                    return true;
+                }
+                // pass through
 
             default:
                 return false;
@@ -633,7 +638,7 @@ public class VpnSettings extends PreferenceActivity implements
     }
 
     // Returns true if the profile needs to access keystore
-    private boolean needKeystoreToConnect(VpnProfile p) {
+    private boolean needKeyStoreToConnect(VpnProfile p) {
         switch (p.getType()) {
             case L2TP_IPSEC:
             case L2TP_IPSEC_PSK:
@@ -648,37 +653,27 @@ public class VpnSettings extends PreferenceActivity implements
     }
 
     // Returns true if keystore is unlocked or keystore is not a concern
-    private boolean unlockKeystore(VpnProfile p, Runnable action) {
-        if (isKeystoreUnlocked()) return true;
+    private boolean unlockKeyStore(VpnProfile p, Runnable action) {
+        if (isKeyStoreUnlocked()) return true;
         mUnlockAction = action;
-        startActivity(
-                new Intent(Keystore.ACTION_UNLOCK_CREDENTIAL_STORAGE));
+        Credentials.getInstance().unlock(this);
         return false;
     }
 
     private void startVpnEditor(final VpnProfile profile) {
-        if (needKeystoreToEdit(profile)) {
-            Runnable action = new Runnable() {
-                public void run() {
-                    startVpnEditor(profile);
-                }
-            };
-            if (!unlockKeystore(profile, action)) return;
-        }
-
         Intent intent = new Intent(this, VpnEditor.class);
         intent.putExtra(KEY_VPN_PROFILE, (Parcelable) profile);
         startActivityForResult(intent, REQUEST_ADD_OR_EDIT_PROFILE);
     }
 
     private synchronized void connect(final VpnProfile p) {
-        if (needKeystoreToConnect(p)) {
+        if (needKeyStoreToConnect(p)) {
             Runnable action = new Runnable() {
                 public void run() {
                     connect(p);
                 }
             };
-            if (!unlockKeystore(p, action)) return;
+            if (!unlockKeyStore(p, action)) return;
         }
 
         if (!checkSecrets(p)) return;
@@ -888,43 +883,32 @@ public class VpnSettings extends PreferenceActivity implements
         return mVpnManager.createVpnProfile(Enum.valueOf(VpnType.class, type));
     }
 
-    private String keyNameForDaemon(String keyName) {
-        return NAMESPACE_VPN + "_" + keyName;
-    }
-
     private boolean checkSecrets(VpnProfile p) {
-        Keystore ks = Keystore.getInstance();
-        HashSet<String> secretSet = new HashSet<String>();
         boolean secretMissing = false;
 
         if (p instanceof L2tpIpsecProfile) {
             L2tpIpsecProfile certProfile = (L2tpIpsecProfile) p;
-            CertTool certTool = CertTool.getInstance();
-            Collections.addAll(secretSet, certTool.getAllCaCertificateKeys());
+
             String cert = certProfile.getCaCertificate();
-            if (TextUtils.isEmpty(cert) || !secretSet.contains(cert)) {
+            if (TextUtils.isEmpty(cert) ||
+                    !mKeyStore.contains(Credentials.CA_CERTIFICATE + cert)) {
                 certProfile.setCaCertificate(null);
                 secretMissing = true;
             }
 
-            secretSet.clear();
-            Collections.addAll(secretSet, certTool.getAllUserCertificateKeys());
             cert = certProfile.getUserCertificate();
-            if (TextUtils.isEmpty(cert) || !secretSet.contains(cert)) {
+            if (TextUtils.isEmpty(cert) ||
+                    !mKeyStore.contains(Credentials.USER_CERTIFICATE + cert)) {
                 certProfile.setUserCertificate(null);
                 secretMissing = true;
             }
         }
 
-        secretSet.clear();
-        Collections.addAll(secretSet, ks.listKeys(NAMESPACE_VPN));
-
         if (p instanceof L2tpIpsecPskProfile) {
             L2tpIpsecPskProfile pskProfile = (L2tpIpsecPskProfile) p;
             String presharedKey = pskProfile.getPresharedKey();
-            String keyName = KEY_PREFIX_IPSEC_PSK + p.getId();
-            if (TextUtils.isEmpty(presharedKey)
-                    || !secretSet.contains(keyName)) {
+            String key = KEY_PREFIX_IPSEC_PSK + p.getId();
+            if (TextUtils.isEmpty(presharedKey) || !mKeyStore.contains(key)) {
                 pskProfile.setPresharedKey(null);
                 secretMissing = true;
             }
@@ -934,9 +918,8 @@ public class VpnSettings extends PreferenceActivity implements
             L2tpProfile l2tpProfile = (L2tpProfile) p;
             if (l2tpProfile.isSecretEnabled()) {
                 String secret = l2tpProfile.getSecretString();
-                String keyName = KEY_PREFIX_L2TP_SECRET + p.getId();
-                if (TextUtils.isEmpty(secret)
-                        || !secretSet.contains(keyName)) {
+                String key = KEY_PREFIX_L2TP_SECRET + p.getId();
+                if (TextUtils.isEmpty(secret) || !mKeyStore.contains(key)) {
                     l2tpProfile.setSecretString(null);
                     secretMissing = true;
                 }
@@ -953,35 +936,30 @@ public class VpnSettings extends PreferenceActivity implements
     }
 
     private void processSecrets(VpnProfile p) {
-        Keystore ks = Keystore.getInstance();
         switch (p.getType()) {
             case L2TP_IPSEC_PSK:
                 L2tpIpsecPskProfile pskProfile = (L2tpIpsecPskProfile) p;
                 String presharedKey = pskProfile.getPresharedKey();
-                String keyName = KEY_PREFIX_IPSEC_PSK + p.getId();
-                if (!TextUtils.isEmpty(presharedKey)) {
-                    int ret = ks.put(NAMESPACE_VPN, keyName, presharedKey);
-                    if (ret != 0) {
-                        Log.e(TAG, "keystore write failed: key=" + keyName);
-                    }
+                String key = KEY_PREFIX_IPSEC_PSK + p.getId();
+                if (!TextUtils.isEmpty(presharedKey) &&
+                        !mKeyStore.put(key, presharedKey)) {
+                    Log.e(TAG, "keystore write failed: key=" + key);
                 }
-                pskProfile.setPresharedKey(keyNameForDaemon(keyName));
+                pskProfile.setPresharedKey(key);
                 // pass through
 
             case L2TP:
                 L2tpProfile l2tpProfile = (L2tpProfile) p;
-                keyName = KEY_PREFIX_L2TP_SECRET + p.getId();
+                key = KEY_PREFIX_L2TP_SECRET + p.getId();
                 if (l2tpProfile.isSecretEnabled()) {
                     String secret = l2tpProfile.getSecretString();
-                    if (!TextUtils.isEmpty(secret)) {
-                        int ret = ks.put(NAMESPACE_VPN, keyName, secret);
-                        if (ret != 0) {
-                            Log.e(TAG, "keystore write failed: key=" + keyName);
-                        }
+                    if (!TextUtils.isEmpty(secret) &&
+                            !mKeyStore.put(key, secret)) {
+                        Log.e(TAG, "keystore write failed: key=" + key);
                     }
-                    l2tpProfile.setSecretString(keyNameForDaemon(keyName));
+                    l2tpProfile.setSecretString(key);
                 } else {
-                    ks.remove(NAMESPACE_VPN, keyName);
+                    mKeyStore.delete(key);
                 }
                 break;
         }
