@@ -37,16 +37,13 @@ import com.android.settings.bluetooth.LocalBluetoothProfileManager.Profile;
  */
 public class BluetoothEventRedirector {
     private static final String TAG = "BluetoothEventRedirector";
-    private static final boolean V = LocalBluetoothManager.V;
 
     private LocalBluetoothManager mManager;
 
     private BroadcastReceiver mBroadcastReceiver = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
-            if (V) {
-                Log.v(TAG, "Received " + intent.getAction());
-            }
+            Log.v(TAG, "Received " + intent.getAction());
 
             String action = intent.getAction();
             BluetoothDevice device = intent.getParcelableExtra(BluetoothDevice.EXTRA_DEVICE);
@@ -65,6 +62,8 @@ public class BluetoothEventRedirector {
                 short rssi = intent.getShortExtra(BluetoothDevice.EXTRA_RSSI, Short.MIN_VALUE);
                 BluetoothClass btClass = intent.getParcelableExtra(BluetoothDevice.EXTRA_CLASS);
                 String name = intent.getStringExtra(BluetoothDevice.EXTRA_NAME);
+                // TODO Pick up UUID. They should be available for 2.1 devices.
+                // Skip for now, there's a bluez problem and we are not getting uuids even for 2.1.
                 mManager.getCachedDeviceManager().onDeviceAppeared(device, rssi, btClass, name);
 
             } else if (action.equals(BluetoothDevice.ACTION_DISAPPEARED)) {
@@ -107,6 +106,9 @@ public class BluetoothEventRedirector {
             } else if (action.equals(BluetoothDevice.ACTION_CLASS_CHANGED)) {
                 mManager.getCachedDeviceManager().onBtClassChanged(device);
 
+            } else if (action.equals(BluetoothDevice.ACTION_UUID)) {
+                mManager.getCachedDeviceManager().onUuidChanged(device);
+
             } else if (action.equals(BluetoothDevice.ACTION_PAIRING_CANCEL)) {
                 int errorMsg = R.string.bluetooth_pairing_error_message;
                 mManager.showError(device, R.string.bluetooth_error_title, errorMsg);
@@ -139,6 +141,7 @@ public class BluetoothEventRedirector {
         filter.addAction(BluetoothA2dp.ACTION_SINK_STATE_CHANGED);
         filter.addAction(BluetoothHeadset.ACTION_STATE_CHANGED);
         filter.addAction(BluetoothDevice.ACTION_CLASS_CHANGED);
+        filter.addAction(BluetoothDevice.ACTION_UUID);
 
         mManager.getContext().registerReceiver(mBroadcastReceiver, filter);
     }
