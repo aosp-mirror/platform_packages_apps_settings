@@ -17,13 +17,15 @@
 package com.android.settings.bluetooth;
 
 import android.app.AlertDialog;
-import android.bluetooth.BluetoothClass;
 import android.bluetooth.BluetoothAdapter;
+import android.bluetooth.BluetoothClass;
 import android.bluetooth.BluetoothDevice;
+import android.bluetooth.ParcelUuid;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.Resources;
+import android.os.SystemClock;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.ContextMenu;
@@ -50,6 +52,7 @@ public class CachedBluetoothDevice implements Comparable<CachedBluetoothDevice> 
     private static final String TAG = "CachedBluetoothDevice";
     private static final boolean D = LocalBluetoothManager.D;
     private static final boolean V = LocalBluetoothManager.V;
+    private static final boolean DEBUG = true; // STOPSHIP - disable before final rom
 
     private static final int CONTEXT_ITEM_CONNECT = Menu.FIRST + 1;
     private static final int CONTEXT_ITEM_DISCONNECT = Menu.FIRST + 2;
@@ -74,6 +77,17 @@ public class CachedBluetoothDevice implements Comparable<CachedBluetoothDevice> 
      * error even if they all fail. This tracks that state.
      */
     private boolean mIsConnectingErrorPossible;
+
+    /**
+     * Last time a bt profile auto-connect was attempted without any profiles or
+     * UUIDs. If an ACTION_UUID intent comes in within
+     * MAX_UUID_DELAY_FOR_AUTO_CONNECT milliseconds, we will try auto-connect
+     * again with the new UUIDs
+     */
+    private long mConnectAttemptedWithoutUuid;
+
+    // See mConnectAttemptedWithoutUuid
+    private static final long MAX_UUID_DELAY_FOR_AUTO_CONNECT = 5000;
 
     // Max time to hold the work queue if we don't get or missed a response
     // from the bt framework.
@@ -361,6 +375,16 @@ public class CachedBluetoothDevice implements Comparable<CachedBluetoothDevice> 
     public void connect() {
         if (!ensurePaired()) return;
 
+        // Try to initialize the profiles if there were not.
+        if (mProfiles.size() == 0) {
+            if (!updateProfiles()) {
+                // If UUIDs are not available yet, connect will be happen
+                // upon arrival of the ACTION_UUID intent.
+                mConnectAttemptedWithoutUuid = SystemClock.elapsedRealtime();
+                return;
+            }
+        }
+
         // Reset the only-show-one-error-dialog tracking variable
         mIsConnectingErrorPossible = true;
 
@@ -479,6 +503,7 @@ public class CachedBluetoothDevice implements Comparable<CachedBluetoothDevice> 
     private void fillData() {
         fetchName();
         fetchBtClass();
+        updateProfiles();
 
         mVisible = false;
 
@@ -599,9 +624,47 @@ public class CachedBluetoothDevice implements Comparable<CachedBluetoothDevice> 
      */
     private void fetchBtClass() {
         mBtClass = mDevice.getBluetoothClass();
-        if (mBtClass != null) {
-            LocalBluetoothProfileManager.fill(mBtClass, mProfiles);
+    }
+
+    private boolean updateProfiles() {
+        ParcelUuid[] uuids = mDevice.getUuids();
+        if (uuids == null) return false;
+
+        LocalBluetoothProfileManager.updateProfiles(uuids, mProfiles);
+
+        if (DEBUG) {
+            Log.e(TAG, "updating profiles for " + mDevice.getName());
+
+            boolean printUuids = true;
+            BluetoothClass bluetoothClass = mDevice.getBluetoothClass();
+
+            if (bluetoothClass.doesClassMatch(BluetoothClass.PROFILE_HEADSET) !=
+                mProfiles.contains(Profile.HEADSET)) {
+                Log.v(TAG, "headset classbits != uuid");
+                printUuids = true;
+            }
+
+            if (bluetoothClass.doesClassMatch(BluetoothClass.PROFILE_A2DP) !=
+                mProfiles.contains(Profile.A2DP)) {
+                Log.v(TAG, "a2dp classbits != uuid");
+                printUuids = true;
+            }
+
+            if (bluetoothClass.doesClassMatch(BluetoothClass.PROFILE_OPP) !=
+                mProfiles.contains(Profile.OPP)) {
+                Log.v(TAG, "opp classbits != uuid");
+                printUuids = true;
+            }
+
+            if (printUuids) {
+                Log.v(TAG, "Class: " + bluetoothClass.toString());
+                Log.v(TAG, "UUID:");
+                for (int i = 0; i < uuids.length; i++) {
+                    Log.v(TAG, "  " + uuids[i]);
+                }
+            }
         }
+        return true;
     }
 
     /**
@@ -613,10 +676,30 @@ public class CachedBluetoothDevice implements Comparable<CachedBluetoothDevice> 
         dispatchAttributesChanged();
     }
 
+    /**
+     * Refreshes the UI when framework alerts us of a UUID change.
+     */
+    public void onUuidChanged() {
+        updateProfiles();
+
+        if (DEBUG) Log.e(TAG, "onUuidChanged: Time since last connect w/ no uuid "
+                + (SystemClock.elapsedRealtime() - mConnectAttemptedWithoutUuid));
+
+        /*
+         * If a connect was attempted earlier without any UUID, we will do the
+         * connect now.
+         */
+        if (mProfiles.size() > 0
+                && (mConnectAttemptedWithoutUuid + MAX_UUID_DELAY_FOR_AUTO_CONNECT) > SystemClock
+                        .elapsedRealtime()) {
+            connect();
+        }
+        dispatchAttributesChanged();
+    }
+
     public void setBtClass(BluetoothClass btClass) {
         if (btClass != null && mBtClass != btClass) {
             mBtClass = btClass;
-            LocalBluetoothProfileManager.fill(mBtClass, mProfiles);
             dispatchAttributesChanged();
         }
     }
