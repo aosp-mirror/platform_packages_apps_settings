@@ -29,7 +29,8 @@ import android.preference.PreferenceActivity;
 import android.preference.PreferenceScreen;
 import android.preference.CheckBoxPreference;
 import android.provider.Settings;
-import android.security.Keystore;
+import android.security.Credentials;
+import android.security.KeyStore;
 import android.util.Log;
 import android.view.ContextMenu;
 import android.view.Menu;
@@ -86,6 +87,7 @@ public class WifiSettings extends PreferenceActivity implements WifiLayer.Callba
     
     private WeakHashMap<AccessPointState, AccessPointPreference> mAps;
 
+    private KeyStore mKeyStore = KeyStore.getInstance();
     private AccessPointState mResumeState = null;
     private int mResumeMode;
     
@@ -156,14 +158,14 @@ public class WifiSettings extends PreferenceActivity implements WifiLayer.Callba
         mWifiEnabler.resume();
         // do what we should have after keystore is unlocked.
         if (mResumeState != null) {
-            if (Keystore.getInstance().getState() == Keystore.UNLOCKED) {
+            if (mKeyStore.test() == KeyStore.NO_ERROR) {
                 showAccessPointDialog(mResumeState, mResumeMode);
             }
             mResumeMode = -1;
             mResumeState = null;
         } else {
             if (mResumeMode == AccessPointDialog.MODE_CONFIGURE) {
-                if (Keystore.getInstance().getState() == Keystore.UNLOCKED) {
+                if (mKeyStore.test() == KeyStore.NO_ERROR) {
                     ((AccessPointDialog) mDialog).enableEnterpriseFields();
                 }
             }
@@ -372,10 +374,8 @@ public class WifiSettings extends PreferenceActivity implements WifiLayer.Callba
     }
     
     public void showAccessPointDialog(AccessPointState state, int mode) {
-        if (state.isEnterprise() &&
-                Keystore.getInstance().getState() != Keystore.UNLOCKED) {
-            startActivity(new Intent(
-                    Keystore.ACTION_UNLOCK_CREDENTIAL_STORAGE));
+        if (state.isEnterprise() && mKeyStore.test() != KeyStore.NO_ERROR) {
+            Credentials.getInstance().unlock(this);
             mResumeState = state;
             mResumeMode = mode;
             return;
