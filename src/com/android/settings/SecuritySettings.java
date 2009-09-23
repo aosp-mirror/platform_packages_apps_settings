@@ -59,8 +59,7 @@ import java.util.Observer;
 /**
  * Gesture lock pattern settings.
  */
-public class SecuritySettings extends PreferenceActivity implements
-        DialogInterface.OnDismissListener, DialogInterface.OnClickListener {
+public class SecuritySettings extends PreferenceActivity {
 
     // Lock Settings
 
@@ -96,14 +95,6 @@ public class SecuritySettings extends PreferenceActivity implements
 
     private CstorHelper mCstorHelper = new CstorHelper();
 
-    // Vendor specific
-    private static final String GSETTINGS_PROVIDER = "com.google.android.providers.settings";
-    private static final String USE_LOCATION = "use_location";
-    private static final String KEY_DONE_USE_LOCATION = "doneLocation";
-    private CheckBoxPreference mUseLocation;
-    private boolean mOkClicked;
-    private Dialog mUseLocationDialog;
-
     private CheckBoxPreference mNetwork;
     private CheckBoxPreference mGps;
     private CheckBoxPreference mAssistedGps;
@@ -130,17 +121,7 @@ public class SecuritySettings extends PreferenceActivity implements
         mNetwork = (CheckBoxPreference) getPreferenceScreen().findPreference(LOCATION_NETWORK);
         mGps = (CheckBoxPreference) getPreferenceScreen().findPreference(LOCATION_GPS);
         mAssistedGps = (CheckBoxPreference) getPreferenceScreen().findPreference(ASSISTED_GPS);
-        mUseLocation = (CheckBoxPreference) getPreferenceScreen().findPreference(USE_LOCATION);
 
-        // Vendor specific
-        try {
-            if (mUseLocation != null
-                    && getPackageManager().getPackageInfo(GSETTINGS_PROVIDER, 0) == null) {
-                ((PreferenceGroup)findPreference(LOCATION_CATEGORY))
-                        .removePreference(mUseLocation);
-            }
-        } catch (NameNotFoundException nnfe) {
-        }
         updateToggles();
 
         // listen for Location Manager settings changes
@@ -150,12 +131,6 @@ public class SecuritySettings extends PreferenceActivity implements
                 null);
         mContentQueryMap = new ContentQueryMap(settingsCursor, Settings.System.NAME, true, null);
         mContentQueryMap.addObserver(new SettingsObserver());
-        boolean doneUseLocation = savedInstanceState == null
-                ? false : savedInstanceState.getBoolean(KEY_DONE_USE_LOCATION, true);
-        if (!doneUseLocation && (getIntent().getBooleanExtra("SHOW_USE_LOCATION", false)
-                || savedInstanceState != null)) {
-            showUseLocationDialog(true);
-        }
 
         mCstorHelper.handleIntent(getIntent());
     }
@@ -168,6 +143,14 @@ public class SecuritySettings extends PreferenceActivity implements
         PreferenceCategory inlinePrefCat = new PreferenceCategory(this);
         inlinePrefCat.setTitle(R.string.lock_settings_title);
         root.addPreference(inlinePrefCat);
+
+        // change pattern lock
+        Intent intent = new Intent();
+        intent.setClassName("com.android.settings",
+                    "com.android.settings.ChooseLockPatternTutorial");
+        mChoosePattern = getPreferenceManager().createPreferenceScreen(this);
+        mChoosePattern.setIntent(intent);
+        inlinePrefCat.addPreference(mChoosePattern);
 
         // autolock toggle
         mLockEnabled = new LockEnabledPref(this);
@@ -187,14 +170,6 @@ public class SecuritySettings extends PreferenceActivity implements
         mTactileFeedback.setKey(KEY_TACTILE_FEEDBACK_ENABLED);
         mTactileFeedback.setTitle(R.string.lockpattern_settings_enable_tactile_feedback_title);
         inlinePrefCat.addPreference(mTactileFeedback);
-
-        // change pattern lock
-        Intent intent = new Intent();
-        intent.setClassName("com.android.settings",
-                    "com.android.settings.ChooseLockPatternTutorial");
-        mChoosePattern = getPreferenceManager().createPreferenceScreen(this);
-        mChoosePattern.setIntent(intent);
-        inlinePrefCat.addPreference(mChoosePattern);
 
         int activePhoneType = TelephonyManager.getDefault().getPhoneType();
 
@@ -259,23 +234,6 @@ public class SecuritySettings extends PreferenceActivity implements
     }
 
     @Override
-    public void onStop() {
-        if (mUseLocationDialog != null && mUseLocationDialog.isShowing()) {
-            mUseLocationDialog.dismiss();
-        }
-        mUseLocationDialog = null;
-        super.onStop();
-    }
-
-    @Override
-    public void onSaveInstanceState(Bundle icicle) {
-        if (mUseLocationDialog != null && mUseLocationDialog.isShowing()) {
-            icicle.putBoolean(KEY_DONE_USE_LOCATION, false);
-        }
-        super.onSaveInstanceState(icicle);
-    }
-
-    @Override
     public boolean onPreferenceTreeClick(PreferenceScreen preferenceScreen,
             Preference preference) {
         final String key = preference.getKey();
@@ -302,13 +260,6 @@ public class SecuritySettings extends PreferenceActivity implements
         } else if (preference == mAssistedGps) {
             Settings.Secure.putInt(getContentResolver(), Settings.Secure.ASSISTED_GPS_ENABLED,
                     mAssistedGps.isChecked() ? 1 : 0);
-        } else if (preference == mUseLocation) {
-            //normally called on the toggle click
-            if (mUseLocation.isChecked()) {
-                showUseLocationDialog(false);
-            } else {
-                updateUseLocation();
-            }
         }
 
         return false;
@@ -317,27 +268,6 @@ public class SecuritySettings extends PreferenceActivity implements
     private void showPrivacyPolicy() {
         Intent intent = new Intent("android.settings.TERMS");
         startActivity(intent);
-    }
-
-    private void showUseLocationDialog(boolean force) {
-        // Show a warning to the user that location data will be shared
-        mOkClicked = false;
-        if (force) {
-            mUseLocation.setChecked(true);
-        }
-
-        if (hasAgreedToUseLocation()) return;
-
-        CharSequence msg = getResources().getText(R.string.use_location_warning_message);
-        mUseLocationDialog = new AlertDialog.Builder(this).setMessage(msg)
-                .setTitle(R.string.use_location_title)
-                .setIcon(android.R.drawable.ic_dialog_alert)
-                .setPositiveButton(R.string.agree, this)
-                .setNegativeButton(R.string.disagree, this)
-                .show();
-        ((TextView)mUseLocationDialog.findViewById(android.R.id.message))
-                .setMovementMethod(LinkMovementMethod.getInstance());
-        mUseLocationDialog.setOnDismissListener(this);
     }
 
     /*
@@ -355,18 +285,10 @@ public class SecuritySettings extends PreferenceActivity implements
                     Settings.Secure.ASSISTED_GPS_ENABLED, 2) == 1);
             mAssistedGps.setEnabled(gpsEnabled);
         }
-        mUseLocation.setChecked(Settings.Secure.getInt(res,
-                Settings.Secure.USE_LOCATION_FOR_SERVICES, 2) == 1);
     }
 
     private boolean isToggled(Preference pref) {
         return ((CheckBoxPreference) pref).isChecked();
-    }
-
-    private void updateUseLocation() {
-        boolean use = mUseLocation.isChecked();
-        Settings.Secure.putInt(getContentResolver(),
-                Settings.Secure.USE_LOCATION_FOR_SERVICES, use ? 1 : 0);
     }
 
     /**
@@ -415,25 +337,6 @@ public class SecuritySettings extends PreferenceActivity implements
         }
     }
 
-    public void onClick(DialogInterface dialog, int which) {
-        if (which == DialogInterface.BUTTON_POSITIVE) {
-            //updateProviders();
-            mOkClicked = true;
-            setAgreedToUseLocation(true);
-        } else {
-            // Reset the toggle
-            mUseLocation.setChecked(false);
-        }
-        updateUseLocation();
-    }
-
-    public void onDismiss(DialogInterface dialog) {
-        // Assuming that onClick gets called first
-        if (!mOkClicked) {
-            mUseLocation.setChecked(false);
-        }
-    }
-
     @Override
     protected Dialog onCreateDialog(int id) {
         switch (id) {
@@ -449,23 +352,6 @@ public class SecuritySettings extends PreferenceActivity implements
 
             default:
                 return null;
-        }
-    }
-
-    private boolean hasAgreedToUseLocation() {
-        SharedPreferences sp = getSharedPreferences(PREFS_NAME, 0);
-        if (sp == null) {
-            return false;
-        }
-        return sp.getBoolean(PREFS_USE_LOCATION, false);
-    }
-
-    private void setAgreedToUseLocation(boolean agreed) {
-        if (agreed) {
-            SharedPreferences settings = getSharedPreferences(PREFS_NAME, 0);
-            SharedPreferences.Editor editor = settings.edit();
-            editor.putBoolean(PREFS_USE_LOCATION, true);
-            editor.commit();
         }
     }
 
