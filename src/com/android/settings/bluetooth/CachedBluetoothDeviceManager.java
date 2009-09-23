@@ -257,4 +257,11 @@ public class CachedBluetoothDeviceManager {
             cachedDevice.refreshBtClass();
         }
     }
+
+    public synchronized void onUuidChanged(BluetoothDevice device) {
+        CachedBluetoothDevice cachedDevice = findDevice(device);
+        if (cachedDevice != null) {
+            cachedDevice.onUuidChanged();
+        }
+    }
 }
