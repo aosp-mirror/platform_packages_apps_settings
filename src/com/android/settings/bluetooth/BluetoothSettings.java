@@ -16,16 +16,12 @@
 
 package com.android.settings.bluetooth;
 
-import com.android.settings.ProgressCategory;
-import com.android.settings.R;
-import com.android.settings.bluetooth.LocalBluetoothProfileManager.Profile;
-
-import java.util.List;
-import java.util.WeakHashMap;
-
 import android.bluetooth.BluetoothAdapter;
+import android.bluetooth.BluetoothClass;
 import android.bluetooth.BluetoothDevice;
 import android.bluetooth.BluetoothDevicePicker;
+import android.bluetooth.BluetoothUuid;
+import android.bluetooth.ParcelUuid;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
@@ -41,7 +37,13 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ContextMenu.ContextMenuInfo;
 import android.widget.AdapterView.AdapterContextMenuInfo;
-import android.util.Log;
+
+import com.android.settings.ProgressCategory;
+import com.android.settings.R;
+import com.android.settings.bluetooth.LocalBluetoothProfileManager.Profile;
+
+import java.util.List;
+import java.util.WeakHashMap;
 
 /**
  * BluetoothSettings is the Settings screen for Bluetooth configuration and
@@ -304,19 +306,42 @@ public class BluetoothSettings extends PreferenceActivity
             throw new IllegalStateException("Got onDeviceAdded, but cachedDevice already exists");
         }
 
-        List<Profile> profiles = cachedDevice.getProfiles();
-        if (mFilterType == BluetoothDevicePicker.FILTER_TYPE_TRANSFER){
-            if(profiles.contains(Profile.OPP)){
-                createDevicePreference(cachedDevice);
-            }
-        } else if (mFilterType == BluetoothDevicePicker.FILTER_TYPE_AUDIO) {
-            if((profiles.contains(Profile.A2DP)) || (profiles.contains(Profile.HEADSET))){
-                createDevicePreference(cachedDevice);
-            }
-        } else {
+        if (addDevicePreference(cachedDevice)) {
             createDevicePreference(cachedDevice);
         }
      }
+
+    private boolean addDevicePreference(CachedBluetoothDevice cachedDevice) {
+        ParcelUuid[] uuids = cachedDevice.getDevice().getUuids();
+        BluetoothClass bluetoothClass = cachedDevice.getDevice().getBluetoothClass();
+
+        switch(mFilterType) {
+        case BluetoothDevicePicker.FILTER_TYPE_TRANSFER:
+            if (uuids != null) {
+                if (BluetoothUuid.containsAnyUuid(uuids,
+                        LocalBluetoothProfileManager.OPP_PROFILE_UUIDS))  return true;
+            } else {
+                if (bluetoothClass.doesClassMatch(BluetoothClass.PROFILE_OPP)) return true;
+            }
+            break;
+        case BluetoothDevicePicker.FILTER_TYPE_AUDIO:
+            if (uuids != null) {
+                if (BluetoothUuid.containsAnyUuid(uuids,
+                        LocalBluetoothProfileManager.A2DP_PROFILE_UUIDS))  return true;
+
+                if (BluetoothUuid.containsAnyUuid(uuids,
+                        LocalBluetoothProfileManager.HEADSET_PROFILE_UUIDS))  return true;
+            } else {
+                if (bluetoothClass.doesClassMatch(BluetoothClass.PROFILE_A2DP)) return true;
+
+                if (bluetoothClass.doesClassMatch(BluetoothClass.PROFILE_HEADSET)) return true;
+            }
+            break;
+        default:
+            return true;
+        }
+        return false;
+    }
 
     private void createDevicePreference(CachedBluetoothDevice cachedDevice) {
         BluetoothDevicePreference preference = new BluetoothDevicePreference(this, cachedDevice);
