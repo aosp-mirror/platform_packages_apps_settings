@@ -37,6 +37,7 @@ import android.telephony.PhoneStateListener;
 import android.telephony.ServiceState;
 import android.telephony.TelephonyManager;
 import android.telephony.NeighboringCellInfo;
+import android.telephony.cdma.CdmaCellLocation;
 import android.telephony.gsm.GsmCellLocation;
 import android.text.format.DateUtils;
 import android.util.Log;
@@ -621,21 +622,42 @@ public class RadioInfo extends Activity {
     }
 
     private final void updateLocation(CellLocation location) {
-        int lac = -1;
-        int cid = -1;
+        Resources r = getResources();
         if (location instanceof GsmCellLocation) {
             GsmCellLocation loc = (GsmCellLocation)location;
-            lac = loc.getLac();
-            cid = loc.getCid();
+            int lac = loc.getLac();
+            int cid = loc.getCid();
+            mLocation.setText(r.getString(R.string.radioInfo_lac) + " = "
+                    + ((lac == -1) ? "unknown" : Integer.toHexString(lac))
+                    + "   "
+                    + r.getString(R.string.radioInfo_cid) + " = "
+                    + ((cid == -1) ? "unknown" : Integer.toHexString(cid)));
+        } else if (location instanceof CdmaCellLocation) {
+            CdmaCellLocation loc = (CdmaCellLocation)location;
+            int bid = loc.getBaseStationId();
+            int sid = loc.getSystemId();
+            int nid = loc.getNetworkId();
+            int lat = loc.getBaseStationLatitude();
+            int lon = loc.getBaseStationLongitude();
+            mLocation.setText("BID = "
+                    + ((bid == -1) ? "unknown" : Integer.toHexString(bid))
+                    + "   "
+                    + "SID = "
+                    + ((sid == -1) ? "unknown" : Integer.toHexString(sid))
+                    + "   "
+                    + "NID = "
+                    + ((nid == -1) ? "unknown" : Integer.toHexString(nid))
+                    + "\n"
+                    + "LAT = "
+                    + ((lat == -1) ? "unknown" : Integer.toHexString(lat))
+                    + "   "
+                    + "LONG = "
+                    + ((lon == -1) ? "unknown" : Integer.toHexString(lon)));
+        } else {
+            mLocation.setText("unknown");
         }
 
-        Resources r = getResources();
 
-        mLocation.setText(r.getString(R.string.radioInfo_lac) + " = "
-                          + ((lac == -1) ? "unknown" : Integer.toHexString(lac))
-                          + "   "
-                          + r.getString(R.string.radioInfo_cid) + " = "
-                + ((cid == -1) ? "unknown" : Integer.toHexString(cid)));
     }
 
     private final void updateNeighboringCids(ArrayList<NeighboringCellInfo> cids) {
