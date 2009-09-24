@@ -22,6 +22,7 @@ import android.bluetooth.BluetoothHeadset;
 import android.bluetooth.BluetoothUuid;
 import android.bluetooth.ParcelUuid;
 import android.os.Handler;
+import android.util.Log;
 
 import com.android.settings.R;
 
@@ -57,34 +58,35 @@ public abstract class LocalBluetoothProfileManager {
 
     protected LocalBluetoothManager mLocalManager;
 
-    public static LocalBluetoothProfileManager getProfileManager(LocalBluetoothManager localManager,
-            Profile profile) {
-
-        LocalBluetoothProfileManager profileManager;
-
+    public static void init(LocalBluetoothManager localManager) {
         synchronized (sProfileMap) {
-            profileManager = sProfileMap.get(profile);
+            if (sProfileMap.size() == 0) {
+                LocalBluetoothProfileManager profileManager;
 
-            if (profileManager == null) {
-                switch (profile) {
-                case A2DP:
-                    profileManager = new A2dpProfileManager(localManager);
-                    break;
+                profileManager = new A2dpProfileManager(localManager);
+                sProfileMap.put(Profile.A2DP, profileManager);
 
-                case HEADSET:
-                    profileManager = new HeadsetProfileManager(localManager);
-                    break;
+                profileManager = new HeadsetProfileManager(localManager);
+                sProfileMap.put(Profile.HEADSET, profileManager);
 
-                case OPP:
-                    profileManager = new OppProfileManager(localManager);
-                    break;
-                }
-
-                sProfileMap.put(profile, profileManager);
+                profileManager = new OppProfileManager(localManager);
+                sProfileMap.put(Profile.OPP, profileManager);
             }
         }
+    }
 
-        return profileManager;
+    public static LocalBluetoothProfileManager getProfileManager(LocalBluetoothManager localManager,
+            Profile profile) {
+        // Note: This code assumes that "localManager" is same as the
+        // LocalBluetoothManager that was used to initialize the sProfileMap.
+        // If that every changes, we can't just keep one copy of sProfileMap.
+        synchronized (sProfileMap) {
+            LocalBluetoothProfileManager profileManager = sProfileMap.get(profile);
+            if (profileManager == null) {
+                Log.e(TAG, "profileManager can't be found for " + profile.toString());
+            }
+            return profileManager;
+        }
     }
 
     /**
