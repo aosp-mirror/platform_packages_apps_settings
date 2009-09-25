@@ -37,17 +37,17 @@ import java.util.Set;
 public abstract class LocalBluetoothProfileManager {
     private static final String TAG = "LocalBluetoothProfileManager";
 
-    private static final ParcelUuid[] HEADSET_PROFILE_UUIDS = new ParcelUuid[] {
+    /* package */ static final ParcelUuid[] HEADSET_PROFILE_UUIDS = new ParcelUuid[] {
         BluetoothUuid.HSP,
         BluetoothUuid.Handsfree,
     };
 
-    private static final ParcelUuid[] A2DP_PROFILE_UUIDS = new ParcelUuid[] {
+    /* package */ static final ParcelUuid[] A2DP_PROFILE_UUIDS = new ParcelUuid[] {
         BluetoothUuid.AudioSink,
         BluetoothUuid.AdvAudioDist,
     };
 
-    private static final ParcelUuid[] OPP_PROFILE_UUIDS = new ParcelUuid[] {
+    /* package */ static final ParcelUuid[] OPP_PROFILE_UUIDS = new ParcelUuid[] {
         BluetoothUuid.ObexObjectPush
     };
 
