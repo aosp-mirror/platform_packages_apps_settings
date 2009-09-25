@@ -174,7 +174,7 @@
     <string name="bluetooth">Bluetooth</string>
     <!-- Bluetooth settings screen, check box label when the Bluetooth device can be seen by others -->
     <string name="bluetooth_visibility">Discoverable</string>
-    <!-- Bluetooth settings screen,  summary after selecting Discoverable check box -->
+    <!-- Bluetooth settings screen, summary after selecting Discoverable check box -->
     <string name="bluetooth_is_discoverable">Discoverable for <xliff:g id="discoverable_time_period">%1$s</xliff:g> seconds\u2026</string>
     <!-- Bluetooth settings screen, Discoverable checkbox summary text -->
     <string name="bluetooth_not_discoverable">Make device discoverable</string>
@@ -712,7 +712,7 @@
     <!-- Wifi network summary when the network is configured previously, capitalized by app -->
     <string name="summary_remembered">remembered</string>
     <!-- Wifi network summary when there was an error connecting -->
-    <string name="summary_connection_failed">Connection unsuccessful, select to try again</string>
+    <string name="summary_connection_failed">Connection unsuccessful, touch to try again</string>
     <!-- Header for the list of wifi networks-->
     <string name="wifi_access_points">Wi-Fi networks</string>
     <!-- Caption for entering the SSID of a wifi network -->
@@ -1165,17 +1165,17 @@
     <!-- Security & location settings screen, setting summary when Use wireless networks check box is selected -->
     <string name="location_neighborhood_level">Location determined by Wi-Fi and/or mobile networks</string>
     <!-- Security & location settings screen, setting check box label if the GPS receiver should be enabled -->
-    <string name="location_gps">Enable GPS satellites</string>
-    <!-- Security & location settings screen, setting summary when Enable GPS satellites check box is selected -->
-    <string name="location_street_level">When locating, accurate to street level (deselect to conserve battery)</string>
-    <!-- Security & location settings screen, setting summary when Enable GPS satellites check box is clear -->
+    <string name="location_gps">Use GPS satellites</string>
+    <!-- Security & location settings screen, setting summary when Use GPS satellites check box is selected -->
+    <string name="location_street_level">When locating, accurate to street level (uncheck to conserve battery)</string>
+    <!-- Security & location settings screen, setting summary when Use GPS satellites check box is clear -->
     <string name="location_gps_disabled">Locate to street-level (requires more battery plus view of sky)</string>
     <!-- Security & location settings screen, setting check box label if Assisted GPS should be enabled -->
-    <string name="assisted_gps">Enable assisted GPS</string>
+    <string name="assisted_gps">Use assisted GPS</string>
     <!-- Security & location settings screen, setting summary when Assisted GPS check box is selected -->
-    <string name="assisted_gps_enabled">Use server to assist GPS (deselect to reduce network usage)</string>
+    <string name="assisted_gps_enabled">Use server to assist GPS (uncheck to reduce network usage)</string>
     <!-- Security & location settings screen, setting summary when Assisted GPS check box is clear -->
-    <string name="assisted_gps_disabled">Use server to assist GPS (select to improve GPS performance)</string>
+    <string name="assisted_gps_disabled">Use server to assist GPS (uncheck to improve GPS performance)</string>
     <!-- Setting title for allow sending location to google -->
     <string name="use_location_title">Share with Google</string>
     <!-- Title of dialog to user requesting use of location information to improve services -->
@@ -1286,8 +1286,8 @@
         \n<font height="17">\n</font><b>1</b>\u00A0 On the next screen, watch while an example pattern is drawn.
         \n<font height="17">\n</font><b>2</b>\u00A0 When ready, draw your own personal unlock pattern. Experiment with different patterns but connect at least four dots.
         \n<font height="17">\n</font><b>3</b>\u00A0 Redraw your pattern to confirm.
-        \n<font height="17">\n</font><b>Ready to start? Select \u201CNext\u201D</b>.
-        \n<font height="3">\n</font>To leave your phone unprotected, select \u201CCancel\u201D.</font>
+        \n<font height="17">\n</font><b>Ready to start? Touch \u201CNext\u201D</b>.
+        \n<font height="3">\n</font>To leave your phone unprotected, touch \u201CCancel\u201D.</font>
     </string>    
         
     <!-- ChooseLockPatternExample --> <skip />
@@ -1295,7 +1295,7 @@
     <string name="lock_example_title">Example pattern</string>
     <!-- ChooseLockPatternExample, screen hint text at bottom of screen. These are instructions and rules for drawing a good patttern -->
     <string name="lock_example_message">Connect at least four dots.\n
-        \nSelect \u201CNext\u201D when you\u2019re ready to draw your own pattern.
+        \nTouch \u201CNext\u201D when you\u2019re ready to draw your own pattern.
     </string>
 
     <!-- Applications Settings --> <skip />
@@ -1430,9 +1430,9 @@ found in the list of installed applications.</string>
     <!-- Running services, button to cancel stopping of a service -->
     <string name="confirm_stop_cancel">Cancel</string>
     <!-- Running services, description for a service in the started state -->
-    <string name="service_started_by_app">Started by application: select to stop</string>
+    <string name="service_started_by_app">Started by application: touch to stop</string>
     <!-- Running services, description for a service in the started state -->
-    <string name="service_client_name"><xliff:g id="client_name">%1$s</xliff:g>: select to manage</string>
+    <string name="service_client_name"><xliff:g id="client_name">%1$s</xliff:g>: touch to manage</string>
     <!-- Running services, summary of background processes -->
     <string name="service_background_processes">Avail: <xliff:g id="memory">%2$s</xliff:g> (<xliff:g id="count">%1$d</xliff:g> procs)</string>
     <!-- Running services, summary of foreground processes -->
@@ -1479,7 +1479,7 @@ found in the list of installed applications.</string>
     all the text you type, including personal data like passwords and credit
     card numbers.  It comes from the application
     <xliff:g id="ime_application_name">%1$s</xliff:g>.
-    Enable this input method?</string>
+    Use this input method?</string>
     
     <!-- User dictionary settings --><skip />
     <!-- User dictionary settings, The titlebar text of the User dictionary settings screen. -->
@@ -1564,7 +1564,7 @@ found in the list of installed applications.</string>
     <!-- setting Checkbox summary whether to allow mock locations  -->
     <string name="allow_mock_location_summary">Allow mock locations</string>
     <!-- Title of warning dialog about the implications of enabling USB debugging -->
-    <string name="adb_warning_title">Enable USB debugging?</string>
+    <string name="adb_warning_title">Allow USB debugging?</string>
     <!-- Warning text to user about the implications of enabling USB debugging -->
     <string name="adb_warning_message">USB debugging is intended for development purposes only. It can be used to copy data between your computer and your device, install applications on your device without notification, and read log data.</string>
 
@@ -1702,7 +1702,7 @@ found in the list of installed applications.</string>
     <string name="accessibility_service_security_warning">This accessibility service may be able to collect
         all the text you type, including personal data credit card numbers except passwords.
         It may also log your user interface interactions. It comes from the application
-        <xliff:g id="accessibility_service_name">%1$s</xliff:g>. Enable this accessibility service?</string>
+        <xliff:g id="accessibility_service_name">%1$s</xliff:g>. Use this accessibility service?</string>
     <!-- Warning about disabling accessibility displayed as a dialog message when the user
          selects to disable accessibility. This avoids accidental disabling. -->
     <string name="accessibility_service_disable_warning">Disable accessibility?</string>
