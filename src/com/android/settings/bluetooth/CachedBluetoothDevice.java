@@ -610,13 +610,22 @@ public class CachedBluetoothDevice implements Comparable<CachedBluetoothDevice> 
             return R.drawable.ic_bt_cellphone;
         }
 
-        if (mProfiles.contains(Profile.A2DP)) {
-            return R.drawable.ic_bt_headphones_a2dp;
-        } else if (mProfiles.contains(Profile.HEADSET)) {
-            return R.drawable.ic_bt_headset_hfp;
+        if (mProfiles.size() > 0) {
+            if (mProfiles.contains(Profile.A2DP)) {
+                return R.drawable.ic_bt_headphones_a2dp;
+            } else if (mProfiles.contains(Profile.HEADSET)) {
+                return R.drawable.ic_bt_headset_hfp;
+            }
         } else {
-            return 0;
+            if (mBtClass.doesClassMatch(BluetoothClass.PROFILE_A2DP)) {
+                return R.drawable.ic_bt_headphones_a2dp;
+
+            }
+            if (mBtClass.doesClassMatch(BluetoothClass.PROFILE_HEADSET)) {
+                return R.drawable.ic_bt_headset_hfp;
+            }
         }
+        return 0;
     }
 
     /**
