@@ -52,6 +52,7 @@ public class SoundAndDisplaySettings extends PreferenceActivity implements
     private static final String KEY_SCREEN_TIMEOUT = "screen_timeout";
     private static final String KEY_DTMF_TONE = "dtmf_tone";
     private static final String KEY_SOUND_EFFECTS = "sound_effects";
+    private static final String KEY_HAPTIC_FEEDBACK = "haptic_feedback";
     private static final String KEY_ANIMATIONS = "animations";
     private static final String KEY_ACCELEROMETER = "accelerometer";
     private static final String KEY_PLAY_MEDIA_NOTIFICATION_SOUNDS = "play_media_notification_sounds";
@@ -73,6 +74,7 @@ public class SoundAndDisplaySettings extends PreferenceActivity implements
     private CheckBoxPreference mVibrate;
     private CheckBoxPreference mDtmfTone;
     private CheckBoxPreference mSoundEffects;
+    private CheckBoxPreference mHapticFeedback;
     private ListPreference mAnimations;
     private CheckBoxPreference mAccelerometer;
     private float[] mAnimationScales;
@@ -118,6 +120,10 @@ public class SoundAndDisplaySettings extends PreferenceActivity implements
         mSoundEffects.setPersistent(false);
         mSoundEffects.setChecked(Settings.System.getInt(resolver,
                 Settings.System.SOUND_EFFECTS_ENABLED, 0) != 0);
+        mHapticFeedback = (CheckBoxPreference) findPreference(KEY_HAPTIC_FEEDBACK);
+        mHapticFeedback.setPersistent(false);
+        mHapticFeedback.setChecked(Settings.System.getInt(resolver,
+                Settings.System.HAPTIC_FEEDBACK_ENABLED, 0) != 0);
         mAnimations = (ListPreference) findPreference(KEY_ANIMATIONS);
         mAnimations.setOnPreferenceChangeListener(this);
         mAccelerometer = (CheckBoxPreference) findPreference(KEY_ACCELEROMETER);
@@ -264,6 +270,10 @@ public class SoundAndDisplaySettings extends PreferenceActivity implements
             }
             Settings.System.putInt(getContentResolver(), Settings.System.SOUND_EFFECTS_ENABLED,
                     mSoundEffects.isChecked() ? 1 : 0);
+
+        } else if (preference == mHapticFeedback) {
+            Settings.System.putInt(getContentResolver(), Settings.System.HAPTIC_FEEDBACK_ENABLED,
+                    mHapticFeedback.isChecked() ? 1 : 0);
             
         } else if (preference == mAccelerometer) {
             Settings.System.putInt(getContentResolver(),

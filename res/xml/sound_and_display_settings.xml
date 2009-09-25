@@ -85,6 +85,14 @@
                 android:defaultValue="true" />
 
         <CheckBoxPreference
+                android:key="haptic_feedback"
+                android:title="@string/haptic_feedback_enable_title"
+                android:summaryOn="@string/haptic_feedback_enable_summary_on"
+                android:summaryOff="@string/haptic_feedback_enable_summary_off"
+                android:dependency="silent"
+                android:defaultValue="true" />
+
+        <CheckBoxPreference
                 android:key="play_media_notification_sounds"
                 android:title="@string/play_media_notification_sounds_enable_title"
                 android:summaryOn="@string/play_media_notification_sounds_enable_summary_on"
