@@ -134,13 +134,13 @@ public class ManageApplications extends ListActivity implements
     // sort order that can be changed through the menu can be sorted alphabetically
     // or size(descending)
     private static final int MENU_OPTIONS_BASE = 0;
-    public static final int SORT_ORDER_ALPHA = MENU_OPTIONS_BASE + 0;
-    public static final int SORT_ORDER_SIZE = MENU_OPTIONS_BASE + 1;
     // Filter options used for displayed list of applications
-    public static final int FILTER_APPS_ALL = MENU_OPTIONS_BASE + 2;
-    public static final int FILTER_APPS_THIRD_PARTY = MENU_OPTIONS_BASE + 3;
-    public static final int FILTER_APPS_RUNNING = MENU_OPTIONS_BASE + 4;
-    public static final int FILTER_OPTIONS = MENU_OPTIONS_BASE + 5;
+    public static final int FILTER_APPS_ALL = MENU_OPTIONS_BASE + 0;
+    public static final int FILTER_APPS_RUNNING = MENU_OPTIONS_BASE + 1;
+    public static final int FILTER_APPS_THIRD_PARTY = MENU_OPTIONS_BASE + 2;
+    public static final int FILTER_OPTIONS = MENU_OPTIONS_BASE + 3;
+    public static final int SORT_ORDER_ALPHA = MENU_OPTIONS_BASE + 4;
+    public static final int SORT_ORDER_SIZE = MENU_OPTIONS_BASE + 5;
     // Alert Dialog presented to user to find out the filter option
     private AlertDialog mAlertDlg;
     // sort order
@@ -1953,6 +1953,8 @@ public class ManageApplications extends ListActivity implements
         if ((menuId == SORT_ORDER_ALPHA) || (menuId == SORT_ORDER_SIZE)) {
             sendMessageToHandler(REORDER_LIST, menuId);
         } else if (menuId == FILTER_OPTIONS) {
+            // Pick up the selection value from the list of added choice items.
+            int selection = mFilterApps - MENU_OPTIONS_BASE;
             if (mAlertDlg == null) {
                 mAlertDlg = new AlertDialog.Builder(this).
                         setTitle(R.string.filter_dlg_title).
@@ -1960,7 +1962,7 @@ public class ManageApplications extends ListActivity implements
                         setSingleChoiceItems(new CharSequence[] {getText(R.string.filter_apps_all),
                                 getText(R.string.filter_apps_running),
                                 getText(R.string.filter_apps_third_party)},
-                                -1, this).
+                                selection, this).
                         create();
             }
             mAlertDlg.show();
@@ -1985,18 +1987,16 @@ public class ManageApplications extends ListActivity implements
         switch (which) {
         // Make sure that values of 0, 1, 2 match options all, running, third_party when
         // created via the AlertDialog.Builder
-        case 0:
-            newOption = FILTER_APPS_ALL;
+        case FILTER_APPS_ALL:
             break;
-        case 1:
-            newOption = FILTER_APPS_RUNNING;
+        case FILTER_APPS_RUNNING:
             break;
-        case 2:
-            newOption = FILTER_APPS_THIRD_PARTY;
+        case FILTER_APPS_THIRD_PARTY:
             break;
         default:
             return;
         }
+        newOption = which;
         mAlertDlg.dismiss();
         sendMessageToHandler(REORDER_LIST, newOption);
     }
