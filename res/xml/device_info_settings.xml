@@ -120,13 +120,4 @@
                 android:title="@string/build_number"
                 android:summary="@string/device_info_default"/>
 
-        <!-- Factory reset -->
-        <PreferenceScreen 
-            android:title="@string/master_clear_title" 
-            android:summary="@string/master_clear_summary">
-            <intent android:action="android.intent.action.MAIN"
-                android:targetPackage="com.android.settings"
-                android:targetClass="com.android.settings.MasterClear" />
-        </PreferenceScreen>
-
 </PreferenceScreen>
