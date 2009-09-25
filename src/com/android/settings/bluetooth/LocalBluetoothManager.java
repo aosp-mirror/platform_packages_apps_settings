@@ -79,6 +79,8 @@ public class LocalBluetoothManager {
                 return null;
             }
 
+            LocalBluetoothProfileManager.init(INSTANCE);
+
             return INSTANCE;
         }
     }
