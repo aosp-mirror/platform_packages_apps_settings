@@ -73,7 +73,7 @@ import java.util.List;
 
 public class RadioInfo extends Activity {
     private final String TAG = "phone";
-    
+
     private static final int EVENT_PHONE_STATE_CHANGED = 100;
     private static final int EVENT_SIGNAL_STRENGTH_CHANGED = 200;
     private static final int EVENT_SERVICE_STATE_CHANGED = 300;
@@ -223,7 +223,7 @@ public class RadioInfo extends Activity {
                     ar= (AsyncResult) msg.obj;
                     if (ar.exception == null) {
                         mQxdmLogEnabled = !mQxdmLogEnabled;
-                        
+
                         updateQxdmState(mQxdmLogEnabled);
                         displayQxdmEnableResult();
                     }
@@ -272,7 +272,7 @@ public class RadioInfo extends Activity {
         static final int OEM_QXDM_SDLOG_LEN = 4;
         static final int OEM_PS_AUTO_ATTACH_FUNCTAG = 0x00020000;
         static final int OEM_CIPHERING_FUNCTAG = 0x00020001;
-        
+
         /**
          * The OEM interface to store QXDM to SD.
          *
@@ -343,7 +343,7 @@ public class RadioInfo extends Activity {
         byte[] getCipheringData(boolean enable) {
             return getSimpleFeatureData(OEM_CIPHERING_FUNCTAG, enable);
         }
-        
+
         private byte[] getSimpleFeatureData(int tag, boolean enable) {
             ByteArrayOutputStream bos = new ByteArrayOutputStream();
             DataOutputStream dos = new DataOutputStream(bos);
@@ -408,7 +408,7 @@ public class RadioInfo extends Activity {
         preferredNetworkType = (Spinner) findViewById(R.id.preferredNetworkType);
         ArrayAdapter<String> adapter = new ArrayAdapter<String> (this,
                 android.R.layout.simple_spinner_item, mPreferredNetworkLabels);
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);        
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         preferredNetworkType.setAdapter(adapter);
         preferredNetworkType.setOnItemSelectedListener(mPreferredNetworkHandler);
 
@@ -428,12 +428,12 @@ public class RadioInfo extends Activity {
         refreshSmscButton.setOnClickListener(mRefreshSmscButtonHandler);
         dnsCheckToggleButton = (Button) findViewById(R.id.dns_check_toggle);
         dnsCheckToggleButton.setOnClickListener(mDnsCheckButtonHandler);
-        
+
         mPhoneStateReceiver = new PhoneStateIntentReceiver(this, mHandler);
         mPhoneStateReceiver.notifySignalStrength(EVENT_SIGNAL_STRENGTH_CHANGED);
         mPhoneStateReceiver.notifyServiceState(EVENT_SERVICE_STATE_CHANGED);
         mPhoneStateReceiver.notifyPhoneCallState(EVENT_PHONE_STATE_CHANGED);
-                         
+
         updateQxdmState(null);
         mOem = new OemCommands();
 
@@ -545,7 +545,7 @@ public class RadioInfo extends Activity {
     private boolean isRadioOn() {
         return phone.getServiceState().getState() != ServiceState.STATE_POWER_OFF;
     }
-    
+
     private void updatePowerState() {
         String buttonText = isRadioOn() ?
                             getString(R.string.turn_off_radio) :
@@ -554,18 +554,18 @@ public class RadioInfo extends Activity {
     }
 
     private void updateQxdmState(Boolean newQxdmStatus) {
-        SharedPreferences sp = 
+        SharedPreferences sp =
           PreferenceManager.getDefaultSharedPreferences(phone.getContext());
         mQxdmLogEnabled = sp.getBoolean("qxdmstatus", false);
         // This is called from onCreate, onResume, and the handler when the status
-        // is updated. 
+        // is updated.
         if (newQxdmStatus != null) {
             SharedPreferences.Editor editor = sp.edit();
             editor.putBoolean("qxdmstatus", newQxdmStatus);
             editor.commit();
             mQxdmLogEnabled = newQxdmStatus;
         }
-        
+
         String buttonText = mQxdmLogEnabled ?
                             getString(R.string.turn_off_qxdm) :
                             getString(R.string.turn_on_qxdm);
@@ -645,8 +645,8 @@ public class RadioInfo extends Activity {
                 neighborings = "no neighboring cells";
             } else {
                 for (NeighboringCellInfo cell : cids) {
-                    neighborings += "{" + Integer.toHexString(cell.getCid()) 
-                    + "@" + cell.getRssi() + "} ";
+                    neighborings += "{" + Integer.toHexString(cell.getCid())
+                            + "@" + cell.getRssi() + "} ";
                 }
             }
         } else {
@@ -672,7 +672,7 @@ public class RadioInfo extends Activity {
         int state = serviceState.getState();
         Resources r = getResources();
         String display = r.getString(R.string.radioInfo_unknown);
-        
+
         switch (state) {
             case ServiceState.STATE_IN_SERVICE:
                 display = r.getString(R.string.radioInfo_service_in);
@@ -685,9 +685,9 @@ public class RadioInfo extends Activity {
                 display = r.getString(R.string.radioInfo_service_off);
                 break;
         }
-        
+
         gsmState.setText(display);
-        
+
         if (serviceState.getRoaming()) {
             roamingState.setText(R.string.radioInfo_roaming_in);
         } else {
@@ -738,7 +738,7 @@ public class RadioInfo extends Activity {
                 display = r.getString(R.string.radioInfo_data_suspended);
                 break;
         }
-        
+
         gprsState.setText(display);
     }
 
@@ -756,12 +756,12 @@ public class RadioInfo extends Activity {
         Resources r = getResources();
 
         s = phone.getDeviceId();
-        if (s == null) s = r.getString(R.string.radioInfo_unknown); 
+        if (s == null) s = r.getString(R.string.radioInfo_unknown);
         mDeviceId.setText(s);
-        
+
 
         s = phone.getLine1Number();
-        if (s == null) s = r.getString(R.string.radioInfo_unknown); 
+        if (s == null) s = r.getString(R.string.radioInfo_unknown);
         number.setText(s);
     }
 
@@ -792,10 +792,10 @@ public class RadioInfo extends Activity {
             long rxPackets = netstat.getMobileRxPackets();
             long txBytes   = netstat.getMobileTxBytes();
             long rxBytes   = netstat.getMobileRxBytes();
-    
+
             String packets = r.getString(R.string.radioInfo_display_packets);
             String bytes   = r.getString(R.string.radioInfo_display_bytes);
-    
+
             sent.setText(txPackets + " " + packets + ", " + txBytes + " " + bytes);
             received.setText(rxPackets + " " + packets + ", " + rxBytes + " " + bytes);
         } catch (RemoteException e) {
@@ -829,7 +829,7 @@ public class RadioInfo extends Activity {
      */
     private final void pingHostname() {
         try {
-            Process p = Runtime.getRuntime().exec("ping -c 1 www.google.com"); 
+            Process p = Runtime.getRuntime().exec("ping -c 1 www.google.com");
             int status = p.waitFor();
             if (status == 0) {
                 mPingHostnameResult = "Pass";
@@ -1045,7 +1045,7 @@ public class RadioInfo extends Activity {
             return true;
         }
     };
-    
+
     private MenuItem.OnMenuItemClickListener mToggleData = new MenuItem.OnMenuItemClickListener() {
         public boolean onMenuItemClick(MenuItem item) {
             int state = mTelephonyManager.getDataState();
@@ -1091,7 +1091,7 @@ public class RadioInfo extends Activity {
         public void onClick(View v) {
             mCipherOn = !getCiphPref();
             byte[] data = mOem.getCipheringData(mCipherOn);
-            
+
             if (data == null)
                 return;
 
@@ -1100,14 +1100,14 @@ public class RadioInfo extends Activity {
                     mHandler.obtainMessage(EVENT_SET_CIPHER_DONE));
         }
     };
-    
+
     OnClickListener mDnsCheckButtonHandler = new OnClickListener() {
         public void onClick(View v) {
             phone.disableDnsCheck(!phone.isDnsCheckDisabled());
             updateDnsCheckState();
         }
     };
-    
+
     OnClickListener mPingButtonHandler = new OnClickListener() {
         public void onClick(View v) {
             updatePingState();
