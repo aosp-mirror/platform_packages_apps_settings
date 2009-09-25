@@ -26,7 +26,9 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.preference.EditTextPreference;
 import android.text.Editable;
+import android.text.InputFilter;
 import android.text.TextWatcher;
+import android.text.InputFilter.LengthFilter;
 import android.util.AttributeSet;
 import android.widget.Button;
 import android.widget.EditText;
@@ -38,6 +40,8 @@ import android.widget.EditText;
  */
 public class BluetoothNamePreference extends EditTextPreference implements TextWatcher {
     private static final String TAG = "BluetoothNamePreference";
+    // TODO(): Investigate bluetoothd/dbus crash when length is set to 248, limit as per spec.
+    private static final int BLUETOOTH_NAME_MAX_LENGTH = 200;
 
     private LocalBluetoothManager mLocalManager;
 
@@ -71,6 +75,7 @@ public class BluetoothNamePreference extends EditTextPreference implements TextW
 
         // Make sure the OK button is disabled (if necessary) after rotation
         EditText et = getEditText();
+        et.setFilters(new InputFilter[] {new LengthFilter(BLUETOOTH_NAME_MAX_LENGTH)});
         if (et != null) {
             et.addTextChangedListener(this);
             Dialog d = getDialog();
