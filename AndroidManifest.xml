@@ -311,6 +311,19 @@
             </intent-filter>
         </activity>
 
+        <activity android:name="PrivacySettings"
+                android:label="@string/privacy_settings_title"
+                android:configChanges="orientation|keyboardHidden"
+                android:clearTaskOnLaunch="true"
+                >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <action android:name="android.settings.PRIVACY_SETTINGS" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.VOICE_LAUNCH" />
+            </intent-filter>
+        </activity>
+
         <activity android:name="IccLockSettings" android:label="@string/sim_lock_settings"
                 android:process="com.android.phone">
             <intent-filter>
