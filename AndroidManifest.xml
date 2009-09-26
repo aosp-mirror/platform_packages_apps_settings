@@ -487,6 +487,25 @@
             </intent-filter>
         </activity>
 
+        <activity android:name=".bluetooth.RequestPermissionActivity"
+                  android:label="@string/bluetooth_permission_request"
+                  android:excludeFromRecents="true"
+                  android:permission="android.permission.BLUETOOTH"
+                  android:theme="@*android:style/Theme.Dialog.Alert">
+            <intent-filter>
+                <action android:name="android.bluetooth.adapter.action.REQUEST_DISCOVERABLE" />
+                <action android:name="android.bluetooth.adapter.action.REQUEST_ENABLE" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+
+        <activity android:name=".bluetooth.RequestPermissionHelperActivity"
+                  android:label="@string/bluetooth_pairing_request"
+                  android:excludeFromRecents="true"
+                  android:permission="android.permission.BLUETOOTH"
+                  android:theme="@*android:style/Theme.Dialog.Alert">
+        </activity>
+
         <receiver android:name=".bluetooth.BluetoothPairingRequest">
             <intent-filter>
                 <action android:name="android.bluetooth.device.action.PAIRING_REQUEST" />

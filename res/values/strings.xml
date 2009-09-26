@@ -15,6 +15,11 @@
 -->
 
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <!-- Strings for Dialog yes button -->
+    <string name="yes">"Yes"</string>
+
+    <!-- Strings for Dialog no button -->
+    <string name="no">"No"</string>
 
     <!-- Device Info --> <skip />
     <!-- Device Info screen. Used for a status item's value when the proper value is not known -->
@@ -226,6 +231,21 @@
 
     <!-- Strings for BluetoothDevicePicker -->
     <string name="device_picker">Bluetooth device picker</string>
+
+    <!-- Strings for dialog title when asking to the user whether to allow an app to enable discovery mode -->
+    <string name="bluetooth_permission_request">"Bluetooth permission request"</string>
+
+    <!-- Strings for asking to the user whether to allow an app to enable bluetooth -->
+    <string name="bluetooth_ask_enablement">"An application on your phone is requesting permission to turn on Bluetooth. Do you want to do this?"</string>
+
+    <!-- Strings for asking to the user whether to allow an app to enable discovery mode -->
+    <string name="bluetooth_ask_discovery">"An application on your phone is requesting permission to make your phone discoverable by other Bluetooth devices for <xliff:g id="timeout">%1$d</xliff:g> seconds. Do you want to do this?"</string>
+
+    <!-- Strings for asking to the user whether to allow an app to enable bluetooth and discovery mode -->
+    <string name="bluetooth_ask_enablement_and_discovery">"An application on your phone is requesting permission to turn on Bluetooth and to make your phone discoverable by other devices for <xliff:g id="timeout">%1$d</xliff:g> seconds. Do you want to do this?"</string>
+
+    <!-- Strings for msg to display to user while bluetooth is turning on -->
+    <string name="bluetooth_turning_on">"Turning on Bluetooth\u2026"</string>
 
     <!-- Do not translate. Used for diagnostic screens, precise translation is not necessary -->
     <string name="bluetooth_scan_text">Empty button\u2026</string>
