@@ -36,6 +36,7 @@ import com.android.internal.app.IBatteryStats;
 
 public class BatteryInfo extends Activity {
     private TextView mStatus;
+    private TextView mPower;
     private TextView mLevel;
     private TextView mScale;
     private TextView mHealth;
@@ -111,6 +112,24 @@ public class BatteryInfo extends Activity {
                 }
                 mStatus.setText(statusString);
 
+                switch (plugType) {
+                    case 0:
+                        mPower.setText(getString(R.string.battery_info_power_unplugged));
+                        break;
+                    case BatteryManager.BATTERY_PLUGGED_AC:
+                        mPower.setText(getString(R.string.battery_info_power_ac));
+                        break;
+                    case BatteryManager.BATTERY_PLUGGED_USB:
+                        mPower.setText(getString(R.string.battery_info_power_usb));
+                        break;
+                    case (BatteryManager.BATTERY_PLUGGED_AC|BatteryManager.BATTERY_PLUGGED_USB):
+                        mPower.setText(getString(R.string.battery_info_power_ac_usb));
+                        break;
+                    default:
+                        mPower.setText(getString(R.string.battery_info_power_unknown));
+                        break;
+                }
+                
                 int health = intent.getIntExtra("health", BatteryManager.BATTERY_HEALTH_UNKNOWN);
                 String healthString;
                 if (health == BatteryManager.BATTERY_HEALTH_GOOD) {
@@ -148,6 +167,7 @@ public class BatteryInfo extends Activity {
         super.onResume();
 
         mStatus = (TextView)findViewById(R.id.status);
+        mPower = (TextView)findViewById(R.id.power);
         mLevel = (TextView)findViewById(R.id.level);
         mScale = (TextView)findViewById(R.id.scale);
         mHealth = (TextView)findViewById(R.id.health);
