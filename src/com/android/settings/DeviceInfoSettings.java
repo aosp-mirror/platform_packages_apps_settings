@@ -48,6 +48,7 @@ public class DeviceInfoSettings extends PreferenceActivity {
     private static final String KEY_LICENSE = "license";
     private static final String KEY_COPYRIGHT = "copyright";
     private static final String KEY_SYSTEM_UPDATE_SETTINGS = "system_update_settings";
+    private static final String PROPERTY_URL_SAFETYLEGAL = "ro.url.safetylegal";
     
     @Override
     protected void onCreate(Bundle icicle) {
@@ -60,6 +61,10 @@ public class DeviceInfoSettings extends PreferenceActivity {
         setStringSummary("device_model", Build.MODEL);
         setStringSummary("build_number", Build.DISPLAY);
         findPreference("kernel_version").setSummary(getFormattedKernelVersion());
+
+        // Remove Safety information preference if PROPERTY_URL_SAFETYLEGAL is not set
+        removePreferenceIfPropertyMissing(getPreferenceScreen(), "safetylegal",
+                PROPERTY_URL_SAFETYLEGAL);
 
         /*
          * Settings is a generic app and should not contain any device-specific
@@ -85,7 +90,21 @@ public class DeviceInfoSettings extends PreferenceActivity {
         Utils.updatePreferenceToSpecificActivityOrRemove(this, parentPreference, KEY_CONTRIBUTORS,
                 Utils.UPDATE_PREFERENCE_FLAG_SET_TITLE_TO_MATCHING_ACTIVITY);
     }
-    
+
+    private void removePreferenceIfPropertyMissing(PreferenceGroup preferenceGroup,
+            String preference, String property ) {
+        if (SystemProperties.get(property).equals(""))
+        {
+            // Property is missing so remove preference from group
+            try {
+                preferenceGroup.removePreference(findPreference(preference));
+            } catch (RuntimeException e) {
+                Log.d(TAG, "Property '" + property + "' missing and no '"
+                        + preference + "' preference");
+            }
+        }
+    }
+
     private void setStringSummary(String preference, String value) {
         try {
             findPreference(preference).setSummary(value);
