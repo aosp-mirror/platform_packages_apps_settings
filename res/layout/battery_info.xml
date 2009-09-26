@@ -26,6 +26,12 @@
         <TextView android:id="@+id/status" style="@style/info_value" />
     </LinearLayout>
 
+    <!-- Battery Status -->
+    <LinearLayout style="@style/entry_layout">
+        <TextView android:text="@string/battery_info_power_label" style="@style/info_label" />
+        <TextView android:id="@+id/power" style="@style/info_value" />
+    </LinearLayout>
+
     <!-- Battery Level -->
     <LinearLayout style="@style/entry_layout">
         <TextView android:text="@string/battery_info_level_label" style="@style/info_label" />
