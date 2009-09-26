@@ -639,20 +639,20 @@ public class RadioInfo extends Activity {
     }
 
     private final void updateNeighboringCids(ArrayList<NeighboringCellInfo> cids) {
-        String neighborings = "";
+        StringBuilder sb = new StringBuilder();
+
         if (cids != null) {
             if ( cids.isEmpty() ) {
-                neighborings = "no neighboring cells";
+                sb.append("no neighboring cells");
             } else {
                 for (NeighboringCellInfo cell : cids) {
-                    neighborings += "{" + Integer.toHexString(cell.getCid())
-                            + "@" + cell.getRssi() + "} ";
+                    sb.append(cell.toString()).append(" ");
                 }
             }
         } else {
-            neighborings = "unknown";
+            sb.append("unknown");
         }
-        mNeighboringCids.setText(neighborings);
+        mNeighboringCids.setText(sb.toString());
     }
 
     private final void
