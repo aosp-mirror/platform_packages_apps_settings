@@ -75,6 +75,12 @@
 
         </PreferenceScreen>
         
+        <PreferenceScreen
+                android:key="safetylegal"
+                android:title="@string/settings_safetylegal_title">
+            <intent android:action="android.settings.SAFETY" />
+        </PreferenceScreen>
+
         <!-- Contributors -->
         <!-- 
         <PreferenceScreen
