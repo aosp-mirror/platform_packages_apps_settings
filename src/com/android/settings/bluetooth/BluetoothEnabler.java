@@ -99,7 +99,7 @@ public class BluetoothEnabler implements Preference.OnPreferenceChangeListener {
         // Don't update UI to opposite state until we're sure
         return false;
     }
-    
+
     private void setEnabled(final boolean enable) {
         // Disable preference
         mCheckBoxPreference.setEnabled(false);
@@ -115,8 +115,16 @@ public class BluetoothEnabler implements Preference.OnPreferenceChangeListener {
             mCheckBoxPreference.setSummary(state == BluetoothAdapter.STATE_OFF ?
                                            mOriginalSummary :
                                            null);
-            
-            mCheckBoxPreference.setEnabled(isEnabledByDependency());
+
+            /*
+             * Don't ever disable the preference. Only enable here. Disablement
+             * is taken care of by the dependency code. If this is disabled
+             * here, it may not be re-enabled from the framework when dependency
+             * is met. http://b/issue?id=2053751
+             */
+            if (isEnabledByDependency()) {
+                mCheckBoxPreference.setEnabled(true);
+            }
             
         } else if (state == BluetoothAdapter.STATE_TURNING_ON ||
                 state == BluetoothAdapter.STATE_TURNING_OFF) {
