@@ -71,6 +71,8 @@ public class BluetoothSettings extends PreferenceActivity
     private String mLaunchPackage;
     private String mLaunchClass;
 
+    private BluetoothDevice mSelectedDevice= null;
+
     private LocalBluetoothManager mLocalManager;
 
     private BluetoothEnabler mEnabler;
@@ -95,9 +97,12 @@ public class BluetoothSettings extends PreferenceActivity
                 int bondState = intent
                         .getIntExtra(BluetoothDevice.EXTRA_BOND_STATE, BluetoothDevice.ERROR);
                 if (bondState == BluetoothDevice.BOND_BONDED) {
-                    BluetoothDevice device = intent.getParcelableExtra(BluetoothDevice.EXTRA_DEVICE);
-                    sendDevicePickedIntent(device);
-                    finish();
+                    BluetoothDevice device = intent
+                            .getParcelableExtra(BluetoothDevice.EXTRA_DEVICE);
+                    if (device.equals(mSelectedDevice)) {
+                        sendDevicePickedIntent(device);
+                        finish();
+                    }
                 }
             }
         }
@@ -249,9 +254,10 @@ public class BluetoothSettings extends PreferenceActivity
             } else if (mScreenType == SCREEN_TYPE_DEVICEPICKER) {
                 CachedBluetoothDevice device = btPreference.getCachedDevice();
 
-                if ((device.getBondState() == BluetoothDevice.BOND_BONDED) || (mNeedAuth == false)) {
-                    BluetoothDevice btAddress = btPreference.getCachedDevice().getDevice();
-                    sendDevicePickedIntent(btAddress);
+                mSelectedDevice = device.getDevice();
+                if ((device.getBondState() == BluetoothDevice.BOND_BONDED) ||
+                        (mNeedAuth == false)) {
+                    sendDevicePickedIntent(mSelectedDevice);
                     finish();
                 } else {
                     btPreference.getCachedDevice().onClicked();
