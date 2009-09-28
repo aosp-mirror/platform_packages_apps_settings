@@ -380,9 +380,6 @@ public class SecuritySettings extends PreferenceActivity {
                 mExternalIntent = intent;
                 showCstorDialog(mState == KeyStore.UNINITIALIZED
                         ? CSTOR_INIT_DIALOG : CSTOR_UNLOCK_DIALOG);
-            } else if (Credentials.SYSTEM_INSTALL_ACTION.equals(action)) {
-                mExternalIntent = intent;
-                // TODO: unlock and install.
             }
         }
 
@@ -460,12 +457,7 @@ public class SecuritySettings extends PreferenceActivity {
                 removeDialog(mDialogId);
 
                 if (mExternalIntent != null) {
-                    if (Credentials.SYSTEM_INSTALL_ACTION.equals(
-                                    mExternalIntent.getAction())) {
-                        // TODO: install if unlocked.
-                    } else {
-                        finish();
-                    }
+                    finish();
                 }
             }
         }
