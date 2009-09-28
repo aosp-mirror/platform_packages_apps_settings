@@ -390,8 +390,14 @@ public class SettingsAppWidgetProvider extends AppWidgetProvider {
                 }
                 power.setBacklightBrightness(brightness);
                 Settings.System.putInt(cr, Settings.System.SCREEN_BRIGHTNESS, brightness);
-                brightness = Settings.System.getInt(cr,
-                        Settings.System.SCREEN_BRIGHTNESS);
+                if (context.getResources().getBoolean(
+                        com.android.internal.R.bool.config_automatic_brightness_available)) {
+                    // Disable automatic brightness
+                    power.setAutoBrightness(false);
+                    Settings.System.putInt(context.getContentResolver(),
+                            Settings.System.SCREEN_BRIGHTNESS_MODE,
+                            0);
+                }
             }
         } catch (RemoteException e) {
             Log.d(TAG, "toggleBrightness: " + e);
