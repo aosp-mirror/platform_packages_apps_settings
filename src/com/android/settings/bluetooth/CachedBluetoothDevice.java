@@ -20,7 +20,7 @@ import android.app.AlertDialog;
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothClass;
 import android.bluetooth.BluetoothDevice;
-import android.bluetooth.ParcelUuid;
+import android.os.ParcelUuid;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;

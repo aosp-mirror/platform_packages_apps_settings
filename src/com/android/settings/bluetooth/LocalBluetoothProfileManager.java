@@ -20,7 +20,7 @@ import android.bluetooth.BluetoothA2dp;
 import android.bluetooth.BluetoothDevice;
 import android.bluetooth.BluetoothHeadset;
 import android.bluetooth.BluetoothUuid;
-import android.bluetooth.ParcelUuid;
+import android.os.ParcelUuid;
 import android.os.Handler;
 import android.util.Log;
 
