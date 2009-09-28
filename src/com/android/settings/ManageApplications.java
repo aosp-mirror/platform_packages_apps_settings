@@ -212,9 +212,6 @@ public class ManageApplications extends ListActivity implements
     // Cache application attributes
     private AppInfoCache mCache = new AppInfoCache();
     
-    // empty message displayed when list is empty
-    private TextView mEmptyView;
-    
     // Boolean variables indicating state
     private boolean mLoadLabels = false;
     private boolean mSizesFirst = false;
@@ -776,17 +773,6 @@ public class ManageApplications extends ListActivity implements
         }
     }
     
-    private void showEmptyViewIfListEmpty() {
-        if (localLOGV) Log.i(TAG, "Checking for empty view");
-        if (mAppInfoAdapter.getCount() > 0) {
-            mListView.setVisibility(View.VISIBLE);
-            mEmptyView.setVisibility(View.GONE);
-        } else {
-            mListView.setVisibility(View.GONE);
-            mEmptyView.setVisibility(View.VISIBLE);
-        }
-    }
-    
     // internal structure used to track added and deleted packages when
     // the activity has focus
     static class AddRemoveInfo {
@@ -1192,7 +1178,6 @@ public class ManageApplications extends ListActivity implements
            } else {
                notifyDataSetChanged();
            }
-           showEmptyViewIfListEmpty();
            return true;
         }
         
@@ -1594,7 +1579,6 @@ public class ManageApplications extends ListActivity implements
         // initialize the inflater
         mInflater = (LayoutInflater)getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         mReceiver = new PackageIntentReceiver();
-        mEmptyView = (TextView) findViewById(R.id.empty_view);
         mObserver = new PkgSizeObserver();
         // Create adapter and list view here
         List<ApplicationInfo> appList = getInstalledApps(mSortOrder);
