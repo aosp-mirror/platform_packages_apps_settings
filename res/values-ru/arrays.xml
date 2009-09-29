@@ -32,30 +32,45 @@
     <item msgid="5721688686241190620">"10 минут"</item>
     <item msgid="1781492122915870416">"Не отключать"</item>
   </string-array>
-    <!-- no translation found for tts_rate_entries:0 (6041212618892492920) -->
-    <!-- no translation found for tts_rate_entries:1 (2361722960903353554) -->
-    <!-- no translation found for tts_rate_entries:2 (1145554631248513562) -->
-    <!-- no translation found for tts_rate_entries:3 (7553665153391107454) -->
-    <!-- no translation found for tts_rate_entries:4 (2538100882620724753) -->
-    <!-- no translation found for tts_pitch_entries:0 (7526050907652687351) -->
-    <!-- no translation found for tts_pitch_entries:1 (2692137425242433765) -->
-    <!-- no translation found for tts_pitch_entries:2 (3332408460740717754) -->
-    <!-- no translation found for tts_pitch_entries:3 (4907380534957572531) -->
-    <!-- no translation found for tts_pitch_entries:4 (4699640516390840297) -->
-    <!-- no translation found for tts_lang_entries:0 (478030717868306353) -->
-    <!-- no translation found for tts_lang_entries:1 (5192284521396794598) -->
-    <!-- no translation found for tts_lang_entries:2 (3000262452051711991) -->
-    <!-- no translation found for tts_lang_entries:3 (9214080387341763401) -->
-    <!-- no translation found for tts_lang_entries:4 (5972100016440094433) -->
-    <!-- no translation found for tts_lang_entries:5 (5811378076054402537) -->
-    <!-- no translation found for wifi_security_entries:3 (6303607119537134095) -->
-    <!-- no translation found for wifi_security_entries:4 (1977424472734732392) -->
-    <!-- no translation found for wifi_security_entries:5 (5185669984217684689) -->
-    <!-- no translation found for wifi_security_entries:6 (8643206823103498303) -->
-    <!-- no translation found for wifi_security_without_auto_entries:2 (2296204649410509235) -->
-    <!-- no translation found for wifi_security_without_auto_entries:3 (8928468573279595315) -->
-    <!-- no translation found for wifi_security_without_auto_entries:4 (8319241197948974314) -->
-    <!-- no translation found for wifi_security_without_auto_entries:5 (2222409752754955757) -->
+  <string-array name="tts_rate_entries">
+    <item msgid="6041212618892492920">"Очень медленная"</item>
+    <item msgid="2361722960903353554">"Медленная"</item>
+    <item msgid="1145554631248513562">"Обычная"</item>
+    <item msgid="7553665153391107454">"Быстрая"</item>
+    <item msgid="2538100882620724753">"Очень быстро"</item>
+  </string-array>
+  <string-array name="tts_pitch_entries">
+    <item msgid="7526050907652687351">"Очень низкий"</item>
+    <item msgid="2692137425242433765">"Низкий"</item>
+    <item msgid="3332408460740717754">"Обычный"</item>
+    <item msgid="4907380534957572531">"Высокий"</item>
+    <item msgid="4699640516390840297">"Очень высокий"</item>
+  </string-array>
+  <string-array name="tts_lang_entries">
+    <item msgid="478030717868306353">"Английский (США)"</item>
+    <item msgid="5192284521396794598">"Английский (Великобритания)"</item>
+    <item msgid="3000262452051711991">"Французский"</item>
+    <item msgid="9214080387341763401">"Немецкий"</item>
+    <item msgid="5972100016440094433">"Итальянский"</item>
+    <item msgid="5811378076054402537">"Испанский"</item>
+  </string-array>
+  <string-array name="wifi_security_entries">
+    <item msgid="2923732046112398627">"Авто"</item>
+    <item msgid="5434666299123318296">"Нет"</item>
+    <item msgid="3159594845889645948">"WEP"</item>
+    <item msgid="6303607119537134095">"WPA Personal"</item>
+    <item msgid="1977424472734732392">"WPA2 Personal"</item>
+    <item msgid="5185669984217684689">"WPA-EAP"</item>
+    <item msgid="8643206823103498303">"IEEE 802.1x"</item>
+  </string-array>
+  <string-array name="wifi_security_without_auto_entries">
+    <item msgid="4402120432904877907">"Нет"</item>
+    <item msgid="2329148995431627488">"WEP"</item>
+    <item msgid="2296204649410509235">"WPA Personal"</item>
+    <item msgid="8928468573279595315">"WPA2 Personal"</item>
+    <item msgid="8319241197948974314">"WPA-EAP"</item>
+    <item msgid="2222409752754955757">"IEEE 802.1x"</item>
+  </string-array>
   <string-array name="wifi_wep_type">
     <item msgid="1497433962958697183">"Авто"</item>
     <item msgid="7182335713815377158">"WEP ASCII"</item>
@@ -75,7 +90,7 @@
     <item msgid="4832254146664706277">"Прочее использование"</item>
   </string-array>
   <string-array name="battery_history_which_spinner">
-    <item msgid="3451981114763440074">"С последнего отключения питания"</item>
+    <item msgid="3451981114763440074">"После последнего отключения питания"</item>
     <item msgid="166936313535197598">"Всего с момента загрузки"</item>
     <item msgid="4793941382744963893">"Всего за все время"</item>
   </string-array>
@@ -84,15 +99,21 @@
     <item msgid="1908750532762193304">"Начать подсчет"</item>
     <item msgid="1213951670006606353">"Название приложения"</item>
   </string-array>
-    <!-- no translation found for wifi_eap_entries:0 (8615575908717909498) -->
-    <!-- no translation found for wifi_eap_entries:1 (8667872640594311615) -->
-    <!-- no translation found for wifi_eap_entries:2 (7182812872984827322) -->
-    <!-- no translation found for wifi_phase2_entries:0 (1818786254010764570) -->
-    <!-- no translation found for wifi_phase2_entries:1 (6189918678874123056) -->
-    <!-- no translation found for wifi_phase2_entries:2 (1524112260493662517) -->
-    <!-- no translation found for wifi_phase2_entries:3 (1586767102985419413) -->
-    <!-- no translation found for wifi_phase2_entries:4 (8651992560135239389) -->
-    <!-- no translation found for emergency_tone_entries:0 (5165439859689033665) -->
-    <!-- no translation found for emergency_tone_entries:1 (3165868966179561687) -->
-    <!-- no translation found for emergency_tone_entries:2 (6038758039030476855) -->
+  <string-array name="wifi_eap_entries">
+    <item msgid="8615575908717909498">"PEAP"</item>
+    <item msgid="8667872640594311615">"TLS"</item>
+    <item msgid="7182812872984827322">"TTLS"</item>
+  </string-array>
+  <string-array name="wifi_phase2_entries">
+    <item msgid="1818786254010764570">"Нет"</item>
+    <item msgid="6189918678874123056">"PAP"</item>
+    <item msgid="1524112260493662517">"MSCHAP"</item>
+    <item msgid="1586767102985419413">"MSCHAP2"</item>
+    <item msgid="8651992560135239389">"GTC"</item>
+  </string-array>
+  <string-array name="emergency_tone_entries">
+    <item msgid="5165439859689033665">"Выкл."</item>
+    <item msgid="3165868966179561687">"Оповещение"</item>
+    <item msgid="6038758039030476855">"Вибрация"</item>
+  </string-array>
 </resources>
