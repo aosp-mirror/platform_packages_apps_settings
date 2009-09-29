@@ -39,9 +39,9 @@ public class BluetoothDiscoverableEnabler implements Preference.OnPreferenceChan
 
     private static final String SYSTEM_PROPERTY_DISCOVERABLE_TIMEOUT =
             "debug.bt.discoverable_time";
-    private static final int DISCOVERABLE_TIMEOUT = 120;
+    /* package */  static final int DEFAULT_DISCOVERABLE_TIMEOUT = 120;
 
-    private static final String SHARED_PREFERENCES_KEY_DISCOVERABLE_END_TIMESTAMP =
+    /* package */ static final String SHARED_PREFERENCES_KEY_DISCOVERABLE_END_TIMESTAMP =
             "discoverable_end_timestamp";
 
     private final Context mContext;
@@ -135,7 +135,7 @@ public class BluetoothDiscoverableEnabler implements Preference.OnPreferenceChan
     private int getDiscoverableTimeout() {
         int timeout = SystemProperties.getInt(SYSTEM_PROPERTY_DISCOVERABLE_TIMEOUT, -1);
         if (timeout <= 0) {
-            timeout = DISCOVERABLE_TIMEOUT;
+            timeout = DEFAULT_DISCOVERABLE_TIMEOUT;
         }
 
         return timeout;
