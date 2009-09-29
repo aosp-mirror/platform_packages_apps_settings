@@ -19,6 +19,7 @@ package com.android.settings;
 import com.android.internal.widget.LockPatternUtils;
 import com.android.internal.widget.LockPatternView;
 import com.android.internal.widget.LinearLayoutWithDefaultTouchRecepient;
+import com.android.internal.widget.LockPatternView.Cell;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -214,6 +215,10 @@ public class ConfirmLockPattern extends Activity {
 
         public void onPatternCleared() {
             mLockPatternView.removeCallbacks(mClearPatternRunnable);
+        }
+
+        public void onPatternCellAdded(List<Cell> pattern) {
+
         }
 
         public void onPatternDetected(List<LockPatternView.Cell> pattern) {
