@@ -397,6 +397,8 @@ public class SettingsAppWidgetProvider extends AppWidgetProvider {
                     Settings.System.putInt(context.getContentResolver(),
                             Settings.System.SCREEN_BRIGHTNESS_MODE,
                             0);
+                    // Set it again in case auto brightness was on
+                    power.setBacklightBrightness(brightness);
                 }
             }
         } catch (RemoteException e) {
