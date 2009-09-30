@@ -78,7 +78,7 @@ public class BluetoothEventRedirector {
                 mManager.getCachedDeviceManager().onBondingStateChanged(device, bondState);
                 if (bondState == BluetoothDevice.BOND_NONE) {
                     int reason = intent.getIntExtra(BluetoothDevice.EXTRA_REASON, BluetoothDevice.ERROR);
-                    mManager.getCachedDeviceManager().onBondingError(device, reason);
+                    mManager.getCachedDeviceManager().showUnbondMessage(device, reason);
                 }
 
             } else if (action.equals(BluetoothHeadset.ACTION_STATE_CHANGED)) {
