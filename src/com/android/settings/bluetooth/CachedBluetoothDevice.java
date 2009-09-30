@@ -79,14 +79,14 @@ public class CachedBluetoothDevice implements Comparable<CachedBluetoothDevice> 
     private boolean mIsConnectingErrorPossible;
 
     /**
-     * Last time a bt profile auto-connect was attempted without any profiles or
-     * UUIDs. If an ACTION_UUID intent comes in within
+     * Last time a bt profile auto-connect was attempted.
+     * If an ACTION_UUID intent comes in within
      * MAX_UUID_DELAY_FOR_AUTO_CONNECT milliseconds, we will try auto-connect
      * again with the new UUIDs
      */
-    private long mConnectAttemptedWithoutUuid;
+    private long mConnectAttempted;
 
-    // See mConnectAttemptedWithoutUuid
+    // See mConnectAttempted
     private static final long MAX_UUID_DELAY_FOR_AUTO_CONNECT = 5000;
 
     // Max time to hold the work queue if we don't get or missed a response
@@ -375,12 +375,18 @@ public class CachedBluetoothDevice implements Comparable<CachedBluetoothDevice> 
     public void connect() {
         if (!ensurePaired()) return;
 
+        mConnectAttempted = SystemClock.elapsedRealtime();
+
+        connectWithoutResettingTimer();
+    }
+
+    private void connectWithoutResettingTimer() {
         // Try to initialize the profiles if there were not.
         if (mProfiles.size() == 0) {
             if (!updateProfiles()) {
                 // If UUIDs are not available yet, connect will be happen
                 // upon arrival of the ACTION_UUID intent.
-                mConnectAttemptedWithoutUuid = SystemClock.elapsedRealtime();
+                if (DEBUG) Log.d(TAG, "No profiles. Maybe we will connect later");
                 return;
             }
         }
@@ -388,22 +394,23 @@ public class CachedBluetoothDevice implements Comparable<CachedBluetoothDevice> 
         // Reset the only-show-one-error-dialog tracking variable
         mIsConnectingErrorPossible = true;
 
-        boolean hasAtLeastOnePreferredProfile = false;
+        int preferredProfiles = 0;
         for (Profile profile : mProfiles) {
             LocalBluetoothProfileManager profileManager =
                     LocalBluetoothProfileManager.getProfileManager(mLocalManager, profile);
             if (profileManager.isPreferred(mDevice)) {
-                hasAtLeastOnePreferredProfile = true;
+                ++preferredProfiles;
                 queueCommand(new BluetoothJob(BluetoothCommand.CONNECT, this, profile));
             }
         }
+        if (DEBUG) Log.d(TAG, "Preferred profiles = " + preferredProfiles);
 
-        if (!hasAtLeastOnePreferredProfile) {
-            connectAndPreferAllProfiles();
+        if (preferredProfiles == 0) {
+            connectAllProfiles();
         }
     }
 
-    private void connectAndPreferAllProfiles() {
+    private void connectAllProfiles() {
         if (!ensurePaired()) return;
 
         // Reset the only-show-one-error-dialog tracking variable
@@ -412,12 +419,13 @@ public class CachedBluetoothDevice implements Comparable<CachedBluetoothDevice> 
         for (Profile profile : mProfiles) {
             LocalBluetoothProfileManager profileManager =
                     LocalBluetoothProfileManager.getProfileManager(mLocalManager, profile);
-            profileManager.setPreferred(mDevice, true);
+            profileManager.setPreferred(mDevice, false);
             queueCommand(new BluetoothJob(BluetoothCommand.CONNECT, this, profile));
         }
     }
 
     public void connect(Profile profile) {
+        mConnectAttempted = SystemClock.elapsedRealtime();
         // Reset the only-show-one-error-dialog tracking variable
         mIsConnectingErrorPossible = true;
         queueCommand(new BluetoothJob(BluetoothCommand.CONNECT, this, profile));
@@ -434,8 +442,9 @@ public class CachedBluetoothDevice implements Comparable<CachedBluetoothDevice> 
                 return true;
             }
             Log.i(TAG, "Failed to connect " + profile.toString() + " to " + cachedDevice.mName);
+        } else {
+            Log.i(TAG, "Already connected");
         }
-        Log.i(TAG, "Not connected");
         return false;
     }
 
@@ -539,6 +548,7 @@ public class CachedBluetoothDevice implements Comparable<CachedBluetoothDevice> 
 
         if (TextUtils.isEmpty(mName)) {
             mName = mDevice.getAddress();
+            if (DEBUG) Log.d(TAG, "Default to address. Device has no name (yet) " + mName);
         }
     }
 
@@ -691,19 +701,28 @@ public class CachedBluetoothDevice implements Comparable<CachedBluetoothDevice> 
     public void onUuidChanged() {
         updateProfiles();
 
-        if (DEBUG) Log.e(TAG, "onUuidChanged: Time since last connect w/ no uuid "
-                + (SystemClock.elapsedRealtime() - mConnectAttemptedWithoutUuid));
+        if (DEBUG) {
+            Log.e(TAG, "onUuidChanged: Time since last connect"
+                    + (SystemClock.elapsedRealtime() - mConnectAttempted));
+        }
 
         /*
          * If a connect was attempted earlier without any UUID, we will do the
          * connect now.
          */
         if (mProfiles.size() > 0
-                && (mConnectAttemptedWithoutUuid + MAX_UUID_DELAY_FOR_AUTO_CONNECT) > SystemClock
+                && (mConnectAttempted + MAX_UUID_DELAY_FOR_AUTO_CONNECT) > SystemClock
                         .elapsedRealtime()) {
-            connect();
+            connectWithoutResettingTimer();
         }
         dispatchAttributesChanged();
+    }
+
+    public void onBondingStateChanged(int bondState) {
+        if (bondState == BluetoothDevice.BOND_NONE) {
+            mProfiles.clear();
+        }
+        refresh();
     }
 
     public void setBtClass(BluetoothClass btClass) {
