@@ -24,18 +24,21 @@ import android.os.Bundle;
 import android.os.SystemProperties;
 import android.telephony.TelephonyManager;
 import android.text.TextUtils;
+import android.view.KeyEvent;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import com.android.internal.app.AlertActivity;
 import com.android.internal.app.AlertController;
 import android.content.DialogInterface;
-import android.content.DialogInterface.OnClickListener;
 
 /**
  * The "dialog" that shows from "Safety information" in the Settings app.
  */
-public class SettingsSafetyLegalActivity extends AlertActivity {
+public class SettingsSafetyLegalActivity extends AlertActivity 
+        implements DialogInterface.OnCancelListener, DialogInterface.OnClickListener {
     private static final String PROPERTY_LSAFETYLEGAL_URL = "ro.url.safetylegal";
+
+    private WebView mWebView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,27 +54,28 @@ public class SettingsSafetyLegalActivity extends AlertActivity {
 
         userSafetylegalUrl = String.format("%s&%s", userSafetylegalUrl, loc);
 
-        if (!isDataNetworkConnected()) {
-            showErrorAndFinish(userSafetylegalUrl);
-            return;
-        }
-
-        WebView webView = new WebView(this);
+        mWebView = new WebView(this);
 
         // Begin accessing
-        webView.getSettings().setJavaScriptEnabled(true);
-        webView.loadUrl(userSafetylegalUrl);
-        webView.setWebViewClient(new WebViewClient() {
+        mWebView.getSettings().setJavaScriptEnabled(true);
+        mWebView.loadUrl(userSafetylegalUrl);
+        mWebView.setWebViewClient(new WebViewClient() {
             @Override
             public void onPageFinished(WebView view, String url) {
                 // Change from 'Loading...' to the real title
                 mAlert.setTitle(getString(R.string.settings_safetylegal_activity_title));
             }
+
+            @Override
+            public void onReceivedError(WebView view, int errorCode,
+                    String description, String failingUrl) {
+                showErrorAndFinish(failingUrl);
+            }
         });
 
         final AlertController.AlertParams p = mAlertParams;
         p.mTitle = getString(R.string.settings_safetylegal_activity_loading);
-        p.mView = webView;
+        p.mView = mWebView;
         p.mForceInverseBackground = true;
         setupAlert();
     }
@@ -81,24 +85,29 @@ public class SettingsSafetyLegalActivity extends AlertActivity {
                 .setMessage(getResources()
                         .getString(R.string.settings_safetylegal_activity_unreachable, url))
                 .setTitle(R.string.settings_safetylegal_activity_title)
-                .setPositiveButton(android.R.string.ok, mOkListener)
+                .setPositiveButton(android.R.string.ok, this)
+                .setOnCancelListener(this)
                 .setCancelable(true)
                 .show();
     }
 
-    private boolean isDataNetworkConnected() {
-        TelephonyManager mTelephonyManager = (TelephonyManager)getSystemService(TELEPHONY_SERVICE);
-
-        if (mTelephonyManager.getDataState() == TelephonyManager.DATA_CONNECTED) {
-            return true;
-        } else {
-            return false;
+    @Override
+    public boolean dispatchKeyEvent(KeyEvent event) {
+        if (event.getKeyCode() == KeyEvent.KEYCODE_BACK 
+                && event.getAction() == KeyEvent.ACTION_DOWN) {
+            if (mWebView.canGoBack()) {
+                mWebView.goBack();
+                return true;
+            }
         }
+        return super.dispatchKeyEvent(event);
     }
 
-    private final OnClickListener mOkListener = new OnClickListener() {
-         public void onClick(DialogInterface dialog, int whichButton) {
-             finish();
-         }
-    };
+    public void onClick(DialogInterface dialog, int whichButton) {
+        finish();
+    }
+
+    public void onCancel(DialogInterface dialog) {
+        finish();
+    }
 }
