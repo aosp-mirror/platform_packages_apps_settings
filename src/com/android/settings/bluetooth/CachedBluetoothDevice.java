@@ -20,11 +20,11 @@ import android.app.AlertDialog;
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothClass;
 import android.bluetooth.BluetoothDevice;
-import android.os.ParcelUuid;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.Resources;
+import android.os.ParcelUuid;
 import android.os.SystemClock;
 import android.text.TextUtils;
 import android.util.Log;
@@ -794,8 +794,18 @@ public class CachedBluetoothDevice implements Comparable<CachedBluetoothDevice> 
         }
     }
 
-    public List<Profile> getProfiles() {
-        return new ArrayList<Profile>(mProfiles);
+    public List<Profile> getConnectableProfiles() {
+        ArrayList<Profile> connectableProfiles = new ArrayList<Profile>();
+        for (Profile profile : mProfiles) {
+            if (isConnectableProfile(profile)) {
+                connectableProfiles.add(profile);
+            }
+        }
+        return connectableProfiles;
+    }
+
+    private boolean isConnectableProfile(Profile profile) {
+        return profile.equals(Profile.HEADSET) || profile.equals(Profile.A2DP);
     }
 
     public void onCreateContextMenu(ContextMenu menu) {
@@ -806,7 +816,14 @@ public class CachedBluetoothDevice implements Comparable<CachedBluetoothDevice> 
 
         int bondState = getBondState();
         boolean isConnected = isConnected();
-        boolean hasProfiles = mProfiles.size() > 0;
+        boolean hasConnectableProfiles = false;
+
+        for (Profile profile : mProfiles) {
+            if (isConnectableProfile(profile)) {
+                hasConnectableProfiles = true;
+                break;
+            }
+        }
 
         menu.setHeaderTitle(getName());
 
@@ -819,14 +836,14 @@ public class CachedBluetoothDevice implements Comparable<CachedBluetoothDevice> 
                 menu.add(0, CONTEXT_ITEM_UNPAIR, 0,
                         R.string.bluetooth_device_context_disconnect_unpair);
             } else { // Paired but not connected
-                if (hasProfiles) {
+                if (hasConnectableProfiles) {
                     menu.add(0, CONTEXT_ITEM_CONNECT, 0, R.string.bluetooth_device_context_connect);
                 }
                 menu.add(0, CONTEXT_ITEM_UNPAIR, 0, R.string.bluetooth_device_context_unpair);
             }
 
             // Show the connection options item
-            if (hasProfiles) {
+            if (hasConnectableProfiles) {
                 menu.add(0, CONTEXT_ITEM_CONNECT_ADVANCED, 0,
                         R.string.bluetooth_device_context_connect_advanced);
             }

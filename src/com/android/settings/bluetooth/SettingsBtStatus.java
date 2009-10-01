@@ -26,9 +26,9 @@ import com.android.settings.R;
  */
 public class SettingsBtStatus {
     private static final String TAG = "SettingsBtStatus";
-   
+
     // Connection status
-    
+
     public static final int CONNECTION_STATUS_UNKNOWN = 0;
     public static final int CONNECTION_STATUS_ACTIVE = 1;
     /** Use {@link #isConnected} to check for the connected state */
@@ -55,17 +55,17 @@ public class SettingsBtStatus {
             return 0;
         }
     }
-    
+
     public static final boolean isConnectionStatusConnected(int connectionStatus) {
         return connectionStatus == CONNECTION_STATUS_ACTIVE
                 || connectionStatus == CONNECTION_STATUS_CONNECTED;
     }
-    
+
     public static final boolean isConnectionStatusBusy(int connectionStatus) {
         return connectionStatus == CONNECTION_STATUS_CONNECTING
                 || connectionStatus == CONNECTION_STATUS_DISCONNECTING;
     }
-    
+
     public static final int getPairingStatusSummary(int bondState) {
         switch (bondState) {
         case BluetoothDevice.BOND_BONDED:
