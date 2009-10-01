@@ -353,7 +353,7 @@ public class SecuritySettings extends PreferenceActivity {
         private static final int RESET_DIALOG = 3;
 
         private KeyStore mKeyStore = KeyStore.getInstance();
-        private int mState;
+        private int mState = mKeyStore.test();
         private int mDialogId;
         private boolean mSubmit;
 
