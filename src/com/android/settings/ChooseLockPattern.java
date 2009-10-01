@@ -21,6 +21,7 @@ import com.google.android.collect.Lists;
 import com.android.internal.widget.LinearLayoutWithDefaultTouchRecepient;
 import com.android.internal.widget.LockPatternUtils;
 import com.android.internal.widget.LockPatternView;
+import com.android.internal.widget.LockPatternView.Cell;
 import static com.android.internal.widget.LockPatternView.DisplayMode;
 
 import android.app.Activity;
@@ -122,6 +123,10 @@ public class ChooseLockPattern extends Activity implements View.OnClickListener{
                     throw new IllegalStateException("Unexpected stage " + mUiStage + " when "
                             + "entering the pattern.");
                 }
+            }
+
+            public void onPatternCellAdded(List<Cell> pattern) { 
+
             }
 
             private void patternInProgress() {
