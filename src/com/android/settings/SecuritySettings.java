@@ -419,9 +419,7 @@ public class SecuritySettings extends PreferenceActivity {
 
         public boolean onPreferenceChange(Preference preference, Object value) {
             if (preference == mAccessCheckBox) {
-                boolean checked = (Boolean) value;
-                mAccessCheckBox.setChecked(!checked);
-                if (checked) {
+                if ((Boolean) value) {
                     showDialog((mState == KeyStore.UNINITIALIZED) ?
                             PASSWORD_DIALOG : UNLOCK_DIALOG);
                 } else {
@@ -461,6 +459,7 @@ public class SecuritySettings extends PreferenceActivity {
                 }
             }
             removeDialog(mDialogId);
+            updatePreferences(mState);
             if (mExternalIntent != null) {
                 mExternalIntent = null;
                 finish();
