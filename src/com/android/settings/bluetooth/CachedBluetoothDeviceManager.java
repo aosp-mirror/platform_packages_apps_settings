@@ -176,7 +176,7 @@ public class CachedBluetoothDeviceManager {
             return;
         }
 
-        cachedDevice.refresh();
+        cachedDevice.onBondingStateChanged(bondState);
 
         if (bondState == BluetoothDevice.BOND_BONDED) {
             // Auto-connect after pairing
@@ -185,13 +185,13 @@ public class CachedBluetoothDeviceManager {
     }
 
     /**
-     * Called when there is a bonding error.
+     * Called when we have reached the un-bond state.
      *
      * @param device The remote device.
      * @param reason The reason, one of the error reasons from
      *            BluetoothDevice.UNBOND_REASON_*
      */
-    public synchronized void onBondingError(BluetoothDevice device, int reason) {
+    public synchronized void showUnbondMessage(BluetoothDevice device, int reason) {
         int errorMsg;
 
         switch(reason) {
@@ -214,7 +214,7 @@ public class CachedBluetoothDeviceManager {
             mLocalManager.showError(device, R.string.bluetooth_error_title, errorMsg);
             break;
         default:
-            Log.w(TAG, "onBondingError: Not displaying any error message for reason:" + reason);
+            Log.w(TAG, "showUnbondMessage: Not displaying any message for reason:" + reason);
             break;
         }
     }
