@@ -2077,72 +2077,50 @@ found in the list of installed applications.</string>
     <string name="vpn_secret_not_set">(not set)</string>
 
     <!-- Title of preference group for credential storage settings -->
-    <string name="cstor_settings_category">Credential storage</string>
+    <string name="credentials_category">Credential storage</string>
     <!-- Title of preference to enable/dislable access to credential storage -->
-    <string name="cstor_access_title">Use secure credentials</string>
+    <string name="credentials_access">Use secure credentials</string>
     <!-- Summary of preference to enable/dislable access to credential storage -->
-    <string name="cstor_access_summary">Allow applications to access secure certificates and other credentials</string>
+    <string name="credentials_access_summary">Allow applications to access secure certificates and other credentials</string>
     <!-- Title of dialog to enable/dislable access to credential storage -->
-    <string name="cstor_access_dialog_title">Enter password</string>
-    <!-- Description of dialog to enable/dislable access to credential storage from an action that requires the credential storage -->
-    <string name="cstor_access_dialog_hint_from_action">Enter the credential storage password.</string>
-
-    <!-- Title of preference to install p12 cert from SD card -->
-    <string name="cstor_cert_install_title">Install from SD card</string>
-    <!-- Summary of preference to install p12 cert from SD card -->
-    <string name="cstor_cert_install_summary">Install encrypted certificates from SD card</string>
+    <string name="credentials_unlock">Enter password</string>
+    <!-- Description of dialog to enable/dislable access to credential storage -->
+    <string name="credentials_unlock_hint">Enter the credential storage password.</string>
+    <!-- Title of preference to install certificates from SD card -->
+    <string name="credentials_install_certificates">Install from SD card</string>
+    <!-- Summary of preference to install certificates from SD card -->
+    <string name="credentials_install_certificates_summary">Install encrypted certificates from SD card</string>
     <!-- Title of preference to set storage password -->
-    <string name="cstor_set_passwd_title">Set password</string>
+    <string name="credentials_set_password">Set password</string>
     <!-- Summary of preference to set storage password -->
-    <string name="cstor_set_passwd_summary">Set or change the credential storage password</string>
-    <!-- Title of dialog to set storage password -->
-    <string name="cstor_set_passwd_dialog_title">Set password</string>
-
-    <!-- Title of preference to reset storage -->
-    <string name="cstor_reset_title">Clear storage</string>
-    <!-- Summary of preference to reset storage -->
-    <string name="cstor_reset_summary">Clear credential storage of all contents and reset its password</string>
-    <string name="cstor_reset_hint">Are you sure you want to delete all credentials and reset the credential storage password?</string>
-
-    <!-- Title of dialog to name a credential -->
-    <string name="cstor_name_credential_dialog_title">Name the certificate</string>
-    <!-- Description for the credential name input box -->
-    <string name="cstor_credential_name">Certificate name:</string>
-    <!-- Title of the credential info -->
-    <!-- Description for the credential password input box -->
-    <string name="cstor_credential_password">Password to extract the certificate:</string>
-    <string name="cstor_credential_info">Certificate details:</string>
-    <string name="cstor_name_credential_hint">The name can contain only letters and numbers.</string>
-
-
+    <string name="credentials_set_password_summary">Set or change the credential storage password</string>
+    <!-- Title of preference to reset credential storage -->
+    <string name="credentials_reset">Clear storage</string>
+    <!-- Summary of preference to reset credential storage -->
+    <string name="credentials_reset_summary">Clear credential storage of all contents and reset its password</string>
+    <!-- Description of dialog to reset the credential storage -->
+    <string name="credentials_reset_hint">Are you sure you want to delete all credentials and reset the credential storage password?</string>
     <!-- Description for the old-password input box -->
-    <string name="cstor_old_password">Current password:</string>
+    <string name="credentials_old_password">Current password:</string>
     <!-- Description for the new-password input box -->
-    <string name="cstor_new_password">New password:</string>
+    <string name="credentials_new_password">New password:</string>
     <!-- Description for the confirm-new-password input box -->
-    <string name="cstor_confirm_password">Confirm new password:</string>
+    <string name="credentials_confirm_password">Confirm new password:</string>
     <!-- Description when user set up the storage for the very first time -->
-    <string name="cstor_first_time_hint">Set a password for the credential storage (at least 8 characters).</string>
-    <!-- Description when user set up the storage for the very first time from an action that requires the credential storage-->
-    <string name="cstor_first_time_hint_from_action">Set a password for the credential storage.</string>
-    <string name="cstor_password_error">Please enter the correct password.</string>
-    <string name="cstor_password_error_reset_warning">Please enter the correct password. You have one more try to enter the correct password before the credential storage is erased.</string>
-    <string name="cstor_password_error_reset_warning_plural">Please enter the correct password. You have <xliff:g id="number" example="5">%d</xliff:g> more tries to enter the correct password before the credential storage is erased.</string>
-    <string name="cstor_passwords_error">Passwords do not match.</string>
-    <string name="cstor_passwords_empty_error">You must enter and confirm a password.</string>
-    <string name="cstor_password_empty_error">Please enter the password.</string>
-    <string name="cstor_password_verification_error">Please enter the password again. The password must have at least 8 characters.</string>
-    <string name="cstor_name_empty_error">Please enter a name.</string>
-    <string name="cstor_name_char_error">Please enter a name that contains only letters and numbers.</string>
-    <string name="cstor_storage_error">Unable to save the certificate. Click OK to retry.</string>
-    <string name="cstor_unable_to_save_cert">Unable to save the certificate. The credential storage is not enabled or properly initialized.</string>
-    <string name="cstor_cert_not_saved">The certificate is not saved.</string>
-    <string name="cstor_is_reset">The credential storage is erased.</string>
-
+    <string name="credentials_first_time_hint">Set a password for the credential storage (at least 8 characters).</string>
+    <string name="credentials_wrong_password">Please enter the correct password.</string>
+    <string name="credentials_reset_warning">Please enter the correct password. You have one more try to enter the correct password before the credential storage is erased.</string>
+    <string name="credentials_reset_warning_plural">Please enter the correct password. You have <xliff:g id="number" example="5">%1$d</xliff:g> more tries to enter the correct password before the credential storage is erased.</string>
+    <string name="credentials_passwords_mismatch">Passwords do not match.</string>
+    <string name="credentials_passwords_empty">You must enter and confirm a password.</string>
+    <string name="credentials_password_empty">Please enter the password.</string>
+    <string name="credentials_password_too_short">The password must have at least 8 characters.</string>
     <!-- toast message -->
-    <string name="cstor_is_enabled">Credential storage is enabled.</string>
+    <string name="credentials_erased">The credential storage is erased.</string>
     <!-- toast message -->
-    <string name="cstor_is_added"><xliff:g id="credential">%s</xliff:g> is added.</string>
+    <string name="credentials_enabled">Credential storage is enabled.</string>
+    <!-- toast message -->
+    <string name="credentials_disabled">Credential storage is disabled.</string>
 
     <!-- Sound settings screen, setting check box label -->
     <string name="emergency_tone_title">Emergency tone</string>
