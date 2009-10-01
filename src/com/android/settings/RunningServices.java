@@ -41,6 +41,7 @@ import android.os.Handler;
 import android.os.Message;
 import android.os.RemoteException;
 import android.os.SystemClock;
+import android.os.SystemProperties;
 import android.text.format.DateUtils;
 import android.text.format.Formatter;
 import android.util.AttributeSet;
@@ -55,6 +56,7 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import java.io.FileInputStream;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -73,6 +75,11 @@ public class RunningServices extends ListActivity
     
     static final long TIME_UPDATE_DELAY = 1000;
     static final long CONTENTS_UPDATE_DELAY = 2000;
+    
+    // Memory pages are 4K.
+    static final long PAGE_SIZE = 4*1024;
+    
+    long SECONDARY_SERVER_MEM;
     
     final HashMap<View, ActiveItem> mActiveItems = new HashMap<View, ActiveItem>();
     
@@ -93,8 +100,11 @@ public class RunningServices extends ListActivity
     int mLastNumForegroundProcesses = -1;
     long mLastBackgroundProcessMemory = -1;
     long mLastForegroundProcessMemory = -1;
+    long mLastAvailMemory = -1;
     
     Dialog mCurDialog;
+    
+    byte[] mBuffer = new byte[1024];
     
     class ActiveItem {
         View mRootView;
@@ -744,6 +754,63 @@ public class RunningServices extends ListActivity
         }
     };
     
+    private boolean matchText(byte[] buffer, int index, String text) {
+        int N = text.length();
+        if ((index+N) >= buffer.length) {
+            return false;
+        }
+        for (int i=0; i<N; i++) {
+            if (buffer[index+i] != text.charAt(i)) {
+                return false;
+            }
+        }
+        return true;
+    }
+    
+    private long extractMemValue(byte[] buffer, int index) {
+        while (index < buffer.length && buffer[index] != '\n') {
+            if (buffer[index] >= '0' && buffer[index] <= '9') {
+                int start = index;
+                index++;
+                while (index < buffer.length && buffer[index] >= '0'
+                    && buffer[index] <= '9') {
+                    index++;
+                }
+                String str = new String(buffer, 0, start, index-start);
+                return ((long)Integer.parseInt(str)) * 1024;
+            }
+            index++;
+        }
+        return 0;
+    }
+    
+    private long readAvailMem() {
+        try {
+            long memFree = 0;
+            long memCached = 0;
+            FileInputStream is = new FileInputStream("/proc/meminfo");
+            int len = is.read(mBuffer);
+            is.close();
+            final int BUFLEN = mBuffer.length;
+            for (int i=0; i<len && (memFree == 0 || memCached == 0); i++) {
+                if (matchText(mBuffer, i, "MemFree")) {
+                    i += 7;
+                    memFree = extractMemValue(mBuffer, i);
+                } else if (matchText(mBuffer, i, "Cached")) {
+                    i += 6;
+                    memCached = extractMemValue(mBuffer, i);
+                }
+                while (i < BUFLEN && mBuffer[i] != '\n') {
+                    i++;
+                }
+            }
+            return memFree + memCached;
+        } catch (java.io.FileNotFoundException e) {
+        } catch (java.io.IOException e) {
+        }
+        return 0;
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -758,19 +825,36 @@ public class RunningServices extends ListActivity
         getListView().setAdapter(new ServiceListAdapter(mState));
         mBackgroundProcessText = (TextView)findViewById(R.id.backgroundText);
         mForegroundProcessText = (TextView)findViewById(R.id.foregroundText);
+        
+        // Magic!  Implementation detail!  Don't count on this!
+        SECONDARY_SERVER_MEM =
+            Integer.valueOf(SystemProperties.get("ro.SECONDARY_SERVER_MEM"))*PAGE_SIZE;
     }
 
     void updateList() {
         if (mState.update(this, mAm)) {
             ((ServiceListAdapter)(getListView().getAdapter())).notifyDataSetChanged();
         }
+        
+        // This is the amount of available memory until we start killing
+        // background services.
+        long availMem = readAvailMem() - SECONDARY_SERVER_MEM;
+        if (availMem < 0) {
+            availMem = 0;
+        }
+        
         if (mLastNumBackgroundProcesses != mState.mNumBackgroundProcesses
-                || mLastBackgroundProcessMemory != mState.mBackgroundProcessMemory) {
+                || mLastBackgroundProcessMemory != mState.mBackgroundProcessMemory
+                || mLastAvailMemory != availMem) {
             mLastNumBackgroundProcesses = mState.mNumBackgroundProcesses;
             mLastBackgroundProcessMemory = mState.mBackgroundProcessMemory;
+            mLastAvailMemory = availMem;
+            String availStr = availMem != 0
+                    ? Formatter.formatShortFileSize(this, availMem) : "0";
             String sizeStr = Formatter.formatShortFileSize(this, mLastBackgroundProcessMemory);
             mBackgroundProcessText.setText(getResources().getString(
-                    R.string.service_background_processes, mLastNumBackgroundProcesses, sizeStr));
+                    R.string.service_background_processes,
+                    mLastNumBackgroundProcesses, availStr, sizeStr));
         }
         if (mLastNumForegroundProcesses != mState.mNumForegroundProcesses
                 || mLastForegroundProcessMemory != mState.mForegroundProcessMemory) {
