@@ -231,6 +231,8 @@ public class SecuritySettings extends PreferenceActivity {
 
         mShowPassword.setChecked(Settings.System.getInt(getContentResolver(),
                 Settings.System.TEXT_SHOW_PASSWORD, 1) != 0);
+
+        mCstorHelper.resume();
     }
 
     @Override
@@ -362,7 +364,7 @@ public class SecuritySettings extends PreferenceActivity {
 
         private View mView;
         private int mDialogId;
-        private boolean mRetry = false;
+        private boolean mRetry;
         private CheckBoxPreference mAccessCheckBox;
         private Preference mResetButton;
 
@@ -381,6 +383,11 @@ public class SecuritySettings extends PreferenceActivity {
                 showCstorDialog(mState == KeyStore.UNINITIALIZED
                         ? CSTOR_INIT_DIALOG : CSTOR_UNLOCK_DIALOG);
             }
+        }
+
+        void resume() {
+            if (mExternalIntent != null) return;
+            updatePreferences(mKeyStore.test());
         }
 
         private void updatePreferences(int state) {
@@ -428,6 +435,7 @@ public class SecuritySettings extends PreferenceActivity {
 
         private void showCstorDialog(int dialogId) {
             mDialogId = dialogId;
+            mRetry = false;
             showDialog(dialogId);
         }
 
@@ -455,6 +463,7 @@ public class SecuritySettings extends PreferenceActivity {
                 showCstorDialog(mDialogId);
             } else {
                 removeDialog(mDialogId);
+                updatePreferences(mState); // may revert checkbox
 
                 if (mExternalIntent != null) {
                     finish();
