@@ -396,11 +396,13 @@ public class CachedBluetoothDevice implements Comparable<CachedBluetoothDevice> 
 
         int preferredProfiles = 0;
         for (Profile profile : mProfiles) {
-            LocalBluetoothProfileManager profileManager =
-                    LocalBluetoothProfileManager.getProfileManager(mLocalManager, profile);
-            if (profileManager.isPreferred(mDevice)) {
-                ++preferredProfiles;
-                queueCommand(new BluetoothJob(BluetoothCommand.CONNECT, this, profile));
+            if (isConnectableProfile(profile)) {
+                LocalBluetoothProfileManager profileManager = LocalBluetoothProfileManager
+                        .getProfileManager(mLocalManager, profile);
+                if (profileManager.isPreferred(mDevice)) {
+                    ++preferredProfiles;
+                    queueCommand(new BluetoothJob(BluetoothCommand.CONNECT, this, profile));
+                }
             }
         }
         if (DEBUG) Log.d(TAG, "Preferred profiles = " + preferredProfiles);
@@ -417,10 +419,12 @@ public class CachedBluetoothDevice implements Comparable<CachedBluetoothDevice> 
         mIsConnectingErrorPossible = true;
 
         for (Profile profile : mProfiles) {
-            LocalBluetoothProfileManager profileManager =
-                    LocalBluetoothProfileManager.getProfileManager(mLocalManager, profile);
-            profileManager.setPreferred(mDevice, false);
-            queueCommand(new BluetoothJob(BluetoothCommand.CONNECT, this, profile));
+            if (isConnectableProfile(profile)) {
+                LocalBluetoothProfileManager profileManager = LocalBluetoothProfileManager
+                        .getProfileManager(mLocalManager, profile);
+                profileManager.setPreferred(mDevice, false);
+                queueCommand(new BluetoothJob(BluetoothCommand.CONNECT, this, profile));
+            }
         }
     }
 
