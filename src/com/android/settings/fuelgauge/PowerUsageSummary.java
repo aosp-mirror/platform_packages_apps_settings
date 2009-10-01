@@ -411,7 +411,7 @@ public class PowerUsageSummary extends PreferenceActivity implements Runnable {
         double phoneOnPower = mPowerProfile.getAveragePower(PowerProfile.POWER_RADIO_ACTIVE)
                 * phoneOnTimeMs / 1000;
         addEntry(getString(R.string.power_phone), DrainType.PHONE, phoneOnTimeMs,
-                android.R.drawable.ic_menu_call, phoneOnPower);
+                R.drawable.ic_settings_voice_calls, phoneOnPower);
     }
 
     private void addScreenUsage(long uSecNow) {
@@ -432,7 +432,7 @@ public class PowerUsageSummary extends PreferenceActivity implements Runnable {
         }
         power /= 1000; // To seconds
         addEntry(getString(R.string.power_screen), DrainType.SCREEN, screenOnTimeMs,
-                android.R.drawable.ic_menu_view, power);
+                R.drawable.ic_settings_display, power);
     }
 
     private void addRadioUsage(long uSecNow) {
@@ -447,7 +447,7 @@ public class PowerUsageSummary extends PreferenceActivity implements Runnable {
         }
         BatterySipper bs =
                 addEntry(getString(R.string.power_cell), DrainType.CELL, signalTimeMs,
-                android.R.drawable.ic_menu_sort_by_size, power);
+                R.drawable.ic_settings_cell_standby, power);
         if (signalTimeMs != 0) {
             bs.noCoveragePercent = mStats.getPhoneSignalStrengthTime(0, uSecNow, mStatsType)
                     / 1000 * 100.0 / signalTimeMs;
@@ -461,7 +461,7 @@ public class PowerUsageSummary extends PreferenceActivity implements Runnable {
                 * mPowerProfile.getAveragePower(PowerProfile.POWER_WIFI_ON)
             + runningTimeMs * mPowerProfile.getAveragePower(PowerProfile.POWER_WIFI_ON)) / 1000;
         addEntry(getString(R.string.power_wifi), DrainType.WIFI, runningTimeMs,
-                R.drawable.ic_wifi_signal_4, wifiPower);
+                R.drawable.ic_settings_wifi, wifiPower);
     }
 
     private void addIdleUsage(long uSecNow) {
@@ -469,7 +469,7 @@ public class PowerUsageSummary extends PreferenceActivity implements Runnable {
         double idlePower = (idleTimeMs * mPowerProfile.getAveragePower(PowerProfile.POWER_CPU_IDLE))
                 / 1000;
         addEntry(getString(R.string.power_idle), DrainType.IDLE, idleTimeMs,
-                android.R.drawable.ic_lock_power_off, idlePower);
+                R.drawable.ic_settings_phone_idle, idlePower);
     }
 
     private void addBluetoothUsage(long uSecNow) {
@@ -481,7 +481,7 @@ public class PowerUsageSummary extends PreferenceActivity implements Runnable {
                 * mPowerProfile.getAveragePower(PowerProfile.POWER_BLUETOOTH_AT_CMD)) / 1000;
 
         addEntry(getString(R.string.power_bluetooth), DrainType.BLUETOOTH, btOnTimeMs,
-                com.android.internal.R.drawable.ic_volume_bluetooth_in_call, btPower);
+                R.drawable.ic_settings_bluetooth, btPower);
     }
 
     private double getAverageDataCost() {
@@ -619,6 +619,8 @@ public class PowerUsageSummary extends PreferenceActivity implements Runnable {
                 } else if ("mediaserver".equals(name)) {
                     name = getResources().getString(R.string.process_mediaserver_label);
                 }
+                iconId = R.drawable.ic_power_system;
+                icon = getResources().getDrawable(iconId);
                 return;
             } else {
                 //name = packages[0];
