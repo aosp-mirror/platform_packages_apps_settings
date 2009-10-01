@@ -32,15 +32,15 @@ public class BluetoothDevicePreference extends Preference implements CachedBluet
     private static final String TAG = "BluetoothDevicePreference";
 
     private static int sDimAlpha = Integer.MIN_VALUE;
-    
+
     private CachedBluetoothDevice mCachedDevice;
-    
+
     /**
      * Cached local copy of whether the device is busy. This is only updated
      * from {@link #onDeviceAttributesChanged(CachedBluetoothDevice)}.
-     */ 
+     */
     private boolean mIsBusy;
-    
+
     public BluetoothDevicePreference(Context context, CachedBluetoothDevice cachedDevice) {
         super(context);
 
@@ -49,16 +49,16 @@ public class BluetoothDevicePreference extends Preference implements CachedBluet
             context.getTheme().resolveAttribute(android.R.attr.disabledAlpha, outValue, true);
             sDimAlpha = (int) (outValue.getFloat() * 255);
         }
-            
+
         mCachedDevice = cachedDevice;
-        
+
         setLayoutResource(R.layout.preference_bluetooth);
-        
+
         cachedDevice.registerCallback(this);
-        
+
         onDeviceAttributesChanged(cachedDevice);
     }
-    
+
     public CachedBluetoothDevice getCachedDevice() {
         return mCachedDevice;
     }
@@ -75,9 +75,9 @@ public class BluetoothDevicePreference extends Preference implements CachedBluet
          * The preference framework takes care of making sure the value has
          * changed before proceeding.
          */
-        
+
         setTitle(mCachedDevice.getName());
-        
+
         /*
          * TODO: Showed "Paired" even though it was "Connected". This may be
          * related to BluetoothHeadset not bound to the actual
@@ -87,10 +87,10 @@ public class BluetoothDevicePreference extends Preference implements CachedBluet
 
         // Used to gray out the item
         mIsBusy = mCachedDevice.isBusy();
-        
+
         // Data has changed
         notifyChanged();
-        
+
         // This could affect ordering, so notify that also
         notifyHierarchyChanged();
     }
@@ -113,7 +113,7 @@ public class BluetoothDevicePreference extends Preference implements CachedBluet
 
         ImageView btClass = (ImageView) view.findViewById(R.id.btClass);
         btClass.setImageResource(mCachedDevice.getBtClassDrawable());
-        btClass.setAlpha(isEnabled() ? 255 : sDimAlpha);        
+        btClass.setAlpha(isEnabled() ? 255 : sDimAlpha);
     }
 
     @Override
@@ -122,8 +122,8 @@ public class BluetoothDevicePreference extends Preference implements CachedBluet
             // Put other preference types above us
             return 1;
         }
-        
+
         return mCachedDevice.compareTo(((BluetoothDevicePreference) another).mCachedDevice);
     }
- 
+
 }
