@@ -351,7 +351,7 @@ public class SecuritySettings extends PreferenceActivity {
         private static final int UNLOCK_DIALOG = 1;
         private static final int PASSWORD_DIALOG = 2;
         private static final int RESET_DIALOG = 3;
-        
+
         private KeyStore mKeyStore = KeyStore.getInstance();
         private int mState;
         private int mDialogId;
@@ -430,7 +430,7 @@ public class SecuritySettings extends PreferenceActivity {
             }
             return false;
         }
-        
+
         public boolean onPreferenceClick(Preference preference) {
             if (preference == mInstallButton) {
                 Credentials.getInstance().installFromSdCard(SecuritySettings.this);
@@ -534,7 +534,7 @@ public class SecuritySettings extends PreferenceActivity {
                 view.setVisibility(View.VISIBLE);
             }
         }
-        
+
         private void createPreferences(PreferenceCategory category) {
             mAccessCheckBox = new CheckBoxPreference(SecuritySettings.this);
             mAccessCheckBox.setTitle(R.string.credentials_access);
