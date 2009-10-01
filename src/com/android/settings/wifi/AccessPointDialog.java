@@ -81,7 +81,7 @@ public class AccessPointDialog extends AlertDialog implements DialogInterface.On
             AccessPointState.WEP_PASSWORD_HEX
     };
     private static final String NOT_APPLICABLE = "N/A";
-    private static final String BLOB_HEADER = "blob://";
+    private static final String KEYSTORE_HEADER = "keystore://";
 
     // Button positions, default to impossible values
     private int mConnectButtonPos = Integer.MAX_VALUE; 
@@ -641,16 +641,16 @@ public class AccessPointDialog extends AlertDialog implements DialogInterface.On
         if (index != (spinner.getCount() - 1)) {
             String key = (String) spinner.getSelectedItem();
             mState.setEnterpriseField(AccessPointState.CLIENT_CERT,
-                    BLOB_HEADER + Credentials.USER_CERTIFICATE + key);
+                    KEYSTORE_HEADER + Credentials.USER_CERTIFICATE + key);
             mState.setEnterpriseField(AccessPointState.PRIVATE_KEY,
-                    BLOB_HEADER + Credentials.USER_PRIVATE_KEY + key);
+                    KEYSTORE_HEADER + Credentials.USER_PRIVATE_KEY + key);
         }
         spinner = mCaCertSpinner;
         index = spinner.getSelectedItemPosition();
         if (index != (spinner.getCount() - 1)) {
             String key = (String) spinner.getSelectedItem();
             mState.setEnterpriseField(AccessPointState.CA_CERT,
-                    BLOB_HEADER + Credentials.CA_CERTIFICATE + key);
+                    KEYSTORE_HEADER + Credentials.CA_CERTIFICATE + key);
         }
         mState.setSecurity(AccessPointState.EAP);
         mState.setEap(mEapSpinner.getSelectedItemPosition());
