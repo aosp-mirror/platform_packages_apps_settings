@@ -546,6 +546,8 @@ public final class AccessPointState implements Comparable<AccessPointState>, Par
                             : mPassword;
                 }
             }
+            config.allowedAuthAlgorithms.set(AuthAlgorithm.OPEN);
+            config.allowedAuthAlgorithms.set(AuthAlgorithm.SHARED);
             config.allowedKeyManagement.set(KeyMgmt.NONE);
             config.wepTxKeyIndex = 0;
         } else if (security.equals(PSK)){
