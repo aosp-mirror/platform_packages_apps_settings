@@ -25,24 +25,17 @@ import android.content.ContentResolver;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.SharedPreferences;
-import android.content.pm.PackageManager.NameNotFoundException;
 import android.database.Cursor;
 import android.location.LocationManager;
 import android.os.Bundle;
 import android.preference.CheckBoxPreference;
-import android.preference.EditTextPreference;
 import android.preference.Preference;
 import android.preference.PreferenceActivity;
 import android.preference.PreferenceCategory;
-import android.preference.PreferenceGroup;
 import android.preference.PreferenceScreen;
 import android.provider.Settings;
 import android.security.Credentials;
 import android.security.KeyStore;
-import android.text.Html;
-import android.text.TextUtils;
-import android.text.method.LinkMovementMethod;
 import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
@@ -51,8 +44,6 @@ import android.widget.Toast;
 import com.android.internal.widget.LockPatternUtils;
 import android.telephony.TelephonyManager;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Observable;
 import java.util.Observer;
 
@@ -86,13 +77,6 @@ public class SecuritySettings extends PreferenceActivity {
     private static final String ASSISTED_GPS = "assisted_gps";
 
     // Credential storage
-    private static final int CSTOR_MIN_PASSWORD_LENGTH = 8;
-
-    private static final int CSTOR_INIT_DIALOG = 1;
-    private static final int CSTOR_CHANGE_PASSWORD_DIALOG = 2;
-    private static final int CSTOR_UNLOCK_DIALOG = 3;
-    private static final int CSTOR_RESET_DIALOG = 4;
-
     private CredentialStorage mCredentialStorage = new CredentialStorage();
 
     private CheckBoxPreference mNetwork;
@@ -131,8 +115,6 @@ public class SecuritySettings extends PreferenceActivity {
                 null);
         mContentQueryMap = new ContentQueryMap(settingsCursor, Settings.System.NAME, true, null);
         mContentQueryMap.addObserver(new SettingsObserver());
-
-        mCredentialStorage.handleIntent(getIntent());
     }
 
     private PreferenceScreen createPreferenceHierarchy() {
@@ -339,57 +321,37 @@ public class SecuritySettings extends PreferenceActivity {
         }
     }
 
-    @Override
-    protected Dialog onCreateDialog(int id) {
-        return mCredentialStorage.createDialog(id);
-    }
-
     private class CredentialStorage implements DialogInterface.OnClickListener,
             DialogInterface.OnDismissListener, Preference.OnPreferenceChangeListener,
             Preference.OnPreferenceClickListener {
         private static final int MINIMUM_PASSWORD_LENGTH = 8;
-        private static final int UNLOCK_DIALOG = 1;
-        private static final int PASSWORD_DIALOG = 2;
-        private static final int RESET_DIALOG = 3;
 
         private KeyStore mKeyStore = KeyStore.getInstance();
-        private int mState = mKeyStore.test();
-        private int mDialogId;
-        private boolean mSubmit;
+        private int mState;
+        private boolean mSubmit = false;
+        private boolean mExternal = false;
 
         private CheckBoxPreference mAccessCheckBox;
         private Preference mInstallButton;
         private Preference mPasswordButton;
         private Preference mResetButton;
 
-        private Intent mExternalIntent;
-
-        void handleIntent(Intent intent) {
-            if (intent != null) {
-                if (Credentials.UNLOCK_ACTION.equals(intent.getAction())) {
-                    mExternalIntent = intent;
-                    showDialog((mState == KeyStore.UNINITIALIZED) ?
-                            PASSWORD_DIALOG : UNLOCK_DIALOG);
-                }
-            }
-        }
-
         void resume() {
             mState = mKeyStore.test();
             updatePreferences(mState);
-        }
 
-        Dialog createDialog(int id) {
-            mDialogId = id;
-            switch (id) {
-                case UNLOCK_DIALOG:
-                    return createUnlockDialog();
-                case PASSWORD_DIALOG:
-                    return createPasswordDialog();
-                case RESET_DIALOG:
-                    return createResetDialog();
+            Intent intent = getIntent();
+            if (!mExternal && intent != null &&
+                    Credentials.UNLOCK_ACTION.equals(intent.getAction())) {
+                mExternal = true;
+                if (mState == KeyStore.UNINITIALIZED) {
+                    showPasswordDialog();
+                } else if (mState == KeyStore.LOCKED) {
+                    showUnlockDialog();
+                } else {
+                    finish();
+                }
             }
-            return null;
         }
 
         private void initialize(String password) {
@@ -420,8 +382,7 @@ public class SecuritySettings extends PreferenceActivity {
         public boolean onPreferenceChange(Preference preference, Object value) {
             if (preference == mAccessCheckBox) {
                 if ((Boolean) value) {
-                    showDialog((mState == KeyStore.UNINITIALIZED) ?
-                            PASSWORD_DIALOG : UNLOCK_DIALOG);
+                    showUnlockDialog();
                 } else {
                     lock();
                 }
@@ -434,9 +395,9 @@ public class SecuritySettings extends PreferenceActivity {
             if (preference == mInstallButton) {
                 Credentials.getInstance().installFromSdCard(SecuritySettings.this);
             } else if (preference == mPasswordButton) {
-                showDialog(PASSWORD_DIALOG);
+                showPasswordDialog();
             } else if (preference == mResetButton) {
-                showDialog(RESET_DIALOG);
+                showResetDialog();
             } else {
                 return false;
             }
@@ -454,14 +415,12 @@ public class SecuritySettings extends PreferenceActivity {
             if (mSubmit && !isFinishing()) {
                 mSubmit = false;
                 if (!checkPassword((Dialog) dialog)) {
-                    showDialog(mDialogId);
+                    ((Dialog) dialog).show();
                     return;
                 }
             }
-            removeDialog(mDialogId);
             updatePreferences(mState);
-            if (mExternalIntent != null) {
-                mExternalIntent = null;
+            if (mExternal) {
                 finish();
             }
         }
@@ -581,12 +540,12 @@ public class SecuritySettings extends PreferenceActivity {
             mState = state;
         }
 
-        private Dialog createUnlockDialog() {
+        private void showUnlockDialog() {
             View view = View.inflate(SecuritySettings.this,
                     R.layout.credentials_unlock_dialog, null);
 
-            // show extra hint only when the action comes from outside
-            if (mExternalIntent != null) {
+            // Show extra hint only when the action comes from outside.
+            if (mExternal) {
                 view.findViewById(R.id.hint).setVisibility(View.VISIBLE);
             }
 
@@ -597,10 +556,10 @@ public class SecuritySettings extends PreferenceActivity {
                     .setNegativeButton(android.R.string.cancel, this)
                     .create();
             dialog.setOnDismissListener(this);
-            return dialog;
+            dialog.show();
         }
 
-        private Dialog createPasswordDialog() {
+        private void showPasswordDialog() {
             View view = View.inflate(SecuritySettings.this,
                     R.layout.credentials_password_dialog, null);
 
@@ -618,17 +577,17 @@ public class SecuritySettings extends PreferenceActivity {
                     .setNegativeButton(android.R.string.cancel, this)
                     .create();
             dialog.setOnDismissListener(this);
-            return dialog;
+            dialog.show();
         }
 
-        private Dialog createResetDialog() {
-            return new AlertDialog.Builder(SecuritySettings.this)
+        private void showResetDialog() {
+            new AlertDialog.Builder(SecuritySettings.this)
                     .setTitle(android.R.string.dialog_alert_title)
                     .setIcon(android.R.drawable.ic_dialog_alert)
                     .setMessage(R.string.credentials_reset_hint)
                     .setNeutralButton(getString(android.R.string.ok), this)
                     .setNegativeButton(getString(android.R.string.cancel), this)
-                    .create();
+                    .create().show();
         }
     }
 }
