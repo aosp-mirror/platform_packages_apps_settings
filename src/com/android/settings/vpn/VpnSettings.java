@@ -948,6 +948,7 @@ public class VpnSettings extends PreferenceActivity implements
                 pskProfile.setPresharedKey(key);
                 // pass through
 
+            case L2TP_IPSEC:
             case L2TP:
                 L2tpProfile l2tpProfile = (L2tpProfile) p;
                 key = KEY_PREFIX_L2TP_SECRET + p.getId();
