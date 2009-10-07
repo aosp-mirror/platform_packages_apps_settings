@@ -509,16 +509,11 @@
     <string name="apn_mms_port" msgid="4074188088199243040">"Puerto MMS"</string>
     <string name="apn_mcc" msgid="4258628382260674636">"MCC"</string>
     <string name="apn_mnc" msgid="8629374076888809874">"MNC"</string>
-    <!-- no translation found for apn_auth_type (6167205395676037015) -->
-    <skip />
-    <!-- no translation found for apn_auth_type_none (5069592676845549926) -->
-    <skip />
-    <!-- no translation found for apn_auth_type_pap (1666934536996033383) -->
-    <skip />
-    <!-- no translation found for apn_auth_type_chap (3369626283789068360) -->
-    <skip />
-    <!-- no translation found for apn_auth_type_pap_chap (9102343063036134541) -->
-    <skip />
+    <string name="apn_auth_type" msgid="6167205395676037015">"Tipo de autenticación"</string>
+    <string name="apn_auth_type_none" msgid="5069592676845549926">"Ninguno"</string>
+    <string name="apn_auth_type_pap" msgid="1666934536996033383">"PAP"</string>
+    <string name="apn_auth_type_chap" msgid="3369626283789068360">"CHAP"</string>
+    <string name="apn_auth_type_pap_chap" msgid="9102343063036134541">"PAP o CHAP"</string>
     <string name="apn_type" msgid="469613123902220544">"Tipo de APN"</string>
     <string name="menu_delete" msgid="6981294422841124659">"Eliminar APN"</string>
     <string name="menu_new" msgid="3014205883303921729">"APN nuevo"</string>
@@ -678,10 +673,8 @@
     <string name="confirm_stop_cancel" msgid="206495326622692381">"Cancelar"</string>
     <string name="service_started_by_app" msgid="8432097226392386802">"Comenzado por aplicación: tocar para detener"</string>
     <string name="service_client_name" msgid="2337664610975074717">"<xliff:g id="CLIENT_NAME">%1$s</xliff:g>: tocar para administrar"</string>
-    <!-- no translation found for service_background_processes (5158600475629177758) -->
-    <skip />
-    <!-- no translation found for service_foreground_processes (4013890350284680796) -->
-    <skip />
+    <string name="service_background_processes" msgid="5158600475629177758">"Disp.:<xliff:g id="FREE">%2$s</xliff:g>+<xliff:g id="MEMORY">%3$s</xliff:g> en <xliff:g id="COUNT">%1$d</xliff:g>"</string>
+    <string name="service_foreground_processes" msgid="4013890350284680796">"Otro: <xliff:g id="MEMORY">%2$s</xliff:g> en <xliff:g id="COUNT">%1$d</xliff:g>"</string>
     <string name="service_process_name" msgid="8630408984456958400">"Proceso: <xliff:g id="PROCESS">%1$s</xliff:g>"</string>
     <string name="language_settings" msgid="502219872342167227">"Idioma &amp; del teclado"</string>
     <string name="language_keyboard_settings_title" msgid="3455826933385341107">"Idioma y Configuración del teclado"</string>
@@ -945,58 +938,32 @@
     <string name="vpn_settings_summary" msgid="8849924181594963972">"Establecer &amp; administrar Redes privadas virtuales (VPN)"</string>
     <string name="vpn_secret_unchanged" msgid="8700613973594154529">"(sin cambios)"</string>
     <string name="vpn_secret_not_set" msgid="1037792636371641845">"(no establecido)"</string>
-    <!-- no translation found for credentials_category (8536992056377271234) -->
-    <skip />
-    <!-- no translation found for credentials_access (4843187230913860492) -->
-    <skip />
-    <!-- no translation found for credentials_access_summary (319662078718574168) -->
-    <skip />
-    <!-- no translation found for credentials_unlock (1463040326264133844) -->
-    <skip />
-    <!-- no translation found for credentials_unlock_hint (594679530407918031) -->
-    <skip />
-    <!-- no translation found for credentials_install_certificates (177337517568022236) -->
-    <skip />
-    <!-- no translation found for credentials_install_certificates_summary (7737001268684193093) -->
-    <skip />
-    <!-- no translation found for credentials_set_password (9104473585811899989) -->
-    <skip />
-    <!-- no translation found for credentials_set_password_summary (8287876917562085701) -->
-    <skip />
-    <!-- no translation found for credentials_reset (9170150870552453457) -->
-    <skip />
-    <!-- no translation found for credentials_reset_summary (1530388094693731636) -->
-    <skip />
-    <!-- no translation found for credentials_reset_hint (819990295796804516) -->
-    <skip />
-    <!-- no translation found for credentials_old_password (7553393815538684028) -->
-    <skip />
-    <!-- no translation found for credentials_new_password (267487774686796938) -->
-    <skip />
-    <!-- no translation found for credentials_confirm_password (4732250000633424345) -->
-    <skip />
-    <!-- no translation found for credentials_first_time_hint (1567821077545346039) -->
-    <skip />
-    <!-- no translation found for credentials_wrong_password (7525192410790152041) -->
-    <skip />
-    <!-- no translation found for credentials_reset_warning (6392481296673345268) -->
-    <skip />
-    <!-- no translation found for credentials_reset_warning_plural (454828369803055270) -->
-    <skip />
-    <!-- no translation found for credentials_passwords_mismatch (5288565139590031733) -->
-    <skip />
-    <!-- no translation found for credentials_passwords_empty (8647631321684363549) -->
-    <skip />
-    <!-- no translation found for credentials_password_empty (8292138152983330473) -->
-    <skip />
-    <!-- no translation found for credentials_password_too_short (7502749986405522663) -->
-    <skip />
-    <!-- no translation found for credentials_erased (7700309135582200849) -->
-    <skip />
-    <!-- no translation found for credentials_enabled (7588607413349978930) -->
-    <skip />
-    <!-- no translation found for credentials_disabled (7453188089059045380) -->
-    <skip />
+    <string name="credentials_category" msgid="8536992056377271234">"Almacenamiento de la credencial"</string>
+    <string name="credentials_access" msgid="4843187230913860492">"Utilizar credenciales seguras"</string>
+    <string name="credentials_access_summary" msgid="319662078718574168">"Permitir a las aplicaciones acceder a certificados seguros y otras credenciales"</string>
+    <string name="credentials_unlock" msgid="1463040326264133844">"Ingresar contraseña"</string>
+    <string name="credentials_unlock_hint" msgid="594679530407918031">"Ingresar la contraseña de almacenamiento de la credencial"</string>
+    <string name="credentials_install_certificates" msgid="177337517568022236">"Instalar de la tarjeta SD"</string>
+    <string name="credentials_install_certificates_summary" msgid="7737001268684193093">"Instalar certificados encriptados de la tarjeta SD"</string>
+    <string name="credentials_set_password" msgid="9104473585811899989">"Establecer contraseña"</string>
+    <string name="credentials_set_password_summary" msgid="8287876917562085701">"Establecer o cambiar la contraseña de almacenamiento de la credencial"</string>
+    <string name="credentials_reset" msgid="9170150870552453457">"Borrar almacenamiento"</string>
+    <string name="credentials_reset_summary" msgid="1530388094693731636">"Borrar el almacenamiento de la credencial de todo el contenido y restablecer su contraseña"</string>
+    <string name="credentials_reset_hint" msgid="819990295796804516">"¿Estás seguro de que deseas eliminar todas las credenciales y restablecer la contraseña de almacenamiento de la credencial?"</string>
+    <string name="credentials_old_password" msgid="7553393815538684028">"Contraseña actual:"</string>
+    <string name="credentials_new_password" msgid="267487774686796938">"Nueva contraseña:"</string>
+    <string name="credentials_confirm_password" msgid="4732250000633424345">"Confirmar contraseña nueva:"</string>
+    <string name="credentials_first_time_hint" msgid="1567821077545346039">"Configurar una contraseña para el almacenamiento de la credencial (mínimo 8 caracteres)."</string>
+    <string name="credentials_wrong_password" msgid="7525192410790152041">"Ingresa la contraseña correcta."</string>
+    <string name="credentials_reset_warning" msgid="6392481296673345268">"Ingresa la contraseña correcta. Tienes una oportunidad más para ingresar la contraseña correcta antes de que el almacenamiento de la credencial se borre."</string>
+    <string name="credentials_reset_warning_plural" msgid="454828369803055270">"Ingresa la contraseña correcta. Tienes <xliff:g id="NUMBER">%1$d</xliff:g> oportunidades más para ingresar la contraseña correcta antes de que el almacenamiento de la credencial se borre."</string>
+    <string name="credentials_passwords_mismatch" msgid="5288565139590031733">"Las contraseñas no coinciden."</string>
+    <string name="credentials_passwords_empty" msgid="8647631321684363549">"Debes ingresar y confirmar una contraseña."</string>
+    <string name="credentials_password_empty" msgid="8292138152983330473">"Ingresa la contraseña."</string>
+    <string name="credentials_password_too_short" msgid="7502749986405522663">"La contraseña debe tener 8 caracteres como mínimo."</string>
+    <string name="credentials_erased" msgid="7700309135582200849">"El almacenamiento de la credencial se ha borrado."</string>
+    <string name="credentials_enabled" msgid="7588607413349978930">"El almacenamiento de la credencial está activado."</string>
+    <string name="credentials_disabled" msgid="7453188089059045380">"El almacenamiento de la credencial está inhabilitado."</string>
     <string name="emergency_tone_title" msgid="1055954530111587114">"Tono de emergencia"</string>
     <string name="emergency_tone_summary" msgid="722259232924572153">"Establecer el comportamiento cuando se establece una llamada de emergencia"</string>
     <string name="privacy_settings" msgid="9206631214140954954">"Privacidad"</string>
