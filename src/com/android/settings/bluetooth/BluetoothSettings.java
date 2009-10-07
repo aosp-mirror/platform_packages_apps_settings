@@ -203,6 +203,12 @@ public class BluetoothSettings extends PreferenceActivity
         }
     }
 
+    @Override
+    protected void onUserLeaveHint() {
+        super.onUserLeaveHint();
+        mLocalManager.stopScanning();
+    }
+
     private void addDevices() {
         List<CachedBluetoothDevice> cachedDevices =
                 mLocalManager.getCachedDeviceManager().getCachedDevicesCopy();

@@ -52,7 +52,7 @@ public class CachedBluetoothDevice implements Comparable<CachedBluetoothDevice> 
     private static final String TAG = "CachedBluetoothDevice";
     private static final boolean D = LocalBluetoothManager.D;
     private static final boolean V = LocalBluetoothManager.V;
-    private static final boolean DEBUG = false;
+    private static final boolean DEBUG = true; // STOPSHIP - disable before final rom
 
     private static final int CONTEXT_ITEM_CONNECT = Menu.FIRST + 1;
     private static final int CONTEXT_ITEM_DISCONNECT = Menu.FIRST + 2;
