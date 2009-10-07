@@ -420,13 +420,13 @@ public class SecuritySettings extends PreferenceActivity {
         public boolean onPreferenceChange(Preference preference, Object value) {
             if (preference == mAccessCheckBox) {
                 boolean checked = (Boolean) value;
+                mAccessCheckBox.setChecked(!checked);
                 if (checked) {
                     showDialog((mState == KeyStore.UNINITIALIZED) ?
                             PASSWORD_DIALOG : UNLOCK_DIALOG);
                 } else {
                     lock();
                 }
-                mAccessCheckBox.setChecked(!checked);
                 return true;
             }
             return false;
