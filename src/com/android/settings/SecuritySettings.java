@@ -93,7 +93,7 @@ public class SecuritySettings extends PreferenceActivity {
     private static final int CSTOR_UNLOCK_DIALOG = 3;
     private static final int CSTOR_RESET_DIALOG = 4;
 
-    private CstorHelper mCstorHelper = new CstorHelper();
+    private CredentialStorage mCredentialStorage = new CredentialStorage();
 
     private CheckBoxPreference mNetwork;
     private CheckBoxPreference mGps;
@@ -132,7 +132,7 @@ public class SecuritySettings extends PreferenceActivity {
         mContentQueryMap = new ContentQueryMap(settingsCursor, Settings.System.NAME, true, null);
         mContentQueryMap.addObserver(new SettingsObserver());
 
-        mCstorHelper.handleIntent(getIntent());
+        mCredentialStorage.handleIntent(getIntent());
     }
 
     private PreferenceScreen createPreferenceHierarchy() {
@@ -203,10 +203,10 @@ public class SecuritySettings extends PreferenceActivity {
         passwordsCat.addPreference(showPassword);
 
         // Credential storage
-        PreferenceCategory credStoreCat = new PreferenceCategory(this);
-        credStoreCat.setTitle(R.string.cstor_settings_category);
-        root.addPreference(credStoreCat);
-        mCstorHelper.createPreferences(credStoreCat);
+        PreferenceCategory credentialsCat = new PreferenceCategory(this);
+        credentialsCat.setTitle(R.string.credentials_category);
+        root.addPreference(credentialsCat);
+        mCredentialStorage.createPreferences(credentialsCat);
 
         return root;
     }
@@ -232,7 +232,7 @@ public class SecuritySettings extends PreferenceActivity {
         mShowPassword.setChecked(Settings.System.getInt(getContentResolver(),
                 Settings.System.TEXT_SHOW_PASSWORD, 1) != 0);
 
-        mCstorHelper.resume();
+        mCredentialStorage.resume();
     }
 
     @Override
@@ -341,138 +341,160 @@ public class SecuritySettings extends PreferenceActivity {
 
     @Override
     protected Dialog onCreateDialog(int id) {
-        switch (id) {
-            case CSTOR_INIT_DIALOG:
-            case CSTOR_CHANGE_PASSWORD_DIALOG:
-                return mCstorHelper.createSetPasswordDialog(id);
-
-            case CSTOR_UNLOCK_DIALOG:
-                return mCstorHelper.createUnlockDialog();
-
-            case CSTOR_RESET_DIALOG:
-                return mCstorHelper.createResetDialog();
-
-            default:
-                return null;
-        }
+        return mCredentialStorage.createDialog(id);
     }
 
-    private class CstorHelper implements DialogInterface.OnClickListener,
-            DialogInterface.OnDismissListener {
+    private class CredentialStorage implements DialogInterface.OnClickListener,
+            DialogInterface.OnDismissListener, Preference.OnPreferenceChangeListener,
+            Preference.OnPreferenceClickListener {
+        private static final int MINIMUM_PASSWORD_LENGTH = 8;
+        private static final int UNLOCK_DIALOG = 1;
+        private static final int PASSWORD_DIALOG = 2;
+        private static final int RESET_DIALOG = 3;
+        
         private KeyStore mKeyStore = KeyStore.getInstance();
         private int mState;
-
-        private View mView;
         private int mDialogId;
-        private boolean mRetry;
+        private boolean mSubmit;
+
         private CheckBoxPreference mAccessCheckBox;
+        private Preference mInstallButton;
+        private Preference mPasswordButton;
         private Preference mResetButton;
 
         private Intent mExternalIntent;
 
-        CstorHelper() {
-            mState = mKeyStore.test();
-        }
-
         void handleIntent(Intent intent) {
-            if (intent == null) return;
-            String action = intent.getAction();
-
-            if (Credentials.UNLOCK_ACTION.equals(action)) {
-                mExternalIntent = intent;
-                showCstorDialog(mState == KeyStore.UNINITIALIZED
-                        ? CSTOR_INIT_DIALOG : CSTOR_UNLOCK_DIALOG);
-            }
-        }
-
-        void resume() {
-            if (mExternalIntent != null) return;
-            updatePreferences(mKeyStore.test());
-        }
-
-        private void updatePreferences(int state) {
-            mAccessCheckBox.setEnabled(state != KeyStore.UNINITIALIZED);
-            mAccessCheckBox.setChecked(state == KeyStore.NO_ERROR);
-            mResetButton.setEnabled(state != KeyStore.UNINITIALIZED);
-
-            // Show a toast message if the state is changed.
-            if (mState == state) return;
-            if (state == KeyStore.NO_ERROR) {
-                Toast.makeText(SecuritySettings.this, R.string.cstor_is_enabled,
-                        Toast.LENGTH_SHORT).show();
-            } else if (state == KeyStore.UNINITIALIZED) {
-                Toast.makeText(SecuritySettings.this, R.string.cstor_is_reset,
-                        Toast.LENGTH_LONG).show();
-            }
-            // TODO: disabled?
-            mState = state;
-        }
-
-        private void lockCstor() {
-            mKeyStore.lock();
-            updatePreferences(KeyStore.LOCKED);
-        }
-
-        private int unlockCstor(String passwd) {
-            mKeyStore.unlock(passwd);
-            return mKeyStore.getLastError();
-        }
-
-        private int changeCstorPassword(String oldPasswd, String newPasswd) {
-            mKeyStore.password(oldPasswd, newPasswd);
-            return mKeyStore.getLastError();
-        }
-
-        private void initCstor(String passwd) {
-            mKeyStore.password(passwd);
-            updatePreferences(KeyStore.NO_ERROR);
-        }
-
-        private void resetCstor() {
-            mKeyStore.reset();
-            updatePreferences(KeyStore.UNINITIALIZED);
-        }
-
-        private void showCstorDialog(int dialogId) {
-            mDialogId = dialogId;
-            mRetry = false;
-            showDialog(dialogId);
-        }
-
-        public void onClick(DialogInterface dialog, int which) {
-            if (which == DialogInterface.BUTTON_NEGATIVE) return;
-
-            switch (mDialogId) {
-                case CSTOR_INIT_DIALOG:
-                case CSTOR_CHANGE_PASSWORD_DIALOG:
-                    mRetry = !checkPasswords((Dialog) dialog);
-                    break;
-
-                case CSTOR_UNLOCK_DIALOG:
-                    mRetry = !checkPassword((Dialog) dialog);
-                    break;
-
-                case CSTOR_RESET_DIALOG:
-                    resetCstor();
-                    break;
-            }
-        }
-
-        public void onDismiss(DialogInterface dialog) {
-            if (mRetry) {
-                showCstorDialog(mDialogId);
-            } else {
-                removeDialog(mDialogId);
-                updatePreferences(mState); // may revert checkbox
-
-                if (mExternalIntent != null) {
-                    finish();
+            if (intent != null) {
+                if (Credentials.UNLOCK_ACTION.equals(intent.getAction())) {
+                    mExternalIntent = intent;
+                    showDialog((mState == KeyStore.UNINITIALIZED) ?
+                            PASSWORD_DIALOG : UNLOCK_DIALOG);
                 }
             }
         }
 
-        // returns false if there is no error.
-        private boolean checkError(int error) {
+        void resume() {
+            mState = mKeyStore.test();
+            updatePreferences(mState);
+        }
+
+        Dialog createDialog(int id) {
+            mDialogId = id;
+            Log.v("Create", "Dialog " + id);
+            switch (id) {
+                case UNLOCK_DIALOG:
+                    return createUnlockDialog();
+                case PASSWORD_DIALOG:
+                    return createPasswordDialog();
+                case RESET_DIALOG:
+                    return createResetDialog();
+            }
+            return null;
+        }
+
+        private void initialize(String password) {
+            mKeyStore.password(password);
+            updatePreferences(KeyStore.NO_ERROR);
+        }
+
+        private void reset() {
+            mKeyStore.reset();
+            updatePreferences(KeyStore.UNINITIALIZED);
+        }
+
+        private void lock() {
+            mKeyStore.lock();
+            updatePreferences(KeyStore.LOCKED);
+        }
+
+        private int unlock(String password) {
+            mKeyStore.unlock(password);
+            return mKeyStore.getLastError();
+        }
+
+        private int changePassword(String oldPassword, String newPassword) {
+            mKeyStore.password(oldPassword, newPassword);
+            return mKeyStore.getLastError();
+        }
+
+        public boolean onPreferenceChange(Preference preference, Object value) {
+            if (preference == mAccessCheckBox) {
+                if ((Boolean) value) {
+                    showDialog((mState == KeyStore.UNINITIALIZED) ?
+                            PASSWORD_DIALOG : UNLOCK_DIALOG);
+                } else {
+                    lock();
+                }
+                return true;
+            }
+            return false;
+        }
+        
+        public boolean onPreferenceClick(Preference preference) {
+            if (preference == mInstallButton) {
+                Credentials.getInstance().installFromSdCard(SecuritySettings.this);
+            } else if (preference == mPasswordButton) {
+                showDialog(PASSWORD_DIALOG);
+            } else if (preference == mResetButton) {
+                showDialog(RESET_DIALOG);
+            } else {
+                return false;
+            }
+            return true;
+        }
+
+        public void onClick(DialogInterface dialog, int button) {
+            mSubmit = (button == DialogInterface.BUTTON_POSITIVE);
+            if (button == DialogInterface.BUTTON_NEUTRAL) {
+                reset();
+            }
+        }
+
+        public void onDismiss(DialogInterface dialog) {
+            if (mSubmit && !isFinishing()) {
+                mSubmit = false;
+                if (!checkPassword((Dialog) dialog)) {
+                    showDialog(mDialogId);
+                    return;
+                }
+            }
+            removeDialog(mDialogId);
+            updatePreferences(mState);
+            if (mExternalIntent != null) {
+                mExternalIntent = null;
+                finish();
+            }
+        }
+
+        // Return true if there is no error.
+        private boolean checkPassword(Dialog dialog) {
+            String oldPassword = getText(dialog, R.id.old_password);
+            String newPassword = getText(dialog, R.id.new_password);
+            String confirmPassword = getText(dialog, R.id.confirm_password);
+
+            if (oldPassword != null && oldPassword.length() == 0) {
+                showError(dialog, R.string.credentials_password_empty);
+                return false;
+            } else if (newPassword == null) {
+                return !checkError(dialog, unlock(oldPassword));
+            } else if (newPassword.length() == 0 || confirmPassword.length() == 0) {
+                showError(dialog, R.string.credentials_passwords_empty);
+            } else if (newPassword.length() < MINIMUM_PASSWORD_LENGTH) {
+                showError(dialog, R.string.credentials_password_too_short);
+            } else if (!newPassword.equals(confirmPassword)) {
+                showError(dialog, R.string.credentials_passwords_mismatch);
+            } else if (oldPassword == null) {
+                initialize(newPassword);
+                return true;
+            } else {
+                return !checkError(dialog, changePassword(oldPassword, newPassword));
+            }
+            return false;
+        }
+
+        // Return false if there is no error.
+        private boolean checkError(Dialog dialog, int error) {
             if (error == KeyStore.NO_ERROR) {
                 updatePreferences(KeyStore.NO_ERROR);
                 return false;
@@ -486,199 +508,125 @@ public class SecuritySettings extends PreferenceActivity {
             }
             int count = error - KeyStore.WRONG_PASSWORD + 1;
             if (count > 3) {
-                showError(R.string.cstor_password_error);
-                return true;
-            }
-            TextView v = showError(R.string.cstor_password_error_reset_warning);
-            if (count == 1) {
-                v.setText(R.string.cstor_password_error_reset_warning);
+                showError(dialog, R.string.credentials_wrong_password);
+            } else if (count == 1) {
+                showError(dialog, R.string.credentials_reset_warning);
             } else {
-                String format = getString(
-                        R.string.cstor_password_error_reset_warning_plural);
-                v.setText(String.format(format, count));
+                showError(dialog, R.string.credentials_reset_warning_plural, count);
             }
             return true;
         }
 
-        // returns true if the password is correct
-        private boolean checkPassword(Dialog d) {
-            hideError();
-
-            String passwd = getText(R.id.cstor_password);
-            if (TextUtils.isEmpty(passwd)) {
-                showError(R.string.cstor_password_empty_error);
-                return false;
-            }
-
-            return !checkError(unlockCstor(passwd));
+        private String getText(Dialog dialog, int viewId) {
+            TextView view = (TextView) dialog.findViewById(viewId);
+            return (view == null || view.getVisibility() == View.GONE) ? null :
+                            view.getText().toString();
         }
 
-        // returns true if the passwords are correct
-        private boolean checkPasswords(Dialog d) {
-            hideError();
-
-            String oldPasswd = getText(R.id.cstor_old_password);
-            String newPasswd = getText(R.id.cstor_new_password);
-            String confirmPasswd = getText(R.id.cstor_confirm_password);
-
-            if ((mDialogId == CSTOR_CHANGE_PASSWORD_DIALOG)
-                    && TextUtils.isEmpty(oldPasswd)) {
-                showError(R.string.cstor_password_empty_error);
-            } else if (TextUtils.isEmpty(newPasswd)
-                    || TextUtils.isEmpty(confirmPasswd)) {
-                showError(R.string.cstor_passwords_empty_error);
-            } else if (newPasswd.length() < CSTOR_MIN_PASSWORD_LENGTH) {
-                showError(R.string.cstor_password_verification_error);
-            } else if (!newPasswd.equals(confirmPasswd)) {
-                showError(R.string.cstor_passwords_error);
-            } else {
-                if (mDialogId == CSTOR_CHANGE_PASSWORD_DIALOG) {
-                    return !checkError(changeCstorPassword(oldPasswd, newPasswd));
+        private void showError(Dialog dialog, int stringId, Object... formatArgs) {
+            TextView view = (TextView) dialog.findViewById(R.id.error);
+            if (view != null) {
+                if (formatArgs == null || formatArgs.length == 0) {
+                    view.setText(stringId);
                 } else {
-                    initCstor(newPasswd);
-                    return true;
+                    view.setText(dialog.getContext().getString(stringId, formatArgs));
                 }
+                view.setVisibility(View.VISIBLE);
             }
-            return false;
         }
-
-        private TextView showError(int messageId) {
-            TextView v = (TextView) mView.findViewById(R.id.cstor_error);
-            v.setText(messageId);
-            if (v != null) v.setVisibility(View.VISIBLE);
-            return v;
-        }
-
-        private void hideError() {
-            hide(R.id.cstor_error);
-        }
-
-        private void hide(int viewId) {
-            View v = mView.findViewById(viewId);
-            if (v != null) v.setVisibility(View.GONE);
-        }
-
-        private String getText(int viewId) {
-            return ((TextView) mView.findViewById(viewId)).getText().toString();
-        }
-
+        
         private void createPreferences(PreferenceCategory category) {
             mAccessCheckBox = new CheckBoxPreference(SecuritySettings.this);
-            mAccessCheckBox.setTitle(R.string.cstor_access_title);
-            mAccessCheckBox.setSummary(R.string.cstor_access_summary);
-            mAccessCheckBox.setOnPreferenceChangeListener(
-                    new Preference.OnPreferenceChangeListener() {
-                        public boolean onPreferenceChange(
-                                Preference pref, Object value) {
-                            if (((Boolean) value)) {
-                                showCstorDialog(CSTOR_UNLOCK_DIALOG);
-                            } else {
-                                lockCstor();
-                            }
-                            return true;
-                        }
-                    });
+            mAccessCheckBox.setTitle(R.string.credentials_access);
+            mAccessCheckBox.setSummary(R.string.credentials_access_summary);
+            mAccessCheckBox.setOnPreferenceChangeListener(this);
             category.addPreference(mAccessCheckBox);
 
-            Preference install = new Preference(SecuritySettings.this);
-            install.setTitle(R.string.cstor_cert_install_title);
-            install.setSummary(R.string.cstor_cert_install_summary);
-            install.setOnPreferenceClickListener(
-                    new Preference.OnPreferenceClickListener() {
-                        public boolean onPreferenceClick(Preference pref) {
-                            Credentials.getInstance().installFromSdCard(
-                                            SecuritySettings.this);
-                            return true;
-                        }
-                    });
-            category.addPreference(install);
+            mInstallButton = new Preference(SecuritySettings.this);
+            mInstallButton.setTitle(R.string.credentials_install_certificates);
+            mInstallButton.setSummary(R.string.credentials_install_certificates_summary);
+            mInstallButton.setOnPreferenceClickListener(this);
+            category.addPreference(mInstallButton);
 
-            Preference password = new Preference(SecuritySettings.this);
-            password.setTitle(R.string.cstor_set_passwd_title);
-            password.setSummary(R.string.cstor_set_passwd_summary);
-            password.setOnPreferenceClickListener(
-                    new Preference.OnPreferenceClickListener() {
-                        public boolean onPreferenceClick(Preference pref) {
-                            showCstorDialog(mState == KeyStore.UNINITIALIZED
-                                    ? CSTOR_INIT_DIALOG
-                                    : CSTOR_CHANGE_PASSWORD_DIALOG);
-                            return true;
-                        }
-                    });
-            category.addPreference(password);
+            mPasswordButton = new Preference(SecuritySettings.this);
+            mPasswordButton.setTitle(R.string.credentials_set_password);
+            mPasswordButton.setSummary(R.string.credentials_set_password_summary);
+            mPasswordButton.setOnPreferenceClickListener(this);
+            category.addPreference(mPasswordButton);
 
             mResetButton = new Preference(SecuritySettings.this);
-            mResetButton.setTitle(R.string.cstor_reset_title);
-            mResetButton.setSummary(R.string.cstor_reset_summary);
-            mResetButton.setOnPreferenceClickListener(
-                    new Preference.OnPreferenceClickListener() {
-                        public boolean onPreferenceClick(Preference pref) {
-                            showCstorDialog(CSTOR_RESET_DIALOG);
-                            return true;
-                        }
-                    });
+            mResetButton.setTitle(R.string.credentials_reset);
+            mResetButton.setSummary(R.string.credentials_reset_summary);
+            mResetButton.setOnPreferenceClickListener(this);
             category.addPreference(mResetButton);
+        }
 
-            updatePreferences(mState);
+        private void updatePreferences(int state) {
+            mAccessCheckBox.setEnabled(state != KeyStore.UNINITIALIZED);
+            mAccessCheckBox.setChecked(state == KeyStore.NO_ERROR);
+            mResetButton.setEnabled(state != KeyStore.UNINITIALIZED);
+
+            // Show a toast message if the state is changed.
+            if (mState == state) return;
+            if (state == KeyStore.NO_ERROR) {
+                Toast.makeText(SecuritySettings.this, R.string.credentials_enabled,
+                        Toast.LENGTH_SHORT).show();
+            } else if (state == KeyStore.UNINITIALIZED) {
+                Toast.makeText(SecuritySettings.this, R.string.credentials_erased,
+                        Toast.LENGTH_SHORT).show();
+            } else if (state == KeyStore.LOCKED) {
+                Toast.makeText(SecuritySettings.this, R.string.credentials_disabled,
+                        Toast.LENGTH_SHORT).show();
+            }
+            mState = state;
         }
 
         private Dialog createUnlockDialog() {
-            mView = View.inflate(SecuritySettings.this,
-                    R.layout.cstor_unlock_dialog_view, null);
-            hideError();
+            View view = View.inflate(SecuritySettings.this,
+                    R.layout.credentials_unlock_dialog, null);
 
             // show extra hint only when the action comes from outside
-            if (mExternalIntent == null) {
-                hide(R.id.cstor_access_dialog_hint_from_action);
+            if (mExternalIntent != null) {
+                view.findViewById(R.id.hint).setVisibility(View.VISIBLE);
             }
 
-            Dialog d = new AlertDialog.Builder(SecuritySettings.this)
-                    .setView(mView)
-                    .setTitle(R.string.cstor_access_dialog_title)
+            Dialog dialog = new AlertDialog.Builder(SecuritySettings.this)
+                    .setView(view)
+                    .setTitle(R.string.credentials_unlock)
                     .setPositiveButton(android.R.string.ok, this)
                     .setNegativeButton(android.R.string.cancel, this)
                     .create();
-            d.setOnDismissListener(this);
-            return d;
+            dialog.setOnDismissListener(this);
+            return dialog;
         }
 
-        private Dialog createSetPasswordDialog(int id) {
-            mView = View.inflate(SecuritySettings.this,
-                    R.layout.cstor_set_password_dialog_view, null);
-            hideError();
+        private Dialog createPasswordDialog() {
+            View view = View.inflate(SecuritySettings.this,
+                    R.layout.credentials_password_dialog, null);
 
-            switch (id) {
-                case CSTOR_INIT_DIALOG:
-                    mView.findViewById(R.id.cstor_old_password_block)
-                            .setVisibility(View.GONE);
-                    break;
-
-                case CSTOR_CHANGE_PASSWORD_DIALOG:
-                    mView.findViewById(R.id.cstor_first_time_hint)
-                            .setVisibility(View.GONE);
-                    break;
-
-                default:
-                    throw new RuntimeException(
-                            "Unknown dialog id: " + mDialogId);
+            if (mState == KeyStore.UNINITIALIZED) {
+                view.findViewById(R.id.hint).setVisibility(View.VISIBLE);
+            } else {
+                view.findViewById(R.id.old_password_prompt).setVisibility(View.VISIBLE);
+                view.findViewById(R.id.old_password).setVisibility(View.VISIBLE);
             }
 
-            Dialog d = new AlertDialog.Builder(SecuritySettings.this)
-                    .setView(mView)
-                    .setTitle(R.string.cstor_set_passwd_dialog_title)
+            Dialog dialog = new AlertDialog.Builder(SecuritySettings.this)
+                    .setView(view)
+                    .setTitle(R.string.credentials_set_password)
                     .setPositiveButton(android.R.string.ok, this)
                     .setNegativeButton(android.R.string.cancel, this)
                     .create();
-            d.setOnDismissListener(this);
-            return d;
+            dialog.setOnDismissListener(this);
+            return dialog;
         }
 
         private Dialog createResetDialog() {
             return new AlertDialog.Builder(SecuritySettings.this)
                     .setTitle(android.R.string.dialog_alert_title)
                     .setIcon(android.R.drawable.ic_dialog_alert)
-                    .setMessage(R.string.cstor_reset_hint)
-                    .setPositiveButton(getString(android.R.string.ok), this)
+                    .setMessage(R.string.credentials_reset_hint)
+                    .setNeutralButton(getString(android.R.string.ok), this)
                     .setNegativeButton(getString(android.R.string.cancel), this)
                     .create();
         }
