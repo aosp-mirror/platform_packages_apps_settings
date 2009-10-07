@@ -381,7 +381,6 @@ public class SecuritySettings extends PreferenceActivity {
 
         Dialog createDialog(int id) {
             mDialogId = id;
-            Log.v("Create", "Dialog " + id);
             switch (id) {
                 case UNLOCK_DIALOG:
                     return createUnlockDialog();
