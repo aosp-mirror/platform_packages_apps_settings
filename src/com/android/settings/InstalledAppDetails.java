@@ -280,7 +280,7 @@ public class InstalledAppDetails extends Activity implements View.OnClickListene
         if (pkgInfo != null) {
             mAppVersion.setVisibility(View.VISIBLE);
             mAppVersion.setText(getString(R.string.version_text,
-                    String.valueOf(pkgInfo.versionCode)));
+                    String.valueOf(pkgInfo.versionName)));
         } else {
             mAppVersion.setVisibility(View.GONE);
         }
