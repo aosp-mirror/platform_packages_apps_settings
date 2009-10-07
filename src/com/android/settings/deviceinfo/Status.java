@@ -377,7 +377,7 @@ public class Status extends PreferenceActivity {
     }
 
     private void setBtStatus() {
-        BluetoothAdapter bluetooth = (BluetoothAdapter) getSystemService(BLUETOOTH_SERVICE);
+        BluetoothAdapter bluetooth = BluetoothAdapter.getDefaultAdapter();
         Preference btAddressPref = findPreference(KEY_BT_ADDRESS);
 
         if (bluetooth == null) {
