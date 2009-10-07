@@ -92,7 +92,7 @@ public class LocalBluetoothManager {
         // This will be around as long as this process is
         mContext = context.getApplicationContext();
 
-        mAdapter = (BluetoothAdapter) context.getSystemService(Context.BLUETOOTH_SERVICE);
+        mAdapter = BluetoothAdapter.getDefaultAdapter();
         if (mAdapter == null) {
             return false;
         }
