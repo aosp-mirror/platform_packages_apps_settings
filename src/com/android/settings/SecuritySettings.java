@@ -419,12 +419,14 @@ public class SecuritySettings extends PreferenceActivity {
 
         public boolean onPreferenceChange(Preference preference, Object value) {
             if (preference == mAccessCheckBox) {
-                if ((Boolean) value) {
+                boolean checked = (Boolean) value;
+                if (checked) {
                     showDialog((mState == KeyStore.UNINITIALIZED) ?
                             PASSWORD_DIALOG : UNLOCK_DIALOG);
                 } else {
                     lock();
                 }
+                mAccessCheckBox.setChecked(!checked);
                 return true;
             }
             return false;
@@ -459,7 +461,6 @@ public class SecuritySettings extends PreferenceActivity {
                 }
             }
             removeDialog(mDialogId);
-            updatePreferences(mState);
             if (mExternalIntent != null) {
                 mExternalIntent = null;
                 finish();
@@ -566,8 +567,9 @@ public class SecuritySettings extends PreferenceActivity {
             mResetButton.setEnabled(state != KeyStore.UNINITIALIZED);
 
             // Show a toast message if the state is changed.
-            if (mState == state) return;
-            if (state == KeyStore.NO_ERROR) {
+            if (mState == state) {
+                return;
+            } else if (state == KeyStore.NO_ERROR) {
                 Toast.makeText(SecuritySettings.this, R.string.credentials_enabled,
                         Toast.LENGTH_SHORT).show();
             } else if (state == KeyStore.UNINITIALIZED) {
