@@ -185,6 +185,12 @@ public class LocalBluetoothManager {
         }
     }
 
+    public void stopScanning() {
+        if (mAdapter.isDiscovering()) {
+            mAdapter.cancelDiscovery();
+        }
+    }
+
     public int getBluetoothState() {
 
         if (mState == BluetoothAdapter.ERROR) {
