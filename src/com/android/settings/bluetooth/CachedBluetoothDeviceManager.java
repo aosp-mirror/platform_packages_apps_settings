@@ -216,6 +216,7 @@ public class CachedBluetoothDeviceManager {
         case BluetoothDevice.UNBOND_REASON_DISCOVERY_IN_PROGRESS:
         case BluetoothDevice.UNBOND_REASON_AUTH_TIMEOUT:
         case BluetoothDevice.UNBOND_REASON_REPEATED_ATTEMPTS:
+        case BluetoothDevice.UNBOND_REASON_REMOTE_AUTH_CANCELED:
             errorMsg = R.string.bluetooth_pairing_error_message;
             mLocalManager.showError(device, R.string.bluetooth_error_title, errorMsg);
             break;
