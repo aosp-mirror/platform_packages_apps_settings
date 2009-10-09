@@ -329,12 +329,10 @@ public class BluetoothSettings extends PreferenceActivity
 
         switch(mFilterType) {
         case BluetoothDevicePicker.FILTER_TYPE_TRANSFER:
-            if (uuids != null) {
+            if (uuids != null)
                 if (BluetoothUuid.containsAnyUuid(uuids,
                         LocalBluetoothProfileManager.OPP_PROFILE_UUIDS))  return true;
-            } else {
-                if (bluetoothClass.doesClassMatch(BluetoothClass.PROFILE_OPP)) return true;
-            }
+            if (bluetoothClass.doesClassMatch(BluetoothClass.PROFILE_OPP)) return true;
             break;
         case BluetoothDevicePicker.FILTER_TYPE_AUDIO:
             if (uuids != null) {
