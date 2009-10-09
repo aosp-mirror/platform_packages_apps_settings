@@ -166,12 +166,6 @@ public final class AccessPointState implements Comparable<AccessPointState>, Par
         if (TextUtils.isEmpty(string)) {
             return "";
         }
-        
-        final int lastPos = string.length() - 1;
-        if (lastPos < 0 || (string.charAt(0) == '"' && string.charAt(lastPos) == '"')) {
-            return string;
-        }
-        
         return "\"" + string + "\"";
     }
     
@@ -225,7 +219,7 @@ public final class AccessPointState implements Comparable<AccessPointState>, Par
     
     public void setSsid(String ssid) {
         if (ssid != null) {
-            this.ssid = convertToQuotedString(ssid);
+            this.ssid = ssid;
             requestRefresh();
         }
     }
@@ -478,41 +472,40 @@ public final class AccessPointState implements Comparable<AccessPointState>, Par
         config.BSSID = getWpaSupplicantBssid();
         config.priority = priority;
         config.hiddenSSID = hiddenSsid;
-        config.SSID = convertToQuotedString(ssid);
+        config.SSID = ssid;
         config.eap.setValue(mEap);
 
         if (!TextUtils.isEmpty(mPhase2)) {
-            config.phase2.setValue(convertToQuotedString("auth=" + mPhase2));
+            config.phase2.setValue("auth=" + mPhase2);
         } else {
             config.phase2.setValue(null);
         }
         if (!TextUtils.isEmpty(mEnterpriseFields[IDENTITY])) {
-            config.identity.setValue(
-                    convertToQuotedString(mEnterpriseFields[IDENTITY]));
+            config.identity.setValue(mEnterpriseFields[IDENTITY]);
         } else {
             config.identity.setValue(null);
         }
         if (!TextUtils.isEmpty(mEnterpriseFields[ANONYMOUS_IDENTITY])) {
-            config.anonymous_identity.setValue(convertToQuotedString(
-                    mEnterpriseFields[ANONYMOUS_IDENTITY]));
+            config.anonymous_identity.setValue(
+                    mEnterpriseFields[ANONYMOUS_IDENTITY]);
         } else {
             config.anonymous_identity.setValue(null);
         }
         if (!TextUtils.isEmpty(mEnterpriseFields[CLIENT_CERT])) {
-            config.client_cert.setValue(convertToQuotedString(
-                    mEnterpriseFields[CLIENT_CERT]));
+            config.client_cert.setValue(
+                    mEnterpriseFields[CLIENT_CERT]);
         } else {
             config.client_cert.setValue(null);
         }
         if (!TextUtils.isEmpty(mEnterpriseFields[CA_CERT])) {
-            config.ca_cert.setValue(convertToQuotedString(
-                    mEnterpriseFields[CA_CERT]));
+            config.ca_cert.setValue(
+                    mEnterpriseFields[CA_CERT]);
         } else {
             config.ca_cert.setValue(null);
         }
         if (!TextUtils.isEmpty(mEnterpriseFields[PRIVATE_KEY])) {
-            config.private_key.setValue(convertToQuotedString(
-                    mEnterpriseFields[PRIVATE_KEY]));
+            config.private_key.setValue(
+                    mEnterpriseFields[PRIVATE_KEY]);
         } else {
             config.private_key.setValue(null);
         }
@@ -565,7 +558,7 @@ public final class AccessPointState implements Comparable<AccessPointState>, Par
             config.allowedKeyManagement.set(KeyMgmt.WPA_EAP);
             config.allowedKeyManagement.set(KeyMgmt.IEEE8021X);
             if (!TextUtils.isEmpty(mPassword)) {
-                config.password.setValue(convertToQuotedString(mPassword));
+                config.password.setValue(mPassword);
             }
         } else if (security.equals(OPEN)) {
             config.allowedKeyManagement.set(KeyMgmt.NONE);
