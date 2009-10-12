@@ -58,7 +58,11 @@ public class SettingsSafetyLegalActivity extends AlertActivity
 
         // Begin accessing
         mWebView.getSettings().setJavaScriptEnabled(true);
-        mWebView.loadUrl(userSafetylegalUrl);
+        if (savedInstanceState == null) {
+            mWebView.loadUrl(userSafetylegalUrl);
+        } else {
+            mWebView.restoreState(savedInstanceState);
+        }
         mWebView.setWebViewClient(new WebViewClient() {
             @Override
             public void onPageFinished(WebView view, String url) {
@@ -109,5 +113,11 @@ public class SettingsSafetyLegalActivity extends AlertActivity
 
     public void onCancel(DialogInterface dialog) {
         finish();
+    }
+
+    @Override
+    public void onSaveInstanceState(Bundle icicle) {
+        mWebView.saveState(icicle);
+        super.onSaveInstanceState(icicle);
     }
 }
