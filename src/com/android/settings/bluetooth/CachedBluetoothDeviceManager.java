@@ -172,8 +172,14 @@ public class CachedBluetoothDeviceManager {
             if (!readPairedDevices()) {
                 Log.e(TAG, "Got bonding state changed for " + device +
                         ", but we have no record of that device.");
+                return;
             }
-            return;
+            cachedDevice = findDevice(device);
+            if (cachedDevice == null) {
+                Log.e(TAG, "Got bonding state changed for " + device +
+                        "but device not added in cache");
+                return;
+            }
         }
 
         cachedDevice.onBondingStateChanged(bondState);
