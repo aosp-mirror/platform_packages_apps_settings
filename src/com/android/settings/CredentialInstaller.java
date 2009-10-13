@@ -32,6 +32,7 @@ import android.util.Log;
  */
 public class CredentialInstaller extends Activity {
     private static final String TAG = "CredentialInstaller";
+    private static final String UNLOCKING = "ulck";
 
     private KeyStore mKeyStore = KeyStore.getInstance();
     private boolean mUnlocking = false;
@@ -42,15 +43,26 @@ public class CredentialInstaller extends Activity {
 
         if (!"com.android.certinstaller".equals(getCallingPackage())) finish();
 
-        if (!isKeyStoreLocked()) {
+        if (isKeyStoreUnlocked()) {
             install();
-            finish();
         } else if (!mUnlocking) {
             mUnlocking = true;
             Credentials.getInstance().unlock(this);
-        } else {
-            finish();
+            return;
         }
+        finish();
+    }
+
+    @Override
+    protected void onSaveInstanceState(Bundle outStates) {
+        super.onSaveInstanceState(outStates);
+        outStates.putBoolean(UNLOCKING, mUnlocking);
+    }
+
+    @Override
+    protected void onRestoreInstanceState(Bundle savedStates) {
+        super.onRestoreInstanceState(savedStates);
+        mUnlocking = savedStates.getBoolean(UNLOCKING);
     }
 
     private void install() {
@@ -61,13 +73,13 @@ public class CredentialInstaller extends Activity {
             byte[] data = bundle.getByteArray(key);
             if (data == null) continue;
             boolean success = mKeyStore.put(key.getBytes(), data);
-            Log.v(TAG, "install " + key + ": " + data.length + "  success? " + success);
+            Log.d(TAG, "install " + key + ": " + data.length + "  success? " + success);
             if (!success) return;
         }
         setResult(RESULT_OK);
     }
 
-    private boolean isKeyStoreLocked() {
-        return (mKeyStore.test() != KeyStore.NO_ERROR);
+    private boolean isKeyStoreUnlocked() {
+        return (mKeyStore.test() == KeyStore.NO_ERROR);
     }
 }
