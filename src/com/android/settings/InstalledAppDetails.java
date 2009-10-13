@@ -323,7 +323,8 @@ public class InstalledAppDetails extends Activity implements View.OnClickListene
         try {
             mAppInfo = mPm.getApplicationInfo(mAppInfo.packageName, 
                     PackageManager.GET_UNINSTALLED_PACKAGES);
-            pkgInfo = mPm.getPackageInfo(mAppInfo.packageName, 0);
+            pkgInfo = mPm.getPackageInfo(mAppInfo.packageName,
+                    PackageManager.GET_UNINSTALLED_PACKAGES);
         } catch (NameNotFoundException e) {
             Log.e(TAG, "Exception when retrieving package:" + mAppInfo.packageName, e);
             showDialogInner(DLG_APP_NOT_FOUND);
