@@ -749,7 +749,6 @@ public class WifiLayer {
                     // We already know about this one
                     continue;
                 }
-    
                 ap = new AccessPointState(mContext);
                 ap.updateFromWifiConfiguration(config);
                 if (LOGV) Log.v(TAG, "Created " + ap + " in loadConfiguredAccessPoints");
@@ -1152,7 +1151,7 @@ public class WifiLayer {
                         continue;
                     }
                     
-                    final String ssid = AccessPointState.convertToQuotedString(scanResult.SSID);
+                    final String ssid = scanResult.SSID;
                     String security = AccessPointState.getScanResultSecurity(scanResult);
                     
                     // See if this AP is part of a group of APs (e.g., any large
