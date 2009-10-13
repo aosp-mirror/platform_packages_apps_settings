@@ -223,7 +223,7 @@ public class AccessPointDialog extends AlertDialog implements DialogInterface.On
     /** Called after flags are set, the dialog's layout/etc should be set up here */
     private void onLayout() {
         final Context context = getContext();
-        final String ssid = mState.getHumanReadableSsid();
+        final String ssid = mState.ssid;
         
         int positiveButtonResId = 0;
         int negativeButtonResId = R.string.cancel;
@@ -439,7 +439,7 @@ public class AccessPointDialog extends AlertDialog implements DialogInterface.On
             }
             
         } else if (mMode == MODE_CONFIGURE) {
-            String ssid = mState.getHumanReadableSsid();
+            String ssid = mState.ssid;
             if (!TextUtils.isEmpty(ssid)) {
                 mSsidEdit.setText(ssid);
             }
