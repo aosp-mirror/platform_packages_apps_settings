@@ -203,20 +203,7 @@ public final class AccessPointState implements Comparable<AccessPointState>, Par
             requestRefresh();
         }
     }
-    
-    public String getHumanReadableSsid() {
-        if (TextUtils.isEmpty(ssid)) {
-            return "";
-        }
-        
-        final int lastPos = ssid.length() - 1;
-        if (ssid.charAt(0) == '"' && ssid.charAt(lastPos) == '"') {
-            return ssid.substring(1, lastPos);
-        }
-        
-        return ssid;
-    }
-    
+   
     public void setSsid(String ssid) {
         if (ssid != null) {
             this.ssid = ssid;
