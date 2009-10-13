@@ -48,7 +48,7 @@ public class AccessPointPreference extends Preference implements
     }
     
     public void refresh() {
-        setTitle(mState.getHumanReadableSsid());
+        setTitle(mState.ssid);
         setSummary(mState.getSummarizedStatus());
 
         notifyChanged();
