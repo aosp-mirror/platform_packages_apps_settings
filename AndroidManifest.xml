@@ -321,7 +321,7 @@
         </activity>
 
         <activity android:name="CredentialInstaller"
-                android:label="@string/credential_installer_activity_title">
+                android:theme="@android:style/Theme.Translucent.NoTitleBar">
             <intent-filter>
                 <action android:name="android.credentials.SYSTEM_INSTALL" />
                 <category android:name="android.intent.category.DEFAULT" />
