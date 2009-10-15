@@ -393,10 +393,9 @@ public class SettingsAppWidgetProvider extends AppWidgetProvider {
                 if (context.getResources().getBoolean(
                         com.android.internal.R.bool.config_automatic_brightness_available)) {
                     // Disable automatic brightness
-                    power.setAutoBrightness(false);
                     Settings.System.putInt(context.getContentResolver(),
                             Settings.System.SCREEN_BRIGHTNESS_MODE,
-                            0);
+                            Settings.System.SCREEN_BRIGHTNESS_MODE_MANUAL);
                     // Set it again in case auto brightness was on
                     power.setBacklightBrightness(brightness);
                 }
