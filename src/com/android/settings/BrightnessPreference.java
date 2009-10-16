@@ -101,7 +101,8 @@ public class BrightnessPreference extends SeekBarPreference implements
     }
 
     public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-        setMode(isChecked ? 1 : 0);
+        setMode(isChecked ? Settings.System.SCREEN_BRIGHTNESS_MODE_AUTOMATIC
+                : Settings.System.SCREEN_BRIGHTNESS_MODE_MANUAL);
         if (!isChecked) {
             setBrightness(mSeekBar.getProgress() + MINIMUM_BACKLIGHT);
         }
@@ -115,11 +116,6 @@ public class BrightnessPreference extends SeekBarPreference implements
             Settings.System.putInt(getContext().getContentResolver(), 
                     Settings.System.SCREEN_BRIGHTNESS,
                     mSeekBar.getProgress() + MINIMUM_BACKLIGHT);
-            if (mAutomaticAvailable) {
-                Settings.System.putInt(getContext().getContentResolver(),
-                        Settings.System.SCREEN_BRIGHTNESS_MODE,
-                        mCheckBox.isChecked() ? 1 : 0);
-            }
         } else {
             if (mAutomaticAvailable) {
                 setMode(mOldAutomatic);
@@ -141,20 +137,14 @@ public class BrightnessPreference extends SeekBarPreference implements
         }        
     }
 
-    private void setMode(int automatic) {
-        if (automatic != 0) {
+    private void setMode(int mode) {
+        if (mode == Settings.System.SCREEN_BRIGHTNESS_MODE_AUTOMATIC) {
             mSeekBar.setVisibility(View.GONE);
         } else {
             mSeekBar.setVisibility(View.VISIBLE);
         }
-        try {
-            IPowerManager power = IPowerManager.Stub.asInterface(
-                    ServiceManager.getService("power"));
-            if (power != null) {
-                power.setAutoBrightness(automatic != 0);
-            }
-        } catch (RemoteException doe) {
-        }
+        Settings.System.putInt(getContext().getContentResolver(),
+                Settings.System.SCREEN_BRIGHTNESS_MODE, mode);
     }
 }
 
