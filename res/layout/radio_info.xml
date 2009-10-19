@@ -188,35 +188,13 @@
                  android:layout_height="wrap_content"
                 />
 
-        <!-- Ciphering -->
-        <LinearLayout style="@style/entry_layout">
-            <Button android:id="@+id/ciph_toggle"
-                    android:textSize="14sp"
-                    android:layout_marginTop="8dip"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/radio_info_toggle_ciph_label"
-                    />
-            <TextView android:id="@+id/ciphState" style="@style/info_value" />
-
-        </LinearLayout>
-
-        <!-- QXDM logging & radio power -->
-        <LinearLayout style="@style/entry_layout">
-            <Button android:id="@+id/qxdm_log"
-                    android:textSize="14sp"
-                    android:layout_marginTop="8dip"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    />
-
-            <Button android:id="@+id/radio_power"
+        <!-- Radio Power -->
+        <Button android:id="@+id/radio_power"
                 android:textSize="14sp"
                 android:layout_marginTop="8dip"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 />
-        </LinearLayout>
 
         <!-- SMSC -->
         <RelativeLayout android:layout_width="fill_parent"
@@ -260,6 +238,15 @@
                     />
             <TextView android:id="@+id/dnsCheckState" style="@style/info_value" />
         </LinearLayout>
+
+        <!-- Launch OEM-specific Info/Settings Activity (if any) -->
+        <Button android:id="@+id/oem_info"
+                android:textSize="14sp"
+                android:layout_marginTop="8dip"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/oem_radio_info_label"
+                />
 
     </LinearLayout>
 </ScrollView>

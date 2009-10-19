@@ -20,6 +20,8 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.content.pm.ResolveInfo;
 import android.content.SharedPreferences;
 import android.content.res.Resources;
 import android.net.Uri;
@@ -57,7 +59,6 @@ import com.android.internal.telephony.Phone;
 import com.android.internal.telephony.PhoneFactory;
 import com.android.internal.telephony.PhoneStateIntentReceiver;
 import com.android.internal.telephony.TelephonyProperties;
-import com.android.internal.telephony.gsm.GSMPhone;
 import com.android.internal.telephony.gsm.PdpConnection;
 
 import org.apache.http.HttpResponse;
@@ -72,6 +73,8 @@ import java.net.UnknownHostException;
 import java.util.ArrayList;
 import java.util.List;
 
+import android.util.Log;
+
 public class RadioInfo extends Activity {
     private final String TAG = "phone";
 
@@ -83,8 +86,6 @@ public class RadioInfo extends Activity {
     private static final int EVENT_QUERY_PREFERRED_TYPE_DONE = 1000;
     private static final int EVENT_SET_PREFERRED_TYPE_DONE = 1001;
     private static final int EVENT_QUERY_NEIGHBORING_CIDS_DONE = 1002;
-    private static final int EVENT_SET_QXDMLOG_DONE = 1003;
-    private static final int EVENT_SET_CIPHER_DONE = 1004;
     private static final int EVENT_QUERY_SMSC_DONE = 1005;
     private static final int EVENT_UPDATE_SMSC_DONE = 1006;
 
@@ -94,7 +95,9 @@ public class RadioInfo extends Activity {
     private static final int MENU_ITEM_VIEW_SDN     = 3;
     private static final int MENU_ITEM_GET_PDP_LIST = 4;
     private static final int MENU_ITEM_TOGGLE_DATA  = 5;
-    private static final int MENU_ITEM_TOGGLE_DATA_ON_BOOT = 6;
+
+    static final String ENABLE_DATA_STR = "Enable data connection";
+    static final String DISABLE_DATA_STR = "Disable data connection";
 
     private TextView mDeviceId; //DeviceId is the IMEI in GSM and the MEID in CDMA
     private TextView number;
@@ -119,27 +122,20 @@ public class RadioInfo extends Activity {
     private TextView mPingIpAddr;
     private TextView mPingHostname;
     private TextView mHttpClientTest;
-    private TextView cipherState;
     private TextView dnsCheckState;
     private EditText smsc;
     private Button radioPowerButton;
-    private Button qxdmLogButton;
-    private Button cipherToggleButton;
     private Button dnsCheckToggleButton;
     private Button pingTestButton;
     private Button updateSmscButton;
     private Button refreshSmscButton;
+    private Button oemInfoButton;
     private Spinner preferredNetworkType;
 
     private TelephonyManager mTelephonyManager;
     private Phone phone = null;
     private PhoneStateIntentReceiver mPhoneStateReceiver;
     private INetStatService netstat;
-
-    private OemCommands mOem = null;
-    private boolean mQxdmLogEnabled;
-    // The requested cipher state
-    private boolean mCipherOn;
 
     private String mPingIpAddrResult;
     private String mPingHostnameResult;
@@ -220,22 +216,6 @@ public class RadioInfo extends Activity {
                         mNeighboringCids.setText("unknown");
                     }
                     break;
-                case EVENT_SET_QXDMLOG_DONE:
-                    ar= (AsyncResult) msg.obj;
-                    if (ar.exception == null) {
-                        mQxdmLogEnabled = !mQxdmLogEnabled;
-
-                        updateQxdmState(mQxdmLogEnabled);
-                        displayQxdmEnableResult();
-                    }
-                    break;
-                case EVENT_SET_CIPHER_DONE:
-                    ar= (AsyncResult) msg.obj;
-                    if (ar.exception == null) {
-                        setCiphPref(mCipherOn);
-                    }
-                    updateCiphState();
-                    break;
                 case EVENT_QUERY_SMSC_DONE:
                     ar= (AsyncResult) msg.obj;
                     if (ar.exception != null) {
@@ -257,116 +237,6 @@ public class RadioInfo extends Activity {
             }
         }
     };
-
-    static private class OemCommands {
-
-        public static final int OEM_QXDM_SDLOG_DEFAULT_FILE_SIZE = 32;
-        public static final int OEM_QXDM_SDLOG_DEFAULT_MASK = 0;
-        public static final int OEM_QXDM_SDLOG_DEFAULT_MAX_INDEX = 8;
-
-        static final int SIZE_OF_INT = 4;
-        static final int OEM_FEATURE_ENABLE = 1;
-        static final int OEM_FEATURE_DISABLE = 0;
-        static final int OEM_SIMPE_FEAUTURE_LEN = 1;
-
-        static final int OEM_QXDM_SDLOG_FUNCTAG = 0x00010000;
-        static final int OEM_QXDM_SDLOG_LEN = 4;
-        static final int OEM_PS_AUTO_ATTACH_FUNCTAG = 0x00020000;
-        static final int OEM_CIPHERING_FUNCTAG = 0x00020001;
-
-        /**
-         * The OEM interface to store QXDM to SD.
-         *
-         * To start/stop logging QXDM logs to SD card, use tag
-         * OEM_RIL_HOOK_QXDM_SD_LOG_SETUP 0x00010000
-         *
-         * "data" is a const oem_ril_hook_qxdm_sdlog_setup_data_st *
-         * ((const oem_ril_hook_qxdm_sdlog_setup_data_st *)data)->head.func_tag
-         * should be OEM_RIL_HOOK_QXDM_SD_LOG_SETUP
-         * ((const oem_ril_hook_qxdm_sdlog_setup_data_st *)data)->head.len
-         * should be "sizeof(unsigned int) * 4"
-         * ((const oem_ril_hook_qxdm_sdlog_setup_data_st *)data)->mode
-         * could be 0 for 'stop logging', or 1 for 'start logging'
-         * ((const oem_ril_hook_qxdm_sdlog_setup_data_st *)data)->log_file_size
-         * will assign the size of each log file, and it could be a value between
-         * 1 and 512 (in megabytes, default value is recommended to set as 32).
-         * This value will be ignored when mode == 0.
-         * ((const oem_ril_hook_qxdm_sdlog_setup_data_st *)data)->log_mask will
-         * assign the rule to filter logs, and it is a bitmask (bit0 is for MsgAll,
-         * bit1 is for LogAll, and bit2 is for EventAll) recommended to be set as 0
-         * by default. This value will be ignored when mode == 0.
-         * ((const oem_ril_hook_qxdm_sdlog_setup_data_st *)data)->log_max_fileindex
-         * set the how many logfiles will storted before roll over. This value will
-         * be ignored when mode == 0.
-         *
-         * "response" is NULL
-         *
-         * typedef struct _oem_ril_hook_raw_head_st {
-         *      unsigned int func_tag;
-         *      unsigned int len;
-         * } oem_ril_hook_raw_head_st;
-         *
-         * typedef struct _oem_ril_hook_qxdm_sdlog_setup_data_st {
-         *      oem_ril_hook_raw_head_st head;
-         *      unsigned int mode;
-         *      unsigned int log_file_size;
-         *      unsigned int log_mask;
-         *      unsigned int log_max_fileindex;
-         * } oem_ril_hook_qxdm_sdlog_setup_data_st;
-         *
-         * @param enable set true to start logging QXDM in SD card
-         * @param fileSize is the log file size in MB
-         * @param mask is the log mask to filter
-         * @param maxIndex is the maximum roll-over file number
-         * @return byteArray to use in RIL RAW command
-         */
-        byte[] getQxdmSdlogData(boolean enable, int fileSize, int mask, int maxIndex) {
-            ByteArrayOutputStream bos = new ByteArrayOutputStream();
-            DataOutputStream dos = new DataOutputStream(bos);
-            try {
-                writeIntLittleEndian(dos, OEM_QXDM_SDLOG_FUNCTAG);
-                writeIntLittleEndian(dos, OEM_QXDM_SDLOG_LEN * SIZE_OF_INT);
-                writeIntLittleEndian(dos, enable ?
-                        OEM_FEATURE_ENABLE : OEM_FEATURE_DISABLE);
-                writeIntLittleEndian(dos, fileSize);
-                writeIntLittleEndian(dos, mask);
-                writeIntLittleEndian(dos, maxIndex);
-            } catch (IOException e) {
-                return null;
-            }
-            return bos.toByteArray();
-        }
-
-        byte[] getPsAutoAttachData(boolean enable) {
-            return getSimpleFeatureData(OEM_PS_AUTO_ATTACH_FUNCTAG, enable);
-        }
-
-        byte[] getCipheringData(boolean enable) {
-            return getSimpleFeatureData(OEM_CIPHERING_FUNCTAG, enable);
-        }
-
-        private byte[] getSimpleFeatureData(int tag, boolean enable) {
-            ByteArrayOutputStream bos = new ByteArrayOutputStream();
-            DataOutputStream dos = new DataOutputStream(bos);
-            try {
-                writeIntLittleEndian(dos, tag);
-                writeIntLittleEndian(dos, OEM_SIMPE_FEAUTURE_LEN * SIZE_OF_INT);
-                writeIntLittleEndian(dos, enable ?
-                        OEM_FEATURE_ENABLE : OEM_FEATURE_DISABLE);
-            } catch (IOException e) {
-                return null;
-            }
-            return bos.toByteArray();
-        }
-
-        private void writeIntLittleEndian(DataOutputStream dos, int val)
-                throws IOException {
-            dos.writeByte(val);
-            dos.writeByte(val >> 8);
-            dos.writeByte(val >> 16);
-            dos.writeByte(val >> 24);
-        }
-    }
 
     @Override
     public void onCreate(Bundle icicle) {
@@ -398,7 +268,6 @@ public class RadioInfo extends Activity {
         sentSinceReceived = (TextView) findViewById(R.id.sentSinceReceived);
         sent = (TextView) findViewById(R.id.sent);
         received = (TextView) findViewById(R.id.received);
-        cipherState = (TextView) findViewById(R.id.ciphState);
         smsc = (EditText) findViewById(R.id.smsc);
         dnsCheckState = (TextView) findViewById(R.id.dnsCheckState);
 
@@ -416,11 +285,6 @@ public class RadioInfo extends Activity {
         radioPowerButton = (Button) findViewById(R.id.radio_power);
         radioPowerButton.setOnClickListener(mPowerButtonHandler);
 
-        qxdmLogButton = (Button) findViewById(R.id.qxdm_log);
-        qxdmLogButton.setOnClickListener(mQxdmButtonHandler);
-
-        cipherToggleButton = (Button) findViewById(R.id.ciph_toggle);
-        cipherToggleButton.setOnClickListener(mCipherButtonHandler);
         pingTestButton = (Button) findViewById(R.id.ping_test);
         pingTestButton.setOnClickListener(mPingButtonHandler);
         updateSmscButton = (Button) findViewById(R.id.update_smsc);
@@ -430,13 +294,19 @@ public class RadioInfo extends Activity {
         dnsCheckToggleButton = (Button) findViewById(R.id.dns_check_toggle);
         dnsCheckToggleButton.setOnClickListener(mDnsCheckButtonHandler);
 
+        oemInfoButton = (Button) findViewById(R.id.oem_info);
+        oemInfoButton.setOnClickListener(mOemInfoButtonHandler);
+        PackageManager pm = getPackageManager();
+        Intent oemInfoIntent = new Intent("com.android.settings.OEM_RADIO_INFO");
+        List<ResolveInfo> oemInfoIntentList = pm.queryIntentActivities(oemInfoIntent, 0);
+        if (oemInfoIntentList.size() == 0) {
+            oemInfoButton.setEnabled(false);
+        }
+
         mPhoneStateReceiver = new PhoneStateIntentReceiver(this, mHandler);
         mPhoneStateReceiver.notifySignalStrength(EVENT_SIGNAL_STRENGTH_CHANGED);
         mPhoneStateReceiver.notifyServiceState(EVENT_SERVICE_STATE_CHANGED);
         mPhoneStateReceiver.notifyPhoneCallState(EVENT_PHONE_STATE_CHANGED);
-
-        updateQxdmState(null);
-        mOem = new OemCommands();
 
         phone.getPreferredNetworkType(
                 mHandler.obtainMessage(EVENT_QUERY_PREFERRED_TYPE_DONE));
@@ -462,9 +332,7 @@ public class RadioInfo extends Activity {
         updateDataStats();
         updateDataStats2();
         updatePowerState();
-        updateQxdmState(null);
         updateProperties();
-        updateCiphState();
         updateDnsCheckState();
 
         Log.i(TAG, "[RadioInfo] onResume: register phone & data intents");
@@ -502,13 +370,9 @@ public class RadioInfo extends Activity {
         menu.add(1, MENU_ITEM_GET_PDP_LIST,
                 0, R.string.radioInfo_menu_getPDP).setOnMenuItemClickListener(mGetPdpList);
         menu.add(1, MENU_ITEM_TOGGLE_DATA,
-                0, R.string.radioInfo_menu_disableData).setOnMenuItemClickListener(mToggleData);
-        menu.add(1, MENU_ITEM_TOGGLE_DATA_ON_BOOT,
-                0, R.string.radioInfo_menu_disableDataOnBoot).setOnMenuItemClickListener(
-                mToggleDataOnBoot);
+                0, DISABLE_DATA_STR).setOnMenuItemClickListener(mToggleData);
         return true;
     }
-
 
     @Override
     public boolean onPrepareOptionsMenu(Menu menu) {
@@ -520,26 +384,16 @@ public class RadioInfo extends Activity {
         switch (state) {
             case TelephonyManager.DATA_CONNECTED:
             case TelephonyManager.DATA_SUSPENDED:
-                item.setTitle(R.string.radioInfo_menu_disableData);
+                item.setTitle(DISABLE_DATA_STR);
                 break;
             case TelephonyManager.DATA_DISCONNECTED:
-                item.setTitle(R.string.radioInfo_menu_enableData);
+                item.setTitle(ENABLE_DATA_STR);
                 break;
             default:
                 visible = false;
                 break;
         }
         item.setVisible(visible);
-
-        // Get the toggle-data-on-boot menu item in the right state.
-        item = menu.findItem(MENU_ITEM_TOGGLE_DATA_ON_BOOT);
-        SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(phone.getContext());
-        boolean value = sp.getBoolean(GSMPhone.DATA_DISABLED_ON_BOOT_KEY, false);
-        if (value) {
-            item.setTitle(R.string.radioInfo_menu_enableDataOnBoot);
-        } else {
-            item.setTitle(R.string.radioInfo_menu_disableDataOnBoot);
-        }
         return true;
     }
 
@@ -552,42 +406,6 @@ public class RadioInfo extends Activity {
                             getString(R.string.turn_off_radio) :
                             getString(R.string.turn_on_radio);
         radioPowerButton.setText(buttonText);
-    }
-
-    private void updateQxdmState(Boolean newQxdmStatus) {
-        SharedPreferences sp =
-          PreferenceManager.getDefaultSharedPreferences(phone.getContext());
-        mQxdmLogEnabled = sp.getBoolean("qxdmstatus", false);
-        // This is called from onCreate, onResume, and the handler when the status
-        // is updated.
-        if (newQxdmStatus != null) {
-            SharedPreferences.Editor editor = sp.edit();
-            editor.putBoolean("qxdmstatus", newQxdmStatus);
-            editor.commit();
-            mQxdmLogEnabled = newQxdmStatus;
-        }
-
-        String buttonText = mQxdmLogEnabled ?
-                            getString(R.string.turn_off_qxdm) :
-                            getString(R.string.turn_on_qxdm);
-        qxdmLogButton.setText(buttonText);
-    }
-
-    private void setCiphPref(boolean value) {
-        SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(phone.getContext());
-        SharedPreferences.Editor editor = sp.edit();
-        editor.putBoolean(GSMPhone.CIPHERING_KEY, value);
-        editor.commit();
-    }
-
-    private boolean getCiphPref() {
-        SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(phone.getContext());
-        boolean ret = sp.getBoolean(GSMPhone.CIPHERING_KEY, true);
-        return ret;
-    }
-
-    private void updateCiphState() {
-        cipherState.setText(getCiphPref() ? "Ciphering ON" : "Ciphering OFF");
     }
 
     private void updateDnsCheckState() {
@@ -987,19 +805,6 @@ public class RadioInfo extends Activity {
         disconnects.setText(sb.toString());
     }
 
-    private void displayQxdmEnableResult() {
-        String status = mQxdmLogEnabled ? "Start QXDM Log" : "Stop QXDM Log";
-
-        new AlertDialog.Builder(this).setMessage(status).show();
-
-        mHandler.postDelayed(
-                new Runnable() {
-                    public void run() {
-                        finish();
-                    }
-                }, 2000);
-    }
-
     private MenuItem.OnMenuItemClickListener mViewADNCallback = new MenuItem.OnMenuItemClickListener() {
         public boolean onMenuItemClick(MenuItem item) {
             Intent intent = new Intent(Intent.ACTION_VIEW);
@@ -1046,24 +851,18 @@ public class RadioInfo extends Activity {
         }
     };
 
-    private void toggleDataDisabledOnBoot() {
-        SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(phone.getContext());
-        SharedPreferences.Editor editor = sp.edit();
-        boolean value = sp.getBoolean(GSMPhone.DATA_DISABLED_ON_BOOT_KEY, false);
-        editor.putBoolean(GSMPhone.DATA_DISABLED_ON_BOOT_KEY, !value);
-        byte[] data = mOem.getPsAutoAttachData(value);
-        if (data == null) {
-            // don't commit
-            return;
-        }
-
-        editor.commit();
-        phone.invokeOemRilRequestRaw(data, null);
-    }
-
-    private MenuItem.OnMenuItemClickListener mToggleDataOnBoot = new MenuItem.OnMenuItemClickListener() {
+    private MenuItem.OnMenuItemClickListener mGetPdpList = new MenuItem.OnMenuItemClickListener() {
         public boolean onMenuItemClick(MenuItem item) {
-            toggleDataDisabledOnBoot();
+            phone.getDataCallList(null);
+            return true;
+        }
+    };
+
+    private MenuItem.OnMenuItemClickListener mSelectBandCallback = new MenuItem.OnMenuItemClickListener() {
+        public boolean onMenuItemClick(MenuItem item) {
+            Intent intent = new Intent();
+            intent.setClass(RadioInfo.this, BandMode.class);
+            startActivity(intent);
             return true;
         }
     };
@@ -1086,22 +885,6 @@ public class RadioInfo extends Activity {
         }
     };
 
-    private MenuItem.OnMenuItemClickListener mGetPdpList = new MenuItem.OnMenuItemClickListener() {
-        public boolean onMenuItemClick(MenuItem item) {
-            phone.getDataCallList(null);
-            return true;
-        }
-    };
-
-    private MenuItem.OnMenuItemClickListener mSelectBandCallback = new MenuItem.OnMenuItemClickListener() {
-        public boolean onMenuItemClick(MenuItem item) {
-            Intent intent = new Intent();
-            intent.setClass(RadioInfo.this, BandMode.class);
-            startActivity(intent);
-            return true;
-        }
-    };
-
     OnClickListener mPowerButtonHandler = new OnClickListener() {
         public void onClick(View v) {
             //log("toggle radio power: currently " + (isRadioOn()?"on":"off"));
@@ -1109,24 +892,23 @@ public class RadioInfo extends Activity {
         }
     };
 
-    OnClickListener mCipherButtonHandler = new OnClickListener() {
-        public void onClick(View v) {
-            mCipherOn = !getCiphPref();
-            byte[] data = mOem.getCipheringData(mCipherOn);
-
-            if (data == null)
-                return;
-
-            cipherState.setText("Setting...");
-            phone.invokeOemRilRequestRaw(data,
-                    mHandler.obtainMessage(EVENT_SET_CIPHER_DONE));
-        }
-    };
-
     OnClickListener mDnsCheckButtonHandler = new OnClickListener() {
         public void onClick(View v) {
             phone.disableDnsCheck(!phone.isDnsCheckDisabled());
             updateDnsCheckState();
+        }
+    };
+
+    OnClickListener mOemInfoButtonHandler = new OnClickListener() {
+        public void onClick(View v) {
+            Intent intent = new Intent("com.android.settings.OEM_RADIO_INFO");
+            try {
+                startActivity(intent);
+            } catch (android.content.ActivityNotFoundException ex) {
+                Log.d(TAG, "OEM-specific Info/Settings Activity Not Found : " + ex);
+                // If the activity does not exist, there are no OEM
+                // settings, and so we can just do nothing...
+            }
         }
     };
 
@@ -1147,22 +929,6 @@ public class RadioInfo extends Activity {
     OnClickListener mRefreshSmscButtonHandler = new OnClickListener() {
         public void onClick(View v) {
             refreshSmsc();
-        }
-    };
-
-    OnClickListener mQxdmButtonHandler = new OnClickListener() {
-        public void onClick(View v) {
-            byte[] data = mOem.getQxdmSdlogData(
-                    !mQxdmLogEnabled,
-                    mOem.OEM_QXDM_SDLOG_DEFAULT_FILE_SIZE,
-                    mOem.OEM_QXDM_SDLOG_DEFAULT_MASK,
-                    mOem.OEM_QXDM_SDLOG_DEFAULT_MAX_INDEX);
-
-            if (data == null)
-                return;
-
-            phone.invokeOemRilRequestRaw(data,
-                    mHandler.obtainMessage(EVENT_SET_QXDMLOG_DONE));
         }
     };
 
