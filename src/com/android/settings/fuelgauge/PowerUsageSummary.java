@@ -445,6 +445,9 @@ public class PowerUsageSummary extends PreferenceActivity implements Runnable {
                     * mPowerProfile.getAveragePower(PowerProfile.POWER_RADIO_ON, i);
             signalTimeMs += strengthTimeMs;
         }
+        long scanningTimeMs = mStats.getPhoneSignalScanningTime(uSecNow, mStatsType) / 1000;
+        power += scanningTimeMs / 1000 * mPowerProfile.getAveragePower(
+                PowerProfile.POWER_RADIO_SCANNING);
         BatterySipper bs =
                 addEntry(getString(R.string.power_cell), DrainType.CELL, signalTimeMs,
                 R.drawable.ic_settings_cell_standby, power);
