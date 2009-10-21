@@ -15,6 +15,8 @@
 -->
 <resources xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <string name="yes" msgid="4676390750360727396">"Ναι"</string>
+    <string name="no" msgid="6731231425810196216">"Όχι"</string>
     <string name="device_info_default" msgid="7847265875578739287">"Άγνωστο"</string>
     <string name="turn_on_radio" msgid="8706561489788373676">"Ενεργοποίηση πομπού"</string>
     <string name="turn_off_radio" msgid="1820294552893884115">"Απενεργοποίηση πομπού"</string>
@@ -45,7 +47,7 @@
     <string name="radioInfo_display_packets" msgid="8654359809877290639">"pkts"</string>
     <string name="radioInfo_display_bytes" msgid="4018206969492931883">"bytes"</string>
     <string name="radioInfo_display_dbm" msgid="3621221793699882781">"dBm"</string>
-    <string name="radioInfo_display_asu" msgid="1422248392727818082">"asu"</string>
+    <string name="radioInfo_display_asu" msgid="1422248392727818082">"αρχ."</string>
     <string name="radioInfo_lac" msgid="8415219164758307156">"LAC"</string>
     <string name="radioInfo_cid" msgid="4362599198392643138">"CID"</string>
     <string name="sdcard_unmount" msgid="3364184561355611897">"Αφαίρεση κάρτας SD"</string>
@@ -56,6 +58,7 @@
     <string name="font_size_save" msgid="3450855718056759095">"OK"</string>
     <string name="sdcard_setting" msgid="5922637503871474866">"Κάρτα SD"</string>
     <string name="battery_info_status_label" msgid="8109155295509700309">"Κατάσταση μπαταρίας:"</string>
+    <string name="battery_info_power_label" msgid="7465140230991349382">"Τροφοδοσία ρεύματος:"</string>
     <string name="battery_info_scale_label" msgid="3649763192389778437">"Κλίμακα μπαταρίας:"</string>
     <string name="battery_info_level_label" msgid="8706526709307788737">"Επίπεδο μπαταρίας:"</string>
     <string name="battery_info_health_label" msgid="6416051542741886958">"Κατάσταση μπαταρίας:"</string>
@@ -75,6 +78,11 @@
     <string name="battery_info_status_discharging" msgid="6222697503392774475">"Αποφόρτιση"</string>
     <string name="battery_info_status_not_charging" msgid="2820070506621483576">"Δεν φορτίζει"</string>
     <string name="battery_info_status_full" msgid="2824614753861462808">"Πλήρης"</string>
+    <string name="battery_info_power_unplugged" msgid="5987246575519551081">"Αποσυνδέθηκε"</string>
+    <string name="battery_info_power_ac" msgid="6808516193001604634">"AC"</string>
+    <string name="battery_info_power_usb" msgid="8012931702516331797">"USB"</string>
+    <string name="battery_info_power_ac_usb" msgid="6777734146838328688">"AC+USB"</string>
+    <string name="battery_info_power_unknown" msgid="7344115502868899881">"Άγνωστος"</string>
     <string name="battery_info_health_unknown" msgid="5664295556921944255">"Άγνωστο"</string>
     <string name="battery_info_health_good" msgid="8070356565806711806">"Καλό"</string>
     <string name="battery_info_health_overheat" msgid="8442959549291368806">"Υπερθέρμανση"</string>
@@ -105,6 +113,11 @@
     <string name="bluetooth_notif_title" msgid="2485175521845371514">"Αίτημα σύζευξης"</string>
     <string name="bluetooth_notif_message" msgid="5381418499788668724">"Επιλογή για σύζευξη με "</string>
     <string name="device_picker" msgid="8721012448931226323">"Επιλογή συσκευής Bluetooth"</string>
+    <string name="bluetooth_permission_request" msgid="1523129741266262748">"Αίτημα άδειας Bluetooth"</string>
+    <string name="bluetooth_ask_enablement" msgid="2342558978033892004">"Μια εφαρμογή στο τηλέφωνό σας ζητά δικαίωμα ενεργοποίησης του Bluetooth. Θέλετε να το επιτρέψετε;"</string>
+    <string name="bluetooth_ask_discovery" msgid="669870705606180872">"Μια εφαρμογή στο τηλέφωνό σας ζητά άδεια για καταστήσει τη συσκευή σας ορατή από άλλες συσκευές Bluetooth για <xliff:g id="TIMEOUT">%1$d</xliff:g> δευτερόλεπτα. Θέλετε να τη χορηγήσετε;"</string>
+    <string name="bluetooth_ask_enablement_and_discovery" msgid="7220210326619399542">"Μια εφαρμογή στο τηλέφωνό σας ζητά άδεια να ενεργοποιήσει το Bluetooth και να καταστήσει τη συσκευή σας ορατή από άλλες συσκευές για <xliff:g id="TIMEOUT">%1$d</xliff:g> δευτερόλεπτα. Θέλετε να τη χορηγήσετε;"</string>
+    <string name="bluetooth_turning_on" msgid="3107102168379705771">"Ενεργοποίηση Bluetooth…"</string>
     <string name="date_and_time" msgid="4114084177056654663">"Ρυθμίσεις ημερομηνίας &amp; ώρας"</string>
     <string name="date_time_12_hour_sample" msgid="3259617262618020574">"1:00 μμ"</string>
     <string name="date_time_24_hour_sample" msgid="8916857570746212357">"13:00"</string>
@@ -198,8 +211,7 @@
     <string name="airplane_mode_turning_on" msgid="8871739222526957255">"Απενεργοποίηση ασύρματων συνδέσεων..."</string>
     <string name="airplane_mode_turning_off" msgid="3393168549611505996">"Ενεργοποίηση ασύρματων συνδέσεων..."</string>
     <string name="radio_controls_title" msgid="5868688473587168882">"Ασύρματο και δίκτυα"</string>
-    <!-- no translation found for wireless_networks_settings_title (149274247949769551) -->
-    <skip />
+    <string name="wireless_networks_settings_title" msgid="149274247949769551">"Ρυθμίσεις ασύρματου &amp; δικτύου"</string>
     <string name="radio_controls_summary" msgid="2998818677094465517">"Διαχείριση Wi-Fi, Bluetooth, λειτουργίας πτήσης, δικτύων κινητής τηλεφωνίας και VPN"</string>
     <string name="roaming" msgid="3596055926335478572">"Περιαγωγή δεδομένων"</string>
     <string name="roaming_enable" msgid="3737380951525303961">"Σύνδεση στις υπηρεσίες δεδομένων κατά την περιαγωγή"</string>
@@ -223,8 +235,7 @@
     <string name="zone_list_menu_sort_alphabetically" msgid="5683377702671088588">"Ταξινόμηση με βάση αλφαβητική σειρά"</string>
     <string name="zone_list_menu_sort_by_timezone" msgid="2720190443744884114">"Ταξινόμηση με βάση ζώνη ώρας"</string>
     <string name="security_settings_title" msgid="5168491784222013179">"Τοποθεσία και ασφάλεια"</string>
-    <!-- no translation found for location_security_settings_title (4624434296446625554) -->
-    <skip />
+    <string name="location_security_settings_title" msgid="4624434296446625554">"Ρυθμίσεις τοποθεσίας και ασφάλειας"</string>
     <string name="security_settings_summary" msgid="967393342537986570">"Ορισμός του \"Η τοποθεσία μου\", ξεκλειδώματος οθόνης, κλειδώματος κάρτας SIM, κλειδώματος αποθηκευτικού χώρου διαπιστευτηρίων"</string>
     <string name="cdma_security_settings_summary" msgid="6068799952798901542">"Ορισμός του \"Η τοποθεσία μου\", του ξεκλειδώματος οθόνης και του κλειδώματος αποθηκευτικού χώρου διαπιστευτηρίων"</string>
     <string name="security_passwords_title" msgid="2930627259125138363">"Κωδικοί πρόσβασης"</string>
@@ -233,26 +244,19 @@
     <string name="bluetooth_settings" msgid="2725796451253089609">"Ρυθμίσεις Bluetooth"</string>
     <string name="bluetooth_settings_title" msgid="2824020086246268296">"Ρυθμίσεις Bluetooth"</string>
     <string name="bluetooth_settings_summary" msgid="2091062709530570462">"Διαχείριση συνδέσεων, ορισμός ονόματος συσκευής &amp; ανιχνευσιμότητα"</string>
-    <!-- no translation found for bluetooth_pairing_request (6385750334766370310) -->
-    <skip />
+    <string name="bluetooth_pairing_request" msgid="6385750334766370310">"Αίτημα σύζευξης Bluetooth"</string>
     <string name="bluetooth_device_info" msgid="6644515376523965073">"Πληροφορίες συσκευής Bluetooth"</string>
-    <!-- no translation found for bluetooth_enter_pin_msg (856962526754150334) -->
-    <skip />
-    <!-- no translation found for bluetooth_enter_passkey_msg (8121515818772179228) -->
-    <skip />
+    <string name="bluetooth_enter_pin_msg" msgid="856962526754150334">\n"Πληκτρολογήστε τον αριθμό PIN για σύζευξη με \"<xliff:g id="DEVICE_NAME">%1$s</xliff:g>\". (Δοκιμάστε 0000 ή 1234.)"</string>
+    <string name="bluetooth_enter_passkey_msg" msgid="8121515818772179228">\n"Πληκτρολογήστε κλειδί πρόσβασης για ζεύξη με \"<xliff:g id="DEVICE_NAME">%1$s</xliff:g>\"."</string>
     <string name="bluetooth_confirm_passkey_msg" msgid="1205362283945104263">"Για ζεύξη με τη συσκευή \"<xliff:g id="DEVICE_NAME">%1$s</xliff:g>\", βεβαιωθείτε ότι προβάλλεται το κλειδί πρόσβασης: <xliff:g id="PASSKEY">%2$s</xliff:g>."</string>
-    <!-- no translation found for bluetooth_incoming_pairing_msg (1076613564387784476) -->
-    <skip />
-    <!-- no translation found for bluetooth_display_passkey_msg (3048496029389441579) -->
-    <skip />
+    <string name="bluetooth_incoming_pairing_msg" msgid="1076613564387784476">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g>"\n"επιθυμεί σύζευξη."</string>
+    <string name="bluetooth_display_passkey_msg" msgid="3048496029389441579">"Εισαγάγετε <xliff:g id="PASSKEY">%2$s</xliff:g> στο \"<xliff:g id="DEVICE_NAME">%1$s</xliff:g>\" για ζεύξη."</string>
     <string name="bluetooth_pairing_accept" msgid="6163520056536604875">"Ζεύγος"</string>
     <string name="bluetooth_pairing_decline" msgid="930951069988011471">"Χωρίς ζεύξη"</string>
-    <!-- no translation found for bluetooth_remote_device (2406662802908395389) -->
-    <skip />
+    <string name="bluetooth_remote_device" msgid="2406662802908395389">"συσκευή bluetooth"</string>
     <string name="bluetooth_error_title" msgid="538287072376677166">"Προσοχή"</string>
     <string name="bluetooth_pairing_error_message" msgid="2852744547246910349">"Παρουσιάστηκε ένα πρόβλημα κατά τη σύζευξη με <xliff:g id="DEVICE_NAME">%1$s</xliff:g>."</string>
-    <!-- no translation found for bluetooth_pairing_pin_error_message (6065697229258906937) -->
-    <skip />
+    <string name="bluetooth_pairing_pin_error_message" msgid="6065697229258906937">"Παρουσιάστηκε ένα πρόβλημα κατά τη ζεύξη με το <xliff:g id="DEVICE_NAME">%1$s</xliff:g> επειδή ο αριθμός PIN ή το κλειδί πρόσβασης είναι εσφαλμένο."</string>
     <string name="bluetooth_pairing_device_down_error_message" msgid="6688215193824686741">"Δεν είναι δυνατή η δημιουργία σύνδεσης με τη συσκευή <xliff:g id="DEVICE_NAME">%1$s</xliff:g>."</string>
     <string name="bluetooth_pairing_rejected_error_message" msgid="1648157108520832454">"Η ζεύξη απορρίφθηκε από τη συσκευή <xliff:g id="DEVICE_NAME">%1$s</xliff:g>."</string>
     <string name="bluetooth_connecting_error_message" msgid="1779660510084746802">"Παρουσιάστηκε ένα πρόβλημα κατά τη σύνδεση σε <xliff:g id="DEVICE_NAME">%1$s</xliff:g>."</string>
@@ -297,17 +301,13 @@
     <string name="security" msgid="1040691896987225267">"Ασφάλεια"</string>
     <string name="wifi_security_open" msgid="3513305614048816607">"Άνοιγμα"</string>
     <string name="wifi_security_wep" msgid="7082604129842065776">"WEP"</string>
-    <!-- no translation found for wifi_security_psk (3392399380570381452) -->
-    <skip />
-    <!-- no translation found for wifi_security_eap (8309434150934969132) -->
-    <skip />
+    <string name="wifi_security_psk" msgid="3392399380570381452">"WPA/WPA2 PSK"</string>
+    <string name="wifi_security_eap" msgid="8309434150934969132">"Εταιρία(802.1x)"</string>
     <string name="wifi_security_unknown" msgid="4564208312073060668">"Άγνωστο"</string>
     <string name="wifi_security_verbose_open" msgid="8117878112088901945">"ανοικτό δίκτυο"</string>
     <string name="wifi_security_verbose_wep" msgid="9220757688700421508">"ασφαλισμένο με WEP"</string>
-    <!-- no translation found for wifi_security_verbose_psk (1110130025330416225) -->
-    <skip />
-    <!-- no translation found for wifi_security_verbose_eap (586632662086063) -->
-    <skip />
+    <string name="wifi_security_verbose_psk" msgid="1110130025330416225">"ασφαλισμένο με WPA/WPA2 PSK"</string>
+    <string name="wifi_security_verbose_eap" msgid="586632662086063">"ασφαλισμένο με 802.1x EAP"</string>
     <string name="ip_address" msgid="850672263358989449">"Διεύθυνση IP"</string>
     <string name="signal" msgid="1947969631626413228">"Ισχύς σήματος"</string>
     <string name="wifi_starting" msgid="6710266609710860129">"Ενεργοποίηση..."</string>
@@ -332,7 +332,7 @@
     <string name="scan_wifi" msgid="2459901725350542606">"Σάρωση"</string>
     <string name="summary_not_in_range" msgid="3926674700733548684">"Εκτός εμβέλειας"</string>
     <string name="summary_remembered" msgid="6079941090549401742">"διατηρήθηκε"</string>
-    <string name="summary_connection_failed" msgid="7610394657613410489">"Η σύνδεση δεν ήταν επιτυχής, επιλέξτε για να προσπαθήσετε ξανά"</string>
+    <string name="summary_connection_failed" msgid="2351885658101671413">"Η σύνδεση δεν ήταν επιτυχής, αγγίξτε για να προσπαθήσετε ξανά"</string>
     <string name="wifi_access_points" msgid="2664629396767022441">"Δίκτυα Wi-Fi"</string>
     <string name="wifi_type_ssid" msgid="1326839657083292017">"Δίκτυο SSID"</string>
     <string name="wifi_security" msgid="6603611185592956936">"Ασφάλεια"</string>
@@ -383,8 +383,7 @@
     <string name="status_disconnected" msgid="7561688569905126046">"Αποσυνδέθηκε"</string>
     <string name="status_failed" msgid="610462050405904601">"Ανεπιτυχής"</string>
     <string name="sound_and_display_settings" msgid="349770582993029003">"Ήχος και εικόνα"</string>
-    <!-- no translation found for sound_and_display_settings_title (5036144539683697330) -->
-    <skip />
+    <string name="sound_and_display_settings_title" msgid="5036144539683697330">"Ρυθμίσεις ήχου &amp; προβολής"</string>
     <string name="sound_settings" msgid="5007659014828162881">"Ρυθμίσεις ήχου"</string>
     <string name="sound_and_display_settings_summary" msgid="1433943789593286064">"Ρύθμιση ήχων κλήσης, ειδοποιήσεων, φωτεινότητας οθόνης"</string>
     <string name="silent_mode_title" msgid="3181479108593217704">"Λειτουργία σίγασης"</string>
@@ -404,12 +403,15 @@
     <string name="notification_sound_dialog_title" msgid="7057274209079144726">"Επιλογή ήχου κλήσης ειδοποίησης"</string>
     <string name="media_volume_title" msgid="7844516127427195383">"Ένταση ήχου πολυμέσων"</string>
     <string name="media_volume_summary" msgid="5363248930648849974">"Ορισμός έντασης ήχου για μουσική και βίντεο"</string>
-    <string name="dtmf_tone_enable_title" msgid="1453831168789523185">"Ήχοι ηχητικής αφής"</string>
+    <string name="dtmf_tone_enable_title" msgid="1453831168789523185">"Ήχοι αγγίγματος οθόνης"</string>
     <string name="dtmf_tone_enable_summary_on" msgid="3028201873989887327">"Αναπαραγωγή ήχων κατά τη χρήση του πληκτρολογίου κλήσης"</string>
     <string name="dtmf_tone_enable_summary_off" msgid="7791065951268525678">"Αναπαραγωγή ήχων κατά τη χρήση του πληκτρολογίου κλήσης"</string>
     <string name="sound_effects_enable_title" msgid="3197313718929122833">"Ηχητική επιλογή"</string>
     <string name="sound_effects_enable_summary_on" msgid="6154141289879491329">"Αναπαραγωγή ήχου κατά την πραγματοποίηση επιλογής στην οθόνη"</string>
     <string name="sound_effects_enable_summary_off" msgid="3447739581759560125">"Αναπαραγωγή ήχου κατά την πραγματοποίηση επιλογής στην οθόνη"</string>
+    <string name="haptic_feedback_enable_title" msgid="6311736559245411290">"Απτικά σχόλια"</string>
+    <string name="haptic_feedback_enable_summary_on" msgid="1875779656524793053">"Δόνηση κατά το πάτημα μαλακών πλήκτρων και σε συγκεκριμένες αλληλεπιδράσεις της επιφάνειας UI"</string>
+    <string name="haptic_feedback_enable_summary_off" msgid="7287885436963105314">"Δόνηση κατά το πάτημα μαλακών πλήκτρων και σε συγκεκριμένες αλληλεπιδράσεις της επιφάνειας UI"</string>
     <string name="play_media_notification_sounds_enable_title" msgid="1008791464029179529">"Ειδοποιήσεις κάρτας SD"</string>
     <string name="play_media_notification_sounds_enable_summary_on" msgid="7675466959375667370">"Αναπαραγωγή ήχου για τις προειδοποιήσεις κάρτας SD"</string>
     <string name="play_media_notification_sounds_enable_summary_off" msgid="8672617597028744693">"Αναπαραγωγή ήχου για τις προειδοποιήσεις κάρτας SD"</string>
@@ -428,8 +430,7 @@
     <string name="brightness_summary" msgid="838917350127550703">"Ρύθμιση της φωτεινότητας της οθόνης"</string>
     <string name="screen_timeout" msgid="4882669461447531301">"Λήξη ορίου χρόνου οθόνης"</string>
     <string name="screen_timeout_summary" msgid="2905757633140605334">"Προσαρμόστε το χρόνο που πρέπει να παρέλθει πριν από την αυτόματη απενεργοποίηση της οθόνης."</string>
-    <!-- no translation found for automatic_brightness (5014143533884135461) -->
-    <skip />
+    <string name="automatic_brightness" msgid="5014143533884135461">"Αυτόματη φωτεινότητα"</string>
     <string name="sim_lock_settings" msgid="3392331196873564292">"Ρυθμίσεις κλειδώματος κάρτας SIM"</string>
     <string name="sim_lock_settings_category" msgid="5136244267576697004">"Ορισμός κλειδώματος κάρτας SIM"</string>
     <string name="sim_lock_settings_title" msgid="9018585580955414596">"Κλείδωμα κάρτας SIM"</string>
@@ -463,10 +464,8 @@
     <string name="device_status_activity_title" msgid="1411201799384697904">"Κατάσταση"</string>
     <string name="device_status" msgid="607405385799807324">"Κατάσταση"</string>
     <string name="device_status_summary" msgid="2599162787451519618">"Τηλεφωνικός αριθμός, σήμα κ.λπ."</string>
-    <!-- no translation found for storage_settings (6681164315506788024) -->
-    <skip />
-    <!-- no translation found for storage_settings_title (5379463509034022773) -->
-    <skip />
+    <string name="storage_settings" msgid="6681164315506788024">"Κάρτα SD &amp; αποθηκευτικός χώρος τηλεφώνου"</string>
+    <string name="storage_settings_title" msgid="5379463509034022773">"Ρυθμίσεις κάρτας SD &amp; αποθηκευτικού χώρου τηλεφώνου"</string>
     <string name="storage_settings_summary" msgid="9176693537325988610">"Αφαίρεση κάρτας SD, προβολή διαθέσιμου αποθηκευτικού χώρου"</string>
     <string name="status_number" msgid="5123197324870153205">"Ο τηλεφωνικός αριθμός μου"</string>
     <string name="status_min_number" msgid="3519504522179420597">"ΛΕΠΤΟ"</string>
@@ -510,6 +509,11 @@
     <string name="apn_mms_port" msgid="4074188088199243040">"Θύρα MMS"</string>
     <string name="apn_mcc" msgid="4258628382260674636">"MCC"</string>
     <string name="apn_mnc" msgid="8629374076888809874">"MNC"</string>
+    <string name="apn_auth_type" msgid="6167205395676037015">"Τύπος ελέγχου ταυτότητας"</string>
+    <string name="apn_auth_type_none" msgid="5069592676845549926">"Κανένας"</string>
+    <string name="apn_auth_type_pap" msgid="1666934536996033383">"PAP"</string>
+    <string name="apn_auth_type_chap" msgid="3369626283789068360">"CHAP"</string>
+    <string name="apn_auth_type_pap_chap" msgid="9102343063036134541">"PAP ή CHAP"</string>
     <string name="apn_type" msgid="469613123902220544">"Τύπος APN"</string>
     <string name="menu_delete" msgid="6981294422841124659">"Διαγραφή APN"</string>
     <string name="menu_new" msgid="3014205883303921729">"Νέο APN"</string>
@@ -548,14 +552,14 @@
     <string name="location_network_based" msgid="8815705866861993344">"Χρήση ασύρματων δικτύων"</string>
     <string name="location_networks_disabled" msgid="2708968452901433980">"Προβ.τοποθ.σε εφαρμ.(όπως π.χ. στους Χάρτες) με χρήση ασύρ.δικτ."</string>
     <string name="location_neighborhood_level" msgid="4656658097932515921">"Η τοποθ.προσδ.από δίκτ.Wi-Fi και/ή δίκτ.κινητ.τηλεφ."</string>
-    <string name="location_gps" msgid="375912731641377120">"Ενεργοποίηση δορυφόρων GPS"</string>
-    <string name="location_street_level" msgid="5899941752252356344">"Κατά την εύρ.τοποθ., η ακρίβ.είναι σε επίπ.δρόμ.(αποεπιλ.το για εξοικ.μπατ.)"</string>
+    <string name="location_gps" msgid="6296125378829097831">"Χρήση δορυφόρων GPS"</string>
+    <string name="location_street_level" msgid="6460740847018275745">"Κατά την εύρεση τοποθεσίας, η ακρίβεια είναι σε επίπεδο δρόμου (αποεπιλογή για εξοικονόμηση μπαταρίας)"</string>
     <string name="location_gps_disabled" msgid="6632537158777308128">"Εντοπ.σε επίπ.δρόμου (απαιτ.μεγ.καταν.μπαταρ.και μετάβ.σε ανοικτό χώρο)"</string>
-    <string name="assisted_gps" msgid="245743826674562912">"Ενεργοποίηση βοήθειας GPS"</string>
-    <string name="assisted_gps_enabled" msgid="4942865222779287424">"Χρήση διακομιστή για βοήθεια GPS (καταργήστε την επιλογή για να μειώσετε τη χρήση του δικτύου)"</string>
-    <string name="assisted_gps_disabled" msgid="5626923671782348802">"Χρήση διακομιστή για βοήθεια του GPS (επιλέξτε για βελτίωση της απόδοσης του GPS)"</string>
-    <string name="use_location_title" msgid="7585990952633568732">"Κοινή χρήση  με το Google"</string>
-    <string name="use_location_summary" msgid="4411467143899877395">"Να επιτρέπεται στο Google η χρήση των τοποθεσιών για τη βελτίωση της αναζήτησης και άλλων υπηρεσιών"</string>
+    <string name="assisted_gps" msgid="4649317129586736885">"Χρήση υποβοηθούμενου GPS"</string>
+    <string name="assisted_gps_enabled" msgid="8751899609589792803">"Χρήση διακομιστή για βοήθεια GPS (αποεπιλογή για να μειώσετε τη χρήση του δικτύου)"</string>
+    <string name="assisted_gps_disabled" msgid="6982698333968010748">"Χρήση διακομιστή για βοήθεια του GPS (αποεπιλογή για βελτίωση της απόδοσης του GPS)"</string>
+    <string name="use_location_title" msgid="5447030582538504247">"Χρήση της τοποθεσίας μου"</string>
+    <string name="use_location_summary" msgid="1816849484040070431">"Χρήση της Τοποθεσίας μου για τα αποτελέσματα αναζήτησης Google και τις υπόλοιπες υπηρεσίες Google"</string>
     <string name="use_location_warning_message" msgid="1420184860518262439">"Θέλετε να επιτρέψετε στο Google να χρησιμοποιήσει πληροφορίες τοποθεσίας για καλύτερα αποτελέσματα αναζήτησης και άλλες υπηρεσίες;"</string>
     <string name="agree" msgid="6288718671527758326">"Συμφωνώ"</string>
     <string name="disagree" msgid="6221069272309799230">"Διαφωνώ"</string>
@@ -571,6 +575,10 @@
     <string name="settings_license_activity_title" msgid="7553683406244228650">"Άδειες λογισμ.ανοικτ.κώδ."</string>
     <string name="settings_license_activity_unavailable" msgid="4210539215951487627">"Παρουσιάστηκε ένα πρόβλημα κατά τη φόρτωση των αδειών."</string>
     <string name="settings_license_activity_loading" msgid="3337535809093591740">"Φόρτωση..."</string>
+    <string name="settings_safetylegal_title" msgid="1289483965535937431">"Πληροφορίες ασφάλειας"</string>
+    <string name="settings_safetylegal_activity_title" msgid="6901214628496951727">"Πληροφορίες ασφάλειας"</string>
+    <string name="settings_safetylegal_activity_unreachable" msgid="3198912875259612887">"Το τηλέφωνό σας δεν είναι συνδεδεμένο σε υπηρεσία δεδομένων. Για να προβάλετε αυτές τις πληροφορίες τώρα, μεταβείτε στο %s από οποιονδήποτε υπολογιστή με σύνδεση στο Διαδίκτυο."</string>
+    <string name="settings_safetylegal_activity_loading" msgid="8059022597639516348">"Φόρτωση..."</string>
     <string name="lock_settings_title" msgid="5828348303971852121">"Μοτίβο ξεκλειδώματος οθόνης"</string>
     <string name="lockpattern_change_lock_pattern_label" msgid="5679630792003440352">"Αλλαγή μοτίβου ξεκλειδώματος"</string>
     <string name="lockpattern_need_to_unlock" msgid="757935356911054465">"Επιβεβαίωση αποθηκευμένου μοτίβου"</string>
@@ -599,9 +607,9 @@
     <string name="skip_button_label" msgid="8680422740354436943">"Ακύρωση"</string>
     <string name="next_button_label" msgid="8890792540116568321">"Επόμενο"</string>
     <string name="lock_title" msgid="4059246467204273930">"Ασφάλιση του τηλεφώνου σας"</string>
-    <string name="lock_intro_message" msgid="5352897389718432077"><font size="17">"Προστατέψτε το τηλέφωνό σας από μη εξουσιοδοτημένη χρήση δημιουργώντας ένα προσωπικό μοτίβο ξεκλειδώματος οθόνης. "\n<font height="17">\n</font><b>"1"</b>"  Στην επόμενη οθόνη παρακολουθήστε ένα παράδειγμα σχεδίασης μοτίβου. "\n<font height="17">\n</font><b>"2"</b>"  Όταν είστε έτοιμοι, σχεδιάστε το προσωπικό σας μοτίβο ξεκλειδώματος. Πειραματιστείτε με διάφορα μοτίβα, αλλά συνδέστε τουλάχιστον τέσσερα σημεία. "\n<font height="17">\n</font><b>"3"</b>"  Ξανασχεδιάστε το μοτίβο σας για επιβεβαίωση. "\n<font height="17">\n</font><b>"Είστε έτοιμοι να ξεκινήσετε; Πατήστε \"Επόμενο\""</b>". "\n<font height="3">\n</font>"Εάν δεν θέλετε να προστατεύσετε το τηλέφωνό σας, επιλέξτε “Ακύρωση”."</font></string>
+    <string name="lock_intro_message" msgid="9100785646737118042"><font size="17">"Προστατέψτε το τηλέφωνό σας από μη εξουσιοδοτημένη χρήση δημιουργώντας ένα προσωπικό μοτίβο ξεκλειδώματος οθόνης. "\n<font height="17">\n</font><b>"1"</b>"  Στην επόμενη οθόνη παρακολουθήστε ένα παράδειγμα σχεδίασης μοτίβου. "\n<font height="17">\n</font><b>"2"</b>"  Όταν είστε έτοιμοι, σχεδιάστε το προσωπικό σας μοτίβο ξεκλειδώματος. Πειραματιστείτε με διάφορα μοτίβα αλλά συνδέστε τουλάχιστον τέσσερα σημεία. "\n<font height="17">\n</font><b>"3"</b>"  Ξανασχεδιάστε το μοτίβο σας για επιβεβαίωση. "\n<font height="17">\n</font><b>"Είστε έτοιμοι να ξεκινήσετε; Πατήστε “Επόμενο”"</b>". "\n<font height="3">\n</font>"Εάν δεν θέλετε να προστατεύσετε το τηλέφωνό σας, επιλέξτε “Ακύρωση”."</font></string>
     <string name="lock_example_title" msgid="8052305554017485410">"Παράδειγμα μοτίβου"</string>
-    <string name="lock_example_message" msgid="7431982730914254881">"Συνδέστε τουλάχιστον τέσσερις τελείες."\n" "\n"Επιλέξτε \"Επόμενο\" όταν είστε έτοιμοι να σχεδιάσετε το δικό σας μοτίβο."</string>
+    <string name="lock_example_message" msgid="1838650097090632706">"Συνδέστε τουλάχιστον τέσσερις τελείες."\n" "\n"Αγγίξτε την επιλογή “Επόμενο” όταν είστε έτοιμοι να σχεδιάσετε το δικό σας μοτίβο."</string>
     <string name="manageapplications_settings_title" msgid="5712405848153426706">"Διαχείριση εφαρμογών"</string>
     <string name="manageapplications_settings_summary" msgid="6097117021500651232">"Διαχείριση και κατάργηση εγκατεστημένων εφαρμογών"</string>
     <string name="applications_settings" msgid="3736173521008476946">"Εφαρμογές"</string>
@@ -635,12 +643,12 @@
     <string name="filter" msgid="2018011724373033887">"Φίλτρο"</string>
     <string name="filter_dlg_title" msgid="6507663329723966854">"Επιλογές φίλτρου"</string>
     <string name="filter_apps_all" msgid="5142129378749391876">"Όλα"</string>
-    <string name="filter_apps_third_party" msgid="1096017647285183437">"Τρίτο μέρος"</string>
+    <string name="filter_apps_third_party" msgid="7786348047690140979">"Η λήψη ολοκληρώθηκε"</string>
     <string name="filter_apps_running" msgid="7767071454371350486">"Εκτελείται"</string>
     <string name="loading" msgid="3200408047793887917">"Φόρτωση..."</string>
     <string name="recompute_size" msgid="7722567982831691718">"Εκ νέου υπολογισμός μεγέθους..."</string>
     <string name="clear_data_dlg_title" msgid="4470209520936375508">"Διαγραφή"</string>
-    <string name="clear_data_dlg_text" msgid="8796694785488630642">"Όλες οι πληροφορίες που αποθηκεύσατε σε αυτήν την εφαρμογή θα διαγραφούν οριστικά."</string>
+    <string name="clear_data_dlg_text" msgid="8368035073300828451">"Όλα τα δεδομένα της εφαρμογής θα διαγραφούν μόνιμα. Αυτό περιλαμβάνει όλα τα αρχεία, τις ρυθμίσεις, τους λογαριασμούς, τις βάσεις δεδομένων και τα λοιπά."</string>
     <string name="dlg_ok" msgid="2402639055725653590">"OK"</string>
     <string name="dlg_cancel" msgid="1674753358972975911">"Ακύρωση"</string>
     <string name="app_not_found_dlg_title" msgid="8458335716378083713">"Η εφαρμογή δεν βρέθηκε"</string>
@@ -660,19 +668,16 @@
     <string name="service_restarting" msgid="2242747937372354306">"Γίνεται επανεκκίνηση"</string>
     <string name="no_running_services" msgid="6981216347270280598">"Δεν εκτελούνται υπηρεσίες"</string>
     <string name="confirm_stop_service" msgid="5700448757318301681">"Διακοπή υπηρεσίας;"</string>
-    <string name="confirm_stop_service_msg" msgid="2530344831367597886">"Η εκτέλεση της υπηρεσίας θα σταματήσει μέχρι να πραγματοποιηθεί ξανά εκκίνησή της από την εφαρμογή. Αυτό ενδέχεται να έχει μη επιθυμητές συνέπειες."</string>
+    <string name="confirm_stop_service_msg" msgid="1202118456282395730">"Η υπηρεσία δεν θα εκτελείται έως ότου επανεκκινηθεί. Αυτό ενδέχεται να έχει μη επιθυμητά αποτελέσματα στην εφαρμογή <xliff:g id="APPLICATION">%1$s</xliff:g>."</string>
     <string name="confirm_stop_stop" msgid="7382363913280993331">"Διακοπή"</string>
     <string name="confirm_stop_cancel" msgid="206495326622692381">"Άκυρο"</string>
-    <!-- no translation found for service_started_by_app (2611669867072561918) -->
-    <skip />
-    <string name="service_client_name" msgid="6645152045851445666">"<xliff:g id="CLIENT_NAME">%1$s</xliff:g>: επιλογή για διαχείριση"</string>
-    <!-- no translation found for service_background_processes (4590194788473181747) -->
-    <skip />
-    <!-- no translation found for service_foreground_processes (6033218875756846671) -->
-    <skip />
+    <string name="service_started_by_app" msgid="8432097226392386802">"Έγινε εκκίνηση από εφαρμογή: άγγιγμα για παύση"</string>
+    <string name="service_client_name" msgid="2337664610975074717">"<xliff:g id="CLIENT_NAME">%1$s</xliff:g>: αγγίξτε για διαχείριση"</string>
+    <string name="service_background_processes" msgid="5158600475629177758">"Διαθ.: <xliff:g id="FREE">%2$s</xliff:g>+<xliff:g id="MEMORY">%3$s</xliff:g> στα <xliff:g id="COUNT">%1$d</xliff:g>"</string>
+    <string name="service_foreground_processes" msgid="4013890350284680796">"Άλλο: <xliff:g id="MEMORY">%2$s</xliff:g> στα <xliff:g id="COUNT">%1$d</xliff:g>"</string>
+    <string name="service_process_name" msgid="8630408984456958400">"Διεργασία: <xliff:g id="PROCESS">%1$s</xliff:g>"</string>
     <string name="language_settings" msgid="502219872342167227">"Γλώσσα και πληκτρολόγιο"</string>
-    <!-- no translation found for language_keyboard_settings_title (3455826933385341107) -->
-    <skip />
+    <string name="language_keyboard_settings_title" msgid="3455826933385341107">"Ρυθμίσεις γλώσσας και πληκτρολογίου"</string>
     <string name="language_settings_summary" msgid="595647729475399987">"Ορισμ.τοπ.ρυθμ.(γλώσσα και περιοχή), είσ.κειμ.και επιλ.αυτόμ.διόρθ."</string>
     <string name="language_category" msgid="3391756582724541530">"Τοπικές ρυθμίσεις"</string>
     <string name="text_category" msgid="6342540511465136739">"Ρυθμίσεις κειμένου"</string>
@@ -687,7 +692,7 @@
     <string name="auto_punctuate_summary" msgid="4372126865670574837">"Πατήστε το πλήκτρο Space δύο φορές για να εισαγάγετε \".\""</string>
     <string name="show_password" msgid="2198798062604049206">"Εμφανιζόμενοι κωδικοί πρόσβασης"</string>
     <string name="show_password_summary" msgid="3806709974395178121">"Εμφάνιση κωδικού πρόσβασης κατά την πληκτρολόγηση"</string>
-    <string name="ime_security_warning" msgid="3458652708716006477">"Η μέθοδος εισόδου ενδέχεται να έχει τη δυνατότητα συλλογής όλων των κειμένων που πληκτρολογείτε, συμπεριλαμβανομένων προσωπικών δεδομένων όπως κωδικοί πρόσβασης και αριθμοί πιστωτικής κάρτας. Προέρχεται από την εφαρμογή <xliff:g id="IME_APPLICATION_NAME">%1$s</xliff:g>. Ενεργοποίηση αυτής της μεθόδου εισόδου;"</string>
+    <string name="ime_security_warning" msgid="812267421486877917">"Η μέθοδος εισόδου ενδέχεται να έχει τη δυνατότητα συλλογής όλων των κειμένων που πληκτρολογείτε, συμπεριλαμβανομένων προσωπικών δεδομένων όπως κωδικοί πρόσβασης και αριθμοί πιστωτικής κάρτας. Προέρχεται από την εφαρμογή <xliff:g id="IME_APPLICATION_NAME">%1$s</xliff:g>. Να γίνει χρήση αυτής της μεθόδου εισόδου;"</string>
     <string name="user_dict_settings_titlebar" msgid="765659257455000490">"Λεξικό χρήστη"</string>
     <string name="user_dict_settings_title" msgid="8357027437499042191">"Λεξικό χρήστη"</string>
     <string name="user_dict_settings_summary" msgid="2460427065601355471">"Προσθήκη &amp; κατάργηση λέξεων από το λεξικό χρήστη"</string>
@@ -715,7 +720,7 @@
     <string name="input_methods_settings_title" msgid="6800066636850553887">"Είσοδος κειμένου"</string>
     <string name="input_methods_settings_summary" msgid="7571173442946675205">"Διαχείριση επιλογών εισόδου κειμένου"</string>
     <string name="input_methods_settings_label_format" msgid="6002887604815693322">"<xliff:g id="IME_NAME">%1$s</xliff:g> ρυθμίσεις"</string>
-    <string name="onscreen_keyboard_settings_summary" msgid="4919680715154885028">"Ρυθμίσεις πληκτρολογίου οθόνης"</string>
+    <string name="onscreen_keyboard_settings_summary" msgid="5841558383556238653">"Ρυθμίσεις πληκτρολογίου οθόνης"</string>
     <string name="builtin_keyboard_settings_title" msgid="8169889453770863227">"Πληκτρολόγιο συσκευής"</string>
     <string name="builtin_keyboard_settings_summary" msgid="6404687907454621637">"Ενσωματωμένες ρυθμίσεις πληκτρολογίου"</string>
     <string name="development_settings_title" msgid="6719732334835420989">"Ανάπτυξη"</string>
@@ -726,7 +731,7 @@
     <string name="keep_screen_on_summary" msgid="2173114350754293009">"Η οθόνη δεν θα μεταβαίνει ποτέ σε κατάσταση αδράνειας κατά τη φόρτιση"</string>
     <string name="allow_mock_location" msgid="2787962564578664888">"Να επιτρέπονται ψευδείς τοποθεσίες"</string>
     <string name="allow_mock_location_summary" msgid="317615105156345626">"Να επιτρέπονται ψευδείς τοποθεσίες"</string>
-    <string name="adb_warning_title" msgid="1756027479229533250">"Να ενεργοποιηθεί ο εντοπισμός σφαλμάτων USB;"</string>
+    <string name="adb_warning_title" msgid="6234463310896563253">"Να επιτρέπεται ο εντοπισμός σφαλμάτων USB;"</string>
     <string name="adb_warning_message" msgid="5352555112049663033">"Ο εντοπισμός σφαλμάτων USB προορίζεται μόνο για σκοπούς προγραμματισμού. Μπορεί να χρησιμοποιηθεί για αντιγραφή δεδομένων μεταξύ του υπολογιστή και της συσκευής σας, για την εγκατάσταση εφαρμογών στη συσκευή σας χωρίς προειδοποίηση και για την ανάγνωση δεδομένων καταγραφής."</string>
     <string name="gadget_picker_title" msgid="98374951396755811">"Επιλογή gadget"</string>
     <string name="widget_picker_title" msgid="9130684134213467557">"Επιλογή γραφικού στοιχείου"</string>
@@ -766,15 +771,13 @@
     <string name="app_name_label" msgid="2000949925256858308">"Εφαρμογή"</string>
     <string name="launch_count_label" msgid="4019444833263957024">"Μέτρηση"</string>
     <string name="usage_time_label" msgid="295954901452833058">"Χρόνος χρήσης"</string>
-    <!-- no translation found for accessibility_settings (3975902491934816215) -->
-    <skip />
-    <!-- no translation found for accessibility_settings_title (2130492524656204459) -->
-    <skip />
+    <string name="accessibility_settings" msgid="3975902491934816215">"Προσβασιμότητα"</string>
+    <string name="accessibility_settings_title" msgid="2130492524656204459">"Ρυθμίσεις προσβασιμότητας"</string>
     <string name="accessibility_settings_summary" msgid="8185181964847149507">"Διαχείριση επιλογών προσβασιμότητας"</string>
     <string name="toggle_accessibility_title" msgid="650839277066574497">"Προσβασιμότητα"</string>
     <string name="accessibility_services_category" msgid="8127851026323672607">"Υπηρεσίες προσβασιμότητας"</string>
     <string name="no_accessibility_services_summary" msgid="694578333333808159">"Καμία εγκατεστημένη υπηρεσία προσβασιμότητας."</string>
-    <string name="accessibility_service_security_warning" msgid="8386156287296967181">"Αυτή η υπηρεσία προσβασιμότητας ενδέχεται να έχει τη δυνατότητα συλλογής όλων των κειμένων που πληκτρολογείτε, συμπεριλαμβανομένων των προσωπικών δεδομένων και των αριθμών πιστωτικών καρτών εκτός των κωδικών πρόσβασης. Ενδέχεται επίσης να καταγράφει τις δραστηριότητες της επιφάνειας χρήστη. Αυτή η λειτουργία προέρχεται από την εφαρμογή <xliff:g id="ACCESSIBILITY_SERVICE_NAME">%1$s</xliff:g>. Να ενεργοποιηθεί αυτή η υπηρεσία προσβασιμότητας;"</string>
+    <string name="accessibility_service_security_warning" msgid="4066258132331302670">"Αυτή η υπηρεσία προσβασιμότητας ενδέχεται να έχει τη δυνατότητα συλλογής όλων των κειμένων που πληκτρολογείτε, συμπεριλαμβανομένων των προσωπικών δεδομένων και των αριθμών πιστωτικών καρτών εκτός των κωδικών πρόσβασης. Ενδέχεται επίσης να καταγράφει τις δραστηριότητες της επιφάνειας χρήστη. Αυτή η λειτουργία προέρχεται από την εφαρμογή <xliff:g id="ACCESSIBILITY_SERVICE_NAME">%1$s</xliff:g>. Να χρησιμοποιηθεί αυτή η υπηρεσία προσβασιμότητας;"</string>
     <string name="accessibility_service_disable_warning" msgid="8930591383312775132">"Να απενεργοποιηθεί η προσβασιμότητα;"</string>
     <string name="power_usage_summary_title" msgid="5180282911164282324">"Χρήση μπαταρίας"</string>
     <string name="power_usage_summary" msgid="7237084831082848168">"Τι χρησιμοποιούσε την μπαταρία"</string>
@@ -836,7 +839,7 @@
     <string name="process_mediaserver_label" msgid="6500382062945689285">"Mediaserver"</string>
     <string name="tts_settings" msgid="3348626948015962987">"Κείμενο σε λόγο"</string>
     <string name="tts_settings_summary" msgid="2627715231944602766">"Ορισμός επιλογών κειμένου σε λόγο"</string>
-    <string name="tts_settings_title" msgid="5064947197040356736">"Στοιχεία έλεγχου προγράμματος σύνθεσης ομιλίας"</string>
+    <string name="tts_settings_title" msgid="4182348653053000933">"Ρυθμίσεις κειμένου σε λόγο"</string>
     <string name="use_default_tts_settings_title" msgid="1577063839539732930">"Χρήση των ρυθμίσεών μου πάντα"</string>
     <string name="use_default_tts_settings_summary" msgid="4253502106159206276">"Οι παρακάτω προεπιλεγμένες ρυθμίσεις αντιγράφουν τις ρυθμίσεις της εφαρμογής"</string>
     <string name="tts_default_settings_section" msgid="5787915620218907443">"Προεπιλεγμένες ρυθμίσεις"</string>
@@ -856,8 +859,9 @@
     <string name="gadget_title" msgid="7455548605888590466">"Έλεγχος ισχύος"</string>
     <string name="gadget_toggle_wifi" msgid="2382963973155082629">"Ενημέρωση ρύθμισης Wi-Fi"</string>
     <string name="gadget_toggle_bluetooth" msgid="7538903239807020826">"Ενημέρωση ρύθμισης Bluetooth"</string>
+    <string name="credential_installer_activity_title" msgid="7600661521831762521">"Πρόγραμμα εγκατάστασης διαπιστευτηρίων"</string>
     <string name="vpn_settings_activity_title" msgid="7276864950701612579">"Ρυθμίσεις VPN"</string>
-    <string name="vpn_connect_to" msgid="2541409082892684362">"Σύνδεση σε <xliff:g id="NAME">%s</xliff:g>"</string>
+    <string name="vpn_connect_to" msgid="2541409082892684362">"Σύνδεση στο <xliff:g id="NAME">%s</xliff:g>"</string>
     <string name="vpn_username_colon" msgid="7854930370861306247">"Όνομα χρήστη:"</string>
     <string name="vpn_password_colon" msgid="5716278710848606626">"Κωδικός πρόσβασης:"</string>
     <string name="vpn_a_username" msgid="6664733641993968692">"ένα όνομα χρήστη"</string>
@@ -934,48 +938,40 @@
     <string name="vpn_settings_summary" msgid="8849924181594963972">"Εγκατάσταση και διαχείριση Εικονικών Ιδιωτικών Δικτύων (VPN)"</string>
     <string name="vpn_secret_unchanged" msgid="8700613973594154529">"(δεν έγινε αλλαγή)"</string>
     <string name="vpn_secret_not_set" msgid="1037792636371641845">"(δεν ορίστηκε)"</string>
-    <string name="cstor_settings_category" msgid="2284299080682591107">"Χώρος αποθήκευσης διαπιστευτηρίων"</string>
-    <string name="cstor_access_title" msgid="1739505390736236717">"Χρήση ασφαλών διαπιστευτηρίων"</string>
-    <string name="cstor_access_summary" msgid="4512681868217546677">"Να επιτρέπεται στις εφαρμογές η πρόσβαση σε ασφαλή πιστοποιητικά και άλλα διαπιστευτήρια"</string>
-    <string name="cstor_access_dialog_title" msgid="3024256293191879190">"Καταχώριση κωδικού πρόσβασης"</string>
-    <string name="cstor_access_dialog_hint_from_action" msgid="679746865623760961">"Καταχώριση κωδικού πρόσβασης χώρου αποθήκευσης διαπιστευτηρίων"</string>
-    <!-- no translation found for cstor_cert_install_title (8387889077991064784) -->
-    <skip />
-    <!-- no translation found for cstor_cert_install_summary (7231036252185501628) -->
-    <skip />
-    <string name="cstor_set_passwd_title" msgid="6156763762703061470">"Ορισμός κωδικού πρόσβασης"</string>
-    <string name="cstor_set_passwd_summary" msgid="5248560429856597398">"Ορισμός ή αλλαγή κωδικού πρόσβασης χώρου αποθήκευσης διαπιστευτηρίων"</string>
-    <string name="cstor_set_passwd_dialog_title" msgid="4071157542842979977">"Ορισμός κωδικού πρόσβασης"</string>
-    <string name="cstor_reset_title" msgid="6001600882136794382">"Εκκαθάριση αποθηκευτικού χώρου"</string>
-    <string name="cstor_reset_summary" msgid="7509525030771504833">"Εκκαθάριση αποθηκευτικού χώρου διαπιστευτηρίων όλων των περιεχομένων και επαναφορά του κωδικού πρόσβασής τους"</string>
-    <string name="cstor_reset_hint" msgid="5331632794451859788">"Είστε βέβαιοι ότι θέλετε να διαγράψετε όλα τα διαπιστευτήρια και να επαναφέρετε τον κωδικό πρόσβασης αποθηκευτικού χώρου διαπιστευτηρίων;"</string>
-    <string name="cstor_name_credential_dialog_title" msgid="1723509156126180662">"Όνομα του πιστοποιητικού"</string>
-    <string name="cstor_credential_name" msgid="2958936431813760259">"Όνομα πιστοποιητικού:"</string>
-    <string name="cstor_credential_password" msgid="7187440553141199409">"Κωδικός πρόσβασης για εξαγωγή κωδικού πρόσβασης:"</string>
-    <string name="cstor_credential_info" msgid="6097346149400207440">"Λεπτομέρειες πιστοποιητικού:"</string>
-    <string name="cstor_name_credential_hint" msgid="6889198058976515785">"Το όνομα μπορεί να περιλαμβάνει μόνο γράμματα και αριθμούς."</string>
-    <string name="cstor_old_password" msgid="979282118063084561">"Τρέχον κωδικός πρόσβασης:"</string>
-    <string name="cstor_new_password" msgid="6218562692435670047">"Νέος κωδικός πρόσβασης:"</string>
-    <string name="cstor_confirm_password" msgid="8996028123356342466">"Επιβεβαίωση νέου κωδικού πρόσβασης:"</string>
-    <!-- no translation found for cstor_first_time_hint (252980561562035720) -->
-    <skip />
-    <string name="cstor_first_time_hint_from_action" msgid="4690937025845780557">"Ορισμός ενός κωδικού πρόσβασης για τον αποθηκευτικό χώρο διαπιστευτηρίων."</string>
-    <string name="cstor_password_error" msgid="2917326097260402464">"Καταχωρίστε το σωστό κωδικό πρόσβασης."</string>
-    <string name="cstor_password_error_reset_warning" msgid="3336370539045905953">"Καταχωρίστε το σωστό κωδικό πρόσβασης. Σας απομένει άλλη μία προσπάθεια για τη σωστή καταχώριση του κωδικού πρόσβασης πριν τη διαγραφή του αποθηκευτικού χώρου διαπιστευτηρίων."</string>
-    <string name="cstor_password_error_reset_warning_plural" msgid="6956258389658499987">"Καταχωρίστε το σωστό κωδικό πρόσβασης. Σας απομένουν ακόμη <xliff:g id="NUMBER">%d</xliff:g> προσπάθειες για τη σωστή καταχώριση του κωδικού πρόσβασης πριν τη διαγραφή του αποθηκευτικού χώρου διαπιστευτηρίων."</string>
-    <string name="cstor_passwords_error" msgid="956773958408751155">"Οι κωδικοί πρόσβασης δεν ταιριάζουν."</string>
-    <string name="cstor_passwords_empty_error" msgid="6062539742626760734">"Πρέπει να καταχωρίσετε και να επιβεβαιώσετε έναν κωδικό πρόσβασης."</string>
-    <string name="cstor_password_empty_error" msgid="7249632576906961482">"Καταχωρίστε τον κωδικό πρόσβασης."</string>
-    <!-- no translation found for cstor_password_verification_error (1438172283989380605) -->
-    <skip />
-    <string name="cstor_name_empty_error" msgid="7499971191993770322">"Καταχωρίστε ένα όνομα."</string>
-    <string name="cstor_name_char_error" msgid="8048089317968192516">"Καταχωρίστε ένα όνομα που περιλαμβάνει μόνο γράμματα και αριθμούς."</string>
-    <string name="cstor_storage_error" msgid="7140697503172458161">"Δεν είναι δυνατή η αποθήκευση του πιστοποιητικού. Κάντε κλικ στην επιλογή ΟΚ για νέα προσπάθεια."</string>
-    <string name="cstor_unable_to_save_cert" msgid="1631402544447196406">"Δεν είναι δυνατή η αποθήκευση του πιστοποιητικού. Ο αποθηκευτικός χώρος διαπιστευτηρίων δεν είναι ενεργοποιημένος ή δεν πραγματοποιήθηκε σωστά η εκκίνησή του."</string>
-    <string name="cstor_cert_not_saved" msgid="6318149789449538491">"Το πιστοποιητικό δεν αποθηκεύτηκε."</string>
-    <string name="cstor_is_reset" msgid="449870501126790589">"Αυτός ο αποθηκευτικός χώρος διαπιστευτηρίων διαγράφτηκε."</string>
-    <string name="cstor_is_enabled" msgid="4054049098081482785">"Χώρος αποθήκευσης διαπιστευτηρίων ενεργοποιήθηκε."</string>
-    <string name="cstor_is_added" msgid="5625022327411754924">"Προστέθηκε <xliff:g id="CREDENTIAL">%s</xliff:g>"</string>
+    <string name="credentials_category" msgid="8536992056377271234">"Χώρος αποθήκευσης διαπιστευτηρίων"</string>
+    <string name="credentials_access" msgid="4843187230913860492">"Χρήση ασφαλών διαπιστευτηρίων"</string>
+    <string name="credentials_access_summary" msgid="319662078718574168">"Να επιτρέπεται στις εφαρμογές η πρόσβαση σε ασφαλή πιστοποιητικά και άλλα διαπιστευτήρια"</string>
+    <string name="credentials_unlock" msgid="1463040326264133844">"Εισαγωγή κωδικού πρόσβασης"</string>
+    <string name="credentials_unlock_hint" msgid="594679530407918031">"Εισαγάγετε τον κωδικό πρόσβασης του χώρου αποθήκευσης διαπιστευτηρίων."</string>
+    <string name="credentials_install_certificates" msgid="177337517568022236">"Εγκατάσταση από κάρτα SD"</string>
+    <string name="credentials_install_certificates_summary" msgid="7737001268684193093">"Εγκατάσταση κρυπτογραφημένων πιστοποιητικών από την κάρτα SD"</string>
+    <string name="credentials_set_password" msgid="9104473585811899989">"Ορισμός κωδικού πρόσβασης"</string>
+    <string name="credentials_set_password_summary" msgid="8287876917562085701">"Ορισμός ή αλλαγή κωδικού πρόσβασης χώρου αποθήκευσης διαπιστευτηρίων"</string>
+    <string name="credentials_reset" msgid="9170150870552453457">"Εκκαθάριση χώρου αποθήκευσης"</string>
+    <string name="credentials_reset_summary" msgid="1530388094693731636">"Εκκαθάριση χώρου αποθήκευσης διαπιστευτηρίων όλων των περιεχομένων και επαναφορά του κωδικού πρόσβασής του"</string>
+    <string name="credentials_reset_hint" msgid="819990295796804516">"Είστε βέβαιοι ότι θέλετε να διαγράψετε όλα τα διαπιστευτήρια και να επαναφέρετε τον κωδικό πρόσβασης του χώρου αποθήκευσης διαπιστευτηρίων;"</string>
+    <string name="credentials_old_password" msgid="7553393815538684028">"Τρέχον κωδικός πρόσβασης:"</string>
+    <string name="credentials_new_password" msgid="267487774686796938">"Νέος κωδικός πρόσβασης:"</string>
+    <string name="credentials_confirm_password" msgid="4732250000633424345">"Επιβεβαίωση νέου κωδικού πρόσβασης:"</string>
+    <string name="credentials_first_time_hint" msgid="1567821077545346039">"Ορίστε έναν κωδικό πρόσβασης για την αποθήκευση των διαπιστευτηρίων (τουλάχιστον 8 χαρακτήρες)."</string>
+    <string name="credentials_wrong_password" msgid="7525192410790152041">"Εισαγάγετε το σωστό κωδικό πρόσβασης."</string>
+    <string name="credentials_reset_warning" msgid="6392481296673345268">"Εισαγάγετε το σωστό κωδικό πρόσβασης. Σας απομένει άλλη μία προσπάθεια για τη σωστή καταχώριση του κωδικού πρόσβασης πριν τη διαγραφή του χώρου αποθήκευσης διαπιστευτηρίων."</string>
+    <string name="credentials_reset_warning_plural" msgid="454828369803055270">"Εισαγάγετε το σωστό κωδικό πρόσβασης. Σας απομένουν ακόμη <xliff:g id="NUMBER">%1$d</xliff:g> προσπάθειες για τη σωστή καταχώριση του κωδικού πρόσβασης πριν τη διαγραφή του χώρου αποθήκευσης διαπιστευτηρίων."</string>
+    <string name="credentials_passwords_mismatch" msgid="5288565139590031733">"Οι κωδικοί πρόσβασης δεν συμφωνούν."</string>
+    <string name="credentials_passwords_empty" msgid="8647631321684363549">"Πρέπει να καταχωρίσετε και να επιβεβαιώσετε έναν κωδικό πρόσβασης."</string>
+    <string name="credentials_password_empty" msgid="8292138152983330473">"Εισαγάγετε τον κωδικό πρόσβασης."</string>
+    <string name="credentials_password_too_short" msgid="7502749986405522663">"Ο κωδικός πρόσβασης θα πρέπει να αποτελείται από τουλάχιστον 8 χαρακτήρες."</string>
+    <string name="credentials_erased" msgid="7700309135582200849">"Αυτός ο χώρος αποθήκευσης διαπιστευτηρίων διαγράφτηκε."</string>
+    <string name="credentials_enabled" msgid="7588607413349978930">"Ο χώρος αποθήκευσης διαπιστευτηρίων ενεργοποιήθηκε."</string>
+    <string name="credentials_disabled" msgid="7453188089059045380">"Ο χώρος αποθήκευσης διαπιστευτηρίων απενεργοποιήθηκε."</string>
     <string name="emergency_tone_title" msgid="1055954530111587114">"Τόνος επείγουσας ανάγκης"</string>
     <string name="emergency_tone_summary" msgid="722259232924572153">"Ορισμός συμπεριφοράς κατά την πραγματοποίηση κλήσης επείγουσας ανάγκης"</string>
+    <string name="privacy_settings" msgid="9206631214140954954">"Απόρρητο"</string>
+    <string name="privacy_settings_title" msgid="1987089301293213705">"Ρυθμίσεις απορρήτου"</string>
+    <string name="location_section_title" msgid="6072558684044939786">"Τοποθεσία"</string>
+    <string name="settings_section_title" msgid="7413252428447723032">"Ρυθμίσεις"</string>
+    <string name="personal_data_section_title" msgid="7815209034443782061">"Προσωπικά δεδομένα"</string>
+    <string name="backup_settings_title" msgid="2968262658155327829">"Δημιουργία αντιγράφων ασφαλείας για τις ρυθμίσεις μου"</string>
+    <string name="backup_erase_dialog_title" msgid="6028429904055779443">"Αντίγραφο ασφαλείας ρυθμίσεων"</string>
+    <string name="backup_erase_dialog_message" msgid="9096433810456900531">"Είστε βέβαιοι ότι θέλετε να διακόψετε τη δημιουργία αντιγράφων ασφαλείας των ρυθμίσεών σας και να διαγράψετε όλα τα αντίγραφα από τους διακομιστές του Google;"</string>
 </resources>
