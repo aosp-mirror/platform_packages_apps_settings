@@ -15,6 +15,8 @@
 -->
 <resources xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <string name="yes" msgid="4676390750360727396">"Oui"</string>
+    <string name="no" msgid="6731231425810196216">"Non"</string>
     <string name="device_info_default" msgid="7847265875578739287">"Inconnu"</string>
     <string name="turn_on_radio" msgid="8706561489788373676">"Allumer le signal radio"</string>
     <string name="turn_off_radio" msgid="1820294552893884115">"Éteindre le signal radio"</string>
@@ -56,6 +58,7 @@
     <string name="font_size_save" msgid="3450855718056759095">"OK"</string>
     <string name="sdcard_setting" msgid="5922637503871474866">"Carte SD"</string>
     <string name="battery_info_status_label" msgid="8109155295509700309">"État de la batterie :"</string>
+    <string name="battery_info_power_label" msgid="7465140230991349382">"Prise électrique :"</string>
     <string name="battery_info_scale_label" msgid="3649763192389778437">"Batterie :"</string>
     <string name="battery_info_level_label" msgid="8706526709307788737">"Niveau de la batterie :"</string>
     <string name="battery_info_health_label" msgid="6416051542741886958">"État de la batterie :"</string>
@@ -75,6 +78,11 @@
     <string name="battery_info_status_discharging" msgid="6222697503392774475">"Baisse du niveau de charge"</string>
     <string name="battery_info_status_not_charging" msgid="2820070506621483576">"Débranchée"</string>
     <string name="battery_info_status_full" msgid="2824614753861462808">"Chargée"</string>
+    <string name="battery_info_power_unplugged" msgid="5987246575519551081">"Débranché"</string>
+    <string name="battery_info_power_ac" msgid="6808516193001604634">"CA"</string>
+    <string name="battery_info_power_usb" msgid="8012931702516331797">"USB"</string>
+    <string name="battery_info_power_ac_usb" msgid="6777734146838328688">"CA + USB"</string>
+    <string name="battery_info_power_unknown" msgid="7344115502868899881">"Inconnu"</string>
     <string name="battery_info_health_unknown" msgid="5664295556921944255">"Inconnu"</string>
     <string name="battery_info_health_good" msgid="8070356565806711806">"Bon"</string>
     <string name="battery_info_health_overheat" msgid="8442959549291368806">"Surchauffe"</string>
@@ -105,6 +113,11 @@
     <string name="bluetooth_notif_title" msgid="2485175521845371514">"Demande d\'association"</string>
     <string name="bluetooth_notif_message" msgid="5381418499788668724">"Sélectionner pour associer à "</string>
     <string name="device_picker" msgid="8721012448931226323">"Sélecteur de périphérique Bluetooth"</string>
+    <string name="bluetooth_permission_request" msgid="1523129741266262748">"Demande d\'autorisation Bluetooth"</string>
+    <string name="bluetooth_ask_enablement" msgid="2342558978033892004">"Une application sur votre téléphone demande l\'autorisation d\'activer Bluetooth. Voulez-vous l\'activer ?"</string>
+    <string name="bluetooth_ask_discovery" msgid="669870705606180872">"Une application sur votre téléphone demande l\'autorisation d\'activer la fonction de détection de votre téléphone par d\'autres appareils Bluetooth pendant <xliff:g id="TIMEOUT">%1$d</xliff:g> secondes. Voulez-vous l\'activer ?"</string>
+    <string name="bluetooth_ask_enablement_and_discovery" msgid="7220210326619399542">"Une application sur votre téléphone demande l\'autorisation d\'activer Bluetooth et de permettre à d\'autres appareils de détecter votre téléphone pendant <xliff:g id="TIMEOUT">%1$d</xliff:g> secondes. Voulez-vous l\'activer ?"</string>
+    <string name="bluetooth_turning_on" msgid="3107102168379705771">"Activation de Bluetooth…"</string>
     <string name="date_and_time" msgid="4114084177056654663">"Paramètres d\'heure et de date"</string>
     <string name="date_time_12_hour_sample" msgid="3259617262618020574">"13:00 h"</string>
     <string name="date_time_24_hour_sample" msgid="8916857570746212357">"13:00"</string>
@@ -198,8 +211,7 @@
     <string name="airplane_mode_turning_on" msgid="8871739222526957255">"Désactivation des connexions sans fil…"</string>
     <string name="airplane_mode_turning_off" msgid="3393168549611505996">"Activation des connexions sans fil…"</string>
     <string name="radio_controls_title" msgid="5868688473587168882">"Sans fil et réseaux"</string>
-    <!-- no translation found for wireless_networks_settings_title (149274247949769551) -->
-    <skip />
+    <string name="wireless_networks_settings_title" msgid="149274247949769551">"Paramètres sans fil et réseau"</string>
     <string name="radio_controls_summary" msgid="2998818677094465517">"Configurer le Wi-Fi, le mode Bluetooth, le mode Avion, les réseaux mobiles et le VPN"</string>
     <string name="roaming" msgid="3596055926335478572">"Itinérance des données"</string>
     <string name="roaming_enable" msgid="3737380951525303961">"Se connecter aux services de données lors de l\'itinérance"</string>
@@ -223,8 +235,7 @@
     <string name="zone_list_menu_sort_alphabetically" msgid="5683377702671088588">"Trier par ordre alphabétique"</string>
     <string name="zone_list_menu_sort_by_timezone" msgid="2720190443744884114">"Trier par fuseau horaire"</string>
     <string name="security_settings_title" msgid="5168491784222013179">"Lieu et sécurité"</string>
-    <!-- no translation found for location_security_settings_title (4624434296446625554) -->
-    <skip />
+    <string name="location_security_settings_title" msgid="4624434296446625554">"Paramètres de sécurité et localisation"</string>
     <string name="security_settings_summary" msgid="967393342537986570">"Définir les paramètres de l\'option Ma position et de verrouillage"</string>
     <string name="cdma_security_settings_summary" msgid="6068799952798901542">"Définir Ma position, le déverrouillage de l\'écran et le blocage des informations d\'identification stockées"</string>
     <string name="security_passwords_title" msgid="2930627259125138363">"Mots de passe"</string>
@@ -233,26 +244,19 @@
     <string name="bluetooth_settings" msgid="2725796451253089609">"Paramètres Bluetooth"</string>
     <string name="bluetooth_settings_title" msgid="2824020086246268296">"Paramètres Bluetooth"</string>
     <string name="bluetooth_settings_summary" msgid="2091062709530570462">"Gérer les connexions, configurer le nom et l\'identification de l\'appareil"</string>
-    <!-- no translation found for bluetooth_pairing_request (6385750334766370310) -->
-    <skip />
+    <string name="bluetooth_pairing_request" msgid="6385750334766370310">"Demande d\'association Bluetooth"</string>
     <string name="bluetooth_device_info" msgid="6644515376523965073">"Informations sur l\'appareil Bluetooth"</string>
-    <!-- no translation found for bluetooth_enter_pin_msg (856962526754150334) -->
-    <skip />
-    <!-- no translation found for bluetooth_enter_passkey_msg (8121515818772179228) -->
-    <skip />
+    <string name="bluetooth_enter_pin_msg" msgid="856962526754150334">\n"Saisissez le code PIN pour associer l\'appareil à \"<xliff:g id="DEVICE_NAME">%1$s</xliff:g>\". (Essayez avec 0000 ou 1234.)"</string>
+    <string name="bluetooth_enter_passkey_msg" msgid="8121515818772179228">\n"Saisissez la clé d\'accès pour effectuer l\'association avec \"<xliff:g id="DEVICE_NAME">%1$s</xliff:g>\"."</string>
     <string name="bluetooth_confirm_passkey_msg" msgid="1205362283945104263">"Avant de se connecter à <xliff:g id="DEVICE_NAME">%1$s</xliff:g>, vérifier qu\'il affiche la clé d\'accès : <xliff:g id="PASSKEY">%2$s</xliff:g>."</string>
-    <!-- no translation found for bluetooth_incoming_pairing_msg (1076613564387784476) -->
-    <skip />
-    <!-- no translation found for bluetooth_display_passkey_msg (3048496029389441579) -->
-    <skip />
+    <string name="bluetooth_incoming_pairing_msg" msgid="1076613564387784476">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g>"\n"souhaite effectuer l\'association."</string>
+    <string name="bluetooth_display_passkey_msg" msgid="3048496029389441579">"Entrez <xliff:g id="PASSKEY">%2$s</xliff:g> sur \"<xliff:g id="DEVICE_NAME">%1$s</xliff:g>\" pour effectuer l\'association."</string>
     <string name="bluetooth_pairing_accept" msgid="6163520056536604875">"Se connecter"</string>
     <string name="bluetooth_pairing_decline" msgid="930951069988011471">"Ne pas se connecter"</string>
-    <!-- no translation found for bluetooth_remote_device (2406662802908395389) -->
-    <skip />
+    <string name="bluetooth_remote_device" msgid="2406662802908395389">"Périphérique Bluetooth"</string>
     <string name="bluetooth_error_title" msgid="538287072376677166">"Attention"</string>
     <string name="bluetooth_pairing_error_message" msgid="2852744547246910349">"Un problème est survenu lors de l\'association à <xliff:g id="DEVICE_NAME">%1$s</xliff:g>."</string>
-    <!-- no translation found for bluetooth_pairing_pin_error_message (6065697229258906937) -->
-    <skip />
+    <string name="bluetooth_pairing_pin_error_message" msgid="6065697229258906937">"Un problème est survenu lors de l\'association à <xliff:g id="DEVICE_NAME">%1$s</xliff:g>, car la clé d\'accès ou le code secret saisi est incorrect."</string>
     <string name="bluetooth_pairing_device_down_error_message" msgid="6688215193824686741">"Impossible d\'établir la communication avec <xliff:g id="DEVICE_NAME">%1$s</xliff:g>."</string>
     <string name="bluetooth_pairing_rejected_error_message" msgid="1648157108520832454">"Association refusée par <xliff:g id="DEVICE_NAME">%1$s</xliff:g>"</string>
     <string name="bluetooth_connecting_error_message" msgid="1779660510084746802">"Un problème est survenu lors de la connexion à <xliff:g id="DEVICE_NAME">%1$s</xliff:g>."</string>
@@ -297,17 +301,13 @@
     <string name="security" msgid="1040691896987225267">"Sécurité"</string>
     <string name="wifi_security_open" msgid="3513305614048816607">"Ouvrir"</string>
     <string name="wifi_security_wep" msgid="7082604129842065776">"WEP"</string>
-    <!-- no translation found for wifi_security_psk (3392399380570381452) -->
-    <skip />
-    <!-- no translation found for wifi_security_eap (8309434150934969132) -->
-    <skip />
+    <string name="wifi_security_psk" msgid="3392399380570381452">"WPA/WPA2 PSK"</string>
+    <string name="wifi_security_eap" msgid="8309434150934969132">"Entreprise (802.1x)"</string>
     <string name="wifi_security_unknown" msgid="4564208312073060668">"Inconnu"</string>
     <string name="wifi_security_verbose_open" msgid="8117878112088901945">"réseau ouvert"</string>
     <string name="wifi_security_verbose_wep" msgid="9220757688700421508">"sécurisé par clé WEP"</string>
-    <!-- no translation found for wifi_security_verbose_psk (1110130025330416225) -->
-    <skip />
-    <!-- no translation found for wifi_security_verbose_eap (586632662086063) -->
-    <skip />
+    <string name="wifi_security_verbose_psk" msgid="1110130025330416225">"sécurisé via WPA/WPA2 PSK"</string>
+    <string name="wifi_security_verbose_eap" msgid="586632662086063">"sécurisé par 802.1x EAP"</string>
     <string name="ip_address" msgid="850672263358989449">"Adresse IP"</string>
     <string name="signal" msgid="1947969631626413228">"Intensité du signal"</string>
     <string name="wifi_starting" msgid="6710266609710860129">"Activation…"</string>
@@ -332,7 +332,7 @@
     <string name="scan_wifi" msgid="2459901725350542606">"Rechercher"</string>
     <string name="summary_not_in_range" msgid="3926674700733548684">"Hors de portée"</string>
     <string name="summary_remembered" msgid="6079941090549401742">"enregistré"</string>
-    <string name="summary_connection_failed" msgid="7610394657613410489">"Échec de la connexion. Sélectionnez cette option pour réessayer."</string>
+    <string name="summary_connection_failed" msgid="2351885658101671413">"Échec de la connexion. Appuyez dessus pour réessayer."</string>
     <string name="wifi_access_points" msgid="2664629396767022441">"Réseaux Wi-Fi"</string>
     <string name="wifi_type_ssid" msgid="1326839657083292017">"SSID du réseau"</string>
     <string name="wifi_security" msgid="6603611185592956936">"Sécurité"</string>
@@ -383,8 +383,7 @@
     <string name="status_disconnected" msgid="7561688569905126046">"Déconnecté"</string>
     <string name="status_failed" msgid="610462050405904601">"Échec"</string>
     <string name="sound_and_display_settings" msgid="349770582993029003">"Sons et affichage"</string>
-    <!-- no translation found for sound_and_display_settings_title (5036144539683697330) -->
-    <skip />
+    <string name="sound_and_display_settings_title" msgid="5036144539683697330">"Paramètres des sons et affichages"</string>
     <string name="sound_settings" msgid="5007659014828162881">"Paramètres sonores"</string>
     <string name="sound_and_display_settings_summary" msgid="1433943789593286064">"Configurer les sonneries, les notifications et la luminosité"</string>
     <string name="silent_mode_title" msgid="3181479108593217704">"Mode silencieux"</string>
@@ -410,6 +409,9 @@
     <string name="sound_effects_enable_title" msgid="3197313718929122833">"Sélections audibles"</string>
     <string name="sound_effects_enable_summary_on" msgid="6154141289879491329">"Jouer un son lors des sélections à l\'écran"</string>
     <string name="sound_effects_enable_summary_off" msgid="3447739581759560125">"Jouer un son lors des sélections à l\'écran"</string>
+    <string name="haptic_feedback_enable_title" msgid="6311736559245411290">"Commentaire haptique"</string>
+    <string name="haptic_feedback_enable_summary_on" msgid="1875779656524793053">"Vibrer lors de la sélection des touches programmables et lors de certaines interactions avec l\'interface utilisateur"</string>
+    <string name="haptic_feedback_enable_summary_off" msgid="7287885436963105314">"Vibrer lors de la sélection des touches programmables et lors de certaines interactions avec l\'interface utilisateur"</string>
     <string name="play_media_notification_sounds_enable_title" msgid="1008791464029179529">"Notifications carte SD"</string>
     <string name="play_media_notification_sounds_enable_summary_on" msgid="7675466959375667370">"Émettre un son pour les notifications de la carte SD"</string>
     <string name="play_media_notification_sounds_enable_summary_off" msgid="8672617597028744693">"Émettre un son pour les notifications de la carte SD"</string>
@@ -428,8 +430,7 @@
     <string name="brightness_summary" msgid="838917350127550703">"Régler la luminosité de l\'écran"</string>
     <string name="screen_timeout" msgid="4882669461447531301">"Mise en veille de l\'écran"</string>
     <string name="screen_timeout_summary" msgid="2905757633140605334">"Définir le délai avant la mise hors tension automatique de l\'écran"</string>
-    <!-- no translation found for automatic_brightness (5014143533884135461) -->
-    <skip />
+    <string name="automatic_brightness" msgid="5014143533884135461">"Ajuster automatiquement la luminosité"</string>
     <string name="sim_lock_settings" msgid="3392331196873564292">"Paramètres de blocage carte SIM"</string>
     <string name="sim_lock_settings_category" msgid="5136244267576697004">"Configurer blocage SIM"</string>
     <string name="sim_lock_settings_title" msgid="9018585580955414596">"Blocage de la carte SIM"</string>
@@ -463,10 +464,8 @@
     <string name="device_status_activity_title" msgid="1411201799384697904">"État"</string>
     <string name="device_status" msgid="607405385799807324">"État"</string>
     <string name="device_status_summary" msgid="2599162787451519618">"Numéro de téléphone, signal, etc."</string>
-    <!-- no translation found for storage_settings (6681164315506788024) -->
-    <skip />
-    <!-- no translation found for storage_settings_title (5379463509034022773) -->
-    <skip />
+    <string name="storage_settings" msgid="6681164315506788024">"Carte SD et mémoire"</string>
+    <string name="storage_settings_title" msgid="5379463509034022773">"Carte SD et paramètres de mémoire du téléphone"</string>
     <string name="storage_settings_summary" msgid="9176693537325988610">"Retirer la carte SD, afficher la mémoire disponible"</string>
     <string name="status_number" msgid="5123197324870153205">"Mon numéro de téléphone"</string>
     <string name="status_min_number" msgid="3519504522179420597">"MIN"</string>
@@ -510,6 +509,11 @@
     <string name="apn_mms_port" msgid="4074188088199243040">"Port MMS"</string>
     <string name="apn_mcc" msgid="4258628382260674636">"MCC"</string>
     <string name="apn_mnc" msgid="8629374076888809874">"MNC"</string>
+    <string name="apn_auth_type" msgid="6167205395676037015">"Type d\'authentification"</string>
+    <string name="apn_auth_type_none" msgid="5069592676845549926">"Aucune"</string>
+    <string name="apn_auth_type_pap" msgid="1666934536996033383">"PAP"</string>
+    <string name="apn_auth_type_chap" msgid="3369626283789068360">"CHAP"</string>
+    <string name="apn_auth_type_pap_chap" msgid="9102343063036134541">"PAP ou CHAP"</string>
     <string name="apn_type" msgid="469613123902220544">"Type d\'APN (nom du point d\'accès)"</string>
     <string name="menu_delete" msgid="6981294422841124659">"Supprimer l\'APN"</string>
     <string name="menu_new" msgid="3014205883303921729">"Nouvel APN"</string>
@@ -548,14 +552,14 @@
     <string name="location_network_based" msgid="8815705866861993344">"Utiliser réseaux sans fil"</string>
     <string name="location_networks_disabled" msgid="2708968452901433980">"Afficher position dans les applications (comme Google Maps)"</string>
     <string name="location_neighborhood_level" msgid="4656658097932515921">"Position géographique déterminée par réseaux Wi-Fi et/ou mobile"</string>
-    <string name="location_gps" msgid="375912731641377120">"Activer les satellites GPS"</string>
-    <string name="location_street_level" msgid="5899941752252356344">"Localisation précise au niveau de la rue lors du positionnement géographique (désélectionner pour économiser la batterie)"</string>
+    <string name="location_gps" msgid="6296125378829097831">"Utiliser les satellites GPS"</string>
+    <string name="location_street_level" msgid="6460740847018275745">"Localisation précise au niveau de la rue lors du positionnement géographique (désélectionner pour économiser la batterie)"</string>
     <string name="location_gps_disabled" msgid="6632537158777308128">"Localiser au niveau rue (requiert + de batterie et une vue dégagée)"</string>
-    <string name="assisted_gps" msgid="245743826674562912">"Activer le GPS assisté"</string>
-    <string name="assisted_gps_enabled" msgid="4942865222779287424">"Utiliser le serveur pour assister le GPS (réduit l\'utilisation du réseau)"</string>
-    <string name="assisted_gps_disabled" msgid="5626923671782348802">"Utiliser le serveur pour assister le GPS (améliore les performances du GPS)"</string>
-    <string name="use_location_title" msgid="7585990952633568732">"Partager avec Google"</string>
-    <string name="use_location_summary" msgid="4411467143899877395">"Autoriser Google à utiliser vos informations de localisation pour améliorer l\'efficacité des recherches et des autres services Google"</string>
+    <string name="assisted_gps" msgid="4649317129586736885">"Utiliser le GPS assisté"</string>
+    <string name="assisted_gps_enabled" msgid="8751899609589792803">"Utiliser le serveur pour assister le GPS (désactiver pour réduire l\'utilisation du réseau)"</string>
+    <string name="assisted_gps_disabled" msgid="6982698333968010748">"Utiliser le serveur pour assister le GPS (désactiver pour améliorer les performances du GPS)"</string>
+    <string name="use_location_title" msgid="5447030582538504247">"Utiliser ma position"</string>
+    <string name="use_location_summary" msgid="1816849484040070431">"Utiliser mes informations de localisation pour améliorer l\'efficacité des recherches et des autres services Google"</string>
     <string name="use_location_warning_message" msgid="1420184860518262439">"Souhaitez-vous autoriser Google à utiliser vos informations de localisation pour améliorer l\'efficacité des recherches et des autres services ?"</string>
     <string name="agree" msgid="6288718671527758326">"Accepter"</string>
     <string name="disagree" msgid="6221069272309799230">"Refuser"</string>
@@ -571,6 +575,10 @@
     <string name="settings_license_activity_title" msgid="7553683406244228650">"Licences open source"</string>
     <string name="settings_license_activity_unavailable" msgid="4210539215951487627">"Un problème est survenu lors du chargement des licences."</string>
     <string name="settings_license_activity_loading" msgid="3337535809093591740">"Chargement..."</string>
+    <string name="settings_safetylegal_title" msgid="1289483965535937431">"Informations de sécurité"</string>
+    <string name="settings_safetylegal_activity_title" msgid="6901214628496951727">"Informations de sécurité"</string>
+    <string name="settings_safetylegal_activity_unreachable" msgid="3198912875259612887">"Votre téléphone n\'est connecté à aucun service de données. Pour consulter ces informations maintenant, accédez à %s depuis un ordinateur connecté à Internet."</string>
+    <string name="settings_safetylegal_activity_loading" msgid="8059022597639516348">"Chargement…"</string>
     <string name="lock_settings_title" msgid="5828348303971852121">"Schéma de déverrouillage de l\'écran"</string>
     <string name="lockpattern_change_lock_pattern_label" msgid="5679630792003440352">"Modifier le schéma de déverrouillage"</string>
     <string name="lockpattern_need_to_unlock" msgid="757935356911054465">"Confirmer le schéma enregistré"</string>
@@ -599,9 +607,9 @@
     <string name="skip_button_label" msgid="8680422740354436943">"Annuler"</string>
     <string name="next_button_label" msgid="8890792540116568321">"Suivant"</string>
     <string name="lock_title" msgid="4059246467204273930">"Sécurisation de votre téléphone"</string>
-    <string name="lock_intro_message" msgid="5352897389718432077"><font size="17">"Protégez votre téléphone contre toute utilisation non autorisée en créant un schéma personnel de déverrouillage de l\'écran."\n<font height="17">\n</font><b>"1"</b>" L\'écran suivant vous présente un exemple de schéma "\n<font height="17">\n</font><b>"2"</b>" Lorsque vous êtes prêt, dessinez votre propre schéma de déverrouillage. Essayez différents schémas, mais reliez au moins quatre points."\n<font height="17">\n</font><b></b>"Reproduisez votre schéma pour confirmer."\n<font height="17">\n</font><b>"Pour commencer, sélectionnez \"Suivant\"."</b>\n<font height="3">\n</font>"Si vous ne souhaitez pas activer cette protection, sélectionnez \"Annuler\"."</font></string>
+    <string name="lock_intro_message" msgid="9100785646737118042"><font size="17">"Protégez votre téléphone contre toute utilisation non autorisée en créant un schéma personnel de déverrouillage de l\'écran. "\n<font height="17">\n</font><b>"1"</b>"  L\'écran suivant vous présente un exemple de schéma. "\n<font height="17">\n</font><b>"2"</b>"  Lorsque vous êtes prêt, dessinez votre propre schéma de déverrouillage. Essayez-en plusieurs, mais veillez à relier au moins quatre points. "\n<font height="17">\n</font><b>"3"</b>"  Reproduisez votre schéma pour confirmer votre choix. "\n<font height="17">\n</font><b>"Pour commencer, appuyez sur \"Suivant\""</b>". "\n<font height="3">\n</font>"Si vous ne souhaitez pas activer la protection, appuyez sur \"Annuler\"."</font></string>
     <string name="lock_example_title" msgid="8052305554017485410">"Exemple de schéma"</string>
-    <string name="lock_example_message" msgid="7431982730914254881">"Reliez au moins quatre points."\n" "\n"Sélectionnez \"Suivant\" pour créer votre propre schéma."</string>
+    <string name="lock_example_message" msgid="1838650097090632706">"Reliez au moins quatre points."\n" "\n"Sélectionnez \"Suivant\" pour créer votre propre schéma."</string>
     <string name="manageapplications_settings_title" msgid="5712405848153426706">"Gérer les applications"</string>
     <string name="manageapplications_settings_summary" msgid="6097117021500651232">"Gérer et supprimer les applications installées"</string>
     <string name="applications_settings" msgid="3736173521008476946">"Applications"</string>
@@ -635,12 +643,12 @@
     <string name="filter" msgid="2018011724373033887">"Filtrer"</string>
     <string name="filter_dlg_title" msgid="6507663329723966854">"Options du filtre"</string>
     <string name="filter_apps_all" msgid="5142129378749391876">"Tous"</string>
-    <string name="filter_apps_third_party" msgid="1096017647285183437">"Tiers"</string>
+    <string name="filter_apps_third_party" msgid="7786348047690140979">"Téléchargées"</string>
     <string name="filter_apps_running" msgid="7767071454371350486">"En cours d\'exécution"</string>
     <string name="loading" msgid="3200408047793887917">"Chargement..."</string>
     <string name="recompute_size" msgid="7722567982831691718">"Calcul de la taille..."</string>
     <string name="clear_data_dlg_title" msgid="4470209520936375508">"Supprimer"</string>
-    <string name="clear_data_dlg_text" msgid="8796694785488630642">"Toutes les informations enregistrées dans cette application seront définitivement supprimées."</string>
+    <string name="clear_data_dlg_text" msgid="8368035073300828451">"Toutes les données de cette application vont être définitivement supprimées, y compris tous les fichiers, les paramètres, les comptes, les bases de données, etc."</string>
     <string name="dlg_ok" msgid="2402639055725653590">"OK"</string>
     <string name="dlg_cancel" msgid="1674753358972975911">"Annuler"</string>
     <string name="app_not_found_dlg_title" msgid="8458335716378083713">"L\'application n\'a pas été trouvée."</string>
@@ -660,19 +668,16 @@
     <string name="service_restarting" msgid="2242747937372354306">"Redémarrage en cours"</string>
     <string name="no_running_services" msgid="6981216347270280598">"Aucun service en cours d\'exécution"</string>
     <string name="confirm_stop_service" msgid="5700448757318301681">"Arrêter le service ?"</string>
-    <string name="confirm_stop_service_msg" msgid="2530344831367597886">"Le service ne sera plus exécuté tant qu\'il ne sera pas relancé par l\'application. Cette configuration peut avoir des conséquences gênantes."</string>
+    <string name="confirm_stop_service_msg" msgid="1202118456282395730">"Le service ne sera plus exécuté tant qu\'il ne sera pas relancé. Cette configuration peut avoir des conséquences gênantes sur l\'application <xliff:g id="APPLICATION">%1$s</xliff:g>."</string>
     <string name="confirm_stop_stop" msgid="7382363913280993331">"Arrêter"</string>
     <string name="confirm_stop_cancel" msgid="206495326622692381">"Annuler"</string>
-    <!-- no translation found for service_started_by_app (2611669867072561918) -->
-    <skip />
-    <string name="service_client_name" msgid="6645152045851445666">"<xliff:g id="CLIENT_NAME">%1$s</xliff:g> : sélectionnez cet élément pour activer la gestion."</string>
-    <!-- no translation found for service_background_processes (4590194788473181747) -->
-    <skip />
-    <!-- no translation found for service_foreground_processes (6033218875756846671) -->
-    <skip />
+    <string name="service_started_by_app" msgid="8432097226392386802">"Service démarré par l\'application : appuyez dessus pour l\'arrêter."</string>
+    <string name="service_client_name" msgid="2337664610975074717">"<xliff:g id="CLIENT_NAME">%1$s</xliff:g> : appuyez dessus pour gérer le service."</string>
+    <string name="service_background_processes" msgid="5158600475629177758">"Disponible : <xliff:g id="FREE">%2$s</xliff:g>+<xliff:g id="MEMORY">%3$s</xliff:g> dans <xliff:g id="COUNT">%1$d</xliff:g>"</string>
+    <string name="service_foreground_processes" msgid="4013890350284680796">"Autres : <xliff:g id="MEMORY">%2$s</xliff:g> dans <xliff:g id="COUNT">%1$d</xliff:g>"</string>
+    <string name="service_process_name" msgid="8630408984456958400">"Processus : <xliff:g id="PROCESS">%1$s</xliff:g>"</string>
     <string name="language_settings" msgid="502219872342167227">"Langue et clavier"</string>
-    <!-- no translation found for language_keyboard_settings_title (3455826933385341107) -->
-    <skip />
+    <string name="language_keyboard_settings_title" msgid="3455826933385341107">"Paramètres de langue et clavier"</string>
     <string name="language_settings_summary" msgid="595647729475399987">"Définir la langue et la région, la saisie de texte et la correction automatique"</string>
     <string name="language_category" msgid="3391756582724541530">"Paramètres régionaux"</string>
     <string name="text_category" msgid="6342540511465136739">"Paramètres du texte"</string>
@@ -687,7 +692,7 @@
     <string name="auto_punctuate_summary" msgid="4372126865670574837">"Appuyez deux fois sur la touche Espace pour insérer \".\""</string>
     <string name="show_password" msgid="2198798062604049206">"Mots de passe visibles"</string>
     <string name="show_password_summary" msgid="3806709974395178121">"Afficher le mot de passe lors de la saisie"</string>
-    <string name="ime_security_warning" msgid="3458652708716006477">"Ce mode de saisie pourrait collecter le texte que vous saisissez, y compris vos données personnelles telles que les mots de passe et les numéros de carte de crédit. Ce mode est propre à l\'application <xliff:g id="IME_APPLICATION_NAME">%1$s</xliff:g>. Voulez-vous vraiment activer ce mode de saisie ?"</string>
+    <string name="ime_security_warning" msgid="812267421486877917">"Ce mode de saisie pourrait collecter le texte que vous saisissez, y compris vos données personnelles telles que les mots de passe et les numéros de carte de crédit. Il provient de l\'application <xliff:g id="IME_APPLICATION_NAME">%1$s</xliff:g>. Voulez-vous vraiment activer ce mode de saisie ?"</string>
     <string name="user_dict_settings_titlebar" msgid="765659257455000490">"Dictionnaire personnel"</string>
     <string name="user_dict_settings_title" msgid="8357027437499042191">"Dictionnaire personnel"</string>
     <string name="user_dict_settings_summary" msgid="2460427065601355471">"Ajouter et retirer des mots du dictionnaire personnel"</string>
@@ -715,7 +720,7 @@
     <string name="input_methods_settings_title" msgid="6800066636850553887">"Saisie de texte"</string>
     <string name="input_methods_settings_summary" msgid="7571173442946675205">"Gérer les options de saisie de texte"</string>
     <string name="input_methods_settings_label_format" msgid="6002887604815693322">"Paramètres <xliff:g id="IME_NAME">%1$s</xliff:g>"</string>
-    <string name="onscreen_keyboard_settings_summary" msgid="4919680715154885028">"Paramètres du clavier à l\'écran"</string>
+    <string name="onscreen_keyboard_settings_summary" msgid="5841558383556238653">"Paramètres du clavier intégré"</string>
     <string name="builtin_keyboard_settings_title" msgid="8169889453770863227">"Clavier de l\'appareil"</string>
     <string name="builtin_keyboard_settings_summary" msgid="6404687907454621637">"Paramètres du clavier intégré"</string>
     <string name="development_settings_title" msgid="6719732334835420989">"Développement"</string>
@@ -726,7 +731,7 @@
     <string name="keep_screen_on_summary" msgid="2173114350754293009">"L\'écran ne se met jamais en veille lors du chargement"</string>
     <string name="allow_mock_location" msgid="2787962564578664888">"Positions fictives"</string>
     <string name="allow_mock_location_summary" msgid="317615105156345626">"Autoriser les positions fictives"</string>
-    <string name="adb_warning_title" msgid="1756027479229533250">"Activer le débogage USB ?"</string>
+    <string name="adb_warning_title" msgid="6234463310896563253">"Autoriser le débogage USB ?"</string>
     <string name="adb_warning_message" msgid="5352555112049663033">"Le débogage USB est conçu à des fins de développement uniquement. Il peut servir à copier des données entre votre ordinateur et votre appareil, à installer des applications sur votre appareil sans notification et à lire les données de journal."</string>
     <string name="gadget_picker_title" msgid="98374951396755811">"Choisir un gadget"</string>
     <string name="widget_picker_title" msgid="9130684134213467557">"Choisir un widget"</string>
@@ -766,15 +771,13 @@
     <string name="app_name_label" msgid="2000949925256858308">"Application"</string>
     <string name="launch_count_label" msgid="4019444833263957024">"Nombre"</string>
     <string name="usage_time_label" msgid="295954901452833058">"Temps d\'utilisation"</string>
-    <!-- no translation found for accessibility_settings (3975902491934816215) -->
-    <skip />
-    <!-- no translation found for accessibility_settings_title (2130492524656204459) -->
-    <skip />
+    <string name="accessibility_settings" msgid="3975902491934816215">"Accessibilité"</string>
+    <string name="accessibility_settings_title" msgid="2130492524656204459">"Paramètres d\'accessibilité"</string>
     <string name="accessibility_settings_summary" msgid="8185181964847149507">"Gérer les options d\'accessibilité"</string>
     <string name="toggle_accessibility_title" msgid="650839277066574497">"Accessibilité"</string>
     <string name="accessibility_services_category" msgid="8127851026323672607">"Services d\'accessibilité"</string>
     <string name="no_accessibility_services_summary" msgid="694578333333808159">"Aucun service d\'accessibilité installé"</string>
-    <string name="accessibility_service_security_warning" msgid="8386156287296967181">"Il est possible que ce service d\'accessibilité puisse recueillir tout le texte que vous saisissez, y compris les données personnelles et les numéros de cartes de crédit, mais pas les mots de passe. Il est également possible qu\'il enregistre vos interactions avec l\'interface utilisateur. Il provient de l\'application <xliff:g id="ACCESSIBILITY_SERVICE_NAME">%1$s</xliff:g>. Activer ce service d\'accessibilité ?"</string>
+    <string name="accessibility_service_security_warning" msgid="4066258132331302670">"Ce service d\'accessibilité est susceptible de recueillir tout le texte que vous saisissez, y compris les données personnelles et les numéros de cartes de crédit, mais pas les mots de passe. Il est également possible qu\'il enregistre vos interactions avec l\'interface utilisateur. Il provient de l\'application <xliff:g id="ACCESSIBILITY_SERVICE_NAME">%1$s</xliff:g>. Utiliser ce service d\'accessibilité ?"</string>
     <string name="accessibility_service_disable_warning" msgid="8930591383312775132">"Désactiver les services d\'accessibilité ?"</string>
     <string name="power_usage_summary_title" msgid="5180282911164282324">"Utilisation de la batterie"</string>
     <string name="power_usage_summary" msgid="7237084831082848168">"Répartition·de·l\'utilisation·de·la·batterie"</string>
@@ -836,7 +839,7 @@
     <string name="process_mediaserver_label" msgid="6500382062945689285">"Serveur multimédia"</string>
     <string name="tts_settings" msgid="3348626948015962987">"SMS vocaux"</string>
     <string name="tts_settings_summary" msgid="2627715231944602766">"Définir les options de synthèse vocale"</string>
-    <string name="tts_settings_title" msgid="5064947197040356736">"Contrôles du synthétiseur vocal"</string>
+    <string name="tts_settings_title" msgid="4182348653053000933">"Paramètres de la synthèse vocale"</string>
     <string name="use_default_tts_settings_title" msgid="1577063839539732930">"Toujours utiliser mes paramètres"</string>
     <string name="use_default_tts_settings_summary" msgid="4253502106159206276">"Les paramètres par défaut ci-dessous remplacent les paramètres de l\'application."</string>
     <string name="tts_default_settings_section" msgid="5787915620218907443">"Paramètres par défaut"</string>
@@ -856,6 +859,7 @@
     <string name="gadget_title" msgid="7455548605888590466">"Contrôle de l\'alimentation"</string>
     <string name="gadget_toggle_wifi" msgid="2382963973155082629">"Mise à jour des paramètres Wi-Fi"</string>
     <string name="gadget_toggle_bluetooth" msgid="7538903239807020826">"Mise à jour des paramètres Bluetooth"</string>
+    <string name="credential_installer_activity_title" msgid="7600661521831762521">"Programme d\'installation des identifiants"</string>
     <string name="vpn_settings_activity_title" msgid="7276864950701612579">"Paramètres de VPN"</string>
     <string name="vpn_connect_to" msgid="2541409082892684362">"Connexion à \"<xliff:g id="NAME">%s</xliff:g>\""</string>
     <string name="vpn_username_colon" msgid="7854930370861306247">"Nom d\'utilisateur :"</string>
@@ -934,48 +938,40 @@
     <string name="vpn_settings_summary" msgid="8849924181594963972">"Configurer et gérer les réseaux privés virtuels (VPN)"</string>
     <string name="vpn_secret_unchanged" msgid="8700613973594154529">"(aucune modification)"</string>
     <string name="vpn_secret_not_set" msgid="1037792636371641845">"(non défini)"</string>
-    <string name="cstor_settings_category" msgid="2284299080682591107">"Stockage des identifiants"</string>
-    <string name="cstor_access_title" msgid="1739505390736236717">"Utiliser des identifiants sécurisés"</string>
-    <string name="cstor_access_summary" msgid="4512681868217546677">"Autoriser l\'accès des applications aux certificats sécurisés et identifiants"</string>
-    <string name="cstor_access_dialog_title" msgid="3024256293191879190">"Saisir le mot de passe"</string>
-    <string name="cstor_access_dialog_hint_from_action" msgid="679746865623760961">"Saisissez le mot de passe du stockage des identifiants."</string>
-    <!-- no translation found for cstor_cert_install_title (8387889077991064784) -->
-    <skip />
-    <!-- no translation found for cstor_cert_install_summary (7231036252185501628) -->
-    <skip />
-    <string name="cstor_set_passwd_title" msgid="6156763762703061470">"Définir le mot de passe"</string>
-    <string name="cstor_set_passwd_summary" msgid="5248560429856597398">"Définir/modifier le mot de passe du stockage des identifiants"</string>
-    <string name="cstor_set_passwd_dialog_title" msgid="4071157542842979977">"Définir le mot de passe"</string>
-    <string name="cstor_reset_title" msgid="6001600882136794382">"Effacer le stockage"</string>
-    <string name="cstor_reset_summary" msgid="7509525030771504833">"Effacer le contenu du stockage des identifiants et réinitialiser le mot de passe"</string>
-    <string name="cstor_reset_hint" msgid="5331632794451859788">"Voulez-vous vraiment supprimer tous les identifiants et réinitialiser le mot de passe du stockage des identifiants ?"</string>
-    <string name="cstor_name_credential_dialog_title" msgid="1723509156126180662">"Attribuer un nom au certificat"</string>
-    <string name="cstor_credential_name" msgid="2958936431813760259">"Nom du certificat :"</string>
-    <string name="cstor_credential_password" msgid="7187440553141199409">"Mot de passe d\'extraction du certificat :"</string>
-    <string name="cstor_credential_info" msgid="6097346149400207440">"Détails du certificat :"</string>
-    <string name="cstor_name_credential_hint" msgid="6889198058976515785">"Le nom ne peut contenir que des lettres et des chiffres."</string>
-    <string name="cstor_old_password" msgid="979282118063084561">"Mot de passe actuel :"</string>
-    <string name="cstor_new_password" msgid="6218562692435670047">"Nouveau mot de passe :"</string>
-    <string name="cstor_confirm_password" msgid="8996028123356342466">"Confirmer le nouveau mot de passe :"</string>
-    <!-- no translation found for cstor_first_time_hint (252980561562035720) -->
-    <skip />
-    <string name="cstor_first_time_hint_from_action" msgid="4690937025845780557">"Définissez le mot de passe du stockage des identifiants."</string>
-    <string name="cstor_password_error" msgid="2917326097260402464">"Veuillez entrer le mot de passe approprié."</string>
-    <string name="cstor_password_error_reset_warning" msgid="3336370539045905953">"Entrez le mot de passe approprié. Il vous reste un essai avant que le stockage des identifiants ne soit effacé."</string>
-    <string name="cstor_password_error_reset_warning_plural" msgid="6956258389658499987">"Entrez le mot de passe approprié. Il vous reste <xliff:g id="NUMBER">%d</xliff:g> essais avant que les identifiants stockés ne soient effacés."</string>
-    <string name="cstor_passwords_error" msgid="956773958408751155">"Les mots de passe ne concordent pas."</string>
-    <string name="cstor_passwords_empty_error" msgid="6062539742626760734">"Vous devez entrer un mot de passe et le confirmer."</string>
-    <string name="cstor_password_empty_error" msgid="7249632576906961482">"Veuillez entrer le mot de passe."</string>
-    <!-- no translation found for cstor_password_verification_error (1438172283989380605) -->
-    <skip />
-    <string name="cstor_name_empty_error" msgid="7499971191993770322">"Veuillez entrer un nom."</string>
-    <string name="cstor_name_char_error" msgid="8048089317968192516">"Entrez un nom ne contenant que des lettres et des chiffres."</string>
-    <string name="cstor_storage_error" msgid="7140697503172458161">"Impossible d\'enregistrer le certificat. Cliquez sur OK pour réessayer."</string>
-    <string name="cstor_unable_to_save_cert" msgid="1631402544447196406">"Impossible d\'enregistrer le certificat. Le stockage des informations d\'identification n\'est pas activé ou initialisé correctement."</string>
-    <string name="cstor_cert_not_saved" msgid="6318149789449538491">"Le certificat n\'est pas enregistré."</string>
-    <string name="cstor_is_reset" msgid="449870501126790589">"Les informations d\'identification stockées sont effacées."</string>
-    <string name="cstor_is_enabled" msgid="4054049098081482785">"Stockage des identifiants activé."</string>
-    <string name="cstor_is_added" msgid="5625022327411754924">"Les informations \"<xliff:g id="CREDENTIAL">%s</xliff:g>\" ont été ajoutées."</string>
+    <string name="credentials_category" msgid="8536992056377271234">"Stockage des identifiants"</string>
+    <string name="credentials_access" msgid="4843187230913860492">"Utiliser des identifiants sécurisés"</string>
+    <string name="credentials_access_summary" msgid="319662078718574168">"Autoriser l\'accès des applications aux certificats sécurisés et aux identifiants"</string>
+    <string name="credentials_unlock" msgid="1463040326264133844">"Saisir le mot de passe"</string>
+    <string name="credentials_unlock_hint" msgid="594679530407918031">"Saisissez le mot de passe du stockage des identifiants."</string>
+    <string name="credentials_install_certificates" msgid="177337517568022236">"Installer depuis la carte SD"</string>
+    <string name="credentials_install_certificates_summary" msgid="7737001268684193093">"Installer les certificats cryptés depuis la carte SD"</string>
+    <string name="credentials_set_password" msgid="9104473585811899989">"Définir le mot de passe"</string>
+    <string name="credentials_set_password_summary" msgid="8287876917562085701">"Définir/modifier le mot de passe de stockage des identifiants"</string>
+    <string name="credentials_reset" msgid="9170150870552453457">"Effacer le stockage"</string>
+    <string name="credentials_reset_summary" msgid="1530388094693731636">"Effacer le contenu du stockage des identifiants et réinitialiser le mot de passe"</string>
+    <string name="credentials_reset_hint" msgid="819990295796804516">"Voulez-vous vraiment supprimer tous les identifiants et réinitialiser le mot de passe du stockage des identifiants ?"</string>
+    <string name="credentials_old_password" msgid="7553393815538684028">"Mot de passe actuel :"</string>
+    <string name="credentials_new_password" msgid="267487774686796938">"Nouveau mot de passe :"</string>
+    <string name="credentials_confirm_password" msgid="4732250000633424345">"Confirmer le nouveau mot de passe :"</string>
+    <string name="credentials_first_time_hint" msgid="1567821077545346039">"Définissez un mot de passe pour le stockage des identifiants (au moins 8 caractères)."</string>
+    <string name="credentials_wrong_password" msgid="7525192410790152041">"Veuillez entrer le mot de passe approprié."</string>
+    <string name="credentials_reset_warning" msgid="6392481296673345268">"Entrez le mot de passe approprié. Il vous reste un essai avant que le stockage des identifiants ne soit effacé."</string>
+    <string name="credentials_reset_warning_plural" msgid="454828369803055270">"Entrez le mot de passe approprié. Il vous reste <xliff:g id="NUMBER">%1$d</xliff:g> essais avant que les identifiants stockés ne soient effacés."</string>
+    <string name="credentials_passwords_mismatch" msgid="5288565139590031733">"Les mots de passe ne concordent pas."</string>
+    <string name="credentials_passwords_empty" msgid="8647631321684363549">"Vous devez entrer un mot de passe et le confirmer."</string>
+    <string name="credentials_password_empty" msgid="8292138152983330473">"Veuillez entrer le mot de passe."</string>
+    <string name="credentials_password_too_short" msgid="7502749986405522663">"Le mot de passe doit contenir au moins 8 caractères."</string>
+    <string name="credentials_erased" msgid="7700309135582200849">"Le stockage des identifiants est effacé."</string>
+    <string name="credentials_enabled" msgid="7588607413349978930">"Stockage des identifiants activé"</string>
+    <string name="credentials_disabled" msgid="7453188089059045380">"Stockage des identifiants désactivé"</string>
     <string name="emergency_tone_title" msgid="1055954530111587114">"Sonnerie d\'urgence"</string>
     <string name="emergency_tone_summary" msgid="722259232924572153">"Définir le comportement en cas d\'appel d\'urgence"</string>
+    <string name="privacy_settings" msgid="9206631214140954954">"Confidentialité"</string>
+    <string name="privacy_settings_title" msgid="1987089301293213705">"Paramètres de confidentialité"</string>
+    <string name="location_section_title" msgid="6072558684044939786">"Localisation"</string>
+    <string name="settings_section_title" msgid="7413252428447723032">"Paramètres"</string>
+    <string name="personal_data_section_title" msgid="7815209034443782061">"Données personnelles"</string>
+    <string name="backup_settings_title" msgid="2968262658155327829">"Sauvegarder mes paramètres"</string>
+    <string name="backup_erase_dialog_title" msgid="6028429904055779443">"Sauvegarde des paramètres"</string>
+    <string name="backup_erase_dialog_message" msgid="9096433810456900531">"Voulez-vous vraiment arrêter de sauvegarder vos paramètres et supprimer toutes les copies des serveurs Google ?"</string>
 </resources>
