@@ -276,7 +276,7 @@ public class WifiSettings extends PreferenceActivity implements WifiLayer.Callba
         if (state == null) {
             return;
         }
-        menu.setHeaderTitle(state.getHumanReadableSsid());
+        menu.setHeaderTitle(state.ssid);
 
         if (state.isConnectable()) {
             menu.add(0, CONTEXT_MENU_ID_CONNECT, 0, R.string.wifi_context_menu_connect);
