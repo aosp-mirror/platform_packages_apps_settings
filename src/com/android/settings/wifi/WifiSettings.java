@@ -51,11 +51,11 @@ public class WifiSettings extends PreferenceActivity implements WifiLayer.Callba
         DialogInterface.OnDismissListener {
 
     private static final String TAG = "WifiSettings";
-    
+
     //============================
     // Preference/activity member variables
     //============================
-    
+
     private static final String INSTANCE_KEY_DIALOG_BUNDLE =
             "com.android.settings.wifi.WifiSettings:dialogBundle";
     /*
@@ -64,43 +64,44 @@ public class WifiSettings extends PreferenceActivity implements WifiLayer.Callba
      * dialog management only creates once.
      */
     private Dialog mDialog;
-    
+
+    private static final String KEY_ONLY_ACCESS_POINTS = "only_access_points";
     private static final String KEY_ADD_OTHER_NETWORK = "add_other_network";
 
     private static final int CONTEXT_MENU_ID_CONNECT = Menu.FIRST;
     private static final int CONTEXT_MENU_ID_FORGET = Menu.FIRST + 1;
     private static final int CONTEXT_MENU_ID_CHANGE_PASSWORD = Menu.FIRST + 2;
 
-    private static final int MENU_ID_SCAN = Menu.FIRST; 
-    private static final int MENU_ID_ADVANCED = Menu.FIRST + 1; 
-    
+    private static final int MENU_ID_SCAN = Menu.FIRST;
+    private static final int MENU_ID_ADVANCED = Menu.FIRST + 1;
+
     private static final String KEY_WIFI_ENABLED = "wifi_enabled";
     private static final String KEY_OPEN_NETWORK_NOTIFICATIONS_ENABLED =
             "open_network_notifications_enabled";
     private static final String KEY_ACCESS_POINTS = "access_points";
-    
+
     private ProgressCategory mApCategory;
     private CheckBoxPreference mWifiEnabled;
     private WifiEnabler mWifiEnabler;
-    private CheckBoxPreference mOpenNetworkNotificationsEnabled; 
+    private CheckBoxPreference mOpenNetworkNotificationsEnabled;
     private Preference mAddOtherNetwork;
-    
+
     private WeakHashMap<AccessPointState, AccessPointPreference> mAps;
 
     private KeyStore mKeyStore = KeyStore.getInstance();
     private AccessPointState mResumeState = null;
     private int mResumeMode;
-    
+
     //============================
     // Wifi member variables
     //============================
-    
+
     private WifiLayer mWifiLayer;
-        
+
     //============================
     // Activity lifecycle
     //============================
-    
+
     public WifiSettings() {
         mAps = new WeakHashMap<AccessPointState, AccessPointPreference>();
         mWifiLayer = new WifiLayer(this, this);
@@ -116,15 +117,23 @@ public class WifiSettings extends PreferenceActivity implements WifiLayer.Callba
         onCreatedWifi();
         mWifiLayer.onCreatedCallback();
     }
-    
+
+    private int getPreferenceResource() {
+        if (getIntent().getBooleanExtra(KEY_ONLY_ACCESS_POINTS, false)) {
+            return R.xml.wifi_access_points;
+        } else {
+            return R.xml.wifi_settings;
+        }
+    }
+
     /**
      * Shouldn't have any dependency on the wifi layer.
      */
     private void onCreatePreferences() {
-        addPreferencesFromResource(R.xml.wifi_settings);
-        
+        addPreferencesFromResource(getPreferenceResource());
+
         final PreferenceScreen preferenceScreen = getPreferenceScreen();
-        
+
         mApCategory = (ProgressCategory) preferenceScreen.findPreference(KEY_ACCESS_POINTS);
         // We don't want the ordering to be the order preferences are added,
         // instead we want*:
@@ -133,29 +142,33 @@ public class WifiSettings extends PreferenceActivity implements WifiLayer.Callba
         //   3) preferred, APs out of range
         //   * this ordering logic is in AccessPointPreference's compareTo
         mApCategory.setOrderingAsAdded(false);
-        
-        mWifiEnabled = (CheckBoxPreference) preferenceScreen.findPreference(KEY_WIFI_ENABLED);
-        mWifiEnabler = new WifiEnabler(this, (WifiManager) getSystemService(WIFI_SERVICE),
-                mWifiEnabled);
-        
-        mOpenNetworkNotificationsEnabled = (CheckBoxPreference) preferenceScreen
-                .findPreference(KEY_OPEN_NETWORK_NOTIFICATIONS_ENABLED);
-        mOpenNetworkNotificationsEnabled.setChecked(Settings.Secure.getInt(getContentResolver(),
-            Settings.Secure.WIFI_NETWORKS_AVAILABLE_NOTIFICATION_ON, 0) == 1);        
-        
+
+        if (!getIntent().getBooleanExtra("only_access_points", false)) {
+            mWifiEnabled = (CheckBoxPreference) preferenceScreen.findPreference(KEY_WIFI_ENABLED);
+            mWifiEnabler = new WifiEnabler(this, (WifiManager) getSystemService(WIFI_SERVICE),
+                    mWifiEnabled);
+
+            mOpenNetworkNotificationsEnabled = (CheckBoxPreference) preferenceScreen
+                    .findPreference(KEY_OPEN_NETWORK_NOTIFICATIONS_ENABLED);
+            mOpenNetworkNotificationsEnabled.setChecked(Settings.Secure.getInt(getContentResolver(),
+                    Settings.Secure.WIFI_NETWORKS_AVAILABLE_NOTIFICATION_ON, 0) == 1);
+        }
+
         mAddOtherNetwork = preferenceScreen.findPreference(KEY_ADD_OTHER_NETWORK);
-        
+
         registerForContextMenu(getListView());
     }
 
     private void onCreatedWifi() {
     }
-    
+
     @Override
     protected void onResume() {
         super.onResume();
         mWifiLayer.onResume();
-        mWifiEnabler.resume();
+        if (mWifiEnabler != null) {
+            mWifiEnabler.resume();
+        }
         // do what we should have after keystore is unlocked.
         if (mResumeState != null) {
             if (mKeyStore.test() == KeyStore.NO_ERROR) {
@@ -176,13 +189,15 @@ public class WifiSettings extends PreferenceActivity implements WifiLayer.Callba
     protected void onPause() {
         super.onPause();
         mWifiLayer.onPause();
-        mWifiEnabler.pause();
+        if (mWifiEnabler != null) {
+            mWifiEnabler.pause();
+        }
     }
 
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        
+
         if (mDialog != null) {
             mDialog.dismiss();
         }
@@ -191,31 +206,31 @@ public class WifiSettings extends PreferenceActivity implements WifiLayer.Callba
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         super.onCreateOptionsMenu(menu);
-        
+
         menu.add(0, MENU_ID_SCAN, 0, R.string.scan_wifi)
             .setIcon(R.drawable.ic_menu_scan_network);
-        
+
         menu.add(0, MENU_ID_ADVANCED, 0, R.string.wifi_menu_advanced)
             .setIcon(android.R.drawable.ic_menu_manage);
-        
+
         return true;
     }
-    
+
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         super.onOptionsItemSelected(item);
-        
+
         switch (item.getItemId()) {
 
             case MENU_ID_SCAN:
                 mWifiLayer.attemptScan();
                 return true;
-                
+
             case MENU_ID_ADVANCED:
                 Intent intent = new Intent(this, AdvancedSettings.class);
                 startActivity(intent);
                 return true;
-                
+
             default:
                 return false;
         }
@@ -224,7 +239,7 @@ public class WifiSettings extends PreferenceActivity implements WifiLayer.Callba
     @Override
     protected void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
-        
+
         if (mDialog != null) {
             Bundle dialogBundle = mDialog.onSaveInstanceState();
             outState.putBundle(INSTANCE_KEY_DIALOG_BUNDLE, dialogBundle);
@@ -234,7 +249,7 @@ public class WifiSettings extends PreferenceActivity implements WifiLayer.Callba
     @Override
     protected void onRestoreInstanceState(Bundle state) {
         super.onRestoreInstanceState(state);
-        
+
         Bundle dialogBundle = state.getBundle(INSTANCE_KEY_DIALOG_BUNDLE);
         if (dialogBundle != null) {
             mDialog = new AccessPointDialog(this, mWifiLayer);
@@ -256,21 +271,20 @@ public class WifiSettings extends PreferenceActivity implements WifiLayer.Callba
     @Override
     public void onCreateContextMenu(ContextMenu menu, View v, ContextMenuInfo menuInfo) {
         super.onCreateContextMenu(menu, v, menuInfo);
-     
+
         AccessPointState state = getStateFromMenuInfo(menuInfo);
         if (state == null) {
             return;
         }
-     
-        menu.setHeaderTitle(state.ssid);
-        
+        menu.setHeaderTitle(state.getHumanReadableSsid());
+
         if (state.isConnectable()) {
             menu.add(0, CONTEXT_MENU_ID_CONNECT, 0, R.string.wifi_context_menu_connect);
         }
-        
+
         if (state.isForgetable()) {
             menu.add(0, CONTEXT_MENU_ID_FORGET, 1, R.string.wifi_context_menu_forget);
-            
+
             if (state.hasPassword()) {
                 menu.add(0, CONTEXT_MENU_ID_CHANGE_PASSWORD, 2,
                         R.string.wifi_context_menu_change_password);
@@ -287,19 +301,19 @@ public class WifiSettings extends PreferenceActivity implements WifiLayer.Callba
         }
 
         switch (item.getItemId()) {
-            
+
             case CONTEXT_MENU_ID_CONNECT:
                 connectToNetwork(state);
                 return true;
-                
+
             case CONTEXT_MENU_ID_FORGET:
                 mWifiLayer.forgetNetwork(state);
                 return true;
-                
+
             case CONTEXT_MENU_ID_CHANGE_PASSWORD:
                 showAccessPointDialog(state, AccessPointDialog.MODE_CONFIGURE);
                 return true;
-                
+
             default:
                 return false;
         }
@@ -317,12 +331,12 @@ public class WifiSettings extends PreferenceActivity implements WifiLayer.Callba
             mWifiLayer.connectToNetwork(state);
         }
     }
-    
+
     private AccessPointState getStateFromMenuInfo(ContextMenuInfo menuInfo) {
         if ((menuInfo == null) || !(menuInfo instanceof AdapterContextMenuInfo)) {
             return null;
         }
-        
+
         AdapterContextMenuInfo adapterMenuInfo = (AdapterContextMenuInfo) menuInfo;
         Preference pref = (Preference) getPreferenceScreen().getRootAdapter().getItem(
                 adapterMenuInfo.position);
@@ -332,11 +346,11 @@ public class WifiSettings extends PreferenceActivity implements WifiLayer.Callba
 
         return ((AccessPointPreference) pref).getAccessPointState();
     }
-    
+
     //============================
     // Preference callbacks
     //============================
-    
+
     @Override
     public boolean onPreferenceTreeClick(PreferenceScreen preferenceScreen, Preference preference) {
         super.onPreferenceTreeClick(preferenceScreen, preference);
@@ -351,10 +365,10 @@ public class WifiSettings extends PreferenceActivity implements WifiLayer.Callba
             AccessPointState state = ((AccessPointPreference) preference).getAccessPointState();
             showAccessPointDialog(state, AccessPointDialog.MODE_INFO);
         }
-        
+
         return false;
     }
-    
+
     //============================
     // Wifi-related
     //============================
@@ -372,7 +386,7 @@ public class WifiSettings extends PreferenceActivity implements WifiLayer.Callba
         mResumeMode = AccessPointDialog.MODE_CONFIGURE;
         showDialog(dialog);
     }
-    
+
     public void showAccessPointDialog(AccessPointState state, int mode) {
         if (state.isEnterprise() && mKeyStore.test() != KeyStore.NO_ERROR) {
             Credentials.getInstance().unlock(this);
@@ -391,14 +405,14 @@ public class WifiSettings extends PreferenceActivity implements WifiLayer.Callba
         if (mDialog != null) {
             mDialog.dismiss();
         }
-        
+
         mDialog = dialog;
         if (dialog != null) {
             dialog.setOnDismissListener(this);
             dialog.show();
         }
     }
-    
+
     //============================
     // Wifi callbacks
     //============================
@@ -409,36 +423,36 @@ public class WifiSettings extends PreferenceActivity implements WifiLayer.Callba
 
     public void onScanningStatusChanged(boolean started) {
         mApCategory.setProgress(started);
-    }    
+    }
 
     public void onAccessPointSetChanged(AccessPointState ap, boolean added) {
 
         AccessPointPreference pref = mAps.get(ap);
-        
+
         if (WifiLayer.LOGV) {
             Log.v(TAG, "onAccessPointSetChanged with " + ap + " and "
                     + (added ? "added" : "removed") + ", found pref " + pref);
         }
-        
+
         if (added) {
-            
+
             if (pref == null) {
                 pref = new AccessPointPreference(this, ap);
                 mAps.put(ap, pref);
             } else {
                 pref.setEnabled(true);
             }
-            
+
             mApCategory.addPreference(pref);
-            
+
         } else {
 
             mAps.remove(ap);
-            
+
             if (pref != null) {
                 mApCategory.removePreference(pref);
             }
-            
+
         }
     }
 
@@ -459,8 +473,8 @@ public class WifiSettings extends PreferenceActivity implements WifiLayer.Callba
             // If we're already showing a dialog, ignore this request
             return;
         }
-        
+
         showAccessPointDialog(ap, AccessPointDialog.MODE_RETRY_PASSWORD);
     }
-    
+
 }
