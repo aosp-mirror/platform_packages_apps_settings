@@ -28,8 +28,10 @@ import android.security.KeyStore;
 import android.net.wifi.WifiInfo;
 import android.net.wifi.WifiManager;
 import android.os.Bundle;
+import android.text.Editable;
 import android.text.InputType;
 import android.text.TextUtils;
+import android.text.TextWatcher;
 import android.text.format.Formatter;
 import android.text.method.PasswordTransformationMethod;
 import android.text.method.TransformationMethod;
@@ -38,6 +40,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.Spinner;
@@ -143,8 +146,32 @@ public class AccessPointDialog extends AlertDialog implements DialogInterface.On
         onFill();
 
         super.onCreate(savedInstanceState);
+
+        if (mMode == MODE_CONFIGURE) {
+            Button saveButton = getButton(mSaveButtonPos);
+            saveButton.setEnabled(false);
+            saveButton.setFocusable(false);
+        }
     }
-    
+
+    private final TextWatcher mSsidEditorWatcher = new TextWatcher() {
+        public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+        }
+        public void onTextChanged(CharSequence s, int start, int before, int count) {
+            if (mSaveButtonPos != Integer.MAX_VALUE) {
+                boolean enable = true;
+                if (s.length() == 0) {
+                    enable = false;
+                }
+                Button saveButton = getButton(mSaveButtonPos);
+                saveButton.setEnabled(enable);
+                saveButton.setFocusable(enable);
+            }
+        }
+        public void afterTextChanged(Editable s) {
+        }
+    };
+
     @Override
     public void onRestoreInstanceState(Bundle savedInstanceState) {
         // Set to a class loader that can find AccessPointState
@@ -237,7 +264,7 @@ public class AccessPointDialog extends AlertDialog implements DialogInterface.On
         setInverseBackgroundForced(true);
 
         boolean defaultPasswordVisibility = true;
-        
+
         if (mMode == MODE_CONFIGURE) {
             setLayout(R.layout.wifi_ap_configure);
 
@@ -274,10 +301,10 @@ public class AccessPointDialog extends AlertDialog implements DialogInterface.On
             }
         } else if (mMode == MODE_RETRY_PASSWORD) {
             setLayout(R.layout.wifi_ap_retry_password);
-            
+
             positiveButtonResId = R.string.connect;
             mConnectButtonPos = POSITIVE_BUTTON;
-            
+
             setGenericPasswordVisible(true);
             defaultPasswordVisibility = false;
         }
@@ -289,8 +316,9 @@ public class AccessPointDialog extends AlertDialog implements DialogInterface.On
                 setGenericPasswordVisible(false);
             }
         }
-        
+
         setButtons(positiveButtonResId, negativeButtonResId, neutralButtonResId);
+
     }
 
     /** Called when we need to set our member variables to point to the views. */
@@ -299,6 +327,9 @@ public class AccessPointDialog extends AlertDialog implements DialogInterface.On
         mPasswordEdit = (EditText) view.findViewById(R.id.password_edit);
         mSsidText = (TextView) view.findViewById(R.id.ssid_text);
         mSsidEdit = (EditText) view.findViewById(R.id.ssid_edit);
+        if (mSsidEdit != null) {
+            mSsidEdit.addTextChangedListener(mSsidEditorWatcher);
+        }
         mSecurityText = (TextView) view.findViewById(R.id.security_text);
         mSecuritySpinner = (Spinner) view.findViewById(R.id.security_spinner);
         mWepTypeSpinner = (Spinner) view.findViewById(R.id.wep_type_spinner);
