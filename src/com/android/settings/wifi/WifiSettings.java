@@ -143,7 +143,7 @@ public class WifiSettings extends PreferenceActivity implements WifiLayer.Callba
         //   * this ordering logic is in AccessPointPreference's compareTo
         mApCategory.setOrderingAsAdded(false);
 
-        if (!getIntent().getBooleanExtra("only_access_points", false)) {
+        if (!getIntent().getBooleanExtra(KEY_ONLY_ACCESS_POINTS, false)) {
             mWifiEnabled = (CheckBoxPreference) preferenceScreen.findPreference(KEY_WIFI_ENABLED);
             mWifiEnabler = new WifiEnabler(this, (WifiManager) getSystemService(WIFI_SERVICE),
                     mWifiEnabled);
