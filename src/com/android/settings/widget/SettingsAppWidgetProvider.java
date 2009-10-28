@@ -144,40 +144,51 @@ public class SettingsAppWidgetProvider extends AppWidgetProvider {
     private static void updateButtons(RemoteViews views, Context context) {
         switch (getWifiState(context)) {
             case STATE_DISABLED:
-                views.setImageViewResource(R.id.btn_wifi, R.drawable.widget_btn_wifi_off);
+                views.setImageViewResource(R.id.img_wifi, R.drawable.ic_appwidget_settings_wifi_off);
+                views.setImageViewResource(R.id.ind_wifi, R.drawable.appwidget_settings_ind_off_l);
                 break;
             case STATE_ENABLED:
-                views.setImageViewResource(R.id.btn_wifi, R.drawable.widget_btn_wifi);
+                views.setImageViewResource(R.id.img_wifi, R.drawable.ic_appwidget_settings_wifi_on);
+                views.setImageViewResource(R.id.ind_wifi, R.drawable.appwidget_settings_ind_on_l);
                 break;
             case STATE_INTERMEDIATE:
-                views.setImageViewResource(R.id.btn_wifi, R.drawable.widget_btn_wifi_gray);
+                views.setImageViewResource(R.id.img_wifi, R.drawable.ic_appwidget_settings_wifi_off);
+                views.setImageViewResource(R.id.ind_wifi, R.drawable.appwidget_settings_ind_mid_l);
                 break;
         }
         if (getBrightness(context)) {
-            views.setImageViewResource(R.id.btn_brightness, R.drawable.widget_btn_brightness);
+            views.setImageViewResource(R.id.img_brightness, R.drawable.ic_appwidget_settings_brightness_on);
+            views.setImageViewResource(R.id.ind_brightness, R.drawable.appwidget_settings_ind_on_r);
         } else {
-            views.setImageViewResource(R.id.btn_brightness, R.drawable.widget_btn_brightness_off);
+            views.setImageViewResource(R.id.img_brightness, R.drawable.ic_appwidget_settings_brightness_off);
+            views.setImageViewResource(R.id.ind_brightness, R.drawable.appwidget_settings_ind_off_r);
         }
         if (getSync(context)) {
-            views.setImageViewResource(R.id.btn_sync, R.drawable.widget_btn_sync);
+            views.setImageViewResource(R.id.img_sync, R.drawable.ic_appwidget_settings_sync_on);
+            views.setImageViewResource(R.id.ind_sync, R.drawable.appwidget_settings_ind_on_c);
         } else {
-            views.setImageViewResource(R.id.btn_sync, R.drawable.widget_btn_sync_off);
+            views.setImageViewResource(R.id.img_sync, R.drawable.ic_appwidget_settings_sync_off);
+            views.setImageViewResource(R.id.ind_sync, R.drawable.appwidget_settings_ind_off_c);
         }
         if (getGpsState(context)) {
-            views.setImageViewResource(R.id.btn_gps, R.drawable.widget_btn_gps);
+            views.setImageViewResource(R.id.img_gps, R.drawable.ic_appwidget_settings_gps_on);
+            views.setImageViewResource(R.id.ind_gps, R.drawable.appwidget_settings_ind_on_c);
         } else {
-            views.setImageViewResource(R.id.btn_gps, R.drawable.widget_btn_gps_off);
+            views.setImageViewResource(R.id.img_gps, R.drawable.ic_appwidget_settings_gps_off);
+            views.setImageViewResource(R.id.ind_gps, R.drawable.appwidget_settings_ind_off_c);
         }
         switch (getBluetoothState(context)) {
             case STATE_DISABLED:
-                views.setImageViewResource(R.id.btn_bluetooth, R.drawable.widget_btn_bluetooth_off);
+                views.setImageViewResource(R.id.img_bluetooth, R.drawable.ic_appwidget_settings_bluetooth_off);
+                views.setImageViewResource(R.id.ind_bluetooth, R.drawable.appwidget_settings_ind_off_c);
                 break;
             case STATE_ENABLED:
-                views.setImageViewResource(R.id.btn_bluetooth, R.drawable.widget_btn_bluetooth);
+                views.setImageViewResource(R.id.img_bluetooth, R.drawable.ic_appwidget_settings_bluetooth_on);
+                views.setImageViewResource(R.id.ind_bluetooth, R.drawable.appwidget_settings_ind_on_c);
                 break;
             case STATE_INTERMEDIATE:
-                views.setImageViewResource(R.id.btn_bluetooth,
-                        R.drawable.widget_btn_bluetooth_gray);
+                views.setImageViewResource(R.id.img_bluetooth, R.drawable.ic_appwidget_settings_bluetooth_off);
+                views.setImageViewResource(R.id.ind_bluetooth, R.drawable.appwidget_settings_ind_mid_c);
                 break;
         }
     }
