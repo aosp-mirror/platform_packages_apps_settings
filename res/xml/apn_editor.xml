@@ -101,6 +101,12 @@
         android:singleLine="true"
         android:inputType="number"
         />
+    <ListPreference
+        android:title="@string/apn_auth_type"
+        android:key="auth_type"
+        android:entries="@array/apn_auth_entries"
+        android:entryValues="@array/apn_auth_values"
+        />
     <EditTextPreference
         android:title="@string/apn_type"
         android:dialogTitle="@string/apn_type"
