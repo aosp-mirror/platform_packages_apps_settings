@@ -105,7 +105,7 @@
 
         <activity android:name="ApnSettings" android:label="@string/apn_settings"
                   android:configChanges="orientation|keyboardHidden"
-                  android:launchMode="singleInstance" 
+                  android:launchMode="singleTask"
                 >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
