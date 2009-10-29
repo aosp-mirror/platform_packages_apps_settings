@@ -120,8 +120,9 @@ public class BrightnessPreference extends SeekBarPreference implements
             if (mAutomaticAvailable) {
                 setMode(mOldAutomatic);
             }
-            // brightness needs to be restored after restoring ALS mode
-            setBrightness(mOldBrightness);
+            if (!mAutomaticAvailable || mOldAutomatic == 0) {
+                setBrightness(mOldBrightness);
+            }
         }
     }
     
