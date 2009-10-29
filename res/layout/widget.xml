@@ -14,51 +14,166 @@
      limitations under the License.
 -->
 
-    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        android:id="@+id/main"
-        android:layout_width="@dimen/appwidget_width"
-        android:layout_height="@dimen/appwidget_height"
-        android:gravity="center"
-        android:background="@drawable/appwidget_bg" >
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/main"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:gravity="center"
+    android:background="@drawable/appwidget_bg" >
 
-        <ImageButton
-            android:id="@+id/btn_wifi"
-            android:layout_width="57dip"
-            android:layout_height="fill_parent"
-            android:background="@drawable/appwidget_outer"
-            android:layout_gravity="center_horizontal"
+    <LinearLayout
+        android:id="@+id/btn_wifi"
+        android:layout_width="0dip"
+        android:layout_weight="1"
+        android:layout_height="fill_parent"
+        android:background="@drawable/appwidget_button_left"
+        android:clickable="true"
+        android:focusable="true"
+        android:orientation="vertical">
+
+        <ImageView
+            android:id="@+id/img_wifi"
+            android:layout_width="fill_parent"
+            android:layout_height="0dip"
+            android:layout_weight="1"
+            android:scaleType="center"
+            />
+
+        <ImageView
+            android:id="@+id/ind_wifi"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:scaleType="fitXY"
+            />
+        </LinearLayout>
+
+    <ImageView
+        android:layout_width="1dip"
+        android:layout_height="fill_parent"
+        android:background="@drawable/appwidget_settings_divider"
         />
 
-        <ImageButton
-            android:id="@+id/btn_bluetooth"
-            android:layout_width="57dip"
-            android:layout_height="fill_parent"
-            android:background="@drawable/appwidget_inner"
-            android:layout_gravity="center_horizontal"
-        />
+    <LinearLayout
+        android:id="@+id/btn_bluetooth"
+        android:layout_width="0dip"
+        android:layout_weight="1"
+        android:layout_height="fill_parent"
+        android:background="@drawable/appwidget_button_center"
+        android:clickable="true"
+        android:focusable="true"
+        android:orientation="vertical">
 
-        <ImageButton
-            android:id="@+id/btn_gps"
-            android:layout_width="57dip"
-            android:layout_height="fill_parent"
-            android:background="@drawable/appwidget_inner"
-            android:layout_gravity="center_horizontal"
-        />
+        <ImageView
+            android:id="@+id/img_bluetooth"
+            android:layout_width="fill_parent"
+            android:layout_height="0dip"
+            android:layout_weight="1"
+            android:scaleType="center"
+            />
 
-        <ImageButton
-            android:id="@+id/btn_sync"
-            android:layout_width="57dip"
-            android:layout_height="fill_parent"
-            android:background="@drawable/appwidget_inner"
-            android:layout_gravity="center_horizontal"
-        />
-
-        <ImageButton
-            android:id="@+id/btn_brightness"
-            android:layout_width="57dip"
-            android:layout_height="fill_parent"
-            android:background="@drawable/appwidget_inner"
-            android:layout_gravity="center_horizontal"
-        />
+        <ImageView
+            android:id="@+id/ind_bluetooth"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:scaleType="fitXY"
+            />
 
     </LinearLayout>
+
+    <ImageView
+        android:layout_width="1dip"
+        android:layout_height="fill_parent"
+        android:background="@drawable/appwidget_settings_divider"
+        />
+
+    <LinearLayout
+        android:id="@+id/btn_gps"
+        android:layout_width="0dip"
+        android:layout_weight="1"
+        android:layout_height="fill_parent"
+        android:background="@drawable/appwidget_button_center"
+        android:clickable="true"
+        android:focusable="true"
+        android:orientation="vertical">
+
+        <ImageView
+            android:id="@+id/img_gps"
+            android:layout_width="fill_parent"
+            android:layout_height="0dip"
+            android:layout_weight="1"
+            android:scaleType="center"
+            />
+
+        <ImageView
+            android:id="@+id/ind_gps"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:scaleType="fitXY"
+            />
+    </LinearLayout>
+
+    <ImageView
+        android:layout_width="1dip"
+        android:layout_height="fill_parent"
+        android:background="@drawable/appwidget_settings_divider"
+        />    
+
+    <LinearLayout
+        android:id="@+id/btn_sync"
+        android:layout_width="0dip"
+        android:layout_weight="1"
+        android:layout_height="fill_parent"
+        android:background="@drawable/appwidget_button_center"
+        android:clickable="true"
+        android:focusable="true"
+        android:orientation="vertical">
+
+        <ImageView
+            android:id="@+id/img_sync"
+            android:layout_width="fill_parent"
+            android:layout_height="0dip"
+            android:layout_weight="1"
+            android:scaleType="center"
+            />
+
+        <ImageView
+            android:id="@+id/ind_sync"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:scaleType="fitXY"
+            />
+    </LinearLayout>
+
+    <ImageView
+        android:layout_width="1dip"
+        android:layout_height="fill_parent"
+        android:background="@drawable/appwidget_settings_divider"
+        />
+
+    <LinearLayout
+        android:id="@+id/btn_brightness"
+        android:layout_width="0dip"
+        android:layout_weight="1"
+        android:layout_height="fill_parent"
+        android:background="@drawable/appwidget_button_right"
+        android:clickable="true"
+        android:focusable="true"
+        android:orientation="vertical">
+
+        <ImageView
+            android:id="@+id/img_brightness"
+            android:layout_width="fill_parent"
+            android:layout_height="0dip"
+            android:layout_weight="1"
+            android:scaleType="center"
+            />
+
+        <ImageView
+            android:id="@+id/ind_brightness"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:scaleType="fitXY"
+            />
+    </LinearLayout>
+
+</LinearLayout>
