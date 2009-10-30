@@ -150,7 +150,7 @@ public class ApnEditor extends PreferenceActivity
         if (action.equals(Intent.ACTION_EDIT)) {
             mUri = intent.getData();
         } else if (action.equals(Intent.ACTION_INSERT)) {
-            if (mFirstTime) {
+            if (mFirstTime || icicle.getInt(SAVED_POS) == 0) {
                 mUri = getContentResolver().insert(intent.getData(), new ContentValues());
             } else {
                 mUri = ContentUris.withAppendedId(Telephony.Carriers.CONTENT_URI,
@@ -185,12 +185,14 @@ public class ApnEditor extends PreferenceActivity
     @Override
     public void onResume() {
         super.onResume();
-        getPreferenceScreen().getSharedPreferences().registerOnSharedPreferenceChangeListener(this);
+        getPreferenceScreen().getSharedPreferences()
+                .registerOnSharedPreferenceChangeListener(this);
     }
 
     @Override
     public void onPause() {
-        getPreferenceScreen().getSharedPreferences().unregisterOnSharedPreferenceChangeListener(this);
+        getPreferenceScreen().getSharedPreferences()
+                .unregisterOnSharedPreferenceChangeListener(this);
         super.onPause();
     }
 
@@ -328,8 +330,9 @@ public class ApnEditor extends PreferenceActivity
     @Override
     protected void onSaveInstanceState(Bundle icicle) {
         super.onSaveInstanceState(icicle);
-        validateAndSave(true);
-        icicle.putInt(SAVED_POS, mCursor.getInt(ID_INDEX));
+        if (validateAndSave(true)) {
+            icicle.putInt(SAVED_POS, mCursor.getInt(ID_INDEX));
+        }
     }
 
     /**
@@ -366,9 +369,18 @@ public class ApnEditor extends PreferenceActivity
             return false;
         }
 
+        // If it's a new APN and a name or apn haven't been entered, then erase the entry
+        if (force && mNewApn && name.length() < 1 && apn.length() < 1) {
+            getContentResolver().delete(mUri, null, null);
+            return false;
+        }
+
         ContentValues values = new ContentValues();
 
-        values.put(Telephony.Carriers.NAME, name);
+        // Add a dummy name "Untitled", if the user exits the screen without adding a name but 
+        // entered other information worth keeping.
+        values.put(Telephony.Carriers.NAME,
+                name.length() < 1 ? getResources().getString(R.string.untitled_apn) : name);
         values.put(Telephony.Carriers.APN, apn);
         values.put(Telephony.Carriers.PROXY, checkNotSet(mProxy.getText()));
         values.put(Telephony.Carriers.PORT, checkNotSet(mPort.getText()));
