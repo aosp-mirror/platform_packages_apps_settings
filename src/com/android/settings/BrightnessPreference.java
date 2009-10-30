@@ -62,7 +62,6 @@ public class BrightnessPreference extends SeekBarPreference implements
         super.onBindDialogView(view);
 
         mSeekBar = getSeekBar(view);
-        mSeekBar.setOnSeekBarChangeListener(this);
         mSeekBar.setMax(MAXIMUM_BACKLIGHT - MINIMUM_BACKLIGHT);
         try {
             mOldBrightness = Settings.System.getInt(getContext().getContentResolver(), 
@@ -85,6 +84,7 @@ public class BrightnessPreference extends SeekBarPreference implements
         } else {
             mCheckBox.setVisibility(View.GONE);
         }
+        mSeekBar.setOnSeekBarChangeListener(this);
     }
 
     public void onProgressChanged(SeekBar seekBar, int progress,
