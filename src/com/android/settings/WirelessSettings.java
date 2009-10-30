@@ -16,21 +16,23 @@
 
 package com.android.settings;
 
-import com.android.settings.bluetooth.BluetoothEnabler;
-import com.android.settings.wifi.WifiEnabler;
-
+import android.bluetooth.BluetoothAdapter;
 import android.content.Intent;
 import android.net.wifi.WifiManager;
 import android.os.Bundle;
+import android.os.IBinder;
+import android.os.ServiceManager;
 import android.os.SystemProperties;
 import android.preference.CheckBoxPreference;
 import android.preference.Preference;
-import android.preference.PreferenceScreen;
 import android.preference.PreferenceActivity;
+import android.preference.PreferenceScreen;
 import android.provider.Settings;
 
 import com.android.internal.telephony.TelephonyIntents;
 import com.android.internal.telephony.TelephonyProperties;
+import com.android.settings.bluetooth.BluetoothEnabler;
+import com.android.settings.wifi.WifiEnabler;
 
 public class WirelessSettings extends PreferenceActivity {
 
@@ -38,6 +40,7 @@ public class WirelessSettings extends PreferenceActivity {
     private static final String KEY_TOGGLE_BLUETOOTH = "toggle_bluetooth";
     private static final String KEY_TOGGLE_WIFI = "toggle_wifi";
     private static final String KEY_WIFI_SETTINGS = "wifi_settings";
+    private static final String KEY_BT_SETTINGS = "bt_settings";
     private static final String KEY_VPN_SETTINGS = "vpn_settings";
     public static final String EXIT_ECM_RESULT = "exit_ecm_result";
     public static final int REQUEST_CODE_EXIT_ECM = 1;
@@ -105,6 +108,13 @@ public class WirelessSettings extends PreferenceActivity {
         Preference btPreference = findPreference(KEY_TOGGLE_BLUETOOTH);
         Preference wifiSettings = findPreference(KEY_WIFI_SETTINGS);
         Preference vpnSettings = findPreference(KEY_VPN_SETTINGS);
+
+        IBinder b = ServiceManager.getService(BluetoothAdapter.BLUETOOTH_SERVICE);
+        if (b == null) {
+            // Disable BT Settings if BT service is not available.
+            Preference btSettings = findPreference(KEY_BT_SETTINGS);
+            btSettings.setEnabled(false);
+        }
 
         mWifiEnabler = new WifiEnabler(
                 this, (WifiManager) getSystemService(WIFI_SERVICE),
