@@ -616,12 +616,16 @@ public class CachedBluetoothDevice implements Comparable<CachedBluetoothDevice> 
     }
 
     public int getBtClassDrawable() {
-        switch (mBtClass.getMajorDeviceClass()) {
-        case BluetoothClass.Device.Major.COMPUTER:
-            return R.drawable.ic_bt_laptop;
+        if (mBtClass != null) {
+            switch (mBtClass.getMajorDeviceClass()) {
+            case BluetoothClass.Device.Major.COMPUTER:
+                return R.drawable.ic_bt_laptop;
 
-        case BluetoothClass.Device.Major.PHONE:
-            return R.drawable.ic_bt_cellphone;
+            case BluetoothClass.Device.Major.PHONE:
+                return R.drawable.ic_bt_cellphone;
+            }
+        } else {
+            Log.w(TAG, "mBtClass is null");
         }
 
         if (mProfiles.size() > 0) {
@@ -630,7 +634,7 @@ public class CachedBluetoothDevice implements Comparable<CachedBluetoothDevice> 
             } else if (mProfiles.contains(Profile.HEADSET)) {
                 return R.drawable.ic_bt_headset_hfp;
             }
-        } else {
+        } else if (mBtClass != null) {
             if (mBtClass.doesClassMatch(BluetoothClass.PROFILE_A2DP)) {
                 return R.drawable.ic_bt_headphones_a2dp;
 
