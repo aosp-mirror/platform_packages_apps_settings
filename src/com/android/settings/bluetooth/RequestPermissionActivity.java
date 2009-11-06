@@ -16,6 +16,11 @@
 
 package com.android.settings.bluetooth;
 
+import com.android.internal.app.AlertActivity;
+import com.android.internal.app.AlertController;
+import com.android.settings.R;
+
+import android.app.Activity;
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
 import android.content.BroadcastReceiver;
@@ -28,10 +33,6 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
-
-import com.android.internal.app.AlertActivity;
-import com.android.internal.app.AlertController;
-import com.android.settings.R;
 
 /**
  * RequestPermissionActivity asks the user whether to enable discovery. This is
@@ -46,12 +47,6 @@ public class RequestPermissionActivity extends AlertActivity implements
     private static final String TAG = "RequestPermissionActivity";
 
     private static final int MAX_DISCOVERABLE_TIMEOUT = 300;
-
-    // Result code: Error
-    public static final int RESULT_ERROR = -2;
-
-    // Result code: User rejected the request
-    public static final int RESULT_USER_DENIED = -1;
 
     // Non-error return code: BT is starting or has started successfully. Used
     // by this Activity and RequestPermissionHelperActivity
@@ -180,7 +175,7 @@ public class RequestPermissionActivity extends AlertActivity implements
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (requestCode != REQUEST_CODE_START_BT) {
             Log.e(TAG, "Unexpected onActivityResult " + requestCode + " " + resultCode);
-            setResult(RESULT_ERROR);
+            setResult(Activity.RESULT_CANCELED);
             finish();
             return;
         }
@@ -208,7 +203,7 @@ public class RequestPermissionActivity extends AlertActivity implements
                 break;
 
             case DialogInterface.BUTTON_NEGATIVE:
-                setResult(RESULT_USER_DENIED);
+                setResult(Activity.RESULT_CANCELED);
                 break;
         }
     }
@@ -218,14 +213,18 @@ public class RequestPermissionActivity extends AlertActivity implements
 
         if (mEnableOnly) {
             // BT enabled. Done
-            returnCode = 0;
+            returnCode = Activity.RESULT_OK;
         } else if (mLocalManager.getBluetoothAdapter().setScanMode(
                 BluetoothAdapter.SCAN_MODE_CONNECTABLE_DISCOVERABLE, mTimeout)) {
             // If already in discoverable mode, this will extend the timeout.
             persistDiscoverableEndTimestamp(System.currentTimeMillis() + mTimeout * 1000);
             returnCode = mTimeout;
+            // Activity.RESULT_FIRST_USER should be 1
+            if (returnCode < Activity.RESULT_FIRST_USER) {
+                returnCode = Activity.RESULT_FIRST_USER;
+            }
         } else {
-            returnCode = RESULT_ERROR;
+            returnCode = Activity.RESULT_CANCELED;
         }
 
         setResult(returnCode);
@@ -254,14 +253,14 @@ public class RequestPermissionActivity extends AlertActivity implements
             Log.e(TAG, "Error: this activity may be started only with intent "
                     + BluetoothAdapter.ACTION_REQUEST_ENABLE + " or "
                     + BluetoothAdapter.ACTION_REQUEST_DISCOVERABLE);
-            setResult(RESULT_ERROR);
+            setResult(Activity.RESULT_CANCELED);
             return true;
         }
 
         mLocalManager = LocalBluetoothManager.getInstance(this);
         if (mLocalManager == null) {
             Log.e(TAG, "Error: there's a problem starting bluetooth");
-            setResult(RESULT_ERROR);
+            setResult(Activity.RESULT_CANCELED);
             return true;
         }
 
@@ -284,7 +283,7 @@ public class RequestPermissionActivity extends AlertActivity implements
 
     @Override
     public void onBackPressed() {
-        setResult(RequestPermissionActivity.RESULT_USER_DENIED);
+        setResult(Activity.RESULT_CANCELED);
         super.onBackPressed();
     }
 }
