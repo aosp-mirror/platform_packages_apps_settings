@@ -16,6 +16,11 @@
 
 package com.android.settings.bluetooth;
 
+import com.android.internal.app.AlertActivity;
+import com.android.internal.app.AlertController;
+import com.android.settings.R;
+
+import android.app.Activity;
 import android.bluetooth.BluetoothAdapter;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -23,10 +28,6 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
-
-import com.android.internal.app.AlertActivity;
-import com.android.internal.app.AlertController;
-import com.android.settings.R;
 
 /**
  * RequestPermissionHelperActivity asks the user whether to enable discovery.
@@ -107,12 +108,12 @@ public class RequestPermissionHelperActivity extends AlertActivity implements
                         || mLocalManager.getBluetoothAdapter().enable()) {
                     returnCode = RequestPermissionActivity.RESULT_BT_STARTING_OR_STARTED;
                 } else {
-                    returnCode = RequestPermissionActivity.RESULT_ERROR;
+                    returnCode = Activity.RESULT_CANCELED;
                 }
                 break;
 
             case DialogInterface.BUTTON_NEGATIVE:
-                returnCode = RequestPermissionActivity.RESULT_USER_DENIED;
+                returnCode = Activity.RESULT_CANCELED;
                 break;
             default:
                 return;
@@ -131,14 +132,14 @@ public class RequestPermissionHelperActivity extends AlertActivity implements
             mTimeout = intent.getIntExtra(BluetoothAdapter.EXTRA_DISCOVERABLE_DURATION,
                     BluetoothDiscoverableEnabler.DEFAULT_DISCOVERABLE_TIMEOUT);
         } else {
-            setResult(RequestPermissionActivity.RESULT_ERROR);
+            setResult(Activity.RESULT_CANCELED);
             return true;
         }
 
         mLocalManager = LocalBluetoothManager.getInstance(this);
         if (mLocalManager == null) {
             Log.e(TAG, "Error: there's a problem starting bluetooth");
-            setResult(RequestPermissionActivity.RESULT_ERROR);
+            setResult(Activity.RESULT_CANCELED);
             return true;
         }
 
@@ -147,7 +148,7 @@ public class RequestPermissionHelperActivity extends AlertActivity implements
 
     @Override
     public void onBackPressed() {
-        setResult(RequestPermissionActivity.RESULT_USER_DENIED);
+        setResult(Activity.RESULT_CANCELED);
         super.onBackPressed();
     }
 }
