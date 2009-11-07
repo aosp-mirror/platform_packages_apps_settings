@@ -24,9 +24,11 @@
     <item msgid="5345178126174698955">"太平洋"</item>
     <item msgid="8392017019801393511">"すべて"</item>
   </string-array>
-    <!-- no translation found for animations_entries:0 (207790005475613429) -->
-    <!-- no translation found for animations_entries:1 (6291186755504776720) -->
-    <!-- no translation found for animations_entries:2 (3856065399819979491) -->
+  <string-array name="animations_entries">
+    <item msgid="207790005475613429">"アニメーションなし"</item>
+    <item msgid="6291186755504776720">"一部のアニメーション"</item>
+    <item msgid="3856065399819979491">"すべてのアニメーション"</item>
+  </string-array>
   <string-array name="animations_summaries">
     <item msgid="4569165952409350897">"ウィンドウアニメーションを表示しない"</item>
     <item msgid="4460915688877708508">"ウィンドウアニメーションの一部を表示"</item>
@@ -38,7 +40,7 @@
     <item msgid="7589406073232279088">"1分"</item>
     <item msgid="7001195990902244174">"2分"</item>
     <item msgid="5721688686241190620">"10分"</item>
-    <item msgid="1781492122915870416">"常時点灯"</item>
+    <item msgid="7156442995039264948">"30分"</item>
   </string-array>
   <string-array name="tts_rate_entries">
     <item msgid="6041212618892492920">"非常に遅い"</item>
@@ -62,10 +64,19 @@
     <item msgid="5972100016440094433">"イタリア語"</item>
     <item msgid="5811378076054402537">"スペイン語"</item>
   </string-array>
-    <!-- no translation found for wifi_security_entries:3 (1687348101566181433) -->
-    <!-- no translation found for wifi_security_entries:4 (329777238762866787) -->
-    <!-- no translation found for wifi_security_without_auto_entries:2 (6903317668294332381) -->
-    <!-- no translation found for wifi_security_without_auto_entries:3 (7280821339307729710) -->
+  <string-array name="wifi_security_entries">
+    <item msgid="2923732046112398627">"自動"</item>
+    <item msgid="5434666299123318296">"なし"</item>
+    <item msgid="3159594845889645948">"WEP"</item>
+    <item msgid="1687348101566181433">"WPA/WPA2 PSK"</item>
+    <item msgid="329777238762866787">"802.1x Enterprise"</item>
+  </string-array>
+  <string-array name="wifi_security_without_auto_entries">
+    <item msgid="4402120432904877907">"なし"</item>
+    <item msgid="2329148995431627488">"WEP"</item>
+    <item msgid="6903317668294332381">"WPA/WPA2 PSK"</item>
+    <item msgid="7280821339307729710">"802.1x Enterprise"</item>
+  </string-array>
   <string-array name="wifi_wep_type">
     <item msgid="1497433962958697183">"自動"</item>
     <item msgid="7182335713815377158">"WEP ASCII"</item>
@@ -99,10 +110,22 @@
     <item msgid="8667872640594311615">"TLS"</item>
     <item msgid="7182812872984827322">"TTLS"</item>
   </string-array>
-    <!-- no translation found for wifi_phase2_entries:3 (5923246669412752932) -->
+  <string-array name="wifi_phase2_entries">
+    <item msgid="1818786254010764570">"なし"</item>
+    <item msgid="6189918678874123056">"PAP"</item>
+    <item msgid="1524112260493662517">"MSCHAP"</item>
+    <item msgid="5923246669412752932">"MSCHAPV2"</item>
+    <item msgid="8651992560135239389">"GTC"</item>
+  </string-array>
   <string-array name="emergency_tone_entries">
     <item msgid="5165439859689033665">"OFF"</item>
     <item msgid="3165868966179561687">"アラート"</item>
     <item msgid="6038758039030476855">"バイブレーション"</item>
+  </string-array>
+  <string-array name="apn_auth_entries">
+    <item msgid="3856896061242872146">"なし"</item>
+    <item msgid="5756844015743664882">"PAP"</item>
+    <item msgid="535934025797984365">"CHAP"</item>
+    <item msgid="8383098660619805783">"PAPまたはCHAP"</item>
   </string-array>
 </resources>
