@@ -16,17 +16,20 @@
 
 package com.android.settings.bluetooth;
 
+import com.android.settings.ProgressCategory;
+import com.android.settings.R;
+
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothClass;
 import android.bluetooth.BluetoothDevice;
 import android.bluetooth.BluetoothDevicePicker;
 import android.bluetooth.BluetoothUuid;
-import android.os.ParcelUuid;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.Bundle;
+import android.os.ParcelUuid;
 import android.preference.CheckBoxPreference;
 import android.preference.Preference;
 import android.preference.PreferenceActivity;
@@ -37,10 +40,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ContextMenu.ContextMenuInfo;
 import android.widget.AdapterView.AdapterContextMenuInfo;
-
-import com.android.settings.ProgressCategory;
-import com.android.settings.R;
-import com.android.settings.bluetooth.LocalBluetoothProfileManager.Profile;
 
 import java.util.List;
 import java.util.WeakHashMap;
@@ -261,6 +260,7 @@ public class BluetoothSettings extends PreferenceActivity
                 CachedBluetoothDevice device = btPreference.getCachedDevice();
 
                 mSelectedDevice = device.getDevice();
+                mLocalManager.persistSelectedDeviceInPicker(mSelectedDevice.getAddress());
                 if ((device.getBondState() == BluetoothDevice.BOND_BONDED) ||
                         (mNeedAuth == false)) {
                     sendDevicePickedIntent(mSelectedDevice);
