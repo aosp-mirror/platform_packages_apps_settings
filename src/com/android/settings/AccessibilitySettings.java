@@ -19,8 +19,14 @@ package com.android.settings;
 import android.app.AlertDialog;
 import android.app.Service;
 import android.content.DialogInterface;
+import android.content.Intent;
+import android.content.pm.ApplicationInfo;
+import android.content.pm.PackageManager;
+import android.content.pm.PackageManager.NameNotFoundException;
 import android.content.pm.ServiceInfo;
+import android.net.Uri;
 import android.os.Bundle;
+import android.os.SystemProperties;
 import android.preference.CheckBoxPreference;
 import android.preference.Preference;
 import android.preference.PreferenceActivity;
@@ -39,6 +45,9 @@ import java.util.Map;
  * Activity with the accessibility settings.
  */
 public class AccessibilitySettings extends PreferenceActivity {
+    private static final String DEFAULT_SCREENREADER_MARKET_LINK =
+        "market://search?q=pname:com.google.android.marvin.talkback";
+
     private final String TOGGLE_ACCESSIBILITY_SERVICE_CHECKBOX =
         "toggle_accessibility_service_checkbox";
 
@@ -108,6 +117,9 @@ public class AccessibilitySettings extends PreferenceActivity {
                 setAccessibilityServicePreferencesState(false);
             }
             mToggleCheckBox.setEnabled(false);
+            // Notify user that they do not have any accessibility apps
+            // installed and direct them to Market to get TalkBack
+            displayNoAppsAlert();
         }
     }
 
@@ -273,5 +285,43 @@ public class AccessibilitySettings extends PreferenceActivity {
             preference.setTitle(serviceInfo.loadLabel(getPackageManager()));
             mAccessibilityServicesCategory.addPreference(preference);
         }
+    }
+
+    /**
+     * Displays a message telling the user that they do not have any accessibility
+     * related apps installed and that they can get TalkBack (Google's free screen
+     * reader) from Market.
+     */
+    private void displayNoAppsAlert() {
+        try {
+            PackageManager pm = getPackageManager();
+            ApplicationInfo info = pm.getApplicationInfo("com.android.vending", 0);
+        } catch (NameNotFoundException e) {
+            // This is a no-op if the user does not have Android Market
+            return;
+        }
+        AlertDialog.Builder noAppsAlert = new AlertDialog.Builder(this);
+        noAppsAlert.setTitle(R.string.accessibility_service_no_apps_title);
+        noAppsAlert.setMessage(R.string.accessibility_service_no_apps_message);
+
+        noAppsAlert.setPositiveButton(android.R.string.ok,
+            new DialogInterface.OnClickListener() {
+                public void onClick(DialogInterface dialog, int which) {
+                    String screenreaderMarketLink =
+                        SystemProperties.get("ro.screenreader.market", DEFAULT_SCREENREADER_MARKET_LINK);
+                    Uri marketUri = Uri.parse(screenreaderMarketLink);
+                    Intent marketIntent = new Intent(Intent.ACTION_VIEW, marketUri);
+                    startActivity(marketIntent);
+                    finish();
+                }
+            });
+
+        noAppsAlert.setNegativeButton(android.R.string.cancel,
+            new DialogInterface.OnClickListener() {
+                public void onClick(DialogInterface dialog, int which) {
+                }
+            });
+
+        noAppsAlert.show();
     }
 }
