@@ -21,7 +21,6 @@ import com.android.settings.R;
 import android.app.Notification;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
-import android.bluetooth.BluetoothClass;
 import android.bluetooth.BluetoothDevice;
 import android.content.BroadcastReceiver;
 import android.content.Context;
@@ -62,7 +61,8 @@ public class BluetoothPairingRequest extends BroadcastReceiver {
             pairingIntent.setAction(BluetoothDevice.ACTION_PAIRING_REQUEST);
             pairingIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 
-            if (localManager.getForegroundActivity() != null) {
+            String deviceAddress = device != null ? device.getAddress() : null;
+            if (localManager.shouldShowDialogInForeground(deviceAddress)) {
                 // Since the BT-related activity is in the foreground, just open the dialog
                 context.startActivity(pairingIntent);
 

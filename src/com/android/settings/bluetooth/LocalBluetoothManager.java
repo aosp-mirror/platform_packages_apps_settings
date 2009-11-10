@@ -18,21 +18,20 @@ package com.android.settings.bluetooth;
 
 import com.android.settings.R;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Set;
-
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.bluetooth.BluetoothA2dp;
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
 import android.content.Context;
-import android.content.Intent;
 import android.content.SharedPreferences;
 import android.util.Config;
 import android.util.Log;
 import android.widget.Toast;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Set;
 
 // TODO: have some notion of shutting down.  Maybe a minute after they leave BT settings?
 /**
@@ -67,6 +66,18 @@ public class LocalBluetoothManager {
     private List<Callback> mCallbacks = new ArrayList<Callback>();
 
     private static final int SCAN_EXPIRATION_MS = 5 * 60 * 1000; // 5 mins
+
+    // If a device was picked from the device picker or was in discoverable mode
+    // in the last 60 seconds, show the pairing dialogs in foreground instead
+    // of raising notifications
+    private static long GRACE_PERIOD_TO_SHOW_DIALOGS_IN_FOREGROUND = 60 * 1000;
+
+    private static final String SHARED_PREFERENCES_KEY_LAST_SELECTED_DEVICE =
+        "last_selected_device";
+
+    private static final String SHARED_PREFERENCES_KEY_LAST_SELECTED_DEVICE_TIME =
+        "last_selected_device_time";
+
     private long mLastScan;
 
     public static LocalBluetoothManager getInstance(Context context) {
@@ -294,4 +305,44 @@ public class LocalBluetoothManager {
         void onDeviceDeleted(CachedBluetoothDevice cachedDevice);
     }
 
+    public boolean shouldShowDialogInForeground(String deviceAddress) {
+        // If Bluetooth Settings is visible
+        if (mForegroundActivity != null) return true;
+
+        long currentTimeMillis = System.currentTimeMillis();
+        SharedPreferences sharedPreferences = getSharedPreferences();
+
+        // If the device was in discoverable mode recently
+        long lastDiscoverableEndTime = sharedPreferences.getLong(
+                BluetoothDiscoverableEnabler.SHARED_PREFERENCES_KEY_DISCOVERABLE_END_TIMESTAMP, 0);
+        if ((lastDiscoverableEndTime + GRACE_PERIOD_TO_SHOW_DIALOGS_IN_FOREGROUND)
+                > currentTimeMillis) {
+            return true;
+        }
+
+        // If the device was picked in the device picker recently
+        if (deviceAddress != null) {
+            String lastSelectedDevice = sharedPreferences.getString(
+                    SHARED_PREFERENCES_KEY_LAST_SELECTED_DEVICE, null);
+
+            if (deviceAddress.equals(lastSelectedDevice)) {
+                long lastDeviceSelectedTime = sharedPreferences.getLong(
+                        SHARED_PREFERENCES_KEY_LAST_SELECTED_DEVICE_TIME, 0);
+                if ((lastDeviceSelectedTime + GRACE_PERIOD_TO_SHOW_DIALOGS_IN_FOREGROUND)
+                        > currentTimeMillis) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
+    void persistSelectedDeviceInPicker(String deviceAddress) {
+        SharedPreferences.Editor editor = getSharedPreferences().edit();
+        editor.putString(LocalBluetoothManager.SHARED_PREFERENCES_KEY_LAST_SELECTED_DEVICE,
+                deviceAddress);
+        editor.putLong(LocalBluetoothManager.SHARED_PREFERENCES_KEY_LAST_SELECTED_DEVICE_TIME,
+                System.currentTimeMillis());
+        editor.commit();
+    }
 }
