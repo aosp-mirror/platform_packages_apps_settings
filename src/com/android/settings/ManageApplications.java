@@ -1403,13 +1403,17 @@ public class ManageApplications extends ListActivity implements
                     }
                 } else {
                     final String prefixString = prefix.toString().toLowerCase();
+                    final String spacePrefixString = " " + prefixString;
                     Map<String, String> newMap = new HashMap<String, String>();
                     synchronized (mFilterLock) {
                         Map<String, String> localMap = mFilterMap;
                         Set<String> keys = mFilterMap.keySet();
                         for (String key : keys) {
                             String label = localMap.get(key);
-                            if (label.indexOf(prefixString) != -1) {
+                            if (label == null) continue;
+                            label = label.toLowerCase();
+                            if (label.startsWith(prefixString)
+                                    || label.indexOf(spacePrefixString) != -1) {
                                 newMap.put(key, label);
                             }
                         }
@@ -1895,6 +1899,9 @@ public class ManageApplications extends ListActivity implements
         public final int compare(ApplicationInfo a, ApplicationInfo b) {
             AppInfo ainfo = mCache.getEntry(a.packageName);
             AppInfo binfo = mCache.getEntry(b.packageName);
+            // Check for null app names, to avoid NPE in rare cases
+            if (ainfo == null || ainfo.appName == null) return -1;
+            if (binfo == null || binfo.appName == null) return 1;
             return sCollator.compare(ainfo.appName.toString(), binfo.appName.toString());
         }
     }
