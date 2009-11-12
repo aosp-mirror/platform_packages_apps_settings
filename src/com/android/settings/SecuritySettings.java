@@ -28,6 +28,7 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.location.LocationManager;
 import android.os.Bundle;
+import android.os.SystemProperties;
 import android.preference.CheckBoxPreference;
 import android.preference.Preference;
 import android.preference.PreferenceActivity;
@@ -59,6 +60,10 @@ public class SecuritySettings extends PreferenceActivity {
     private static final String KEY_TACTILE_FEEDBACK_ENABLED = "tactilefeedback";
     private static final int CONFIRM_PATTERN_THEN_DISABLE_AND_CLEAR_REQUEST_CODE = 55;
 
+    // Encrypted File Systems constants
+    private static final String PROPERTY_EFS_ENABLED = "persist.security.efs.enabled";
+    private static final String PROPERTY_EFS_TRANSITION = "persist.security.efs.trans";
+
     private static final String PREFS_NAME = "location_prefs";
     private static final String PREFS_USE_LOCATION = "use_location";
 
@@ -78,6 +83,9 @@ public class SecuritySettings extends PreferenceActivity {
 
     // Credential storage
     private CredentialStorage mCredentialStorage = new CredentialStorage();
+
+    // Encrypted file system
+    private  CheckBoxPreference mEncryptedFSEnabled;
 
     private CheckBoxPreference mNetwork;
     private CheckBoxPreference mGps;
@@ -188,7 +196,13 @@ public class SecuritySettings extends PreferenceActivity {
         PreferenceCategory credentialsCat = new PreferenceCategory(this);
         credentialsCat.setTitle(R.string.credentials_category);
         root.addPreference(credentialsCat);
-        mCredentialStorage.createPreferences(credentialsCat);
+        mCredentialStorage.createPreferences(credentialsCat, CredentialStorage.TYPE_KEYSTORE);
+
+        // File System Encryption
+        PreferenceCategory encryptedfsCat = new PreferenceCategory(this);
+        encryptedfsCat.setTitle(R.string.encrypted_fs_category);
+        root.addPreference(encryptedfsCat);
+        mCredentialStorage.createPreferences(encryptedfsCat, CredentialStorage.TYPE_ENCRYPTEDFS);
 
         return root;
     }
@@ -326,15 +340,24 @@ public class SecuritySettings extends PreferenceActivity {
             Preference.OnPreferenceClickListener {
         private static final int MINIMUM_PASSWORD_LENGTH = 8;
 
+        private static final int TYPE_KEYSTORE = 0;
+        private static final int TYPE_ENCRYPTEDFS = 1;
+
         private KeyStore mKeyStore = KeyStore.getInstance();
         private int mState;
         private boolean mSubmit = false;
         private boolean mExternal = false;
 
+        private boolean mIsEFSActive;
+
+        // Key Store controls
         private CheckBoxPreference mAccessCheckBox;
         private Preference mInstallButton;
         private Preference mPasswordButton;
         private Preference mResetButton;
+
+        // Encrypted file system controls
+        private  CheckBoxPreference mEncryptedFSEnabled;
 
         void resume() {
             mState = mKeyStore.test();
@@ -387,6 +410,26 @@ public class SecuritySettings extends PreferenceActivity {
                     lock();
                 }
                 return true;
+            } else if (preference == mEncryptedFSEnabled) {
+                Boolean bval = (Boolean)value;
+                SystemProperties.set(PROPERTY_EFS_ENABLED,
+                        bval.booleanValue() ? "1" : "0");
+                if (mIsEFSActive != bval.booleanValue()) {
+                    // EFS transition detected
+                    SystemProperties.set(PROPERTY_EFS_TRANSITION, "1");
+                } else {
+                    // No transition
+                    SystemProperties.set(PROPERTY_EFS_TRANSITION, "0");
+                }
+
+                updatePreferences(mState);
+                if (bval.booleanValue()) {
+                    Toast.makeText(SecuritySettings.this, R.string.encrypted_fs_enabled,
+                            Toast.LENGTH_SHORT).show();
+                } else {
+                    Toast.makeText(SecuritySettings.this, R.string.encrypted_fs_disabled,
+                            Toast.LENGTH_SHORT).show();
+                }
             }
             return false;
         }
@@ -493,36 +536,57 @@ public class SecuritySettings extends PreferenceActivity {
             }
         }
 
-        private void createPreferences(PreferenceCategory category) {
-            mAccessCheckBox = new CheckBoxPreference(SecuritySettings.this);
-            mAccessCheckBox.setTitle(R.string.credentials_access);
-            mAccessCheckBox.setSummary(R.string.credentials_access_summary);
-            mAccessCheckBox.setOnPreferenceChangeListener(this);
-            category.addPreference(mAccessCheckBox);
+        private void createPreferences(PreferenceCategory category, int type) {
+            // Legacy EFS state - useful for detecting EFS device state transition
+            mIsEFSActive = SystemProperties.getBoolean(PROPERTY_EFS_ENABLED, false);
 
-            mInstallButton = new Preference(SecuritySettings.this);
-            mInstallButton.setTitle(R.string.credentials_install_certificates);
-            mInstallButton.setSummary(R.string.credentials_install_certificates_summary);
-            mInstallButton.setOnPreferenceClickListener(this);
-            category.addPreference(mInstallButton);
+            switch(type) {
+            case TYPE_KEYSTORE:
+                mAccessCheckBox = new CheckBoxPreference(SecuritySettings.this);
+                mAccessCheckBox.setTitle(R.string.credentials_access);
+                mAccessCheckBox.setSummary(R.string.credentials_access_summary);
+                mAccessCheckBox.setOnPreferenceChangeListener(this);
+                category.addPreference(mAccessCheckBox);
 
-            mPasswordButton = new Preference(SecuritySettings.this);
-            mPasswordButton.setTitle(R.string.credentials_set_password);
-            mPasswordButton.setSummary(R.string.credentials_set_password_summary);
-            mPasswordButton.setOnPreferenceClickListener(this);
-            category.addPreference(mPasswordButton);
+                mInstallButton = new Preference(SecuritySettings.this);
+                mInstallButton.setTitle(R.string.credentials_install_certificates);
+                mInstallButton.setSummary(R.string.credentials_install_certificates_summary);
+                mInstallButton.setOnPreferenceClickListener(this);
+                category.addPreference(mInstallButton);
 
-            mResetButton = new Preference(SecuritySettings.this);
-            mResetButton.setTitle(R.string.credentials_reset);
-            mResetButton.setSummary(R.string.credentials_reset_summary);
-            mResetButton.setOnPreferenceClickListener(this);
-            category.addPreference(mResetButton);
+                mPasswordButton = new Preference(SecuritySettings.this);
+                mPasswordButton.setTitle(R.string.credentials_set_password);
+                mPasswordButton.setSummary(R.string.credentials_set_password_summary);
+                mPasswordButton.setOnPreferenceClickListener(this);
+                category.addPreference(mPasswordButton);
+
+                mResetButton = new Preference(SecuritySettings.this);
+                mResetButton.setTitle(R.string.credentials_reset);
+                mResetButton.setSummary(R.string.credentials_reset_summary);
+                mResetButton.setOnPreferenceClickListener(this);
+                category.addPreference(mResetButton);
+                break;
+
+            case TYPE_ENCRYPTEDFS:
+                mEncryptedFSEnabled = new CheckBoxPreference(SecuritySettings.this);
+                mEncryptedFSEnabled.setTitle(R.string.encrypted_fs_enable);
+                mEncryptedFSEnabled.setSummary(R.string.encrypted_fs_enable_summary);
+                mEncryptedFSEnabled.setOnPreferenceChangeListener(this);
+                category.addPreference(mEncryptedFSEnabled);
+                break;
+            }
         }
 
         private void updatePreferences(int state) {
-            mAccessCheckBox.setEnabled(state != KeyStore.UNINITIALIZED);
             mAccessCheckBox.setChecked(state == KeyStore.NO_ERROR);
-            mResetButton.setEnabled(state != KeyStore.UNINITIALIZED);
+            boolean encFSEnabled = SystemProperties.getBoolean(PROPERTY_EFS_ENABLED,
+                    false);
+            mResetButton.setEnabled((!encFSEnabled) && (state != KeyStore.UNINITIALIZED));
+            mAccessCheckBox.setEnabled((state != KeyStore.UNINITIALIZED) && (!encFSEnabled));
+
+            // Encrypted File system preferences
+            mEncryptedFSEnabled.setChecked(encFSEnabled);
+            mEncryptedFSEnabled.setEnabled(state != KeyStore.UNINITIALIZED);
 
             // Show a toast message if the state is changed.
             if (mState == state) {
