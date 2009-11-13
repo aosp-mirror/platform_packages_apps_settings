@@ -48,6 +48,30 @@
         <item>yyyy-MM-dd</item>
     </string-array>
 
+    <!-- Display settings.  The type of animations to show. -->
+    <string-array name="animations_entries">
+        <item>No animations</item>
+        <item>Some animations</item>
+        <item>All animations</item>
+    </string-array>
+
+    <!-- Display settings.  Summary for each type of animation. -->
+    <string-array name="animations_summaries">
+        <item>No window animations are shown</item>
+        <item>Some window animations are shown</item>
+        <item>All window animations are shown</item>
+    </string-array>
+
+    <!-- Do not translate. -->
+    <string-array name="animations_values">
+        <!-- Do not translate. -->
+        <item>00</item>
+        <!-- Do not translate. -->
+        <item>01</item>
+        <!-- Do not translate. -->
+        <item>11</item>
+    </string-array>
+
     <!-- Display settings.  The delay in inactivity before the screen is turned off. These are shown ain a list dialog. -->
     <string-array name="screen_timeout_entries">
         <item>15 seconds</item>
@@ -55,12 +79,11 @@
         <item>1 minute</item>
         <item>2 minutes</item>
         <item>10 minutes</item>
-        <!-- Choosing this means the screen will only turn off after the user manually does so.  There will be no inactivity check. -->
-        <item>Never timeout</item>
+        <item>30 minutes</item>
     </string-array>
 
     <!-- Do not translate. -->
-    <string-array name="screen_timeout_values">
+    <string-array name="screen_timeout_values" translatable="false">
         <!-- Do not translate. -->
         <item>15000</item>
         <!-- Do not translate. -->
@@ -72,7 +95,7 @@
         <!-- Do not translate. -->
         <item>600000</item>
         <!-- Do not translate. -->
-        <item>-1</item>
+        <item>1800000</item>
     </string-array>
 
     <!-- TTS settings -->
@@ -129,6 +152,15 @@
         <item>ita-ITA</item>
         <item>spa-ESP</item>
     </string-array>
+    <!-- Do not translate. -->
+    <string-array name="tts_demo_strings">
+        <item>This is an example of speech synthesis in English.</item>
+        <item>This is an example of speech synthesis in English.</item>
+        <item>Voici un échantillon de synthèse vocale en français.</item>
+        <item>Dies ist ein Beispiel für Sprachsynthese in Deutsch.</item>
+        <item>Questo è un esempio di sintesi vocale in italiano.</item>
+        <item>Este es un ejemplo de síntesis de voz en español.</item>
+    </string-array>
 
     <!-- Wi-Fi settings -->
 
@@ -142,13 +174,9 @@
         <!-- Do not translate. The Wi-Fi network has WEP security. -->
         <item>WEP</item>
         <!-- The Wi-Fi network has WPA personal security. WPA Personal is a tech term, and might be better left untranslated? -->
-        <item>WPA personal</item>
-        <!-- The Wi-Fi network has WPA2 personal security. WPA Personal is a tech term, and might be better left untranslated? -->
-        <item>WPA2 personal</item>
+        <item>WPA/WPA2 PSK</item>
         <!-- The Wi-Fi network has WPA EAP extensible authentication protocol. -->
-        <item>WPA-EAP</item>
-        <!-- IEEE 802.1X key management -->
-        <item>IEEE 802.1x</item>
+        <item>802.1x Enterprise</item>
     </string-array>
 
     <!-- Match this with code. --> <skip />
@@ -159,14 +187,9 @@
         <!-- Do not translate. The Wi-Fi network has WEP security. -->
         <item>WEP</item>
         <!-- The Wi-Fi network has WPA personal security. WPA Personal is a tech term, and might be better left untranslated? -->
-        <item>WPA personal</item>
-        <!-- The Wi-Fi network has WPA2 personal security. WPA Personal is a tech term, and might be better left untranslated? -->
-        <item>WPA2 personal</item>
+        <item>WPA/WPA2 PSK</item>
         <!-- The Wi-Fi network has WPA enterprise security. WPA Enterprise is a tech term, and might be better left untranslated? -->
-        <!-- The Wi-Fi network has WPA EAP extensible authentication protocol. -->
-        <item>WPA-EAP</item>
-        <!-- IEEE 802.1X key management -->
-        <item>IEEE 802.1x</item>
+        <item>802.1x Enterprise</item>
     </string-array>
 
     <!-- Match this with code. --> <skip />
@@ -237,7 +260,7 @@
         <item>None</item>
         <item>PAP</item>
         <item>MSCHAP</item>
-        <item>MSCHAP2</item>
+        <item>MSCHAPV2</item>
         <item>GTC</item>
     </string-array>
 
@@ -264,8 +287,27 @@
     </string-array>
 
     <string-array translatable="false" name="special_locale_names">
-        <item>中文（简体）</item>
+        <item>中文 (简体)</item>
         <item>中文 (繁體)</item>
+    </string-array>
+
+    <!-- Authentication Types used in APN editor -->
+    <string-array name="apn_auth_entries">
+        <item>None</item>
+        <item>PAP</item>
+        <item>CHAP</item>
+        <item>PAP or CHAP</item>
+    </string-array>
+
+    <string-array translatable="false" name="apn_auth_values">
+        <!-- Do not translate. -->
+        <item>0</item>
+        <!-- Do not translate. -->
+        <item>1</item>
+        <!-- Do not translate. -->
+        <item>2</item>
+        <!-- Do not translate. -->
+        <item>3</item>
     </string-array>
 
 </resources>

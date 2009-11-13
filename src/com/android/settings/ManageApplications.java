@@ -52,6 +52,8 @@ import android.view.ViewGroup;
 import android.view.Window;
 import android.widget.AdapterView;
 import android.widget.BaseAdapter;
+import android.widget.Filter;
+import android.widget.Filterable;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -64,7 +66,6 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.text.Collator;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
@@ -133,19 +134,19 @@ public class ManageApplications extends ListActivity implements
     // sort order that can be changed through the menu can be sorted alphabetically
     // or size(descending)
     private static final int MENU_OPTIONS_BASE = 0;
-    public static final int SORT_ORDER_ALPHA = MENU_OPTIONS_BASE + 0;
-    public static final int SORT_ORDER_SIZE = MENU_OPTIONS_BASE + 1;
     // Filter options used for displayed list of applications
-    public static final int FILTER_APPS_ALL = MENU_OPTIONS_BASE + 2;
-    public static final int FILTER_APPS_THIRD_PARTY = MENU_OPTIONS_BASE + 3;
-    public static final int FILTER_APPS_RUNNING = MENU_OPTIONS_BASE + 4;
-    public static final int FILTER_OPTIONS = MENU_OPTIONS_BASE + 5;
+    public static final int FILTER_APPS_ALL = MENU_OPTIONS_BASE + 0;
+    public static final int FILTER_APPS_RUNNING = MENU_OPTIONS_BASE + 1;
+    public static final int FILTER_APPS_THIRD_PARTY = MENU_OPTIONS_BASE + 2;
+    public static final int FILTER_OPTIONS = MENU_OPTIONS_BASE + 3;
+    public static final int SORT_ORDER_ALPHA = MENU_OPTIONS_BASE + 4;
+    public static final int SORT_ORDER_SIZE = MENU_OPTIONS_BASE + 5;
     // Alert Dialog presented to user to find out the filter option
-    AlertDialog mAlertDlg;
+    private AlertDialog mAlertDlg;
     // sort order
     private int mSortOrder = SORT_ORDER_ALPHA;
     // Filter value
-    int mFilterApps = FILTER_APPS_ALL;
+    private int mFilterApps = FILTER_APPS_THIRD_PARTY;
     
     // Custom Adapter used for managing items in the list
     private AppInfoAdapter mAppInfoAdapter;
@@ -176,7 +177,7 @@ public class ManageApplications extends ListActivity implements
     private boolean mComputeSizes = false;
     // default icon thats used when displaying applications initially before resource info is
     // retrieved
-    private Drawable mDefaultAppIcon;
+    private static Drawable mDefaultAppIcon;
     
     // temporary dialog displayed while the application info loads
     private static final int DLG_BASE = 0;
@@ -210,9 +211,6 @@ public class ManageApplications extends ListActivity implements
     
     // Cache application attributes
     private AppInfoCache mCache = new AppInfoCache();
-    
-    // empty message displayed when list is empty
-    private TextView mEmptyView;
     
     // Boolean variables indicating state
     private boolean mLoadLabels = false;
@@ -275,6 +273,7 @@ public class ManageApplications extends ListActivity implements
                 if(localLOGV) Log.i(TAG, "Message INIT_PKG_INFO, justCreated = " + mJustCreated);
                 List<ApplicationInfo> newList = null;
                 if (!mJustCreated) {
+                    if (localLOGV) Log.i(TAG, "List already created");
                     // Add or delete newly created packages by comparing lists
                     newList = getInstalledApps(FILTER_APPS_ALL);
                     updateAppList(newList);
@@ -370,8 +369,7 @@ public class ManageApplications extends ListActivity implements
                 if (status) {
                     size = data.getLong(ATTR_PKG_STATS);
                     formattedSize = data.getString(ATTR_PKG_SIZE_STR);
-                    int idx = mAppInfoAdapter.getIndex(pkgName);
-                    if (idx == -1) {
+                    if (!mAppInfoAdapter.isInstalled(pkgName)) {
                         mAppInfoAdapter.addToList(pkgName, size, formattedSize);
                     } else {
                         mAppInfoAdapter.updatePackage(pkgName, size, formattedSize);
@@ -565,7 +563,9 @@ public class ManageApplications extends ListActivity implements
         Set<String> existingList = new HashSet<String>();
         boolean ret = false;
         // Loop over new list and find out common elements between old and new lists
-        for (ApplicationInfo info : newList) {
+        int N = newList.size();
+        for (int i = (N-1); i >= 0; i--) {
+            ApplicationInfo info = newList.get(i);
             String pkgName = info.packageName;
             AppInfo aInfo = mCache.getEntry(pkgName);
             if (aInfo != null) {
@@ -574,10 +574,14 @@ public class ManageApplications extends ListActivity implements
                 // New package. update info by refreshing
                 if (localLOGV) Log.i(TAG, "New pkg :"+pkgName+" installed when paused");
                 updatePackageList(Intent.ACTION_PACKAGE_ADDED, pkgName);
+                // Remove from current list so that the newly added package can
+                // be handled later
+                newList.remove(i);
                 ret = true;
             }
         }
-        // Loop over old list and figure out state entries
+
+        // Loop over old list and figure out stale entries
         List<String> deletedList = null;
         Set<String> staleList = mCache.getPkgList();
         for (String pkgName : staleList) {
@@ -592,6 +596,7 @@ public class ManageApplications extends ListActivity implements
         }
         // Delete right away
         if (deletedList != null) {
+            if (localLOGV) Log.i(TAG, "Deleting right away");
             mAppInfoAdapter.removeFromList(deletedList);
         }
         return ret;
@@ -653,19 +658,29 @@ public class ManageApplications extends ListActivity implements
             return installedAppList;
         }
     }
+
+    private static boolean matchFilter(boolean filter, Map<String, String> filterMap, String pkg) {
+        boolean add = true;
+        if (filter) {
+            if (filterMap == null || !filterMap.containsKey(pkg)) {
+                add = false;
+            }
+        }
+        return add;
+    }
     
     /*
      * Utility method used to figure out list of apps based on filterOption
      * If the framework supports an additional flag to indicate running apps
      *  we can get away with some code here.
      */
-    List<ApplicationInfo> getFilteredApps(List<ApplicationInfo> pAppList, int filterOption) {
+    List<ApplicationInfo> getFilteredApps(List<ApplicationInfo> pAppList, int filterOption, boolean filter,
+            Map<String, String> filterMap) {
         List<ApplicationInfo> retList = new ArrayList<ApplicationInfo>();
         if(pAppList == null) {
             return retList;
         }
         if (filterOption == FILTER_APPS_THIRD_PARTY) {
-            List<ApplicationInfo> appList =new ArrayList<ApplicationInfo> ();
             for (ApplicationInfo appInfo : pAppList) {
                 boolean flag = false;
                 if ((appInfo.flags & ApplicationInfo.FLAG_UPDATED_SYSTEM_APP) != 0) {
@@ -676,15 +691,16 @@ public class ManageApplications extends ListActivity implements
                     flag = true;
                 }
                 if (flag) {
-                    appList.add(appInfo);
+                    if (matchFilter(filter, filterMap, appInfo.packageName)) {
+                        retList.add(appInfo);
+                    }
                 }
             }
-            return appList;
+            return retList;
         } else if (filterOption == FILTER_APPS_RUNNING) {
-            List<ApplicationInfo> appList =new ArrayList<ApplicationInfo> ();
             List<ActivityManager.RunningAppProcessInfo> procList = getRunningAppProcessesList();
             if ((procList == null) || (procList.size() == 0)) {
-                return appList;
+                return retList;
             }
             // Retrieve running processes from ActivityManager
             HashMap<String, ActivityManager.RunningAppProcessInfo> runningMap = 
@@ -700,15 +716,22 @@ public class ManageApplications extends ListActivity implements
             // Query list to find running processes in current list
             for (ApplicationInfo appInfo : pAppList) {
                 if (runningMap.get(appInfo.packageName) != null) {
-                    appList.add(appInfo);
+                    if (matchFilter(filter, filterMap, appInfo.packageName)) {
+                        retList.add(appInfo);
+                    }
                 }
             }
-            return appList;
+            return retList;
         } else {
-            return pAppList;
+            for (ApplicationInfo appInfo : pAppList) {
+                if (matchFilter(filter, filterMap, appInfo.packageName)) {
+                    retList.add(appInfo);
+                }
+            }
+            return retList;
         }
     }
-    
+
     private List<ActivityManager.RunningAppProcessInfo> getRunningAppProcessesList() {
         ActivityManager am = (ActivityManager)getSystemService(Context.ACTIVITY_SERVICE);
         return am.getRunningAppProcesses();
@@ -750,20 +773,9 @@ public class ManageApplications extends ListActivity implements
         }
     }
     
-    private void showEmptyViewIfListEmpty() {
-        if (localLOGV) Log.i(TAG, "Checking for empty view");
-        if (mAppInfoAdapter.getCount() > 0) {
-            mListView.setVisibility(View.VISIBLE);
-            mEmptyView.setVisibility(View.GONE);
-        } else {
-            mListView.setVisibility(View.GONE);
-            mEmptyView.setVisibility(View.VISIBLE);
-        }
-    }
-    
     // internal structure used to track added and deleted packages when
     // the activity has focus
-    class AddRemoveInfo {
+    static class AddRemoveInfo {
         String pkgName;
         boolean add;
         public AddRemoveInfo(String pPkgName, boolean pAdd) {
@@ -847,7 +859,7 @@ public class ManageApplications extends ListActivity implements
     /* Internal class representing an application or packages displayable attributes
      * 
      */
-    class AppInfo {
+    static private class AppInfo {
         public String pkgName;
         int index;
         public  CharSequence appName;
@@ -927,11 +939,63 @@ public class ManageApplications extends ListActivity implements
      * the getId methods via the package name into the internal maps and indices.
      * The order of applications in the list is mirrored in mAppLocalList
      */
-    class AppInfoAdapter extends BaseAdapter {        
+    class AppInfoAdapter extends BaseAdapter implements Filterable {   
         private List<ApplicationInfo> mAppList;
         private List<ApplicationInfo> mAppLocalList;
+        private Map<String, String> mFilterMap = new HashMap<String, String>();
         AlphaComparator mAlphaComparator = new AlphaComparator();
         SizeComparator mSizeComparator = new SizeComparator();
+        private Filter mAppFilter = new AppFilter();
+        final private Object mFilterLock = new Object();
+        private Map<String, String> mCurrentFilterMap = null;
+
+        private void generateFilterListLocked(List<ApplicationInfo> list) {
+            mAppLocalList = new ArrayList<ApplicationInfo>(list);
+            synchronized(mFilterLock) {
+                for (ApplicationInfo info : mAppLocalList) {
+                    String label = info.packageName;
+                    AppInfo aInfo = mCache.getEntry(info.packageName);
+                    if ((aInfo != null) && (aInfo.appName != null)) {
+                        label = aInfo.appName.toString();
+                    }
+                    mFilterMap.put(info.packageName, label.toLowerCase());
+                }
+            }
+        }
+
+        private void addFilterListLocked(int newIdx, ApplicationInfo info, CharSequence pLabel) {
+            mAppLocalList.add(newIdx, info);
+            synchronized (mFilterLock) {
+                String label = info.packageName;
+                if (pLabel != null) {
+                    label = pLabel.toString();
+                }
+                mFilterMap.put(info.packageName, label.toLowerCase());
+            }
+        }
+
+        private boolean removeFilterListLocked(String removePkg) {
+            // Remove from filtered list
+            int N = mAppLocalList.size();
+            int i;
+            for (i = (N-1); i >= 0; i--) {
+                ApplicationInfo info = mAppLocalList.get(i);
+                if (info.packageName.equalsIgnoreCase(removePkg)) {
+                    if (localLOGV) Log.i(TAG, "Removing " + removePkg + " from local list");
+                    mAppLocalList.remove(i);
+                    synchronized (mFilterLock) {
+                        mFilterMap.remove(removePkg);
+                    }
+                    return true;
+                }
+            }
+            return false;
+        }
+
+        private void reverseGenerateList() {
+            generateFilterListLocked(getFilteredApps(mAppList, mFilterApps, mCurrentFilterMap!= null, mCurrentFilterMap));
+            sortListInner(mSortOrder);
+        }
 
         // Make sure the cache or map contains entries for all elements
         // in appList for a valid sort.
@@ -942,11 +1006,11 @@ public class ManageApplications extends ListActivity implements
                 // Just refresh the list
                 appList = mAppList;
             } else {
-                mAppList = pAppList;
+                mAppList = new ArrayList<ApplicationInfo>(pAppList);
                 appList = pAppList;
                 notify = true;
             }
-            mAppLocalList = getFilteredApps(appList, filterOption);
+            generateFilterListLocked(getFilteredApps(appList, filterOption, mCurrentFilterMap!= null, mCurrentFilterMap));
             // This loop verifies and creates new entries for new packages in list
             int imax = appList.size();
             for (int i = 0; i < imax; i++) {
@@ -977,24 +1041,19 @@ public class ManageApplications extends ListActivity implements
             return mAppLocalList.get(position);
         }
         
-        /*
-         * This method returns the index of the package position in the application list
-         */
-        public int getIndex(String pkgName) {
+        public boolean isInstalled(String pkgName) {
             if(pkgName == null) {
-                Log.w(TAG, "Getting index of null package in List Adapter");
+                if (localLOGV) Log.w(TAG, "Null pkg name when checking if installed");
+                return false;
             }
-            int imax = mAppLocalList.size();
-            ApplicationInfo appInfo;
-            for(int i = 0; i < imax; i++) {
-                appInfo = mAppLocalList.get(i);
-                if(appInfo.packageName.equalsIgnoreCase(pkgName)) {
-                    return i;
+            for (ApplicationInfo info : mAppList) {
+                if (info.packageName.equalsIgnoreCase(pkgName)) {
+                    return true;
                 }
             }
-            return -1;
+            return false;
         }
-        
+
         public ApplicationInfo getApplicationInfo(int position) {
             int imax = mAppLocalList.size();
             if( (position < 0) || (position >= imax)) {
@@ -1083,7 +1142,7 @@ public class ManageApplications extends ListActivity implements
         public void sortBaseList(int sortOrder) {
             if (localLOGV) Log.i(TAG, "Sorting base list based on sortOrder = "+sortOrder);
             sortAppList(mAppList, sortOrder);
-            mAppLocalList = getFilteredApps(mAppList, mFilterApps);
+            generateFilterListLocked(getFilteredApps(mAppList, mFilterApps, mCurrentFilterMap!= null, mCurrentFilterMap));
             adjustIndex();
         }
 
@@ -1106,7 +1165,7 @@ public class ManageApplications extends ListActivity implements
          */
         public boolean resetAppList(int filterOption) {
            // Change application list based on filter option
-           mAppLocalList = getFilteredApps(mAppList, filterOption);
+           generateFilterListLocked(getFilteredApps(mAppList, filterOption, mCurrentFilterMap!= null, mCurrentFilterMap));
            // Check for all properties in map before sorting. Populate values from cache
            for(ApplicationInfo applicationInfo : mAppLocalList) {
                AppInfo appInfo = mCache.getEntry(applicationInfo.packageName);
@@ -1119,7 +1178,6 @@ public class ManageApplications extends ListActivity implements
            } else {
                notifyDataSetChanged();
            }
-           showEmptyViewIfListEmpty();
            return true;
         }
         
@@ -1202,7 +1260,6 @@ public class ManageApplications extends ListActivity implements
             if (pkgName == null) {
                 return;
             }
-            boolean notInList = true;
             // Get ApplicationInfo
             ApplicationInfo info = null;
             try {
@@ -1216,29 +1273,38 @@ public class ManageApplications extends ListActivity implements
                 Log.i(TAG, "Null ApplicationInfo for package:"+pkgName);
                 return;
             }
-            // Add entry to local list
+            // Add entry to base list
             mAppList.add(info);
             // Add entry to map. Note that the index gets adjusted later on based on
             // whether the newly added package is part of displayed list
+            CharSequence label = info.loadLabel(mPm);
             mCache.addEntry(new AppInfo(pkgName, -1,
-                    info.loadLabel(mPm), info.loadIcon(mPm), size, formattedSize));
+                    label, info.loadIcon(mPm), size, formattedSize));
+            if (addLocalEntry(info, label)) {
+                notifyDataSetChanged();
+            }
+        }
+
+        private boolean addLocalEntry(ApplicationInfo info, CharSequence label) {
+            String pkgName = info.packageName;
             // Add to list
-            if (notInList && (shouldBeInList(mFilterApps, info))) {
+            if (shouldBeInList(mFilterApps, info)) {
                 // Binary search returns a negative index (ie -index) of the position where
                 // this might be inserted. 
                 int newIdx = Collections.binarySearch(mAppLocalList, info, 
                         getAppComparator(mSortOrder));
                 if(newIdx >= 0) {
-                    Log.i(TAG, "Strange. Package:"+pkgName+" is not new");
-                    return;
+                    if (localLOGV) Log.i(TAG, "Strange. Package:" + pkgName + " is not new");
+                    return false;
                 }
                 // New entry
                 newIdx = -newIdx-1;
-                mAppLocalList.add(newIdx, info);
+                addFilterListLocked(newIdx, info, label);
                 // Adjust index
                 adjustIndex();
-                notifyDataSetChanged();
+                return true;
             }
+            return false;
         }
 
         public void updatePackage(String pkgName,
@@ -1252,9 +1318,13 @@ public class ManageApplications extends ListActivity implements
             }
             AppInfo aInfo = mCache.getEntry(pkgName);
             if (aInfo != null) {
-                aInfo.refreshLabel(info.loadLabel(mPm));
+                CharSequence label = info.loadLabel(mPm);
+                aInfo.refreshLabel(label);
                 aInfo.refreshIcon(info.loadIcon(mPm));
                 aInfo.setSize(size, formattedSize);
+                // Check if the entry has to be added to the displayed list
+                addLocalEntry(info, label);
+                // Refresh list since size might have changed
                 notifyDataSetChanged();
             }
         }
@@ -1286,15 +1356,8 @@ public class ManageApplications extends ListActivity implements
                 if (localLOGV) Log.i(TAG, "Removing " + pkg + " from cache");
                 mCache.removeEntry(pkg);
                 // Remove from filtered list
-                int i = 0;
-                for (ApplicationInfo info : mAppLocalList) {
-                    if (info.packageName.equalsIgnoreCase(pkg)) {
-                        mAppLocalList.remove(i);
-                        if (localLOGV) Log.i(TAG, "Removing " + pkg + " from local list");
-                        found = true;
-                        break;
-                    }
-                    i++;
+                if (removeFilterListLocked(pkg)) {
+                    found = true;
                 }
             }
             // Adjust indices of list entries
@@ -1322,6 +1385,50 @@ public class ManageApplications extends ListActivity implements
             }
             if (changed) {
                 notifyDataSetChanged();
+            }
+        }
+
+        public Filter getFilter() {
+            return mAppFilter;
+        }
+
+        private class AppFilter extends Filter {
+            @Override
+            protected FilterResults performFiltering(CharSequence prefix) {
+                FilterResults results = new FilterResults();
+                if (prefix == null || prefix.length() == 0) {
+                    synchronized (mFilterLock) {
+                        results.values = new HashMap<String, String>(mFilterMap);
+                        results.count = mFilterMap.size();
+                    }
+                } else {
+                    final String prefixString = prefix.toString().toLowerCase();
+                    Map<String, String> newMap = new HashMap<String, String>();
+                    synchronized (mFilterLock) {
+                        Map<String, String> localMap = mFilterMap;
+                        Set<String> keys = mFilterMap.keySet();
+                        for (String key : keys) {
+                            String label = localMap.get(key);
+                            if (label.indexOf(prefixString) != -1) {
+                                newMap.put(key, label);
+                            }
+                        }
+                    }
+                    results.values = newMap;
+                    results.count = newMap.size();
+                }
+                return results;
+            }
+
+            @Override
+            protected void publishResults(CharSequence constraint, FilterResults results) {
+                mCurrentFilterMap = (Map<String, String>) results.values;
+                reverseGenerateList();
+                if (results.count > 0) {
+                    notifyDataSetChanged();
+                } else {
+                    notifyDataSetInvalidated();
+                }
             }
         }
     }
@@ -1455,6 +1562,7 @@ public class ManageApplications extends ListActivity implements
         String action = intent.getAction();
         if (action.equals(Intent.ACTION_MANAGE_PACKAGE_STORAGE)) {
             mSortOrder = SORT_ORDER_SIZE;
+            mFilterApps = FILTER_APPS_ALL;
             mSizesFirst = true;
         }
         mPm = getPackageManager();
@@ -1471,7 +1579,6 @@ public class ManageApplications extends ListActivity implements
         // initialize the inflater
         mInflater = (LayoutInflater)getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         mReceiver = new PackageIntentReceiver();
-        mEmptyView = (TextView) findViewById(R.id.empty_view);
         mObserver = new PkgSizeObserver();
         // Create adapter and list view here
         List<ApplicationInfo> appList = getInstalledApps(mSortOrder);
@@ -1481,6 +1588,7 @@ public class ManageApplications extends ListActivity implements
         lv.setSaveEnabled(true);
         lv.setItemsCanFocus(true);
         lv.setOnItemClickListener(this);
+        lv.setTextFilterEnabled(true);
         mListView = lv;
         if (DEBUG_TIME) {
             Log.i(TAG, "Total time in Activity.create:: " +
@@ -1829,6 +1937,8 @@ public class ManageApplications extends ListActivity implements
         if ((menuId == SORT_ORDER_ALPHA) || (menuId == SORT_ORDER_SIZE)) {
             sendMessageToHandler(REORDER_LIST, menuId);
         } else if (menuId == FILTER_OPTIONS) {
+            // Pick up the selection value from the list of added choice items.
+            int selection = mFilterApps - MENU_OPTIONS_BASE;
             if (mAlertDlg == null) {
                 mAlertDlg = new AlertDialog.Builder(this).
                         setTitle(R.string.filter_dlg_title).
@@ -1836,7 +1946,7 @@ public class ManageApplications extends ListActivity implements
                         setSingleChoiceItems(new CharSequence[] {getText(R.string.filter_apps_all),
                                 getText(R.string.filter_apps_running),
                                 getText(R.string.filter_apps_third_party)},
-                                -1, this).
+                                selection, this).
                         create();
             }
             mAlertDlg.show();
@@ -1861,18 +1971,16 @@ public class ManageApplications extends ListActivity implements
         switch (which) {
         // Make sure that values of 0, 1, 2 match options all, running, third_party when
         // created via the AlertDialog.Builder
-        case 0:
-            newOption = FILTER_APPS_ALL;
+        case FILTER_APPS_ALL:
             break;
-        case 1:
-            newOption = FILTER_APPS_RUNNING;
+        case FILTER_APPS_RUNNING:
             break;
-        case 2:
-            newOption = FILTER_APPS_THIRD_PARTY;
+        case FILTER_APPS_THIRD_PARTY:
             break;
         default:
             return;
         }
+        newOption = which;
         mAlertDlg.dismiss();
         sendMessageToHandler(REORDER_LIST, newOption);
     }

@@ -15,15 +15,17 @@
 -->
 <resources xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <string name="yes" msgid="4676390750360727396">"Ja"</string>
+    <string name="no" msgid="6731231425810196216">"Nei"</string>
     <string name="device_info_default" msgid="7847265875578739287">"Ukjent"</string>
     <string name="turn_on_radio" msgid="8706561489788373676">"Slå på radio"</string>
     <string name="turn_off_radio" msgid="1820294552893884115">"Slå av radio"</string>
     <string name="turn_on_qxdm" msgid="634471960429852506">"Slå på QXDM-minnekortlogg"</string>
     <string name="turn_off_qxdm" msgid="5719931520533431085">"Slå av QXDM-minnekortlogg"</string>
     <string name="radioInfo_menu_viewADN" msgid="8743377494429930831">"Se SIM-adressebok"</string>
-    <string name="radioInfo_menu_viewFDN" msgid="7934301566925610318">"View Fixed Dialing Numbers"</string>
-    <string name="radioInfo_menu_viewSDN" msgid="7130280686244955669">"View Service Dialing Numbers"</string>
-    <string name="radioInfo_menu_getPDP" msgid="560610293888406317">"Get PDP list"</string>
+    <string name="radioInfo_menu_viewFDN" msgid="7934301566925610318">"Vis faste nummer"</string>
+    <string name="radioInfo_menu_viewSDN" msgid="7130280686244955669">"Vis tjenestenummer"</string>
+    <string name="radioInfo_menu_getPDP" msgid="560610293888406317">"Hent PDP-liste"</string>
     <string name="radioInfo_menu_enableData" msgid="5452877756028654595">"Slå på datatilkobling"</string>
     <string name="radioInfo_menu_disableData" msgid="7645419447977636497">"Slå av datatilkobling"</string>
     <string name="radioInfo_menu_enableDataOnBoot" msgid="1438925440424627675">"Slå på data ved oppstart"</string>
@@ -31,7 +33,7 @@
     <string name="radioInfo_service_in" msgid="1915416319177520020">"I serviceperiode"</string>
     <string name="radioInfo_service_out" msgid="5238736759641916278">"Ute av serviceperiode"</string>
     <string name="radioInfo_service_emergency" msgid="2485604591272668370">"Kun nødsamtaler"</string>
-    <string name="radioInfo_service_off" msgid="1434084741785525415">"Radio off"</string>
+    <string name="radioInfo_service_off" msgid="1434084741785525415">"Radio av"</string>
     <string name="radioInfo_roaming_in" msgid="9045363884600341051">"Roamer"</string>
     <string name="radioInfo_roaming_not" msgid="2851853244069662307">"Roamer ikke"</string>
     <string name="radioInfo_phone_idle" msgid="7489244938838742820">"Ledig"</string>
@@ -56,6 +58,7 @@
     <string name="font_size_save" msgid="3450855718056759095">"OK"</string>
     <string name="sdcard_setting" msgid="5922637503871474866">"Minnekort"</string>
     <string name="battery_info_status_label" msgid="8109155295509700309">"Batteristatus:"</string>
+    <string name="battery_info_power_label" msgid="7465140230991349382">"Strømplugg:"</string>
     <string name="battery_info_scale_label" msgid="3649763192389778437">"Batteriskala:"</string>
     <string name="battery_info_level_label" msgid="8706526709307788737">"Batterinivå:"</string>
     <string name="battery_info_health_label" msgid="6416051542741886958">"Batterihelse:"</string>
@@ -75,6 +78,11 @@
     <string name="battery_info_status_discharging" msgid="6222697503392774475">"Lader ut"</string>
     <string name="battery_info_status_not_charging" msgid="2820070506621483576">"Lader ikke"</string>
     <string name="battery_info_status_full" msgid="2824614753861462808">"Full"</string>
+    <string name="battery_info_power_unplugged" msgid="5987246575519551081">"Ikke plugget i"</string>
+    <string name="battery_info_power_ac" msgid="6808516193001604634">"Nettstrøm"</string>
+    <string name="battery_info_power_usb" msgid="8012931702516331797">"USB"</string>
+    <string name="battery_info_power_ac_usb" msgid="6777734146838328688">"Nettstrøm+USB"</string>
+    <string name="battery_info_power_unknown" msgid="7344115502868899881">"Ukjent"</string>
     <string name="battery_info_health_unknown" msgid="5664295556921944255">"Ukjent"</string>
     <string name="battery_info_health_good" msgid="8070356565806711806">"OK"</string>
     <string name="battery_info_health_overheat" msgid="8442959549291368806">"For varmt"</string>
@@ -104,8 +112,14 @@
     <string name="bluetooth_notif_ticker" msgid="4726721390078512173">"Paringsforespørsel for Bluetooth"</string>
     <string name="bluetooth_notif_title" msgid="2485175521845371514">"Paringsforespørsel"</string>
     <string name="bluetooth_notif_message" msgid="5381418499788668724">"Velg å pare med "</string>
+    <string name="device_picker" msgid="8721012448931226323">"Bluetooths enhetsvelger"</string>
+    <string name="bluetooth_permission_request" msgid="1523129741266262748">"Bluetooth-tillatelse"</string>
+    <string name="bluetooth_ask_enablement" msgid="2342558978033892004">"En applikasjon på telefonen spør om tillatelse til å slå på Bluetooth. Ønsker du å gjøre dette?"</string>
+    <string name="bluetooth_ask_discovery" msgid="669870705606180872">"En applikasjon på telefonen spør om tillatelse for å gjøre telefonen synlig for andre Bluetooth-enheter i <xliff:g id="TIMEOUT">%1$d</xliff:g> sekunder. Ønsker du å gjøre dette?"</string>
+    <string name="bluetooth_ask_enablement_and_discovery" msgid="7220210326619399542">"En applikasjon på telefonen spør om tillatelse til å slå på Bluetooth og gjøre telefonen synlig for andre enheter i <xliff:g id="TIMEOUT">%1$d</xliff:g> sekunder. Ønsker du å gjøre dette?"</string>
+    <string name="bluetooth_turning_on" msgid="3107102168379705771">"Aktiverer Bluetooth…"</string>
     <string name="date_and_time" msgid="4114084177056654663">"Innstillinger for dato og tid"</string>
-    <string name="date_time_12_hour_sample" msgid="3259617262618020574">"1:00 pm"</string>
+    <string name="date_time_12_hour_sample" msgid="3259617262618020574">"1:00 ettermiddag"</string>
     <string name="date_time_24_hour_sample" msgid="8916857570746212357">"13:00"</string>
     <string name="date_time_changeTime_text" msgid="7037437020000867740">"Endre tid"</string>
     <string name="date_time_changeDate_text" msgid="5259762626498028057">"Endre dato"</string>
@@ -119,7 +133,7 @@
     <string name="intent_sender_action_label" msgid="616458370005452389">"<xliff:g id="ACTION">Action</xliff:g>:"</string>
     <string name="intent_sender_startactivity_text" msgid="5080516029580421895">"Start <xliff:g id="ACTIVITY">activity</xliff:g>"</string>
     <string name="intent_sender_resource_label" msgid="6963659726895482829">"<xliff:g id="RESOURCE">Resource</xliff:g>:"</string>
-    <string name="intent_sender_account_label" msgid="465210404475603404">"Account:"</string>
+    <string name="intent_sender_account_label" msgid="465210404475603404">"Konto:"</string>
     <string name="proxy_clear_text" msgid="5555400754952012657">"Tøm"</string>
     <string name="proxy_port_label" msgid="2623639656638472491">"Port"</string>
     <string name="proxy_defaultView_text" msgid="6387985519141433291">"Gjenopprett standardinnstillinger"</string>
@@ -131,37 +145,37 @@
     <string name="proxy_error_empty_port" msgid="3525734169948795417">"Du må skrive inn et portnummer."</string>
     <string name="proxy_error_empty_host_set_port" msgid="2451694104858226781">"Feltet for portnummer må være tomt om feltet for vertsnavn er tomt."</string>
     <string name="proxy_error_invalid_port" msgid="1816315605424943626">"Portnummeret er ikke gyldig."</string>
-    <string name="radio_info_signal_location_label" msgid="16475158265551708">"Location:"</string>
-    <string name="radio_info_neighboring_location_label" msgid="2385625674055934880">"Neighboring CID:"</string>
-    <string name="radio_info_data_attempts_label" msgid="1731106244577323381">"Data attempts:"</string>
-    <string name="radio_info_gprs_service_label" msgid="2331818110375395364">"GPRS service:"</string>
+    <string name="radio_info_signal_location_label" msgid="16475158265551708">"Plassering:"</string>
+    <string name="radio_info_neighboring_location_label" msgid="2385625674055934880">"Nabo-CID:"</string>
+    <string name="radio_info_data_attempts_label" msgid="1731106244577323381">"Dataforsøk:"</string>
+    <string name="radio_info_gprs_service_label" msgid="2331818110375395364">"GPRS-tjeneste:"</string>
     <string name="radio_info_roaming_label" msgid="6141505430275138647">"Roaming:"</string>
     <string name="radio_info_imei_label" msgid="1220524224732944192">"IMEI:"</string>
-    <string name="radio_info_call_redirect_label" msgid="1654674226961476872">"Call redirect:"</string>
-    <string name="radio_info_ppp_resets_label" msgid="3241667824729310546">"Number of PPP reset since boot:"</string>
-    <string name="radio_info_gsm_disconnects_label" msgid="1683069665736339820">"GSM disconnects:"</string>
+    <string name="radio_info_call_redirect_label" msgid="1654674226961476872">"Samtaleomdirigering:"</string>
+    <string name="radio_info_ppp_resets_label" msgid="3241667824729310546">"Antall PPP-nullstillinger siden boot:"</string>
+    <string name="radio_info_gsm_disconnects_label" msgid="1683069665736339820">"GSM-frakoblinger:"</string>
     <string name="radio_info_current_network_label" msgid="3256402602440102610">"Gjeldende nettverk:"</string>
-    <string name="radio_info_data_successes_label" msgid="4417894113689054945">"Data successes:"</string>
-    <string name="radio_info_ppp_received_label" msgid="3345184342444878849">"PPP received:"</string>
-    <string name="radio_info_gsm_service_label" msgid="2082332114596916985">"GSM service:"</string>
-    <string name="radio_info_signal_strength_label" msgid="1931937920896925766">"Signal strength:"</string>
-    <string name="radio_info_call_status_label" msgid="4896238900685510883">"Call status:"</string>
-    <string name="radio_info_ppp_sent_label" msgid="5009102250704375687">"PPP sent:"</string>
-    <string name="radio_info_radio_resets_label" msgid="9211343458143291617">"Radio resets:"</string>
-    <string name="radio_info_message_waiting_label" msgid="6981842420058672207">"Message waiting:"</string>
-    <string name="radio_info_phone_number_label" msgid="7192944627907412169">"Phone number:"</string>
-    <string name="radio_info_band_mode_label" msgid="441469694142042022">"Select radio band"</string>
-    <string name="radio_info_network_type_label" msgid="3706382548257257987">"Network type:"</string>
-    <string name="radio_info_set_perferred_label" msgid="9039200405863503267">"Set preferred network type:"</string>
-    <string name="radio_info_ping_ipaddr" msgid="498747917793263530">"Ping IpAddr:"</string>
-    <string name="radio_info_ping_hostname" msgid="3054888474808217853">"Ping Hostname(www.google.com):"</string>
-    <string name="radio_info_http_client_test" msgid="5733604021077701555">"HTTP Client test:"</string>
-    <string name="radio_info_toggle_ciph_label" msgid="1506817306430095478">"Toggle ciphering"</string>
-    <string name="ping_test_label" msgid="7255376471490860631">"Run ping test"</string>
+    <string name="radio_info_data_successes_label" msgid="4417894113689054945">"Vellykket data:"</string>
+    <string name="radio_info_ppp_received_label" msgid="3345184342444878849">"PPP mottatt:"</string>
+    <string name="radio_info_gsm_service_label" msgid="2082332114596916985">"GSM-tjeneste:"</string>
+    <string name="radio_info_signal_strength_label" msgid="1931937920896925766">"Signalstyrke:"</string>
+    <string name="radio_info_call_status_label" msgid="4896238900685510883">"Samtalestatus:"</string>
+    <string name="radio_info_ppp_sent_label" msgid="5009102250704375687">"PPP sendt:"</string>
+    <string name="radio_info_radio_resets_label" msgid="9211343458143291617">"Radio-nullstillinger:"</string>
+    <string name="radio_info_message_waiting_label" msgid="6981842420058672207">"Melding venter:"</string>
+    <string name="radio_info_phone_number_label" msgid="7192944627907412169">"Telefonnummer:"</string>
+    <string name="radio_info_band_mode_label" msgid="441469694142042022">"Velg radiobånd"</string>
+    <string name="radio_info_network_type_label" msgid="3706382548257257987">"Nettverkstype:"</string>
+    <string name="radio_info_set_perferred_label" msgid="9039200405863503267">"Velg foretrukket nettverkstype:"</string>
+    <string name="radio_info_ping_ipaddr" msgid="498747917793263530">"Ping IP-adresse:"</string>
+    <string name="radio_info_ping_hostname" msgid="3054888474808217853">"Ping vertsnavn(www.google.com):"</string>
+    <string name="radio_info_http_client_test" msgid="5733604021077701555">"HTTP-klienttest:"</string>
+    <string name="radio_info_toggle_ciph_label" msgid="1506817306430095478">"Sål av/på kryptering"</string>
+    <string name="ping_test_label" msgid="7255376471490860631">"Kjør ping-test"</string>
     <string name="radio_info_smsc_label" msgid="6399460520126501354">"SMSC:"</string>
-    <string name="radio_info_smsc_update_label" msgid="7258686760358791539">"Update"</string>
-    <string name="radio_info_smsc_refresh_label" msgid="6902302130315125102">"Refresh"</string>
-    <string name="radio_info_toggle_dns_check_label" msgid="8292252930563286858">"Toggle DNS check"</string>
+    <string name="radio_info_smsc_update_label" msgid="7258686760358791539">"Oppdater"</string>
+    <string name="radio_info_smsc_refresh_label" msgid="6902302130315125102">"Last på nytt"</string>
+    <string name="radio_info_toggle_dns_check_label" msgid="8292252930563286858">"Slå av/på DNS-sjekk"</string>
     <string name="band_mode_title" msgid="954174198903776205">"Velg GSM/UMTS-bånd"</string>
     <string name="band_mode_loading" msgid="548764766363847336">"Henter båndliste…"</string>
     <string name="band_mode_set" msgid="5730560180249458484">"Velg"</string>
@@ -196,7 +210,8 @@
     <string name="airplane_mode_summary" msgid="3154817401368780988">"Slå av alle trådløse tilkoblinger"</string>
     <string name="airplane_mode_turning_on" msgid="8871739222526957255">"Slår av trådløse tilkoblinger…"</string>
     <string name="airplane_mode_turning_off" msgid="3393168549611505996">"Slår på trådløse tilkoblinger…"</string>
-    <string name="radio_controls_title" msgid="8356991079873437337">"Trådløse nett"</string>
+    <string name="radio_controls_title" msgid="5868688473587168882">"Trådløst og nettverk"</string>
+    <string name="wireless_networks_settings_title" msgid="149274247949769551">"Innstillinger for trådløst og nettverk"</string>
     <string name="radio_controls_summary" msgid="2998818677094465517">"Trådløse nett, Bluetooth, flymodus, mobile nettverk, VPN"</string>
     <string name="roaming" msgid="3596055926335478572">"Dataroaming"</string>
     <string name="roaming_enable" msgid="3737380951525303961">"Koble til datatjenester ved roaming"</string>
@@ -219,20 +234,29 @@
     <string name="date_time_date_format" msgid="436706100255870967">"Datoformat"</string>
     <string name="zone_list_menu_sort_alphabetically" msgid="5683377702671088588">"Sorter alfabetisk"</string>
     <string name="zone_list_menu_sort_by_timezone" msgid="2720190443744884114">"Sorter etter tidssone"</string>
-    <string name="security_settings_title" msgid="4918904614964215087">"Sikkerhet og plassering"</string>
+    <string name="security_settings_title" msgid="5168491784222013179">"Plassering og sikkerhet"</string>
+    <string name="location_security_settings_title" msgid="4624434296446625554">"Plassering og sikkerhet"</string>
     <string name="security_settings_summary" msgid="967393342537986570">"Plassering, skjermlås, SIM-kort-lås"</string>
+    <string name="cdma_security_settings_summary" msgid="6068799952798901542">"Angi Min posisjon, lås opp skjerm, lås påloggingsopplysninger"</string>
     <string name="security_passwords_title" msgid="2930627259125138363">"Passord"</string>
     <string name="bluetooth_quick_toggle_title" msgid="1037056952714061893">"Bluetooth"</string>
     <string name="bluetooth_quick_toggle_summary" msgid="5293641680139873341">"Slå på Bluetooth"</string>
     <string name="bluetooth_settings" msgid="2725796451253089609">"Bluetooth-innstillinger"</string>
     <string name="bluetooth_settings_title" msgid="2824020086246268296">"Bluetooth-innstillinger"</string>
     <string name="bluetooth_settings_summary" msgid="2091062709530570462">"Tilkoblinger, enhetsnavn og synlighet"</string>
-    <string name="bluetooth_pin_entry" msgid="5627349871303455279">"Forespørsel om Bluetooth-paring"</string>
+    <string name="bluetooth_pairing_request" msgid="6385750334766370310">"Bluetooth-paringsforespørsel"</string>
     <string name="bluetooth_device_info" msgid="6644515376523965073">"Bluetooth-enhetsinformasjon"</string>
-    <string name="bluetooth_enter_pin_msg" msgid="7551139612735632370">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g>"\n\n"Skriv inn PIN-kode for å pare."\n"(Prøv 0000 eller 1234.)"</string>
+    <string name="bluetooth_enter_pin_msg" msgid="856962526754150334">\n"Skriv PIN-kode for å pare med «<xliff:g id="DEVICE_NAME">%1$s</xliff:g>». (Prøv 0000 eller 1234.)"</string>
+    <string name="bluetooth_enter_passkey_msg" msgid="8121515818772179228">\n"Skriv inn passordet for å pare med «<xliff:g id="DEVICE_NAME">%1$s</xliff:g>»."</string>
+    <string name="bluetooth_confirm_passkey_msg" msgid="1205362283945104263">"Hvis du vil pare med «<xliff:g id="DEVICE_NAME">%1$s</xliff:g>», må du kontrollere at enheten viser passordet: <xliff:g id="PASSKEY">%2$s</xliff:g>"</string>
+    <string name="bluetooth_incoming_pairing_msg" msgid="1076613564387784476">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g>"\n"ønsker å pare."</string>
+    <string name="bluetooth_display_passkey_msg" msgid="3048496029389441579">"Skriv inn <xliff:g id="PASSKEY">%2$s</xliff:g> på «<xliff:g id="DEVICE_NAME">%1$s</xliff:g>» for å pare."</string>
+    <string name="bluetooth_pairing_accept" msgid="6163520056536604875">"Paring"</string>
+    <string name="bluetooth_pairing_decline" msgid="930951069988011471">"Ikke par"</string>
+    <string name="bluetooth_remote_device" msgid="2406662802908395389">"Bluetooth-enhet"</string>
     <string name="bluetooth_error_title" msgid="538287072376677166">"NB"</string>
     <string name="bluetooth_pairing_error_message" msgid="2852744547246910349">"Det oppsto et problem under paring med <xliff:g id="DEVICE_NAME">%1$s</xliff:g>."</string>
-    <string name="bluetooth_pairing_pin_error_message" msgid="6938408362011024289">"Det oppsto et problem under paring med <xliff:g id="DEVICE_NAME">%1$s</xliff:g> fordi PIN-koden du oppga var feil."</string>
+    <string name="bluetooth_pairing_pin_error_message" msgid="6065697229258906937">"Det oppsto et problem under paring med <xliff:g id="DEVICE_NAME">%1$s</xliff:g> fordi PIN-koden eller passordet er feil."</string>
     <string name="bluetooth_pairing_device_down_error_message" msgid="6688215193824686741">"Fikk ikke kontakt med <xliff:g id="DEVICE_NAME">%1$s</xliff:g>."</string>
     <string name="bluetooth_pairing_rejected_error_message" msgid="1648157108520832454">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> avslo paring."</string>
     <string name="bluetooth_connecting_error_message" msgid="1779660510084746802">"Kunne ikke koble til <xliff:g id="DEVICE_NAME">%1$s</xliff:g>."</string>
@@ -246,6 +270,7 @@
     <string name="bluetooth_connect_specific_profiles_title" msgid="6952214406025825164">"Koble til…"</string>
     <string name="bluetooth_profile_a2dp" msgid="3259633293424539529">"Media"</string>
     <string name="bluetooth_profile_headset" msgid="1874975688666658946">"Telefon"</string>
+    <string name="bluetooth_profile_opp" msgid="3799470046565284440">"Overfør"</string>
     <string name="bluetooth_summary_connected_to_a2dp" msgid="510833839847758664">"Koblet til medielyd"</string>
     <string name="bluetooth_summary_connected_to_headset" msgid="4876496372728623918">"Koblet til telefonlyd"</string>
     <string name="bluetooth_summary_connected_to_a2dp_headset" msgid="3045032710457800891">"Koblet til medie- og telefonlyd"</string>
@@ -255,8 +280,11 @@
     <string name="bluetooth_device_advanced_profile_header_title" msgid="3764437426089639639">"Profiler"</string>
     <string name="bluetooth_a2dp_profile_summary_connected" msgid="963376081347721598">"Koblet til medielyd"</string>
     <string name="bluetooth_headset_profile_summary_connected" msgid="7661070206715520671">"Koblet til telefonlyd"</string>
+    <string name="bluetooth_opp_profile_summary_connected" msgid="2611913495968309066">"Koblet til tjener for filoverføring"</string>
+    <string name="bluetooth_opp_profile_summary_not_connected" msgid="1267091356089086285">"Ikke koblet til tjener for filoverføring"</string>
     <string name="bluetooth_a2dp_profile_summary_use_for" msgid="4630849022250168427">"Bruk for medielyd"</string>
     <string name="bluetooth_headset_profile_summary_use_for" msgid="8705753622443862627">"Bruk for telefonlyd"</string>
+    <string name="bluetooth_opp_profile_summary_use_for" msgid="1255674547144769756">"Bruk til filoverføring"</string>
     <string name="wifi" msgid="1081550856200013637">"Trådløst nett"</string>
     <string name="wifi_quick_toggle_title" msgid="874495178395350104">"Trådløst nett"</string>
     <string name="wifi_quick_toggle_summary" msgid="1047950931623694366">"Slå på trådløst nett"</string>
@@ -273,17 +301,13 @@
     <string name="security" msgid="1040691896987225267">"Sikkerhet"</string>
     <string name="wifi_security_open" msgid="3513305614048816607">"Åpen"</string>
     <string name="wifi_security_wep" msgid="7082604129842065776">"WEP"</string>
-    <string name="wifi_security_wpa" msgid="8980169410565477162">"WPA"</string>
-    <string name="wifi_security_wpa2" msgid="5780665935088930524">"WPA2"</string>
-    <string name="wifi_security_wpa_eap" msgid="7485687331651751101">"WPA-EAP"</string>
-    <string name="wifi_security_ieee8021x" msgid="8538687609878109005">"IEEE8021X"</string>
+    <string name="wifi_security_psk" msgid="3392399380570381452">"WPA/WPA2 PSK"</string>
+    <string name="wifi_security_eap" msgid="8309434150934969132">"Enterprise (802.1x)"</string>
     <string name="wifi_security_unknown" msgid="4564208312073060668">"Ukjent"</string>
     <string name="wifi_security_verbose_open" msgid="8117878112088901945">"åpent nett"</string>
     <string name="wifi_security_verbose_wep" msgid="9220757688700421508">"sikret med WEP"</string>
-    <string name="wifi_security_verbose_wpa" msgid="598697674252714455">"sikret med WPA"</string>
-    <string name="wifi_security_verbose_wpa2" msgid="4116236883347875722">"sikret med WPA2"</string>
-    <string name="wifi_security_verbose_wpa_eap" msgid="1984821646949066624">"sikret med WPA-EAP"</string>
-    <string name="wifi_security_verbose_ieee8021x" msgid="5552995793910186310">"sikret med IEEE 802.1x"</string>
+    <string name="wifi_security_verbose_psk" msgid="1110130025330416225">"sikret med WPA/WPA2 PSK"</string>
+    <string name="wifi_security_verbose_eap" msgid="586632662086063">"sikret med 802.1x EAP"</string>
     <string name="ip_address" msgid="850672263358989449">"IP-adresse"</string>
     <string name="signal" msgid="1947969631626413228">"Signalstyrke"</string>
     <string name="wifi_starting" msgid="6710266609710860129">"Slår på…"</string>
@@ -302,14 +326,13 @@
     <string name="please_type_anonymous_identity" msgid="835061562079965048">"Anonym identitet"</string>
     <string name="please_select_client_certificate" msgid="2137906961594663234">"Klientsertifikat"</string>
     <string name="please_select_ca_certificate" msgid="5010815181914420677">"CA-sertifikat"</string>
-    <string name="please_type_private_key_passwd" msgid="4077744679722504443">"Passord for privat nøkkel"</string>
     <string name="please_type_passphrase" msgid="8256017704131522462">"Passord for trådløst nettverk"</string>
     <string name="please_type_hex_key" msgid="8751224390407867551">"WEP-nøkkel i hex (0-9, A-F)"</string>
     <string name="wifi_show_password" msgid="4235237470701732009">"Vis passord."</string>
     <string name="scan_wifi" msgid="2459901725350542606">"Søk"</string>
     <string name="summary_not_in_range" msgid="3926674700733548684">"Utenfor rekkevidde"</string>
     <string name="summary_remembered" msgid="6079941090549401742">"husket"</string>
-    <string name="summary_connection_failed" msgid="7610394657613410489">"Tilkoblingen mislyktes, velg for å prøve på nytt"</string>
+    <string name="summary_connection_failed" msgid="2351885658101671413">"Tilkoblingen mislyktes, velg for å prøve på nytt"</string>
     <string name="wifi_access_points" msgid="2664629396767022441">"Trådløse nettverk"</string>
     <string name="wifi_type_ssid" msgid="1326839657083292017">"Nettverks-SSID"</string>
     <string name="wifi_security" msgid="6603611185592956936">"Sikkerhet"</string>
@@ -360,6 +383,7 @@
     <string name="status_disconnected" msgid="7561688569905126046">"Frakoblet"</string>
     <string name="status_failed" msgid="610462050405904601">"Mislykket"</string>
     <string name="sound_and_display_settings" msgid="349770582993029003">"Lyd og skjerm"</string>
+    <string name="sound_and_display_settings_title" msgid="5036144539683697330">"Lyd og bilde"</string>
     <string name="sound_settings" msgid="5007659014828162881">"Lydinnstillinger"</string>
     <string name="sound_and_display_settings_summary" msgid="1433943789593286064">"Ringetoner, varsling, lysstyrke"</string>
     <string name="silent_mode_title" msgid="3181479108593217704">"Stillemodus"</string>
@@ -385,13 +409,16 @@
     <string name="sound_effects_enable_title" msgid="3197313718929122833">"Hørbart valg"</string>
     <string name="sound_effects_enable_summary_on" msgid="6154141289879491329">"Lag lyd under skjermvalg"</string>
     <string name="sound_effects_enable_summary_off" msgid="3447739581759560125">"Lag lyd under skjermvalg"</string>
+    <string name="haptic_feedback_enable_title" msgid="6311736559245411290">"Vibrasjonsfeedback"</string>
+    <string name="haptic_feedback_enable_summary_on" msgid="1875779656524793053">"Vibrer ved bruk av skjermtaster og enkelte UI-interaksjoner"</string>
+    <string name="haptic_feedback_enable_summary_off" msgid="7287885436963105314">"Vibrer ved bruk av skjermtaster og enkelte UI-interaksjoner"</string>
     <string name="play_media_notification_sounds_enable_title" msgid="1008791464029179529">"Varsling for minnekort"</string>
     <string name="play_media_notification_sounds_enable_summary_on" msgid="7675466959375667370">"Spill lyd for minnekortvarsler"</string>
     <string name="play_media_notification_sounds_enable_summary_off" msgid="8672617597028744693">"Spill lyd for minnekortvarsler"</string>
-    <string name="sync_settings" msgid="2212736205476453234">"Datasynkronisering"</string>
-    <string name="sync_settings_summary" msgid="6480534906375217074">"Applikasjoner som skal synkroniseres"</string>
+    <string name="sync_settings" msgid="9186125469300013491">"Kontoer/synkronisering"</string>
+    <string name="sync_settings_summary" msgid="2962179505214965667">"Legge til eller fjerne kontoer og endre kontoinnstillinger"</string>
     <string name="search_settings" msgid="1910951467596035063">"Søk"</string>
-    <string name="search_settings_summary" msgid="9205656546570654169">"Søkeinnstillinger og -historie"</string>
+    <string name="search_settings_summary" msgid="9205656546570654169">"Søkeinnstillinger og -logg"</string>
     <string name="display_settings" msgid="3912042046350078328">"Skjerminnstillinger"</string>
     <string name="animations_title" msgid="1062189037402346023">"Animasjon"</string>
     <string name="animations_summary_on" msgid="8843613112130484436">"Vis animasjoner når vinduer åpnes og lukkes"</string>
@@ -403,6 +430,7 @@
     <string name="brightness_summary" msgid="838917350127550703">"Juster skjermens lysstyrke"</string>
     <string name="screen_timeout" msgid="4882669461447531301">"Skjermsparer"</string>
     <string name="screen_timeout_summary" msgid="2905757633140605334">"Juster hvor lang tid som skal gå før skjermen slås av automatisk"</string>
+    <string name="automatic_brightness" msgid="5014143533884135461">"Automatisk lysstyrke"</string>
     <string name="sim_lock_settings" msgid="3392331196873564292">"Innstillinger for SIM-kort-lås"</string>
     <string name="sim_lock_settings_category" msgid="5136244267576697004">"Sett opp SIM-kort-lås"</string>
     <string name="sim_lock_settings_title" msgid="9018585580955414596">"SIM-kort-lås"</string>
@@ -436,7 +464,8 @@
     <string name="device_status_activity_title" msgid="1411201799384697904">"Status"</string>
     <string name="device_status" msgid="607405385799807324">"Status"</string>
     <string name="device_status_summary" msgid="2599162787451519618">"Telefonnummer, signalstyrke, osv."</string>
-    <string name="storage_settings_title" msgid="8461515684514801302">"Minnekort og lagring"</string>
+    <string name="storage_settings" msgid="6681164315506788024">"Minnekort og telefonlager"</string>
+    <string name="storage_settings_title" msgid="5379463509034022773">"Minnekort og telefonlager"</string>
     <string name="storage_settings_summary" msgid="9176693537325988610">"Avmonter minnekort, vis ledig plass"</string>
     <string name="status_number" msgid="5123197324870153205">"Telefonnummer"</string>
     <string name="status_min_number" msgid="3519504522179420597">"MIN"</string>
@@ -480,6 +509,11 @@
     <string name="apn_mms_port" msgid="4074188088199243040">"MMS-port"</string>
     <string name="apn_mcc" msgid="4258628382260674636">"MCC"</string>
     <string name="apn_mnc" msgid="8629374076888809874">"MNC"</string>
+    <string name="apn_auth_type" msgid="6167205395676037015">"Autentiseringstype"</string>
+    <string name="apn_auth_type_none" msgid="5069592676845549926">"Ingen"</string>
+    <string name="apn_auth_type_pap" msgid="1666934536996033383">"PAP"</string>
+    <string name="apn_auth_type_chap" msgid="3369626283789068360">"CHAP"</string>
+    <string name="apn_auth_type_pap_chap" msgid="9102343063036134541">"CHAP"</string>
     <string name="apn_type" msgid="469613123902220544">"APN-type"</string>
     <string name="menu_delete" msgid="6981294422841124659">"Slett APN"</string>
     <string name="menu_new" msgid="3014205883303921729">"Nytt APN"</string>
@@ -495,14 +529,13 @@
     <string name="restore_default_apn_completed" msgid="3990449939234957281">"Ferdig med å gjenopprette standardvalg for APN"</string>
     <string name="master_clear_title" msgid="5907939616087039756">"Fabrikkinnstillinger"</string>
     <string name="master_clear_summary" msgid="4986154238001088492">"Fjern alle data fra telefonen"</string>
-    <!-- no translation found for master_clear_desc (7823268823499739178) -->
-    <skip />
-    <string name="master_clear_button_text" msgid="7550632653343157971">"Nullstill telefonen"</string>
+    <string name="master_clear_desc" msgid="7823268823499739178">"Dette vil fjerne alle data fra telefonen, herunder:"\n<li>"Google-kontoen din"</li>\n<li>"System- og programdata og -innstillinger"</li>\n<li>"Nedlastede programmer"</li>\n"Det vil ikke slette:"\n<li>"Gjeldende systemprogramvare og medfølgende programmer"</li>\n<li>"Filer på minnekortet, eksempelvis musikk eller bilder"</li></string>
+    <string name="master_clear_button_text" msgid="7550632653343157971">"Tilbakestill telefonen"</string>
     <string name="master_clear_final_desc" msgid="6917971132484622696">"Fjern all personlig informasjon og nedlastede applikasjoner? Dette kan ikke gjøres om!"</string>
     <string name="master_clear_final_button_text" msgid="5390908019019242910">"Fjern alt"</string>
     <string name="master_clear_gesture_prompt" msgid="1428645764883536750">"Tegn opplåsingsmønsteret"</string>
-    <string name="master_clear_gesture_explanation" msgid="8901714274312707918">"Du må tegne opplåsingsmønsteret for å bekrefte nullstilling av telefonen."</string>
-    <string name="master_clear_failed" msgid="8655202125010189406">"Telefonen ble ikke nullstilt fordi nullstillingstjenesten ikke er tilgjengelig."</string>
+    <string name="master_clear_gesture_explanation" msgid="8901714274312707918">"Du må tegne opplåsingsmønsteret for å bekrefte tilbakestilling av telefonen."</string>
+    <string name="master_clear_failed" msgid="8655202125010189406">"Telefonen ble ikke tilbakestilt fordi tilbakestillingstjenesten ikke er tilgjengelig."</string>
     <string name="media_format_title" msgid="4671276096695789895">"Formater minnekort"</string>
     <string name="media_format_summary" msgid="3805714639375830120">"Sletter alle data fra minnekortet"</string>
     <string name="media_format_desc" msgid="1142563222357820834">"Dette valget vil slette alle data fra minnekortet i telefonen. Du vil miste ALLE data på kortet!"</string>
@@ -519,12 +552,15 @@
     <string name="location_network_based" msgid="8815705866861993344">"Bruk trådløse nettverk"</string>
     <string name="location_networks_disabled" msgid="2708968452901433980">"Se plassering i applikasjoner (som kart) ved hjelp av trådløse nettverk"</string>
     <string name="location_neighborhood_level" msgid="4656658097932515921">"Plassering bestemmes ved hjelp av trådløse og/eller mobile nettverk"</string>
-    <string name="location_gps" msgid="375912731641377120">"Bruk GPS-satellitter"</string>
-    <string name="location_street_level" msgid="5899941752252356344">"Nøyaktig til gatenivå (slå av for å spare batteri)"</string>
+    <string name="location_gps" msgid="6296125378829097831">"Bruk GPS-satellitter"</string>
+    <string name="location_street_level" msgid="6460740847018275745">"Nøyaktig til gatenivå (slå av for å spare batteri)"</string>
     <string name="location_gps_disabled" msgid="6632537158777308128">"Finn plassering på gatenivå (bruker mer batteri, og trenger fri sikt til himmelen)"</string>
-    <string name="use_location_title" msgid="7585990952633568732">"Del med Google"</string>
-    <string name="use_location_summary" msgid="4411467143899877395">"La Google bruke plasseringen til bedre søk og andre tjenester"</string>
-    <string name="use_location_warning_message" msgid="5696732842038416151">"La Google bruke plasseringen til bedre søk og andre tjenester"</string>
+    <string name="assisted_gps" msgid="4649317129586736885">"Aktiver GPS med hjelp"</string>
+    <string name="assisted_gps_enabled" msgid="8751899609589792803">"Bruk tjener til å hjelpe GPS (opphev for å redusere nettverksbruken)"</string>
+    <string name="assisted_gps_disabled" msgid="6982698333968010748">"Bruk tjeneren til å hjelpe GPS (velg for å forbedre GPS-ytelsen)"</string>
+    <string name="use_location_title" msgid="5447030582538504247">"Del med Google"</string>
+    <string name="use_location_summary" msgid="1816849484040070431">"La Google bruke plasseringen til bedre søk og andre tjenester"</string>
+    <string name="use_location_warning_message" msgid="1420184860518262439">"Vil du tillate Google å bruke din posisjon til å forbedre søkeresultatene og andre tjenester?"</string>
     <string name="agree" msgid="6288718671527758326">"Godta"</string>
     <string name="disagree" msgid="6221069272309799230">"Avslå"</string>
     <string name="about_settings" msgid="1743378368185371685">"Om telefonen"</string>
@@ -539,6 +575,10 @@
     <string name="settings_license_activity_title" msgid="7553683406244228650">"Åpen kildekode-lisenser"</string>
     <string name="settings_license_activity_unavailable" msgid="4210539215951487627">"Kunne ikke hente lisensene."</string>
     <string name="settings_license_activity_loading" msgid="3337535809093591740">"henter…"</string>
+    <string name="settings_safetylegal_title" msgid="1289483965535937431">"Sikkerhetsinformasjon"</string>
+    <string name="settings_safetylegal_activity_title" msgid="6901214628496951727">"Sikkerhetsinformasjon"</string>
+    <string name="settings_safetylegal_activity_unreachable" msgid="3198912875259612887">"Telefonen er ikke koblet til en datatjeneste. For å se informasjonen nå, gå til %s fra en datamaskin koblet til internett."</string>
+    <string name="settings_safetylegal_activity_loading" msgid="8059022597639516348">"Henter…"</string>
     <string name="lock_settings_title" msgid="5828348303971852121">"Opplåsingsmønster for skjerm"</string>
     <string name="lockpattern_change_lock_pattern_label" msgid="5679630792003440352">"Opplåsingsmønster"</string>
     <string name="lockpattern_need_to_unlock" msgid="757935356911054465">"Bekreft lagret mønster"</string>
@@ -553,7 +593,7 @@
     <string name="lockpattern_confirm_button_text" msgid="1128204343957002841">"Bekreft"</string>
     <string name="lockpattern_restart_button_text" msgid="3337574403350953926">"Tegn på nytt"</string>
     <string name="lockpattern_retry_button_text" msgid="1949847413862309134">"Prøv igjen"</string>
-    <string name="lockpattern_continue_button_text" msgid="4723771754714471410">"Continue"</string>
+    <string name="lockpattern_continue_button_text" msgid="4723771754714471410">"Fortsett"</string>
     <string name="lockpattern_settings_title" msgid="3207750489460466680">"Opplåsingsmønster"</string>
     <string name="lockpattern_settings_enable_title" msgid="6920616873671115281">"Krev mønster"</string>
     <string name="lockpattern_settings_enable_summary" msgid="1165707416664252167">"Krev mønster for å låse opp skjermen"</string>
@@ -567,9 +607,9 @@
     <string name="skip_button_label" msgid="8680422740354436943">"Avbryt"</string>
     <string name="next_button_label" msgid="8890792540116568321">"Neste"</string>
     <string name="lock_title" msgid="4059246467204273930">"Sikring av telefonen"</string>
-    <string name="lock_intro_message" msgid="5352897389718432077"><font size="17">"Beskytt telefonen fra uautorisert bruk ved å lage et personlig opplåsingsmønster for skjermen. "\n<font height="17">\n</font><b>"1"</b>"  På den neste skjermen, se på mens et eksempelmønster blir tegnet. "\n<font height="17">\n</font><b>"2"</b>"  Når du er klar, tegn ditt eget personlige opplåsingsmønster. Prøv med forskjellige mønster, men tegn over minst fire prikker. "\n<font height="17">\n</font><b>"3"</b>"  Tegn mønsteret på nytt for å bekrefte. "\n<font height="17">\n</font><b>"Klar? Velg «neste»."</b>" "\n<font height="3">\n</font>"For å la telefonen forbli ubeskyttet, velg «Avbryt»."</font></string>
+    <string name="lock_intro_message" msgid="9100785646737118042"><font size="17">"Beskytt telefonen fra uautorisert bruk ved å lage et personlig opplåsingsmønster for skjermen. "\n<font height="17">\n</font><b>"1"</b>"  På den neste skjermen, se på mens et eksempelmønster blir tegnet. "\n<font height="17">\n</font><b>"2"</b>"  Når du er klar, tegn ditt eget personlige opplåsingsmønster. Prøv med forskjellige mønster, men tegn over minst fire prikker. "\n<font height="17">\n</font><b>"3"</b>"  Tegn mønsteret på nytt for å bekrefte. "\n<font height="17">\n</font><b>"Klar? Velg «neste»."</b>" "\n<font height="3">\n</font>"For å la telefonen forbli ubeskyttet, velg «Avbryt»."</font></string>
     <string name="lock_example_title" msgid="8052305554017485410">"Eksempelmønster"</string>
-    <string name="lock_example_message" msgid="7431982730914254881">"Tegn over minst fire prikker."\n" "\n"Velg «Neste» når du er klar til å tegne ditt eget mønster."</string>
+    <string name="lock_example_message" msgid="1838650097090632706">"Tegn over minst fire prikker."\n" "\n"Velg «Neste» når du er klar til å tegne ditt eget mønster."</string>
     <string name="manageapplications_settings_title" msgid="5712405848153426706">"Installerte applikasjoner"</string>
     <string name="manageapplications_settings_summary" msgid="6097117021500651232">"Hold orden på og fjern installerte applikasjoner"</string>
     <string name="applications_settings" msgid="3736173521008476946">"Applikasjoner"</string>
@@ -603,12 +643,12 @@
     <string name="filter" msgid="2018011724373033887">"Filter"</string>
     <string name="filter_dlg_title" msgid="6507663329723966854">"Velg filtreringsinnstillinger"</string>
     <string name="filter_apps_all" msgid="5142129378749391876">"Alle"</string>
-    <string name="filter_apps_third_party" msgid="1096017647285183437">"Tredjeparts"</string>
+    <string name="filter_apps_third_party" msgid="7786348047690140979">"Tredjeparts"</string>
     <string name="filter_apps_running" msgid="7767071454371350486">"Kjører"</string>
     <string name="loading" msgid="3200408047793887917">"Laster…"</string>
     <string name="recompute_size" msgid="7722567982831691718">"Beregner størrelse på nytt…"</string>
     <string name="clear_data_dlg_title" msgid="4470209520936375508">"Slett"</string>
-    <string name="clear_data_dlg_text" msgid="8796694785488630642">"All informasjon du har lagret i denne applikasjonen vil bli fjernet permanent."</string>
+    <string name="clear_data_dlg_text" msgid="8368035073300828451">"All informasjon du har lagret i denne applikasjonen vil bli fjernet permanent."</string>
     <string name="dlg_ok" msgid="2402639055725653590">"OK"</string>
     <string name="dlg_cancel" msgid="1674753358972975911">"Avbryt"</string>
     <string name="app_not_found_dlg_title" msgid="8458335716378083713">"Fant ikke applikasjonen"</string>
@@ -616,14 +656,28 @@
     <string name="clear_data_failed" msgid="581956197586913865">"Kunne ikke fjerne applikasjonsdata."</string>
     <string name="app_factory_reset_dlg_title" msgid="6116199391150388147">"Avinstaller oppdateringer"</string>
     <string name="app_factory_reset_dlg_text" msgid="438395129140568893">"Vil du avinstallere alle oppdateringer til denne Android-systemapplikasjonen?"</string>
-    <string name="clear_failed_dlg_title" msgid="2387060805294783175">"Nullstill data"</string>
-    <string name="clear_failed_dlg_text" msgid="7943411157007320290">"Kunne ikke nullstille data for applikasjonen"</string>
+    <string name="clear_failed_dlg_title" msgid="2387060805294783175">"Tilbakestill data"</string>
+    <string name="clear_failed_dlg_text" msgid="7943411157007320290">"Kunne ikke tilbakestille data for applikasjonen"</string>
     <string name="security_settings_desc" msgid="3116027624526915561">"Applikasjonen har disse rettighetene på telefonen:"</string>
     <string name="computing_size" msgid="1599186977475211186">"Beregner fortsatt…"</string>
     <string name="invalid_size_value" msgid="1901940003700269523">"Kunne ikke beregne pakkestørrelse"</string>
-    <string name="empty_list_msg" msgid="1883660401486953588">"Ingen tredjepartsapplikasjoner er installert."</string>
+    <string name="empty_list_msg" msgid="2901049162265094971">"Du har ingen tredjepartsprogrammer installert."</string>
     <string name="version_text" msgid="9189073826278676425">"versjon <xliff:g id="VERSION_NUM">%1$s</xliff:g>"</string>
-    <string name="language_settings" msgid="2939555761536357092">"Språk og tekst"</string>
+    <string name="runningservices_settings_title" msgid="8097287939865165213">"Kjørende tjenester"</string>
+    <string name="runningservices_settings_summary" msgid="854608995821032748">"Vis og kontroller tjenester som kjører for øyeblikket"</string>
+    <string name="service_restarting" msgid="2242747937372354306">"Starter på nytt"</string>
+    <string name="no_running_services" msgid="6981216347270280598">"Ingen kjørende tjenester"</string>
+    <string name="confirm_stop_service" msgid="5700448757318301681">"Stoppe tjenesten?"</string>
+    <string name="confirm_stop_service_msg" msgid="1202118456282395730">"Tjenesten kjører ikke før den startes på nytt. Dette kan påvirke programmet <xliff:g id="APPLICATION">%1$s</xliff:g> på en negativ måte."</string>
+    <string name="confirm_stop_stop" msgid="7382363913280993331">"Stopp"</string>
+    <string name="confirm_stop_cancel" msgid="206495326622692381">"Avbryt"</string>
+    <string name="service_started_by_app" msgid="8432097226392386802">"Startet av applikasjon: trykk for å avslutte"</string>
+    <string name="service_client_name" msgid="2337664610975074717">"<xliff:g id="CLIENT_NAME">%1$s</xliff:g>: Velg for å administrere"</string>
+    <string name="service_background_processes" msgid="5158600475629177758">"Tilgj.:<xliff:g id="FREE">%2$s</xliff:g> + <xliff:g id="MEMORY">%3$s</xliff:g> i <xliff:g id="COUNT">%1$d</xliff:g>"</string>
+    <string name="service_foreground_processes" msgid="4013890350284680796">"Andre: <xliff:g id="MEMORY">%2$s</xliff:g> (<xliff:g id="COUNT">%1$d</xliff:g> pros.)"</string>
+    <string name="service_process_name" msgid="8630408984456958400">"Prosess: <xliff:g id="PROCESS">%1$s</xliff:g>"</string>
+    <string name="language_settings" msgid="502219872342167227">"Språk og tastatur"</string>
+    <string name="language_keyboard_settings_title" msgid="3455826933385341107">"Språk og tastatur"</string>
     <string name="language_settings_summary" msgid="595647729475399987">"Innstillinger for språk, region, skriving av tekst og feilretting"</string>
     <string name="language_category" msgid="3391756582724541530">"Innstillinger for språk"</string>
     <string name="text_category" msgid="6342540511465136739">"Tekstinnstillinger"</string>
@@ -638,7 +692,7 @@
     <string name="auto_punctuate_summary" msgid="4372126865670574837">"Trykk mellomromstasten to ganger for å skrive punktum"</string>
     <string name="show_password" msgid="2198798062604049206">"Synlige passord"</string>
     <string name="show_password_summary" msgid="3806709974395178121">"Vis passord mens de skrives inn"</string>
-    <string name="ime_security_warning" msgid="3458652708716006477">"Inndatametoden har mulighet til å samle inn all tekst du skriver, inkludert personlige data som passord og kredittkortnummer. Den kommer fra applikasjonen <xliff:g id="IME_APPLICATION_NAME">%1$s</xliff:g>. Aktiver inndatametoden?"</string>
+    <string name="ime_security_warning" msgid="812267421486877917">"Inndatametoden har mulighet til å samle inn all tekst du skriver, inkludert personlige data som passord og kredittkortnummer. Den kommer fra applikasjonen <xliff:g id="IME_APPLICATION_NAME">%1$s</xliff:g>. Aktiver inndatametoden?"</string>
     <string name="user_dict_settings_titlebar" msgid="765659257455000490">"Ordliste"</string>
     <string name="user_dict_settings_title" msgid="8357027437499042191">"Ordliste"</string>
     <string name="user_dict_settings_summary" msgid="2460427065601355471">"Legg til og fjern ord fra ordlisten"</string>
@@ -666,7 +720,7 @@
     <string name="input_methods_settings_title" msgid="6800066636850553887">"Skriving av tekst"</string>
     <string name="input_methods_settings_summary" msgid="7571173442946675205">"Innstillinger for skriving av tekst"</string>
     <string name="input_methods_settings_label_format" msgid="6002887604815693322">"Innstillinger for <xliff:g id="IME_NAME">%1$s</xliff:g>"</string>
-    <string name="onscreen_keyboard_settings_summary" msgid="4919680715154885028">"Innstillinger for skjermtastatur"</string>
+    <string name="onscreen_keyboard_settings_summary" msgid="5841558383556238653">"Innstillinger for skjermtastatur"</string>
     <string name="builtin_keyboard_settings_title" msgid="8169889453770863227">"Fysisk tastatur"</string>
     <string name="builtin_keyboard_settings_summary" msgid="6404687907454621637">"Innstillinger for innebygget tastatur"</string>
     <string name="development_settings_title" msgid="6719732334835420989">"Utvikling"</string>
@@ -675,13 +729,13 @@
     <string name="enable_adb_summary" msgid="4881186971746056635">"Debug-modus når USB er koblet til"</string>
     <string name="keep_screen_on" msgid="1146389631208760344">"Forbli våken"</string>
     <string name="keep_screen_on_summary" msgid="2173114350754293009">"Skjermen vil aldri blankes under lading"</string>
-    <string name="allow_mock_location" msgid="2787962564578664888">"Tillat manuell plassering"</string>
-    <string name="allow_mock_location_summary" msgid="317615105156345626">"Tillat manuell plassering"</string>
-    <string name="adb_warning_title" msgid="1756027479229533250">"Aktiver USB-debugging?"</string>
+    <string name="allow_mock_location" msgid="2787962564578664888">"Tillat simulert plassering"</string>
+    <string name="allow_mock_location_summary" msgid="317615105156345626">"Tillat bruk av simulerte GPS-koordinater"</string>
+    <string name="adb_warning_title" msgid="6234463310896563253">"Aktiver USB-debugging?"</string>
     <string name="adb_warning_message" msgid="5352555112049663033">"USB-debugging er kun ment for utviklere. Det kan brukes for å kopiere data mellom datamaskinen og telefonen, installere applikasjoner på telefonen i det stille, og lese loggdata."</string>
     <string name="gadget_picker_title" msgid="98374951396755811">"Velg gadget"</string>
     <string name="widget_picker_title" msgid="9130684134213467557">"Velg skrivebordselement"</string>
-    <string name="battery_history_details_for" msgid="5189636461798594740">"Detaljer for UID %d"</string>
+    <string name="battery_history_details_for" msgid="5924639922153109669">"Detaljer for UID <xliff:g id="NUMBER">%d</xliff:g>"</string>
     <string name="battery_history_uid" msgid="1016606150528436298">"UID <xliff:g id="USER_ID">%1$d</xliff:g>"</string>
     <string name="battery_history_network_usage" msgid="8010852371665217020">"Nettbruk av <xliff:g id="APP_NAME">%1$s</xliff:g>:"</string>
     <string name="battery_history_bytes_received" msgid="980307569180518302">"Byte mottatt: <xliff:g id="BYTES">%1$d</xliff:g>"</string>
@@ -717,26 +771,25 @@
     <string name="app_name_label" msgid="2000949925256858308">"Applikasjon"</string>
     <string name="launch_count_label" msgid="4019444833263957024">"Antall"</string>
     <string name="usage_time_label" msgid="295954901452833058">"Brukstid"</string>
-    <string name="accessibility_settings_title" msgid="4239640930601071058">"Tilgjengelighet"</string>
+    <string name="accessibility_settings" msgid="3975902491934816215">"Tilgjengelighet"</string>
+    <string name="accessibility_settings_title" msgid="2130492524656204459">"Tilgjengelighetsinnstillinger"</string>
     <string name="accessibility_settings_summary" msgid="8185181964847149507">"Tilgjengelighetsvalg"</string>
     <string name="toggle_accessibility_title" msgid="650839277066574497">"Tilgjengelighet"</string>
     <string name="accessibility_services_category" msgid="8127851026323672607">"Tjenester for tilgjengelighet"</string>
     <string name="no_accessibility_services_summary" msgid="694578333333808159">"Ingen tilgjengelighetstjenester er installert."</string>
-    <!-- no translation found for accessibility_service_security_warning (8386156287296967181) -->
-    <skip />
+    <string name="accessibility_service_security_warning" msgid="4066258132331302670">"<xliff:g id="ACCESSIBILITY_SERVICE_NAME">%1$s</xliff:g>Denne tilgjengelighetstjenesten har tilgang til all tekst du skriver, inkludert personlig data som passord og kredittkortnummer. Den kan også loggføre alt som skjer i brukergrensesnittet. Det kommer fra programmet. Aktivere tilgjengelighetstjenesten?"</string>
     <string name="accessibility_service_disable_warning" msgid="8930591383312775132">"Slå av tilgjengelighetsstøtten?"</string>
     <string name="power_usage_summary_title" msgid="5180282911164282324">"Batteribruk"</string>
     <string name="power_usage_summary" msgid="7237084831082848168">"Hva som har brukt batteri"</string>
     <string name="battery_since_unplugged" msgid="338073389740738437">"Batteribruk siden strømmen ble trukket ut"</string>
     <string name="battery_since_reset" msgid="7464546661121187045">"Batteribruk siden omstart"</string>
-    <string name="battery_stats_duration" msgid="7464501326709469282">"<xliff:g id="TIME">%1$s</xliff:g> siden strømmen ble trukket ut"</string>
+    <string name="battery_stats_duration" msgid="7464501326709469282">"<xliff:g id="TIME">%1$s</xliff:g> siden strømmen ble frakoblet"</string>
     <!-- no translation found for battery_stats_last_duration (1535831453827905957) -->
     <skip />
     <string name="awake" msgid="387122265874485088">"Tid enheten har vært våken"</string>
     <string name="wifi_on_time" msgid="4630925382578609056">"Tid trådløsnettet har vært aktivt"</string>
     <string name="bluetooth_on_time" msgid="4478515071957280711">"Tid Bluetooth har vært aktivt"</string>
-    <!-- no translation found for usage_name_percent (1899151069711662289) -->
-    <skip />
+    <string name="usage_name_percent" msgid="7976919382448235858">"<xliff:g id="NAME">%1$s</xliff:g> – <xliff:g id="NUMBER">%2$s</xliff:g><xliff:g id="PERCENT">%%</xliff:g>"</string>
     <string name="details_title" msgid="7564809986329021063">"Detaljert batteribrukinformasjon"</string>
     <string name="details_subtitle" msgid="32593908269911734">"Bruksdetaljer"</string>
     <string name="controls_subtitle" msgid="390468421138288702">"Juster strømforbruk"</string>
@@ -755,9 +808,8 @@
     <string name="usage_type_data_recv" msgid="7251090882025234185">"Data mottatt"</string>
     <string name="usage_type_audio" msgid="6957269406840886290">"Lyd"</string>
     <string name="usage_type_video" msgid="4295357792078579944">"Video"</string>
-    <string name="usage_type_on_time" msgid="3351200096173733159">"TId på"</string>
-    <!-- no translation found for usage_type_no_coverage (3797004252954385053) -->
-    <skip />
+    <string name="usage_type_on_time" msgid="3351200096173733159">"Tid på"</string>
+    <string name="usage_type_no_coverage" msgid="3797004252954385053">"Tid uten signal"</string>
     <string name="battery_action_stop" msgid="649958863744041872">"Tving avslutning"</string>
     <string name="battery_action_app_details" msgid="3275013531871113681">"Info om applikasjon"</string>
     <string name="battery_action_app_settings" msgid="350562653472577250">"Innstillinger for applikasjon"</string>
@@ -771,24 +823,23 @@
     <string name="battery_desc_display" msgid="5432795282958076557">"Batteri brukt av skjermen og baklyset"</string>
     <string name="battery_sugg_display" msgid="3370202402045141760">"Skru ned lysstyrken og/eller tidsavbruddet for skjerm"</string>
     <string name="battery_desc_wifi" msgid="1702486494565080431">"Batteri brukt av trådløsnettet"</string>
-    <!-- no translation found for battery_sugg_wifi (7542345142282261691) -->
-    <skip />
+    <string name="battery_sugg_wifi" msgid="7542345142282261691">"Skru av trådløst nett når du ikke bruker det, eller det ikke er tilgjengelig"</string>
     <string name="battery_desc_bluetooth" msgid="7535520658674621902">"Batteri brukt av Bluetooth"</string>
-    <string name="battery_sugg_bluetooth_basic" msgid="144393178427277439">"Skru av Bluetooth når det ikke er i bruk"</string>
+    <string name="battery_sugg_bluetooth_basic" msgid="817276933922157788">"Slå av Bluetooth når det ikke er i bruk"</string>
     <string name="battery_sugg_bluetooth_headset" msgid="8214816222115517479">"Prøv å koble til en annen Bluetooth-enhet"</string>
     <string name="battery_desc_apps" msgid="8123202939321333639">"Batteri brukt av applikasjoner som ikke kjøres"</string>
     <string name="battery_sugg_apps_info" msgid="6065882899391322442">"Stopp eller avinstaller applikasjonen"</string>
     <string name="battery_sugg_apps_gps" msgid="4145005297393800223">"Skru av GPS når den ikke er i bruk"</string>
     <string name="battery_sugg_apps_settings" msgid="8021302847272481168">"Applikasjonen har muligens innstillinger som kan redusere batteribruken"</string>
-    <string name="menu_stats_unplugged" msgid="8296577130840261624">"<xliff:g id="UNPLUGGED">%1$s</xliff:g> siden strømmen ble trukket ut"</string>
+    <string name="menu_stats_unplugged" msgid="8296577130840261624">"<xliff:g id="UNPLUGGED">%1$s</xliff:g> siden strømmen ble frakoblet"</string>
     <string name="menu_stats_last_unplugged" msgid="5922246077592434526">"Siste gang uten strøm i <xliff:g id="UNPLUGGED">%1$s</xliff:g>"</string>
     <string name="menu_stats_total" msgid="8973377864854807854">"Total bruk"</string>
     <string name="menu_stats_refresh" msgid="1676215433344981075">"Oppdater"</string>
     <string name="process_kernel_label" msgid="3916858646836739323">"Android-operativsystem"</string>
     <string name="process_mediaserver_label" msgid="6500382062945689285">"Medietjener"</string>
-    <string name="tts_settings" msgid="6454363854545277027">"Talesyntese"</string>
+    <string name="tts_settings" msgid="3348626948015962987">"Tekst til tale"</string>
     <string name="tts_settings_summary" msgid="2627715231944602766">"Endre valg for talesyntese"</string>
-    <string name="tts_settings_title" msgid="5064947197040356736">"Talesyntese-kontroller"</string>
+    <string name="tts_settings_title" msgid="4182348653053000933">"Talesyntese-kontroller"</string>
     <string name="use_default_tts_settings_title" msgid="1577063839539732930">"Overstyr innstillinger"</string>
     <string name="use_default_tts_settings_summary" msgid="4253502106159206276">"Standardvalgene under overstyrer applikasjonsinnstillinger"</string>
     <string name="tts_default_settings_section" msgid="5787915620218907443">"Standardvalg"</string>
@@ -806,8 +857,11 @@
     <string name="tts_demo" msgid="405357591189935876">"Dette er et eksempel på stemmesyntese."</string>
     <string name="tts_settings_changed_demo" msgid="4926518555912328645">"Du har endret innstillingene dine. Dette er et eksempel på hvordan de høres ut."</string>
     <string name="gadget_title" msgid="7455548605888590466">"Strømkontroll"</string>
+    <string name="gadget_toggle_wifi" msgid="2382963973155082629">"Oppdaterer innstilling for Wi-Fi"</string>
+    <string name="gadget_toggle_bluetooth" msgid="7538903239807020826">"Oppdatere Bluetooth-innstilling"</string>
+    <string name="credential_installer_activity_title" msgid="7600661521831762521">"Akkreditivinstallasjon"</string>
     <string name="vpn_settings_activity_title" msgid="7276864950701612579">"VPN-innstillinger"</string>
-    <string name="vpn_connect_to" msgid="9040615733700098831">"Koble til %s"</string>
+    <string name="vpn_connect_to" msgid="2541409082892684362">"Koble til <xliff:g id="NAME">%s</xliff:g>"</string>
     <string name="vpn_username_colon" msgid="7854930370861306247">"Brukernavn:"</string>
     <string name="vpn_password_colon" msgid="5716278710848606626">"Passord:"</string>
     <string name="vpn_a_username" msgid="6664733641993968692">"et brukernavn"</string>
@@ -817,8 +871,7 @@
     <string name="vpn_yes_button" msgid="8034531001149843119">"Ja"</string>
     <string name="vpn_no_button" msgid="7620339571187119107">"Nei"</string>
     <string name="vpn_back_button" msgid="192036339792734970">"Tilbake"</string>
-    <!-- no translation found for vpn_mistake_button (1683383660912491270) -->
-    <skip />
+    <string name="vpn_mistake_button" msgid="1683383660912491270">"Nei"</string>
     <string name="vpn_menu_done" msgid="93528279226907926">"Lagre"</string>
     <string name="vpn_menu_cancel" msgid="7234451214611202868">"Avbryt"</string>
     <string name="vpn_menu_revert" msgid="4407762442281467659">"Tilbakestill"</string>
@@ -826,38 +879,34 @@
     <string name="vpn_menu_disconnect" msgid="8254492450022562235">"Koble fra nettverk"</string>
     <string name="vpn_menu_edit" msgid="4526245173583195618">"Rediger nettverk"</string>
     <string name="vpn_menu_delete" msgid="3326527392609513129">"Slett nettverk"</string>
-    <string name="vpn_error_miss_entering" msgid="1467455143582547499">"Du må skrive inn %s."</string>
-    <string name="vpn_error_miss_selecting" msgid="953436717902387192">"Du må velge %s."</string>
-    <string name="vpn_error_duplicate_name" msgid="2786397299628471911">"VPN-navnet \'%s\' finnes allerede. Velg et annet navn."</string>
+    <string name="vpn_error_miss_entering" msgid="5377667978602483250">"Du må skrive inn <xliff:g id="CODE">%s</xliff:g>."</string>
+    <string name="vpn_error_miss_selecting" msgid="4890780825580511345">"Du må velge <xliff:g id="OPTION">%s</xliff:g>."</string>
+    <string name="vpn_error_duplicate_name" msgid="2693927537390963745">"VPN-navnet «<xliff:g id="NAME">%s</xliff:g>»·finnes allerede. Velg et annet navn."</string>
     <string name="vpn_confirm_profile_deletion" msgid="8679536635364177239">"Er du sikker på at du ønsker å slette dette VPN-et?"</string>
     <string name="vpn_confirm_add_profile_cancellation" msgid="3377869170901609182">"Er du sikker på at du ikke ønsker å opprette denne profilen?"</string>
     <string name="vpn_confirm_edit_profile_cancellation" msgid="7496760181072204494">"Er du sikker på at du vil forkaste endringene for denne profilen?"</string>
     <string name="vpn_confirm_reconnect" msgid="5748535476278674296">"Kunne ikke koble til nettverket. Prøv igjen?"</string>
-    <!-- no translation found for vpn_reconnect_from_lost (2442844155623372118) -->
-    <skip />
-    <!-- no translation found for vpn_unknown_server_dialog_msg (3080742299823671319) -->
-    <skip />
-    <!-- no translation found for vpn_challenge_error_dialog_msg (6174901754230038601) -->
-    <skip />
-    <!-- no translation found for vpn_secret_not_set_dialog_msg (8013052814131532765) -->
-    <skip />
-    <!-- no translation found for vpn_auth_error_dialog_msg (5476820106624807614) -->
-    <skip />
-    <!-- no translation found for vpn_remote_hung_up_error_dialog_msg (1566946015052633150) -->
-    <skip />
+    <string name="vpn_reconnect_from_lost" msgid="2442844155623372118">"Mistet tilkoblingen. Koble til på nytt?"</string>
+    <string name="vpn_unknown_server_dialog_msg" msgid="3080742299823671319">"Kunne ikke slå opp tjenernavnet. Ønsker du å sjekke innstillingen for tjenernavn?"</string>
+    <string name="vpn_challenge_error_dialog_msg" msgid="6174901754230038601">"Autentiseringsfeil. Ønsker du å sjekke passordinnstillingene?"</string>
+    <string name="vpn_secret_not_set_dialog_msg" msgid="8013052814131532765">"Et eller flere passord mangler i denne VPN-innstillingen. Ønsker du å sjekke passordinnstillingene?"</string>
+    <string name="vpn_auth_error_dialog_msg" msgid="5476820106624807614">"Brukernavnet eller passordet er feil. Prøv igjen?"</string>
+    <string name="vpn_remote_hung_up_error_dialog_msg" msgid="1566946015052633150">"Tjeneren la på. Brukernavnet eller passordet kan være feil. Prøv igjen?"</string>
+    <string name="vpn_remote_ppp_hung_up_error_dialog_msg" msgid="5135958511128503344">"Tjeneren brøt forbindelsen. Det kan hende du befinner deg bak en brannmur som hindrer deg i å koble til tjeneren. Vil du prøve igjen?"</string>
+    <string name="vpn_ppp_negotiation_failed_dialog_msg" msgid="4611293656718340994">"Tjenerforhandling mislyktes. Det kan hende at tjeneren ikke er enig i krypteringsalternativet ditt. Vil du kontrollere krypteringsinnstillingene?"</string>
     <string name="vpn_type_title" msgid="6392933604218676224">"Legg til VPN"</string>
     <string name="vpn_add_new_vpn" msgid="5438260689052714550">"Legg til VPN"</string>
-    <string name="vpn_edit_title_add" msgid="2550661826320709266">"Legg til %s-VPN"</string>
-    <string name="vpn_edit_title_edit" msgid="1769999313158207723">"Detaljer for %s"</string>
+    <string name="vpn_edit_title_add" msgid="2121313217989682890">"Legg til <xliff:g id="NAME">%s</xliff:g>-VPN"</string>
+    <string name="vpn_edit_title_edit" msgid="2457278794066617935">"Detaljer om <xliff:g id="NAME">%s</xliff:g>"</string>
     <string name="vpns" msgid="3148141862835492816">"VPN"</string>
-    <string name="vpn_connecting" msgid="8039521381692090116">"Kobler til..."</string>
-    <string name="vpn_disconnecting" msgid="7748050200708257066">"Kobler fra..."</string>
+    <string name="vpn_connecting" msgid="8039521381692090116">"Kobler til ..."</string>
+    <string name="vpn_disconnecting" msgid="7748050200708257066">"Kobler fra ..."</string>
     <string name="vpn_connected" msgid="7641723116362845781">"Tilkoblet"</string>
     <string name="vpn_connect_hint" msgid="7442898962925875181">"Koblet til nettverket"</string>
     <string name="vpn_name" msgid="1550918148476193076">"VPN-navn"</string>
     <string name="vpn_a_name" msgid="8445736942405283509">"et VPN-navn"</string>
-    <string name="vpn_profile_added" msgid="2157095890825215726">"«%s» ble lagt til"</string>
-    <string name="vpn_profile_replaced" msgid="384234123486734768">"«%s» ble redigert"</string>
+    <string name="vpn_profile_added" msgid="9061017910337129840">"«<xliff:g id="NAME">%s</xliff:g>» ble lagt til"</string>
+    <string name="vpn_profile_replaced" msgid="587435576816273815">"«<xliff:g id="NAME">%s</xliff:g>» ble endret"</string>
     <string name="vpn_user_certificate_title" msgid="6812545893924071742">"Velg klientsertifikat"</string>
     <string name="vpn_user_certificate" msgid="949322691686938888">"Klientsertifikat"</string>
     <string name="vpn_a_user_certificate" msgid="8943983437956898649">"et klientsertifikat"</string>
@@ -867,10 +916,8 @@
     <string name="vpn_l2tp_secret_string_title" msgid="5039677186748940987">"Velg L2TP-passord"</string>
     <string name="vpn_l2tp_secret" msgid="529359749677142076">"L2TP-passord"</string>
     <string name="vpn_a_l2tp_secret" msgid="6612042930810981845">"et L2TP-passord"</string>
-    <!-- no translation found for vpn_pptp_encryption_title (2236795167467896499) -->
-    <skip />
-    <!-- no translation found for vpn_pptp_encryption (2602329949737259686) -->
-    <skip />
+    <string name="vpn_pptp_encryption_title" msgid="2236795167467896499">"kryptering"</string>
+    <string name="vpn_pptp_encryption" msgid="2602329949737259686">"PPTP-kryptering"</string>
     <string name="vpn_ipsec_presharedkey_title" msgid="2184060087690539175">"Velg forhåndsdelt nøkkel for IPSec"</string>
     <string name="vpn_ipsec_presharedkey" msgid="5434316521616673741">"Forhåndsdelt nøkkel for IPSec"</string>
     <string name="vpn_a_ipsec_presharedkey" msgid="1255301923217898418">"en forhåndsdelt nøkkel for IPSec"</string>
@@ -880,60 +927,53 @@
     <string name="vpn_vpn_server_dialog_title" msgid="7850850940160521918">"VPN-tjenernavn"</string>
     <string name="vpn_dns_search_list_title" msgid="1022776976104584251">"DNS-søkesti"</string>
     <string name="vpn_dns_search_list" msgid="4230034234026605360">"DNS-søkesti"</string>
-    <string name="vpn_field_is_set" msgid="1880980734721258127">"%s er valgt"</string>
-    <string name="vpn_field_not_set" msgid="6827205815004809490">"%s er ikke valgt"</string>
-    <string name="vpn_field_not_set_optional" msgid="8665901697706781015">"%s er ikke valgt (frivillig)"</string>
-    <string name="vpn_enable_field" msgid="3348948489989523325">"Aktiver %s"</string>
-    <string name="vpn_disable_field" msgid="2286966253789266389">"Deaktiver %s"</string>
-    <string name="vpn_is_enabled" msgid="5128973727115662815">"%s er aktivert"</string>
-    <string name="vpn_is_disabled" msgid="8028085699769751756">"%s er deaktivert"</string>
+    <string name="vpn_field_is_set" msgid="7137320847812992243">"<xliff:g id="VALUE">%s</xliff:g> er angitt"</string>
+    <string name="vpn_field_not_set" msgid="2972519243515893804">"<xliff:g id="VALUE">%s</xliff:g> ikke angitt"</string>
+    <string name="vpn_field_not_set_optional" msgid="8840557698252556791">"<xliff:g id="VALUE">%s</xliff:g> er ikke angitt (valgfritt)"</string>
+    <string name="vpn_enable_field" msgid="3700967675854517191">"Aktiver <xliff:g id="OPTION">%s</xliff:g>"</string>
+    <string name="vpn_disable_field" msgid="6905658811179634005">"Deaktiver <xliff:g id="OPTION">%s</xliff:g>"</string>
+    <string name="vpn_is_enabled" msgid="1266304230417098877">"<xliff:g id="OPTION">%s</xliff:g> er aktivert"</string>
+    <string name="vpn_is_disabled" msgid="2013622485867806167">"<xliff:g id="OPTION">%s</xliff:g> er deaktivert"</string>
     <string name="vpn_settings_title" msgid="7327468307909556719">"VPN-innstillinger"</string>
     <string name="vpn_settings_summary" msgid="8849924181594963972">"Sett opp og vedlikehold virtuelle private nettverk (VPN)"</string>
-    <!-- no translation found for vpn_secret_unchanged (8700613973594154529) -->
-    <skip />
-    <!-- no translation found for vpn_secret_not_set (1037792636371641845) -->
-    <skip />
-    <string name="cstor_settings_category" msgid="2284299080682591107">"Akkreditivlager"</string>
-    <string name="cstor_access_title" msgid="1739505390736236717">"Bruk sikre akkreditiver"</string>
-    <string name="cstor_access_summary" msgid="4512681868217546677">"Gir applikasjoner tilgang til sikre sertifikater og andre akkreditiver"</string>
-    <string name="cstor_access_dialog_title" msgid="3024256293191879190">"Skriv inn passord"</string>
-    <string name="cstor_access_dialog_hint_from_action" msgid="679746865623760961">"Skriv inn passordet for akkreditivlager."</string>
-    <string name="cstor_set_passwd_title" msgid="6156763762703061470">"Velg passord"</string>
-    <string name="cstor_set_passwd_summary" msgid="5248560429856597398">"Velg eller endre passordet for akkreditivlageret"</string>
-    <string name="cstor_set_passwd_dialog_title" msgid="4071157542842979977">"Velg passord"</string>
-    <string name="cstor_reset_title" msgid="6001600882136794382">"Tøm lager"</string>
-    <string name="cstor_reset_summary" msgid="7509525030771504833">"Tøm akkreditivlageret for alt innhold, og nullstill passordet"</string>
-    <string name="cstor_reset_hint" msgid="5331632794451859788">"Er du sikker på at du ønsker å slette alle akkreditiver og nullstille passordet for akkreditivlageret?"</string>
-    <string name="cstor_name_credential_dialog_title" msgid="1723509156126180662">"Gi sertifikatet et navn"</string>
-    <string name="cstor_credential_name" msgid="2958936431813760259">"Sertifikatnavn:"</string>
-    <!-- no translation found for cstor_credential_password (7187440553141199409) -->
-    <skip />
-    <string name="cstor_credential_info" msgid="6097346149400207440">"Detaljer for sertifikat:"</string>
-    <string name="cstor_name_credential_hint" msgid="6889198058976515785">"Navnet kan kun inneholde bokstaver og tall."</string>
-    <string name="cstor_old_password" msgid="979282118063084561">"Nåværende passord:"</string>
-    <string name="cstor_new_password" msgid="6218562692435670047">"Nytt passord:"</string>
-    <string name="cstor_confirm_password" msgid="8996028123356342466">"Bekreft nytt passord:"</string>
-    <string name="cstor_first_time_hint" msgid="1831593416099224962">"Velg et passord for akkreditivlageret."</string>
-    <string name="cstor_first_time_hint_from_action" msgid="4690937025845780557">"Velg et passord for akkreditivlageret."</string>
-    <string name="cstor_password_error" msgid="2917326097260402464">"Skriv inn det riktige passordet."</string>
-    <string name="cstor_password_error_reset_warning" msgid="3336370539045905953">"Skriv inn det riktige passordet. Du har ett forsøk igjen før akkreditivlageret blir slettet."</string>
-    <string name="cstor_password_error_reset_warning_plural" msgid="6209069679269017200">"Skriv inn det riktige passordet. Du har %d forsøk igjen før akkreditivlageret blir slettet."</string>
-    <string name="cstor_passwords_error" msgid="956773958408751155">"Passordene stemmer ikke overens."</string>
-    <string name="cstor_passwords_empty_error" msgid="6062539742626760734">"Du må skrive inn og bekrefte et passord."</string>
-    <string name="cstor_password_empty_error" msgid="7249632576906961482">"Skriv inn et passord."</string>
-    <string name="cstor_password_verification_error" msgid="8553930704493511389">"Skriv inn passordet på nytt. Passordet må ha minst åtte tegn, og kan ikke inneholde mellomrom."</string>
-    <string name="cstor_name_empty_error" msgid="7499971191993770322">"Skriv inn et navn."</string>
-    <string name="cstor_name_char_error" msgid="8048089317968192516">"Skriv inn et navn som kun inneholder bokstaver og tall."</string>
-    <!-- no translation found for cstor_storage_error (7140697503172458161) -->
-    <skip />
-    <!-- no translation found for cstor_unable_to_save_cert (1631402544447196406) -->
-    <skip />
-    <!-- no translation found for cstor_cert_not_saved (6318149789449538491) -->
-    <skip />
-    <!-- no translation found for cstor_is_reset (449870501126790589) -->
-    <skip />
-    <string name="cstor_is_enabled" msgid="4054049098081482785">"Akkreditivlagring er aktivert."</string>
-    <string name="cstor_is_added" msgid="794788474010251572">"%s ble lagt til."</string>
+    <string name="vpn_secret_unchanged" msgid="8700613973594154529">"(uendret)"</string>
+    <string name="vpn_secret_not_set" msgid="1037792636371641845">"(ikke satt)"</string>
+    <string name="credentials_category" msgid="8536992056377271234">"Akkreditivlager"</string>
+    <string name="credentials_access" msgid="4843187230913860492">"Bruk sikre akkreditiver"</string>
+    <string name="credentials_access_summary" msgid="319662078718574168">"Gir applikasjoner tilgang til sikre sertifikater og andre akkreditiver"</string>
+    <string name="credentials_unlock" msgid="1463040326264133844">"Velg passord"</string>
+    <string name="credentials_unlock_hint" msgid="594679530407918031">"Skriv inn passordet for akkreditivlageret"</string>
+    <string name="credentials_install_certificates" msgid="177337517568022236">"Installer fra minnekort"</string>
+    <string name="credentials_install_certificates_summary" msgid="7737001268684193093">"Installer krypterte sertifikater fra minnekort"</string>
+    <string name="credentials_set_password" msgid="9104473585811899989">"Velg passord"</string>
+    <string name="credentials_set_password_summary" msgid="8287876917562085701">"Velg eller endre passord for akkreditivlageret"</string>
+    <string name="credentials_reset" msgid="9170150870552453457">"Tøm lager"</string>
+    <string name="credentials_reset_summary" msgid="1530388094693731636">"Tøm akkreditivlageret for alt innhold, og tilbakestill passordet"</string>
+    <string name="credentials_reset_hint" msgid="819990295796804516">"Er du sikker på at du ønsker å slette alle akkreditiver og tilbakestille passordet for akkreditivlageret?"</string>
+    <string name="credentials_old_password" msgid="7553393815538684028">"Nåværende passord:"</string>
+    <string name="credentials_new_password" msgid="267487774686796938">"Nytt passord:"</string>
+    <string name="credentials_confirm_password" msgid="4732250000633424345">"Bekreft nytt passord:"</string>
+    <string name="credentials_first_time_hint" msgid="1567821077545346039">"Velg et passord for akkreditivlageret (minst åtte tegn)"</string>
+    <string name="credentials_wrong_password" msgid="7525192410790152041">"Galt passord. Prøv igjen."</string>
+    <string name="credentials_reset_warning" msgid="6392481296673345268">"Skriv inn passordet. Du har ett forsøk igjen før akkreditivlageret blir tømt."</string>
+    <string name="credentials_reset_warning_plural" msgid="454828369803055270">"Skriv inn passordet. Du har <xliff:g id="NUMBER">%1$d</xliff:g> forsøk igjen før akkreditivlageret blir tømt."</string>
+    <string name="credentials_passwords_mismatch" msgid="5288565139590031733">"Passordene stemmer ikke overens."</string>
+    <string name="credentials_passwords_empty" msgid="8647631321684363549">"Du må skrive inn og bekrefte et passord."</string>
+    <string name="credentials_password_empty" msgid="8292138152983330473">"Skriv inn passordet."</string>
+    <string name="credentials_password_too_short" msgid="7502749986405522663">"Passordet må bestå av minst åtte tegn."</string>
+    <string name="credentials_erased" msgid="7700309135582200849">"Akkreditivlageret ble tømt."</string>
+    <string name="credentials_enabled" msgid="7588607413349978930">"Akkreditivlageret er aktivert."</string>
+    <string name="credentials_disabled" msgid="7453188089059045380">"Akkreditivlageret er deaktivert."</string>
     <string name="emergency_tone_title" msgid="1055954530111587114">"Nødtone"</string>
     <string name="emergency_tone_summary" msgid="722259232924572153">"Velg oppførsel når en nødsamtale opprettes"</string>
+    <string name="privacy_settings" msgid="9206631214140954954">"Personvern"</string>
+    <string name="privacy_settings_title" msgid="1987089301293213705">"Personverninnstillinger"</string>
+    <string name="location_section_title" msgid="6072558684044939786">"Plassering"</string>
+    <string name="settings_section_title" msgid="7413252428447723032">"Innstillinger"</string>
+    <string name="personal_data_section_title" msgid="7815209034443782061">"Personlige data"</string>
+    <string name="backup_settings_title" msgid="2968262658155327829">"Innstillingsbackup"</string>
+    <string name="backup_erase_dialog_title" msgid="6028429904055779443">"Backup av innstillinger"</string>
+    <string name="backup_erase_dialog_message" msgid="9096433810456900531">"Er du sikker på at du ønsker å slutte med backup av innstillingene og fjerne alle kopier på Googles tjenere?"</string>
+    <!-- no translation found for untitled_apn (1230060359198685513) -->
+    <skip />
 </resources>

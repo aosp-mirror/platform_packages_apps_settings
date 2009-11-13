@@ -43,6 +43,14 @@
                 android:targetClass="com.android.settings.ManageApplications" />
     </PreferenceScreen>
 
+    <PreferenceScreen
+            android:title="@string/runningservices_settings_title"
+            android:summary="@string/runningservices_settings_summary">
+        <intent android:action="android.intent.action.MAIN"
+                android:targetPackage="com.android.settings"
+                android:targetClass="com.android.settings.RunningServices" />
+    </PreferenceScreen>
+
     <PreferenceScreen 
             android:title="@string/development_settings_title" 
             android:summary="@string/development_settings_summary">

@@ -33,14 +33,11 @@ public class AccessPointPreference extends Preference implements
     // Signal strength indicator
     private static final int UI_SIGNAL_LEVELS = 4;
 
-    private WifiSettings mWifiSettings;
-    
     private AccessPointState mState;
 
     public AccessPointPreference(WifiSettings wifiSettings, AccessPointState state) {
         super(wifiSettings, null);
         
-        mWifiSettings = wifiSettings;
         mState = state;
         
         setWidgetLayoutResource(R.layout.preference_widget_wifi_signal);

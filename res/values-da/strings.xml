@@ -15,6 +15,8 @@
 -->
 <resources xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <string name="yes" msgid="4676390750360727396">"Ja"</string>
+    <string name="no" msgid="6731231425810196216">"Nej"</string>
     <string name="device_info_default" msgid="7847265875578739287">"Ukendt"</string>
     <string name="turn_on_radio" msgid="8706561489788373676">"Slå radio til"</string>
     <string name="turn_off_radio" msgid="1820294552893884115">"Slå radio fra"</string>
@@ -56,6 +58,7 @@
     <string name="font_size_save" msgid="3450855718056759095">"OK"</string>
     <string name="sdcard_setting" msgid="5922637503871474866">"SD-kort"</string>
     <string name="battery_info_status_label" msgid="8109155295509700309">"Batteristatus:"</string>
+    <string name="battery_info_power_label" msgid="7465140230991349382">"Strømstik:"</string>
     <string name="battery_info_scale_label" msgid="3649763192389778437">"Batteriskala:"</string>
     <string name="battery_info_level_label" msgid="8706526709307788737">"Batteriniveau:"</string>
     <string name="battery_info_health_label" msgid="6416051542741886958">"Batterihelbred:"</string>
@@ -75,6 +78,11 @@
     <string name="battery_info_status_discharging" msgid="6222697503392774475">"Aflader"</string>
     <string name="battery_info_status_not_charging" msgid="2820070506621483576">"Oplader ikke"</string>
     <string name="battery_info_status_full" msgid="2824614753861462808">"Fuld"</string>
+    <string name="battery_info_power_unplugged" msgid="5987246575519551081">"Ikke sluttet til"</string>
+    <string name="battery_info_power_ac" msgid="6808516193001604634">"AC"</string>
+    <string name="battery_info_power_usb" msgid="8012931702516331797">"USB"</string>
+    <string name="battery_info_power_ac_usb" msgid="6777734146838328688">"AC+USB"</string>
+    <string name="battery_info_power_unknown" msgid="7344115502868899881">"Ukendte"</string>
     <string name="battery_info_health_unknown" msgid="5664295556921944255">"Ukendt"</string>
     <string name="battery_info_health_good" msgid="8070356565806711806">"God"</string>
     <string name="battery_info_health_overheat" msgid="8442959549291368806">"Overophed"</string>
@@ -104,14 +112,19 @@
     <string name="bluetooth_notif_ticker" msgid="4726721390078512173">"Anmodning om Bluetooth-parring"</string>
     <string name="bluetooth_notif_title" msgid="2485175521845371514">"Parringsanmodning"</string>
     <string name="bluetooth_notif_message" msgid="5381418499788668724">"Vælg for at parre med "</string>
+    <string name="device_picker" msgid="8721012448931226323">"Bluetooth-enhedssamler"</string>
+    <string name="bluetooth_permission_request" msgid="1523129741266262748">"Anmodning om Bluetooth-tilladelse"</string>
+    <string name="bluetooth_ask_enablement" msgid="2342558978033892004">"Et program på din telefon kræver tilladelse til at aktivere Bluetooth. Ønsker du at gøre dette?"</string>
+    <string name="bluetooth_ask_discovery" msgid="669870705606180872">"Et program på din telefon kræver tilladelse til, at din telefon er synlig for andre Bluetooth-enheder i <xliff:g id="TIMEOUT">%1$d</xliff:g> sekunder. Ønsker du at gøre dette?"</string>
+    <string name="bluetooth_ask_enablement_and_discovery" msgid="7220210326619399542">"Et program på din telefon anmoder om tilladelse til at aktivere Bluetooth, så din telefon er synlig for andre enheder i <xliff:g id="TIMEOUT">%1$d</xliff:g> sekunder. Ønsker du at gøre dette?"</string>
+    <string name="bluetooth_turning_on" msgid="3107102168379705771">"Aktiverer Bluetooth …"</string>
     <string name="date_and_time" msgid="4114084177056654663">"Dato- og tidsindstillinger"</string>
     <string name="date_time_12_hour_sample" msgid="3259617262618020574">"1:00 pm"</string>
     <string name="date_time_24_hour_sample" msgid="8916857570746212357">"13:00"</string>
     <string name="date_time_changeTime_text" msgid="7037437020000867740">"Skift tid"</string>
     <string name="date_time_changeDate_text" msgid="5259762626498028057">"Dato"</string>
     <string name="choose_timezone" msgid="7762866468013985022">"Vælg tidszone"</string>
-    <!-- no translation found for normal_date_format (1982904221918374153) -->
-    <skip />
+    <string name="normal_date_format" msgid="1982904221918374153">"Normal (<xliff:g id="DATE">%s</xliff:g>)"</string>
     <string name="display_preview_label" msgid="1127597250917274792">"Eksempelvisning:"</string>
     <string name="display_font_size_label" msgid="8941851418397475389">"Skrifttypestørrelse:"</string>
     <!-- no translation found for intent_sender_data_label (6332324780477289261) -->
@@ -192,33 +205,23 @@
     <string name="proxy_settings_label" msgid="3271174136184391743">"Proxyindstillinger"</string>
     <string name="cancel" msgid="6859253417269739139">"Annuller"</string>
     <string name="settings_label" msgid="1626402585530130914">"Indstillinger"</string>
-    <!-- no translation found for settings_shortcut (3672145147925639262) -->
-    <skip />
+    <string name="settings_shortcut" msgid="3672145147925639262">"Indstillinger"</string>
     <string name="airplane_mode" msgid="8837269988154128601">"Flytilstand"</string>
     <string name="airplane_mode_summary" msgid="3154817401368780988">"Deaktiver alle trådløse forbindelser"</string>
     <string name="airplane_mode_turning_on" msgid="8871739222526957255">"Deaktiverer trådløse forbindelser ..."</string>
     <string name="airplane_mode_turning_off" msgid="3393168549611505996">"Aktiverer trådløse forbindelser ..."</string>
-    <string name="radio_controls_title" msgid="8356991079873437337">"Trådl. kontrolelementer"</string>
-    <!-- no translation found for radio_controls_summary (2998818677094465517) -->
-    <skip />
-    <!-- no translation found for roaming (3596055926335478572) -->
-    <skip />
-    <!-- no translation found for roaming_enable (3737380951525303961) -->
-    <skip />
-    <!-- no translation found for roaming_disable (1295279574370898378) -->
-    <skip />
-    <!-- no translation found for roaming_reenable_message (9141007271031717369) -->
-    <skip />
-    <!-- no translation found for roaming_turn_it_on_button (4387601818162120589) -->
-    <skip />
-    <!-- no translation found for roaming_warning (1269870211689178511) -->
-    <skip />
-    <!-- no translation found for roaming_reenable_title (7626425894611573131) -->
-    <skip />
-    <!-- no translation found for networks (6333316876545927039) -->
-    <skip />
-    <!-- no translation found for sum_carrier_select (6648929373316748020) -->
-    <skip />
+    <string name="radio_controls_title" msgid="5868688473587168882">"Trådløst og netværk"</string>
+    <string name="wireless_networks_settings_title" msgid="149274247949769551">"Indstillinger for trådløs og netværk"</string>
+    <string name="radio_controls_summary" msgid="2998818677094465517">"Administrer Wi-Fi, Bluetooth, flytilstand, mobile netværker og VPN\'er"</string>
+    <string name="roaming" msgid="3596055926335478572">"Dataroaming"</string>
+    <string name="roaming_enable" msgid="3737380951525303961">"Opret forbindelse til datatjenester under roaming"</string>
+    <string name="roaming_disable" msgid="1295279574370898378">"Opret forbindelse til datatjenester under roaming"</string>
+    <string name="roaming_reenable_message" msgid="9141007271031717369">"Du har mistet dataforbindelsen, fordi du har forladt dit hjemmenetværk med dataroaming slået fra."</string>
+    <string name="roaming_turn_it_on_button" msgid="4387601818162120589">"Slå det til"</string>
+    <string name="roaming_warning" msgid="1269870211689178511">"Tillad dataroaming? Du kan komme ud for væsentlige gebyrer for roaming."</string>
+    <string name="roaming_reenable_title" msgid="7626425894611573131">"Bemærk"</string>
+    <string name="networks" msgid="6333316876545927039">"Udbydervalg"</string>
+    <string name="sum_carrier_select" msgid="6648929373316748020">"Vælg en netværksudbyder"</string>
     <string name="date_and_time_settings_title" msgid="3350640463596716780">"Dato og tid"</string>
     <string name="date_and_time_settings_summary" msgid="2435705040205950381">"Indstil dato, tid, tidszone og formater"</string>
     <string name="date_time_auto" msgid="3086083265745944725">"Automatisk"</string>
@@ -231,25 +234,31 @@
     <string name="date_time_date_format" msgid="436706100255870967">"Vælg datoformat"</string>
     <string name="zone_list_menu_sort_alphabetically" msgid="5683377702671088588">"Sorter alfabetisk"</string>
     <string name="zone_list_menu_sort_by_timezone" msgid="2720190443744884114">"Sorter efter tidszone"</string>
-    <string name="security_settings_title" msgid="4918904614964215087">"Sikkerhed og placering"</string>
-    <!-- no translation found for security_settings_summary (967393342537986570) -->
-    <skip />
+    <string name="security_settings_title" msgid="5168491784222013179">"Placering og sikkerhed"</string>
+    <string name="location_security_settings_title" msgid="4624434296446625554">"Indstillinger for placering og sikkerhed"</string>
+    <string name="security_settings_summary" msgid="967393342537986570">"Indstil Min placering, oplåsning af skærmen, SIM-kortlås, oplysningslagringslås"</string>
+    <string name="cdma_security_settings_summary" msgid="6068799952798901542">"Indstil Min placering, oplåsning af skærmen, oplysningslagringslås"</string>
     <string name="security_passwords_title" msgid="2930627259125138363">"Adgangskoder"</string>
     <string name="bluetooth_quick_toggle_title" msgid="1037056952714061893">"Bluetooth"</string>
     <string name="bluetooth_quick_toggle_summary" msgid="5293641680139873341">"Slå Bluetooth til"</string>
     <string name="bluetooth_settings" msgid="2725796451253089609">"Bluetooth-indstillinger"</string>
     <string name="bluetooth_settings_title" msgid="2824020086246268296">"Bluetooth-indstillinger"</string>
     <string name="bluetooth_settings_summary" msgid="2091062709530570462">"Administrer forbindelser, indstil enhedsnavn og søgbarhed"</string>
-    <string name="bluetooth_pin_entry" msgid="5627349871303455279">"Anmodning om Bluetooth-parring"</string>
+    <string name="bluetooth_pairing_request" msgid="6385750334766370310">"Anmodning om Bluetooth-parring"</string>
     <string name="bluetooth_device_info" msgid="6644515376523965073">"Oplysninger om Bluetooth-enhed"</string>
-    <string name="bluetooth_enter_pin_msg" msgid="7551139612735632370">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g>"\n\n"Indtast PIN-kode for at parre."\n"(Prøv 0000 eller 1234)."</string>
+    <string name="bluetooth_enter_pin_msg" msgid="856962526754150334">\n"Indtast PIN-kode for at forbinde med \"<xliff:g id="DEVICE_NAME">%1$s</xliff:g>\". (Prøv 0000 eller 1234)."</string>
+    <string name="bluetooth_enter_passkey_msg" msgid="8121515818772179228">\n"Indtast adgangsnøgle for at forbinde med \"<xliff:g id="DEVICE_NAME">%1$s</xliff:g>\"."</string>
+    <string name="bluetooth_confirm_passkey_msg" msgid="1205362283945104263">"For at parre med \"<xliff:g id="DEVICE_NAME">%1$s</xliff:g>\" skal du bekræfte, at den viser adgangsnøglen: <xliff:g id="PASSKEY">%2$s</xliff:g>."</string>
+    <string name="bluetooth_incoming_pairing_msg" msgid="1076613564387784476">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g>"\n"ønsker at forbinde."</string>
+    <string name="bluetooth_display_passkey_msg" msgid="3048496029389441579">"Indtast <xliff:g id="PASSKEY">%2$s</xliff:g> på \"<xliff:g id="DEVICE_NAME">%1$s</xliff:g>\" for at forbinde."</string>
+    <string name="bluetooth_pairing_accept" msgid="6163520056536604875">"Par"</string>
+    <string name="bluetooth_pairing_decline" msgid="930951069988011471">"Undlad at parre"</string>
+    <string name="bluetooth_remote_device" msgid="2406662802908395389">"Bluetooth-enhed"</string>
     <string name="bluetooth_error_title" msgid="538287072376677166">"Bemærk"</string>
     <string name="bluetooth_pairing_error_message" msgid="2852744547246910349">"Der var problemer med at parre med <xliff:g id="DEVICE_NAME">%1$s</xliff:g>"</string>
-    <string name="bluetooth_pairing_pin_error_message" msgid="6938408362011024289">"Der var problemer med at parre med <xliff:g id="DEVICE_NAME">%1$s</xliff:g>, fordi den indtastede PIN-kode er forkert."</string>
-    <!-- no translation found for bluetooth_pairing_device_down_error_message (6688215193824686741) -->
-    <skip />
-    <!-- no translation found for bluetooth_pairing_rejected_error_message (1648157108520832454) -->
-    <skip />
+    <string name="bluetooth_pairing_pin_error_message" msgid="6065697229258906937">"Der var problemer med at forbinde med <xliff:g id="DEVICE_NAME">%1$s</xliff:g>, fordi PIN-koden eller adgangsnøglen er forkert."</string>
+    <string name="bluetooth_pairing_device_down_error_message" msgid="6688215193824686741">"Der kan ikke etableres kommunikation med <xliff:g id="DEVICE_NAME">%1$s</xliff:g>."</string>
+    <string name="bluetooth_pairing_rejected_error_message" msgid="1648157108520832454">"Parring afvist af <xliff:g id="DEVICE_NAME">%1$s</xliff:g>."</string>
     <string name="bluetooth_connecting_error_message" msgid="1779660510084746802">"Der var problemer med at oprette forbindelse til <xliff:g id="DEVICE_NAME">%1$s</xliff:g>."</string>
     <string name="bluetooth_preference_scan_title" msgid="2277464653118896016">"Scan efter enheder"</string>
     <string name="bluetooth_device_context_connect" msgid="3997659895003244941">"Forbind"</string>
@@ -261,6 +270,7 @@
     <string name="bluetooth_connect_specific_profiles_title" msgid="6952214406025825164">"Opret forbindelse til ..."</string>
     <string name="bluetooth_profile_a2dp" msgid="3259633293424539529">"Medier"</string>
     <string name="bluetooth_profile_headset" msgid="1874975688666658946">"Telefon"</string>
+    <string name="bluetooth_profile_opp" msgid="3799470046565284440">"Overfør"</string>
     <string name="bluetooth_summary_connected_to_a2dp" msgid="510833839847758664">"Forbundet til medielyd"</string>
     <string name="bluetooth_summary_connected_to_headset" msgid="4876496372728623918">"Forbundet til telefonlyd"</string>
     <string name="bluetooth_summary_connected_to_a2dp_headset" msgid="3045032710457800891">"Forbundet til telefon- og medielyd"</string>
@@ -270,8 +280,11 @@
     <string name="bluetooth_device_advanced_profile_header_title" msgid="3764437426089639639">"Profiler"</string>
     <string name="bluetooth_a2dp_profile_summary_connected" msgid="963376081347721598">"Forbundet til medielyd"</string>
     <string name="bluetooth_headset_profile_summary_connected" msgid="7661070206715520671">"Forbundet til telefonlyd"</string>
+    <string name="bluetooth_opp_profile_summary_connected" msgid="2611913495968309066">"Forbundet til filoverførselsserver"</string>
+    <string name="bluetooth_opp_profile_summary_not_connected" msgid="1267091356089086285">"Ikke forbundet til filoverførselsserver"</string>
     <string name="bluetooth_a2dp_profile_summary_use_for" msgid="4630849022250168427">"Brug medielyd"</string>
     <string name="bluetooth_headset_profile_summary_use_for" msgid="8705753622443862627">"Brug til telefonlyd"</string>
+    <string name="bluetooth_opp_profile_summary_use_for" msgid="1255674547144769756">"Brug til filoverførsel"</string>
     <string name="wifi" msgid="1081550856200013637">"Wi-Fi"</string>
     <string name="wifi_quick_toggle_title" msgid="874495178395350104">"Wi-Fi"</string>
     <string name="wifi_quick_toggle_summary" msgid="1047950931623694366">"Slå Wi-Fi til"</string>
@@ -288,25 +301,13 @@
     <string name="security" msgid="1040691896987225267">"Sikkerhed"</string>
     <string name="wifi_security_open" msgid="3513305614048816607">"Åbn"</string>
     <string name="wifi_security_wep" msgid="7082604129842065776">"WEP"</string>
-    <string name="wifi_security_wpa" msgid="8980169410565477162">"WPA"</string>
-    <string name="wifi_security_wpa2" msgid="5780665935088930524">"WPA2"</string>
-    <!-- no translation found for wifi_security_wpa_eap (7485687331651751101) -->
-    <skip />
-    <!-- no translation found for wifi_security_ieee8021x (8538687609878109005) -->
-    <skip />
+    <string name="wifi_security_psk" msgid="3392399380570381452">"WPA/WPA2 PSK"</string>
+    <string name="wifi_security_eap" msgid="8309434150934969132">"Enterprise(802.1x)"</string>
     <string name="wifi_security_unknown" msgid="4564208312073060668">"Ukendt"</string>
-    <!-- no translation found for wifi_security_verbose_open (8117878112088901945) -->
-    <skip />
-    <!-- no translation found for wifi_security_verbose_wep (9220757688700421508) -->
-    <skip />
-    <!-- no translation found for wifi_security_verbose_wpa (598697674252714455) -->
-    <skip />
-    <!-- no translation found for wifi_security_verbose_wpa2 (4116236883347875722) -->
-    <skip />
-    <!-- no translation found for wifi_security_verbose_wpa_eap (1984821646949066624) -->
-    <skip />
-    <!-- no translation found for wifi_security_verbose_ieee8021x (5552995793910186310) -->
-    <skip />
+    <string name="wifi_security_verbose_open" msgid="8117878112088901945">"åbent netværk"</string>
+    <string name="wifi_security_verbose_wep" msgid="9220757688700421508">"sikret med WEP"</string>
+    <string name="wifi_security_verbose_psk" msgid="1110130025330416225">"sikret med WPA/WPA2 PSK"</string>
+    <string name="wifi_security_verbose_eap" msgid="586632662086063">"sikret med 802.1x EAP"</string>
     <string name="ip_address" msgid="850672263358989449">"IP-adresse"</string>
     <string name="signal" msgid="1947969631626413228">"Signalstyrke"</string>
     <string name="wifi_starting" msgid="6710266609710860129">"Tænder ..."</string>
@@ -319,28 +320,19 @@
     <string name="error_saving" msgid="8294279443961615302">"Netværket kunne ikke gemmes"</string>
     <string name="connect" msgid="3079076576295839400">"Forbind"</string>
     <string name="connect_to_blank" msgid="6950910074058025378">"Opret forbindelse til <xliff:g id="NETWORK_NAME">%1$s</xliff:g>"</string>
-    <!-- no translation found for please_select_eap (4488240331626456338) -->
-    <skip />
-    <!-- no translation found for please_select_phase2 (5231074529772044898) -->
-    <skip />
-    <!-- no translation found for please_type_identity (7061261155499513089) -->
-    <skip />
-    <!-- no translation found for please_type_anonymous_identity (835061562079965048) -->
-    <skip />
-    <!-- no translation found for please_select_client_certificate (2137906961594663234) -->
-    <skip />
-    <!-- no translation found for please_select_ca_certificate (5010815181914420677) -->
-    <skip />
-    <!-- no translation found for please_type_private_key_passwd (4077744679722504443) -->
-    <skip />
+    <string name="please_select_eap" msgid="4488240331626456338">"EAP-metode"</string>
+    <string name="please_select_phase2" msgid="5231074529772044898">"Fase 2-godkendelse"</string>
+    <string name="please_type_identity" msgid="7061261155499513089">"Identitet"</string>
+    <string name="please_type_anonymous_identity" msgid="835061562079965048">"Anonym identitet"</string>
+    <string name="please_select_client_certificate" msgid="2137906961594663234">"Klientcertifikat"</string>
+    <string name="please_select_ca_certificate" msgid="5010815181914420677">"CA-certifikat"</string>
     <string name="please_type_passphrase" msgid="8256017704131522462">"Adgangskode til trådløs"</string>
     <string name="please_type_hex_key" msgid="8751224390407867551">"tast til \"WEP-heksadecimal\" (0-9, A-F)"</string>
     <string name="wifi_show_password" msgid="4235237470701732009">"Vis adgangskode."</string>
     <string name="scan_wifi" msgid="2459901725350542606">"Scan"</string>
     <string name="summary_not_in_range" msgid="3926674700733548684">"Ikke inden for rækkevidde"</string>
-    <!-- no translation found for summary_remembered (6079941090549401742) -->
-    <skip />
-    <string name="summary_connection_failed" msgid="7610394657613410489">"Forbindelsen mislykkedes. Vælg for at prøve igen"</string>
+    <string name="summary_remembered" msgid="6079941090549401742">"husket"</string>
+    <string name="summary_connection_failed" msgid="2351885658101671413">"Forbindelsen mislykkedes. Tryk for at prøve igen"</string>
     <string name="wifi_access_points" msgid="2664629396767022441">"Wi-Fi-netværk"</string>
     <string name="wifi_type_ssid" msgid="1326839657083292017">"Netværk-SSID"</string>
     <string name="wifi_security" msgid="6603611185592956936">"Sikkerhed"</string>
@@ -391,6 +383,7 @@
     <string name="status_disconnected" msgid="7561688569905126046">"Afbrudt"</string>
     <string name="status_failed" msgid="610462050405904601">"Mislykkedes"</string>
     <string name="sound_and_display_settings" msgid="349770582993029003">"Lyd og visning"</string>
+    <string name="sound_and_display_settings_title" msgid="5036144539683697330">"Indstillinger for lyd og visning"</string>
     <string name="sound_settings" msgid="5007659014828162881">"Lydindstillinger"</string>
     <string name="sound_and_display_settings_summary" msgid="1433943789593286064">"Indstil ringetoner, meddelelser, skærmlysstyrke"</string>
     <string name="silent_mode_title" msgid="3181479108593217704">"Lydløs"</string>
@@ -416,17 +409,16 @@
     <string name="sound_effects_enable_title" msgid="3197313718929122833">"Lydudvalg"</string>
     <string name="sound_effects_enable_summary_on" msgid="6154141289879491329">"Afspil lyd, når der foretages skærmvalg"</string>
     <string name="sound_effects_enable_summary_off" msgid="3447739581759560125">"Afspil lyd, når der foretages skærmvalg"</string>
+    <string name="haptic_feedback_enable_title" msgid="6311736559245411290">"Feedback ved berøring"</string>
+    <string name="haptic_feedback_enable_summary_on" msgid="1875779656524793053">"Vibrerer, når der trykkes på funktionstaster og ved visse interaktioner med brugergrænsefladen"</string>
+    <string name="haptic_feedback_enable_summary_off" msgid="7287885436963105314">"Vibrerer, når der trykkes på funktionstaster og ved visse interaktioner med brugergrænsefladen"</string>
     <string name="play_media_notification_sounds_enable_title" msgid="1008791464029179529">"SD-kortmeddelelser"</string>
-    <!-- no translation found for play_media_notification_sounds_enable_summary_on (7675466959375667370) -->
-    <skip />
-    <!-- no translation found for play_media_notification_sounds_enable_summary_off (8672617597028744693) -->
-    <skip />
-    <string name="sync_settings" msgid="2212736205476453234">"Datasynkronisering"</string>
-    <string name="sync_settings_summary" msgid="6480534906375217074">"Vælg, hvilke programmer der skal synkroniseres"</string>
-    <!-- no translation found for search_settings (1910951467596035063) -->
-    <skip />
-    <!-- no translation found for search_settings_summary (9205656546570654169) -->
-    <skip />
+    <string name="play_media_notification_sounds_enable_summary_on" msgid="7675466959375667370">"Afspil lyd for SD-kortmeddelelser"</string>
+    <string name="play_media_notification_sounds_enable_summary_off" msgid="8672617597028744693">"Afspil lyd for SD-kortmeddelelser"</string>
+    <string name="sync_settings" msgid="9186125469300013491">"Konti og synkronisering"</string>
+    <string name="sync_settings_summary" msgid="2962179505214965667">"Tilføj eller fjern konti, og skift kontoindstillinger"</string>
+    <string name="search_settings" msgid="1910951467596035063">"Søg"</string>
+    <string name="search_settings_summary" msgid="9205656546570654169">"Administrer søgeindstillinger og oversigt"</string>
     <string name="display_settings" msgid="3912042046350078328">"Visningsindstillinger"</string>
     <string name="animations_title" msgid="1062189037402346023">"Animation"</string>
     <string name="animations_summary_on" msgid="8843613112130484436">"Vis animationer, når der åbnes og lukkes for vinduer"</string>
@@ -438,6 +430,7 @@
     <string name="brightness_summary" msgid="838917350127550703">"Juster skærmens lysstyrke"</string>
     <string name="screen_timeout" msgid="4882669461447531301">"Timeout for skærmen"</string>
     <string name="screen_timeout_summary" msgid="2905757633140605334">"Juster forsinkelsen, inden skærmen slukkes automatisk"</string>
+    <string name="automatic_brightness" msgid="5014143533884135461">"Automatisk lysstyrke"</string>
     <string name="sim_lock_settings" msgid="3392331196873564292">"Indstillinger for lås af SIM-kort"</string>
     <string name="sim_lock_settings_category" msgid="5136244267576697004">"Opsæt SIM-kortlås"</string>
     <string name="sim_lock_settings_title" msgid="9018585580955414596">"SIM-kortlås"</string>
@@ -470,18 +463,14 @@
     <string name="device_info_not_available" msgid="8062521887156825182">"Ikke tilgængelig"</string>
     <string name="device_status_activity_title" msgid="1411201799384697904">"Status"</string>
     <string name="device_status" msgid="607405385799807324">"Status"</string>
-    <!-- no translation found for device_status_summary (2599162787451519618) -->
-    <skip />
-    <string name="storage_settings_title" msgid="8461515684514801302">"SD-kort og tlf.lag.plads"</string>
+    <string name="device_status_summary" msgid="2599162787451519618">"Telefonnummer, signal osv."</string>
+    <string name="storage_settings" msgid="6681164315506788024">"SD-kort og tlf.lag.plads"</string>
+    <string name="storage_settings_title" msgid="5379463509034022773">"Indstillinger for lagerplads på SD-kort og telefon"</string>
     <string name="storage_settings_summary" msgid="9176693537325988610">"Demonter SD-kort, vis ledig lagerplads"</string>
-    <!-- no translation found for status_number (5123197324870153205) -->
-    <skip />
-    <!-- no translation found for status_min_number (3519504522179420597) -->
-    <skip />
-    <!-- no translation found for status_prl_version (8499039751817386529) -->
-    <skip />
-    <!-- no translation found for status_meid_number (1751442889111731088) -->
-    <skip />
+    <string name="status_number" msgid="5123197324870153205">"Mit telefonnummer"</string>
+    <string name="status_min_number" msgid="3519504522179420597">"MIN"</string>
+    <string name="status_prl_version" msgid="8499039751817386529">"PRL-version"</string>
+    <string name="status_meid_number" msgid="1751442889111731088">"MEID"</string>
     <string name="status_network_type" msgid="3279383550222116235">"Mobil netværkstype"</string>
     <string name="status_data_state" msgid="5503181397066522950">"Mobil netværkstilstand"</string>
     <string name="status_service_state" msgid="2323931627519429503">"Servicetilstand"</string>
@@ -520,6 +509,11 @@
     <string name="apn_mms_port" msgid="4074188088199243040">"MMS-port"</string>
     <string name="apn_mcc" msgid="4258628382260674636">"MCC"</string>
     <string name="apn_mnc" msgid="8629374076888809874">"MNC"</string>
+    <string name="apn_auth_type" msgid="6167205395676037015">"Godkendelsestype"</string>
+    <string name="apn_auth_type_none" msgid="5069592676845549926">"Ingen"</string>
+    <string name="apn_auth_type_pap" msgid="1666934536996033383">"PAP"</string>
+    <string name="apn_auth_type_chap" msgid="3369626283789068360">"CHAP"</string>
+    <string name="apn_auth_type_pap_chap" msgid="9102343063036134541">"PAP eller CHAP"</string>
     <string name="apn_type" msgid="469613123902220544">"APN-type"</string>
     <string name="menu_delete" msgid="6981294422841124659">"Slet APN"</string>
     <string name="menu_new" msgid="3014205883303921729">"Ny APN"</string>
@@ -535,11 +529,9 @@
     <string name="restore_default_apn_completed" msgid="3990449939234957281">"Nulstilling af APN-standardindstillinger afsluttet"</string>
     <string name="master_clear_title" msgid="5907939616087039756">"Nulstilling af fabriksdata"</string>
     <string name="master_clear_summary" msgid="4986154238001088492">"Sletter alle data på telefonen"</string>
-    <!-- no translation found for master_clear_desc (7823268823499739178) -->
-    <skip />
+    <string name="master_clear_desc" msgid="7823268823499739178">"Dette sletter alle data fra din telefon, inklusive :"\n<li>"Din Google-konto"</li>\n<li>"System- og programdata samt indstillinger"</li>\n<li>"Downloadede programmer"</li>\n"Det sletter ikke:"\n<li>"Nuværende systemsoftware og programbundter"</li>\n<li>"SD-kortfiler, som f.eks. musik og fotos"</li></string>
     <string name="master_clear_button_text" msgid="7550632653343157971">"Nulstil telefon"</string>
-    <!-- no translation found for master_clear_final_desc (6917971132484622696) -->
-    <skip />
+    <string name="master_clear_final_desc" msgid="6917971132484622696">"Slet alle dine personlige oplysninger og downloadede programmer? Denne handling kan ikke omstødes?"</string>
     <string name="master_clear_final_button_text" msgid="5390908019019242910">"Slet alting"</string>
     <string name="master_clear_gesture_prompt" msgid="1428645764883536750">"Tegn dit mønster til at låse op"</string>
     <string name="master_clear_gesture_explanation" msgid="8901714274312707918">"Du skal tegne dit mønster til at låse op for at bekræfte nulstilling af telefonen."</string>
@@ -556,20 +548,19 @@
     <string name="call_settings_summary" msgid="7291195704801002886">"Opsæt voicemail, viderestilling af opkald, ventende opkald, opkalds-id"</string>
     <string name="network_settings_title" msgid="7967552516440151852">"Mobilnetværk"</string>
     <string name="network_settings_summary" msgid="5149750850846813553">"Indstil valgmuligheder for roaming, netværk, APN\'er"</string>
-    <!-- no translation found for location_title (1029961368397484576) -->
-    <skip />
+    <string name="location_title" msgid="1029961368397484576">"Min placering"</string>
     <string name="location_network_based" msgid="8815705866861993344">"Brug trådløse netværk"</string>
     <string name="location_networks_disabled" msgid="2708968452901433980">"Se placering i programmer (som f.eks. Maps) ved hjælp af trådløse netværk"</string>
     <string name="location_neighborhood_level" msgid="4656658097932515921">"Placering er afgjort af Wi-Fi og/eller mobile netværk"</string>
-    <string name="location_gps" msgid="375912731641377120">"Aktiver GPS-satelliter"</string>
-    <string name="location_street_level" msgid="5899941752252356344">"Find præcise placeringer på gadeniveau (fravælg for at spare på batteriet)"</string>
+    <string name="location_gps" msgid="6296125378829097831">"Brug GPS-satellitter"</string>
+    <string name="location_street_level" msgid="6460740847018275745">"Find præcise placeringer på gadeniveau (fjern markering for at spare på batteriet)"</string>
     <string name="location_gps_disabled" msgid="6632537158777308128">"Gå til gadeniveau (kræver mere batteri plus visning af himmel)"</string>
-    <!-- no translation found for use_location_title (7585990952633568732) -->
-    <skip />
-    <!-- no translation found for use_location_summary (4411467143899877395) -->
-    <skip />
-    <!-- no translation found for use_location_warning_message (5696732842038416151) -->
-    <skip />
+    <string name="assisted_gps" msgid="4649317129586736885">"Brug assisteret GPS"</string>
+    <string name="assisted_gps_enabled" msgid="8751899609589792803">"Brug server til at assistere GPS (fjern markering for at mindske netværksforbrug)"</string>
+    <string name="assisted_gps_disabled" msgid="6982698333968010748">"Brug server til at assistere GPS (fjern markering for at forbedre GPS-ydelsen)"</string>
+    <string name="use_location_title" msgid="5447030582538504247">"Brug Min placering"</string>
+    <string name="use_location_summary" msgid="1816849484040070431">"Brug Min placering til Google-søgeresultater og andre Google-tjenester"</string>
+    <string name="use_location_warning_message" msgid="1420184860518262439">"Tillad Google at bruge placering til forbedrede søgeresultater og andre tjenester?"</string>
     <string name="agree" msgid="6288718671527758326">"Enig"</string>
     <string name="disagree" msgid="6221069272309799230">"Ikke enig"</string>
     <string name="about_settings" msgid="1743378368185371685">"Om telefon"</string>
@@ -579,12 +570,15 @@
     <string name="copyright_title" msgid="865906688917260647">"Ophavsret"</string>
     <string name="license_title" msgid="1990487604356037871">"Licens"</string>
     <string name="terms_title" msgid="7697580845616764642">"Vilkår og betingelser"</string>
-    <!-- no translation found for system_tutorial_list_item_title (9082844446660969729) -->
-    <skip />
+    <string name="system_tutorial_list_item_title" msgid="9082844446660969729">"Systemselvstudie"</string>
     <string name="system_tutorial_list_item_summary" msgid="3861815254521030201">"Lær, hvordan du bruger din telefon"</string>
     <string name="settings_license_activity_title" msgid="7553683406244228650">"Open source-licenser"</string>
     <string name="settings_license_activity_unavailable" msgid="4210539215951487627">"Der er problemer med at indlæse licenserne."</string>
     <string name="settings_license_activity_loading" msgid="3337535809093591740">"Indlæser ..."</string>
+    <string name="settings_safetylegal_title" msgid="1289483965535937431">"Sikkerhedsoplysninger"</string>
+    <string name="settings_safetylegal_activity_title" msgid="6901214628496951727">"Sikkerhedsoplysninger"</string>
+    <string name="settings_safetylegal_activity_unreachable" msgid="3198912875259612887">"Din telefon er ikke tilsluttet en datatjeneste. For at se disse oplysninger nu skal du gå til  %s fra en hvilken som helst computer, der er forbundet til internettet."</string>
+    <string name="settings_safetylegal_activity_loading" msgid="8059022597639516348">"Indlæser ..."</string>
     <string name="lock_settings_title" msgid="5828348303971852121">"Mønster til at låse skærmen op"</string>
     <string name="lockpattern_change_lock_pattern_label" msgid="5679630792003440352">"Skift oplåsningsmønster"</string>
     <string name="lockpattern_need_to_unlock" msgid="757935356911054465">"Bekræft gemt mønster"</string>
@@ -613,9 +607,9 @@
     <string name="skip_button_label" msgid="8680422740354436943">"Annuller"</string>
     <string name="next_button_label" msgid="8890792540116568321">"Næste"</string>
     <string name="lock_title" msgid="4059246467204273930">"Sikring af din telefon"</string>
-    <string name="lock_intro_message" msgid="5352897389718432077"><font size="17">"Beskyt din telefon mod uautoriseret brug ved at oprette et personligt mønster til at låse skærmen op. "\n<font height="17">\n</font><b>"1"</b>"  På den næste skærm kan du se et eksempel på, hvordan mønsteret tegnes. "\n<font height="17">\n</font><b>"2"</b>"  Når du er klar, kan du tegne dit eget personlige mønster til at låse op. Eksperimenter med forskellige mønstre, men forbind mindst fire punkter. "\n<font height="17">\n</font><b>"3"</b>"  Tegn dit mønster igen for at bekræfte. "\n<font height="17">\n</font><b>"Er du klar? Vælg \"Næste\""</b>". "\n<font height="3">\n</font>"Du kan efterlade din telefon ubeskyttet ved at vælge \"Annuller\"."</font></string>
+    <string name="lock_intro_message" msgid="9100785646737118042"><font size="17">"Beskyt din telefon mod uautoriseret brug ved at oprette et personligt mønster til at låse skærmen op. "\n<font height="17">\n</font><b>"1"</b>"  På næste skærm kan du se et eksempel på, hvordan mønsteret tegnes. "\n<font height="17">\n</font><b>"2"</b>"  Når du er klar, kan du tegne dit eget personlige mønster til at låse op. Eksperimenter med forskellige mønstre, men forbind mindst fire punkter. "\n<font height="17">\n</font><b>"3"</b>"  Tegn dit mønster igen for at bekræfte. "\n<font height="17">\n</font><b>"Er du klar? Tryk på \"Næste\""</b>". "\n<font height="3">\n</font>"Du kan lade din telefon være ubeskyttet ved at trykke på \"Annuller\"."</font></string>
     <string name="lock_example_title" msgid="8052305554017485410">"Eksempelmønster"</string>
-    <string name="lock_example_message" msgid="7431982730914254881">"Forbind mindst fire punkter."\n" "\n"Vælg \"Næste\", når du er klar til at tegne dit eget mønster."</string>
+    <string name="lock_example_message" msgid="1838650097090632706">"Forbind mindst fire punkter."\n" "\n"Tryk på \"Næste\", når du er klar til at tegne dit eget mønster."</string>
     <string name="manageapplications_settings_title" msgid="5712405848153426706">"Administ. programmer"</string>
     <string name="manageapplications_settings_summary" msgid="6097117021500651232">"Administrer og fjern installerede programmer"</string>
     <string name="applications_settings" msgid="3736173521008476946">"Programmer"</string>
@@ -638,8 +632,7 @@
     <string name="data_size_label" msgid="8679376373625710107">"Data"</string>
     <string name="uninstall_text" msgid="3644892466144802466">"Afinstaller"</string>
     <string name="clear_user_data_text" msgid="5597622864770098388">"Ryd data"</string>
-    <!-- no translation found for app_factory_reset (6635744722502563022) -->
-    <skip />
+    <string name="app_factory_reset" msgid="6635744722502563022">"Afinstaller opdateringer"</string>
     <string name="auto_launch_enable_text" msgid="2630656657744196691">"Du har valgt at starte dette program som standard for nogle handlinger."</string>
     <string name="auto_launch_disable_text" msgid="7800385822185540166">"Der er ikke indstillet nogen standarder."</string>
     <string name="clear_activities" msgid="7408923511535174430">"Ryd standarder"</string>
@@ -650,32 +643,41 @@
     <string name="filter" msgid="2018011724373033887">"Filter"</string>
     <string name="filter_dlg_title" msgid="6507663329723966854">"Vælg filtervalgmuligheder"</string>
     <string name="filter_apps_all" msgid="5142129378749391876">"Alle"</string>
-    <string name="filter_apps_third_party" msgid="1096017647285183437">"Tredjeparts"</string>
+    <string name="filter_apps_third_party" msgid="7786348047690140979">"Overført"</string>
     <string name="filter_apps_running" msgid="7767071454371350486">"Kørende"</string>
     <string name="loading" msgid="3200408047793887917">"Indlæser ..."</string>
     <string name="recompute_size" msgid="7722567982831691718">"Beregner størrelse igen ..."</string>
     <string name="clear_data_dlg_title" msgid="4470209520936375508">"Slet"</string>
-    <string name="clear_data_dlg_text" msgid="8796694785488630642">"Alle de oplysninger, du har gemt i dette program, slettes permanent."</string>
+    <string name="clear_data_dlg_text" msgid="8368035073300828451">"Alle dette programs data slettes permanent. Det omfatter alle filer, indstillinger, konti, databaser osv."</string>
     <string name="dlg_ok" msgid="2402639055725653590">"OK"</string>
     <string name="dlg_cancel" msgid="1674753358972975911">"Annuller"</string>
     <string name="app_not_found_dlg_title" msgid="8458335716378083713">"Programmet blev ikke fundet"</string>
     <string name="app_not_found_dlg_text" msgid="2980271680333341554">"Programmet blev ikke fundet på listen over installerede programmer."</string>
     <string name="clear_data_failed" msgid="581956197586913865">"Programdata kunne ikke ryddes."</string>
-    <!-- no translation found for app_factory_reset_dlg_title (6116199391150388147) -->
-    <skip />
-    <!-- no translation found for app_factory_reset_dlg_text (438395129140568893) -->
-    <skip />
-    <!-- no translation found for clear_failed_dlg_title (2387060805294783175) -->
-    <skip />
-    <!-- no translation found for clear_failed_dlg_text (7943411157007320290) -->
-    <skip />
+    <string name="app_factory_reset_dlg_title" msgid="6116199391150388147">"Afinstaller opdateringer"</string>
+    <string name="app_factory_reset_dlg_text" msgid="438395129140568893">"Ønsker du at afinstallere alle opdateringer til dette Android-systemprogram?"</string>
+    <string name="clear_failed_dlg_title" msgid="2387060805294783175">"Ryd data"</string>
+    <string name="clear_failed_dlg_text" msgid="7943411157007320290">"Rydning af data til programmet mislykkedes"</string>
     <string name="security_settings_desc" msgid="3116027624526915561">"Dette program kan få adgang til følgende på din telefon:"</string>
     <string name="computing_size" msgid="1599186977475211186">"Beregner ..."</string>
     <string name="invalid_size_value" msgid="1901940003700269523">"Pakkestørrelse kunne ikke beregnes"</string>
-    <string name="empty_list_msg" msgid="1883660401486953588">"Du har ikke installeret nogen tredjepartsprogrammer."</string>
-    <!-- no translation found for version_text (9189073826278676425) -->
-    <skip />
-    <string name="language_settings" msgid="2939555761536357092">"Landestandard og tekst"</string>
+    <string name="empty_list_msg" msgid="2901049162265094971">"Du har ikke installeret nogen tredjepartsprogrammer."</string>
+    <string name="version_text" msgid="9189073826278676425">"version <xliff:g id="VERSION_NUM">%1$s</xliff:g>"</string>
+    <string name="runningservices_settings_title" msgid="8097287939865165213">"Kørende tjenester"</string>
+    <string name="runningservices_settings_summary" msgid="854608995821032748">"Vis og kontroller igangværende tjenester"</string>
+    <string name="service_restarting" msgid="2242747937372354306">"Genstarter"</string>
+    <string name="no_running_services" msgid="6981216347270280598">"Der er ingen kørende tjenester"</string>
+    <string name="confirm_stop_service" msgid="5700448757318301681">"Stop tjeneste?"</string>
+    <string name="confirm_stop_service_msg" msgid="1202118456282395730">"Denne tjeneste kører ikke, før den startes igen. Det kan have uønskede konsekvenser for programmet <xliff:g id="APPLICATION">%1$s</xliff:g>."</string>
+    <string name="confirm_stop_stop" msgid="7382363913280993331">"Stop"</string>
+    <string name="confirm_stop_cancel" msgid="206495326622692381">"Annuller"</string>
+    <string name="service_started_by_app" msgid="8432097226392386802">"Startet af program: tryk for at stoppe"</string>
+    <string name="service_client_name" msgid="2337664610975074717">"<xliff:g id="CLIENT_NAME">%1$s</xliff:g>: tryk for at administrere"</string>
+    <string name="service_background_processes" msgid="5158600475629177758">"Ledig: <xliff:g id="FREE">%2$s</xliff:g>+<xliff:g id="MEMORY">%3$s</xliff:g> i <xliff:g id="COUNT">%1$d</xliff:g>"</string>
+    <string name="service_foreground_processes" msgid="4013890350284680796">"Andre: <xliff:g id="MEMORY">%2$s</xliff:g> i <xliff:g id="COUNT">%1$d</xliff:g>"</string>
+    <string name="service_process_name" msgid="8630408984456958400">"Proces: <xliff:g id="PROCESS">%1$s</xliff:g>"</string>
+    <string name="language_settings" msgid="502219872342167227">"Sprog og tastatur"</string>
+    <string name="language_keyboard_settings_title" msgid="3455826933385341107">"Sprog- og tastaturindstillinger"</string>
     <string name="language_settings_summary" msgid="595647729475399987">"Indstil landestandard (land og område), tekstinput…"</string>
     <string name="language_category" msgid="3391756582724541530">"Landestandardindstilling"</string>
     <string name="text_category" msgid="6342540511465136739">"Tekstindstillinger"</string>
@@ -690,7 +692,7 @@
     <string name="auto_punctuate_summary" msgid="4372126865670574837">"Tryk på mellemrumstasten to gange for at indsætte \".\""</string>
     <string name="show_password" msgid="2198798062604049206">"Synlig adgangskode"</string>
     <string name="show_password_summary" msgid="3806709974395178121">"Vis adgangskode, mens du indtaster"</string>
-    <string name="ime_security_warning" msgid="3458652708716006477">"Inputmetoden vil muligvis være i stand til at indsamle al den tekst, du indtaster, inklusive personlige data som adgangskoder og kreditkortnumre. Den kommer fra programmet <xliff:g id="IME_APPLICATION_NAME">%1$s</xliff:g>. Aktiver denne inputmetode?"</string>
+    <string name="ime_security_warning" msgid="812267421486877917">"Denne indtastningsmetode vil muligvis være i stand til at indsamle al den tekst, du indtaster, herunder personlige data som adgangskoder og kreditkortnumre. Den kommer fra programmet <xliff:g id="IME_APPLICATION_NAME">%1$s</xliff:g>. Vil du bruge denne indtastningsmetode?"</string>
     <string name="user_dict_settings_titlebar" msgid="765659257455000490">"Brugerordbog"</string>
     <string name="user_dict_settings_title" msgid="8357027437499042191">"Brugerordbog"</string>
     <string name="user_dict_settings_summary" msgid="2460427065601355471">"Tilføj og fjern ord fra brugerordbogen"</string>
@@ -718,7 +720,7 @@
     <string name="input_methods_settings_title" msgid="6800066636850553887">"Tekstinput"</string>
     <string name="input_methods_settings_summary" msgid="7571173442946675205">"Administrer valgmuligheder for tekstinput"</string>
     <string name="input_methods_settings_label_format" msgid="6002887604815693322">"<xliff:g id="IME_NAME">%1$s</xliff:g> indstillinger"</string>
-    <string name="onscreen_keyboard_settings_summary" msgid="4919680715154885028">"Indstillinger for skærmtastatur"</string>
+    <string name="onscreen_keyboard_settings_summary" msgid="5841558383556238653">"Indstillinger for skærmens tastatur"</string>
     <string name="builtin_keyboard_settings_title" msgid="8169889453770863227">"Enhedstastatur"</string>
     <string name="builtin_keyboard_settings_summary" msgid="6404687907454621637">"Indstillinger for indbygget tastatur"</string>
     <string name="development_settings_title" msgid="6719732334835420989">"Udvikling"</string>
@@ -729,13 +731,11 @@
     <string name="keep_screen_on_summary" msgid="2173114350754293009">"Skærmen går aldrig i dvale, når der lades op"</string>
     <string name="allow_mock_location" msgid="2787962564578664888">"Tillad imiterede placer."</string>
     <string name="allow_mock_location_summary" msgid="317615105156345626">"Tillad imiterede placer."</string>
-    <!-- no translation found for adb_warning_title (1756027479229533250) -->
-    <skip />
-    <!-- no translation found for adb_warning_message (5352555112049663033) -->
-    <skip />
+    <string name="adb_warning_title" msgid="6234463310896563253">"Vil du tillade USB-fejlretning?"</string>
+    <string name="adb_warning_message" msgid="5352555112049663033">"USB-fejlretning er kun beregnet til udviklingsformål. Det kan bruges til at kopiere data mellem din computer og din enhed, installere programmer på din enhed uden underretning og læse logdata."</string>
     <string name="gadget_picker_title" msgid="98374951396755811">"Vælg gadget"</string>
     <string name="widget_picker_title" msgid="9130684134213467557">"Vælg widget"</string>
-    <string name="battery_history_details_for" msgid="5189636461798594740">"Detaljer for UID %d"</string>
+    <string name="battery_history_details_for" msgid="5924639922153109669">"Detaljer for UID <xliff:g id="NUMBER">%d</xliff:g>"</string>
     <string name="battery_history_uid" msgid="1016606150528436298">"UID <xliff:g id="USER_ID">%1$d</xliff:g>"</string>
     <string name="battery_history_network_usage" msgid="8010852371665217020">"Netværksbrugsdetaljer for <xliff:g id="APP_NAME">%1$s</xliff:g>:"</string>
     <string name="battery_history_bytes_received" msgid="980307569180518302">"Modtagne bytes: <xliff:g id="BYTES">%1$d</xliff:g>"</string>
@@ -746,14 +746,10 @@
     <string name="battery_history_system_time" msgid="2015862072724507547">"Systemtid:"</string>
     <string name="battery_history_total_time" msgid="3618703970098556104">"Tid i alt:"</string>
     <string name="battery_history_starts" msgid="9137453931978571696">"Start: <xliff:g id="STARTS">%1$d</xliff:g>"</string>
-    <!-- no translation found for battery_history_days (7110262897769622564) -->
-    <skip />
-    <!-- no translation found for battery_history_hours (7525170329826274999) -->
-    <skip />
-    <!-- no translation found for battery_history_minutes (1467775596084148610) -->
-    <skip />
-    <!-- no translation found for battery_history_seconds (4283492130945761685) -->
-    <skip />
+    <string name="battery_history_days" msgid="7110262897769622564">"<xliff:g id="DAYS">%1$d</xliff:g>d <xliff:g id="HOURS">%2$d</xliff:g>t <xliff:g id="MINUTES">%3$d</xliff:g>m <xliff:g id="SECONDS">%4$d</xliff:g>s"</string>
+    <string name="battery_history_hours" msgid="7525170329826274999">"<xliff:g id="HOURS">%1$d</xliff:g>t <xliff:g id="MINUTES">%2$d</xliff:g>m <xliff:g id="SECONDS">%3$d</xliff:g>s"</string>
+    <string name="battery_history_minutes" msgid="1467775596084148610">"<xliff:g id="MINUTES">%1$d</xliff:g>m <xliff:g id="SECONDS">%2$d</xliff:g>s"</string>
+    <string name="battery_history_seconds" msgid="4283492130945761685">"<xliff:g id="SECONDS">%1$d</xliff:g>S"</string>
     <string name="battery_history_packages_sharing_this_uid" msgid="4101596071379250050">"Pakker, der deler denne UID:"</string>
     <string name="battery_history_no_data" msgid="1177238743237067617">"Der er ingen tilgængelige batteribrugsdata"</string>
     <string name="battery_history_sensor" msgid="2333488996028993982">"Sensor:"</string>
@@ -775,400 +771,209 @@
     <string name="app_name_label" msgid="2000949925256858308">"Program"</string>
     <string name="launch_count_label" msgid="4019444833263957024">"Optælling"</string>
     <string name="usage_time_label" msgid="295954901452833058">"Brugstid"</string>
-    <!-- no translation found for accessibility_settings_title (4239640930601071058) -->
-    <skip />
-    <!-- no translation found for accessibility_settings_summary (8185181964847149507) -->
-    <skip />
-    <!-- no translation found for toggle_accessibility_title (650839277066574497) -->
-    <skip />
-    <!-- no translation found for accessibility_services_category (8127851026323672607) -->
-    <skip />
-    <!-- no translation found for no_accessibility_services_summary (694578333333808159) -->
-    <skip />
-    <!-- no translation found for accessibility_service_security_warning (8386156287296967181) -->
-    <skip />
-    <!-- no translation found for accessibility_service_disable_warning (8930591383312775132) -->
-    <skip />
-    <!-- no translation found for power_usage_summary_title (5180282911164282324) -->
-    <skip />
-    <!-- no translation found for power_usage_summary (7237084831082848168) -->
-    <skip />
-    <!-- no translation found for battery_since_unplugged (338073389740738437) -->
-    <skip />
-    <!-- no translation found for battery_since_reset (7464546661121187045) -->
-    <skip />
-    <!-- no translation found for battery_stats_duration (7464501326709469282) -->
-    <skip />
+    <string name="accessibility_settings" msgid="3975902491934816215">"Tilgængelighed"</string>
+    <string name="accessibility_settings_title" msgid="2130492524656204459">"Indstillinger for tilgængelighed"</string>
+    <string name="accessibility_settings_summary" msgid="8185181964847149507">"Administrer tilgængelighedsvalgmuligheder"</string>
+    <string name="toggle_accessibility_title" msgid="650839277066574497">"Tilgængelighed"</string>
+    <string name="accessibility_services_category" msgid="8127851026323672607">"Tilgængelighedstjenester"</string>
+    <string name="no_accessibility_services_summary" msgid="694578333333808159">"Der er ingen installerede tilgængelighedstjenester."</string>
+    <string name="accessibility_service_security_warning" msgid="4066258132331302670">"Denne tilgængelighedstjeneste vil muligvis være i stand til at indsamle al den tekst, du indtaster, inklusive personlige data, kreditkortoplysninger undtagen adgangskoder. Den kan også registrere dine brugergrænsefladeinteraktioner. Den kommer fra programmet <xliff:g id="ACCESSIBILITY_SERVICE_NAME">%1$s</xliff:g>. Vil du aktivere denne tilgængelighedstjeneste?"</string>
+    <string name="accessibility_service_disable_warning" msgid="8930591383312775132">"Deaktiver tilgængelighed?"</string>
+    <string name="power_usage_summary_title" msgid="5180282911164282324">"Batteriforbrug"</string>
+    <string name="power_usage_summary" msgid="7237084831082848168">"Hvad, der har brugt batteriet"</string>
+    <string name="battery_since_unplugged" msgid="338073389740738437">"Batteriforbrug siden afbrydelse"</string>
+    <string name="battery_since_reset" msgid="7464546661121187045">"Batteriforbrug siden nulstilling"</string>
+    <string name="battery_stats_duration" msgid="7464501326709469282">"<xliff:g id="TIME">%1$s</xliff:g> siden afbrydelse"</string>
     <!-- no translation found for battery_stats_last_duration (1535831453827905957) -->
     <skip />
-    <!-- no translation found for awake (387122265874485088) -->
-    <skip />
-    <!-- no translation found for wifi_on_time (4630925382578609056) -->
-    <skip />
-    <!-- no translation found for bluetooth_on_time (4478515071957280711) -->
-    <skip />
-    <!-- no translation found for usage_name_percent (1899151069711662289) -->
-    <skip />
-    <!-- no translation found for details_title (7564809986329021063) -->
-    <skip />
-    <!-- no translation found for details_subtitle (32593908269911734) -->
-    <skip />
-    <!-- no translation found for controls_subtitle (390468421138288702) -->
-    <skip />
-    <!-- no translation found for packages_subtitle (4736416171658062768) -->
-    <skip />
-    <!-- no translation found for power_screen (2353149143338929583) -->
-    <skip />
-    <!-- no translation found for power_wifi (2382791137776486974) -->
-    <skip />
-    <!-- no translation found for power_bluetooth (4373329044379008289) -->
-    <skip />
-    <!-- no translation found for power_cell (6596471490976003056) -->
-    <skip />
-    <!-- no translation found for power_phone (5392641106474567277) -->
-    <skip />
-    <!-- no translation found for power_idle (9055659695602194990) -->
-    <skip />
-    <!-- no translation found for usage_type_cpu (715162150698338714) -->
-    <skip />
-    <!-- no translation found for usage_type_cpu_foreground (6500579611933211831) -->
-    <skip />
-    <!-- no translation found for usage_type_gps (7989688715128160790) -->
-    <skip />
-    <!-- no translation found for usage_type_phone (9108247984998041853) -->
-    <skip />
-    <!-- no translation found for usage_type_data_send (2857401966985425427) -->
-    <skip />
-    <!-- no translation found for usage_type_data_recv (7251090882025234185) -->
-    <skip />
-    <!-- no translation found for usage_type_audio (6957269406840886290) -->
-    <skip />
-    <!-- no translation found for usage_type_video (4295357792078579944) -->
-    <skip />
-    <!-- no translation found for usage_type_on_time (3351200096173733159) -->
-    <skip />
-    <!-- no translation found for usage_type_no_coverage (3797004252954385053) -->
-    <skip />
-    <!-- no translation found for battery_action_stop (649958863744041872) -->
-    <skip />
-    <!-- no translation found for battery_action_app_details (3275013531871113681) -->
-    <skip />
-    <!-- no translation found for battery_action_app_settings (350562653472577250) -->
-    <skip />
-    <!-- no translation found for battery_action_display (5302763261448580102) -->
-    <skip />
-    <!-- no translation found for battery_action_wifi (5452076674659927993) -->
-    <skip />
-    <!-- no translation found for battery_action_bluetooth (8374789049507723142) -->
-    <skip />
-    <!-- no translation found for battery_desc_voice (8980322055722959211) -->
-    <skip />
-    <!-- no translation found for battery_desc_standby (3009080001948091424) -->
-    <skip />
-    <!-- no translation found for battery_desc_radio (5479196477223185367) -->
-    <skip />
-    <!-- no translation found for battery_sugg_radio (8211336978326295047) -->
-    <skip />
-    <!-- no translation found for battery_desc_display (5432795282958076557) -->
-    <skip />
-    <!-- no translation found for battery_sugg_display (3370202402045141760) -->
-    <skip />
-    <!-- no translation found for battery_desc_wifi (1702486494565080431) -->
-    <skip />
-    <!-- no translation found for battery_sugg_wifi (7542345142282261691) -->
-    <skip />
-    <!-- no translation found for battery_desc_bluetooth (7535520658674621902) -->
-    <skip />
-    <!-- no translation found for battery_sugg_bluetooth_basic (144393178427277439) -->
-    <skip />
-    <!-- no translation found for battery_sugg_bluetooth_headset (8214816222115517479) -->
-    <skip />
-    <!-- no translation found for battery_desc_apps (8123202939321333639) -->
-    <skip />
-    <!-- no translation found for battery_sugg_apps_info (6065882899391322442) -->
-    <skip />
-    <!-- no translation found for battery_sugg_apps_gps (4145005297393800223) -->
-    <skip />
-    <!-- no translation found for battery_sugg_apps_settings (8021302847272481168) -->
-    <skip />
-    <!-- no translation found for menu_stats_unplugged (8296577130840261624) -->
-    <skip />
-    <!-- no translation found for menu_stats_last_unplugged (5922246077592434526) -->
-    <skip />
-    <!-- no translation found for menu_stats_total (8973377864854807854) -->
-    <skip />
-    <!-- no translation found for menu_stats_refresh (1676215433344981075) -->
-    <skip />
-    <!-- no translation found for process_kernel_label (3916858646836739323) -->
-    <skip />
-    <!-- no translation found for process_mediaserver_label (6500382062945689285) -->
-    <skip />
-    <!-- no translation found for tts_settings (6454363854545277027) -->
-    <skip />
-    <!-- no translation found for tts_settings_summary (2627715231944602766) -->
-    <skip />
-    <!-- no translation found for tts_settings_title (5064947197040356736) -->
-    <skip />
-    <!-- no translation found for use_default_tts_settings_title (1577063839539732930) -->
-    <skip />
-    <!-- no translation found for use_default_tts_settings_summary (4253502106159206276) -->
-    <skip />
-    <!-- no translation found for tts_default_settings_section (5787915620218907443) -->
-    <skip />
-    <!-- no translation found for tts_default_rate_title (6030550998379310088) -->
-    <skip />
-    <!-- no translation found for tts_default_rate_summary (4061815292287182801) -->
-    <skip />
-    <!-- no translation found for tts_default_pitch_title (6135942113172488671) -->
-    <skip />
-    <!-- no translation found for tts_default_pitch_summary (1328298665182885277) -->
-    <skip />
-    <!-- no translation found for tts_default_lang_title (8018087612299820556) -->
-    <skip />
-    <!-- no translation found for tts_default_lang_summary (5219362163902707785) -->
-    <skip />
-    <!-- no translation found for tts_play_example_title (7094780383253097230) -->
-    <skip />
-    <!-- no translation found for tts_play_example_summary (8029071615047894486) -->
-    <skip />
-    <!-- no translation found for tts_install_data_title (4264378440508149986) -->
-    <skip />
-    <!-- no translation found for tts_install_data_summary (5742135732511822589) -->
-    <skip />
-    <!-- no translation found for tts_data_installed_summary (9162111552859972809) -->
-    <skip />
-    <!-- no translation found for tts_demo (405357591189935876) -->
-    <skip />
-    <!-- no translation found for tts_settings_changed_demo (4926518555912328645) -->
-    <skip />
-    <!-- no translation found for gadget_title (7455548605888590466) -->
-    <skip />
-    <!-- no translation found for vpn_settings_activity_title (7276864950701612579) -->
-    <skip />
-    <!-- no translation found for vpn_connect_to (9040615733700098831) -->
-    <skip />
-    <!-- no translation found for vpn_username_colon (7854930370861306247) -->
-    <skip />
-    <!-- no translation found for vpn_password_colon (5716278710848606626) -->
-    <skip />
-    <!-- no translation found for vpn_a_username (6664733641993968692) -->
-    <skip />
-    <!-- no translation found for vpn_a_password (1537213632501483753) -->
-    <skip />
-    <!-- no translation found for vpn_save_username (1408415289165970790) -->
-    <skip />
-    <!-- no translation found for vpn_connect_button (1699007212602470655) -->
-    <skip />
-    <!-- no translation found for vpn_yes_button (8034531001149843119) -->
-    <skip />
-    <!-- no translation found for vpn_no_button (7620339571187119107) -->
-    <skip />
-    <!-- no translation found for vpn_back_button (192036339792734970) -->
-    <skip />
-    <!-- no translation found for vpn_mistake_button (1683383660912491270) -->
-    <skip />
-    <!-- no translation found for vpn_menu_done (93528279226907926) -->
-    <skip />
-    <!-- no translation found for vpn_menu_cancel (7234451214611202868) -->
-    <skip />
-    <!-- no translation found for vpn_menu_revert (4407762442281467659) -->
-    <skip />
-    <!-- no translation found for vpn_menu_connect (1089399414463784218) -->
-    <skip />
-    <!-- no translation found for vpn_menu_disconnect (8254492450022562235) -->
-    <skip />
-    <!-- no translation found for vpn_menu_edit (4526245173583195618) -->
-    <skip />
-    <!-- no translation found for vpn_menu_delete (3326527392609513129) -->
-    <skip />
-    <!-- no translation found for vpn_error_miss_entering (1467455143582547499) -->
-    <skip />
-    <!-- no translation found for vpn_error_miss_selecting (953436717902387192) -->
-    <skip />
-    <!-- no translation found for vpn_error_duplicate_name (2786397299628471911) -->
-    <skip />
-    <!-- no translation found for vpn_confirm_profile_deletion (8679536635364177239) -->
-    <skip />
-    <!-- no translation found for vpn_confirm_add_profile_cancellation (3377869170901609182) -->
-    <skip />
-    <!-- no translation found for vpn_confirm_edit_profile_cancellation (7496760181072204494) -->
-    <skip />
-    <!-- no translation found for vpn_confirm_reconnect (5748535476278674296) -->
-    <skip />
-    <!-- no translation found for vpn_reconnect_from_lost (2442844155623372118) -->
-    <skip />
-    <!-- no translation found for vpn_unknown_server_dialog_msg (3080742299823671319) -->
-    <skip />
-    <!-- no translation found for vpn_challenge_error_dialog_msg (6174901754230038601) -->
-    <skip />
-    <!-- no translation found for vpn_secret_not_set_dialog_msg (8013052814131532765) -->
-    <skip />
-    <!-- no translation found for vpn_auth_error_dialog_msg (5476820106624807614) -->
-    <skip />
-    <!-- no translation found for vpn_remote_hung_up_error_dialog_msg (1566946015052633150) -->
-    <skip />
-    <!-- no translation found for vpn_type_title (6392933604218676224) -->
-    <skip />
-    <!-- no translation found for vpn_add_new_vpn (5438260689052714550) -->
-    <skip />
-    <!-- no translation found for vpn_edit_title_add (2550661826320709266) -->
-    <skip />
-    <!-- no translation found for vpn_edit_title_edit (1769999313158207723) -->
-    <skip />
-    <!-- no translation found for vpns (3148141862835492816) -->
-    <skip />
-    <!-- no translation found for vpn_connecting (8039521381692090116) -->
-    <skip />
-    <!-- no translation found for vpn_disconnecting (7748050200708257066) -->
-    <skip />
-    <!-- no translation found for vpn_connected (7641723116362845781) -->
-    <skip />
-    <!-- no translation found for vpn_connect_hint (7442898962925875181) -->
-    <skip />
-    <!-- no translation found for vpn_name (1550918148476193076) -->
-    <skip />
-    <!-- no translation found for vpn_a_name (8445736942405283509) -->
-    <skip />
-    <!-- no translation found for vpn_profile_added (2157095890825215726) -->
-    <skip />
-    <!-- no translation found for vpn_profile_replaced (384234123486734768) -->
-    <skip />
-    <!-- no translation found for vpn_user_certificate_title (6812545893924071742) -->
-    <skip />
-    <!-- no translation found for vpn_user_certificate (949322691686938888) -->
-    <skip />
-    <!-- no translation found for vpn_a_user_certificate (8943983437956898649) -->
-    <skip />
-    <!-- no translation found for vpn_ca_certificate_title (7846466160795589985) -->
-    <skip />
-    <!-- no translation found for vpn_ca_certificate (465085144064264742) -->
-    <skip />
-    <!-- no translation found for vpn_a_ca_certificate (3374242520974884295) -->
-    <skip />
-    <!-- no translation found for vpn_l2tp_secret_string_title (5039677186748940987) -->
-    <skip />
-    <!-- no translation found for vpn_l2tp_secret (529359749677142076) -->
-    <skip />
-    <!-- no translation found for vpn_a_l2tp_secret (6612042930810981845) -->
-    <skip />
-    <!-- no translation found for vpn_pptp_encryption_title (2236795167467896499) -->
-    <skip />
-    <!-- no translation found for vpn_pptp_encryption (2602329949737259686) -->
-    <skip />
-    <!-- no translation found for vpn_ipsec_presharedkey_title (2184060087690539175) -->
-    <skip />
-    <!-- no translation found for vpn_ipsec_presharedkey (5434316521616673741) -->
-    <skip />
-    <!-- no translation found for vpn_a_ipsec_presharedkey (1255301923217898418) -->
-    <skip />
-    <!-- no translation found for vpn_vpn_server_title (8897005887420358913) -->
-    <skip />
-    <!-- no translation found for vpn_vpn_server (1141754908824209260) -->
-    <skip />
-    <!-- no translation found for vpn_a_vpn_server (5960906152125045853) -->
-    <skip />
-    <!-- no translation found for vpn_vpn_server_dialog_title (7850850940160521918) -->
-    <skip />
-    <!-- no translation found for vpn_dns_search_list_title (1022776976104584251) -->
-    <skip />
-    <!-- no translation found for vpn_dns_search_list (4230034234026605360) -->
-    <skip />
-    <!-- no translation found for vpn_field_is_set (1880980734721258127) -->
-    <skip />
-    <!-- no translation found for vpn_field_not_set (6827205815004809490) -->
-    <skip />
-    <!-- no translation found for vpn_field_not_set_optional (8665901697706781015) -->
-    <skip />
-    <!-- no translation found for vpn_enable_field (3348948489989523325) -->
-    <skip />
-    <!-- no translation found for vpn_disable_field (2286966253789266389) -->
-    <skip />
-    <!-- no translation found for vpn_is_enabled (5128973727115662815) -->
-    <skip />
-    <!-- no translation found for vpn_is_disabled (8028085699769751756) -->
-    <skip />
-    <!-- no translation found for vpn_settings_title (7327468307909556719) -->
-    <skip />
-    <!-- no translation found for vpn_settings_summary (8849924181594963972) -->
-    <skip />
-    <!-- no translation found for vpn_secret_unchanged (8700613973594154529) -->
-    <skip />
-    <!-- no translation found for vpn_secret_not_set (1037792636371641845) -->
-    <skip />
-    <!-- no translation found for cstor_settings_category (2284299080682591107) -->
-    <skip />
-    <!-- no translation found for cstor_access_title (1739505390736236717) -->
-    <skip />
-    <!-- no translation found for cstor_access_summary (4512681868217546677) -->
-    <skip />
-    <!-- no translation found for cstor_access_dialog_title (3024256293191879190) -->
-    <skip />
-    <!-- no translation found for cstor_access_dialog_hint_from_action (679746865623760961) -->
-    <skip />
-    <!-- no translation found for cstor_set_passwd_title (6156763762703061470) -->
-    <skip />
-    <!-- no translation found for cstor_set_passwd_summary (5248560429856597398) -->
-    <skip />
-    <!-- no translation found for cstor_set_passwd_dialog_title (4071157542842979977) -->
-    <skip />
-    <!-- no translation found for cstor_reset_title (6001600882136794382) -->
-    <skip />
-    <!-- no translation found for cstor_reset_summary (7509525030771504833) -->
-    <skip />
-    <!-- no translation found for cstor_reset_hint (5331632794451859788) -->
-    <skip />
-    <!-- no translation found for cstor_name_credential_dialog_title (1723509156126180662) -->
-    <skip />
-    <!-- no translation found for cstor_credential_name (2958936431813760259) -->
-    <skip />
-    <!-- no translation found for cstor_credential_password (7187440553141199409) -->
-    <skip />
-    <!-- no translation found for cstor_credential_info (6097346149400207440) -->
-    <skip />
-    <!-- no translation found for cstor_name_credential_hint (6889198058976515785) -->
-    <skip />
-    <!-- no translation found for cstor_old_password (979282118063084561) -->
-    <skip />
-    <!-- no translation found for cstor_new_password (6218562692435670047) -->
-    <skip />
-    <!-- no translation found for cstor_confirm_password (8996028123356342466) -->
-    <skip />
-    <!-- no translation found for cstor_first_time_hint (1831593416099224962) -->
-    <skip />
-    <!-- no translation found for cstor_first_time_hint_from_action (4690937025845780557) -->
-    <skip />
-    <!-- no translation found for cstor_password_error (2917326097260402464) -->
-    <skip />
-    <!-- no translation found for cstor_password_error_reset_warning (3336370539045905953) -->
-    <skip />
-    <!-- no translation found for cstor_password_error_reset_warning_plural (6209069679269017200) -->
-    <skip />
-    <!-- no translation found for cstor_passwords_error (956773958408751155) -->
-    <skip />
-    <!-- no translation found for cstor_passwords_empty_error (6062539742626760734) -->
-    <skip />
-    <!-- no translation found for cstor_password_empty_error (7249632576906961482) -->
-    <skip />
-    <!-- no translation found for cstor_password_verification_error (8553930704493511389) -->
-    <skip />
-    <!-- no translation found for cstor_name_empty_error (7499971191993770322) -->
-    <skip />
-    <!-- no translation found for cstor_name_char_error (8048089317968192516) -->
-    <skip />
-    <!-- no translation found for cstor_storage_error (7140697503172458161) -->
-    <skip />
-    <!-- no translation found for cstor_unable_to_save_cert (1631402544447196406) -->
-    <skip />
-    <!-- no translation found for cstor_cert_not_saved (6318149789449538491) -->
-    <skip />
-    <!-- no translation found for cstor_is_reset (449870501126790589) -->
-    <skip />
-    <!-- no translation found for cstor_is_enabled (4054049098081482785) -->
-    <skip />
-    <!-- no translation found for cstor_is_added (794788474010251572) -->
-    <skip />
-    <!-- no translation found for emergency_tone_title (1055954530111587114) -->
-    <skip />
-    <!-- no translation found for emergency_tone_summary (722259232924572153) -->
+    <string name="awake" msgid="387122265874485088">"Enhedsopvågningstid"</string>
+    <string name="wifi_on_time" msgid="4630925382578609056">"Wi-Fi til tiden"</string>
+    <string name="bluetooth_on_time" msgid="4478515071957280711">"Wi-Fi til tiden"</string>
+    <string name="usage_name_percent" msgid="7976919382448235858">"<xliff:g id="NAME">%1$s</xliff:g> -  <xliff:g id="NUMBER">%2$s</xliff:g><xliff:g id="PERCENT">%%</xliff:g>"</string>
+    <string name="details_title" msgid="7564809986329021063">"Batteriforbrugsoplysninger"</string>
+    <string name="details_subtitle" msgid="32593908269911734">"Brugsdetaljer"</string>
+    <string name="controls_subtitle" msgid="390468421138288702">"Juster strømforbrug"</string>
+    <string name="packages_subtitle" msgid="4736416171658062768">"Inkluderede pakker"</string>
+    <string name="power_screen" msgid="2353149143338929583">"Visning"</string>
+    <string name="power_wifi" msgid="2382791137776486974">"Wi-Fi"</string>
+    <string name="power_bluetooth" msgid="4373329044379008289">"Bluetooth"</string>
+    <string name="power_cell" msgid="6596471490976003056">"Cellestandby"</string>
+    <string name="power_phone" msgid="5392641106474567277">"Stemmeopkald"</string>
+    <string name="power_idle" msgid="9055659695602194990">"Telefon er ikke aktiv"</string>
+    <string name="usage_type_cpu" msgid="715162150698338714">"CPU i alt"</string>
+    <string name="usage_type_cpu_foreground" msgid="6500579611933211831">"CPU forgrund"</string>
+    <string name="usage_type_gps" msgid="7989688715128160790">"GPS"</string>
+    <string name="usage_type_phone" msgid="9108247984998041853">"Telefon"</string>
+    <string name="usage_type_data_send" msgid="2857401966985425427">"Data sendt"</string>
+    <string name="usage_type_data_recv" msgid="7251090882025234185">"Data modtaget"</string>
+    <string name="usage_type_audio" msgid="6957269406840886290">"Lyd"</string>
+    <string name="usage_type_video" msgid="4295357792078579944">"Video"</string>
+    <string name="usage_type_on_time" msgid="3351200096173733159">"Tid til"</string>
+    <string name="usage_type_no_coverage" msgid="3797004252954385053">"Tid uden signal"</string>
+    <string name="battery_action_stop" msgid="649958863744041872">"Tving til at standse"</string>
+    <string name="battery_action_app_details" msgid="3275013531871113681">"Programoplysninger"</string>
+    <string name="battery_action_app_settings" msgid="350562653472577250">"Programindstillinger"</string>
+    <string name="battery_action_display" msgid="5302763261448580102">"Visningsindstillinger"</string>
+    <string name="battery_action_wifi" msgid="5452076674659927993">"Wi-Fi-indstillinger"</string>
+    <string name="battery_action_bluetooth" msgid="8374789049507723142">"Bluetooth-indstillinger"</string>
+    <string name="battery_desc_voice" msgid="8980322055722959211">"Batteri brugt af stemmeopkald"</string>
+    <string name="battery_desc_standby" msgid="3009080001948091424">"Batteri brugt, når telefon ikke er aktiv"</string>
+    <string name="battery_desc_radio" msgid="5479196477223185367">"Batteri brugt af celleradio"</string>
+    <string name="battery_sugg_radio" msgid="8211336978326295047">"Skift til flytilstand for at spare på strømmen i områder uden celledækning."</string>
+    <string name="battery_desc_display" msgid="5432795282958076557">"Batteri brugt af skærmen og baglyset."</string>
+    <string name="battery_sugg_display" msgid="3370202402045141760">"Reducer skærmens lysstyrke og/eller skærmens timeout"</string>
+    <string name="battery_desc_wifi" msgid="1702486494565080431">"Batteri brugt af Wi-Fi"</string>
+    <string name="battery_sugg_wifi" msgid="7542345142282261691">"Slå Wi-Fi fra, når det ikke er i brug eller tilgængeligt"</string>
+    <string name="battery_desc_bluetooth" msgid="7535520658674621902">"Batteri brugt af Bluetooth"</string>
+    <string name="battery_sugg_bluetooth_basic" msgid="817276933922157788">"Slå Bluetooth fra, når du ikke bruger det"</string>
+    <string name="battery_sugg_bluetooth_headset" msgid="8214816222115517479">"Prøv at oprette forbindelse til en anden Bluetooth-enhed"</string>
+    <string name="battery_desc_apps" msgid="8123202939321333639">"Batteri brugt af programmer, når de kører"</string>
+    <string name="battery_sugg_apps_info" msgid="6065882899391322442">"Stop eller afinstaller programmet"</string>
+    <string name="battery_sugg_apps_gps" msgid="4145005297393800223">"Slå GPS fra, når den ikke bruges"</string>
+    <string name="battery_sugg_apps_settings" msgid="8021302847272481168">"Dette program kan muligvis tilbyde indstillinger, der mindsker batteriforbruget"</string>
+    <string name="menu_stats_unplugged" msgid="8296577130840261624">"<xliff:g id="UNPLUGGED">%1$s</xliff:g> siden afbrydelse"</string>
+    <string name="menu_stats_last_unplugged" msgid="5922246077592434526">"Siden sidste afbrydelse for <xliff:g id="UNPLUGGED">%1$s</xliff:g>"</string>
+    <string name="menu_stats_total" msgid="8973377864854807854">"Brugstotal"</string>
+    <string name="menu_stats_refresh" msgid="1676215433344981075">"Opdater"</string>
+    <string name="process_kernel_label" msgid="3916858646836739323">"Android OS"</string>
+    <string name="process_mediaserver_label" msgid="6500382062945689285">"Medieserver"</string>
+    <string name="tts_settings" msgid="3348626948015962987">"Tekst-til-tale"</string>
+    <string name="tts_settings_summary" msgid="2627715231944602766">"Indstil valgmuligheder for tekst-til-tale"</string>
+    <string name="tts_settings_title" msgid="4182348653053000933">"Indstillinger for tekst-til-tale"</string>
+    <string name="use_default_tts_settings_title" msgid="1577063839539732930">"Brug altid mine indstil."</string>
+    <string name="use_default_tts_settings_summary" msgid="4253502106159206276">"Nedenstående standardindstillinger tilsidesætter programindstillinger"</string>
+    <string name="tts_default_settings_section" msgid="5787915620218907443">"Standardindstillinger"</string>
+    <string name="tts_default_rate_title" msgid="6030550998379310088">"Talefrekvens"</string>
+    <string name="tts_default_rate_summary" msgid="4061815292287182801">"Hastighed hvormed tekst udtales"</string>
+    <string name="tts_default_pitch_title" msgid="6135942113172488671">"Tonehøjde"</string>
+    <string name="tts_default_pitch_summary" msgid="1328298665182885277">"Påvirker tonen af den talte tekst"</string>
+    <string name="tts_default_lang_title" msgid="8018087612299820556">"Sprog"</string>
+    <string name="tts_default_lang_summary" msgid="5219362163902707785">"Indstiller den sprogspecifikke stemme til talt tekst"</string>
+    <string name="tts_play_example_title" msgid="7094780383253097230">"Lyt til et eksempel"</string>
+    <string name="tts_play_example_summary" msgid="8029071615047894486">"Afspil en kort demonstration af talesyntese"</string>
+    <string name="tts_install_data_title" msgid="4264378440508149986">"Installer stemmedata"</string>
+    <string name="tts_install_data_summary" msgid="5742135732511822589">"Installer de påkrævede stemmedata for talesyntese"</string>
+    <string name="tts_data_installed_summary" msgid="9162111552859972809">"De påkrævede stemmer til talesyntese er allerede installeret korrekt"</string>
+    <string name="tts_demo" msgid="405357591189935876">"Dette er et eksempel på talesyntese."</string>
+    <string name="tts_settings_changed_demo" msgid="4926518555912328645">"Dine indstillinger er blevet ændret. Dette er et eksempel på, hvordan de lyder."</string>
+    <string name="gadget_title" msgid="7455548605888590466">"Strømkontrol"</string>
+    <string name="gadget_toggle_wifi" msgid="2382963973155082629">"Opdaterer Wi-Fi-indstilling"</string>
+    <string name="gadget_toggle_bluetooth" msgid="7538903239807020826">"Opdaterer Bluetooth-indstilling"</string>
+    <string name="credential_installer_activity_title" msgid="7600661521831762521">"Installationsprogram til oplysninger"</string>
+    <string name="vpn_settings_activity_title" msgid="7276864950701612579">"VPN-indstillinger"</string>
+    <string name="vpn_connect_to" msgid="2541409082892684362">"Opret forbindelse til <xliff:g id="NAME">%s</xliff:g>"</string>
+    <string name="vpn_username_colon" msgid="7854930370861306247">"Brugernavn:"</string>
+    <string name="vpn_password_colon" msgid="5716278710848606626">"Adgangskode:"</string>
+    <string name="vpn_a_username" msgid="6664733641993968692">"et brugernavn"</string>
+    <string name="vpn_a_password" msgid="1537213632501483753">"en adgangskode"</string>
+    <string name="vpn_save_username" msgid="1408415289165970790">"Husk brugernavn"</string>
+    <string name="vpn_connect_button" msgid="1699007212602470655">"Forbind"</string>
+    <string name="vpn_yes_button" msgid="8034531001149843119">"Ja"</string>
+    <string name="vpn_no_button" msgid="7620339571187119107">"Nej"</string>
+    <string name="vpn_back_button" msgid="192036339792734970">"Tilbage"</string>
+    <string name="vpn_mistake_button" msgid="1683383660912491270">"Nej"</string>
+    <string name="vpn_menu_done" msgid="93528279226907926">"Gem"</string>
+    <string name="vpn_menu_cancel" msgid="7234451214611202868">"Annuller"</string>
+    <string name="vpn_menu_revert" msgid="4407762442281467659">"Vend tilbage"</string>
+    <string name="vpn_menu_connect" msgid="1089399414463784218">"Opret forbindelse til netværk"</string>
+    <string name="vpn_menu_disconnect" msgid="8254492450022562235">"Afbryd forbindelsen til netværk"</string>
+    <string name="vpn_menu_edit" msgid="4526245173583195618">"Rediger netværk"</string>
+    <string name="vpn_menu_delete" msgid="3326527392609513129">"Slet netværk"</string>
+    <string name="vpn_error_miss_entering" msgid="5377667978602483250">"Du skal indtaste <xliff:g id="CODE">%s</xliff:g>."</string>
+    <string name="vpn_error_miss_selecting" msgid="4890780825580511345">"Du skal vælge <xliff:g id="OPTION">%s</xliff:g>."</string>
+    <string name="vpn_error_duplicate_name" msgid="2693927537390963745">"VPN-navnet \'<xliff:g id="NAME">%s</xliff:g>\' eksisterer allerede. Find et andet navn."</string>
+    <string name="vpn_confirm_profile_deletion" msgid="8679536635364177239">"Er du sikker på, at du ønsker at slette dette VPN?"</string>
+    <string name="vpn_confirm_add_profile_cancellation" msgid="3377869170901609182">"Er du sikker på, du ikke ønsker at oprette denne profil?"</string>
+    <string name="vpn_confirm_edit_profile_cancellation" msgid="7496760181072204494">"Er du sikker på, at du ønsker at kassere de ændringer, der er foretaget til denne profil?"</string>
+    <string name="vpn_confirm_reconnect" msgid="5748535476278674296">"Der kunne ikke oprettes forbindelse til netværket. Ønsker du at prøve igen?"</string>
+    <string name="vpn_reconnect_from_lost" msgid="2442844155623372118">"Forbindelsen er mistet. Ønsker du at oprette forbindelse igen?"</string>
+    <string name="vpn_unknown_server_dialog_msg" msgid="3080742299823671319">"Servernavnet kan ikke løses. Ønsker du at kontrollere dine servernavneindstillinger?"</string>
+    <string name="vpn_challenge_error_dialog_msg" msgid="6174901754230038601">"Udfordringsfejl. Ønsker du at kontrollere din hemmelige indstilling?"</string>
+    <string name="vpn_secret_not_set_dialog_msg" msgid="8013052814131532765">"Der mangler en eller flere hemmeligheder i denne VPN-konfiguration. Ønsker du at kontrollere din hemmelige indstilling."</string>
+    <string name="vpn_auth_error_dialog_msg" msgid="5476820106624807614">"Det/den indtastede brugernavn eller adgangskode er forkert. Ønsker du at prøve igen?"</string>
+    <string name="vpn_remote_hung_up_error_dialog_msg" msgid="1566946015052633150">"Serverophængning. Brugernavnet eller adgangskoden, du indtastede, kan være forkerte. Ønsker du at prøve igen?"</string>
+    <string name="vpn_remote_ppp_hung_up_error_dialog_msg" msgid="5135958511128503344">"Serveren afbrød. Du er muligvis bag en firewall, der forhindrer dig i at oprette forbindelse til serveren. Vil du prøve igen?"</string>
+    <string name="vpn_ppp_negotiation_failed_dialog_msg" msgid="4611293656718340994">"Serverkommunikationen mislykkedes. Serveren er muligvis ikke enig i dine krypteringsindstillinger. Vil du kontrollere dine krypteringsindstillinger?"</string>
+    <string name="vpn_type_title" msgid="6392933604218676224">"Tilføj VPN"</string>
+    <string name="vpn_add_new_vpn" msgid="5438260689052714550">"Tilføj VPN"</string>
+    <string name="vpn_edit_title_add" msgid="2121313217989682890">"Tilføj <xliff:g id="NAME">%s</xliff:g> VPN"</string>
+    <string name="vpn_edit_title_edit" msgid="2457278794066617935">"<xliff:g id="NAME">%s</xliff:g> detaljer"</string>
+    <string name="vpns" msgid="3148141862835492816">"VPN\'er"</string>
+    <string name="vpn_connecting" msgid="8039521381692090116">"Opretter forbindelse ..."</string>
+    <string name="vpn_disconnecting" msgid="7748050200708257066">"Afbryder ..."</string>
+    <string name="vpn_connected" msgid="7641723116362845781">"Forbundet"</string>
+    <string name="vpn_connect_hint" msgid="7442898962925875181">"Opret forbindelse til netværk"</string>
+    <string name="vpn_name" msgid="1550918148476193076">"VPN-navn"</string>
+    <string name="vpn_a_name" msgid="8445736942405283509">"et VPN-navn"</string>
+    <string name="vpn_profile_added" msgid="9061017910337129840">"\'<xliff:g id="NAME">%s</xliff:g>\' er tilføjet"</string>
+    <string name="vpn_profile_replaced" msgid="587435576816273815">"Der er foretaget ændringer af \'<xliff:g id="NAME">%s</xliff:g>\'"</string>
+    <string name="vpn_user_certificate_title" msgid="6812545893924071742">"Indstil brugercertifikat"</string>
+    <string name="vpn_user_certificate" msgid="949322691686938888">"Brugercertifikat"</string>
+    <string name="vpn_a_user_certificate" msgid="8943983437956898649">"et brugercertifikat"</string>
+    <string name="vpn_ca_certificate_title" msgid="7846466160795589985">"Indstil CA-certifikat"</string>
+    <string name="vpn_ca_certificate" msgid="465085144064264742">"Certifikat fra certifikatleverandør (CA)"</string>
+    <string name="vpn_a_ca_certificate" msgid="3374242520974884295">"et CA-certifikat"</string>
+    <string name="vpn_l2tp_secret_string_title" msgid="5039677186748940987">"Indstil L2TP-hemmelighed"</string>
+    <string name="vpn_l2tp_secret" msgid="529359749677142076">"L2TP-hemmelighed"</string>
+    <string name="vpn_a_l2tp_secret" msgid="6612042930810981845">"en L2TP-hemmelighed"</string>
+    <string name="vpn_pptp_encryption_title" msgid="2236795167467896499">"kryptering"</string>
+    <string name="vpn_pptp_encryption" msgid="2602329949737259686">"PPTP-kryptering"</string>
+    <string name="vpn_ipsec_presharedkey_title" msgid="2184060087690539175">"Indstil IPsec-forhåndsdelt nøglekodning"</string>
+    <string name="vpn_ipsec_presharedkey" msgid="5434316521616673741">"IPsec-forhåndsdelt nøglekodning"</string>
+    <string name="vpn_a_ipsec_presharedkey" msgid="1255301923217898418">"en IPsec-forhåndsdelt nøglekodning"</string>
+    <string name="vpn_vpn_server_title" msgid="8897005887420358913">"Indstil VPN-server"</string>
+    <string name="vpn_vpn_server" msgid="1141754908824209260">"VPN-server"</string>
+    <string name="vpn_a_vpn_server" msgid="5960906152125045853">"en VPN-server"</string>
+    <string name="vpn_vpn_server_dialog_title" msgid="7850850940160521918">"VPN-servernavn"</string>
+    <string name="vpn_dns_search_list_title" msgid="1022776976104584251">"DNS-søgedomæner"</string>
+    <string name="vpn_dns_search_list" msgid="4230034234026605360">"DNS-søgedomæner"</string>
+    <string name="vpn_field_is_set" msgid="7137320847812992243">"<xliff:g id="VALUE">%s</xliff:g> er indstillet"</string>
+    <string name="vpn_field_not_set" msgid="2972519243515893804">"<xliff:g id="VALUE">%s</xliff:g> ikke indstillet"</string>
+    <string name="vpn_field_not_set_optional" msgid="8840557698252556791">"<xliff:g id="VALUE">%s</xliff:g> ikke indstillet (valgfrit)"</string>
+    <string name="vpn_enable_field" msgid="3700967675854517191">"Aktiver<xliff:g id="OPTION">%s</xliff:g>"</string>
+    <string name="vpn_disable_field" msgid="6905658811179634005">"Deaktiver<xliff:g id="OPTION">%s</xliff:g>"</string>
+    <string name="vpn_is_enabled" msgid="1266304230417098877">"<xliff:g id="OPTION">%s</xliff:g> er aktiveret"</string>
+    <string name="vpn_is_disabled" msgid="2013622485867806167">"<xliff:g id="OPTION">%s</xliff:g> er deaktiveret"</string>
+    <string name="vpn_settings_title" msgid="7327468307909556719">"VPN-indstillinger"</string>
+    <string name="vpn_settings_summary" msgid="8849924181594963972">"Indstil og administrer Virtuelle Private Netværk (VPN\'er)"</string>
+    <string name="vpn_secret_unchanged" msgid="8700613973594154529">"(uændret)"</string>
+    <string name="vpn_secret_not_set" msgid="1037792636371641845">"(ikke indstillet)"</string>
+    <string name="credentials_category" msgid="8536992056377271234">"Oplysningslagring"</string>
+    <string name="credentials_access" msgid="4843187230913860492">"Brug sikre oplysninger"</string>
+    <string name="credentials_access_summary" msgid="319662078718574168">"Tillad programmer at få adgang til sikre certifikater og andre oplysninger"</string>
+    <string name="credentials_unlock" msgid="1463040326264133844">"Indtast adgangskode"</string>
+    <string name="credentials_unlock_hint" msgid="594679530407918031">"Indtast adgangskoden til oplysningslagring."</string>
+    <string name="credentials_install_certificates" msgid="177337517568022236">"Installer fra SD-kort"</string>
+    <string name="credentials_install_certificates_summary" msgid="7737001268684193093">"Installer krypterede certifikater fra SD-kortet"</string>
+    <string name="credentials_set_password" msgid="9104473585811899989">"Indstil adgangskode"</string>
+    <string name="credentials_set_password_summary" msgid="8287876917562085701">"Indstil eller skift adgangskode til oplysningslagring"</string>
+    <string name="credentials_reset" msgid="9170150870552453457">"Ryd lager"</string>
+    <string name="credentials_reset_summary" msgid="1530388094693731636">"Ryd oplysningslagring af alt indhold, og nulstil dens adgangskode"</string>
+    <string name="credentials_reset_hint" msgid="819990295796804516">"Er du sikker på, at du ønsker at slette alle oplysninger og nulstille adgangskoden til oplysningslagringen?"</string>
+    <string name="credentials_old_password" msgid="7553393815538684028">"Nuværende adgangskode:"</string>
+    <string name="credentials_new_password" msgid="267487774686796938">"Ny adgangskode:"</string>
+    <string name="credentials_confirm_password" msgid="4732250000633424345">"Bekræft ny adgangskode:"</string>
+    <string name="credentials_first_time_hint" msgid="1567821077545346039">"Indstil en adgangskode til oplysningslagring (mindst 8 tegn)."</string>
+    <string name="credentials_wrong_password" msgid="7525192410790152041">"Indtast den rigtige adgangskode."</string>
+    <string name="credentials_reset_warning" msgid="6392481296673345268">"Indtast den rigtige adgangskode. Du har et forsøg mere til at indtaste den rigtige adgangskode, inden oplysningslagringen slettes."</string>
+    <string name="credentials_reset_warning_plural" msgid="454828369803055270">"Indtast den rigtige adgangskode. Du har <xliff:g id="NUMBER">%1$d</xliff:g> forsøg mere til at indtaste den rigtige adgangskode, inden oplysningslagringen slettes."</string>
+    <string name="credentials_passwords_mismatch" msgid="5288565139590031733">"Adgangskoder stemmer ikke overens."</string>
+    <string name="credentials_passwords_empty" msgid="8647631321684363549">"Du skal indtaste og bekræfte en adgangskode."</string>
+    <string name="credentials_password_empty" msgid="8292138152983330473">"Indtast adgangskoden."</string>
+    <string name="credentials_password_too_short" msgid="7502749986405522663">"Adgangskoden skal indeholde mindst 8 tegn."</string>
+    <string name="credentials_erased" msgid="7700309135582200849">"Oplysningslagringen er slettet."</string>
+    <string name="credentials_enabled" msgid="7588607413349978930">"Oplysningslagring er aktiveret."</string>
+    <string name="credentials_disabled" msgid="7453188089059045380">"Oplysningslagring er deaktiveret."</string>
+    <string name="emergency_tone_title" msgid="1055954530111587114">"Nødtone"</string>
+    <string name="emergency_tone_summary" msgid="722259232924572153">"Indstil adfærd, når der foretages et nødopkald"</string>
+    <string name="privacy_settings" msgid="9206631214140954954">"Fortrolighed"</string>
+    <string name="privacy_settings_title" msgid="1987089301293213705">"Fortrolighedsindstillinger"</string>
+    <string name="location_section_title" msgid="6072558684044939786">"Placering"</string>
+    <string name="settings_section_title" msgid="7413252428447723032">"Indstillinger"</string>
+    <string name="personal_data_section_title" msgid="7815209034443782061">"Personlige data"</string>
+    <string name="backup_settings_title" msgid="2968262658155327829">"Sikkerhedskopier mine indstillinger"</string>
+    <string name="backup_erase_dialog_title" msgid="6028429904055779443">"Sikkerhedskopi af indstillinger"</string>
+    <string name="backup_erase_dialog_message" msgid="9096433810456900531">"Er du sikker på, at du vil holde op med at sikkerhedskopiere dine indstillinger og slette alle kopier på Googles servere?"</string>
+    <!-- no translation found for untitled_apn (1230060359198685513) -->
     <skip />
 </resources>

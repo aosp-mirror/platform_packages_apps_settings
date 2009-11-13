@@ -108,48 +108,41 @@ public class SdCardSettings extends Activity
         } catch (RemoteException ex) {
         }
 
-        String scanVolume = null; // this no longer exists: SystemProperties.get(MediaScanner.CURRENT_VOLUME_PROPERTY, "");
-        boolean scanning = "external".equals(scanVolume);
+        String status = Environment.getExternalStorageState();
+        boolean readOnly = false;
 
-        if (scanning) {
-            setLayout(mScanningLayout);
-        } else {
-            String status = Environment.getExternalStorageState();
-            boolean readOnly = false;
+        if (status.equals(Environment.MEDIA_MOUNTED_READ_ONLY)) {
+            status = Environment.MEDIA_MOUNTED;
+            readOnly = true;
+        }
 
-            if (status.equals(Environment.MEDIA_MOUNTED_READ_ONLY)) {
-                status = Environment.MEDIA_MOUNTED;
-                readOnly = true;
+        if (status.equals(Environment.MEDIA_MOUNTED)) {
+            try {
+                File path = Environment.getExternalStorageDirectory();
+                StatFs stat = new StatFs(path.getPath());
+                long blockSize = stat.getBlockSize();
+                long totalBlocks = stat.getBlockCount();
+                long availableBlocks = stat.getAvailableBlocks();
+
+                mTotalSize.setText(formatSize(totalBlocks * blockSize));
+                mUsedSize.setText(formatSize((totalBlocks - availableBlocks) * blockSize));
+                mAvailableSize.setText(formatSize(availableBlocks * blockSize));
+            } catch (IllegalArgumentException e) {
+                // this can occur if the SD card is removed, but we haven't received the
+                // ACTION_MEDIA_REMOVED Intent yet.
+                status = Environment.MEDIA_REMOVED;
             }
 
-            if (status.equals(Environment.MEDIA_MOUNTED)) {
-                try {
-                    File path = Environment.getExternalStorageDirectory();
-                    StatFs stat = new StatFs(path.getPath());
-                    long blockSize = stat.getBlockSize();
-                    long totalBlocks = stat.getBlockCount();
-                    long availableBlocks = stat.getAvailableBlocks();
-
-                    mTotalSize.setText(formatSize(totalBlocks * blockSize));
-                    mUsedSize.setText(formatSize((totalBlocks - availableBlocks) * blockSize));
-                    mAvailableSize.setText(formatSize(availableBlocks * blockSize));
-                } catch (IllegalArgumentException e) {
-                    // this can occur if the SD card is removed, but we haven't received the
-                    // ACTION_MEDIA_REMOVED Intent yet.
-                    status = Environment.MEDIA_REMOVED;
-                }
-
-                mReadOnlyStatus.setVisibility(readOnly ? View.VISIBLE : View.GONE);
-                setLayout(mMountedLayout);
-            } else if (status.equals(Environment.MEDIA_UNMOUNTED)) {
-                setLayout(mUnmountedLayout);
-            } else if (status.equals(Environment.MEDIA_REMOVED)) {
-                setLayout(mRemovedLayout);
-            } else if (status.equals(Environment.MEDIA_SHARED)) {
-                setLayout(mSharedLayout);
-            } else if (status.equals(Environment.MEDIA_BAD_REMOVAL)) {
-                setLayout(mBadRemovalLayout);
-            }
+            mReadOnlyStatus.setVisibility(readOnly ? View.VISIBLE : View.GONE);
+            setLayout(mMountedLayout);
+        } else if (status.equals(Environment.MEDIA_UNMOUNTED)) {
+            setLayout(mUnmountedLayout);
+        } else if (status.equals(Environment.MEDIA_REMOVED)) {
+            setLayout(mRemovedLayout);
+        } else if (status.equals(Environment.MEDIA_SHARED)) {
+            setLayout(mSharedLayout);
+        } else if (status.equals(Environment.MEDIA_BAD_REMOVAL)) {
+            setLayout(mBadRemovalLayout);
         }
     }
 
@@ -191,8 +184,6 @@ public class SdCardSettings extends Activity
         }
     };
 
-
-    private int         mStatus;
     private IMountService   mMountService;
 
     private CheckBox    mMassStorage;

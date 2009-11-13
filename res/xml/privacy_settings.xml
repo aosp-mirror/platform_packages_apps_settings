@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright (C) 2009 The Android Open Source Project
+
+     Licensed under the Apache License, Version 2.0 (the "License");
+     you may not use this file except in compliance with the License.
+     You may obtain a copy of the License at
+  
+          http://www.apache.org/licenses/LICENSE-2.0
+  
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+-->
+
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <PreferenceCategory android:key="location_category"
+            android:title="@string/location_section_title">
+        <!-- Share location with Google -->
+        <CheckBoxPreference
+                android:key="use_location"
+                android:title="@string/use_location_title"
+                android:persistent="false"
+                android:summary="@string/use_location_summary"/>
+    </PreferenceCategory>
+
+    <PreferenceCategory android:key="settings_category"
+            android:title="@string/settings_section_title">
+        <!-- Backup settings -->
+        <CheckBoxPreference
+                android:key="backup_settings"
+                android:title="@string/backup_settings_title"
+                android:persistent="false" />
+    </PreferenceCategory>
+
+    <PreferenceCategory
+            android:title="@string/personal_data_section_title">
+        <!-- Factory reset -->
+        <PreferenceScreen
+                android:title="@string/master_clear_title"
+                android:summary="@string/master_clear_summary">
+            <intent android:action="android.intent.action.MAIN"
+                    android:targetPackage="com.android.settings"
+                    android:targetClass="com.android.settings.MasterClear" />
+        </PreferenceScreen>
+    </PreferenceCategory>
+
+</PreferenceScreen>

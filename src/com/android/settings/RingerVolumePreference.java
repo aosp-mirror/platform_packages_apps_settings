@@ -16,10 +16,12 @@
 
 package com.android.settings;
 
+import android.app.Dialog;
 import android.content.Context;
 import android.media.AudioManager;
+import android.os.Parcel;
+import android.os.Parcelable;
 import android.preference.VolumePreference;
-import android.preference.VolumePreference.SeekBarVolumizer;
 import android.provider.Settings;
 import android.util.AttributeSet;
 import android.view.View;
@@ -121,9 +123,79 @@ public class RingerVolumePreference extends VolumePreference implements
     
     private void cleanup() {
         if (mNotificationSeekBarVolumizer != null) {
+            Dialog dialog = getDialog();
+            if (dialog != null && dialog.isShowing()) {
+                // Stopped while dialog was showing, revert changes
+                mNotificationSeekBarVolumizer.revertVolume();
+            }
             mNotificationSeekBarVolumizer.stop();
             mNotificationSeekBarVolumizer = null;
         }
     }
-    
+
+    @Override
+    protected Parcelable onSaveInstanceState() {
+        final Parcelable superState = super.onSaveInstanceState();
+        if (isPersistent()) {
+            // No need to save instance state since it's persistent
+            return superState;
+        }
+
+        final SavedState myState = new SavedState(superState);
+        if (mNotificationSeekBarVolumizer != null) {
+            mNotificationSeekBarVolumizer.onSaveInstanceState(myState.getVolumeStore());
+        }
+        return myState;
+    }
+
+    @Override
+    protected void onRestoreInstanceState(Parcelable state) {
+        if (state == null || !state.getClass().equals(SavedState.class)) {
+            // Didn't save state for us in onSaveInstanceState
+            super.onRestoreInstanceState(state);
+            return;
+        }
+
+        SavedState myState = (SavedState) state;
+        super.onRestoreInstanceState(myState.getSuperState());
+        if (mNotificationSeekBarVolumizer != null) {
+            mNotificationSeekBarVolumizer.onRestoreInstanceState(myState.getVolumeStore());
+        }
+    }
+
+    private static class SavedState extends BaseSavedState {
+        VolumeStore mVolumeStore = new VolumeStore();
+
+        public SavedState(Parcel source) {
+            super(source);
+            mVolumeStore.volume = source.readInt();
+            mVolumeStore.originalVolume = source.readInt();
+        }
+
+        @Override
+        public void writeToParcel(Parcel dest, int flags) {
+            super.writeToParcel(dest, flags);
+            dest.writeInt(mVolumeStore.volume);
+            dest.writeInt(mVolumeStore.originalVolume);
+        }
+
+        VolumeStore getVolumeStore() {
+            return mVolumeStore;
+        }
+
+        public SavedState(Parcelable superState) {
+            super(superState);
+        }
+
+        public static final Parcelable.Creator<SavedState> CREATOR =
+                new Parcelable.Creator<SavedState>() {
+            public SavedState createFromParcel(Parcel in) {
+                return new SavedState(in);
+            }
+
+            public SavedState[] newArray(int size) {
+                return new SavedState[size];
+            }
+        };
+    }
 }

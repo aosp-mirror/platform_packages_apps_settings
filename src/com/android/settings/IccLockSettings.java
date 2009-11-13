@@ -261,10 +261,13 @@ public class IccLockSettings extends PreferenceActivity
             mPinToggle.setChecked(!mToState);  
             mDialogState = ICC_LOCK_MODE;
             showPinDialog();
+        } else if (preference == mPinDialog) {
+            mDialogState = ICC_OLD_MODE;
+            return false;
         }
         return true;
     }
-    
+
     private void tryChangeIccLockState() {
         // Try to change icc lock. If it succeeds, toggle the lock state and 
         // reset dialog state. Else inject error message and show dialog again.
@@ -277,7 +280,6 @@ public class IccLockSettings extends PreferenceActivity
         if (success) {
             mPinToggle.setChecked(mToState);
         } else {
-            // TODO: I18N
             Toast.makeText(this, mRes.getString(R.string.sim_lock_failed), Toast.LENGTH_SHORT)
                     .show();
         }
@@ -286,7 +288,6 @@ public class IccLockSettings extends PreferenceActivity
 
     private void iccPinChanged(boolean success) {
         if (!success) {
-         // TODO: I18N
             Toast.makeText(this, mRes.getString(R.string.sim_change_failed),
                     Toast.LENGTH_SHORT)
                     .show();
@@ -304,7 +305,7 @@ public class IccLockSettings extends PreferenceActivity
         mPhone.getIccCard().changeIccLockPassword(mOldPin,
                 mNewPin, callback);
     }
-    
+
     private boolean reasonablePin(String pin) {
         if (pin == null || pin.length() < MIN_PIN_LENGTH || pin.length() > MAX_PIN_LENGTH) {
             return false;
@@ -312,11 +313,12 @@ public class IccLockSettings extends PreferenceActivity
             return true;
         }
     }
- 
+
     private void resetDialogState() {
         mError = null;
         mDialogState = ICC_OLD_MODE; // Default for when Change PIN is clicked
         mPin = "";
         setDialogValues();
+        mDialogState = OFF_MODE;
     }
 }

@@ -23,6 +23,7 @@ import static android.net.wifi.WifiManager.WIFI_STATE_ENABLING;
 import static android.net.wifi.WifiManager.WIFI_STATE_UNKNOWN;
 
 import com.android.settings.R;
+import com.android.settings.AirplaneModeEnabler;
 
 import android.content.BroadcastReceiver;
 import android.content.Context;
@@ -32,6 +33,7 @@ import android.net.NetworkInfo;
 import android.net.wifi.WifiManager;
 import android.preference.Preference;
 import android.preference.CheckBoxPreference;
+import android.provider.Settings;
 import android.text.TextUtils;
 import android.util.Config;
 import android.util.Log;
@@ -121,7 +123,7 @@ public class WifiEnabler implements Preference.OnPreferenceChangeListener {
             mWifiCheckBoxPref
                     .setSummary(wifiState == WIFI_STATE_DISABLED ? mOriginalSummary : null);
             
-            mWifiCheckBoxPref.setEnabled(isEnabledByDependency());
+            mWifiCheckBoxPref.setEnabled(isWifiAllowed(mContext));
             
         } else if (wifiState == WIFI_STATE_DISABLING || wifiState == WIFI_STATE_ENABLING) {
             mWifiCheckBoxPref.setSummary(wifiState == WIFI_STATE_ENABLING ? R.string.wifi_starting
@@ -151,24 +153,23 @@ public class WifiEnabler implements Preference.OnPreferenceChangeListener {
         }
     }
 
-    private boolean isEnabledByDependency() {
-        Preference dep = getDependencyPreference();
-        if (dep == null) {
+    private static boolean isWifiAllowed(Context context) {
+        // allowed if we are not in airplane mode
+        if (!AirplaneModeEnabler.isAirplaneModeOn(context)) {
             return true;
         }
-        
-        return !dep.shouldDisableDependents();
-    }
-    
-    private Preference getDependencyPreference() {
-        String depKey = mWifiCheckBoxPref.getDependency();
-        if (TextUtils.isEmpty(depKey)) {
-            return null;
+        // allowed if wifi is not in AIRPLANE_MODE_RADIOS
+        String radios = Settings.System.getString(context.getContentResolver(),
+                Settings.System.AIRPLANE_MODE_RADIOS);
+        if (radios == null || !radios.contains(Settings.System.RADIO_WIFI)) {
+            return true;
         }
-        
-        return mWifiCheckBoxPref.getPreferenceManager().findPreference(depKey);
+        // allowed if wifi is in AIRPLANE_MODE_TOGGLEABLE_RADIOS
+        radios = Settings.System.getString(context.getContentResolver(),
+                Settings.System.AIRPLANE_MODE_TOGGLEABLE_RADIOS);
+        return (radios != null && radios.contains(Settings.System.RADIO_WIFI));
     }
-    
+
     private static String getHumanReadableWifiState(int wifiState) {
         switch (wifiState) {
             case WIFI_STATE_DISABLED:

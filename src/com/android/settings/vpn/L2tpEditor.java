@@ -57,7 +57,7 @@ class L2tpEditor extends VpnProfileEditor {
         final L2tpProfile profile = (L2tpProfile) getProfile();
         CheckBoxPreference secret = mSecret = new CheckBoxPreference(c);
         boolean enabled = profile.isSecretEnabled();
-        setSecretTitle(secret, R.string.vpn_l2tp_secret, enabled);
+        setCheckBoxTitle(secret, R.string.vpn_l2tp_secret);
         secret.setChecked(enabled);
         setSecretSummary(secret, enabled);
         secret.setOnPreferenceChangeListener(
@@ -67,8 +67,6 @@ class L2tpEditor extends VpnProfileEditor {
                         boolean enabled = (Boolean) newValue;
                         profile.setSecretEnabled(enabled);
                         mSecretHandler.getPreference().setEnabled(enabled);
-                        setSecretTitle(mSecret, R.string.vpn_l2tp_secret,
-                                enabled);
                         setSecretSummary(mSecret, enabled);
                         return true;
                     }

@@ -85,6 +85,14 @@
                 android:defaultValue="true" />
 
         <CheckBoxPreference
+                android:key="haptic_feedback"
+                android:title="@string/haptic_feedback_enable_title"
+                android:summaryOn="@string/haptic_feedback_enable_summary_on"
+                android:summaryOff="@string/haptic_feedback_enable_summary_off"
+                android:dependency="silent"
+                android:defaultValue="true" />
+
+        <CheckBoxPreference
                 android:key="play_media_notification_sounds"
                 android:title="@string/play_media_notification_sounds_enable_title"
                 android:summaryOn="@string/play_media_notification_sounds_enable_summary_on"
@@ -110,11 +118,12 @@
             android:summaryOn="@string/accelerometer_summary_on"
             android:summaryOff="@string/accelerometer_summary_off"/>
     
-        <CheckBoxPreference
-                android:key="animations"
-                android:title="@string/animations_title"
-                android:summaryOn="@string/animations_summary_on"
-                android:summaryOff="@string/animations_summary_off" />
+	    <ListPreference
+	        android:key="animations"
+	        android:title="@string/animations_title" 
+            android:persistent="false"
+            android:entries="@array/animations_entries"
+            android:entryValues="@array/animations_values" />
 
         <com.android.settings.BrightnessPreference
                 android:key="brightness"

@@ -15,6 +15,8 @@
 -->
 <resources xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <string name="yes" msgid="4676390750360727396">"是"</string>
+    <string name="no" msgid="6731231425810196216">"否"</string>
     <string name="device_info_default" msgid="7847265875578739287">"未知的"</string>
     <string name="turn_on_radio" msgid="8706561489788373676">"開啟無線通訊"</string>
     <string name="turn_off_radio" msgid="1820294552893884115">"關閉無線通訊"</string>
@@ -56,6 +58,7 @@
     <string name="font_size_save" msgid="3450855718056759095">"確定"</string>
     <string name="sdcard_setting" msgid="5922637503871474866">"SD 卡"</string>
     <string name="battery_info_status_label" msgid="8109155295509700309">"電池狀態："</string>
+    <string name="battery_info_power_label" msgid="7465140230991349382">"電源插頭："</string>
     <string name="battery_info_scale_label" msgid="3649763192389778437">"電池存量："</string>
     <string name="battery_info_level_label" msgid="8706526709307788737">"電池存量："</string>
     <string name="battery_info_health_label" msgid="6416051542741886958">"電池壽命："</string>
@@ -75,6 +78,11 @@
     <string name="battery_info_status_discharging" msgid="6222697503392774475">"放電中"</string>
     <string name="battery_info_status_not_charging" msgid="2820070506621483576">"未充電"</string>
     <string name="battery_info_status_full" msgid="2824614753861462808">"電力充足"</string>
+    <string name="battery_info_power_unplugged" msgid="5987246575519551081">"未插入"</string>
+    <string name="battery_info_power_ac" msgid="6808516193001604634">"AC"</string>
+    <string name="battery_info_power_usb" msgid="8012931702516331797">"USB"</string>
+    <string name="battery_info_power_ac_usb" msgid="6777734146838328688">"AC+USB"</string>
+    <string name="battery_info_power_unknown" msgid="7344115502868899881">"不明"</string>
     <string name="battery_info_health_unknown" msgid="5664295556921944255">"未知的"</string>
     <string name="battery_info_health_good" msgid="8070356565806711806">"好"</string>
     <string name="battery_info_health_overheat" msgid="8442959549291368806">"過熱"</string>
@@ -104,6 +112,12 @@
     <string name="bluetooth_notif_ticker" msgid="4726721390078512173">"藍牙配對要求"</string>
     <string name="bluetooth_notif_title" msgid="2485175521845371514">"配對要求"</string>
     <string name="bluetooth_notif_message" msgid="5381418499788668724">"選取要配對的裝置 "</string>
+    <string name="device_picker" msgid="8721012448931226323">"藍牙裝置選取器"</string>
+    <string name="bluetooth_permission_request" msgid="1523129741266262748">"藍牙權限要求"</string>
+    <string name="bluetooth_ask_enablement" msgid="2342558978033892004">"手機上的某個應用程式要求開啟藍牙裝置，您想要允許要求嗎？"</string>
+    <string name="bluetooth_ask_discovery" msgid="669870705606180872">"手機上的某個應用程式要求開啟藍牙裝置，這表示您的藍牙連線將開放 <xliff:g id="TIMEOUT">%1$d</xliff:g> 秒，讓其他裝置可在時間內搜尋到您的手機。您想要允許要求嗎？"</string>
+    <string name="bluetooth_ask_enablement_and_discovery" msgid="7220210326619399542">"手機上的某個應用程式要求開啟藍牙裝置，這表示您的藍牙連線將開放 <xliff:g id="TIMEOUT">%1$d</xliff:g> 秒，讓其他裝置可在時間內搜尋到您的手機。您想要允許要求嗎？"</string>
+    <string name="bluetooth_turning_on" msgid="3107102168379705771">"正在開啟藍牙..."</string>
     <string name="date_and_time" msgid="4114084177056654663">"日期與時間設定"</string>
     <string name="date_time_12_hour_sample" msgid="3259617262618020574">"下午 1:00"</string>
     <string name="date_time_24_hour_sample" msgid="8916857570746212357">"13:00"</string>
@@ -196,7 +210,8 @@
     <string name="airplane_mode_summary" msgid="3154817401368780988">"停用所有的無線網路連線"</string>
     <string name="airplane_mode_turning_on" msgid="8871739222526957255">"停用無線網路連線中..."</string>
     <string name="airplane_mode_turning_off" msgid="3393168549611505996">"啟用無線網路連線中..."</string>
-    <string name="radio_controls_title" msgid="8356991079873437337">"無線網路控制"</string>
+    <string name="radio_controls_title" msgid="5868688473587168882">"無線與網路"</string>
+    <string name="wireless_networks_settings_title" msgid="149274247949769551">"無線裝置和網路設定"</string>
     <string name="radio_controls_summary" msgid="2998818677094465517">"管理 Wi-Fi、藍牙、飛行模式、行動網路和 VPN"</string>
     <string name="roaming" msgid="3596055926335478572">"漫游服務"</string>
     <string name="roaming_enable" msgid="3737380951525303961">"漫遊時連線到資料傳輸服務"</string>
@@ -219,20 +234,29 @@
     <string name="date_time_date_format" msgid="436706100255870967">"選取日期格式"</string>
     <string name="zone_list_menu_sort_alphabetically" msgid="5683377702671088588">"依照字母排序"</string>
     <string name="zone_list_menu_sort_by_timezone" msgid="2720190443744884114">"依時區排序"</string>
-    <string name="security_settings_title" msgid="4918904614964215087">"安全性與位置"</string>
+    <string name="security_settings_title" msgid="5168491784222013179">"位置與安全性"</string>
+    <string name="location_security_settings_title" msgid="4624434296446625554">"位置與安全性設定"</string>
     <string name="security_settings_summary" msgid="967393342537986570">"設定我的位置、畫面解鎖、SIM 卡鎖定、認證儲存空間鎖定"</string>
+    <string name="cdma_security_settings_summary" msgid="6068799952798901542">"設定我的位置、解除鎖定畫面及鎖定認證儲存空間"</string>
     <string name="security_passwords_title" msgid="2930627259125138363">"密碼"</string>
     <string name="bluetooth_quick_toggle_title" msgid="1037056952714061893">"藍牙"</string>
     <string name="bluetooth_quick_toggle_summary" msgid="5293641680139873341">"開啟藍牙"</string>
     <string name="bluetooth_settings" msgid="2725796451253089609">"藍牙設定"</string>
     <string name="bluetooth_settings_title" msgid="2824020086246268296">"藍牙設定"</string>
     <string name="bluetooth_settings_summary" msgid="2091062709530570462">"管理連線、設定裝置名稱與可偵測性"</string>
-    <string name="bluetooth_pin_entry" msgid="5627349871303455279">"藍牙配對要求"</string>
+    <string name="bluetooth_pairing_request" msgid="6385750334766370310">"藍牙配對要求"</string>
     <string name="bluetooth_device_info" msgid="6644515376523965073">"藍牙裝置資訊"</string>
-    <string name="bluetooth_enter_pin_msg" msgid="7551139612735632370">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g>"\n\n"輸入 PIN 進行配對。"\n"(請嘗試 0000 或 1234。)"</string>
+    <string name="bluetooth_enter_pin_msg" msgid="856962526754150334">\n"請輸入 PIN 與「<xliff:g id="DEVICE_NAME">%1$s</xliff:g>」進行配對 (建議嘗試輸入 0000 或 1234)。"</string>
+    <string name="bluetooth_enter_passkey_msg" msgid="8121515818772179228">\n"請輸入密碼金鑰與「<xliff:g id="DEVICE_NAME">%1$s</xliff:g>」進行配對。"</string>
+    <string name="bluetooth_confirm_passkey_msg" msgid="1205362283945104263">"如要與「<xliff:g id="DEVICE_NAME">%1$s</xliff:g>」配對，請確定裝置顯示以下密碼金鑰：<xliff:g id="PASSKEY">%2$s</xliff:g>。"</string>
+    <string name="bluetooth_incoming_pairing_msg" msgid="1076613564387784476">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g>"\n"想要進行配對。"</string>
+    <string name="bluetooth_display_passkey_msg" msgid="3048496029389441579">"請在「<xliff:g id="DEVICE_NAME">%1$s</xliff:g>」輸入 <xliff:g id="PASSKEY">%2$s</xliff:g> 以進行配對。"</string>
+    <string name="bluetooth_pairing_accept" msgid="6163520056536604875">"配對"</string>
+    <string name="bluetooth_pairing_decline" msgid="930951069988011471">"不要配對"</string>
+    <string name="bluetooth_remote_device" msgid="2406662802908395389">"藍牙裝置"</string>
     <string name="bluetooth_error_title" msgid="538287072376677166">"注意"</string>
     <string name="bluetooth_pairing_error_message" msgid="2852744547246910349">"與<xliff:g id="DEVICE_NAME">%1$s</xliff:g>配對時發生問題。"</string>
-    <string name="bluetooth_pairing_pin_error_message" msgid="6938408362011024289">"由於輸入的 PIN 不正確，因此無法與<xliff:g id="DEVICE_NAME">%1$s</xliff:g>配對。"</string>
+    <string name="bluetooth_pairing_pin_error_message" msgid="6065697229258906937">"無法與 <xliff:g id="DEVICE_NAME">%1$s</xliff:g> 進行配對，因為輸入的 PIN 或密碼金鑰有誤。"</string>
     <string name="bluetooth_pairing_device_down_error_message" msgid="6688215193824686741">"無法與「<xliff:g id="DEVICE_NAME">%1$s</xliff:g>」建立通訊。"</string>
     <string name="bluetooth_pairing_rejected_error_message" msgid="1648157108520832454">"「<xliff:g id="DEVICE_NAME">%1$s</xliff:g>」拒絕配對要求。"</string>
     <string name="bluetooth_connecting_error_message" msgid="1779660510084746802">"連接至<xliff:g id="DEVICE_NAME">%1$s</xliff:g>時發生問題。"</string>
@@ -246,6 +270,7 @@
     <string name="bluetooth_connect_specific_profiles_title" msgid="6952214406025825164">"連線到..."</string>
     <string name="bluetooth_profile_a2dp" msgid="3259633293424539529">"媒體"</string>
     <string name="bluetooth_profile_headset" msgid="1874975688666658946">"電話"</string>
+    <string name="bluetooth_profile_opp" msgid="3799470046565284440">"傳輸"</string>
     <string name="bluetooth_summary_connected_to_a2dp" msgid="510833839847758664">"連接至媒體音訊"</string>
     <string name="bluetooth_summary_connected_to_headset" msgid="4876496372728623918">"連接至電話音訊"</string>
     <string name="bluetooth_summary_connected_to_a2dp_headset" msgid="3045032710457800891">"連接至電話和媒體音訊"</string>
@@ -255,8 +280,11 @@
     <string name="bluetooth_device_advanced_profile_header_title" msgid="3764437426089639639">"設定檔"</string>
     <string name="bluetooth_a2dp_profile_summary_connected" msgid="963376081347721598">"連接至媒體音訊"</string>
     <string name="bluetooth_headset_profile_summary_connected" msgid="7661070206715520671">"連接至電話音訊"</string>
+    <string name="bluetooth_opp_profile_summary_connected" msgid="2611913495968309066">"已連線到檔案傳輸伺服器"</string>
+    <string name="bluetooth_opp_profile_summary_not_connected" msgid="1267091356089086285">"不要連線到檔案傳輸伺服器"</string>
     <string name="bluetooth_a2dp_profile_summary_use_for" msgid="4630849022250168427">"用於媒體音訊"</string>
     <string name="bluetooth_headset_profile_summary_use_for" msgid="8705753622443862627">"用於電話音訊"</string>
+    <string name="bluetooth_opp_profile_summary_use_for" msgid="1255674547144769756">"用於傳輸檔案"</string>
     <string name="wifi" msgid="1081550856200013637">"Wi-Fi"</string>
     <string name="wifi_quick_toggle_title" msgid="874495178395350104">"Wi-Fi"</string>
     <string name="wifi_quick_toggle_summary" msgid="1047950931623694366">"開啟 Wi-Fi"</string>
@@ -271,19 +299,15 @@
     <string name="wifi_signal_1" msgid="8623690413812290642">"可"</string>
     <string name="wifi_signal_0" msgid="3862211184991511432">"差"</string>
     <string name="security" msgid="1040691896987225267">"安全性"</string>
-    <string name="wifi_security_open" msgid="3513305614048816607">"開啟"</string>
+    <string name="wifi_security_open" msgid="3513305614048816607">"開放"</string>
     <string name="wifi_security_wep" msgid="7082604129842065776">"WEP"</string>
-    <string name="wifi_security_wpa" msgid="8980169410565477162">"WPA"</string>
-    <string name="wifi_security_wpa2" msgid="5780665935088930524">"WPA2"</string>
-    <string name="wifi_security_wpa_eap" msgid="7485687331651751101">"WPA-EAP"</string>
-    <string name="wifi_security_ieee8021x" msgid="8538687609878109005">"IEEE8021X"</string>
+    <string name="wifi_security_psk" msgid="3392399380570381452">"WPA/WPA2 PSK"</string>
+    <string name="wifi_security_eap" msgid="8309434150934969132">"Enterprise(802.1x)"</string>
     <string name="wifi_security_unknown" msgid="4564208312073060668">"未知的"</string>
     <string name="wifi_security_verbose_open" msgid="8117878112088901945">"開放網路"</string>
     <string name="wifi_security_verbose_wep" msgid="9220757688700421508">"以 WEP 保護連線安全性"</string>
-    <string name="wifi_security_verbose_wpa" msgid="598697674252714455">"以 WPA 保護連線安全性"</string>
-    <string name="wifi_security_verbose_wpa2" msgid="4116236883347875722">"以 WPA2 保護連線安全性"</string>
-    <string name="wifi_security_verbose_wpa_eap" msgid="1984821646949066624">"以 WPA-EAP 保護連線安全性"</string>
-    <string name="wifi_security_verbose_ieee8021x" msgid="5552995793910186310">"以 IEEE 802.1x 保護連線安全性"</string>
+    <string name="wifi_security_verbose_psk" msgid="1110130025330416225">"以 WPA/WPA2 PSK 保護連線安全性"</string>
+    <string name="wifi_security_verbose_eap" msgid="586632662086063">"以 802.1x EAP 保護連線安全性"</string>
     <string name="ip_address" msgid="850672263358989449">"IP 位址"</string>
     <string name="signal" msgid="1947969631626413228">"訊號強度"</string>
     <string name="wifi_starting" msgid="6710266609710860129">"開啟中..."</string>
@@ -302,14 +326,13 @@
     <string name="please_type_anonymous_identity" msgid="835061562079965048">"匿名識別"</string>
     <string name="please_select_client_certificate" msgid="2137906961594663234">"用戶端憑證"</string>
     <string name="please_select_ca_certificate" msgid="5010815181914420677">"CA 憑證"</string>
-    <string name="please_type_private_key_passwd" msgid="4077744679722504443">"私密金鑰密碼"</string>
     <string name="please_type_passphrase" msgid="8256017704131522462">"無線網路密碼"</string>
     <string name="please_type_hex_key" msgid="8751224390407867551">"WEP hex key (0-9，A-F)"</string>
     <string name="wifi_show_password" msgid="4235237470701732009">"顯示密碼"</string>
     <string name="scan_wifi" msgid="2459901725350542606">"掃描"</string>
     <string name="summary_not_in_range" msgid="3926674700733548684">"不在範圍內"</string>
     <string name="summary_remembered" msgid="6079941090549401742">"已記憶"</string>
-    <string name="summary_connection_failed" msgid="7610394657613410489">"連線失敗，選取此項再試一次。"</string>
+    <string name="summary_connection_failed" msgid="2351885658101671413">"連線失敗，請輕觸以再試一次"</string>
     <string name="wifi_access_points" msgid="2664629396767022441">"Wi-Fi 網路"</string>
     <string name="wifi_type_ssid" msgid="1326839657083292017">"網路 SSID"</string>
     <string name="wifi_security" msgid="6603611185592956936">"安全性"</string>
@@ -360,6 +383,7 @@
     <string name="status_disconnected" msgid="7561688569905126046">"已中斷連線"</string>
     <string name="status_failed" msgid="610462050405904601">"失敗"</string>
     <string name="sound_and_display_settings" msgid="349770582993029003">"音效與顯示"</string>
+    <string name="sound_and_display_settings_title" msgid="5036144539683697330">"音效與顯示設定"</string>
     <string name="sound_settings" msgid="5007659014828162881">"音效設定"</string>
     <string name="sound_and_display_settings_summary" msgid="1433943789593286064">"設定鈴聲、通知與螢幕亮度"</string>
     <string name="silent_mode_title" msgid="3181479108593217704">"靜音模式"</string>
@@ -385,11 +409,14 @@
     <string name="sound_effects_enable_title" msgid="3197313718929122833">"有聲選項"</string>
     <string name="sound_effects_enable_summary_on" msgid="6154141289879491329">"使用螢幕選取時播放音效"</string>
     <string name="sound_effects_enable_summary_off" msgid="3447739581759560125">"在螢幕上進行選取時播放音效"</string>
+    <string name="haptic_feedback_enable_title" msgid="6311736559245411290">"觸動回饋"</string>
+    <string name="haptic_feedback_enable_summary_on" msgid="1875779656524793053">"按下螢幕按鍵與出現特定的操作行為時會震動"</string>
+    <string name="haptic_feedback_enable_summary_off" msgid="7287885436963105314">"按下螢幕按鍵與出現特定的操作行為時會震動"</string>
     <string name="play_media_notification_sounds_enable_title" msgid="1008791464029179529">"SD 卡通知"</string>
     <string name="play_media_notification_sounds_enable_summary_on" msgid="7675466959375667370">"播放 SD 卡通知音效"</string>
     <string name="play_media_notification_sounds_enable_summary_off" msgid="8672617597028744693">"播放 SD 卡通知音效"</string>
-    <string name="sync_settings" msgid="2212736205476453234">"資料同步處理"</string>
-    <string name="sync_settings_summary" msgid="6480534906375217074">"選取要同步處理的應用程式"</string>
+    <string name="sync_settings" msgid="9186125469300013491">"帳戶與同步處理"</string>
+    <string name="sync_settings_summary" msgid="2962179505214965667">"新增或移除帳戶和變更帳戶設定"</string>
     <string name="search_settings" msgid="1910951467596035063">"搜尋"</string>
     <string name="search_settings_summary" msgid="9205656546570654169">"管理搜尋設定和記錄"</string>
     <string name="display_settings" msgid="3912042046350078328">"顯示設定"</string>
@@ -403,6 +430,7 @@
     <string name="brightness_summary" msgid="838917350127550703">"調整螢幕亮度"</string>
     <string name="screen_timeout" msgid="4882669461447531301">"螢幕逾時"</string>
     <string name="screen_timeout_summary" msgid="2905757633140605334">"調整螢幕自動關閉前的延遲時間"</string>
+    <string name="automatic_brightness" msgid="5014143533884135461">"自動調整亮度"</string>
     <string name="sim_lock_settings" msgid="3392331196873564292">"SIM 卡鎖定設定"</string>
     <string name="sim_lock_settings_category" msgid="5136244267576697004">"設定 SIM 卡鎖定"</string>
     <string name="sim_lock_settings_title" msgid="9018585580955414596">"SIM 卡鎖定"</string>
@@ -436,7 +464,8 @@
     <string name="device_status_activity_title" msgid="1411201799384697904">"狀態"</string>
     <string name="device_status" msgid="607405385799807324">"狀態"</string>
     <string name="device_status_summary" msgid="2599162787451519618">"電話號碼、訊號等。"</string>
-    <string name="storage_settings_title" msgid="8461515684514801302">"SD 卡與手機儲存"</string>
+    <string name="storage_settings" msgid="6681164315506788024">"SD 卡和行動電話儲存空間"</string>
+    <string name="storage_settings_title" msgid="5379463509034022773">"SD 卡和行動電話儲存空間設定"</string>
     <string name="storage_settings_summary" msgid="9176693537325988610">"卸載 SD 卡，檢視可用儲存媒體。"</string>
     <string name="status_number" msgid="5123197324870153205">"我的電話號碼"</string>
     <string name="status_min_number" msgid="3519504522179420597">"MIN"</string>
@@ -480,6 +509,11 @@
     <string name="apn_mms_port" msgid="4074188088199243040">"MMS 連接埠"</string>
     <string name="apn_mcc" msgid="4258628382260674636">"MCC"</string>
     <string name="apn_mnc" msgid="8629374076888809874">"MNC"</string>
+    <string name="apn_auth_type" msgid="6167205395676037015">"驗證類型"</string>
+    <string name="apn_auth_type_none" msgid="5069592676845549926">"無"</string>
+    <string name="apn_auth_type_pap" msgid="1666934536996033383">"PAP"</string>
+    <string name="apn_auth_type_chap" msgid="3369626283789068360">"CHAP"</string>
+    <string name="apn_auth_type_pap_chap" msgid="9102343063036134541">"PAP 或 CHAP"</string>
     <string name="apn_type" msgid="469613123902220544">"APN 類型"</string>
     <string name="menu_delete" msgid="6981294422841124659">"刪除 APN"</string>
     <string name="menu_new" msgid="3014205883303921729">"新增 APN"</string>
@@ -518,12 +552,15 @@
     <string name="location_network_based" msgid="8815705866861993344">"使用無線網路"</string>
     <string name="location_networks_disabled" msgid="2708968452901433980">"使用無線網路，在應用程式中查詢位置 (例如 Google 地圖)"</string>
     <string name="location_neighborhood_level" msgid="4656658097932515921">"根據 Wi-Fi 與/或行動網路判定位置"</string>
-    <string name="location_gps" msgid="375912731641377120">"啟用 GPS 衛星接收器"</string>
-    <string name="location_street_level" msgid="5899941752252356344">"定位時，精準度設定為街道等級 (取消選取此項可較省電)"</string>
+    <string name="location_gps" msgid="6296125378829097831">"使用 GPS 衛星定位"</string>
+    <string name="location_street_level" msgid="6460740847018275745">"定位時，精準度設定為街道等級 (取消勾選即可節省電力)"</string>
     <string name="location_gps_disabled" msgid="6632537158777308128">"定位至街道等級 (需要更多電力及天候允許)"</string>
-    <string name="use_location_title" msgid="7585990952633568732">"與 Google 分享"</string>
-    <string name="use_location_summary" msgid="4411467143899877395">"允許 Google 使用位置資訊來改善搜尋與其他服務"</string>
-    <string name="use_location_warning_message" msgid="5696732842038416151">"允許 Google 使用位置資訊來改善搜尋結果與其他服務"</string>
+    <string name="assisted_gps" msgid="4649317129586736885">"使用輔助 GPS"</string>
+    <string name="assisted_gps_enabled" msgid="8751899609589792803">"使用伺服器輔助 GPS (取消勾選即可降低網路使用量)"</string>
+    <string name="assisted_gps_disabled" msgid="6982698333968010748">"使用伺服器輔助 GPS (取消勾選即可提升 GPS 效能)"</string>
+    <string name="use_location_title" msgid="5447030582538504247">"使用我的位置"</string>
+    <string name="use_location_summary" msgid="1816849484040070431">"在 Google 搜尋結果和其他 Google 服務使用「我的位置」資訊"</string>
+    <string name="use_location_warning_message" msgid="1420184860518262439">"要允許 Google 使用位置資訊改善搜尋結果與其他服務嗎？"</string>
     <string name="agree" msgid="6288718671527758326">"同意"</string>
     <string name="disagree" msgid="6221069272309799230">"不同意"</string>
     <string name="about_settings" msgid="1743378368185371685">"關於手機"</string>
@@ -538,6 +575,10 @@
     <string name="settings_license_activity_title" msgid="7553683406244228650">"開啟原始授權"</string>
     <string name="settings_license_activity_unavailable" msgid="4210539215951487627">"載入授權時發生問題"</string>
     <string name="settings_license_activity_loading" msgid="3337535809093591740">"載入中..."</string>
+    <string name="settings_safetylegal_title" msgid="1289483965535937431">"安全資訊"</string>
+    <string name="settings_safetylegal_activity_title" msgid="6901214628496951727">"安全資訊"</string>
+    <string name="settings_safetylegal_activity_unreachable" msgid="3198912875259612887">"您的手機尚未與資料傳輸服務連線。如要檢視此資訊，請使用任何可上網的電腦前往 %s。"</string>
+    <string name="settings_safetylegal_activity_loading" msgid="8059022597639516348">"載入中..."</string>
     <string name="lock_settings_title" msgid="5828348303971852121">"螢幕解鎖圖形"</string>
     <string name="lockpattern_change_lock_pattern_label" msgid="5679630792003440352">"變更解鎖圖形"</string>
     <string name="lockpattern_need_to_unlock" msgid="757935356911054465">"確認儲存的圖形"</string>
@@ -566,9 +607,9 @@
     <string name="skip_button_label" msgid="8680422740354436943">"取消"</string>
     <string name="next_button_label" msgid="8890792540116568321">"下一頁"</string>
     <string name="lock_title" msgid="4059246467204273930">"手機安全設定"</string>
-    <string name="lock_intro_message" msgid="5352897389718432077"><font size="17">" 建立個人螢幕解鎖圖形，避免您的手機在未授權狀態下遭人使用。 "\n<font height="17">\n</font><b>" 1 "</b>"  請在下一個畫面中，檢視範例圖形繪畫示範。"\n<font height="17">\n</font><b>" 2 "</b>"  準備好後，便可畫出個人解鎖圖形。您可以嘗試不同的圖形，但需要至少連接四點。 "\n<font height="17">\n</font><b>" 3 "</b>"  再次畫出圖形以確認。"\n<font height="17">\n</font><b>" 準備開始了嗎？選取 [下一步]"</b>"。"\n<font height="3">\n</font>" 如要維持未保護的狀態，請選取 [取消]。"</font></string>
+    <string name="lock_intro_message" msgid="9100785646737118042"><font size="17">"建立個人螢幕的解鎖圖案，避免手機在未經授權的狀態下遭人使用。"\n<font height="17">\n</font><b>"1"</b>"  請在下一個畫面檢視範例圖案的繪製示範。"\n<font height="17">\n</font><b>"2"</b>"  當您準備就緒後，請繪製自己的個人解鎖圖案。請嘗試繪製不同的圖案，但至少要連接四個點。"\n<font height="17">\n</font><b>"3"</b>"  再次繪製圖案來確認。"\n<font height="17">\n</font><b>"準備好要開始了嗎？請輕觸 [下一步]"</b>"。"\n<font height="3">\n</font>"如要繼續讓手機處於未保護狀態，請輕觸 [取消]。"</font></string>
     <string name="lock_example_title" msgid="8052305554017485410">"範例圖形"</string>
-    <string name="lock_example_message" msgid="7431982730914254881">"畫出圖形時，需要至少連接四個點。"\n" "\n"準備好要畫出您的解鎖圖形時，請選取 [下一步]。"</string>
+    <string name="lock_example_message" msgid="1838650097090632706">"至少連接四個點。"\n" "\n"您準備好要繪製自己的解鎖圖案時，請輕觸 [下一步]。"</string>
     <string name="manageapplications_settings_title" msgid="5712405848153426706">"管理應用程式"</string>
     <string name="manageapplications_settings_summary" msgid="6097117021500651232">"管理及移除已安裝的應用程式"</string>
     <string name="applications_settings" msgid="3736173521008476946">"應用程式"</string>
@@ -602,12 +643,12 @@
     <string name="filter" msgid="2018011724373033887">"篩選"</string>
     <string name="filter_dlg_title" msgid="6507663329723966854">"選取篩選選項"</string>
     <string name="filter_apps_all" msgid="5142129378749391876">"全部"</string>
-    <string name="filter_apps_third_party" msgid="1096017647285183437">"第三方"</string>
+    <string name="filter_apps_third_party" msgid="7786348047690140979">"已下載"</string>
     <string name="filter_apps_running" msgid="7767071454371350486">"執行中"</string>
     <string name="loading" msgid="3200408047793887917">"載入中..."</string>
     <string name="recompute_size" msgid="7722567982831691718">"重新計算大小..."</string>
     <string name="clear_data_dlg_title" msgid="4470209520936375508">"刪除"</string>
-    <string name="clear_data_dlg_text" msgid="8796694785488630642">"所有儲存在此應用程式的資訊都會被永久刪除。"</string>
+    <string name="clear_data_dlg_text" msgid="8368035073300828451">"該應用程式的所有資料都將遭到永遠刪除，包含所有檔案、設定、帳戶、資料庫等等。"</string>
     <string name="dlg_ok" msgid="2402639055725653590">"確定"</string>
     <string name="dlg_cancel" msgid="1674753358972975911">"取消"</string>
     <string name="app_not_found_dlg_title" msgid="8458335716378083713">"找不到應用程式"</string>
@@ -620,9 +661,23 @@
     <string name="security_settings_desc" msgid="3116027624526915561">"此應用程式可存取您電話中的下列項目："</string>
     <string name="computing_size" msgid="1599186977475211186">"計算中..."</string>
     <string name="invalid_size_value" msgid="1901940003700269523">"無法計算封裝大小"</string>
-    <string name="empty_list_msg" msgid="1883660401486953588">"您未安裝任何第三方應用程式。"</string>
+    <string name="empty_list_msg" msgid="2901049162265094971">"您未安裝任何第三方應用程式。"</string>
     <string name="version_text" msgid="9189073826278676425">"版本 <xliff:g id="VERSION_NUM">%1$s</xliff:g>"</string>
-    <string name="language_settings" msgid="2939555761536357092">"地區設定與文字"</string>
+    <string name="runningservices_settings_title" msgid="8097287939865165213">"正在運作的服務"</string>
+    <string name="runningservices_settings_summary" msgid="854608995821032748">"查看並控制目前正在運作的服務"</string>
+    <string name="service_restarting" msgid="2242747937372354306">"重新啟動中"</string>
+    <string name="no_running_services" msgid="6981216347270280598">"沒有正在運作的服務"</string>
+    <string name="confirm_stop_service" msgid="5700448757318301681">"要停止服務嗎？"</string>
+    <string name="confirm_stop_service_msg" msgid="1202118456282395730">"服務將不再繼續執行，除非您重新啟動該服務。這個動作可能會對應用程式「<xliff:g id="APPLICATION">%1$s</xliff:g>」造成無法預期的結果。"</string>
+    <string name="confirm_stop_stop" msgid="7382363913280993331">"停止"</string>
+    <string name="confirm_stop_cancel" msgid="206495326622692381">"取消"</string>
+    <string name="service_started_by_app" msgid="8432097226392386802">"由應用程式啟動：輕觸螢幕即可停止"</string>
+    <string name="service_client_name" msgid="2337664610975074717">"<xliff:g id="CLIENT_NAME">%1$s</xliff:g>：輕觸即可進行管理"</string>
+    <string name="service_background_processes" msgid="5158600475629177758">"可用：<xliff:g id="FREE">%2$s</xliff:g>+<xliff:g id="MEMORY">%3$s</xliff:g>，共 <xliff:g id="COUNT">%1$d</xliff:g> 個程序"</string>
+    <string name="service_foreground_processes" msgid="4013890350284680796">"其他：<xliff:g id="MEMORY">%2$s</xliff:g>，共 <xliff:g id="COUNT">%1$d</xliff:g> 個程序"</string>
+    <string name="service_process_name" msgid="8630408984456958400">"程序：<xliff:g id="PROCESS">%1$s</xliff:g>"</string>
+    <string name="language_settings" msgid="502219872342167227">"語言與鍵盤"</string>
+    <string name="language_keyboard_settings_title" msgid="3455826933385341107">"語言與鍵盤設定"</string>
     <string name="language_settings_summary" msgid="595647729475399987">"選取地區設定 (語言和地區)、文字輸入和自動校正選項"</string>
     <string name="language_category" msgid="3391756582724541530">"地區設定"</string>
     <string name="text_category" msgid="6342540511465136739">"文字設定"</string>
@@ -637,7 +692,7 @@
     <string name="auto_punctuate_summary" msgid="4372126865670574837">"按空白鍵兩次可插入「.」"</string>
     <string name="show_password" msgid="2198798062604049206">"顯示密碼"</string>
     <string name="show_password_summary" msgid="3806709974395178121">"顯示輸入的密碼"</string>
-    <string name="ime_security_warning" msgid="3458652708716006477">"此輸入法可能會收集您輸入的所有文字，包括密碼和信用卡號等個人資料。此輸入法來自 <xliff:g id="IME_APPLICATION_NAME">%1$s</xliff:g> 應用程式。是否啟用此輸入法？"</string>
+    <string name="ime_security_warning" msgid="812267421486877917">"此輸入法可能會收集您輸入的所有文字，包括密碼和信用卡號等個人資料。此輸入法來自「<xliff:g id="IME_APPLICATION_NAME">%1$s</xliff:g>」應用程式。是否要使用此輸入法？"</string>
     <string name="user_dict_settings_titlebar" msgid="765659257455000490">"使用者字典"</string>
     <string name="user_dict_settings_title" msgid="8357027437499042191">"使用者字典"</string>
     <string name="user_dict_settings_summary" msgid="2460427065601355471">"在使用者字典中新增及移除字詞"</string>
@@ -665,7 +720,7 @@
     <string name="input_methods_settings_title" msgid="6800066636850553887">"文字輸入法"</string>
     <string name="input_methods_settings_summary" msgid="7571173442946675205">"管理輸入法選項"</string>
     <string name="input_methods_settings_label_format" msgid="6002887604815693322">"<xliff:g id="IME_NAME">%1$s</xliff:g> 設定"</string>
-    <string name="onscreen_keyboard_settings_summary" msgid="4919680715154885028">"螢幕小鍵盤設定"</string>
+    <string name="onscreen_keyboard_settings_summary" msgid="5841558383556238653">"螢幕鍵盤設定"</string>
     <string name="builtin_keyboard_settings_title" msgid="8169889453770863227">"裝置小鍵盤"</string>
     <string name="builtin_keyboard_settings_summary" msgid="6404687907454621637">"內建小鍵盤設定"</string>
     <string name="development_settings_title" msgid="6719732334835420989">"開發"</string>
@@ -676,11 +731,11 @@
     <string name="keep_screen_on_summary" msgid="2173114350754293009">"充電時螢幕不會進入休眠"</string>
     <string name="allow_mock_location" msgid="2787962564578664888">"允許模擬位置"</string>
     <string name="allow_mock_location_summary" msgid="317615105156345626">"允許模擬位置"</string>
-    <string name="adb_warning_title" msgid="1756027479229533250">"啟用 USB 偵錯功能嗎？"</string>
+    <string name="adb_warning_title" msgid="6234463310896563253">"允許 USB 偵錯嗎？"</string>
     <string name="adb_warning_message" msgid="5352555112049663033">"USB 偵錯是針對應用程式開發而設計的功能，可讓您在電腦與裝置間複製資料、不用通知即可在裝置上安裝應用程式，以及讀取記錄資料。"</string>
     <string name="gadget_picker_title" msgid="98374951396755811">"選擇小工具"</string>
     <string name="widget_picker_title" msgid="9130684134213467557">"選擇小工具"</string>
-    <string name="battery_history_details_for" msgid="5189636461798594740">"UID %d 的詳細資料"</string>
+    <string name="battery_history_details_for" msgid="5924639922153109669">"UID <xliff:g id="NUMBER">%d</xliff:g> 的詳細資料"</string>
     <string name="battery_history_uid" msgid="1016606150528436298">"UID <xliff:g id="USER_ID">%1$d</xliff:g>"</string>
     <string name="battery_history_network_usage" msgid="8010852371665217020">"<xliff:g id="APP_NAME">%1$s</xliff:g> 的網路使用率詳細資料："</string>
     <string name="battery_history_bytes_received" msgid="980307569180518302">"已接收的位元組數：<xliff:g id="BYTES">%1$d</xliff:g>"</string>
@@ -716,12 +771,13 @@
     <string name="app_name_label" msgid="2000949925256858308">"應用程式"</string>
     <string name="launch_count_label" msgid="4019444833263957024">"計數"</string>
     <string name="usage_time_label" msgid="295954901452833058">"使用時間"</string>
-    <string name="accessibility_settings_title" msgid="4239640930601071058">"協助工具"</string>
+    <string name="accessibility_settings" msgid="3975902491934816215">"協助工具"</string>
+    <string name="accessibility_settings_title" msgid="2130492524656204459">"協助工具設定"</string>
     <string name="accessibility_settings_summary" msgid="8185181964847149507">"管理協助工具選項"</string>
     <string name="toggle_accessibility_title" msgid="650839277066574497">"協助工具"</string>
     <string name="accessibility_services_category" msgid="8127851026323672607">"協助工具服務"</string>
     <string name="no_accessibility_services_summary" msgid="694578333333808159">"尚未安裝協助工具服務。"</string>
-    <string name="accessibility_service_security_warning" msgid="8386156287296967181">"此協助工具服務可能會收集您輸入的所有文字，包括個人資料及信用卡號碼，但並不會收集您輸入的密碼，而且它也可能會記錄您的使用者介面互動行為。該服務是由應用程式「<xliff:g id="ACCESSIBILITY_SERVICE_NAME">%1$s</xliff:g>」所提供，要啟動此協助工具服務嗎？"</string>
+    <string name="accessibility_service_security_warning" msgid="4066258132331302670">"此協助工具服務可能會收集您輸入的所有文字，包括個人資料及信用卡號碼，但並不會收集您輸入的密碼，而且它也可能會記錄您的使用者介面互動行為。該服務是由應用程式「<xliff:g id="ACCESSIBILITY_SERVICE_NAME">%1$s</xliff:g>」所提供，要使用此協助工具服務嗎？"</string>
     <string name="accessibility_service_disable_warning" msgid="8930591383312775132">"要停用協助工具嗎？"</string>
     <string name="power_usage_summary_title" msgid="5180282911164282324">"電池使用狀況"</string>
     <string name="power_usage_summary" msgid="7237084831082848168">"消耗電池電力的功能"</string>
@@ -733,7 +789,7 @@
     <string name="awake" msgid="387122265874485088">"裝置甦醒時間"</string>
     <string name="wifi_on_time" msgid="4630925382578609056">"WiFi 開啟時間"</string>
     <string name="bluetooth_on_time" msgid="4478515071957280711">"WiFi 開啟時間"</string>
-    <string name="usage_name_percent" msgid="1899151069711662289">"<xliff:g id="NAME">%1$s</xliff:g> -  <xliff:g id="PERCENT">%2$s</xliff:g>%%"</string>
+    <string name="usage_name_percent" msgid="7976919382448235858">"<xliff:g id="NAME">%1$s</xliff:g> -  <xliff:g id="NUMBER">%2$s</xliff:g><xliff:g id="PERCENT">%%</xliff:g>"</string>
     <string name="details_title" msgid="7564809986329021063">"電池使用狀況詳細資料"</string>
     <string name="details_subtitle" msgid="32593908269911734">"使用狀況詳細資訊"</string>
     <string name="controls_subtitle" msgid="390468421138288702">"調整電力使用"</string>
@@ -769,7 +825,7 @@
     <string name="battery_desc_wifi" msgid="1702486494565080431">"Wi-Fi 耗電量"</string>
     <string name="battery_sugg_wifi" msgid="7542345142282261691">"未使用或無法使用 Wi-Fi 時即關閉 Wi-Fi"</string>
     <string name="battery_desc_bluetooth" msgid="7535520658674621902">"藍牙耗電量"</string>
-    <string name="battery_sugg_bluetooth_basic" msgid="144393178427277439">"未使用藍牙時即關閉藍牙"</string>
+    <string name="battery_sugg_bluetooth_basic" msgid="817276933922157788">"未使用藍牙時即關閉藍牙"</string>
     <string name="battery_sugg_bluetooth_headset" msgid="8214816222115517479">"嘗試連線至不同的藍牙裝置"</string>
     <string name="battery_desc_apps" msgid="8123202939321333639">"應用程式執行時的耗電量"</string>
     <string name="battery_sugg_apps_info" msgid="6065882899391322442">"停止或解除安裝應用程式"</string>
@@ -781,9 +837,9 @@
     <string name="menu_stats_refresh" msgid="1676215433344981075">"重新整理"</string>
     <string name="process_kernel_label" msgid="3916858646836739323">"Android 作業系統"</string>
     <string name="process_mediaserver_label" msgid="6500382062945689285">"媒體伺服器"</string>
-    <string name="tts_settings" msgid="6454363854545277027">"語音合成"</string>
+    <string name="tts_settings" msgid="3348626948015962987">"文字轉語音"</string>
     <string name="tts_settings_summary" msgid="2627715231944602766">"設定文字轉語音選項"</string>
-    <string name="tts_settings_title" msgid="5064947197040356736">"語音合成器控制項"</string>
+    <string name="tts_settings_title" msgid="4182348653053000933">"文字轉語音設定"</string>
     <string name="use_default_tts_settings_title" msgid="1577063839539732930">"永遠使用我的設定"</string>
     <string name="use_default_tts_settings_summary" msgid="4253502106159206276">"下列預設設定會覆寫應用程式設定"</string>
     <string name="tts_default_settings_section" msgid="5787915620218907443">"預設設定"</string>
@@ -801,8 +857,11 @@
     <string name="tts_demo" msgid="405357591189935876">"請聆聽合成的範例。"</string>
     <string name="tts_settings_changed_demo" msgid="4926518555912328645">"設定已變更，請聆聽語音範例。"</string>
     <string name="gadget_title" msgid="7455548605888590466">"電源控制"</string>
+    <string name="gadget_toggle_wifi" msgid="2382963973155082629">"正在更新 Wi-Fi 設定"</string>
+    <string name="gadget_toggle_bluetooth" msgid="7538903239807020826">"正在更新藍牙設定"</string>
+    <string name="credential_installer_activity_title" msgid="7600661521831762521">"認證安裝程式"</string>
     <string name="vpn_settings_activity_title" msgid="7276864950701612579">"VPN 設定"</string>
-    <string name="vpn_connect_to" msgid="9040615733700098831">"連線至「%s」"</string>
+    <string name="vpn_connect_to" msgid="2541409082892684362">"連線至<xliff:g id="NAME">%s</xliff:g>"</string>
     <string name="vpn_username_colon" msgid="7854930370861306247">"使用者名稱："</string>
     <string name="vpn_password_colon" msgid="5716278710848606626">"密碼："</string>
     <string name="vpn_a_username" msgid="6664733641993968692">"使用者名稱"</string>
@@ -820,9 +879,9 @@
     <string name="vpn_menu_disconnect" msgid="8254492450022562235">"中斷網路連線"</string>
     <string name="vpn_menu_edit" msgid="4526245173583195618">"編輯網路"</string>
     <string name="vpn_menu_delete" msgid="3326527392609513129">"刪除網路"</string>
-    <string name="vpn_error_miss_entering" msgid="1467455143582547499">"請輸入%s。"</string>
-    <string name="vpn_error_miss_selecting" msgid="953436717902387192">"請選取%s。"</string>
-    <string name="vpn_error_duplicate_name" msgid="2786397299628471911">"VPN 名稱「%s」已經存在，請使用其他名稱。"</string>
+    <string name="vpn_error_miss_entering" msgid="5377667978602483250">"請輸入<xliff:g id="CODE">%s</xliff:g>。"</string>
+    <string name="vpn_error_miss_selecting" msgid="4890780825580511345">"請選取<xliff:g id="OPTION">%s</xliff:g>。"</string>
+    <string name="vpn_error_duplicate_name" msgid="2693927537390963745">"VPN 名稱「<xliff:g id="NAME">%s</xliff:g>」已經存在，請使用其他名稱。"</string>
     <string name="vpn_confirm_profile_deletion" msgid="8679536635364177239">"確定要刪除此 VPN 嗎？"</string>
     <string name="vpn_confirm_add_profile_cancellation" msgid="3377869170901609182">"確定不要建立此設定檔嗎？"</string>
     <string name="vpn_confirm_edit_profile_cancellation" msgid="7496760181072204494">"確定要捨棄您對此設定檔所做的變更嗎？"</string>
@@ -833,10 +892,12 @@
     <string name="vpn_secret_not_set_dialog_msg" msgid="8013052814131532765">"此 VPN 設定遺失了一或多個密碼檔，要檢查密碼檔設定嗎？"</string>
     <string name="vpn_auth_error_dialog_msg" msgid="5476820106624807614">"您所輸入的使用者名稱或密碼不正確，您要再試一次嗎？"</string>
     <string name="vpn_remote_hung_up_error_dialog_msg" msgid="1566946015052633150">"伺服器無回應，您所輸入的使用者名稱或密碼可能有誤，要再試一次嗎？"</string>
+    <string name="vpn_remote_ppp_hung_up_error_dialog_msg" msgid="5135958511128503344">"伺服器中斷連線，這可能是因為您的防火牆禁止您連線到該伺服器。要再試一次嗎？"</string>
+    <string name="vpn_ppp_negotiation_failed_dialog_msg" msgid="4611293656718340994">"伺服器協商失敗；伺服器不同意您的加密選項。要查看您的加密設定嗎？"</string>
     <string name="vpn_type_title" msgid="6392933604218676224">"新增 VPN"</string>
     <string name="vpn_add_new_vpn" msgid="5438260689052714550">"新增 VPN"</string>
-    <string name="vpn_edit_title_add" msgid="2550661826320709266">"新增%s VPN"</string>
-    <string name="vpn_edit_title_edit" msgid="1769999313158207723">"%s詳細資訊"</string>
+    <string name="vpn_edit_title_add" msgid="2121313217989682890">"新增 <xliff:g id="NAME">%s</xliff:g> VPN"</string>
+    <string name="vpn_edit_title_edit" msgid="2457278794066617935">"<xliff:g id="NAME">%s</xliff:g>的詳細資料"</string>
     <string name="vpns" msgid="3148141862835492816">"VPN"</string>
     <string name="vpn_connecting" msgid="8039521381692090116">"連線中..."</string>
     <string name="vpn_disconnecting" msgid="7748050200708257066">"中斷連線中..."</string>
@@ -844,8 +905,8 @@
     <string name="vpn_connect_hint" msgid="7442898962925875181">"連線至網路"</string>
     <string name="vpn_name" msgid="1550918148476193076">"VPN 名稱"</string>
     <string name="vpn_a_name" msgid="8445736942405283509">"VPN 名稱"</string>
-    <string name="vpn_profile_added" msgid="2157095890825215726">"已新增「%s」"</string>
-    <string name="vpn_profile_replaced" msgid="384234123486734768">"已變更「%s」的設定"</string>
+    <string name="vpn_profile_added" msgid="9061017910337129840">"已新增「<xliff:g id="NAME">%s</xliff:g>」"</string>
+    <string name="vpn_profile_replaced" msgid="587435576816273815">"已變更「<xliff:g id="NAME">%s</xliff:g>」的設定"</string>
     <string name="vpn_user_certificate_title" msgid="6812545893924071742">"設定使用者憑證"</string>
     <string name="vpn_user_certificate" msgid="949322691686938888">"使用者憑證"</string>
     <string name="vpn_a_user_certificate" msgid="8943983437956898649">"使用者憑證"</string>
@@ -866,53 +927,53 @@
     <string name="vpn_vpn_server_dialog_title" msgid="7850850940160521918">"VPN 伺服器名稱"</string>
     <string name="vpn_dns_search_list_title" msgid="1022776976104584251">"DNS 搜尋網域"</string>
     <string name="vpn_dns_search_list" msgid="4230034234026605360">"DNS 搜尋網域"</string>
-    <string name="vpn_field_is_set" msgid="1880980734721258127">"已設定%s"</string>
-    <string name="vpn_field_not_set" msgid="6827205815004809490">"未設定%s"</string>
-    <string name="vpn_field_not_set_optional" msgid="8665901697706781015">"未設定%s (可略過)"</string>
-    <string name="vpn_enable_field" msgid="3348948489989523325">"啟用%s"</string>
-    <string name="vpn_disable_field" msgid="2286966253789266389">"停用%s"</string>
-    <string name="vpn_is_enabled" msgid="5128973727115662815">"已啟用%s"</string>
-    <string name="vpn_is_disabled" msgid="8028085699769751756">"已停用%s"</string>
+    <string name="vpn_field_is_set" msgid="7137320847812992243">"已設定<xliff:g id="VALUE">%s</xliff:g>"</string>
+    <string name="vpn_field_not_set" msgid="2972519243515893804">"未設定<xliff:g id="VALUE">%s</xliff:g>"</string>
+    <string name="vpn_field_not_set_optional" msgid="8840557698252556791">"未設定<xliff:g id="VALUE">%s</xliff:g> (可略過)"</string>
+    <string name="vpn_enable_field" msgid="3700967675854517191">"啟用<xliff:g id="OPTION">%s</xliff:g>"</string>
+    <string name="vpn_disable_field" msgid="6905658811179634005">"停用<xliff:g id="OPTION">%s</xliff:g>"</string>
+    <string name="vpn_is_enabled" msgid="1266304230417098877">"已啟用<xliff:g id="OPTION">%s</xliff:g>"</string>
+    <string name="vpn_is_disabled" msgid="2013622485867806167">"已停用<xliff:g id="OPTION">%s</xliff:g>"</string>
     <string name="vpn_settings_title" msgid="7327468307909556719">"VPN 設定"</string>
     <string name="vpn_settings_summary" msgid="8849924181594963972">"設定與管理虛擬私人網路 (VPN)"</string>
     <string name="vpn_secret_unchanged" msgid="8700613973594154529">"(未變更)"</string>
     <string name="vpn_secret_not_set" msgid="1037792636371641845">"(未設定)"</string>
-    <string name="cstor_settings_category" msgid="2284299080682591107">"認證儲存空間"</string>
-    <string name="cstor_access_title" msgid="1739505390736236717">"使用安全認證"</string>
-    <string name="cstor_access_summary" msgid="4512681868217546677">"允許應用程式存取安全認證及其他認證"</string>
-    <string name="cstor_access_dialog_title" msgid="3024256293191879190">"輸入密碼"</string>
-    <string name="cstor_access_dialog_hint_from_action" msgid="679746865623760961">"輸入認證儲存空間密碼。"</string>
-    <string name="cstor_set_passwd_title" msgid="6156763762703061470">"設定密碼"</string>
-    <string name="cstor_set_passwd_summary" msgid="5248560429856597398">"設定或變更認證儲存空間密碼"</string>
-    <string name="cstor_set_passwd_dialog_title" msgid="4071157542842979977">"設定密碼"</string>
-    <string name="cstor_reset_title" msgid="6001600882136794382">"清除儲存空間"</string>
-    <string name="cstor_reset_summary" msgid="7509525030771504833">"清除認證儲存空間的所有內容，並重新設定密碼"</string>
-    <string name="cstor_reset_hint" msgid="5331632794451859788">"確定要刪除所有認證，並重新設定認證儲存空間密碼嗎？"</string>
-    <string name="cstor_name_credential_dialog_title" msgid="1723509156126180662">"為憑證命名"</string>
-    <string name="cstor_credential_name" msgid="2958936431813760259">"憑證名稱："</string>
-    <string name="cstor_credential_password" msgid="7187440553141199409">"擷取憑證的密碼："</string>
-    <string name="cstor_credential_info" msgid="6097346149400207440">"憑證詳細資訊："</string>
-    <string name="cstor_name_credential_hint" msgid="6889198058976515785">"名稱只能包含英數字元。"</string>
-    <string name="cstor_old_password" msgid="979282118063084561">"目前的密碼："</string>
-    <string name="cstor_new_password" msgid="6218562692435670047">"新密碼："</string>
-    <string name="cstor_confirm_password" msgid="8996028123356342466">"確認新密碼："</string>
-    <string name="cstor_first_time_hint" msgid="1831593416099224962">"設定認證儲存空間密碼。"</string>
-    <string name="cstor_first_time_hint_from_action" msgid="4690937025845780557">"設定認證儲存空間密碼。"</string>
-    <string name="cstor_password_error" msgid="2917326097260402464">"請輸入正確的密碼。"</string>
-    <string name="cstor_password_error_reset_warning" msgid="3336370539045905953">"請輸入正確的密碼。您還有 1 次輸入密碼的機會，如果輸入錯誤，認證儲存空間將遭到清除。"</string>
-    <string name="cstor_password_error_reset_warning_plural" msgid="6209069679269017200">"請輸入正確的密碼。您還有 %d 次輸入密碼的機會，如果輸入錯誤，認證儲存空間將遭到清除。"</string>
-    <string name="cstor_passwords_error" msgid="956773958408751155">"密碼不符。"</string>
-    <string name="cstor_passwords_empty_error" msgid="6062539742626760734">"請輸入一個密碼，並確認未輸錯。"</string>
-    <string name="cstor_password_empty_error" msgid="7249632576906961482">"請輸入密碼。"</string>
-    <string name="cstor_password_verification_error" msgid="8553930704493511389">"請再次輸入密碼，密碼必須包含至少 8 個字元，且不得包含空格。"</string>
-    <string name="cstor_name_empty_error" msgid="7499971191993770322">"請輸入名稱。"</string>
-    <string name="cstor_name_char_error" msgid="8048089317968192516">"請輸入名稱 (只能包含英數字元)。"</string>
-    <string name="cstor_storage_error" msgid="7140697503172458161">"無法儲存憑證，如要重試，請按一下 [確定]。"</string>
-    <string name="cstor_unable_to_save_cert" msgid="1631402544447196406">"無法儲存憑證，未啟用或未正確初始化認證儲存空間。"</string>
-    <string name="cstor_cert_not_saved" msgid="6318149789449538491">"未儲存憑證。"</string>
-    <string name="cstor_is_reset" msgid="449870501126790589">"已清除認證儲存空間內容。"</string>
-    <string name="cstor_is_enabled" msgid="4054049098081482785">"已啟用認證儲存空間。"</string>
-    <string name="cstor_is_added" msgid="794788474010251572">"已新增%s。"</string>
+    <string name="credentials_category" msgid="8536992056377271234">"認證儲存空間"</string>
+    <string name="credentials_access" msgid="4843187230913860492">"使用安全認證"</string>
+    <string name="credentials_access_summary" msgid="319662078718574168">"允許應用程式存取安全認證及其他認證"</string>
+    <string name="credentials_unlock" msgid="1463040326264133844">"輸入密碼"</string>
+    <string name="credentials_unlock_hint" msgid="594679530407918031">"輸入認證儲存空間密碼。"</string>
+    <string name="credentials_install_certificates" msgid="177337517568022236">"從 SD 卡安裝"</string>
+    <string name="credentials_install_certificates_summary" msgid="7737001268684193093">"從 SD 卡安裝加密憑證"</string>
+    <string name="credentials_set_password" msgid="9104473585811899989">"設定密碼"</string>
+    <string name="credentials_set_password_summary" msgid="8287876917562085701">"設定或變更認證儲存空間密碼"</string>
+    <string name="credentials_reset" msgid="9170150870552453457">"清除儲存空間"</string>
+    <string name="credentials_reset_summary" msgid="1530388094693731636">"清除認證儲存空間的所有內容，並重新設定密碼"</string>
+    <string name="credentials_reset_hint" msgid="819990295796804516">"確定要刪除所有認證，並重新設定認證儲存空間密碼嗎？"</string>
+    <string name="credentials_old_password" msgid="7553393815538684028">"目前的密碼："</string>
+    <string name="credentials_new_password" msgid="267487774686796938">"新密碼："</string>
+    <string name="credentials_confirm_password" msgid="4732250000633424345">"確認新密碼："</string>
+    <string name="credentials_first_time_hint" msgid="1567821077545346039">"設定認證儲存空間密碼 (最少 8 個字元)。"</string>
+    <string name="credentials_wrong_password" msgid="7525192410790152041">"請輸入正確的密碼。"</string>
+    <string name="credentials_reset_warning" msgid="6392481296673345268">"請輸入正確的密碼。您還有 1 次輸入密碼的機會，如果輸入錯誤，認證儲存空間將遭到清除。"</string>
+    <string name="credentials_reset_warning_plural" msgid="454828369803055270">"請輸入正確的密碼。您還有 <xliff:g id="NUMBER">%1$d</xliff:g> 次輸入密碼的機會，如果輸入錯誤，認證儲存空間將遭到清除。"</string>
+    <string name="credentials_passwords_mismatch" msgid="5288565139590031733">"密碼不符。"</string>
+    <string name="credentials_passwords_empty" msgid="8647631321684363549">"請輸入您的密碼，並加以確認。"</string>
+    <string name="credentials_password_empty" msgid="8292138152983330473">"請輸入密碼。"</string>
+    <string name="credentials_password_too_short" msgid="7502749986405522663">"密碼最少必須包含 8 個字元。"</string>
+    <string name="credentials_erased" msgid="7700309135582200849">"已清除認證儲存空間內容。"</string>
+    <string name="credentials_enabled" msgid="7588607413349978930">"已啟用認證儲存空間。"</string>
+    <string name="credentials_disabled" msgid="7453188089059045380">"已停用認證儲存空間。"</string>
     <string name="emergency_tone_title" msgid="1055954530111587114">"緊急警示音"</string>
     <string name="emergency_tone_summary" msgid="722259232924572153">"設定撥打緊急電話時的運作方式"</string>
+    <string name="privacy_settings" msgid="9206631214140954954">"隱私設定"</string>
+    <string name="privacy_settings_title" msgid="1987089301293213705">"隱私設定"</string>
+    <string name="location_section_title" msgid="6072558684044939786">"位置"</string>
+    <string name="settings_section_title" msgid="7413252428447723032">"設定"</string>
+    <string name="personal_data_section_title" msgid="7815209034443782061">"個人資料"</string>
+    <string name="backup_settings_title" msgid="2968262658155327829">"備份我的設定"</string>
+    <string name="backup_erase_dialog_title" msgid="6028429904055779443">"設定備份"</string>
+    <string name="backup_erase_dialog_message" msgid="9096433810456900531">"您確定要停止備份設定，並清除 Google 伺服器上的所有設定資料嗎？"</string>
+    <!-- no translation found for untitled_apn (1230060359198685513) -->
+    <skip />
 </resources>
