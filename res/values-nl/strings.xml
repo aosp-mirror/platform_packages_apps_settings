@@ -415,6 +415,8 @@
     <string name="play_media_notification_sounds_enable_title" msgid="1008791464029179529">"SD-kaartmeldingen"</string>
     <string name="play_media_notification_sounds_enable_summary_on" msgid="7675466959375667370">"Geluid afspelen voor SD-kaartmeldingen"</string>
     <string name="play_media_notification_sounds_enable_summary_off" msgid="8672617597028744693">"Geluid afspelen voor SD-kaartmeldingen"</string>
+    <string name="audio_record_proc_title" msgid="4271091199976457534">"Geluidsdemping"</string>
+    <string name="audio_record_proc_summary" msgid="8113628457499616498">"Demp achtergrondgeluid tijdens spraakinvoer of opname."</string>
     <string name="sync_settings" msgid="9186125469300013491">"Accounts en synchronisatie"</string>
     <string name="sync_settings_summary" msgid="2962179505214965667">"Accounts toevoegen of verwijderen en accountinstellingen wijzigen"</string>
     <string name="search_settings" msgid="1910951467596035063">"Zoeken"</string>
@@ -509,16 +511,11 @@
     <string name="apn_mms_port" msgid="4074188088199243040">"MMS-poort"</string>
     <string name="apn_mcc" msgid="4258628382260674636">"MCC"</string>
     <string name="apn_mnc" msgid="8629374076888809874">"MNC"</string>
-    <!-- no translation found for apn_auth_type (6167205395676037015) -->
-    <skip />
-    <!-- no translation found for apn_auth_type_none (5069592676845549926) -->
-    <skip />
-    <!-- no translation found for apn_auth_type_pap (1666934536996033383) -->
-    <skip />
-    <!-- no translation found for apn_auth_type_chap (3369626283789068360) -->
-    <skip />
-    <!-- no translation found for apn_auth_type_pap_chap (9102343063036134541) -->
-    <skip />
+    <string name="apn_auth_type" msgid="6167205395676037015">"Verificatietype"</string>
+    <string name="apn_auth_type_none" msgid="5069592676845549926">"Geen"</string>
+    <string name="apn_auth_type_pap" msgid="1666934536996033383">"PAP"</string>
+    <string name="apn_auth_type_chap" msgid="3369626283789068360">"CHAP"</string>
+    <string name="apn_auth_type_pap_chap" msgid="9102343063036134541">"PAP of CHAP"</string>
     <string name="apn_type" msgid="469613123902220544">"APN-type"</string>
     <string name="menu_delete" msgid="6981294422841124659">"APN verwijderen"</string>
     <string name="menu_new" msgid="3014205883303921729">"Nieuwe APN"</string>
@@ -673,15 +670,14 @@
     <string name="service_restarting" msgid="2242747937372354306">"Opnieuw starten"</string>
     <string name="no_running_services" msgid="6981216347270280598">"Er zijn geen actieve services"</string>
     <string name="confirm_stop_service" msgid="5700448757318301681">"Service stopzetten?"</string>
-    <string name="confirm_stop_service_msg" msgid="1202118456282395730">"De service wordt niet langer uitgevoerd totdat deze opnieuw wordt gestart. Dit heeft mogelijk nadelige gevolgen voor de toepassing <xliff:g id="APPLICATION">%1$s</xliff:g>."</string>
+    <!-- no translation found for confirm_stop_service_msg (1166661293369421272) -->
+    <skip />
     <string name="confirm_stop_stop" msgid="7382363913280993331">"Stoppen"</string>
     <string name="confirm_stop_cancel" msgid="206495326622692381">"Annuleren"</string>
     <string name="service_started_by_app" msgid="8432097226392386802">"Gestart door toepassing: aanraken om te stoppen"</string>
     <string name="service_client_name" msgid="2337664610975074717">"<xliff:g id="CLIENT_NAME">%1$s</xliff:g>: aanraken om te beheren"</string>
-    <!-- no translation found for service_background_processes (5158600475629177758) -->
-    <skip />
-    <!-- no translation found for service_foreground_processes (4013890350284680796) -->
-    <skip />
+    <string name="service_background_processes" msgid="5158600475629177758">"Beschikbaar: <xliff:g id="FREE">%2$s</xliff:g>+<xliff:g id="MEMORY">%3$s</xliff:g> in <xliff:g id="COUNT">%1$d</xliff:g>"</string>
+    <string name="service_foreground_processes" msgid="4013890350284680796">"Overig: <xliff:g id="MEMORY">%2$s</xliff:g> in <xliff:g id="COUNT">%1$d</xliff:g>"</string>
     <string name="service_process_name" msgid="8630408984456958400">"Proces: <xliff:g id="PROCESS">%1$s</xliff:g>"</string>
     <string name="language_settings" msgid="502219872342167227">"Taal en toetsenbord"</string>
     <string name="language_keyboard_settings_title" msgid="3455826933385341107">"Taal- en toetsenbordinstellingen"</string>
@@ -945,58 +941,32 @@
     <string name="vpn_settings_summary" msgid="8849924181594963972">"VPN\'s (Virtual Private Networks) instellen en beheren"</string>
     <string name="vpn_secret_unchanged" msgid="8700613973594154529">"(ongewijzigd)"</string>
     <string name="vpn_secret_not_set" msgid="1037792636371641845">"(niet ingesteld)"</string>
-    <!-- no translation found for credentials_category (8536992056377271234) -->
-    <skip />
-    <!-- no translation found for credentials_access (4843187230913860492) -->
-    <skip />
-    <!-- no translation found for credentials_access_summary (319662078718574168) -->
-    <skip />
-    <!-- no translation found for credentials_unlock (1463040326264133844) -->
-    <skip />
-    <!-- no translation found for credentials_unlock_hint (594679530407918031) -->
-    <skip />
-    <!-- no translation found for credentials_install_certificates (177337517568022236) -->
-    <skip />
-    <!-- no translation found for credentials_install_certificates_summary (7737001268684193093) -->
-    <skip />
-    <!-- no translation found for credentials_set_password (9104473585811899989) -->
-    <skip />
-    <!-- no translation found for credentials_set_password_summary (8287876917562085701) -->
-    <skip />
-    <!-- no translation found for credentials_reset (9170150870552453457) -->
-    <skip />
-    <!-- no translation found for credentials_reset_summary (1530388094693731636) -->
-    <skip />
-    <!-- no translation found for credentials_reset_hint (819990295796804516) -->
-    <skip />
-    <!-- no translation found for credentials_old_password (7553393815538684028) -->
-    <skip />
-    <!-- no translation found for credentials_new_password (267487774686796938) -->
-    <skip />
-    <!-- no translation found for credentials_confirm_password (4732250000633424345) -->
-    <skip />
-    <!-- no translation found for credentials_first_time_hint (1567821077545346039) -->
-    <skip />
-    <!-- no translation found for credentials_wrong_password (7525192410790152041) -->
-    <skip />
-    <!-- no translation found for credentials_reset_warning (6392481296673345268) -->
-    <skip />
-    <!-- no translation found for credentials_reset_warning_plural (454828369803055270) -->
-    <skip />
-    <!-- no translation found for credentials_passwords_mismatch (5288565139590031733) -->
-    <skip />
-    <!-- no translation found for credentials_passwords_empty (8647631321684363549) -->
-    <skip />
-    <!-- no translation found for credentials_password_empty (8292138152983330473) -->
-    <skip />
-    <!-- no translation found for credentials_password_too_short (7502749986405522663) -->
-    <skip />
-    <!-- no translation found for credentials_erased (7700309135582200849) -->
-    <skip />
-    <!-- no translation found for credentials_enabled (7588607413349978930) -->
-    <skip />
-    <!-- no translation found for credentials_disabled (7453188089059045380) -->
-    <skip />
+    <string name="credentials_category" msgid="8536992056377271234">"Opslag van referenties"</string>
+    <string name="credentials_access" msgid="4843187230913860492">"Beveiligingsreferenties gebruiken"</string>
+    <string name="credentials_access_summary" msgid="319662078718574168">"Toepassingen mogen veilige certificaten en andere referenties openen"</string>
+    <string name="credentials_unlock" msgid="1463040326264133844">"Voer het wachtwoord in"</string>
+    <string name="credentials_unlock_hint" msgid="594679530407918031">"Geef het wachtwoord voor de opslag van referenties op."</string>
+    <string name="credentials_install_certificates" msgid="177337517568022236">"Installeren van SD-kaart"</string>
+    <string name="credentials_install_certificates_summary" msgid="7737001268684193093">"Gecodeerde certificaten installeren vanaf SD-kaart"</string>
+    <string name="credentials_set_password" msgid="9104473585811899989">"Wachtwoord instellen"</string>
+    <string name="credentials_set_password_summary" msgid="8287876917562085701">"Het wachtwoord voor de opslag van referenties instellen"</string>
+    <string name="credentials_reset" msgid="9170150870552453457">"Opslag wissen"</string>
+    <string name="credentials_reset_summary" msgid="1530388094693731636">"Referentieopslag voor inhoud wissen en wachtwoord opnieuw instellen"</string>
+    <string name="credentials_reset_hint" msgid="819990295796804516">"Weet u zeker dat u alle referenties wilt verwijderen en het wachtwoord voor de opslag van referenties opnieuw wilt instellen?"</string>
+    <string name="credentials_old_password" msgid="7553393815538684028">"Huidig wachtwoord:"</string>
+    <string name="credentials_new_password" msgid="267487774686796938">"Nieuw wachtwoord:"</string>
+    <string name="credentials_confirm_password" msgid="4732250000633424345">"Nieuw wachtwoord bevestigen:"</string>
+    <string name="credentials_first_time_hint" msgid="1567821077545346039">"Geef een wachtwoord op voor opslag van referenties (minimaal 8 tekens)."</string>
+    <string name="credentials_wrong_password" msgid="7525192410790152041">"Voer het juiste wachtwoord in."</string>
+    <string name="credentials_reset_warning" msgid="6392481296673345268">"Voer het juiste wachtwoord in. U kunt nog één keer proberen het juiste wachtwoord in te voeren voordat de opgeslagen referenties worden verwijderd."</string>
+    <string name="credentials_reset_warning_plural" msgid="454828369803055270">"Voer het juiste wachtwoord in. U kunt nog <xliff:g id="NUMBER">%1$d</xliff:g> keer proberen om het juiste wachtwoord in te voeren voordat de opgeslagen referenties worden verwijderd."</string>
+    <string name="credentials_passwords_mismatch" msgid="5288565139590031733">"De wachtwoorden komen niet overeen."</string>
+    <string name="credentials_passwords_empty" msgid="8647631321684363549">"U moet een wachtwoord invoeren en bevestigen."</string>
+    <string name="credentials_password_empty" msgid="8292138152983330473">"Voer het wachtwoord in."</string>
+    <string name="credentials_password_too_short" msgid="7502749986405522663">"Het wachtwoord moet uit ten minste 8 tekens bestaan."</string>
+    <string name="credentials_erased" msgid="7700309135582200849">"De opslag van referenties is gewist."</string>
+    <string name="credentials_enabled" msgid="7588607413349978930">"De opslag van referenties is ingeschakeld."</string>
+    <string name="credentials_disabled" msgid="7453188089059045380">"De opslag van referenties is uitgeschakeld."</string>
     <string name="emergency_tone_title" msgid="1055954530111587114">"Toon voor noodoproep"</string>
     <string name="emergency_tone_summary" msgid="722259232924572153">"Gedrag bij noodoproepen instellen"</string>
     <string name="privacy_settings" msgid="9206631214140954954">"Privacy"</string>
@@ -1007,6 +977,5 @@
     <string name="backup_settings_title" msgid="2968262658155327829">"Back-up maken van mijn instellingen"</string>
     <string name="backup_erase_dialog_title" msgid="6028429904055779443">"Back-up van instellingen"</string>
     <string name="backup_erase_dialog_message" msgid="9096433810456900531">"Weet u zeker dat het maken van back-ups van uw instellingen wilt stoppen en alle kopieën op Google-servers wilt wissen?"</string>
-    <!-- no translation found for untitled_apn (1230060359198685513) -->
-    <skip />
+    <string name="untitled_apn" msgid="1230060359198685513">"Naamloos"</string>
 </resources>
