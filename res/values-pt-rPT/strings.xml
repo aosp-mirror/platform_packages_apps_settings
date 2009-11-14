@@ -411,7 +411,7 @@
     <string name="sound_effects_enable_summary_off" msgid="3447739581759560125">"Reproduzir som ao efectuar selecção no ecrã"</string>
     <string name="haptic_feedback_enable_title" msgid="6311736559245411290">"Comentário haptic"</string>
     <string name="haptic_feedback_enable_summary_on" msgid="1875779656524793053">"Vibrar ao premir teclas de função e em certas interacções da interface do utilizador"</string>
-    <string name="haptic_feedback_enable_summary_off" msgid="7287885436963105314">"Vibrar ao premir teclas de função e em certas interacções da interface do utilizador"</string>
+    <string name="haptic_feedback_enable_summary_off" msgid="7287885436963105314">"Vibrar para teclas de função e certas interacções da interface do utiliz."</string>
     <string name="play_media_notification_sounds_enable_title" msgid="1008791464029179529">"Notificações do cartão SD"</string>
     <string name="play_media_notification_sounds_enable_summary_on" msgid="7675466959375667370">"Reproduzir som para notificações do cartão SD"</string>
     <string name="play_media_notification_sounds_enable_summary_off" msgid="8672617597028744693">"Reproduzir som para notificações do cartão SD"</string>
@@ -555,7 +555,7 @@
     <string name="location_networks_disabled" msgid="2708968452901433980">"Ver localização em aplicações (como o Google Maps) utilizando redes sem fios"</string>
     <string name="location_neighborhood_level" msgid="4656658097932515921">"Localização determinada por redes Wi-Fi e/ou móveis"</string>
     <string name="location_gps" msgid="6296125378829097831">"Utilizar satélites GPS"</string>
-    <string name="location_street_level" msgid="6460740847018275745">"Ao localizar, determinar a localização exacta ao nível da rua (desmarque esta opção para preservar a bateria)"</string>
+    <string name="location_street_level" msgid="6460740847018275745">"Ao localizar determinar localização exacta ao nível da rua (desmarque p/ poupar bateria)"</string>
     <string name="location_gps_disabled" msgid="6632537158777308128">"Localizar ao nível da rua (exige mais bateria e vista do céu)"</string>
     <string name="assisted_gps" msgid="4649317129586736885">"Utilizar GPS assistido"</string>
     <string name="assisted_gps_enabled" msgid="8751899609589792803">"Utilizar o servidor para auxiliar o GPS (desmarque esta opção para reduzir a utilização da rede)"</string>
@@ -670,11 +670,10 @@
     <string name="service_restarting" msgid="2242747937372354306">"A reiniciar"</string>
     <string name="no_running_services" msgid="6981216347270280598">"Não existem serviços em execução"</string>
     <string name="confirm_stop_service" msgid="5700448757318301681">"Parar serviço?"</string>
-    <!-- no translation found for confirm_stop_service_msg (1166661293369421272) -->
-    <skip />
+    <string name="confirm_stop_service_msg" msgid="1166661293369421272">"O serviço deixará de ser executado até que seja novamente iniciado. Isto pode ter consequências indesejáveis para a aplicação <xliff:g id="APPLICATION">%1$s</xliff:g>."</string>
     <string name="confirm_stop_stop" msgid="7382363913280993331">"Parar"</string>
     <string name="confirm_stop_cancel" msgid="206495326622692381">"Cancelar"</string>
-    <string name="service_started_by_app" msgid="8432097226392386802">"Iniciado pela aplicação: tocar para parar"</string>
+    <string name="service_started_by_app" msgid="8432097226392386802">"Iniciado pela aplicação: tocar p/ parar"</string>
     <string name="service_client_name" msgid="2337664610975074717">"<xliff:g id="CLIENT_NAME">%1$s</xliff:g>: toque para gerir"</string>
     <string name="service_background_processes" msgid="5158600475629177758">"Disp.: <xliff:g id="FREE">%2$s</xliff:g>+<xliff:g id="MEMORY">%3$s</xliff:g> em <xliff:g id="COUNT">%1$d</xliff:g>"</string>
     <string name="service_foreground_processes" msgid="4013890350284680796">"Outro: <xliff:g id="MEMORY">%2$s</xliff:g> em <xliff:g id="COUNT">%1$d</xliff:g>"</string>
@@ -935,7 +934,7 @@
     <string name="vpn_field_not_set_optional" msgid="8840557698252556791">"<xliff:g id="VALUE">%s</xliff:g> não definido (opcional)"</string>
     <string name="vpn_enable_field" msgid="3700967675854517191">"Activar <xliff:g id="OPTION">%s</xliff:g>"</string>
     <string name="vpn_disable_field" msgid="6905658811179634005">"Desactivar <xliff:g id="OPTION">%s</xliff:g>"</string>
-    <string name="vpn_is_enabled" msgid="1266304230417098877">"<xliff:g id="OPTION">%s</xliff:g> está activado"</string>
+    <string name="vpn_is_enabled" msgid="1266304230417098877">"<xliff:g id="OPTION">%s</xliff:g> está activada"</string>
     <string name="vpn_is_disabled" msgid="2013622485867806167">"<xliff:g id="OPTION">%s</xliff:g> está desactivado"</string>
     <string name="vpn_settings_title" msgid="7327468307909556719">"Definições VPN"</string>
     <string name="vpn_settings_summary" msgid="8849924181594963972">"Configurar e gerir VPNs (Redes Privadas Virtuais)"</string>
@@ -943,7 +942,7 @@
     <string name="vpn_secret_not_set" msgid="1037792636371641845">"(não definido)"</string>
     <string name="credentials_category" msgid="8536992056377271234">"Armazenamento de credenciais"</string>
     <string name="credentials_access" msgid="4843187230913860492">"Utilizar credenciais seguras"</string>
-    <string name="credentials_access_summary" msgid="319662078718574168">"Permitir que as aplicações acedam a certificados seguros e outras credenciais"</string>
+    <string name="credentials_access_summary" msgid="319662078718574168">"Acesso das aplicações a certificados seguros e outras credenciais"</string>
     <string name="credentials_unlock" msgid="1463040326264133844">"Introduzir palavra-passe"</string>
     <string name="credentials_unlock_hint" msgid="594679530407918031">"Introduza a palavra-passe do armazenamento de credenciais."</string>
     <string name="credentials_install_certificates" msgid="177337517568022236">"Instalar a partir do cartão SD"</string>

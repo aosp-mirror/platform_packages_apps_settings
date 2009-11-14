@@ -152,7 +152,7 @@
     <string name="radio_info_roaming_label" msgid="6141505430275138647">"Itinerancia:"</string>
     <string name="radio_info_imei_label" msgid="1220524224732944192">"IMEI:"</string>
     <string name="radio_info_call_redirect_label" msgid="1654674226961476872">"Desvío de llamada:"</string>
-    <string name="radio_info_ppp_resets_label" msgid="3241667824729310546">"Número de PPP restablecidos desde el inicio:"</string>
+    <string name="radio_info_ppp_resets_label" msgid="3241667824729310546">"Número de PPP restablecido desde el inicio:"</string>
     <string name="radio_info_gsm_disconnects_label" msgid="1683069665736339820">"Desconexión de GSM:"</string>
     <string name="radio_info_current_network_label" msgid="3256402602440102610">"Red actual:"</string>
     <string name="radio_info_data_successes_label" msgid="4417894113689054945">"Datos correctos:"</string>
@@ -191,7 +191,7 @@
     <string name="sdcard_settings_bad_removal_status" msgid="5145797653495907970">"La tarjeta SD se ha extraído mientras estaba en uso."</string>
     <string name="sdcard_settings_used_bytes_label" msgid="8820289486001170836">"Bytes utilizados:"</string>
     <string name="sdcard_settings_scanning_status" msgid="2763464949274455656">"Buscando medios en tarjeta SD..."</string>
-    <string name="sdcard_settings_read_only_status" msgid="5706115860484118911">"Tarjeta SD activada en modo de sólo lectura"</string>
+    <string name="sdcard_settings_read_only_status" msgid="5706115860484118911">"Tarjeta SD activada en modo de solo lectura"</string>
     <string name="next_label" msgid="4693520878012668114">"Siguiente"</string>
     <string name="language_picker_title" msgid="4034157617842965844">"Configuración local"</string>
     <string name="select_your_language" msgid="1146235168951906084">"Selecciona el idioma que prefieras."</string>
@@ -280,8 +280,8 @@
     <string name="bluetooth_device_advanced_profile_header_title" msgid="3764437426089639639">"Perfiles"</string>
     <string name="bluetooth_a2dp_profile_summary_connected" msgid="963376081347721598">"Conectado al audio del medio"</string>
     <string name="bluetooth_headset_profile_summary_connected" msgid="7661070206715520671">"Conectado al audio del teléfono"</string>
-    <string name="bluetooth_opp_profile_summary_connected" msgid="2611913495968309066">"Con conexión al servidor de transferencia de archivos"</string>
-    <string name="bluetooth_opp_profile_summary_not_connected" msgid="1267091356089086285">"Sin conexión al servidor de transferencia de archivos"</string>
+    <string name="bluetooth_opp_profile_summary_connected" msgid="2611913495968309066">"Conectado con el servidor de transferencia de archivos"</string>
+    <string name="bluetooth_opp_profile_summary_not_connected" msgid="1267091356089086285">"Sin conexión con el servidor de transferencia de archivos"</string>
     <string name="bluetooth_a2dp_profile_summary_use_for" msgid="4630849022250168427">"Utilizar para audio de medio"</string>
     <string name="bluetooth_headset_profile_summary_use_for" msgid="8705753622443862627">"Utilizar para audio del teléfono"</string>
     <string name="bluetooth_opp_profile_summary_use_for" msgid="1255674547144769756">"Uso de la transferencia de archivos"</string>
@@ -430,7 +430,7 @@
     <string name="accelerometer_summary_off" msgid="5485489363715740761">"Cambiar orientación automáticamente al girar el teléfono"</string>
     <string name="brightness" msgid="2354961343555249270">"Brillo"</string>
     <string name="brightness_summary" msgid="838917350127550703">"Ajustar el brillo de la pantalla"</string>
-    <string name="screen_timeout" msgid="4882669461447531301">"Tiempo espera pantalla"</string>
+    <string name="screen_timeout" msgid="4882669461447531301">"Tiempo de espera de la pantalla"</string>
     <string name="screen_timeout_summary" msgid="2905757633140605334">"Ajustar el tiempo de retraso antes de que la pantalla se apague automáticamente"</string>
     <string name="automatic_brightness" msgid="5014143533884135461">"Brillo automático"</string>
     <string name="sim_lock_settings" msgid="3392331196873564292">"Configuración de bloqueo de tarjeta SIM"</string>
@@ -670,8 +670,7 @@
     <string name="service_restarting" msgid="2242747937372354306">"Reiniciando"</string>
     <string name="no_running_services" msgid="6981216347270280598">"No hay servicios en ejecución."</string>
     <string name="confirm_stop_service" msgid="5700448757318301681">"¿Quieres detener el servicio?"</string>
-    <!-- no translation found for confirm_stop_service_msg (1166661293369421272) -->
-    <skip />
+    <string name="confirm_stop_service_msg" msgid="1166661293369421272">"El servicio no se ejecutará hasta que se vuelva a iniciar, lo que puede provocar consecuencias no deseadas en la aplicación <xliff:g id="APPLICATION">%1$s</xliff:g>."</string>
     <string name="confirm_stop_stop" msgid="7382363913280993331">"Detener"</string>
     <string name="confirm_stop_cancel" msgid="206495326622692381">"Cancelar"</string>
     <string name="service_started_by_app" msgid="8432097226392386802">"Iniciado por la aplicación: tocar para detener"</string>
@@ -735,7 +734,7 @@
     <string name="allow_mock_location" msgid="2787962564578664888">"Ubicaciones simuladas"</string>
     <string name="allow_mock_location_summary" msgid="317615105156345626">"Permitir ubicaciones simuladas"</string>
     <string name="adb_warning_title" msgid="6234463310896563253">"¿Permitir depuración USB?"</string>
-    <string name="adb_warning_message" msgid="5352555112049663033">"La depuración USB sólo está indicada para actividades de desarrollo. Se puede utilizar para intercambiar datos entre el equipo y el dispositivo, para instalar aplicaciones en el dispositivo sin recibir notificaciones y para leer datos de registro."</string>
+    <string name="adb_warning_message" msgid="5352555112049663033">"La depuración USB solo está indicada para actividades de desarrollo. Se puede utilizar para intercambiar datos entre el equipo y el dispositivo, para instalar aplicaciones en el dispositivo sin recibir notificaciones y para leer datos de registro."</string>
     <string name="gadget_picker_title" msgid="98374951396755811">"Seleccionar gadget"</string>
     <string name="widget_picker_title" msgid="9130684134213467557">"Seleccionar widget"</string>
     <string name="battery_history_details_for" msgid="5924639922153109669">"Detalles del ID único <xliff:g id="NUMBER">%d</xliff:g>"</string>
@@ -895,7 +894,7 @@
     <string name="vpn_secret_not_set_dialog_msg" msgid="8013052814131532765">"Faltan uno o varios secretos en la configuración de esta VPN. ¿Deseas comprobar tu configuración secreta?"</string>
     <string name="vpn_auth_error_dialog_msg" msgid="5476820106624807614">"El nombre de usuario o la contraseña introducidos no son correctos. ¿Quieres intentarlo de nuevo?"</string>
     <string name="vpn_remote_hung_up_error_dialog_msg" msgid="1566946015052633150">"El servidor se ha bloqueado. Es posible que la contraseña o el nombre de usuario introducidos sean incorrectos. ¿Deseas volver a intentarlo?"</string>
-    <string name="vpn_remote_ppp_hung_up_error_dialog_msg" msgid="5135958511128503344">"El servidor se ha bloqueado. Es posible que tengas activado un cortafuegos que impide la conexión al servidor. ¿Quieres volver a intentarlo?"</string>
+    <string name="vpn_remote_ppp_hung_up_error_dialog_msg" msgid="5135958511128503344">"El servidor se ha bloqueado. Es posible que tengas activado un cortafuegos que impide la conexión con el servidor. ¿Quieres volver a intentarlo?"</string>
     <string name="vpn_ppp_negotiation_failed_dialog_msg" msgid="4611293656718340994">"Error de negociación con el servidor. Es posible que el servidor no acepte tu opción de encriptación. ¿Quieres comprobar tus valores de configuración de la encriptación?"</string>
     <string name="vpn_type_title" msgid="6392933604218676224">"Añadir VPN"</string>
     <string name="vpn_add_new_vpn" msgid="5438260689052714550">"Añadir VPN"</string>
