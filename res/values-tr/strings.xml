@@ -410,8 +410,8 @@
     <string name="sound_effects_enable_summary_on" msgid="6154141289879491329">"Ekran seçimi yaparken ses çal"</string>
     <string name="sound_effects_enable_summary_off" msgid="3447739581759560125">"Ekran seçimi yaparken ses çal"</string>
     <string name="haptic_feedback_enable_title" msgid="6311736559245411290">"Dokunsal geribildirim"</string>
-    <string name="haptic_feedback_enable_summary_on" msgid="1875779656524793053">"Yumuşak tuşlara basarken ve belirli UI (Kullanıcı Arayüzü) etkileşimleri sırasında titret"</string>
-    <string name="haptic_feedback_enable_summary_off" msgid="7287885436963105314">"Yumuşak tuşlara basarken ve belirli UI (Kullanıcı Arayüzü) etkileşimleri sırasında titret"</string>
+    <string name="haptic_feedback_enable_summary_on" msgid="1875779656524793053">"Yumuşak tuşlara basarken ve belirli UI etkileşimleri sırasında titret"</string>
+    <string name="haptic_feedback_enable_summary_off" msgid="7287885436963105314">"Yumuşak tuşlara basarken ve belirli UI etkileşimleri sırasında titret"</string>
     <string name="play_media_notification_sounds_enable_title" msgid="1008791464029179529">"SD kart bildirimleri"</string>
     <string name="play_media_notification_sounds_enable_summary_on" msgid="7675466959375667370">"SD kart bildirimleri için ses yürüt"</string>
     <string name="play_media_notification_sounds_enable_summary_off" msgid="8672617597028744693">"SD kart bildirimleri için ses yürüt"</string>
@@ -608,7 +608,7 @@
     <string name="lockpattern_too_many_failed_confirmation_attempts_footer" msgid="6759029360597122873">"<xliff:g id="NUMBER">%d</xliff:g> saniye içinde yeniden deneyin."</string>
     <string name="skip_button_label" msgid="8680422740354436943">"İptal"</string>
     <string name="next_button_label" msgid="8890792540116568321">"İleri"</string>
-    <string name="lock_title" msgid="4059246467204273930">"Telefonunuz güvenlik altına alınıyor"</string>
+    <string name="lock_title" msgid="4059246467204273930">"Telefonunuzu güvenlik altına alma"</string>
     <string name="lock_intro_message" msgid="9100785646737118042"><font size="17">"Kişisel bir ekran kilidi açma deseni oluşturarak telefonunuzu yetkisiz kullanımdan koruyun. "\n<font height="17">\n</font><b>"1"</b>"  Bir sonraki ekranda örnek bir desenin çizilişini izleyin. "\n<font height="17">\n</font><b>"2"</b>"  Hazır olduğunuzda, kendi kişisel kilit açma deseninizi çizin. Değişik desenleri deneyebilirsiniz ancak en az dört noktayı birleştirin. "\n<font height="17">\n</font><b>"3"</b>"  Onaylamak için deseninizi yeniden çizin. "\n<font height="17">\n</font><b>"Başlamaya hazır mısınız? \"İleri\"ye dokunun"</b>". "\n<font height="3">\n</font>"Telefonunuzu korumasız bırakmak için \"İptal\"e dokunun."</font></string>
     <string name="lock_example_title" msgid="8052305554017485410">"Örnek desen"</string>
     <string name="lock_example_message" msgid="1838650097090632706">"En az dört noktayı birleştirin."\n" "\n"Kendi deseninizi çizmeye hazır olduğunuzda \"İleri\"ye dokunun."</string>
@@ -670,14 +670,13 @@
     <string name="service_restarting" msgid="2242747937372354306">"Yeniden başlatılıyor"</string>
     <string name="no_running_services" msgid="6981216347270280598">"Çalışan hizmet yok"</string>
     <string name="confirm_stop_service" msgid="5700448757318301681">"Hizmet durdurulsun mu?"</string>
-    <!-- no translation found for confirm_stop_service_msg (1166661293369421272) -->
-    <skip />
+    <string name="confirm_stop_service_msg" msgid="1166661293369421272">"Bu hizmet, yeniden başlatılana kadar çalışmayacak. Bu durum, <xliff:g id="APPLICATION">%1$s</xliff:g> uygulamasında istenmeyen sonuçlara yol açabilir."</string>
     <string name="confirm_stop_stop" msgid="7382363913280993331">"Durdur"</string>
     <string name="confirm_stop_cancel" msgid="206495326622692381">"İptal"</string>
     <string name="service_started_by_app" msgid="8432097226392386802">"Uygulama tarafından başlatıldı: durdurmak için dokunun"</string>
     <string name="service_client_name" msgid="2337664610975074717">"<xliff:g id="CLIENT_NAME">%1$s</xliff:g>: yönetmek için dokunun"</string>
-    <string name="service_background_processes" msgid="5158600475629177758">"Kullanılabilir: <xliff:g id="COUNT">%1$d</xliff:g> hesabında <xliff:g id="FREE">%2$s</xliff:g>+<xliff:g id="MEMORY">%3$s</xliff:g>"</string>
-    <string name="service_foreground_processes" msgid="4013890350284680796">"Diğer: <xliff:g id="COUNT">%1$d</xliff:g> hesabında <xliff:g id="MEMORY">%2$s</xliff:g>"</string>
+    <string name="service_background_processes" msgid="5158600475629177758">"Kull.: <xliff:g id="FREE">%2$s</xliff:g>+<xliff:g id="MEMORY">%3$s</xliff:g>/<xliff:g id="COUNT">%1$d</xliff:g>"</string>
+    <string name="service_foreground_processes" msgid="4013890350284680796">"Diğer: <xliff:g id="MEMORY">%2$s</xliff:g>/<xliff:g id="COUNT">%1$d</xliff:g>"</string>
     <string name="service_process_name" msgid="8630408984456958400">"İşlem: <xliff:g id="PROCESS">%1$s</xliff:g>"</string>
     <string name="language_settings" msgid="502219872342167227">"Dil ve klavye"</string>
     <string name="language_keyboard_settings_title" msgid="3455826933385341107">"Dil ve klavye ayarları"</string>
@@ -784,7 +783,7 @@
     <string name="accessibility_service_disable_warning" msgid="8930591383312775132">"Erişilebilirlik devre dışı bırakılsın mı?"</string>
     <string name="power_usage_summary_title" msgid="5180282911164282324">"Pil kullanımı"</string>
     <string name="power_usage_summary" msgid="7237084831082848168">"Pili ne kullanıyor?"</string>
-    <string name="battery_since_unplugged" msgid="338073389740738437">"Fişten çekildikten itibaren pil kullanımı"</string>
+    <string name="battery_since_unplugged" msgid="338073389740738437">"Fişten çekildikten sonra pil kullanımı"</string>
     <string name="battery_since_reset" msgid="7464546661121187045">"Sıfırlamadan itibaren pil kullanımı"</string>
     <string name="battery_stats_duration" msgid="7464501326709469282">"Fişten çekildikten itibaren <xliff:g id="TIME">%1$s</xliff:g>"</string>
     <!-- no translation found for battery_stats_last_duration (1535831453827905957) -->
@@ -835,7 +834,7 @@
     <string name="battery_sugg_apps_gps" msgid="4145005297393800223">"Kullanmadığınız zamanlarda GPS\'yi kapatın"</string>
     <string name="battery_sugg_apps_settings" msgid="8021302847272481168">"Uygulama, pil kullanımını azaltmak için ayarlar önerebilir"</string>
     <string name="menu_stats_unplugged" msgid="8296577130840261624">"Fişten çekildikten itibaren <xliff:g id="UNPLUGGED">%1$s</xliff:g>"</string>
-    <string name="menu_stats_last_unplugged" msgid="5922246077592434526">"<xliff:g id="UNPLUGGED">%1$s</xliff:g> için fişten son çekilmesinden itibaren"</string>
+    <string name="menu_stats_last_unplugged" msgid="5922246077592434526">"Fişten son çekildikten sonra <xliff:g id="UNPLUGGED">%1$s</xliff:g> boyunca"</string>
     <string name="menu_stats_total" msgid="8973377864854807854">"Kullanım toplamı"</string>
     <string name="menu_stats_refresh" msgid="1676215433344981075">"Yenile"</string>
     <string name="process_kernel_label" msgid="3916858646836739323">"Android İS"</string>
@@ -968,7 +967,7 @@
     <string name="credentials_enabled" msgid="7588607413349978930">"Kimlik bilgileri deposu etkin."</string>
     <string name="credentials_disabled" msgid="7453188089059045380">"Kimlik bilgileri deposu devre dışı."</string>
     <string name="emergency_tone_title" msgid="1055954530111587114">"Acil sesi"</string>
-    <string name="emergency_tone_summary" msgid="722259232924572153">"Acil bir arama yapıldığında nasıl işlev göreceğini ayarlayın"</string>
+    <string name="emergency_tone_summary" msgid="722259232924572153">"Acil çağrı yapıldığında nasıl işlev göreceğini ayarlayın"</string>
     <string name="privacy_settings" msgid="9206631214140954954">"Gizlilik"</string>
     <string name="privacy_settings_title" msgid="1987089301293213705">"Gizlilik ayarları"</string>
     <string name="location_section_title" msgid="6072558684044939786">"Konum"</string>

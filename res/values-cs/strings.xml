@@ -609,7 +609,7 @@
     <string name="skip_button_label" msgid="8680422740354436943">"Zrušit"</string>
     <string name="next_button_label" msgid="8890792540116568321">"Další"</string>
     <string name="lock_title" msgid="4059246467204273930">"Zabezpečení telefonu"</string>
-    <string name="lock_intro_message" msgid="9100785646737118042"><font size="17">"Vytvořte si osobní gesto odemknutí a chraňte tak svůj telefon před nepovoleným použitím. "\n<font height="17">\n</font><b>"1"</b>"  Na dalším snímku uvidíte příklad takového gesta. "\n<font height="17">\n</font><b>"2"</b>"  Až budete připraveni, proveďte své osobní gesto odemknutí. Vyzkoušejte více gest, ale vždy spojte alespoň čtyři tečky. "\n<font height="17">\n</font><b>"3"</b>"  Opakujte gesto a tím jej potvrďte. "\n<font height="17">\n</font><b>"Jste připraveni začít? Dotkněte se tlačítka Další "</b>". "\n<font height="3">\n</font>"Chcete-li ponechat telefon nezabezpečený, dotkněte se tlačítka Storno."</font></string>
+    <string name="lock_intro_message" msgid="9100785646737118042"><font size="17">"Vytvořte si osobní gesto odemknutí a chraňte tak svůj telefon před nepovoleným použitím. "\n<font height="17">\n</font><b>"1"</b>"  Na dalším snímku uvidíte příklad takového gesta. "\n<font height="17">\n</font><b>"2"</b>"  Až budete připraveni, proveďte své osobní gesto odemknutí. Vyzkoušejte více gest, ale vždy spojte alespoň čtyři tečky. "\n<font height="17">\n</font><b>"3"</b>"  Opakujte gesto a tím jej potvrďte. "\n<font height="17">\n</font><b>"Jste připraveni začít? Dotkněte se tlačítka Další "</b>". "\n<font height="3">\n</font>"Chcete-li ponechat telefon nezabezpečený, dotkněte se tlačítka Zrušit."</font></string>
     <string name="lock_example_title" msgid="8052305554017485410">"Příklad gesta"</string>
     <string name="lock_example_message" msgid="1838650097090632706">"Spojte alespoň čtyři tečky."\n" "\n"Až budete připraveni provést vlastní gesto, dotkněte se tlačítka Další."</string>
     <string name="manageapplications_settings_title" msgid="5712405848153426706">"Správa aplikací"</string>
@@ -636,7 +636,7 @@
     <string name="clear_user_data_text" msgid="5597622864770098388">"Vymazat data"</string>
     <string name="app_factory_reset" msgid="6635744722502563022">"Odinstalovat aktualizace"</string>
     <string name="auto_launch_enable_text" msgid="2630656657744196691">"Aplikace byla nastavena, aby se pro některé akce spouštěla jako výchozí."</string>
-    <string name="auto_launch_disable_text" msgid="7800385822185540166">"Žádná výchozí nastavení."</string>
+    <string name="auto_launch_disable_text" msgid="7800385822185540166">"Není výchozí pro žádné akce."</string>
     <string name="clear_activities" msgid="7408923511535174430">"Vymazat výchozí nastavení"</string>
     <string name="unknown" msgid="1592123443519355854">"Neznámé"</string>
     <string name="sort_order_alpha" msgid="8622029358896599842">"Řadit"</string>
@@ -666,16 +666,15 @@
     <string name="empty_list_msg" msgid="2901049162265094971">"Žádné aplikace třetích stran nejsou nainstalovány."</string>
     <string name="version_text" msgid="9189073826278676425">"verze <xliff:g id="VERSION_NUM">%1$s</xliff:g>"</string>
     <string name="runningservices_settings_title" msgid="8097287939865165213">"Spuštěné služby"</string>
-    <string name="runningservices_settings_summary" msgid="854608995821032748">"Zobrazit a ovládat aktuálně spuštěné služby"</string>
+    <string name="runningservices_settings_summary" msgid="854608995821032748">"Umožňuje zobrazit a ovládat aktuálně spuštěné služby"</string>
     <string name="service_restarting" msgid="2242747937372354306">"Probíhá restartování"</string>
     <string name="no_running_services" msgid="6981216347270280598">"Žádné spuštěné služby"</string>
     <string name="confirm_stop_service" msgid="5700448757318301681">"Zastavit službu?"</string>
-    <!-- no translation found for confirm_stop_service_msg (1166661293369421272) -->
-    <skip />
+    <string name="confirm_stop_service_msg" msgid="1166661293369421272">"Služba zůstane vypnutá, dokud nebude znovu spuštěna. To může mít nežádoucí vliv na aplikaci <xliff:g id="APPLICATION">%1$s</xliff:g>."</string>
     <string name="confirm_stop_stop" msgid="7382363913280993331">"Zastavit"</string>
     <string name="confirm_stop_cancel" msgid="206495326622692381">"Zrušit"</string>
-    <string name="service_started_by_app" msgid="8432097226392386802">"Spuštěno aplikací, zastavte dotykem"</string>
-    <string name="service_client_name" msgid="2337664610975074717">"<xliff:g id="CLIENT_NAME">%1$s</xliff:g>: spravovat dotykem"</string>
+    <string name="service_started_by_app" msgid="8432097226392386802">"Spuštěno aplikací: dotykem zastavíte"</string>
+    <string name="service_client_name" msgid="2337664610975074717">"<xliff:g id="CLIENT_NAME">%1$s</xliff:g>: dotykem otevřete správu"</string>
     <string name="service_background_processes" msgid="5158600475629177758">"K dispozici: <xliff:g id="FREE">%2$s</xliff:g> + <xliff:g id="MEMORY">%3$s</xliff:g> v <xliff:g id="COUNT">%1$d</xliff:g>"</string>
     <string name="service_foreground_processes" msgid="4013890350284680796">"Ostatní: <xliff:g id="MEMORY">%2$s</xliff:g> v <xliff:g id="COUNT">%1$d</xliff:g>"</string>
     <string name="service_process_name" msgid="8630408984456958400">"Proces: <xliff:g id="PROCESS">%1$s</xliff:g>"</string>
@@ -835,7 +834,7 @@
     <string name="battery_sugg_apps_gps" msgid="4145005297393800223">"Nepoužíváte-li systém GPS, vypněte jej."</string>
     <string name="battery_sugg_apps_settings" msgid="8021302847272481168">"Tato aplikace může nabízet nastavení pro snížení využití baterie"</string>
     <string name="menu_stats_unplugged" msgid="8296577130840261624">"<xliff:g id="UNPLUGGED">%1$s</xliff:g> od odpojení"</string>
-    <string name="menu_stats_last_unplugged" msgid="5922246077592434526">"Při posledním odpojení pro <xliff:g id="UNPLUGGED">%1$s</xliff:g>"</string>
+    <string name="menu_stats_last_unplugged" msgid="5922246077592434526">"Od posledního odpojení (<xliff:g id="UNPLUGGED">%1$s</xliff:g>)"</string>
     <string name="menu_stats_total" msgid="8973377864854807854">"Využití baterie celkem"</string>
     <string name="menu_stats_refresh" msgid="1676215433344981075">"Obnovit"</string>
     <string name="process_kernel_label" msgid="3916858646836739323">"OS Android"</string>
@@ -851,7 +850,7 @@
     <string name="tts_default_pitch_title" msgid="6135942113172488671">"Výška"</string>
     <string name="tts_default_pitch_summary" msgid="1328298665182885277">"Určuje rejstřík mluveného textu"</string>
     <string name="tts_default_lang_title" msgid="8018087612299820556">"Jazyk"</string>
-    <string name="tts_default_lang_summary" msgid="5219362163902707785">"Nastavuje hlas mluveného textu odpovídající danému jazyku"</string>
+    <string name="tts_default_lang_summary" msgid="5219362163902707785">"Nastavení jazyka hlasu pro mluvený text"</string>
     <string name="tts_play_example_title" msgid="7094780383253097230">"Poslechnout příklad"</string>
     <string name="tts_play_example_summary" msgid="8029071615047894486">"Přehrát krátkou ukázku syntézy řeči"</string>
     <string name="tts_install_data_title" msgid="4264378440508149986">"Nainstalovat hlasová data"</string>
