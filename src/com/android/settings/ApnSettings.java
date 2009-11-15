@@ -178,7 +178,7 @@ public class ApnSettings extends PreferenceActivity implements
             pref.setSelectable(selectable);
             if (selectable) {
                 if ((mSelectedKey != null) && mSelectedKey.equals(key)) {
-                    pref.setChecked(true);
+                    pref.setChecked();
                 }
                 apnList.addPreference(pref);
             } else {

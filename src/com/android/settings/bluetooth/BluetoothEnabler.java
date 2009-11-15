@@ -18,9 +18,7 @@ package com.android.settings.bluetooth;
 
 import com.android.settings.R;
 
-import android.bluetooth.BluetoothDevice;
-import android.bluetooth.BluetoothError;
-import android.bluetooth.BluetoothIntent;
+import android.bluetooth.BluetoothAdapter;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
@@ -36,21 +34,20 @@ import android.util.Config;
  * preference reflects the current state.
  */
 public class BluetoothEnabler implements Preference.OnPreferenceChangeListener {
-    
+
     private static final boolean LOCAL_LOGD = Config.LOGD || false;
     private static final String TAG = "BluetoothEnabler";
-    
-    private final Context mContext; 
+
+    private final Context mContext;
     private final CheckBoxPreference mCheckBoxPreference;
     private final CharSequence mOriginalSummary;
-    
+
     private final LocalBluetoothManager mLocalManager;
 
     private final BroadcastReceiver mReceiver = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
-            int state = intent.getIntExtra(BluetoothIntent.BLUETOOTH_STATE,
-                    BluetoothError.ERROR);
+            int state = intent.getIntExtra(BluetoothAdapter.EXTRA_STATE, BluetoothAdapter.ERROR);
             handleStateChanged(state);
         }
     };
@@ -58,10 +55,10 @@ public class BluetoothEnabler implements Preference.OnPreferenceChangeListener {
     public BluetoothEnabler(Context context, CheckBoxPreference checkBoxPreference) {
         mContext = context;
         mCheckBoxPreference = checkBoxPreference;
-        
+
         mOriginalSummary = checkBoxPreference.getSummary();
         checkBoxPreference.setPersistent(false);
-        
+
         mLocalManager = LocalBluetoothManager.getInstance(context);
         if (mLocalManager == null) {
             // Bluetooth not supported
@@ -73,60 +70,68 @@ public class BluetoothEnabler implements Preference.OnPreferenceChangeListener {
         if (mLocalManager == null) {
             return;
         }
-        
+
         int state = mLocalManager.getBluetoothState();
         // This is the widget enabled state, not the preference toggled state
-        mCheckBoxPreference.setEnabled(state == BluetoothDevice.BLUETOOTH_STATE_ON ||
-                state == BluetoothDevice.BLUETOOTH_STATE_OFF);
+        mCheckBoxPreference.setEnabled(state == BluetoothAdapter.STATE_ON ||
+                state == BluetoothAdapter.STATE_OFF);
         // BT state is not a sticky broadcast, so set it manually
         handleStateChanged(state);
-        
-        mContext.registerReceiver(mReceiver, 
-                new IntentFilter(BluetoothIntent.BLUETOOTH_STATE_CHANGED_ACTION));
+
+        mContext.registerReceiver(mReceiver,
+                new IntentFilter(BluetoothAdapter.ACTION_STATE_CHANGED));
         mCheckBoxPreference.setOnPreferenceChangeListener(this);
     }
-    
+
     public void pause() {
         if (mLocalManager == null) {
             return;
         }
-        
+
         mContext.unregisterReceiver(mReceiver);
         mCheckBoxPreference.setOnPreferenceChangeListener(null);
     }
-    
+
     public boolean onPreferenceChange(Preference preference, Object value) {
         // Turn on/off BT
         setEnabled((Boolean) value);
-        
+
         // Don't update UI to opposite state until we're sure
         return false;
     }
-    
+
     private void setEnabled(final boolean enable) {
         // Disable preference
         mCheckBoxPreference.setEnabled(false);
-        
+
         mLocalManager.setBluetoothEnabled(enable);
     }
-    
+
     private void handleStateChanged(int state) {
 
-        if (state == BluetoothDevice.BLUETOOTH_STATE_OFF ||
-                state == BluetoothDevice.BLUETOOTH_STATE_ON) {
-            mCheckBoxPreference.setChecked(state == BluetoothDevice.BLUETOOTH_STATE_ON);
-            mCheckBoxPreference.setSummary(state == BluetoothDevice.BLUETOOTH_STATE_OFF ?
+        if (state == BluetoothAdapter.STATE_OFF ||
+                state == BluetoothAdapter.STATE_ON) {
+            mCheckBoxPreference.setChecked(state == BluetoothAdapter.STATE_ON);
+            mCheckBoxPreference.setSummary(state == BluetoothAdapter.STATE_OFF ?
                                            mOriginalSummary :
                                            null);
-            
-            mCheckBoxPreference.setEnabled(isEnabledByDependency());
-            
-        } else if (state == BluetoothDevice.BLUETOOTH_STATE_TURNING_ON ||
-                state == BluetoothDevice.BLUETOOTH_STATE_TURNING_OFF) {
-            mCheckBoxPreference.setSummary(state == BluetoothDevice.BLUETOOTH_STATE_TURNING_ON
+
+            /*
+             * Don't ever disable the preference. Only enable here. Disablement
+             * is taken care of by the dependency code. If this is disabled
+             * here, it may not be re-enabled from the framework when dependency
+             * is met. http://b/issue?id=2053751
+             */
+            if (isEnabledByDependency()) {
+                mCheckBoxPreference.setEnabled(true);
+            }
+
+        } else if (state == BluetoothAdapter.STATE_TURNING_ON ||
+                state == BluetoothAdapter.STATE_TURNING_OFF) {
+            mCheckBoxPreference.setSummary(state == BluetoothAdapter.STATE_TURNING_ON
                     ? R.string.wifi_starting
                     : R.string.wifi_stopping);
-            
+
         } else {
             mCheckBoxPreference.setChecked(false);
             mCheckBoxPreference.setSummary(R.string.wifi_error);
@@ -139,17 +144,17 @@ public class BluetoothEnabler implements Preference.OnPreferenceChangeListener {
         if (dep == null) {
             return true;
         }
-        
+
         return !dep.shouldDisableDependents();
     }
-    
+
     private Preference getDependencyPreference() {
         String depKey = mCheckBoxPreference.getDependency();
         if (TextUtils.isEmpty(depKey)) {
             return null;
         }
-        
+
         return mCheckBoxPreference.getPreferenceManager().findPreference(depKey);
     }
-    
+
 }

@@ -15,6 +15,11 @@
 -->
 
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <!-- Strings for Dialog yes button -->
+    <string name="yes">"Yes"</string>
+
+    <!-- Strings for Dialog no button -->
+    <string name="no">"No"</string>
 
     <!-- Device Info --> <skip />
     <!-- Device Info screen. Used for a status item's value when the proper value is not known -->
@@ -117,6 +122,8 @@
     <!-- Battery Info screen. Label for a status item.  Used for diagnostic info screens, precise translation isn't needed -->
     <string name="battery_info_status_label">Battery status:</string>
     <!-- Battery Info screen. Label for a status item.  Used for diagnostic info screens, precise translation isn't needed -->
+    <string name="battery_info_power_label">Power plug:</string>
+    <!-- Battery Info screen. Label for a status item.  Used for diagnostic info screens, precise translation isn't needed -->
     <string name="battery_info_scale_label">Battery scale:</string>
     <!-- Battery Info screen. Label for a status item.  Used for diagnostic info screens, precise translation isn't needed -->
     <string name="battery_info_level_label">Battery level:</string>
@@ -157,6 +164,13 @@
     <!-- Battery Info screen. Value for a status item.  Used for diagnostic info screens, precise translation isn't needed -->
     <string name="battery_info_status_full">Full</string>
 
+    <!-- Battery Info screen. Units shown after a value.  Used for diagnostic info screens, precise translation isn't needed -->
+    <string name="battery_info_power_unplugged">Unplugged</string>
+    <string name="battery_info_power_ac">AC</string>
+    <string name="battery_info_power_usb">USB</string>
+    <string name="battery_info_power_ac_usb">AC+USB</string>
+    <string name="battery_info_power_unknown">Unknown</string>
+    
     <!-- Battery Info screen. Value for a status item.  Used for diagnostic info screens, precise translation isn't needed -->
     <string name="battery_info_health_unknown">Unknown</string>
     <!-- Battery Info screen. Value for a status item.  Used for diagnostic info screens, precise translation isn't needed -->
@@ -174,7 +188,7 @@
     <string name="bluetooth">Bluetooth</string>
     <!-- Bluetooth settings screen, check box label when the Bluetooth device can be seen by others -->
     <string name="bluetooth_visibility">Discoverable</string>
-    <!-- Bluetooth settings screen,  summary after selecting Discoverable check box -->
+    <!-- Bluetooth settings screen, summary after selecting Discoverable check box -->
     <string name="bluetooth_is_discoverable">Discoverable for <xliff:g id="discoverable_time_period">%1$s</xliff:g> seconds\u2026</string>
     <!-- Bluetooth settings screen, Discoverable checkbox summary text -->
     <string name="bluetooth_not_discoverable">Make device discoverable</string>
@@ -215,6 +229,23 @@
     <!-- Notification message when a Bluetooth device wants to pair with us -->
     <string name="bluetooth_notif_message">Select to pair with\u0020</string>
 
+    <!-- Strings for BluetoothDevicePicker -->
+    <string name="device_picker">Bluetooth device picker</string>
+
+    <!-- Strings for dialog title when asking to the user whether to allow an app to enable discovery mode -->
+    <string name="bluetooth_permission_request">"Bluetooth permission request"</string>
+
+    <!-- Strings for asking to the user whether to allow an app to enable bluetooth -->
+    <string name="bluetooth_ask_enablement">"An application on your phone is requesting permission to turn on Bluetooth. Do you want to do this?"</string>
+
+    <!-- Strings for asking to the user whether to allow an app to enable discovery mode -->
+    <string name="bluetooth_ask_discovery">"An application on your phone is requesting permission to make your phone discoverable by other Bluetooth devices for <xliff:g id="timeout">%1$d</xliff:g> seconds. Do you want to do this?"</string>
+
+    <!-- Strings for asking to the user whether to allow an app to enable bluetooth and discovery mode -->
+    <string name="bluetooth_ask_enablement_and_discovery">"An application on your phone is requesting permission to turn on Bluetooth and to make your phone discoverable by other devices for <xliff:g id="timeout">%1$d</xliff:g> seconds. Do you want to do this?"</string>
+
+    <!-- Strings for msg to display to user while bluetooth is turning on -->
+    <string name="bluetooth_turning_on">"Turning on Bluetooth\u2026"</string>
 
     <!-- Do not translate. Used for diagnostic screens, precise translation is not necessary -->
     <string name="bluetooth_scan_text">Empty button\u2026</string>
@@ -435,7 +466,9 @@
     <!-- Wireless controls settings screen, setting option summary text as airplane mode is being disabled (so it is re-enabling all the wireless conenctions) -->
     <string name="airplane_mode_turning_off">Enabling wireless connections\u2026</string>
     <!-- Main Settings screen settings title for things like Wi-Fi, bluetooth, airplane mode.  This will take you to another screen with those settings. -->
-    <string name="radio_controls_title">Wireless controls</string>
+    <string name="radio_controls_title">Wireless &amp; networks</string>
+    <!-- Wireless Settings screen title for things like Wi-Fi, bluetooth, airplane mode. -->
+    <string name="wireless_networks_settings_title">Wireless &amp; network settings</string>
     <!-- Main Settings screen settings summary text for the "Wireless controls" setting -->
     <string name="radio_controls_summary">Manage Wi-Fi, Bluetooth, airplane mode, mobile networks, &amp; VPNs</string>
 
@@ -486,9 +519,13 @@
     <string name="zone_list_menu_sort_by_timezone">Sort by time zone</string>
 
     <!-- Main Settings screen setting option title for the item to take you the security and location screen -->
-    <string name="security_settings_title">Security &amp; location</string>
+    <string name="security_settings_title">Location &amp; security</string>
+    <!-- Location & security settings screen title -->
+    <string name="location_security_settings_title">Location &amp; security settings</string>
     <!-- Main Settings screen setting option summary text for the item tot ake you to the security and location screen -->
     <string name="security_settings_summary">Set My Location, screen unlock, SIM card lock, credential storage lock</string>
+    <!-- Main Settings screen setting option summary text for the item to take you to the CDMA security and location screen -->
+    <string name="cdma_security_settings_summary">Set My Location, screen unlock, credential storage lock</string>
     <!-- In the security screen, the header title for settings related to  Passwords-->
     <string name="security_passwords_title">Passwords</string>
 
@@ -505,18 +542,33 @@
     <string name="bluetooth_settings_summary">Manage connections, set device name &amp; discoverability</string>
 
     <!-- Title for the dialog to enter PIN.  -->
-    <string name="bluetooth_pin_entry">Bluetooth pairing request</string>
+    <string name="bluetooth_pairing_request">Bluetooth pairing request</string>
     <!-- Title for the bluetooth device info screen. -->
     <string name="bluetooth_device_info">Bluetooth device info</string>
-    <!-- Message when bluetooth dialog for pin entry is shwoing -->
-    <string name="bluetooth_enter_pin_msg"><xliff:g id="device_name">%1$s</xliff:g>\n\nType PIN to pair.\n(Try 0000 or 1234.)</string>
+    <!-- Message when bluetooth dialog for pin entry is showing -->
+    <string name="bluetooth_enter_pin_msg">\nType PIN to pair with \u0022<xliff:g id="device_name">%1$s</xliff:g>\u0022. (Try 0000 or 1234.)</string>
+    <!-- Message when bluetooth dialog for passkey entry is showing -->
+    <string name="bluetooth_enter_passkey_msg">\nType passkey to pair with \u0022<xliff:g id="device_name">%1$s</xliff:g>\u0022.</string>
+    <!-- Message when bluetooth dialog for confirmation of passkey is showing -->
+    <string name="bluetooth_confirm_passkey_msg">To pair with \u0022<xliff:g id="device_name">%1$s</xliff:g>\u0022, confirm that it is showing the passkey: <xliff:g id="passkey">%2$s</xliff:g>.</string>
+    <!-- Message when bluetooth incoming pairing request for (2.1 devices) dialog is showing -->
+    <string name="bluetooth_incoming_pairing_msg"><xliff:g id="device_name">%1$s</xliff:g>\nwants to pair.</string>
+    <!-- Message when bluetooth dialog when passkey needs to be displayed. -->
+    <string name="bluetooth_display_passkey_msg">Enter <xliff:g id="passkey">%2$s</xliff:g> on \u0022<xliff:g id="device_name">%1$s</xliff:g>\u0022 to pair. </string>
+    <!-- Button text for accepting an incoming pairing request -->
+    <string name="bluetooth_pairing_accept">Pair</string>
+    <!-- Button text for declining an incoming pairing request -->
+    <string name="bluetooth_pairing_decline">Don\u0027t Pair</string>
+    <!-- Generic string for remote Bluetooth device  -->
+    <string name="bluetooth_remote_device">bluetooth device</string>
 
     <!-- Title for BT error dialogs. -->
     <string name="bluetooth_error_title">Attention</string>
     <!-- Message for the error dialog when BT pairing fails generically. -->
     <string name="bluetooth_pairing_error_message">There was a problem pairing with <xliff:g id="device_name">%1$s</xliff:g>.</string> 
-    <!-- Message for the error dialog when BT pairing fails because the PIN entered is incorrect. -->
-    <string name="bluetooth_pairing_pin_error_message">There was a problem pairing with <xliff:g id="device_name">%1$s</xliff:g> because the typed PIN is incorrect.</string> 
+    <!-- Message for the error dialog when BT pairing fails because the PIN /
+    Passkey entered is incorrect. -->
+    <string name="bluetooth_pairing_pin_error_message">There was a problem pairing with <xliff:g id="device_name">%1$s</xliff:g> because the PIN or Passkey is incorrect.</string>
     <!-- Message for the error dialog when BT pairing fails because the other device is down. -->
     <string name="bluetooth_pairing_device_down_error_message">Cannot establish communication with <xliff:g id="device_name">%1$s</xliff:g>.</string>
     <!-- Message for the error dialog when BT pairing fails because the other device rejected the pairing. -->
@@ -557,6 +609,8 @@
     <string name="bluetooth_profile_a2dp">Media</string>
     <!-- Bluetooth settings.  The user-visible string that is used whenever referring to the headset or handsfree profile. -->
     <string name="bluetooth_profile_headset">Phone</string>
+    <!-- Bluetooth settings.  The user-visible string that is used whenever referring to the OPP profile. -->
+    <string name="bluetooth_profile_opp">Transfer</string>
 
     <!-- Bluetooth settings.  The summary string when a device is connected to the A2DP profile. -->
     <string name="bluetooth_summary_connected_to_a2dp">Connected to media audio</string>
@@ -577,11 +631,17 @@
     <string name="bluetooth_a2dp_profile_summary_connected">Connected to media audio</string>
     <!-- Bluetooth settings.  Connection options screen.  The summary for the headset checkbox preference when headset is connected. -->
     <string name="bluetooth_headset_profile_summary_connected">Connected to phone audio</string>
+    <!-- Bluetooth settings.  Connection options screen.  The summary for the OPP checkbox preference when OPP is connected. -->
+    <string name="bluetooth_opp_profile_summary_connected">Connected to file transfer server</string>
+    <!-- Bluetooth settings.  Connection options screen.  The summary for the OPP checkbox preference when OPP is not connected. -->
+    <string name="bluetooth_opp_profile_summary_not_connected">Not connected to file transfer server</string>
 
     <!-- Bluetooth settings.  Connection options screen.  The summary for the A2DP checkbox preference that describes how checking it will set the A2DP profile as preferred. -->
     <string name="bluetooth_a2dp_profile_summary_use_for">Use for media audio</string>
     <!-- Bluetooth settings.  Connection options screen.  The summary for the headset checkbox preference that describes how checking it will set the headset profile as preferred. -->
     <string name="bluetooth_headset_profile_summary_use_for">Use for phone audio</string>
+    <!-- Bluetooth settings.  Connection options screen.  The summary for the OPP checkbox preference that describes how checking it will set the OPP profile as preferred. -->
+    <string name="bluetooth_opp_profile_summary_use_for">Use for file transfer</string>
 
     <!-- Wi-Fi settings -->
     <!-- Used in the 2nd-level settings screen to turn on Wi-Fi -->
@@ -617,13 +677,10 @@
     <!-- Value for the wifi security -->
     <string name="wifi_security_wep">WEP</string>
     <!-- Value for the wifi security -->
-    <string name="wifi_security_wpa">WPA</string>
+    <string name="wifi_security_psk">WPA/WPA2 PSK</string>
     <!-- Value for the wifi security -->
-    <string name="wifi_security_wpa2">WPA2</string>
+    <string name="wifi_security_eap">Enterprise(802.1x)</string>
     <!-- Value for the wifi security -->
-    <string name="wifi_security_wpa_eap">WPA-EAP</string>
-    <!-- Value for the wifi security -->
-    <string name="wifi_security_ieee8021x">IEEE8021X</string>
 
     <!-- Value for the wifi security when it is unknown -->
     <string name="wifi_security_unknown">Unknown</string>
@@ -632,14 +689,10 @@
     <!-- Verbose security type of a wifi network.  Capitalized by app. -->
     <string name="wifi_security_verbose_wep">secured with WEP</string>
     <!-- Verbose security type of a wifi network.  Capitalized by app. -->
-    <string name="wifi_security_verbose_wpa">secured with WPA</string>
+    <string name="wifi_security_verbose_psk">secured with WPA/WPA2 PSK</string>
     <!-- Verbose security type of a wifi network.  Capitalized by app. -->
-    <string name="wifi_security_verbose_wpa2">secured with WPA2</string>
-    <!-- Verbose security type of a wifi network.  Capitalized by app. -->
-    <string name="wifi_security_verbose_wpa_eap">secured with WPA-EAP</string>
-    <!-- Verbose security type of a wifi network.  Capitalized by app. -->
-    <string name="wifi_security_verbose_ieee8021x">secured with IEEE 802.1x</string>
-    <!-- Wi-Fi IP addrress label -->    
+    <string name="wifi_security_verbose_eap">secured with 802.1x EAP</string>
+    <!-- Wi-Fi IP addrress label -->
     <string name="ip_address">IP address</string>
     <!-- Label for the signal strength -->
     <string name="signal">Signal strength</string>
@@ -675,8 +728,6 @@
     <string name="please_select_client_certificate">Client certificate</string>
     <!-- Caption for the ca certificate -->
     <string name="please_select_ca_certificate">CA certificate</string>
-    <!-- Caption for the Private Key -->
-    <string name="please_type_private_key_passwd">Private key password</string>
     <!-- Caption for the wireless password -->
     <string name="please_type_passphrase">Wireless password</string>
     <!--Wi-Fi settings screen, connect to network dialog box, field label and hint text -->
@@ -690,7 +741,7 @@
     <!-- Wifi network summary when the network is configured previously, capitalized by app -->
     <string name="summary_remembered">remembered</string>
     <!-- Wifi network summary when there was an error connecting -->
-    <string name="summary_connection_failed">Connection unsuccessful, select to try again</string>
+    <string name="summary_connection_failed">Connection unsuccessful, touch to try again</string>
     <!-- Header for the list of wifi networks-->
     <string name="wifi_access_points">Wi-Fi networks</string>
     <!-- Caption for entering the SSID of a wifi network -->
@@ -798,6 +849,8 @@
     <!-- Sound and alerts settings -->
     <!-- Main Settings screen setting option name to go into the sound and display settings screen -->
     <string name="sound_and_display_settings">Sound &amp; display</string>
+    <!-- Main Settings screen setting option name to go into the sound and display settings screen -->
+    <string name="sound_and_display_settings_title">Sound &amp; display settings</string>
     <!-- Sound settings screen heading -->
     <string name="sound_settings">Sound settings</string>
     <!-- Main Settings screen setting option summary text for the item to go into the soudn and display settings screen-->
@@ -850,16 +903,26 @@
     <!-- Sound settings screen, setting option summary text when check box is clear -->
     <string name="sound_effects_enable_summary_off">Play sound when making screen selection</string>
     <!-- Sound settings screen, setting check box label -->
+    <string name="haptic_feedback_enable_title">Haptic feedback</string>
+    <!-- Sound settings screen, setting option summary text when check box is selected -->
+    <string name="haptic_feedback_enable_summary_on">Vibrate when pressing soft keys and on certain UI interactions</string>
+    <!-- Sound settings screen, setting option summary text when check box is clear -->
+    <string name="haptic_feedback_enable_summary_off">Vibrate when pressing soft keys and on certain UI interactions</string>
+    <!-- Sound settings screen, setting check box label -->
     <string name="play_media_notification_sounds_enable_title">SD card notifications</string>
     <!-- Sound settings screen, setting option summary text when check box is selected -->
     <string name="play_media_notification_sounds_enable_summary_on">Play sound for SD card notifications</string>
     <!-- Sound settings screen, setting option summary text when check box is clear -->
     <string name="play_media_notification_sounds_enable_summary_off">Play sound for SD card notifications</string>
+    <!-- Sound settings screen, setting option name checkbox to enable/disable audio recording features that improve audio recording in noisy environments -->
+    <string name="audio_record_proc_title">Noise cancellation</string>
+    <!-- Sound settings screen, setting option summary text -->
+    <string name="audio_record_proc_summary">Suppress background noise when speaking or recording.</string>
 
-    <!-- Main Settings screen setting option name to go into the screen for data sync settings-->
-    <string name="sync_settings">Data synchronization</string>
+    <!-- Acounts & Sync settings screen setting option name to go into the screen for data sync settings-->
+    <string name="sync_settings">Accounts &amp; sync</string>
     <!-- Main Settings screen setting option summary text for the itme to go into the screen with data sync settings-->
-    <string name="sync_settings_summary">Select which applications are synchronized</string>
+    <string name="sync_settings_summary">Add or remove accounts and change account settings</string>
 
     <!-- Main Settings screen, setting option name to go into search settings -->
     <string name="search_settings">Search</string>
@@ -889,6 +952,8 @@
     <string name="screen_timeout">Screen timeout</string>
     <!-- Sound & display settings screen, setting option summary to change screen timeout -->
     <string name="screen_timeout_summary">Adjust the delay before the screen automatically turns off</string>
+    <!-- Sound & display settings screen, setting option name to change whether the screen adjusts automatically based on lighting conditions -->
+    <string name="automatic_brightness">Automatic brightness</string>
 
     <!-- SIM lock settings title -->
     <string name="sim_lock_settings">SIM card lock settings</string>
@@ -960,7 +1025,9 @@
     <!-- About phone screen, summary of the item to go into the phone status screen -->
     <string name="device_status_summary">Phone number, signal, etc.</string>
     <!-- Main settings screen item's title to go into the SD card and storage settings screen-->
-    <string name="storage_settings_title">SD card &amp; phone storage</string>
+    <string name="storage_settings">SD card &amp; phone storage</string>
+    <!-- SD card and storage settings screen title -->
+    <string name="storage_settings_title">SD card &amp; phone storage settings</string>
     <!-- Main settings screen item's summary for the SD card and storage settings -->
     <string name="storage_settings_summary">Unmount SD card, view available storage</string>
     <!-- Do not translate. About phone, status item title -->
@@ -1053,6 +1120,16 @@
     <string name="apn_mcc">MCC</string>
     <!-- Edit access point labels: -->
     <string name="apn_mnc">MNC</string>
+    <!-- Edit acces  point labels: Authenticaton type-->
+    <string name="apn_auth_type">Authentication type</string>
+    <!-- Authentication Typs: None -->
+    <string name="apn_auth_type_none">None</string>
+    <!-- Authentication Typs: PAP -->
+    <string name="apn_auth_type_pap">PAP</string>
+    <!-- Authentication Typs: CHAP -->
+    <string name="apn_auth_type_chap">CHAP</string>
+    <!-- Authentication Typs: PAP or CHAP -->
+    <string name="apn_auth_type_pap_chap">PAP or CHAP</string>
     <!-- Edit access point labels: The type of APN -->
     <string name="apn_type">APN type</string>
     <!-- Edit access point screen menu option to delete this APN -->
@@ -1137,17 +1214,23 @@
     <!-- Security & location settings screen, setting summary when Use wireless networks check box is selected -->
     <string name="location_neighborhood_level">Location determined by Wi-Fi and/or mobile networks</string>
     <!-- Security & location settings screen, setting check box label if the GPS receiver should be enabled -->
-    <string name="location_gps">Enable GPS satellites</string>
-    <!-- Security & location settings screen, setting summary when Enable GPS satellites check box is selected -->
-    <string name="location_street_level">When locating, accurate to street level (deselect to conserve battery)</string>
-    <!-- Security & location settings screen, setting summary when Enable GPS satellites check box is clear -->
+    <string name="location_gps">Use GPS satellites</string>
+    <!-- Security & location settings screen, setting summary when Use GPS satellites check box is selected -->
+    <string name="location_street_level">When locating, accurate to street level (uncheck to conserve battery)</string>
+    <!-- Security & location settings screen, setting summary when Use GPS satellites check box is clear -->
     <string name="location_gps_disabled">Locate to street-level (requires more battery plus view of sky)</string>
+    <!-- Security & location settings screen, setting check box label if Assisted GPS should be enabled -->
+    <string name="assisted_gps">Use assisted GPS</string>
+    <!-- Security & location settings screen, setting summary when Assisted GPS check box is selected -->
+    <string name="assisted_gps_enabled">Use server to assist GPS (uncheck to reduce network usage)</string>
+    <!-- Security & location settings screen, setting summary when Assisted GPS check box is clear -->
+    <string name="assisted_gps_disabled">Use server to assist GPS (uncheck to improve GPS performance)</string>
     <!-- Setting title for allow sending location to google -->
-    <string name="use_location_title">Share with Google</string>
-    <!-- Title of dialog to user requesting use of location information to improve services -->
-    <string name="use_location_summary">Allow Google to use location for improved search and other services</string>
+    <string name="use_location_title">Use My Location</string>
+    <!-- Setting summary for allowing Google to use location information for improved search results. -->
+    <string name="use_location_summary">Use My Location for Google search results and other Google services</string>
     <!-- Message of dialog to user requesting use of location information -->
-    <string name="use_location_warning_message">Allow Google to use location for improved search results and other services</string>
+    <string name="use_location_warning_message">Do you want to allow Google to use location for improved search results and other services?</string>
     <!-- Agree -->
     <string name="agree">Agree</string>
     <!-- Disagree -->
@@ -1184,6 +1267,15 @@
     <string name="settings_license_activity_unavailable">There is a problem loading the licenses.</string>
     <!-- About phone settings screen, Open source license dialog title until license is fully loaded -->
     <string name="settings_license_activity_loading">Loading\u2026</string>
+
+    <!-- About phone settings, Safety Legal information setting option name and title of dialog box holding safety legal info -->
+    <string name="settings_safetylegal_title">Safety information</string>
+    <!-- About phone settings, Safety Legal information setting option name and title of dialog box holding safety legal info -->
+    <string name="settings_safetylegal_activity_title">Safety information</string>
+    <!-- About phone settings screen, Safety legal dialog message when data network is not connected -->
+    <string name="settings_safetylegal_activity_unreachable">Your phone is not connected to a data service. To view this information now, go to %s from any computer connected to the Internet.</string>
+    <!-- About phone settings screen, Safety Legal dialog title until the link is fully loaded -->
+    <string name="settings_safetylegal_activity_loading">Loading\u2026</string>
 
     <!-- Lock Pattern settings -->
     <!-- Security & location settings screen, header -->
@@ -1252,8 +1344,8 @@
         \n<font height="17">\n</font><b>1</b>\u00A0 On the next screen, watch while an example pattern is drawn.
         \n<font height="17">\n</font><b>2</b>\u00A0 When ready, draw your own personal unlock pattern. Experiment with different patterns but connect at least four dots.
         \n<font height="17">\n</font><b>3</b>\u00A0 Redraw your pattern to confirm.
-        \n<font height="17">\n</font><b>Ready to start? Select \u201CNext\u201D</b>.
-        \n<font height="3">\n</font>To leave your phone unprotected, select \u201CCancel\u201D.</font>
+        \n<font height="17">\n</font><b>Ready to start? Touch \u201CNext\u201D</b>.
+        \n<font height="3">\n</font>To leave your phone unprotected, touch \u201CCancel\u201D.</font>
     </string>    
         
     <!-- ChooseLockPatternExample --> <skip />
@@ -1261,7 +1353,7 @@
     <string name="lock_example_title">Example pattern</string>
     <!-- ChooseLockPatternExample, screen hint text at bottom of screen. These are instructions and rules for drawing a good patttern -->
     <string name="lock_example_message">Connect at least four dots.\n
-        \nSelect \u201CNext\u201D when you\u2019re ready to draw your own pattern.
+        \nTouch \u201CNext\u201D when you\u2019re ready to draw your own pattern.
     </string>
 
     <!-- Applications Settings --> <skip />
@@ -1337,7 +1429,7 @@
     <string name="filter_apps_all">All</string>
     <!-- Text for filter option in ManageApps screen to display third party 
     applications only -->
-    <string name="filter_apps_third_party">Third-party</string>
+    <string name="filter_apps_third_party">Downloaded</string>
     <!-- Text for filter option in ManageApps screen to display list of running
     packages only. -->
     <string name="filter_apps_running">Running</string>
@@ -1347,7 +1439,7 @@
     <!-- Manage applications, individual application screen, confirmation dialog title. Displays when user selects to "Clear data". -->
     <string name="clear_data_dlg_title">Delete</string>
     <!-- Manage applications, individual application screen, confirmation dialog message. Displays when user selects to "Clear data". It warns the user of the consequences of clearing the data for an app. -->
-    <string name="clear_data_dlg_text">All information you\'ve saved in this application will be deleted permanently.</string>
+    <string name="clear_data_dlg_text">All of this application\'s data will be deleted permanently. This includes all files, settings, accounts, databases and so on.</string>
     <!-- Manage applications, individual application screen, confirmation dialog button. Displays when user selects to "Clear data". Goes through with the clearing of the data. -->
     <string name="dlg_ok">OK</string>
     <!-- Manage applications, individual application screen, confirmation dialog button. Displays when user selects to "Clear data". -->
@@ -1372,13 +1464,45 @@ found in the list of installed applications.</string>
     <string name="computing_size">Computing\u2026</string>
     <string name="invalid_size_value">Unable to compute package size</string>
     <!-- String displayed when list is empty -->
-    <string name="empty_list_msg">You do not have any third-party apps installed.</string>
+    <string name="empty_list_msg">You do not have any third-party applications installed.</string>
     <!-- Manage applications, version string displayed in app snippet -->
     <string name="version_text">version <xliff:g id="version_num">%1$s</xliff:g></string>
 
+    <!-- Services settings screen, setting option name for the user to go to the screen to view running services -->
+    <string name="runningservices_settings_title">Running services</string>
+    <!-- Services settings screen, setting option summary for the user to go to the screen to view running services  -->
+    <string name="runningservices_settings_summary">View and control currently running services</string>
+    <!-- Label for a service item when it is restarting -->
+    <string name="service_restarting">Restarting</string>
+    <!-- Running services, body text when there are no services to show -->
+    <string name="no_running_services">No running services</string>
+    <!-- Running services, title of dialog to stop a service -->
+    <string name="confirm_stop_service">Stop service?</string>
+    <!-- Running services, message of dialog to stop a service -->
+    <string name="confirm_stop_service_msg">The service will no longer run until
+            started again.  This may have undesireable
+            consequences on the applicaton
+            <xliff:g id="application">%1$s</xliff:g>.</string>
+    <!-- Running services, button to stop a service -->
+    <string name="confirm_stop_stop">Stop</string>
+    <!-- Running services, button to cancel stopping of a service -->
+    <string name="confirm_stop_cancel">Cancel</string>
+    <!-- Running services, description for a service in the started state -->
+    <string name="service_started_by_app">Started by application: touch to stop</string>
+    <!-- Running services, description for a service in the started state -->
+    <string name="service_client_name"><xliff:g id="client_name">%1$s</xliff:g>: touch to manage</string>
+    <!-- Running services, summary of background processes -->
+    <string name="service_background_processes">Avail: <xliff:g id="free">%2$s</xliff:g>+<xliff:g id="memory">%3$s</xliff:g> in <xliff:g id="count">%1$d</xliff:g></string>
+    <!-- Running services, summary of foreground processes -->
+    <string name="service_foreground_processes">Other: <xliff:g id="memory">%2$s</xliff:g> in <xliff:g id="count">%1$d</xliff:g></string>
+    <!-- Text to label a process entry with the process name. -->
+    <string name="service_process_name">Process: <xliff:g id="process">%1$s</xliff:g></string>
+    
     <!-- Language Settings --> <skip />
     <!-- Title of setting on main settings screen.  This item will take the user to the screen to tweak settings realted to locale and text -->
-    <string name="language_settings">Locale &amp; text</string>
+    <string name="language_settings">Language &amp; keyboard</string>
+    <!-- Title of Language and keyboard settings screen -->
+    <string name="language_keyboard_settings_title">Language &amp; keyboard settings</string>
     <!-- Summary of setting on main settings screen.  This item will take the user to the screen to tweak settings realted to locale and text -->
     <string name="language_settings_summary">Set locale (language and region), text input and auto-correction options</string>
     <!-- On Text & language settings screen, heading. Inside the "Locale & text" screen, this is the header for settings that are for locale changes. -->
@@ -1413,7 +1537,7 @@ found in the list of installed applications.</string>
     all the text you type, including personal data like passwords and credit
     card numbers.  It comes from the application
     <xliff:g id="ime_application_name">%1$s</xliff:g>.
-    Enable this input method?</string>
+    Use this input method?</string>
     
     <!-- User dictionary settings --><skip />
     <!-- User dictionary settings, The titlebar text of the User dictionary settings screen. -->
@@ -1475,7 +1599,7 @@ found in the list of installed applications.</string>
     <!-- Input Methods Settings localized format string for generating the appropriate "Foo settings" menu label for the Input Method named "Foo" -->
     <string name="input_methods_settings_label_format"><xliff:g id="ime_name">%1$s</xliff:g> settings</string>
     <!-- Summary for on-screen keyboard settings -->
-    <string name="onscreen_keyboard_settings_summary">On-screen keyboard settings</string>
+    <string name="onscreen_keyboard_settings_summary">Onscreen keyboard settings</string>
     <!-- Title for built-in keyboard settings -->
     <string name="builtin_keyboard_settings_title">Device keyboard</string>
     <!-- Summary for built-in keyboard settings -->
@@ -1498,7 +1622,7 @@ found in the list of installed applications.</string>
     <!-- setting Checkbox summary whether to allow mock locations  -->
     <string name="allow_mock_location_summary">Allow mock locations</string>
     <!-- Title of warning dialog about the implications of enabling USB debugging -->
-    <string name="adb_warning_title">Enable USB debugging?</string>
+    <string name="adb_warning_title">Allow USB debugging?</string>
     <!-- Warning text to user about the implications of enabling USB debugging -->
     <string name="adb_warning_message">USB debugging is intended for development purposes only. It can be used to copy data between your computer and your device, install applications on your device without notification, and read log data.</string>
 
@@ -1506,13 +1630,14 @@ found in the list of installed applications.</string>
          (or other screens that can host gadgets).  Note to translators: we're still determining
          the final name for Gadgets/Widgets, so please translate both for now. -->
     <string name="gadget_picker_title">Choose gadget</string>
+    
     <!-- Title for the screen that lets the user choose a widget to add to the home screen
          (or other screens that can host widgets).  Note to translators: we're still determining
          the final name for Gadgets/Widgets, so please translate both for now. -->
     <string name="widget_picker_title">Choose widget</string>
 
     <!-- Used to display "Details for UID 1234" in BatteryHistory -->
-    <string name="battery_history_details_for">Details for UID %d</string>
+    <string name="battery_history_details_for">Details for UID <xliff:g id="number" example="1234">%d</xliff:g></string>
 
     <!-- Used to name a set of apps that share a user id in BatteryHistory -->
     <string name="battery_history_uid">UID <xliff:g id="user_id">%1$d</xliff:g></string>
@@ -1618,8 +1743,10 @@ found in the list of installed applications.</string>
     <!-- Accessibility settings -->
     <skip/>
 
-    <!-- Settings title for accessibility settings -->
-    <string name="accessibility_settings_title">Accessibility</string>
+    <!-- Settings title in main settings screen for accessibility settings -->
+    <string name="accessibility_settings">Accessibility</string>
+    <!-- Settings title for accessibility settings screen -->
+    <string name="accessibility_settings_title">Accessibility settings</string>
     <!-- Settings summary for accessibility settings -->
     <string name="accessibility_settings_summary">Manage accessibility options</string>
     <!-- Setting Checkbox title for enabling accessibility -->
@@ -1633,7 +1760,7 @@ found in the list of installed applications.</string>
     <string name="accessibility_service_security_warning">This accessibility service may be able to collect
         all the text you type, including personal data credit card numbers except passwords.
         It may also log your user interface interactions. It comes from the application
-        <xliff:g id="accessibility_service_name">%1$s</xliff:g>. Enable this accessibility service?</string>
+        <xliff:g id="accessibility_service_name">%1$s</xliff:g>. Use this accessibility service?</string>
     <!-- Warning about disabling accessibility displayed as a dialog message when the user
          selects to disable accessibility. This avoids accidental disabling. -->
     <string name="accessibility_service_disable_warning">Disable accessibility?</string>
@@ -1661,7 +1788,7 @@ found in the list of installed applications.</string>
     <string name="bluetooth_on_time">WiFi on time</string>
     <!-- Application name and battery usage percentage -->
     <string name="usage_name_percent"><xliff:g id="name">%1$s</xliff:g>" - "
-            <xliff:g id="percent">%2$s</xliff:g>"%%"</string>
+            <xliff:g id="number" example="30">%2$s</xliff:g><xliff:g id="percent" example="%">%%</xliff:g></string>
 
     <!-- Activity title for battery usage details for an app. or power consumer -->
     <string name="details_title">Battery use details</string>
@@ -1742,7 +1869,7 @@ found in the list of installed applications.</string>
     <!-- Description for bluetooth power consumption detail -->
     <string name="battery_desc_bluetooth">Battery used by bluetooth</string>
     <!-- Suggestion for bluetooth -->
-    <string name="battery_sugg_bluetooth_basic">Turn off bluetooth when you aren't using it</string>
+    <string name="battery_sugg_bluetooth_basic">Turn off bluetooth when you aren\'t using it</string>
     <!-- Suggestion for bluetooth headset -->
     <string name="battery_sugg_bluetooth_headset">Try connecting to a different bluetooth device</string>
 
@@ -1771,11 +1898,11 @@ found in the list of installed applications.</string>
 
     <!-- Text-To-Speech (TTS) settings --><skip />
     <!-- Title of setting on main settings screen.  This item will take the user to the screen to tweak settings related to the text-to-speech functionality -->
-    <string name="tts_settings">Speech synthesis</string>
+    <string name="tts_settings">Text-to-speech</string>
     <!-- Summary of setting on main settings screen. This item will take the user to the screen to tweak settings related to the text-to-speech functionality  -->
     <string name="tts_settings_summary">Set text-to-speech options</string>
     <!-- Main TTS Settings screen title -->
-    <string name="tts_settings_title">Speech synthesizer controls</string>
+    <string name="tts_settings_title">Text-to-speech settings</string>
     <!-- On main TTS Settings screen, title for toggle used to force use of default TTS settings -->
     <string name="use_default_tts_settings_title">Always use my settings</string>
     <!-- On main TTS Settings screen, summary for toggle used to force use of default TTS settings -->
@@ -1811,11 +1938,16 @@ found in the list of installed applications.</string>
 
     <!-- Power Control Widget -->
     <string name="gadget_title">Power Control</string>
+    <string name="gadget_toggle_wifi">Updating Wi-Fi setting</string>
+    <string name="gadget_toggle_bluetooth">Updating Bluetooth setting</string>
+
+    <!-- credential installer title -->
+    <string name="credential_installer_activity_title">Credential installer</string>
 
     <string name="vpn_settings_activity_title">VPN settings</string>
 
     <!-- Title of VPN connect dialog -->
-    <string name="vpn_connect_to">Connect to %s</string>
+    <string name="vpn_connect_to">Connect to <xliff:g id="name" example="Work Network">%s</xliff:g></string>
     <!-- In VPN connect dialog, for inputing username and password -->
     <string name="vpn_username_colon">Username:</string>
     <string name="vpn_password_colon">Password:</string>
@@ -1840,9 +1972,9 @@ found in the list of installed applications.</string>
     <string name="vpn_menu_delete">Delete network</string>
 
     <!-- VPN error dialog messages -->
-    <string name="vpn_error_miss_entering">You must enter %s.</string>
-    <string name="vpn_error_miss_selecting">You must select %s.</string>
-    <string name="vpn_error_duplicate_name">The VPN name \'%s\' already exists. Find another name.</string>
+    <string name="vpn_error_miss_entering">You must enter <xliff:g id="code">%s</xliff:g>.</string>
+    <string name="vpn_error_miss_selecting">You must select <xliff:g id="option">%s</xliff:g>.</string>
+    <string name="vpn_error_duplicate_name">The VPN name \'<xliff:g id="name" example="Home Network">%s</xliff:g>\' already exists. Find another name.</string>
     <string name="vpn_confirm_profile_deletion">Are you sure you want to delete this VPN?</string>
     <string name="vpn_confirm_add_profile_cancellation">Are you sure you don\'t want to create this profile?</string>
     <string name="vpn_confirm_edit_profile_cancellation">Are you sure you want to discard the changes made to this profile?</string>
@@ -1853,15 +1985,17 @@ found in the list of installed applications.</string>
     <string name="vpn_secret_not_set_dialog_msg">One or more secrets are missing in this VPN configuration. Do you want to check your secret setting?</string>
     <string name="vpn_auth_error_dialog_msg">The username or password you entered is incorrect. Do you want to try again?</string>
     <string name="vpn_remote_hung_up_error_dialog_msg">Server hung up. The username or password you entered could be incorrect. Do you want to try again?</string>
+    <string name="vpn_remote_ppp_hung_up_error_dialog_msg">Server hung up. It is possible that you are behind a firewall that prevents you from connecting to the server. Do you want to try again?</string>
+    <string name="vpn_ppp_negotiation_failed_dialog_msg">Server negotiation failed. The server may not agree with your encryption option. Do you want to check your encryption setting?</string>
 
     <!-- VPN type selection activity title -->
     <string name="vpn_type_title">Add VPN</string>
     <!-- "Add VPN" preference title -->
     <string name="vpn_add_new_vpn">Add VPN</string>
     <!-- VPN profile editor title when adding a new profile -->
-    <string name="vpn_edit_title_add">Add %s VPN</string>
+    <string name="vpn_edit_title_add">Add <xliff:g id="name">%s</xliff:g> VPN</string>
     <!-- VPN profile editor title when editing an existing profile -->
-    <string name="vpn_edit_title_edit">%s details</string>
+    <string name="vpn_edit_title_edit"><xliff:g id="name">%s</xliff:g> details</string>
     <!-- Preference group title for a list of VPN profiles -->
     <string name="vpns">VPNs</string>
     <!-- Preference summary text when VPN is connecting -->
@@ -1878,9 +2012,9 @@ found in the list of installed applications.</string>
     <string name="vpn_a_name">a VPN name</string>
 
     <!-- Toast message shown when a profile is added -->
-    <string name="vpn_profile_added">&#39;%s&#39; is added</string>
+    <string name="vpn_profile_added">\'<xliff:g id="name">%s</xliff:g>\' is added</string>
     <!-- Toast message shown when changes of a profile is saved -->
-    <string name="vpn_profile_replaced">Changes are made to &#39;%s&#39;</string>
+    <string name="vpn_profile_replaced">Changes are made to \'<xliff:g id="name">%s</xliff:g>\'</string>
 
     <!-- Preference title -->
     <string name="vpn_user_certificate_title">Set user certificate</string>
@@ -1921,21 +2055,21 @@ found in the list of installed applications.</string>
     <string name="vpn_dns_search_list">DNS search domains</string>
 
     <!-- Summary text to hint that the value is set -->
-    <string name="vpn_field_is_set">%s is set</string>
+    <string name="vpn_field_is_set"><xliff:g id="value">%s</xliff:g> is set</string>
     <!-- Summary text to hint that the value is not set -->
-    <string name="vpn_field_not_set">%s not set</string>
+    <string name="vpn_field_not_set"><xliff:g id="value">%s</xliff:g> not set</string>
     <!-- Summary text to hint that the value is not set but it's not required-->
-    <string name="vpn_field_not_set_optional">%s not set (optional)</string>
+    <string name="vpn_field_not_set_optional"><xliff:g id="value">%s</xliff:g> not set (optional)</string>
 
     <!-- CheckBoxPreference title to enable something -->
-    <string name="vpn_enable_field">Enable %s</string>
+    <string name="vpn_enable_field">Enable <xliff:g id="option">%s</xliff:g></string>
     <!-- CheckBoxPreference title to disable something -->
-    <string name="vpn_disable_field">Disable %s</string>
+    <string name="vpn_disable_field">Disable <xliff:g id="option">%s</xliff:g></string>
 
     <!-- CheckBoxPreference summary to hint that something is enabled -->
-    <string name="vpn_is_enabled">%s is enabled</string>
+    <string name="vpn_is_enabled"><xliff:g id="option">%s</xliff:g> is enabled</string>
     <!-- CheckBoxPreference summary to hint that something is disabled -->
-    <string name="vpn_is_disabled">%s is disabled</string>
+    <string name="vpn_is_disabled"><xliff:g id="option">%s</xliff:g> is disabled</string>
 
     <!-- Title of preference to enter the VPN settings activity -->
     <string name="vpn_settings_title">VPN settings</string>
@@ -1947,71 +2081,74 @@ found in the list of installed applications.</string>
     <string name="vpn_secret_not_set">(not set)</string>
 
     <!-- Title of preference group for credential storage settings -->
-    <string name="cstor_settings_category">Credential storage</string>
+    <string name="credentials_category">Credential storage</string>
     <!-- Title of preference to enable/dislable access to credential storage -->
-    <string name="cstor_access_title">Use secure credentials</string>
+    <string name="credentials_access">Use secure credentials</string>
     <!-- Summary of preference to enable/dislable access to credential storage -->
-    <string name="cstor_access_summary">Allow applications to access secure certificates and other credentials</string>
+    <string name="credentials_access_summary">Allow applications to access secure certificates and other credentials</string>
     <!-- Title of dialog to enable/dislable access to credential storage -->
-    <string name="cstor_access_dialog_title">Enter password</string>
-    <!-- Description of dialog to enable/dislable access to credential storage from an action that requires the credential storage -->
-    <string name="cstor_access_dialog_hint_from_action">Enter the credential storage password.</string>
-
+    <string name="credentials_unlock">Enter password</string>
+    <!-- Description of dialog to enable/dislable access to credential storage -->
+    <string name="credentials_unlock_hint">Enter the credential storage password.</string>
+    <!-- Title of preference to install certificates from SD card -->
+    <string name="credentials_install_certificates">Install from SD card</string>
+    <!-- Summary of preference to install certificates from SD card -->
+    <string name="credentials_install_certificates_summary">Install encrypted certificates from SD card</string>
     <!-- Title of preference to set storage password -->
-    <string name="cstor_set_passwd_title">Set password</string>
+    <string name="credentials_set_password">Set password</string>
     <!-- Summary of preference to set storage password -->
-    <string name="cstor_set_passwd_summary">Set or change the credential storage password</string>
-    <!-- Title of dialog to set storage password -->
-    <string name="cstor_set_passwd_dialog_title">Set password</string>
-
-    <!-- Title of preference to reset storage -->
-    <string name="cstor_reset_title">Clear storage</string>
-    <!-- Summary of preference to reset storage -->
-    <string name="cstor_reset_summary">Clear credential storage of all contents and reset its password</string>
-    <string name="cstor_reset_hint">Are you sure you want to delete all credentials and reset the credential storage password?</string>
-
-    <!-- Title of dialog to name a credential -->
-    <string name="cstor_name_credential_dialog_title">Name the certificate</string>
-    <!-- Description for the credential name input box -->
-    <string name="cstor_credential_name">Certificate name:</string>
-    <!-- Title of the credential info -->
-    <!-- Description for the credential password input box -->
-    <string name="cstor_credential_password">Password to extract the certificate:</string>
-    <string name="cstor_credential_info">Certificate details:</string>
-    <string name="cstor_name_credential_hint">The name can contain only letters and numbers.</string>
-
-
+    <string name="credentials_set_password_summary">Set or change the credential storage password</string>
+    <!-- Title of preference to reset credential storage -->
+    <string name="credentials_reset">Clear storage</string>
+    <!-- Summary of preference to reset credential storage -->
+    <string name="credentials_reset_summary">Clear credential storage of all contents and reset its password</string>
+    <!-- Description of dialog to reset the credential storage -->
+    <string name="credentials_reset_hint">Are you sure you want to delete all credentials and reset the credential storage password?</string>
     <!-- Description for the old-password input box -->
-    <string name="cstor_old_password">Current password:</string>
+    <string name="credentials_old_password">Current password:</string>
     <!-- Description for the new-password input box -->
-    <string name="cstor_new_password">New password:</string>
+    <string name="credentials_new_password">New password:</string>
     <!-- Description for the confirm-new-password input box -->
-    <string name="cstor_confirm_password">Confirm new password:</string>
+    <string name="credentials_confirm_password">Confirm new password:</string>
     <!-- Description when user set up the storage for the very first time -->
-    <string name="cstor_first_time_hint">Set a password for the credential storage.</string>
-    <!-- Description when user set up the storage for the very first time from an action that requires the credential storage-->
-    <string name="cstor_first_time_hint_from_action">Set a password for the credential storage.</string>
-    <string name="cstor_password_error">Please enter the correct password.</string>
-    <string name="cstor_password_error_reset_warning">Please enter the correct password. You have one more try to enter the correct password before the credential storage is erased.</string>
-    <string name="cstor_password_error_reset_warning_plural">Please enter the correct password. You have %d more tries to enter the correct password before the credential storage is erased.</string>
-    <string name="cstor_passwords_error">Passwords do not match.</string>
-    <string name="cstor_passwords_empty_error">You must enter and confirm a password.</string>
-    <string name="cstor_password_empty_error">Please enter the password.</string>
-    <string name="cstor_password_verification_error">Please enter the password again. The password must have at least 8 characters and must not contain spaces.</string>
-    <string name="cstor_name_empty_error">Please enter a name.</string>
-    <string name="cstor_name_char_error">Please enter a name that contains only letters and numbers.</string>
-    <string name="cstor_storage_error">Unable to save the certificate. Click OK to retry.</string>
-    <string name="cstor_unable_to_save_cert">Unable to save the certificate. The credential storage is not enabled or properly initialized.</string>
-    <string name="cstor_cert_not_saved">The certificate is not saved.</string>
-    <string name="cstor_is_reset">The credential storage is erased.</string>
-
+    <string name="credentials_first_time_hint">Set a password for the credential storage (at least 8 characters).</string>
+    <string name="credentials_wrong_password">Please enter the correct password.</string>
+    <string name="credentials_reset_warning">Please enter the correct password. You have one more try to enter the correct password before the credential storage is erased.</string>
+    <string name="credentials_reset_warning_plural">Please enter the correct password. You have <xliff:g id="number" example="5">%1$d</xliff:g> more tries to enter the correct password before the credential storage is erased.</string>
+    <string name="credentials_passwords_mismatch">Passwords do not match.</string>
+    <string name="credentials_passwords_empty">You must enter and confirm a password.</string>
+    <string name="credentials_password_empty">Please enter the password.</string>
+    <string name="credentials_password_too_short">The password must have at least 8 characters.</string>
     <!-- toast message -->
-    <string name="cstor_is_enabled">Credential storage is enabled.</string>
+    <string name="credentials_erased">The credential storage is erased.</string>
     <!-- toast message -->
-    <string name="cstor_is_added">%s is added.</string>
+    <string name="credentials_enabled">Credential storage is enabled.</string>
+    <!-- toast message -->
+    <string name="credentials_disabled">Credential storage is disabled.</string>
 
     <!-- Sound settings screen, setting check box label -->
     <string name="emergency_tone_title">Emergency tone</string>
     <!-- Sound settings screen, setting option summary text -->
     <string name="emergency_tone_summary">Set behavior when an emergency call is placed</string>
+    
+    <!-- Privacy Settings screen --><skip/>
+    <!-- Privacy settings menu title -->
+    <string name="privacy_settings">Privacy</string>
+    <!-- Privacy settings activity title -->
+    <string name="privacy_settings_title">Privacy settings</string>
+    <!-- Location settings section title -->
+    <string name="location_section_title">Location</string>
+    <!-- Settings section title -->
+    <string name="settings_section_title">Settings</string>
+    <!-- Personal data section title -->
+    <string name="personal_data_section_title">Personal data</string>
+    <!-- Backup settings menu title -->
+    <string name="backup_settings_title">Back up my settings</string>
+    <!-- Dialog title for confirmation to erase backup data from server -->
+    <string name="backup_erase_dialog_title">Settings backup</string>
+    <!-- Dialog title for confirmation to erase backup data from server -->
+    <string name="backup_erase_dialog_message">Are you sure you want to stop backing up your settings and erase all copies on Google servers?</string>
+
+    <!-- Name to assign to a Network Access Point that was saved without a name -->
+    <string name="untitled_apn">Untitled</string>
 </resources>

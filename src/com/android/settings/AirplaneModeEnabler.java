@@ -22,10 +22,13 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Handler;
 import android.os.Message;
+import android.os.SystemProperties;
 import android.preference.CheckBoxPreference;
 import android.preference.Preference;
 import android.provider.Settings;
 import android.telephony.ServiceState;
+
+import com.android.internal.telephony.TelephonyProperties;
 
 public class AirplaneModeEnabler implements Preference.OnPreferenceChangeListener {
 
@@ -74,7 +77,7 @@ public class AirplaneModeEnabler implements Preference.OnPreferenceChangeListene
         mCheckBoxPref.setOnPreferenceChangeListener(null);
     }
     
-    static boolean isAirplaneModeOn(Context context) {
+    public static boolean isAirplaneModeOn(Context context) {
         return Settings.System.getInt(context.getContentResolver(),
                 Settings.System.AIRPLANE_MODE_ON, 0) != 0;
     }
@@ -111,8 +114,23 @@ public class AirplaneModeEnabler implements Preference.OnPreferenceChangeListene
      * Called when someone clicks on the checkbox preference.
      */
     public boolean onPreferenceChange(Preference preference, Object newValue) {
-        setAirplaneModeOn((Boolean) newValue);
+        if (Boolean.parseBoolean(
+                    SystemProperties.get(TelephonyProperties.PROPERTY_INECM_MODE))) {
+            // In ECM mode, do not update database at this point
+        } else {
+            setAirplaneModeOn((Boolean) newValue);
+        }
         return true;
+    }
+
+    public void setAirplaneModeInECM(boolean isECMExit, boolean isAirplaneModeOn) {
+        if (isECMExit) {
+            // update database based on the current checkbox state
+            setAirplaneModeOn(isAirplaneModeOn);
+        } else {
+            // update checkbox state based on database value
+            onAirplaneModeChanged();
+        }
     }
 
 }

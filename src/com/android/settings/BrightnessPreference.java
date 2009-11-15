@@ -18,7 +18,7 @@ package com.android.settings;
 
 import android.content.Context;
 import android.os.RemoteException;
-import android.os.IHardwareService;
+import android.os.IPowerManager;
 import android.os.ServiceManager;
 import android.preference.SeekBarPreference;
 import android.provider.Settings;
@@ -26,16 +26,22 @@ import android.provider.Settings.SettingNotFoundException;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.View;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.SeekBar;
 
 import java.util.Map;
 
 public class BrightnessPreference extends SeekBarPreference implements
-        SeekBar.OnSeekBarChangeListener {
+        SeekBar.OnSeekBarChangeListener, CheckBox.OnCheckedChangeListener {
 
     private SeekBar mSeekBar;
+    private CheckBox mCheckBox;
     
     private int mOldBrightness;
+    private int mOldAutomatic;
+
+    private boolean mAutomaticAvailable;
     
     // Backlight range is from 0 - 255. Need to make sure that user
     // doesn't set the backlight to 0 and get stuck
@@ -44,6 +50,11 @@ public class BrightnessPreference extends SeekBarPreference implements
 
     public BrightnessPreference(Context context, AttributeSet attrs) {
         super(context, attrs);
+
+        mAutomaticAvailable = context.getResources().getBoolean(
+                com.android.internal.R.bool.config_automatic_brightness_available);
+
+        setDialogLayoutResource(R.layout.preference_dialog_brightness);
     }
 
     @Override
@@ -51,7 +62,6 @@ public class BrightnessPreference extends SeekBarPreference implements
         super.onBindDialogView(view);
 
         mSeekBar = getSeekBar(view);
-        mSeekBar.setOnSeekBarChangeListener(this);
         mSeekBar.setMax(MAXIMUM_BACKLIGHT - MINIMUM_BACKLIGHT);
         try {
             mOldBrightness = Settings.System.getInt(getContext().getContentResolver(), 
@@ -60,6 +70,21 @@ public class BrightnessPreference extends SeekBarPreference implements
             mOldBrightness = MAXIMUM_BACKLIGHT;
         }
         mSeekBar.setProgress(mOldBrightness - MINIMUM_BACKLIGHT);
+
+        mCheckBox = (CheckBox)view.findViewById(R.id.automatic_mode);
+        if (mAutomaticAvailable) {
+            mCheckBox.setOnCheckedChangeListener(this);
+            try {
+                mOldAutomatic = Settings.System.getInt(getContext().getContentResolver(),
+                        Settings.System.SCREEN_BRIGHTNESS_MODE);
+            } catch (SettingNotFoundException snfe) {
+                mOldAutomatic = 0;
+            }
+            mCheckBox.setChecked(mOldAutomatic != 0);
+        } else {
+            mCheckBox.setVisibility(View.GONE);
+        }
+        mSeekBar.setOnSeekBarChangeListener(this);
     }
 
     public void onProgressChanged(SeekBar seekBar, int progress,
@@ -75,6 +100,14 @@ public class BrightnessPreference extends SeekBarPreference implements
         // NA
     }
 
+    public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+        setMode(isChecked ? Settings.System.SCREEN_BRIGHTNESS_MODE_AUTOMATIC
+                : Settings.System.SCREEN_BRIGHTNESS_MODE_MANUAL);
+        if (!isChecked) {
+            setBrightness(mSeekBar.getProgress() + MINIMUM_BACKLIGHT);
+        }
+    }
+
     @Override
     protected void onDialogClosed(boolean positiveResult) {
         super.onDialogClosed(positiveResult);
@@ -84,20 +117,35 @@ public class BrightnessPreference extends SeekBarPreference implements
                     Settings.System.SCREEN_BRIGHTNESS,
                     mSeekBar.getProgress() + MINIMUM_BACKLIGHT);
         } else {
-            setBrightness(mOldBrightness);
+            if (mAutomaticAvailable) {
+                setMode(mOldAutomatic);
+            }
+            if (!mAutomaticAvailable || mOldAutomatic == 0) {
+                setBrightness(mOldBrightness);
+            }
         }
     }
     
     private void setBrightness(int brightness) {
         try {
-            IHardwareService hardware = IHardwareService.Stub.asInterface(
-                    ServiceManager.getService("hardware"));
-            if (hardware != null) {
-                hardware.setBacklights(brightness);
+            IPowerManager power = IPowerManager.Stub.asInterface(
+                    ServiceManager.getService("power"));
+            if (power != null) {
+                power.setBacklightBrightness(brightness);
             }
         } catch (RemoteException doe) {
             
         }        
+    }
+
+    private void setMode(int mode) {
+        if (mode == Settings.System.SCREEN_BRIGHTNESS_MODE_AUTOMATIC) {
+            mSeekBar.setVisibility(View.GONE);
+        } else {
+            mSeekBar.setVisibility(View.VISIBLE);
+        }
+        Settings.System.putInt(getContext().getContentResolver(),
+                Settings.System.SCREEN_BRIGHTNESS_MODE, mode);
     }
 }
 

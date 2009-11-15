@@ -15,6 +15,8 @@
 -->
 <resources xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <string name="yes" msgid="4676390750360727396">"Ja"</string>
+    <string name="no" msgid="6731231425810196216">"Nee"</string>
     <string name="device_info_default" msgid="7847265875578739287">"Onbekend"</string>
     <string name="turn_on_radio" msgid="8706561489788373676">"Radio inschakelen"</string>
     <string name="turn_off_radio" msgid="1820294552893884115">"Radio uitschakelen"</string>
@@ -56,6 +58,7 @@
     <string name="font_size_save" msgid="3450855718056759095">"OK"</string>
     <string name="sdcard_setting" msgid="5922637503871474866">"SD-kaart"</string>
     <string name="battery_info_status_label" msgid="8109155295509700309">"Accustatus:"</string>
+    <string name="battery_info_power_label" msgid="7465140230991349382">"Voedingsstekker:"</string>
     <string name="battery_info_scale_label" msgid="3649763192389778437">"Accuschaal:"</string>
     <string name="battery_info_level_label" msgid="8706526709307788737">"Accuniveau:"</string>
     <string name="battery_info_health_label" msgid="6416051542741886958">"Accustaat:"</string>
@@ -75,6 +78,11 @@
     <string name="battery_info_status_discharging" msgid="6222697503392774475">"Ontladen"</string>
     <string name="battery_info_status_not_charging" msgid="2820070506621483576">"Wordt niet opgeladen"</string>
     <string name="battery_info_status_full" msgid="2824614753861462808">"Volledig"</string>
+    <string name="battery_info_power_unplugged" msgid="5987246575519551081">"Niet aangesloten"</string>
+    <string name="battery_info_power_ac" msgid="6808516193001604634">"AC"</string>
+    <string name="battery_info_power_usb" msgid="8012931702516331797">"USB"</string>
+    <string name="battery_info_power_ac_usb" msgid="6777734146838328688">"AC+USB"</string>
+    <string name="battery_info_power_unknown" msgid="7344115502868899881">"Onbekend"</string>
     <string name="battery_info_health_unknown" msgid="5664295556921944255">"Onbekend"</string>
     <string name="battery_info_health_good" msgid="8070356565806711806">"Goed"</string>
     <string name="battery_info_health_overheat" msgid="8442959549291368806">"Oververhitting"</string>
@@ -104,6 +112,12 @@
     <string name="bluetooth_notif_ticker" msgid="4726721390078512173">"Bluetooth-koppelingsverzoek"</string>
     <string name="bluetooth_notif_title" msgid="2485175521845371514">"Koppelingsverzoek"</string>
     <string name="bluetooth_notif_message" msgid="5381418499788668724">"Selecteer dit om te koppelen met "</string>
+    <string name="device_picker" msgid="8721012448931226323">"Apparaatkiezer van Bluetooth"</string>
+    <string name="bluetooth_permission_request" msgid="1523129741266262748">"Machtigingsverzoek voor Bluetooth"</string>
+    <string name="bluetooth_ask_enablement" msgid="2342558978033892004">"Een toepassing probeert Bluetooth in te schakelen. Wilt u dit toestaan?"</string>
+    <string name="bluetooth_ask_discovery" msgid="669870705606180872">"Een toepassing probeert uw telefoon <xliff:g id="TIMEOUT">%1$d</xliff:g> seconden zichtbaar te maken voor andere Bluetooth-apparaten. Wilt u dit toestaan?"</string>
+    <string name="bluetooth_ask_enablement_and_discovery" msgid="7220210326619399542">"Een toepassing probeert Bluetooth in te schakelen en uw telefoon <xliff:g id="TIMEOUT">%1$d</xliff:g> seconden zichtbaar te maken voor andere apparaten. Wilt u dit toestaan?"</string>
+    <string name="bluetooth_turning_on" msgid="3107102168379705771">"Bluetooth inschakelen…"</string>
     <string name="date_and_time" msgid="4114084177056654663">"Datum- en tijdinstellingen"</string>
     <string name="date_time_12_hour_sample" msgid="3259617262618020574">"13:00 uur"</string>
     <string name="date_time_24_hour_sample" msgid="8916857570746212357">"01:00:00 PM"</string>
@@ -196,7 +210,8 @@
     <string name="airplane_mode_summary" msgid="3154817401368780988">"Alle draadloze verbindingen uitschakelen"</string>
     <string name="airplane_mode_turning_on" msgid="8871739222526957255">"Draadloze verbindingen uitschakelen..."</string>
     <string name="airplane_mode_turning_off" msgid="3393168549611505996">"Draadloze verbindingen inschakelen..."</string>
-    <string name="radio_controls_title" msgid="8356991079873437337">"Draadloze bedieningselementen"</string>
+    <string name="radio_controls_title" msgid="5868688473587168882">"Draadloos en netwerken"</string>
+    <string name="wireless_networks_settings_title" msgid="149274247949769551">"Draadloze en netwerkinstellingen"</string>
     <string name="radio_controls_summary" msgid="2998818677094465517">"Wi-Fi, Bluetooth, vliegmodus, mobiele netwerken en VPN\'s beheren"</string>
     <string name="roaming" msgid="3596055926335478572">"Gegevensroaming"</string>
     <string name="roaming_enable" msgid="3737380951525303961">"Verbinding maken met gegevensservices tijdens roaming"</string>
@@ -219,20 +234,29 @@
     <string name="date_time_date_format" msgid="436706100255870967">"Datumnotatie selecteren"</string>
     <string name="zone_list_menu_sort_alphabetically" msgid="5683377702671088588">"Alfabetisch sorteren"</string>
     <string name="zone_list_menu_sort_by_timezone" msgid="2720190443744884114">"Sorteren op tijdzone"</string>
-    <string name="security_settings_title" msgid="4918904614964215087">"Beveiliging en locatie"</string>
+    <string name="security_settings_title" msgid="5168491784222013179">"Locatie en beveiliging"</string>
+    <string name="location_security_settings_title" msgid="4624434296446625554">"Locatie- en beveiligingsinstellingen"</string>
     <string name="security_settings_summary" msgid="967393342537986570">"Mijn locatie\', schermontgrendeling, SIM- en referentieopslagvergrendeling instellen"</string>
+    <string name="cdma_security_settings_summary" msgid="6068799952798901542">"\'Mijn locatie\' instellen, scherm ontgrendelen, opslag van referenties vergrendelen"</string>
     <string name="security_passwords_title" msgid="2930627259125138363">"Wachtwoorden"</string>
     <string name="bluetooth_quick_toggle_title" msgid="1037056952714061893">"Bluetooth"</string>
     <string name="bluetooth_quick_toggle_summary" msgid="5293641680139873341">"Bluetooth inschakelen"</string>
     <string name="bluetooth_settings" msgid="2725796451253089609">"Bluetooth-instellingen"</string>
     <string name="bluetooth_settings_title" msgid="2824020086246268296">"Bluetooth-instellingen"</string>
     <string name="bluetooth_settings_summary" msgid="2091062709530570462">"Verbindingen beheren, apparaatnaam en vindbaarheid instellen"</string>
-    <string name="bluetooth_pin_entry" msgid="5627349871303455279">"Bluetooth-koppelingsverzoek"</string>
+    <string name="bluetooth_pairing_request" msgid="6385750334766370310">"Bluetooth-koppelingsverzoek"</string>
     <string name="bluetooth_device_info" msgid="6644515376523965073">"Bluetooth-apparaatinfo"</string>
-    <string name="bluetooth_enter_pin_msg" msgid="7551139612735632370">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g>"\n\n"Typ de PIN-code om te koppelen."\n"(Probeer 0000 of 1234.)"</string>
+    <string name="bluetooth_enter_pin_msg" msgid="856962526754150334">\n"Typ de PIN-code om te koppelen met \'<xliff:g id="DEVICE_NAME">%1$s</xliff:g>\'. (Probeer 0000 of 1234.)"</string>
+    <string name="bluetooth_enter_passkey_msg" msgid="8121515818772179228">\n"Geef de toegangscode op om te koppelen met \'<xliff:g id="DEVICE_NAME">%1$s</xliff:g>\'."</string>
+    <string name="bluetooth_confirm_passkey_msg" msgid="1205362283945104263">"Als u wilt koppelen met \'<xliff:g id="DEVICE_NAME">%1$s</xliff:g>\', moet u bevestigen dat deze toegangscode wordt weergegeven: <xliff:g id="PASSKEY">%2$s</xliff:g>."</string>
+    <string name="bluetooth_incoming_pairing_msg" msgid="1076613564387784476">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g>"\n"wil koppelen."</string>
+    <string name="bluetooth_display_passkey_msg" msgid="3048496029389441579">"Voer <xliff:g id="PASSKEY">%2$s</xliff:g> in op \'<xliff:g id="DEVICE_NAME">%1$s</xliff:g>\' om te koppelen."</string>
+    <string name="bluetooth_pairing_accept" msgid="6163520056536604875">"Koppelen"</string>
+    <string name="bluetooth_pairing_decline" msgid="930951069988011471">"Niet koppelen"</string>
+    <string name="bluetooth_remote_device" msgid="2406662802908395389">"Bluetooth-apparaat"</string>
     <string name="bluetooth_error_title" msgid="538287072376677166">"Let op"</string>
     <string name="bluetooth_pairing_error_message" msgid="2852744547246910349">"Er is een probleem opgetreden bij het koppelen met <xliff:g id="DEVICE_NAME">%1$s</xliff:g>."</string>
-    <string name="bluetooth_pairing_pin_error_message" msgid="6938408362011024289">"Er is een probleem opgetreden bij het koppelen met <xliff:g id="DEVICE_NAME">%1$s</xliff:g>, omdat de opgegeven PIN-code onjuist is."</string>
+    <string name="bluetooth_pairing_pin_error_message" msgid="6065697229258906937">"Er is een probleem opgetreden bij het koppelen met <xliff:g id="DEVICE_NAME">%1$s</xliff:g>, omdat de opgegeven PIN-code of toegangscode onjuist is."</string>
     <string name="bluetooth_pairing_device_down_error_message" msgid="6688215193824686741">"Kan niet communiceren met <xliff:g id="DEVICE_NAME">%1$s</xliff:g>."</string>
     <string name="bluetooth_pairing_rejected_error_message" msgid="1648157108520832454">"Koppeling geweigerd door <xliff:g id="DEVICE_NAME">%1$s</xliff:g>."</string>
     <string name="bluetooth_connecting_error_message" msgid="1779660510084746802">"Er is een probleem opgetreden bij het verbinden met <xliff:g id="DEVICE_NAME">%1$s</xliff:g>."</string>
@@ -246,6 +270,7 @@
     <string name="bluetooth_connect_specific_profiles_title" msgid="6952214406025825164">"Verbinding maken met…"</string>
     <string name="bluetooth_profile_a2dp" msgid="3259633293424539529">"Media"</string>
     <string name="bluetooth_profile_headset" msgid="1874975688666658946">"Telefoon"</string>
+    <string name="bluetooth_profile_opp" msgid="3799470046565284440">"Overdracht"</string>
     <string name="bluetooth_summary_connected_to_a2dp" msgid="510833839847758664">"Verbonden met audio van medium"</string>
     <string name="bluetooth_summary_connected_to_headset" msgid="4876496372728623918">"Verbonden met audio van telefoon"</string>
     <string name="bluetooth_summary_connected_to_a2dp_headset" msgid="3045032710457800891">"Verbonden met audio van telefoon en medium"</string>
@@ -255,8 +280,11 @@
     <string name="bluetooth_device_advanced_profile_header_title" msgid="3764437426089639639">"Profielen"</string>
     <string name="bluetooth_a2dp_profile_summary_connected" msgid="963376081347721598">"Verbonden met audio van medium"</string>
     <string name="bluetooth_headset_profile_summary_connected" msgid="7661070206715520671">"Verbonden met audio van telefoon"</string>
+    <string name="bluetooth_opp_profile_summary_connected" msgid="2611913495968309066">"Verbonden met server voor bestandsoverdracht"</string>
+    <string name="bluetooth_opp_profile_summary_not_connected" msgid="1267091356089086285">"Niet verbonden met server voor bestandsoverdracht"</string>
     <string name="bluetooth_a2dp_profile_summary_use_for" msgid="4630849022250168427">"Gebruiken voor audio van medium"</string>
     <string name="bluetooth_headset_profile_summary_use_for" msgid="8705753622443862627">"Gebruiken voor audio van telefoon"</string>
+    <string name="bluetooth_opp_profile_summary_use_for" msgid="1255674547144769756">"Gebruiken voor bestandsoverdracht"</string>
     <string name="wifi" msgid="1081550856200013637">"Wi-Fi"</string>
     <string name="wifi_quick_toggle_title" msgid="874495178395350104">"Wi-Fi"</string>
     <string name="wifi_quick_toggle_summary" msgid="1047950931623694366">"Wi-Fi inschakelen"</string>
@@ -273,17 +301,13 @@
     <string name="security" msgid="1040691896987225267">"Beveiliging"</string>
     <string name="wifi_security_open" msgid="3513305614048816607">"Open"</string>
     <string name="wifi_security_wep" msgid="7082604129842065776">"WEP"</string>
-    <string name="wifi_security_wpa" msgid="8980169410565477162">"WPA"</string>
-    <string name="wifi_security_wpa2" msgid="5780665935088930524">"WPA2"</string>
-    <string name="wifi_security_wpa_eap" msgid="7485687331651751101">"WPA-EAP"</string>
-    <string name="wifi_security_ieee8021x" msgid="8538687609878109005">"IEEE8021X"</string>
+    <string name="wifi_security_psk" msgid="3392399380570381452">"WPA/WPA2 PSK"</string>
+    <string name="wifi_security_eap" msgid="8309434150934969132">"Enterprise(802.1x)"</string>
     <string name="wifi_security_unknown" msgid="4564208312073060668">"Onbekend"</string>
     <string name="wifi_security_verbose_open" msgid="8117878112088901945">"open netwerk"</string>
     <string name="wifi_security_verbose_wep" msgid="9220757688700421508">"beveiligd met WEP"</string>
-    <string name="wifi_security_verbose_wpa" msgid="598697674252714455">"beveiligd met WPA"</string>
-    <string name="wifi_security_verbose_wpa2" msgid="4116236883347875722">"beveiligd met WPA2"</string>
-    <string name="wifi_security_verbose_wpa_eap" msgid="1984821646949066624">"beveiligd met WPA-EAP"</string>
-    <string name="wifi_security_verbose_ieee8021x" msgid="5552995793910186310">"beveiligd met IEEE 802.1x"</string>
+    <string name="wifi_security_verbose_psk" msgid="1110130025330416225">"beveiligd met WPA/WPA2 PSK"</string>
+    <string name="wifi_security_verbose_eap" msgid="586632662086063">"beveiligd met 802.1x EAP"</string>
     <string name="ip_address" msgid="850672263358989449">"IP-adres"</string>
     <string name="signal" msgid="1947969631626413228">"Signaalsterkte"</string>
     <string name="wifi_starting" msgid="6710266609710860129">"Inschakelen..."</string>
@@ -302,14 +326,13 @@
     <string name="please_type_anonymous_identity" msgid="835061562079965048">"Anonieme identiteit"</string>
     <string name="please_select_client_certificate" msgid="2137906961594663234">"Klantcertificaat"</string>
     <string name="please_select_ca_certificate" msgid="5010815181914420677">"CA-certificaat"</string>
-    <string name="please_type_private_key_passwd" msgid="4077744679722504443">"Wachtwoord voor privésleutel"</string>
     <string name="please_type_passphrase" msgid="8256017704131522462">"Draadloos wachtwoord"</string>
     <string name="please_type_hex_key" msgid="8751224390407867551">"Hexadecimale WEP-sleutel (0-9, A-F)"</string>
     <string name="wifi_show_password" msgid="4235237470701732009">"Wachtwoord weergeven."</string>
     <string name="scan_wifi" msgid="2459901725350542606">"Scannen"</string>
     <string name="summary_not_in_range" msgid="3926674700733548684">"Niet binnen bereik"</string>
     <string name="summary_remembered" msgid="6079941090549401742">"onthouden"</string>
-    <string name="summary_connection_failed" msgid="7610394657613410489">"Verbinding mislukt. Selecteer dit om opnieuw te proberen."</string>
+    <string name="summary_connection_failed" msgid="2351885658101671413">"Verbinding mislukt. Raak aan om opnieuw te proberen"</string>
     <string name="wifi_access_points" msgid="2664629396767022441">"Wi-Fi-netwerken"</string>
     <string name="wifi_type_ssid" msgid="1326839657083292017">"SSID van netwerk"</string>
     <string name="wifi_security" msgid="6603611185592956936">"Beveiliging"</string>
@@ -360,6 +383,7 @@
     <string name="status_disconnected" msgid="7561688569905126046">"Verbinding verbroken"</string>
     <string name="status_failed" msgid="610462050405904601">"Mislukt"</string>
     <string name="sound_and_display_settings" msgid="349770582993029003">"Geluid en weergave"</string>
+    <string name="sound_and_display_settings_title" msgid="5036144539683697330">"Geluid- en weergaveinstellingen"</string>
     <string name="sound_settings" msgid="5007659014828162881">"Geluidsinstellingen"</string>
     <string name="sound_and_display_settings_summary" msgid="1433943789593286064">"Beltonen, meldingen, schermhelderheid instellen"</string>
     <string name="silent_mode_title" msgid="3181479108593217704">"Stille modus"</string>
@@ -385,11 +409,14 @@
     <string name="sound_effects_enable_title" msgid="3197313718929122833">"Hoorbare selectie"</string>
     <string name="sound_effects_enable_summary_on" msgid="6154141289879491329">"Geluid afspelen bij schermselectie"</string>
     <string name="sound_effects_enable_summary_off" msgid="3447739581759560125">"Geluid afspelen bij schermselectie"</string>
+    <string name="haptic_feedback_enable_title" msgid="6311736559245411290">"Haptische feedback"</string>
+    <string name="haptic_feedback_enable_summary_on" msgid="1875779656524793053">"Trillen bij indrukken van functietoetsen en bij bepaalde UI-interactie"</string>
+    <string name="haptic_feedback_enable_summary_off" msgid="7287885436963105314">"Trillen bij indrukken van functietoetsen en bij bepaalde UI-interactie"</string>
     <string name="play_media_notification_sounds_enable_title" msgid="1008791464029179529">"SD-kaartmeldingen"</string>
     <string name="play_media_notification_sounds_enable_summary_on" msgid="7675466959375667370">"Geluid afspelen voor SD-kaartmeldingen"</string>
     <string name="play_media_notification_sounds_enable_summary_off" msgid="8672617597028744693">"Geluid afspelen voor SD-kaartmeldingen"</string>
-    <string name="sync_settings" msgid="2212736205476453234">"Gegevenssynchronisatie"</string>
-    <string name="sync_settings_summary" msgid="6480534906375217074">"Selecteren welke toepassingen worden gesynchroniseerd"</string>
+    <string name="sync_settings" msgid="9186125469300013491">"Accounts en synchronisatie"</string>
+    <string name="sync_settings_summary" msgid="2962179505214965667">"Accounts toevoegen of verwijderen en accountinstellingen wijzigen"</string>
     <string name="search_settings" msgid="1910951467596035063">"Zoeken"</string>
     <string name="search_settings_summary" msgid="9205656546570654169">"Instellingen voor zoeken en zoekgeschiedenis beheren"</string>
     <string name="display_settings" msgid="3912042046350078328">"Instellingen weergeven"</string>
@@ -403,6 +430,7 @@
     <string name="brightness_summary" msgid="838917350127550703">"Helderheid van het scherm aanpassen"</string>
     <string name="screen_timeout" msgid="4882669461447531301">"Time-out scherm"</string>
     <string name="screen_timeout_summary" msgid="2905757633140605334">"De vertraging voor het automatisch uitschakelen van het scherm aanpassen"</string>
+    <string name="automatic_brightness" msgid="5014143533884135461">"Automatische helderheid"</string>
     <string name="sim_lock_settings" msgid="3392331196873564292">"Instellingen SIM-kaartvergrendeling"</string>
     <string name="sim_lock_settings_category" msgid="5136244267576697004">"SIM-kaartvergrendeling instellen"</string>
     <string name="sim_lock_settings_title" msgid="9018585580955414596">"SIM-kaartvergrendeling"</string>
@@ -436,7 +464,8 @@
     <string name="device_status_activity_title" msgid="1411201799384697904">"Status"</string>
     <string name="device_status" msgid="607405385799807324">"Status"</string>
     <string name="device_status_summary" msgid="2599162787451519618">"Telefoonnummer, signaal, enzovoort"</string>
-    <string name="storage_settings_title" msgid="8461515684514801302">"SD-kaart en telefoongeheugen"</string>
+    <string name="storage_settings" msgid="6681164315506788024">"SD-kaart en telefoongeheugen"</string>
+    <string name="storage_settings_title" msgid="5379463509034022773">"Instellingen voor SD-kaart en telefoongeheugen"</string>
     <string name="storage_settings_summary" msgid="9176693537325988610">"SD-kaart ontkoppelen, beschikbare opslagruimte weergeven"</string>
     <string name="status_number" msgid="5123197324870153205">"Mijn telefoonnummer"</string>
     <string name="status_min_number" msgid="3519504522179420597">"MIN"</string>
@@ -480,6 +509,16 @@
     <string name="apn_mms_port" msgid="4074188088199243040">"MMS-poort"</string>
     <string name="apn_mcc" msgid="4258628382260674636">"MCC"</string>
     <string name="apn_mnc" msgid="8629374076888809874">"MNC"</string>
+    <!-- no translation found for apn_auth_type (6167205395676037015) -->
+    <skip />
+    <!-- no translation found for apn_auth_type_none (5069592676845549926) -->
+    <skip />
+    <!-- no translation found for apn_auth_type_pap (1666934536996033383) -->
+    <skip />
+    <!-- no translation found for apn_auth_type_chap (3369626283789068360) -->
+    <skip />
+    <!-- no translation found for apn_auth_type_pap_chap (9102343063036134541) -->
+    <skip />
     <string name="apn_type" msgid="469613123902220544">"APN-type"</string>
     <string name="menu_delete" msgid="6981294422841124659">"APN verwijderen"</string>
     <string name="menu_new" msgid="3014205883303921729">"Nieuwe APN"</string>
@@ -518,12 +557,15 @@
     <string name="location_network_based" msgid="8815705866861993344">"Draadloze netwerken gebruiken"</string>
     <string name="location_networks_disabled" msgid="2708968452901433980">"Locatie in toepassingen (zoals Maps) bekijken via draadloze netwerken"</string>
     <string name="location_neighborhood_level" msgid="4656658097932515921">"Locatie bepaald door Wi-Fi en/of mobiele netwerken"</string>
-    <string name="location_gps" msgid="375912731641377120">"GPS-satellieten inschakelen"</string>
-    <string name="location_street_level" msgid="5899941752252356344">"Locatie tot op straatniveau (uit om acculading te sparen)"</string>
+    <string name="location_gps" msgid="6296125378829097831">"GPS-satellieten gebruiken"</string>
+    <string name="location_street_level" msgid="6460740847018275745">"Locatie tot op straatniveau (uitschakelen om acculading te sparen)"</string>
     <string name="location_gps_disabled" msgid="6632537158777308128">"Locatie bepalen tot op straatniveau (meer stroom nodig en luchtweergave)"</string>
-    <string name="use_location_title" msgid="7585990952633568732">"Delen met Google"</string>
-    <string name="use_location_summary" msgid="4411467143899877395">"Toestaan dat Google locatie gebruikt voor verbeterde zoekfunctie en andere services"</string>
-    <string name="use_location_warning_message" msgid="5696732842038416151">"Toestaan dat Google locatie gebruikt voor verbeterde zoekresultaten en andere services"</string>
+    <string name="assisted_gps" msgid="4649317129586736885">"Ondersteunde GPS gebruiken"</string>
+    <string name="assisted_gps_enabled" msgid="8751899609589792803">"Server gebruiken ter ondersteuning van GPS (uitschakelen om het netwerkgebruik te beperken)"</string>
+    <string name="assisted_gps_disabled" msgid="6982698333968010748">"Server gebruiken ter ondersteuning van GPS (uitschakelen om GPS-prestaties te verbeteren)"</string>
+    <string name="use_location_title" msgid="5447030582538504247">"\'Mijn locatie\' gebruiken"</string>
+    <string name="use_location_summary" msgid="1816849484040070431">"\'Mijn locatie\' gebruiken voor zoekresultaten en andere services van Google"</string>
+    <string name="use_location_warning_message" msgid="1420184860518262439">"Wilt u Google toestaan uw locatie te gebruiken voor verbeterde zoekresultaten en andere services?"</string>
     <string name="agree" msgid="6288718671527758326">"Akkoord"</string>
     <string name="disagree" msgid="6221069272309799230">"Niet akkoord"</string>
     <string name="about_settings" msgid="1743378368185371685">"Over de telefoon"</string>
@@ -538,6 +580,10 @@
     <string name="settings_license_activity_title" msgid="7553683406244228650">"Open-sourcelicenties"</string>
     <string name="settings_license_activity_unavailable" msgid="4210539215951487627">"Er is een probleem bij het laden van de licenties."</string>
     <string name="settings_license_activity_loading" msgid="3337535809093591740">"Laden..."</string>
+    <string name="settings_safetylegal_title" msgid="1289483965535937431">"Veiligheidsinformatie"</string>
+    <string name="settings_safetylegal_activity_title" msgid="6901214628496951727">"Veiligheidsinformatie"</string>
+    <string name="settings_safetylegal_activity_unreachable" msgid="3198912875259612887">"Uw telefoon heeft geen verbinding met een gegevensservice. Als u deze informatie nu wilt weergeven, gaat u op een computer met internetverbinding naar %s."</string>
+    <string name="settings_safetylegal_activity_loading" msgid="8059022597639516348">"Laden..."</string>
     <string name="lock_settings_title" msgid="5828348303971852121">"Ontgrendelingspatroon scherm"</string>
     <string name="lockpattern_change_lock_pattern_label" msgid="5679630792003440352">"Ontgrendelingspatroon wijzigen"</string>
     <string name="lockpattern_need_to_unlock" msgid="757935356911054465">"Opgeslagen patroon bevestigen"</string>
@@ -566,9 +612,9 @@
     <string name="skip_button_label" msgid="8680422740354436943">"Annuleren"</string>
     <string name="next_button_label" msgid="8890792540116568321">"Volgende"</string>
     <string name="lock_title" msgid="4059246467204273930">"Uw telefoon beveiligen"</string>
-    <string name="lock_intro_message" msgid="5352897389718432077"><font size="17">"Beveilig uw telefoon tegen ongeoorloofd gebruik door het instellen van een persoonlijk schermontgrendelingspatroon. "\n<font height="17">\n</font><b>"1"</b>" Op het volgende scherm ziet u hoe een voorbeeldpatroon wordt getekend. "\n<font height="17">\n</font><b>"2"</b>" Teken uw eigen persoonlijke ontgrendelingspatroon als het voorbeeld is voltooid. U kunt verschillende patronen uitproberen, maar u moet minimaal vier punten met elkaar verbinden. "\n<font height="17">\n</font><b>"3"</b>" Teken uw patroon nogmaals ter bevestiging. "\n<font height="17">\n</font><b>"Bent u er klaar voor? Selecteer \'Volgende\'"</b>". "\n<font height="3">\n</font>"Als u uw telefoon niet wilt beveiligen, selecteert u \'Annuleren\'."</font></string>
+    <string name="lock_intro_message" msgid="9100785646737118042"><font size="17">"Beveilig uw telefoon tegen ongeoorloofd gebruik door het instellen van een persoonlijk schermdeblokkeringspatroon. "\n<font height="17">\n</font><b>"1"</b>" Op het volgende scherm ziet u hoe een voorbeeldpatroon wordt getekend. "\n<font height="17">\n</font><b>"2"</b>" Teken uw eigen persoonlijke deblokkeringspatroon als het voorbeeld is voltooid. U kunt verschillende patronen uitproberen, maar u moet minimaal vier punten met elkaar verbinden. "\n<font height="17">\n</font><b>"3"</b>" Teken uw patroon nogmaals ter bevestiging. "\n<font height="17">\n</font><b>"Bent u er klaar voor? Selecteer \'Volgende\'"</b>". "\n<font height="3">\n</font>"Als u uw telefoon niet wilt beveiligen, selecteert u \'Annuleren\'."</font></string>
     <string name="lock_example_title" msgid="8052305554017485410">"Voorbeeldpatroon"</string>
-    <string name="lock_example_message" msgid="7431982730914254881">"Verbind minimaal vier punten. "\n" "\n"Selecteer \'Volgende\' als u klaar bent om uw eigen patroon te tekenen."</string>
+    <string name="lock_example_message" msgid="1838650097090632706">"Verbind minimaal vier punten. "\n" "\n"Selecteer \'Volgende\' als u klaar bent om uw eigen patroon te tekenen."</string>
     <string name="manageapplications_settings_title" msgid="5712405848153426706">"Toepassingen beheren"</string>
     <string name="manageapplications_settings_summary" msgid="6097117021500651232">"Geïnstalleerde toepassingen beheren en verwijderen"</string>
     <string name="applications_settings" msgid="3736173521008476946">"Toepassingen"</string>
@@ -602,12 +648,12 @@
     <string name="filter" msgid="2018011724373033887">"Filter"</string>
     <string name="filter_dlg_title" msgid="6507663329723966854">"Filteropties selecteren"</string>
     <string name="filter_apps_all" msgid="5142129378749391876">"Alles"</string>
-    <string name="filter_apps_third_party" msgid="1096017647285183437">"Derden"</string>
+    <string name="filter_apps_third_party" msgid="7786348047690140979">"Gedownload"</string>
     <string name="filter_apps_running" msgid="7767071454371350486">"Wordt uitgevoerd"</string>
     <string name="loading" msgid="3200408047793887917">"Laden..."</string>
     <string name="recompute_size" msgid="7722567982831691718">"Grootte opnieuw berekenen..."</string>
     <string name="clear_data_dlg_title" msgid="4470209520936375508">"Verwijderen"</string>
-    <string name="clear_data_dlg_text" msgid="8796694785488630642">"Alle informatie die u in deze toepassing heeft opgeslagen, wordt definitief verwijderd."</string>
+    <string name="clear_data_dlg_text" msgid="8368035073300828451">"Alle gegevens van deze toepassing worden permanent verwijderd. Dit omvat alle bestanden, instellingen, accounts, databases, enzovoort."</string>
     <string name="dlg_ok" msgid="2402639055725653590">"OK"</string>
     <string name="dlg_cancel" msgid="1674753358972975911">"Annuleren"</string>
     <string name="app_not_found_dlg_title" msgid="8458335716378083713">"Toepassing niet gevonden"</string>
@@ -620,9 +666,25 @@
     <string name="security_settings_desc" msgid="3116027624526915561">"Deze toepassing heeft toegang tot de volgende opties van uw telefoon:"</string>
     <string name="computing_size" msgid="1599186977475211186">"Berekenen…"</string>
     <string name="invalid_size_value" msgid="1901940003700269523">"Kan grootte van pakket niet berekenen"</string>
-    <string name="empty_list_msg" msgid="1883660401486953588">"U heeft geen toepassingen van derden geïnstalleerd."</string>
+    <string name="empty_list_msg" msgid="2901049162265094971">"U heeft geen toepassingen van derden geïnstalleerd."</string>
     <string name="version_text" msgid="9189073826278676425">"versie <xliff:g id="VERSION_NUM">%1$s</xliff:g>"</string>
-    <string name="language_settings" msgid="2939555761536357092">"Landinstelling en tekst"</string>
+    <string name="runningservices_settings_title" msgid="8097287939865165213">"Actieve services"</string>
+    <string name="runningservices_settings_summary" msgid="854608995821032748">"Services die momenteel actief zijn, weergeven en beheren"</string>
+    <string name="service_restarting" msgid="2242747937372354306">"Opnieuw starten"</string>
+    <string name="no_running_services" msgid="6981216347270280598">"Er zijn geen actieve services"</string>
+    <string name="confirm_stop_service" msgid="5700448757318301681">"Service stopzetten?"</string>
+    <string name="confirm_stop_service_msg" msgid="1202118456282395730">"De service wordt niet langer uitgevoerd totdat deze opnieuw wordt gestart. Dit heeft mogelijk nadelige gevolgen voor de toepassing <xliff:g id="APPLICATION">%1$s</xliff:g>."</string>
+    <string name="confirm_stop_stop" msgid="7382363913280993331">"Stoppen"</string>
+    <string name="confirm_stop_cancel" msgid="206495326622692381">"Annuleren"</string>
+    <string name="service_started_by_app" msgid="8432097226392386802">"Gestart door toepassing: aanraken om te stoppen"</string>
+    <string name="service_client_name" msgid="2337664610975074717">"<xliff:g id="CLIENT_NAME">%1$s</xliff:g>: aanraken om te beheren"</string>
+    <!-- no translation found for service_background_processes (5158600475629177758) -->
+    <skip />
+    <!-- no translation found for service_foreground_processes (4013890350284680796) -->
+    <skip />
+    <string name="service_process_name" msgid="8630408984456958400">"Proces: <xliff:g id="PROCESS">%1$s</xliff:g>"</string>
+    <string name="language_settings" msgid="502219872342167227">"Taal en toetsenbord"</string>
+    <string name="language_keyboard_settings_title" msgid="3455826933385341107">"Taal- en toetsenbordinstellingen"</string>
     <string name="language_settings_summary" msgid="595647729475399987">"Instellingen voor taal en regio, tekstinvoer en autocorrectieopties opgeven"</string>
     <string name="language_category" msgid="3391756582724541530">"Landinstelling"</string>
     <string name="text_category" msgid="6342540511465136739">"Tekstinstellingen"</string>
@@ -637,7 +699,7 @@
     <string name="auto_punctuate_summary" msgid="4372126865670574837">"Druk twee keer op de spatiebalk om een punt (.) in te voegen"</string>
     <string name="show_password" msgid="2198798062604049206">"Zichtbare wachtwoorden"</string>
     <string name="show_password_summary" msgid="3806709974395178121">"Wachtwoord weergeven tijdens het typen"</string>
-    <string name="ime_security_warning" msgid="3458652708716006477">"Deze invoermethode verzamelt mogelijk alle tekst die u typt, inclusief persoonlijke gegevens zoals wachtwoorden en creditcardnummers. De methode is afkomstig uit de toepassing <xliff:g id="IME_APPLICATION_NAME">%1$s</xliff:g>. Deze invoermethode inschakelen?"</string>
+    <string name="ime_security_warning" msgid="812267421486877917">"Deze invoermethode verzamelt mogelijk alle tekst die u typt, inclusief persoonlijke gegevens zoals wachtwoorden en creditcardnummers. De methode is afkomstig uit de toepassing <xliff:g id="IME_APPLICATION_NAME">%1$s</xliff:g>. Deze invoermethode inschakelen?"</string>
     <string name="user_dict_settings_titlebar" msgid="765659257455000490">"Gebruikerswoordenboek"</string>
     <string name="user_dict_settings_title" msgid="8357027437499042191">"Gebruikerswoordenboek"</string>
     <string name="user_dict_settings_summary" msgid="2460427065601355471">"Woorden toevoegen en verwijderen"</string>
@@ -665,7 +727,7 @@
     <string name="input_methods_settings_title" msgid="6800066636850553887">"Tekstinvoer"</string>
     <string name="input_methods_settings_summary" msgid="7571173442946675205">"Opties voor tekstinvoer beheren"</string>
     <string name="input_methods_settings_label_format" msgid="6002887604815693322">"Instellingen voor <xliff:g id="IME_NAME">%1$s</xliff:g>"</string>
-    <string name="onscreen_keyboard_settings_summary" msgid="4919680715154885028">"Instellingen voor schermtoetsenbord"</string>
+    <string name="onscreen_keyboard_settings_summary" msgid="5841558383556238653">"Instellingen voor schermtoetsenbord"</string>
     <string name="builtin_keyboard_settings_title" msgid="8169889453770863227">"Apparaattoetsenbord"</string>
     <string name="builtin_keyboard_settings_summary" msgid="6404687907454621637">"Instellingen voor ingebouwd toetsenbord"</string>
     <string name="development_settings_title" msgid="6719732334835420989">"Ontwikkeling"</string>
@@ -676,11 +738,11 @@
     <string name="keep_screen_on_summary" msgid="2173114350754293009">"Scherm gaat nooit uit tijdens het opladen"</string>
     <string name="allow_mock_location" msgid="2787962564578664888">"Neplocaties toestaan"</string>
     <string name="allow_mock_location_summary" msgid="317615105156345626">"Neplocaties toestaan"</string>
-    <string name="adb_warning_title" msgid="1756027479229533250">"USB-foutopsporing inschakelen?"</string>
+    <string name="adb_warning_title" msgid="6234463310896563253">"USB-foutopsporing toestaan?"</string>
     <string name="adb_warning_message" msgid="5352555112049663033">"USB-foutopsporing is alleen bedoeld voor ontwikkelingsdoeleinden. Het kan worden gebruikt om gegevens te kopiëren tussen uw computer en uw apparaat, om toepassingen zonder melding op uw apparaat te installeren en om loggegevens te lezen."</string>
     <string name="gadget_picker_title" msgid="98374951396755811">"Gadget kiezen"</string>
     <string name="widget_picker_title" msgid="9130684134213467557">"Widget kiezen"</string>
-    <string name="battery_history_details_for" msgid="5189636461798594740">"Details voor UID %d"</string>
+    <string name="battery_history_details_for" msgid="5924639922153109669">"Details voor UID <xliff:g id="NUMBER">%d</xliff:g>"</string>
     <string name="battery_history_uid" msgid="1016606150528436298">"UID <xliff:g id="USER_ID">%1$d</xliff:g>"</string>
     <string name="battery_history_network_usage" msgid="8010852371665217020">"Netwerkgebruiksdetails voor <xliff:g id="APP_NAME">%1$s</xliff:g>:"</string>
     <string name="battery_history_bytes_received" msgid="980307569180518302">"Bytes ontvangen: <xliff:g id="BYTES">%1$d</xliff:g>"</string>
@@ -716,12 +778,13 @@
     <string name="app_name_label" msgid="2000949925256858308">"Toepassing"</string>
     <string name="launch_count_label" msgid="4019444833263957024">"Aantal"</string>
     <string name="usage_time_label" msgid="295954901452833058">"Gebruikstijd"</string>
-    <string name="accessibility_settings_title" msgid="4239640930601071058">"Toegankelijkheid"</string>
+    <string name="accessibility_settings" msgid="3975902491934816215">"Toegankelijkheid"</string>
+    <string name="accessibility_settings_title" msgid="2130492524656204459">"Instellingen voor toegankelijkheid"</string>
     <string name="accessibility_settings_summary" msgid="8185181964847149507">"Toegankelijkheidsopties beheren"</string>
     <string name="toggle_accessibility_title" msgid="650839277066574497">"Toegankelijkheid"</string>
     <string name="accessibility_services_category" msgid="8127851026323672607">"Toegankelijkheidsservices"</string>
     <string name="no_accessibility_services_summary" msgid="694578333333808159">"Geen geïnstalleerde toegankelijkheidsservices."</string>
-    <string name="accessibility_service_security_warning" msgid="8386156287296967181">"Deze toegankelijkheidsservice verzamelt mogelijk alle tekst die u typt, inclusief persoonlijke gegevens en creditcardnummers, maar geen wachtwoorden. De service kan ook uw interacties met de gebruikersinterface vastleggen. De service is afkomstig uit de toepassing <xliff:g id="ACCESSIBILITY_SERVICE_NAME">%1$s</xliff:g>. Deze toegankelijkheidsservice inschakelen?"</string>
+    <string name="accessibility_service_security_warning" msgid="4066258132331302670">"Deze toegankelijkheidsservice verzamelt mogelijk alle tekst die u typt, inclusief persoonlijke gegevens en creditcardnummers, maar geen wachtwoorden. De service kan ook uw interacties met de gebruikersinterface vastleggen. De service is afkomstig uit de toepassing <xliff:g id="ACCESSIBILITY_SERVICE_NAME">%1$s</xliff:g>. Deze toegankelijkheidsservice inschakelen?"</string>
     <string name="accessibility_service_disable_warning" msgid="8930591383312775132">"Toegankelijkheid uitschakelen?"</string>
     <string name="power_usage_summary_title" msgid="5180282911164282324">"Accugebruik"</string>
     <string name="power_usage_summary" msgid="7237084831082848168">"Waarvoor de accu is gebruikt"</string>
@@ -733,7 +796,7 @@
     <string name="awake" msgid="387122265874485088">"Stand-bytijd apparaat"</string>
     <string name="wifi_on_time" msgid="4630925382578609056">"Tijd Wi-Fi aan"</string>
     <string name="bluetooth_on_time" msgid="4478515071957280711">"Tijd Wi-Fi aan"</string>
-    <string name="usage_name_percent" msgid="1899151069711662289">"<xliff:g id="NAME">%1$s</xliff:g> - <xliff:g id="PERCENT">%2$s</xliff:g>%%"</string>
+    <string name="usage_name_percent" msgid="7976919382448235858">"<xliff:g id="NAME">%1$s</xliff:g> - <xliff:g id="NUMBER">%2$s</xliff:g><xliff:g id="PERCENT">%%</xliff:g>"</string>
     <string name="details_title" msgid="7564809986329021063">"Details over accugebruik"</string>
     <string name="details_subtitle" msgid="32593908269911734">"Gebruiksdetails"</string>
     <string name="controls_subtitle" msgid="390468421138288702">"Energieverbruik aanpassen"</string>
@@ -769,7 +832,7 @@
     <string name="battery_desc_wifi" msgid="1702486494565080431">"Accu gebruikt door Wi-Fi"</string>
     <string name="battery_sugg_wifi" msgid="7542345142282261691">"Schakel Wi-Fi uit wanneer u dit niet gebruikt of waar dit niet beschikbaar is"</string>
     <string name="battery_desc_bluetooth" msgid="7535520658674621902">"Accu gebruikt door Bluetooth"</string>
-    <string name="battery_sugg_bluetooth_basic" msgid="144393178427277439">"Schakel Bluetooth uit wanneer u dit niet gebruikt"</string>
+    <string name="battery_sugg_bluetooth_basic" msgid="817276933922157788">"Schakel Bluetooth uit wanneer u deze functie niet gebruikt"</string>
     <string name="battery_sugg_bluetooth_headset" msgid="8214816222115517479">"Probeer verbinding te maken met een ander Bluetooth-apparaat"</string>
     <string name="battery_desc_apps" msgid="8123202939321333639">"Accu gebruikt door actieve toepassingen"</string>
     <string name="battery_sugg_apps_info" msgid="6065882899391322442">"De toepassing stoppen of verwijderen"</string>
@@ -781,9 +844,9 @@
     <string name="menu_stats_refresh" msgid="1676215433344981075">"Vernieuwen"</string>
     <string name="process_kernel_label" msgid="3916858646836739323">"Android-besturingssysteem"</string>
     <string name="process_mediaserver_label" msgid="6500382062945689285">"Mediaserver"</string>
-    <string name="tts_settings" msgid="6454363854545277027">"Spraaksynthese"</string>
+    <string name="tts_settings" msgid="3348626948015962987">"Tekst-naar-spraak"</string>
     <string name="tts_settings_summary" msgid="2627715231944602766">"Opties voor tekst-naar-spraak instellen"</string>
-    <string name="tts_settings_title" msgid="5064947197040356736">"Bedieningselementen voor spraaksynthesizer"</string>
+    <string name="tts_settings_title" msgid="4182348653053000933">"Instellingen voor tekst-naar-spraak"</string>
     <string name="use_default_tts_settings_title" msgid="1577063839539732930">"Altijd mijn instellingen gebruiken"</string>
     <string name="use_default_tts_settings_summary" msgid="4253502106159206276">"Onderstaande standaardinstellingen overschrijven toepassingsinstellingen"</string>
     <string name="tts_default_settings_section" msgid="5787915620218907443">"Standaardinstellingen"</string>
@@ -801,8 +864,11 @@
     <string name="tts_demo" msgid="405357591189935876">"Dit is een voorbeeld van spraaksynthese."</string>
     <string name="tts_settings_changed_demo" msgid="4926518555912328645">"Uw instellingen zijn gewijzigd. Dit is een voorbeeld van hoe ze klinken."</string>
     <string name="gadget_title" msgid="7455548605888590466">"Energiebeheer"</string>
+    <string name="gadget_toggle_wifi" msgid="2382963973155082629">"Wi-Fi-instelling bijwerken"</string>
+    <string name="gadget_toggle_bluetooth" msgid="7538903239807020826">"Bluetooth-instelling bijwerken"</string>
+    <string name="credential_installer_activity_title" msgid="7600661521831762521">"Installatieprogramma voor referenties"</string>
     <string name="vpn_settings_activity_title" msgid="7276864950701612579">"VPN-instellingen"</string>
-    <string name="vpn_connect_to" msgid="9040615733700098831">"Verbinden met %s"</string>
+    <string name="vpn_connect_to" msgid="2541409082892684362">"Verbinding maken met <xliff:g id="NAME">%s</xliff:g>"</string>
     <string name="vpn_username_colon" msgid="7854930370861306247">"Gebruikersnaam:"</string>
     <string name="vpn_password_colon" msgid="5716278710848606626">"Wachtwoord:"</string>
     <string name="vpn_a_username" msgid="6664733641993968692">"een gebruikersnaam"</string>
@@ -820,9 +886,9 @@
     <string name="vpn_menu_disconnect" msgid="8254492450022562235">"Verbinding met netwerk verbreken"</string>
     <string name="vpn_menu_edit" msgid="4526245173583195618">"Netwerk bewerken"</string>
     <string name="vpn_menu_delete" msgid="3326527392609513129">"Netwerk verwijderen"</string>
-    <string name="vpn_error_miss_entering" msgid="1467455143582547499">"U moet \'%s\' invoeren."</string>
-    <string name="vpn_error_miss_selecting" msgid="953436717902387192">"U moet \'%s\' selecteren."</string>
-    <string name="vpn_error_duplicate_name" msgid="2786397299628471911">"De VPN-naam \'%s\' bestaat al. Geef een andere naam op."</string>
+    <string name="vpn_error_miss_entering" msgid="5377667978602483250">"U moet \'<xliff:g id="CODE">%s</xliff:g>\' invoeren."</string>
+    <string name="vpn_error_miss_selecting" msgid="4890780825580511345">"U moet \'<xliff:g id="OPTION">%s</xliff:g>\' selecteren."</string>
+    <string name="vpn_error_duplicate_name" msgid="2693927537390963745">"De VPN-naam \'<xliff:g id="NAME">%s</xliff:g>\' bestaat al. Geef een andere naam op."</string>
     <string name="vpn_confirm_profile_deletion" msgid="8679536635364177239">"Weet u zeker dat u dit VPN wilt verwijderen?"</string>
     <string name="vpn_confirm_add_profile_cancellation" msgid="3377869170901609182">"Weet u zeker dat u dit profiel niet wilt maken?"</string>
     <string name="vpn_confirm_edit_profile_cancellation" msgid="7496760181072204494">"Weet u zeker dat u de wijzigingen in dit profiel wilt annuleren?"</string>
@@ -833,10 +899,12 @@
     <string name="vpn_secret_not_set_dialog_msg" msgid="8013052814131532765">"Een of meer geheimen ontbreken in deze VPN-configuratie. Wilt u uw geheime instelling controleren?"</string>
     <string name="vpn_auth_error_dialog_msg" msgid="5476820106624807614">"De door u ingevoerde gebruikersnaam of het door u ingevoerde wachtwoord is onjuist. Wilt u het opnieuw proberen?"</string>
     <string name="vpn_remote_hung_up_error_dialog_msg" msgid="1566946015052633150">"Serververbinding verbroken. De gebruikersnaam of het wachtwoord dat u heeft ingevoerd, is onjuist. Wilt u het opnieuw proberen?"</string>
+    <string name="vpn_remote_ppp_hung_up_error_dialog_msg" msgid="5135958511128503344">"De server is vastgelopen. Wellicht bevindt u zich achter een firewall die een verbinding met de server blokkeert. Wilt u het opnieuw proberen?"</string>
+    <string name="vpn_ppp_negotiation_failed_dialog_msg" msgid="4611293656718340994">"Het contact met de server is mislukt. De server gaat wellicht niet akkoord met uw optie voor codering. Wilt u de instelling voor de codering controleren?"</string>
     <string name="vpn_type_title" msgid="6392933604218676224">"VPN toevoegen"</string>
     <string name="vpn_add_new_vpn" msgid="5438260689052714550">"VPN toevoegen"</string>
-    <string name="vpn_edit_title_add" msgid="2550661826320709266">"VPN \'%s\' toevoegen"</string>
-    <string name="vpn_edit_title_edit" msgid="1769999313158207723">"Details voor %"</string>
+    <string name="vpn_edit_title_add" msgid="2121313217989682890">"VPN \'<xliff:g id="NAME">%s</xliff:g>\' toevoegen"</string>
+    <string name="vpn_edit_title_edit" msgid="2457278794066617935">"Details voor <xliff:g id="NAME">%s</xliff:g>"</string>
     <string name="vpns" msgid="3148141862835492816">"VPN\'s"</string>
     <string name="vpn_connecting" msgid="8039521381692090116">"Verbinding maken..."</string>
     <string name="vpn_disconnecting" msgid="7748050200708257066">"Verbinding verbreken..."</string>
@@ -844,8 +912,8 @@
     <string name="vpn_connect_hint" msgid="7442898962925875181">"Verbinding maken met netwerk"</string>
     <string name="vpn_name" msgid="1550918148476193076">"VPN-naam"</string>
     <string name="vpn_a_name" msgid="8445736942405283509">"een VPN-naam"</string>
-    <string name="vpn_profile_added" msgid="2157095890825215726">"%s is toegevoegd"</string>
-    <string name="vpn_profile_replaced" msgid="384234123486734768">"Er zijn wijzigingen aangebracht in %s"</string>
+    <string name="vpn_profile_added" msgid="9061017910337129840">"\'<xliff:g id="NAME">%s</xliff:g>\' is toegevoegd"</string>
+    <string name="vpn_profile_replaced" msgid="587435576816273815">"Er zijn wijzigingen aangebracht in \'<xliff:g id="NAME">%s</xliff:g>\'"</string>
     <string name="vpn_user_certificate_title" msgid="6812545893924071742">"Gebruikerscertificaat instellen"</string>
     <string name="vpn_user_certificate" msgid="949322691686938888">"Gebruikerscertificaat"</string>
     <string name="vpn_a_user_certificate" msgid="8943983437956898649">"een gebruikerscertificaat"</string>
@@ -866,53 +934,79 @@
     <string name="vpn_vpn_server_dialog_title" msgid="7850850940160521918">"Naam VPN-server"</string>
     <string name="vpn_dns_search_list_title" msgid="1022776976104584251">"DNS-zoekdomeinen"</string>
     <string name="vpn_dns_search_list" msgid="4230034234026605360">"DNS-zoekdomeinen"</string>
-    <string name="vpn_field_is_set" msgid="1880980734721258127">"%s is ingesteld"</string>
-    <string name="vpn_field_not_set" msgid="6827205815004809490">"%s niet ingesteld"</string>
-    <string name="vpn_field_not_set_optional" msgid="8665901697706781015">"%s niet ingesteld (optioneel)"</string>
-    <string name="vpn_enable_field" msgid="3348948489989523325">"%s inschakelen"</string>
-    <string name="vpn_disable_field" msgid="2286966253789266389">"%s uitschakelen"</string>
-    <string name="vpn_is_enabled" msgid="5128973727115662815">"%s is ingeschakeld"</string>
-    <string name="vpn_is_disabled" msgid="8028085699769751756">"%s is uitgeschakeld"</string>
+    <string name="vpn_field_is_set" msgid="7137320847812992243">"<xliff:g id="VALUE">%s</xliff:g> is ingesteld"</string>
+    <string name="vpn_field_not_set" msgid="2972519243515893804">"<xliff:g id="VALUE">%s</xliff:g> is niet ingesteld"</string>
+    <string name="vpn_field_not_set_optional" msgid="8840557698252556791">"<xliff:g id="VALUE">%s</xliff:g> is niet ingesteld (optioneel)"</string>
+    <string name="vpn_enable_field" msgid="3700967675854517191">"<xliff:g id="OPTION">%s</xliff:g> inschakelen"</string>
+    <string name="vpn_disable_field" msgid="6905658811179634005">"\'<xliff:g id="OPTION">%s</xliff:g>\' uitschakelen"</string>
+    <string name="vpn_is_enabled" msgid="1266304230417098877">"\'<xliff:g id="OPTION">%s</xliff:g>\' is ingeschakeld"</string>
+    <string name="vpn_is_disabled" msgid="2013622485867806167">"\'<xliff:g id="OPTION">%s</xliff:g>\' is uitgeschakeld"</string>
     <string name="vpn_settings_title" msgid="7327468307909556719">"VPN-instellingen"</string>
     <string name="vpn_settings_summary" msgid="8849924181594963972">"VPN\'s (Virtual Private Networks) instellen en beheren"</string>
     <string name="vpn_secret_unchanged" msgid="8700613973594154529">"(ongewijzigd)"</string>
     <string name="vpn_secret_not_set" msgid="1037792636371641845">"(niet ingesteld)"</string>
-    <string name="cstor_settings_category" msgid="2284299080682591107">"Opslag van referenties"</string>
-    <string name="cstor_access_title" msgid="1739505390736236717">"Beveiligingsreferenties gebruiken"</string>
-    <string name="cstor_access_summary" msgid="4512681868217546677">"Toepassingen mogen veilige certificaten en andere referenties openen"</string>
-    <string name="cstor_access_dialog_title" msgid="3024256293191879190">"Voer het wachtwoord in"</string>
-    <string name="cstor_access_dialog_hint_from_action" msgid="679746865623760961">"Geef het wachtwoord voor de opslag van referenties op."</string>
-    <string name="cstor_set_passwd_title" msgid="6156763762703061470">"Wachtwoord instellen"</string>
-    <string name="cstor_set_passwd_summary" msgid="5248560429856597398">"Het wachtwoord voor de opslag van referenties instellen"</string>
-    <string name="cstor_set_passwd_dialog_title" msgid="4071157542842979977">"Wachtwoord instellen"</string>
-    <string name="cstor_reset_title" msgid="6001600882136794382">"Opslag wissen"</string>
-    <string name="cstor_reset_summary" msgid="7509525030771504833">"Referentieopslag voor inhoud wissen en wachtwoord opnieuw instellen"</string>
-    <string name="cstor_reset_hint" msgid="5331632794451859788">"Weet u zeker dat u alle referenties wilt verwijderen en het wachtwoord voor de opslag van referenties opnieuw wilt instellen?"</string>
-    <string name="cstor_name_credential_dialog_title" msgid="1723509156126180662">"De naam voor het certificaat opgeven"</string>
-    <string name="cstor_credential_name" msgid="2958936431813760259">"Certificaatnaam:"</string>
-    <string name="cstor_credential_password" msgid="7187440553141199409">"Wachtwoord om het certificaat uit te pakken:"</string>
-    <string name="cstor_credential_info" msgid="6097346149400207440">"Certificaatgegevens:"</string>
-    <string name="cstor_name_credential_hint" msgid="6889198058976515785">"De naam mag alleen letters en cijfers bevatten."</string>
-    <string name="cstor_old_password" msgid="979282118063084561">"Huidig wachtwoord:"</string>
-    <string name="cstor_new_password" msgid="6218562692435670047">"Nieuw wachtwoord:"</string>
-    <string name="cstor_confirm_password" msgid="8996028123356342466">"Nieuw wachtwoord bevestigen:"</string>
-    <string name="cstor_first_time_hint" msgid="1831593416099224962">"Stel een wachtwoord in voor de opslag van referenties."</string>
-    <string name="cstor_first_time_hint_from_action" msgid="4690937025845780557">"Stel een wachtwoord in voor de opslag van referenties."</string>
-    <string name="cstor_password_error" msgid="2917326097260402464">"Voer het juiste wachtwoord in."</string>
-    <string name="cstor_password_error_reset_warning" msgid="3336370539045905953">"Voer het juiste wachtwoord in. U kunt nog één keer proberen het juiste wachtwoord in te voeren voordat de opgeslagen referenties worden verwijderd."</string>
-    <string name="cstor_password_error_reset_warning_plural" msgid="6209069679269017200">"Voer het juiste wachtwoord in. U kunt nog %d keer proberen om het juiste wachtwoord in te voeren voordat de opgeslagen referenties worden verwijderd."</string>
-    <string name="cstor_passwords_error" msgid="956773958408751155">"De wachtwoorden komen niet overeen."</string>
-    <string name="cstor_passwords_empty_error" msgid="6062539742626760734">"U moet een wachtwoord invoeren en bevestigen."</string>
-    <string name="cstor_password_empty_error" msgid="7249632576906961482">"Voer het wachtwoord in."</string>
-    <string name="cstor_password_verification_error" msgid="8553930704493511389">"Voer het wachtwoord opnieuw in. Het wachtwoord moet ten minste 8 tekens bevatten en mag geen spaties bevatten."</string>
-    <string name="cstor_name_empty_error" msgid="7499971191993770322">"Voer een naam in."</string>
-    <string name="cstor_name_char_error" msgid="8048089317968192516">"Voer een naam in die alleen uit letters en cijfers bestaat."</string>
-    <string name="cstor_storage_error" msgid="7140697503172458161">"Kan het certificaat niet opslaan. Klik op \'OK\' om het opnieuw te proberen."</string>
-    <string name="cstor_unable_to_save_cert" msgid="1631402544447196406">"Kan het certificaat niet opslaan. De opslag van referenties is niet ingeschakeld of niet correct geïnitialiseerd."</string>
-    <string name="cstor_cert_not_saved" msgid="6318149789449538491">"Het certificaat is niet opgeslagen."</string>
-    <string name="cstor_is_reset" msgid="449870501126790589">"De opslag van referenties is gewist."</string>
-    <string name="cstor_is_enabled" msgid="4054049098081482785">"De opslag van referenties is ingeschakeld."</string>
-    <string name="cstor_is_added" msgid="794788474010251572">"%s is toegevoegd."</string>
+    <!-- no translation found for credentials_category (8536992056377271234) -->
+    <skip />
+    <!-- no translation found for credentials_access (4843187230913860492) -->
+    <skip />
+    <!-- no translation found for credentials_access_summary (319662078718574168) -->
+    <skip />
+    <!-- no translation found for credentials_unlock (1463040326264133844) -->
+    <skip />
+    <!-- no translation found for credentials_unlock_hint (594679530407918031) -->
+    <skip />
+    <!-- no translation found for credentials_install_certificates (177337517568022236) -->
+    <skip />
+    <!-- no translation found for credentials_install_certificates_summary (7737001268684193093) -->
+    <skip />
+    <!-- no translation found for credentials_set_password (9104473585811899989) -->
+    <skip />
+    <!-- no translation found for credentials_set_password_summary (8287876917562085701) -->
+    <skip />
+    <!-- no translation found for credentials_reset (9170150870552453457) -->
+    <skip />
+    <!-- no translation found for credentials_reset_summary (1530388094693731636) -->
+    <skip />
+    <!-- no translation found for credentials_reset_hint (819990295796804516) -->
+    <skip />
+    <!-- no translation found for credentials_old_password (7553393815538684028) -->
+    <skip />
+    <!-- no translation found for credentials_new_password (267487774686796938) -->
+    <skip />
+    <!-- no translation found for credentials_confirm_password (4732250000633424345) -->
+    <skip />
+    <!-- no translation found for credentials_first_time_hint (1567821077545346039) -->
+    <skip />
+    <!-- no translation found for credentials_wrong_password (7525192410790152041) -->
+    <skip />
+    <!-- no translation found for credentials_reset_warning (6392481296673345268) -->
+    <skip />
+    <!-- no translation found for credentials_reset_warning_plural (454828369803055270) -->
+    <skip />
+    <!-- no translation found for credentials_passwords_mismatch (5288565139590031733) -->
+    <skip />
+    <!-- no translation found for credentials_passwords_empty (8647631321684363549) -->
+    <skip />
+    <!-- no translation found for credentials_password_empty (8292138152983330473) -->
+    <skip />
+    <!-- no translation found for credentials_password_too_short (7502749986405522663) -->
+    <skip />
+    <!-- no translation found for credentials_erased (7700309135582200849) -->
+    <skip />
+    <!-- no translation found for credentials_enabled (7588607413349978930) -->
+    <skip />
+    <!-- no translation found for credentials_disabled (7453188089059045380) -->
+    <skip />
     <string name="emergency_tone_title" msgid="1055954530111587114">"Toon voor noodoproep"</string>
     <string name="emergency_tone_summary" msgid="722259232924572153">"Gedrag bij noodoproepen instellen"</string>
+    <string name="privacy_settings" msgid="9206631214140954954">"Privacy"</string>
+    <string name="privacy_settings_title" msgid="1987089301293213705">"Privacyinstellingen"</string>
+    <string name="location_section_title" msgid="6072558684044939786">"Locatie"</string>
+    <string name="settings_section_title" msgid="7413252428447723032">"Instellingen"</string>
+    <string name="personal_data_section_title" msgid="7815209034443782061">"Persoonlijke gegevens"</string>
+    <string name="backup_settings_title" msgid="2968262658155327829">"Back-up maken van mijn instellingen"</string>
+    <string name="backup_erase_dialog_title" msgid="6028429904055779443">"Back-up van instellingen"</string>
+    <string name="backup_erase_dialog_message" msgid="9096433810456900531">"Weet u zeker dat het maken van back-ups van uw instellingen wilt stoppen en alle kopieën op Google-servers wilt wissen?"</string>
+    <!-- no translation found for untitled_apn (1230060359198685513) -->
+    <skip />
 </resources>

@@ -174,12 +174,9 @@ class VpnProfileEditor {
                 : v);
     }
 
-    protected void setSecretTitle(
-            CheckBoxPreference pref, int fieldNameId, boolean enabled) {
+    protected void setCheckBoxTitle(CheckBoxPreference pref, int fieldNameId) {
         Context c = pref.getContext();
-        String formatString = enabled
-                ? c.getString(R.string.vpn_disable_field)
-                : c.getString(R.string.vpn_enable_field);
+        String formatString = c.getString(R.string.vpn_enable_field);
         pref.setTitle(String.format(formatString, c.getString(fieldNameId)));
     }
 

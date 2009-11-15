@@ -17,6 +17,7 @@
 package com.android.settings;
 
 import android.app.AlertDialog;
+import android.app.Dialog;
 import android.content.DialogInterface;
 import android.os.BatteryManager;
 import android.os.Bundle;
@@ -44,6 +45,8 @@ public class DevelopmentSettings extends PreferenceActivity
 
     // To track whether Yes was clicked in the adb warning dialog
     private boolean mOkClicked;
+
+    private Dialog mOkDialog;
 
     @Override
     protected void onCreate(Bundle icicle) {
@@ -80,14 +83,15 @@ public class DevelopmentSettings extends PreferenceActivity
         if (preference == mEnableAdb) {
             if (mEnableAdb.isChecked()) {
                 mOkClicked = false;
-                new AlertDialog.Builder(this).setMessage(
+                if (mOkDialog != null) dismissDialog();
+                mOkDialog = new AlertDialog.Builder(this).setMessage(
                         getResources().getString(R.string.adb_warning_message))
                         .setTitle(R.string.adb_warning_title)
                         .setIcon(android.R.drawable.ic_dialog_alert)
                         .setPositiveButton(android.R.string.yes, this)
                         .setNegativeButton(android.R.string.no, this)
-                        .show()
-                        .setOnDismissListener(this);
+                        .show();
+                mOkDialog.setOnDismissListener(this);
             } else {
                 Settings.Secure.putInt(getContentResolver(), Settings.Secure.ADB_ENABLED, 0);
             }
@@ -99,8 +103,14 @@ public class DevelopmentSettings extends PreferenceActivity
             Settings.Secure.putInt(getContentResolver(), Settings.Secure.ALLOW_MOCK_LOCATION,
                     mAllowMockLocation.isChecked() ? 1 : 0);
         }
-        
+
         return false;
+    }
+
+    private void dismissDialog() {
+        if (mOkDialog == null) return;
+        mOkDialog.dismiss();
+        mOkDialog = null;
     }
 
     public void onClick(DialogInterface dialog, int which) {
@@ -118,5 +128,11 @@ public class DevelopmentSettings extends PreferenceActivity
         if (!mOkClicked) {
             mEnableAdb.setChecked(false);
         }
+    }
+
+    @Override
+    public void onDestroy() {
+        dismissDialog();
+        super.onDestroy();
     }
 }

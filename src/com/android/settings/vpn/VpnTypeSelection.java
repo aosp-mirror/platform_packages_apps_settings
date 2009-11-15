@@ -60,7 +60,7 @@ public class VpnTypeSelection extends PreferenceActivity {
 
             Preference pref = new Preference(this);
             pref.setTitle(message);
-            pref.setSummary(t.getDescription());
+            pref.setSummary(t.getDescriptionId());
             root.addPreference(pref);
         }
     }

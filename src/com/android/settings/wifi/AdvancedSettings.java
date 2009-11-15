@@ -64,11 +64,19 @@ public class AdvancedSettings extends PreferenceActivity
         addPreferencesFromResource(R.xml.wifi_advanced_settings);
         
         mUseStaticIpCheckBox = (CheckBoxPreference) findPreference(KEY_USE_STATIC_IP);
+        mUseStaticIpCheckBox.setOnPreferenceChangeListener(this);
 
         for (int i = 0; i < mPreferenceKeys.length; i++) {
             Preference preference = findPreference(mPreferenceKeys[i]);
             preference.setOnPreferenceChangeListener(this);
         }
+
+        /*
+         * Fix the Run-time IllegalStateException that ListPreference requires an entries
+         * array and an entryValues array, this exception occurs when user open/close the
+         * slider in the Regulatory domain dialog.
+         */
+        initNumChannelsPreference();
     }
     
     @Override
@@ -141,7 +149,7 @@ public class AdvancedSettings extends PreferenceActivity
             try {
                 int numChannels = Integer.parseInt((String) newValue);
                 WifiManager wifiManager = (WifiManager) getSystemService(WIFI_SERVICE);
-                if (!wifiManager.setNumAllowedChannels(numChannels)) {
+                if (!wifiManager.setNumAllowedChannels(numChannels, true)) {
                     Toast.makeText(this, R.string.wifi_setting_num_channels_error,
                             Toast.LENGTH_SHORT).show();
                 }
@@ -160,7 +168,16 @@ public class AdvancedSettings extends PreferenceActivity
                         Toast.LENGTH_SHORT).show();
                 return false;
             }
-                
+
+        } else if (key.equals(KEY_USE_STATIC_IP)) {
+            boolean value = ((Boolean) newValue).booleanValue();
+
+            try {
+                Settings.System.putInt(getContentResolver(),
+                        Settings.System.WIFI_USE_STATIC_IP, value ? 1 : 0);
+            } catch (NumberFormatException e) {
+                return false;
+            }
         } else {
             String value = (String) newValue;
             
@@ -170,6 +187,12 @@ public class AdvancedSettings extends PreferenceActivity
             }
             
             preference.setSummary(value);
+            for (int i = 0; i < mSettingNames.length; i++) {
+                if (key.equals(mPreferenceKeys[i])) {
+                    Settings.System.putString(getContentResolver(), mSettingNames[i], value);
+                    break;
+                }
+            }
         }
         
         return true;

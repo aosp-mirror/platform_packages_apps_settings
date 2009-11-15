@@ -19,7 +19,7 @@ package com.android.settings.widget;
 import android.app.PendingIntent;
 import android.appwidget.AppWidgetManager;
 import android.appwidget.AppWidgetProvider;
-import android.bluetooth.BluetoothDevice;
+import android.bluetooth.BluetoothAdapter;
 import android.content.ComponentName;
 import android.content.ContentResolver;
 import android.content.Context;
@@ -30,12 +30,13 @@ import android.location.LocationManager;
 import android.net.ConnectivityManager;
 import android.net.Uri;
 import android.net.wifi.WifiManager;
-import android.os.IHardwareService;
+import android.os.IPowerManager;
 import android.os.RemoteException;
 import android.os.ServiceManager;
 import android.provider.Settings;
 import android.util.Log;
 import android.widget.RemoteViews;
+import android.widget.Toast;
 import com.android.settings.R;
 import com.android.settings.bluetooth.LocalBluetoothManager;
 
@@ -143,39 +144,51 @@ public class SettingsAppWidgetProvider extends AppWidgetProvider {
     private static void updateButtons(RemoteViews views, Context context) {
         switch (getWifiState(context)) {
             case STATE_DISABLED:
-                views.setImageViewResource(R.id.btn_wifi, R.drawable.widget_btn_wifi_off);
+                views.setImageViewResource(R.id.img_wifi, R.drawable.ic_appwidget_settings_wifi_off);
+                views.setImageViewResource(R.id.ind_wifi, R.drawable.appwidget_settings_ind_off_l);
                 break;
             case STATE_ENABLED:
-                views.setImageViewResource(R.id.btn_wifi, R.drawable.widget_btn_wifi);
+                views.setImageViewResource(R.id.img_wifi, R.drawable.ic_appwidget_settings_wifi_on);
+                views.setImageViewResource(R.id.ind_wifi, R.drawable.appwidget_settings_ind_on_l);
                 break;
             case STATE_INTERMEDIATE:
-                views.setImageViewResource(R.id.btn_wifi, R.drawable.widget_btn_wifi_gray);
+                views.setImageViewResource(R.id.img_wifi, R.drawable.ic_appwidget_settings_wifi_off);
+                views.setImageViewResource(R.id.ind_wifi, R.drawable.appwidget_settings_ind_mid_l);
                 break;
         }
         if (getBrightness(context)) {
-            views.setImageViewResource(R.id.btn_brightness, R.drawable.widget_btn_brightness);
+            views.setImageViewResource(R.id.img_brightness, R.drawable.ic_appwidget_settings_brightness_on);
+            views.setImageViewResource(R.id.ind_brightness, R.drawable.appwidget_settings_ind_on_r);
         } else {
-            views.setImageViewResource(R.id.btn_brightness, R.drawable.widget_btn_brightness_off);
+            views.setImageViewResource(R.id.img_brightness, R.drawable.ic_appwidget_settings_brightness_off);
+            views.setImageViewResource(R.id.ind_brightness, R.drawable.appwidget_settings_ind_off_r);
         }
-        if (getBackgroundDataState(context)) {
-            views.setImageViewResource(R.id.btn_sync, R.drawable.widget_btn_sync);
+        if (getSync(context)) {
+            views.setImageViewResource(R.id.img_sync, R.drawable.ic_appwidget_settings_sync_on);
+            views.setImageViewResource(R.id.ind_sync, R.drawable.appwidget_settings_ind_on_c);
         } else {
-            views.setImageViewResource(R.id.btn_sync, R.drawable.widget_btn_sync_off);
+            views.setImageViewResource(R.id.img_sync, R.drawable.ic_appwidget_settings_sync_off);
+            views.setImageViewResource(R.id.ind_sync, R.drawable.appwidget_settings_ind_off_c);
         }
         if (getGpsState(context)) {
-            views.setImageViewResource(R.id.btn_gps, R.drawable.widget_btn_gps);
+            views.setImageViewResource(R.id.img_gps, R.drawable.ic_appwidget_settings_gps_on);
+            views.setImageViewResource(R.id.ind_gps, R.drawable.appwidget_settings_ind_on_c);
         } else {
-            views.setImageViewResource(R.id.btn_gps, R.drawable.widget_btn_gps_off);
+            views.setImageViewResource(R.id.img_gps, R.drawable.ic_appwidget_settings_gps_off);
+            views.setImageViewResource(R.id.ind_gps, R.drawable.appwidget_settings_ind_off_c);
         }
         switch (getBluetoothState(context)) {
             case STATE_DISABLED:
-                views.setImageViewResource(R.id.btn_bluetooth, R.drawable.widget_btn_bluetooth_off);
+                views.setImageViewResource(R.id.img_bluetooth, R.drawable.ic_appwidget_settings_bluetooth_off);
+                views.setImageViewResource(R.id.ind_bluetooth, R.drawable.appwidget_settings_ind_off_c);
                 break;
             case STATE_ENABLED:
-                views.setImageViewResource(R.id.btn_bluetooth, R.drawable.widget_btn_bluetooth);
+                views.setImageViewResource(R.id.img_bluetooth, R.drawable.ic_appwidget_settings_bluetooth_on);
+                views.setImageViewResource(R.id.ind_bluetooth, R.drawable.appwidget_settings_ind_on_c);
                 break;
             case STATE_INTERMEDIATE:
-                views.setImageViewResource(R.id.btn_bluetooth, R.drawable.widget_btn_bluetooth_gray);
+                views.setImageViewResource(R.id.img_bluetooth, R.drawable.ic_appwidget_settings_bluetooth_off);
+                views.setImageViewResource(R.id.ind_bluetooth, R.drawable.appwidget_settings_ind_mid_c);
                 break;
         }
     }
@@ -187,7 +200,8 @@ public class SettingsAppWidgetProvider extends AppWidgetProvider {
      * @param appWidgetId
      * @return
      */
-    private static PendingIntent getLaunchPendingIntent(Context context, int appWidgetId, int buttonId) {
+    private static PendingIntent getLaunchPendingIntent(Context context, int appWidgetId,
+            int buttonId) {
         Intent launchIntent = new Intent();
         launchIntent.setClass(context, SettingsAppWidgetProvider.class);
         launchIntent.addCategory(Intent.CATEGORY_ALTERNATIVE);
@@ -214,7 +228,7 @@ public class SettingsAppWidgetProvider extends AppWidgetProvider {
             } else if (buttonId == BUTTON_BRIGHTNESS) {
                 toggleBrightness(context);
             } else if (buttonId == BUTTON_SYNC) {
-                toggleBackgroundData(context);
+                toggleSync(context);
             } else if (buttonId == BUTTON_GPS) {
                 toggleGps(context);
             } else if (buttonId == BUTTON_BLUETOOTH) {
@@ -256,6 +270,7 @@ public class SettingsAppWidgetProvider extends AppWidgetProvider {
         } else if (wifiState == STATE_DISABLED) {
             wifiManager.setWifiEnabled(true);
         }
+        Toast.makeText(context, R.string.gadget_toggle_wifi, Toast.LENGTH_SHORT).show();
     }
 
     /**
@@ -265,25 +280,56 @@ public class SettingsAppWidgetProvider extends AppWidgetProvider {
      * @return true if enabled
      */
     private static boolean getBackgroundDataState(Context context) {
-        ConnectivityManager connManager = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
+        ConnectivityManager connManager =
+                (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
         return connManager.getBackgroundDataSetting();
     }
 
     /**
-     * Toggle background data and sync tickles.
+     * Gets the state of auto-sync.
+     *
+     * @param context
+     * @return true if enabled
+     */
+    private static boolean getSync(Context context) {
+        boolean backgroundData = getBackgroundDataState(context);
+        boolean sync = ContentResolver.getMasterSyncAutomatically();
+        return backgroundData && sync;
+    }
+
+    /**
+     * Toggle auto-sync
      *
      * @param context
      */
-    private void toggleBackgroundData(Context context) {
-        ConnectivityManager connManager = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
-        boolean sync = getBackgroundDataState(context);
-        connManager.setBackgroundDataSetting(!sync);
+    private void toggleSync(Context context) {
+        ConnectivityManager connManager =
+                (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
+        boolean backgroundData = getBackgroundDataState(context);
+        boolean sync = ContentResolver.getMasterSyncAutomatically();
 
-        IContentService contentService = ContentResolver.getContentService();
-        try {
-            contentService.setListenForNetworkTickles(!sync);
-        } catch (RemoteException e) {
-            Log.d(TAG, "toggleBackgroundData: " + e);
+        // four cases to handle:
+        // setting toggled from off to on:
+        // 1. background data was off, sync was off: turn on both
+        if (!backgroundData && !sync) {
+            connManager.setBackgroundDataSetting(true);
+            ContentResolver.setMasterSyncAutomatically(true);
+        }
+
+        // 2. background data was off, sync was on: turn on background data
+        if (!backgroundData && sync) {
+            connManager.setBackgroundDataSetting(true);
+        }
+
+        // 3. background data was on, sync was off: turn on sync
+        if (backgroundData && !sync) {
+            ContentResolver.setMasterSyncAutomatically(true);
+        }
+
+        // setting toggled from on to off:
+        // 4. background data was on, sync was on: turn off sync
+        if (backgroundData && sync) {
+            ContentResolver.setMasterSyncAutomatically(false);
         }
     }
 
@@ -306,7 +352,8 @@ public class SettingsAppWidgetProvider extends AppWidgetProvider {
     private void toggleGps(Context context) {
         ContentResolver resolver = context.getContentResolver();
         boolean enabled = getGpsState(context);
-        Settings.Secure.setLocationProviderEnabled(resolver, LocationManager.GPS_PROVIDER, !enabled);
+        Settings.Secure.setLocationProviderEnabled(resolver, LocationManager.GPS_PROVIDER,
+                !enabled);
     }
 
     /**
@@ -317,9 +364,9 @@ public class SettingsAppWidgetProvider extends AppWidgetProvider {
      */
     private static boolean getBrightness(Context context) {
         try {
-            IHardwareService hardware = IHardwareService.Stub.asInterface(
-                    ServiceManager.getService("hardware"));
-            if (hardware != null) {
+            IPowerManager power = IPowerManager.Stub.asInterface(
+                    ServiceManager.getService("power"));
+            if (power != null) {
                 int brightness = Settings.System.getInt(context.getContentResolver(),
                         Settings.System.SCREEN_BRIGHTNESS);
                 return brightness > 100;
@@ -337,9 +384,9 @@ public class SettingsAppWidgetProvider extends AppWidgetProvider {
      */
     private void toggleBrightness(Context context) {
         try {
-            IHardwareService hardware = IHardwareService.Stub.asInterface(
-                    ServiceManager.getService("hardware"));
-            if (hardware != null) {
+            IPowerManager power = IPowerManager.Stub.asInterface(
+                    ServiceManager.getService("power"));
+            if (power != null) {
                 ContentResolver cr = context.getContentResolver();
                 int brightness = Settings.System.getInt(cr,
                         Settings.System.SCREEN_BRIGHTNESS);
@@ -352,10 +399,17 @@ public class SettingsAppWidgetProvider extends AppWidgetProvider {
                 } else {
                     brightness = MINIMUM_BACKLIGHT;
                 }
-                hardware.setBacklights(brightness);
+                power.setBacklightBrightness(brightness);
                 Settings.System.putInt(cr, Settings.System.SCREEN_BRIGHTNESS, brightness);
-                brightness = Settings.System.getInt(cr,
-                        Settings.System.SCREEN_BRIGHTNESS);
+                if (context.getResources().getBoolean(
+                        com.android.internal.R.bool.config_automatic_brightness_available)) {
+                    // Disable automatic brightness
+                    Settings.System.putInt(context.getContentResolver(),
+                            Settings.System.SCREEN_BRIGHTNESS_MODE,
+                            Settings.System.SCREEN_BRIGHTNESS_MODE_MANUAL);
+                    // Set it again in case auto brightness was on
+                    power.setBacklightBrightness(brightness);
+                }
             }
         } catch (RemoteException e) {
             Log.d(TAG, "toggleBrightness: " + e);
@@ -378,9 +432,9 @@ public class SettingsAppWidgetProvider extends AppWidgetProvider {
             }
         }
         int state = mLocalBluetoothManager.getBluetoothState();
-        if (state == BluetoothDevice.BLUETOOTH_STATE_OFF) {
+        if (state == BluetoothAdapter.STATE_OFF) {
             return STATE_DISABLED;
-        } else if (state == BluetoothDevice.BLUETOOTH_STATE_ON) {
+        } else if (state == BluetoothAdapter.STATE_ON) {
             return STATE_ENABLED;
         } else {
             return STATE_INTERMEDIATE;
@@ -399,5 +453,6 @@ public class SettingsAppWidgetProvider extends AppWidgetProvider {
         } else if (state == STATE_DISABLED) {
             mLocalBluetoothManager.setBluetoothEnabled(true);
         }
+        Toast.makeText(context, R.string.gadget_toggle_bluetooth, Toast.LENGTH_SHORT).show();
     }
 }

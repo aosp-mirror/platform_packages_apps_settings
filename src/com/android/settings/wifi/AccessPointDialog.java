@@ -17,15 +17,14 @@
 package com.android.settings.wifi;
 
 import com.android.settings.R;
-import com.android.settings.SecuritySettings;
 
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.Resources;
-import android.security.CertTool;
-import android.security.Keystore;
+import android.security.Credentials;
+import android.security.KeyStore;
 import android.net.wifi.WifiInfo;
 import android.net.wifi.WifiManager;
 import android.os.Bundle;
@@ -74,17 +73,15 @@ public class AccessPointDialog extends AlertDialog implements DialogInterface.On
     private static final int SECURITY_AUTO = 0;
     private static final int SECURITY_NONE = 1;
     private static final int SECURITY_WEP = 2;
-    private static final int SECURITY_WPA_PERSONAL = 3;
-    private static final int SECURITY_WPA2_PERSONAL = 4;
-    private static final int SECURITY_WPA_EAP = 5;
-    private static final int SECURITY_IEEE8021X = 6;
+    private static final int SECURITY_PSK = 3;
+    private static final int SECURITY_EAP = 4;
 
     private static final int[] WEP_TYPE_VALUES = {
             AccessPointState.WEP_PASSWORD_AUTO, AccessPointState.WEP_PASSWORD_ASCII,
             AccessPointState.WEP_PASSWORD_HEX
     };
     private static final String NOT_APPLICABLE = "N/A";
-    private static final String BLOB_HEADER = "blob://";
+    private static final String KEYSTORE_HEADER = "keystore://";
 
     // Button positions, default to impossible values
     private int mConnectButtonPos = Integer.MAX_VALUE; 
@@ -119,8 +116,6 @@ public class AccessPointDialog extends AlertDialog implements DialogInterface.On
     private Spinner mCaCertSpinner;
     private TextView mClientCertText;
     private Spinner mClientCertSpinner;
-    private TextView mPrivateKeyPasswdText;
-    private EditText mPrivateKeyPasswdEdit;
     private EditText[] mEnterpriseTextFields;
 
     
@@ -133,13 +128,13 @@ public class AccessPointDialog extends AlertDialog implements DialogInterface.On
     private TextView mSecurityText;
     private Spinner mSecuritySpinner;
     private Spinner mWepTypeSpinner;
-    private CertTool mCertTool;
+    private KeyStore mKeyStore;
 
     public AccessPointDialog(Context context, WifiLayer wifiLayer) {
         super(context);
 
         mWifiLayer = wifiLayer;
-        mCertTool = CertTool.getInstance();
+        mKeyStore = KeyStore.getInstance();
     }
 
     @Override
@@ -222,7 +217,7 @@ public class AccessPointDialog extends AlertDialog implements DialogInterface.On
         updateCertificateSelection();
         setGenericPasswordVisible(true);
         // Both WPA and WPA2 show the same caption, so either is ok
-        updatePasswordCaption(AccessPointState.WPA);
+        updatePasswordCaption(AccessPointState.PSK);
     }
 
     /** Called after flags are set, the dialog's layout/etc should be set up here */
@@ -347,18 +342,22 @@ public class AccessPointDialog extends AlertDialog implements DialogInterface.On
     }
 
     private String[] getAllCaCertificateKeys() {
-        return appendEmptyInSelection(mCertTool.getAllCaCertificateKeys());
+        return appendEmptyInSelection(mKeyStore.saw(Credentials.CA_CERTIFICATE));
     }
 
     private String[] getAllUserCertificateKeys() {
-        return appendEmptyInSelection(mCertTool.getAllUserCertificateKeys());
+        return appendEmptyInSelection(mKeyStore.saw(Credentials.USER_CERTIFICATE));
     }
 
     private String[] appendEmptyInSelection(String[] keys) {
-      String[] selections = new String[keys.length + 1];
-      System.arraycopy(keys, 0, selections, 0, keys.length);
-      selections[keys.length] = NOT_APPLICABLE;
-      return selections;
+        if (keys == null) {
+            return new String[] {NOT_APPLICABLE};
+        } else {
+            String[] selections = new String[keys.length + 1];
+            System.arraycopy(keys, 0, selections, 0, keys.length);
+            selections[keys.length] = NOT_APPLICABLE;
+            return selections;
+        }
     }
 
     private void setEnterpriseFields(View view) {
@@ -371,8 +370,6 @@ public class AccessPointDialog extends AlertDialog implements DialogInterface.On
         mClientCertText =
                 (TextView) view.findViewById(R.id.client_certificate_text);
         mCaCertText = (TextView) view.findViewById(R.id.ca_certificate_text);
-        mPrivateKeyPasswdEdit =
-                (EditText) view.findViewById(R.id.private_key_passwd_edit);
         mEapText = (TextView) view.findViewById(R.id.eap_text);
         mEapSpinner = (Spinner) view.findViewById(R.id.eap_spinner);
         mEapSpinner.setOnItemSelectedListener(this);
@@ -399,7 +396,7 @@ public class AccessPointDialog extends AlertDialog implements DialogInterface.On
         setSpinnerAdapter(mCaCertSpinner, getAllCaCertificateKeys());
 
         mEnterpriseTextFields = new EditText[] {
-            mIdentityEdit, mAnonymousIdentityEdit, mPrivateKeyPasswdEdit
+            mIdentityEdit, mAnonymousIdentityEdit
         };
 
     }
@@ -455,12 +452,12 @@ public class AccessPointDialog extends AlertDialog implements DialogInterface.On
     }
 
     private void updatePasswordCaption(String security) {
-        
-        if (mPasswordText != null && security != null
-                && security.equals(AccessPointState.WEP)) {
-            mPasswordText.setText(R.string.please_type_hex_key);
-        } else {
-            mPasswordText.setText(R.string.please_type_passphrase);
+        if (mPasswordText != null) {
+            if (security != null && security.equals(AccessPointState.WEP)) {
+                mPasswordText.setText(R.string.please_type_hex_key);
+            } else {
+                mPasswordText.setText(R.string.please_type_passphrase);
+            }
         }
     }
     
@@ -518,9 +515,7 @@ public class AccessPointDialog extends AlertDialog implements DialogInterface.On
 
         if (mState.isEnterprise()) {
             if(!mState.configured) {
-                updateEnterpriseFields(
-                        AccessPointState.WPA_EAP.equals(mState.security) ?
-                        SECURITY_WPA_EAP : SECURITY_IEEE8021X);
+                updateEnterpriseFields();
             }
         }
         updatePasswordField();
@@ -576,13 +571,8 @@ public class AccessPointDialog extends AlertDialog implements DialogInterface.On
         }
 
         switch (securityType) {
-            case SECURITY_WPA_PERSONAL: {
-                mState.setSecurity(AccessPointState.WPA);
-                break;
-            }
-
-            case SECURITY_WPA2_PERSONAL: {
-                mState.setSecurity(AccessPointState.WPA2);
+            case SECURITY_PSK: {
+                mState.setSecurity(AccessPointState.PSK);
                 break;
             }
 
@@ -597,12 +587,8 @@ public class AccessPointDialog extends AlertDialog implements DialogInterface.On
                     break;
             }
 
-            case SECURITY_WPA_EAP:
-                mState.setSecurity(AccessPointState.WPA_EAP);
-                break;
-
-            case SECURITY_IEEE8021X:
-                mState.setSecurity(AccessPointState.IEEE8021X);
+            case SECURITY_EAP:
+                mState.setSecurity(AccessPointState.EAP);
                 break;
 
             case SECURITY_NONE:
@@ -612,9 +598,7 @@ public class AccessPointDialog extends AlertDialog implements DialogInterface.On
         }
 
         if (mState.isEnterprise() && !mState.configured) {
-            updateEnterpriseFields(
-                    AccessPointState.WPA_EAP.equals(mState.security) ?
-                    SECURITY_WPA_EAP : SECURITY_IEEE8021X);
+            updateEnterpriseFields();
         }
 
         if (!mWifiLayer.saveNetwork(mState)) {
@@ -642,57 +626,35 @@ public class AccessPointDialog extends AlertDialog implements DialogInterface.On
             getContext().getResources().getStringArray(arrayResId), selection);
     }
 
-    private void updateEnterpriseFields(int securityType) {
+    private void updateEnterpriseFields() {
         int i;
         String value;
         for (i = AccessPointState.IDENTITY ;
-                i <= AccessPointState.PRIVATE_KEY_PASSWD ; i++) {
+                i <= AccessPointState.ANONYMOUS_IDENTITY ; i++) {
             value = mEnterpriseTextFields[i].getText().toString();
-            if (!TextUtils.isEmpty(value) ||
-                    (i == AccessPointState.PRIVATE_KEY_PASSWD)) {
+            if (!TextUtils.isEmpty(value)) {
                 mState.setEnterpriseField(i, value);
             }
         }
         Spinner spinner = mClientCertSpinner;
         int index = spinner.getSelectedItemPosition();
         if (index != (spinner.getCount() - 1)) {
-            String key = (String)spinner.getSelectedItem();
-            value = mCertTool.getUserCertificate(key);
-            if (!TextUtils.isEmpty(value)) {
-                mState.setEnterpriseField(AccessPointState.CLIENT_CERT,
-                        BLOB_HEADER + value);
-            }
-            value = mCertTool.getUserPrivateKey(key);
-            if (!TextUtils.isEmpty(value)) {
-                mState.setEnterpriseField(AccessPointState.PRIVATE_KEY,
-                        BLOB_HEADER + value);
-            }
+            String key = (String) spinner.getSelectedItem();
+            mState.setEnterpriseField(AccessPointState.CLIENT_CERT,
+                    KEYSTORE_HEADER + Credentials.USER_CERTIFICATE + key);
+            mState.setEnterpriseField(AccessPointState.PRIVATE_KEY,
+                    KEYSTORE_HEADER + Credentials.USER_PRIVATE_KEY + key);
         }
         spinner = mCaCertSpinner;
         index = spinner.getSelectedItemPosition();
         if (index != (spinner.getCount() - 1)) {
-            String key = (String)spinner.getSelectedItem();
-            value = mCertTool.getCaCertificate(key);
-            if (!TextUtils.isEmpty(value)) {
-                mState.setEnterpriseField(AccessPointState.CA_CERT,
-                        BLOB_HEADER + value);
-            }
+            String key = (String) spinner.getSelectedItem();
+            mState.setEnterpriseField(AccessPointState.CA_CERT,
+                    KEYSTORE_HEADER + Credentials.CA_CERTIFICATE + key);
         }
-        switch (securityType) {
-            case SECURITY_IEEE8021X: 
-            case SECURITY_WPA_EAP: {
-                if (securityType == SECURITY_WPA_EAP) {
-                    mState.setSecurity(AccessPointState.WPA_EAP);
-                } else {
-                    mState.setSecurity(AccessPointState.IEEE8021X);
-                }
-                mState.setEap(mEapSpinner.getSelectedItemPosition());
-                mState.setPhase2((String)mPhase2Spinner.getSelectedItem());
-                break;
-            }
-            default:
-                mState.setSecurity(AccessPointState.OPEN);
-        }
+        mState.setSecurity(AccessPointState.EAP);
+        mState.setEap(mEapSpinner.getSelectedItemPosition());
+        mState.setPhase2((String) mPhase2Spinner.getSelectedItem());
     }
 
     /**
@@ -785,24 +747,21 @@ public class AccessPointDialog extends AlertDialog implements DialogInterface.On
                 setWepVisible(false);
                 setGenericPasswordVisible(mState.hasSecurity());
                 // Shows the generic 'wireless password'
-                updatePasswordCaption(AccessPointState.WPA);
+                updatePasswordCaption(AccessPointState.PSK);
                 break;
             }
-            
-            case SECURITY_WPA_PERSONAL:
-            case SECURITY_WPA2_PERSONAL: {
+
+            case SECURITY_PSK: {
                 setWepVisible(false);
                 setGenericPasswordVisible(true);
                 // Both WPA and WPA2 show the same caption, so either is ok
-                updatePasswordCaption(AccessPointState.WPA);
+                updatePasswordCaption(AccessPointState.PSK);
                 break;
             }
-            case SECURITY_WPA_EAP:
-            case SECURITY_IEEE8021X: {
+            case SECURITY_EAP: {
                 // Unlock the keystore if it is not unlocked yet.
-                if (Keystore.getInstance().getState() != Keystore.UNLOCKED) {
-                    getContext().startActivity(new Intent(
-                            SecuritySettings.ACTION_UNLOCK_CREDENTIAL_STORAGE));
+                if (mKeyStore.test() != KeyStore.NO_ERROR) {
+                    Credentials.getInstance().unlock(getContext());
                     return;
                 }
                 enableEnterpriseFields();

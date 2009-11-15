@@ -16,72 +16,124 @@
 
 package com.android.settings.bluetooth;
 
-import android.bluetooth.BluetoothDevice;
-import android.bluetooth.BluetoothError;
-import android.bluetooth.BluetoothIntent;
+import android.app.AlertDialog;
+import android.app.Dialog;
+
+import android.bluetooth.BluetoothAdapter;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.preference.EditTextPreference;
-import android.preference.PreferenceManager;
+import android.text.Editable;
+import android.text.InputFilter;
+import android.text.TextWatcher;
+import android.text.InputFilter.LengthFilter;
 import android.util.AttributeSet;
+import android.widget.Button;
+import android.widget.EditText;
 
 /**
  * BluetoothNamePreference is the preference type for editing the device's
  * Bluetooth name. It asks the user for a name, and persists it via the
  * Bluetooth API.
  */
-public class BluetoothNamePreference extends EditTextPreference {
+public class BluetoothNamePreference extends EditTextPreference implements TextWatcher {
     private static final String TAG = "BluetoothNamePreference";
+    // TODO(): Investigate bluetoothd/dbus crash when length is set to 248, limit as per spec.
+    private static final int BLUETOOTH_NAME_MAX_LENGTH = 200;
 
     private LocalBluetoothManager mLocalManager;
-    
+
     private BroadcastReceiver mReceiver = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
             String action = intent.getAction();
-            if (action.equals(BluetoothIntent.NAME_CHANGED_ACTION)) {
+            if (action.equals(BluetoothAdapter.ACTION_LOCAL_NAME_CHANGED)) {
                 setSummaryToName();
-            } else if (action.equals(BluetoothIntent.BLUETOOTH_STATE_CHANGED_ACTION) &&
-                    (intent.getIntExtra(BluetoothIntent.BLUETOOTH_STATE,
-                    BluetoothError.ERROR) == BluetoothDevice.BLUETOOTH_STATE_ON)) {
+            } else if (action.equals(BluetoothAdapter.ACTION_STATE_CHANGED) &&
+                    (intent.getIntExtra(BluetoothAdapter.EXTRA_STATE, BluetoothAdapter.ERROR) ==
+                            BluetoothAdapter.STATE_ON)) {
                 setSummaryToName();
             }
         }
     };
-    
+
     public BluetoothNamePreference(Context context, AttributeSet attrs) {
         super(context, attrs);
-        
+
         mLocalManager = LocalBluetoothManager.getInstance(context);
-        
-        setSummaryToName();        
+
+        setSummaryToName();
     }
 
     public void resume() {
         IntentFilter filter = new IntentFilter();
-        filter.addAction(BluetoothIntent.BLUETOOTH_STATE_CHANGED_ACTION);
-        filter.addAction(BluetoothIntent.NAME_CHANGED_ACTION);
+        filter.addAction(BluetoothAdapter.ACTION_STATE_CHANGED);
+        filter.addAction(BluetoothAdapter.ACTION_LOCAL_NAME_CHANGED);
         getContext().registerReceiver(mReceiver, filter);
+
+        // Make sure the OK button is disabled (if necessary) after rotation
+        EditText et = getEditText();
+        et.setFilters(new InputFilter[] {new LengthFilter(BLUETOOTH_NAME_MAX_LENGTH)});
+        if (et != null) {
+            et.addTextChangedListener(this);
+            Dialog d = getDialog();
+            if (d instanceof AlertDialog) {
+                Button b = ((AlertDialog) d).getButton(AlertDialog.BUTTON_POSITIVE);
+                b.setEnabled(et.getText().length() > 0);
+            }
+        }
     }
-    
+
     public void pause() {
+        EditText et = getEditText();
+        if (et != null) {
+            et.removeTextChangedListener(this);
+        }
         getContext().unregisterReceiver(mReceiver);
     }
-    
+
     private void setSummaryToName() {
-        BluetoothDevice manager = mLocalManager.getBluetoothManager();
-        if (manager.isEnabled()) {
-            setSummary(manager.getName());
+        BluetoothAdapter adapter = mLocalManager.getBluetoothAdapter();
+        if (adapter.isEnabled()) {
+            setSummary(adapter.getName());
         }
     }
 
     @Override
     protected boolean persistString(String value) {
-        BluetoothDevice manager = mLocalManager.getBluetoothManager();
-        manager.setName(value);
-        return true;        
+        BluetoothAdapter adapter = mLocalManager.getBluetoothAdapter();
+        adapter.setName(value);
+        return true;
     }
-    
+
+    @Override
+    protected void onClick() {
+        super.onClick();
+
+        // The dialog should be created by now
+        EditText et = getEditText();
+        if (et != null) {
+            et.setText(mLocalManager.getBluetoothAdapter().getName());
+        }
+    }
+
+    // TextWatcher interface
+    public void afterTextChanged(Editable s) {
+        Dialog d = getDialog();
+        if (d instanceof AlertDialog) {
+            ((AlertDialog) d).getButton(AlertDialog.BUTTON_POSITIVE).setEnabled(s.length() > 0);
+        }
+    }
+
+    // TextWatcher interface
+    public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+        // not used
+    }
+
+    // TextWatcher interface
+    public void onTextChanged(CharSequence s, int start, int before, int count) {
+        // not used
+    }
 }

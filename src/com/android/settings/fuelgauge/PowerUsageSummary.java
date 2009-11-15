@@ -295,7 +295,12 @@ public class PowerUsageSummary extends PreferenceActivity implements Runnable {
     private void processAppUsage() {
         SensorManager sensorManager = (SensorManager)getSystemService(Context.SENSOR_SERVICE);
         final int which = mStatsType;
-        final double powerCpuNormal = mPowerProfile.getAveragePower(PowerProfile.POWER_CPU_NORMAL);
+        final int speedSteps = mPowerProfile.getNumSpeedSteps();
+        final double[] powerCpuNormal = new double[speedSteps];
+        final long[] cpuSpeedStepTimes = new long[speedSteps];
+        for (int p = 0; p < speedSteps; p++) {
+            powerCpuNormal[p] = mPowerProfile.getAveragePower(PowerProfile.POWER_CPU_ACTIVE, p);
+        }
         final double averageCostPerByte = getAverageDataCost();
         long uSecTime = mStats.computeBatteryRealtime(SystemClock.elapsedRealtime() * 1000, which);
         updateStatsPeriod(uSecTime);
@@ -322,7 +327,19 @@ public class PowerUsageSummary extends PreferenceActivity implements Runnable {
                     final long foregroundTime = ps.getForegroundTime(which);
                     cpuFgTime += foregroundTime * 10; // convert to millis
                     final long tmpCpuTime = (userTime + systemTime) * 10; // convert to millis
-                    final double processPower = tmpCpuTime * powerCpuNormal;
+                    int totalTimeAtSpeeds = 0;
+                    // Get the total first
+                    for (int step = 0; step < speedSteps; step++) {
+                        cpuSpeedStepTimes[step] = ps.getTimeAtCpuSpeedStep(step, which);
+                        totalTimeAtSpeeds += cpuSpeedStepTimes[step];
+                    }
+                    if (totalTimeAtSpeeds == 0) totalTimeAtSpeeds = 1;
+                    // Then compute the ratio of time spent at each speed
+                    double processPower = 0;
+                    for (int step = 0; step < speedSteps; step++) {
+                        double ratio = (double) cpuSpeedStepTimes[step] / totalTimeAtSpeeds;
+                        processPower += ratio * tmpCpuTime * powerCpuNormal[step];
+                    }
                     cpuTime += tmpCpuTime;
                     power += processPower;
                     if (highestDrain < processPower) {
@@ -394,7 +411,7 @@ public class PowerUsageSummary extends PreferenceActivity implements Runnable {
         double phoneOnPower = mPowerProfile.getAveragePower(PowerProfile.POWER_RADIO_ACTIVE)
                 * phoneOnTimeMs / 1000;
         addEntry(getString(R.string.power_phone), DrainType.PHONE, phoneOnTimeMs,
-                android.R.drawable.ic_menu_call, phoneOnPower);
+                R.drawable.ic_settings_voice_calls, phoneOnPower);
     }
 
     private void addScreenUsage(long uSecNow) {
@@ -415,7 +432,7 @@ public class PowerUsageSummary extends PreferenceActivity implements Runnable {
         }
         power /= 1000; // To seconds
         addEntry(getString(R.string.power_screen), DrainType.SCREEN, screenOnTimeMs,
-                android.R.drawable.ic_menu_view, power);
+                R.drawable.ic_settings_display, power);
     }
 
     private void addRadioUsage(long uSecNow) {
@@ -428,9 +445,12 @@ public class PowerUsageSummary extends PreferenceActivity implements Runnable {
                     * mPowerProfile.getAveragePower(PowerProfile.POWER_RADIO_ON, i);
             signalTimeMs += strengthTimeMs;
         }
+        long scanningTimeMs = mStats.getPhoneSignalScanningTime(uSecNow, mStatsType) / 1000;
+        power += scanningTimeMs / 1000 * mPowerProfile.getAveragePower(
+                PowerProfile.POWER_RADIO_SCANNING);
         BatterySipper bs =
                 addEntry(getString(R.string.power_cell), DrainType.CELL, signalTimeMs,
-                android.R.drawable.ic_menu_sort_by_size, power);
+                R.drawable.ic_settings_cell_standby, power);
         if (signalTimeMs != 0) {
             bs.noCoveragePercent = mStats.getPhoneSignalStrengthTime(0, uSecNow, mStatsType)
                     / 1000 * 100.0 / signalTimeMs;
@@ -444,7 +464,7 @@ public class PowerUsageSummary extends PreferenceActivity implements Runnable {
                 * mPowerProfile.getAveragePower(PowerProfile.POWER_WIFI_ON)
             + runningTimeMs * mPowerProfile.getAveragePower(PowerProfile.POWER_WIFI_ON)) / 1000;
         addEntry(getString(R.string.power_wifi), DrainType.WIFI, runningTimeMs,
-                R.drawable.ic_wifi_signal_4, wifiPower);
+                R.drawable.ic_settings_wifi, wifiPower);
     }
 
     private void addIdleUsage(long uSecNow) {
@@ -452,7 +472,7 @@ public class PowerUsageSummary extends PreferenceActivity implements Runnable {
         double idlePower = (idleTimeMs * mPowerProfile.getAveragePower(PowerProfile.POWER_CPU_IDLE))
                 / 1000;
         addEntry(getString(R.string.power_idle), DrainType.IDLE, idleTimeMs,
-                android.R.drawable.ic_lock_power_off, idlePower);
+                R.drawable.ic_settings_phone_idle, idlePower);
     }
 
     private void addBluetoothUsage(long uSecNow) {
@@ -464,7 +484,7 @@ public class PowerUsageSummary extends PreferenceActivity implements Runnable {
                 * mPowerProfile.getAveragePower(PowerProfile.POWER_BLUETOOTH_AT_CMD)) / 1000;
 
         addEntry(getString(R.string.power_bluetooth), DrainType.BLUETOOTH, btOnTimeMs,
-                com.android.internal.R.drawable.ic_volume_bluetooth_in_call, btPower);
+                R.drawable.ic_settings_bluetooth, btPower);
     }
 
     private double getAverageDataCost() {
@@ -602,6 +622,8 @@ public class PowerUsageSummary extends PreferenceActivity implements Runnable {
                 } else if ("mediaserver".equals(name)) {
                     name = getResources().getString(R.string.process_mediaserver_label);
                 }
+                iconId = R.drawable.ic_power_system;
+                icon = getResources().getDrawable(iconId);
                 return;
             } else {
                 //name = packages[0];

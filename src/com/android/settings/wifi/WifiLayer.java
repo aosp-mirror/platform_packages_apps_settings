@@ -774,7 +774,9 @@ public class WifiLayer {
              * We pass null for security since we have a network ID (i.e., it's
              * not a wildcard), and rely on it matching.
              */
-            return findApLocked(wifiInfo.getNetworkId(), wifiInfo.getBSSID(), ssid, null);
+            synchronized (this) {
+                return findApLocked(wifiInfo.getNetworkId(), wifiInfo.getBSSID(), ssid, null);
+            }
         } else {
             return null;
         }
@@ -1013,8 +1015,10 @@ public class WifiLayer {
              * We pass null for security since we have a network ID (i.e., it's
              * not a wildcard), and rely on it matching.
              */
-            ap = findApLocked(wifiInfo.getNetworkId(), wifiInfo.getBSSID(), wifiInfo
-                    .getSSID(), null);
+            synchronized (this) {
+                ap = findApLocked(wifiInfo.getNetworkId(), wifiInfo.getBSSID(), wifiInfo
+                        .getSSID(), null);
+            }
         }
 
         if (ap != null) {

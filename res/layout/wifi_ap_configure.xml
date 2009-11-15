@@ -39,14 +39,13 @@
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/wifi_type_ssid" />
-            
+
         <EditText android:id="@+id/ssid_edit"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="2dip"
-                android:singleLine="true" />
-    
-    
+                android:singleLine="true"
+                android:inputType="textNoSuggestions" />
     
         <!-- Security -->
         
@@ -105,17 +104,6 @@
                 <Spinner android:id="@+id/client_certificate_spinner"
                         android:layout_width="fill_parent"
                         android:layout_height="wrap_content" />
-                <TextView android:id="@+id/private_key_passwd_text"
-                        style="?android:attr/textAppearanceSmallInverse"
-                        android:layout_width="fill_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="8dip"
-                        android:text="@string/please_type_private_key_passwd" />
-                <EditText android:id="@+id/private_key_passwd_edit"
-                        android:layout_width="fill_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="2dip"
-                        android:singleLine="true" />
                 <TextView android:id="@+id/identity_text"
                         style="?android:attr/textAppearanceSmallInverse"
                         android:layout_width="fill_parent"
@@ -126,7 +114,8 @@
                         android:layout_width="fill_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="2dip"
-                        android:singleLine="true" />
+                        android:singleLine="true"
+                        android:inputType="textNoSuggestions" />
                 <TextView android:id="@+id/anonymous_identity_text"
                         style="?android:attr/textAppearanceSmallInverse"
                         android:layout_width="fill_parent"

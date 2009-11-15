@@ -6,6 +6,7 @@
     <uses-permission android:name="com.google.android.providers.gmail.permission.READ_GMAIL" />
     <uses-permission android:name="android.permission.WRITE_SETTINGS" />
     <uses-permission android:name="android.permission.WRITE_SECURE_SETTINGS" />
+    <uses-permission android:name="android.permission.DEVICE_POWER" />
     <uses-permission android:name="android.permission.CHANGE_CONFIGURATION" />
     <uses-permission android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS" />
     <uses-permission android:name="android.permission.VIBRATE" />
@@ -15,6 +16,7 @@
     <uses-permission android:name="android.permission.CALL_PHONE" />
     <uses-permission android:name="android.permission.MODIFY_AUDIO_SETTINGS" />
     <uses-permission android:name="android.permission.MASTER_CLEAR" />
+    <uses-permission android:name="android.permission.USE_CREDENTIALS" />
     <uses-permission android:name="com.google.android.googleapps.permission.GOOGLE_AUTH" />
     <uses-permission android:name="android.permission.ACCESS_DOWNLOAD_MANAGER" />
     <uses-permission android:name="android.permission.READ_CONTACTS" />
@@ -64,7 +66,7 @@
         <!-- Wireless Controls -->
 
         <activity android:name="WirelessSettings" 
-                android:label="@string/radio_controls_title"
+                android:label="@string/wireless_networks_settings_title"
                 >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -103,7 +105,7 @@
 
         <activity android:name="ApnSettings" android:label="@string/apn_settings"
                   android:configChanges="orientation|keyboardHidden"
-                  android:launchMode="singleInstance" 
+                  android:launchMode="singleTask"
                 >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -122,6 +124,10 @@
                 <action android:name="android.settings.BLUETOOTH_SETTINGS" />
                 <category android:name="android.intent.category.VOICE_LAUNCH" />
                 <category android:name="com.android.settings.SHORTCUT" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+            <intent-filter>
+                <action android:name="android.bluetooth.devicepicker.action.LAUNCH" />
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
@@ -176,7 +182,8 @@
             </intent-filter>
         </activity>
 
-        <activity android:name="LanguageSettings" android:label="@string/language_picker_title"
+        <activity android:name="LanguageSettings"
+                android:label="@string/language_keyboard_settings_title"
                 android:clearTaskOnLaunch="true"
                 >
             <intent-filter>
@@ -209,7 +216,8 @@
             </intent-filter>
         </activity>
 
-        <activity android:name="SoundAndDisplaySettings" android:label="@string/sound_and_display_settings"
+        <activity android:name="SoundAndDisplaySettings"
+                android:label="@string/sound_and_display_settings_title"
                 android:clearTaskOnLaunch="true"
                 >
             <intent-filter>
@@ -217,6 +225,7 @@
                 <action android:name="com.android.settings.SOUND_SETTINGS" />
                 <action android:name="com.android.settings.DISPLAY_SETTINGS" />
                 <action android:name="android.settings.DISPLAY_SETTINGS" />
+                <action android:name="android.settings.SOUND_SETTINGS" />
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.VOICE_LAUNCH" />
                 <category android:name="com.android.settings.SHORTCUT" />
@@ -237,6 +246,15 @@
                 android:theme="@*android:style/Theme.Dialog.Alert">
             <intent-filter>
                 <action android:name="android.settings.LICENSE" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+
+        <activity android:name="SettingsSafetyLegalActivity"
+                android:label="@string/settings_safetylegal_activity_title"
+                android:theme="@*android:style/Theme.Dialog.Alert">
+            <intent-filter>
+                <action android:name="android.settings.SAFETY" />
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
@@ -274,7 +292,20 @@
             </intent-filter>
         </activity>
 
-        <activity android:name="SecuritySettings" android:label="@string/security_settings_title"
+        <activity android:name="RunningServices"
+                  android:label="@string/runningservices_settings_title"
+                  android:clearTaskOnLaunch="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.MONKEY" />
+                <category android:name="android.intent.category.VOICE_LAUNCH" />
+                <category android:name="com.android.settings.SHORTCUT" />
+            </intent-filter>
+        </activity>
+        
+        <activity android:name="SecuritySettings"
+                android:label="@string/location_security_settings_title"
                 android:configChanges="orientation|keyboardHidden"
                 android:clearTaskOnLaunch="true"
                 >
@@ -282,11 +313,31 @@
                 <action android:name="android.intent.action.MAIN" />
                 <action android:name="android.settings.SECURITY_SETTINGS" />
                 <action android:name="android.settings.LOCATION_SOURCE_SETTINGS" />
-                <action android:name="android.security.ADD_CREDENTIAL" />
-                <action android:name="android.security.UNLOCK_CREDENTIAL_STORAGE" />
+                <action android:name="android.credentials.UNLOCK" />
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.VOICE_LAUNCH" />
                 <category android:name="com.android.settings.SHORTCUT" />
+            </intent-filter>
+        </activity>
+
+        <activity android:name="CredentialInstaller"
+                android:label="@string/credential_installer_activity_title">
+            <intent-filter>
+                <action android:name="android.credentials.SYSTEM_INSTALL" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+
+        <activity android:name="PrivacySettings"
+                android:label="@string/privacy_settings_title"
+                android:configChanges="orientation|keyboardHidden"
+                android:clearTaskOnLaunch="true"
+                >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <action android:name="android.settings.PRIVACY_SETTINGS" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.VOICE_LAUNCH" />
             </intent-filter>
         </activity>
 
@@ -299,10 +350,12 @@
             </intent-filter>
         </activity>
 
-        <activity android:name="AccessibilitySettings" android:label="@string/accessibility_settings_title"
-                android:theme="@android:style/Theme.NoTitleBar">
+        <activity android:name="AccessibilitySettings"
+                android:label="@string/accessibility_settings_title">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+                <action android:name="android.settings.ACCESSIBILITY_SETTINGS" />
+                <!-- Wtf...  this action is bogus!  Can we remove it? -->
                 <action android:name="ACCESSIBILITY_FEEDBACK_SETTINGS" />
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.VOICE_LAUNCH" />
@@ -353,7 +406,8 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".deviceinfo.Memory" android:label="@string/storage_settings_title">
+        <activity android:name=".deviceinfo.Memory"
+                android:label="@string/storage_settings_title">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <action android:name="android.settings.INTERNAL_STORAGE_SETTINGS" />
@@ -424,25 +478,46 @@
         <activity android:name=".bluetooth.ConnectSpecificProfilesActivity"
                   android:label="@string/bluetooth_connect_specific_profiles_title" />
 
-        <activity android:name=".bluetooth.BluetoothPinDialog"
-                  android:label="@string/bluetooth_pin_entry"
+        <activity android:name=".bluetooth.BluetoothPairingDialog"
+                  android:label="@string/bluetooth_pairing_request"
+                  android:excludeFromRecents="true"
                   android:theme="@*android:style/Theme.Dialog.Alert">
             <intent-filter>
-                <action android:name="android.bluetooth.intent.action.PAIRING_REQUEST" />
+                <action android:name="android.bluetooth.device.action.PAIRING_REQUEST" />
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
 
-        <receiver android:name=".bluetooth.BluetoothPinRequest">
+        <activity android:name=".bluetooth.RequestPermissionActivity"
+                  android:label="@string/bluetooth_permission_request"
+                  android:excludeFromRecents="true"
+                  android:permission="android.permission.BLUETOOTH"
+                  android:theme="@*android:style/Theme.Dialog.Alert">
             <intent-filter>
-                <action android:name="android.bluetooth.intent.action.PAIRING_REQUEST" />
-                <action android:name="android.bluetooth.intent.action.PAIRING_CANCEL" />
+                <action android:name="android.bluetooth.adapter.action.REQUEST_DISCOVERABLE" />
+                <action android:name="android.bluetooth.adapter.action.REQUEST_ENABLE" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+
+        <activity android:name=".bluetooth.RequestPermissionHelperActivity"
+                  android:label="@string/bluetooth_pairing_request"
+                  android:excludeFromRecents="true"
+                  android:permission="android.permission.BLUETOOTH"
+                  android:theme="@*android:style/Theme.Dialog.Alert">
+        </activity>
+
+        <receiver android:name=".bluetooth.BluetoothPairingRequest">
+            <intent-filter>
+                <action android:name="android.bluetooth.device.action.PAIRING_REQUEST" />
+                <action android:name="android.bluetooth.device.action.PAIRING_CANCEL" />
             </intent-filter>
         </receiver>
 
         <activity android:name="ActivityPicker"
                 android:label="@string/activity_picker_label"
-                android:theme="@*android:style/Theme.Dialog.Alert">
+                android:theme="@*android:style/Theme.Dialog.Alert"
+                android:finishOnCloseSystemDialogs="true">
             <intent-filter>
                 <action android:name="android.intent.action.PICK_ACTIVITY" />
                 <category android:name="android.intent.category.DEFAULT" />
@@ -545,7 +620,8 @@
         <!-- Standard picker for widgets -->
         <activity android:name="AppWidgetPickActivity"
                 android:label="@string/widget_picker_title"
-                android:theme="@*android:style/Theme.Dialog.Alert">
+                android:theme="@*android:style/Theme.Dialog.Alert"
+                android:finishOnCloseSystemDialogs="true">
             <intent-filter>
                 <action android:name="android.appwidget.action.APPWIDGET_PICK" />
                 <category android:name="android.intent.category.DEFAULT" />
@@ -590,7 +666,7 @@
                 <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
                 <action android:name="android.net.wifi.WIFI_STATE_CHANGED" />
                 <action android:name="android.net.conn.BACKGROUND_DATA_SETTING_CHANGED" />
-                <action android:name="android.bluetooth.intent.action.BLUETOOTH_STATE_CHANGED" />
+                <action android:name="android.bluetooth.adapter.action.STATE_CHANGED" />
                 <action android:name="android.intent.action.CLOSE_SYSTEM_DIALOGS" /> <!-- pick up misc changes -->
             </intent-filter>
             <meta-data android:name="android.appwidget.provider" android:resource="@xml/appwidget_info" />
