@@ -203,7 +203,7 @@ public abstract class LocalBluetoothProfileManager {
         @Override
         public void setPreferred(BluetoothDevice device, boolean preferred) {
             mService.setSinkPriority(device,
-                    preferred ? BluetoothA2dp.PRIORITY_AUTO : BluetoothA2dp.PRIORITY_OFF);
+                    preferred ? BluetoothA2dp.PRIORITY_AUTO_CONNECT : BluetoothA2dp.PRIORITY_OFF);
         }
 
         @Override
