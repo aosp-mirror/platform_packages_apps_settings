@@ -2145,12 +2145,21 @@ found in the list of installed applications.</string>
     <!-- Title of preference to enable/dislable encrypted filesystem -->
     <string name="encrypted_fs_enable">Encrypt private user data</string>
     <!-- Summary of preference to enable/dislable encrypted filesystem -->
-    <string name="encrypted_fs_enable_summary">Enable encrypted file system storage for private user
-data in this device</string>
-    <!-- Toast message for enabled encrypted filesystem -->
-    <string name="encrypted_fs_enabled">Encrypted File System enabled.</string>
-    <!-- Toast message for disabled encrypted filesystem -->
-    <string name="encrypted_fs_disabled">Encrypted File System disabled.</string>
+    <string name="encrypted_fs_enable_summary">Enable encrypted file system storage for private user data in this device</string>
+    <!-- Dialog message to enable encrypted filesystem -->
+    <string name="encrypted_fs_enable_dialog">Enabling Encrypted File Systems requires a device data wipe.</string>
+    <!-- Dialog message to disable encrypted filesystem -->
+    <string name="encrypted_fs_disable_dialog">Disabling Encrypted File Systems requires a device data wipe.</string>
+    <!-- Button label to enable encrypted filesystem -->
+    <string name="encrypted_fs_enable_button">Enable</string>
+    <!-- Button label to disable encrypted filesystem -->
+    <string name="encrypted_fs_disable_button">Disable</string>
+    <!-- Button message to cancel toggling encrypted filesystem -->
+    <string name="encrypted_fs_cancel_button">Cancel</string>
+    <!-- Toast message to notify cancel toggling encrypted filesystem -->
+    <string name="encrypted_fs_cancel_confirm">Encrypted File Systems mode change cancelled.</string>
+    <!-- Dialog title to toggle encrypted filesystem -->
+    <string name="encrypted_fs_alert_dialog_title">Encrypted File Systems Warning.</string>
 
     <!-- Sound settings screen, setting check box label -->
     <string name="emergency_tone_title">Emergency tone</string>

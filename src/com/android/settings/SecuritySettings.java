@@ -17,6 +17,9 @@
 package com.android.settings;
 
 
+import java.util.Observable;
+import java.util.Observer;
+
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
@@ -28,6 +31,8 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.location.LocationManager;
 import android.os.Bundle;
+import android.os.ICheckinService;
+import android.os.ServiceManager;
 import android.os.SystemProperties;
 import android.preference.CheckBoxPreference;
 import android.preference.Preference;
@@ -37,16 +42,13 @@ import android.preference.PreferenceScreen;
 import android.provider.Settings;
 import android.security.Credentials;
 import android.security.KeyStore;
+import android.telephony.TelephonyManager;
 import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.internal.widget.LockPatternUtils;
-import android.telephony.TelephonyManager;
-
-import java.util.Observable;
-import java.util.Observer;
 
 /**
  * Gesture lock pattern settings.
@@ -343,18 +345,27 @@ public class SecuritySettings extends PreferenceActivity {
         private static final int TYPE_KEYSTORE = 0;
         private static final int TYPE_ENCRYPTEDFS = 1;
 
+        // Dialog identifiers
+        private static final int DLG_BASE = 0;
+        private static final int DLG_UNLOCK = DLG_BASE + 1;
+        private static final int DLG_PASSWORD = DLG_UNLOCK + 1;
+        private static final int DLG_RESET = DLG_PASSWORD + 1;
+        private static final int DLG_ENABLE_EFS = DLG_RESET + 1;
+
         private KeyStore mKeyStore = KeyStore.getInstance();
         private int mState;
         private boolean mSubmit = false;
         private boolean mExternal = false;
 
-        private boolean mIsEFSActive;
+        private boolean mWillEnableEncryptedFS;
+        private int mShowingDialog = 0;
 
         // Key Store controls
         private CheckBoxPreference mAccessCheckBox;
         private Preference mInstallButton;
         private Preference mPasswordButton;
         private Preference mResetButton;
+
 
         // Encrypted file system controls
         private  CheckBoxPreference mEncryptedFSEnabled;
@@ -412,26 +423,10 @@ public class SecuritySettings extends PreferenceActivity {
                 return true;
             } else if (preference == mEncryptedFSEnabled) {
                 Boolean bval = (Boolean)value;
-                SystemProperties.set(PROPERTY_EFS_ENABLED,
-                        bval.booleanValue() ? "1" : "0");
-                if (mIsEFSActive != bval.booleanValue()) {
-                    // EFS transition detected
-                    SystemProperties.set(PROPERTY_EFS_TRANSITION, "1");
-                } else {
-                    // No transition
-                    SystemProperties.set(PROPERTY_EFS_TRANSITION, "0");
-                }
-
-                updatePreferences(mState);
-                if (bval.booleanValue()) {
-                    Toast.makeText(SecuritySettings.this, R.string.encrypted_fs_enabled,
-                            Toast.LENGTH_SHORT).show();
-                } else {
-                    Toast.makeText(SecuritySettings.this, R.string.encrypted_fs_disabled,
-                            Toast.LENGTH_SHORT).show();
-                }
+                mWillEnableEncryptedFS = bval.booleanValue();
+                showSwitchEncryptedFSDialog();
             }
-            return false;
+            return true;
         }
 
         public boolean onPreferenceClick(Preference preference) {
@@ -448,9 +443,43 @@ public class SecuritySettings extends PreferenceActivity {
         }
 
         public void onClick(DialogInterface dialog, int button) {
-            mSubmit = (button == DialogInterface.BUTTON_POSITIVE);
-            if (button == DialogInterface.BUTTON_NEUTRAL) {
-                reset();
+            if (mShowingDialog != DLG_ENABLE_EFS) {
+                mSubmit = (button == DialogInterface.BUTTON_POSITIVE);
+                if (button == DialogInterface.BUTTON_NEUTRAL) {
+                    reset();
+                }
+            } else {
+                if (button == DialogInterface.BUTTON_POSITIVE) {
+                    // Perform action
+                    // Reboot and toggle Encrypted File Systems
+                    ICheckinService service =
+                    ICheckinService.Stub.asInterface(ServiceManager.getService("checkin"));
+                    if (service != null) {
+                        try {
+                            // This RPC should never return
+                            if (mWillEnableEncryptedFS) {
+                                service.masterClearAndToggleEFS(true);
+                            } else {
+                                service.masterClearAndToggleEFS(false);
+                            }
+                        } catch (android.os.RemoteException e) {
+                            // Intentionally blank - there's nothing we can do here
+                            Log.w("SecuritySettings",
+                                    "Unable to invoke ICheckinService.masterClearAndToggleEFS()");
+                        }
+                    } else {
+                        Log.w("SecuritySettings", "Unable to locate ICheckinService");
+                    }
+                    updatePreferences(mState);
+                } else if (button == DialogInterface.BUTTON_NEGATIVE) {
+                    // Cancel action
+                    Toast.makeText(SecuritySettings.this, R.string.encrypted_fs_cancel_confirm,
+                            Toast.LENGTH_SHORT).show();
+                    updatePreferences(mState);
+                } else {
+                    // Unknown - should not happen
+                    return;
+                }
             }
         }
 
@@ -537,9 +566,6 @@ public class SecuritySettings extends PreferenceActivity {
         }
 
         private void createPreferences(PreferenceCategory category, int type) {
-            // Legacy EFS state - useful for detecting EFS device state transition
-            mIsEFSActive = SystemProperties.getBoolean(PROPERTY_EFS_ENABLED, false);
-
             switch(type) {
             case TYPE_KEYSTORE:
                 mAccessCheckBox = new CheckBoxPreference(SecuritySettings.this);
@@ -586,7 +612,6 @@ public class SecuritySettings extends PreferenceActivity {
 
             // Encrypted File system preferences
             mEncryptedFSEnabled.setChecked(encFSEnabled);
-            mEncryptedFSEnabled.setEnabled(state != KeyStore.UNINITIALIZED);
 
             // Show a toast message if the state is changed.
             if (mState == state) {
@@ -620,6 +645,7 @@ public class SecuritySettings extends PreferenceActivity {
                     .setNegativeButton(android.R.string.cancel, this)
                     .create();
             dialog.setOnDismissListener(this);
+            mShowingDialog = DLG_UNLOCK;
             dialog.show();
         }
 
@@ -641,10 +667,12 @@ public class SecuritySettings extends PreferenceActivity {
                     .setNegativeButton(android.R.string.cancel, this)
                     .create();
             dialog.setOnDismissListener(this);
+            mShowingDialog = DLG_PASSWORD;
             dialog.show();
         }
 
         private void showResetDialog() {
+            mShowingDialog = DLG_RESET;
             new AlertDialog.Builder(SecuritySettings.this)
                     .setTitle(android.R.string.dialog_alert_title)
                     .setIcon(android.R.drawable.ic_dialog_alert)
@@ -652,6 +680,25 @@ public class SecuritySettings extends PreferenceActivity {
                     .setNeutralButton(getString(android.R.string.ok), this)
                     .setNegativeButton(getString(android.R.string.cancel), this)
                     .create().show();
+        }
+
+        private void showSwitchEncryptedFSDialog() {
+            AlertDialog.Builder builder = new AlertDialog.Builder(SecuritySettings.this)
+                    .setCancelable(false)
+                    .setTitle(R.string.encrypted_fs_alert_dialog_title);
+
+            mShowingDialog = DLG_ENABLE_EFS;
+            if (mWillEnableEncryptedFS) {
+                 builder.setMessage(R.string.encrypted_fs_enable_dialog)
+                         .setPositiveButton(R.string.encrypted_fs_enable_button, this)
+                         .setNegativeButton(R.string.encrypted_fs_cancel_button, this)
+                         .create().show();
+            } else {
+                builder.setMessage(R.string.encrypted_fs_disable_dialog)
+                        .setPositiveButton(R.string.encrypted_fs_disable_button, this)
+                        .setNegativeButton(R.string.encrypted_fs_cancel_button, this)
+                        .create().show();
+            }
         }
     }
 }
