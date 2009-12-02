@@ -19,14 +19,15 @@
         
     <PreferenceCategory android:key="sound_settings"
             android:title="@string/sound_settings">
-            
+
         <CheckBoxPreference
                 android:key="silent"
                 android:title="@string/silent_mode_title"
                 android:summary="@string/silent_mode_summary"
                 android:persistent="false"
+                android:order="1"
                 android:disableDependentsState="true" />
-    
+
         <com.android.settings.RingerVolumePreference
                 android:key="ring_volume"
                 android:title="@string/ring_volume_title"
@@ -34,16 +35,28 @@
                 android:dialogTitle="@string/ring_volume_title"
                 android:persistent="false"
                 android:dependency="silent"
+                android:order="2"
                 android:streamType="ring" />
-    
+
         <VolumePreference
                 android:key="media_volume"
                 android:title="@string/media_volume_title"
                 android:summary="@string/media_volume_summary"
                 android:dialogTitle="@string/media_volume_title"
                 android:persistent="false"
+                android:order="3"
                 android:streamType="music" />
-    
+
+        <PreferenceScreen
+                android:key="dock_settings"
+                android:order="4"
+                android:title="@string/dock_settings_title">
+            <intent
+                android:action="android.intent.action.MAIN"
+                android:targetPackage="com.android.settings"
+                android:targetClass="com.android.settings.bluetooth.DockSettingsActivity" />
+        </PreferenceScreen>
+
         <com.android.settings.DefaultRingtonePreference
                 android:key="ringtone"
                 android:title="@string/ringtone_title"
@@ -51,12 +64,14 @@
                 android:dialogTitle="@string/ringtone_title"
                 android:persistent="false"
                 android:dependency="silent"
+                android:order="5"
                 android:ringtoneType="ringtone" />
     
         <CheckBoxPreference
                 android:key="vibrate"
                 android:title="@string/vibrate_title"
                 android:summary="@string/vibrate_summary"
+                android:order="6"
                 android:persistent="false" />
     
         <com.android.settings.DefaultRingtonePreference
@@ -66,12 +81,14 @@
                 android:dialogTitle="@string/notification_sound_dialog_title"
                 android:dependency="silent"
                 android:persistent="false"
+                android:order="7"
                 android:ringtoneType="notification" />
 
         <CheckBoxPreference
                 android:key="notification_pulse"
                 android:title="@string/notification_pulse_title"
                 android:summary="@string/notification_pulse_summary"
+                android:order="8"
                 android:persistent="false" />
 
         <CheckBoxPreference
@@ -80,6 +97,7 @@
                 android:summaryOn="@string/dtmf_tone_enable_summary_on"
                 android:summaryOff="@string/dtmf_tone_enable_summary_off"
                 android:dependency="silent"
+                android:order="9"
                 android:defaultValue="true" />
 
         <CheckBoxPreference
@@ -88,6 +106,7 @@
                 android:summaryOn="@string/sound_effects_enable_summary_on"
                 android:summaryOff="@string/sound_effects_enable_summary_off"
                 android:dependency="silent"
+                android:order="10"
                 android:defaultValue="true" />
 
         <CheckBoxPreference
@@ -96,6 +115,7 @@
                 android:summaryOn="@string/haptic_feedback_enable_summary_on"
                 android:summaryOff="@string/haptic_feedback_enable_summary_off"
                 android:dependency="silent"
+                 android:order="11"
                 android:defaultValue="true" />
 
         <CheckBoxPreference
@@ -104,6 +124,7 @@
                 android:summaryOn="@string/play_media_notification_sounds_enable_summary_on"
                 android:summaryOff="@string/play_media_notification_sounds_enable_summary_off"
                 android:dependency="silent"
+                android:order="12"
                 android:defaultValue="true" />
 
     </PreferenceCategory>
