@@ -60,10 +60,14 @@ public class SoundAndDisplaySettings extends PreferenceActivity implements
     private static final String KEY_EMERGENCY_TONE = "emergency_tone";
     private static final String KEY_SOUND_SETTINGS = "sound_settings";
     private static final String KEY_NOTIFICATION_PULSE = "notification_pulse";
+    private static final String KEY_DOCK_SETTINGS = "dock_settings";
 
     private CheckBoxPreference mSilent;
 
     private CheckBoxPreference mPlayMediaNotificationSounds;
+
+    private Preference mDockSettings;
+    private boolean mHasDockSettings;
 
     private IMountService mMountService = null;
 
@@ -90,9 +94,15 @@ public class SoundAndDisplaySettings extends PreferenceActivity implements
     private BroadcastReceiver mReceiver = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
-            updateState(false);
+            if (intent.getAction().equals(AudioManager.RINGER_MODE_CHANGED_ACTION)) {
+                updateState(false);
+            } else if (intent.getAction().equals(Intent.ACTION_DOCK_EVENT)) {
+                handleDockChange(intent);
+            }
         }
     };
+
+    private PreferenceGroup mSoundSettings;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -147,12 +157,12 @@ public class SoundAndDisplaySettings extends PreferenceActivity implements
             emergencyTonePreference.setOnPreferenceChangeListener(this);
         }
 
-        PreferenceGroup soundSettings = (PreferenceGroup) findPreference(KEY_SOUND_SETTINGS);
+        mSoundSettings = (PreferenceGroup) findPreference(KEY_SOUND_SETTINGS);
         mNotificationPulse = (CheckBoxPreference)
-                soundSettings.findPreference(KEY_NOTIFICATION_PULSE);
-        if (mNotificationPulse != null && soundSettings != null &&
+                mSoundSettings.findPreference(KEY_NOTIFICATION_PULSE);
+        if (mNotificationPulse != null &&
                 getResources().getBoolean(R.bool.has_intrusive_led) == false) {
-            soundSettings.removePreference(mNotificationPulse);
+            mSoundSettings.removePreference(mNotificationPulse);
         } else {
             try {
                 mNotificationPulse.setChecked(Settings.System.getInt(resolver,
@@ -162,6 +172,8 @@ public class SoundAndDisplaySettings extends PreferenceActivity implements
                 Log.e(TAG, Settings.System.NOTIFICATION_LIGHT_PULSE + " not found");
             }
         }
+
+        initDockSettings();
     }
 
     @Override
@@ -171,6 +183,12 @@ public class SoundAndDisplaySettings extends PreferenceActivity implements
         updateState(true);
         
         IntentFilter filter = new IntentFilter(AudioManager.RINGER_MODE_CHANGED_ACTION);
+        if (mHasDockSettings) {
+            if (mDockSettings != null) {
+                mSoundSettings.removePreference(mDockSettings);
+            }
+            filter.addAction(Intent.ACTION_DOCK_EVENT);
+        }
         registerReceiver(mReceiver, filter);
     }
 
@@ -179,6 +197,31 @@ public class SoundAndDisplaySettings extends PreferenceActivity implements
         super.onPause();
 
         unregisterReceiver(mReceiver);
+    }
+
+    private void initDockSettings() {
+        mDockSettings = mSoundSettings.findPreference(KEY_DOCK_SETTINGS);
+        mHasDockSettings = getResources().getBoolean(R.bool.has_dock_settings);
+        if (mDockSettings != null) {
+            mSoundSettings.removePreference(mDockSettings);
+            // Don't care even if we dock
+            if (getResources().getBoolean(R.bool.has_dock_settings) == false) {
+                mDockSettings = null;
+            }
+        }
+    }
+
+    private void handleDockChange(Intent intent) {
+        if (mHasDockSettings && mDockSettings != null) {
+            int dockState = intent.getIntExtra(Intent.EXTRA_DOCK_STATE, 0);
+            if (dockState != Intent.EXTRA_DOCK_STATE_UNDOCKED) {
+                // Show dock settings item
+                mSoundSettings.addPreference(mDockSettings);
+            } else {
+                // Remove dock settings item
+                mSoundSettings.removePreference(mDockSettings);
+            }
+        }
     }
 
     private void updateState(boolean force) {
