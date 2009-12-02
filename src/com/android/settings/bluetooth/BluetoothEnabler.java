@@ -16,6 +16,7 @@
 
 package com.android.settings.bluetooth;
 
+import com.android.settings.AirplaneModeEnabler;
 import com.android.settings.R;
 
 import android.bluetooth.BluetoothAdapter;
@@ -25,6 +26,7 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.preference.Preference;
 import android.preference.CheckBoxPreference;
+import android.provider.Settings;
 import android.text.TextUtils;
 import android.util.Config;
 
@@ -116,14 +118,15 @@ public class BluetoothEnabler implements Preference.OnPreferenceChangeListener {
                                            mOriginalSummary :
                                            null);
 
-            /*
-             * Don't ever disable the preference. Only enable here. Disablement
-             * is taken care of by the dependency code. If this is disabled
-             * here, it may not be re-enabled from the framework when dependency
-             * is met. http://b/issue?id=2053751
-             */
-            if (isEnabledByDependency()) {
+            final boolean hasDependency = !TextUtils.isEmpty(mCheckBoxPreference.getDependency());
+            final boolean bluetoothAllowed = isBluetoothAllowed(mContext);
+
+            // Avoid disabling when dependencies have been manually set,
+            // workaround for framework bug http://b/2053751
+            if (bluetoothAllowed) {
                 mCheckBoxPreference.setEnabled(true);
+            } else if (!hasDependency) {
+                mCheckBoxPreference.setEnabled(false);
             }
 
         } else if (state == BluetoothAdapter.STATE_TURNING_ON ||
@@ -139,22 +142,21 @@ public class BluetoothEnabler implements Preference.OnPreferenceChangeListener {
         }
     }
 
-    private boolean isEnabledByDependency() {
-        Preference dep = getDependencyPreference();
-        if (dep == null) {
+    private static boolean isBluetoothAllowed(Context context) {
+        // allowed if we are not in airplane mode
+        if (!AirplaneModeEnabler.isAirplaneModeOn(context)) {
             return true;
         }
-
-        return !dep.shouldDisableDependents();
-    }
-
-    private Preference getDependencyPreference() {
-        String depKey = mCheckBoxPreference.getDependency();
-        if (TextUtils.isEmpty(depKey)) {
-            return null;
+        // allowed if bluetooth is not in AIRPLANE_MODE_RADIOS
+        String radios = Settings.System.getString(context.getContentResolver(),
+                Settings.System.AIRPLANE_MODE_RADIOS);
+        if (radios == null || !radios.contains(Settings.System.RADIO_BLUETOOTH)) {
+            return true;
         }
-
-        return mCheckBoxPreference.getPreferenceManager().findPreference(depKey);
+        // allowed if bluetooth is in AIRPLANE_MODE_TOGGLEABLE_RADIOS
+        radios = Settings.System.getString(context.getContentResolver(),
+                Settings.System.AIRPLANE_MODE_TOGGLEABLE_RADIOS);
+        return (radios != null && radios.contains(Settings.System.RADIO_BLUETOOTH));
     }
 
 }

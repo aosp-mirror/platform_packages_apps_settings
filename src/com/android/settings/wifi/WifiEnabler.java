@@ -122,9 +122,18 @@ public class WifiEnabler implements Preference.OnPreferenceChangeListener {
             mWifiCheckBoxPref.setChecked(wifiState == WIFI_STATE_ENABLED);
             mWifiCheckBoxPref
                     .setSummary(wifiState == WIFI_STATE_DISABLED ? mOriginalSummary : null);
-            
-            mWifiCheckBoxPref.setEnabled(isWifiAllowed(mContext));
-            
+
+            final boolean hasDependency = !TextUtils.isEmpty(mWifiCheckBoxPref.getDependency());
+            final boolean wifiAllowed = isWifiAllowed(mContext);
+
+            // Avoid disabling when dependencies have been manually set,
+            // workaround for framework bug http://b/2053751
+            if (wifiAllowed) {
+                mWifiCheckBoxPref.setEnabled(true);
+            } else if (!hasDependency) {
+                mWifiCheckBoxPref.setEnabled(false);
+            }
+
         } else if (wifiState == WIFI_STATE_DISABLING || wifiState == WIFI_STATE_ENABLING) {
             mWifiCheckBoxPref.setSummary(wifiState == WIFI_STATE_ENABLING ? R.string.wifi_starting
                     : R.string.wifi_stopping);

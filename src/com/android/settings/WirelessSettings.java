@@ -107,12 +107,12 @@ public class WirelessSettings extends PreferenceActivity {
         Preference wifiPreference = findPreference(KEY_TOGGLE_WIFI);
         Preference btPreference = findPreference(KEY_TOGGLE_BLUETOOTH);
         Preference wifiSettings = findPreference(KEY_WIFI_SETTINGS);
+        Preference btSettings = findPreference(KEY_BT_SETTINGS);
         Preference vpnSettings = findPreference(KEY_VPN_SETTINGS);
 
         IBinder b = ServiceManager.getService(BluetoothAdapter.BLUETOOTH_SERVICE);
         if (b == null) {
             // Disable BT Settings if BT service is not available.
-            Preference btSettings = findPreference(KEY_BT_SETTINGS);
             btSettings.setEnabled(false);
         }
 
@@ -130,6 +130,13 @@ public class WirelessSettings extends PreferenceActivity {
             wifiPreference.setDependency(airplanePreference.getKey());
             wifiSettings.setDependency(airplanePreference.getKey());
             vpnSettings.setDependency(airplanePreference.getKey());
+        }
+
+        // Manually set dependencies for Bluetooth when not toggleable.
+        if (toggleableRadios == null ||
+                !toggleableRadios.contains(Settings.System.RADIO_BLUETOOTH)) {
+            btPreference.setDependency(airplanePreference.getKey());
+            btSettings.setDependency(airplanePreference.getKey());
         }
     }
 

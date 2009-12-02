@@ -44,14 +44,12 @@
         android:key="toggle_bluetooth"
         android:title="@string/bluetooth_quick_toggle_title"
         android:summary="@string/bluetooth_quick_toggle_summary"
-        android:persistent="false"
-        android:dependency="toggle_airplane" />
+        android:persistent="false" />
 
     <PreferenceScreen
         android:key="bt_settings"
         android:title="@string/bluetooth_settings_title"
-        android:summary="@string/bluetooth_settings_summary"
-        android:dependency="toggle_airplane">
+        android:summary="@string/bluetooth_settings_summary">
         <intent
             android:action="android.intent.action.MAIN"
             android:targetPackage="com.android.settings"
