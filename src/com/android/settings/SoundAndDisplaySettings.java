@@ -17,8 +17,6 @@
 package com.android.settings;
 
 import static android.provider.Settings.System.SCREEN_OFF_TIMEOUT;
-import static android.provider.Settings.System.COMPATIBILITY_MODE;
-
 import android.content.BroadcastReceiver;
 import android.content.ContentResolver;
 import android.content.Context;
@@ -29,15 +27,17 @@ import android.os.Bundle;
 import android.os.IMountService;
 import android.os.RemoteException;
 import android.os.ServiceManager;
+import android.preference.CheckBoxPreference;
 import android.preference.ListPreference;
 import android.preference.Preference;
 import android.preference.PreferenceActivity;
+import android.preference.PreferenceGroup;
 import android.preference.PreferenceScreen;
-import android.preference.CheckBoxPreference;
 import android.provider.Settings;
+import android.provider.Settings.SettingNotFoundException;
+import android.telephony.TelephonyManager;
 import android.util.Log;
 import android.view.IWindowManager;
-import android.telephony.TelephonyManager;
 
 public class SoundAndDisplaySettings extends PreferenceActivity implements
         Preference.OnPreferenceChangeListener {
@@ -55,9 +55,12 @@ public class SoundAndDisplaySettings extends PreferenceActivity implements
     private static final String KEY_HAPTIC_FEEDBACK = "haptic_feedback";
     private static final String KEY_ANIMATIONS = "animations";
     private static final String KEY_ACCELEROMETER = "accelerometer";
-    private static final String KEY_PLAY_MEDIA_NOTIFICATION_SOUNDS = "play_media_notification_sounds";
-    private static final String KEY_EMERGENCY_TONE ="emergency_tone";
-    
+    private static final String KEY_PLAY_MEDIA_NOTIFICATION_SOUNDS =
+            "play_media_notification_sounds";
+    private static final String KEY_EMERGENCY_TONE = "emergency_tone";
+    private static final String KEY_SOUND_SETTINGS = "sound_settings";
+    private static final String KEY_NOTIFICATION_PULSE = "notification_pulse";
+
     private CheckBoxPreference mSilent;
 
     private CheckBoxPreference mPlayMediaNotificationSounds;
@@ -77,6 +80,7 @@ public class SoundAndDisplaySettings extends PreferenceActivity implements
     private CheckBoxPreference mHapticFeedback;
     private ListPreference mAnimations;
     private CheckBoxPreference mAccelerometer;
+    private CheckBoxPreference mNotificationPulse;
     private float[] mAnimationScales;
     
     private AudioManager mAudioManager;
@@ -102,11 +106,11 @@ public class SoundAndDisplaySettings extends PreferenceActivity implements
         mMountService = IMountService.Stub.asInterface(ServiceManager.getService("mount"));
         
         addPreferencesFromResource(R.xml.sound_and_display_settings);
-        
+
         if (TelephonyManager.PHONE_TYPE_CDMA != activePhoneType) {
             // device is not CDMA, do not display CDMA emergency_tone
             getPreferenceScreen().removePreference(findPreference(KEY_EMERGENCY_TONE));
-         }
+        }
 
         mSilent = (CheckBoxPreference) findPreference(KEY_SILENT);
         mPlayMediaNotificationSounds = (CheckBoxPreference) findPreference(KEY_PLAY_MEDIA_NOTIFICATION_SOUNDS);
@@ -142,8 +146,24 @@ public class SoundAndDisplaySettings extends PreferenceActivity implements
                 resolver, Settings.System.EMERGENCY_TONE, FALLBACK_EMERGENCY_TONE_VALUE)));
             emergencyTonePreference.setOnPreferenceChangeListener(this);
         }
+
+        PreferenceGroup soundSettings = (PreferenceGroup) findPreference(KEY_SOUND_SETTINGS);
+        mNotificationPulse = (CheckBoxPreference)
+                soundSettings.findPreference(KEY_NOTIFICATION_PULSE);
+        if (mNotificationPulse != null && soundSettings != null &&
+                getResources().getBoolean(R.bool.has_intrusive_led) == false) {
+            soundSettings.removePreference(mNotificationPulse);
+        } else {
+            try {
+                mNotificationPulse.setChecked(Settings.System.getInt(resolver,
+                        Settings.System.NOTIFICATION_LIGHT_PULSE) == 1);
+                mNotificationPulse.setOnPreferenceChangeListener(this);
+            } catch (SettingNotFoundException snfe) {
+                Log.e(TAG, Settings.System.NOTIFICATION_LIGHT_PULSE + " not found");
+            }
+        }
     }
-    
+
     @Override
     protected void onResume() {
         super.onResume();
@@ -279,12 +299,18 @@ public class SoundAndDisplaySettings extends PreferenceActivity implements
             Settings.System.putInt(getContentResolver(),
                     Settings.System.ACCELEROMETER_ROTATION,
                     mAccelerometer.isChecked() ? 1 : 0);
+        } else if (preference == mNotificationPulse) {
+            boolean value = mNotificationPulse.isChecked();
+            Settings.System.putInt(getContentResolver(),
+                    Settings.System.NOTIFICATION_LIGHT_PULSE, value ? 1 : 0);
         }
+
         return true;
     }
 
     public boolean onPreferenceChange(Preference preference, Object objValue) {
-        if (KEY_ANIMATIONS.equals(preference.getKey())) {
+        final String key = preference.getKey();
+        if (KEY_ANIMATIONS.equals(key)) {
             try {
                 int value = Integer.parseInt((String) objValue);
                 if (mAnimationScales.length >= 1) {
@@ -303,7 +329,7 @@ public class SoundAndDisplaySettings extends PreferenceActivity implements
             }
             
         }
-        if (KEY_SCREEN_TIMEOUT.equals(preference.getKey())) {
+        if (KEY_SCREEN_TIMEOUT.equals(key)) {
             int value = Integer.parseInt((String) objValue);
             try {
                 Settings.System.putInt(getContentResolver(), 
@@ -311,7 +337,7 @@ public class SoundAndDisplaySettings extends PreferenceActivity implements
             } catch (NumberFormatException e) {
                 Log.e(TAG, "could not persist screen timeout setting", e);
             }
-        } else if (KEY_EMERGENCY_TONE.equals(preference.getKey())) {
+        } else if (KEY_EMERGENCY_TONE.equals(key)) {
             int value = Integer.parseInt((String) objValue);
             try {
                 Settings.System.putInt(getContentResolver(),
@@ -320,8 +346,7 @@ public class SoundAndDisplaySettings extends PreferenceActivity implements
                 Log.e(TAG, "could not persist emergency tone setting", e);
             }
         }
-        
+
         return true;
     }
-
 }
