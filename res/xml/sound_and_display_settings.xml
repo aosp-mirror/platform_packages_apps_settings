@@ -17,7 +17,7 @@
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:settings="http://schemas.android.com/apk/res/com.android.settings">
         
-    <PreferenceCategory
+    <PreferenceCategory android:key="sound_settings"
             android:title="@string/sound_settings">
             
         <CheckBoxPreference
@@ -67,7 +67,13 @@
                 android:dependency="silent"
                 android:persistent="false"
                 android:ringtoneType="notification" />
-                
+
+        <CheckBoxPreference
+                android:key="notification_pulse"
+                android:title="@string/notification_pulse_title"
+                android:summary="@string/notification_pulse_summary"
+                android:persistent="false" />
+
         <CheckBoxPreference
                 android:key="dtmf_tone"
                 android:title="@string/dtmf_tone_enable_title"
