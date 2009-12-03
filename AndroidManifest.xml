@@ -103,6 +103,39 @@
             </intent-filter>
         </activity>
 
+        <activity android:name=".wifi.WifiInfo">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN"/>
+                <category android:name="android.intent.category.DEVELOPMENT_PREFERENCE" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+
+        <activity android:name=".wifi.WifiConfigInfo">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN"/>
+                <category android:name="android.intent.category.DEVELOPMENT_PREFERENCE" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+
+        <activity android:name=".wifi.WifiAPITest">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN"/>
+                <category android:name="android.intent.category.DEVELOPMENT_PREFERENCE" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+
+        <activity android:name=".wifi.WifiStatusTest">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN"/>
+                <category android:name="android.intent.category.DEVELOPMENT_PREFERENCE" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+
+
         <activity android:name="ApnSettings" android:label="@string/apn_settings"
                   android:configChanges="orientation|keyboardHidden"
                   android:launchMode="singleTask"
