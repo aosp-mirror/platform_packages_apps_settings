@@ -488,6 +488,22 @@
             </intent-filter>
         </activity>
 
+        <receiver
+            android:name=".bluetooth.DockAudioStateChangeReceiver"
+            >
+            <intent-filter>
+                <action android:name="android.intent.action.DOCK_EVENT" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </receiver>
+
+        <activity android:name=".bluetooth.DockSettingsActivity"
+                  android:label="@string/bluetooth_dock_settings"
+                  android:launchMode="singleTask"
+                  android:excludeFromRecents="true"
+                  android:theme="@*android:style/Theme.Dialog.Alert">
+        </activity>
+
         <activity android:name=".bluetooth.RequestPermissionActivity"
                   android:label="@string/bluetooth_permission_request"
                   android:excludeFromRecents="true"
