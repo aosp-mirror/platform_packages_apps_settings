@@ -41,6 +41,7 @@ import java.util.Date;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Set;
 
 /**
  * CachedBluetoothDevice represents a remote Bluetooth device. It contains
@@ -401,6 +402,7 @@ public class CachedBluetoothDevice implements Comparable<CachedBluetoothDevice> 
                         .getProfileManager(mLocalManager, profile);
                 if (profileManager.isPreferred(mDevice)) {
                     ++preferredProfiles;
+                    disconnectConnected(profile);
                     queueCommand(new BluetoothJob(BluetoothCommand.CONNECT, this, profile));
                 }
             }
@@ -423,6 +425,7 @@ public class CachedBluetoothDevice implements Comparable<CachedBluetoothDevice> 
                 LocalBluetoothProfileManager profileManager = LocalBluetoothProfileManager
                         .getProfileManager(mLocalManager, profile);
                 profileManager.setPreferred(mDevice, false);
+                disconnectConnected(profile);
                 queueCommand(new BluetoothJob(BluetoothCommand.CONNECT, this, profile));
             }
         }
@@ -432,7 +435,22 @@ public class CachedBluetoothDevice implements Comparable<CachedBluetoothDevice> 
         mConnectAttempted = SystemClock.elapsedRealtime();
         // Reset the only-show-one-error-dialog tracking variable
         mIsConnectingErrorPossible = true;
+        disconnectConnected(profile);
         queueCommand(new BluetoothJob(BluetoothCommand.CONNECT, this, profile));
+    }
+
+    private void disconnectConnected(Profile profile) {
+        LocalBluetoothProfileManager profileManager =
+            LocalBluetoothProfileManager.getProfileManager(mLocalManager, profile);
+        CachedBluetoothDeviceManager cachedDeviceManager = mLocalManager.getCachedDeviceManager();
+        Set<BluetoothDevice> devices = profileManager.getConnectedDevices();
+        if (devices == null) return;
+        for (BluetoothDevice device : devices) {
+            CachedBluetoothDevice cachedDevice = cachedDeviceManager.findDevice(device);
+            if (cachedDevice != null) {
+                queueCommand(new BluetoothJob(BluetoothCommand.DISCONNECT, cachedDevice, profile));
+            }
+        }
     }
 
     private boolean connectInt(CachedBluetoothDevice cachedDevice, Profile profile) {
