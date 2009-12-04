@@ -16,17 +16,18 @@
 
 package com.android.settings.bluetooth;
 
+import com.android.settings.R;
+
 import android.bluetooth.BluetoothA2dp;
 import android.bluetooth.BluetoothDevice;
 import android.bluetooth.BluetoothHeadset;
 import android.bluetooth.BluetoothUuid;
-import android.os.ParcelUuid;
 import android.os.Handler;
+import android.os.ParcelUuid;
 import android.util.Log;
 
-import com.android.settings.R;
-
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -121,6 +122,8 @@ public abstract class LocalBluetoothProfileManager {
         mLocalManager = localManager;
     }
 
+    public abstract Set<BluetoothDevice> getConnectedDevices();
+
     public abstract boolean connect(BluetoothDevice device);
 
     public abstract boolean disconnect(BluetoothDevice device);
@@ -161,6 +164,11 @@ public abstract class LocalBluetoothProfileManager {
         public A2dpProfileManager(LocalBluetoothManager localManager) {
             super(localManager);
             mService = new BluetoothA2dp(localManager.getContext());
+        }
+
+        @Override
+        public Set<BluetoothDevice> getConnectedDevices() {
+            return mService.getConnectedSinks();
         }
 
         @Override
@@ -261,6 +269,17 @@ public abstract class LocalBluetoothProfileManager {
         }
 
         @Override
+        public Set<BluetoothDevice> getConnectedDevices() {
+            Set<BluetoothDevice> devices = null;
+            BluetoothDevice device = mService.getCurrentHeadset();
+            if (device != null) {
+                devices = new HashSet<BluetoothDevice>();
+                devices.add(device);
+            }
+            return devices;
+        }
+
+        @Override
         public boolean connect(BluetoothDevice device) {
             // Since connectHeadset fails if already connected to a headset, we
             // disconnect from any headset first
@@ -331,6 +350,11 @@ public abstract class LocalBluetoothProfileManager {
 
         public OppProfileManager(LocalBluetoothManager localManager) {
             super(localManager);
+        }
+
+        @Override
+        public Set<BluetoothDevice> getConnectedDevices() {
+            return null;
         }
 
         @Override
