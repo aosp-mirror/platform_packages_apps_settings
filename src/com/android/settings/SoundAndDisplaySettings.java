@@ -17,6 +17,9 @@
 package com.android.settings;
 
 import static android.provider.Settings.System.SCREEN_OFF_TIMEOUT;
+
+import com.android.settings.bluetooth.DockSettingsActivity;
+
 import android.content.BroadcastReceiver;
 import android.content.ContentResolver;
 import android.content.Context;
@@ -103,6 +106,8 @@ public class SoundAndDisplaySettings extends PreferenceActivity implements
     };
 
     private PreferenceGroup mSoundSettings;
+
+    private Intent mDockIntent;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -217,6 +222,9 @@ public class SoundAndDisplaySettings extends PreferenceActivity implements
             if (dockState != Intent.EXTRA_DOCK_STATE_UNDOCKED) {
                 // Show dock settings item
                 mSoundSettings.addPreference(mDockSettings);
+
+                // Save the intent to send to the activity
+                mDockIntent = intent;
             } else {
                 // Remove dock settings item
                 mSoundSettings.removePreference(mDockSettings);
@@ -346,6 +354,10 @@ public class SoundAndDisplaySettings extends PreferenceActivity implements
             boolean value = mNotificationPulse.isChecked();
             Settings.System.putInt(getContentResolver(),
                     Settings.System.NOTIFICATION_LIGHT_PULSE, value ? 1 : 0);
+        } else if (preference == mDockSettings) {
+            Intent i = new Intent(mDockIntent);
+            i.setClass(this, DockSettingsActivity.class);
+            startActivity(i);
         }
 
         return true;
