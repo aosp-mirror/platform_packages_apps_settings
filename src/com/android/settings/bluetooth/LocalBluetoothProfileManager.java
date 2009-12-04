@@ -185,7 +185,9 @@ public abstract class LocalBluetoothProfileManager {
         @Override
         public boolean disconnect(BluetoothDevice device) {
             // Downgrade priority as user is disconnecting the sink.
-            mService.setSinkPriority(device, BluetoothA2dp.PRIORITY_ON);
+            if (mService.getSinkPriority(device) > BluetoothA2dp.PRIORITY_ON) {
+                mService.setSinkPriority(device, BluetoothA2dp.PRIORITY_ON);
+            }
             return mService.disconnectSink(device);
         }
 
@@ -291,7 +293,9 @@ public abstract class LocalBluetoothProfileManager {
         public boolean disconnect(BluetoothDevice device) {
             if (mService.getCurrentHeadset().equals(device)) {
                 // Downgrade prority as user is disconnecting the headset.
-                mService.setPriority(device, BluetoothHeadset.PRIORITY_ON);
+                if (mService.getPriority(device) > BluetoothHeadset.PRIORITY_ON) {
+                    mService.setPriority(device, BluetoothHeadset.PRIORITY_ON);
+                }
                 return mService.disconnectHeadset();
             } else {
                 return false;
