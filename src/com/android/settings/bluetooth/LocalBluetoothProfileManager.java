@@ -168,12 +168,12 @@ public abstract class LocalBluetoothProfileManager {
 
         @Override
         public Set<BluetoothDevice> getConnectedDevices() {
-            return mService.getConnectedSinks();
+            return mService.getNonDisconnectedSinks();
         }
 
         @Override
         public boolean connect(BluetoothDevice device) {
-            Set<BluetoothDevice> sinks = mService.getConnectedSinks();
+            Set<BluetoothDevice> sinks = mService.getNonDisconnectedSinks();
             if (sinks != null) {
                 for (BluetoothDevice sink : sinks) {
                     mService.disconnectSink(sink);
