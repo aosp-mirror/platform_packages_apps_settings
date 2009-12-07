@@ -55,6 +55,7 @@ public class TextToSpeechSettings extends PreferenceActivity implements
     private static final String KEY_TTS_DEFAULT_LANG = "tts_default_lang";
     private static final String KEY_TTS_DEFAULT_COUNTRY = "tts_default_country";
     private static final String KEY_TTS_DEFAULT_VARIANT = "tts_default_variant";
+    private static final String KEY_TTS_DEFAULT_SYNTH = "tts_default_synth";
     // TODO move default Locale values to TextToSpeech.Engine
     private static final String DEFAULT_LANG_VAL = "eng";
     private static final String DEFAULT_COUNTRY_VAL = "USA";
@@ -70,6 +71,7 @@ public class TextToSpeechSettings extends PreferenceActivity implements
     private CheckBoxPreference mUseDefaultPref = null;
     private ListPreference     mDefaultRatePref = null;
     private ListPreference     mDefaultLocPref = null;
+    private ListPreference     mDefaultSynthPref = null;
     private String             mDefaultLanguage = null;
     private String             mDefaultCountry = null;
     private String             mDefaultLocVariant = null;
@@ -156,7 +158,10 @@ public class TextToSpeechSettings extends PreferenceActivity implements
         mUseDefaultPref.setChecked(useDefault == 1);
         mUseDefaultPref.setOnPreferenceChangeListener(this);
 
-        // Default engine
+        // Default synthesis engine
+        mDefaultSynthPref = (ListPreference) findPreference(KEY_TTS_DEFAULT_SYNTH);
+        loadEngines();
+        mDefaultSynthPref.setOnPreferenceChangeListener(this);
         String engine = Settings.Secure.getString(resolver, TTS_DEFAULT_SYNTH);
         if (engine == null) {
             // TODO move FALLBACK_TTS_DEFAULT_SYNTH to TextToSpeech
@@ -297,6 +302,14 @@ public class TextToSpeechSettings extends PreferenceActivity implements
             int newIndex = mDefaultLocPref.findIndexOfValue((String)objValue);
             Log.v("Settings", " selected is " + newIndex);
             mDemoStringIndex = newIndex > -1 ? newIndex : 0;
+        } else if (KEY_TTS_DEFAULT_SYNTH.equals(preference.getKey())) {
+            // TODO: Do a data check here
+            mDefaultEng = objValue.toString();
+            Settings.Secure.putString(getContentResolver(), TTS_DEFAULT_SYNTH, mDefaultEng);
+            if (mTts != null) {
+                mTts.setEngineByPackageName(mDefaultEng);
+            }
+            Log.v("Settings", "The default synth is: " + objValue.toString());
         }
 
         return true;
@@ -423,5 +436,24 @@ public class TextToSpeechSettings extends PreferenceActivity implements
         Settings.Secure.putString(resolver, TTS_DEFAULT_COUNTRY, DEFAULT_COUNTRY_VAL);
         Settings.Secure.putString(resolver, TTS_DEFAULT_VARIANT, DEFAULT_VARIANT_VAL);
     }
+
+
+  private void loadEngines() {
+    ListPreference enginesPref = (ListPreference) findPreference(KEY_TTS_DEFAULT_SYNTH);
+
+    Intent intent = new Intent("android.intent.action.START_TTS_ENGINE");
+
+    ResolveInfo[] enginesArray = new ResolveInfo[0];
+    PackageManager pm = getPackageManager();
+    enginesArray = pm.queryIntentActivities(intent, 0).toArray(enginesArray);
+    CharSequence entries[] = new CharSequence[enginesArray.length];
+    CharSequence values[] = new CharSequence[enginesArray.length];
+    for (int i = 0; i < enginesArray.length; i++) {
+      entries[i] = enginesArray[i].loadLabel(pm);
+      values[i] = enginesArray[i].activityInfo.packageName;
+    }
+    enginesPref.setEntries(entries);
+    enginesPref.setEntryValues(values);
+  }
 
 }
