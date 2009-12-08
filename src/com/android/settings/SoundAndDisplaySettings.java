@@ -18,7 +18,7 @@ package com.android.settings;
 
 import static android.provider.Settings.System.SCREEN_OFF_TIMEOUT;
 
-import com.android.settings.bluetooth.DockSettingsActivity;
+import com.android.settings.bluetooth.DockEventReceiver;
 
 import android.content.BroadcastReceiver;
 import android.content.ContentResolver;
@@ -49,7 +49,7 @@ public class SoundAndDisplaySettings extends PreferenceActivity implements
     /** If there is no setting in the provider, use this. */
     private static final int FALLBACK_SCREEN_TIMEOUT_VALUE = 30000;
     private static final int FALLBACK_EMERGENCY_TONE_VALUE = 0;
-    
+
     private static final String KEY_SILENT = "silent";
     private static final String KEY_VIBRATE = "vibrate";
     private static final String KEY_SCREEN_TIMEOUT = "screen_timeout";
@@ -89,9 +89,9 @@ public class SoundAndDisplaySettings extends PreferenceActivity implements
     private CheckBoxPreference mAccelerometer;
     private CheckBoxPreference mNotificationPulse;
     private float[] mAnimationScales;
-    
+
     private AudioManager mAudioManager;
-    
+
     private IWindowManager mWindowManager;
 
     private BroadcastReceiver mReceiver = new BroadcastReceiver() {
@@ -114,12 +114,12 @@ public class SoundAndDisplaySettings extends PreferenceActivity implements
         super.onCreate(savedInstanceState);
         ContentResolver resolver = getContentResolver();
         int activePhoneType = TelephonyManager.getDefault().getPhoneType();
-        
+
         mAudioManager = (AudioManager) getSystemService(Context.AUDIO_SERVICE);
         mWindowManager = IWindowManager.Stub.asInterface(ServiceManager.getService("window"));
 
         mMountService = IMountService.Stub.asInterface(ServiceManager.getService("mount"));
-        
+
         addPreferencesFromResource(R.xml.sound_and_display_settings);
 
         if (TelephonyManager.PHONE_TYPE_CDMA != activePhoneType) {
@@ -147,7 +147,7 @@ public class SoundAndDisplaySettings extends PreferenceActivity implements
         mAnimations.setOnPreferenceChangeListener(this);
         mAccelerometer = (CheckBoxPreference) findPreference(KEY_ACCELEROMETER);
         mAccelerometer.setPersistent(false);
-        
+
         ListPreference screenTimeoutPreference =
             (ListPreference) findPreference(KEY_SCREEN_TIMEOUT);
         screenTimeoutPreference.setValue(String.valueOf(Settings.System.getInt(
@@ -184,9 +184,9 @@ public class SoundAndDisplaySettings extends PreferenceActivity implements
     @Override
     protected void onResume() {
         super.onResume();
-        
+
         updateState(true);
-        
+
         IntentFilter filter = new IntentFilter(AudioManager.RINGER_MODE_CHANGED_ACTION);
         if (mHasDockSettings) {
             if (mDockSettings != null) {
@@ -236,7 +236,7 @@ public class SoundAndDisplaySettings extends PreferenceActivity implements
         final int ringerMode = mAudioManager.getRingerMode();
         final boolean silentOrVibrateMode =
                 ringerMode != AudioManager.RINGER_MODE_NORMAL;
-        
+
         if (silentOrVibrateMode != mSilent.isChecked() || force) {
             mSilent.setChecked(silentOrVibrateMode);
         }
@@ -245,25 +245,25 @@ public class SoundAndDisplaySettings extends PreferenceActivity implements
             mPlayMediaNotificationSounds.setChecked(mMountService.getPlayNotificationSounds());
         } catch (RemoteException e) {
         }
-       
+
         boolean vibrateSetting;
         if (silentOrVibrateMode) {
             vibrateSetting = ringerMode == AudioManager.RINGER_MODE_VIBRATE;
         } else {
             vibrateSetting = mAudioManager.getVibrateSetting(AudioManager.VIBRATE_TYPE_RINGER)
-                    == AudioManager.VIBRATE_SETTING_ON;            
+                    == AudioManager.VIBRATE_SETTING_ON;
         }
         if (vibrateSetting != mVibrate.isChecked() || force) {
             mVibrate.setChecked(vibrateSetting);
         }
-        
+
         int silentModeStreams = Settings.System.getInt(getContentResolver(),
                 Settings.System.MODE_RINGER_STREAMS_AFFECTED, 0);
-        boolean isAlarmInclSilentMode = (silentModeStreams & (1 << AudioManager.STREAM_ALARM)) != 0; 
+        boolean isAlarmInclSilentMode = (silentModeStreams & (1 << AudioManager.STREAM_ALARM)) != 0;
         mSilent.setSummary(isAlarmInclSilentMode ?
                 R.string.silent_mode_incl_alarm_summary :
                 R.string.silent_mode_summary);
-        
+
         int animations = 0;
         try {
             mAnimationScales = mWindowManager.getAnimationScales();
@@ -290,7 +290,7 @@ public class SoundAndDisplaySettings extends PreferenceActivity implements
         mAnimations.setValueIndex(idx);
         updateAnimationsSummary(mAnimations.getValue());
         mAccelerometer.setChecked(Settings.System.getInt(
-                getContentResolver(), 
+                getContentResolver(),
                 Settings.System.ACCELEROMETER_ROTATION, 0) != 0);
     }
 
@@ -306,7 +306,7 @@ public class SoundAndDisplaySettings extends PreferenceActivity implements
             }
         }
     }
-    
+
     private void setRingerMode(boolean silent, boolean vibrate) {
         if (silent) {
             mAudioManager.setRingerMode(vibrate ? AudioManager.RINGER_MODE_VIBRATE :
@@ -332,7 +332,7 @@ public class SoundAndDisplaySettings extends PreferenceActivity implements
         } else if (preference == mDtmfTone) {
             Settings.System.putInt(getContentResolver(), Settings.System.DTMF_TONE_WHEN_DIALING,
                     mDtmfTone.isChecked() ? 1 : 0);
-            
+
         } else if (preference == mSoundEffects) {
             if (mSoundEffects.isChecked()) {
                 mAudioManager.loadSoundEffects();
@@ -345,7 +345,7 @@ public class SoundAndDisplaySettings extends PreferenceActivity implements
         } else if (preference == mHapticFeedback) {
             Settings.System.putInt(getContentResolver(), Settings.System.HAPTIC_FEEDBACK_ENABLED,
                     mHapticFeedback.isChecked() ? 1 : 0);
-            
+
         } else if (preference == mAccelerometer) {
             Settings.System.putInt(getContentResolver(),
                     Settings.System.ACCELEROMETER_ROTATION,
@@ -356,8 +356,9 @@ public class SoundAndDisplaySettings extends PreferenceActivity implements
                     Settings.System.NOTIFICATION_LIGHT_PULSE, value ? 1 : 0);
         } else if (preference == mDockSettings) {
             Intent i = new Intent(mDockIntent);
-            i.setClass(this, DockSettingsActivity.class);
-            startActivity(i);
+            i.setAction(DockEventReceiver.ACTION_DOCK_SHOW_UI);
+            i.setClass(this, DockEventReceiver.class);
+            sendBroadcast(i);
         }
 
         return true;
@@ -382,12 +383,12 @@ public class SoundAndDisplaySettings extends PreferenceActivity implements
             } catch (NumberFormatException e) {
                 Log.e(TAG, "could not persist animation setting", e);
             }
-            
+
         }
         if (KEY_SCREEN_TIMEOUT.equals(key)) {
             int value = Integer.parseInt((String) objValue);
             try {
-                Settings.System.putInt(getContentResolver(), 
+                Settings.System.putInt(getContentResolver(),
                         SCREEN_OFF_TIMEOUT, value);
             } catch (NumberFormatException e) {
                 Log.e(TAG, "could not persist screen timeout setting", e);
