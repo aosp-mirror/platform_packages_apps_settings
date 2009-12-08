@@ -227,44 +227,46 @@ public class CachedBluetoothDevice implements Comparable<CachedBluetoothDevice> 
     }
 
     public void onProfileStateChanged(Profile profile, int newProfileState) {
-        if (D) {
-            Log.d(TAG, "onProfileStateChanged:" + workQueue.toString());
-        }
-
-        int newState = LocalBluetoothProfileManager.getProfileManager(mLocalManager,
-                profile).convertState(newProfileState);
-
-        if (newState == SettingsBtStatus.CONNECTION_STATUS_CONNECTED) {
-            if (!mProfiles.contains(profile)) {
-                mProfiles.add(profile);
+        synchronized (workQueue) {
+            if (D) {
+                Log.d(TAG, "onProfileStateChanged:" + workQueue.toString());
             }
-        }
 
-        /* Ignore the transient states e.g. connecting, disconnecting */
-        if (newState == SettingsBtStatus.CONNECTION_STATUS_CONNECTED ||
-                newState == SettingsBtStatus.CONNECTION_STATUS_DISCONNECTED) {
-            BluetoothJob job = workQueue.peek();
-            if (job == null) {
-                return;
-            } else if (!job.cachedDevice.mDevice.equals(mDevice)) {
-                // This can happen in 2 cases: 1) BT device initiated pairing and
-                // 2) disconnects of one headset that's triggered by connects of
-                // another.
-                if (D) {
-                    Log.d(TAG, "mDevice:" + mDevice + " != head:" + job.toString());
+            int newState = LocalBluetoothProfileManager.getProfileManager(mLocalManager,
+                    profile).convertState(newProfileState);
+
+            if (newState == SettingsBtStatus.CONNECTION_STATUS_CONNECTED) {
+                if (!mProfiles.contains(profile)) {
+                    mProfiles.add(profile);
                 }
+            }
 
-                // Check to see if we need to remove the stale items from the queue
-                if (!pruneQueue(null)) {
-                    // nothing in the queue was modify. Just ignore the notification and return.
+            /* Ignore the transient states e.g. connecting, disconnecting */
+            if (newState == SettingsBtStatus.CONNECTION_STATUS_CONNECTED ||
+                    newState == SettingsBtStatus.CONNECTION_STATUS_DISCONNECTED) {
+                BluetoothJob job = workQueue.peek();
+                if (job == null) {
                     return;
-                }
-            } else {
-                // Remove the first item and process the next one
-                workQueue.poll();
-            }
+                } else if (!job.cachedDevice.mDevice.equals(mDevice)) {
+                    // This can happen in 2 cases: 1) BT device initiated pairing and
+                    // 2) disconnects of one headset that's triggered by connects of
+                    // another.
+                    if (D) {
+                        Log.d(TAG, "mDevice:" + mDevice + " != head:" + job.toString());
+                    }
 
-            processCommands();
+                    // Check to see if we need to remove the stale items from the queue
+                    if (!pruneQueue(null)) {
+                        // nothing in the queue was modify. Just ignore the notification and return.
+                        return;
+                    }
+                } else {
+                    // Remove the first item and process the next one
+                    workQueue.poll();
+                }
+
+                processCommands();
+            }
         }
     }
 
