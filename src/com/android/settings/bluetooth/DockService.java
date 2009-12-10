@@ -30,7 +30,6 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
-import android.content.SharedPreferences;
 import android.os.Handler;
 import android.os.HandlerThread;
 import android.os.IBinder;
@@ -57,8 +56,6 @@ public class DockService extends Service implements AlertDialog.OnMultiChoiceCli
 
     // TODO clean up logs. Disable DEBUG flag for this file and receiver's too
     private static final boolean DEBUG = true;
-
-    private static final String SHARED_PREFERENCE_KEY_AUTO_CONNECT_TO_DOCK = "auto_connect_to_dock";
 
     // Time allowed for the device to be undocked and redocked without severing
     // the bluetooth connection
@@ -214,7 +211,7 @@ public class DockService extends Service implements AlertDialog.OnMultiChoiceCli
                     }
 
                     mDevice = device;
-                    if (getAutoConnectSetting(mBtManager, device.getAddress())) {
+                    if (mBtManager.getDockAutoConnectSetting(device.getAddress())) {
                         // Setting == auto connect
                         initBtSettings(mContext, device, state, false);
                         applyBtSettings(mDevice, startId);
@@ -291,7 +288,7 @@ public class DockService extends Service implements AlertDialog.OnMultiChoiceCli
         startForeground(0, new Notification());
 
         // Device in a new dock.
-        boolean firstTime = !hasAutoConnectSetting(mBtManager, device.getAddress());
+        boolean firstTime = !mBtManager.hasDockAutoConnectSetting(device.getAddress());
 
         CharSequence[] items = initBtSettings(service, device, state, firstTime);
 
@@ -309,14 +306,15 @@ public class DockService extends Service implements AlertDialog.OnMultiChoiceCli
         CheckBox rememberCheckbox = (CheckBox) view.findViewById(R.id.remember);
 
         // check "Remember setting" by default if no value was saved
-        boolean checked = firstTime || getAutoConnectSetting(mBtManager, device.getAddress());
+        boolean checked = firstTime || mBtManager.getDockAutoConnectSetting(device.getAddress());
         rememberCheckbox.setChecked(checked);
         rememberCheckbox.setOnCheckedChangeListener(this);
         int viewSpacingLeft = (int) (14 * pixelScaleFactor);
         int viewSpacingRight = (int) (14 * pixelScaleFactor);
         ab.setView(view, viewSpacingLeft, 0 /* top */, viewSpacingRight, 0 /* bottom */);
         if (DEBUG) {
-            Log.d(TAG, "Auto connect = " + getAutoConnectSetting(mBtManager, device.getAddress()));
+            Log.d(TAG, "Auto connect = "
+                    + mBtManager.getDockAutoConnectSetting(device.getAddress()));
         }
 
         // Ok Button
@@ -339,7 +337,7 @@ public class DockService extends Service implements AlertDialog.OnMultiChoiceCli
     // Called when the "Remember" Checkbox is clicked
     public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
         if (DEBUG) Log.d(TAG, "onCheckedChanged: Remember Settings = " + isChecked);
-        saveAutoConnectSetting(mBtManager, mDevice.getAddress(), isChecked);
+        mBtManager.saveDockAutoConnectSetting(mDevice.getAddress(), isChecked);
     }
 
     // Called when the dialog is dismissed
@@ -355,8 +353,8 @@ public class DockService extends Service implements AlertDialog.OnMultiChoiceCli
     // Called when clicked on the OK button
     public void onClick(DialogInterface dialog, int which) {
         if (which == DialogInterface.BUTTON_POSITIVE) {
-            if (!hasAutoConnectSetting(mBtManager, mDevice.getAddress())) {
-                saveAutoConnectSetting(mBtManager, mDevice.getAddress(), true);
+            if (!mBtManager.hasDockAutoConnectSetting(mDevice.getAddress())) {
+                mBtManager.saveDockAutoConnectSetting(mDevice.getAddress(), true);
             }
 
             applyBtSettings(mDevice, mStartIdAssociatedWithDialog);
@@ -512,23 +510,6 @@ public class DockService extends Service implements AlertDialog.OnMultiChoiceCli
             cachedBluetoothDevice = new CachedBluetoothDevice(context, device);
         }
         return cachedBluetoothDevice;
-    }
-
-    public static boolean hasAutoConnectSetting(LocalBluetoothManager localManager, String addr) {
-        return localManager.getSharedPreferences().contains(
-                SHARED_PREFERENCE_KEY_AUTO_CONNECT_TO_DOCK + addr);
-    }
-
-    public static boolean getAutoConnectSetting(LocalBluetoothManager localManager, String addr) {
-        return localManager.getSharedPreferences().getBoolean(
-                SHARED_PREFERENCE_KEY_AUTO_CONNECT_TO_DOCK + addr, false);
-    }
-
-    public static void saveAutoConnectSetting(LocalBluetoothManager localManager, String addr,
-            boolean autoConnect) {
-        SharedPreferences.Editor editor = localManager.getSharedPreferences().edit();
-        editor.putBoolean(SHARED_PREFERENCE_KEY_AUTO_CONNECT_TO_DOCK + addr, autoConnect);
-        editor.commit();
     }
 
     // TODO Delete this method if not needed.
