@@ -16,6 +16,7 @@
 
 package com.android.settings;
 
+import android.util.DisplayMetrics;
 import com.android.internal.app.AlertActivity;
 import com.android.internal.app.AlertController;
 
@@ -39,11 +40,9 @@ import android.graphics.drawable.Drawable;
 import android.graphics.drawable.PaintDrawable;
 import android.os.Bundle;
 import android.os.Parcelable;
-import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.WindowManager;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 
@@ -161,6 +160,7 @@ public class ActivityPicker extends AlertActivity implements
                     icon = res.getDrawable(res.getIdentifier(
                             iconResource.resourceName, null, null));
                 } catch (NameNotFoundException e) {
+                    // Ignore
                 }
                 
                 items.add(new PickAdapter.Item(this, label, icon));
@@ -205,7 +205,9 @@ public class ActivityPicker extends AlertActivity implements
             
             protected IconResizer getResizer(Context context) {
                 if (sResizer == null) {
-                    sResizer = new IconResizer(context);
+                    final Resources resources = context.getResources();
+                    int size = (int) resources.getDimension(android.R.dimen.app_icon_size);
+                    sResizer = new IconResizer(size, size, resources.getDisplayMetrics());
                 }
                 return sResizer;
             }
@@ -233,15 +235,15 @@ public class ActivityPicker extends AlertActivity implements
                 if (label == null && resolveInfo.activityInfo != null) {
                     label = resolveInfo.activityInfo.name;
                 }
-                
+
                 icon = getResizer(context).createIconThumbnail(resolveInfo.loadIcon(pm));
                 packageName = resolveInfo.activityInfo.applicationInfo.packageName;
                 className = resolveInfo.activityInfo.name;
             }
-            
+
             /**
              * Build the {@link Intent} described by this item. If this item
-             * can't create a valid {@link ComponentName}, it will return
+             * can't create a valid {@link android.content.ComponentName}, it will return
              * {@link Intent#ACTION_CREATE_SHORTCUT} filled with the item label.
              */
             Intent getIntent(Intent baseIntent) {
@@ -262,16 +264,13 @@ public class ActivityPicker extends AlertActivity implements
         }
         
         private final LayoutInflater mInflater;
-
-        private List<Item> mItems;
-        private int mLayoutRes = R.layout.pick_item;
+        private final List<Item> mItems;
         
         /**
          * Create an adapter for the given items.
          */
         public PickAdapter(Context context, List<Item> items) {
-            mInflater = (LayoutInflater)
-                    context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+            mInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             mItems = items;
         }
 
@@ -301,7 +300,7 @@ public class ActivityPicker extends AlertActivity implements
          */
         public View getView(int position, View convertView, ViewGroup parent) {
             if (convertView == null) {
-                convertView = mInflater.inflate(mLayoutRes, parent, false);
+                convertView = mInflater.inflate(R.layout.pick_item, parent, false);
             }
             
             Item item = (Item) getItem(position);
@@ -318,19 +317,20 @@ public class ActivityPicker extends AlertActivity implements
      * borrowed from Launcher.
      */
     private static class IconResizer {
-        private int mIconWidth = -1;
-        private int mIconHeight = -1;
+        private final int mIconWidth;
+        private final int mIconHeight;
 
+        private final DisplayMetrics mMetrics;
         private final Rect mOldBounds = new Rect();
-        private Canvas mCanvas = new Canvas();
+        private final Canvas mCanvas = new Canvas();
         
-        public IconResizer(Context context) {
+        public IconResizer(int width, int height, DisplayMetrics metrics) {
             mCanvas.setDrawFilter(new PaintFlagsDrawFilter(Paint.DITHER_FLAG,
                     Paint.FILTER_BITMAP_FLAG));
-            
-            final Resources resources = context.getResources();
-            mIconWidth = mIconHeight = (int) resources.getDimension(
-                    android.R.dimen.app_icon_size);
+
+            mMetrics = metrics;
+            mIconWidth = width;
+            mIconHeight = height; 
         }
 
         /**
@@ -348,21 +348,23 @@ public class ActivityPicker extends AlertActivity implements
         public Drawable createIconThumbnail(Drawable icon) {
             int width = mIconWidth;
             int height = mIconHeight;
-            
-            if (icon == null) {
-                return null;
-            }
-
-            final int iconWidth = icon.getIntrinsicWidth();
-            final int iconHeight = icon.getIntrinsicHeight();
 
             if (icon instanceof PaintDrawable) {
                 PaintDrawable painter = (PaintDrawable) icon;
                 painter.setIntrinsicWidth(width);
                 painter.setIntrinsicHeight(height);
+            } else if (icon instanceof BitmapDrawable) {
+                // Ensure the bitmap has a density.
+                BitmapDrawable bitmapDrawable = (BitmapDrawable) icon;
+                Bitmap bitmap = bitmapDrawable.getBitmap();
+                if (bitmap.getDensity() == Bitmap.DENSITY_NONE) {
+                    bitmapDrawable.setTargetDensity(mMetrics);
+                }
             }
+            int iconWidth = icon.getIntrinsicWidth();
+            int iconHeight = icon.getIntrinsicHeight();
 
-            if (width > 0 && height > 0) {
+            if (iconWidth > 0 && iconHeight > 0) {
                 if (width < iconWidth || height < iconHeight) {
                     final float ratio = (float) iconWidth / iconHeight;
 
@@ -388,7 +390,9 @@ public class ActivityPicker extends AlertActivity implements
                     icon.setBounds(x, y, x + width, y + height);
                     icon.draw(canvas);
                     icon.setBounds(mOldBounds);
+                    //noinspection deprecation
                     icon = new BitmapDrawable(thumb);
+                    ((BitmapDrawable) icon).setTargetDensity(mMetrics);
                 } else if (iconWidth < width && iconHeight < height) {
                     final Bitmap.Config c = Bitmap.Config.ARGB_8888;
                     final Bitmap thumb = Bitmap.createBitmap(mIconWidth, mIconHeight, c);
@@ -400,7 +404,9 @@ public class ActivityPicker extends AlertActivity implements
                     icon.setBounds(x, y, x + iconWidth, y + iconHeight);
                     icon.draw(canvas);
                     icon.setBounds(mOldBounds);
+                    //noinspection deprecation
                     icon = new BitmapDrawable(thumb);
+                    ((BitmapDrawable) icon).setTargetDensity(mMetrics);
                 }
             }
 
