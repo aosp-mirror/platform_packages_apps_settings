@@ -55,7 +55,7 @@ public class DockEventReceiver extends BroadcastReceiver {
         if (Intent.ACTION_DOCK_EVENT.equals(intent.getAction())
                 || ACTION_DOCK_SHOW_UI.endsWith(intent.getAction())) {
             if (device == null) {
-                if (DEBUG) Log.e(TAG, "Device is missing");
+                if (DEBUG) Log.d(TAG, "Device is missing");
                 return;
             }
 
