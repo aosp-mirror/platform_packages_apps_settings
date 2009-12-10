@@ -142,10 +142,10 @@ public class CachedBluetoothDevice implements Comparable<CachedBluetoothDevice> 
     private static LinkedList<BluetoothJob> workQueue = new LinkedList<BluetoothJob>();
 
     private void queueCommand(BluetoothJob job) {
-        if (D) {
-            Log.d(TAG, workQueue.toString());
-        }
         synchronized (workQueue) {
+            if (D) {
+                Log.d(TAG, workQueue.toString());
+            }
             boolean processNow = pruneQueue(job);
 
             // Add job to queue
