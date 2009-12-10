@@ -75,10 +75,23 @@ public class BluetoothEventRedirector {
             } else if (action.equals(BluetoothDevice.ACTION_BOND_STATE_CHANGED)) {
                 int bondState = intent.getIntExtra(BluetoothDevice.EXTRA_BOND_STATE,
                                                    BluetoothDevice.ERROR);
-                mManager.getCachedDeviceManager().onBondingStateChanged(device, bondState);
+                CachedBluetoothDeviceManager cachedDeviceMgr = mManager.getCachedDeviceManager();
+                cachedDeviceMgr.onBondingStateChanged(device, bondState);
                 if (bondState == BluetoothDevice.BOND_NONE) {
-                    int reason = intent.getIntExtra(BluetoothDevice.EXTRA_REASON, BluetoothDevice.ERROR);
-                    mManager.getCachedDeviceManager().showUnbondMessage(device, reason);
+                    if (device.isBluetoothDock()) {
+                        // After a dock is unpaired, we will forget the
+                        // setttings
+                        mManager.removeDockAutoConnectSetting(device.getAddress());
+
+                        // if the device is undocked, remove it from the list as
+                        // well
+                        if (!device.getAddress().equals(getDockedDeviceAddress(context))) {
+                            cachedDeviceMgr.onDeviceDisappeared(device);
+                        }
+                    }
+                    int reason = intent.getIntExtra(BluetoothDevice.EXTRA_REASON,
+                            BluetoothDevice.ERROR);
+                    cachedDeviceMgr.showUnbondMessage(device, reason);
                 }
 
             } else if (action.equals(BluetoothHeadset.ACTION_STATE_CHANGED)) {
@@ -112,6 +125,16 @@ public class BluetoothEventRedirector {
             } else if (action.equals(BluetoothDevice.ACTION_PAIRING_CANCEL)) {
                 int errorMsg = R.string.bluetooth_pairing_error_message;
                 mManager.showError(device, R.string.bluetooth_error_title, errorMsg);
+
+            } else if (action.equals(Intent.ACTION_DOCK_EVENT)) {
+                // Remove if unpair device upon undocking
+                int anythingButUnDocked = Intent.EXTRA_DOCK_STATE_UNDOCKED + 1;
+                int state = intent.getIntExtra(Intent.EXTRA_DOCK_STATE, anythingButUnDocked);
+                if (state == Intent.EXTRA_DOCK_STATE_UNDOCKED) {
+                    if (device.getBondState() == BluetoothDevice.BOND_NONE) {
+                        mManager.getCachedDeviceManager().onDeviceDisappeared(device);
+                    }
+                }
             }
         }
     };
@@ -143,10 +166,29 @@ public class BluetoothEventRedirector {
         filter.addAction(BluetoothDevice.ACTION_CLASS_CHANGED);
         filter.addAction(BluetoothDevice.ACTION_UUID);
 
+        // Dock event broadcasts
+        filter.addAction(Intent.ACTION_DOCK_EVENT);
+
         mManager.getContext().registerReceiver(mBroadcastReceiver, filter);
     }
 
     public void stop() {
         mManager.getContext().unregisterReceiver(mBroadcastReceiver);
+    }
+
+    // This can't be called from a broadcast receiver where the filter is set in the Manifest.
+    private String getDockedDeviceAddress(Context context) {
+        // This works only because these broadcast intents are "sticky"
+        Intent i = context.registerReceiver(null, new IntentFilter(Intent.ACTION_DOCK_EVENT));
+        if (i != null) {
+            int state = i.getIntExtra(Intent.EXTRA_DOCK_STATE, Intent.EXTRA_DOCK_STATE_UNDOCKED);
+            if (state != Intent.EXTRA_DOCK_STATE_UNDOCKED) {
+                BluetoothDevice device = i.getParcelableExtra(BluetoothDevice.EXTRA_DEVICE);
+                if (device != null) {
+                    return device.getAddress();
+                }
+            }
+        }
+        return null;
     }
 }
