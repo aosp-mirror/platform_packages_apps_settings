@@ -49,7 +49,7 @@ public class DockService extends Service implements AlertDialog.OnMultiChoiceCli
     private static final String TAG = "DockService";
 
     // TODO clean up logs. Disable DEBUG flag for this file and receiver's too
-    private static final boolean DEBUG = true;
+    private static final boolean DEBUG = false;
 
     // Time allowed for the device to be undocked and redocked without severing
     // the bluetooth connection
