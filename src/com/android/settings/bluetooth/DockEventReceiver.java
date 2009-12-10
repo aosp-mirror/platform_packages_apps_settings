@@ -103,6 +103,7 @@ public class DockEventReceiver extends BroadcastReceiver {
     public static void finishStartingService(Service service, int startId) {
         synchronized (mStartingServiceSync) {
             if (mStartingService != null) {
+                if (DEBUG) Log.d(TAG, "stopSelf id = "+ startId);
                 if (service.stopSelfResult(startId)) {
                     mStartingService.release();
                 }
