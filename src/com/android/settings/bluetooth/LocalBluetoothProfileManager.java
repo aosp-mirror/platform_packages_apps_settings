@@ -214,8 +214,13 @@ public abstract class LocalBluetoothProfileManager {
 
         @Override
         public void setPreferred(BluetoothDevice device, boolean preferred) {
-            mService.setSinkPriority(device,
-                    preferred ? BluetoothA2dp.PRIORITY_AUTO_CONNECT : BluetoothA2dp.PRIORITY_OFF);
+            if (preferred) {
+                if (mService.getSinkPriority(device) < BluetoothA2dp.PRIORITY_ON) {
+                    mService.setSinkPriority(device, BluetoothA2dp.PRIORITY_ON);
+                }
+            } else {
+                mService.setSinkPriority(device, BluetoothA2dp.PRIORITY_OFF);
+            }
         }
 
         @Override
@@ -328,8 +333,13 @@ public abstract class LocalBluetoothProfileManager {
 
         @Override
         public void setPreferred(BluetoothDevice device, boolean preferred) {
-            mService.setPriority(device,
-                    preferred ? BluetoothHeadset.PRIORITY_AUTO_CONNECT : BluetoothHeadset.PRIORITY_OFF);
+            if (preferred) {
+                if (mService.getPriority(device) < BluetoothHeadset.PRIORITY_ON) {
+                    mService.setPriority(device, BluetoothHeadset.PRIORITY_ON);
+                }
+            } else {
+                mService.setPriority(device, BluetoothHeadset.PRIORITY_OFF);
+            }
         }
 
         @Override
