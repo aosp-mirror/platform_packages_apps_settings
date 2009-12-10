@@ -167,6 +167,7 @@ public class AppWidgetPickActivity extends ActivityPicker {
      */
     void putAppWidgetItems(List<AppWidgetProviderInfo> appWidgets,
             List<Bundle> customExtras, List<PickAdapter.Item> items) {
+        if (appWidgets == null) return;
         final int size = appWidgets.size();
         for (int i = 0; i < size; i++) {
             AppWidgetProviderInfo info = appWidgets.get(i);
