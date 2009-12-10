@@ -150,7 +150,7 @@
     <string name="radio_info_data_attempts_label" msgid="1731106244577323381">"数据尝试次数："</string>
     <string name="radio_info_gprs_service_label" msgid="2331818110375395364">"GPRS 服务："</string>
     <string name="radio_info_roaming_label" msgid="6141505430275138647">"漫游："</string>
-    <string name="radio_info_imei_label" msgid="1220524224732944192">"IMEI："</string>
+    <string name="radio_info_imei_label" msgid="1220524224732944192">"移动通信国际识别码："</string>
     <string name="radio_info_call_redirect_label" msgid="1654674226961476872">"呼叫重定向："</string>
     <string name="radio_info_ppp_resets_label" msgid="3241667824729310546">"启动后重置 PPP 的次数："</string>
     <string name="radio_info_gsm_disconnects_label" msgid="1683069665736339820">"GSM 断开连接："</string>
@@ -285,6 +285,11 @@
     <string name="bluetooth_a2dp_profile_summary_use_for" msgid="4630849022250168427">"用于媒体音频"</string>
     <string name="bluetooth_headset_profile_summary_use_for" msgid="8705753622443862627">"用于手机音频"</string>
     <string name="bluetooth_opp_profile_summary_use_for" msgid="1255674547144769756">"用于文件传输"</string>
+    <string name="bluetooth_dock_settings" msgid="3218335822716052885">"底座设置"</string>
+    <string name="bluetooth_dock_settings_title" msgid="5543069893044375188">"底座用于音频"</string>
+    <string name="bluetooth_dock_settings_headset" msgid="1001821426078644650">"将底座用作免提电话"</string>
+    <string name="bluetooth_dock_settings_a2dp" msgid="8791004998846630574">"用于音乐和媒体"</string>
+    <string name="bluetooth_dock_settings_remember" msgid="5551459057010609115">"记住设置"</string>
     <string name="wifi" msgid="1081550856200013637">"Wi-Fi"</string>
     <string name="wifi_quick_toggle_title" msgid="874495178395350104">"Wi-Fi"</string>
     <string name="wifi_quick_toggle_summary" msgid="1047950931623694366">"打开 Wi-Fi"</string>
@@ -397,16 +402,16 @@
     <string name="vibrate_summary" msgid="5224303668448643275">"来电时振动手机"</string>
     <string name="notification_sound_title" msgid="6316316069880531693">"通知铃声"</string>
     <string name="notification_sound_summary" msgid="7628081155578496618">"设置默认的通知铃声"</string>
-    <!-- no translation found for notification_pulse_title (1247988024534030629) -->
-    <skip />
-    <!-- no translation found for notification_pulse_summary (6899220780534617152) -->
-    <skip />
+    <string name="notification_pulse_title" msgid="1247988024534030629">"闪动通知指示灯"</string>
+    <string name="notification_pulse_summary" msgid="6899220780534617152">"在收到新通知时，跟踪球指示灯会不断闪动"</string>
     <string name="incoming_call_volume_title" msgid="6144314834963494752">"来电音量"</string>
     <string name="notification_volume_title" msgid="3363351773121138717">"通知音量"</string>
     <string name="checkbox_notification_same_as_incoming_call" msgid="1073644356290338921">"将来电音量用作通知音量"</string>
     <string name="notification_sound_dialog_title" msgid="7057274209079144726">"选择通知铃声"</string>
     <string name="media_volume_title" msgid="7844516127427195383">"媒体音量"</string>
     <string name="media_volume_summary" msgid="5363248930648849974">"设置音乐和视频的音量"</string>
+    <string name="dock_settings_title" msgid="5121296855098055941">"底座音频"</string>
+    <string name="dock_settings_summary" msgid="455802113668982481">"附加底座的音频设置"</string>
     <string name="dtmf_tone_enable_title" msgid="1453831168789523185">"按键操作音"</string>
     <string name="dtmf_tone_enable_summary_on" msgid="3028201873989887327">"使用拨号键盘时播放按键音效"</string>
     <string name="dtmf_tone_enable_summary_off" msgid="7791065951268525678">"使用拨号键盘时播放按键音效"</string>
@@ -557,7 +562,7 @@
     <string name="location_title" msgid="1029961368397484576">"我的位置"</string>
     <string name="location_network_based" msgid="8815705866861993344">"使用无线网络"</string>
     <string name="location_networks_disabled" msgid="2708968452901433980">"使用无线网络在应用程序（例如 Google 地图）中查看位置"</string>
-    <string name="location_neighborhood_level" msgid="4656658097932515921">"通过 Wi-Fi 和/或移动网络确定位置"</string>
+    <string name="location_neighborhood_level" msgid="4656658097932515921">"通过 Wi-Fi 和/或移动网络确定的位置"</string>
     <string name="location_gps" msgid="6296125378829097831">"使用 GPS 卫星"</string>
     <string name="location_street_level" msgid="6460740847018275745">"定位时，精确度设定为街道级别（取消选中可节约电量）"</string>
     <string name="location_gps_disabled" msgid="6632537158777308128">"定位到街道级别（需要消耗更多电量以及天气允许）"</string>
@@ -971,7 +976,7 @@
     <string name="credentials_enabled" msgid="7588607413349978930">"凭证存储已启用。"</string>
     <string name="credentials_disabled" msgid="7453188089059045380">"凭证存储已停用。"</string>
     <string name="emergency_tone_title" msgid="1055954530111587114">"紧急提示音"</string>
-    <string name="emergency_tone_summary" msgid="722259232924572153">"设置进行紧急呼叫时的行为"</string>
+    <string name="emergency_tone_summary" msgid="722259232924572153">"设置进行紧急呼救时的行为"</string>
     <string name="privacy_settings" msgid="9206631214140954954">"隐私权"</string>
     <string name="privacy_settings_title" msgid="1987089301293213705">"隐私权设置"</string>
     <string name="location_section_title" msgid="6072558684044939786">"位置"</string>
