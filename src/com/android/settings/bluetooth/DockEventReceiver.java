@@ -26,7 +26,7 @@ import android.util.Log;
 
 public class DockEventReceiver extends BroadcastReceiver {
 
-    private static final boolean DEBUG = true;
+    private static final boolean DEBUG = false;
 
     private static final String TAG = "DockEventReceiver";
 
