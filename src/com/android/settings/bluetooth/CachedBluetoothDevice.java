@@ -383,6 +383,12 @@ public class CachedBluetoothDevice implements Comparable<CachedBluetoothDevice> 
         connectWithoutResettingTimer();
     }
 
+    /*package*/ void onBondingDockConnect() {
+        // Don't connect just set the timer.
+        // TODO(): Fix the actual problem
+        mConnectAttempted = SystemClock.elapsedRealtime();
+    }
+
     private void connectWithoutResettingTimer() {
         // Try to initialize the profiles if there were not.
         if (mProfiles.size() == 0) {
