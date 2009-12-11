@@ -131,7 +131,7 @@ public class BluetoothEventRedirector {
                 int anythingButUnDocked = Intent.EXTRA_DOCK_STATE_UNDOCKED + 1;
                 int state = intent.getIntExtra(Intent.EXTRA_DOCK_STATE, anythingButUnDocked);
                 if (state == Intent.EXTRA_DOCK_STATE_UNDOCKED) {
-                    if (device.getBondState() == BluetoothDevice.BOND_NONE) {
+                    if (device != null && device.getBondState() == BluetoothDevice.BOND_NONE) {
                         mManager.getCachedDeviceManager().onDeviceDisappeared(device);
                     }
                 }
