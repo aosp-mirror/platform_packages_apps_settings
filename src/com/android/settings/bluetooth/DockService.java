@@ -46,12 +46,6 @@ public class DockService extends Service implements AlertDialog.OnMultiChoiceCli
         DialogInterface.OnClickListener, DialogInterface.OnDismissListener,
         CompoundButton.OnCheckedChangeListener {
 
-    // TODO check for waitlock leak
-    // TODO check for service shutting down properly
-    // TODO sticky vs non-sticky
-    // TODO clean up static functions
-    // TODO test after wiping data
-
     private static final String TAG = "DockService";
 
     // TODO clean up logs. Disable DEBUG flag for this file and receiver's too
@@ -157,7 +151,7 @@ public class DockService extends Service implements AlertDialog.OnMultiChoiceCli
         msg.arg2 = startId;
         processMessage(msg);
 
-        return START_STICKY;
+        return START_NOT_STICKY;
     }
 
     private final class ServiceHandler extends Handler {
@@ -229,15 +223,15 @@ public class DockService extends Service implements AlertDialog.OnMultiChoiceCli
             case MSG_TYPE_UNDOCKED_TEMPORARY:
                 // Undocked event received. Queue a delayed msg to sever connection
                 Message newMsg = mServiceHandler.obtainMessage(MSG_TYPE_UNDOCKED_PERMANENT, state,
-                        0, device);
+                        startId, device);
                 mServiceHandler.sendMessageDelayed(newMsg, UNDOCKED_GRACE_PERIOD);
                 break;
         }
 
-        if (mDialog == null && mPendingDevice == null) {
+        if (mDialog == null && mPendingDevice == null && msgType != MSG_TYPE_UNDOCKED_TEMPORARY) {
             // NOTE: We MUST not call stopSelf() directly, since we need to
             // make sure the wake lock acquired by the Receiver is released.
-            DockEventReceiver.finishStartingService(DockService.this, msg.arg1);
+            DockEventReceiver.finishStartingService(DockService.this, startId);
         }
     }
 
@@ -251,7 +245,7 @@ public class DockService extends Service implements AlertDialog.OnMultiChoiceCli
         }
 
         if (device == null) {
-            Log.e(TAG, "device is null");
+            Log.w(TAG, "device is null");
             return null;
         }
 
@@ -416,8 +410,9 @@ public class DockService extends Service implements AlertDialog.OnMultiChoiceCli
                     if (mPendingDevice.equals(mDevice)) {
                         if(DEBUG) Log.d(TAG, "applying settings");
                         applyBtSettings(mPendingDevice, mPendingStartId);
-                    } if(DEBUG) {
-                        Log.d(TAG, "mPendingDevice != mDevice");
+                    } else if(DEBUG) {
+                        Log.d(TAG, "mPendingDevice  (" + mPendingDevice + ") != mDevice ("
+                                + mDevice + ")");
                     }
 
                     mPendingDevice = null;
