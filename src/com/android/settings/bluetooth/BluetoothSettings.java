@@ -332,7 +332,10 @@ public class BluetoothSettings extends PreferenceActivity
             if (uuids != null)
                 if (BluetoothUuid.containsAnyUuid(uuids,
                         LocalBluetoothProfileManager.OPP_PROFILE_UUIDS))  return true;
-            if (bluetoothClass.doesClassMatch(BluetoothClass.PROFILE_OPP)) return true;
+                if (bluetoothClass != null
+                        && bluetoothClass.doesClassMatch(BluetoothClass.PROFILE_OPP)) {
+                    return true;
+                }
             break;
         case BluetoothDevicePicker.FILTER_TYPE_AUDIO:
             if (uuids != null) {
@@ -341,7 +344,7 @@ public class BluetoothSettings extends PreferenceActivity
 
                 if (BluetoothUuid.containsAnyUuid(uuids,
                         LocalBluetoothProfileManager.HEADSET_PROFILE_UUIDS))  return true;
-            } else {
+            } else if (bluetoothClass != null) {
                 if (bluetoothClass.doesClassMatch(BluetoothClass.PROFILE_A2DP)) return true;
 
                 if (bluetoothClass.doesClassMatch(BluetoothClass.PROFILE_HEADSET)) return true;
