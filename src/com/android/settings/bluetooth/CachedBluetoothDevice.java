@@ -691,26 +691,28 @@ public class CachedBluetoothDevice implements Comparable<CachedBluetoothDevice> 
             boolean printUuids = true;
             BluetoothClass bluetoothClass = mDevice.getBluetoothClass();
 
-            if (bluetoothClass.doesClassMatch(BluetoothClass.PROFILE_HEADSET) !=
-                mProfiles.contains(Profile.HEADSET)) {
-                Log.v(TAG, "headset classbits != uuid");
-                printUuids = true;
-            }
+            if (bluetoothClass != null) {
+                if (bluetoothClass.doesClassMatch(BluetoothClass.PROFILE_HEADSET) !=
+                    mProfiles.contains(Profile.HEADSET)) {
+                    Log.v(TAG, "headset classbits != uuid");
+                    printUuids = true;
+                }
 
-            if (bluetoothClass.doesClassMatch(BluetoothClass.PROFILE_A2DP) !=
-                mProfiles.contains(Profile.A2DP)) {
-                Log.v(TAG, "a2dp classbits != uuid");
-                printUuids = true;
-            }
+                if (bluetoothClass.doesClassMatch(BluetoothClass.PROFILE_A2DP) !=
+                    mProfiles.contains(Profile.A2DP)) {
+                    Log.v(TAG, "a2dp classbits != uuid");
+                    printUuids = true;
+                }
 
-            if (bluetoothClass.doesClassMatch(BluetoothClass.PROFILE_OPP) !=
-                mProfiles.contains(Profile.OPP)) {
-                Log.v(TAG, "opp classbits != uuid");
-                printUuids = true;
+                if (bluetoothClass.doesClassMatch(BluetoothClass.PROFILE_OPP) !=
+                    mProfiles.contains(Profile.OPP)) {
+                    Log.v(TAG, "opp classbits != uuid");
+                    printUuids = true;
+                }
             }
 
             if (printUuids) {
-                Log.v(TAG, "Class: " + bluetoothClass.toString());
+                if (bluetoothClass != null) Log.v(TAG, "Class: " + bluetoothClass.toString());
                 Log.v(TAG, "UUID:");
                 for (int i = 0; i < uuids.length; i++) {
                     Log.v(TAG, "  " + uuids[i]);
