@@ -16,6 +16,7 @@
 
 package com.android.settings;
 
+import android.graphics.ColorFilter;
 import android.util.DisplayMetrics;
 import com.android.internal.app.AlertActivity;
 import com.android.internal.app.AlertController;
@@ -349,68 +350,124 @@ public class ActivityPicker extends AlertActivity implements
             int width = mIconWidth;
             int height = mIconHeight;
 
-            if (icon instanceof PaintDrawable) {
-                PaintDrawable painter = (PaintDrawable) icon;
-                painter.setIntrinsicWidth(width);
-                painter.setIntrinsicHeight(height);
-            } else if (icon instanceof BitmapDrawable) {
-                // Ensure the bitmap has a density.
-                BitmapDrawable bitmapDrawable = (BitmapDrawable) icon;
-                Bitmap bitmap = bitmapDrawable.getBitmap();
-                if (bitmap.getDensity() == Bitmap.DENSITY_NONE) {
-                    bitmapDrawable.setTargetDensity(mMetrics);
-                }
+            if (icon == null) {
+                return new EmptyDrawable(width, height);
             }
-            int iconWidth = icon.getIntrinsicWidth();
-            int iconHeight = icon.getIntrinsicHeight();
-
-            if (iconWidth > 0 && iconHeight > 0) {
-                if (width < iconWidth || height < iconHeight) {
-                    final float ratio = (float) iconWidth / iconHeight;
-
-                    if (iconWidth > iconHeight) {
-                        height = (int) (width / ratio);
-                    } else if (iconHeight > iconWidth) {
-                        width = (int) (height * ratio);
+            
+            try {
+                if (icon instanceof PaintDrawable) {
+                    PaintDrawable painter = (PaintDrawable) icon;
+                    painter.setIntrinsicWidth(width);
+                    painter.setIntrinsicHeight(height);
+                } else if (icon instanceof BitmapDrawable) {
+                    // Ensure the bitmap has a density.
+                    BitmapDrawable bitmapDrawable = (BitmapDrawable) icon;
+                    Bitmap bitmap = bitmapDrawable.getBitmap();
+                    if (bitmap.getDensity() == Bitmap.DENSITY_NONE) {
+                        bitmapDrawable.setTargetDensity(mMetrics);
                     }
-
-                    final Bitmap.Config c = icon.getOpacity() != PixelFormat.OPAQUE ?
-                                Bitmap.Config.ARGB_8888 : Bitmap.Config.RGB_565;
-                    final Bitmap thumb = Bitmap.createBitmap(mIconWidth, mIconHeight, c);
-                    final Canvas canvas = mCanvas;
-                    canvas.setBitmap(thumb);
-                    // Copy the old bounds to restore them later
-                    // If we were to do oldBounds = icon.getBounds(),
-                    // the call to setBounds() that follows would
-                    // change the same instance and we would lose the
-                    // old bounds
-                    mOldBounds.set(icon.getBounds());
-                    final int x = (mIconWidth - width) / 2;
-                    final int y = (mIconHeight - height) / 2;
-                    icon.setBounds(x, y, x + width, y + height);
-                    icon.draw(canvas);
-                    icon.setBounds(mOldBounds);
-                    //noinspection deprecation
-                    icon = new BitmapDrawable(thumb);
-                    ((BitmapDrawable) icon).setTargetDensity(mMetrics);
-                } else if (iconWidth < width && iconHeight < height) {
-                    final Bitmap.Config c = Bitmap.Config.ARGB_8888;
-                    final Bitmap thumb = Bitmap.createBitmap(mIconWidth, mIconHeight, c);
-                    final Canvas canvas = mCanvas;
-                    canvas.setBitmap(thumb);
-                    mOldBounds.set(icon.getBounds());
-                    final int x = (width - iconWidth) / 2;
-                    final int y = (height - iconHeight) / 2;
-                    icon.setBounds(x, y, x + iconWidth, y + iconHeight);
-                    icon.draw(canvas);
-                    icon.setBounds(mOldBounds);
-                    //noinspection deprecation
-                    icon = new BitmapDrawable(thumb);
-                    ((BitmapDrawable) icon).setTargetDensity(mMetrics);
                 }
+                int iconWidth = icon.getIntrinsicWidth();
+                int iconHeight = icon.getIntrinsicHeight();
+    
+                if (iconWidth > 0 && iconHeight > 0) {
+                    if (width < iconWidth || height < iconHeight) {
+                        final float ratio = (float) iconWidth / iconHeight;
+    
+                        if (iconWidth > iconHeight) {
+                            height = (int) (width / ratio);
+                        } else if (iconHeight > iconWidth) {
+                            width = (int) (height * ratio);
+                        }
+    
+                        final Bitmap.Config c = icon.getOpacity() != PixelFormat.OPAQUE ?
+                                    Bitmap.Config.ARGB_8888 : Bitmap.Config.RGB_565;
+                        final Bitmap thumb = Bitmap.createBitmap(mIconWidth, mIconHeight, c);
+                        final Canvas canvas = mCanvas;
+                        canvas.setBitmap(thumb);
+                        // Copy the old bounds to restore them later
+                        // If we were to do oldBounds = icon.getBounds(),
+                        // the call to setBounds() that follows would
+                        // change the same instance and we would lose the
+                        // old bounds
+                        mOldBounds.set(icon.getBounds());
+                        final int x = (mIconWidth - width) / 2;
+                        final int y = (mIconHeight - height) / 2;
+                        icon.setBounds(x, y, x + width, y + height);
+                        icon.draw(canvas);
+                        icon.setBounds(mOldBounds);
+                        //noinspection deprecation
+                        icon = new BitmapDrawable(thumb);
+                        ((BitmapDrawable) icon).setTargetDensity(mMetrics);
+                    } else if (iconWidth < width && iconHeight < height) {
+                        final Bitmap.Config c = Bitmap.Config.ARGB_8888;
+                        final Bitmap thumb = Bitmap.createBitmap(mIconWidth, mIconHeight, c);
+                        final Canvas canvas = mCanvas;
+                        canvas.setBitmap(thumb);
+                        mOldBounds.set(icon.getBounds());
+                        final int x = (width - iconWidth) / 2;
+                        final int y = (height - iconHeight) / 2;
+                        icon.setBounds(x, y, x + iconWidth, y + iconHeight);
+                        icon.draw(canvas);
+                        icon.setBounds(mOldBounds);
+                        //noinspection deprecation
+                        icon = new BitmapDrawable(thumb);
+                        ((BitmapDrawable) icon).setTargetDensity(mMetrics);
+                    }
+                }
+    
+            } catch (Throwable t) {
+                icon = new EmptyDrawable(width, height);
             }
 
             return icon;
         }
     }
+
+    private static class EmptyDrawable extends Drawable {
+        private final int mWidth;
+        private final int mHeight;
+
+        EmptyDrawable(int width, int height) {
+            mWidth = width;
+            mHeight = height;
+        }
+
+        @Override
+        public int getIntrinsicWidth() {
+            return mWidth;
+        }
+
+        @Override
+        public int getIntrinsicHeight() {
+            return mHeight;
+        }
+
+        @Override
+        public int getMinimumWidth() {
+            return mWidth;
+        }
+
+        @Override
+        public int getMinimumHeight() {
+            return mHeight;
+        }
+
+        @Override
+        public void draw(Canvas canvas) {
+        }
+
+        @Override
+        public void setAlpha(int alpha) {
+        }
+
+        @Override
+        public void setColorFilter(ColorFilter cf) {
+        }
+
+        @Override
+        public int getOpacity() {
+            return PixelFormat.TRANSLUCENT;
+        }
+    }    
 }
