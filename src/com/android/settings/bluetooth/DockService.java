@@ -331,7 +331,9 @@ public class DockService extends Service implements AlertDialog.OnMultiChoiceCli
     // Called when the "Remember" Checkbox is clicked
     public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
         if (DEBUG) Log.d(TAG, "onCheckedChanged: Remember Settings = " + isChecked);
-        mBtManager.saveDockAutoConnectSetting(mDevice.getAddress(), isChecked);
+        if (mDevice != null) {
+            mBtManager.saveDockAutoConnectSetting(mDevice.getAddress(), isChecked);
+        }
     }
 
     // Called when the dialog is dismissed
@@ -346,7 +348,7 @@ public class DockService extends Service implements AlertDialog.OnMultiChoiceCli
 
     // Called when clicked on the OK button
     public void onClick(DialogInterface dialog, int which) {
-        if (which == DialogInterface.BUTTON_POSITIVE) {
+        if (which == DialogInterface.BUTTON_POSITIVE && mDevice != null) {
             if (!mBtManager.hasDockAutoConnectSetting(mDevice.getAddress())) {
                 mBtManager.saveDockAutoConnectSetting(mDevice.getAddress(), true);
             }
