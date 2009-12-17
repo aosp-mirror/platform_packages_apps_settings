@@ -4,9 +4,9 @@
      Licensed under the Apache License, Version 2.0 (the "License");
      you may not use this file except in compliance with the License.
      You may obtain a copy of the License at
-
+  
           http://www.apache.org/licenses/LICENSE-2.0
-
+  
      Unless required by applicable law or agreed to in writing, software
      distributed under the License is distributed on an "AS IS" BASIS,
      WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -135,7 +135,7 @@
     <string name="battery_info_awake_plugged">Awake time when charging:</string>
     <!-- Battery Info screen. Label for a status item.  Used for diagnostic info screens, precise translation isn't needed -->
     <string name="battery_info_screen_on">Screen ON time:</string>
-
+    
 
     <!-- Battery Info screen. Value for a status item.  Used for diagnostic info screens, precise translation isn't needed -->
     <string name="battery_info_status_unknown">Unknown</string>
@@ -158,7 +158,7 @@
     <string name="battery_info_power_usb">USB</string>
     <string name="battery_info_power_ac_usb">AC+USB</string>
     <string name="battery_info_power_unknown">Unknown</string>
-
+    
     <!-- Battery Info screen. Value for a status item.  Used for diagnostic info screens, precise translation isn't needed -->
     <string name="battery_info_health_unknown">Unknown</string>
     <!-- Battery Info screen. Value for a status item.  Used for diagnostic info screens, precise translation isn't needed -->
@@ -553,7 +553,7 @@
     <!-- Title for BT error dialogs. -->
     <string name="bluetooth_error_title">Attention</string>
     <!-- Message for the error dialog when BT pairing fails generically. -->
-    <string name="bluetooth_pairing_error_message">There was a problem pairing with <xliff:g id="device_name">%1$s</xliff:g>.</string>
+    <string name="bluetooth_pairing_error_message">There was a problem pairing with <xliff:g id="device_name">%1$s</xliff:g>.</string> 
     <!-- Message for the error dialog when BT pairing fails because the PIN /
     Passkey entered is incorrect. -->
     <string name="bluetooth_pairing_pin_error_message">There was a problem pairing with <xliff:g id="device_name">%1$s</xliff:g> because the PIN or Passkey is incorrect.</string>
@@ -563,7 +563,7 @@
     <string name="bluetooth_pairing_rejected_error_message">Pairing rejected by <xliff:g id="device_name">%1$s</xliff:g>.</string>
 
     <!-- Message for the error dialog when BT connecting operation fails generically. -->
-    <string name="bluetooth_connecting_error_message">There was a problem connecting to <xliff:g id="device_name">%1$s</xliff:g>.</string>
+    <string name="bluetooth_connecting_error_message">There was a problem connecting to <xliff:g id="device_name">%1$s</xliff:g>.</string> 
 
     <!-- Do not translate -->
     <string name="bluetooth_device_info_alias">Device alias</string>
@@ -576,7 +576,7 @@
 
     <!-- Bluetooth settings: The title of the preference (list item) that initiates a scan for devices -->
     <string name="bluetooth_preference_scan_title">Scan for devices</string>
-
+    
     <!-- Bluetooth settings.  Context menu item for a device.  Action will connect to all profiles on the device. -->
     <string name="bluetooth_device_context_connect">Connect</string>
     <!-- Bluetooth settings.  Context menu item for a device.  Action will disconnect from all profiles on the device. -->
@@ -588,8 +588,8 @@
     <!-- Bluetooth settings.  Context menu item for a device.  Action will disconnect and remove pairing with the device. -->
     <string name="bluetooth_device_context_disconnect_unpair">Disconnect &amp; unpair</string>
     <!-- Bluetooth settings.  Context menu item for a device.  Action will take the user to another screen where they can choose exactly which profiles to connect to. -->
-    <string name="bluetooth_device_context_connect_advanced">Options\u2026</string>
-
+    <string name="bluetooth_device_context_connect_advanced">Options\u2026</string>    
+    
     <!-- Bluetooth settings.  The title of the screen to pick which profiles to connect to on the device.  For example, headphones may have both A2DP and headset, this allows the user to choose which one he wants to connect to. -->
     <string name="bluetooth_connect_specific_profiles_title">Connect to\u2026</string>
 
@@ -807,7 +807,7 @@
     <string name="wifi_setting_sleep_policy_summary">Specify when to switch from Wi-Fi to mobile data</string>
     <!-- Wi-Fi settings screen, generic error message when the sleep policy could not be set. -->
     <string name="wifi_setting_sleep_policy_error">There was a problem setting the sleep policy.</string>
-
+    
     <!-- Wi-Fi settings screen, advanced, title of the item to show the Wi-Fi device's MAC address. -->
     <string name="wifi_advanced_mac_address_title">MAC address</string>
 
@@ -1245,10 +1245,10 @@
     <string name="error_mnc_not23">MNC field must be 2 or 3 digits.</string>
     <!-- The message of dialog indicated restoring default APN settings in progress -->
     <string name="restore_default_apn">Restoring default APN settings</string>
-    <!-- APNs screen menu option to reset default APN settings -->
-    <string name="menu_restore">Reset to default</string>
-    <!-- APNs screen toast message to inform reset default APN settings is completed -->
-    <string name="restore_default_apn_completed">Reset default APN settings completed</string>
+    <!-- APNs screen menu option to reset default APN settings --> 
+    <string name="menu_restore">Reset to default</string>    
+    <!-- APNs screen toast message to inform reset default APN settings is completed -->     
+    <string name="restore_default_apn_completed">Reset default APN settings completed</string>    
 
     <!-- Master Clear -->
     <!-- SD card & phone storage settings screen, setting option name under Internal phone storage heading -->
@@ -1439,8 +1439,8 @@
         \n<font height="17">\n</font><b>3</b>\u00A0 Redraw your pattern to confirm.
         \n<font height="17">\n</font><b>Ready to start? Touch \u201CNext\u201D</b>.
         \n<font height="3">\n</font>To leave your phone unprotected, touch \u201CCancel\u201D.</font>
-    </string>
-
+    </string>    
+        
     <!-- ChooseLockPatternExample --> <skip />
     <!-- ChooseLockPatternExample, screen title that shows an example pattern -->
     <string name="lock_example_title">Example pattern</string>
@@ -1520,7 +1520,7 @@
     <!-- Text for filter option in ManageApps screen to display all installed
     applications -->
     <string name="filter_apps_all">All</string>
-    <!-- Text for filter option in ManageApps screen to display third party
+    <!-- Text for filter option in ManageApps screen to display third party 
     applications only -->
     <string name="filter_apps_third_party">Downloaded</string>
     <!-- Text for filter option in ManageApps screen to display list of running
@@ -1590,7 +1590,7 @@ found in the list of installed applications.</string>
     <string name="service_foreground_processes">Other: <xliff:g id="memory">%2$s</xliff:g> in <xliff:g id="count">%1$d</xliff:g></string>
     <!-- Text to label a process entry with the process name. -->
     <string name="service_process_name">Process: <xliff:g id="process">%1$s</xliff:g></string>
-
+    
     <!-- Language Settings --> <skip />
     <!-- Title of setting on main settings screen.  This item will take the user to the screen to tweak settings realted to locale and text -->
     <string name="language_settings">Language &amp; keyboard</string>
@@ -1631,7 +1631,7 @@ found in the list of installed applications.</string>
     card numbers.  It comes from the application
     <xliff:g id="ime_application_name">%1$s</xliff:g>.
     Use this input method?</string>
-
+    
     <!-- User dictionary settings --><skip />
     <!-- User dictionary settings, The titlebar text of the User dictionary settings screen. -->
     <string name="user_dict_settings_titlebar">User dictionary</string>
@@ -1723,7 +1723,7 @@ found in the list of installed applications.</string>
          (or other screens that can host gadgets).  Note to translators: we're still determining
          the final name for Gadgets/Widgets, so please translate both for now. -->
     <string name="gadget_picker_title">Choose gadget</string>
-
+    
     <!-- Title for the screen that lets the user choose a widget to add to the home screen
          (or other screens that can host widgets).  Note to translators: we're still determining
          the final name for Gadgets/Widgets, so please translate both for now. -->
@@ -1776,52 +1776,52 @@ found in the list of installed applications.</string>
 
     <!-- Used to head a list of packages that share a given user id BatteryHistory -->
     <string name="battery_history_packages_sharing_this_uid">Packages sharing this UID:</string>
-
+    
     <!-- Used when no battery data available in BatteryHistory -->
     <string name="battery_history_no_data">No battery usage data available</string>
-
+        
     <!-- Used for Sensor detail screen in BatteryHistory -->
     <string name="battery_history_sensor">Sensor:</string>
-
+    
     <!-- Used for Wakelock detail screen in BatteryHistory -->
     <string name="battery_history_wakelock">Partial Wakelock:</string>
-
+    
     <!-- Used for Sensor detail screen in BatteryHistory -->
     <string name="battery_history_used_by_packages">Sensor used by packages:</string>
-
+    
     <!-- Used for Sensor detail screen in BatteryHistory -->
     <string name="battery_history_sensor_usage">Used <xliff:g id="count">%1$d</xliff:g> times by <xliff:g id="package">%2$s</xliff:g></string>
-
+    
     <!-- Used for Sensor detail screen in BatteryHistory -->
     <string name="battery_history_sensor_usage_multi">Used <xliff:g id="count">%1$d</xliff:g> times by one of:</string>
-
+    
     <!-- Used for label of awake bar in BatteryHistory -->
     <string name="battery_history_awake_label">Running</string>
-
+    
     <!-- Used for label of screen on bar in BatteryHistory -->
     <string name="battery_history_screen_on_label">Screen on</string>
-
+    
     <!-- Used for label of phone on bar in BatteryHistory -->
     <string name="battery_history_phone_on_label">Phone on</string>
-
+    
     <!-- Used for awake time message in BatteryHistory -->
     <string name="battery_history_awake">Time spent without sleeping:</string>
-
+    
     <!-- Used for Screen on time message in BatteryHistory -->
     <string name="battery_history_screen_on">Time spent with screen on:</string>
-
+    
     <!-- Used for Phone on time message in BatteryHistory -->
     <string name="battery_history_phone_on">Time spent with phone on:</string>
-
+    
     <!-- Used for Screen on time message in BatteryHistory -->
     <string name="battery_history_screen_on_battery">On battery:</string>
-
+    
     <!-- XXX remove? Used for Screen on time message in BatteryHistory -->
     <string name="battery_history_screen_on_plugged">Plugged in:</string>
 
     <!-- XXX remove? Strings used for displaying usage statistics -->
     <string name="usage_stats_label">Usage statistics</string>
-
+    
     <!-- In the Testing screen. The item title of the activity that shows usage statistics.  -->
     <string name="testing_usage_stats">Usage statistics</string>
     <!-- label for text to indicate sort options -->
@@ -2255,7 +2255,7 @@ found in the list of installed applications.</string>
     <string name="emergency_tone_title">Emergency tone</string>
     <!-- Sound settings screen, setting option summary text -->
     <string name="emergency_tone_summary">Set behavior when an emergency call is placed</string>
-
+    
     <!-- Privacy Settings screen --><skip/>
     <!-- Privacy settings menu title -->
     <string name="privacy_settings">Privacy</string>
