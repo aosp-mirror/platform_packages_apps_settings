@@ -382,7 +382,7 @@ public class DockService extends Service implements AlertDialog.OnMultiChoiceCli
                 items[i] = service.getString(R.string.bluetooth_dock_settings_headset);
                 mProfiles[i] = Profile.HEADSET;
                 if (firstTime) {
-                    mCheckedItems[i] = true;
+                    mCheckedItems[i] = false;
                 } else {
                     mCheckedItems[i] = LocalBluetoothProfileManager.getProfileManager(mBtManager,
                             Profile.HEADSET).isPreferred(device);
@@ -393,7 +393,7 @@ public class DockService extends Service implements AlertDialog.OnMultiChoiceCli
                 items[i] = service.getString(R.string.bluetooth_dock_settings_a2dp);
                 mProfiles[i] = Profile.A2DP;
                 if (firstTime) {
-                    mCheckedItems[i] = true;
+                    mCheckedItems[i] = false;
                 } else {
                     mCheckedItems[i] = LocalBluetoothProfileManager.getProfileManager(mBtManager,
                             Profile.A2DP).isPreferred(device);
