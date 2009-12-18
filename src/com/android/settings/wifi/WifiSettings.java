@@ -192,6 +192,9 @@ public class WifiSettings extends PreferenceActivity implements WifiLayer.Callba
         if (mWifiEnabler != null) {
             mWifiEnabler.pause();
         }
+        if (mDialog != null) {
+            mDialog.dismiss();
+        }
     }
 
     @Override
