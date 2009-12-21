@@ -459,19 +459,19 @@ public class DockService extends Service implements AlertDialog.OnMultiChoiceCli
 
         mPendingDevice = null;
 
+        boolean callConnect = false;
+        CachedBluetoothDevice cachedDevice = getCachedBluetoothDevice(mContext, mBtManager,
+                device);
         for (int i = 0; i < mProfiles.length; i++) {
             LocalBluetoothProfileManager profileManager = LocalBluetoothProfileManager
                     .getProfileManager(mBtManager, mProfiles[i]);
             boolean isConnected = profileManager.isConnected(device);
-            CachedBluetoothDevice cachedDevice = getCachedBluetoothDevice(mContext, mBtManager,
-                    device);
 
             if (DEBUG) Log.d(TAG, mProfiles[i].toString() + " = " + mCheckedItems[i]);
 
             if (mCheckedItems[i] && !isConnected) {
                 // Checked but not connected
-                if (DEBUG) Log.d(TAG, "applyBtSettings - Connecting");
-                cachedDevice.connect(mProfiles[i]);
+                callConnect = true;
             } else if (!mCheckedItems[i] && isConnected) {
                 // Unchecked but connected
                 if (DEBUG) Log.d(TAG, "applyBtSettings - Disconnecting");
@@ -483,6 +483,11 @@ public class DockService extends Service implements AlertDialog.OnMultiChoiceCli
                     Log.e(TAG, "Can't save prefered value");
                 }
             }
+        }
+
+        if (callConnect) {
+            if (DEBUG) Log.d(TAG, "applyBtSettings - Connecting");
+            cachedDevice.connect();
         }
     }
 
