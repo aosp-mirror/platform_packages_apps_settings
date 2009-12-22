@@ -59,7 +59,7 @@ import com.android.internal.telephony.Phone;
 import com.android.internal.telephony.PhoneFactory;
 import com.android.internal.telephony.PhoneStateIntentReceiver;
 import com.android.internal.telephony.TelephonyProperties;
-import com.android.internal.telephony.gsm.PdpConnection;
+import com.android.internal.telephony.gsm.GsmDataConnection;
 
 import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
@@ -760,8 +760,8 @@ public class RadioInfo extends Activity {
         List<DataConnection> dcs = phone.getCurrentDataConnectionList();
 
         for (DataConnection dc : dcs) {
-            sb.append("    State: ").append(dc.getState().toString()).append("\n");
-            if (dc.getState().isActive()) {
+            sb.append("    State: ").append(dc.getStateAsString()).append("\n");
+            if (dc.isActive()) {
                 long timeElapsed =
                     (System.currentTimeMillis() - dc.getConnectionTime())/1000;
                 sb.append("    connected at ")
@@ -769,8 +769,8 @@ public class RadioInfo extends Activity {
                   .append(" and elapsed ")
                   .append(DateUtils.formatElapsedTime(timeElapsed));
 
-                if (dc instanceof PdpConnection) {
-                    PdpConnection pdp = (PdpConnection)dc;
+                if (dc instanceof GsmDataConnection) {
+                    GsmDataConnection pdp = (GsmDataConnection)dc;
                     sb.append("\n    to ")
                       .append(pdp.getApn().toString());
                 }
@@ -784,14 +784,14 @@ public class RadioInfo extends Activity {
                 if (dns != null) {
                     sb.append("\ndns: ").append(dns[0]).append(", ").append(dns[1]);
                 }
-            } else if (dc.getState().isInactive()) {
+            } else if (dc.isInactive()) {
                 sb.append("    disconnected with last try at ")
                   .append(DateUtils.timeString(dc.getLastFailTime()))
                   .append("\n    fail because ")
                   .append(dc.getLastFailCause().toString());
             } else {
-                if (dc instanceof PdpConnection) {
-                    PdpConnection pdp = (PdpConnection)dc;
+                if (dc instanceof GsmDataConnection) {
+                    GsmDataConnection pdp = (GsmDataConnection)dc;
                     sb.append("    is connecting to ")
                       .append(pdp.getApn().toString());
                 } else {
