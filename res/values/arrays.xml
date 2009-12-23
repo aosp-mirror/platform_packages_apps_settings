@@ -23,19 +23,19 @@
          strings. --> <skip />
     <!-- The time zone picker screen has two levels.  The first level allows the user to choose a region. -->
     <string-array name="timezone_filters">
-	<!-- The next level of the time zoner picker should show time zones from the Americas. -->
+    <!-- The next level of the time zoner picker should show time zones from the Americas. -->
         <item>America</item>
-	<!-- The next level of the time zoner picker should show time zones from Europe. -->
+    <!-- The next level of the time zoner picker should show time zones from Europe. -->
         <item>Europe</item>
-	<!-- The next level of the time zoner picker should show time zones from Africa. -->
+    <!-- The next level of the time zoner picker should show time zones from Africa. -->
         <item>Africa</item>
-	<!-- The next level of the time zoner picker should show time zones from Asia. -->
+    <!-- The next level of the time zoner picker should show time zones from Asia. -->
         <item>Asia</item>
-	<!-- The next level of the time zoner picker should show time zones from Australia. -->
+    <!-- The next level of the time zoner picker should show time zones from Australia. -->
         <item>Australia</item>
-	<!-- The next level of the time zoner picker should show time zones from Pacific. -->
+    <!-- The next level of the time zoner picker should show time zones from Pacific. -->
         <item>Pacific</item>
-	<!-- The next level of the time zoner picker should show time zones from ALL regions. -->
+    <!-- The next level of the time zoner picker should show time zones from ALL regions. -->
         <item>All</item>
     </string-array>
 
@@ -98,6 +98,22 @@
         <item>1800000</item>
     </string-array>
 
+    <!-- Unlock method in SecuritySettings --><skip/>
+    <string-array name="unlock_method_entries">
+        <item>Password</item>
+        <item>PIN</item>
+        <item>Pattern</item>
+        <item>None</item>
+    </string-array>
+
+    <!-- Do not translate. -->
+    <string-array name="unlock_method_values" translatable="false">
+        <item>password</item>
+        <item>pin</item>
+        <item>pattern</item>
+        <item>none</item>
+    </string-array>
+
     <!-- TTS settings -->
 
     <!-- Default speech rate choices -->
@@ -133,7 +149,7 @@
         <item>120</item>
         <item>150</item>
     </string-array>
-    
+
     <!-- Default language choices -->
     <string-array name="tts_lang_entries">
         <item>American English</item>
@@ -202,7 +218,7 @@
         <!-- WEP key that is in hexadecimal. -->
         <item>WEP hexadecimal</item>
     </string-array>
-    
+
     <!-- Wi-Fi settings. Presented as a list dialog to the user to choose the Wi-Fi sleep policy. -->
     <string-array name="wifi_sleep_policy_entries">
         <!-- Wi-Fi should go to sleep when the screen turns off. -->

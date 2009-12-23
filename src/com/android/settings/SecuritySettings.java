@@ -25,7 +25,6 @@ import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.ContentQueryMap;
 import android.content.ContentResolver;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
@@ -35,10 +34,13 @@ import android.os.ICheckinService;
 import android.os.ServiceManager;
 import android.os.SystemProperties;
 import android.preference.CheckBoxPreference;
+import android.preference.ListPreference;
 import android.preference.Preference;
 import android.preference.PreferenceActivity;
 import android.preference.PreferenceCategory;
+import android.preference.PreferenceManager;
 import android.preference.PreferenceScreen;
+import android.preference.Preference.OnPreferenceChangeListener;
 import android.provider.Settings;
 import android.security.Credentials;
 import android.security.KeyStore;
@@ -56,11 +58,18 @@ import com.android.internal.widget.LockPatternUtils;
 public class SecuritySettings extends PreferenceActivity {
 
     // Lock Settings
+    private static final String PACKAGE = "com.android.settings";
+    private static final String LOCK_PATTERN_TUTORIAL = PACKAGE + ".ChooseLockPatternTutorial";
+    private static final String ICC_LOCK_SETTINGS = PACKAGE + ".IccLockSettings";
+    private static final String CHOOSE_LOCK_PATTERN = PACKAGE + ".ChooseLockPattern";
+    private static final String CHOOSE_LOCK_PIN = PACKAGE + ".ChooseLockPassword";
 
     private static final String KEY_LOCK_ENABLED = "lockenabled";
     private static final String KEY_VISIBLE_PATTERN = "visiblepattern";
     private static final String KEY_TACTILE_FEEDBACK_ENABLED = "tactilefeedback";
-    private static final int CONFIRM_PATTERN_THEN_DISABLE_AND_CLEAR_REQUEST_CODE = 55;
+    private static final String KEY_UNLOCK_METHOD = "unlock_method";
+    private static final int UPDATE_PASSWORD_REQUEST = 56;
+    private static final int CONFIRM_EXISTING_REQUEST = 57;
 
     // Encrypted File Systems constants
     private static final String PROPERTY_EFS_ENABLED = "persist.security.efs.enabled";
@@ -69,11 +78,8 @@ public class SecuritySettings extends PreferenceActivity {
     private static final String PREFS_NAME = "location_prefs";
     private static final String PREFS_USE_LOCATION = "use_location";
 
-    private LockPatternUtils mLockPatternUtils;
-    private CheckBoxPreference mLockEnabled;
     private CheckBoxPreference mVisiblePattern;
     private CheckBoxPreference mTactileFeedback;
-    private Preference mChoosePattern;
 
     private CheckBoxPreference mShowPassword;
 
@@ -97,6 +103,8 @@ public class SecuritySettings extends PreferenceActivity {
     // This is necessary because the Network Location Provider can change settings
     // if the user does not confirm enabling the provider.
     private ContentQueryMap mContentQueryMap;
+    private ListPreference mUnlockMethod;
+    private ChooseLockSettingsHelper mChooseLockSettingsHelper;
     private final class SettingsObserver implements Observer {
         public void update(Observable o, Object arg) {
             updateToggles();
@@ -108,7 +116,7 @@ public class SecuritySettings extends PreferenceActivity {
         super.onCreate(savedInstanceState);
         addPreferencesFromResource(R.xml.security_settings);
 
-        mLockPatternUtils = new LockPatternUtils(getContentResolver());
+        mChooseLockSettingsHelper = new ChooseLockSettingsHelper(this);
 
         createPreferenceHierarchy();
 
@@ -131,37 +139,22 @@ public class SecuritySettings extends PreferenceActivity {
         // Root
         PreferenceScreen root = this.getPreferenceScreen();
 
-        // Inline preferences
-        PreferenceCategory inlinePrefCat = new PreferenceCategory(this);
-        inlinePrefCat.setTitle(R.string.lock_settings_title);
-        root.addPreference(inlinePrefCat);
+        PreferenceManager pm = getPreferenceManager();
 
-        // change pattern lock
-        Intent intent = new Intent();
-        intent.setClassName("com.android.settings",
-                    "com.android.settings.ChooseLockPatternTutorial");
-        mChoosePattern = getPreferenceManager().createPreferenceScreen(this);
-        mChoosePattern.setIntent(intent);
-        inlinePrefCat.addPreference(mChoosePattern);
-
-        // autolock toggle
-        mLockEnabled = new LockEnabledPref(this);
-        mLockEnabled.setTitle(R.string.lockpattern_settings_enable_title);
-        mLockEnabled.setSummary(R.string.lockpattern_settings_enable_summary);
-        mLockEnabled.setKey(KEY_LOCK_ENABLED);
-        inlinePrefCat.addPreference(mLockEnabled);
+        mUnlockMethod = (ListPreference) pm.findPreference(KEY_UNLOCK_METHOD);
+        mUnlockMethod.setOnPreferenceChangeListener(new OnPreferenceChangeListener() {
+            public boolean onPreferenceChange(Preference preference, Object newValue) {
+                String value = (String) newValue;
+                handleUpdateUnlockMethod(value);
+                return false;
+            }
+        });
 
         // visible pattern
-        mVisiblePattern = new CheckBoxPreference(this);
-        mVisiblePattern.setKey(KEY_VISIBLE_PATTERN);
-        mVisiblePattern.setTitle(R.string.lockpattern_settings_enable_visible_pattern_title);
-        inlinePrefCat.addPreference(mVisiblePattern);
+        mVisiblePattern = (CheckBoxPreference) pm.findPreference(KEY_VISIBLE_PATTERN);
 
         // tactile feedback
-        mTactileFeedback = new CheckBoxPreference(this);
-        mTactileFeedback.setKey(KEY_TACTILE_FEEDBACK_ENABLED);
-        mTactileFeedback.setTitle(R.string.lockpattern_settings_enable_tactile_feedback_title);
-        inlinePrefCat.addPreference(mTactileFeedback);
+        mTactileFeedback = (CheckBoxPreference) pm.findPreference(KEY_TACTILE_FEEDBACK_ENABLED);
 
         int activePhoneType = TelephonyManager.getDefault().getPhoneType();
 
@@ -172,10 +165,7 @@ public class SecuritySettings extends PreferenceActivity {
                     .createPreferenceScreen(this);
             simLockPreferences.setTitle(R.string.sim_lock_settings_category);
             // Intent to launch SIM lock settings
-            intent = new Intent();
-            intent.setClassName("com.android.settings", "com.android.settings.IccLockSettings");
-            simLockPreferences.setIntent(intent);
-
+            simLockPreferences.setIntent(new Intent().setClassName(PACKAGE, ICC_LOCK_SETTINGS));
             PreferenceCategory simLockCat = new PreferenceCategory(this);
             simLockCat.setTitle(R.string.sim_lock_settings_title);
             root.addPreference(simLockCat);
@@ -209,23 +199,41 @@ public class SecuritySettings extends PreferenceActivity {
         return root;
     }
 
+    protected void handleUpdateUnlockMethod(final String value) {
+        final LockPatternUtils lockPatternUtils = mChooseLockSettingsHelper.utils();
+        if ("none".equals(value)) {
+            mChooseLockSettingsHelper.launchConfirmationActivity(CONFIRM_EXISTING_REQUEST);
+        } else if ("password".equals(value) || "pin".equals(value)) {
+            final int minLength = 4; // TODO: get from policy store.
+            final int maxLength = 16;
+            final int mode = "password".equals(value)
+                    ? LockPatternUtils.MODE_PASSWORD : LockPatternUtils.MODE_PIN;
+            Intent intent = new Intent().setClassName(PACKAGE, CHOOSE_LOCK_PIN);
+            intent.putExtra(LockPatternUtils.PASSWORD_TYPE_KEY, mode);
+            intent.putExtra(ChooseLockPassword.PASSWORD_MIN_KEY, minLength);
+            intent.putExtra(ChooseLockPassword.PASSWORD_MAX_KEY, maxLength);
+            startActivityForResult(intent, UPDATE_PASSWORD_REQUEST);
+        } else if ("pattern".equals(value)) {
+            boolean showTutorial = !lockPatternUtils.isPatternEverChosen();
+            Intent intent = new Intent();
+            intent.setClassName(PACKAGE, showTutorial ?
+                    LOCK_PATTERN_TUTORIAL : CHOOSE_LOCK_PATTERN);
+            intent.putExtra("key_lock_method", value);
+            startActivityForResult(intent, UPDATE_PASSWORD_REQUEST);
+        }
+    }
+
     @Override
     protected void onResume() {
         super.onResume();
 
-        boolean patternExists = mLockPatternUtils.savedPatternExists();
-        mLockEnabled.setEnabled(patternExists);
+        final LockPatternUtils lockPatternUtils = mChooseLockSettingsHelper.utils();
+        boolean patternExists = lockPatternUtils.savedPatternExists();
         mVisiblePattern.setEnabled(patternExists);
         mTactileFeedback.setEnabled(patternExists);
 
-        mLockEnabled.setChecked(mLockPatternUtils.isLockPatternEnabled());
-        mVisiblePattern.setChecked(mLockPatternUtils.isVisiblePatternEnabled());
-        mTactileFeedback.setChecked(mLockPatternUtils.isTactileFeedbackEnabled());
-
-        int chooseStringRes = mLockPatternUtils.savedPatternExists() ?
-                R.string.lockpattern_settings_change_lock_pattern :
-                R.string.lockpattern_settings_choose_lock_pattern;
-        mChoosePattern.setTitle(chooseStringRes);
+        mVisiblePattern.setChecked(lockPatternUtils.isVisiblePatternEnabled());
+        mTactileFeedback.setChecked(lockPatternUtils.isTactileFeedbackEnabled());
 
         mShowPassword.setChecked(Settings.System.getInt(getContentResolver(),
                 Settings.System.TEXT_SHOW_PASSWORD, 1) != 0);
@@ -238,12 +246,13 @@ public class SecuritySettings extends PreferenceActivity {
             Preference preference) {
         final String key = preference.getKey();
 
+        final LockPatternUtils lockPatternUtils = mChooseLockSettingsHelper.utils();
         if (KEY_LOCK_ENABLED.equals(key)) {
-            mLockPatternUtils.setLockPatternEnabled(isToggled(preference));
+            lockPatternUtils.setLockPatternEnabled(isToggled(preference));
         } else if (KEY_VISIBLE_PATTERN.equals(key)) {
-            mLockPatternUtils.setVisiblePatternEnabled(isToggled(preference));
+            lockPatternUtils.setVisiblePatternEnabled(isToggled(preference));
         } else if (KEY_TACTILE_FEEDBACK_ENABLED.equals(key)) {
-            mLockPatternUtils.setTactileFeedbackEnabled(isToggled(preference));
+            lockPatternUtils.setTactileFeedbackEnabled(isToggled(preference));
         } else if (preference == mShowPassword) {
             Settings.System.putInt(getContentResolver(), Settings.System.TEXT_SHOW_PASSWORD,
                     mShowPassword.isChecked() ? 1 : 0);
@@ -263,11 +272,6 @@ public class SecuritySettings extends PreferenceActivity {
         }
 
         return false;
-    }
-
-    private void showPrivacyPolicy() {
-        Intent intent = new Intent("android.settings.TERMS");
-        startActivity(intent);
     }
 
     /*
@@ -292,36 +296,6 @@ public class SecuritySettings extends PreferenceActivity {
     }
 
     /**
-     * For the user to disable keyguard, we first make them verify their
-     * existing pattern.
-     */
-    private class LockEnabledPref extends CheckBoxPreference {
-
-        public LockEnabledPref(Context context) {
-            super(context);
-        }
-
-        @Override
-        protected void onClick() {
-            if (mLockPatternUtils.savedPatternExists() && isChecked()) {
-                confirmPatternThenDisableAndClear();
-            } else {
-                super.onClick();
-            }
-        }
-    }
-
-    /**
-     * Launch screen to confirm the existing lock pattern.
-     * @see #onActivityResult(int, int, android.content.Intent)
-     */
-    private void confirmPatternThenDisableAndClear() {
-        final Intent intent = new Intent();
-        intent.setClassName("com.android.settings", "com.android.settings.ConfirmLockPattern");
-        startActivityForResult(intent, CONFIRM_PATTERN_THEN_DISABLE_AND_CLEAR_REQUEST_CODE);
-    }
-
-    /**
      * @see #confirmPatternThenDisableAndClear
      */
     @Override
@@ -330,10 +304,11 @@ public class SecuritySettings extends PreferenceActivity {
 
         final boolean resultOk = resultCode == Activity.RESULT_OK;
 
-        if ((requestCode == CONFIRM_PATTERN_THEN_DISABLE_AND_CLEAR_REQUEST_CODE)
-                && resultOk) {
-            mLockPatternUtils.setLockPatternEnabled(false);
-            mLockPatternUtils.saveLockPattern(null);
+        LockPatternUtils lockPatternUtils = mChooseLockSettingsHelper.utils();
+        if ((requestCode == CONFIRM_EXISTING_REQUEST) && resultOk) {
+            lockPatternUtils.saveLockPassword(null);
+            lockPatternUtils.setLockPatternEnabled(false);
+            lockPatternUtils.saveLockPattern(null);
         }
     }
 

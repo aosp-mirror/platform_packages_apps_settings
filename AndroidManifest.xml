@@ -406,6 +406,9 @@
         <!-- Second and third-level settings -->
 
         <activity android:name="ConfirmLockPattern"/>
+        <activity android:name="ConfirmLockPassword"
+            android:theme="@android:style/Theme.NoTitleBar">
+        </activity>
 
         <activity android:name="ChooseLockPattern" android:label="@string/lockpattern_change_lock_pattern_label">
             <intent-filter>
@@ -413,9 +416,15 @@
             </intent-filter>
         </activity>
 
+        <activity android:name="ChooseLockPassword" android:label="@string/lockpattern_change_lock_pin_label"
+            android:theme="@android:style/Theme.NoTitleBar">
+            <intent-filter>
+                <action android:name="android.intent.action.DEFAULT" />
+            </intent-filter>
+        </activity>
+
         <activity android:name="ChooseLockPatternTutorial"
-            android:label="@string/lockpattern_change_lock_pattern_label"
-            >
+            android:label="@string/lockpattern_change_lock_pattern_label">
             <intent-filter>
                 <action android:name="android.intent.action.DEFAULT" />
             </intent-filter>

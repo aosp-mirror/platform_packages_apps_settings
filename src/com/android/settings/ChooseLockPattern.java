@@ -45,7 +45,6 @@ import java.util.List;
  * - saves chosen password when confirmed
  */
 public class ChooseLockPattern extends Activity implements View.OnClickListener{
-
     /**
      * Used by the choose lock pattern wizard to indicate the wizard is
      * finished, and each activity in the wizard should finish.
@@ -56,7 +55,9 @@ public class ChooseLockPattern extends Activity implements View.OnClickListener{
      * result.
      */
     static final int RESULT_FINISHED = RESULT_FIRST_USER;
-    
+
+    public static final int CONFIRM_EXISTING_REQUEST = 55;
+
     // how long after a confirmation message is shown before moving on
     static final int INFORMATION_MSG_TIMEOUT_MS = 3000;
 
@@ -65,29 +66,38 @@ public class ChooseLockPattern extends Activity implements View.OnClickListener{
 
     private static final int ID_EMPTY_MESSAGE = -1;
 
-
     protected TextView mHeaderText;
     protected LockPatternView mLockPatternView;
     protected TextView mFooterText;
     private TextView mFooterLeftButton;
     private TextView mFooterRightButton;
-
     protected List<LockPatternView.Cell> mChosenPattern = null;
-
-    protected LockPatternUtils mLockPatternUtils;
 
     /**
      * The patten used during the help screen to show how to draw a pattern.
      */
     private final List<LockPatternView.Cell> mAnimatePattern =
-            Collections.unmodifiableList(
-                Lists.newArrayList(
-                        LockPatternView.Cell.of(0, 0),
-                        LockPatternView.Cell.of(0, 1),
-                        LockPatternView.Cell.of(1, 1),
-                        LockPatternView.Cell.of(2, 1)
-                    ));
+            Collections.unmodifiableList(Lists.newArrayList(
+                    LockPatternView.Cell.of(0, 0),
+                    LockPatternView.Cell.of(0, 1),
+                    LockPatternView.Cell.of(1, 1),
+                    LockPatternView.Cell.of(2, 1)
+            ));
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode,
+            Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        switch (requestCode) {
+            case CONFIRM_EXISTING_REQUEST:
+                if (resultCode != Activity.RESULT_OK) {
+                    setResult(RESULT_FINISHED);
+                    finish();
+                }
+                updateStage(Stage.Introduction);
+                break;
+        }
+    }
 
     /**
      * The pattern listener that responds according to a user choosing a new
@@ -125,7 +135,7 @@ public class ChooseLockPattern extends Activity implements View.OnClickListener{
                 }
             }
 
-            public void onPatternCellAdded(List<Cell> pattern) { 
+            public void onPatternCellAdded(List<Cell> pattern) {
 
             }
 
@@ -250,19 +260,19 @@ public class ChooseLockPattern extends Activity implements View.OnClickListener{
         }
     };
 
+    private ChooseLockSettingsHelper mChooseLockSettingsHelper;
+
     private static final String KEY_UI_STAGE = "uiStage";
     private static final String KEY_PATTERN_CHOICE = "chosenPattern";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-        mLockPatternUtils = new LockPatternUtils(getContentResolver());
-
+        mChooseLockSettingsHelper = new ChooseLockSettingsHelper(this);
         requestWindowFeature(Window.FEATURE_NO_TITLE);
 
         setupViews();
-        
+
         // make it so unhandled touch events within the unlock screen go to the
         // lock pattern view.
         final LinearLayoutWithDefaultTouchRecepient topLayout
@@ -271,11 +281,12 @@ public class ChooseLockPattern extends Activity implements View.OnClickListener{
         topLayout.setDefaultTouchRecepient(mLockPatternView);
 
         if (savedInstanceState == null) {
-            // first launch
-            updateStage(Stage.Introduction);
-            if (mLockPatternUtils.savedPatternExists()) {
-                confirmPattern();
-            } 
+            // first launch. As a security measure, we're in NeedToConfirm mode until we know
+            // there isn't an existing password or the user confirms their password.
+            updateStage(Stage.NeedToConfirm);
+            if (!mChooseLockSettingsHelper.launchConfirmationActivity(CONFIRM_EXISTING_REQUEST)) {
+                updateStage(Stage.Introduction);
+            }
         } else {
             // restore from previous state
             final String patternString = savedInstanceState.getString(KEY_PATTERN_CHOICE);
@@ -285,19 +296,20 @@ public class ChooseLockPattern extends Activity implements View.OnClickListener{
             updateStage(Stage.values()[savedInstanceState.getInt(KEY_UI_STAGE)]);
         }
     }
-    
+
     /**
      * Keep all "find view" related stuff confined to this function since in
      * case someone needs to subclass and customize.
      */
     protected void setupViews() {
         setContentView(R.layout.choose_lock_pattern);
-        
+
         mHeaderText = (TextView) findViewById(R.id.headerText);
 
         mLockPatternView = (LockPatternView) findViewById(R.id.lockPattern);
         mLockPatternView.setOnPatternListener(mChooseNewLockPatternListener);
-        mLockPatternView.setTactileFeedbackEnabled(mLockPatternUtils.isTactileFeedbackEnabled());        
+        mLockPatternView.setTactileFeedbackEnabled(
+                mChooseLockSettingsHelper.utils().isTactileFeedbackEnabled());
 
         mFooterText = (TextView) findViewById(R.id.footerText);
 
@@ -364,35 +376,6 @@ public class ChooseLockPattern extends Activity implements View.OnClickListener{
         return super.onKeyDown(keyCode, event);
     }
 
-    /**
-     * Launch screen to confirm the existing lock pattern.
-     * @see #onActivityResult(int, int, android.content.Intent)
-     */
-    protected void confirmPattern() {
-        final Intent intent = new Intent();
-        intent.setClassName("com.android.settings", "com.android.settings.ConfirmLockPattern");
-        startActivityForResult(intent, 55);
-    }
-
-    /**
-     * @see #confirmPattern
-     */
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode,
-            Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-
-        if (requestCode != 55) {
-            return;
-        }
-
-        if (resultCode != Activity.RESULT_OK) {
-            setResult(RESULT_FINISHED);
-            finish();
-        }
-        updateStage(Stage.Introduction);
-    }
-
     @Override
     protected void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
@@ -414,7 +397,7 @@ public class ChooseLockPattern extends Activity implements View.OnClickListener{
 
         mUiStage = stage;
 
-        // header text, footer text, visibility and 
+        // header text, footer text, visibility and
         // enabled state all known from the stage
         if (stage == Stage.ChoiceTooShort) {
             mHeaderText.setText(
@@ -486,16 +469,17 @@ public class ChooseLockPattern extends Activity implements View.OnClickListener{
     }
 
     private void saveChosenPatternAndFinish() {
-        final boolean lockVirgin = !mLockPatternUtils.isPatternEverChosen();
+        LockPatternUtils utils = mChooseLockSettingsHelper.utils();
+        final boolean lockVirgin = !utils.isPatternEverChosen();
 
-        mLockPatternUtils.saveLockPattern(mChosenPattern);
-        mLockPatternUtils.setLockPatternEnabled(true);
+        utils.saveLockPattern(mChosenPattern);
+        utils.setLockPatternEnabled(true);
 
         if (lockVirgin) {
-            mLockPatternUtils.setVisiblePatternEnabled(true);
-            mLockPatternUtils.setTactileFeedbackEnabled(false);
+            utils.setVisiblePatternEnabled(true);
+            utils.setTactileFeedbackEnabled(false);
         }
-        
+
         setResult(RESULT_FINISHED);
         finish();
     }
