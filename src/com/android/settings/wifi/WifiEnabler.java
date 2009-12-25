@@ -64,6 +64,11 @@ public class WifiEnabler implements Preference.OnPreferenceChangeListener {
             }
         }
     };
+
+    public WifiEnabler(Context context, CheckBoxPreference wifiCheckBoxPreference) {
+        this(context, (WifiManager) context.getSystemService(Context.WIFI_SERVICE),
+                wifiCheckBoxPreference);
+    }
     
     public WifiEnabler(Context context, WifiManager wifiManager,
             CheckBoxPreference wifiCheckBoxPreference) {

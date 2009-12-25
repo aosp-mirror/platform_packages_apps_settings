@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2007 The Android Open Source Project
+ * Copyright (C) 2009 The Android Open Source Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -20,7 +20,6 @@ import android.bluetooth.BluetoothAdapter;
 import android.content.Intent;
 import android.net.wifi.WifiManager;
 import android.os.Bundle;
-import android.os.IBinder;
 import android.os.ServiceManager;
 import android.os.SystemProperties;
 import android.preference.CheckBoxPreference;
@@ -45,10 +44,10 @@ public class WirelessSettings extends PreferenceActivity {
     public static final String EXIT_ECM_RESULT = "exit_ecm_result";
     public static final int REQUEST_CODE_EXIT_ECM = 1;
 
-    private WifiEnabler mWifiEnabler;
     private AirplaneModeEnabler mAirplaneModeEnabler;
-    private BluetoothEnabler mBtEnabler;
     private CheckBoxPreference mAirplaneModePreference;
+    private WifiEnabler mWifiEnabler;
+    private BluetoothEnabler mBtEnabler;
 
     /**
      * Invoked on each preference click in this hierarchy, overrides
@@ -57,20 +56,16 @@ public class WirelessSettings extends PreferenceActivity {
      */
     @Override
     public boolean onPreferenceTreeClick(PreferenceScreen preferenceScreen, Preference preference) {
-        if ( (preference == mAirplaneModePreference) &&
-                (Boolean.parseBoolean(
-                    SystemProperties.get(TelephonyProperties.PROPERTY_INECM_MODE))) ) {
+        if (preference == mAirplaneModePreference && Boolean.parseBoolean(
+                SystemProperties.get(TelephonyProperties.PROPERTY_INECM_MODE))) {
             // In ECM mode launch ECM app dialog
             startActivityForResult(
                 new Intent(TelephonyIntents.ACTION_SHOW_NOTICE_ECM_BLOCK_OTHERS, null),
                 REQUEST_CODE_EXIT_ECM);
-
             return true;
         }
-        else {
-            // Let the intents be launched by the Preference manager
-            return false;
-        }
+        // Let the intents be launched by the Preference manager
+        return false;
     }
     
     @Override
@@ -79,81 +74,62 @@ public class WirelessSettings extends PreferenceActivity {
 
         addPreferencesFromResource(R.xml.wireless_settings);
 
-        initToggles();
+        CheckBoxPreference airplane = (CheckBoxPreference) findPreference(KEY_TOGGLE_AIRPLANE);
+        CheckBoxPreference wifi = (CheckBoxPreference) findPreference(KEY_TOGGLE_WIFI);
+        CheckBoxPreference bt = (CheckBoxPreference) findPreference(KEY_TOGGLE_BLUETOOTH);
+
+        mAirplaneModeEnabler = new AirplaneModeEnabler(this, airplane);
         mAirplaneModePreference = (CheckBoxPreference) findPreference(KEY_TOGGLE_AIRPLANE);
+        mWifiEnabler = new WifiEnabler(this, wifi);
+        mBtEnabler = new BluetoothEnabler(this, bt);
+
+        String toggleable = Settings.System.getString(getContentResolver(),
+                Settings.System.AIRPLANE_MODE_TOGGLEABLE_RADIOS);
+
+        // Manually set up dependencies for Wifi when not toggleable.
+        if (toggleable == null || !toggleable.contains(Settings.System.RADIO_WIFI)) {
+            wifi.setDependency(KEY_TOGGLE_AIRPLANE);
+            findPreference(KEY_WIFI_SETTINGS).setDependency(KEY_TOGGLE_AIRPLANE);
+            findPreference(KEY_VPN_SETTINGS).setDependency(KEY_TOGGLE_AIRPLANE);
+        }
+
+        // Manually set dependencies for Bluetooth when not toggleable.
+        if (toggleable == null || !toggleable.contains(Settings.System.RADIO_BLUETOOTH)) {
+            bt.setDependency(KEY_TOGGLE_AIRPLANE);
+            findPreference(KEY_BT_SETTINGS).setDependency(KEY_TOGGLE_AIRPLANE);
+        }
+
+        // Disable BT Settings if BT service is not available.
+        if (ServiceManager.getService(BluetoothAdapter.BLUETOOTH_SERVICE) == null) {
+            findPreference(KEY_BT_SETTINGS).setEnabled(false);
+        }
     }
     
     @Override
     protected void onResume() {
         super.onResume();
         
+        mAirplaneModeEnabler.resume();
         mWifiEnabler.resume();
         mBtEnabler.resume();
-        mAirplaneModeEnabler.resume();
     }
     
     @Override
     protected void onPause() {
         super.onPause();
         
-        mWifiEnabler.pause();
         mAirplaneModeEnabler.pause();
+        mWifiEnabler.pause();
         mBtEnabler.pause();
     }
     
-    private void initToggles() {
-        
-        Preference airplanePreference = findPreference(KEY_TOGGLE_AIRPLANE);
-        Preference wifiPreference = findPreference(KEY_TOGGLE_WIFI);
-        Preference btPreference = findPreference(KEY_TOGGLE_BLUETOOTH);
-        Preference wifiSettings = findPreference(KEY_WIFI_SETTINGS);
-        Preference btSettings = findPreference(KEY_BT_SETTINGS);
-        Preference vpnSettings = findPreference(KEY_VPN_SETTINGS);
-
-        IBinder b = ServiceManager.getService(BluetoothAdapter.BLUETOOTH_SERVICE);
-        if (b == null) {
-            // Disable BT Settings if BT service is not available.
-            btSettings.setEnabled(false);
-        }
-
-        mWifiEnabler = new WifiEnabler(
-                this, (WifiManager) getSystemService(WIFI_SERVICE),
-                (CheckBoxPreference) wifiPreference);
-        mAirplaneModeEnabler = new AirplaneModeEnabler(
-                this, (CheckBoxPreference) airplanePreference);
-        mBtEnabler = new BluetoothEnabler(this, (CheckBoxPreference) btPreference);
-
-        // manually set up dependencies for Wifi if its radio is not toggleable in airplane mode
-        String toggleableRadios = Settings.System.getString(getContentResolver(),
-                Settings.System.AIRPLANE_MODE_TOGGLEABLE_RADIOS);
-        if (toggleableRadios == null || !toggleableRadios.contains(Settings.System.RADIO_WIFI)) {
-            wifiPreference.setDependency(airplanePreference.getKey());
-            wifiSettings.setDependency(airplanePreference.getKey());
-            vpnSettings.setDependency(airplanePreference.getKey());
-        }
-
-        // Manually set dependencies for Bluetooth when not toggleable.
-        if (toggleableRadios == null ||
-                !toggleableRadios.contains(Settings.System.RADIO_BLUETOOTH)) {
-            btPreference.setDependency(airplanePreference.getKey());
-            btSettings.setDependency(airplanePreference.getKey());
-        }
-    }
-
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        switch(requestCode) {
-        case REQUEST_CODE_EXIT_ECM:
-            Boolean isChoiceYes =
-                data.getBooleanExtra(EXIT_ECM_RESULT, false);
+        if (requestCode == REQUEST_CODE_EXIT_ECM) {
+            Boolean isChoiceYes = data.getBooleanExtra(EXIT_ECM_RESULT, false);
             // Set Airplane mode based on the return value and checkbox state
             mAirplaneModeEnabler.setAirplaneModeInECM(isChoiceYes,
                     mAirplaneModePreference.isChecked());
-            break;
-
-        default:
-            break;
         }
     }
-
 }
