@@ -206,7 +206,7 @@ public class LanguageSettings extends PreferenceActivity {
         // Input Method stuff
         // Those monkeys kept committing suicide, so we add this property
         // to disable this functionality
-        if (!TextUtils.isEmpty(SystemProperties.get("ro.monkey"))) {
+        if (!TextUtils.isEmpty(SystemProperties.get("monkey.running"))) {
             return false;
         }
 
