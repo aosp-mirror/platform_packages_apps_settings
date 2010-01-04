@@ -16,12 +16,8 @@
 
 package com.android.settings.bluetooth;
 
-import com.android.settings.R;
-import com.android.settings.bluetooth.LocalBluetoothProfileManager.Profile;
-
 import android.app.AlertDialog;
 import android.app.Notification;
-import android.app.PendingIntent;
 import android.app.Service;
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
@@ -42,13 +38,15 @@ import android.view.WindowManager;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 
+import com.android.settings.R;
+import com.android.settings.bluetooth.LocalBluetoothProfileManager.Profile;
+
 public class DockService extends Service implements AlertDialog.OnMultiChoiceClickListener,
         DialogInterface.OnClickListener, DialogInterface.OnDismissListener,
         CompoundButton.OnCheckedChangeListener {
 
     private static final String TAG = "DockService";
 
-    // TODO clean up logs. Disable DEBUG flag for this file and receiver's too
     private static final boolean DEBUG = false;
 
     // Time allowed for the device to be undocked and redocked without severing
@@ -166,7 +164,7 @@ public class DockService extends Service implements AlertDialog.OnMultiChoiceCli
     }
 
     // This method gets messages from both onStartCommand and mServiceHandler/mServiceLooper
-    void processMessage(Message msg) {
+    private synchronized void processMessage(Message msg) {
         int msgType = msg.what;
         int state = msg.arg1;
         int startId = msg.arg2;
@@ -424,7 +422,7 @@ public class DockService extends Service implements AlertDialog.OnMultiChoiceCli
         }
     };
 
-    private void applyBtSettings(final BluetoothDevice device, int startId) {
+    private synchronized void applyBtSettings(final BluetoothDevice device, int startId) {
         if (device == null || mProfiles == null || mCheckedItems == null)
             return;
 
@@ -465,14 +463,13 @@ public class DockService extends Service implements AlertDialog.OnMultiChoiceCli
         for (int i = 0; i < mProfiles.length; i++) {
             LocalBluetoothProfileManager profileManager = LocalBluetoothProfileManager
                     .getProfileManager(mBtManager, mProfiles[i]);
-            boolean isConnected = profileManager.isConnected(device);
 
             if (DEBUG) Log.d(TAG, mProfiles[i].toString() + " = " + mCheckedItems[i]);
 
-            if (mCheckedItems[i] && !isConnected) {
+            if (mCheckedItems[i]) {
                 // Checked but not connected
                 callConnect = true;
-            } else if (!mCheckedItems[i] && isConnected) {
+            } else if (!mCheckedItems[i]) {
                 // Unchecked but connected
                 if (DEBUG) Log.d(TAG, "applyBtSettings - Disconnecting");
                 cachedDevice.disconnect(mProfiles[i]);
@@ -491,7 +488,7 @@ public class DockService extends Service implements AlertDialog.OnMultiChoiceCli
         }
     }
 
-    void handleUndocked(Context context, LocalBluetoothManager localManager,
+    private synchronized void handleUndocked(Context context, LocalBluetoothManager localManager,
             BluetoothDevice device) {
         if (mDialog != null) {
             mDialog.dismiss();
@@ -512,21 +509,5 @@ public class DockService extends Service implements AlertDialog.OnMultiChoiceCli
             cachedBluetoothDevice = new CachedBluetoothDevice(context, device);
         }
         return cachedBluetoothDevice;
-    }
-
-    // TODO Delete this method if not needed.
-    private Notification getNotification(Service service) {
-        CharSequence title = service.getString(R.string.dock_settings_title);
-
-        Notification n = new Notification(R.drawable.ic_bt_headphones_a2dp, title, System
-                .currentTimeMillis());
-
-        CharSequence contentText = service.getString(R.string.dock_settings_summary);
-        Intent notificationIntent = new Intent(service, DockEventReceiver.class);
-        notificationIntent.setAction(DockEventReceiver.ACTION_DOCK_SHOW_UI);
-        PendingIntent pendingIntent = PendingIntent.getActivity(service, 0, notificationIntent, 0);
-
-        n.setLatestEventInfo(service, title, contentText, pendingIntent);
-        return n;
     }
 }
