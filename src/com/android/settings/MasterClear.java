@@ -60,13 +60,13 @@ public class MasterClear extends Activity {
      */
     private Button.OnClickListener mFinalClickListener = new Button.OnClickListener() {
             public void onClick(View v) {
-                
+
                 // Those monkeys kept committing suicide, so we add this property
                 // to disable going through with the master clear
-                if (!TextUtils.isEmpty(SystemProperties.get("ro.monkey"))) {
+                if (!TextUtils.isEmpty(SystemProperties.get("monkey.running"))) {
                     return;
                 }
-                
+
                 ICheckinService service = 
                         ICheckinService.Stub.asInterface(ServiceManager.getService("checkin"));
                 if (service != null) {
