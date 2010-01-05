@@ -74,9 +74,7 @@ public class DevelopmentSettings extends PreferenceActivity
     @Override
     public boolean onPreferenceTreeClick(PreferenceScreen preferenceScreen, Preference preference) {
 
-        // Those monkeys kept committing suicide, so we add this property
-        // to disable this functionality
-        if (!TextUtils.isEmpty(SystemProperties.get("monkey.running"))) {
+        if (Utils.isMonkeyRunning()) {
             return false;
         }
 
