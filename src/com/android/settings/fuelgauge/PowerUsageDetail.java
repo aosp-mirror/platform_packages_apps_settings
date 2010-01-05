@@ -330,7 +330,7 @@ public class PowerUsageDetail extends Activity implements Button.OnClickListener
         ActivityManager am = (ActivityManager)getSystemService(
                 Context.ACTIVITY_SERVICE);
         for (int i = 0; i < mPackages.length; i++) {
-            am.restartPackage(mPackages[i]);
+            am.forceStopPackage(mPackages[i]);
         }
     }
 

@@ -539,7 +539,7 @@ public class InstalledAppDetails extends Activity implements View.OnClickListene
         } else if (v == mForceStopButton) {
             ActivityManager am = (ActivityManager)getSystemService(
                     Context.ACTIVITY_SERVICE);
-            am.restartPackage(packageName);
+            am.forceStopPackage(packageName);
         }
     }
 
