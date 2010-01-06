@@ -37,6 +37,7 @@ import java.util.Locale;
 
 public class LocalePicker extends ListActivity {
     private static final String TAG = "LocalePicker";
+    private static final boolean DEBUG = false;
 
     Loc[] mLocales;
     String[] mSpecialLocaleCodes;
@@ -90,8 +91,9 @@ public class LocalePicker extends ListActivity {
                 Locale l = new Locale(language, country);
 
                 if (finalSize == 0) {
-                    Log.v(TAG, "adding initial "+
-                            toTitleCase(l.getDisplayLanguage(l)));
+                    if (DEBUG) {
+                        Log.v(TAG, "adding initial "+ toTitleCase(l.getDisplayLanguage(l)));
+                    }
                     preprocess[finalSize++] =
                             new Loc(toTitleCase(l.getDisplayLanguage(l)), l);
                 } else {
@@ -101,13 +103,16 @@ public class LocalePicker extends ListActivity {
                     //  diff lang -> insert ours with lang-only name
                     if (preprocess[finalSize-1].locale.getLanguage().equals(
                             language)) {
-                        Log.v(TAG, "backing up and fixing "+
-                                preprocess[finalSize-1].label+" to "+
-                                getDisplayName(preprocess[finalSize-1].locale));
+                        if (DEBUG) {
+                            Log.v(TAG, "backing up and fixing "+
+                                    preprocess[finalSize-1].label+" to "+
+                                    getDisplayName(preprocess[finalSize-1].locale));
+                        }
                         preprocess[finalSize-1].label = toTitleCase(
                                 getDisplayName(preprocess[finalSize-1].locale));
-                        Log.v(TAG, "  and adding "+
-                                toTitleCase(getDisplayName(l)));
+                        if (DEBUG) {
+                            Log.v(TAG, "  and adding "+ toTitleCase(getDisplayName(l)));
+                        }
                         preprocess[finalSize++] =
                                 new Loc(toTitleCase(getDisplayName(l)), l);
                     } else {
@@ -117,7 +122,9 @@ public class LocalePicker extends ListActivity {
                         } else {
                             displayName = toTitleCase(l.getDisplayLanguage(l));
                         }
-                        Log.v(TAG, "adding "+displayName);
+                        if (DEBUG) {
+                            Log.v(TAG, "adding "+displayName);
+                        }
                         preprocess[finalSize++] = new Loc(displayName, l);
                     }
                 }
