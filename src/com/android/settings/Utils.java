@@ -21,6 +21,7 @@ import android.content.Intent;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
+import android.os.SystemProperties;
 import android.preference.Preference;
 import android.preference.PreferenceGroup;
 
@@ -36,7 +37,7 @@ public class Utils {
     /**
      * Finds a matching activity for a preference's intent. If a matching
      * activity is not found, it will remove the preference.
-     * 
+     *
      * @param context The context.
      * @param parentPreferenceGroup The preference group that contains the
      *            preference whose intent is being resolved.
@@ -50,12 +51,12 @@ public class Utils {
      */
     public static boolean updatePreferenceToSpecificActivityOrRemove(Context context,
             PreferenceGroup parentPreferenceGroup, String preferenceKey, int flags) {
-        
+
         Preference preference = parentPreferenceGroup.findPreference(preferenceKey);
         if (preference == null) {
             return false;
         }
-        
+
         Intent intent = preference.getIntent();
         if (intent != null) {
             // Find the activity that is in the system image
@@ -66,7 +67,7 @@ public class Utils {
                 ResolveInfo resolveInfo = list.get(i);
                 if ((resolveInfo.activityInfo.applicationInfo.flags & ApplicationInfo.FLAG_SYSTEM)
                         != 0) {
-                    
+
                     // Replace the intent with this specific activity
                     preference.setIntent(new Intent().setClassName(
                             resolveInfo.activityInfo.packageName,
@@ -76,7 +77,7 @@ public class Utils {
                         // Set the preference title to the activity's label
                         preference.setTitle(resolveInfo.loadLabel(pm));
                     }
-                    
+
                     return true;
                 }
             }
@@ -84,8 +85,15 @@ public class Utils {
 
         // Did not find a matching activity, so remove the preference
         parentPreferenceGroup.removePreference(preference);
-        
+
         return true;
     }
-    
+
+    /**
+     * Returns true if Monkey is running.
+     */
+    public static boolean isMonkeyRunning() {
+        return SystemProperties.getBoolean("ro.monkey", false);
+    }
+
 }
