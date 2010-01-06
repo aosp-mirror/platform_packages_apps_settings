@@ -204,9 +204,7 @@ public class LanguageSettings extends PreferenceActivity {
     public boolean onPreferenceTreeClick(PreferenceScreen preferenceScreen, Preference preference) {
         
         // Input Method stuff
-        // Those monkeys kept committing suicide, so we add this property
-        // to disable this functionality
-        if (!TextUtils.isEmpty(SystemProperties.get("monkey.running"))) {
+        if (Utils.isMonkeyRunning()) {
             return false;
         }
 

@@ -61,9 +61,7 @@ public class MediaFormat extends Activity {
     private Button.OnClickListener mFinalClickListener = new Button.OnClickListener() {
             public void onClick(View v) {
 
-                // Those monkeys kept committing suicide, so we add this property
-                // to disable going through with the format
-                if (!TextUtils.isEmpty(SystemProperties.get("monkey.running"))) {
+                if (Utils.isMonkeyRunning()) {
                     return;
                 }
                 IMountService service =
