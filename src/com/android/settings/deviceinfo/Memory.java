@@ -47,14 +47,14 @@ public class Memory extends PreferenceActivity {
 
     private static final String MEMORY_SD_AVAIL = "memory_sd_avail";
 
-    private static final String MEMORY_SD_UNMOUNT = "memory_sd_unmount";
+    private static final String MEMORY_SD_MOUNT_TOGGLE = "memory_sd_mount_toggle";
 
     private static final String MEMORY_SD_FORMAT = "memory_sd_format";
     private Resources mRes;
 
     private Preference mSdSize;
     private Preference mSdAvail;
-    private Preference mSdUnmount;
+    private Preference mSdMountToggle;
     private Preference mSdFormat;
     
     // Access using getMountService()
@@ -69,7 +69,7 @@ public class Memory extends PreferenceActivity {
         mRes = getResources();
         mSdSize = findPreference(MEMORY_SD_SIZE);
         mSdAvail = findPreference(MEMORY_SD_AVAIL);
-        mSdUnmount = findPreference(MEMORY_SD_UNMOUNT);
+        mSdMountToggle = findPreference(MEMORY_SD_MOUNT_TOGGLE);
         mSdFormat = findPreference(MEMORY_SD_FORMAT);
     }
     
@@ -112,8 +112,13 @@ public class Memory extends PreferenceActivity {
     
     @Override
     public boolean onPreferenceTreeClick(PreferenceScreen preferenceScreen, Preference preference) {
-        if (preference == mSdUnmount) {
-            unmount();
+        if (preference == mSdMountToggle) {
+            String status = Environment.getExternalStorageState();
+            if (status.equals(Environment.MEDIA_MOUNTED)) {
+                unmount();
+            } else {
+                mount();
+            }
             return true;
         } else if (preference == mSdFormat) {
             Intent intent = new Intent(Intent.ACTION_VIEW);
@@ -146,6 +151,20 @@ public class Memory extends PreferenceActivity {
         }
     }
 
+    private void mount() {
+        IMountService mountService = getMountService();
+        try {
+            if (mountService != null) {
+                mountService.mountMedia(Environment.getExternalStorageDirectory().toString());
+            } else {
+                Log.e(TAG, "Mount service is null, can't mount");
+            }
+        } catch (RemoteException ex) {
+            // Failed for some reason, try to update UI to actual state
+            updateMemoryStatus();
+        }
+    }
+
     private void updateMemoryStatus() {
         String status = Environment.getExternalStorageState();
         String readOnly = "";
@@ -166,7 +185,11 @@ public class Memory extends PreferenceActivity {
                 
                 mSdSize.setSummary(formatSize(totalBlocks * blockSize));
                 mSdAvail.setSummary(formatSize(availableBlocks * blockSize) + readOnly);
-                mSdUnmount.setEnabled(true);
+
+                mSdMountToggle.setEnabled(true);
+                mSdMountToggle.setTitle(mRes.getString(R.string.sd_eject));
+                mSdMountToggle.setSummary(mRes.getString(R.string.sd_eject_summary));
+
             } catch (IllegalArgumentException e) {
                 // this can occur if the SD card is removed, but we haven't received the 
                 // ACTION_MEDIA_REMOVED Intent yet.
@@ -176,15 +199,20 @@ public class Memory extends PreferenceActivity {
         } else {
             mSdSize.setSummary(mRes.getString(R.string.sd_unavailable));
             mSdAvail.setSummary(mRes.getString(R.string.sd_unavailable));
-            mSdUnmount.setEnabled(false);
+
 
             if (status.equals(Environment.MEDIA_UNMOUNTED) ||
                 status.equals(Environment.MEDIA_NOFS) ||
                 status.equals(Environment.MEDIA_UNMOUNTABLE) ) {
                 mSdFormat.setEnabled(true);
+                mSdMountToggle.setEnabled(true);
+                mSdMountToggle.setTitle(mRes.getString(R.string.sd_mount));
+                mSdMountToggle.setSummary(mRes.getString(R.string.sd_mount_summary));
+            } else {
+                mSdMountToggle.setEnabled(false);
+                mSdMountToggle.setTitle(mRes.getString(R.string.sd_mount));
+                mSdMountToggle.setSummary(mRes.getString(R.string.sd_insert_summary));
             }
-
-            
         }
 
         File path = Environment.getDataDirectory();
