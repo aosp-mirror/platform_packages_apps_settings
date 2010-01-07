@@ -632,8 +632,14 @@ public class AccessPointDialog extends AlertDialog implements DialogInterface.On
             updateEnterpriseFields();
         }
 
-        /* AP state on the current scan list needs update to enable "Forget" capability */
-        mWifiLayer.getWifiLayerApInstance(mState).setConfigured(true);
+        /**
+         * AP state on the current scan list needs update to enable "Forget" capability.
+         * This is not required for newly added APs.
+         */
+        AccessPointState ap = mWifiLayer.getWifiLayerApInstance(mState);
+        if(ap != null) {
+            ap.setConfigured(true);
+        }
 
         if (!mWifiLayer.saveNetwork(mState)) {
             return;
