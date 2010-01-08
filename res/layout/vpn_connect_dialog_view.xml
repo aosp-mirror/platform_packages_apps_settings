@@ -15,18 +15,18 @@
 -->
 
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-        android:layout_width="fill_parent"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
             android:orientation="vertical"
-            android:layout_width="fill_parent"
-            android:layout_height="fill_parent"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
             android:padding="10dip">
 
         <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
                 android:orientation="horizontal"
-                android:layout_width="fill_parent"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content">
             <TextView android:id="@+id/username_str"
                     android:layout_width="@dimen/vpn_connect_input_box_label_width"
@@ -36,14 +36,14 @@
                     android:layout_marginRight="@dimen/vpn_connect_margin_right"
                     android:text="@string/vpn_username_colon" />
             <EditText android:id="@+id/username_value"
-                    android:layout_width="fill_parent"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:singleLine="True"/>
         </LinearLayout>
 
         <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
                 android:orientation="horizontal"
-                android:layout_width="fill_parent"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content">
             <TextView android:id="@+id/password_str"
                     android:layout_width="@dimen/vpn_connect_input_box_label_width"
@@ -53,14 +53,14 @@
                     android:layout_marginRight="@dimen/vpn_connect_margin_right"
                     android:text="@string/vpn_password_colon" />
             <EditText android:id="@+id/password_value"
-                    android:layout_width="fill_parent"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:password="True"
                     android:singleLine="True"/>
         </LinearLayout>
 
         <CheckBox android:id="@+id/save_username"
-                android:layout_width="fill_parent"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="66dip"
                 android:text="@string/vpn_save_username" />

@@ -18,12 +18,12 @@
 -->
 <ScrollView
     xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="fill_parent"
-    android:layout_height="fill_parent">
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
     <LinearLayout
         android:id="@+id/all_details"
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
         android:paddingRight="6dip"
         android:paddingTop="5dip"
         android:paddingBottom="5dip"
@@ -31,14 +31,14 @@
 
         <!-- App snippet -->
         <RelativeLayout
-            android:layout_width="fill_parent"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical">
 
             <LinearLayout
                 android:orientation="vertical"
                 android:layout_alignParentLeft="true"
-                android:layout_width="fill_parent"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:paddingTop="6dip"
                 android:paddingBottom="6dip"
@@ -79,12 +79,12 @@
             android:text="@string/storage_label" />
 
         <LinearLayout
-            android:layout_width="fill_parent"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:paddingLeft="6dip"
             android:orientation="vertical">
             <LinearLayout
-                android:layout_width="fill_parent"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
                 android:baselineAligned="true"
@@ -121,7 +121,7 @@
 
             </LinearLayout>
             <LinearLayout
-                android:layout_width="fill_parent"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
                 android:baselineAligned="true"
@@ -158,7 +158,7 @@
             </LinearLayout>
             <LinearLayout
                 android:id="@+id/info_size"
-                android:layout_width="fill_parent"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
                 android:baselineAligned="true"
@@ -195,7 +195,7 @@
             </LinearLayout>
             <!-- Manage space, Clear data/Uninstall buttons  -->
             <LinearLayout
-                android:layout_width="fill_parent"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="bottom"
                 android:orientation="horizontal">
@@ -229,7 +229,7 @@
         <!-- Clear cache section -->
         <RelativeLayout
             android:id="@+id/cache_panel"
-            android:layout_width="fill_parent"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content" >
             <TextView
                 android:id="@+id/cache_header"
@@ -237,7 +237,7 @@
                 android:text="@string/cache_header_label" />
             <LinearLayout
                 android:id="@+id/cache_size"
-                android:layout_width="fill_parent"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
                 android:baselineAligned="true"
@@ -287,13 +287,13 @@
             android:text="@string/auto_launch_label" />
 
         <RelativeLayout 
-            android:layout_width="fill_parent"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical">
             <TextView android:id="@+id/auto_launch"
                 android:textAppearance="?android:attr/textAppearanceSmall"
                 android:layout_alignParentLeft="true"
-                android:layout_width="fill_parent"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:paddingTop="6dip"
                 android:paddingRight="6dip"
@@ -313,7 +313,7 @@
             android:text="@string/controls_label" />
 
         <RelativeLayout
-            android:layout_width="fill_parent"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical">
             <Button android:id="@+id/force_stop_button"
@@ -329,8 +329,8 @@
         <!-- Permissions section -->
         <LinearLayout
             android:id="@+id/permissions_section"
-            android:layout_width="fill_parent"
-            android:layout_height="fill_parent"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
             android:orientation="vertical">
             <TextView
                 style="?android:attr/listSeparatorTextViewStyle"
@@ -341,12 +341,12 @@
                 android:paddingTop="6dip"
                 android:paddingLeft="6dip"
                 android:paddingBottom="6dip"
-                android:layout_width="fill_parent"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
             <LinearLayout
                 android:id="@+id/security_settings_list"
-                android:layout_width="fill_parent"
-                android:layout_height="fill_parent"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
                 android:orientation="vertical"/>
         </LinearLayout>
     </LinearLayout>

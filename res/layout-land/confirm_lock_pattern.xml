@@ -18,21 +18,21 @@
         xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/topLayout"
     android:orientation="horizontal"
-    android:layout_width="fill_parent"
-    android:layout_height="fill_parent"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
     android:background="@color/black">
 
     <!-- left side: instructions and messages -->
     <LinearLayout
             android:orientation="vertical"
             android:layout_width="0dip"
-            android:layout_height="fill_parent"
+            android:layout_height="match_parent"
             android:layout_weight="1.0"
             >
 
         <!-- header message -->
         <TextView android:id="@+id/headerText"
-                  android:layout_width="fill_parent"
+                  android:layout_width="match_parent"
                   android:layout_height="wrap_content"
                   android:gravity="center"
                   android:textSize="18sp"/>
@@ -40,13 +40,13 @@
         <!-- fill space between header and button below -->
         <View
             android:layout_weight="1.0"
-            android:layout_width="fill_parent"
+            android:layout_width="match_parent"
             android:layout_height="0dip"
             />
 
         <!-- footer message -->
         <TextView android:id="@+id/footerText"
-                  android:layout_width="fill_parent"
+                  android:layout_width="match_parent"
                   android:layout_height="wrap_content"
                   android:gravity="center"
                   android:textSize="14sp"/>
@@ -55,7 +55,7 @@
     <View
          android:background="@*android:drawable/code_lock_left"
          android:layout_width="2dip"
-         android:layout_height="fill_parent" />
+         android:layout_height="match_parent" />
     <!-- right side: lock pattern -->
     <com.android.internal.widget.LockPatternView android:id="@+id/lockPattern"
          android:layout_width="wrap_content"

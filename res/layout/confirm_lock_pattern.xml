@@ -18,11 +18,11 @@
     android:id="@+id/topLayout"
     android:orientation="vertical"
     android:layout_width="wrap_content"
-    android:layout_height="fill_parent"
+    android:layout_height="match_parent"
     android:background="@color/black">
 
     <TextView android:id="@+id/headerText"
-        android:layout_width="fill_parent"
+        android:layout_width="match_parent"
         android:layout_height="0dip"
         android:layout_weight="1.0"
         android:gravity="center"
@@ -30,18 +30,18 @@
 
     <View
          android:background="@*android:drawable/code_lock_top"
-         android:layout_width="fill_parent"
+         android:layout_width="match_parent"
          android:layout_height="2dip" />
     <com.android.internal.widget.LockPatternView android:id="@+id/lockPattern"
          android:layout_width="wrap_content"
          android:layout_height="wrap_content" />
     <View
          android:background="@*android:drawable/code_lock_bottom"
-         android:layout_width="fill_parent"
+         android:layout_width="match_parent"
          android:layout_height="8dip" />
 
     <TextView android:id="@+id/footerText"
-        android:layout_width="fill_parent"
+        android:layout_width="match_parent"
         android:layout_height="0dip"
         android:layout_weight="1.0"
         android:gravity="center"

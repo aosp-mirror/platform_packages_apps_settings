@@ -18,11 +18,11 @@
 -->
 
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent">
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-            android:layout_width="fill_parent"
-            android:layout_height="fill_parent"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
             android:orientation="vertical"
             android:gravity="center_horizontal"
             android:paddingBottom="20dip">
@@ -33,7 +33,7 @@
                 android:paddingTop="20dip" />
 
         <CheckBox android:id="@+id/automatic_mode"
-                android:layout_width="fill_parent"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/automatic_brightness"
                 android:textAppearance="?android:attr/textAppearanceSmall"
@@ -42,7 +42,7 @@
                 android:layout_marginRight="20dip" />
 
         <SeekBar android:id="@*android:id/seekbar"
-                android:layout_width="fill_parent"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:padding="20dip" />
 

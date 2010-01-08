@@ -18,8 +18,8 @@
 */
 -->
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="fill_parent"
-    android:layout_height="fill_parent" >
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
 
     <LinearLayout style="@style/info_layout">
 
@@ -177,14 +177,14 @@
 
         <!-- Preferred Network Type -->
         <TextView
-                android:layout_width="fill_parent"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/radio_info_set_perferred_label"
                 style="@style/info_label"
                 />
 
         <Spinner android:id="@+id/preferredNetworkType"
-                 android:layout_width="fill_parent"
+                 android:layout_width="match_parent"
                  android:layout_height="wrap_content"
                 />
 
@@ -197,7 +197,7 @@
                 />
 
         <!-- SMSC -->
-        <RelativeLayout android:layout_width="fill_parent"
+        <RelativeLayout android:layout_width="match_parent"
                         android:layout_height="wrap_content">
             <TextView android:id="@+id/smsc_label"
                       android:text="@string/radio_info_smsc_label"

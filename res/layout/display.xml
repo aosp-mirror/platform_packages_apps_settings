@@ -23,22 +23,22 @@
         android:orientation="vertical">
 
         <TextView
-            android:layout_width="fill_parent"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/display_font_size_label" />
 
         <Spinner android:id="@+id/fontSize"
-            android:layout_width="fill_parent"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content">
         </Spinner>
 
         <TextView
-            android:layout_width="fill_parent"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/display_preview_label" />
 
         <TextView android:id="@+id/preview"
-            android:layout_width="fill_parent"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content" />
 
         <Button android:id="@+id/save"

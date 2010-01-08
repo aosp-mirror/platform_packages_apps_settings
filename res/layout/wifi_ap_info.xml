@@ -15,19 +15,19 @@
 -->
 
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-        android:layout_width="fill_parent"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content">
         
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-            android:layout_width="fill_parent"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:padding="8dip"
             android:orientation="vertical"> 
     
         <LinearLayout
                 android:id="@+id/table"
-                android:layout_width="fill_parent"
-                android:layout_height="fill_parent"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
                 android:orientation="vertical">
         
         <!-- Info dynamically added here. -->
@@ -37,13 +37,13 @@
         <!-- Password -->
         <TextView android:id="@+id/password_text"
                 style="?android:attr/textAppearanceSmallInverse"
-                android:layout_width="fill_parent"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dip"
                 android:text="@string/please_type_passphrase" />
             
         <EditText android:id="@+id/password_edit"
-                android:layout_width="fill_parent"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="2dip"
                 android:singleLine="true"
@@ -51,7 +51,7 @@
     
         <CheckBox android:id="@+id/show_password_checkbox"
                 style="?android:attr/textAppearanceSmallInverse"
-                android:layout_width="fill_parent"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="2dip"
                 android:text="@string/wifi_show_password" />

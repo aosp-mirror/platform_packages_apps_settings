@@ -16,22 +16,22 @@
 
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
-    android:layout_height="fill_parent"
-    android:layout_width="fill_parent">
+    android:layout_height="match_parent"
+    android:layout_width="match_parent">
     
     <ScrollView 
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
         android:layout_weight="1">
         
         <LinearLayout
             android:orientation="vertical"
-            android:layout_height="fill_parent"
-            android:layout_width="fill_parent"
+            android:layout_height="match_parent"
+            android:layout_width="match_parent"
             android:padding="5dip">
             
             <TextView
-                android:layout_width="fill_parent"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/lock_example_title"
                 android:gravity="center_horizontal"
@@ -48,7 +48,7 @@
             />
             
             <TextView
-                android:layout_width="fill_parent"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dip"
                 android:text="@string/lock_example_message"
@@ -62,7 +62,7 @@
     
     <LinearLayout style="@android:style/ButtonBar"
         android:orientation="horizontal"
-        android:layout_width="fill_parent"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content">
         
         <Button android:id="@+id/skip_button"

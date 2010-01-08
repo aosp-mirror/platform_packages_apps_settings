@@ -62,7 +62,7 @@ public class BandMode extends Activity {
         setContentView(R.layout.band_mode);
 
         setTitle(getString(R.string.band_mode_title));
-        getWindow().setLayout(WindowManager.LayoutParams.FILL_PARENT,
+        getWindow().setLayout(WindowManager.LayoutParams.MATCH_PARENT,
                                     WindowManager.LayoutParams.WRAP_CONTENT);
 
         mPhone = PhoneFactory.getDefaultPhone();

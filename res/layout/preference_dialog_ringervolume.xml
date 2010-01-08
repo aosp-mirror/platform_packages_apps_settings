@@ -15,12 +15,12 @@
 -->
 
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent">
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
         
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-            android:layout_width="fill_parent"
-            android:layout_height="fill_parent"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
             android:orientation="vertical"
             android:gravity="center_horizontal"
             android:paddingBottom="20dip">
@@ -31,7 +31,7 @@
                 android:paddingTop="20dip" />
                 
         <TextView
-                android:layout_width="fill_parent"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/incoming_call_volume_title"
                 android:paddingTop="20dip"
@@ -40,14 +40,14 @@
         
         <!-- Used for the ring volume.  This is what the superclass VolumePreference uses. -->
         <SeekBar android:id="@*android:id/seekbar"
-                android:layout_width="fill_parent"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:paddingTop="6dip" 
                 android:paddingLeft="20dip" 
                 android:paddingRight="20dip" />
             
         <CheckBox android:id="@+id/same_notification_volume"
-                android:layout_width="fill_parent"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/checkbox_notification_same_as_incoming_call"
                 android:textAppearance="?android:attr/textAppearanceSmall"
@@ -56,7 +56,7 @@
                 android:layout_marginRight="20dip" />
     
         <TextView android:id="@+id/notification_volume_title"
-                android:layout_width="fill_parent"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/notification_volume_title"
                 android:paddingTop="6dip"
@@ -65,7 +65,7 @@
         
         <!-- Used for the notification volume -->
         <SeekBar android:id="@+id/notification_volume_seekbar"
-                android:layout_width="fill_parent"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:paddingTop="6dip" 
                 android:paddingLeft="20dip" 
