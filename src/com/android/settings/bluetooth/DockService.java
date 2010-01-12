@@ -374,26 +374,32 @@ public class DockService extends Service implements AlertDialog.OnMultiChoiceCli
         mCheckedItems = new boolean[numOfProfiles];
         CharSequence[] items = new CharSequence[numOfProfiles];
 
-        int i = 0;
         switch (state) {
             case Intent.EXTRA_DOCK_STATE_CAR:
-                items[i] = service.getString(R.string.bluetooth_dock_settings_headset);
-                mProfiles[i] = Profile.HEADSET;
+                items[0] = service.getString(R.string.bluetooth_dock_settings_headset);
+                items[1] = service.getString(R.string.bluetooth_dock_settings_a2dp);
+                mProfiles[0] = Profile.HEADSET;
+                mProfiles[1] = Profile.A2DP;
                 if (firstTime) {
-                    mCheckedItems[i] = false;
+                    // Enable by default for car dock
+                    mCheckedItems[0] = true;
+                    mCheckedItems[1] = true;
                 } else {
-                    mCheckedItems[i] = LocalBluetoothProfileManager.getProfileManager(mBtManager,
+                    mCheckedItems[0] = LocalBluetoothProfileManager.getProfileManager(mBtManager,
                             Profile.HEADSET).isPreferred(device);
+                    mCheckedItems[1] = LocalBluetoothProfileManager.getProfileManager(mBtManager,
+                            Profile.A2DP).isPreferred(device);
                 }
-                ++i;
-                // fall through
+                break;
+
             case Intent.EXTRA_DOCK_STATE_DESK:
-                items[i] = service.getString(R.string.bluetooth_dock_settings_a2dp);
-                mProfiles[i] = Profile.A2DP;
+                items[0] = service.getString(R.string.bluetooth_dock_settings_a2dp);
+                mProfiles[0] = Profile.A2DP;
                 if (firstTime) {
-                    mCheckedItems[i] = false;
+                    // Disable by default for desk dock
+                    mCheckedItems[0] = false;
                 } else {
-                    mCheckedItems[i] = LocalBluetoothProfileManager.getProfileManager(mBtManager,
+                    mCheckedItems[0] = LocalBluetoothProfileManager.getProfileManager(mBtManager,
                             Profile.A2DP).isPreferred(device);
                 }
                 break;
