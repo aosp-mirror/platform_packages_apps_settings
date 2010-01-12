@@ -17,6 +17,7 @@
 package com.android.settings;
 
 import android.bluetooth.BluetoothAdapter;
+import android.content.Context;
 import android.content.Intent;
 import android.net.wifi.WifiManager;
 import android.os.Bundle;
@@ -67,7 +68,17 @@ public class WirelessSettings extends PreferenceActivity {
         // Let the intents be launched by the Preference manager
         return false;
     }
-    
+
+    public static boolean isRadioAllowed(Context context, String type) {
+        if (!AirplaneModeEnabler.isAirplaneModeOn(context)) {
+            return true;
+        }
+        // Here we use the same logic in onCreate().
+        String toggleable = Settings.System.getString(context.getContentResolver(),
+                Settings.System.AIRPLANE_MODE_TOGGLEABLE_RADIOS);
+        return toggleable != null && toggleable.contains(type);
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -86,7 +97,7 @@ public class WirelessSettings extends PreferenceActivity {
         String toggleable = Settings.System.getString(getContentResolver(),
                 Settings.System.AIRPLANE_MODE_TOGGLEABLE_RADIOS);
 
-        // Manually set up dependencies for Wifi when not toggleable.
+        // Manually set dependencies for Wifi when not toggleable.
         if (toggleable == null || !toggleable.contains(Settings.System.RADIO_WIFI)) {
             wifi.setDependency(KEY_TOGGLE_AIRPLANE);
             findPreference(KEY_WIFI_SETTINGS).setDependency(KEY_TOGGLE_AIRPLANE);
@@ -99,7 +110,7 @@ public class WirelessSettings extends PreferenceActivity {
             findPreference(KEY_BT_SETTINGS).setDependency(KEY_TOGGLE_AIRPLANE);
         }
 
-        // Disable BT Settings if BT service is not available.
+        // Disable Bluetooth Settings if Bluetooth service is not available.
         if (ServiceManager.getService(BluetoothAdapter.BLUETOOTH_SERVICE) == null) {
             findPreference(KEY_BT_SETTINGS).setEnabled(false);
         }

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2008 The Android Open Source Project
+ * Copyright (C) 2010 The Android Open Source Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,8 +16,8 @@
 
 package com.android.settings.bluetooth;
 
-import com.android.settings.AirplaneModeEnabler;
 import com.android.settings.R;
+import com.android.settings.WirelessSettings;
 
 import android.bluetooth.BluetoothAdapter;
 import android.content.BroadcastReceiver;
@@ -28,7 +28,7 @@ import android.preference.Preference;
 import android.preference.CheckBoxPreference;
 import android.provider.Settings;
 import android.text.TextUtils;
-import android.util.Config;
+import android.widget.Toast;
 
 /**
  * BluetoothEnabler is a helper to manage the Bluetooth on/off checkbox
@@ -36,16 +36,12 @@ import android.util.Config;
  * preference reflects the current state.
  */
 public class BluetoothEnabler implements Preference.OnPreferenceChangeListener {
-
-    private static final boolean LOCAL_LOGD = Config.LOGD || false;
-    private static final String TAG = "BluetoothEnabler";
-
     private final Context mContext;
-    private final CheckBoxPreference mCheckBoxPreference;
+    private final CheckBoxPreference mCheckBox;
     private final CharSequence mOriginalSummary;
 
     private final LocalBluetoothManager mLocalManager;
-
+    private final IntentFilter mIntentFilter;
     private final BroadcastReceiver mReceiver = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
@@ -54,18 +50,18 @@ public class BluetoothEnabler implements Preference.OnPreferenceChangeListener {
         }
     };
 
-    public BluetoothEnabler(Context context, CheckBoxPreference checkBoxPreference) {
+    public BluetoothEnabler(Context context, CheckBoxPreference checkBox) {
         mContext = context;
-        mCheckBoxPreference = checkBoxPreference;
-
-        mOriginalSummary = checkBoxPreference.getSummary();
-        checkBoxPreference.setPersistent(false);
+        mCheckBox = checkBox;
+        mOriginalSummary = checkBox.getSummary();
+        checkBox.setPersistent(false);
 
         mLocalManager = LocalBluetoothManager.getInstance(context);
         if (mLocalManager == null) {
-            // Bluetooth not supported
-            checkBoxPreference.setEnabled(false);
+            // Bluetooth is not supported
+            checkBox.setEnabled(false);
         }
+        mIntentFilter = new IntentFilter(BluetoothAdapter.ACTION_STATE_CHANGED);
     }
 
     public void resume() {
@@ -73,16 +69,11 @@ public class BluetoothEnabler implements Preference.OnPreferenceChangeListener {
             return;
         }
 
-        int state = mLocalManager.getBluetoothState();
-        // This is the widget enabled state, not the preference toggled state
-        mCheckBoxPreference.setEnabled(state == BluetoothAdapter.STATE_ON ||
-                state == BluetoothAdapter.STATE_OFF);
-        // BT state is not a sticky broadcast, so set it manually
-        handleStateChanged(state);
+        // Bluetooth state is not sticky, so set it manually
+        handleStateChanged(mLocalManager.getBluetoothState());
 
-        mContext.registerReceiver(mReceiver,
-                new IntentFilter(BluetoothAdapter.ACTION_STATE_CHANGED));
-        mCheckBoxPreference.setOnPreferenceChangeListener(this);
+        mContext.registerReceiver(mReceiver, mIntentFilter);
+        mCheckBox.setOnPreferenceChangeListener(this);
     }
 
     public void pause() {
@@ -91,72 +82,51 @@ public class BluetoothEnabler implements Preference.OnPreferenceChangeListener {
         }
 
         mContext.unregisterReceiver(mReceiver);
-        mCheckBoxPreference.setOnPreferenceChangeListener(null);
+        mCheckBox.setOnPreferenceChangeListener(null);
     }
 
     public boolean onPreferenceChange(Preference preference, Object value) {
-        // Turn on/off BT
-        setEnabled((Boolean) value);
+        boolean enable = (Boolean) value;
+
+        // Show toast message if Bluetooth is not allowed in airplane mode
+        if (enable && !WirelessSettings
+                .isRadioAllowed(mContext, Settings.System.RADIO_BLUETOOTH)) {
+            Toast.makeText(mContext, R.string.wifi_in_airplane_mode,
+                    Toast.LENGTH_SHORT).show();
+            return false;
+        }
+
+        mLocalManager.setBluetoothEnabled(enable);
+        mCheckBox.setEnabled(false);
 
         // Don't update UI to opposite state until we're sure
         return false;
     }
 
-    private void setEnabled(final boolean enable) {
-        // Disable preference
-        mCheckBoxPreference.setEnabled(false);
-
-        mLocalManager.setBluetoothEnabled(enable);
-    }
-
     private void handleStateChanged(int state) {
-
-        if (state == BluetoothAdapter.STATE_OFF ||
-                state == BluetoothAdapter.STATE_ON) {
-            mCheckBoxPreference.setChecked(state == BluetoothAdapter.STATE_ON);
-            mCheckBoxPreference.setSummary(state == BluetoothAdapter.STATE_OFF ?
-                                           mOriginalSummary :
-                                           null);
-
-            final boolean hasDependency = !TextUtils.isEmpty(mCheckBoxPreference.getDependency());
-            final boolean bluetoothAllowed = isBluetoothAllowed(mContext);
-
-            // Avoid disabling when dependencies have been manually set,
-            // workaround for framework bug http://b/2053751
-            if (bluetoothAllowed) {
-                mCheckBoxPreference.setEnabled(true);
-            } else if (!hasDependency) {
-                mCheckBoxPreference.setEnabled(false);
-            }
-
-        } else if (state == BluetoothAdapter.STATE_TURNING_ON ||
-                state == BluetoothAdapter.STATE_TURNING_OFF) {
-            mCheckBoxPreference.setSummary(state == BluetoothAdapter.STATE_TURNING_ON
-                    ? R.string.wifi_starting
-                    : R.string.wifi_stopping);
-
-        } else {
-            mCheckBoxPreference.setChecked(false);
-            mCheckBoxPreference.setSummary(R.string.wifi_error);
-            mCheckBoxPreference.setEnabled(true);
+        switch (state) {
+            case BluetoothAdapter.STATE_TURNING_ON:
+                mCheckBox.setSummary(R.string.wifi_starting);
+                mCheckBox.setEnabled(false);
+                break;
+            case BluetoothAdapter.STATE_ON:
+                mCheckBox.setChecked(true);
+                mCheckBox.setSummary(null);
+                mCheckBox.setEnabled(true);
+                break;
+            case BluetoothAdapter.STATE_TURNING_OFF:
+                mCheckBox.setSummary(R.string.wifi_stopping);
+                mCheckBox.setEnabled(false);
+                break;
+            case BluetoothAdapter.STATE_OFF:
+                mCheckBox.setChecked(false);
+                mCheckBox.setSummary(mOriginalSummary);
+                mCheckBox.setEnabled(true);
+                break;
+            default:
+                mCheckBox.setChecked(false);
+                mCheckBox.setSummary(R.string.wifi_error);
+                mCheckBox.setEnabled(true);
         }
     }
-
-    private static boolean isBluetoothAllowed(Context context) {
-        // allowed if we are not in airplane mode
-        if (!AirplaneModeEnabler.isAirplaneModeOn(context)) {
-            return true;
-        }
-        // allowed if bluetooth is not in AIRPLANE_MODE_RADIOS
-        String radios = Settings.System.getString(context.getContentResolver(),
-                Settings.System.AIRPLANE_MODE_RADIOS);
-        if (radios == null || !radios.contains(Settings.System.RADIO_BLUETOOTH)) {
-            return true;
-        }
-        // allowed if bluetooth is in AIRPLANE_MODE_TOGGLEABLE_RADIOS
-        radios = Settings.System.getString(context.getContentResolver(),
-                Settings.System.AIRPLANE_MODE_TOGGLEABLE_RADIOS);
-        return (radios != null && radios.contains(Settings.System.RADIO_BLUETOOTH));
-    }
-
 }

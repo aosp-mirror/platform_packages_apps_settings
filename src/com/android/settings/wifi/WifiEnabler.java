@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2007 The Android Open Source Project
+ * Copyright (C) 2010 The Android Open Source Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,14 +16,8 @@
 
 package com.android.settings.wifi;
 
-import static android.net.wifi.WifiManager.WIFI_STATE_DISABLED;
-import static android.net.wifi.WifiManager.WIFI_STATE_DISABLING;
-import static android.net.wifi.WifiManager.WIFI_STATE_ENABLED;
-import static android.net.wifi.WifiManager.WIFI_STATE_ENABLING;
-import static android.net.wifi.WifiManager.WIFI_STATE_UNKNOWN;
-
 import com.android.settings.R;
-import com.android.settings.AirplaneModeEnabler;
+import com.android.settings.WirelessSettings;
 
 import android.content.BroadcastReceiver;
 import android.content.Context;
@@ -35,169 +29,110 @@ import android.preference.Preference;
 import android.preference.CheckBoxPreference;
 import android.provider.Settings;
 import android.text.TextUtils;
-import android.util.Config;
-import android.util.Log;
+import android.widget.Toast;
 
 public class WifiEnabler implements Preference.OnPreferenceChangeListener {
-    
-    private static final boolean LOCAL_LOGD = Config.LOGD || WifiLayer.LOGV;
-    private static final String TAG = "SettingsWifiEnabler";
-    
     private final Context mContext; 
-    private final WifiManager mWifiManager;
-    private final CheckBoxPreference mWifiCheckBoxPref;
+    private final CheckBoxPreference mCheckBox;
     private final CharSequence mOriginalSummary;
-    
-    private final IntentFilter mWifiStateFilter;
-    private final BroadcastReceiver mWifiStateReceiver = new BroadcastReceiver() {
 
+    private final WifiManager mWifiManager;
+    private final IntentFilter mIntentFilter;
+    private final BroadcastReceiver mReceiver = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
-            if (intent.getAction().equals(WifiManager.WIFI_STATE_CHANGED_ACTION)) {
-                handleWifiStateChanged(
-                        intent.getIntExtra(WifiManager.EXTRA_WIFI_STATE, WIFI_STATE_UNKNOWN),
-                        intent.getIntExtra(WifiManager.EXTRA_PREVIOUS_WIFI_STATE,
-                                WIFI_STATE_UNKNOWN));
-            } else if (intent.getAction().equals(WifiManager.NETWORK_STATE_CHANGED_ACTION)) {
-                handleNetworkStateChanged(
-                        (NetworkInfo) intent.getParcelableExtra(WifiManager.EXTRA_NETWORK_INFO));
+            String action = intent.getAction();
+            if (WifiManager.WIFI_STATE_CHANGED_ACTION.equals(action)) {
+                handleWifiStateChanged(intent.getIntExtra(
+                        WifiManager.EXTRA_WIFI_STATE, WifiManager.WIFI_STATE_UNKNOWN));
+            } else if (WifiManager.NETWORK_STATE_CHANGED_ACTION.equals(action)) {
+                handleNetworkStateChanged((NetworkInfo)
+                        intent.getParcelableExtra(WifiManager.EXTRA_NETWORK_INFO));
             }
         }
     };
 
-    public WifiEnabler(Context context, CheckBoxPreference wifiCheckBoxPreference) {
+    public WifiEnabler(Context context, CheckBoxPreference checkBox) {
         this(context, (WifiManager) context.getSystemService(Context.WIFI_SERVICE),
-                wifiCheckBoxPreference);
+                checkBox);
     }
     
     public WifiEnabler(Context context, WifiManager wifiManager,
-            CheckBoxPreference wifiCheckBoxPreference) {
+            CheckBoxPreference checkBox) {
         mContext = context;
-        mWifiCheckBoxPref = wifiCheckBoxPreference;
+        mCheckBox = checkBox;
         mWifiManager = wifiManager;
+        mOriginalSummary = checkBox.getSummary();
+        checkBox.setPersistent(false);
         
-        mOriginalSummary = wifiCheckBoxPreference.getSummary();
-        wifiCheckBoxPreference.setPersistent(false);
-        
-        mWifiStateFilter = new IntentFilter(WifiManager.WIFI_STATE_CHANGED_ACTION);
-        mWifiStateFilter.addAction(WifiManager.NETWORK_STATE_CHANGED_ACTION);
+        mIntentFilter = new IntentFilter(WifiManager.WIFI_STATE_CHANGED_ACTION);
+        mIntentFilter.addAction(WifiManager.NETWORK_STATE_CHANGED_ACTION);
     }
 
     public void resume() {
-        int state = mWifiManager.getWifiState();
-        // This is the widget enabled state, not the preference toggled state
-        mWifiCheckBoxPref.setEnabled(state == WIFI_STATE_ENABLED || state == WIFI_STATE_DISABLED
-                || state == WIFI_STATE_UNKNOWN);
-
-        mContext.registerReceiver(mWifiStateReceiver, mWifiStateFilter);
-        mWifiCheckBoxPref.setOnPreferenceChangeListener(this);
+        // Wi-Fi state is sticky, so just let the receiver update UI
+        mContext.registerReceiver(mReceiver, mIntentFilter);
+        mCheckBox.setOnPreferenceChangeListener(this);
     }
     
     public void pause() {
-        mContext.unregisterReceiver(mWifiStateReceiver);
-        mWifiCheckBoxPref.setOnPreferenceChangeListener(null);
+        mContext.unregisterReceiver(mReceiver);
+        mCheckBox.setOnPreferenceChangeListener(null);
     }
     
     public boolean onPreferenceChange(Preference preference, Object value) {
-        // Turn on/off Wi-Fi
-        setWifiEnabled((Boolean) value);
-        
+        boolean enable = (Boolean) value;
+    
+        // Show toast message if Wi-Fi is not allowed in airplane mode
+        if (enable && !WirelessSettings
+                .isRadioAllowed(mContext, Settings.System.RADIO_WIFI)) {
+            Toast.makeText(mContext, R.string.wifi_in_airplane_mode,
+                    Toast.LENGTH_SHORT).show();
+            return false;
+        }
+
+        if (mWifiManager.setWifiEnabled(enable)) {
+            mCheckBox.setEnabled(false);
+        } else {
+            mCheckBox.setSummary(R.string.wifi_error);
+        }
+
         // Don't update UI to opposite state until we're sure
         return false;
     }
     
-    private void setWifiEnabled(final boolean enable) {
-        // Disable button
-        mWifiCheckBoxPref.setEnabled(false);
-        
-        if (!mWifiManager.setWifiEnabled(enable)) {
-            mWifiCheckBoxPref.setSummary(enable ? R.string.error_starting : R.string.error_stopping);
-        }
-    }
-    
-    private void handleWifiStateChanged(int wifiState, int previousWifiState) {
-
-        if (LOCAL_LOGD) {
-            Log.d(TAG, "Received wifi state changed from "
-                    + getHumanReadableWifiState(previousWifiState) + " to "
-                    + getHumanReadableWifiState(wifiState));
-        }
-        
-        if (wifiState == WIFI_STATE_DISABLED || wifiState == WIFI_STATE_ENABLED) {
-            mWifiCheckBoxPref.setChecked(wifiState == WIFI_STATE_ENABLED);
-            mWifiCheckBoxPref
-                    .setSummary(wifiState == WIFI_STATE_DISABLED ? mOriginalSummary : null);
-
-            final boolean hasDependency = !TextUtils.isEmpty(mWifiCheckBoxPref.getDependency());
-            final boolean wifiAllowed = isWifiAllowed(mContext);
-
-            // Avoid disabling when dependencies have been manually set,
-            // workaround for framework bug http://b/2053751
-            if (wifiAllowed) {
-                mWifiCheckBoxPref.setEnabled(true);
-            } else if (!hasDependency) {
-                mWifiCheckBoxPref.setEnabled(false);
-            }
-
-        } else if (wifiState == WIFI_STATE_DISABLING || wifiState == WIFI_STATE_ENABLING) {
-            mWifiCheckBoxPref.setSummary(wifiState == WIFI_STATE_ENABLING ? R.string.wifi_starting
-                    : R.string.wifi_stopping);
-            
-        } else if (wifiState == WIFI_STATE_UNKNOWN) {
-            int message = R.string.wifi_error;
-            if (previousWifiState == WIFI_STATE_ENABLING) message = R.string.error_starting;
-            else if (previousWifiState == WIFI_STATE_DISABLING) message = R.string.error_stopping;
-            
-            mWifiCheckBoxPref.setChecked(false);
-            mWifiCheckBoxPref.setSummary(message);
-            mWifiCheckBoxPref.setEnabled(true);
+    private void handleWifiStateChanged(int state) {
+        switch (state) {
+            case WifiManager.WIFI_STATE_ENABLING:
+                mCheckBox.setSummary(R.string.wifi_starting);
+                mCheckBox.setEnabled(false);
+                break;
+            case WifiManager.WIFI_STATE_ENABLED:
+                mCheckBox.setChecked(true);
+                mCheckBox.setSummary(null);
+                mCheckBox.setEnabled(true);
+                break;
+            case WifiManager.WIFI_STATE_DISABLING:
+                mCheckBox.setSummary(R.string.wifi_stopping);
+                mCheckBox.setEnabled(false);
+                break;
+            case WifiManager.WIFI_STATE_DISABLED:
+                mCheckBox.setChecked(false);
+                mCheckBox.setSummary(mOriginalSummary);
+                mCheckBox.setEnabled(true);
+                break;
+            default:
+                mCheckBox.setChecked(false);
+                mCheckBox.setSummary(R.string.wifi_error);
+                mCheckBox.setEnabled(true);
         }
     }
 
     private void handleNetworkStateChanged(NetworkInfo networkInfo) {
-
-        if (LOCAL_LOGD) {
-            Log.d(TAG, "Received network state changed to " + networkInfo);
-        }
-        
         if (mWifiManager.isWifiEnabled()) {
             String summary = WifiStatus.getStatus(mContext, 
                     mWifiManager.getConnectionInfo().getSSID(), networkInfo.getDetailedState());
-            mWifiCheckBoxPref.setSummary(summary);
-        }
-    }
-
-    private static boolean isWifiAllowed(Context context) {
-        // allowed if we are not in airplane mode
-        if (!AirplaneModeEnabler.isAirplaneModeOn(context)) {
-            return true;
-        }
-        // allowed if wifi is not in AIRPLANE_MODE_RADIOS
-        String radios = Settings.System.getString(context.getContentResolver(),
-                Settings.System.AIRPLANE_MODE_RADIOS);
-        if (radios == null || !radios.contains(Settings.System.RADIO_WIFI)) {
-            return true;
-        }
-        // allowed if wifi is in AIRPLANE_MODE_TOGGLEABLE_RADIOS
-        radios = Settings.System.getString(context.getContentResolver(),
-                Settings.System.AIRPLANE_MODE_TOGGLEABLE_RADIOS);
-        return (radios != null && radios.contains(Settings.System.RADIO_WIFI));
-    }
-
-    private static String getHumanReadableWifiState(int wifiState) {
-        switch (wifiState) {
-            case WIFI_STATE_DISABLED:
-                return "Disabled";
-            case WIFI_STATE_DISABLING:
-                return "Disabling";
-            case WIFI_STATE_ENABLED:
-                return "Enabled";
-            case WIFI_STATE_ENABLING:
-                return "Enabling";
-            case WIFI_STATE_UNKNOWN:
-                return "Unknown";
-            default:
-                return "Some other state!";    
+            mCheckBox.setSummary(summary);
         }
     }
 }
