@@ -4,9 +4,9 @@
      Licensed under the Apache License, Version 2.0 (the "License");
      you may not use this file except in compliance with the License.
      You may obtain a copy of the License at
-  
+
           http://www.apache.org/licenses/LICENSE-2.0
-  
+
      Unless required by applicable law or agreed to in writing, software
      distributed under the License is distributed on an "AS IS" BASIS,
      WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -16,17 +16,18 @@
 
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:settings="http://schemas.android.com/apk/res/com.android.settings">
-        
-    <PreferenceCategory
+
+    <PreferenceCategory android:key="sound_settings"
             android:title="@string/sound_settings">
-            
+
         <CheckBoxPreference
                 android:key="silent"
                 android:title="@string/silent_mode_title"
                 android:summary="@string/silent_mode_summary"
                 android:persistent="false"
+                android:order="1"
                 android:disableDependentsState="true" />
-    
+
         <com.android.settings.RingerVolumePreference
                 android:key="ring_volume"
                 android:title="@string/ring_volume_title"
@@ -34,16 +35,25 @@
                 android:dialogTitle="@string/ring_volume_title"
                 android:persistent="false"
                 android:dependency="silent"
+                android:order="2"
                 android:streamType="ring" />
-    
+
         <VolumePreference
                 android:key="media_volume"
                 android:title="@string/media_volume_title"
                 android:summary="@string/media_volume_summary"
                 android:dialogTitle="@string/media_volume_title"
                 android:persistent="false"
+                android:order="3"
                 android:streamType="music" />
-    
+
+        <PreferenceScreen
+                android:key="dock_settings"
+                android:order="4"
+                android:title="@string/dock_settings_title"
+                android:summary="@string/dock_settings_summary"
+                android:widgetLayout="@*android:layout/preference_dialog" />
+
         <com.android.settings.DefaultRingtonePreference
                 android:key="ringtone"
                 android:title="@string/ringtone_title"
@@ -51,14 +61,16 @@
                 android:dialogTitle="@string/ringtone_title"
                 android:persistent="false"
                 android:dependency="silent"
+                android:order="5"
                 android:ringtoneType="ringtone" />
-    
+
         <CheckBoxPreference
                 android:key="vibrate"
                 android:title="@string/vibrate_title"
                 android:summary="@string/vibrate_summary"
+                android:order="6"
                 android:persistent="false" />
-    
+
         <com.android.settings.DefaultRingtonePreference
                 android:key="notification_sound"
                 android:title="@string/notification_sound_title"
@@ -66,14 +78,23 @@
                 android:dialogTitle="@string/notification_sound_dialog_title"
                 android:dependency="silent"
                 android:persistent="false"
+                android:order="7"
                 android:ringtoneType="notification" />
-                
+
+        <CheckBoxPreference
+                android:key="notification_pulse"
+                android:title="@string/notification_pulse_title"
+                android:summary="@string/notification_pulse_summary"
+                android:order="8"
+                android:persistent="false" />
+
         <CheckBoxPreference
                 android:key="dtmf_tone"
                 android:title="@string/dtmf_tone_enable_title"
                 android:summaryOn="@string/dtmf_tone_enable_summary_on"
                 android:summaryOff="@string/dtmf_tone_enable_summary_off"
                 android:dependency="silent"
+                android:order="9"
                 android:defaultValue="true" />
 
         <CheckBoxPreference
@@ -82,6 +103,7 @@
                 android:summaryOn="@string/sound_effects_enable_summary_on"
                 android:summaryOff="@string/sound_effects_enable_summary_off"
                 android:dependency="silent"
+                android:order="10"
                 android:defaultValue="true" />
 
         <CheckBoxPreference
@@ -90,6 +112,7 @@
                 android:summaryOn="@string/haptic_feedback_enable_summary_on"
                 android:summaryOff="@string/haptic_feedback_enable_summary_off"
                 android:dependency="silent"
+                 android:order="11"
                 android:defaultValue="true" />
 
         <CheckBoxPreference
@@ -98,6 +121,7 @@
                 android:summaryOn="@string/play_media_notification_sounds_enable_summary_on"
                 android:summaryOff="@string/play_media_notification_sounds_enable_summary_off"
                 android:dependency="silent"
+                android:order="12"
                 android:defaultValue="true" />
 
     </PreferenceCategory>
@@ -112,15 +136,15 @@
     <PreferenceCategory
             android:title="@string/display_settings">
 
-        <CheckBoxPreference 
-            android:key="accelerometer" 
-            android:title="@string/accelerometer_title" 
+        <CheckBoxPreference
+            android:key="accelerometer"
+            android:title="@string/accelerometer_title"
             android:summaryOn="@string/accelerometer_summary_on"
             android:summaryOff="@string/accelerometer_summary_off"/>
-    
-	    <ListPreference
-	        android:key="animations"
-	        android:title="@string/animations_title" 
+
+        <ListPreference
+            android:key="animations"
+            android:title="@string/animations_title"
             android:persistent="false"
             android:entries="@array/animations_entries"
             android:entryValues="@array/animations_values" />
@@ -131,7 +155,7 @@
                 android:summary="@string/brightness_summary"
                 android:dialogIcon="@drawable/ic_popup_brightness"
                 android:dialogTitle="@string/brightness" />
-            
+
         <ListPreference
                 android:key="screen_timeout"
                 android:title="@string/screen_timeout"
@@ -141,4 +165,4 @@
                 android:entryValues="@array/screen_timeout_values" />
     </PreferenceCategory>
 
-</PreferenceScreen>   
+</PreferenceScreen>

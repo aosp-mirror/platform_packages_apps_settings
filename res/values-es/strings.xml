@@ -152,7 +152,7 @@
     <string name="radio_info_roaming_label" msgid="6141505430275138647">"Itinerancia:"</string>
     <string name="radio_info_imei_label" msgid="1220524224732944192">"IMEI:"</string>
     <string name="radio_info_call_redirect_label" msgid="1654674226961476872">"Desvío de llamada:"</string>
-    <string name="radio_info_ppp_resets_label" msgid="3241667824729310546">"Número de PPP restablecidos desde el inicio:"</string>
+    <string name="radio_info_ppp_resets_label" msgid="3241667824729310546">"Número de PPP restablecido desde el inicio:"</string>
     <string name="radio_info_gsm_disconnects_label" msgid="1683069665736339820">"Desconexión de GSM:"</string>
     <string name="radio_info_current_network_label" msgid="3256402602440102610">"Red actual:"</string>
     <string name="radio_info_data_successes_label" msgid="4417894113689054945">"Datos correctos:"</string>
@@ -191,7 +191,7 @@
     <string name="sdcard_settings_bad_removal_status" msgid="5145797653495907970">"La tarjeta SD se ha extraído mientras estaba en uso."</string>
     <string name="sdcard_settings_used_bytes_label" msgid="8820289486001170836">"Bytes utilizados:"</string>
     <string name="sdcard_settings_scanning_status" msgid="2763464949274455656">"Buscando medios en tarjeta SD..."</string>
-    <string name="sdcard_settings_read_only_status" msgid="5706115860484118911">"Tarjeta SD activada en modo de sólo lectura"</string>
+    <string name="sdcard_settings_read_only_status" msgid="5706115860484118911">"Tarjeta SD activada en modo de solo lectura"</string>
     <string name="next_label" msgid="4693520878012668114">"Siguiente"</string>
     <string name="language_picker_title" msgid="4034157617842965844">"Configuración local"</string>
     <string name="select_your_language" msgid="1146235168951906084">"Selecciona el idioma que prefieras."</string>
@@ -231,7 +231,7 @@
     <string name="date_time_set_time" msgid="5716856602742530696">"Establecer hora"</string>
     <string name="date_time_set_timezone" msgid="5045627174274377814">"Seleccionar zona horaria"</string>
     <string name="date_time_set_date" msgid="7021491668550232105">"Establecer fecha"</string>
-    <string name="date_time_date_format" msgid="436706100255870967">"Seleccionar formato de fecha"</string>
+    <string name="date_time_date_format" msgid="436706100255870967">"Formato de fecha"</string>
     <string name="zone_list_menu_sort_alphabetically" msgid="5683377702671088588">"Ordenar alfabéticamente"</string>
     <string name="zone_list_menu_sort_by_timezone" msgid="2720190443744884114">"Ordenar por zona horaria"</string>
     <string name="security_settings_title" msgid="5168491784222013179">"Ubicación y seguridad"</string>
@@ -280,11 +280,16 @@
     <string name="bluetooth_device_advanced_profile_header_title" msgid="3764437426089639639">"Perfiles"</string>
     <string name="bluetooth_a2dp_profile_summary_connected" msgid="963376081347721598">"Conectado al audio del medio"</string>
     <string name="bluetooth_headset_profile_summary_connected" msgid="7661070206715520671">"Conectado al audio del teléfono"</string>
-    <string name="bluetooth_opp_profile_summary_connected" msgid="2611913495968309066">"Con conexión al servidor de transferencia de archivos"</string>
-    <string name="bluetooth_opp_profile_summary_not_connected" msgid="1267091356089086285">"Sin conexión al servidor de transferencia de archivos"</string>
+    <string name="bluetooth_opp_profile_summary_connected" msgid="2611913495968309066">"Conectado con el servidor de transferencia de archivos"</string>
+    <string name="bluetooth_opp_profile_summary_not_connected" msgid="1267091356089086285">"Sin conexión con el servidor de transferencia de archivos"</string>
     <string name="bluetooth_a2dp_profile_summary_use_for" msgid="4630849022250168427">"Utilizar para audio de medio"</string>
     <string name="bluetooth_headset_profile_summary_use_for" msgid="8705753622443862627">"Utilizar para audio del teléfono"</string>
     <string name="bluetooth_opp_profile_summary_use_for" msgid="1255674547144769756">"Uso de la transferencia de archivos"</string>
+    <string name="bluetooth_dock_settings" msgid="3218335822716052885">"Configuración del conector"</string>
+    <string name="bluetooth_dock_settings_title" msgid="5543069893044375188">"Uso del conector para audio"</string>
+    <string name="bluetooth_dock_settings_headset" msgid="1001821426078644650">"Como altavoz del teléfono"</string>
+    <string name="bluetooth_dock_settings_a2dp" msgid="8791004998846630574">"Para música y contenido multimedia"</string>
+    <string name="bluetooth_dock_settings_remember" msgid="5551459057010609115">"Configuración de recordatorio"</string>
     <string name="wifi" msgid="1081550856200013637">"Wi-Fi"</string>
     <string name="wifi_quick_toggle_title" msgid="874495178395350104">"Wi-Fi"</string>
     <string name="wifi_quick_toggle_summary" msgid="1047950931623694366">"Activar Wi-Fi"</string>
@@ -397,12 +402,16 @@
     <string name="vibrate_summary" msgid="5224303668448643275">"Teléfono en vibración para llamadas entrantes"</string>
     <string name="notification_sound_title" msgid="6316316069880531693">"Tono de notificación"</string>
     <string name="notification_sound_summary" msgid="7628081155578496618">"Establecer el tono de notificación predeterminado"</string>
+    <string name="notification_pulse_title" msgid="1247988024534030629">"Pulsar luz de notificación"</string>
+    <string name="notification_pulse_summary" msgid="6899220780534617152">"Pulsar la luz de la bola de seguimiento de forma repetida para obtener nuevas notificaciones"</string>
     <string name="incoming_call_volume_title" msgid="6144314834963494752">"Volumen de llamada entrante"</string>
     <string name="notification_volume_title" msgid="3363351773121138717">"Volumen de notificaciones"</string>
     <string name="checkbox_notification_same_as_incoming_call" msgid="1073644356290338921">"Utilizar volumen de llamada entrante para notificaciones"</string>
     <string name="notification_sound_dialog_title" msgid="7057274209079144726">"Seleccionar tono de notificación"</string>
     <string name="media_volume_title" msgid="7844516127427195383">"Volumen multimedia"</string>
     <string name="media_volume_summary" msgid="5363248930648849974">"Establecer volumen para música y vídeos"</string>
+    <string name="dock_settings_title" msgid="5121296855098055941">"Audio del conector"</string>
+    <string name="dock_settings_summary" msgid="455802113668982481">"Configuración de audio del conector adjunto"</string>
     <string name="dtmf_tone_enable_title" msgid="1453831168789523185">"Tonos táctiles sonoros"</string>
     <string name="dtmf_tone_enable_summary_on" msgid="3028201873989887327">"Reproducir tonos al utilizar teclado de marcado"</string>
     <string name="dtmf_tone_enable_summary_off" msgid="7791065951268525678">"Reproducir tonos al utilizar teclado de marcado"</string>
@@ -415,9 +424,11 @@
     <string name="play_media_notification_sounds_enable_title" msgid="1008791464029179529">"Notificaciones tarjeta SD"</string>
     <string name="play_media_notification_sounds_enable_summary_on" msgid="7675466959375667370">"Reproducir sonido para notificaciones de la tarjeta SD"</string>
     <string name="play_media_notification_sounds_enable_summary_off" msgid="8672617597028744693">"Reproducir sonido para notificaciones de la tarjeta SD"</string>
+    <string name="audio_record_proc_title" msgid="4271091199976457534">"Supresión de ruido"</string>
+    <string name="audio_record_proc_summary" msgid="8113628457499616498">"Suprimir ruido de fondo al hablar o al grabar"</string>
     <string name="sync_settings" msgid="9186125469300013491">"Cuentas y sincronización"</string>
     <string name="sync_settings_summary" msgid="2962179505214965667">"Añadir o eliminar cuentas y modificar la configuración de las cuentas"</string>
-    <string name="search_settings" msgid="1910951467596035063">"Buscar"</string>
+    <string name="search_settings" msgid="1910951467596035063">"Búsqueda"</string>
     <string name="search_settings_summary" msgid="9205656546570654169">"Administrar historial y configuración de búsqueda"</string>
     <string name="display_settings" msgid="3912042046350078328">"Configuración de pantalla"</string>
     <string name="animations_title" msgid="1062189037402346023">"Animación"</string>
@@ -428,7 +439,7 @@
     <string name="accelerometer_summary_off" msgid="5485489363715740761">"Cambiar orientación automáticamente al girar el teléfono"</string>
     <string name="brightness" msgid="2354961343555249270">"Brillo"</string>
     <string name="brightness_summary" msgid="838917350127550703">"Ajustar el brillo de la pantalla"</string>
-    <string name="screen_timeout" msgid="4882669461447531301">"Tiempo espera pantalla"</string>
+    <string name="screen_timeout" msgid="4882669461447531301">"Tiempo de espera de la pantalla"</string>
     <string name="screen_timeout_summary" msgid="2905757633140605334">"Ajustar el tiempo de retraso antes de que la pantalla se apague automáticamente"</string>
     <string name="automatic_brightness" msgid="5014143533884135461">"Brillo automático"</string>
     <string name="sim_lock_settings" msgid="3392331196873564292">"Configuración de bloqueo de tarjeta SIM"</string>
@@ -527,7 +538,7 @@
     <string name="restore_default_apn" msgid="2724583218635739913">"Restaurando la configuración de APN predeterminada"</string>
     <string name="menu_restore" msgid="8260067415075573273">"Restablecer valores predeterminados"</string>
     <string name="restore_default_apn_completed" msgid="3990449939234957281">"Restablecimiento de la configuración de APN predeterminada completado"</string>
-    <string name="master_clear_title" msgid="5907939616087039756">"Rest. datos de fábrica"</string>
+    <string name="master_clear_title" msgid="5907939616087039756">"Restablecer datos de fábrica"</string>
     <string name="master_clear_summary" msgid="4986154238001088492">"Borrar todos los datos del teléfono"</string>
     <string name="master_clear_desc" msgid="7823268823499739178">"Se borrarán todos los datos del teléfono, incluidos los siguientes elementos:"\n<li>"tu cuenta de Google,"</li>\n<li>"la configuración y los datos de las aplicaciones y del sistema,"</li>\n<li>"las aplicaciones descargadas."</li>\n"No se borrarán los siguientes elementos:"\n<li>"las aplicaciones agrupadas y el software del sistema actual,"</li>\n<li>"los archivos de la tarjeta SD como, por ejemplo, música o fotografías."</li></string>
     <string name="master_clear_button_text" msgid="7550632653343157971">"Reiniciar teléfono"</string>
@@ -572,7 +583,7 @@
     <string name="terms_title" msgid="7697580845616764642">"Términos y condiciones"</string>
     <string name="system_tutorial_list_item_title" msgid="9082844446660969729">"Tutorial del sistema"</string>
     <string name="system_tutorial_list_item_summary" msgid="3861815254521030201">"Aprende a utilizar tu teléfono"</string>
-    <string name="settings_license_activity_title" msgid="7553683406244228650">"Licencias de SW libre"</string>
+    <string name="settings_license_activity_title" msgid="7553683406244228650">"Licencias de sw libre"</string>
     <string name="settings_license_activity_unavailable" msgid="4210539215951487627">"Se ha producido un problema al intentar cargar las licencias."</string>
     <string name="settings_license_activity_loading" msgid="3337535809093591740">"Cargando..."</string>
     <string name="settings_safetylegal_title" msgid="1289483965535937431">"Información de seguridad"</string>
@@ -668,7 +679,7 @@
     <string name="service_restarting" msgid="2242747937372354306">"Reiniciando"</string>
     <string name="no_running_services" msgid="6981216347270280598">"No hay servicios en ejecución."</string>
     <string name="confirm_stop_service" msgid="5700448757318301681">"¿Quieres detener el servicio?"</string>
-    <string name="confirm_stop_service_msg" msgid="1202118456282395730">"El servicio no se ejecutará hasta que se vuelva a iniciar, lo que puede provocar consecuencias no deseadas en la aplicación <xliff:g id="APPLICATION">%1$s</xliff:g>."</string>
+    <string name="confirm_stop_service_msg" msgid="1166661293369421272">"El servicio no se ejecutará hasta que se vuelva a iniciar, lo que puede provocar consecuencias no deseadas en la aplicación <xliff:g id="APPLICATION">%1$s</xliff:g>."</string>
     <string name="confirm_stop_stop" msgid="7382363913280993331">"Detener"</string>
     <string name="confirm_stop_cancel" msgid="206495326622692381">"Cancelar"</string>
     <string name="service_started_by_app" msgid="8432097226392386802">"Iniciado por la aplicación: tocar para detener"</string>
@@ -732,7 +743,7 @@
     <string name="allow_mock_location" msgid="2787962564578664888">"Ubicaciones simuladas"</string>
     <string name="allow_mock_location_summary" msgid="317615105156345626">"Permitir ubicaciones simuladas"</string>
     <string name="adb_warning_title" msgid="6234463310896563253">"¿Permitir depuración USB?"</string>
-    <string name="adb_warning_message" msgid="5352555112049663033">"La depuración USB sólo está indicada para actividades de desarrollo. Se puede utilizar para intercambiar datos entre el equipo y el dispositivo, para instalar aplicaciones en el dispositivo sin recibir notificaciones y para leer datos de registro."</string>
+    <string name="adb_warning_message" msgid="5352555112049663033">"La depuración USB solo está indicada para actividades de desarrollo. Se puede utilizar para intercambiar datos entre el equipo y el dispositivo, para instalar aplicaciones en el dispositivo sin recibir notificaciones y para leer datos de registro."</string>
     <string name="gadget_picker_title" msgid="98374951396755811">"Seleccionar gadget"</string>
     <string name="widget_picker_title" msgid="9130684134213467557">"Seleccionar widget"</string>
     <string name="battery_history_details_for" msgid="5924639922153109669">"Detalles del ID único <xliff:g id="NUMBER">%d</xliff:g>"</string>
@@ -780,7 +791,7 @@
     <string name="accessibility_service_security_warning" msgid="4066258132331302670">"Este servicio de accesibilidad puede recopilar todo lo que escribas, desde datos personales hasta números de tarjetas de crédito, a excepción de las contraseñas. También puede registrar las interacciones con la interfaz de usuario. Procede de la aplicación <xliff:g id="ACCESSIBILITY_SERVICE_NAME">%1$s</xliff:g>. ¿Quieres utilizar este servicio de accesibilidad?"</string>
     <string name="accessibility_service_disable_warning" msgid="8930591383312775132">"¿Quieres inhabilitar la accesibilidad?"</string>
     <string name="power_usage_summary_title" msgid="5180282911164282324">"Uso de la batería"</string>
-    <string name="power_usage_summary" msgid="7237084831082848168">"Qué ha estado utilizando la batería"</string>
+    <string name="power_usage_summary" msgid="7237084831082848168">"Consumo de la batería"</string>
     <string name="battery_since_unplugged" msgid="338073389740738437">"Uso de la batería desde que se desenchufó"</string>
     <string name="battery_since_reset" msgid="7464546661121187045">"Uso de la batería desde que se restableció"</string>
     <string name="battery_stats_duration" msgid="7464501326709469282">"<xliff:g id="TIME">%1$s</xliff:g> desde que se desenchufó"</string>
@@ -832,7 +843,7 @@
     <string name="battery_sugg_apps_gps" msgid="4145005297393800223">"Desactivar GPS cuando no se esté utilizando"</string>
     <string name="battery_sugg_apps_settings" msgid="8021302847272481168">"La aplicación puede incluir opciones que permitan reducir el uso de la batería."</string>
     <string name="menu_stats_unplugged" msgid="8296577130840261624">"<xliff:g id="UNPLUGGED">%1$s</xliff:g> desde que se desenchufó"</string>
-    <string name="menu_stats_last_unplugged" msgid="5922246077592434526">"Desde la última vez que se desenchufó para <xliff:g id="UNPLUGGED">%1$s</xliff:g>"</string>
+    <string name="menu_stats_last_unplugged" msgid="5922246077592434526">"Desde la última vez que se cargó: <xliff:g id="UNPLUGGED">%1$s</xliff:g>"</string>
     <string name="menu_stats_total" msgid="8973377864854807854">"Total de consumo"</string>
     <string name="menu_stats_refresh" msgid="1676215433344981075">"Actualizar"</string>
     <string name="process_kernel_label" msgid="3916858646836739323">"Sistema operativo de Android"</string>
@@ -841,7 +852,7 @@
     <string name="tts_settings_summary" msgid="2627715231944602766">"Establecer opciones de síntesis de voz"</string>
     <string name="tts_settings_title" msgid="4182348653053000933">"Configuración de síntesis de voz"</string>
     <string name="use_default_tts_settings_title" msgid="1577063839539732930">"Utilizar siempre mi configuración"</string>
-    <string name="use_default_tts_settings_summary" msgid="4253502106159206276">"La configuración predeterminada que aparece a continuación anula la configuración de la aplicación."</string>
+    <string name="use_default_tts_settings_summary" msgid="4253502106159206276">"La configuración predeterminada anula la de la aplicación."</string>
     <string name="tts_default_settings_section" msgid="5787915620218907443">"Configuración predeterminada"</string>
     <string name="tts_default_rate_title" msgid="6030550998379310088">"Velocidad de voz"</string>
     <string name="tts_default_rate_summary" msgid="4061815292287182801">"Velocidad a la que se lee el texto"</string>
@@ -892,7 +903,7 @@
     <string name="vpn_secret_not_set_dialog_msg" msgid="8013052814131532765">"Faltan uno o varios secretos en la configuración de esta VPN. ¿Deseas comprobar tu configuración secreta?"</string>
     <string name="vpn_auth_error_dialog_msg" msgid="5476820106624807614">"El nombre de usuario o la contraseña introducidos no son correctos. ¿Quieres intentarlo de nuevo?"</string>
     <string name="vpn_remote_hung_up_error_dialog_msg" msgid="1566946015052633150">"El servidor se ha bloqueado. Es posible que la contraseña o el nombre de usuario introducidos sean incorrectos. ¿Deseas volver a intentarlo?"</string>
-    <string name="vpn_remote_ppp_hung_up_error_dialog_msg" msgid="5135958511128503344">"El servidor se ha bloqueado. Es posible que tengas activado un cortafuegos que impide la conexión al servidor. ¿Quieres volver a intentarlo?"</string>
+    <string name="vpn_remote_ppp_hung_up_error_dialog_msg" msgid="5135958511128503344">"El servidor se ha bloqueado. Es posible que tengas activado un cortafuegos que impide la conexión con el servidor. ¿Quieres volver a intentarlo?"</string>
     <string name="vpn_ppp_negotiation_failed_dialog_msg" msgid="4611293656718340994">"Error de negociación con el servidor. Es posible que el servidor no acepte tu opción de encriptación. ¿Quieres comprobar tus valores de configuración de la encriptación?"</string>
     <string name="vpn_type_title" msgid="6392933604218676224">"Añadir VPN"</string>
     <string name="vpn_add_new_vpn" msgid="5438260689052714550">"Añadir VPN"</string>
@@ -974,6 +985,5 @@
     <string name="backup_settings_title" msgid="2968262658155327829">"Realizar copia de seguridad de mi configuración"</string>
     <string name="backup_erase_dialog_title" msgid="6028429904055779443">"Copia de seguridad de la configuración"</string>
     <string name="backup_erase_dialog_message" msgid="9096433810456900531">"¿Estás seguro de que quieres detener la copia de seguridad de tu configuración y borrar todas las copias de los servidores de Google?"</string>
-    <!-- no translation found for untitled_apn (1230060359198685513) -->
-    <skip />
+    <string name="untitled_apn" msgid="1230060359198685513">"Sin título"</string>
 </resources>

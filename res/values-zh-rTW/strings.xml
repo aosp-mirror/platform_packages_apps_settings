@@ -285,6 +285,11 @@
     <string name="bluetooth_a2dp_profile_summary_use_for" msgid="4630849022250168427">"用於媒體音訊"</string>
     <string name="bluetooth_headset_profile_summary_use_for" msgid="8705753622443862627">"用於電話音訊"</string>
     <string name="bluetooth_opp_profile_summary_use_for" msgid="1255674547144769756">"用於傳輸檔案"</string>
+    <string name="bluetooth_dock_settings" msgid="3218335822716052885">"座架設定"</string>
+    <string name="bluetooth_dock_settings_title" msgid="5543069893044375188">"使用座架播放音訊"</string>
+    <string name="bluetooth_dock_settings_headset" msgid="1001821426078644650">"當成手機喇叭"</string>
+    <string name="bluetooth_dock_settings_a2dp" msgid="8791004998846630574">"使用於音樂與媒體"</string>
+    <string name="bluetooth_dock_settings_remember" msgid="5551459057010609115">"記住設定"</string>
     <string name="wifi" msgid="1081550856200013637">"Wi-Fi"</string>
     <string name="wifi_quick_toggle_title" msgid="874495178395350104">"Wi-Fi"</string>
     <string name="wifi_quick_toggle_summary" msgid="1047950931623694366">"開啟 Wi-Fi"</string>
@@ -397,12 +402,16 @@
     <string name="vibrate_summary" msgid="5224303668448643275">"來電震動"</string>
     <string name="notification_sound_title" msgid="6316316069880531693">"通知鈴聲"</string>
     <string name="notification_sound_summary" msgid="7628081155578496618">"設定預設通知鈴聲"</string>
+    <string name="notification_pulse_title" msgid="1247988024534030629">"閃爍燈光通知"</string>
+    <string name="notification_pulse_summary" msgid="6899220780534617152">"有新通知時重複閃爍軌跡球燈光"</string>
     <string name="incoming_call_volume_title" msgid="6144314834963494752">"來電音量"</string>
     <string name="notification_volume_title" msgid="3363351773121138717">"通知音量"</string>
     <string name="checkbox_notification_same_as_incoming_call" msgid="1073644356290338921">"通知使用來電音量"</string>
     <string name="notification_sound_dialog_title" msgid="7057274209079144726">"選取通知鈴聲"</string>
     <string name="media_volume_title" msgid="7844516127427195383">"媒體音量"</string>
     <string name="media_volume_summary" msgid="5363248930648849974">"設定音樂與影片的音量"</string>
+    <string name="dock_settings_title" msgid="5121296855098055941">"座架音訊"</string>
+    <string name="dock_settings_summary" msgid="455802113668982481">"附加座架的音訊設定"</string>
     <string name="dtmf_tone_enable_title" msgid="1453831168789523185">"觸控音效"</string>
     <string name="dtmf_tone_enable_summary_on" msgid="3028201873989887327">"使用撥號面板時播放按鍵音效"</string>
     <string name="dtmf_tone_enable_summary_off" msgid="7791065951268525678">"使用撥號面板時播放按鍵音效"</string>
@@ -415,6 +424,8 @@
     <string name="play_media_notification_sounds_enable_title" msgid="1008791464029179529">"SD 卡通知"</string>
     <string name="play_media_notification_sounds_enable_summary_on" msgid="7675466959375667370">"播放 SD 卡通知音效"</string>
     <string name="play_media_notification_sounds_enable_summary_off" msgid="8672617597028744693">"播放 SD 卡通知音效"</string>
+    <string name="audio_record_proc_title" msgid="4271091199976457534">"噪音消除"</string>
+    <string name="audio_record_proc_summary" msgid="8113628457499616498">"在說話或錄音時抑制背景雜音。"</string>
     <string name="sync_settings" msgid="9186125469300013491">"帳戶與同步處理"</string>
     <string name="sync_settings_summary" msgid="2962179505214965667">"新增或移除帳戶和變更帳戶設定"</string>
     <string name="search_settings" msgid="1910951467596035063">"搜尋"</string>
@@ -668,7 +679,7 @@
     <string name="service_restarting" msgid="2242747937372354306">"重新啟動中"</string>
     <string name="no_running_services" msgid="6981216347270280598">"沒有正在運作的服務"</string>
     <string name="confirm_stop_service" msgid="5700448757318301681">"要停止服務嗎？"</string>
-    <string name="confirm_stop_service_msg" msgid="1202118456282395730">"服務將不再繼續執行，除非您重新啟動該服務。這個動作可能會對應用程式「<xliff:g id="APPLICATION">%1$s</xliff:g>」造成無法預期的結果。"</string>
+    <string name="confirm_stop_service_msg" msgid="1166661293369421272">"服務將不再繼續執行，除非您重新啟動該服務。這個動作可能會對應用程式「<xliff:g id="APPLICATION">%1$s</xliff:g>」造成無法預期的結果。"</string>
     <string name="confirm_stop_stop" msgid="7382363913280993331">"停止"</string>
     <string name="confirm_stop_cancel" msgid="206495326622692381">"取消"</string>
     <string name="service_started_by_app" msgid="8432097226392386802">"由應用程式啟動：輕觸螢幕即可停止"</string>
@@ -780,7 +791,7 @@
     <string name="accessibility_service_security_warning" msgid="4066258132331302670">"此協助工具服務可能會收集您輸入的所有文字，包括個人資料及信用卡號碼，但並不會收集您輸入的密碼，而且它也可能會記錄您的使用者介面互動行為。該服務是由應用程式「<xliff:g id="ACCESSIBILITY_SERVICE_NAME">%1$s</xliff:g>」所提供，要使用此協助工具服務嗎？"</string>
     <string name="accessibility_service_disable_warning" msgid="8930591383312775132">"要停用協助工具嗎？"</string>
     <string name="power_usage_summary_title" msgid="5180282911164282324">"電池使用狀況"</string>
-    <string name="power_usage_summary" msgid="7237084831082848168">"消耗電池電力的功能"</string>
+    <string name="power_usage_summary" msgid="7237084831082848168">"查看正在消耗電力的功能"</string>
     <string name="battery_since_unplugged" msgid="338073389740738437">"拔除插頭後的電池使用狀況"</string>
     <string name="battery_since_reset" msgid="7464546661121187045">"重設後的電池使用狀況"</string>
     <string name="battery_stats_duration" msgid="7464501326709469282">"拔除插頭後已過了 <xliff:g id="TIME">%1$s</xliff:g>"</string>
@@ -974,6 +985,5 @@
     <string name="backup_settings_title" msgid="2968262658155327829">"備份我的設定"</string>
     <string name="backup_erase_dialog_title" msgid="6028429904055779443">"設定備份"</string>
     <string name="backup_erase_dialog_message" msgid="9096433810456900531">"您確定要停止備份設定，並清除 Google 伺服器上的所有設定資料嗎？"</string>
-    <!-- no translation found for untitled_apn (1230060359198685513) -->
-    <skip />
+    <string name="untitled_apn" msgid="1230060359198685513">"未命名"</string>
 </resources>

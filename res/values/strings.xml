@@ -643,6 +643,17 @@
     <!-- Bluetooth settings.  Connection options screen.  The summary for the OPP checkbox preference that describes how checking it will set the OPP profile as preferred. -->
     <string name="bluetooth_opp_profile_summary_use_for">Use for file transfer</string>
 
+    <!-- Bluetooth settings.  Dock Setting Title -->
+    <string name="bluetooth_dock_settings">Dock Settings</string>
+    <!-- Bluetooth settings.  Dock Setting Dialog Title -->
+    <string name="bluetooth_dock_settings_title">Use dock for audio</string>
+    <!-- Bluetooth settings.  Dock Setting Dialog - Checkbox selection 1: Use dock as speaker phone -->
+    <string name="bluetooth_dock_settings_headset">As speaker phone</string>
+    <!-- Bluetooth settings.  Dock Setting Dialog - Checkbox selection 2: Use dock for media audio -->
+    <string name="bluetooth_dock_settings_a2dp">Music, ringer, alarms \u0028silences phone\u0029</string>
+    <!-- Bluetooth settings.  Dock Setting Dialog - Remember setting and don't ask user again -->
+    <string name="bluetooth_dock_settings_remember">Remember settings</string>
+
     <!-- Wi-Fi settings -->
     <!-- Used in the 2nd-level settings screen to turn on Wi-Fi -->
     <string name="wifi">Wi-Fi</string>
@@ -877,6 +888,10 @@
     <string name="notification_sound_title">Notification ringtone</string>
     <!-- Sound settings screen, setting option summary text -->
     <string name="notification_sound_summary">Set your default notification ringtone</string>
+    <!-- Sound settings screen, notification light repeat pulsing title -->
+    <string name="notification_pulse_title">Pulse notification light</string>
+    <!-- Sound settings screen, notification light repeat pulsing summary -->
+    <string name="notification_pulse_summary">Pulse trackball light repeatedly for new notifications</string>
     <!-- Sound settings screen, the title of the volume bar to adjust the incoming call volume -->
     <string name="incoming_call_volume_title">Incoming call volume</string>
     <!-- Sound settings screen, the title of the volume bar to adjust the notification volume -->
@@ -890,6 +905,10 @@
     <string name="media_volume_title">Media volume</string>
     <!-- Sound settings screen, setting option summary text -->
     <string name="media_volume_summary">Set volume for music and videos</string>
+    <!-- Sound settings screen, dock settings -->
+    <string name="dock_settings_title">Dock audio</string>
+    <!-- Sound settings screen, dock settings summary-->
+    <string name="dock_settings_summary">Audio settings for the attached dock</string>
     <!-- Sound settings screen, setting check box label -->
     <string name="dtmf_tone_enable_title">Audible touch tones</string>
     <!-- Sound settings screen, setting option summary text when check box is selected -->
@@ -1480,8 +1499,8 @@ found in the list of installed applications.</string>
     <string name="confirm_stop_service">Stop service?</string>
     <!-- Running services, message of dialog to stop a service -->
     <string name="confirm_stop_service_msg">The service will no longer run until
-            started again.  This may have undesireable
-            consequences on the applicaton
+            started again.  This may have undesirable
+            consequences on the application
             <xliff:g id="application">%1$s</xliff:g>.</string>
     <!-- Running services, button to stop a service -->
     <string name="confirm_stop_stop">Stop</string>

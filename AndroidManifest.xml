@@ -65,7 +65,7 @@
 
         <!-- Wireless Controls -->
 
-        <activity android:name="WirelessSettings" 
+        <activity android:name="WirelessSettings"
                 android:label="@string/wireless_networks_settings_title"
                 >
             <intent-filter>
@@ -175,7 +175,7 @@
                 <category android:name="android.intent.category.VOICE_LAUNCH" />
             </intent-filter>
         </activity>
-        
+
         <activity android:name="LocalePickerInSetupWizard" android:label="@string/language_picker_title">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -195,7 +195,7 @@
             </intent-filter>
         </activity>
 
-        <activity android:name="PhysicalKeyboardSettings" 
+        <activity android:name="PhysicalKeyboardSettings"
                 android:label="@string/builtin_keyboard_settings_title">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -283,7 +283,7 @@
                 <category android:name="com.android.settings.SHORTCUT" />
             </intent-filter>
         </activity>
-        
+
         <activity android:name="InstalledAppDetails" android:label="@string/application_info_label">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
@@ -303,7 +303,7 @@
                 <category android:name="com.android.settings.SHORTCUT" />
             </intent-filter>
         </activity>
-        
+
         <activity android:name="SecuritySettings"
                 android:label="@string/location_security_settings_title"
                 android:configChanges="orientation|keyboardHidden"
@@ -373,22 +373,22 @@
         <!-- Second and third-level settings -->
 
         <activity android:name="ConfirmLockPattern"/>
-        
+
         <activity android:name="ChooseLockPattern" android:label="@string/lockpattern_change_lock_pattern_label">
             <intent-filter>
                 <action android:name="android.intent.action.DEFAULT" />
             </intent-filter>
         </activity>
 
-        <activity android:name="ChooseLockPatternTutorial" 
+        <activity android:name="ChooseLockPatternTutorial"
             android:label="@string/lockpattern_change_lock_pattern_label"
             >
             <intent-filter>
                 <action android:name="android.intent.action.DEFAULT" />
             </intent-filter>
         </activity>
-        
-        <activity android:name="ChooseLockPatternExample" 
+
+        <activity android:name="ChooseLockPatternExample"
             android:label="@string/lockpattern_change_lock_pattern_label">
             <intent-filter>
                 <action android:name="android.intent.action.DEFAULT" />
@@ -444,7 +444,7 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".quicklaunch.QuickLaunchSettings" 
+        <activity android:name=".quicklaunch.QuickLaunchSettings"
                 android:label="@string/quick_launch_title">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -453,7 +453,7 @@
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
-        
+
         <activity android:name=".quicklaunch.BookmarkPicker" android:label="@string/quick_launch_title">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -487,6 +487,16 @@
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
+
+        <receiver
+            android:name=".bluetooth.DockEventReceiver">
+            <intent-filter>
+                <action android:name="android.intent.action.DOCK_EVENT" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </receiver>
+
+        <service android:name=".bluetooth.DockService" />
 
         <activity android:name=".bluetooth.RequestPermissionActivity"
                   android:label="@string/bluetooth_permission_request"

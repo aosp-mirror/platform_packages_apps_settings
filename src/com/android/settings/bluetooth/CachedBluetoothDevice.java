@@ -41,6 +41,7 @@ import java.util.Date;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Set;
 
 /**
  * CachedBluetoothDevice represents a remote Bluetooth device. It contains
@@ -141,10 +142,10 @@ public class CachedBluetoothDevice implements Comparable<CachedBluetoothDevice> 
     private static LinkedList<BluetoothJob> workQueue = new LinkedList<BluetoothJob>();
 
     private void queueCommand(BluetoothJob job) {
-        if (D) {
-            Log.d(TAG, workQueue.toString());
-        }
         synchronized (workQueue) {
+            if (D) {
+                Log.d(TAG, workQueue.toString());
+            }
             boolean processNow = pruneQueue(job);
 
             // Add job to queue
@@ -226,44 +227,46 @@ public class CachedBluetoothDevice implements Comparable<CachedBluetoothDevice> 
     }
 
     public void onProfileStateChanged(Profile profile, int newProfileState) {
-        if (D) {
-            Log.d(TAG, "onProfileStateChanged:" + workQueue.toString());
-        }
-
-        int newState = LocalBluetoothProfileManager.getProfileManager(mLocalManager,
-                profile).convertState(newProfileState);
-
-        if (newState == SettingsBtStatus.CONNECTION_STATUS_CONNECTED) {
-            if (!mProfiles.contains(profile)) {
-                mProfiles.add(profile);
+        synchronized (workQueue) {
+            if (D) {
+                Log.d(TAG, "onProfileStateChanged:" + workQueue.toString());
             }
-        }
 
-        /* Ignore the transient states e.g. connecting, disconnecting */
-        if (newState == SettingsBtStatus.CONNECTION_STATUS_CONNECTED ||
-                newState == SettingsBtStatus.CONNECTION_STATUS_DISCONNECTED) {
-            BluetoothJob job = workQueue.peek();
-            if (job == null) {
-                return;
-            } else if (!job.cachedDevice.mDevice.equals(mDevice)) {
-                // This can happen in 2 cases: 1) BT device initiated pairing and
-                // 2) disconnects of one headset that's triggered by connects of
-                // another.
-                if (D) {
-                    Log.d(TAG, "mDevice:" + mDevice + " != head:" + job.toString());
+            int newState = LocalBluetoothProfileManager.getProfileManager(mLocalManager,
+                    profile).convertState(newProfileState);
+
+            if (newState == SettingsBtStatus.CONNECTION_STATUS_CONNECTED) {
+                if (!mProfiles.contains(profile)) {
+                    mProfiles.add(profile);
                 }
+            }
 
-                // Check to see if we need to remove the stale items from the queue
-                if (!pruneQueue(null)) {
-                    // nothing in the queue was modify. Just ignore the notification and return.
+            /* Ignore the transient states e.g. connecting, disconnecting */
+            if (newState == SettingsBtStatus.CONNECTION_STATUS_CONNECTED ||
+                    newState == SettingsBtStatus.CONNECTION_STATUS_DISCONNECTED) {
+                BluetoothJob job = workQueue.peek();
+                if (job == null) {
                     return;
-                }
-            } else {
-                // Remove the first item and process the next one
-                workQueue.poll();
-            }
+                } else if (!job.cachedDevice.mDevice.equals(mDevice)) {
+                    // This can happen in 2 cases: 1) BT device initiated pairing and
+                    // 2) disconnects of one headset that's triggered by connects of
+                    // another.
+                    if (D) {
+                        Log.d(TAG, "mDevice:" + mDevice + " != head:" + job.toString());
+                    }
 
-            processCommands();
+                    // Check to see if we need to remove the stale items from the queue
+                    if (!pruneQueue(null)) {
+                        // nothing in the queue was modify. Just ignore the notification and return.
+                        return;
+                    }
+                } else {
+                    // Remove the first item and process the next one
+                    workQueue.poll();
+                }
+
+                processCommands();
+            }
         }
     }
 
@@ -380,6 +383,12 @@ public class CachedBluetoothDevice implements Comparable<CachedBluetoothDevice> 
         connectWithoutResettingTimer();
     }
 
+    /*package*/ void onBondingDockConnect() {
+        // Don't connect just set the timer.
+        // TODO(): Fix the actual problem
+        mConnectAttempted = SystemClock.elapsedRealtime();
+    }
+
     private void connectWithoutResettingTimer() {
         // Try to initialize the profiles if there were not.
         if (mProfiles.size() == 0) {
@@ -401,6 +410,7 @@ public class CachedBluetoothDevice implements Comparable<CachedBluetoothDevice> 
                         .getProfileManager(mLocalManager, profile);
                 if (profileManager.isPreferred(mDevice)) {
                     ++preferredProfiles;
+                    disconnectConnected(profile);
                     queueCommand(new BluetoothJob(BluetoothCommand.CONNECT, this, profile));
                 }
             }
@@ -423,6 +433,7 @@ public class CachedBluetoothDevice implements Comparable<CachedBluetoothDevice> 
                 LocalBluetoothProfileManager profileManager = LocalBluetoothProfileManager
                         .getProfileManager(mLocalManager, profile);
                 profileManager.setPreferred(mDevice, false);
+                disconnectConnected(profile);
                 queueCommand(new BluetoothJob(BluetoothCommand.CONNECT, this, profile));
             }
         }
@@ -432,7 +443,22 @@ public class CachedBluetoothDevice implements Comparable<CachedBluetoothDevice> 
         mConnectAttempted = SystemClock.elapsedRealtime();
         // Reset the only-show-one-error-dialog tracking variable
         mIsConnectingErrorPossible = true;
+        disconnectConnected(profile);
         queueCommand(new BluetoothJob(BluetoothCommand.CONNECT, this, profile));
+    }
+
+    private void disconnectConnected(Profile profile) {
+        LocalBluetoothProfileManager profileManager =
+            LocalBluetoothProfileManager.getProfileManager(mLocalManager, profile);
+        CachedBluetoothDeviceManager cachedDeviceManager = mLocalManager.getCachedDeviceManager();
+        Set<BluetoothDevice> devices = profileManager.getConnectedDevices();
+        if (devices == null) return;
+        for (BluetoothDevice device : devices) {
+            CachedBluetoothDevice cachedDevice = cachedDeviceManager.findDevice(device);
+            if (cachedDevice != null) {
+                queueCommand(new BluetoothJob(BluetoothCommand.DISCONNECT, cachedDevice, profile));
+            }
+        }
     }
 
     private boolean connectInt(CachedBluetoothDevice cachedDevice, Profile profile) {
@@ -665,26 +691,28 @@ public class CachedBluetoothDevice implements Comparable<CachedBluetoothDevice> 
             boolean printUuids = true;
             BluetoothClass bluetoothClass = mDevice.getBluetoothClass();
 
-            if (bluetoothClass.doesClassMatch(BluetoothClass.PROFILE_HEADSET) !=
-                mProfiles.contains(Profile.HEADSET)) {
-                Log.v(TAG, "headset classbits != uuid");
-                printUuids = true;
-            }
+            if (bluetoothClass != null) {
+                if (bluetoothClass.doesClassMatch(BluetoothClass.PROFILE_HEADSET) !=
+                    mProfiles.contains(Profile.HEADSET)) {
+                    Log.v(TAG, "headset classbits != uuid");
+                    printUuids = true;
+                }
 
-            if (bluetoothClass.doesClassMatch(BluetoothClass.PROFILE_A2DP) !=
-                mProfiles.contains(Profile.A2DP)) {
-                Log.v(TAG, "a2dp classbits != uuid");
-                printUuids = true;
-            }
+                if (bluetoothClass.doesClassMatch(BluetoothClass.PROFILE_A2DP) !=
+                    mProfiles.contains(Profile.A2DP)) {
+                    Log.v(TAG, "a2dp classbits != uuid");
+                    printUuids = true;
+                }
 
-            if (bluetoothClass.doesClassMatch(BluetoothClass.PROFILE_OPP) !=
-                mProfiles.contains(Profile.OPP)) {
-                Log.v(TAG, "opp classbits != uuid");
-                printUuids = true;
+                if (bluetoothClass.doesClassMatch(BluetoothClass.PROFILE_OPP) !=
+                    mProfiles.contains(Profile.OPP)) {
+                    Log.v(TAG, "opp classbits != uuid");
+                    printUuids = true;
+                }
             }
 
             if (printUuids) {
-                Log.v(TAG, "Class: " + bluetoothClass.toString());
+                if (bluetoothClass != null) Log.v(TAG, "Class: " + bluetoothClass.toString());
                 Log.v(TAG, "UUID:");
                 for (int i = 0; i < uuids.length; i++) {
                     Log.v(TAG, "  " + uuids[i]);
