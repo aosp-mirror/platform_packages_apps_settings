@@ -141,7 +141,7 @@ public class Memory extends PreferenceActivity {
         IMountService mountService = getMountService();
         try {
             if (mountService != null) {
-                mountService.unmountMedia(Environment.getExternalStorageDirectory().toString());
+                mountService.unmountVolume(Environment.getExternalStorageDirectory().toString());
             } else {
                 Log.e(TAG, "Mount service is null, can't unmount");
             }
@@ -155,7 +155,7 @@ public class Memory extends PreferenceActivity {
         IMountService mountService = getMountService();
         try {
             if (mountService != null) {
-                mountService.mountMedia(Environment.getExternalStorageDirectory().toString());
+                mountService.mountVolume(Environment.getExternalStorageDirectory().toString());
             } else {
                 Log.e(TAG, "Mount service is null, can't mount");
             }

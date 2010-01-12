@@ -169,7 +169,7 @@ public class SdCardSettings extends Activity
     OnClickListener mUnmountButtonHandler = new OnClickListener() {
         public void onClick(View v) {
             try {
-                mMountService.unmountMedia(Environment.getExternalStorageDirectory().toString());
+                mMountService.unmountVolume(Environment.getExternalStorageDirectory().toString());
             } catch (RemoteException ex) {
             }
         }
@@ -178,7 +178,7 @@ public class SdCardSettings extends Activity
     OnClickListener mFormatButtonHandler = new OnClickListener() {
         public void onClick(View v) {
             try {
-                mMountService.formatMedia(Environment.getExternalStorageDirectory().toString());
+                mMountService.formatVolume(Environment.getExternalStorageDirectory().toString());
             } catch (RemoteException ex) {
             }
         }
