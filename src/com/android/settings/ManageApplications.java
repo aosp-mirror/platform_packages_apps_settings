@@ -17,11 +17,12 @@
 package com.android.settings;
 
 import com.android.settings.R;
+
 import android.app.ActivityManager;
 import android.app.AlertDialog;
 import android.app.Dialog;
-import android.app.ListActivity;
 import android.app.ProgressDialog;
+import android.app.TabActivity;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -42,8 +43,8 @@ import android.os.Handler;
 import android.os.Message;
 import android.os.SystemClock;
 import android.text.format.Formatter;
-import android.util.Config;
 import android.util.Log;
+import android.util.SparseArray;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -56,6 +57,7 @@ import android.widget.Filter;
 import android.widget.Filterable;
 import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.TabHost;
 import android.widget.TextView;
 import android.widget.AdapterView.OnItemClickListener;
 
@@ -100,23 +102,23 @@ import java.util.concurrent.CountDownLatch;
  *  If the user selects an application, extended info(like size, uninstall/clear data options,
  *  permissions info etc.,) is displayed via the InstalledAppDetails activity.
  */
-public class ManageApplications extends ListActivity implements
+public class ManageApplications extends TabActivity implements
         OnItemClickListener, DialogInterface.OnCancelListener,
-        DialogInterface.OnClickListener {
+        TabHost.TabContentFactory,
+        TabHost.OnTabChangeListener {
     // TAG for this activity
     private static final String TAG = "ManageApplications";
     private static final String PREFS_NAME = "ManageAppsInfo.prefs";
     private static final String PREF_DISABLE_CACHE = "disableCache";
     
     // Log information boolean
-    private boolean localLOGV = Config.LOGV || false;
+    private boolean localLOGV = false;
     private static final boolean DEBUG_SIZE = false;
     private static final boolean DEBUG_TIME = false;
     
     // attributes used as keys when passing values to InstalledAppDetails activity
-    public static final String APP_PKG_PREFIX = "com.android.settings.";
-    public static final String APP_PKG_NAME = APP_PKG_PREFIX+"ApplicationPkgName";
-    public static final String APP_CHG = APP_PKG_PREFIX+"changed";
+    public static final String APP_PKG_NAME = "pkg";
+    public static final String APP_CHG = "chg";
     
     // attribute name used in receiver for tagging names of added/deleted packages
     private static final String ATTR_PKG_NAME="p";
@@ -141,8 +143,6 @@ public class ManageApplications extends ListActivity implements
     public static final int FILTER_OPTIONS = MENU_OPTIONS_BASE + 3;
     public static final int SORT_ORDER_ALPHA = MENU_OPTIONS_BASE + 4;
     public static final int SORT_ORDER_SIZE = MENU_OPTIONS_BASE + 5;
-    // Alert Dialog presented to user to find out the filter option
-    private AlertDialog mAlertDlg;
     // sort order
     private int mSortOrder = SORT_ORDER_ALPHA;
     // Filter value
@@ -1554,6 +1554,10 @@ public class ManageApplications extends ListActivity implements
         }
     }
 
+    static final String TAB_DOWNLOADED = "Downloaded";
+    static final String TAB_RUNNING = "Running";
+    static final String TAB_ALL = "All";
+    private View mRootView;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -1564,9 +1568,11 @@ public class ManageApplications extends ListActivity implements
         }
         Intent intent = getIntent();
         String action = intent.getAction();
+        String defaultTabTag = TAB_DOWNLOADED;
         if (action.equals(Intent.ACTION_MANAGE_PACKAGE_STORAGE)) {
             mSortOrder = SORT_ORDER_SIZE;
             mFilterApps = FILTER_APPS_ALL;
+            defaultTabTag = TAB_ALL;
             mSizesFirst = true;
         }
         mPm = getPackageManager();
@@ -1574,20 +1580,20 @@ public class ManageApplications extends ListActivity implements
         requestWindowFeature(Window.FEATURE_RIGHT_ICON);
         requestWindowFeature(Window.FEATURE_PROGRESS);
         requestWindowFeature(Window.FEATURE_INDETERMINATE_PROGRESS);
-        setContentView(R.layout.compute_sizes);
         showLoadingMsg();
-        mDefaultAppIcon =Resources.getSystem().getDrawable(
+        mDefaultAppIcon = Resources.getSystem().getDrawable(
                 com.android.internal.R.drawable.sym_def_app_icon);
         mInvalidSizeStr = getText(R.string.invalid_size_value);
         mComputingSizeStr = getText(R.string.computing_size);
         // initialize the inflater
         mInflater = (LayoutInflater)getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        mRootView = mInflater.inflate(R.layout.compute_sizes, null);
         mReceiver = new PackageIntentReceiver();
         mObserver = new PkgSizeObserver();
         // Create adapter and list view here
         List<ApplicationInfo> appList = getInstalledApps(mSortOrder);
         mAppInfoAdapter = new AppInfoAdapter(this, appList);
-        ListView lv= (ListView) findViewById(android.R.id.list);
+        ListView lv = (ListView) mRootView.findViewById(android.R.id.list);
         lv.setOnItemClickListener(this);
         lv.setSaveEnabled(true);
         lv.setItemsCanFocus(true);
@@ -1607,6 +1613,18 @@ public class ManageApplications extends ListActivity implements
         if (DEBUG_TIME) {
             Log.i(TAG, "Took " + (SystemClock.elapsedRealtime()-sStart) + " ms to init cache");
         }
+        final TabHost tabHost = getTabHost();
+        tabHost.addTab(tabHost.newTabSpec(TAB_DOWNLOADED)
+                .setIndicator(getString(R.string.filter_apps_third_party))
+                .setContent(this));
+        tabHost.addTab(tabHost.newTabSpec(TAB_RUNNING)
+                .setIndicator(getString(R.string.filter_apps_running))
+                .setContent(this));
+        tabHost.addTab(tabHost.newTabSpec(TAB_ALL)
+                .setIndicator(getString(R.string.filter_apps_all))
+                .setContent(this));
+        tabHost.setCurrentTabByTag(defaultTabTag);
+        tabHost.setOnTabChangedListener(this);
     }
     
     protected void onDestroy() {
@@ -1922,8 +1940,6 @@ public class ManageApplications extends ListActivity implements
                 .setIcon(android.R.drawable.ic_menu_sort_alphabetically);
         menu.add(0, SORT_ORDER_SIZE, 2, R.string.sort_order_size)
                 .setIcon(android.R.drawable.ic_menu_sort_by_size); 
-        menu.add(0, FILTER_OPTIONS, 3, R.string.filter)
-                .setIcon(R.drawable.ic_menu_filter_settings);
         return true;
     }
     
@@ -1932,7 +1948,6 @@ public class ManageApplications extends ListActivity implements
         if (mFirst) {
             menu.findItem(SORT_ORDER_ALPHA).setVisible(mSortOrder != SORT_ORDER_ALPHA);
             menu.findItem(SORT_ORDER_SIZE).setVisible(mSortOrder != SORT_ORDER_SIZE);
-            menu.findItem(FILTER_OPTIONS).setVisible(true);
             return true;
         }
         return false;
@@ -1943,20 +1958,6 @@ public class ManageApplications extends ListActivity implements
         int menuId = item.getItemId();
         if ((menuId == SORT_ORDER_ALPHA) || (menuId == SORT_ORDER_SIZE)) {
             sendMessageToHandler(REORDER_LIST, menuId);
-        } else if (menuId == FILTER_OPTIONS) {
-            // Pick up the selection value from the list of added choice items.
-            int selection = mFilterApps - MENU_OPTIONS_BASE;
-            if (mAlertDlg == null) {
-                mAlertDlg = new AlertDialog.Builder(this).
-                        setTitle(R.string.filter_dlg_title).
-                        setNeutralButton(R.string.cancel, this).
-                        setSingleChoiceItems(new CharSequence[] {getText(R.string.filter_apps_all),
-                                getText(R.string.filter_apps_running),
-                                getText(R.string.filter_apps_third_party)},
-                                selection, this).
-                        create();
-            }
-            mAlertDlg.show();
         }
         return true;
     }
@@ -1973,22 +1974,22 @@ public class ManageApplications extends ListActivity implements
         finish();
     }
 
-    public void onClick(DialogInterface dialog, int which) {
+    public View createTabContent(String tag) {
+        return mRootView;
+    }
+
+    public void onTabChanged(String tabId) {
         int newOption;
-        switch (which) {
-        // Make sure that values of 0, 1, 2 match options all, running, third_party when
-        // created via the AlertDialog.Builder
-        case FILTER_APPS_ALL:
-            break;
-        case FILTER_APPS_RUNNING:
-            break;
-        case FILTER_APPS_THIRD_PARTY:
-            break;
-        default:
+        if (TAB_DOWNLOADED.equalsIgnoreCase(tabId)) {
+            newOption = FILTER_APPS_THIRD_PARTY;
+        } else if (TAB_RUNNING.equalsIgnoreCase(tabId)) {
+            newOption = FILTER_APPS_RUNNING;
+        } else if (TAB_ALL.equalsIgnoreCase(tabId)) {
+            newOption = FILTER_APPS_ALL;
+        } else {
+            // Invalid option. Do nothing
             return;
         }
-        newOption = which;
-        mAlertDlg.dismiss();
         sendMessageToHandler(REORDER_LIST, newOption);
     }
 }
