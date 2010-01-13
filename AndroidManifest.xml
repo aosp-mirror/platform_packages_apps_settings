@@ -374,6 +374,19 @@
             </intent-filter>
         </activity>
 
+        <activity android:name="DeviceAdminSettings"
+                android:label="@string/device_admin_settings_title"
+                android:clearTaskOnLaunch="true"
+                >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <action android:name="android.app.action.ADD_DEVICE_ADMIN" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.VOICE_LAUNCH" />
+                <category android:name="com.android.settings.SHORTCUT" />
+            </intent-filter>
+        </activity>
+
         <activity android:name="IccLockSettings" android:label="@string/sim_lock_settings"
                 android:process="com.android.phone">
             <intent-filter>

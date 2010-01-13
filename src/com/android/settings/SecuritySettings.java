@@ -184,6 +184,19 @@ public class SecuritySettings extends PreferenceActivity {
         showPassword.setPersistent(false);
         passwordsCat.addPreference(showPassword);
 
+        // Device policies
+        PreferenceCategory devicePoliciesCat = new PreferenceCategory(this);
+        devicePoliciesCat.setTitle(R.string.device_admin_title);
+        root.addPreference(devicePoliciesCat);
+
+        Preference deviceAdminButton = new Preference(this);
+        deviceAdminButton.setTitle(R.string.manage_device_admin);
+        deviceAdminButton.setSummary(R.string.manage_device_admin_summary);
+        Intent deviceAdminIntent = new Intent();
+        deviceAdminIntent.setClass(this, DeviceAdminSettings.class);
+        deviceAdminButton.setIntent(deviceAdminIntent);
+        devicePoliciesCat.addPreference(deviceAdminButton);
+
         // Credential storage
         PreferenceCategory credentialsCat = new PreferenceCategory(this);
         credentialsCat.setTitle(R.string.credentials_category);
