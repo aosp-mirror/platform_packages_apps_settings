@@ -27,7 +27,7 @@ import android.util.Log;
 
 public class DockEventReceiver extends BroadcastReceiver {
 
-    private static final boolean DEBUG = false;
+    private static final boolean DEBUG = DockService.DEBUG;
 
     private static final String TAG = "DockEventReceiver";
 
@@ -73,6 +73,13 @@ public class DockEventReceiver extends BroadcastReceiver {
                 default:
                     if (DEBUG) Log.e(TAG, "Unknown state");
                     break;
+            }
+        } else if (BluetoothAdapter.ACTION_STATE_CHANGED.equals(intent.getAction())) {
+            int btState = intent.getIntExtra(BluetoothAdapter.EXTRA_STATE, BluetoothAdapter.ERROR);
+            if (btState == BluetoothAdapter.STATE_ON) {
+                Intent i = new Intent(intent);
+                i.setClass(context, DockService.class);
+                beginStartingService(context, i);
             }
         }
     }
