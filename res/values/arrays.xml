@@ -17,7 +17,7 @@
 ** limitations under the License.
 */
 -->
-<resources>
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
     <!-- Choices for timezone picker first level.
          These values will be used as search terms for TimeZone displayName
          strings. --> <skip />
@@ -179,6 +179,56 @@
     </string-array>
 
     <!-- Wi-Fi settings -->
+
+    <!-- Match this with the order of NetworkInfo.DetailedState. --> <skip />
+    <!-- Wi-Fi settings. The status messages when the network is unknown. -->
+    <string-array name="wifi_status">
+        <!-- Status message of Wi-Fi when it is idle. -->
+        <item></item>
+        <!-- Status message of Wi-Fi when it is scanning. -->
+        <item>Scanning\u2026</item>
+        <!-- Status message of Wi-Fi when it is connecting. -->
+        <item>Connecting\u2026</item>
+        <!-- Status message of Wi-Fi when it is authenticating. -->
+        <item>Authenticating\u2026</item>
+        <!-- Status message of Wi-Fi when it is obtaining IP address. -->
+        <item>Obtaining IP address\u2026</item>
+        <!-- Status message of Wi-Fi when it is connected. -->
+        <item>Connected</item>
+        <!-- Status message of Wi-Fi when it is suspended. -->
+        <item>Suspended</item>
+        <!-- Status message of Wi-Fi when it is disconnecting. -->
+        <item>Disconnecting\u2026</item>
+        <!-- Status message of Wi-Fi when it is disconnected. -->
+        <item>Disconnected</item>
+        <!-- Status message of Wi-Fi when it is a failure. -->
+        <item>Unsuccessful</item>
+    </string-array>
+
+    <!-- Match this with the order of NetworkInfo.DetailedState. --> <skip />
+    <!-- Wi-Fi settings. The status messages when the network is known. -->
+    <string-array name="wifi_status_with_ssid">
+        <!-- Status message of Wi-Fi when it is idle. -->
+        <item></item>
+        <!-- Status message of Wi-Fi when it is scanning. -->
+        <item>Scanning\u2026</item>
+        <!-- Status message of Wi-Fi when it is connecting to a network. -->
+        <item>Connecting to <xliff:g id="network_name">%1$s</xliff:g>\u2026</item>
+        <!-- Status message of Wi-Fi when it is authenticating with a network. -->
+        <item>Authenticating with <xliff:g id="network_name">%1$s</xliff:g>\u2026</item>
+        <!-- Status message of Wi-Fi when it is obtaining IP address from a network. -->
+        <item>Obtaining IP address from <xliff:g id="network_name">%1$s</xliff:g>\u2026</item>
+        <!-- Status message of Wi-Fi when it is connected to a network. -->
+        <item>Connected to <xliff:g id="network_name">%1$s</xliff:g></item>
+        <!-- Status message of Wi-Fi when it is suspended. -->
+        <item>Suspended</item>
+        <!-- Status message of Wi-Fi when it is disconnecting from a network. -->
+        <item>Disconnecting from <xliff:g id="network_name">%1$s</xliff:g>\u2026</item>
+        <!-- Status message of Wi-Fi when it is disconnected. -->
+        <item>Disconnected</item>
+        <!-- Status message of Wi-Fi when it is a failure. -->
+        <item>Unsuccessful</item>
+    </string-array>
 
     <!-- Match this with code. --> <skip />
     <!-- Wi-Fi settings.  The type of security a Wi-Fi network has.  The user can choose this when he adds a manual network, or configures an existing network. -->

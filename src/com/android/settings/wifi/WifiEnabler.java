@@ -24,6 +24,8 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.net.NetworkInfo;
+import android.net.wifi.SupplicantState;
+import android.net.wifi.WifiInfo;
 import android.net.wifi.WifiManager;
 import android.preference.Preference;
 import android.preference.CheckBoxPreference;
@@ -45,9 +47,12 @@ public class WifiEnabler implements Preference.OnPreferenceChangeListener {
             if (WifiManager.WIFI_STATE_CHANGED_ACTION.equals(action)) {
                 handleWifiStateChanged(intent.getIntExtra(
                         WifiManager.EXTRA_WIFI_STATE, WifiManager.WIFI_STATE_UNKNOWN));
+            } else if (WifiManager.SUPPLICANT_STATE_CHANGED_ACTION.equals(action)) {
+                handleStateChanged(WifiInfo.getDetailedStateOf((SupplicantState)
+                        intent.getParcelableExtra(WifiManager.EXTRA_NEW_STATE)));
             } else if (WifiManager.NETWORK_STATE_CHANGED_ACTION.equals(action)) {
-                handleNetworkStateChanged((NetworkInfo)
-                        intent.getParcelableExtra(WifiManager.EXTRA_NETWORK_INFO));
+                handleStateChanged(((NetworkInfo) intent.getParcelableExtra(
+                        WifiManager.EXTRA_NETWORK_INFO)).getDetailedState());
             }
         }
     };
@@ -66,6 +71,8 @@ public class WifiEnabler implements Preference.OnPreferenceChangeListener {
         checkBox.setPersistent(false);
         
         mIntentFilter = new IntentFilter(WifiManager.WIFI_STATE_CHANGED_ACTION);
+        // The order matters! We really should not depend on this. :(
+        mIntentFilter.addAction(WifiManager.SUPPLICANT_STATE_CHANGED_ACTION);
         mIntentFilter.addAction(WifiManager.NETWORK_STATE_CHANGED_ACTION);
     }
 
@@ -128,11 +135,14 @@ public class WifiEnabler implements Preference.OnPreferenceChangeListener {
         }
     }
 
-    private void handleNetworkStateChanged(NetworkInfo networkInfo) {
-        if (mWifiManager.isWifiEnabled()) {
-            String summary = WifiStatus.getStatus(mContext, 
-                    mWifiManager.getConnectionInfo().getSSID(), networkInfo.getDetailedState());
-            mCheckBox.setSummary(summary);
+    private void handleStateChanged(NetworkInfo.DetailedState state) {
+        // WifiInfo is valid if and only if Wi-Fi is enabled.
+        // Here we use the state of the check box as an optimization.
+        if (state != null && mCheckBox.isChecked()) {
+            WifiInfo info = mWifiManager.getConnectionInfo();
+            if (info != null) {
+                mCheckBox.setSummary(Summary.get(mContext, info.getSSID(), state));
+            }
         }
     }
 }
