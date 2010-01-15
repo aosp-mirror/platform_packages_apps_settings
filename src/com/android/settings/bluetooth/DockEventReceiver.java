@@ -47,7 +47,8 @@ public class DockEventReceiver extends BroadcastReceiver {
         if (intent == null)
             return;
 
-        int state = intent.getIntExtra(Intent.EXTRA_DOCK_STATE, EXTRA_INVALID);
+        int state = intent.getIntExtra(Intent.EXTRA_DOCK_STATE, intent.getIntExtra(
+                BluetoothAdapter.EXTRA_STATE, EXTRA_INVALID));
         BluetoothDevice device = intent.getParcelableExtra(BluetoothDevice.EXTRA_DEVICE);
 
         if (DEBUG) {
@@ -76,7 +77,7 @@ public class DockEventReceiver extends BroadcastReceiver {
             }
         } else if (BluetoothAdapter.ACTION_STATE_CHANGED.equals(intent.getAction())) {
             int btState = intent.getIntExtra(BluetoothAdapter.EXTRA_STATE, BluetoothAdapter.ERROR);
-            if (btState == BluetoothAdapter.STATE_ON) {
+            if (btState != BluetoothAdapter.STATE_TURNING_ON) {
                 Intent i = new Intent(intent);
                 i.setClass(context, DockService.class);
                 beginStartingService(context, i);
