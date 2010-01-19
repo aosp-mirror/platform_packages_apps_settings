@@ -133,6 +133,17 @@
                 android:targetClass="com.android.settings.LanguageSettings" />
         </com.android.settings.IconPreferenceScreen>
 
+        <!-- Dock -->
+
+        <com.android.settings.IconPreferenceScreen
+            android:key="dock_settings"
+            android:title="@string/dock_settings">
+            <intent
+                android:action="android.intent.action.MAIN"
+                android:targetPackage="com.android.settings"
+                android:targetClass="com.android.settings.DockSettings" />
+        </com.android.settings.IconPreferenceScreen>
+
         <!-- Accessibility feedback -->
 
         <com.android.settings.IconPreferenceScreen
