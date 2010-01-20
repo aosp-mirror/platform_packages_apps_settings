@@ -136,6 +136,8 @@ public abstract class LocalBluetoothProfileManager {
 
     public abstract boolean isPreferred(BluetoothDevice device);
 
+    public abstract int getPreferred(BluetoothDevice device);
+
     public abstract void setPreferred(BluetoothDevice device, boolean preferred);
 
     public boolean isConnected(BluetoothDevice device) {
@@ -210,6 +212,11 @@ public abstract class LocalBluetoothProfileManager {
         @Override
         public boolean isPreferred(BluetoothDevice device) {
             return mService.getSinkPriority(device) > BluetoothA2dp.PRIORITY_OFF;
+        }
+
+        @Override
+        public int getPreferred(BluetoothDevice device) {
+            return mService.getSinkPriority(device);
         }
 
         @Override
@@ -332,6 +339,11 @@ public abstract class LocalBluetoothProfileManager {
         }
 
         @Override
+        public int getPreferred(BluetoothDevice device) {
+            return mService.getPriority(device);
+        }
+
+        @Override
         public void setPreferred(BluetoothDevice device, boolean preferred) {
             if (preferred) {
                 if (mService.getPriority(device) < BluetoothHeadset.PRIORITY_ON) {
@@ -400,6 +412,11 @@ public abstract class LocalBluetoothProfileManager {
         @Override
         public boolean isPreferred(BluetoothDevice device) {
             return false;
+        }
+
+        @Override
+        public int getPreferred(BluetoothDevice device) {
+            return -1;
         }
 
         @Override

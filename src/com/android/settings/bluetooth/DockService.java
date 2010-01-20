@@ -19,9 +19,10 @@ package com.android.settings.bluetooth;
 import android.app.AlertDialog;
 import android.app.Notification;
 import android.app.Service;
+import android.bluetooth.BluetoothA2dp;
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
-import android.content.BroadcastReceiver;
+import android.bluetooth.BluetoothHeadset;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -41,13 +42,15 @@ import android.widget.CompoundButton;
 import com.android.settings.R;
 import com.android.settings.bluetooth.LocalBluetoothProfileManager.Profile;
 
+import java.util.List;
+
 public class DockService extends Service implements AlertDialog.OnMultiChoiceClickListener,
         DialogInterface.OnClickListener, DialogInterface.OnDismissListener,
         CompoundButton.OnCheckedChangeListener {
 
     private static final String TAG = "DockService";
 
-    private static final boolean DEBUG = false;
+    static final boolean DEBUG = false;
 
     // Time allowed for the device to be undocked and redocked without severing
     // the bluetooth connection
@@ -87,7 +90,6 @@ public class DockService extends Service implements AlertDialog.OnMultiChoiceCli
     private BluetoothDevice mPendingDevice;
     private int mPendingStartId;
 
-    private boolean mRegistered;
     private Object mBtSynchroObject = new Object();
 
     @Override
@@ -111,10 +113,6 @@ public class DockService extends Service implements AlertDialog.OnMultiChoiceCli
             mDialog.dismiss();
             mDialog = null;
         }
-        if (mRegistered) {
-            unregisterReceiver(mReceiver);
-            mRegistered = false;
-        }
         mServiceLooper.quit();
     }
 
@@ -134,6 +132,12 @@ public class DockService extends Service implements AlertDialog.OnMultiChoiceCli
 
             // NOTE: We MUST not call stopSelf() directly, since we need to
             // make sure the wake lock acquired by the Receiver is released.
+            DockEventReceiver.finishStartingService(this, startId);
+            return START_NOT_STICKY;
+        }
+
+        if (BluetoothAdapter.ACTION_STATE_CHANGED.equals(intent.getAction())) {
+            handleBtStateChange(intent);
             DockEventReceiver.finishStartingService(this, startId);
             return START_NOT_STICKY;
         }
@@ -407,12 +411,11 @@ public class DockService extends Service implements AlertDialog.OnMultiChoiceCli
         return items;
     }
 
-    private final BroadcastReceiver mReceiver = new BroadcastReceiver() {
-        @Override
-        public void onReceive(Context context, Intent intent) {
-            int state = intent.getIntExtra(BluetoothAdapter.EXTRA_STATE, BluetoothAdapter.ERROR);
-            if (state == BluetoothAdapter.STATE_ON && mPendingDevice != null) {
-                synchronized (mBtSynchroObject) {
+    public void handleBtStateChange(Intent intent) {
+        int btState = intent.getIntExtra(BluetoothAdapter.EXTRA_STATE, BluetoothAdapter.ERROR);
+        if (btState == BluetoothAdapter.STATE_ON) {
+            synchronized (mBtSynchroObject) {
+                if (mPendingDevice != null) {
                     if (mPendingDevice.equals(mDevice)) {
                         if(DEBUG) Log.d(TAG, "applying settings");
                         applyBtSettings(mPendingDevice, mPendingStartId);
@@ -423,10 +426,46 @@ public class DockService extends Service implements AlertDialog.OnMultiChoiceCli
 
                     mPendingDevice = null;
                     DockEventReceiver.finishStartingService(mContext, mPendingStartId);
+                } else {
+                    // Reconnect if docked and bluetooth was enabled by user.
+                    Intent i = registerReceiver(null, new IntentFilter(Intent.ACTION_DOCK_EVENT));
+                    if (i != null) {
+                        int state = i.getIntExtra(Intent.EXTRA_DOCK_STATE,
+                                Intent.EXTRA_DOCK_STATE_UNDOCKED);
+                        if (state != Intent.EXTRA_DOCK_STATE_UNDOCKED) {
+                            BluetoothDevice device = i
+                                    .getParcelableExtra(BluetoothDevice.EXTRA_DEVICE);
+                            if (device != null) {
+                                connectIfEnabled(device);
+                            }
+                        }
+                    }
                 }
             }
         }
-    };
+    }
+
+    private synchronized void connectIfEnabled(BluetoothDevice device) {
+        CachedBluetoothDevice cachedDevice = getCachedBluetoothDevice(mContext, mBtManager, device);
+        List<Profile> profiles = cachedDevice.getConnectableProfiles();
+        for (int i = 0; i < profiles.size(); i++) {
+            LocalBluetoothProfileManager profileManager = LocalBluetoothProfileManager
+                    .getProfileManager(mBtManager, profiles.get(i));
+            int auto;
+            if (Profile.A2DP == profiles.get(i)) {
+                auto = BluetoothA2dp.PRIORITY_AUTO_CONNECT;
+            } else if (Profile.HEADSET == profiles.get(i)) {
+                auto = BluetoothHeadset.PRIORITY_AUTO_CONNECT;
+            } else {
+                continue;
+            }
+
+            if (profileManager.getPreferred(device) == auto) {
+                cachedDevice.connect();
+                break;
+            }
+        }
+    }
 
     private synchronized void applyBtSettings(final BluetoothDevice device, int startId) {
         if (device == null || mProfiles == null || mCheckedItems == null)
@@ -444,12 +483,8 @@ public class DockService extends Service implements AlertDialog.OnMultiChoiceCli
                             if (mPendingDevice != null && mPendingDevice.equals(mDevice)) {
                                 return;
                             }
-                            if (!mRegistered) {
-                                registerReceiver(mReceiver, new IntentFilter(
-                                        BluetoothAdapter.ACTION_STATE_CHANGED));
-                            }
+
                             mPendingDevice = device;
-                            mRegistered = true;
                             mPendingStartId = startId;
                             if (btState != BluetoothAdapter.STATE_TURNING_ON) {
                                 // BT is off. Enable it
