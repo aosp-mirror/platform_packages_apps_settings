@@ -27,7 +27,7 @@ public class ChooseLockSettingsHelper {
 
     public ChooseLockSettingsHelper(Activity activity) {
         mActivity = activity;
-        mLockPatternUtils = new LockPatternUtils(activity.getContentResolver());
+        mLockPatternUtils = new LockPatternUtils(activity);
     }
 
     public LockPatternUtils utils() {

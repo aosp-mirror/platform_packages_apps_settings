@@ -80,7 +80,7 @@ public class ConfirmLockPattern extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        mLockPatternUtils = new LockPatternUtils(getContentResolver());
+        mLockPatternUtils = new LockPatternUtils(this);
 
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.confirm_lock_pattern);
@@ -94,7 +94,7 @@ public class ConfirmLockPattern extends Activity {
         final LinearLayoutWithDefaultTouchRecepient topLayout
                 = (LinearLayoutWithDefaultTouchRecepient) findViewById(
                 R.id.topLayout);
-        topLayout.setDefaultTouchRecepient(mLockPatternView);        
+        topLayout.setDefaultTouchRecepient(mLockPatternView);
 
         Intent intent = getIntent();
         if (intent != null) {
@@ -161,7 +161,7 @@ public class ConfirmLockPattern extends Activity {
                 } else {
                     mFooterTextView.setText(R.string.lockpattern_need_to_unlock_footer);
                 }
-                
+
                 mLockPatternView.setEnabled(true);
                 mLockPatternView.enableInput();
                 break;
@@ -176,7 +176,7 @@ public class ConfirmLockPattern extends Activity {
                 } else {
                     mFooterTextView.setText(R.string.lockpattern_need_to_unlock_wrong_footer);
                 }
-                
+
                 mLockPatternView.setDisplayMode(LockPatternView.DisplayMode.Wrong);
                 mLockPatternView.setEnabled(true);
                 mLockPatternView.enableInput();

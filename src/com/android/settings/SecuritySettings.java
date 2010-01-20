@@ -89,6 +89,10 @@ public class SecuritySettings extends PreferenceActivity {
     private static final String LOCATION_GPS = "location_gps";
     private static final String ASSISTED_GPS = "assisted_gps";
 
+    // Default password lengths if device policy isn't in effect. Ignored otherwise.
+    private static final int PASSWORD_MIN_LENGTH = 4;
+    private static final int PASSWORD_MAX_LENGTH = 16;
+
     // Credential storage
     private CredentialStorage mCredentialStorage = new CredentialStorage();
 
@@ -217,14 +221,12 @@ public class SecuritySettings extends PreferenceActivity {
         if ("none".equals(value)) {
             mChooseLockSettingsHelper.launchConfirmationActivity(CONFIRM_EXISTING_REQUEST);
         } else if ("password".equals(value) || "pin".equals(value)) {
-            final int minLength = 4; // TODO: get from policy store.
-            final int maxLength = 16;
             final int mode = "password".equals(value)
                     ? LockPatternUtils.MODE_PASSWORD : LockPatternUtils.MODE_PIN;
             Intent intent = new Intent().setClassName(PACKAGE, CHOOSE_LOCK_PIN);
             intent.putExtra(LockPatternUtils.PASSWORD_TYPE_KEY, mode);
-            intent.putExtra(ChooseLockPassword.PASSWORD_MIN_KEY, minLength);
-            intent.putExtra(ChooseLockPassword.PASSWORD_MAX_KEY, maxLength);
+            intent.putExtra(ChooseLockPassword.PASSWORD_MIN_KEY, PASSWORD_MIN_LENGTH);
+            intent.putExtra(ChooseLockPassword.PASSWORD_MAX_KEY, PASSWORD_MAX_LENGTH);
             startActivityForResult(intent, UPDATE_PASSWORD_REQUEST);
         } else if ("pattern".equals(value)) {
             boolean showTutorial = !lockPatternUtils.isPatternEverChosen();
