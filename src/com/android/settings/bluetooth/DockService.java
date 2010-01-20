@@ -397,7 +397,7 @@ public class DockService extends Service implements AlertDialog.OnMultiChoiceCli
 
         mStartIdAssociatedWithDialog = startId;
         mDialog = ab.create();
-        mDialog.getWindow().setType(WindowManager.LayoutParams.TYPE_SYSTEM_DIALOG);
+        mDialog.getWindow().setType(WindowManager.LayoutParams.TYPE_KEYGUARD_DIALOG);
         mDialog.setOnDismissListener(service);
         mDialog.show();
         return true;
