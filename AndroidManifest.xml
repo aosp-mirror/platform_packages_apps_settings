@@ -423,31 +423,29 @@
             android:theme="@android:style/Theme.NoTitleBar">
         </activity>
 
-        <activity android:name="ChooseLockPattern" android:label="@string/lockpattern_change_lock_pattern_label">
+        <activity android:name="ChooseLockGeneric"
+                android:theme="@android:style/Theme.NoDisplay">
             <intent-filter>
-                <action android:name="android.intent.action.DEFAULT" />
+                <action android:name="android.app.action.SET_NEW_PASSWORD" />
+                <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
 
-        <activity android:name="ChooseLockPassword" android:label="@string/lockpattern_change_lock_pin_label"
+        <activity android:name="ChooseLockPattern"
+                android:label="@string/lockpattern_change_lock_pattern_label">
+        </activity>
+
+        <activity android:name="ChooseLockPassword"
+                android:label="@string/lockpattern_change_lock_pin_label"
             android:theme="@android:style/Theme.NoTitleBar">
-            <intent-filter>
-                <action android:name="android.intent.action.DEFAULT" />
-            </intent-filter>
         </activity>
 
         <activity android:name="ChooseLockPatternTutorial"
             android:label="@string/lockpattern_change_lock_pattern_label">
-            <intent-filter>
-                <action android:name="android.intent.action.DEFAULT" />
-            </intent-filter>
         </activity>
 
         <activity android:name="ChooseLockPatternExample"
             android:label="@string/lockpattern_change_lock_pattern_label">
-            <intent-filter>
-                <action android:name="android.intent.action.DEFAULT" />
-            </intent-filter>
         </activity>
 
         <activity android:name="ZoneList" android:label="@string/choose_timezone" />

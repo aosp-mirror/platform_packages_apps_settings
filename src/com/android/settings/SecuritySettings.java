@@ -22,9 +22,11 @@ import java.util.Observer;
 
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.app.DevicePolicyManager;
 import android.app.Dialog;
 import android.content.ContentQueryMap;
 import android.content.ContentResolver;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
@@ -103,6 +105,8 @@ public class SecuritySettings extends PreferenceActivity {
     private CheckBoxPreference mGps;
     private CheckBoxPreference mAssistedGps;
 
+    DevicePolicyManager mDPM;
+    
     // These provide support for receiving notification when Location Manager settings change.
     // This is necessary because the Network Location Provider can change settings
     // if the user does not confirm enabling the provider.
@@ -120,6 +124,8 @@ public class SecuritySettings extends PreferenceActivity {
         super.onCreate(savedInstanceState);
         addPreferencesFromResource(R.xml.security_settings);
 
+        mDPM = (DevicePolicyManager)getSystemService(Context.DEVICE_POLICY_SERVICE);
+        
         mChooseLockSettingsHelper = new ChooseLockSettingsHelper(this);
 
         createPreferenceHierarchy();
@@ -217,23 +223,26 @@ public class SecuritySettings extends PreferenceActivity {
     }
 
     protected void handleUpdateUnlockMethod(final String value) {
-        final LockPatternUtils lockPatternUtils = mChooseLockSettingsHelper.utils();
         if ("none".equals(value)) {
-            mChooseLockSettingsHelper.launchConfirmationActivity(CONFIRM_EXISTING_REQUEST);
-        } else if ("password".equals(value) || "pin".equals(value)) {
-            final int mode = "password".equals(value)
-                    ? LockPatternUtils.MODE_PASSWORD : LockPatternUtils.MODE_PIN;
-            Intent intent = new Intent().setClassName(PACKAGE, CHOOSE_LOCK_PIN);
-            intent.putExtra(LockPatternUtils.PASSWORD_TYPE_KEY, mode);
-            intent.putExtra(ChooseLockPassword.PASSWORD_MIN_KEY, PASSWORD_MIN_LENGTH);
-            intent.putExtra(ChooseLockPassword.PASSWORD_MAX_KEY, PASSWORD_MAX_LENGTH);
-            startActivityForResult(intent, UPDATE_PASSWORD_REQUEST);
-        } else if ("pattern".equals(value)) {
-            boolean showTutorial = !lockPatternUtils.isPatternEverChosen();
+            if (mDPM.getPasswordMode() == DevicePolicyManager.PASSWORD_MODE_UNSPECIFIED) {
+                mChooseLockSettingsHelper.launchConfirmationActivity(CONFIRM_EXISTING_REQUEST);
+            }
+        } else {
+            int reqMode;
+            if ("password".equals(value)) {
+                reqMode = LockPatternUtils.MODE_PASSWORD;
+            } else if ( "pin".equals(value)) {
+                reqMode = LockPatternUtils.MODE_PIN;
+            } else {
+                reqMode = LockPatternUtils.MODE_PATTERN;
+            }
+            int minMode = mDPM.getPasswordMode();
+            if (reqMode < minMode) {
+                reqMode = minMode;
+            }
             Intent intent = new Intent();
-            intent.setClassName(PACKAGE, showTutorial ?
-                    LOCK_PATTERN_TUTORIAL : CHOOSE_LOCK_PATTERN);
-            intent.putExtra("key_lock_method", value);
+            intent.setClass(this, ChooseLockGeneric.class);
+            intent.putExtra(LockPatternUtils.PASSWORD_TYPE_KEY, reqMode);
             startActivityForResult(intent, UPDATE_PASSWORD_REQUEST);
         }
     }
@@ -321,9 +330,7 @@ public class SecuritySettings extends PreferenceActivity {
 
         LockPatternUtils lockPatternUtils = mChooseLockSettingsHelper.utils();
         if ((requestCode == CONFIRM_EXISTING_REQUEST) && resultOk) {
-            lockPatternUtils.saveLockPassword(null);
-            lockPatternUtils.setLockPatternEnabled(false);
-            lockPatternUtils.saveLockPattern(null);
+            lockPatternUtils.clearLock();
         }
     }
 

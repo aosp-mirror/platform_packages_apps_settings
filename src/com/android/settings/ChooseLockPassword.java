@@ -79,15 +79,17 @@ public class ChooseLockPassword extends Activity implements OnClickListener {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mLockPatternUtils = new LockPatternUtils(this);
-        if (mLockPatternUtils.isDevicePolicyActive()) {
-            mRequestedMode = mLockPatternUtils.getRequestedPasswordMode();
-            mPasswordMinLength = mLockPatternUtils.getRequestedMinimumPasswordLength();
-        } else {
-            mRequestedMode = getIntent().getIntExtra(LockPatternUtils.PASSWORD_TYPE_KEY,
-                    mRequestedMode);
-            mPasswordMinLength = getIntent().getIntExtra(PASSWORD_MIN_KEY, mPasswordMinLength);
+        mRequestedMode = getIntent().getIntExtra("password_mode", mRequestedMode);
+        mPasswordMinLength = getIntent().getIntExtra("password_min_length", mPasswordMinLength);
+        mPasswordMaxLength = getIntent().getIntExtra("password_max_length", mPasswordMaxLength);
+        int minMode = mLockPatternUtils.getRequestedPasswordMode();
+        if (mRequestedMode < minMode) {
+            mRequestedMode = minMode;
         }
-        mPasswordMaxLength = getIntent().getIntExtra(PASSWORD_MAX_KEY, mPasswordMaxLength);
+        int minLength = mLockPatternUtils.getRequestedMinimumPasswordLength();
+        if (mPasswordMinLength < minLength) {
+            mPasswordMinLength = minLength;
+        }
         initViews();
         mChooseLockSettingsHelper = new ChooseLockSettingsHelper(this);
         if (savedInstanceState == null) {
@@ -188,7 +190,7 @@ public class ChooseLockPassword extends Activity implements OnClickListener {
                             // TODO: move these to LockPatternUtils
                             mLockPatternUtils.setLockPatternEnabled(false);
                             mLockPatternUtils.saveLockPattern(null);
-                            mLockPatternUtils.saveLockPassword(pin);
+                            mLockPatternUtils.saveLockPassword(pin, mRequestedMode);
                             finish();
                         } else {
                             int msg = R.string.lockpassword_confirm_passwords_dont_match;
