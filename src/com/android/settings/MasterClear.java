@@ -53,7 +53,7 @@ public class MasterClear extends Activity {
     private View mFinalView;
     private Button mFinalButton;
 
-    /** 
+    /**
      * The user has gone through the multiple confirmation, so now we go ahead
      * and invoke the Checkin Service to reset the device to its factory-default
      * state (rebooting in the process).
@@ -65,7 +65,7 @@ public class MasterClear extends Activity {
                     return;
                 }
 
-                ICheckinService service = 
+                ICheckinService service =
                         ICheckinService.Stub.asInterface(ServiceManager.getService("checkin"));
                 if (service != null) {
                     try {
@@ -159,7 +159,7 @@ public class MasterClear extends Activity {
      * click in order to initiate a confirmation sequence.  This method is
      * called from various other points in the code to reset the activity to
      * this base state.
-     * 
+     *
      * <p>Reinflating views from resources is expensive and prevents us from
      * caching widget pointers, so we use a single-inflate pattern:  we lazy-
      * inflate each view, caching all of the widget pointers we'll need at the
@@ -184,7 +184,7 @@ public class MasterClear extends Activity {
         mInitialView = null;
         mFinalView = null;
         mInflater = LayoutInflater.from(this);
-        mLockUtils = new LockPatternUtils(getContentResolver());
+        mLockUtils = new LockPatternUtils(this);
 
         establishInitialState();
     }

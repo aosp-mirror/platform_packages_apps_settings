@@ -39,7 +39,7 @@ public class ConfirmLockPassword extends Activity implements OnClickListener {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        mLockPatternUtils = new LockPatternUtils(getContentResolver());
+        mLockPatternUtils = new LockPatternUtils(this);
         initViews();
     }
 

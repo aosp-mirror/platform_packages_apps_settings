@@ -25,15 +25,15 @@ import android.view.View;
 
 public class ChooseLockPatternTutorial extends Activity implements View.OnClickListener {
     private static final int REQUESTCODE_EXAMPLE = 1;
-    
+
     private View mNextButton;
     private View mSkipButton;
-    
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         // Don't show the tutorial if the user has seen it before.
-        LockPatternUtils lockPatternUtils = new LockPatternUtils(getContentResolver());
+        LockPatternUtils lockPatternUtils = new LockPatternUtils(this);
         if (savedInstanceState == null && lockPatternUtils.isPatternEverChosen()) {
             Intent intent = new Intent();
             intent.setClassName("com.android.settings", "com.android.settings.ChooseLockPattern");
@@ -43,7 +43,7 @@ public class ChooseLockPatternTutorial extends Activity implements View.OnClickL
             initViews();
         }
     }
-    
+
     private void initViews() {
         setContentView(R.layout.choose_lock_pattern_tutorial);
         mNextButton = findViewById(R.id.next_button);
@@ -70,6 +70,6 @@ public class ChooseLockPatternTutorial extends Activity implements View.OnClickL
             finish();
         }
     }
-    
+
 }
 

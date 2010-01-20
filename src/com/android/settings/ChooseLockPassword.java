@@ -78,10 +78,16 @@ public class ChooseLockPassword extends Activity implements OnClickListener {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        mLockPatternUtils = new LockPatternUtils(getContentResolver());
-        mRequestedMode = getIntent().getIntExtra("password_mode", mRequestedMode);
-        mPasswordMinLength = getIntent().getIntExtra("password_min_length", mPasswordMinLength);
-        mPasswordMaxLength = getIntent().getIntExtra("password_max_length", mPasswordMaxLength);
+        mLockPatternUtils = new LockPatternUtils(this);
+        if (mLockPatternUtils.isDevicePolicyActive()) {
+            mRequestedMode = mLockPatternUtils.getRequestedPasswordMode();
+            mPasswordMinLength = mLockPatternUtils.getRequestedMinimumPasswordLength();
+        } else {
+            mRequestedMode = getIntent().getIntExtra(LockPatternUtils.PASSWORD_TYPE_KEY,
+                    mRequestedMode);
+            mPasswordMinLength = getIntent().getIntExtra(PASSWORD_MIN_KEY, mPasswordMinLength);
+        }
+        mPasswordMaxLength = getIntent().getIntExtra(PASSWORD_MAX_KEY, mPasswordMaxLength);
         initViews();
         mChooseLockSettingsHelper = new ChooseLockSettingsHelper(this);
         if (savedInstanceState == null) {
@@ -91,19 +97,22 @@ public class ChooseLockPassword extends Activity implements OnClickListener {
     }
 
     private void initViews() {
-        if (LockPatternUtils.MODE_PIN == mRequestedMode
-                || LockPatternUtils.MODE_PASSWORD == mRequestedMode) {
-            setContentView(R.layout.choose_lock_pin);
-            // TODO: alphanumeric layout
-            // setContentView(R.layout.choose_lock_password);
-            for (int i = 0; i < digitIds.length; i++) {
-                Button button = (Button) findViewById(digitIds[i]);
-                button.setOnClickListener(this);
-                button.setText(Integer.toString(i));
-            }
-            findViewById(R.id.ok).setOnClickListener(this);
-            findViewById(R.id.cancel).setOnClickListener(this);
+        switch(mRequestedMode) {
+            case LockPatternUtils.MODE_PIN:
+            case LockPatternUtils.MODE_PASSWORD:
+            case LockPatternUtils.MODE_PATTERN:
+                setContentView(R.layout.choose_lock_pin);
+                // TODO: alphanumeric layout
+                // setContentView(R.layout.choose_lock_password);
+                for (int i = 0; i < digitIds.length; i++) {
+                    Button button = (Button) findViewById(digitIds[i]);
+                    button.setOnClickListener(this);
+                    button.setText(Integer.toString(i));
+                }
+                break;
         }
+        findViewById(R.id.ok).setOnClickListener(this);
+        findViewById(R.id.cancel).setOnClickListener(this);
         findViewById(R.id.backspace).setOnClickListener(this);
         mPasswordTextView = (TextView) findViewById(R.id.pinDisplay);
         mHeaderText = (TextView) findViewById(R.id.headerText);
@@ -179,8 +188,6 @@ public class ChooseLockPassword extends Activity implements OnClickListener {
                             // TODO: move these to LockPatternUtils
                             mLockPatternUtils.setLockPatternEnabled(false);
                             mLockPatternUtils.saveLockPattern(null);
-
-
                             mLockPatternUtils.saveLockPassword(pin);
                             finish();
                         } else {
