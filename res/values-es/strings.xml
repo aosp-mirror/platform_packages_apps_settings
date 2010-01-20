@@ -78,7 +78,7 @@
     <string name="battery_info_status_discharging" msgid="6222697503392774475">"Descargando..."</string>
     <string name="battery_info_status_not_charging" msgid="2820070506621483576">"No se está cargando."</string>
     <string name="battery_info_status_full" msgid="2824614753861462808">"Completa"</string>
-    <string name="battery_info_power_unplugged" msgid="5987246575519551081">"Sin conexión"</string>
+    <string name="battery_info_power_unplugged" msgid="5987246575519551081">"No se está cargando"</string>
     <string name="battery_info_power_ac" msgid="6808516193001604634">"CA"</string>
     <string name="battery_info_power_usb" msgid="8012931702516331797">"USB"</string>
     <string name="battery_info_power_ac_usb" msgid="6777734146838328688">"AC+USB"</string>
@@ -410,7 +410,6 @@
     <string name="notification_sound_dialog_title" msgid="7057274209079144726">"Seleccionar tono de notificación"</string>
     <string name="media_volume_title" msgid="7844516127427195383">"Volumen multimedia"</string>
     <string name="media_volume_summary" msgid="5363248930648849974">"Establecer volumen para música y vídeos"</string>
-    <string name="dock_settings_title" msgid="5121296855098055941">"Audio del conector"</string>
     <string name="dock_settings_summary" msgid="455802113668982481">"Configuración de audio del conector adjunto"</string>
     <string name="dtmf_tone_enable_title" msgid="1453831168789523185">"Tonos táctiles sonoros"</string>
     <string name="dtmf_tone_enable_summary_on" msgid="3028201873989887327">"Reproducir tonos al utilizar teclado de marcado"</string>
@@ -426,6 +425,15 @@
     <string name="play_media_notification_sounds_enable_summary_off" msgid="8672617597028744693">"Reproducir sonido para notificaciones de la tarjeta SD"</string>
     <string name="audio_record_proc_title" msgid="4271091199976457534">"Supresión de ruido"</string>
     <string name="audio_record_proc_summary" msgid="8113628457499616498">"Suprimir ruido de fondo al hablar o al grabar"</string>
+    <string name="dock_settings" msgid="1820107306693002541">"Conector"</string>
+    <string name="dock_settings_title" msgid="9161438664257429372">"Configuración del conector"</string>
+    <string name="dock_audio_settings_title" msgid="3324750259959570305">"Audio"</string>
+    <string name="dock_audio_summary_desk" msgid="6487784412371139335">"Configuración del conector de equipo de sobremesa adjunto"</string>
+    <string name="dock_audio_summary_car" msgid="6740897586006248450">"Configuración del conector del coche adjunto"</string>
+    <string name="dock_audio_summary_none" msgid="289909253741048784">"Teléfono sin conectar"</string>
+    <string name="dock_audio_summary_unknown" msgid="4465059868974255693">"Configuración del conector adjunto"</string>
+    <string name="dock_not_found_title" msgid="3290961741828952424">"No se ha encontrado el conector"</string>
+    <string name="dock_not_found_text" msgid="3035260358985111855">"El teléfono debe estar conectado para configurar el audio del conector."</string>
     <string name="sync_settings" msgid="9186125469300013491">"Cuentas y sincronización"</string>
     <string name="sync_settings_summary" msgid="2962179505214965667">"Añadir o eliminar cuentas y modificar la configuración de las cuentas"</string>
     <string name="search_settings" msgid="1910951467596035063">"Búsqueda"</string>
@@ -775,7 +783,7 @@
     <string name="battery_history_screen_on" msgid="1377240025275657277">"Tiempo transcurrido con la pantalla encendida:"</string>
     <string name="battery_history_phone_on" msgid="4891504401623839532">"Tiempo transcurrido con el teléfono encendido:"</string>
     <string name="battery_history_screen_on_battery" msgid="536058210445081888">"En la batería:"</string>
-    <string name="battery_history_screen_on_plugged" msgid="5019127390021871260">"Conectado:"</string>
+    <string name="battery_history_screen_on_plugged" msgid="5019127390021871260">"Cargando:"</string>
     <string name="usage_stats_label" msgid="5890846333487083609">"Estadísticas de uso"</string>
     <string name="testing_usage_stats" msgid="7823048598893937339">"Estadísticas de uso"</string>
     <string name="display_order_text" msgid="8592776965827565271">"Ordenar por:"</string>
@@ -792,9 +800,9 @@
     <string name="accessibility_service_disable_warning" msgid="8930591383312775132">"¿Quieres inhabilitar la accesibilidad?"</string>
     <string name="power_usage_summary_title" msgid="5180282911164282324">"Uso de la batería"</string>
     <string name="power_usage_summary" msgid="7237084831082848168">"Consumo de la batería"</string>
-    <string name="battery_since_unplugged" msgid="338073389740738437">"Uso de la batería desde que se desenchufó"</string>
+    <string name="battery_since_unplugged" msgid="338073389740738437">"Uso de la batería desde que se cargó"</string>
     <string name="battery_since_reset" msgid="7464546661121187045">"Uso de la batería desde que se restableció"</string>
-    <string name="battery_stats_duration" msgid="7464501326709469282">"<xliff:g id="TIME">%1$s</xliff:g> desde que se desenchufó"</string>
+    <string name="battery_stats_duration" msgid="7464501326709469282">"<xliff:g id="TIME">%1$s</xliff:g> desde que se cargó"</string>
     <!-- no translation found for battery_stats_last_duration (1535831453827905957) -->
     <skip />
     <string name="awake" msgid="387122265874485088">"Tiempo de actividad del dispositivo"</string>
@@ -842,7 +850,7 @@
     <string name="battery_sugg_apps_info" msgid="6065882899391322442">"Detener o desinstalar la aplicación"</string>
     <string name="battery_sugg_apps_gps" msgid="4145005297393800223">"Desactivar GPS cuando no se esté utilizando"</string>
     <string name="battery_sugg_apps_settings" msgid="8021302847272481168">"La aplicación puede incluir opciones que permitan reducir el uso de la batería."</string>
-    <string name="menu_stats_unplugged" msgid="8296577130840261624">"<xliff:g id="UNPLUGGED">%1$s</xliff:g> desde que se desenchufó"</string>
+    <string name="menu_stats_unplugged" msgid="8296577130840261624">"<xliff:g id="UNPLUGGED">%1$s</xliff:g> desde que se cargó"</string>
     <string name="menu_stats_last_unplugged" msgid="5922246077592434526">"Desde la última vez que se cargó: <xliff:g id="UNPLUGGED">%1$s</xliff:g>"</string>
     <string name="menu_stats_total" msgid="8973377864854807854">"Total de consumo"</string>
     <string name="menu_stats_refresh" msgid="1676215433344981075">"Actualizar"</string>
