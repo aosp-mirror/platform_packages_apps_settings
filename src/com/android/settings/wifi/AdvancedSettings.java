@@ -71,12 +71,20 @@ public class AdvancedSettings extends PreferenceActivity
             preference.setOnPreferenceChangeListener(this);
         }
 
-        /*
-         * Fix the Run-time IllegalStateException that ListPreference requires an entries
-         * array and an entryValues array, this exception occurs when user open/close the
-         * slider in the Regulatory domain dialog.
+//        /*
+//         * Fix the Run-time IllegalStateException that ListPreference requires an entries
+//         * array and an entryValues array, this exception occurs when user open/close the
+//         * slider in the Regulatory domain dialog.
+//         */
+//        initNumChannelsPreference();
+        /**
+         * Remove user control of regulatory domain
+         * channel count settings
          */
-        initNumChannelsPreference();
+        Preference chanPref = findPreference(KEY_NUM_CHANNELS);
+        if (chanPref != null) {
+            getPreferenceScreen().removePreference(chanPref);
+        }
     }
     
     @Override
@@ -84,7 +92,11 @@ public class AdvancedSettings extends PreferenceActivity
         super.onResume();
         
         updateUi();
-        initNumChannelsPreference();
+        /**
+         * Remove user control of regulatory domain
+         * channel count settings
+         */
+        //initNumChannelsPreference();
         initSleepPolicyPreference();
         refreshMacAddress();
     }
