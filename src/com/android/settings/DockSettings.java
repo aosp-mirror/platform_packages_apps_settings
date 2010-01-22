@@ -72,6 +72,9 @@ public class DockSettings extends PreferenceActivity {
 
     private void initDockSettings() {
         mAudioSettings = findPreference(KEY_AUDIO_SETTINGS);
+        if (mAudioSettings != null) {
+            mAudioSettings.setSummary(R.string.dock_audio_summary_none);
+        }
     }
 
     private void handleDockChange(Intent intent) {
@@ -104,7 +107,9 @@ public class DockSettings extends PreferenceActivity {
     @Override
     public boolean onPreferenceTreeClick(PreferenceScreen preferenceScreen, Preference preference) {
         if (preference == mAudioSettings) {
-            int dockState = mDockIntent.getIntExtra(Intent.EXTRA_DOCK_STATE, 0);
+            int dockState = mDockIntent != null
+                    ? mDockIntent.getIntExtra(Intent.EXTRA_DOCK_STATE, 0)
+                    : Intent.EXTRA_DOCK_STATE_UNDOCKED;
             if (dockState == Intent.EXTRA_DOCK_STATE_UNDOCKED) {
                 showDialog(DIALOG_NOT_DOCKED);
             } else {
