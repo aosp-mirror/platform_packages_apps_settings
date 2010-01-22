@@ -16,6 +16,9 @@
 
 package com.android.settings.bluetooth;
 
+import com.android.settings.R;
+import com.android.settings.bluetooth.LocalBluetoothProfileManager.Profile;
+
 import android.app.AlertDialog;
 import android.app.Notification;
 import android.app.Service;
@@ -27,6 +30,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.content.SharedPreferences;
 import android.os.Handler;
 import android.os.HandlerThread;
 import android.os.IBinder;
@@ -39,10 +43,8 @@ import android.view.WindowManager;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 
-import com.android.settings.R;
-import com.android.settings.bluetooth.LocalBluetoothProfileManager.Profile;
-
 import java.util.List;
+import java.util.Set;
 
 public class DockService extends Service implements AlertDialog.OnMultiChoiceClickListener,
         DialogInterface.OnClickListener, DialogInterface.OnDismissListener,
@@ -56,6 +58,10 @@ public class DockService extends Service implements AlertDialog.OnMultiChoiceCli
     // the bluetooth connection
     private static final long UNDOCKED_GRACE_PERIOD = 1000;
 
+    // Time allowed for the device to be undocked and redocked without turning
+    // off Bluetooth
+    private static final long DISABLE_BT_GRACE_PERIOD = 2000;
+
     // Msg for user wanting the UI to setup the dock
     private static final int MSG_TYPE_SHOW_UI = 111;
 
@@ -68,6 +74,17 @@ public class DockService extends Service implements AlertDialog.OnMultiChoiceCli
     // Msg for undocked command to be process after UNDOCKED_GRACE_PERIOD millis
     // since MSG_TYPE_UNDOCKED_TEMPORARY
     private static final int MSG_TYPE_UNDOCKED_PERMANENT = 444;
+
+    // Msg for disabling bt after DISABLE_BT_GRACE_PERIOD millis since
+    // MSG_TYPE_UNDOCKED_PERMANENT
+    private static final int MSG_TYPE_DISABLE_BT = 555;
+
+    private static final String SHARED_PREFERENCES_NAME = "dock_settings";
+
+    private static final String SHARED_PREFERENCES_KEY_DISABLE_BT_WHEN_UNDOCKED =
+        "disable_bt_when_undock";
+
+    private static final int INVALID_STARTID = -100;
 
     // Created in OnCreate()
     private volatile Looper mServiceLooper;
@@ -89,8 +106,7 @@ public class DockService extends Service implements AlertDialog.OnMultiChoiceCli
     // Set while BT is being enabled.
     private BluetoothDevice mPendingDevice;
     private int mPendingStartId;
-
-    private Object mBtSynchroObject = new Object();
+    private int mPendingTurnOnStartId = INVALID_STARTID;
 
     @Override
     public void onCreate() {
@@ -137,8 +153,7 @@ public class DockService extends Service implements AlertDialog.OnMultiChoiceCli
         }
 
         if (BluetoothAdapter.ACTION_STATE_CHANGED.equals(intent.getAction())) {
-            handleBtStateChange(intent);
-            DockEventReceiver.finishStartingService(this, startId);
+            handleBtStateChange(intent, startId);
             return START_NOT_STICKY;
         }
 
@@ -172,10 +187,14 @@ public class DockService extends Service implements AlertDialog.OnMultiChoiceCli
         int msgType = msg.what;
         int state = msg.arg1;
         int startId = msg.arg2;
-        BluetoothDevice device = (BluetoothDevice) msg.obj;
+        boolean deferFinishCall = false;
+        BluetoothDevice device = null;
+        if (msg.obj != null) {
+            device = (BluetoothDevice) msg.obj;
+        }
 
         if(DEBUG) Log.d(TAG, "processMessage: " + msgType + " state: " + state + " device = "
-                + (msg.obj == null ? "null" : device.toString()));
+                + (device == null ? "null" : device.toString()));
 
         switch (msgType) {
             case MSG_TYPE_SHOW_UI:
@@ -199,6 +218,7 @@ public class DockService extends Service implements AlertDialog.OnMultiChoiceCli
                 }
 
                 mServiceHandler.removeMessages(MSG_TYPE_UNDOCKED_PERMANENT);
+                mServiceHandler.removeMessages(MSG_TYPE_DISABLE_BT);
 
                 if (!device.equals(mDevice)) {
                     if (mDevice != null) {
@@ -220,6 +240,21 @@ public class DockService extends Service implements AlertDialog.OnMultiChoiceCli
             case MSG_TYPE_UNDOCKED_PERMANENT:
                 // Grace period passed. Disconnect.
                 handleUndocked(mContext, mBtManager, device);
+                if(DEBUG) Log.d(TAG, "getDisableBtSetting = " + getDisableBtSetting());
+                if (getDisableBtSetting()) {
+                    // BT was disabled when we first docked
+                    if (!hasOtherConnectedDevices(device)) {
+                        if(DEBUG) Log.d(TAG, "QUEUED BT DISABLE");
+                        // Queue a delayed msg to disable BT
+                        Message newMsg = mServiceHandler.obtainMessage(MSG_TYPE_DISABLE_BT, 0,
+                                startId, null);
+                        mServiceHandler.sendMessageDelayed(newMsg, DISABLE_BT_GRACE_PERIOD);
+                        deferFinishCall = true;
+                    } else {
+                        // Don't disable BT if something is connected
+                        removeDisableBtSetting();
+                    }
+                }
                 break;
 
             case MSG_TYPE_UNDOCKED_TEMPORARY:
@@ -228,13 +263,40 @@ public class DockService extends Service implements AlertDialog.OnMultiChoiceCli
                         startId, device);
                 mServiceHandler.sendMessageDelayed(newMsg, UNDOCKED_GRACE_PERIOD);
                 break;
+
+            case MSG_TYPE_DISABLE_BT:
+                if(DEBUG) Log.d(TAG, "BT DISABLE");
+                mBtManager.getBluetoothAdapter().disable();
+                removeDisableBtSetting();
+                break;
         }
 
-        if (mDialog == null && mPendingDevice == null && msgType != MSG_TYPE_UNDOCKED_TEMPORARY) {
+        if (mDialog == null && mPendingDevice == null && msgType != MSG_TYPE_UNDOCKED_TEMPORARY
+                && !deferFinishCall) {
             // NOTE: We MUST not call stopSelf() directly, since we need to
             // make sure the wake lock acquired by the Receiver is released.
             DockEventReceiver.finishStartingService(DockService.this, startId);
         }
+    }
+
+    public synchronized boolean hasOtherConnectedDevices(BluetoothDevice dock) {
+        List<CachedBluetoothDevice> cachedDevices = mBtManager.getCachedDeviceManager()
+                .getCachedDevicesCopy();
+        Set<BluetoothDevice> btDevices = mBtManager.getBluetoothAdapter().getBondedDevices();
+        if (btDevices == null || cachedDevices == null || btDevices.size() == 0) {
+            return false;
+        }
+        if(DEBUG) Log.d(TAG, "btDevices = " + btDevices.size());
+        if(DEBUG) Log.d(TAG, "cachedDevices = " + cachedDevices.size());
+
+        for (CachedBluetoothDevice device : cachedDevices) {
+            BluetoothDevice btDevice = device.getDevice();
+            if (!btDevice.equals(dock) && btDevices.contains(btDevice) && device.isConnected()) {
+                if(DEBUG) Log.d(TAG, "connected device = " + device.getName());
+                return true;
+            }
+        }
+        return false;
     }
 
     private Message parseIntent(Intent intent) {
@@ -411,10 +473,11 @@ public class DockService extends Service implements AlertDialog.OnMultiChoiceCli
         return items;
     }
 
-    public void handleBtStateChange(Intent intent) {
+    private void handleBtStateChange(Intent intent, int startId) {
         int btState = intent.getIntExtra(BluetoothAdapter.EXTRA_STATE, BluetoothAdapter.ERROR);
-        if (btState == BluetoothAdapter.STATE_ON) {
-            synchronized (mBtSynchroObject) {
+        synchronized (this) {
+            if(DEBUG) Log.d(TAG, "BtState = " + btState + " mPendingDevice = " + mPendingDevice);
+            if (btState == BluetoothAdapter.STATE_ON) {
                 if (mPendingDevice != null) {
                     if (mPendingDevice.equals(mDevice)) {
                         if(DEBUG) Log.d(TAG, "applying settings");
@@ -440,6 +503,30 @@ public class DockService extends Service implements AlertDialog.OnMultiChoiceCli
                             }
                         }
                     }
+                }
+
+                if (mPendingTurnOnStartId != INVALID_STARTID) {
+                    DockEventReceiver.finishStartingService(this, mPendingTurnOnStartId);
+                    mPendingTurnOnStartId = INVALID_STARTID;
+                }
+
+                DockEventReceiver.finishStartingService(this, startId);
+            } else if (btState == BluetoothAdapter.STATE_TURNING_OFF) {
+                // Remove the flag to disable BT if someone is turning off bt.
+                // The rational is that:
+                // a) if BT is off at undock time, no work needs to be done
+                // b) if BT is on at undock time, the user wants it on.
+                removeDisableBtSetting();
+                DockEventReceiver.finishStartingService(this, startId);
+            } else if (btState == BluetoothAdapter.STATE_OFF) {
+                // Bluetooth was turning off as we were trying to turn it on.
+                // Let's try again
+                if(DEBUG) Log.d(TAG, "Bluetooth = OFF mPendingDevice = " + mPendingDevice);
+                if (mPendingDevice != null) {
+                    mBtManager.getBluetoothAdapter().enable();
+                    mPendingTurnOnStartId = startId;
+                } else {
+                    DockEventReceiver.finishStartingService(this, startId);
                 }
             }
         }
@@ -472,10 +559,15 @@ public class DockService extends Service implements AlertDialog.OnMultiChoiceCli
             return;
 
         // Turn on BT if something is enabled
-        synchronized (mBtSynchroObject) {
+        synchronized (this) {
             for (boolean enable : mCheckedItems) {
                 if (enable) {
                     int btState = mBtManager.getBluetoothState();
+                    if(DEBUG) Log.d(TAG, "BtState = " + btState);
+                    // May have race condition as the phone comes in and out and in the dock.
+                    // Always turn on BT
+                    mBtManager.getBluetoothAdapter().enable();
+
                     switch (btState) {
                         case BluetoothAdapter.STATE_OFF:
                         case BluetoothAdapter.STATE_TURNING_OFF:
@@ -487,8 +579,7 @@ public class DockService extends Service implements AlertDialog.OnMultiChoiceCli
                             mPendingDevice = device;
                             mPendingStartId = startId;
                             if (btState != BluetoothAdapter.STATE_TURNING_ON) {
-                                // BT is off. Enable it
-                                mBtManager.getBluetoothAdapter().enable();
+                                setDisableBtSetting(true);
                             }
                             return;
                     }
@@ -550,5 +641,27 @@ public class DockService extends Service implements AlertDialog.OnMultiChoiceCli
             cachedBluetoothDevice = new CachedBluetoothDevice(context, device);
         }
         return cachedBluetoothDevice;
+    }
+
+    private boolean getDisableBtSetting() {
+        SharedPreferences sharedPref = getSharedPreferences(SHARED_PREFERENCES_NAME,
+                Context.MODE_PRIVATE);
+        return sharedPref.getBoolean(SHARED_PREFERENCES_KEY_DISABLE_BT_WHEN_UNDOCKED, false);
+    }
+
+    private void setDisableBtSetting(boolean disableBt) {
+        SharedPreferences.Editor editor = getSharedPreferences(SHARED_PREFERENCES_NAME,
+                Context.MODE_PRIVATE).edit();
+        editor.putBoolean(SHARED_PREFERENCES_KEY_DISABLE_BT_WHEN_UNDOCKED, disableBt);
+        editor.commit();
+    }
+
+    private void removeDisableBtSetting() {
+        SharedPreferences sharedPref = getSharedPreferences(SHARED_PREFERENCES_NAME,
+                Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPref.edit();
+        editor.remove(SHARED_PREFERENCES_KEY_DISABLE_BT_WHEN_UNDOCKED);
+        editor.commit();
+        return;
     }
 }
