@@ -84,6 +84,9 @@ public class DockService extends Service implements AlertDialog.OnMultiChoiceCli
     private static final String SHARED_PREFERENCES_KEY_DISABLE_BT_WHEN_UNDOCKED =
         "disable_bt_when_undock";
 
+    private static final String SHARED_PREFERENCES_KEY_DISABLE_BT =
+        "disable_bt";
+
     private static final int INVALID_STARTID = -100;
 
     // Created in OnCreate()
@@ -107,6 +110,7 @@ public class DockService extends Service implements AlertDialog.OnMultiChoiceCli
     private BluetoothDevice mPendingDevice;
     private int mPendingStartId;
     private int mPendingTurnOnStartId = INVALID_STARTID;
+    private int mPendingTurnOffStartId = INVALID_STARTID;
 
     @Override
     public void onCreate() {
@@ -219,6 +223,7 @@ public class DockService extends Service implements AlertDialog.OnMultiChoiceCli
 
                 mServiceHandler.removeMessages(MSG_TYPE_UNDOCKED_PERMANENT);
                 mServiceHandler.removeMessages(MSG_TYPE_DISABLE_BT);
+                removeSetting(SHARED_PREFERENCES_KEY_DISABLE_BT);
 
                 if (!device.equals(mDevice)) {
                     if (mDevice != null) {
@@ -240,8 +245,13 @@ public class DockService extends Service implements AlertDialog.OnMultiChoiceCli
             case MSG_TYPE_UNDOCKED_PERMANENT:
                 // Grace period passed. Disconnect.
                 handleUndocked(mContext, mBtManager, device);
-                if(DEBUG) Log.d(TAG, "getDisableBtSetting = " + getDisableBtSetting());
-                if (getDisableBtSetting()) {
+
+                if (DEBUG) {
+                    Log.d(TAG, "DISABLE_BT_WHEN_UNDOCKED = "
+                            + getSetting(SHARED_PREFERENCES_KEY_DISABLE_BT_WHEN_UNDOCKED));
+                }
+
+                if (getSetting(SHARED_PREFERENCES_KEY_DISABLE_BT_WHEN_UNDOCKED)) {
                     // BT was disabled when we first docked
                     if (!hasOtherConnectedDevices(device)) {
                         if(DEBUG) Log.d(TAG, "QUEUED BT DISABLE");
@@ -252,7 +262,7 @@ public class DockService extends Service implements AlertDialog.OnMultiChoiceCli
                         deferFinishCall = true;
                     } else {
                         // Don't disable BT if something is connected
-                        removeDisableBtSetting();
+                        removeSetting(SHARED_PREFERENCES_KEY_DISABLE_BT_WHEN_UNDOCKED);
                     }
                 }
                 break;
@@ -266,8 +276,15 @@ public class DockService extends Service implements AlertDialog.OnMultiChoiceCli
 
             case MSG_TYPE_DISABLE_BT:
                 if(DEBUG) Log.d(TAG, "BT DISABLE");
-                mBtManager.getBluetoothAdapter().disable();
-                removeDisableBtSetting();
+                if (mBtManager.getBluetoothAdapter().disable()) {
+                    removeSetting(SHARED_PREFERENCES_KEY_DISABLE_BT_WHEN_UNDOCKED);
+                } else {
+                    // disable() returned an error. Persist a flag to disable BT later
+                    setSetting(SHARED_PREFERENCES_KEY_DISABLE_BT, true);
+                    mPendingTurnOffStartId = startId;
+                    deferFinishCall = true;
+                    if(DEBUG) Log.d(TAG, "disable failed. try again later " + startId);
+                }
                 break;
         }
 
@@ -490,6 +507,10 @@ public class DockService extends Service implements AlertDialog.OnMultiChoiceCli
                     mPendingDevice = null;
                     DockEventReceiver.finishStartingService(mContext, mPendingStartId);
                 } else {
+                    if (DEBUG) {
+                        Log.d(TAG, "A DISABLE_BT_WHEN_UNDOCKED = "
+                                + getSetting(SHARED_PREFERENCES_KEY_DISABLE_BT_WHEN_UNDOCKED));
+                    }
                     // Reconnect if docked and bluetooth was enabled by user.
                     Intent i = registerReceiver(null, new IntentFilter(Intent.ACTION_DOCK_EVENT));
                     if (i != null) {
@@ -501,6 +522,11 @@ public class DockService extends Service implements AlertDialog.OnMultiChoiceCli
                             if (device != null) {
                                 connectIfEnabled(device);
                             }
+                        } else if (getSetting(SHARED_PREFERENCES_KEY_DISABLE_BT)
+                                && mBtManager.getBluetoothAdapter().disable()) {
+                            mPendingTurnOffStartId = startId;
+                            removeSetting(SHARED_PREFERENCES_KEY_DISABLE_BT);
+                            return;
                         }
                     }
                 }
@@ -516,12 +542,19 @@ public class DockService extends Service implements AlertDialog.OnMultiChoiceCli
                 // The rational is that:
                 // a) if BT is off at undock time, no work needs to be done
                 // b) if BT is on at undock time, the user wants it on.
-                removeDisableBtSetting();
+                removeSetting(SHARED_PREFERENCES_KEY_DISABLE_BT_WHEN_UNDOCKED);
                 DockEventReceiver.finishStartingService(this, startId);
             } else if (btState == BluetoothAdapter.STATE_OFF) {
                 // Bluetooth was turning off as we were trying to turn it on.
                 // Let's try again
                 if(DEBUG) Log.d(TAG, "Bluetooth = OFF mPendingDevice = " + mPendingDevice);
+
+                if (mPendingTurnOffStartId != INVALID_STARTID) {
+                    DockEventReceiver.finishStartingService(this, mPendingTurnOffStartId);
+                    removeSetting(SHARED_PREFERENCES_KEY_DISABLE_BT);
+                    mPendingTurnOffStartId = INVALID_STARTID;
+                }
+
                 if (mPendingDevice != null) {
                     mBtManager.getBluetoothAdapter().enable();
                     mPendingTurnOnStartId = startId;
@@ -579,7 +612,7 @@ public class DockService extends Service implements AlertDialog.OnMultiChoiceCli
                             mPendingDevice = device;
                             mPendingStartId = startId;
                             if (btState != BluetoothAdapter.STATE_TURNING_ON) {
-                                setDisableBtSetting(true);
+                                setSetting(SHARED_PREFERENCES_KEY_DISABLE_BT_WHEN_UNDOCKED, true);
                             }
                             return;
                     }
@@ -643,24 +676,24 @@ public class DockService extends Service implements AlertDialog.OnMultiChoiceCli
         return cachedBluetoothDevice;
     }
 
-    private boolean getDisableBtSetting() {
+    private boolean getSetting(String key) {
         SharedPreferences sharedPref = getSharedPreferences(SHARED_PREFERENCES_NAME,
                 Context.MODE_PRIVATE);
-        return sharedPref.getBoolean(SHARED_PREFERENCES_KEY_DISABLE_BT_WHEN_UNDOCKED, false);
+        return sharedPref.getBoolean(key, false);
     }
 
-    private void setDisableBtSetting(boolean disableBt) {
+    private void setSetting(String key, boolean disableBt) {
         SharedPreferences.Editor editor = getSharedPreferences(SHARED_PREFERENCES_NAME,
                 Context.MODE_PRIVATE).edit();
-        editor.putBoolean(SHARED_PREFERENCES_KEY_DISABLE_BT_WHEN_UNDOCKED, disableBt);
+        editor.putBoolean(key, disableBt);
         editor.commit();
     }
 
-    private void removeDisableBtSetting() {
+    private void removeSetting(String key) {
         SharedPreferences sharedPref = getSharedPreferences(SHARED_PREFERENCES_NAME,
                 Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPref.edit();
-        editor.remove(SHARED_PREFERENCES_KEY_DISABLE_BT_WHEN_UNDOCKED);
+        editor.remove(key);
         editor.commit();
         return;
     }
