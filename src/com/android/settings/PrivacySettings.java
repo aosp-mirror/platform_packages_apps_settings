@@ -45,7 +45,7 @@ public class PrivacySettings extends PreferenceActivity implements
     private static final String PREFS_USE_LOCATION = "use_location";
 
     // Vendor specific
-    private static final String GSETTINGS_PROVIDER = "com.google.android.providers.settings";
+    private static final String GSETTINGS_PROVIDER = "com.google.settings";
     private static final String LOCATION_CATEGORY = "location_category";
     private static final String SETTINGS_CATEGORY = "settings_category";
     private static final String USE_LOCATION = "use_location";
@@ -69,11 +69,7 @@ public class PrivacySettings extends PreferenceActivity implements
         mBackup = (CheckBoxPreference) getPreferenceScreen().findPreference(BACKUP_SETTINGS);
 
         // Vendor specific
-        try {
-            if (mUseLocation != null) {
-                getPackageManager().getPackageInfo(GSETTINGS_PROVIDER, 0);
-            }
-        } catch (NameNotFoundException nnfe) {
+        if (getPackageManager().resolveContentProvider(GSETTINGS_PROVIDER, 0) == null) {
             getPreferenceScreen().removePreference(findPreference(LOCATION_CATEGORY));
             getPreferenceScreen().removePreference(findPreference(SETTINGS_CATEGORY));
         }
