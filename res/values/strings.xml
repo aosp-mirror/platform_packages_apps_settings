@@ -713,15 +713,15 @@
     <string name="ip_address">IP address</string>
     <!-- Label for the signal strength -->
     <string name="signal">Signal strength</string>
-    <!-- Summary text when turning Wi-Fi or bluetooth on -->
+    <!--Summary text when turning Wi-Fi or bluetooth on -->
     <string name="wifi_starting">Turning on\u2026</string>
-    <!-- Summary text when turning Wi-Fi or bluetooth off -->
+    <!--Summary text when turning Wi-Fi or bluetooth off -->
     <string name="wifi_stopping">Turning off\u2026</string>
     <!-- Summary text when Wi-Fi or bluetooth has error -->
     <string name="wifi_error">Error</string>
     <!-- Toast message when Wi-Fi or bluetooth is disallowed in airplane mode -->
     <string name="wifi_in_airplane_mode">In airplane mode</string>
-    <!-- Error message when Wi-Fi can't start -->
+     <!-- Error message when Wi-Fi can't start -->
     <string name="error_starting">Unable to start Wi-Fi</string>
     <!-- Error message when Wi-Fi can't stop -->
     <string name="error_stopping">Unable to stop Wi-Fi</string>
@@ -952,28 +952,28 @@
     <string name="status_failed">Unsuccessful</string>
 
     <!-- Sound and alerts settings -->
-    <!-- Main Settings screen setting option name to go into the sound and display settings screen -->
-    <string name="sound_and_display_settings">Sound &amp; display</string>
-    <!-- Main Settings screen setting option name to go into the sound and display settings screen -->
-    <string name="sound_and_display_settings_title">Sound &amp; display settings</string>
+    <!-- Main Settings screen setting option name to go into the sound settings screen -->
+    <string name="sound_settings_title">Sound</string>
+    <!-- Main Settings screen setting option name to go into the display settings screen -->
+    <string name="display_settings_title">Display</string>
     <!-- Sound settings screen heading -->
     <string name="sound_settings">Sound settings</string>
-    <!-- Main Settings screen setting option summary text for the item to go into the soudn and display settings screen-->
-    <string name="sound_and_display_settings_summary">Set ringtones, notifications, screen brightness</string>
     <!-- Sound settings screen, setting option name checkbox -->
     <string name="silent_mode_title">Silent mode</string>
     <!-- Sound settings screen, setting option summary text when going into silent mode.  Media and alarms sounds WILL NOT be silenced in silent mode. -->
-    <string name="silent_mode_summary">All sounds except media &amp; alarms are silenced</string>
+    <string name="silent_mode_summary">Silence all sounds except media &amp; alarms</string>
     <!-- Sound settings screen, setting option summary text when going into silent mode.  Media WILL NOT be silenced in silent mode, but alarms WILL be silenced. -->
     <string name="silent_mode_incl_alarm_summary">All sounds except media are silenced</string>
     <!-- Sound settings screen, setting option name to pick ringtone (a list dialog comes up)-->
     <string name="ringtone_title">Phone ringtone</string>
     <!-- Sound settings screen, setting option summary text -->
-    <string name="ringtone_summary">Set your default incoming call ringtone</string>
+    <string name="ringtone_summary">""</string>
+    <!-- Sound settings screen, volume title -->
+    <string name="all_volume_title">Volume</string>
     <!-- Sound settings screen, setting option name -->
     <string name="ring_volume_title">Ringer volume</string>
     <!-- Sound settings screen, setting option summary text -->
-    <string name="ring_volume_summary">Set volume for incoming calls and notifications</string>
+    <string name="ring_volume_summary">""</string>
     <!-- Sound settings screen, setting option name checkbox -->
     <string name="vibrate_title">Phone vibrate</string>
     <!-- Sound settings screen, setting option summary text -->
@@ -981,7 +981,7 @@
     <!-- Sound settings screen, setting option name -->
     <string name="notification_sound_title">Notification ringtone</string>
     <!-- Sound settings screen, setting option summary text -->
-    <string name="notification_sound_summary">Set your default notification ringtone</string>
+    <string name="notification_sound_summary">""</string>
     <!-- Sound settings screen, notification light repeat pulsing title -->
     <string name="notification_pulse_title">Pulse notification light</string>
     <!-- Sound settings screen, notification light repeat pulsing summary -->
@@ -999,6 +999,8 @@
     <string name="media_volume_title">Media volume</string>
     <!-- Sound settings screen, setting option summary text -->
     <string name="media_volume_summary">Set volume for music and videos</string>
+    <!-- Sound settings screen, alarm volume slider title -->
+    <string name="alarm_volume_title">Alarm volume</string>
     <!-- Sound settings screen, dock settings summary-->
     <string name="dock_settings_summary">Audio settings for the attached dock</string>
     <!-- Sound settings screen, setting check box label -->
@@ -1069,7 +1071,7 @@
     <!-- Sound & display settings screen, animations option summary text when check box is clear -->
     <string name="animations_summary_off">Show animation when opening &amp; closing windows</string>
     <!-- Sound & display settings screen, accelerometer-based rotation check box label -->
-    <string name="accelerometer_title">Orientation</string>
+    <string name="accelerometer_title">Auto-rotate screen</string>
     <!-- Sound & display settings screen, accelerometer-based rotation summary text when check box is selected -->
     <string name="accelerometer_summary_on">Switch orientation automatically when rotating phone</string>
     <!-- Sound & display settings screen, accelerometer-based rotation summary text when check box is clear -->
@@ -1133,7 +1135,7 @@
     <!-- About phone screen, list item title.  Takes the user to the screen for seeing and installing system updates. -->
     <string name="system_update_settings_list_item_title">System updates</string>
     <!-- About phone screen, list item summary.  Takes the user to the screen for seeing and installing system updates. -->
-    <string name="system_update_settings_list_item_summary">Check for system updates</string>
+    <string name="system_update_settings_list_item_summary">""</string>
 
     <!-- About phone screen, status item label -->
     <string name="firmware_version">Firmware version</string>
@@ -1570,6 +1572,10 @@
     <string name="sort_order_size">Sort by size</string>
     <!-- Manage applications screen, individual app screen, button label when the user wants to manage the space taken up by an app. -->
     <string name="manage_space_text">Manage space</string>
+    <!-- Text for menu option in ManageApps screen to present various menu options -->
+    <string name="filter">Filter</string>
+    <!-- Title of dialog for presenting filter options -->
+    <string name="filter_dlg_title">Select filter options</string>
     <!-- Text for filter option in ManageApps screen to display all installed
     applications -->
     <string name="filter_apps_all">All</string>
@@ -1656,9 +1662,9 @@ found in the list of installed applications.</string>
     <!-- On Text & language settings screen, heading. Inside the "Locale & text" screen, this is the header for settings that relate to text (autotext, autoreplace, autocapitalization). -->
     <string name="text_category">Text settings</string>
     <!-- On Text & language settings screen, setting option name. title of the setting to take the user to a screen to select the locale. -->
-    <string name="phone_language">Select locale</string>
+    <string name="phone_language">Select language</string>
     <!-- On Text & language settings screen, setting option name. summary of the setting to take the user to a screen to select the locale. -->
-    <string name="phone_language_summary">Select language and region</string>
+    <string name="phone_language_summary">""</string>
     <!-- On Text & language settings screen, setting option name. title of the setting to enable autoreplace of entered text. auto replace is a feature that will automatically correct mistyped words. -->
     <string name="auto_replace">Auto-replace</string>
     <!-- On Text & language settings screen, setting summary.  This is the summary for the "Auto-replace" setting. -->
@@ -1691,7 +1697,7 @@ found in the list of installed applications.</string>
     <!-- User dictionary settings, The title of the list item to go into the User dictionary settings screen. -->
     <string name="user_dict_settings_title">User dictionary</string>
     <!-- User dictionary settings.  The summary of the listem item to go into the User dictionary settings screen. -->
-    <string name="user_dict_settings_summary">Add &amp; remove words from user dictionary</string>
+    <string name="user_dict_settings_summary">""</string>
     <!-- User dictionary settings. The title of the menu item to add a new word to the user dictionary. -->
     <string name="user_dict_settings_add_menu_title">Add</string>
     <!-- User dictionary settings. The title of the dialog to add a new word to the user dictionary. -->
@@ -2336,7 +2342,7 @@ found in the list of installed applications.</string>
     <string name="remove_device_admin">Remove</string>
     <!-- Label for screen showing to select device policy -->
     <string name="select_device_admin_msg">Select device administrator</string>
-    
+
     <!-- Name to assign to a Network Access Point that was saved without a name -->
     <string name="untitled_apn">Untitled</string>
 </resources>

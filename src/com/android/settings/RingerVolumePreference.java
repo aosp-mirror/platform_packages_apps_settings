@@ -39,16 +39,28 @@ public class RingerVolumePreference extends VolumePreference implements
     private static final String TAG = "RingerVolumePreference";
 
     private CheckBox mNotificationsUseRingVolumeCheckbox;
-    private SeekBarVolumizer mNotificationSeekBarVolumizer;
+    private SeekBarVolumizer [] mSeekBarVolumizer;
+    private static final int[] SEEKBAR_ID = new int[] {
+        R.id.notification_volume_seekbar,
+        R.id.media_volume_seekbar,
+        R.id.alarm_volume_seekbar
+    };
+    private static final int[] SEEKBAR_TYPE = new int[] {
+        AudioManager.STREAM_NOTIFICATION,
+        AudioManager.STREAM_MUSIC,
+        AudioManager.STREAM_ALARM
+    };
+    //private SeekBarVolumizer mNotificationSeekBarVolumizer;
     private TextView mNotificationVolumeTitle;
-    
+
     public RingerVolumePreference(Context context, AttributeSet attrs) {
         super(context, attrs);
 
         // The always visible seekbar is for ring volume
         setStreamType(AudioManager.STREAM_RING);
-        
+
         setDialogLayoutResource(R.layout.preference_dialog_ringervolume);
+        mSeekBarVolumizer = new SeekBarVolumizer[SEEKBAR_ID.length];
     }
 
     @Override
@@ -61,13 +73,14 @@ public class RingerVolumePreference extends VolumePreference implements
         mNotificationsUseRingVolumeCheckbox.setChecked(Settings.System.getInt(
                 getContext().getContentResolver(),
                 Settings.System.NOTIFICATIONS_USE_RING_VOLUME, 1) == 1);
-        
-        final SeekBar seekBar = (SeekBar) view.findViewById(R.id.notification_volume_seekbar);
-        mNotificationSeekBarVolumizer = new SeekBarVolumizer(getContext(), seekBar,
-                AudioManager.STREAM_NOTIFICATION);
-        
+      
+        for (int i = 0; i < SEEKBAR_ID.length; i++) {
+            SeekBar seekBar = (SeekBar) view.findViewById(SEEKBAR_ID[i]);
+            mSeekBarVolumizer[i] = new SeekBarVolumizer(getContext(), seekBar,
+                SEEKBAR_TYPE[i]);
+        }
+
         mNotificationVolumeTitle = (TextView) view.findViewById(R.id.notification_volume_title);
-        
         setNotificationVolumeVisibility(!mNotificationsUseRingVolumeCheckbox.isChecked());
     }
 
@@ -75,10 +88,11 @@ public class RingerVolumePreference extends VolumePreference implements
     protected void onDialogClosed(boolean positiveResult) {
         super.onDialogClosed(positiveResult);
         
-        if (!positiveResult && mNotificationSeekBarVolumizer != null) {
-            mNotificationSeekBarVolumizer.revertVolume();
-        }
-        
+        if (!positiveResult) {
+            for (SeekBarVolumizer vol : mSeekBarVolumizer) {
+                if (vol != null) vol.revertVolume();
+            }
+        }        
         cleanup();
     }
 
@@ -107,29 +121,28 @@ public class RingerVolumePreference extends VolumePreference implements
     @Override
     protected void onSampleStarting(SeekBarVolumizer volumizer) {
         super.onSampleStarting(volumizer);
-        
-        if (mNotificationSeekBarVolumizer != null && volumizer != mNotificationSeekBarVolumizer) {
-            mNotificationSeekBarVolumizer.stopSample();
+        for (SeekBarVolumizer vol : mSeekBarVolumizer) {
+            if (vol != volumizer) vol.stopSample();
         }
     }
 
     private void setNotificationVolumeVisibility(boolean visible) {
-        if (mNotificationSeekBarVolumizer != null) {
-            mNotificationSeekBarVolumizer.getSeekBar().setVisibility(
-                    visible ? View.VISIBLE : View.GONE);
-            mNotificationVolumeTitle.setVisibility(visible ? View.VISIBLE : View.GONE);
-        }
+        mSeekBarVolumizer[0].getSeekBar().setVisibility(
+                visible ? View.VISIBLE : View.GONE);
+        mNotificationVolumeTitle.setVisibility(visible ? View.VISIBLE : View.GONE);
     }
-    
+
     private void cleanup() {
-        if (mNotificationSeekBarVolumizer != null) {
-            Dialog dialog = getDialog();
-            if (dialog != null && dialog.isShowing()) {
-                // Stopped while dialog was showing, revert changes
-                mNotificationSeekBarVolumizer.revertVolume();
+        for (int i = 0; i < SEEKBAR_ID.length; i++) {
+            if (mSeekBarVolumizer[i] != null) {
+                Dialog dialog = getDialog();
+                if (dialog != null && dialog.isShowing()) {
+                    // Stopped while dialog was showing, revert changes
+                    mSeekBarVolumizer[i].revertVolume();
+                }
+                mSeekBarVolumizer[i].stop();
+                mSeekBarVolumizer[i] = null;
             }
-            mNotificationSeekBarVolumizer.stop();
-            mNotificationSeekBarVolumizer = null;
         }
     }
 
@@ -142,8 +155,12 @@ public class RingerVolumePreference extends VolumePreference implements
         }
 
         final SavedState myState = new SavedState(superState);
-        if (mNotificationSeekBarVolumizer != null) {
-            mNotificationSeekBarVolumizer.onSaveInstanceState(myState.getVolumeStore());
+        VolumeStore[] volumeStore = myState.getVolumeStore(SEEKBAR_ID.length);
+        for (int i = 0; i < SEEKBAR_ID.length; i++) {
+            SeekBarVolumizer vol = mSeekBarVolumizer[i];
+            if (vol != null) {
+                vol.onSaveInstanceState(volumeStore[i]);
+            }
         }
         return myState;
     }
@@ -158,28 +175,44 @@ public class RingerVolumePreference extends VolumePreference implements
 
         SavedState myState = (SavedState) state;
         super.onRestoreInstanceState(myState.getSuperState());
-        if (mNotificationSeekBarVolumizer != null) {
-            mNotificationSeekBarVolumizer.onRestoreInstanceState(myState.getVolumeStore());
+        VolumeStore[] volumeStore = myState.getVolumeStore(SEEKBAR_ID.length);
+        for (int i = 0; i < SEEKBAR_ID.length; i++) {
+            SeekBarVolumizer vol = mSeekBarVolumizer[i];
+            if (vol != null) {
+                vol.onRestoreInstanceState(volumeStore[i]);
+            }
         }
     }
 
     private static class SavedState extends BaseSavedState {
-        VolumeStore mVolumeStore = new VolumeStore();
+        VolumeStore [] mVolumeStore;
 
         public SavedState(Parcel source) {
             super(source);
-            mVolumeStore.volume = source.readInt();
-            mVolumeStore.originalVolume = source.readInt();
+            mVolumeStore = new VolumeStore[SEEKBAR_ID.length];
+            for (int i = 0; i < SEEKBAR_ID.length; i++) {
+                mVolumeStore[i] = new VolumeStore();
+                mVolumeStore[i].volume = source.readInt();
+                mVolumeStore[i].originalVolume = source.readInt();
+            }
         }
 
         @Override
         public void writeToParcel(Parcel dest, int flags) {
             super.writeToParcel(dest, flags);
-            dest.writeInt(mVolumeStore.volume);
-            dest.writeInt(mVolumeStore.originalVolume);
+            for (int i = 0; i < SEEKBAR_ID.length; i++) {
+                dest.writeInt(mVolumeStore[i].volume);
+                dest.writeInt(mVolumeStore[i].originalVolume);
+            }
         }
 
-        VolumeStore getVolumeStore() {
+        VolumeStore[] getVolumeStore(int count) {
+            if (mVolumeStore == null || mVolumeStore.length != count) {
+                mVolumeStore = new VolumeStore[count];
+                for (int i = 0; i < count; i++) {
+                    mVolumeStore[i] = new VolumeStore();
+                }
+            }
             return mVolumeStore;
         }
 
