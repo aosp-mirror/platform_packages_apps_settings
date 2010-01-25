@@ -92,6 +92,7 @@ public class TextToSpeechSettings extends PreferenceActivity implements
      * startActivityForResult.
      */
     private static final int VOICE_DATA_INTEGRITY_CHECK = 1977;
+    private static final int GET_SAMPLE_TEXT = 1983;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -230,6 +231,30 @@ public class TextToSpeechSettings extends PreferenceActivity implements
         }
     }
 
+    /**
+     * Ask the current default engine to return a string of sample text to be
+     * spoken to the user.
+     */
+    private void getSampleText() {
+        PackageManager pm = getPackageManager();
+        Intent intent = new Intent();
+        // TODO (clchen): Replace Intent string with the actual
+        // Intent defined in the list of platform Intents.
+        intent.setAction("android.speech.tts.engine.GET_SAMPLE_TEXT");
+        intent.putExtra("language", mDefaultLanguage);
+        intent.putExtra("country", mDefaultCountry);
+        intent.putExtra("variant", mDefaultLocVariant);
+        List<ResolveInfo> resolveInfos = pm.queryIntentActivities(intent, 0);
+        // query only the package that matches that of the default engine
+        for (int i = 0; i < resolveInfos.size(); i++) {
+            ActivityInfo currentActivityInfo = resolveInfos.get(i).activityInfo;
+            if (mDefaultEng.equals(currentActivityInfo.packageName)) {
+                intent.setClassName(mDefaultEng, currentActivityInfo.name);
+                this.startActivityForResult(intent, GET_SAMPLE_TEXT);
+            }
+        }
+    }
+
 
     /**
      * Called when the TTS engine is initialized.
@@ -262,6 +287,16 @@ public class TextToSpeechSettings extends PreferenceActivity implements
                 Log.v(TAG, "Voice data check failed");
                 mEnableDemo = false;
                 updateWidgetState();
+            }
+        } else if (requestCode == GET_SAMPLE_TEXT) {
+            if (resultCode == TextToSpeech.LANG_AVAILABLE) {
+                if (mTts != null) {
+                    String sample = data.getExtras().getString("sampleText");
+                    mTts.speak(sample, TextToSpeech.QUEUE_FLUSH, null);
+                }
+            } else {
+                // TODO: Display an error here to the user.
+                Log.e(TAG, "Did not have a sample string for the requested language");
             }
         }
     }
@@ -321,10 +356,9 @@ public class TextToSpeechSettings extends PreferenceActivity implements
      */
     public boolean onPreferenceClick(Preference preference) {
         if (preference == mPlayExample) {
-            // Play example
-            if (mTts != null) {
-                mTts.speak(mDemoStrings[mDemoStringIndex], TextToSpeech.QUEUE_FLUSH, null);
-            }
+            // Get the sample text from the TTS engine; onActivityResult will do
+            // the actual speaking
+            getSampleText();
             return true;
         }
         if (preference == mInstallData) {
