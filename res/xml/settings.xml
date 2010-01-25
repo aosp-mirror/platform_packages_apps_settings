@@ -39,15 +39,26 @@
                 android:targetClass="com.android.phone.CallFeaturesSetting" />
         </com.android.settings.IconPreferenceScreen>
 
-        <!-- Sound and Display -->
+        <!-- Sound -->
 
         <com.android.settings.IconPreferenceScreen
-            settings:icon="@drawable/ic_settings_sound_display"
-            android:title="@string/sound_and_display_settings">
+            settings:icon="@drawable/ic_settings_sound"
+            android:title="@string/sound_settings_title">
             <intent
                 android:action="android.intent.action.MAIN"
                 android:targetPackage="com.android.settings"
-                android:targetClass="com.android.settings.SoundAndDisplaySettings" />
+                android:targetClass="com.android.settings.SoundSettings" />
+        </com.android.settings.IconPreferenceScreen>
+
+        <!-- Display -->
+
+        <com.android.settings.IconPreferenceScreen
+            settings:icon="@drawable/ic_settings_display"
+            android:title="@string/display_settings_title">
+            <intent
+                android:action="android.intent.action.MAIN"
+                android:targetPackage="com.android.settings"
+                android:targetClass="com.android.settings.DisplaySettings" />
         </com.android.settings.IconPreferenceScreen>
 
         <!-- Security & Location -->

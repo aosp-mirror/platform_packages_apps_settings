@@ -15,10 +15,9 @@
 -->
 
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+        android:title="@string/sound_settings"
+        android:key="sound_settings"
         xmlns:settings="http://schemas.android.com/apk/res/com.android.settings">
-
-    <PreferenceCategory android:key="sound_settings"
-            android:title="@string/sound_settings">
 
         <CheckBoxPreference
                 android:key="silent"
@@ -30,22 +29,13 @@
 
         <com.android.settings.RingerVolumePreference
                 android:key="ring_volume"
-                android:title="@string/ring_volume_title"
+                android:title="@string/all_volume_title"
                 android:summary="@string/ring_volume_summary"
-                android:dialogTitle="@string/ring_volume_title"
+                android:dialogTitle="@string/all_volume_title"
                 android:persistent="false"
                 android:dependency="silent"
                 android:order="2"
                 android:streamType="ring" />
-
-        <VolumePreference
-                android:key="media_volume"
-                android:title="@string/media_volume_title"
-                android:summary="@string/media_volume_summary"
-                android:dialogTitle="@string/media_volume_title"
-                android:persistent="false"
-                android:order="3"
-                android:streamType="music" />
 
         <com.android.settings.DefaultRingtonePreference
                 android:key="ringtone"
@@ -116,45 +106,11 @@
                 android:order="12"
                 android:defaultValue="true" />
 
-    </PreferenceCategory>
-
-    <ListPreference
-            android:key="emergency_tone"
-            android:title="@string/emergency_tone_title"
-            android:summary="@string/emergency_tone_summary"
-            android:entries="@array/emergency_tone_entries"
-            android:entryValues="@array/emergency_tone_values" />
-
-    <PreferenceCategory
-            android:title="@string/display_settings">
-
-        <CheckBoxPreference
-            android:key="accelerometer"
-            android:title="@string/accelerometer_title"
-            android:summaryOn="@string/accelerometer_summary_on"
-            android:summaryOff="@string/accelerometer_summary_off"/>
-
         <ListPreference
-            android:key="animations"
-            android:title="@string/animations_title"
-            android:persistent="false"
-            android:entries="@array/animations_entries"
-            android:entryValues="@array/animations_values" />
-
-        <com.android.settings.BrightnessPreference
-                android:key="brightness"
-                android:title="@string/brightness"
-                android:summary="@string/brightness_summary"
-                android:dialogIcon="@drawable/ic_popup_brightness"
-                android:dialogTitle="@string/brightness" />
-
-        <ListPreference
-                android:key="screen_timeout"
-                android:title="@string/screen_timeout"
-                android:summary="@string/screen_timeout_summary"
-                android:persistent="false"
-                android:entries="@array/screen_timeout_entries"
-                android:entryValues="@array/screen_timeout_values" />
-    </PreferenceCategory>
+                android:key="emergency_tone"
+                android:title="@string/emergency_tone_title"
+                android:summary="@string/emergency_tone_summary"
+                android:entries="@array/emergency_tone_entries"
+                android:entryValues="@array/emergency_tone_values" />
 
 </PreferenceScreen>

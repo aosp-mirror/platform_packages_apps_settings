@@ -34,7 +34,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/incoming_call_volume_title"
-                android:paddingTop="20dip"
+                android:paddingTop="10dip"
                 android:paddingLeft="20dip" 
                 android:paddingRight="20dip" />
         
@@ -46,6 +46,36 @@
                 android:paddingLeft="20dip" 
                 android:paddingRight="20dip" />
             
+        <!-- Used for the media volume -->
+        <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/media_volume_title"
+                android:paddingTop="10dip"
+                android:paddingLeft="20dip" 
+                android:paddingRight="20dip" />
+        <SeekBar android:id="@+id/media_volume_seekbar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingTop="6dip" 
+                android:paddingLeft="20dip" 
+                android:paddingRight="20dip" />
+
+        <!-- Used for the alarm volume -->
+        <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/alarm_volume_title"
+                android:paddingTop="10dip"
+                android:paddingLeft="20dip" 
+                android:paddingRight="20dip" />
+        <SeekBar android:id="@+id/alarm_volume_seekbar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingTop="6dip" 
+                android:paddingLeft="20dip" 
+                android:paddingRight="20dip" />
+
         <CheckBox android:id="@+id/same_notification_volume"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

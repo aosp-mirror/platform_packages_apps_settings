@@ -271,7 +271,7 @@ public class PowerUsageDetail extends Activity implements Button.OnClickListener
                 }
                 break;
             case SCREEN:
-                addControl(R.string.sound_and_display_settings,
+                addControl(R.string.display_settings,
                         R.string.battery_sugg_display,
                         ACTION_DISPLAY_SETTINGS);
                 removeHeader = false;

@@ -40,7 +40,7 @@ import android.telephony.TelephonyManager;
 import android.util.Log;
 import android.view.IWindowManager;
 
-public class SoundAndDisplaySettings extends PreferenceActivity implements
+public class SoundSettings extends PreferenceActivity implements
         Preference.OnPreferenceChangeListener {
     private static final String TAG = "SoundAndDisplaysSettings";
 
@@ -50,12 +50,9 @@ public class SoundAndDisplaySettings extends PreferenceActivity implements
 
     private static final String KEY_SILENT = "silent";
     private static final String KEY_VIBRATE = "vibrate";
-    private static final String KEY_SCREEN_TIMEOUT = "screen_timeout";
     private static final String KEY_DTMF_TONE = "dtmf_tone";
     private static final String KEY_SOUND_EFFECTS = "sound_effects";
     private static final String KEY_HAPTIC_FEEDBACK = "haptic_feedback";
-    private static final String KEY_ANIMATIONS = "animations";
-    private static final String KEY_ACCELEROMETER = "accelerometer";
     private static final String KEY_PLAY_MEDIA_NOTIFICATION_SOUNDS =
             "play_media_notification_sounds";
     private static final String KEY_EMERGENCY_TONE = "emergency_tone";
@@ -79,14 +76,9 @@ public class SoundAndDisplaySettings extends PreferenceActivity implements
     private CheckBoxPreference mDtmfTone;
     private CheckBoxPreference mSoundEffects;
     private CheckBoxPreference mHapticFeedback;
-    private ListPreference mAnimations;
-    private CheckBoxPreference mAccelerometer;
     private CheckBoxPreference mNotificationPulse;
-    private float[] mAnimationScales;
 
     private AudioManager mAudioManager;
-
-    private IWindowManager mWindowManager;
 
     private BroadcastReceiver mReceiver = new BroadcastReceiver() {
         @Override
@@ -106,11 +98,10 @@ public class SoundAndDisplaySettings extends PreferenceActivity implements
         int activePhoneType = TelephonyManager.getDefault().getPhoneType();
 
         mAudioManager = (AudioManager) getSystemService(Context.AUDIO_SERVICE);
-        mWindowManager = IWindowManager.Stub.asInterface(ServiceManager.getService("window"));
 
         mMountService = IMountService.Stub.asInterface(ServiceManager.getService("mount"));
 
-        addPreferencesFromResource(R.xml.sound_and_display_settings);
+        addPreferencesFromResource(R.xml.sound_settings);
 
         if (TelephonyManager.PHONE_TYPE_CDMA != activePhoneType) {
             // device is not CDMA, do not display CDMA emergency_tone
@@ -133,16 +124,6 @@ public class SoundAndDisplaySettings extends PreferenceActivity implements
         mHapticFeedback.setPersistent(false);
         mHapticFeedback.setChecked(Settings.System.getInt(resolver,
                 Settings.System.HAPTIC_FEEDBACK_ENABLED, 0) != 0);
-        mAnimations = (ListPreference) findPreference(KEY_ANIMATIONS);
-        mAnimations.setOnPreferenceChangeListener(this);
-        mAccelerometer = (CheckBoxPreference) findPreference(KEY_ACCELEROMETER);
-        mAccelerometer.setPersistent(false);
-
-        ListPreference screenTimeoutPreference =
-            (ListPreference) findPreference(KEY_SCREEN_TIMEOUT);
-        screenTimeoutPreference.setValue(String.valueOf(Settings.System.getInt(
-                resolver, SCREEN_OFF_TIMEOUT, FALLBACK_SCREEN_TIMEOUT_VALUE)));
-        screenTimeoutPreference.setOnPreferenceChangeListener(this);
 
         if (TelephonyManager.PHONE_TYPE_CDMA == activePhoneType) {
             ListPreference emergencyTonePreference =
@@ -219,47 +200,6 @@ public class SoundAndDisplaySettings extends PreferenceActivity implements
                 R.string.silent_mode_incl_alarm_summary :
                 R.string.silent_mode_summary);
 
-        int animations = 0;
-        try {
-            mAnimationScales = mWindowManager.getAnimationScales();
-        } catch (RemoteException e) {
-        }
-        if (mAnimationScales != null) {
-            if (mAnimationScales.length >= 1) {
-                animations = ((int)(mAnimationScales[0]+.5f)) % 10;
-            }
-            if (mAnimationScales.length >= 2) {
-                animations += (((int)(mAnimationScales[1]+.5f)) & 0x7) * 10;
-            }
-        }
-        int idx = 0;
-        int best = 0;
-        CharSequence[] aents = mAnimations.getEntryValues();
-        for (int i=0; i<aents.length; i++) {
-            int val = Integer.parseInt(aents[i].toString());
-            if (val <= animations && val > best) {
-                best = val;
-                idx = i;
-            }
-        }
-        mAnimations.setValueIndex(idx);
-        updateAnimationsSummary(mAnimations.getValue());
-        mAccelerometer.setChecked(Settings.System.getInt(
-                getContentResolver(),
-                Settings.System.ACCELEROMETER_ROTATION, 0) != 0);
-    }
-
-    private void updateAnimationsSummary(Object value) {
-        CharSequence[] summaries = getResources().getTextArray(R.array.animations_summaries);
-        CharSequence[] values = mAnimations.getEntryValues();
-        for (int i=0; i<values.length; i++) {
-            //Log.i("foo", "Comparing entry "+ values[i] + " to current "
-            //        + mAnimations.getValue());
-            if (values[i].equals(value)) {
-                mAnimations.setSummary(summaries[i]);
-                break;
-            }
-        }
     }
 
     private void setRingerMode(boolean silent, boolean vibrate) {
@@ -301,10 +241,6 @@ public class SoundAndDisplaySettings extends PreferenceActivity implements
             Settings.System.putInt(getContentResolver(), Settings.System.HAPTIC_FEEDBACK_ENABLED,
                     mHapticFeedback.isChecked() ? 1 : 0);
 
-        } else if (preference == mAccelerometer) {
-            Settings.System.putInt(getContentResolver(),
-                    Settings.System.ACCELEROMETER_ROTATION,
-                    mAccelerometer.isChecked() ? 1 : 0);
         } else if (preference == mNotificationPulse) {
             boolean value = mNotificationPulse.isChecked();
             Settings.System.putInt(getContentResolver(),
@@ -316,34 +252,7 @@ public class SoundAndDisplaySettings extends PreferenceActivity implements
 
     public boolean onPreferenceChange(Preference preference, Object objValue) {
         final String key = preference.getKey();
-        if (KEY_ANIMATIONS.equals(key)) {
-            try {
-                int value = Integer.parseInt((String) objValue);
-                if (mAnimationScales.length >= 1) {
-                    mAnimationScales[0] = value%10;
-                }
-                if (mAnimationScales.length >= 2) {
-                    mAnimationScales[1] = (value/10)%10;
-                }
-                try {
-                    mWindowManager.setAnimationScales(mAnimationScales);
-                } catch (RemoteException e) {
-                }
-                updateAnimationsSummary(objValue);
-            } catch (NumberFormatException e) {
-                Log.e(TAG, "could not persist animation setting", e);
-            }
-
-        }
-        if (KEY_SCREEN_TIMEOUT.equals(key)) {
-            int value = Integer.parseInt((String) objValue);
-            try {
-                Settings.System.putInt(getContentResolver(),
-                        SCREEN_OFF_TIMEOUT, value);
-            } catch (NumberFormatException e) {
-                Log.e(TAG, "could not persist screen timeout setting", e);
-            }
-        } else if (KEY_EMERGENCY_TONE.equals(key)) {
+        if (KEY_EMERGENCY_TONE.equals(key)) {
             int value = Integer.parseInt((String) objValue);
             try {
                 Settings.System.putInt(getContentResolver(),
