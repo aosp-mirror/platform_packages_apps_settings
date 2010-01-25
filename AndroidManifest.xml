@@ -432,6 +432,15 @@
                 <category android:name="android.intent.category.VOICE_LAUNCH" />
             </intent-filter>
         </activity>
+        
+        <activity android:name="VoiceInputOutputSettings"
+                android:label="@string/voice_input_output_settings">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <action android:name="com.android.settings.VOICE_INPUT_OUTPUT_SETTINGS" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
 
         <activity android:name="TextToSpeechSettings" android:label="@string/tts_settings">
             <intent-filter>

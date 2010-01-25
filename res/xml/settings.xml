@@ -144,16 +144,15 @@
                 android:targetClass="com.android.settings.LanguageSettings" />
         </com.android.settings.IconPreferenceScreen>
 
-        <!-- Dock -->
+        <!-- Voice input & output -->
 
         <com.android.settings.IconPreferenceScreen
-            android:key="dock_settings"
-            settings:icon="@drawable/ic_settings_dock"
-            android:title="@string/dock_settings">
+            settings:icon="@drawable/ic_settings_speech"
+            android:title="@string/voice_input_output_settings">
             <intent
                 android:action="android.intent.action.MAIN"
                 android:targetPackage="com.android.settings"
-                android:targetClass="com.android.settings.DockSettings" />
+                android:targetClass="com.android.settings.VoiceInputOutputSettings" />
         </com.android.settings.IconPreferenceScreen>
 
         <!-- Accessibility feedback -->
@@ -167,15 +166,16 @@
                 android:targetClass="com.android.settings.AccessibilitySettings" />
         </com.android.settings.IconPreferenceScreen>
 
-        <!-- Text-To-Speech -->
+        <!-- Dock -->
 
         <com.android.settings.IconPreferenceScreen
-            settings:icon="@drawable/ic_settings_speech"
-            android:title="@string/tts_settings">
+            android:key="dock_settings"
+            settings:icon="@drawable/ic_settings_dock"
+            android:title="@string/dock_settings">
             <intent
                 android:action="android.intent.action.MAIN"
                 android:targetPackage="com.android.settings"
-                android:targetClass="com.android.settings.TextToSpeechSettings" />
+                android:targetClass="com.android.settings.DockSettings" />
         </com.android.settings.IconPreferenceScreen>
 
         <!-- Date & Time -->
