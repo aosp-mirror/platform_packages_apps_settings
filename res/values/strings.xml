@@ -660,7 +660,7 @@
     <!-- Bluetooth settings.  Dock Setting Dialog - Remember setting and don't ask user again -->
     <string name="bluetooth_dock_settings_remember">Remember settings</string>
 
-    <!-- Wi-Fi settings -->
+    <!-- Wi-Fi Settings --> <skip />
     <!-- Used in the 2nd-level settings screen to turn on Wi-Fi -->
     <string name="wifi">Wi-Fi</string>
     <!-- Used in the 1st-level settings screen to turn on Wi-Fi -->
@@ -671,12 +671,127 @@
     <string name="wifi_settings">Wi-Fi settings</string>
     <!-- Title of the Wi-fi settings screen -->
     <string name="wifi_settings_category">Wi-Fi settings</string>
-    <!--Wireless controls setting screen, Wi-Fi settings summary text -->
+    <!-- Summary text of the Wi-fi settings screen -->
     <string name="wifi_settings_summary">Set up &amp; manage wireless access points</string>
+    <!-- Summary text when turning Wi-Fi or bluetooth on -->
+    <string name="wifi_starting">Turning on\u2026</string>
+    <!-- Summary text when turning Wi-Fi or bluetooth off -->
+    <string name="wifi_stopping">Turning off\u2026</string>
+    <!-- Summary text when Wi-Fi or bluetooth has error -->
+    <string name="wifi_error">Error</string>
+    <!-- Toast message when Wi-Fi or bluetooth is disallowed in airplane mode -->
+    <string name="wifi_in_airplane_mode">In airplane mode</string>
+    <!-- Toast message when Wi-Fi cannot scan for networks -->
+    <string name="wifi_fail_to_scan">Unable to scan for networks</string>
+    <!-- Checkbox title for option to notify user when open networks are nearby -->
+    <string name="wifi_notify_open_networks">Network notification</string>
+    <!-- Checkbox summary for option to notify user when open networks are nearby -->
+    <string name="wifi_notify_open_networks_summary">Notify me when an open network is available</string>
+    <!-- Action message to manually add a wifi network -->
+    <string name="wifi_add_network">Add Wi-Fi network</string>
+    <!-- Header for the list of wifi networks-->
+    <string name="wifi_access_points">Wi-Fi networks</string>
+    <!-- Menu option to scan Wi-Fi networks -->
+    <string name="wifi_menu_scan">Scan</string>
+    <!-- Menu option to Wi-Fi advanced settings -->
+    <string name="wifi_menu_advanced">Advanced</string>
+    <!-- Menu option to connect to a Wi-Fi network -->
+    <string name="wifi_menu_connect">Connect to network</string>
+    <!-- Menu option to delete a Wi-Fi network -->
+    <string name="wifi_menu_forget">Forget network</string>
+    <!-- Menu option to modify a Wi-Fi network configuration -->
+    <string name="wifi_menu_modify">Modify network</string>
+
+    <!-- Dialog for Access Points --> <skip />
+    <!-- Label for the SSID of the network -->
+    <string name="wifi_ssid">Network SSID</string>
+    <!-- Label for the security of the connection -->
+    <string name="wifi_security">Security</string>
+    <!-- Label for the signal strength of the connection -->
+    <string name="wifi_signal">Signal strength</string>
+    <!-- Label for the status of the connection -->
+    <string name="wifi_status">Status</string>
+    <!-- Label for the link speed of the connection -->
+    <string name="wifi_speed">Link speed</string>
+    <!-- Label for the IP address of the connection -->
+    <string name="wifi_ip_address">IP address</string>
+    <!-- Label for the EAP method of the network -->
+    <string name="wifi_eap_method">EAP method</string>
+    <!-- Label for the EAP CA certificate of the network -->
+    <string name="wifi_eap_ca_cert">CA certificate</string>
+    <!-- Label for the EAP user certificate of the network -->
+    <string name="wifi_eap_user_cert">User certificate</string>
+    <!-- Label for the EAP identity of the network -->
+    <string name="wifi_eap_identity">Identity</string>
+    <!-- Label for the EAP anonymous identity of the network -->
+    <string name="wifi_eap_anonymous">Anonymous identity</string>
+    <!-- Label for the password of the secured network -->
+    <string name="wifi_password">Password</string>
+    <!-- Label for the check box to show password -->
+    <string name="wifi_show_password">Show password.</string>
+    <!-- Hint for unchanged fields -->
+    <string name="wifi_unchanged">(unchanged)</string>
+    <!-- Hint for unspecified fields -->
+    <string name="wifi_unspecified">(unspecified)</string>
+    <!-- Summary for the remembered network. -->
+    <string name="wifi_remembered">Remembered</string>
+    <!-- Summary for the disabled network. -->
+    <string name="wifi_disabled">Disabled</string>
+    <!-- Summary for the remembered network but currently not in range. -->
+    <string name="wifi_not_in_range">Not in range</string>
+    <!-- Summary for the secured network. -->
+    <string name="wifi_secured">Secured with <xliff:g id="wifi_security">%1$s</xliff:g></string>
+    <!-- Summary for the secured and remembered network. Status can be "Remembered", "Disabled" or "Not in range". -->
+    <string name="wifi_secured_with_status"><xliff:g id="wifi_status">%2$s</xliff:g>, secured with <xliff:g id="wifi_security">%1$s</xliff:g></string>
+    <!-- Button label to connect to a Wi-Fi network -->
+    <string name="wifi_connect">Connect</string>
+    <!-- Button label to delete a Wi-Fi network -->
+    <string name="wifi_forget">Forget</string>
+    <!-- Button label to save a Wi-Fi network configuration -->
+    <string name="wifi_save">Save</string>
+    <!-- Button label to dismiss the dialog -->
+    <string name="wifi_cancel">Cancel</string>
+
+    <!-- Wi-Fi Advanced Settings --> <skip />
+    <!-- Wi-Fi settings screen, advanced, settings section.  This is a header shown above advanced wifi settings. -->
+    <string name="wifi_advanced_titlebar">Advanced</string>
+    <!-- Wi-Fi settings screen, setting title for choosing the number of channels to be used -->
+    <string name="wifi_setting_num_channels_title">Regulatory domain</string>
+    <!-- Wi-Fi settings screen, setting summary for choosing the number of channels to be used -->
+    <string name="wifi_setting_num_channels_summary">Set the number of channels to use</string>
+    <!-- Wi-Fi settings screen, generic error message when the regulatory domain could not be set. -->
+    <string name="wifi_setting_num_channels_error">There was a problem setting the regulatory domain.</string>
+    <!-- Wi-Fi settings screen, label to be appended to the count in displaying the list of valid channel counts -->
+    <string name="wifi_setting_num_channels_channel_phrase"><xliff:g id="num_channels">%1$d</xliff:g> channels</string>
+    <!-- Wi-Fi settings screen, setting title for setting the wifi sleep policy -->
+    <string name="wifi_setting_sleep_policy_title">Wi-Fi sleep policy</string>
+    <!-- Wi-Fi settings screen, setting summary for setting the wifi sleep policy -->
+    <string name="wifi_setting_sleep_policy_summary">Specify when to switch from Wi-Fi to mobile data</string>
+    <!-- Wi-Fi settings screen, generic error message when the sleep policy could not be set. -->
+    <string name="wifi_setting_sleep_policy_error">There was a problem setting the sleep policy.</string>
+    <!-- Wi-Fi settings screen, advanced, title of the item to show the Wi-Fi device's MAC address. -->
+    <string name="wifi_advanced_mac_address_title">MAC address</string>
+    <!-- Title of the screen to adjust IP settings -->
+    <string name="wifi_ip_settings_titlebar">IP settings</string>
+    <!-- Menu ietm to save the IP settings -->
+    <string name="wifi_ip_settings_menu_save">Save</string>
+    <!-- Menu ietm to cancel the IP settings -->
+    <string name="wifi_ip_settings_menu_cancel">Cancel</string>
+    <!-- Error message if the IP address is not valid -->
+    <string name="wifi_ip_settings_invalid_ip">Please type a valid IP address.</string>
+    <!-- Checkbox for whether to use a static IP address -->
+    <string name="wifi_use_static_ip">Use static IP</string>
+    <!-- Label for the DNS (first one) -->
+    <string name="wifi_dns1">DNS 1</string>
+    <!-- Label for the DNS (second one)-->
+    <string name="wifi_dns2">DNS 2</string>
+    <!-- Label for the gateway of the network -->
+    <string name="wifi_gateway">Gateway</string>
+    <!-- Label for the netmask of the network -->
+    <string name="wifi_netmask">Netmask</string>
+
     <!-- Button caption to forget a wifi network -->
     <string name="forget_network">Forget</string>
-    <!-- Label for status of connection -->
-    <string name="wifi_status">Status</string>
     <!-- Label for link speed (wifi) -->
     <string name="wifi_link_speed">Speed</string>
     <!-- Verbose wifi signal strength.  This is the best out of 4 levels. -->
@@ -709,19 +824,9 @@
     <string name="wifi_security_verbose_psk">secured with WPA/WPA2 PSK</string>
     <!-- Verbose security type of a wifi network.  Capitalized by app. -->
     <string name="wifi_security_verbose_eap">secured with 802.1x EAP</string>
-    <!-- Wi-Fi IP addrress label -->
-    <string name="ip_address">IP address</string>
     <!-- Label for the signal strength -->
     <string name="signal">Signal strength</string>
-    <!--Summary text when turning Wi-Fi or bluetooth on -->
-    <string name="wifi_starting">Turning on\u2026</string>
-    <!--Summary text when turning Wi-Fi or bluetooth off -->
-    <string name="wifi_stopping">Turning off\u2026</string>
-    <!-- Summary text when Wi-Fi or bluetooth has error -->
-    <string name="wifi_error">Error</string>
-    <!-- Toast message when Wi-Fi or bluetooth is disallowed in airplane mode -->
-    <string name="wifi_in_airplane_mode">In airplane mode</string>
-     <!-- Error message when Wi-Fi can't start -->
+    <!-- Error message when Wi-Fi can't start -->
     <string name="error_starting">Unable to start Wi-Fi</string>
     <!-- Error message when Wi-Fi can't stop -->
     <string name="error_stopping">Unable to stop Wi-Fi</string>
@@ -734,7 +839,7 @@
     <!-- Button label to connect to a wifi network-->
     <string name="connect">Connect</string>
     <!-- Dialog title for when the user is trying to connect to a particular network-->
-    <string name="connect_to_blank">Connect to <xliff:g id="network_name">%1$s</xliff:g></string>
+    <string name="connect_to_blank"><xliff:g id="network_name">%1$s</xliff:g></string>
     <!-- Caption for the eap method -->
     <string name="please_select_eap">EAP method</string>
     <!-- Caption for the phase2 -->
@@ -751,8 +856,6 @@
     <string name="please_type_passphrase">Wireless password</string>
     <!--Wi-Fi settings screen, connect to network dialog box, field label and hint text -->
     <string name="please_type_hex_key">WEP hex key (0-9, A-F)</string>
-    <!--Wi-Fi settings screen, connect to network dialog box, check box label -->
-    <string name="wifi_show_password">Show password.</string>
     <!--Wi-Fi settings screen menu option -->
     <string name="scan_wifi">Scan</string>
     <!-- Wifi network summary when not in nearby. -->
@@ -761,48 +864,18 @@
     <string name="summary_remembered">remembered</string>
     <!-- Wifi network summary when there was an error connecting -->
     <string name="summary_connection_failed">Connection unsuccessful, touch to try again</string>
-    <!-- Header for the list of wifi networks-->
-    <string name="wifi_access_points">Wi-Fi networks</string>
     <!-- Caption for entering the SSID of a wifi network -->
     <string name="wifi_type_ssid">Network SSID</string>
-    <!-- The label for security -->
-    <string name="wifi_security">Security</string>
     <!-- Button caption to save a configuration wifi -->
     <string name="wifi_save_config">Save</string>
     <!-- An edit field's grayed out value when it has not been modified -->
     <string name="wifi_password_unchanged">(unchanged)</string>
     <!-- Action message to add a wifi network -->
     <string name="wifi_add_other_network">Add Wi-Fi network</string>
-    <!-- Checkbox title for option to notify user when open networks are nearby -->
-    <string name="wifi_notify_open_networks">Network notification</string>
-    <!-- Checkbox summary for option to notify user when open networks are nearby -->
-    <string name="wifi_notify_open_networks_summary">Notify me when an open network is available</string>
     <!-- This dialog will use the error_title as the title. -->
     <string name="wifi_password_incorrect_error">The network password you typed is not correct. Please try again.</string>
     <!-- Generic error message -->
     <string name="wifi_generic_connection_error">There is a problem connecting to the network. Please try again.</string>
-    <!--Wi-Fi settings screen menu option -->
-    <string name="wifi_menu_advanced">Advanced</string>
-    <!-- Title of the screen to adjust IP settings -->
-    <string name="wifi_ip_settings_titlebar">IP settings</string>
-    <!-- Menu ietm to save the IP settings -->
-    <string name="wifi_ip_settings_menu_save">Save</string>
-    <!-- Menu ietm to cancel the IP settings -->
-    <string name="wifi_ip_settings_menu_cancel">Cancel</string>
-    <!-- Error message if the IP address is not valid -->
-    <string name="wifi_ip_settings_invalid_ip">Please type a valid IP address.</string>
-    <!-- Checkbox for whether to use a static IP address -->
-    <string name="wifi_use_static_ip">Use static IP</string>
-    <!-- Label for the IP address -->
-    <string name="wifi_ip_address">IP address</string>
-    <!-- Label for the DNS (first one) -->
-    <string name="wifi_dns1">DNS 1</string>
-    <!-- Label for the DNS (second one)-->
-    <string name="wifi_dns2">DNS 2</string>
-    <!-- Label for the gateway of the network -->
-    <string name="wifi_gateway">Gateway</string>
-    <!-- Label for the netmask of the network -->
-    <string name="wifi_netmask">Netmask</string>
     <!--Wi-Fi settings screen, network context menu item -->
     <string name="wifi_context_menu_connect">Connect to network</string>
     <!--Wi-Fi settings screen, network context menu item -->
@@ -810,31 +883,43 @@
     <!--Wi-Fi settings screen, network context menu item -->
     <string name="wifi_context_menu_change_password">Change password</string>
 
-    <!-- Wi-Fi settings screen, advanced, settings section.  This is a header shown above advanced wifi settings. -->
-    <string name="wifi_advanced_titlebar">Advanced</string>
-    <!-- Wi-Fi settings screen, setting title for choosing the number of channels to be used -->
-    <string name="wifi_setting_num_channels_title">Regulatory domain</string>
-    <!-- Wi-Fi settings screen, setting summary for choosing the number of channels to be used -->
-    <string name="wifi_setting_num_channels_summary">Set the number of channels to use</string>
-    <!-- Wi-Fi settings screen, generic error message when the regulatory domain could not be set. -->
-    <string name="wifi_setting_num_channels_error">There was a problem setting the regulatory domain.</string>
-    <!-- Wi-Fi settings screen, label to be appended to the count in displaying the list of valid channel counts -->
-    <string name="wifi_setting_num_channels_channel_phrase"><xliff:g id="num_channels">%1$d</xliff:g> channels</string>
+    <!-- Status message of Wi-Fi when it is scanning -->
+    <string name="fragment_status_scanning">Scanning\u2026</string>
+    <!-- Status message of Wi-Fi when it is connecting to a particular network -->
+    <string name="fragment_status_connecting">Connecting to <xliff:g id="network_name">%1$s</xliff:g>\u2026</string>
+    <!-- Status message of Wi-Fi when it is authenticating with a network -->
+    <string name="fragment_status_authenticating">Authenticating with <xliff:g id="network_name">%1$s</xliff:g>\u2026</string>
+    <!-- Status message of Wi-Fi when it is obtaining the IP address from a netwrok -->
+    <string name="fragment_status_obtaining_ip">Obtaining IP address from <xliff:g id="network_name">%1$s</xliff:g>\u2026</string>
+    <!-- Status message of Wi-Fi when it is connect to a network -->
+    <string name="fragment_status_connected">Connected to <xliff:g id="network_name">%1$s</xliff:g></string>
+    <!-- Status message of Wi-Fi when it is disconnecting from a network -->
+    <string name="fragment_status_disconnecting">Disconnecting from <xliff:g id="network_name">%1$s</xliff:g>\u2026</string>
+    <!-- Status message of Wi-Fi when it is disconnected from a network-->
+    <string name="fragment_status_disconnected">Disconnected</string>
+    <!-- Status message of Wi-Fi when it is a failure (connection) -->
+    <string name="fragment_status_failed">Unsuccessful</string>
 
-    <!-- Wi-Fi settings screen, setting title for setting the wifi sleep policy -->
-    <string name="wifi_setting_sleep_policy_title">Wi-Fi sleep policy</string>
-    <!-- Wi-Fi settings screen, setting summary for setting the wifi sleep policy -->
-    <string name="wifi_setting_sleep_policy_summary">Specify when to switch from Wi-Fi to mobile data</string>
-    <!-- Wi-Fi settings screen, generic error message when the sleep policy could not be set. -->
-    <string name="wifi_setting_sleep_policy_error">There was a problem setting the sleep policy.</string>
-
-    <!-- Wi-Fi settings screen, advanced, title of the item to show the Wi-Fi device's MAC address. -->
-    <string name="wifi_advanced_mac_address_title">MAC address</string>
+    <!-- Status message of Wi-Fi when it is scanning -->
+    <string name="status_scanning">Scanning\u2026</string>
+    <!-- Status message of Wi-Fi when it is connecting (but the network is not known right now) -->
+    <string name="status_connecting">Connecting\u2026</string>
+    <!-- Status message of Wi-Fi when it is authenticating (but the network is not known right now) -->
+    <string name="status_authenticating">Authenticating\u2026</string>
+    <!--Wi-Fi settings screen, summary text for network when connecting -->
+    <string name="status_obtaining_ip">Obtaining address\u2026</string>
+    <!--Wi-Fi settings screen, summary text for network when connected -->
+    <string name="status_connected">Connected</string>
+    <!-- Status message of Wi-Fi when it is disconnecting (but the network is not known right now) -->
+    <string name="status_disconnecting">Disconnecting\u2026</string>
+    <!-- Status message of Wi-Fi when it is disconnected (but the network is not known right now) -->
+    <string name="status_disconnected">Disconnected</string>
+    <!-- Status message of Wi-Fi when it is a failure (but the network is not known right now) -->
+    <string name="status_failed">Unsuccessful</string>
 
     <!-- Do not translate. Used for diagnostic screens, precise translation is not necessary
          Wi-Fi Testing on the diagnostic screen-->
     <string name="testing_wifi_info" translatable="false">Wifi information</string>
-
     <!-- Do not translate. Used for diagnostic screens, precise translation is not necessary
          Menu item for WifiManager disableNetwork API-->
     <string name="disableNetwork" translatable="false">disableNetwork</string>
@@ -853,7 +938,6 @@
     <!-- Do not translate. Used for diagnostic screens, precise translation is not necessary
          Menu item on Wifi information screen-->
     <string name="wifi_api_test" translatable="false">Wifi API</string>
-
     <!-- Do not translate. Used for diagnostic screens, precise translation is not necessary
          Menu item on Wifi information screen-->
     <string name="wifi_status_test" translatable="false">Wifi Status</string>
@@ -915,41 +999,6 @@
     <!-- Do not translate. Used for diagnostic screens, precise translation is not necessary
          Label on Wifi Configuration screen-->
     <string name="config_list_label" translatable="false">Configured Networks</string>
-
-
-    <!-- Status message of Wi-Fi when it is scanning -->
-    <string name="fragment_status_scanning">Scanning\u2026</string>
-    <!-- Status message of Wi-Fi when it is connecting to a particular network -->
-    <string name="fragment_status_connecting">Connecting to <xliff:g id="network_name">%1$s</xliff:g>\u2026</string>
-    <!-- Status message of Wi-Fi when it is authenticating with a network -->
-    <string name="fragment_status_authenticating">Authenticating with <xliff:g id="network_name">%1$s</xliff:g>\u2026</string>
-    <!-- Status message of Wi-Fi when it is obtaining the IP address from a netwrok -->
-    <string name="fragment_status_obtaining_ip">Obtaining IP address from <xliff:g id="network_name">%1$s</xliff:g>\u2026</string>
-    <!-- Status message of Wi-Fi when it is connect to a network -->
-    <string name="fragment_status_connected">Connected to <xliff:g id="network_name">%1$s</xliff:g></string>
-    <!-- Status message of Wi-Fi when it is disconnecting from a network -->
-    <string name="fragment_status_disconnecting">Disconnecting from <xliff:g id="network_name">%1$s</xliff:g>\u2026</string>
-    <!-- Status message of Wi-Fi when it is disconnected from a network-->
-    <string name="fragment_status_disconnected">Disconnected</string>
-    <!-- Status message of Wi-Fi when it is a failure (connection) -->
-    <string name="fragment_status_failed">Unsuccessful</string>
-
-    <!-- Status message of Wi-Fi when it is scanning -->
-    <string name="status_scanning">Scanning\u2026</string>
-    <!-- Status message of Wi-Fi when it is connecting (but the network is not known right now) -->
-    <string name="status_connecting">Connecting\u2026</string>
-    <!-- Status message of Wi-Fi when it is authenticating (but the network is not known right now) -->
-    <string name="status_authenticating">Authenticating\u2026</string>
-    <!--Wi-Fi settings screen, summary text for network when connecting -->
-    <string name="status_obtaining_ip">Obtaining address\u2026</string>
-    <!--Wi-Fi settings screen, summary text for network when connected -->
-    <string name="status_connected">Connected</string>
-    <!-- Status message of Wi-Fi when it is disconnecting (but the network is not known right now) -->
-    <string name="status_disconnecting">Disconnecting\u2026</string>
-    <!-- Status message of Wi-Fi when it is disconnected (but the network is not known right now) -->
-    <string name="status_disconnected">Disconnected</string>
-    <!-- Status message of Wi-Fi when it is a failure (but the network is not known right now) -->
-    <string name="status_failed">Unsuccessful</string>
 
     <!-- Sound and alerts settings -->
     <!-- Main Settings screen setting option name to go into the sound settings screen -->

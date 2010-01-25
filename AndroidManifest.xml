@@ -93,7 +93,23 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".wifi.AdvancedSettings" android:label="@string/wifi_ip_settings_titlebar"
+        <activity android:name=".wifi.WifiSettings2"
+                android:label="@string/wifi_settings"
+                android:configChanges="orientation|keyboardHidden"
+                android:clearTaskOnLaunch="true"
+                >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <action android:name="android.settings.WIFI_SETTINGS" />
+                <action android:name="android.net.wifi.PICK_WIFI_NETWORK" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.VOICE_LAUNCH" />
+                <category android:name="com.android.settings.SHORTCUT" />
+            </intent-filter>
+        </activity>
+
+        <activity android:name=".wifi.AdvancedSettings"
+                android:label="@string/wifi_ip_settings_titlebar"
                 >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

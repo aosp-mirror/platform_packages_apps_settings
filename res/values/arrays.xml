@@ -230,6 +230,39 @@
         <item>Unsuccessful</item>
     </string-array>
 
+    <!-- Match this with the constants in AccessPoint. --> <skip />
+    <!-- Wi-Fi settings.  The type of security a Wi-Fi network has. -->
+    <string-array name="wifi_security">
+        <!-- The Wi-Fi network does not have any security. -->
+        <item>Open</item>
+        <!-- Do not translate. -->
+        <item>WEP</item>
+        <!-- Do not translate. -->
+        <item>WPA/WPA2 PSK</item>
+        <!-- Do not translate. -->
+        <item>802.1x EAP</item>
+    </string-array>
+
+    <!-- Match this with the constants in WifiDialog. --> <skip />
+    <!-- Wi-Fi settings.  The type of EAP method a Wi-Fi network has. -->
+    <string-array name="wifi_eap_method">
+        <!-- Do not translate. -->
+        <item>PEAP</item>
+        <!-- Do not translate. -->
+        <item>TLS</item>
+        <!-- Do not translate. -->
+        <item>TTLS</item>
+    </string-array>
+
+    <!-- Match this with drawable.wifi_signal. --> <skip />
+    <!-- Wi-Fi settings. The signal strength a Wi-Fi network has. -->
+    <string-array name="wifi_signal">
+        <item>Poor</item>
+        <item>Fair</item>
+        <item>Good</item>
+        <item>Excellent</item>
+    </string-array>
+
     <!-- Match this with code. --> <skip />
     <!-- Wi-Fi settings.  The type of security a Wi-Fi network has.  The user can choose this when he adds a manual network, or configures an existing network. -->
     <string-array name="wifi_security_entries">
