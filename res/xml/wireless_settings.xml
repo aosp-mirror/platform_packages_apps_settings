@@ -57,6 +57,15 @@
     </PreferenceScreen>
 
     <PreferenceScreen
+        android:title="@string/tether_settings_title"
+        android:summary="@string/tether_settings_summary">
+        <intent
+            android:action="android.intent.action.MAIN"
+            android:targetPackage="com.android.settings"
+            android:targetClass="com.android.settings.TetherSettings" />
+    </PreferenceScreen>
+
+    <PreferenceScreen
         android:key="vpn_settings"
         android:title="@string/vpn_settings_title"
         android:summary="@string/vpn_settings_summary" >
