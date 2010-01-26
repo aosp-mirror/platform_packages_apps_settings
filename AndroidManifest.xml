@@ -402,14 +402,25 @@
 
         <activity android:name="DeviceAdminSettings"
                 android:label="@string/device_admin_settings_title"
+                android:theme="@style/TallTitleBarTheme"
                 android:clearTaskOnLaunch="true"
                 >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-                <action android:name="android.app.action.ADD_DEVICE_ADMIN" />
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.VOICE_LAUNCH" />
                 <category android:name="com.android.settings.SHORTCUT" />
+            </intent-filter>
+        </activity>
+
+        <activity android:name="DeviceAdminAdd"
+                android:label="@string/device_admin_add_title"
+                android:theme="@style/TallTitleBarTheme"
+                android:clearTaskOnLaunch="true"
+                >
+            <intent-filter>
+                <action android:name="android.app.action.ADD_DEVICE_ADMIN" />
+                <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
 

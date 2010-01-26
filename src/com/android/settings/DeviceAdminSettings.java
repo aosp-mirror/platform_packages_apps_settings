@@ -28,6 +28,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
+import android.content.res.Resources;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -80,10 +81,7 @@ public class DeviceAdminSettings extends ListActivity {
         });
         
         mSelectLayout = findViewById(R.id.select_layout);
-        getListView().setDivider(null);
 
-        updateLayout();
-        
         if (DevicePolicyManager.ACTION_ADD_DEVICE_ADMIN.equals(getIntent().getAction())) {
             ComponentName cn = (ComponentName)getIntent().getParcelableExtra(
                     DevicePolicyManager.EXTRA_DEVICE_ADMIN);
@@ -114,12 +112,23 @@ public class DeviceAdminSettings extends ListActivity {
         }
     }
     
+    @Override
+    protected void onResume() {
+        super.onResume();
+        updateLayout();
+    }
+
     void updateLayout() {
         if (mCurrentAdmin != null) {
             mActiveLayout.setVisibility(View.VISIBLE);
             mSelectLayout.setVisibility(View.GONE);
             mActiveIcon.setImageDrawable(mCurrentAdmin.loadIcon(getPackageManager()));
             mActiveName.setText(mCurrentAdmin.loadLabel(getPackageManager()));
+            try {
+                mActiveDescription.setText(
+                        mCurrentAdmin.loadDescription(getPackageManager()));
+            } catch (Resources.NotFoundException e) {
+            }
         } else {
             mActiveLayout.setVisibility(View.GONE);
             mSelectLayout.setVisibility(View.VISIBLE);
@@ -145,8 +154,9 @@ public class DeviceAdminSettings extends ListActivity {
     @Override
     protected void onListItemClick(ListView l, View v, int position, long id) {
         DeviceAdminInfo dpi = (DeviceAdminInfo)l.getAdapter().getItem(position);
-        mDPM.setActiveAdmin(dpi.getComponent());
-        finish();
+        Intent intent = new Intent(DevicePolicyManager.ACTION_ADD_DEVICE_ADMIN);
+        intent.putExtra(DevicePolicyManager.EXTRA_DEVICE_ADMIN, dpi.getComponent());
+        startActivity(intent);
     }
     
     static class ViewHolder {
