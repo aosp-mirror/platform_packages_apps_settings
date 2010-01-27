@@ -19,17 +19,22 @@ package com.android.settings;
 import org.xmlpull.v1.XmlPullParserException;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.app.DeviceAdmin;
 import android.app.DeviceAdminInfo;
 import android.app.DevicePolicyManager;
+import android.app.Dialog;
 import android.app.ListActivity;
 import android.content.ComponentName;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
 import android.content.res.Resources;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.RemoteCallback;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -46,8 +51,11 @@ import java.util.List;
 public class DeviceAdminSettings extends ListActivity {
     static final String TAG = "DeviceAdminSettings";
     
+    static final int DIALOG_WARNING = 1;
+    
     DevicePolicyManager mDPM;
     DeviceAdminInfo mCurrentAdmin;
+    Handler mHandler;
     
     View mActiveLayout;
     ImageView mActiveIcon;
@@ -64,6 +72,7 @@ public class DeviceAdminSettings extends ListActivity {
 
         mDPM = (DevicePolicyManager)getSystemService(Context.DEVICE_POLICY_SERVICE);
         mCurrentAdmin = mDPM.getActiveAdminInfo();
+        mHandler = new Handler(getMainLooper());
         
         setContentView(R.layout.device_admin_settings);
         
@@ -74,8 +83,23 @@ public class DeviceAdminSettings extends ListActivity {
         findViewById(R.id.remove_button).setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 if (mCurrentAdmin != null) {
-                    mDPM.removeActiveAdmin(mCurrentAdmin.getComponent());
-                    finish();
+                    mDPM.getRemoveWarning(mCurrentAdmin.getComponent(),
+                            new RemoteCallback(mHandler) {
+                        @Override
+                        protected void onResult(Bundle bundle) {
+                            CharSequence msg = bundle != null
+                                    ? bundle.getCharSequence(DeviceAdmin.EXTRA_DISABLE_WARNING)
+                                    : null;
+                            if (msg == null) {
+                                mDPM.removeActiveAdmin(mCurrentAdmin.getComponent());
+                                finish();
+                            } else {
+                                Bundle args = new Bundle();
+                                args.putCharSequence(DeviceAdmin.EXTRA_DISABLE_WARNING, msg);
+                                showDialog(DIALOG_WARNING, args);
+                            }
+                        }
+                    });
                 }
             }
         });
@@ -116,6 +140,30 @@ public class DeviceAdminSettings extends ListActivity {
     protected void onResume() {
         super.onResume();
         updateLayout();
+    }
+
+    @Override
+    protected Dialog onCreateDialog(int id, Bundle args) {
+        switch (id) {
+            case DIALOG_WARNING: {
+                CharSequence msg = args.getCharSequence(DeviceAdmin.EXTRA_DISABLE_WARNING);
+                AlertDialog.Builder builder = new AlertDialog.Builder(
+                        DeviceAdminSettings.this);
+                builder.setMessage(msg);
+                builder.setPositiveButton(R.string.dlg_ok,
+                        new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        mDPM.removeActiveAdmin(mCurrentAdmin.getComponent());
+                        finish();
+                    }
+                });
+                builder.setNegativeButton(R.string.dlg_cancel, null);
+                return builder.create();
+            }
+            default:
+                return super.onCreateDialog(id, args);
+                    
+        }
     }
 
     void updateLayout() {

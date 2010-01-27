@@ -43,10 +43,12 @@ public class DeviceAdminAdd extends Activity {
     
     DevicePolicyManager mDPM;
     DeviceAdminInfo mDeviceAdmin;
+    CharSequence mAddMsgText;
     
     ImageView mActiveIcon;
     TextView mActiveName;
     TextView mActiveDescription;
+    TextView mAddMsg;
     TextView mActiveWarning;
     ViewGroup mAdminPolicies;
     
@@ -103,11 +105,15 @@ public class DeviceAdminAdd extends Activity {
             return;
         }
         
+        mAddMsgText = getIntent().getCharSequenceExtra(
+                DevicePolicyManager.EXTRA_ADD_EXPLANATION);
+        
         setContentView(R.layout.device_admin_add);
         
         mActiveIcon = (ImageView)findViewById(R.id.active_icon);
         mActiveName = (TextView)findViewById(R.id.active_name);
         mActiveDescription = (TextView)findViewById(R.id.active_description);
+        mAddMsg = (TextView)findViewById(R.id.add_msg);
         mActiveWarning = (TextView)findViewById(R.id.active_warning);
         mAdminPolicies = (ViewGroup)findViewById(R.id.admin_policies);
         findViewById(R.id.add_button).setOnClickListener(new View.OnClickListener() {
@@ -131,7 +137,15 @@ public class DeviceAdminAdd extends Activity {
         try {
             mActiveDescription.setText(
                     mDeviceAdmin.loadDescription(getPackageManager()));
+            mActiveDescription.setVisibility(View.VISIBLE);
         } catch (Resources.NotFoundException e) {
+            mActiveDescription.setVisibility(View.GONE);
+        }
+        if (mAddMsgText != null) {
+            mAddMsg.setText(mAddMsgText);
+            mAddMsg.setVisibility(View.VISIBLE);
+        } else {
+            mAddMsg.setVisibility(View.GONE);
         }
         mActiveWarning.setText(getString(R.string.device_admin_warning,
                 mDeviceAdmin.getActivityInfo().applicationInfo.loadLabel(getPackageManager())));

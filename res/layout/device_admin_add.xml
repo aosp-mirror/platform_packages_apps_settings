@@ -20,21 +20,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:background="@*android:drawable/title_bar_medium">
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:text="@string/add_device_admin_msg"
-            android:gravity="center"
-            android:textAppearance="?android:attr/textAppearanceLarge"
-            android:textColor="?android:attr/textColorPrimary"
-            android:shadowColor="?android:attr/colorBackground"
-            android:shadowRadius="2" />
-    </LinearLayout>
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -45,6 +30,21 @@
             android:layout_height="0dp"
             android:layout_weight="1"
             android:orientation="vertical">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:background="@*android:drawable/title_bar_medium">
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:text="@string/add_device_admin_msg"
+                    android:gravity="center"
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:textColor="?android:attr/textColorPrimary"
+                    android:shadowColor="?android:attr/colorBackground"
+                    android:shadowRadius="2" />
+            </LinearLayout>
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -67,11 +67,6 @@
                     android:singleLine="true"
                     android:ellipsize="marquee" />
             </LinearLayout>
-            <TextView android:id="@+id/active_description"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:padding="10dip" />
             <TextView android:id="@+id/active_warning"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -82,6 +77,16 @@
                 android:orientation="vertical"
                 android:paddingLeft="16dip"
                 android:paddingRight="12dip" />
+            <TextView android:id="@+id/active_description"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:padding="10dip" />
+            <TextView android:id="@+id/add_msg"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:padding="10dip" />
         </LinearLayout>
     </ScrollView>
     <LinearLayout style="@android:style/ButtonBar"
