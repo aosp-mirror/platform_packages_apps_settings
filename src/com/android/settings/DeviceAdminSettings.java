@@ -40,12 +40,14 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.CheckBox;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 
 public class DeviceAdminSettings extends ListActivity {
@@ -54,155 +56,57 @@ public class DeviceAdminSettings extends ListActivity {
     static final int DIALOG_WARNING = 1;
     
     DevicePolicyManager mDPM;
-    DeviceAdminInfo mCurrentAdmin;
-    Handler mHandler;
-    
-    View mActiveLayout;
-    ImageView mActiveIcon;
-    TextView mActiveName;
-    TextView mActiveDescription;
-    
-    View mSelectLayout;
-    ArrayList<DeviceAdminInfo> mAvailablePolicies
-            = new ArrayList<DeviceAdminInfo>();
+    final HashSet<ComponentName> mActiveAdmins = new HashSet<ComponentName>();
+    final ArrayList<DeviceAdminInfo> mAvailableAdmins = new ArrayList<DeviceAdminInfo>();
     
     @Override
     protected void onCreate(Bundle icicle) {
         super.onCreate(icicle);
 
         mDPM = (DevicePolicyManager)getSystemService(Context.DEVICE_POLICY_SERVICE);
-        mCurrentAdmin = mDPM.getActiveAdminInfo();
-        mHandler = new Handler(getMainLooper());
         
         setContentView(R.layout.device_admin_settings);
-        
-        mActiveLayout = findViewById(R.id.active_layout);
-        mActiveIcon = (ImageView)findViewById(R.id.active_icon);
-        mActiveName = (TextView)findViewById(R.id.active_name);
-        mActiveDescription = (TextView)findViewById(R.id.active_description);
-        findViewById(R.id.remove_button).setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                if (mCurrentAdmin != null) {
-                    mDPM.getRemoveWarning(mCurrentAdmin.getComponent(),
-                            new RemoteCallback(mHandler) {
-                        @Override
-                        protected void onResult(Bundle bundle) {
-                            CharSequence msg = bundle != null
-                                    ? bundle.getCharSequence(DeviceAdmin.EXTRA_DISABLE_WARNING)
-                                    : null;
-                            if (msg == null) {
-                                mDPM.removeActiveAdmin(mCurrentAdmin.getComponent());
-                                finish();
-                            } else {
-                                Bundle args = new Bundle();
-                                args.putCharSequence(DeviceAdmin.EXTRA_DISABLE_WARNING, msg);
-                                showDialog(DIALOG_WARNING, args);
-                            }
-                        }
-                    });
-                }
-            }
-        });
-        
-        mSelectLayout = findViewById(R.id.select_layout);
-
-        if (DevicePolicyManager.ACTION_ADD_DEVICE_ADMIN.equals(getIntent().getAction())) {
-            ComponentName cn = (ComponentName)getIntent().getParcelableExtra(
-                    DevicePolicyManager.EXTRA_DEVICE_ADMIN);
-            if (cn == null) {
-                Log.w(TAG, "No component specified in " + getIntent().getAction());
-                finish();
-                return;
-            }
-            if (cn.equals(mCurrentAdmin)) {
-                setResult(Activity.RESULT_OK);
-                finish();
-                return;
-            }
-            if (mCurrentAdmin != null) {
-                Log.w(TAG, "Admin already set, can't do " + getIntent().getAction());
-                finish();
-                return;
-            }
-            
-            try {
-                mDPM.setActiveAdmin(cn);
-                setResult(Activity.RESULT_OK);
-            } catch (RuntimeException e) {
-                Log.w(TAG, "Unable to set admin " + cn, e);
-                setResult(Activity.RESULT_CANCELED);
-            }
-            finish();
-        }
     }
     
     @Override
     protected void onResume() {
         super.onResume();
-        updateLayout();
+        updateList();
     }
 
-    @Override
-    protected Dialog onCreateDialog(int id, Bundle args) {
-        switch (id) {
-            case DIALOG_WARNING: {
-                CharSequence msg = args.getCharSequence(DeviceAdmin.EXTRA_DISABLE_WARNING);
-                AlertDialog.Builder builder = new AlertDialog.Builder(
-                        DeviceAdminSettings.this);
-                builder.setMessage(msg);
-                builder.setPositiveButton(R.string.dlg_ok,
-                        new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int which) {
-                        mDPM.removeActiveAdmin(mCurrentAdmin.getComponent());
-                        finish();
-                    }
-                });
-                builder.setNegativeButton(R.string.dlg_cancel, null);
-                return builder.create();
+    void updateList() {
+        mActiveAdmins.clear();
+        List<ComponentName> cur = mDPM.getActiveAdmins();
+        if (cur != null) {
+            for (int i=0; i<cur.size(); i++) {
+                mActiveAdmins.add(cur.get(i));
             }
-            default:
-                return super.onCreateDialog(id, args);
-                    
         }
-    }
-
-    void updateLayout() {
-        if (mCurrentAdmin != null) {
-            mActiveLayout.setVisibility(View.VISIBLE);
-            mSelectLayout.setVisibility(View.GONE);
-            mActiveIcon.setImageDrawable(mCurrentAdmin.loadIcon(getPackageManager()));
-            mActiveName.setText(mCurrentAdmin.loadLabel(getPackageManager()));
+        
+        mAvailableAdmins.clear();
+        List<ResolveInfo> avail = getPackageManager().queryBroadcastReceivers(
+                new Intent(DeviceAdmin.ACTION_DEVICE_ADMIN_ENABLED),
+                PackageManager.GET_META_DATA);
+        for (int i=0; i<avail.size(); i++) {
+            ResolveInfo ri = avail.get(i);
             try {
-                mActiveDescription.setText(
-                        mCurrentAdmin.loadDescription(getPackageManager()));
-            } catch (Resources.NotFoundException e) {
+                DeviceAdminInfo dpi = new DeviceAdminInfo(this, ri);
+                mAvailableAdmins.add(dpi);
+            } catch (XmlPullParserException e) {
+                Log.w(TAG, "Skipping " + ri.activityInfo, e);
+            } catch (IOException e) {
+                Log.w(TAG, "Skipping " + ri.activityInfo, e);
             }
-        } else {
-            mActiveLayout.setVisibility(View.GONE);
-            mSelectLayout.setVisibility(View.VISIBLE);
-            mAvailablePolicies.clear();
-            List<ResolveInfo> avail = getPackageManager().queryBroadcastReceivers(
-                    new Intent(DeviceAdmin.ACTION_DEVICE_ADMIN_ENABLED),
-                    PackageManager.GET_META_DATA);
-            for (int i=0; i<avail.size(); i++) {
-                ResolveInfo ri = avail.get(i);
-                try {
-                    DeviceAdminInfo dpi = new DeviceAdminInfo(this, ri);
-                    mAvailablePolicies.add(dpi);
-                } catch (XmlPullParserException e) {
-                    Log.w(TAG, "Skipping " + ri.activityInfo, e);
-                } catch (IOException e) {
-                    Log.w(TAG, "Skipping " + ri.activityInfo, e);
-                }
-            }
-            getListView().setAdapter(new PolicyListAdapter());
         }
+        
+        getListView().setAdapter(new PolicyListAdapter());
     }
     
     @Override
     protected void onListItemClick(ListView l, View v, int position, long id) {
         DeviceAdminInfo dpi = (DeviceAdminInfo)l.getAdapter().getItem(position);
-        Intent intent = new Intent(DevicePolicyManager.ACTION_ADD_DEVICE_ADMIN);
+        Intent intent = new Intent();
+        intent.setClass(this, DeviceAdminAdd.class);
         intent.putExtra(DevicePolicyManager.EXTRA_DEVICE_ADMIN, dpi.getComponent());
         startActivity(intent);
     }
@@ -210,6 +114,8 @@ public class DeviceAdminSettings extends ListActivity {
     static class ViewHolder {
         ImageView icon;
         TextView name;
+        CheckBox checkbox;
+        TextView description;
     }
     
     class PolicyListAdapter extends BaseAdapter {
@@ -224,11 +130,11 @@ public class DeviceAdminSettings extends ListActivity {
         }
         
         public int getCount() {
-            return mAvailablePolicies.size();
+            return mAvailableAdmins.size();
         }
 
         public Object getItem(int position) {
-            return mAvailablePolicies.get(position);
+            return mAvailableAdmins.get(position);
         }
 
         public long getItemId(int position) {
@@ -259,15 +165,22 @@ public class DeviceAdminSettings extends ListActivity {
             ViewHolder h = new ViewHolder();
             h.icon = (ImageView)v.findViewById(R.id.icon);
             h.name = (TextView)v.findViewById(R.id.name);
+            h.checkbox = (CheckBox)v.findViewById(R.id.checkbox);
+            h.description = (TextView)v.findViewById(R.id.description);
             v.setTag(h);
             return v;
         }
         
         public void bindView(View view, int position) {
             ViewHolder vh = (ViewHolder) view.getTag();
-            DeviceAdminInfo item = mAvailablePolicies.get(position);
+            DeviceAdminInfo item = mAvailableAdmins.get(position);
             vh.icon.setImageDrawable(item.loadIcon(getPackageManager()));
             vh.name.setText(item.loadLabel(getPackageManager()));
+            vh.checkbox.setChecked(mActiveAdmins.contains(item.getComponent()));
+            try {
+                vh.description.setText(item.loadDescription(getPackageManager()));
+            } catch (Resources.NotFoundException e) {
+            }
         }
     }
 }

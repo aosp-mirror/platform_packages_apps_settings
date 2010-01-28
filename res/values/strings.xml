@@ -2347,20 +2347,26 @@ found in the list of installed applications.</string>
     <!-- Device admin settings activity title -->
     <string name="device_admin_settings_title">Device administration settings</string>
     <!-- Label for screen showing the active device policy -->
-    <string name="active_device_admin_msg">Active device administrator</string>
+    <string name="active_device_admin_msg">Device administrator</string>
     <!-- Label for button to remove the active device admin -->
     <string name="remove_device_admin">Deactivate</string>
     <!-- Label for screen showing to select device policy -->
-    <string name="select_device_admin_msg">Select device administrator</string>
+    <string name="select_device_admin_msg">Device administrators</string>
+    <!-- Message when there are no available device admins to display -->
+    <string name="no_device_admins">No available device administrators</string>
 
     <!-- Label for screen showing to add device policy -->
-    <string name="add_device_admin_msg">Activate device administrator</string>
+    <string name="add_device_admin_msg">Activate device administrator?</string>
     <!-- Label for button to set the active device admin -->
     <string name="add_device_admin">Activate</string>
     <!-- Device admin add activity title -->
-    <string name="device_admin_add_title">Activate device administrator</string>
+    <string name="device_admin_add_title">Device administrator</string>
     <!-- Device admin warning message about policies an admin can use -->
     <string name="device_admin_warning">Activating this administrator will allow
+        the application <xliff:g id="app_name">%1$s</xliff:g> to perform the
+        following operations:</string>
+    <!-- Device admin warning message about policies an admin can use -->
+    <string name="device_admin_status">This administrator is active and allows
         the application <xliff:g id="app_name">%1$s</xliff:g> to perform the
         following operations:</string>
     
