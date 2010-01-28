@@ -66,8 +66,9 @@ public class DeviceAdminAdd extends Activity {
     Button mActionButton;
     
     View mSelectLayout;
-    ArrayList<DeviceAdminInfo> mAvailablePolicies
-            = new ArrayList<DeviceAdminInfo>();
+    
+    final ArrayList<View> mAddingPolicies = new ArrayList<View>();
+    final ArrayList<View> mActivePolicies = new ArrayList<View>();
     
     boolean mAdding;
     
@@ -191,6 +192,13 @@ public class DeviceAdminAdd extends Activity {
         }
     }
     
+    static void setViewVisibility(ArrayList<View> views, int visibility) {
+        final int N = views.size();
+        for (int i=0; i<N; i++) {
+            views.get(i).setVisibility(visibility);
+        }
+    }
+    
     void updateInterface() {
         mAdminIcon.setImageDrawable(mDeviceAdmin.loadIcon(getPackageManager()));
         mAdminName.setText(mDeviceAdmin.loadLabel(getPackageManager()));
@@ -207,19 +215,37 @@ public class DeviceAdminAdd extends Activity {
         } else {
             mAddMsg.setVisibility(View.GONE);
         }
-        ArrayList<DeviceAdminInfo.PolicyInfo> policies = mDeviceAdmin.getUsedPolicies();
-        for (int i=0; i<policies.size(); i++) {
-            DeviceAdminInfo.PolicyInfo pi = policies.get(i);
-            mAdminPolicies.addView(AppSecurityPermissions.getPermissionItemView(
-                    this, getText(pi.label), getText(pi.description), true));
-        }
         if (mDPM.isAdminActive(mDeviceAdmin.getComponent())) {
+            if (mActivePolicies.size() == 0) {
+                ArrayList<DeviceAdminInfo.PolicyInfo> policies = mDeviceAdmin.getUsedPolicies();
+                for (int i=0; i<policies.size(); i++) {
+                    DeviceAdminInfo.PolicyInfo pi = policies.get(i);
+                    View view = AppSecurityPermissions.getPermissionItemView(
+                            this, getText(pi.label), "", true);
+                    mActivePolicies.add(view);
+                    mAdminPolicies.addView(view);
+                }
+            }
+            setViewVisibility(mActivePolicies, View.VISIBLE);
+            setViewVisibility(mAddingPolicies, View.GONE);
             mAdminWarning.setText(getString(R.string.device_admin_status,
                     mDeviceAdmin.getActivityInfo().applicationInfo.loadLabel(getPackageManager())));
             mTitle.setText(getText(R.string.active_device_admin_msg));
             mActionButton.setText(getText(R.string.remove_device_admin));
             mAdding = false;
         } else {
+            if (mAddingPolicies.size() == 0) {
+                ArrayList<DeviceAdminInfo.PolicyInfo> policies = mDeviceAdmin.getUsedPolicies();
+                for (int i=0; i<policies.size(); i++) {
+                    DeviceAdminInfo.PolicyInfo pi = policies.get(i);
+                    View view = AppSecurityPermissions.getPermissionItemView(
+                            this, getText(pi.label), getText(pi.description), true);
+                    mAddingPolicies.add(view);
+                    mAdminPolicies.addView(view);
+                }
+            }
+            setViewVisibility(mAddingPolicies, View.VISIBLE);
+            setViewVisibility(mActivePolicies, View.GONE);
             mAdminWarning.setText(getString(R.string.device_admin_warning,
                     mDeviceAdmin.getActivityInfo().applicationInfo.loadLabel(getPackageManager())));
             mTitle.setText(getText(R.string.add_device_admin_msg));

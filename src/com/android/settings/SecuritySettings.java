@@ -224,7 +224,7 @@ public class SecuritySettings extends PreferenceActivity {
 
     protected void handleUpdateUnlockMethod(final String value) {
         if ("none".equals(value)) {
-            if (mDPM.getPasswordMode() == DevicePolicyManager.PASSWORD_MODE_UNSPECIFIED) {
+            if (mDPM.getPasswordMode(null) == DevicePolicyManager.PASSWORD_MODE_UNSPECIFIED) {
                 mChooseLockSettingsHelper.launchConfirmationActivity(CONFIRM_EXISTING_REQUEST);
             }
         } else {
@@ -236,7 +236,7 @@ public class SecuritySettings extends PreferenceActivity {
             } else {
                 reqMode = LockPatternUtils.MODE_PATTERN;
             }
-            int minMode = mDPM.getPasswordMode();
+            int minMode = mDPM.getPasswordMode(null);
             if (reqMode < minMode) {
                 reqMode = minMode;
             }
