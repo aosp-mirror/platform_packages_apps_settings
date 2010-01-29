@@ -37,22 +37,22 @@ public class ChooseLockGeneric extends Activity {
         
         final LockPatternUtils lockPatternUtils = mChooseLockSettingsHelper.utils();
         
-        int mode = getIntent().getIntExtra(LockPatternUtils.PASSWORD_TYPE_KEY, -1);
-        if (mode == -1) {
-            mode = lockPatternUtils.getPasswordMode();
+        int quality = getIntent().getIntExtra(LockPatternUtils.PASSWORD_TYPE_KEY, -1);
+        if (quality == -1) {
+            quality = lockPatternUtils.getPasswordMode();
         }
-        int minMode = mDPM.getPasswordMode(null);
-        if (mode < minMode) {
-            mode = minMode;
+        int minQuality = mDPM.getPasswordQuality(null);
+        if (quality < minQuality) {
+            quality = minQuality;
         }
-        if (mode >= DevicePolicyManager.PASSWORD_MODE_NUMERIC) {
+        if (quality >= DevicePolicyManager.PASSWORD_QUALITY_NUMERIC) {
             int minLength = mDPM.getPasswordMinimumLength(null);
             if (minLength < 4) {
                 minLength = 4;
             }
-            final int maxLength = mDPM.getPasswordMaximumLength(mode);
+            final int maxLength = mDPM.getPasswordMaximumLength(quality);
             Intent intent = new Intent().setClass(this, ChooseLockPassword.class);
-            intent.putExtra(LockPatternUtils.PASSWORD_TYPE_KEY, mode);
+            intent.putExtra(LockPatternUtils.PASSWORD_TYPE_KEY, quality);
             intent.putExtra(ChooseLockPassword.PASSWORD_MIN_KEY, minLength);
             intent.putExtra(ChooseLockPassword.PASSWORD_MAX_KEY, maxLength);
             startActivity(intent);
