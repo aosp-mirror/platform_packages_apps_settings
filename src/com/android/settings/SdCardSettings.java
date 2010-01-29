@@ -103,9 +103,13 @@ public class SdCardSettings extends Activity
     }
 
     private void update() {
+
         try {
-            mMassStorage.setChecked(mMountService.getMassStorageEnabled());
-        } catch (RemoteException ex) {
+            String path = Environment.getExternalStorageDirectory().getPath();
+            mMassStorage.setChecked(
+                    mMountService.getVolumeShared(
+                            Environment.getExternalStorageDirectory().getPath(), "ums"));
+        } catch (Exception ex) {
         }
 
         String status = Environment.getExternalStorageState();
@@ -153,8 +157,14 @@ public class SdCardSettings extends Activity
     OnClickListener mMassStorageListener = new OnClickListener() {
         public void onClick(View v) {
             try {
-                mMountService.setMassStorageEnabled(mMassStorage.isChecked());
-            } catch (RemoteException ex) {
+                if (mMassStorage.isChecked()) {
+                    mMountService.shareVolume(
+                            Environment.getExternalStorageDirectory().getPath(), "ums");
+                } else {
+                    mMountService.unshareVolume(
+                            Environment.getExternalStorageDirectory().getPath(), "ums");
+                }
+            } catch (Exception ex) {
             }
         }
     };

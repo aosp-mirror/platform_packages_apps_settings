@@ -97,15 +97,6 @@
                 android:order="11"
                 android:defaultValue="true" />
 
-        <CheckBoxPreference
-                android:key="play_media_notification_sounds"
-                android:title="@string/play_media_notification_sounds_enable_title"
-                android:summaryOn="@string/play_media_notification_sounds_enable_summary_on"
-                android:summaryOff="@string/play_media_notification_sounds_enable_summary_off"
-                android:dependency="silent"
-                android:order="12"
-                android:defaultValue="true" />
-
         <ListPreference
                 android:key="emergency_tone"
                 android:title="@string/emergency_tone_title"

@@ -53,15 +53,11 @@ public class SoundSettings extends PreferenceActivity implements
     private static final String KEY_DTMF_TONE = "dtmf_tone";
     private static final String KEY_SOUND_EFFECTS = "sound_effects";
     private static final String KEY_HAPTIC_FEEDBACK = "haptic_feedback";
-    private static final String KEY_PLAY_MEDIA_NOTIFICATION_SOUNDS =
-            "play_media_notification_sounds";
     private static final String KEY_EMERGENCY_TONE = "emergency_tone";
     private static final String KEY_SOUND_SETTINGS = "sound_settings";
     private static final String KEY_NOTIFICATION_PULSE = "notification_pulse";
 
     private CheckBoxPreference mSilent;
-
-    private CheckBoxPreference mPlayMediaNotificationSounds;
 
     private IMountService mMountService = null;
 
@@ -109,7 +105,6 @@ public class SoundSettings extends PreferenceActivity implements
         }
 
         mSilent = (CheckBoxPreference) findPreference(KEY_SILENT);
-        mPlayMediaNotificationSounds = (CheckBoxPreference) findPreference(KEY_PLAY_MEDIA_NOTIFICATION_SOUNDS);
 
         mVibrate = (CheckBoxPreference) findPreference(KEY_VIBRATE);
         mDtmfTone = (CheckBoxPreference) findPreference(KEY_DTMF_TONE);
@@ -177,11 +172,6 @@ public class SoundSettings extends PreferenceActivity implements
             mSilent.setChecked(silentOrVibrateMode);
         }
 
-        try {
-            mPlayMediaNotificationSounds.setChecked(mMountService.getPlayNotificationSounds());
-        } catch (RemoteException e) {
-        }
-
         boolean vibrateSetting;
         if (silentOrVibrateMode) {
             vibrateSetting = ringerMode == AudioManager.RINGER_MODE_VIBRATE;
@@ -219,11 +209,6 @@ public class SoundSettings extends PreferenceActivity implements
         if (preference == mSilent || preference == mVibrate) {
             setRingerMode(mSilent.isChecked(), mVibrate.isChecked());
             if (preference == mSilent) updateState(false);
-        } else if (preference == mPlayMediaNotificationSounds) {
-            try {
-                mMountService.setPlayNotificationSounds(mPlayMediaNotificationSounds.isChecked());
-            } catch (RemoteException e) {
-            }
         } else if (preference == mDtmfTone) {
             Settings.System.putInt(getContentResolver(), Settings.System.DTMF_TONE_WHEN_DIALING,
                     mDtmfTone.isChecked() ? 1 : 0);

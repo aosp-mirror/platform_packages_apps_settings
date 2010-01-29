@@ -26,6 +26,8 @@ import android.os.IBinder;
 import android.os.RemoteException;
 import android.os.Environment;
 import android.os.IMountService;
+import android.os.StorageManager;
+import android.os.StorageEventListener;
 import android.os.ServiceManager;
 import android.os.StatFs;
 import android.preference.Preference;
@@ -60,10 +62,17 @@ public class Memory extends PreferenceActivity {
     // Access using getMountService()
     private IMountService mMountService = null;
 
+    private StorageManager mStorageManager = null;
+
     @Override
     protected void onCreate(Bundle icicle) {
         super.onCreate(icicle);
-        
+
+        if (mStorageManager == null) {
+            mStorageManager = (StorageManager) getSystemService(Context.STORAGE_SERVICE);
+            mStorageManager.registerListener(mStorageListener);
+        }
+
         addPreferencesFromResource(R.xml.device_info_memory);
         
         mRes = getResources();
@@ -77,20 +86,31 @@ public class Memory extends PreferenceActivity {
     protected void onResume() {
         super.onResume();
         
-        IntentFilter intentFilter = new IntentFilter(Intent.ACTION_MEDIA_REMOVED);
-        intentFilter.addAction(Intent.ACTION_MEDIA_UNMOUNTED);
-        intentFilter.addAction(Intent.ACTION_MEDIA_MOUNTED);
-        intentFilter.addAction(Intent.ACTION_MEDIA_SHARED);
-        intentFilter.addAction(Intent.ACTION_MEDIA_BAD_REMOVAL);
-        intentFilter.addAction(Intent.ACTION_MEDIA_UNMOUNTABLE);
-        intentFilter.addAction(Intent.ACTION_MEDIA_NOFS);
-        intentFilter.addAction(Intent.ACTION_MEDIA_SCANNER_STARTED);
+        IntentFilter intentFilter = new IntentFilter(Intent.ACTION_MEDIA_SCANNER_STARTED);
         intentFilter.addAction(Intent.ACTION_MEDIA_SCANNER_FINISHED);
         intentFilter.addDataScheme("file");
         registerReceiver(mReceiver, intentFilter);
 
         updateMemoryStatus();
     }
+
+    StorageEventListener mStorageListener = new StorageEventListener() {
+        public void onShareAvailabilityChanged(String method, boolean available) {
+        }
+
+        public void onMediaInserted(String label, String path, int major, int minor) {
+            updateMemoryStatus();
+        }
+
+        public void onMediaRemoved(String label, String path, int major, int minor, boolean clean) {
+            updateMemoryStatus();
+        }
+
+        public void onVolumeStateChanged(
+                String label, String path, String oldState, String newState) {
+            updateMemoryStatus();
+        }
+    };
     
     @Override
     protected void onPause() {
