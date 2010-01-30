@@ -140,7 +140,8 @@ public class ManageApplications extends TabActivity implements
     public static final int FILTER_APPS_ALL = MENU_OPTIONS_BASE + 0;
     public static final int FILTER_APPS_RUNNING = MENU_OPTIONS_BASE + 1;
     public static final int FILTER_APPS_THIRD_PARTY = MENU_OPTIONS_BASE + 2;
-    public static final int FILTER_OPTIONS = MENU_OPTIONS_BASE + 3;
+    public static final int FILTER_APPS_SDCARD = MENU_OPTIONS_BASE + 3;
+
     public static final int SORT_ORDER_ALPHA = MENU_OPTIONS_BASE + 4;
     public static final int SORT_ORDER_SIZE = MENU_OPTIONS_BASE + 5;
     // sort order
@@ -612,7 +613,16 @@ public class ManageApplications extends TabActivity implements
         if (installedAppList == null) {
             return new ArrayList<ApplicationInfo> ();
         }
-        if (filterOption == FILTER_APPS_THIRD_PARTY) {
+        if (filterOption == FILTER_APPS_SDCARD) {
+            List<ApplicationInfo> appList =new ArrayList<ApplicationInfo> ();
+            for (ApplicationInfo appInfo : installedAppList) {
+                if ((appInfo.flags & ApplicationInfo.FLAG_ON_SDCARD) != 0) {
+                    // App on sdcard
+                    appList.add(appInfo);
+                }
+            }
+            return appList;
+        } else if (filterOption == FILTER_APPS_THIRD_PARTY) {
             List<ApplicationInfo> appList =new ArrayList<ApplicationInfo> ();
             for (ApplicationInfo appInfo : installedAppList) {
                 boolean flag = false;
@@ -680,7 +690,21 @@ public class ManageApplications extends TabActivity implements
         if(pAppList == null) {
             return retList;
         }
-        if (filterOption == FILTER_APPS_THIRD_PARTY) {
+        if (filterOption == FILTER_APPS_SDCARD) {
+            for (ApplicationInfo appInfo : pAppList) {
+                boolean flag = false;
+                if ((appInfo.flags & ApplicationInfo.FLAG_ON_SDCARD) != 0) {
+                    // App on sdcard
+                    flag = true;
+                }
+                if (flag) {
+                    if (matchFilter(filter, filterMap, appInfo.packageName)) {
+                        retList.add(appInfo);
+                    }
+                }
+            }
+            return retList;
+        } else if (filterOption == FILTER_APPS_THIRD_PARTY) {
             for (ApplicationInfo appInfo : pAppList) {
                 boolean flag = false;
                 if ((appInfo.flags & ApplicationInfo.FLAG_UPDATED_SYSTEM_APP) != 0) {
@@ -1243,6 +1267,10 @@ public class ManageApplications extends TabActivity implements
                 } else if ((info.flags & ApplicationInfo.FLAG_UPDATED_SYSTEM_APP) != 0) {
                     return true;
                 }
+            } else if (filterOption == FILTER_APPS_SDCARD) {
+                if ((info.flags & ApplicationInfo.FLAG_ON_SDCARD) != 0) {
+                    return true;
+                }
             } else {
                 return true;
             }
@@ -1557,6 +1585,7 @@ public class ManageApplications extends TabActivity implements
     static final String TAB_DOWNLOADED = "Downloaded";
     static final String TAB_RUNNING = "Running";
     static final String TAB_ALL = "All";
+    static final String TAB_SDCARD = "OnSdCard";
     private View mRootView;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -1623,6 +1652,10 @@ public class ManageApplications extends TabActivity implements
         tabHost.addTab(tabHost.newTabSpec(TAB_ALL)
                 .setIndicator(getString(R.string.filter_apps_all))
                 .setContent(this));
+        tabHost.addTab(tabHost.newTabSpec(TAB_SDCARD)
+                .setIndicator(getString(R.string.filter_apps_onsdcard))
+                .setContent(this));
+
         tabHost.setCurrentTabByTag(defaultTabTag);
         tabHost.setOnTabChangedListener(this);
     }
@@ -1986,6 +2019,8 @@ public class ManageApplications extends TabActivity implements
             newOption = FILTER_APPS_RUNNING;
         } else if (TAB_ALL.equalsIgnoreCase(tabId)) {
             newOption = FILTER_APPS_ALL;
+        } else if (TAB_SDCARD.equalsIgnoreCase(tabId)) {
+            newOption = FILTER_APPS_SDCARD;
         } else {
             // Invalid option. Do nothing
             return;
