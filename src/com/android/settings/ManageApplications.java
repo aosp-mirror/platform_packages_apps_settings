@@ -1557,17 +1557,39 @@ public class ManageApplications extends TabActivity implements
              filter.addAction(Intent.ACTION_PACKAGE_CHANGED);
              filter.addDataScheme("package");
              ManageApplications.this.registerReceiver(this, filter);
+             // Register for events related to sdcard installation.
+             IntentFilter sdFilter = new IntentFilter();
+             sdFilter.addAction(Intent.ACTION_MEDIA_RESOURCES_AVAILABLE);
+             sdFilter.addAction(Intent.ACTION_MEDIA_RESOURCES_UNAVAILABLE);
+             ManageApplications.this.registerReceiver(this, sdFilter);
          }
-        @Override
-        public void onReceive(Context context, Intent intent) {
-            String actionStr = intent.getAction();
-            Uri data = intent.getData();
-            String pkgName = data.getEncodedSchemeSpecificPart();
-            if (localLOGV) Log.i(TAG, "action:"+actionStr+", for package:"+pkgName);
-            updatePackageList(actionStr, pkgName);
-        }
+         @Override
+         public void onReceive(Context context, Intent intent) {
+             // technically we dont have to invoke handler since onReceive is invoked on
+             // the main thread but doing it here for better clarity
+             String actionStr = intent.getAction();
+             if (Intent.ACTION_PACKAGE_ADDED.equals(actionStr) ||
+                     Intent.ACTION_PACKAGE_REMOVED.equals(actionStr)) {
+                 Uri data = intent.getData();
+                 String pkgName = data.getEncodedSchemeSpecificPart();
+                 updatePackageList(actionStr, pkgName);
+             } else if (Intent.ACTION_MEDIA_RESOURCES_AVAILABLE.equals(actionStr) ||
+                     Intent.ACTION_MEDIA_RESOURCES_UNAVAILABLE.equals(actionStr)) {
+                 boolean available = Intent.ACTION_MEDIA_RESOURCES_AVAILABLE.equals(actionStr);
+                 String pkgList[] = intent.getStringArrayExtra(Intent.EXTRA_CHANGED_PACKAGE_LIST);
+                 if (pkgList == null || pkgList.length == 0) {
+                     // Ignore
+                     return;
+                 }
+                 String msg = available ? Intent.ACTION_PACKAGE_ADDED :
+                     Intent.ACTION_PACKAGE_REMOVED;
+                 for (String pkgName : pkgList) {
+                     updatePackageList(msg, pkgName);
+                 }
+             }
+         }
     }
-    
+
     private void updatePackageList(String actionStr, String pkgName) {
         // technically we dont have to invoke handler since onReceive is invoked on
         // the main thread but doing it here for better clarity
