@@ -47,12 +47,14 @@ public class PrivacySettings extends PreferenceActivity implements
     // Vendor specific
     private static final String GSETTINGS_PROVIDER = "com.google.settings";
     private static final String LOCATION_CATEGORY = "location_category";
-    private static final String SETTINGS_CATEGORY = "settings_category";
+    private static final String BACKUP_CATEGORY = "backup_category";
     private static final String USE_LOCATION = "use_location";
     private static final String BACKUP_SETTINGS = "backup_settings";
+    private static final String AUTO_RESTORE = "auto_restore";
     private static final String KEY_DONE_USE_LOCATION = "doneLocation";
     private CheckBoxPreference mUseLocation;
     private CheckBoxPreference mBackup;
+    private CheckBoxPreference mAutoRestore;
     private boolean mOkClicked;
     private Dialog mConfirmDialog;
 
@@ -64,14 +66,16 @@ public class PrivacySettings extends PreferenceActivity implements
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         addPreferencesFromResource(R.xml.privacy_settings);
+        final PreferenceScreen screen = getPreferenceScreen();
 
-        mUseLocation = (CheckBoxPreference) getPreferenceScreen().findPreference(USE_LOCATION);
-        mBackup = (CheckBoxPreference) getPreferenceScreen().findPreference(BACKUP_SETTINGS);
+        mUseLocation = (CheckBoxPreference) screen.findPreference(USE_LOCATION);
+        mBackup = (CheckBoxPreference) screen.findPreference(BACKUP_SETTINGS);
+        mAutoRestore = (CheckBoxPreference) screen.findPreference(AUTO_RESTORE);
 
         // Vendor specific
         if (getPackageManager().resolveContentProvider(GSETTINGS_PROVIDER, 0) == null) {
-            getPreferenceScreen().removePreference(findPreference(LOCATION_CATEGORY));
-            getPreferenceScreen().removePreference(findPreference(SETTINGS_CATEGORY));
+            screen.removePreference(findPreference(LOCATION_CATEGORY));
+            screen.removePreference(findPreference(BACKUP_CATEGORY));
         }
         updateToggles();
 
@@ -117,6 +121,18 @@ public class PrivacySettings extends PreferenceActivity implements
                 showEraseBackupDialog();
             } else {
                 setBackupEnabled(true);
+            }
+        } else if (preference == mAutoRestore) {
+            IBackupManager bm = IBackupManager.Stub.asInterface(
+                    ServiceManager.getService(Context.BACKUP_SERVICE));
+            if (bm != null) {
+                // TODO: disable via the backup manager interface
+                boolean curState = mAutoRestore.isChecked();
+                try {
+                    bm.setAutoRestore(curState);
+                } catch (RemoteException e) {
+                    mAutoRestore.setChecked(!curState);
+                }
             }
         }
 
@@ -171,8 +187,14 @@ public class PrivacySettings extends PreferenceActivity implements
         ContentResolver res = getContentResolver();
         mUseLocation.setChecked(Settings.Secure.getInt(res,
                 Settings.Secure.USE_LOCATION_FOR_SERVICES, 2) == 1);
-        mBackup.setChecked(Settings.Secure.getInt(res,
-                Settings.Secure.BACKUP_ENABLED, 0) == 1);
+
+        final boolean backupEnabled = Settings.Secure.getInt(res,
+                Settings.Secure.BACKUP_ENABLED, 0) == 1;
+        mBackup.setChecked(backupEnabled);
+
+        mAutoRestore.setChecked(Settings.Secure.getInt(res,
+                Settings.Secure.BACKUP_AUTO_RESTORE, 0) == 1);
+        mAutoRestore.setEnabled(backupEnabled);
     }
 
     private void updateUseLocation() {
@@ -196,6 +218,7 @@ public class PrivacySettings extends PreferenceActivity implements
                 mUseLocation.setChecked(false);
             } else if (mDialogType == DIALOG_ERASE_BACKUP) {
                 mBackup.setChecked(true);
+                mAutoRestore.setEnabled(true);
             }
         }
         updateUseLocation();
@@ -248,9 +271,11 @@ public class PrivacySettings extends PreferenceActivity implements
                 bm.setBackupEnabled(enable);
             } catch (RemoteException e) {
                 mBackup.setChecked(!enable);
+                mAutoRestore.setEnabled(!enable);
                 return;
             }
         }
         mBackup.setChecked(enable);
+        mAutoRestore.setEnabled(enable);
     }
 }

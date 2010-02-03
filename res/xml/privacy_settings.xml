@@ -26,12 +26,17 @@
                 android:summary="@string/use_location_summary"/>
     </PreferenceCategory>
 
-    <PreferenceCategory android:key="settings_category"
-            android:title="@string/settings_section_title">
+    <PreferenceCategory android:key="backup_category"
+            android:title="@string/backup_section_title">
         <!-- Backup settings -->
         <CheckBoxPreference
                 android:key="backup_settings"
                 android:title="@string/backup_settings_title"
+                android:persistent="false" />
+        <CheckBoxPreference
+                android:key="auto_restore"
+                android:title="@string/auto_restore_title"
+                android:summary="@string/auto_restore_summary"
                 android:persistent="false" />
     </PreferenceCategory>
 
