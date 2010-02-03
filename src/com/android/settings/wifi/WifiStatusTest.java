@@ -17,7 +17,6 @@
 package com.android.settings.wifi;
 
 import com.android.settings.R;
-import com.android.settings.wifi.WifiStatus;
 import android.net.wifi.ScanResult;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
@@ -295,8 +294,8 @@ public class WifiStatusTest extends Activity {
 
     private void handleNetworkStateChanged(NetworkInfo networkInfo) {
         if (mWifiManager.isWifiEnabled()) {
-            String summary = WifiStatus.getStatus(this,
-                    mWifiManager.getConnectionInfo().getSSID(), networkInfo.getDetailedState());
+            String summary = Summary.get(this, mWifiManager.getConnectionInfo().getSSID(),
+                    networkInfo.getDetailedState());
             mNetworkState.setText(summary);
         }
     }
