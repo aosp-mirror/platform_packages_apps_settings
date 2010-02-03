@@ -54,7 +54,7 @@ import android.widget.Toast;
 import java.util.ArrayList;
 import java.util.List;
 
-public class WifiSettings2 extends PreferenceActivity implements DialogInterface.OnClickListener {
+public class WifiSettings extends PreferenceActivity implements DialogInterface.OnClickListener {
     private static final int MENU_ID_SCAN = Menu.FIRST;
     private static final int MENU_ID_ADVANCED = Menu.FIRST + 1;
     private static final int MENU_ID_CONNECT = Menu.FIRST + 2;
@@ -81,7 +81,7 @@ public class WifiSettings2 extends PreferenceActivity implements DialogInterface
     private AccessPoint mSelected;
     private WifiDialog mDialog;
 
-    public WifiSettings2() {
+    public WifiSettings() {
         mFilter = new IntentFilter();
         mFilter.addAction(WifiManager.WIFI_STATE_CHANGED_ACTION);
         mFilter.addAction(WifiManager.SCAN_RESULTS_AVAILABLE_ACTION);
@@ -107,9 +107,9 @@ public class WifiSettings2 extends PreferenceActivity implements DialogInterface
         mWifiManager = (WifiManager) getSystemService(Context.WIFI_SERVICE);
 
         if (getIntent().getBooleanExtra("only_access_points", false)) {
-            addPreferencesFromResource(R.xml.wifi_access_points2);
+            addPreferencesFromResource(R.xml.wifi_access_points);
         } else {
-            addPreferencesFromResource(R.xml.wifi_settings2);
+            addPreferencesFromResource(R.xml.wifi_settings);
             mWifiEnabler = new WifiEnabler(this, mWifiManager,
                     (CheckBoxPreference) findPreference("enable_wifi"));
             mNotifyOpenNetworks =
@@ -474,7 +474,7 @@ public class WifiSettings2 extends PreferenceActivity implements DialogInterface
                 mRetry = 0;
             } else if (++mRetry >= 3) {
                 mRetry = 0;
-                Toast.makeText(WifiSettings2.this, R.string.wifi_fail_to_scan,
+                Toast.makeText(WifiSettings.this, R.string.wifi_fail_to_scan,
                         Toast.LENGTH_LONG).show();
             }
             mAccessPoints.setProgress(mRetry != 0);
