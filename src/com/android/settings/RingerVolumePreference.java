@@ -66,14 +66,7 @@ public class RingerVolumePreference extends VolumePreference implements
     @Override
     protected void onBindDialogView(View view) {
         super.onBindDialogView(view);
-     
-        mNotificationsUseRingVolumeCheckbox =
-                (CheckBox) view.findViewById(R.id.same_notification_volume);
-        mNotificationsUseRingVolumeCheckbox.setOnCheckedChangeListener(this);
-        mNotificationsUseRingVolumeCheckbox.setChecked(Settings.System.getInt(
-                getContext().getContentResolver(),
-                Settings.System.NOTIFICATIONS_USE_RING_VOLUME, 1) == 1);
-      
+
         for (int i = 0; i < SEEKBAR_ID.length; i++) {
             SeekBar seekBar = (SeekBar) view.findViewById(SEEKBAR_ID[i]);
             mSeekBarVolumizer[i] = new SeekBarVolumizer(getContext(), seekBar,
@@ -81,6 +74,12 @@ public class RingerVolumePreference extends VolumePreference implements
         }
 
         mNotificationVolumeTitle = (TextView) view.findViewById(R.id.notification_volume_title);
+        mNotificationsUseRingVolumeCheckbox =
+                (CheckBox) view.findViewById(R.id.same_notification_volume);
+        mNotificationsUseRingVolumeCheckbox.setOnCheckedChangeListener(this);
+        mNotificationsUseRingVolumeCheckbox.setChecked(Settings.System.getInt(
+                getContext().getContentResolver(),
+                Settings.System.NOTIFICATIONS_USE_RING_VOLUME, 1) == 1);
         setNotificationVolumeVisibility(!mNotificationsUseRingVolumeCheckbox.isChecked());
     }
 
