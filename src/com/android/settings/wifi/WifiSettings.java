@@ -110,7 +110,7 @@ public class WifiSettings extends PreferenceActivity implements DialogInterface.
             addPreferencesFromResource(R.xml.wifi_access_points);
         } else {
             addPreferencesFromResource(R.xml.wifi_settings);
-            mWifiEnabler = new WifiEnabler(this, mWifiManager,
+            mWifiEnabler = new WifiEnabler(this,
                     (CheckBoxPreference) findPreference("enable_wifi"));
             mNotifyOpenNetworks =
                     (CheckBoxPreference) findPreference("notify_open_networks");
@@ -128,10 +128,10 @@ public class WifiSettings extends PreferenceActivity implements DialogInterface.
     @Override
     protected void onResume() {
         super.onResume();
-        registerReceiver(mReceiver, mFilter);
         if (mWifiEnabler != null) {
             mWifiEnabler.resume();
         }
+        registerReceiver(mReceiver, mFilter);
         if (mKeyStoreNetworkId != -1 && KeyStore.getInstance().test() == KeyStore.NO_ERROR) {
             connect(mKeyStoreNetworkId);
         }
@@ -141,10 +141,10 @@ public class WifiSettings extends PreferenceActivity implements DialogInterface.
     @Override
     protected void onPause() {
         super.onPause();
-        unregisterReceiver(mReceiver);
         if (mWifiEnabler != null) {
             mWifiEnabler.pause();
         }
+        unregisterReceiver(mReceiver);
         mScanner.pause();
         if (mDialog != null) {
             mDialog.dismiss();

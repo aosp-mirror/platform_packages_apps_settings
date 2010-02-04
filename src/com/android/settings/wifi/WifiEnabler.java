@@ -58,18 +58,12 @@ public class WifiEnabler implements Preference.OnPreferenceChangeListener {
     };
 
     public WifiEnabler(Context context, CheckBoxPreference checkBox) {
-        this(context, (WifiManager) context.getSystemService(Context.WIFI_SERVICE),
-                checkBox);
-    }
-    
-    public WifiEnabler(Context context, WifiManager wifiManager,
-            CheckBoxPreference checkBox) {
         mContext = context;
         mCheckBox = checkBox;
-        mWifiManager = wifiManager;
         mOriginalSummary = checkBox.getSummary();
         checkBox.setPersistent(false);
-        
+
+        mWifiManager = (WifiManager) context.getSystemService(Context.WIFI_SERVICE);
         mIntentFilter = new IntentFilter(WifiManager.WIFI_STATE_CHANGED_ACTION);
         // The order matters! We really should not depend on this. :(
         mIntentFilter.addAction(WifiManager.SUPPLICANT_STATE_CHANGED_ACTION);
