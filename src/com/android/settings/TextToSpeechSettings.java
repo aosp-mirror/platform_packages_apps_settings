@@ -425,7 +425,9 @@ public class TextToSpeechSettings extends PreferenceActivity implements
         // update the demo string
         mDemoStringIndex = mDefaultLocPref.findIndexOfValue(mDefaultLanguage + LOCALE_DELIMITER
                 + mDefaultCountry);
-        mDefaultLocPref.setValueIndex(mDemoStringIndex);
+        if (mDemoStringIndex > -1){
+            mDefaultLocPref.setValueIndex(mDemoStringIndex);
+        }
     }
 
     /**
