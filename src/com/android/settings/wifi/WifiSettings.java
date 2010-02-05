@@ -441,6 +441,10 @@ public class WifiSettings extends PreferenceActivity implements DialogInterface.
         for (int i = mAccessPoints.getPreferenceCount() - 1; i >= 0; --i) {
             ((AccessPoint) mAccessPoints.getPreference(i)).update(mLastInfo, mLastState);
         }
+
+        if (mResetNetworks) {
+            enableNetworks();
+        }
     }
 
     private void updateWifiState(int state) {
