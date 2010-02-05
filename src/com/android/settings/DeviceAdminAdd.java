@@ -140,24 +140,25 @@ public class DeviceAdminAdd extends Activity {
                     mDPM.setActiveAdmin(mDeviceAdmin.getComponent());
                     setResult(Activity.RESULT_OK);
                     finish();
-                }
-                mDPM.getRemoveWarning(mDeviceAdmin.getComponent(),
-                        new RemoteCallback(mHandler) {
-                    @Override
-                    protected void onResult(Bundle bundle) {
-                        CharSequence msg = bundle != null
-                                ? bundle.getCharSequence(DeviceAdmin.EXTRA_DISABLE_WARNING)
-                                : null;
-                        if (msg == null) {
-                            mDPM.removeActiveAdmin(mDeviceAdmin.getComponent());
-                            finish();
-                        } else {
-                            Bundle args = new Bundle();
-                            args.putCharSequence(DeviceAdmin.EXTRA_DISABLE_WARNING, msg);
-                            showDialog(DIALOG_WARNING, args);
+                } else {
+                    mDPM.getRemoveWarning(mDeviceAdmin.getComponent(),
+                            new RemoteCallback(mHandler) {
+                        @Override
+                        protected void onResult(Bundle bundle) {
+                            CharSequence msg = bundle != null
+                                    ? bundle.getCharSequence(DeviceAdmin.EXTRA_DISABLE_WARNING)
+                                    : null;
+                            if (msg == null) {
+                                mDPM.removeActiveAdmin(mDeviceAdmin.getComponent());
+                                finish();
+                            } else {
+                                Bundle args = new Bundle();
+                                args.putCharSequence(DeviceAdmin.EXTRA_DISABLE_WARNING, msg);
+                                showDialog(DIALOG_WARNING, args);
+                            }
                         }
-                    }
-                });
+                    });
+                }
             }
         });
     }
