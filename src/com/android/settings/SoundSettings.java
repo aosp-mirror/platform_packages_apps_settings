@@ -25,7 +25,6 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.media.AudioManager;
 import android.os.Bundle;
-import android.os.IMountService;
 import android.os.RemoteException;
 import android.os.ServiceManager;
 import android.preference.CheckBoxPreference;
@@ -58,8 +57,6 @@ public class SoundSettings extends PreferenceActivity implements
     private static final String KEY_NOTIFICATION_PULSE = "notification_pulse";
 
     private CheckBoxPreference mSilent;
-
-    private IMountService mMountService = null;
 
     /*
      * If we are currently in one of the silent modes (the ringer mode is set to either
@@ -94,8 +91,6 @@ public class SoundSettings extends PreferenceActivity implements
         int activePhoneType = TelephonyManager.getDefault().getPhoneType();
 
         mAudioManager = (AudioManager) getSystemService(Context.AUDIO_SERVICE);
-
-        mMountService = IMountService.Stub.asInterface(ServiceManager.getService("mount"));
 
         addPreferencesFromResource(R.xml.sound_settings);
 

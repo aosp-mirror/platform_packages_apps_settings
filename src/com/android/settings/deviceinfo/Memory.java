@@ -25,11 +25,11 @@ import android.os.Bundle;
 import android.os.IBinder;
 import android.os.RemoteException;
 import android.os.Environment;
-import android.os.IMountService;
+import android.os.storage.IMountService;
 import android.os.ServiceManager;
 import android.os.StatFs;
-import android.storage.StorageManager;
-import android.storage.StorageEventListener;
+import android.os.storage.StorageManager;
+import android.os.storage.StorageEventListener;
 import android.preference.Preference;
 import android.preference.PreferenceActivity;
 import android.preference.PreferenceScreen;
@@ -95,16 +95,6 @@ public class Memory extends PreferenceActivity {
     }
 
     StorageEventListener mStorageListener = new StorageEventListener() {
-        public void onShareAvailabilityChanged(String method, boolean available) {
-        }
-
-        public void onMediaInserted(String label, String path, int major, int minor) {
-            updateMemoryStatus();
-        }
-
-        public void onMediaRemoved(String label, String path, int major, int minor, boolean clean) {
-            updateMemoryStatus();
-        }
 
         public void onVolumeStateChanged(
                 String label, String path, String oldState, String newState) {

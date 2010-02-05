@@ -23,7 +23,7 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.IMountService;
+import android.os.storage.IMountService;
 import android.os.ServiceManager;
 import android.os.SystemProperties;
 import android.os.Environment;

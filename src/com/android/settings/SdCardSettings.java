@@ -24,9 +24,10 @@ import android.content.IntentFilter;
 import android.os.Bundle;
 import android.os.RemoteException;
 import android.os.Environment;
-import android.os.IMountService;
 import android.os.ServiceManager;
 import android.os.StatFs;
+import android.os.storage.StorageManager;
+import android.os.storage.IMountService;
 import android.text.format.Formatter;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -45,6 +46,7 @@ public class SdCardSettings extends Activity
 
         setContentView(R.layout.sdcard_settings_screen);
 
+        mStorageManager = (StorageManager) getSystemService(Context.STORAGE_SERVICE);
         mMountService = IMountService.Stub.asInterface(ServiceManager.getService("mount"));
 
         mRemovedLayout = findViewById(R.id.removed);
@@ -105,10 +107,7 @@ public class SdCardSettings extends Activity
     private void update() {
 
         try {
-            String path = Environment.getExternalStorageDirectory().getPath();
-            mMassStorage.setChecked(
-                    mMountService.getVolumeShared(
-                            Environment.getExternalStorageDirectory().getPath(), "ums"));
+            mMassStorage.setChecked(mStorageManager.isUsbMassStorageEnabled());
         } catch (Exception ex) {
         }
 
@@ -158,11 +157,9 @@ public class SdCardSettings extends Activity
         public void onClick(View v) {
             try {
                 if (mMassStorage.isChecked()) {
-                    mMountService.shareVolume(
-                            Environment.getExternalStorageDirectory().getPath(), "ums");
+                    mStorageManager.enableUsbMassStorage();
                 } else {
-                    mMountService.unshareVolume(
-                            Environment.getExternalStorageDirectory().getPath(), "ums");
+                    mStorageManager.disableUsbMassStorage();
                 }
             } catch (Exception ex) {
             }
@@ -194,7 +191,8 @@ public class SdCardSettings extends Activity
         }
     };
 
-    private IMountService   mMountService;
+    private StorageManager mStorageManager;
+    private IMountService mMountService;
 
     private CheckBox    mMassStorage;
 
