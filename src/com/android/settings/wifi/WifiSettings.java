@@ -25,6 +25,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.net.NetworkInfo;
+import android.net.NetworkInfo.DetailedState;
 import android.net.wifi.ScanResult;
 import android.net.wifi.SupplicantState;
 import android.net.wifi.WifiConfiguration;
@@ -71,7 +72,7 @@ public class WifiSettings extends PreferenceActivity implements DialogInterface.
     private ProgressCategory mAccessPoints;
     private Preference mAddNetwork;
 
-    private NetworkInfo.DetailedState mLastState;
+    private DetailedState mLastState;
     private WifiInfo mLastInfo;
     private int mLastPriority;
 
@@ -426,8 +427,8 @@ public class WifiSettings extends PreferenceActivity implements DialogInterface.
         }
     }
 
-    private void updateConnectionState(NetworkInfo.DetailedState state) {
-        if (state == NetworkInfo.DetailedState.OBTAINING_IPADDR) {
+    private void updateConnectionState(DetailedState state) {
+        if (state == DetailedState.OBTAINING_IPADDR) {
             mScanner.pause();
         } else {
             mScanner.resume();
@@ -442,7 +443,8 @@ public class WifiSettings extends PreferenceActivity implements DialogInterface.
             ((AccessPoint) mAccessPoints.getPreference(i)).update(mLastInfo, mLastState);
         }
 
-        if (mResetNetworks) {
+        if (mResetNetworks && (state == DetailedState.CONNECTED ||
+                state == DetailedState.DISCONNECTED || state == DetailedState.FAILED)) {
             enableNetworks();
         }
     }
