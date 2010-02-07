@@ -96,8 +96,8 @@ public class Memory extends PreferenceActivity {
 
     StorageEventListener mStorageListener = new StorageEventListener() {
 
-        public void onVolumeStateChanged(
-                String label, String path, String oldState, String newState) {
+        @Override
+        public void onStorageStateChanged(String path, String oldState, String newState) {
             updateMemoryStatus();
         }
     };
@@ -156,9 +156,8 @@ public class Memory extends PreferenceActivity {
                 Log.e(TAG, "Mount service is null, can't unmount");
             }
         } catch (RemoteException ex) {
-            // Failed for some reason, try to update UI to actual state
-            updateMemoryStatus();
         }
+        updateMemoryStatus();
     }
 
     private void mount() {
@@ -170,9 +169,8 @@ public class Memory extends PreferenceActivity {
                 Log.e(TAG, "Mount service is null, can't mount");
             }
         } catch (RemoteException ex) {
-            // Failed for some reason, try to update UI to actual state
-            updateMemoryStatus();
         }
+        updateMemoryStatus();
     }
 
     private void updateMemoryStatus() {
