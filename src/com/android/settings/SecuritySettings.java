@@ -77,9 +77,6 @@ public class SecuritySettings extends PreferenceActivity {
     private static final String PROPERTY_EFS_ENABLED = "persist.security.efs.enabled";
     private static final String PROPERTY_EFS_TRANSITION = "persist.security.efs.trans";
 
-    private static final String PREFS_NAME = "location_prefs";
-    private static final String PREFS_USE_LOCATION = "use_location";
-
     private CheckBoxPreference mVisiblePattern;
     private CheckBoxPreference mTactileFeedback;
 
