@@ -1559,8 +1559,8 @@ public class ManageApplications extends TabActivity implements
              ManageApplications.this.registerReceiver(this, filter);
              // Register for events related to sdcard installation.
              IntentFilter sdFilter = new IntentFilter();
-             sdFilter.addAction(Intent.ACTION_MEDIA_RESOURCES_AVAILABLE);
-             sdFilter.addAction(Intent.ACTION_MEDIA_RESOURCES_UNAVAILABLE);
+             sdFilter.addAction(Intent.ACTION_EXTERNAL_APPLICATIONS_AVAILABLE);
+             sdFilter.addAction(Intent.ACTION_EXTERNAL_APPLICATIONS_UNAVAILABLE);
              ManageApplications.this.registerReceiver(this, sdFilter);
          }
          @Override
@@ -1573,9 +1573,9 @@ public class ManageApplications extends TabActivity implements
                  Uri data = intent.getData();
                  String pkgName = data.getEncodedSchemeSpecificPart();
                  updatePackageList(actionStr, pkgName);
-             } else if (Intent.ACTION_MEDIA_RESOURCES_AVAILABLE.equals(actionStr) ||
-                     Intent.ACTION_MEDIA_RESOURCES_UNAVAILABLE.equals(actionStr)) {
-                 boolean available = Intent.ACTION_MEDIA_RESOURCES_AVAILABLE.equals(actionStr);
+             } else if (Intent.ACTION_EXTERNAL_APPLICATIONS_AVAILABLE.equals(actionStr) ||
+                     Intent.ACTION_EXTERNAL_APPLICATIONS_UNAVAILABLE.equals(actionStr)) {
+                 boolean available = Intent.ACTION_EXTERNAL_APPLICATIONS_AVAILABLE.equals(actionStr);
                  String pkgList[] = intent.getStringArrayExtra(Intent.EXTRA_CHANGED_PACKAGE_LIST);
                  if (pkgList == null || pkgList.length == 0) {
                      // Ignore
