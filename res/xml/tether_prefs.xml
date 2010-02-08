@@ -17,14 +17,43 @@
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
         android:title="@string/tether_screen_title">
 
-    <PreferenceScreen
-        android:key="usb_tether_settings"
-        android:title="@string/usb_tethering_button_text"
-        android:widgetLayout="@*android:layout/preference_dialog" >
-        <intent
-            android:action="android.intent.action.MAIN"
-            android:targetPackage="android"
-            android:targetClass="com.android.internal.app.TetherActivity" />
+    <PreferenceCategory
+        android:key="usb_category"
+        android:title="@string/usb_title">
+
+        <PreferenceScreen
+            android:key="usb_tether_settings"
+            android:title="@string/usb_tethering_button_text"
+            android:widgetLayout="@*android:layout/preference_dialog" >
+            <intent
+                android:action="android.intent.action.MAIN"
+                android:targetPackage="android"
+                android:targetClass="com.android.internal.app.TetherActivity" />
     </PreferenceScreen>
+
+    </PreferenceCategory>
+
+    <PreferenceCategory
+        android:key="wifi_category"
+        android:title="@string/wifi_ap_title">
+
+        <CheckBoxPreference
+            android:key="enable_wifi_ap"
+            android:title="@string/wifi_ap"
+            android:summary="@string/wifi_ap_summary"
+            android:persistent="false" />
+
+        <PreferenceScreen
+            android:key="wifi_ap_settings"
+            android:dependency="enable_wifi_ap"
+            android:title="@string/wifi_ap_settings"
+            android:summary="@string/wifi_ap_settings_summary" >
+            <intent
+                android:action="android.intent.action.MAIN"
+                android:targetPackage="com.android.settings"
+                android:targetClass="com.android.settings.wifi.WifiApSettings" />
+        </PreferenceScreen>
+
+    </PreferenceCategory>
 
 </PreferenceScreen>

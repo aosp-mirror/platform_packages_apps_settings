@@ -16,6 +16,8 @@
 
 package com.android.settings;
 
+import com.android.settings.wifi.WifiApEnabler;
+
 import android.os.Bundle;
 import android.os.SystemProperties;
 import android.content.BroadcastReceiver;
@@ -32,13 +34,20 @@ import android.provider.Settings;
 import android.util.Log;
 
 import java.util.ArrayList;
+
 /*
  * Displays preferences for Tethering.
  */
 public class TetherSettings extends PreferenceActivity {
     private static final String USB_TETHER_SETTINGS = "usb_tether_settings";
+    private static final String ENABLE_WIFI_AP = "enable_wifi_ap";
+    private static final String WIFI_AP_SETTINGS = "wifi_ap_settings";
 
     private PreferenceScreen mUsbTether;
+
+    private CheckBoxPreference mEnableWifiAp;
+    private PreferenceScreen mWifiApSettings;
+    private WifiApEnabler mWifiApEnabler;
 
     private BroadcastReceiver mTetherChangeReceiver;
 
@@ -55,6 +64,8 @@ public class TetherSettings extends PreferenceActivity {
         addPreferencesFromResource(R.xml.tether_prefs);
 
         mUsbTether = (PreferenceScreen) findPreference(USB_TETHER_SETTINGS);
+        mEnableWifiAp = (CheckBoxPreference) findPreference(ENABLE_WIFI_AP);
+        mWifiApSettings = (PreferenceScreen) findPreference(WIFI_AP_SETTINGS);
 
         ConnectivityManager cm =
                 (ConnectivityManager)getSystemService(Context.CONNECTIVITY_SERVICE);
@@ -62,7 +73,13 @@ public class TetherSettings extends PreferenceActivity {
         if (mUsbRegexs.length == 0) {
             getPreferenceScreen().removePreference(mUsbTether);
         }
+
         mWifiRegexs = cm.getTetherableWifiRegexs();
+        if (mWifiRegexs.length == 0) {
+            getPreferenceScreen().removePreference(mEnableWifiAp);
+            getPreferenceScreen().removePreference(mWifiApSettings);
+        }
+        mWifiApEnabler = new WifiApEnabler(this, mEnableWifiAp);
     }
 
 
@@ -91,6 +108,7 @@ public class TetherSettings extends PreferenceActivity {
         Intent intent = registerReceiver(mTetherChangeReceiver, filter);
 
         if (intent != null) mTetherChangeReceiver.onReceive(this, intent);
+        mWifiApEnabler.resume();
     }
 
     @Override
@@ -98,6 +116,7 @@ public class TetherSettings extends PreferenceActivity {
         super.onPause();
         unregisterReceiver(mTetherChangeReceiver);
         mTetherChangeReceiver = null;
+        mWifiApEnabler.pause();
     }
 
     private void updateState(ArrayList<String> available, ArrayList<String> tethered,

@@ -49,7 +49,7 @@ class AccessPoint extends Preference {
     private DetailedState mState;
     private ImageView mSignal;
 
-    private static int getSecurity(WifiConfiguration config) {
+    static int getSecurity(WifiConfiguration config) {
         if (config.allowedKeyManagement.get(KeyMgmt.WPA_PSK)) {
             return SECURITY_PSK;
         }

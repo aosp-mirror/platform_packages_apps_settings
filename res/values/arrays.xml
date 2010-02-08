@@ -227,6 +227,15 @@
         <item>802.1x EAP</item>
     </string-array>
 
+   <!-- Wi-Fi AP settings.  The type of security a Wi-Fi AP supports. -->
+    <string-array name="wifi_ap_security" translatable="false">
+        <item>Open</item>
+        <!-- Do not translate. -->
+        <item>WEP</item>
+        <!-- Do not translate. -->
+        <item>WPA/WPA2 PSK</item>
+    </string-array>
+
     <!-- Match this with the constants in WifiDialog. --> <skip />
     <!-- Wi-Fi settings.  The type of EAP method a Wi-Fi network has. -->
     <string-array name="wifi_eap_method">
