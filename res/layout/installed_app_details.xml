@@ -72,7 +72,10 @@
                 android:paddingRight="6dip"
                 android:scaleType="fitCenter" />
         </RelativeLayout>
-
+        <!-- Force stop and uninstall buttons -->
+        <include
+            layout="@layout/two_buttons_panel"
+            android:id="@+id/control_buttons_panel"/>
 
         <TextView
             style="?android:attr/listSeparatorTextViewStyle"
@@ -193,37 +196,11 @@
                     android:maxLines="1" />
 
             </LinearLayout>
-            <!-- Manage space, Clear data/Uninstall buttons  -->
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="bottom"
-                android:orientation="horizontal">
-                <Button
-                    android:id="@+id/manage_space_button"
-                    android:text="@string/manage_space_text"
-                    android:visibility="invisible"
-                    android:layout_width="150dip"
-                    android:paddingLeft="6dip"
-                    android:layout_gravity="left"
-                    android:layout_weight="0.4"
-                    android:layout_height="wrap_content"/>
-                <!-- Spacer -->
-                <View
-                    android:id="@+id/buttons_spacer_left"
-                    android:layout_width="0dip"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="0.2"
-                    android:visibility="gone" />
- 
-                <Button
-                    android:id="@+id/uninstall_button"
-                    android:layout_width="150dip"
-                    android:paddingRight="6dip"
-                    android:layout_gravity="right"
-                    android:layout_weight="0.4"
-                    android:layout_height="wrap_content"/>
-            </LinearLayout>
+            <!-- Clear data and install location buttons  -->
+            <include
+                layout="@layout/two_buttons_panel"
+                android:id="@+id/data_buttons_panel"/>
+
         </LinearLayout>
 
         <!-- Clear cache section -->
@@ -304,25 +281,6 @@
                 android:layout_centerHorizontal="true"
                 android:layout_width="150dip"
                 android:text="@string/clear_activities"
-                android:layout_height="wrap_content" />
-        </RelativeLayout>
-
-        <!-- Other controls section -->
-        <TextView
-            style="?android:attr/listSeparatorTextViewStyle"
-            android:text="@string/controls_label" />
-
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical">
-            <Button android:id="@+id/force_stop_button"
-                android:layout_alignParentRight="true"
-                android:layout_alignParentTop="true"
-                android:layout_centerHorizontal="true"
-                android:paddingTop="6dip"
-                android:layout_width="150dip"
-                android:text="@string/force_stop"
                 android:layout_height="wrap_content" />
         </RelativeLayout>
 

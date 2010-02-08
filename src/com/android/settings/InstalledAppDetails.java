@@ -23,6 +23,7 @@ import android.app.Activity;
 import android.app.ActivityManager;
 import android.app.AlertDialog;
 import android.app.Dialog;
+import android.app.ActivityManager.RunningAppProcessInfo;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -62,11 +63,12 @@ import android.widget.TextView;
  * For non-system applications, there is no option to clear data. Instead there is an option to
  * uninstall the application.
  */
-public class InstalledAppDetails extends Activity implements View.OnClickListener, DialogInterface.OnClickListener  {
+public class InstalledAppDetails extends Activity implements View.OnClickListener {
     private static final String TAG="InstalledAppDetails";
     private static final int _UNKNOWN_APP=R.string.unknown;
     private ApplicationInfo mAppInfo;
-    private Button mAppButton;
+    private Button mUninstallButton;
+    private boolean mUpdatedSysApp = false;
     private Button mActivitiesButton;
     private boolean localLOGV = false;
     private TextView mAppVersion;
@@ -76,14 +78,14 @@ public class InstalledAppDetails extends Activity implements View.OnClickListene
     private PkgSizeObserver mSizeObserver;
     private ClearUserDataObserver mClearDataObserver;
     // Views related to cache info
-    private View mCachePanel;
     private TextView mCacheSize;
     private Button mClearCacheButton;
     private ClearCacheObserver mClearCacheObserver;
     private Button mForceStopButton;
+    private Button mClearDataButton;
+    private Button mMoveAppButton;
     
     PackageStats mSizeInfo;
-    private Button mManageSpaceButton;
     private PackageManager mPm;
     
     //internal constants used in Handler
@@ -101,7 +103,6 @@ public class InstalledAppDetails extends Activity implements View.OnClickListene
     // Resource strings
     private CharSequence mInvalidSizeStr;
     private CharSequence mComputingStr;
-    private CharSequence mAppButtonText;
     
     // Dialog identifiers used in showDialog
     private static final int DLG_BASE = 0;
@@ -109,15 +110,7 @@ public class InstalledAppDetails extends Activity implements View.OnClickListene
     private static final int DLG_FACTORY_RESET = DLG_BASE + 2;
     private static final int DLG_APP_NOT_FOUND = DLG_BASE + 3;
     private static final int DLG_CANNOT_CLEAR_DATA = DLG_BASE + 4;
-    
-    // Possible btn states
-    private enum AppButtonStates {
-        CLEAR_DATA,
-        UNINSTALL,
-        FACTORY_RESET,
-        NONE
-    } 
-    private AppButtonStates mAppButtonState;
+    private static final int DLG_FORCE_STOP = DLG_BASE + 5;
     
     private Handler mHandler = new Handler() {
         public void handleMessage(Message msg) {
@@ -147,7 +140,6 @@ public class InstalledAppDetails extends Activity implements View.OnClickListene
     }
     
     class PkgSizeObserver extends IPackageStatsObserver.Stub {
-        public int idx;
         public void onGetStatsCompleted(PackageStats pStats, boolean succeeded) {
              Message msg = mHandler.obtainMessage(GET_PKG_SIZE);
              Bundle data = new Bundle();
@@ -173,6 +165,69 @@ public class InstalledAppDetails extends Activity implements View.OnClickListene
         return Formatter.formatFileSize(this, size);
     }
     
+    private void initDataButtons() {
+        if (mAppInfo.manageSpaceActivityName != null) {
+            mClearDataButton.setText(R.string.manage_space_text);
+        } else {
+            mClearDataButton.setText(R.string.clear_user_data_text);
+        }
+        mClearDataButton.setOnClickListener(this);
+        String pkgName = mAppInfo.packageName;
+        boolean dataOnly = false;
+        ApplicationInfo info1 = null;
+        ApplicationInfo info2 = null;
+
+        try {
+            info1 = mPm.getApplicationInfo(pkgName, 0);
+        } catch (NameNotFoundException e) {
+        }
+        dataOnly = (info1 == null) && (mAppInfo != null);
+        if (dataOnly) {
+            mMoveAppButton.setText(R.string.move_app);
+        } else if ((mAppInfo.flags & ApplicationInfo.FLAG_ON_SDCARD) != 0) {
+            mMoveAppButton.setText(R.string.move_app_to_internal);
+        } else {
+            mMoveAppButton.setText(R.string.move_app_to_sdcard);
+        }
+    }
+
+    private void initControlButtons() {
+        mUpdatedSysApp = (mAppInfo.flags & ApplicationInfo.FLAG_UPDATED_SYSTEM_APP) != 0;
+        boolean enabled = true;
+        if (mUpdatedSysApp) {
+            mUninstallButton.setText(R.string.app_factory_reset);
+        } else if ((mAppInfo.flags & ApplicationInfo.FLAG_SYSTEM) == 0){
+            mUninstallButton.setText(R.string.uninstall_text);
+        } else {
+            // Disable uninstall for system apps
+            enabled = false;
+        }
+        mUninstallButton.setEnabled(enabled);
+        if (enabled) {
+            // Register listener
+            mUninstallButton.setOnClickListener(this);
+        }
+        ActivityManager am = (ActivityManager) getSystemService(Context.ACTIVITY_SERVICE);
+        List<RunningAppProcessInfo> rList = am.getRunningAppProcesses();
+        boolean running = false;
+        if (rList != null) {
+            for (RunningAppProcessInfo info : rList) {
+                if (info.pkgList != null) {
+                    for (String rpkg : info.pkgList) {
+                        if (rpkg.equals(mAppInfo.packageName)) {
+                            running = true;
+                            break;
+                        }
+                    }
+                }
+            }
+        }
+        mForceStopButton.setEnabled(running);
+        if (running) {
+            mForceStopButton.setOnClickListener(this);
+        }
+    }
+
     /** Called when the activity is first created. */
     @Override
     protected void onCreate(Bundle icicle) {
@@ -205,21 +260,23 @@ public class InstalledAppDetails extends Activity implements View.OnClickListene
         mAppSize.setText(appSizeStr);
         mDataSize = (TextView)findViewById(R.id.data_size_text);
         mDataSize.setText(dataSizeStr);
-         // Get AppButton
-         mAppButton = ((Button)findViewById(R.id.uninstall_button));
-         // Get ManageSpaceButton
-         mManageSpaceButton = (Button)findViewById(R.id.manage_space_button);
-         if(mAppInfo.manageSpaceActivityName != null) {
-             mManageSpaceButton.setVisibility(View.VISIBLE);
-             mManageSpaceButton.setOnClickListener(this);
-         }
+        // Get Control button panel
+        View btnPanel = findViewById(R.id.control_buttons_panel);
+        mForceStopButton = (Button) btnPanel.findViewById(R.id.left_button);
+        mForceStopButton.setText(R.string.force_stop);
+        mUninstallButton = (Button)btnPanel.findViewById(R.id.right_button);
+        initControlButtons();
+        // Initialize clear data and move install location buttons
+        View data_buttons_panel = findViewById(R.id.data_buttons_panel);
+        mClearDataButton = (Button) data_buttons_panel.findViewById(R.id.left_button);
+        mMoveAppButton = (Button) data_buttons_panel.findViewById(R.id.right_button);
+        // Disable move for now
+        mMoveAppButton.setEnabled(false);
          // Cache section
-         mCachePanel = findViewById(R.id.cache_panel);
          mCacheSize = (TextView) findViewById(R.id.cache_size_text);
          mCacheSize.setText(mComputingStr);
          mClearCacheButton = (Button) findViewById(R.id.clear_cache_button);
-         mForceStopButton = (Button) findViewById(R.id.force_stop_button);
-         mForceStopButton.setOnClickListener(this);
+
          // Get list of preferred activities
          mActivitiesButton = (Button)findViewById(R.id.clear_activities_button);
          List<ComponentName> prefActList = new ArrayList<ComponentName>();
@@ -253,9 +310,10 @@ public class InstalledAppDetails extends Activity implements View.OnClickListene
     
     private void refreshAppAttributes(PackageInfo pkgInfo) {
         setAppLabelAndIcon();
+        initControlButtons();
+        initDataButtons();
         // Version number of application
         setAppVersion(pkgInfo);
-        setAppBtnState();
         // Refresh size info
         if (mAppInfo != null && mAppInfo.packageName != null) {
             mPm.getPackageSizeInfo(mAppInfo.packageName, mSizeObserver);
@@ -286,38 +344,9 @@ public class InstalledAppDetails extends Activity implements View.OnClickListene
         }
     }
 
-    // Utility method to set button state
-    private void setAppBtnState() {
-        boolean visible = true;
-        if  ((mAppInfo.flags & ApplicationInfo.FLAG_SYSTEM) != 0) {
-            if ((mAppInfo.flags & ApplicationInfo.FLAG_UPDATED_SYSTEM_APP) != 0) {
-                mAppButtonState = AppButtonStates.FACTORY_RESET;
-                mAppButtonText = getText(R.string.app_factory_reset);
-            } else {
-                if ((mAppInfo.flags & ApplicationInfo.FLAG_ALLOW_CLEAR_USER_DATA) == 0) {
-                    // Hide button if diableClearUserData is set
-                    mAppButtonState = AppButtonStates.NONE;
-                    visible = false;
-                } else {
-                    mAppButtonState = AppButtonStates.CLEAR_DATA;
-                    mAppButtonText = getText(R.string.clear_user_data_text);
-                }
-            }
-        } else {
-            mAppButtonState = AppButtonStates.UNINSTALL;
-            mAppButtonText = getText(R.string.uninstall_text);
-        }
-        if(visible) {
-            mAppButton.setText(mAppButtonText);
-            mAppButton.setVisibility(View.VISIBLE);
-        } else {
-            mAppButton.setVisibility(View.GONE);
-        }
-    }
-
     @Override
-    public void onStart() {
-        super.onStart();
+    public void onResume() {
+        super.onResume();
         PackageInfo pkgInfo;
         // Get application info again to refresh changed properties of application
         try {
@@ -332,13 +361,12 @@ public class InstalledAppDetails extends Activity implements View.OnClickListene
         }
         refreshAppAttributes(pkgInfo);
     }
-    
+
     private void setIntentAndFinish(boolean finish, boolean appChanged) {
         if(localLOGV) Log.i(TAG, "appChanged="+appChanged);
         Intent intent = new Intent();
         intent.putExtra(ManageApplications.APP_CHG, appChanged);
         setResult(ManageApplications.RESULT_OK, intent);
-        mAppButton.setEnabled(false);
         if(finish) {
             finish();
         }
@@ -383,18 +411,11 @@ public class InstalledAppDetails extends Activity implements View.OnClickListene
                 mSizeInfo = newPs;
             }
         }
-        
-        long data = mSizeInfo.dataSize;
-        // Disable button if data is 0
-        if(mAppButtonState != AppButtonStates.NONE){
-            mAppButton.setText(mAppButtonText);
-            if((mAppButtonState == AppButtonStates.CLEAR_DATA) && (data == 0)) {
-                mAppButton.setEnabled(false);
-            } else {
-                mAppButton.setEnabled(true);
-                mAppButton.setOnClickListener(this);
-            }            
+        // If data size is zero disable clear data button
+        if (newPs.dataSize == 0) {
+            mClearDataButton.setEnabled(false);
         }
+        long data = mSizeInfo.dataSize;
         refreshCacheInfo(newPs.cacheSize);
     }
     
@@ -415,12 +436,12 @@ public class InstalledAppDetails extends Activity implements View.OnClickListene
     private void processClearMsg(Message msg) {
         int result = msg.arg1;
         String packageName = mAppInfo.packageName;
+        mClearDataButton.setText(R.string.clear_user_data_text);
         if(result == OP_SUCCESSFUL) {
-            Log.i(TAG, "Cleared user data for system package:"+packageName);
+            Log.i(TAG, "Cleared user data for package : "+packageName);
             mPm.getPackageSizeInfo(packageName, mSizeObserver);
         } else {
-            mAppButton.setText(R.string.clear_user_data_text);
-            mAppButton.setEnabled(true);
+            mClearDataButton.setEnabled(true);
         }
     }
     
@@ -428,11 +449,11 @@ public class InstalledAppDetails extends Activity implements View.OnClickListene
      * Private method to initiate clearing user data when the user clicks the clear data 
      * button for a system package
      */
-    private  void initiateClearUserDataForSysPkg() {
-        mAppButton.setEnabled(false);
-        //invoke uninstall or clear user data based on sysPackage
+    private  void initiateClearUserData() {
+        mClearDataButton.setEnabled(false);
+        // Invoke uninstall or clear user data based on sysPackage
         String packageName = mAppInfo.packageName;
-        Log.i(TAG, "Clearing user data for system package");
+        Log.i(TAG, "Clearing user data for package : " + packageName);
         if(mClearDataObserver == null) {
             mClearDataObserver = new ClearUserDataObserver();
         }
@@ -443,7 +464,7 @@ public class InstalledAppDetails extends Activity implements View.OnClickListene
             Log.i(TAG, "Couldnt clear application user data for package:"+packageName);
             showDialogInner(DLG_CANNOT_CLEAR_DATA);
         } else {
-                mAppButton.setText(R.string.recompute_size);
+            mClearDataButton.setText(R.string.recompute_size);
         }
     }
     
@@ -453,23 +474,35 @@ public class InstalledAppDetails extends Activity implements View.OnClickListene
     }
     
     @Override
-    public Dialog onCreateDialog(int id) {
+    public Dialog onCreateDialog(int id, Bundle args) {
         switch (id) {
         case DLG_CLEAR_DATA:
             return new AlertDialog.Builder(this)
             .setTitle(getString(R.string.clear_data_dlg_title))
             .setIcon(android.R.drawable.ic_dialog_alert)
             .setMessage(getString(R.string.clear_data_dlg_text))
-            .setPositiveButton(R.string.dlg_ok, this)
-            .setNegativeButton(R.string.dlg_cancel, this)
+            .setPositiveButton(R.string.dlg_ok,
+                    new DialogInterface.OnClickListener() {
+                public void onClick(DialogInterface dialog, int which) {
+                    // Clear user data here
+                    initiateClearUserData();
+                }
+            })
+            .setNegativeButton(R.string.dlg_cancel, null)
             .create();
         case DLG_FACTORY_RESET:
             return new AlertDialog.Builder(this)
             .setTitle(getString(R.string.app_factory_reset_dlg_title))
             .setIcon(android.R.drawable.ic_dialog_alert)
             .setMessage(getString(R.string.app_factory_reset_dlg_text))
-            .setPositiveButton(R.string.dlg_ok, this)
-            .setNegativeButton(R.string.dlg_cancel, this)
+            .setPositiveButton(R.string.dlg_ok,
+                    new DialogInterface.OnClickListener() {
+                public void onClick(DialogInterface dialog, int which) {
+                    // Clear user data here
+                    uninstallPkg(mAppInfo.packageName);
+                }
+            })
+            .setNegativeButton(R.string.dlg_cancel, null)
             .create();
         case DLG_APP_NOT_FOUND:
             return new AlertDialog.Builder(this)
@@ -492,10 +525,25 @@ public class InstalledAppDetails extends Activity implements View.OnClickListene
             .setNeutralButton(R.string.dlg_ok,
                     new DialogInterface.OnClickListener() {
                 public void onClick(DialogInterface dialog, int which) {
+                    mClearDataButton.setEnabled(false);
                     //force to recompute changed value
                     setIntentAndFinish(false, false);
                 }
             })
+            .create();
+            case DLG_FORCE_STOP:
+                return new AlertDialog.Builder(this)
+                .setTitle(getString(R.string.force_stop_dlg_title))
+                .setIcon(android.R.drawable.ic_dialog_alert)
+                .setMessage(getString(R.string.force_stop_dlg_text))
+                .setPositiveButton(R.string.dlg_ok,
+                    new DialogInterface.OnClickListener() {
+                public void onClick(DialogInterface dialog, int which) {
+                    // Force stop
+                    forceStopPackage(mAppInfo.packageName);
+                }
+            })
+            .setNegativeButton(R.string.dlg_cancel, null)
             .create();
         }
         return null;
@@ -509,27 +557,35 @@ public class InstalledAppDetails extends Activity implements View.OnClickListene
         setIntentAndFinish(true, true);
     }
 
+    private void forceStopPackage(String pkgName) {
+        ActivityManager am = (ActivityManager)getSystemService(
+                Context.ACTIVITY_SERVICE);
+        am.forceStopPackage(pkgName);
+    }
+
     /*
      * Method implementing functionality of buttons clicked
      * @see android.view.View.OnClickListener#onClick(android.view.View)
      */
     public void onClick(View v) {
         String packageName = mAppInfo.packageName;
-        if(v == mAppButton) {
-            if (mAppButtonState == AppButtonStates.CLEAR_DATA) {
-                showDialogInner(DLG_CLEAR_DATA);
-            } else if (mAppButtonState == AppButtonStates.FACTORY_RESET) {
+        if(v == mUninstallButton) {
+            if (mUpdatedSysApp) {
                 showDialogInner(DLG_FACTORY_RESET);
-            } else if (mAppButtonState == AppButtonStates.UNINSTALL) {
+            } else {
                 uninstallPkg(packageName);
             }
         } else if(v == mActivitiesButton) {
             mPm.clearPackagePreferredActivities(packageName);
             mActivitiesButton.setEnabled(false);
-        } else if(v == mManageSpaceButton) {
-            Intent intent = new Intent(Intent.ACTION_DEFAULT);
-            intent.setClassName(mAppInfo.packageName, mAppInfo.manageSpaceActivityName);
-            startActivityForResult(intent, -1);
+        } else if(v == mClearDataButton) {
+            if (mAppInfo.manageSpaceActivityName != null) {
+                Intent intent = new Intent(Intent.ACTION_DEFAULT);
+                intent.setClassName(mAppInfo.packageName, mAppInfo.manageSpaceActivityName);
+                startActivityForResult(intent, -1);
+            } else {
+                showDialogInner(DLG_CLEAR_DATA);
+            }
         } else if (v == mClearCacheButton) {
             // Lazy initialization of observer
             if (mClearCacheObserver == null) {
@@ -537,23 +593,14 @@ public class InstalledAppDetails extends Activity implements View.OnClickListene
             }
             mPm.deleteApplicationCacheFiles(packageName, mClearCacheObserver);
         } else if (v == mForceStopButton) {
-            ActivityManager am = (ActivityManager)getSystemService(
-                    Context.ACTIVITY_SERVICE);
-            am.forceStopPackage(packageName);
-        }
-    }
-
-    public void onClick(DialogInterface dialog, int which) {
-        if(which == AlertDialog.BUTTON_POSITIVE) {
-            if (mAppButtonState == AppButtonStates.CLEAR_DATA) {
-                // Invoke uninstall or clear user data based on sysPackage
-                initiateClearUserDataForSysPkg();
-            } else if (mAppButtonState == AppButtonStates.FACTORY_RESET) {
-                // Initiate package installer to delete package
-                uninstallPkg(mAppInfo.packageName);
-            }
-        } else {
-            //cancel do nothing just retain existing screen
+            // TODO Once framework supports a pre-broadcast to
+            // actually find out if an application will be restarted right
+            // after its killed, there is no way we can determine if
+            // a force stop will really kill the app. So just ignore
+            // the dialog for now and force stop the package. Please note
+            // that the button cannot be enabled or disabled since
+            // we do not have this info for now.
+            forceStopPackage(mAppInfo.packageName);
         }
     }
 }
