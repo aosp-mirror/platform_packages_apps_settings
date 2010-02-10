@@ -16,16 +16,6 @@
 
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <PreferenceCategory android:key="location_category"
-            android:title="@string/location_section_title">
-        <!-- Share location with Google -->
-        <CheckBoxPreference
-                android:key="use_location"
-                android:title="@string/use_location_title"
-                android:persistent="false"
-                android:summary="@string/use_location_summary"/>
-    </PreferenceCategory>
-
     <PreferenceCategory android:key="backup_category"
             android:title="@string/backup_section_title">
         <!-- Backup settings -->
