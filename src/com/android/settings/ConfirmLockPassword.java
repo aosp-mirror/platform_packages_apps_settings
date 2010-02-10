@@ -17,24 +17,27 @@
 package com.android.settings;
 
 import com.android.internal.widget.LockPatternUtils;
+import com.android.internal.widget.PasswordEntryKeyboardHelper;
+import com.android.internal.widget.PasswordEntryKeyboardView;
 
 import android.app.Activity;
 import android.os.Bundle;
 import android.os.Handler;
 import android.text.Editable;
 import android.view.View;
+import android.view.WindowManager;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.TextView;
 
 public class ConfirmLockPassword extends Activity implements OnClickListener {
     private static final long ERROR_MESSAGE_TIMEOUT = 3000;
-    private final int digitIds[] = new int[] { R.id.zero, R.id.one, R.id.two, R.id.three,
-            R.id.four, R.id.five, R.id.six, R.id.seven, R.id.eight, R.id.nine };
-    private TextView mPasswordTextView;
+    private TextView mPasswordEntry;
     private LockPatternUtils mLockPatternUtils;
     private TextView mHeaderText;
     private Handler mHandler = new Handler();
+    private PasswordEntryKeyboardHelper mKeyboardHelper;
+    private PasswordEntryKeyboardView mKeyboardView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,27 +48,43 @@ public class ConfirmLockPassword extends Activity implements OnClickListener {
 
     private void initViews() {
         int mode = mLockPatternUtils.getPasswordMode();
-        if (LockPatternUtils.MODE_PIN == mode || LockPatternUtils.MODE_PASSWORD == mode) {
-            setContentView(R.layout.confirm_lock_pin);
-            for (int i = 0; i < digitIds.length; i++) {
-                Button button = (Button) findViewById(digitIds[i]);
-                button.setOnClickListener(this);
-                button.setText(Integer.toString(i));
-            }
-            findViewById(R.id.ok).setOnClickListener(this);
-            findViewById(R.id.cancel).setOnClickListener(this);
-        }
-        findViewById(R.id.backspace).setOnClickListener(this);
-        mPasswordTextView = (TextView) findViewById(R.id.pinDisplay);
+        setContentView(R.layout.confirm_lock_password);
+        // Disable IME on our window since we provide our own keyboard
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_ALT_FOCUSABLE_IM,
+                WindowManager.LayoutParams.FLAG_ALT_FOCUSABLE_IM);
+
+        findViewById(R.id.cancel_button).setOnClickListener(this);
+        findViewById(R.id.next_button).setOnClickListener(this);
+        mPasswordEntry = (TextView) findViewById(R.id.password_entry);
+        mKeyboardView = (PasswordEntryKeyboardView) findViewById(R.id.keyboard);
         mHeaderText = (TextView) findViewById(R.id.headerText);
         mHeaderText.setText(R.string.lockpassword_confirm_your_password_header);
+        final boolean isAlpha =
+                LockPatternUtils.MODE_PASSWORD == mLockPatternUtils.getPasswordMode();
+        mKeyboardHelper = new PasswordEntryKeyboardHelper(this, mKeyboardView, mPasswordEntry);
+        mKeyboardHelper.setKeyboardMode(isAlpha ? PasswordEntryKeyboardHelper.KEYBOARD_MODE_ALPHA
+                : PasswordEntryKeyboardHelper.KEYBOARD_MODE_NUMERIC);
+        mKeyboardView.requestFocus();
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        mKeyboardView.requestFocus();
+    }
+
+    @Override
+    protected void onResume() {
+        // TODO Auto-generated method stub
+        super.onResume();
+        mKeyboardView.requestFocus();
     }
 
     public void onClick(View v) {
         switch (v.getId()) {
-            case R.id.ok:
+            case R.id.next_button:
                 {
-                    final String pin = mPasswordTextView.getText().toString();
+                    final String pin = mPasswordEntry.getText().toString();
                     if (mLockPatternUtils.checkPassword(pin)) {
                         setResult(RESULT_OK);
                         finish();
@@ -75,36 +94,16 @@ public class ConfirmLockPassword extends Activity implements OnClickListener {
                 }
                 break;
 
-            case R.id.backspace:
-                {
-                    final Editable digits = mPasswordTextView.getEditableText();
-                    final int len = digits.length();
-                    if (len > 0) {
-                        digits.delete(len-1, len);
-                    }
-                }
-                break;
-
-            case R.id.cancel:
+            case R.id.cancel_button:
                 setResult(RESULT_CANCELED);
                 finish();
-                break;
-
-            default:
-                // Digits
-                for (int i = 0; i < digitIds.length; i++) {
-                    if (v.getId() == digitIds[i]) {
-                        mPasswordTextView.append(Integer.toString(i));
-                        return;
-                    }
-                }
                 break;
         }
     }
 
     private void showError(int msg) {
         mHeaderText.setText(msg);
-        mPasswordTextView.setText(null);
+        mPasswordEntry.setText(null);
         mHandler.postDelayed(new Runnable() {
             public void run() {
                 mHeaderText.setText(R.string.lockpassword_confirm_your_password_header);

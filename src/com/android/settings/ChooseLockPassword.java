@@ -20,26 +20,30 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import com.android.internal.widget.LockPatternUtils;
+import com.android.internal.widget.PasswordEntryKeyboardHelper;
+import com.android.internal.widget.PasswordEntryKeyboardView;
 import com.android.settings.ChooseLockPattern.LeftButtonMode;
 import com.android.settings.ChooseLockPattern.RightButtonMode;
 import com.android.settings.ChooseLockPattern.Stage;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.content.pm.ActivityInfo;
+import android.graphics.PixelFormat;
+import android.inputmethodservice.KeyboardView;
 import android.os.Bundle;
 import android.os.Handler;
 import android.text.Editable;
 import android.text.TextUtils;
 import android.view.View;
+import android.view.WindowManager;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.TextView;
 
 
 public class ChooseLockPassword extends Activity implements OnClickListener {
-    private final int digitIds[] = new int[] { R.id.zero, R.id.one, R.id.two, R.id.three,
-            R.id.four, R.id.five, R.id.six, R.id.seven, R.id.eight, R.id.nine };
-    private TextView mPasswordTextView;
+    private TextView mPasswordEntry;
     private int mPasswordMinLength = 4;
     private int mPasswordMaxLength = 8;
     private LockPatternUtils mLockPatternUtils;
@@ -48,6 +52,8 @@ public class ChooseLockPassword extends Activity implements OnClickListener {
     private com.android.settings.ChooseLockPassword.Stage mUiStage = Stage.Introduction;
     private TextView mHeaderText;
     private String mFirstPin;
+    private KeyboardView mKeyboardView;
+    private PasswordEntryKeyboardHelper mKeyboardHelper;
     public static final String PASSWORD_MIN_KEY = "lockscreen.password_min";
     public static final String PASSWORD_MAX_KEY = "lockscreen.password_max";
     private static Handler mHandler = new Handler();
@@ -79,7 +85,7 @@ public class ChooseLockPassword extends Activity implements OnClickListener {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mLockPatternUtils = new LockPatternUtils(this);
-        mRequestedMode = getIntent().getIntExtra("password_mode", mRequestedMode);
+        mRequestedMode = getIntent().getIntExtra(LockPatternUtils.PASSWORD_TYPE_KEY, mRequestedMode);
         mPasswordMinLength = getIntent().getIntExtra("password_min_length", mPasswordMinLength);
         mPasswordMaxLength = getIntent().getIntExtra("password_max_length", mPasswordMaxLength);
         int minMode = mLockPatternUtils.getRequestedPasswordMode();
@@ -99,25 +105,38 @@ public class ChooseLockPassword extends Activity implements OnClickListener {
     }
 
     private void initViews() {
-        switch(mRequestedMode) {
-            case LockPatternUtils.MODE_PIN:
-            case LockPatternUtils.MODE_PASSWORD:
-            case LockPatternUtils.MODE_PATTERN:
-                setContentView(R.layout.choose_lock_pin);
-                // TODO: alphanumeric layout
-                // setContentView(R.layout.choose_lock_password);
-                for (int i = 0; i < digitIds.length; i++) {
-                    Button button = (Button) findViewById(digitIds[i]);
-                    button.setOnClickListener(this);
-                    button.setText(Integer.toString(i));
-                }
-                break;
-        }
-        findViewById(R.id.ok).setOnClickListener(this);
-        findViewById(R.id.cancel).setOnClickListener(this);
-        findViewById(R.id.backspace).setOnClickListener(this);
-        mPasswordTextView = (TextView) findViewById(R.id.pinDisplay);
+        setContentView(R.layout.choose_lock_password);
+        // Disable IME on our window since we provide our own keyboard
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_ALT_FOCUSABLE_IM,
+                WindowManager.LayoutParams.FLAG_ALT_FOCUSABLE_IM);
+
+        findViewById(R.id.cancel_button).setOnClickListener(this);
+        findViewById(R.id.next_button).setOnClickListener(this);
+
+        mKeyboardView = (PasswordEntryKeyboardView) findViewById(R.id.keyboard);
+        mPasswordEntry = (TextView) findViewById(R.id.password_entry);
+
+        final boolean isAlpha = LockPatternUtils.MODE_PASSWORD == mRequestedMode;
+        mKeyboardHelper = new PasswordEntryKeyboardHelper(this, mKeyboardView, mPasswordEntry);
+        mKeyboardHelper.setKeyboardMode(isAlpha ? PasswordEntryKeyboardHelper.KEYBOARD_MODE_ALPHA
+                : PasswordEntryKeyboardHelper.KEYBOARD_MODE_NUMERIC);
+
         mHeaderText = (TextView) findViewById(R.id.headerText);
+        mKeyboardView.requestFocus();
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        mKeyboardView.requestFocus();
+    }
+
+    @Override
+    protected void onResume() {
+        // TODO Auto-generated method stub
+        super.onResume();
+        updateStage(mUiStage);
+        mKeyboardView.requestFocus();
     }
 
     @Override
@@ -136,7 +155,7 @@ public class ChooseLockPassword extends Activity implements OnClickListener {
 
     protected void updateStage(Stage stage) {
         mHeaderText.setText(stage.headerMessage);
-        mPasswordTextView.setText("");
+        mPasswordEntry.setText("");
         mUiStage = stage;
     }
 
@@ -172,9 +191,9 @@ public class ChooseLockPassword extends Activity implements OnClickListener {
 
     public void onClick(View v) {
         switch (v.getId()) {
-            case R.id.ok:
+            case R.id.next_button:
                 {
-                    final String pin = mPasswordTextView.getText().toString();
+                    final String pin = mPasswordEntry.getText().toString();
                     if (TextUtils.isEmpty(pin)) {
                         break;
                     }
@@ -203,35 +222,15 @@ public class ChooseLockPassword extends Activity implements OnClickListener {
                 }
                 break;
 
-            case R.id.backspace:
-                {
-                    final Editable digits = mPasswordTextView.getEditableText();
-                    final int len = digits.length();
-                    if (len > 0) {
-                        digits.delete(len-1, len);
-                    }
-                }
-                break;
-
-            case R.id.cancel:
+            case R.id.cancel_button:
                 finish();
-                break;
-
-            default:
-                // Digits
-                for (int i = 0; i < digitIds.length; i++) {
-                    if (v.getId() == digitIds[i]) {
-                        mPasswordTextView.append(Integer.toString(i));
-                        return;
-                    }
-                }
                 break;
         }
     }
 
     private void showError(String msg, final Stage next) {
         mHeaderText.setText(msg);
-        mPasswordTextView.setText("");
+        mPasswordEntry.setText("");
         mHandler.postDelayed(new Runnable() {
             public void run() {
                 updateStage(next);
