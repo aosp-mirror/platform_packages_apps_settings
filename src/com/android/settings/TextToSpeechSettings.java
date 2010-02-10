@@ -38,6 +38,7 @@ import android.provider.Settings.SettingNotFoundException;
 import android.speech.tts.TextToSpeech;
 import android.util.Log;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 import java.util.StringTokenizer;
@@ -84,6 +85,7 @@ public class TextToSpeechSettings extends PreferenceActivity implements
     private int      mDemoStringIndex = 0;
 
     private boolean mEnableDemo = false;
+    private boolean mVoicesMissing = false;
 
     private TextToSpeech mTts = null;
 
@@ -278,16 +280,50 @@ public class TextToSpeechSettings extends PreferenceActivity implements
      */
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (requestCode == VOICE_DATA_INTEGRITY_CHECK) {
-            if (resultCode == TextToSpeech.Engine.CHECK_VOICE_DATA_PASS) {
-                Log.v(TAG, "Voice data check passed");
+            // TODO (clchen): Add these extras to TextToSpeech.Engine
+            ArrayList<String> available =
+                    data.getStringArrayListExtra("TextToSpeech.Engine.EXTRA_AVAILABLE_VOICES");
+            ArrayList<String> unavailable =
+                    data.getStringArrayListExtra("TextToSpeech.Engine.EXTRA_UNAVAILABLE_VOICES");
+
+            if (available.size() > 0){
                 if (mTts == null) {
                     mTts = new TextToSpeech(this, this);
                 }
+                ListPreference ttsLanguagePref =
+                        (ListPreference) findPreference("tts_default_lang");
+                CharSequence[] entries = new CharSequence[available.size()];
+                CharSequence[] entryValues = new CharSequence[available.size()];
+                for (int i=0; i<available.size(); i++){
+                    String[] langCountryVariant = available.get(i).split("-");
+                    Locale loc = null;
+                    if (langCountryVariant.length == 1){
+                        loc = new Locale(langCountryVariant[0]);
+                    } else if (langCountryVariant.length == 2){
+                        loc = new Locale(langCountryVariant[0], langCountryVariant[1]);
+                    } else if (langCountryVariant.length == 3){
+                        loc = new Locale(langCountryVariant[0], langCountryVariant[1],
+                                         langCountryVariant[2]);
+                    }
+                    if (loc != null){
+                        entries[i] = loc.getDisplayName();
+                        entryValues[i] = available.get(i);
+                    }
+                }
+                ttsLanguagePref.setEntries(entries);
+                ttsLanguagePref.setEntryValues(entryValues);
+                mEnableDemo = true;
             } else {
-                Log.v(TAG, "Voice data check failed");
                 mEnableDemo = false;
-                updateWidgetState();
             }
+
+            if (unavailable.size() > 0){
+                mVoicesMissing = true;
+            } else {
+                mVoicesMissing = false;
+            }
+
+            updateWidgetState();
         } else if (requestCode == GET_SAMPLE_TEXT) {
             if (resultCode == TextToSpeech.LANG_AVAILABLE) {
                 if (mTts != null) {
@@ -377,7 +413,7 @@ public class TextToSpeechSettings extends PreferenceActivity implements
         mDefaultRatePref.setEnabled(mEnableDemo);
         mDefaultLocPref.setEnabled(mEnableDemo);
 
-        mInstallData.setEnabled(!mEnableDemo);
+        mInstallData.setEnabled(mVoicesMissing);
     }
 
 
