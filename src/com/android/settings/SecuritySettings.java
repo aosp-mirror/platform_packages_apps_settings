@@ -32,8 +32,6 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.location.LocationManager;
 import android.os.Bundle;
-import android.os.ICheckinService;
-import android.os.ServiceManager;
 import android.os.SystemProperties;
 import android.preference.CheckBoxPreference;
 import android.preference.ListPreference;
@@ -444,26 +442,9 @@ public class SecuritySettings extends PreferenceActivity {
                 }
             } else {
                 if (button == DialogInterface.BUTTON_POSITIVE) {
-                    // Perform action
-                    // Reboot and toggle Encrypted File Systems
-                    ICheckinService service =
-                    ICheckinService.Stub.asInterface(ServiceManager.getService("checkin"));
-                    if (service != null) {
-                        try {
-                            // This RPC should never return
-                            if (mWillEnableEncryptedFS) {
-                                service.masterClearAndToggleEFS(true);
-                            } else {
-                                service.masterClearAndToggleEFS(false);
-                            }
-                        } catch (android.os.RemoteException e) {
-                            // Intentionally blank - there's nothing we can do here
-                            Log.w("SecuritySettings",
-                                    "Unable to invoke ICheckinService.masterClearAndToggleEFS()");
-                        }
-                    } else {
-                        Log.w("SecuritySettings", "Unable to locate ICheckinService");
-                    }
+                    Intent intent = new Intent("android.intent.action.MASTER_CLEAR");
+                    intent.putExtra("enableEFS", mWillEnableEncryptedFS);
+                    sendBroadcast(intent);
                     updatePreferences(mState);
                 } else if (button == DialogInterface.BUTTON_NEGATIVE) {
                     // Cancel action

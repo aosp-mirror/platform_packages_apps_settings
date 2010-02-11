@@ -60,35 +60,12 @@ public class MasterClear extends Activity {
      */
     private Button.OnClickListener mFinalClickListener = new Button.OnClickListener() {
             public void onClick(View v) {
-
                 if (Utils.isMonkeyRunning()) {
                     return;
                 }
 
-                ICheckinService service =
-                        ICheckinService.Stub.asInterface(ServiceManager.getService("checkin"));
-                if (service != null) {
-                    try {
-                        // This RPC should never return
-                        service.masterClear();
-                    } catch (android.os.RemoteException e) {
-                        // Intentionally blank - there's nothing we can do here
-                        Log.w("MasterClear", "Unable to invoke ICheckinService.masterClear()");
-                    }
-                } else {
-                    Log.w("MasterClear", "Unable to locate ICheckinService");
-                }
-
-                /* If we reach this point, the master clear didn't happen -- the
-                 * service might have been unregistered with the ServiceManager,
-                 * the RPC might have thrown an exception, or for some reason
-                 * the implementation of masterClear() may have returned instead
-                 * of resetting the device.
-                 */
-                new AlertDialog.Builder(MasterClear.this)
-                        .setMessage(getText(R.string.master_clear_failed))
-                        .setPositiveButton(getText(android.R.string.ok), null)
-                        .show();
+                sendBroadcast(new Intent("android.intent.action.MASTER_CLEAR"));
+                // Intent handling is asynchronous -- assume it will happen soon.
             }
         };
 
