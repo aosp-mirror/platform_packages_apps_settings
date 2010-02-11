@@ -87,7 +87,8 @@ public class DeviceAdminSettings extends ListActivity {
         List<ResolveInfo> avail = getPackageManager().queryBroadcastReceivers(
                 new Intent(DeviceAdmin.ACTION_DEVICE_ADMIN_ENABLED),
                 PackageManager.GET_META_DATA);
-        for (int i=0; i<avail.size(); i++) {
+        int count = avail == null ? 0 : avail.size();
+        for (int i=0; i<count; i++) {
             ResolveInfo ri = avail.get(i);
             try {
                 DeviceAdminInfo dpi = new DeviceAdminInfo(this, ri);
