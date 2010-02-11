@@ -60,6 +60,8 @@ public class RingerVolumePreference extends VolumePreference implements
         setStreamType(AudioManager.STREAM_RING);
 
         setDialogLayoutResource(R.layout.preference_dialog_ringervolume);
+        setDialogIcon(R.drawable.ic_settings_sound);
+
         mSeekBarVolumizer = new SeekBarVolumizer[SEEKBAR_ID.length];
     }
 
