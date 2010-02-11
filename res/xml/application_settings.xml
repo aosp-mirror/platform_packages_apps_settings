@@ -25,7 +25,15 @@
             android:summaryOff="@string/install_unknown_applications"
             android:summaryOn="@string/install_unknown_applications"
             android:persistent="false" />
-        
+
+    <ListPreference
+        android:key="app_install_location"
+        android:title="@string/app_install_location_title"
+        android:summary="@string/app_install_location_summary"
+        android:persistent="false"
+        android:entries="@array/app_install_location_entries"
+        android:entryValues="@array/app_install_location_values"/>
+
     <PreferenceScreen
             android:key="quick_launch"
             android:title="@string/quick_launch_title"
