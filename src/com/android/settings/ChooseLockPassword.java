@@ -34,15 +34,24 @@ import android.inputmethodservice.KeyboardView;
 import android.os.Bundle;
 import android.os.Handler;
 import android.text.Editable;
+import android.text.Selection;
+import android.text.Spannable;
 import android.text.TextUtils;
+import android.text.TextWatcher;
+import android.view.KeyEvent;
 import android.view.View;
 import android.view.WindowManager;
 import android.view.View.OnClickListener;
+import android.view.inputmethod.EditorInfo;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.TextView.OnEditorActionListener;
 
 
-public class ChooseLockPassword extends Activity implements OnClickListener {
+public class ChooseLockPassword extends Activity implements OnClickListener, OnEditorActionListener,
+        TextWatcher {
+    private static final String KEY_FIRST_PIN = "first_pin";
+    private static final String KEY_UI_STAGE = "ui_stage";
     private TextView mPasswordEntry;
     private int mPasswordMinLength = 4;
     private int mPasswordMaxLength = 8;
@@ -54,6 +63,9 @@ public class ChooseLockPassword extends Activity implements OnClickListener {
     private String mFirstPin;
     private KeyboardView mKeyboardView;
     private PasswordEntryKeyboardHelper mKeyboardHelper;
+    private boolean mIsAlphaMode;
+    private Button mCancelButton;
+    private Button mNextButton;
     public static final String PASSWORD_MIN_KEY = "lockscreen.password_min";
     public static final String PASSWORD_MAX_KEY = "lockscreen.password_max";
     private static Handler mHandler = new Handler();
@@ -66,19 +78,30 @@ public class ChooseLockPassword extends Activity implements OnClickListener {
      */
     protected enum Stage {
 
-        Introduction(R.string.lockpassword_choose_your_password_header),
-        NeedToConfirm(R.string.lockpassword_confirm_your_password_header),
-        ConfirmWrong(R.string.lockpassword_confirm_passwords_dont_match),
-        ChoiceConfirmed(R.string.lockpassword_password_confirmed_header);
+        Introduction(R.string.lockpassword_choose_your_password_header,
+                R.string.lockpassword_choose_your_pin_header,
+                R.string.lockpassword_continue_label),
+
+        NeedToConfirm(R.string.lockpassword_confirm_your_password_header,
+                R.string.lockpassword_confirm_your_pin_header,
+                R.string.lockpassword_ok_label),
+
+        ConfirmWrong(R.string.lockpassword_confirm_passwords_dont_match,
+                R.string.lockpassword_confirm_pins_dont_match,
+                R.string.lockpassword_continue_label);
 
         /**
          * @param headerMessage The message displayed at the top.
          */
-        Stage(int headerMessage) {
-            this.headerMessage = headerMessage;
+        Stage(int hintInAlpha, int hintInNumeric, int nextButtonText) {
+            this.alphaHint = hintInAlpha;
+            this.numericHint = hintInNumeric;
+            this.buttonText = nextButtonText;
         }
 
-        final int headerMessage;
+        public final int alphaHint;
+        public final int numericHint;
+        public final int buttonText;
     }
 
     @Override
@@ -110,15 +133,20 @@ public class ChooseLockPassword extends Activity implements OnClickListener {
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_ALT_FOCUSABLE_IM,
                 WindowManager.LayoutParams.FLAG_ALT_FOCUSABLE_IM);
 
-        findViewById(R.id.cancel_button).setOnClickListener(this);
-        findViewById(R.id.next_button).setOnClickListener(this);
+        mCancelButton = (Button) findViewById(R.id.cancel_button);
+        mCancelButton.setOnClickListener(this);
+        mNextButton = (Button) findViewById(R.id.next_button);
+        mNextButton.setOnClickListener(this);
 
         mKeyboardView = (PasswordEntryKeyboardView) findViewById(R.id.keyboard);
         mPasswordEntry = (TextView) findViewById(R.id.password_entry);
+        mPasswordEntry.setOnEditorActionListener(this);
+        mPasswordEntry.addTextChangedListener(this);
 
-        final boolean isAlpha = LockPatternUtils.MODE_PASSWORD == mRequestedMode;
+        mIsAlphaMode = LockPatternUtils.MODE_PASSWORD == mRequestedMode;
         mKeyboardHelper = new PasswordEntryKeyboardHelper(this, mKeyboardView, mPasswordEntry);
-        mKeyboardHelper.setKeyboardMode(isAlpha ? PasswordEntryKeyboardHelper.KEYBOARD_MODE_ALPHA
+        mKeyboardHelper.setKeyboardMode(mIsAlphaMode ?
+                PasswordEntryKeyboardHelper.KEYBOARD_MODE_ALPHA
                 : PasswordEntryKeyboardHelper.KEYBOARD_MODE_NUMERIC);
 
         mHeaderText = (TextView) findViewById(R.id.headerText);
@@ -126,17 +154,28 @@ public class ChooseLockPassword extends Activity implements OnClickListener {
     }
 
     @Override
-    protected void onPause() {
-        super.onPause();
+    protected void onResume() {
+        super.onResume();
+        updateStage(mUiStage);
         mKeyboardView.requestFocus();
     }
 
     @Override
-    protected void onResume() {
-        // TODO Auto-generated method stub
-        super.onResume();
-        updateStage(mUiStage);
-        mKeyboardView.requestFocus();
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putString(KEY_UI_STAGE, mUiStage.name());
+        outState.putString(KEY_FIRST_PIN, mFirstPin);
+    }
+
+    @Override
+    protected void onRestoreInstanceState(Bundle savedInstanceState) {
+        super.onRestoreInstanceState(savedInstanceState);
+        String state = savedInstanceState.getString(KEY_UI_STAGE);
+        mFirstPin = savedInstanceState.getString(KEY_FIRST_PIN);
+        if (state != null) {
+            mUiStage = Stage.valueOf(state);
+            updateStage(mUiStage);
+        }
     }
 
     @Override
@@ -154,9 +193,8 @@ public class ChooseLockPassword extends Activity implements OnClickListener {
     }
 
     protected void updateStage(Stage stage) {
-        mHeaderText.setText(stage.headerMessage);
-        mPasswordEntry.setText("");
         mUiStage = stage;
+        updateUi();
     }
 
     /**
@@ -166,60 +204,76 @@ public class ChooseLockPassword extends Activity implements OnClickListener {
      */
     private String validatePassword(String pin) {
         if (pin.length() < mPasswordMinLength) {
-            return getString(R.string.pin_password_too_short, mPasswordMinLength);
+            return getString(mIsAlphaMode ?
+                    R.string.lockpassword_password_too_short
+                    : R.string.lockpassword_pin_too_short, mPasswordMinLength);
         }
         if (pin.length() > mPasswordMaxLength) {
-            return getString(R.string.pin_password_too_long, mPasswordMaxLength);
+            return getString(mIsAlphaMode ?
+                    R.string.lockpassword_password_too_long
+                    : R.string.lockpassword_pin_too_long, mPasswordMaxLength);
         }
-        if (LockPatternUtils.MODE_PIN == mRequestedMode) {
-            Pattern p = Pattern.compile("[0-9]+");
-            Matcher m = p.matcher(pin);
-            if (!m.find()) {
-                return getString(R.string.pin_password_contains_non_digits);
+        boolean hasAlpha = false;
+        boolean hasDigit = false;
+        boolean hasSymbol = false;
+        for (int i = 0; i < pin.length(); i++) {
+            char c = pin.charAt(i);
+            // allow non white space Latin-1 characters only
+            if (c <= 32 || c > 127) {
+                return getString(R.string.lockpassword_illegal_character);
             }
-        } else if (LockPatternUtils.MODE_PASSWORD == mRequestedMode) {
-            // allow Latin-1 characters only
-            for (int i = 0; i < pin.length(); i++) {
-                char c = pin.charAt(i);
-                if (c <= 32 || c > 127) {
-                    return getString(R.string.pin_password_illegal_character);
+            if (c >= '0' && c <= '9') {
+                hasDigit = true;
+            } else if ((c >= 'A' && c <= 'Z') || (c >= 'a' && c <= 'z')) {
+                hasAlpha = true;
+            } else {
+                hasSymbol = true;
+            }
+        }
+        if (LockPatternUtils.MODE_PIN == mRequestedMode && (hasAlpha | hasSymbol)) {
+                return getString(R.string.lockpassword_pin_contains_non_digits);
+        } else if (LockPatternUtils.MODE_PASSWORD == mRequestedMode && !hasAlpha) {
+            // require at least 1 alpha character
+            return getString(R.string.lockpassword_password_requires_alpha);
+        }
+        return null;
+    }
+
+    private void handleNext() {
+        final String pin = mPasswordEntry.getText().toString();
+        if (TextUtils.isEmpty(pin)) {
+            return;
+        }
+        String errorMsg = null;
+        if (mUiStage == Stage.Introduction) {
+            errorMsg = validatePassword(pin);
+            if (errorMsg == null) {
+                mFirstPin = pin;
+                updateStage(Stage.NeedToConfirm);
+                mPasswordEntry.setText("");
+            }
+        } else if (mUiStage == Stage.NeedToConfirm) {
+            if (mFirstPin.equals(pin)) {
+                mLockPatternUtils.clearLock();
+                mLockPatternUtils.saveLockPassword(pin, mRequestedMode);
+                finish();
+            } else {
+                updateStage(Stage.ConfirmWrong);
+                CharSequence tmp = mPasswordEntry.getText();
+                if (tmp != null) {
+                    Selection.setSelection((Spannable) tmp, 0, tmp.length());
                 }
             }
         }
-        return null;
+        if (errorMsg != null) {
+            showError(errorMsg, mUiStage);
+        }
     }
 
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.next_button:
-                {
-                    final String pin = mPasswordEntry.getText().toString();
-                    if (TextUtils.isEmpty(pin)) {
-                        break;
-                    }
-                    String errorMsg = null;
-                    if (mUiStage == Stage.Introduction) {
-                        errorMsg = validatePassword(pin);
-                        if (errorMsg == null) {
-                            mFirstPin = pin;
-                            updateStage(Stage.NeedToConfirm);
-                        }
-                    } else if (mUiStage == Stage.NeedToConfirm) {
-                        if (mFirstPin.equals(pin)) {
-                            // TODO: move these to LockPatternUtils
-                            mLockPatternUtils.setLockPatternEnabled(false);
-                            mLockPatternUtils.saveLockPattern(null);
-                            mLockPatternUtils.saveLockPassword(pin, mRequestedMode);
-                            finish();
-                        } else {
-                            int msg = R.string.lockpassword_confirm_passwords_dont_match;
-                            errorMsg = getString(msg);
-                        }
-                    }
-                    if (errorMsg != null) {
-                        showError(errorMsg, Stage.Introduction);
-                    }
-                }
+                handleNext();
                 break;
 
             case R.id.cancel_button:
@@ -230,11 +284,57 @@ public class ChooseLockPassword extends Activity implements OnClickListener {
 
     private void showError(String msg, final Stage next) {
         mHeaderText.setText(msg);
-        mPasswordEntry.setText("");
         mHandler.postDelayed(new Runnable() {
             public void run() {
                 updateStage(next);
             }
         }, ERROR_MESSAGE_TIMEOUT);
+    }
+
+    public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+        // Check if this was the result of hitting the enter key
+        if (actionId == EditorInfo.IME_NULL) {
+            handleNext();
+            return true;
+        }
+        return false;
+    }
+
+    /**
+     * Update the hint based on current Stage and length of password entry
+     */
+    private void updateUi() {
+        final int length = mPasswordEntry.getText().toString().length();
+        if (mUiStage == Stage.Introduction && length > 0) {
+            if (length < mPasswordMinLength) {
+                String msg = getString(mIsAlphaMode ? R.string.lockpassword_password_too_short
+                        : R.string.lockpassword_pin_too_short, mPasswordMinLength);
+                mHeaderText.setText(msg);
+                mNextButton.setEnabled(false);
+            } else {
+                mHeaderText.setText(R.string.lockpassword_press_continue);
+                mNextButton.setEnabled(true);
+            }
+        } else {
+            mHeaderText.setText(mIsAlphaMode ? mUiStage.alphaHint : mUiStage.numericHint);
+            mNextButton.setEnabled(length > 0);
+        }
+        mNextButton.setText(mUiStage.buttonText);
+    }
+
+    public void afterTextChanged(Editable s) {
+        // Changing the text while error displayed resets to NeedToConfirm state
+        if (mUiStage == Stage.ConfirmWrong) {
+            mUiStage = Stage.NeedToConfirm;
+        }
+        updateUi();
+    }
+
+    public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+    }
+
+    public void onTextChanged(CharSequence s, int start, int before, int count) {
+
     }
 }

@@ -516,28 +516,81 @@
     <string name="cdma_security_settings_summary">Set My Location, screen unlock, credential storage lock</string>
     <!-- In the security screen, the header title for settings related to  Passwords-->
     <string name="security_passwords_title">Passwords</string>
-    <!-- Name shown for changing the unlock method -->
-    <string name="unlock_method_title">Unlock Method</string>
-    <!-- Summary shown for changing the unlock method -->
-    <string name="unlock_method_summary">Change the method used to unlock your phone</string>
-    <!-- Error shown in popup when PIN is too short -->
-    <string name="pin_password_too_short">Password must be at least %d digits</string>
+
+    
+    <!-- Unlock settings --><skip />
+
+    <!-- Title for preference that will guide the user through creating an unlock pattern -->
+    <string name="unlock_set_unlock_pattern_title">Set unlock pattern</string>
+    <!-- Summary for preference that guides the user through creating an unlock pattern -->
+    <string name="unlock_set_unlock_pattern_summary">Must draw pattern to unlock screen</string>
+
+    <!-- Title for preference that guides the user through creating an unlock PIN (Personal Identification Number)  -->
+    <string name="unlock_set_unlock_pin_title">Set unlock PIN</string>
+    <!-- Summary for preference that guides the user through creating an unlock PIN (Personal Identification Number)  -->
+    <string name="unlock_set_unlock_pin_summary">Must use a numeric PIN to unlock screen</string>
+
+    <!-- Title for preference that guides the user through creating an unlock password -->
+    <string name="unlock_set_unlock_password_title">Set unlock password</string>
+    <!-- Title for preference that guides the user through creating an unlock password -->
+    <string name="unlock_set_unlock_password_summary">Must use a password to unlock screen</string>
+
+    <!-- Title for option to turn of password/pin/pattern unlock. -->
+    <string name="unlock_disable_lock_title">Turn off screen lock</string>
+
+    <!-- Summary shown under unlock_disable_lock_title when pattern is in use and can be removed -->
+    <string name="unlock_disable_lock_pattern_summary">Remove unlock pattern</string>
+    <!-- Summary shown under unlock_disable_lock_title when PIN is in use and can be removed -->
+    <string name="unlock_disable_lock_pin_summary">Remove unlock PIN</string>
+    <!-- Summary shown under unlock_disable_lock_title when password is in use and can be removed -->
+    <string name="unlock_disable_lock_password_summary">Remove unlock password</string>
+
+    <!-- Title shown on security settings to allow the user to change their lockscreen pattern -->
+    <string name="unlock_change_lock_pattern_title">Change unlock pattern</string>
+    <!-- Title shown on security settings to allow the user to change their lockscreen PIN -->
+    <string name="unlock_change_lock_pin_title">Change unlock PIN</string>
+    <!-- Title shown on security settings to allow the user to change their lockscreen password -->
+    <string name="unlock_change_lock_password_title">Change unlock password</string>
+
+    <!-- Hint shown in dialog screen when password is too short -->
+    <string name="lockpassword_password_too_short">Password must be at least %d characters</string>
+    <!-- Hint shown in dialog screen when PIN is too short -->
+    <string name="lockpassword_pin_too_short">PIN must be at least %d characters</string>
+
+    <!-- Hint shown after minimum password criteria is met -->
+    <string name="lockpassword_press_continue">Press Continue when done</string>
+
+    <!-- Hint shown after minimum password criteria is met -->
+    <string name="lockpassword_continue_label">Continue</string>
+
+    <!-- Error shown in popup when password is too long -->
+    <string name="lockpassword_password_too_long">PIN can be no longer than %d digits</string>
     <!-- Error shown in popup when PIN is too long -->
-    <string name="pin_password_too_long">Password can be no longer than %d digits</string>
+    <string name="lockpassword_pin_too_long">PIN can be no longer than %d digits</string>
+
     <!-- Error shown when in PIN mode and user enters a non-digit -->
-    <string name="pin_password_illegal_character">PIN must contain only digits 0-9</string>
+    <string name="lockpassword_pin_contains_non_digits">PIN must contain only digits 0-9</string>
+
     <!-- Error shown when in PASSWORD mode and user enters an invalid character -->
-    <string name="pin_password_contains_non_digits">Password contains an illegal character</string>
+    <string name="lockpassword_illegal_character">Password contains an illegal character</string>
+
+    <!-- Error shown when in PASSWORD mode and password is all digits -->
+    <string name="lockpassword_password_requires_alpha">Alpha password must contain at least one letter</string>
+
+    <!-- Label for ChoosePassword/PIN OK button -->
+    <string name="lockpassword_ok_label">OK</string>
+
+    <!-- Label for ChoosePassword/PIN OK button -->
+    <string name="lockpassword_cancel_label">Cancel</string>
+
     <!-- In the security screen, the header title for settings related to device admins -->
     <string name="device_admin_title">Device administration</string>
+
     <!-- Title of preference to manage device admins -->
     <string name="manage_device_admin">Select device administrators</string>
+
     <!-- Summary of preference to manage device policies -->
     <string name="manage_device_admin_summary">Add or remove device administrators</string>
-    <!-- Label for ChoosePassword/PIN OK button -->
-    <string name="password_ok_button_label">OK</string>
-    <!-- Label for ChoosePassword/PIN OK button -->
-    <string name="password_cancel_button_label">Cancel</string>
 
     <!-- Bluetooth settings -->
     <!-- Bluetooth settings check box title on Main Settings screen -->
@@ -1350,16 +1403,26 @@
     <!-- Lock Pattern settings -->
     <!-- Header on first screen of choose password/PIN flow -->
     <string name="lockpassword_choose_your_password_header">Choose your password</string>
+    <!-- Header on first screen of choose password/PIN flow -->
+    <string name="lockpassword_choose_your_pin_header">Choose your PIN</string>
     <!-- Header on password confirm screen -->
-    <string name="lockpassword_confirm_your_password_header">Confirm password</string>
+    <string name="lockpassword_confirm_your_password_header">Confirm your password</string>
+    <!-- Header on password confirm screen -->
+    <string name="lockpassword_confirm_your_pin_header">Confirm your PIN</string>
     <!-- Header on password confirm screen if second password doesn't match the first. -->
     <string name="lockpassword_confirm_passwords_dont_match">Passwords don\'t match</string>
-    <!-- Header shown if passwords match -->
-    <string name="lockpassword_password_confirmed_header">Password confirmed</string>
+    <!-- Header on pin confirm screen if second pin doesn't match the first. -->
+    <string name="lockpassword_confirm_pins_dont_match">PINs don\'t match</string>
+    <!-- Toast shown if setting password was successful -->
+    <string name="lockpassword_password_set_toast">Password has been set</string>
+    <!-- Toast shown if setting PIN was successful -->
+    <string name="lockpassword_pin_set_toast">PIN has been set</string>
+    <!-- Toast shown if setting pattern was successful -->
+    <string name="lockpassword_pattern_set_toast">Pattern has been set</string>
 
     <!-- Lock Pattern settings -->
     <!-- Security & location settings screen, header -->
-    <string name="lock_settings_title">Screen unlock pattern</string>
+    <string name="lock_settings_title">Screen unlock</string>
     <!-- Security & location settings screen, setting option name -->
     <string name="lockpattern_change_lock_pattern_label">Change unlock pattern</string>
     <!-- Security & location settings screen, change unlock pattern screen instruction when the user chooses "Change unlock pattern".  We first ask the user toe nter the current pattern, and this is the message seen -->

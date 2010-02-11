@@ -43,26 +43,4 @@
 
     </PreferenceCategory>
 
-    <PreferenceCategory
-        android:key="security_category"
-        android:title="@string/lock_settings_title">
-
-        <ListPreference
-            android:key="unlock_method"
-            android:title="@string/unlock_method_title"
-            android:summary="@string/unlock_method_summary"
-            android:persistent="false"
-            android:entries="@array/unlock_method_entries"
-            android:entryValues="@array/unlock_method_values"/>
-
-        <CheckBoxPreference
-            android:key="visiblepattern"
-            android:title="@string/lockpattern_settings_enable_visible_pattern_title"/>
-
-        <CheckBoxPreference
-            android:key="tactilefeedback"
-            android:title="@string/lockpattern_settings_enable_tactile_feedback_title"/>
-
-    </PreferenceCategory>
-
 </PreferenceScreen>

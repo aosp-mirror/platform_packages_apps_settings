@@ -24,13 +24,17 @@ import android.app.Activity;
 import android.os.Bundle;
 import android.os.Handler;
 import android.text.Editable;
+import android.view.KeyEvent;
 import android.view.View;
 import android.view.WindowManager;
 import android.view.View.OnClickListener;
+import android.view.inputmethod.EditorInfo;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.TextView.OnEditorActionListener;
 
-public class ConfirmLockPassword extends Activity implements OnClickListener {
+public class ConfirmLockPassword extends Activity implements OnClickListener,
+        OnEditorActionListener {
     private static final long ERROR_MESSAGE_TIMEOUT = 3000;
     private TextView mPasswordEntry;
     private LockPatternUtils mLockPatternUtils;
@@ -56,11 +60,13 @@ public class ConfirmLockPassword extends Activity implements OnClickListener {
         findViewById(R.id.cancel_button).setOnClickListener(this);
         findViewById(R.id.next_button).setOnClickListener(this);
         mPasswordEntry = (TextView) findViewById(R.id.password_entry);
+        mPasswordEntry.setOnEditorActionListener(this);
         mKeyboardView = (PasswordEntryKeyboardView) findViewById(R.id.keyboard);
         mHeaderText = (TextView) findViewById(R.id.headerText);
-        mHeaderText.setText(R.string.lockpassword_confirm_your_password_header);
         final boolean isAlpha =
                 LockPatternUtils.MODE_PASSWORD == mLockPatternUtils.getPasswordMode();
+        mHeaderText.setText(isAlpha ? R.string.lockpassword_confirm_your_password_header
+                : R.string.lockpassword_confirm_your_pin_header);
         mKeyboardHelper = new PasswordEntryKeyboardHelper(this, mKeyboardView, mPasswordEntry);
         mKeyboardHelper.setKeyboardMode(isAlpha ? PasswordEntryKeyboardHelper.KEYBOARD_MODE_ALPHA
                 : PasswordEntryKeyboardHelper.KEYBOARD_MODE_NUMERIC);
@@ -80,18 +86,20 @@ public class ConfirmLockPassword extends Activity implements OnClickListener {
         mKeyboardView.requestFocus();
     }
 
+    private void handleNext() {
+        final String pin = mPasswordEntry.getText().toString();
+        if (mLockPatternUtils.checkPassword(pin)) {
+            setResult(RESULT_OK);
+            finish();
+        } else {
+            showError(R.string.lockpattern_need_to_unlock_wrong);
+        }
+    }
+
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.next_button:
-                {
-                    final String pin = mPasswordEntry.getText().toString();
-                    if (mLockPatternUtils.checkPassword(pin)) {
-                        setResult(RESULT_OK);
-                        finish();
-                    } else {
-                        showError(R.string.lockpattern_need_to_unlock_wrong);
-                    }
-                }
+                handleNext();
                 break;
 
             case R.id.cancel_button:
@@ -109,5 +117,14 @@ public class ConfirmLockPassword extends Activity implements OnClickListener {
                 mHeaderText.setText(R.string.lockpassword_confirm_your_password_header);
             }
         }, ERROR_MESSAGE_TIMEOUT);
+    }
+
+    public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+        // Check if this was the result of hitting the enter key
+        if (actionId == EditorInfo.IME_NULL) {
+            handleNext();
+            return true;
+        }
+        return false;
     }
 }
