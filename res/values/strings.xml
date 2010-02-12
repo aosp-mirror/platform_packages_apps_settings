@@ -2117,6 +2117,26 @@ found in the list of installed applications.</string>
     <string name="tts_demo">This is an example of speech synthesis.</string>
     <!-- Text spoken by the TTS engine when TTS settings (other than language) have been changed -->
     <string name="tts_settings_changed_demo">Your settings have changed. This is an example of how they sound.</string>
+    <!-- Error screen when a selected TTS engine can't run because it's missing components -->
+    <string name="tts_engine_error">The engine you selected is unable to run</string>
+    <!-- Button text for error screen when a selected TTS engine can't run because it's missing components -->
+    <string name="tts_engine_error_config">Configure</string>
+    <!-- Button text for error screen when a selected TTS engine can't run because it's missing components -->
+    <string name="tts_engine_error_reselect">Select another engine</string>
+    <!-- Warning message about security implications of enabling a TTS engine, displayed as a dialog
+         message when the user selects to enable an engine. -->
+    <string name="tts_engine_security_warning">This speech synthesis engine may be able to collect
+    all the text that will be spoken, including personal data like passwords and credit
+    card numbers.  It comes from the <xliff:g id="tts_plugin_engine_name">%s</xliff:g> engine.
+    Enable the use of this speech synthesis engine?</string>
+    <!-- On main TTS Settings screen, text for divider under which all TTS engines are listed -->
+    <string name="tts_engines_section">Engines</string>
+    <!-- On main TTS Settings screen, text preceded by the TTS engine name, clicking this button will launch the engine settings -->
+    <string name="tts_engine_name_settings"><xliff:g id="tts_plugin_engine_name">%s</xliff:g> settings</string>
+    <!-- On main TTS Settings screen, text preceded by the TTS engine name to indicate the engine can be used by the user -->
+    <string name="tts_engine_name_is_enabled_summary"><xliff:g id="tts_plugin_engine_name">%s</xliff:g> is enabled</string>
+    <!-- On main TTS Settings screen, text preceded by the TTS engine name to indicate the engine cannot be used by the user -->
+    <string name="tts_engine_name_is_disabled_summary"><xliff:g id="tts_plugin_engine_name">%s</xliff:g> is disabled</string>
 
     <!-- Power Control Widget -->
     <string name="gadget_title">Power Control</string>
