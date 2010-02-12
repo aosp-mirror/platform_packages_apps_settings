@@ -92,8 +92,20 @@ public class VoiceInputOutputSettings extends PreferenceActivity
             removePreference(mRecognizerPref);
             removePreference(mSettingsPref);
         } else if (numAvailable == 1) {
-            // Only one recognizer available, so don't show the list of choices.
+            // Only one recognizer available, so don't show the list of choices, but do
+            // set up the link to settings for the available recognizer.
             removePreference(mRecognizerPref);
+            
+            // But first set up the available recognizers map with just the one recognizer.
+            ResolveInfo resolveInfo = availableRecognitionServices.get(0);
+            String recognizerComponent =
+                    new ComponentName(resolveInfo.serviceInfo.packageName,
+                            resolveInfo.serviceInfo.name).flattenToString();
+            mAvailableRecognizersMap.put(recognizerComponent, resolveInfo);
+            
+            String currentSetting = Settings.Secure.getString(
+                    getContentResolver(), Settings.Secure.VOICE_RECOGNITION_SERVICE);
+            updateSettingsLink(currentSetting);
         } else {
             // Multiple recognizers available, so show the full list of choices.
             populateRecognizerPreference(availableRecognitionServices);
@@ -186,6 +198,7 @@ public class VoiceInputOutputSettings extends PreferenceActivity
             Intent i = new Intent(Intent.ACTION_MAIN);
             i.setComponent(new ComponentName(si.packageName, settingsActivity));
             mSettingsPref.setIntent(i);
+            mRecognizerPref.setSummary(currentRecognizer.loadLabel(getPackageManager()));
         }
     }
     
