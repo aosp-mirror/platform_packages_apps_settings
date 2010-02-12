@@ -265,7 +265,10 @@ public class TextToSpeechSettings extends PreferenceActivity implements
         if (status == TextToSpeech.SUCCESS) {
             Log.v(TAG, "TTS engine for settings screen initialized.");
             mEnableDemo = true;
-            mTts.setLanguage(new Locale(mDefaultLanguage, mDefaultCountry));
+            if (mDefaultLanguage == null){
+                mDefaultLanguage = Locale.getDefault().getISO3Language();
+            }
+            mTts.setLanguage(new Locale(mDefaultLanguage, mDefaultCountry, mDefaultLocVariant));
             mTts.setSpeechRate((float)(mDefaultRate/100.0f));
         } else {
             Log.v(TAG, "TTS engine for settings screen failed to initialize successfully.");
@@ -368,17 +371,20 @@ public class TextToSpeechSettings extends PreferenceActivity implements
             Log.v(TAG, "TTS default lang/country/variant set to "
                     + mDefaultLanguage + "/" + mDefaultCountry + "/" + mDefaultLocVariant);
             if (mTts != null) {
-                mTts.setLanguage(new Locale(mDefaultLanguage, mDefaultCountry));
+                mTts.setLanguage(new Locale(mDefaultLanguage, mDefaultCountry, mDefaultLocVariant));
             }
             int newIndex = mDefaultLocPref.findIndexOfValue((String)objValue);
             Log.v("Settings", " selected is " + newIndex);
             mDemoStringIndex = newIndex > -1 ? newIndex : 0;
         } else if (KEY_TTS_DEFAULT_SYNTH.equals(preference.getKey())) {
-            // TODO: Do a data check here
             mDefaultEng = objValue.toString();
             Settings.Secure.putString(getContentResolver(), TTS_DEFAULT_SYNTH, mDefaultEng);
             if (mTts != null) {
                 mTts.setEngineByPackageName(mDefaultEng);
+                mEnableDemo = false;
+                mVoicesMissing = false;
+                updateWidgetState();
+                checkVoiceData();
             }
             Log.v("Settings", "The default synth is: " + objValue.toString());
         }
