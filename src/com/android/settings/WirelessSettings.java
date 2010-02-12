@@ -19,6 +19,7 @@ package com.android.settings;
 import android.bluetooth.BluetoothAdapter;
 import android.content.Context;
 import android.content.Intent;
+import android.net.ConnectivityManager;
 import android.net.wifi.WifiManager;
 import android.os.Bundle;
 import android.os.ServiceManager;
@@ -28,6 +29,7 @@ import android.preference.Preference;
 import android.preference.PreferenceActivity;
 import android.preference.PreferenceScreen;
 import android.provider.Settings;
+import android.util.Log;
 
 import com.android.internal.telephony.TelephonyIntents;
 import com.android.internal.telephony.TelephonyProperties;
@@ -42,6 +44,7 @@ public class WirelessSettings extends PreferenceActivity {
     private static final String KEY_WIFI_SETTINGS = "wifi_settings";
     private static final String KEY_BT_SETTINGS = "bt_settings";
     private static final String KEY_VPN_SETTINGS = "vpn_settings";
+    private static final String KEY_TETHER_SETTINGS = "tether_settings";
     public static final String EXIT_ECM_RESULT = "exit_ecm_result";
     public static final int REQUEST_CODE_EXIT_ECM = 1;
 
@@ -114,8 +117,15 @@ public class WirelessSettings extends PreferenceActivity {
         if (ServiceManager.getService(BluetoothAdapter.BLUETOOTH_SERVICE) == null) {
             findPreference(KEY_BT_SETTINGS).setEnabled(false);
         }
+
+        // Disable Tethering if it's not allowed
+        ConnectivityManager cm =
+                (ConnectivityManager)getSystemService(Context.CONNECTIVITY_SERVICE);
+        if (!cm.isTetheringSupported()) {
+            getPreferenceScreen().removePreference(findPreference(KEY_TETHER_SETTINGS));
+        }
     }
-    
+
     @Override
     protected void onResume() {
         super.onResume();

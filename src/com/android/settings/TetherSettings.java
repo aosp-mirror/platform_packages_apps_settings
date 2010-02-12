@@ -30,6 +30,7 @@ import android.preference.CheckBoxPreference;
 import android.provider.Settings;
 import android.util.Log;
 
+import java.util.ArrayList;
 /*
  * Displays preferences for Tethering.
  */
@@ -43,6 +44,12 @@ public class TetherSettings extends PreferenceActivity {
 
     private BroadcastReceiver mTetherChangeReceiver;
 
+    private String[] mUsbRegexs;
+    private ArrayList mUsbIfaces;
+
+    private String[] mWifiRegexs;
+    private ArrayList mWifiIfaces;
+
     @Override
     protected void onCreate(Bundle icicle) {
         super.onCreate(icicle);
@@ -51,12 +58,27 @@ public class TetherSettings extends PreferenceActivity {
 
         mEnableTetherNotice = (CheckBoxPreference) findPreference(ENABLE_TETHER_NOTICE);
         mUsbTether = (PreferenceScreen) findPreference(USB_TETHER_SETTINGS);
+
+        ConnectivityManager cm =
+                (ConnectivityManager)getSystemService(Context.CONNECTIVITY_SERVICE);
+        mUsbRegexs = cm.getTetherableUsbRegexs();
+        if (mUsbRegexs.length == 0) {
+            getPreferenceScreen().removePreference(mUsbTether);
+            getPreferenceScreen().removePreference(mEnableTetherNotice);
+        }
+        mWifiRegexs = cm.getTetherableWifiRegexs();
     }
+
 
     private class TetherChangeReceiver extends BroadcastReceiver {
         public void onReceive(Context content, Intent intent) {
-            updateState(intent.getIntExtra(ConnectivityManager.EXTRA_AVAILABLE_TETHER_COUNT,0)>0,
-                    intent.getIntExtra(ConnectivityManager.EXTRA_ACTIVE_TETHER_COUNT,0)>0);
+            // TODO - this should understand the interface types
+            ArrayList<String> available = intent.getStringArrayListExtra(
+                    ConnectivityManager.EXTRA_AVAILABLE_TETHER);
+            ArrayList<String> active = intent.getStringArrayListExtra(
+                    ConnectivityManager.EXTRA_ACTIVE_TETHER);
+
+            updateState(available, active);
         }
     }
 
@@ -68,11 +90,9 @@ public class TetherSettings extends PreferenceActivity {
 
         IntentFilter filter = new IntentFilter(ConnectivityManager.ACTION_TETHER_STATE_CHANGED);
         mTetherChangeReceiver = new TetherChangeReceiver();
-        registerReceiver(mTetherChangeReceiver, filter);
+        Intent intent = registerReceiver(mTetherChangeReceiver, filter);
 
-        ConnectivityManager cm =
-                (ConnectivityManager)getSystemService(Context.CONNECTIVITY_SERVICE);
-        updateState(cm.getTetherableIfaces().length>0, cm.getTetheredIfaces().length>0);
+        if (intent != null) mTetherChangeReceiver.onReceive(this, intent);
     }
 
     @Override
@@ -82,11 +102,33 @@ public class TetherSettings extends PreferenceActivity {
         mTetherChangeReceiver = null;
     }
 
-    private void updateState(boolean isAvailable, boolean isTethered) {
-        if (isTethered) {
+    private void updateState(ArrayList<String> available, ArrayList<String> tethered) {
+        boolean usbTethered = false;
+        boolean usbAvailable = false;
+        boolean wifiTethered = false;
+        boolean wifiAvailable = false;
+
+        for (String s : available) {
+            for (String regex : mUsbRegexs) {
+                if (s.matches(regex)) usbAvailable = true;
+            }
+            for (String regex : mWifiRegexs) {
+                if (s.matches(regex)) wifiAvailable = true;
+            }
+        }
+        for (String s : tethered) {
+            for (String regex : mUsbRegexs) {
+                if (s.matches(regex)) usbTethered = true;
+            }
+            for (String regex : mWifiRegexs) {
+                if (s.matches(regex)) wifiTethered = true;
+            }
+        }
+
+        if (usbTethered) {
             mUsbTether.setSummary(R.string.usb_tethering_active_subtext);
             mUsbTether.setEnabled(true);
-        } else if (isAvailable) {
+        } else if (usbAvailable) {
             mUsbTether.setSummary(R.string.usb_tethering_available_subtext);
             mUsbTether.setEnabled(true);
         } else {

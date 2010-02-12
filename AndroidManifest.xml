@@ -171,8 +171,7 @@
         </activity>
 
         <activity android:name=".TetherSettings"
-                android:configChanges="orientation|keyboardHidden"
-                android:launchMode="singleTask">
+                android:clearTaskOnLaunch="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.DEFAULT" />
