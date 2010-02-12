@@ -17,25 +17,28 @@
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
         android:title="@string/voice_input_output_settings_title"
         android:key="parent">
+
+    <PreferenceCategory android:key="voice_input_category"
+            android:title="@string/voice_input_category" />
     
-    <PreferenceScreen android:key="voice_search_settings"
-            android:title="@string/voice_search_settings_title">
-        <intent android:action="android.speech.action.VOICE_SEARCH_SETTINGS"/>
-    </PreferenceScreen>
-    
-    <!-- TODO: Link to a specific voice settings activity within LatinIME when it exists. -->
-    <PreferenceScreen android:key="keyboard_settings"
-            android:title="@string/keyboard_settings_title">
-        <intent android:action="android.intent.action.MAIN"
-                android:targetPackage="com.android.inputmethod.latin"
-                android:targetClass="com.android.inputmethod.latin.LatinIMESettings" />
-    </PreferenceScreen>
-    
+    <!-- entries, entryValues, and defaultValue will be populated programmatically. -->
+    <ListPreference
+            android:key="recognizer"
+            android:title="@string/recognizer_title"
+            android:dialogTitle="@string/recognizer_title" />
+
+    <!-- An intent for this preference will be populated programmatically. -->
+    <PreferenceScreen android:key="recognizer_settings"
+            android:title="@string/recognizer_settings_title" />
+
+    <PreferenceCategory android:key="voice_output_category"
+            android:title="@string/voice_output_category" />
+
     <PreferenceScreen android:key="tts_settings"
             android:title="@string/tts_settings_title">
         <intent android:action="android.intent.action.MAIN"
                 android:targetPackage="com.android.settings"
                 android:targetClass="com.android.settings.TextToSpeechSettings" />
     </PreferenceScreen>
-    
+
 </PreferenceScreen>
