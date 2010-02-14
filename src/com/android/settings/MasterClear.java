@@ -23,7 +23,6 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.ICheckinService;
 import android.os.ServiceManager;
 import android.os.SystemProperties;
 import android.text.TextUtils;
