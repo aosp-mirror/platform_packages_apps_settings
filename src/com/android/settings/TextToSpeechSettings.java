@@ -265,8 +265,14 @@ public class TextToSpeechSettings extends PreferenceActivity implements
         if (status == TextToSpeech.SUCCESS) {
             Log.v(TAG, "TTS engine for settings screen initialized.");
             mEnableDemo = true;
-            if (mDefaultLanguage == null){
+            if (mDefaultLanguage == null) {
                 mDefaultLanguage = Locale.getDefault().getISO3Language();
+            }
+            if (mDefaultCountry == null) {
+                mDefaultCountry = Locale.getDefault().getISO3Country();
+            }
+            if (mDefaultLocVariant == null) {
+                mDefaultLocVariant = new String();
             }
             mTts.setLanguage(new Locale(mDefaultLanguage, mDefaultCountry, mDefaultLocVariant));
             mTts.setSpeechRate((float)(mDefaultRate/100.0f));
