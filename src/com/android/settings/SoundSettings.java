@@ -55,6 +55,7 @@ public class SoundSettings extends PreferenceActivity implements
     private static final String KEY_EMERGENCY_TONE = "emergency_tone";
     private static final String KEY_SOUND_SETTINGS = "sound_settings";
     private static final String KEY_NOTIFICATION_PULSE = "notification_pulse";
+    private static final String KEY_LOCK_SOUNDS = "lock_sounds";
 
     private CheckBoxPreference mSilent;
 
@@ -70,6 +71,7 @@ public class SoundSettings extends PreferenceActivity implements
     private CheckBoxPreference mSoundEffects;
     private CheckBoxPreference mHapticFeedback;
     private CheckBoxPreference mNotificationPulse;
+    private CheckBoxPreference mLockSounds;
 
     private AudioManager mAudioManager;
 
@@ -114,6 +116,10 @@ public class SoundSettings extends PreferenceActivity implements
         mHapticFeedback.setPersistent(false);
         mHapticFeedback.setChecked(Settings.System.getInt(resolver,
                 Settings.System.HAPTIC_FEEDBACK_ENABLED, 0) != 0);
+        mLockSounds = (CheckBoxPreference) findPreference(KEY_LOCK_SOUNDS);
+        mLockSounds.setPersistent(false);
+        mLockSounds.setChecked(Settings.System.getInt(resolver,
+                Settings.System.LOCKSCREEN_SOUNDS_ENABLED, 1) != 0);
 
         if (TelephonyManager.PHONE_TYPE_CDMA == activePhoneType) {
             ListPreference emergencyTonePreference =
@@ -220,6 +226,10 @@ public class SoundSettings extends PreferenceActivity implements
         } else if (preference == mHapticFeedback) {
             Settings.System.putInt(getContentResolver(), Settings.System.HAPTIC_FEEDBACK_ENABLED,
                     mHapticFeedback.isChecked() ? 1 : 0);
+
+        } else if (preference == mLockSounds) {
+            Settings.System.putInt(getContentResolver(), Settings.System.LOCKSCREEN_SOUNDS_ENABLED,
+                    mLockSounds.isChecked() ? 1 : 0);
 
         } else if (preference == mNotificationPulse) {
             boolean value = mNotificationPulse.isChecked();

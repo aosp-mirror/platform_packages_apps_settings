@@ -90,11 +90,20 @@
                 android:defaultValue="true" />
 
         <CheckBoxPreference
+                android:key="lock_sounds"
+                android:title="@string/lock_sounds_enable_title"
+                android:summaryOn="@string/lock_sounds_enable_summary_on"
+                android:summaryOff="@string/lock_sounds_enable_summary_off"
+                android:dependency="silent"
+                android:order="11"
+                android:defaultValue="true" />
+
+        <CheckBoxPreference
                 android:key="haptic_feedback"
                 android:title="@string/haptic_feedback_enable_title"
                 android:summaryOn="@string/haptic_feedback_enable_summary_on"
                 android:summaryOff="@string/haptic_feedback_enable_summary_off"
-                android:order="11"
+                android:order="12"
                 android:defaultValue="true" />
 
         <ListPreference
