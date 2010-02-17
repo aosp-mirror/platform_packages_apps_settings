@@ -20,7 +20,7 @@ import org.xmlpull.v1.XmlPullParserException;
 
 import android.app.Activity;
 import android.app.AlertDialog;
-import android.app.DeviceAdmin;
+import android.app.DeviceAdminReceiver;
 import android.app.DeviceAdminInfo;
 import android.app.DevicePolicyManager;
 import android.app.Dialog;
@@ -85,7 +85,7 @@ public class DeviceAdminSettings extends ListActivity {
         
         mAvailableAdmins.clear();
         List<ResolveInfo> avail = getPackageManager().queryBroadcastReceivers(
-                new Intent(DeviceAdmin.ACTION_DEVICE_ADMIN_ENABLED),
+                new Intent(DeviceAdminReceiver.ACTION_DEVICE_ADMIN_ENABLED),
                 PackageManager.GET_META_DATA);
         int count = avail == null ? 0 : avail.size();
         for (int i=0; i<count; i++) {

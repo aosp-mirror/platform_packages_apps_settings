@@ -20,7 +20,7 @@ import org.xmlpull.v1.XmlPullParserException;
 
 import android.app.Activity;
 import android.app.AlertDialog;
-import android.app.DeviceAdmin;
+import android.app.DeviceAdminReceiver;
 import android.app.DeviceAdminInfo;
 import android.app.DevicePolicyManager;
 import android.app.Dialog;
@@ -146,14 +146,16 @@ public class DeviceAdminAdd extends Activity {
                         @Override
                         protected void onResult(Bundle bundle) {
                             CharSequence msg = bundle != null
-                                    ? bundle.getCharSequence(DeviceAdmin.EXTRA_DISABLE_WARNING)
+                                    ? bundle.getCharSequence(
+                                            DeviceAdminReceiver.EXTRA_DISABLE_WARNING)
                                     : null;
                             if (msg == null) {
                                 mDPM.removeActiveAdmin(mDeviceAdmin.getComponent());
                                 finish();
                             } else {
                                 Bundle args = new Bundle();
-                                args.putCharSequence(DeviceAdmin.EXTRA_DISABLE_WARNING, msg);
+                                args.putCharSequence(
+                                        DeviceAdminReceiver.EXTRA_DISABLE_WARNING, msg);
                                 showDialog(DIALOG_WARNING, args);
                             }
                         }
@@ -173,7 +175,7 @@ public class DeviceAdminAdd extends Activity {
     protected Dialog onCreateDialog(int id, Bundle args) {
         switch (id) {
             case DIALOG_WARNING: {
-                CharSequence msg = args.getCharSequence(DeviceAdmin.EXTRA_DISABLE_WARNING);
+                CharSequence msg = args.getCharSequence(DeviceAdminReceiver.EXTRA_DISABLE_WARNING);
                 AlertDialog.Builder builder = new AlertDialog.Builder(
                         DeviceAdminAdd.this);
                 builder.setMessage(msg);
