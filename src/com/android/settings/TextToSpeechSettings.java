@@ -350,18 +350,11 @@ public class TextToSpeechSettings extends PreferenceActivity implements
             updateWidgetState();
         } else if (requestCode == GET_SAMPLE_TEXT) {
             if (resultCode == TextToSpeech.LANG_AVAILABLE) {
-                if (data == null){
-                    // The GET_SAMPLE_TEXT activity for the plugin did not run properly;
-                    // return without doing anything.
-                    return;
+                String sample = getString(R.string.tts_demo);
+                if ((data != null) && (data.getStringExtra("sampleText") != null)) {
+                    sample = data.getStringExtra("sampleText");
                 }
                 if (mTts != null) {
-                    String sample = data.getStringExtra("sampleText");
-                    if (sample == null){
-                       // The GET_SAMPLE_TEXT activity for the plugin did not run properly;
-                       // return without doing anything.
-                       return;
-                    }
                     mTts.speak(sample, TextToSpeech.QUEUE_FLUSH, null);
                 }
             } else {
