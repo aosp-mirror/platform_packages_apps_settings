@@ -43,10 +43,12 @@ import java.util.List;
 
 public class LanguageSettings extends PreferenceActivity {
     
+    private static final String KEY_PHONE_LANGUAGE = "phone_language";
     private boolean mHaveHardKeyboard;
 
     private List<InputMethodInfo> mInputMethodProperties;
     private List<CheckBoxPreference> mCheckboxes;
+    private Preference mLanguagePref;
 
     final TextUtils.SimpleStringSplitter mStringColonSplitter
             = new TextUtils.SimpleStringSplitter(':');
@@ -67,6 +69,8 @@ public class LanguageSettings extends PreferenceActivity {
         if (getAssets().getLocales().length == 1) {
             getPreferenceScreen().
                 removePreference(findPreference("language_category"));
+        } else {
+            mLanguagePref = findPreference(KEY_PHONE_LANGUAGE);
         }
 
         Configuration config = getResources().getConfiguration();
@@ -156,6 +160,15 @@ public class LanguageSettings extends PreferenceActivity {
             }
         }
         mLastTickedInputMethodId = null;
+
+        if (mLanguagePref != null) {
+            Configuration conf = getResources().getConfiguration();
+            String locale = conf.locale.getDisplayName(conf.locale);
+            if (locale != null && locale.length() > 1) {
+                locale = Character.toUpperCase(locale.charAt(0)) + locale.substring(1);
+                mLanguagePref.setSummary(locale);
+            }
+        }
     }
 
     @Override
