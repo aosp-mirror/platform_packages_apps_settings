@@ -289,12 +289,27 @@ public class TextToSpeechSettings extends PreferenceActivity implements
      */
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (requestCode == VOICE_DATA_INTEGRITY_CHECK) {
+            if (data == null){
+                // The CHECK_TTS_DATA activity for the plugin did not run properly;
+                // disable the preview and install controls and return.
+                mEnableDemo = false;
+                mVoicesMissing = false;
+                updateWidgetState();
+                return;
+            }
             // TODO (clchen): Add these extras to TextToSpeech.Engine
             ArrayList<String> available =
                     data.getStringArrayListExtra("TextToSpeech.Engine.EXTRA_AVAILABLE_VOICES");
             ArrayList<String> unavailable =
                     data.getStringArrayListExtra("TextToSpeech.Engine.EXTRA_UNAVAILABLE_VOICES");
-
+            if ((available == null) || (unavailable == null)){
+                // The CHECK_TTS_DATA activity for the plugin did not run properly;
+                // disable the preview and install controls and return.
+                mEnableDemo = false;
+                mVoicesMissing = false;
+                updateWidgetState();
+                return;
+            }
             if (available.size() > 0){
                 if (mTts == null) {
                     mTts = new TextToSpeech(this, this);
@@ -335,8 +350,18 @@ public class TextToSpeechSettings extends PreferenceActivity implements
             updateWidgetState();
         } else if (requestCode == GET_SAMPLE_TEXT) {
             if (resultCode == TextToSpeech.LANG_AVAILABLE) {
+                if (data == null){
+                    // The GET_SAMPLE_TEXT activity for the plugin did not run properly;
+                    // return without doing anything.
+                    return;
+                }
                 if (mTts != null) {
-                    String sample = data.getExtras().getString("sampleText");
+                    String sample = data.getStringExtra("sampleText");
+                    if (sample == null){
+                       // The GET_SAMPLE_TEXT activity for the plugin did not run properly;
+                       // return without doing anything.
+                       return;
+                    }
                     mTts.speak(sample, TextToSpeech.QUEUE_FLUSH, null);
                 }
             } else {
