@@ -18,8 +18,8 @@
         xmlns:settings="http://schemas.android.com/apk/res/com.android.settings">
 
     <PreferenceScreen
-            android:title="@string/phone_language"
-            android:summary="@string/phone_language_summary">
+            android:key="phone_language"
+            android:title="@string/phone_language">
         <intent android:action="android.intent.action.MAIN"
                 android:targetPackage="com.android.settings"
                 android:targetClass="com.android.settings.LocalePicker"/>
