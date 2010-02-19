@@ -31,6 +31,7 @@ import android.content.IntentFilter;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.IPackageDataObserver;
 import android.content.pm.IPackageDeleteObserver;
+import android.content.pm.IPackageMoveObserver;
 import android.content.pm.IPackageStatsObserver;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
@@ -87,6 +88,7 @@ public class InstalledAppDetails extends Activity implements View.OnClickListene
     
     PackageStats mSizeInfo;
     private PackageManager mPm;
+    private PackageMoveObserver mPackageMoveObserver;
     
     //internal constants used in Handler
     private static final int OP_SUCCESSFUL = 1;
@@ -94,6 +96,7 @@ public class InstalledAppDetails extends Activity implements View.OnClickListene
     private static final int CLEAR_USER_DATA = 1;
     private static final int GET_PKG_SIZE = 2;
     private static final int CLEAR_CACHE = 3;
+    private static final int PACKAGE_MOVE = 4;
     private static final String ATTR_PACKAGE_STATS="PackageStats";
     
     // invalid size value used initially and also when size retrieval through PackageManager
@@ -125,6 +128,9 @@ public class InstalledAppDetails extends Activity implements View.OnClickListene
                     // Refresh size info
                     mPm.getPackageSizeInfo(mAppInfo.packageName, mSizeObserver);
                     break;
+                case PACKAGE_MOVE:
+                    processMoveMsg(msg);
+                    break;
                 default:
                     break;
             }
@@ -153,10 +159,18 @@ public class InstalledAppDetails extends Activity implements View.OnClickListene
     class ClearCacheObserver extends IPackageDataObserver.Stub {
         public void onRemoveCompleted(final String packageName, final boolean succeeded) {
             final Message msg = mHandler.obtainMessage(CLEAR_CACHE);
-            msg.arg1 = succeeded?OP_SUCCESSFUL:OP_FAILED;
+            msg.arg1 = succeeded ? OP_SUCCESSFUL:OP_FAILED;
             mHandler.sendMessage(msg);
          }
      }
+
+    class PackageMoveObserver extends IPackageMoveObserver.Stub {
+        public void packageMoved(String packageName, int returnCode) throws RemoteException {
+            final Message msg = mHandler.obtainMessage(PACKAGE_MOVE);
+            msg.arg1 = returnCode;
+            mHandler.sendMessage(msg);
+        }
+    }
     
     private String getSizeStr(long size) {
         if (size == SIZE_INVALID) {
@@ -172,22 +186,35 @@ public class InstalledAppDetails extends Activity implements View.OnClickListene
             mClearDataButton.setText(R.string.clear_user_data_text);
         }
         mClearDataButton.setOnClickListener(this);
+        initMoveButton();
+    }
+
+    private void initMoveButton() {
         String pkgName = mAppInfo.packageName;
         boolean dataOnly = false;
         ApplicationInfo info1 = null;
-        ApplicationInfo info2 = null;
 
         try {
             info1 = mPm.getApplicationInfo(pkgName, 0);
         } catch (NameNotFoundException e) {
         }
         dataOnly = (info1 == null) && (mAppInfo != null);
+        boolean moveDisable = true;
         if (dataOnly) {
             mMoveAppButton.setText(R.string.move_app);
         } else if ((mAppInfo.flags & ApplicationInfo.FLAG_ON_SDCARD) != 0) {
             mMoveAppButton.setText(R.string.move_app_to_internal);
+            moveDisable = false;
         } else {
+            moveDisable = (mAppInfo.flags & ApplicationInfo.FLAG_FORWARD_LOCK) != 0 ||
+            (mAppInfo.flags & ApplicationInfo.FLAG_SYSTEM) != 0;
             mMoveAppButton.setText(R.string.move_app_to_sdcard);
+        }
+        if (moveDisable) {
+            mMoveAppButton.setEnabled(false);
+        } else {
+            mMoveAppButton.setOnClickListener(this);
+            mMoveAppButton.setEnabled(true);
         }
     }
 
@@ -270,8 +297,6 @@ public class InstalledAppDetails extends Activity implements View.OnClickListene
         View data_buttons_panel = findViewById(R.id.data_buttons_panel);
         mClearDataButton = (Button) data_buttons_panel.findViewById(R.id.left_button);
         mMoveAppButton = (Button) data_buttons_panel.findViewById(R.id.right_button);
-        // Disable move for now
-        mMoveAppButton.setEnabled(false);
          // Cache section
          mCacheSize = (TextView) findViewById(R.id.cache_size_text);
          mCacheSize.setText(mComputingStr);
@@ -444,6 +469,24 @@ public class InstalledAppDetails extends Activity implements View.OnClickListene
             mClearDataButton.setEnabled(true);
         }
     }
+
+    private void processMoveMsg(Message msg) {
+        int result = msg.arg1;
+        String packageName = mAppInfo.packageName;
+        if(result == PackageManager.MOVE_SUCCEEDED) {
+            Log.i(TAG, "Moved resources for " + packageName);
+            try {
+                // Reset flags
+                mAppInfo = mPm.getApplicationInfo(packageName,
+                        PackageManager.GET_UNINSTALLED_PACKAGES);
+                initMoveButton();
+            } catch (NameNotFoundException e) {
+                // TODO error handling
+            }
+        } else {
+            // TODO Present a dialog indicating failure.
+        }
+    }
     
     /*
      * Private method to initiate clearing user data when the user clicks the clear data 
@@ -601,6 +644,15 @@ public class InstalledAppDetails extends Activity implements View.OnClickListene
             // that the button cannot be enabled or disabled since
             // we do not have this info for now.
             forceStopPackage(mAppInfo.packageName);
+        } else if (v == mMoveAppButton) {
+            if (mPackageMoveObserver == null) {
+                mPackageMoveObserver = new PackageMoveObserver();
+            }
+            int moveFlags = (mAppInfo.flags & ApplicationInfo.FLAG_ON_SDCARD) != 0 ?
+                    PackageManager.MOVE_INTERNAL : PackageManager.MOVE_EXTERNAL_MEDIA;
+            mMoveAppButton.setText(R.string.moving);
+            mMoveAppButton.setEnabled(false);
+            mPm.movePackage(mAppInfo.packageName, mPackageMoveObserver, moveFlags);
         }
     }
 }
