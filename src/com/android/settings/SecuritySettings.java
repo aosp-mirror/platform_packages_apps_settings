@@ -71,7 +71,7 @@ public class SecuritySettings extends PreferenceActivity {
 
     private static final String KEY_LOCK_ENABLED = "lockenabled";
     private static final String KEY_VISIBLE_PATTERN = "visiblepattern";
-    private static final String KEY_TACTILE_FEEDBACK_ENABLED = "tactilefeedback";
+    private static final String KEY_TACTILE_FEEDBACK_ENABLED = "unlock_tactile_feedback";
     private static final String KEY_UNLOCK_METHOD = "unlock_method";
     private static final int UPDATE_PASSWORD_REQUEST = 56;
     private static final int CONFIRM_EXISTING_REQUEST = 57;
@@ -285,13 +285,10 @@ public class SecuritySettings extends PreferenceActivity {
         super.onResume();
 
         final LockPatternUtils lockPatternUtils = mChooseLockSettingsHelper.utils();
-        boolean patternExists = lockPatternUtils.savedPatternExists();
         if (mVisiblePattern != null) {
-            mVisiblePattern.setEnabled(patternExists);
             mVisiblePattern.setChecked(lockPatternUtils.isVisiblePatternEnabled());
         }
         if (mTactileFeedback != null) {
-            mTactileFeedback.setEnabled(patternExists);
             mTactileFeedback.setChecked(lockPatternUtils.isTactileFeedbackEnabled());
         }
 
