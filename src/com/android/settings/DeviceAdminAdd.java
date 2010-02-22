@@ -137,8 +137,18 @@ public class DeviceAdminAdd extends Activity {
         mActionButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 if (mAdding) {
-                    mDPM.setActiveAdmin(mDeviceAdmin.getComponent());
-                    setResult(Activity.RESULT_OK);
+                    try {
+                        mDPM.setActiveAdmin(mDeviceAdmin.getComponent());
+                        setResult(Activity.RESULT_OK);
+                    } catch (RuntimeException e) {
+                        // Something bad happened...  could be that it was
+                        // already set, though.
+                        Log.w(TAG, "Exception trying to activate admin "
+                                + mDeviceAdmin.getComponent(), e);
+                        if (mDPM.isAdminActive(mDeviceAdmin.getComponent())) {
+                            setResult(Activity.RESULT_OK);
+                        }
+                    }
                     finish();
                 } else {
                     mDPM.getRemoveWarning(mDeviceAdmin.getComponent(),
