@@ -18,6 +18,9 @@ package com.android.settings.fuelgauge;
 
 import android.app.Activity;
 import android.app.ActivityManager;
+import android.app.ApplicationErrorReport;
+import android.content.BroadcastReceiver;
+import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.ApplicationInfo;
@@ -26,9 +29,12 @@ import android.content.pm.PackageManager;
 import android.content.pm.PackageManager.NameNotFoundException;
 import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
+import android.net.Uri;
 import android.os.Bundle;
+import android.os.Process;
 import android.provider.Settings;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -37,6 +43,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.android.settings.InstalledAppDetails;
+import com.android.settings.ManageApplications;
 import com.android.settings.R;
 
 public class PowerUsageDetail extends Activity implements Button.OnClickListener {
@@ -68,6 +75,8 @@ public class PowerUsageDetail extends Activity implements Button.OnClickListener
     public static final int ACTION_WIRELESS_SETTINGS = 4;
     public static final int ACTION_APP_DETAILS = 5;
     public static final int ACTION_SECURITY_SETTINGS = 6;
+    public static final int ACTION_FORCE_STOP = 7;
+    public static final int ACTION_REPORT = 8;
 
     public static final int USAGE_SINCE_UNPLUGGED = 1;
     public static final int USAGE_SINCE_RESET = 2;
@@ -78,6 +87,8 @@ public class PowerUsageDetail extends Activity implements Button.OnClickListener
     public static final String EXTRA_UID = "uid";
     public static final String EXTRA_USAGE_SINCE = "since";
     public static final String EXTRA_USAGE_DURATION = "duration";
+    public static final String EXTRA_REPORT_DETAILS = "report_details";
+    public static final String EXTRA_REPORT_CHECKIN_DETAILS = "report_checkin_details";
     public static final String EXTRA_DETAIL_TYPES = "types"; // Array of usage types (cpu, gps, etc)
     public static final String EXTRA_DETAIL_VALUES = "values"; // Array of doubles
     public static final String EXTRA_DRAIN_TYPE = "drainType"; // DrainType
@@ -92,6 +103,9 @@ public class PowerUsageDetail extends Activity implements Button.OnClickListener
     private int mUid;
     private double[] mValues;
     private TextView mTitleView;
+    private ViewGroup mTwoButtonsPanel;
+    private Button mForceStopButton;
+    private Button mReportButton;
     private ViewGroup mDetailsParent;
     private ViewGroup mControlsParent;
     private long mStartTime;
@@ -105,6 +119,9 @@ public class PowerUsageDetail extends Activity implements Button.OnClickListener
     private static final String TAG = "PowerUsageDetail";
     private String[] mPackages;
 
+    ApplicationInfo mApp;
+    ComponentName mInstaller;
+    
     @Override
     protected void onCreate(Bundle icicle) {
         super.onCreate(icicle);
@@ -116,6 +133,7 @@ public class PowerUsageDetail extends Activity implements Button.OnClickListener
     protected void onResume() {
         super.onResume();
         mStartTime = android.os.Process.getElapsedCpuTime();
+        checkForceStop();
     }
 
     @Override
@@ -163,6 +181,11 @@ public class PowerUsageDetail extends Activity implements Button.OnClickListener
         ((TextView)findViewById(R.id.battery_percentage))
             .setText(String.format("%d%%", percentage));
 
+        mTwoButtonsPanel = (ViewGroup) findViewById(R.id.two_buttons_panel);
+        mForceStopButton = (Button) findViewById(R.id.left_button);
+        mReportButton = (Button) findViewById(R.id.right_button);
+        mForceStopButton.setEnabled(false);
+        
         ImageView gaugeImage = (ImageView) findViewById(R.id.gauge);
         mGauge = new PercentageBar();
         mGauge.percent = gaugeValue;
@@ -178,6 +201,34 @@ public class PowerUsageDetail extends Activity implements Button.OnClickListener
         fillDetailsSection();
         fillPackagesSection(mUid);
         fillControlsSection(mUid);
+        
+        if (mUid >= Process.FIRST_APPLICATION_UID) {
+            mForceStopButton.setText(R.string.force_stop);
+            mForceStopButton.setTag(ACTION_FORCE_STOP);
+            mForceStopButton.setOnClickListener(this);
+            mReportButton.setText(com.android.internal.R.string.report);
+            mReportButton.setTag(ACTION_REPORT);
+            mReportButton.setOnClickListener(this);
+            
+            // check if error reporting is enabled in secure settings
+            int enabled = Settings.Secure.getInt(getContentResolver(),
+                    Settings.Secure.SEND_ACTION_APP_ERROR, 0);
+            if (enabled != 0) {
+                if (mPackages != null && mPackages.length > 0) {
+                    try {
+                        mApp = getPackageManager().getApplicationInfo(mPackages[0], 0);
+                        mInstaller = ApplicationErrorReport.getErrorReportReceiver(
+                                this, mPackages[0], mApp.flags);
+                    } catch (NameNotFoundException e) {
+                    }
+                }
+                mReportButton.setEnabled(mInstaller != null);
+            } else {
+                mTwoButtonsPanel.setVisibility(View.GONE);
+            }
+        } else {
+            mTwoButtonsPanel.setVisibility(View.GONE);
+        }
     }
 
     public void onClick(View v) {
@@ -201,11 +252,17 @@ public class PowerUsageDetail extends Activity implements Button.OnClickListener
             case ACTION_APP_DETAILS:
                 Intent intent = new Intent(Intent.ACTION_VIEW);
                 intent.setClass(this, InstalledAppDetails.class);
-                intent.putExtra("com.android.settings.ApplicationPkgName", mPackages[0]);
+                intent.putExtra(ManageApplications.APP_PKG_NAME, mPackages[0]);
                 startActivity(intent);
                 break;
             case ACTION_SECURITY_SETTINGS:
                 startActivity(new Intent(Settings.ACTION_SECURITY_SETTINGS));
+                break;
+            case ACTION_FORCE_STOP:
+                killProcesses();
+                break;
+            case ACTION_REPORT:
+                reportBatteryUse();
                 break;
         }
     }
@@ -332,8 +389,62 @@ public class PowerUsageDetail extends Activity implements Button.OnClickListener
         for (int i = 0; i < mPackages.length; i++) {
             am.forceStopPackage(mPackages[i]);
         }
+        checkForceStop();
     }
 
+    private final BroadcastReceiver mCheckKillProcessesReceiver = new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            mForceStopButton.setEnabled(getResultCode() != RESULT_CANCELED);
+        }
+    };
+    
+    private void checkForceStop() {
+        if (mPackages == null || mUid < Process.FIRST_APPLICATION_UID) {
+            mForceStopButton.setEnabled(false);
+            return;
+        }
+        Intent intent = new Intent(Intent.ACTION_QUERY_PACKAGE_RESTART,
+                Uri.fromParts("package", mPackages[0], null));
+        intent.putExtra(Intent.EXTRA_PACKAGES, mPackages);
+        intent.putExtra(Intent.EXTRA_UID, mUid);
+        sendOrderedBroadcast(intent, null, mCheckKillProcessesReceiver, null,
+                Activity.RESULT_CANCELED, null, null);
+    }
+    
+    private void reportBatteryUse() {
+        if (mPackages == null) return;
+        
+        final Intent intent = getIntent();
+        final int percentage = intent.getIntExtra(EXTRA_PERCENT, 1);
+        final long duration = intent.getLongExtra(EXTRA_USAGE_DURATION, 0);
+        
+        ApplicationErrorReport report = new ApplicationErrorReport();
+        report.type = ApplicationErrorReport.TYPE_BATTERY;
+        report.packageName = mPackages[0];
+        report.installerPackageName = mInstaller.getPackageName();
+        report.processName = mPackages[0];
+        report.time = System.currentTimeMillis();
+        report.systemApp = (mApp.flags & ApplicationInfo.FLAG_SYSTEM) != 0;
+        
+        StringBuilder builder = new StringBuilder();
+        builder.append("Application used " + percentage + "% of battery over "
+                + Utils.formatElapsedTime(this, duration / 1000));
+        builder.append('\n');
+        builder.append(intent.getStringExtra(EXTRA_REPORT_DETAILS));
+        builder.append('\n');
+        builder.append("----------------------------------------------");
+        builder.append('\n');
+        builder.append(intent.getStringExtra(EXTRA_REPORT_CHECKIN_DETAILS));
+        builder.append('\n');
+        report.batteryText = builder.toString();
+        Intent result = new Intent(Intent.ACTION_APP_ERROR);
+        result.setComponent(mInstaller);
+        result.putExtra(Intent.EXTRA_BUG_REPORT, report);
+        result.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        startActivity(result);
+    }
+    
     private void fillPackagesSection(int uid) {
         if (uid < 1) {
             removePackagesSection();
@@ -344,7 +455,7 @@ public class PowerUsageDetail extends Activity implements Button.OnClickListener
         LayoutInflater inflater = getLayoutInflater();
         
         PackageManager pm = getPackageManager();
-        final Drawable defaultActivityIcon = pm.getDefaultActivityIcon();
+        //final Drawable defaultActivityIcon = pm.getDefaultActivityIcon();
         mPackages = pm.getPackagesForUid(uid);
         if (mPackages == null || mPackages.length < 2) {
             removePackagesSection();
@@ -356,13 +467,13 @@ public class PowerUsageDetail extends Activity implements Button.OnClickListener
             try {
                 ApplicationInfo ai = pm.getApplicationInfo(mPackages[i], 0);
                 CharSequence label = ai.loadLabel(pm);
-                Drawable icon = defaultActivityIcon;
+                //Drawable icon = defaultActivityIcon;
                 if (label != null) {
                     mPackages[i] = label.toString();
                 }
-                if (ai.icon != 0) {
-                    icon = ai.loadIcon(pm);
-                }
+                //if (ai.icon != 0) {
+                //    icon = ai.loadIcon(pm);
+                //}
                 ViewGroup item = (ViewGroup) inflater.inflate(R.layout.power_usage_package_item,
                         null);
                 packagesParent.addView(item);

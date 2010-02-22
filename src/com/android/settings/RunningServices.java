@@ -35,6 +35,9 @@ import android.content.pm.PackageItemInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.ServiceInfo;
 import android.content.res.Resources;
+import android.graphics.Canvas;
+import android.graphics.Paint;
+import android.graphics.Rect;
 import android.os.Bundle;
 import android.os.Debug;
 import android.os.Handler;
@@ -53,6 +56,7 @@ import android.view.ViewGroup;
 import android.widget.AbsListView;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -93,13 +97,16 @@ public class RunningServices extends ListActivity
     
     int mProcessBgColor;
     
+    LinearColorBar mColorBar;
     TextView mBackgroundProcessText;
     TextView mForegroundProcessText;
     
     int mLastNumBackgroundProcesses = -1;
     int mLastNumForegroundProcesses = -1;
+    int mLastNumServiceProcesses = -1;
     long mLastBackgroundProcessMemory = -1;
     long mLastForegroundProcessMemory = -1;
+    long mLastServiceProcessMemory = -1;
     long mLastAvailMemory = -1;
     
     Dialog mCurDialog;
@@ -392,6 +399,8 @@ public class RunningServices extends ListActivity
         long mBackgroundProcessMemory;
         int mNumForegroundProcesses;
         long mForegroundProcessMemory;
+        int mNumServiceProcesses;
+        long mServiceProcessMemory;
         
         boolean update(Context context, ActivityManager am) {
             final PackageManager pm = context.getPackageManager();
@@ -576,6 +585,7 @@ public class RunningServices extends ListActivity
             mAllProcessItems.addAll(mProcessItems);
             mNumBackgroundProcesses = 0;
             mNumForegroundProcesses = 0;
+            mNumServiceProcesses = 0;
             NRP = mRunningProcesses.size();
             for (int i=0; i<NRP; i++) {
                 ProcessItem proc = mRunningProcesses.valueAt(i);
@@ -590,13 +600,19 @@ public class RunningServices extends ListActivity
                             ActivityManager.RunningAppProcessInfo.IMPORTANCE_VISIBLE) {
                         mNumForegroundProcesses++;
                         mAllProcessItems.add(proc);
+                    } else {
+                        Log.i(TAG, "Unknown non-service process: "
+                                + proc.mProcessName + " #" + proc.mPid);
                     }
+                } else {
+                    mNumServiceProcesses++;
                 }
             }
             
             try {
                 mBackgroundProcessMemory = 0;
                 mForegroundProcessMemory = 0;
+                mServiceProcessMemory = 0;
                 final int numProc = mAllProcessItems.size();
                 int[] pids = new int[numProc];
                 for (int i=0; i<numProc; i++) {
@@ -608,9 +624,8 @@ public class RunningServices extends ListActivity
                     ProcessItem proc = mAllProcessItems.get(i);
                     changed |= proc.updateSize(context, mem[i], mSequence);
                     if (proc.mCurSeq == mSequence) {
-                        continue;
-                    }
-                    if (proc.mRunningProcessInfo.importance >=
+                        mServiceProcessMemory += proc.mSize;
+                    } else if (proc.mRunningProcessInfo.importance >=
                             ActivityManager.RunningAppProcessInfo.IMPORTANCE_BACKGROUND) {
                         mBackgroundProcessMemory += proc.mSize;
                     } else if (proc.mRunningProcessInfo.importance <=
@@ -725,6 +740,67 @@ public class RunningServices extends ListActivity
         }
     }
     
+    public static class LinearColorBar extends LinearLayout {
+        private float mRedRatio;
+        private float mYellowRatio;
+        private float mGreenRatio;
+        
+        final Rect mRect = new Rect();
+        final Paint mPaint = new Paint();
+        
+        public LinearColorBar(Context context, AttributeSet attrs) {
+            super(context, attrs);
+            setWillNotDraw(false);
+            mPaint.setStyle(Paint.Style.FILL);
+        }
+
+        public void setRatios(float red, float yellow, float green) {
+            mRedRatio = red;
+            mYellowRatio = yellow;
+            mGreenRatio = green;
+            invalidate();
+        }
+        
+        @Override
+        protected void onDraw(Canvas canvas) {
+            super.onDraw(canvas);
+            
+            int width = getWidth();
+            mRect.top = 0;
+            mRect.bottom = getHeight();
+            
+            int left = 0;
+            
+            int right = left + (int)(width*mRedRatio);
+            if (left < right) {
+                mRect.left = left;
+                mRect.right = right;
+                mPaint.setColor(0xffff8080);
+                canvas.drawRect(mRect, mPaint);
+                width -= (right-left);
+                left = right;
+            }
+            
+            right = left + (int)(width*mYellowRatio);
+            if (left < right) {
+                mRect.left = left;
+                mRect.right = right;
+                mPaint.setColor(0xffffff00);
+                canvas.drawRect(mRect, mPaint);
+                width -= (right-left);
+                left = right;
+            }
+            
+            right = left + width;
+            if (left < right) {
+                mRect.left = left;
+                mRect.right = right;
+                mPaint.setColor(0xff80ff80);
+                canvas.drawRect(mRect, mPaint);
+            }
+        }
+    }
+    
     final Handler mHandler = new Handler() {
         @Override
         public void handleMessage(Message msg) {
@@ -823,6 +899,7 @@ public class RunningServices extends ListActivity
         setContentView(R.layout.running_services);
         getListView().setDivider(null);
         getListView().setAdapter(new ServiceListAdapter(mState));
+        mColorBar = (LinearColorBar)findViewById(R.id.color_bar);
         mBackgroundProcessText = (TextView)findViewById(R.id.backgroundText);
         mForegroundProcessText = (TextView)findViewById(R.id.foregroundText);
         
@@ -864,6 +941,14 @@ public class RunningServices extends ListActivity
             mForegroundProcessText.setText(getResources().getString(
                     R.string.service_foreground_processes, mLastNumForegroundProcesses, sizeStr));
         }
+        mLastNumServiceProcesses = mState.mNumServiceProcesses;
+        mLastServiceProcessMemory = mState.mServiceProcessMemory;
+        
+        float totalMem = mLastBackgroundProcessMemory
+                + mLastForegroundProcessMemory + mLastServiceProcessMemory;
+        mColorBar.setRatios(mLastForegroundProcessMemory/totalMem,
+                mLastServiceProcessMemory/totalMem,
+                mLastForegroundProcessMemory/totalMem);
     }
     
     @Override

@@ -48,6 +48,9 @@ import com.android.internal.os.PowerProfile;
 import com.android.settings.R;
 import com.android.settings.fuelgauge.PowerUsageDetail.DrainType;
 
+import java.io.PrintWriter;
+import java.io.StringWriter;
+import java.io.Writer;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
@@ -78,6 +81,7 @@ public class PowerUsageSummary extends PreferenceActivity implements Runnable {
     private static final int MIN_POWER_THRESHOLD = 5;
     private static final int MAX_ITEMS_TO_LIST = 10;
 
+    private long mStatsPeriod = 0;
     private double mMaxPower = 1;
     private double mTotalPower;
     private PowerProfile mPowerProfile;
@@ -132,6 +136,7 @@ public class PowerUsageSummary extends PreferenceActivity implements Runnable {
                 Math.ceil(sipper.getSortValue() * 100 / mTotalPower));
         intent.putExtra(PowerUsageDetail.EXTRA_GAUGE, (int)
                 Math.ceil(sipper.getSortValue() * 100 / mMaxPower));
+        intent.putExtra(PowerUsageDetail.EXTRA_USAGE_DURATION, mStatsPeriod);
         intent.putExtra(PowerUsageDetail.EXTRA_ICON_PACKAGE, sipper.defaultPackageName);
         intent.putExtra(PowerUsageDetail.EXTRA_ICON_ID, sipper.iconId);
         intent.putExtra(PowerUsageDetail.EXTRA_NO_COVERAGE, sipper.noCoveragePercent);
@@ -165,6 +170,15 @@ public class PowerUsageSummary extends PreferenceActivity implements Runnable {
                     0
                 };
 
+                Writer result = new StringWriter();
+                PrintWriter printWriter = new PrintWriter(result);
+                mStats.dumpLocked(printWriter, "", mStatsType, uid.getUid());
+                intent.putExtra(PowerUsageDetail.EXTRA_REPORT_DETAILS, result.toString());
+                
+                result = new StringWriter();
+                printWriter = new PrintWriter(result);
+                mStats.dumpCheckinLocked(printWriter, mStatsType, uid.getUid());
+                intent.putExtra(PowerUsageDetail.EXTRA_REPORT_CHECKIN_DETAILS, result.toString());
             }
             break;
             case CELL:
@@ -303,6 +317,7 @@ public class PowerUsageSummary extends PreferenceActivity implements Runnable {
         }
         final double averageCostPerByte = getAverageDataCost();
         long uSecTime = mStats.computeBatteryRealtime(SystemClock.elapsedRealtime() * 1000, which);
+        mStatsPeriod = uSecTime;
         updateStatsPeriod(uSecTime);
         SparseArray<? extends Uid> uidStats = mStats.getUidStats();
         final int NU = uidStats.size();

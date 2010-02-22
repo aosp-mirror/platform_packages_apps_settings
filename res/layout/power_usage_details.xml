@@ -87,6 +87,17 @@
             </RelativeLayout>
         </LinearLayout>
 
+        <!-- Force stop and report buttons -->
+        <LinearLayout
+            android:id="@+id/two_buttons_panel"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingBottom="6dip"
+            android:orientation="vertical">
+            <include
+                layout="@layout/two_buttons_panel"/>
+        </LinearLayout>
+                    
         <TextView
             style="?android:attr/listSeparatorTextViewStyle"
             android:text="@string/details_subtitle" />

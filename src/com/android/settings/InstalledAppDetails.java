@@ -23,14 +23,13 @@ import android.app.Activity;
 import android.app.ActivityManager;
 import android.app.AlertDialog;
 import android.app.Dialog;
-import android.app.ActivityManager.RunningAppProcessInfo;
+import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.IPackageDataObserver;
-import android.content.pm.IPackageDeleteObserver;
 import android.content.pm.IPackageMoveObserver;
 import android.content.pm.IPackageStatsObserver;
 import android.content.pm.PackageInfo;
@@ -43,7 +42,6 @@ import android.os.Handler;
 import android.os.Message;
 import android.os.RemoteException;
 import android.text.format.Formatter;
-import android.util.Config;
 import android.util.Log;
 import java.util.ArrayList;
 import java.util.List;
@@ -234,25 +232,6 @@ public class InstalledAppDetails extends Activity implements View.OnClickListene
             // Register listener
             mUninstallButton.setOnClickListener(this);
         }
-        ActivityManager am = (ActivityManager) getSystemService(Context.ACTIVITY_SERVICE);
-        List<RunningAppProcessInfo> rList = am.getRunningAppProcesses();
-        boolean running = false;
-        if (rList != null) {
-            for (RunningAppProcessInfo info : rList) {
-                if (info.pkgList != null) {
-                    for (String rpkg : info.pkgList) {
-                        if (rpkg.equals(mAppInfo.packageName)) {
-                            running = true;
-                            break;
-                        }
-                    }
-                }
-            }
-        }
-        mForceStopButton.setEnabled(running);
-        if (running) {
-            mForceStopButton.setOnClickListener(this);
-        }
     }
 
     /** Called when the activity is first created. */
@@ -292,6 +271,7 @@ public class InstalledAppDetails extends Activity implements View.OnClickListene
         mForceStopButton = (Button) btnPanel.findViewById(R.id.left_button);
         mForceStopButton.setText(R.string.force_stop);
         mUninstallButton = (Button)btnPanel.findViewById(R.id.right_button);
+        mForceStopButton.setEnabled(false);
         initControlButtons();
         // Initialize clear data and move install location buttons
         View data_buttons_panel = findViewById(R.id.data_buttons_panel);
@@ -384,6 +364,7 @@ public class InstalledAppDetails extends Activity implements View.OnClickListene
             showDialogInner(DLG_APP_NOT_FOUND);
             return;
         }
+        checkForceStop();
         refreshAppAttributes(pkgInfo);
     }
 
@@ -604,8 +585,25 @@ public class InstalledAppDetails extends Activity implements View.OnClickListene
         ActivityManager am = (ActivityManager)getSystemService(
                 Context.ACTIVITY_SERVICE);
         am.forceStopPackage(pkgName);
+        checkForceStop();
     }
 
+    private final BroadcastReceiver mCheckKillProcessesReceiver = new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            mForceStopButton.setEnabled(getResultCode() != RESULT_CANCELED);
+        }
+    };
+    
+    private void checkForceStop() {
+        Intent intent = new Intent(Intent.ACTION_QUERY_PACKAGE_RESTART,
+                Uri.fromParts("package", mAppInfo.packageName, null));
+        intent.putExtra(Intent.EXTRA_PACKAGES, new String[] { mAppInfo.packageName });
+        intent.putExtra(Intent.EXTRA_UID, mAppInfo.uid);
+        sendOrderedBroadcast(intent, null, mCheckKillProcessesReceiver, null,
+                Activity.RESULT_CANCELED, null, null);
+    }
+    
     /*
      * Method implementing functionality of buttons clicked
      * @see android.view.View.OnClickListener#onClick(android.view.View)
