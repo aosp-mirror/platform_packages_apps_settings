@@ -700,14 +700,6 @@
             </intent-filter>
         </activity>
 
-        <activity android:name="SdCardSettings" android:label="@string/sd_card_settings_label">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.DEVELOPMENT_PREFERENCE" />
-                <category android:name="android.intent.category.VOICE_LAUNCH" />
-            </intent-filter>
-        </activity>
-
         <activity android:name="ProxySelector" android:label="@string/proxy_settings_label"
                 android:theme="@android:style/Theme.Dialog">
             <intent-filter>

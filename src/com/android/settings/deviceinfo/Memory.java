@@ -16,13 +16,19 @@
 
 package com.android.settings.deviceinfo;
 
+import android.app.AlertDialog;
+import android.app.Dialog;
 import android.content.BroadcastReceiver;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.content.DialogInterface.OnCancelListener;
 import android.content.res.Resources;
 import android.os.Bundle;
+import android.os.Handler;
 import android.os.IBinder;
+import android.os.Message;
 import android.os.RemoteException;
 import android.os.Environment;
 import android.os.storage.IMountService;
@@ -35,15 +41,15 @@ import android.preference.PreferenceActivity;
 import android.preference.PreferenceScreen;
 import android.text.format.Formatter;
 import android.util.Log;
+import android.widget.Toast;
 
 import com.android.settings.R;
 
 import java.io.File;
-import java.text.DecimalFormat;
 
-public class Memory extends PreferenceActivity {
-    
+public class Memory extends PreferenceActivity implements OnCancelListener {
     private static final String TAG = "Memory";
+    private static final boolean localLOGV = false;
 
     private static final String MEMORY_SD_SIZE = "memory_sd_size";
 
@@ -52,6 +58,10 @@ public class Memory extends PreferenceActivity {
     private static final String MEMORY_SD_MOUNT_TOGGLE = "memory_sd_mount_toggle";
 
     private static final String MEMORY_SD_FORMAT = "memory_sd_format";
+
+    private static final int DLG_CONFIRM_UNMOUNT = 1;
+    private static final int DLG_ERROR_UNMOUNT = 2;
+
     private Resources mRes;
 
     private Preference mSdSize;
@@ -98,6 +108,9 @@ public class Memory extends PreferenceActivity {
 
         @Override
         public void onStorageStateChanged(String path, String oldState, String newState) {
+            Log.i(TAG, "Received storage state changed notification that " +
+                    path + " changed state from " + oldState +
+                    " to " + newState);
             updateMemoryStatus();
         }
     };
@@ -107,7 +120,15 @@ public class Memory extends PreferenceActivity {
         super.onPause();
         unregisterReceiver(mReceiver);
     }
-    
+
+    @Override
+    protected void onDestroy() {
+        if (mStorageManager != null && mStorageListener != null) {
+            mStorageManager.unregisterListener(mStorageListener);
+        }
+        super.onDestroy();
+    }
+
     private synchronized IMountService getMountService() {
        if (mMountService == null) {
            IBinder service = ServiceManager.getService("mount");
@@ -147,18 +168,79 @@ public class Memory extends PreferenceActivity {
         }
     };
 
-    private void unmount() {
-        IMountService mountService = getMountService();
-        try {
-            if (mountService != null) {
-                mountService.unmountVolume(Environment.getExternalStorageDirectory().toString(), false);
-            } else {
-                Log.e(TAG, "Mount service is null, can't unmount");
-            }
-        } catch (RemoteException ex) {
+    @Override
+    public Dialog onCreateDialog(int id, Bundle args) {
+        switch (id) {
+        case DLG_CONFIRM_UNMOUNT:
+            return new AlertDialog.Builder(this)
+                    .setTitle(R.string.dlg_confirm_unmount_title)
+                    .setPositiveButton(R.string.dlg_ok, new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int which) {
+                            doUnmount(true);
+                        }})
+                    .setNegativeButton(R.string.cancel, null)
+                    .setMessage(R.string.dlg_confirm_unmount_text)
+                    .setOnCancelListener(this)
+                    .create();
+        case DLG_ERROR_UNMOUNT:
+            return new AlertDialog.Builder(this                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            )
+            .setTitle(R.string.dlg_error_unmount_title)
+            .setNeutralButton(R.string.dlg_ok, null)
+            .setMessage(R.string.dlg_error_unmount_text)
+            .setOnCancelListener(this)
+            .create();
         }
-        updateMemoryStatus();
+        return null;
     }
+
+    private void doUnmount(boolean force) {
+        // Present a toast here
+        Toast.makeText(this, R.string.unmount_inform_text, Toast.LENGTH_SHORT).show();
+        IMountService mountService = getMountService();
+        String extStoragePath = Environment.getExternalStorageDirectory().toString();
+        try {
+            mSdMountToggle.setEnabled(false);
+            mSdMountToggle.setTitle(mRes.getString(R.string.sd_ejecting_title));
+            mSdMountToggle.setSummary(mRes.getString(R.string.sd_ejecting_summary));
+            mountService.unmountVolume(extStoragePath, force);
+        } catch (RemoteException e) {
+            // Informative dialog to user that
+            // unmount failed.
+            showDialogInner(DLG_ERROR_UNMOUNT);
+        }
+    }
+
+    private void showDialogInner(int id) {
+        removeDialog(id);
+        showDialog(id);
+    }
+
+    private void unmount() {
+        // Check if the sdcard is being accessed by other processes
+        // and let the user decide if the sdcard should be ejected.
+        String extStoragePath = Environment.
+        getExternalStorageDirectory().toString();
+        IMountService mountService = getMountService();
+        int stUsers[] = null;
+        try {
+            stUsers = mountService.getStorageUsers(extStoragePath);
+        } catch (RemoteException e) {
+            // Very unlikely. But present an error dialog anyway
+            Log.e(TAG, "Is MountService running?");
+            showDialogInner(DLG_ERROR_UNMOUNT);
+        }
+        if (stUsers != null && stUsers.length > 0) {
+            if (localLOGV) Log.i(TAG, "Do have storage users accessing "
+                    + extStoragePath);
+            for (int pid : stUsers) {
+                if (localLOGV) Log.i(TAG, pid + " accessing file on sdcard");
+            }
+            // Present dialog to user
+            showDialogInner(DLG_CONFIRM_UNMOUNT);
+        } else {
+            doUnmount(true);
+        }
+}
 
     private void mount() {
         IMountService mountService = getMountService();
@@ -170,7 +252,6 @@ public class Memory extends PreferenceActivity {
             }
         } catch (RemoteException ex) {
         }
-        updateMemoryStatus();
     }
 
     private void updateMemoryStatus() {
@@ -232,6 +313,10 @@ public class Memory extends PreferenceActivity {
     
     private String formatSize(long size) {
         return Formatter.formatFileSize(this, size);
+    }
+
+    public void onCancel(DialogInterface dialog) {
+        finish();
     }
     
 }
