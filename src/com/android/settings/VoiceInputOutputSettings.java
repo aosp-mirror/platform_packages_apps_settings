@@ -100,7 +100,8 @@ public class VoiceInputOutputSettings extends PreferenceActivity
             ResolveInfo resolveInfo = availableRecognitionServices.get(0);
             String recognizerComponent =
                     new ComponentName(resolveInfo.serviceInfo.packageName,
-                            resolveInfo.serviceInfo.name).flattenToString();
+                            resolveInfo.serviceInfo.name).flattenToShortString();
+            
             mAvailableRecognizersMap.put(recognizerComponent, resolveInfo);
             
             String currentSetting = Settings.Secure.getString(
@@ -134,7 +135,7 @@ public class VoiceInputOutputSettings extends PreferenceActivity
             ResolveInfo resolveInfo = recognizers.get(i);
             String recognizerComponent =
                     new ComponentName(resolveInfo.serviceInfo.packageName,
-                            resolveInfo.serviceInfo.name).flattenToString();
+                            resolveInfo.serviceInfo.name).flattenToShortString();
             
             mAvailableRecognizersMap.put(recognizerComponent, resolveInfo);
 
