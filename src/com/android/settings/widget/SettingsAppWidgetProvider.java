@@ -267,10 +267,12 @@ public class SettingsAppWidgetProvider extends AppWidgetProvider {
         int wifiState = getWifiState(context);
         if (wifiState == STATE_ENABLED) {
             wifiManager.setWifiEnabled(false);
+            Toast.makeText(context, R.string.gadget_toggle_wifi, Toast.LENGTH_SHORT).show();
         } else if (wifiState == STATE_DISABLED) {
             wifiManager.setWifiEnabled(true);
+            Toast.makeText(context, R.string.gadget_toggle_wifi, Toast.LENGTH_SHORT).show();
         }
-        Toast.makeText(context, R.string.gadget_toggle_wifi, Toast.LENGTH_SHORT).show();
+        // If wifi is in intermediate state, don't do anything.
     }
 
     /**
@@ -450,9 +452,11 @@ public class SettingsAppWidgetProvider extends AppWidgetProvider {
         int state = getBluetoothState(context);
         if (state == STATE_ENABLED) {
             mLocalBluetoothManager.setBluetoothEnabled(false);
+            Toast.makeText(context, R.string.gadget_toggle_bluetooth, Toast.LENGTH_SHORT).show();
         } else if (state == STATE_DISABLED) {
             mLocalBluetoothManager.setBluetoothEnabled(true);
+            Toast.makeText(context, R.string.gadget_toggle_bluetooth, Toast.LENGTH_SHORT).show();
         }
-        Toast.makeText(context, R.string.gadget_toggle_bluetooth, Toast.LENGTH_SHORT).show();
+        // If bluetooth is in intermediate state, don't do anything.
     }
 }
