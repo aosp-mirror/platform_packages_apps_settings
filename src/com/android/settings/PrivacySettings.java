@@ -129,7 +129,7 @@ public class PrivacySettings extends PreferenceActivity implements
         mBackup.setChecked(backupEnabled);
 
         mAutoRestore.setChecked(Settings.Secure.getInt(res,
-                Settings.Secure.BACKUP_AUTO_RESTORE, 0) == 1);
+                Settings.Secure.BACKUP_AUTO_RESTORE, 1) == 1);
         mAutoRestore.setEnabled(backupEnabled);
     }
 
