@@ -235,9 +235,8 @@ public class SecuritySettings extends PreferenceActivity {
         // File System Encryption
         PreferenceCategory encryptedfsCat = new PreferenceCategory(this);
         encryptedfsCat.setTitle(R.string.encrypted_fs_category);
-        root.addPreference(encryptedfsCat);
+        //root.addPreference(encryptedfsCat);
         mCredentialStorage.createPreferences(encryptedfsCat, CredentialStorage.TYPE_ENCRYPTEDFS);
-
         return root;
     }
 
@@ -622,7 +621,7 @@ public class SecuritySettings extends PreferenceActivity {
                 mEncryptedFSEnabled.setTitle(R.string.encrypted_fs_enable);
                 mEncryptedFSEnabled.setSummary(R.string.encrypted_fs_enable_summary);
                 mEncryptedFSEnabled.setOnPreferenceChangeListener(this);
-                category.addPreference(mEncryptedFSEnabled);
+                // category.addPreference(mEncryptedFSEnabled);
                 break;
             }
         }
