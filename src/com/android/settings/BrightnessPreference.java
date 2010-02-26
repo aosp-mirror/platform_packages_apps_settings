@@ -55,6 +55,7 @@ public class BrightnessPreference extends SeekBarPreference implements
                 com.android.internal.R.bool.config_automatic_brightness_available);
 
         setDialogLayoutResource(R.layout.preference_dialog_brightness);
+        setDialogIcon(R.drawable.ic_settings_display);
     }
 
     @Override
