@@ -123,13 +123,15 @@ public class RingerVolumePreference extends VolumePreference implements
     protected void onSampleStarting(SeekBarVolumizer volumizer) {
         super.onSampleStarting(volumizer);
         for (SeekBarVolumizer vol : mSeekBarVolumizer) {
-            if (vol != volumizer) vol.stopSample();
+            if (vol != null && vol != volumizer) vol.stopSample();
         }
     }
 
     private void setNotificationVolumeVisibility(boolean visible) {
-        mSeekBarVolumizer[0].getSeekBar().setVisibility(
-                visible ? View.VISIBLE : View.GONE);
+        if (mSeekBarVolumizer[0] != null) {
+            mSeekBarVolumizer[0].getSeekBar().setVisibility(
+                    visible ? View.VISIBLE : View.GONE);
+        }
         mNotificationVolumeTitle.setVisibility(visible ? View.VISIBLE : View.GONE);
     }
 
