@@ -22,8 +22,8 @@ import java.util.Observer;
 
 import android.app.Activity;
 import android.app.AlertDialog;
-import android.app.DevicePolicyManager;
 import android.app.Dialog;
+import android.app.admin.DevicePolicyManager;
 import android.content.ContentQueryMap;
 import android.content.ContentResolver;
 import android.content.Context;

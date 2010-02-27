@@ -20,10 +20,10 @@ import org.xmlpull.v1.XmlPullParserException;
 
 import android.app.Activity;
 import android.app.AlertDialog;
-import android.app.DeviceAdminReceiver;
-import android.app.DeviceAdminInfo;
-import android.app.DevicePolicyManager;
 import android.app.Dialog;
+import android.app.admin.DeviceAdminInfo;
+import android.app.admin.DeviceAdminReceiver;
+import android.app.admin.DevicePolicyManager;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.DialogInterface;
