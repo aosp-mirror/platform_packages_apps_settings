@@ -34,14 +34,12 @@ import android.os.Bundle;
 import android.os.Process;
 import android.provider.Settings;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
-
 import com.android.settings.InstalledAppDetails;
 import com.android.settings.ManageApplications;
 import com.android.settings.R;
@@ -415,10 +413,6 @@ public class PowerUsageDetail extends Activity implements Button.OnClickListener
     private void reportBatteryUse() {
         if (mPackages == null) return;
         
-        final Intent intent = getIntent();
-        final int percentage = intent.getIntExtra(EXTRA_PERCENT, 1);
-        final long duration = intent.getLongExtra(EXTRA_USAGE_DURATION, 0);
-        
         ApplicationErrorReport report = new ApplicationErrorReport();
         report.type = ApplicationErrorReport.TYPE_BATTERY;
         report.packageName = mPackages[0];
@@ -426,18 +420,15 @@ public class PowerUsageDetail extends Activity implements Button.OnClickListener
         report.processName = mPackages[0];
         report.time = System.currentTimeMillis();
         report.systemApp = (mApp.flags & ApplicationInfo.FLAG_SYSTEM) != 0;
-        
-        StringBuilder builder = new StringBuilder();
-        builder.append("Application used " + percentage + "% of battery over "
-                + Utils.formatElapsedTime(this, duration / 1000));
-        builder.append('\n');
-        builder.append(intent.getStringExtra(EXTRA_REPORT_DETAILS));
-        builder.append('\n');
-        builder.append("----------------------------------------------");
-        builder.append('\n');
-        builder.append(intent.getStringExtra(EXTRA_REPORT_CHECKIN_DETAILS));
-        builder.append('\n');
-        report.batteryText = builder.toString();
+
+        final Intent intent = getIntent();
+        ApplicationErrorReport.BatteryInfo batteryInfo = new ApplicationErrorReport.BatteryInfo();
+        batteryInfo.usagePercent = intent.getIntExtra(EXTRA_PERCENT, 1);
+        batteryInfo.durationMicros = intent.getLongExtra(EXTRA_USAGE_DURATION, 0);
+        batteryInfo.usageDetails = intent.getStringExtra(EXTRA_REPORT_DETAILS);
+        batteryInfo.checkinDetails = intent.getStringExtra(EXTRA_REPORT_CHECKIN_DETAILS);
+        report.batteryInfo = batteryInfo;
+
         Intent result = new Intent(Intent.ACTION_APP_ERROR);
         result.setComponent(mInstaller);
         result.putExtra(Intent.EXTRA_BUG_REPORT, report);
