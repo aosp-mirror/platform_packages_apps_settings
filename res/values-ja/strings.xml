@@ -169,8 +169,7 @@
     <string name="radio_info_smsc_update_label" msgid="7258686760358791539">"更新"</string>
     <string name="radio_info_smsc_refresh_label" msgid="6902302130315125102">"更新"</string>
     <string name="radio_info_toggle_dns_check_label" msgid="8292252930563286858">"DNSチェックを切り替え"</string>
-    <!-- no translation found for oem_radio_info_label (6163141792477958941) -->
-    <skip />
+    <string name="oem_radio_info_label" msgid="6163141792477958941">"OEM固有の情報/設定"</string>
     <string name="band_mode_title" msgid="954174198903776205">"GSM/UMTSバンドの設定"</string>
     <string name="band_mode_loading" msgid="548764766363847336">"バンドリストを読み込み中..."</string>
     <string name="band_mode_set" msgid="5730560180249458484">"設定"</string>
@@ -234,6 +233,33 @@
     <string name="security_settings_summary" msgid="967393342537986570">"現在地、画面のロック解除、SIMカードのロック、認証情報ストレージのロックの設定"</string>
     <string name="cdma_security_settings_summary" msgid="6068799952798901542">"現在地、画面のロック解除、認証情報ストレージのロックを設定します"</string>
     <string name="security_passwords_title" msgid="2930627259125138363">"パスワード"</string>
+    <string name="unlock_set_unlock_pattern_title" msgid="1896502750816432974">"ロック解除パターンの設定"</string>
+    <string name="unlock_set_unlock_pattern_summary" msgid="1235339327020445576">"画面ロックを解除するにはパターンの入力が必要"</string>
+    <string name="unlock_set_unlock_pin_title" msgid="2206721045699671063">"ロック解除PINの設定"</string>
+    <string name="unlock_set_unlock_pin_summary" msgid="3898840802187521463">"画面ロックを解除するには数値PINの入力が必要"</string>
+    <string name="unlock_set_unlock_password_title" msgid="2410408982973923603">"ロック解除パスワードの設定"</string>
+    <string name="unlock_set_unlock_password_summary" msgid="4711043487823726994">"画面ロックを解除するにはパスワードの入力が必要"</string>
+    <string name="unlock_disable_lock_title" msgid="1427036227416979120">"画面ロックをOFFにする"</string>
+    <string name="unlock_disable_lock_pattern_summary" msgid="6801602880568869201">"ロック解除パターンを削除"</string>
+    <string name="unlock_disable_lock_pin_summary" msgid="8856842745366993387">"ロック解除PINを削除"</string>
+    <string name="unlock_disable_lock_password_summary" msgid="192161194564577025">"ロック解除パスワードを削除"</string>
+    <string name="unlock_change_lock_pattern_title" msgid="2044092014872741130">"ロック解除パターンの変更"</string>
+    <string name="unlock_change_lock_pin_title" msgid="806629901095938484">"ロック解除PINの変更"</string>
+    <string name="unlock_change_lock_password_title" msgid="5606298470358768865">"ロック解除パスワードの変更"</string>
+    <string name="lockpassword_password_too_short" msgid="7328975683669256660">"パスワードを%d文字以上で入力してください"</string>
+    <string name="lockpassword_pin_too_short" msgid="2252847623267704683">"PINを%d文字以上で入力してください"</string>
+    <string name="lockpassword_press_continue" msgid="6506047902828925216">"終了後[次へ]をタップ"</string>
+    <string name="lockpassword_continue_label" msgid="4602203784934526940">"次へ"</string>
+    <string name="lockpassword_password_too_long" msgid="7354418473281442589">"PINは%d桁以内で指定してください"</string>
+    <string name="lockpassword_pin_too_long" msgid="6290317580664119373">"PINは%d桁以内で指定してください"</string>
+    <string name="lockpassword_pin_contains_non_digits" msgid="3379277100136600632">"PINに使用できるのは数字0～9のみです"</string>
+    <string name="lockpassword_illegal_character" msgid="6204396794254688549">"パスワードに無効な文字が含まれています"</string>
+    <string name="lockpassword_password_requires_alpha" msgid="2837140849790751729">"パスワードには英字が1文字以上必要です"</string>
+    <string name="lockpassword_ok_label" msgid="313822574062553672">"OK"</string>
+    <string name="lockpassword_cancel_label" msgid="8818529276331121899">"キャンセル"</string>
+    <string name="device_admin_title" msgid="3562216873644263804">"デバイス管理"</string>
+    <string name="manage_device_admin" msgid="3864120111085199551">"デバイス管理者を選択"</string>
+    <string name="manage_device_admin_summary" msgid="915390201809231575">"デバイス管理者を追加または削除する"</string>
     <string name="bluetooth_quick_toggle_title" msgid="1037056952714061893">"Bluetooth"</string>
     <string name="bluetooth_quick_toggle_summary" msgid="5293641680139873341">"BluetoothをONにする"</string>
     <string name="bluetooth_settings" msgid="2725796451253089609">"Bluetooth設定"</string>
@@ -291,72 +317,44 @@
     <string name="wifi_settings" msgid="4746946030627213196">"Wi-Fi設定"</string>
     <string name="wifi_settings_category" msgid="2810363951104753710">"Wi-Fi設定"</string>
     <string name="wifi_settings_summary" msgid="668767638556052820">"ワイヤレスアクセスポイントの設定"</string>
-    <string name="forget_network" msgid="4718015029995727138">"切断"</string>
-    <string name="wifi_status" msgid="4824568012414605414">"接続状況"</string>
-    <string name="wifi_link_speed" msgid="6182852256449825038">"速度"</string>
-    <string name="wifi_signal_3" msgid="3565958820483624962">"非常に強い"</string>
-    <string name="wifi_signal_2" msgid="4130061311918407501">"強"</string>
-    <string name="wifi_signal_1" msgid="8623690413812290642">"中"</string>
-    <string name="wifi_signal_0" msgid="3862211184991511432">"弱"</string>
-    <string name="security" msgid="1040691896987225267">"セキュリティ"</string>
-    <string name="wifi_security_open" msgid="3513305614048816607">"オープン"</string>
-    <string name="wifi_security_wep" msgid="7082604129842065776">"WEP"</string>
-    <string name="wifi_security_psk" msgid="3392399380570381452">"WPA/WPA2 PSK"</string>
-    <string name="wifi_security_eap" msgid="8309434150934969132">"Enterprise（802.1x）"</string>
-    <string name="wifi_security_unknown" msgid="4564208312073060668">"不明"</string>
-    <string name="wifi_security_verbose_open" msgid="8117878112088901945">"オープンネットワーク"</string>
-    <string name="wifi_security_verbose_wep" msgid="9220757688700421508">"WEPで保護"</string>
-    <string name="wifi_security_verbose_psk" msgid="1110130025330416225">"WPA/WPA2 PSKで保護"</string>
-    <string name="wifi_security_verbose_eap" msgid="586632662086063">"802.1x EAPで保護"</string>
-    <string name="ip_address" msgid="850672263358989449">"IPアドレス"</string>
-    <string name="signal" msgid="1947969631626413228">"電波強度"</string>
     <string name="wifi_starting" msgid="6710266609710860129">"ONにしています..."</string>
     <string name="wifi_stopping" msgid="5952909472548218348">"OFFにしています..."</string>
     <string name="wifi_error" msgid="3207971103917128179">"エラー"</string>
-    <string name="error_starting" msgid="4055163089721254078">"Wi-Fiを使用できません"</string>
-    <string name="error_stopping" msgid="7855531609645531489">"Wi-Fiを停止できません"</string>
-    <string name="error_scanning" msgid="4644050284132264368">"ネットワークをスキャンできません"</string>
-    <string name="error_connecting" msgid="1981882310590509609">"ネットワークに接続できません"</string>
-    <string name="error_saving" msgid="8294279443961615302">"ネットワークを保存できません"</string>
-    <string name="connect" msgid="3079076576295839400">"接続"</string>
-    <string name="connect_to_blank" msgid="6950910074058025378">"<xliff:g id="NETWORK_NAME">%1$s</xliff:g>に接続"</string>
-    <string name="please_select_eap" msgid="4488240331626456338">"EAP方式"</string>
-    <string name="please_select_phase2" msgid="5231074529772044898">"フェーズ2認証"</string>
-    <string name="please_type_identity" msgid="7061261155499513089">"ID"</string>
-    <string name="please_type_anonymous_identity" msgid="835061562079965048">"匿名ID"</string>
-    <string name="please_select_client_certificate" msgid="2137906961594663234">"クライアント証明書"</string>
-    <string name="please_select_ca_certificate" msgid="5010815181914420677">"CA証明書"</string>
-    <string name="please_type_passphrase" msgid="8256017704131522462">"ワイヤレス接続パスワード"</string>
-    <string name="please_type_hex_key" msgid="8751224390407867551">"WEPの16進キー (0～9、A～F)"</string>
-    <string name="wifi_show_password" msgid="4235237470701732009">"パスワードを表示"</string>
-    <string name="scan_wifi" msgid="2459901725350542606">"スキャン"</string>
-    <string name="summary_not_in_range" msgid="3926674700733548684">"圏外"</string>
-    <string name="summary_remembered" msgid="6079941090549401742">"接続履歴あり"</string>
-    <string name="summary_connection_failed" msgid="2351885658101671413">"接続できませんでした。タップすると再試行します。"</string>
-    <string name="wifi_access_points" msgid="2664629396767022441">"Wi-Fiネットワーク"</string>
-    <string name="wifi_type_ssid" msgid="1326839657083292017">"ネットワークSSID"</string>
-    <string name="wifi_security" msgid="6603611185592956936">"セキュリティ"</string>
-    <string name="wifi_save_config" msgid="6153726364988064360">"保存"</string>
-    <string name="wifi_password_unchanged" msgid="678604576488211090">"（変更なし）"</string>
-    <string name="wifi_add_other_network" msgid="5499063300755575893">"Wi-Fiネットワークを追加"</string>
+    <string name="wifi_in_airplane_mode" msgid="7618393787965366655">"機内モード"</string>
+    <string name="wifi_fail_to_scan" msgid="6194542252808587669">"ネットワークをスキャンできません"</string>
     <string name="wifi_notify_open_networks" msgid="3755768188029653293">"ネットワークの通知"</string>
     <string name="wifi_notify_open_networks_summary" msgid="3038290727701553612">"オープンネットワークが利用可能なときに通知する"</string>
-    <string name="wifi_password_incorrect_error" msgid="5429305767166704803">"ネットワークキーまたはパスワードが正しくありません。入力し直してください。"</string>
-    <string name="wifi_generic_connection_error" msgid="8240172247986220199">"ネットワーク接続に問題があります。やり直してください。"</string>
+    <string name="wifi_add_network" msgid="1671334951296205616">"Wi-Fiネットワークを追加"</string>
+    <string name="wifi_access_points" msgid="2664629396767022441">"Wi-Fiネットワーク"</string>
+    <string name="wifi_menu_scan" msgid="1470911530412095868">"スキャン"</string>
     <string name="wifi_menu_advanced" msgid="7522252991919573664">"詳細設定"</string>
-    <string name="wifi_ip_settings_titlebar" msgid="4345739031248760326">"IP設定"</string>
-    <string name="wifi_ip_settings_menu_save" msgid="7296724066102908366">"保存"</string>
-    <string name="wifi_ip_settings_menu_cancel" msgid="6582567330136502340">"キャンセル"</string>
-    <string name="wifi_ip_settings_invalid_ip" msgid="8057085083985255580">"正しいIPアドレスを入力してください。"</string>
-    <string name="wifi_use_static_ip" msgid="2133464242165642230">"静的IPを使用する"</string>
+    <string name="wifi_menu_connect" msgid="4996220309848349408">"ネットワークに接続"</string>
+    <string name="wifi_menu_forget" msgid="8736964302477327114">"ネットワークから切断"</string>
+    <string name="wifi_menu_modify" msgid="2068554918652440105">"ネットワークを変更"</string>
+    <string name="wifi_ssid" msgid="641393708309146745">"ネットワークSSID"</string>
+    <string name="wifi_security" msgid="6603611185592956936">"セキュリティ"</string>
+    <string name="wifi_signal" msgid="5514120261628065287">"電波強度"</string>
+    <string name="wifi_status" msgid="4824568012414605414">"接続状況"</string>
+    <string name="wifi_speed" msgid="3526198708812322037">"リンク速度"</string>
     <string name="wifi_ip_address" msgid="1440054061044402918">"IPアドレス"</string>
-    <string name="wifi_dns1" msgid="7344118050720080045">"DNS 1"</string>
-    <string name="wifi_dns2" msgid="1368601006824882659">"DNS 2"</string>
-    <string name="wifi_gateway" msgid="163914742461092086">"ゲートウェイ"</string>
-    <string name="wifi_netmask" msgid="4520635321425529085">"ネットマスク"</string>
-    <string name="wifi_context_menu_connect" msgid="5756210010680123258">"ネットワークに接続"</string>
-    <string name="wifi_context_menu_forget" msgid="4654112495616788392">"ネットワークへの接続を解除"</string>
-    <string name="wifi_context_menu_change_password" msgid="8860202712693404562">"パスワードを変更"</string>
+    <string name="wifi_eap_method" msgid="8529436133640730382">"EAP方式"</string>
+    <string name="wifi_eap_ca_cert" msgid="3521574865488892851">"CA証明書"</string>
+    <string name="wifi_eap_user_cert" msgid="1291089413368160789">"ユーザー証明書"</string>
+    <string name="wifi_eap_identity" msgid="4359453783379679103">"ID"</string>
+    <string name="wifi_eap_anonymous" msgid="2989469344116577955">"匿名ID"</string>
+    <string name="wifi_password" msgid="5948219759936151048">"パスワード"</string>
+    <string name="wifi_show_password" msgid="4235237470701732009">"パスワードを表示"</string>
+    <string name="wifi_unchanged" msgid="3410422020930397102">"（変更なし）"</string>
+    <string name="wifi_unspecified" msgid="5431501214192991253">"（指定なし）"</string>
+    <string name="wifi_remembered" msgid="8426719916135950136">"接続履歴あり"</string>
+    <string name="wifi_disabled" msgid="2104752038187543712">"無効"</string>
+    <string name="wifi_not_in_range" msgid="1136191511238508967">"圏外"</string>
+    <string name="wifi_secured" msgid="6759903183748011566">"<xliff:g id="WIFI_SECURITY">%1$s</xliff:g>で保護"</string>
+    <string name="wifi_secured_with_status" msgid="6489317496506267302">"<xliff:g id="WIFI_STATUS">%2$s</xliff:g>、<xliff:g id="WIFI_SECURITY">%1$s</xliff:g>で保護"</string>
+    <string name="wifi_connect" msgid="1076622875777072845">"接続"</string>
+    <string name="wifi_forget" msgid="8168174695608386644">"切断"</string>
+    <string name="wifi_save" msgid="3331121567988522826">"保存"</string>
+    <string name="wifi_cancel" msgid="6763568902542968964">"キャンセル"</string>
     <string name="wifi_advanced_titlebar" msgid="5419052271935350999">"詳細設定"</string>
     <string name="wifi_setting_num_channels_title" msgid="694031537019656132">"規制区域"</string>
     <string name="wifi_setting_num_channels_summary" msgid="4889355096717099141">"使用するチャネル番号を設定する"</string>
@@ -366,43 +364,42 @@
     <string name="wifi_setting_sleep_policy_summary" msgid="7573693311804602041">"Wi-Fiをスリープに切り替えるタイミング"</string>
     <string name="wifi_setting_sleep_policy_error" msgid="5103670439972135148">"スリープポリシーの設定で問題が発生しました。"</string>
     <string name="wifi_advanced_mac_address_title" msgid="6571335466330978393">"MACアドレス"</string>
-    <string name="fragment_status_scanning" msgid="6278637764967888244">"スキャン中..."</string>
-    <string name="fragment_status_connecting" msgid="1238623050972038297">"<xliff:g id="NETWORK_NAME">%1$s</xliff:g>に接続中..."</string>
-    <string name="fragment_status_authenticating" msgid="8239692896109081272">"<xliff:g id="NETWORK_NAME">%1$s</xliff:g>による認証中..."</string>
-    <string name="fragment_status_obtaining_ip" msgid="1064039965703090012">"<xliff:g id="NETWORK_NAME">%1$s</xliff:g>からIPアドレスを取得中..."</string>
-    <string name="fragment_status_connected" msgid="7482295568942137616">"<xliff:g id="NETWORK_NAME">%1$s</xliff:g>に接続しました"</string>
-    <string name="fragment_status_disconnecting" msgid="6723077519682929097">"<xliff:g id="NETWORK_NAME">%1$s</xliff:g>から切断中..."</string>
-    <string name="fragment_status_disconnected" msgid="5260939772487218470">"切断"</string>
-    <string name="fragment_status_failed" msgid="4122410100224856650">"失敗"</string>
-    <string name="status_scanning" msgid="8402178267165567371">"スキャン中..."</string>
-    <string name="status_connecting" msgid="1669262263707521505">"接続中..."</string>
-    <string name="status_authenticating" msgid="3536039799394033822">"認証中..."</string>
-    <string name="status_obtaining_ip" msgid="1624527502433683471">"アドレスを取得中..."</string>
-    <string name="status_connected" msgid="8175694029067954271">"接続"</string>
-    <string name="status_disconnecting" msgid="8468213362967337584">"切断中..."</string>
-    <string name="status_disconnected" msgid="7561688569905126046">"切断"</string>
-    <string name="status_failed" msgid="610462050405904601">"失敗"</string>
+    <string name="wifi_ip_settings_titlebar" msgid="4345739031248760326">"IP設定"</string>
+    <string name="wifi_ip_settings_menu_save" msgid="7296724066102908366">"保存"</string>
+    <string name="wifi_ip_settings_menu_cancel" msgid="6582567330136502340">"キャンセル"</string>
+    <string name="wifi_ip_settings_invalid_ip" msgid="8057085083985255580">"正しいIPアドレスを入力してください。"</string>
+    <string name="wifi_use_static_ip" msgid="2133464242165642230">"静的IPを使用する"</string>
+    <string name="wifi_dns1" msgid="7344118050720080045">"DNS 1"</string>
+    <string name="wifi_dns2" msgid="1368601006824882659">"DNS 2"</string>
+    <string name="wifi_gateway" msgid="163914742461092086">"ゲートウェイ"</string>
+    <string name="wifi_netmask" msgid="4520635321425529085">"ネットマスク"</string>
+    <string name="sound_settings_title" msgid="8735891486683305886">"音"</string>
+    <string name="display_settings_title" msgid="1708697328627382561">"表示"</string>
     <string name="sound_settings" msgid="5007659014828162881">"音の設定"</string>
     <string name="silent_mode_title" msgid="3181479108593217704">"マナーモード"</string>
-    <string name="silent_mode_summary" msgid="9081534746589616108">"音楽、動画メディア、アラーム以外は消音"</string>
+    <string name="silent_mode_summary" msgid="3309650676072917899">"音楽、動画メディア、アラーム以外は消音"</string>
     <string name="silent_mode_incl_alarm_summary" msgid="2088830834182228458">"音楽と動画メディア以外は消音"</string>
     <string name="ringtone_title" msgid="5379026328015343686">"着信音"</string>
-    <string name="ringtone_summary" msgid="3856990752494160139">"端末の基本着信音を選択"</string>
+    <!-- no translation found for ringtone_summary (2630023412632683493) -->
+    <skip />
+    <string name="all_volume_title" msgid="8741571721868253103">"音量"</string>
     <string name="ring_volume_title" msgid="7938706566797464165">"着信音量"</string>
-    <string name="ring_volume_summary" msgid="8370699933709381329">"着信音と通知音の音量"</string>
+    <!-- no translation found for ring_volume_summary (7055497624193116879) -->
+    <skip />
     <string name="vibrate_title" msgid="5408984084125311526">"バイブレーション"</string>
     <string name="vibrate_summary" msgid="5224303668448643275">"着信時バイブレーションをONにする"</string>
     <string name="notification_sound_title" msgid="6316316069880531693">"通知音"</string>
-    <string name="notification_sound_summary" msgid="7628081155578496618">"端末の基本通知音を選択"</string>
+    <!-- no translation found for notification_sound_summary (2953599929394109819) -->
+    <skip />
     <string name="notification_pulse_title" msgid="1247988024534030629">"光を点滅させて通知"</string>
     <string name="notification_pulse_summary" msgid="6899220780534617152">"新しい通知が届くとカーソルボタンが点滅します"</string>
-    <string name="incoming_call_volume_title" msgid="6144314834963494752">"着信音量"</string>
-    <string name="notification_volume_title" msgid="3363351773121138717">"通知音量"</string>
+    <string name="incoming_call_volume_title" msgid="8073714801365904099">"着信音"</string>
+    <string name="notification_volume_title" msgid="2012640760341080408">"通知"</string>
     <string name="checkbox_notification_same_as_incoming_call" msgid="1073644356290338921">"通知音にも着信音量を適用"</string>
     <string name="notification_sound_dialog_title" msgid="7057274209079144726">"通知音を選択"</string>
-    <string name="media_volume_title" msgid="7844516127427195383">"メディア再生音量"</string>
+    <string name="media_volume_title" msgid="3576565767317118106">"メディア"</string>
     <string name="media_volume_summary" msgid="5363248930648849974">"音楽や動画の再生音量"</string>
-    <string name="dock_settings_title" msgid="5121296855098055941">"ドックオーディオ"</string>
+    <string name="alarm_volume_title" msgid="2285597478377758706">"アラーム"</string>
     <string name="dock_settings_summary" msgid="455802113668982481">"付属のドックの音声設定"</string>
     <string name="dtmf_tone_enable_title" msgid="1453831168789523185">"タッチ操作音"</string>
     <string name="dtmf_tone_enable_summary_on" msgid="3028201873989887327">"ダイヤルパッドの操作音をONにする"</string>
@@ -410,14 +407,26 @@
     <string name="sound_effects_enable_title" msgid="3197313718929122833">"選択時の操作音"</string>
     <string name="sound_effects_enable_summary_on" msgid="6154141289879491329">"メニュー選択時の操作音をONにする"</string>
     <string name="sound_effects_enable_summary_off" msgid="3447739581759560125">"メニュー選択時の操作音をONにする"</string>
+    <!-- no translation found for lock_sounds_enable_title (1575990840389107141) -->
+    <skip />
+    <!-- no translation found for lock_sounds_enable_summary_on (145741024028391473) -->
+    <skip />
+    <!-- no translation found for lock_sounds_enable_summary_off (8481243116223542804) -->
+    <skip />
     <string name="haptic_feedback_enable_title" msgid="6311736559245411290">"入力時バイブレーション"</string>
     <string name="haptic_feedback_enable_summary_on" msgid="1875779656524793053">"ソフトキー操作や特定のUI操作でのバイブレーションをONにする"</string>
     <string name="haptic_feedback_enable_summary_off" msgid="7287885436963105314">"ソフトキー操作や特定のUI操作でのバイブレーションをONにする"</string>
-    <string name="play_media_notification_sounds_enable_title" msgid="1008791464029179529">"SDカードの通知"</string>
-    <string name="play_media_notification_sounds_enable_summary_on" msgid="7675466959375667370">"SDカード通知時に音を鳴らす"</string>
-    <string name="play_media_notification_sounds_enable_summary_off" msgid="8672617597028744693">"SDカード通知時に音を鳴らす"</string>
     <string name="audio_record_proc_title" msgid="4271091199976457534">"ノイズキャンセル"</string>
     <string name="audio_record_proc_summary" msgid="8113628457499616498">"通話中や録音中に周囲のノイズを抑えます。"</string>
+    <string name="dock_settings" msgid="1820107306693002541">"ドック"</string>
+    <string name="dock_settings_title" msgid="9161438664257429372">"ドックの設定"</string>
+    <string name="dock_audio_settings_title" msgid="3324750259959570305">"音声"</string>
+    <string name="dock_audio_summary_desk" msgid="6487784412371139335">"付属のデスクトップホルダーの設定"</string>
+    <string name="dock_audio_summary_car" msgid="6740897586006248450">"付属のカーホルダーの設定"</string>
+    <string name="dock_audio_summary_none" msgid="289909253741048784">"電話が固定されていません"</string>
+    <string name="dock_audio_summary_unknown" msgid="4465059868974255693">"付属のドックの設定"</string>
+    <string name="dock_not_found_title" msgid="3290961741828952424">"ドックが見つかりません"</string>
+    <string name="dock_not_found_text" msgid="3035260358985111855">"ドックの音声を設定するには携帯電話をドックに固定する必要があります"</string>
     <string name="sync_settings" msgid="9186125469300013491">"アカウントと同期"</string>
     <string name="sync_settings_summary" msgid="2962179505214965667">"アカウントの追加や削除、アカウント設定の変更を行います"</string>
     <string name="search_settings" msgid="1910951467596035063">"検索"</string>
@@ -426,7 +435,7 @@
     <string name="animations_title" msgid="1062189037402346023">"アニメーション表示"</string>
     <string name="animations_summary_on" msgid="8843613112130484436">"ウィンドウの開閉をアニメーション表示"</string>
     <string name="animations_summary_off" msgid="2777026828025551983">"ウィンドウの開閉をアニメーション表示"</string>
-    <string name="accelerometer_title" msgid="6183763368844793276">"画面の向き"</string>
+    <string name="accelerometer_title" msgid="7854608399547349157">"画面の自動回転"</string>
     <string name="accelerometer_summary_on" msgid="1133737282813048021">"画面の向きに合わせて縦横表示を切り替える"</string>
     <string name="accelerometer_summary_off" msgid="5485489363715740761">"画面の向きに合わせて縦横表示を切り替える"</string>
     <string name="brightness" msgid="2354961343555249270">"画面の明るさ"</string>
@@ -457,8 +466,10 @@
     <string name="sim_enter_cancel" msgid="6240422158517208036">"キャンセル"</string>
     <string name="device_info_settings" msgid="475872867864762157">"端末の状態"</string>
     <string name="system_update_settings_list_item_title" msgid="3342887311059985961">"システムアップデート"</string>
-    <string name="system_update_settings_list_item_summary" msgid="9164660818865695219">"システムの更新を確認する"</string>
-    <string name="firmware_version" msgid="6284872163051667788">"ファームウェアバージョン"</string>
+    <!-- no translation found for system_update_settings_list_item_summary (3853057315907710747) -->
+    <skip />
+    <!-- no translation found for firmware_version (4801135784886859972) -->
+    <skip />
     <string name="model_number" msgid="3765737700545384794">"モデル番号"</string>
     <string name="baseband_version" msgid="1848990160763524801">"ベースバンドバージョン"</string>
     <string name="kernel_version" msgid="9192574954196167602">"カーネルバージョン"</string>
@@ -491,16 +502,27 @@
     <string name="memory_size" msgid="6629067715017232195">"合計容量"</string>
     <string name="sd_eject" msgid="6915293408836853020">"SDカードのマウント解除"</string>
     <string name="sd_eject_summary" msgid="3315557796211542962">"SDカードを安全に取り外すためマウントを解除する"</string>
-    <!-- no translation found for sd_insert_summary (2048640010381803841) -->
-    <skip />
-    <!-- no translation found for sd_mount (5940523765187704135) -->
-    <skip />
-    <!-- no translation found for sd_mount_summary (4936591681679097699) -->
-    <skip />
+    <string name="sd_insert_summary" msgid="2048640010381803841">"マウントするSDカードを挿入"</string>
+    <string name="sd_mount" msgid="5940523765187704135">"SDカードをマウント"</string>
+    <string name="sd_mount_summary" msgid="4936591681679097699">"SDカードをマウント"</string>
     <string name="sd_format" msgid="5448738337382712203">"SDカードをフォーマット"</string>
     <string name="sd_format_summary" msgid="6616491027883134004">"SDカードをフォーマット（消去）する"</string>
     <string name="sd_unavailable" msgid="8580107589533213904">"使用不可"</string>
     <string name="read_only" msgid="6702420168629076340">" （読み取り専用）"</string>
+    <!-- no translation found for dlg_confirm_unmount_title (1024442654915425534) -->
+    <skip />
+    <!-- no translation found for dlg_confirm_unmount_text (4608293598382089766) -->
+    <skip />
+    <!-- no translation found for dlg_error_unmount_title (4148354409906593341) -->
+    <skip />
+    <!-- no translation found for dlg_error_unmount_text (5586898213654534611) -->
+    <skip />
+    <!-- no translation found for unmount_inform_text (5766392597765003786) -->
+    <skip />
+    <!-- no translation found for sd_ejecting_title (8824572198034365468) -->
+    <skip />
+    <!-- no translation found for sd_ejecting_summary (2028753069184908491) -->
+    <skip />
     <string name="battery_status_title" msgid="9159414319574976203">"電池の状態:"</string>
     <string name="battery_level_title" msgid="2965679202786873272">"電池残量"</string>
     <string name="apn_settings" msgid="3743170484827528406">"APN"</string>
@@ -555,6 +577,15 @@
     <string name="media_format_gesture_explanation" msgid="4239529439389660159">"ロック解除パターンを入力してSDカードのフォーマット実行を確認する必要があります。"</string>
     <string name="call_settings_title" msgid="5188713413939232801">"通話設定"</string>
     <string name="call_settings_summary" msgid="7291195704801002886">"ボイスメール、着信転送、発信者番号など"</string>
+    <string name="tether_settings_title" msgid="1722086243281663634">"テザリングの設定"</string>
+    <string name="tether_settings_summary" msgid="6622852565352323706">"テザリングのセットアップと管理"</string>
+    <string name="tether_screen_title" msgid="1521966915332491855">"テザリングの設定"</string>
+    <string name="enable_tether_notice_checkbox" msgid="5683371235784989464">"通知"</string>
+    <string name="enable_tether_notice_checkbox_summary" msgid="236184235861504232">"USBテザリングが利用できるときに通知を表示する"</string>
+    <string name="usb_tethering_button_text" msgid="585829947108007917">"USBテザリング"</string>
+    <string name="usb_tethering_available_subtext" msgid="3755973887099973815">"USB接続済み、テザリングするには選択"</string>
+    <string name="usb_tethering_active_subtext" msgid="8738795360071005038">"接続済み、切断するには選択"</string>
+    <string name="usb_tethering_unavailable_subtext" msgid="1044622421184007254">"USBが接続されていません"</string>
     <string name="network_settings_title" msgid="7967552516440151852">"モバイルネットワーク"</string>
     <string name="network_settings_summary" msgid="5149750850846813553">"ローミング、ネットワーク、APN設定"</string>
     <string name="location_title" msgid="1029961368397484576">"現在地"</string>
@@ -567,11 +598,6 @@
     <string name="assisted_gps" msgid="4649317129586736885">"A-GPSを使用"</string>
     <string name="assisted_gps_enabled" msgid="8751899609589792803">"サーバーでGPSを補助します（OFFにするとネットワーク使用率が減少します）"</string>
     <string name="assisted_gps_disabled" msgid="6982698333968010748">"サーバーでGPSを補助します（OFFにするとGPS性能が向上します）"</string>
-    <string name="use_location_title" msgid="5447030582538504247">"現在地情報を使用"</string>
-    <string name="use_location_summary" msgid="1816849484040070431">"現在地情報をGoogleの検索結果やサービスで利用する"</string>
-    <string name="use_location_warning_message" msgid="1420184860518262439">"検索結果やサービスの品質向上にGoogleが位置情報を使用することを許可しますか？"</string>
-    <string name="agree" msgid="6288718671527758326">"同意する"</string>
-    <string name="disagree" msgid="6221069272309799230">"同意しない"</string>
     <string name="about_settings" msgid="1743378368185371685">"端末情報"</string>
     <string name="about_settings_summary" msgid="3302263393543848667">"端末情報、規約、バージョン情報"</string>
     <string name="legal_information" msgid="5769301644270604095">"法的情報"</string>
@@ -588,8 +614,18 @@
     <string name="settings_safetylegal_activity_title" msgid="6901214628496951727">"安全に関する情報"</string>
     <string name="settings_safetylegal_activity_unreachable" msgid="3198912875259612887">"この電話はデータサービスに接続されていません。この情報を表示するにはインターネットに接続されたコンピュータから%sにアクセスしてください。"</string>
     <string name="settings_safetylegal_activity_loading" msgid="8059022597639516348">"読み込み中..."</string>
-    <string name="lock_settings_title" msgid="5828348303971852121">"画面ロックの解除パターン"</string>
+    <string name="lockpassword_choose_your_password_header" msgid="8624900666929394990">"パスワードを選択"</string>
+    <string name="lockpassword_choose_your_pin_header" msgid="7598849519816138302">"PINを選択"</string>
+    <string name="lockpassword_confirm_your_password_header" msgid="6308478184889846633">"パスワードを確認"</string>
+    <string name="lockpassword_confirm_your_pin_header" msgid="49038294648213197">"PINの確認"</string>
+    <string name="lockpassword_confirm_passwords_dont_match" msgid="6850677112663979120">"パスワードが一致しません"</string>
+    <string name="lockpassword_confirm_pins_dont_match" msgid="4757532830594400147">"PINが一致しません"</string>
+    <string name="lockpassword_password_set_toast" msgid="4875050283108629383">"パスワードが設定されました"</string>
+    <string name="lockpassword_pin_set_toast" msgid="6011826444725291475">"PINが設定されました"</string>
+    <string name="lockpassword_pattern_set_toast" msgid="6867259621331406236">"パターンが設定されました"</string>
+    <string name="lock_settings_title" msgid="975088518210629938">"画面のロック解除"</string>
     <string name="lockpattern_change_lock_pattern_label" msgid="5679630792003440352">"パターンの変更"</string>
+    <string name="lockpattern_change_lock_pin_label" msgid="266707138486731661">"ロック解除PINを変更"</string>
     <string name="lockpattern_need_to_unlock" msgid="757935356911054465">"現在のパターンを入力"</string>
     <string name="lockpattern_need_to_unlock_wrong" msgid="5629093548611791080">"やり直してください"</string>
     <string name="lockpattern_recording_intro_header" msgid="308287052221942814">"ロック解除パターンを入力"</string>
@@ -625,8 +661,7 @@
     <string name="applications_settings_summary" msgid="2714215108369119717">"アプリケーションの管理やクイック起動ショートカットの設定"</string>
     <string name="applications_settings_header" msgid="6018266337275422250">"アプリケーション設定"</string>
     <string name="install_applications" msgid="4872012136210802181">"提供元不明のアプリ"</string>
-    <!-- no translation found for install_unknown_applications (6612824788917283662) -->
-    <skip />
+    <string name="install_unknown_applications" msgid="6612824788917283662">"サードパーティアプリケーションのインストールを許可する"</string>
     <string name="install_all_warning" msgid="1923717607319933741">"提供元不明のアプリケーションから携帯電話や個人情報データが攻撃を受ける可能性が高くなります。このようなアプリケーションの使用により生じうる携帯電話への損害やデータの損失について、お客様がすべての責任を負うことに同意するものとします。"</string>
     <string name="application_info_label" msgid="1150486628158409543">"アプリケーション情報"</string>
     <string name="storage_label" msgid="8700867073480107253">"メモリ"</string>
@@ -655,6 +690,7 @@
     <string name="filter_apps_all" msgid="5142129378749391876">"すべて"</string>
     <string name="filter_apps_third_party" msgid="7786348047690140979">"ダウンロード済み"</string>
     <string name="filter_apps_running" msgid="7767071454371350486">"実行中"</string>
+    <string name="filter_apps_onsdcard" msgid="1477351142334784771">"SDカード上"</string>
     <string name="loading" msgid="3200408047793887917">"読み込み中..."</string>
     <string name="recompute_size" msgid="7722567982831691718">"サイズを再計算中..."</string>
     <string name="clear_data_dlg_title" msgid="4470209520936375508">"削除"</string>
@@ -673,6 +709,17 @@
     <string name="invalid_size_value" msgid="1901940003700269523">"パッケージのサイズを計算できません"</string>
     <string name="empty_list_msg" msgid="2901049162265094971">"サードパーティ製アプリケーションはインストールされていません。"</string>
     <string name="version_text" msgid="9189073826278676425">"バージョン<xliff:g id="VERSION_NUM">%1$s</xliff:g>"</string>
+    <string name="move_app" msgid="5042838441401731346">"移動"</string>
+    <string name="move_app_to_internal" msgid="3919318857309344803">"フラッシュに移動"</string>
+    <string name="move_app_to_sdcard" msgid="6784919832517488432">"SDカードに移動"</string>
+    <!-- no translation found for moving (6431016143218876491) -->
+    <skip />
+    <string name="force_stop_dlg_title" msgid="2531896882056462617">"強制停止"</string>
+    <string name="force_stop_dlg_text" msgid="3381302041569982075">"このアプリケーションはすぐに再起動されます。強制停止してもよろしいですか？"</string>
+    <!-- no translation found for app_install_location_title (2068975150026852168) -->
+    <skip />
+    <!-- no translation found for app_install_location_summary (879753854530300436) -->
+    <skip />
     <string name="runningservices_settings_title" msgid="8097287939865165213">"実行中のサービス"</string>
     <string name="runningservices_settings_summary" msgid="854608995821032748">"現在実行中のサービスを表示して制御する"</string>
     <string name="service_restarting" msgid="2242747937372354306">"再起動中"</string>
@@ -691,8 +738,9 @@
     <string name="language_settings_summary" msgid="595647729475399987">"言語と地域、文字入力の設定"</string>
     <string name="language_category" msgid="3391756582724541530">"地域/言語設定"</string>
     <string name="text_category" msgid="6342540511465136739">"文字入力設定"</string>
-    <string name="phone_language" msgid="2138384312336494991">"地域/言語を選択"</string>
-    <string name="phone_language_summary" msgid="1809580675831352352">"言語と地域の選択"</string>
+    <string name="phone_language" msgid="1165758957501090679">"言語を選択"</string>
+    <!-- no translation found for phone_language_summary (3871309445655554211) -->
+    <skip />
     <string name="auto_replace" msgid="6199184757891937822">"自動修正"</string>
     <string name="auto_replace_summary" msgid="370288728200084466">"入力間違いを自動修正する"</string>
     <string name="auto_caps" msgid="581633131114124121">"自動大文字変換"</string>
@@ -705,7 +753,8 @@
     <string name="ime_security_warning" msgid="812267421486877917">"この入力方法を選択すると、入力する全文字列の収集をアプリケーション（<xliff:g id="IME_APPLICATION_NAME">%1$s</xliff:g>）に許可することになります。これにはパスワードやクレジットカード番号などの個人情報も含まれます。この入力方法を使用しますか？"</string>
     <string name="user_dict_settings_titlebar" msgid="765659257455000490">"ユーザー辞書"</string>
     <string name="user_dict_settings_title" msgid="8357027437499042191">"ユーザー辞書"</string>
-    <string name="user_dict_settings_summary" msgid="2460427065601355471">"ユーザー辞書に単語を登録／削除する"</string>
+    <!-- no translation found for user_dict_settings_summary (7965571192902870454) -->
+    <skip />
     <string name="user_dict_settings_add_menu_title" msgid="4056762757149923551">"追加"</string>
     <string name="user_dict_settings_add_dialog_title" msgid="4702613990174126482">"辞書に追加"</string>
     <string name="user_dict_settings_edit_dialog_title" msgid="8967476444840548674">"語句の編集"</string>
@@ -789,10 +838,8 @@
     <string name="no_accessibility_services_summary" msgid="694578333333808159">"ユーザー補助サービスがインストールされていません。"</string>
     <string name="accessibility_service_security_warning" msgid="4066258132331302670">"このユーザー補助サービスを選択すると、入力する全テキストの収集をアプリケーション（<xliff:g id="ACCESSIBILITY_SERVICE_NAME">%1$s</xliff:g>）に許可することになります。これにはクレジットカード番号などの個人情報（パスワードを除く）も含まれます。また、ユーザーインターフェースでのやり取りも記録されます。このユーザー補助サービスを使用しますか？"</string>
     <string name="accessibility_service_disable_warning" msgid="8930591383312775132">"ユーザー補助サービスを無効にしますか？"</string>
-    <!-- no translation found for accessibility_service_no_apps_title (898893674114288531) -->
-    <skip />
-    <!-- no translation found for accessibility_service_no_apps_message (2450056749545404807) -->
-    <skip />
+    <string name="accessibility_service_no_apps_title" msgid="898893674114288531">"ユーザー補助アプリケーションが見つかりません"</string>
+    <string name="accessibility_service_no_apps_message" msgid="2450056749545404807">"ユーザー補助アプリケーションをインストールしていません。"\n\n"携帯電話用のスクリーンリーダーをAndroidマーケットからダウンロードできます。"\n\n"スクリーンリーダーをインストールするには[OK]をタップします。"</string>
     <string name="power_usage_summary_title" msgid="5180282911164282324">"電池使用量"</string>
     <string name="power_usage_summary" msgid="7237084831082848168">"電池を使用している操作"</string>
     <string name="battery_since_unplugged" msgid="338073389740738437">"電池使用時間"</string>
@@ -851,16 +898,21 @@
     <string name="menu_stats_refresh" msgid="1676215433344981075">"更新"</string>
     <string name="process_kernel_label" msgid="3916858646836739323">"Android OS"</string>
     <string name="process_mediaserver_label" msgid="6500382062945689285">"メディアサーバー"</string>
-    <string name="tts_settings" msgid="3348626948015962987">"テキスト読み上げ"</string>
-    <string name="tts_settings_summary" msgid="2627715231944602766">"テキストから音声への変換オプションの設定"</string>
+    <string name="voice_input_output_settings" msgid="1336135218350444783">"音声入出力"</string>
+    <string name="voice_input_output_settings_title" msgid="2442850635048676991">"音声入出力の設定"</string>
+    <string name="voice_search_settings_title" msgid="2775469246913196536">"音声検索"</string>
+    <string name="keyboard_settings_title" msgid="5080115226780201234">"Androidキーボード"</string>
+    <string name="voice_input_category" msgid="1589318440824204736">"音声入力"</string>
+    <string name="voice_output_category" msgid="2624538587784986229">"音声出力"</string>
+    <string name="recognizer_title" msgid="3231385184559054457">"音声認識装置"</string>
+    <string name="recognizer_settings_title" msgid="6038598099039717232">"音声認識装置の設定"</string>
+    <string name="tts_settings" msgid="8186971894801348327">"テキスト読み上げの設定"</string>
     <string name="tts_settings_title" msgid="4182348653053000933">"テキスト読み上げの設定"</string>
     <string name="use_default_tts_settings_title" msgid="1577063839539732930">"常に自分の設定を使用する"</string>
     <string name="use_default_tts_settings_summary" msgid="4253502106159206276">"アプリケーション設定を下のデフォルト設定で上書きする"</string>
     <string name="tts_default_settings_section" msgid="5787915620218907443">"デフォルト設定"</string>
-    <!-- no translation found for tts_default_synth_title (29467896463371992) -->
-    <skip />
-    <!-- no translation found for tts_default_synth_summary (6482936537135251690) -->
-    <skip />
+    <string name="tts_default_synth_title" msgid="29467896463371992">"既定のエンジン"</string>
+    <string name="tts_default_synth_summary" msgid="6482936537135251690">"テキスト読み上げに使用する音声合成エンジンを設定する"</string>
     <string name="tts_default_rate_title" msgid="6030550998379310088">"音声の速度"</string>
     <string name="tts_default_rate_summary" msgid="4061815292287182801">"テキストの読み上げ速度"</string>
     <string name="tts_default_pitch_title" msgid="6135942113172488671">"音の高さ"</string>
@@ -874,6 +926,14 @@
     <string name="tts_data_installed_summary" msgid="9162111552859972809">"音声合成に必要な音声は正常にインストールされています"</string>
     <string name="tts_demo" msgid="405357591189935876">"これは音声合成のサンプルです。"</string>
     <string name="tts_settings_changed_demo" msgid="4926518555912328645">"設定が変更されました。これがサンプル音です。"</string>
+    <string name="tts_engine_error" msgid="5513288178403066867">"選択したエンジンは実行できません"</string>
+    <string name="tts_engine_error_config" msgid="5820525416624637313">"設定"</string>
+    <string name="tts_engine_error_reselect" msgid="3071453963296013376">"別のエンジンを選択"</string>
+    <string name="tts_engine_security_warning" msgid="8786238102020223650">"この音声合成エンジンを使用すると、読み上げるすべてのテキストの収集をエンジン（<xliff:g id="TTS_PLUGIN_ENGINE_NAME">%s</xliff:g>）に許可することになります。これにはパスワードやクレジットカード番号などの個人情報も含まれます。この音声合成エンジンを有効にしますか？"</string>
+    <string name="tts_engines_section" msgid="7515470972378742429">"エンジン"</string>
+    <string name="tts_engine_name_settings" msgid="4974538563074395920">"<xliff:g id="TTS_PLUGIN_ENGINE_NAME">%s</xliff:g>の設定"</string>
+    <string name="tts_engine_name_is_enabled_summary" msgid="4909484006804022115">"<xliff:g id="TTS_PLUGIN_ENGINE_NAME">%s</xliff:g>は有効です"</string>
+    <string name="tts_engine_name_is_disabled_summary" msgid="7644198182255168200">"<xliff:g id="TTS_PLUGIN_ENGINE_NAME">%s</xliff:g>は無効です"</string>
     <string name="gadget_title" msgid="7455548605888590466">"電源管理"</string>
     <string name="gadget_toggle_wifi" msgid="2382963973155082629">"Wi-Fi設定の更新"</string>
     <string name="gadget_toggle_bluetooth" msgid="7538903239807020826">"Bluetooth設定の更新"</string>
@@ -981,35 +1041,36 @@
     <string name="credentials_erased" msgid="7700309135582200849">"認証情報ストレージが消去されました。"</string>
     <string name="credentials_enabled" msgid="7588607413349978930">"認証情報ストレージが有効になりました。"</string>
     <string name="credentials_disabled" msgid="7453188089059045380">"認証情報ストレージが無効になりました。"</string>
-    <!-- no translation found for encrypted_fs_category (1841367653663913956) -->
-    <skip />
-    <!-- no translation found for encrypted_fs_enable (3884033081603327729) -->
-    <skip />
-    <!-- no translation found for encrypted_fs_enable_summary (5635188119509076089) -->
-    <skip />
-    <!-- no translation found for encrypted_fs_enable_dialog (919487211207214266) -->
-    <skip />
-    <!-- no translation found for encrypted_fs_disable_dialog (6960413613985682501) -->
-    <skip />
-    <!-- no translation found for encrypted_fs_enable_button (8453841319751433751) -->
-    <skip />
-    <!-- no translation found for encrypted_fs_disable_button (8468354944060220496) -->
-    <skip />
-    <!-- no translation found for encrypted_fs_cancel_button (4785921255266305799) -->
-    <skip />
-    <!-- no translation found for encrypted_fs_cancel_confirm (853572431153803557) -->
-    <skip />
-    <!-- no translation found for encrypted_fs_alert_dialog_title (583462447886934755) -->
-    <skip />
+    <string name="encrypted_fs_category" msgid="1841367653663913956">"暗号化ファイルシステム"</string>
+    <string name="encrypted_fs_enable" msgid="3884033081603327729">"個人データの暗号化"</string>
+    <string name="encrypted_fs_enable_summary" msgid="5635188119509076089">"この携帯電話の個人データを格納するために暗号化ファイルシステムを有効にする"</string>
+    <string name="encrypted_fs_enable_dialog" msgid="919487211207214266">"暗号化ファイルシステムを有効にするには、携帯電話データの消去が必要です。"</string>
+    <string name="encrypted_fs_disable_dialog" msgid="6960413613985682501">"暗号化ファイルシステムを無効にするには、携帯電話データの消去が必要です。"</string>
+    <string name="encrypted_fs_enable_button" msgid="8453841319751433751">"有効にする"</string>
+    <string name="encrypted_fs_disable_button" msgid="8468354944060220496">"無効にする"</string>
+    <string name="encrypted_fs_cancel_button" msgid="4785921255266305799">"キャンセル"</string>
+    <string name="encrypted_fs_cancel_confirm" msgid="853572431153803557">"暗号化ファイルシステムのモードの変更がキャンセルされました。"</string>
+    <string name="encrypted_fs_alert_dialog_title" msgid="583462447886934755">"暗号化ファイルシステムの警告。"</string>
     <string name="emergency_tone_title" msgid="1055954530111587114">"緊急時の音"</string>
     <string name="emergency_tone_summary" msgid="722259232924572153">"緊急通報時の動作を設定します"</string>
     <string name="privacy_settings" msgid="9206631214140954954">"プライバシー"</string>
     <string name="privacy_settings_title" msgid="1987089301293213705">"プライバシーの設定"</string>
-    <string name="location_section_title" msgid="6072558684044939786">"位置情報"</string>
-    <string name="settings_section_title" msgid="7413252428447723032">"設定"</string>
+    <string name="backup_section_title" msgid="717834414028702406">"バックアップと復元"</string>
     <string name="personal_data_section_title" msgid="7815209034443782061">"個人データ"</string>
     <string name="backup_settings_title" msgid="2968262658155327829">"設定のバックアップ"</string>
-    <string name="backup_erase_dialog_title" msgid="6028429904055779443">"バックアップの設定"</string>
-    <string name="backup_erase_dialog_message" msgid="9096433810456900531">"設定のバックアップを停止し、Googleサーバー上のすべてのコピーを消去してもよろしいですか？"</string>
+    <string name="auto_restore_title" msgid="5397528966329126506">"自動復元"</string>
+    <string name="auto_restore_summary" msgid="2029683590724508019">"インストール時のバックアップからアプリケーションのデータを復元する"</string>
+    <string name="backup_erase_dialog_title" msgid="3438255037256586237">"バックアップ"</string>
+    <string name="backup_erase_dialog_message" msgid="2948090854996352245">"設定とアプリケーションデータのバックアップを停止し、Googleサーバー上のすべてのコピーを消去してもよろしいですか？"</string>
+    <string name="device_admin_settings_title" msgid="1335557832906433309">"デバイス管理の設定"</string>
+    <string name="active_device_admin_msg" msgid="6930903262612422111">"デバイス管理者"</string>
+    <string name="remove_device_admin" msgid="3596845261596451437">"無効にする"</string>
+    <string name="select_device_admin_msg" msgid="2645509057946368094">"デバイス管理者"</string>
+    <string name="no_device_admins" msgid="702695100241728775">"有効なデバイス管理者がいません"</string>
+    <string name="add_device_admin_msg" msgid="6246742476064507965">"デバイス管理者を有効にしますか？"</string>
+    <string name="add_device_admin" msgid="7133327675884827091">"有効にする"</string>
+    <string name="device_admin_add_title" msgid="7705551449705676363">"デバイス管理者"</string>
+    <string name="device_admin_warning" msgid="1149471041373876923">"この管理者を有効にすると、アプリケーション<xliff:g id="APP_NAME">%1$s</xliff:g>で次の操作が可能になります:"</string>
+    <string name="device_admin_status" msgid="7169948053970923035">"この管理者は有効であり、アプリケーション<xliff:g id="APP_NAME">%1$s</xliff:g>に次の操作を許可できます:"</string>
     <string name="untitled_apn" msgid="1230060359198685513">"無題"</string>
 </resources>
