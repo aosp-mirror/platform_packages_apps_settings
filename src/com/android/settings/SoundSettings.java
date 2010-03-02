@@ -49,6 +49,7 @@ public class SoundSettings extends PreferenceActivity implements
 
     private static final String KEY_SILENT = "silent";
     private static final String KEY_VIBRATE = "vibrate";
+    private static final String KEY_VIBRATE_IN_SILENT = "vibrate_in_silent";
     private static final String KEY_DTMF_TONE = "dtmf_tone";
     private static final String KEY_SOUND_EFFECTS = "sound_effects";
     private static final String KEY_HAPTIC_FEEDBACK = "haptic_feedback";
@@ -66,7 +67,8 @@ public class SoundSettings extends PreferenceActivity implements
      * Otherwise, it will adjust the normal ringer mode's ring or ring+vibrate
      * setting.
      */
-    private CheckBoxPreference mVibrate;
+    private ListPreference mPhoneVibrate;
+    private CheckBoxPreference mVibrateInSilent;
     private CheckBoxPreference mDtmfTone;
     private CheckBoxPreference mSoundEffects;
     private CheckBoxPreference mHapticFeedback;
@@ -103,7 +105,8 @@ public class SoundSettings extends PreferenceActivity implements
 
         mSilent = (CheckBoxPreference) findPreference(KEY_SILENT);
 
-        mVibrate = (CheckBoxPreference) findPreference(KEY_VIBRATE);
+        mPhoneVibrate = (ListPreference) findPreference(KEY_VIBRATE);
+        mVibrateInSilent = (CheckBoxPreference) findPreference(KEY_VIBRATE_IN_SILENT);
         mDtmfTone = (CheckBoxPreference) findPreference(KEY_DTMF_TONE);
         mDtmfTone.setPersistent(false);
         mDtmfTone.setChecked(Settings.System.getInt(resolver,
@@ -164,8 +167,13 @@ public class SoundSettings extends PreferenceActivity implements
         unregisterReceiver(mReceiver);
     }
 
+    // updateState in fact updates the UI to reflect the system state
     private void updateState(boolean force) {
         final int ringerMode = mAudioManager.getRingerMode();
+
+        // NB: in the UI we now simply call this "silent mode". A separate
+        // setting controls whether we're in RINGER_MODE_SILENT or
+        // RINGER_MODE_VIBRATE.
         final boolean silentOrVibrateMode =
                 ringerMode != AudioManager.RINGER_MODE_NORMAL;
 
@@ -173,15 +181,18 @@ public class SoundSettings extends PreferenceActivity implements
             mSilent.setChecked(silentOrVibrateMode);
         }
 
-        boolean vibrateSetting;
-        if (silentOrVibrateMode) {
-            vibrateSetting = ringerMode == AudioManager.RINGER_MODE_VIBRATE;
-        } else {
-            vibrateSetting = mAudioManager.getVibrateSetting(AudioManager.VIBRATE_TYPE_RINGER)
-                    == AudioManager.VIBRATE_SETTING_ON;
-        }
-        if (vibrateSetting != mVibrate.isChecked() || force) {
-            mVibrate.setChecked(vibrateSetting);
+        mVibrateInSilent.setEnabled(silentOrVibrateMode);
+        mVibrateInSilent.setChecked(Settings.System.getInt(
+            getContentResolver(),
+            Settings.System.VIBRATE_IN_SILENT,
+            1) == 1);
+
+        // Control phone vibe independent of silent mode
+        String phoneVibrateSetting = String.valueOf(
+            mAudioManager.getVibrateSetting(AudioManager.VIBRATE_TYPE_RINGER));
+
+        if (! phoneVibrateSetting.equals(mPhoneVibrate.getValue()) || force) {
+            mPhoneVibrate.setValue(phoneVibrateSetting);
         }
 
         int silentModeStreams = Settings.System.getInt(getContentResolver(),
@@ -193,23 +204,41 @@ public class SoundSettings extends PreferenceActivity implements
 
     }
 
-    private void setRingerMode(boolean silent, boolean vibrate) {
-        if (silent) {
-            mAudioManager.setRingerMode(vibrate ? AudioManager.RINGER_MODE_VIBRATE :
-                AudioManager.RINGER_MODE_SILENT);
-        } else {
-            mAudioManager.setRingerMode(AudioManager.RINGER_MODE_NORMAL);
-            mAudioManager.setVibrateSetting(AudioManager.VIBRATE_TYPE_RINGER,
-                    vibrate ? AudioManager.VIBRATE_SETTING_ON
-                            : AudioManager.VIBRATE_SETTING_OFF);
-        }
-    }
-
     @Override
     public boolean onPreferenceTreeClick(PreferenceScreen preferenceScreen, Preference preference) {
-        if (preference == mSilent || preference == mVibrate) {
-            setRingerMode(mSilent.isChecked(), mVibrate.isChecked());
-            if (preference == mSilent) updateState(false);
+        if (preference == mSilent) {
+            if (mSilent.isChecked()) {
+                boolean vibeInSilent = mVibrateInSilent.isChecked();
+                mAudioManager.setRingerMode(
+                    vibeInSilent ? AudioManager.RINGER_MODE_VIBRATE
+                                 : AudioManager.RINGER_MODE_SILENT);
+            } else {
+                mAudioManager.setRingerMode(AudioManager.RINGER_MODE_NORMAL);
+            }
+            updateState(false);
+        } else if (preference == mPhoneVibrate) {
+            int vibeSetting = new Integer(mPhoneVibrate.getValue()).intValue();
+            switch (vibeSetting) {
+                case AudioManager.VIBRATE_SETTING_ON:
+                case AudioManager.VIBRATE_SETTING_OFF:
+                case AudioManager.VIBRATE_SETTING_ONLY_SILENT:
+                    mAudioManager.setVibrateSetting(
+                            AudioManager.VIBRATE_TYPE_RINGER,
+                            vibeSetting);
+                    updateState(false);
+                    break;
+            }
+        } else if (preference == mVibrateInSilent) {
+            boolean vibeInSilent = mVibrateInSilent.isChecked();
+            Settings.System.putInt(getContentResolver(),
+                Settings.System.VIBRATE_IN_SILENT,
+                vibeInSilent ? 1 : 0);
+            int ringerMode = mAudioManager.getRingerMode();
+            if (ringerMode != AudioManager.RINGER_MODE_NORMAL) {
+                mAudioManager.setRingerMode(vibeInSilent
+                    ? AudioManager.RINGER_MODE_VIBRATE
+                    : AudioManager.RINGER_MODE_SILENT);
+            }
         } else if (preference == mDtmfTone) {
             Settings.System.putInt(getContentResolver(), Settings.System.DTMF_TONE_WHEN_DIALING,
                     mDtmfTone.isChecked() ? 1 : 0);

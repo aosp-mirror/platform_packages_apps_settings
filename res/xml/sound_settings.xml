@@ -27,6 +27,13 @@
                 android:order="1"
                 android:disableDependentsState="true" />
 
+        <CheckBoxPreference
+                android:key="vibrate_in_silent"
+                android:title="@string/vibrate_in_silent_title"
+                android:summary="@string/vibrate_in_silent_summary"
+                android:order="2"
+                android:persistent="false" />
+
         <com.android.settings.RingerVolumePreference
                 android:key="ring_volume"
                 android:title="@string/all_volume_title"
@@ -34,7 +41,7 @@
                 android:dialogTitle="@string/all_volume_title"
                 android:persistent="false"
                 android:dependency="silent"
-                android:order="2"
+                android:order="3"
                 android:streamType="ring" />
 
         <com.android.settings.DefaultRingtonePreference
@@ -47,12 +54,13 @@
                 android:order="5"
                 android:ringtoneType="ringtone" />
 
-        <CheckBoxPreference
+        <ListPreference
                 android:key="vibrate"
+                android:order="6"
                 android:title="@string/vibrate_title"
                 android:summary="@string/vibrate_summary"
-                android:order="6"
-                android:persistent="false" />
+                android:entries="@array/vibrate_entries"
+                android:entryValues="@array/vibrate_values" />
 
         <com.android.settings.DefaultRingtonePreference
                 android:key="notification_sound"
