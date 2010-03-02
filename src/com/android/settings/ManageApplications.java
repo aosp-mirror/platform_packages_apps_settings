@@ -37,6 +37,7 @@ import android.content.pm.PackageManager.NameNotFoundException;
 import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
+import android.graphics.drawable.StateListDrawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
@@ -1664,24 +1665,29 @@ public class ManageApplications extends TabActivity implements
         if (DEBUG_TIME) {
             Log.i(TAG, "Took " + (SystemClock.elapsedRealtime()-sStart) + " ms to init cache");
         }
+
         final TabHost tabHost = getTabHost();
         tabHost.addTab(tabHost.newTabSpec(TAB_DOWNLOADED)
-                .setIndicator(getString(R.string.filter_apps_third_party))
+                .setIndicator(getString(R.string.filter_apps_third_party),
+                        getResources().getDrawable(R.drawable.ic_tab_download))
                 .setContent(this));
         tabHost.addTab(tabHost.newTabSpec(TAB_RUNNING)
-                .setIndicator(getString(R.string.filter_apps_running))
+                .setIndicator(getString(R.string.filter_apps_running),
+                        getResources().getDrawable(R.drawable.ic_tab_running))
                 .setContent(this));
         tabHost.addTab(tabHost.newTabSpec(TAB_ALL)
-                .setIndicator(getString(R.string.filter_apps_all))
+                .setIndicator(getString(R.string.filter_apps_all),
+                        getResources().getDrawable(R.drawable.ic_tab_all))
                 .setContent(this));
         tabHost.addTab(tabHost.newTabSpec(TAB_SDCARD)
-                .setIndicator(getString(R.string.filter_apps_onsdcard))
+                .setIndicator(getString(R.string.filter_apps_onsdcard),
+                        getResources().getDrawable(R.drawable.ic_tab_sdcard))
                 .setContent(this));
-
         tabHost.setCurrentTabByTag(defaultTabTag);
         tabHost.setOnTabChangedListener(this);
     }
     
+    @Override
     protected void onDestroy() {
         // Persist values in cache
         mCache.updateCache();
@@ -1689,7 +1695,7 @@ public class ManageApplications extends TabActivity implements
     }
 
     @Override
-    public Dialog onCreateDialog(int id) {
+    public Dialog onCreateDialog(int id, Bundle args) {
         if (id == DLG_LOADING) {
             ProgressDialog dlg = new ProgressDialog(this);
             dlg.setProgressStyle(ProgressDialog.STYLE_SPINNER);

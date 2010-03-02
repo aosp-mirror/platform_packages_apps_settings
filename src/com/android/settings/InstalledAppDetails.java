@@ -314,38 +314,32 @@ public class InstalledAppDetails extends Activity implements View.OnClickListene
     }
     
     private void refreshAppAttributes(PackageInfo pkgInfo) {
-        setAppLabelAndIcon();
+        setAppLabelAndIcon(pkgInfo);
         initControlButtons();
         initDataButtons();
-        // Version number of application
-        setAppVersion(pkgInfo);
         // Refresh size info
         if (mAppInfo != null && mAppInfo.packageName != null) {
             mPm.getPackageSizeInfo(mAppInfo.packageName, mSizeObserver);
         }
     }
-    
+
     // Utility method to set applicaiton label and icon.
-    private void setAppLabelAndIcon() {
-        ((ImageView)findViewById(R.id.app_icon)).setImageDrawable(mAppInfo.loadIcon(mPm));
-        //set application name TODO version
-        CharSequence appName = mAppInfo.loadLabel(mPm);
-        if(appName == null) {
-            appName = getString(_UNKNOWN_APP);
-        }
-        ((TextView)findViewById(R.id.app_name)).setText(appName);
-    }
-    
-    // Utility method to set application version
-    private void setAppVersion(PackageInfo pkgInfo) {
+    private void setAppLabelAndIcon(PackageInfo pkgInfo) {
+        View appSnippet = findViewById(R.id.app_snippet);
+        ImageView icon = (ImageView) appSnippet.findViewById(R.id.app_icon);
+        icon.setImageDrawable(mAppInfo.loadIcon(mPm));
+        // Set application name.
+        TextView label = (TextView) appSnippet.findViewById(R.id.app_name);
+        label.setText(mAppInfo.loadLabel(mPm));
         // Version number of application
-        mAppVersion = ((TextView)findViewById(R.id.app_version));
-        if (pkgInfo != null) {
+        mAppVersion = (TextView) appSnippet.findViewById(R.id.app_size);
+
+        if (pkgInfo != null && pkgInfo.versionName != null) {
             mAppVersion.setVisibility(View.VISIBLE);
             mAppVersion.setText(getString(R.string.version_text,
                     String.valueOf(pkgInfo.versionName)));
         } else {
-            mAppVersion.setVisibility(View.GONE);
+            mAppVersion.setVisibility(View.INVISIBLE);
         }
     }
 

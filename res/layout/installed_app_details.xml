@@ -29,53 +29,27 @@
         android:paddingBottom="5dip"
         android:orientation="vertical">
 
-        <!-- App snippet -->
-        <RelativeLayout
+        <!-- App snippet with buttons -->
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical">
+            android:layout_gravity="center_vertical"
+            android:orientation="vertical"
+            android:paddingRight="6dip"
+            android:paddingLeft="6dip"
+            android:paddingTop="5dip"
+            android:paddingBottom="5dip" >
 
-            <LinearLayout
-                android:orientation="vertical"
-                android:layout_alignParentLeft="true"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:paddingTop="6dip"
-                android:paddingBottom="6dip"
-                android:paddingRight="6dip"
-                android:paddingLeft="6dip" >
-                <!-- application name -->
-                <TextView android:id="@+id/app_name"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textAppearance="?android:attr/textAppearanceMedium"
-                    android:textStyle="bold"
-                    android:singleLine="true"
-                    android:ellipsize="marquee"
-                    android:layout_marginBottom="2dip" />
-                <!-- application version -->
-                <TextView android:id="@+id/app_version"
-                    android:layout_marginTop="-4dip"
-                    android:layout_gravity="center_vertical"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textAppearance="?android:attr/textAppearanceSmall" />
-            </LinearLayout>
+        <!-- Application snippet label, version and icon -->
+        <include
+            layout="@layout/manage_applications_item"
+            android:id="@+id/app_snippet"/>
 
-            <!-- application icon -->
-            <ImageView android:id="@+id/app_icon"
-                android:layout_width="@android:dimen/app_icon_size"
-                android:layout_height="@android:dimen/app_icon_size"
-                android:layout_alignParentRight="true"
-                android:paddingTop="6dip"
-                android:paddingBottom="6dip"
-                android:paddingRight="6dip"
-                android:scaleType="fitCenter" />
-        </RelativeLayout>
         <!-- Force stop and uninstall buttons -->
         <include
             layout="@layout/two_buttons_panel"
             android:id="@+id/control_buttons_panel"/>
+        </LinearLayout>
 
         <TextView
             style="?android:attr/listSeparatorTextViewStyle"
