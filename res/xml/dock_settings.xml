@@ -26,4 +26,11 @@
         android:summary="@string/dock_settings_summary"
         android:widgetLayout="@*android:layout/preference_dialog" />
 
+    <CheckBoxPreference
+        android:key="dock_sounds"
+        android:title="@string/dock_sounds_enable_title"
+        android:summaryOn="@string/dock_sounds_enable_summary_on"
+        android:summaryOff="@string/dock_sounds_enable_summary_off"
+        android:defaultValue="false" />
+
 </PreferenceScreen>

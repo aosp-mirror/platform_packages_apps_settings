@@ -24,9 +24,11 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.Bundle;
+import android.preference.CheckBoxPreference;
 import android.preference.Preference;
 import android.preference.PreferenceActivity;
 import android.preference.PreferenceScreen;
+import android.provider.Settings;
 
 import com.android.settings.bluetooth.DockEventReceiver;
 
@@ -34,7 +36,9 @@ public class DockSettings extends PreferenceActivity {
 
     private static final int DIALOG_NOT_DOCKED = 1;
     private static final String KEY_AUDIO_SETTINGS = "dock_audio";
+    private static final String KEY_DOCK_SOUNDS = "dock_sounds";
     private Preference mAudioSettings;
+    private CheckBoxPreference mDockSounds;
     private Intent mDockIntent;
 
     private BroadcastReceiver mReceiver = new BroadcastReceiver() {
@@ -71,10 +75,17 @@ public class DockSettings extends PreferenceActivity {
     }
 
     private void initDockSettings() {
+        ContentResolver resolver = getContentResolver();
+
         mAudioSettings = findPreference(KEY_AUDIO_SETTINGS);
         if (mAudioSettings != null) {
             mAudioSettings.setSummary(R.string.dock_audio_summary_none);
         }
+
+        mDockSounds = (CheckBoxPreference) findPreference(KEY_DOCK_SOUNDS);
+        mDockSounds.setPersistent(false);
+        mDockSounds.setChecked(Settings.System.getInt(resolver,
+                Settings.System.DOCK_SOUNDS_ENABLED, 0) != 0);
     }
 
     private void handleDockChange(Intent intent) {
@@ -118,6 +129,9 @@ public class DockSettings extends PreferenceActivity {
                 i.setClass(this, DockEventReceiver.class);
                 sendBroadcast(i);
             }
+        } else if (preference == mDockSounds) {
+            Settings.System.putInt(getContentResolver(), Settings.System.DOCK_SOUNDS_ENABLED,
+                    mDockSounds.isChecked() ? 1 : 0);
         }
 
         return true;
