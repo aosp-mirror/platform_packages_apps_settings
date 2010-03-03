@@ -23,6 +23,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.net.ConnectivityManager;
+import android.os.Environment;
 import android.preference.Preference;
 import android.preference.PreferenceActivity;
 import android.preference.PreferenceScreen;
@@ -89,6 +90,8 @@ public class TetherSettings extends PreferenceActivity {
                 Settings.Secure.TETHER_NOTIFY, 0) != 0);
 
         IntentFilter filter = new IntentFilter(ConnectivityManager.ACTION_TETHER_STATE_CHANGED);
+        filter.addAction(Intent.ACTION_MEDIA_SHARED);
+        filter.addAction(Intent.ACTION_MEDIA_UNSHARED);
         mTetherChangeReceiver = new TetherChangeReceiver();
         Intent intent = registerReceiver(mTetherChangeReceiver, filter);
 
@@ -107,6 +110,8 @@ public class TetherSettings extends PreferenceActivity {
         boolean usbAvailable = false;
         boolean wifiTethered = false;
         boolean wifiAvailable = false;
+        boolean massStorageActive =
+                Environment.MEDIA_SHARED.equals(Environment.getExternalStorageState());
 
         for (String s : available) {
             for (String regex : mUsbRegexs) {
@@ -128,6 +133,9 @@ public class TetherSettings extends PreferenceActivity {
         if (usbTethered) {
             mUsbTether.setSummary(R.string.usb_tethering_active_subtext);
             mUsbTether.setEnabled(true);
+        } else if (massStorageActive) {
+            mUsbTether.setSummary(R.string.usb_tethering_storage_active_subtext);
+            mUsbTether.setEnabled(false);
         } else if (usbAvailable) {
             mUsbTether.setSummary(R.string.usb_tethering_available_subtext);
             mUsbTether.setEnabled(true);
