@@ -78,8 +78,10 @@ public class TetherSettings extends PreferenceActivity {
                     ConnectivityManager.EXTRA_AVAILABLE_TETHER);
             ArrayList<String> active = intent.getStringArrayListExtra(
                     ConnectivityManager.EXTRA_ACTIVE_TETHER);
+            ArrayList<String> errored = intent.getStringArrayListExtra(
+                    ConnectivityManager.EXTRA_ERRORED_TETHER);
 
-            updateState(available, active);
+            updateState(available, active, errored);
         }
     }
 
@@ -105,13 +107,16 @@ public class TetherSettings extends PreferenceActivity {
         mTetherChangeReceiver = null;
     }
 
-    private void updateState(ArrayList<String> available, ArrayList<String> tethered) {
+    private void updateState(ArrayList<String> available, ArrayList<String> tethered,
+            ArrayList<String> errored) {
         boolean usbTethered = false;
         boolean usbAvailable = false;
+        boolean usbErrored = false;
         boolean wifiTethered = false;
         boolean wifiAvailable = false;
         boolean massStorageActive =
                 Environment.MEDIA_SHARED.equals(Environment.getExternalStorageState());
+        boolean wifiErrored = false;
 
         for (String s : available) {
             for (String regex : mUsbRegexs) {
@@ -129,6 +134,14 @@ public class TetherSettings extends PreferenceActivity {
                 if (s.matches(regex)) wifiTethered = true;
             }
         }
+        for (String s: errored) {
+            for (String regex : mUsbRegexs) {
+                if (s.matches(regex)) usbErrored = true;
+            }
+            for (String regex : mWifiRegexs) {
+                if (s.matches(regex)) wifiErrored = true;
+            }
+        }
 
         if (usbTethered) {
             mUsbTether.setSummary(R.string.usb_tethering_active_subtext);
@@ -139,6 +152,9 @@ public class TetherSettings extends PreferenceActivity {
         } else if (usbAvailable) {
             mUsbTether.setSummary(R.string.usb_tethering_available_subtext);
             mUsbTether.setEnabled(true);
+        } else if (usbErrored) {
+            mUsbTether.setSummary(R.string.usb_tethering_errored_subtext);
+            mUsbTether.setEnabled(false);
         } else {
             mUsbTether.setSummary(R.string.usb_tethering_unavailable_subtext);
             mUsbTether.setEnabled(false);
