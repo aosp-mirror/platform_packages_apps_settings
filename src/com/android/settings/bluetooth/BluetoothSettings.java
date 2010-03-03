@@ -35,7 +35,6 @@ import android.preference.Preference;
 import android.preference.PreferenceActivity;
 import android.preference.PreferenceScreen;
 import android.view.ContextMenu;
-import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ContextMenu.ContextMenuInfo;
@@ -52,8 +51,6 @@ public class BluetoothSettings extends PreferenceActivity
         implements LocalBluetoothManager.Callback {
 
     private static final String TAG = "BluetoothSettings";
-
-    private static final int MENU_SCAN = Menu.FIRST;
 
     private static final String KEY_BT_CHECKBOX = "bt_checkbox";
     private static final String KEY_BT_DISCOVERABLE = "bt_discoverable";
@@ -213,33 +210,6 @@ public class BluetoothSettings extends PreferenceActivity
                 mLocalManager.getCachedDeviceManager().getCachedDevicesCopy();
         for (CachedBluetoothDevice cachedDevice : cachedDevices) {
             onDeviceAdded(cachedDevice);
-        }
-    }
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        menu.add(0, MENU_SCAN, 0, R.string.bluetooth_scan_for_devices)
-                .setIcon(com.android.internal.R.drawable.ic_menu_refresh)
-                .setAlphabeticShortcut('r');
-        return true;
-    }
-
-    @Override
-    public boolean onPrepareOptionsMenu(Menu menu) {
-        menu.findItem(MENU_SCAN).setEnabled(mLocalManager.getBluetoothAdapter().isEnabled());
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-
-            case MENU_SCAN:
-                mLocalManager.startScanning(true);
-                return true;
-
-            default:
-                return false;
         }
     }
 
