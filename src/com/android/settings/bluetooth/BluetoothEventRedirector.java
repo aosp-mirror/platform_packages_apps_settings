@@ -16,6 +16,9 @@
 
 package com.android.settings.bluetooth;
 
+import com.android.settings.R;
+import com.android.settings.bluetooth.LocalBluetoothProfileManager.Profile;
+
 import android.bluetooth.BluetoothA2dp;
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothClass;
@@ -25,10 +28,8 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.content.SharedPreferences;
 import android.util.Log;
-
-import com.android.settings.R;
-import com.android.settings.bluetooth.LocalBluetoothProfileManager.Profile;
 
 /**
  * BluetoothEventRedirector receives broadcasts and callbacks from the Bluetooth
@@ -53,9 +54,11 @@ public class BluetoothEventRedirector {
                                         BluetoothAdapter.ERROR);
                 mManager.setBluetoothStateInt(state);
             } else if (action.equals(BluetoothAdapter.ACTION_DISCOVERY_STARTED)) {
+                persistDiscoveringTimestamp();
                 mManager.onScanningStateChanged(true);
 
             } else if (action.equals(BluetoothAdapter.ACTION_DISCOVERY_FINISHED)) {
+                persistDiscoveringTimestamp();
                 mManager.onScanningStateChanged(false);
 
             } else if (action.equals(BluetoothDevice.ACTION_FOUND)) {
@@ -190,5 +193,12 @@ public class BluetoothEventRedirector {
             }
         }
         return null;
+    }
+
+    private void persistDiscoveringTimestamp() {
+        SharedPreferences.Editor editor = mManager.getSharedPreferences().edit();
+        editor.putLong(LocalBluetoothManager.SHARED_PREFERENCES_KEY_DISCOVERING_TIMESTAMP,
+                System.currentTimeMillis());
+        editor.commit();
     }
 }

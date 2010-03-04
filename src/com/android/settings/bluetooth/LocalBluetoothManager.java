@@ -72,6 +72,9 @@ public class LocalBluetoothManager {
     // of raising notifications
     private static long GRACE_PERIOD_TO_SHOW_DIALOGS_IN_FOREGROUND = 60 * 1000;
 
+    public static final String SHARED_PREFERENCES_KEY_DISCOVERING_TIMESTAMP =
+        "last_discovering_time";
+
     private static final String SHARED_PREFERENCES_KEY_LAST_SELECTED_DEVICE =
         "last_selected_device";
 
@@ -314,11 +317,19 @@ public class LocalBluetoothManager {
         long currentTimeMillis = System.currentTimeMillis();
         SharedPreferences sharedPreferences = getSharedPreferences();
 
-        // If the device was in discoverable mode recently
+        // If the device was in discoverABLE mode recently
         long lastDiscoverableEndTime = sharedPreferences.getLong(
                 BluetoothDiscoverableEnabler.SHARED_PREFERENCES_KEY_DISCOVERABLE_END_TIMESTAMP, 0);
         if ((lastDiscoverableEndTime + GRACE_PERIOD_TO_SHOW_DIALOGS_IN_FOREGROUND)
                 > currentTimeMillis) {
+            return true;
+        }
+
+        // If the device was discoverING recently
+        if (mAdapter != null && mAdapter.isDiscovering()) {
+            return true;
+        } else if ((sharedPreferences.getLong(SHARED_PREFERENCES_KEY_DISCOVERING_TIMESTAMP, 0) +
+                GRACE_PERIOD_TO_SHOW_DIALOGS_IN_FOREGROUND) > currentTimeMillis) {
             return true;
         }
 

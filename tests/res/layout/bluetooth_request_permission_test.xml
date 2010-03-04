@@ -37,10 +37,16 @@
             android:layout_weight="1"
             android:text="@string/enable" />
 
-        <Button android:id="@+id/discover"
+        <Button android:id="@+id/discoverable"
             android:layout_width="0dip"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="@string/discoverable" />
+
+        <Button android:id="@+id/scan"
+            android:layout_width="0dip"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/start_scan" />
     </LinearLayout>
 </LinearLayout>

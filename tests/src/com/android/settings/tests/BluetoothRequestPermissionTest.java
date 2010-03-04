@@ -33,7 +33,7 @@ import android.widget.ListView;
 
 public class BluetoothRequestPermissionTest extends Activity {
     private static final String TAG = "BluetoothRequestPermissionTest";
-
+    BluetoothAdapter mAdapter;
     private ArrayAdapter<String> mMsgAdapter;
 
     private class BtOnClickListener implements OnClickListener {
@@ -48,23 +48,50 @@ public class BluetoothRequestPermissionTest extends Activity {
         }
     }
 
+    private class BtScanOnClickListener implements OnClickListener {
+        public void onClick(View v) {
+            Button scanButton = (Button) v;
+            if (mAdapter.isDiscovering()) {
+                mAdapter.cancelDiscovery();
+                scanButton.setText(R.string.start_scan);
+            } else {
+                mAdapter.startDiscovery();
+                scanButton.setText(R.string.stop_scan);
+            }
+        }
+    }
+
     @Override
     public void onCreate(Bundle icicle) {
         super.onCreate(icicle);
         setContentView(R.layout.bluetooth_request_permission_test);
+        mAdapter = BluetoothAdapter.getDefaultAdapter();
 
         Button enable = (Button) findViewById(R.id.enable);
         enable.setOnClickListener(new BtOnClickListener(true /* enable */));
 
-        Button discover = (Button) findViewById(R.id.discover);
-        discover.setOnClickListener(new BtOnClickListener(false /* enable & discoverable */));
+        Button discoverable = (Button) findViewById(R.id.discoverable);
+        discoverable.setOnClickListener(new BtOnClickListener(false /* enable & discoverable */));
+
+        Button scanButton = (Button) findViewById(R.id.scan);
+        scanButton.setOnClickListener(new BtScanOnClickListener());
+        if (mAdapter.isDiscovering()) {
+            scanButton.setText(R.string.stop_scan);
+        } else {
+            scanButton.setText(R.string.start_scan);
+        }
 
         mMsgAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1);
 
         ListView listView = (ListView) findViewById(R.id.msg_container);
         listView.setAdapter(mMsgAdapter);
 
-        registerReceiver(mReceiver, new IntentFilter(BluetoothAdapter.ACTION_STATE_CHANGED));
+        IntentFilter filter = new IntentFilter();
+        filter.addAction(BluetoothAdapter.ACTION_DISCOVERY_STARTED);
+        filter.addAction(BluetoothAdapter.ACTION_DISCOVERY_FINISHED);
+        filter.addAction(BluetoothAdapter.ACTION_STATE_CHANGED);
+        filter.addAction(BluetoothDevice.ACTION_FOUND);
+        registerReceiver(mReceiver, filter);
         addMsg("Initialized");
     }
 
@@ -113,7 +140,8 @@ public class BluetoothRequestPermissionTest extends Activity {
         public void onReceive(Context context, Intent intent) {
             if (intent == null)
                 return;
-            if (BluetoothAdapter.ACTION_STATE_CHANGED.equals(intent.getAction())) {
+            String action = intent.getAction();
+            if (BluetoothAdapter.ACTION_STATE_CHANGED.equals(action)) {
                 String stateStr = "???";
                 switch (intent.getIntExtra(BluetoothAdapter.EXTRA_STATE, BluetoothDevice.ERROR)) {
                     case BluetoothAdapter.STATE_OFF:
@@ -130,6 +158,13 @@ public class BluetoothRequestPermissionTest extends Activity {
                         break;
                 }
                 addMsg("Bluetooth status = " + stateStr);
+            } else if (action.equals(BluetoothDevice.ACTION_FOUND)) {
+                String name = intent.getStringExtra(BluetoothDevice.EXTRA_NAME);
+                addMsg("Found: " + name);
+            } else if (action.equals(BluetoothAdapter.ACTION_DISCOVERY_STARTED)) {
+                addMsg("Scan started...");
+            } else if (action.equals(BluetoothAdapter.ACTION_DISCOVERY_FINISHED)) {
+                addMsg("Scan ended");
             }
         }
     };
