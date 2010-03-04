@@ -43,7 +43,7 @@
     <string name="radioInfo_display_dbm" msgid="3621221793699882781">"dBm"</string>
     <string name="radioInfo_display_asu" msgid="1422248392727818082">"asu"</string>
     <string name="radioInfo_lac" msgid="8415219164758307156">"LAC"</string>
-    <string name="radioInfo_cid" msgid="4362599198392643138">"CID"</string>
+    <string name="radioInfo_cid" msgid="4362599198392643138">"客戶編號"</string>
     <string name="sdcard_unmount" msgid="3364184561355611897">"卸載 SD 卡"</string>
     <string name="sdcard_format" msgid="362497552060004057">"將 SD 卡格式化"</string>
     <string name="small_font" msgid="2295331917424072635">"小"</string>
@@ -140,7 +140,7 @@
     <string name="proxy_error_empty_host_set_port" msgid="2451694104858226781">"若主機欄位空白，連接埠欄位也須空白。"</string>
     <string name="proxy_error_invalid_port" msgid="1816315605424943626">"您輸入的連接埠無效。"</string>
     <string name="radio_info_signal_location_label" msgid="16475158265551708">"位置："</string>
-    <string name="radio_info_neighboring_location_label" msgid="2385625674055934880">"附近的 CID："</string>
+    <string name="radio_info_neighboring_location_label" msgid="2385625674055934880">"相鄰的客戶編號："</string>
     <string name="radio_info_data_attempts_label" msgid="1731106244577323381">"嘗試資料："</string>
     <string name="radio_info_gprs_service_label" msgid="2331818110375395364">"GPRS 服務："</string>
     <string name="radio_info_roaming_label" msgid="6141505430275138647">"漫遊："</string>
@@ -169,8 +169,7 @@
     <string name="radio_info_smsc_update_label" msgid="7258686760358791539">"更新"</string>
     <string name="radio_info_smsc_refresh_label" msgid="6902302130315125102">"重新整理"</string>
     <string name="radio_info_toggle_dns_check_label" msgid="8292252930563286858">"切換 DNS 檢查"</string>
-    <!-- no translation found for oem_radio_info_label (6163141792477958941) -->
-    <skip />
+    <string name="oem_radio_info_label" msgid="6163141792477958941">"OEM 專用資訊/設定"</string>
     <string name="band_mode_title" msgid="954174198903776205">"設定 GSM/UMTS 頻道"</string>
     <string name="band_mode_loading" msgid="548764766363847336">"載入頻道清單..."</string>
     <string name="band_mode_set" msgid="5730560180249458484">"設定"</string>
@@ -234,60 +233,33 @@
     <string name="security_settings_summary" msgid="967393342537986570">"設定我的位置、畫面解鎖、SIM 卡鎖定、認證儲存空間鎖定"</string>
     <string name="cdma_security_settings_summary" msgid="6068799952798901542">"設定我的位置、解除鎖定畫面及鎖定認證儲存空間"</string>
     <string name="security_passwords_title" msgid="2930627259125138363">"密碼"</string>
-    <!-- no translation found for unlock_set_unlock_pattern_title (1896502750816432974) -->
-    <skip />
-    <!-- no translation found for unlock_set_unlock_pattern_summary (1235339327020445576) -->
-    <skip />
-    <!-- no translation found for unlock_set_unlock_pin_title (2206721045699671063) -->
-    <skip />
-    <!-- no translation found for unlock_set_unlock_pin_summary (3898840802187521463) -->
-    <skip />
-    <!-- no translation found for unlock_set_unlock_password_title (2410408982973923603) -->
-    <skip />
-    <!-- no translation found for unlock_set_unlock_password_summary (4711043487823726994) -->
-    <skip />
-    <!-- no translation found for unlock_disable_lock_title (1427036227416979120) -->
-    <skip />
-    <!-- no translation found for unlock_disable_lock_pattern_summary (6801602880568869201) -->
-    <skip />
-    <!-- no translation found for unlock_disable_lock_pin_summary (8856842745366993387) -->
-    <skip />
-    <!-- no translation found for unlock_disable_lock_password_summary (192161194564577025) -->
-    <skip />
-    <!-- no translation found for unlock_change_lock_pattern_title (2044092014872741130) -->
-    <skip />
-    <!-- no translation found for unlock_change_lock_pin_title (806629901095938484) -->
-    <skip />
-    <!-- no translation found for unlock_change_lock_password_title (5606298470358768865) -->
-    <skip />
-    <!-- no translation found for lockpassword_password_too_short (7328975683669256660) -->
-    <skip />
-    <!-- no translation found for lockpassword_pin_too_short (2252847623267704683) -->
-    <skip />
-    <!-- no translation found for lockpassword_press_continue (6506047902828925216) -->
-    <skip />
-    <!-- no translation found for lockpassword_continue_label (4602203784934526940) -->
-    <skip />
-    <!-- no translation found for lockpassword_password_too_long (7354418473281442589) -->
-    <skip />
-    <!-- no translation found for lockpassword_pin_too_long (6290317580664119373) -->
-    <skip />
-    <!-- no translation found for lockpassword_pin_contains_non_digits (3379277100136600632) -->
-    <skip />
-    <!-- no translation found for lockpassword_illegal_character (6204396794254688549) -->
-    <skip />
-    <!-- no translation found for lockpassword_password_requires_alpha (2837140849790751729) -->
-    <skip />
-    <!-- no translation found for lockpassword_ok_label (313822574062553672) -->
-    <skip />
-    <!-- no translation found for lockpassword_cancel_label (8818529276331121899) -->
-    <skip />
-    <!-- no translation found for device_admin_title (3562216873644263804) -->
-    <skip />
-    <!-- no translation found for manage_device_admin (3864120111085199551) -->
-    <skip />
-    <!-- no translation found for manage_device_admin_summary (915390201809231575) -->
-    <skip />
+    <string name="unlock_set_unlock_pattern_title" msgid="1896502750816432974">"設定解鎖圖形"</string>
+    <string name="unlock_set_unlock_pattern_summary" msgid="1235339327020445576">"必須繪出圖形來解鎖螢幕"</string>
+    <string name="unlock_set_unlock_pin_title" msgid="2206721045699671063">"設定解鎖 PIN"</string>
+    <string name="unlock_set_unlock_pin_summary" msgid="3898840802187521463">"必須輸入數字 PIN 來解鎖螢幕"</string>
+    <string name="unlock_set_unlock_password_title" msgid="2410408982973923603">"設定解鎖密碼"</string>
+    <string name="unlock_set_unlock_password_summary" msgid="4711043487823726994">"必須輸入密碼來解鎖螢幕"</string>
+    <string name="unlock_disable_lock_title" msgid="1427036227416979120">"關閉螢幕鎖定"</string>
+    <string name="unlock_disable_lock_pattern_summary" msgid="6801602880568869201">"移除解鎖圖形"</string>
+    <string name="unlock_disable_lock_pin_summary" msgid="8856842745366993387">"移除解鎖 PIN"</string>
+    <string name="unlock_disable_lock_password_summary" msgid="192161194564577025">"移除解鎖密碼"</string>
+    <string name="unlock_change_lock_pattern_title" msgid="2044092014872741130">"變更解鎖圖形"</string>
+    <string name="unlock_change_lock_pin_title" msgid="806629901095938484">"變更解鎖 PIN"</string>
+    <string name="unlock_change_lock_password_title" msgid="5606298470358768865">"變更解鎖密碼"</string>
+    <string name="lockpassword_password_too_short" msgid="7328975683669256660">"密碼必須有至少 %d 個字元"</string>
+    <string name="lockpassword_pin_too_short" msgid="2252847623267704683">"PIN 必須有至少 %d 個字元"</string>
+    <string name="lockpassword_press_continue" msgid="6506047902828925216">"完成時請按 [繼續]"</string>
+    <string name="lockpassword_continue_label" msgid="4602203784934526940">"繼續"</string>
+    <string name="lockpassword_password_too_long" msgid="7354418473281442589">"PIN 不得超過 %d 位數"</string>
+    <string name="lockpassword_pin_too_long" msgid="6290317580664119373">"PIN 不得超過 %d 位數"</string>
+    <string name="lockpassword_pin_contains_non_digits" msgid="3379277100136600632">"PIN 只能包含數字 0-9"</string>
+    <string name="lockpassword_illegal_character" msgid="6204396794254688549">"密碼包含不適用的字元"</string>
+    <string name="lockpassword_password_requires_alpha" msgid="2837140849790751729">"Alpha 密碼必須包含至少 1 個字母"</string>
+    <string name="lockpassword_ok_label" msgid="313822574062553672">"確定"</string>
+    <string name="lockpassword_cancel_label" msgid="8818529276331121899">"取消"</string>
+    <string name="device_admin_title" msgid="3562216873644263804">"裝置管理"</string>
+    <string name="manage_device_admin" msgid="3864120111085199551">"選取裝置管理員"</string>
+    <string name="manage_device_admin_summary" msgid="915390201809231575">"新增或移除裝置管理員"</string>
     <string name="bluetooth_quick_toggle_title" msgid="1037056952714061893">"藍牙"</string>
     <string name="bluetooth_quick_toggle_summary" msgid="5293641680139873341">"開啟藍牙"</string>
     <string name="bluetooth_settings" msgid="2725796451253089609">"藍牙設定"</string>
@@ -348,68 +320,41 @@
     <string name="wifi_starting" msgid="6710266609710860129">"開啟中..."</string>
     <string name="wifi_stopping" msgid="5952909472548218348">"關閉中..."</string>
     <string name="wifi_error" msgid="3207971103917128179">"錯誤"</string>
-    <!-- no translation found for wifi_in_airplane_mode (7618393787965366655) -->
-    <skip />
-    <!-- no translation found for wifi_fail_to_scan (6194542252808587669) -->
-    <skip />
+    <string name="wifi_in_airplane_mode" msgid="7618393787965366655">"處於飛航模式時"</string>
+    <string name="wifi_fail_to_scan" msgid="6194542252808587669">"無法掃描網路"</string>
     <string name="wifi_notify_open_networks" msgid="3755768188029653293">"網路通知"</string>
     <string name="wifi_notify_open_networks_summary" msgid="3038290727701553612">"有開放網路時通知我"</string>
-    <!-- no translation found for wifi_add_network (1671334951296205616) -->
-    <skip />
+    <string name="wifi_add_network" msgid="1671334951296205616">"新增 Wi-Fi 網路"</string>
     <string name="wifi_access_points" msgid="2664629396767022441">"Wi-Fi 網路"</string>
-    <!-- no translation found for wifi_menu_scan (1470911530412095868) -->
-    <skip />
+    <string name="wifi_menu_scan" msgid="1470911530412095868">"掃描"</string>
     <string name="wifi_menu_advanced" msgid="7522252991919573664">"進階"</string>
-    <!-- no translation found for wifi_menu_connect (4996220309848349408) -->
-    <skip />
-    <!-- no translation found for wifi_menu_forget (8736964302477327114) -->
-    <skip />
-    <!-- no translation found for wifi_menu_modify (2068554918652440105) -->
-    <skip />
-    <!-- no translation found for wifi_ssid (641393708309146745) -->
-    <skip />
+    <string name="wifi_menu_connect" msgid="4996220309848349408">"連線至網路"</string>
+    <string name="wifi_menu_forget" msgid="8736964302477327114">"清除網路"</string>
+    <string name="wifi_menu_modify" msgid="2068554918652440105">"修改網路"</string>
+    <string name="wifi_ssid" msgid="641393708309146745">"網路 SSID"</string>
     <string name="wifi_security" msgid="6603611185592956936">"安全性"</string>
-    <!-- no translation found for wifi_signal (5514120261628065287) -->
-    <skip />
+    <string name="wifi_signal" msgid="5514120261628065287">"訊號強度"</string>
     <string name="wifi_status" msgid="4824568012414605414">"狀態"</string>
-    <!-- no translation found for wifi_speed (3526198708812322037) -->
-    <skip />
+    <string name="wifi_speed" msgid="3526198708812322037">"連線速度"</string>
     <string name="wifi_ip_address" msgid="1440054061044402918">"IP 位址"</string>
-    <!-- no translation found for wifi_eap_method (8529436133640730382) -->
-    <skip />
-    <!-- no translation found for wifi_eap_ca_cert (3521574865488892851) -->
-    <skip />
-    <!-- no translation found for wifi_eap_user_cert (1291089413368160789) -->
-    <skip />
-    <!-- no translation found for wifi_eap_identity (4359453783379679103) -->
-    <skip />
-    <!-- no translation found for wifi_eap_anonymous (2989469344116577955) -->
-    <skip />
-    <!-- no translation found for wifi_password (5948219759936151048) -->
-    <skip />
+    <string name="wifi_eap_method" msgid="8529436133640730382">"EAP 方法"</string>
+    <string name="wifi_eap_ca_cert" msgid="3521574865488892851">"CA 憑證"</string>
+    <string name="wifi_eap_user_cert" msgid="1291089413368160789">"使用者憑證"</string>
+    <string name="wifi_eap_identity" msgid="4359453783379679103">"識別"</string>
+    <string name="wifi_eap_anonymous" msgid="2989469344116577955">"匿名識別"</string>
+    <string name="wifi_password" msgid="5948219759936151048">"密碼"</string>
     <string name="wifi_show_password" msgid="4235237470701732009">"顯示密碼"</string>
-    <!-- no translation found for wifi_unchanged (3410422020930397102) -->
-    <skip />
-    <!-- no translation found for wifi_unspecified (5431501214192991253) -->
-    <skip />
-    <!-- no translation found for wifi_remembered (8426719916135950136) -->
-    <skip />
-    <!-- no translation found for wifi_disabled (2104752038187543712) -->
-    <skip />
-    <!-- no translation found for wifi_not_in_range (1136191511238508967) -->
-    <skip />
-    <!-- no translation found for wifi_secured (6759903183748011566) -->
-    <skip />
-    <!-- no translation found for wifi_secured_with_status (6489317496506267302) -->
-    <skip />
-    <!-- no translation found for wifi_connect (1076622875777072845) -->
-    <skip />
-    <!-- no translation found for wifi_forget (8168174695608386644) -->
-    <skip />
-    <!-- no translation found for wifi_save (3331121567988522826) -->
-    <skip />
-    <!-- no translation found for wifi_cancel (6763568902542968964) -->
-    <skip />
+    <string name="wifi_unchanged" msgid="3410422020930397102">"(未變更)"</string>
+    <string name="wifi_unspecified" msgid="5431501214192991253">"(未指定)"</string>
+    <string name="wifi_remembered" msgid="8426719916135950136">"已記憶"</string>
+    <string name="wifi_disabled" msgid="2104752038187543712">"已停用"</string>
+    <string name="wifi_not_in_range" msgid="1136191511238508967">"超出可用範圍"</string>
+    <string name="wifi_secured" msgid="6759903183748011566">"以 <xliff:g id="WIFI_SECURITY">%1$s</xliff:g> 保護連線安全性"</string>
+    <string name="wifi_secured_with_status" msgid="6489317496506267302">"<xliff:g id="WIFI_STATUS">%2$s</xliff:g>，以 <xliff:g id="WIFI_SECURITY">%1$s</xliff:g> 保護連線安全性"</string>
+    <string name="wifi_connect" msgid="1076622875777072845">"連線"</string>
+    <string name="wifi_forget" msgid="8168174695608386644">"清除"</string>
+    <string name="wifi_save" msgid="3331121567988522826">"儲存"</string>
+    <string name="wifi_cancel" msgid="6763568902542968964">"取消"</string>
     <string name="wifi_advanced_titlebar" msgid="5419052271935350999">"進階"</string>
     <string name="wifi_setting_num_channels_title" msgid="694031537019656132">"管理網域"</string>
     <string name="wifi_setting_num_channels_summary" msgid="4889355096717099141">"設定要使用的頻道號碼"</string>
@@ -428,22 +373,22 @@
     <string name="wifi_dns2" msgid="1368601006824882659">"DNS 2"</string>
     <string name="wifi_gateway" msgid="163914742461092086">"閘道"</string>
     <string name="wifi_netmask" msgid="4520635321425529085">"網路遮罩"</string>
-    <!-- no translation found for sound_settings_title (8735891486683305886) -->
-    <skip />
-    <!-- no translation found for display_settings_title (1708697328627382561) -->
-    <skip />
+    <string name="sound_settings_title" msgid="8735891486683305886">"音效"</string>
+    <string name="display_settings_title" msgid="1708697328627382561">"顯示"</string>
     <string name="sound_settings" msgid="5007659014828162881">"音效設定"</string>
     <string name="silent_mode_title" msgid="3181479108593217704">"靜音模式"</string>
-    <!-- no translation found for silent_mode_summary (3309650676072917899) -->
-    <skip />
+    <string name="silent_mode_summary" msgid="3309650676072917899">"將所有非媒體音效及鬧鐘音效設為靜音"</string>
     <string name="silent_mode_incl_alarm_summary" msgid="2088830834182228458">"將所有非媒體音效設為靜音"</string>
     <string name="ringtone_title" msgid="5379026328015343686">"電話鈴聲"</string>
     <!-- no translation found for ringtone_summary (2630023412632683493) -->
     <skip />
-    <!-- no translation found for all_volume_title (8741571721868253103) -->
-    <skip />
+    <string name="all_volume_title" msgid="8741571721868253103">"音量"</string>
     <string name="ring_volume_title" msgid="7938706566797464165">"鈴聲音量"</string>
     <!-- no translation found for ring_volume_summary (7055497624193116879) -->
+    <skip />
+    <!-- no translation found for vibrate_in_silent_title (3897968069156767036) -->
+    <skip />
+    <!-- no translation found for vibrate_in_silent_summary (3312600513070076281) -->
     <skip />
     <string name="vibrate_title" msgid="5408984084125311526">"手機震動"</string>
     <string name="vibrate_summary" msgid="5224303668448643275">"來電震動"</string>
@@ -452,17 +397,13 @@
     <skip />
     <string name="notification_pulse_title" msgid="1247988024534030629">"閃爍燈光通知"</string>
     <string name="notification_pulse_summary" msgid="6899220780534617152">"有新通知時重複閃爍軌跡球燈光"</string>
-    <!-- no translation found for incoming_call_volume_title (8073714801365904099) -->
-    <skip />
-    <!-- no translation found for notification_volume_title (2012640760341080408) -->
-    <skip />
+    <string name="incoming_call_volume_title" msgid="8073714801365904099">"鈴聲"</string>
+    <string name="notification_volume_title" msgid="2012640760341080408">"通知"</string>
     <string name="checkbox_notification_same_as_incoming_call" msgid="1073644356290338921">"通知使用來電音量"</string>
     <string name="notification_sound_dialog_title" msgid="7057274209079144726">"選取通知鈴聲"</string>
-    <!-- no translation found for media_volume_title (3576565767317118106) -->
-    <skip />
+    <string name="media_volume_title" msgid="3576565767317118106">"媒體"</string>
     <string name="media_volume_summary" msgid="5363248930648849974">"設定音樂與影片的音量"</string>
-    <!-- no translation found for alarm_volume_title (2285597478377758706) -->
-    <skip />
+    <string name="alarm_volume_title" msgid="2285597478377758706">"鬧鐘"</string>
     <string name="dock_settings_summary" msgid="455802113668982481">"附加座架的音訊設定"</string>
     <string name="dtmf_tone_enable_title" msgid="1453831168789523185">"觸控音效"</string>
     <string name="dtmf_tone_enable_summary_on" msgid="3028201873989887327">"使用撥號面板時播放按鍵音效"</string>
@@ -498,8 +439,7 @@
     <string name="animations_title" msgid="1062189037402346023">"動畫"</string>
     <string name="animations_summary_on" msgid="8843613112130484436">"開啟和關閉視窗時顯示動畫"</string>
     <string name="animations_summary_off" msgid="2777026828025551983">"開啟和關閉視窗時顯示動畫"</string>
-    <!-- no translation found for accelerometer_title (7854608399547349157) -->
-    <skip />
+    <string name="accelerometer_title" msgid="7854608399547349157">"自動旋轉螢幕"</string>
     <string name="accelerometer_summary_on" msgid="1133737282813048021">"旋轉手機時自動改變顯示方向"</string>
     <string name="accelerometer_summary_off" msgid="5485489363715740761">"旋轉手機時自動改變顯示方向"</string>
     <string name="brightness" msgid="2354961343555249270">"亮度"</string>
@@ -566,12 +506,9 @@
     <string name="memory_size" msgid="6629067715017232195">"總空間"</string>
     <string name="sd_eject" msgid="6915293408836853020">"卸載 SD 卡"</string>
     <string name="sd_eject_summary" msgid="3315557796211542962">"必須先卸載 SD 卡，才能安全移除"</string>
-    <!-- no translation found for sd_insert_summary (2048640010381803841) -->
-    <skip />
-    <!-- no translation found for sd_mount (5940523765187704135) -->
-    <skip />
-    <!-- no translation found for sd_mount_summary (4936591681679097699) -->
-    <skip />
+    <string name="sd_insert_summary" msgid="2048640010381803841">"插入要掛載的 SD 卡"</string>
+    <string name="sd_mount" msgid="5940523765187704135">"掛載 SD 卡"</string>
+    <string name="sd_mount_summary" msgid="4936591681679097699">"掛載 SD 卡"</string>
     <string name="sd_format" msgid="5448738337382712203">"將 SD 卡格式化"</string>
     <string name="sd_format_summary" msgid="6616491027883134004">"將 SD 卡格式化 (清除)"</string>
     <string name="sd_unavailable" msgid="8580107589533213904">"無法取得資訊"</string>
@@ -644,23 +581,18 @@
     <string name="media_format_gesture_explanation" msgid="4239529439389660159">"您必須畫出解鎖圖形，以確認將 SD 卡格式化。"</string>
     <string name="call_settings_title" msgid="5188713413939232801">"通話設定"</string>
     <string name="call_settings_summary" msgid="7291195704801002886">"設定語音信箱、來電轉接、來電待接及本機號碼顯示"</string>
-    <!-- no translation found for tether_settings_title (1722086243281663634) -->
+    <string name="tether_settings_title" msgid="1722086243281663634">"數據連線設定"</string>
+    <string name="tether_settings_summary" msgid="6622852565352323706">"設定及管理數據連線"</string>
+    <string name="tether_screen_title" msgid="1521966915332491855">"數據連線設定"</string>
+    <string name="enable_tether_notice_checkbox" msgid="5683371235784989464">"通知"</string>
+    <string name="enable_tether_notice_checkbox_summary" msgid="236184235861504232">"可使用 USB 數據連線時顯示通知"</string>
+    <string name="usb_tethering_button_text" msgid="585829947108007917">"USB 數據連線"</string>
+    <string name="usb_tethering_available_subtext" msgid="3755973887099973815">"已連接 USB，選取即可進行數據連線"</string>
+    <string name="usb_tethering_active_subtext" msgid="8738795360071005038">"已連線，選取即可中斷連線"</string>
+    <!-- no translation found for usb_tethering_storage_active_subtext (8064355162703861529) -->
     <skip />
-    <!-- no translation found for tether_settings_summary (6622852565352323706) -->
-    <skip />
-    <!-- no translation found for tether_screen_title (1521966915332491855) -->
-    <skip />
-    <!-- no translation found for enable_tether_notice_checkbox (5683371235784989464) -->
-    <skip />
-    <!-- no translation found for enable_tether_notice_checkbox_summary (236184235861504232) -->
-    <skip />
-    <!-- no translation found for usb_tethering_button_text (585829947108007917) -->
-    <skip />
-    <!-- no translation found for usb_tethering_available_subtext (3755973887099973815) -->
-    <skip />
-    <!-- no translation found for usb_tethering_active_subtext (8738795360071005038) -->
-    <skip />
-    <!-- no translation found for usb_tethering_unavailable_subtext (1044622421184007254) -->
+    <string name="usb_tethering_unavailable_subtext" msgid="1044622421184007254">"USB 尚未連線"</string>
+    <!-- no translation found for usb_tethering_errored_subtext (5216096403405886540) -->
     <skip />
     <string name="network_settings_title" msgid="7967552516440151852">"行動網路"</string>
     <string name="network_settings_summary" msgid="5149750850846813553">"設定漫遊、網路、APN 選項"</string>
@@ -690,29 +622,18 @@
     <string name="settings_safetylegal_activity_title" msgid="6901214628496951727">"安全資訊"</string>
     <string name="settings_safetylegal_activity_unreachable" msgid="3198912875259612887">"您的手機尚未與資料傳輸服務連線。如要檢視此資訊，請使用任何可上網的電腦前往 %s。"</string>
     <string name="settings_safetylegal_activity_loading" msgid="8059022597639516348">"載入中..."</string>
-    <!-- no translation found for lockpassword_choose_your_password_header (8624900666929394990) -->
-    <skip />
-    <!-- no translation found for lockpassword_choose_your_pin_header (7598849519816138302) -->
-    <skip />
-    <!-- no translation found for lockpassword_confirm_your_password_header (6308478184889846633) -->
-    <skip />
-    <!-- no translation found for lockpassword_confirm_your_pin_header (49038294648213197) -->
-    <skip />
-    <!-- no translation found for lockpassword_confirm_passwords_dont_match (6850677112663979120) -->
-    <skip />
-    <!-- no translation found for lockpassword_confirm_pins_dont_match (4757532830594400147) -->
-    <skip />
-    <!-- no translation found for lockpassword_password_set_toast (4875050283108629383) -->
-    <skip />
-    <!-- no translation found for lockpassword_pin_set_toast (6011826444725291475) -->
-    <skip />
-    <!-- no translation found for lockpassword_pattern_set_toast (6867259621331406236) -->
-    <skip />
-    <!-- no translation found for lock_settings_title (975088518210629938) -->
-    <skip />
+    <string name="lockpassword_choose_your_password_header" msgid="8624900666929394990">"選擇密碼"</string>
+    <string name="lockpassword_choose_your_pin_header" msgid="7598849519816138302">"選擇您的 PIN"</string>
+    <string name="lockpassword_confirm_your_password_header" msgid="6308478184889846633">"確認密碼"</string>
+    <string name="lockpassword_confirm_your_pin_header" msgid="49038294648213197">"確認 PIN"</string>
+    <string name="lockpassword_confirm_passwords_dont_match" msgid="6850677112663979120">"密碼不符"</string>
+    <string name="lockpassword_confirm_pins_dont_match" msgid="4757532830594400147">"PIN 不符"</string>
+    <string name="lockpassword_password_set_toast" msgid="4875050283108629383">"已設定密碼"</string>
+    <string name="lockpassword_pin_set_toast" msgid="6011826444725291475">"已設定 PIN"</string>
+    <string name="lockpassword_pattern_set_toast" msgid="6867259621331406236">"已設定圖形"</string>
+    <string name="lock_settings_title" msgid="975088518210629938">"螢幕解鎖"</string>
     <string name="lockpattern_change_lock_pattern_label" msgid="5679630792003440352">"變更解鎖圖形"</string>
-    <!-- no translation found for lockpattern_change_lock_pin_label (266707138486731661) -->
-    <skip />
+    <string name="lockpattern_change_lock_pin_label" msgid="266707138486731661">"變更解鎖 PIN"</string>
     <string name="lockpattern_need_to_unlock" msgid="757935356911054465">"確認儲存的圖形"</string>
     <string name="lockpattern_need_to_unlock_wrong" msgid="5629093548611791080">"很抱歉，請再試一次："</string>
     <string name="lockpattern_recording_intro_header" msgid="308287052221942814">"畫出解鎖圖形"</string>
@@ -748,8 +669,7 @@
     <string name="applications_settings_summary" msgid="2714215108369119717">"管理應用程式，設定快速啟動鍵"</string>
     <string name="applications_settings_header" msgid="6018266337275422250">"應用程式設定"</string>
     <string name="install_applications" msgid="4872012136210802181">"未知的來源"</string>
-    <!-- no translation found for install_unknown_applications (6612824788917283662) -->
-    <skip />
+    <string name="install_unknown_applications" msgid="6612824788917283662">"允許安裝非 Market 應用程式"</string>
     <string name="install_all_warning" msgid="1923717607319933741">"未知來源的應用程式可能會損害您的手機及個人資訊。如使用這些應用程式而造成手機受損或資料遺失，您必須自行承擔責任。"</string>
     <string name="application_info_label" msgid="1150486628158409543">"應用程式資訊"</string>
     <string name="storage_label" msgid="8700867073480107253">"儲存空間"</string>
@@ -778,8 +698,7 @@
     <string name="filter_apps_all" msgid="5142129378749391876">"全部"</string>
     <string name="filter_apps_third_party" msgid="7786348047690140979">"已下載"</string>
     <string name="filter_apps_running" msgid="7767071454371350486">"執行中"</string>
-    <!-- no translation found for filter_apps_onsdcard (1477351142334784771) -->
-    <skip />
+    <string name="filter_apps_onsdcard" msgid="1477351142334784771">"於 SD 卡"</string>
     <string name="loading" msgid="3200408047793887917">"載入中..."</string>
     <string name="recompute_size" msgid="7722567982831691718">"重新計算大小..."</string>
     <string name="clear_data_dlg_title" msgid="4470209520936375508">"刪除"</string>
@@ -798,18 +717,13 @@
     <string name="invalid_size_value" msgid="1901940003700269523">"無法計算封裝大小"</string>
     <string name="empty_list_msg" msgid="2901049162265094971">"您未安裝任何第三方應用程式。"</string>
     <string name="version_text" msgid="9189073826278676425">"版本 <xliff:g id="VERSION_NUM">%1$s</xliff:g>"</string>
-    <!-- no translation found for move_app (5042838441401731346) -->
-    <skip />
-    <!-- no translation found for move_app_to_internal (3919318857309344803) -->
-    <skip />
-    <!-- no translation found for move_app_to_sdcard (6784919832517488432) -->
-    <skip />
+    <string name="move_app" msgid="5042838441401731346">"移動"</string>
+    <string name="move_app_to_internal" msgid="3919318857309344803">"移到快閃記憶體"</string>
+    <string name="move_app_to_sdcard" msgid="6784919832517488432">"移到 SD 卡"</string>
     <!-- no translation found for moving (6431016143218876491) -->
     <skip />
-    <!-- no translation found for force_stop_dlg_title (2531896882056462617) -->
-    <skip />
-    <!-- no translation found for force_stop_dlg_text (3381302041569982075) -->
-    <skip />
+    <string name="force_stop_dlg_title" msgid="2531896882056462617">"強制停止"</string>
+    <string name="force_stop_dlg_text" msgid="3381302041569982075">"此應用程式即將重新啟動，確定要強制停止嗎？"</string>
     <!-- no translation found for app_install_location_title (2068975150026852168) -->
     <skip />
     <!-- no translation found for app_install_location_summary (879753854530300436) -->
@@ -832,8 +746,7 @@
     <string name="language_settings_summary" msgid="595647729475399987">"選取地區設定 (語言和地區)、文字輸入和自動校正選項"</string>
     <string name="language_category" msgid="3391756582724541530">"地區設定"</string>
     <string name="text_category" msgid="6342540511465136739">"文字設定"</string>
-    <!-- no translation found for phone_language (1165758957501090679) -->
-    <skip />
+    <string name="phone_language" msgid="1165758957501090679">"選取語言"</string>
     <!-- no translation found for phone_language_summary (3871309445655554211) -->
     <skip />
     <string name="auto_replace" msgid="6199184757891937822">"自動替換"</string>
@@ -933,10 +846,8 @@
     <string name="no_accessibility_services_summary" msgid="694578333333808159">"尚未安裝協助工具服務。"</string>
     <string name="accessibility_service_security_warning" msgid="4066258132331302670">"此協助工具服務可能會收集您輸入的所有文字，包括個人資料及信用卡號碼，但並不會收集您輸入的密碼，而且它也可能會記錄您的使用者介面互動行為。該服務是由應用程式「<xliff:g id="ACCESSIBILITY_SERVICE_NAME">%1$s</xliff:g>」所提供，要使用此協助工具服務嗎？"</string>
     <string name="accessibility_service_disable_warning" msgid="8930591383312775132">"要停用協助工具嗎？"</string>
-    <!-- no translation found for accessibility_service_no_apps_title (898893674114288531) -->
-    <skip />
-    <!-- no translation found for accessibility_service_no_apps_message (2450056749545404807) -->
-    <skip />
+    <string name="accessibility_service_no_apps_title" msgid="898893674114288531">"找不到與協助工具相關的應用程式"</string>
+    <string name="accessibility_service_no_apps_message" msgid="2450056749545404807">"您尚未安裝與協助工具相關的應用程式。"\n\n"您可以從 Android Market 下載螢幕助讀器。"\n\n"按一下 [確定] 即可安裝螢幕助讀器。"</string>
     <string name="power_usage_summary_title" msgid="5180282911164282324">"電池使用狀況"</string>
     <string name="power_usage_summary" msgid="7237084831082848168">"查看正在消耗電力的功能"</string>
     <string name="battery_since_unplugged" msgid="338073389740738437">"拔除插頭後的電池使用狀況"</string>
@@ -995,32 +906,21 @@
     <string name="menu_stats_refresh" msgid="1676215433344981075">"重新整理"</string>
     <string name="process_kernel_label" msgid="3916858646836739323">"Android 作業系統"</string>
     <string name="process_mediaserver_label" msgid="6500382062945689285">"媒體伺服器"</string>
-    <!-- no translation found for voice_input_output_settings (1336135218350444783) -->
-    <skip />
-    <!-- no translation found for voice_input_output_settings_title (2442850635048676991) -->
-    <skip />
-    <!-- no translation found for voice_search_settings_title (2775469246913196536) -->
-    <skip />
-    <!-- no translation found for keyboard_settings_title (5080115226780201234) -->
-    <skip />
-    <!-- no translation found for voice_input_category (1589318440824204736) -->
-    <skip />
-    <!-- no translation found for voice_output_category (2624538587784986229) -->
-    <skip />
-    <!-- no translation found for recognizer_title (3231385184559054457) -->
-    <skip />
-    <!-- no translation found for recognizer_settings_title (6038598099039717232) -->
-    <skip />
-    <!-- no translation found for tts_settings (8186971894801348327) -->
-    <skip />
+    <string name="voice_input_output_settings" msgid="1336135218350444783">"語音輸入裝置與輸出裝置"</string>
+    <string name="voice_input_output_settings_title" msgid="2442850635048676991">"語音輸入與輸出裝置設定"</string>
+    <string name="voice_search_settings_title" msgid="2775469246913196536">"語音搜尋"</string>
+    <string name="keyboard_settings_title" msgid="5080115226780201234">"Android 鍵盤"</string>
+    <string name="voice_input_category" msgid="1589318440824204736">"語音輸入"</string>
+    <string name="voice_output_category" msgid="2624538587784986229">"語音輸出裝置"</string>
+    <string name="recognizer_title" msgid="3231385184559054457">"語音辨識系統"</string>
+    <string name="recognizer_settings_title" msgid="6038598099039717232">"語音辨識系統設定"</string>
+    <string name="tts_settings" msgid="8186971894801348327">"文字轉語音設定"</string>
     <string name="tts_settings_title" msgid="4182348653053000933">"文字轉語音設定"</string>
     <string name="use_default_tts_settings_title" msgid="1577063839539732930">"永遠使用我的設定"</string>
     <string name="use_default_tts_settings_summary" msgid="4253502106159206276">"下列預設設定會覆寫應用程式設定"</string>
     <string name="tts_default_settings_section" msgid="5787915620218907443">"預設設定"</string>
-    <!-- no translation found for tts_default_synth_title (29467896463371992) -->
-    <skip />
-    <!-- no translation found for tts_default_synth_summary (6482936537135251690) -->
-    <skip />
+    <string name="tts_default_synth_title" msgid="29467896463371992">"預設引擎"</string>
+    <string name="tts_default_synth_summary" msgid="6482936537135251690">"將語音合成引擎設為處理語音"</string>
     <string name="tts_default_rate_title" msgid="6030550998379310088">"語音速率"</string>
     <string name="tts_default_rate_summary" msgid="4061815292287182801">"文字轉換成語音後的播放速度"</string>
     <string name="tts_default_pitch_title" msgid="6135942113172488671">"音調"</string>
@@ -1034,21 +934,23 @@
     <string name="tts_data_installed_summary" msgid="9162111552859972809">"語音合成所需的語音資料已正確安裝"</string>
     <string name="tts_demo" msgid="405357591189935876">"請聆聽合成的範例。"</string>
     <string name="tts_settings_changed_demo" msgid="4926518555912328645">"設定已變更，請聆聽語音範例。"</string>
-    <!-- no translation found for tts_engine_error (5513288178403066867) -->
+    <string name="tts_engine_error" msgid="5513288178403066867">"無法使用您選取的引擎"</string>
+    <string name="tts_engine_error_config" msgid="5820525416624637313">"設定"</string>
+    <string name="tts_engine_error_reselect" msgid="3071453963296013376">"選取其他引擎"</string>
+    <string name="tts_engine_security_warning" msgid="8786238102020223650">"此語音合成引擎可能會收集您輸入的所有語音，包括密碼和信用卡號等個人資料。此引擎來自「<xliff:g id="TTS_PLUGIN_ENGINE_NAME">%s</xliff:g>」引擎，是否要使用此語音合成引擎？"</string>
+    <string name="tts_engines_section" msgid="7515470972378742429">"引擎"</string>
+    <string name="tts_engine_name_settings" msgid="4974538563074395920">"<xliff:g id="TTS_PLUGIN_ENGINE_NAME">%s</xliff:g>設定"</string>
+    <string name="tts_engine_name_is_enabled_summary" msgid="4909484006804022115">"已啟用<xliff:g id="TTS_PLUGIN_ENGINE_NAME">%s</xliff:g>"</string>
+    <string name="tts_engine_name_is_disabled_summary" msgid="7644198182255168200">"已停用<xliff:g id="TTS_PLUGIN_ENGINE_NAME">%s</xliff:g>"</string>
+    <!-- no translation found for pico_languages_and_voices (4226463566815349260) -->
     <skip />
-    <!-- no translation found for tts_engine_error_config (5820525416624637313) -->
+    <!-- no translation found for pico_installed (2452546687858267414) -->
     <skip />
-    <!-- no translation found for tts_engine_error_reselect (3071453963296013376) -->
+    <!-- no translation found for pico_not_installed (6266845418419994311) -->
     <skip />
-    <!-- no translation found for tts_engine_security_warning (8786238102020223650) -->
+    <!-- no translation found for pico_voice_summary_female (8047327176247727492) -->
     <skip />
-    <!-- no translation found for tts_engines_section (7515470972378742429) -->
-    <skip />
-    <!-- no translation found for tts_engine_name_settings (4974538563074395920) -->
-    <skip />
-    <!-- no translation found for tts_engine_name_is_enabled_summary (4909484006804022115) -->
-    <skip />
-    <!-- no translation found for tts_engine_name_is_disabled_summary (7644198182255168200) -->
+    <!-- no translation found for pico_voice_summary_male (8331266854058577610) -->
     <skip />
     <string name="gadget_title" msgid="7455548605888590466">"電源控制"</string>
     <string name="gadget_toggle_wifi" msgid="2382963973155082629">"正在更新 Wi-Fi 設定"</string>
@@ -1157,61 +1059,36 @@
     <string name="credentials_erased" msgid="7700309135582200849">"已清除認證儲存空間內容。"</string>
     <string name="credentials_enabled" msgid="7588607413349978930">"已啟用認證儲存空間。"</string>
     <string name="credentials_disabled" msgid="7453188089059045380">"已停用認證儲存空間。"</string>
-    <!-- no translation found for encrypted_fs_category (1841367653663913956) -->
-    <skip />
-    <!-- no translation found for encrypted_fs_enable (3884033081603327729) -->
-    <skip />
-    <!-- no translation found for encrypted_fs_enable_summary (5635188119509076089) -->
-    <skip />
-    <!-- no translation found for encrypted_fs_enable_dialog (919487211207214266) -->
-    <skip />
-    <!-- no translation found for encrypted_fs_disable_dialog (6960413613985682501) -->
-    <skip />
-    <!-- no translation found for encrypted_fs_enable_button (8453841319751433751) -->
-    <skip />
-    <!-- no translation found for encrypted_fs_disable_button (8468354944060220496) -->
-    <skip />
-    <!-- no translation found for encrypted_fs_cancel_button (4785921255266305799) -->
-    <skip />
-    <!-- no translation found for encrypted_fs_cancel_confirm (853572431153803557) -->
-    <skip />
-    <!-- no translation found for encrypted_fs_alert_dialog_title (583462447886934755) -->
-    <skip />
+    <string name="encrypted_fs_category" msgid="1841367653663913956">"加密檔案系統"</string>
+    <string name="encrypted_fs_enable" msgid="3884033081603327729">"加密使用者隱私資訊"</string>
+    <string name="encrypted_fs_enable_summary" msgid="5635188119509076089">"啟用加密檔案系統，以儲存此裝置的使用者隱私資訊"</string>
+    <string name="encrypted_fs_enable_dialog" msgid="919487211207214266">"啟用加密檔案系統前必須抹除裝置資料。"</string>
+    <string name="encrypted_fs_disable_dialog" msgid="6960413613985682501">"停用加密檔案系統前必須抹除裝置資料。"</string>
+    <string name="encrypted_fs_enable_button" msgid="8453841319751433751">"啟用"</string>
+    <string name="encrypted_fs_disable_button" msgid="8468354944060220496">"停用"</string>
+    <string name="encrypted_fs_cancel_button" msgid="4785921255266305799">"取消"</string>
+    <string name="encrypted_fs_cancel_confirm" msgid="853572431153803557">"已取消變更加密檔案系統模式。"</string>
+    <string name="encrypted_fs_alert_dialog_title" msgid="583462447886934755">"加密檔案系統警告。"</string>
     <string name="emergency_tone_title" msgid="1055954530111587114">"緊急警示音"</string>
     <string name="emergency_tone_summary" msgid="722259232924572153">"設定撥打緊急電話時的運作方式"</string>
     <string name="privacy_settings" msgid="9206631214140954954">"隱私設定"</string>
     <string name="privacy_settings_title" msgid="1987089301293213705">"隱私設定"</string>
-    <!-- no translation found for backup_section_title (717834414028702406) -->
-    <skip />
+    <string name="backup_section_title" msgid="717834414028702406">"備份與還原"</string>
     <string name="personal_data_section_title" msgid="7815209034443782061">"個人資料"</string>
     <string name="backup_settings_title" msgid="2968262658155327829">"備份我的設定"</string>
-    <!-- no translation found for auto_restore_title (5397528966329126506) -->
-    <skip />
-    <!-- no translation found for auto_restore_summary (2029683590724508019) -->
-    <skip />
-    <!-- no translation found for backup_erase_dialog_title (3438255037256586237) -->
-    <skip />
-    <!-- no translation found for backup_erase_dialog_message (2948090854996352245) -->
-    <skip />
-    <!-- no translation found for device_admin_settings_title (1335557832906433309) -->
-    <skip />
-    <!-- no translation found for active_device_admin_msg (6930903262612422111) -->
-    <skip />
-    <!-- no translation found for remove_device_admin (3596845261596451437) -->
-    <skip />
-    <!-- no translation found for select_device_admin_msg (2645509057946368094) -->
-    <skip />
-    <!-- no translation found for no_device_admins (702695100241728775) -->
-    <skip />
-    <!-- no translation found for add_device_admin_msg (6246742476064507965) -->
-    <skip />
-    <!-- no translation found for add_device_admin (7133327675884827091) -->
-    <skip />
-    <!-- no translation found for device_admin_add_title (7705551449705676363) -->
-    <skip />
-    <!-- no translation found for device_admin_warning (1149471041373876923) -->
-    <skip />
-    <!-- no translation found for device_admin_status (7169948053970923035) -->
-    <skip />
+    <string name="auto_restore_title" msgid="5397528966329126506">"自動還原功能"</string>
+    <string name="auto_restore_summary" msgid="2029683590724508019">"安裝後可由備份檔案復原應用程式資料"</string>
+    <string name="backup_erase_dialog_title" msgid="3438255037256586237">"備份"</string>
+    <string name="backup_erase_dialog_message" msgid="2948090854996352245">"您確定要停止備份設定及應用程式資料，並清除 Google 伺服器上的所有相關資料嗎？"</string>
+    <string name="device_admin_settings_title" msgid="1335557832906433309">"裝置管理設定"</string>
+    <string name="active_device_admin_msg" msgid="6930903262612422111">"裝置管理員"</string>
+    <string name="remove_device_admin" msgid="3596845261596451437">"撤銷"</string>
+    <string name="select_device_admin_msg" msgid="2645509057946368094">"裝置管理員"</string>
+    <string name="no_device_admins" msgid="702695100241728775">"沒有可用的裝置管理員"</string>
+    <string name="add_device_admin_msg" msgid="6246742476064507965">"啟動裝置管理員？"</string>
+    <string name="add_device_admin" msgid="7133327675884827091">"啟用"</string>
+    <string name="device_admin_add_title" msgid="7705551449705676363">"裝置管理員"</string>
+    <string name="device_admin_warning" msgid="1149471041373876923">"啟用此管理員將允許 <xliff:g id="APP_NAME">%1$s</xliff:g> 應用程式執行以下活動："</string>
+    <string name="device_admin_status" msgid="7169948053970923035">"此管理員正在作業中，且允許 <xliff:g id="APP_NAME">%1$s</xliff:g> 應用程式執行以下活動："</string>
     <string name="untitled_apn" msgid="1230060359198685513">"未命名"</string>
 </resources>
