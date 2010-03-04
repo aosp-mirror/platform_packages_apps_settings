@@ -156,7 +156,10 @@ public class SettingsAppWidgetProvider extends AppWidgetProvider {
                 views.setImageViewResource(R.id.ind_wifi, R.drawable.appwidget_settings_ind_mid_l);
                 break;
         }
-        if (getBrightness(context)) {
+        if (getBrightnessMode(context)) {
+            views.setImageViewResource(R.id.img_brightness, R.drawable.ic_appwidget_settings_brightness_auto);
+            views.setImageViewResource(R.id.ind_brightness, R.drawable.appwidget_settings_ind_on_r);
+        } else if (getBrightness(context)) {
             views.setImageViewResource(R.id.img_brightness, R.drawable.ic_appwidget_settings_brightness_on);
             views.setImageViewResource(R.id.ind_brightness, R.drawable.appwidget_settings_ind_on_r);
         } else {
@@ -380,6 +383,27 @@ public class SettingsAppWidgetProvider extends AppWidgetProvider {
     }
 
     /**
+     * Gets state of brightness mode.
+     *
+     * @param context
+     * @return true if auto brightness is on.
+     */
+    private static boolean getBrightnessMode(Context context) {
+        try {
+            IPowerManager power = IPowerManager.Stub.asInterface(
+                    ServiceManager.getService("power"));
+            if (power != null) {
+                int brightnessMode = Settings.System.getInt(context.getContentResolver(),
+                        Settings.System.SCREEN_BRIGHTNESS_MODE);
+                return brightnessMode == Settings.System.SCREEN_BRIGHTNESS_MODE_AUTOMATIC;
+            }
+        } catch (Exception e) {
+            Log.d(TAG, "getBrightnessMode: " + e);
+        }
+        return false;
+    }
+
+    /**
      * Increases or decreases the brightness.
      *
      * @param context
@@ -392,25 +416,37 @@ public class SettingsAppWidgetProvider extends AppWidgetProvider {
                 ContentResolver cr = context.getContentResolver();
                 int brightness = Settings.System.getInt(cr,
                         Settings.System.SCREEN_BRIGHTNESS);
-                // Rotate MINIMUM -> DEFAULT -> MAXIMUM
+                int brightnessMode = Settings.System.SCREEN_BRIGHTNESS_MODE_MANUAL;
+                //Only get brightness setting if available
+                if (context.getResources().getBoolean(
+                        com.android.internal.R.bool.config_automatic_brightness_available)) {
+                    brightnessMode = Settings.System.getInt(cr,
+                            Settings.System.SCREEN_BRIGHTNESS_MODE);
+                }
+
+                // Rotate AUTO -> MINIMUM -> DEFAULT -> MAXIMUM
                 // Technically, not a toggle...
-                if (brightness < DEFAULT_BACKLIGHT) {
+                if (brightnessMode == Settings.System.SCREEN_BRIGHTNESS_MODE_AUTOMATIC) {
+                    brightness = MINIMUM_BACKLIGHT;
+                    brightnessMode = Settings.System.SCREEN_BRIGHTNESS_MODE_MANUAL;
+                } else if (brightness < DEFAULT_BACKLIGHT) {
                     brightness = DEFAULT_BACKLIGHT;
                 } else if (brightness < MAXIMUM_BACKLIGHT) {
                     brightness = MAXIMUM_BACKLIGHT;
                 } else {
-                    brightness = MINIMUM_BACKLIGHT;
+                    brightnessMode = Settings.System.SCREEN_BRIGHTNESS_MODE_AUTOMATIC;
                 }
-                power.setBacklightBrightness(brightness);
-                Settings.System.putInt(cr, Settings.System.SCREEN_BRIGHTNESS, brightness);
+
                 if (context.getResources().getBoolean(
                         com.android.internal.R.bool.config_automatic_brightness_available)) {
-                    // Disable automatic brightness
+                    // Set screen brightness mode (automatic or manual)
                     Settings.System.putInt(context.getContentResolver(),
                             Settings.System.SCREEN_BRIGHTNESS_MODE,
-                            Settings.System.SCREEN_BRIGHTNESS_MODE_MANUAL);
-                    // Set it again in case auto brightness was on
+                            brightnessMode);
+                }
+                if (brightnessMode == Settings.System.SCREEN_BRIGHTNESS_MODE_MANUAL) {
                     power.setBacklightBrightness(brightness);
+                    Settings.System.putInt(cr, Settings.System.SCREEN_BRIGHTNESS, brightness);
                 }
             }
         } catch (RemoteException e) {
