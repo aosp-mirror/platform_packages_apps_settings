@@ -24,6 +24,8 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
 import android.content.pm.ServiceInfo;
+import android.content.pm.PackageManager.NameNotFoundException;
+import android.content.res.Resources;
 import android.content.res.TypedArray;
 import android.content.res.XmlResourceParser;
 import android.os.Bundle;
@@ -164,6 +166,9 @@ public class VoiceInputOutputSettings extends PreferenceActivity
                         " meta-data for " + si.packageName);
             }
             
+            Resources res = getPackageManager().getResourcesForApplication(
+                    si.applicationInfo);
+            
             AttributeSet attrs = Xml.asAttributeSet(parser);
             
             int type;
@@ -177,7 +182,7 @@ public class VoiceInputOutputSettings extends PreferenceActivity
                         "Meta-data does not start with recognition-service tag");
             }
             
-            TypedArray array = getResources().obtainAttributes(attrs,
+            TypedArray array = res.obtainAttributes(attrs,
                     com.android.internal.R.styleable.RecognitionService);
             settingsActivity = array.getString(
                     com.android.internal.R.styleable.RecognitionService_settingsActivity);
@@ -185,6 +190,8 @@ public class VoiceInputOutputSettings extends PreferenceActivity
         } catch (XmlPullParserException e) {
             Log.e(TAG, "error parsing recognition service meta-data", e);
         } catch (IOException e) {
+            Log.e(TAG, "error parsing recognition service meta-data", e);
+        } catch (NameNotFoundException e) {
             Log.e(TAG, "error parsing recognition service meta-data", e);
         } finally {
             if (parser != null) parser.close();
