@@ -26,10 +26,10 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.net.ConnectivityManager;
 import android.os.Environment;
+import android.preference.CheckBoxPreference;
 import android.preference.Preference;
 import android.preference.PreferenceActivity;
 import android.preference.PreferenceScreen;
-import android.preference.CheckBoxPreference;
 import android.provider.Settings;
 import android.util.Log;
 
@@ -43,7 +43,7 @@ public class TetherSettings extends PreferenceActivity {
     private static final String ENABLE_WIFI_AP = "enable_wifi_ap";
     private static final String WIFI_AP_SETTINGS = "wifi_ap_settings";
 
-    private PreferenceScreen mUsbTether;
+    private CheckBoxPreference mUsbTether;
 
     private CheckBoxPreference mEnableWifiAp;
     private PreferenceScreen mWifiApSettings;
@@ -63,9 +63,9 @@ public class TetherSettings extends PreferenceActivity {
 
         addPreferencesFromResource(R.xml.tether_prefs);
 
-        mUsbTether = (PreferenceScreen) findPreference(USB_TETHER_SETTINGS);
         mEnableWifiAp = (CheckBoxPreference) findPreference(ENABLE_WIFI_AP);
         mWifiApSettings = (PreferenceScreen) findPreference(WIFI_AP_SETTINGS);
+        mUsbTether = (CheckBoxPreference) findPreference(USB_TETHER_SETTINGS);
 
         ConnectivityManager cm =
                 (ConnectivityManager)getSystemService(Context.CONNECTIVITY_SERVICE);
@@ -93,7 +93,7 @@ public class TetherSettings extends PreferenceActivity {
             ArrayList<String> errored = intent.getStringArrayListExtra(
                     ConnectivityManager.EXTRA_ERRORED_TETHER);
 
-            updateState(available, active, errored);
+            updateState(available.toArray(), active.toArray(), errored.toArray());
         }
     }
 
@@ -119,26 +119,52 @@ public class TetherSettings extends PreferenceActivity {
         mWifiApEnabler.pause();
     }
 
-    private void updateState(ArrayList<String> available, ArrayList<String> tethered,
-            ArrayList<String> errored) {
+    private void updateState() {
+        ConnectivityManager cm =
+                (ConnectivityManager)getSystemService(Context.CONNECTIVITY_SERVICE);
+
+        String[] available = cm.getTetherableIfaces();
+        String[] tethered = cm.getTetheredIfaces();
+        String[] errored = cm.getTetheringErroredIfaces();
+        updateState(available, tethered, errored);
+    }
+
+    private void updateState(Object[] available, Object[] tethered,
+            Object[] errored) {
+        ConnectivityManager cm =
+                (ConnectivityManager)getSystemService(Context.CONNECTIVITY_SERVICE);
         boolean usbTethered = false;
         boolean usbAvailable = false;
+        int usbError = ConnectivityManager.TETHER_ERROR_NO_ERROR;
         boolean usbErrored = false;
         boolean wifiTethered = false;
         boolean wifiAvailable = false;
+        int wifiError = ConnectivityManager.TETHER_ERROR_NO_ERROR;
         boolean massStorageActive =
                 Environment.MEDIA_SHARED.equals(Environment.getExternalStorageState());
         boolean wifiErrored = false;
 
-        for (String s : available) {
+        for (Object o : available) {
+            String s = (String)o;
             for (String regex : mUsbRegexs) {
-                if (s.matches(regex)) usbAvailable = true;
+                if (s.matches(regex)) {
+                    usbAvailable = true;
+                    if (usbError == ConnectivityManager.TETHER_ERROR_NO_ERROR) {
+                        usbError = cm.getLastTetherError(s);
+                    }
+                }
             }
             for (String regex : mWifiRegexs) {
-                if (s.matches(regex)) wifiAvailable = true;
+                if (s.matches(regex)) {
+                    wifiAvailable = true;
+                    if (wifiError == ConnectivityManager.TETHER_ERROR_NO_ERROR) {
+                        wifiError = cm.getLastTetherError(s);
+                    }
+                }
             }
         }
-        for (String s : tethered) {
+        for (Object o : tethered) {
+            String s = (String)o;
             for (String regex : mUsbRegexs) {
                 if (s.matches(regex)) usbTethered = true;
             }
@@ -146,7 +172,8 @@ public class TetherSettings extends PreferenceActivity {
                 if (s.matches(regex)) wifiTethered = true;
             }
         }
-        for (String s: errored) {
+        for (Object o: errored) {
+            String s = (String)o;
             for (String regex : mUsbRegexs) {
                 if (s.matches(regex)) usbErrored = true;
             }
@@ -155,6 +182,9 @@ public class TetherSettings extends PreferenceActivity {
             }
         }
 
+        if (usbTethered || wifiTethered) {
+//            showTetheredNotification();
+        }
         if (usbTethered) {
             mUsbTether.setSummary(R.string.usb_tethering_active_subtext);
             mUsbTether.setEnabled(true);
@@ -162,7 +192,11 @@ public class TetherSettings extends PreferenceActivity {
             mUsbTether.setSummary(R.string.usb_tethering_storage_active_subtext);
             mUsbTether.setEnabled(false);
         } else if (usbAvailable) {
-            mUsbTether.setSummary(R.string.usb_tethering_available_subtext);
+            if (usbError == ConnectivityManager.TETHER_ERROR_NO_ERROR) {
+                mUsbTether.setSummary(R.string.usb_tethering_available_subtext);
+            } else {
+                mUsbTether.setSummary(R.string.usb_tethering_errored_subtext);
+            }
             mUsbTether.setEnabled(true);
         } else if (usbErrored) {
             mUsbTether.setSummary(R.string.usb_tethering_errored_subtext);
@@ -172,4 +206,93 @@ public class TetherSettings extends PreferenceActivity {
             mUsbTether.setEnabled(false);
         }
     }
+
+    @Override
+    public boolean onPreferenceTreeClick(PreferenceScreen preferenceScreen, Preference preference) {
+        if (preference == mUsbTether) {
+            boolean newState = mUsbTether.isChecked();
+
+            ConnectivityManager cm =
+                    (ConnectivityManager)getSystemService(Context.CONNECTIVITY_SERVICE);
+
+            if (newState) {
+                String[] available = cm.getTetherableIfaces();
+
+                String usbIface = findIface(available, mUsbRegexs);
+                if (usbIface == null) {
+                    updateState();
+                    return true;
+                }
+                if (cm.tether(usbIface) != ConnectivityManager.TETHER_ERROR_NO_ERROR) {
+                    mUsbTether.setChecked(false);
+                    mUsbTether.setSummary(R.string.usb_tethering_errored_subtext);
+                    return true;
+                }
+                mUsbTether.setSummary("");
+            } else {
+                String [] tethered = cm.getTetheredIfaces();
+
+                String usbIface = findIface(tethered, mUsbRegexs);
+                if (usbIface == null) {
+                    updateState();
+                    return true;
+                }
+                if (cm.untether(usbIface) != ConnectivityManager.TETHER_ERROR_NO_ERROR) {
+                    mUsbTether.setSummary(R.string.usb_tethering_errored_subtext);
+                    return true;
+                }
+                mUsbTether.setSummary("");
+            }
+        }
+        return false;
+    }
+
+    private String findIface(String[] ifaces, String[] regexes) {
+        for (String iface : ifaces) {
+            for (String regex : regexes) {
+                if (iface.matches(regex)) {
+                    return iface;
+                }
+            }
+        }
+        return null;
+    }
+
+//    private showTetheredNotification() {
+//        NotificationManager notificationManager = (NotificationManager)mContext.
+//                getSystemService(Context.NOTIFICATION_SERVICE);
+//        if (notificationManager == null) {
+//            return;
+//        }
+//
+//        Intent intent = new Intent();
+//
+//        PendingIntent pi = PendingIntent.getActivity(mContext, 0, intent, 0);
+//
+//        Resources r = Resources.getSystem();
+//        CharSequence title = r.getText(com.android.internal.R.string.
+//                tether_stop_notification_title);
+//        CharSequence message = r.getText(com.android.internal.R.string.
+//                tether_stop_notification_message);
+//
+//        if(mTetheringNotification == null) {
+//            mTetheringNotification = new Notification();
+//            mTetheringNotification.when = 0;
+//        }
+//        mTetheringNotification.icon = com.android.internal.R.drawable.stat_sys_tether_usb;
+//
+//        boolean playSounds = false;
+//        //playSounds = SystemProperties.get("persist.service.mount.playsnd", "1").equals("1");
+//        if (playSounds) {
+//            mTetheringNotification.defaults |= Notification.DEFAULT_SOUND;
+//        } else {
+//            mTetheringNotification.defaults &= ~Notification.DEFAULT_SOUND;
+//        }
+//        mTetheringNotification.flags = Notification.FLAG_ONGOING_EVENT;
+//        mTetheringNotification.tickerText = title;
+//        mTetheringNotification.setLatestEventInfo(mContext, title, message, pi);
+//
+//        notificationManager.notify(mTetheringNotification.icon, mTetheringNotification);
+//    }
+
 }

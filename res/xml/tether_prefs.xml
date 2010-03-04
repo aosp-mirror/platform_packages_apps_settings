@@ -17,21 +17,10 @@
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
         android:title="@string/tether_screen_title">
 
-    <PreferenceCategory
-        android:key="usb_category"
-        android:title="@string/usb_title">
-
-        <PreferenceScreen
-            android:key="usb_tether_settings"
-            android:title="@string/usb_tethering_button_text"
-            android:widgetLayout="@*android:layout/preference_dialog" >
-            <intent
-                android:action="android.intent.action.MAIN"
-                android:targetPackage="android"
-                android:targetClass="com.android.internal.app.TetherActivity" />
-    </PreferenceScreen>
-
-    </PreferenceCategory>
+    <CheckBoxPreference
+        android:key="usb_tether_settings"
+        android:title="@string/usb_tethering_button_text"
+        android:persistent="false" />
 
     <PreferenceCategory
         android:key="wifi_category"

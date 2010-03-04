@@ -1374,9 +1374,9 @@
     <string name="call_settings_summary">Set up voicemail, call forwarding, call waiting, caller ID</string>
 
     <!-- Tethering controls, item title to go into the tethering settings -->
-    <string name="tether_settings_title">Tethering settings</string>
+    <string name="tether_settings_title">Tethering</string>
     <!-- Tethering controls, the item summary for the user to go into the tethering settings -->
-    <string name="tether_settings_summary">Set up and manage tethering</string>
+    <string name="tether_settings_summary">Set up &amp; manage tethering</string>
 
     <!-- Title of the screen for adjusting tethering settings -->
     <string name="tether_screen_title">Tethering settings</string>
@@ -1385,15 +1385,23 @@
     <string name="usb_title">USB</string>
     <string name="usb_tethering_button_text">USB tethering</string>
     <!-- USB available subtext - shown when USB is connected but not currently being tethered -->
-    <string name="usb_tethering_available_subtext">USB connected, select to tether</string>
+    <string name="usb_tethering_available_subtext">USB connected, check to tether</string>
     <!-- USB tethered subtext - shown when USB is connected and being tethered -->
-    <string name="usb_tethering_active_subtext">Connected, select to disconnect</string>
+    <string name="usb_tethering_active_subtext">Tethered</string>
     <!-- USB storage subtext - shown when tethering is disabled because USB storage is active -->
-    <string name="usb_tethering_storage_active_subtext">Tethering disabled (USB storage is in use)</string>
+    <string name="usb_tethering_storage_active_subtext">Can\'t tether when USB storage in use</string>
     <!-- USB unavailable subtext - shown when USB is not connected -->
     <string name="usb_tethering_unavailable_subtext">USB not connected</string>
     <!-- USB errored subtext - shown when USB is broken for some reason -->
-    <string name="usb_tethering_errored_subtext">USB tethering has had a problem.</string>
+    <string name="usb_tethering_errored_subtext">USB tethering error</string>
+
+    <!-- Thethering help button - calls up a web view with general tethering info -->
+    <string name="tethering_help_button_text">Tethering help</string>
+
+    <!-- Tethered notification text - shown in the notification bar when tethering is active -->
+    <string name="tethered_notifcation_title">Tethering active</string>
+    <!-- Tethered notification message - shown under the notification title -->
+    <string name="tethered_notification_message">Touch to configure</string>
 
     <!-- Wireless controls, item title to go into the network settings -->
     <string name="network_settings_title">Mobile networks</string>
