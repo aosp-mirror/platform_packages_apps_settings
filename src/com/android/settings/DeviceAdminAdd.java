@@ -64,6 +64,7 @@ public class DeviceAdminAdd extends Activity {
     TextView mAdminWarning;
     ViewGroup mAdminPolicies;
     Button mActionButton;
+    Button mCancelButton;
     
     View mSelectLayout;
     
@@ -133,6 +134,12 @@ public class DeviceAdminAdd extends Activity {
         mAddMsg = (TextView)findViewById(R.id.add_msg);
         mAdminWarning = (TextView)findViewById(R.id.admin_warning);
         mAdminPolicies = (ViewGroup)findViewById(R.id.admin_policies);
+        mCancelButton = (Button)findViewById(R.id.cancel_button);
+        mCancelButton.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                finish();
+            }
+        });
         mActionButton = (Button)findViewById(R.id.action_button);
         mActionButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {

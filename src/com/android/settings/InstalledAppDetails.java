@@ -592,6 +592,7 @@ public class InstalledAppDetails extends Activity implements View.OnClickListene
         @Override
         public void onReceive(Context context, Intent intent) {
             mForceStopButton.setEnabled(getResultCode() != RESULT_CANCELED);
+            mForceStopButton.setOnClickListener(InstalledAppDetails.this);
         }
     };
     
@@ -634,13 +635,6 @@ public class InstalledAppDetails extends Activity implements View.OnClickListene
             }
             mPm.deleteApplicationCacheFiles(packageName, mClearCacheObserver);
         } else if (v == mForceStopButton) {
-            // TODO Once framework supports a pre-broadcast to
-            // actually find out if an application will be restarted right
-            // after its killed, there is no way we can determine if
-            // a force stop will really kill the app. So just ignore
-            // the dialog for now and force stop the package. Please note
-            // that the button cannot be enabled or disabled since
-            // we do not have this info for now.
             forceStopPackage(mAppInfo.packageName);
         } else if (v == mMoveAppButton) {
             if (mPackageMoveObserver == null) {
