@@ -36,11 +36,8 @@ import java.util.ArrayList;
  * Displays preferences for Tethering.
  */
 public class TetherSettings extends PreferenceActivity {
-
-    private static final String ENABLE_TETHER_NOTICE = "enable_tether_notice";
     private static final String USB_TETHER_SETTINGS = "usb_tether_settings";
 
-    private CheckBoxPreference mEnableTetherNotice;
     private PreferenceScreen mUsbTether;
 
     private BroadcastReceiver mTetherChangeReceiver;
@@ -57,7 +54,6 @@ public class TetherSettings extends PreferenceActivity {
 
         addPreferencesFromResource(R.xml.tether_prefs);
 
-        mEnableTetherNotice = (CheckBoxPreference) findPreference(ENABLE_TETHER_NOTICE);
         mUsbTether = (PreferenceScreen) findPreference(USB_TETHER_SETTINGS);
 
         ConnectivityManager cm =
@@ -65,7 +61,6 @@ public class TetherSettings extends PreferenceActivity {
         mUsbRegexs = cm.getTetherableUsbRegexs();
         if (mUsbRegexs.length == 0) {
             getPreferenceScreen().removePreference(mUsbTether);
-            getPreferenceScreen().removePreference(mEnableTetherNotice);
         }
         mWifiRegexs = cm.getTetherableWifiRegexs();
     }
@@ -88,8 +83,6 @@ public class TetherSettings extends PreferenceActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        mEnableTetherNotice.setChecked(Settings.Secure.getInt(getContentResolver(),
-                Settings.Secure.TETHER_NOTIFY, 0) != 0);
 
         IntentFilter filter = new IntentFilter(ConnectivityManager.ACTION_TETHER_STATE_CHANGED);
         filter.addAction(Intent.ACTION_MEDIA_SHARED);
@@ -160,17 +153,4 @@ public class TetherSettings extends PreferenceActivity {
             mUsbTether.setEnabled(false);
         }
     }
-
-    @Override
-    public boolean onPreferenceTreeClick(PreferenceScreen preferenceScreen, Preference preference) {
-
-        if (preference == mEnableTetherNotice) {
-            boolean newState = mEnableTetherNotice.isChecked();
-            Settings.Secure.putInt(getContentResolver(),
-                    Settings.Secure.TETHER_NOTIFY, newState ? 1 : 0);
-            return true;
-        }
-        return false;
-    }
-
 }
