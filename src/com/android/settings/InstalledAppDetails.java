@@ -34,6 +34,7 @@ import android.content.pm.IPackageMoveObserver;
 import android.content.pm.IPackageStatsObserver;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
+import android.content.pm.PackageParser;
 import android.content.pm.PackageStats;
 import android.content.pm.PackageManager.NameNotFoundException;
 import android.net.Uri;
@@ -191,9 +192,12 @@ public class InstalledAppDetails extends Activity implements View.OnClickListene
         String pkgName = mAppInfo.packageName;
         boolean dataOnly = false;
         ApplicationInfo info1 = null;
+        PackageInfo pkgInfo = null;
 
         try {
             info1 = mPm.getApplicationInfo(pkgName, 0);
+            pkgInfo = mPm.getPackageInfo(mAppInfo.packageName,
+                    PackageManager.GET_UNINSTALLED_PACKAGES);
         } catch (NameNotFoundException e) {
         }
         dataOnly = (info1 == null) && (mAppInfo != null);
@@ -207,6 +211,12 @@ public class InstalledAppDetails extends Activity implements View.OnClickListene
             moveDisable = (mAppInfo.flags & ApplicationInfo.FLAG_FORWARD_LOCK) != 0 ||
             (mAppInfo.flags & ApplicationInfo.FLAG_SYSTEM) != 0;
             mMoveAppButton.setText(R.string.move_app_to_sdcard);
+        }
+        if (pkgInfo != null && pkgInfo.installLocation ==
+            PackageInfo.INSTALL_LOCATION_INTERNAL_ONLY) {
+            // If an application explicitly specifies install location
+            // consider that
+            moveDisable = true;
         }
         if (moveDisable) {
             mMoveAppButton.setEnabled(false);
