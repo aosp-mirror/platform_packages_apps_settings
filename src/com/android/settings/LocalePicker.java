@@ -19,7 +19,7 @@ package com.android.settings;
 import android.app.ActivityManagerNative;
 import android.app.IActivityManager;
 import android.app.ListActivity;
-import android.backup.BackupManager;
+import android.app.backup.BackupManager;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.os.RemoteException;

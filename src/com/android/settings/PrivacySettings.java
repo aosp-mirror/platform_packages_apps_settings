@@ -18,7 +18,7 @@ package com.android.settings;
 
 import android.app.AlertDialog;
 import android.app.Dialog;
-import android.backup.IBackupManager;
+import android.app.backup.IBackupManager;
 import android.content.ContentResolver;
 import android.content.Context;
 import android.content.DialogInterface;
