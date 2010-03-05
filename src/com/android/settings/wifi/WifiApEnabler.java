@@ -86,7 +86,10 @@ public class WifiApEnabler implements Preference.OnPreferenceChangeListener,
 
         if (enable && mWifiManager.isWifiEnabled()) {
             AlertDialog.Builder builder = new AlertDialog.Builder(mContext);
-            builder.setMessage(R.string.wifi_ap_tether_message)
+            /**
+             * TODO: this alert will go away.
+             */
+            builder.setMessage("Turning off Wifi client. Enabling Wifi tethering")
                    .setCancelable(false)
                    .setPositiveButton(android.R.string.ok, this)
                    .setNegativeButton(android.R.string.cancel, this);

@@ -846,28 +846,27 @@
     <string name="wifi_gateway">Gateway</string>
     <!-- Label for the netmask of the network -->
     <string name="wifi_netmask">Netmask</string>
-    <!-- Alert message to indicate Wi-Fi AP will be disabled to enable station mode operation-->
-    <string name="wifi_ap_disable_message">Wi-fi Access Point for tethering is currently enabled. Turning Wi-fi on will disable Access Point operation.</string>
 
     <!-- Wifi AP settings-->
-    <!-- Title for Wifi AP tether settings-->
-    <string name="wifi_ap_title">Wi-Fi</string>
-    <!-- Label for checkbox. Toggles Access Point on/off -->
-    <string name="wifi_ap">Wi-Fi AP</string>
-    <!-- Summary for the AP toggle checkbox. -->
-    <string name="wifi_ap_summary">Set as Access Point</string>
-    <!-- Title of the Wi-fi settings screen and label for the settings preference-->
-    <string name="wifi_ap_settings">Wi-Fi AP settings</string>
-    <!-- Summary for the settings preference. -->
-    <string name="wifi_ap_settings_summary">Set up &amp; manage Access Point</string>
-    <!-- Used to open the ssid and security dialog for Wifi Access Point-->
-    <string name="wifi_ap_ssid_and_security">SSID and Security</string>
-    <!-- Action message to configure Access Point ssid and security-->
-    <string name="wifi_ap_configure_network">Configure AP</string>
-    <!-- Used to open the channel selection dialog -->
-    <string name="wifi_ap_channel">Channel </string>
-    <!-- The Toast message shown to user when tethering is enabled with Wifi on-->
-    <string name="wifi_ap_tether_message">Enabling Wi-fi Access Point for tethering. This will reset any existing Wi-fi connection and stop Wi-fi station mode operation.</string>
+    <!-- Label for wifi tether checkbox. Toggles Access Point on/off -->
+    <string name="wifi_tether_checkbox_text">Wi-Fi tethering</string>
+    <!-- Subtext for wifi tether checkbox on success -->
+    <string name="wifi_tether_enabled_subtext">Access point <xliff:g id="network_ssid">%1$s</xliff:g> active</string>
+    <!-- Subtext for wifi tether checkbox on failure -->
+    <string name="wifi_tether_failed_subtext">Wi-Fi tethering error</string>
+    <!-- Label for Wi-fi tether settings preference -->
+    <string name="wifi_tether_settings_text">Wi-Fi tethering settings</string>
+    <!-- Subtext for Wi-fi tether settings preference -->
+    <string name="wifi_tether_settings_subtext">Set up &amp; manage access point</string>
+    <!-- Title of the Wi-fi settings screen -->
+    <string name="wifi_tether_settings_title">Wi-Fi tethering settings</string>
+    <!-- Used to open the ssid and security dialog for Wifi Access Point -->
+    <string name="wifi_tether_configure_ap_text">Configure AP</string>
+    <!-- Subtext on configuration preference to indicate SSID and security chosen -->
+    <string name="wifi_tether_configure_subtext"><xliff:g id="network_ssid">%1$s</xliff:g> <xliff:g id="network_security">%2$s</xliff:g> access point</string>
+    <!-- Default access point SSID used for tethering -->
+    <string name="wifi_tether_configure_ssid_default">AndroidAP</string>
+
 
     <!-- Do not translate. Used for diagnostic screens, precise translation is not necessary
          Wi-Fi Testing on the diagnostic screen-->
