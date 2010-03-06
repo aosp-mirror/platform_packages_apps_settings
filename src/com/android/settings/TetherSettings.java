@@ -143,7 +143,6 @@ public class TetherSettings extends PreferenceActivity {
         boolean massStorageActive =
                 Environment.MEDIA_SHARED.equals(Environment.getExternalStorageState());
         boolean wifiErrored = false;
-
         for (Object o : available) {
             String s = (String)o;
             for (String regex : mUsbRegexs) {
@@ -182,15 +181,14 @@ public class TetherSettings extends PreferenceActivity {
             }
         }
 
-        if (usbTethered || wifiTethered) {
-//            showTetheredNotification();
-        }
         if (usbTethered) {
             mUsbTether.setSummary(R.string.usb_tethering_active_subtext);
             mUsbTether.setEnabled(true);
+            mUsbTether.setChecked(true);
         } else if (massStorageActive) {
             mUsbTether.setSummary(R.string.usb_tethering_storage_active_subtext);
             mUsbTether.setEnabled(false);
+            mUsbTether.setChecked(false);
         } else if (usbAvailable) {
             if (usbError == ConnectivityManager.TETHER_ERROR_NO_ERROR) {
                 mUsbTether.setSummary(R.string.usb_tethering_available_subtext);
@@ -198,12 +196,15 @@ public class TetherSettings extends PreferenceActivity {
                 mUsbTether.setSummary(R.string.usb_tethering_errored_subtext);
             }
             mUsbTether.setEnabled(true);
+            mUsbTether.setChecked(false);
         } else if (usbErrored) {
             mUsbTether.setSummary(R.string.usb_tethering_errored_subtext);
             mUsbTether.setEnabled(false);
+            mUsbTether.setChecked(false);
         } else {
             mUsbTether.setSummary(R.string.usb_tethering_unavailable_subtext);
             mUsbTether.setEnabled(false);
+            mUsbTether.setChecked(false);
         }
     }
 
@@ -257,42 +258,4 @@ public class TetherSettings extends PreferenceActivity {
         }
         return null;
     }
-
-//    private showTetheredNotification() {
-//        NotificationManager notificationManager = (NotificationManager)mContext.
-//                getSystemService(Context.NOTIFICATION_SERVICE);
-//        if (notificationManager == null) {
-//            return;
-//        }
-//
-//        Intent intent = new Intent();
-//
-//        PendingIntent pi = PendingIntent.getActivity(mContext, 0, intent, 0);
-//
-//        Resources r = Resources.getSystem();
-//        CharSequence title = r.getText(com.android.internal.R.string.
-//                tether_stop_notification_title);
-//        CharSequence message = r.getText(com.android.internal.R.string.
-//                tether_stop_notification_message);
-//
-//        if(mTetheringNotification == null) {
-//            mTetheringNotification = new Notification();
-//            mTetheringNotification.when = 0;
-//        }
-//        mTetheringNotification.icon = com.android.internal.R.drawable.stat_sys_tether_usb;
-//
-//        boolean playSounds = false;
-//        //playSounds = SystemProperties.get("persist.service.mount.playsnd", "1").equals("1");
-//        if (playSounds) {
-//            mTetheringNotification.defaults |= Notification.DEFAULT_SOUND;
-//        } else {
-//            mTetheringNotification.defaults &= ~Notification.DEFAULT_SOUND;
-//        }
-//        mTetheringNotification.flags = Notification.FLAG_ONGOING_EVENT;
-//        mTetheringNotification.tickerText = title;
-//        mTetheringNotification.setLatestEventInfo(mContext, title, message, pi);
-//
-//        notificationManager.notify(mTetheringNotification.icon, mTetheringNotification);
-//    }
-
 }
