@@ -254,7 +254,7 @@ public class WifiSettings extends PreferenceActivity implements DialogInterface.
     public void onClick(DialogInterface dialogInterface, int button) {
         if (button == WifiDialog.BUTTON_FORGET && mSelected != null) {
             forget(mSelected.networkId);
-        } else if (button == WifiDialog.BUTTON_SUBMIT) {
+        } else if (button == WifiDialog.BUTTON_SUBMIT && mDialog != null) {
             WifiConfiguration config = mDialog.getConfig();
 
             if (config == null) {
