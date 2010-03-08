@@ -106,6 +106,8 @@ public class SoundSettings extends PreferenceActivity implements
         mSilent = (CheckBoxPreference) findPreference(KEY_SILENT);
 
         mPhoneVibrate = (ListPreference) findPreference(KEY_VIBRATE);
+        mPhoneVibrate.setOnPreferenceChangeListener(this);
+
         mVibrateInSilent = (CheckBoxPreference) findPreference(KEY_VIBRATE_IN_SILENT);
         mDtmfTone = (CheckBoxPreference) findPreference(KEY_DTMF_TONE);
         mDtmfTone.setPersistent(false);
@@ -216,18 +218,6 @@ public class SoundSettings extends PreferenceActivity implements
                 mAudioManager.setRingerMode(AudioManager.RINGER_MODE_NORMAL);
             }
             updateState(false);
-        } else if (preference == mPhoneVibrate) {
-            int vibeSetting = new Integer(mPhoneVibrate.getValue()).intValue();
-            switch (vibeSetting) {
-                case AudioManager.VIBRATE_SETTING_ON:
-                case AudioManager.VIBRATE_SETTING_OFF:
-                case AudioManager.VIBRATE_SETTING_ONLY_SILENT:
-                    mAudioManager.setVibrateSetting(
-                            AudioManager.VIBRATE_TYPE_RINGER,
-                            vibeSetting);
-                    updateState(false);
-                    break;
-            }
         } else if (preference == mVibrateInSilent) {
             boolean vibeInSilent = mVibrateInSilent.isChecked();
             Settings.System.putInt(getContentResolver(),
@@ -278,6 +268,18 @@ public class SoundSettings extends PreferenceActivity implements
                         Settings.System.EMERGENCY_TONE, value);
             } catch (NumberFormatException e) {
                 Log.e(TAG, "could not persist emergency tone setting", e);
+            }
+        } else if (preference == mPhoneVibrate) {
+            int vibeSetting = new Integer(objValue.toString()).intValue();
+            switch (vibeSetting) {
+                case AudioManager.VIBRATE_SETTING_ON:
+                case AudioManager.VIBRATE_SETTING_OFF:
+                case AudioManager.VIBRATE_SETTING_ONLY_SILENT:
+                    mAudioManager.setVibrateSetting(
+                            AudioManager.VIBRATE_TYPE_RINGER,
+                            vibeSetting);
+                    updateState(false);
+                    break;
             }
         }
 
