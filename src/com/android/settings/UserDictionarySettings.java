@@ -159,7 +159,8 @@ public class UserDictionarySettings extends ListActivity {
         
         AdapterContextMenuInfo adapterMenuInfo = (AdapterContextMenuInfo) menuInfo;
         String word = getWord(adapterMenuInfo.position);
-        
+        if (word == null) return true;
+
         switch (item.getItemId()) {
             case CONTEXT_MENU_DELETE:
                 deleteWord(word);
@@ -193,6 +194,9 @@ public class UserDictionarySettings extends ListActivity {
     
     private String getWord(int position) {
         mCursor.moveToPosition(position);
+        // Handle a possible race-condition
+        if (mCursor.isAfterLast()) return null;
+
         return mCursor.getString(
                 mCursor.getColumnIndexOrThrow(UserDictionary.Words.WORD));
     }
