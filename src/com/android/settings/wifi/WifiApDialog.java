@@ -108,11 +108,10 @@ class WifiApDialog extends AlertDialog implements View.OnClickListener,
         return null;
     }
 
-    @Override
     protected void onCreate(Bundle savedInstanceState) {
 
-        Spinner mSecurity = ((Spinner) mView.findViewById(R.id.security));
         mView = getLayoutInflater().inflate(R.layout.wifi_ap_dialog, null);
+        Spinner mSecurity = ((Spinner) mView.findViewById(R.id.security));
 
         setView(mView);
         setInverseBackgroundForced(true);
