@@ -120,7 +120,11 @@ public class LanguageSettings extends PreferenceActivity {
             // If setting activity is available, add a setting screen entry.
             if (null != property.getSettingsActivity()) {
                 PreferenceScreen prefScreen = new PreferenceScreen(this, null);
-                prefScreen.setKey(property.getSettingsActivity());
+                String settingsActivity = property.getSettingsActivity();
+                if (settingsActivity.lastIndexOf("/") < 0) {
+                    settingsActivity = property.getPackageName() + "/" + settingsActivity;
+                }
+                prefScreen.setKey(settingsActivity);
                 prefScreen.setTitle(label);
                 if (N == 1) {
                     prefScreen.setSummary(getString(R.string.onscreen_keyboard_settings_summary));
@@ -274,6 +278,11 @@ public class LanguageSettings extends PreferenceActivity {
                 String activityName = pref.getKey();
                 String packageName = activityName.substring(0, activityName
                         .lastIndexOf("."));
+                int slash = activityName.indexOf("/");
+                if (slash > 0) {
+                    packageName = activityName.substring(0, slash);
+                    activityName = activityName.substring(slash + 1);
+                }
                 if (activityName.length() > 0) {
                     Intent i = new Intent(Intent.ACTION_MAIN);
                     i.setClassName(packageName, activityName);
