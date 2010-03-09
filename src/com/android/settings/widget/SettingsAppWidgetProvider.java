@@ -435,6 +435,7 @@ public class SettingsAppWidgetProvider extends AppWidgetProvider {
                     brightness = MAXIMUM_BACKLIGHT;
                 } else {
                     brightnessMode = Settings.System.SCREEN_BRIGHTNESS_MODE_AUTOMATIC;
+                    brightness = MINIMUM_BACKLIGHT;
                 }
 
                 if (context.getResources().getBoolean(
@@ -443,6 +444,9 @@ public class SettingsAppWidgetProvider extends AppWidgetProvider {
                     Settings.System.putInt(context.getContentResolver(),
                             Settings.System.SCREEN_BRIGHTNESS_MODE,
                             brightnessMode);
+                } else {
+                    // Make sure we set the brightness if automatic mode isn't available
+                    brightnessMode = Settings.System.SCREEN_BRIGHTNESS_MODE_MANUAL;
                 }
                 if (brightnessMode == Settings.System.SCREEN_BRIGHTNESS_MODE_MANUAL) {
                     power.setBacklightBrightness(brightness);
