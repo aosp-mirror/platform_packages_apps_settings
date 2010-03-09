@@ -189,7 +189,7 @@
 
         <activity android:name=".vpn.VpnSettings"
                 android:configChanges="orientation|keyboardHidden"
-                android:launchMode="singleTask">
+                android:clearTaskOnLaunch="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <action android:name="android.net.vpn.SETTINGS" />

@@ -90,7 +90,7 @@ public class VpnSettings extends PreferenceActivity implements
     private static final String PREF_ADD_VPN = "add_new_vpn";
     private static final String PREF_VPN_LIST = "vpn_list";
 
-    private static final String PROFILES_ROOT = VpnManager.PROFILES_PATH + "/";
+    private static final String PROFILES_ROOT = VpnManager.getProfilePath() + "/";
     private static final String PROFILE_OBJ_FILE = ".pobj";
 
     private static final int REQUEST_ADD_OR_EDIT_PROFILE = 1;
