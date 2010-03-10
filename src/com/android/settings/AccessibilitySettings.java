@@ -105,6 +105,8 @@ public class AccessibilitySettings extends PreferenceActivity {
         if (!accessibilityServices.isEmpty()) {
             if (serviceState == 1) {
                 mToggleCheckBox.setChecked(true);
+            } else {
+                setAccessibilityServicePreferencesState(false);
             }
             mToggleCheckBox.setEnabled(true);
         } else {
@@ -125,6 +127,24 @@ public class AccessibilitySettings extends PreferenceActivity {
         super.onPause();
 
         persistEnabledAccessibilityServices();
+    }
+
+    /**
+     * Sets the state of the preferences for enabling/disabling
+     * AccessibilityServices.
+     *
+     * @param isEnabled If to enable or disable the preferences.
+     */
+    private void setAccessibilityServicePreferencesState(boolean isEnabled) {
+        if (mAccessibilityServicesCategory == null) {
+            return;
+        }
+
+        int count = mAccessibilityServicesCategory.getPreferenceCount();
+        for (int i = 0; i < count; i++) {
+            Preference pref = mAccessibilityServicesCategory.getPreference(i);
+            pref.setEnabled(isEnabled);
+        }
     }
 
     @Override
@@ -150,6 +170,7 @@ public class AccessibilitySettings extends PreferenceActivity {
         if (preference.isChecked()) {
             Settings.Secure.putInt(getContentResolver(),
                 Settings.Secure.ACCESSIBILITY_ENABLED, 1);
+            setAccessibilityServicePreferencesState(true);
         } else {
             final CheckBoxPreference checkBoxPreference = preference;
             AlertDialog dialog = (new AlertDialog.Builder(this))
@@ -162,6 +183,7 @@ public class AccessibilitySettings extends PreferenceActivity {
                         public void onClick(DialogInterface dialog, int which) {
                             Settings.Secure.putInt(getContentResolver(),
                                 Settings.Secure.ACCESSIBILITY_ENABLED, 0);
+                            setAccessibilityServicePreferencesState(false);
                         }
                 })
                 .setNegativeButton(android.R.string.cancel,
