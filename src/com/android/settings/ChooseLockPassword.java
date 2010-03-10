@@ -54,7 +54,7 @@ public class ChooseLockPassword extends Activity implements OnClickListener, OnE
     private static final String KEY_UI_STAGE = "ui_stage";
     private TextView mPasswordEntry;
     private int mPasswordMinLength = 4;
-    private int mPasswordMaxLength = 8;
+    private int mPasswordMaxLength = 16;
     private LockPatternUtils mLockPatternUtils;
     private int mRequestedMode = LockPatternUtils.MODE_PIN;
     private ChooseLockSettingsHelper mChooseLockSettingsHelper;
@@ -109,8 +109,8 @@ public class ChooseLockPassword extends Activity implements OnClickListener, OnE
         super.onCreate(savedInstanceState);
         mLockPatternUtils = new LockPatternUtils(this);
         mRequestedMode = getIntent().getIntExtra(LockPatternUtils.PASSWORD_TYPE_KEY, mRequestedMode);
-        mPasswordMinLength = getIntent().getIntExtra("password_min_length", mPasswordMinLength);
-        mPasswordMaxLength = getIntent().getIntExtra("password_max_length", mPasswordMaxLength);
+        mPasswordMinLength = getIntent().getIntExtra(PASSWORD_MIN_KEY, mPasswordMinLength);
+        mPasswordMaxLength = getIntent().getIntExtra(PASSWORD_MAX_KEY, mPasswordMaxLength);
         int minMode = mLockPatternUtils.getRequestedPasswordMode();
         if (mRequestedMode < minMode) {
             mRequestedMode = minMode;
