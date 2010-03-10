@@ -617,7 +617,7 @@ public class ManageApplications extends TabActivity implements
         if (filterOption == FILTER_APPS_SDCARD) {
             List<ApplicationInfo> appList =new ArrayList<ApplicationInfo> ();
             for (ApplicationInfo appInfo : installedAppList) {
-                if ((appInfo.flags & ApplicationInfo.FLAG_ON_SDCARD) != 0) {
+                if ((appInfo.flags & ApplicationInfo.FLAG_EXTERNAL_STORAGE) != 0) {
                     // App on sdcard
                     appList.add(appInfo);
                 }
@@ -694,7 +694,7 @@ public class ManageApplications extends TabActivity implements
         if (filterOption == FILTER_APPS_SDCARD) {
             for (ApplicationInfo appInfo : pAppList) {
                 boolean flag = false;
-                if ((appInfo.flags & ApplicationInfo.FLAG_ON_SDCARD) != 0) {
+                if ((appInfo.flags & ApplicationInfo.FLAG_EXTERNAL_STORAGE) != 0) {
                     // App on sdcard
                     flag = true;
                 }
@@ -1269,7 +1269,7 @@ public class ManageApplications extends TabActivity implements
                     return true;
                 }
             } else if (filterOption == FILTER_APPS_SDCARD) {
-                if ((info.flags & ApplicationInfo.FLAG_ON_SDCARD) != 0) {
+                if ((info.flags & ApplicationInfo.FLAG_EXTERNAL_STORAGE) != 0) {
                     return true;
                 }
             } else {

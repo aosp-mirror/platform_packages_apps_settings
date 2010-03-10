@@ -204,7 +204,7 @@ public class InstalledAppDetails extends Activity implements View.OnClickListene
         boolean moveDisable = true;
         if (dataOnly) {
             mMoveAppButton.setText(R.string.move_app);
-        } else if ((mAppInfo.flags & ApplicationInfo.FLAG_ON_SDCARD) != 0) {
+        } else if ((mAppInfo.flags & ApplicationInfo.FLAG_EXTERNAL_STORAGE) != 0) {
             mMoveAppButton.setText(R.string.move_app_to_internal);
             moveDisable = false;
         } else {
@@ -644,7 +644,7 @@ public class InstalledAppDetails extends Activity implements View.OnClickListene
             if (mPackageMoveObserver == null) {
                 mPackageMoveObserver = new PackageMoveObserver();
             }
-            int moveFlags = (mAppInfo.flags & ApplicationInfo.FLAG_ON_SDCARD) != 0 ?
+            int moveFlags = (mAppInfo.flags & ApplicationInfo.FLAG_EXTERNAL_STORAGE) != 0 ?
                     PackageManager.MOVE_INTERNAL : PackageManager.MOVE_EXTERNAL_MEDIA;
             mMoveAppButton.setText(R.string.moving);
             mMoveAppButton.setEnabled(false);
