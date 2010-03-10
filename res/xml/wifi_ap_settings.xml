@@ -28,11 +28,4 @@
         android:title="@string/wifi_tether_configure_ap_text"
         android:persistent="false" />
 
-    <!-- TODO: Channel setting will go away -->
-    <ListPreference
-        android:key="wifi_ap_channel"
-        android:dependency="enable_wifi_ap"
-        android:title="Channel"
-        android:persistent="false" />
-
 </PreferenceScreen>

@@ -30,6 +30,8 @@ import android.preference.CheckBoxPreference;
 import android.provider.Settings;
 import android.util.Log;
 import android.net.wifi.WifiConfiguration;
+import android.net.wifi.WifiConfiguration.AuthAlgorithm;
+import android.net.wifi.WifiConfiguration.KeyMgmt;
 import android.net.wifi.WifiManager;
 import android.os.Bundle;
 
@@ -37,14 +39,17 @@ import android.os.Bundle;
  * Displays preferences for Tethering.
  */
 public class WifiApSettings extends PreferenceActivity
-        implements DialogInterface.OnClickListener, Preference.OnPreferenceChangeListener {
+                            implements DialogInterface.OnClickListener {
 
     private static final String WIFI_AP_SSID_AND_SECURITY = "wifi_ap_ssid_and_security";
-    private static final String WIFI_AP_CHANNEL = "wifi_ap_channel";
     private static final String ENABLE_WIFI_AP = "enable_wifi_ap";
+    private static final int CONFIG_SUBTEXT = R.string.wifi_tether_configure_subtext;
 
+    private static final int OPEN_INDEX = 0;
+    private static final int WPA_INDEX = 1;
+
+    private String[] mSecurityType;
     private Preference mCreateNetwork;
-    private ListPreference mChannel;
     private CheckBoxPreference mEnableWifiAp;
 
     private WifiApDialog mDialog;
@@ -57,38 +62,26 @@ public class WifiApSettings extends PreferenceActivity
         super.onCreate(savedInstanceState);
 
         mWifiManager = (WifiManager) getSystemService(Context.WIFI_SERVICE);
+        mWifiConfig = mWifiManager.getWifiApConfiguration();
+        mSecurityType = getResources().getStringArray(R.array.wifi_ap_security);
 
         addPreferencesFromResource(R.xml.wifi_ap_settings);
 
         mCreateNetwork = findPreference(WIFI_AP_SSID_AND_SECURITY);
-        mChannel = (ListPreference) findPreference(WIFI_AP_CHANNEL);
         mEnableWifiAp = (CheckBoxPreference) findPreference(ENABLE_WIFI_AP);
 
         mWifiApEnabler = new WifiApEnabler(this, mEnableWifiAp);
 
-        initChannels();
-    }
-
-    public void initChannels() {
-        mChannel.setOnPreferenceChangeListener(this);
-
-        int numChannels = mWifiManager.getNumAllowedChannels();
-
-        String[] entries = new String[numChannels];
-        String[] entryValues = new String[numChannels];
-
-        for (int i = 1; i <= numChannels; i++) {
-            entries[i-1] = "Channel "+i;
-            entryValues[i-1] = i+"";
+        if(mWifiConfig == null) {
+            String s = getString(com.android.internal.R.string.wifi_tether_configure_ssid_default);
+            mCreateNetwork.setSummary(String.format(getString(CONFIG_SUBTEXT),
+                                                    s, mSecurityType[OPEN_INDEX]));
+        } else {
+            mCreateNetwork.setSummary(String.format(getString(CONFIG_SUBTEXT),
+                                      mWifiConfig.SSID,
+                                      mWifiConfig.allowedKeyManagement.get(KeyMgmt.WPA_PSK) ?
+                                      mSecurityType[WPA_INDEX] : mSecurityType[OPEN_INDEX]));
         }
-
-        mChannel.setEntries(entries);
-        mChannel.setEntryValues(entryValues);
-        mChannel.setEnabled(true);
-        /**
-         * TODO: randomize initial channel chosen
-         */
-        mChannel.setValue("2");
     }
 
     @Override
@@ -120,32 +113,15 @@ public class WifiApSettings extends PreferenceActivity
     }
 
     public void onClick(DialogInterface dialogInterface, int button) {
-        /**
-         * TODO: Needs work
-         */
+
         mWifiConfig = mDialog.getConfig();
 
-        if(mWifiConfig.SSID != null)
-            mCreateNetwork.setSummary(mWifiConfig.SSID);
-
-        /**
-         * TODO: set SSID and security
-         */
-    }
-
-    public boolean onPreferenceChange(Preference preference, Object newValue) {
-        /**
-         * TODO: Needs work
-         */
-
-        String key = preference.getKey();
-        if (key == null) return true;
-
-        if (key.equals(WIFI_AP_CHANNEL)) {
-            int chosenChannel = Integer.parseInt((String) newValue);
-            if(newValue != null)
-                mChannel.setSummary(newValue.toString());
+        if (button == DialogInterface.BUTTON_POSITIVE && mWifiConfig != null) {
+            mWifiManager.setWifiApEnabled(mWifiConfig, true);
+            mCreateNetwork.setSummary(String.format(getString(CONFIG_SUBTEXT),
+                                      mWifiConfig.SSID,
+                                      mWifiConfig.allowedKeyManagement.get(KeyMgmt.WPA_PSK) ?
+                                      mSecurityType[WPA_INDEX] : mSecurityType[OPEN_INDEX]));
         }
-        return true;
     }
 }

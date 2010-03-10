@@ -26,6 +26,8 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.net.ConnectivityManager;
+import android.net.wifi.WifiManager;
+import android.net.wifi.WifiConfiguration;
 import android.os.Environment;
 import android.preference.CheckBoxPreference;
 import android.preference.Preference;
@@ -54,6 +56,7 @@ public class TetherSettings extends PreferenceActivity {
     private PreferenceScreen mWifiApSettings;
     private WifiApEnabler mWifiApEnabler;
     private PreferenceScreen mTetherHelp;
+    private WifiManager mWifiManager;
 
     private BroadcastReceiver mTetherChangeReceiver;
 
@@ -76,6 +79,8 @@ public class TetherSettings extends PreferenceActivity {
 
         ConnectivityManager cm =
                 (ConnectivityManager)getSystemService(Context.CONNECTIVITY_SERVICE);
+        mWifiManager = (WifiManager)getSystemService(Context.WIFI_SERVICE);
+
         mUsbRegexs = cm.getTetherableUsbRegexs();
         if (mUsbRegexs.length == 0) {
             getPreferenceScreen().removePreference(mUsbTether);
@@ -220,6 +225,17 @@ public class TetherSettings extends PreferenceActivity {
             mUsbTether.setSummary(R.string.usb_tethering_unavailable_subtext);
             mUsbTether.setEnabled(false);
             mUsbTether.setChecked(false);
+        }
+
+        if (wifiTethered) {
+            WifiConfiguration mWifiConfig = mWifiManager.getWifiApConfiguration();
+            String s = getString(com.android.internal.R.string.wifi_tether_configure_ssid_default);
+            mEnableWifiAp.setSummary(String.format(getString(R.string.wifi_tether_enabled_subtext),
+                                                   (mWifiConfig == null) ? s : mWifiConfig.SSID));
+        }
+
+        if (wifiErrored) {
+            mEnableWifiAp.setSummary(R.string.wifi_error);
         }
     }
 

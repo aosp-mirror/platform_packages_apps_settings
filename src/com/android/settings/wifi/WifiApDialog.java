@@ -49,6 +49,9 @@ class WifiApDialog extends AlertDialog implements View.OnClickListener,
 
     private final DialogInterface.OnClickListener mListener;
 
+    private static final int OPEN_INDEX = 0;
+    private static final int WPA_INDEX = 1;
+
     private View mView;
     private TextView mSsid;
     private int mSecurityType = AccessPoint.SECURITY_NONE;
@@ -74,22 +77,6 @@ class WifiApDialog extends AlertDialog implements View.OnClickListener,
         switch (mSecurityType) {
             case AccessPoint.SECURITY_NONE:
                 config.allowedKeyManagement.set(KeyMgmt.NONE);
-                return config;
-
-            case AccessPoint.SECURITY_WEP:
-                config.allowedKeyManagement.set(KeyMgmt.NONE);
-                config.allowedAuthAlgorithms.set(AuthAlgorithm.SHARED);
-                if (mPassword.length() != 0) {
-                    int length = mPassword.length();
-                    String password = mPassword.getText().toString();
-                    // WEP-40, WEP-104, and 256-bit WEP (WEP-232?)
-                    if ((length == 10 || length == 26 || length == 58) &&
-                            password.matches("[0-9A-Fa-f]*")) {
-                        config.wepKeys[0] = password;
-                    } else {
-                        config.wepKeys[0] = '"' + password + '"';
-                    }
-                }
                 return config;
 
             case AccessPoint.SECURITY_PSK:
@@ -130,14 +117,18 @@ class WifiApDialog extends AlertDialog implements View.OnClickListener,
         if (mWifiConfig != null) {
             mSsid.setText(mWifiConfig.SSID);
             switch (mSecurityType) {
-              case AccessPoint.SECURITY_WEP:
-                  mPassword.setText(mWifiConfig.wepKeys[0]);
+              case AccessPoint.SECURITY_NONE:
+                  mSecurity.setSelection(OPEN_INDEX);
                   break;
               case AccessPoint.SECURITY_PSK:
-                  mPassword.setText(mWifiConfig.preSharedKey);
+                  String str = mWifiConfig.preSharedKey;
+                  if (!str.matches("[0-9A-Fa-f]{64}")) {
+                     str = str.substring(1,str.length()-1);
+                  }
+                  mPassword.setText(str);
+                  mSecurity.setSelection(WPA_INDEX);
                   break;
             }
-            mSecurity.setSelection(mSecurityType);
         }
 
         mSsid.addTextChangedListener(this);
@@ -153,7 +144,6 @@ class WifiApDialog extends AlertDialog implements View.OnClickListener,
 
     private void validate() {
         if ((mSsid != null && mSsid.length() == 0) ||
-                (mSecurityType == AccessPoint.SECURITY_WEP && mPassword.length() == 0) ||
                    (mSecurityType == AccessPoint.SECURITY_PSK && mPassword.length() < 8)) {
             getButton(BUTTON_SUBMIT).setEnabled(false);
         } else {
@@ -179,7 +169,10 @@ class WifiApDialog extends AlertDialog implements View.OnClickListener,
     }
 
     public void onItemSelected(AdapterView parent, View view, int position, long id) {
-        mSecurityType = position;
+        if(position == OPEN_INDEX)
+            mSecurityType = AccessPoint.SECURITY_NONE;
+        else
+            mSecurityType = AccessPoint.SECURITY_PSK;
         showSecurityFields();
         validate();
     }

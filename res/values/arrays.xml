@@ -228,12 +228,11 @@
     </string-array>
 
    <!-- Wi-Fi AP settings.  The type of security a Wi-Fi AP supports. -->
+   <!-- Note that adding/removing/moving the items will need wifi settings code change. -->
     <string-array name="wifi_ap_security" translatable="false">
         <item>Open</item>
         <!-- Do not translate. -->
-        <item>WEP</item>
-        <!-- Do not translate. -->
-        <item>WPA/WPA2 PSK</item>
+        <item>WPA2 PSK</item>
     </string-array>
 
     <!-- Match this with the constants in WifiDialog. --> <skip />

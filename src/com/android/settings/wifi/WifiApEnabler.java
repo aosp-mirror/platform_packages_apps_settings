@@ -22,7 +22,6 @@ import com.android.settings.WirelessSettings;
 import android.app.AlertDialog;
 import android.content.BroadcastReceiver;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.net.NetworkInfo;
@@ -36,15 +35,13 @@ import android.text.TextUtils;
 import android.util.Log;
 import android.widget.Toast;
 
-public class WifiApEnabler implements Preference.OnPreferenceChangeListener,
-                                      DialogInterface.OnClickListener {
+public class WifiApEnabler implements Preference.OnPreferenceChangeListener {
     private final Context mContext;
     private final CheckBoxPreference mCheckBox;
     private final CharSequence mOriginalSummary;
 
-    private final WifiManager mWifiManager;
+    private WifiManager mWifiManager;
     private final IntentFilter mIntentFilter;
-    private AlertDialog mAlertDialog = null;
 
     private final BroadcastReceiver mReceiver = new BroadcastReceiver() {
         @Override
@@ -75,50 +72,20 @@ public class WifiApEnabler implements Preference.OnPreferenceChangeListener,
     public void pause() {
         mContext.unregisterReceiver(mReceiver);
         mCheckBox.setOnPreferenceChangeListener(null);
-        if (mAlertDialog != null) {
-            mAlertDialog.dismiss();
-            mAlertDialog = null;
-        }
     }
 
-    public boolean onPreferenceChange(Preference preference, Object value) {
-        boolean enable = (Boolean) value;
+    public boolean onPreferenceChange(Preference preference, Object enable) {
 
-        if (enable && mWifiManager.isWifiEnabled()) {
-            AlertDialog.Builder builder = new AlertDialog.Builder(mContext);
-            /**
-             * TODO: this alert will go away.
-             */
-            builder.setMessage("Turning off Wifi client. Enabling Wifi tethering")
-                   .setCancelable(false)
-                   .setPositiveButton(android.R.string.ok, this)
-                   .setNegativeButton(android.R.string.cancel, this);
-
-            mAlertDialog = builder.create();
-            mAlertDialog.show();
+        if (mWifiManager.setWifiApEnabled(null, (Boolean)enable)) {
+            /* Disable here, enabled on receiving success broadcast */
+            mCheckBox.setEnabled(false);
         } else {
-            setUpAccessPoint(enable);
+            mCheckBox.setSummary(R.string.wifi_error);
         }
 
         return false;
     }
 
-    public void onClick(DialogInterface dialog, int id) {
-        if(id == DialogInterface.BUTTON_POSITIVE ) {
-            setUpAccessPoint(true);
-        } else if (id == DialogInterface.BUTTON_NEGATIVE) {
-            dialog.dismiss();
-            mAlertDialog = null;
-        }
-    }
-
-    private void setUpAccessPoint(boolean enable) {
-        if (mWifiManager.setWifiApEnabled(null, enable)) {
-            mCheckBox.setEnabled(false);
-        } else {
-            mCheckBox.setSummary(R.string.wifi_error);
-        }
-    }
 
     private void handleWifiApStateChanged(int state) {
         switch (state) {
@@ -127,8 +94,11 @@ public class WifiApEnabler implements Preference.OnPreferenceChangeListener,
                 mCheckBox.setEnabled(false);
                 break;
             case WifiManager.WIFI_AP_STATE_ENABLED:
+                /**
+                 * Summary on enable is handled by tether
+                 * broadcast notice
+                 */
                 mCheckBox.setChecked(true);
-                mCheckBox.setSummary(null);
                 mCheckBox.setEnabled(true);
                 break;
             case WifiManager.WIFI_AP_STATE_DISABLING:
