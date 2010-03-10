@@ -30,10 +30,13 @@ import android.os.SystemProperties;
 import android.preference.CheckBoxPreference;
 import android.preference.Preference;
 import android.preference.PreferenceActivity;
+import android.preference.PreferenceCategory;
 import android.preference.PreferenceGroup;
 import android.preference.PreferenceScreen;
 import android.provider.Settings;
 import android.text.TextUtils;
+import android.view.KeyCharacterMap;
+import android.view.KeyEvent;
 import android.view.accessibility.AccessibilityManager;
 
 import java.util.HashSet;
@@ -54,7 +57,16 @@ public class AccessibilitySettings extends PreferenceActivity {
     private static final String ACCESSIBILITY_SERVICES_CATEGORY =
         "accessibility_services_category";
 
+    private static final String POWER_BUTTON_CATEGORY =
+        "power_button_category";
+
+    private final String POWER_BUTTON_ENDS_CALL_CHECKBOX =
+        "power_button_ends_call";
+
     private CheckBoxPreference mToggleCheckBox;
+
+    private PreferenceCategory mPowerButtonCategory;
+    private CheckBoxPreference mPowerButtonEndsCallCheckBox;
 
     private Map<String, ServiceInfo> mAccessibilityServices =
         new LinkedHashMap<String, ServiceInfo>();
@@ -71,6 +83,10 @@ public class AccessibilitySettings extends PreferenceActivity {
 
         mToggleCheckBox = (CheckBoxPreference) findPreference(
             TOGGLE_ACCESSIBILITY_SERVICE_CHECKBOX);
+
+        mPowerButtonCategory = (PreferenceCategory) findPreference(POWER_BUTTON_CATEGORY);
+        mPowerButtonEndsCallCheckBox = (CheckBoxPreference) findPreference(
+            POWER_BUTTON_ENDS_CALL_CHECKBOX);
 
         addAccessibilitServicePreferences();
     }
@@ -120,6 +136,22 @@ public class AccessibilitySettings extends PreferenceActivity {
             // installed and direct them to Market to get TalkBack
             displayNoAppsAlert();
         }
+
+        if (KeyCharacterMap.deviceHasKey(KeyEvent.KEYCODE_POWER)) {
+            int incallPowerBehavior = Settings.Secure.getInt(getContentResolver(),
+                    Settings.Secure.INCALL_POWER_BUTTON_BEHAVIOR,
+                    Settings.Secure.INCALL_POWER_BUTTON_BEHAVIOR_DEFAULT);
+            // The checkbox is labeled "Power button ends call"; thus the in-call
+            // Power button behavior is INCALL_POWER_BUTTON_BEHAVIOR_HANGUP if
+            // checked, and INCALL_POWER_BUTTON_BEHAVIOR_SCREEN_OFF if unchecked.
+            boolean powerButtonCheckboxEnabled =
+                    (incallPowerBehavior == Settings.Secure.INCALL_POWER_BUTTON_BEHAVIOR_HANGUP);
+            mPowerButtonEndsCallCheckBox.setChecked(powerButtonCheckboxEnabled);
+            mPowerButtonEndsCallCheckBox.setEnabled(true);
+        } else {
+            // No POWER key on the current device; this entire category is irrelevant.
+            getPreferenceScreen().removePreference(mPowerButtonCategory);
+        }
     }
 
     @Override
@@ -154,6 +186,15 @@ public class AccessibilitySettings extends PreferenceActivity {
         if (TOGGLE_ACCESSIBILITY_SERVICE_CHECKBOX.equals(key)) {
             boolean isChecked = ((CheckBoxPreference) preference).isChecked();
             handleEnableAccessibilityStateChange((CheckBoxPreference) preference);
+        } else if (POWER_BUTTON_ENDS_CALL_CHECKBOX.equals(key)) {
+            boolean isChecked = ((CheckBoxPreference) preference).isChecked();
+            // The checkbox is labeled "Power button ends call"; thus the in-call
+            // Power button behavior is INCALL_POWER_BUTTON_BEHAVIOR_HANGUP if
+            // checked, and INCALL_POWER_BUTTON_BEHAVIOR_SCREEN_OFF if unchecked.
+            Settings.Secure.putInt(getContentResolver(),
+                    Settings.Secure.INCALL_POWER_BUTTON_BEHAVIOR,
+                    (isChecked ? Settings.Secure.INCALL_POWER_BUTTON_BEHAVIOR_HANGUP
+                            : Settings.Secure.INCALL_POWER_BUTTON_BEHAVIOR_SCREEN_OFF));
         } else if (preference instanceof CheckBoxPreference) {
             handleEnableAccessibilityServiceStateChange((CheckBoxPreference) preference);
         }
@@ -305,7 +346,8 @@ public class AccessibilitySettings extends PreferenceActivity {
             new DialogInterface.OnClickListener() {
                 public void onClick(DialogInterface dialog, int which) {
                     String screenreaderMarketLink =
-                        SystemProperties.get("ro.screenreader.market", DEFAULT_SCREENREADER_MARKET_LINK);
+                        SystemProperties.get("ro.screenreader.market",
+                                DEFAULT_SCREENREADER_MARKET_LINK);
                     Uri marketUri = Uri.parse(screenreaderMarketLink);
                     Intent marketIntent = new Intent(Intent.ACTION_VIEW, marketUri);
                     startActivity(marketIntent);

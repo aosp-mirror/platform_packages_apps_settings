@@ -25,4 +25,13 @@
     <PreferenceCategory android:key="accessibility_services_category"
             android:title="@string/accessibility_services_category" />
 
+    <PreferenceCategory android:key="power_button_category"
+            android:title="@string/accessibility_power_button_category">
+        <CheckBoxPreference
+                android:key="power_button_ends_call"
+                android:title="@string/accessibility_power_button_ends_call"
+                android:summary="@string/accessibility_power_button_ends_call_summary"
+                android:persistent="false" />
+    </PreferenceCategory>
+
 </PreferenceScreen>
