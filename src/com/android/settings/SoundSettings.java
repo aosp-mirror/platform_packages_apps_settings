@@ -183,7 +183,6 @@ public class SoundSettings extends PreferenceActivity implements
             mSilent.setChecked(silentOrVibrateMode);
         }
 
-        mVibrateInSilent.setEnabled(silentOrVibrateMode);
         mVibrateInSilent.setChecked(Settings.System.getInt(
             getContentResolver(),
             Settings.System.VIBRATE_IN_SILENT,
