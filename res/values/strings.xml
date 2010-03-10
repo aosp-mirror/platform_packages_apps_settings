@@ -1686,9 +1686,21 @@ found in the list of installed applications.</string>
     <!-- Manage applications, title for dialog when killing persistent apps-->
     <!-- Manage applications, text for Move button when move is in progress -->
     <string name="moving">Moving</string>
+
+    <!-- Manage applications, text for move error messages -->
+    <string name="insufficient_storage">There is not enough storage left.</string>
+    <string name="does_not_exist">The application does not exist.</string>
+    <string name="app_forward_locked">The application is forward locked</string>
+    <string name="invalid_location">The specified install location is not valid.</string>
+    <string name="system_package">System updates cannot be installed on external media.</string>
+
     <string name="force_stop_dlg_title">Force Stop</string>
     <!-- Manage applications, text for dialog when killing persistent apps-->
     <string name="force_stop_dlg_text">This application will be restarted right way. Are you sure you want to force stop?</string>
+    <!-- Manage applications, text for dialog when moving an app -->
+    <string name="move_app_failed_dlg_title">Move Application</string>
+    <!-- Manage applications, text for dialog moving an app -->
+    <string name="move_app_failed_dlg_text">Failed to move application. <xliff:g id="reason">%1$s</xliff:g></string>
     <!-- Manage applications, application installation location title -->
     <string name="app_install_location_title">Preferred install location</string>
     <!-- Manage applications. application installation location summary -->

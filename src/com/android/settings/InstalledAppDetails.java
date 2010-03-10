@@ -84,6 +84,7 @@ public class InstalledAppDetails extends Activity implements View.OnClickListene
     private Button mForceStopButton;
     private Button mClearDataButton;
     private Button mMoveAppButton;
+    private int mMoveErrorCode;
     
     PackageStats mSizeInfo;
     private PackageManager mPm;
@@ -113,6 +114,7 @@ public class InstalledAppDetails extends Activity implements View.OnClickListene
     private static final int DLG_APP_NOT_FOUND = DLG_BASE + 3;
     private static final int DLG_CANNOT_CLEAR_DATA = DLG_BASE + 4;
     private static final int DLG_FORCE_STOP = DLG_BASE + 5;
+    private static final int DLG_MOVE_FAILED = DLG_BASE + 6;
     
     private Handler mHandler = new Handler() {
         public void handleMessage(Message msg) {
@@ -186,6 +188,22 @@ public class InstalledAppDetails extends Activity implements View.OnClickListene
         }
         mClearDataButton.setOnClickListener(this);
         initMoveButton();
+    }
+
+    private CharSequence getMoveErrMsg(int errCode) {
+        switch (errCode) {
+            case PackageManager.MOVE_FAILED_INSUFFICIENT_STORAGE:
+                return getString(R.string.insufficient_storage);
+            case PackageManager.MOVE_FAILED_DOESNT_EXIST:
+                return getString(R.string.does_not_exist);
+            case PackageManager.MOVE_FAILED_FORWARD_LOCKED:
+                return getString(R.string.app_forward_locked);
+            case PackageManager.MOVE_FAILED_INVALID_LOCATION:
+                return getString(R.string.invalid_location);
+            case PackageManager.MOVE_FAILED_SYSTEM_PACKAGE:
+                return getString(R.string.system_package);
+        }
+        return null;
     }
 
     private void initMoveButton() {
@@ -465,14 +483,18 @@ public class InstalledAppDetails extends Activity implements View.OnClickListene
                 mAppInfo = mPm.getApplicationInfo(packageName,
                         PackageManager.GET_UNINSTALLED_PACKAGES);
                 initMoveButton();
+                // Refresh size info
+                mPm.getPackageSizeInfo(mAppInfo.packageName, mSizeObserver);
             } catch (NameNotFoundException e) {
                 // TODO error handling
             }
         } else {
-            // TODO Present a dialog indicating failure.
+            initMoveButton();
+            mMoveErrorCode = result;
+            showDialogInner(DLG_MOVE_FAILED);
         }
     }
-    
+
     /*
      * Private method to initiate clearing user data when the user clicks the clear data 
      * button for a system package
@@ -573,6 +595,15 @@ public class InstalledAppDetails extends Activity implements View.OnClickListene
             })
             .setNegativeButton(R.string.dlg_cancel, null)
             .create();
+            case DLG_MOVE_FAILED:
+                CharSequence msg = getString(R.string.move_app_failed_dlg_text,
+                        getMoveErrMsg(mMoveErrorCode));
+                return new AlertDialog.Builder(this)
+                .setTitle(getString(R.string.move_app_failed_dlg_title))
+                .setIcon(android.R.drawable.ic_dialog_alert)
+                .setMessage(msg)
+                .setNeutralButton(R.string.dlg_ok, null)
+                .create();
         }
         return null;
     }
