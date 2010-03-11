@@ -85,15 +85,19 @@ public class TetherSettings extends PreferenceActivity {
 
     private class TetherChangeReceiver extends BroadcastReceiver {
         public void onReceive(Context content, Intent intent) {
-            // TODO - this should understand the interface types
-            ArrayList<String> available = intent.getStringArrayListExtra(
-                    ConnectivityManager.EXTRA_AVAILABLE_TETHER);
-            ArrayList<String> active = intent.getStringArrayListExtra(
-                    ConnectivityManager.EXTRA_ACTIVE_TETHER);
-            ArrayList<String> errored = intent.getStringArrayListExtra(
-                    ConnectivityManager.EXTRA_ERRORED_TETHER);
-
-            updateState(available.toArray(), active.toArray(), errored.toArray());
+            if (intent.getAction().equals(ConnectivityManager.ACTION_TETHER_STATE_CHANGED)) {
+                // TODO - this should understand the interface types
+                ArrayList<String> available = intent.getStringArrayListExtra(
+                        ConnectivityManager.EXTRA_AVAILABLE_TETHER);
+                ArrayList<String> active = intent.getStringArrayListExtra(
+                        ConnectivityManager.EXTRA_ACTIVE_TETHER);
+                ArrayList<String> errored = intent.getStringArrayListExtra(
+                        ConnectivityManager.EXTRA_ERRORED_TETHER);
+                updateState(available.toArray(), active.toArray(), errored.toArray());
+            } else if (intent.getAction().equals(Intent.ACTION_MEDIA_SHARED) ||
+                       intent.getAction().equals(Intent.ACTION_MEDIA_UNSHARED)) {
+                updateState();
+            }
         }
     }
 
@@ -185,10 +189,6 @@ public class TetherSettings extends PreferenceActivity {
             mUsbTether.setSummary(R.string.usb_tethering_active_subtext);
             mUsbTether.setEnabled(true);
             mUsbTether.setChecked(true);
-        } else if (massStorageActive) {
-            mUsbTether.setSummary(R.string.usb_tethering_storage_active_subtext);
-            mUsbTether.setEnabled(false);
-            mUsbTether.setChecked(false);
         } else if (usbAvailable) {
             if (usbError == ConnectivityManager.TETHER_ERROR_NO_ERROR) {
                 mUsbTether.setSummary(R.string.usb_tethering_available_subtext);
@@ -199,6 +199,10 @@ public class TetherSettings extends PreferenceActivity {
             mUsbTether.setChecked(false);
         } else if (usbErrored) {
             mUsbTether.setSummary(R.string.usb_tethering_errored_subtext);
+            mUsbTether.setEnabled(false);
+            mUsbTether.setChecked(false);
+        } else if (massStorageActive) {
+            mUsbTether.setSummary(R.string.usb_tethering_storage_active_subtext);
             mUsbTether.setEnabled(false);
             mUsbTether.setChecked(false);
         } else {
