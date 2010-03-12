@@ -106,10 +106,14 @@ public class TetherSettings extends PreferenceActivity {
         super.onResume();
 
         IntentFilter filter = new IntentFilter(ConnectivityManager.ACTION_TETHER_STATE_CHANGED);
-        filter.addAction(Intent.ACTION_MEDIA_SHARED);
-        filter.addAction(Intent.ACTION_MEDIA_UNSHARED);
         mTetherChangeReceiver = new TetherChangeReceiver();
         Intent intent = registerReceiver(mTetherChangeReceiver, filter);
+
+        filter = new IntentFilter();
+        filter.addAction(Intent.ACTION_MEDIA_SHARED);
+        filter.addAction(Intent.ACTION_MEDIA_UNSHARED);
+        filter.addDataScheme("file");
+        registerReceiver(mTetherChangeReceiver, filter);
 
         if (intent != null) mTetherChangeReceiver.onReceive(this, intent);
         mWifiApEnabler.resume();
