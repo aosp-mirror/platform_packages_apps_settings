@@ -18,6 +18,7 @@ package com.android.settings;
 
 import android.app.AlertDialog;
 import android.app.Dialog;
+import android.bluetooth.BluetoothDevice;
 import android.content.BroadcastReceiver;
 import android.content.ContentResolver;
 import android.content.Context;
@@ -91,19 +92,31 @@ public class DockSettings extends PreferenceActivity {
     private void handleDockChange(Intent intent) {
         if (mAudioSettings != null) {
             int dockState = intent.getIntExtra(Intent.EXTRA_DOCK_STATE, 0);
-            mDockIntent = intent;
-            int resId = R.string.dock_audio_summary_unknown;
-            switch (dockState) {
-            case Intent.EXTRA_DOCK_STATE_CAR:
-                resId = R.string.dock_audio_summary_car;
-                break;
-            case Intent.EXTRA_DOCK_STATE_DESK:
-                resId = R.string.dock_audio_summary_desk;
-                break;
-            case Intent.EXTRA_DOCK_STATE_UNDOCKED:
-                resId = R.string.dock_audio_summary_none;
+
+            boolean isBluetooth = intent.getParcelableExtra(BluetoothDevice.EXTRA_DEVICE) != null;
+
+            if (!isBluetooth) {
+                // No dock audio if not on Bluetooth.
+                mAudioSettings.setEnabled(false);
+                mAudioSettings.setSummary(R.string.dock_audio_summary_unknown);
+            } else {
+                mAudioSettings.setEnabled(true);
+
+                mDockIntent = intent;
+                int resId = R.string.dock_audio_summary_unknown;
+                switch (dockState) {
+                case Intent.EXTRA_DOCK_STATE_CAR:
+                    resId = R.string.dock_audio_summary_car;
+                    break;
+                case Intent.EXTRA_DOCK_STATE_DESK:
+                    resId = R.string.dock_audio_summary_desk;
+                    break;
+                case Intent.EXTRA_DOCK_STATE_UNDOCKED:
+                    resId = R.string.dock_audio_summary_none;
+                }
+                mAudioSettings.setSummary(resId);
             }
-            mAudioSettings.setSummary(resId);
+
             if (dockState != Intent.EXTRA_DOCK_STATE_UNDOCKED) {
                 // remove undocked dialog if currently showing.
                 try {
