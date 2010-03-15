@@ -32,6 +32,7 @@ import android.os.SystemClock;
 import android.os.SystemProperties;
 import android.preference.Preference;
 import android.preference.PreferenceActivity;
+import android.telephony.PhoneNumberUtils;
 import android.telephony.PhoneStateListener;
 import android.telephony.ServiceState;
 import android.telephony.TelephonyManager;
@@ -221,7 +222,7 @@ public class Status extends PreferenceActivity {
             }
         }
 
-        setSummaryText("number", mPhone.getLine1Number());
+        setSummaryText("number", PhoneNumberUtils.formatNumber(mPhone.getLine1Number()));
 
         mPhoneStateReceiver = new PhoneStateIntentReceiver(this, mHandler);
         mPhoneStateReceiver.notifySignalStrength(EVENT_SIGNAL_STRENGTH_CHANGED);
