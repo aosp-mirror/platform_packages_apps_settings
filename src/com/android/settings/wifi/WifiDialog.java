@@ -108,6 +108,7 @@ class WifiDialog extends AlertDialog implements View.OnClickListener,
 
             case AccessPoint.SECURITY_WEP:
                 config.allowedKeyManagement.set(KeyMgmt.NONE);
+                config.allowedAuthAlgorithms.set(AuthAlgorithm.OPEN);
                 config.allowedAuthAlgorithms.set(AuthAlgorithm.SHARED);
                 if (mPassword.length() != 0) {
                     int length = mPassword.length();
