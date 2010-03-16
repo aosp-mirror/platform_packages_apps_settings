@@ -18,6 +18,7 @@ package com.android.settings;
 
 import com.android.settings.wifi.WifiApEnabler;
 
+import android.app.AlertDialog;
 import android.os.Bundle;
 import android.os.SystemProperties;
 import android.content.BroadcastReceiver;
@@ -32,8 +33,10 @@ import android.preference.PreferenceActivity;
 import android.preference.PreferenceScreen;
 import android.provider.Settings;
 import android.util.Log;
+import android.webkit.WebView;
 
 import java.util.ArrayList;
+import java.util.Locale;
 
 /*
  * Displays preferences for Tethering.
@@ -42,12 +45,15 @@ public class TetherSettings extends PreferenceActivity {
     private static final String USB_TETHER_SETTINGS = "usb_tether_settings";
     private static final String ENABLE_WIFI_AP = "enable_wifi_ap";
     private static final String WIFI_AP_SETTINGS = "wifi_ap_settings";
+    private static final String TETHERING_HELP = "tethering_help";
+    private static final String HELP_URL = "file:///android_asset/html/%y_%z/tethering_help.html";
 
     private CheckBoxPreference mUsbTether;
 
     private CheckBoxPreference mEnableWifiAp;
     private PreferenceScreen mWifiApSettings;
     private WifiApEnabler mWifiApEnabler;
+    private PreferenceScreen mTetherHelp;
 
     private BroadcastReceiver mTetherChangeReceiver;
 
@@ -66,6 +72,7 @@ public class TetherSettings extends PreferenceActivity {
         mEnableWifiAp = (CheckBoxPreference) findPreference(ENABLE_WIFI_AP);
         mWifiApSettings = (PreferenceScreen) findPreference(WIFI_AP_SETTINGS);
         mUsbTether = (CheckBoxPreference) findPreference(USB_TETHER_SETTINGS);
+        mTetherHelp = (PreferenceScreen) findPreference(TETHERING_HELP);
 
         ConnectivityManager cm =
                 (ConnectivityManager)getSystemService(Context.CONNECTIVITY_SERVICE);
@@ -252,6 +259,17 @@ public class TetherSettings extends PreferenceActivity {
                 }
                 mUsbTether.setSummary("");
             }
+        } else if (preference == mTetherHelp) {
+            Locale locale = Locale.getDefault();
+            String url = HELP_URL.replace("%y", locale.getLanguage().toLowerCase());
+            url = url.replace("%z", locale.getCountry().toLowerCase());
+            WebView view = new WebView(this);
+            view.loadUrl(url);
+
+            AlertDialog.Builder builder = new AlertDialog.Builder(this);
+            builder.setCancelable(true);
+            builder.setView(view);
+            builder.show();
         }
         return false;
     }
