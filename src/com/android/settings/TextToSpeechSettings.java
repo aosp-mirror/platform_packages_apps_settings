@@ -23,7 +23,9 @@ import static android.provider.Settings.Secure.TTS_DEFAULT_COUNTRY;
 import static android.provider.Settings.Secure.TTS_DEFAULT_VARIANT;
 import static android.provider.Settings.Secure.TTS_DEFAULT_SYNTH;
 
+import android.app.AlertDialog;
 import android.content.ContentResolver;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.content.pm.PackageManager;
@@ -31,7 +33,10 @@ import android.content.pm.ResolveInfo;
 import android.os.Bundle;
 import android.preference.ListPreference;
 import android.preference.Preference;
+import android.preference.Preference.OnPreferenceClickListener;
 import android.preference.PreferenceActivity;
+import android.preference.PreferenceGroup;
+import android.preference.PreferenceScreen;
 import android.preference.CheckBoxPreference;
 import android.provider.Settings;
 import android.provider.Settings.SettingNotFoundException;
@@ -49,6 +54,7 @@ public class TextToSpeechSettings extends PreferenceActivity implements
 
     private static final String TAG = "TextToSpeechSettings";
 
+    private static final String SYSTEM_TTS = "com.svox.pico";
     private static final String KEY_TTS_PLAY_EXAMPLE = "tts_play_example";
     private static final String KEY_TTS_INSTALL_DATA = "tts_install_data";
     private static final String KEY_TTS_USE_DEFAULT = "toggle_use_default_tts_settings";
@@ -57,6 +63,10 @@ public class TextToSpeechSettings extends PreferenceActivity implements
     private static final String KEY_TTS_DEFAULT_COUNTRY = "tts_default_country";
     private static final String KEY_TTS_DEFAULT_VARIANT = "tts_default_variant";
     private static final String KEY_TTS_DEFAULT_SYNTH = "tts_default_synth";
+
+    private static final String KEY_PLUGIN_ENABLED_PREFIX = "ENABLED_";
+    private static final String KEY_PLUGIN_SETTINGS_PREFIX = "SETTINGS_";
+
     // TODO move default Locale values to TextToSpeech.Engine
     private static final String DEFAULT_LANG_VAL = "eng";
     private static final String DEFAULT_COUNTRY_VAL = "USA";
@@ -102,6 +112,8 @@ public class TextToSpeechSettings extends PreferenceActivity implements
 
         addPreferencesFromResource(R.xml.tts_settings);
 
+        addEngineSpecificSettings();
+
         mDemoStrings = getResources().getStringArray(R.array.tts_demo_strings);
 
         setVolumeControlStream(TextToSpeech.Engine.DEFAULT_STREAM);
@@ -130,6 +142,55 @@ public class TextToSpeechSettings extends PreferenceActivity implements
         if (mTts != null) {
             mTts.shutdown();
         }
+    }
+
+
+    private void addEngineSpecificSettings() {
+        PreferenceGroup enginesCategory = (PreferenceGroup) findPreference("tts_engines_section");
+        Intent intent = new Intent("android.intent.action.START_TTS_ENGINE");
+        ResolveInfo[] enginesArray = new ResolveInfo[0];
+        PackageManager pm = getPackageManager();
+        enginesArray = pm.queryIntentActivities(intent, 0).toArray(enginesArray);
+        for (int i = 0; i < enginesArray.length; i++) {
+            String prefKey = "";
+            final String pluginPackageName = enginesArray[i].activityInfo.packageName;
+            if (!enginesArray[i].activityInfo.packageName.equals(SYSTEM_TTS)) {
+                CheckBoxPreference chkbxPref = new CheckBoxPreference(this);
+                prefKey = KEY_PLUGIN_ENABLED_PREFIX + pluginPackageName;
+                chkbxPref.setKey(prefKey);
+                chkbxPref.setTitle(enginesArray[i].loadLabel(pm));
+                enginesCategory.addPreference(chkbxPref);
+            }
+            if (pluginHasSettings(pluginPackageName)) {
+                Preference pref = new Preference(this);
+                prefKey = KEY_PLUGIN_SETTINGS_PREFIX + pluginPackageName;
+                pref.setKey(prefKey);
+                pref.setTitle(enginesArray[i].loadLabel(pm));
+                CharSequence settingsLabel = getResources().getString(
+                        R.string.tts_engine_name_settings, enginesArray[i].loadLabel(pm));
+                pref.setSummary(settingsLabel);
+                pref.setOnPreferenceClickListener(new OnPreferenceClickListener(){
+                            public boolean onPreferenceClick(Preference preference){
+                                Intent i = new Intent();
+                                i.setClassName(pluginPackageName,
+                                        pluginPackageName + ".EngineSettings");
+                                startActivity(i);
+                                return true;
+                            }
+                        });
+                enginesCategory.addPreference(pref);
+            }
+        }
+    }
+
+    private boolean pluginHasSettings(String pluginPackageName) {
+        PackageManager pm = getPackageManager();
+        Intent i = new Intent();
+        i.setClassName(pluginPackageName, pluginPackageName + ".EngineSettings");
+        if (pm.resolveActivity(i, PackageManager.MATCH_DEFAULT_ONLY) != null){
+            return true;
+        }
+        return false;
     }
 
 
@@ -436,6 +497,46 @@ public class TextToSpeechSettings extends PreferenceActivity implements
         return false;
     }
 
+    @Override
+    public boolean onPreferenceTreeClick(PreferenceScreen preferenceScreen, Preference preference) {
+        if (Utils.isMonkeyRunning()) {
+            return false;
+        }
+
+        if (preference instanceof CheckBoxPreference) {
+            final CheckBoxPreference chkPref = (CheckBoxPreference) preference;
+            if (!chkPref.getKey().equals(KEY_TTS_USE_DEFAULT)){
+                if (chkPref.isChecked()) {
+                    chkPref.setChecked(false);
+                    AlertDialog d = (new AlertDialog.Builder(this))
+                            .setTitle(android.R.string.dialog_alert_title)
+                            .setIcon(android.R.drawable.ic_dialog_alert)
+                            .setMessage(getString(R.string.tts_engine_security_warning,
+                                    chkPref.getTitle()))
+                            .setCancelable(true)
+                            .setPositiveButton(android.R.string.ok,
+                                    new DialogInterface.OnClickListener() {
+                                        public void onClick(DialogInterface dialog, int which) {
+                                            chkPref.setChecked(true);
+                                            loadEngines();
+                                        }
+                            })
+                            .setNegativeButton(android.R.string.cancel,
+                                    new DialogInterface.OnClickListener() {
+                                        public void onClick(DialogInterface dialog, int which) {
+                                        }
+                            })
+                            .create();
+                    d.show();
+                } else {
+                    loadEngines();
+                }
+                return true;
+            }
+        }
+        return false;
+    }
+
 
     private void updateWidgetState() {
         mPlayExample.setEnabled(mEnableDemo);
@@ -540,22 +641,36 @@ public class TextToSpeechSettings extends PreferenceActivity implements
     }
 
 
-  private void loadEngines() {
-    ListPreference enginesPref = (ListPreference) findPreference(KEY_TTS_DEFAULT_SYNTH);
+    private void loadEngines() {
+        ListPreference enginesPref = (ListPreference) findPreference(KEY_TTS_DEFAULT_SYNTH);
 
-    Intent intent = new Intent("android.intent.action.START_TTS_ENGINE");
+        // TODO (clchen): Try to see if it is possible to be more efficient here
+        // and not search for plugins again.
+        Intent intent = new Intent("android.intent.action.START_TTS_ENGINE");
+        ResolveInfo[] enginesArray = new ResolveInfo[0];
+        PackageManager pm = getPackageManager();
+        enginesArray = pm.queryIntentActivities(intent, 0).toArray(enginesArray);
+        ArrayList<CharSequence> entries = new ArrayList<CharSequence>();
+        ArrayList<CharSequence> values = new ArrayList<CharSequence>();
+        for (int i = 0; i < enginesArray.length; i++) {
+            if (enginesArray[i].activityInfo.packageName.equals(SYSTEM_TTS)) {
+                entries.add(enginesArray[i].loadLabel(pm));
+                values.add(enginesArray[i].activityInfo.packageName);
+            } else {
+                CheckBoxPreference pref = (CheckBoxPreference) findPreference(
+                        KEY_PLUGIN_ENABLED_PREFIX + enginesArray[i].activityInfo.packageName);
+                if ((pref != null) && pref.isChecked()){
+                    entries.add(enginesArray[i].loadLabel(pm));
+                    values.add(enginesArray[i].activityInfo.packageName);
+                }
+            }
+        }
 
-    ResolveInfo[] enginesArray = new ResolveInfo[0];
-    PackageManager pm = getPackageManager();
-    enginesArray = pm.queryIntentActivities(intent, 0).toArray(enginesArray);
-    CharSequence entries[] = new CharSequence[enginesArray.length];
-    CharSequence values[] = new CharSequence[enginesArray.length];
-    for (int i = 0; i < enginesArray.length; i++) {
-      entries[i] = enginesArray[i].loadLabel(pm);
-      values[i] = enginesArray[i].activityInfo.packageName;
+        CharSequence entriesArray[] = new CharSequence[entries.size()];
+        CharSequence valuesArray[] = new CharSequence[values.size()];
+
+        enginesPref.setEntries(entries.toArray(entriesArray));
+        enginesPref.setEntryValues(values.toArray(valuesArray));
     }
-    enginesPref.setEntries(entries);
-    enginesPref.setEntryValues(values);
-  }
 
 }
