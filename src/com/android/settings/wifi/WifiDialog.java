@@ -125,7 +125,6 @@ class WifiDialog extends AlertDialog implements View.OnClickListener,
 
             case AccessPoint.SECURITY_PSK:
                 config.allowedKeyManagement.set(KeyMgmt.WPA_PSK);
-                config.allowedAuthAlgorithms.set(AuthAlgorithm.OPEN);
                 if (mPassword.length() != 0) {
                     String password = mPassword.getText().toString();
                     if (password.matches("[0-9A-Fa-f]{64}")) {
