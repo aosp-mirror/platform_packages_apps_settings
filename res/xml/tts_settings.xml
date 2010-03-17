@@ -22,12 +22,6 @@
                 android:persistent="false"
                 android:title="@string/tts_play_example_title" 
                 android:summary="@string/tts_play_example_summary" />
-                
-        <Preference
-                android:key="tts_install_data"
-                android:persistent="false"
-                android:title="@string/tts_install_data_title" 
-                android:summary="@string/tts_install_data_summary" />
 
         <CheckBoxPreference
             android:key="toggle_use_default_tts_settings"
@@ -42,7 +36,13 @@
                 android:title="@string/tts_default_synth_title"
                 android:summary="@string/tts_default_synth_summary"
                 android:persistent="false" />
-            
+
+            <ListPreference
+                android:key="tts_install_data"
+                android:persistent="false"
+                android:title="@string/tts_install_data_title" 
+                android:summary="@string/tts_install_data_summary" />
+
             <ListPreference
                 android:key="tts_default_rate"
                 android:title="@string/tts_default_rate_title"
@@ -50,7 +50,7 @@
                 android:persistent="false"
                 android:entries="@array/tts_rate_entries"
                 android:entryValues="@array/tts_rate_values" />
-                
+
             <ListPreference
                 android:key="tts_default_lang"
                 android:title="@string/tts_default_lang_title"
@@ -60,6 +60,9 @@
                 android:entryValues="@array/tts_lang_values" />
 
         </PreferenceCategory>
+
+        <PreferenceCategory android:key="tts_engines_section"
+                android:title="@string/tts_engines_section" />
 
 
 </PreferenceScreen>
