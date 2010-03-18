@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- Copyright (C) 2009 The Android Open Source Project
+<!--  Copyright (C) 2007 The Android Open Source Project
 
      Licensed under the Apache License, Version 2.0 (the "License");
      you may not use this file except in compliance with the License.
@@ -12,7 +12,8 @@
      WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
      See the License for the specific language governing permissions and
      limitations under the License.
--->
+ -->
+
 <resources xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
     <string name="yes" msgid="4676390750360727396">"Ja"</string>
@@ -87,6 +88,8 @@
     <string name="bluetooth_visibility" msgid="2930835434091839916">"Synlighet"</string>
     <string name="bluetooth_is_discoverable" msgid="1205694503775884903">"Synlig i <xliff:g id="DISCOVERABLE_TIME_PERIOD">%1$s</xliff:g> sekunder..."</string>
     <string name="bluetooth_not_discoverable" msgid="128269993123955177">"Gör enheten synlig"</string>
+    <string name="bluetooth_lock_voice_dialing" msgid="3139322992062086225">"Röstuppringning med låsskärm"</string>
+    <string name="bluetooth_lock_voice_dialing_summary" msgid="4741338867496787042">"Förhindra att bluetooth-uppringningsfunktionen används när skärmen är låst"</string>
     <string name="bluetooth_devices" msgid="1886018064039454227">"Bluetooth-enheter"</string>
     <string name="bluetooth_device_name" msgid="8415828355207423800">"Enhetens namn"</string>
     <string name="bluetooth_name_not_set" msgid="2653752006416027426">"Inget namn har angetts, använder kontonamn"</string>
@@ -311,7 +314,6 @@
     <string name="bluetooth_dock_settings_headset" msgid="1001821426078644650">"Som högtalartelefon"</string>
     <string name="bluetooth_dock_settings_a2dp" msgid="8791004998846630574">"För musik och media"</string>
     <string name="bluetooth_dock_settings_remember" msgid="5551459057010609115">"Kom ihåg inställningarna"</string>
-    <string name="wifi" msgid="1081550856200013637">"Wi-Fi"</string>
     <string name="wifi_quick_toggle_title" msgid="874495178395350104">"Wi-Fi"</string>
     <string name="wifi_quick_toggle_summary" msgid="1047950931623694366">"Aktivera Wi-Fi"</string>
     <string name="wifi_settings" msgid="4746946030627213196">"Wi-Fi-inställningar"</string>
@@ -373,6 +375,15 @@
     <string name="wifi_dns2" msgid="1368601006824882659">"DNS 2"</string>
     <string name="wifi_gateway" msgid="163914742461092086">"Gateway"</string>
     <string name="wifi_netmask" msgid="4520635321425529085">"Nätmask"</string>
+    <string name="wifi_tether_checkbox_text" msgid="796007268580464534">"WiFi-sammanlänkning"</string>
+    <string name="wifi_tether_enabled_subtext" msgid="6758080605207549918">"Åtkomstpunkten <xliff:g id="NETWORK_SSID">%1$s</xliff:g> är aktiv"</string>
+    <string name="wifi_tether_failed_subtext" msgid="4379214348183654280">"WiFi-sammanlänkningsfel"</string>
+    <string name="wifi_tether_settings_text" msgid="8831276059149506799">"Inställningar för WiFi-sammanlänkning"</string>
+    <string name="wifi_tether_settings_subtext" msgid="3415164631321782704">"Ställ in och hantera åtkomstpunkt"</string>
+    <string name="wifi_tether_settings_title" msgid="3233393750798545228">"Inställningar för WiFi-sammanlänkning"</string>
+    <string name="wifi_tether_configure_ap_text" msgid="7849700175083202171">"Konfigurera åtkomstpunkt"</string>
+    <string name="wifi_tether_configure_subtext" msgid="54089556089657247">"<xliff:g id="NETWORK_SSID">%1$s</xliff:g> <xliff:g id="NETWORK_SECURITY">%2$s</xliff:g> åtkomstpunkt"</string>
+    <string name="wifi_tether_configure_ssid_default" msgid="4491822321218336928">"Android-åtkomstpunkt"</string>
     <string name="sound_settings_title" msgid="8735891486683305886">"Ljud"</string>
     <string name="display_settings_title" msgid="1708697328627382561">"Skärm"</string>
     <string name="sound_settings" msgid="5007659014828162881">"Ljudinställningar"</string>
@@ -386,6 +397,8 @@
     <string name="ring_volume_title" msgid="7938706566797464165">"Ringvolym"</string>
     <!-- no translation found for ring_volume_summary (7055497624193116879) -->
     <skip />
+    <string name="vibrate_in_silent_title" msgid="3897968069156767036">"Vibrera vid tyst"</string>
+    <string name="vibrate_in_silent_summary" msgid="3312600513070076281">"Tillåt vibrationsfeedback i tyst läge"</string>
     <string name="vibrate_title" msgid="5408984084125311526">"Telefonvibration"</string>
     <string name="vibrate_summary" msgid="5224303668448643275">"Telefonen vibrerar vid inkommande samtal"</string>
     <string name="notification_sound_title" msgid="6316316069880531693">"Ringsignal för avisering"</string>
@@ -407,12 +420,9 @@
     <string name="sound_effects_enable_title" msgid="3197313718929122833">"Ljud vid val"</string>
     <string name="sound_effects_enable_summary_on" msgid="6154141289879491329">"Spela upp ljud när du väljer på skärmen"</string>
     <string name="sound_effects_enable_summary_off" msgid="3447739581759560125">"Spela ljud när du väljer något på skärmen"</string>
-    <!-- no translation found for lock_sounds_enable_title (1575990840389107141) -->
-    <skip />
-    <!-- no translation found for lock_sounds_enable_summary_on (145741024028391473) -->
-    <skip />
-    <!-- no translation found for lock_sounds_enable_summary_off (8481243116223542804) -->
-    <skip />
+    <string name="lock_sounds_enable_title" msgid="1575990840389107141">"Skärmlåsljud"</string>
+    <string name="lock_sounds_enable_summary_on" msgid="145741024028391473">"Spela upp ljud vid låsning och upplåsning av skärmen"</string>
+    <string name="lock_sounds_enable_summary_off" msgid="8481243116223542804">"Spela upp ljud vid låsning och upplåsning av skärmen"</string>
     <string name="haptic_feedback_enable_title" msgid="6311736559245411290">"Haptisk återkoppling"</string>
     <string name="haptic_feedback_enable_summary_on" msgid="1875779656524793053">"Vibrera när funktionsknappar trycks ned och vid vissa gränssnittshändelser"</string>
     <string name="haptic_feedback_enable_summary_off" msgid="7287885436963105314">"Vibrera när funktionsknappar trycks ned och vid vissa gränssnittshändelser"</string>
@@ -427,6 +437,9 @@
     <string name="dock_audio_summary_unknown" msgid="4465059868974255693">"Inställningar för ansluten dockningsenhet"</string>
     <string name="dock_not_found_title" msgid="3290961741828952424">"Ingen dockningsenhet hittades"</string>
     <string name="dock_not_found_text" msgid="3035260358985111855">"Telefonen måste vara dockad när du konfigurerar ljudet för dockning"</string>
+    <string name="dock_sounds_enable_title" msgid="3659084028644948905">"Ljud för placering i docka"</string>
+    <string name="dock_sounds_enable_summary_on" msgid="8491180514199743771">"Spela upp ljud när telefonen placeras i eller tas bort från docka"</string>
+    <string name="dock_sounds_enable_summary_off" msgid="3151046599205265919">"Spela inte upp ljud när telefonen placeras i eller tas bort från docka"</string>
     <string name="sync_settings" msgid="9186125469300013491">"Konton och synkronisering"</string>
     <string name="sync_settings_summary" msgid="2962179505214965667">"Lägg till eller ta bort konton och ändra kontoinställningar"</string>
     <string name="search_settings" msgid="1910951467596035063">"Sök"</string>
@@ -468,8 +481,7 @@
     <string name="system_update_settings_list_item_title" msgid="3342887311059985961">"Systemuppdateringar"</string>
     <!-- no translation found for system_update_settings_list_item_summary (3853057315907710747) -->
     <skip />
-    <!-- no translation found for firmware_version (4801135784886859972) -->
-    <skip />
+    <string name="firmware_version" msgid="4801135784886859972">"Android-version"</string>
     <string name="model_number" msgid="3765737700545384794">"Modellnummer"</string>
     <string name="baseband_version" msgid="1848990160763524801">"Basbandsversion"</string>
     <string name="kernel_version" msgid="9192574954196167602">"Kernel-version"</string>
@@ -509,20 +521,18 @@
     <string name="sd_format_summary" msgid="6616491027883134004">"Formatera (radera) SD-kortet"</string>
     <string name="sd_unavailable" msgid="8580107589533213904">"Inte tillgängligt"</string>
     <string name="read_only" msgid="6702420168629076340">" (Skrivskyddad)"</string>
-    <!-- no translation found for dlg_confirm_unmount_title (1024442654915425534) -->
+    <!-- no translation found for dlg_confirm_unmount_title (8612140627310646730) -->
     <skip />
-    <!-- no translation found for dlg_confirm_unmount_text (4608293598382089766) -->
+    <!-- no translation found for dlg_confirm_unmount_text (5851214273718817727) -->
     <skip />
-    <!-- no translation found for dlg_error_unmount_title (4148354409906593341) -->
+    <!-- no translation found for dlg_error_unmount_title (4004106918266783081) -->
     <skip />
-    <!-- no translation found for dlg_error_unmount_text (5586898213654534611) -->
+    <!-- no translation found for dlg_error_unmount_text (9188972789897713180) -->
     <skip />
-    <!-- no translation found for unmount_inform_text (5766392597765003786) -->
+    <!-- no translation found for unmount_inform_text (3213378327712151498) -->
     <skip />
-    <!-- no translation found for sd_ejecting_title (8824572198034365468) -->
-    <skip />
-    <!-- no translation found for sd_ejecting_summary (2028753069184908491) -->
-    <skip />
+    <string name="sd_ejecting_title" msgid="8824572198034365468">"Monterar bort"</string>
+    <string name="sd_ejecting_summary" msgid="2028753069184908491">"Monterar bort"</string>
     <string name="battery_status_title" msgid="9159414319574976203">"Batteristatus"</string>
     <string name="battery_level_title" msgid="2965679202786873272">"Batterinivå"</string>
     <string name="apn_settings" msgid="3743170484827528406">"APN:er"</string>
@@ -577,15 +587,17 @@
     <string name="media_format_gesture_explanation" msgid="4239529439389660159">"Du måste rita ditt grafiska lösenord för att bekräfta formateringen av SD-kortet."</string>
     <string name="call_settings_title" msgid="5188713413939232801">"Samtalsinställningar"</string>
     <string name="call_settings_summary" msgid="7291195704801002886">"Ställ in röstbrevlåda, vidarebefordra samtal, samtal väntar, nummerpres."</string>
-    <string name="tether_settings_title" msgid="1722086243281663634">"Inställningar för sammanlänkning"</string>
-    <string name="tether_settings_summary" msgid="6622852565352323706">"Ställ in och hantera sammanlänkning"</string>
+    <string name="tether_settings_title" msgid="8703982377504005349">"Sammanlänkning"</string>
+    <string name="tether_settings_summary" msgid="6679594629002850490">"Ställ in och hantera sammanlänkning"</string>
     <string name="tether_screen_title" msgid="1521966915332491855">"Inställningar för sammanlänkning"</string>
-    <string name="enable_tether_notice_checkbox" msgid="5683371235784989464">"Meddelanden"</string>
-    <string name="enable_tether_notice_checkbox_summary" msgid="236184235861504232">"Visa ett meddelande när USB-sammanlänkning är tillgänglig"</string>
+    <string name="usb_title" msgid="7483344855356312510">"USB"</string>
     <string name="usb_tethering_button_text" msgid="585829947108007917">"USB-sammanlänkning"</string>
-    <string name="usb_tethering_available_subtext" msgid="3755973887099973815">"USB-ansluten, välja för att sammanlänka"</string>
-    <string name="usb_tethering_active_subtext" msgid="8738795360071005038">"Ansluten, markera för att koppla från"</string>
+    <string name="usb_tethering_available_subtext" msgid="156779271296152605">"USB-ansluten, markera för att sammanlänka"</string>
+    <string name="usb_tethering_active_subtext" msgid="8916210851136467042">"Sammanlänkad"</string>
+    <string name="usb_tethering_storage_active_subtext" msgid="6608933594288072573">"Det går inte att sammanlänka när USB-lagret används"</string>
     <string name="usb_tethering_unavailable_subtext" msgid="1044622421184007254">"Ingen USB är ansluten"</string>
+    <string name="usb_tethering_errored_subtext" msgid="1377574819427841992">"USB-sammanlänkningsfel"</string>
+    <string name="tethering_help_button_text" msgid="7322604807045355030">"Hjälp om sammanlänkning"</string>
     <string name="network_settings_title" msgid="7967552516440151852">"Mobila nätverk"</string>
     <string name="network_settings_summary" msgid="5149750850846813553">"Ställ in alternativ för roaming, nätverk, APN:er"</string>
     <string name="location_title" msgid="1029961368397484576">"Min plats"</string>
@@ -710,16 +722,30 @@
     <string name="empty_list_msg" msgid="2901049162265094971">"Du har inte installerat några program från tredje part."</string>
     <string name="version_text" msgid="9189073826278676425">"version <xliff:g id="VERSION_NUM">%1$s</xliff:g>"</string>
     <string name="move_app" msgid="5042838441401731346">"Flytta"</string>
-    <string name="move_app_to_internal" msgid="3919318857309344803">"Flytta till flash"</string>
-    <string name="move_app_to_sdcard" msgid="6784919832517488432">"Flytta till SD-kort"</string>
-    <!-- no translation found for moving (6431016143218876491) -->
+    <!-- no translation found for move_app_to_internal (3895430471913858185) -->
     <skip />
-    <string name="force_stop_dlg_title" msgid="2531896882056462617">"Tvingad avslutning"</string>
+    <!-- no translation found for move_app_to_sdcard (1143379049903056407) -->
+    <skip />
+    <string name="moving" msgid="6431016143218876491">"Flyttar"</string>
+    <!-- no translation found for insufficient_storage (8566913062094452962) -->
+    <skip />
+    <!-- no translation found for does_not_exist (837163572898468245) -->
+    <skip />
+    <!-- no translation found for app_forward_locked (5747805144210389585) -->
+    <skip />
+    <!-- no translation found for invalid_location (4934491353200240499) -->
+    <skip />
+    <!-- no translation found for system_package (1030561474413022831) -->
+    <skip />
+    <!-- no translation found for force_stop_dlg_title (4289453224368188476) -->
+    <skip />
     <string name="force_stop_dlg_text" msgid="3381302041569982075">"Programmet kommer att startas direkt. Vill du framtvinga avslutning?"</string>
-    <!-- no translation found for app_install_location_title (2068975150026852168) -->
+    <!-- no translation found for move_app_failed_dlg_title (4337731903265156405) -->
     <skip />
-    <!-- no translation found for app_install_location_summary (879753854530300436) -->
+    <!-- no translation found for move_app_failed_dlg_text (8824246817947643697) -->
     <skip />
+    <string name="app_install_location_title" msgid="2068975150026852168">"Önskad installationsplats"</string>
+    <string name="app_install_location_summary" msgid="879753854530300436">"Ändra önskad installationsplats för nya program."</string>
     <string name="runningservices_settings_title" msgid="8097287939865165213">"Aktiva tjänster"</string>
     <string name="runningservices_settings_summary" msgid="854608995821032748">"Visa och styr aktiva tjänster"</string>
     <string name="service_restarting" msgid="2242747937372354306">"Startar om"</string>
@@ -840,6 +866,9 @@
     <string name="accessibility_service_disable_warning" msgid="8930591383312775132">"Vill du inaktivera tillgänglighet?"</string>
     <string name="accessibility_service_no_apps_title" msgid="898893674114288531">"Hittade inga tillgänglighetsrelaterade program"</string>
     <string name="accessibility_service_no_apps_message" msgid="2450056749545404807">"Du har inga tillgänglighetsrelaterade program installerade."\n\n"Du kan hämta en skärmläsare för enheten från Android Market."\n\n"Klicka på OK om du vill installera skärmläsaren."</string>
+    <string name="accessibility_power_button_category" msgid="8545885236482339928">"Avstängningsknapp"</string>
+    <string name="accessibility_power_button_ends_call" msgid="7698764194501089533">"Avstängningsknappen avslutar samtal"</string>
+    <string name="accessibility_power_button_ends_call_summary" msgid="8878097632186291462">"Under ett samtal avslutar avstängningsknappen samtalet i stället för att stänga av skärmen"</string>
     <string name="power_usage_summary_title" msgid="5180282911164282324">"Batteriförbrukning"</string>
     <string name="power_usage_summary" msgid="7237084831082848168">"Program som har förbrukat batteriet"</string>
     <string name="battery_since_unplugged" msgid="338073389740738437">"Batteriförbrukning sedan bortkoppling"</string>
@@ -934,6 +963,11 @@
     <string name="tts_engine_name_settings" msgid="4974538563074395920">"<xliff:g id="TTS_PLUGIN_ENGINE_NAME">%s</xliff:g>-inställningar"</string>
     <string name="tts_engine_name_is_enabled_summary" msgid="4909484006804022115">"<xliff:g id="TTS_PLUGIN_ENGINE_NAME">%s</xliff:g> är aktiverad"</string>
     <string name="tts_engine_name_is_disabled_summary" msgid="7644198182255168200">"<xliff:g id="TTS_PLUGIN_ENGINE_NAME">%s</xliff:g> är inaktiverad"</string>
+    <string name="pico_languages_and_voices" msgid="4611320375917773238">"Språk och röster"</string>
+    <string name="pico_installed" msgid="2452546687858267414">"Installerad"</string>
+    <string name="pico_not_installed" msgid="6266845418419994311">"Inte installerad"</string>
+    <string name="pico_voice_summary_female" msgid="8047327176247727492">"Kvinna"</string>
+    <string name="pico_voice_summary_male" msgid="8331266854058577610">"Man"</string>
     <string name="gadget_title" msgid="7455548605888590466">"Strömkontroll"</string>
     <string name="gadget_toggle_wifi" msgid="2382963973155082629">"Uppdaterar Wi-Fi-inställningar"</string>
     <string name="gadget_toggle_bluetooth" msgid="7538903239807020826">"Uppdatera Bluetooth-inställningar"</string>

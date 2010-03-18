@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- Copyright (C) 2009 The Android Open Source Project
+<!--  Copyright (C) 2007 The Android Open Source Project
 
      Licensed under the Apache License, Version 2.0 (the "License");
      you may not use this file except in compliance with the License.
@@ -12,7 +12,8 @@
      WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
      See the License for the specific language governing permissions and
      limitations under the License.
--->
+ -->
+
 <resources xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
     <string name="yes" msgid="4676390750360727396">"是"</string>
@@ -87,6 +88,8 @@
     <string name="bluetooth_visibility" msgid="2930835434091839916">"可检测"</string>
     <string name="bluetooth_is_discoverable" msgid="1205694503775884903">"<xliff:g id="DISCOVERABLE_TIME_PERIOD">%1$s</xliff:g> 秒内可检测到..."</string>
     <string name="bluetooth_not_discoverable" msgid="128269993123955177">"可以检测到设备"</string>
+    <string name="bluetooth_lock_voice_dialing" msgid="3139322992062086225">"锁定语音拨号"</string>
+    <string name="bluetooth_lock_voice_dialing_summary" msgid="4741338867496787042">"屏幕锁定时停止使用蓝牙拨号器"</string>
     <string name="bluetooth_devices" msgid="1886018064039454227">"蓝牙设备"</string>
     <string name="bluetooth_device_name" msgid="8415828355207423800">"设备名称"</string>
     <string name="bluetooth_name_not_set" msgid="2653752006416027426">"无名称集，使用帐户名"</string>
@@ -311,7 +314,6 @@
     <string name="bluetooth_dock_settings_headset" msgid="1001821426078644650">"将底座用作免提电话"</string>
     <string name="bluetooth_dock_settings_a2dp" msgid="8791004998846630574">"用于音乐和媒体"</string>
     <string name="bluetooth_dock_settings_remember" msgid="5551459057010609115">"记住设置"</string>
-    <string name="wifi" msgid="1081550856200013637">"Wi-Fi"</string>
     <string name="wifi_quick_toggle_title" msgid="874495178395350104">"Wi-Fi"</string>
     <string name="wifi_quick_toggle_summary" msgid="1047950931623694366">"打开 Wi-Fi"</string>
     <string name="wifi_settings" msgid="4746946030627213196">"Wi-Fi 设置"</string>
@@ -373,6 +375,15 @@
     <string name="wifi_dns2" msgid="1368601006824882659">"域名 2"</string>
     <string name="wifi_gateway" msgid="163914742461092086">"网关"</string>
     <string name="wifi_netmask" msgid="4520635321425529085">"网络掩码"</string>
+    <string name="wifi_tether_checkbox_text" msgid="796007268580464534">"Wi-Fi 绑定"</string>
+    <string name="wifi_tether_enabled_subtext" msgid="6758080605207549918">"接入点 <xliff:g id="NETWORK_SSID">%1$s</xliff:g> 已生效"</string>
+    <string name="wifi_tether_failed_subtext" msgid="4379214348183654280">"Wi-Fi 绑定出错"</string>
+    <string name="wifi_tether_settings_text" msgid="8831276059149506799">"Wi-Fi 绑定设置"</string>
+    <string name="wifi_tether_settings_subtext" msgid="3415164631321782704">"设置和管理接入点"</string>
+    <string name="wifi_tether_settings_title" msgid="3233393750798545228">"Wi-Fi 绑定设置"</string>
+    <string name="wifi_tether_configure_ap_text" msgid="7849700175083202171">"配置接入点"</string>
+    <string name="wifi_tether_configure_subtext" msgid="54089556089657247">"<xliff:g id="NETWORK_SSID">%1$s</xliff:g> <xliff:g id="NETWORK_SECURITY">%2$s</xliff:g> 接入点"</string>
+    <string name="wifi_tether_configure_ssid_default" msgid="4491822321218336928">"AndroidAP"</string>
     <string name="sound_settings_title" msgid="8735891486683305886">"声音"</string>
     <string name="display_settings_title" msgid="1708697328627382561">"显示"</string>
     <string name="sound_settings" msgid="5007659014828162881">"声音设置"</string>
@@ -386,6 +397,8 @@
     <string name="ring_volume_title" msgid="7938706566797464165">"铃声音量"</string>
     <!-- no translation found for ring_volume_summary (7055497624193116879) -->
     <skip />
+    <string name="vibrate_in_silent_title" msgid="3897968069156767036">"静音时振动"</string>
+    <string name="vibrate_in_silent_summary" msgid="3312600513070076281">"静音模式下允许振动反馈"</string>
     <string name="vibrate_title" msgid="5408984084125311526">"手机振动"</string>
     <string name="vibrate_summary" msgid="5224303668448643275">"来电时振动手机"</string>
     <string name="notification_sound_title" msgid="6316316069880531693">"通知铃声"</string>
@@ -407,12 +420,9 @@
     <string name="sound_effects_enable_title" msgid="3197313718929122833">"选择操作音"</string>
     <string name="sound_effects_enable_summary_on" msgid="6154141289879491329">"进行屏幕选取时播放音效"</string>
     <string name="sound_effects_enable_summary_off" msgid="3447739581759560125">"进行屏幕选取时播放音效"</string>
-    <!-- no translation found for lock_sounds_enable_title (1575990840389107141) -->
-    <skip />
-    <!-- no translation found for lock_sounds_enable_summary_on (145741024028391473) -->
-    <skip />
-    <!-- no translation found for lock_sounds_enable_summary_off (8481243116223542804) -->
-    <skip />
+    <string name="lock_sounds_enable_title" msgid="1575990840389107141">"屏幕锁定提示音"</string>
+    <string name="lock_sounds_enable_summary_on" msgid="145741024028391473">"锁定和解锁屏幕时播放声音"</string>
+    <string name="lock_sounds_enable_summary_off" msgid="8481243116223542804">"锁定和解锁屏幕时播放声音"</string>
     <string name="haptic_feedback_enable_title" msgid="6311736559245411290">"触感反馈"</string>
     <string name="haptic_feedback_enable_summary_on" msgid="1875779656524793053">"按软键以及进行某些 UI 交互时振动"</string>
     <string name="haptic_feedback_enable_summary_off" msgid="7287885436963105314">"按软键以及进行某些 UI 交互时振动"</string>
@@ -427,6 +437,9 @@
     <string name="dock_audio_summary_unknown" msgid="4465059868974255693">"附加底座的设置"</string>
     <string name="dock_not_found_title" msgid="3290961741828952424">"未找到底座"</string>
     <string name="dock_not_found_text" msgid="3035260358985111855">"必须将手机插入底座，才能配置底座音频"</string>
+    <string name="dock_sounds_enable_title" msgid="3659084028644948905">"插入底座提示音"</string>
+    <string name="dock_sounds_enable_summary_on" msgid="8491180514199743771">"将电话插入底座或拔出时播放声音"</string>
+    <string name="dock_sounds_enable_summary_off" msgid="3151046599205265919">"电话插入底座或拔出时不播放声音"</string>
     <string name="sync_settings" msgid="9186125469300013491">"帐户与同步"</string>
     <string name="sync_settings_summary" msgid="2962179505214965667">"添加或删除帐户和更改帐户设置"</string>
     <string name="search_settings" msgid="1910951467596035063">"搜索"</string>
@@ -468,8 +481,7 @@
     <string name="system_update_settings_list_item_title" msgid="3342887311059985961">"系统更新"</string>
     <!-- no translation found for system_update_settings_list_item_summary (3853057315907710747) -->
     <skip />
-    <!-- no translation found for firmware_version (4801135784886859972) -->
-    <skip />
+    <string name="firmware_version" msgid="4801135784886859972">"Android 版本"</string>
     <string name="model_number" msgid="3765737700545384794">"型号"</string>
     <string name="baseband_version" msgid="1848990160763524801">"基带版本"</string>
     <string name="kernel_version" msgid="9192574954196167602">"内核版本"</string>
@@ -509,20 +521,18 @@
     <string name="sd_format_summary" msgid="6616491027883134004">"格式化（清除）SD 卡"</string>
     <string name="sd_unavailable" msgid="8580107589533213904">"不可用"</string>
     <string name="read_only" msgid="6702420168629076340">" （只读）"</string>
-    <!-- no translation found for dlg_confirm_unmount_title (1024442654915425534) -->
+    <!-- no translation found for dlg_confirm_unmount_title (8612140627310646730) -->
     <skip />
-    <!-- no translation found for dlg_confirm_unmount_text (4608293598382089766) -->
+    <!-- no translation found for dlg_confirm_unmount_text (5851214273718817727) -->
     <skip />
-    <!-- no translation found for dlg_error_unmount_title (4148354409906593341) -->
+    <!-- no translation found for dlg_error_unmount_title (4004106918266783081) -->
     <skip />
-    <!-- no translation found for dlg_error_unmount_text (5586898213654534611) -->
+    <!-- no translation found for dlg_error_unmount_text (9188972789897713180) -->
     <skip />
-    <!-- no translation found for unmount_inform_text (5766392597765003786) -->
+    <!-- no translation found for unmount_inform_text (3213378327712151498) -->
     <skip />
-    <!-- no translation found for sd_ejecting_title (8824572198034365468) -->
-    <skip />
-    <!-- no translation found for sd_ejecting_summary (2028753069184908491) -->
-    <skip />
+    <string name="sd_ejecting_title" msgid="8824572198034365468">"正在卸载"</string>
+    <string name="sd_ejecting_summary" msgid="2028753069184908491">"正在卸载"</string>
     <string name="battery_status_title" msgid="9159414319574976203">"电池状态"</string>
     <string name="battery_level_title" msgid="2965679202786873272">"电池电量"</string>
     <string name="apn_settings" msgid="3743170484827528406">"APN"</string>
@@ -577,15 +587,17 @@
     <string name="media_format_gesture_explanation" msgid="4239529439389660159">"您必须绘制解锁图案以确认将 SD 卡格式化。"</string>
     <string name="call_settings_title" msgid="5188713413939232801">"通话设置"</string>
     <string name="call_settings_summary" msgid="7291195704801002886">"设置语音信箱、来电转接、来电等待和本机号码显示"</string>
-    <string name="tether_settings_title" msgid="1722086243281663634">"绑定设置"</string>
-    <string name="tether_settings_summary" msgid="6622852565352323706">"设置和管理绑定"</string>
+    <string name="tether_settings_title" msgid="8703982377504005349">"绑定"</string>
+    <string name="tether_settings_summary" msgid="6679594629002850490">"设置和管理绑定"</string>
     <string name="tether_screen_title" msgid="1521966915332491855">"绑定设置"</string>
-    <string name="enable_tether_notice_checkbox" msgid="5683371235784989464">"通知"</string>
-    <string name="enable_tether_notice_checkbox_summary" msgid="236184235861504232">"在可绑定 USB 时显示通知"</string>
+    <string name="usb_title" msgid="7483344855356312510">"USB 绑定选项"</string>
     <string name="usb_tethering_button_text" msgid="585829947108007917">"USB 绑定"</string>
-    <string name="usb_tethering_available_subtext" msgid="3755973887099973815">"USB 已连接，选择绑定"</string>
-    <string name="usb_tethering_active_subtext" msgid="8738795360071005038">"已连接，可选择断开绑定"</string>
+    <string name="usb_tethering_available_subtext" msgid="156779271296152605">"USB 已连接，选中以绑定"</string>
+    <string name="usb_tethering_active_subtext" msgid="8916210851136467042">"已绑定"</string>
+    <string name="usb_tethering_storage_active_subtext" msgid="6608933594288072573">"使用 USB 存储设备时无法绑定"</string>
     <string name="usb_tethering_unavailable_subtext" msgid="1044622421184007254">"USB 未连接"</string>
+    <string name="usb_tethering_errored_subtext" msgid="1377574819427841992">"USB 绑定出错"</string>
+    <string name="tethering_help_button_text" msgid="7322604807045355030">"绑定帮助"</string>
     <string name="network_settings_title" msgid="7967552516440151852">"移动网络"</string>
     <string name="network_settings_summary" msgid="5149750850846813553">"设置漫游、网络、APN 选项"</string>
     <string name="location_title" msgid="1029961368397484576">"我的位置"</string>
@@ -710,16 +722,30 @@
     <string name="empty_list_msg" msgid="2901049162265094971">"未安装任何第三方应用程序。"</string>
     <string name="version_text" msgid="9189073826278676425">"版本 <xliff:g id="VERSION_NUM">%1$s</xliff:g>"</string>
     <string name="move_app" msgid="5042838441401731346">"移动"</string>
-    <string name="move_app_to_internal" msgid="3919318857309344803">"移至闪存"</string>
-    <string name="move_app_to_sdcard" msgid="6784919832517488432">"移至 SD 卡"</string>
-    <!-- no translation found for moving (6431016143218876491) -->
+    <!-- no translation found for move_app_to_internal (3895430471913858185) -->
     <skip />
-    <string name="force_stop_dlg_title" msgid="2531896882056462617">"强行停止"</string>
+    <!-- no translation found for move_app_to_sdcard (1143379049903056407) -->
+    <skip />
+    <string name="moving" msgid="6431016143218876491">"正在移动"</string>
+    <!-- no translation found for insufficient_storage (8566913062094452962) -->
+    <skip />
+    <!-- no translation found for does_not_exist (837163572898468245) -->
+    <skip />
+    <!-- no translation found for app_forward_locked (5747805144210389585) -->
+    <skip />
+    <!-- no translation found for invalid_location (4934491353200240499) -->
+    <skip />
+    <!-- no translation found for system_package (1030561474413022831) -->
+    <skip />
+    <!-- no translation found for force_stop_dlg_title (4289453224368188476) -->
+    <skip />
     <string name="force_stop_dlg_text" msgid="3381302041569982075">"此应用程序将立即重新启动。您确定要强行停止应用程序吗？"</string>
-    <!-- no translation found for app_install_location_title (2068975150026852168) -->
+    <!-- no translation found for move_app_failed_dlg_title (4337731903265156405) -->
     <skip />
-    <!-- no translation found for app_install_location_summary (879753854530300436) -->
+    <!-- no translation found for move_app_failed_dlg_text (8824246817947643697) -->
     <skip />
+    <string name="app_install_location_title" msgid="2068975150026852168">"首选安装位置"</string>
+    <string name="app_install_location_summary" msgid="879753854530300436">"更改安装新应用程序时使用的首选安装位置"</string>
     <string name="runningservices_settings_title" msgid="8097287939865165213">"正在运行的服务"</string>
     <string name="runningservices_settings_summary" msgid="854608995821032748">"查看和控制当前正在运行的服务"</string>
     <string name="service_restarting" msgid="2242747937372354306">"正在重新启动"</string>
@@ -840,6 +866,9 @@
     <string name="accessibility_service_disable_warning" msgid="8930591383312775132">"是否停用辅助功能？"</string>
     <string name="accessibility_service_no_apps_title" msgid="898893674114288531">"找不到与辅助功能相关的应用程序"</string>
     <string name="accessibility_service_no_apps_message" msgid="2450056749545404807">"您没有安装任何与辅助功能相关的应用程序。"\n\n"您可以从 Android 电子市场下载适用于您设备的屏幕阅读器。"\n\n"点击“确定”即可安装屏幕阅读器。"</string>
+    <string name="accessibility_power_button_category" msgid="8545885236482339928">"“电源”按钮"</string>
+    <string name="accessibility_power_button_ends_call" msgid="7698764194501089533">"按“电源”按钮结束通话"</string>
+    <string name="accessibility_power_button_ends_call_summary" msgid="8878097632186291462">"通话时，按下“电源”将结束通话而不是关闭屏幕"</string>
     <string name="power_usage_summary_title" msgid="5180282911164282324">"电量使用情况"</string>
     <string name="power_usage_summary" msgid="7237084831082848168">"耗电情况"</string>
     <string name="battery_since_unplugged" msgid="338073389740738437">"拔下电源后的电量消耗情况"</string>
@@ -934,6 +963,11 @@
     <string name="tts_engine_name_settings" msgid="4974538563074395920">"<xliff:g id="TTS_PLUGIN_ENGINE_NAME">%s</xliff:g> 设置"</string>
     <string name="tts_engine_name_is_enabled_summary" msgid="4909484006804022115">"已启用 <xliff:g id="TTS_PLUGIN_ENGINE_NAME">%s</xliff:g>"</string>
     <string name="tts_engine_name_is_disabled_summary" msgid="7644198182255168200">"已停用 <xliff:g id="TTS_PLUGIN_ENGINE_NAME">%s</xliff:g>"</string>
+    <string name="pico_languages_and_voices" msgid="4611320375917773238">"语言和语音"</string>
+    <string name="pico_installed" msgid="2452546687858267414">"已安装"</string>
+    <string name="pico_not_installed" msgid="6266845418419994311">"未安装"</string>
+    <string name="pico_voice_summary_female" msgid="8047327176247727492">"女声"</string>
+    <string name="pico_voice_summary_male" msgid="8331266854058577610">"男声"</string>
     <string name="gadget_title" msgid="7455548605888590466">"电量控制"</string>
     <string name="gadget_toggle_wifi" msgid="2382963973155082629">"正在更新 Wi-Fi 设置"</string>
     <string name="gadget_toggle_bluetooth" msgid="7538903239807020826">"正在更新蓝牙设置"</string>

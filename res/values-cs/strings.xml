@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- Copyright (C) 2009 The Android Open Source Project
+<!--  Copyright (C) 2007 The Android Open Source Project
 
      Licensed under the Apache License, Version 2.0 (the "License");
      you may not use this file except in compliance with the License.
@@ -12,7 +12,8 @@
      WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
      See the License for the specific language governing permissions and
      limitations under the License.
--->
+ -->
+
 <resources xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
     <string name="yes" msgid="4676390750360727396">"Ano"</string>
@@ -87,6 +88,8 @@
     <string name="bluetooth_visibility" msgid="2930835434091839916">"Viditelné"</string>
     <string name="bluetooth_is_discoverable" msgid="1205694503775884903">"Zařízení je viditelné v intervalu <xliff:g id="DISCOVERABLE_TIME_PERIOD">%1$s</xliff:g> s."</string>
     <string name="bluetooth_not_discoverable" msgid="128269993123955177">"Přepne zařízení do viditelného režimu"</string>
+    <string name="bluetooth_lock_voice_dialing" msgid="3139322992062086225">"Uzamknout hlasové vytáčení"</string>
+    <string name="bluetooth_lock_voice_dialing_summary" msgid="4741338867496787042">"Zabránit použití vytáčení Bluetooth při uzamčené obrazovce"</string>
     <string name="bluetooth_devices" msgid="1886018064039454227">"Zařízení Bluetooth"</string>
     <string name="bluetooth_device_name" msgid="8415828355207423800">"Název zařízení"</string>
     <string name="bluetooth_name_not_set" msgid="2653752006416027426">"Název není nastaven, použit název účtu"</string>
@@ -311,7 +314,6 @@
     <string name="bluetooth_dock_settings_headset" msgid="1001821426078644650">"Jako telefon pro hlasitý poslech"</string>
     <string name="bluetooth_dock_settings_a2dp" msgid="8791004998846630574">"Pro hudbu a média"</string>
     <string name="bluetooth_dock_settings_remember" msgid="5551459057010609115">"Zapamatovat nastavení"</string>
-    <string name="wifi" msgid="1081550856200013637">"WiFi"</string>
     <string name="wifi_quick_toggle_title" msgid="874495178395350104">"WiFi"</string>
     <string name="wifi_quick_toggle_summary" msgid="1047950931623694366">"Zapnout WiFi"</string>
     <string name="wifi_settings" msgid="4746946030627213196">"Nastavení WiFi"</string>
@@ -373,6 +375,15 @@
     <string name="wifi_dns2" msgid="1368601006824882659">"Server DNS 2"</string>
     <string name="wifi_gateway" msgid="163914742461092086">"Brána"</string>
     <string name="wifi_netmask" msgid="4520635321425529085">"Maska sítě"</string>
+    <string name="wifi_tether_checkbox_text" msgid="796007268580464534">"Sdílení datového připojení prostřednictvím WiFi"</string>
+    <string name="wifi_tether_enabled_subtext" msgid="6758080605207549918">"Přístupový bod <xliff:g id="NETWORK_SSID">%1$s</xliff:g> je aktivní"</string>
+    <string name="wifi_tether_failed_subtext" msgid="4379214348183654280">"Chyba sdílení datového připojení prostřednictvím WiFi"</string>
+    <string name="wifi_tether_settings_text" msgid="8831276059149506799">"Nastavení sdílení datového připojení prostřednictvím WiFi"</string>
+    <string name="wifi_tether_settings_subtext" msgid="3415164631321782704">"Nastavení a správa přístupového bodu"</string>
+    <string name="wifi_tether_settings_title" msgid="3233393750798545228">"Nastavení sdílení datového připojení prostřednictvím WiFi"</string>
+    <string name="wifi_tether_configure_ap_text" msgid="7849700175083202171">"Konfigurovat přístupový bod"</string>
+    <string name="wifi_tether_configure_subtext" msgid="54089556089657247">"Přístupový bod: <xliff:g id="NETWORK_SSID">%1$s</xliff:g> <xliff:g id="NETWORK_SECURITY">%2$s</xliff:g>"</string>
+    <string name="wifi_tether_configure_ssid_default" msgid="4491822321218336928">"Přístupový bod AndroidAP"</string>
     <string name="sound_settings_title" msgid="8735891486683305886">"Zvuk"</string>
     <string name="display_settings_title" msgid="1708697328627382561">"Zobrazení"</string>
     <string name="sound_settings" msgid="5007659014828162881">"Nastavení zvuku"</string>
@@ -386,6 +397,8 @@
     <string name="ring_volume_title" msgid="7938706566797464165">"Hlasitost vyzvánění"</string>
     <!-- no translation found for ring_volume_summary (7055497624193116879) -->
     <skip />
+    <string name="vibrate_in_silent_title" msgid="3897968069156767036">"Vibrovat v tichém režimu"</string>
+    <string name="vibrate_in_silent_summary" msgid="3312600513070076281">"Povolit odezvu vibracemi v tichém režimu"</string>
     <string name="vibrate_title" msgid="5408984084125311526">"Vibrace telefonu"</string>
     <string name="vibrate_summary" msgid="5224303668448643275">"Při příchozím hovoru vibrovat"</string>
     <string name="notification_sound_title" msgid="6316316069880531693">"Tón oznámení"</string>
@@ -407,12 +420,9 @@
     <string name="sound_effects_enable_title" msgid="3197313718929122833">"Výběr se zvuky"</string>
     <string name="sound_effects_enable_summary_on" msgid="6154141289879491329">"Výběr na obrazovce je provázen zvuky"</string>
     <string name="sound_effects_enable_summary_off" msgid="3447739581759560125">"Výběr na obrazovce je provázen zvuky"</string>
-    <!-- no translation found for lock_sounds_enable_title (1575990840389107141) -->
-    <skip />
-    <!-- no translation found for lock_sounds_enable_summary_on (145741024028391473) -->
-    <skip />
-    <!-- no translation found for lock_sounds_enable_summary_off (8481243116223542804) -->
-    <skip />
+    <string name="lock_sounds_enable_title" msgid="1575990840389107141">"Zvuky uzamčení obrazovky"</string>
+    <string name="lock_sounds_enable_summary_on" msgid="145741024028391473">"Přehrát zvuk při uzamykání a odemykání obrazovky"</string>
+    <string name="lock_sounds_enable_summary_off" msgid="8481243116223542804">"Přehrát zvuk při uzamykání a odemykání obrazovky"</string>
     <string name="haptic_feedback_enable_title" msgid="6311736559245411290">"Hmatová odezva"</string>
     <string name="haptic_feedback_enable_summary_on" msgid="1875779656524793053">"Vibrovat při stisku softwarových kláves a při některých událostech uživatelského rozhraní"</string>
     <string name="haptic_feedback_enable_summary_off" msgid="7287885436963105314">"Vibrovat při stisku softwarových kláves a při některých událostech uživatelského rozhraní"</string>
@@ -427,6 +437,9 @@
     <string name="dock_audio_summary_unknown" msgid="4465059868974255693">"Nastavení připojeného doku"</string>
     <string name="dock_not_found_title" msgid="3290961741828952424">"Dok nebyl nalezen"</string>
     <string name="dock_not_found_text" msgid="3035260358985111855">"Chcete-li konfigurovat zvuk doku, musí v něm být telefon vložen."</string>
+    <string name="dock_sounds_enable_title" msgid="3659084028644948905">"Zvuk při vkládání do doku"</string>
+    <string name="dock_sounds_enable_summary_on" msgid="8491180514199743771">"Přehrát zvuk při vkládání nebo vyjímání telefonu z doku"</string>
+    <string name="dock_sounds_enable_summary_off" msgid="3151046599205265919">"Nepřehrávat zvuk při vkládání nebo vyjímání telefonu z doku"</string>
     <string name="sync_settings" msgid="9186125469300013491">"Účty a synchronizace"</string>
     <string name="sync_settings_summary" msgid="2962179505214965667">"Umožňuje přidat nebo odebrat účty a změnit jejich nastavení"</string>
     <string name="search_settings" msgid="1910951467596035063">"Vyhledávání"</string>
@@ -468,8 +481,7 @@
     <string name="system_update_settings_list_item_title" msgid="3342887311059985961">"Aktualizace systému"</string>
     <!-- no translation found for system_update_settings_list_item_summary (3853057315907710747) -->
     <skip />
-    <!-- no translation found for firmware_version (4801135784886859972) -->
-    <skip />
+    <string name="firmware_version" msgid="4801135784886859972">"Verze systému Android"</string>
     <string name="model_number" msgid="3765737700545384794">"Označení modelu"</string>
     <string name="baseband_version" msgid="1848990160763524801">"Verze základního pásma"</string>
     <string name="kernel_version" msgid="9192574954196167602">"Verze jádra"</string>
@@ -509,20 +521,18 @@
     <string name="sd_format_summary" msgid="6616491027883134004">"Formátovat (vymazat) kartu SD"</string>
     <string name="sd_unavailable" msgid="8580107589533213904">"Nedostupný údaj"</string>
     <string name="read_only" msgid="6702420168629076340">" (Pouze pro čtení)"</string>
-    <!-- no translation found for dlg_confirm_unmount_title (1024442654915425534) -->
+    <!-- no translation found for dlg_confirm_unmount_title (8612140627310646730) -->
     <skip />
-    <!-- no translation found for dlg_confirm_unmount_text (4608293598382089766) -->
+    <!-- no translation found for dlg_confirm_unmount_text (5851214273718817727) -->
     <skip />
-    <!-- no translation found for dlg_error_unmount_title (4148354409906593341) -->
+    <!-- no translation found for dlg_error_unmount_title (4004106918266783081) -->
     <skip />
-    <!-- no translation found for dlg_error_unmount_text (5586898213654534611) -->
+    <!-- no translation found for dlg_error_unmount_text (9188972789897713180) -->
     <skip />
-    <!-- no translation found for unmount_inform_text (5766392597765003786) -->
+    <!-- no translation found for unmount_inform_text (3213378327712151498) -->
     <skip />
-    <!-- no translation found for sd_ejecting_title (8824572198034365468) -->
-    <skip />
-    <!-- no translation found for sd_ejecting_summary (2028753069184908491) -->
-    <skip />
+    <string name="sd_ejecting_title" msgid="8824572198034365468">"Odpojování"</string>
+    <string name="sd_ejecting_summary" msgid="2028753069184908491">"Probíhá odpojování"</string>
     <string name="battery_status_title" msgid="9159414319574976203">"Stav baterie"</string>
     <string name="battery_level_title" msgid="2965679202786873272">"Stav baterie"</string>
     <string name="apn_settings" msgid="3743170484827528406">"Přístupové body"</string>
@@ -577,15 +587,17 @@
     <string name="media_format_gesture_explanation" msgid="4239529439389660159">"Formátování karty SD je potřeba potvrdit nakreslením bezpečnostního gesta."</string>
     <string name="call_settings_title" msgid="5188713413939232801">"Nastavení hovorů"</string>
     <string name="call_settings_summary" msgid="7291195704801002886">"Nastavení hlasové schránky, přesměrování a čekání hovorů a ID volajícího"</string>
-    <string name="tether_settings_title" msgid="1722086243281663634">"Nastavení sdíleného datového připojení"</string>
-    <string name="tether_settings_summary" msgid="6622852565352323706">"Nastavení a správa sdíleného datového připojení"</string>
+    <string name="tether_settings_title" msgid="8703982377504005349">"Sdílení datového připojení"</string>
+    <string name="tether_settings_summary" msgid="6679594629002850490">"Nastavení a správa sdíleného datového připojení"</string>
     <string name="tether_screen_title" msgid="1521966915332491855">"Nastavení sdíleného datového připojení"</string>
-    <string name="enable_tether_notice_checkbox" msgid="5683371235784989464">"Oznámení"</string>
-    <string name="enable_tether_notice_checkbox_summary" msgid="236184235861504232">"Zobrazit oznámení, jakmile je k dispozici sdílení datového připojení prostřednictvím portu USB"</string>
+    <string name="usb_title" msgid="7483344855356312510">"USB"</string>
     <string name="usb_tethering_button_text" msgid="585829947108007917">"Sdílené datové připojení prostřednictvím portu USB"</string>
-    <string name="usb_tethering_available_subtext" msgid="3755973887099973815">"Připojení USB je k dispozici. Chcete-li vytvořit sdílené datové připojení, vyberte je."</string>
-    <string name="usb_tethering_active_subtext" msgid="8738795360071005038">"Připojeno. Vyberte, chcete-li propojení odpojit."</string>
+    <string name="usb_tethering_available_subtext" msgid="156779271296152605">"Připojení USB je k dispozici. Chcete-li vytvořit sdílené datové připojení, vyberte je."</string>
+    <string name="usb_tethering_active_subtext" msgid="8916210851136467042">"Sdíleno"</string>
+    <string name="usb_tethering_storage_active_subtext" msgid="6608933594288072573">"Nelze sdílet datové připojení, pokud se používá úložiště USB"</string>
     <string name="usb_tethering_unavailable_subtext" msgid="1044622421184007254">"Připojení USB není k dispozici"</string>
+    <string name="usb_tethering_errored_subtext" msgid="1377574819427841992">"Chyba sdílení datového připojení prostřednictvím USB"</string>
+    <string name="tethering_help_button_text" msgid="7322604807045355030">"Nápověda ke sdílení datového připojení"</string>
     <string name="network_settings_title" msgid="7967552516440151852">"Mobilní sítě"</string>
     <string name="network_settings_summary" msgid="5149750850846813553">"Nastavení roamingu, sítí a názvů přístupových bodů"</string>
     <string name="location_title" msgid="1029961368397484576">"Moje poloha"</string>
@@ -710,16 +722,30 @@
     <string name="empty_list_msg" msgid="2901049162265094971">"Žádné aplikace třetích stran nejsou nainstalovány."</string>
     <string name="version_text" msgid="9189073826278676425">"verze <xliff:g id="VERSION_NUM">%1$s</xliff:g>"</string>
     <string name="move_app" msgid="5042838441401731346">"Přesunout"</string>
-    <string name="move_app_to_internal" msgid="3919318857309344803">"Přesunout do paměti flash"</string>
-    <string name="move_app_to_sdcard" msgid="6784919832517488432">"Přesunout na kartu SD"</string>
-    <!-- no translation found for moving (6431016143218876491) -->
+    <!-- no translation found for move_app_to_internal (3895430471913858185) -->
     <skip />
-    <string name="force_stop_dlg_title" msgid="2531896882056462617">"Vynutit zastavení"</string>
+    <!-- no translation found for move_app_to_sdcard (1143379049903056407) -->
+    <skip />
+    <string name="moving" msgid="6431016143218876491">"Přesouvání"</string>
+    <!-- no translation found for insufficient_storage (8566913062094452962) -->
+    <skip />
+    <!-- no translation found for does_not_exist (837163572898468245) -->
+    <skip />
+    <!-- no translation found for app_forward_locked (5747805144210389585) -->
+    <skip />
+    <!-- no translation found for invalid_location (4934491353200240499) -->
+    <skip />
+    <!-- no translation found for system_package (1030561474413022831) -->
+    <skip />
+    <!-- no translation found for force_stop_dlg_title (4289453224368188476) -->
+    <skip />
     <string name="force_stop_dlg_text" msgid="3381302041569982075">"Tato aplikace bude okamžitě restartována. Opravdu chcete vynutit její zastavení?"</string>
-    <!-- no translation found for app_install_location_title (2068975150026852168) -->
+    <!-- no translation found for move_app_failed_dlg_title (4337731903265156405) -->
     <skip />
-    <!-- no translation found for app_install_location_summary (879753854530300436) -->
+    <!-- no translation found for move_app_failed_dlg_text (8824246817947643697) -->
     <skip />
+    <string name="app_install_location_title" msgid="2068975150026852168">"Preferované umístění pro instalaci"</string>
+    <string name="app_install_location_summary" msgid="879753854530300436">"Změna preferovaného umístění pro instalaci nových aplikací"</string>
     <string name="runningservices_settings_title" msgid="8097287939865165213">"Spuštěné služby"</string>
     <string name="runningservices_settings_summary" msgid="854608995821032748">"Umožňuje zobrazit a ovládat aktuálně spuštěné služby"</string>
     <string name="service_restarting" msgid="2242747937372354306">"Probíhá restartování"</string>
@@ -840,6 +866,9 @@
     <string name="accessibility_service_disable_warning" msgid="8930591383312775132">"Deaktivovat usnadnění?"</string>
     <string name="accessibility_service_no_apps_title" msgid="898893674114288531">"Nebyly nalezeny žádné aplikace týkající se usnadnění"</string>
     <string name="accessibility_service_no_apps_message" msgid="2450056749545404807">"Nejsou nainstalovány žádné aplikace týkající se usnadnění."\n\n"Prostřednictvím služby Android Market můžete do svého zařízení stáhnout čtečku obrazovky."\n\n"Kliknutím na tlačítko OK čtečku obrazovky nainstalujete."</string>
+    <string name="accessibility_power_button_category" msgid="8545885236482339928">"Tlačítko Napájení"</string>
+    <string name="accessibility_power_button_ends_call" msgid="7698764194501089533">"Tlačítko Napájení ukončuje hovor"</string>
+    <string name="accessibility_power_button_ends_call_summary" msgid="8878097632186291462">"Stisknutí tlačítka Napájení během hovoru ukončí hovor místo vypnutí obrazovky"</string>
     <string name="power_usage_summary_title" msgid="5180282911164282324">"Využití baterie"</string>
     <string name="power_usage_summary" msgid="7237084831082848168">"Co využívá baterii"</string>
     <string name="battery_since_unplugged" msgid="338073389740738437">"Využití baterie od odpojení"</string>
@@ -934,6 +963,11 @@
     <string name="tts_engine_name_settings" msgid="4974538563074395920">"Nastavení modulu <xliff:g id="TTS_PLUGIN_ENGINE_NAME">%s</xliff:g>"</string>
     <string name="tts_engine_name_is_enabled_summary" msgid="4909484006804022115">"Položka <xliff:g id="TTS_PLUGIN_ENGINE_NAME">%s</xliff:g> je aktivována"</string>
     <string name="tts_engine_name_is_disabled_summary" msgid="7644198182255168200">"Možnost <xliff:g id="TTS_PLUGIN_ENGINE_NAME">%s</xliff:g> je deaktivována"</string>
+    <string name="pico_languages_and_voices" msgid="4611320375917773238">"Jazyky a hlasy"</string>
+    <string name="pico_installed" msgid="2452546687858267414">"Nainstalováno"</string>
+    <string name="pico_not_installed" msgid="6266845418419994311">"Není nainstalováno"</string>
+    <string name="pico_voice_summary_female" msgid="8047327176247727492">"Žena"</string>
+    <string name="pico_voice_summary_male" msgid="8331266854058577610">"Muž"</string>
     <string name="gadget_title" msgid="7455548605888590466">"Ovládací prvek napájení"</string>
     <string name="gadget_toggle_wifi" msgid="2382963973155082629">"Probíhá aktualizace nastavení Wi-Fi"</string>
     <string name="gadget_toggle_bluetooth" msgid="7538903239807020826">"Probíhá aktualizace nastavení Bluetooth"</string>

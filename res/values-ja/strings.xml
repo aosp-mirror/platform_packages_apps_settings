@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- Copyright (C) 2009 The Android Open Source Project
+<!--  Copyright (C) 2007 The Android Open Source Project
 
      Licensed under the Apache License, Version 2.0 (the "License");
      you may not use this file except in compliance with the License.
@@ -12,7 +12,8 @@
      WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
      See the License for the specific language governing permissions and
      limitations under the License.
--->
+ -->
+
 <resources xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
     <string name="yes" msgid="4676390750360727396">"はい"</string>
@@ -87,6 +88,8 @@
     <string name="bluetooth_visibility" msgid="2930835434091839916">"検出可能"</string>
     <string name="bluetooth_is_discoverable" msgid="1205694503775884903">"<xliff:g id="DISCOVERABLE_TIME_PERIOD">%1$s</xliff:g>秒間検出可能..."</string>
     <string name="bluetooth_not_discoverable" msgid="128269993123955177">"この端末が検出されることを許可する"</string>
+    <string name="bluetooth_lock_voice_dialing" msgid="3139322992062086225">"ボイスダイヤルをロック"</string>
+    <string name="bluetooth_lock_voice_dialing_summary" msgid="4741338867496787042">"画面がロックされているときはBluetoothボイスダイヤルを使用しない"</string>
     <string name="bluetooth_devices" msgid="1886018064039454227">"Bluetooth端末"</string>
     <string name="bluetooth_device_name" msgid="8415828355207423800">"端末名"</string>
     <string name="bluetooth_name_not_set" msgid="2653752006416027426">"名前が設定されていない場合、アカウント名を使用する"</string>
@@ -311,7 +314,6 @@
     <string name="bluetooth_dock_settings_headset" msgid="1001821426078644650">"スピーカーフォン"</string>
     <string name="bluetooth_dock_settings_a2dp" msgid="8791004998846630574">"音楽とメディア"</string>
     <string name="bluetooth_dock_settings_remember" msgid="5551459057010609115">"設定を保存"</string>
-    <string name="wifi" msgid="1081550856200013637">"Wi-Fi"</string>
     <string name="wifi_quick_toggle_title" msgid="874495178395350104">"Wi-Fi"</string>
     <string name="wifi_quick_toggle_summary" msgid="1047950931623694366">"Wi-FiをONにする"</string>
     <string name="wifi_settings" msgid="4746946030627213196">"Wi-Fi設定"</string>
@@ -373,6 +375,15 @@
     <string name="wifi_dns2" msgid="1368601006824882659">"DNS 2"</string>
     <string name="wifi_gateway" msgid="163914742461092086">"ゲートウェイ"</string>
     <string name="wifi_netmask" msgid="4520635321425529085">"ネットマスク"</string>
+    <string name="wifi_tether_checkbox_text" msgid="796007268580464534">"Wi-Fiテザリング"</string>
+    <string name="wifi_tether_enabled_subtext" msgid="6758080605207549918">"アクセスポンイト<xliff:g id="NETWORK_SSID">%1$s</xliff:g>が有効です"</string>
+    <string name="wifi_tether_failed_subtext" msgid="4379214348183654280">"Wi-Fiテザリングエラー"</string>
+    <string name="wifi_tether_settings_text" msgid="8831276059149506799">"Wi-Fiテザリング設定"</string>
+    <string name="wifi_tether_settings_subtext" msgid="3415164631321782704">"アクセスポイントのセットアップと管理"</string>
+    <string name="wifi_tether_settings_title" msgid="3233393750798545228">"Wi-Fiテザリング設定"</string>
+    <string name="wifi_tether_configure_ap_text" msgid="7849700175083202171">"APの設定"</string>
+    <string name="wifi_tether_configure_subtext" msgid="54089556089657247">"<xliff:g id="NETWORK_SSID">%1$s</xliff:g><xliff:g id="NETWORK_SECURITY">%2$s</xliff:g>アクセスポイント"</string>
+    <string name="wifi_tether_configure_ssid_default" msgid="4491822321218336928">"AndroidAP"</string>
     <string name="sound_settings_title" msgid="8735891486683305886">"音"</string>
     <string name="display_settings_title" msgid="1708697328627382561">"表示"</string>
     <string name="sound_settings" msgid="5007659014828162881">"音の設定"</string>
@@ -386,6 +397,8 @@
     <string name="ring_volume_title" msgid="7938706566797464165">"着信音量"</string>
     <!-- no translation found for ring_volume_summary (7055497624193116879) -->
     <skip />
+    <string name="vibrate_in_silent_title" msgid="3897968069156767036">"マナーモードのときにバイブレーションをONにする"</string>
+    <string name="vibrate_in_silent_summary" msgid="3312600513070076281">"マナーモード中の入力時バイブレーションを許可する"</string>
     <string name="vibrate_title" msgid="5408984084125311526">"バイブレーション"</string>
     <string name="vibrate_summary" msgid="5224303668448643275">"着信時バイブレーションをONにする"</string>
     <string name="notification_sound_title" msgid="6316316069880531693">"通知音"</string>
@@ -407,12 +420,9 @@
     <string name="sound_effects_enable_title" msgid="3197313718929122833">"選択時の操作音"</string>
     <string name="sound_effects_enable_summary_on" msgid="6154141289879491329">"メニュー選択時の操作音をONにする"</string>
     <string name="sound_effects_enable_summary_off" msgid="3447739581759560125">"メニュー選択時の操作音をONにする"</string>
-    <!-- no translation found for lock_sounds_enable_title (1575990840389107141) -->
-    <skip />
-    <!-- no translation found for lock_sounds_enable_summary_on (145741024028391473) -->
-    <skip />
-    <!-- no translation found for lock_sounds_enable_summary_off (8481243116223542804) -->
-    <skip />
+    <string name="lock_sounds_enable_title" msgid="1575990840389107141">"画面ロックの音"</string>
+    <string name="lock_sounds_enable_summary_on" msgid="145741024028391473">"画面のロック/ロック解除時に音を鳴らす"</string>
+    <string name="lock_sounds_enable_summary_off" msgid="8481243116223542804">"画面のロック/ロック解除時に音を鳴らす"</string>
     <string name="haptic_feedback_enable_title" msgid="6311736559245411290">"入力時バイブレーション"</string>
     <string name="haptic_feedback_enable_summary_on" msgid="1875779656524793053">"ソフトキー操作や特定のUI操作でのバイブレーションをONにする"</string>
     <string name="haptic_feedback_enable_summary_off" msgid="7287885436963105314">"ソフトキー操作や特定のUI操作でのバイブレーションをONにする"</string>
@@ -427,6 +437,9 @@
     <string name="dock_audio_summary_unknown" msgid="4465059868974255693">"付属のドックの設定"</string>
     <string name="dock_not_found_title" msgid="3290961741828952424">"ドックが見つかりません"</string>
     <string name="dock_not_found_text" msgid="3035260358985111855">"ドックの音声を設定するには携帯電話をドックに固定する必要があります"</string>
+    <string name="dock_sounds_enable_title" msgid="3659084028644948905">"ホルダー装着時の音"</string>
+    <string name="dock_sounds_enable_summary_on" msgid="8491180514199743771">"携帯のホルダー脱着時に音を鳴らす"</string>
+    <string name="dock_sounds_enable_summary_off" msgid="3151046599205265919">"携帯のホルダー脱着時に音を鳴らさない"</string>
     <string name="sync_settings" msgid="9186125469300013491">"アカウントと同期"</string>
     <string name="sync_settings_summary" msgid="2962179505214965667">"アカウントの追加や削除、アカウント設定の変更を行います"</string>
     <string name="search_settings" msgid="1910951467596035063">"検索"</string>
@@ -468,8 +481,7 @@
     <string name="system_update_settings_list_item_title" msgid="3342887311059985961">"システムアップデート"</string>
     <!-- no translation found for system_update_settings_list_item_summary (3853057315907710747) -->
     <skip />
-    <!-- no translation found for firmware_version (4801135784886859972) -->
-    <skip />
+    <string name="firmware_version" msgid="4801135784886859972">"Androidバージョン"</string>
     <string name="model_number" msgid="3765737700545384794">"モデル番号"</string>
     <string name="baseband_version" msgid="1848990160763524801">"ベースバンドバージョン"</string>
     <string name="kernel_version" msgid="9192574954196167602">"カーネルバージョン"</string>
@@ -509,20 +521,18 @@
     <string name="sd_format_summary" msgid="6616491027883134004">"SDカードをフォーマット（消去）する"</string>
     <string name="sd_unavailable" msgid="8580107589533213904">"使用不可"</string>
     <string name="read_only" msgid="6702420168629076340">" （読み取り専用）"</string>
-    <!-- no translation found for dlg_confirm_unmount_title (1024442654915425534) -->
+    <!-- no translation found for dlg_confirm_unmount_title (8612140627310646730) -->
     <skip />
-    <!-- no translation found for dlg_confirm_unmount_text (4608293598382089766) -->
+    <!-- no translation found for dlg_confirm_unmount_text (5851214273718817727) -->
     <skip />
-    <!-- no translation found for dlg_error_unmount_title (4148354409906593341) -->
+    <!-- no translation found for dlg_error_unmount_title (4004106918266783081) -->
     <skip />
-    <!-- no translation found for dlg_error_unmount_text (5586898213654534611) -->
+    <!-- no translation found for dlg_error_unmount_text (9188972789897713180) -->
     <skip />
-    <!-- no translation found for unmount_inform_text (5766392597765003786) -->
+    <!-- no translation found for unmount_inform_text (3213378327712151498) -->
     <skip />
-    <!-- no translation found for sd_ejecting_title (8824572198034365468) -->
-    <skip />
-    <!-- no translation found for sd_ejecting_summary (2028753069184908491) -->
-    <skip />
+    <string name="sd_ejecting_title" msgid="8824572198034365468">"マウント解除中"</string>
+    <string name="sd_ejecting_summary" msgid="2028753069184908491">"マウントを解除中"</string>
     <string name="battery_status_title" msgid="9159414319574976203">"電池の状態:"</string>
     <string name="battery_level_title" msgid="2965679202786873272">"電池残量"</string>
     <string name="apn_settings" msgid="3743170484827528406">"APN"</string>
@@ -577,15 +587,17 @@
     <string name="media_format_gesture_explanation" msgid="4239529439389660159">"ロック解除パターンを入力してSDカードのフォーマット実行を確認する必要があります。"</string>
     <string name="call_settings_title" msgid="5188713413939232801">"通話設定"</string>
     <string name="call_settings_summary" msgid="7291195704801002886">"ボイスメール、着信転送、発信者番号など"</string>
-    <string name="tether_settings_title" msgid="1722086243281663634">"テザリングの設定"</string>
-    <string name="tether_settings_summary" msgid="6622852565352323706">"テザリングのセットアップと管理"</string>
+    <string name="tether_settings_title" msgid="8703982377504005349">"テザリング"</string>
+    <string name="tether_settings_summary" msgid="6679594629002850490">"テザリングのセットアップと管理"</string>
     <string name="tether_screen_title" msgid="1521966915332491855">"テザリングの設定"</string>
-    <string name="enable_tether_notice_checkbox" msgid="5683371235784989464">"通知"</string>
-    <string name="enable_tether_notice_checkbox_summary" msgid="236184235861504232">"USBテザリングが利用できるときに通知を表示する"</string>
+    <string name="usb_title" msgid="7483344855356312510">"USB"</string>
     <string name="usb_tethering_button_text" msgid="585829947108007917">"USBテザリング"</string>
-    <string name="usb_tethering_available_subtext" msgid="3755973887099973815">"USB接続済み、テザリングするには選択"</string>
-    <string name="usb_tethering_active_subtext" msgid="8738795360071005038">"接続済み、切断するには選択"</string>
+    <string name="usb_tethering_available_subtext" msgid="156779271296152605">"USB接続済み、テザリングするには選択"</string>
+    <string name="usb_tethering_active_subtext" msgid="8916210851136467042">"テザリングしました"</string>
+    <string name="usb_tethering_storage_active_subtext" msgid="6608933594288072573">"USBストレージの使用中はテザリングできません"</string>
     <string name="usb_tethering_unavailable_subtext" msgid="1044622421184007254">"USBが接続されていません"</string>
+    <string name="usb_tethering_errored_subtext" msgid="1377574819427841992">"USBテザリングエラー"</string>
+    <string name="tethering_help_button_text" msgid="7322604807045355030">"テザリングヘルプ"</string>
     <string name="network_settings_title" msgid="7967552516440151852">"モバイルネットワーク"</string>
     <string name="network_settings_summary" msgid="5149750850846813553">"ローミング、ネットワーク、APN設定"</string>
     <string name="location_title" msgid="1029961368397484576">"現在地"</string>
@@ -710,16 +722,30 @@
     <string name="empty_list_msg" msgid="2901049162265094971">"サードパーティ製アプリケーションはインストールされていません。"</string>
     <string name="version_text" msgid="9189073826278676425">"バージョン<xliff:g id="VERSION_NUM">%1$s</xliff:g>"</string>
     <string name="move_app" msgid="5042838441401731346">"移動"</string>
-    <string name="move_app_to_internal" msgid="3919318857309344803">"フラッシュに移動"</string>
-    <string name="move_app_to_sdcard" msgid="6784919832517488432">"SDカードに移動"</string>
-    <!-- no translation found for moving (6431016143218876491) -->
+    <!-- no translation found for move_app_to_internal (3895430471913858185) -->
     <skip />
-    <string name="force_stop_dlg_title" msgid="2531896882056462617">"強制停止"</string>
+    <!-- no translation found for move_app_to_sdcard (1143379049903056407) -->
+    <skip />
+    <string name="moving" msgid="6431016143218876491">"移動中"</string>
+    <!-- no translation found for insufficient_storage (8566913062094452962) -->
+    <skip />
+    <!-- no translation found for does_not_exist (837163572898468245) -->
+    <skip />
+    <!-- no translation found for app_forward_locked (5747805144210389585) -->
+    <skip />
+    <!-- no translation found for invalid_location (4934491353200240499) -->
+    <skip />
+    <!-- no translation found for system_package (1030561474413022831) -->
+    <skip />
+    <!-- no translation found for force_stop_dlg_title (4289453224368188476) -->
+    <skip />
     <string name="force_stop_dlg_text" msgid="3381302041569982075">"このアプリケーションはすぐに再起動されます。強制停止してもよろしいですか？"</string>
-    <!-- no translation found for app_install_location_title (2068975150026852168) -->
+    <!-- no translation found for move_app_failed_dlg_title (4337731903265156405) -->
     <skip />
-    <!-- no translation found for app_install_location_summary (879753854530300436) -->
+    <!-- no translation found for move_app_failed_dlg_text (8824246817947643697) -->
     <skip />
+    <string name="app_install_location_title" msgid="2068975150026852168">"優先インストール先"</string>
+    <string name="app_install_location_summary" msgid="879753854530300436">"新しいアプリケーションの優先インストール先を変更する"</string>
     <string name="runningservices_settings_title" msgid="8097287939865165213">"実行中のサービス"</string>
     <string name="runningservices_settings_summary" msgid="854608995821032748">"現在実行中のサービスを表示して制御する"</string>
     <string name="service_restarting" msgid="2242747937372354306">"再起動中"</string>
@@ -840,6 +866,9 @@
     <string name="accessibility_service_disable_warning" msgid="8930591383312775132">"ユーザー補助サービスを無効にしますか？"</string>
     <string name="accessibility_service_no_apps_title" msgid="898893674114288531">"ユーザー補助アプリケーションが見つかりません"</string>
     <string name="accessibility_service_no_apps_message" msgid="2450056749545404807">"ユーザー補助アプリケーションをインストールしていません。"\n\n"携帯電話用のスクリーンリーダーをAndroidマーケットからダウンロードできます。"\n\n"スクリーンリーダーをインストールするには[OK]をタップします。"</string>
+    <string name="accessibility_power_button_category" msgid="8545885236482339928">"電源ボタン"</string>
+    <string name="accessibility_power_button_ends_call" msgid="7698764194501089533">"電源ボタンで通話を終了する"</string>
+    <string name="accessibility_power_button_ends_call_summary" msgid="8878097632186291462">"画面をOFFにするのではなく電源ボタンを押して通話を終了する"</string>
     <string name="power_usage_summary_title" msgid="5180282911164282324">"電池使用量"</string>
     <string name="power_usage_summary" msgid="7237084831082848168">"電池を使用している操作"</string>
     <string name="battery_since_unplugged" msgid="338073389740738437">"電池使用時間"</string>
@@ -934,6 +963,11 @@
     <string name="tts_engine_name_settings" msgid="4974538563074395920">"<xliff:g id="TTS_PLUGIN_ENGINE_NAME">%s</xliff:g>の設定"</string>
     <string name="tts_engine_name_is_enabled_summary" msgid="4909484006804022115">"<xliff:g id="TTS_PLUGIN_ENGINE_NAME">%s</xliff:g>は有効です"</string>
     <string name="tts_engine_name_is_disabled_summary" msgid="7644198182255168200">"<xliff:g id="TTS_PLUGIN_ENGINE_NAME">%s</xliff:g>は無効です"</string>
+    <string name="pico_languages_and_voices" msgid="4611320375917773238">"言語と音声"</string>
+    <string name="pico_installed" msgid="2452546687858267414">"インストール済み"</string>
+    <string name="pico_not_installed" msgid="6266845418419994311">"未インストール"</string>
+    <string name="pico_voice_summary_female" msgid="8047327176247727492">"女性"</string>
+    <string name="pico_voice_summary_male" msgid="8331266854058577610">"男性"</string>
     <string name="gadget_title" msgid="7455548605888590466">"電源管理"</string>
     <string name="gadget_toggle_wifi" msgid="2382963973155082629">"Wi-Fi設定の更新"</string>
     <string name="gadget_toggle_bluetooth" msgid="7538903239807020826">"Bluetooth設定の更新"</string>
