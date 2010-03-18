@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- Copyright (C) 2009 The Android Open Source Project
+<!--  Copyright (C) 2007 The Android Open Source Project
 
      Licensed under the Apache License, Version 2.0 (the "License");
      you may not use this file except in compliance with the License.
@@ -12,7 +12,8 @@
      WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
      See the License for the specific language governing permissions and
      limitations under the License.
--->
+ -->
+
 <resources xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
     <string name="yes" msgid="4676390750360727396">"Да"</string>
@@ -87,6 +88,8 @@
     <string name="bluetooth_visibility" msgid="2930835434091839916">"Видимый"</string>
     <string name="bluetooth_is_discoverable" msgid="1205694503775884903">"Видимый в течение <xliff:g id="DISCOVERABLE_TIME_PERIOD">%1$s</xliff:g> секунд..."</string>
     <string name="bluetooth_not_discoverable" msgid="128269993123955177">"Сделать устройство видимым"</string>
+    <string name="bluetooth_lock_voice_dialing" msgid="3139322992062086225">"Заблокировать голосовой набор"</string>
+    <string name="bluetooth_lock_voice_dialing_summary" msgid="4741338867496787042">"Предотвратить использование телефона Bluetooth, когда экран заблокирован"</string>
     <string name="bluetooth_devices" msgid="1886018064039454227">"Устройства Bluetooth"</string>
     <string name="bluetooth_device_name" msgid="8415828355207423800">"Имя устройства"</string>
     <string name="bluetooth_name_not_set" msgid="2653752006416027426">"Без настройки имени, использовать имя аккаунта"</string>
@@ -311,7 +314,6 @@
     <string name="bluetooth_dock_settings_headset" msgid="1001821426078644650">"Для громкой связи"</string>
     <string name="bluetooth_dock_settings_a2dp" msgid="8791004998846630574">"Для музыки и мультимедиа"</string>
     <string name="bluetooth_dock_settings_remember" msgid="5551459057010609115">"Запомнить настройки"</string>
-    <string name="wifi" msgid="1081550856200013637">"Wi-Fi"</string>
     <string name="wifi_quick_toggle_title" msgid="874495178395350104">"Wi-Fi"</string>
     <string name="wifi_quick_toggle_summary" msgid="1047950931623694366">"Включить Wi-Fi"</string>
     <string name="wifi_settings" msgid="4746946030627213196">"Настройки Wi-Fi"</string>
@@ -373,6 +375,15 @@
     <string name="wifi_dns2" msgid="1368601006824882659">"DNS 2"</string>
     <string name="wifi_gateway" msgid="163914742461092086">"Шлюз"</string>
     <string name="wifi_netmask" msgid="4520635321425529085">"Маска сети"</string>
+    <string name="wifi_tether_checkbox_text" msgid="796007268580464534">"Подключение Wi-Fi"</string>
+    <string name="wifi_tether_enabled_subtext" msgid="6758080605207549918">"Точка доступа <xliff:g id="NETWORK_SSID">%1$s</xliff:g> активна"</string>
+    <string name="wifi_tether_failed_subtext" msgid="4379214348183654280">"Ошибка подключения Wi-Fi"</string>
+    <string name="wifi_tether_settings_text" msgid="8831276059149506799">"Настройки подключения Wi-Fi"</string>
+    <string name="wifi_tether_settings_subtext" msgid="3415164631321782704">"Настройка и управление точкой доступа"</string>
+    <string name="wifi_tether_settings_title" msgid="3233393750798545228">"Настройки подключения Wi-Fi"</string>
+    <string name="wifi_tether_configure_ap_text" msgid="7849700175083202171">"Настроить точку доступа"</string>
+    <string name="wifi_tether_configure_subtext" msgid="54089556089657247">"Точка доступа <xliff:g id="NETWORK_SSID">%1$s</xliff:g> <xliff:g id="NETWORK_SECURITY">%2$s</xliff:g>"</string>
+    <string name="wifi_tether_configure_ssid_default" msgid="4491822321218336928">"AndroidAP"</string>
     <string name="sound_settings_title" msgid="8735891486683305886">"Звуковой сигнал"</string>
     <string name="display_settings_title" msgid="1708697328627382561">"Экран"</string>
     <string name="sound_settings" msgid="5007659014828162881">"Настройки звука"</string>
@@ -386,6 +397,8 @@
     <string name="ring_volume_title" msgid="7938706566797464165">"Громкость звонка"</string>
     <!-- no translation found for ring_volume_summary (7055497624193116879) -->
     <skip />
+    <string name="vibrate_in_silent_title" msgid="3897968069156767036">"Вибрировать в тихом режиме"</string>
+    <string name="vibrate_in_silent_summary" msgid="3312600513070076281">"Разрешить вибрацию в тихом режиме"</string>
     <string name="vibrate_title" msgid="5408984084125311526">"Вибровызов"</string>
     <string name="vibrate_summary" msgid="5224303668448643275">"Включить"</string>
     <string name="notification_sound_title" msgid="6316316069880531693">"Мелодия уведомления"</string>
@@ -407,12 +420,9 @@
     <string name="sound_effects_enable_title" msgid="3197313718929122833">"Звуки нажатия на экран"</string>
     <string name="sound_effects_enable_summary_on" msgid="6154141289879491329">"Не воспроизводить щелчок при выборе опции на экране"</string>
     <string name="sound_effects_enable_summary_off" msgid="3447739581759560125">"Воспроизводить щелчок при выборе опции на экране"</string>
-    <!-- no translation found for lock_sounds_enable_title (1575990840389107141) -->
-    <skip />
-    <!-- no translation found for lock_sounds_enable_summary_on (145741024028391473) -->
-    <skip />
-    <!-- no translation found for lock_sounds_enable_summary_off (8481243116223542804) -->
-    <skip />
+    <string name="lock_sounds_enable_title" msgid="1575990840389107141">"Звуки блокировки экрана"</string>
+    <string name="lock_sounds_enable_summary_on" msgid="145741024028391473">"Воспроизводить звуки при блокировке и разблокировке экрана"</string>
+    <string name="lock_sounds_enable_summary_off" msgid="8481243116223542804">"Воспроизводить звуки при блокировке и разблокировке экрана"</string>
     <string name="haptic_feedback_enable_title" msgid="6311736559245411290">"Виброотклик"</string>
     <string name="haptic_feedback_enable_summary_on" msgid="1875779656524793053">"Вибрация при нажатии софт-клавиш и некоторых элементов интерфейса"</string>
     <string name="haptic_feedback_enable_summary_off" msgid="7287885436963105314">"Вибрация при нажатии софт-клавиш и некоторых элементов интерфейса"</string>
@@ -427,6 +437,9 @@
     <string name="dock_audio_summary_unknown" msgid="4465059868974255693">"Настройки подключенной док-станции"</string>
     <string name="dock_not_found_title" msgid="3290961741828952424">"Док-станция не найдена."</string>
     <string name="dock_not_found_text" msgid="3035260358985111855">"Чтобы настроить звук док-станции, телефон должен быть подключен к ней."</string>
+    <string name="dock_sounds_enable_title" msgid="3659084028644948905">"Звук при установке в док-станцию"</string>
+    <string name="dock_sounds_enable_summary_on" msgid="8491180514199743771">"Воспроизводить звук при установке или извлечении телефона из док-станции"</string>
+    <string name="dock_sounds_enable_summary_off" msgid="3151046599205265919">"Не воспроизводить звук при установке или извлечении телефона из док-станции"</string>
     <string name="sync_settings" msgid="9186125469300013491">"Аккаунты и синхронизация"</string>
     <string name="sync_settings_summary" msgid="2962179505214965667">"Добавление или удаление аккаунтов и изменение настроек аккаунта"</string>
     <string name="search_settings" msgid="1910951467596035063">"Поиск"</string>
@@ -468,8 +481,7 @@
     <string name="system_update_settings_list_item_title" msgid="3342887311059985961">"Обновления системы"</string>
     <!-- no translation found for system_update_settings_list_item_summary (3853057315907710747) -->
     <skip />
-    <!-- no translation found for firmware_version (4801135784886859972) -->
-    <skip />
+    <string name="firmware_version" msgid="4801135784886859972">"Версия Android"</string>
     <string name="model_number" msgid="3765737700545384794">"Номер модели"</string>
     <string name="baseband_version" msgid="1848990160763524801">"Версия ПО модуля связи"</string>
     <string name="kernel_version" msgid="9192574954196167602">"Версия ядра"</string>
@@ -509,20 +521,18 @@
     <string name="sd_format_summary" msgid="6616491027883134004">"Форматировать (очистить) карту SD"</string>
     <string name="sd_unavailable" msgid="8580107589533213904">"Недоступно"</string>
     <string name="read_only" msgid="6702420168629076340">" (только для чтения)"</string>
-    <!-- no translation found for dlg_confirm_unmount_title (1024442654915425534) -->
+    <!-- no translation found for dlg_confirm_unmount_title (8612140627310646730) -->
     <skip />
-    <!-- no translation found for dlg_confirm_unmount_text (4608293598382089766) -->
+    <!-- no translation found for dlg_confirm_unmount_text (5851214273718817727) -->
     <skip />
-    <!-- no translation found for dlg_error_unmount_title (4148354409906593341) -->
+    <!-- no translation found for dlg_error_unmount_title (4004106918266783081) -->
     <skip />
-    <!-- no translation found for dlg_error_unmount_text (5586898213654534611) -->
+    <!-- no translation found for dlg_error_unmount_text (9188972789897713180) -->
     <skip />
-    <!-- no translation found for unmount_inform_text (5766392597765003786) -->
+    <!-- no translation found for unmount_inform_text (3213378327712151498) -->
     <skip />
-    <!-- no translation found for sd_ejecting_title (8824572198034365468) -->
-    <skip />
-    <!-- no translation found for sd_ejecting_summary (2028753069184908491) -->
-    <skip />
+    <string name="sd_ejecting_title" msgid="8824572198034365468">"Извлечение"</string>
+    <string name="sd_ejecting_summary" msgid="2028753069184908491">"Выполняется извлечение"</string>
     <string name="battery_status_title" msgid="9159414319574976203">"Состояние батареи"</string>
     <string name="battery_level_title" msgid="2965679202786873272">"Уровень заряда батареи"</string>
     <string name="apn_settings" msgid="3743170484827528406">"Точки доступа (APN)"</string>
@@ -577,15 +587,17 @@
     <string name="media_format_gesture_explanation" msgid="4239529439389660159">"Для подтверждения форматирования карты SD нужно начертить графический ключ разблокировки."</string>
     <string name="call_settings_title" msgid="5188713413939232801">"Вызовы"</string>
     <string name="call_settings_summary" msgid="7291195704801002886">"Голосовая почта, АОН, переадресация, параллельный вызов"</string>
-    <string name="tether_settings_title" msgid="1722086243281663634">"Настройки подключения"</string>
-    <string name="tether_settings_summary" msgid="6622852565352323706">"Настройка и управление подключением"</string>
+    <string name="tether_settings_title" msgid="8703982377504005349">"Подключение"</string>
+    <string name="tether_settings_summary" msgid="6679594629002850490">"Настройка и управление подключением"</string>
     <string name="tether_screen_title" msgid="1521966915332491855">"Настройки подключения"</string>
-    <string name="enable_tether_notice_checkbox" msgid="5683371235784989464">"Уведомления"</string>
-    <string name="enable_tether_notice_checkbox_summary" msgid="236184235861504232">"Показывать уведомление, когда доступно USB-подключение"</string>
+    <string name="usb_title" msgid="7483344855356312510">"USB"</string>
     <string name="usb_tethering_button_text" msgid="585829947108007917">"USB-подключение"</string>
-    <string name="usb_tethering_available_subtext" msgid="3755973887099973815">"USB-связь установлена, выберите для подключения"</string>
-    <string name="usb_tethering_active_subtext" msgid="8738795360071005038">"Подключено, выберите для отключения"</string>
+    <string name="usb_tethering_available_subtext" msgid="156779271296152605">"USB-связь установлена, установите флажок для подключения"</string>
+    <string name="usb_tethering_active_subtext" msgid="8916210851136467042">"Подключено"</string>
+    <string name="usb_tethering_storage_active_subtext" msgid="6608933594288072573">"Невозможно подключиться при использовании USB-накопителя"</string>
     <string name="usb_tethering_unavailable_subtext" msgid="1044622421184007254">"USB-подключения не обнаружено"</string>
+    <string name="usb_tethering_errored_subtext" msgid="1377574819427841992">"Ошибка подключения USB"</string>
+    <string name="tethering_help_button_text" msgid="7322604807045355030">"Справка по подключению"</string>
     <string name="network_settings_title" msgid="7967552516440151852">"Мобильная сеть"</string>
     <string name="network_settings_summary" msgid="5149750850846813553">"Настроить параметры роуминга, сетей, точек доступа (APN)"</string>
     <string name="location_title" msgid="1029961368397484576">"Мое местоположение"</string>
@@ -710,16 +722,30 @@
     <string name="empty_list_msg" msgid="2901049162265094971">"Не обнаружено установленных приложений сторонних разработчиков."</string>
     <string name="version_text" msgid="9189073826278676425">"Версия <xliff:g id="VERSION_NUM">%1$s</xliff:g>"</string>
     <string name="move_app" msgid="5042838441401731346">"Переместить"</string>
-    <string name="move_app_to_internal" msgid="3919318857309344803">"Перенести во флэш-память"</string>
-    <string name="move_app_to_sdcard" msgid="6784919832517488432">"Переместить на SD-карту"</string>
-    <!-- no translation found for moving (6431016143218876491) -->
+    <!-- no translation found for move_app_to_internal (3895430471913858185) -->
     <skip />
-    <string name="force_stop_dlg_title" msgid="2531896882056462617">"Остановить принудительно"</string>
+    <!-- no translation found for move_app_to_sdcard (1143379049903056407) -->
+    <skip />
+    <string name="moving" msgid="6431016143218876491">"Перемещение"</string>
+    <!-- no translation found for insufficient_storage (8566913062094452962) -->
+    <skip />
+    <!-- no translation found for does_not_exist (837163572898468245) -->
+    <skip />
+    <!-- no translation found for app_forward_locked (5747805144210389585) -->
+    <skip />
+    <!-- no translation found for invalid_location (4934491353200240499) -->
+    <skip />
+    <!-- no translation found for system_package (1030561474413022831) -->
+    <skip />
+    <!-- no translation found for force_stop_dlg_title (4289453224368188476) -->
+    <skip />
     <string name="force_stop_dlg_text" msgid="3381302041569982075">"Программа будет перезапущена. Вы действительно хотите выполнить принудительную остановку?"</string>
-    <!-- no translation found for app_install_location_title (2068975150026852168) -->
+    <!-- no translation found for move_app_failed_dlg_title (4337731903265156405) -->
     <skip />
-    <!-- no translation found for app_install_location_summary (879753854530300436) -->
+    <!-- no translation found for move_app_failed_dlg_text (8824246817947643697) -->
     <skip />
+    <string name="app_install_location_title" msgid="2068975150026852168">"Предпочтительное место установки"</string>
+    <string name="app_install_location_summary" msgid="879753854530300436">"Изменить установочную папку для новых приложений."</string>
     <string name="runningservices_settings_title" msgid="8097287939865165213">"Работающие программы"</string>
     <string name="runningservices_settings_summary" msgid="854608995821032748">"Просмотр и управление работающими службами"</string>
     <string name="service_restarting" msgid="2242747937372354306">"Перезапуск"</string>
@@ -840,6 +866,9 @@
     <string name="accessibility_service_disable_warning" msgid="8930591383312775132">"Отключить специальные возможности?"</string>
     <string name="accessibility_service_no_apps_title" msgid="898893674114288531">"Не найдено программ для упрощения доступа"</string>
     <string name="accessibility_service_no_apps_message" msgid="2450056749545404807">"У вас нет установленных программ для упрощения доступа."\n\n"Вы можете загрузить программу чтения с экрана из Android-маркета."\n\n"Нажмите OK, чтобы установить программу чтения с экрана."</string>
+    <string name="accessibility_power_button_category" msgid="8545885236482339928">"Кнопка питания"</string>
+    <string name="accessibility_power_button_ends_call" msgid="7698764194501089533">"Кнопка питания завершает вызов"</string>
+    <string name="accessibility_power_button_ends_call_summary" msgid="8878097632186291462">"Во время разговора при нажатии кнопки питания вместо выключения экрана завершается вызов"</string>
     <string name="power_usage_summary_title" msgid="5180282911164282324">"Расход заряда батареи"</string>
     <string name="power_usage_summary" msgid="7237084831082848168">"На что расходуется заряд батареи"</string>
     <string name="battery_since_unplugged" msgid="338073389740738437">"Расход заряда батареи с момента отключения от сети питания"</string>
@@ -934,6 +963,11 @@
     <string name="tts_engine_name_settings" msgid="4974538563074395920">"Настройки <xliff:g id="TTS_PLUGIN_ENGINE_NAME">%s</xliff:g>"</string>
     <string name="tts_engine_name_is_enabled_summary" msgid="4909484006804022115">"<xliff:g id="TTS_PLUGIN_ENGINE_NAME">%s</xliff:g> вкл."</string>
     <string name="tts_engine_name_is_disabled_summary" msgid="7644198182255168200">"<xliff:g id="TTS_PLUGIN_ENGINE_NAME">%s</xliff:g>: отключено"</string>
+    <string name="pico_languages_and_voices" msgid="4611320375917773238">"Языки и голос"</string>
+    <string name="pico_installed" msgid="2452546687858267414">"Установлено"</string>
+    <string name="pico_not_installed" msgid="6266845418419994311">"Не установлено"</string>
+    <string name="pico_voice_summary_female" msgid="8047327176247727492">"Женский"</string>
+    <string name="pico_voice_summary_male" msgid="8331266854058577610">"Мужской"</string>
     <string name="gadget_title" msgid="7455548605888590466">"Управление питанием"</string>
     <string name="gadget_toggle_wifi" msgid="2382963973155082629">"Обновление настроек Wi-Fi"</string>
     <string name="gadget_toggle_bluetooth" msgid="7538903239807020826">"Обновление настроек Bluetooth"</string>

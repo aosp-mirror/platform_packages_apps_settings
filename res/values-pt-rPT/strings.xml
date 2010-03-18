@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- Copyright (C) 2009 The Android Open Source Project
+<!--  Copyright (C) 2007 The Android Open Source Project
 
      Licensed under the Apache License, Version 2.0 (the "License");
      you may not use this file except in compliance with the License.
@@ -12,7 +12,8 @@
      WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
      See the License for the specific language governing permissions and
      limitations under the License.
--->
+ -->
+
 <resources xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
     <string name="yes" msgid="4676390750360727396">"Sim"</string>
@@ -87,6 +88,8 @@
     <string name="bluetooth_visibility" msgid="2930835434091839916">"Detectável"</string>
     <string name="bluetooth_is_discoverable" msgid="1205694503775884903">"Detectável durante <xliff:g id="DISCOVERABLE_TIME_PERIOD">%1$s</xliff:g> segundos…"</string>
     <string name="bluetooth_not_discoverable" msgid="128269993123955177">"Tornar o dispositivo detectável"</string>
+    <string name="bluetooth_lock_voice_dialing" msgid="3139322992062086225">"Bloquear marcação por voz"</string>
+    <string name="bluetooth_lock_voice_dialing_summary" msgid="4741338867496787042">"Evitar a utilização do telefone Bluetooth quando o ecrã está bloqueado"</string>
     <string name="bluetooth_devices" msgid="1886018064039454227">"Dispositivos Bluetooth"</string>
     <string name="bluetooth_device_name" msgid="8415828355207423800">"Nome do dispositivo"</string>
     <string name="bluetooth_name_not_set" msgid="2653752006416027426">"Nenhum nome definido, utilizar nome da conta"</string>
@@ -311,7 +314,6 @@
     <string name="bluetooth_dock_settings_headset" msgid="1001821426078644650">"Como telefone com altifalante"</string>
     <string name="bluetooth_dock_settings_a2dp" msgid="8791004998846630574">"Para música e multimédia"</string>
     <string name="bluetooth_dock_settings_remember" msgid="5551459057010609115">"Memorizar definições"</string>
-    <string name="wifi" msgid="1081550856200013637">"Wi-Fi"</string>
     <string name="wifi_quick_toggle_title" msgid="874495178395350104">"Wi-Fi"</string>
     <string name="wifi_quick_toggle_summary" msgid="1047950931623694366">"Activar Wi-Fi"</string>
     <string name="wifi_settings" msgid="4746946030627213196">"Definições de Wi-Fi"</string>
@@ -373,6 +375,15 @@
     <string name="wifi_dns2" msgid="1368601006824882659">"DNS 2"</string>
     <string name="wifi_gateway" msgid="163914742461092086">"Gateway"</string>
     <string name="wifi_netmask" msgid="4520635321425529085">"Máscara de rede"</string>
+    <string name="wifi_tether_checkbox_text" msgid="796007268580464534">"Associação Wi-Fi"</string>
+    <string name="wifi_tether_enabled_subtext" msgid="6758080605207549918">"Ponto de acesso <xliff:g id="NETWORK_SSID">%1$s</xliff:g> activo"</string>
+    <string name="wifi_tether_failed_subtext" msgid="4379214348183654280">"Erro na associação Wi-Fi"</string>
+    <string name="wifi_tether_settings_text" msgid="8831276059149506799">"Definições de associação Wi-Fi"</string>
+    <string name="wifi_tether_settings_subtext" msgid="3415164631321782704">"Configurar e gerir o ponto de acesso"</string>
+    <string name="wifi_tether_settings_title" msgid="3233393750798545228">"Definições de associação Wi-Fi"</string>
+    <string name="wifi_tether_configure_ap_text" msgid="7849700175083202171">"Configurar ponto de acesso"</string>
+    <string name="wifi_tether_configure_subtext" msgid="54089556089657247">"Ponto de acesso <xliff:g id="NETWORK_SSID">%1$s</xliff:g><xliff:g id="NETWORK_SECURITY">%2$s</xliff:g>"</string>
+    <string name="wifi_tether_configure_ssid_default" msgid="4491822321218336928">"Ponto de acesso do Android"</string>
     <string name="sound_settings_title" msgid="8735891486683305886">"Som"</string>
     <string name="display_settings_title" msgid="1708697328627382561">"Visor"</string>
     <string name="sound_settings" msgid="5007659014828162881">"Definições de som"</string>
@@ -386,6 +397,8 @@
     <string name="ring_volume_title" msgid="7938706566797464165">"Volume da campainha"</string>
     <!-- no translation found for ring_volume_summary (7055497624193116879) -->
     <skip />
+    <string name="vibrate_in_silent_title" msgid="3897968069156767036">"Vibrar quando estiver em silêncio"</string>
+    <string name="vibrate_in_silent_summary" msgid="3312600513070076281">"Permitir vibração no modo de silêncio"</string>
     <string name="vibrate_title" msgid="5408984084125311526">"Vibração do telefone"</string>
     <string name="vibrate_summary" msgid="5224303668448643275">"Vibrar telefone para chamadas recebidas"</string>
     <string name="notification_sound_title" msgid="6316316069880531693">"Toque de notificação"</string>
@@ -407,12 +420,9 @@
     <string name="sound_effects_enable_title" msgid="3197313718929122833">"Selecção audível"</string>
     <string name="sound_effects_enable_summary_on" msgid="6154141289879491329">"Reproduzir som ao efectuar selecção no ecrã"</string>
     <string name="sound_effects_enable_summary_off" msgid="3447739581759560125">"Reproduzir som ao efectuar selecção no ecrã"</string>
-    <!-- no translation found for lock_sounds_enable_title (1575990840389107141) -->
-    <skip />
-    <!-- no translation found for lock_sounds_enable_summary_on (145741024028391473) -->
-    <skip />
-    <!-- no translation found for lock_sounds_enable_summary_off (8481243116223542804) -->
-    <skip />
+    <string name="lock_sounds_enable_title" msgid="1575990840389107141">"Sons de bloqueio do ecrã"</string>
+    <string name="lock_sounds_enable_summary_on" msgid="145741024028391473">"Reproduzir sons ao bloquear e desbloquear o ecrã"</string>
+    <string name="lock_sounds_enable_summary_off" msgid="8481243116223542804">"Reproduzir sons ao bloquear e desbloquear o ecrã"</string>
     <string name="haptic_feedback_enable_title" msgid="6311736559245411290">"Comentário haptic"</string>
     <string name="haptic_feedback_enable_summary_on" msgid="1875779656524793053">"Vibrar ao premir teclas de função e em certas interacções da interface do utilizador"</string>
     <string name="haptic_feedback_enable_summary_off" msgid="7287885436963105314">"Vibrar para teclas de função e certas interacções da interface do utiliz."</string>
@@ -427,6 +437,9 @@
     <string name="dock_audio_summary_unknown" msgid="4465059868974255693">"Definições da estação de ancoragem acoplada"</string>
     <string name="dock_not_found_title" msgid="3290961741828952424">"Estação de ancoragem não encontrada"</string>
     <string name="dock_not_found_text" msgid="3035260358985111855">"O telefone tem de estar ancorado para configurar o áudio da estação de ancoragem"</string>
+    <string name="dock_sounds_enable_title" msgid="3659084028644948905">"Som de inserção na estação de ancoragem"</string>
+    <string name="dock_sounds_enable_summary_on" msgid="8491180514199743771">"Reproduzir som ao inserir ou remover o telefone da estação de ancoragem"</string>
+    <string name="dock_sounds_enable_summary_off" msgid="3151046599205265919">"Não reproduzir som ao inserir ou remover o telefone da estação de ancoragem"</string>
     <string name="sync_settings" msgid="9186125469300013491">"Contas e sincronização"</string>
     <string name="sync_settings_summary" msgid="2962179505214965667">"Adicionar ou remover contas e alterar definições de contas"</string>
     <string name="search_settings" msgid="1910951467596035063">"Pesquisar"</string>
@@ -468,8 +481,7 @@
     <string name="system_update_settings_list_item_title" msgid="3342887311059985961">"Actualizações do sistema"</string>
     <!-- no translation found for system_update_settings_list_item_summary (3853057315907710747) -->
     <skip />
-    <!-- no translation found for firmware_version (4801135784886859972) -->
-    <skip />
+    <string name="firmware_version" msgid="4801135784886859972">"Versão do Android"</string>
     <string name="model_number" msgid="3765737700545384794">"Modelo"</string>
     <string name="baseband_version" msgid="1848990160763524801">"Versão de banda base"</string>
     <string name="kernel_version" msgid="9192574954196167602">"Versão do kernel"</string>
@@ -509,20 +521,18 @@
     <string name="sd_format_summary" msgid="6616491027883134004">"Formatar (apagar) o cartão SD"</string>
     <string name="sd_unavailable" msgid="8580107589533213904">"Indisponível"</string>
     <string name="read_only" msgid="6702420168629076340">" (Só de leitura)"</string>
-    <!-- no translation found for dlg_confirm_unmount_title (1024442654915425534) -->
+    <!-- no translation found for dlg_confirm_unmount_title (8612140627310646730) -->
     <skip />
-    <!-- no translation found for dlg_confirm_unmount_text (4608293598382089766) -->
+    <!-- no translation found for dlg_confirm_unmount_text (5851214273718817727) -->
     <skip />
-    <!-- no translation found for dlg_error_unmount_title (4148354409906593341) -->
+    <!-- no translation found for dlg_error_unmount_title (4004106918266783081) -->
     <skip />
-    <!-- no translation found for dlg_error_unmount_text (5586898213654534611) -->
+    <!-- no translation found for dlg_error_unmount_text (9188972789897713180) -->
     <skip />
-    <!-- no translation found for unmount_inform_text (5766392597765003786) -->
+    <!-- no translation found for unmount_inform_text (3213378327712151498) -->
     <skip />
-    <!-- no translation found for sd_ejecting_title (8824572198034365468) -->
-    <skip />
-    <!-- no translation found for sd_ejecting_summary (2028753069184908491) -->
-    <skip />
+    <string name="sd_ejecting_title" msgid="8824572198034365468">"A desmontar"</string>
+    <string name="sd_ejecting_summary" msgid="2028753069184908491">"Desmontagem em curso"</string>
     <string name="battery_status_title" msgid="9159414319574976203">"Estado da bateria"</string>
     <string name="battery_level_title" msgid="2965679202786873272">"Nível da bateria"</string>
     <string name="apn_settings" msgid="3743170484827528406">"APNs"</string>
@@ -577,15 +587,17 @@
     <string name="media_format_gesture_explanation" msgid="4239529439389660159">"Tem de efectuar o padrão de desbloqueio para confirmar a formatação de um cartão SD."</string>
     <string name="call_settings_title" msgid="5188713413939232801">"Definições de chamadas"</string>
     <string name="call_settings_summary" msgid="7291195704801002886">"Configurar correio de voz, reencaminhamento de chamadas, chamada em espera, ID do autor da chamada"</string>
-    <string name="tether_settings_title" msgid="1722086243281663634">"Definições de associação"</string>
-    <string name="tether_settings_summary" msgid="6622852565352323706">"Configurar e gerir associação"</string>
+    <string name="tether_settings_title" msgid="8703982377504005349">"Associação"</string>
+    <string name="tether_settings_summary" msgid="6679594629002850490">"Configurar e gerir associação"</string>
     <string name="tether_screen_title" msgid="1521966915332491855">"Definições de associação"</string>
-    <string name="enable_tether_notice_checkbox" msgid="5683371235784989464">"Notificações"</string>
-    <string name="enable_tether_notice_checkbox_summary" msgid="236184235861504232">"Mostrar uma notificação quando a associação USB estiver disponível"</string>
+    <string name="usb_title" msgid="7483344855356312510">"USB"</string>
     <string name="usb_tethering_button_text" msgid="585829947108007917">"Associação USB"</string>
-    <string name="usb_tethering_available_subtext" msgid="3755973887099973815">"USB ligado, seleccione para associar"</string>
-    <string name="usb_tethering_active_subtext" msgid="8738795360071005038">"Ligado, seleccione para desligar"</string>
+    <string name="usb_tethering_available_subtext" msgid="156779271296152605">"Ligado via USB; confirme para associar"</string>
+    <string name="usb_tethering_active_subtext" msgid="8916210851136467042">"Associada"</string>
+    <string name="usb_tethering_storage_active_subtext" msgid="6608933594288072573">"Não é possível associar quando o armazenamento USB está a ser utilizado"</string>
     <string name="usb_tethering_unavailable_subtext" msgid="1044622421184007254">"USB não ligado"</string>
+    <string name="usb_tethering_errored_subtext" msgid="1377574819427841992">"Erro na associação USB"</string>
+    <string name="tethering_help_button_text" msgid="7322604807045355030">"Ajuda para associação"</string>
     <string name="network_settings_title" msgid="7967552516440151852">"Redes móveis"</string>
     <string name="network_settings_summary" msgid="5149750850846813553">"Definir opções de roaming, redes, APNs"</string>
     <string name="location_title" msgid="1029961368397484576">"A minha localização"</string>
@@ -710,16 +722,30 @@
     <string name="empty_list_msg" msgid="2901049162265094971">"Não tem nenhuma aplicação de terceiros instalada."</string>
     <string name="version_text" msgid="9189073826278676425">"versão <xliff:g id="VERSION_NUM">%1$s</xliff:g>"</string>
     <string name="move_app" msgid="5042838441401731346">"Mover"</string>
-    <string name="move_app_to_internal" msgid="3919318857309344803">"Mover para flash"</string>
-    <string name="move_app_to_sdcard" msgid="6784919832517488432">"Mover para cartão SD"</string>
-    <!-- no translation found for moving (6431016143218876491) -->
+    <!-- no translation found for move_app_to_internal (3895430471913858185) -->
     <skip />
-    <string name="force_stop_dlg_title" msgid="2531896882056462617">"Forçar paragem"</string>
+    <!-- no translation found for move_app_to_sdcard (1143379049903056407) -->
+    <skip />
+    <string name="moving" msgid="6431016143218876491">"A mover"</string>
+    <!-- no translation found for insufficient_storage (8566913062094452962) -->
+    <skip />
+    <!-- no translation found for does_not_exist (837163572898468245) -->
+    <skip />
+    <!-- no translation found for app_forward_locked (5747805144210389585) -->
+    <skip />
+    <!-- no translation found for invalid_location (4934491353200240499) -->
+    <skip />
+    <!-- no translation found for system_package (1030561474413022831) -->
+    <skip />
+    <!-- no translation found for force_stop_dlg_title (4289453224368188476) -->
+    <skip />
     <string name="force_stop_dlg_text" msgid="3381302041569982075">"Esta aplicação será reiniciada imediatamente. Tem a certeza de que pretende forçar a paragem?"</string>
-    <!-- no translation found for app_install_location_title (2068975150026852168) -->
+    <!-- no translation found for move_app_failed_dlg_title (4337731903265156405) -->
     <skip />
-    <!-- no translation found for app_install_location_summary (879753854530300436) -->
+    <!-- no translation found for move_app_failed_dlg_text (8824246817947643697) -->
     <skip />
+    <string name="app_install_location_title" msgid="2068975150026852168">"Localização de instalação preferida"</string>
+    <string name="app_install_location_summary" msgid="879753854530300436">"Alterar a localização de instalação preferida para novas aplicações."</string>
     <string name="runningservices_settings_title" msgid="8097287939865165213">"Serviços em execução"</string>
     <string name="runningservices_settings_summary" msgid="854608995821032748">"Ver e controlar os serviços actualmente em execução"</string>
     <string name="service_restarting" msgid="2242747937372354306">"A reiniciar"</string>
@@ -840,6 +866,9 @@
     <string name="accessibility_service_disable_warning" msgid="8930591383312775132">"Desactivar acessibilidade?"</string>
     <string name="accessibility_service_no_apps_title" msgid="898893674114288531">"Não foram encontradas aplicações relacionadas com acessibilidade"</string>
     <string name="accessibility_service_no_apps_message" msgid="2450056749545404807">"Não tem nenhuma aplicação relacionada com acessibilidade instalada."\n\n"Pode transferir um leitor de ecrã para o dispositivo a partir do Android Market."\n\n"Clique em OK para instalar o leitor de ecrã."</string>
+    <string name="accessibility_power_button_category" msgid="8545885236482339928">"Botão de ligar/desligar"</string>
+    <string name="accessibility_power_button_ends_call" msgid="7698764194501089533">"O botão de ligar/desligar termina a chamada"</string>
+    <string name="accessibility_power_button_ends_call_summary" msgid="8878097632186291462">"Durante uma chamada, premir o botão de ligar/desligar termina a chamada em vez de desligar o ecrã"</string>
     <string name="power_usage_summary_title" msgid="5180282911164282324">"Utilização da bateria"</string>
     <string name="power_usage_summary" msgid="7237084831082848168">"O que tem estado a utilizar a bateria"</string>
     <string name="battery_since_unplugged" msgid="338073389740738437">"Bateria utilizada desde que foi desligado"</string>
@@ -934,6 +963,11 @@
     <string name="tts_engine_name_settings" msgid="4974538563074395920">"Definições de <xliff:g id="TTS_PLUGIN_ENGINE_NAME">%s</xliff:g>"</string>
     <string name="tts_engine_name_is_enabled_summary" msgid="4909484006804022115">"<xliff:g id="TTS_PLUGIN_ENGINE_NAME">%s</xliff:g> está activado"</string>
     <string name="tts_engine_name_is_disabled_summary" msgid="7644198182255168200">"<xliff:g id="TTS_PLUGIN_ENGINE_NAME">%s</xliff:g> está desactivado"</string>
+    <string name="pico_languages_and_voices" msgid="4611320375917773238">"Idiomas e vozes"</string>
+    <string name="pico_installed" msgid="2452546687858267414">"Instalado"</string>
+    <string name="pico_not_installed" msgid="6266845418419994311">"Não instalada"</string>
+    <string name="pico_voice_summary_female" msgid="8047327176247727492">"Feminino"</string>
+    <string name="pico_voice_summary_male" msgid="8331266854058577610">"Masculino"</string>
     <string name="gadget_title" msgid="7455548605888590466">"Controlo de Energia"</string>
     <string name="gadget_toggle_wifi" msgid="2382963973155082629">"Actualizar definição de Wi-Fi"</string>
     <string name="gadget_toggle_bluetooth" msgid="7538903239807020826">"Actualizar a definição do Bluetooth"</string>
