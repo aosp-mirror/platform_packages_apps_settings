@@ -22,6 +22,7 @@ import static android.provider.Settings.Secure.TTS_DEFAULT_LANG;
 import static android.provider.Settings.Secure.TTS_DEFAULT_COUNTRY;
 import static android.provider.Settings.Secure.TTS_DEFAULT_VARIANT;
 import static android.provider.Settings.Secure.TTS_DEFAULT_SYNTH;
+import static android.provider.Settings.Secure.TTS_ENABLED_PLUGINS;
 
 import android.app.AlertDialog;
 import android.content.ContentResolver;
@@ -652,19 +653,24 @@ public class TextToSpeechSettings extends PreferenceActivity implements
         enginesArray = pm.queryIntentActivities(intent, 0).toArray(enginesArray);
         ArrayList<CharSequence> entries = new ArrayList<CharSequence>();
         ArrayList<CharSequence> values = new ArrayList<CharSequence>();
+        String enabledEngines = "";
         for (int i = 0; i < enginesArray.length; i++) {
-            if (enginesArray[i].activityInfo.packageName.equals(SYSTEM_TTS)) {
+            String pluginPackageName = enginesArray[i].activityInfo.packageName;
+            if (pluginPackageName.equals(SYSTEM_TTS)) {
                 entries.add(enginesArray[i].loadLabel(pm));
-                values.add(enginesArray[i].activityInfo.packageName);
+                values.add(pluginPackageName);
             } else {
                 CheckBoxPreference pref = (CheckBoxPreference) findPreference(
-                        KEY_PLUGIN_ENABLED_PREFIX + enginesArray[i].activityInfo.packageName);
+                        KEY_PLUGIN_ENABLED_PREFIX + pluginPackageName);
                 if ((pref != null) && pref.isChecked()){
                     entries.add(enginesArray[i].loadLabel(pm));
-                    values.add(enginesArray[i].activityInfo.packageName);
+                    values.add(pluginPackageName);
+                    enabledEngines = enabledEngines + pluginPackageName + " ";
                 }
             }
         }
+        ContentResolver resolver = getContentResolver();
+        Settings.Secure.putString(resolver, TTS_ENABLED_PLUGINS, enabledEngines);
 
         CharSequence entriesArray[] = new CharSequence[entries.size()];
         CharSequence valuesArray[] = new CharSequence[values.size()];
