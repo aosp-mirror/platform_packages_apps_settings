@@ -46,7 +46,9 @@ public class TetherSettings extends PreferenceActivity {
     private static final String ENABLE_WIFI_AP = "enable_wifi_ap";
     private static final String WIFI_AP_SETTINGS = "wifi_ap_settings";
     private static final String TETHERING_HELP = "tethering_help";
-    private static final String HELP_URL = "file:///android_asset/html/%y_%z/tethering_help.html";
+    private static final String USB_HELP_MODIFIER = "usb_";
+    private static final String WIFI_HELP_MODIFIER = "wifi_";
+    private static final String HELP_URL = "file:///android_asset/html/%y_%z/tethering_%xhelp.html";
 
     private CheckBoxPreference mUsbTether;
 
@@ -245,6 +247,16 @@ public class TetherSettings extends PreferenceActivity {
             Locale locale = Locale.getDefault();
             String url = HELP_URL.replace("%y", locale.getLanguage().toLowerCase());
             url = url.replace("%z", locale.getCountry().toLowerCase());
+
+            if ((mUsbRegexs.length != 0) && (mWifiRegexs.length == 0)) {
+                url = url.replace("%x", USB_HELP_MODIFIER);
+            } else if ((mWifiRegexs.length != 0) && (mUsbRegexs.length == 0)) {
+                url = url.replace("%x", WIFI_HELP_MODIFIER);
+            } else {
+                // could assert that both wifi and usb have regexs, but the default
+                // is to use this anyway so no check is needed
+                url = url.replace("%x", "");
+            }
             WebView view = new WebView(this);
             view.loadUrl(url);
 
