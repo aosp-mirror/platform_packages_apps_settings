@@ -26,8 +26,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.net.ConnectivityManager;
-import android.net.wifi.WifiManager;
-import android.net.wifi.WifiConfiguration;
 import android.os.Environment;
 import android.preference.CheckBoxPreference;
 import android.preference.Preference;
@@ -56,7 +54,6 @@ public class TetherSettings extends PreferenceActivity {
     private PreferenceScreen mWifiApSettings;
     private WifiApEnabler mWifiApEnabler;
     private PreferenceScreen mTetherHelp;
-    private WifiManager mWifiManager;
 
     private BroadcastReceiver mTetherChangeReceiver;
 
@@ -64,7 +61,6 @@ public class TetherSettings extends PreferenceActivity {
     private ArrayList mUsbIfaces;
 
     private String[] mWifiRegexs;
-    private ArrayList mWifiIfaces;
 
     @Override
     protected void onCreate(Bundle icicle) {
@@ -79,7 +75,6 @@ public class TetherSettings extends PreferenceActivity {
 
         ConnectivityManager cm =
                 (ConnectivityManager)getSystemService(Context.CONNECTIVITY_SERVICE);
-        mWifiManager = (WifiManager)getSystemService(Context.WIFI_SERVICE);
 
         mUsbRegexs = cm.getTetherableUsbRegexs();
         if (mUsbRegexs.length == 0) {
@@ -157,12 +152,8 @@ public class TetherSettings extends PreferenceActivity {
         boolean usbAvailable = false;
         int usbError = ConnectivityManager.TETHER_ERROR_NO_ERROR;
         boolean usbErrored = false;
-        boolean wifiTethered = false;
-        boolean wifiAvailable = false;
-        int wifiError = ConnectivityManager.TETHER_ERROR_NO_ERROR;
         boolean massStorageActive =
                 Environment.MEDIA_SHARED.equals(Environment.getExternalStorageState());
-        boolean wifiErrored = false;
         for (Object o : available) {
             String s = (String)o;
             for (String regex : mUsbRegexs) {
@@ -173,31 +164,17 @@ public class TetherSettings extends PreferenceActivity {
                     }
                 }
             }
-            for (String regex : mWifiRegexs) {
-                if (s.matches(regex)) {
-                    wifiAvailable = true;
-                    if (wifiError == ConnectivityManager.TETHER_ERROR_NO_ERROR) {
-                        wifiError = cm.getLastTetherError(s);
-                    }
-                }
-            }
         }
         for (Object o : tethered) {
             String s = (String)o;
             for (String regex : mUsbRegexs) {
                 if (s.matches(regex)) usbTethered = true;
             }
-            for (String regex : mWifiRegexs) {
-                if (s.matches(regex)) wifiTethered = true;
-            }
         }
         for (Object o: errored) {
             String s = (String)o;
             for (String regex : mUsbRegexs) {
                 if (s.matches(regex)) usbErrored = true;
-            }
-            for (String regex : mWifiRegexs) {
-                if (s.matches(regex)) wifiErrored = true;
             }
         }
 
@@ -225,17 +202,6 @@ public class TetherSettings extends PreferenceActivity {
             mUsbTether.setSummary(R.string.usb_tethering_unavailable_subtext);
             mUsbTether.setEnabled(false);
             mUsbTether.setChecked(false);
-        }
-
-        if (wifiTethered) {
-            WifiConfiguration mWifiConfig = mWifiManager.getWifiApConfiguration();
-            String s = getString(com.android.internal.R.string.wifi_tether_configure_ssid_default);
-            mEnableWifiAp.setSummary(String.format(getString(R.string.wifi_tether_enabled_subtext),
-                                                   (mWifiConfig == null) ? s : mWifiConfig.SSID));
-        }
-
-        if (wifiErrored) {
-            mEnableWifiAp.setSummary(R.string.wifi_error);
         }
     }
 

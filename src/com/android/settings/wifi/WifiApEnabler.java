@@ -19,13 +19,17 @@ package com.android.settings.wifi;
 import com.android.settings.R;
 import com.android.settings.WirelessSettings;
 
+import java.util.ArrayList;
+
 import android.app.AlertDialog;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.net.wifi.SupplicantState;
+import android.net.wifi.WifiConfiguration;
 import android.net.wifi.WifiInfo;
 import android.net.wifi.WifiManager;
 import android.preference.Preference;
@@ -43,6 +47,9 @@ public class WifiApEnabler implements Preference.OnPreferenceChangeListener {
     private WifiManager mWifiManager;
     private final IntentFilter mIntentFilter;
 
+    ConnectivityManager mCm;
+    private String[] mWifiRegexs;
+
     private final BroadcastReceiver mReceiver = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
@@ -50,7 +57,16 @@ public class WifiApEnabler implements Preference.OnPreferenceChangeListener {
             if (WifiManager.WIFI_AP_STATE_CHANGED_ACTION.equals(action)) {
                 handleWifiApStateChanged(intent.getIntExtra(
                         WifiManager.EXTRA_WIFI_AP_STATE, WifiManager.WIFI_AP_STATE_FAILED));
+            } else if (ConnectivityManager.ACTION_TETHER_STATE_CHANGED.equals(action)) {
+                ArrayList<String> available = intent.getStringArrayListExtra(
+                        ConnectivityManager.EXTRA_AVAILABLE_TETHER);
+                ArrayList<String> active = intent.getStringArrayListExtra(
+                        ConnectivityManager.EXTRA_ACTIVE_TETHER);
+                ArrayList<String> errored = intent.getStringArrayListExtra(
+                        ConnectivityManager.EXTRA_ERRORED_TETHER);
+                updateTetherState(available.toArray(), active.toArray(), errored.toArray());
             }
+
         }
     };
 
@@ -61,7 +77,12 @@ public class WifiApEnabler implements Preference.OnPreferenceChangeListener {
         checkBox.setPersistent(false);
 
         mWifiManager = (WifiManager) context.getSystemService(Context.WIFI_SERVICE);
+        mCm = (ConnectivityManager)mContext.getSystemService(Context.CONNECTIVITY_SERVICE);
+
+        mWifiRegexs = mCm.getTetherableWifiRegexs();
+
         mIntentFilter = new IntentFilter(WifiManager.WIFI_AP_STATE_CHANGED_ACTION);
+        mIntentFilter.addAction(ConnectivityManager.ACTION_TETHER_STATE_CHANGED);
     }
 
     public void resume() {
@@ -86,6 +107,34 @@ public class WifiApEnabler implements Preference.OnPreferenceChangeListener {
         return false;
     }
 
+    private void updateTetherState(Object[] available, Object[] tethered, Object[] errored) {
+        boolean wifiTethered = false;
+        boolean wifiErrored = false;
+
+        for (Object o : tethered) {
+            String s = (String)o;
+            for (String regex : mWifiRegexs) {
+                if (s.matches(regex)) wifiTethered = true;
+            }
+        }
+        for (Object o: errored) {
+            String s = (String)o;
+            for (String regex : mWifiRegexs) {
+                if (s.matches(regex)) wifiErrored = true;
+            }
+        }
+
+        if (wifiTethered) {
+            WifiConfiguration mWifiConfig = mWifiManager.getWifiApConfiguration();
+            String s = mContext.getString(
+                    com.android.internal.R.string.wifi_tether_configure_ssid_default);
+            mCheckBox.setSummary(String.format(
+                    mContext.getString(R.string.wifi_tether_enabled_subtext),
+                    (mWifiConfig == null) ? s : mWifiConfig.SSID));
+        } else if (wifiErrored) {
+            mCheckBox.setSummary(R.string.wifi_error);
+        }
+    }
 
     private void handleWifiApStateChanged(int state) {
         switch (state) {
