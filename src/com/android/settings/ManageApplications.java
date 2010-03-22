@@ -19,7 +19,6 @@ package com.android.settings;
 import com.android.settings.R;
 
 import android.app.ActivityManager;
-import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.app.TabActivity;
@@ -37,7 +36,6 @@ import android.content.pm.PackageManager.NameNotFoundException;
 import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
-import android.graphics.drawable.StateListDrawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
@@ -45,7 +43,6 @@ import android.os.Message;
 import android.os.SystemClock;
 import android.text.format.Formatter;
 import android.util.Log;
-import android.util.SparseArray;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -209,7 +206,7 @@ public class ManageApplications extends TabActivity implements
     ResourceLoaderThread mResourceThread;
     private TaskRunner mSizeComputor;
     
-    String mCurrentPkgName;
+    private String mCurrentPkgName;
     
     // Cache application attributes
     private AppInfoCache mCache = new AppInfoCache();
@@ -2054,5 +2051,22 @@ public class ManageApplications extends TabActivity implements
             return;
         }
         sendMessageToHandler(REORDER_LIST, newOption);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode,
+            Intent data) {
+        if (requestCode == INSTALLED_APP_DETAILS && mCurrentPkgName != null) {
+            // Refresh package attributes
+            try {
+                ApplicationInfo info = mPm.getApplicationInfo(mCurrentPkgName,
+                        PackageManager.GET_UNINSTALLED_PACKAGES);
+            } catch (NameNotFoundException e) {
+                Bundle rData = new Bundle();
+                rData.putString(ATTR_PKG_NAME, mCurrentPkgName);
+                sendMessageToHandler(REMOVE_PKG, rData);
+                mCurrentPkgName = null;
+            }
+        }
     }
 }
