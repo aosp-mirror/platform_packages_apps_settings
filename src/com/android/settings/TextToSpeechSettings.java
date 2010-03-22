@@ -122,6 +122,8 @@ public class TextToSpeechSettings extends PreferenceActivity implements
         mEnableDemo = false;
         initClickers();
         initDefaultSettings();
+
+        mTts = new TextToSpeech(this, this);
     }
 
 
@@ -677,6 +679,14 @@ public class TextToSpeechSettings extends PreferenceActivity implements
 
         enginesPref.setEntries(entries.toArray(entriesArray));
         enginesPref.setEntryValues(values.toArray(valuesArray));
+
+        // Set the selected engine based on the saved preference
+        String selectedEngine = Settings.Secure.getString(getContentResolver(), TTS_DEFAULT_SYNTH);
+        int selectedEngineIndex = enginesPref.findIndexOfValue(selectedEngine);
+        if (selectedEngineIndex == -1){
+            selectedEngineIndex = enginesPref.findIndexOfValue(SYSTEM_TTS);
+        }
+        enginesPref.setValueIndex(selectedEngineIndex);
     }
 
 }
