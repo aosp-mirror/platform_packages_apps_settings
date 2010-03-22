@@ -107,6 +107,14 @@ public class WifiApEnabler implements Preference.OnPreferenceChangeListener {
         return false;
     }
 
+    void updateConfigSummary(WifiConfiguration wifiConfig) {
+        String s = mContext.getString(
+                com.android.internal.R.string.wifi_tether_configure_ssid_default);
+        mCheckBox.setSummary(String.format(
+                    mContext.getString(R.string.wifi_tether_enabled_subtext),
+                    (wifiConfig == null) ? s : wifiConfig.SSID));
+    }
+
     private void updateTetherState(Object[] available, Object[] tethered, Object[] errored) {
         boolean wifiTethered = false;
         boolean wifiErrored = false;
@@ -125,12 +133,8 @@ public class WifiApEnabler implements Preference.OnPreferenceChangeListener {
         }
 
         if (wifiTethered) {
-            WifiConfiguration mWifiConfig = mWifiManager.getWifiApConfiguration();
-            String s = mContext.getString(
-                    com.android.internal.R.string.wifi_tether_configure_ssid_default);
-            mCheckBox.setSummary(String.format(
-                    mContext.getString(R.string.wifi_tether_enabled_subtext),
-                    (mWifiConfig == null) ? s : mWifiConfig.SSID));
+            WifiConfiguration wifiConfig = mWifiManager.getWifiApConfiguration();
+            updateConfigSummary(wifiConfig);
         } else if (wifiErrored) {
             mCheckBox.setSummary(R.string.wifi_error);
         }

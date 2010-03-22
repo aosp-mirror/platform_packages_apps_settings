@@ -122,6 +122,11 @@ public class WifiApSettings extends PreferenceActivity
                                       mWifiConfig.SSID,
                                       mWifiConfig.allowedKeyManagement.get(KeyMgmt.WPA_PSK) ?
                                       mSecurityType[WPA_INDEX] : mSecurityType[OPEN_INDEX]));
+            /**
+             * There is no tether notification on changing AP
+             * configuration. Update status with new config.
+             */
+            mWifiApEnabler.updateConfigSummary(mWifiConfig);
         }
     }
 }
