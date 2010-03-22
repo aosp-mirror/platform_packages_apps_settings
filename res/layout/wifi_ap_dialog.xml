@@ -81,6 +81,13 @@
                     android:singleLine="true"
                     android:password="true" />
 
+            <TextView android:id="@+id/hint"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textSize="12sp"
+                    android:text="@string/credentials_password_too_short"
+                    android:layout_marginBottom="10sp"/>
+
             <CheckBox android:id="@+id/show_password"
                     style="?android:attr/textAppearanceSmallInverse"
                     android:layout_width="match_parent"

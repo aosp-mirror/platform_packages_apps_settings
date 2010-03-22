@@ -114,19 +114,21 @@ public class WifiApSettings extends PreferenceActivity
 
     public void onClick(DialogInterface dialogInterface, int button) {
 
-        mWifiConfig = mDialog.getConfig();
+        if (button == DialogInterface.BUTTON_POSITIVE) {
+            mWifiConfig = mDialog.getConfig();
+            if(mWifiConfig != null) {
+                mWifiManager.setWifiApEnabled(mWifiConfig, true);
+                mCreateNetwork.setSummary(String.format(getString(CONFIG_SUBTEXT),
+                            mWifiConfig.SSID,
+                            mWifiConfig.allowedKeyManagement.get(KeyMgmt.WPA_PSK) ?
+                            mSecurityType[WPA_INDEX] : mSecurityType[OPEN_INDEX]));
+                /**
+                 * There is no tether notification on changing AP
+                 * configuration. Update status with new config.
+                 */
+                mWifiApEnabler.updateConfigSummary(mWifiConfig);
 
-        if (button == DialogInterface.BUTTON_POSITIVE && mWifiConfig != null) {
-            mWifiManager.setWifiApEnabled(mWifiConfig, true);
-            mCreateNetwork.setSummary(String.format(getString(CONFIG_SUBTEXT),
-                                      mWifiConfig.SSID,
-                                      mWifiConfig.allowedKeyManagement.get(KeyMgmt.WPA_PSK) ?
-                                      mSecurityType[WPA_INDEX] : mSecurityType[OPEN_INDEX]));
-            /**
-             * There is no tether notification on changing AP
-             * configuration. Update status with new config.
-             */
-            mWifiApEnabler.updateConfigSummary(mWifiConfig);
+            }
         }
     }
 }
