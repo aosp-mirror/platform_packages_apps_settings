@@ -16,6 +16,7 @@
 
 package com.android.settings.deviceinfo;
 
+import android.app.ActivityManager;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.BroadcastReceiver;
@@ -24,6 +25,9 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.DialogInterface.OnCancelListener;
+import android.content.pm.ApplicationInfo;
+import android.content.pm.PackageManager;
+import android.content.pm.PackageManager.NameNotFoundException;
 import android.content.res.Resources;
 import android.os.Bundle;
 import android.os.Handler;
@@ -46,6 +50,9 @@ import android.widget.Toast;
 import com.android.settings.R;
 
 import java.io.File;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 public class Memory extends PreferenceActivity implements OnCancelListener {
     private static final String TAG = "Memory";
@@ -215,32 +222,52 @@ public class Memory extends PreferenceActivity implements OnCancelListener {
         showDialog(id);
     }
 
-    private void unmount() {
-        // Check if the sdcard is being accessed by other processes
-        // and let the user decide if the sdcard should be ejected.
-        String extStoragePath = Environment.
-        getExternalStorageDirectory().toString();
+    private boolean hasAppsAccessingStorage() throws RemoteException {
+        String extStoragePath = Environment.getExternalStorageDirectory().toString();
         IMountService mountService = getMountService();
-        int stUsers[] = null;
+        boolean showPidDialog = false;
+        int stUsers[] = mountService.getStorageUsers(extStoragePath);
+        if (stUsers != null && stUsers.length > 0) {
+            return true;
+        }
+        ActivityManager am = (ActivityManager)getSystemService(Context.ACTIVITY_SERVICE);
+        PackageManager pm = getPackageManager();
+        List<ActivityManager.RunningAppProcessInfo> runningApps = am.getRunningAppProcesses();
+        if (runningApps != null && runningApps.size() > 0) {
+            for (ActivityManager.RunningAppProcessInfo app : runningApps) {
+                if (app.pkgList == null) {
+                    continue;
+                }
+                for (String pkg : app.pkgList) {
+                    try {
+                        ApplicationInfo info = pm.getApplicationInfo(pkg, 0);
+                        if ((info.flags & ApplicationInfo.FLAG_EXTERNAL_STORAGE) != 0) {
+                            return true;
+                        }
+                    } catch (NameNotFoundException e) {
+                    }
+                }
+            }
+        }
+        return false;
+    }
+
+    private void unmount() {
+        // Check if external media is in use.
         try {
-            stUsers = mountService.getStorageUsers(extStoragePath);
+           if (hasAppsAccessingStorage()) {
+               if (localLOGV) Log.i(TAG, "Do have storage users accessing media");
+               // Present dialog to user
+               showDialogInner(DLG_CONFIRM_UNMOUNT);
+           } else {
+               doUnmount(true);
+           }
         } catch (RemoteException e) {
             // Very unlikely. But present an error dialog anyway
             Log.e(TAG, "Is MountService running?");
             showDialogInner(DLG_ERROR_UNMOUNT);
         }
-        if (stUsers != null && stUsers.length > 0) {
-            if (localLOGV) Log.i(TAG, "Do have storage users accessing "
-                    + extStoragePath);
-            for (int pid : stUsers) {
-                if (localLOGV) Log.i(TAG, pid + " accessing file on sdcard");
-            }
-            // Present dialog to user
-            showDialogInner(DLG_CONFIRM_UNMOUNT);
-        } else {
-            doUnmount(true);
-        }
-}
+    }
 
     private void mount() {
         IMountService mountService = getMountService();
