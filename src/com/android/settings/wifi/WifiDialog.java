@@ -146,7 +146,7 @@ class WifiDialog extends AlertDialog implements View.OnClickListener,
                         KEYSTORE_SPACE + Credentials.USER_CERTIFICATE +
                         (String) mEapUserCert.getSelectedItem());
                 config.private_key.setValue((mEapUserCert.getSelectedItemPosition() == 0) ? "" :
-                        KEYSTORE_SPACE + Credentials.PRIVATE_KEY +
+                        KEYSTORE_SPACE + Credentials.USER_PRIVATE_KEY +
                         (String) mEapUserCert.getSelectedItem());
                 config.identity.setValue((mEapIdentity.length() == 0) ? "" :
                         mEapIdentity.getText().toString());
