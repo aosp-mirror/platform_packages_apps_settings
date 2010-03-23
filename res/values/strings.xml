@@ -525,7 +525,7 @@
     <!-- In the security screen, the header title for settings related to  Passwords-->
     <string name="security_passwords_title">Passwords</string>
 
-    
+
     <!-- Unlock settings --><skip />
 
     <!-- Title for preference that will guide the user through creating an unlock pattern -->
@@ -583,7 +583,13 @@
     <string name="lockpassword_illegal_character">Password contains an illegal character</string>
 
     <!-- Error shown when in PASSWORD mode and password is all digits -->
-    <string name="lockpassword_password_requires_alpha">Alpha password must contain at least one letter</string>
+    <string name="lockpassword_password_requires_alpha">Password must contain at least one letter</string>
+
+    <!-- Error shown when in PASSWORD mode and password doesn't contain any digits -->
+    <string name="lockpassword_password_requires_digit">Password must contain at least one digit</string>
+
+    <!-- Error shown when in PASSWORD mode and password doesn't contain any symbols -->
+    <string name="lockpassword_password_requires_symbol">Password must contain at least one symbol</string>
 
     <!-- Label for ChoosePassword/PIN OK button -->
     <string name="lockpassword_ok_label">OK</string>
