@@ -68,6 +68,7 @@ public class InstalledAppDetails extends Activity implements View.OnClickListene
     private static final int _UNKNOWN_APP=R.string.unknown;
     private ApplicationInfo mAppInfo;
     private Button mUninstallButton;
+    private boolean mMoveInProgress = false;
     private boolean mUpdatedSysApp = false;
     private Button mActivitiesButton;
     private boolean localLOGV = false;
@@ -187,7 +188,6 @@ public class InstalledAppDetails extends Activity implements View.OnClickListene
             mClearDataButton.setText(R.string.clear_user_data_text);
         }
         mClearDataButton.setOnClickListener(this);
-        initMoveButton();
     }
 
     private CharSequence getMoveErrMsg(int errCode) {
@@ -244,7 +244,7 @@ public class InstalledAppDetails extends Activity implements View.OnClickListene
         }
     }
 
-    private void initControlButtons() {
+    private void initUninstallButtons() {
         mUpdatedSysApp = (mAppInfo.flags & ApplicationInfo.FLAG_UPDATED_SYSTEM_APP) != 0;
         boolean enabled = true;
         if (mUpdatedSysApp) {
@@ -259,6 +259,17 @@ public class InstalledAppDetails extends Activity implements View.OnClickListene
         if (enabled) {
             // Register listener
             mUninstallButton.setOnClickListener(this);
+        }
+    }
+
+    private void initAppInfo(String packageName) {
+        try {
+            mAppInfo = mPm.getApplicationInfo(packageName,
+                    PackageManager.GET_UNINSTALLED_PACKAGES);
+        } catch (NameNotFoundException e) {
+            Log.e(TAG, "Exception when retrieving package: " + packageName, e);
+            showDialogInner(DLG_APP_NOT_FOUND);
+            return;
         }
     }
 
@@ -277,14 +288,7 @@ public class InstalledAppDetails extends Activity implements View.OnClickListene
         totalSizeStr = appSizeStr = dataSizeStr = mComputingStr;
         if(localLOGV) Log.i(TAG, "Have to compute package sizes");
         mSizeObserver = new PkgSizeObserver();
-        try {
-            mAppInfo = mPm.getApplicationInfo(packageName, 
-                    PackageManager.GET_UNINSTALLED_PACKAGES);
-        } catch (NameNotFoundException e) {
-            Log.e(TAG, "Exception when retrieving package:"+packageName, e);
-            showDialogInner(DLG_APP_NOT_FOUND);
-            return;
-        }
+        initAppInfo(packageName);
         setContentView(R.layout.installed_app_details);
         //TODO download str and download url
         // Set default values on sizes
@@ -300,7 +304,6 @@ public class InstalledAppDetails extends Activity implements View.OnClickListene
         mForceStopButton.setText(R.string.force_stop);
         mUninstallButton = (Button)btnPanel.findViewById(R.id.right_button);
         mForceStopButton.setEnabled(false);
-        initControlButtons();
         // Initialize clear data and move install location buttons
         View data_buttons_panel = findViewById(R.id.data_buttons_panel);
         mClearDataButton = (Button) data_buttons_panel.findViewById(R.id.left_button);
@@ -340,16 +343,6 @@ public class InstalledAppDetails extends Activity implements View.OnClickListene
              permsView.setVisibility(View.GONE);
          }
     }
-    
-    private void refreshAppAttributes(PackageInfo pkgInfo) {
-        setAppLabelAndIcon(pkgInfo);
-        initControlButtons();
-        initDataButtons();
-        // Refresh size info
-        if (mAppInfo != null && mAppInfo.packageName != null) {
-            mPm.getPackageSizeInfo(mAppInfo.packageName, mSizeObserver);
-        }
-    }
 
     // Utility method to set applicaiton label and icon.
     private void setAppLabelAndIcon(PackageInfo pkgInfo) {
@@ -374,11 +367,10 @@ public class InstalledAppDetails extends Activity implements View.OnClickListene
     @Override
     public void onResume() {
         super.onResume();
-        PackageInfo pkgInfo;
+        initAppInfo(mAppInfo.packageName);
+        PackageInfo pkgInfo = null;
         // Get application info again to refresh changed properties of application
         try {
-            mAppInfo = mPm.getApplicationInfo(mAppInfo.packageName, 
-                    PackageManager.GET_UNINSTALLED_PACKAGES);
             pkgInfo = mPm.getPackageInfo(mAppInfo.packageName,
                     PackageManager.GET_UNINSTALLED_PACKAGES);
         } catch (NameNotFoundException e) {
@@ -387,7 +379,12 @@ public class InstalledAppDetails extends Activity implements View.OnClickListene
             return;
         }
         checkForceStop();
-        refreshAppAttributes(pkgInfo);
+        setAppLabelAndIcon(pkgInfo);
+        refreshButtons();
+        // Refresh size info
+        if (mAppInfo != null && mAppInfo.packageName != null) {
+            mPm.getPackageSizeInfo(mAppInfo.packageName, mSizeObserver);
+        }
     }
 
     private void setIntentAndFinish(boolean finish, boolean appChanged) {
@@ -473,23 +470,31 @@ public class InstalledAppDetails extends Activity implements View.OnClickListene
         }
     }
 
+    private void refreshButtons() {
+        if (!mMoveInProgress) {
+            // Refresh application information again.
+            initAppInfo(mAppInfo.packageName);
+            initUninstallButtons();
+            initDataButtons();
+            initMoveButton();
+        } else {
+            mMoveAppButton.setText(R.string.moving);
+            mMoveAppButton.setEnabled(false);
+            mUninstallButton.setEnabled(false);
+        }
+    }
+
     private void processMoveMsg(Message msg) {
         int result = msg.arg1;
         String packageName = mAppInfo.packageName;
+        // Refresh the button attributes.
+        mMoveInProgress = false;
+        refreshButtons();
         if(result == PackageManager.MOVE_SUCCEEDED) {
             Log.i(TAG, "Moved resources for " + packageName);
-            try {
-                // Reset flags
-                mAppInfo = mPm.getApplicationInfo(packageName,
-                        PackageManager.GET_UNINSTALLED_PACKAGES);
-                initMoveButton();
-                // Refresh size info
-                mPm.getPackageSizeInfo(mAppInfo.packageName, mSizeObserver);
-            } catch (NameNotFoundException e) {
-                // TODO error handling
-            }
+            // Refresh size information again.
+            mPm.getPackageSizeInfo(mAppInfo.packageName, mSizeObserver);
         } else {
-            initMoveButton();
             mMoveErrorCode = result;
             showDialogInner(DLG_MOVE_FAILED);
         }
@@ -677,8 +682,8 @@ public class InstalledAppDetails extends Activity implements View.OnClickListene
             }
             int moveFlags = (mAppInfo.flags & ApplicationInfo.FLAG_EXTERNAL_STORAGE) != 0 ?
                     PackageManager.MOVE_INTERNAL : PackageManager.MOVE_EXTERNAL_MEDIA;
-            mMoveAppButton.setText(R.string.moving);
-            mMoveAppButton.setEnabled(false);
+            mMoveInProgress = true;
+            refreshButtons();
             mPm.movePackage(mAppInfo.packageName, mPackageMoveObserver, moveFlags);
         }
     }
