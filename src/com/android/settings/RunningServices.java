@@ -41,6 +41,8 @@ import android.graphics.Rect;
 import android.os.Bundle;
 import android.os.Debug;
 import android.os.Handler;
+import android.os.HandlerThread;
+import android.os.Looper;
 import android.os.Message;
 import android.os.RemoteException;
 import android.os.SystemClock;
@@ -76,6 +78,7 @@ public class RunningServices extends ListActivity
     
     static final int MSG_UPDATE_TIMES = 1;
     static final int MSG_UPDATE_CONTENTS = 2;
+    static final int MSG_REFRESH_UI = 3;
     
     static final long TIME_UPDATE_DELAY = 1000;
     static final long CONTENTS_UPDATE_DELAY = 2000;
@@ -389,11 +392,18 @@ public class RunningServices extends ListActivity
         final SparseArray<ProcessItem> mRunningProcesses
                 = new SparseArray<ProcessItem>();
         
-        final ArrayList<BaseItem> mItems = new ArrayList<BaseItem>();
         final ArrayList<ProcessItem> mProcessItems = new ArrayList<ProcessItem>();
         final ArrayList<ProcessItem> mAllProcessItems = new ArrayList<ProcessItem>();
         
         int mSequence = 0;
+        
+        // ----- following protected by mLock -----
+        
+        // Lock for protecting the state that will be shared between the
+        // background update thread and the UI thread.
+        final Object mLock = new Object();
+        
+        ArrayList<BaseItem> mItems = new ArrayList<BaseItem>();
         
         int mNumBackgroundProcesses;
         long mBackgroundProcessMemory;
@@ -556,15 +566,15 @@ public class RunningServices extends ListActivity
             }
             
             if (changed) {
-                mItems.clear();
+                ArrayList<BaseItem> newItems = new ArrayList<BaseItem>();
                 mProcessItems.clear();
                 for (int i=0; i<mProcesses.size(); i++) {
                     for (ProcessItem pi : mProcesses.valueAt(i).values()) {
                         pi.mNeedDivider = false;
                         // First add processes we are dependent on.
-                        pi.addDependentProcesses(mItems, mProcessItems);
+                        pi.addDependentProcesses(newItems, mProcessItems);
                         // And add the process itself.
-                        mItems.add(pi);
+                        newItems.add(pi);
                         if (pi.mPid > 0) {
                             mProcessItems.add(pi);
                         }
@@ -573,9 +583,12 @@ public class RunningServices extends ListActivity
                         for (ServiceItem si : pi.mServices.values()) {
                             si.mNeedDivider = needDivider;
                             needDivider = true;
-                            mItems.add(si);
+                            newItems.add(si);
                         }
                     }
+                }
+                synchronized (mLock) {
+                    mItems = newItems;
                 }
             }
             
@@ -583,9 +596,9 @@ public class RunningServices extends ListActivity
             // build a list of all processes we will retrieve memory for.
             mAllProcessItems.clear();
             mAllProcessItems.addAll(mProcessItems);
-            mNumBackgroundProcesses = 0;
-            mNumForegroundProcesses = 0;
-            mNumServiceProcesses = 0;
+            int numBackgroundProcesses = 0;
+            int numForegroundProcesses = 0;
+            int numServiceProcesses = 0;
             NRP = mRunningProcesses.size();
             for (int i=0; i<NRP; i++) {
                 ProcessItem proc = mRunningProcesses.valueAt(i);
@@ -594,25 +607,25 @@ public class RunningServices extends ListActivity
                     // of our active ones, so add it up if needed.
                     if (proc.mRunningProcessInfo.importance >=
                             ActivityManager.RunningAppProcessInfo.IMPORTANCE_BACKGROUND) {
-                        mNumBackgroundProcesses++;
+                        numBackgroundProcesses++;
                         mAllProcessItems.add(proc);
                     } else if (proc.mRunningProcessInfo.importance <=
                             ActivityManager.RunningAppProcessInfo.IMPORTANCE_VISIBLE) {
-                        mNumForegroundProcesses++;
+                        numForegroundProcesses++;
                         mAllProcessItems.add(proc);
                     } else {
                         Log.i(TAG, "Unknown non-service process: "
                                 + proc.mProcessName + " #" + proc.mPid);
                     }
                 } else {
-                    mNumServiceProcesses++;
+                    numServiceProcesses++;
                 }
             }
             
+            long backgroundProcessMemory = 0;
+            long foregroundProcessMemory = 0;
+            long serviceProcessMemory = 0;
             try {
-                mBackgroundProcessMemory = 0;
-                mForegroundProcessMemory = 0;
-                mServiceProcessMemory = 0;
                 final int numProc = mAllProcessItems.size();
                 int[] pids = new int[numProc];
                 for (int i=0; i<numProc; i++) {
@@ -624,16 +637,25 @@ public class RunningServices extends ListActivity
                     ProcessItem proc = mAllProcessItems.get(i);
                     changed |= proc.updateSize(context, mem[i], mSequence);
                     if (proc.mCurSeq == mSequence) {
-                        mServiceProcessMemory += proc.mSize;
+                        serviceProcessMemory += proc.mSize;
                     } else if (proc.mRunningProcessInfo.importance >=
                             ActivityManager.RunningAppProcessInfo.IMPORTANCE_BACKGROUND) {
-                        mBackgroundProcessMemory += proc.mSize;
+                        backgroundProcessMemory += proc.mSize;
                     } else if (proc.mRunningProcessInfo.importance <=
                             ActivityManager.RunningAppProcessInfo.IMPORTANCE_VISIBLE) {
-                        mForegroundProcessMemory += proc.mSize;
+                        foregroundProcessMemory += proc.mSize;
                     }
                 }
             } catch (RemoteException e) {
+            }
+            
+            synchronized (mLock) {
+                mNumBackgroundProcesses = numBackgroundProcesses;
+                mNumForegroundProcesses = numForegroundProcesses;
+                mNumServiceProcesses = numServiceProcesses;
+                mBackgroundProcessMemory = backgroundProcessMemory;
+                mForegroundProcessMemory = foregroundProcessMemory;
+                mServiceProcessMemory = serviceProcessMemory;
             }
             
             return changed;
@@ -659,8 +681,10 @@ public class RunningServices extends ListActivity
         final LayoutInflater mInflater;
         
         ServiceListAdapter(State state) {
-            mState = state;
-            mInflater = (LayoutInflater)getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+            synchronized (state.mLock) {
+                mState = state;
+                mInflater = (LayoutInflater)getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+            }
         }
 
         public boolean hasStableIds() {
@@ -668,11 +692,15 @@ public class RunningServices extends ListActivity
         }
         
         public int getCount() {
-            return mState.mItems.size();
+            synchronized (mState.mLock) {
+                return mState.mItems.size();
+            }
         }
 
         public Object getItem(int position) {
-            return mState.mItems.get(position);
+            synchronized (mState.mLock) {
+                return mState.mItems.get(position);
+            }
         }
 
         public long getItemId(int position) {
@@ -684,7 +712,9 @@ public class RunningServices extends ListActivity
         }
 
         public boolean isEnabled(int position) {
-            return !mState.mItems.get(position).mIsProcess;
+            synchronized (mState.mLock) {
+                return !mState.mItems.get(position).mIsProcess;
+            }
         }
 
         public View getView(int position, View convertView, ViewGroup parent) {
@@ -711,32 +741,40 @@ public class RunningServices extends ListActivity
         }
         
         public void bindView(View view, int position) {
-            ViewHolder vh = (ViewHolder) view.getTag();
-            BaseItem item = mState.mItems.get(position);
-            vh.name.setText(item.mDisplayLabel);
-            vh.separator.setVisibility(item.mNeedDivider
-                    ? View.VISIBLE : View.INVISIBLE);
-            ActiveItem ai = new ActiveItem();
-            ai.mRootView = view;
-            ai.mItem = item;
-            ai.mHolder = vh;
-            ai.mFirstRunTime = item.mActiveSince;
-            vh.description.setText(item.mDescription);
-            if (item.mIsProcess) {
-                view.setBackgroundColor(mProcessBgColor);
-                vh.icon.setImageDrawable(null);
-                vh.icon.setVisibility(View.GONE);
-                vh.description.setText(item.mDescription);
-                item.mCurSizeStr = null;
-            } else {
-                view.setBackgroundDrawable(null);
-                vh.icon.setImageDrawable(item.mPackageInfo.loadIcon(getPackageManager()));
-                vh.icon.setVisibility(View.VISIBLE);
-                vh.description.setText(item.mDescription);
+            synchronized (mState.mLock) {
+                ViewHolder vh = (ViewHolder) view.getTag();
+                if (position >= mState.mItems.size()) {
+                    // List must have changed since we last reported its
+                    // size...  ignore here, we will be doing a data changed
+                    // to refresh the entire list.
+                    return;
+                }
+                BaseItem item = mState.mItems.get(position);
+                vh.name.setText(item.mDisplayLabel);
+                vh.separator.setVisibility(item.mNeedDivider
+                        ? View.VISIBLE : View.INVISIBLE);
+                ActiveItem ai = new ActiveItem();
+                ai.mRootView = view;
+                ai.mItem = item;
+                ai.mHolder = vh;
                 ai.mFirstRunTime = item.mActiveSince;
+                vh.description.setText(item.mDescription);
+                if (item.mIsProcess) {
+                    view.setBackgroundColor(mProcessBgColor);
+                    vh.icon.setImageDrawable(null);
+                    vh.icon.setVisibility(View.GONE);
+                    vh.description.setText(item.mDescription);
+                    item.mCurSizeStr = null;
+                } else {
+                    view.setBackgroundDrawable(null);
+                    vh.icon.setImageDrawable(item.mPackageInfo.loadIcon(getPackageManager()));
+                    vh.icon.setVisibility(View.VISIBLE);
+                    vh.description.setText(item.mDescription);
+                    ai.mFirstRunTime = item.mActiveSince;
+                }
+                ai.updateTime(RunningServices.this);
+                mActiveItems.put(view, ai);
             }
-            ai.updateTime(RunningServices.this);
-            mActiveItems.put(view, ai);
         }
     }
     
@@ -801,6 +839,28 @@ public class RunningServices extends ListActivity
         }
     }
     
+    HandlerThread mBackgroundThread;
+    final class BackgroundHandler extends Handler {
+        public BackgroundHandler(Looper looper) {
+            super(looper);
+        }
+        
+        @Override
+        public void handleMessage(Message msg) {
+            switch (msg.what) {
+                case MSG_UPDATE_CONTENTS:
+                    Message cmd = mHandler.obtainMessage(MSG_REFRESH_UI);
+                    cmd.arg1 = mState.update(RunningServices.this, mAm) ? 1 : 0;
+                    mHandler.sendMessage(cmd);
+                    removeMessages(MSG_UPDATE_CONTENTS);
+                    msg = obtainMessage(MSG_UPDATE_CONTENTS);
+                    sendMessageDelayed(msg, CONTENTS_UPDATE_DELAY);
+                    break;
+            }
+        }
+    };
+    BackgroundHandler mBackgroundHandler;
+    
     final Handler mHandler = new Handler() {
         @Override
         public void handleMessage(Message msg) {
@@ -820,11 +880,8 @@ public class RunningServices extends ListActivity
                     msg = obtainMessage(MSG_UPDATE_TIMES);
                     sendMessageDelayed(msg, TIME_UPDATE_DELAY);
                     break;
-                case MSG_UPDATE_CONTENTS:
-                    updateList();
-                    removeMessages(MSG_UPDATE_CONTENTS);
-                    msg = obtainMessage(MSG_UPDATE_CONTENTS);
-                    sendMessageDelayed(msg, CONTENTS_UPDATE_DELAY);
+                case MSG_REFRESH_UI:
+                    refreshUi(msg.arg1 != 0);
                     break;
             }
         }
@@ -908,8 +965,8 @@ public class RunningServices extends ListActivity
             Integer.valueOf(SystemProperties.get("ro.SECONDARY_SERVER_MEM"))*PAGE_SIZE;
     }
 
-    void updateList() {
-        if (mState.update(this, mAm)) {
+    void refreshUi(boolean dataChanged) {
+        if (dataChanged) {
             ((ServiceListAdapter)(getListView().getAdapter())).notifyDataSetChanged();
         }
         
@@ -920,35 +977,37 @@ public class RunningServices extends ListActivity
             availMem = 0;
         }
         
-        if (mLastNumBackgroundProcesses != mState.mNumBackgroundProcesses
-                || mLastBackgroundProcessMemory != mState.mBackgroundProcessMemory
-                || mLastAvailMemory != availMem) {
-            mLastNumBackgroundProcesses = mState.mNumBackgroundProcesses;
-            mLastBackgroundProcessMemory = mState.mBackgroundProcessMemory;
-            mLastAvailMemory = availMem;
-            String availStr = availMem != 0
-                    ? Formatter.formatShortFileSize(this, availMem) : "0";
-            String sizeStr = Formatter.formatShortFileSize(this, mLastBackgroundProcessMemory);
-            mBackgroundProcessText.setText(getResources().getString(
-                    R.string.service_background_processes,
-                    mLastNumBackgroundProcesses, availStr, sizeStr));
+        synchronized (mState.mLock) {
+            if (mLastNumBackgroundProcesses != mState.mNumBackgroundProcesses
+                    || mLastBackgroundProcessMemory != mState.mBackgroundProcessMemory
+                    || mLastAvailMemory != availMem) {
+                mLastNumBackgroundProcesses = mState.mNumBackgroundProcesses;
+                mLastBackgroundProcessMemory = mState.mBackgroundProcessMemory;
+                mLastAvailMemory = availMem;
+                String availStr = availMem != 0
+                        ? Formatter.formatShortFileSize(this, availMem) : "0";
+                String sizeStr = Formatter.formatShortFileSize(this, mLastBackgroundProcessMemory);
+                mBackgroundProcessText.setText(getResources().getString(
+                        R.string.service_background_processes,
+                        mLastNumBackgroundProcesses, availStr, sizeStr));
+            }
+            if (mLastNumForegroundProcesses != mState.mNumForegroundProcesses
+                    || mLastForegroundProcessMemory != mState.mForegroundProcessMemory) {
+                mLastNumForegroundProcesses = mState.mNumForegroundProcesses;
+                mLastForegroundProcessMemory = mState.mForegroundProcessMemory;
+                String sizeStr = Formatter.formatShortFileSize(this, mLastForegroundProcessMemory);
+                mForegroundProcessText.setText(getResources().getString(
+                        R.string.service_foreground_processes, mLastNumForegroundProcesses, sizeStr));
+            }
+            mLastNumServiceProcesses = mState.mNumServiceProcesses;
+            mLastServiceProcessMemory = mState.mServiceProcessMemory;
+            
+            float totalMem = availMem + mLastBackgroundProcessMemory
+                    + mLastForegroundProcessMemory + mLastServiceProcessMemory;
+            mColorBar.setRatios(mLastForegroundProcessMemory/totalMem,
+                    mLastServiceProcessMemory/totalMem,
+                    (availMem+mLastBackgroundProcessMemory)/totalMem);
         }
-        if (mLastNumForegroundProcesses != mState.mNumForegroundProcesses
-                || mLastForegroundProcessMemory != mState.mForegroundProcessMemory) {
-            mLastNumForegroundProcesses = mState.mNumForegroundProcesses;
-            mLastForegroundProcessMemory = mState.mForegroundProcessMemory;
-            String sizeStr = Formatter.formatShortFileSize(this, mLastForegroundProcessMemory);
-            mForegroundProcessText.setText(getResources().getString(
-                    R.string.service_foreground_processes, mLastNumForegroundProcesses, sizeStr));
-        }
-        mLastNumServiceProcesses = mState.mNumServiceProcesses;
-        mLastServiceProcessMemory = mState.mServiceProcessMemory;
-        
-        float totalMem = mLastBackgroundProcessMemory
-                + mLastForegroundProcessMemory + mLastServiceProcessMemory;
-        mColorBar.setRatios(mLastForegroundProcessMemory/totalMem,
-                mLastServiceProcessMemory/totalMem,
-                mLastForegroundProcessMemory/totalMem);
     }
     
     @Override
@@ -996,7 +1055,9 @@ public class RunningServices extends ListActivity
         if (mCurSelected != null) {
             stopService(new Intent().setComponent(
                     ((ServiceItem)mCurSelected).mRunningService.service));
-            updateList();
+            if (mBackgroundHandler != null) {
+                mBackgroundHandler.sendEmptyMessage(MSG_UPDATE_CONTENTS);
+            }
         }
     }
 
@@ -1004,19 +1065,26 @@ public class RunningServices extends ListActivity
     protected void onPause() {
         super.onPause();
         mHandler.removeMessages(MSG_UPDATE_TIMES);
-        mHandler.removeMessages(MSG_UPDATE_CONTENTS);
+        if (mBackgroundThread != null) {
+            mBackgroundThread.quit();
+            mBackgroundThread = null;
+            mBackgroundHandler = null;
+        }
     }
 
     @Override
     protected void onResume() {
         super.onResume();
-        updateList();
+        refreshUi(mState.update(this, mAm));
+        mBackgroundThread = new HandlerThread("RunningServices");
+        mBackgroundThread.start();
+        mBackgroundHandler = new BackgroundHandler(mBackgroundThread.getLooper());
         mHandler.removeMessages(MSG_UPDATE_TIMES);
         Message msg = mHandler.obtainMessage(MSG_UPDATE_TIMES);
         mHandler.sendMessageDelayed(msg, TIME_UPDATE_DELAY);
-        mHandler.removeMessages(MSG_UPDATE_CONTENTS);
-        msg = mHandler.obtainMessage(MSG_UPDATE_CONTENTS);
-        mHandler.sendMessageDelayed(msg, CONTENTS_UPDATE_DELAY);
+        mBackgroundHandler.removeMessages(MSG_UPDATE_CONTENTS);
+        msg = mBackgroundHandler.obtainMessage(MSG_UPDATE_CONTENTS);
+        mBackgroundHandler.sendMessageDelayed(msg, CONTENTS_UPDATE_DELAY);
     }
 
     @Override
