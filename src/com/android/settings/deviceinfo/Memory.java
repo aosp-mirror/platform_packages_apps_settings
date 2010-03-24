@@ -231,23 +231,9 @@ public class Memory extends PreferenceActivity implements OnCancelListener {
             return true;
         }
         ActivityManager am = (ActivityManager)getSystemService(Context.ACTIVITY_SERVICE);
-        PackageManager pm = getPackageManager();
-        List<ActivityManager.RunningAppProcessInfo> runningApps = am.getRunningAppProcesses();
-        if (runningApps != null && runningApps.size() > 0) {
-            for (ActivityManager.RunningAppProcessInfo app : runningApps) {
-                if (app.pkgList == null) {
-                    continue;
-                }
-                for (String pkg : app.pkgList) {
-                    try {
-                        ApplicationInfo info = pm.getApplicationInfo(pkg, 0);
-                        if ((info.flags & ApplicationInfo.FLAG_EXTERNAL_STORAGE) != 0) {
-                            return true;
-                        }
-                    } catch (NameNotFoundException e) {
-                    }
-                }
-            }
+        List<ApplicationInfo> list = am.getRunningExternalApplications();
+        if (list != null && list.size() > 0) {
+            return true;
         }
         return false;
     }
