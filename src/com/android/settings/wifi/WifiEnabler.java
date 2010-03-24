@@ -92,6 +92,14 @@ public class WifiEnabler implements Preference.OnPreferenceChangeListener {
             return false;
         }
 
+        /**
+         * Disable tethering if enabling Wifi
+         */
+        int wifiApState = mWifiManager.getWifiApState();
+        if (enable && ((wifiApState == WifiManager.WIFI_AP_STATE_ENABLING) ||
+                (wifiApState == WifiManager.WIFI_AP_STATE_ENABLED))) {
+            mWifiManager.setWifiApEnabled(null, false);
+        }
         if (mWifiManager.setWifiEnabled(enable)) {
             mCheckBox.setEnabled(false);
         } else {

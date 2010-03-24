@@ -248,6 +248,15 @@ public class SettingsAppWidgetProvider extends AppWidgetProvider {
             if (withToast) {
                 Toast.makeText(context, R.string.gadget_toggle_wifi, Toast.LENGTH_SHORT).show();
             }
+            /**
+             * Disable tethering if enabling Wifi
+             */
+            int wifiApState = wifiManager.getWifiApState();
+            if (desiredState && ((wifiApState == WifiManager.WIFI_AP_STATE_ENABLING) ||
+                        (wifiApState == WifiManager.WIFI_AP_STATE_ENABLED))) {
+                wifiManager.setWifiApEnabled(null, false);
+            }
+
             wifiManager.setWifiEnabled(desiredState);
         }
 
