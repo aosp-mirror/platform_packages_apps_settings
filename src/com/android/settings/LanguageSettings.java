@@ -180,7 +180,8 @@ public class LanguageSettings extends PreferenceActivity {
         super.onPause();
 
         StringBuilder builder = new StringBuilder(256);
-        
+        StringBuilder disabledSysImes = new StringBuilder(256);
+
         int firstEnabled = -1;
         int N = mInputMethodProperties.size();
         for (int i = 0; i < N; ++i) {
@@ -199,6 +200,12 @@ public class LanguageSettings extends PreferenceActivity {
             } else if (hasIt) {
                 mLastInputMethodId = mLastTickedInputMethodId;
             }
+            // If it's a disabled system ime, add it to the disabled list so that it
+            // doesn't get enabled automatically on any changes to the package list
+            if (pref != null && !pref.isChecked() && systemIme && mHaveHardKeyboard) {
+                if (disabledSysImes.length() > 0) disabledSysImes.append(":");
+                disabledSysImes.append(id);
+            }
         }
 
         // If the last input method is unset, set it as the first enabled one.
@@ -212,6 +219,8 @@ public class LanguageSettings extends PreferenceActivity {
         
         Settings.Secure.putString(getContentResolver(),
             Settings.Secure.ENABLED_INPUT_METHODS, builder.toString());
+        Settings.Secure.putString(getContentResolver(),
+                Settings.Secure.DISABLED_SYSTEM_INPUT_METHODS, disabledSysImes.toString());
         Settings.Secure.putString(getContentResolver(),
             Settings.Secure.DEFAULT_INPUT_METHOD,
             mLastInputMethodId != null ? mLastInputMethodId : "");
