@@ -23,6 +23,7 @@ import java.util.ArrayList;
 
 import android.app.AlertDialog;
 import android.content.BroadcastReceiver;
+import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
@@ -95,22 +96,42 @@ public class WifiApEnabler implements Preference.OnPreferenceChangeListener {
         mCheckBox.setOnPreferenceChangeListener(null);
     }
 
-    public boolean onPreferenceChange(Preference preference, Object enable) {
+    public boolean onPreferenceChange(Preference preference, Object value) {
+
+        final ContentResolver cr = mContext.getContentResolver();
+        boolean enable = (Boolean)value;
 
         /**
          * Disable Wifi if enabling tethering
          */
         int wifiState = mWifiManager.getWifiState();
-        if ((Boolean)enable && ((wifiState == WifiManager.WIFI_STATE_ENABLING) ||
+        if (enable && ((wifiState == WifiManager.WIFI_STATE_ENABLING) ||
                     (wifiState == WifiManager.WIFI_STATE_ENABLED))) {
             mWifiManager.setWifiEnabled(false);
+            Settings.Secure.putInt(cr, Settings.Secure.WIFI_SAVED_STATE, 1);
         }
 
-        if (mWifiManager.setWifiApEnabled(null, (Boolean)enable)) {
+        if (mWifiManager.setWifiApEnabled(null, enable)) {
             /* Disable here, enabled on receiving success broadcast */
             mCheckBox.setEnabled(false);
         } else {
             mCheckBox.setSummary(R.string.wifi_error);
+        }
+
+        /**
+         *  If needed, restore Wifi on tether disable
+         */
+        if (!enable) {
+            int wifiSavedState = 0;
+            try {
+                wifiSavedState = Settings.Secure.getInt(cr, Settings.Secure.WIFI_SAVED_STATE);
+            } catch (Settings.SettingNotFoundException e) {
+                ;
+            }
+            if (wifiSavedState == 1) {
+                mWifiManager.setWifiEnabled(true);
+                Settings.Secure.putInt(cr, Settings.Secure.WIFI_SAVED_STATE, 0);
+            }
         }
 
         return false;
