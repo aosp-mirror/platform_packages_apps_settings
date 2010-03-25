@@ -230,6 +230,7 @@ public class BluetoothSettings extends PreferenceActivity
                 CachedBluetoothDevice device = btPreference.getCachedDevice();
 
                 mSelectedDevice = device.getDevice();
+                mLocalManager.stopScanning();
                 mLocalManager.persistSelectedDeviceInPicker(mSelectedDevice.getAddress());
                 if ((device.getBondState() == BluetoothDevice.BOND_BONDED) ||
                         (mNeedAuth == false)) {
