@@ -162,13 +162,17 @@ public class SecuritySettings extends PreferenceActivity {
         if (!mLockPatternUtils.isSecure()) {
             addPreferencesFromResource(R.xml.security_settings_chooser);
         } else {
-            final int currentMode = mLockPatternUtils.getPasswordMode();
-            if (currentMode == LockPatternUtils.MODE_PATTERN) {
-                addPreferencesFromResource(R.xml.security_settings_pattern);
-            } else if (currentMode == LockPatternUtils.MODE_PIN) {
-                addPreferencesFromResource(R.xml.security_settings_pin);
-            } else if (currentMode == LockPatternUtils.MODE_PASSWORD) {
-                addPreferencesFromResource(R.xml.security_settings_password);
+            switch (mLockPatternUtils.getKeyguardStoredPasswordQuality()) {
+                case DevicePolicyManager.PASSWORD_QUALITY_SOMETHING:
+                    addPreferencesFromResource(R.xml.security_settings_pattern);
+                    break;
+                case DevicePolicyManager.PASSWORD_QUALITY_NUMERIC:
+                    addPreferencesFromResource(R.xml.security_settings_pin);
+                    break;
+                case DevicePolicyManager.PASSWORD_QUALITY_ALPHABETIC:
+                case DevicePolicyManager.PASSWORD_QUALITY_ALPHANUMERIC:
+                    addPreferencesFromResource(R.xml.security_settings_password);
+                    break;
             }
         }
 
@@ -243,12 +247,13 @@ public class SecuritySettings extends PreferenceActivity {
     protected void handleUpdateUnlockMethod(String value) {
         // NULL means update the current password/pattern/pin
         if (value == null) {
-            int mode = mLockPatternUtils.getPasswordMode();
-            if (LockPatternUtils.MODE_PATTERN == mode) {
+            int mode = mLockPatternUtils.getKeyguardStoredPasswordQuality();
+            if (DevicePolicyManager.PASSWORD_QUALITY_SOMETHING == mode) {
                 value = "pattern";
-            } else if (LockPatternUtils.MODE_PASSWORD == mode) {
+            } else if (DevicePolicyManager.PASSWORD_QUALITY_ALPHABETIC == mode
+                    || DevicePolicyManager.PASSWORD_QUALITY_ALPHANUMERIC == mode) {
                 value = "password";
-            } else if (LockPatternUtils.MODE_PIN == mode) {
+            } else if (DevicePolicyManager.PASSWORD_QUALITY_NUMERIC == mode) {
                 value = "pin";
             } else {
                 throw new IllegalStateException("Unknown password mode: " + value);
@@ -262,11 +267,11 @@ public class SecuritySettings extends PreferenceActivity {
         } else {
             int reqMode;
             if ("password".equals(value)) {
-                reqMode = LockPatternUtils.MODE_PASSWORD;
+                reqMode = DevicePolicyManager.PASSWORD_QUALITY_ALPHABETIC;
             } else if ( "pin".equals(value)) {
-                reqMode = LockPatternUtils.MODE_PIN;
+                reqMode = DevicePolicyManager.PASSWORD_QUALITY_NUMERIC;
             } else {
-                reqMode = LockPatternUtils.MODE_PATTERN;
+                reqMode = DevicePolicyManager.PASSWORD_QUALITY_SOMETHING;
             }
             int minMode = mDPM.getPasswordQuality(null);
             if (reqMode < minMode) {

@@ -16,20 +16,13 @@
 
 package com.android.settings;
 
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-
 import com.android.internal.widget.LockPatternUtils;
 import com.android.internal.widget.PasswordEntryKeyboardHelper;
 import com.android.internal.widget.PasswordEntryKeyboardView;
-import com.android.settings.ChooseLockPattern.LeftButtonMode;
-import com.android.settings.ChooseLockPattern.RightButtonMode;
-import com.android.settings.ChooseLockPattern.Stage;
 
 import android.app.Activity;
+import android.app.admin.DevicePolicyManager;
 import android.content.Intent;
-import android.content.pm.ActivityInfo;
-import android.graphics.PixelFormat;
 import android.inputmethodservice.KeyboardView;
 import android.os.Bundle;
 import android.os.Handler;
@@ -56,7 +49,7 @@ public class ChooseLockPassword extends Activity implements OnClickListener, OnE
     private int mPasswordMinLength = 4;
     private int mPasswordMaxLength = 16;
     private LockPatternUtils mLockPatternUtils;
-    private int mRequestedMode = LockPatternUtils.MODE_PIN;
+    private int mRequestedQuality = DevicePolicyManager.PASSWORD_QUALITY_NUMERIC;
     private ChooseLockSettingsHelper mChooseLockSettingsHelper;
     private com.android.settings.ChooseLockPassword.Stage mUiStage = Stage.Introduction;
     private TextView mHeaderText;
@@ -108,12 +101,12 @@ public class ChooseLockPassword extends Activity implements OnClickListener, OnE
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mLockPatternUtils = new LockPatternUtils(this);
-        mRequestedMode = getIntent().getIntExtra(LockPatternUtils.PASSWORD_TYPE_KEY, mRequestedMode);
+        mRequestedQuality = getIntent().getIntExtra(LockPatternUtils.PASSWORD_TYPE_KEY, mRequestedQuality);
         mPasswordMinLength = getIntent().getIntExtra(PASSWORD_MIN_KEY, mPasswordMinLength);
         mPasswordMaxLength = getIntent().getIntExtra(PASSWORD_MAX_KEY, mPasswordMaxLength);
-        int minMode = mLockPatternUtils.getRequestedPasswordMode();
-        if (mRequestedMode < minMode) {
-            mRequestedMode = minMode;
+        int minMode = mLockPatternUtils.getRequestedPasswordQuality();
+        if (mRequestedQuality < minMode) {
+            mRequestedQuality = minMode;
         }
         int minLength = mLockPatternUtils.getRequestedMinimumPasswordLength();
         if (mPasswordMinLength < minLength) {
@@ -143,7 +136,8 @@ public class ChooseLockPassword extends Activity implements OnClickListener, OnE
         mPasswordEntry.setOnEditorActionListener(this);
         mPasswordEntry.addTextChangedListener(this);
 
-        mIsAlphaMode = LockPatternUtils.MODE_PASSWORD == mRequestedMode;
+        mIsAlphaMode = DevicePolicyManager.PASSWORD_QUALITY_ALPHABETIC == mRequestedQuality
+            || DevicePolicyManager.PASSWORD_QUALITY_ALPHANUMERIC == mRequestedQuality;
         mKeyboardHelper = new PasswordEntryKeyboardHelper(this, mKeyboardView, mPasswordEntry);
         mKeyboardHelper.setKeyboardMode(mIsAlphaMode ?
                 PasswordEntryKeyboardHelper.KEYBOARD_MODE_ALPHA
@@ -199,16 +193,16 @@ public class ChooseLockPassword extends Activity implements OnClickListener, OnE
 
     /**
      * Validates PIN and returns a message to display if PIN fails test.
-     * @param pin
-     * @return message id to display to user
+     * @param password the raw password the user typed in
+     * @return error message to show to user or null if password is OK
      */
-    private String validatePassword(String pin) {
-        if (pin.length() < mPasswordMinLength) {
+    private String validatePassword(String password) {
+        if (password.length() < mPasswordMinLength) {
             return getString(mIsAlphaMode ?
                     R.string.lockpassword_password_too_short
                     : R.string.lockpassword_pin_too_short, mPasswordMinLength);
         }
-        if (pin.length() > mPasswordMaxLength) {
+        if (password.length() > mPasswordMaxLength) {
             return getString(mIsAlphaMode ?
                     R.string.lockpassword_password_too_long
                     : R.string.lockpassword_pin_too_long, mPasswordMaxLength);
@@ -216,8 +210,8 @@ public class ChooseLockPassword extends Activity implements OnClickListener, OnE
         boolean hasAlpha = false;
         boolean hasDigit = false;
         boolean hasSymbol = false;
-        for (int i = 0; i < pin.length(); i++) {
-            char c = pin.charAt(i);
+        for (int i = 0; i < password.length(); i++) {
+            char c = password.charAt(i);
             // allow non white space Latin-1 characters only
             if (c <= 32 || c > 127) {
                 return getString(R.string.lockpassword_illegal_character);
@@ -230,11 +224,25 @@ public class ChooseLockPassword extends Activity implements OnClickListener, OnE
                 hasSymbol = true;
             }
         }
-        if (LockPatternUtils.MODE_PIN == mRequestedMode && (hasAlpha | hasSymbol)) {
-                return getString(R.string.lockpassword_pin_contains_non_digits);
-        } else if (LockPatternUtils.MODE_PASSWORD == mRequestedMode && !hasAlpha) {
-            // require at least 1 alpha character
-            return getString(R.string.lockpassword_password_requires_alpha);
+        if (DevicePolicyManager.PASSWORD_QUALITY_NUMERIC == mRequestedQuality
+                && (hasAlpha | hasSymbol)) {
+            // This shouldn't be possible unless user finds some way to bring up soft keyboard
+            return getString(R.string.lockpassword_pin_contains_non_digits);
+        } else {
+            final boolean alphabetic = DevicePolicyManager.PASSWORD_QUALITY_ALPHABETIC
+                    == mRequestedQuality;
+            final boolean alphanumeric = DevicePolicyManager.PASSWORD_QUALITY_ALPHANUMERIC
+                    == mRequestedQuality;
+            final boolean symbolic = false; // not yet
+            if ((alphabetic || alphanumeric) && !hasAlpha) {
+                return getString(R.string.lockpassword_password_requires_alpha);
+            }
+            if (alphanumeric && !hasDigit) {
+                return getString(R.string.lockpassword_password_requires_digit);
+            }
+            if (symbolic && !hasSymbol) {
+                return getString(R.string.lockpassword_password_requires_symbol);
+            }
         }
         return null;
     }
@@ -255,7 +263,7 @@ public class ChooseLockPassword extends Activity implements OnClickListener, OnE
         } else if (mUiStage == Stage.NeedToConfirm) {
             if (mFirstPin.equals(pin)) {
                 mLockPatternUtils.clearLock();
-                mLockPatternUtils.saveLockPassword(pin, mRequestedMode);
+                mLockPatternUtils.saveLockPassword(pin, mRequestedQuality);
                 finish();
             } else {
                 updateStage(Stage.ConfirmWrong);
@@ -304,7 +312,8 @@ public class ChooseLockPassword extends Activity implements OnClickListener, OnE
      * Update the hint based on current Stage and length of password entry
      */
     private void updateUi() {
-        final int length = mPasswordEntry.getText().toString().length();
+        String password = mPasswordEntry.getText().toString();
+        final int length = password.length();
         if (mUiStage == Stage.Introduction && length > 0) {
             if (length < mPasswordMinLength) {
                 String msg = getString(mIsAlphaMode ? R.string.lockpassword_password_too_short
@@ -312,8 +321,14 @@ public class ChooseLockPassword extends Activity implements OnClickListener, OnE
                 mHeaderText.setText(msg);
                 mNextButton.setEnabled(false);
             } else {
-                mHeaderText.setText(R.string.lockpassword_press_continue);
-                mNextButton.setEnabled(true);
+                String error = validatePassword(password);
+                if (error != null) {
+                    mHeaderText.setText(error);
+                    mNextButton.setEnabled(false);
+                } else {
+                    mHeaderText.setText(R.string.lockpassword_press_continue);
+                    mNextButton.setEnabled(true);
+                }
             }
         } else {
             mHeaderText.setText(mIsAlphaMode ? mUiStage.alphaHint : mUiStage.numericHint);
