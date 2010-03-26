@@ -27,6 +27,7 @@ import android.app.admin.DevicePolicyManager;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
@@ -81,6 +82,12 @@ public class DeviceAdminAdd extends Activity {
         
         mDPM = (DevicePolicyManager)getSystemService(Context.DEVICE_POLICY_SERVICE);
 
+        if ((getIntent().getFlags()&Intent.FLAG_ACTIVITY_NEW_TASK) != 0) {
+            Log.w(TAG, "Can now start ADD_DEVICE_ADMIN as a new task");
+            finish();
+            return;
+        }
+        
         ComponentName cn = (ComponentName)getIntent().getParcelableExtra(
                 DevicePolicyManager.EXTRA_DEVICE_ADMIN);
         if (cn == null) {
