@@ -21,6 +21,7 @@ import com.android.internal.widget.PasswordEntryKeyboardHelper;
 import com.android.internal.widget.PasswordEntryKeyboardView;
 
 import android.app.Activity;
+import android.app.admin.DevicePolicyManager;
 import android.os.Bundle;
 import android.os.Handler;
 import android.text.Editable;
@@ -51,7 +52,7 @@ public class ConfirmLockPassword extends Activity implements OnClickListener,
     }
 
     private void initViews() {
-        int mode = mLockPatternUtils.getPasswordMode();
+        final int storedQuality = mLockPatternUtils.getKeyguardStoredPasswordQuality();
         setContentView(R.layout.confirm_lock_password);
         // Disable IME on our window since we provide our own keyboard
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_ALT_FOCUSABLE_IM,
@@ -63,8 +64,8 @@ public class ConfirmLockPassword extends Activity implements OnClickListener,
         mPasswordEntry.setOnEditorActionListener(this);
         mKeyboardView = (PasswordEntryKeyboardView) findViewById(R.id.keyboard);
         mHeaderText = (TextView) findViewById(R.id.headerText);
-        final boolean isAlpha =
-                LockPatternUtils.MODE_PASSWORD == mLockPatternUtils.getPasswordMode();
+        final boolean isAlpha = DevicePolicyManager.PASSWORD_QUALITY_ALPHABETIC == storedQuality
+                || DevicePolicyManager.PASSWORD_QUALITY_ALPHANUMERIC == storedQuality;
         mHeaderText.setText(isAlpha ? R.string.lockpassword_confirm_your_password_header
                 : R.string.lockpassword_confirm_your_pin_header);
         mKeyboardHelper = new PasswordEntryKeyboardHelper(this, mKeyboardView, mPasswordEntry);

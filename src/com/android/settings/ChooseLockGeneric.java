@@ -39,7 +39,7 @@ public class ChooseLockGeneric extends Activity {
         
         int quality = getIntent().getIntExtra(LockPatternUtils.PASSWORD_TYPE_KEY, -1);
         if (quality == -1) {
-            quality = lockPatternUtils.getPasswordMode();
+            quality = lockPatternUtils.getKeyguardStoredPasswordQuality();
         }
         int minQuality = mDPM.getPasswordQuality(null);
         if (quality < minQuality) {

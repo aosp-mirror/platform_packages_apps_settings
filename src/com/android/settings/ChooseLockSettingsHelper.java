@@ -17,6 +17,7 @@
 package com.android.settings;
 
 import android.app.Activity;
+import android.app.admin.DevicePolicyManager;
 import android.content.Intent;
 
 import com.android.internal.widget.LockPatternUtils;
@@ -41,12 +42,12 @@ public class ChooseLockSettingsHelper {
      */
     protected boolean launchConfirmationActivity(int request) {
         boolean launched = false;
-        switch (mLockPatternUtils.getPasswordMode()) {
-            case LockPatternUtils.MODE_PATTERN:
+        switch (mLockPatternUtils.getKeyguardStoredPasswordQuality()) {
+            case DevicePolicyManager.PASSWORD_QUALITY_SOMETHING:
                 launched = confirmPattern(request);
                 break;
-            case LockPatternUtils.MODE_PIN:
-            case LockPatternUtils.MODE_PASSWORD:
+            case DevicePolicyManager.PASSWORD_QUALITY_NUMERIC:
+            case DevicePolicyManager.PASSWORD_QUALITY_ALPHABETIC:
                 launched = confirmPassword(request);
                 break;
         }
