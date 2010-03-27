@@ -76,10 +76,6 @@ public class SecuritySettings extends PreferenceActivity {
     private static final int UPDATE_PASSWORD_REQUEST = 56;
     private static final int CONFIRM_EXISTING_REQUEST = 57;
 
-    // Encrypted File Systems constants
-    private static final String PROPERTY_EFS_ENABLED = "persist.security.efs.enabled";
-    private static final String PROPERTY_EFS_TRANSITION = "persist.security.efs.trans";
-
     private CheckBoxPreference mVisiblePattern;
     private CheckBoxPreference mTactileFeedback;
 
@@ -97,9 +93,6 @@ public class SecuritySettings extends PreferenceActivity {
 
     // Credential storage
     private CredentialStorage mCredentialStorage = new CredentialStorage();
-
-    // Encrypted file system
-    private  CheckBoxPreference mEncryptedFSEnabled;
 
     private CheckBoxPreference mNetwork;
     private CheckBoxPreference mGps;
@@ -236,11 +229,6 @@ public class SecuritySettings extends PreferenceActivity {
         root.addPreference(credentialsCat);
         mCredentialStorage.createPreferences(credentialsCat, CredentialStorage.TYPE_KEYSTORE);
 
-        // File System Encryption
-        PreferenceCategory encryptedfsCat = new PreferenceCategory(this);
-        encryptedfsCat.setTitle(R.string.encrypted_fs_category);
-        //root.addPreference(encryptedfsCat);
-        mCredentialStorage.createPreferences(encryptedfsCat, CredentialStorage.TYPE_ENCRYPTEDFS);
         return root;
     }
 
@@ -388,21 +376,18 @@ public class SecuritySettings extends PreferenceActivity {
         private static final int MINIMUM_PASSWORD_LENGTH = 8;
 
         private static final int TYPE_KEYSTORE = 0;
-        private static final int TYPE_ENCRYPTEDFS = 1;
 
         // Dialog identifiers
         private static final int DLG_BASE = 0;
         private static final int DLG_UNLOCK = DLG_BASE + 1;
         private static final int DLG_PASSWORD = DLG_UNLOCK + 1;
         private static final int DLG_RESET = DLG_PASSWORD + 1;
-        private static final int DLG_ENABLE_EFS = DLG_RESET + 1;
 
         private KeyStore mKeyStore = KeyStore.getInstance();
         private int mState;
         private boolean mSubmit = false;
         private boolean mExternal = false;
 
-        private boolean mWillEnableEncryptedFS;
         private int mShowingDialog = 0;
 
         // Key Store controls
@@ -410,10 +395,6 @@ public class SecuritySettings extends PreferenceActivity {
         private Preference mInstallButton;
         private Preference mPasswordButton;
         private Preference mResetButton;
-
-
-        // Encrypted file system controls
-        private  CheckBoxPreference mEncryptedFSEnabled;
 
         void resume() {
             mState = mKeyStore.test();
@@ -466,10 +447,6 @@ public class SecuritySettings extends PreferenceActivity {
                     lock();
                 }
                 return true;
-            } else if (preference == mEncryptedFSEnabled) {
-                Boolean bval = (Boolean)value;
-                mWillEnableEncryptedFS = bval.booleanValue();
-                showSwitchEncryptedFSDialog();
             }
             return true;
         }
@@ -488,26 +465,9 @@ public class SecuritySettings extends PreferenceActivity {
         }
 
         public void onClick(DialogInterface dialog, int button) {
-            if (mShowingDialog != DLG_ENABLE_EFS) {
-                mSubmit = (button == DialogInterface.BUTTON_POSITIVE);
-                if (button == DialogInterface.BUTTON_NEUTRAL) {
-                    reset();
-                }
-            } else {
-                if (button == DialogInterface.BUTTON_POSITIVE) {
-                    Intent intent = new Intent("android.intent.action.MASTER_CLEAR");
-                    intent.putExtra("enableEFS", mWillEnableEncryptedFS);
-                    sendBroadcast(intent);
-                    updatePreferences(mState);
-                } else if (button == DialogInterface.BUTTON_NEGATIVE) {
-                    // Cancel action
-                    Toast.makeText(SecuritySettings.this, R.string.encrypted_fs_cancel_confirm,
-                            Toast.LENGTH_SHORT).show();
-                    updatePreferences(mState);
-                } else {
-                    // Unknown - should not happen
-                    return;
-                }
+            mSubmit = (button == DialogInterface.BUTTON_POSITIVE);
+            if (button == DialogInterface.BUTTON_NEUTRAL) {
+                reset();
             }
         }
 
@@ -621,25 +581,16 @@ public class SecuritySettings extends PreferenceActivity {
                 category.addPreference(mResetButton);
                 break;
 
-            case TYPE_ENCRYPTEDFS:
-                mEncryptedFSEnabled = new CheckBoxPreference(SecuritySettings.this);
-                mEncryptedFSEnabled.setTitle(R.string.encrypted_fs_enable);
-                mEncryptedFSEnabled.setSummary(R.string.encrypted_fs_enable_summary);
-                mEncryptedFSEnabled.setOnPreferenceChangeListener(this);
-                // category.addPreference(mEncryptedFSEnabled);
-                break;
             }
         }
 
         private void updatePreferences(int state) {
             mAccessCheckBox.setChecked(state == KeyStore.NO_ERROR);
-            boolean encFSEnabled = SystemProperties.getBoolean(PROPERTY_EFS_ENABLED,
-                    false);
-            mResetButton.setEnabled((!encFSEnabled) && (state != KeyStore.UNINITIALIZED));
-            mAccessCheckBox.setEnabled((state != KeyStore.UNINITIALIZED) && (!encFSEnabled));
+
+            mResetButton.setEnabled(state != KeyStore.UNINITIALIZED);
+            mAccessCheckBox.setEnabled(state != KeyStore.UNINITIALIZED);
 
             // Encrypted File system preferences
-            mEncryptedFSEnabled.setChecked(encFSEnabled);
 
             // Show a toast message if the state is changed.
             if (mState == state) {
@@ -708,25 +659,6 @@ public class SecuritySettings extends PreferenceActivity {
                     .setNeutralButton(getString(android.R.string.ok), this)
                     .setNegativeButton(getString(android.R.string.cancel), this)
                     .create().show();
-        }
-
-        private void showSwitchEncryptedFSDialog() {
-            AlertDialog.Builder builder = new AlertDialog.Builder(SecuritySettings.this)
-                    .setCancelable(false)
-                    .setTitle(R.string.encrypted_fs_alert_dialog_title);
-
-            mShowingDialog = DLG_ENABLE_EFS;
-            if (mWillEnableEncryptedFS) {
-                 builder.setMessage(R.string.encrypted_fs_enable_dialog)
-                         .setPositiveButton(R.string.encrypted_fs_enable_button, this)
-                         .setNegativeButton(R.string.encrypted_fs_cancel_button, this)
-                         .create().show();
-            } else {
-                builder.setMessage(R.string.encrypted_fs_disable_dialog)
-                        .setPositiveButton(R.string.encrypted_fs_disable_button, this)
-                        .setNegativeButton(R.string.encrypted_fs_cancel_button, this)
-                        .create().show();
-            }
         }
     }
 }
