@@ -64,15 +64,19 @@ public class MediaFormat extends Activity {
                 if (Utils.isMonkeyRunning()) {
                     return;
                 }
-                IMountService service =
+                final IMountService service =
                         IMountService.Stub.asInterface(ServiceManager.getService("mount"));
                 if (service != null) {
-                    try {
-                        service.formatVolume(Environment.getExternalStorageDirectory().toString());
-                    } catch (android.os.RemoteException e) {
-                        // Intentionally blank - there's nothing we can do here
-                        Log.w("MediaFormat", "Unable to invoke IMountService.formatMedia()");
-                    }
+                    new Thread() {
+                        public void run() {
+                            try {
+                                service.formatVolume(Environment.getExternalStorageDirectory().toString());
+                            } catch (Exception e) {
+                                // Intentionally blank - there's nothing we can do here
+                                Log.w("MediaFormat", "Unable to invoke IMountService.formatMedia()");
+                            }
+                        }
+                    }.start();
                 } else {
                     Log.w("MediaFormat", "Unable to locate IMountService");
                 }
