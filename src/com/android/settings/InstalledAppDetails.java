@@ -202,8 +202,10 @@ public class InstalledAppDetails extends Activity implements View.OnClickListene
                 return getString(R.string.invalid_location);
             case PackageManager.MOVE_FAILED_SYSTEM_PACKAGE:
                 return getString(R.string.system_package);
+            case PackageManager.MOVE_FAILED_INTERNAL_ERROR:
+                return "";
         }
-        return null;
+        return "";
     }
 
     private void initMoveButton() {
