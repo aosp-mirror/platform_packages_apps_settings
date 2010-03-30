@@ -239,9 +239,9 @@
     <string name="unlock_set_unlock_pattern_title" msgid="1896502750816432974">"Créer un schéma de déverrouillage"</string>
     <string name="unlock_set_unlock_pattern_summary" msgid="1235339327020445576">"Vous devez dessiner le schéma pour déverrouiller l\'écran."</string>
     <string name="unlock_set_unlock_pin_title" msgid="2206721045699671063">"Définir le code PIN de déverrouillage"</string>
-    <string name="unlock_set_unlock_pin_summary" msgid="3898840802187521463">"Vous devez utiliser un code PIN numérique pour déverrouiller l\'écran."</string>
+    <string name="unlock_set_unlock_pin_summary" msgid="3898840802187521463">"Utiliser un code PIN numérique pour déverrouiller l\'écran"</string>
     <string name="unlock_set_unlock_password_title" msgid="2410408982973923603">"Définir le mot de passe de déverrouillage"</string>
-    <string name="unlock_set_unlock_password_summary" msgid="4711043487823726994">"Vous devez utiliser un mot de passe pour déverrouiller l\'écran."</string>
+    <string name="unlock_set_unlock_password_summary" msgid="4711043487823726994">"Utiliser un mot de passe pour déverrouiller l\'écran"</string>
     <string name="unlock_disable_lock_title" msgid="1427036227416979120">"Désactiver le verrouillage de l\'écran"</string>
     <string name="unlock_disable_lock_pattern_summary" msgid="6801602880568869201">"Supprimer le schéma de déverrouillage"</string>
     <string name="unlock_disable_lock_pin_summary" msgid="8856842745366993387">"Supprimer le code PIN de déverrouillage"</string>
@@ -257,7 +257,12 @@
     <string name="lockpassword_pin_too_long" msgid="6290317580664119373">"Le code PIN ne doit pas contenir plus de %d chiffres."</string>
     <string name="lockpassword_pin_contains_non_digits" msgid="3379277100136600632">"Le code PIN ne doit contenir que des chiffres compris entre 0 et 9."</string>
     <string name="lockpassword_illegal_character" msgid="6204396794254688549">"Le mot de passe contient un caractère non autorisé."</string>
-    <string name="lockpassword_password_requires_alpha" msgid="2837140849790751729">"Le mot de passe alphanumérique doit comporter au moins une lettre."</string>
+    <!-- no translation found for lockpassword_password_requires_alpha (5668524505560400449) -->
+    <skip />
+    <!-- no translation found for lockpassword_password_requires_digit (4840579514154254907) -->
+    <skip />
+    <!-- no translation found for lockpassword_password_requires_symbol (4140602725865312078) -->
+    <skip />
     <string name="lockpassword_ok_label" msgid="313822574062553672">"OK"</string>
     <string name="lockpassword_cancel_label" msgid="8818529276331121899">"Annuler"</string>
     <string name="device_admin_title" msgid="3562216873644263804">"Administration du périphérique"</string>
@@ -424,8 +429,8 @@
     <string name="lock_sounds_enable_summary_on" msgid="145741024028391473">"Émettre un son lorsque l\'écran est verrouillé ou déverrouillé"</string>
     <string name="lock_sounds_enable_summary_off" msgid="8481243116223542804">"Émettre un son lorsque l\'écran est verrouillé ou déverrouillé"</string>
     <string name="haptic_feedback_enable_title" msgid="6311736559245411290">"Retour haptique"</string>
-    <string name="haptic_feedback_enable_summary_on" msgid="1875779656524793053">"Vibrer lors de la sélection des touches programmables et lors de certaines interactions avec l\'interface utilisateur"</string>
-    <string name="haptic_feedback_enable_summary_off" msgid="7287885436963105314">"Vibrer à la sélection touches progr./certaines interactions avec interface"</string>
+    <string name="haptic_feedback_enable_summary_on" msgid="1875779656524793053">"Vibrer à l\'utilisation de touches programmables et d\'autres options"</string>
+    <string name="haptic_feedback_enable_summary_off" msgid="7287885436963105314">"Vibrer à l\'utilisation de touches programmables et d\'autres options"</string>
     <string name="audio_record_proc_title" msgid="4271091199976457534">"Suppression du bruit"</string>
     <string name="audio_record_proc_summary" msgid="8113628457499616498">"Supprimer les bruits de fond lors d\'une discussion ou d\'un enregistrement."</string>
     <string name="dock_settings" msgid="1820107306693002541">"Base"</string>
@@ -605,7 +610,7 @@
     <string name="location_networks_disabled" msgid="2708968452901433980">"Afficher position dans les applications (comme Google Maps)"</string>
     <string name="location_neighborhood_level" msgid="4656658097932515921">"Position géographique déterminée par réseaux Wi-Fi et/ou mobile"</string>
     <string name="location_gps" msgid="6296125378829097831">"Utiliser les satellites GPS"</string>
-    <string name="location_street_level" msgid="6460740847018275745">"Localisation précise au niveau de la rue lors du localisation géographique (désélectionner pour économiser la batterie)"</string>
+    <string name="location_street_level" msgid="6460740847018275745">"Localisation à la rue près (décocher pour économiser la batterie)"</string>
     <string name="location_gps_disabled" msgid="6632537158777308128">"Localiser au niveau rue (requiert + de batterie et une vue dégagée)"</string>
     <string name="assisted_gps" msgid="4649317129586736885">"Utiliser le GPS assisté"</string>
     <string name="assisted_gps_enabled" msgid="8751899609589792803">"Utiliser le serveur pour assister le GPS (désactiver pour réduire l\'utilisation du réseau)"</string>
@@ -640,8 +645,8 @@
     <string name="lockpattern_change_lock_pin_label" msgid="266707138486731661">"Modifier le code PIN de déverrouillage"</string>
     <string name="lockpattern_need_to_unlock" msgid="757935356911054465">"Confirmer le schéma enregistré"</string>
     <string name="lockpattern_need_to_unlock_wrong" msgid="5629093548611791080">"Désolé. Merci de réessayer :"</string>
-    <string name="lockpattern_recording_intro_header" msgid="308287052221942814">"Dessiner un schéma de déverrouillage :"</string>
-    <string name="lockpattern_recording_intro_footer" msgid="1118579101409152113">"Appuyer sur Menu pour obtenir de l\'aide."</string>
+    <string name="lockpattern_recording_intro_header" msgid="308287052221942814">"Dessinez un schéma de déverrouillage :"</string>
+    <string name="lockpattern_recording_intro_footer" msgid="1118579101409152113">"Appuyez sur Menu pour obtenir de l\'aide."</string>
     <string name="lockpattern_recording_inprogress" msgid="4622772178078818425">"Ôtez le doigt lorsque vous avez terminé."</string>
     <string name="lockpattern_recording_incorrect_too_short" msgid="3103250430366718996">"Reliez au moins <xliff:g id="NUMBER">%d</xliff:g> points. Veuillez réessayer :"</string>
     <string name="lockpattern_pattern_entered_header" msgid="5012716272001299362">"Schéma enregistré !"</string>
@@ -653,7 +658,7 @@
     <string name="lockpattern_continue_button_text" msgid="4723771754714471410">"Continuer"</string>
     <string name="lockpattern_settings_title" msgid="3207750489460466680">"Schéma de déverrouillage"</string>
     <string name="lockpattern_settings_enable_title" msgid="6920616873671115281">"Schéma obligatoire"</string>
-    <string name="lockpattern_settings_enable_summary" msgid="1165707416664252167">"Vous devez dessiner le schéma pour déverrouiller l\'écran."</string>
+    <string name="lockpattern_settings_enable_summary" msgid="1165707416664252167">"Dessiner un schéma pour déverrouiller l\'écran"</string>
     <string name="lockpattern_settings_enable_visible_pattern_title" msgid="104851667540971729">"Schéma visible"</string>
     <string name="lockpattern_settings_enable_tactile_feedback_title" msgid="972174133075372341">"Retour tactile"</string>
     <string name="lockpattern_settings_choose_lock_pattern" msgid="1652352830005653447">"Créer un schéma"</string>
@@ -691,7 +696,7 @@
     <string name="clear_user_data_text" msgid="5597622864770098388">"Effacer les données"</string>
     <string name="app_factory_reset" msgid="6635744722502563022">"Désinstaller les mises à jour"</string>
     <string name="auto_launch_enable_text" msgid="2630656657744196691">"Vous avez choisi de lancer cette application par défaut pour certaines actions."</string>
-    <string name="auto_launch_disable_text" msgid="7800385822185540166">"Aucun paramètre par défaut défini."</string>
+    <string name="auto_launch_disable_text" msgid="7800385822185540166">"Aucun paramètre par défaut défini"</string>
     <string name="clear_activities" msgid="7408923511535174430">"Effacer les actions par défaut"</string>
     <string name="unknown" msgid="1592123443519355854">"Inconnu"</string>
     <string name="sort_order_alpha" msgid="8622029358896599842">"Trier"</string>
@@ -699,7 +704,7 @@
     <string name="manage_space_text" msgid="8852711522447794676">"Gérer l\'espace"</string>
     <string name="filter" msgid="2018011724373033887">"Filtrer"</string>
     <string name="filter_dlg_title" msgid="6507663329723966854">"Options du filtre"</string>
-    <string name="filter_apps_all" msgid="5142129378749391876">"Tous"</string>
+    <string name="filter_apps_all" msgid="5142129378749391876">"Toutes"</string>
     <string name="filter_apps_third_party" msgid="7786348047690140979">"Téléchargées"</string>
     <string name="filter_apps_running" msgid="7767071454371350486">"En cours d\'exécution"</string>
     <string name="filter_apps_onsdcard" msgid="1477351142334784771">"Sur la carte SD"</string>
@@ -747,7 +752,7 @@
     <string name="app_install_location_title" msgid="2068975150026852168">"Emplacement d\'installation souhaité"</string>
     <string name="app_install_location_summary" msgid="879753854530300436">"Modifiez l\'emplacement d\'installation par défaut pour les nouvelles applications."</string>
     <string name="runningservices_settings_title" msgid="8097287939865165213">"Services en cours d\'exécution"</string>
-    <string name="runningservices_settings_summary" msgid="854608995821032748">"Afficher les services en cours d\'exécution"</string>
+    <string name="runningservices_settings_summary" msgid="854608995821032748">"Afficher et contrôler les services en cours d\'exécution"</string>
     <string name="service_restarting" msgid="2242747937372354306">"Redémarrage en cours"</string>
     <string name="no_running_services" msgid="6981216347270280598">"Aucun service en cours d\'exécution"</string>
     <string name="confirm_stop_service" msgid="5700448757318301681">"Arrêter le service ?"</string>
@@ -947,7 +952,7 @@
     <string name="tts_default_pitch_title" msgid="6135942113172488671">"Ton"</string>
     <string name="tts_default_pitch_summary" msgid="1328298665182885277">"Affecte le ton utilisé par la synthèse vocale"</string>
     <string name="tts_default_lang_title" msgid="8018087612299820556">"Langue"</string>
-    <string name="tts_default_lang_summary" msgid="5219362163902707785">"Définit la langue utilisée par la synthèse vocale"</string>
+    <string name="tts_default_lang_summary" msgid="5219362163902707785">"Définir la langue utilisée par la synthèse vocal"</string>
     <string name="tts_play_example_title" msgid="7094780383253097230">"Écouter un échantillon"</string>
     <string name="tts_play_example_summary" msgid="8029071615047894486">"Lire une courte démonstration de la synthèse vocale"</string>
     <string name="tts_install_data_title" msgid="4264378440508149986">"Installer les données vocales"</string>
@@ -990,7 +995,7 @@
     <string name="vpn_menu_disconnect" msgid="8254492450022562235">"Se déconnecter du réseau"</string>
     <string name="vpn_menu_edit" msgid="4526245173583195618">"Modifier le réseau"</string>
     <string name="vpn_menu_delete" msgid="3326527392609513129">"Supprimer un réseau"</string>
-    <string name="vpn_error_miss_entering" msgid="5377667978602483250">"Vous devez entrer \"<xliff:g id="CODE">%s</xliff:g>\"."</string>
+    <string name="vpn_error_miss_entering" msgid="5377667978602483250">"Vous devez indiquer <xliff:g id="CODE">%s</xliff:g>."</string>
     <string name="vpn_error_miss_selecting" msgid="4890780825580511345">"Vous devez sélectionner \"<xliff:g id="OPTION">%s</xliff:g>\"."</string>
     <string name="vpn_error_duplicate_name" msgid="2693927537390963745">"Le nom de VPN \"<xliff:g id="NAME">%s</xliff:g>\" existe déjà. Veuillez choisir un autre nom."</string>
     <string name="vpn_confirm_profile_deletion" msgid="8679536635364177239">"Voulez-vous vraiment supprimer ce VPN ?"</string>
@@ -1007,7 +1012,7 @@
     <string name="vpn_ppp_negotiation_failed_dialog_msg" msgid="4611293656718340994">"Échec de la négociation avec le serveur. Le serveur n\'est peut-être pas conforme au paramètre de cryptage. Voulez-vous vérifier le paramètre de cryptage ?"</string>
     <string name="vpn_type_title" msgid="6392933604218676224">"Ajouter un VPN"</string>
     <string name="vpn_add_new_vpn" msgid="5438260689052714550">"Ajouter un VPN"</string>
-    <string name="vpn_edit_title_add" msgid="2121313217989682890">"Ajouter le VPN \"<xliff:g id="NAME">%s</xliff:g>\""</string>
+    <string name="vpn_edit_title_add" msgid="2121313217989682890">"Ajouter un VPN <xliff:g id="NAME">%s</xliff:g>"</string>
     <string name="vpn_edit_title_edit" msgid="2457278794066617935">"Détails du profil \"<xliff:g id="NAME">%s</xliff:g>\""</string>
     <string name="vpns" msgid="3148141862835492816">"VPN"</string>
     <string name="vpn_connecting" msgid="8039521381692090116">"Connexion en cours…"</string>
@@ -1041,9 +1046,9 @@
     <string name="vpn_field_is_set" msgid="7137320847812992243">"Valeur \"<xliff:g id="VALUE">%s</xliff:g>\" définie"</string>
     <string name="vpn_field_not_set" msgid="2972519243515893804">"Valeur \"<xliff:g id="VALUE">%s</xliff:g>\" non définie"</string>
     <string name="vpn_field_not_set_optional" msgid="8840557698252556791">"Valeur \"<xliff:g id="VALUE">%s</xliff:g>\" non définie (facultatif)"</string>
-    <string name="vpn_enable_field" msgid="3700967675854517191">"Activer \"<xliff:g id="OPTION">%s</xliff:g>\""</string>
+    <string name="vpn_enable_field" msgid="3700967675854517191">"Activer <xliff:g id="OPTION">%s</xliff:g>"</string>
     <string name="vpn_disable_field" msgid="6905658811179634005">"Désactiver \"<xliff:g id="OPTION">%s</xliff:g>\""</string>
-    <string name="vpn_is_enabled" msgid="1266304230417098877">"L\'option \"<xliff:g id="OPTION">%s</xliff:g>\" est activée."</string>
+    <string name="vpn_is_enabled" msgid="1266304230417098877">"Option <xliff:g id="OPTION">%s</xliff:g> activée"</string>
     <string name="vpn_is_disabled" msgid="2013622485867806167">"L\'option \"<xliff:g id="OPTION">%s</xliff:g>\" est désactivée."</string>
     <string name="vpn_settings_title" msgid="7327468307909556719">"Paramètres de VPN"</string>
     <string name="vpn_settings_summary" msgid="8849924181594963972">"Configurer et gérer les réseaux privés virtuels (VPN)"</string>
