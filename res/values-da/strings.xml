@@ -36,7 +36,7 @@
     <string name="radioInfo_phone_offhook" msgid="4174402846862780998">"Opkald i gang"</string>
     <string name="radioInfo_data_disconnected" msgid="1959735267890719418">"Afbrudt"</string>
     <string name="radioInfo_data_connecting" msgid="8404571440697917823">"Forbinder"</string>
-    <string name="radioInfo_data_connected" msgid="7074301157399238697">"Forbundet"</string>
+    <string name="radioInfo_data_connected" msgid="7074301157399238697">"Tilsluttet"</string>
     <string name="radioInfo_data_suspended" msgid="5315325487890334196">"Midlertidigt standset"</string>
     <string name="radioInfo_unknown" msgid="737385314432468266">"ukendt"</string>
     <string name="radioInfo_display_packets" msgid="8654359809877290639">"pk."</string>
@@ -91,11 +91,11 @@
     <string name="bluetooth_lock_voice_dialing" msgid="3139322992062086225">"Lås stemmeopkald"</string>
     <string name="bluetooth_lock_voice_dialing_summary" msgid="4741338867496787042">"Bloker brug af Bluetooth-opkald, når skærmen er låst"</string>
     <string name="bluetooth_devices" msgid="1886018064039454227">"Bluetooth-enheder"</string>
-    <string name="bluetooth_device_name" msgid="8415828355207423800">"Enhedsnavn"</string>
+    <string name="bluetooth_device_name" msgid="8415828355207423800">"Enhedens navn"</string>
     <string name="bluetooth_name_not_set" msgid="2653752006416027426">"Der er ikke angivet noget navn. Kontonavn anvendes"</string>
-    <string name="bluetooth_scan_for_devices" msgid="9214184305566815727">"Scan efter enheder"</string>
+    <string name="bluetooth_scan_for_devices" msgid="9214184305566815727">"Søg efter enheder"</string>
     <string name="bluetooth_disconnect_blank" msgid="8102076504922229274">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> afbrydes."</string>
-    <string name="bluetooth_connected" msgid="6038755206916626419">"Forbundet"</string>
+    <string name="bluetooth_connected" msgid="6038755206916626419">"Tilsluttet"</string>
     <string name="bluetooth_disconnected" msgid="6557104142667339895">"Afbrudt"</string>
     <string name="bluetooth_disconnecting" msgid="8913264760027764974">"Afbryder ..."</string>
     <string name="bluetooth_connecting" msgid="8555009514614320497">"Opretter forbindelse ..."</string>
@@ -175,7 +175,7 @@
     <string name="oem_radio_info_label" msgid="6163141792477958941">"OEM-specifikke oplysninger/indstillinger"</string>
     <string name="band_mode_title" msgid="954174198903776205">"Angiv GSM/UMTS-bånd"</string>
     <string name="band_mode_loading" msgid="548764766363847336">"Indlæser båndliste ..."</string>
-    <string name="band_mode_set" msgid="5730560180249458484">"Indstil"</string>
+    <string name="band_mode_set" msgid="5730560180249458484">"Angiv"</string>
     <string name="band_mode_failed" msgid="1495968863884716379">"Mislykkedes"</string>
     <string name="band_mode_succeeded" msgid="2701016190055887575">"Lykkedes"</string>
     <string name="sdcard_changes_instructions" msgid="1364712901180556244">"Ændringerne træder i kraft, når USB-kablet tilsluttes igen"</string>
@@ -236,11 +236,11 @@
     <string name="security_settings_summary" msgid="967393342537986570">"Angiv Min placering, oplåsning af skærmen, låsning af SIM-kort og oplysningslagring"</string>
     <string name="cdma_security_settings_summary" msgid="6068799952798901542">"Angiv Min placering, oplåsning af skærmen, oplysningslagring"</string>
     <string name="security_passwords_title" msgid="2930627259125138363">"Adgangskoder"</string>
-    <string name="unlock_set_unlock_pattern_title" msgid="1896502750816432974">"Indstil mønster til at låse op"</string>
+    <string name="unlock_set_unlock_pattern_title" msgid="1896502750816432974">"Angiv oplåsningsmønster"</string>
     <string name="unlock_set_unlock_pattern_summary" msgid="1235339327020445576">"Du skal tegne et mønster for at låse skærmen op"</string>
-    <string name="unlock_set_unlock_pin_title" msgid="2206721045699671063">"Indstil pinkode til at låse op"</string>
-    <string name="unlock_set_unlock_pin_summary" msgid="3898840802187521463">"Du skal bruge en numerisk Pinkode for at låse skærmen op"</string>
-    <string name="unlock_set_unlock_password_title" msgid="2410408982973923603">"Indstil adgangskode til at låse op"</string>
+    <string name="unlock_set_unlock_pin_title" msgid="2206721045699671063">"Angiv PIN-kode til oplåsning"</string>
+    <string name="unlock_set_unlock_pin_summary" msgid="3898840802187521463">"Du skal bruge en numerisk PIN-kode til oplåsning af skærmen"</string>
+    <string name="unlock_set_unlock_password_title" msgid="2410408982973923603">"Angiv adg.kode til oplåsning"</string>
     <string name="unlock_set_unlock_password_summary" msgid="4711043487823726994">"Du skal bruge en adgangskode for at låse skærmen op"</string>
     <string name="unlock_disable_lock_title" msgid="1427036227416979120">"Slå skærmlås fra"</string>
     <string name="unlock_disable_lock_pattern_summary" msgid="6801602880568869201">"Fjern mønster til at låse op"</string>
@@ -257,7 +257,12 @@
     <string name="lockpassword_pin_too_long" msgid="6290317580664119373">"PIN-koden kan ikke være længere end %d cifre"</string>
     <string name="lockpassword_pin_contains_non_digits" msgid="3379277100136600632">"Pinkoden må kun indeholde cifrene 0-9"</string>
     <string name="lockpassword_illegal_character" msgid="6204396794254688549">"Adgangskoden indeholder et ulovligt tegn"</string>
-    <string name="lockpassword_password_requires_alpha" msgid="2837140849790751729">"Bogstavadgangskode skal indeholde mindst ét bogstav."</string>
+    <!-- no translation found for lockpassword_password_requires_alpha (5668524505560400449) -->
+    <skip />
+    <!-- no translation found for lockpassword_password_requires_digit (4840579514154254907) -->
+    <skip />
+    <!-- no translation found for lockpassword_password_requires_symbol (4140602725865312078) -->
+    <skip />
     <string name="lockpassword_ok_label" msgid="313822574062553672">"OK"</string>
     <string name="lockpassword_cancel_label" msgid="8818529276331121899">"Annuller"</string>
     <string name="device_admin_title" msgid="3562216873644263804">"Enhedsadministration"</string>
@@ -267,7 +272,7 @@
     <string name="bluetooth_quick_toggle_summary" msgid="5293641680139873341">"Slå Bluetooth til"</string>
     <string name="bluetooth_settings" msgid="2725796451253089609">"Indstillinger for Bluetooth"</string>
     <string name="bluetooth_settings_title" msgid="2824020086246268296">"Indstillinger for Bluetooth"</string>
-    <string name="bluetooth_settings_summary" msgid="2091062709530570462">"Administrer forbindelser, angiv enhedsnavn og søgbarhed"</string>
+    <string name="bluetooth_settings_summary" msgid="2091062709530570462">"Administrer forbindelser, angiv enhedens navn og søgbarhed"</string>
     <string name="bluetooth_pairing_request" msgid="6385750334766370310">"Anmodning om Bluetooth-parring"</string>
     <string name="bluetooth_device_info" msgid="6644515376523965073">"Oplysninger om Bluetooth-enhed"</string>
     <string name="bluetooth_enter_pin_msg" msgid="856962526754150334">\n"Indtast PIN-kode for at parre med \"<xliff:g id="DEVICE_NAME">%1$s</xliff:g>\". (Prøv 0000 eller 1234)."</string>
@@ -284,10 +289,10 @@
     <string name="bluetooth_pairing_device_down_error_message" msgid="6688215193824686741">"Der kan ikke etableres kommunikation med <xliff:g id="DEVICE_NAME">%1$s</xliff:g>."</string>
     <string name="bluetooth_pairing_rejected_error_message" msgid="1648157108520832454">"Parringen blev afvist af <xliff:g id="DEVICE_NAME">%1$s</xliff:g>."</string>
     <string name="bluetooth_connecting_error_message" msgid="1779660510084746802">"Der var problemer med at oprette forbindelse til <xliff:g id="DEVICE_NAME">%1$s</xliff:g>."</string>
-    <string name="bluetooth_preference_scan_title" msgid="2277464653118896016">"Scan efter enheder"</string>
+    <string name="bluetooth_preference_scan_title" msgid="2277464653118896016">"Søg efter enheder"</string>
     <string name="bluetooth_device_context_connect" msgid="3997659895003244941">"Forbind"</string>
     <string name="bluetooth_device_context_disconnect" msgid="8220072022970148683">"Afbryd"</string>
-    <string name="bluetooth_device_context_pair_connect" msgid="7611522504813927727">"Par, og forbind"</string>
+    <string name="bluetooth_device_context_pair_connect" msgid="7611522504813927727">"Par og forbind med denne enhed"</string>
     <string name="bluetooth_device_context_unpair" msgid="662992425948536144">"Ophæv parring"</string>
     <string name="bluetooth_device_context_disconnect_unpair" msgid="7644014238070043798">"Afbryd, og ophæv parring"</string>
     <string name="bluetooth_device_context_connect_advanced" msgid="2643129703569788771">"Indstillinger"</string>
@@ -319,8 +324,8 @@
     <string name="wifi_settings" msgid="4746946030627213196">"Wi-Fi-indstillinger"</string>
     <string name="wifi_settings_category" msgid="2810363951104753710">"Indstillinger for Wi-Fi"</string>
     <string name="wifi_settings_summary" msgid="668767638556052820">"Konfiguration og administration af trådløse adgangspunkter"</string>
-    <string name="wifi_starting" msgid="6710266609710860129">"Tænder ..."</string>
-    <string name="wifi_stopping" msgid="5952909472548218348">"Slukker ..."</string>
+    <string name="wifi_starting" msgid="6710266609710860129">"Aktiverer..."</string>
+    <string name="wifi_stopping" msgid="5952909472548218348">"Deaktiverer..."</string>
     <string name="wifi_error" msgid="3207971103917128179">"Fejl"</string>
     <string name="wifi_in_airplane_mode" msgid="7618393787965366655">"I flytilstand"</string>
     <string name="wifi_fail_to_scan" msgid="6194542252808587669">"Der kunne ikke søges efter netværk"</string>
@@ -414,7 +419,7 @@
     <string name="media_volume_summary" msgid="5363248930648849974">"Angiv lydstyrke for musik og videoer"</string>
     <string name="alarm_volume_title" msgid="2285597478377758706">"Alarm"</string>
     <string name="dock_settings_summary" msgid="455802113668982481">"Lydindstillinger til den fastgjorte dock"</string>
-    <string name="dtmf_tone_enable_title" msgid="1453831168789523185">"Hørbare touch-toner"</string>
+    <string name="dtmf_tone_enable_title" msgid="1453831168789523185">"Lyd ved skærmtryk"</string>
     <string name="dtmf_tone_enable_summary_on" msgid="3028201873989887327">"Afspil toner, når nummerblokken bruges"</string>
     <string name="dtmf_tone_enable_summary_off" msgid="7791065951268525678">"Afspil toner, når nummerblokken bruges"</string>
     <string name="sound_effects_enable_title" msgid="3197313718929122833">"Lyd ved valg"</string>
@@ -497,9 +502,9 @@
     <string name="status_min_number" msgid="3519504522179420597">"MIN"</string>
     <string name="status_prl_version" msgid="8499039751817386529">"PRL-version"</string>
     <string name="status_meid_number" msgid="1751442889111731088">"MEID"</string>
-    <string name="status_network_type" msgid="3279383550222116235">"Mobil netværkstype"</string>
-    <string name="status_data_state" msgid="5503181397066522950">"Mobil netværkstilstand"</string>
-    <string name="status_service_state" msgid="2323931627519429503">"Servicetilstand"</string>
+    <string name="status_network_type" msgid="3279383550222116235">"Mobilt netværk"</string>
+    <string name="status_data_state" msgid="5503181397066522950">"Tilstand for mobilnetværk"</string>
+    <string name="status_service_state" msgid="2323931627519429503">"Tjenestetilstand"</string>
     <string name="status_signal_strength" msgid="3732655254188304547">"Signalstyrke"</string>
     <string name="status_roaming" msgid="2638800467430913403">"Roaming"</string>
     <string name="status_operator" msgid="2274875196954742087">"Netværk"</string>
@@ -570,16 +575,16 @@
     <string name="restore_default_apn_completed" msgid="3990449939234957281">"Nulstillingen af APN-standardindstillinger er afsluttet"</string>
     <string name="master_clear_title" msgid="5907939616087039756">"Nulstilling til fabriksdata"</string>
     <string name="master_clear_summary" msgid="4986154238001088492">"Sletter alle data på telefonen"</string>
-    <string name="master_clear_desc" msgid="7823268823499739178">"Dette sletter alle data fra din telefon, inklusive :"\n<li>"Din Google-konto"</li>\n<li>"System- og programdata samt indstillinger"</li>\n<li>"Downloadede programmer"</li>\n"Det sletter ikke:"\n<li>"Nuværende systemsoftware og programbundter"</li>\n<li>"Filer på SD-kortet, som f.eks. musik og fotos"</li></string>
+    <string name="master_clear_desc" msgid="7823268823499739178">"Dette sletter alle data fra din telefon, inklusive:"\n<li>"Din Google-konto"</li>\n<li>"System- og programdata samt indstillinger"</li>\n<li>"Downloadede programmer"</li>\n"Det sletter ikke:"\n<li>"Nuværende systemsoftware og programbundter"</li>\n<li>"Filer på SD-kortet, som f.eks. musik og fotos"</li></string>
     <string name="master_clear_button_text" msgid="7550632653343157971">"Nulstil telefon"</string>
-    <string name="master_clear_final_desc" msgid="6917971132484622696">"Slet alle dine personlige oplysninger og downloadede programmer? Denne handling kan ikke annulleres?"</string>
+    <string name="master_clear_final_desc" msgid="6917971132484622696">"Slet alle dine personlige oplysninger og downloadede programmer? Denne handlíng kan ikke fortrydes."</string>
     <string name="master_clear_final_button_text" msgid="5390908019019242910">"Slet alt"</string>
     <string name="master_clear_gesture_prompt" msgid="1428645764883536750">"Tegn dit oplåsningsmønster"</string>
     <string name="master_clear_gesture_explanation" msgid="8901714274312707918">"Du skal tegne dit oplåsningsmønster for at bekræfte, at telefonen nulstilles."</string>
     <string name="master_clear_failed" msgid="8655202125010189406">"Der blev ikke foretaget nogen nulstilling, fordi tjenesten Systemoprydning ikke er tilgængelig."</string>
     <string name="media_format_title" msgid="4671276096695789895">"Formater SD-kort."</string>
     <string name="media_format_summary" msgid="3805714639375830120">"Sletter alle data på SD-kortet"</string>
-    <string name="media_format_desc" msgid="1142563222357820834">"Dette sletter det SD-kort, der sidder i telefonen. Du mister ALLE data på kortet!"</string>
+    <string name="media_format_desc" msgid="1142563222357820834">"Denne handling rydder det SD-kort, der sidder i telefonen. Du mister ALLE data på kortet!"</string>
     <string name="media_format_button_text" msgid="370856400090190151">"Formater SD-kort"</string>
     <string name="media_format_final_desc" msgid="1776666694910717198">"Vil du formatere dit SD-kort og slette alle dine medier? Handlingen kan ikke annulleres."</string>
     <string name="media_format_final_button_text" msgid="4881713344315923175">"Slet alt"</string>
@@ -663,15 +668,15 @@
     <string name="lockpattern_too_many_failed_confirmation_attempts_footer" msgid="6759029360597122873">"Prøv igen om <xliff:g id="NUMBER">%d</xliff:g> sekunder."</string>
     <string name="skip_button_label" msgid="8680422740354436943">"Annuller"</string>
     <string name="next_button_label" msgid="8890792540116568321">"Næste"</string>
-    <string name="lock_title" msgid="4059246467204273930">"Sikring af din telefon"</string>
-    <string name="lock_intro_message" msgid="9100785646737118042"><font size="17">"Beskyt din telefon mod uautoriseret brug ved at oprette et personligt mønster til at låse skærmen op. "\n<font height="17">\n</font><b>"1"</b>"  På næste skærm kan du se et eksempel på, hvordan mønsteret tegnes. "\n<font height="17">\n</font><b>"2"</b>"  Når du er klar, kan du tegne dit eget personlige mønster til at låse op. Eksperimenter med forskellige mønstre, men forbind mindst fire punkter. "\n<font height="17">\n</font><b>"3"</b>"  Tegn dit mønster igen for at bekræfte. "\n<font height="17">\n</font><b>"Er du klar? Tryk på \"Næste\""</b>". "\n<font height="3">\n</font>"Du kan lade din telefon være ubeskyttet ved at trykke på \"Annuller\"."</font></string>
+    <string name="lock_title" msgid="4059246467204273930">"Beskyt din telefon"</string>
+    <string name="lock_intro_message" msgid="9100785646737118042"><font size="17">"Beskyt din telefon mod uautoriseret brug ved at oprette et personligt mønster til at låse skærmen op. "\n<font height="17">\n</font><b>"1"</b>"  På næste skærm kan du se et eksempel på, hvordan mønsteret tegnes. "\n<font height="17">\n</font><b>"2"</b>"  Når du er klar, kan du tegne dit eget personlige oplåsningsmønster. Eksperimenter med forskellige mønstre, men forbind mindst fire punkter. "\n<font height="17">\n</font><b>"3"</b>"  Tegn dit mønster igen for at bekræfte. "\n<font height="17">\n</font><b>"Er du klar? Tryk på \"Næste\""</b>". "\n<font height="3">\n</font>"Du kan lade din telefon være ubeskyttet ved at trykke på \"Annuller\"."</font></string>
     <string name="lock_example_title" msgid="8052305554017485410">"Eksempel på et mønster"</string>
     <string name="lock_example_message" msgid="1838650097090632706">"Forbind mindst fire punkter."\n" "\n"Tryk på \"Næste\", når du er klar til at tegne dit eget mønster."</string>
     <string name="manageapplications_settings_title" msgid="5712405848153426706">"Administ. programmer"</string>
     <string name="manageapplications_settings_summary" msgid="6097117021500651232">"Administrer og fjern installerede programmer"</string>
     <string name="applications_settings" msgid="3736173521008476946">"Programmer"</string>
     <string name="applications_settings_summary" msgid="2714215108369119717">"Administ. programmer, konf. genveje til hurtig start"</string>
-    <string name="applications_settings_header" msgid="6018266337275422250">"Indstillinger for program"</string>
+    <string name="applications_settings_header" msgid="6018266337275422250">"Indstillinger for programmer"</string>
     <string name="install_applications" msgid="4872012136210802181">"Ukendte kilder"</string>
     <string name="install_unknown_applications" msgid="6612824788917283662">"Tillad installation af programmer, der ikke stammer fra Marked"</string>
     <string name="install_all_warning" msgid="1923717607319933741">"Din telefon og dine personlige oplysninger er mere sårbare over for angreb af programmer fra ukendte kilder. Du accepterer, at du alene er ansvarlig for skader på din telefon eller tab af data, der kan skyldes brug af disse programmer."</string>
@@ -691,7 +696,7 @@
     <string name="clear_user_data_text" msgid="5597622864770098388">"Ryd data"</string>
     <string name="app_factory_reset" msgid="6635744722502563022">"Afinstaller opdateringer"</string>
     <string name="auto_launch_enable_text" msgid="2630656657744196691">"Du har valgt at starte dette program som standard for nogle handlinger."</string>
-    <string name="auto_launch_disable_text" msgid="7800385822185540166">"Der er ikke indstillet nogen standarder."</string>
+    <string name="auto_launch_disable_text" msgid="7800385822185540166">"Der er ikke angivet nogen standarder."</string>
     <string name="clear_activities" msgid="7408923511535174430">"Ryd standarder"</string>
     <string name="unknown" msgid="1592123443519355854">"Ukendt"</string>
     <string name="sort_order_alpha" msgid="8622029358896599842">"Sorter"</string>
@@ -716,7 +721,7 @@
     <string name="app_factory_reset_dlg_text" msgid="438395129140568893">"Ønsker du at afinstallere alle opdateringer til dette Android-systemprogram?"</string>
     <string name="clear_failed_dlg_title" msgid="2387060805294783175">"Ryd data"</string>
     <string name="clear_failed_dlg_text" msgid="7943411157007320290">"Rydning af data til programmet mislykkedes"</string>
-    <string name="security_settings_desc" msgid="3116027624526915561">"Dette program kan få adgang til følgende på din telefon:"</string>
+    <string name="security_settings_desc" msgid="3116027624526915561">"Dette program har adgang til følgende på din telefon:"</string>
     <string name="computing_size" msgid="1599186977475211186">"Beregner ..."</string>
     <string name="invalid_size_value" msgid="1901940003700269523">"Pakkestørrelsen kunne ikke beregnes"</string>
     <string name="empty_list_msg" msgid="2901049162265094971">"Du har ikke installeret nogen tredjepartsprogrammer."</string>
@@ -747,7 +752,7 @@
     <string name="app_install_location_title" msgid="2068975150026852168">"Foretrukken installationsplacering"</string>
     <string name="app_install_location_summary" msgid="879753854530300436">"Skift den foretrukne installationsplacering for nye programmer."</string>
     <string name="runningservices_settings_title" msgid="8097287939865165213">"Kørende tjenester"</string>
-    <string name="runningservices_settings_summary" msgid="854608995821032748">"Vis og kontroller igangværende tjenester"</string>
+    <string name="runningservices_settings_summary" msgid="854608995821032748">"Vis og kontroller kørende tjenester"</string>
     <string name="service_restarting" msgid="2242747937372354306">"Genstarter"</string>
     <string name="no_running_services" msgid="6981216347270280598">"Der er ingen kørende tjenester"</string>
     <string name="confirm_stop_service" msgid="5700448757318301681">"Stop tjeneste?"</string>
@@ -805,7 +810,7 @@
     <string name="input_methods_settings_title" msgid="6800066636850553887">"Tekstinput"</string>
     <string name="input_methods_settings_summary" msgid="7571173442946675205">"Administrer valgmuligheder for tekstinput"</string>
     <string name="input_methods_settings_label_format" msgid="6002887604815693322">"<xliff:g id="IME_NAME">%1$s</xliff:g> indstillinger"</string>
-    <string name="onscreen_keyboard_settings_summary" msgid="5841558383556238653">"Indstillinger for skærmtastaturet"</string>
+    <string name="onscreen_keyboard_settings_summary" msgid="5841558383556238653">"Indstillinger for skærmens tastatur"</string>
     <string name="builtin_keyboard_settings_title" msgid="8169889453770863227">"Enhedens tastatur"</string>
     <string name="builtin_keyboard_settings_summary" msgid="6404687907454621637">"Indstillinger for indbygget tastatur"</string>
     <string name="development_settings_title" msgid="6719732334835420989">"Udvikling"</string>
@@ -862,7 +867,7 @@
     <string name="toggle_accessibility_title" msgid="650839277066574497">"Tilgængelighed"</string>
     <string name="accessibility_services_category" msgid="8127851026323672607">"Tilgængelighedstjenester"</string>
     <string name="no_accessibility_services_summary" msgid="694578333333808159">"Der er ikke installeret nogen tilgængelighedstjenester."</string>
-    <string name="accessibility_service_security_warning" msgid="4066258132331302670">"Denne tilgængelighedstjeneste vil muligvis være i stand til at indsamle al den tekst, du indtaster, inklusive personlige oplysninger og kreditkortoplysninger, men ikke adgangskoder. Den kan også registrere dine brugergrænsefladeinteraktioner. Den kommer fra programmet <xliff:g id="ACCESSIBILITY_SERVICE_NAME">%1$s</xliff:g>. Vil du bruge denne tilgængelighedstjeneste?"</string>
+    <string name="accessibility_service_security_warning" msgid="4066258132331302670">"Denne tilgængelighedstjeneste vil muligvis være i stand til at indsamle al den tekst, du indtaster, inklusive personlige oplysninger og kreditkortoplysninger, men ikke adgangskoder. Den kan også registrere dine interaktioner på brugergrænsefladen. Den kommer fra programmet <xliff:g id="ACCESSIBILITY_SERVICE_NAME">%1$s</xliff:g>. Vil du bruge denne tilgængelighedstjeneste?"</string>
     <string name="accessibility_service_disable_warning" msgid="8930591383312775132">"Deaktiver tilgængelighed?"</string>
     <string name="accessibility_service_no_apps_title" msgid="898893674114288531">"Der blev ikke fundet programmer med relateret tilgængelighed"</string>
     <string name="accessibility_service_no_apps_message" msgid="2450056749545404807">"Du har ingen programmer med relateret tilgængelighed installeret."\n\n"Du kan downloade en skærmlæser fra Android Marked."\n\n"Klik på OK for at installere skærmlæseren."</string>
@@ -902,7 +907,7 @@
     <string name="usage_type_no_coverage" msgid="3797004252954385053">"Tid uden signal"</string>
     <string name="battery_action_stop" msgid="649958863744041872">"Tving til at standse"</string>
     <string name="battery_action_app_details" msgid="3275013531871113681">"Programoplysninger"</string>
-    <string name="battery_action_app_settings" msgid="350562653472577250">"Indstillinger for program"</string>
+    <string name="battery_action_app_settings" msgid="350562653472577250">"Indstillinger for programmer"</string>
     <string name="battery_action_display" msgid="5302763261448580102">"Indstillinger for visning"</string>
     <string name="battery_action_wifi" msgid="5452076674659927993">"Indstillinger for Wi-Fi"</string>
     <string name="battery_action_bluetooth" msgid="8374789049507723142">"Indstillinger for Bluetooth"</string>
@@ -1012,7 +1017,7 @@
     <string name="vpns" msgid="3148141862835492816">"VPN\'er"</string>
     <string name="vpn_connecting" msgid="8039521381692090116">"Opretter forbindelse ..."</string>
     <string name="vpn_disconnecting" msgid="7748050200708257066">"Afbryder ..."</string>
-    <string name="vpn_connected" msgid="7641723116362845781">"Forbundet"</string>
+    <string name="vpn_connected" msgid="7641723116362845781">"Tilsluttet"</string>
     <string name="vpn_connect_hint" msgid="7442898962925875181">"Opret forbindelse til netværk"</string>
     <string name="vpn_name" msgid="1550918148476193076">"VPN-navn"</string>
     <string name="vpn_a_name" msgid="8445736942405283509">"et VPN-navn"</string>

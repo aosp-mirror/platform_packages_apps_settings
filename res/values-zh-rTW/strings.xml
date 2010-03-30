@@ -18,7 +18,7 @@
     xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
     <string name="yes" msgid="4676390750360727396">"是"</string>
     <string name="no" msgid="6731231425810196216">"否"</string>
-    <string name="device_info_default" msgid="7847265875578739287">"未知的"</string>
+    <string name="device_info_default" msgid="7847265875578739287">"不明"</string>
     <string name="turn_on_radio" msgid="8706561489788373676">"開啟無線通訊"</string>
     <string name="turn_off_radio" msgid="1820294552893884115">"關閉無線通訊"</string>
     <string name="radioInfo_menu_viewADN" msgid="8743377494429930831">"檢視 SIM 地址簿"</string>
@@ -38,7 +38,7 @@
     <string name="radioInfo_data_connecting" msgid="8404571440697917823">"連線中"</string>
     <string name="radioInfo_data_connected" msgid="7074301157399238697">"已連線"</string>
     <string name="radioInfo_data_suspended" msgid="5315325487890334196">"待命"</string>
-    <string name="radioInfo_unknown" msgid="737385314432468266">"未知的"</string>
+    <string name="radioInfo_unknown" msgid="737385314432468266">"不明"</string>
     <string name="radioInfo_display_packets" msgid="8654359809877290639">"pkts"</string>
     <string name="radioInfo_display_bytes" msgid="4018206969492931883">"bytes"</string>
     <string name="radioInfo_display_dbm" msgid="3621221793699882781">"dBm"</string>
@@ -66,7 +66,7 @@
     <string name="battery_info_awake_battery" msgid="2557725975486185849">"電池的清醒時間："</string>
     <string name="battery_info_awake_plugged" msgid="176716874713478188">"充電時的清醒時間："</string>
     <string name="battery_info_screen_on" msgid="376277447175613889">"螢幕顯示時間："</string>
-    <string name="battery_info_status_unknown" msgid="196130600938058547">"未知的"</string>
+    <string name="battery_info_status_unknown" msgid="196130600938058547">"不明"</string>
     <string name="battery_info_status_charging" msgid="1705179948350365604">"充電中"</string>
     <string name="battery_info_status_charging_ac" msgid="5874340256342956252">"(AC)"</string>
     <string name="battery_info_status_charging_usb" msgid="4059070156126770959">"(USB)"</string>
@@ -78,7 +78,7 @@
     <string name="battery_info_power_usb" msgid="8012931702516331797">"USB"</string>
     <string name="battery_info_power_ac_usb" msgid="6777734146838328688">"AC+USB"</string>
     <string name="battery_info_power_unknown" msgid="7344115502868899881">"不明"</string>
-    <string name="battery_info_health_unknown" msgid="5664295556921944255">"未知的"</string>
+    <string name="battery_info_health_unknown" msgid="5664295556921944255">"不明"</string>
     <string name="battery_info_health_good" msgid="8070356565806711806">"好"</string>
     <string name="battery_info_health_overheat" msgid="8442959549291368806">"過熱"</string>
     <string name="battery_info_health_dead" msgid="1725917445762829059">"電池耗盡"</string>
@@ -121,7 +121,7 @@
     <string name="date_time_changeTime_text" msgid="7037437020000867740">"變更時間"</string>
     <string name="date_time_changeDate_text" msgid="5259762626498028057">"日期"</string>
     <string name="choose_timezone" msgid="7762866468013985022">"選取時區"</string>
-    <string name="normal_date_format" msgid="1982904221918374153">"適中 (<xliff:g id="DATE">%s</xliff:g>)"</string>
+    <string name="normal_date_format" msgid="1982904221918374153">"一般 (<xliff:g id="DATE">%s</xliff:g>)"</string>
     <string name="display_preview_label" msgid="1127597250917274792">"預覽："</string>
     <string name="display_font_size_label" msgid="8941851418397475389">"字型大小："</string>
     <!-- no translation found for intent_sender_data_label (6332324780477289261) -->
@@ -257,7 +257,12 @@
     <string name="lockpassword_pin_too_long" msgid="6290317580664119373">"PIN 不得超過 %d 位數"</string>
     <string name="lockpassword_pin_contains_non_digits" msgid="3379277100136600632">"PIN 只能包含數字 0-9"</string>
     <string name="lockpassword_illegal_character" msgid="6204396794254688549">"密碼包含不適用的字元"</string>
-    <string name="lockpassword_password_requires_alpha" msgid="2837140849790751729">"Alpha 密碼必須包含至少 1 個字母"</string>
+    <!-- no translation found for lockpassword_password_requires_alpha (5668524505560400449) -->
+    <skip />
+    <!-- no translation found for lockpassword_password_requires_digit (4840579514154254907) -->
+    <skip />
+    <!-- no translation found for lockpassword_password_requires_symbol (4140602725865312078) -->
+    <skip />
     <string name="lockpassword_ok_label" msgid="313822574062553672">"確定"</string>
     <string name="lockpassword_cancel_label" msgid="8818529276331121899">"取消"</string>
     <string name="device_admin_title" msgid="3562216873644263804">"裝置管理"</string>
@@ -398,7 +403,7 @@
     <!-- no translation found for ring_volume_summary (7055497624193116879) -->
     <skip />
     <string name="vibrate_in_silent_title" msgid="3897968069156767036">"靜音時震動"</string>
-    <string name="vibrate_in_silent_summary" msgid="3312600513070076281">"在靜音模式時允許震動回應"</string>
+    <string name="vibrate_in_silent_summary" msgid="3312600513070076281">"允許在靜音模式時開啟震動功能"</string>
     <string name="vibrate_title" msgid="5408984084125311526">"手機震動"</string>
     <string name="vibrate_summary" msgid="5224303668448643275">"來電震動"</string>
     <string name="notification_sound_title" msgid="6316316069880531693">"通知鈴聲"</string>
@@ -408,7 +413,7 @@
     <string name="notification_pulse_summary" msgid="6899220780534617152">"有新通知時重複閃爍軌跡球燈光"</string>
     <string name="incoming_call_volume_title" msgid="8073714801365904099">"鈴聲"</string>
     <string name="notification_volume_title" msgid="2012640760341080408">"通知"</string>
-    <string name="checkbox_notification_same_as_incoming_call" msgid="1073644356290338921">"通知使用來電音量"</string>
+    <string name="checkbox_notification_same_as_incoming_call" msgid="1073644356290338921">"通知音量與來電音量相同"</string>
     <string name="notification_sound_dialog_title" msgid="7057274209079144726">"選取通知鈴聲"</string>
     <string name="media_volume_title" msgid="3576565767317118106">"媒體"</string>
     <string name="media_volume_summary" msgid="5363248930648849974">"設定音樂與影片的音量"</string>
@@ -559,7 +564,7 @@
     <string name="menu_delete" msgid="6981294422841124659">"刪除 APN"</string>
     <string name="menu_new" msgid="3014205883303921729">"新增 APN"</string>
     <string name="menu_save" msgid="8109345640668285399">"儲存"</string>
-    <string name="menu_cancel" msgid="2194502410474697474">"放棄"</string>
+    <string name="menu_cancel" msgid="2194502410474697474">"捨棄"</string>
     <string name="error_title" msgid="1319225301794168762">"注意"</string>
     <string name="error_name_empty" msgid="1498238337687930558">"名稱欄位不能空白。"</string>
     <string name="error_apn_empty" msgid="1513892291812404310">"APN 不能空白。"</string>
@@ -603,7 +608,7 @@
     <string name="location_title" msgid="1029961368397484576">"我的位置"</string>
     <string name="location_network_based" msgid="8815705866861993344">"使用無線網路"</string>
     <string name="location_networks_disabled" msgid="2708968452901433980">"使用無線網路，在應用程式中查詢位置 (例如 Google 地圖)"</string>
-    <string name="location_neighborhood_level" msgid="4656658097932515921">"根據 Wi-Fi 與/或行動網路判定位置"</string>
+    <string name="location_neighborhood_level" msgid="4656658097932515921">"根據 Wi-Fi 和/或行動網路判定位置"</string>
     <string name="location_gps" msgid="6296125378829097831">"使用 GPS 衛星定位"</string>
     <string name="location_street_level" msgid="6460740847018275745">"定位時，精準度設定為街道等級 (取消勾選即可節省電力)"</string>
     <string name="location_gps_disabled" msgid="6632537158777308128">"定位至街道等級 (需要更多電力及天候允許)"</string>
@@ -693,7 +698,7 @@
     <string name="auto_launch_enable_text" msgid="2630656657744196691">"您已設定在某些操作下啟動此應用程式。"</string>
     <string name="auto_launch_disable_text" msgid="7800385822185540166">"沒有預設值。"</string>
     <string name="clear_activities" msgid="7408923511535174430">"清除預設值"</string>
-    <string name="unknown" msgid="1592123443519355854">"未知的"</string>
+    <string name="unknown" msgid="1592123443519355854">"不明"</string>
     <string name="sort_order_alpha" msgid="8622029358896599842">"排序"</string>
     <string name="sort_order_size" msgid="7024513286636502362">"依大小排序"</string>
     <string name="manage_space_text" msgid="8852711522447794676">"管理空間"</string>
@@ -961,8 +966,8 @@
     <string name="tts_engine_security_warning" msgid="8786238102020223650">"此語音合成引擎可能會收集您輸入的所有語音，包括密碼和信用卡號等個人資料。此引擎來自「<xliff:g id="TTS_PLUGIN_ENGINE_NAME">%s</xliff:g>」引擎，是否要使用此語音合成引擎？"</string>
     <string name="tts_engines_section" msgid="7515470972378742429">"引擎"</string>
     <string name="tts_engine_name_settings" msgid="4974538563074395920">"<xliff:g id="TTS_PLUGIN_ENGINE_NAME">%s</xliff:g>設定"</string>
-    <string name="tts_engine_name_is_enabled_summary" msgid="4909484006804022115">"已啟用<xliff:g id="TTS_PLUGIN_ENGINE_NAME">%s</xliff:g>"</string>
-    <string name="tts_engine_name_is_disabled_summary" msgid="7644198182255168200">"已停用<xliff:g id="TTS_PLUGIN_ENGINE_NAME">%s</xliff:g>"</string>
+    <string name="tts_engine_name_is_enabled_summary" msgid="4909484006804022115">"已啟用 <xliff:g id="TTS_PLUGIN_ENGINE_NAME">%s</xliff:g>"</string>
+    <string name="tts_engine_name_is_disabled_summary" msgid="7644198182255168200">"已停用 <xliff:g id="TTS_PLUGIN_ENGINE_NAME">%s</xliff:g>"</string>
     <string name="pico_languages_and_voices" msgid="4611320375917773238">"語言及語音"</string>
     <string name="pico_installed" msgid="2452546687858267414">"已安裝"</string>
     <string name="pico_not_installed" msgid="6266845418419994311">"未安裝"</string>
@@ -990,7 +995,7 @@
     <string name="vpn_menu_disconnect" msgid="8254492450022562235">"中斷網路連線"</string>
     <string name="vpn_menu_edit" msgid="4526245173583195618">"編輯網路"</string>
     <string name="vpn_menu_delete" msgid="3326527392609513129">"刪除網路"</string>
-    <string name="vpn_error_miss_entering" msgid="5377667978602483250">"請輸入<xliff:g id="CODE">%s</xliff:g>。"</string>
+    <string name="vpn_error_miss_entering" msgid="5377667978602483250">"請輸入 <xliff:g id="CODE">%s</xliff:g>。"</string>
     <string name="vpn_error_miss_selecting" msgid="4890780825580511345">"請選取<xliff:g id="OPTION">%s</xliff:g>。"</string>
     <string name="vpn_error_duplicate_name" msgid="2693927537390963745">"VPN 名稱「<xliff:g id="NAME">%s</xliff:g>」已經存在，請使用其他名稱。"</string>
     <string name="vpn_confirm_profile_deletion" msgid="8679536635364177239">"確定要刪除此 VPN 嗎？"</string>
@@ -1039,12 +1044,12 @@
     <string name="vpn_dns_search_list_title" msgid="1022776976104584251">"DNS 搜尋網域"</string>
     <string name="vpn_dns_search_list" msgid="4230034234026605360">"DNS 搜尋網域"</string>
     <string name="vpn_field_is_set" msgid="7137320847812992243">"已設定<xliff:g id="VALUE">%s</xliff:g>"</string>
-    <string name="vpn_field_not_set" msgid="2972519243515893804">"未設定<xliff:g id="VALUE">%s</xliff:g>"</string>
-    <string name="vpn_field_not_set_optional" msgid="8840557698252556791">"未設定<xliff:g id="VALUE">%s</xliff:g> (可略過)"</string>
+    <string name="vpn_field_not_set" msgid="2972519243515893804">"未設定 <xliff:g id="VALUE">%s</xliff:g>"</string>
+    <string name="vpn_field_not_set_optional" msgid="8840557698252556791">"未設定 <xliff:g id="VALUE">%s</xliff:g> (可略過)"</string>
     <string name="vpn_enable_field" msgid="3700967675854517191">"啟用<xliff:g id="OPTION">%s</xliff:g>"</string>
     <string name="vpn_disable_field" msgid="6905658811179634005">"停用<xliff:g id="OPTION">%s</xliff:g>"</string>
-    <string name="vpn_is_enabled" msgid="1266304230417098877">"已啟用<xliff:g id="OPTION">%s</xliff:g>"</string>
-    <string name="vpn_is_disabled" msgid="2013622485867806167">"已停用<xliff:g id="OPTION">%s</xliff:g>"</string>
+    <string name="vpn_is_enabled" msgid="1266304230417098877">"已啟用 <xliff:g id="OPTION">%s</xliff:g>"</string>
+    <string name="vpn_is_disabled" msgid="2013622485867806167">"已停用 <xliff:g id="OPTION">%s</xliff:g>"</string>
     <string name="vpn_settings_title" msgid="7327468307909556719">"VPN 設定"</string>
     <string name="vpn_settings_summary" msgid="8849924181594963972">"設定與管理虛擬私人網路 (VPN)"</string>
     <string name="vpn_secret_unchanged" msgid="8700613973594154529">"(未變更)"</string>

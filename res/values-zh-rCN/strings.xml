@@ -85,7 +85,7 @@
     <string name="battery_info_health_over_voltage" msgid="2420269351664490121">"过电压"</string>
     <string name="battery_info_health_unspecified_failure" msgid="6347021103185471590">"未知错误"</string>
     <string name="bluetooth" msgid="5549625000628014477">"蓝牙"</string>
-    <string name="bluetooth_visibility" msgid="2930835434091839916">"可检测"</string>
+    <string name="bluetooth_visibility" msgid="2930835434091839916">"可检测的"</string>
     <string name="bluetooth_is_discoverable" msgid="1205694503775884903">"<xliff:g id="DISCOVERABLE_TIME_PERIOD">%1$s</xliff:g> 秒内可检测到..."</string>
     <string name="bluetooth_not_discoverable" msgid="128269993123955177">"可以检测到设备"</string>
     <string name="bluetooth_lock_voice_dialing" msgid="3139322992062086225">"锁定语音拨号"</string>
@@ -257,7 +257,12 @@
     <string name="lockpassword_pin_too_long" msgid="6290317580664119373">"PIN 不得超过 %d 位数"</string>
     <string name="lockpassword_pin_contains_non_digits" msgid="3379277100136600632">"PIN 只能由 0-9 的数字组成"</string>
     <string name="lockpassword_illegal_character" msgid="6204396794254688549">"密码包含非法字符"</string>
-    <string name="lockpassword_password_requires_alpha" msgid="2837140849790751729">"字母密码必须至少包含一个字母"</string>
+    <!-- no translation found for lockpassword_password_requires_alpha (5668524505560400449) -->
+    <skip />
+    <!-- no translation found for lockpassword_password_requires_digit (4840579514154254907) -->
+    <skip />
+    <!-- no translation found for lockpassword_password_requires_symbol (4140602725865312078) -->
+    <skip />
     <string name="lockpassword_ok_label" msgid="313822574062553672">"确定"</string>
     <string name="lockpassword_cancel_label" msgid="8818529276331121899">"取消"</string>
     <string name="device_admin_title" msgid="3562216873644263804">"设备管理"</string>
@@ -423,10 +428,10 @@
     <string name="lock_sounds_enable_title" msgid="1575990840389107141">"屏幕锁定提示音"</string>
     <string name="lock_sounds_enable_summary_on" msgid="145741024028391473">"锁定和解锁屏幕时播放声音"</string>
     <string name="lock_sounds_enable_summary_off" msgid="8481243116223542804">"锁定和解锁屏幕时播放声音"</string>
-    <string name="haptic_feedback_enable_title" msgid="6311736559245411290">"触感反馈"</string>
+    <string name="haptic_feedback_enable_title" msgid="6311736559245411290">"触感"</string>
     <string name="haptic_feedback_enable_summary_on" msgid="1875779656524793053">"按软键以及进行某些 UI 交互时振动"</string>
     <string name="haptic_feedback_enable_summary_off" msgid="7287885436963105314">"按软键以及进行某些 UI 交互时振动"</string>
-    <string name="audio_record_proc_title" msgid="4271091199976457534">"噪音消除"</string>
+    <string name="audio_record_proc_title" msgid="4271091199976457534">"降噪"</string>
     <string name="audio_record_proc_summary" msgid="8113628457499616498">"在进行通话或录音时降低背景噪音。"</string>
     <string name="dock_settings" msgid="1820107306693002541">"底座"</string>
     <string name="dock_settings_title" msgid="9161438664257429372">"底座设置"</string>
@@ -453,9 +458,9 @@
     <string name="accelerometer_summary_off" msgid="5485489363715740761">"旋转手机时自动改变方向"</string>
     <string name="brightness" msgid="2354961343555249270">"亮度"</string>
     <string name="brightness_summary" msgid="838917350127550703">"调整屏幕亮度"</string>
-    <string name="screen_timeout" msgid="4882669461447531301">"屏幕待机"</string>
+    <string name="screen_timeout" msgid="4882669461447531301">"屏幕超时"</string>
     <string name="screen_timeout_summary" msgid="2905757633140605334">"调整屏幕自动锁定前的延迟"</string>
-    <string name="automatic_brightness" msgid="5014143533884135461">"自动亮度"</string>
+    <string name="automatic_brightness" msgid="5014143533884135461">"自动调整亮度"</string>
     <string name="sim_lock_settings" msgid="3392331196873564292">"SIM 卡锁定设置"</string>
     <string name="sim_lock_settings_category" msgid="5136244267576697004">"设置 SIM 卡锁定"</string>
     <string name="sim_lock_settings_title" msgid="9018585580955414596">"SIM 卡锁定"</string>
@@ -664,9 +669,9 @@
     <string name="skip_button_label" msgid="8680422740354436943">"取消"</string>
     <string name="next_button_label" msgid="8890792540116568321">"下一步"</string>
     <string name="lock_title" msgid="4059246467204273930">"手机安全设置"</string>
-    <string name="lock_intro_message" msgid="9100785646737118042"><font size="17">"创建个人屏幕的解锁图案，防止手机被人擅自使用。"\n<font height="17">\n</font><b>"1"</b>"  在下一屏幕上，观看示例图案的绘制过程。"\n<font height="17">\n</font><b>"2"</b>"  准备就绪后，绘制您自己的个人解锁图案。可尝试不同的图案，但至少要连接四个点。"\n<font height="17">\n</font><b>"3"</b>"  再次绘制您的图案进行确认。"\n<font height="17">\n</font><b>"准备好要开始了吗？请触摸“下一步”"</b>"。"\n<font height="3">\n</font>"如果不想改变手机的无保护状态，请触摸“取消”。"</font></string>
+    <string name="lock_intro_message" msgid="9100785646737118042"><font size="17">"创建个人屏幕的解锁图案，防止手机被人擅自使用。"\n<font height="17">\n</font><b>"1"</b>"  在下一屏幕上，观看示例图案的绘制过程。"\n<font height="17">\n</font><b>"2"</b>"  准备就绪后，绘制您自己的个人解锁图案。可尝试不同的图案，但至少经过四个点。"\n<font height="17">\n</font><b>"3"</b>"  再次绘制您的图案进行确认。"\n<font height="17">\n</font><b>"准备好要开始了吗？请触摸“下一步”"</b>"。"\n<font height="3">\n</font>"如果不想改变手机的无保护状态，请触摸“取消”。"</font></string>
     <string name="lock_example_title" msgid="8052305554017485410">"示例图案"</string>
-    <string name="lock_example_message" msgid="1838650097090632706">"至少连接四个点。"\n\n"您准备好绘制自己的解锁图案时，请触摸“下一步”。"</string>
+    <string name="lock_example_message" msgid="1838650097090632706">"至少经过四个点。"\n\n"您准备好绘制自己的解锁图案时，请触摸“下一步”。"</string>
     <string name="manageapplications_settings_title" msgid="5712405848153426706">"管理应用程序"</string>
     <string name="manageapplications_settings_summary" msgid="6097117021500651232">"管理和删除安装的应用程序"</string>
     <string name="applications_settings" msgid="3736173521008476946">"应用程序"</string>
@@ -674,7 +679,7 @@
     <string name="applications_settings_header" msgid="6018266337275422250">"应用程序设置"</string>
     <string name="install_applications" msgid="4872012136210802181">"未知来源"</string>
     <string name="install_unknown_applications" msgid="6612824788917283662">"允许安装非电子市场提供的应用程序"</string>
-    <string name="install_all_warning" msgid="1923717607319933741">"您的手机和个人数据更容易受到来自未知来源的应用程序攻击。您同意自己对因使用这些应用程序而造成的手机损坏或数据丢失承担全部责任。"</string>
+    <string name="install_all_warning" msgid="1923717607319933741">"您的手机和个人数据会更容易受到来自未知来源的应用程序的攻击。您同意自己对因使用这些应用程序而造成的手机损坏或数据丢失承担全部责任。"</string>
     <string name="application_info_label" msgid="1150486628158409543">"应用程序信息"</string>
     <string name="storage_label" msgid="8700867073480107253">"存储"</string>
     <string name="auto_launch_label" msgid="3012617472833815382">"默认启动"</string>
