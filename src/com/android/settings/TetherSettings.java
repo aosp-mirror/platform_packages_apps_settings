@@ -262,6 +262,7 @@ public class TetherSettings extends PreferenceActivity {
 
             AlertDialog.Builder builder = new AlertDialog.Builder(this);
             builder.setCancelable(true);
+            builder.setTitle(R.string.tethering_help_button_text);
             builder.setView(view);
             builder.show();
         }
