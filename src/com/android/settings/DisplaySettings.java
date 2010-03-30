@@ -18,14 +18,11 @@ package com.android.settings;
 
 import static android.provider.Settings.System.SCREEN_OFF_TIMEOUT;
 
-import com.android.settings.bluetooth.DockEventReceiver;
+import java.util.ArrayList;
 
-import android.content.BroadcastReceiver;
+import android.app.admin.DevicePolicyManager;
 import android.content.ContentResolver;
 import android.content.Context;
-import android.content.Intent;
-import android.content.IntentFilter;
-import android.media.AudioManager;
 import android.os.Bundle;
 import android.os.RemoteException;
 import android.os.ServiceManager;
@@ -33,11 +30,8 @@ import android.preference.CheckBoxPreference;
 import android.preference.ListPreference;
 import android.preference.Preference;
 import android.preference.PreferenceActivity;
-import android.preference.PreferenceGroup;
 import android.preference.PreferenceScreen;
 import android.provider.Settings;
-import android.provider.Settings.SettingNotFoundException;
-import android.telephony.TelephonyManager;
 import android.util.Log;
 import android.view.IWindowManager;
 
@@ -76,7 +70,35 @@ public class DisplaySettings extends PreferenceActivity implements
         screenTimeoutPreference.setValue(String.valueOf(Settings.System.getInt(
                 resolver, SCREEN_OFF_TIMEOUT, FALLBACK_SCREEN_TIMEOUT_VALUE)));
         screenTimeoutPreference.setOnPreferenceChangeListener(this);
+        disableUnusableTimeouts(screenTimeoutPreference);
+    }
 
+    private void disableUnusableTimeouts(ListPreference screenTimeoutPreference) {
+        DevicePolicyManager dpm =
+            (DevicePolicyManager) getSystemService(Context.DEVICE_POLICY_SERVICE);
+        long maxTimeout = dpm != null ? dpm.getMaximumTimeToLock(null) : 0;
+        if (maxTimeout == 0) {
+            return; // policy not enforced
+        }
+        final CharSequence[] entries = screenTimeoutPreference.getEntries();
+        final CharSequence[] values = screenTimeoutPreference.getEntryValues();
+        ArrayList<CharSequence> revisedEntries = new ArrayList<CharSequence>();
+        ArrayList<CharSequence> revisedValues = new ArrayList<CharSequence>();
+        for (int i = 0; i < values.length; i++) {
+            long timeout = Long.valueOf(values[i].toString());
+            if (timeout <= maxTimeout) {
+                revisedEntries.add(entries[i]);
+                revisedValues.add(values[i]);
+            }
+        }
+        if (revisedEntries.size() != entries.length || revisedValues.size() != values.length) {
+            screenTimeoutPreference.setEntries(
+                    revisedEntries.toArray(new CharSequence[revisedEntries.size()]));
+            screenTimeoutPreference.setEntryValues(
+                    revisedValues.toArray(new CharSequence[revisedValues.size()]));
+            screenTimeoutPreference.setValue(String.valueOf(maxTimeout));
+        }
+        screenTimeoutPreference.setEnabled(revisedEntries.size() > 0);
     }
 
     @Override
