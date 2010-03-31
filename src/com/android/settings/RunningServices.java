@@ -64,6 +64,8 @@ import android.widget.TextView;
 
 import java.io.FileInputStream;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
@@ -188,6 +190,11 @@ public class RunningServices extends ListActivity
         
         int mRunningSeq;
         ActivityManager.RunningAppProcessInfo mRunningProcessInfo;
+        
+        // Purely for sorting.
+        boolean mIsSystem;
+        boolean mIsStarted;
+        long mActiveSince;
         
         public ProcessItem(Context context, int uid, String processName) {
             super(true);
@@ -382,11 +389,32 @@ public class RunningServices extends ListActivity
         }
     }
     
+    static class ServiceProcessComparator implements Comparator<ProcessItem> {
+        public int compare(ProcessItem object1, ProcessItem object2) {
+            if (object1.mIsStarted != object2.mIsStarted) {
+                // Non-started processes go last.
+                return object1.mIsStarted ? -1 : 1;
+            }
+            if (object1.mIsSystem != object2.mIsSystem) {
+                // System processes go below non-system.
+                return object1.mIsSystem ? 1 : -1;
+            }
+            if (object1.mActiveSince != object2.mActiveSince) {
+                // Remaining ones are sorted with the longest running
+                // services last.
+                return (object1.mActiveSince > object2.mActiveSince) ? -1 : 1;
+            }
+            return 0;
+        }
+    }
+    
     static class State {
         final SparseArray<HashMap<String, ProcessItem>> mProcesses
                 = new SparseArray<HashMap<String, ProcessItem>>();
         final SparseArray<ProcessItem> mActiveProcesses
                 = new SparseArray<ProcessItem>();
+        final ServiceProcessComparator mServiceProcessComparator
+                = new ServiceProcessComparator();
         
         // Temporary for finding process dependencies.
         final SparseArray<ProcessItem> mRunningProcesses
@@ -566,25 +594,51 @@ public class RunningServices extends ListActivity
             }
             
             if (changed) {
-                ArrayList<BaseItem> newItems = new ArrayList<BaseItem>();
-                mProcessItems.clear();
+                // First determine an order for the services.
+                ArrayList<ProcessItem> sortedProcesses = new ArrayList<ProcessItem>();
                 for (int i=0; i<mProcesses.size(); i++) {
                     for (ProcessItem pi : mProcesses.valueAt(i).values()) {
-                        pi.mNeedDivider = false;
-                        // First add processes we are dependent on.
-                        pi.addDependentProcesses(newItems, mProcessItems);
-                        // And add the process itself.
-                        newItems.add(pi);
-                        if (pi.mPid > 0) {
-                            mProcessItems.add(pi);
-                        }
-                        // And finally the services running in it.
-                        boolean needDivider = false;
+                        pi.mIsSystem = false;
+                        pi.mIsStarted = true;
+                        pi.mActiveSince = Long.MAX_VALUE;
                         for (ServiceItem si : pi.mServices.values()) {
-                            si.mNeedDivider = needDivider;
-                            needDivider = true;
-                            newItems.add(si);
+                            if (si.mServiceInfo != null
+                                    && (si.mServiceInfo.applicationInfo.flags
+                                            & ApplicationInfo.FLAG_SYSTEM) != 0) {
+                                pi.mIsSystem = true;
+                            }
+                            if (si.mRunningService != null
+                                    && si.mRunningService.clientLabel != 0) {
+                                pi.mIsStarted = false;
+                                if (pi.mActiveSince > si.mRunningService.activeSince) {
+                                    pi.mActiveSince = si.mRunningService.activeSince;
+                                }
+                            }
                         }
+                        sortedProcesses.add(pi);
+                    }
+                }
+                
+                Collections.sort(sortedProcesses, mServiceProcessComparator);
+                
+                ArrayList<BaseItem> newItems = new ArrayList<BaseItem>();
+                mProcessItems.clear();
+                for (int i=0; i<sortedProcesses.size(); i++) {
+                    ProcessItem pi = sortedProcesses.get(i);
+                    pi.mNeedDivider = false;
+                    // First add processes we are dependent on.
+                    pi.addDependentProcesses(newItems, mProcessItems);
+                    // And add the process itself.
+                    newItems.add(pi);
+                    if (pi.mPid > 0) {
+                        mProcessItems.add(pi);
+                    }
+                    // And finally the services running in it.
+                    boolean needDivider = false;
+                    for (ServiceItem si : pi.mServices.values()) {
+                        si.mNeedDivider = needDivider;
+                        needDivider = true;
+                        newItems.add(si);
                     }
                 }
                 synchronized (mLock) {
@@ -660,6 +714,12 @@ public class RunningServices extends ListActivity
             
             return changed;
         }
+        
+        ArrayList<BaseItem> getCurrentItems() {
+            synchronized (mLock) {
+                return mItems;
+            }
+        }
     }
     
     static class TimeTicker extends TextView {
@@ -679,32 +739,38 @@ public class RunningServices extends ListActivity
     class ServiceListAdapter extends BaseAdapter {
         final State mState;
         final LayoutInflater mInflater;
+        ArrayList<BaseItem> mItems;
         
         ServiceListAdapter(State state) {
-            synchronized (state.mLock) {
-                mState = state;
-                mInflater = (LayoutInflater)getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-            }
+            mState = state;
+            mInflater = (LayoutInflater)getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+            refreshItems();
         }
 
+        void refreshItems() {
+            ArrayList<BaseItem> newItems = mState.getCurrentItems();
+            if (mItems != newItems) {
+                mItems = newItems;
+            }
+            if (mItems == null) {
+                mItems = new ArrayList<BaseItem>();
+            }
+        }
+        
         public boolean hasStableIds() {
             return true;
         }
         
         public int getCount() {
-            synchronized (mState.mLock) {
-                return mState.mItems.size();
-            }
+            return mItems.size();
         }
 
         public Object getItem(int position) {
-            synchronized (mState.mLock) {
-                return mState.mItems.get(position);
-            }
+            return mItems.get(position);
         }
 
         public long getItemId(int position) {
-            return position;
+            return mItems.get(position).hashCode();
         }
 
         public boolean areAllItemsEnabled() {
@@ -712,9 +778,7 @@ public class RunningServices extends ListActivity
         }
 
         public boolean isEnabled(int position) {
-            synchronized (mState.mLock) {
-                return !mState.mItems.get(position).mIsProcess;
-            }
+            return !mItems.get(position).mIsProcess;
         }
 
         public View getView(int position, View convertView, ViewGroup parent) {
@@ -743,13 +807,13 @@ public class RunningServices extends ListActivity
         public void bindView(View view, int position) {
             synchronized (mState.mLock) {
                 ViewHolder vh = (ViewHolder) view.getTag();
-                if (position >= mState.mItems.size()) {
+                if (position >= mItems.size()) {
                     // List must have changed since we last reported its
                     // size...  ignore here, we will be doing a data changed
                     // to refresh the entire list.
                     return;
                 }
-                BaseItem item = mState.mItems.get(position);
+                BaseItem item = mItems.get(position);
                 vh.name.setText(item.mDisplayLabel);
                 vh.separator.setVisibility(item.mNeedDivider
                         ? View.VISIBLE : View.INVISIBLE);
@@ -967,7 +1031,9 @@ public class RunningServices extends ListActivity
 
     void refreshUi(boolean dataChanged) {
         if (dataChanged) {
-            ((ServiceListAdapter)(getListView().getAdapter())).notifyDataSetChanged();
+            ServiceListAdapter adapter = (ServiceListAdapter)(getListView().getAdapter());
+            adapter.refreshItems();
+            adapter.notifyDataSetChanged();
         }
         
         // This is the amount of available memory until we start killing
