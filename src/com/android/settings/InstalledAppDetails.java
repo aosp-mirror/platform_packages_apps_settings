@@ -119,6 +119,10 @@ public class InstalledAppDetails extends Activity implements View.OnClickListene
     
     private Handler mHandler = new Handler() {
         public void handleMessage(Message msg) {
+            // If the activity is gone, don't process any more messages.
+            if (isFinishing()) {
+                return;
+            }
             switch (msg.what) {
                 case CLEAR_USER_DATA:
                     processClearMsg(msg);
