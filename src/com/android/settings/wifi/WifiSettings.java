@@ -24,6 +24,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.net.NetworkInfo.DetailedState;
 import android.net.wifi.ScanResult;
@@ -62,6 +63,9 @@ public class WifiSettings extends PreferenceActivity implements DialogInterface.
     private static final int MENU_ID_FORGET = Menu.FIRST + 3;
     private static final int MENU_ID_MODIFY = Menu.FIRST + 4;
 
+    // this boolean extra specifies whether to disable the Next button when not connected
+    private static final String EXTRA_ENABLE_NEXT_ON_CONNECT = "wifi_enable_next_on_connect";
+
     private final IntentFilter mFilter;
     private final BroadcastReceiver mReceiver;
     private final Scanner mScanner;
@@ -81,6 +85,9 @@ public class WifiSettings extends PreferenceActivity implements DialogInterface.
 
     private AccessPoint mSelected;
     private WifiDialog mDialog;
+
+    // should Next button only be enabled when we have a connection?
+    private boolean mEnableNextOnConnection;
 
     public WifiSettings() {
         mFilter = new IntentFilter();
@@ -106,6 +113,18 @@ public class WifiSettings extends PreferenceActivity implements DialogInterface.
         super.onCreate(savedInstanceState);
 
         mWifiManager = (WifiManager) getSystemService(Context.WIFI_SERVICE);
+
+        // if we're supposed to enable/disable the Next button based on our current connection
+        // state, start it off in the right state
+        mEnableNextOnConnection = getIntent().getBooleanExtra(EXTRA_ENABLE_NEXT_ON_CONNECT, false);
+        if (mEnableNextOnConnection && hasNextButton()) {
+            ConnectivityManager connectivity = (ConnectivityManager)
+                getApplicationContext().getSystemService(Context.CONNECTIVITY_SERVICE);
+            if (connectivity != null) {
+                NetworkInfo info = connectivity.getNetworkInfo(ConnectivityManager.TYPE_WIFI);
+                getNextButton().setEnabled(info.isConnected());
+            }
+        }
 
         if (getIntent().getBooleanExtra("only_access_points", false)) {
             addPreferencesFromResource(R.xml.wifi_access_points);
@@ -420,8 +439,12 @@ public class WifiSettings extends PreferenceActivity implements DialogInterface.
             updateConnectionState(WifiInfo.getDetailedStateOf((SupplicantState)
                     intent.getParcelableExtra(WifiManager.EXTRA_NEW_STATE)));
         } else if (WifiManager.NETWORK_STATE_CHANGED_ACTION.equals(action)) {
-            updateConnectionState(((NetworkInfo) intent.getParcelableExtra(
-                    WifiManager.EXTRA_NETWORK_INFO)).getDetailedState());
+            NetworkInfo info = (NetworkInfo) intent.getParcelableExtra(
+                    WifiManager.EXTRA_NETWORK_INFO);
+            if (mEnableNextOnConnection && hasNextButton()) {
+                getNextButton().setEnabled(info.isConnected());
+            }
+            updateConnectionState(info.getDetailedState());
         } else if (WifiManager.RSSI_CHANGED_ACTION.equals(action)) {
             updateConnectionState(null);
         }
