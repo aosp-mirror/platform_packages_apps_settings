@@ -81,24 +81,28 @@ import java.util.concurrent.CountDownLatch;
  * options to uninstall/delete user data for system applications. This activity
  * can be launched through Settings or via the ACTION_MANAGE_PACKAGE_STORAGE
  * intent.
- *  Initially a compute in progress message is displayed while the application retrieves
- *  the list of application information from the PackageManager. The size information
- *  for each package is refreshed to the screen. The resource(app description and
- *  icon) information for each package is not available yet, so some default values for size
- *  icon and descriptions are used initially. Later the resource information for each 
- *  application is retrieved and dynamically updated on the screen.
- *  A Broadcast receiver registers for package additions or deletions when the activity is
- *  in focus. If the user installs or deletes packages when the activity has focus, the receiver
- *  gets notified and proceeds to add/delete these packages from the list on the screen.
- *  This is an unlikely scenario but could happen. The entire list gets created every time
- *  the activity's onStart gets invoked. This is to avoid having the receiver for the entire
- *  life cycle of the application.
- *  The applications can be sorted either alphabetically or 
- *  based on size(descending). If this activity gets launched under low memory
- *  situations(A low memory notification dispatches intent 
- *  ACTION_MANAGE_PACKAGE_STORAGE) the list is sorted per size.
- *  If the user selects an application, extended info(like size, uninstall/clear data options,
- *  permissions info etc.,) is displayed via the InstalledAppDetails activity.
+ * 
+ * Initially a compute in progress message is displayed while the application retrieves
+ * the list of application information from the PackageManager. The size information
+ * for each package is refreshed to the screen. The resource (app description and
+ * icon) information for each package is not available yet, so some default values for size
+ * icon and descriptions are used initially. Later the resource information for each 
+ * application is retrieved and dynamically updated on the screen.
+ *  
+ * A Broadcast receiver registers for package additions or deletions when the activity is
+ * in focus. If the user installs or deletes packages when the activity has focus, the receiver
+ * gets notified and proceeds to add/delete these packages from the list on the screen.
+ * This is an unlikely scenario but could happen. The entire list gets created every time
+ * the activity's onStart gets invoked. This is to avoid having the receiver for the entire
+ * life cycle of the application.
+ *  
+ * The applications can be sorted either alphabetically or 
+ * based on size (descending).  If this activity gets launched under low memory
+ * situations (a low memory notification dispatches intent 
+ * ACTION_MANAGE_PACKAGE_STORAGE) the list is sorted per size.
+ *  
+ * If the user selects an application, extended info (like size, uninstall/clear data options,
+ * permissions info etc.,) is displayed via the InstalledAppDetails activity.
  */
 public class ManageApplications extends TabActivity implements
         OnItemClickListener, DialogInterface.OnCancelListener,
@@ -173,7 +177,7 @@ public class ManageApplications extends TabActivity implements
     private PackageIntentReceiver mReceiver;
     // atomic variable used to track if computing pkg sizes is in progress. should be volatile?
     
-    private boolean mComputeSizes = false;
+    private boolean mComputeSizesFinished = false;
     // default icon thats used when displaying applications initially before resource info is
     // retrieved
     private static Drawable mDefaultAppIcon;
@@ -212,7 +216,7 @@ public class ManageApplications extends TabActivity implements
     private AppInfoCache mCache = new AppInfoCache();
     
     // Boolean variables indicating state
-    private boolean mLoadLabels = false;
+    private boolean mLoadLabelsFinished = false;
     private boolean mSizesFirst = false;
     // ListView used to display list
     private ListView mListView;
@@ -224,33 +228,38 @@ public class ManageApplications extends TabActivity implements
     private boolean mSetListViewLater = true;
     
     /*
-     * Handler class to handle messages for various operations
+     * Handler class to handle messages for various operations.
      * Most of the operations that effect Application related data
      * are posted as messages to the handler to avoid synchronization
      * when accessing these structures.
+     * 
      * When the size retrieval gets kicked off for the first time, a COMPUTE_PKG_SIZE_START
-     * message is posted to the handler which invokes the getSizeInfo for the pkg at index 0
+     * message is posted to the handler which invokes the getSizeInfo for the pkg at index 0.
+     * 
      * When the PackageManager's asynchronous call back through
      * PkgSizeObserver.onGetStatsCompleted gets invoked, the application resources like
-     * label, description, icon etc., is loaded in the same thread and these values are
-     * set on the observer. The observer then posts a COMPUTE_PKG_SIZE_DONE message
-     * to the handler. This information is updated on the AppInfoAdapter associated with
+     * label, description, icon etc., are loaded in the same thread and these values are
+     * set on the observer.  The observer then posts a COMPUTE_PKG_SIZE_DONE message
+     * to the handler.  This information is updated on the AppInfoAdapter associated with
      * the list view of this activity and size info retrieval is initiated for the next package as 
-     * indicated by mComputeIndex
+     * indicated by mComputeIndex.
+     * 
      * When a package gets added while the activity has focus, the PkgSizeObserver posts
      * ADD_PKG_START message to the handler.  If the computation is not in progress, the size
      * is retrieved for the newly added package through the observer object and the newly
-     * installed app info is updated on the screen. If the computation is still in progress
+     * installed app info is updated on the screen.  If the computation is still in progress
      * the package is added to an internal structure and action deferred till the computation
-     * is done for all the packages. 
+     * is done for all the packages.
+     * 
      * When a package gets deleted, REMOVE_PKG is posted to the handler
-     *  if computation is not in progress(as indicated by
-     * mDoneIniting), the package is deleted from the displayed list of apps. If computation is
+     * if computation is not in progress (as indicated by
+     * mDoneIniting), the package is deleted from the displayed list of apps.  If computation is
      * still in progress the package is added to an internal structure and action deferred till
      * the computation is done for all packages.
+     * 
      * When the sizes of all packages is computed, the newly
      * added or removed packages are processed in order.
-     * If the user changes the order in  which these applications are viewed by hitting the
+     * If the user changes the order in which these applications are viewed by hitting the
      * menu key, REORDER_LIST message is posted to the handler. this sorts the list
      * of items based on the sort order.
      */
@@ -292,8 +301,8 @@ public class ManageApplications extends TabActivity implements
                 }
                 mAppInfoAdapter.bulkUpdateSizes(pkgs, sizes, formatted);
                 break;
-            case COMPUTE_END :
-                mComputeSizes = true;
+            case COMPUTE_END:
+                mComputeSizesFinished = true;
                 mFirst = true;
                 mHandler.sendEmptyMessage(NEXT_LOAD_STEP);
                 break;
@@ -303,7 +312,7 @@ public class ManageApplications extends TabActivity implements
                     Log.w(TAG, "Ignoring message:REMOVE_PKG for null pkgName");
                     break;
                 }
-                if (!mComputeSizes) {
+                if (!mComputeSizesFinished) {
                     Boolean currB = mAddRemoveMap.get(pkgName);
                     if (currB == null || (currB.equals(Boolean.TRUE))) {
                         mAddRemoveMap.put(pkgName, Boolean.FALSE);
@@ -343,7 +352,7 @@ public class ManageApplications extends TabActivity implements
                     Log.w(TAG, "Ignoring message:ADD_PKG_START for null pkgName");
                     break;
                 }
-                if (!mComputeSizes || !mLoadLabels) {
+                if (!mComputeSizesFinished || !mLoadLabelsFinished) {
                     Boolean currB = mAddRemoveMap.get(pkgName);
                     if (currB == null || (currB.equals(Boolean.FALSE))) {
                         mAddRemoveMap.put(pkgName, Boolean.TRUE);
@@ -388,7 +397,7 @@ public class ManageApplications extends TabActivity implements
                 }
                 break;
             case REFRESH_DONE:
-                mLoadLabels = true;
+                mLoadLabelsFinished = true;
                 mHandler.sendEmptyMessage(NEXT_LOAD_STEP);
                 break;
             case NEXT_LOAD_STEP:
@@ -398,7 +407,7 @@ public class ManageApplications extends TabActivity implements
                     mSetListViewLater = false;
                     mFirst = true;
                 }
-                if (mComputeSizes && mLoadLabels) {
+                if (mComputeSizesFinished && mLoadLabelsFinished) {
                     doneLoadingData();
                     // Check for added/removed packages
                     Set<String> keys =  mAddRemoveMap.keySet();
@@ -412,7 +421,7 @@ public class ManageApplications extends TabActivity implements
                         }
                     }
                     mAddRemoveMap.clear();
-                } else if (!mComputeSizes && !mLoadLabels) {
+                } else if (!mComputeSizesFinished && !mLoadLabelsFinished) {
                      // Either load the package labels or initiate get size info
                     if (mSizesFirst) {
                         initComputeSizes();
@@ -425,9 +434,9 @@ public class ManageApplications extends TabActivity implements
                         initListView();
                         mSetListViewLater = false;
                     }
-                    if (!mComputeSizes) {
+                    if (!mComputeSizesFinished) {
                         initComputeSizes();
-                    } else if (!mLoadLabels) {
+                    } else if (!mLoadLabelsFinished) {
                         initResourceThread();
                     }
                 }
@@ -762,8 +771,8 @@ public class ManageApplications extends TabActivity implements
      // Some initialization code used when kicking off the size computation
     private void initAppList(List<ApplicationInfo> appList, int filterOption) {
         setProgressBarIndeterminateVisibility(true);
-        mComputeSizes = false;
-        mLoadLabels = false;
+        mComputeSizesFinished = false;
+        mLoadLabelsFinished = false;
         // Initialize lists
         mAddRemoveMap = new TreeMap<String, Boolean>();
         mAppInfoAdapter.initMapFromList(appList, filterOption);
@@ -791,7 +800,7 @@ public class ManageApplications extends TabActivity implements
         if ((appList != null) && (appList.size()) > 0) {
             mSizeComputor = new TaskRunner(appList);
         } else {
-            mComputeSizes = true;
+            mComputeSizesFinished = true;
         }
     }
     
@@ -884,8 +893,8 @@ public class ManageApplications extends TabActivity implements
     static private class AppInfo {
         public String pkgName;
         int index;
-        public  CharSequence appName;
-        public  Drawable appIcon;
+        public CharSequence appName;
+        public Drawable appIcon;
         public CharSequence appSize;
         long size;
 
@@ -1107,7 +1116,7 @@ public class ManageApplications extends TabActivity implements
                 Log.w(TAG, "Invalid view position:"+position+", actual size is:"+mAppLocalList.size());
                 return null;
             }
-            // A ViewHolder keeps references to children views to avoid unneccessary calls
+            // A ViewHolder keeps references to children views to avoid unnecessary calls
             // to findViewById() on each row.
             AppViewHolder holder;
 
@@ -1563,8 +1572,6 @@ public class ManageApplications extends TabActivity implements
          }
          @Override
          public void onReceive(Context context, Intent intent) {
-             // technically we dont have to invoke handler since onReceive is invoked on
-             // the main thread but doing it here for better clarity
              String actionStr = intent.getAction();
              if (Intent.ACTION_PACKAGE_ADDED.equals(actionStr) ||
                      Intent.ACTION_PACKAGE_REMOVED.equals(actionStr)) {
@@ -1573,24 +1580,26 @@ public class ManageApplications extends TabActivity implements
                  updatePackageList(actionStr, pkgName);
              } else if (Intent.ACTION_EXTERNAL_APPLICATIONS_AVAILABLE.equals(actionStr) ||
                      Intent.ACTION_EXTERNAL_APPLICATIONS_UNAVAILABLE.equals(actionStr)) {
-                 boolean available = Intent.ACTION_EXTERNAL_APPLICATIONS_AVAILABLE.equals(actionStr);
+                 // When applications become available or unavailable (perhaps because
+                 // the SD card was inserted or ejected) we need to refresh the
+                 // AppInfo with new label, icon and size information as appropriate
+                 // given the newfound (un)availability of the application.
+                 // A simple way to do that is to treat the refresh as a package
+                 // removal followed by a package addition.
                  String pkgList[] = intent.getStringArrayExtra(Intent.EXTRA_CHANGED_PACKAGE_LIST);
                  if (pkgList == null || pkgList.length == 0) {
                      // Ignore
                      return;
                  }
-                 String msg = available ? Intent.ACTION_PACKAGE_ADDED :
-                     Intent.ACTION_PACKAGE_REMOVED;
                  for (String pkgName : pkgList) {
-                     updatePackageList(msg, pkgName);
+                     updatePackageList(Intent.ACTION_PACKAGE_REMOVED, pkgName);
+                     updatePackageList(Intent.ACTION_PACKAGE_ADDED, pkgName);
                  }
              }
          }
     }
 
     private void updatePackageList(String actionStr, String pkgName) {
-        // technically we dont have to invoke handler since onReceive is invoked on
-        // the main thread but doing it here for better clarity
         if (Intent.ACTION_PACKAGE_ADDED.equalsIgnoreCase(actionStr)) {
             Bundle data = new Bundle();
             data.putString(ATTR_PKG_NAME, pkgName);
@@ -1640,7 +1649,7 @@ public class ManageApplications extends TabActivity implements
         mReceiver = new PackageIntentReceiver();
         mObserver = new PkgSizeObserver();
         // Create adapter and list view here
-        List<ApplicationInfo> appList = getInstalledApps(mSortOrder);
+        List<ApplicationInfo> appList = getInstalledApps(FILTER_APPS_ALL);
         mAppInfoAdapter = new AppInfoAdapter(this, appList);
         ListView lv = (ListView) mRootView.findViewById(android.R.id.list);
         lv.setOnItemClickListener(this);
@@ -1776,7 +1785,7 @@ public class ManageApplications extends TabActivity implements
                         err = true;
                         break;
                     }
-                    // Buffer length cannot be great then max.
+                    // Buffer length cannot be greater than max.
                     fis.read(byteBuff, 0, buffLen);
                     String buffStr = new String(byteBuff);
                     if (DEBUG_CACHE) {
