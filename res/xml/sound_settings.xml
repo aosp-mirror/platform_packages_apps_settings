@@ -36,6 +36,7 @@
 
         <com.android.settings.RingerVolumePreference
                 android:key="ring_volume"
+                android:dependency="silent"
                 android:title="@string/all_volume_title"
                 android:summary="@string/ring_volume_summary"
                 android:dialogTitle="@string/all_volume_title"
