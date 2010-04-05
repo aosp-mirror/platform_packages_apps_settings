@@ -445,6 +445,7 @@ public class WifiSettings extends PreferenceActivity implements DialogInterface.
 
         if (mResetNetworks && (state == DetailedState.CONNECTED ||
                 state == DetailedState.DISCONNECTED || state == DetailedState.FAILED)) {
+            updateAccessPoints();
             enableNetworks();
         }
     }
