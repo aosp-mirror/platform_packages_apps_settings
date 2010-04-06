@@ -19,6 +19,7 @@ package com.android.settings;
 import com.android.settings.wifi.WifiApEnabler;
 
 import android.app.AlertDialog;
+import android.app.Dialog;
 import android.os.Bundle;
 import android.os.SystemProperties;
 import android.content.BroadcastReceiver;
@@ -50,6 +51,9 @@ public class TetherSettings extends PreferenceActivity {
     private static final String WIFI_HELP_MODIFIER = "wifi_";
     private static final String HELP_URL = "file:///android_asset/html/%y_%z/tethering_%xhelp.html";
 
+    private static final int DIALOG_TETHER_HELP = 1;
+
+    private WebView mView;
     private CheckBoxPreference mUsbTether;
 
     private CheckBoxPreference mEnableWifiAp;
@@ -89,8 +93,35 @@ public class TetherSettings extends PreferenceActivity {
             getPreferenceScreen().removePreference(mWifiApSettings);
         }
         mWifiApEnabler = new WifiApEnabler(this, mEnableWifiAp);
+        mView = new WebView(this);
     }
 
+    @Override
+    protected Dialog onCreateDialog(int id) {
+        if (id == DIALOG_TETHER_HELP) {
+            Locale locale = Locale.getDefault();
+            String url = HELP_URL.replace("%y", locale.getLanguage().toLowerCase());
+            url = url.replace("%z", locale.getCountry().toLowerCase());
+
+            if ((mUsbRegexs.length != 0) && (mWifiRegexs.length == 0)) {
+                url = url.replace("%x", USB_HELP_MODIFIER);
+            } else if ((mWifiRegexs.length != 0) && (mUsbRegexs.length == 0)) {
+                url = url.replace("%x", WIFI_HELP_MODIFIER);
+            } else {
+                // could assert that both wifi and usb have regexs, but the default
+                // is to use this anyway so no check is needed
+                url = url.replace("%x", "");
+            }
+            mView.loadUrl(url);
+
+            return new AlertDialog.Builder(this)
+                .setCancelable(true)
+                .setTitle(R.string.tethering_help_button_text)
+                .setView(mView)
+                .create();
+        }
+        return null;
+    }
 
     private class TetherChangeReceiver extends BroadcastReceiver {
         public void onReceive(Context content, Intent intent) {
@@ -244,27 +275,8 @@ public class TetherSettings extends PreferenceActivity {
                 mUsbTether.setSummary("");
             }
         } else if (preference == mTetherHelp) {
-            Locale locale = Locale.getDefault();
-            String url = HELP_URL.replace("%y", locale.getLanguage().toLowerCase());
-            url = url.replace("%z", locale.getCountry().toLowerCase());
 
-            if ((mUsbRegexs.length != 0) && (mWifiRegexs.length == 0)) {
-                url = url.replace("%x", USB_HELP_MODIFIER);
-            } else if ((mWifiRegexs.length != 0) && (mUsbRegexs.length == 0)) {
-                url = url.replace("%x", WIFI_HELP_MODIFIER);
-            } else {
-                // could assert that both wifi and usb have regexs, but the default
-                // is to use this anyway so no check is needed
-                url = url.replace("%x", "");
-            }
-            WebView view = new WebView(this);
-            view.loadUrl(url);
-
-            AlertDialog.Builder builder = new AlertDialog.Builder(this);
-            builder.setCancelable(true);
-            builder.setTitle(R.string.tethering_help_button_text);
-            builder.setView(view);
-            builder.show();
+            showDialog(DIALOG_TETHER_HELP);
         }
         return false;
     }
