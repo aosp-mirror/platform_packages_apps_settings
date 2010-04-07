@@ -466,7 +466,7 @@
                 <category android:name="android.intent.category.VOICE_LAUNCH" />
             </intent-filter>
         </activity>
-        
+
         <activity android:name="VoiceInputOutputSettings"
                 android:label="@string/voice_input_output_settings">
             <intent-filter>
@@ -614,6 +614,8 @@
             <intent-filter>
                 <action android:name="android.intent.action.DOCK_EVENT" />
                 <action android:name="android.bluetooth.adapter.action.STATE_CHANGED" />
+                <action android:name="android.bluetooth.headset.action.STATE_CHANGED" />
+                <action android:name="android.bluetooth.a2dp.action.SINK_STATE_CHANGED" />
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </receiver>
