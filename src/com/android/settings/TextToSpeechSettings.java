@@ -99,6 +99,7 @@ public class TextToSpeechSettings extends PreferenceActivity implements
     private boolean mVoicesMissing = false;
 
     private TextToSpeech mTts = null;
+    private boolean mTtsStarted = false;
 
     /**
      * Request code (arbitrary value) for voice data check through
@@ -120,8 +121,7 @@ public class TextToSpeechSettings extends PreferenceActivity implements
         setVolumeControlStream(TextToSpeech.Engine.DEFAULT_STREAM);
 
         mEnableDemo = false;
-        initClickers();
-        initDefaultSettings();
+        mTtsStarted = false;
 
         mTts = new TextToSpeech(this, this);
     }
@@ -130,12 +130,14 @@ public class TextToSpeechSettings extends PreferenceActivity implements
     @Override
     protected void onStart() {
         super.onStart();
-        // whenever we return to this screen, we don't know the state of the
-        // system, so we have to recheck that we can play the demo, or it must be disabled.
-        // TODO make the TTS service listen to "changes in the system", i.e. sd card un/mount
-        initClickers();
-        updateWidgetState();
-        checkVoiceData();
+        if (mTtsStarted){
+            // whenever we return to this screen, we don't know the state of the
+            // system, so we have to recheck that we can play the demo, or it must be disabled.
+            // TODO make the TTS service listen to "changes in the system", i.e. sd card un/mount
+            initClickers();
+            updateWidgetState();
+            checkVoiceData();
+        }
     }
 
 
@@ -327,7 +329,6 @@ public class TextToSpeechSettings extends PreferenceActivity implements
      */
     public void onInit(int status) {
         if (status == TextToSpeech.SUCCESS) {
-            Log.v(TAG, "TTS engine for settings screen initialized.");
             mEnableDemo = true;
             if (mDefaultLanguage == null) {
                 mDefaultLanguage = Locale.getDefault().getISO3Language();
@@ -340,6 +341,12 @@ public class TextToSpeechSettings extends PreferenceActivity implements
             }
             mTts.setLanguage(new Locale(mDefaultLanguage, mDefaultCountry, mDefaultLocVariant));
             mTts.setSpeechRate((float)(mDefaultRate/100.0f));
+            initDefaultSettings();
+            initClickers();
+            updateWidgetState();
+            checkVoiceData();
+            mTtsStarted = true;
+            Log.v(TAG, "TTS engine for settings screen initialized.");
         } else {
             Log.v(TAG, "TTS engine for settings screen failed to initialize successfully.");
             mEnableDemo = false;
