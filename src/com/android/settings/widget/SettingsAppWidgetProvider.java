@@ -30,13 +30,13 @@ import android.location.LocationManager;
 import android.net.ConnectivityManager;
 import android.net.Uri;
 import android.net.wifi.WifiManager;
+import android.os.AsyncTask;
 import android.os.IPowerManager;
 import android.os.RemoteException;
 import android.os.ServiceManager;
 import android.provider.Settings;
 import android.util.Log;
 import android.widget.RemoteViews;
-import android.widget.Toast;
 import com.android.settings.R;
 import com.android.settings.bluetooth.LocalBluetoothManager;
 
@@ -129,8 +129,7 @@ public class SettingsAppWidgetProvider extends AppWidgetProvider {
                 mDeferredStateChangeRequestNeeded = true;
             } else {
                 mInTransition = true;
-                boolean showToast = newState;  // only show Toast on the up transition
-                requestStateChange(context, newState, showToast);
+                requestStateChange(context, newState);
             }
         }
 
@@ -146,7 +145,7 @@ public class SettingsAppWidgetProvider extends AppWidgetProvider {
          *                 STATE_TURNING_OFF, STATE_UNKNOWN
          */
         protected final void setCurrentState(Context context, int newState) {
-            boolean wasInTransition = mInTransition;
+            final boolean wasInTransition = mInTransition;
             switch (newState) {
                 case STATE_DISABLED:
                     mInTransition = false;
@@ -174,7 +173,7 @@ public class SettingsAppWidgetProvider extends AppWidgetProvider {
                         Log.v(TAG, "... but intended state matches, so no changes.");
                     } else if (mIntendedState != null) {
                         mInTransition = true;
-                        requestStateChange(context, mIntendedState, false /* no toast */);
+                        requestStateChange(context, mIntendedState);
                     }
                     mDeferredStateChangeRequestNeeded = false;
                 }
@@ -197,6 +196,16 @@ public class SettingsAppWidgetProvider extends AppWidgetProvider {
          * @return STATE_ENABLED, STATE_DISABLED, or STATE_INTERMEDIATE
          */
         public final int getTriState(Context context) {
+            if (mInTransition) {
+                // If we know we just got a toggle request recently
+                // (which set mInTransition), don't even ask the
+                // underlying interface for its state.  We know we're
+                // changing.  This avoids blocking the UI thread
+                // during UI refresh post-toggle if the underlying
+                // service state accessor has coarse locking on its
+                // state (to be fixed separately).
+                return STATE_INTERMEDIATE;
+            }
             switch (getActualState(context)) {
                 case STATE_DISABLED:
                     return STATE_DISABLED;
@@ -220,8 +229,7 @@ public class SettingsAppWidgetProvider extends AppWidgetProvider {
          * Actually make the desired change to the underlying radio
          * API.
          */
-        protected abstract void requestStateChange(Context context,
-                                                   boolean desiredState, boolean withToast);
+        protected abstract void requestStateChange(Context context, boolean desiredState);
     }
 
     /**
@@ -238,26 +246,33 @@ public class SettingsAppWidgetProvider extends AppWidgetProvider {
         }
 
         @Override
-        protected void requestStateChange(Context context,
-                                          boolean desiredState, boolean withToast) {
-            WifiManager wifiManager = (WifiManager) context.getSystemService(Context.WIFI_SERVICE);
+        protected void requestStateChange(Context context, final boolean desiredState) {
+            final WifiManager wifiManager = (WifiManager) context.getSystemService(Context.WIFI_SERVICE);
             if (wifiManager == null) {
                 Log.d(TAG, "No wifiManager.");
                 return;
             }
-            if (withToast) {
-                Toast.makeText(context, R.string.gadget_toggle_wifi, Toast.LENGTH_SHORT).show();
-            }
-            /**
-             * Disable tethering if enabling Wifi
-             */
-            int wifiApState = wifiManager.getWifiApState();
-            if (desiredState && ((wifiApState == WifiManager.WIFI_AP_STATE_ENABLING) ||
-                        (wifiApState == WifiManager.WIFI_AP_STATE_ENABLED))) {
-                wifiManager.setWifiApEnabled(null, false);
-            }
 
-            wifiManager.setWifiEnabled(desiredState);
+            // Actually request the wifi change and persistent
+            // settings write off the UI thread, as it can take a
+            // user-noticeable amount of time, especially if there's
+            // disk contention.
+            new AsyncTask<Void, Void, Void>() {
+                @Override
+                protected Void doInBackground(Void... args) {
+                    /**
+                     * Disable tethering if enabling Wifi
+                     */
+                    int wifiApState = wifiManager.getWifiApState();
+                    if (desiredState && ((wifiApState == WifiManager.WIFI_AP_STATE_ENABLING) ||
+                                         (wifiApState == WifiManager.WIFI_AP_STATE_ENABLED))) {
+                        wifiManager.setWifiApEnabled(null, false);
+                    }
+
+                    wifiManager.setWifiEnabled(desiredState);
+                    return null;
+                }
+            }.execute();
         }
 
         @Override
@@ -306,17 +321,22 @@ public class SettingsAppWidgetProvider extends AppWidgetProvider {
         }
 
         @Override
-        protected void requestStateChange(Context context,
-                                          boolean desiredState, boolean withToast) {
+        protected void requestStateChange(Context context, final boolean desiredState) {
             if (sLocalBluetoothManager == null) {
                 Log.d(TAG, "No LocalBluetoothManager");
                 return;
             }
-            if (withToast) {
-                Toast.makeText(context,
-                               R.string.gadget_toggle_bluetooth, Toast.LENGTH_SHORT).show();
-            }
-            sLocalBluetoothManager.setBluetoothEnabled(desiredState);
+            // Actually request the Bluetooth change and persistent
+            // settings write off the UI thread, as it can take a
+            // user-noticeable amount of time, especially if there's
+            // disk contention.
+            new AsyncTask<Void, Void, Void>() {
+                @Override
+                protected Void doInBackground(Void... args) {
+                    sLocalBluetoothManager.setBluetoothEnabled(desiredState);
+                    return null;
+                }
+            }.execute();
         }
 
         @Override
@@ -563,6 +583,11 @@ public class SettingsAppWidgetProvider extends AppWidgetProvider {
             } else if (buttonId == BUTTON_BLUETOOTH) {
                 sBluetoothState.toggleState(context);
             }
+        } else {
+            // Don't fall-through to updating the widget.  The Intent
+            // was something unrelated or that our super class took
+            // care of.
+            return;
         }
 
         // State changes fall through
