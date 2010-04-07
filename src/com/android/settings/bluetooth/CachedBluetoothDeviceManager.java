@@ -43,7 +43,6 @@ public class CachedBluetoothDeviceManager {
     public CachedBluetoothDeviceManager(LocalBluetoothManager localManager) {
         mLocalManager = localManager;
         mCallbacks = localManager.getCallbacks();
-        readPairedDevices();
     }
 
     private synchronized boolean readPairedDevices() {
