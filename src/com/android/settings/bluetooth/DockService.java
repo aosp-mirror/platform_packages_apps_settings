@@ -87,6 +87,15 @@ public class DockService extends Service implements AlertDialog.OnMultiChoiceCli
     private static final String SHARED_PREFERENCES_KEY_DISABLE_BT =
         "disable_bt";
 
+    private static final String SHARED_PREFERENCES_KEY_CONNECT_RETRY_COUNT =
+        "connect_retry_count";
+
+    /*
+     * If disconnected unexpectedly, reconnect up to 6 times. Each profile counts
+     * as one time so it's only 3 times for both profiles on the car dock.
+     */
+    private static final int MAX_CONNECT_RETRY = 6;
+
     private static final int INVALID_STARTID = -100;
 
     // Created in OnCreate()
@@ -161,12 +170,42 @@ public class DockService extends Service implements AlertDialog.OnMultiChoiceCli
             return START_NOT_STICKY;
         }
 
+        /*
+         * This assumes that the intent sender has checked that this is a dock
+         * and that the intent is for a disconnect
+         */
+        if (BluetoothHeadset.ACTION_STATE_CHANGED.equals(intent.getAction())) {
+            BluetoothDevice disconnectedDevice = intent
+                    .getParcelableExtra(BluetoothDevice.EXTRA_DEVICE);
+
+            int retryCount = getSettingInt(SHARED_PREFERENCES_KEY_CONNECT_RETRY_COUNT, 0);
+            if (retryCount < MAX_CONNECT_RETRY) {
+                setSettingInt(SHARED_PREFERENCES_KEY_CONNECT_RETRY_COUNT, retryCount + 1);
+                handleUnexpectedDisconnect(disconnectedDevice, Profile.HEADSET, startId);
+            }
+            return START_NOT_STICKY;
+        } else if (BluetoothA2dp.ACTION_SINK_STATE_CHANGED.equals(intent.getAction())) {
+            BluetoothDevice disconnectedDevice = intent
+                    .getParcelableExtra(BluetoothDevice.EXTRA_DEVICE);
+
+            int retryCount = getSettingInt(SHARED_PREFERENCES_KEY_CONNECT_RETRY_COUNT, 0);
+            if (retryCount < MAX_CONNECT_RETRY) {
+                setSettingInt(SHARED_PREFERENCES_KEY_CONNECT_RETRY_COUNT, retryCount + 1);
+                handleUnexpectedDisconnect(disconnectedDevice, Profile.A2DP, startId);
+            }
+            return START_NOT_STICKY;
+        }
+
         Message msg = parseIntent(intent);
         if (msg == null) {
             // Bad intent
             if (DEBUG) Log.d(TAG, "START_NOT_STICKY - Bad intent.");
             DockEventReceiver.finishStartingService(this, startId);
             return START_NOT_STICKY;
+        }
+
+        if (msg.what == MSG_TYPE_DOCKED) {
+            removeSetting(SHARED_PREFERENCES_KEY_CONNECT_RETRY_COUNT);
         }
 
         msg.arg2 = startId;
@@ -248,10 +287,10 @@ public class DockService extends Service implements AlertDialog.OnMultiChoiceCli
 
                 if (DEBUG) {
                     Log.d(TAG, "DISABLE_BT_WHEN_UNDOCKED = "
-                            + getSetting(SHARED_PREFERENCES_KEY_DISABLE_BT_WHEN_UNDOCKED));
+                            + getSettingBool(SHARED_PREFERENCES_KEY_DISABLE_BT_WHEN_UNDOCKED));
                 }
 
-                if (getSetting(SHARED_PREFERENCES_KEY_DISABLE_BT_WHEN_UNDOCKED)) {
+                if (getSettingBool(SHARED_PREFERENCES_KEY_DISABLE_BT_WHEN_UNDOCKED)) {
                     // BT was disabled when we first docked
                     if (!hasOtherConnectedDevices(device)) {
                         if(DEBUG) Log.d(TAG, "QUEUED BT DISABLE");
@@ -280,7 +319,7 @@ public class DockService extends Service implements AlertDialog.OnMultiChoiceCli
                     removeSetting(SHARED_PREFERENCES_KEY_DISABLE_BT_WHEN_UNDOCKED);
                 } else {
                     // disable() returned an error. Persist a flag to disable BT later
-                    setSetting(SHARED_PREFERENCES_KEY_DISABLE_BT, true);
+                    setSettingBool(SHARED_PREFERENCES_KEY_DISABLE_BT, true);
                     mPendingTurnOffStartId = startId;
                     deferFinishCall = true;
                     if(DEBUG) Log.d(TAG, "disable failed. try again later " + startId);
@@ -509,7 +548,7 @@ public class DockService extends Service implements AlertDialog.OnMultiChoiceCli
                 } else {
                     if (DEBUG) {
                         Log.d(TAG, "A DISABLE_BT_WHEN_UNDOCKED = "
-                                + getSetting(SHARED_PREFERENCES_KEY_DISABLE_BT_WHEN_UNDOCKED));
+                                + getSettingBool(SHARED_PREFERENCES_KEY_DISABLE_BT_WHEN_UNDOCKED));
                     }
                     // Reconnect if docked and bluetooth was enabled by user.
                     Intent i = registerReceiver(null, new IntentFilter(Intent.ACTION_DOCK_EVENT));
@@ -522,7 +561,7 @@ public class DockService extends Service implements AlertDialog.OnMultiChoiceCli
                             if (device != null) {
                                 connectIfEnabled(device);
                             }
-                        } else if (getSetting(SHARED_PREFERENCES_KEY_DISABLE_BT)
+                        } else if (getSettingBool(SHARED_PREFERENCES_KEY_DISABLE_BT)
                                 && mBtManager.getBluetoothAdapter().disable()) {
                             mPendingTurnOffStartId = startId;
                             removeSetting(SHARED_PREFERENCES_KEY_DISABLE_BT);
@@ -562,6 +601,34 @@ public class DockService extends Service implements AlertDialog.OnMultiChoiceCli
                     DockEventReceiver.finishStartingService(this, startId);
                 }
             }
+        }
+    }
+
+    private void handleUnexpectedDisconnect(BluetoothDevice disconnectedDevice, Profile profile,
+            int startId) {
+        synchronized (this) {
+            if (DEBUG) Log.d(TAG, "handling failed connect for " + disconnectedDevice);
+
+            // Reconnect if docked.
+            if (disconnectedDevice != null) {
+                // registerReceiver can't be called from a BroadcastReceiver
+                Intent i = registerReceiver(null, new IntentFilter(Intent.ACTION_DOCK_EVENT));
+                if (i != null) {
+                    int state = i.getIntExtra(Intent.EXTRA_DOCK_STATE,
+                            Intent.EXTRA_DOCK_STATE_UNDOCKED);
+                    if (state != Intent.EXTRA_DOCK_STATE_UNDOCKED) {
+                        BluetoothDevice dockedDevice = i
+                                .getParcelableExtra(BluetoothDevice.EXTRA_DEVICE);
+                        if (dockedDevice != null && dockedDevice.equals(disconnectedDevice)) {
+                            CachedBluetoothDevice cachedDevice = getCachedBluetoothDevice(mContext,
+                                    mBtManager, dockedDevice);
+                            cachedDevice.connect(profile);
+                        }
+                    }
+                }
+            }
+
+            DockEventReceiver.finishStartingService(this, startId);
         }
     }
 
@@ -612,7 +679,8 @@ public class DockService extends Service implements AlertDialog.OnMultiChoiceCli
                             mPendingDevice = device;
                             mPendingStartId = startId;
                             if (btState != BluetoothAdapter.STATE_TURNING_ON) {
-                                setSetting(SHARED_PREFERENCES_KEY_DISABLE_BT_WHEN_UNDOCKED, true);
+                                setSettingBool(SHARED_PREFERENCES_KEY_DISABLE_BT_WHEN_UNDOCKED,
+                                        true);
                             }
                             return;
                     }
@@ -676,16 +744,29 @@ public class DockService extends Service implements AlertDialog.OnMultiChoiceCli
         return cachedBluetoothDevice;
     }
 
-    private boolean getSetting(String key) {
+    private boolean getSettingBool(String key) {
         SharedPreferences sharedPref = getSharedPreferences(SHARED_PREFERENCES_NAME,
                 Context.MODE_PRIVATE);
         return sharedPref.getBoolean(key, false);
     }
 
-    private void setSetting(String key, boolean disableBt) {
+    private int getSettingInt(String key, int defaultValue) {
+        SharedPreferences sharedPref = getSharedPreferences(SHARED_PREFERENCES_NAME,
+                Context.MODE_PRIVATE);
+        return sharedPref.getInt(key, defaultValue);
+    }
+
+    private void setSettingBool(String key, boolean bool) {
         SharedPreferences.Editor editor = getSharedPreferences(SHARED_PREFERENCES_NAME,
                 Context.MODE_PRIVATE).edit();
-        editor.putBoolean(key, disableBt);
+        editor.putBoolean(key, bool);
+        editor.commit();
+    }
+
+    private void setSettingInt(String key, int value) {
+        SharedPreferences.Editor editor = getSharedPreferences(SHARED_PREFERENCES_NAME,
+                Context.MODE_PRIVATE).edit();
+        editor.putInt(key, value);
         editor.commit();
     }
 
