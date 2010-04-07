@@ -401,6 +401,28 @@ public class TextToSpeechSettings extends PreferenceActivity implements
                 ttsLanguagePref.setEntries(entries);
                 ttsLanguagePref.setEntryValues(entryValues);
                 mEnableDemo = true;
+                // Make sure that the default language can be used.
+                int languageResult = mTts.setLanguage(
+                        new Locale(mDefaultLanguage, mDefaultCountry, mDefaultLocVariant));
+                if (languageResult < TextToSpeech.LANG_AVAILABLE){
+                    Locale currentLocale = Locale.getDefault();
+                    mDefaultLanguage = currentLocale.getISO3Language();
+                    mDefaultCountry = currentLocale.getISO3Country();
+                    mDefaultLocVariant = currentLocale.getVariant();
+                    languageResult = mTts.setLanguage(
+                            new Locale(mDefaultLanguage, mDefaultCountry, mDefaultLocVariant));
+                    // If the default Locale isn't supported, just choose the first available
+                    // language so that there is at least something.
+                    if (languageResult < TextToSpeech.LANG_AVAILABLE){
+                        parseLocaleInfo(ttsLanguagePref.getEntryValues()[0].toString());
+                        mTts.setLanguage(
+                                new Locale(mDefaultLanguage, mDefaultCountry, mDefaultLocVariant));
+                    }
+                    ContentResolver resolver = getContentResolver();
+                    Settings.Secure.putString(resolver, TTS_DEFAULT_LANG, mDefaultLanguage);
+                    Settings.Secure.putString(resolver, TTS_DEFAULT_COUNTRY, mDefaultCountry);
+                    Settings.Secure.putString(resolver, TTS_DEFAULT_VARIANT, mDefaultLocVariant);
+                }
             } else {
                 mEnableDemo = false;
             }
