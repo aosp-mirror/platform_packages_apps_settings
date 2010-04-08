@@ -18,6 +18,7 @@
 
 package com.android.settings;
 
+import com.android.internal.content.PackageHelper;
 import com.android.settings.R;
 import android.app.Activity;
 import android.app.ActivityManager;
@@ -30,6 +31,7 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.IPackageDataObserver;
+import android.content.pm.IPackageManager;
 import android.content.pm.IPackageMoveObserver;
 import android.content.pm.IPackageStatsObserver;
 import android.content.pm.PackageInfo;
@@ -40,8 +42,11 @@ import android.content.pm.PackageManager.NameNotFoundException;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
+import android.os.IBinder;
 import android.os.Message;
 import android.os.RemoteException;
+import android.os.ServiceManager;
+import android.os.storage.IMountService;
 import android.text.format.Formatter;
 import android.util.Log;
 import java.util.ArrayList;
@@ -230,17 +235,36 @@ public class InstalledAppDetails extends Activity implements View.OnClickListene
             mMoveAppButton.setText(R.string.move_app);
         } else if ((mAppInfo.flags & ApplicationInfo.FLAG_EXTERNAL_STORAGE) != 0) {
             mMoveAppButton.setText(R.string.move_app_to_internal);
+            // Always let apps move to internal storage from sdcard.
             moveDisable = false;
         } else {
-            moveDisable = (mAppInfo.flags & ApplicationInfo.FLAG_FORWARD_LOCK) != 0 ||
-            (mAppInfo.flags & ApplicationInfo.FLAG_SYSTEM) != 0;
             mMoveAppButton.setText(R.string.move_app_to_sdcard);
-        }
-        if (pkgInfo != null && pkgInfo.installLocation ==
-            PackageInfo.INSTALL_LOCATION_INTERNAL_ONLY) {
-            // If an application explicitly specifies install location
-            // consider that
-            moveDisable = true;
+            if ((mAppInfo.flags & ApplicationInfo.FLAG_FORWARD_LOCK) != 0 ||
+                    (mAppInfo.flags & ApplicationInfo.FLAG_SYSTEM) != 0) {
+                moveDisable = true;
+            } else if (pkgInfo != null) {
+                if (pkgInfo.installLocation ==
+                    PackageInfo.INSTALL_LOCATION_INTERNAL_ONLY) {
+                    // If an application explicitly specifies install location
+                    // consider that
+                    moveDisable = true;
+                } else if (pkgInfo.installLocation == PackageInfo.INSTALL_LOCATION_UNSPECIFIED) {
+                    IPackageManager ipm  = IPackageManager.Stub.asInterface(
+                            ServiceManager.getService("package"));
+                    int loc;
+                    try {
+                        loc = ipm.getInstallLocation();
+                    } catch (RemoteException e) {
+                        Log.e(TAG, "Is Pakage Manager running?");
+                        return;
+                    }
+                    if (loc == PackageHelper.APP_INSTALL_EXTERNAL) {
+                        // For apps with no preference and the default value set
+                        // to install on sdcard.
+                        moveDisable = false;
+                    }
+                }
+            }
         }
         if (moveDisable) {
             mMoveAppButton.setEnabled(false);
