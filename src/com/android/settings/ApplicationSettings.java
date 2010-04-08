@@ -62,7 +62,7 @@ public class ApplicationSettings extends PreferenceActivity implements
         mInstallLocation = (ListPreference) findPreference(KEY_APP_INSTALL_LOCATION);
         // Is app default install location set?
         boolean userSetInstLocation = (Settings.System.getInt(getContentResolver(),
-                Settings.System.SET_INSTALL_LOCATION, 0) != 0);
+                Settings.Secure.SET_INSTALL_LOCATION, 0) != 0);
         if (!userSetInstLocation) {
             getPreferenceScreen().removePreference(mInstallLocation);
         } else {
@@ -86,17 +86,17 @@ public class ApplicationSettings extends PreferenceActivity implements
     protected void handleUpdateAppInstallLocation(final String value) {
         if(APP_INSTALL_DEVICE_ID.equals(value)) {
             Settings.System.putInt(getContentResolver(),
-                    Settings.System.DEFAULT_INSTALL_LOCATION, APP_INSTALL_DEVICE);
+                    Settings.Secure.DEFAULT_INSTALL_LOCATION, APP_INSTALL_DEVICE);
         } else if (APP_INSTALL_SDCARD_ID.equals(value)) {
             Settings.System.putInt(getContentResolver(),
-                    Settings.System.DEFAULT_INSTALL_LOCATION, APP_INSTALL_SDCARD);
+                    Settings.Secure.DEFAULT_INSTALL_LOCATION, APP_INSTALL_SDCARD);
         } else if (APP_INSTALL_AUTO_ID.equals(value)) {
             Settings.System.putInt(getContentResolver(),
-                    Settings.System.DEFAULT_INSTALL_LOCATION, APP_INSTALL_AUTO);
+                    Settings.Secure.DEFAULT_INSTALL_LOCATION, APP_INSTALL_AUTO);
         } else {
             // Should not happen, default to prompt...
             Settings.System.putInt(getContentResolver(),
-                    Settings.System.DEFAULT_INSTALL_LOCATION, APP_INSTALL_AUTO);
+                    Settings.Secure.DEFAULT_INSTALL_LOCATION, APP_INSTALL_AUTO);
         }
         mInstallLocation.setValue(value);
     }
@@ -143,7 +143,7 @@ public class ApplicationSettings extends PreferenceActivity implements
 
     private String getAppInstallLocation() {
         int selectedLocation = Settings.System.getInt(getContentResolver(),
-                Settings.System.DEFAULT_INSTALL_LOCATION, APP_INSTALL_AUTO);
+                Settings.Secure.DEFAULT_INSTALL_LOCATION, APP_INSTALL_AUTO);
         if (selectedLocation == APP_INSTALL_DEVICE) {
             return APP_INSTALL_DEVICE_ID;
         } else if (selectedLocation == APP_INSTALL_SDCARD) {
