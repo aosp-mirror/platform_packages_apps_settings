@@ -48,6 +48,7 @@ public class ChooseLockSettingsHelper {
                 break;
             case DevicePolicyManager.PASSWORD_QUALITY_NUMERIC:
             case DevicePolicyManager.PASSWORD_QUALITY_ALPHABETIC:
+            case DevicePolicyManager.PASSWORD_QUALITY_ALPHANUMERIC:
                 launched = confirmPassword(request);
                 break;
         }
