@@ -368,11 +368,10 @@ public class TextToSpeechSettings extends PreferenceActivity implements
                 updateWidgetState();
                 return;
             }
-            // TODO (clchen): Add these extras to TextToSpeech.Engine
             ArrayList<String> available =
-                    data.getStringArrayListExtra("TextToSpeech.Engine.EXTRA_AVAILABLE_VOICES");
+                    data.getStringArrayListExtra(TextToSpeech.Engine.EXTRA_AVAILABLE_VOICES);
             ArrayList<String> unavailable =
-                    data.getStringArrayListExtra("TextToSpeech.Engine.EXTRA_UNAVAILABLE_VOICES");
+                    data.getStringArrayListExtra(TextToSpeech.Engine.EXTRA_UNAVAILABLE_VOICES);
             if ((available == null) || (unavailable == null)){
                 // The CHECK_TTS_DATA activity for the plugin did not run properly;
                 // disable the preview and install controls and return.
