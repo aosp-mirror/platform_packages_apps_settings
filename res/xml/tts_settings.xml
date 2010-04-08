@@ -35,7 +35,9 @@
                 android:key="tts_default_synth"
                 android:title="@string/tts_default_synth_title"
                 android:summary="@string/tts_default_synth_summary"
-                android:persistent="false" />
+                android:persistent="false"
+                android:entries="@array/tts_engine_entries"
+                android:entryValues="@array/tts_engine_values" />
 
             <Preference
                 android:key="tts_install_data"

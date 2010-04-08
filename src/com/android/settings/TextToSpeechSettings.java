@@ -123,6 +123,11 @@ public class TextToSpeechSettings extends PreferenceActivity implements
         mEnableDemo = false;
         mTtsStarted = false;
 
+        Locale currentLocale = Locale.getDefault();
+        mDefaultLanguage = currentLocale.getISO3Language();
+        mDefaultCountry = currentLocale.getISO3Country();
+        mDefaultLocVariant = currentLocale.getVariant();
+
         mTts = new TextToSpeech(this, this);
     }
 
@@ -148,6 +153,21 @@ public class TextToSpeechSettings extends PreferenceActivity implements
             mTts.shutdown();
         }
     }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        if ((mDefaultRatePref != null) && (mDefaultRatePref.getDialog() != null)) {
+            mDefaultRatePref.getDialog().dismiss();
+        }
+        if ((mDefaultLocPref != null) && (mDefaultLocPref.getDialog() != null)) {
+            mDefaultLocPref.getDialog().dismiss();
+        }
+        if ((mDefaultSynthPref != null) && (mDefaultSynthPref.getDialog() != null)) {
+            mDefaultSynthPref.getDialog().dismiss();
+        }
+    }
+
 
 
     private void addEngineSpecificSettings() {
@@ -673,7 +693,7 @@ public class TextToSpeechSettings extends PreferenceActivity implements
 
 
     private void loadEngines() {
-        ListPreference enginesPref = (ListPreference) findPreference(KEY_TTS_DEFAULT_SYNTH);
+        mDefaultSynthPref = (ListPreference) findPreference(KEY_TTS_DEFAULT_SYNTH);
 
         // TODO (clchen): Try to see if it is possible to be more efficient here
         // and not search for plugins again.
@@ -705,16 +725,16 @@ public class TextToSpeechSettings extends PreferenceActivity implements
         CharSequence entriesArray[] = new CharSequence[entries.size()];
         CharSequence valuesArray[] = new CharSequence[values.size()];
 
-        enginesPref.setEntries(entries.toArray(entriesArray));
-        enginesPref.setEntryValues(values.toArray(valuesArray));
+        mDefaultSynthPref.setEntries(entries.toArray(entriesArray));
+        mDefaultSynthPref.setEntryValues(values.toArray(valuesArray));
 
         // Set the selected engine based on the saved preference
         String selectedEngine = Settings.Secure.getString(getContentResolver(), TTS_DEFAULT_SYNTH);
-        int selectedEngineIndex = enginesPref.findIndexOfValue(selectedEngine);
+        int selectedEngineIndex = mDefaultSynthPref.findIndexOfValue(selectedEngine);
         if (selectedEngineIndex == -1){
-            selectedEngineIndex = enginesPref.findIndexOfValue(SYSTEM_TTS);
+            selectedEngineIndex = mDefaultSynthPref.findIndexOfValue(SYSTEM_TTS);
         }
-        enginesPref.setValueIndex(selectedEngineIndex);
+        mDefaultSynthPref.setValueIndex(selectedEngineIndex);
     }
 
 }
