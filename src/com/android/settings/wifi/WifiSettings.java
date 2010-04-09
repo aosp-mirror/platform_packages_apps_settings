@@ -169,7 +169,9 @@ public class WifiSettings extends PreferenceActivity implements DialogInterface.
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case MENU_ID_SCAN:
-                mScanner.resume();
+                if (mWifiManager.isWifiEnabled()) {
+                    mScanner.resume();
+                }
                 return true;
             case MENU_ID_ADVANCED:
                 startActivity(new Intent(this, AdvancedSettings.class));
@@ -428,6 +430,10 @@ public class WifiSettings extends PreferenceActivity implements DialogInterface.
     }
 
     private void updateConnectionState(DetailedState state) {
+        /* sticky broadcasts can call this when wifi is disabled */
+        if (!mWifiManager.isWifiEnabled())
+            return;
+
         if (state == DetailedState.OBTAINING_IPADDR) {
             mScanner.pause();
         } else {
