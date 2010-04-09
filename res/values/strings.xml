@@ -514,6 +514,8 @@
     <!-- Menu item on Select time zone screen -->
     <string name="zone_list_menu_sort_by_timezone">Sort by time zone</string>
 
+    <!-- Security Settings --><skip />
+
     <!-- Main Settings screen setting option title for the item to take you the security and location screen -->
     <string name="security_settings_title">Location &amp; security</string>
     <!-- Location & security settings screen title -->
@@ -525,23 +527,49 @@
     <!-- In the security screen, the header title for settings related to  Passwords-->
     <string name="security_passwords_title">Passwords</string>
 
+    <!-- Unlock Picker Settings --><skip />
 
-    <!-- Unlock settings --><skip />
+    <!-- Security Picker --><skip />
+    <!--  Title for security picker to choose the unlock method: None/Pattern/PIN/Password -->
+    <string name="lock_settings_picker_title">Screen unlock security</string>
 
-    <!-- Title for preference that will guide the user through creating an unlock pattern -->
-    <string name="unlock_set_unlock_pattern_title">Set unlock pattern</string>
+    <!--  Main Security lock settings --><skip />
+    <!--  Title for PreferenceScreen to launch picker for security method when there is none -->
+    <string name="unlock_set_unlock_launch_picker_title">Set up screen lock</string>
+
+    <!--  Summary for PreferenceScreen to launch picker for security method when there is none -->
+    <string name="unlock_set_unlock_launch_picker_summary">Lock screen with a pattern, PIN, or password</string>
+
+    <!--  Title for PreferenceScreen to change security method: None/Pattern/PIN/Password  -->
+    <string name="unlock_set_unlock_launch_picker_change_title">Change screen lock</string>
+
+    <!--  Summary for PreferenceScreen to changeecurity method: None/Pattern/PIN/Password  -->
+    <string name="unlock_set_unlock_launch_picker_change_summary">Change or disable pattern, PIN, or password security</string>
+
+
+    <!-- Title for preference that disables unlock security -->
+    <string name="unlock_set_unlock_none_title">None</string>
+    <!-- Summary for preference that disables unlock security -->
+    <string name="unlock_set_unlock_none_summary">Disable screen unlock security</string>
+
+    <!-- Title for preference that guides the user through creating an unlock pattern -->
+    <string name="unlock_set_unlock_pattern_title">Pattern</string>
     <!-- Summary for preference that guides the user through creating an unlock pattern -->
-    <string name="unlock_set_unlock_pattern_summary">Must draw pattern to unlock screen</string>
+    <string name="unlock_set_unlock_pattern_summary">Draw pattern to unlock screen</string>
 
     <!-- Title for preference that guides the user through creating an unlock PIN (Personal Identification Number)  -->
-    <string name="unlock_set_unlock_pin_title">Set unlock PIN</string>
+    <string name="unlock_set_unlock_pin_title">PIN</string>
     <!-- Summary for preference that guides the user through creating an unlock PIN (Personal Identification Number)  -->
-    <string name="unlock_set_unlock_pin_summary">Must use a numeric PIN to unlock screen</string>
+    <string name="unlock_set_unlock_pin_summary">Enter a numeric PIN to unlock screen</string>
 
     <!-- Title for preference that guides the user through creating an unlock password -->
-    <string name="unlock_set_unlock_password_title">Set unlock password</string>
+    <string name="unlock_set_unlock_password_title">Password</string>
     <!-- Title for preference that guides the user through creating an unlock password -->
-    <string name="unlock_set_unlock_password_summary">Must use a password to unlock screen</string>
+    <string name="unlock_set_unlock_password_summary">Enter a password to unlock screen</string>
+
+    <!-- Summary for preference that has been disabled by DevicePolicyAdmin -->
+    <string name="unlock_set_unlock_disabled_summary">Disable by device policy</string>
+
 
     <!-- Title for option to turn of password/pin/pattern unlock. -->
     <string name="unlock_disable_lock_title">Turn off screen lock</string>
