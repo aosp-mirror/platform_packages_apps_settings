@@ -25,7 +25,6 @@ import android.view.View;
 import android.widget.ImageView;
 
 public class ChooseLockPatternExample extends Activity implements View.OnClickListener {
-    private static final int REQUESTCODE_CHOOSE = 1;
     private static final long START_DELAY = 1000;
     protected static final String TAG = "Settings";
     private View mNextButton;
@@ -38,26 +37,26 @@ public class ChooseLockPatternExample extends Activity implements View.OnClickLi
             startAnimation(mAnimation);
         }
     };
-   
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.choose_lock_pattern_example);
         initViews();
     }
-    
+
     @Override
     protected void onResume() {
         super.onResume();
         mHandler.postDelayed(mRunnable, START_DELAY);
     }
-    
+
     @Override
     protected void onPause() {
         super.onPause();
         stopAnimation(mAnimation);
     }
-    
+
     public void onClick(View v) {
         if (v == mSkipButton) {
             // Canceling, so finish all
@@ -66,37 +65,31 @@ public class ChooseLockPatternExample extends Activity implements View.OnClickLi
         } else if (v == mNextButton) {
             stopAnimation(mAnimation);
             Intent intent = new Intent(this, ChooseLockPattern.class);
-            startActivityForResult(intent, REQUESTCODE_CHOOSE);
-        }
-    }
-    
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if (requestCode == REQUESTCODE_CHOOSE && resultCode == ChooseLockPattern.RESULT_FINISHED) {
-            setResult(resultCode);
+            intent.addFlags(Intent.FLAG_ACTIVITY_FORWARD_RESULT);
+            startActivity(intent);
             finish();
         }
     }
-    
+
     private void initViews() {
         mNextButton = findViewById(R.id.next_button);
         mNextButton.setOnClickListener(this);
-        
+
         mSkipButton = findViewById(R.id.skip_button);
         mSkipButton.setOnClickListener(this);
-        
+
         mImageView = (ImageView) findViewById(R.id.lock_anim);
         mImageView.setBackgroundResource(R.drawable.lock_anim);
         mImageView.setOnClickListener(this);
         mAnimation = (AnimationDrawable) mImageView.getBackground();
     }
-    
+
     protected void startAnimation(final AnimationDrawable animation) {
         if (animation != null && !animation.isRunning()) {
             animation.run();
         }
     }
-   
+
     protected void stopAnimation(final AnimationDrawable animation) {
         if (animation != null && animation.isRunning()) animation.stop();
     }

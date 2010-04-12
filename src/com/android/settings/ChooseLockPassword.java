@@ -104,6 +104,8 @@ public class ChooseLockPassword extends Activity implements OnClickListener, OnE
         mRequestedQuality = getIntent().getIntExtra(LockPatternUtils.PASSWORD_TYPE_KEY, mRequestedQuality);
         mPasswordMinLength = getIntent().getIntExtra(PASSWORD_MIN_KEY, mPasswordMinLength);
         mPasswordMaxLength = getIntent().getIntExtra(PASSWORD_MAX_KEY, mPasswordMaxLength);
+
+        final boolean confirmCredentials = getIntent().getBooleanExtra("confirm_credentials", true);
         int minMode = mLockPatternUtils.getRequestedPasswordQuality();
         if (mRequestedQuality < minMode) {
             mRequestedQuality = minMode;
@@ -116,7 +118,9 @@ public class ChooseLockPassword extends Activity implements OnClickListener, OnE
         mChooseLockSettingsHelper = new ChooseLockSettingsHelper(this);
         if (savedInstanceState == null) {
             updateStage(Stage.Introduction);
-            mChooseLockSettingsHelper.launchConfirmationActivity(CONFIRM_EXISTING_REQUEST);
+            if (confirmCredentials) {
+                mChooseLockSettingsHelper.launchConfirmationActivity(CONFIRM_EXISTING_REQUEST);
+            }
         }
     }
 
