@@ -280,11 +280,19 @@ public class ChooseLockPattern extends Activity implements View.OnClickListener{
                 R.id.topLayout);
         topLayout.setDefaultTouchRecepient(mLockPatternView);
 
+        final boolean confirmCredentials = getIntent().getBooleanExtra("confirm_credentials", true);
+
         if (savedInstanceState == null) {
-            // first launch. As a security measure, we're in NeedToConfirm mode until we know
-            // there isn't an existing password or the user confirms their password.
-            updateStage(Stage.NeedToConfirm);
-            if (!mChooseLockSettingsHelper.launchConfirmationActivity(CONFIRM_EXISTING_REQUEST)) {
+            if (confirmCredentials) {
+                // first launch. As a security measure, we're in NeedToConfirm mode until we know
+                // there isn't an existing password or the user confirms their password.
+                updateStage(Stage.NeedToConfirm);
+                boolean launchedConfirmationActivity =
+                    mChooseLockSettingsHelper.launchConfirmationActivity(CONFIRM_EXISTING_REQUEST);
+                if (!launchedConfirmationActivity) {
+                    updateStage(Stage.Introduction);
+                }
+            } else {
                 updateStage(Stage.Introduction);
             }
         } else {
