@@ -637,8 +637,8 @@ public class TextToSpeechSettings extends PreferenceActivity implements
         // demo string (at this stage there is a default language pref)
         ContentResolver resolver = getContentResolver();
         mDefaultLanguage = Settings.Secure.getString(resolver, TTS_DEFAULT_LANG);
-        mDefaultCountry = Settings.Secure.getString(resolver, KEY_TTS_DEFAULT_COUNTRY);
-        mDefaultLocVariant = Settings.Secure.getString(resolver, KEY_TTS_DEFAULT_VARIANT);
+        mDefaultCountry = Settings.Secure.getString(resolver, TTS_DEFAULT_COUNTRY);
+        mDefaultLocVariant = Settings.Secure.getString(resolver, TTS_DEFAULT_VARIANT);
 
         // update the demo string
         mDemoStringIndex = mDefaultLocPref.findIndexOfValue(mDefaultLanguage + LOCALE_DELIMITER
