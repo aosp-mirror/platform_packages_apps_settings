@@ -408,7 +408,17 @@ public class TextToSpeechSettings extends PreferenceActivity implements
                         (ListPreference) findPreference("tts_default_lang");
                 CharSequence[] entries = new CharSequence[available.size()];
                 CharSequence[] entryValues = new CharSequence[available.size()];
-                for (int i=0; i<available.size(); i++){
+                int selectedLanguageIndex = -1;
+                String selectedLanguagePref = mDefaultLanguage;
+                if (mDefaultCountry.length() > 0) {
+                    selectedLanguagePref = selectedLanguagePref + LOCALE_DELIMITER +
+                            mDefaultCountry;
+                }
+                if (mDefaultLocVariant.length() > 0) {
+                    selectedLanguagePref = selectedLanguagePref + LOCALE_DELIMITER +
+                            mDefaultLocVariant;
+                }
+                for (int i = 0; i < available.size(); i++){
                     String[] langCountryVariant = available.get(i).split("-");
                     Locale loc = null;
                     if (langCountryVariant.length == 1){
@@ -422,10 +432,16 @@ public class TextToSpeechSettings extends PreferenceActivity implements
                     if (loc != null){
                         entries[i] = loc.getDisplayName();
                         entryValues[i] = available.get(i);
+                        if (entryValues[i].equals(selectedLanguagePref)){
+                            selectedLanguageIndex = i;
+                        }
                     }
                 }
                 ttsLanguagePref.setEntries(entries);
                 ttsLanguagePref.setEntryValues(entryValues);
+                if (selectedLanguageIndex > -1) {
+                    ttsLanguagePref.setValueIndex(selectedLanguageIndex);
+                }
                 mEnableDemo = true;
                 // Make sure that the default language can be used.
                 int languageResult = mTts.setLanguage(
