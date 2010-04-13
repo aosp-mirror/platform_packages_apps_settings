@@ -418,7 +418,7 @@ public class TextToSpeechSettings extends PreferenceActivity implements
                     selectedLanguagePref = selectedLanguagePref + LOCALE_DELIMITER +
                             mDefaultLocVariant;
                 }
-                for (int i = 0; i < available.size(); i++){
+                for (int i = 0; i < available.size(); i++) {
                     String[] langCountryVariant = available.get(i).split("-");
                     Locale loc = null;
                     if (langCountryVariant.length == 1){
@@ -432,7 +432,7 @@ public class TextToSpeechSettings extends PreferenceActivity implements
                     if (loc != null){
                         entries[i] = loc.getDisplayName();
                         entryValues[i] = available.get(i);
-                        if (entryValues[i].equals(selectedLanguagePref)){
+                        if (entryValues[i].equals(selectedLanguagePref)) {
                             selectedLanguageIndex = i;
                         }
                     }
@@ -669,8 +669,20 @@ public class TextToSpeechSettings extends PreferenceActivity implements
      * Returns whether there is a default language in the TTS settings.
      */
     private boolean hasLangPref() {
-        String language = Settings.Secure.getString(getContentResolver(), TTS_DEFAULT_LANG);
-        return (language != null);
+        ContentResolver resolver = getContentResolver();
+        String language = Settings.Secure.getString(resolver, TTS_DEFAULT_LANG);
+        if ((language == null) || (language.length() < 1)) {
+            return false;
+        }
+        String country = Settings.Secure.getString(resolver, TTS_DEFAULT_COUNTRY);
+        if (country == null) {
+            return false;
+        }
+        String variant = Settings.Secure.getString(resolver, TTS_DEFAULT_VARIANT);
+        if (variant == null) {
+            return false;
+        }
+        return true;
     }
 
     /**
