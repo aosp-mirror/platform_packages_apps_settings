@@ -491,8 +491,7 @@
             android:theme="@android:style/Theme.NoTitleBar">
         </activity>
 
-        <activity android:name="ChooseLockGeneric"
-                android:theme="@android:style/Theme.NoDisplay">
+        <activity android:name="ChooseLockGeneric">
             <intent-filter>
                 <action android:name="android.app.action.SET_NEW_PASSWORD" />
                 <category android:name="android.intent.category.DEFAULT" />
@@ -500,12 +499,14 @@
         </activity>
 
         <activity android:name="ChooseLockPattern"
-                android:label="@string/lockpattern_change_lock_pattern_label">
+                android:label="@string/lockpattern_change_lock_pattern_label"
+                android:exported="false">
         </activity>
 
         <activity android:name="ChooseLockPassword"
                 android:label="@string/lockpattern_change_lock_pin_label"
-            android:theme="@android:style/Theme.NoTitleBar">
+            android:theme="@android:style/Theme.NoTitleBar"
+            android:exported="false">
         </activity>
 
         <activity android:name="ChooseLockPatternTutorial"
