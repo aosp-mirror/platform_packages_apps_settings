@@ -74,9 +74,9 @@ public class DisplaySettings extends PreferenceActivity implements
     }
 
     private void disableUnusableTimeouts(ListPreference screenTimeoutPreference) {
-        DevicePolicyManager dpm =
+        final DevicePolicyManager dpm =
             (DevicePolicyManager) getSystemService(Context.DEVICE_POLICY_SERVICE);
-        long maxTimeout = dpm != null ? dpm.getMaximumTimeToLock(null) : 0;
+        final long maxTimeout = dpm != null ? dpm.getMaximumTimeToLock(null) : 0;
         if (maxTimeout == 0) {
             return; // policy not enforced
         }
@@ -96,7 +96,14 @@ public class DisplaySettings extends PreferenceActivity implements
                     revisedEntries.toArray(new CharSequence[revisedEntries.size()]));
             screenTimeoutPreference.setEntryValues(
                     revisedValues.toArray(new CharSequence[revisedValues.size()]));
-            screenTimeoutPreference.setValue(String.valueOf(maxTimeout));
+            final int userPreference = Integer.valueOf(screenTimeoutPreference.getValue());
+            if (userPreference <= maxTimeout) {
+                screenTimeoutPreference.setValue(String.valueOf(userPreference));
+            } else {
+                // There will be no highlighted selection since nothing in the list matches
+                // maxTimeout. The user can still select anything less than maxTimeout.
+                // TODO: maybe append maxTimeout to the list and mark selected.
+            }
         }
         screenTimeoutPreference.setEnabled(revisedEntries.size() > 0);
     }
