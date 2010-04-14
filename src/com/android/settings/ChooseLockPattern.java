@@ -288,7 +288,8 @@ public class ChooseLockPattern extends Activity implements View.OnClickListener{
                 // there isn't an existing password or the user confirms their password.
                 updateStage(Stage.NeedToConfirm);
                 boolean launchedConfirmationActivity =
-                    mChooseLockSettingsHelper.launchConfirmationActivity(CONFIRM_EXISTING_REQUEST);
+                    mChooseLockSettingsHelper.launchConfirmationActivity(CONFIRM_EXISTING_REQUEST,
+                            null, null);
                 if (!launchedConfirmationActivity) {
                     updateStage(Stage.Introduction);
                 }
