@@ -54,7 +54,7 @@ public class ChooseLockGeneric extends PreferenceActivity {
 
         if (!mPasswordConfirmed) {
             ChooseLockSettingsHelper helper = new ChooseLockSettingsHelper(this);
-            if (!helper.launchConfirmationActivity(CONFIRM_EXISTING_REQUEST)) {
+            if (!helper.launchConfirmationActivity(CONFIRM_EXISTING_REQUEST, null, null)) {
                 mPasswordConfirmed = true; // no password set, so no need to confirm
                 updatePreferencesOrFinish();
             }

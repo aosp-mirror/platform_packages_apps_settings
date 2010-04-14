@@ -37,18 +37,22 @@ public class ChooseLockSettingsHelper {
 
     /**
      * If a pattern, password or PIN exists, prompt the user before allowing them to change it.
+     * @param message optional message to display about the action about to be done
+     * @param details optional detail message to display
      * @return true if one exists and we launched an activity to confirm it
      * @see #onActivityResult(int, int, android.content.Intent)
      */
-    protected boolean launchConfirmationActivity(int request) {
+    protected boolean launchConfirmationActivity(int request,
+            CharSequence message, CharSequence details) {
         boolean launched = false;
         switch (mLockPatternUtils.getKeyguardStoredPasswordQuality()) {
             case DevicePolicyManager.PASSWORD_QUALITY_SOMETHING:
-                launched = confirmPattern(request);
+                launched = confirmPattern(request, message, details);
                 break;
             case DevicePolicyManager.PASSWORD_QUALITY_NUMERIC:
             case DevicePolicyManager.PASSWORD_QUALITY_ALPHABETIC:
             case DevicePolicyManager.PASSWORD_QUALITY_ALPHANUMERIC:
+                // TODO: update UI layout for ConfirmPassword to show message and details
                 launched = confirmPassword(request);
                 break;
         }
@@ -57,14 +61,19 @@ public class ChooseLockSettingsHelper {
 
     /**
      * Launch screen to confirm the existing lock pattern.
+     * @param message shown in header of ConfirmLockPattern if not null
+     * @param details shown in footer of ConfirmLockPattern if not null
      * @see #onActivityResult(int, int, android.content.Intent)
      * @return true if we launched an activity to confirm pattern
      */
-    private boolean confirmPattern(int request) {
+    private boolean confirmPattern(int request, CharSequence message, CharSequence details) {
         if (!mLockPatternUtils.isLockPatternEnabled() || !mLockPatternUtils.savedPatternExists()) {
             return false;
         }
         final Intent intent = new Intent();
+        // supply header and footer text in the intent
+        intent.putExtra(ConfirmLockPattern.HEADER_TEXT, message);
+        intent.putExtra(ConfirmLockPattern.FOOTER_TEXT, details);
         intent.setClassName("com.android.settings", "com.android.settings.ConfirmLockPattern");
         mActivity.startActivityForResult(intent, request);
         return true;
