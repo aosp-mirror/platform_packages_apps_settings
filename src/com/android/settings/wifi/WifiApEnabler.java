@@ -88,12 +88,23 @@ public class WifiApEnabler implements Preference.OnPreferenceChangeListener {
 
     public void resume() {
         mContext.registerReceiver(mReceiver, mIntentFilter);
+        enableWifiCheckBox();
         mCheckBox.setOnPreferenceChangeListener(this);
     }
 
     public void pause() {
         mContext.unregisterReceiver(mReceiver);
         mCheckBox.setOnPreferenceChangeListener(null);
+    }
+
+    private void enableWifiCheckBox() {
+        boolean isAirplaneMode = Settings.System.getInt(mContext.getContentResolver(),
+                Settings.System.AIRPLANE_MODE_ON, 0) != 0;
+        if(!isAirplaneMode) {
+            mCheckBox.setEnabled(true);
+        } else {
+            mCheckBox.setEnabled(false);
+        }
     }
 
     public boolean onPreferenceChange(Preference preference, Object value) {
@@ -182,6 +193,7 @@ public class WifiApEnabler implements Preference.OnPreferenceChangeListener {
                  * broadcast notice
                  */
                 mCheckBox.setChecked(true);
+                /* Doesnt need the airplane check */
                 mCheckBox.setEnabled(true);
                 break;
             case WifiManager.WIFI_AP_STATE_DISABLING:
@@ -191,12 +203,12 @@ public class WifiApEnabler implements Preference.OnPreferenceChangeListener {
             case WifiManager.WIFI_AP_STATE_DISABLED:
                 mCheckBox.setChecked(false);
                 mCheckBox.setSummary(mOriginalSummary);
-                mCheckBox.setEnabled(true);
+                enableWifiCheckBox();
                 break;
             default:
                 mCheckBox.setChecked(false);
                 mCheckBox.setSummary(R.string.wifi_error);
-                mCheckBox.setEnabled(true);
+                enableWifiCheckBox();
         }
     }
 }
