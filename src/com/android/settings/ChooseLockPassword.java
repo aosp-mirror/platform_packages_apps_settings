@@ -119,7 +119,8 @@ public class ChooseLockPassword extends Activity implements OnClickListener, OnE
         if (savedInstanceState == null) {
             updateStage(Stage.Introduction);
             if (confirmCredentials) {
-                mChooseLockSettingsHelper.launchConfirmationActivity(CONFIRM_EXISTING_REQUEST);
+                mChooseLockSettingsHelper.launchConfirmationActivity(CONFIRM_EXISTING_REQUEST,
+                        null, null);
             }
         }
     }
