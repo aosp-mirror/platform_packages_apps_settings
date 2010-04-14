@@ -239,15 +239,11 @@ public class InstalledAppDetails extends Activity implements View.OnClickListene
             moveDisable = false;
         } else {
             mMoveAppButton.setText(R.string.move_app_to_sdcard);
-            if ((mAppInfo.flags & ApplicationInfo.FLAG_FORWARD_LOCK) != 0 ||
-                    (mAppInfo.flags & ApplicationInfo.FLAG_SYSTEM) != 0) {
-                moveDisable = true;
-            } else if (pkgInfo != null) {
-                if (pkgInfo.installLocation ==
-                    PackageInfo.INSTALL_LOCATION_INTERNAL_ONLY) {
-                    // If an application explicitly specifies install location
-                    // consider that
-                    moveDisable = true;
+            if ((mAppInfo.flags & ApplicationInfo.FLAG_FORWARD_LOCK) == 0 &&
+                    (mAppInfo.flags & ApplicationInfo.FLAG_SYSTEM) == 0 &&
+                    pkgInfo != null) {
+                if (pkgInfo.installLocation == PackageInfo.INSTALL_LOCATION_PREFER_EXTERNAL) {
+                    moveDisable = false;
                 } else if (pkgInfo.installLocation == PackageInfo.INSTALL_LOCATION_UNSPECIFIED) {
                     IPackageManager ipm  = IPackageManager.Stub.asInterface(
                             ServiceManager.getService("package"));
