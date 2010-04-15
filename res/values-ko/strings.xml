@@ -236,12 +236,34 @@
     <string name="security_settings_summary" msgid="967393342537986570">"내 위치, 화면 잠금해제, SIM 카드 잠금, 자격증명 저장소 잠금 설정"</string>
     <string name="cdma_security_settings_summary" msgid="6068799952798901542">"내 위치, 화면 잠금해제, 자격증명 저장소 잠금 설정"</string>
     <string name="security_passwords_title" msgid="2930627259125138363">"비밀번호"</string>
-    <string name="unlock_set_unlock_pattern_title" msgid="1896502750816432974">"잠금해제 패턴 설정"</string>
-    <string name="unlock_set_unlock_pattern_summary" msgid="1235339327020445576">"화면 잠금을 해제하려면 패턴을 그려야 합니다."</string>
-    <string name="unlock_set_unlock_pin_title" msgid="2206721045699671063">"잠금해제 PIN 설정"</string>
-    <string name="unlock_set_unlock_pin_summary" msgid="3898840802187521463">"화면 잠금을 해제하려면 숫자 PIN을 사용해야 합니다."</string>
-    <string name="unlock_set_unlock_password_title" msgid="2410408982973923603">"잠금해제 비밀번호 설정"</string>
-    <string name="unlock_set_unlock_password_summary" msgid="4711043487823726994">"화면 잠금을 해제하려면 비밀번호를 사용해야 함"</string>
+    <!-- no translation found for lock_settings_picker_title (3973555216065628262) -->
+    <skip />
+    <!-- no translation found for unlock_set_unlock_launch_picker_title (1129684221223017902) -->
+    <skip />
+    <!-- no translation found for unlock_set_unlock_launch_picker_summary (1667332113134720845) -->
+    <skip />
+    <!-- no translation found for unlock_set_unlock_launch_picker_change_title (6987228635944678726) -->
+    <skip />
+    <!-- no translation found for unlock_set_unlock_launch_picker_change_summary (2790960639554590668) -->
+    <skip />
+    <!-- no translation found for unlock_set_unlock_none_title (3760684669884671990) -->
+    <skip />
+    <!-- no translation found for unlock_set_unlock_none_summary (2658550480388272618) -->
+    <skip />
+    <!-- no translation found for unlock_set_unlock_pattern_title (2912067603917311700) -->
+    <skip />
+    <!-- no translation found for unlock_set_unlock_pattern_summary (3018395214738645405) -->
+    <skip />
+    <!-- no translation found for unlock_set_unlock_pin_title (5846029709462329515) -->
+    <skip />
+    <!-- no translation found for unlock_set_unlock_pin_summary (4131169672844263316) -->
+    <skip />
+    <!-- no translation found for unlock_set_unlock_password_title (8775603825675090937) -->
+    <skip />
+    <!-- no translation found for unlock_set_unlock_password_summary (4623254789833899286) -->
+    <skip />
+    <!-- no translation found for unlock_set_unlock_disabled_summary (736557879526940324) -->
+    <skip />
     <string name="unlock_disable_lock_title" msgid="1427036227416979120">"화면 잠금 사용 안함"</string>
     <string name="unlock_disable_lock_pattern_summary" msgid="6801602880568869201">"잠금해제 패턴 삭제"</string>
     <string name="unlock_disable_lock_pin_summary" msgid="8856842745366993387">"잠금 해제 PIN 삭제"</string>
@@ -257,12 +279,9 @@
     <string name="lockpassword_pin_too_long" msgid="6290317580664119373">"PIN은 %d자리 이하여야 합니다."</string>
     <string name="lockpassword_pin_contains_non_digits" msgid="3379277100136600632">"PIN에는 숫자 0-9만 사용할 수 있습니다."</string>
     <string name="lockpassword_illegal_character" msgid="6204396794254688549">"비밀번호에 잘못된 글자가 들어 있습니다."</string>
-    <!-- no translation found for lockpassword_password_requires_alpha (5668524505560400449) -->
-    <skip />
-    <!-- no translation found for lockpassword_password_requires_digit (4840579514154254907) -->
-    <skip />
-    <!-- no translation found for lockpassword_password_requires_symbol (4140602725865312078) -->
-    <skip />
+    <string name="lockpassword_password_requires_alpha" msgid="5668524505560400449">"비밀번호에는 적어도 하나의 문자가 포함되어야 합니다."</string>
+    <string name="lockpassword_password_requires_digit" msgid="4840579514154254907">"비밀번호에는 적어도 하나의 숫자가 포함되어야 합니다."</string>
+    <string name="lockpassword_password_requires_symbol" msgid="4140602725865312078">"비밀번호에는 적어도 하나의 기호가 포함되어야 합니다."</string>
     <string name="lockpassword_ok_label" msgid="313822574062553672">"확인"</string>
     <string name="lockpassword_cancel_label" msgid="8818529276331121899">"취소"</string>
     <string name="device_admin_title" msgid="3562216873644263804">"기기 관리"</string>
@@ -526,16 +545,11 @@
     <string name="sd_format_summary" msgid="6616491027883134004">"SD 카드 포맷(지우기)"</string>
     <string name="sd_unavailable" msgid="8580107589533213904">"사용할 수 없음"</string>
     <string name="read_only" msgid="6702420168629076340">" (읽기전용)"</string>
-    <!-- no translation found for dlg_confirm_unmount_title (8612140627310646730) -->
-    <skip />
-    <!-- no translation found for dlg_confirm_unmount_text (5851214273718817727) -->
-    <skip />
-    <!-- no translation found for dlg_error_unmount_title (4004106918266783081) -->
-    <skip />
-    <!-- no translation found for dlg_error_unmount_text (9188972789897713180) -->
-    <skip />
-    <!-- no translation found for unmount_inform_text (3213378327712151498) -->
-    <skip />
+    <string name="dlg_confirm_unmount_title" msgid="8612140627310646730">"SD 카드 마운트 해제"</string>
+    <string name="dlg_confirm_unmount_text" msgid="5851214273718817727">"SD 카드를 마운트 해제하면 사용 중인 일부 응용프로그램이 중지되고 SD 카드를 다시 마운트할 때까지 사용할 수 없게 됩니다."</string>
+    <string name="dlg_error_unmount_title" msgid="4004106918266783081">"SD 카드 마운트 해제 실패\n"</string>
+    <string name="dlg_error_unmount_text" msgid="9188972789897713180">"SD 카드를 마운트 해제할 수 없습니다. 나중에 다시 시도하세요."</string>
+    <string name="unmount_inform_text" msgid="3213378327712151498">"SD 카드가 마운트 해제됩니다. 알림 영역에서 상태를 확인하세요."</string>
     <string name="sd_ejecting_title" msgid="8824572198034365468">"마운트 해제 중"</string>
     <string name="sd_ejecting_summary" msgid="2028753069184908491">"마운트 해제 중"</string>
     <string name="battery_status_title" msgid="9159414319574976203">"배터리 상태"</string>
@@ -727,28 +741,18 @@
     <string name="empty_list_msg" msgid="2901049162265094971">"타사 응용프로그램을 설치하지 않았습니다."</string>
     <string name="version_text" msgid="9189073826278676425">"버전 <xliff:g id="VERSION_NUM">%1$s</xliff:g>"</string>
     <string name="move_app" msgid="5042838441401731346">"이동"</string>
-    <!-- no translation found for move_app_to_internal (3895430471913858185) -->
-    <skip />
-    <!-- no translation found for move_app_to_sdcard (1143379049903056407) -->
-    <skip />
+    <string name="move_app_to_internal" msgid="3895430471913858185">"휴대전화로 이동"</string>
+    <string name="move_app_to_sdcard" msgid="1143379049903056407">"SD 카드로 이동"</string>
     <string name="moving" msgid="6431016143218876491">"이동하는 중"</string>
-    <!-- no translation found for insufficient_storage (8566913062094452962) -->
-    <skip />
-    <!-- no translation found for does_not_exist (837163572898468245) -->
-    <skip />
-    <!-- no translation found for app_forward_locked (5747805144210389585) -->
-    <skip />
-    <!-- no translation found for invalid_location (4934491353200240499) -->
-    <skip />
-    <!-- no translation found for system_package (1030561474413022831) -->
-    <skip />
-    <!-- no translation found for force_stop_dlg_title (4289453224368188476) -->
-    <skip />
+    <string name="insufficient_storage" msgid="8566913062094452962">"남은 저장공간이 부족합니다."</string>
+    <string name="does_not_exist" msgid="837163572898468245">"응용프로그램이 없습니다."</string>
+    <string name="app_forward_locked" msgid="5747805144210389585">"복제가 금지된 응용프로그램입니다."</string>
+    <string name="invalid_location" msgid="4934491353200240499">"지정된 설치 위치가 잘못되었습니다."</string>
+    <string name="system_package" msgid="1030561474413022831">"외부 미디어에 시스템 업데이트를 설치할 수 없습니다. "</string>
+    <string name="force_stop_dlg_title" msgid="4289453224368188476">"강제 종료"</string>
     <string name="force_stop_dlg_text" msgid="3381302041569982075">"응용프로그램은 바로 다시 시작됩니다. 강제로 종료하시겠습니까?"</string>
-    <!-- no translation found for move_app_failed_dlg_title (4337731903265156405) -->
-    <skip />
-    <!-- no translation found for move_app_failed_dlg_text (8824246817947643697) -->
-    <skip />
+    <string name="move_app_failed_dlg_title" msgid="4337731903265156405">"응용프로그램 이동"</string>
+    <string name="move_app_failed_dlg_text" msgid="8824246817947643697">"응용프로그램을 이동하지 못했습니다. <xliff:g id="REASON">%1$s</xliff:g>"</string>
     <string name="app_install_location_title" msgid="2068975150026852168">"기본 설치 위치"</string>
     <string name="app_install_location_summary" msgid="879753854530300436">"새 응용프로그램에 대한 기본 설치 위치를 변경합니다."</string>
     <string name="runningservices_settings_title" msgid="8097287939865165213">"실행 중인 서비스"</string>
@@ -940,6 +944,7 @@
     <string name="voice_output_category" msgid="2624538587784986229">"음성 출력"</string>
     <string name="recognizer_title" msgid="3231385184559054457">"음성 인식기"</string>
     <string name="recognizer_settings_title" msgid="6038598099039717232">"음성 인식기 설정"</string>
+    <string name="recognizer_settings_summary" msgid="4472287934134546902">"\'<xliff:g id="RECOGNIZER_NAME">%s</xliff:g>\' 설정"</string>
     <string name="tts_settings" msgid="8186971894801348327">"TTS(text-to-speech) 설정"</string>
     <string name="tts_settings_title" msgid="4182348653053000933">"TTS(text-to-speech) 설정"</string>
     <string name="use_default_tts_settings_title" msgid="1577063839539732930">"항상 내 설정 사용"</string>

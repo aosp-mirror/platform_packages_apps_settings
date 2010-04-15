@@ -236,12 +236,34 @@
     <string name="security_settings_summary" msgid="967393342537986570">"Meinen Standort, Display-Entsperrung, SIM-Kartensperrung und Sperrung des Anmeldeinformationsspeichers festlegen"</string>
     <string name="cdma_security_settings_summary" msgid="6068799952798901542">"Meinen Standort festlegen, Bildschirm entsperren, Sperren des Speichers für Anmeldeinformationen"</string>
     <string name="security_passwords_title" msgid="2930627259125138363">"Passwörter"</string>
-    <string name="unlock_set_unlock_pattern_title" msgid="1896502750816432974">"Entsperrungsmuster einrichten"</string>
-    <string name="unlock_set_unlock_pattern_summary" msgid="1235339327020445576">"Zum Entsperren muss ein Muster gezeichnet werden."</string>
-    <string name="unlock_set_unlock_pin_title" msgid="2206721045699671063">"Entsperrungs-PIN einrichten"</string>
-    <string name="unlock_set_unlock_pin_summary" msgid="3898840802187521463">"Zum Entsperren ist eine numerische PIN erforderlich."</string>
-    <string name="unlock_set_unlock_password_title" msgid="2410408982973923603">"Entsperr.-Passw. einr."</string>
-    <string name="unlock_set_unlock_password_summary" msgid="4711043487823726994">"Zum Entsperren ist ein Passwort erforderlich."</string>
+    <!-- no translation found for lock_settings_picker_title (3973555216065628262) -->
+    <skip />
+    <!-- no translation found for unlock_set_unlock_launch_picker_title (1129684221223017902) -->
+    <skip />
+    <!-- no translation found for unlock_set_unlock_launch_picker_summary (1667332113134720845) -->
+    <skip />
+    <!-- no translation found for unlock_set_unlock_launch_picker_change_title (6987228635944678726) -->
+    <skip />
+    <!-- no translation found for unlock_set_unlock_launch_picker_change_summary (2790960639554590668) -->
+    <skip />
+    <!-- no translation found for unlock_set_unlock_none_title (3760684669884671990) -->
+    <skip />
+    <!-- no translation found for unlock_set_unlock_none_summary (2658550480388272618) -->
+    <skip />
+    <!-- no translation found for unlock_set_unlock_pattern_title (2912067603917311700) -->
+    <skip />
+    <!-- no translation found for unlock_set_unlock_pattern_summary (3018395214738645405) -->
+    <skip />
+    <!-- no translation found for unlock_set_unlock_pin_title (5846029709462329515) -->
+    <skip />
+    <!-- no translation found for unlock_set_unlock_pin_summary (4131169672844263316) -->
+    <skip />
+    <!-- no translation found for unlock_set_unlock_password_title (8775603825675090937) -->
+    <skip />
+    <!-- no translation found for unlock_set_unlock_password_summary (4623254789833899286) -->
+    <skip />
+    <!-- no translation found for unlock_set_unlock_disabled_summary (736557879526940324) -->
+    <skip />
     <string name="unlock_disable_lock_title" msgid="1427036227416979120">"Display-Sperre deaktivieren"</string>
     <string name="unlock_disable_lock_pattern_summary" msgid="6801602880568869201">"Entsperrungsmuster entfernen"</string>
     <string name="unlock_disable_lock_pin_summary" msgid="8856842745366993387">"Entsperrungs-PIN entfernen"</string>
@@ -257,12 +279,9 @@
     <string name="lockpassword_pin_too_long" msgid="6290317580664119373">"Die PIN darf maximal %d Zeichen enthalten."</string>
     <string name="lockpassword_pin_contains_non_digits" msgid="3379277100136600632">"PIN darf nur die Ziffern 0 - 9 enthalten."</string>
     <string name="lockpassword_illegal_character" msgid="6204396794254688549">"Das Passwort enthält ein ungültiges Zeichen."</string>
-    <!-- no translation found for lockpassword_password_requires_alpha (5668524505560400449) -->
-    <skip />
-    <!-- no translation found for lockpassword_password_requires_digit (4840579514154254907) -->
-    <skip />
-    <!-- no translation found for lockpassword_password_requires_symbol (4140602725865312078) -->
-    <skip />
+    <string name="lockpassword_password_requires_alpha" msgid="5668524505560400449">"Das Passwort muss mindestens einen Buchstaben enthalten."</string>
+    <string name="lockpassword_password_requires_digit" msgid="4840579514154254907">"Das Passwort muss mindestens eine Zahl enthalten."</string>
+    <string name="lockpassword_password_requires_symbol" msgid="4140602725865312078">"Das Passwort muss mindestens ein Symbol enthalten."</string>
     <string name="lockpassword_ok_label" msgid="313822574062553672">"OK"</string>
     <string name="lockpassword_cancel_label" msgid="8818529276331121899">"Abbrechen"</string>
     <string name="device_admin_title" msgid="3562216873644263804">"Geräteverwaltung"</string>
@@ -526,16 +545,11 @@
     <string name="sd_format_summary" msgid="6616491027883134004">"SD-Karte formatieren (löschen)"</string>
     <string name="sd_unavailable" msgid="8580107589533213904">"Nicht verfügbar"</string>
     <string name="read_only" msgid="6702420168629076340">" (schreibgeschützt)"</string>
-    <!-- no translation found for dlg_confirm_unmount_title (8612140627310646730) -->
-    <skip />
-    <!-- no translation found for dlg_confirm_unmount_text (5851214273718817727) -->
-    <skip />
-    <!-- no translation found for dlg_error_unmount_title (4004106918266783081) -->
-    <skip />
-    <!-- no translation found for dlg_error_unmount_text (9188972789897713180) -->
-    <skip />
-    <!-- no translation found for unmount_inform_text (3213378327712151498) -->
-    <skip />
+    <string name="dlg_confirm_unmount_title" msgid="8612140627310646730">"SD-Karte entnehmen"</string>
+    <string name="dlg_confirm_unmount_text" msgid="5851214273718817727">"Wenn Sie die SD-Karte entfernen, werden einige von Ihnen verwendete Anwendungen angehalten und sind nicht mehr verfügbar, bis Sie die SD-Karte wieder einsetzen."</string>
+    <string name="dlg_error_unmount_title" msgid="4004106918266783081">"Fehler beim Entfernen der SD-Karte"</string>
+    <string name="dlg_error_unmount_text" msgid="9188972789897713180">"SD-Karte kann nicht entfernt werden. Versuchen Sie es später erneut."</string>
+    <string name="unmount_inform_text" msgid="3213378327712151498">"SD-Karte wird getrennt. Überprüfen Sie den Status im Benachrichtigungsfeld."</string>
     <string name="sd_ejecting_title" msgid="8824572198034365468">"Trennen..."</string>
     <string name="sd_ejecting_summary" msgid="2028753069184908491">"Trennung..."</string>
     <string name="battery_status_title" msgid="9159414319574976203">"Akkustatus"</string>
@@ -727,28 +741,18 @@
     <string name="empty_list_msg" msgid="2901049162265094971">"Sie haben keine Anwendungen von Drittanbietern installiert."</string>
     <string name="version_text" msgid="9189073826278676425">"Version <xliff:g id="VERSION_NUM">%1$s</xliff:g>"</string>
     <string name="move_app" msgid="5042838441401731346">"Verschieben"</string>
-    <!-- no translation found for move_app_to_internal (3895430471913858185) -->
-    <skip />
-    <!-- no translation found for move_app_to_sdcard (1143379049903056407) -->
-    <skip />
+    <string name="move_app_to_internal" msgid="3895430471913858185">"Auf Telefon verschieben"</string>
+    <string name="move_app_to_sdcard" msgid="1143379049903056407">"Auf SD-Karte verschieben"</string>
     <string name="moving" msgid="6431016143218876491">"Verschieben"</string>
-    <!-- no translation found for insufficient_storage (8566913062094452962) -->
-    <skip />
-    <!-- no translation found for does_not_exist (837163572898468245) -->
-    <skip />
-    <!-- no translation found for app_forward_locked (5747805144210389585) -->
-    <skip />
-    <!-- no translation found for invalid_location (4934491353200240499) -->
-    <skip />
-    <!-- no translation found for system_package (1030561474413022831) -->
-    <skip />
-    <!-- no translation found for force_stop_dlg_title (4289453224368188476) -->
-    <skip />
+    <string name="insufficient_storage" msgid="8566913062094452962">"Es ist nicht genügend Speicher vorhanden."</string>
+    <string name="does_not_exist" msgid="837163572898468245">"Diese Anwendung existiert nicht."</string>
+    <string name="app_forward_locked" msgid="5747805144210389585">"Die Anwendung ist kopiergeschützt."</string>
+    <string name="invalid_location" msgid="4934491353200240499">"Der angegebene Installationsort ist nicht gültig."</string>
+    <string name="system_package" msgid="1030561474413022831">"Systemupdates können nicht auf externen Datenträgern installiert werden."</string>
+    <string name="force_stop_dlg_title" msgid="4289453224368188476">"Stoppen erzwingen"</string>
     <string name="force_stop_dlg_text" msgid="3381302041569982075">"Diese Anwendung wird sofort neu gestartet. Möchten Sie das Beenden wirklich erzwingen?"</string>
-    <!-- no translation found for move_app_failed_dlg_title (4337731903265156405) -->
-    <skip />
-    <!-- no translation found for move_app_failed_dlg_text (8824246817947643697) -->
-    <skip />
+    <string name="move_app_failed_dlg_title" msgid="4337731903265156405">"Anwendung verschieben"</string>
+    <string name="move_app_failed_dlg_text" msgid="8824246817947643697">"Verschieben der Anwendung fehlgeschlagen. <xliff:g id="REASON">%1$s</xliff:g>"</string>
     <string name="app_install_location_title" msgid="2068975150026852168">"Bevorzugter Installationspfad"</string>
     <string name="app_install_location_summary" msgid="879753854530300436">"Bevorzugten Installationspfad für neue Anwendungen ändern"</string>
     <string name="runningservices_settings_title" msgid="8097287939865165213">"Aktive Dienste"</string>
@@ -940,6 +944,7 @@
     <string name="voice_output_category" msgid="2624538587784986229">"Sprachausgabe"</string>
     <string name="recognizer_title" msgid="3231385184559054457">"Spracherkennung"</string>
     <string name="recognizer_settings_title" msgid="6038598099039717232">"Einstellungen für die Spracherkennung"</string>
+    <string name="recognizer_settings_summary" msgid="4472287934134546902">"Einstellungen für \'<xliff:g id="RECOGNIZER_NAME">%s</xliff:g>\'"</string>
     <string name="tts_settings" msgid="8186971894801348327">"Text-in-Sprache-Einstellungen"</string>
     <string name="tts_settings_title" msgid="4182348653053000933">"Text-in-Sprache-Einstellungen"</string>
     <string name="use_default_tts_settings_title" msgid="1577063839539732930">"Immer meine Einst. verwenden"</string>
