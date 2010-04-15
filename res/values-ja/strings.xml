@@ -236,12 +236,34 @@
     <string name="security_settings_summary" msgid="967393342537986570">"現在地、画面ロック、SIMカードロック、認証情報ストレージのロック"</string>
     <string name="cdma_security_settings_summary" msgid="6068799952798901542">"現在地、画面のロック解除、認証情報ストレージのロックを設定します"</string>
     <string name="security_passwords_title" msgid="2930627259125138363">"パスワード"</string>
-    <string name="unlock_set_unlock_pattern_title" msgid="1896502750816432974">"ロック解除パターンの設定"</string>
-    <string name="unlock_set_unlock_pattern_summary" msgid="1235339327020445576">"画面ロックを解除するにはパターンの入力が必要"</string>
-    <string name="unlock_set_unlock_pin_title" msgid="2206721045699671063">"ロック解除PINの設定"</string>
-    <string name="unlock_set_unlock_pin_summary" msgid="3898840802187521463">"画面ロックを解除するには数値PINの入力が必要"</string>
-    <string name="unlock_set_unlock_password_title" msgid="2410408982973923603">"ロック解除パスワードの設定"</string>
-    <string name="unlock_set_unlock_password_summary" msgid="4711043487823726994">"画面ロックを解除するにはパスワードの入力が必要"</string>
+    <!-- no translation found for lock_settings_picker_title (3973555216065628262) -->
+    <skip />
+    <!-- no translation found for unlock_set_unlock_launch_picker_title (1129684221223017902) -->
+    <skip />
+    <!-- no translation found for unlock_set_unlock_launch_picker_summary (1667332113134720845) -->
+    <skip />
+    <!-- no translation found for unlock_set_unlock_launch_picker_change_title (6987228635944678726) -->
+    <skip />
+    <!-- no translation found for unlock_set_unlock_launch_picker_change_summary (2790960639554590668) -->
+    <skip />
+    <!-- no translation found for unlock_set_unlock_none_title (3760684669884671990) -->
+    <skip />
+    <!-- no translation found for unlock_set_unlock_none_summary (2658550480388272618) -->
+    <skip />
+    <!-- no translation found for unlock_set_unlock_pattern_title (2912067603917311700) -->
+    <skip />
+    <!-- no translation found for unlock_set_unlock_pattern_summary (3018395214738645405) -->
+    <skip />
+    <!-- no translation found for unlock_set_unlock_pin_title (5846029709462329515) -->
+    <skip />
+    <!-- no translation found for unlock_set_unlock_pin_summary (4131169672844263316) -->
+    <skip />
+    <!-- no translation found for unlock_set_unlock_password_title (8775603825675090937) -->
+    <skip />
+    <!-- no translation found for unlock_set_unlock_password_summary (4623254789833899286) -->
+    <skip />
+    <!-- no translation found for unlock_set_unlock_disabled_summary (736557879526940324) -->
+    <skip />
     <string name="unlock_disable_lock_title" msgid="1427036227416979120">"画面ロックをOFFにする"</string>
     <string name="unlock_disable_lock_pattern_summary" msgid="6801602880568869201">"ロック解除パターンを削除"</string>
     <string name="unlock_disable_lock_pin_summary" msgid="8856842745366993387">"ロック解除PINを削除"</string>
@@ -257,12 +279,9 @@
     <string name="lockpassword_pin_too_long" msgid="6290317580664119373">"PINは%d桁以内で指定してください"</string>
     <string name="lockpassword_pin_contains_non_digits" msgid="3379277100136600632">"PINに使用できるのは数字0～9のみです"</string>
     <string name="lockpassword_illegal_character" msgid="6204396794254688549">"パスワードに無効な文字が含まれています"</string>
-    <!-- no translation found for lockpassword_password_requires_alpha (5668524505560400449) -->
-    <skip />
-    <!-- no translation found for lockpassword_password_requires_digit (4840579514154254907) -->
-    <skip />
-    <!-- no translation found for lockpassword_password_requires_symbol (4140602725865312078) -->
-    <skip />
+    <string name="lockpassword_password_requires_alpha" msgid="5668524505560400449">"パスワードには英字が1文字以上必要です"</string>
+    <string name="lockpassword_password_requires_digit" msgid="4840579514154254907">"パスワードには数字が1つ以上必要です"</string>
+    <string name="lockpassword_password_requires_symbol" msgid="4140602725865312078">"パスワードには記号が1つ以上必要です"</string>
     <string name="lockpassword_ok_label" msgid="313822574062553672">"OK"</string>
     <string name="lockpassword_cancel_label" msgid="8818529276331121899">"キャンセル"</string>
     <string name="device_admin_title" msgid="3562216873644263804">"デバイス管理"</string>
@@ -381,7 +400,7 @@
     <string name="wifi_gateway" msgid="163914742461092086">"ゲートウェイ"</string>
     <string name="wifi_netmask" msgid="4520635321425529085">"ネットマスク"</string>
     <string name="wifi_tether_checkbox_text" msgid="796007268580464534">"Wi-Fiテザリング"</string>
-    <string name="wifi_tether_enabled_subtext" msgid="6758080605207549918">"アクセスポンイト<xliff:g id="NETWORK_SSID">%1$s</xliff:g>が有効です"</string>
+    <string name="wifi_tether_enabled_subtext" msgid="6758080605207549918">"アクセスポイント<xliff:g id="NETWORK_SSID">%1$s</xliff:g>が有効です"</string>
     <string name="wifi_tether_failed_subtext" msgid="4379214348183654280">"Wi-Fiテザリングエラー"</string>
     <string name="wifi_tether_settings_text" msgid="8831276059149506799">"Wi-Fiテザリング設定"</string>
     <string name="wifi_tether_settings_subtext" msgid="3415164631321782704">"アクセスポイントのセットアップと管理"</string>
@@ -526,16 +545,11 @@
     <string name="sd_format_summary" msgid="6616491027883134004">"SDカードをフォーマット（消去）する"</string>
     <string name="sd_unavailable" msgid="8580107589533213904">"使用不可"</string>
     <string name="read_only" msgid="6702420168629076340">" （読み取り専用）"</string>
-    <!-- no translation found for dlg_confirm_unmount_title (8612140627310646730) -->
-    <skip />
-    <!-- no translation found for dlg_confirm_unmount_text (5851214273718817727) -->
-    <skip />
-    <!-- no translation found for dlg_error_unmount_title (4004106918266783081) -->
-    <skip />
-    <!-- no translation found for dlg_error_unmount_text (9188972789897713180) -->
-    <skip />
-    <!-- no translation found for unmount_inform_text (3213378327712151498) -->
-    <skip />
+    <string name="dlg_confirm_unmount_title" msgid="8612140627310646730">"SDカードのマウント解除"</string>
+    <string name="dlg_confirm_unmount_text" msgid="5851214273718817727">"SDカードのマウントを解除すると、使用中のアプリケーションの一部が停止し、SDカードを再マウントするまで使用できなくなる場合があります。"</string>
+    <string name="dlg_error_unmount_title" msgid="4004106918266783081">"SDカードのマウントを解除できません"</string>
+    <string name="dlg_error_unmount_text" msgid="9188972789897713180">"SDカードのマウントを解除できません。しばらくしてからもう一度お試しください。"</string>
+    <string name="unmount_inform_text" msgid="3213378327712151498">"SDカードのマウントを解除します。ステータスは通知エリアで確認してください。"</string>
     <string name="sd_ejecting_title" msgid="8824572198034365468">"マウント解除中"</string>
     <string name="sd_ejecting_summary" msgid="2028753069184908491">"マウントを解除中"</string>
     <string name="battery_status_title" msgid="9159414319574976203">"電池の状態:"</string>
@@ -727,28 +741,18 @@
     <string name="empty_list_msg" msgid="2901049162265094971">"サードパーティ製アプリケーションはインストールされていません。"</string>
     <string name="version_text" msgid="9189073826278676425">"バージョン<xliff:g id="VERSION_NUM">%1$s</xliff:g>"</string>
     <string name="move_app" msgid="5042838441401731346">"移動"</string>
-    <!-- no translation found for move_app_to_internal (3895430471913858185) -->
-    <skip />
-    <!-- no translation found for move_app_to_sdcard (1143379049903056407) -->
-    <skip />
+    <string name="move_app_to_internal" msgid="3895430471913858185">"携帯端末に移動"</string>
+    <string name="move_app_to_sdcard" msgid="1143379049903056407">"SDカードに移動"</string>
     <string name="moving" msgid="6431016143218876491">"移動中"</string>
-    <!-- no translation found for insufficient_storage (8566913062094452962) -->
-    <skip />
-    <!-- no translation found for does_not_exist (837163572898468245) -->
-    <skip />
-    <!-- no translation found for app_forward_locked (5747805144210389585) -->
-    <skip />
-    <!-- no translation found for invalid_location (4934491353200240499) -->
-    <skip />
-    <!-- no translation found for system_package (1030561474413022831) -->
-    <skip />
-    <!-- no translation found for force_stop_dlg_title (4289453224368188476) -->
-    <skip />
+    <string name="insufficient_storage" msgid="8566913062094452962">"ストレージの容量が不足しています。"</string>
+    <string name="does_not_exist" msgid="837163572898468245">"そのアプリケーションは存在しません."</string>
+    <string name="app_forward_locked" msgid="5747805144210389585">"このアプリケーションはコピー防止機能付きです。"</string>
+    <string name="invalid_location" msgid="4934491353200240499">"指定したインストール先が無効です。"</string>
+    <string name="system_package" msgid="1030561474413022831">"システムアップデートは外部メディアにはインストールできません。"</string>
+    <string name="force_stop_dlg_title" msgid="4289453224368188476">"強制停止"</string>
     <string name="force_stop_dlg_text" msgid="3381302041569982075">"このアプリケーションはすぐに再起動されます。強制停止してもよろしいですか？"</string>
-    <!-- no translation found for move_app_failed_dlg_title (4337731903265156405) -->
-    <skip />
-    <!-- no translation found for move_app_failed_dlg_text (8824246817947643697) -->
-    <skip />
+    <string name="move_app_failed_dlg_title" msgid="4337731903265156405">"アプリケーションを移動"</string>
+    <string name="move_app_failed_dlg_text" msgid="8824246817947643697">"アプリケーションを移動できません。<xliff:g id="REASON">%1$s</xliff:g>"</string>
     <string name="app_install_location_title" msgid="2068975150026852168">"優先インストール先"</string>
     <string name="app_install_location_summary" msgid="879753854530300436">"新しいアプリケーションの優先インストール先を変更する"</string>
     <string name="runningservices_settings_title" msgid="8097287939865165213">"実行中のサービス"</string>
@@ -940,8 +944,7 @@
     <string name="voice_output_category" msgid="2624538587784986229">"音声出力"</string>
     <string name="recognizer_title" msgid="3231385184559054457">"音声認識装置"</string>
     <string name="recognizer_settings_title" msgid="6038598099039717232">"音声認識装置の設定"</string>
-    <!-- no translation found for recognizer_settings_summary (4472287934134546902) -->
-    <skip />
+    <string name="recognizer_settings_summary" msgid="4472287934134546902">"「<xliff:g id="RECOGNIZER_NAME">%s</xliff:g>」の設定"</string>
     <string name="tts_settings" msgid="8186971894801348327">"テキスト読み上げの設定"</string>
     <string name="tts_settings_title" msgid="4182348653053000933">"テキスト読み上げの設定"</string>
     <string name="use_default_tts_settings_title" msgid="1577063839539732930">"常に自分の設定を使用"</string>
