@@ -69,19 +69,16 @@ public class MasterClear extends Activity {
         };
 
     /**
-     *  Keyguard validation is run using the standard {@link ConfirmLockPattern}
+     * Keyguard validation is run using the standard {@link ConfirmLockPattern}
      * component as a subactivity
+     * @param request the request code to be returned once confirmation finishes
+     * @return true if confirmation launched
      */
-    private void runKeyguardConfirmation() {
-        final Intent intent = new Intent();
-        intent.setClassName("com.android.settings",
-                "com.android.settings.ConfirmLockPattern");
-        // supply header and footer text in the intent
-        intent.putExtra(ConfirmLockPattern.HEADER_TEXT,
-                getText(R.string.master_clear_gesture_prompt));
-        intent.putExtra(ConfirmLockPattern.FOOTER_TEXT,
-                getText(R.string.master_clear_gesture_explanation));
-        startActivityForResult(intent, KEYGUARD_REQUEST);
+    private boolean runKeyguardConfirmation(int request) {
+        return new ChooseLockSettingsHelper(this)
+                .launchConfirmationActivity(request,
+                        getText(R.string.master_clear_gesture_prompt),
+                        getText(R.string.master_clear_gesture_explanation));
     }
 
     @Override
@@ -96,6 +93,8 @@ public class MasterClear extends Activity {
         // confirmation prompt; otherwise, go back to the initial state.
         if (resultCode == Activity.RESULT_OK) {
             establishFinalConfirmationState();
+        } else if (resultCode == Activity.RESULT_CANCELED) {
+            finish();
         } else {
             establishInitialState();
         }
@@ -108,9 +107,7 @@ public class MasterClear extends Activity {
      */
     private Button.OnClickListener mInitiateListener = new Button.OnClickListener() {
             public void onClick(View v) {
-                if (mLockUtils.isLockPatternEnabled()) {
-                    runKeyguardConfirmation();
-                } else {
+                if (!runKeyguardConfirmation(KEYGUARD_REQUEST)) {
                     establishFinalConfirmationState();
                 }
             }
