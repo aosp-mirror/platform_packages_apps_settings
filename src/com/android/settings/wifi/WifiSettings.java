@@ -454,8 +454,10 @@ public class WifiSettings extends PreferenceActivity implements DialogInterface.
 
     private void updateConnectionState(DetailedState state) {
         /* sticky broadcasts can call this when wifi is disabled */
-        if (!mWifiManager.isWifiEnabled())
+        if (!mWifiManager.isWifiEnabled()) {
+            mScanner.pause();
             return;
+        }
 
         if (state == DetailedState.OBTAINING_IPADDR) {
             mScanner.pause();
@@ -512,6 +514,7 @@ public class WifiSettings extends PreferenceActivity implements DialogInterface.
                 mRetry = 0;
                 Toast.makeText(WifiSettings.this, R.string.wifi_fail_to_scan,
                         Toast.LENGTH_LONG).show();
+                return;
             }
             mAccessPoints.setProgress(mRetry != 0);
             sendEmptyMessageDelayed(0, 6000);
