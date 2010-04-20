@@ -19,6 +19,10 @@
         android:key="sound_settings"
         xmlns:settings="http://schemas.android.com/apk/res/com.android.settings">
 
+    <PreferenceCategory
+            android:title="@string/sound_category_sound_title"
+            >
+
         <CheckBoxPreference
                 android:key="silent"
                 android:title="@string/silent_mode_title"
@@ -44,6 +48,12 @@
                 android:order="3"
                 android:streamType="ring" />
 
+    </PreferenceCategory>
+
+    <PreferenceCategory
+            android:title="@string/sound_category_calls_title"
+            >
+
         <com.android.settings.DefaultRingtonePreference
                 android:key="ringtone"
                 android:title="@string/ringtone_title"
@@ -61,6 +71,12 @@
                 android:entries="@array/vibrate_entries"
                 android:entryValues="@array/vibrate_values" />
 
+    </PreferenceCategory>
+
+    <PreferenceCategory
+            android:title="@string/sound_category_notification_title"
+            >
+
         <com.android.settings.DefaultRingtonePreference
                 android:key="notification_sound"
                 android:title="@string/notification_sound_title"
@@ -76,6 +92,12 @@
                 android:summary="@string/notification_pulse_summary"
                 android:order="8"
                 android:persistent="false" />
+
+    </PreferenceCategory>
+
+    <PreferenceCategory
+            android:title="@string/sound_category_feedback_title"
+            >
 
         <CheckBoxPreference
                 android:key="dtmf_tone"
@@ -115,5 +137,7 @@
                 android:summary="@string/emergency_tone_summary"
                 android:entries="@array/emergency_tone_entries"
                 android:entryValues="@array/emergency_tone_values" />
+
+    </PreferenceCategory>
 
 </PreferenceScreen>
