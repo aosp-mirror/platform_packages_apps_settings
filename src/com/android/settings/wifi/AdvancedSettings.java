@@ -40,6 +40,7 @@ public class AdvancedSettings extends PreferenceActivity
         implements Preference.OnPreferenceChangeListener {
 
     private static final String KEY_MAC_ADDRESS = "mac_address";
+    private static final String KEY_CURRENT_IP_ADDRESS = "current_ip_address";
     private static final String KEY_USE_STATIC_IP = "use_static_ip";
     private static final String KEY_NUM_CHANNELS = "num_channels";
     private static final String KEY_SLEEP_POLICY = "sleep_policy";
@@ -109,7 +110,7 @@ public class AdvancedSettings extends PreferenceActivity
             initNumChannelsPreference();
         }
         initSleepPolicyPreference();
-        refreshMacAddress();
+        refreshWifiInfo();
     }
 
     private void initNumChannelsPreference() {
@@ -307,7 +308,7 @@ public class AdvancedSettings extends PreferenceActivity
         }
     }
     
-    private void refreshMacAddress() {
+    private void refreshWifiInfo() {
         WifiManager wifiManager = (WifiManager) getSystemService(WIFI_SERVICE);
         WifiInfo wifiInfo = wifiManager.getConnectionInfo();
 
@@ -315,6 +316,20 @@ public class AdvancedSettings extends PreferenceActivity
         String macAddress = wifiInfo == null ? null : wifiInfo.getMacAddress();
         wifiMacAddressPref.setSummary(!TextUtils.isEmpty(macAddress) ? macAddress 
                 : getString(R.string.status_unavailable));
+
+        Preference wifiIpAddressPref = findPreference(KEY_CURRENT_IP_ADDRESS);
+        String ipAddress = null;
+        if (wifiInfo != null) {
+            long addr = wifiInfo.getIpAddress();
+            if (addr != 0) {
+                // handle negative values whe first octet > 127
+                if (addr < 0) addr += 0x100000000L;
+                ipAddress = String.format("%d.%d.%d.%d",
+                        addr & 0xFF, (addr >> 8) & 0xFF, (addr >> 16) & 0xFF, (addr >> 24) & 0xFF);
+            }
+        }
+        wifiIpAddressPref.setSummary(ipAddress == null ?
+                getString(R.string.status_unavailable) : ipAddress);
     }
-    
+
 }
