@@ -26,6 +26,7 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.content.res.AssetManager;
 import android.net.ConnectivityManager;
 import android.os.Environment;
 import android.preference.CheckBoxPreference;
@@ -36,6 +37,7 @@ import android.provider.Settings;
 import android.util.Log;
 import android.webkit.WebView;
 
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Locale;
 
@@ -49,7 +51,8 @@ public class TetherSettings extends PreferenceActivity {
     private static final String TETHERING_HELP = "tethering_help";
     private static final String USB_HELP_MODIFIER = "usb_";
     private static final String WIFI_HELP_MODIFIER = "wifi_";
-    private static final String HELP_URL = "file:///android_asset/html/%y_%z/tethering_%xhelp.html";
+    private static final String HELP_URL = "file:///android_asset/html/%y%z/tethering_%xhelp.html";
+    private static final String HELP_PATH = "html/%y%z/tethering_help.html";
 
     private static final int DIALOG_TETHER_HELP = 1;
 
@@ -100,9 +103,26 @@ public class TetherSettings extends PreferenceActivity {
     protected Dialog onCreateDialog(int id) {
         if (id == DIALOG_TETHER_HELP) {
             Locale locale = Locale.getDefault();
-            String url = HELP_URL.replace("%y", locale.getLanguage().toLowerCase());
-            url = url.replace("%z", locale.getCountry().toLowerCase());
 
+            // check for the full language + country resource, if not there, try just language
+            AssetManager am = getAssets();
+            String path = HELP_PATH.replace("%y", locale.getLanguage().toLowerCase());
+            path = path.replace("%z", "_"+locale.getCountry().toLowerCase());
+            boolean useCountry = true;
+            InputStream is = null;
+            try {
+                is = am.open(path);
+            } catch (Exception e) {
+                useCountry = false;
+            } finally {
+                if (is != null) {
+                    try {
+                        is.close();
+                    } catch (Exception e) {}
+                }
+            }
+            String url = HELP_URL.replace("%y", locale.getLanguage().toLowerCase());
+            url = url.replace("%z", (useCountry ? "_"+locale.getCountry().toLowerCase() : ""));
             if ((mUsbRegexs.length != 0) && (mWifiRegexs.length == 0)) {
                 url = url.replace("%x", USB_HELP_MODIFIER);
             } else if ((mWifiRegexs.length != 0) && (mUsbRegexs.length == 0)) {
@@ -112,6 +132,7 @@ public class TetherSettings extends PreferenceActivity {
                 // is to use this anyway so no check is needed
                 url = url.replace("%x", "");
             }
+
             mView.loadUrl(url);
 
             return new AlertDialog.Builder(this)
