@@ -388,14 +388,16 @@
     <!-- New incoming call vibrate options. -->
     <string-array name="vibrate_entries">
         <item>Always</item>
-        <item>Only when silent</item>
         <item>Never</item>
+        <item>Only in Silent mode</item>
+        <item>Only when not in Silent mode</item>
     </string-array>
 
-    <!-- Corresponds to AudioManager.VIBRATE_SETTING_*. Do not translate. -->
+    <!-- Values for vibrate_entries matching constants in SoundSettings. Do not translate. -->
     <string-array name="vibrate_values" translatable="false">
-        <item>1</item>
-        <item>2</item>
-        <item>0</item>
+        <item>always</item>
+        <item>never</item>
+        <item>silent</item>
+        <item>notsilent</item>
     </string-array>
 </resources>
