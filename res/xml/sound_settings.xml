@@ -31,12 +31,13 @@
                 android:order="1"
                 android:disableDependentsState="true" />
 
-        <CheckBoxPreference
-                android:key="vibrate_in_silent"
-                android:title="@string/vibrate_in_silent_title"
-                android:summary="@string/vibrate_in_silent_summary"
-                android:order="2"
-                android:persistent="false" />
+        <ListPreference
+                android:key="vibrate"
+                android:order="6"
+                android:title="@string/vibrate_title"
+                android:summary="@string/vibrate_summary"
+                android:entries="@array/vibrate_entries"
+                android:entryValues="@array/vibrate_values" />
 
         <com.android.settings.RingerVolumePreference
                 android:key="ring_volume"
@@ -62,14 +63,6 @@
                 android:persistent="false"
                 android:order="5"
                 android:ringtoneType="ringtone" />
-
-        <ListPreference
-                android:key="vibrate"
-                android:order="6"
-                android:title="@string/vibrate_title"
-                android:summary="@string/vibrate_summary"
-                android:entries="@array/vibrate_entries"
-                android:entryValues="@array/vibrate_values" />
 
     </PreferenceCategory>
 
