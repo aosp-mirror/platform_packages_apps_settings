@@ -242,7 +242,8 @@ public class InstalledAppDetails extends Activity implements View.OnClickListene
             if ((mAppInfo.flags & ApplicationInfo.FLAG_FORWARD_LOCK) == 0 &&
                     (mAppInfo.flags & ApplicationInfo.FLAG_SYSTEM) == 0 &&
                     pkgInfo != null) {
-                if (pkgInfo.installLocation == PackageInfo.INSTALL_LOCATION_PREFER_EXTERNAL) {
+                if (pkgInfo.installLocation == PackageInfo.INSTALL_LOCATION_PREFER_EXTERNAL ||
+                        pkgInfo.installLocation == PackageInfo.INSTALL_LOCATION_AUTO) {
                     moveDisable = false;
                 } else if (pkgInfo.installLocation == PackageInfo.INSTALL_LOCATION_UNSPECIFIED) {
                     IPackageManager ipm  = IPackageManager.Stub.asInterface(
