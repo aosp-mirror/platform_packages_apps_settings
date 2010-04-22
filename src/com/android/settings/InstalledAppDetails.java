@@ -276,11 +276,12 @@ public class InstalledAppDetails extends Activity implements View.OnClickListene
         boolean enabled = true;
         if (mUpdatedSysApp) {
             mUninstallButton.setText(R.string.app_factory_reset);
-        } else if ((mAppInfo.flags & ApplicationInfo.FLAG_SYSTEM) == 0){
-            mUninstallButton.setText(R.string.uninstall_text);
         } else {
-            // Disable uninstall for system apps
-            enabled = false;
+            if ((mAppInfo.flags & ApplicationInfo.FLAG_SYSTEM) != 0){
+                // Disable button for system applications.
+                enabled = false;
+            }
+            mUninstallButton.setText(R.string.uninstall_text);
         }
         mUninstallButton.setEnabled(enabled);
         if (enabled) {
