@@ -95,7 +95,7 @@ public class CachedBluetoothDevice implements Comparable<CachedBluetoothDevice> 
     private static final long MAX_WAIT_TIME_FOR_FRAMEWORK = 25 * 1000;
 
     private enum BluetoothCommand {
-        CONNECT, DISCONNECT,
+        CONNECT, DISCONNECT, REMOVE_BOND,
     }
 
     static class BluetoothJob {
@@ -118,7 +118,9 @@ public class CachedBluetoothDevice implements Comparable<CachedBluetoothDevice> 
             StringBuilder sb = new StringBuilder();
             sb.append(command.name());
             sb.append(" Address:").append(cachedDevice.mDevice);
-            sb.append(" Profile:").append(profile.name());
+            if (profile != null) {
+                sb.append(" Profile:").append(profile.name());
+            }
             sb.append(" TimeSent:");
             if (timeSent == 0) {
                 sb.append("not yet");
@@ -209,6 +211,12 @@ public class CachedBluetoothDevice implements Comparable<CachedBluetoothDevice> 
                 break;
             case DISCONNECT:
                 successful = disconnectInt(job.cachedDevice, job.profile);
+                break;
+            case REMOVE_BOND:
+                BluetoothDevice dev = job.cachedDevice.getDevice();
+                if (dev != null) {
+                    successful = dev.removeBond();
+                }
                 break;
             }
 
@@ -510,32 +518,16 @@ public class CachedBluetoothDevice implements Comparable<CachedBluetoothDevice> 
     }
 
     public void unpair() {
-        synchronized (workQueue) {
-            // Remove any pending commands for this device
-            boolean processNow = false;
-            Iterator<BluetoothJob> it = workQueue.iterator();
-            while (it.hasNext()) {
-                BluetoothJob job = it.next();
-                if (job.cachedDevice.mDevice.equals(this.mDevice)) {
-                    it.remove();
-                    if (job.timeSent != 0) {
-                        processNow = true;
-                    }
-                }
-            }
-            if (processNow) {
-                processCommands();
-            }
+        disconnect();
+
+        int state = getBondState();
+
+        if (state == BluetoothDevice.BOND_BONDING) {
+            mDevice.cancelBondProcess();
         }
 
-        switch (getBondState()) {
-        case BluetoothDevice.BOND_BONDED:
-            mDevice.removeBond();
-            break;
-
-        case BluetoothDevice.BOND_BONDING:
-            mDevice.cancelBondProcess();
-            break;
+        if (state != BluetoothDevice.BOND_NONE) {
+            queueCommand(new BluetoothJob(BluetoothCommand.REMOVE_BOND, this, null));
         }
     }
 
