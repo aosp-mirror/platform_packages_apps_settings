@@ -20,117 +20,99 @@
         xmlns:settings="http://schemas.android.com/apk/res/com.android.settings">
 
     <PreferenceCategory
-            android:title="@string/sound_category_sound_title"
-            >
+            android:title="@string/sound_category_sound_title"/>
 
-        <CheckBoxPreference
-                android:key="silent"
-                android:title="@string/silent_mode_title"
-                android:summary="@string/silent_mode_summary"
-                android:persistent="false"
-                android:order="1"
-                android:disableDependentsState="true" />
+    <CheckBoxPreference
+            android:key="silent"
+            android:title="@string/silent_mode_title"
+            android:summary="@string/silent_mode_summary"
+            android:persistent="false"
+            android:disableDependentsState="true" />
 
-        <ListPreference
-                android:key="vibrate"
-                android:order="6"
-                android:title="@string/vibrate_title"
-                android:summary="@string/vibrate_summary"
-                android:entries="@array/vibrate_entries"
-                android:entryValues="@array/vibrate_values" />
+    <ListPreference
+            android:key="vibrate"
+            android:title="@string/vibrate_title"
+            android:summary="@string/vibrate_summary"
+            android:entries="@array/vibrate_entries"
+            android:entryValues="@array/vibrate_values" />
 
-        <com.android.settings.RingerVolumePreference
-                android:key="ring_volume"
-                android:dependency="silent"
-                android:title="@string/all_volume_title"
-                android:summary="@string/ring_volume_summary"
-                android:dialogTitle="@string/all_volume_title"
-                android:persistent="false"
-                android:order="3"
-                android:streamType="ring" />
-
-    </PreferenceCategory>
+    <com.android.settings.RingerVolumePreference
+            android:key="ring_volume"
+            android:dependency="silent"
+            android:title="@string/all_volume_title"
+            android:summary="@string/ring_volume_summary"
+            android:dialogTitle="@string/all_volume_title"
+            android:persistent="false"
+            android:streamType="ring" />
 
     <PreferenceCategory
-            android:title="@string/sound_category_calls_title"
-            >
+            android:title="@string/sound_category_calls_title"/>
 
-        <com.android.settings.DefaultRingtonePreference
-                android:key="ringtone"
-                android:title="@string/ringtone_title"
-                android:summary="@string/ringtone_summary"
-                android:dialogTitle="@string/ringtone_title"
-                android:persistent="false"
-                android:order="5"
-                android:ringtoneType="ringtone" />
-
-    </PreferenceCategory>
+    <com.android.settings.DefaultRingtonePreference
+            android:key="ringtone"
+            android:title="@string/ringtone_title"
+            android:summary="@string/ringtone_summary"
+            android:dialogTitle="@string/ringtone_title"
+            android:persistent="false"
+            android:ringtoneType="ringtone" />
 
     <PreferenceCategory
-            android:title="@string/sound_category_notification_title"
-            >
+            android:title="@string/sound_category_notification_title"/>
 
-        <com.android.settings.DefaultRingtonePreference
-                android:key="notification_sound"
-                android:title="@string/notification_sound_title"
-                android:summary="@string/notification_sound_summary"
-                android:dialogTitle="@string/notification_sound_dialog_title"
-                android:persistent="false"
-                android:order="7"
-                android:ringtoneType="notification" />
+    <!-- Do not nest these, or removals in code will break -->
 
-        <CheckBoxPreference
-                android:key="notification_pulse"
-                android:title="@string/notification_pulse_title"
-                android:summary="@string/notification_pulse_summary"
-                android:order="8"
-                android:persistent="false" />
+    <com.android.settings.DefaultRingtonePreference
+            android:key="notification_sound"
+            android:title="@string/notification_sound_title"
+            android:summary="@string/notification_sound_summary"
+            android:dialogTitle="@string/notification_sound_dialog_title"
+            android:persistent="false"
+            android:ringtoneType="notification" />
 
-    </PreferenceCategory>
+    <CheckBoxPreference
+            android:key="notification_pulse"
+            android:title="@string/notification_pulse_title"
+            android:summary="@string/notification_pulse_summary"
+            android:persistent="false" />
 
     <PreferenceCategory
-            android:title="@string/sound_category_feedback_title"
-            >
+            android:title="@string/sound_category_feedback_title"/>
 
-        <CheckBoxPreference
-                android:key="dtmf_tone"
-                android:title="@string/dtmf_tone_enable_title"
-                android:summaryOn="@string/dtmf_tone_enable_summary_on"
-                android:summaryOff="@string/dtmf_tone_enable_summary_off"
-                android:order="9"
-                android:defaultValue="true" />
+    <!-- Do not nest these, or removals in code will break -->
 
-        <CheckBoxPreference
-                android:key="sound_effects"
-                android:title="@string/sound_effects_enable_title"
-                android:summaryOn="@string/sound_effects_enable_summary_on"
-                android:summaryOff="@string/sound_effects_enable_summary_off"
-                android:order="10"
-                android:defaultValue="true" />
+    <CheckBoxPreference
+            android:key="dtmf_tone"
+            android:title="@string/dtmf_tone_enable_title"
+            android:summaryOn="@string/dtmf_tone_enable_summary_on"
+            android:summaryOff="@string/dtmf_tone_enable_summary_off"
+            android:defaultValue="true" />
 
-        <CheckBoxPreference
-                android:key="lock_sounds"
-                android:title="@string/lock_sounds_enable_title"
-                android:summaryOn="@string/lock_sounds_enable_summary_on"
-                android:summaryOff="@string/lock_sounds_enable_summary_off"
-                android:order="11"
-                android:defaultValue="true" />
+    <CheckBoxPreference
+            android:key="sound_effects"
+            android:title="@string/sound_effects_enable_title"
+            android:summaryOn="@string/sound_effects_enable_summary_on"
+            android:summaryOff="@string/sound_effects_enable_summary_off"
+            android:defaultValue="true" />
 
-        <CheckBoxPreference
-                android:key="haptic_feedback"
-                android:title="@string/haptic_feedback_enable_title"
-                android:summaryOn="@string/haptic_feedback_enable_summary_on"
-                android:summaryOff="@string/haptic_feedback_enable_summary_off"
-                android:order="12"
-                android:defaultValue="true" />
+    <CheckBoxPreference
+            android:key="lock_sounds"
+            android:title="@string/lock_sounds_enable_title"
+            android:summaryOn="@string/lock_sounds_enable_summary_on"
+            android:summaryOff="@string/lock_sounds_enable_summary_off"
+            android:defaultValue="true" />
 
-        <ListPreference
-                android:key="emergency_tone"
-                android:title="@string/emergency_tone_title"
-                android:summary="@string/emergency_tone_summary"
-                android:entries="@array/emergency_tone_entries"
-                android:entryValues="@array/emergency_tone_values" />
+    <CheckBoxPreference
+            android:key="haptic_feedback"
+            android:title="@string/haptic_feedback_enable_title"
+            android:summaryOn="@string/haptic_feedback_enable_summary_on"
+            android:summaryOff="@string/haptic_feedback_enable_summary_off"
+            android:defaultValue="true" />
 
-    </PreferenceCategory>
+    <ListPreference
+            android:key="emergency_tone"
+            android:title="@string/emergency_tone_title"
+            android:summary="@string/emergency_tone_summary"
+            android:entries="@array/emergency_tone_entries"
+            android:entryValues="@array/emergency_tone_values" />
 
 </PreferenceScreen>
