@@ -222,8 +222,8 @@
     <string name="date_and_time_settings_title" msgid="3350640463596716780">"Data i godzina"</string>
     <string name="date_and_time_settings_summary" msgid="2435705040205950381">"Ustaw format daty, godziny i strefę czasową"</string>
     <string name="date_time_auto" msgid="3086083265745944725">"Automatycznie"</string>
-    <string name="date_time_auto_summaryOn" msgid="9034585614665299846">"Używaj wartości dostarczonych przez sieć"</string>
-    <string name="date_time_auto_summaryOff" msgid="3900356736797266448">"Używaj informacji dostarczonych przez operatora"</string>
+    <string name="date_time_auto_summaryOn" msgid="9034585614665299846">"Używaj danych dostarczonych przez operatora"</string>
+    <string name="date_time_auto_summaryOff" msgid="3900356736797266448">"Używaj danych dostarczonych przez operatora"</string>
     <string name="date_time_24hour" msgid="1193032284921000063">"Format 24-godzinny"</string>
     <string name="date_time_set_time" msgid="5716856602742530696">"Ustaw godzinę"</string>
     <string name="date_time_set_timezone" msgid="5045627174274377814">"Wybierz strefę czasową"</string>
@@ -238,10 +238,8 @@
     <string name="security_passwords_title" msgid="2930627259125138363">"Hasła"</string>
     <!-- no translation found for lock_settings_picker_title (3973555216065628262) -->
     <skip />
-    <!-- no translation found for unlock_set_unlock_launch_picker_title (1129684221223017902) -->
-    <skip />
-    <!-- no translation found for unlock_set_unlock_launch_picker_summary (1667332113134720845) -->
-    <skip />
+    <string name="unlock_set_unlock_launch_picker_title" msgid="1129684221223017902">"Ustaw blokadę ekranu"</string>
+    <string name="unlock_set_unlock_launch_picker_summary" msgid="1667332113134720845">"Zablokuj ekran za pomocą wzoru, PINu lub hasła"</string>
     <!-- no translation found for unlock_set_unlock_launch_picker_change_title (6987228635944678726) -->
     <skip />
     <!-- no translation found for unlock_set_unlock_launch_picker_change_summary (2790960639554590668) -->
@@ -250,18 +248,14 @@
     <skip />
     <!-- no translation found for unlock_set_unlock_none_summary (2658550480388272618) -->
     <skip />
-    <!-- no translation found for unlock_set_unlock_pattern_title (2912067603917311700) -->
-    <skip />
-    <!-- no translation found for unlock_set_unlock_pattern_summary (3018395214738645405) -->
-    <skip />
+    <string name="unlock_set_unlock_pattern_title" msgid="2912067603917311700">"Wzór graficzny"</string>
+    <string name="unlock_set_unlock_pattern_summary" msgid="3018395214738645405">"Narysuj wzór do odblokowania ekran"</string>
     <!-- no translation found for unlock_set_unlock_pin_title (5846029709462329515) -->
     <skip />
-    <!-- no translation found for unlock_set_unlock_pin_summary (4131169672844263316) -->
-    <skip />
+    <string name="unlock_set_unlock_pin_summary" msgid="4131169672844263316">"Wpisz kod PIN do odblokowania ekranu"</string>
     <!-- no translation found for unlock_set_unlock_password_title (8775603825675090937) -->
     <skip />
-    <!-- no translation found for unlock_set_unlock_password_summary (4623254789833899286) -->
-    <skip />
+    <string name="unlock_set_unlock_password_summary" msgid="4623254789833899286">"Wpisz hasło do odblokowania ekranu"</string>
     <!-- no translation found for unlock_set_unlock_disabled_summary (736557879526940324) -->
     <skip />
     <string name="unlock_disable_lock_title" msgid="1427036227416979120">"Wyłącz blokadę ekranu"</string>
@@ -285,7 +279,7 @@
     <string name="lockpassword_ok_label" msgid="313822574062553672">"OK"</string>
     <string name="lockpassword_cancel_label" msgid="8818529276331121899">"Anuluj"</string>
     <string name="device_admin_title" msgid="3562216873644263804">"Administracja urządzeniem"</string>
-    <string name="manage_device_admin" msgid="3864120111085199551">"Wybierz administratorów urządzenia"</string>
+    <string name="manage_device_admin" msgid="3864120111085199551">"Wybierz administratorów"</string>
     <string name="manage_device_admin_summary" msgid="915390201809231575">"Dodaj lub usuń administratorów urządzenia"</string>
     <string name="bluetooth_quick_toggle_title" msgid="1037056952714061893">"Bluetooth"</string>
     <string name="bluetooth_quick_toggle_summary" msgid="5293641680139873341">"Włącz Bluetooth"</string>
@@ -423,13 +417,15 @@
     <skip />
     <string name="vibrate_in_silent_title" msgid="3897968069156767036">"Wibracje po wyciszeniu"</string>
     <string name="vibrate_in_silent_summary" msgid="3312600513070076281">"Zezwalaj na wibracje w trybie cichym"</string>
-    <string name="vibrate_title" msgid="5408984084125311526">"Wibracje telefonu"</string>
-    <string name="vibrate_summary" msgid="5224303668448643275">"Wibracje telefonu przy połączeniach przychodzących"</string>
+    <!-- no translation found for vibrate_title (6045820877942801599) -->
+    <skip />
+    <!-- no translation found for vibrate_summary (7378130397830790458) -->
+    <skip />
     <string name="notification_sound_title" msgid="6316316069880531693">"Powiadomienia"</string>
     <!-- no translation found for notification_sound_summary (2953599929394109819) -->
     <skip />
-    <string name="notification_pulse_title" msgid="1247988024534030629">"Powiadamianie pulsującym podświetleniem"</string>
-    <string name="notification_pulse_summary" msgid="6899220780534617152">"Włącz pulsowanie podświetlenia kulki dla nowych powiadomień"</string>
+    <string name="notification_pulse_title" msgid="1247988024534030629">"Pulsująca dioda"</string>
+    <string name="notification_pulse_summary" msgid="6899220780534617152">"Nowe powiadomienia sygnalizowane są pulsowaniem diody w kulce"</string>
     <string name="incoming_call_volume_title" msgid="8073714801365904099">"Dzwonek"</string>
     <string name="notification_volume_title" msgid="2012640760341080408">"Powiadomienie"</string>
     <string name="checkbox_notification_same_as_incoming_call" msgid="1073644356290338921">"Użyj głośności połączeń przychodzących dla powiadomień"</string>
@@ -439,7 +435,7 @@
     <string name="alarm_volume_title" msgid="2285597478377758706">"Alarm"</string>
     <string name="dock_settings_summary" msgid="455802113668982481">"Ustawienia dźwięku dla podłączonej podstawki"</string>
     <string name="dtmf_tone_enable_title" msgid="1453831168789523185">"Wybieranie numeru"</string>
-    <string name="dtmf_tone_enable_summary_on" msgid="3028201873989887327">"Odtwarzaj dźwięki podczas używania panelu wybierania numeru"</string>
+    <string name="dtmf_tone_enable_summary_on" msgid="3028201873989887327">"Odtwarzaj dźwięki podczas wybierania numeru"</string>
     <string name="dtmf_tone_enable_summary_off" msgid="7791065951268525678">"Odtwarzaj dźwięki podczas wybierania numeru"</string>
     <string name="sound_effects_enable_title" msgid="3197313718929122833">"Dotyk ekranu"</string>
     <string name="sound_effects_enable_summary_on" msgid="6154141289879491329">"Odtwarzaj dźwięk podczas wybierania opcji na ekranie"</string>
@@ -447,7 +443,7 @@
     <string name="lock_sounds_enable_title" msgid="1575990840389107141">"Dźwięki blokady ekranu"</string>
     <string name="lock_sounds_enable_summary_on" msgid="145741024028391473">"Odtwarzaj dźwięki podczas blokowania i odblokowywania ekranu"</string>
     <string name="lock_sounds_enable_summary_off" msgid="8481243116223542804">"Odtwarzaj dźwięki podczas blokowania i odblokowywania ekranu"</string>
-    <string name="haptic_feedback_enable_title" msgid="6311736559245411290">"Dotykowe sprzężenie zwrotne"</string>
+    <string name="haptic_feedback_enable_title" msgid="6311736559245411290">"Wibracja przy wybieraniu"</string>
     <string name="haptic_feedback_enable_summary_on" msgid="1875779656524793053">"Wibracje podczas naciskania przycisków i wykonywania określonych działań w interfejsie użytkownika"</string>
     <string name="haptic_feedback_enable_summary_off" msgid="7287885436963105314">"Wibracje podczas naciskania przycisków i wykonywania określonych działań w interfejsie użytkownika"</string>
     <string name="audio_record_proc_title" msgid="4271091199976457534">"Eliminowanie szumu"</string>
@@ -461,18 +457,18 @@
     <string name="dock_audio_summary_unknown" msgid="4465059868974255693">"Ustawienia dla podłączonej podstawki"</string>
     <string name="dock_not_found_title" msgid="3290961741828952424">"Nie znaleziono podstawki"</string>
     <string name="dock_not_found_text" msgid="3035260358985111855">"Telefon musi być na podstawce, aby można było konfigurować dźwięk"</string>
-    <string name="dock_sounds_enable_title" msgid="3659084028644948905">"Dźwięk umieszczenia w doku"</string>
-    <string name="dock_sounds_enable_summary_on" msgid="8491180514199743771">"Odtwarzaj dźwięk podczas umieszczania telefonu w doku i wyjmowania go"</string>
-    <string name="dock_sounds_enable_summary_off" msgid="3151046599205265919">"Nie odtwarzaj dźwięku podczas umieszczania telefonu w doku i wyjmowania go"</string>
+    <string name="dock_sounds_enable_title" msgid="3659084028644948905">"Dźwięk włożenia telefonu"</string>
+    <string name="dock_sounds_enable_summary_on" msgid="8491180514199743771">"Odtwarzaj dźwięk podczas umieszczania telefonu w podstawce i wyjmowania go"</string>
+    <string name="dock_sounds_enable_summary_off" msgid="3151046599205265919">"Nie odtwarzaj dźwięku podczas umieszczania telefonu w podstawce i wyjmowania go"</string>
     <string name="sync_settings" msgid="9186125469300013491">"Konta i synchronizacja"</string>
     <string name="sync_settings_summary" msgid="2962179505214965667">"Dodaj lub usuń konta i zmień ich ustawienia"</string>
     <string name="search_settings" msgid="1910951467596035063">"Wyszukiwanie"</string>
     <string name="search_settings_summary" msgid="9205656546570654169">"Zarządzaj ustawieniami i historią wyszukiwania"</string>
     <string name="display_settings" msgid="3912042046350078328">"Ustawienia wyświetlacza"</string>
-    <string name="animations_title" msgid="1062189037402346023">"Animacja"</string>
+    <string name="animations_title" msgid="1062189037402346023">"Animacje"</string>
     <string name="animations_summary_on" msgid="8843613112130484436">"Pokaż animację przy otwieraniu i zamykaniu okien"</string>
     <string name="animations_summary_off" msgid="2777026828025551983">"Pokaż animację przy otwieraniu i zamykaniu okien"</string>
-    <string name="accelerometer_title" msgid="7854608399547349157">"Automatyczne obracanie ekranu"</string>
+    <string name="accelerometer_title" msgid="7854608399547349157">"Autoobracanie ekranu"</string>
     <string name="accelerometer_summary_on" msgid="1133737282813048021">"Automatycznie przełącz orientację przy obracaniu telefonu"</string>
     <string name="accelerometer_summary_off" msgid="5485489363715740761">"Automatycznie przełącz orientację przy obracaniu telefonu"</string>
     <string name="brightness" msgid="2354961343555249270">"Jasność ekranu"</string>
@@ -486,7 +482,7 @@
     <string name="sim_pin_toggle" msgid="1742123478029451888">"Zablokuj kartę SIM"</string>
     <string name="sim_lock_on" msgid="2503536505568814324">"Aby korzystać z telefonu, należy wprowadzić kod PIN"</string>
     <string name="sim_lock_off" msgid="258981978215428916">"Aby korzystać z telefonu, należy wprowadzić kod PIN"</string>
-    <string name="sim_pin_change" msgid="6311414184279932368">"Zmień kod PIN do karty SIM"</string>
+    <string name="sim_pin_change" msgid="6311414184279932368">"Zmień PIN do karty SIM"</string>
     <string name="sim_enter_pin" msgid="6608715137008508432">"Kod PIN do karty SIM"</string>
     <string name="sim_enable_sim_lock" msgid="4517742794997166918">"Zablokuj kartę SIM"</string>
     <string name="sim_disable_sim_lock" msgid="7664729528754784824">"Odblokuj kartę SIM"</string>
@@ -565,7 +561,7 @@
     <string name="apn_password" msgid="5412301994998250968">"Hasło"</string>
     <string name="apn_server" msgid="2436185314756372858">"Serwer"</string>
     <string name="apn_mmsc" msgid="3670124402105585737">"MMSC"</string>
-    <string name="apn_mms_proxy" msgid="5374082621073999275">"Proxy dla wiadomości MMS"</string>
+    <string name="apn_mms_proxy" msgid="5374082621073999275">"Proxy dla MMS"</string>
     <string name="apn_mms_port" msgid="4074188088199243040">"Port MMS"</string>
     <string name="apn_mcc" msgid="4258628382260674636">"MCC"</string>
     <string name="apn_mnc" msgid="8629374076888809874">"MNC"</string>
@@ -624,7 +620,7 @@
     <string name="location_networks_disabled" msgid="2708968452901433980">"Określ moją lokalizację w aplikacjach (takich jak Mapy), korzystając z sieci bezprzewodowych"</string>
     <string name="location_neighborhood_level" msgid="4656658097932515921">"Lokalizacja określana jest za pomocą Wi-Fi i/lub sieci komórkowych"</string>
     <string name="location_gps" msgid="6296125378829097831">"Użyj satelitów GPS"</string>
-    <string name="location_street_level" msgid="6460740847018275745">"Określaj lokalizację z dokładnością do ulicy (usuń zaznaczenie, aby oszczędzać baterię)"</string>
+    <string name="location_street_level" msgid="6460740847018275745">"Określa lokalizację z dokładnością do ulicy (wyłącz, aby oszczędzać baterię)"</string>
     <string name="location_gps_disabled" msgid="6632537158777308128">"Podaje dokładne położenie (zużywa więcej baterii, działa na zewnątrz)"</string>
     <string name="assisted_gps" msgid="4649317129586736885">"Użyj wspomaganego systemu GPS"</string>
     <string name="assisted_gps_enabled" msgid="8751899609589792803">"Użyj serwera do wspomagania systemu GPS (usuń zaznaczenie, aby zmniejszyć ruch sieciowy)"</string>
@@ -662,7 +658,7 @@
     <string name="lockpattern_recording_intro_header" msgid="308287052221942814">"Narysuj wzór odblokowania"</string>
     <string name="lockpattern_recording_intro_footer" msgid="1118579101409152113">"Naciśnij Menu, aby uzyskać pomoc."</string>
     <string name="lockpattern_recording_inprogress" msgid="4622772178078818425">"Puść palec, gdy gotowe."</string>
-    <string name="lockpattern_recording_incorrect_too_short" msgid="3103250430366718996">"Połącz co najmniej <xliff:g id="NUMBER">%d</xliff:g> punktów. Spróbuj jeszcze raz:"</string>
+    <string name="lockpattern_recording_incorrect_too_short" msgid="3103250430366718996">"Połącz co najmniej <xliff:g id="NUMBER">%d</xliff:g> kropki. Spróbuj jeszcze raz:"</string>
     <string name="lockpattern_pattern_entered_header" msgid="5012716272001299362">"Wzór został nagrany!"</string>
     <string name="lockpattern_need_to_confirm" msgid="5144676887162575050">"Narysuj wzór ponownie, aby potwierdzić:"</string>
     <string name="lockpattern_pattern_confirmed_header" msgid="2223856038485537716">"Nowy wzór odblokowania:"</string>
@@ -683,9 +679,9 @@
     <string name="skip_button_label" msgid="8680422740354436943">"Anuluj"</string>
     <string name="next_button_label" msgid="8890792540116568321">"Dalej"</string>
     <string name="lock_title" msgid="4059246467204273930">"Zabezpieczanie telefonu"</string>
-    <string name="lock_intro_message" msgid="9100785646737118042"><font size="17">"Chroń swój telefon przed nieautoryzowanym użyciem, tworząc osobisty wzorzec odblokowywania ekranu. "\n<font height="17">\n</font><b>"1"</b>"  Na następnym ekranie obejrzyj procedurę rysowania przykładowego wzorca. "\n<font height="17">\n</font><b>"2"</b>"  Po przygotowaniu się narysuj własny osobisty wzorzec odblokowywania. Wypróbuj różne wzorce, łącząc co najmniej cztery kropki. "\n<font height="17">\n</font><b>"3"</b>"  Ponownie narysuj swój wzorzec, aby go potwierdzić. "\n<font height="17">\n</font><b>"Wszystko gotowe? Dotknij przycisku „Dalej”"</b>". "\n<font height="3">\n</font>"Aby pozostawić telefon bez ochrony, dotknij przycisku „Anuluj”."</font></string>
+    <string name="lock_intro_message" msgid="9100785646737118042"><font size="17">"Chroń swój telefon przed nieautoryzowanym użyciem, tworząc osobisty wzór odblokowywania ekranu. "\n<font height="17">\n</font><b>"1"</b>"  Na następnym ekranie obejrzyj procedurę rysowania przykładowego wzoru. "\n<font height="17">\n</font><b>"2"</b>"  Po przygotowaniu się narysuj własny osobisty wzór odblokowywania. Wypróbuj różne wzory, łącząc co najmniej cztery kropki. "\n<font height="17">\n</font><b>"3"</b>"  Ponownie narysuj swój wzór, aby go potwierdzić. "\n<font height="17">\n</font><b>"Wszystko gotowe? Dotknij przycisku „Dalej”"</b>". "\n<font height="3">\n</font>"Aby pozostawić telefon bez ochrony, dotknij przycisku „Anuluj”."</font></string>
     <string name="lock_example_title" msgid="8052305554017485410">"Przykładowy wzór"</string>
-    <string name="lock_example_message" msgid="1838650097090632706">"Połącz co najmniej cztery kropki."\n" "\n"Dotknij przycisku „Dalej”, aby rozpocząć rysowanie własnego wzorca."</string>
+    <string name="lock_example_message" msgid="1838650097090632706">"Połącz co najmniej cztery kropki."\n" "\n"Dotknij przycisku „Dalej”, aby rozpocząć rysowanie własnego wzoru."</string>
     <string name="manageapplications_settings_title" msgid="5712405848153426706">"Zarządzaj aplikacjami"</string>
     <string name="manageapplications_settings_summary" msgid="6097117021500651232">"Zarządzaj zainstalowanymi aplikacjami oraz usuwaj je"</string>
     <string name="applications_settings" msgid="3736173521008476946">"Aplikacje"</string>
@@ -766,7 +762,7 @@
     <string name="service_started_by_app" msgid="8432097226392386802">"Uruchomiona przez aplikację: dotknij, aby zatrzymać"</string>
     <string name="service_client_name" msgid="2337664610975074717">"<xliff:g id="CLIENT_NAME">%1$s</xliff:g>: dotknij, aby zarządzać"</string>
     <string name="service_background_processes" msgid="5158600475629177758">"Dostępne: <xliff:g id="FREE">%2$s</xliff:g>+<xliff:g id="MEMORY">%3$s</xliff:g> w <xliff:g id="COUNT">%1$d</xliff:g>"</string>
-    <string name="service_foreground_processes" msgid="4013890350284680796">"Pozostała: <xliff:g id="MEMORY">%2$s</xliff:g> w <xliff:g id="COUNT">%1$d</xliff:g>"</string>
+    <string name="service_foreground_processes" msgid="4013890350284680796">"Inne: <xliff:g id="MEMORY">%2$s</xliff:g> w <xliff:g id="COUNT">%1$d</xliff:g>"</string>
     <string name="service_process_name" msgid="8630408984456958400">"Proces: <xliff:g id="PROCESS">%1$s</xliff:g>"</string>
     <string name="language_settings" msgid="502219872342167227">"Język i klawiatura"</string>
     <string name="language_keyboard_settings_title" msgid="3455826933385341107">"Ustawienia języka i klawiatury"</string>
@@ -822,9 +818,9 @@
     <string name="enable_adb" msgid="7982306934419797485">"Debugowanie USB"</string>
     <string name="enable_adb_summary" msgid="4881186971746056635">"Tryb debugowania, gdy podłączone jest USB"</string>
     <string name="keep_screen_on" msgid="1146389631208760344">"Zostaw włączony"</string>
-    <string name="keep_screen_on_summary" msgid="2173114350754293009">"Ekran nigdy nie będzie gaszony podczas ładowania"</string>
-    <string name="allow_mock_location" msgid="2787962564578664888">"Pozorowanie położenia"</string>
-    <string name="allow_mock_location_summary" msgid="317615105156345626">"Zezwalaj na pozorowane położenia"</string>
+    <string name="keep_screen_on_summary" msgid="2173114350754293009">"Ekran nie będzie gaszony podczas ładowania telefonu"</string>
+    <string name="allow_mock_location" msgid="2787962564578664888">"Pozorowanie lokalizacji"</string>
+    <string name="allow_mock_location_summary" msgid="317615105156345626">"Zezwalaj na pozorowanie lokalizacji"</string>
     <string name="adb_warning_title" msgid="6234463310896563253">"Czy zezwalać na debugowanie USB?"</string>
     <string name="adb_warning_message" msgid="5352555112049663033">"Debugowanie USB jest przeznaczone wyłącznie do celów programistycznych. Może posłużyć do kopiowania danych między komputerem a urządzeniem, instalowania aplikacji w urządzeniu bez powiadamiania, a także odczytywania danych dziennika."</string>
     <string name="gadget_picker_title" msgid="98374951396755811">"Wybierz gadżet"</string>
@@ -876,7 +872,7 @@
     <string name="accessibility_service_no_apps_title" msgid="898893674114288531">"Nie znaleziono aplikacji związanych z ułatwieniami dostępu"</string>
     <string name="accessibility_service_no_apps_message" msgid="2450056749545404807">"Nie zainstalowano żadnych aplikacji związanych z ułatwieniami dostępu."\n\n"Z usługi Android Market możesz pobrać czytnik ekranowy dla tego urządzenia."\n\n"Aby zainstalować czytnik ekranowy, kliknij przycisk OK."</string>
     <string name="accessibility_power_button_category" msgid="8545885236482339928">"Przycisk zasilania"</string>
-    <string name="accessibility_power_button_ends_call" msgid="7698764194501089533">"Przycisk zasilania kończy połączenie"</string>
+    <string name="accessibility_power_button_ends_call" msgid="7698764194501089533">"Koniec połączenia"</string>
     <string name="accessibility_power_button_ends_call_summary" msgid="8878097632186291462">"Naciśnięcie przycisku zasilania w trakcie połączenia powoduje jego zakończenie zamiast wyłączenia ekranu"</string>
     <string name="power_usage_summary_title" msgid="5180282911164282324">"Użycie baterii"</string>
     <string name="power_usage_summary" msgid="7237084831082848168">"Gdzie wykorzystywana jest bateria"</string>
@@ -936,19 +932,19 @@
     <string name="menu_stats_refresh" msgid="1676215433344981075">"Odśwież"</string>
     <string name="process_kernel_label" msgid="3916858646836739323">"System operacyjny Android"</string>
     <string name="process_mediaserver_label" msgid="6500382062945689285">"Serwer mediów"</string>
-    <string name="voice_input_output_settings" msgid="1336135218350444783">"Wprowadzanie i odtwarzanie głosowe"</string>
-    <string name="voice_input_output_settings_title" msgid="2442850635048676991">"Ustawienia wprowadzania i odtwarzania głosowego"</string>
+    <string name="voice_input_output_settings" msgid="1336135218350444783">"Ustawienia głosowe"</string>
+    <string name="voice_input_output_settings_title" msgid="2442850635048676991">"Ustawienia funkcji głosowych"</string>
     <string name="voice_search_settings_title" msgid="2775469246913196536">"Wyszukiwanie głosowe"</string>
     <string name="keyboard_settings_title" msgid="5080115226780201234">"Klawiatura Android"</string>
     <string name="voice_input_category" msgid="1589318440824204736">"Wprowadzanie głosowe"</string>
     <string name="voice_output_category" msgid="2624538587784986229">"Odtwarzanie głosowe"</string>
     <string name="recognizer_title" msgid="3231385184559054457">"Moduł rozpoznawania mowy"</string>
-    <string name="recognizer_settings_title" msgid="6038598099039717232">"Ustawienia modułu rozpoznawania mowy"</string>
+    <string name="recognizer_settings_title" msgid="6038598099039717232">"Rozpoznawanie mowy"</string>
     <string name="recognizer_settings_summary" msgid="4472287934134546902">"Ustawienia dla „<xliff:g id="RECOGNIZER_NAME">%s</xliff:g>”"</string>
-    <string name="tts_settings" msgid="8186971894801348327">"Ustawienia przetwarzania tekstu na mowę"</string>
+    <string name="tts_settings" msgid="8186971894801348327">"Przetwarzanie tekstu na mowę"</string>
     <string name="tts_settings_title" msgid="4182348653053000933">"Ustawienia przetwarzania tekstu na mowę"</string>
-    <string name="use_default_tts_settings_title" msgid="1577063839539732930">"Zawsze używaj moich ustawień"</string>
-    <string name="use_default_tts_settings_summary" msgid="4253502106159206276">"Poniższe ustawienia domyślne zastępują ustawienia aplikacji"</string>
+    <string name="use_default_tts_settings_title" msgid="1577063839539732930">"Używaj moich ustawień"</string>
+    <string name="use_default_tts_settings_summary" msgid="4253502106159206276">"Poniższe ustawienia domyślne zastępują ustawienia innych aplikacji"</string>
     <string name="tts_default_settings_section" msgid="5787915620218907443">"Ustawienia domyślne"</string>
     <string name="tts_default_synth_title" msgid="29467896463371992">"Mechanizm domyślny"</string>
     <string name="tts_default_synth_summary" msgid="6482936537135251690">"Konfiguruje mechanizm syntezy mowy używany do odczytywania tekstu"</string>
@@ -1060,7 +1056,7 @@
     <string name="vpn_secret_unchanged" msgid="8700613973594154529">"(nie zmieniono)"</string>
     <string name="vpn_secret_not_set" msgid="1037792636371641845">"(nie ustawiono)"</string>
     <string name="credentials_category" msgid="8536992056377271234">"Magazyn danych logowania"</string>
-    <string name="credentials_access" msgid="4843187230913860492">"Użyj bezpiecznych danych logowania"</string>
+    <string name="credentials_access" msgid="4843187230913860492">"Dostęp do poufnych danych"</string>
     <string name="credentials_access_summary" msgid="319662078718574168">"Zezwalaj aplikacjom na dostęp do bezpiecznych certyfikatów i innych danych logowania"</string>
     <string name="credentials_unlock" msgid="1463040326264133844">"Wprowadź hasło"</string>
     <string name="credentials_unlock_hint" msgid="594679530407918031">"Wprowadź hasło magazynu danych logowania."</string>
@@ -1102,11 +1098,11 @@
     <string name="backup_section_title" msgid="717834414028702406">"Tworzenie i przywracanie kopii zapasowej"</string>
     <string name="personal_data_section_title" msgid="7815209034443782061">"Dane osobiste"</string>
     <string name="backup_settings_title" msgid="2968262658155327829">"Utwórz kopię zapasową moich ustawień"</string>
-    <string name="auto_restore_title" msgid="5397528966329126506">"Automatyczne przywracanie"</string>
-    <string name="auto_restore_summary" msgid="2029683590724508019">"Przywróć dane aplikacji z kopii zapasowej podczas instalacji"</string>
+    <string name="auto_restore_title" msgid="5397528966329126506">"Autoprzywracanie"</string>
+    <string name="auto_restore_summary" msgid="2029683590724508019">"Przy instalowaniu aplikacji przywróć ich dane z kopii zapasowej"</string>
     <string name="backup_erase_dialog_title" msgid="3438255037256586237">"Kopia zapasowa"</string>
     <string name="backup_erase_dialog_message" msgid="2948090854996352245">"Czy na pewno chcesz zakończyć tworzenie kopii zapasowych ustawień i danych aplikacji oraz usunąć wszystkie kopie z serwerów Google?"</string>
-    <string name="device_admin_settings_title" msgid="1335557832906433309">"Ustawienia administracji urządzeniem"</string>
+    <string name="device_admin_settings_title" msgid="1335557832906433309">"Ustawienia administracji"</string>
     <string name="active_device_admin_msg" msgid="6930903262612422111">"Administrator urządzenia"</string>
     <string name="remove_device_admin" msgid="3596845261596451437">"Dezaktywuj"</string>
     <string name="select_device_admin_msg" msgid="2645509057946368094">"Administratorzy urządzenia"</string>
@@ -1117,4 +1113,12 @@
     <string name="device_admin_warning" msgid="1149471041373876923">"Aktywowanie tego administratora zezwoli aplikacji <xliff:g id="APP_NAME">%1$s</xliff:g> na wykonywanie następujących operacji:"</string>
     <string name="device_admin_status" msgid="7169948053970923035">"Administrator jest aktywny i zezwala aplikacji <xliff:g id="APP_NAME">%1$s</xliff:g> na wykonywanie następujących operacji:"</string>
     <string name="untitled_apn" msgid="1230060359198685513">"Bez nazwy"</string>
+    <!-- no translation found for sound_category_sound_title (1488759370067953996) -->
+    <skip />
+    <!-- no translation found for sound_category_calls_title (3688531959256239012) -->
+    <skip />
+    <!-- no translation found for sound_category_notification_title (3502115998790286943) -->
+    <skip />
+    <!-- no translation found for sound_category_feedback_title (4399742321363475393) -->
+    <skip />
 </resources>

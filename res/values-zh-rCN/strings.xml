@@ -37,7 +37,7 @@
     <string name="radioInfo_data_disconnected" msgid="1959735267890719418">"已断开连接"</string>
     <string name="radioInfo_data_connecting" msgid="8404571440697917823">"正在连接"</string>
     <string name="radioInfo_data_connected" msgid="7074301157399238697">"已连接"</string>
-    <string name="radioInfo_data_suspended" msgid="5315325487890334196">"已挂起"</string>
+    <string name="radioInfo_data_suspended" msgid="5315325487890334196">"已暂停"</string>
     <string name="radioInfo_unknown" msgid="737385314432468266">"未知"</string>
     <string name="radioInfo_display_packets" msgid="8654359809877290639">"pkts"</string>
     <string name="radioInfo_display_bytes" msgid="4018206969492931883">"字节"</string>
@@ -69,7 +69,7 @@
     <string name="battery_info_status_unknown" msgid="196130600938058547">"未知"</string>
     <string name="battery_info_status_charging" msgid="1705179948350365604">"正在充电"</string>
     <string name="battery_info_status_charging_ac" msgid="5874340256342956252">"（交流电）"</string>
-    <string name="battery_info_status_charging_usb" msgid="4059070156126770959">"(USB)"</string>
+    <string name="battery_info_status_charging_usb" msgid="4059070156126770959">"(USB 绑定选项)"</string>
     <string name="battery_info_status_discharging" msgid="6222697503392774475">"正在放电"</string>
     <string name="battery_info_status_not_charging" msgid="2820070506621483576">"未在充电"</string>
     <string name="battery_info_status_full" msgid="2824614753861462808">"已满"</string>
@@ -122,15 +122,15 @@
     <string name="date_time_changeDate_text" msgid="5259762626498028057">"日期"</string>
     <string name="choose_timezone" msgid="7762866468013985022">"选择时区"</string>
     <string name="normal_date_format" msgid="1982904221918374153">"普通 (<xliff:g id="DATE">%s</xliff:g>)"</string>
-    <string name="display_preview_label" msgid="1127597250917274792">"预览："</string>
+    <string name="display_preview_label" msgid="1127597250917274792">"预览:"</string>
     <string name="display_font_size_label" msgid="8941851418397475389">"字号："</string>
     <!-- no translation found for intent_sender_data_label (6332324780477289261) -->
     <skip />
     <string name="intent_sender_sendbroadcast_text" msgid="1415735148895872715">"发送<xliff:g id="BROADCAST">broadcast</xliff:g>"</string>
-    <string name="intent_sender_action_label" msgid="616458370005452389">"<xliff:g id="ACTION">Action</xliff:g>："</string>
+    <string name="intent_sender_action_label" msgid="616458370005452389">"<xliff:g id="ACTION">Action</xliff:g>:"</string>
     <string name="intent_sender_startactivity_text" msgid="5080516029580421895">"启动<xliff:g id="ACTIVITY">activity</xliff:g>"</string>
-    <string name="intent_sender_resource_label" msgid="6963659726895482829">"<xliff:g id="RESOURCE">Resource</xliff:g>："</string>
-    <string name="intent_sender_account_label" msgid="465210404475603404">"帐户："</string>
+    <string name="intent_sender_resource_label" msgid="6963659726895482829">"<xliff:g id="RESOURCE">Resource</xliff:g>:"</string>
+    <string name="intent_sender_account_label" msgid="465210404475603404">"帐户:"</string>
     <string name="proxy_clear_text" msgid="5555400754952012657">"清除"</string>
     <string name="proxy_port_label" msgid="2623639656638472491">"端口"</string>
     <string name="proxy_defaultView_text" msgid="6387985519141433291">"恢复默认设置"</string>
@@ -142,7 +142,7 @@
     <string name="proxy_error_empty_port" msgid="3525734169948795417">"您必须填写端口字段。"</string>
     <string name="proxy_error_empty_host_set_port" msgid="2451694104858226781">"如果主机字段为空，则端口字段必须为空。"</string>
     <string name="proxy_error_invalid_port" msgid="1816315605424943626">"您输入的端口无效。"</string>
-    <string name="radio_info_signal_location_label" msgid="16475158265551708">"位置："</string>
+    <string name="radio_info_signal_location_label" msgid="16475158265551708">"地点："</string>
     <string name="radio_info_neighboring_location_label" msgid="2385625674055934880">"相邻的 CID："</string>
     <string name="radio_info_data_attempts_label" msgid="1731106244577323381">"数据尝试次数："</string>
     <string name="radio_info_gprs_service_label" msgid="2331818110375395364">"GPRS 服务："</string>
@@ -155,7 +155,7 @@
     <string name="radio_info_data_successes_label" msgid="4417894113689054945">"数据成功："</string>
     <string name="radio_info_ppp_received_label" msgid="3345184342444878849">"已收到 PPP："</string>
     <string name="radio_info_gsm_service_label" msgid="2082332114596916985">"GSM 服务："</string>
-    <string name="radio_info_signal_strength_label" msgid="1931937920896925766">"信号强度："</string>
+    <string name="radio_info_signal_strength_label" msgid="1931937920896925766">"信号强度:"</string>
     <string name="radio_info_call_status_label" msgid="4896238900685510883">"呼叫状态："</string>
     <string name="radio_info_ppp_sent_label" msgid="5009102250704375687">"已发送 PPP："</string>
     <string name="radio_info_radio_resets_label" msgid="9211343458143291617">"无线通信重置："</string>
@@ -310,14 +310,14 @@
     <string name="bluetooth_connecting_error_message" msgid="1779660510084746802">"连接到<xliff:g id="DEVICE_NAME">%1$s</xliff:g>时出现问题。"</string>
     <string name="bluetooth_preference_scan_title" msgid="2277464653118896016">"扫描查找设备"</string>
     <string name="bluetooth_device_context_connect" msgid="3997659895003244941">"连接"</string>
-    <string name="bluetooth_device_context_disconnect" msgid="8220072022970148683">"断开连接"</string>
+    <string name="bluetooth_device_context_disconnect" msgid="8220072022970148683">"断开绑定"</string>
     <string name="bluetooth_device_context_pair_connect" msgid="7611522504813927727">"配对和连接"</string>
     <string name="bluetooth_device_context_unpair" msgid="662992425948536144">"取消配对"</string>
     <string name="bluetooth_device_context_disconnect_unpair" msgid="7644014238070043798">"断开连接和取消配对"</string>
-    <string name="bluetooth_device_context_connect_advanced" msgid="2643129703569788771">"选项..."</string>
+    <string name="bluetooth_device_context_connect_advanced" msgid="2643129703569788771">"选项…"</string>
     <string name="bluetooth_connect_specific_profiles_title" msgid="6952214406025825164">"连接到..."</string>
     <string name="bluetooth_profile_a2dp" msgid="3259633293424539529">"媒体"</string>
-    <string name="bluetooth_profile_headset" msgid="1874975688666658946">"手机"</string>
+    <string name="bluetooth_profile_headset" msgid="1874975688666658946">"电话"</string>
     <string name="bluetooth_profile_opp" msgid="3799470046565284440">"传输"</string>
     <string name="bluetooth_summary_connected_to_a2dp" msgid="510833839847758664">"已连接到媒体音频"</string>
     <string name="bluetooth_summary_connected_to_headset" msgid="4876496372728623918">"已连接到手机音频"</string>
@@ -360,7 +360,7 @@
     <string name="wifi_ssid" msgid="641393708309146745">"网络 SSID"</string>
     <string name="wifi_security" msgid="6603611185592956936">"安全性"</string>
     <string name="wifi_signal" msgid="5514120261628065287">"信号强度"</string>
-    <string name="wifi_status" msgid="4824568012414605414">"状态"</string>
+    <string name="wifi_status" msgid="4824568012414605414">"状态消息"</string>
     <string name="wifi_speed" msgid="3526198708812322037">"连接速度"</string>
     <string name="wifi_ip_address" msgid="1440054061044402918">"IP 地址"</string>
     <string name="wifi_eap_method" msgid="8529436133640730382">"EAP 方法"</string>
@@ -423,8 +423,10 @@
     <skip />
     <string name="vibrate_in_silent_title" msgid="3897968069156767036">"静音时振动"</string>
     <string name="vibrate_in_silent_summary" msgid="3312600513070076281">"静音模式下允许振动反馈"</string>
-    <string name="vibrate_title" msgid="5408984084125311526">"手机振动"</string>
-    <string name="vibrate_summary" msgid="5224303668448643275">"来电时振动手机"</string>
+    <!-- no translation found for vibrate_title (6045820877942801599) -->
+    <skip />
+    <!-- no translation found for vibrate_summary (7378130397830790458) -->
+    <skip />
     <string name="notification_sound_title" msgid="6316316069880531693">"通知铃声"</string>
     <!-- no translation found for notification_sound_summary (2953599929394109819) -->
     <skip />
@@ -474,7 +476,7 @@
     <string name="animations_summary_off" msgid="2777026828025551983">"打开和关闭窗口时显示动画"</string>
     <string name="accelerometer_title" msgid="7854608399547349157">"自动旋转屏幕"</string>
     <string name="accelerometer_summary_on" msgid="1133737282813048021">"旋转手机时自动改变显示方向"</string>
-    <string name="accelerometer_summary_off" msgid="5485489363715740761">"旋转手机时自动改变方向"</string>
+    <string name="accelerometer_summary_off" msgid="5485489363715740761">"旋转手机时自动改变显示方向"</string>
     <string name="brightness" msgid="2354961343555249270">"亮度"</string>
     <string name="brightness_summary" msgid="838917350127550703">"调整屏幕亮度"</string>
     <string name="screen_timeout" msgid="4882669461447531301">"屏幕超时"</string>
@@ -511,8 +513,8 @@
     <string name="kernel_version" msgid="9192574954196167602">"内核版本"</string>
     <string name="build_number" msgid="3075795840572241758">"版本号"</string>
     <string name="device_info_not_available" msgid="8062521887156825182">"不可用"</string>
-    <string name="device_status_activity_title" msgid="1411201799384697904">"状态"</string>
-    <string name="device_status" msgid="607405385799807324">"状态"</string>
+    <string name="device_status_activity_title" msgid="1411201799384697904">"状态消息"</string>
+    <string name="device_status" msgid="607405385799807324">"状态消息"</string>
     <string name="device_status_summary" msgid="2599162787451519618">"电话号码、信号等"</string>
     <string name="storage_settings" msgid="6681164315506788024">"SD 卡和手机内存"</string>
     <string name="storage_settings_title" msgid="5379463509034022773">"SD 卡和手机内存设置"</string>
@@ -557,7 +559,7 @@
     <string name="apn_settings" msgid="3743170484827528406">"APN"</string>
     <string name="apn_edit" msgid="1354715499708424718">"修改接入点"</string>
     <string name="apn_not_set" msgid="7422262558097875757">"&lt;未设置&gt;"</string>
-    <string name="apn_name" msgid="4115580098369824123">"名称"</string>
+    <string name="apn_name" msgid="4115580098369824123">"姓名"</string>
     <string name="apn_apn" msgid="2479425126733513353">"APN"</string>
     <string name="apn_http_proxy" msgid="1826885957243696354">"代理"</string>
     <string name="apn_http_port" msgid="3763259523984976226">"端口"</string>
@@ -589,7 +591,7 @@
     <string name="restore_default_apn_completed" msgid="3990449939234957281">"重置默认 APN 设置已完成"</string>
     <string name="master_clear_title" msgid="5907939616087039756">"恢复出厂设置"</string>
     <string name="master_clear_summary" msgid="4986154238001088492">"清除手机上的所有数据"</string>
-    <string name="master_clear_desc" msgid="7823268823499739178">"这将清除您手机中的以下数据："\n<li>"您的 Google 帐户"</li>\n<li>"系统与应用程序的数据和设置"</li>\n<li>"下载的应用程序"</li>\n"不会清除以下数据："\n<li>"当前系统软件和捆绑的应用程序"</li>\n<li>"SD 卡中的文件，如音乐或照片"</li></string>
+    <string name="master_clear_desc" msgid="7823268823499739178">"这会从手机中删除所有数据，包括："\n<li>"Google 帐户"</li>\n<li>"系统与应用程序的数据和设置"</li>\n<li>"下载的应用程序"</li>\n"不会删除："\n<li>"当前系统软件和捆绑的应用程序"</li>\n<li>"SD 卡文件，如音乐或照片"</li></string>
     <string name="master_clear_button_text" msgid="7550632653343157971">"重置手机"</string>
     <string name="master_clear_final_desc" msgid="6917971132484622696">"是否删除所有个人信息和下载的所有应用程序？此操作无法还原！"</string>
     <string name="master_clear_final_button_text" msgid="5390908019019242910">"清除全部内容"</string>
@@ -601,7 +603,7 @@
     <string name="media_format_desc" msgid="1142563222357820834">"该操作会清除手机中 SD 卡上的数据。卡上的所有数据都将丢失。"</string>
     <string name="media_format_button_text" msgid="370856400090190151">"格式化 SD 卡"</string>
     <string name="media_format_final_desc" msgid="1776666694910717198">"确定要将 SD 卡格式化、清除所有媒体吗？该操作将不能撤消！"</string>
-    <string name="media_format_final_button_text" msgid="4881713344315923175">"清除所有内容"</string>
+    <string name="media_format_final_button_text" msgid="4881713344315923175">"清除全部内容"</string>
     <string name="media_format_gesture_prompt" msgid="3109349468816856670">"绘制您的解锁图案"</string>
     <string name="media_format_gesture_explanation" msgid="4239529439389660159">"您必须绘制解锁图案以确认将 SD 卡格式化。"</string>
     <string name="call_settings_title" msgid="5188713413939232801">"通话设置"</string>
@@ -683,9 +685,9 @@
     <string name="skip_button_label" msgid="8680422740354436943">"取消"</string>
     <string name="next_button_label" msgid="8890792540116568321">"下一步"</string>
     <string name="lock_title" msgid="4059246467204273930">"手机安全设置"</string>
-    <string name="lock_intro_message" msgid="9100785646737118042"><font size="17">"创建个人屏幕的解锁图案，防止手机被人擅自使用。"\n<font height="17">\n</font><b>"1"</b>"  在下一屏幕上，观看示例图案的绘制过程。"\n<font height="17">\n</font><b>"2"</b>"  准备就绪后，绘制您自己的个人解锁图案。可尝试不同的图案，但至少经过四个点。"\n<font height="17">\n</font><b>"3"</b>"  再次绘制您的图案进行确认。"\n<font height="17">\n</font><b>"准备好要开始了吗？请触摸“下一步”"</b>"。"\n<font height="3">\n</font>"如果不想改变手机的无保护状态，请触摸“取消”。"</font></string>
+    <string name="lock_intro_message" msgid="9100785646737118042"><font size="17">"通过创建个人屏幕解锁图案，防止他人未经授权使用您的手机。"\n<font height="17">\n</font><b>"1"</b>"  在下一屏幕上，观看示例图案的绘制过程。"\n<font height="17">\n</font><b>"2"</b>"  准备就绪后，绘制您自己的个人解锁图案。可尝试不同的图案，但至少要连接四个点。"\n<font height="17">\n</font><b>"3"</b>"  重新绘制您的图案进行确认。"\n<font height="17">\n</font><b>"可以开始了吗？触摸“下一步”"</b>"。"\n<font height="3">\n</font>"要让手机处于不受保护的状态，请触摸“取消”。"</font></string>
     <string name="lock_example_title" msgid="8052305554017485410">"示例图案"</string>
-    <string name="lock_example_message" msgid="1838650097090632706">"至少经过四个点。"\n\n"您准备好绘制自己的解锁图案时，请触摸“下一步”。"</string>
+    <string name="lock_example_message" msgid="1838650097090632706">"至少连接四个点。"\n\n"准备就绪后，触摸“下一步”绘制自己的图案。"</string>
     <string name="manageapplications_settings_title" msgid="5712405848153426706">"管理应用程序"</string>
     <string name="manageapplications_settings_summary" msgid="6097117021500651232">"管理和删除安装的应用程序"</string>
     <string name="applications_settings" msgid="3736173521008476946">"应用程序"</string>
@@ -765,8 +767,8 @@
     <string name="confirm_stop_cancel" msgid="206495326622692381">"取消"</string>
     <string name="service_started_by_app" msgid="8432097226392386802">"由应用程序启动：触摸可停止"</string>
     <string name="service_client_name" msgid="2337664610975074717">"<xliff:g id="CLIENT_NAME">%1$s</xliff:g>：触摸可进行管理"</string>
-    <string name="service_background_processes" msgid="5158600475629177758">"可用空间：<xliff:g id="FREE">%2$s</xliff:g>+<xliff:g id="MEMORY">%3$s</xliff:g>，共 <xliff:g id="COUNT">%1$d</xliff:g> 个程序"</string>
-    <string name="service_foreground_processes" msgid="4013890350284680796">"其他空间：<xliff:g id="MEMORY">%2$s</xliff:g>，共 <xliff:g id="COUNT">%1$d</xliff:g> 个程序"</string>
+    <string name="service_background_processes" msgid="5158600475629177758">"可用：<xliff:g id="FREE">%2$s</xliff:g>+<xliff:g id="MEMORY">%3$s</xliff:g>，合计 <xliff:g id="COUNT">%1$d</xliff:g>"</string>
+    <string name="service_foreground_processes" msgid="4013890350284680796">"其他：<xliff:g id="MEMORY">%2$s</xliff:g>，合计 <xliff:g id="COUNT">%1$d</xliff:g>"</string>
     <string name="service_process_name" msgid="8630408984456958400">"进程：<xliff:g id="PROCESS">%1$s</xliff:g>"</string>
     <string name="language_settings" msgid="502219872342167227">"语言和键盘"</string>
     <string name="language_keyboard_settings_title" msgid="3455826933385341107">"语言和键盘设置"</string>
@@ -810,10 +812,10 @@
     <string name="quick_launch_clear_ok_button" msgid="2634568926597586716">"确定"</string>
     <string name="quick_launch_clear_cancel_button" msgid="1892854652197747064">"取消"</string>
     <string name="quick_launch_display_mode_applications" msgid="3748789806447639039">"应用程序"</string>
-    <string name="quick_launch_display_mode_shortcuts" msgid="4177934019174169042">"快捷键"</string>
+    <string name="quick_launch_display_mode_shortcuts" msgid="4177934019174169042">"快捷方式"</string>
     <string name="input_methods_settings_title" msgid="6800066636850553887">"文字输入"</string>
     <string name="input_methods_settings_summary" msgid="7571173442946675205">"管理文字输入选项"</string>
-    <string name="input_methods_settings_label_format" msgid="6002887604815693322">"<xliff:g id="IME_NAME">%1$s</xliff:g>设置"</string>
+    <string name="input_methods_settings_label_format" msgid="6002887604815693322">"<xliff:g id="IME_NAME">%1$s</xliff:g> 设置"</string>
     <string name="onscreen_keyboard_settings_summary" msgid="5841558383556238653">"屏幕键盘设置"</string>
     <string name="builtin_keyboard_settings_title" msgid="8169889453770863227">"设备键盘"</string>
     <string name="builtin_keyboard_settings_summary" msgid="6404687907454621637">"内置键盘设置"</string>
@@ -859,7 +861,7 @@
     <string name="battery_history_phone_on" msgid="4891504401623839532">"手机处于开机状态的时间："</string>
     <string name="battery_history_screen_on_battery" msgid="536058210445081888">"正在使用电池："</string>
     <string name="battery_history_screen_on_plugged" msgid="5019127390021871260">"充电时间："</string>
-    <string name="usage_stats_label" msgid="5890846333487083609">"使用情况统计"</string>
+    <string name="usage_stats_label" msgid="5890846333487083609">"使用情况统计数据"</string>
     <string name="testing_usage_stats" msgid="7823048598893937339">"使用情况统计数据"</string>
     <string name="display_order_text" msgid="8592776965827565271">"排序方式："</string>
     <string name="app_name_label" msgid="2000949925256858308">"应用程序"</string>
@@ -871,7 +873,7 @@
     <string name="toggle_accessibility_title" msgid="650839277066574497">"辅助功能"</string>
     <string name="accessibility_services_category" msgid="8127851026323672607">"辅助功能服务"</string>
     <string name="no_accessibility_services_summary" msgid="694578333333808159">"未安装辅助功能服务。"</string>
-    <string name="accessibility_service_security_warning" msgid="4066258132331302670">"此辅助功能服务可能会收集您键入的所有文字，包括信用卡号码等个人数据，但并不会收集您输入的密码，而且它也可能记录您的用户界面交互行为。该服务由应用程序“<xliff:g id="ACCESSIBILITY_SERVICE_NAME">%1$s</xliff:g>”所提供。要使用此辅助功能服务吗？"</string>
+    <string name="accessibility_service_security_warning" msgid="4066258132331302670">"此辅助服务能够收集键入的所有文字，包括除密码以外的个人资料，如信用卡号。该服务还会记录用户界面交互情况。该服务来自应用程序 <xliff:g id="ACCESSIBILITY_SERVICE_NAME">%1$s</xliff:g>。是否使用此辅助服务？"</string>
     <string name="accessibility_service_disable_warning" msgid="8930591383312775132">"是否停用辅助功能？"</string>
     <string name="accessibility_service_no_apps_title" msgid="898893674114288531">"找不到与辅助功能相关的应用程序"</string>
     <string name="accessibility_service_no_apps_message" msgid="2450056749545404807">"您没有安装任何与辅助功能相关的应用程序。"\n\n"您可以从 Android 电子市场下载适用于您设备的屏幕阅读器。"\n\n"点击“确定”即可安装屏幕阅读器。"</string>
@@ -882,7 +884,7 @@
     <string name="power_usage_summary" msgid="7237084831082848168">"耗电情况"</string>
     <string name="battery_since_unplugged" msgid="338073389740738437">"拔下电源后的电量消耗情况"</string>
     <string name="battery_since_reset" msgid="7464546661121187045">"重置后的电量消耗情况"</string>
-    <string name="battery_stats_duration" msgid="7464501326709469282">"拔下电源后已过了 <xliff:g id="TIME">%1$s</xliff:g>"</string>
+    <string name="battery_stats_duration" msgid="7464501326709469282">"拔下电源后已过 <xliff:g id="TIME">%1$s</xliff:g>"</string>
     <!-- no translation found for battery_stats_last_duration (1535831453827905957) -->
     <skip />
     <string name="awake" msgid="387122265874485088">"设备唤醒时间"</string>
@@ -930,8 +932,8 @@
     <string name="battery_sugg_apps_info" msgid="6065882899391322442">"停止或卸载应用程序"</string>
     <string name="battery_sugg_apps_gps" msgid="4145005297393800223">"不使用 GPS 时将其关闭"</string>
     <string name="battery_sugg_apps_settings" msgid="8021302847272481168">"该应用程序中可能有用于减少耗电量的设置"</string>
-    <string name="menu_stats_unplugged" msgid="8296577130840261624">"拔下电源 <xliff:g id="UNPLUGGED">%1$s</xliff:g>后的电量消耗情况"</string>
-    <string name="menu_stats_last_unplugged" msgid="5922246077592434526">"<xliff:g id="UNPLUGGED">%1$s</xliff:g>前拔下电源"</string>
+    <string name="menu_stats_unplugged" msgid="8296577130840261624">"拔下电源后已过 <xliff:g id="UNPLUGGED">%1$s</xliff:g>"</string>
+    <string name="menu_stats_last_unplugged" msgid="5922246077592434526">"上次拔下电源 <xliff:g id="UNPLUGGED">%1$s</xliff:g> 时"</string>
     <string name="menu_stats_total" msgid="8973377864854807854">"总使用量"</string>
     <string name="menu_stats_refresh" msgid="1676215433344981075">"刷新"</string>
     <string name="process_kernel_label" msgid="3916858646836739323">"Android OS"</string>
@@ -1049,8 +1051,8 @@
     <string name="vpn_dns_search_list_title" msgid="1022776976104584251">"DNS 搜索范围"</string>
     <string name="vpn_dns_search_list" msgid="4230034234026605360">"DNS 搜索范围"</string>
     <string name="vpn_field_is_set" msgid="7137320847812992243">"已设置 <xliff:g id="VALUE">%s</xliff:g>"</string>
-    <string name="vpn_field_not_set" msgid="2972519243515893804">"未设置<xliff:g id="VALUE">%s</xliff:g>"</string>
-    <string name="vpn_field_not_set_optional" msgid="8840557698252556791">"未设置<xliff:g id="VALUE">%s</xliff:g>（可选）"</string>
+    <string name="vpn_field_not_set" msgid="2972519243515893804">"<xliff:g id="VALUE">%s</xliff:g> 未设置"</string>
+    <string name="vpn_field_not_set_optional" msgid="8840557698252556791">"未设置 <xliff:g id="VALUE">%s</xliff:g>（可选）"</string>
     <string name="vpn_enable_field" msgid="3700967675854517191">"启用<xliff:g id="OPTION">%s</xliff:g>"</string>
     <string name="vpn_disable_field" msgid="6905658811179634005">"停用<xliff:g id="OPTION">%s</xliff:g>"</string>
     <string name="vpn_is_enabled" msgid="1266304230417098877">"已启用<xliff:g id="OPTION">%s</xliff:g>"</string>
@@ -1117,4 +1119,12 @@
     <string name="device_admin_warning" msgid="1149471041373876923">"激活此管理器可允许应用程序 <xliff:g id="APP_NAME">%1$s</xliff:g> 执行以下操作："</string>
     <string name="device_admin_status" msgid="7169948053970923035">"此管理器已激活，从而允许应用程序 <xliff:g id="APP_NAME">%1$s</xliff:g> 执行以下操作："</string>
     <string name="untitled_apn" msgid="1230060359198685513">"未命名"</string>
+    <!-- no translation found for sound_category_sound_title (1488759370067953996) -->
+    <skip />
+    <!-- no translation found for sound_category_calls_title (3688531959256239012) -->
+    <skip />
+    <!-- no translation found for sound_category_notification_title (3502115998790286943) -->
+    <skip />
+    <!-- no translation found for sound_category_feedback_title (4399742321363475393) -->
+    <skip />
 </resources>
