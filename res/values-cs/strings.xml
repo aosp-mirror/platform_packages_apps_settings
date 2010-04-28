@@ -142,7 +142,7 @@
     <string name="proxy_error_empty_port" msgid="3525734169948795417">"Je třeba vyplnit pole port."</string>
     <string name="proxy_error_empty_host_set_port" msgid="2451694104858226781">"Pokud je pole hostitel prázdné, musí být prázdné i pole port."</string>
     <string name="proxy_error_invalid_port" msgid="1816315605424943626">"Zadaný port není platný."</string>
-    <string name="radio_info_signal_location_label" msgid="16475158265551708">"Poloha:"</string>
+    <string name="radio_info_signal_location_label" msgid="16475158265551708">"Místo:"</string>
     <string name="radio_info_neighboring_location_label" msgid="2385625674055934880">"Sousední identifikátor CID:"</string>
     <string name="radio_info_data_attempts_label" msgid="1731106244577323381">"Pokusy dat:"</string>
     <string name="radio_info_gprs_service_label" msgid="2331818110375395364">"Služba GPRS:"</string>
@@ -170,18 +170,18 @@
     <string name="ping_test_label" msgid="7255376471490860631">"Spustit test Ping"</string>
     <string name="radio_info_smsc_label" msgid="6399460520126501354">"SMSC:"</string>
     <string name="radio_info_smsc_update_label" msgid="7258686760358791539">"Aktualizovat"</string>
-    <string name="radio_info_smsc_refresh_label" msgid="6902302130315125102">"Obnovit"</string>
+    <string name="radio_info_smsc_refresh_label" msgid="6902302130315125102">"Aktualizovat"</string>
     <string name="radio_info_toggle_dns_check_label" msgid="8292252930563286858">"Přepnout kontrolu DNS"</string>
     <string name="oem_radio_info_label" msgid="6163141792477958941">"Informace a nastavení specifické pro výrobce OEM"</string>
     <string name="band_mode_title" msgid="954174198903776205">"Nastavit pásmo pro GSM a UMTS"</string>
     <string name="band_mode_loading" msgid="548764766363847336">"Načítání seznamu pásem..."</string>
     <string name="band_mode_set" msgid="5730560180249458484">"Nastavit"</string>
-    <string name="band_mode_failed" msgid="1495968863884716379">"Pásmo nenastaveno."</string>
+    <string name="band_mode_failed" msgid="1495968863884716379">"Neúspěšné"</string>
     <string name="band_mode_succeeded" msgid="2701016190055887575">"Pásmo nastaveno."</string>
     <string name="sdcard_changes_instructions" msgid="1364712901180556244">"Změna se projeví při příštím připojení kabelu USB."</string>
     <string name="sdcard_settings_screen_mass_storage_text" msgid="3741220147296482474">"Povolit velkokapacitní paměťové zařízení USB"</string>
     <string name="sdcard_settings_total_bytes_label" msgid="9184160745785062144">"Celková paměť (bajty):"</string>
-    <string name="sdcard_settings_not_present_status" msgid="6666688653496819947">"Žádná karta SD není dostupná."</string>
+    <string name="sdcard_settings_not_present_status" msgid="6666688653496819947">"Žádná karta SD"</string>
     <string name="sdcard_settings_available_bytes_label" msgid="763232429899373001">"Dostupná paměť (bajty):"</string>
     <string name="sdcard_settings_mass_storage_status" msgid="4786433969313661655">"Karta SD je využívána jako velkokapacitní paměťové zařízení."</string>
     <string name="sdcard_settings_unmounted_status" msgid="3812022095683863087">"Nyní můžete kartu SD bezpečně odebrat."</string>
@@ -413,7 +413,7 @@
     <string name="sound_settings" msgid="5007659014828162881">"Nastavení zvuku"</string>
     <string name="silent_mode_title" msgid="3181479108593217704">"Tichý režim"</string>
     <string name="silent_mode_summary" msgid="3309650676072917899">"Ztlumit všechny zvuky kromě médií a budíků"</string>
-    <string name="silent_mode_incl_alarm_summary" msgid="2088830834182228458">"Všechny zvuky kromě médií jsou ztišeny."</string>
+    <string name="silent_mode_incl_alarm_summary" msgid="2088830834182228458">"Jsou ztišeny všechny zvuky kromě médií"</string>
     <string name="ringtone_title" msgid="5379026328015343686">"Vyzváněcí tón telefonu"</string>
     <!-- no translation found for ringtone_summary (2630023412632683493) -->
     <skip />
@@ -423,9 +423,11 @@
     <skip />
     <string name="vibrate_in_silent_title" msgid="3897968069156767036">"Vibrovat v tichém režimu"</string>
     <string name="vibrate_in_silent_summary" msgid="3312600513070076281">"Povolit odezvu vibracemi v tichém režimu"</string>
-    <string name="vibrate_title" msgid="5408984084125311526">"Vibrace telefonu"</string>
-    <string name="vibrate_summary" msgid="5224303668448643275">"Při příchozím hovoru vibrovat"</string>
-    <string name="notification_sound_title" msgid="6316316069880531693">"Tón oznámení"</string>
+    <!-- no translation found for vibrate_title (6045820877942801599) -->
+    <skip />
+    <!-- no translation found for vibrate_summary (7378130397830790458) -->
+    <skip />
+    <string name="notification_sound_title" msgid="6316316069880531693">"Tón upozornění"</string>
     <!-- no translation found for notification_sound_summary (2953599929394109819) -->
     <skip />
     <string name="notification_pulse_title" msgid="1247988024534030629">"Blikat kontrolkou oznámení"</string>
@@ -474,7 +476,7 @@
     <string name="animations_summary_off" msgid="2777026828025551983">"Zobrazit animace otevírání a zavírání oken"</string>
     <string name="accelerometer_title" msgid="7854608399547349157">"Automatické otočení obrazovky"</string>
     <string name="accelerometer_summary_on" msgid="1133737282813048021">"Při otáčení telefonu automaticky přepínat orientaci"</string>
-    <string name="accelerometer_summary_off" msgid="5485489363715740761">"Přepínat orientaci automaticky při otáčení telefonu"</string>
+    <string name="accelerometer_summary_off" msgid="5485489363715740761">"Při otáčení telefonu automaticky přepínat orientaci"</string>
     <string name="brightness" msgid="2354961343555249270">"Jas"</string>
     <string name="brightness_summary" msgid="838917350127550703">"Nastavení jasu displeje"</string>
     <string name="screen_timeout" msgid="4882669461447531301">"Interval vypnutí obrazovky"</string>
@@ -484,7 +486,7 @@
     <string name="sim_lock_settings_category" msgid="5136244267576697004">"Nastavení zámku karty SIM"</string>
     <string name="sim_lock_settings_title" msgid="9018585580955414596">"Zámek karty SIM"</string>
     <string name="sim_pin_toggle" msgid="1742123478029451888">"Zamykat kartu SIM"</string>
-    <string name="sim_lock_on" msgid="2503536505568814324">"K použití telefonu je vyžadován kód PIN"</string>
+    <string name="sim_lock_on" msgid="2503536505568814324">"K použití telefonu je vyžadován PIN"</string>
     <string name="sim_lock_off" msgid="258981978215428916">"K použití telefonu je vyžadován PIN"</string>
     <string name="sim_pin_change" msgid="6311414184279932368">"Změnit kód PIN karty SIM"</string>
     <string name="sim_enter_pin" msgid="6608715137008508432">"Kód PIN karty SIM"</string>
@@ -554,11 +556,11 @@
     <string name="sd_ejecting_summary" msgid="2028753069184908491">"Probíhá odpojování"</string>
     <string name="battery_status_title" msgid="9159414319574976203">"Stav baterie"</string>
     <string name="battery_level_title" msgid="2965679202786873272">"Stav baterie"</string>
-    <string name="apn_settings" msgid="3743170484827528406">"Přístupové body"</string>
+    <string name="apn_settings" msgid="3743170484827528406">"Názvy AP"</string>
     <string name="apn_edit" msgid="1354715499708424718">"Upravit přístupový bod"</string>
     <string name="apn_not_set" msgid="7422262558097875757">"&lt;Nenastaveno&gt;"</string>
     <string name="apn_name" msgid="4115580098369824123">"Jméno"</string>
-    <string name="apn_apn" msgid="2479425126733513353">"Název přístupvého bodu (APN)"</string>
+    <string name="apn_apn" msgid="2479425126733513353">"Název AP"</string>
     <string name="apn_http_proxy" msgid="1826885957243696354">"Proxy"</string>
     <string name="apn_http_port" msgid="3763259523984976226">"Port"</string>
     <string name="apn_user" msgid="455637547356117761">"Uživatelské jméno"</string>
@@ -574,9 +576,9 @@
     <string name="apn_auth_type_pap" msgid="1666934536996033383">"PAP"</string>
     <string name="apn_auth_type_chap" msgid="3369626283789068360">"CHAP"</string>
     <string name="apn_auth_type_pap_chap" msgid="9102343063036134541">"PAP nebo CHAP"</string>
-    <string name="apn_type" msgid="469613123902220544">"typ APN"</string>
-    <string name="menu_delete" msgid="6981294422841124659">"Smazat APN"</string>
-    <string name="menu_new" msgid="3014205883303921729">"Nový APN"</string>
+    <string name="apn_type" msgid="469613123902220544">"Typ názvu AP"</string>
+    <string name="menu_delete" msgid="6981294422841124659">"Smazat název přístupového bodu"</string>
+    <string name="menu_new" msgid="3014205883303921729">"Nový název AP"</string>
     <string name="menu_save" msgid="8109345640668285399">"Uložit"</string>
     <string name="menu_cancel" msgid="2194502410474697474">"Zrušit"</string>
     <string name="error_title" msgid="1319225301794168762">"Upozornění"</string>
@@ -589,21 +591,21 @@
     <string name="restore_default_apn_completed" msgid="3990449939234957281">"Obnovení výchozích nastavení názvu AP bylo dokončeno."</string>
     <string name="master_clear_title" msgid="5907939616087039756">"Obnovení továrních dat"</string>
     <string name="master_clear_summary" msgid="4986154238001088492">"Vymaže všechna data v telefonu"</string>
-    <string name="master_clear_desc" msgid="7823268823499739178">"Tento krok z vašeho telefonu vymaže všechna data včetně:"\n<li>"vašeho účtu Google,"</li>\n<li>"dat a nastavení systému a aplikací,"</li>\n<li>"stažených aplikací."</li>\n"Vymazány nebudou:"\n<li>"aktuální software systému a s ním dodané aplikace"</li>\n<li>"soubory na kartě SD, například hudba a fotky."</li></string>
+    <string name="master_clear_desc" msgid="7823268823499739178">"Tento krok vymaže všechna data z vašeho telefonu včetně:"\n<li>"vašeho účtu Google,"</li>\n<li>"dat a nastavení systému a aplikací,"</li>\n<li>"stažených aplikací."</li>\n"Vymazány nebudou:"\n<li>"aktuální software systému a s ním dodané aplikace"</li>\n<li>"soubory na kartě SD, například hudba a fotky."</li></string>
     <string name="master_clear_button_text" msgid="7550632653343157971">"Resetovat telefon"</string>
     <string name="master_clear_final_desc" msgid="6917971132484622696">"Chcete smazat všechny osobní informace a stažené aplikace? Tuto akci nelze vrátit zpět."</string>
     <string name="master_clear_final_button_text" msgid="5390908019019242910">"Odstranit vše"</string>
-    <string name="master_clear_gesture_prompt" msgid="1428645764883536750">"Nakreslete své bezpečnostní gesto"</string>
-    <string name="master_clear_gesture_explanation" msgid="8901714274312707918">"Chcete-li potvrdit resetování telefonu, musíte nakreslit bezpečnostní gesto."</string>
+    <string name="master_clear_gesture_prompt" msgid="1428645764883536750">"Proveďte gesto odemknutí"</string>
+    <string name="master_clear_gesture_explanation" msgid="8901714274312707918">"Chcete-li potvrdit reset telefonu, musíte provést gesto odemknutí."</string>
     <string name="master_clear_failed" msgid="8655202125010189406">"Pokus o reset se nezdařil, protože služba System Clear není dostupná."</string>
     <string name="media_format_title" msgid="4671276096695789895">"Formátovat kartu SD"</string>
     <string name="media_format_summary" msgid="3805714639375830120">"Vymaže všechna data na kartě SD"</string>
     <string name="media_format_desc" msgid="1142563222357820834">"Tato akce smaže kartu SD v telefonu. VŠECHNA data na kartě budou ztracena."</string>
     <string name="media_format_button_text" msgid="370856400090190151">"Formátovat kartu SD"</string>
     <string name="media_format_final_desc" msgid="1776666694910717198">"Formátování karty SD. Chcete smazat všechna svoje média? Akci nelze vrátit zpět."</string>
-    <string name="media_format_final_button_text" msgid="4881713344315923175">"Smazat vše"</string>
-    <string name="media_format_gesture_prompt" msgid="3109349468816856670">"Nakreslete své bezpečnostní gesto"</string>
-    <string name="media_format_gesture_explanation" msgid="4239529439389660159">"Formátování karty SD je potřeba potvrdit nakreslením bezpečnostního gesta."</string>
+    <string name="media_format_final_button_text" msgid="4881713344315923175">"Odstranit vše"</string>
+    <string name="media_format_gesture_prompt" msgid="3109349468816856670">"Proveďte gesto odemknutí"</string>
+    <string name="media_format_gesture_explanation" msgid="4239529439389660159">"Formátování karty SD je potřeba potvrdit nakreslením odemykacího obrazce."</string>
     <string name="call_settings_title" msgid="5188713413939232801">"Nastavení hovorů"</string>
     <string name="call_settings_summary" msgid="7291195704801002886">"Nastavení hlasové schránky, přesměrování a čekání hovorů a ID volajícího"</string>
     <string name="tether_settings_title" msgid="8703982377504005349">"Sdílení datového připojení"</string>
@@ -659,43 +661,43 @@
     <string name="lockpattern_change_lock_pin_label" msgid="266707138486731661">"Změna bezpečnostního kódu PIN"</string>
     <string name="lockpattern_need_to_unlock" msgid="757935356911054465">"Potvrďte uložené gesto"</string>
     <string name="lockpattern_need_to_unlock_wrong" msgid="5629093548611791080">"Zkuste to prosím znovu:"</string>
-    <string name="lockpattern_recording_intro_header" msgid="308287052221942814">"Nakreslete své bezpečnostní gesto."</string>
+    <string name="lockpattern_recording_intro_header" msgid="308287052221942814">"Proveďte gesto odemknutí"</string>
     <string name="lockpattern_recording_intro_footer" msgid="1118579101409152113">"Nápovědu zobrazíte stisknutím klávesy Menu."</string>
     <string name="lockpattern_recording_inprogress" msgid="4622772178078818425">"Na závěr zdvihněte prst z obrazovky."</string>
     <string name="lockpattern_recording_incorrect_too_short" msgid="3103250430366718996">"Minimální počet spojených teček je <xliff:g id="NUMBER">%d</xliff:g>. Zkuste to znovu:"</string>
     <string name="lockpattern_pattern_entered_header" msgid="5012716272001299362">"Gesto bylo zaznamenáno."</string>
-    <string name="lockpattern_need_to_confirm" msgid="5144676887162575050">"Pro potvrzení nakreslete gesto znovu:"</string>
-    <string name="lockpattern_pattern_confirmed_header" msgid="2223856038485537716">"Nové bezpečnostní gesto:"</string>
+    <string name="lockpattern_need_to_confirm" msgid="5144676887162575050">"Proveďte gesto znovu pro potvrzení:"</string>
+    <string name="lockpattern_pattern_confirmed_header" msgid="2223856038485537716">"Nové gesto odemknutí:"</string>
     <string name="lockpattern_confirm_button_text" msgid="1128204343957002841">"Potvrdit"</string>
     <string name="lockpattern_restart_button_text" msgid="3337574403350953926">"Nakreslit znovu"</string>
     <string name="lockpattern_retry_button_text" msgid="1949847413862309134">"Zkusit znovu"</string>
     <string name="lockpattern_continue_button_text" msgid="4723771754714471410">"Pokračovat"</string>
-    <string name="lockpattern_settings_title" msgid="3207750489460466680">"Bezpečnostní gesto"</string>
+    <string name="lockpattern_settings_title" msgid="3207750489460466680">"Gesto odemknutí"</string>
     <string name="lockpattern_settings_enable_title" msgid="6920616873671115281">"Požadovat gesto"</string>
-    <string name="lockpattern_settings_enable_summary" msgid="1165707416664252167">"Obrazovku je nutné odemknout pomocí bezpečnostního gesta"</string>
+    <string name="lockpattern_settings_enable_summary" msgid="1165707416664252167">"Obrazovku je třeba odemknout gestem ruky."</string>
     <string name="lockpattern_settings_enable_visible_pattern_title" msgid="104851667540971729">"Viditelné gesto"</string>
     <string name="lockpattern_settings_enable_tactile_feedback_title" msgid="972174133075372341">"Vibrační zpětná vazba"</string>
     <string name="lockpattern_settings_choose_lock_pattern" msgid="1652352830005653447">"Nastavení bezpečnostního gesta"</string>
     <string name="lockpattern_settings_change_lock_pattern" msgid="1123908306116495545">"Změna bezpečnostního gesta"</string>
-    <string name="lockpattern_settings_help_how_to_record" msgid="2614673439060830433">"Bezpečnostní gesto nakreslíte takto"</string>
+    <string name="lockpattern_settings_help_how_to_record" msgid="2614673439060830433">"Gesto odemknutí obrazovky proveďte tímto způsobem"</string>
     <string name="lockpattern_too_many_failed_confirmation_attempts_header" msgid="819903817323783498">"Příliš mnoho neplatných pokusů."</string>
     <string name="lockpattern_too_many_failed_confirmation_attempts_footer" msgid="6759029360597122873">"Sekundy zbývající do dalšího pokusu: <xliff:g id="NUMBER">%d</xliff:g>."</string>
     <string name="skip_button_label" msgid="8680422740354436943">"Zrušit"</string>
     <string name="next_button_label" msgid="8890792540116568321">"Další"</string>
     <string name="lock_title" msgid="4059246467204273930">"Zabezpečení telefonu"</string>
-    <string name="lock_intro_message" msgid="9100785646737118042"><font size="17">"Vytvořte si osobní bezpečnostní gesto a chraňte tak svůj telefon před nepovoleným použitím. "\n<font height="17">\n</font><b>"1"</b>"  Příklad takového gesta uvidíte na dalším snímku. "\n<font height="17">\n</font><b>"2"</b>"  Až budete připraveni, nakreslete své osobní bezpečnostní gesto. Vyzkoušejte více gest, ale vždy spojte alespoň čtyři tečky. "\n<font height="17">\n</font><b>"3"</b>"  Gesto zopakujte a tím jej potvrďte. "\n<font height="17">\n</font><b>"Jste připraveni začít? Dotkněte se tlačítka Další"</b>". "\n<font height="3">\n</font>"Chcete-li ponechat telefon nezabezpečený, dotkněte se tlačítka Zrušit."</font></string>
+    <string name="lock_intro_message" msgid="9100785646737118042"><font size="17">"Vytvořte si osobní gesto odemknutí a chraňte tak svůj telefon před nepovoleným použitím. "\n<font height="17">\n</font><b>"1"</b>"  Na dalším snímku uvidíte příklad takového gesta. "\n<font height="17">\n</font><b>"2"</b>"  Až budete připraveni, proveďte své osobní gesto odemknutí. Vyzkoušejte více gest, ale vždy spojte alespoň čtyři tečky. "\n<font height="17">\n</font><b>"3"</b>"  Opakujte gesto a tím jej potvrďte. "\n<font height="17">\n</font><b>"Jste připraveni začít? Dotkněte se tlačítka Další "</b>". "\n<font height="3">\n</font>"Chcete-li ponechat telefon nezabezpečený, dotkněte se tlačítka Storno."</font></string>
     <string name="lock_example_title" msgid="8052305554017485410">"Příklad gesta"</string>
     <string name="lock_example_message" msgid="1838650097090632706">"Spojte alespoň čtyři tečky."\n" "\n"Až budete připraveni provést vlastní gesto, dotkněte se tlačítka Další."</string>
     <string name="manageapplications_settings_title" msgid="5712405848153426706">"Správa aplikací"</string>
     <string name="manageapplications_settings_summary" msgid="6097117021500651232">"Umožňuje spravovat a odebírat instalované aplikace"</string>
     <string name="applications_settings" msgid="3736173521008476946">"Aplikace"</string>
     <string name="applications_settings_summary" msgid="2714215108369119717">"Správa aplikací a klávesových zkratek rychlého spuštění"</string>
-    <string name="applications_settings_header" msgid="6018266337275422250">"Nastavení aplikace"</string>
+    <string name="applications_settings_header" msgid="6018266337275422250">"Nastavení aplikací"</string>
     <string name="install_applications" msgid="4872012136210802181">"Neznámé zdroje"</string>
     <string name="install_unknown_applications" msgid="6612824788917283662">"Povoluje instalaci aplikací, které nepocházejí ze služby Market."</string>
     <string name="install_all_warning" msgid="1923717607319933741">"Váš telefon a osobní údaje jsou zranitelnější vůči útoku aplikací z neznámých zdrojů. Vyjadřujete souhlas, že nesete osobní odpovědnost za jakékoli škody způsobené na vašem telefonu nebo za ztrátu dat v důsledku používání těchto aplikací."</string>
-    <string name="application_info_label" msgid="1150486628158409543">"Info o aplikaci"</string>
-    <string name="storage_label" msgid="8700867073480107253">"Paměť"</string>
+    <string name="application_info_label" msgid="1150486628158409543">"Informace o aplikaci"</string>
+    <string name="storage_label" msgid="8700867073480107253">"Úložiště"</string>
     <string name="auto_launch_label" msgid="3012617472833815382">"Spouštět jako výchozí"</string>
     <string name="permissions_label" msgid="2605296874922726203">"Oprávnění"</string>
     <string name="cache_header_label" msgid="1877197634162461830">"Mezipaměť"</string>
@@ -707,7 +709,7 @@
     <string name="application_size_label" msgid="5055196275624686382">"Aplikace"</string>
     <string name="data_size_label" msgid="8679376373625710107">"Data"</string>
     <string name="uninstall_text" msgid="3644892466144802466">"Odinstalovat"</string>
-    <string name="clear_user_data_text" msgid="5597622864770098388">"Vymazat data"</string>
+    <string name="clear_user_data_text" msgid="5597622864770098388">"Mazání dat"</string>
     <string name="app_factory_reset" msgid="6635744722502563022">"Odinstalovat aktualizace"</string>
     <string name="auto_launch_enable_text" msgid="2630656657744196691">"Aplikace byla nastavena, aby se pro některé akce spouštěla jako výchozí."</string>
     <string name="auto_launch_disable_text" msgid="7800385822185540166">"Není výchozí pro žádné akce."</string>
@@ -718,7 +720,7 @@
     <string name="manage_space_text" msgid="8852711522447794676">"Správa paměti"</string>
     <string name="filter" msgid="2018011724373033887">"Filtrovat"</string>
     <string name="filter_dlg_title" msgid="6507663329723966854">"Vyberte možnosti filtru"</string>
-    <string name="filter_apps_all" msgid="5142129378749391876">"Všechny"</string>
+    <string name="filter_apps_all" msgid="5142129378749391876">"Vše"</string>
     <string name="filter_apps_third_party" msgid="7786348047690140979">"Stažené"</string>
     <string name="filter_apps_running" msgid="7767071454371350486">"Spuštěné"</string>
     <string name="filter_apps_onsdcard" msgid="1477351142334784771">"Na kartě SD"</string>
@@ -764,7 +766,7 @@
     <string name="confirm_stop_stop" msgid="7382363913280993331">"Zastavit"</string>
     <string name="confirm_stop_cancel" msgid="206495326622692381">"Zrušit"</string>
     <string name="service_started_by_app" msgid="8432097226392386802">"Spuštěno aplikací: dotykem zastavíte"</string>
-    <string name="service_client_name" msgid="2337664610975074717">"<xliff:g id="CLIENT_NAME">%1$s</xliff:g>: dotykem otevřete správu"</string>
+    <string name="service_client_name" msgid="2337664610975074717">"<xliff:g id="CLIENT_NAME">%1$s</xliff:g>: spravovat dotykem"</string>
     <string name="service_background_processes" msgid="5158600475629177758">"K dispozici: <xliff:g id="FREE">%2$s</xliff:g> + <xliff:g id="MEMORY">%3$s</xliff:g> v <xliff:g id="COUNT">%1$d</xliff:g>"</string>
     <string name="service_foreground_processes" msgid="4013890350284680796">"Ostatní: <xliff:g id="MEMORY">%2$s</xliff:g> v <xliff:g id="COUNT">%1$d</xliff:g>"</string>
     <string name="service_process_name" msgid="8630408984456958400">"Proces: <xliff:g id="PROCESS">%1$s</xliff:g>"</string>
@@ -810,10 +812,10 @@
     <string name="quick_launch_clear_ok_button" msgid="2634568926597586716">"OK"</string>
     <string name="quick_launch_clear_cancel_button" msgid="1892854652197747064">"Zrušit"</string>
     <string name="quick_launch_display_mode_applications" msgid="3748789806447639039">"Aplikace"</string>
-    <string name="quick_launch_display_mode_shortcuts" msgid="4177934019174169042">"Klávesové zkratky"</string>
+    <string name="quick_launch_display_mode_shortcuts" msgid="4177934019174169042">"Zástupce"</string>
     <string name="input_methods_settings_title" msgid="6800066636850553887">"Zadávání textu"</string>
     <string name="input_methods_settings_summary" msgid="7571173442946675205">"Správa možností zadávání textu"</string>
-    <string name="input_methods_settings_label_format" msgid="6002887604815693322">"Nastavení metody <xliff:g id="IME_NAME">%1$s</xliff:g>"</string>
+    <string name="input_methods_settings_label_format" msgid="6002887604815693322">"Nastavení modulu <xliff:g id="IME_NAME">%1$s</xliff:g>"</string>
     <string name="onscreen_keyboard_settings_summary" msgid="5841558383556238653">"Nastavení klávesnice na obrazovce"</string>
     <string name="builtin_keyboard_settings_title" msgid="8169889453770863227">"Klávesnice zařízení"</string>
     <string name="builtin_keyboard_settings_summary" msgid="6404687907454621637">"Nastavení vestavěné klávesnice"</string>
@@ -849,7 +851,7 @@
     <string name="battery_history_sensor" msgid="2333488996028993982">"Senzor:"</string>
     <string name="battery_history_wakelock" msgid="608683447522396293">"Částečný zámek probuzení:"</string>
     <string name="battery_history_used_by_packages" msgid="3000711380023436470">"Senzor je používán následujícími balíčky:"</string>
-    <string name="battery_history_sensor_usage" msgid="3593133338613209024">"Použito <xliff:g id="COUNT">%1$d</xliff:g>krát balíčkem <xliff:g id="PACKAGE">%2$s</xliff:g>"</string>
+    <string name="battery_history_sensor_usage" msgid="3593133338613209024">"Použito <xliff:g id="COUNT">%1$d</xliff:g>krát balíčkem <xliff:g id="PACKAGE">%2$s</xliff:g>\n"</string>
     <string name="battery_history_sensor_usage_multi" msgid="4536084375991014508">"Použito <xliff:g id="COUNT">%1$d</xliff:g>krát některým z následujících:"</string>
     <string name="battery_history_awake_label" msgid="8449792868990080882">"Spuštěné"</string>
     <string name="battery_history_screen_on_label" msgid="1848936521786339362">"Obrazovka zapnutá"</string>
@@ -922,7 +924,7 @@
     <string name="battery_desc_display" msgid="5432795282958076557">"Využití baterie displejem a podsvícením"</string>
     <string name="battery_sugg_display" msgid="3370202402045141760">"Snižte jas displeje nebo interval vypnutí obrazovky"</string>
     <string name="battery_desc_wifi" msgid="1702486494565080431">"Využití baterie sítí WiFi"</string>
-    <string name="battery_sugg_wifi" msgid="7542345142282261691">"Pokud síť WiFi nepoužíváte nebo na daném místě není k dispozici, vypněte ji."</string>
+    <string name="battery_sugg_wifi" msgid="7542345142282261691">"Pokud síť WiFi nepoužíváte nebo na daném místě není k dispozici, vypněte přijímač WiFi."</string>
     <string name="battery_desc_bluetooth" msgid="7535520658674621902">"Využití baterie technologií Bluetooth"</string>
     <string name="battery_sugg_bluetooth_basic" msgid="817276933922157788">"Vypněte technologii Bluetooth, když ji nepoužíváte."</string>
     <string name="battery_sugg_bluetooth_headset" msgid="8214816222115517479">"Zkuste se připojit k jinému zařízení bluetooth"</string>
@@ -931,7 +933,7 @@
     <string name="battery_sugg_apps_gps" msgid="4145005297393800223">"Nepoužíváte-li systém GPS, vypněte jej."</string>
     <string name="battery_sugg_apps_settings" msgid="8021302847272481168">"Tato aplikace může nabízet nastavení pro snížení využití baterie"</string>
     <string name="menu_stats_unplugged" msgid="8296577130840261624">"<xliff:g id="UNPLUGGED">%1$s</xliff:g> od odpojení"</string>
-    <string name="menu_stats_last_unplugged" msgid="5922246077592434526">"Od posledního odpojení (<xliff:g id="UNPLUGGED">%1$s</xliff:g>)"</string>
+    <string name="menu_stats_last_unplugged" msgid="5922246077592434526">"Při posledním odpojení pro <xliff:g id="UNPLUGGED">%1$s</xliff:g>"</string>
     <string name="menu_stats_total" msgid="8973377864854807854">"Využití baterie celkem"</string>
     <string name="menu_stats_refresh" msgid="1676215433344981075">"Obnovit"</string>
     <string name="process_kernel_label" msgid="3916858646836739323">"OS Android"</string>
@@ -1107,4 +1109,12 @@
     <string name="device_admin_warning" msgid="1149471041373876923">"Aktivací tohoto správce umožníte aplikaci <xliff:g id="APP_NAME">%1$s</xliff:g> provádět následující operace:"</string>
     <string name="device_admin_status" msgid="7169948053970923035">"Správce je aktivní a umožňuje aplikaci <xliff:g id="APP_NAME">%1$s</xliff:g> provádět následující operace:"</string>
     <string name="untitled_apn" msgid="1230060359198685513">"Bez názvu"</string>
+    <!-- no translation found for sound_category_sound_title (1488759370067953996) -->
+    <skip />
+    <!-- no translation found for sound_category_calls_title (3688531959256239012) -->
+    <skip />
+    <!-- no translation found for sound_category_notification_title (3502115998790286943) -->
+    <skip />
+    <!-- no translation found for sound_category_feedback_title (4399742321363475393) -->
+    <skip />
 </resources>

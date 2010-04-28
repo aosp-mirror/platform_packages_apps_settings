@@ -29,7 +29,7 @@
     <string name="radioInfo_service_out" msgid="5238736759641916278">"Fuori servizio"</string>
     <string name="radioInfo_service_emergency" msgid="2485604591272668370">"Solo chiamate di emergenza"</string>
     <string name="radioInfo_service_off" msgid="1434084741785525415">"Segnale radio disattivato"</string>
-    <string name="radioInfo_roaming_in" msgid="9045363884600341051">"Roaming"</string>
+    <string name="radioInfo_roaming_in" msgid="9045363884600341051">"Roaming in corso"</string>
     <string name="radioInfo_roaming_not" msgid="2851853244069662307">"Non roaming"</string>
     <string name="radioInfo_phone_idle" msgid="7489244938838742820">"Inattivo"</string>
     <string name="radioInfo_phone_ringing" msgid="4883724645684297895">"Chiamata in corso"</string>
@@ -44,7 +44,7 @@
     <string name="radioInfo_display_dbm" msgid="3621221793699882781">"dBm"</string>
     <string name="radioInfo_display_asu" msgid="1422248392727818082">"asu"</string>
     <string name="radioInfo_lac" msgid="8415219164758307156">"LAC"</string>
-    <string name="radioInfo_cid" msgid="4362599198392643138">"CID"</string>
+    <string name="radioInfo_cid" msgid="4362599198392643138">"Sistema di identificazione contenuti"</string>
     <string name="sdcard_unmount" msgid="3364184561355611897">"Smonta scheda SD"</string>
     <string name="sdcard_format" msgid="362497552060004057">"Formatta scheda SD"</string>
     <string name="small_font" msgid="2295331917424072635">"Piccole"</string>
@@ -116,12 +116,12 @@
     <string name="bluetooth_ask_enablement_and_discovery" msgid="7220210326619399542">"Un\'applicazione sul tuo telefono chiede l\'autorizzazione per attivare Bluetooth e rendere il tuo telefono rilevabile da altri dispositivi per <xliff:g id="TIMEOUT">%1$d</xliff:g> secondi. Procedere?"</string>
     <string name="bluetooth_turning_on" msgid="3107102168379705771">"Attivazione Bluetooth in corso…"</string>
     <string name="date_and_time" msgid="4114084177056654663">"Impostazioni data e ora"</string>
-    <string name="date_time_12_hour_sample" msgid="3259617262618020574">"1:00 pm"</string>
+    <string name="date_time_12_hour_sample" msgid="3259617262618020574">"13:00"</string>
     <string name="date_time_24_hour_sample" msgid="8916857570746212357">"13:00"</string>
     <string name="date_time_changeTime_text" msgid="7037437020000867740">"Modifica ora"</string>
     <string name="date_time_changeDate_text" msgid="5259762626498028057">"Data"</string>
     <string name="choose_timezone" msgid="7762866468013985022">"Seleziona fuso orario"</string>
-    <string name="normal_date_format" msgid="1982904221918374153">"Normale (<xliff:g id="DATE">%s</xliff:g>)"</string>
+    <string name="normal_date_format" msgid="1982904221918374153">"Normale (<xliff:g id="DATE">%s</xliff:g>)\n"</string>
     <string name="display_preview_label" msgid="1127597250917274792">"Anteprima:"</string>
     <string name="display_font_size_label" msgid="8941851418397475389">"Dimensioni carattere:"</string>
     <!-- no translation found for intent_sender_data_label (6332324780477289261) -->
@@ -146,7 +146,7 @@
     <string name="radio_info_neighboring_location_label" msgid="2385625674055934880">"CID adiacente:"</string>
     <string name="radio_info_data_attempts_label" msgid="1731106244577323381">"Tentativi dati:"</string>
     <string name="radio_info_gprs_service_label" msgid="2331818110375395364">"Servizio GPRS:"</string>
-    <string name="radio_info_roaming_label" msgid="6141505430275138647">"Roaming:"</string>
+    <string name="radio_info_roaming_label" msgid="6141505430275138647">"Roaming in corso:"</string>
     <string name="radio_info_imei_label" msgid="1220524224732944192">"IMEI:"</string>
     <string name="radio_info_call_redirect_label" msgid="1654674226961476872">"Reindirizzamento chiamate:"</string>
     <string name="radio_info_ppp_resets_label" msgid="3241667824729310546">"Numero di PPP reimpostati dall\'avvio:"</string>
@@ -316,7 +316,7 @@
     <string name="bluetooth_device_context_disconnect_unpair" msgid="7644014238070043798">"Disconnetti e disaccoppia"</string>
     <string name="bluetooth_device_context_connect_advanced" msgid="2643129703569788771">"Opzioni..."</string>
     <string name="bluetooth_connect_specific_profiles_title" msgid="6952214406025825164">"Connessione a…"</string>
-    <string name="bluetooth_profile_a2dp" msgid="3259633293424539529">"Media"</string>
+    <string name="bluetooth_profile_a2dp" msgid="3259633293424539529">"Multimediali"</string>
     <string name="bluetooth_profile_headset" msgid="1874975688666658946">"Telefono"</string>
     <string name="bluetooth_profile_opp" msgid="3799470046565284440">"Trasferisci"</string>
     <string name="bluetooth_summary_connected_to_a2dp" msgid="510833839847758664">"Collegato ad audio media"</string>
@@ -385,7 +385,7 @@
     <string name="wifi_setting_num_channels_title" msgid="694031537019656132">"Dominio regolatore"</string>
     <string name="wifi_setting_num_channels_summary" msgid="4889355096717099141">"Imposta il numero di canali da usare"</string>
     <string name="wifi_setting_num_channels_error" msgid="5765443843427870721">"Errore durante l\'impostazione del dominio regolatore."</string>
-    <string name="wifi_setting_num_channels_channel_phrase" msgid="1269381923672908636">"<xliff:g id="NUM_CHANNELS">%1$d</xliff:g> canali"</string>
+    <string name="wifi_setting_num_channels_channel_phrase" msgid="1269381923672908636">"<xliff:g id="NUM_CHANNELS">%1$d</xliff:g> Canali"</string>
     <string name="wifi_setting_sleep_policy_title" msgid="1367731352485585528">"Criteri di sospensione Wi-Fi"</string>
     <string name="wifi_setting_sleep_policy_summary" msgid="7573693311804602041">"Specifica quando passare da Wi-Fi a dati cellulare"</string>
     <string name="wifi_setting_sleep_policy_error" msgid="5103670439972135148">"Errore durante l\'impostazione dei criteri di sospensione."</string>
@@ -408,7 +408,7 @@
     <string name="wifi_tether_configure_ap_text" msgid="7849700175083202171">"Configura AP"</string>
     <string name="wifi_tether_configure_subtext" msgid="54089556089657247">"Punto di accesso <xliff:g id="NETWORK_SSID">%1$s</xliff:g> <xliff:g id="NETWORK_SECURITY">%2$s</xliff:g>"</string>
     <string name="wifi_tether_configure_ssid_default" msgid="4491822321218336928">"AndroidAP"</string>
-    <string name="sound_settings_title" msgid="8735891486683305886">"Suono"</string>
+    <string name="sound_settings_title" msgid="8735891486683305886">"Audio"</string>
     <string name="display_settings_title" msgid="1708697328627382561">"Display"</string>
     <string name="sound_settings" msgid="5007659014828162881">"Impostazioni audio"</string>
     <string name="silent_mode_title" msgid="3181479108593217704">"Modalità silenziosa"</string>
@@ -423,8 +423,10 @@
     <skip />
     <string name="vibrate_in_silent_title" msgid="3897968069156767036">"Vibra in modalità silenziosa"</string>
     <string name="vibrate_in_silent_summary" msgid="3312600513070076281">"Consenti feedback vibrazione in modalità silenziosa"</string>
-    <string name="vibrate_title" msgid="5408984084125311526">"Vibrazione telefono"</string>
-    <string name="vibrate_summary" msgid="5224303668448643275">"Vibrazione per chiamate in entrata"</string>
+    <!-- no translation found for vibrate_title (6045820877942801599) -->
+    <skip />
+    <!-- no translation found for vibrate_summary (7378130397830790458) -->
+    <skip />
     <string name="notification_sound_title" msgid="6316316069880531693">"Suoneria notifiche"</string>
     <!-- no translation found for notification_sound_summary (2953599929394109819) -->
     <skip />
@@ -434,7 +436,7 @@
     <string name="notification_volume_title" msgid="2012640760341080408">"Notifica"</string>
     <string name="checkbox_notification_same_as_incoming_call" msgid="1073644356290338921">"Usa volume chiamate in entrata per le notifiche"</string>
     <string name="notification_sound_dialog_title" msgid="7057274209079144726">"Seleziona suoneria notifica"</string>
-    <string name="media_volume_title" msgid="3576565767317118106">"Multimediali"</string>
+    <string name="media_volume_title" msgid="3576565767317118106">"Applicazioni multimediali"</string>
     <string name="media_volume_summary" msgid="5363248930648849974">"Imposta il volume di musica e video"</string>
     <string name="alarm_volume_title" msgid="2285597478377758706">"Allarme"</string>
     <string name="dock_settings_summary" msgid="455802113668982481">"Impostazioni audio per dock collegato"</string>
@@ -442,8 +444,8 @@
     <string name="dtmf_tone_enable_summary_on" msgid="3028201873989887327">"Riproduci toni durante la composizione"</string>
     <string name="dtmf_tone_enable_summary_off" msgid="7791065951268525678">"Riproduci toni durante la composizione"</string>
     <string name="sound_effects_enable_title" msgid="3197313718929122833">"Selezione sonora"</string>
-    <string name="sound_effects_enable_summary_on" msgid="6154141289879491329">"Riproduci toni durante una selezione sullo schermo"</string>
-    <string name="sound_effects_enable_summary_off" msgid="3447739581759560125">"Riproduci toni durante una selezione sullo schermo"</string>
+    <string name="sound_effects_enable_summary_on" msgid="6154141289879491329">"Riproduci suono durante una selezione sullo schermo"</string>
+    <string name="sound_effects_enable_summary_off" msgid="3447739581759560125">"Riproduci suono durante una selezione sullo schermo"</string>
     <string name="lock_sounds_enable_title" msgid="1575990840389107141">"Suoni di blocco schermo"</string>
     <string name="lock_sounds_enable_summary_on" msgid="145741024028391473">"Riproduci suoni al blocco o allo sblocco dello schermo"</string>
     <string name="lock_sounds_enable_summary_off" msgid="8481243116223542804">"Riproduci suoni al blocco o allo sblocco dello schermo"</string>
@@ -472,7 +474,7 @@
     <string name="animations_title" msgid="1062189037402346023">"Animazione"</string>
     <string name="animations_summary_on" msgid="8843613112130484436">"Mostra l\'animazione durante l\'apertura e la chiusura di finestre"</string>
     <string name="animations_summary_off" msgid="2777026828025551983">"Mostra l\'animazione durante l\'apertura e la chiusura di finestre"</string>
-    <string name="accelerometer_title" msgid="7854608399547349157">"Rotazione automatica schermo"</string>
+    <string name="accelerometer_title" msgid="7854608399547349157">"Rotazione automatica"</string>
     <string name="accelerometer_summary_on" msgid="1133737282813048021">"Cambia automaticamente quando il cellulare viene ruotato"</string>
     <string name="accelerometer_summary_off" msgid="5485489363715740761">"Cambia automatic. l\'orientamento quando il cell. viene ruotato"</string>
     <string name="brightness" msgid="2354961343555249270">"Luminosità"</string>
@@ -525,7 +527,7 @@
     <string name="status_data_state" msgid="5503181397066522950">"Stato rete cellulare"</string>
     <string name="status_service_state" msgid="2323931627519429503">"Stato servizio"</string>
     <string name="status_signal_strength" msgid="3732655254188304547">"Intensità segnale"</string>
-    <string name="status_roaming" msgid="2638800467430913403">"Roaming"</string>
+    <string name="status_roaming" msgid="2638800467430913403">"Roaming in corso"</string>
     <string name="status_operator" msgid="2274875196954742087">"Rete"</string>
     <string name="status_wifi_mac_address" msgid="33109409206264790">"Indirizzo MAC Wi-Fi"</string>
     <string name="status_bt_address" msgid="4195174192087439720">"Indirizzo Bluetooth"</string>
@@ -693,7 +695,7 @@
     <string name="applications_settings_header" msgid="6018266337275422250">"Impostazioni applicazione"</string>
     <string name="install_applications" msgid="4872012136210802181">"Origini sconosciute"</string>
     <string name="install_unknown_applications" msgid="6612824788917283662">"Consenti l\'installazione di applicazioni non presenti in Market"</string>
-    <string name="install_all_warning" msgid="1923717607319933741">"Il telefono e i dati personali sono più vulnerabili agli attacchi da parte di applicazioni\n di origini sconosciute. L\'utente accetta di essere il solo responsabile degli eventuali\n danni al telefono o della perdita dei dati che potrebbero derivare dall\'utilizzo di\n queste applicazioni."</string>
+    <string name="install_all_warning" msgid="1923717607319933741">"Il telefono e i dati personali sono più vulnerabili agli attacchi da parte di applicazioni di origini sconosciute. L\'utente accetta di essere il solo responsabile degli eventuali danni al telefono o della perdita dei dati che potrebbero derivare dall\'utilizzo di queste applicazioni."</string>
     <string name="application_info_label" msgid="1150486628158409543">"Info applicazione"</string>
     <string name="storage_label" msgid="8700867073480107253">"Archiviazione"</string>
     <string name="auto_launch_label" msgid="3012617472833815382">"Avvia per impostazione predefinita"</string>
@@ -721,7 +723,7 @@
     <string name="filter_apps_all" msgid="5142129378749391876">"Tutte"</string>
     <string name="filter_apps_third_party" msgid="7786348047690140979">"Scaricate"</string>
     <string name="filter_apps_running" msgid="7767071454371350486">"In esecuzione"</string>
-    <string name="filter_apps_onsdcard" msgid="1477351142334784771">"Sulla scheda SD"</string>
+    <string name="filter_apps_onsdcard" msgid="1477351142334784771">"Scheda SD"</string>
     <string name="loading" msgid="3200408047793887917">"Caricamento..."</string>
     <string name="recompute_size" msgid="7722567982831691718">"Ricalcolo dimensioni..."</string>
     <string name="clear_data_dlg_title" msgid="4470209520936375508">"Elimina"</string>
@@ -747,14 +749,14 @@
     <string name="insufficient_storage" msgid="8566913062094452962">"Spazio di archiviazione rimanente insufficiente."</string>
     <string name="does_not_exist" msgid="837163572898468245">"Applicazione inesistente."</string>
     <string name="app_forward_locked" msgid="5747805144210389585">"L\'applicazione è protetta dalla copia."</string>
-    <string name="invalid_location" msgid="4934491353200240499">"La posizione di installazione specificata non è valida."</string>
+    <string name="invalid_location" msgid="4934491353200240499">"Il percorso di installazione specificato non è valido."</string>
     <string name="system_package" msgid="1030561474413022831">"Impossibile installare aggiornamenti di sistema su supporti esterni."</string>
     <string name="force_stop_dlg_title" msgid="4289453224368188476">"Forza interruzione"</string>
     <string name="force_stop_dlg_text" msgid="3381302041569982075">"Questa applicazione verrà riavviata immediatamente. Procedere con l\'interruzione forzata?"</string>
     <string name="move_app_failed_dlg_title" msgid="4337731903265156405">"Sposta applicazione"</string>
     <string name="move_app_failed_dlg_text" msgid="8824246817947643697">"Spostamento applicazione non riuscito. <xliff:g id="REASON">%1$s</xliff:g>"</string>
-    <string name="app_install_location_title" msgid="2068975150026852168">"Posizione di installazione preferita"</string>
-    <string name="app_install_location_summary" msgid="879753854530300436">"Cambia la posizione di installazione preferita per nuove applicazioni."</string>
+    <string name="app_install_location_title" msgid="2068975150026852168">"Percorso di installazione"</string>
+    <string name="app_install_location_summary" msgid="879753854530300436">"Cambia il percorso preferito per l\'installazione di nuove applicazioni."</string>
     <string name="runningservices_settings_title" msgid="8097287939865165213">"Servizi in esecuzione"</string>
     <string name="runningservices_settings_summary" msgid="854608995821032748">"Visualizza e controlla i servizi attualmente in esecuzione"</string>
     <string name="service_restarting" msgid="2242747937372354306">"In fase di riavvio"</string>
@@ -764,7 +766,7 @@
     <string name="confirm_stop_stop" msgid="7382363913280993331">"Interrompi"</string>
     <string name="confirm_stop_cancel" msgid="206495326622692381">"Annulla"</string>
     <string name="service_started_by_app" msgid="8432097226392386802">"Avviato dall\'applicaz.: tocca per interr."</string>
-    <string name="service_client_name" msgid="2337664610975074717">"<xliff:g id="CLIENT_NAME">%1$s</xliff:g>: tocca per gestire"</string>
+    <string name="service_client_name" msgid="2337664610975074717">"<xliff:g id="CLIENT_NAME">%1$s</xliff:g>: tocca per la gestione"</string>
     <string name="service_background_processes" msgid="5158600475629177758">"Disponibile: <xliff:g id="FREE">%2$s</xliff:g>+<xliff:g id="MEMORY">%3$s</xliff:g> in <xliff:g id="COUNT">%1$d</xliff:g>"</string>
     <string name="service_foreground_processes" msgid="4013890350284680796">"Altro: <xliff:g id="MEMORY">%2$s</xliff:g> in <xliff:g id="COUNT">%1$d</xliff:g>"</string>
     <string name="service_process_name" msgid="8630408984456958400">"Processo: <xliff:g id="PROCESS">%1$s</xliff:g>"</string>
@@ -804,7 +806,7 @@
     <string name="quick_launch_summary" msgid="3453825712466417452">"Imposta scorciatoie da tastiera per avviare le applicazioni"</string>
     <string name="quick_launch_assign_application" msgid="4521368464929956350">"Assegna applicazione"</string>
     <string name="quick_launch_no_shortcut" msgid="5998005833838278693">"Nessuna scorciatoia"</string>
-    <string name="quick_launch_shortcut" msgid="5090405067413522300">"Cerca + <xliff:g id="SHORTCUT_LETTER">%1$s</xliff:g>"</string>
+    <string name="quick_launch_shortcut" msgid="5090405067413522300">"Ricerca + <xliff:g id="SHORTCUT_LETTER">%1$s</xliff:g>"</string>
     <string name="quick_launch_clear_dialog_title" msgid="5546543501250320220">"Cancella"</string>
     <string name="quick_launch_clear_dialog_message" msgid="3921015601470260722">"La scorciatoia per <xliff:g id="SHORTCUT_LETTER">%1$s</xliff:g> (<xliff:g id="APPLICATION_NAME">%2$s</xliff:g>) verrà cancellata."</string>
     <string name="quick_launch_clear_ok_button" msgid="2634568926597586716">"OK"</string>
@@ -936,14 +938,14 @@
     <string name="menu_stats_refresh" msgid="1676215433344981075">"Aggiorna"</string>
     <string name="process_kernel_label" msgid="3916858646836739323">"Sistema operativo Android"</string>
     <string name="process_mediaserver_label" msgid="6500382062945689285">"MediaServer"</string>
-    <string name="voice_input_output_settings" msgid="1336135218350444783">"Impostazioni vocali in entrata e uscita"</string>
+    <string name="voice_input_output_settings" msgid="1336135218350444783">"Impostazioni vocali"</string>
     <string name="voice_input_output_settings_title" msgid="2442850635048676991">"Impostazioni vocali in entrata e uscita"</string>
     <string name="voice_search_settings_title" msgid="2775469246913196536">"Ricerca vocale"</string>
     <string name="keyboard_settings_title" msgid="5080115226780201234">"Tastiera Android"</string>
     <string name="voice_input_category" msgid="1589318440824204736">"Impostazioni vocali in entrata"</string>
     <string name="voice_output_category" msgid="2624538587784986229">"Impostazioni vocali in uscita"</string>
     <string name="recognizer_title" msgid="3231385184559054457">"Riconoscimento vocale"</string>
-    <string name="recognizer_settings_title" msgid="6038598099039717232">"Impostazioni riconoscimento vocale"</string>
+    <string name="recognizer_settings_title" msgid="6038598099039717232">"Riconoscimento vocale"</string>
     <string name="recognizer_settings_summary" msgid="4472287934134546902">"Impostazioni per \"<xliff:g id="RECOGNIZER_NAME">%s</xliff:g>\""</string>
     <string name="tts_settings" msgid="8186971894801348327">"Impostazioni di sintesi vocale"</string>
     <string name="tts_settings_title" msgid="4182348653053000933">"Impostazioni di sintesi vocale"</string>
@@ -1010,7 +1012,7 @@
     <string name="vpn_reconnect_from_lost" msgid="2442844155623372118">"Connessione interrotta. Riprovare?"</string>
     <string name="vpn_unknown_server_dialog_msg" msgid="3080742299823671319">"Impossibile risolvere il nome del server. Controllare l\'impostazione del nome del server?"</string>
     <string name="vpn_challenge_error_dialog_msg" msgid="6174901754230038601">"Errore di verifica. Controllare l\'impostazione segreta?"</string>
-    <string name="vpn_secret_not_set_dialog_msg" msgid="8013052814131532765">"In questa configurazione VPN mancano uno o più segreti. Controllare la relativa impostazione?"</string>
+    <string name="vpn_secret_not_set_dialog_msg" msgid="8013052814131532765">"In questa configurazione VPN mancano uno o più segreti. Controllare l\'impostazione segreta?"</string>
     <string name="vpn_auth_error_dialog_msg" msgid="5476820106624807614">"La password o il nome utente inserito non è corretto. Riprovare?"</string>
     <string name="vpn_remote_hung_up_error_dialog_msg" msgid="1566946015052633150">"Server bloccato. La password o il nome utente inserito potrebbe non essere corretto. Riprovare?"</string>
     <string name="vpn_remote_ppp_hung_up_error_dialog_msg" msgid="5135958511128503344">"Server bloccato. È possibile che un firewall ti impedisca di collegarti al server. Riprovare?"</string>
@@ -1107,4 +1109,12 @@
     <string name="device_admin_warning" msgid="1149471041373876923">"L\'attivazione di questo amministratore consentirà all\'applicazione <xliff:g id="APP_NAME">%1$s</xliff:g> di eseguire le seguenti operazioni:"</string>
     <string name="device_admin_status" msgid="7169948053970923035">"Questo amministratore è attivo e consente all\'applicazione <xliff:g id="APP_NAME">%1$s</xliff:g> di eseguire le seguenti operazioni:"</string>
     <string name="untitled_apn" msgid="1230060359198685513">"Senza titolo"</string>
+    <!-- no translation found for sound_category_sound_title (1488759370067953996) -->
+    <skip />
+    <!-- no translation found for sound_category_calls_title (3688531959256239012) -->
+    <skip />
+    <!-- no translation found for sound_category_notification_title (3502115998790286943) -->
+    <skip />
+    <!-- no translation found for sound_category_feedback_title (4399742321363475393) -->
+    <skip />
 </resources>
