@@ -16,11 +16,10 @@
 
 package com.android.settings.bluetooth;
 
-import com.android.internal.app.AlertActivity;
-import com.android.internal.app.AlertController;
 import com.android.settings.R;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
 import android.content.BroadcastReceiver;
@@ -31,14 +30,12 @@ import android.content.IntentFilter;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.View;
-import android.widget.TextView;
 
 /**
  * RequestPermissionActivity asks the user whether to enable discovery. This is
  * usually started by an application wanted to start bluetooth and or discovery
  */
-public class RequestPermissionActivity extends AlertActivity implements
+public class RequestPermissionActivity extends Activity implements
         DialogInterface.OnClickListener {
     // Command line to test this
     // adb shell am start -a android.bluetooth.adapter.action.REQUEST_ENABLE
@@ -73,6 +70,8 @@ public class RequestPermissionActivity extends AlertActivity implements
 
     private boolean mUserConfirmed = false;
 
+    private AlertDialog mDialog = null;
+
     private BroadcastReceiver mReceiver = new BroadcastReceiver() {
 
         @Override
@@ -84,7 +83,7 @@ public class RequestPermissionActivity extends AlertActivity implements
                 int state = intent.getIntExtra(BluetoothAdapter.EXTRA_STATE, BluetoothDevice.ERROR);
                 if (state == BluetoothAdapter.STATE_ON) {
                     if (mUserConfirmed) {
-                        proceedAndFinish(false);
+                        proceedAndFinish();
                     }
                 }
             }
@@ -136,7 +135,7 @@ public class RequestPermissionActivity extends AlertActivity implements
             case BluetoothAdapter.STATE_ON:
                 if (mEnableOnly) {
                     // Nothing to do. Already enabled.
-                    proceedAndFinish(false);
+                    proceedAndFinish();
                     return;
                 } else {
                     // Ask the user about enabling discovery mode
@@ -147,28 +146,24 @@ public class RequestPermissionActivity extends AlertActivity implements
     }
 
     private void createDialog() {
-        final AlertController.AlertParams p = mAlertParams;
-        p.mIconId = android.R.drawable.ic_dialog_info;
-        p.mTitle = getString(R.string.bluetooth_permission_request);
-
-        View view = getLayoutInflater().inflate(R.layout.bluetooth_discoverable, null);
-        p.mView = view;
-        TextView tv = (TextView) view.findViewById(R.id.message);
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setIcon(android.R.drawable.ic_dialog_info);
+        builder.setTitle(getString(R.string.bluetooth_permission_request));
 
         if (mNeededToEnableBluetooth) {
             // RequestPermissionHelperActivity has gotten confirmation from user
             // to turn on BT
-            tv.setText(getString(R.string.bluetooth_turning_on));
+            builder.setMessage(getString(R.string.bluetooth_turning_on));
+            builder.setCancelable(false);
         } else {
             // Ask the user whether to turn on discovery mode or not
-            tv.setText(getString(R.string.bluetooth_ask_enablement_and_discovery, mTimeout));
-            p.mPositiveButtonText = getString(R.string.yes);
-            p.mPositiveButtonListener = this;
-            p.mNegativeButtonText = getString(R.string.no);
-            p.mNegativeButtonListener = this;
+            builder.setMessage(getString(R.string.bluetooth_ask_enablement_and_discovery, mTimeout));
+            builder.setPositiveButton(getString(R.string.yes), this);
+            builder.setNegativeButton(getString(R.string.no), this);
         }
 
-        setupAlert();
+        mDialog = builder.create();
+        mDialog.show();
     }
 
     @Override
@@ -182,6 +177,7 @@ public class RequestPermissionActivity extends AlertActivity implements
         if (resultCode != RESULT_BT_STARTING_OR_STARTED) {
             setResult(resultCode);
             finish();
+            return;
         }
 
         // Back from RequestPermissionHelperActivity. User confirmed to enable
@@ -189,7 +185,7 @@ public class RequestPermissionActivity extends AlertActivity implements
         mUserConfirmed = true;
 
         if (mLocalManager.getBluetoothState() == BluetoothAdapter.STATE_ON) {
-            proceedAndFinish(false);
+            proceedAndFinish();
         } else {
             // If BT is not up yet, show "Turning on Bluetooth..."
             createDialog();
@@ -199,16 +195,17 @@ public class RequestPermissionActivity extends AlertActivity implements
     public void onClick(DialogInterface dialog, int which) {
         switch (which) {
             case DialogInterface.BUTTON_POSITIVE:
-                proceedAndFinish(true);
+                proceedAndFinish();
                 break;
 
             case DialogInterface.BUTTON_NEGATIVE:
                 setResult(Activity.RESULT_CANCELED);
+                finish();
                 break;
         }
     }
 
-    private void proceedAndFinish(boolean buttonPressed) {
+    private void proceedAndFinish() {
         int returnCode;
 
         if (mEnableOnly) {
@@ -227,10 +224,12 @@ public class RequestPermissionActivity extends AlertActivity implements
             returnCode = Activity.RESULT_CANCELED;
         }
 
-        setResult(returnCode);
-        if (!buttonPressed) {
-            finish();
+        if (mDialog != null) {
+            mDialog.dismiss();
         }
+
+        setResult(returnCode);
+        finish();
     }
 
     private boolean parseIntent() {
