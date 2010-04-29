@@ -236,28 +236,20 @@
     <string name="security_settings_summary" msgid="967393342537986570">"Ustaw funkcję Moja lokalizacja, odblokowywanie ekranu, blokadę karty SIM, blokadę magazynu danych logowania."</string>
     <string name="cdma_security_settings_summary" msgid="6068799952798901542">"Ustaw funkcję Moja lokalizacja, odblokowywanie ekranu, blokadę magazynu danych uwierzytelniania"</string>
     <string name="security_passwords_title" msgid="2930627259125138363">"Hasła"</string>
-    <!-- no translation found for lock_settings_picker_title (3973555216065628262) -->
-    <skip />
-    <string name="unlock_set_unlock_launch_picker_title" msgid="1129684221223017902">"Ustaw blokadę ekranu"</string>
-    <string name="unlock_set_unlock_launch_picker_summary" msgid="1667332113134720845">"Zablokuj ekran za pomocą wzoru, PINu lub hasła"</string>
-    <!-- no translation found for unlock_set_unlock_launch_picker_change_title (6987228635944678726) -->
-    <skip />
-    <!-- no translation found for unlock_set_unlock_launch_picker_change_summary (2790960639554590668) -->
-    <skip />
-    <!-- no translation found for unlock_set_unlock_none_title (3760684669884671990) -->
-    <skip />
-    <!-- no translation found for unlock_set_unlock_none_summary (2658550480388272618) -->
-    <skip />
-    <string name="unlock_set_unlock_pattern_title" msgid="2912067603917311700">"Wzór graficzny"</string>
-    <string name="unlock_set_unlock_pattern_summary" msgid="3018395214738645405">"Narysuj wzór do odblokowania ekran"</string>
-    <!-- no translation found for unlock_set_unlock_pin_title (5846029709462329515) -->
-    <skip />
-    <string name="unlock_set_unlock_pin_summary" msgid="4131169672844263316">"Wpisz kod PIN do odblokowania ekranu"</string>
-    <!-- no translation found for unlock_set_unlock_password_title (8775603825675090937) -->
-    <skip />
-    <string name="unlock_set_unlock_password_summary" msgid="4623254789833899286">"Wpisz hasło do odblokowania ekranu"</string>
-    <!-- no translation found for unlock_set_unlock_disabled_summary (736557879526940324) -->
-    <skip />
+    <string name="lock_settings_picker_title" msgid="3973555216065628262">"Zabezpieczenie odblokowania ekranu"</string>
+    <string name="unlock_set_unlock_launch_picker_title" msgid="1129684221223017902">"Konfiguruj blokadę ekranu"</string>
+    <string name="unlock_set_unlock_launch_picker_summary" msgid="1667332113134720845">"Zablokuj ekran za pomocą wzoru, kodu PIN lub hasła"</string>
+    <string name="unlock_set_unlock_launch_picker_change_title" msgid="6987228635944678726">"Zmień ustawienia blokady ekranu"</string>
+    <string name="unlock_set_unlock_launch_picker_change_summary" msgid="2790960639554590668">"Zmień lub wyłącz zabezpieczenie w postaci wzoru, kodu PIN lub hasła"</string>
+    <string name="unlock_set_unlock_none_title" msgid="3760684669884671990">"Brak"</string>
+    <string name="unlock_set_unlock_none_summary" msgid="2658550480388272618">"Wyłącz zabezpieczenie odblokowania ekranu"</string>
+    <string name="unlock_set_unlock_pattern_title" msgid="2912067603917311700">"Wzór"</string>
+    <string name="unlock_set_unlock_pattern_summary" msgid="3018395214738645405">"Narysuj wzór umożliwiający odblokowanie ekranu"</string>
+    <string name="unlock_set_unlock_pin_title" msgid="5846029709462329515">"Kod PIN"</string>
+    <string name="unlock_set_unlock_pin_summary" msgid="4131169672844263316">"Wprowadź numeryczny kod PIN umożliwiający odblokowanie ekranu"</string>
+    <string name="unlock_set_unlock_password_title" msgid="8775603825675090937">"Hasło"</string>
+    <string name="unlock_set_unlock_password_summary" msgid="4623254789833899286">"Wprowadź hasło umożliwiające odblokowanie ekranu"</string>
+    <string name="unlock_set_unlock_disabled_summary" msgid="736557879526940324">"Wyłączone przez zdalnego administratora telefonu"</string>
     <string name="unlock_disable_lock_title" msgid="1427036227416979120">"Wyłącz blokadę ekranu"</string>
     <string name="unlock_disable_lock_pattern_summary" msgid="6801602880568869201">"Usuń wzór odblokowania"</string>
     <string name="unlock_disable_lock_pin_summary" msgid="8856842745366993387">"Usuń kod PIN odblokowania"</string>
@@ -417,10 +409,8 @@
     <skip />
     <string name="vibrate_in_silent_title" msgid="3897968069156767036">"Wibracje po wyciszeniu"</string>
     <string name="vibrate_in_silent_summary" msgid="3312600513070076281">"Zezwalaj na wibracje w trybie cichym"</string>
-    <!-- no translation found for vibrate_title (6045820877942801599) -->
-    <skip />
-    <!-- no translation found for vibrate_summary (7378130397830790458) -->
-    <skip />
+    <string name="vibrate_title" msgid="6045820877942801599">"Wibracje"</string>
+    <string name="vibrate_summary" msgid="7378130397830790458">"Wibracje w przypadku połączeń i powiadomień"</string>
     <string name="notification_sound_title" msgid="6316316069880531693">"Powiadomienia"</string>
     <!-- no translation found for notification_sound_summary (2953599929394109819) -->
     <skip />
@@ -679,7 +669,7 @@
     <string name="skip_button_label" msgid="8680422740354436943">"Anuluj"</string>
     <string name="next_button_label" msgid="8890792540116568321">"Dalej"</string>
     <string name="lock_title" msgid="4059246467204273930">"Zabezpieczanie telefonu"</string>
-    <string name="lock_intro_message" msgid="9100785646737118042"><font size="17">"Chroń swój telefon przed nieautoryzowanym użyciem, tworząc osobisty wzór odblokowywania ekranu. "\n<font height="17">\n</font><b>"1"</b>"  Na następnym ekranie obejrzyj procedurę rysowania przykładowego wzoru. "\n<font height="17">\n</font><b>"2"</b>"  Po przygotowaniu się narysuj własny osobisty wzór odblokowywania. Wypróbuj różne wzory, łącząc co najmniej cztery kropki. "\n<font height="17">\n</font><b>"3"</b>"  Ponownie narysuj swój wzór, aby go potwierdzić. "\n<font height="17">\n</font><b>"Wszystko gotowe? Dotknij przycisku „Dalej”"</b>". "\n<font height="3">\n</font>"Aby pozostawić telefon bez ochrony, dotknij przycisku „Anuluj”."</font></string>
+    <string name="lock_intro_message" msgid="9100785646737118042"><font size="17">"Chroń swój telefon przed nieautoryzowanym użyciem, tworząc osobisty wzorzec odblokowywania ekranu. "\n<font height="17">\n</font><b>"1"</b>"  Na następnym ekranie obejrzyj procedurę rysowania przykładowego wzorca. "\n<font height="17">\n</font><b>"2"</b>"  Po przygotowaniu się narysuj własny osobisty wzorzec odblokowywania. Wypróbuj różne wzorce, łącząc co najmniej cztery kropki. "\n<font height="17">\n</font><b>"3"</b>"  Ponownie narysuj swój wzorzec, aby go potwierdzić. "\n<font height="17">\n</font><b>"Wszystko gotowe? Dotknij przycisku „Dalej”"</b>". "\n<font height="3">\n</font>"Aby pozostawić telefon bez ochrony, dotknij przycisku „Anuluj”."</font></string>
     <string name="lock_example_title" msgid="8052305554017485410">"Przykładowy wzór"</string>
     <string name="lock_example_message" msgid="1838650097090632706">"Połącz co najmniej cztery kropki."\n" "\n"Dotknij przycisku „Dalej”, aby rozpocząć rysowanie własnego wzoru."</string>
     <string name="manageapplications_settings_title" msgid="5712405848153426706">"Zarządzaj aplikacjami"</string>
@@ -1103,12 +1093,8 @@
     <string name="device_admin_warning" msgid="1149471041373876923">"Aktywowanie tego administratora zezwoli aplikacji <xliff:g id="APP_NAME">%1$s</xliff:g> na wykonywanie następujących operacji:"</string>
     <string name="device_admin_status" msgid="7169948053970923035">"Administrator jest aktywny i zezwala aplikacji <xliff:g id="APP_NAME">%1$s</xliff:g> na wykonywanie następujących operacji:"</string>
     <string name="untitled_apn" msgid="1230060359198685513">"Bez nazwy"</string>
-    <!-- no translation found for sound_category_sound_title (1488759370067953996) -->
-    <skip />
-    <!-- no translation found for sound_category_calls_title (3688531959256239012) -->
-    <skip />
-    <!-- no translation found for sound_category_notification_title (3502115998790286943) -->
-    <skip />
-    <!-- no translation found for sound_category_feedback_title (4399742321363475393) -->
-    <skip />
+    <string name="sound_category_sound_title" msgid="1488759370067953996">"Ogólne"</string>
+    <string name="sound_category_calls_title" msgid="3688531959256239012">"Połączenia przychodzące"</string>
+    <string name="sound_category_notification_title" msgid="3502115998790286943">"Powiadomienia"</string>
+    <string name="sound_category_feedback_title" msgid="4399742321363475393">"Opinia"</string>
 </resources>

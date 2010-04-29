@@ -236,34 +236,20 @@
     <string name="security_settings_summary" msgid="967393342537986570">"Establecer Mi ubicación, bloqueo de pantalla, bloqueo de tarjeta SIM y bloqueo de almacenamiento de credenciales"</string>
     <string name="cdma_security_settings_summary" msgid="6068799952798901542">"Establecer ubicación, bloqueo de pantalla y bloqueo de almacenamiento de credenciales"</string>
     <string name="security_passwords_title" msgid="2930627259125138363">"Contraseñas"</string>
-    <!-- no translation found for lock_settings_picker_title (3973555216065628262) -->
-    <skip />
-    <!-- no translation found for unlock_set_unlock_launch_picker_title (1129684221223017902) -->
-    <skip />
-    <!-- no translation found for unlock_set_unlock_launch_picker_summary (1667332113134720845) -->
-    <skip />
-    <!-- no translation found for unlock_set_unlock_launch_picker_change_title (6987228635944678726) -->
-    <skip />
-    <!-- no translation found for unlock_set_unlock_launch_picker_change_summary (2790960639554590668) -->
-    <skip />
-    <!-- no translation found for unlock_set_unlock_none_title (3760684669884671990) -->
-    <skip />
-    <!-- no translation found for unlock_set_unlock_none_summary (2658550480388272618) -->
-    <skip />
-    <!-- no translation found for unlock_set_unlock_pattern_title (2912067603917311700) -->
-    <skip />
-    <!-- no translation found for unlock_set_unlock_pattern_summary (3018395214738645405) -->
-    <skip />
-    <!-- no translation found for unlock_set_unlock_pin_title (5846029709462329515) -->
-    <skip />
-    <!-- no translation found for unlock_set_unlock_pin_summary (4131169672844263316) -->
-    <skip />
-    <!-- no translation found for unlock_set_unlock_password_title (8775603825675090937) -->
-    <skip />
-    <!-- no translation found for unlock_set_unlock_password_summary (4623254789833899286) -->
-    <skip />
-    <!-- no translation found for unlock_set_unlock_disabled_summary (736557879526940324) -->
-    <skip />
+    <string name="lock_settings_picker_title" msgid="3973555216065628262">"Seguridad bloqueo pant"</string>
+    <string name="unlock_set_unlock_launch_picker_title" msgid="1129684221223017902">"Config bloqueo pant"</string>
+    <string name="unlock_set_unlock_launch_picker_summary" msgid="1667332113134720845">"Bloqueo pantalla con patrón, PIN o contraseña"</string>
+    <string name="unlock_set_unlock_launch_picker_change_title" msgid="6987228635944678726">"Cambio bloqueo pant"</string>
+    <string name="unlock_set_unlock_launch_picker_change_summary" msgid="2790960639554590668">"Cambia o inhabilit seguridad contraseña, PIN o patrón"</string>
+    <string name="unlock_set_unlock_none_title" msgid="3760684669884671990">"Ninguno"</string>
+    <string name="unlock_set_unlock_none_summary" msgid="2658550480388272618">"Inhab seguridad desbloq pantalla"</string>
+    <string name="unlock_set_unlock_pattern_title" msgid="2912067603917311700">"Patrón"</string>
+    <string name="unlock_set_unlock_pattern_summary" msgid="3018395214738645405">"Patrón para desbloq pantalla"</string>
+    <string name="unlock_set_unlock_pin_title" msgid="5846029709462329515">"PIN"</string>
+    <string name="unlock_set_unlock_pin_summary" msgid="4131169672844263316">"PIN numérico para desbloquear pantalla"</string>
+    <string name="unlock_set_unlock_password_title" msgid="8775603825675090937">"Contraseña"</string>
+    <string name="unlock_set_unlock_password_summary" msgid="4623254789833899286">"Contraseña para desbloq pantalla"</string>
+    <string name="unlock_set_unlock_disabled_summary" msgid="736557879526940324">"Inhab por administrador de teléf remoto"</string>
     <string name="unlock_disable_lock_title" msgid="1427036227416979120">"Desactivar bloqueo pantalla"</string>
     <string name="unlock_disable_lock_pattern_summary" msgid="6801602880568869201">"Eliminar patrón de desbloqueo"</string>
     <string name="unlock_disable_lock_pin_summary" msgid="8856842745366993387">"Eliminar PIN de desbloqueo"</string>
@@ -423,10 +409,8 @@
     <skip />
     <string name="vibrate_in_silent_title" msgid="3897968069156767036">"Vibrar en modo silencio"</string>
     <string name="vibrate_in_silent_summary" msgid="3312600513070076281">"Permitir vibración en modo silencio"</string>
-    <!-- no translation found for vibrate_title (6045820877942801599) -->
-    <skip />
-    <!-- no translation found for vibrate_summary (7378130397830790458) -->
-    <skip />
+    <string name="vibrate_title" msgid="6045820877942801599">"Vibrar"</string>
+    <string name="vibrate_summary" msgid="7378130397830790458">"Vibrar al recibir llamadas o notificaciones"</string>
     <string name="notification_sound_title" msgid="6316316069880531693">"Tono de notificación"</string>
     <!-- no translation found for notification_sound_summary (2953599929394109819) -->
     <skip />
@@ -884,7 +868,7 @@
     <string name="power_usage_summary" msgid="7237084831082848168">"Consumo de la batería"</string>
     <string name="battery_since_unplugged" msgid="338073389740738437">"Uso de la batería desde que se cargó"</string>
     <string name="battery_since_reset" msgid="7464546661121187045">"Uso de la batería desde que se restableció"</string>
-    <string name="battery_stats_duration" msgid="7464501326709469282">"<xliff:g id="TIME">%1$s</xliff:g> desde que se desenchufó"</string>
+    <string name="battery_stats_duration" msgid="7464501326709469282">"<xliff:g id="TIME">%1$s</xliff:g> desde que se cargó"</string>
     <!-- no translation found for battery_stats_last_duration (1535831453827905957) -->
     <skip />
     <string name="awake" msgid="387122265874485088">"Tiempo de actividad del dispositivo"</string>
@@ -1109,12 +1093,8 @@
     <string name="device_admin_warning" msgid="1149471041373876923">"Al activar este administrador se permitirá que la aplicación <xliff:g id="APP_NAME">%1$s</xliff:g> realice las siguientes operaciones:"</string>
     <string name="device_admin_status" msgid="7169948053970923035">"Este administrador está activo y permite que la aplicación <xliff:g id="APP_NAME">%1$s</xliff:g> realice las siguientes operaciones:"</string>
     <string name="untitled_apn" msgid="1230060359198685513">"Sin título"</string>
-    <!-- no translation found for sound_category_sound_title (1488759370067953996) -->
-    <skip />
-    <!-- no translation found for sound_category_calls_title (3688531959256239012) -->
-    <skip />
-    <!-- no translation found for sound_category_notification_title (3502115998790286943) -->
-    <skip />
-    <!-- no translation found for sound_category_feedback_title (4399742321363475393) -->
-    <skip />
+    <string name="sound_category_sound_title" msgid="1488759370067953996">"General"</string>
+    <string name="sound_category_calls_title" msgid="3688531959256239012">"Llamadas entrantes"</string>
+    <string name="sound_category_notification_title" msgid="3502115998790286943">"Notificaciones"</string>
+    <string name="sound_category_feedback_title" msgid="4399742321363475393">"Comentarios"</string>
 </resources>
