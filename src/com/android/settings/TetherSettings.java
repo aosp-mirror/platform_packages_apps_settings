@@ -88,12 +88,19 @@ public class TetherSettings extends PreferenceActivity {
         mUsbRegexs = cm.getTetherableUsbRegexs();
         if (mUsbRegexs.length == 0) {
             getPreferenceScreen().removePreference(mUsbTether);
+
+            setTitle(R.string.tether_settings_title_wifi);
         }
 
         mWifiRegexs = cm.getTetherableWifiRegexs();
         if (mWifiRegexs.length == 0) {
             getPreferenceScreen().removePreference(mEnableWifiAp);
             getPreferenceScreen().removePreference(mWifiApSettings);
+
+            setTitle(R.string.tether_settings_title_usb);
+        } else if (mUsbRegexs.length != 0) {
+            // have both
+            setTitle(R.string.tether_settings_title_both);
         }
         mWifiApEnabler = new WifiApEnabler(this, mEnableWifiAp);
         mView = new WebView(this);
