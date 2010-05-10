@@ -123,6 +123,22 @@ public class WirelessSettings extends PreferenceActivity {
                 (ConnectivityManager)getSystemService(Context.CONNECTIVITY_SERVICE);
         if (!cm.isTetheringSupported()) {
             getPreferenceScreen().removePreference(findPreference(KEY_TETHER_SETTINGS));
+        } else {
+            String[] usbRegexs = cm.getTetherableUsbRegexs();
+            String[] wifiRegexs = cm.getTetherableWifiRegexs();
+            Preference p = findPreference(KEY_TETHER_SETTINGS);
+            if (wifiRegexs.length == 0) {
+                p.setTitle(R.string.tether_settings_title_usb);
+                p.setSummary(R.string.tether_settings_summary_usb);
+            } else {
+                if (usbRegexs.length == 0) {
+                    p.setTitle(R.string.tether_settings_title_wifi);
+                    p.setSummary(R.string.tether_settings_summary_wifi);
+                } else {
+                    p.setTitle(R.string.tether_settings_title_both);
+                    p.setSummary(R.string.tether_settings_summary_both);
+                }
+            }
         }
     }
 
