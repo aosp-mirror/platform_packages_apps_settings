@@ -751,29 +751,28 @@ public class CachedBluetoothDevice implements Comparable<CachedBluetoothDevice> 
             mProfiles.clear();
 
             BluetoothJob job = workQueue.peek();
-            if (job == null) {
-                return;
-            }
+            if (job != null) {
+                // Remove the first item and process the next one
+                if (job.command == BluetoothCommand.REMOVE_BOND
+                        && job.cachedDevice.mDevice.equals(mDevice)) {
+                    workQueue.poll(); // dequeue
+                } else {
+                    // Unexpected job
+                    if (D) {
+                        Log.d(TAG, "job.command = " + job.command);
+                        Log.d(TAG, "mDevice:" + mDevice + " != head:" + job.toString());
+                    }
 
-            // Remove the first item and process the next one
-            if (job.command == BluetoothCommand.REMOVE_BOND
-                    && job.cachedDevice.mDevice.equals(mDevice)) {
-                workQueue.poll(); // dequeue
-            } else {
-                // Unexpected job
-                if (D) {
-                    Log.d(TAG, "job.command = " + job.command);
-                    Log.d(TAG, "mDevice:" + mDevice + " != head:" + job.toString());
+                    // Check to see if we need to remove the stale items from the queue
+                    if (!pruneQueue(null)) {
+                        // nothing in the queue was modify. Just ignore the notification and return.
+                        refresh();
+                        return;
+                    }
                 }
 
-                // Check to see if we need to remove the stale items from the queue
-                if (!pruneQueue(null)) {
-                    // nothing in the queue was modify. Just ignore the notification and return.
-                    return;
-                }
+                processCommands();
             }
-
-            processCommands();
         }
 
         refresh();
