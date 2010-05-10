@@ -890,23 +890,23 @@
 
     <!-- Wifi AP settings-->
     <!-- Label for wifi tether checkbox. Toggles Access Point on/off -->
-    <string name="wifi_tether_checkbox_text">Wi-Fi tethering</string>
+    <string name="wifi_tether_checkbox_text">Portable Wi-Fi hotspot</string>
     <!-- Subtext for wifi tether checkbox on success -->
-    <string name="wifi_tether_enabled_subtext">Access point <xliff:g id="network_ssid">%1$s</xliff:g> active</string>
+    <string name="wifi_tether_enabled_subtext">Portable hotspot <xliff:g id="network_ssid">%1$s</xliff:g> active</string>
     <!-- Subtext for wifi tether checkbox on failure -->
-    <string name="wifi_tether_failed_subtext">Wi-Fi tethering error</string>
+    <string name="wifi_tether_failed_subtext">Portable Wi-Fi hotspot error</string>
     <!-- Label for Wi-fi tether settings preference -->
-    <string name="wifi_tether_settings_text">Wi-Fi tethering settings</string>
+    <string name="wifi_tether_settings_text">Portable Wi-Fi hotspot settings</string>
     <!-- Subtext for Wi-fi tether settings preference -->
-    <string name="wifi_tether_settings_subtext">Set up &amp; manage access point</string>
+    <string name="wifi_tether_settings_subtext">Set up &amp; manage portable Wi-Fi hotspot</string>
     <!-- Title of the Wi-fi settings screen -->
-    <string name="wifi_tether_settings_title">Wi-Fi tethering settings</string>
+    <string name="wifi_tether_settings_title">Portable Wi-Fi hotspot settings</string>
     <!-- Used to open the ssid and security dialog for Wifi Access Point -->
-    <string name="wifi_tether_configure_ap_text">Configure AP</string>
+    <string name="wifi_tether_configure_ap_text">Configure Wi-Fi hotspot</string>
     <!-- Subtext on configuration preference to indicate SSID and security chosen -->
-    <string name="wifi_tether_configure_subtext"><xliff:g id="network_ssid">%1$s</xliff:g> <xliff:g id="network_security">%2$s</xliff:g> access point</string>
+    <string name="wifi_tether_configure_subtext"><xliff:g id="network_ssid">%1$s</xliff:g> <xliff:g id="network_security">%2$s</xliff:g> portable Wi-Fi hotspot</string>
     <!-- Default access point SSID used for tethering -->
-    <string name="wifi_tether_configure_ssid_default">AndroidAP</string>
+    <string name="wifi_tether_configure_ssid_default">AndroidHotspot</string>
 
 
     <!-- Do not translate. Used for diagnostic screens, precise translation is not necessary
@@ -1407,12 +1407,13 @@
     <string name="call_settings_summary">Set up voicemail, call forwarding, call waiting, caller ID</string>
 
     <!-- Tethering controls, item title to go into the tethering settings -->
-    <string name="tether_settings_title">Tethering</string>
+    <string name="tether_settings_title_usb">Tethering</string>
+    <string name="tether_settings_title_wifi">Portable hotspot</string>
+    <string name="tether_settings_title_both">Tethering &amp; portable hotspot</string>
     <!-- Tethering controls, the item summary for the user to go into the tethering settings -->
-    <string name="tether_settings_summary">Set up &amp; manage tethering</string>
-
-    <!-- Title of the screen for adjusting tethering settings -->
-    <string name="tether_screen_title">Tethering settings</string>
+    <string name="tether_settings_summary_usb">Share your phone\'s mobile data connection via USB</string>
+    <string name="tether_settings_summary_wifi">Share your phone\'s mobile connection as a portable Wi-Fi hotspot</string>
+    <string name="tether_settings_summary_both">Share your phone\'s mobile data connection via USB or as a portable Wi-Fi hotspot</string>
 
     <!-- USB Tethering options -->
     <string name="usb_title">USB</string>
@@ -1429,7 +1430,7 @@
     <string name="usb_tethering_errored_subtext">USB tethering error</string>
 
     <!-- Thethering help button - calls up a web view with general tethering info -->
-    <string name="tethering_help_button_text">Tethering help</string>
+    <string name="tethering_help_button_text">Help</string>
 
     <!-- Wireless controls, item title to go into the network settings -->
     <string name="network_settings_title">Mobile networks</string>
