@@ -40,6 +40,8 @@ public class SettingsSafetyLegalActivity extends AlertActivity
 
     private WebView mWebView;
 
+    private AlertDialog mErrorDialog = null;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -85,14 +87,31 @@ public class SettingsSafetyLegalActivity extends AlertActivity
     }
 
     private void showErrorAndFinish(String url) {
-        new AlertDialog.Builder(this)
-                .setMessage(getResources()
-                        .getString(R.string.settings_safetylegal_activity_unreachable, url))
-                .setTitle(R.string.settings_safetylegal_activity_title)
-                .setPositiveButton(android.R.string.ok, this)
-                .setOnCancelListener(this)
-                .setCancelable(true)
-                .show();
+        if (mErrorDialog == null) {
+            mErrorDialog = new AlertDialog.Builder(this)
+                    .setTitle(R.string.settings_safetylegal_activity_title)
+                    .setPositiveButton(android.R.string.ok, this)
+                    .setOnCancelListener(this)
+                    .setCancelable(true)
+                    .create();
+        } else {
+            if (mErrorDialog.isShowing()) {
+                mErrorDialog.dismiss();
+            }
+        }
+        mErrorDialog.setMessage(getResources()
+                .getString(R.string.settings_safetylegal_activity_unreachable, url));
+        mErrorDialog.show();
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+
+        if (mErrorDialog != null) {
+            mErrorDialog.dismiss();
+            mErrorDialog = null;
+        }
     }
 
     @Override

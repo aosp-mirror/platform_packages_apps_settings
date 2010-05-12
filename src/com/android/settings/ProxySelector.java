@@ -18,6 +18,7 @@ package com.android.settings;
 
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.app.Dialog;
 import android.content.ContentResolver;
 import android.content.Intent;
 import android.net.Proxy;
@@ -73,6 +74,7 @@ public class ProxySelector extends Activity
         HOSTNAME_PATTERN = Pattern.compile(HOSTNAME_REGEXP);
     }
 
+    private static final int ERROR_DIALOG_ID = 0;
 
     public void onCreate(Bundle icicle) {
         super.onCreate(icicle);
@@ -84,13 +86,32 @@ public class ProxySelector extends Activity
         populateFields(false);
     }
 
-    protected void showError(int error) {
+    @Override
+    protected Dialog onCreateDialog(int id) {
+        if (id == ERROR_DIALOG_ID) {
+            String hostname = mHostnameField.getText().toString().trim();
+            String portStr = mPortField.getText().toString().trim();
+            String msg = getString(validate(hostname, portStr));
 
-        new AlertDialog.Builder(this)
-                .setTitle(R.string.proxy_error)
-                .setMessage(error)
-                .setPositiveButton(R.string.proxy_error_dismiss, null)
-                .show();
+            return new AlertDialog.Builder(this)
+                    .setTitle(R.string.proxy_error)
+                    .setPositiveButton(R.string.proxy_error_dismiss, null)
+                    .setMessage(msg)
+                    .create();
+        }
+        return super.onCreateDialog(id);
+    }
+
+    @Override
+    protected void onPrepareDialog(int id, Dialog dialog) {
+        super.onPrepareDialog(id, dialog);
+
+        if (id == ERROR_DIALOG_ID) {
+            String hostname = mHostnameField.getText().toString().trim();
+            String portStr = mPortField.getText().toString().trim();
+            String msg = getString(validate(hostname, portStr));
+            ((AlertDialog)dialog).setMessage(msg);
+        }
     }
 
     void initView() {
@@ -188,7 +209,7 @@ public class ProxySelector extends Activity
 
         int result = validate(hostname, portStr);
         if (result > 0) {
-            showError(result);
+            showDialog(ERROR_DIALOG_ID);
             return false;
         }
 
