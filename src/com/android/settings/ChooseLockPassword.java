@@ -249,6 +249,10 @@ public class ChooseLockPassword extends Activity implements OnClickListener, OnE
                 return getString(R.string.lockpassword_password_requires_symbol);
             }
         }
+        if(mLockPatternUtils.checkPasswordHistory(password)) {
+            return getString(mIsAlphaMode ? R.string.lockpassword_password_recently_used
+                    : R.string.lockpassword_pin_recently_used);
+        }
         return null;
     }
 
@@ -306,7 +310,7 @@ public class ChooseLockPassword extends Activity implements OnClickListener, OnE
 
     public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
         // Check if this was the result of hitting the enter key
-        if (actionId == EditorInfo.IME_NULL) {
+        if (actionId == EditorInfo.IME_NULL && event.getAction() == KeyEvent.ACTION_DOWN) {
             handleNext();
             return true;
         }
