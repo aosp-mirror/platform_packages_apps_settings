@@ -144,6 +144,11 @@ public class ConfirmLockPattern extends Activity {
         long deadline = mLockPatternUtils.getLockoutAttemptDeadline();
         if (deadline != 0) {
             handleAttemptLockout(deadline);
+        } else if (!mLockPatternView.isEnabled()) {
+            // The deadline has passed, but the timer was cancelled...
+            // Need to clean up.
+            mNumWrongConfirmAttempts = 0;
+            updateStage(Stage.NeedToUnlock);
         }
     }
 
