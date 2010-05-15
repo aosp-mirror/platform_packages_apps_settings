@@ -92,11 +92,13 @@ class WifiDialog extends AlertDialog implements View.OnClickListener,
         WifiConfiguration config = new WifiConfiguration();
 
         if (mAccessPoint == null) {
-            config.SSID = mSsid.getText().toString();
+            config.SSID = AccessPoint.convertToQuotedString(
+                    mSsid.getText().toString());
             // If the user adds a network manually, assume that it is hidden.
             config.hiddenSSID = true;
         } else if (mAccessPoint.networkId == -1) {
-            config.SSID = mAccessPoint.ssid;
+            config.SSID = AccessPoint.convertToQuotedString(
+                    mAccessPoint.ssid);
         } else {
             config.networkId = mAccessPoint.networkId;
         }
