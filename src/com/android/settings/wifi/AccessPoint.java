@@ -74,7 +74,7 @@ class AccessPoint extends Preference {
     AccessPoint(Context context, WifiConfiguration config) {
         super(context);
         setWidgetLayoutResource(R.layout.preference_widget_wifi_signal);
-        ssid = (config.SSID == null ? "" : config.SSID);
+        ssid = (config.SSID == null ? "" : removeDoubleQuotes(config.SSID));
         security = getSecurity(config);
         networkId = config.networkId;
         mConfig = config;
@@ -179,6 +179,19 @@ class AccessPoint extends Preference {
 
     DetailedState getState() {
         return mState;
+    }
+
+    static String removeDoubleQuotes(String string) {
+        int length = string.length();
+        if ((length > 1) && (string.charAt(0) == '"')
+                && (string.charAt(length - 1) == '"')) {
+            return string.substring(1, length - 1);
+        }
+        return string;
+    }
+
+    static String convertToQuotedString(String string) {
+        return "\"" + string + "\"";
     }
 
     private void refresh() {

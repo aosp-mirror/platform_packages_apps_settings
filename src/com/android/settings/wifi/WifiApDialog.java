@@ -72,7 +72,7 @@ class WifiApDialog extends AlertDialog implements View.OnClickListener,
 
         WifiConfiguration config = new WifiConfiguration();
 
-        config.SSID = mSsid.getText().toString();
+        config.SSID = AccessPoint.convertToQuotedString(mSsid.getText().toString());
 
         switch (mSecurityType) {
             case AccessPoint.SECURITY_NONE:
@@ -115,7 +115,7 @@ class WifiApDialog extends AlertDialog implements View.OnClickListener,
         context.getString(R.string.wifi_cancel), mListener);
 
         if (mWifiConfig != null) {
-            mSsid.setText(mWifiConfig.SSID);
+            mSsid.setText(AccessPoint.removeDoubleQuotes(mWifiConfig.SSID));
             switch (mSecurityType) {
               case AccessPoint.SECURITY_NONE:
                   mSecurity.setSelection(OPEN_INDEX);
