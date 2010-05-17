@@ -241,7 +241,7 @@
     <string name="unlock_set_unlock_launch_picker_summary" msgid="1667332113134720845">"Zamknout obrazovku pomocí gesta, kódu PIN nebo hesla"</string>
     <string name="unlock_set_unlock_launch_picker_change_title" msgid="6987228635944678726">"Změnit zámek obrazovky"</string>
     <string name="unlock_set_unlock_launch_picker_change_summary" msgid="2790960639554590668">"Změnit nebo deaktivovat bezpečnostní gesto, kód PIN nebo heslo"</string>
-    <string name="unlock_set_unlock_none_title" msgid="3760684669884671990">"Žádný"</string>
+    <string name="unlock_set_unlock_none_title" msgid="3760684669884671990">"Žádné"</string>
     <string name="unlock_set_unlock_none_summary" msgid="2658550480388272618">"Deaktivovat zabezpečení zámku obrazovky"</string>
     <string name="unlock_set_unlock_pattern_title" msgid="2912067603917311700">"Gesto"</string>
     <string name="unlock_set_unlock_pattern_summary" msgid="3018395214738645405">"Nakreslete gesto pro odemknutí obrazovky"</string>
@@ -385,15 +385,15 @@
     <string name="wifi_dns2" msgid="1368601006824882659">"Server DNS 2"</string>
     <string name="wifi_gateway" msgid="163914742461092086">"Brána"</string>
     <string name="wifi_netmask" msgid="4520635321425529085">"Maska sítě"</string>
-    <string name="wifi_tether_checkbox_text" msgid="796007268580464534">"Sdílení datového připojení prostřednictvím WiFi"</string>
-    <string name="wifi_tether_enabled_subtext" msgid="6758080605207549918">"Přístupový bod <xliff:g id="NETWORK_SSID">%1$s</xliff:g> je aktivní"</string>
-    <string name="wifi_tether_failed_subtext" msgid="4379214348183654280">"Chyba sdílení datového připojení prostřednictvím WiFi"</string>
-    <string name="wifi_tether_settings_text" msgid="8831276059149506799">"Nastavení sdílení datového připojení prostřednictvím WiFi"</string>
-    <string name="wifi_tether_settings_subtext" msgid="3415164631321782704">"Nastavení a správa přístupového bodu"</string>
-    <string name="wifi_tether_settings_title" msgid="3233393750798545228">"Nastavení sdílení datového připojení prostřednictvím WiFi"</string>
-    <string name="wifi_tether_configure_ap_text" msgid="7849700175083202171">"Konfigurovat přístupový bod"</string>
-    <string name="wifi_tether_configure_subtext" msgid="54089556089657247">"Přístupový bod: <xliff:g id="NETWORK_SSID">%1$s</xliff:g> <xliff:g id="NETWORK_SECURITY">%2$s</xliff:g>"</string>
-    <string name="wifi_tether_configure_ssid_default" msgid="4491822321218336928">"Přístupový bod AndroidAP"</string>
+    <string name="wifi_tether_checkbox_text" msgid="6961605862058056788">"Přenosný hotspot Wi-Fi"</string>
+    <string name="wifi_tether_enabled_subtext" msgid="8948641212931906143">"Přenosný hotspot <xliff:g id="NETWORK_SSID">%1$s</xliff:g> je aktivní"</string>
+    <string name="wifi_tether_failed_subtext" msgid="2654888578056042315">"Chyba přenosného hotspotu Wi-Fi"</string>
+    <string name="wifi_tether_settings_text" msgid="123573487844470195">"Nastavení přenosného hotspotu Wi-Fi"</string>
+    <string name="wifi_tether_settings_subtext" msgid="8064755682383367008">"Nastavení a správa přenosného hotspotu Wi-Fi"</string>
+    <string name="wifi_tether_settings_title" msgid="3749063216348284432">"Nastavení přenosného hotspotu Wi-Fi"</string>
+    <string name="wifi_tether_configure_ap_text" msgid="3474995108398156258">"Konfigurace hotspotu Wi-Fi"</string>
+    <string name="wifi_tether_configure_subtext" msgid="1927454307836232128">"Přenosný hotspot Wi-Fi <xliff:g id="NETWORK_SSID">%1$s</xliff:g> <xliff:g id="NETWORK_SECURITY">%2$s</xliff:g>"</string>
+    <string name="wifi_tether_configure_ssid_default" msgid="8467525402622138547">"AndroidHotspot"</string>
     <string name="sound_settings_title" msgid="8735891486683305886">"Zvuk"</string>
     <string name="display_settings_title" msgid="1708697328627382561">"Zobrazení"</string>
     <string name="sound_settings" msgid="5007659014828162881">"Nastavení zvuku"</string>
@@ -438,7 +438,7 @@
     <string name="haptic_feedback_enable_summary_off" msgid="7287885436963105314">"Vibrovat při stisku softwarových kláves a při některých událostech uživatelského rozhraní"</string>
     <string name="audio_record_proc_title" msgid="4271091199976457534">"Potlačení hluku"</string>
     <string name="audio_record_proc_summary" msgid="8113628457499616498">"Při hovoru nebo nahrávání potlačí okolní hluk."</string>
-    <string name="dock_settings" msgid="1820107306693002541">"Dok"</string>
+    <string name="dock_settings" msgid="1820107306693002541">"Dokovací stanice"</string>
     <string name="dock_settings_title" msgid="9161438664257429372">"Nastavení doku"</string>
     <string name="dock_audio_settings_title" msgid="3324750259959570305">"Zvuk"</string>
     <string name="dock_audio_summary_desk" msgid="6487784412371139335">"Nastavení připojeného stolního doku"</string>
@@ -592,9 +592,12 @@
     <string name="media_format_gesture_explanation" msgid="4239529439389660159">"Formátování karty SD je potřeba potvrdit nakreslením odemykacího obrazce."</string>
     <string name="call_settings_title" msgid="5188713413939232801">"Nastavení hovorů"</string>
     <string name="call_settings_summary" msgid="7291195704801002886">"Nastavení hlasové schránky, přesměrování a čekání hovorů a ID volajícího"</string>
-    <string name="tether_settings_title" msgid="8703982377504005349">"Sdílení datového připojení"</string>
-    <string name="tether_settings_summary" msgid="6679594629002850490">"Nastavení a správa sdíleného datového připojení"</string>
-    <string name="tether_screen_title" msgid="1521966915332491855">"Nastavení sdíleného datového připojení"</string>
+    <string name="tether_settings_title_usb" msgid="4315031513434087777">"Tethering"</string>
+    <string name="tether_settings_title_wifi" msgid="3277144155960302049">"Přenosný hotspot"</string>
+    <string name="tether_settings_title_both" msgid="2734066355556891504">"Tethering a přenosný hotspot"</string>
+    <string name="tether_settings_summary_usb" msgid="3562431455625637370">"Sdílet mobilního datové připojení telefonu prostřednictvím portu USB"</string>
+    <string name="tether_settings_summary_wifi" msgid="4690912027002467246">"Sdílet mobilní připojení telefonu jako přenosný hotspot Wi-Fi"</string>
+    <string name="tether_settings_summary_both" msgid="7460063951190682635">"Sdílet mobilní datové připojení telefonu prostřednictvím portu USB nebo jako přenosný hotspot Wi-Fi"</string>
     <string name="usb_title" msgid="7483344855356312510">"USB"</string>
     <string name="usb_tethering_button_text" msgid="585829947108007917">"Sdílené datové připojení prostřednictvím portu USB"</string>
     <string name="usb_tethering_available_subtext" msgid="156779271296152605">"Připojení USB je k dispozici. Chcete-li vytvořit sdílené datové připojení, vyberte je."</string>
@@ -602,7 +605,7 @@
     <string name="usb_tethering_storage_active_subtext" msgid="6608933594288072573">"Nelze sdílet datové připojení, pokud se používá úložiště USB"</string>
     <string name="usb_tethering_unavailable_subtext" msgid="1044622421184007254">"Připojení USB není k dispozici"</string>
     <string name="usb_tethering_errored_subtext" msgid="1377574819427841992">"Chyba sdílení datového připojení prostřednictvím USB"</string>
-    <string name="tethering_help_button_text" msgid="7322604807045355030">"Nápověda ke sdílení datového připojení"</string>
+    <string name="tethering_help_button_text" msgid="656117495547173630">"Nápověda"</string>
     <string name="network_settings_title" msgid="7967552516440151852">"Mobilní sítě"</string>
     <string name="network_settings_summary" msgid="5149750850846813553">"Nastavení roamingu, sítí a názvů přístupových bodů"</string>
     <string name="location_title" msgid="1029961368397484576">"Moje poloha"</string>

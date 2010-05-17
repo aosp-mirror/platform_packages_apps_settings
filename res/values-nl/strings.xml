@@ -385,15 +385,15 @@
     <string name="wifi_dns2" msgid="1368601006824882659">"DNS 2"</string>
     <string name="wifi_gateway" msgid="163914742461092086">"Gateway"</string>
     <string name="wifi_netmask" msgid="4520635321425529085">"Netmasker"</string>
-    <string name="wifi_tether_checkbox_text" msgid="796007268580464534">"Wi-Fi-tethering"</string>
-    <string name="wifi_tether_enabled_subtext" msgid="6758080605207549918">"Toegangspunt <xliff:g id="NETWORK_SSID">%1$s</xliff:g> actief"</string>
-    <string name="wifi_tether_failed_subtext" msgid="4379214348183654280">"Fout met Wi-Fi-tethering"</string>
-    <string name="wifi_tether_settings_text" msgid="8831276059149506799">"Instellingen Wi-Fi-tethering"</string>
-    <string name="wifi_tether_settings_subtext" msgid="3415164631321782704">"Toegangspunt instellen en beheren"</string>
-    <string name="wifi_tether_settings_title" msgid="3233393750798545228">"Instellingen voor Wi-Fi-tethering"</string>
-    <string name="wifi_tether_configure_ap_text" msgid="7849700175083202171">"AP configureren"</string>
-    <string name="wifi_tether_configure_subtext" msgid="54089556089657247">"<xliff:g id="NETWORK_SSID">%1$s</xliff:g> <xliff:g id="NETWORK_SECURITY">%2$s</xliff:g> toegangspunt"</string>
-    <string name="wifi_tether_configure_ssid_default" msgid="4491822321218336928">"AndroidAP"</string>
+    <string name="wifi_tether_checkbox_text" msgid="6961605862058056788">"Draagbare Wi-Fi-hotspot"</string>
+    <string name="wifi_tether_enabled_subtext" msgid="8948641212931906143">"Draagbare hotspot <xliff:g id="NETWORK_SSID">%1$s</xliff:g> actief"</string>
+    <string name="wifi_tether_failed_subtext" msgid="2654888578056042315">"Fout met draagbare Wi-Fi-hotspot"</string>
+    <string name="wifi_tether_settings_text" msgid="123573487844470195">"Instellingen voor draagbare Wi-Fi-hotspot"</string>
+    <string name="wifi_tether_settings_subtext" msgid="8064755682383367008">"Draagbare Wi-Fi-hotspot instellen en beheren"</string>
+    <string name="wifi_tether_settings_title" msgid="3749063216348284432">"Instellingen voor draagbare Wi-Fi-hotspot"</string>
+    <string name="wifi_tether_configure_ap_text" msgid="3474995108398156258">"Wi-Fi-hotspot configureren"</string>
+    <string name="wifi_tether_configure_subtext" msgid="1927454307836232128">"<xliff:g id="NETWORK_SSID">%1$s</xliff:g> <xliff:g id="NETWORK_SECURITY">%2$s</xliff:g> draagbare Wi-Fi-hotspot"</string>
+    <string name="wifi_tether_configure_ssid_default" msgid="8467525402622138547">"AndroidHotspot"</string>
     <string name="sound_settings_title" msgid="8735891486683305886">"Geluid"</string>
     <string name="display_settings_title" msgid="1708697328627382561">"Weergave"</string>
     <string name="sound_settings" msgid="5007659014828162881">"Geluidsinstellingen"</string>
@@ -430,7 +430,7 @@
     <string name="sound_effects_enable_title" msgid="3197313718929122833">"Hoorbare selectie"</string>
     <string name="sound_effects_enable_summary_on" msgid="6154141289879491329">"Geluid afspelen bij schermselectie"</string>
     <string name="sound_effects_enable_summary_off" msgid="3447739581759560125">"Geluid afspelen bij schermselectie"</string>
-    <string name="lock_sounds_enable_title" msgid="1575990840389107141">"Geluid schermvergrendeling"</string>
+    <string name="lock_sounds_enable_title" msgid="1575990840389107141">"Geluid vergrendeling"</string>
     <string name="lock_sounds_enable_summary_on" msgid="145741024028391473">"Geluiden afspelen wanneer het scherm wordt vergrendeld en ontgrendeld"</string>
     <string name="lock_sounds_enable_summary_off" msgid="8481243116223542804">"Geluiden afspelen wanneer het scherm wordt vergrendeld en ontgrendeld"</string>
     <string name="haptic_feedback_enable_title" msgid="6311736559245411290">"Haptische feedback"</string>
@@ -592,9 +592,12 @@
     <string name="media_format_gesture_explanation" msgid="4239529439389660159">"U moet uw ontgrendelingspatroon tekenen om het formatteren van een SD-kaart te bevestigen."</string>
     <string name="call_settings_title" msgid="5188713413939232801">"Oproepinstellingen"</string>
     <string name="call_settings_summary" msgid="7291195704801002886">"Voicemail, oproepen doorschakelen, wisselgesprek, beller-id instellen"</string>
-    <string name="tether_settings_title" msgid="8703982377504005349">"Tethering"</string>
-    <string name="tether_settings_summary" msgid="6679594629002850490">"Tethering instellen en beheren"</string>
-    <string name="tether_screen_title" msgid="1521966915332491855">"Instellingen voor tethering"</string>
+    <string name="tether_settings_title_usb" msgid="4315031513434087777">"Tethering"</string>
+    <string name="tether_settings_title_wifi" msgid="3277144155960302049">"Draagbare hotspot"</string>
+    <string name="tether_settings_title_both" msgid="2734066355556891504">"Tethering en draagbare hotspot"</string>
+    <string name="tether_settings_summary_usb" msgid="3562431455625637370">"Deel de mobiele gegevensverbinding van uw telefoon via USB"</string>
+    <string name="tether_settings_summary_wifi" msgid="4690912027002467246">"Deel de mobiele verbinding van uw telefoon als draagbare Wi-Fi-hotspot"</string>
+    <string name="tether_settings_summary_both" msgid="7460063951190682635">"Deel de mobiele gegevensverbinding van uw telefoon via USB of als draagbare Wi-Fi-hotspot"</string>
     <string name="usb_title" msgid="7483344855356312510">"USB"</string>
     <string name="usb_tethering_button_text" msgid="585829947108007917">"USB-tethering"</string>
     <string name="usb_tethering_available_subtext" msgid="156779271296152605">"USB-verbinding, aanvinken om te tetheren"</string>
@@ -602,7 +605,7 @@
     <string name="usb_tethering_storage_active_subtext" msgid="6608933594288072573">"Kan niet tetheren wanneer USB-opslag wordt gebruikt"</string>
     <string name="usb_tethering_unavailable_subtext" msgid="1044622421184007254">"USB niet verbonden"</string>
     <string name="usb_tethering_errored_subtext" msgid="1377574819427841992">"Fout met USB-tethering"</string>
-    <string name="tethering_help_button_text" msgid="7322604807045355030">"Hulp bij tethering"</string>
+    <string name="tethering_help_button_text" msgid="656117495547173630">"Help"</string>
     <string name="network_settings_title" msgid="7967552516440151852">"Mobiele netwerken"</string>
     <string name="network_settings_summary" msgid="5149750850846813553">"Opties voor roaming, netwerken, APN\'s instellen"</string>
     <string name="location_title" msgid="1029961368397484576">"Mijn locatie"</string>
@@ -820,7 +823,7 @@
     <string name="battery_history_network_usage" msgid="8010852371665217020">"Netwerkgebruiksdetails voor <xliff:g id="APP_NAME">%1$s</xliff:g>:"</string>
     <string name="battery_history_bytes_received" msgid="980307569180518302">"Bytes ontvangen: <xliff:g id="BYTES">%1$d</xliff:g>"</string>
     <string name="battery_history_bytes_sent" msgid="2501748768602119159">"Bytes verzonden: <xliff:g id="BYTES">%1$d</xliff:g>"</string>
-    <string name="battery_history_bytes_total" msgid="4444807574361642753">"Totaal aantal bytes: <xliff:g id="BYTES">%1$d</xliff:g>"</string>
+    <string name="battery_history_bytes_total" msgid="4444807574361642753">"Totaal aantal bytes: <xliff:g id="BYTES">%1$d</xliff:g>\n"</string>
     <string name="battery_history_cpu_usage" msgid="2597353713014790877">"CPU-gebruiksdetails voor <xliff:g id="APP_NAME">%1$s</xliff:g>:"</string>
     <string name="battery_history_user_time" msgid="6227507614894791359">"Gebruikerstijd:"</string>
     <string name="battery_history_system_time" msgid="2015862072724507547">"Systeemtijd:"</string>
@@ -1077,7 +1080,7 @@
     <string name="privacy_settings_title" msgid="1987089301293213705">"Privacyinstellingen"</string>
     <string name="backup_section_title" msgid="717834414028702406">"Back-up maken en terugzetten"</string>
     <string name="personal_data_section_title" msgid="7815209034443782061">"Persoonlijke gegevens"</string>
-    <string name="backup_settings_title" msgid="2968262658155327829">"Back-up instellingen maken"</string>
+    <string name="backup_settings_title" msgid="2968262658155327829">"Back-up instellingen"</string>
     <string name="auto_restore_title" msgid="5397528966329126506">"Automatisch terugzetten"</string>
     <string name="auto_restore_summary" msgid="2029683590724508019">"Gegevens van toepassingen terugzetten uit back-up wanneer de toepassingen worden geïnstalleerd"</string>
     <string name="backup_erase_dialog_title" msgid="3438255037256586237">"Back-up"</string>

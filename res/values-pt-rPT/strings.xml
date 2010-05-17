@@ -385,15 +385,15 @@
     <string name="wifi_dns2" msgid="1368601006824882659">"DNS 2"</string>
     <string name="wifi_gateway" msgid="163914742461092086">"Gateway"</string>
     <string name="wifi_netmask" msgid="4520635321425529085">"Máscara de rede"</string>
-    <string name="wifi_tether_checkbox_text" msgid="796007268580464534">"Associação Wi-Fi"</string>
-    <string name="wifi_tether_enabled_subtext" msgid="6758080605207549918">"Ponto de acesso <xliff:g id="NETWORK_SSID">%1$s</xliff:g> activo"</string>
-    <string name="wifi_tether_failed_subtext" msgid="4379214348183654280">"Erro na associação Wi-Fi"</string>
-    <string name="wifi_tether_settings_text" msgid="8831276059149506799">"Definições de associação Wi-Fi"</string>
-    <string name="wifi_tether_settings_subtext" msgid="3415164631321782704">"Configurar e gerir o ponto de acesso"</string>
-    <string name="wifi_tether_settings_title" msgid="3233393750798545228">"Definições de associação Wi-Fi"</string>
-    <string name="wifi_tether_configure_ap_text" msgid="7849700175083202171">"Configurar ponto de acesso"</string>
-    <string name="wifi_tether_configure_subtext" msgid="54089556089657247">"Ponto de acesso <xliff:g id="NETWORK_SSID">%1$s</xliff:g><xliff:g id="NETWORK_SECURITY">%2$s</xliff:g>"</string>
-    <string name="wifi_tether_configure_ssid_default" msgid="4491822321218336928">"Ponto de acesso do Android"</string>
+    <string name="wifi_tether_checkbox_text" msgid="6961605862058056788">"Hotspot Wi-Fi portátil"</string>
+    <string name="wifi_tether_enabled_subtext" msgid="8948641212931906143">"Hotspot portátil <xliff:g id="NETWORK_SSID">%1$s</xliff:g> activo"</string>
+    <string name="wifi_tether_failed_subtext" msgid="2654888578056042315">"Erro do hotspot Wi-Fi portátil"</string>
+    <string name="wifi_tether_settings_text" msgid="123573487844470195">"Definições de hotspot Wi-Fi portátil"</string>
+    <string name="wifi_tether_settings_subtext" msgid="8064755682383367008">"Configurar e gerir hotspot Wi-Fi portátil"</string>
+    <string name="wifi_tether_settings_title" msgid="3749063216348284432">"Definições de hotspot Wi-Fi portátil"</string>
+    <string name="wifi_tether_configure_ap_text" msgid="3474995108398156258">"Configurar hotspot Wi-Fi"</string>
+    <string name="wifi_tether_configure_subtext" msgid="1927454307836232128">"Hotspot Wi-Fi portátil <xliff:g id="NETWORK_SSID">%1$s</xliff:g> <xliff:g id="NETWORK_SECURITY">%2$s</xliff:g>"</string>
+    <string name="wifi_tether_configure_ssid_default" msgid="8467525402622138547">"AndroidHotspot"</string>
     <string name="sound_settings_title" msgid="8735891486683305886">"Som"</string>
     <string name="display_settings_title" msgid="1708697328627382561">"Visor"</string>
     <string name="sound_settings" msgid="5007659014828162881">"Definições de som"</string>
@@ -592,9 +592,12 @@
     <string name="media_format_gesture_explanation" msgid="4239529439389660159">"Tem de efectuar o padrão de desbloqueio para confirmar a formatação de um cartão SD."</string>
     <string name="call_settings_title" msgid="5188713413939232801">"Definições de chamadas"</string>
     <string name="call_settings_summary" msgid="7291195704801002886">"Configurar correio de voz, reencaminhamento de chamadas, chamada em espera, ID do autor da chamada"</string>
-    <string name="tether_settings_title" msgid="8703982377504005349">"Associação"</string>
-    <string name="tether_settings_summary" msgid="6679594629002850490">"Configurar e gerir associação"</string>
-    <string name="tether_screen_title" msgid="1521966915332491855">"Definições de associação"</string>
+    <string name="tether_settings_title_usb" msgid="4315031513434087777">"Ligação ponto a ponto"</string>
+    <string name="tether_settings_title_wifi" msgid="3277144155960302049">"Hotspot portátil"</string>
+    <string name="tether_settings_title_both" msgid="2734066355556891504">"Ligação ponto a ponto e hotspot portátil"</string>
+    <string name="tether_settings_summary_usb" msgid="3562431455625637370">"Partilhar a ligação móvel de dados do seu telefone por USB"</string>
+    <string name="tether_settings_summary_wifi" msgid="4690912027002467246">"Partilhar a ligação móvel do seu telefone como um hotspot Wi-Fi portátil"</string>
+    <string name="tether_settings_summary_both" msgid="7460063951190682635">"Partilhar a ligação móvel de dados do seu telefone por USB como um hotspot Wi-Fi portátil"</string>
     <string name="usb_title" msgid="7483344855356312510">"USB"</string>
     <string name="usb_tethering_button_text" msgid="585829947108007917">"Associação USB"</string>
     <string name="usb_tethering_available_subtext" msgid="156779271296152605">"Ligado via USB; confirme para associar"</string>
@@ -602,7 +605,7 @@
     <string name="usb_tethering_storage_active_subtext" msgid="6608933594288072573">"Não é possível associar quando o armazenamento USB está a ser utilizado"</string>
     <string name="usb_tethering_unavailable_subtext" msgid="1044622421184007254">"USB não ligado"</string>
     <string name="usb_tethering_errored_subtext" msgid="1377574819427841992">"Erro na associação USB"</string>
-    <string name="tethering_help_button_text" msgid="7322604807045355030">"Ajuda para associação"</string>
+    <string name="tethering_help_button_text" msgid="656117495547173630">"Ajuda"</string>
     <string name="network_settings_title" msgid="7967552516440151852">"Redes móveis"</string>
     <string name="network_settings_summary" msgid="5149750850846813553">"Definir opções de roaming, redes, APNs"</string>
     <string name="location_title" msgid="1029961368397484576">"A minha localização"</string>

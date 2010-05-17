@@ -101,7 +101,7 @@
     <string name="bluetooth_connecting" msgid="8555009514614320497">"Подключение..."</string>
     <!-- no translation found for bluetooth_unknown (644716244548801421) -->
     <skip />
-    <string name="bluetooth_not_connected" msgid="3389882907500605937">"Установить сопряжение с этим устройством"</string>
+    <string name="bluetooth_not_connected" msgid="3389882907500605937">"Подключиться к этому устройству"</string>
     <string name="bluetooth_pairing" msgid="1426882272690346242">"Сопряжение..."</string>
     <string name="bluetooth_paired" msgid="1247541089000057726">"Сопряжено, но не подключено"</string>
     <string name="bluetooth_device" msgid="6873461446424952003">"гарнитура/наушники"</string>
@@ -239,14 +239,14 @@
     <string name="lock_settings_picker_title" msgid="3973555216065628262">"Блокировка экрана"</string>
     <string name="unlock_set_unlock_launch_picker_title" msgid="1129684221223017902">"Настроить блокировку экрана"</string>
     <string name="unlock_set_unlock_launch_picker_summary" msgid="1667332113134720845">"Блокировка экрана графическим ключом, PIN и паролем"</string>
-    <string name="unlock_set_unlock_launch_picker_change_title" msgid="6987228635944678726">"Сменить блокировку экрана"</string>
+    <string name="unlock_set_unlock_launch_picker_change_title" msgid="6987228635944678726">"Сменить способ блокировки"</string>
     <string name="unlock_set_unlock_launch_picker_change_summary" msgid="2790960639554590668">"Смена и отключение графического ключа, PIN и пароля"</string>
     <string name="unlock_set_unlock_none_title" msgid="3760684669884671990">"Нет"</string>
     <string name="unlock_set_unlock_none_summary" msgid="2658550480388272618">"Отключить блокировку экрана"</string>
     <string name="unlock_set_unlock_pattern_title" msgid="2912067603917311700">"Графический ключ"</string>
     <string name="unlock_set_unlock_pattern_summary" msgid="3018395214738645405">"Начертите графический ключ, чтобы разблокировать экран"</string>
     <string name="unlock_set_unlock_pin_title" msgid="5846029709462329515">"PIN"</string>
-    <string name="unlock_set_unlock_pin_summary" msgid="4131169672844263316">"Введите цифровой ПИН-код, чтобы разблокировать экран"</string>
+    <string name="unlock_set_unlock_pin_summary" msgid="4131169672844263316">"Введите цифровой PIN-код, чтобы разблокировать экран"</string>
     <string name="unlock_set_unlock_password_title" msgid="8775603825675090937">"Пароль"</string>
     <string name="unlock_set_unlock_password_summary" msgid="4623254789833899286">"Введите пароль, чтобы разблокировать экран"</string>
     <string name="unlock_set_unlock_disabled_summary" msgid="736557879526940324">"Запрещено удаленным администратором"</string>
@@ -303,7 +303,7 @@
     <string name="bluetooth_device_context_connect_advanced" msgid="2643129703569788771">"Параметры..."</string>
     <string name="bluetooth_connect_specific_profiles_title" msgid="6952214406025825164">"Подключить к..."</string>
     <string name="bluetooth_profile_a2dp" msgid="3259633293424539529">"Мультимедиа"</string>
-    <string name="bluetooth_profile_headset" msgid="1874975688666658946">"Кнопки"</string>
+    <string name="bluetooth_profile_headset" msgid="1874975688666658946">"Телефон"</string>
     <string name="bluetooth_profile_opp" msgid="3799470046565284440">"Передать"</string>
     <string name="bluetooth_summary_connected_to_a2dp" msgid="510833839847758664">"Подключено к мультимедийному аудиоустройству"</string>
     <string name="bluetooth_summary_connected_to_headset" msgid="4876496372728623918">"Подключено к аудиоустройству телефона"</string>
@@ -385,15 +385,15 @@
     <string name="wifi_dns2" msgid="1368601006824882659">"DNS 2"</string>
     <string name="wifi_gateway" msgid="163914742461092086">"Шлюз"</string>
     <string name="wifi_netmask" msgid="4520635321425529085">"Маска сети"</string>
-    <string name="wifi_tether_checkbox_text" msgid="796007268580464534">"Подключение Wi-Fi"</string>
-    <string name="wifi_tether_enabled_subtext" msgid="6758080605207549918">"Точка доступа <xliff:g id="NETWORK_SSID">%1$s</xliff:g> активна"</string>
-    <string name="wifi_tether_failed_subtext" msgid="4379214348183654280">"Ошибка подключения Wi-Fi"</string>
-    <string name="wifi_tether_settings_text" msgid="8831276059149506799">"Настройки подключения Wi-Fi"</string>
-    <string name="wifi_tether_settings_subtext" msgid="3415164631321782704">"Настройка и управление точкой доступа"</string>
-    <string name="wifi_tether_settings_title" msgid="3233393750798545228">"Настройки подключения Wi-Fi"</string>
-    <string name="wifi_tether_configure_ap_text" msgid="7849700175083202171">"Настроить точку доступа"</string>
-    <string name="wifi_tether_configure_subtext" msgid="54089556089657247">"Точка доступа <xliff:g id="NETWORK_SSID">%1$s</xliff:g> <xliff:g id="NETWORK_SECURITY">%2$s</xliff:g>"</string>
-    <string name="wifi_tether_configure_ssid_default" msgid="4491822321218336928">"AndroidAP"</string>
+    <string name="wifi_tether_checkbox_text" msgid="6961605862058056788">"Точка доступа Wi-Fi"</string>
+    <string name="wifi_tether_enabled_subtext" msgid="8948641212931906143">"Точка доступа <xliff:g id="NETWORK_SSID">%1$s</xliff:g> активна"</string>
+    <string name="wifi_tether_failed_subtext" msgid="2654888578056042315">"Ошибка подключения"</string>
+    <string name="wifi_tether_settings_text" msgid="123573487844470195">"Настройки точки доступа Wi-Fi"</string>
+    <string name="wifi_tether_settings_subtext" msgid="8064755682383367008">"Настройка точки доступа Wi-Fi"</string>
+    <string name="wifi_tether_settings_title" msgid="3749063216348284432">"Настройки точки доступа "</string>
+    <string name="wifi_tether_configure_ap_text" msgid="3474995108398156258">"Настроить точку доступа Wi-Fi"</string>
+    <string name="wifi_tether_configure_subtext" msgid="1927454307836232128">"Точка доступа <xliff:g id="NETWORK_SSID">%1$s</xliff:g> <xliff:g id="NETWORK_SECURITY">%2$s</xliff:g>"</string>
+    <string name="wifi_tether_configure_ssid_default" msgid="8467525402622138547">"Хот-спот Android"</string>
     <string name="sound_settings_title" msgid="8735891486683305886">"Звуковой сигнал"</string>
     <string name="display_settings_title" msgid="1708697328627382561">"Экран"</string>
     <string name="sound_settings" msgid="5007659014828162881">"Настройки звука"</string>
@@ -592,9 +592,12 @@
     <string name="media_format_gesture_explanation" msgid="4239529439389660159">"Для подтверждения форматирования карты SD нужно начертить графический ключ разблокировки."</string>
     <string name="call_settings_title" msgid="5188713413939232801">"Вызовы"</string>
     <string name="call_settings_summary" msgid="7291195704801002886">"Голосовая почта, АОН, переадресация, параллельный вызов"</string>
-    <string name="tether_settings_title" msgid="8703982377504005349">"USB-подключение"</string>
-    <string name="tether_settings_summary" msgid="6679594629002850490">"Настройка и управление подключением"</string>
-    <string name="tether_screen_title" msgid="1521966915332491855">"Настройки подключения"</string>
+    <string name="tether_settings_title_usb" msgid="4315031513434087777">"USB-модем"</string>
+    <string name="tether_settings_title_wifi" msgid="3277144155960302049">"Точка доступа Wi-Fi"</string>
+    <string name="tether_settings_title_both" msgid="2734066355556891504">"Режим модема"</string>
+    <string name="tether_settings_summary_usb" msgid="3562431455625637370">"Открыть доступ к интернет-подключению телефона через USB"</string>
+    <string name="tether_settings_summary_wifi" msgid="4690912027002467246">"Открыть доступ к интернет-подключению телефона через Wi-Fi"</string>
+    <string name="tether_settings_summary_both" msgid="7460063951190682635">"Открыть доступ к интернет-подключению телефона через USB или Wi-Fi"</string>
     <string name="usb_title" msgid="7483344855356312510">"USB"</string>
     <string name="usb_tethering_button_text" msgid="585829947108007917">"USB-подключение"</string>
     <string name="usb_tethering_available_subtext" msgid="156779271296152605">"USB-связь установлена, установите флажок для подключения"</string>
@@ -602,7 +605,7 @@
     <string name="usb_tethering_storage_active_subtext" msgid="6608933594288072573">"Невозможно подключиться при использовании USB-накопителя"</string>
     <string name="usb_tethering_unavailable_subtext" msgid="1044622421184007254">"USB-подключения не обнаружено"</string>
     <string name="usb_tethering_errored_subtext" msgid="1377574819427841992">"Ошибка подключения USB"</string>
-    <string name="tethering_help_button_text" msgid="7322604807045355030">"Справка по подключению"</string>
+    <string name="tethering_help_button_text" msgid="656117495547173630">"Справка"</string>
     <string name="network_settings_title" msgid="7967552516440151852">"Мобильная сеть"</string>
     <string name="network_settings_summary" msgid="5149750850846813553">"Настроить параметры роуминга, сетей, точек доступа (APN)"</string>
     <string name="location_title" msgid="1029961368397484576">"Мое местоположение"</string>
@@ -621,7 +624,7 @@
     <string name="contributors_title" msgid="5917703088825286504">"Участники"</string>
     <string name="copyright_title" msgid="865906688917260647">"Авторские права"</string>
     <string name="license_title" msgid="1990487604356037871">"Лицензия"</string>
-    <string name="terms_title" msgid="7697580845616764642">"Условия предоставления услуг"</string>
+    <string name="terms_title" msgid="7697580845616764642">"Условия использования"</string>
     <string name="system_tutorial_list_item_title" msgid="9082844446660969729">"Обучение"</string>
     <string name="system_tutorial_list_item_summary" msgid="3861815254521030201">"Узнайте, как пользоваться телефоном"</string>
     <string name="settings_license_activity_title" msgid="7553683406244228650">"Лицензии открытого ПО"</string>
@@ -1096,5 +1099,5 @@
     <string name="sound_category_sound_title" msgid="1488759370067953996">"Общие"</string>
     <string name="sound_category_calls_title" msgid="3688531959256239012">"Входящие вызовы"</string>
     <string name="sound_category_notification_title" msgid="3502115998790286943">"Оповещения"</string>
-    <string name="sound_category_feedback_title" msgid="4399742321363475393">"Вибрация"</string>
+    <string name="sound_category_feedback_title" msgid="4399742321363475393">"Вибровызов"</string>
 </resources>
