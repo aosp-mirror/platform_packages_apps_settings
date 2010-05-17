@@ -385,15 +385,15 @@
     <string name="wifi_dns2" msgid="1368601006824882659">"DNS 2"</string>
     <string name="wifi_gateway" msgid="163914742461092086">"Gateway"</string>
     <string name="wifi_netmask" msgid="4520635321425529085">"Maschera di rete"</string>
-    <string name="wifi_tether_checkbox_text" msgid="796007268580464534">"Tethering Wi-Fi"</string>
-    <string name="wifi_tether_enabled_subtext" msgid="6758080605207549918">"Punto di accesso <xliff:g id="NETWORK_SSID">%1$s</xliff:g> attivo"</string>
-    <string name="wifi_tether_failed_subtext" msgid="4379214348183654280">"Errore tethering Wi-Fi"</string>
-    <string name="wifi_tether_settings_text" msgid="8831276059149506799">"Impostazioni tethering Wi-Fi"</string>
-    <string name="wifi_tether_settings_subtext" msgid="3415164631321782704">"Configura e gestisci punto di accesso"</string>
-    <string name="wifi_tether_settings_title" msgid="3233393750798545228">"Impostazioni tethering Wi-Fi"</string>
-    <string name="wifi_tether_configure_ap_text" msgid="7849700175083202171">"Configura AP"</string>
-    <string name="wifi_tether_configure_subtext" msgid="54089556089657247">"Punto di accesso <xliff:g id="NETWORK_SSID">%1$s</xliff:g> <xliff:g id="NETWORK_SECURITY">%2$s</xliff:g>"</string>
-    <string name="wifi_tether_configure_ssid_default" msgid="4491822321218336928">"AndroidAP"</string>
+    <string name="wifi_tether_checkbox_text" msgid="6961605862058056788">"Hotspot Wi-Fi portatile"</string>
+    <string name="wifi_tether_enabled_subtext" msgid="8948641212931906143">"Hotspot portatile <xliff:g id="NETWORK_SSID">%1$s</xliff:g> attivo"</string>
+    <string name="wifi_tether_failed_subtext" msgid="2654888578056042315">"Errore hotspot Wi-Fi portatile"</string>
+    <string name="wifi_tether_settings_text" msgid="123573487844470195">"Impostazioni hotspot Wi-Fi portatile"</string>
+    <string name="wifi_tether_settings_subtext" msgid="8064755682383367008">"Configura e gestisci hotspot Wi-Fi portatile"</string>
+    <string name="wifi_tether_settings_title" msgid="3749063216348284432">"Impostazioni hotspot Wi-Fi portatile"</string>
+    <string name="wifi_tether_configure_ap_text" msgid="3474995108398156258">"Configura hotspot Wi-Fi"</string>
+    <string name="wifi_tether_configure_subtext" msgid="1927454307836232128">"Hotspot Wi-Fi <xliff:g id="NETWORK_SSID">%1$s</xliff:g><xliff:g id="NETWORK_SECURITY">%2$s</xliff:g> portatile"</string>
+    <string name="wifi_tether_configure_ssid_default" msgid="8467525402622138547">"HotspotAndroid"</string>
     <string name="sound_settings_title" msgid="8735891486683305886">"Audio"</string>
     <string name="display_settings_title" msgid="1708697328627382561">"Display"</string>
     <string name="sound_settings" msgid="5007659014828162881">"Impostazioni audio"</string>
@@ -441,8 +441,8 @@
     <string name="dock_settings" msgid="1820107306693002541">"Dock"</string>
     <string name="dock_settings_title" msgid="9161438664257429372">"Impostazioni dock"</string>
     <string name="dock_audio_settings_title" msgid="3324750259959570305">"Audio"</string>
-    <string name="dock_audio_summary_desk" msgid="6487784412371139335">"Impostazioni per desktop dock collegato"</string>
-    <string name="dock_audio_summary_car" msgid="6740897586006248450">"Impostazioni per dock automobile collegato"</string>
+    <string name="dock_audio_summary_desk" msgid="6487784412371139335">"Impostazioni per dock da tavolo collegato"</string>
+    <string name="dock_audio_summary_car" msgid="6740897586006248450">"Impostazioni per dock auto collegato"</string>
     <string name="dock_audio_summary_none" msgid="289909253741048784">"Telefono non inserito nel dock"</string>
     <string name="dock_audio_summary_unknown" msgid="4465059868974255693">"Impostazioni per dock collegato"</string>
     <string name="dock_not_found_title" msgid="3290961741828952424">"Dock non trovato"</string>
@@ -592,9 +592,12 @@
     <string name="media_format_gesture_explanation" msgid="4239529439389660159">"Per confermare la formattazione della scheda SD devi inserire la sequenza di sblocco."</string>
     <string name="call_settings_title" msgid="5188713413939232801">"Impostazioni chiamate"</string>
     <string name="call_settings_summary" msgid="7291195704801002886">"Imposta segreteria, deviazione chiamate, avviso di chiamata, ID chiamante"</string>
-    <string name="tether_settings_title" msgid="8703982377504005349">"Tethering"</string>
-    <string name="tether_settings_summary" msgid="6679594629002850490">"Imposta e gestisci tethering"</string>
-    <string name="tether_screen_title" msgid="1521966915332491855">"Impostazioni di tethering"</string>
+    <string name="tether_settings_title_usb" msgid="4315031513434087777">"Tethering"</string>
+    <string name="tether_settings_title_wifi" msgid="3277144155960302049">"Hotspot portatile"</string>
+    <string name="tether_settings_title_both" msgid="2734066355556891504">"Tethering e hotspot portatile"</string>
+    <string name="tether_settings_summary_usb" msgid="3562431455625637370">"Condividi la connessione dati del cellulare tramite USB"</string>
+    <string name="tether_settings_summary_wifi" msgid="4690912027002467246">"Condividi la connessione mobile del cellulare come hotspot Wi-Fi portatile"</string>
+    <string name="tether_settings_summary_both" msgid="7460063951190682635">"Condividi la connessione dati del cellulare tramite USB oppure hotspot Wi-Fi portatile"</string>
     <string name="usb_title" msgid="7483344855356312510">"USB"</string>
     <string name="usb_tethering_button_text" msgid="585829947108007917">"Tethering USB"</string>
     <string name="usb_tethering_available_subtext" msgid="156779271296152605">"USB collegata, seleziona per impostare tethering"</string>
@@ -602,7 +605,7 @@
     <string name="usb_tethering_storage_active_subtext" msgid="6608933594288072573">"Tethering non possibile quando è in uso la memorizzazione USB"</string>
     <string name="usb_tethering_unavailable_subtext" msgid="1044622421184007254">"USB non connessa"</string>
     <string name="usb_tethering_errored_subtext" msgid="1377574819427841992">"Errore tethering USB"</string>
-    <string name="tethering_help_button_text" msgid="7322604807045355030">"Guida sul tethering"</string>
+    <string name="tethering_help_button_text" msgid="656117495547173630">"Guida"</string>
     <string name="network_settings_title" msgid="7967552516440151852">"Reti mobili"</string>
     <string name="network_settings_summary" msgid="5149750850846813553">"Imposta le opzioni per roaming, reti e APN"</string>
     <string name="location_title" msgid="1029961368397484576">"La mia posizione"</string>

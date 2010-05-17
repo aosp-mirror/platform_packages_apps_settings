@@ -385,15 +385,15 @@
     <string name="wifi_dns2" msgid="1368601006824882659">"DNS 2"</string>
     <string name="wifi_gateway" msgid="163914742461092086">"Gateway"</string>
     <string name="wifi_netmask" msgid="4520635321425529085">"Nätmask"</string>
-    <string name="wifi_tether_checkbox_text" msgid="796007268580464534">"WiFi-sammanlänkning"</string>
-    <string name="wifi_tether_enabled_subtext" msgid="6758080605207549918">"Åtkomstpunkten <xliff:g id="NETWORK_SSID">%1$s</xliff:g> är aktiv"</string>
-    <string name="wifi_tether_failed_subtext" msgid="4379214348183654280">"WiFi-sammanlänkningsfel"</string>
-    <string name="wifi_tether_settings_text" msgid="8831276059149506799">"Inställningar för WiFi-sammanlänkning"</string>
-    <string name="wifi_tether_settings_subtext" msgid="3415164631321782704">"Ställ in och hantera åtkomstpunkt"</string>
-    <string name="wifi_tether_settings_title" msgid="3233393750798545228">"Inställningar för WiFi-sammanlänkning"</string>
-    <string name="wifi_tether_configure_ap_text" msgid="7849700175083202171">"Konfigurera åtkomstpunkt"</string>
-    <string name="wifi_tether_configure_subtext" msgid="54089556089657247">"<xliff:g id="NETWORK_SSID">%1$s</xliff:g> <xliff:g id="NETWORK_SECURITY">%2$s</xliff:g> åtkomstpunkt"</string>
-    <string name="wifi_tether_configure_ssid_default" msgid="4491822321218336928">"Android-åtkomstpunkt"</string>
+    <string name="wifi_tether_checkbox_text" msgid="6961605862058056788">"Mobil Wi-Fi-surfpunkt"</string>
+    <string name="wifi_tether_enabled_subtext" msgid="8948641212931906143">"Mobil surfpunkt <xliff:g id="NETWORK_SSID">%1$s</xliff:g> aktiv"</string>
+    <string name="wifi_tether_failed_subtext" msgid="2654888578056042315">"Fel på mobil Wi-Fi-surfpunkt"</string>
+    <string name="wifi_tether_settings_text" msgid="123573487844470195">"Inställningar för mobil Wi-Fi-surfpunkt"</string>
+    <string name="wifi_tether_settings_subtext" msgid="8064755682383367008">"Konfigurera och hantera mobil Wi-Fi-surfpunkt"</string>
+    <string name="wifi_tether_settings_title" msgid="3749063216348284432">"Inställningar för mobil Wi-Fi-surfpunkt"</string>
+    <string name="wifi_tether_configure_ap_text" msgid="3474995108398156258">"Konfigurera Wi-Fi-surfpunkt"</string>
+    <string name="wifi_tether_configure_subtext" msgid="1927454307836232128">"<xliff:g id="NETWORK_SSID">%1$s</xliff:g> <xliff:g id="NETWORK_SECURITY">%2$s</xliff:g> mobil Wi-Fi-surfpunkt"</string>
+    <string name="wifi_tether_configure_ssid_default" msgid="8467525402622138547">"AndroidHotspot"</string>
     <string name="sound_settings_title" msgid="8735891486683305886">"Ljud"</string>
     <string name="display_settings_title" msgid="1708697328627382561">"Skärm"</string>
     <string name="sound_settings" msgid="5007659014828162881">"Ljudinställningar"</string>
@@ -592,9 +592,12 @@
     <string name="media_format_gesture_explanation" msgid="4239529439389660159">"Du måste rita ditt grafiska lösenord för att bekräfta formateringen av SD-kortet."</string>
     <string name="call_settings_title" msgid="5188713413939232801">"Samtalsinställningar"</string>
     <string name="call_settings_summary" msgid="7291195704801002886">"Ställ in röstbrevlåda, vidarebefordra samtal, samtal väntar, nummerpres."</string>
-    <string name="tether_settings_title" msgid="8703982377504005349">"Sammanlänkning"</string>
-    <string name="tether_settings_summary" msgid="6679594629002850490">"Ställ in och hantera sammanlänkning"</string>
-    <string name="tether_screen_title" msgid="1521966915332491855">"Inställningar för sammanlänkning"</string>
+    <string name="tether_settings_title_usb" msgid="4315031513434087777">"Internetdelning"</string>
+    <string name="tether_settings_title_wifi" msgid="3277144155960302049">"Mobil surfpunkt"</string>
+    <string name="tether_settings_title_both" msgid="2734066355556891504">"Internetdelning och mobil surfpunkt"</string>
+    <string name="tether_settings_summary_usb" msgid="3562431455625637370">"Dela telefonens mobila dataanslutning via USB"</string>
+    <string name="tether_settings_summary_wifi" msgid="4690912027002467246">"Dela telefonens anslutning som en mobil Wi-Fi-surfpunkt"</string>
+    <string name="tether_settings_summary_both" msgid="7460063951190682635">"Dela telefonens mobila dataanslutning via USB eller som en mobil Wi-Fi-surfpunkt"</string>
     <string name="usb_title" msgid="7483344855356312510">"USB"</string>
     <string name="usb_tethering_button_text" msgid="585829947108007917">"USB-sammanlänkning"</string>
     <string name="usb_tethering_available_subtext" msgid="156779271296152605">"USB-ansluten, markera för att sammanlänka"</string>
@@ -602,7 +605,7 @@
     <string name="usb_tethering_storage_active_subtext" msgid="6608933594288072573">"Det går inte att sammanlänka när USB-lagret används"</string>
     <string name="usb_tethering_unavailable_subtext" msgid="1044622421184007254">"Ingen USB är ansluten"</string>
     <string name="usb_tethering_errored_subtext" msgid="1377574819427841992">"USB-sammanlänkningsfel"</string>
-    <string name="tethering_help_button_text" msgid="7322604807045355030">"Hjälp om sammanlänkning"</string>
+    <string name="tethering_help_button_text" msgid="656117495547173630">"Hjälp"</string>
     <string name="network_settings_title" msgid="7967552516440151852">"Mobila nätverk"</string>
     <string name="network_settings_summary" msgid="5149750850846813553">"Ställ in alternativ för roaming, nätverk, APN:er"</string>
     <string name="location_title" msgid="1029961368397484576">"Min plats"</string>

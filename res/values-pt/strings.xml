@@ -242,7 +242,7 @@
     <string name="unlock_set_unlock_launch_picker_change_title" msgid="6987228635944678726">"Alterar bloqueio de tela"</string>
     <string name="unlock_set_unlock_launch_picker_change_summary" msgid="2790960639554590668">"Alterar ou desativar o padrão, o PIN ou a segurança da senha"</string>
     <string name="unlock_set_unlock_none_title" msgid="3760684669884671990">"Nenhum"</string>
-    <string name="unlock_set_unlock_none_summary" msgid="2658550480388272618">"Desativar segurança do desbloqueio de tela"</string>
+    <string name="unlock_set_unlock_none_summary" msgid="2658550480388272618">"Desativar o bloqueio de tela"</string>
     <string name="unlock_set_unlock_pattern_title" msgid="2912067603917311700">"Padrão"</string>
     <string name="unlock_set_unlock_pattern_summary" msgid="3018395214738645405">"Defina o padrão para desbloquear a tela"</string>
     <string name="unlock_set_unlock_pin_title" msgid="5846029709462329515">"PIN"</string>
@@ -385,15 +385,15 @@
     <string name="wifi_dns2" msgid="1368601006824882659">"DNS 2"</string>
     <string name="wifi_gateway" msgid="163914742461092086">"Gateway"</string>
     <string name="wifi_netmask" msgid="4520635321425529085">"Máscara de rede"</string>
-    <string name="wifi_tether_checkbox_text" msgid="796007268580464534">"Vínculo de Wi-Fi"</string>
-    <string name="wifi_tether_enabled_subtext" msgid="6758080605207549918">"Ponto de acesso <xliff:g id="NETWORK_SSID">%1$s</xliff:g> ativo"</string>
-    <string name="wifi_tether_failed_subtext" msgid="4379214348183654280">"Erro de vínculo de Wi-Fi"</string>
-    <string name="wifi_tether_settings_text" msgid="8831276059149506799">"Configurações de vínculo de Wi-Fi"</string>
-    <string name="wifi_tether_settings_subtext" msgid="3415164631321782704">"Configurar e gerenciar o ponto de acesso"</string>
-    <string name="wifi_tether_settings_title" msgid="3233393750798545228">"Configurações de vínculo de Wi-Fi"</string>
-    <string name="wifi_tether_configure_ap_text" msgid="7849700175083202171">"Configurar ponto de acesso"</string>
-    <string name="wifi_tether_configure_subtext" msgid="54089556089657247">"Ponto de acesso <xliff:g id="NETWORK_SSID">%1$s</xliff:g> <xliff:g id="NETWORK_SECURITY">%2$s</xliff:g>"</string>
-    <string name="wifi_tether_configure_ssid_default" msgid="4491822321218336928">"AndroidAP"</string>
+    <string name="wifi_tether_checkbox_text" msgid="6961605862058056788">"Ponto de acesso Wi-Fi portátil"</string>
+    <string name="wifi_tether_enabled_subtext" msgid="8948641212931906143">"Ponto de acesso portátil <xliff:g id="NETWORK_SSID">%1$s</xliff:g> ativo"</string>
+    <string name="wifi_tether_failed_subtext" msgid="2654888578056042315">"Erro de ponto de acesso Wi-Fi portátil"</string>
+    <string name="wifi_tether_settings_text" msgid="123573487844470195">"Configurações de ponto de acesso Wi-Fi portátil"</string>
+    <string name="wifi_tether_settings_subtext" msgid="8064755682383367008">"Configurar e gerenciar ponto de acesso Wi-Fi portátil"</string>
+    <string name="wifi_tether_settings_title" msgid="3749063216348284432">"Configurações do ponto de acesso Wi-Fi portátil"</string>
+    <string name="wifi_tether_configure_ap_text" msgid="3474995108398156258">"Configurar ponto de acesso Wi-Fi"</string>
+    <string name="wifi_tether_configure_subtext" msgid="1927454307836232128">"ponto de acesso Wi-Fi portátil <xliff:g id="NETWORK_SSID">%1$s</xliff:g> <xliff:g id="NETWORK_SECURITY">%2$s</xliff:g>"</string>
+    <string name="wifi_tether_configure_ssid_default" msgid="8467525402622138547">"Ponto de acesso Android"</string>
     <string name="sound_settings_title" msgid="8735891486683305886">"Som"</string>
     <string name="display_settings_title" msgid="1708697328627382561">"Tela"</string>
     <string name="sound_settings" msgid="5007659014828162881">"Configurações de som"</string>
@@ -592,9 +592,12 @@
     <string name="media_format_gesture_explanation" msgid="4239529439389660159">"Você deve desenhar o seu padrão de desbloqueio para confirmar a formatação de um cartão SD."</string>
     <string name="call_settings_title" msgid="5188713413939232801">"Conf. de chamada"</string>
     <string name="call_settings_summary" msgid="7291195704801002886">"Configurar correio voz, encaminhamento, espera etc."</string>
-    <string name="tether_settings_title" msgid="8703982377504005349">"Vínculo"</string>
-    <string name="tether_settings_summary" msgid="6679594629002850490">"Configurar e gerenciar vínculo"</string>
-    <string name="tether_screen_title" msgid="1521966915332491855">"Configurações de vínculo"</string>
+    <string name="tether_settings_title_usb" msgid="4315031513434087777">"Vínculo"</string>
+    <string name="tether_settings_title_wifi" msgid="3277144155960302049">"Ponto de acesso portátil"</string>
+    <string name="tether_settings_title_both" msgid="2734066355556891504">"Vínculo e ponto de acesso portátil"</string>
+    <string name="tether_settings_summary_usb" msgid="3562431455625637370">"Compartilhar a conexão de dados móveis do seu telefone via USB"</string>
+    <string name="tether_settings_summary_wifi" msgid="4690912027002467246">"Compartilhar a conexão de dados móveis do seu telefone como um ponto de acesso Wi-Fi portátil"</string>
+    <string name="tether_settings_summary_both" msgid="7460063951190682635">"Compartilhar a conexão de dados móveis do seu telefone via USB ou como ponto de acesso Wi-Fi"</string>
     <string name="usb_title" msgid="7483344855356312510">"USB"</string>
     <string name="usb_tethering_button_text" msgid="585829947108007917">"Vínculo USB"</string>
     <string name="usb_tethering_available_subtext" msgid="156779271296152605">"USB conectado, marque para vincular"</string>
@@ -602,7 +605,7 @@
     <string name="usb_tethering_storage_active_subtext" msgid="6608933594288072573">"Não é possível vincular quando o armazenamento USB estiver em uso"</string>
     <string name="usb_tethering_unavailable_subtext" msgid="1044622421184007254">"USB não conectado"</string>
     <string name="usb_tethering_errored_subtext" msgid="1377574819427841992">"Erro de vínculo de USB"</string>
-    <string name="tethering_help_button_text" msgid="7322604807045355030">"Ajuda do vínculo"</string>
+    <string name="tethering_help_button_text" msgid="656117495547173630">"Ajuda"</string>
     <string name="network_settings_title" msgid="7967552516440151852">"Redes móveis"</string>
     <string name="network_settings_summary" msgid="5149750850846813553">"Definir opções para roaming, redes, APNs"</string>
     <string name="location_title" msgid="1029961368397484576">"Meu Local"</string>

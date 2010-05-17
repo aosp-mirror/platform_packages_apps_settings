@@ -237,7 +237,7 @@
     <string name="cdma_security_settings_summary" msgid="6068799952798901542">"Définir les paramètres de la fonction Ma position, de déverrouillage de l\'écran et de verrouillage du stockage des identifiants"</string>
     <string name="security_passwords_title" msgid="2930627259125138363">"Mots de passe"</string>
     <string name="lock_settings_picker_title" msgid="3973555216065628262">"Sécurité du verrouillage de l\'écran"</string>
-    <string name="unlock_set_unlock_launch_picker_title" msgid="1129684221223017902">"Configurer le verrouillage de l\'écran"</string>
+    <string name="unlock_set_unlock_launch_picker_title" msgid="1129684221223017902">"Verrouillage de l\'écran"</string>
     <string name="unlock_set_unlock_launch_picker_summary" msgid="1667332113134720845">"Verrouiller l\'écran à l\'aide d\'un schéma, d\'un code PIN ou d\'un mot de passe"</string>
     <string name="unlock_set_unlock_launch_picker_change_title" msgid="6987228635944678726">"Modifier le verrouillage de l\'écran"</string>
     <string name="unlock_set_unlock_launch_picker_change_summary" msgid="2790960639554590668">"Modifier ou désactiver la sécurité : schéma, code PIN ou mot de passe"</string>
@@ -385,15 +385,15 @@
     <string name="wifi_dns2" msgid="1368601006824882659">"DNS 2"</string>
     <string name="wifi_gateway" msgid="163914742461092086">"Passerelle"</string>
     <string name="wifi_netmask" msgid="4520635321425529085">"Masque de réseau"</string>
-    <string name="wifi_tether_checkbox_text" msgid="796007268580464534">"Via Wi-Fi"</string>
-    <string name="wifi_tether_enabled_subtext" msgid="6758080605207549918">"Point d\'accès <xliff:g id="NETWORK_SSID">%1$s</xliff:g> activé"</string>
-    <string name="wifi_tether_failed_subtext" msgid="4379214348183654280">"Erreur de partage de connexion via Wi-Fi"</string>
-    <string name="wifi_tether_settings_text" msgid="8831276059149506799">"Paramètres via Wi-Fi"</string>
-    <string name="wifi_tether_settings_subtext" msgid="3415164631321782704">"Configurer et gérer le point d\'accès"</string>
-    <string name="wifi_tether_settings_title" msgid="3233393750798545228">"Paramètres de partage de connexion via Wi-Fi"</string>
-    <string name="wifi_tether_configure_ap_text" msgid="7849700175083202171">"Configurer le point d\'accès"</string>
-    <string name="wifi_tether_configure_subtext" msgid="54089556089657247">"Point d\'accès <xliff:g id="NETWORK_SSID">%1$s</xliff:g> <xliff:g id="NETWORK_SECURITY">%2$s</xliff:g>"</string>
-    <string name="wifi_tether_configure_ssid_default" msgid="4491822321218336928">"Point d\'accès Android"</string>
+    <string name="wifi_tether_checkbox_text" msgid="6961605862058056788">"Point d\'accès Wi-Fi mobile"</string>
+    <string name="wifi_tether_enabled_subtext" msgid="8948641212931906143">"Point d\'accès Wi-Fi mobile <xliff:g id="NETWORK_SSID">%1$s</xliff:g> actif"</string>
+    <string name="wifi_tether_failed_subtext" msgid="2654888578056042315">"Erreur liée au point d\'accès Wi-Fi mobile"</string>
+    <string name="wifi_tether_settings_text" msgid="123573487844470195">"Paramètres du point d\'accès Wi-Fi mobile"</string>
+    <string name="wifi_tether_settings_subtext" msgid="8064755682383367008">"Configurer et gérer le point d\'accès Wi-Fi mobile"</string>
+    <string name="wifi_tether_settings_title" msgid="3749063216348284432">"Paramètres du point d\'accès Wi-Fi mobile"</string>
+    <string name="wifi_tether_configure_ap_text" msgid="3474995108398156258">"Configurer le point d\'accès Wi-Fi"</string>
+    <string name="wifi_tether_configure_subtext" msgid="1927454307836232128">"Point d\'accès Wi-Fi mobile <xliff:g id="NETWORK_SSID">%1$s</xliff:g> <xliff:g id="NETWORK_SECURITY">%2$s</xliff:g>"</string>
+    <string name="wifi_tether_configure_ssid_default" msgid="8467525402622138547">"AndroidHotspot"</string>
     <string name="sound_settings_title" msgid="8735891486683305886">"Son"</string>
     <string name="display_settings_title" msgid="1708697328627382561">"Affichage"</string>
     <string name="sound_settings" msgid="5007659014828162881">"Paramètres sonores"</string>
@@ -592,9 +592,12 @@
     <string name="media_format_gesture_explanation" msgid="4239529439389660159">"Vous devez créer votre schéma de déverrouillage pour confirmer le format de la carte SD."</string>
     <string name="call_settings_title" msgid="5188713413939232801">"Paramètres d\'appel"</string>
     <string name="call_settings_summary" msgid="7291195704801002886">"Configurer mess. vocale, transferts d\'appel, mises en attente, numéro de l\'appelant"</string>
-    <string name="tether_settings_title" msgid="8703982377504005349">"Partage de connexion"</string>
-    <string name="tether_settings_summary" msgid="6679594629002850490">"Configurer et gérer le partage de connexion"</string>
-    <string name="tether_screen_title" msgid="1521966915332491855">"Paramètres du partage de connexion"</string>
+    <string name="tether_settings_title_usb" msgid="4315031513434087777">"Partage de connexion"</string>
+    <string name="tether_settings_title_wifi" msgid="3277144155960302049">"Point d\'accès Wi-Fi mobile"</string>
+    <string name="tether_settings_title_both" msgid="2734066355556891504">"Partage de connexion et point d\'accès mobile"</string>
+    <string name="tether_settings_summary_usb" msgid="3562431455625637370">"Partagez la connexion Internet de votre mobile via un câble USB."</string>
+    <string name="tether_settings_summary_wifi" msgid="4690912027002467246">"Transformez votre mobile en point d\'accès Wi-Fi mobile."</string>
+    <string name="tether_settings_summary_both" msgid="7460063951190682635">"Partagez la connexion Internet de votre mobile via un câble USB ou transformez votre appareil en point d\'accès Wi-Fi mobile."</string>
     <string name="usb_title" msgid="7483344855356312510">"USB"</string>
     <string name="usb_tethering_button_text" msgid="585829947108007917">"Via USB"</string>
     <string name="usb_tethering_available_subtext" msgid="156779271296152605">"Connexion USB établie, cochez l\'option adéquate pour partager la connexion."</string>
@@ -602,12 +605,12 @@
     <string name="usb_tethering_storage_active_subtext" msgid="6608933594288072573">"Impossible de partager la connexion lorsqu\'un stockage USB est utilisé."</string>
     <string name="usb_tethering_unavailable_subtext" msgid="1044622421184007254">"USB non connecté"</string>
     <string name="usb_tethering_errored_subtext" msgid="1377574819427841992">"Erreur liée au partage de connexion via USB"</string>
-    <string name="tethering_help_button_text" msgid="7322604807045355030">"Aide"</string>
+    <string name="tethering_help_button_text" msgid="656117495547173630">"Aide"</string>
     <string name="network_settings_title" msgid="7967552516440151852">"Réseaux mobiles"</string>
     <string name="network_settings_summary" msgid="5149750850846813553">"Définir les options d\'itinérance, réseaux, noms de points d\'accès"</string>
     <string name="location_title" msgid="1029961368397484576">"Ma position"</string>
-    <string name="location_network_based" msgid="8815705866861993344">"Utiliser les réseaux sans fil"</string>
-    <string name="location_networks_disabled" msgid="2708968452901433980">"Afficher position dans les applications (comme Google Maps)"</string>
+    <string name="location_network_based" msgid="8815705866861993344">"Utiliser réseaux sans fil"</string>
+    <string name="location_networks_disabled" msgid="2708968452901433980">"Afficher ma position dans les applications (comme Google Maps)"</string>
     <string name="location_neighborhood_level" msgid="4656658097932515921">"Position géographique déterminée par réseaux Wi-Fi et/ou mobile"</string>
     <string name="location_gps" msgid="6296125378829097831">"Utiliser les satellites GPS"</string>
     <string name="location_street_level" msgid="6460740847018275745">"Localisation à la rue près (décocher pour économiser la batterie)"</string>
@@ -862,8 +865,8 @@
     <string name="accessibility_service_no_apps_title" msgid="898893674114288531">"Aucune application d\'accessibilité n\'a été trouvée."</string>
     <string name="accessibility_service_no_apps_message" msgid="2450056749545404807">"Aucune application d\'accessibilité n\'est installée."\n\n"Vous pouvez télécharger un lecteur d\'écran pour votre périphérique depuis Android Market."\n\n"Cliquez sur OK pour installer le lecteur d\'écran."</string>
     <string name="accessibility_power_button_category" msgid="8545885236482339928">"Bouton d\'alimentation"</string>
-    <string name="accessibility_power_button_ends_call" msgid="7698764194501089533">"Utiliser le bouton d\'alimentation pour raccrocher"</string>
-    <string name="accessibility_power_button_ends_call_summary" msgid="8878097632186291462">"Lors d\'un appel, le bouton d\'alimentation permet de raccrocher, pas de désactiver l\'écran."</string>
+    <string name="accessibility_power_button_ends_call" msgid="7698764194501089533">"Raccrocher pdt un appel"</string>
+    <string name="accessibility_power_button_ends_call_summary" msgid="8878097632186291462">"Lors d\'un appel, utiliser le bouton d\'alimentation pour raccrocher, sans désactiver l\'écran"</string>
     <string name="power_usage_summary_title" msgid="5180282911164282324">"Utilisation de la batterie"</string>
     <string name="power_usage_summary" msgid="7237084831082848168">"Répartition de l\'utilisation de la batterie"</string>
     <string name="battery_since_unplugged" msgid="338073389740738437">"Utilisation de la batterie depuis le débranchement"</string>
@@ -929,10 +932,10 @@
     <string name="voice_input_category" msgid="1589318440824204736">"Saisie vocale"</string>
     <string name="voice_output_category" msgid="2624538587784986229">"Sortie vocale"</string>
     <string name="recognizer_title" msgid="3231385184559054457">"Reconnaissance vocale"</string>
-    <string name="recognizer_settings_title" msgid="6038598099039717232">"Paramètres de reconnaissance vocale"</string>
+    <string name="recognizer_settings_title" msgid="6038598099039717232">"Reconnaissance vocale"</string>
     <string name="recognizer_settings_summary" msgid="4472287934134546902">"Paramètres de \"<xliff:g id="RECOGNIZER_NAME">%s</xliff:g>\""</string>
     <string name="tts_settings" msgid="8186971894801348327">"Paramètres de la synthèse vocale"</string>
-    <string name="tts_settings_title" msgid="4182348653053000933">"Paramètres de la synthèse vocale"</string>
+    <string name="tts_settings_title" msgid="4182348653053000933">"Synthèse vocale"</string>
     <string name="use_default_tts_settings_title" msgid="1577063839539732930">"Tjrs utiliser mes param."</string>
     <string name="use_default_tts_settings_summary" msgid="4253502106159206276">"Les param. par défaut ci-dessous remplacent les param. de l\'application"</string>
     <string name="tts_default_settings_section" msgid="5787915620218907443">"Paramètres par défaut"</string>
