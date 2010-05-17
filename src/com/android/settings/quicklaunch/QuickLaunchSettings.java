@@ -178,7 +178,7 @@ public class QuickLaunchSettings extends PreferenceActivity implements
     }
     
     public void onClick(DialogInterface dialog, int which) {
-        if (mClearDialogShortcut > 0 && which == AlertDialog.BUTTON1) {
+        if (mClearDialogShortcut > 0 && which == AlertDialog.BUTTON_POSITIVE) {
             // Clear the shortcut
             clearShortcut(mClearDialogShortcut);
         }
