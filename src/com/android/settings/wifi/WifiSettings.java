@@ -235,7 +235,7 @@ public class WifiSettings extends PreferenceActivity implements DialogInterface.
                 } else if (mSelected.security == AccessPoint.SECURITY_NONE) {
                     // Shortcut for open networks.
                     WifiConfiguration config = new WifiConfiguration();
-                    config.SSID = mSelected.ssid;
+                    config.SSID = AccessPoint.convertToQuotedString(mSelected.ssid);
                     config.allowedKeyManagement.set(KeyMgmt.NONE);
                     int networkId = mWifiManager.addNetwork(config);
                     mWifiManager.enableNetwork(networkId, false);
