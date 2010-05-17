@@ -81,7 +81,7 @@ public class WifiApSettings extends PreferenceActivity
                                                     s, mSecurityType[OPEN_INDEX]));
         } else {
             mCreateNetwork.setSummary(String.format(getString(CONFIG_SUBTEXT),
-                                      AccessPoint.removeDoubleQuotes(mWifiConfig.SSID),
+                                      mWifiConfig.SSID,
                                       mWifiConfig.allowedKeyManagement.get(KeyMgmt.WPA_PSK) ?
                                       mSecurityType[WPA_INDEX] : mSecurityType[OPEN_INDEX]));
         }
@@ -123,7 +123,7 @@ public class WifiApSettings extends PreferenceActivity
             if(mWifiConfig != null) {
                 mWifiManager.setWifiApEnabled(mWifiConfig, true);
                 mCreateNetwork.setSummary(String.format(getString(CONFIG_SUBTEXT),
-                            AccessPoint.removeDoubleQuotes(mWifiConfig.SSID),
+                            mWifiConfig.SSID,
                             mWifiConfig.allowedKeyManagement.get(KeyMgmt.WPA_PSK) ?
                             mSecurityType[WPA_INDEX] : mSecurityType[OPEN_INDEX]));
                 /**

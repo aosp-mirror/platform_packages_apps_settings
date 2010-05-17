@@ -72,7 +72,13 @@ class WifiApDialog extends AlertDialog implements View.OnClickListener,
 
         WifiConfiguration config = new WifiConfiguration();
 
-        config.SSID = AccessPoint.convertToQuotedString(mSsid.getText().toString());
+        /**
+         * TODO: SSID in WifiConfiguration for soft ap
+         * is being stored as a raw string without quotes.
+         * This is not the case on the client side. We need to
+         * make things consistent and clean it up
+         */
+        config.SSID = mSsid.getText().toString().replaceAll("\"","");
 
         switch (mSecurityType) {
             case AccessPoint.SECURITY_NONE:
@@ -115,7 +121,7 @@ class WifiApDialog extends AlertDialog implements View.OnClickListener,
         context.getString(R.string.wifi_cancel), mListener);
 
         if (mWifiConfig != null) {
-            mSsid.setText(AccessPoint.removeDoubleQuotes(mWifiConfig.SSID));
+            mSsid.setText(mWifiConfig.SSID);
             switch (mSecurityType) {
               case AccessPoint.SECURITY_NONE:
                   mSecurity.setSelection(OPEN_INDEX);
