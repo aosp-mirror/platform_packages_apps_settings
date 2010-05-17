@@ -153,8 +153,7 @@ public class WifiApEnabler implements Preference.OnPreferenceChangeListener {
                 com.android.internal.R.string.wifi_tether_configure_ssid_default);
         mCheckBox.setSummary(String.format(
                     mContext.getString(R.string.wifi_tether_enabled_subtext),
-                    (wifiConfig == null) ? s : AccessPoint.removeDoubleQuotes(
-                    wifiConfig.SSID)));
+                    (wifiConfig == null) ? s : wifiConfig.SSID));
     }
 
     private void updateTetherState(Object[] available, Object[] tethered, Object[] errored) {
