@@ -124,7 +124,7 @@ public class ApplicationSettings extends PreferenceActivity implements
     }
 
     public void onClick(DialogInterface dialog, int which) {
-        if (dialog == mWarnInstallApps && which == DialogInterface.BUTTON1) {
+        if (dialog == mWarnInstallApps && which == DialogInterface.BUTTON_POSITIVE) {
             setNonMarketAppsAllowed(true);
             mToggleAppInstallation.setChecked(true);
         }
