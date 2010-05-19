@@ -17,7 +17,6 @@
 package com.android.settings.vpn;
 
 import com.android.settings.R;
-import com.android.settings.SecuritySettings;
 
 import android.app.AlertDialog;
 import android.app.Dialog;
@@ -38,13 +37,10 @@ import android.net.vpn.VpnType;
 import android.os.Bundle;
 import android.os.ConditionVariable;
 import android.os.IBinder;
-import android.os.Parcel;
 import android.os.Parcelable;
-import android.os.RemoteException;
 import android.preference.Preference;
 import android.preference.PreferenceActivity;
 import android.preference.PreferenceCategory;
-import android.preference.PreferenceManager;
 import android.preference.PreferenceScreen;
 import android.preference.Preference.OnPreferenceClickListener;
 import android.security.Credentials;
@@ -53,7 +49,6 @@ import android.text.TextUtils;
 import android.util.Log;
 import android.view.ContextMenu;
 import android.view.ContextMenu.ContextMenuInfo;
-import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView.AdapterContextMenuInfo;
@@ -67,12 +62,9 @@ import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
-import java.util.HashSet;
-import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 
 /**
  * The preference activity for configuring VPN settings.
@@ -101,8 +93,8 @@ public class VpnSettings extends PreferenceActivity implements
     private static final int CONTEXT_MENU_EDIT_ID = ContextMenu.FIRST + 2;
     private static final int CONTEXT_MENU_DELETE_ID = ContextMenu.FIRST + 3;
 
-    private static final int CONNECT_BUTTON = DialogInterface.BUTTON1;
-    private static final int OK_BUTTON = DialogInterface.BUTTON1;
+    private static final int CONNECT_BUTTON = DialogInterface.BUTTON_POSITIVE;
+    private static final int OK_BUTTON = DialogInterface.BUTTON_POSITIVE;
 
     private static final int DIALOG_CONNECT = VpnManager.VPN_ERROR_LARGEST + 1;
     private static final int DIALOG_SECRET_NOT_SET = DIALOG_CONNECT + 1;
