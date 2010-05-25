@@ -179,6 +179,9 @@ public class ConnectSpecificProfilesActivity extends PreferenceActivity
     }
 
     private void onProfileCheckedStateChanged(Profile profile, boolean checked) {
+        LocalBluetoothProfileManager profileManager = LocalBluetoothProfileManager
+                .getProfileManager(mManager, profile);
+        profileManager.setPreferred(mCachedDevice.getDevice(), checked);
         if (mOnlineMode) {
             if (checked) {
                 mCachedDevice.connect(profile);
@@ -186,10 +189,6 @@ public class ConnectSpecificProfilesActivity extends PreferenceActivity
                 mCachedDevice.disconnect(profile);
             }
         }
-
-        LocalBluetoothProfileManager profileManager = LocalBluetoothProfileManager
-                .getProfileManager(mManager, profile);
-        profileManager.setPreferred(mCachedDevice.getDevice(), checked);
     }
 
     public void onDeviceAttributesChanged(CachedBluetoothDevice cachedDevice) {
