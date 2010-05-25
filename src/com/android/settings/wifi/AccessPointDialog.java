@@ -21,8 +21,6 @@ import com.android.settings.R;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
-import android.content.Intent;
-import android.content.res.Resources;
 import android.security.Credentials;
 import android.security.KeyStore;
 import android.net.wifi.WifiInfo;
@@ -31,8 +29,6 @@ import android.os.Bundle;
 import android.text.InputType;
 import android.text.TextUtils;
 import android.text.format.Formatter;
-import android.text.method.PasswordTransformationMethod;
-import android.text.method.TransformationMethod;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
@@ -41,7 +37,6 @@ import android.widget.ArrayAdapter;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.Spinner;
-import android.widget.TableLayout;
 import android.widget.TextView;
 
 public class AccessPointDialog extends AlertDialog implements DialogInterface.OnClickListener,
@@ -57,9 +52,8 @@ public class AccessPointDialog extends AlertDialog implements DialogInterface.On
     private static final String INSTANCE_KEY_AUTO_SECURITY_ALLOWED =
             "com.android.settings.wifi.AccessPointDialog:autoSecurityAllowed";
     
-    private static final int POSITIVE_BUTTON = BUTTON1;
-    private static final int NEGATIVE_BUTTON = BUTTON2;
-    private static final int NEUTRAL_BUTTON = BUTTON3;
+    private static final int POSITIVE_BUTTON = BUTTON_POSITIVE;
+    private static final int NEUTRAL_BUTTON = BUTTON_NEUTRAL;
     
     /** The dialog should show info connectivity functionality */
     public static final int MODE_INFO = 0;
@@ -476,15 +470,15 @@ public class AccessPointDialog extends AlertDialog implements DialogInterface.On
         final Context context = getContext();
         
         if (positiveResId > 0) {
-            setButton(context.getString(positiveResId), this);
+            setButton(BUTTON_POSITIVE, context.getString(positiveResId), this);
         }
         
         if (negativeResId > 0) {
-            setButton2(context.getString(negativeResId), this);
+            setButton(BUTTON_NEGATIVE, context.getString(negativeResId), this);
         }
 
         if (neutralResId > 0) {
-            setButton3(context.getString(neutralResId), this);
+            setButton(BUTTON_NEUTRAL, context.getString(neutralResId), this);
         }
     }
     
@@ -717,13 +711,13 @@ public class AccessPointDialog extends AlertDialog implements DialogInterface.On
         }
     }
 
-    public void onItemSelected(AdapterView parent, View view, int position, long id) {
+    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
         if (parent == mSecuritySpinner) {
             handleSecurityChange(getSecurityTypeFromSpinner());
         }
     }
 
-    public void onNothingSelected(AdapterView parent) {
+    public void onNothingSelected(AdapterView<?> parent) {
     }
 
     private void handleSecurityChange(int security) {
