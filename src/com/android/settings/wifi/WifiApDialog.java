@@ -78,7 +78,7 @@ class WifiApDialog extends AlertDialog implements View.OnClickListener,
          * This is not the case on the client side. We need to
          * make things consistent and clean it up
          */
-        config.SSID = mSsid.getText().toString().replaceAll("\"","");
+        config.SSID = mSsid.getText().toString();
 
         switch (mSecurityType) {
             case AccessPoint.SECURITY_NONE:
@@ -90,11 +90,7 @@ class WifiApDialog extends AlertDialog implements View.OnClickListener,
                 config.allowedAuthAlgorithms.set(AuthAlgorithm.OPEN);
                 if (mPassword.length() != 0) {
                     String password = mPassword.getText().toString();
-                    if (password.matches("[0-9A-Fa-f]{64}")) {
-                        config.preSharedKey = password;
-                    } else {
-                        config.preSharedKey = '"' + password + '"';
-                    }
+                    config.preSharedKey = password;
                 }
                 return config;
         }
@@ -128,9 +124,6 @@ class WifiApDialog extends AlertDialog implements View.OnClickListener,
                   break;
               case AccessPoint.SECURITY_PSK:
                   String str = mWifiConfig.preSharedKey;
-                  if (!str.matches("[0-9A-Fa-f]{64}")) {
-                     str = str.substring(1,str.length()-1);
-                  }
                   mPassword.setText(str);
                   mSecurity.setSelection(WPA_INDEX);
                   break;
