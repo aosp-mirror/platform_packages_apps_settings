@@ -65,7 +65,8 @@ public class ConfirmLockPassword extends Activity implements OnClickListener,
         mKeyboardView = (PasswordEntryKeyboardView) findViewById(R.id.keyboard);
         mHeaderText = (TextView) findViewById(R.id.headerText);
         final boolean isAlpha = DevicePolicyManager.PASSWORD_QUALITY_ALPHABETIC == storedQuality
-                || DevicePolicyManager.PASSWORD_QUALITY_ALPHANUMERIC == storedQuality;
+                || DevicePolicyManager.PASSWORD_QUALITY_ALPHANUMERIC == storedQuality
+                || DevicePolicyManager.PASSWORD_QUALITY_COMPLEX == storedQuality;
         mHeaderText.setText(isAlpha ? R.string.lockpassword_confirm_your_password_header
                 : R.string.lockpassword_confirm_your_pin_header);
         mKeyboardHelper = new PasswordEntryKeyboardHelper(this, mKeyboardView, mPasswordEntry);

@@ -138,7 +138,7 @@ public class ChooseLockGeneric extends PreferenceActivity {
                 } else if (KEY_UNLOCK_SET_PIN.equals(key)) {
                     enabled = quality <= DevicePolicyManager.PASSWORD_QUALITY_NUMERIC;
                 } else if (KEY_UNLOCK_SET_PASSWORD.equals(key)) {
-                    enabled = quality <= DevicePolicyManager.PASSWORD_QUALITY_ALPHANUMERIC;
+                    enabled = quality <= DevicePolicyManager.PASSWORD_QUALITY_COMPLEX;
                 }
                 if (!enabled) {
                     pref.setSummary(R.string.unlock_set_unlock_disabled_summary);

@@ -48,6 +48,11 @@ public class ChooseLockPassword extends Activity implements OnClickListener, OnE
     private TextView mPasswordEntry;
     private int mPasswordMinLength = 4;
     private int mPasswordMaxLength = 16;
+    private int mPasswordMinLetters = 0;
+    private int mPasswordMinUpperCase = 0;
+    private int mPasswordMinLowerCase = 0;
+    private int mPasswordMinSymbols = 0;
+    private int mPasswordMinNumeric = 0;
     private LockPatternUtils mLockPatternUtils;
     private int mRequestedQuality = DevicePolicyManager.PASSWORD_QUALITY_NUMERIC;
     private ChooseLockSettingsHelper mChooseLockSettingsHelper;
@@ -61,6 +66,11 @@ public class ChooseLockPassword extends Activity implements OnClickListener, OnE
     private Button mNextButton;
     public static final String PASSWORD_MIN_KEY = "lockscreen.password_min";
     public static final String PASSWORD_MAX_KEY = "lockscreen.password_max";
+    public static final String PASSWORD_MIN_LETTERS_KEY = "lockscreen.password_min_letters";
+    public static final String PASSWORD_MIN_LOWERCASE_KEY = "lockscreen.password_min_lowercase";
+    public static final String PASSWORD_MIN_UPPERCASE_KEY = "lockscreen.password_min_uppercase";
+    public static final String PASSWORD_MIN_NUMERIC_KEY = "lockscreen.password_min_numeric";
+    public static final String PASSWORD_MIN_SYMBOLS_KEY = "lockscreen.password_min_symbols";
     private static Handler mHandler = new Handler();
     private static final int CONFIRM_EXISTING_REQUEST = 58;
     static final int RESULT_FINISHED = RESULT_FIRST_USER;
@@ -101,19 +111,25 @@ public class ChooseLockPassword extends Activity implements OnClickListener, OnE
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mLockPatternUtils = new LockPatternUtils(this);
-        mRequestedQuality = getIntent().getIntExtra(LockPatternUtils.PASSWORD_TYPE_KEY, mRequestedQuality);
-        mPasswordMinLength = getIntent().getIntExtra(PASSWORD_MIN_KEY, mPasswordMinLength);
+        mRequestedQuality = Math.max(getIntent().getIntExtra(LockPatternUtils.PASSWORD_TYPE_KEY,
+                mRequestedQuality), mLockPatternUtils.getRequestedPasswordQuality());
+        mPasswordMinLength = Math.max(
+                getIntent().getIntExtra(PASSWORD_MIN_KEY, mPasswordMinLength), mLockPatternUtils
+                        .getRequestedMinimumPasswordLength());
         mPasswordMaxLength = getIntent().getIntExtra(PASSWORD_MAX_KEY, mPasswordMaxLength);
-
+        mPasswordMinLetters = Math.max(getIntent().getIntExtra(PASSWORD_MIN_LETTERS_KEY,
+                mPasswordMinLetters), mLockPatternUtils.getRequestedPasswordMinimumLetters());
+        mPasswordMinUpperCase = Math.max(getIntent().getIntExtra(PASSWORD_MIN_UPPERCASE_KEY,
+                mPasswordMinUpperCase), mLockPatternUtils.getRequestedPasswordMinimumUpperCase());
+        mPasswordMinLowerCase = Math.max(getIntent().getIntExtra(PASSWORD_MIN_LOWERCASE_KEY,
+                mPasswordMinLowerCase), mLockPatternUtils.getRequestedPasswordMinimumLowerCase());
+        mPasswordMinNumeric = Math.max(getIntent().getIntExtra(PASSWORD_MIN_NUMERIC_KEY,
+                mPasswordMinNumeric), mLockPatternUtils.getRequestedPasswordMinimumNumeric());
+        mPasswordMinSymbols = Math.max(getIntent().getIntExtra(PASSWORD_MIN_SYMBOLS_KEY,
+                mPasswordMinSymbols), mLockPatternUtils.getRequestedPasswordMinimumSymbols());
         final boolean confirmCredentials = getIntent().getBooleanExtra("confirm_credentials", true);
-        int minMode = mLockPatternUtils.getRequestedPasswordQuality();
-        if (mRequestedQuality < minMode) {
-            mRequestedQuality = minMode;
-        }
-        int minLength = mLockPatternUtils.getRequestedMinimumPasswordLength();
-        if (mPasswordMinLength < minLength) {
-            mPasswordMinLength = minLength;
-        }
+
+
         initViews();
         mChooseLockSettingsHelper = new ChooseLockSettingsHelper(this);
         if (savedInstanceState == null) {
@@ -142,7 +158,8 @@ public class ChooseLockPassword extends Activity implements OnClickListener, OnE
         mPasswordEntry.addTextChangedListener(this);
 
         mIsAlphaMode = DevicePolicyManager.PASSWORD_QUALITY_ALPHABETIC == mRequestedQuality
-            || DevicePolicyManager.PASSWORD_QUALITY_ALPHANUMERIC == mRequestedQuality;
+                || DevicePolicyManager.PASSWORD_QUALITY_ALPHANUMERIC == mRequestedQuality
+                || DevicePolicyManager.PASSWORD_QUALITY_COMPLEX == mRequestedQuality;
         mKeyboardHelper = new PasswordEntryKeyboardHelper(this, mKeyboardView, mPasswordEntry);
         mKeyboardHelper.setKeyboardMode(mIsAlphaMode ?
                 PasswordEntryKeyboardHelper.KEYBOARD_MODE_ALPHA
@@ -212,9 +229,11 @@ public class ChooseLockPassword extends Activity implements OnClickListener, OnE
                     R.string.lockpassword_password_too_long
                     : R.string.lockpassword_pin_too_long, mPasswordMaxLength);
         }
-        boolean hasAlpha = false;
-        boolean hasDigit = false;
-        boolean hasSymbol = false;
+        int letters = 0;
+        int numbers = 0;
+        int lowercase = 0;
+        int symbols = 0;
+        int uppercase = 0;
         for (int i = 0; i < password.length(); i++) {
             char c = password.charAt(i);
             // allow non white space Latin-1 characters only
@@ -222,31 +241,54 @@ public class ChooseLockPassword extends Activity implements OnClickListener, OnE
                 return getString(R.string.lockpassword_illegal_character);
             }
             if (c >= '0' && c <= '9') {
-                hasDigit = true;
-            } else if ((c >= 'A' && c <= 'Z') || (c >= 'a' && c <= 'z')) {
-                hasAlpha = true;
+                numbers++;
+            } else if (c >= 'A' && c <= 'Z') {
+                letters++;
+                uppercase++;
+            } else if (c >= 'a' && c <= 'z') {
+                letters++;
+                lowercase++;
             } else {
-                hasSymbol = true;
+                symbols++;
             }
         }
         if (DevicePolicyManager.PASSWORD_QUALITY_NUMERIC == mRequestedQuality
-                && (hasAlpha | hasSymbol)) {
-            // This shouldn't be possible unless user finds some way to bring up soft keyboard
+                && (letters > 0 || symbols > 0)) {
+            // This shouldn't be possible unless user finds some way to bring up
+            // soft keyboard
             return getString(R.string.lockpassword_pin_contains_non_digits);
+        } else if (DevicePolicyManager.PASSWORD_QUALITY_COMPLEX == mRequestedQuality) {
+            if (letters < mPasswordMinLetters) {
+                return String.format(getResources().getQuantityString(
+                        R.plurals.lockpassword_password_requires_letters, mPasswordMinLetters),
+                        mPasswordMinLetters);
+            } else if (numbers < mPasswordMinNumeric) {
+                return String.format(getResources().getQuantityString(
+                        R.plurals.lockpassword_password_requires_numeric, mPasswordMinNumeric),
+                        mPasswordMinNumeric);
+            } else if (lowercase < mPasswordMinLowerCase) {
+                return String.format(getResources().getQuantityString(
+                        R.plurals.lockpassword_password_requires_lowercase, mPasswordMinLowerCase),
+                        mPasswordMinLowerCase);
+            } else if (uppercase < mPasswordMinUpperCase) {
+                return String.format(getResources().getQuantityString(
+                        R.plurals.lockpassword_password_requires_uppercase, mPasswordMinUpperCase),
+                        mPasswordMinUpperCase);
+            } else if (symbols < mPasswordMinSymbols) {
+                return String.format(getResources().getQuantityString(
+                        R.plurals.lockpassword_password_requires_symbols, mPasswordMinSymbols),
+                        mPasswordMinSymbols);
+            }
         } else {
             final boolean alphabetic = DevicePolicyManager.PASSWORD_QUALITY_ALPHABETIC
                     == mRequestedQuality;
             final boolean alphanumeric = DevicePolicyManager.PASSWORD_QUALITY_ALPHANUMERIC
                     == mRequestedQuality;
-            final boolean symbolic = false; // not yet
-            if ((alphabetic || alphanumeric) && !hasAlpha) {
+            if ((alphabetic || alphanumeric) && letters == 0) {
                 return getString(R.string.lockpassword_password_requires_alpha);
             }
-            if (alphanumeric && !hasDigit) {
+            if (alphanumeric && numbers == 0) {
                 return getString(R.string.lockpassword_password_requires_digit);
-            }
-            if (symbolic && !hasSymbol) {
-                return getString(R.string.lockpassword_password_requires_symbol);
             }
         }
         if(mLockPatternUtils.checkPasswordHistory(password)) {

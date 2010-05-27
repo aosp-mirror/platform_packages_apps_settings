@@ -52,6 +52,7 @@ public class ChooseLockSettingsHelper {
             case DevicePolicyManager.PASSWORD_QUALITY_NUMERIC:
             case DevicePolicyManager.PASSWORD_QUALITY_ALPHABETIC:
             case DevicePolicyManager.PASSWORD_QUALITY_ALPHANUMERIC:
+            case DevicePolicyManager.PASSWORD_QUALITY_COMPLEX:
                 // TODO: update UI layout for ConfirmPassword to show message and details
                 launched = confirmPassword(request);
                 break;
