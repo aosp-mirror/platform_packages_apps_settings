@@ -290,14 +290,15 @@ public class InstalledAppDetails extends Activity implements View.OnClickListene
         }
     }
 
-    private void initAppInfo(String packageName) {
+    private boolean initAppInfo(String packageName) {
         try {
             mAppInfo = mPm.getApplicationInfo(packageName,
                     PackageManager.GET_UNINSTALLED_PACKAGES);
+            return true;
         } catch (NameNotFoundException e) {
             Log.e(TAG, "Exception when retrieving package: " + packageName, e);
             showDialogInner(DLG_APP_NOT_FOUND);
-            return;
+            return false;
         }
     }
 
@@ -305,20 +306,26 @@ public class InstalledAppDetails extends Activity implements View.OnClickListene
     @Override
     protected void onCreate(Bundle icicle) {
         super.onCreate(icicle);
+        
         // Get package manager
         mPm = getPackageManager();
+        
         // Get application's name from intent
         Intent intent = getIntent();
         final String packageName = intent.getStringExtra(ManageApplications.APP_PKG_NAME);
-        mComputingStr = getText(R.string.computing_size);
+        if (! initAppInfo(packageName)) {
+            return; // could not find package, finish called
+        }
+        
         // Try retrieving package stats again
         CharSequence totalSizeStr, appSizeStr, dataSizeStr;
+        mComputingStr = getText(R.string.computing_size);
         totalSizeStr = appSizeStr = dataSizeStr = mComputingStr;
         if(localLOGV) Log.i(TAG, "Have to compute package sizes");
         mSizeObserver = new PkgSizeObserver();
-        initAppInfo(packageName);
         setContentView(R.layout.installed_app_details);
         //TODO download str and download url
+        
         // Set default values on sizes
         mTotalSize = (TextView)findViewById(R.id.total_size_text);
         mTotalSize.setText(totalSizeStr);
@@ -326,16 +333,19 @@ public class InstalledAppDetails extends Activity implements View.OnClickListene
         mAppSize.setText(appSizeStr);
         mDataSize = (TextView)findViewById(R.id.data_size_text);
         mDataSize.setText(dataSizeStr);
+        
         // Get Control button panel
         View btnPanel = findViewById(R.id.control_buttons_panel);
         mForceStopButton = (Button) btnPanel.findViewById(R.id.left_button);
         mForceStopButton.setText(R.string.force_stop);
         mUninstallButton = (Button)btnPanel.findViewById(R.id.right_button);
         mForceStopButton.setEnabled(false);
+        
         // Initialize clear data and move install location buttons
         View data_buttons_panel = findViewById(R.id.data_buttons_panel);
         mClearDataButton = (Button) data_buttons_panel.findViewById(R.id.left_button);
         mMoveAppButton = (Button) data_buttons_panel.findViewById(R.id.right_button);
+        
          // Cache section
          mCacheSize = (TextView) findViewById(R.id.cache_size_text);
          mCacheSize.setText(mComputingStr);
@@ -344,6 +354,7 @@ public class InstalledAppDetails extends Activity implements View.OnClickListene
          // Get list of preferred activities
          mActivitiesButton = (Button)findViewById(R.id.clear_activities_button);
          List<ComponentName> prefActList = new ArrayList<ComponentName>();
+         
          // Intent list cannot be null. so pass empty list
          List<IntentFilter> intentList = new ArrayList<IntentFilter>();
          mPm.getPreferredActivities(intentList,  prefActList, packageName);
@@ -395,7 +406,15 @@ public class InstalledAppDetails extends Activity implements View.OnClickListene
     @Override
     public void onResume() {
         super.onResume();
-        initAppInfo(mAppInfo.packageName);
+        
+        if (mAppInfo == null) {
+            setIntentAndFinish(true, true);
+            return; // onCreate must have failed, make sure to exit
+        }
+        if (! initAppInfo(mAppInfo.packageName)) {
+            return; // could not find package, finish called
+        }
+        
         PackageInfo pkgInfo = null;
         // Get application info again to refresh changed properties of application
         try {
@@ -404,11 +423,13 @@ public class InstalledAppDetails extends Activity implements View.OnClickListene
         } catch (NameNotFoundException e) {
             Log.e(TAG, "Exception when retrieving package:" + mAppInfo.packageName, e);
             showDialogInner(DLG_APP_NOT_FOUND);
-            return;
+            return; // could not find package, finish called
         }
+        
         checkForceStop();
         setAppLabelAndIcon(pkgInfo);
         refreshButtons();
+        
         // Refresh size info
         if (mAppInfo != null && mAppInfo.packageName != null) {
             mPm.getPackageSizeInfo(mAppInfo.packageName, mSizeObserver);
@@ -500,8 +521,6 @@ public class InstalledAppDetails extends Activity implements View.OnClickListene
 
     private void refreshButtons() {
         if (!mMoveInProgress) {
-            // Refresh application information again.
-            initAppInfo(mAppInfo.packageName);
             initUninstallButtons();
             initDataButtons();
             initMoveButton();
@@ -517,15 +536,20 @@ public class InstalledAppDetails extends Activity implements View.OnClickListene
         String packageName = mAppInfo.packageName;
         // Refresh the button attributes.
         mMoveInProgress = false;
-        refreshButtons();
         if(result == PackageManager.MOVE_SUCCEEDED) {
             Log.i(TAG, "Moved resources for " + packageName);
             // Refresh size information again.
-            mPm.getPackageSizeInfo(mAppInfo.packageName, mSizeObserver);
+            mPm.getPackageSizeInfo(packageName, mSizeObserver);
         } else {
             mMoveErrorCode = result;
             showDialogInner(DLG_MOVE_FAILED);
         }
+        
+        if (! initAppInfo(packageName)) {
+            return; // could not find package, finish called
+        }
+        
+        refreshButtons();
     }
 
     /*
