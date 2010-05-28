@@ -28,6 +28,8 @@ import android.util.Log;
 
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Iterator;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -53,6 +55,29 @@ public abstract class LocalBluetoothProfileManager {
         BluetoothUuid.ObexObjectPush
     };
 
+    /**
+     * An interface for notifying BluetoothHeadset IPC clients when they have
+     * been connected to the BluetoothHeadset service.
+     */
+    public interface ServiceListener {
+        /**
+         * Called to notify the client when this proxy object has been
+         * connected to the BluetoothHeadset service. Clients must wait for
+         * this callback before making IPC calls on the BluetoothHeadset
+         * service.
+         */
+        public void onServiceConnected();
+
+        /**
+         * Called to notify the client that this proxy object has been
+         * disconnected from the BluetoothHeadset service. Clients must not
+         * make IPC calls on the BluetoothHeadset service after this callback.
+         * This callback will currently only occur if the application hosting
+         * the BluetoothHeadset service, but may be called more often in future.
+         */
+        public void onServiceDisconnected();
+    }
+
     // TODO: close profiles when we're shutting down
     private static Map<Profile, LocalBluetoothProfileManager> sProfileMap =
             new HashMap<Profile, LocalBluetoothProfileManager>();
@@ -74,6 +99,26 @@ public abstract class LocalBluetoothProfileManager {
                 sProfileMap.put(Profile.OPP, profileManager);
             }
         }
+    }
+
+    private static LinkedList<ServiceListener> mServiceListeners = new LinkedList<ServiceListener>();
+
+    public static void addServiceListener(ServiceListener l) {
+        mServiceListeners.add(l);
+    }
+
+    public static void removeServiceListener(ServiceListener l) {
+        mServiceListeners.remove(l);
+    }
+
+    public static boolean isManagerReady() {
+        // Getting just the headset profile is fine for now. Will need to deal with A2DP
+        // and others if they aren't always in a ready state.
+        LocalBluetoothProfileManager profileManager = sProfileMap.get(Profile.HEADSET);
+        if (profileManager == null) {
+            return sProfileMap.size() > 0;
+        }
+        return profileManager.isProfileReady();
     }
 
     public static LocalBluetoothProfileManager getProfileManager(LocalBluetoothManager localManager,
@@ -143,6 +188,8 @@ public abstract class LocalBluetoothProfileManager {
     public boolean isConnected(BluetoothDevice device) {
         return SettingsBtStatus.isConnectionStatusConnected(getConnectionStatus(device));
     }
+
+    public abstract boolean isProfileReady();
 
     // TODO: int instead of enum
     public enum Profile {
@@ -247,6 +294,11 @@ public abstract class LocalBluetoothProfileManager {
                 return SettingsBtStatus.CONNECTION_STATUS_UNKNOWN;
             }
         }
+
+        @Override
+        public boolean isProfileReady() {
+            return true;
+        }
     }
 
     /**
@@ -256,6 +308,7 @@ public abstract class LocalBluetoothProfileManager {
             implements BluetoothHeadset.ServiceListener {
         private BluetoothHeadset mService;
         private Handler mUiHandler = new Handler();
+        private boolean profileReady = false;
 
         public HeadsetProfileManager(LocalBluetoothManager localManager) {
             super(localManager);
@@ -263,6 +316,7 @@ public abstract class LocalBluetoothProfileManager {
         }
 
         public void onServiceConnected() {
+            profileReady = true;
             // This could be called on a non-UI thread, funnel to UI thread.
             mUiHandler.post(new Runnable() {
                 public void run() {
@@ -277,9 +331,28 @@ public abstract class LocalBluetoothProfileManager {
                                                    BluetoothHeadset.STATE_CONNECTED);
                 }
             });
+
+            if (mServiceListeners.size() > 0) {
+                Iterator<ServiceListener> it = mServiceListeners.iterator();
+                while(it.hasNext()) {
+                    it.next().onServiceConnected();
+                }
+            }
         }
 
         public void onServiceDisconnected() {
+            profileReady = false;
+            if (mServiceListeners.size() > 0) {
+                Iterator<ServiceListener> it = mServiceListeners.iterator();
+                while(it.hasNext()) {
+                    it.next().onServiceDisconnected();
+                }
+            }
+        }
+
+        @Override
+        public boolean isProfileReady() {
+            return profileReady;
         }
 
         @Override
@@ -421,6 +494,11 @@ public abstract class LocalBluetoothProfileManager {
 
         @Override
         public void setPreferred(BluetoothDevice device, boolean preferred) {
+        }
+
+        @Override
+        public boolean isProfileReady() {
+            return true;
         }
 
         @Override
