@@ -66,6 +66,7 @@ public class ChooseLockPatternExample extends Activity implements View.OnClickLi
             stopAnimation(mAnimation);
             Intent intent = new Intent(this, ChooseLockPattern.class);
             intent.addFlags(Intent.FLAG_ACTIVITY_FORWARD_RESULT);
+            intent.putExtra("confirm_credentials", false);
             startActivity(intent);
             finish();
         }

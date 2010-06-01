@@ -35,6 +35,7 @@ public class ChooseLockPatternTutorial extends Activity implements View.OnClickL
         if (savedInstanceState == null && lockPatternUtils.isPatternEverChosen()) {
             Intent intent = new Intent(this, ChooseLockPattern.class);
             intent.setFlags(Intent.FLAG_ACTIVITY_FORWARD_RESULT);
+            intent.putExtra("confirm_credentials", false);
             startActivity(intent);
             finish();
         } else {
