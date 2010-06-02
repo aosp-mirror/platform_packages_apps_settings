@@ -370,7 +370,10 @@ public abstract class LocalBluetoothProfileManager {
         public boolean connect(BluetoothDevice device) {
             // Since connectHeadset fails if already connected to a headset, we
             // disconnect from any headset first
-            mService.disconnectHeadset();
+            BluetoothDevice currDevice = mService.getCurrentHeadset();
+            if (currDevice != null) {
+                mService.disconnectHeadset(currDevice);
+            }
             return mService.connectHeadset(device);
         }
 
@@ -381,7 +384,7 @@ public abstract class LocalBluetoothProfileManager {
                 if (mService.getPriority(device) > BluetoothHeadset.PRIORITY_ON) {
                     mService.setPriority(device, BluetoothHeadset.PRIORITY_ON);
                 }
-                return mService.disconnectHeadset();
+                return mService.disconnectHeadset(device);
             } else {
                 return false;
             }
@@ -391,7 +394,7 @@ public abstract class LocalBluetoothProfileManager {
         public int getConnectionStatus(BluetoothDevice device) {
             BluetoothDevice currentDevice = mService.getCurrentHeadset();
             return currentDevice != null && currentDevice.equals(device)
-                    ? convertState(mService.getState())
+                    ? convertState(mService.getState(device))
                     : SettingsBtStatus.CONNECTION_STATUS_DISCONNECTED;
         }
 
