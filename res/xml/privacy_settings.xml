@@ -20,8 +20,9 @@
             android:title="@string/backup_section_title">
         <!-- Backup settings -->
         <CheckBoxPreference
-                android:key="backup_settings"
-                android:title="@string/backup_settings_title"
+                android:key="backup_data"
+                android:title="@string/backup_data_title"
+                android:summary="@string/backup_data_summary"
                 android:persistent="false" />
         <CheckBoxPreference
                 android:key="auto_restore"
