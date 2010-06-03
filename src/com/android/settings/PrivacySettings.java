@@ -44,7 +44,7 @@ public class PrivacySettings extends PreferenceActivity implements
     // Vendor specific
     private static final String GSETTINGS_PROVIDER = "com.google.settings";
     private static final String BACKUP_CATEGORY = "backup_category";
-    private static final String BACKUP_SETTINGS = "backup_settings";
+    private static final String BACKUP_DATA = "backup_data";
     private static final String AUTO_RESTORE = "auto_restore";
     private CheckBoxPreference mBackup;
     private CheckBoxPreference mAutoRestore;
@@ -59,7 +59,7 @@ public class PrivacySettings extends PreferenceActivity implements
         addPreferencesFromResource(R.xml.privacy_settings);
         final PreferenceScreen screen = getPreferenceScreen();
 
-        mBackup = (CheckBoxPreference) screen.findPreference(BACKUP_SETTINGS);
+        mBackup = (CheckBoxPreference) screen.findPreference(BACKUP_DATA);
         mAutoRestore = (CheckBoxPreference) screen.findPreference(AUTO_RESTORE);
 
         // Vendor specific
