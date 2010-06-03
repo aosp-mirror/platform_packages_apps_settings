@@ -89,6 +89,19 @@
 
                 <TextView
                         style="?android:attr/textAppearanceSmallInverse"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dip"
+                        android:text="@string/please_select_phase2" />
+
+                <Spinner android:id="@+id/phase2"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:prompt="@string/please_select_phase2"
+                        android:entries="@array/wifi_phase2_entries" />
+
+                <TextView
+                        style="?android:attr/textAppearanceSmallInverse"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="4dip"
