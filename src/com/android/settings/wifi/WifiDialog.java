@@ -60,6 +60,7 @@ class WifiDialog extends AlertDialog implements View.OnClickListener,
 
     private Spinner mEapMethod;
     private Spinner mEapCaCert;
+    private Spinner mPhase2;
     private Spinner mEapUserCert;
     private TextView mEapIdentity;
     private TextView mEapAnonymous;
@@ -141,6 +142,9 @@ class WifiDialog extends AlertDialog implements View.OnClickListener,
                 config.allowedKeyManagement.set(KeyMgmt.WPA_EAP);
                 config.allowedKeyManagement.set(KeyMgmt.IEEE8021X);
                 config.eap.setValue((String) mEapMethod.getSelectedItem());
+
+                config.phase2.setValue((mPhase2.getSelectedItemPosition() == 0) ? "" :
+                        "auth=" + mPhase2.getSelectedItem());
                 config.ca_cert.setValue((mEapCaCert.getSelectedItemPosition() == 0) ? "" :
                         KEYSTORE_SPACE + Credentials.CA_CERTIFICATE +
                         (String) mEapCaCert.getSelectedItem());
@@ -302,6 +306,7 @@ class WifiDialog extends AlertDialog implements View.OnClickListener,
 
         if (mEapMethod == null) {
             mEapMethod = (Spinner) mView.findViewById(R.id.method);
+            mPhase2 = (Spinner) mView.findViewById(R.id.phase2);
             mEapCaCert = (Spinner) mView.findViewById(R.id.ca_cert);
             mEapUserCert = (Spinner) mView.findViewById(R.id.user_cert);
             mEapIdentity = (TextView) mView.findViewById(R.id.identity);
@@ -313,6 +318,7 @@ class WifiDialog extends AlertDialog implements View.OnClickListener,
             if (mAccessPoint != null && mAccessPoint.networkId != -1) {
                 WifiConfiguration config = mAccessPoint.getConfig();
                 setSelection(mEapMethod, config.eap.value());
+                setSelection(mPhase2, config.phase2.value());
                 setCertificate(mEapCaCert, Credentials.CA_CERTIFICATE,
                         config.ca_cert.value());
                 setCertificate(mEapUserCert, Credentials.USER_PRIVATE_KEY,
