@@ -53,6 +53,7 @@ public class ChooseLockPassword extends Activity implements OnClickListener, OnE
     private int mPasswordMinLowerCase = 0;
     private int mPasswordMinSymbols = 0;
     private int mPasswordMinNumeric = 0;
+    private int mPasswordMinNonLetter = 0;
     private LockPatternUtils mLockPatternUtils;
     private int mRequestedQuality = DevicePolicyManager.PASSWORD_QUALITY_NUMERIC;
     private ChooseLockSettingsHelper mChooseLockSettingsHelper;
@@ -71,6 +72,7 @@ public class ChooseLockPassword extends Activity implements OnClickListener, OnE
     public static final String PASSWORD_MIN_UPPERCASE_KEY = "lockscreen.password_min_uppercase";
     public static final String PASSWORD_MIN_NUMERIC_KEY = "lockscreen.password_min_numeric";
     public static final String PASSWORD_MIN_SYMBOLS_KEY = "lockscreen.password_min_symbols";
+    public static final String PASSWORD_MIN_NONLETTER_KEY = "lockscreen.password_min_nonletter";
     private static Handler mHandler = new Handler();
     private static final int CONFIRM_EXISTING_REQUEST = 58;
     static final int RESULT_FINISHED = RESULT_FIRST_USER;
@@ -127,6 +129,8 @@ public class ChooseLockPassword extends Activity implements OnClickListener, OnE
                 mPasswordMinNumeric), mLockPatternUtils.getRequestedPasswordMinimumNumeric());
         mPasswordMinSymbols = Math.max(getIntent().getIntExtra(PASSWORD_MIN_SYMBOLS_KEY,
                 mPasswordMinSymbols), mLockPatternUtils.getRequestedPasswordMinimumSymbols());
+        mPasswordMinNonLetter = Math.max(getIntent().getIntExtra(PASSWORD_MIN_NONLETTER_KEY,
+                mPasswordMinNonLetter), mLockPatternUtils.getRequestedPasswordMinimumNonLetter());
         final boolean confirmCredentials = getIntent().getBooleanExtra("confirm_credentials", true);
 
 
@@ -234,6 +238,7 @@ public class ChooseLockPassword extends Activity implements OnClickListener, OnE
         int lowercase = 0;
         int symbols = 0;
         int uppercase = 0;
+        int nonletter = 0;
         for (int i = 0; i < password.length(); i++) {
             char c = password.charAt(i);
             // allow non white space Latin-1 characters only
@@ -242,6 +247,7 @@ public class ChooseLockPassword extends Activity implements OnClickListener, OnE
             }
             if (c >= '0' && c <= '9') {
                 numbers++;
+                nonletter++;
             } else if (c >= 'A' && c <= 'Z') {
                 letters++;
                 uppercase++;
@@ -250,6 +256,7 @@ public class ChooseLockPassword extends Activity implements OnClickListener, OnE
                 lowercase++;
             } else {
                 symbols++;
+                nonletter++;
             }
         }
         if (DevicePolicyManager.PASSWORD_QUALITY_NUMERIC == mRequestedQuality
@@ -278,6 +285,10 @@ public class ChooseLockPassword extends Activity implements OnClickListener, OnE
                 return String.format(getResources().getQuantityString(
                         R.plurals.lockpassword_password_requires_symbols, mPasswordMinSymbols),
                         mPasswordMinSymbols);
+            } else if (nonletter < mPasswordMinNonLetter) {
+                return String.format(getResources().getQuantityString(
+                        R.plurals.lockpassword_password_requires_nonletter, mPasswordMinNonLetter),
+                        mPasswordMinNonLetter);
             }
         } else {
             final boolean alphabetic = DevicePolicyManager.PASSWORD_QUALITY_ALPHABETIC
