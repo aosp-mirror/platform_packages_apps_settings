@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.android.settings;
+package com.android.settings.applications;
 
 import com.android.settings.R;
 
@@ -41,6 +41,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.os.SystemClock;
+import android.provider.Settings;
 import android.text.format.Formatter;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -119,7 +120,6 @@ public class ManageApplications extends TabActivity implements
     private static final boolean DEBUG_TIME = false;
     
     // attributes used as keys when passing values to InstalledAppDetails activity
-    public static final String APP_PKG_NAME = "pkg";
     public static final String APP_CHG = "chg";
     
     // attribute name used in receiver for tagging names of added/deleted packages
@@ -140,9 +140,8 @@ public class ManageApplications extends TabActivity implements
     private static final int MENU_OPTIONS_BASE = 0;
     // Filter options used for displayed list of applications
     public static final int FILTER_APPS_ALL = MENU_OPTIONS_BASE + 0;
-    public static final int FILTER_APPS_RUNNING = MENU_OPTIONS_BASE + 1;
-    public static final int FILTER_APPS_THIRD_PARTY = MENU_OPTIONS_BASE + 2;
-    public static final int FILTER_APPS_SDCARD = MENU_OPTIONS_BASE + 3;
+    public static final int FILTER_APPS_THIRD_PARTY = MENU_OPTIONS_BASE + 1;
+    public static final int FILTER_APPS_SDCARD = MENU_OPTIONS_BASE + 2;
 
     public static final int SORT_ORDER_ALPHA = MENU_OPTIONS_BASE + 4;
     public static final int SORT_ORDER_SIZE = MENU_OPTIONS_BASE + 5;
@@ -220,12 +219,22 @@ public class ManageApplications extends TabActivity implements
     private boolean mSizesFirst = false;
     // ListView used to display list
     private ListView mListView;
+    // Custom view used to display running processes
+    private RunningProcessesView mRunningProcessesView;
     // State variables used to figure out menu options and also
     // initiate the first computation and loading of resources
     private boolean mJustCreated = true;
     private boolean mFirst = false;
     private long mLoadTimeStart;
     private boolean mSetListViewLater = true;
+    
+    // These are for keeping track of activity and tab switch state.
+    private int mCurView;
+    private boolean mCreatedRunning;
+
+    private boolean mResumedRunning;
+    private boolean mActivityResumed;
+    private Object mNonConfigInstance;
     
     /*
      * Handler class to handle messages for various operations.
@@ -268,10 +277,8 @@ public class ManageApplications extends TabActivity implements
             boolean status;
             long size;
             String formattedSize;
-            ApplicationInfo info;
             Bundle data;
             String pkgName = null;
-            AppInfo appInfo;
             data = msg.getData();
             if(data != null) {
                 pkgName = data.getString(ATTR_PKG_NAME);
@@ -357,12 +364,6 @@ public class ManageApplications extends TabActivity implements
                     if (currB == null || (currB.equals(Boolean.FALSE))) {
                         mAddRemoveMap.put(pkgName, Boolean.TRUE);
                     }
-                    break;
-                }
-                try {
-                    info = mPm.getApplicationInfo(pkgName, 0);
-                } catch (NameNotFoundException e) {
-                    Log.w(TAG, "Couldnt find application info for:"+pkgName);
                     break;
                 }
                 mObserver.invokeGetSizeInfo(pkgName);
@@ -456,7 +457,6 @@ public class ManageApplications extends TabActivity implements
             // Set the adapter here.
             mJustCreated = false;
             mListView.setAdapter(mAppInfoAdapter);
-            dismissLoadingMsg();
         }
     }
 
@@ -645,32 +645,6 @@ public class ManageApplications extends TabActivity implements
                 }
             }
             return appList;
-        } else if (filterOption == FILTER_APPS_RUNNING) {
-            List<ApplicationInfo> appList =new ArrayList<ApplicationInfo> ();
-            List<ActivityManager.RunningAppProcessInfo> procList = getRunningAppProcessesList();
-            if ((procList == null) || (procList.size() == 0)) {
-                return appList;
-            }
-            // Retrieve running processes from ActivityManager
-            for (ActivityManager.RunningAppProcessInfo appProcInfo : procList) {
-                if ((appProcInfo != null)  && (appProcInfo.pkgList != null)){
-                    int size = appProcInfo.pkgList.length;
-                    for (int i = 0; i < size; i++) {
-                        ApplicationInfo appInfo = null;
-                        try {
-                            appInfo = mPm.getApplicationInfo(appProcInfo.pkgList[i], 
-                                    PackageManager.GET_UNINSTALLED_PACKAGES);
-                        } catch (NameNotFoundException e) {
-                           Log.w(TAG, "Error retrieving ApplicationInfo for pkg:"+appProcInfo.pkgList[i]);
-                           continue;
-                        }
-                        if(appInfo != null) {
-                            appList.add(appInfo);
-                        }
-                    }
-                }
-            }
-            return appList;
         } else {
             return installedAppList;
         }
@@ -728,31 +702,6 @@ public class ManageApplications extends TabActivity implements
                 }
             }
             return retList;
-        } else if (filterOption == FILTER_APPS_RUNNING) {
-            List<ActivityManager.RunningAppProcessInfo> procList = getRunningAppProcessesList();
-            if ((procList == null) || (procList.size() == 0)) {
-                return retList;
-            }
-            // Retrieve running processes from ActivityManager
-            HashMap<String, ActivityManager.RunningAppProcessInfo> runningMap = 
-                new HashMap<String, ActivityManager.RunningAppProcessInfo>();
-            for (ActivityManager.RunningAppProcessInfo appProcInfo : procList) {
-                if ((appProcInfo != null)  && (appProcInfo.pkgList != null)){
-                    int size = appProcInfo.pkgList.length;
-                    for (int i = 0; i < size; i++) {
-                        runningMap.put(appProcInfo.pkgList[i], appProcInfo);
-                    }
-                }
-            }
-            // Query list to find running processes in current list
-            for (ApplicationInfo appInfo : pAppList) {
-                if (runningMap.get(appInfo.packageName) != null) {
-                    if (matchFilter(filter, filterMap, appInfo.packageName)) {
-                        retList.add(appInfo);
-                    }
-                }
-            }
-            return retList;
         } else {
             for (ApplicationInfo appInfo : pAppList) {
                 if (matchFilter(filter, filterMap, appInfo.packageName)) {
@@ -761,11 +710,6 @@ public class ManageApplications extends TabActivity implements
             }
             return retList;
         }
-    }
-
-    private List<ActivityManager.RunningAppProcessInfo> getRunningAppProcessesList() {
-        ActivityManager am = (ActivityManager)getSystemService(Context.ACTIVITY_SERVICE);
-        return am.getRunningAppProcesses();
     }
 
      // Some initialization code used when kicking off the size computation
@@ -1261,14 +1205,7 @@ public class ManageApplications extends TabActivity implements
 
         private boolean shouldBeInList(int filterOption, ApplicationInfo info) {
             // Match filter here
-            if (filterOption == FILTER_APPS_RUNNING) {
-                List<ApplicationInfo> runningList = getInstalledApps(FILTER_APPS_RUNNING);
-                for (ApplicationInfo running : runningList) {
-                    if (running.packageName.equalsIgnoreCase(info.packageName)) {
-                        return true;
-                    }
-                }
-            } else if (filterOption == FILTER_APPS_THIRD_PARTY) {
+            if (filterOption == FILTER_APPS_THIRD_PARTY) {
                 if ((info.flags & ApplicationInfo.FLAG_SYSTEM) == 0) {
                     return true;
                 } else if ((info.flags & ApplicationInfo.FLAG_UPDATED_SYSTEM_APP) != 0) {
@@ -1611,11 +1548,44 @@ public class ManageApplications extends TabActivity implements
         }
     }
 
+    static final int VIEW_NOTHING = 0;
+    static final int VIEW_LIST = 1;
+    static final int VIEW_RUNNING = 2;
+    
+    private void selectView(int which) {
+        if (mCurView == which) {
+            return;
+        }
+        
+        mCurView = which;
+        
+        if (which == VIEW_LIST) {
+            if (mResumedRunning) {
+                mRunningProcessesView.doPause();
+                mResumedRunning = false;
+            }
+            mRunningProcessesView.setVisibility(View.GONE);
+            mListView.setVisibility(View.VISIBLE);
+        } else if (which == VIEW_RUNNING) {
+            if (!mCreatedRunning) {
+                mRunningProcessesView.doCreate(null, mNonConfigInstance);
+                mCreatedRunning = true;
+            }
+            if (mActivityResumed && !mResumedRunning) {
+                mRunningProcessesView.doResume();
+                mResumedRunning = true;
+            }
+            mRunningProcessesView.setVisibility(View.VISIBLE);
+            mListView.setVisibility(View.GONE);
+        }
+    }
+    
     static final String TAB_DOWNLOADED = "Downloaded";
     static final String TAB_RUNNING = "Running";
     static final String TAB_ALL = "All";
     static final String TAB_SDCARD = "OnSdCard";
     private View mRootView;
+    
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -1627,18 +1597,31 @@ public class ManageApplications extends TabActivity implements
         Intent intent = getIntent();
         String action = intent.getAction();
         String defaultTabTag = TAB_DOWNLOADED;
+        if (intent.getComponent().getClassName().equals(
+                "com.android.settings.RunningServices")) {
+            defaultTabTag = TAB_RUNNING;
+        }
         if (action.equals(Intent.ACTION_MANAGE_PACKAGE_STORAGE)) {
             mSortOrder = SORT_ORDER_SIZE;
             mFilterApps = FILTER_APPS_ALL;
             defaultTabTag = TAB_ALL;
             mSizesFirst = true;
         }
+        
+        if (savedInstanceState != null) {
+            mSortOrder = savedInstanceState.getInt("sortOrder", mSortOrder);
+            mFilterApps = savedInstanceState.getInt("filterApps", mFilterApps);
+            String tmp = savedInstanceState.getString("defaultTabTag");
+            if (tmp != null) defaultTabTag = tmp;
+            mSizesFirst = savedInstanceState.getBoolean("sizesFirst", mSizesFirst);
+        }
+        
+        mNonConfigInstance = getLastNonConfigurationInstance();
+        
         mPm = getPackageManager();
         // initialize some window features
         requestWindowFeature(Window.FEATURE_RIGHT_ICON);
-        requestWindowFeature(Window.FEATURE_PROGRESS);
         requestWindowFeature(Window.FEATURE_INDETERMINATE_PROGRESS);
-        showLoadingMsg();
         mDefaultAppIcon = Resources.getSystem().getDrawable(
                 com.android.internal.R.drawable.sym_def_app_icon);
         mInvalidSizeStr = getText(R.string.invalid_size_value);
@@ -1658,6 +1641,8 @@ public class ManageApplications extends TabActivity implements
         lv.setOnItemClickListener(this);
         lv.setTextFilterEnabled(true);
         mListView = lv;
+        mRunningProcessesView = (RunningProcessesView)mRootView.findViewById(
+                R.id.running_processes);
         if (DEBUG_TIME) {
             Log.i(TAG, "Total time in Activity.create:: " +
                     (SystemClock.elapsedRealtime() - sCreate)+ " ms");
@@ -1677,10 +1662,6 @@ public class ManageApplications extends TabActivity implements
                 .setIndicator(getString(R.string.filter_apps_third_party),
                         getResources().getDrawable(R.drawable.ic_tab_download))
                 .setContent(this));
-        tabHost.addTab(tabHost.newTabSpec(TAB_RUNNING)
-                .setIndicator(getString(R.string.filter_apps_running),
-                        getResources().getDrawable(R.drawable.ic_tab_running))
-                .setContent(this));
         tabHost.addTab(tabHost.newTabSpec(TAB_ALL)
                 .setIndicator(getString(R.string.filter_apps_all),
                         getResources().getDrawable(R.drawable.ic_tab_all))
@@ -1689,8 +1670,95 @@ public class ManageApplications extends TabActivity implements
                 .setIndicator(getString(R.string.filter_apps_onsdcard),
                         getResources().getDrawable(R.drawable.ic_tab_sdcard))
                 .setContent(this));
+        tabHost.addTab(tabHost.newTabSpec(TAB_RUNNING)
+                .setIndicator(getString(R.string.filter_apps_running),
+                        getResources().getDrawable(R.drawable.ic_tab_running))
+                .setContent(this));
         tabHost.setCurrentTabByTag(defaultTabTag);
         tabHost.setOnTabChangedListener(this);
+        
+        selectView(TAB_RUNNING.equals(defaultTabTag) ? VIEW_RUNNING : VIEW_LIST);
+    }
+    
+    @Override
+    public void onStart() {
+        super.onStart();
+        // Register receiver
+        mReceiver.registerReceiver();
+        sendMessageToHandler(INIT_PKG_INFO);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        mActivityResumed = true;
+        if (mCurView == VIEW_RUNNING) {
+            mRunningProcessesView.doResume();
+            mResumedRunning = true;
+        }
+    }
+
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putInt("sortOrder", mSortOrder);
+        outState.putInt("filterApps", mFilterApps);
+        outState.putString("defautTabTag", getTabHost().getCurrentTabTag());
+        outState.putBoolean("sizesFirst", mSizesFirst);
+    }
+
+    @Override
+    public Object onRetainNonConfigurationInstance() {
+        return mRunningProcessesView.doRetainNonConfigurationInstance();
+    }
+    
+    @Override
+    protected void onPause() {
+        super.onPause();
+        mActivityResumed = false;
+        if (mResumedRunning) {
+            mRunningProcessesView.doPause();
+            mResumedRunning = false;
+        }
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        // Stop the background threads
+        if (mResourceThread != null) {
+            mResourceThread.setAbort();
+        }
+        if (mSizeComputor != null) {
+            mSizeComputor.setAbort();
+        }
+        // clear all messages related to application list
+        clearMessagesInHandler();
+        // register receiver here
+        unregisterReceiver(mReceiver);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode,
+            Intent data) {
+        if (requestCode == INSTALLED_APP_DETAILS && mCurrentPkgName != null) {
+            // Refresh package attributes
+            try {
+                ApplicationInfo info = mPm.getApplicationInfo(mCurrentPkgName,
+                        PackageManager.GET_UNINSTALLED_PACKAGES);
+            } catch (NameNotFoundException e) {
+                Bundle rData = new Bundle();
+                rData.putString(ATTR_PKG_NAME, mCurrentPkgName);
+                sendMessageToHandler(REMOVE_PKG, rData);
+                mCurrentPkgName = null;
+            }
+        }
+    }
+    
+    // Avoid the restart and pause when orientation changes
+    @Override
+    public void onConfigurationChanged(Configuration newConfig) {
+        super.onConfigurationChanged(newConfig);
     }
     
     @Override
@@ -1698,34 +1766,6 @@ public class ManageApplications extends TabActivity implements
         // Persist values in cache
         mCache.updateCache();
         super.onDestroy();
-    }
-
-    @Override
-    public Dialog onCreateDialog(int id, Bundle args) {
-        if (id == DLG_LOADING) {
-            ProgressDialog dlg = new ProgressDialog(this);
-            dlg.setProgressStyle(ProgressDialog.STYLE_SPINNER);
-            dlg.setMessage(getText(R.string.loading));
-            dlg.setIndeterminate(true);        
-            dlg.setOnCancelListener(this);
-            return dlg;
-        }
-        return null;
-    }
-
-    private void showLoadingMsg() {
-        if (DEBUG_TIME) {
-            mLoadTimeStart = SystemClock.elapsedRealtime();
-        }
-        showDialog(DLG_LOADING); 
-        if(localLOGV) Log.i(TAG, "Displaying Loading message");
-    }
-    
-    private void dismissLoadingMsg() {
-        if(localLOGV) Log.i(TAG, "Dismissing Loading message");
-        dismissDialog(DLG_LOADING);
-        if (DEBUG_TIME) Log.i(TAG, "Displayed loading message for "+
-                (SystemClock.elapsedRealtime() - mLoadTimeStart) + " ms");
     }
 
     class AppInfoCache {
@@ -1923,36 +1963,6 @@ public class ManageApplications extends TabActivity implements
         }
     }
 
-    @Override
-    public void onStart() {
-        super.onStart();
-        // Register receiver
-        mReceiver.registerReceiver();
-        sendMessageToHandler(INIT_PKG_INFO);
-    }
-
-    @Override
-    public void onStop() {
-        super.onStop();
-        // Stop the background threads
-        if (mResourceThread != null) {
-            mResourceThread.setAbort();
-        }
-        if (mSizeComputor != null) {
-            mSizeComputor.setAbort();
-        }
-        // clear all messages related to application list
-        clearMessagesInHandler();
-        // register receiver here
-        unregisterReceiver(mReceiver);
-    }
-    
-    // Avoid the restart and pause when orientation changes
-    @Override
-    public void onConfigurationChanged(Configuration newConfig) {
-        super.onConfigurationChanged(newConfig);
-    }
-    
     /*
      * comparator class used to sort AppInfo objects based on size
      */
@@ -1994,9 +2004,8 @@ public class ManageApplications extends TabActivity implements
     // utility method used to start sub activity
     private void startApplicationDetailsActivity() {
         // Create intent to start new activity
-        Intent intent = new Intent(Intent.ACTION_VIEW);
-        intent.setClass(this, InstalledAppDetails.class);
-        intent.putExtra(APP_PKG_NAME, mCurrentPkgName);
+        Intent intent = new Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS,
+                Uri.fromParts("package", mCurrentPkgName, null));
         // start new activity to display extended information
         startActivityForResult(intent, INSTALLED_APP_DETAILS);
     }
@@ -2049,33 +2058,19 @@ public class ManageApplications extends TabActivity implements
         int newOption;
         if (TAB_DOWNLOADED.equalsIgnoreCase(tabId)) {
             newOption = FILTER_APPS_THIRD_PARTY;
-        } else if (TAB_RUNNING.equalsIgnoreCase(tabId)) {
-            newOption = FILTER_APPS_RUNNING;
         } else if (TAB_ALL.equalsIgnoreCase(tabId)) {
             newOption = FILTER_APPS_ALL;
         } else if (TAB_SDCARD.equalsIgnoreCase(tabId)) {
             newOption = FILTER_APPS_SDCARD;
+        } else if (TAB_RUNNING.equalsIgnoreCase(tabId)) {
+            selectView(VIEW_RUNNING);
+            return;
         } else {
             // Invalid option. Do nothing
             return;
         }
+        
+        selectView(VIEW_LIST);
         sendMessageToHandler(REORDER_LIST, newOption);
-    }
-
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode,
-            Intent data) {
-        if (requestCode == INSTALLED_APP_DETAILS && mCurrentPkgName != null) {
-            // Refresh package attributes
-            try {
-                ApplicationInfo info = mPm.getApplicationInfo(mCurrentPkgName,
-                        PackageManager.GET_UNINSTALLED_PACKAGES);
-            } catch (NameNotFoundException e) {
-                Bundle rData = new Bundle();
-                rData.putString(ATTR_PKG_NAME, mCurrentPkgName);
-                sendMessageToHandler(REMOVE_PKG, rData);
-                mCurrentPkgName = null;
-            }
-        }
     }
 }

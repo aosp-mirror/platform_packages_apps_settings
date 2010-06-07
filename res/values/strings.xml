@@ -1800,16 +1800,55 @@ found in the list of installed applications.</string>
     <!-- Running services, button to cancel stopping of a service -->
     <string name="confirm_stop_cancel">Cancel</string>
     <!-- Running services, description for a service in the started state -->
-    <string name="service_started_by_app">Started by application: touch to stop</string>
+    <string name="service_started_by_app">Started by application.</string>
     <!-- Running services, description for a service in the started state -->
-    <string name="service_client_name"><xliff:g id="client_name">%1$s</xliff:g>: touch to manage</string>
+    <string name="service_client_name"><xliff:g id="client_name">%1$s</xliff:g></string>
     <!-- Running services, summary of background processes -->
-    <string name="service_background_processes">Avail: <xliff:g id="free">%2$s</xliff:g>+<xliff:g id="memory">%3$s</xliff:g> in <xliff:g id="count">%1$d</xliff:g></string>
+    <string name="service_background_processes"><xliff:g id="memory">%1$s</xliff:g> available</string>
     <!-- Running services, summary of foreground processes -->
-    <string name="service_foreground_processes">Other: <xliff:g id="memory">%2$s</xliff:g> in <xliff:g id="count">%1$d</xliff:g></string>
+    <string name="service_foreground_processes"><xliff:g id="memory">%1$s</xliff:g> in use</string>
     <!-- Text to label a process entry with the process name. -->
-    <string name="service_process_name">Process: <xliff:g id="process">%1$s</xliff:g></string>
+    <string name="service_process_name"><xliff:g id="process">%1$s</xliff:g></string>
+    <!-- Descriptive text of a running process: singular process, singular service. -->
+    <string name="running_processes_item_description_s_s"><xliff:g id="numprocess">%1$d</xliff:g>
+        process and <xliff:g id="numservices">%2$d</xliff:g> service</string>
+    <!-- Descriptive text of a running process: singular process, plural service. -->
+    <string name="running_processes_item_description_s_p"><xliff:g id="numprocess">%1$d</xliff:g>
+        process and <xliff:g id="numservices">%2$d</xliff:g> services</string>
+     <!-- Descriptive text of a running process: plural process, singular service. -->
+    <string name="running_processes_item_description_p_s"><xliff:g id="numprocess">%1$d</xliff:g>
+        processes and <xliff:g id="numservices">%2$d</xliff:g> service</string>
+    <!-- Descriptive text of a running process: plural process, plural service. -->
+    <string name="running_processes_item_description_p_p"><xliff:g id="numprocess">%1$d</xliff:g>
+        processes and <xliff:g id="numservices">%2$d</xliff:g> services</string>
 
+    <!-- Details about an application's running services. -->
+    <string name="runningservicedetails_settings_title">Running application</string>
+    <!-- Message displayed when there are no active services in a process. -->
+    <string name="no_services">Not active</string>
+    <!-- Title for list of services. -->
+    <string name="runningservicedetails_services_title">Services</string>
+    <!-- Title for list of services. -->
+    <string name="runningservicedetails_processes_title">Processes</string>
+    <!-- Running service details, stop a service that has started itself. -->
+    <string name="service_stop">Stop</string>
+    <!-- Running service details, manage a service that is running for some other reason. -->
+    <string name="service_manage">Manage</string>
+    <!-- Running service details, default description for services that are started. -->
+    <string name="service_stop_description">This service was started by its
+        application.  Stopping it may cause the application to misbehave.</string>
+    <!-- Running service details, default description for services that are managed. -->
+    <string name="service_manage_description"><xliff:g id="client_name">%1$s</xliff:g>:
+        currently in use.  You can manage your settings to stop it.</string>
+    <!-- Description of the main process in the details. -->
+    <string name="main_running_process_description">Main process that is in use.</string>
+    <!-- Message that a process's service is in use. -->
+    <string name="process_service_in_use_description">Service <xliff:g id="comp_name">%1$s</xliff:g>
+        is in use.</string>
+    <!-- Message that a process's provider is in use. -->
+    <string name="process_provider_in_use_description">Provider <xliff:g id="comp_name">%1$s</xliff:g>
+        is in use.</string>
+    
     <!-- Language Settings --> <skip />
     <!-- Title of setting on main settings screen.  This item will take the user to the screen to tweak settings realted to locale and text -->
     <string name="language_settings">Language &amp; keyboard</string>
