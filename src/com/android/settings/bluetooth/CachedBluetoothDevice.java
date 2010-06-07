@@ -35,11 +35,7 @@ import android.view.MenuItem;
 import com.android.settings.R;
 import com.android.settings.bluetooth.LocalBluetoothProfileManager.Profile;
 
-import java.text.DateFormat;
 import java.util.ArrayList;
-import java.util.Date;
-import java.util.Iterator;
-import java.util.LinkedList;
 import java.util.List;
 import java.util.Set;
 
@@ -90,219 +86,39 @@ public class CachedBluetoothDevice implements Comparable<CachedBluetoothDevice> 
     // See mConnectAttempted
     private static final long MAX_UUID_DELAY_FOR_AUTO_CONNECT = 5000;
 
-    // Max time to hold the work queue if we don't get or missed a response
-    // from the bt framework.
-    private static final long MAX_WAIT_TIME_FOR_FRAMEWORK = 25 * 1000;
-
-    private enum BluetoothCommand {
-        CONNECT, DISCONNECT, REMOVE_BOND,
-    }
-
-    static class BluetoothJob {
-        final BluetoothCommand command; // CONNECT, DISCONNECT
-        final CachedBluetoothDevice cachedDevice;
-        final Profile profile; // HEADSET, A2DP, etc
-        // 0 means this command was not been sent to the bt framework.
-        long timeSent;
-
-        public BluetoothJob(BluetoothCommand command,
-                CachedBluetoothDevice cachedDevice, Profile profile) {
-            this.command = command;
-            this.cachedDevice = cachedDevice;
-            this.profile = profile;
-            this.timeSent = 0;
-        }
-
-        @Override
-        public String toString() {
-            StringBuilder sb = new StringBuilder();
-            sb.append(command.name());
-            sb.append(" Address:").append(cachedDevice.mDevice);
-            if (profile != null) {
-                sb.append(" Profile:").append(profile.name());
-            }
-            sb.append(" TimeSent:");
-            if (timeSent == 0) {
-                sb.append("not yet");
-            } else {
-                sb.append(DateFormat.getTimeInstance().format(new Date(timeSent)));
-            }
-            return sb.toString();
-        }
-    }
-
+    
     /**
-     * We want to serialize connect and disconnect calls. http://b/170538
-     * This are some headsets that may have L2CAP resource limitation. We want
-     * to limit the bt bandwidth usage.
-     *
-     * A queue to keep track of asynchronous calls to the bt framework.  The
-     * first item, if exist, should be in progress i.e. went to the bt framework
-     * already, waiting for a notification to come back. The second item and
-     * beyond have not been sent to the bt framework yet.
+     * Describes the current device and profile for logging.
+     * 
+     * @param profile Profile to describe
+     * @return Description of the device and profile
      */
-    private static LinkedList<BluetoothJob> workQueue = new LinkedList<BluetoothJob>();
-
-    private void queueCommand(BluetoothJob job) {
-        synchronized (workQueue) {
-            if (D) {
-                Log.d(TAG, workQueue.toString());
-            }
-            boolean processNow = pruneQueue(job);
-
-            // Add job to queue
-            if (D) {
-                Log.d(TAG, "Adding: " + job.toString());
-            }
-            workQueue.add(job);
-
-            // if there's nothing pending from before, send the command to bt
-            // framework immediately.
-            if (workQueue.size() == 1 || processNow) {
-                // If the failed to process, just drop it from the queue.
-                // There will be no callback to remove this from the queue.
-                processCommands();
-            }
+    private String describe(CachedBluetoothDevice cachedDevice, Profile profile) {
+        StringBuilder sb = new StringBuilder();
+        sb.append("Address:").append(cachedDevice.mDevice);
+        if (profile != null) {
+            sb.append(" Profile:").append(profile.name());
         }
+
+        return sb.toString();
     }
-
-    private boolean pruneQueue(BluetoothJob job) {
-        boolean removedStaleItems = false;
-        long now = System.currentTimeMillis();
-        Iterator<BluetoothJob> it = workQueue.iterator();
-        while (it.hasNext()) {
-            BluetoothJob existingJob = it.next();
-
-            // Remove any pending CONNECTS when we receive a DISCONNECT
-            if (job != null && job.command == BluetoothCommand.DISCONNECT) {
-                if (existingJob.timeSent == 0
-                        && existingJob.command == BluetoothCommand.CONNECT
-                        && existingJob.cachedDevice.mDevice.equals(job.cachedDevice.mDevice)
-                        && existingJob.profile == job.profile) {
-                    if (D) {
-                        Log.d(TAG, "Removed because of a pending disconnect. " + existingJob);
-                    }
-                    it.remove();
-                    continue;
-                }
-            }
-
-            // Defensive Code: Remove any job that older than a preset time.
-            // We never got a call back. It is better to have overlapping
-            // calls than to get stuck.
-            if (existingJob.timeSent != 0
-                    && (now - existingJob.timeSent) >= MAX_WAIT_TIME_FOR_FRAMEWORK) {
-                Log.w(TAG, "Timeout. Removing Job:" + existingJob.toString());
-                it.remove();
-                removedStaleItems = true;
-                continue;
-            }
-        }
-        return removedStaleItems;
-    }
-
-    private boolean processCommand(BluetoothJob job) {
-        boolean successful = false;
-        if (job.timeSent == 0) {
-            job.timeSent = System.currentTimeMillis();
-            switch (job.command) {
-            case CONNECT:
-                successful = connectInt(job.cachedDevice, job.profile);
-                break;
-            case DISCONNECT:
-                successful = disconnectInt(job.cachedDevice, job.profile);
-                break;
-            case REMOVE_BOND:
-                BluetoothDevice dev = job.cachedDevice.getDevice();
-                if (dev != null) {
-                    successful = dev.removeBond();
-                }
-                break;
-            }
-
-            if (successful) {
-                if (D) {
-                    Log.d(TAG, "Command sent successfully:" + job.toString());
-                }
-            } else if (V) {
-                Log.v(TAG, "Framework rejected command immediately:" + job.toString());
-            }
-        } else if (D) {
-            Log.d(TAG, "Job already has a sent time. Skip. " + job.toString());
-        }
-
-        return successful;
+    
+    private String describe(Profile profile) {
+        return describe(this, profile);
     }
 
     public void onProfileStateChanged(Profile profile, int newProfileState) {
-        synchronized (workQueue) {
-            if (D) {
-                Log.d(TAG, "onProfileStateChanged:" + workQueue.toString());
-            }
-
-            int newState = LocalBluetoothProfileManager.getProfileManager(mLocalManager,
-                    profile).convertState(newProfileState);
-
-            if (newState == SettingsBtStatus.CONNECTION_STATUS_CONNECTED) {
-                if (!mProfiles.contains(profile)) {
-                    mProfiles.add(profile);
-                }
-            }
-
-            /* Ignore the transient states e.g. connecting, disconnecting */
-            if (newState == SettingsBtStatus.CONNECTION_STATUS_CONNECTED ||
-                    newState == SettingsBtStatus.CONNECTION_STATUS_DISCONNECTED) {
-                BluetoothJob job = workQueue.peek();
-                if (job == null) {
-                    return;
-                } else if (!job.cachedDevice.mDevice.equals(mDevice)) {
-                    // This can happen in 2 cases: 1) BT device initiated pairing and
-                    // 2) disconnects of one headset that's triggered by connects of
-                    // another.
-                    if (D) {
-                        Log.d(TAG, "mDevice:" + mDevice + " != head:" + job.toString());
-                    }
-
-                    // Check to see if we need to remove the stale items from the queue
-                    if (!pruneQueue(null)) {
-                        // nothing in the queue was modify. Just ignore the notification and return.
-                        return;
-                    }
-                } else {
-                    // Remove the first item and process the next one
-                    workQueue.poll();
-                }
-
-                processCommands();
-            }
-        }
-    }
-
-    /*
-     * This method is called in 2 places:
-     * 1) queryCommand() - when someone or something want to connect or
-     *    disconnect
-     * 2) onProfileStateChanged() - when the framework sends an intent
-     *    notification when it finishes processing a command
-     */
-    private void processCommands() {
         if (D) {
-            Log.d(TAG, "processCommands:" + workQueue.toString());
+            Log.d(TAG, "onProfileStateChanged: profile " + profile.toString() +
+                    " newProfileState " + newProfileState);
         }
-        Iterator<BluetoothJob> it = workQueue.iterator();
-        while (it.hasNext()) {
-            BluetoothJob job = it.next();
-            if (processCommand(job)) {
-                // Sent to bt framework. Done for now. Will remove this job
-                // from queue when we get an event
-                return;
-            } else {
-                /*
-                 * If the command failed immediately, there will be no event
-                 * callbacks. So delete the job immediately and move on to the
-                 * next one
-                 */
-                it.remove();
+
+        int newState = LocalBluetoothProfileManager.getProfileManager(mLocalManager,
+                profile).convertState(newProfileState);
+
+        if (newState == SettingsBtStatus.CONNECTION_STATUS_CONNECTED) {
+            if (!mProfiles.contains(profile)) {
+                mProfiles.add(profile);
             }
         }
     }
@@ -338,7 +154,7 @@ public class CachedBluetoothDevice implements Comparable<CachedBluetoothDevice> 
     }
 
     public void disconnect(Profile profile) {
-        queueCommand(new BluetoothJob(BluetoothCommand.DISCONNECT, this, profile));
+        disconnectInt(this, profile);
     }
 
     private boolean disconnectInt(CachedBluetoothDevice cachedDevice, Profile profile) {
@@ -347,9 +163,17 @@ public class CachedBluetoothDevice implements Comparable<CachedBluetoothDevice> 
         int status = profileManager.getConnectionStatus(cachedDevice.mDevice);
         if (SettingsBtStatus.isConnectionStatusConnected(status)) {
             if (profileManager.disconnect(cachedDevice.mDevice)) {
+                if (D) {
+                    Log.d(TAG, "Command sent successfully:DISCONNECT " + describe(profile));
+                }
                 return true;
             }
+            if (V) {
+                Log.v(TAG, "Framework rejected command immediately:DISCONNECT " +
+                        describe(profile));
+            }
         }
+
         return false;
     }
 
@@ -419,7 +243,7 @@ public class CachedBluetoothDevice implements Comparable<CachedBluetoothDevice> 
                 if (profileManager.isPreferred(mDevice)) {
                     ++preferredProfiles;
                     disconnectConnected(profile);
-                    queueCommand(new BluetoothJob(BluetoothCommand.CONNECT, this, profile));
+                    connectInt(this, profile);
                 }
             }
         }
@@ -442,7 +266,7 @@ public class CachedBluetoothDevice implements Comparable<CachedBluetoothDevice> 
                         .getProfileManager(mLocalManager, profile);
                 profileManager.setPreferred(mDevice, false);
                 disconnectConnected(profile);
-                queueCommand(new BluetoothJob(BluetoothCommand.CONNECT, this, profile));
+                connectInt(this, profile);
             }
         }
     }
@@ -452,7 +276,7 @@ public class CachedBluetoothDevice implements Comparable<CachedBluetoothDevice> 
         // Reset the only-show-one-error-dialog tracking variable
         mIsConnectingErrorPossible = true;
         disconnectConnected(profile);
-        queueCommand(new BluetoothJob(BluetoothCommand.CONNECT, this, profile));
+        connectInt(this, profile);
     }
 
     private void disconnectConnected(Profile profile) {
@@ -464,7 +288,7 @@ public class CachedBluetoothDevice implements Comparable<CachedBluetoothDevice> 
         for (BluetoothDevice device : devices) {
             CachedBluetoothDevice cachedDevice = cachedDeviceManager.findDevice(device);
             if (cachedDevice != null) {
-                queueCommand(new BluetoothJob(BluetoothCommand.DISCONNECT, cachedDevice, profile));
+                disconnectInt(cachedDevice, profile);
             }
         }
     }
@@ -477,12 +301,16 @@ public class CachedBluetoothDevice implements Comparable<CachedBluetoothDevice> 
         int status = profileManager.getConnectionStatus(cachedDevice.mDevice);
         if (!SettingsBtStatus.isConnectionStatusConnected(status)) {
             if (profileManager.connect(cachedDevice.mDevice)) {
+                if (D) {
+                    Log.d(TAG, "Command sent successfully:CONNECT " + describe(profile));
+                }
                 return true;
             }
             Log.i(TAG, "Failed to connect " + profile.toString() + " to " + cachedDevice.mName);
         } else {
             Log.i(TAG, "Already connected");
         }
+
         return false;
     }
 
@@ -527,7 +355,18 @@ public class CachedBluetoothDevice implements Comparable<CachedBluetoothDevice> 
         }
 
         if (state != BluetoothDevice.BOND_NONE) {
-            queueCommand(new BluetoothJob(BluetoothCommand.REMOVE_BOND, this, null));
+            final BluetoothDevice dev = getDevice();
+            if (dev != null) {
+                final boolean successful = dev.removeBond();
+                if (successful) {
+                    if (D) {
+                        Log.d(TAG, "Command sent successfully:REMOVE_BOND " + describe(null));
+                    }
+                } else if (V) {
+                    Log.v(TAG, "Framework rejected command immediately:REMOVE_BOND " +
+                            describe(null));
+                }
+            }
         }
     }
 
@@ -749,30 +588,6 @@ public class CachedBluetoothDevice implements Comparable<CachedBluetoothDevice> 
     public void onBondingStateChanged(int bondState) {
         if (bondState == BluetoothDevice.BOND_NONE) {
             mProfiles.clear();
-
-            BluetoothJob job = workQueue.peek();
-            if (job != null) {
-                // Remove the first item and process the next one
-                if (job.command == BluetoothCommand.REMOVE_BOND
-                        && job.cachedDevice.mDevice.equals(mDevice)) {
-                    workQueue.poll(); // dequeue
-                } else {
-                    // Unexpected job
-                    if (D) {
-                        Log.d(TAG, "job.command = " + job.command);
-                        Log.d(TAG, "mDevice:" + mDevice + " != head:" + job.toString());
-                    }
-
-                    // Check to see if we need to remove the stale items from the queue
-                    if (!pruneQueue(null)) {
-                        // nothing in the queue was modify. Just ignore the notification and return.
-                        refresh();
-                        return;
-                    }
-                }
-
-                processCommands();
-            }
         }
 
         refresh();
