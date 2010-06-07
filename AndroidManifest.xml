@@ -350,7 +350,7 @@
             </intent-filter>
         </activity>
 
-        <activity android:name="ManageApplications"
+        <activity android:name=".applications.ManageApplications"
                   android:label="@string/manageapplications_settings_title"
                   android:clearTaskOnLaunch="true"
                   android:configChanges="orientation|keyboardHidden">
@@ -365,15 +365,22 @@
             </intent-filter>
         </activity>
 
-        <activity android:name="InstalledAppDetails" android:label="@string/application_info_label">
+        <!-- Keep compatibility with old shortcuts. -->
+        <activity-alias android:name=".ManageApplications"
+            android:targetActivity=".applications.ManageApplications"
+            android:exported="true" />
+        
+        <activity android:name=".applications.InstalledAppDetails"
+                android:label="@string/application_info_label">
             <intent-filter>
-                <action android:name="android.intent.action.VIEW" />
+                <action android:name="android.settings.APPLICATION_DETAILS_SETTINGS" />
                 <category android:name="android.intent.category.DEFAULT" />
-                <category android:name="android.intent.category.VOICE_LAUNCH" />
+                <data android:scheme="package" />
             </intent-filter>
         </activity>
 
-        <activity android:name="RunningServices"
+        <!--
+        <activity android:name=".applications.RunningServices"
                   android:label="@string/runningservices_settings_title"
                   android:clearTaskOnLaunch="true">
             <intent-filter>
@@ -383,6 +390,24 @@
                 <category android:name="android.intent.category.VOICE_LAUNCH" />
                 <category android:name="com.android.settings.SHORTCUT" />
             </intent-filter>
+        </activity>
+        -->
+        
+        <!-- Provide direct entry into manage apps showing running services. -->
+        <activity-alias android:name=".RunningServices"
+            android:targetActivity=".applications.ManageApplications">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.MONKEY" />
+                <category android:name="android.intent.category.VOICE_LAUNCH" />
+                <category android:name="com.android.settings.SHORTCUT" />
+            </intent-filter>
+        </activity-alias>
+        
+        <activity android:name=".applications.RunningServiceDetails"
+                android:theme="@android:style/Theme.NoTitleBar"
+                android:label="@string/runningservicedetails_settings_title">
         </activity>
 
         <activity android:name="SecuritySettings"

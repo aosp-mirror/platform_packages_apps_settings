@@ -16,10 +16,14 @@
  * under the License.
  */
 
-package com.android.settings;
+package com.android.settings.applications;
 
 import com.android.internal.content.PackageHelper;
 import com.android.settings.R;
+import com.android.settings.R.id;
+import com.android.settings.R.layout;
+import com.android.settings.R.string;
+
 import android.app.Activity;
 import android.app.ActivityManager;
 import android.app.AlertDialog;
@@ -312,7 +316,7 @@ public class InstalledAppDetails extends Activity implements View.OnClickListene
         
         // Get application's name from intent
         Intent intent = getIntent();
-        final String packageName = intent.getStringExtra(ManageApplications.APP_PKG_NAME);
+        final String packageName = intent.getData().getSchemeSpecificPart();
         if (! initAppInfo(packageName)) {
             return; // could not find package, finish called
         }

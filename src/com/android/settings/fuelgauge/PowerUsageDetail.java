@@ -40,9 +40,9 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
-import com.android.settings.InstalledAppDetails;
-import com.android.settings.ManageApplications;
 import com.android.settings.R;
+import com.android.settings.applications.InstalledAppDetails;
+import com.android.settings.applications.ManageApplications;
 
 public class PowerUsageDetail extends Activity implements Button.OnClickListener {
 
@@ -248,9 +248,9 @@ public class PowerUsageDetail extends Activity implements Button.OnClickListener
                 startActivity(new Intent(Settings.ACTION_WIRELESS_SETTINGS));
                 break;
             case ACTION_APP_DETAILS:
-                Intent intent = new Intent(Intent.ACTION_VIEW);
+                Intent intent = new Intent(Intent.ACTION_VIEW,
+                        Uri.fromParts("package", mPackages[0], null));
                 intent.setClass(this, InstalledAppDetails.class);
-                intent.putExtra(ManageApplications.APP_PKG_NAME, mPackages[0]);
                 startActivity(intent);
                 break;
             case ACTION_SECURITY_SETTINGS:
