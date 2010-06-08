@@ -24,6 +24,7 @@ import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothClass;
 import android.bluetooth.BluetoothDevice;
 import android.bluetooth.BluetoothHeadset;
+import android.bluetooth.BluetoothInputDevice;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
@@ -118,6 +119,19 @@ public class BluetoothEventRedirector {
 
                 mManager.getCachedDeviceManager().onProfileStateChanged(device,
                         Profile.A2DP, newState);
+
+            } else if (action.equals(BluetoothInputDevice.ACTION_INPUT_DEVICE_STATE_CHANGED)) {
+                final int newState = intent.getIntExtra(
+                        BluetoothInputDevice.EXTRA_INPUT_DEVICE_STATE, 0);
+                final int oldState = intent.getIntExtra(
+                        BluetoothInputDevice.EXTRA_PREVIOUS_INPUT_DEVICE_STATE, 0);
+                if (newState == BluetoothInputDevice.STATE_DISCONNECTED &&
+                        oldState == BluetoothInputDevice.STATE_CONNECTING) {
+                    Log.i(TAG, "Failed to connect BT HID");
+                }
+
+                mManager.getCachedDeviceManager().onProfileStateChanged(device,
+                        Profile.HID, newState);
 
             } else if (action.equals(BluetoothDevice.ACTION_CLASS_CHANGED)) {
                 mManager.getCachedDeviceManager().onBtClassChanged(device);
