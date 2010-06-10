@@ -70,7 +70,7 @@
     <string name="battery_info_status_charging" msgid="1705179948350365604">"Wird geladen"</string>
     <string name="battery_info_status_charging_ac" msgid="5874340256342956252">"(AC)"</string>
     <string name="battery_info_status_charging_usb" msgid="4059070156126770959">"(USB)"</string>
-    <string name="battery_info_status_discharging" msgid="6222697503392774475">"Entladung"</string>
+    <string name="battery_info_status_discharging" msgid="6222697503392774475">"Entlädt"</string>
     <string name="battery_info_status_not_charging" msgid="2820070506621483576">"Wird nicht geladen"</string>
     <string name="battery_info_status_full" msgid="2824614753861462808">"Voll"</string>
     <string name="battery_info_power_unplugged" msgid="5987246575519551081">"Nicht angeschlossen"</string>
@@ -271,7 +271,7 @@
     <string name="lockpassword_ok_label" msgid="313822574062553672">"OK"</string>
     <string name="lockpassword_cancel_label" msgid="8818529276331121899">"Abbrechen"</string>
     <string name="device_admin_title" msgid="3562216873644263804">"Geräteverwaltung"</string>
-    <string name="manage_device_admin" msgid="3864120111085199551">"Geräte-Administratoren wählen"</string>
+    <string name="manage_device_admin" msgid="3864120111085199551">"Geräte-Administratoren"</string>
     <string name="manage_device_admin_summary" msgid="915390201809231575">"Geräteadministratoren hinzufügen oder entfernen"</string>
     <string name="bluetooth_quick_toggle_title" msgid="1037056952714061893">"Bluetooth"</string>
     <string name="bluetooth_quick_toggle_summary" msgid="5293641680139873341">"Bluetooth aktivieren"</string>
@@ -386,14 +386,14 @@
     <string name="wifi_dns2" msgid="1368601006824882659">"DNS 2"</string>
     <string name="wifi_gateway" msgid="163914742461092086">"Gateway"</string>
     <string name="wifi_netmask" msgid="4520635321425529085">"Netmask"</string>
-    <string name="wifi_tether_checkbox_text" msgid="6961605862058056788">"Mobiler Wi-Fi-Hotspot"</string>
+    <string name="wifi_tether_checkbox_text" msgid="6961605862058056788">"Mobiler WLAN-Hotspot"</string>
     <string name="wifi_tether_enabled_subtext" msgid="8948641212931906143">"Mobiler Hotspot <xliff:g id="NETWORK_SSID">%1$s</xliff:g> aktiv"</string>
-    <string name="wifi_tether_failed_subtext" msgid="2654888578056042315">"Fehler beim mobilen Wi-Fi-Hotspot"</string>
-    <string name="wifi_tether_settings_text" msgid="123573487844470195">"Einstellungen des mobilen Wi-Fi-Hotspots"</string>
-    <string name="wifi_tether_settings_subtext" msgid="8064755682383367008">"Mobilen Wi-Fi-Hotspot einrichten &amp; verwalten"</string>
-    <string name="wifi_tether_settings_title" msgid="3749063216348284432">"Einstellungen des mobilen Wi-Fi-Hotspots"</string>
-    <string name="wifi_tether_configure_ap_text" msgid="3474995108398156258">"Wi-Fi-Hotspot konfigurieren"</string>
-    <string name="wifi_tether_configure_subtext" msgid="1927454307836232128">"<xliff:g id="NETWORK_SSID">%1$s</xliff:g> <xliff:g id="NETWORK_SECURITY">%2$s</xliff:g> mobiler Wi-Fi-Hotspot"</string>
+    <string name="wifi_tether_failed_subtext" msgid="2654888578056042315">"Fehler beim mobilen WLAN-Hotspot"</string>
+    <string name="wifi_tether_settings_text" msgid="123573487844470195">"WLAN-Hotspot-Einstellungen"</string>
+    <string name="wifi_tether_settings_subtext" msgid="8064755682383367008">"Mobilen WLAN-Hotspot einrichten &amp; verwalten"</string>
+    <string name="wifi_tether_settings_title" msgid="3749063216348284432">"WLAN-Hotspot-Einstellungen"</string>
+    <string name="wifi_tether_configure_ap_text" msgid="3474995108398156258">"WLAN-Hotspot konfigurieren"</string>
+    <string name="wifi_tether_configure_subtext" msgid="1927454307836232128">"<xliff:g id="NETWORK_SSID">%1$s</xliff:g> <xliff:g id="NETWORK_SECURITY">%2$s</xliff:g> mobiler WLAN-Hotspot"</string>
     <string name="wifi_tether_configure_ssid_default" msgid="8467525402622138547">"AndroidHotspot"</string>
     <string name="sound_settings_title" msgid="8735891486683305886">"Töne"</string>
     <string name="display_settings_title" msgid="1708697328627382561">"Display"</string>
@@ -451,7 +451,7 @@
     <string name="dock_sounds_enable_title" msgid="3659084028644948905">"Ton bei Dock-Anschluss"</string>
     <string name="dock_sounds_enable_summary_on" msgid="8491180514199743771">"Beim Anschließen oder Trennen des Telefons vom Dock Ton abspielen"</string>
     <string name="dock_sounds_enable_summary_off" msgid="3151046599205265919">"Beim Anschließen oder Trennen des Telefons vom Dock keinen Ton abspielen"</string>
-    <string name="sync_settings" msgid="9186125469300013491">"Konten &amp; Synchronisierung"</string>
+    <string name="sync_settings" msgid="9186125469300013491">"Konten&amp;Synchronisierung"</string>
     <string name="sync_settings_summary" msgid="2962179505214965667">"Konten hinzufügen und entfernen und Kontoeinstellungen ändern"</string>
     <string name="search_settings" msgid="1910951467596035063">"Suche"</string>
     <string name="search_settings_summary" msgid="9205656546570654169">"Sucheinstellungen und Suchverlauf verwalten"</string>
@@ -597,8 +597,8 @@
     <string name="tether_settings_title_wifi" msgid="3277144155960302049">"Mobiler Hotspot"</string>
     <string name="tether_settings_title_both" msgid="2734066355556891504">"Tethering &amp; mobiler Hotspot"</string>
     <string name="tether_settings_summary_usb" msgid="3562431455625637370">"Mobile Datenverbindung Ihres Handys über USB freigeben"</string>
-    <string name="tether_settings_summary_wifi" msgid="4690912027002467246">"Mobile Verbindung Ihres Handys als mobilen Wi-Fi-Hotspot freigeben"</string>
-    <string name="tether_settings_summary_both" msgid="7460063951190682635">"Mobile Datenverbindung Ihres Handys über USB oder als mobilen Wi-Fi-Hotspot freigeben"</string>
+    <string name="tether_settings_summary_wifi" msgid="4690912027002467246">"Mobile Verbindung Ihres Handys als mobilen WLAN-Hotspot freigeben"</string>
+    <string name="tether_settings_summary_both" msgid="7460063951190682635">"Mobile Datenverbindung Ihres Handys über USB oder als mobilen WLAN-Hotspot freigeben"</string>
     <string name="usb_title" msgid="7483344855356312510">"USB"</string>
     <string name="usb_tethering_button_text" msgid="585829947108007917">"USB-Tethering"</string>
     <string name="usb_tethering_available_subtext" msgid="156779271296152605">"USB verbunden; auf Tethering überprüfen"</string>
@@ -610,10 +610,10 @@
     <string name="network_settings_title" msgid="7967552516440151852">"Mobile Netzwerke"</string>
     <string name="network_settings_summary" msgid="5149750850846813553">"Optionen für Roaming, Netzwerke, APNs festlegen"</string>
     <string name="location_title" msgid="1029961368397484576">"Mein Standort"</string>
-    <string name="location_network_based" msgid="8815705866861993344">"Drahtlosnetzw. verw."</string>
+    <string name="location_network_based" msgid="8815705866861993344">"Drahtlosnetzwerke"</string>
     <string name="location_networks_disabled" msgid="2708968452901433980">"Standort über Drahtlosnetzwerke bestimmen (z. B. in Google Maps)"</string>
     <string name="location_neighborhood_level" msgid="4656658097932515921">"Standort bestimmt von WLAN und/oder mobilen Netzwerken"</string>
-    <string name="location_gps" msgid="6296125378829097831">"GPS-Sat. verwenden"</string>
+    <string name="location_gps" msgid="6296125378829097831">"GPS-Satelliten"</string>
     <string name="location_street_level" msgid="6460740847018275745">"Auf Straßenebene lokalisieren (deaktivieren, um Akku zu sparen)"</string>
     <string name="location_gps_disabled" msgid="6632537158777308128">"Auf Straßenebene lokalisieren (höherer Akkuverbrauch, im Freien)"</string>
     <string name="assisted_gps" msgid="4649317129586736885">"Unterstütztes GPS verwenden"</string>
@@ -880,24 +880,24 @@
     <string name="bluetooth_on_time" msgid="4478515071957280711">"WLAN-Aktivzeit"</string>
     <string name="usage_name_percent" msgid="7976919382448235858">"<xliff:g id="NAME">%1$s</xliff:g> - <xliff:g id="NUMBER">%2$s</xliff:g><xliff:g id="PERCENT">%%</xliff:g>"</string>
     <string name="details_title" msgid="7564809986329021063">"Akkuverbrauch - Details"</string>
-    <string name="details_subtitle" msgid="32593908269911734">"Details verwenden"</string>
+    <string name="details_subtitle" msgid="32593908269911734">"Details"</string>
     <string name="controls_subtitle" msgid="390468421138288702">"Energieverbrauch anpassen"</string>
     <string name="packages_subtitle" msgid="4736416171658062768">"Enthaltene Pakete"</string>
     <string name="power_screen" msgid="2353149143338929583">"Display"</string>
     <string name="power_wifi" msgid="2382791137776486974">"WLAN"</string>
     <string name="power_bluetooth" msgid="4373329044379008289">"Bluetooth"</string>
-    <string name="power_cell" msgid="6596471490976003056">"Handy-Standby"</string>
+    <string name="power_cell" msgid="6596471490976003056">"Mobilfunk-Standby"</string>
     <string name="power_phone" msgid="5392641106474567277">"Anrufe"</string>
     <string name="power_idle" msgid="9055659695602194990">"Telefon inaktiv"</string>
     <string name="usage_type_cpu" msgid="715162150698338714">"CPU insgesamt"</string>
-    <string name="usage_type_cpu_foreground" msgid="6500579611933211831">"CPU-Vordergrund"</string>
+    <string name="usage_type_cpu_foreground" msgid="6500579611933211831">"CPU Vordergrund"</string>
     <string name="usage_type_gps" msgid="7989688715128160790">"GPS"</string>
     <string name="usage_type_phone" msgid="9108247984998041853">"Telefon"</string>
     <string name="usage_type_data_send" msgid="2857401966985425427">"Gesendete Daten"</string>
     <string name="usage_type_data_recv" msgid="7251090882025234185">"Empfangene Daten"</string>
     <string name="usage_type_audio" msgid="6957269406840886290">"Audio"</string>
     <string name="usage_type_video" msgid="4295357792078579944">"Video"</string>
-    <string name="usage_type_on_time" msgid="3351200096173733159">"Aktiviert"</string>
+    <string name="usage_type_on_time" msgid="3351200096173733159">"Laufzeit"</string>
     <string name="usage_type_no_coverage" msgid="3797004252954385053">"Zeit ohne Signal"</string>
     <string name="battery_action_stop" msgid="649958863744041872">"Stoppen erzwingen"</string>
     <string name="battery_action_app_details" msgid="3275013531871113681">"Anwendungsinfo"</string>
@@ -916,7 +916,7 @@
     <string name="battery_desc_bluetooth" msgid="7535520658674621902">"Akkuverbrauch durch Bluetooth"</string>
     <string name="battery_sugg_bluetooth_basic" msgid="817276933922157788">"Bluetooth bei Nichtverwendung deaktivieren"</string>
     <string name="battery_sugg_bluetooth_headset" msgid="8214816222115517479">"Mit einem anderen Bluetooth-Gerät verbinden"</string>
-    <string name="battery_desc_apps" msgid="8123202939321333639">"Akkuverbrauch bei ausgeführten Anwendungen"</string>
+    <string name="battery_desc_apps" msgid="8123202939321333639">"Akkuverbrauch durch ausgeführte Anwendungen"</string>
     <string name="battery_sugg_apps_info" msgid="6065882899391322442">"Anwendung beenden oder deinstallieren"</string>
     <string name="battery_sugg_apps_gps" msgid="4145005297393800223">"GPS bei Nichtverwendung deaktivieren"</string>
     <string name="battery_sugg_apps_settings" msgid="8021302847272481168">"Die Anwendung bietet unter Umständen Einstellungen für einen geringeren Akkuverbrauch."</string>
@@ -1080,11 +1080,8 @@
     <string name="emergency_tone_summary" msgid="722259232924572153">"Verhalten bei einem Notruf festlegen"</string>
     <string name="privacy_settings" msgid="9206631214140954954">"Datenschutz"</string>
     <string name="privacy_settings_title" msgid="1987089301293213705">"Datenschutzeinstellungen"</string>
-    <string name="backup_section_title" msgid="717834414028702406">"Sicherung und Wiederherstellung"</string>
     <string name="personal_data_section_title" msgid="7815209034443782061">"Persönliche Daten"</string>
-    <string name="backup_settings_title" msgid="2968262658155327829">"Einstellungen sichern"</string>
     <string name="auto_restore_title" msgid="5397528966329126506">"Autom. Wiederherst."</string>
-    <string name="auto_restore_summary" msgid="2029683590724508019">"Anwendungsdaten nach Installation der Anwendungen aus Sicherung wiederherstellen"</string>
     <string name="backup_erase_dialog_title" msgid="3438255037256586237">"Sicherung"</string>
     <string name="backup_erase_dialog_message" msgid="2948090854996352245">"Möchten Sie wirklich die Sicherung Ihrer Einstellungen beenden und alle Kopien auf den Google-Servern löschen?"</string>
     <string name="device_admin_settings_title" msgid="1335557832906433309">"Einstellungen für die Geräteverwaltung"</string>
