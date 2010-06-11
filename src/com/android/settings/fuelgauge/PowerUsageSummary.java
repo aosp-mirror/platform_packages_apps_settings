@@ -18,10 +18,6 @@ package com.android.settings.fuelgauge;
 
 import android.content.Context;
 import android.content.Intent;
-import android.content.pm.ApplicationInfo;
-import android.content.pm.PackageInfo;
-import android.content.pm.PackageManager;
-import android.content.pm.PackageManager.NameNotFoundException;
 import android.graphics.drawable.Drawable;
 import android.hardware.SensorManager;
 import android.os.BatteryStats;
@@ -53,7 +49,6 @@ import java.io.StringWriter;
 import java.io.Writer;
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -86,19 +81,11 @@ public class PowerUsageSummary extends PreferenceActivity implements Runnable {
     private double mTotalPower;
     private PowerProfile mPowerProfile;
 
-    private HashMap<String,UidToDetail> mUidCache = new HashMap<String,UidToDetail>();
-
     /** Queue for fetching name and icon for an application */
     private ArrayList<BatterySipper> mRequestQueue = new ArrayList<BatterySipper>();
     private Thread mRequestThread;
     private boolean mAbort;
     
-    static class UidToDetail {
-        String name;
-        String packageName;
-        Drawable icon;
-    }
-
     @Override
     protected void onCreate(Bundle icicle) {
         super.onCreate(icicle);
@@ -267,6 +254,10 @@ public class PowerUsageSummary extends PreferenceActivity implements Runnable {
 
         mAppListGroup.setOrderingAsAdded(false);
 
+        BatteryHistoryPreference hist = new BatteryHistoryPreference(this, mStats);
+        hist.setOrder(-1);
+        mAppListGroup.addPreference(hist);
+        
         Collections.sort(mUsageList);
         for (BatterySipper sipper : mUsageList) {
             if (sipper.getSortValue() < MIN_POWER_THRESHOLD) continue;
@@ -283,7 +274,7 @@ public class PowerUsageSummary extends PreferenceActivity implements Runnable {
                 pref.setKey(Integer.toString(sipper.uidObj.getUid()));
             }
             mAppListGroup.addPreference(pref);
-            if (mAppListGroup.getPreferenceCount() > MAX_ITEMS_TO_LIST) break;
+            if (mAppListGroup.getPreferenceCount() > (MAX_ITEMS_TO_LIST+1)) break;
         }
         if (DEBUG) setTitle("Battery total uAh = " + ((mTotalPower * 1000) / 3600));
         synchronized (mRequestQueue) {
@@ -408,7 +399,8 @@ public class PowerUsageSummary extends PreferenceActivity implements Runnable {
 
             // Add the app to the list if it is consuming power
             if (power != 0) {
-                BatterySipper app = new BatterySipper(packageWithHighestDrain, DrainType.APP, 0, u,
+                BatterySipper app = new BatterySipper(this, mRequestQueue, mHandler,
+                        packageWithHighestDrain, DrainType.APP, 0, u,
                         new double[] {power});
                 app.cpuTime = cpuTime;
                 app.gpsTime = gpsTime;
@@ -549,7 +541,8 @@ public class PowerUsageSummary extends PreferenceActivity implements Runnable {
             double power) {
         if (power > mMaxPower) mMaxPower = power;
         mTotalPower += power;
-        BatterySipper bs = new BatterySipper(label, drainType, iconId, null, new double[] {power});
+        BatterySipper bs = new BatterySipper(this, mRequestQueue, mHandler,
+                label, drainType, iconId, null, new double[] {power});
         bs.usageTime = time;
         bs.iconId = iconId;
         mUsageList.add(bs);
@@ -569,156 +562,6 @@ public class PowerUsageSummary extends PreferenceActivity implements Runnable {
         }
     }
 
-    class BatterySipper implements Comparable<BatterySipper> {
-        String name;
-        Drawable icon;
-        int iconId; // For passing to the detail screen.
-        Uid uidObj;
-        double value;
-        double[] values;
-        DrainType drainType;
-        long usageTime;
-        long cpuTime;
-        long gpsTime;
-        long cpuFgTime;
-        double percent;
-        double noCoveragePercent;
-        String defaultPackageName;
-
-        BatterySipper(String label, DrainType drainType, int iconId, Uid uid, double[] values) {
-            this.values = values;
-            name = label;
-            this.drainType = drainType;
-            if (iconId > 0) {
-                icon = getResources().getDrawable(iconId);
-            }
-            if (values != null) value = values[0];
-            if ((label == null || iconId == 0) && uid != null) {
-                getQuickNameIconForUid(uid);
-            }
-            uidObj = uid;
-        }
-
-        double getSortValue() {
-            return value;
-        }
-
-        double[] getValues() {
-            return values;
-        }
-
-        Drawable getIcon() {
-            return icon;
-        }
-
-        public int compareTo(BatterySipper other) {
-            // Return the flipped value because we want the items in descending order
-            return (int) (other.getSortValue() - getSortValue());
-        }
-
-        void getQuickNameIconForUid(Uid uidObj) {
-            final int uid = uidObj.getUid();
-            final String uidString = Integer.toString(uid);
-            if (mUidCache.containsKey(uidString)) {
-                UidToDetail utd = mUidCache.get(uidString);
-                defaultPackageName = utd.packageName;
-                name = utd.name;
-                icon = utd.icon;
-                return;
-            }
-            PackageManager pm = getPackageManager();
-            final Drawable defaultActivityIcon = pm.getDefaultActivityIcon();
-            String[] packages = pm.getPackagesForUid(uid);
-            icon = pm.getDefaultActivityIcon();
-            if (packages == null) {
-                //name = Integer.toString(uid);
-                if (uid == 0) {
-                    name = getResources().getString(R.string.process_kernel_label);
-                } else if ("mediaserver".equals(name)) {
-                    name = getResources().getString(R.string.process_mediaserver_label);
-                }
-                iconId = R.drawable.ic_power_system;
-                icon = getResources().getDrawable(iconId);
-                return;
-            } else {
-                //name = packages[0];
-            }
-            synchronized (mRequestQueue) {
-                mRequestQueue.add(this);
-            }
-        }
-
-        /**
-         * Sets name and icon
-         * @param uid Uid of the application
-         */
-        void getNameIcon() {
-            PackageManager pm = getPackageManager();
-            final int uid = uidObj.getUid();
-            final Drawable defaultActivityIcon = pm.getDefaultActivityIcon();
-            String[] packages = pm.getPackagesForUid(uid);
-            if (packages == null) {
-                name = Integer.toString(uid);
-                return;
-            }
-
-            String[] packageLabels = new String[packages.length];
-            System.arraycopy(packages, 0, packageLabels, 0, packages.length);
-
-            int preferredIndex = -1;
-            // Convert package names to user-facing labels where possible
-            for (int i = 0; i < packageLabels.length; i++) {
-                // Check if package matches preferred package
-                if (packageLabels[i].equals(name)) preferredIndex = i;
-                try {
-                    ApplicationInfo ai = pm.getApplicationInfo(packageLabels[i], 0);
-                    CharSequence label = ai.loadLabel(pm);
-                    if (label != null) {
-                        packageLabels[i] = label.toString();
-                    }
-                    if (ai.icon != 0) {
-                        defaultPackageName = packages[i];
-                        icon = ai.loadIcon(pm);
-                        break;
-                    }
-                } catch (NameNotFoundException e) {
-                }
-            }
-            if (icon == null) icon = defaultActivityIcon;
-
-            if (packageLabels.length == 1) {
-                name = packageLabels[0];
-            } else {
-                // Look for an official name for this UID.
-                for (String pkgName : packages) {
-                    try {
-                        final PackageInfo pi = pm.getPackageInfo(pkgName, 0);
-                        if (pi.sharedUserLabel != 0) {
-                            final CharSequence nm = pm.getText(pkgName,
-                                    pi.sharedUserLabel, pi.applicationInfo);
-                            if (nm != null) {
-                                name = nm.toString();
-                                if (pi.applicationInfo.icon != 0) {
-                                    defaultPackageName = pkgName;
-                                    icon = pi.applicationInfo.loadIcon(pm);
-                                }
-                                break;
-                            }
-                        }
-                    } catch (PackageManager.NameNotFoundException e) {
-                    }
-                }
-            }
-            final String uidString = Integer.toString(uidObj.getUid());
-            UidToDetail utd = new UidToDetail();
-            utd.name = name;
-            utd.icon = icon;
-            utd.packageName = defaultPackageName;
-            mUidCache.put(uidString, utd);
-            mHandler.sendMessage(mHandler.obtainMessage(MSG_UPDATE_NAME_ICON, this));
-        }
-    }
-
     public void run() {
         while (true) {
             BatterySipper bs;
@@ -733,7 +576,7 @@ public class PowerUsageSummary extends PreferenceActivity implements Runnable {
         }
     }
 
-    private static final int MSG_UPDATE_NAME_ICON = 1;
+    static final int MSG_UPDATE_NAME_ICON = 1;
 
     Handler mHandler = new Handler() {
 

@@ -712,13 +712,6 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".battery_history.BatteryHistory" android:label="@string/battery_history_label">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.DEVELOPMENT_PREFERENCE" />
-            </intent-filter>
-        </activity>
-
         <activity android:name="Display" android:label="@string/display_label"
                 android:configChanges="fontScale">
             <intent-filter>
@@ -788,6 +781,7 @@
         </activity>
 
         <activity android:name=".fuelgauge.PowerUsageSummary"
+                android:theme="@android:style/Theme.NoTitleBar"
                 android:label="@string/power_usage_summary_title"
                 android:clearTaskOnLaunch="true"
                 >
