@@ -431,8 +431,6 @@
     <string name="device_info_label">Device info</string>
     <!-- The title of the activity to see battery info. -->
     <string name="battery_info_label">Battery info</string>
-    <!-- The title of the activity to see battery history. -->
-    <string name="battery_history_label">Battery history</string>
     <!-- The title of the activity to adjust display settings -->
     <string name="display_label">Display</string>
     <!-- The title of the activity to see phone info -->
@@ -1752,19 +1750,6 @@ found in the list of installed applications.</string>
     <string name="runningservices_settings_summary">View and control currently running services</string>
     <!-- Label for a service item when it is restarting -->
     <string name="service_restarting">Restarting</string>
-    <!-- Running services, body text when there are no services to show -->
-    <string name="no_running_services">No running services</string>
-    <!-- Running services, title of dialog to stop a service -->
-    <string name="confirm_stop_service">Stop service?</string>
-    <!-- Running services, message of dialog to stop a service -->
-    <string name="confirm_stop_service_msg">The service will no longer run until
-            started again.  This may have undesirable
-            consequences on the application
-            <xliff:g id="application">%1$s</xliff:g>.</string>
-    <!-- Running services, button to stop a service -->
-    <string name="confirm_stop_stop">Stop</string>
-    <!-- Running services, button to cancel stopping of a service -->
-    <string name="confirm_stop_cancel">Cancel</string>
     <!-- Running services, description for a service in the started state -->
     <string name="service_started_by_app">Started by application.</string>
     <!-- Running services, description for a service in the started state -->
@@ -1799,13 +1784,13 @@ found in the list of installed applications.</string>
     <!-- Running service details, stop a service that has started itself. -->
     <string name="service_stop">Stop</string>
     <!-- Running service details, manage a service that is running for some other reason. -->
-    <string name="service_manage">Manage</string>
+    <string name="service_manage">Settings</string>
     <!-- Running service details, default description for services that are started. -->
     <string name="service_stop_description">This service was started by its
-        application.  Stopping it may cause the application to misbehave.</string>
+        application.  Stopping it may cause the application to fail.</string>
     <!-- Running service details, default description for services that are managed. -->
     <string name="service_manage_description"><xliff:g id="client_name">%1$s</xliff:g>:
-        currently in use.  You can manage your settings to stop it.</string>
+        currently in use.  Touch Settings to control it.</string>
     <!-- Description of the main process in the details. -->
     <string name="main_running_process_description">Main process that is in use.</string>
     <!-- Message that a process's service is in use. -->
@@ -1953,39 +1938,6 @@ found in the list of installed applications.</string>
          the final name for Gadgets/Widgets, so please translate both for now. -->
     <string name="widget_picker_title">Choose widget</string>
 
-    <!-- Used to display "Details for UID 1234" in BatteryHistory -->
-    <string name="battery_history_details_for">Details for UID <xliff:g id="number" example="1234">%d</xliff:g></string>
-
-    <!-- Used to name a set of apps that share a user id in BatteryHistory -->
-    <string name="battery_history_uid">UID <xliff:g id="user_id">%1$d</xliff:g></string>
-
-    <!-- Used as a title for the network usage details screen in BatteryHistory -->
-    <string name="battery_history_network_usage">Network usage details for <xliff:g id="app_name">%1$s</xliff:g>:</string>
-
-    <!-- Used to show the number of bytes received by an app over the network in BatteryHistory -->
-    <string name="battery_history_bytes_received">Bytes received: <xliff:g id="bytes">%1$d</xliff:g></string>
-
-    <!-- Used to show the number of bytes sent by an app over the network in BatteryHistory -->
-    <string name="battery_history_bytes_sent">Bytes sent: <xliff:g id="bytes">%1$d</xliff:g></string>
-
-    <!-- Used to show the number of bytes sent and received by an app over the network in BatteryHistory -->
-    <string name="battery_history_bytes_total">Total bytes: <xliff:g id="bytes">%1$d</xliff:g></string>
-
-    <!-- Used as a title for the cpu usage details screen in BatteryHistory -->
-    <string name="battery_history_cpu_usage">CPU usage details for <xliff:g id="app_name">%1$s</xliff:g>:</string>
-
-    <!-- Used to show the time spent in user code for a given app in BatteryHistory -->
-    <string name="battery_history_user_time">User time: </string>
-
-    <!-- Used to show the time spent in system code for a given app in BatteryHistory -->
-    <string name="battery_history_system_time">System time: </string>
-
-    <!-- Used to show the time spent in user or system code for a given app in BatteryHistory -->
-    <string name="battery_history_total_time">Total time: </string>
-
-    <!-- Used to show the number of times an app has been started in BatteryHistory -->
-    <string name="battery_history_starts">Starts: <xliff:g id="starts">%1$d</xliff:g></string>
-
     <!-- Used to show an amount of time in the form "d days, h hours, m minutes, s seconds" in BatteryHistory -->
     <string name="battery_history_days"><xliff:g id="days">%1$d</xliff:g>d <xliff:g id="hours">%2$d</xliff:g>h <xliff:g id="minutes">%3$d</xliff:g>m <xliff:g id="seconds">%4$d</xliff:g>s</string>
 
@@ -1997,52 +1949,7 @@ found in the list of installed applications.</string>
 
     <!-- Used to show an amount of time in the form "s seconds" in BatteryHistory -->
     <string name="battery_history_seconds"><xliff:g id="seconds">%1$d</xliff:g>s</string>
-
-    <!-- Used to head a list of packages that share a given user id BatteryHistory -->
-    <string name="battery_history_packages_sharing_this_uid">Packages sharing this UID:</string>
-
-    <!-- Used when no battery data available in BatteryHistory -->
-    <string name="battery_history_no_data">No battery usage data available</string>
-
-    <!-- Used for Sensor detail screen in BatteryHistory -->
-    <string name="battery_history_sensor">Sensor:</string>
-
-    <!-- Used for Wakelock detail screen in BatteryHistory -->
-    <string name="battery_history_wakelock">Partial Wakelock:</string>
-
-    <!-- Used for Sensor detail screen in BatteryHistory -->
-    <string name="battery_history_used_by_packages">Sensor used by packages:</string>
-
-    <!-- Used for Sensor detail screen in BatteryHistory -->
-    <string name="battery_history_sensor_usage">Used <xliff:g id="count">%1$d</xliff:g> times by <xliff:g id="package">%2$s</xliff:g></string>
-
-    <!-- Used for Sensor detail screen in BatteryHistory -->
-    <string name="battery_history_sensor_usage_multi">Used <xliff:g id="count">%1$d</xliff:g> times by one of:</string>
-
-    <!-- Used for label of awake bar in BatteryHistory -->
-    <string name="battery_history_awake_label">Running</string>
-
-    <!-- Used for label of screen on bar in BatteryHistory -->
-    <string name="battery_history_screen_on_label">Screen on</string>
-
-    <!-- Used for label of phone on bar in BatteryHistory -->
-    <string name="battery_history_phone_on_label">Phone on</string>
-
-    <!-- Used for awake time message in BatteryHistory -->
-    <string name="battery_history_awake">Time spent without sleeping:</string>
-
-    <!-- Used for Screen on time message in BatteryHistory -->
-    <string name="battery_history_screen_on">Time spent with screen on:</string>
-
-    <!-- Used for Phone on time message in BatteryHistory -->
-    <string name="battery_history_phone_on">Time spent with phone on:</string>
-
-    <!-- Used for Screen on time message in BatteryHistory -->
-    <string name="battery_history_screen_on_battery">On battery:</string>
-
-    <!-- XXX remove? Used for Screen on time message in BatteryHistory -->
-    <string name="battery_history_screen_on_plugged">Plugged in:</string>
-
+    
     <!-- XXX remove? Strings used for displaying usage statistics -->
     <string name="usage_stats_label">Usage statistics</string>
 
@@ -2109,6 +2016,8 @@ found in the list of installed applications.</string>
     <string name="battery_since_unplugged">Battery use since unplugged</string>
     <!-- Battery usage since user reset the stats -->
     <string name="battery_since_reset">Battery use since reset</string>
+    <!-- Battery usage on battery duration -->
+    <string name="battery_stats_on_battery"><xliff:g id="time">%1$s</xliff:g> on battery</string>
     <!-- Battery usage duration -->
     <string name="battery_stats_duration"><xliff:g id="time">%1$s</xliff:g> since unplugged</string>
     <!-- Battery usage during last unplugged period -->

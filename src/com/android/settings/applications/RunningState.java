@@ -418,7 +418,7 @@ public class RunningState {
         boolean changed = false;
         
         List<ActivityManager.RunningServiceInfo> services 
-                = am.getRunningServices(RunningServices.MAX_SERVICES);
+                = am.getRunningServices(RunningProcessesView.MAX_SERVICES);
         final int NS = services != null ? services.size() : 0;
         for (int i=0; i<NS; i++) {
             ActivityManager.RunningServiceInfo si = services.get(i);
@@ -671,7 +671,7 @@ public class RunningState {
                     numForegroundProcesses++;
                     mAllProcessItems.add(proc);
                 } else {
-                    Log.i(RunningServices.TAG, "Unknown non-service process: "
+                    Log.i("RunningState", "Unknown non-service process: "
                             + proc.mProcessName + " #" + proc.mPid);
                 }
             } else {

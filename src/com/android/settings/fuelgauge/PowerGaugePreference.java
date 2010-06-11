@@ -17,9 +17,6 @@
 package com.android.settings.fuelgauge;
 
 import android.content.Context;
-import android.graphics.Canvas;
-import android.graphics.ColorFilter;
-import android.graphics.PixelFormat;
 import android.graphics.drawable.Drawable;
 import android.preference.Preference;
 import android.view.View;
@@ -27,7 +24,6 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.android.settings.R;
-import com.android.settings.fuelgauge.PowerUsageSummary.BatterySipper;
 
 /**
  * Custom preference for displaying power consumption as a bar and an icon on the left for the
