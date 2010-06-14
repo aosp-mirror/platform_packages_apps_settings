@@ -20,6 +20,20 @@
     android:title="@string/settings_label"
     android:key="parent">
 
+        <!-- Operator hook -->
+
+        <com.android.settings.IconPreferenceScreen
+            android:key="operator_settings">
+            <intent android:action="com.android.settings.OPERATOR_APPLICATION_SETTING" />
+        </com.android.settings.IconPreferenceScreen>
+
+        <!-- Manufacturer hook -->
+
+        <com.android.settings.IconPreferenceScreen
+            android:key="manufacturer_settings">
+            <intent android:action="com.android.settings.MANUFACTURER_APPLICATION_SETTING" />
+        </com.android.settings.IconPreferenceScreen>
+
         <com.android.settings.IconPreferenceScreen
             android:title="@string/radio_controls_title"
             settings:icon="@drawable/ic_settings_wireless">

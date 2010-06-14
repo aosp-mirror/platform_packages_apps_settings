@@ -30,6 +30,9 @@ public class Settings extends PreferenceActivity {
     private static final String KEY_SEARCH_SETTINGS = "search_settings";
     private static final String KEY_DOCK_SETTINGS = "dock_settings";
     
+    private static final String KEY_OPERATOR_SETTINGS = "operator_settings";
+    private static final String KEY_MANUFACTURER_SETTINGS = "manufacturer_settings";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -46,6 +49,11 @@ public class Settings extends PreferenceActivity {
         if (getResources().getBoolean(R.bool.has_dock_settings) == false && dockSettings != null) {
             parent.removePreference(dockSettings);
         }
+
+        Utils.updatePreferenceToSpecificActivityFromMetaDataOrRemove(this, parent,
+                KEY_OPERATOR_SETTINGS);
+        Utils.updatePreferenceToSpecificActivityFromMetaDataOrRemove(this, parent,
+                KEY_MANUFACTURER_SETTINGS);
     }
     
     @Override
