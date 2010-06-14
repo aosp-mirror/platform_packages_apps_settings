@@ -973,7 +973,7 @@ public class RunningServices extends ListActivity
                     && buffer[index] <= '9') {
                     index++;
                 }
-                String str = new String(buffer, 0, start, index-start);
+                String str = new String(buffer, start, index-start);
                 return ((long)Integer.parseInt(str)) * 1024;
             }
             index++;
