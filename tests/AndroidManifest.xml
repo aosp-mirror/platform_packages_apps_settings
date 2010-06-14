@@ -30,7 +30,28 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name="Operator" android:label="Operator Hook Test" >
+            <intent-filter>
+                <action android:name="com.android.settings.OPERATOR_APPLICATION_SETTING" />
+            </intent-filter>
+            <meta-data android:name="com.android.settings.title" android:resource="@string/operator_settings_title" />
+            <meta-data android:name="com.android.settings.summary" android:resource="@string/operator_settings_summary" />
+            <meta-data android:name="com.android.settings.icon" android:resource="@drawable/ic_settings_applications" />
+        </activity>
+        <activity android:name="Manufacturer" android:label="Manufacturer Hook Test" >
+            <intent-filter>
+                <action android:name="com.android.settings.MANUFACTURER_APPLICATION_SETTING" />
+            </intent-filter>
+            <meta-data android:name="com.android.settings.title" android:resource="@string/manufacturer_settings_title" />
+            <meta-data android:name="com.android.settings.summary" android:resource="@string/manufacturer_settings_summary" />
+            <meta-data android:name="com.android.settings.icon" android:resource="@drawable/ic_settings_applications" />
+        </activity>
     </application>
+
+    <instrumentation android:name="android.test.InstrumentationTestRunner"
+        android:targetPackage="com.android.settings"
+        android:label="Settings App Tests">
+    </instrumentation>
 
     <instrumentation android:name="SettingsLaunchPerformance"
         android:targetPackage="com.android.settings"
