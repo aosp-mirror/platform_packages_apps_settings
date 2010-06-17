@@ -71,7 +71,7 @@ public class PowerUsageSummary extends PreferenceActivity implements Runnable {
 
     private PreferenceGroup mAppListGroup;
 
-    private int mStatsType = BatteryStats.STATS_UNPLUGGED;
+    private int mStatsType = BatteryStats.STATS_SINCE_CHARGED;
 
     private static final int MIN_POWER_THRESHOLD = 5;
     private static final int MAX_ITEMS_TO_LIST = 10;
@@ -115,6 +115,9 @@ public class PowerUsageSummary extends PreferenceActivity implements Runnable {
 
     @Override
     public boolean onPreferenceTreeClick(PreferenceScreen preferenceScreen, Preference preference) {
+        if (!(preference instanceof PowerGaugePreference)) {
+            return false;
+        }
         PowerGaugePreference pgp = (PowerGaugePreference) preference;
         BatterySipper sipper = pgp.getInfo();
         Intent intent = new Intent(this, PowerUsageDetail.class);
@@ -213,7 +216,7 @@ public class PowerUsageSummary extends PreferenceActivity implements Runnable {
     @Override
     public boolean onPrepareOptionsMenu(Menu menu) {
         if (DEBUG) {
-            menu.findItem(MENU_STATS_TYPE).setTitle(mStatsType == BatteryStats.STATS_TOTAL
+            menu.findItem(MENU_STATS_TYPE).setTitle(mStatsType == BatteryStats.STATS_SINCE_CHARGED
                     ? R.string.menu_stats_unplugged
                     : R.string.menu_stats_total);
         }
@@ -224,10 +227,10 @@ public class PowerUsageSummary extends PreferenceActivity implements Runnable {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case MENU_STATS_TYPE:
-                if (mStatsType == BatteryStats.STATS_TOTAL) {
-                    mStatsType = BatteryStats.STATS_UNPLUGGED;
+                if (mStatsType == BatteryStats.STATS_SINCE_CHARGED) {
+                    mStatsType = BatteryStats.STATS_SINCE_UNPLUGGED;
                 } else {
-                    mStatsType = BatteryStats.STATS_TOTAL;
+                    mStatsType = BatteryStats.STATS_SINCE_CHARGED;
                 }
                 refreshStats();
                 return true;

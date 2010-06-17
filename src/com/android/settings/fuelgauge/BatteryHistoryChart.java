@@ -23,20 +23,28 @@ import android.content.res.ColorStateList;
 import android.content.res.TypedArray;
 import android.graphics.Canvas;
 import android.graphics.Paint;
+import android.graphics.Path;
 import android.graphics.Typeface;
 import android.os.BatteryStats;
 import android.os.SystemClock;
-import android.os.BatteryStats.BatteryHistoryRecord;
+import android.os.BatteryStats.HistoryItem;
 import android.text.TextPaint;
 import android.util.AttributeSet;
+import android.util.TypedValue;
 import android.view.View;
 
 public class BatteryHistoryChart extends View {
-    private static final int SANS = 1;
-    private static final int SERIF = 2;
-    private static final int MONOSPACE = 3;
+    static final int SANS = 1;
+    static final int SERIF = 2;
+    static final int MONOSPACE = 3;
+
+    static final int BATTERY_WARN = 29;
+    static final int BATTERY_CRITICAL = 14;
     
-    final Paint mBatteryPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
+    final Paint mBatteryBackgroundPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
+    final Paint mBatteryGoodPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
+    final Paint mBatteryWarnPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
+    final Paint mBatteryCriticalPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
     final TextPaint mTextPaint = new TextPaint(Paint.ANTI_ALIAS_FLAG);
     
     int mFontSize;
@@ -55,10 +63,26 @@ public class BatteryHistoryChart extends View {
     int mBatLow;
     int mBatHigh;
     
+    final Path mBatLevelPath = new Path();
+    int[] mBatLevelX;
+    int[] mBatLevelY;
+    byte[] mBatLevelValue;
+    int mNumBatLevel;
+    
     public BatteryHistoryChart(Context context, AttributeSet attrs) {
         super(context, attrs);
         
-        mBatteryPaint.setARGB(255, 255, 128, 128);
+        mBatteryBackgroundPaint.setARGB(255, 128, 128, 128);
+        mBatteryBackgroundPaint.setStyle(Paint.Style.FILL);
+        mBatteryGoodPaint.setARGB(128, 0, 255, 0);
+        int lineWidth = (int)TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP,
+                2, getResources().getDisplayMetrics());
+        if (lineWidth <= 0) lineWidth = 1;
+        mBatteryGoodPaint.setStrokeWidth(lineWidth);
+        mBatteryWarnPaint.setARGB(128, 255, 255, 0);
+        mBatteryWarnPaint.setStrokeWidth(lineWidth);
+        mBatteryCriticalPaint.setARGB(192, 255, 0, 0);
+        mBatteryCriticalPaint.setStrokeWidth(lineWidth);
         
         mTextPaint.density = getResources().getDisplayMetrics().density;
         mTextPaint.setCompatibilityScaling(
@@ -199,30 +223,33 @@ public class BatteryHistoryChart extends View {
         mStats = stats;
         
         long uSecTime = mStats.computeBatteryRealtime(SystemClock.elapsedRealtime() * 1000,
-                BatteryStats.STATS_UNPLUGGED);
+                BatteryStats.STATS_SINCE_CHARGED);
         mStatsPeriod = uSecTime;
         String durationString = Utils.formatElapsedTime(getContext(), mStatsPeriod / 1000);
         mDurationString = getContext().getString(R.string.battery_stats_on_battery,
                 durationString);
         
-        BatteryStats.BatteryHistoryRecord rec = stats.getHistory();
+        BatteryStats.HistoryItem rec = stats.getHistory();
         if (rec != null) {
             mHistStart = rec.time;
             mBatLow = mBatHigh = rec.batteryLevel;
         }
         int pos = 0;
-        int lastUnplugged = 0;
+        int lastInteresting = 0;
+        byte lastLevel = -1;
         mBatLow = 0;
         mBatHigh = 100;
         while (rec != null) {
             pos++;
-            if ((rec.states&BatteryHistoryRecord.STATE_BATTERY_PLUGGED_FLAG) == 0) {
-                lastUnplugged = pos;
+            if (rec.cmd == HistoryItem.CMD_UPDATE && (rec.batteryLevel != lastLevel
+                    || pos == 1)) {
+                lastLevel = rec.batteryLevel;
+                lastInteresting = pos;
                 mHistEnd = rec.time;
             }
             rec = rec.next;
         }
-        mNumHist = lastUnplugged;
+        mNumHist = lastInteresting;
         
         if (mHistEnd <= mHistStart) mHistEnd = mHistStart+1;
     }
@@ -238,6 +265,83 @@ public class BatteryHistoryChart extends View {
     @Override
     protected void onSizeChanged(int w, int h, int oldw, int oldh) {
         super.onSizeChanged(w, h, oldw, oldh);
+        
+        mBatLevelPath.reset();
+        mBatLevelX = new int[w+5];
+        mBatLevelY = new int[w+5];
+        mBatLevelValue = new byte[w+5];
+        mNumBatLevel = 0;
+        
+        final long timeStart = mHistStart;
+        final long timeChange = mHistEnd-mHistStart;
+        
+        final int batLow = mBatLow;
+        final int batChange = mBatHigh-mBatLow;
+        
+        BatteryStats.HistoryItem rec = mStats.getHistory();
+        int x = 0, y = 0, lastX = -1, lastY = -1, lastBatX = -1, lastBatY = -1;
+        byte lastBatValue = 0;
+        int i = 0, num = 0;
+        boolean first = true;
+        final int N = mNumHist;
+        while (rec != null && i < N) {
+            if (rec.cmd == BatteryStats.HistoryItem.CMD_UPDATE) {
+                x = (int)(((rec.time-timeStart)*w)/timeChange);
+                y = h-1 - ((rec.batteryLevel-batLow)*(h-3))/batChange;
+                if (first) {
+                    first = false;
+                    mBatLevelPath.moveTo(x, y);
+                    mBatLevelX[mNumBatLevel] = x;
+                    mBatLevelY[mNumBatLevel] = y;
+                    mBatLevelValue[mNumBatLevel] = lastBatValue = rec.batteryLevel;
+                    mNumBatLevel++;
+                    lastX = lastBatX = x;
+                    lastY = lastBatY = y;
+                } else {
+                    if (lastX != x) {
+                        // We have moved by at least a pixel.
+                        if (lastY == y) {
+                            // Battery level is still the same; don't plot,
+                            // but remember it.
+                            lastBatX = x;
+                            lastBatY = y;
+                        } else {
+                            if (lastBatX >= 0) {
+                                // Level stayed the same up to here; put in line.
+                                mBatLevelPath.lineTo(lastBatX, lastBatY);
+                                mBatLevelX[mNumBatLevel] = lastBatX;
+                                mBatLevelY[mNumBatLevel] = lastBatY;
+                                mBatLevelValue[mNumBatLevel] = lastBatValue;
+                                mNumBatLevel++;
+                                num++;
+                            }
+                            mBatLevelPath.lineTo(x, y);
+                            mBatLevelX[mNumBatLevel] = x;
+                            mBatLevelY[mNumBatLevel] = y;
+                            mBatLevelValue[mNumBatLevel] = lastBatValue = rec.batteryLevel;
+                            mNumBatLevel++;
+                            num++;
+                            lastX = x;
+                            lastY = y;
+                            lastBatX = -1;
+                        }
+                    }
+                }
+            }
+            rec = rec.next;
+            i++;
+        }
+        
+        if (num == 0 || lastBatX >= 0) {
+            mBatLevelPath.lineTo(w, y);
+            mBatLevelX[mNumBatLevel] = w;
+            mBatLevelY[mNumBatLevel] = y;
+            mBatLevelValue[mNumBatLevel] = lastBatValue;
+            mNumBatLevel++;
+        }
+        mBatLevelPath.lineTo(w, h);
+        mBatLevelPath.lineTo(0, h);
+        mBatLevelPath.close();
     }
     
     @Override
@@ -247,29 +351,23 @@ public class BatteryHistoryChart extends View {
         final int width = getWidth();
         final int height = getHeight();
         
-        final long timeStart = mHistStart;
-        final long timeChange = mHistEnd-mHistStart;
-        
-        final int batLow = mBatLow;
-        final int batChange = mBatHigh-mBatLow;
-        
-        BatteryStats.BatteryHistoryRecord rec = mStats.getHistory();
-        int lastX=-1, lastY=-1;
-        int pos = 0;
-        final int N = mNumHist;
-        while (rec != null && pos < N) {
-            int x = (int)(((rec.time-timeStart)*width)/timeChange);
-            int y = height-1 - ((rec.batteryLevel-batLow)*height)/batChange;
-            if (lastX >= 0) {
-                canvas.drawLine(lastX, lastY, x, y, mBatteryPaint);
-            }
-            lastX = x;
-            lastY = y;
-            rec = rec.next;
-            pos++;
-        }
-        
+        canvas.drawPath(mBatLevelPath, mBatteryBackgroundPaint);
         canvas.drawText(mDurationString, (width/2) - (mDurationStringWidth/2),
                 (height/2) - ((mTextDescent-mTextAscent)/2) - mTextAscent, mTextPaint);
+        
+        int lastX = mBatLevelX[0];
+        int lastY = mBatLevelY[0];
+        for (int i=1; i<mNumBatLevel; i++) {
+            int x = mBatLevelX[i];
+            int y = mBatLevelY[i];
+            Paint paint;
+            byte value = mBatLevelValue[i];
+            if (value <= BATTERY_CRITICAL) paint = mBatteryCriticalPaint;
+            else if (value <= BATTERY_WARN) paint = mBatteryWarnPaint;
+            else paint = mBatteryGoodPaint;
+            canvas.drawLine(lastX, lastY, x, y, paint);
+            lastX = x;
+            lastY = y;
+        }
     }
 }
