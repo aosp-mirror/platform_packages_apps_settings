@@ -58,6 +58,7 @@ public class BatteryHistoryChart extends View {
     int mDurationStringWidth;
     
     int mNumHist;
+    BatteryStats.HistoryItem mHistFirst;
     long mHistStart;
     long mHistEnd;
     int mBatLow;
@@ -230,10 +231,7 @@ public class BatteryHistoryChart extends View {
                 durationString);
         
         BatteryStats.HistoryItem rec = stats.getHistory();
-        if (rec != null) {
-            mHistStart = rec.time;
-            mBatLow = mBatHigh = rec.batteryLevel;
-        }
+        mHistFirst = null;
         int pos = 0;
         int lastInteresting = 0;
         byte lastLevel = -1;
@@ -241,11 +239,16 @@ public class BatteryHistoryChart extends View {
         mBatHigh = 100;
         while (rec != null) {
             pos++;
-            if (rec.cmd == HistoryItem.CMD_UPDATE && (rec.batteryLevel != lastLevel
-                    || pos == 1)) {
-                lastLevel = rec.batteryLevel;
-                lastInteresting = pos;
-                mHistEnd = rec.time;
+            if (rec.cmd == HistoryItem.CMD_UPDATE) {
+                if (mHistFirst == null) {
+                    mHistFirst = rec;
+                    mHistStart = rec.time;
+                }
+                if (rec.batteryLevel != lastLevel || pos == 1) {
+                    lastLevel = rec.batteryLevel;
+                    lastInteresting = pos;
+                    mHistEnd = rec.time;
+                }
             }
             rec = rec.next;
         }
@@ -278,7 +281,7 @@ public class BatteryHistoryChart extends View {
         final int batLow = mBatLow;
         final int batChange = mBatHigh-mBatLow;
         
-        BatteryStats.HistoryItem rec = mStats.getHistory();
+        BatteryStats.HistoryItem rec = mHistFirst;
         int x = 0, y = 0, lastX = -1, lastY = -1, lastBatX = -1, lastBatY = -1;
         byte lastBatValue = 0;
         int i = 0, num = 0;
@@ -306,15 +309,6 @@ public class BatteryHistoryChart extends View {
                             lastBatX = x;
                             lastBatY = y;
                         } else {
-                            if (lastBatX >= 0) {
-                                // Level stayed the same up to here; put in line.
-                                mBatLevelPath.lineTo(lastBatX, lastBatY);
-                                mBatLevelX[mNumBatLevel] = lastBatX;
-                                mBatLevelY[mNumBatLevel] = lastBatY;
-                                mBatLevelValue[mNumBatLevel] = lastBatValue;
-                                mNumBatLevel++;
-                                num++;
-                            }
                             mBatLevelPath.lineTo(x, y);
                             mBatLevelX[mNumBatLevel] = x;
                             mBatLevelY[mNumBatLevel] = y;
