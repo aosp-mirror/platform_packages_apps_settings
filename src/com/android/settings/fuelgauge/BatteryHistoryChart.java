@@ -288,9 +288,9 @@ public class BatteryHistoryChart extends View {
     }
 
     void finishPaths(int w, int h, int levelh, int startX, int y, Path curLevelPath,
-            int lastBatX, boolean lastCharging, boolean lastScreenOn, Path lastPath) {
+            int lastX, boolean lastCharging, boolean lastScreenOn, Path lastPath) {
         if (curLevelPath != null) {
-            if (lastBatX >= 0) {
+            if (lastX >= 0 && lastX < w) {
                 if (lastPath != null) {
                     lastPath.lineTo(w, y);
                 }
@@ -301,10 +301,10 @@ public class BatteryHistoryChart extends View {
             curLevelPath.close();
         }
         
-        if (lastCharging) {
+        if (lastCharging && lastX < w) {
             mChargingPath.lineTo(w, h-mChargingOffset);
         }
-        if (lastScreenOn) {
+        if (lastScreenOn && lastX < w) {
             mScreenOnPath.lineTo(w, h-mScreenOnOffset);
         }
     }
@@ -329,7 +329,7 @@ public class BatteryHistoryChart extends View {
         final int levelh = h - mLevelOffset;
         
         BatteryStats.HistoryItem rec = mHistFirst;
-        int x = 0, y = 0, startX = 0, lastX = -1, lastY = -1, lastBatX = -1;
+        int x = 0, y = 0, startX = 0, lastX = -1, lastY = -1;
         int i = 0;
         Path curLevelPath = null;
         Path lastLinePath = null;
@@ -342,11 +342,8 @@ public class BatteryHistoryChart extends View {
                 
                 if (lastX != x) {
                     // We have moved by at least a pixel.
-                    if (lastY == y) {
-                        // Battery level is still the same; don't plot,
-                        // but remember it.
-                        lastBatX = x;
-                    } else {
+                    if (lastY != y) {
+                        // Don't plot changes within a pixel.
                         Path path;
                         byte value = rec.batteryLevel;
                         if (value <= BATTERY_CRITICAL) path = mBatCriticalPath;
@@ -372,7 +369,6 @@ public class BatteryHistoryChart extends View {
                         }
                         lastX = x;
                         lastY = y;
-                        lastBatX = -1;
                         
                         final boolean charging =
                             (rec.states&HistoryItem.STATE_BATTERY_PLUGGED_FLAG) != 0;
@@ -399,9 +395,9 @@ public class BatteryHistoryChart extends View {
                 }
                 
             } else if (curLevelPath != null) {
-                finishPaths(x+1, h, levelh, startX, lastY, curLevelPath, lastBatX,
+                finishPaths(x+1, h, levelh, startX, lastY, curLevelPath, lastX,
                         lastCharging, lastScreenOn, lastLinePath);
-                lastX = lastY = lastBatX = -1;
+                lastX = lastY = -1;
                 curLevelPath = null;
                 lastLinePath = null;
                 lastCharging = lastScreenOn = false;
@@ -411,7 +407,7 @@ public class BatteryHistoryChart extends View {
             i++;
         }
         
-        finishPaths(w, h, levelh, startX, lastY, curLevelPath, lastBatX,
+        finishPaths(w, h, levelh, startX, lastY, curLevelPath, lastX,
                 lastCharging, lastScreenOn, lastLinePath);
     }
     

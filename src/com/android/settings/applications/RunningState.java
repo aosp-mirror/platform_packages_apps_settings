@@ -47,18 +47,34 @@ import java.util.List;
  */
 public class RunningState {
 
-    final SparseArray<HashMap<String, ProcessItem>> mProcesses
+    // Processes that are hosting a service we are interested in, organized
+    // by uid and name.  Note that this mapping does not change even across
+    // service restarts, and during a restart there will still be a process
+    // entry.
+    final SparseArray<HashMap<String, ProcessItem>> mServiceProcessesByName
             = new SparseArray<HashMap<String, ProcessItem>>();
-    final SparseArray<ProcessItem> mActiveProcesses
+    
+    // Processes that are hosting a service we are interested in, organized
+    // by their pid.  These disappear and re-appear as services are restarted.
+    final SparseArray<ProcessItem> mServiceProcessesByPid
             = new SparseArray<ProcessItem>();
+    
+    // Used to sort the interesting processes.
     final ServiceProcessComparator mServiceProcessComparator
             = new ServiceProcessComparator();
     
-    // Temporary for finding process dependencies.
+    // Additional heavy-weight processes to be shown to the user, even if
+    // there is no service running in them.
+    final ArrayList<ProcessItem> mHeavyProcesses = new ArrayList<ProcessItem>();
+    
+    // All currently running processes, for finding dependencies etc.
     final SparseArray<ProcessItem> mRunningProcesses
             = new SparseArray<ProcessItem>();
     
+    // The processes associated with services, in sorted order.
     final ArrayList<ProcessItem> mProcessItems = new ArrayList<ProcessItem>();
+    
+    // All processes, used for retrieving memory information.
     final ArrayList<ProcessItem> mAllProcessItems = new ArrayList<ProcessItem>();
     
     int mSequence = 0;
@@ -127,6 +143,8 @@ public class RunningState {
         
         int mRunningSeq;
         ActivityManager.RunningAppProcessInfo mRunningProcessInfo;
+        
+        MergedItem mMergedItem;
         
         // Purely for sorting.
         boolean mIsSystem;
@@ -435,10 +453,10 @@ public class RunningState {
                 continue;
             }
             
-            HashMap<String, ProcessItem> procs = mProcesses.get(si.uid);
+            HashMap<String, ProcessItem> procs = mServiceProcessesByName.get(si.uid);
             if (procs == null) {
                 procs = new HashMap<String, ProcessItem>();
-                mProcesses.put(si.uid, procs);
+                mServiceProcessesByName.put(si.uid, procs);
             }
             ProcessItem proc = procs.get(si.process);
             if (proc == null) {
@@ -453,10 +471,10 @@ public class RunningState {
                     changed = true;
                     if (proc.mPid != pid) {
                         if (proc.mPid != 0) {
-                            mActiveProcesses.remove(proc.mPid);
+                            mServiceProcessesByPid.remove(proc.mPid);
                         }
                         if (pid != 0) {
-                            mActiveProcesses.put(pid, proc);
+                            mServiceProcessesByPid.put(pid, proc);
                         }
                         proc.mPid = pid;
                     }
@@ -474,19 +492,30 @@ public class RunningState {
         final int NP = processes != null ? processes.size() : 0;
         for (int i=0; i<NP; i++) {
             ActivityManager.RunningAppProcessInfo pi = processes.get(i);
-            ProcessItem proc = mActiveProcesses.get(pi.pid);
+            ProcessItem proc = mServiceProcessesByPid.get(pi.pid);
             if (proc == null) {
                 // This process is not one that is a direct container
                 // of a service, so look for it in the secondary
                 // running list.
                 proc = mRunningProcesses.get(pi.pid);
                 if (proc == null) {
+                    changed = true;
                     proc = new ProcessItem(context, pi.uid, pi.processName);
                     proc.mPid = pi.pid;
                     mRunningProcesses.put(pi.pid, proc);
                 }
                 proc.mDependentProcesses.clear();
             }
+            
+            if ((pi.flags&ActivityManager.RunningAppProcessInfo.FLAG_HEAVY_WEIGHT) != 0) {
+                if (!mHeavyProcesses.contains(proc)) {
+                    changed = true;
+                    mHeavyProcesses.add(proc);
+                }
+                proc.mCurSeq = mSequence;
+                proc.ensureLabel(pm);
+            }
+            
             proc.mRunningSeq = mSequence;
             proc.mRunningProcessInfo = pi;
         }
@@ -499,7 +528,7 @@ public class RunningState {
             if (proc.mRunningSeq == mSequence) {
                 int clientPid = proc.mRunningProcessInfo.importanceReasonPid;
                 if (clientPid != 0) {
-                    ProcessItem client = mActiveProcesses.get(clientPid);
+                    ProcessItem client = mServiceProcessesByPid.get(clientPid);
                     if (client == null) {
                         client = mRunningProcesses.get(clientPid);
                     }
@@ -508,29 +537,42 @@ public class RunningState {
                     }
                 } else {
                     // In this pass the process doesn't have a client.
-                    // Clear to make sure if it later gets the same one
-                    // that we will detect the change.
+                    // Clear to make sure that, if it later gets the same one,
+                    // we will detect the change.
                     proc.mClient = null;
                 }
             } else {
+                changed = true;
                 mRunningProcesses.remove(mRunningProcesses.keyAt(i));
+            }
+        }
+        
+        // Remove any old heavy processes.
+        int NHP = mHeavyProcesses.size();
+        for (int i=0; i<NHP; i++) {
+            ProcessItem proc = mHeavyProcesses.get(i);
+            if (mRunningProcesses.get(proc.mPid) == null) {
+                changed = true;
+                mHeavyProcesses.remove(i);
+                i--;
+                NHP--;
             }
         }
         
         // Follow the tree from all primary service processes to all
         // processes they are dependent on, marking these processes as
         // still being active and determining if anything has changed.
-        final int NAP = mActiveProcesses.size();
+        final int NAP = mServiceProcessesByPid.size();
         for (int i=0; i<NAP; i++) {
-            ProcessItem proc = mActiveProcesses.valueAt(i);
+            ProcessItem proc = mServiceProcessesByPid.valueAt(i);
             if (proc.mCurSeq == mSequence) {
                 changed |= proc.buildDependencyChain(context, pm, mSequence);
             }
         }
         
         // Look for services and their primary processes that no longer exist...
-        for (int i=0; i<mProcesses.size(); i++) {
-            HashMap<String, ProcessItem> procs = mProcesses.valueAt(i);
+        for (int i=0; i<mServiceProcessesByName.size(); i++) {
+            HashMap<String, ProcessItem> procs = mServiceProcessesByName.valueAt(i);
             Iterator<ProcessItem> pit = procs.values().iterator();
             while (pit.hasNext()) {
                 ProcessItem pi = pit.next();
@@ -545,10 +587,10 @@ public class RunningState {
                     changed = true;
                     pit.remove();
                     if (procs.size() == 0) {
-                        mProcesses.remove(mProcesses.keyAt(i));
+                        mServiceProcessesByName.remove(mServiceProcessesByName.keyAt(i));
                     }
                     if (pi.mPid != 0) {
-                        mActiveProcesses.remove(pi.mPid);
+                        mServiceProcessesByPid.remove(pi.mPid);
                     }
                     continue;
                 }
@@ -566,8 +608,8 @@ public class RunningState {
         if (changed) {
             // First determine an order for the services.
             ArrayList<ProcessItem> sortedProcesses = new ArrayList<ProcessItem>();
-            for (int i=0; i<mProcesses.size(); i++) {
-                for (ProcessItem pi : mProcesses.valueAt(i).values()) {
+            for (int i=0; i<mServiceProcessesByName.size(); i++) {
+                for (ProcessItem pi : mServiceProcessesByName.valueAt(i).values()) {
                     pi.mIsSystem = false;
                     pi.mIsStarted = true;
                     pi.mActiveSince = Long.MAX_VALUE;
@@ -643,6 +685,23 @@ public class RunningState {
                 mergedItem.update(context);
                 newMergedItems.add(mergedItem);
             }
+            
+            // Finally, heavy-weight processes need to be shown and will
+            // go at the top.
+            NHP = mHeavyProcesses.size();
+            for (int i=0; i<NHP; i++) {
+                ProcessItem proc = mHeavyProcesses.get(i);
+                if (proc.mClient == null && proc.mServices.size() <= 0) {
+                    if (proc.mMergedItem == null) {
+                        proc.mMergedItem = new MergedItem();
+                        proc.mMergedItem.mProcess = proc;
+                    }
+                    proc.mMergedItem.update(context);
+                    newMergedItems.add(0, proc.mMergedItem);
+                    mProcessItems.add(proc);
+                }
+            }
+            
             synchronized (mLock) {
                 mItems = newItems;
                 mMergedItems = newMergedItems;

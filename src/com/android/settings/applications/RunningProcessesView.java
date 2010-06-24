@@ -130,8 +130,16 @@ public class RunningProcessesView extends FrameLayout
                     uptimeView.setText(DateUtils.formatElapsedTime(builder,
                             (SystemClock.uptimeMillis()-mFirstRunTime)/1000));
                 } else {
-                    uptimeView.setText(context.getResources().getText(
-                            R.string.service_restarting));
+                    boolean isService = false;
+                    if (mItem instanceof RunningState.MergedItem) {
+                        isService = ((RunningState.MergedItem)mItem).mServices.size() > 0;
+                    }
+                    if (isService) {
+                        uptimeView.setText(context.getResources().getText(
+                                R.string.service_restarting));
+                    } else {
+                        uptimeView.setText("");
+                    }
                 }
             }
         }
