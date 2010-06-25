@@ -52,7 +52,7 @@ import android.widget.AdapterView.OnItemSelectedListener;
  */
 public class UsageStats extends Activity implements OnItemSelectedListener {
     private static final String TAG="UsageStatsActivity";
-    private static final boolean localLOGV = true;
+    private static final boolean localLOGV = false;
     private Spinner mTypeSpinner;
     private ListView mListView;
     private IUsageStats mUsageStatsService;
