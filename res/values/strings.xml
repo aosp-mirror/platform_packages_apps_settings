@@ -2122,10 +2122,21 @@ found in the list of installed applications.</string>
         </string>
     <!-- Message for the prompt that lets users know that they have no accessibility related apps
          installed and that they can install TalkBack from Market. -->
-    <string name="accessibility_service_no_apps_message">You do not have any accessibility related
+    <string name="accessibility_service_no_apps_message">You do not have any accessibility-related
         applications installed.\n\nYou can download a screen reader for your device from Android
         Market.\n\nClick "OK" to install the screen reader.</string>
 
+    <!-- Accessibility settings: Webpage accessibility scripts category [CHAR LIMIT=25] -->
+    <string name="accessibility_script_injection_category">Accessibility scripts</string>
+    <!-- Accessibility settings: Checkbox title for enabling download of accessibility scripts [CHAR LIMIT=40] -->
+    <string name="accessibility_script_injection_enabled">Download accessibility scripts</string>
+    <!-- Accessibility settings: Checkbox summary for enabling download of accessibility scripts [CHAR LIMIT=65] -->
+    <string name="accessibility_script_injection_enabled_summary">Allow applications to download accessibility scripts from Google</string>
+    <!-- Warning message about security implications of downloading accessibility scripts,
+         displayed as a dialog message when the user selects to enable script downloading. [CHAR LIMIT="NONE"] -->
+    <string name="accessibility_script_injection_security_warning">Some applications can ask Google
+        to download scripts to your phone that make their content more accessible. Are you sure you
+        want to allow Google to install accessibility scripts on your phone?</string>
     <!-- Accessibility settings: Power button category -->
     <string name="accessibility_power_button_category">Power button</string>
     <!-- Accessibility settings: checkbox title for power button behavior -->

@@ -56,6 +56,9 @@ public class AccessibilitySettings extends SettingsPreferenceFragment {
     private static final String ACCESSIBILITY_SERVICES_CATEGORY =
         "accessibility_services_category";
 
+    private static final String TOGGLE_ACCESSIBILITY_SCRIPT_INJECTION_CHECKBOX =
+        "toggle_accessibility_script_injection_checkbox";
+
     private static final String POWER_BUTTON_CATEGORY =
         "power_button_category";
 
@@ -63,6 +66,8 @@ public class AccessibilitySettings extends SettingsPreferenceFragment {
         "power_button_ends_call";
 
     private CheckBoxPreference mToggleCheckBox;
+
+    private CheckBoxPreference mToggleScriptInjectionCheckBox;
 
     private PreferenceCategory mPowerButtonCategory;
     private CheckBoxPreference mPowerButtonEndsCallCheckBox;
@@ -81,11 +86,14 @@ public class AccessibilitySettings extends SettingsPreferenceFragment {
         addPreferencesFromResource(R.xml.accessibility_settings);
 
         mToggleCheckBox = (CheckBoxPreference) findPreference(
-            TOGGLE_ACCESSIBILITY_SERVICE_CHECKBOX);
+                TOGGLE_ACCESSIBILITY_SERVICE_CHECKBOX);
+
+        mToggleScriptInjectionCheckBox = (CheckBoxPreference) findPreference(
+                TOGGLE_ACCESSIBILITY_SCRIPT_INJECTION_CHECKBOX);
 
         mPowerButtonCategory = (PreferenceCategory) findPreference(POWER_BUTTON_CATEGORY);
         mPowerButtonEndsCallCheckBox = (CheckBoxPreference) findPreference(
-            POWER_BUTTON_ENDS_CALL_CHECKBOX);
+                POWER_BUTTON_ENDS_CALL_CHECKBOX);
 
         addAccessibilitServicePreferences();
 
@@ -130,6 +138,12 @@ public class AccessibilitySettings extends SettingsPreferenceFragment {
             // installed and direct them to Market to get TalkBack
             displayNoAppsAlert();
         }
+
+        // set the accessibility script injection category
+        boolean scriptInjectionEnabled = (Settings.Secure.getInt(getContentResolver(),
+                Settings.Secure.ACCESSIBILITY_SCRIPT_INJECTION, 0) == 1);
+        mToggleScriptInjectionCheckBox.setChecked(scriptInjectionEnabled);
+        mToggleScriptInjectionCheckBox.setEnabled(true);
 
         if (KeyCharacterMap.deviceHasKey(KeyEvent.KEYCODE_POWER)
                 && Utils.isVoiceCapable(getActivity())) {
@@ -180,7 +194,6 @@ public class AccessibilitySettings extends SettingsPreferenceFragment {
         final String key = preference.getKey();
 
         if (TOGGLE_ACCESSIBILITY_SERVICE_CHECKBOX.equals(key)) {
-            boolean isChecked = ((CheckBoxPreference) preference).isChecked();
             handleEnableAccessibilityStateChange((CheckBoxPreference) preference);
         } else if (POWER_BUTTON_ENDS_CALL_CHECKBOX.equals(key)) {
             boolean isChecked = ((CheckBoxPreference) preference).isChecked();
@@ -191,6 +204,8 @@ public class AccessibilitySettings extends SettingsPreferenceFragment {
                     Settings.Secure.INCALL_POWER_BUTTON_BEHAVIOR,
                     (isChecked ? Settings.Secure.INCALL_POWER_BUTTON_BEHAVIOR_HANGUP
                             : Settings.Secure.INCALL_POWER_BUTTON_BEHAVIOR_SCREEN_OFF));
+        } else if (TOGGLE_ACCESSIBILITY_SCRIPT_INJECTION_CHECKBOX.equals(key)) {
+            handleToggleAccessibilityScriptInjection((CheckBoxPreference) preference);
         } else if (preference instanceof CheckBoxPreference) {
             handleEnableAccessibilityServiceStateChange((CheckBoxPreference) preference);
         }
@@ -233,6 +248,42 @@ public class AccessibilitySettings extends SettingsPreferenceFragment {
                 })
                 .create();
             dialog.show();
+        }
+    }
+
+    /**
+     * Handles the change of the accessibility script injection setting state.
+     *
+     * @param preference The preference for enabling/disabling accessibility script injection.
+     */
+    private void handleToggleAccessibilityScriptInjection(CheckBoxPreference preference) {
+        if (preference.isChecked()) {
+            final CheckBoxPreference checkBoxPreference = preference;
+            // TODO: DialogFragment?
+            AlertDialog dialog = (new AlertDialog.Builder(getActivity()))
+                .setTitle(android.R.string.dialog_alert_title)
+                .setIcon(android.R.drawable.ic_dialog_alert)
+                .setMessage(getActivity().getString(
+                        R.string.accessibility_script_injection_security_warning))
+                .setCancelable(true)
+                .setPositiveButton(android.R.string.ok,
+                    new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int which) {
+                            Settings.Secure.putInt(getContentResolver(),
+                            Settings.Secure.ACCESSIBILITY_SCRIPT_INJECTION, 1);
+                        }
+                })
+                .setNegativeButton(android.R.string.cancel,
+                    new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int which) {
+                            checkBoxPreference.setChecked(false);
+                        }
+                    })
+                .create();
+                dialog.show();
+        } else {
+            Settings.Secure.putInt(getContentResolver(),
+                Settings.Secure.ACCESSIBILITY_SCRIPT_INJECTION, 0);
         }
     }
 
