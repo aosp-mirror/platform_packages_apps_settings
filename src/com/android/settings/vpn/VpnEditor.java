@@ -19,6 +19,7 @@ package com.android.settings.vpn;
 import com.android.settings.R;
 
 import android.app.AlertDialog;
+import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.vpn.L2tpIpsecProfile;
@@ -44,6 +45,7 @@ import android.view.View;
 public class VpnEditor extends PreferenceActivity {
     private static final int MENU_SAVE = Menu.FIRST;
     private static final int MENU_CANCEL = Menu.FIRST + 1;
+    private static final int CONFIRM_DIALOG_ID = 0;
     private static final String KEY_PROFILE = "profile";
     private static final String KEY_ORIGINAL_PROFILE_NAME = "orig_profile_name";
 
@@ -98,7 +100,7 @@ public class VpnEditor extends PreferenceActivity {
 
             case MENU_CANCEL:
                 if (profileChanged()) {
-                    showCancellationConfirmDialog();
+                    showDialog(CONFIRM_DIALOG_ID);
                 } else {
                     finish();
                 }
@@ -171,21 +173,39 @@ public class VpnEditor extends PreferenceActivity {
         }
     }
 
-    private void showCancellationConfirmDialog() {
-        new AlertDialog.Builder(this)
-                .setTitle(android.R.string.dialog_alert_title)
-                .setIcon(android.R.drawable.ic_dialog_alert)
-                .setMessage(mAddingProfile
-                        ? R.string.vpn_confirm_add_profile_cancellation
-                        : R.string.vpn_confirm_edit_profile_cancellation)
-                .setPositiveButton(R.string.vpn_yes_button,
-                        new DialogInterface.OnClickListener() {
-                            public void onClick(DialogInterface dialog, int w) {
-                                finish();
-                            }
-                        })
-                .setNegativeButton(R.string.vpn_mistake_button, null)
-                .show();
+
+    @Override
+    protected Dialog onCreateDialog(int id) {
+
+        if (id == CONFIRM_DIALOG_ID) {
+            return new AlertDialog.Builder(this)
+                    .setTitle(android.R.string.dialog_alert_title)
+                    .setIcon(android.R.drawable.ic_dialog_alert)
+                    .setMessage(mAddingProfile
+                            ? R.string.vpn_confirm_add_profile_cancellation
+                            : R.string.vpn_confirm_edit_profile_cancellation)
+                    .setPositiveButton(R.string.vpn_yes_button,
+                            new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int w) {
+                                    finish();
+                                }
+                            })
+                    .setNegativeButton(R.string.vpn_mistake_button, null)
+                    .create();
+        }
+
+        return super.onCreateDialog(id);
+    }
+
+    @Override
+    protected void onPrepareDialog(int id, Dialog dialog) {
+        super.onPrepareDialog(id, dialog);
+
+        if (id == CONFIRM_DIALOG_ID) {
+            ((AlertDialog)dialog).setMessage(mAddingProfile
+                    ? getString(R.string.vpn_confirm_add_profile_cancellation)
+                    : getString(R.string.vpn_confirm_edit_profile_cancellation));
+        }
     }
 
     private VpnProfile getProfile() {
