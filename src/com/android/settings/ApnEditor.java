@@ -17,6 +17,7 @@
 package com.android.settings;
 
 import android.app.AlertDialog;
+import android.app.Dialog;
 import android.content.ContentUris;
 import android.content.ContentValues;
 import android.content.Intent;
@@ -51,6 +52,7 @@ public class ApnEditor extends PreferenceActivity
     private static final int MENU_DELETE = Menu.FIRST;
     private static final int MENU_SAVE = Menu.FIRST + 1;
     private static final int MENU_CANCEL = Menu.FIRST + 2;
+    private static final int ERROR_DIALOG_ID = 0;
 
     private static String sNotSet;
     private EditTextPreference mName;
@@ -347,19 +349,8 @@ public class ApnEditor extends PreferenceActivity
         String mcc = checkNotSet(mMcc.getText());
         String mnc = checkNotSet(mMnc.getText());
 
-        String errorMsg = null;
-        if (name.length() < 1) {
-            errorMsg = mRes.getString(R.string.error_name_empty);
-        } else if (apn.length() < 1) {
-            errorMsg = mRes.getString(R.string.error_apn_empty);
-        } else if (mcc.length() != 3) {
-            errorMsg = mRes.getString(R.string.error_mcc_not3);
-        } else if ((mnc.length() & 0xFFFE) != 2) {
-            errorMsg = mRes.getString(R.string.error_mnc_not23);
-        }
-
-        if (errorMsg != null && !force) {
-            showErrorMessage(errorMsg);
+        if (getErrorMsg() != null && !force) {
+            showDialog(ERROR_DIALOG_ID);
             return false;
         }
 
@@ -414,12 +405,54 @@ public class ApnEditor extends PreferenceActivity
         return true;
     }
 
-    private void showErrorMessage(String message) {
-        new AlertDialog.Builder(this)
-            .setTitle(R.string.error_title)
-            .setMessage(message)
-            .setPositiveButton(android.R.string.ok, null)
-            .show();
+    private String getErrorMsg() {
+        String errorMsg = null;
+
+        String name = checkNotSet(mName.getText());
+        String apn = checkNotSet(mApn.getText());
+        String mcc = checkNotSet(mMcc.getText());
+        String mnc = checkNotSet(mMnc.getText());
+
+        if (name.length() < 1) {
+            errorMsg = mRes.getString(R.string.error_name_empty);
+        } else if (apn.length() < 1) {
+            errorMsg = mRes.getString(R.string.error_apn_empty);
+        } else if (mcc.length() != 3) {
+            errorMsg = mRes.getString(R.string.error_mcc_not3);
+        } else if ((mnc.length() & 0xFFFE) != 2) {
+            errorMsg = mRes.getString(R.string.error_mnc_not23);
+        }
+
+        return errorMsg;
+    }
+
+    @Override
+    protected Dialog onCreateDialog(int id) {
+
+        if (id == ERROR_DIALOG_ID) {
+            String msg = getErrorMsg();
+
+            return new AlertDialog.Builder(this)
+                    .setTitle(R.string.error_title)
+                    .setPositiveButton(android.R.string.ok, null)
+                    .setMessage(msg)
+                    .create();
+        }
+
+        return super.onCreateDialog(id);
+    }
+
+    @Override
+    protected void onPrepareDialog(int id, Dialog dialog) {
+        super.onPrepareDialog(id, dialog);
+
+        if (id == ERROR_DIALOG_ID) {
+            String msg = getErrorMsg();
+
+            if (msg != null) {
+                ((AlertDialog)dialog).setMessage(msg);
+            }
+        }
     }
 
     private void deleteApn() {
