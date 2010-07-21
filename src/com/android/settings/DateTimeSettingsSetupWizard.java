@@ -20,7 +20,6 @@ import android.os.Bundle;
 import android.view.View;
 import android.view.Window;
 import android.view.View.OnClickListener;
-import android.widget.LinearLayout;
 
 public class DateTimeSettingsSetupWizard extends DateTimeSettings implements OnClickListener {
     private View mNextButton;
