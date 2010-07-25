@@ -353,7 +353,8 @@
         <activity android:name=".applications.ManageApplications"
                   android:label="@string/manageapplications_settings_title"
                   android:clearTaskOnLaunch="true"
-                  android:configChanges="orientation|keyboardHidden">
+                  android:configChanges="orientation|keyboardHidden"
+                  android:theme="@android:style/Theme.NoTitleBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <action android:name="android.intent.action.MANAGE_PACKAGE_STORAGE" />
@@ -371,6 +372,7 @@
             android:exported="true" />
         
         <activity android:name=".applications.InstalledAppDetails"
+                android:theme="@android:style/Theme.NoTitleBar"
                 android:label="@string/application_info_label">
             <intent-filter>
                 <action android:name="android.settings.APPLICATION_DETAILS_SETTINGS" />
@@ -794,6 +796,7 @@
         </activity>
 
         <activity android:name=".fuelgauge.PowerUsageDetail"
+                android:theme="@android:style/Theme.NoTitleBar"
                 android:label="@string/details_title">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
