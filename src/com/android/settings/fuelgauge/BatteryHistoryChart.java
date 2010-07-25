@@ -560,7 +560,7 @@ public class BatteryHistoryChart extends View {
             int x = tick&PHONE_SIGNAL_X_MASK;
             int bin = (tick&PHONE_SIGNAL_BIN_MASK) >> PHONE_SIGNAL_BIN_SHIFT;
             if (lastBin != 0) {
-                canvas.drawRect(lastX, top, x, bottom, mPhoneSignalPaints[bin]);
+                canvas.drawRect(lastX, top, x, bottom, mPhoneSignalPaints[lastBin]);
             }
             lastBin = bin;
             lastX = x;
