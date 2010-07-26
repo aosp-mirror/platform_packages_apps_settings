@@ -90,11 +90,18 @@ public class PowerUsageSummary extends PreferenceActivity implements Runnable {
     protected void onCreate(Bundle icicle) {
         super.onCreate(icicle);
 
+        mStats = (BatteryStatsImpl)getLastNonConfigurationInstance();
+
         addPreferencesFromResource(R.xml.power_usage_summary);
         mBatteryInfo = IBatteryStats.Stub.asInterface(
                 ServiceManager.getService("batteryinfo"));
         mAppListGroup = (PreferenceGroup) findPreference("app_list");
         mPowerProfile = new PowerProfile(this);
+    }
+
+    @Override
+    public Object onRetainNonConfigurationInstance() {
+        return mStats;
     }
 
     @Override
@@ -115,6 +122,15 @@ public class PowerUsageSummary extends PreferenceActivity implements Runnable {
 
     @Override
     public boolean onPreferenceTreeClick(PreferenceScreen preferenceScreen, Preference preference) {
+        if (preference instanceof BatteryHistoryPreference) {
+            Parcel hist = Parcel.obtain();
+            mStats.writeToParcelWithoutUids(hist, 0);
+            byte[] histData = hist.marshall();
+            Intent intent = new Intent(this, BatteryHistoryDetail.class);
+            intent.putExtra(BatteryHistoryDetail.EXTRA_STATS, histData);
+            startActivity(intent);
+            return super.onPreferenceTreeClick(preferenceScreen, preference);
+        }
         if (!(preference instanceof PowerGaugePreference)) {
             return false;
         }
