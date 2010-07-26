@@ -4,29 +4,41 @@ import com.android.settings.R;
 
 import android.app.Activity;
 import android.app.ActivityManager;
+import android.app.ApplicationErrorReport;
 import android.app.PendingIntent;
 import android.content.ActivityNotFoundException;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentSender;
+import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.ProviderInfo;
 import android.content.pm.ServiceInfo;
 import android.content.pm.PackageManager.NameNotFoundException;
 import android.content.res.Resources;
 import android.os.Bundle;
+import android.os.Debug;
 import android.os.Handler;
 import android.os.HandlerThread;
 import android.os.Looper;
 import android.os.Message;
+import android.os.Process;
+import android.os.SystemClock;
+import android.provider.Settings;
+import android.text.format.DateUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.LinearLayout;
+import android.widget.Button;
 import android.widget.TextView;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -63,11 +75,66 @@ public class RunningServiceDetails extends Activity {
     
     class ActiveDetail implements View.OnClickListener {
         View mRootView;
+        Button mStopButton;
+        Button mReportButton;
+        RunningState.ServiceItem mServiceItem;
         RunningProcessesView.ActiveItem mActiveItem;
         RunningProcessesView.ViewHolder mViewHolder;
         PendingIntent mManageIntent;
+        ComponentName mInstaller;
 
         public void onClick(View v) {
+            if (v == mReportButton) {
+                ApplicationErrorReport report = new ApplicationErrorReport();
+                report.type = ApplicationErrorReport.TYPE_RUNNING_SERVICE;
+                report.packageName = mServiceItem.mServiceInfo.packageName;
+                report.installerPackageName = mInstaller.getPackageName();
+                report.processName = mServiceItem.mRunningService.process;
+                report.time = System.currentTimeMillis();
+                report.systemApp = (mServiceItem.mServiceInfo.applicationInfo.flags
+                        & ApplicationInfo.FLAG_SYSTEM) != 0;
+                ApplicationErrorReport.RunningServiceInfo info
+                        = new ApplicationErrorReport.RunningServiceInfo();
+                if (mActiveItem.mItem.mActiveSince >= 0) {
+                    info.durationMillis = SystemClock.uptimeMillis()-mActiveItem.mFirstRunTime;
+                } else {
+                    info.durationMillis = -1;
+                }
+                ComponentName comp = new ComponentName(mServiceItem.mServiceInfo.packageName,
+                        mServiceItem.mServiceInfo.name);
+                File filename = getFileStreamPath("service_dump.txt");
+                FileOutputStream output = null;
+                try {
+                    output = new FileOutputStream(filename);
+                    Debug.dumpService("activity", output.getFD(),
+                            new String[] { "-a", "service", comp.flattenToString() });
+                } catch (IOException e) {
+                    Log.w(TAG, "Can't dump service: " + comp, e);
+                } finally {
+                    if (output != null) try { output.close(); } catch (IOException e) {}
+                }
+                FileInputStream input = null;
+                try {
+                    input = new FileInputStream(filename);
+                    byte[] buffer = new byte[(int) filename.length()];
+                    input.read(buffer);
+                    info.serviceDetails = new String(buffer);
+                } catch (IOException e) {
+                    Log.w(TAG, "Can't read service dump: " + comp, e);
+                } finally {
+                    if (input != null) try { input.close(); } catch (IOException e) {}
+                }
+                filename.delete();
+                Log.i(TAG, "Details: " + info.serviceDetails);
+                report.runningServiceInfo = info;
+                Intent result = new Intent(Intent.ACTION_APP_ERROR);
+                result.setComponent(mInstaller);
+                result.putExtra(Intent.EXTRA_BUG_REPORT, report);
+                result.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                startActivity(result);
+                return;
+            }
+
             if (mManageIntent != null) {
                 try {
                     startIntentSender(mManageIntent.getIntentSender(), null,
@@ -185,6 +252,7 @@ public class RunningServiceDetails extends Activity {
                 mAllDetails, false);
         mAllDetails.addView(root);
         detail.mRootView = root;
+        detail.mServiceItem = si;
         detail.mViewHolder = new RunningProcessesView.ViewHolder(root);
         detail.mActiveItem = detail.mViewHolder.bind(mState, bi, mBuilder);
         
@@ -215,11 +283,24 @@ public class RunningServiceDetails extends Activity {
             }
         }
         
-        View button = root.findViewById(R.id.right_button);
-        button.setOnClickListener(detail);
-        ((TextView)button).setText(getText(detail.mManageIntent != null
+        detail.mStopButton = (Button)root.findViewById(R.id.left_button);
+        detail.mStopButton.setOnClickListener(detail);
+        detail.mStopButton.setText(getText(detail.mManageIntent != null
                 ? R.string.service_manage : R.string.service_stop));
-        root.findViewById(R.id.left_button).setVisibility(View.INVISIBLE);
+
+        detail.mReportButton = (Button)root.findViewById(R.id.right_button);
+        detail.mReportButton.setOnClickListener(detail);
+        detail.mReportButton.setText(com.android.internal.R.string.report);
+        // check if error reporting is enabled in secure settings
+        int enabled = Settings.Secure.getInt(getContentResolver(),
+                Settings.Secure.SEND_ACTION_APP_ERROR, 0);
+        if (enabled != 0) {
+            detail.mInstaller = ApplicationErrorReport.getErrorReportReceiver(
+                    this, si.mServiceInfo.packageName, si.mServiceInfo.applicationInfo.flags);
+            detail.mReportButton.setEnabled(detail.mInstaller != null);
+        } else {
+            detail.mReportButton.setEnabled(false);
+        }
         
         mActiveDetails.add(detail);
     }
