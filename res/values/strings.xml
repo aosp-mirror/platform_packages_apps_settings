@@ -1647,6 +1647,10 @@
     <string name="data_size_label">Data</string>
     <!-- Manage applications, individual application info screen, button label under Storage heading. Button to remove the application from the system. -->
     <string name="uninstall_text">Uninstall</string>
+    <!-- Manage applications, individual application info screen, button label under Storage heading. Button to disable an existing application. -->
+    <string name="disable_text">Disable</string>
+    <!-- Manage applications, individual application info screen, button label under Storage heading. Button to re-enable an existing application. -->
+    <string name="enable_text">Enable</string>
     <!-- Manage applications, individual application info screen, button label under Storage heading. Button to clear all data associated with tis app (for exampel, remove all cached emails for an Email app) -->
     <string name="clear_user_data_text">Clear data</string>
     <!-- Manage applications, restore updated system application to factory version -->
@@ -1681,6 +1685,8 @@
     <!-- Text for filter option in ManageApps screen to display list of
     packages installed on sdcard. -->
     <string name="filter_apps_onsdcard">On SD card</string>
+    <!-- Manage applications, text telling using an application is disabled. -->
+    <string name="disabled">Disabled</string>
     <string name="loading">Loading\u2026</string>
     <!-- Manage app screen, shown when the activity is busy recomputing the size of each app -->
     <string name="recompute_size">Recomputing size\u2026</string>
@@ -1734,7 +1740,7 @@ found in the list of installed applications.</string>
 
     <string name="force_stop_dlg_title">Force stop</string>
     <!-- Manage applications, text for dialog when killing persistent apps-->
-    <string name="force_stop_dlg_text">This application will be restarted right way. Are you sure you want to force stop?</string>
+    <string name="force_stop_dlg_text">Force stopping an application can cause it to misbehave.  Are you sure?</string>
     <!-- Manage applications, text for dialog when moving an app -->
     <string name="move_app_failed_dlg_title">Move application</string>
     <!-- Manage applications, text for dialog moving an app -->
