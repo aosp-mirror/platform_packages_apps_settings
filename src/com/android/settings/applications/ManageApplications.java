@@ -616,7 +616,8 @@ public class ManageApplications extends TabActivity implements
     
     List<ApplicationInfo> getInstalledApps(int filterOption) {
         List<ApplicationInfo> installedAppList = mPm.getInstalledApplications(
-                PackageManager.GET_UNINSTALLED_PACKAGES);
+                PackageManager.GET_UNINSTALLED_PACKAGES |
+                PackageManager.GET_DISABLED_COMPONENTS);
         if (installedAppList == null) {
             return new ArrayList<ApplicationInfo> ();
         }
@@ -903,6 +904,7 @@ public class ManageApplications extends TabActivity implements
         TextView appName;
         ImageView appIcon;
         TextView appSize;
+        TextView disabled;
     }
     
     /* 
@@ -1076,6 +1078,7 @@ public class ManageApplications extends TabActivity implements
                 holder.appName = (TextView) convertView.findViewById(R.id.app_name);
                 holder.appIcon = (ImageView) convertView.findViewById(R.id.app_icon);
                 holder.appSize = (TextView) convertView.findViewById(R.id.app_size);
+                holder.disabled = (TextView) convertView.findViewById(R.id.app_disabled);
                 convertView.setTag(holder);
             } else {
                 // Get the ViewHolder back to get fast access to the TextView
@@ -1087,15 +1090,19 @@ public class ManageApplications extends TabActivity implements
             ApplicationInfo appInfo = mAppLocalList.get(position);
             AppInfo mInfo = mCache.getEntry(appInfo.packageName);
             if(mInfo != null) {
-                if(mInfo.appName != null) {
+                if (mInfo.appName != null) {
                     holder.appName.setText(mInfo.appName);
+                    holder.appName.setTextColor(getResources().getColorStateList(
+                            appInfo.enabled ? android.R.color.primary_text_dark
+                                    : android.R.color.secondary_text_dark));
                 }
-                if(mInfo.appIcon != null) {
+                if (mInfo.appIcon != null) {
                     holder.appIcon.setImageDrawable(mInfo.appIcon);
                 }
                 if (mInfo.appSize != null) {
                     holder.appSize.setText(mInfo.appSize);
                 }
+                holder.disabled.setVisibility(appInfo.enabled ? View.GONE : View.VISIBLE);
             } else {
                 Log.w(TAG, "No info for package:"+appInfo.packageName+" in property map");
             }

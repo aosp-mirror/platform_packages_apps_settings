@@ -47,12 +47,27 @@
             android:singleLine="true"
             android:ellipsize="marquee"
             android:layout_marginBottom="2dip" />
-        <TextView android:id="@+id/app_size"
-            android:layout_marginTop="-4dip"
-            android:layout_gravity="center_vertical"
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceSmall" />
+            android:baselineAlignedChildIndex="0" >
+            <TextView android:id="@+id/app_size"
+                android:layout_marginTop="-4dip"
+                android:layout_gravity="center_vertical|left"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:textAppearance="?android:attr/textAppearanceSmall" />
+            <TextView android:id="@+id/app_disabled"
+                android:layout_marginTop="-4dip"
+                android:layout_gravity="center_vertical|right"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="0"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:text="@string/disabled" />
+        </LinearLayout>
     </LinearLayout>
 </LinearLayout>
 

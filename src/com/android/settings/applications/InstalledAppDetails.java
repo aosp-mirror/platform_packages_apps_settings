@@ -1,5 +1,3 @@
-
-
 /**
  * Copyright (C) 2007 The Android Open Source Project
  *
@@ -42,8 +40,10 @@ import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.PackageParser;
 import android.content.pm.PackageStats;
+import android.content.pm.ResolveInfo;
 import android.content.pm.PackageManager.NameNotFoundException;
 import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.IBinder;
@@ -53,6 +53,8 @@ import android.os.ServiceManager;
 import android.os.storage.IMountService;
 import android.text.format.Formatter;
 import android.util.Log;
+
+import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import java.util.List;
 import android.content.ComponentName;
@@ -74,7 +76,6 @@ import android.widget.TextView;
  */
 public class InstalledAppDetails extends Activity implements View.OnClickListener {
     private static final String TAG="InstalledAppDetails";
-    private static final int _UNKNOWN_APP=R.string.unknown;
     private ApplicationInfo mAppInfo;
     private Button mUninstallButton;
     private boolean mMoveInProgress = false;
@@ -281,11 +282,39 @@ public class InstalledAppDetails extends Activity implements View.OnClickListene
         if (mUpdatedSysApp) {
             mUninstallButton.setText(R.string.app_factory_reset);
         } else {
-            if ((mAppInfo.flags & ApplicationInfo.FLAG_SYSTEM) != 0){
-                // Disable button for system applications.
+            if ((mAppInfo.flags & ApplicationInfo.FLAG_SYSTEM) != 0) {
                 enabled = false;
+                try {
+                    // Try to prevent the user from bricking their phone
+                    // by not allowing disabling of apps signed with the
+                    // system cert and any launcher app in the system.
+                    PackageInfo pi = mPm.getPackageInfo(mAppInfo.packageName,
+                            PackageManager.GET_DISABLED_COMPONENTS |
+                            PackageManager.GET_UNINSTALLED_PACKAGES |
+                            PackageManager.GET_SIGNATURES);
+                    PackageInfo sys = mPm.getPackageInfo("android",
+                            PackageManager.GET_SIGNATURES);
+                    Intent intent = new Intent(Intent.ACTION_MAIN);
+                    intent.addCategory(Intent.CATEGORY_HOME);
+                    intent.setPackage(mAppInfo.packageName);
+                    List<ResolveInfo> homes = mPm.queryIntentActivities(intent, 0);
+                    if ((homes != null && homes.size() > 0)
+                            || sys.signatures[0].equals(pi.signatures[0])) {
+                        // Disable button for core system applications.
+                        mUninstallButton.setText(R.string.disable_text);
+                    } else if (mAppInfo.enabled) {
+                        mUninstallButton.setText(R.string.disable_text);
+                        enabled = true;
+                    } else {
+                        mUninstallButton.setText(R.string.enable_text);
+                        enabled = true;
+                    }
+                } catch (PackageManager.NameNotFoundException e) {
+                    Log.w(TAG, "Unable to get package info", e);
+                }
+            } else {
+                mUninstallButton.setText(R.string.uninstall_text);
             }
-            mUninstallButton.setText(R.string.uninstall_text);
         }
         mUninstallButton.setEnabled(enabled);
         if (enabled) {
@@ -521,6 +550,7 @@ public class InstalledAppDetails extends Activity implements View.OnClickListene
         } else {
             mClearDataButton.setEnabled(true);
         }
+        checkForceStop();
     }
 
     private void refreshButtons() {
@@ -642,13 +672,13 @@ public class InstalledAppDetails extends Activity implements View.OnClickListene
                 }
             })
             .create();
-            case DLG_FORCE_STOP:
-                return new AlertDialog.Builder(this)
-                .setTitle(getString(R.string.force_stop_dlg_title))
-                .setIcon(android.R.drawable.ic_dialog_alert)
-                .setMessage(getString(R.string.force_stop_dlg_text))
-                .setPositiveButton(R.string.dlg_ok,
-                    new DialogInterface.OnClickListener() {
+        case DLG_FORCE_STOP:
+            return new AlertDialog.Builder(this)
+            .setTitle(getString(R.string.force_stop_dlg_title))
+            .setIcon(android.R.drawable.ic_dialog_alert)
+            .setMessage(getString(R.string.force_stop_dlg_text))
+            .setPositiveButton(R.string.dlg_ok,
+                new DialogInterface.OnClickListener() {
                 public void onClick(DialogInterface dialog, int which) {
                     // Force stop
                     forceStopPackage(mAppInfo.packageName);
@@ -656,15 +686,15 @@ public class InstalledAppDetails extends Activity implements View.OnClickListene
             })
             .setNegativeButton(R.string.dlg_cancel, null)
             .create();
-            case DLG_MOVE_FAILED:
-                CharSequence msg = getString(R.string.move_app_failed_dlg_text,
-                        getMoveErrMsg(mMoveErrorCode));
-                return new AlertDialog.Builder(this)
-                .setTitle(getString(R.string.move_app_failed_dlg_title))
-                .setIcon(android.R.drawable.ic_dialog_alert)
-                .setMessage(msg)
-                .setNeutralButton(R.string.dlg_ok, null)
-                .create();
+        case DLG_MOVE_FAILED:
+            CharSequence msg = getString(R.string.move_app_failed_dlg_text,
+                    getMoveErrMsg(mMoveErrorCode));
+            return new AlertDialog.Builder(this)
+            .setTitle(getString(R.string.move_app_failed_dlg_title))
+            .setIcon(android.R.drawable.ic_dialog_alert)
+            .setMessage(msg)
+            .setNeutralButton(R.string.dlg_ok, null)
+            .create();
         }
         return null;
     }
@@ -701,6 +731,36 @@ public class InstalledAppDetails extends Activity implements View.OnClickListene
                 Activity.RESULT_CANCELED, null, null);
     }
     
+    static class DisableChanger extends AsyncTask<Object, Object, Object> {
+        final PackageManager mPm;
+        final WeakReference<InstalledAppDetails> mActivity;
+        final ApplicationInfo mInfo;
+        final int mState;
+
+        DisableChanger(InstalledAppDetails activity, ApplicationInfo info, int state) {
+            mPm = activity.mPm;
+            mActivity = new WeakReference<InstalledAppDetails>(activity);
+            mInfo = info;
+            mState = state;
+        }
+
+        @Override
+        protected Object doInBackground(Object... params) {
+            mPm.setApplicationEnabledSetting(mInfo.packageName, mState, 0);
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(Object result) {
+            InstalledAppDetails activity = mActivity.get();
+            if (activity != null) {
+                activity.initAppInfo(mInfo.packageName);
+                activity.checkForceStop();
+                activity.refreshButtons();
+            }
+        }
+    }
+
     /*
      * Method implementing functionality of buttons clicked
      * @see android.view.View.OnClickListener#onClick(android.view.View)
@@ -711,7 +771,13 @@ public class InstalledAppDetails extends Activity implements View.OnClickListene
             if (mUpdatedSysApp) {
                 showDialogInner(DLG_FACTORY_RESET);
             } else {
-                uninstallPkg(packageName);
+                if ((mAppInfo.flags & ApplicationInfo.FLAG_SYSTEM) != 0) {
+                    new DisableChanger(this, mAppInfo, mAppInfo.enabled ?
+                            PackageManager.COMPONENT_ENABLED_STATE_DISABLED
+                            : PackageManager.COMPONENT_ENABLED_STATE_DEFAULT).execute((Object)null);
+                } else {
+                    uninstallPkg(packageName);
+                }
             }
         } else if(v == mActivitiesButton) {
             mPm.clearPackagePreferredActivities(packageName);
@@ -731,7 +797,8 @@ public class InstalledAppDetails extends Activity implements View.OnClickListene
             }
             mPm.deleteApplicationCacheFiles(packageName, mClearCacheObserver);
         } else if (v == mForceStopButton) {
-            forceStopPackage(mAppInfo.packageName);
+            showDialogInner(DLG_FORCE_STOP);
+            //forceStopPackage(mAppInfo.packageName);
         } else if (v == mMoveAppButton) {
             if (mPackageMoveObserver == null) {
                 mPackageMoveObserver = new PackageMoveObserver();
