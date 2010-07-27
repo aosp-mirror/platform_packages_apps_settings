@@ -45,6 +45,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.AbsListView.RecyclerListener;
 
 import java.io.FileInputStream;
 import java.util.ArrayList;
@@ -52,7 +53,7 @@ import java.util.HashMap;
 import java.util.Iterator;
 
 public class RunningProcessesView extends FrameLayout
-        implements AdapterView.OnItemClickListener {
+        implements AdapterView.OnItemClickListener, RecyclerListener {
     
     /** Maximum number of services to retrieve */
     static final int MAX_SERVICES = 100;
@@ -518,6 +519,7 @@ public class RunningProcessesView extends FrameLayout
             mListView.setEmptyView(emptyView);
         }
         mListView.setOnItemClickListener(this);
+        mListView.setRecyclerListener(this);
         mListView.setAdapter(new ServiceListAdapter(mState));
         mColorBar = (LinearColorBar)findViewById(R.id.color_bar);
         mBackgroundProcessText = (TextView)findViewById(R.id.backgroundText);
