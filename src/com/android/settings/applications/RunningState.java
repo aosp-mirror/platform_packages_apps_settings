@@ -29,7 +29,12 @@ import android.content.pm.PackageManager;
 import android.content.pm.ServiceInfo;
 import android.content.res.Resources;
 import android.os.Debug;
+import android.os.Handler;
+import android.os.HandlerThread;
+import android.os.Looper;
+import android.os.Message;
 import android.os.RemoteException;
+import android.os.SystemClock;
 import android.text.format.Formatter;
 import android.util.Log;
 import android.util.SparseArray;
@@ -46,6 +51,23 @@ import java.util.List;
  * applications/processes/services.
  */
 public class RunningState {
+    static Object sGlobalLock = new Object();
+    static RunningState sInstance;
+
+    static final int MSG_UPDATE_CONTENTS = 1;
+    static final int MSG_REFRESH_UI = 2;
+    static final int MSG_UPDATE_TIME = 3;
+
+    static final long TIME_UPDATE_DELAY = 1000;
+    static final long CONTENTS_UPDATE_DELAY = 2000;
+
+    static final int MAX_SERVICES = 100;
+
+    final Context mApplicationContext;
+    final ActivityManager mAm;
+    final PackageManager mPm;
+
+    OnRefreshUiListener mRefreshUiListener;
 
     // Processes that are hosting a service we are interested in, organized
     // by uid and name.  Note that this mapping does not change even across
@@ -85,6 +107,9 @@ public class RunningState {
     // background update thread and the UI thread.
     final Object mLock = new Object();
     
+    boolean mResumed;
+    boolean mHaveData;
+
     ArrayList<BaseItem> mItems = new ArrayList<BaseItem>();
     ArrayList<MergedItem> mMergedItems = new ArrayList<MergedItem>();
     
@@ -94,6 +119,78 @@ public class RunningState {
     long mForegroundProcessMemory;
     int mNumServiceProcesses;
     long mServiceProcessMemory;
+
+    // ----- BACKGROUND MONITORING THREAD -----
+
+    final HandlerThread mBackgroundThread;
+    final class BackgroundHandler extends Handler {
+        public BackgroundHandler(Looper looper) {
+            super(looper);
+        }
+
+        @Override
+        public void handleMessage(Message msg) {
+            switch (msg.what) {
+                case MSG_UPDATE_CONTENTS:
+                    synchronized (mLock) {
+                        if (!mResumed) {
+                            return;
+                        }
+                    }
+                    Message cmd = mHandler.obtainMessage(MSG_REFRESH_UI);
+                    cmd.arg1 = update(mApplicationContext, mAm) ? 1 : 0;
+                    mHandler.sendMessage(cmd);
+                    removeMessages(MSG_UPDATE_CONTENTS);
+                    msg = obtainMessage(MSG_UPDATE_CONTENTS);
+                    sendMessageDelayed(msg, CONTENTS_UPDATE_DELAY);
+                    break;
+            }
+        }
+    };
+
+    final BackgroundHandler mBackgroundHandler;
+
+    final Handler mHandler = new Handler() {
+        int mNextUpdate = OnRefreshUiListener.REFRESH_TIME;
+
+        @Override
+        public void handleMessage(Message msg) {
+            switch (msg.what) {
+                case MSG_REFRESH_UI:
+                    mNextUpdate = msg.arg1 != 0
+                            ? OnRefreshUiListener.REFRESH_STRUCTURE
+                            : OnRefreshUiListener.REFRESH_DATA;
+                    break;
+                case MSG_UPDATE_TIME:
+                    synchronized (mLock) {
+                        if (!mResumed) {
+                            return;
+                        }
+                    }
+                    removeMessages(MSG_UPDATE_TIME);
+                    Message m = obtainMessage(MSG_UPDATE_TIME);
+                    sendMessageDelayed(m, TIME_UPDATE_DELAY);
+
+                    if (mRefreshUiListener != null) {
+                        //Log.i("foo", "Refresh UI: " + mNextUpdate
+                        //        + " @ " + SystemClock.uptimeMillis());
+                        mRefreshUiListener.onRefreshUi(mNextUpdate);
+                        mNextUpdate = OnRefreshUiListener.REFRESH_TIME;
+                    }
+                    break;
+            }
+        }
+    };
+
+    // ----- DATA STRUCTURES -----
+
+    static interface OnRefreshUiListener {
+        public static final int REFRESH_TIME = 0;
+        public static final int REFRESH_DATA = 1;
+        public static final int REFRESH_STRUCTURE = 2;
+
+        public void onRefreshUi(int what);
+    }
 
     static class BaseItem {
         final boolean mIsProcess;
@@ -428,7 +525,69 @@ public class RunningState {
         return label;
     }
     
-    boolean update(Context context, ActivityManager am) {
+    static RunningState getInstance(Context context) {
+        synchronized (sGlobalLock) {
+            if (sInstance == null) {
+                sInstance = new RunningState(context);
+            }
+            return sInstance;
+        }
+    }
+
+    private RunningState(Context context) {
+        mApplicationContext = context.getApplicationContext();
+        mAm = (ActivityManager)mApplicationContext.getSystemService(Context.ACTIVITY_SERVICE);
+        mPm = mApplicationContext.getPackageManager();
+        mResumed = false;
+        mBackgroundThread = new HandlerThread("RunningState:Background");
+        mBackgroundThread.start();
+        mBackgroundHandler = new BackgroundHandler(mBackgroundThread.getLooper());
+    }
+
+    void resume(OnRefreshUiListener listener) {
+        synchronized (mLock) {
+            mResumed = true;
+            mRefreshUiListener = listener;
+            if (!mBackgroundHandler.hasMessages(MSG_UPDATE_CONTENTS)) {
+                mBackgroundHandler.sendEmptyMessage(MSG_UPDATE_CONTENTS);
+            }
+            mHandler.sendEmptyMessage(MSG_UPDATE_TIME);
+        }
+    }
+
+    void updateNow() {
+        synchronized (mLock) {
+            mBackgroundHandler.removeMessages(MSG_UPDATE_CONTENTS);
+            mBackgroundHandler.sendEmptyMessage(MSG_UPDATE_CONTENTS);
+        }
+    }
+
+    boolean hasData() {
+        synchronized (mLock) {
+            return mHaveData;
+        }
+    }
+
+    void waitForData() {
+        synchronized (mLock) {
+            while (!mHaveData) {
+                try {
+                    mLock.wait(0);
+                } catch (InterruptedException e) {
+                }
+            }
+        }
+    }
+
+    void pause() {
+        synchronized (mLock) {
+            mResumed = false;
+            mRefreshUiListener = null;
+            mHandler.removeMessages(MSG_UPDATE_TIME);
+        }
+    }
+
+    private boolean update(Context context, ActivityManager am) {
         final PackageManager pm = context.getPackageManager();
         
         mSequence++;
@@ -436,7 +595,7 @@ public class RunningState {
         boolean changed = false;
         
         List<ActivityManager.RunningServiceInfo> services 
-                = am.getRunningServices(RunningProcessesView.MAX_SERVICES);
+                = am.getRunningServices(MAX_SERVICES);
         final int NS = services != null ? services.size() : 0;
         for (int i=0; i<NS; i++) {
             ActivityManager.RunningServiceInfo si = services.get(i);
@@ -776,6 +935,10 @@ public class RunningState {
             mBackgroundProcessMemory = backgroundProcessMemory;
             mForegroundProcessMemory = foregroundProcessMemory;
             mServiceProcessMemory = serviceProcessMemory;
+            if (!mHaveData) {
+                mHaveData = true;
+                mLock.notifyAll();
+            }
         }
         
         return changed;

@@ -92,6 +92,8 @@ public class ManageApplications extends TabActivity implements
     
     private String mCurrentPkgName;
     
+    private View mListContainer;
+
     // ListView used to display list
     private ListView mListView;
     // Custom view used to display running processes
@@ -378,8 +380,9 @@ public class ManageApplications extends TabActivity implements
         if (intent.getComponent().getClassName().equals(
                 "com.android.settings.RunningServices")) {
             defaultTabTag = TAB_RUNNING;
-        }
-        if (action.equals(Intent.ACTION_MANAGE_PACKAGE_STORAGE)) {
+        } else if (intent.getComponent().getClassName().equals(
+                "com.android.settings.applications.StorageUse")
+                || action.equals(Intent.ACTION_MANAGE_PACKAGE_STORAGE)) {
             mSortOrder = SORT_ORDER_SIZE;
             mFilterApps = FILTER_APPS_ALL;
             defaultTabTag = TAB_ALL;
@@ -401,9 +404,14 @@ public class ManageApplications extends TabActivity implements
         mComputingSizeStr = getText(R.string.computing_size);
         // initialize the inflater
         mInflater = (LayoutInflater)getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        mRootView = mInflater.inflate(R.layout.compute_sizes, null);
+        mRootView = mInflater.inflate(R.layout.manage_applications, null);
+        mListContainer = mRootView.findViewById(R.id.list_container);
         // Create adapter and list view here
-        ListView lv = (ListView) mRootView.findViewById(android.R.id.list);
+        ListView lv = (ListView) mListContainer.findViewById(android.R.id.list);
+        View emptyView = mListContainer.findViewById(com.android.internal.R.id.empty);
+        if (emptyView != null) {
+            lv.setEmptyView(emptyView);
+        }
         lv.setOnItemClickListener(this);
         lv.setSaveEnabled(true);
         lv.setItemsCanFocus(true);
@@ -543,7 +551,7 @@ public class ManageApplications extends TabActivity implements
             }
             if (mCurView != which) {
                 mRunningProcessesView.setVisibility(View.GONE);
-                mListView.setVisibility(View.VISIBLE);
+                mListContainer.setVisibility(View.VISIBLE);
             }
             if (mActivityResumed) {
                 mApplicationsAdapter.resume(mFilterApps, mSortOrder);
@@ -560,7 +568,7 @@ public class ManageApplications extends TabActivity implements
             mApplicationsAdapter.pause();
             if (mCurView != which) {
                 mRunningProcessesView.setVisibility(View.VISIBLE);
-                mListView.setVisibility(View.GONE);
+                mListContainer.setVisibility(View.GONE);
             }
         }
         mCurView = which;

@@ -26,15 +26,12 @@ import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.Rect;
 import android.os.Bundle;
-import android.os.Handler;
-import android.os.HandlerThread;
-import android.os.Looper;
-import android.os.Message;
 import android.os.SystemClock;
 import android.os.SystemProperties;
 import android.text.format.DateUtils;
 import android.text.format.Formatter;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -53,17 +50,8 @@ import java.util.HashMap;
 import java.util.Iterator;
 
 public class RunningProcessesView extends FrameLayout
-        implements AdapterView.OnItemClickListener, RecyclerListener {
-    
-    /** Maximum number of services to retrieve */
-    static final int MAX_SERVICES = 100;
-    
-    static final int MSG_UPDATE_TIMES = 1;
-    static final int MSG_UPDATE_CONTENTS = 2;
-    static final int MSG_REFRESH_UI = 3;
-    
-    static final long TIME_UPDATE_DELAY = 1000;
-    static final long CONTENTS_UPDATE_DELAY = 2000;
+        implements AdapterView.OnItemClickListener, RecyclerListener,
+        RunningState.OnRefreshUiListener {
     
     // Memory pages are 4K.
     static final long PAGE_SIZE = 4*1024;
@@ -128,6 +116,8 @@ public class RunningProcessesView extends FrameLayout
             
             if (uptimeView != null) {
                 if (mItem.mActiveSince >= 0) {
+                    //Log.i("foo", "Time for " + mItem.mDisplayLabel
+                    //        + ": " + (SystemClock.uptimeMillis()-mFirstRunTime));
                     uptimeView.setText(DateUtils.formatElapsedTime(builder,
                             (SystemClock.uptimeMillis()-mFirstRunTime)/1000));
                 } else {
@@ -218,6 +208,11 @@ public class RunningProcessesView extends FrameLayout
         
         public int getCount() {
             return mItems.size();
+        }
+
+        @Override
+        public boolean isEmpty() {
+            return mState.hasData() && mItems.size() == 0;
         }
 
         public Object getItem(int position) {
@@ -329,55 +324,6 @@ public class RunningProcessesView extends FrameLayout
             }
         }
     }
-    
-    HandlerThread mBackgroundThread;
-    final class BackgroundHandler extends Handler {
-        public BackgroundHandler(Looper looper) {
-            super(looper);
-        }
-        
-        @Override
-        public void handleMessage(Message msg) {
-            switch (msg.what) {
-                case MSG_UPDATE_CONTENTS:
-                    Message cmd = mHandler.obtainMessage(MSG_REFRESH_UI);
-                    cmd.arg1 = mState.update(getContext(), mAm) ? 1 : 0;
-                    mHandler.sendMessage(cmd);
-                    removeMessages(MSG_UPDATE_CONTENTS);
-                    msg = obtainMessage(MSG_UPDATE_CONTENTS);
-                    sendMessageDelayed(msg, CONTENTS_UPDATE_DELAY);
-                    break;
-            }
-        }
-    };
-
-    BackgroundHandler mBackgroundHandler;
-    
-    final Handler mHandler = new Handler() {
-        @Override
-        public void handleMessage(Message msg) {
-            switch (msg.what) {
-                case MSG_UPDATE_TIMES:
-                    Iterator<ActiveItem> it = mActiveItems.values().iterator();
-                    while (it.hasNext()) {
-                        ActiveItem ai = it.next();
-                        if (ai.mRootView.getWindowToken() == null) {
-                            // Clean out any dead views, just in case.
-                            it.remove();
-                            continue;
-                        }
-                        ai.updateTime(getContext(), mBuilder);
-                    }
-                    removeMessages(MSG_UPDATE_TIMES);
-                    msg = obtainMessage(MSG_UPDATE_TIMES);
-                    sendMessageDelayed(msg, TIME_UPDATE_DELAY);
-                    break;
-                case MSG_REFRESH_UI:
-                    refreshUi(msg.arg1 != 0);
-                    break;
-            }
-        }
-    };
     
     private boolean matchText(byte[] buffer, int index, String text) {
         int N = text.length();
@@ -506,10 +452,7 @@ public class RunningProcessesView extends FrameLayout
     
     public void doCreate(Bundle savedInstanceState, Object nonConfigurationInstace) {
         mAm = (ActivityManager)getContext().getSystemService(Context.ACTIVITY_SERVICE);
-        mState = (RunningState)nonConfigurationInstace;
-        if (mState == null) {
-            mState = new RunningState();
-        }
+        mState = RunningState.getInstance(getContext());
         LayoutInflater inflater = (LayoutInflater)getContext().getSystemService(
                 Context.LAYOUT_INFLATER_SERVICE);
         inflater.inflate(R.layout.running_processes_view, this);
@@ -531,28 +474,49 @@ public class RunningProcessesView extends FrameLayout
     }
     
     public void doPause() {
-        mHandler.removeMessages(MSG_UPDATE_TIMES);
-        if (mBackgroundThread != null) {
-            mBackgroundThread.quit();
-            mBackgroundThread = null;
-            mBackgroundHandler = null;
-        }
+        mState.pause();
     }
 
     public void doResume() {
-        refreshUi(mState.update(getContext(), mAm));
-        mBackgroundThread = new HandlerThread("RunningServices");
-        mBackgroundThread.start();
-        mBackgroundHandler = new BackgroundHandler(mBackgroundThread.getLooper());
-        mHandler.removeMessages(MSG_UPDATE_TIMES);
-        Message msg = mHandler.obtainMessage(MSG_UPDATE_TIMES);
-        mHandler.sendMessageDelayed(msg, TIME_UPDATE_DELAY);
-        mBackgroundHandler.removeMessages(MSG_UPDATE_CONTENTS);
-        msg = mBackgroundHandler.obtainMessage(MSG_UPDATE_CONTENTS);
-        mBackgroundHandler.sendMessageDelayed(msg, CONTENTS_UPDATE_DELAY);
+        mState.resume(this);
+        if (mState.hasData()) {
+            // If the state already has its data, then let's populate our
+            // list right now to avoid flicker.
+            refreshUi(true);
+        }
     }
 
     public Object doRetainNonConfigurationInstance() {
-        return mState;
+        return null;
+    }
+
+    void updateTimes() {
+        Iterator<ActiveItem> it = mActiveItems.values().iterator();
+        while (it.hasNext()) {
+            ActiveItem ai = it.next();
+            if (ai.mRootView.getWindowToken() == null) {
+                // Clean out any dead views, just in case.
+                it.remove();
+                continue;
+            }
+            ai.updateTime(getContext(), mBuilder);
+        }
+    }
+
+    @Override
+    public void onRefreshUi(int what) {
+        switch (what) {
+            case REFRESH_TIME:
+                updateTimes();
+                break;
+            case REFRESH_DATA:
+                refreshUi(false);
+                updateTimes();
+                break;
+            case REFRESH_STRUCTURE:
+                refreshUi(true);
+                updateTimes();
+                break;
+        }
     }
 }

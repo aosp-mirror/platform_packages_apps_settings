@@ -42,15 +42,12 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class RunningServiceDetails extends Activity {
+public class RunningServiceDetails extends Activity
+        implements RunningState.OnRefreshUiListener {
     static final String TAG = "RunningServicesDetails";
     
     static final String KEY_UID = "uid";
     static final String KEY_PROCESS = "process";
-    
-    static final int MSG_UPDATE_TIMES = 1;
-    static final int MSG_UPDATE_CONTENTS = 2;
-    static final int MSG_REFRESH_UI = 3;
     
     ActivityManager mAm;
     LayoutInflater mInflater;
@@ -156,9 +153,7 @@ public class RunningServiceDetails extends Activity {
                     // so no reason for the UI to stick around.
                     finish();
                 } else {
-                    if (mBackgroundHandler != null) {
-                        mBackgroundHandler.sendEmptyMessage(MSG_UPDATE_CONTENTS);
-                    }
+                    mState.updateNow();
                 }
             } else {
                 // Heavy-weight process.  We'll do a force-stop on it.
@@ -169,52 +164,6 @@ public class RunningServiceDetails extends Activity {
     }
     
     StringBuilder mBuilder = new StringBuilder(128);
-    
-    HandlerThread mBackgroundThread;
-    final class BackgroundHandler extends Handler {
-        public BackgroundHandler(Looper looper) {
-            super(looper);
-        }
-        
-        @Override
-        public void handleMessage(Message msg) {
-            switch (msg.what) {
-                case MSG_UPDATE_CONTENTS:
-                    Message cmd = mHandler.obtainMessage(MSG_REFRESH_UI);
-                    cmd.arg1 = mState.update(RunningServiceDetails.this, mAm) ? 1 : 0;
-                    mHandler.sendMessage(cmd);
-                    removeMessages(MSG_UPDATE_CONTENTS);
-                    msg = obtainMessage(MSG_UPDATE_CONTENTS);
-                    sendMessageDelayed(msg, RunningProcessesView.CONTENTS_UPDATE_DELAY);
-                    break;
-            }
-        }
-    };
-
-    BackgroundHandler mBackgroundHandler;
-    
-    final Handler mHandler = new Handler() {
-        @Override
-        public void handleMessage(Message msg) {
-            switch (msg.what) {
-                case MSG_UPDATE_TIMES:
-                    if (mSnippetActiveItem != null) {
-                        mSnippetActiveItem.updateTime(RunningServiceDetails.this, mBuilder);
-                    }
-                    for (int i=0; i<mActiveDetails.size(); i++) {
-                        mActiveDetails.get(i).mActiveItem.updateTime(
-                                RunningServiceDetails.this, mBuilder);
-                    }
-                    removeMessages(MSG_UPDATE_TIMES);
-                    msg = obtainMessage(MSG_UPDATE_TIMES);
-                    sendMessageDelayed(msg, RunningProcessesView.TIME_UPDATE_DELAY);
-                    break;
-                case MSG_REFRESH_UI:
-                    refreshUi(msg.arg1 != 0);
-                    break;
-            }
-        }
-    };
     
     boolean findMergedItem() {
         RunningState.MergedItem item = null;
@@ -447,10 +396,7 @@ public class RunningServiceDetails extends Activity {
         mAm = (ActivityManager)getSystemService(Context.ACTIVITY_SERVICE);
         mInflater = (LayoutInflater)getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         
-        mState = (RunningState)getLastNonConfigurationInstance();
-        if (mState == null) {
-            mState = new RunningState();
-        }
+        mState = RunningState.getInstance(this);
         
         setContentView(R.layout.running_service_details);
         
@@ -464,36 +410,53 @@ public class RunningServiceDetails extends Activity {
     @Override
     protected void onPause() {
         super.onPause();
-        mHandler.removeMessages(MSG_UPDATE_TIMES);
-        if (mBackgroundThread != null) {
-            mBackgroundThread.quit();
-            mBackgroundThread = null;
-            mBackgroundHandler = null;
-        }
+        mState.pause();
     }
 
     @Override
     protected void onResume() {
         super.onResume();
-        refreshUi(mState.update(this, mAm));
-        mBackgroundThread = new HandlerThread("RunningServices");
-        mBackgroundThread.start();
-        mBackgroundHandler = new BackgroundHandler(mBackgroundThread.getLooper());
-        mHandler.removeMessages(MSG_UPDATE_TIMES);
-        Message msg = mHandler.obtainMessage(MSG_UPDATE_TIMES);
-        mHandler.sendMessageDelayed(msg, RunningProcessesView.TIME_UPDATE_DELAY);
-        mBackgroundHandler.removeMessages(MSG_UPDATE_CONTENTS);
-        msg = mBackgroundHandler.obtainMessage(MSG_UPDATE_CONTENTS);
-        mBackgroundHandler.sendMessageDelayed(msg, RunningProcessesView.CONTENTS_UPDATE_DELAY);
-    }
+        mState.resume(this);
 
-    @Override
-    public Object onRetainNonConfigurationInstance() {
-        return mState;
+        // We want to go away if the service being shown no longer exists,
+        // so we need to ensure we have done the initial data retrieval before
+        // showing our ui.
+        mState.waitForData();
+
+        // And since we know we have the data, let's show the UI right away
+        // to avoid flicker.
+        refreshUi(true);
     }
 
     @Override
     protected void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
+    }
+
+    void updateTimes() {
+        if (mSnippetActiveItem != null) {
+            mSnippetActiveItem.updateTime(RunningServiceDetails.this, mBuilder);
+        }
+        for (int i=0; i<mActiveDetails.size(); i++) {
+            mActiveDetails.get(i).mActiveItem.updateTime(
+                    RunningServiceDetails.this, mBuilder);
+        }
+    }
+
+    @Override
+    public void onRefreshUi(int what) {
+        switch (what) {
+            case REFRESH_TIME:
+                updateTimes();
+                break;
+            case REFRESH_DATA:
+                refreshUi(false);
+                updateTimes();
+                break;
+            case REFRESH_STRUCTURE:
+                refreshUi(true);
+                updateTimes();
+                break;
+        }
     }
 }
