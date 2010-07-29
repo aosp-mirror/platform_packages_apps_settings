@@ -380,10 +380,10 @@
             </intent-filter>
         </activity>
 
-        <!--
-        <activity android:name=".applications.RunningServices"
-                  android:label="@string/runningservices_settings_title"
-                  android:clearTaskOnLaunch="true">
+        <!-- Provide direct entry into manage apps showing running services. -->
+        <activity-alias android:name=".RunningServices"
+                android:label="@string/runningservices_settings_title"
+            android:targetActivity=".applications.ManageApplications">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.DEFAULT" />
@@ -391,11 +391,11 @@
                 <category android:name="android.intent.category.VOICE_LAUNCH" />
                 <category android:name="com.android.settings.SHORTCUT" />
             </intent-filter>
-        </activity>
-        -->
+        </activity-alias>
         
         <!-- Provide direct entry into manage apps showing running services. -->
-        <activity-alias android:name=".RunningServices"
+        <activity-alias android:name=".applications.StorageUse"
+                android:label="@string/storageuse_settings_title"
             android:targetActivity=".applications.ManageApplications">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

@@ -320,7 +320,7 @@ public class ApplicationsState {
         if (entry.icon != null) {
             return;
         }
-        synchronized (mEntriesMap) {
+        synchronized (entry) {
             if (entry.icon == null) {
                 entry.icon = entry.info.loadIcon(mPm);
             }
