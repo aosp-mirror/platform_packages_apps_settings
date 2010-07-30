@@ -67,6 +67,10 @@ public class ApplicationsState {
         final String label;
         final long id;
         long size;
+        
+        long cacheSize;
+        long codeSize;
+        long dataSize;
 
         String getNormalizedLabel() {
             if (normalizedLabel != null) {
@@ -116,7 +120,9 @@ public class ApplicationsState {
     public static final AppFilter THIRD_PARTY_FILTER = new AppFilter() {
         @Override
         public boolean filterApp(ApplicationInfo info) {
-            if ((info.flags & ApplicationInfo.FLAG_EXTERNAL_STORAGE) != 0) {
+            if ((info.flags & ApplicationInfo.FLAG_UPDATED_SYSTEM_APP) != 0) {
+                return true;
+            } else if ((info.flags & ApplicationInfo.FLAG_SYSTEM) == 0) {
                 return true;
             }
             return false;
@@ -126,9 +132,7 @@ public class ApplicationsState {
     public static final AppFilter ON_SD_CARD_FILTER = new AppFilter() {
         @Override
         public boolean filterApp(ApplicationInfo info) {
-            if ((info.flags & ApplicationInfo.FLAG_UPDATED_SYSTEM_APP) != 0) {
-                return true;
-            } else if ((info.flags & ApplicationInfo.FLAG_SYSTEM) == 0) {
+            if ((info.flags & ApplicationInfo.FLAG_EXTERNAL_STORAGE) != 0) {
                 return true;
             }
             return false;
@@ -195,9 +199,10 @@ public class ApplicationsState {
                      // Ignore
                      return;
                  }
+                 boolean avail = Intent.ACTION_EXTERNAL_APPLICATIONS_AVAILABLE.equals(actionStr);
                  for (String pkgName : pkgList) {
-                     removePackage(pkgName);
-                     addPackage(pkgName);
+                     if (avail) addPackage(pkgName);
+                     else removePackage(pkgName);
                  }
              }
          }
@@ -316,6 +321,22 @@ public class ApplicationsState {
         return filteredApps;
     }
 
+    AppEntry getEntry(String packageName) {
+        synchronized (mEntriesMap) {
+            AppEntry entry = mEntriesMap.get(packageName);
+            if (entry == null) {
+                for (int i=0; i<mApplications.size(); i++) {
+                    ApplicationInfo info = mApplications.get(i);
+                    if (packageName.equals(info.packageName)) {
+                        entry = getEntryLocked(info);
+                        break;
+                    }
+                }
+            }
+            return entry;
+        }
+    }
+    
     void ensureIcon(AppEntry entry) {
         if (entry.icon != null) {
             return;
@@ -442,8 +463,14 @@ public class ApplicationsState {
                             entry.sizeStale = false;
                             entry.sizeLoadStart = 0;
                             long newSize = getTotalSize(stats);
-                            if (entry.size != newSize) {
+                            if (entry.size != newSize ||
+                                    entry.cacheSize != stats.cacheSize ||
+                                    entry.codeSize != stats.codeSize ||
+                                    entry.dataSize != stats.dataSize) {
                                 entry.size = newSize;
+                                entry.cacheSize = stats.cacheSize;
+                                entry.codeSize = stats.codeSize;
+                                entry.dataSize = stats.dataSize;
                                 entry.sizeStr = getSizeStr(entry.size);
                                 if (DEBUG) Log.i(TAG, "Set size of " + entry.label + " " + entry
                                         + ": " + entry.sizeStr);
