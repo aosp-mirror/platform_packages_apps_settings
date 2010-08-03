@@ -64,8 +64,6 @@ public class AirplaneModeEnabler implements Preference.OnPreferenceChangeListene
 
     public void resume() {
         
-        // This is the widget enabled state, not the preference toggled state
-        mCheckBoxPref.setEnabled(true);
         mCheckBoxPref.setChecked(isAirplaneModeOn(mContext));
 
         mPhoneStateReceiver.registerIntent();
@@ -84,13 +82,14 @@ public class AirplaneModeEnabler implements Preference.OnPreferenceChangeListene
 
     private void setAirplaneModeOn(boolean enabling) {
         
-        mCheckBoxPref.setEnabled(false);
         mCheckBoxPref.setSummary(enabling ? R.string.airplane_mode_turning_on
                 : R.string.airplane_mode_turning_off);
         
         // Change the system setting
         Settings.System.putInt(mContext.getContentResolver(), Settings.System.AIRPLANE_MODE_ON, 
                                 enabling ? 1 : 0);
+        // Update the UI to reflect system setting
+        mCheckBoxPref.setChecked(enabling);
         
         // Post the intent
         Intent intent = new Intent(Intent.ACTION_AIRPLANE_MODE_CHANGED);
@@ -100,14 +99,17 @@ public class AirplaneModeEnabler implements Preference.OnPreferenceChangeListene
 
     /**
      * Called when we've received confirmation that the airplane mode was set.
+     * TODO: We update the checkbox summary when we get notified
+     * that mobile radio is powered up/down. We should not have dependency
+     * on one radio alone. We need to do the following:
+     * - handle the case of wifi/bluetooth failures
+     * - mobile does not send failure notification, fail on timeout.
      */
     private void onAirplaneModeChanged() {
         ServiceState serviceState = mPhoneStateReceiver.getServiceState();
         boolean airplaneModeEnabled = serviceState.getState() == ServiceState.STATE_POWER_OFF;
-        mCheckBoxPref.setChecked(airplaneModeEnabled);
         mCheckBoxPref.setSummary(airplaneModeEnabled ? null : 
                 mContext.getString(R.string.airplane_mode_summary));            
-        mCheckBoxPref.setEnabled(true);
     }
     
     /**
@@ -128,7 +130,7 @@ public class AirplaneModeEnabler implements Preference.OnPreferenceChangeListene
             // update database based on the current checkbox state
             setAirplaneModeOn(isAirplaneModeOn);
         } else {
-            // update checkbox state based on database value
+            // update summary
             onAirplaneModeChanged();
         }
     }
