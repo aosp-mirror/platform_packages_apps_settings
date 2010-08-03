@@ -16,6 +16,7 @@
 
 package com.android.settings;
 
+import android.app.admin.DevicePolicyManager;
 import android.bluetooth.BluetoothAdapter;
 import android.content.Context;
 import android.content.Intent;
@@ -45,6 +46,7 @@ public class WirelessSettings extends PreferenceActivity {
     private static final String KEY_BT_SETTINGS = "bt_settings";
     private static final String KEY_VPN_SETTINGS = "vpn_settings";
     private static final String KEY_TETHER_SETTINGS = "tether_settings";
+    private static final String KEY_PROXY_SETTINGS = "proxy_settings";
     public static final String EXIT_ECM_RESULT = "exit_ecm_result";
     public static final int REQUEST_CODE_EXIT_ECM = 1;
 
@@ -117,6 +119,11 @@ public class WirelessSettings extends PreferenceActivity {
         if (ServiceManager.getService(BluetoothAdapter.BLUETOOTH_SERVICE) == null) {
             findPreference(KEY_BT_SETTINGS).setEnabled(false);
         }
+
+        // Enable Proxy selector settings if allowed.
+        Preference mGlobalProxy = findPreference(KEY_PROXY_SETTINGS);
+        DevicePolicyManager mDPM = (DevicePolicyManager)getSystemService(Context.DEVICE_POLICY_SERVICE);
+        mGlobalProxy.setEnabled(mDPM.getGlobalProxyAdmin() == null);
 
         // Disable Tethering if it's not allowed
         ConnectivityManager cm =

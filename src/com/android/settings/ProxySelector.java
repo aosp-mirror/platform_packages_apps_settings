@@ -18,8 +18,10 @@ package com.android.settings;
 
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.app.admin.DevicePolicyManager;
 import android.app.Dialog;
 import android.content.ContentResolver;
+import android.content.Context;
 import android.content.Intent;
 import android.net.Proxy;
 import android.os.Bundle;
@@ -28,6 +30,7 @@ import android.text.Selection;
 import android.text.Spannable;
 import android.text.TextUtils;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.View.OnFocusChangeListener;
@@ -62,16 +65,24 @@ import java.util.regex.Pattern;
 public class ProxySelector extends Activity
 {
     private final static String LOGTAG = "Settings";
+    private View mInitialView;
+    private LayoutInflater mInflater;
+    boolean mUserSetGlobalProxy;
 
     EditText    mHostnameField;
     EditText    mPortField;
+    EditText    mExclusionListField;
     Button      mOKButton;
+    DevicePolicyManager mDPM;
 
     // Matches blank input, ips, and domain names
     private static final String HOSTNAME_REGEXP = "^$|^[a-zA-Z0-9]+(\\-[a-zA-Z0-9]+)*(\\.[a-zA-Z0-9]+(\\-[a-zA-Z0-9]+)*)*$";
     private static final Pattern HOSTNAME_PATTERN;
+    private static final String EXCLLIST_REGEXP = "$|^(.?[a-zA-Z0-9]+(\\-[a-zA-Z0-9]+)*(\\.[a-zA-Z0-9]+(\\-[a-zA-Z0-9]+)*)*)+(,(.?[a-zA-Z0-9]+(\\-[a-zA-Z0-9]+)*(\\.[a-zA-Z0-9]+(\\-[a-zA-Z0-9]+)*)*))*$";
+    private static final Pattern EXCLLIST_PATTERN;
     static {
         HOSTNAME_PATTERN = Pattern.compile(HOSTNAME_REGEXP);
+        EXCLLIST_PATTERN = Pattern.compile(EXCLLIST_REGEXP);
     }
 
     private static final int ERROR_DIALOG_ID = 0;
@@ -81,8 +92,16 @@ public class ProxySelector extends Activity
 
         if (android.util.Config.LOGV) Log.v(LOGTAG, "[ProxySelector] onStart");
 
-        setContentView(R.layout.proxy);
+        mInflater = LayoutInflater.from(this);
+        if (mInitialView == null) {
+            mInitialView = mInflater.inflate(R.layout.proxy, null);
+        }
+        mDPM = (DevicePolicyManager)getSystemService(Context.DEVICE_POLICY_SERVICE);
+        mUserSetGlobalProxy = (mDPM.getGlobalProxyAdmin() == null);
+
+        setContentView(mInitialView);
         initView();
+        // TODO: Populate based on connection status
         populateFields(false);
     }
 
@@ -91,7 +110,8 @@ public class ProxySelector extends Activity
         if (id == ERROR_DIALOG_ID) {
             String hostname = mHostnameField.getText().toString().trim();
             String portStr = mPortField.getText().toString().trim();
-            String msg = getString(validate(hostname, portStr));
+            String exclList = mExclusionListField.getText().toString().trim();
+            String msg = getString(validate(hostname, portStr, exclList));
 
             return new AlertDialog.Builder(this)
                     .setTitle(R.string.proxy_error)
@@ -109,7 +129,8 @@ public class ProxySelector extends Activity
         if (id == ERROR_DIALOG_ID) {
             String hostname = mHostnameField.getText().toString().trim();
             String portStr = mPortField.getText().toString().trim();
-            String msg = getString(validate(hostname, portStr));
+            String exclList = mExclusionListField.getText().toString().trim();
+            String msg = getString(validate(hostname, portStr, exclList));
             ((AlertDialog)dialog).setMessage(msg);
         }
     }
@@ -123,27 +144,41 @@ public class ProxySelector extends Activity
         mPortField.setOnClickListener(mOKHandler);
         mPortField.setOnFocusChangeListener(mOnFocusChangeHandler);
 
+        mExclusionListField = (EditText)findViewById(R.id.exclusionlist);
+        mExclusionListField.setOnFocusChangeListener(mOnFocusChangeHandler);
+
         mOKButton = (Button)findViewById(R.id.action);
         mOKButton.setOnClickListener(mOKHandler);
 
-        Button b = (Button)findViewById(R.id.clear);
-        b.setOnClickListener(mClearHandler);
+        Button clearButton = (Button)findViewById(R.id.clear);
+        clearButton.setOnClickListener(mClearHandler);
 
-        b = (Button)findViewById(R.id.defaultView);
-        b.setOnClickListener(mDefaultHandler);
-    }
+        Button defButton = (Button)findViewById(R.id.defaultView);
+        defButton.setOnClickListener(mDefaultHandler);
+
+        // Disable UI if the Global Proxy is being controlled by a Device Admin
+        mHostnameField.setEnabled(mUserSetGlobalProxy);
+        mPortField.setEnabled(mUserSetGlobalProxy);
+        mExclusionListField.setEnabled(mUserSetGlobalProxy);
+        mOKButton.setEnabled(mUserSetGlobalProxy);
+        clearButton.setEnabled(mUserSetGlobalProxy);
+        defButton.setEnabled(mUserSetGlobalProxy);
+}
 
     void populateFields(boolean useDefault) {
         String hostname = null;
         int port = -1;
+        String exclList = null;
         if (useDefault) {
             // Use the default proxy settings provided by the carrier
             hostname = Proxy.getDefaultHost();
             port = Proxy.getDefaultPort();
         } else {
             // Use the last setting given by the user
+            ContentResolver res = getContentResolver();
             hostname = Proxy.getHost(this);
             port = Proxy.getPort(this);
+            exclList = Settings.Secure.getString(res, Settings.Secure.HTTP_PROXY_EXCLUSION_LIST);
         }
 
         if (hostname == null) {
@@ -154,6 +189,8 @@ public class ProxySelector extends Activity
 
         String portStr = port == -1 ? "" : Integer.toString(port);
         mPortField.setText(portStr);
+
+        mExclusionListField.setText(exclList);
 
         Intent intent = getIntent();
 
@@ -172,10 +209,13 @@ public class ProxySelector extends Activity
      * validate syntax of hostname and port entries
      * @return 0 on success, string resource ID on failure
      */
-    int validate(String hostname, String port) {
+    int validate(String hostname, String port, String exclList) {
         Matcher match = HOSTNAME_PATTERN.matcher(hostname);
+        Matcher listMatch = EXCLLIST_PATTERN.matcher(exclList);
 
         if (!match.matches()) return R.string.proxy_error_invalid_host;
+
+        if (!listMatch.matches()) return R.string.proxy_error_invalid_exclusion_list;
 
         if (hostname.length() > 0 && port.length() == 0) {
             return R.string.proxy_error_empty_port;
@@ -205,9 +245,10 @@ public class ProxySelector extends Activity
 
         String hostname = mHostnameField.getText().toString().trim();
         String portStr = mPortField.getText().toString().trim();
+        String exclList = mExclusionListField.getText().toString().trim();
         int port = -1;
 
-        int result = validate(hostname, portStr);
+        int result = validate(hostname, portStr, exclList);
         if (result > 0) {
             showDialog(ERROR_DIALOG_ID);
             return false;
@@ -244,6 +285,7 @@ public class ProxySelector extends Activity
             hostname += ':' + portStr;
         }
         Settings.Secure.putString(res, Settings.Secure.HTTP_PROXY, hostname);
+        Settings.Secure.putString(res, Settings.Secure.HTTP_PROXY_EXCLUSION_LIST, exclList);
         sendBroadcast(new Intent(Proxy.PROXY_CHANGE_ACTION));
 
         return true;
@@ -261,12 +303,14 @@ public class ProxySelector extends Activity
             public void onClick(View v) {
                 mHostnameField.setText("");
                 mPortField.setText("");
+                mExclusionListField.setText("");
             }
         };
 
     OnClickListener mDefaultHandler = new OnClickListener() {
             public void onClick(View v) {
-                populateFields(true);
+                // TODO: populate based on connection status
+                populateFields(false);
             }
         };
 

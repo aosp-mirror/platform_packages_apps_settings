@@ -292,14 +292,20 @@
     <!-- Used for diagnostic screens, precise translation is not necessary -->
     <string name="intent_sender_account_label">Account: </string>
 
+    <!-- HTTP proxy settings title -->
+    <string name="proxy_settings_title">Proxy Settings</string>
+    <!-- HTTP proxy settings summary -->
+    <string name="proxy_settings_summary">Set the global HTTP proxy and exclusion lists</string>
     <!-- HTTP proxy settings. Button to clear the proxy box. -->
     <string name="proxy_clear_text">Clear</string>
     <!-- HTTP proxy settings. The port number label. -->
     <string name="proxy_port_label">Port</string>
+    <!-- HTTP proxy settings. The exclusion list label. -->
+    <string name="proxy_exclusionlist_label">No Proxy for</string>
     <!-- HTTP proxy settings. The button to restore the defaults. -->
     <string name="proxy_defaultView_text">Restore defaults</string>
     <!-- HTTP proxy settings. The button to save. -->
-    <string name="proxy_action_text">Save</string>
+    <string name="proxy_action_text">Done</string>
     <!-- HTTP proxy settings. The text field for the hostname -->
     <string name="proxy_hostname_label">Hostname</string>
     <!-- HTTP proxy settings. Title if there is an error-->
@@ -308,6 +314,8 @@
     <string name="proxy_error_dismiss">OK</string>
     <!-- HTTP proxy settings. The error if the hostname is not valid -->
     <string name="proxy_error_invalid_host">The hostname you typed is not valid.</string>
+    <!-- HTTP proxy settings. The error if the exclusion list is not valid -->
+    <string name="proxy_error_invalid_exclusion_list">The exclusion list you typed is not properly formatted. Please enter a comma-separated list of excluded domains.</string>
     <!-- HTTP proxy settings. Error msg -->
     <string name="proxy_error_empty_port">You must complete the port field.</string>
     <!-- HTTP proxy settings. Error msg -->
