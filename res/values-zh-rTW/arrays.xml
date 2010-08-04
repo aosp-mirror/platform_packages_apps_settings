@@ -69,8 +69,30 @@
     <item msgid="5972100016440094433">"義大利文"</item>
     <item msgid="5811378076054402537">"西班牙文"</item>
   </string-array>
-    <!-- no translation found for wifi_status:0 (1922181315419294640) -->
-    <!-- no translation found for wifi_status_with_ssid:0 (7714855332363650812) -->
+  <string-array name="wifi_status">
+    <item msgid="1922181315419294640"></item>
+    <item msgid="8934131797783724664">"掃描中..."</item>
+    <item msgid="8513729475867537913">"連線中…"</item>
+    <item msgid="515055375277271756">"驗證中..."</item>
+    <item msgid="1943354004029184381">"正在取得 IP 位址..."</item>
+    <item msgid="4221763391123233270">"已連線"</item>
+    <item msgid="624838831631122137">"已暫停"</item>
+    <item msgid="7979680559596111948">"中斷連線中…"</item>
+    <item msgid="1634960474403853625">"已中斷連線"</item>
+    <item msgid="746097431216080650">"失敗"</item>
+  </string-array>
+  <string-array name="wifi_status_with_ssid">
+    <item msgid="7714855332363650812"></item>
+    <item msgid="8878186979715711006">"掃描中..."</item>
+    <item msgid="355508996603873860">"正在連線到 <xliff:g id="NETWORK_NAME">%1$s</xliff:g>..."</item>
+    <item msgid="554971459996405634">"正在取得 <xliff:g id="NETWORK_NAME">%1$s</xliff:g> 的授權..."</item>
+    <item msgid="7928343808033020343">"正在由 <xliff:g id="NETWORK_NAME">%1$s</xliff:g> 取得 IP 位址..."</item>
+    <item msgid="8937994881315223448">"已連線到 <xliff:g id="NETWORK_NAME">%1$s</xliff:g>"</item>
+    <item msgid="1330262655415760617">"已暫停"</item>
+    <item msgid="7698638434317271902">"正在中斷 <xliff:g id="NETWORK_NAME">%1$s</xliff:g> 連線 ..."</item>
+    <item msgid="197508606402264311">"已中斷連線"</item>
+    <item msgid="8578370891960825148">"失敗"</item>
+  </string-array>
   <string-array name="wifi_security">
     <item msgid="1435933968767043814">"開放"</item>
     <item msgid="6318432659048829665">"WEP"</item>
@@ -91,20 +113,7 @@
   <string-array name="wifi_sleep_policy_entries">
     <item msgid="3804733751095821976">"關上螢幕時"</item>
     <item msgid="1549288661423279207">"插入時絕不"</item>
-    <item msgid="1986753720941888596">"從不"</item>
-  </string-array>
-  <string-array name="battery_history_type_spinner">
-    <item msgid="2193799199027871385">"CPU 使用率"</item>
-    <item msgid="6401018715947316517">"網路使用率"</item>
-    <item msgid="188092590354892392">"GPS 使用率"</item>
-    <item msgid="8414109131222049141">"感應器使用率"</item>
-    <item msgid="1327904325081257093">"部分喚醒使用率"</item>
-    <item msgid="4832254146664706277">"其他使用率"</item>
-  </string-array>
-  <string-array name="battery_history_which_spinner">
-    <item msgid="3451981114763440074">"自上次拔除插頭後的時間"</item>
-    <item msgid="166936313535197598">"開機後總時間"</item>
-    <item msgid="4793941382744963893">"所有時間的總計"</item>
+    <item msgid="1986753720941888596">"永不"</item>
   </string-array>
   <string-array name="usage_stats_display_order_types">
     <item msgid="9077371706468756228">"使用時間"</item>
@@ -139,7 +148,10 @@
     <item msgid="3738430123799803530">"卸除式 SD 卡"</item>
     <item msgid="4498124044785815005">"讓系統決定"</item>
   </string-array>
-    <!-- no translation found for vibrate_entries:1 (6293147072807231256) -->
-    <!-- no translation found for vibrate_entries:2 (1276641209451816572) -->
-    <!-- no translation found for vibrate_entries:3 (8418930333779132418) -->
+  <string-array name="vibrate_entries">
+    <item msgid="3388952299521009213">"永遠要"</item>
+    <item msgid="6293147072807231256">"永遠不要"</item>
+    <item msgid="1276641209451816572">"僅適用於靜音模式"</item>
+    <item msgid="8418930333779132418">"僅適用於非靜音模式"</item>
+  </string-array>
 </resources>
