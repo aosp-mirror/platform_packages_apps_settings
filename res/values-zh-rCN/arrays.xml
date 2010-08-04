@@ -69,10 +69,32 @@
     <item msgid="5972100016440094433">"意大利语"</item>
     <item msgid="5811378076054402537">"西班牙语"</item>
   </string-array>
-    <!-- no translation found for wifi_status:0 (1922181315419294640) -->
-    <!-- no translation found for wifi_status_with_ssid:0 (7714855332363650812) -->
+  <string-array name="wifi_status">
+    <item msgid="1922181315419294640"></item>
+    <item msgid="8934131797783724664">"正在扫描..."</item>
+    <item msgid="8513729475867537913">"正在连接..."</item>
+    <item msgid="515055375277271756">"正在进行身份验证..."</item>
+    <item msgid="1943354004029184381">"正在获取 IP 地址..."</item>
+    <item msgid="4221763391123233270">"已连接"</item>
+    <item msgid="624838831631122137">"已暂停"</item>
+    <item msgid="7979680559596111948">"正在断开连接..."</item>
+    <item msgid="1634960474403853625">"已断开连接"</item>
+    <item msgid="746097431216080650">"失败"</item>
+  </string-array>
+  <string-array name="wifi_status_with_ssid">
+    <item msgid="7714855332363650812"></item>
+    <item msgid="8878186979715711006">"正在扫描..."</item>
+    <item msgid="355508996603873860">"正在连接到 <xliff:g id="NETWORK_NAME">%1$s</xliff:g>..."</item>
+    <item msgid="554971459996405634">"正在通过 <xliff:g id="NETWORK_NAME">%1$s</xliff:g> 进行身份验证..."</item>
+    <item msgid="7928343808033020343">"正在从 <xliff:g id="NETWORK_NAME">%1$s</xliff:g> 获取 IP 地址..."</item>
+    <item msgid="8937994881315223448">"已连接到 <xliff:g id="NETWORK_NAME">%1$s</xliff:g>"</item>
+    <item msgid="1330262655415760617">"已暂停"</item>
+    <item msgid="7698638434317271902">"正在断开与 <xliff:g id="NETWORK_NAME">%1$s</xliff:g> 的连接..."</item>
+    <item msgid="197508606402264311">"已断开连接"</item>
+    <item msgid="8578370891960825148">"失败"</item>
+  </string-array>
   <string-array name="wifi_security">
-    <item msgid="1435933968767043814">"打开"</item>
+    <item msgid="1435933968767043814">"开放"</item>
     <item msgid="6318432659048829665">"WEP"</item>
     <item msgid="2966395706508338179">"WPA/WPA2 PSK"</item>
     <item msgid="9098390198768443435">"802.1x EAP"</item>
@@ -92,19 +114,6 @@
     <item msgid="3804733751095821976">"屏幕关闭时休眠"</item>
     <item msgid="1549288661423279207">"充电时永不休眠"</item>
     <item msgid="1986753720941888596">"永不休眠"</item>
-  </string-array>
-  <string-array name="battery_history_type_spinner">
-    <item msgid="2193799199027871385">"CPU 使用率"</item>
-    <item msgid="6401018715947316517">"网络使用率"</item>
-    <item msgid="188092590354892392">"GPS 使用率"</item>
-    <item msgid="8414109131222049141">"传感器使用情况"</item>
-    <item msgid="1327904325081257093">"部分唤醒使用情况"</item>
-    <item msgid="4832254146664706277">"其他使用情况"</item>
-  </string-array>
-  <string-array name="battery_history_which_spinner">
-    <item msgid="3451981114763440074">"自上次拔下电源后的时间"</item>
-    <item msgid="166936313535197598">"自启动以来的总时间"</item>
-    <item msgid="4793941382744963893">"所有时间总计"</item>
   </string-array>
   <string-array name="usage_stats_display_order_types">
     <item msgid="9077371706468756228">"使用时间"</item>
@@ -139,7 +148,10 @@
     <item msgid="3738430123799803530">"可卸载的 SD 卡"</item>
     <item msgid="4498124044785815005">"由系统确定"</item>
   </string-array>
-    <!-- no translation found for vibrate_entries:1 (6293147072807231256) -->
-    <!-- no translation found for vibrate_entries:2 (1276641209451816572) -->
-    <!-- no translation found for vibrate_entries:3 (8418930333779132418) -->
+  <string-array name="vibrate_entries">
+    <item msgid="3388952299521009213">"始终"</item>
+    <item msgid="6293147072807231256">"一律不"</item>
+    <item msgid="1276641209451816572">"仅在静音模式下来电振动"</item>
+    <item msgid="8418930333779132418">"仅在非静音模式下来电振动"</item>
+  </string-array>
 </resources>
