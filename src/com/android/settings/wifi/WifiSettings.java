@@ -517,7 +517,8 @@ public class WifiSettings extends PreferenceActivity implements DialogInterface.
                 return;
             }
             mAccessPoints.setProgress(mRetry != 0);
-            sendEmptyMessageDelayed(0, 6000);
+            // Combo scans can take 5-6s to complete. Increase interval to 10s.
+            sendEmptyMessageDelayed(0, 10000);
         }
     }
 }
