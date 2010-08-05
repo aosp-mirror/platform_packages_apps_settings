@@ -69,10 +69,32 @@
     <item msgid="5972100016440094433">"Italiensk"</item>
     <item msgid="5811378076054402537">"Spansk"</item>
   </string-array>
-    <!-- no translation found for wifi_status:0 (1922181315419294640) -->
-    <!-- no translation found for wifi_status_with_ssid:0 (7714855332363650812) -->
+  <string-array name="wifi_status">
+    <item msgid="1922181315419294640"></item>
+    <item msgid="8934131797783724664">"Scanner ..."</item>
+    <item msgid="8513729475867537913">"Opretter forbindelse ..."</item>
+    <item msgid="515055375277271756">"Godkender ..."</item>
+    <item msgid="1943354004029184381">"Henter IP-adresse …"</item>
+    <item msgid="4221763391123233270">"Tilsluttet"</item>
+    <item msgid="624838831631122137">"Midlertidigt standset"</item>
+    <item msgid="7979680559596111948">"Afbryder ..."</item>
+    <item msgid="1634960474403853625">"Afbrudt"</item>
+    <item msgid="746097431216080650">"Mislykkedes"</item>
+  </string-array>
+  <string-array name="wifi_status_with_ssid">
+    <item msgid="7714855332363650812"></item>
+    <item msgid="8878186979715711006">"Scanner ..."</item>
+    <item msgid="355508996603873860">"Opretter forbindelse til <xliff:g id="NETWORK_NAME">%1$s</xliff:g> ..."</item>
+    <item msgid="554971459996405634">"Godkender med <xliff:g id="NETWORK_NAME">%1$s</xliff:g> ..."</item>
+    <item msgid="7928343808033020343">"Henter IP-adresse fra <xliff:g id="NETWORK_NAME">%1$s</xliff:g> ..."</item>
+    <item msgid="8937994881315223448">"Forbundet til <xliff:g id="NETWORK_NAME">%1$s</xliff:g>"</item>
+    <item msgid="1330262655415760617">"Midlertidigt standset"</item>
+    <item msgid="7698638434317271902">"Afbryder fra <xliff:g id="NETWORK_NAME">%1$s</xliff:g> ..."</item>
+    <item msgid="197508606402264311">"Afbrudt"</item>
+    <item msgid="8578370891960825148">"Mislykkedes"</item>
+  </string-array>
   <string-array name="wifi_security">
-    <item msgid="1435933968767043814">"Åbn"</item>
+    <item msgid="1435933968767043814">"Åbent"</item>
     <item msgid="6318432659048829665">"WEP"</item>
     <item msgid="2966395706508338179">"WPA/WPA2 PSK"</item>
     <item msgid="9098390198768443435">"802.1x EAP"</item>
@@ -83,8 +105,8 @@
     <item msgid="2892994535305020162">"TTLS"</item>
   </string-array>
   <string-array name="wifi_signal">
-    <item msgid="2245412278046491293">"Dårligt"</item>
-    <item msgid="5615082285463430971">"Rimeligt"</item>
+    <item msgid="2245412278046491293">"Dårlig"</item>
+    <item msgid="5615082285463430971">"Rimelig"</item>
     <item msgid="3565079809875324621">"God"</item>
     <item msgid="5702329417707689835">"Fremragende"</item>
   </string-array>
@@ -92,19 +114,6 @@
     <item msgid="3804733751095821976">"Når skærmen slukker"</item>
     <item msgid="1549288661423279207">"Aldrig når tilsluttet"</item>
     <item msgid="1986753720941888596">"Aldrig"</item>
-  </string-array>
-  <string-array name="battery_history_type_spinner">
-    <item msgid="2193799199027871385">"CPU-brug"</item>
-    <item msgid="6401018715947316517">"Netværksbrug"</item>
-    <item msgid="188092590354892392">"GPS-brug"</item>
-    <item msgid="8414109131222049141">"Sensorbrug"</item>
-    <item msgid="1327904325081257093">"Delvis vågen brug"</item>
-    <item msgid="4832254146664706277">"Anden brug"</item>
-  </string-array>
-  <string-array name="battery_history_which_spinner">
-    <item msgid="3451981114763440074">"Siden sidste afbrydelse"</item>
-    <item msgid="166936313535197598">"I alt siden start"</item>
-    <item msgid="4793941382744963893">"I alt hele tiden"</item>
   </string-array>
   <string-array name="usage_stats_display_order_types">
     <item msgid="9077371706468756228">"Brugstid"</item>
@@ -139,7 +148,10 @@
     <item msgid="3738430123799803530">"SD-kort, der kan fjernes"</item>
     <item msgid="4498124044785815005">"Lad systemet vælge"</item>
   </string-array>
-    <!-- no translation found for vibrate_entries:1 (6293147072807231256) -->
-    <!-- no translation found for vibrate_entries:2 (1276641209451816572) -->
-    <!-- no translation found for vibrate_entries:3 (8418930333779132418) -->
+  <string-array name="vibrate_entries">
+    <item msgid="3388952299521009213">"Altid"</item>
+    <item msgid="6293147072807231256">"Aldrig"</item>
+    <item msgid="1276641209451816572">"Kun, når lydløs er slået til"</item>
+    <item msgid="8418930333779132418">"Kun, når lydløs er slået fra"</item>
+  </string-array>
 </resources>

@@ -69,8 +69,30 @@
     <item msgid="5972100016440094433">"italština"</item>
     <item msgid="5811378076054402537">"španělština"</item>
   </string-array>
-    <!-- no translation found for wifi_status:0 (1922181315419294640) -->
-    <!-- no translation found for wifi_status_with_ssid:0 (7714855332363650812) -->
+  <string-array name="wifi_status">
+    <item msgid="1922181315419294640"></item>
+    <item msgid="8934131797783724664">"Vyhledávání..."</item>
+    <item msgid="8513729475867537913">"Připojování..."</item>
+    <item msgid="515055375277271756">"Ověřování..."</item>
+    <item msgid="1943354004029184381">"Načítání adresy IP…"</item>
+    <item msgid="4221763391123233270">"Připojeno"</item>
+    <item msgid="624838831631122137">"Pozastaveno"</item>
+    <item msgid="7979680559596111948">"Odpojování..."</item>
+    <item msgid="1634960474403853625">"Odpojeno"</item>
+    <item msgid="746097431216080650">"Neúspěšné"</item>
+  </string-array>
+  <string-array name="wifi_status_with_ssid">
+    <item msgid="7714855332363650812"></item>
+    <item msgid="8878186979715711006">"Vyhledávání..."</item>
+    <item msgid="355508996603873860">"Připojování k síti <xliff:g id="NETWORK_NAME">%1$s</xliff:g>..."</item>
+    <item msgid="554971459996405634">"Ověřování v síti <xliff:g id="NETWORK_NAME">%1$s</xliff:g>..."</item>
+    <item msgid="7928343808033020343">"Získávání adresy IP ze sítě <xliff:g id="NETWORK_NAME">%1$s</xliff:g>..."</item>
+    <item msgid="8937994881315223448">"Připojeno k síti <xliff:g id="NETWORK_NAME">%1$s</xliff:g>"</item>
+    <item msgid="1330262655415760617">"Pozastaveno"</item>
+    <item msgid="7698638434317271902">"Odpojování od sítě <xliff:g id="NETWORK_NAME">%1$s</xliff:g>..."</item>
+    <item msgid="197508606402264311">"Odpojeno"</item>
+    <item msgid="8578370891960825148">"Neúspěšné"</item>
+  </string-array>
   <string-array name="wifi_security">
     <item msgid="1435933968767043814">"Otevřít"</item>
     <item msgid="6318432659048829665">"WEP"</item>
@@ -92,19 +114,6 @@
     <item msgid="3804733751095821976">"Při vypnutí obrazovky"</item>
     <item msgid="1549288661423279207">"Nikdy, je-li zapnuto napájení"</item>
     <item msgid="1986753720941888596">"Nikdy"</item>
-  </string-array>
-  <string-array name="battery_history_type_spinner">
-    <item msgid="2193799199027871385">"Využití CPU"</item>
-    <item msgid="6401018715947316517">"Využití sítě"</item>
-    <item msgid="188092590354892392">"Využití GPS"</item>
-    <item msgid="8414109131222049141">"Využití senzoru"</item>
-    <item msgid="1327904325081257093">"Použití při částečném probuzení"</item>
-    <item msgid="4832254146664706277">"Další využití"</item>
-  </string-array>
-  <string-array name="battery_history_which_spinner">
-    <item msgid="3451981114763440074">"Od posledního odpojení"</item>
-    <item msgid="166936313535197598">"Celkem od spuštění"</item>
-    <item msgid="4793941382744963893">"Celkem za celou dobu"</item>
   </string-array>
   <string-array name="usage_stats_display_order_types">
     <item msgid="9077371706468756228">"Doba použití"</item>
@@ -139,7 +148,10 @@
     <item msgid="3738430123799803530">"Vyjímatelná karta SD"</item>
     <item msgid="4498124044785815005">"Automaticky vybere systém"</item>
   </string-array>
-    <!-- no translation found for vibrate_entries:1 (6293147072807231256) -->
-    <!-- no translation found for vibrate_entries:2 (1276641209451816572) -->
-    <!-- no translation found for vibrate_entries:3 (8418930333779132418) -->
+  <string-array name="vibrate_entries">
+    <item msgid="3388952299521009213">"Vždy"</item>
+    <item msgid="6293147072807231256">"Nikdy"</item>
+    <item msgid="1276641209451816572">"Pouze v tichém režimu"</item>
+    <item msgid="8418930333779132418">"Pouze pokud není v tichém režimu"</item>
+  </string-array>
 </resources>
