@@ -251,7 +251,9 @@ public class UserDictionarySettings extends ListActivity {
         // TODO: present UI for picking whether to add word to all locales, or current.
         UserDictionary.Words.addWord(this, word.toString(),
                 250, UserDictionary.Words.LOCALE_TYPE_ALL);
-        mCursor.requery();
+        if (!mCursor.requery()) {
+            throw new IllegalStateException("can't requery on already-closed cursor.");
+        }
         mAddedWordAlready = true;
     }
 
