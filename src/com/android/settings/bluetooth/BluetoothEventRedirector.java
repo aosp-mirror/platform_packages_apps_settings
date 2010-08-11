@@ -25,6 +25,7 @@ import android.bluetooth.BluetoothClass;
 import android.bluetooth.BluetoothDevice;
 import android.bluetooth.BluetoothHeadset;
 import android.bluetooth.BluetoothInputDevice;
+import android.bluetooth.BluetoothPan;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
@@ -133,6 +134,18 @@ public class BluetoothEventRedirector {
                 mManager.getCachedDeviceManager().onProfileStateChanged(device,
                         Profile.HID, newState);
 
+            } else if (action.equals(BluetoothPan.ACTION_PAN_STATE_CHANGED)) {
+                final int newState = intent.getIntExtra(
+                        BluetoothPan.EXTRA_PAN_STATE, 0);
+                final int oldState = intent.getIntExtra(
+                        BluetoothPan.EXTRA_PREVIOUS_PAN_STATE, 0);
+                if (newState == BluetoothPan.STATE_DISCONNECTED &&
+                        oldState == BluetoothPan.STATE_CONNECTING) {
+                    Log.i(TAG, "Failed to connect BT PAN");
+                }
+                mManager.getCachedDeviceManager().onProfileStateChanged(device,
+                        Profile.PAN, newState);
+
             } else if (action.equals(BluetoothDevice.ACTION_CLASS_CHANGED)) {
                 mManager.getCachedDeviceManager().onBtClassChanged(device);
 
@@ -180,6 +193,7 @@ public class BluetoothEventRedirector {
         // Fine-grained state broadcasts
         filter.addAction(BluetoothA2dp.ACTION_SINK_STATE_CHANGED);
         filter.addAction(BluetoothHeadset.ACTION_STATE_CHANGED);
+        filter.addAction(BluetoothPan.ACTION_PAN_STATE_CHANGED);
         filter.addAction(BluetoothDevice.ACTION_CLASS_CHANGED);
         filter.addAction(BluetoothDevice.ACTION_UUID);
 

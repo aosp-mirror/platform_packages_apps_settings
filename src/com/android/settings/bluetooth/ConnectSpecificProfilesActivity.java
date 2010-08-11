@@ -232,7 +232,8 @@ public class ConnectSpecificProfilesActivity extends PreferenceActivity
          * If the device is online, show status. Otherwise, show a summary that
          * describes what the checkbox does.
          */
-        mOnlineModePreference.setSummary(mOnlineMode ? mCachedDevice.getSummary()
+        mOnlineModePreference.setSummary(mOnlineMode ?
+                mCachedDevice.getSummary(CachedBluetoothDevice.OTHER_PROFILES)
                 : R.string.bluetooth_device_advanced_online_mode_summary);
     }
 

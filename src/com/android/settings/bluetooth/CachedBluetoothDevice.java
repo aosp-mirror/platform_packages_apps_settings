@@ -56,6 +56,9 @@ public class CachedBluetoothDevice implements Comparable<CachedBluetoothDevice> 
     private static final int CONTEXT_ITEM_UNPAIR = Menu.FIRST + 3;
     private static final int CONTEXT_ITEM_CONNECT_ADVANCED = Menu.FIRST + 4;
 
+    public static final int PAN_PROFILE = 1;
+    public static final int OTHER_PROFILES = 2;
+
     private final BluetoothDevice mDevice;
     private String mName;
     private short mRssi;
@@ -625,9 +628,9 @@ public class CachedBluetoothDevice implements Comparable<CachedBluetoothDevice> 
         }
     }
 
-    public int getSummary() {
+    public int getSummary(int accessibleProfile) {
         // TODO: clean up
-        int oneOffSummary = getOneOffSummary();
+        int oneOffSummary = getOneOffSummary(accessibleProfile);
         if (oneOffSummary != 0) {
             return oneOffSummary;
         }
@@ -653,34 +656,43 @@ public class CachedBluetoothDevice implements Comparable<CachedBluetoothDevice> 
      *
      * @return A one-off summary that is applicable for the current state, or 0.
      */
-    private int getOneOffSummary() {
+    private int getOneOffSummary(int accessibleProfile) {
         boolean isA2dpConnected = false;
         boolean isHeadsetConnected = false;
         boolean isHidConnected = false;
+        boolean isPanConnected = false;
         boolean isConnecting = false;
 
-        if (mProfiles.contains(Profile.A2DP)) {
-            LocalBluetoothProfileManager profileManager = LocalBluetoothProfileManager
-                    .getProfileManager(mLocalManager, Profile.A2DP);
-            isConnecting = profileManager.getConnectionStatus(mDevice) ==
-                    SettingsBtStatus.CONNECTION_STATUS_CONNECTING;
-            isA2dpConnected = profileManager.isConnected(mDevice);
-        }
+        if (accessibleProfile == OTHER_PROFILES) {
+            if (mProfiles.contains(Profile.A2DP)) {
+                LocalBluetoothProfileManager profileManager = LocalBluetoothProfileManager
+                        .getProfileManager(mLocalManager, Profile.A2DP);
+                isConnecting = profileManager.getConnectionStatus(mDevice) ==
+                        SettingsBtStatus.CONNECTION_STATUS_CONNECTING;
+                isA2dpConnected = profileManager.isConnected(mDevice);
+            }
 
-        if (mProfiles.contains(Profile.HEADSET)) {
+            if (mProfiles.contains(Profile.HEADSET)) {
+                LocalBluetoothProfileManager profileManager = LocalBluetoothProfileManager
+                        .getProfileManager(mLocalManager, Profile.HEADSET);
+                isConnecting |= profileManager.getConnectionStatus(mDevice) ==
+                        SettingsBtStatus.CONNECTION_STATUS_CONNECTING;
+                isHeadsetConnected = profileManager.isConnected(mDevice);
+            }
+
+            if (mProfiles.contains(Profile.HID)) {
+                LocalBluetoothProfileManager profileManager = LocalBluetoothProfileManager
+                        .getProfileManager(mLocalManager, Profile.HID);
+                isConnecting |= profileManager.getConnectionStatus(mDevice) ==
+                        SettingsBtStatus.CONNECTION_STATUS_CONNECTING;
+                isHidConnected = profileManager.isConnected(mDevice);
+            }
+        } else if (accessibleProfile == PAN_PROFILE && mProfiles.contains(Profile.PAN)) {
             LocalBluetoothProfileManager profileManager = LocalBluetoothProfileManager
-                    .getProfileManager(mLocalManager, Profile.HEADSET);
+                    .getProfileManager(mLocalManager, Profile.PAN);
             isConnecting |= profileManager.getConnectionStatus(mDevice) ==
                     SettingsBtStatus.CONNECTION_STATUS_CONNECTING;
-            isHeadsetConnected = profileManager.isConnected(mDevice);
-        }
-
-        if (mProfiles.contains(Profile.HID)) {
-            LocalBluetoothProfileManager profileManager = LocalBluetoothProfileManager
-                    .getProfileManager(mLocalManager, Profile.HID);
-            isConnecting |= profileManager.getConnectionStatus(mDevice) ==
-                    SettingsBtStatus.CONNECTION_STATUS_CONNECTING;
-            isHidConnected = profileManager.isConnected(mDevice);
+            isPanConnected = profileManager.isConnected(mDevice);
         }
 
         if (isConnecting) {
@@ -695,6 +707,8 @@ public class CachedBluetoothDevice implements Comparable<CachedBluetoothDevice> 
             return R.string.bluetooth_summary_connected_to_headset;
         } else if (isHidConnected) {
             return R.string.bluetooth_summary_connected_to_hid;
+        } else if (isPanConnected) {
+            return R.string.bluetooth_summary_connected_to_pan;
         } else {
             return 0;
         }

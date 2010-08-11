@@ -133,18 +133,34 @@ public class WirelessSettings extends PreferenceActivity {
         } else {
             String[] usbRegexs = cm.getTetherableUsbRegexs();
             String[] wifiRegexs = cm.getTetherableWifiRegexs();
+            String[] bluetoothRegexs = cm.getTetherableBluetoothRegexs();
+
+            boolean usbAvailable = usbRegexs.length != 0;
+            boolean wifiAvailable = wifiRegexs.length != 0;
+            boolean bluetoothAvailable = bluetoothRegexs.length != 0;
+
             Preference p = findPreference(KEY_TETHER_SETTINGS);
-            if (wifiRegexs.length == 0) {
+            if (wifiAvailable && usbAvailable && bluetoothAvailable) {
+                p.setTitle(R.string.tether_settings_title_all);
+                p.setSummary(R.string.tether_settings_summary_all);
+            } else if (wifiAvailable && usbAvailable) {
+                p.setTitle(R.string.tether_settings_title_all);
+                p.setSummary(R.string.tether_settings_summary_usb_wifi);
+            } else if (wifiAvailable && bluetoothAvailable) {
+                p.setTitle(R.string.tether_settings_title_all);
+                p.setSummary(R.string.tether_settings_summary_wifi_bluetooth);
+            } else if (wifiAvailable) {
+                p.setTitle(R.string.tether_settings_title_wifi);
+                p.setSummary(R.string.tether_settings_summary_wifi);
+            } else if (usbAvailable && bluetoothAvailable) {
+                p.setTitle(R.string.tether_settings_title_usb_bluetooth);
+                p.setSummary(R.string.tether_settings_summary_usb_bluetooth);
+            } else if (usbAvailable) {
                 p.setTitle(R.string.tether_settings_title_usb);
                 p.setSummary(R.string.tether_settings_summary_usb);
             } else {
-                if (usbRegexs.length == 0) {
-                    p.setTitle(R.string.tether_settings_title_wifi);
-                    p.setSummary(R.string.tether_settings_summary_wifi);
-                } else {
-                    p.setTitle(R.string.tether_settings_title_both);
-                    p.setSummary(R.string.tether_settings_summary_both);
-                }
+                p.setTitle(R.string.tether_settings_title_bluetooth);
+                p.setSummary(R.string.tether_settings_summary_bluetooth);
             }
         }
     }
@@ -152,21 +168,21 @@ public class WirelessSettings extends PreferenceActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        
+
         mAirplaneModeEnabler.resume();
         mWifiEnabler.resume();
         mBtEnabler.resume();
     }
-    
+
     @Override
     protected void onPause() {
         super.onPause();
-        
+
         mAirplaneModeEnabler.pause();
         mWifiEnabler.pause();
         mBtEnabler.pause();
     }
-    
+
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (requestCode == REQUEST_CODE_EXIT_ECM) {
