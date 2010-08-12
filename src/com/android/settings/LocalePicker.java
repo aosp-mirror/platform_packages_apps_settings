@@ -23,14 +23,11 @@ import android.app.backup.BackupManager;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.os.RemoteException;
-import android.os.SystemProperties;
 import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
-import java.io.BufferedWriter;
-import java.io.FileOutputStream;
 import java.text.Collator;
 import java.util.Arrays;
 import java.util.Locale;
