@@ -78,9 +78,7 @@ public class WifiSettings extends PreferenceActivity implements DialogInterface.
 
     private DetailedState mLastState;
     private WifiInfo mLastInfo;
-    private int mLastPriority;
 
-    private boolean mResetNetworks = false;
     private int mKeyStoreNetworkId = -1;
 
     private AccessPoint mSelected;
@@ -95,6 +93,7 @@ public class WifiSettings extends PreferenceActivity implements DialogInterface.
         mFilter.addAction(WifiManager.SCAN_RESULTS_AVAILABLE_ACTION);
         mFilter.addAction(WifiManager.NETWORK_IDS_CHANGED_ACTION);
         mFilter.addAction(WifiManager.SUPPLICANT_STATE_CHANGED_ACTION);
+        mFilter.addAction(WifiManager.SUPPLICANT_CONFIG_CHANGED_ACTION);
         mFilter.addAction(WifiManager.NETWORK_STATE_CHANGED_ACTION);
         mFilter.addAction(WifiManager.RSSI_CHANGED_ACTION);
 
@@ -153,9 +152,10 @@ public class WifiSettings extends PreferenceActivity implements DialogInterface.
         }
         registerReceiver(mReceiver, mFilter);
         if (mKeyStoreNetworkId != -1 && KeyStore.getInstance().test() == KeyStore.NO_ERROR) {
-            connect(mKeyStoreNetworkId);
+            mWifiManager.connectNetwork(mKeyStoreNetworkId);
         }
         mKeyStoreNetworkId = -1;
+        updateAccessPoints();
     }
 
     @Override
@@ -169,9 +169,6 @@ public class WifiSettings extends PreferenceActivity implements DialogInterface.
         if (mDialog != null) {
             mDialog.dismiss();
             mDialog = null;
-        }
-        if (mResetNetworks) {
-            enableNetworks();
         }
     }
 
@@ -230,22 +227,20 @@ public class WifiSettings extends PreferenceActivity implements DialogInterface.
             case MENU_ID_CONNECT:
                 if (mSelected.networkId != -1) {
                     if (!requireKeyStore(mSelected.getConfig())) {
-                        connect(mSelected.networkId);
+                        mWifiManager.connectNetwork(mSelected.networkId);
                     }
                 } else if (mSelected.security == AccessPoint.SECURITY_NONE) {
                     // Shortcut for open networks.
                     WifiConfiguration config = new WifiConfiguration();
                     config.SSID = AccessPoint.convertToQuotedString(mSelected.ssid);
                     config.allowedKeyManagement.set(KeyMgmt.NONE);
-                    int networkId = mWifiManager.addNetwork(config);
-                    mWifiManager.enableNetwork(networkId, false);
-                    connect(networkId);
+                    mWifiManager.connectNetwork(config);
                 } else {
                     showDialog(mSelected, false);
                 }
                 return true;
             case MENU_ID_FORGET:
-                forget(mSelected.networkId);
+                mWifiManager.forgetNetwork(mSelected.networkId);
                 return true;
             case MENU_ID_MODIFY:
                 showDialog(mSelected, true);
@@ -274,29 +269,23 @@ public class WifiSettings extends PreferenceActivity implements DialogInterface.
 
     public void onClick(DialogInterface dialogInterface, int button) {
         if (button == WifiDialog.BUTTON_FORGET && mSelected != null) {
-            forget(mSelected.networkId);
+            mWifiManager.forgetNetwork(mSelected.networkId);
         } else if (button == WifiDialog.BUTTON_SUBMIT && mDialog != null) {
             WifiConfiguration config = mDialog.getConfig();
 
             if (config == null) {
                 if (mSelected != null && !requireKeyStore(mSelected.getConfig())) {
-                    connect(mSelected.networkId);
+                    mWifiManager.connectNetwork(mSelected.networkId);
                 }
             } else if (config.networkId != -1) {
                 if (mSelected != null) {
-                    mWifiManager.updateNetwork(config);
-                    saveNetworks();
+                    mWifiManager.saveNetwork(config);
                 }
             } else {
-                int networkId = mWifiManager.addNetwork(config);
-                if (networkId != -1) {
-                    mWifiManager.enableNetwork(networkId, false);
-                    config.networkId = networkId;
-                    if (mDialog.edit || requireKeyStore(config)) {
-                        saveNetworks();
-                    } else {
-                        connect(networkId);
-                    }
+                if (mDialog.edit || requireKeyStore(config)) {
+                    mWifiManager.saveNetwork(config);
+                } else {
+                    mWifiManager.connectNetwork(config);
                 }
             }
         }
@@ -320,78 +309,12 @@ public class WifiSettings extends PreferenceActivity implements DialogInterface.
         return false;
     }
 
-    private void forget(int networkId) {
-        mWifiManager.removeNetwork(networkId);
-        saveNetworks();
-    }
-
-    private void connect(int networkId) {
-        if (networkId == -1) {
-            return;
-        }
-
-        // Reset the priority of each network if it goes too high.
-        if (mLastPriority > 1000000) {
-            for (int i = mAccessPoints.getPreferenceCount() - 1; i >= 0; --i) {
-                AccessPoint accessPoint = (AccessPoint) mAccessPoints.getPreference(i);
-                if (accessPoint.networkId != -1) {
-                    WifiConfiguration config = new WifiConfiguration();
-                    config.networkId = accessPoint.networkId;
-                    config.priority = 0;
-                    mWifiManager.updateNetwork(config);
-                }
-            }
-            mLastPriority = 0;
-        }
-
-        // Set to the highest priority and save the configuration.
-        WifiConfiguration config = new WifiConfiguration();
-        config.networkId = networkId;
-        config.priority = ++mLastPriority;
-        mWifiManager.updateNetwork(config);
-        saveNetworks();
-
-        // Connect to network by disabling others.
-        mWifiManager.enableNetwork(networkId, true);
-        mWifiManager.reconnect();
-        mResetNetworks = true;
-    }
-
-    private void enableNetworks() {
-        for (int i = mAccessPoints.getPreferenceCount() - 1; i >= 0; --i) {
-            WifiConfiguration config = ((AccessPoint) mAccessPoints.getPreference(i)).getConfig();
-            if (config != null && config.status != Status.ENABLED) {
-                mWifiManager.enableNetwork(config.networkId, false);
-            }
-        }
-        mResetNetworks = false;
-    }
-
-    private void saveNetworks() {
-        // Always save the configuration with all networks enabled.
-        enableNetworks();
-        mWifiManager.saveConfiguration();
-        updateAccessPoints();
-    }
-
     private void updateAccessPoints() {
         List<AccessPoint> accessPoints = new ArrayList<AccessPoint>();
 
         List<WifiConfiguration> configs = mWifiManager.getConfiguredNetworks();
         if (configs != null) {
-            mLastPriority = 0;
             for (WifiConfiguration config : configs) {
-                if (config.priority > mLastPriority) {
-                    mLastPriority = config.priority;
-                }
-
-                // Shift the status to make enableNetworks() more efficient.
-                if (config.status == Status.CURRENT) {
-                    config.status = Status.ENABLED;
-                } else if (mResetNetworks && config.status == Status.DISABLED) {
-                    config.status = Status.CURRENT;
-                }
-
                 AccessPoint accessPoint = new AccessPoint(this, config);
                 accessPoint.update(mLastInfo, mLastState);
                 accessPoints.add(accessPoint);
@@ -430,12 +353,8 @@ public class WifiSettings extends PreferenceActivity implements DialogInterface.
         if (WifiManager.WIFI_STATE_CHANGED_ACTION.equals(action)) {
             updateWifiState(intent.getIntExtra(WifiManager.EXTRA_WIFI_STATE,
                     WifiManager.WIFI_STATE_UNKNOWN));
-        } else if (WifiManager.SCAN_RESULTS_AVAILABLE_ACTION.equals(action)) {
-            updateAccessPoints();
-        } else if (WifiManager.NETWORK_IDS_CHANGED_ACTION.equals(action)) {
-            if (mSelected != null && mSelected.networkId != -1) {
-                mSelected = null;
-            }
+        } else if (WifiManager.SCAN_RESULTS_AVAILABLE_ACTION.equals(action) ||
+                WifiManager.SUPPLICANT_CONFIG_CHANGED_ACTION.equals(action)) {
             updateAccessPoints();
         } else if (WifiManager.SUPPLICANT_STATE_CHANGED_ACTION.equals(action)) {
             updateConnectionState(WifiInfo.getDetailedStateOf((SupplicantState)
@@ -473,18 +392,11 @@ public class WifiSettings extends PreferenceActivity implements DialogInterface.
         for (int i = mAccessPoints.getPreferenceCount() - 1; i >= 0; --i) {
             ((AccessPoint) mAccessPoints.getPreference(i)).update(mLastInfo, mLastState);
         }
-
-        if (mResetNetworks && (state == DetailedState.CONNECTED ||
-                state == DetailedState.DISCONNECTED || state == DetailedState.FAILED)) {
-            updateAccessPoints();
-            enableNetworks();
-        }
     }
 
     private void updateWifiState(int state) {
         if (state == WifiManager.WIFI_STATE_ENABLED) {
             mScanner.resume();
-            updateAccessPoints();
         } else {
             mScanner.pause();
             mAccessPoints.removeAll();
