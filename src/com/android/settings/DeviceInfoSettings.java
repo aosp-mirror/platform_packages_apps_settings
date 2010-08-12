@@ -17,29 +17,24 @@
 package com.android.settings;
 
 import android.content.Intent;
-import android.content.pm.ApplicationInfo;
-import android.content.pm.PackageManager;
-import android.content.pm.ResolveInfo;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.SystemProperties;
 import android.preference.Preference;
 import android.preference.PreferenceActivity;
 import android.preference.PreferenceGroup;
-import android.util.Config;
+import android.preference.PreferenceScreen;
 import android.util.Log;
+import android.view.MotionEvent;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
-import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class DeviceInfoSettings extends PreferenceActivity {
-
     private static final String TAG = "DeviceInfoSettings";
-    private static final boolean LOGD = false || Config.LOGD;
 
     private static final String KEY_CONTAINER = "container";
     private static final String KEY_TEAM = "team";
@@ -57,6 +52,7 @@ public class DeviceInfoSettings extends PreferenceActivity {
         addPreferencesFromResource(R.xml.device_info_settings);
        
         setStringSummary("firmware_version", Build.VERSION.RELEASE);
+        findPreference("firmware_version").setEnabled(true);
         setValueSummary("baseband_version", "gsm.version.baseband");
         setStringSummary("device_model", Build.MODEL);
         setStringSummary("build_number", Build.DISPLAY);
@@ -89,6 +85,20 @@ public class DeviceInfoSettings extends PreferenceActivity {
                 Utils.UPDATE_PREFERENCE_FLAG_SET_TITLE_TO_MATCHING_ACTIVITY);
         Utils.updatePreferenceToSpecificActivityOrRemove(this, parentPreference, KEY_CONTRIBUTORS,
                 Utils.UPDATE_PREFERENCE_FLAG_SET_TITLE_TO_MATCHING_ACTIVITY);
+    }
+    
+    @Override
+    public boolean onPreferenceTreeClick(PreferenceScreen preferenceScreen, Preference preference) {
+        if (preference.getKey().equals("firmware_version")) {
+            Intent intent = new Intent(Intent.ACTION_MAIN);
+            intent.setClassName("android",
+                    com.android.internal.app.PlatLogoActivity.class.getName());
+            try {
+                startActivity(intent);
+            } catch (Exception e) {
+            }
+        }
+        return super.onPreferenceTreeClick(preferenceScreen, preference);
     }
 
     private void removePreferenceIfPropertyMissing(PreferenceGroup preferenceGroup,
