@@ -160,6 +160,7 @@ public class PowerUsageSummary extends PreferenceActivity implements Runnable {
                 types = new int[] {
                     R.string.usage_type_cpu,
                     R.string.usage_type_cpu_foreground,
+                    R.string.usage_type_wake_lock,
                     R.string.usage_type_gps,
                     R.string.usage_type_data_send,
                     R.string.usage_type_data_recv,
@@ -169,6 +170,7 @@ public class PowerUsageSummary extends PreferenceActivity implements Runnable {
                 values = new double[] {
                     sipper.cpuTime,
                     sipper.cpuFgTime,
+                    sipper.wakeLockTime,
                     sipper.gpsTime,
                     uid != null? uid.getTcpBytesSent(mStatsType) : 0,
                     uid != null? uid.getTcpBytesReceived(mStatsType) : 0,
@@ -340,6 +342,7 @@ public class PowerUsageSummary extends PreferenceActivity implements Runnable {
             Map<String, ? extends BatteryStats.Uid.Proc> processStats = u.getProcessStats();
             long cpuTime = 0;
             long cpuFgTime = 0;
+            long wakelockTime = 0;
             long gpsTime = 0;
             if (processStats.size() > 0) {
                 // Process CPU time
@@ -384,6 +387,24 @@ public class PowerUsageSummary extends PreferenceActivity implements Runnable {
             }
             power /= 1000;
 
+            // Process wake lock usage
+            Map<String, ? extends BatteryStats.Uid.Wakelock> wakelockStats = u.getWakelockStats();
+            for (Map.Entry<String, ? extends BatteryStats.Uid.Wakelock> wakelockEntry
+                    : wakelockStats.entrySet()) {
+                Uid.Wakelock wakelock = wakelockEntry.getValue();
+                BatteryStats.Timer timer = wakelock.getWakeTime(BatteryStats.WAKE_TYPE_FULL);
+                if (timer != null) {
+                    wakelockTime += timer.getTotalTimeLocked(uSecTime, which);
+                }
+                timer = wakelock.getWakeTime(BatteryStats.WAKE_TYPE_PARTIAL);
+                if (timer != null) {
+                    wakelockTime += timer.getTotalTimeLocked(uSecTime, which);
+                }
+                // Note: not considering window, since that is just the system
+                // keeping the screen on while the app is running.
+            }
+            wakelockTime /= 1000; // convert to millis
+
             // Add cost of data traffic
             power += (u.getTcpBytesReceived(mStatsType) + u.getTcpBytesSent(mStatsType))
                     * averageCostPerByte;
@@ -424,6 +445,7 @@ public class PowerUsageSummary extends PreferenceActivity implements Runnable {
                 app.cpuTime = cpuTime;
                 app.gpsTime = gpsTime;
                 app.cpuFgTime = cpuFgTime;
+                app.wakeLockTime = wakelockTime;
                 mUsageList.add(app);
             }
             if (power > mMaxPower) mMaxPower = power;
