@@ -2037,13 +2037,17 @@ found in the list of installed applications.</string>
     <string name="battery_stats_on_battery"><xliff:g id="time">%1$s</xliff:g> on battery</string>
     <!-- Battery usage duration -->
     <string name="battery_stats_duration"><xliff:g id="time">%1$s</xliff:g> since unplugged</string>
-    <!-- Label for battery stats charging state graph -->
+    <!-- [CHAR LIMIT=25] Label for battery stats charging state graph -->
     <string name="battery_stats_charging_label">Charging</string>
-    <!-- Label for battery stats screen on state graph -->
+    <!-- [CHAR LIMIT=25] Label for battery stats screen on state graph -->
     <string name="battery_stats_screen_on_label">Screen on</string>
-    <!-- Label for battery stats gps on state graph -->
+    <!-- [CHAR LIMIT=25] Label for battery stats gps on state graph -->
     <string name="battery_stats_gps_on_label">GPS on</string>
-    <!-- Label for battery stats phone signal strength graph -->
+    <!-- [CHAR LIMIT=25] Label for battery stats wifi running state graph -->
+    <string name="battery_stats_wifi_running_label">WIFI</string>
+    <!-- [CHAR LIMIT=25] Label for battery stats wake lock state graph -->
+    <string name="battery_stats_wake_lock_label">Awake</string>
+    <!-- [CHAR LIMIT=25] Label for battery stats phone signal strength graph -->
     <string name="battery_stats_phone_signal_label">Phone signal</string>
     <!-- Battery usage during last unplugged period -->
     <string name="battery_stats_last_duration">@string/menu_stats_last_unplugged</string>
@@ -2083,6 +2087,8 @@ found in the list of installed applications.</string>
     <string name="usage_type_cpu">CPU total</string>
     <!-- Label for CPU usage in foreground -->
     <string name="usage_type_cpu_foreground">CPU foreground</string>
+    <!-- [CHAR LIMIT=25] Label for keeping device from sleeping -->
+    <string name="usage_type_wake_lock">Keep awake</string>
     <!-- Label for GPU usage time -->
     <string name="usage_type_gps">GPS</string>
     <!-- Label for Phone usage time -->

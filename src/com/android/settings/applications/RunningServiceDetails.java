@@ -92,8 +92,8 @@ public class RunningServiceDetails extends Activity
                         & ApplicationInfo.FLAG_SYSTEM) != 0;
                 ApplicationErrorReport.RunningServiceInfo info
                         = new ApplicationErrorReport.RunningServiceInfo();
-                if (mActiveItem.mItem.mActiveSince >= 0) {
-                    info.durationMillis = SystemClock.uptimeMillis()-mActiveItem.mFirstRunTime;
+                if (mActiveItem.mFirstRunTime >= 0) {
+                    info.durationMillis = SystemClock.elapsedRealtime()-mActiveItem.mFirstRunTime;
                 } else {
                     info.durationMillis = -1;
                 }
