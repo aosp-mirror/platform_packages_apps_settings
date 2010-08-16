@@ -64,6 +64,8 @@ public class RunningProcessesView extends FrameLayout
     
     RunningState mState;
     
+    Runnable mDataAvail;
+
     StringBuilder mBuilder = new StringBuilder(128);
     
     RunningState.BaseItem mCurSelected;
@@ -390,6 +392,11 @@ public class RunningProcessesView extends FrameLayout
             adapter.notifyDataSetChanged();
         }
         
+        if (mDataAvail != null) {
+            mDataAvail.run();
+            mDataAvail = null;
+        }
+
         // This is the amount of available memory until we start killing
         // background services.
         long availMem = readAvailMem() - SECONDARY_SERVER_MEM;
@@ -475,15 +482,19 @@ public class RunningProcessesView extends FrameLayout
     
     public void doPause() {
         mState.pause();
+        mDataAvail = null;
     }
 
-    public void doResume() {
+    public boolean doResume(Runnable dataAvail) {
         mState.resume(this);
         if (mState.hasData()) {
             // If the state already has its data, then let's populate our
             // list right now to avoid flicker.
             refreshUi(true);
+            return true;
         }
+        mDataAvail = dataAvail;
+        return false;
     }
 
     public Object doRetainNonConfigurationInstance() {
