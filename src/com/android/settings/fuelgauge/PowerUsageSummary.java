@@ -392,16 +392,12 @@ public class PowerUsageSummary extends PreferenceActivity implements Runnable {
             for (Map.Entry<String, ? extends BatteryStats.Uid.Wakelock> wakelockEntry
                     : wakelockStats.entrySet()) {
                 Uid.Wakelock wakelock = wakelockEntry.getValue();
-                BatteryStats.Timer timer = wakelock.getWakeTime(BatteryStats.WAKE_TYPE_FULL);
+                // Only care about partial wake locks since full wake locks
+                // are canceled when the user turns the screen off.
+                BatteryStats.Timer timer = wakelock.getWakeTime(BatteryStats.WAKE_TYPE_PARTIAL);
                 if (timer != null) {
                     wakelockTime += timer.getTotalTimeLocked(uSecTime, which);
                 }
-                timer = wakelock.getWakeTime(BatteryStats.WAKE_TYPE_PARTIAL);
-                if (timer != null) {
-                    wakelockTime += timer.getTotalTimeLocked(uSecTime, which);
-                }
-                // Note: not considering window, since that is just the system
-                // keeping the screen on while the app is running.
             }
             wakelockTime /= 1000; // convert to millis
 

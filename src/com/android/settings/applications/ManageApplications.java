@@ -33,6 +33,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
+import android.view.animation.AnimationUtils;
 import android.widget.AbsListView;
 import android.widget.AdapterView;
 import android.widget.BaseAdapter;
@@ -92,6 +93,8 @@ public class ManageApplications extends TabActivity implements
     
     private String mCurrentPkgName;
     
+    private View mLoadingContainer;
+
     private View mListContainer;
 
     // ListView used to display list
@@ -107,6 +110,12 @@ public class ManageApplications extends TabActivity implements
     private boolean mActivityResumed;
     private Object mNonConfigInstance;
     
+    final Runnable mRunningProcessesAvail = new Runnable() {
+        public void run() {
+            handleRunningProcessesAvail();
+        }
+    };
+
     // View Holder used when displaying views
     static class AppViewHolder {
         ApplicationsState.AppEntry entry;
@@ -405,6 +414,7 @@ public class ManageApplications extends TabActivity implements
         // initialize the inflater
         mInflater = (LayoutInflater)getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         mRootView = mInflater.inflate(R.layout.manage_applications, null);
+        mLoadingContainer = mRootView.findViewById(R.id.loading_container);
         mListContainer = mRootView.findViewById(R.id.list_container);
         // Create adapter and list view here
         ListView lv = (ListView) mListContainer.findViewById(android.R.id.list);
@@ -561,17 +571,33 @@ public class ManageApplications extends TabActivity implements
                 mRunningProcessesView.doCreate(null, mNonConfigInstance);
                 mCreatedRunning = true;
             }
+            boolean haveData = true;
             if (mActivityResumed && !mResumedRunning) {
-                mRunningProcessesView.doResume();
+                haveData = mRunningProcessesView.doResume(mRunningProcessesAvail);
                 mResumedRunning = true;
             }
             mApplicationsAdapter.pause();
             if (mCurView != which) {
-                mRunningProcessesView.setVisibility(View.VISIBLE);
+                if (haveData) {
+                    mRunningProcessesView.setVisibility(View.VISIBLE);
+                } else {
+                    mLoadingContainer.setVisibility(View.VISIBLE);
+                }
                 mListContainer.setVisibility(View.GONE);
             }
         }
         mCurView = which;
+    }
+
+    void handleRunningProcessesAvail() {
+        if (mCurView == VIEW_RUNNING) {
+            mLoadingContainer.startAnimation(AnimationUtils.loadAnimation(
+                    this, android.R.anim.fade_out));
+            mRunningProcessesView.startAnimation(AnimationUtils.loadAnimation(
+                    this, android.R.anim.fade_in));
+            mRunningProcessesView.setVisibility(View.VISIBLE);
+            mLoadingContainer.setVisibility(View.GONE);
+        }
     }
 
     public void showCurrentTab() {
