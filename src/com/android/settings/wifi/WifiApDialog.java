@@ -16,8 +16,6 @@
 
 package com.android.settings.wifi;
 
-import com.android.settings.R;
-
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -28,15 +26,14 @@ import android.os.Bundle;
 import android.text.Editable;
 import android.text.InputType;
 import android.text.TextWatcher;
-import android.util.Log;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
+
+import com.android.settings.R;
 
 /**
  * Dialog to configure the SSID and security settings
@@ -97,6 +94,7 @@ class WifiApDialog extends AlertDialog implements View.OnClickListener,
         return null;
     }
 
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
 
         mView = getLayoutInflater().inflate(R.layout.wifi_ap_dialog, null);
@@ -167,7 +165,8 @@ class WifiApDialog extends AlertDialog implements View.OnClickListener,
         validate();
     }
 
-    public void onItemSelected(AdapterView parent, View view, int position, long id) {
+    @Override
+    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
         if(position == OPEN_INDEX)
             mSecurityType = AccessPoint.SECURITY_NONE;
         else
@@ -176,7 +175,8 @@ class WifiApDialog extends AlertDialog implements View.OnClickListener,
         validate();
     }
 
-    public void onNothingSelected(AdapterView parent) {
+    @Override
+    public void onNothingSelected(AdapterView<?> parent) {
     }
 
     private void showSecurityFields() {
