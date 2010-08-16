@@ -115,11 +115,11 @@ public class RunningProcessesView extends FrameLayout
             }
             
             if (uptimeView != null) {
-                if (mItem.mActiveSince >= 0) {
+                if (mFirstRunTime >= 0) {
                     //Log.i("foo", "Time for " + mItem.mDisplayLabel
                     //        + ": " + (SystemClock.uptimeMillis()-mFirstRunTime));
                     uptimeView.setText(DateUtils.formatElapsedTime(builder,
-                            (SystemClock.uptimeMillis()-mFirstRunTime)/1000));
+                            (SystemClock.elapsedRealtime()-mFirstRunTime)/1000));
                 } else {
                     boolean isService = false;
                     if (mItem instanceof RunningState.MergedItem) {
