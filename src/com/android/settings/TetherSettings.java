@@ -21,7 +21,6 @@ import com.android.settings.wifi.WifiApEnabler;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.os.Bundle;
-import android.os.SystemProperties;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
@@ -33,8 +32,6 @@ import android.preference.CheckBoxPreference;
 import android.preference.Preference;
 import android.preference.PreferenceActivity;
 import android.preference.PreferenceScreen;
-import android.provider.Settings;
-import android.util.Log;
 import android.webkit.WebView;
 
 import java.io.InputStream;
@@ -67,7 +64,6 @@ public class TetherSettings extends PreferenceActivity {
     private BroadcastReceiver mTetherChangeReceiver;
 
     private String[] mUsbRegexs;
-    private ArrayList mUsbIfaces;
 
     private String[] mWifiRegexs;
 
@@ -161,7 +157,8 @@ public class TetherSettings extends PreferenceActivity {
                         ConnectivityManager.EXTRA_ACTIVE_TETHER);
                 ArrayList<String> errored = intent.getStringArrayListExtra(
                         ConnectivityManager.EXTRA_ERRORED_TETHER);
-                updateState(available.toArray(), active.toArray(), errored.toArray());
+                updateState((String[]) available.toArray(), (String[]) active.toArray(),
+                        (String[]) errored.toArray());
             } else if (intent.getAction().equals(Intent.ACTION_MEDIA_SHARED) ||
                        intent.getAction().equals(Intent.ACTION_MEDIA_UNSHARED)) {
                 updateState();
@@ -205,8 +202,8 @@ public class TetherSettings extends PreferenceActivity {
         updateState(available, tethered, errored);
     }
 
-    private void updateState(Object[] available, Object[] tethered,
-            Object[] errored) {
+    private void updateState(String[] available, String[] tethered,
+            String[] errored) {
         ConnectivityManager cm =
                 (ConnectivityManager)getSystemService(Context.CONNECTIVITY_SERVICE);
         boolean usbTethered = false;
@@ -215,8 +212,7 @@ public class TetherSettings extends PreferenceActivity {
         boolean usbErrored = false;
         boolean massStorageActive =
                 Environment.MEDIA_SHARED.equals(Environment.getExternalStorageState());
-        for (Object o : available) {
-            String s = (String)o;
+        for (String s : available) {
             for (String regex : mUsbRegexs) {
                 if (s.matches(regex)) {
                     usbAvailable = true;
@@ -226,14 +222,12 @@ public class TetherSettings extends PreferenceActivity {
                 }
             }
         }
-        for (Object o : tethered) {
-            String s = (String)o;
+        for (String s : tethered) {
             for (String regex : mUsbRegexs) {
                 if (s.matches(regex)) usbTethered = true;
             }
         }
-        for (Object o: errored) {
-            String s = (String)o;
+        for (String s: errored) {
             for (String regex : mUsbRegexs) {
                 if (s.matches(regex)) usbErrored = true;
             }
