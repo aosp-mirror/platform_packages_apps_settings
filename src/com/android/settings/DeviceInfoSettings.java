@@ -16,16 +16,15 @@
 
 package com.android.settings;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.SystemProperties;
 import android.preference.Preference;
-import android.preference.PreferenceActivity;
 import android.preference.PreferenceGroup;
 import android.preference.PreferenceScreen;
 import android.util.Log;
-import android.view.MotionEvent;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
@@ -33,7 +32,7 @@ import java.io.IOException;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class DeviceInfoSettings extends PreferenceActivity {
+public class DeviceInfoSettings extends SettingsPreferenceFragment {
     private static final String TAG = "DeviceInfoSettings";
 
     private static final String KEY_CONTAINER = "container";
@@ -46,7 +45,7 @@ public class DeviceInfoSettings extends PreferenceActivity {
     private static final String PROPERTY_URL_SAFETYLEGAL = "ro.url.safetylegal";
     
     @Override
-    protected void onCreate(Bundle icicle) {
+    public void onCreate(Bundle icicle) {
         super.onCreate(icicle);
         
         addPreferencesFromResource(R.xml.device_info_settings);
@@ -66,24 +65,24 @@ public class DeviceInfoSettings extends PreferenceActivity {
          * Settings is a generic app and should not contain any device-specific
          * info.
          */
-        
+        final Activity act = getActivity();
         // These are contained in the "container" preference group
         PreferenceGroup parentPreference = (PreferenceGroup) findPreference(KEY_CONTAINER);
-        Utils.updatePreferenceToSpecificActivityOrRemove(this, parentPreference, KEY_TERMS,
+        Utils.updatePreferenceToSpecificActivityOrRemove(act, parentPreference, KEY_TERMS,
                 Utils.UPDATE_PREFERENCE_FLAG_SET_TITLE_TO_MATCHING_ACTIVITY);
-        Utils.updatePreferenceToSpecificActivityOrRemove(this, parentPreference, KEY_LICENSE,
+        Utils.updatePreferenceToSpecificActivityOrRemove(act, parentPreference, KEY_LICENSE,
                 Utils.UPDATE_PREFERENCE_FLAG_SET_TITLE_TO_MATCHING_ACTIVITY);
-        Utils.updatePreferenceToSpecificActivityOrRemove(this, parentPreference, KEY_COPYRIGHT,
+        Utils.updatePreferenceToSpecificActivityOrRemove(act, parentPreference, KEY_COPYRIGHT,
                 Utils.UPDATE_PREFERENCE_FLAG_SET_TITLE_TO_MATCHING_ACTIVITY);
-        Utils.updatePreferenceToSpecificActivityOrRemove(this, parentPreference, KEY_TEAM,
+        Utils.updatePreferenceToSpecificActivityOrRemove(act, parentPreference, KEY_TEAM,
                 Utils.UPDATE_PREFERENCE_FLAG_SET_TITLE_TO_MATCHING_ACTIVITY);
         
         // These are contained by the root preference screen
         parentPreference = getPreferenceScreen();
-        Utils.updatePreferenceToSpecificActivityOrRemove(this, parentPreference,
+        Utils.updatePreferenceToSpecificActivityOrRemove(act, parentPreference,
                 KEY_SYSTEM_UPDATE_SETTINGS,
                 Utils.UPDATE_PREFERENCE_FLAG_SET_TITLE_TO_MATCHING_ACTIVITY);
-        Utils.updatePreferenceToSpecificActivityOrRemove(this, parentPreference, KEY_CONTRIBUTORS,
+        Utils.updatePreferenceToSpecificActivityOrRemove(act, parentPreference, KEY_CONTRIBUTORS,
                 Utils.UPDATE_PREFERENCE_FLAG_SET_TITLE_TO_MATCHING_ACTIVITY);
     }
     

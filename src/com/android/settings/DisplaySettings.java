@@ -18,8 +18,6 @@ package com.android.settings;
 
 import static android.provider.Settings.System.SCREEN_OFF_TIMEOUT;
 
-import java.util.ArrayList;
-
 import android.app.admin.DevicePolicyManager;
 import android.content.ContentResolver;
 import android.content.Context;
@@ -29,13 +27,14 @@ import android.os.ServiceManager;
 import android.preference.CheckBoxPreference;
 import android.preference.ListPreference;
 import android.preference.Preference;
-import android.preference.PreferenceActivity;
 import android.preference.PreferenceScreen;
 import android.provider.Settings;
 import android.util.Log;
 import android.view.IWindowManager;
 
-public class DisplaySettings extends PreferenceActivity implements
+import java.util.ArrayList;
+
+public class DisplaySettings extends SettingsPreferenceFragment implements
         Preference.OnPreferenceChangeListener {
     private static final String TAG = "DisplaySettings";
 
@@ -53,9 +52,9 @@ public class DisplaySettings extends PreferenceActivity implements
     private IWindowManager mWindowManager;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        ContentResolver resolver = getContentResolver();
+        ContentResolver resolver = getActivity().getContentResolver();
         mWindowManager = IWindowManager.Stub.asInterface(ServiceManager.getService("window"));
 
         addPreferencesFromResource(R.xml.display_settings);
@@ -75,7 +74,8 @@ public class DisplaySettings extends PreferenceActivity implements
 
     private void disableUnusableTimeouts(ListPreference screenTimeoutPreference) {
         final DevicePolicyManager dpm =
-            (DevicePolicyManager) getSystemService(Context.DEVICE_POLICY_SERVICE);
+                (DevicePolicyManager) getActivity().getSystemService(
+                Context.DEVICE_POLICY_SERVICE);
         final long maxTimeout = dpm != null ? dpm.getMaximumTimeToLock(null) : 0;
         if (maxTimeout == 0) {
             return; // policy not enforced
@@ -109,7 +109,7 @@ public class DisplaySettings extends PreferenceActivity implements
     }
 
     @Override
-    protected void onResume() {
+    public void onResume() {
         super.onResume();
 
         updateState(true);

@@ -22,14 +22,13 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
-import android.content.pm.PackageManager.NameNotFoundException;
 import android.content.pm.ServiceInfo;
+import android.content.pm.PackageManager.NameNotFoundException;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.SystemProperties;
 import android.preference.CheckBoxPreference;
 import android.preference.Preference;
-import android.preference.PreferenceActivity;
 import android.preference.PreferenceCategory;
 import android.preference.PreferenceGroup;
 import android.preference.PreferenceScreen;
@@ -47,7 +46,7 @@ import java.util.Map;
 /**
  * Activity with the accessibility settings.
  */
-public class AccessibilitySettings extends PreferenceActivity {
+public class AccessibilitySettings extends SettingsPreferenceFragment {
     private static final String DEFAULT_SCREENREADER_MARKET_LINK =
         "market://search?q=pname:com.google.android.marvin.talkback";
 
@@ -77,7 +76,7 @@ public class AccessibilitySettings extends PreferenceActivity {
     private PreferenceGroup mAccessibilityServicesCategory;
 
     @Override
-    protected void onCreate(Bundle icicle) {
+    public void onCreate(Bundle icicle) {
         super.onCreate(icicle);
         addPreferencesFromResource(R.xml.accessibility_settings);
 
@@ -92,7 +91,7 @@ public class AccessibilitySettings extends PreferenceActivity {
     }
 
     @Override
-    protected void onResume() {
+    public void onResume() {
         super.onResume();
 
         final HashSet<String> enabled = new HashSet<String>();
@@ -155,7 +154,7 @@ public class AccessibilitySettings extends PreferenceActivity {
     }
 
     @Override
-    protected void onPause() {
+    public void onPause() {
         super.onPause();
 
         persistEnabledAccessibilityServices();
@@ -214,10 +213,12 @@ public class AccessibilitySettings extends PreferenceActivity {
             setAccessibilityServicePreferencesState(true);
         } else {
             final CheckBoxPreference checkBoxPreference = preference;
-            AlertDialog dialog = (new AlertDialog.Builder(this))
+            // TODO: DialogFragment?
+            AlertDialog dialog = (new AlertDialog.Builder(getActivity()))
                 .setTitle(android.R.string.dialog_alert_title)
                 .setIcon(android.R.drawable.ic_dialog_alert)
-                .setMessage(getString(R.string.accessibility_service_disable_warning))
+                .setMessage(getResources().
+                        getString(R.string.accessibility_service_disable_warning))
                 .setCancelable(true)
                 .setPositiveButton(android.R.string.ok,
                     new DialogInterface.OnClickListener() {
@@ -246,12 +247,14 @@ public class AccessibilitySettings extends PreferenceActivity {
     private void handleEnableAccessibilityServiceStateChange(CheckBoxPreference preference) {
         if (preference.isChecked()) {
             final CheckBoxPreference checkBoxPreference = preference;
-            AlertDialog dialog = (new AlertDialog.Builder(this))
+            // TODO: DialogFragment?
+            AlertDialog dialog = (new AlertDialog.Builder(getActivity()))
                 .setTitle(android.R.string.dialog_alert_title)
                 .setIcon(android.R.drawable.ic_dialog_alert)
-                .setMessage(getString(R.string.accessibility_service_security_warning,
-                    mAccessibilityServices.get(preference.getKey())
-                    .applicationInfo.loadLabel(getPackageManager())))
+                .setMessage(getResources().
+                        getString(R.string.accessibility_service_security_warning,
+                                mAccessibilityServices.get(preference.getKey())
+                                .applicationInfo.loadLabel(getActivity().getPackageManager())))
                 .setCancelable(true)
                 .setPositiveButton(android.R.string.ok,
                         new DialogInterface.OnClickListener() {
@@ -318,9 +321,9 @@ public class AccessibilitySettings extends PreferenceActivity {
 
             mAccessibilityServices.put(key, serviceInfo);
 
-            CheckBoxPreference preference = new CheckBoxPreference(this);
+            CheckBoxPreference preference = new CheckBoxPreference(getActivity());
             preference.setKey(key);
-            preference.setTitle(serviceInfo.loadLabel(getPackageManager()));
+            preference.setTitle(serviceInfo.loadLabel(getActivity().getPackageManager()));
             mAccessibilityServicesCategory.addPreference(preference);
         }
     }
@@ -332,13 +335,14 @@ public class AccessibilitySettings extends PreferenceActivity {
      */
     private void displayNoAppsAlert() {
         try {
-            PackageManager pm = getPackageManager();
+            PackageManager pm = getActivity().getPackageManager();
             ApplicationInfo info = pm.getApplicationInfo("com.android.vending", 0);
         } catch (NameNotFoundException e) {
             // This is a no-op if the user does not have Android Market
             return;
         }
-        AlertDialog.Builder noAppsAlert = new AlertDialog.Builder(this);
+        // TODO: DialogFragment?
+        AlertDialog.Builder noAppsAlert = new AlertDialog.Builder(getActivity());
         noAppsAlert.setTitle(R.string.accessibility_service_no_apps_title);
         noAppsAlert.setMessage(R.string.accessibility_service_no_apps_message);
 
@@ -351,7 +355,7 @@ public class AccessibilitySettings extends PreferenceActivity {
                     Uri marketUri = Uri.parse(screenreaderMarketLink);
                     Intent marketIntent = new Intent(Intent.ACTION_VIEW, marketUri);
                     startActivity(marketIntent);
-                    finish();
+                    getFragmentManager().popBackStack();
                 }
             });
 

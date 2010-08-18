@@ -22,12 +22,15 @@ import android.graphics.drawable.Drawable;
 import android.preference.Preference;
 import android.util.AttributeSet;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 public class IconPreferenceScreen extends Preference {
 
     private Drawable mIcon;
+
+    // Whether or not the text and icon should be highlighted (as selected)
+    private boolean mHighlight;
 
     public IconPreferenceScreen(Context context, AttributeSet attrs) {
         this(context, attrs, 0);
@@ -48,6 +51,7 @@ public class IconPreferenceScreen extends Preference {
         if (imageView != null && mIcon != null) {
             imageView.setImageDrawable(mIcon);
         }
+        TextView textView = (TextView) view.findViewById(android.R.id.title);
     }
 
     /**
@@ -70,5 +74,10 @@ public class IconPreferenceScreen extends Preference {
      */
     public Drawable getIcon() {
         return mIcon;
+    }
+
+    public void setHighlighted(boolean highlight) {
+        mHighlight = highlight;
+        notifyChanged();
     }
 }

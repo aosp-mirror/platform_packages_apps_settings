@@ -17,8 +17,7 @@
 package com.android.settings;
 
 
-import java.util.Observable;
-import java.util.Observer;
+import com.android.internal.widget.LockPatternUtils;
 
 import android.app.AlertDialog;
 import android.app.Dialog;
@@ -34,7 +33,6 @@ import android.os.Bundle;
 import android.os.SystemProperties;
 import android.preference.CheckBoxPreference;
 import android.preference.Preference;
-import android.preference.PreferenceActivity;
 import android.preference.PreferenceCategory;
 import android.preference.PreferenceManager;
 import android.preference.PreferenceScreen;
@@ -46,12 +44,13 @@ import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.android.internal.widget.LockPatternUtils;
+import java.util.Observable;
+import java.util.Observer;
 
 /**
  * Gesture lock pattern settings.
  */
-public class SecuritySettings extends PreferenceActivity {
+public class SecuritySettings extends SettingsPreferenceFragment {
     private static final String KEY_UNLOCK_SET_OR_CHANGE = "unlock_set_or_change";
 
     // Lock Settings
@@ -102,14 +101,14 @@ public class SecuritySettings extends PreferenceActivity {
     }
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        mLockPatternUtils = new LockPatternUtils(this);
+        mLockPatternUtils = new LockPatternUtils(getActivity());
 
         mDPM = (DevicePolicyManager)getSystemService(Context.DEVICE_POLICY_SERVICE);
 
-        mChooseLockSettingsHelper = new ChooseLockSettingsHelper(this);
+        mChooseLockSettingsHelper = new ChooseLockSettingsHelper(getActivity());
 
         createPreferenceHierarchy();
 
@@ -172,22 +171,22 @@ public class SecuritySettings extends PreferenceActivity {
         if (TelephonyManager.PHONE_TYPE_CDMA != activePhoneType)
         {
             PreferenceScreen simLockPreferences = getPreferenceManager()
-                    .createPreferenceScreen(this);
+                    .createPreferenceScreen(getActivity());
             simLockPreferences.setTitle(R.string.sim_lock_settings_category);
             // Intent to launch SIM lock settings
             simLockPreferences.setIntent(new Intent().setClassName(PACKAGE, ICC_LOCK_SETTINGS));
-            PreferenceCategory simLockCat = new PreferenceCategory(this);
+            PreferenceCategory simLockCat = new PreferenceCategory(getActivity());
             simLockCat.setTitle(R.string.sim_lock_settings_title);
             root.addPreference(simLockCat);
             simLockCat.addPreference(simLockPreferences);
         }
 
         // Passwords
-        PreferenceCategory passwordsCat = new PreferenceCategory(this);
+        PreferenceCategory passwordsCat = new PreferenceCategory(getActivity());
         passwordsCat.setTitle(R.string.security_passwords_title);
         root.addPreference(passwordsCat);
 
-        CheckBoxPreference showPassword = mShowPassword = new CheckBoxPreference(this);
+        CheckBoxPreference showPassword = mShowPassword = new CheckBoxPreference(getActivity());
         showPassword.setKey("show_password");
         showPassword.setTitle(R.string.show_password);
         showPassword.setSummary(R.string.show_password_summary);
@@ -195,26 +194,26 @@ public class SecuritySettings extends PreferenceActivity {
         passwordsCat.addPreference(showPassword);
 
         // Device policies
-        PreferenceCategory devicePoliciesCat = new PreferenceCategory(this);
+        PreferenceCategory devicePoliciesCat = new PreferenceCategory(getActivity());
         devicePoliciesCat.setTitle(R.string.device_admin_title);
         root.addPreference(devicePoliciesCat);
 
-        Preference deviceAdminButton = new Preference(this);
+        Preference deviceAdminButton = new Preference(getActivity());
         deviceAdminButton.setTitle(R.string.manage_device_admin);
         deviceAdminButton.setSummary(R.string.manage_device_admin_summary);
         Intent deviceAdminIntent = new Intent();
-        deviceAdminIntent.setClass(this, DeviceAdminSettings.class);
+        deviceAdminIntent.setClass(getActivity(), DeviceAdminSettings.class);
         deviceAdminButton.setIntent(deviceAdminIntent);
         devicePoliciesCat.addPreference(deviceAdminButton);
 
         // Credential storage
-        PreferenceCategory credentialsCat = new PreferenceCategory(this);
+        PreferenceCategory credentialsCat = new PreferenceCategory(getActivity());
         credentialsCat.setTitle(R.string.credentials_category);
         root.addPreference(credentialsCat);
         mCredentialStorage.createPreferences(credentialsCat, CredentialStorage.TYPE_KEYSTORE);
 
         // File System Encryption
-        PreferenceCategory encryptedfsCat = new PreferenceCategory(this);
+        PreferenceCategory encryptedfsCat = new PreferenceCategory(getActivity());
         encryptedfsCat.setTitle(R.string.encrypted_fs_category);
         //root.addPreference(encryptedfsCat);
         mCredentialStorage.createPreferences(encryptedfsCat, CredentialStorage.TYPE_ENCRYPTEDFS);
@@ -222,7 +221,7 @@ public class SecuritySettings extends PreferenceActivity {
     }
 
     @Override
-    protected void onResume() {
+    public void onResume() {
         super.onResume();
 
         final LockPatternUtils lockPatternUtils = mChooseLockSettingsHelper.utils();
@@ -246,7 +245,7 @@ public class SecuritySettings extends PreferenceActivity {
 
         final LockPatternUtils lockPatternUtils = mChooseLockSettingsHelper.utils();
         if (KEY_UNLOCK_SET_OR_CHANGE.equals(key)) {
-            Intent intent = new Intent(this, ChooseLockGeneric.class);
+            Intent intent = new Intent(getActivity(), ChooseLockGeneric.class);
             startActivityForResult(intent, SET_OR_CHANGE_LOCK_METHOD_REQUEST);
         } else if (KEY_LOCK_ENABLED.equals(key)) {
             lockPatternUtils.setLockPatternEnabled(isToggled(preference));
@@ -300,7 +299,7 @@ public class SecuritySettings extends PreferenceActivity {
      * @see #confirmPatternThenDisableAndClear
      */
     @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         createPreferenceHierarchy();
     }
@@ -342,7 +341,7 @@ public class SecuritySettings extends PreferenceActivity {
             mState = mKeyStore.test();
             updatePreferences(mState);
 
-            Intent intent = getIntent();
+            Intent intent = getActivity().getIntent();
             if (!mExternal && intent != null &&
                     Credentials.UNLOCK_ACTION.equals(intent.getAction())) {
                 mExternal = true;
@@ -351,7 +350,8 @@ public class SecuritySettings extends PreferenceActivity {
                 } else if (mState == KeyStore.LOCKED) {
                     showUnlockDialog();
                 } else {
-                    finish();
+                    // TODO: Verify if this is the right way
+                    SecuritySettings.this.getFragmentManager().popBackStack();
                 }
             }
         }
@@ -399,7 +399,7 @@ public class SecuritySettings extends PreferenceActivity {
 
         public boolean onPreferenceClick(Preference preference) {
             if (preference == mInstallButton) {
-                Credentials.getInstance().installFromSdCard(SecuritySettings.this);
+                Credentials.getInstance().installFromSdCard(SecuritySettings.this.getActivity());
             } else if (preference == mPasswordButton) {
                 showPasswordDialog();
             } else if (preference == mResetButton) {
@@ -420,11 +420,12 @@ public class SecuritySettings extends PreferenceActivity {
                 if (button == DialogInterface.BUTTON_POSITIVE) {
                     Intent intent = new Intent("android.intent.action.MASTER_CLEAR");
                     intent.putExtra("enableEFS", mWillEnableEncryptedFS);
-                    sendBroadcast(intent);
+                    getActivity().sendBroadcast(intent);
                     updatePreferences(mState);
                 } else if (button == DialogInterface.BUTTON_NEGATIVE) {
                     // Cancel action
-                    Toast.makeText(SecuritySettings.this, R.string.encrypted_fs_cancel_confirm,
+                    Toast.makeText(SecuritySettings.this.getActivity(),
+                            R.string.encrypted_fs_cancel_confirm,
                             Toast.LENGTH_SHORT).show();
                     updatePreferences(mState);
                 } else {
@@ -435,7 +436,10 @@ public class SecuritySettings extends PreferenceActivity {
         }
 
         public void onDismiss(DialogInterface dialog) {
-            if (mSubmit && !isFinishing()) {
+            // TODO:
+            //if (mSubmit && !isFinishing()) {
+
+            if (mSubmit) {
                 mSubmit = false;
                 if (!checkPassword((Dialog) dialog)) {
                     ((Dialog) dialog).show();
@@ -444,7 +448,8 @@ public class SecuritySettings extends PreferenceActivity {
             }
             updatePreferences(mState);
             if (mExternal) {
-                finish();
+                // TODO:
+                // finish();
             }
         }
 
@@ -519,25 +524,25 @@ public class SecuritySettings extends PreferenceActivity {
         private void createPreferences(PreferenceCategory category, int type) {
             switch(type) {
             case TYPE_KEYSTORE:
-                mAccessCheckBox = new CheckBoxPreference(SecuritySettings.this);
+                    mAccessCheckBox = new CheckBoxPreference(SecuritySettings.this.getActivity());
                 mAccessCheckBox.setTitle(R.string.credentials_access);
                 mAccessCheckBox.setSummary(R.string.credentials_access_summary);
                 mAccessCheckBox.setOnPreferenceChangeListener(this);
                 category.addPreference(mAccessCheckBox);
 
-                mInstallButton = new Preference(SecuritySettings.this);
+                    mInstallButton = new Preference(SecuritySettings.this.getActivity());
                 mInstallButton.setTitle(R.string.credentials_install_certificates);
                 mInstallButton.setSummary(R.string.credentials_install_certificates_summary);
                 mInstallButton.setOnPreferenceClickListener(this);
                 category.addPreference(mInstallButton);
 
-                mPasswordButton = new Preference(SecuritySettings.this);
+                    mPasswordButton = new Preference(SecuritySettings.this.getActivity());
                 mPasswordButton.setTitle(R.string.credentials_set_password);
                 mPasswordButton.setSummary(R.string.credentials_set_password_summary);
                 mPasswordButton.setOnPreferenceClickListener(this);
                 category.addPreference(mPasswordButton);
 
-                mResetButton = new Preference(SecuritySettings.this);
+                    mResetButton = new Preference(SecuritySettings.this.getActivity());
                 mResetButton.setTitle(R.string.credentials_reset);
                 mResetButton.setSummary(R.string.credentials_reset_summary);
                 mResetButton.setOnPreferenceClickListener(this);
@@ -545,7 +550,8 @@ public class SecuritySettings extends PreferenceActivity {
                 break;
 
             case TYPE_ENCRYPTEDFS:
-                mEncryptedFSEnabled = new CheckBoxPreference(SecuritySettings.this);
+                    mEncryptedFSEnabled = new CheckBoxPreference(SecuritySettings.this
+                            .getActivity());
                 mEncryptedFSEnabled.setTitle(R.string.encrypted_fs_enable);
                 mEncryptedFSEnabled.setSummary(R.string.encrypted_fs_enable_summary);
                 mEncryptedFSEnabled.setOnPreferenceChangeListener(this);
@@ -568,20 +574,20 @@ public class SecuritySettings extends PreferenceActivity {
             if (mState == state) {
                 return;
             } else if (state == KeyStore.NO_ERROR) {
-                Toast.makeText(SecuritySettings.this, R.string.credentials_enabled,
+                Toast.makeText(SecuritySettings.this.getActivity(), R.string.credentials_enabled,
                         Toast.LENGTH_SHORT).show();
             } else if (state == KeyStore.UNINITIALIZED) {
-                Toast.makeText(SecuritySettings.this, R.string.credentials_erased,
+                Toast.makeText(SecuritySettings.this.getActivity(), R.string.credentials_erased,
                         Toast.LENGTH_SHORT).show();
             } else if (state == KeyStore.LOCKED) {
-                Toast.makeText(SecuritySettings.this, R.string.credentials_disabled,
+                Toast.makeText(SecuritySettings.this.getActivity(), R.string.credentials_disabled,
                         Toast.LENGTH_SHORT).show();
             }
             mState = state;
         }
 
         private void showUnlockDialog() {
-            View view = View.inflate(SecuritySettings.this,
+            View view = View.inflate(SecuritySettings.this.getActivity(),
                     R.layout.credentials_unlock_dialog, null);
 
             // Show extra hint only when the action comes from outside.
@@ -589,7 +595,7 @@ public class SecuritySettings extends PreferenceActivity {
                 view.findViewById(R.id.hint).setVisibility(View.VISIBLE);
             }
 
-            Dialog dialog = new AlertDialog.Builder(SecuritySettings.this)
+            Dialog dialog = new AlertDialog.Builder(SecuritySettings.this.getActivity())
                     .setView(view)
                     .setTitle(R.string.credentials_unlock)
                     .setPositiveButton(android.R.string.ok, this)
@@ -601,7 +607,7 @@ public class SecuritySettings extends PreferenceActivity {
         }
 
         private void showPasswordDialog() {
-            View view = View.inflate(SecuritySettings.this,
+            View view = View.inflate(SecuritySettings.this.getActivity(),
                     R.layout.credentials_password_dialog, null);
 
             if (mState == KeyStore.UNINITIALIZED) {
@@ -611,7 +617,7 @@ public class SecuritySettings extends PreferenceActivity {
                 view.findViewById(R.id.old_password).setVisibility(View.VISIBLE);
             }
 
-            Dialog dialog = new AlertDialog.Builder(SecuritySettings.this)
+            Dialog dialog = new AlertDialog.Builder(SecuritySettings.this.getActivity())
                     .setView(view)
                     .setTitle(R.string.credentials_set_password)
                     .setPositiveButton(android.R.string.ok, this)
@@ -624,17 +630,18 @@ public class SecuritySettings extends PreferenceActivity {
 
         private void showResetDialog() {
             mShowingDialog = DLG_RESET;
-            new AlertDialog.Builder(SecuritySettings.this)
+            new AlertDialog.Builder(SecuritySettings.this.getActivity())
                     .setTitle(android.R.string.dialog_alert_title)
                     .setIcon(android.R.drawable.ic_dialog_alert)
                     .setMessage(R.string.credentials_reset_hint)
-                    .setNeutralButton(getString(android.R.string.ok), this)
-                    .setNegativeButton(getString(android.R.string.cancel), this)
+                    .setNeutralButton(getResources().getString(android.R.string.ok), this)
+                    .setNegativeButton(getResources().getString(android.R.string.cancel), this)
                     .create().show();
         }
 
         private void showSwitchEncryptedFSDialog() {
-            AlertDialog.Builder builder = new AlertDialog.Builder(SecuritySettings.this)
+            AlertDialog.Builder builder = new AlertDialog.Builder(SecuritySettings.this
+                    .getActivity())
                     .setCancelable(false)
                     .setTitle(R.string.encrypted_fs_alert_dialog_title);
 

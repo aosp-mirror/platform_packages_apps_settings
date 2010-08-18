@@ -23,12 +23,11 @@ import android.os.Bundle;
 import android.preference.CheckBoxPreference;
 import android.preference.ListPreference;
 import android.preference.Preference;
-import android.preference.PreferenceActivity;
 import android.preference.PreferenceScreen;
 import android.preference.Preference.OnPreferenceChangeListener;
 import android.provider.Settings;
 
-public class ApplicationSettings extends PreferenceActivity implements
+public class ApplicationSettings extends SettingsPreferenceFragment implements
         DialogInterface.OnClickListener {
     
     private static final String KEY_TOGGLE_INSTALL_APPLICATIONS = "toggle_install_applications";
@@ -51,7 +50,7 @@ public class ApplicationSettings extends PreferenceActivity implements
     private DialogInterface mWarnInstallApps;
 
     @Override
-    protected void onCreate(Bundle icicle) {
+    public void onCreate(Bundle icicle) {
         super.onCreate(icicle);
 
         addPreferencesFromResource(R.xml.application_settings);
@@ -102,7 +101,7 @@ public class ApplicationSettings extends PreferenceActivity implements
     }
 
     @Override
-    protected void onDestroy() {
+    public void onDestroy() {
         super.onDestroy();
         if (mWarnInstallApps != null) {
             mWarnInstallApps.dismiss();
@@ -157,8 +156,9 @@ public class ApplicationSettings extends PreferenceActivity implements
     }
 
     private void warnAppInstallation() {
-        mWarnInstallApps = new AlertDialog.Builder(this)
-                .setTitle(getString(R.string.error_title))
+        // TODO: DialogFragment?
+        mWarnInstallApps = new AlertDialog.Builder(getActivity()).setTitle(
+                getResources().getString(R.string.error_title))
                 .setIcon(com.android.internal.R.drawable.ic_dialog_alert)
                 .setMessage(getResources().getString(R.string.install_all_warning))
                 .setPositiveButton(android.R.string.yes, this)

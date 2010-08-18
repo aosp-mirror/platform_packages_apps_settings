@@ -21,7 +21,7 @@ import android.view.View;
 import android.view.Window;
 import android.view.View.OnClickListener;
 
-public class DateTimeSettingsSetupWizard extends DateTimeSettings implements OnClickListener {
+public class DateTimeSettingsSetupWizard extends DateTimeSettingsActivity implements OnClickListener {
     private View mNextButton;
     
     @Override

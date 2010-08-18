@@ -16,8 +16,8 @@
 
 package com.android.settings;
 
-import android.app.DatePickerDialog;
 import android.app.Dialog;
+import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
 import android.content.BroadcastReceiver;
 import android.content.Context;
@@ -30,6 +30,7 @@ import android.os.SystemClock;
 import android.preference.CheckBoxPreference;
 import android.preference.ListPreference;
 import android.preference.Preference;
+import android.preference.PreferenceActivity;
 import android.preference.PreferenceScreen;
 import android.provider.Settings;
 import android.provider.Settings.SettingNotFoundException;
@@ -41,8 +42,8 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.TimeZone;
 
-public class DateTimeSettings 
- extends SettingsPreferenceFragment
+public class DateTimeSettingsActivity 
+        extends PreferenceActivity 
         implements OnSharedPreferenceChangeListener,
                 TimePickerDialog.OnTimeSetListener , DatePickerDialog.OnDateSetListener {
 
@@ -64,7 +65,7 @@ public class DateTimeSettings
     private ListPreference mDateFormat;
     
     @Override
-    public void onCreate(Bundle icicle) {
+    protected void onCreate(Bundle icicle) {
         super.onCreate(icicle);
         
         addPreferencesFromResource(R.xml.date_time_prefs);
@@ -96,8 +97,8 @@ public class DateTimeSettings
         }
         for (int i = 0; i < formattedDates.length; i++) {
             String formatted =
-                    DateFormat.getDateFormatForSetting(getActivity(), dateFormats[i])
-                    .format(mDummyDate.getTime());
+                DateFormat.getDateFormatForSetting(this, dateFormats[i]).
+                    format(mDummyDate.getTime());
 
             if (dateFormats[i].length() == 0) {
                 formattedDates[i] = getResources().
@@ -118,7 +119,7 @@ public class DateTimeSettings
 
     
     @Override
-    public void onResume() {
+    protected void onResume() {
         super.onResume();
         
         getPreferenceScreen().getSharedPreferences().registerOnSharedPreferenceChangeListener(this);
@@ -130,23 +131,23 @@ public class DateTimeSettings
         filter.addAction(Intent.ACTION_TIME_TICK);
         filter.addAction(Intent.ACTION_TIME_CHANGED);
         filter.addAction(Intent.ACTION_TIMEZONE_CHANGED);
-        getActivity().registerReceiver(mIntentReceiver, filter, null, null);
+        registerReceiver(mIntentReceiver, filter, null, null);
         
         updateTimeAndDateDisplay();
     }
 
     @Override 
-    public void onPause() {
+    protected void onPause() {
         super.onPause();
-        getActivity().unregisterReceiver(mIntentReceiver);
+        unregisterReceiver(mIntentReceiver);
         getPreferenceScreen().getSharedPreferences().unregisterOnSharedPreferenceChangeListener(this);
     }
     
     private void updateTimeAndDateDisplay() {
-        java.text.DateFormat shortDateFormat = DateFormat.getDateFormat(getActivity());
+        java.text.DateFormat shortDateFormat = DateFormat.getDateFormat(this);
         Date now = Calendar.getInstance().getTime();
         Date dummyDate = mDummyDate.getTime();
-        mTimePref.setSummary(DateFormat.getTimeFormat(getActivity()).format(now));
+        mTimePref.setSummary(DateFormat.getTimeFormat(this).format(now));
         mTimeZone.setSummary(getTimeZoneText());
         mDatePref.setSummary(shortDateFormat.format(now));
         mDateFormat.setSummary(shortDateFormat.format(dummyDate));
@@ -209,7 +210,7 @@ public class DateTimeSettings
         case DIALOG_DATEPICKER: {
             final Calendar calendar = Calendar.getInstance();
             d = new DatePickerDialog(
-                getActivity(),
+                this,
                 this,
                 calendar.get(Calendar.YEAR),
                 calendar.get(Calendar.MONTH),
@@ -220,11 +221,11 @@ public class DateTimeSettings
         case DIALOG_TIMEPICKER: {
             final Calendar calendar = Calendar.getInstance();
             d = new TimePickerDialog(
-                    getActivity(),
+                    this,
                     this,
                     calendar.get(Calendar.HOUR_OF_DAY),
                     calendar.get(Calendar.MINUTE),
-                    DateFormat.is24HourFormat(getActivity()));
+                    DateFormat.is24HourFormat(this));
             d.setTitle(getResources().getString(R.string.date_time_changeTime_text));
             break;
         }
@@ -236,7 +237,6 @@ public class DateTimeSettings
         return d;
     }
 
-    /*
     @Override
     public void onPrepareDialog(int id, Dialog d) {
         switch (id) {
@@ -261,7 +261,7 @@ public class DateTimeSettings
             break;
         }
     }
-    */
+    
     @Override
     public boolean onPreferenceTreeClick(PreferenceScreen preferenceScreen, Preference preference) {
         if (preference == mDatePref) {
@@ -276,27 +276,27 @@ public class DateTimeSettings
             timeUpdated();
         } else if (preference == mTimeZone) {
             Intent intent = new Intent();
-            intent.setClass(getActivity(), ZoneList.class);
+            intent.setClass(this, ZoneList.class);
             startActivityForResult(intent, 0);
         }
         return false;
     }
     
     @Override
-    public void onActivityResult(int requestCode, int resultCode,
+    protected void onActivityResult(int requestCode, int resultCode,
             Intent data) {
         updateTimeAndDateDisplay();
     }
     
     private void timeUpdated() {
         Intent timeChanged = new Intent(Intent.ACTION_TIME_CHANGED);
-        getActivity().sendBroadcast(timeChanged);
+        sendBroadcast(timeChanged);
     }
     
     /*  Get & Set values from the system settings  */
     
     private boolean is24Hour() {
-        return DateFormat.is24HourFormat(getActivity());
+        return DateFormat.is24HourFormat(this);
     }
     
     private void set24Hour(boolean is24Hour) {

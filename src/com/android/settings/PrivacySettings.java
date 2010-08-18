@@ -22,23 +22,18 @@ import android.app.backup.IBackupManager;
 import android.content.ContentResolver;
 import android.content.Context;
 import android.content.DialogInterface;
-import android.content.SharedPreferences;
-import android.content.pm.PackageManager.NameNotFoundException;
 import android.os.Bundle;
 import android.os.RemoteException;
 import android.os.ServiceManager;
 import android.preference.CheckBoxPreference;
 import android.preference.Preference;
-import android.preference.PreferenceActivity;
 import android.preference.PreferenceScreen;
 import android.provider.Settings;
-import android.text.method.LinkMovementMethod;
-import android.widget.TextView;
 
 /**
  * Gesture lock pattern settings.
  */
-public class PrivacySettings extends PreferenceActivity implements
+public class PrivacySettings extends SettingsPreferenceFragment implements
         DialogInterface.OnClickListener {
 
     // Vendor specific
@@ -54,7 +49,7 @@ public class PrivacySettings extends PreferenceActivity implements
     private int     mDialogType;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         addPreferencesFromResource(R.xml.privacy_settings);
         final PreferenceScreen screen = getPreferenceScreen();
@@ -63,7 +58,8 @@ public class PrivacySettings extends PreferenceActivity implements
         mAutoRestore = (CheckBoxPreference) screen.findPreference(AUTO_RESTORE);
 
         // Vendor specific
-        if (getPackageManager().resolveContentProvider(GSETTINGS_PROVIDER, 0) == null) {
+        if (getActivity().getPackageManager().
+                resolveContentProvider(GSETTINGS_PROVIDER, 0) == null) {
             screen.removePreference(findPreference(BACKUP_CATEGORY));
         }
         updateToggles();
@@ -110,7 +106,8 @@ public class PrivacySettings extends PreferenceActivity implements
 
         mDialogType = DIALOG_ERASE_BACKUP;
         CharSequence msg = getResources().getText(R.string.backup_erase_dialog_message);
-        mConfirmDialog = new AlertDialog.Builder(this).setMessage(msg)
+        // TODO: DialogFragment?
+        mConfirmDialog = new AlertDialog.Builder(getActivity()).setMessage(msg)
                 .setTitle(R.string.backup_erase_dialog_title)
                 .setIcon(android.R.drawable.ic_dialog_alert)
                 .setPositiveButton(android.R.string.ok, this)

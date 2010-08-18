@@ -31,7 +31,6 @@ import android.content.res.XmlResourceParser;
 import android.os.Bundle;
 import android.preference.ListPreference;
 import android.preference.Preference;
-import android.preference.PreferenceActivity;
 import android.preference.PreferenceCategory;
 import android.preference.PreferenceGroup;
 import android.preference.PreferenceScreen;
@@ -49,7 +48,7 @@ import java.util.List;
 /**
  * Settings screen for voice input/output.
  */
-public class VoiceInputOutputSettings extends PreferenceActivity
+public class VoiceInputOutputSettings extends SettingsPreferenceFragment
         implements OnPreferenceChangeListener {
     
     private static final String TAG = "VoiceInputOutputSettings";
@@ -67,7 +66,7 @@ public class VoiceInputOutputSettings extends PreferenceActivity
     private HashMap<String, ResolveInfo> mAvailableRecognizersMap;
     
     @Override
-    protected void onCreate(Bundle icicle) {
+    public void onCreate(Bundle icicle) {
         super.onCreate(icicle);
 
         addPreferencesFromResource(R.xml.voice_input_output_settings);

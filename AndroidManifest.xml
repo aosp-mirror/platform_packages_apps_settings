@@ -49,8 +49,7 @@
 
         <activity android:name="Settings" android:label="@string/settings_label"
                 android:taskAffinity="com.android.settings"
-                android:clearTaskOnLaunch="true"
-                android:launchMode="singleTop">
+                android:theme="@android:style/Theme.WithActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <action android:name="android.settings.SETTINGS" />
@@ -68,8 +67,9 @@
 
         <!-- Wireless Controls -->
 
-        <activity android:name="WirelessSettings"
+        <activity-alias android:name="WirelessSettings"
                 android:label="@string/wireless_networks_settings_title"
+                android:targetActivity="Settings"
                 >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -78,7 +78,7 @@
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.VOICE_LAUNCH" />
             </intent-filter>
-        </activity>
+        </activity-alias>
 
 
         <!-- Top-level settings -->
@@ -205,7 +205,9 @@
                 android:configChanges="orientation|keyboardHidden">
         </activity>
 
-        <activity android:name="DateTimeSettings" android:label="@string/date_and_time"
+        <activity-alias android:name="DateTimeSettings"
+                android:label="@string/date_and_time"
+                android:targetActivity="Settings"
                 >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -213,7 +215,7 @@
                 <category android:name="android.intent.category.VOICE_LAUNCH" />
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
-        </activity>
+        </activity-alias>
 
         <activity android:name="DateTimeSettingsSetupWizard" android:label="@string/date_and_time"
             android:screenOrientation="portrait">
@@ -231,9 +233,10 @@
             </intent-filter>
         </activity>
 
-        <activity android:name="LanguageSettings"
+        <activity-alias android:name="LanguageSettings"
                 android:label="@string/language_keyboard_settings_title"
                 android:clearTaskOnLaunch="true"
+                android:targetActivity="Settings"
                 >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -242,7 +245,7 @@
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="com.android.settings.SHORTCUT" />
             </intent-filter>
-        </activity>
+        </activity-alias>
 
         <activity android:name="PhysicalKeyboardSettings"
                 android:label="@string/builtin_keyboard_settings_title">
@@ -265,9 +268,10 @@
             </intent-filter>
         </activity>
 
-        <activity android:name="SoundSettings"
+        <activity-alias android:name="SoundSettings"
                 android:label="@string/sound_settings"
                 android:clearTaskOnLaunch="true"
+                android:targetActivity="Settings"
                 >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -277,10 +281,11 @@
                 <category android:name="android.intent.category.VOICE_LAUNCH" />
                 <category android:name="com.android.settings.SHORTCUT" />
             </intent-filter>
-        </activity>
+        </activity-alias>
 
-        <activity android:name="DisplaySettings"
+        <activity-alias android:name="DisplaySettings"
                 android:label="@string/display_settings"
+                android:targetActivity="Settings"
                 android:clearTaskOnLaunch="true"
                 >
             <intent-filter>
@@ -291,11 +296,12 @@
                 <category android:name="android.intent.category.VOICE_LAUNCH" />
                 <category android:name="com.android.settings.SHORTCUT" />
             </intent-filter>
-        </activity>
+        </activity-alias>
 
-        <activity android:name="DockSettings"
+        <activity-alias android:name="DockSettings"
                 android:label="@string/dock_settings_title"
                 android:clearTaskOnLaunch="true"
+                android:targetActivity="Settings"
                 >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -304,9 +310,11 @@
                 <category android:name="android.intent.category.VOICE_LAUNCH" />
                 <category android:name="com.android.settings.SHORTCUT" />
             </intent-filter>
-        </activity>
+        </activity-alias>
 
-        <activity android:name="DeviceInfoSettings" android:label="@string/device_info_settings"
+        <activity-alias android:name="DeviceInfoSettings"
+                android:label="@string/device_info_settings"
+                android:targetActivity="Settings"
                 >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -314,7 +322,7 @@
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.VOICE_LAUNCH" />
             </intent-filter>
-        </activity>
+        </activity-alias>
 
         <activity android:name="SettingsLicenseActivity"
                 android:label="@string/settings_license_activity_title"
@@ -334,7 +342,9 @@
             </intent-filter>
         </activity>
 
-        <activity android:name="ApplicationSettings" android:label="@string/applications_settings_header"
+        <activity-alias android:name="ApplicationSettings"
+                android:label="@string/applications_settings_header"
+                android:targetActivity="Settings"
                 >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -342,7 +352,7 @@
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.VOICE_LAUNCH" />
             </intent-filter>
-        </activity>
+        </activity-alias>
 
         <activity android:name=".applications.ManageApplications"
                   android:label="@string/manageapplications_settings_title"
@@ -405,9 +415,10 @@
                 android:label="@string/runningservicedetails_settings_title">
         </activity>
 
-        <activity android:name="SecuritySettings"
+        <activity-alias android:name="SecuritySettings"
                 android:label="@string/location_security_settings_title"
                 android:configChanges="orientation|keyboardHidden"
+                android:targetActivity="Settings"
                 android:clearTaskOnLaunch="true"
                 >
             <intent-filter>
@@ -419,7 +430,7 @@
                 <category android:name="android.intent.category.VOICE_LAUNCH" />
                 <category android:name="com.android.settings.SHORTCUT" />
             </intent-filter>
-        </activity>
+        </activity-alias>
 
         <activity android:name="CredentialInstaller"
                 android:theme="@android:style/Theme.Translucent.NoTitleBar">
@@ -429,10 +440,11 @@
             </intent-filter>
         </activity>
 
-        <activity android:name="PrivacySettings"
+        <activity-alias android:name="PrivacySettings"
                 android:label="@string/privacy_settings_title"
                 android:configChanges="orientation|keyboardHidden"
                 android:clearTaskOnLaunch="true"
+                android:targetActivity="Settings"
                 >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -440,7 +452,7 @@
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.VOICE_LAUNCH" />
             </intent-filter>
-        </activity>
+        </activity-alias>
 
         <activity android:name="DeviceAdminSettings"
                 android:label="@string/device_admin_settings_title"
@@ -475,8 +487,9 @@
             </intent-filter>
         </activity>
 
-        <activity android:name="AccessibilitySettings"
-                android:label="@string/accessibility_settings_title">
+        <activity-alias android:name="AccessibilitySettings"
+                android:label="@string/accessibility_settings_title"
+                android:targetActivity="Settings">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <action android:name="android.settings.ACCESSIBILITY_SETTINGS" />
@@ -485,16 +498,17 @@
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.VOICE_LAUNCH" />
             </intent-filter>
-        </activity>
+        </activity-alias>
 
-        <activity android:name="VoiceInputOutputSettings"
-                android:label="@string/voice_input_output_settings">
+        <activity-alias android:name="VoiceInputOutputSettings"
+                android:label="@string/voice_input_output_settings"
+                android:targetActivity="Settings">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <action android:name="com.android.settings.VOICE_INPUT_OUTPUT_SETTINGS" />
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
-        </activity>
+        </activity-alias>
 
         <activity android:name="TextToSpeechSettings" android:label="@string/tts_settings">
             <intent-filter>
@@ -548,7 +562,8 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".deviceinfo.Memory"
+        <activity-alias android:name=".deviceinfo.Memory"
+                android:targetActivity="Settings"
                 android:label="@string/storage_settings_title">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -557,7 +572,7 @@
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.VOICE_LAUNCH" />
             </intent-filter>
-        </activity>
+        </activity-alias>
 
         <activity android:name="ApnEditor" android:label="@string/apn_edit">
             <intent-filter>

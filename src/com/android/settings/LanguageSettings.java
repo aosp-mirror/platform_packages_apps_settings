@@ -17,23 +17,18 @@
 package com.android.settings;
 
 import android.app.AlertDialog;
-import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.ApplicationInfo;
 import android.content.res.Configuration;
 import android.os.Bundle;
-import android.os.Environment;
-import android.os.SystemProperties;
 import android.preference.CheckBoxPreference;
 import android.preference.Preference;
-import android.preference.PreferenceActivity;
 import android.preference.PreferenceGroup;
 import android.preference.PreferenceScreen;
 import android.provider.Settings;
 import android.text.TextUtils;
-import android.view.View.OnClickListener;
 import android.view.inputmethod.InputMethodInfo;
 import android.view.inputmethod.InputMethodManager;
 
@@ -41,7 +36,7 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 
-public class LanguageSettings extends PreferenceActivity {
+public class LanguageSettings extends SettingsPreferenceFragment {
     
     private static final String KEY_PHONE_LANGUAGE = "phone_language";
     private static final String KEY_INPUT_METHOD = "input_method";
@@ -65,12 +60,12 @@ public class LanguageSettings extends PreferenceActivity {
     }
 
     @Override
-    protected void onCreate(Bundle icicle) {
+    public void onCreate(Bundle icicle) {
         super.onCreate(icicle);
 
         addPreferencesFromResource(R.xml.language_settings);
 
-        if (getAssets().getLocales().length == 1) {
+        if (getActivity().getAssets().getLocales().length == 1) {
             getPreferenceScreen().
                 removePreference(findPreference("language_category"));
         } else {
@@ -109,12 +104,12 @@ public class LanguageSettings extends PreferenceActivity {
             InputMethodInfo property = mInputMethodProperties.get(i);
             String prefKey = property.getId();
 
-            CharSequence label = property.loadLabel(getPackageManager());
+            CharSequence label = property.loadLabel(getActivity().getPackageManager());
             boolean systemIME = isSystemIme(property);
             // Add a check box.
             // Don't show the toggle if it's the only keyboard in the system, or it's a system IME.
             if (mHaveHardKeyboard || (N > 1 && !systemIME)) {
-                CheckBoxPreference chkbxPref = new CheckBoxPreference(this);
+                CheckBoxPreference chkbxPref = new CheckBoxPreference(getActivity());
                 chkbxPref.setKey(prefKey);
                 chkbxPref.setTitle(label);
                 textCategory.addPreference(chkbxPref);
@@ -123,7 +118,7 @@ public class LanguageSettings extends PreferenceActivity {
 
             // If setting activity is available, add a setting screen entry.
             if (null != property.getSettingsActivity()) {
-                PreferenceScreen prefScreen = new PreferenceScreen(this, null);
+                PreferenceScreen prefScreen = new PreferenceScreen(getActivity(), null);
                 String settingsActivity = property.getSettingsActivity();
                 if (settingsActivity.lastIndexOf("/") < 0) {
                     settingsActivity = property.getPackageName() + "/" + settingsActivity;
@@ -131,7 +126,8 @@ public class LanguageSettings extends PreferenceActivity {
                 prefScreen.setKey(settingsActivity);
                 prefScreen.setTitle(label);
                 if (N == 1) {
-                    prefScreen.setSummary(getString(R.string.onscreen_keyboard_settings_summary));
+                    prefScreen.setSummary(getResources().getString(
+                            R.string.onscreen_keyboard_settings_summary));
                 } else {
                     CharSequence settingsLabel = getResources().getString(
                             R.string.input_methods_settings_label_format, label);
@@ -143,7 +139,7 @@ public class LanguageSettings extends PreferenceActivity {
     }
 
     @Override
-    protected void onResume() {
+    public void onResume() {
         super.onResume();
 
         final HashSet<String> enabled = new HashSet<String>();
@@ -180,7 +176,7 @@ public class LanguageSettings extends PreferenceActivity {
     }
 
     @Override
-    protected void onPause() {
+    public void onPause() {
         super.onPause();
 
         StringBuilder builder = new StringBuilder(256);
@@ -260,7 +256,8 @@ public class LanguageSettings extends PreferenceActivity {
                     return super.onPreferenceTreeClick(preferenceScreen, preference);
                 }
                 if (mDialog == null) {
-                    mDialog = (new AlertDialog.Builder(this))
+                    // TODO: DialogFragment?
+                    mDialog = (new AlertDialog.Builder(getActivity()))
                             .setTitle(android.R.string.dialog_alert_title)
                             .setIcon(android.R.drawable.ic_dialog_alert)
                             .setCancelable(true)
@@ -284,9 +281,9 @@ public class LanguageSettings extends PreferenceActivity {
                         mDialog.dismiss();
                     }
                 }
-                mDialog.setMessage(getString(R.string.ime_security_warning,
-                        selImi.getServiceInfo().applicationInfo.loadLabel(
-                                getPackageManager())));
+                mDialog.setMessage(getResources().getString(
+                        R.string.ime_security_warning,
+                        selImi.getServiceInfo().applicationInfo.loadLabel(getPackageManager())));
                 mDialog.show();
             } else if (id.equals(mLastTickedInputMethodId)) {
                 mLastTickedInputMethodId = null;
@@ -316,7 +313,7 @@ public class LanguageSettings extends PreferenceActivity {
     }
 
     @Override
-    protected void onDestroy() {
+    public void onDestroy() {
         super.onDestroy();
         if (mDialog != null) {
             mDialog.dismiss();

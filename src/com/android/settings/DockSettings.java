@@ -16,6 +16,8 @@
 
 package com.android.settings;
 
+import com.android.settings.bluetooth.DockEventReceiver;
+
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.bluetooth.BluetoothDevice;
@@ -27,13 +29,10 @@ import android.content.IntentFilter;
 import android.os.Bundle;
 import android.preference.CheckBoxPreference;
 import android.preference.Preference;
-import android.preference.PreferenceActivity;
 import android.preference.PreferenceScreen;
 import android.provider.Settings;
 
-import com.android.settings.bluetooth.DockEventReceiver;
-
-public class DockSettings extends PreferenceActivity {
+public class DockSettings extends SettingsPreferenceFragment {
 
     private static final int DIALOG_NOT_DOCKED = 1;
     private static final String KEY_AUDIO_SETTINGS = "dock_audio";
@@ -52,7 +51,7 @@ public class DockSettings extends PreferenceActivity {
     };
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         ContentResolver resolver = getContentResolver();
         addPreferencesFromResource(R.xml.dock_settings);
@@ -61,18 +60,18 @@ public class DockSettings extends PreferenceActivity {
     }
 
     @Override
-    protected void onResume() {
+    public void onResume() {
         super.onResume();
 
         IntentFilter filter = new IntentFilter(Intent.ACTION_DOCK_EVENT);
-        registerReceiver(mReceiver, filter);
+        getActivity().registerReceiver(mReceiver, filter);
     }
 
     @Override
-    protected void onPause() {
+    public void onPause() {
         super.onPause();
 
-        unregisterReceiver(mReceiver);
+        getActivity().unregisterReceiver(mReceiver);
     }
 
     private void initDockSettings() {
@@ -120,7 +119,7 @@ public class DockSettings extends PreferenceActivity {
             if (dockState != Intent.EXTRA_DOCK_STATE_UNDOCKED) {
                 // remove undocked dialog if currently showing.
                 try {
-                    dismissDialog(DIALOG_NOT_DOCKED);
+                    removeDialog(DIALOG_NOT_DOCKED);
                 } catch (IllegalArgumentException iae) {
                     // Maybe it was already dismissed
                 }
@@ -139,8 +138,8 @@ public class DockSettings extends PreferenceActivity {
             } else {
                 Intent i = new Intent(mDockIntent);
                 i.setAction(DockEventReceiver.ACTION_DOCK_SHOW_UI);
-                i.setClass(this, DockEventReceiver.class);
-                sendBroadcast(i);
+                i.setClass(getActivity(), DockEventReceiver.class);
+                getActivity().sendBroadcast(i);
             }
         } else if (preference == mDockSounds) {
             Settings.System.putInt(getContentResolver(), Settings.System.DOCK_SOUNDS_ENABLED,
@@ -159,7 +158,7 @@ public class DockSettings extends PreferenceActivity {
     }
 
     private Dialog createUndockedMessage() {
-        final AlertDialog.Builder ab = new AlertDialog.Builder(this);
+        final AlertDialog.Builder ab = new AlertDialog.Builder(getActivity());
         ab.setTitle(R.string.dock_not_found_title);
         ab.setMessage(R.string.dock_not_found_text);
         ab.setPositiveButton(android.R.string.ok, null);

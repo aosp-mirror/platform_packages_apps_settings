@@ -16,6 +16,9 @@
 
 package com.android.settings.deviceinfo;
 
+import com.android.settings.R;
+import com.android.settings.SettingsPreferenceFragment;
+
 import android.app.ActivityManager;
 import android.app.AlertDialog;
 import android.app.Dialog;
@@ -26,35 +29,26 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.DialogInterface.OnCancelListener;
 import android.content.pm.ApplicationInfo;
-import android.content.pm.PackageManager;
-import android.content.pm.PackageManager.NameNotFoundException;
 import android.content.res.Resources;
 import android.os.Bundle;
-import android.os.Handler;
-import android.os.IBinder;
-import android.os.Message;
-import android.os.RemoteException;
 import android.os.Environment;
-import android.os.storage.IMountService;
+import android.os.IBinder;
+import android.os.RemoteException;
 import android.os.ServiceManager;
 import android.os.StatFs;
-import android.os.storage.StorageManager;
+import android.os.storage.IMountService;
 import android.os.storage.StorageEventListener;
+import android.os.storage.StorageManager;
 import android.preference.Preference;
-import android.preference.PreferenceActivity;
 import android.preference.PreferenceScreen;
 import android.text.format.Formatter;
 import android.util.Log;
 import android.widget.Toast;
 
-import com.android.settings.R;
-
 import java.io.File;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
-public class Memory extends PreferenceActivity implements OnCancelListener {
+public class Memory extends SettingsPreferenceFragment implements OnCancelListener {
     private static final String TAG = "Memory";
     private static final boolean localLOGV = false;
 
@@ -82,7 +76,7 @@ public class Memory extends PreferenceActivity implements OnCancelListener {
     private StorageManager mStorageManager = null;
 
     @Override
-    protected void onCreate(Bundle icicle) {
+    public void onCreate(Bundle icicle) {
         super.onCreate(icicle);
 
         if (mStorageManager == null) {
@@ -100,13 +94,13 @@ public class Memory extends PreferenceActivity implements OnCancelListener {
     }
     
     @Override
-    protected void onResume() {
+    public void onResume() {
         super.onResume();
         
         IntentFilter intentFilter = new IntentFilter(Intent.ACTION_MEDIA_SCANNER_STARTED);
         intentFilter.addAction(Intent.ACTION_MEDIA_SCANNER_FINISHED);
         intentFilter.addDataScheme("file");
-        registerReceiver(mReceiver, intentFilter);
+        getActivity().registerReceiver(mReceiver, intentFilter);
 
         updateMemoryStatus();
     }
@@ -123,13 +117,13 @@ public class Memory extends PreferenceActivity implements OnCancelListener {
     };
     
     @Override
-    protected void onPause() {
+    public void onPause() {
         super.onPause();
-        unregisterReceiver(mReceiver);
+        getActivity().unregisterReceiver(mReceiver);
     }
 
     @Override
-    protected void onDestroy() {
+    public void onDestroy() {
         if (mStorageManager != null && mStorageListener != null) {
             mStorageManager.unregisterListener(mStorageListener);
         }
@@ -160,7 +154,7 @@ public class Memory extends PreferenceActivity implements OnCancelListener {
             return true;
         } else if (preference == mSdFormat) {
             Intent intent = new Intent(Intent.ACTION_VIEW);
-            intent.setClass(this, com.android.settings.MediaFormat.class);
+            intent.setClass(getActivity(), com.android.settings.MediaFormat.class);
             startActivity(intent);
             return true;
         }
@@ -176,10 +170,10 @@ public class Memory extends PreferenceActivity implements OnCancelListener {
     };
 
     @Override
-    public Dialog onCreateDialog(int id, Bundle args) {
+    public Dialog onCreateDialog(int id) {
         switch (id) {
         case DLG_CONFIRM_UNMOUNT:
-            return new AlertDialog.Builder(this)
+                return new AlertDialog.Builder(getActivity())
                     .setTitle(R.string.dlg_confirm_unmount_title)
                     .setPositiveButton(R.string.dlg_ok, new DialogInterface.OnClickListener() {
                         public void onClick(DialogInterface dialog, int which) {
@@ -190,7 +184,7 @@ public class Memory extends PreferenceActivity implements OnCancelListener {
                     .setOnCancelListener(this)
                     .create();
         case DLG_ERROR_UNMOUNT:
-            return new AlertDialog.Builder(this                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            )
+                return new AlertDialog.Builder(getActivity())
             .setTitle(R.string.dlg_error_unmount_title)
             .setNeutralButton(R.string.dlg_ok, null)
             .setMessage(R.string.dlg_error_unmount_text)
@@ -202,7 +196,7 @@ public class Memory extends PreferenceActivity implements OnCancelListener {
 
     private void doUnmount(boolean force) {
         // Present a toast here
-        Toast.makeText(this, R.string.unmount_inform_text, Toast.LENGTH_SHORT).show();
+        Toast.makeText(getActivity(), R.string.unmount_inform_text, Toast.LENGTH_SHORT).show();
         IMountService mountService = getMountService();
         String extStoragePath = Environment.getExternalStorageDirectory().toString();
         try {
@@ -225,7 +219,6 @@ public class Memory extends PreferenceActivity implements OnCancelListener {
     private boolean hasAppsAccessingStorage() throws RemoteException {
         String extStoragePath = Environment.getExternalStorageDirectory().toString();
         IMountService mountService = getMountService();
-        boolean showPidDialog = false;
         int stUsers[] = mountService.getStorageUsers(extStoragePath);
         if (stUsers != null && stUsers.length > 0) {
             return true;
@@ -325,11 +318,12 @@ public class Memory extends PreferenceActivity implements OnCancelListener {
     }
     
     private String formatSize(long size) {
-        return Formatter.formatFileSize(this, size);
+        return Formatter.formatFileSize(getActivity(), size);
     }
 
     public void onCancel(DialogInterface dialog) {
-        finish();
+        // TODO: Is this really required?
+        // finish();
     }
     
 }

@@ -14,7 +14,8 @@
      limitations under the License.
 -->
 
-<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+        android:title="@string/wireless_networks_settings_title">
 
     <CheckBoxPreference
         android:key="toggle_airplane"
@@ -36,7 +37,7 @@
         android:summary="@string/wifi_settings_summary" >
         <intent
             android:action="android.intent.action.MAIN"
-            android:targetPackage="com.android.settings"
+            android:targetPackage="com.android.settings"                
             android:targetClass="com.android.settings.wifi.WifiSettings" />
     </PreferenceScreen>
 

@@ -16,28 +16,26 @@
 
 package com.android.settings;
 
-import android.app.admin.DevicePolicyManager;
-import android.bluetooth.BluetoothAdapter;
-import android.content.Context;
-import android.content.Intent;
-import android.net.ConnectivityManager;
-import android.net.wifi.WifiManager;
-import android.os.Bundle;
-import android.os.ServiceManager;
-import android.os.SystemProperties;
-import android.preference.CheckBoxPreference;
-import android.preference.Preference;
-import android.preference.PreferenceActivity;
-import android.preference.PreferenceScreen;
-import android.provider.Settings;
-import android.util.Log;
-
 import com.android.internal.telephony.TelephonyIntents;
 import com.android.internal.telephony.TelephonyProperties;
 import com.android.settings.bluetooth.BluetoothEnabler;
 import com.android.settings.wifi.WifiEnabler;
 
-public class WirelessSettings extends PreferenceActivity {
+import android.app.Activity;
+import android.app.admin.DevicePolicyManager;
+import android.bluetooth.BluetoothAdapter;
+import android.content.Context;
+import android.content.Intent;
+import android.net.ConnectivityManager;
+import android.os.Bundle;
+import android.os.ServiceManager;
+import android.os.SystemProperties;
+import android.preference.CheckBoxPreference;
+import android.preference.Preference;
+import android.preference.PreferenceScreen;
+import android.provider.Settings;
+
+public class WirelessSettings extends SettingsPreferenceFragment {
 
     private static final String KEY_TOGGLE_AIRPLANE = "toggle_airplane";
     private static final String KEY_TOGGLE_BLUETOOTH = "toggle_bluetooth";
@@ -71,7 +69,7 @@ public class WirelessSettings extends PreferenceActivity {
             return true;
         }
         // Let the intents be launched by the Preference manager
-        return false;
+        return super.onPreferenceTreeClick(preferenceScreen, preference);
     }
 
     public static boolean isRadioAllowed(Context context, String type) {
@@ -85,21 +83,22 @@ public class WirelessSettings extends PreferenceActivity {
     }
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         addPreferencesFromResource(R.xml.wireless_settings);
 
+        final Activity activity = getActivity();
         CheckBoxPreference airplane = (CheckBoxPreference) findPreference(KEY_TOGGLE_AIRPLANE);
         CheckBoxPreference wifi = (CheckBoxPreference) findPreference(KEY_TOGGLE_WIFI);
         CheckBoxPreference bt = (CheckBoxPreference) findPreference(KEY_TOGGLE_BLUETOOTH);
 
-        mAirplaneModeEnabler = new AirplaneModeEnabler(this, airplane);
+        mAirplaneModeEnabler = new AirplaneModeEnabler(activity, airplane);
         mAirplaneModePreference = (CheckBoxPreference) findPreference(KEY_TOGGLE_AIRPLANE);
-        mWifiEnabler = new WifiEnabler(this, wifi);
-        mBtEnabler = new BluetoothEnabler(this, bt);
+        mWifiEnabler = new WifiEnabler(activity, wifi);
+        mBtEnabler = new BluetoothEnabler(activity, bt);
 
-        String toggleable = Settings.System.getString(getContentResolver(),
+        String toggleable = Settings.System.getString(activity.getContentResolver(),
                 Settings.System.AIRPLANE_MODE_TOGGLEABLE_RADIOS);
 
         // Manually set dependencies for Wifi when not toggleable.
@@ -122,12 +121,13 @@ public class WirelessSettings extends PreferenceActivity {
 
         // Enable Proxy selector settings if allowed.
         Preference mGlobalProxy = findPreference(KEY_PROXY_SETTINGS);
-        DevicePolicyManager mDPM = (DevicePolicyManager)getSystemService(Context.DEVICE_POLICY_SERVICE);
+        DevicePolicyManager mDPM = (DevicePolicyManager)
+                activity.getSystemService(Context.DEVICE_POLICY_SERVICE);
         mGlobalProxy.setEnabled(mDPM.getGlobalProxyAdmin() == null);
 
         // Disable Tethering if it's not allowed
         ConnectivityManager cm =
-                (ConnectivityManager)getSystemService(Context.CONNECTIVITY_SERVICE);
+                (ConnectivityManager) activity.getSystemService(Context.CONNECTIVITY_SERVICE);
         if (!cm.isTetheringSupported()) {
             getPreferenceScreen().removePreference(findPreference(KEY_TETHER_SETTINGS));
         } else {
@@ -166,7 +166,7 @@ public class WirelessSettings extends PreferenceActivity {
     }
 
     @Override
-    protected void onResume() {
+    public void onResume() {
         super.onResume();
 
         mAirplaneModeEnabler.resume();
@@ -175,7 +175,7 @@ public class WirelessSettings extends PreferenceActivity {
     }
 
     @Override
-    protected void onPause() {
+    public void onPause() {
         super.onPause();
 
         mAirplaneModeEnabler.pause();
@@ -184,7 +184,7 @@ public class WirelessSettings extends PreferenceActivity {
     }
 
     @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (requestCode == REQUEST_CODE_EXIT_ECM) {
             Boolean isChoiceYes = data.getBooleanExtra(EXIT_ECM_RESULT, false);
             // Set Airplane mode based on the return value and checkbox state
