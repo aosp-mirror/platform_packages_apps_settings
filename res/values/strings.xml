@@ -764,6 +764,8 @@
     <string name="bluetooth_profile_opp">Transfer</string>
     <!-- Bluetooth settings. The user-visible string that is used whenever referring to the HID profile. -->
     <string name="bluetooth_profile_hid">Input Device</string>
+    <!-- Bluetooth settings. The user-visible string that is used whenever referring to the PAN profile. [CHAR LIMIT=25]-->
+    <string name="bluetooth_profile_pan">Tethering</string>
 
     <!-- Bluetooth settings.  The summary string when a device is connected to the A2DP profile. -->
     <string name="bluetooth_summary_connected_to_a2dp">Connected to media audio</string>
@@ -773,6 +775,8 @@
     <string name="bluetooth_summary_connected_to_a2dp_headset">Connected to phone and media audio</string>
     <!-- Bluetooth settings. The summary string when a device is connected to the HID profile. -->
     <string name="bluetooth_summary_connected_to_hid">Connected to input device</string>
+    <!-- Bluetooth settings. The summary string when a device is connected to the PAN profile. [CHAR LIMIT=35]-->
+    <string name="bluetooth_summary_connected_to_pan">Tethered</string>
 
     <!-- Bluetooth settings.  Connection options screen.  The title of the screen. -->
     <string name="bluetooth_device_advanced_title"><xliff:g id="device_name">%1$s</xliff:g> options</string>
@@ -792,6 +796,8 @@
     <string name="bluetooth_opp_profile_summary_not_connected">Not connected to file transfer server</string>
     <!-- Bluetooth settings. Connection options screen. The summary for the HID checkbox preference when HID is connected. -->
     <string name="bluetooth_hid_profile_summary_connected">Connected to input device</string>
+    <!-- Bluetooth settings. Connection options screen. The summary for the PAN checkbox preference when PAN is connected. [CHAR LIMIT=25]-->
+    <string name="bluetooth_pan_profile_summary_connected">Tethered</string>
 
     <!-- Bluetooth settings.  Connection options screen.  The summary for the A2DP checkbox preference that describes how checking it will set the A2DP profile as preferred. -->
     <string name="bluetooth_a2dp_profile_summary_use_for">Use for media audio</string>
@@ -1467,13 +1473,32 @@
     <string name="call_settings_summary">Set up voicemail, call forwarding, call waiting, caller ID</string>
 
     <!-- Tethering controls, item title to go into the tethering settings -->
-    <string name="tether_settings_title_usb">Tethering</string>
+    <!-- Tethering controls, item title to go into the tethering settings when only USB tethering is available [CHAR LIMIT=25]-->
+    <string name="tether_settings_title_usb">USB tethering</string>
+    <!-- Tethering controls, item title to go into the tethering settings when only Wifi tethering is available [CHAR LIMIT=25]-->
     <string name="tether_settings_title_wifi">Portable hotspot</string>
-    <string name="tether_settings_title_both">Tethering &amp; portable hotspot</string>
+    <!-- Tethering controls, item title to go into the tethering settings when only Bluetooth tethering is available [CHAR LIMIT=25]-->
+    <string name="tether_settings_title_bluetooth">Bluetooth tethering</string>
+    <!-- Tethering controls, item title to go into the tethering settings when USB and Bluetooth tethering are available [CHAR LIMIT=25]-->
+    <string name="tether_settings_title_usb_bluetooth">Tethering</string>
+    <!-- Tethering controls, item title to go into the tethering settings when USB, Bluetooth and Wifi tethering are available [CHAR LIMIT=25]-->
+    <string name="tether_settings_title_all">Tethering &amp; portable hotspot</string>
+
     <!-- Tethering controls, the item summary for the user to go into the tethering settings -->
+    <!-- Tethering controls, the item summary for the user to go into the tethering settings when only USB tethering is available [CHAR LIMIT=100]-->
     <string name="tether_settings_summary_usb">Share your phone\'s mobile data connection via USB</string>
+    <!-- Tethering controls, the item summary for the user to go into the tethering settings when only Wifi tethering is available [CHAR LIMIT=100]-->
     <string name="tether_settings_summary_wifi">Share your phone\'s mobile connection as a portable Wi-Fi hotspot</string>
-    <string name="tether_settings_summary_both">Share your phone\'s mobile data connection via USB or as a portable Wi-Fi hotspot</string>
+    <!-- Tethering controls, the item summary for the user to go into the tethering settings when only Bluetooth tethering is available [CHAR LIMIT=100]-->
+    <string name="tether_settings_summary_bluetooth">Share your phone\'s mobile connection via Bluetooth</string>
+    <!-- Tethering controls, the item summary for the user to go into the tethering settings when USB and Wifi tethering are available [CHAR LIMIT=100]-->
+    <string name="tether_settings_summary_usb_wifi">Share your phone\'s mobile data connection via USB or as a portable Wi-Fi hotspot</string>
+    <!-- Tethering controls, the item summary for the user to go into the tethering settings when USB and Bluetooth tethering are available [CHAR LIMIT=100]-->
+    <string name="tether_settings_summary_usb_bluetooth">Share your phone\'s mobile data connection via USB or Bluetooth</string>
+    <!-- Tethering controls, the item summary for the user to go into the tethering settings when Bluetooth and Wifi tethering are available [CHAR LIMIT=100]-->
+    <string name="tether_settings_summary_wifi_bluetooth">Share your phone\'s mobile data connection via Bluetooth or as a portable Wi-Fi hotspot</string>
+    <!-- Tethering controls, the item summary for the user to go into the tethering settings when USB, Wifi, and Bluetooth tethering are available [CHAR LIMIT=100]-->
+    <string name="tether_settings_summary_all">Share your phone\'s mobile data connection via USB, Wi-Fi, or Bluetooth</string>
 
     <!-- USB Tethering options -->
     <string name="usb_title">USB</string>
@@ -1489,7 +1514,26 @@
     <!-- USB errored subtext - shown when USB is broken for some reason -->
     <string name="usb_tethering_errored_subtext">USB tethering error</string>
 
-    <!-- Thethering help button - calls up a web view with general tethering info -->
+    <!-- Bluetooth Tethering settings-->
+    <!-- Label for bluetooth tether checkbox [CHAR LIMIT=25]-->
+    <string name="bluetooth_tether_checkbox_text">Bluetooth tethering</string>
+    <!-- Bluetooth available subtext - shown when Bluetooth tethering is turned on but it is not currently tethered to any devices [CHAR LIMIT=50]-->
+    <string name="bluetooth_tethering_available_subtext">Bluetooth tethering on, but not connected</string>
+    <!-- Bluetooth connected subtext - shown when a device is tethered over Bluetooth [CHAR LIMIT=50]-->
+    <string name="bluetooth_tethering_connected_subtext">Bluetooth tethering on and connected</string>
+    <!-- Bluetooth tethering off subtext - shown when Bluetooth Tethering is turned off [CHAR LIMIT=50]-->
+    <string name="bluetooth_tethering_off_subtext">Bluetooth tethering off</string>
+    <!-- Bluetooth errored subtext - shown when Bluetooth is broken for some reason [CHAR LIMIT=50]-->
+    <string name="bluetooth_tethering_errored_subtext">Bluetooth tethering error</string>
+    <!-- Bluetooth Tethering settings. Error message shown when trying to connect an 8th device [CHAR LIMIT=50]-->
+    <string name="bluetooth_tethering_overflow_error">Cannot tether to more than <xliff:g id="maxConnection">%1$d</xliff:g> devices</string>
+    <!-- Bluetooth Tethering settings.  Message for untethering from a bluetooth device [CHAR LIMIT=50]-->
+    <string name="bluetooth_untether_blank"><xliff:g id="device_name">%1$s</xliff:g> will be untethered.</string>
+
+    <string name="bluetooth_tether_settings_text">Bluetooth tethering settings</string>
+    <string name="bluetooth_tether_settings_subtext">Select Bluetooth devices to tether</string>
+
+    <!-- Tethering help button - calls up a web view with general tethering info -->
     <string name="tethering_help_button_text">Help</string>
 
     <!-- Wireless controls, item title to go into the network settings -->

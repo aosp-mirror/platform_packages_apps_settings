@@ -34,6 +34,7 @@ public class BluetoothDevicePreference extends Preference implements CachedBluet
     private static int sDimAlpha = Integer.MIN_VALUE;
 
     private CachedBluetoothDevice mCachedDevice;
+    private int mAccessibleProfile;
 
     /**
      * Cached local copy of whether the device is busy. This is only updated
@@ -41,7 +42,8 @@ public class BluetoothDevicePreference extends Preference implements CachedBluet
      */
     private boolean mIsBusy;
 
-    public BluetoothDevicePreference(Context context, CachedBluetoothDevice cachedDevice) {
+    public BluetoothDevicePreference(Context context, CachedBluetoothDevice cachedDevice,
+            int accessibleProfile) {
         super(context);
 
         if (sDimAlpha == Integer.MIN_VALUE) {
@@ -51,6 +53,7 @@ public class BluetoothDevicePreference extends Preference implements CachedBluet
         }
 
         mCachedDevice = cachedDevice;
+        mAccessibleProfile = accessibleProfile;
 
         setLayoutResource(R.layout.preference_bluetooth);
 
@@ -83,7 +86,7 @@ public class BluetoothDevicePreference extends Preference implements CachedBluet
          * related to BluetoothHeadset not bound to the actual
          * BluetoothHeadsetService when we got here.
          */
-        setSummary(mCachedDevice.getSummary());
+        setSummary(mCachedDevice.getSummary(mAccessibleProfile));
 
         // Used to gray out the item
         mIsBusy = mCachedDevice.isBusy();
