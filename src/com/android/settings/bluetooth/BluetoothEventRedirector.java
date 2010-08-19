@@ -26,6 +26,7 @@ import android.bluetooth.BluetoothDevice;
 import android.bluetooth.BluetoothHeadset;
 import android.bluetooth.BluetoothInputDevice;
 import android.bluetooth.BluetoothPan;
+import android.bluetooth.BluetoothProfile;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
@@ -99,28 +100,26 @@ public class BluetoothEventRedirector {
                     cachedDeviceMgr.showUnbondMessage(device, reason);
                 }
 
-            } else if (action.equals(BluetoothHeadset.ACTION_STATE_CHANGED)) {
-                int newState = intent.getIntExtra(BluetoothHeadset.EXTRA_STATE, 0);
-                int oldState = intent.getIntExtra(BluetoothHeadset.EXTRA_PREVIOUS_STATE, 0);
-                if (newState == BluetoothHeadset.STATE_DISCONNECTED &&
-                        oldState == BluetoothHeadset.STATE_CONNECTING) {
+            } else if (action.equals(BluetoothHeadset.ACTION_CONNECTION_STATE_CHANGED)) {
+                int newState = intent.getIntExtra(BluetoothProfile.EXTRA_STATE, 0);
+                int oldState = intent.getIntExtra(BluetoothProfile.EXTRA_PREVIOUS_STATE, 0);
+                if (newState == BluetoothProfile.STATE_DISCONNECTED &&
+                        oldState == BluetoothProfile.STATE_CONNECTING) {
                     Log.i(TAG, "Failed to connect BT headset");
                 }
 
                 mManager.getCachedDeviceManager().onProfileStateChanged(device,
-                        Profile.HEADSET, newState);
-
-            } else if (action.equals(BluetoothA2dp.ACTION_SINK_STATE_CHANGED)) {
-                int newState = intent.getIntExtra(BluetoothA2dp.EXTRA_SINK_STATE, 0);
-                int oldState = intent.getIntExtra(BluetoothA2dp.EXTRA_PREVIOUS_SINK_STATE, 0);
-                if (newState == BluetoothA2dp.STATE_DISCONNECTED &&
-                        oldState == BluetoothA2dp.STATE_CONNECTING) {
+                    Profile.HEADSET, newState);
+            } else if (action.equals(BluetoothA2dp.ACTION_CONNECTION_STATE_CHANGED)) {
+                int newState = intent.getIntExtra(BluetoothProfile.EXTRA_STATE, 0);
+                int oldState = intent.getIntExtra(BluetoothProfile.EXTRA_PREVIOUS_STATE, 0);
+                if (newState == BluetoothProfile.STATE_DISCONNECTED &&
+                        oldState == BluetoothProfile.STATE_CONNECTING) {
                     Log.i(TAG, "Failed to connect BT A2DP");
                 }
 
                 mManager.getCachedDeviceManager().onProfileStateChanged(device,
                         Profile.A2DP, newState);
-
             } else if (action.equals(BluetoothInputDevice.ACTION_INPUT_DEVICE_STATE_CHANGED)) {
                 final int newState = intent.getIntExtra(
                         BluetoothInputDevice.EXTRA_INPUT_DEVICE_STATE, 0);
@@ -191,9 +190,9 @@ public class BluetoothEventRedirector {
         filter.addAction(BluetoothDevice.ACTION_PAIRING_CANCEL);
 
         // Fine-grained state broadcasts
-        filter.addAction(BluetoothA2dp.ACTION_SINK_STATE_CHANGED);
-        filter.addAction(BluetoothHeadset.ACTION_STATE_CHANGED);
         filter.addAction(BluetoothPan.ACTION_PAN_STATE_CHANGED);
+        filter.addAction(BluetoothA2dp.ACTION_CONNECTION_STATE_CHANGED);
+        filter.addAction(BluetoothHeadset.ACTION_CONNECTION_STATE_CHANGED);
         filter.addAction(BluetoothDevice.ACTION_CLASS_CHANGED);
         filter.addAction(BluetoothDevice.ACTION_UUID);
 

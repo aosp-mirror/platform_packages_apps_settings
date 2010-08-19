@@ -27,6 +27,7 @@ import android.bluetooth.BluetoothA2dp;
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
 import android.bluetooth.BluetoothHeadset;
+import android.bluetooth.BluetoothProfile;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -178,7 +179,7 @@ public class DockService extends Service implements AlertDialog.OnMultiChoiceCli
          * This assumes that the intent sender has checked that this is a dock
          * and that the intent is for a disconnect
          */
-        if (BluetoothHeadset.ACTION_STATE_CHANGED.equals(intent.getAction())) {
+        if (BluetoothHeadset.ACTION_CONNECTION_STATE_CHANGED.equals(intent.getAction())) {
             BluetoothDevice disconnectedDevice = intent
                     .getParcelableExtra(BluetoothDevice.EXTRA_DEVICE);
 
@@ -188,7 +189,7 @@ public class DockService extends Service implements AlertDialog.OnMultiChoiceCli
                 handleUnexpectedDisconnect(disconnectedDevice, Profile.HEADSET, startId);
             }
             return START_NOT_STICKY;
-        } else if (BluetoothA2dp.ACTION_SINK_STATE_CHANGED.equals(intent.getAction())) {
+        } else if (BluetoothA2dp.ACTION_CONNECTION_STATE_CHANGED.equals(intent.getAction())) {
             BluetoothDevice disconnectedDevice = intent
                     .getParcelableExtra(BluetoothDevice.EXTRA_DEVICE);
 

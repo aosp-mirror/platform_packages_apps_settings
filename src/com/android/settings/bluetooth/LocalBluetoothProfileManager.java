@@ -19,10 +19,12 @@ package com.android.settings.bluetooth;
 import com.android.settings.R;
 
 import android.bluetooth.BluetoothA2dp;
+import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
 import android.bluetooth.BluetoothHeadset;
 import android.bluetooth.BluetoothInputDevice;
 import android.bluetooth.BluetoothPan;
+import android.bluetooth.BluetoothProfile;
 import android.bluetooth.BluetoothUuid;
 import android.os.Handler;
 import android.os.ParcelUuid;
@@ -237,42 +239,58 @@ public abstract class LocalBluetoothProfileManager {
     /**
      * A2dpProfileManager is an abstraction for the {@link BluetoothA2dp} service.
      */
-    private static class A2dpProfileManager extends LocalBluetoothProfileManager {
+    private static class A2dpProfileManager extends LocalBluetoothProfileManager
+          implements BluetoothProfile.ServiceListener {
         private BluetoothA2dp mService;
 
+        // TODO(): The calls must wait for mService. Its not null just
+        // because it runs in the system server.
         public A2dpProfileManager(LocalBluetoothManager localManager) {
             super(localManager);
-            mService = new BluetoothA2dp(localManager.getContext());
+            BluetoothAdapter adapter = BluetoothAdapter.getDefaultAdapter();
+            adapter.getProfileProxy(localManager.getContext(), this, BluetoothProfile.A2DP);
+
+        }
+
+        public void onServiceConnected(int profile, BluetoothProfile proxy) {
+            mService = (BluetoothA2dp) proxy;
+        }
+
+        public void onServiceDisconnected(int profile) {
+            mService = null;
         }
 
         @Override
         public Set<BluetoothDevice> getConnectedDevices() {
-            return mService.getNonDisconnectedSinks();
+            return mService.getDevicesMatchingConnectionStates(
+                  new int[] {BluetoothProfile.STATE_CONNECTED,
+                             BluetoothProfile.STATE_CONNECTING,
+                             BluetoothProfile.STATE_DISCONNECTING});
         }
 
         @Override
         public boolean connect(BluetoothDevice device) {
-            Set<BluetoothDevice> sinks = mService.getNonDisconnectedSinks();
+            Set<BluetoothDevice> sinks = getConnectedDevices();
             if (sinks != null) {
                 for (BluetoothDevice sink : sinks) {
-                    mService.disconnectSink(sink);
+                    mService.disconnect(sink);
                 }
             }
-            return mService.connectSink(device);
+            return mService.connect(device);
         }
 
         @Override
         public boolean disconnect(BluetoothDevice device) {
             // Downgrade priority as user is disconnecting the sink.
-            if (mService.getSinkPriority(device) > BluetoothA2dp.PRIORITY_ON) {
-                mService.setSinkPriority(device, BluetoothA2dp.PRIORITY_ON);
+            if (mService.getPriority(device) > BluetoothProfile.PRIORITY_ON) {
+                mService.setPriority(device, BluetoothProfile.PRIORITY_ON);
             }
-            return mService.disconnectSink(device);
+            return mService.disconnect(device);
         }
 
         @Override
         public int getConnectionStatus(BluetoothDevice device) {
-            return convertState(mService.getSinkState(device));
+            return convertState(mService.getConnectionState(device));
         }
 
         @Override
@@ -288,35 +306,35 @@ public abstract class LocalBluetoothProfileManager {
 
         @Override
         public boolean isPreferred(BluetoothDevice device) {
-            return mService.getSinkPriority(device) > BluetoothA2dp.PRIORITY_OFF;
+            return mService.getPriority(device) > BluetoothProfile.PRIORITY_OFF;
         }
 
         @Override
         public int getPreferred(BluetoothDevice device) {
-            return mService.getSinkPriority(device);
+            return mService.getPriority(device);
         }
 
         @Override
         public void setPreferred(BluetoothDevice device, boolean preferred) {
             if (preferred) {
-                if (mService.getSinkPriority(device) < BluetoothA2dp.PRIORITY_ON) {
-                    mService.setSinkPriority(device, BluetoothA2dp.PRIORITY_ON);
+                if (mService.getPriority(device) < BluetoothProfile.PRIORITY_ON) {
+                    mService.setPriority(device, BluetoothProfile.PRIORITY_ON);
                 }
             } else {
-                mService.setSinkPriority(device, BluetoothA2dp.PRIORITY_OFF);
+                mService.setPriority(device, BluetoothProfile.PRIORITY_OFF);
             }
         }
 
         @Override
         public int convertState(int a2dpState) {
             switch (a2dpState) {
-            case BluetoothA2dp.STATE_CONNECTED:
+            case BluetoothProfile.STATE_CONNECTED:
                 return SettingsBtStatus.CONNECTION_STATUS_CONNECTED;
-            case BluetoothA2dp.STATE_CONNECTING:
+            case BluetoothProfile.STATE_CONNECTING:
                 return SettingsBtStatus.CONNECTION_STATUS_CONNECTING;
-            case BluetoothA2dp.STATE_DISCONNECTED:
+            case BluetoothProfile.STATE_DISCONNECTED:
                 return SettingsBtStatus.CONNECTION_STATUS_DISCONNECTED;
-            case BluetoothA2dp.STATE_DISCONNECTING:
+            case BluetoothProfile.STATE_DISCONNECTING:
                 return SettingsBtStatus.CONNECTION_STATUS_DISCONNECTING;
             case BluetoothA2dp.STATE_PLAYING:
                 return SettingsBtStatus.CONNECTION_STATUS_ACTIVE;
@@ -335,17 +353,23 @@ public abstract class LocalBluetoothProfileManager {
      * HeadsetProfileManager is an abstraction for the {@link BluetoothHeadset} service.
      */
     private static class HeadsetProfileManager extends LocalBluetoothProfileManager
-            implements BluetoothHeadset.ServiceListener {
+            implements BluetoothProfile.ServiceListener {
         private BluetoothHeadset mService;
         private Handler mUiHandler = new Handler();
         private boolean profileReady = false;
 
+        // TODO(): The calls must get queued if mService becomes null.
+        // It can happen  when phone app crashes for some reason.
+        // All callers should have service listeners. Dock Service is the only
+        // one right now.
         public HeadsetProfileManager(LocalBluetoothManager localManager) {
             super(localManager);
-            mService = new BluetoothHeadset(localManager.getContext(), this);
+            BluetoothAdapter adapter = BluetoothAdapter.getDefaultAdapter();
+            adapter.getProfileProxy(localManager.getContext(), this, BluetoothProfile.HEADSET);
         }
 
-        public void onServiceConnected() {
+        public void onServiceConnected(int profile, BluetoothProfile proxy) {
+            mService = (BluetoothHeadset) proxy;
             profileReady = true;
             // This could be called on a non-UI thread, funnel to UI thread.
             mUiHandler.post(new Runnable() {
@@ -354,11 +378,15 @@ public abstract class LocalBluetoothProfileManager {
                      * We just bound to the service, so refresh the UI of the
                      * headset device.
                      */
-                    BluetoothDevice device = mService.getCurrentHeadset();
-                    if (device == null) return;
+                    Set<BluetoothDevice> deviceSet = mService.getConnectedDevices();
+                    if (deviceSet.size() == 0) return;
+
+                    BluetoothDevice[] devices =
+                        deviceSet.toArray(new BluetoothDevice[deviceSet.size()]);
+
                     mLocalManager.getCachedDeviceManager()
-                            .onProfileStateChanged(device, Profile.HEADSET,
-                                                   BluetoothHeadset.STATE_CONNECTED);
+                            .onProfileStateChanged(devices[0], Profile.HEADSET,
+                                                   BluetoothProfile.STATE_CONNECTED);
                 }
             });
 
@@ -370,7 +398,8 @@ public abstract class LocalBluetoothProfileManager {
             }
         }
 
-        public void onServiceDisconnected() {
+        public void onServiceDisconnected(int profile) {
+            mService = null;
             profileReady = false;
             if (mServiceListeners.size() > 0) {
                 Iterator<ServiceListener> it = mServiceListeners.iterator();
@@ -387,34 +416,24 @@ public abstract class LocalBluetoothProfileManager {
 
         @Override
         public Set<BluetoothDevice> getConnectedDevices() {
-            Set<BluetoothDevice> devices = null;
-            BluetoothDevice device = mService.getCurrentHeadset();
-            if (device != null) {
-                devices = new HashSet<BluetoothDevice>();
-                devices.add(device);
-            }
-            return devices;
+            return mService.getConnectedDevices();
         }
 
         @Override
         public boolean connect(BluetoothDevice device) {
-            // Since connectHeadset fails if already connected to a headset, we
-            // disconnect from any headset first
-            BluetoothDevice currDevice = mService.getCurrentHeadset();
-            if (currDevice != null) {
-                mService.disconnectHeadset(currDevice);
-            }
-            return mService.connectHeadset(device);
+            return mService.connect(device);
         }
 
         @Override
         public boolean disconnect(BluetoothDevice device) {
-            if (mService.getCurrentHeadset().equals(device)) {
+            Set<BluetoothDevice> deviceSet = getConnectedDevices();
+            BluetoothDevice[] devices = deviceSet.toArray(new BluetoothDevice[deviceSet.size()]);
+            if (devices.length != 0 && devices[0].equals(device)) {
                 // Downgrade prority as user is disconnecting the headset.
-                if (mService.getPriority(device) > BluetoothHeadset.PRIORITY_ON) {
-                    mService.setPriority(device, BluetoothHeadset.PRIORITY_ON);
+                if (mService.getPriority(device) > BluetoothProfile.PRIORITY_ON) {
+                    mService.setPriority(device, BluetoothProfile.PRIORITY_ON);
                 }
-                return mService.disconnectHeadset(device);
+                return mService.disconnect(device);
             } else {
                 return false;
             }
@@ -422,9 +441,11 @@ public abstract class LocalBluetoothProfileManager {
 
         @Override
         public int getConnectionStatus(BluetoothDevice device) {
-            BluetoothDevice currentDevice = mService.getCurrentHeadset();
-            return currentDevice != null && currentDevice.equals(device)
-                    ? convertState(mService.getState(device))
+            Set<BluetoothDevice> deviceSet = getConnectedDevices();
+            BluetoothDevice[] devices = deviceSet.toArray(new BluetoothDevice[deviceSet.size()]);
+
+            return devices.length > 0 && devices[0].equals(device)
+                    ? convertState(mService.getConnectionState(device))
                     : SettingsBtStatus.CONNECTION_STATUS_DISCONNECTED;
         }
 
@@ -441,7 +462,7 @@ public abstract class LocalBluetoothProfileManager {
 
         @Override
         public boolean isPreferred(BluetoothDevice device) {
-            return mService.getPriority(device) > BluetoothHeadset.PRIORITY_OFF;
+            return mService.getPriority(device) > BluetoothProfile.PRIORITY_OFF;
         }
 
         @Override
@@ -452,22 +473,22 @@ public abstract class LocalBluetoothProfileManager {
         @Override
         public void setPreferred(BluetoothDevice device, boolean preferred) {
             if (preferred) {
-                if (mService.getPriority(device) < BluetoothHeadset.PRIORITY_ON) {
-                    mService.setPriority(device, BluetoothHeadset.PRIORITY_ON);
+                if (mService.getPriority(device) < BluetoothProfile.PRIORITY_ON) {
+                    mService.setPriority(device, BluetoothProfile.PRIORITY_ON);
                 }
             } else {
-                mService.setPriority(device, BluetoothHeadset.PRIORITY_OFF);
+                mService.setPriority(device, BluetoothProfile.PRIORITY_OFF);
             }
         }
 
         @Override
         public int convertState(int headsetState) {
             switch (headsetState) {
-            case BluetoothHeadset.STATE_CONNECTED:
+            case BluetoothProfile.STATE_CONNECTED:
                 return SettingsBtStatus.CONNECTION_STATUS_CONNECTED;
-            case BluetoothHeadset.STATE_CONNECTING:
+            case BluetoothProfile.STATE_CONNECTING:
                 return SettingsBtStatus.CONNECTION_STATUS_CONNECTING;
-            case BluetoothHeadset.STATE_DISCONNECTED:
+            case BluetoothProfile.STATE_DISCONNECTED:
                 return SettingsBtStatus.CONNECTION_STATUS_DISCONNECTED;
             default:
                 return SettingsBtStatus.CONNECTION_STATUS_UNKNOWN;

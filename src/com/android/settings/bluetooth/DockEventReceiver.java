@@ -23,6 +23,7 @@ import android.bluetooth.BluetoothA2dp;
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
 import android.bluetooth.BluetoothHeadset;
+import android.bluetooth.BluetoothProfile;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
@@ -80,7 +81,12 @@ public class DockEventReceiver extends BroadcastReceiver {
                     if (DEBUG) Log.e(TAG, "Unknown state");
                     break;
             }
-        } else if (BluetoothHeadset.ACTION_STATE_CHANGED.equals(intent.getAction())) {
+        } else if (BluetoothHeadset.ACTION_CONNECTION_STATE_CHANGED.equals(intent.getAction()) ||
+                   BluetoothA2dp.ACTION_CONNECTION_STATE_CHANGED.equals(intent.getAction())) {
+            int newState = intent.getIntExtra(BluetoothProfile.EXTRA_STATE,
+                    BluetoothProfile.STATE_CONNECTED);
+            int oldState = intent.getIntExtra(BluetoothProfile.EXTRA_PREVIOUS_STATE, 0);
+
             /*
              *  Reconnect to the dock if:
              *  1) it is a dock
@@ -93,35 +99,8 @@ public class DockEventReceiver extends BroadcastReceiver {
                 return;
             }
 
-            int newState = intent.getIntExtra(BluetoothHeadset.EXTRA_STATE,
-                    BluetoothHeadset.STATE_CONNECTED);
-            if (newState != BluetoothHeadset.STATE_DISCONNECTED) return;
-
-            int source = intent.getIntExtra(BluetoothHeadset.EXTRA_DISCONNECT_INITIATOR,
-                    BluetoothHeadset.LOCAL_DISCONNECT);
-            if (source != BluetoothHeadset.REMOTE_DISCONNECT) return;
-
-            // Too bad, the dock state can't be checked from a BroadcastReceiver.
-            Intent i = new Intent(intent);
-            i.setClass(context, DockService.class);
-            beginStartingService(context, i);
-
-        } else if (BluetoothA2dp.ACTION_SINK_STATE_CHANGED.equals(intent.getAction())) {
-            /*
-             *  Reconnect to the dock if:
-             *  1) it is a dock
-             *  2) it is an unexpected disconnect i.e. didn't go through disconnecting state
-             *  3) the dock is still docked (check can only be done in the Service)
-             */
-            if (device == null) {
-                if (DEBUG) Log.d(TAG, "Device is missing");
-                return;
-            }
-
-            int newState = intent.getIntExtra(BluetoothA2dp.EXTRA_SINK_STATE, 0);
-            int oldState = intent.getIntExtra(BluetoothA2dp.EXTRA_PREVIOUS_SINK_STATE, 0);
-            if (newState == BluetoothA2dp.STATE_DISCONNECTED &&
-                    oldState != BluetoothA2dp.STATE_DISCONNECTING) {
+            if (newState == BluetoothProfile.STATE_DISCONNECTED &&
+                    oldState != BluetoothProfile.STATE_DISCONNECTING) {
                 // Too bad, the dock state can't be checked from a BroadcastReceiver.
                 Intent i = new Intent(intent);
                 i.setClass(context, DockService.class);

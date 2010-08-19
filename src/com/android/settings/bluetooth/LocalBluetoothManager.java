@@ -23,6 +23,7 @@ import android.app.AlertDialog;
 import android.bluetooth.BluetoothA2dp;
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
+import android.bluetooth.BluetoothProfile;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.util.Config;
@@ -117,10 +118,20 @@ public class LocalBluetoothManager {
         mEventRedirector = new BluetoothEventRedirector(this);
         mEventRedirector.start();
 
-        mBluetoothA2dp = new BluetoothA2dp(context);
+        mAdapter.getProfileProxy(mContext, mProfileListener, BluetoothProfile.A2DP);
 
         return true;
     }
+
+    private BluetoothProfile.ServiceListener mProfileListener =
+      new BluetoothProfile.ServiceListener() {
+        public void onServiceConnected(int profile, BluetoothProfile proxy) {
+            mBluetoothA2dp = (BluetoothA2dp) proxy;
+        }
+        public void onServiceDisconnected(int profile) {
+            mBluetoothA2dp = null;
+        }
+    };
 
     public BluetoothAdapter getBluetoothAdapter() {
         return mAdapter;
@@ -184,12 +195,11 @@ public class LocalBluetoothManager {
                 }
 
                 // If we are playing music, don't scan unless forced.
-                Set<BluetoothDevice> sinks = mBluetoothA2dp.getConnectedSinks();
-                if (sinks != null) {
-                    for (BluetoothDevice sink : sinks) {
-                        if (mBluetoothA2dp.getSinkState(sink) == BluetoothA2dp.STATE_PLAYING) {
-                            return;
-                        }
+                if (mBluetoothA2dp != null) {
+                    Set<BluetoothDevice> sinks = mBluetoothA2dp.getConnectedDevices();
+                    if (sinks.size() > 0) {
+                        BluetoothDevice sink = sinks.toArray(new BluetoothDevice[sinks.size()])[0];
+                        if (mBluetoothA2dp.isA2dpPlaying(sink)) return;
                     }
                 }
             }
