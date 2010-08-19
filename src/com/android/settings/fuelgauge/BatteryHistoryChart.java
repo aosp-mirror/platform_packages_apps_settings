@@ -411,8 +411,8 @@ public class BatteryHistoryChart extends View {
             mScreenOnOffset = mChargingOffset + barOffset;
             mWakeLockOffset = mScreenOnOffset + barOffset;
             mWifiRunningOffset = mWakeLockOffset + barOffset;
-            mGpsOnOffset = mHaveWifi ? (mWifiRunningOffset + barOffset) : mWakeLockOffset;
-            mPhoneSignalOffset = mHaveGps ? (mGpsOnOffset + barOffset) : mWifiRunningOffset;
+            mGpsOnOffset = mWifiRunningOffset + (mHaveWifi ? barOffset : 0);
+            mPhoneSignalOffset = mGpsOnOffset + (mHaveGps ? barOffset : 0);
             mLevelOffset = mPhoneSignalOffset + barOffset + mLineWidth;
             mPhoneSignalTicks = new int[w+2];
         } else {
