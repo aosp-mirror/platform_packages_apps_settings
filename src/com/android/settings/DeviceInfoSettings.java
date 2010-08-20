@@ -19,6 +19,7 @@ package com.android.settings;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.SystemClock;
 import android.os.SystemProperties;
 import android.preference.Preference;
 import android.preference.PreferenceActivity;
@@ -44,6 +45,8 @@ public class DeviceInfoSettings extends PreferenceActivity {
     private static final String KEY_COPYRIGHT = "copyright";
     private static final String KEY_SYSTEM_UPDATE_SETTINGS = "system_update_settings";
     private static final String PROPERTY_URL_SAFETYLEGAL = "ro.url.safetylegal";
+    
+    long[] mHits = new long[3];
     
     @Override
     protected void onCreate(Bundle icicle) {
@@ -90,12 +93,16 @@ public class DeviceInfoSettings extends PreferenceActivity {
     @Override
     public boolean onPreferenceTreeClick(PreferenceScreen preferenceScreen, Preference preference) {
         if (preference.getKey().equals("firmware_version")) {
-            Intent intent = new Intent(Intent.ACTION_MAIN);
-            intent.setClassName("android",
-                    com.android.internal.app.PlatLogoActivity.class.getName());
-            try {
-                startActivity(intent);
-            } catch (Exception e) {
+            System.arraycopy(mHits, 1, mHits, 0, mHits.length-1);
+            mHits[mHits.length-1] = SystemClock.uptimeMillis();
+            if (mHits[0] >= (SystemClock.uptimeMillis()-500)) {
+                Intent intent = new Intent(Intent.ACTION_MAIN);
+                intent.setClassName("android",
+                        com.android.internal.app.PlatLogoActivity.class.getName());
+                try {
+                    startActivity(intent);
+                } catch (Exception e) {
+                }
             }
         }
         return super.onPreferenceTreeClick(preferenceScreen, preference);
