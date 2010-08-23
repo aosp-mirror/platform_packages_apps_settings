@@ -337,13 +337,14 @@ public class BluetoothSettings extends PreferenceActivity
 
         switch(mFilterType) {
         case BluetoothDevicePicker.FILTER_TYPE_TRANSFER:
-            if (uuids != null)
+            if (uuids != null) {
                 if (BluetoothUuid.containsAnyUuid(uuids,
                         LocalBluetoothProfileManager.OPP_PROFILE_UUIDS))  return true;
-                if (bluetoothClass != null
-                        && bluetoothClass.doesClassMatch(BluetoothClass.PROFILE_OPP)) {
-                    return true;
-                }
+            }
+            if (bluetoothClass != null
+                   && bluetoothClass.doesClassMatch(BluetoothClass.PROFILE_OPP)) {
+                return true;
+            }
             break;
         case BluetoothDevicePicker.FILTER_TYPE_AUDIO:
             if (uuids != null) {
@@ -364,11 +365,19 @@ public class BluetoothSettings extends PreferenceActivity
                         LocalBluetoothProfileManager.PANU_PROFILE_UUIDS))  return true;
 
             }
+            if (bluetoothClass != null
+                   && bluetoothClass.doesClassMatch(BluetoothClass.PROFILE_PANU)) {
+                return true;
+            }
             break;
         case BluetoothDevicePicker.FILTER_TYPE_NAP:
             if (uuids != null) {
                 if (BluetoothUuid.containsAnyUuid(uuids,
                         LocalBluetoothProfileManager.NAP_PROFILE_UUIDS))  return true;
+            }
+            if (bluetoothClass != null
+                   && bluetoothClass.doesClassMatch(BluetoothClass.PROFILE_NAP)) {
+                return true;
             }
             break;
         default:
