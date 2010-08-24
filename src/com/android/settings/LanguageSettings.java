@@ -16,6 +16,7 @@
 
 package com.android.settings;
 
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -29,6 +30,7 @@ import android.preference.PreferenceGroup;
 import android.preference.PreferenceScreen;
 import android.provider.Settings;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.inputmethod.InputMethodInfo;
 import android.view.inputmethod.InputMethodManager;
 
@@ -37,7 +39,8 @@ import java.util.HashSet;
 import java.util.List;
 
 public class LanguageSettings extends SettingsPreferenceFragment {
-    
+    private static final String TAG = LanguageSettings.class.getSimpleName();
+
     private static final String KEY_PHONE_LANGUAGE = "phone_language";
     private static final String KEY_INPUT_METHOD = "input_method";
 
@@ -232,6 +235,15 @@ public class LanguageSettings extends SettingsPreferenceFragment {
         // Input Method stuff
         if (Utils.isMonkeyRunning()) {
             return false;
+        }
+        final String fragmentClass = preference.getFragment();
+        if (fragmentClass != null) {
+            final Activity activity = getActivity();
+            if (activity instanceof com.android.settings.Settings) {
+                return ((com.android.settings.Settings) activity).showFragment(preference);
+            } else {
+                Log.w(TAG, "Fragment is available while the parent is not Settings Activity.");
+            }
         }
 
         if (preference instanceof CheckBoxPreference) {

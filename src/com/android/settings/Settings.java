@@ -87,6 +87,11 @@ public class Settings extends Activity
             if (initialFragment != null) {
                 showFragment(initialFragment, initialArguments);
             } else {
+                // Intent#getCompontent() lets us get Fragment name, even when the Intent is
+                // given via <activity-alias>.
+                //
+                // e.g. When we reach here via "ChildSetting" activity-alias,
+                // we should get the name here instead of targetActivity ("Settings").
                 if (intent.getComponent().getClassName().equals(this.getClass().getName())) {
                     showFragment(TopLevelSettings.class.getName(), null);
                 } else {

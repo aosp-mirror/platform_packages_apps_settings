@@ -19,11 +19,9 @@
         android:title="@string/language_keyboard_settings_title">
 
     <PreferenceScreen
-            android:key="phone_language"
-            android:title="@string/phone_language">
-        <intent android:action="android.intent.action.MAIN"
-                android:targetPackage="com.android.settings"
-                android:targetClass="com.android.settings.LocalePicker"/>
+       android:fragment="com.android.settings.LocalePicker"
+       android:key="phone_language"
+       android:title="@string/phone_language">
     </PreferenceScreen>
 
     <PreferenceCategory android:key="text_category"
