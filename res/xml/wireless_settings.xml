@@ -32,13 +32,10 @@
         android:persistent="false" />
 
     <PreferenceScreen
+        android:fragment="com.android.settings.wifi.WifiSettings"
         android:key="wifi_settings"
         android:title="@string/wifi_settings"
         android:summary="@string/wifi_settings_summary" >
-        <intent
-            android:action="android.intent.action.MAIN"
-            android:targetPackage="com.android.settings"                
-            android:targetClass="com.android.settings.wifi.WifiSettings" />
     </PreferenceScreen>
 
     <CheckBoxPreference
