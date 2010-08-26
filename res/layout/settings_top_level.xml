@@ -24,4 +24,44 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             />
+
+    <!-- button_bar -->
+    <RelativeLayout android:id="@+id/button_bar"
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:layout_weight="0"
+        android:background="@android:drawable/bottom_bar"
+        android:visibility="gone">
+
+        <Button android:id="@+id/back_button"
+            android:layout_width="150dip"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dip"
+            android:layout_alignParentLeft="true"
+            android:drawablePadding="3dip"
+        />
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true">
+
+            <Button android:id="@+id/skip_button"
+                android:layout_width="150dip"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dip"
+                android:text="@string/skip_button_label"
+                android:visibility="gone"
+            />
+
+            <Button android:id="@+id/next_button"
+                android:layout_width="150dip"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dip"
+                android:drawableRight="@drawable/ic_btn_next"
+                android:drawablePadding="3dip"
+                android:text="@string/next_button_label"
+            />
+        </LinearLayout>
+    </RelativeLayout>
 </LinearLayout>

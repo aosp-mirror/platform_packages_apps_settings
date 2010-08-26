@@ -16,9 +16,7 @@
 
 package com.android.settings.wifi;
 
-import com.android.settings.ProgressCategory;
-import com.android.settings.R;
-
+import android.app.Activity;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -31,7 +29,6 @@ import android.net.wifi.ScanResult;
 import android.net.wifi.SupplicantState;
 import android.net.wifi.WifiConfiguration;
 import android.net.wifi.WifiConfiguration.KeyMgmt;
-import android.net.wifi.WifiConfiguration.Status;
 import android.net.wifi.WifiInfo;
 import android.net.wifi.WifiManager;
 import android.os.Bundle;
@@ -39,24 +36,29 @@ import android.os.Handler;
 import android.os.Message;
 import android.preference.CheckBoxPreference;
 import android.preference.Preference;
-import android.preference.PreferenceActivity;
 import android.preference.PreferenceScreen;
 import android.provider.Settings.Secure;
 import android.security.Credentials;
 import android.security.KeyStore;
-import android.text.TextUtils;
+import android.util.Log;
 import android.view.ContextMenu;
 import android.view.ContextMenu.ContextMenuInfo;
 import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView.AdapterContextMenuInfo;
 import android.widget.Toast;
 
+import com.android.settings.ProgressCategory;
+import com.android.settings.R;
+import com.android.settings.SettingsPreferenceFragment;
+
 import java.util.ArrayList;
 import java.util.List;
 
-public class WifiSettings extends PreferenceActivity implements DialogInterface.OnClickListener {
+public class WifiSettings extends SettingsPreferenceFragment
+        implements DialogInterface.OnClickListener {
     private static final int MENU_ID_SCAN = Menu.FIRST;
     private static final int MENU_ID_ADVANCED = Menu.FIRST + 1;
     private static final int MENU_ID_CONNECT = Menu.FIRST + 2;
@@ -108,28 +110,33 @@ public class WifiSettings extends PreferenceActivity implements DialogInterface.
     }
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
+    public void onActivityCreated(Bundle savedInstanceState) {
+        // We don't call super.onActivityCreated() here, since it assumes we already set up
+        // Preference (probably in onCreate()), while WifiSettings exceptionally set it up in
+        // this method.
 
         mWifiManager = (WifiManager) getSystemService(Context.WIFI_SERVICE);
 
+        final Activity activity = getActivity();
+        final Intent intent = activity.getIntent();
+
         // if we're supposed to enable/disable the Next button based on our current connection
         // state, start it off in the right state
-        mEnableNextOnConnection = getIntent().getBooleanExtra(EXTRA_ENABLE_NEXT_ON_CONNECT, false);
+        mEnableNextOnConnection = intent.getBooleanExtra(EXTRA_ENABLE_NEXT_ON_CONNECT, false);
         if (mEnableNextOnConnection && hasNextButton()) {
             ConnectivityManager connectivity = (ConnectivityManager)
-                getApplicationContext().getSystemService(Context.CONNECTIVITY_SERVICE);
+                getActivity().getSystemService(Context.CONNECTIVITY_SERVICE);
             if (connectivity != null) {
                 NetworkInfo info = connectivity.getNetworkInfo(ConnectivityManager.TYPE_WIFI);
                 getNextButton().setEnabled(info.isConnected());
             }
         }
 
-        if (getIntent().getBooleanExtra("only_access_points", false)) {
+        if (intent.getBooleanExtra("only_access_points", false)) {
             addPreferencesFromResource(R.xml.wifi_access_points);
         } else {
             addPreferencesFromResource(R.xml.wifi_settings);
-            mWifiEnabler = new WifiEnabler(this,
+            mWifiEnabler = new WifiEnabler(activity,
                     (CheckBoxPreference) findPreference("enable_wifi"));
             mNotifyOpenNetworks =
                     (CheckBoxPreference) findPreference("notify_open_networks");
@@ -137,20 +144,25 @@ public class WifiSettings extends PreferenceActivity implements DialogInterface.
                     Secure.WIFI_NETWORKS_AVAILABLE_NOTIFICATION_ON, 0) == 1);
         }
 
+        // After confirming PreferenceScreen is available, we call super.
+        super.onActivityCreated(savedInstanceState);
+
         mAccessPoints = (ProgressCategory) findPreference("access_points");
         mAccessPoints.setOrderingAsAdded(false);
         mAddNetwork = findPreference("add_network");
 
         registerForContextMenu(getListView());
+
+        setHasOptionsMenu(true);
     }
 
     @Override
-    protected void onResume() {
+    public void onResume() {
         super.onResume();
         if (mWifiEnabler != null) {
             mWifiEnabler.resume();
         }
-        registerReceiver(mReceiver, mFilter);
+        getActivity().registerReceiver(mReceiver, mFilter);
         if (mKeyStoreNetworkId != -1 && KeyStore.getInstance().test() == KeyStore.NO_ERROR) {
             mWifiManager.connectNetwork(mKeyStoreNetworkId);
         }
@@ -159,12 +171,12 @@ public class WifiSettings extends PreferenceActivity implements DialogInterface.
     }
 
     @Override
-    protected void onPause() {
+    public void onPause() {
         super.onPause();
         if (mWifiEnabler != null) {
             mWifiEnabler.pause();
         }
-        unregisterReceiver(mReceiver);
+        getActivity().unregisterReceiver(mReceiver);
         mScanner.pause();
         if (mDialog != null) {
             mDialog.dismiss();
@@ -173,12 +185,12 @@ public class WifiSettings extends PreferenceActivity implements DialogInterface.
     }
 
     @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         menu.add(Menu.NONE, MENU_ID_SCAN, 0, R.string.wifi_menu_scan)
                 .setIcon(R.drawable.ic_menu_scan_network);
         menu.add(Menu.NONE, MENU_ID_ADVANCED, 0, R.string.wifi_menu_advanced)
                 .setIcon(android.R.drawable.ic_menu_manage);
-        return super.onCreateOptionsMenu(menu);
+        super.onCreateOptionsMenu(menu, inflater);
     }
 
     @Override
@@ -190,7 +202,7 @@ public class WifiSettings extends PreferenceActivity implements DialogInterface.
                 }
                 return true;
             case MENU_ID_ADVANCED:
-                startActivity(new Intent(this, AdvancedSettings.class));
+                startActivity(new Intent(getActivity(), AdvancedSettings.class));
                 return true;
         }
         return super.onOptionsItemSelected(item);
@@ -295,7 +307,7 @@ public class WifiSettings extends PreferenceActivity implements DialogInterface.
         if (mDialog != null) {
             mDialog.dismiss();
         }
-        mDialog = new WifiDialog(this, this, accessPoint, edit);
+        mDialog = new WifiDialog(getActivity(), this, accessPoint, edit);
         mDialog.show();
     }
 
@@ -303,7 +315,7 @@ public class WifiSettings extends PreferenceActivity implements DialogInterface.
         if (WifiDialog.requireKeyStore(config) &&
                 KeyStore.getInstance().test() != KeyStore.NO_ERROR) {
             mKeyStoreNetworkId = config.networkId;
-            Credentials.getInstance().unlock(this);
+            Credentials.getInstance().unlock(getActivity());
             return true;
         }
         return false;
@@ -315,7 +327,7 @@ public class WifiSettings extends PreferenceActivity implements DialogInterface.
         List<WifiConfiguration> configs = mWifiManager.getConfiguredNetworks();
         if (configs != null) {
             for (WifiConfiguration config : configs) {
-                AccessPoint accessPoint = new AccessPoint(this, config);
+                AccessPoint accessPoint = new AccessPoint(getActivity(), config);
                 accessPoint.update(mLastInfo, mLastState);
                 accessPoints.add(accessPoint);
             }
@@ -337,7 +349,7 @@ public class WifiSettings extends PreferenceActivity implements DialogInterface.
                     }
                 }
                 if (!found) {
-                    accessPoints.add(new AccessPoint(this, result));
+                    accessPoints.add(new AccessPoint(getActivity(), result));
                 }
             }
         }
@@ -424,7 +436,7 @@ public class WifiSettings extends PreferenceActivity implements DialogInterface.
                 mRetry = 0;
             } else if (++mRetry >= 3) {
                 mRetry = 0;
-                Toast.makeText(WifiSettings.this, R.string.wifi_fail_to_scan,
+                Toast.makeText(getActivity(), R.string.wifi_fail_to_scan,
                         Toast.LENGTH_LONG).show();
                 return;
             }

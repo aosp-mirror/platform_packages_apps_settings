@@ -83,10 +83,11 @@
 
         <!-- Top-level settings -->
 
-        <activity android:name=".wifi.WifiSettings"
+        <activity-alias android:name=".wifi.WifiSettings"
                 android:label="@string/wifi_settings"
                 android:configChanges="orientation|keyboardHidden"
                 android:clearTaskOnLaunch="true"
+                android:targetActivity="Settings"
                 >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -96,7 +97,7 @@
                 <category android:name="android.intent.category.VOICE_LAUNCH" />
                 <category android:name="com.android.settings.SHORTCUT" />
             </intent-filter>
-        </activity>
+        </activity-alias>
 
         <activity android:name=".wifi.AdvancedSettings"
                 android:label="@string/wifi_ip_settings_titlebar"

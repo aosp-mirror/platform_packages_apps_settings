@@ -98,10 +98,11 @@ public class Settings extends Activity
                 if (showFragment(intent.getComponent().getClassName(), intent.getExtras())) {
                     mMainPane.setVisibility(View.GONE);
                 }
-            }
-            Fragment topLevel = getFragmentManager().findFragmentById(R.id.top_level);
-            if (topLevel != null) {
-                ((TopLevelSettings) topLevel).selectFirst();
+            } else {
+                Fragment topLevel = getFragmentManager().findFragmentById(R.id.top_level);
+                if (topLevel != null) {
+                    ((TopLevelSettings) topLevel).selectFirst();
+                }
             }
         }
     }
@@ -165,13 +166,13 @@ public class Settings extends Activity
     }
 
     public void onCreated(SettingsPreferenceFragment fragment) {
-        Log.d(TAG, "Fragment created " + fragment);
+        Log.d(TAG, "Fragment created " + fragment + " (name: " + fragment.getClass() + ")");
         addToBreadCrumbs(fragment);
     }
 
     public void onDestroyed(SettingsPreferenceFragment fragment) {
         removeFromBreadCrumbs(fragment);
-        Log.d(TAG, "Fragment destroyed " + fragment);
+        Log.d(TAG, "Fragment destroyed " + fragment + " (name: " + fragment.getClass() + ")");
     }
 
     public boolean onPreferenceStartFragment(PreferenceFragment caller, Preference pref) {
