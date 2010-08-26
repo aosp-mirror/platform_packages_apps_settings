@@ -2261,6 +2261,12 @@ found in the list of installed applications.</string>
     <string name="pico_voice_summary_female">Female</string>
     <!-- On Pico TTS Settings screen, summary text to indicate that a voice is male -->
     <string name="pico_voice_summary_male">Male</string>
+    <!-- [CHAR LIMIT=33] Notification title that appears when the installation of a new TTS engine completed -->
+    <string name="tts_notif_engine_install_title">Speech synthesis engine installed</string>
+    <!-- [CHAR LIMIT=30] Notification message that appears after the user has installed a new TTS engine,
+         to warn the user that this engine cannot be used before the checkbox for that engine
+         in TTS settings is checked. -->
+    <string name="tts_notif_engine_install_message">Enable new engine before use</string>
 
     <!-- Power Control Widget -->
     <string name="gadget_title">Power Control</string>
