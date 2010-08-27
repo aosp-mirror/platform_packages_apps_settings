@@ -759,6 +759,7 @@ public class RadioInfo extends Activity {
 
         List<DataConnection> dcs = phone.getCurrentDataConnectionList();
 
+        /*
         for (DataConnection dc : dcs) {
             sb.append("    State: ").append(dc.getStateAsString()).append("\n");
             if (dc.isActive()) {
@@ -800,6 +801,7 @@ public class RadioInfo extends Activity {
             }
             sb.append("\n===================");
         }
+        */
 
 
         disconnects.setText(sb.toString());
