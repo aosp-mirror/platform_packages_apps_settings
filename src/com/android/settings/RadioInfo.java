@@ -17,13 +17,11 @@
 package com.android.settings;
 
 import android.app.Activity;
-import android.app.AlertDialog;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
-import android.content.SharedPreferences;
 import android.content.res.Resources;
+import android.net.NetworkProperties;
 import android.net.Uri;
 import android.os.AsyncResult;
 import android.os.Bundle;
@@ -33,7 +31,6 @@ import android.os.Message;
 import android.os.RemoteException;
 import android.os.ServiceManager;
 import android.os.SystemProperties;
-import android.preference.PreferenceManager;
 import android.telephony.CellLocation;
 import android.telephony.PhoneStateListener;
 import android.telephony.ServiceState;
@@ -66,9 +63,8 @@ import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.DefaultHttpClient;
 
-import java.io.ByteArrayOutputStream;
-import java.io.DataOutputStream;
 import java.io.IOException;
+import java.net.InetAddress;
 import java.net.UnknownHostException;
 import java.util.ArrayList;
 import java.util.List;
@@ -759,9 +755,8 @@ public class RadioInfo extends Activity {
 
         List<DataConnection> dcs = phone.getCurrentDataConnectionList();
 
-        /*
         for (DataConnection dc : dcs) {
-            sb.append("    State: ").append(dc.getStateAsString()).append("\n");
+            sb.append("    State=").append(dc.getStateAsString()).append("\n");
             if (dc.isActive()) {
                 long timeElapsed =
                     (System.currentTimeMillis() - dc.getConnectionTime())/1000;
@@ -775,16 +770,8 @@ public class RadioInfo extends Activity {
                     sb.append("\n    to ")
                       .append(pdp.getApn().toString());
                 }
-                sb.append("\ninterface: ")
-                  .append(phone.getInterfaceName(phone.getActiveApnTypes()[0]))
-                  .append("\naddress: ")
-                  .append(phone.getIpAddress(phone.getActiveApnTypes()[0]))
-                  .append("\ngateway: ")
-                  .append(phone.getGateway(phone.getActiveApnTypes()[0]));
-                String[] dns = phone.getDnsServers(phone.getActiveApnTypes()[0]);
-                if (dns != null) {
-                    sb.append("\ndns: ").append(dns[0]).append(", ").append(dns[1]);
-                }
+                sb.append("\nNetworkProperties: ");
+                sb.append(phone.getNetworkProperties(phone.getActiveApnTypes()[0]).toString());
             } else if (dc.isInactive()) {
                 sb.append("    disconnected with last try at ")
                   .append(DateUtils.timeString(dc.getLastFailTime()))
@@ -801,8 +788,6 @@ public class RadioInfo extends Activity {
             }
             sb.append("\n===================");
         }
-        */
-
 
         disconnects.setText(sb.toString());
     }
