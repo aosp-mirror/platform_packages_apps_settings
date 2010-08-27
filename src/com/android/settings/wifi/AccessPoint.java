@@ -16,23 +16,52 @@
 
 package com.android.settings.wifi;
 
-import com.android.settings.R;
-
 import android.content.Context;
 import android.net.NetworkInfo.DetailedState;
+import android.net.wifi.ScanResult;
 import android.net.wifi.WifiConfiguration;
 import android.net.wifi.WifiConfiguration.KeyMgmt;
 import android.net.wifi.WifiInfo;
 import android.net.wifi.WifiManager;
-import android.net.wifi.ScanResult;
 import android.preference.Preference;
-import android.text.TextUtils;
 import android.view.View;
 import android.widget.ImageView;
+
+import com.android.settings.R;
+
+import java.util.Comparator;
 
 class AccessPoint extends Preference {
     private static final int[] STATE_SECURED = {R.attr.state_encrypted};
     private static final int[] STATE_NONE = {};
+
+    public static final class Comparater
+            implements Comparator<AccessPoint> {
+        @Override
+        public int compare(AccessPoint accessPoint1, AccessPoint accessPoint2) {
+            // Active one goes first.
+            if (accessPoint1.mInfo != accessPoint2.mInfo) {
+                return (accessPoint1.mInfo != null) ? -1 : 1;
+            }
+
+            // Reachable one goes before unreachable one.
+            if ((accessPoint1.mRssi ^ accessPoint2.mRssi) < 0) {
+                return (accessPoint1.mRssi != Integer.MAX_VALUE) ? -1 : 1;
+            }
+            // Configured one goes before unconfigured one.
+            if ((accessPoint1.networkId ^ accessPoint2.networkId) < 0) {
+                return (accessPoint1.networkId != -1) ? -1 : 1;
+            }
+            // Sort by signal strength.
+            int difference = WifiManager.compareSignalLevel(
+                    accessPoint2.mRssi, accessPoint1.mRssi);
+            if (difference != 0) {
+                return difference;
+            }
+            // Sort by ssid.
+            return accessPoint1.ssid.compareToIgnoreCase(accessPoint2.ssid);
+        }
+    }
 
     static final int SECURITY_NONE = 0;
     static final int SECURITY_WEP = 1;
@@ -105,32 +134,6 @@ class AccessPoint extends Preference {
         super.onBindView(view);
     }
 
-    @Override
-    public int compareTo(Preference preference) {
-        if (!(preference instanceof AccessPoint)) {
-            return 1;
-        }
-        AccessPoint other = (AccessPoint) preference;
-        // Active one goes first.
-        if (mInfo != other.mInfo) {
-            return (mInfo != null) ? -1 : 1;
-        }
-        // Reachable one goes before unreachable one.
-        if ((mRssi ^ other.mRssi) < 0) {
-            return (mRssi != Integer.MAX_VALUE) ? -1 : 1;
-        }
-        // Configured one goes before unconfigured one.
-        if ((networkId ^ other.networkId) < 0) {
-            return (networkId != -1) ? -1 : 1;
-        }
-        // Sort by signal strength.
-        int difference = WifiManager.compareSignalLevel(other.mRssi, mRssi);
-        if (difference != 0) {
-            return difference;
-        }
-        // Sort by ssid.
-        return ssid.compareToIgnoreCase(other.ssid);
-    }
 
     boolean update(ScanResult result) {
         // We do not call refresh() since this is called before onBindView().

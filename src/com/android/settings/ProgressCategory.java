@@ -21,9 +21,7 @@ import android.preference.PreferenceCategory;
 import android.util.AttributeSet;
 import android.view.View;
 
-import java.util.Map;
-
-public class ProgressCategory extends PreferenceCategory {
+public class ProgressCategory extends ProgressCategoryBase {
 
     private boolean mProgress = false;
     private View oldView = null;
@@ -36,10 +34,10 @@ public class ProgressCategory extends PreferenceCategory {
     @Override
     public void onBindView(View view) {
         super.onBindView(view);
-        View textView = view.findViewById(R.id.scanning_text);
-        View progressBar = view.findViewById(R.id.scanning_progress);
+        final View textView = view.findViewById(R.id.scanning_text);
+        final View progressBar = view.findViewById(R.id.scanning_progress);
 
-        int visibility = mProgress ? View.VISIBLE : View.INVISIBLE;
+        final int visibility = mProgress ? View.VISIBLE : View.INVISIBLE;
         textView.setVisibility(visibility);
         progressBar.setVisibility(visibility);
 
@@ -50,11 +48,8 @@ public class ProgressCategory extends PreferenceCategory {
         }
         oldView = view;
     }
-    
-    /**
-     * Turn on/off the progress indicator and text on the right.
-     * @param progressOn whether or not the progress should be displayed 
-     */
+
+    @Override
     public void setProgress(boolean progressOn) {
         mProgress = progressOn;
         notifyChanged();
