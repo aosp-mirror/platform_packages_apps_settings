@@ -21,7 +21,7 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
 import android.content.res.Resources;
-import android.net.NetworkProperties;
+import android.net.LinkProperties;
 import android.net.Uri;
 import android.os.AsyncResult;
 import android.os.Bundle;
@@ -770,8 +770,8 @@ public class RadioInfo extends Activity {
                     sb.append("\n    to ")
                       .append(pdp.getApn().toString());
                 }
-                sb.append("\nNetworkProperties: ");
-                sb.append(phone.getNetworkProperties(phone.getActiveApnTypes()[0]).toString());
+                sb.append("\nLinkProperties: ");
+                sb.append(phone.getLinkProperties(phone.getActiveApnTypes()[0]).toString());
             } else if (dc.isInactive()) {
                 sb.append("    disconnected with last try at ")
                   .append(DateUtils.timeString(dc.getLastFailTime()))
