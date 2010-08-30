@@ -829,7 +829,9 @@
                 <action android:name="android.net.wifi.WIFI_STATE_CHANGED" />
                 <action android:name="android.net.conn.BACKGROUND_DATA_SETTING_CHANGED" />
                 <action android:name="android.bluetooth.adapter.action.STATE_CHANGED" />
-                <action android:name="android.intent.action.CLOSE_SYSTEM_DIALOGS" /> <!-- pick up misc changes -->
+                <action android:name="android.location.PROVIDERS_CHANGED" />
+                <!-- hack: using CLOSE_SYSTEM_DIALOGS to pick up (possible) sync changes -->
+                <action android:name="android.intent.action.CLOSE_SYSTEM_DIALOGS" />
             </intent-filter>
             <meta-data android:name="android.appwidget.provider" android:resource="@xml/appwidget_info" />
         </receiver>
