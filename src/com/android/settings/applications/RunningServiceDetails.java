@@ -284,20 +284,13 @@ public class RunningServiceDetails extends Activity
             switch (rpi.importanceReasonCode) {
                 case ActivityManager.RunningAppProcessInfo.REASON_PROVIDER_IN_USE:
                     textid = R.string.process_provider_in_use_description;
-                    List<ProviderInfo> providers = null;
-                    if (comp != null) {
-                        providers = getPackageManager()
-                                .queryContentProviders(comp.getPackageName(),
-                                        rpi.uid, 0);
-                    }
-                    if (providers != null) {
-                        for (int j=0; j<providers.size(); j++) {
-                            ProviderInfo prov = providers.get(j);
-                            if (comp.getClassName().equals(prov.name)) {
-                                label = RunningState.makeLabel(getPackageManager(),
-                                        prov.name, prov);
-                                break;
-                            }
+                    if (rpi.importanceReasonComponent != null) {
+                        try {
+                            ProviderInfo prov = getPackageManager().getProviderInfo(
+                                    rpi.importanceReasonComponent, 0);
+                            label = RunningState.makeLabel(getPackageManager(),
+                                    prov.name, prov);
+                        } catch (NameNotFoundException e) {
                         }
                     }
                     break;
