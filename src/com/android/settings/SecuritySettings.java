@@ -17,6 +17,8 @@
 package com.android.settings;
 
 
+import static android.provider.Settings.System.SCREEN_OFF_TIMEOUT;
+
 import com.android.internal.widget.LockPatternUtils;
 
 import android.app.AlertDialog;
@@ -32,25 +34,30 @@ import android.location.LocationManager;
 import android.os.Bundle;
 import android.os.SystemProperties;
 import android.preference.CheckBoxPreference;
+import android.preference.ListPreference;
 import android.preference.Preference;
 import android.preference.PreferenceCategory;
 import android.preference.PreferenceManager;
 import android.preference.PreferenceScreen;
+import android.preference.Preference.OnPreferenceChangeListener;
 import android.provider.Settings;
 import android.security.Credentials;
 import android.security.KeyStore;
 import android.telephony.TelephonyManager;
+import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.util.ArrayList;
 import java.util.Observable;
 import java.util.Observer;
 
 /**
  * Gesture lock pattern settings.
  */
-public class SecuritySettings extends SettingsPreferenceFragment {
+public class SecuritySettings extends SettingsPreferenceFragment 
+        implements OnPreferenceChangeListener {
     private static final String KEY_UNLOCK_SET_OR_CHANGE = "unlock_set_or_change";
 
     // Lock Settings
@@ -74,7 +81,9 @@ public class SecuritySettings extends SettingsPreferenceFragment {
     private static final String LOCATION_NETWORK = "location_network";
     private static final String LOCATION_GPS = "location_gps";
     private static final String ASSISTED_GPS = "assisted_gps";
+    private static final String LOCK_AFTER_TIMEOUT_KEY = "lock_after_timeout";
     private static final int SET_OR_CHANGE_LOCK_METHOD_REQUEST = 123;
+    private static final int FALLBACK_LOCK_AFTER_TIMEOUT_VALUE = 5000; // compatible with pre-Froyo
 
     // Credential storage
     private CredentialStorage mCredentialStorage = new CredentialStorage();
@@ -92,8 +101,11 @@ public class SecuritySettings extends SettingsPreferenceFragment {
     // This is necessary because the Network Location Provider can change settings
     // if the user does not confirm enabling the provider.
     private ContentQueryMap mContentQueryMap;
+    
     private ChooseLockSettingsHelper mChooseLockSettingsHelper;
     private LockPatternUtils mLockPatternUtils;
+    private ListPreference mLockAfter;
+    
     private final class SettingsObserver implements Observer {
         public void update(Observable o, Object arg) {
             updateToggles();
@@ -156,8 +168,8 @@ public class SecuritySettings extends SettingsPreferenceFragment {
             }
         }
 
-        // set or change current. Should be common to all unlock preference screens
-        // mSetOrChange = (PreferenceScreen) pm.findPreference(KEY_UNLOCK_SET_OR_CHANGE);
+        // lock after preference
+        mLockAfter = setupLockAfterPreference(pm);
 
         // visible pattern
         mVisiblePattern = (CheckBoxPreference) pm.findPreference(KEY_VISIBLE_PATTERN);
@@ -220,9 +232,64 @@ public class SecuritySettings extends SettingsPreferenceFragment {
         return root;
     }
 
+    private ListPreference setupLockAfterPreference(PreferenceManager pm) {
+        ListPreference result = (ListPreference) pm.findPreference(LOCK_AFTER_TIMEOUT_KEY);
+        if (result != null) {
+            int lockAfterValue = Settings.Secure.getInt(getContentResolver(), 
+                    Settings.Secure.LOCK_SCREEN_LOCK_AFTER_TIMEOUT, 
+                    FALLBACK_LOCK_AFTER_TIMEOUT_VALUE);
+            result.setValue(String.valueOf(lockAfterValue));
+            result.setOnPreferenceChangeListener(this);
+            final long adminTimeout = mDPM != null ? mDPM.getMaximumTimeToLock(null) : 0;
+            final ContentResolver cr = getContentResolver();
+            final long displayTimeout = Math.max(0, 
+                    Settings.System.getInt(cr, SCREEN_OFF_TIMEOUT, 0));
+            if (adminTimeout > 0) {
+                // This setting is a slave to display timeout when a device policy is enforced.
+                // As such, maxLockTimeout = adminTimeout - displayTimeout.
+                // If there isn't enough time, shows "immediately" setting.
+                disableUnusableTimeouts(result, Math.max(0, adminTimeout - displayTimeout));
+            }
+        }
+        return result;
+    }
+
+    private static void disableUnusableTimeouts(ListPreference pref, long maxTimeout) {
+        final CharSequence[] entries = pref.getEntries();
+        final CharSequence[] values = pref.getEntryValues();
+        ArrayList<CharSequence> revisedEntries = new ArrayList<CharSequence>();
+        ArrayList<CharSequence> revisedValues = new ArrayList<CharSequence>();
+        for (int i = 0; i < values.length; i++) {
+            long timeout = Long.valueOf(values[i].toString());
+            if (timeout <= maxTimeout) {
+                revisedEntries.add(entries[i]);
+                revisedValues.add(values[i]);
+            }
+        }
+        if (revisedEntries.size() != entries.length || revisedValues.size() != values.length) {
+            pref.setEntries(
+                    revisedEntries.toArray(new CharSequence[revisedEntries.size()]));
+            pref.setEntryValues(
+                    revisedValues.toArray(new CharSequence[revisedValues.size()]));
+            final int userPreference = Integer.valueOf(pref.getValue());
+            if (userPreference <= maxTimeout) {
+                pref.setValue(String.valueOf(userPreference));
+            } else {
+                // There will be no highlighted selection since nothing in the list matches
+                // maxTimeout. The user can still select anything less than maxTimeout.
+                // TODO: maybe append maxTimeout to the list and mark selected.
+            }
+        }
+        pref.setEnabled(revisedEntries.size() > 0);
+    }
+
     @Override
     public void onResume() {
         super.onResume();
+
+        // Make sure we reload the preference hierarchy since some of these settings
+        // depend on others...
+        createPreferenceHierarchy();
 
         final LockPatternUtils lockPatternUtils = mChooseLockSettingsHelper.utils();
         if (mVisiblePattern != null) {
@@ -393,7 +460,7 @@ public class SecuritySettings extends SettingsPreferenceFragment {
                 Boolean bval = (Boolean)value;
                 mWillEnableEncryptedFS = bval.booleanValue();
                 showSwitchEncryptedFSDialog();
-            }
+            } 
             return true;
         }
 
@@ -658,5 +725,18 @@ public class SecuritySettings extends SettingsPreferenceFragment {
                         .create().show();
             }
         }
+    }
+
+    public boolean onPreferenceChange(Preference preference, Object value) {
+        if (preference == mLockAfter) {
+            int lockAfter = Integer.parseInt((String) value);
+            try {
+                Settings.Secure.putInt(getContentResolver(),
+                        Settings.Secure.LOCK_SCREEN_LOCK_AFTER_TIMEOUT, lockAfter);
+            } catch (NumberFormatException e) {
+                Log.e("SecuritySettings", "could not persist lockAfter timeout setting", e);
+            }
+        }
+        return true;
     }
 }

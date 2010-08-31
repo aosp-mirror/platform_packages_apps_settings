@@ -72,7 +72,7 @@
         <item>11</item>
     </string-array>
 
-    <!-- Display settings.  The delay in inactivity before the screen is turned off. These are shown ain a list dialog. -->
+    <!-- Display settings.  The delay in inactivity before the screen is turned off. These are shown in a list dialog. -->
     <string-array name="screen_timeout_entries">
         <item>15 seconds</item>
         <item>30 seconds</item>
@@ -97,7 +97,40 @@
         <!-- Do not translate. -->
         <item>1800000</item>
     </string-array>
+    
+    <!-- Security settings.  The delay after screen is turned off until device locks. 
+         These are shown in a list dialog. -->
+    <string-array name="lock_after_timeout_entries">
+        <item>immediately</item>
+        <item>5 seconds</item>
+        <item>15 seconds</item>
+        <item>30 seconds</item>
+        <item>1 minute</item>
+        <item>2 minutes</item>
+        <item>10 minutes</item>
+        <item>30 minutes</item>
+    </string-array>
 
+    <!-- Do not translate. -->
+    <string-array name="lock_after_timeout_values" translatable="false">
+        <!-- Do not translate. -->
+        <item>0</item>
+        <!-- Do not translate. -->
+        <item>5000</item>
+        <!-- Do not translate. -->
+        <item>15000</item>
+        <!-- Do not translate. -->
+        <item>30000</item>
+        <!-- Do not translate. -->
+        <item>60000</item>
+        <!-- Do not translate. -->
+        <item>120000</item>
+        <!-- Do not translate. -->
+        <item>600000</item>
+        <!-- Do not translate. -->
+        <item>1800000</item>
+    </string-array>
+    
     <!-- TTS settings -->
 
     <!-- Default speech rate choices -->
