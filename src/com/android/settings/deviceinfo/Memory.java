@@ -31,6 +31,7 @@ import android.content.DialogInterface.OnCancelListener;
 import android.content.pm.ApplicationInfo;
 import android.content.res.Resources;
 import android.os.Bundle;
+import android.hardware.Usb;
 import android.os.Environment;
 import android.os.IBinder;
 import android.os.RemoteException;
@@ -39,8 +40,10 @@ import android.os.StatFs;
 import android.os.storage.IMountService;
 import android.os.storage.StorageEventListener;
 import android.os.storage.StorageManager;
+import android.preference.CheckBoxPreference;
 import android.preference.Preference;
 import android.preference.PreferenceScreen;
+import android.provider.Settings;
 import android.text.format.Formatter;
 import android.util.Log;
 import android.widget.Toast;
@@ -60,6 +63,8 @@ public class Memory extends SettingsPreferenceFragment implements OnCancelListen
 
     private static final String MEMORY_SD_FORMAT = "memory_sd_format";
 
+    private static final String PTP_MODE_TOGGLE = "ptp_mode_toggle";
+
     private static final int DLG_CONFIRM_UNMOUNT = 1;
     private static final int DLG_ERROR_UNMOUNT = 2;
 
@@ -69,6 +74,7 @@ public class Memory extends SettingsPreferenceFragment implements OnCancelListen
     private Preference mSdAvail;
     private Preference mSdMountToggle;
     private Preference mSdFormat;
+    private CheckBoxPreference mPtpModeToggle;
     
     // Access using getMountService()
     private IMountService mMountService = null;
@@ -91,6 +97,16 @@ public class Memory extends SettingsPreferenceFragment implements OnCancelListen
         mSdAvail = findPreference(MEMORY_SD_AVAIL);
         mSdMountToggle = findPreference(MEMORY_SD_MOUNT_TOGGLE);
         mSdFormat = findPreference(MEMORY_SD_FORMAT);
+
+        mPtpModeToggle = (CheckBoxPreference)findPreference(PTP_MODE_TOGGLE);
+        if (Usb.isFunctionSupported(Usb.USB_FUNCTION_MTP)) {
+            mPtpModeToggle.setChecked(Settings.System.getInt(
+                    getContentResolver(),
+                    Settings.System.USE_PTP_INTERFACE, 0) != 0);
+        } else {
+            // hide the PTP mode toggle checkbox if MTP is not supported
+            getPreferenceScreen().removePreference(mPtpModeToggle);
+        }
     }
     
     @Override
@@ -157,8 +173,13 @@ public class Memory extends SettingsPreferenceFragment implements OnCancelListen
             intent.setClass(getActivity(), com.android.settings.MediaFormat.class);
             startActivity(intent);
             return true;
+        } else if (preference == mPtpModeToggle) {
+            Settings.System.putInt(getContentResolver(),
+                    Settings.System.USE_PTP_INTERFACE,
+                    mPtpModeToggle.isChecked() ? 1 : 0);
+            return true;
         }
-        
+
         return false;
     }
      
