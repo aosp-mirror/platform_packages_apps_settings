@@ -39,6 +39,9 @@
             style="?android:attr/preferenceInformationStyle" 
             android:title="@string/memory_available"
             android:summary="00"/>
+        <CheckBoxPreference android:key="ptp_mode_toggle"
+            android:title="@string/ptp_mode"
+            android:summary="@string/ptp_mode_summary"/>
     </PreferenceCategory>
 
 </PreferenceScreen>
