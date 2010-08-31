@@ -51,11 +51,9 @@ import android.os.StatFs;
 import android.os.storage.IMountService;
 import android.os.storage.StorageEventListener;
 import android.os.storage.StorageManager;
-import android.preference.CheckBoxPreference;
 import android.preference.Preference;
 import android.preference.PreferenceGroup;
 import android.preference.PreferenceScreen;
-import android.provider.Settings;
 import android.text.format.Formatter;
 import android.util.Log;
 import android.widget.Toast;
@@ -77,8 +75,6 @@ public class Memory extends SettingsPreferenceFragment implements OnCancelListen
     private static final String MEMORY_SD_FORMAT = "memory_sd_format";
 
     private static final String MEMORY_SD_GROUP = "memory_sd";
-
-    private static final String PTP_MODE_TOGGLE = "ptp_mode_toggle";
 
     private static final String MEMORY_INTERNAL_SIZE = "memory_internal_size";
 
@@ -122,8 +118,6 @@ public class Memory extends SettingsPreferenceFragment implements OnCancelListen
     private boolean mMeasured = false;
 
     boolean mSdMountToggleAdded = true;
-
-    private CheckBoxPreference mPtpModeToggle;
     
     // Access using getMountService()
     private IMountService mMountService = null;
@@ -391,16 +385,6 @@ public class Memory extends SettingsPreferenceFragment implements OnCancelListen
             mSdMountPreferenceGroup.removePreference(mSdMountToggle);
         }
 
-        mPtpModeToggle = (CheckBoxPreference)findPreference(PTP_MODE_TOGGLE);
-        if (UsbManager.isFunctionSupported(UsbManager.USB_FUNCTION_MTP)) {
-            mPtpModeToggle.setChecked(Settings.System.getInt(
-                    getContentResolver(),
-                    Settings.System.USE_PTP_INTERFACE, 0) != 0);
-        } else {
-            // hide the PTP mode toggle checkbox if MTP is not supported
-            getPreferenceScreen().removePreference(mPtpModeToggle);
-        }
-
         mInternalSize = findPreference(MEMORY_INTERNAL_SIZE);
         mInternalAvail = findPreference(MEMORY_INTERNAL_AVAIL);
         mInternalMediaUsage = findPreference(MEMORY_INTERNAL_MEDIA);
@@ -484,11 +468,6 @@ public class Memory extends SettingsPreferenceFragment implements OnCancelListen
             Intent intent = new Intent(Intent.ACTION_VIEW);
             intent.setClass(getActivity(), com.android.settings.MediaFormat.class);
             startActivity(intent);
-            return true;
-        } else if (preference == mPtpModeToggle) {
-            Settings.System.putInt(getContentResolver(),
-                    Settings.System.USE_PTP_INTERFACE,
-                    mPtpModeToggle.isChecked() ? 1 : 0);
             return true;
         }
 
