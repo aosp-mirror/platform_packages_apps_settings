@@ -433,8 +433,7 @@ public class TetherSettings extends PreferenceActivity {
                     mBluetoothSettings.setEnabled(true);
                 }
 
-                mBluetoothPan.setBluetoothTethering(true,
-                        BluetoothPan.NAP_ROLE, BluetoothPan.NAP_BRIDGE);
+                mBluetoothPan.setBluetoothTethering(true);
                 mBluetoothTether.setSummary(R.string.bluetooth_tethering_available_subtext);
             } else {
                 boolean errored = false;
@@ -448,9 +447,7 @@ public class TetherSettings extends PreferenceActivity {
                     errored = true;
                 }
 
-                mBluetoothPan.setBluetoothTethering(false,
-                        BluetoothPan.NAP_ROLE, BluetoothPan.NAP_BRIDGE);
-
+                mBluetoothPan.setBluetoothTethering(false);
                 mBluetoothSettings.setEnabled(false);
                 if (errored) {
                     mBluetoothTether.setSummary(R.string.bluetooth_tethering_errored_subtext);
