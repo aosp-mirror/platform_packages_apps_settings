@@ -16,18 +16,17 @@
 
 package com.android.settings.wifi;
 
+import com.android.settings.R;
+
 import android.app.Activity;
 import android.net.NetworkInfo.DetailedState;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.Window;
 import android.widget.Button;
 import android.widget.ProgressBar;
 import android.widget.TextView;
-
-import com.android.settings.R;
 
 import java.util.EnumMap;
 

@@ -16,6 +16,10 @@
 
 package com.android.settings.wifi;
 
+import com.android.settings.ProgressCategoryBase;
+import com.android.settings.R;
+import com.android.settings.SettingsPreferenceFragment;
+
 import android.app.Activity;
 import android.content.BroadcastReceiver;
 import android.content.Context;
@@ -47,16 +51,9 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.View.OnClickListener;
 import android.widget.AdapterView.AdapterContextMenuInfo;
 import android.widget.Button;
-import android.widget.ProgressBar;
-import android.widget.TextView;
 import android.widget.Toast;
-
-import com.android.settings.ProgressCategoryBase;
-import com.android.settings.R;
-import com.android.settings.SettingsPreferenceFragment;
 
 import java.util.Collection;
 import java.util.List;

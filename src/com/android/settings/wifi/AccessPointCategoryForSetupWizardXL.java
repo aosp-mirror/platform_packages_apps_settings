@@ -16,11 +16,11 @@
 
 package com.android.settings.wifi;
 
-import android.content.Context;
-import android.util.AttributeSet;
-
 import com.android.settings.ProgressCategoryBase;
 import com.android.settings.R;
+
+import android.content.Context;
+import android.util.AttributeSet;
 
 public class AccessPointCategoryForSetupWizardXL extends ProgressCategoryBase {
     public AccessPointCategoryForSetupWizardXL(Context context, AttributeSet attrs) {

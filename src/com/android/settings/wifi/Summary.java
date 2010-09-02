@@ -16,10 +16,10 @@
 
 package com.android.settings.wifi;
 
+import com.android.settings.R;
+
 import android.content.Context;
 import android.net.NetworkInfo.DetailedState;
-
-import com.android.settings.R;
 
 class Summary {
     static String get(Context context, String ssid, DetailedState state) {

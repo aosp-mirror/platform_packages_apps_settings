@@ -16,6 +16,8 @@
 
 package com.android.settings.wifi;
 
+import com.android.settings.R;
+
 import android.content.Context;
 import android.content.DialogInterface;
 import android.preference.Preference;
@@ -23,8 +25,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-
-import com.android.settings.R;
 
 /**
  * Preference letting users modify a setting for Wifi network. This work as an alternative UI

@@ -16,6 +16,8 @@
 
 package com.android.settings.wifi;
 
+import com.android.settings.R;
+
 import android.content.Context;
 import android.net.NetworkInfo.DetailedState;
 import android.net.wifi.ScanResult;
@@ -26,8 +28,6 @@ import android.net.wifi.WifiManager;
 import android.preference.Preference;
 import android.view.View;
 import android.widget.ImageView;
-
-import com.android.settings.R;
 
 import java.util.Comparator;
 
