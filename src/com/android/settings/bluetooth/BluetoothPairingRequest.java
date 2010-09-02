@@ -27,6 +27,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.res.Resources;
 import android.text.TextUtils;
+import android.os.PowerManager;
 
 /**
  * BluetoothPairingRequest is a receiver for any Bluetooth pairing request. It
@@ -61,9 +62,13 @@ public class BluetoothPairingRequest extends BroadcastReceiver {
             pairingIntent.setAction(BluetoothDevice.ACTION_PAIRING_REQUEST);
             pairingIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 
+            PowerManager powerManager =
+                    (PowerManager)context.getSystemService(Context.POWER_SERVICE);
             String deviceAddress = device != null ? device.getAddress() : null;
-            if (localManager.shouldShowDialogInForeground(deviceAddress)) {
-                // Since the BT-related activity is in the foreground, just open the dialog
+            if (powerManager.isScreenOn() &&
+                localManager.shouldShowDialogInForeground(deviceAddress)) {
+                // Since the screen is on and the BT-related activity is in the foreground,
+                // just open the dialog
                 context.startActivity(pairingIntent);
 
             } else {
@@ -88,6 +93,7 @@ public class BluetoothPairingRequest extends BroadcastReceiver {
                         res.getString(R.string.bluetooth_notif_message) + name,
                         pending);
                 notification.flags |= Notification.FLAG_AUTO_CANCEL;
+                notification.defaults |= Notification.DEFAULT_SOUND;
 
                 NotificationManager manager = (NotificationManager)
                         context.getSystemService(Context.NOTIFICATION_SERVICE);
