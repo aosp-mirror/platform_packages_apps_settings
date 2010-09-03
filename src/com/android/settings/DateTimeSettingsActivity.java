@@ -274,10 +274,6 @@ public class DateTimeSettingsActivity
             set24Hour(((CheckBoxPreference)mTime24Pref).isChecked());
             updateTimeAndDateDisplay();
             timeUpdated();
-        } else if (preference == mTimeZone) {
-            Intent intent = new Intent();
-            intent.setClass(this, ZoneList.class);
-            startActivityForResult(intent, 0);
         }
         return false;
     }

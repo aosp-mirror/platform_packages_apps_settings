@@ -21,9 +21,10 @@ import android.view.View;
 import android.view.Window;
 import android.view.View.OnClickListener;
 
-public class DateTimeSettingsSetupWizard extends DateTimeSettingsActivity implements OnClickListener {
+public class DateTimeSettingsSetupWizard extends DateTimeSettingsActivity
+        implements OnClickListener {
     private View mNextButton;
-    
+
     @Override
     protected void onCreate(Bundle icicle) {
         requestWindowFeature(Window.FEATURE_NO_TITLE); 

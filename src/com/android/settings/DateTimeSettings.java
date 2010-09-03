@@ -41,8 +41,7 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.TimeZone;
 
-public class DateTimeSettings 
- extends SettingsPreferenceFragment
+public class DateTimeSettings extends SettingsPreferenceFragment
         implements OnSharedPreferenceChangeListener,
                 TimePickerDialog.OnTimeSetListener , DatePickerDialog.OnDateSetListener {
 
@@ -152,6 +151,7 @@ public class DateTimeSettings
         mDateFormat.setSummary(shortDateFormat.format(dummyDate));
     }
 
+    @Override
     public void onDateSet(DatePicker view, int year, int month, int day) {
         Calendar c = Calendar.getInstance();
 
@@ -166,6 +166,7 @@ public class DateTimeSettings
         updateTimeAndDateDisplay();
     }
 
+    @Override
     public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
         Calendar c = Calendar.getInstance();
 
@@ -183,6 +184,7 @@ public class DateTimeSettings
         // SystemClock time.
     }
 
+    @Override
     public void onSharedPreferenceChanged(SharedPreferences preferences, String key) {
         if (key.equals(KEY_DATE_FORMAT)) {
             String format = preferences.getString(key, 
@@ -274,12 +276,8 @@ public class DateTimeSettings
             set24Hour(((CheckBoxPreference)mTime24Pref).isChecked());
             updateTimeAndDateDisplay();
             timeUpdated();
-        } else if (preference == mTimeZone) {
-            Intent intent = new Intent();
-            intent.setClass(getActivity(), ZoneList.class);
-            startActivityForResult(intent, 0);
         }
-        return false;
+        return super.onPreferenceTreeClick(preferenceScreen, preference);
     }
     
     @Override
