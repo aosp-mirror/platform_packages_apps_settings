@@ -666,7 +666,7 @@ public class RunningState {
                 proc.mDependentProcesses.clear();
             }
             
-            if ((pi.flags&ActivityManager.RunningAppProcessInfo.FLAG_HEAVY_WEIGHT) != 0) {
+            if ((pi.flags&ActivityManager.RunningAppProcessInfo.FLAG_CANT_SAVE_STATE) != 0) {
                 if (!mHeavyProcesses.contains(proc)) {
                     changed = true;
                     mHeavyProcesses.add(proc);
