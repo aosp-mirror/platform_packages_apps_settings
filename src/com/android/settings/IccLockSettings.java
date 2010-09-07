@@ -61,6 +61,11 @@ public class IccLockSettings extends PreferenceActivity
     private static final String DIALOG_PIN = "dialogPin";
     private static final String DIALOG_ERROR = "dialogError";
     private static final String ENABLE_TO_STATE = "enableState";
+
+    // Save and restore inputted PIN code when configuration changed
+    // (ex. portrait<-->landscape) during change PIN code
+    private static final String OLD_PINCODE = "oldPinCode";
+    private static final String NEW_PINCODE = "newPinCode";
     
     private static final int MIN_PIN_LENGTH = 4;
     private static final int MAX_PIN_LENGTH = 8;
@@ -133,6 +138,23 @@ public class IccLockSettings extends PreferenceActivity
             mPin = savedInstanceState.getString(DIALOG_PIN);
             mError = savedInstanceState.getString(DIALOG_ERROR);
             mToState = savedInstanceState.getBoolean(ENABLE_TO_STATE);
+
+            // Restore inputted PIN code
+            switch (mDialogState) {
+                case ICC_NEW_MODE:
+                    mOldPin = savedInstanceState.getString(OLD_PINCODE);
+                    break;
+
+                case ICC_REENTER_MODE:
+                    mOldPin = savedInstanceState.getString(OLD_PINCODE);
+                    mNewPin = savedInstanceState.getString(NEW_PINCODE);
+                    break;
+
+                case ICC_LOCK_MODE:
+                case ICC_OLD_MODE:
+                default:
+                    break;
+            }
         }
 
         mPinDialog.setOnPinEnteredListener(this);
@@ -170,6 +192,23 @@ public class IccLockSettings extends PreferenceActivity
             out.putString(DIALOG_PIN, mPinDialog.getEditText().getText().toString());
             out.putString(DIALOG_ERROR, mError);
             out.putBoolean(ENABLE_TO_STATE, mToState);
+
+            // Save inputted PIN code
+            switch (mDialogState) {
+                case ICC_NEW_MODE:
+                    out.putString(OLD_PINCODE, mOldPin);
+                    break;
+
+                case ICC_REENTER_MODE:
+                    out.putString(OLD_PINCODE, mOldPin);
+                    out.putString(NEW_PINCODE, mNewPin);
+                    break;
+
+                case ICC_LOCK_MODE:
+                case ICC_OLD_MODE:
+                default:
+                    break;
+            }
         } else {
             super.onSaveInstanceState(out);
         }
