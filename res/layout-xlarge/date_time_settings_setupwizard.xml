@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright (C) 2010 The Android Open Source Project
+
+     Licensed under the Apache License, Version 2.0 (the "License");
+     you may not use this file except in compliance with the License.
+     You may obtain a copy of the License at
+
+     http://www.apache.org/licenses/LICENSE-2.0
+
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+  -->
+<!-- TODO: too many LinearLayout. -->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="vertical"
+              android:layout_width="fill_parent"
+              android:layout_height="fill_parent"
+              android:paddingTop="70dip"
+              android:paddingBottom="40dip"
+              android:paddingLeft="60dip"
+              android:paddingRight="60dip">
+
+    <!-- Title: Set date & time-->
+    <TextView android:id="@+id/title"
+              android:layout_width="fill_parent"
+              android:layout_height="wrap_content"
+              android:layout_weight="0"
+              android:gravity="center"
+              android:layout_marginBottom="10dip"
+              android:layout_alignParentTop="true"
+              android:textSize="64dip"
+              android:textColor="#FF30FF30"
+              android:text="@string/date_and_time_settings_title"/>
+
+    <LinearLayout android:id="@+id/main"
+                  android:orientation="horizontal"
+                  android:layout_width="fill_parent"
+                  android:layout_height="fill_parent"
+                  android:layout_weight="1">
+        <!-- Left side: time zone setting -->
+        <LinearLayout android:orientation="vertical"
+                      android:layout_width="0px"
+                      android:layout_weight="1"
+                      android:layout_height="fill_parent">
+            <!-- TODO: replace with appropratie UI component -->
+            <CheckBox android:id="@+id/time_zone_auto"
+                      android:layout_width="wrap_content"
+                      android:layout_height="wrap_content"
+                      android:gravity="right|center_horizontal"
+                      android:layout_marginBottom="5dip"
+                      android:textSize="32dip"
+                      android:text="@string/time_zone_auto_stub"/>
+
+            <!-- text should manually be set. -->
+            <Button android:id="@+id/current_time_zone"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:textSize="24dip"
+                    android:layout_alignParentTop="true" />
+            <LinearLayout android:id="@+id/zone_picker"
+                          android:orientation="vertical"
+                          android:layout_width="fill_parent"
+                          android:layout_height="fill_parent"
+                          android:paddingLeft="10dip"
+                          android:paddingBottom="20dip"
+                          android:gravity="center"
+                          android:visibility="gone"
+                          android:clickable="true">
+                <fragment android:id="@+id/zone_picker_fragment"
+                          class="com.android.settings.ZonePicker"
+                          android:layout_width="fill_parent"
+                          android:layout_height="wrap_content" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <!-- Right side: date & time setting -->
+        <LinearLayout android:orientation="vertical"
+                      android:layout_width="0px"
+                      android:layout_weight="1"
+                      android:layout_height="fill_parent">
+
+            <!-- TODO: replace with appropratie UI component -->
+            <CheckBox android:id="@+id/date_time_auto"
+                      android:layout_width="wrap_content"
+                      android:layout_height="wrap_content"
+                      android:gravity="right|center_horizontal"
+                      android:textSize="32dip"
+                      android:text="@string/date_time_auto" />
+
+            <LinearLayout android:orientation="horizontal"
+                          android:layout_width="fill_parent"
+                          android:layout_height="wrap_content">
+                <TimePicker android:id="@+id/time_picker"
+                            android:layout_width="0px"
+                            android:layout_weight=".5"
+                            android:layout_height="wrap_content"
+                            android:visibility="visible"/>
+                <DatePicker android:id="@+id/date_picker"
+                            android:layout_width="0px"
+                            android:layout_weight=".5"
+                            android:layout_height="wrap_content"/>
+            </LinearLayout>
+        </LinearLayout>
+    </LinearLayout>
+
+    <LinearLayout android:id="@+id/bottom"
+                  android:orientation="horizontal"
+                  android:layout_width="fill_parent"
+                  android:gravity="center"
+                  android:layout_height="wrap_content"
+                  android:layout_weight="0">
+        <Button android:id="@+id/skip_button"
+                android:layout_width="300dip"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_alignParentLeft="true"
+                android:layout_marginRight="50dip"
+                android:textSize="32dip"
+                android:text="@string/skip_label"/>
+
+        <Button android:id="@+id/next_button"
+                android:layout_width="300dip"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_alignParentRight="true"
+                android:layout_marginLeft="50dip"
+                android:textSize="32dip"
+                android:text="@string/next_label" />
+    </LinearLayout>
+</LinearLayout>

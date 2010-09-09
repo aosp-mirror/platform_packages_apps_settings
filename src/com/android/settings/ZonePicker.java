@@ -52,7 +52,7 @@ public class ZonePicker extends ListFragment {
 
     public static interface ZoneSelectionListener {
         // You can add any argument if you really need it...
-        public void onZoneSelected();
+        public void onZoneSelected(TimeZone tz);
     }
 
     private static final String KEY_ID = "id";
@@ -235,9 +235,13 @@ public class ZonePicker extends ListFragment {
         // Update the system timezone value
         final Activity activity = getActivity();
         AlarmManager alarm = (AlarmManager) activity.getSystemService(Context.ALARM_SERVICE);
-        alarm.setTimeZone((String) map.get(KEY_ID));
+        String tzId = (String) map.get(KEY_ID);
+        alarm.setTimeZone(tzId);
+        final TimeZone tz = TimeZone.getTimeZone(tzId);
         if (mListener != null) {
-            mListener.onZoneSelected();
+            mListener.onZoneSelected(tz);
+        } else {
+            getActivity().onBackPressed();
         }
     }
 

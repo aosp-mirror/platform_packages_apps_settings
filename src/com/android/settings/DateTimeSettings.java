@@ -43,12 +43,15 @@ import java.util.TimeZone;
 
 public class DateTimeSettings extends SettingsPreferenceFragment
         implements OnSharedPreferenceChangeListener,
-                TimePickerDialog.OnTimeSetListener , DatePickerDialog.OnDateSetListener {
+                TimePickerDialog.OnTimeSetListener, DatePickerDialog.OnDateSetListener {
 
     private static final String HOURS_12 = "12";
     private static final String HOURS_24 = "24";
     
+    // Used for showing the current date format, which looks like "12/31/2010", "2010/12/13", etc.
+    // The date value is dummy (independent of actual date).
     private Calendar mDummyDate;
+
     private static final String KEY_DATE_FORMAT = "date_format";
     private static final String KEY_AUTO_TIME = "auto_time";
 
@@ -143,42 +146,25 @@ public class DateTimeSettings extends SettingsPreferenceFragment
     
     private void updateTimeAndDateDisplay() {
         java.text.DateFormat shortDateFormat = DateFormat.getDateFormat(getActivity());
-        Date now = Calendar.getInstance().getTime();
+        final Calendar now = Calendar.getInstance();
         Date dummyDate = mDummyDate.getTime();
-        mTimePref.setSummary(DateFormat.getTimeFormat(getActivity()).format(now));
-        mTimeZone.setSummary(getTimeZoneText());
-        mDatePref.setSummary(shortDateFormat.format(now));
+        mTimePref.setSummary(DateFormat.getTimeFormat(getActivity()).format(now.getTime()));
+        mTimeZone.setSummary(getTimeZoneText(now.getTimeZone()));
+        mDatePref.setSummary(shortDateFormat.format(now.getTime()));
         mDateFormat.setSummary(shortDateFormat.format(dummyDate));
     }
 
     @Override
     public void onDateSet(DatePicker view, int year, int month, int day) {
-        Calendar c = Calendar.getInstance();
-
-        c.set(Calendar.YEAR, year);
-        c.set(Calendar.MONTH, month);
-        c.set(Calendar.DAY_OF_MONTH, day);
-        long when = c.getTimeInMillis();
-
-        if (when / 1000 < Integer.MAX_VALUE) {
-            SystemClock.setCurrentTimeMillis(when);
-        }
+        setDate(year, month, day);
         updateTimeAndDateDisplay();
     }
 
     @Override
     public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
-        Calendar c = Calendar.getInstance();
-
-        c.set(Calendar.HOUR_OF_DAY, hourOfDay);
-        c.set(Calendar.MINUTE, minute);
-        long when = c.getTimeInMillis();
-
-        if (when / 1000 < Integer.MAX_VALUE) {
-            SystemClock.setCurrentTimeMillis(when);
-        }
+        setTime(hourOfDay, minute);
         updateTimeAndDateDisplay();
-        
+
         // We don't need to call timeUpdated() here because the TIME_CHANGED
         // broadcast is sent by the AlarmManager as a side effect of setting the
         // SystemClock time.
@@ -317,18 +303,34 @@ public class DateTimeSettings extends SettingsPreferenceFragment
         }
     }
 
-    private void setDateFormat(String format) {
-        if (format.length() == 0) {
-            format = null;
-        }
-
-        Settings.System.putString(getContentResolver(), Settings.System.DATE_FORMAT, format);        
-    }
-    
     /*  Helper routines to format timezone */
-    
-    private String getTimeZoneText() {
-        TimeZone    tz = java.util.Calendar.getInstance().getTimeZone();
+
+    /* package */ static void setDate(int year, int month, int day) {
+        Calendar c = Calendar.getInstance();
+
+        c.set(Calendar.YEAR, year);
+        c.set(Calendar.MONTH, month);
+        c.set(Calendar.DAY_OF_MONTH, day);
+        long when = c.getTimeInMillis();
+
+        if (when / 1000 < Integer.MAX_VALUE) {
+            SystemClock.setCurrentTimeMillis(when);
+        }
+    }
+
+    /* package */ static void setTime(int hourOfDay, int minute) {
+        Calendar c = Calendar.getInstance();
+
+        c.set(Calendar.HOUR_OF_DAY, hourOfDay);
+        c.set(Calendar.MINUTE, minute);
+        long when = c.getTimeInMillis();
+
+        if (when / 1000 < Integer.MAX_VALUE) {
+            SystemClock.setCurrentTimeMillis(when);
+        }
+    }
+
+    /* package */ static String getTimeZoneText(TimeZone tz) {
         boolean daylight = tz.inDaylightTime(new Date());
         StringBuilder sb = new StringBuilder();
 
@@ -340,7 +342,7 @@ public class DateTimeSettings extends SettingsPreferenceFragment
         return sb.toString();        
     }
 
-    private char[] formatOffset(int off) {
+    private static char[] formatOffset(int off) {
         off = off / 1000 / 60;
 
         char[] buf = new char[9];
