@@ -38,14 +38,13 @@
         android:title="@string/bluetooth_tether_checkbox_text"
         android:persistent="false" />
 
+    <!-- BluetoothSettings will have extra argument to know this request is
+         for tethering, not for BT setting in general. -->
     <PreferenceScreen
+        android:fragment="com.android.settings.bluetooth.BluetoothSettings"
         android:key="bluetooth_tether_settings"
         android:title="@string/bluetooth_tether_settings_text"
         android:summary="@string/bluetooth_tether_settings_subtext" >
-        <intent
-            android:action="com.android.settings.bluetooth.action.LAUNCH_TETHER_PICKER"
-            android:targetPackage="com.android.settings"
-            android:targetClass="com.android.settings.bluetooth.BluetoothSettings" />
     </PreferenceScreen>
 
     <PreferenceScreen

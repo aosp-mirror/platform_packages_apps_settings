@@ -18,8 +18,11 @@ package com.android.settings.bluetooth;
 
 import com.android.settings.ProgressCategory;
 import com.android.settings.R;
+import com.android.settings.SettingsPreferenceFragment;
+import com.android.settings.UserLeaveHintListener;
 import com.android.settings.bluetooth.LocalBluetoothProfileManager.Profile;
 
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothClass;
@@ -27,28 +30,22 @@ import android.bluetooth.BluetoothDevice;
 import android.bluetooth.BluetoothDevicePicker;
 import android.bluetooth.BluetoothPan;
 import android.bluetooth.BluetoothUuid;
-import android.bluetooth.IBluetooth;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.Bundle;
-import android.os.IBinder;
 import android.os.ParcelUuid;
-import android.os.RemoteException;
-import android.os.ServiceManager;
 import android.preference.CheckBoxPreference;
 import android.preference.Preference;
-import android.preference.PreferenceActivity;
 import android.preference.PreferenceScreen;
-import android.server.BluetoothService;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.ContextMenu;
+import android.view.ContextMenu.ContextMenuInfo;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.ContextMenu.ContextMenuInfo;
 import android.widget.AdapterView.AdapterContextMenuInfo;
 
 import java.util.List;
@@ -58,8 +55,8 @@ import java.util.WeakHashMap;
  * BluetoothSettings is the Settings screen for Bluetooth configuration and
  * connection management.
  */
-public class BluetoothSettings extends PreferenceActivity
-        implements LocalBluetoothManager.Callback {
+public class BluetoothSettings extends SettingsPreferenceFragment
+        implements LocalBluetoothManager.Callback, UserLeaveHintListener {
 
     private static final String TAG = "BluetoothSettings";
 
@@ -73,6 +70,7 @@ public class BluetoothSettings extends PreferenceActivity
     private static final int SCREEN_TYPE_DEVICEPICKER = 1;
     private static final int SCREEN_TYPE_TETHERING = 2;
 
+    public static final String ACTION = "bluetooth_action";
     public static final String ACTION_LAUNCH_TETHER_PICKER =
         "com.android.settings.bluetooth.action.LAUNCH_TETHER_PICKER";
 
@@ -123,11 +121,19 @@ public class BluetoothSettings extends PreferenceActivity
     };
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+    }
 
-        mLocalManager = LocalBluetoothManager.getInstance(this);
-        if (mLocalManager == null) finish();
+    @Override
+    public void onActivityCreated(Bundle savedInstanceState) {
+        // We delay calling super.onActivityCreated(). See WifiSettings.java for more info.
+
+        final Activity activity = getActivity();
+        mLocalManager = LocalBluetoothManager.getInstance(activity);
+        if (mLocalManager == null) {
+            finish();
+        }
 
         // Note:
         // If an application wish to show the BT device list, it can send an
@@ -139,8 +145,13 @@ public class BluetoothSettings extends PreferenceActivity
         // -DEVICE_PICKER_NEED_AUTH: to show if bonding procedure needed.
 
         mFilterType = BluetoothDevicePicker.FILTER_TYPE_ALL;
-        Intent intent = getIntent();
-        String action = intent.getAction();
+        final Intent intent = activity.getIntent();
+
+        // This additional argument comes from PreferenceScreen (See TetherSettings.java).
+        String action = getArguments().getString(ACTION);
+        if (TextUtils.isEmpty(action)) {
+            action = intent.getAction();
+        }
 
         if (action.equals(BluetoothDevicePicker.ACTION_LAUNCH)) {
             mScreenType = SCREEN_TYPE_DEVICEPICKER;
@@ -150,23 +161,23 @@ public class BluetoothSettings extends PreferenceActivity
             mLaunchPackage = intent.getStringExtra(BluetoothDevicePicker.EXTRA_LAUNCH_PACKAGE);
             mLaunchClass = intent.getStringExtra(BluetoothDevicePicker.EXTRA_LAUNCH_CLASS);
 
-            setTitle(getString(R.string.device_picker));
+            activity.setTitle(activity.getString(R.string.device_picker));
             addPreferencesFromResource(R.xml.device_picker);
         } else if (action.equals(ACTION_LAUNCH_TETHER_PICKER)){
             mScreenType = SCREEN_TYPE_TETHERING;
             mFilterType = BluetoothDevicePicker.FILTER_TYPE_PANU;
 
-            setTitle(getString(R.string.device_picker));
+            activity.setTitle(activity.getString(R.string.device_picker));
             addPreferencesFromResource(R.xml.device_picker);
         } else {
             addPreferencesFromResource(R.xml.bluetooth_settings);
 
             mEnabler = new BluetoothEnabler(
-                    this,
+                    activity,
                     (CheckBoxPreference) findPreference(KEY_BT_CHECKBOX));
 
             mDiscoverableEnabler = new BluetoothDiscoverableEnabler(
-                    this,
+                    activity,
                     (CheckBoxPreference) findPreference(KEY_BT_DISCOVERABLE));
 
             mNamePreference = (BluetoothNamePreference) findPreference(KEY_BT_NAME);
@@ -177,10 +188,12 @@ public class BluetoothSettings extends PreferenceActivity
         mDeviceList = (ProgressCategory) findPreference(KEY_BT_DEVICE_LIST);
 
         registerForContextMenu(getListView());
+
+        super.onActivityCreated(savedInstanceState);
     }
 
     @Override
-    protected void onResume() {
+    public void onResume() {
         super.onResume();
 
         // Repopulate (which isn't too bad since it's cached in the settings
@@ -203,18 +216,17 @@ public class BluetoothSettings extends PreferenceActivity
         IntentFilter intentFilter = new IntentFilter();
         intentFilter.addAction(BluetoothAdapter.ACTION_STATE_CHANGED);
         intentFilter.addAction(BluetoothDevice.ACTION_BOND_STATE_CHANGED);
-        registerReceiver(mReceiver, intentFilter);
-        mLocalManager.setForegroundActivity(this);
+        getActivity().registerReceiver(mReceiver, intentFilter);
+        mLocalManager.setForegroundActivity(getActivity());
     }
 
     @Override
-    protected void onPause() {
+    public void onPause() {
         super.onPause();
-
         mLocalManager.setForegroundActivity(null);
         mDevicePreferenceMap.clear();
         mDeviceList.removeAll();
-        unregisterReceiver(mReceiver);
+        getActivity().unregisterReceiver(mReceiver);
 
         mLocalManager.unregisterCallback(this);
         if (mScreenType == SCREEN_TYPE_SETTINGS) {
@@ -225,8 +237,7 @@ public class BluetoothSettings extends PreferenceActivity
     }
 
     @Override
-    protected void onUserLeaveHint() {
-        super.onUserLeaveHint();
+    public void onUserLeaveHint() {
         mLocalManager.stopScanning();
     }
 
@@ -390,10 +401,10 @@ public class BluetoothSettings extends PreferenceActivity
         BluetoothDevicePreference preference;
         if (mScreenType == SCREEN_TYPE_TETHERING) {
             preference = new BluetoothDevicePreference(
-                    this, cachedDevice, CachedBluetoothDevice.PAN_PROFILE);
+                    getActivity(), cachedDevice, CachedBluetoothDevice.PAN_PROFILE);
         } else {
             preference = new BluetoothDevicePreference(
-                    this, cachedDevice, CachedBluetoothDevice.OTHER_PROFILES);
+                    getActivity(), cachedDevice, CachedBluetoothDevice.OTHER_PROFILES);
         }
         mDeviceList.addPreference(preference);
         mDevicePreferenceMap.put(cachedDevice, preference);
@@ -421,22 +432,23 @@ public class BluetoothSettings extends PreferenceActivity
     }
 
     private void onPanDevicePicked() {
+        final Activity activity = getActivity();
         final LocalBluetoothProfileManager profileManager =
             LocalBluetoothProfileManager.getProfileManager(mLocalManager, Profile.PAN);
         int status = profileManager.getConnectionStatus(mSelectedDevice);
         if (SettingsBtStatus.isConnectionStatusConnected(status)) {
             String name = mSelectedDevice.getName();
             if (TextUtils.isEmpty(name)) {
-                name = getString(R.string.bluetooth_device);
+                name = activity.getString(R.string.bluetooth_device);
             }
-            String message = getString(R.string.bluetooth_untether_blank, name);
+            String message = activity.getString(R.string.bluetooth_untether_blank, name);
             DialogInterface.OnClickListener disconnectListener =
                 new DialogInterface.OnClickListener() {
                 public void onClick(DialogInterface dialog, int which) {
                     profileManager.disconnect(mSelectedDevice);
                 }
             };
-            new AlertDialog.Builder(this)
+            new AlertDialog.Builder(activity)
                 .setTitle(name)
                 .setMessage(message)
                 .setPositiveButton(android.R.string.ok, disconnectListener)
@@ -445,10 +457,10 @@ public class BluetoothSettings extends PreferenceActivity
                 .show();
         } else if (status == SettingsBtStatus.CONNECTION_STATUS_DISCONNECTED) {
             if (profileManager.getConnectedDevices().size() >= BluetoothPan.MAX_CONNECTIONS) {
-                new AlertDialog.Builder(this)
+                new AlertDialog.Builder(activity)
                     .setIcon(android.R.drawable.ic_dialog_alert)
                     .setTitle(R.string.bluetooth_error_title)
-                    .setMessage(getString(R.string.bluetooth_tethering_overflow_error,
+                    .setMessage(activity.getString(R.string.bluetooth_tethering_overflow_error,
                             BluetoothPan.MAX_CONNECTIONS))
                     .setNegativeButton(android.R.string.ok, null)
                     .create()
@@ -466,6 +478,6 @@ public class BluetoothSettings extends PreferenceActivity
                 mLaunchPackage != null && mLaunchClass != null) {
             intent.setClassName(mLaunchPackage, mLaunchClass);
         }
-        sendBroadcast(intent);
+        getActivity().sendBroadcast(intent);
     }
 }

@@ -175,6 +175,10 @@ public class SettingsPreferenceFragment extends PreferenceFragment
         return mNextButton;
     }
 
+    public void finish() {
+        getActivity().onBackPressed();
+    }
+
     /**
      * Sets up Button Bar possibly required in the Fragment. Probably available only in
      * phones.

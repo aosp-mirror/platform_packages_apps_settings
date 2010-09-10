@@ -16,6 +16,7 @@
 
 package com.android.settings;
 
+import com.android.settings.bluetooth.BluetoothSettings;
 import com.android.settings.wifi.WifiApEnabler;
 
 import android.app.Activity;
@@ -34,6 +35,7 @@ import android.os.Environment;
 import android.preference.CheckBoxPreference;
 import android.preference.Preference;
 import android.preference.PreferenceScreen;
+import android.util.Log;
 import android.webkit.WebView;
 
 import java.io.InputStream;
@@ -385,7 +387,7 @@ public class TetherSettings extends SettingsPreferenceFragment {
     }
 
     @Override
-    public boolean onPreferenceTreeClick(PreferenceScreen preferenceScreen, Preference preference) {
+    public boolean onPreferenceTreeClick(PreferenceScreen screen, Preference preference) {
         if (preference == mUsbTether) {
             boolean newState = mUsbTether.isChecked();
 
@@ -457,11 +459,15 @@ public class TetherSettings extends SettingsPreferenceFragment {
                     mBluetoothTether.setSummary(R.string.bluetooth_tethering_off_subtext);
                 }
             }
+        } else if (preference == mBluetoothSettings) {
+            preference.getExtras().putString(BluetoothSettings.ACTION,
+                    BluetoothSettings.ACTION_LAUNCH_TETHER_PICKER);
         } else if (preference == mTetherHelp) {
             showDialog(DIALOG_TETHER_HELP);
+            return true;
         }
 
-        return super.onPreferenceTreeClick(preferenceScreen, preference);
+        return super.onPreferenceTreeClick(screen, preference);
     }
 
     private String findIface(String[] ifaces, String[] regexes) {

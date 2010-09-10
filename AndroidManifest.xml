@@ -168,9 +168,10 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".bluetooth.BluetoothSettings"
+        <activity-alias android:name=".bluetooth.BluetoothSettings"
                   android:label="@string/bluetooth_settings_title"
                   android:clearTaskOnLaunch="true"
+                  android:targetActivity="Settings"
                   >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -183,7 +184,7 @@
                 <action android:name="android.bluetooth.devicepicker.action.LAUNCH" />
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
-        </activity>
+        </activity-alias>
 
         <activity-alias android:name=".TetherSettings"
             android:clearTaskOnLaunch="true"
