@@ -609,7 +609,7 @@
     <string name="location_networks_disabled" msgid="2708968452901433980">"Afficher ma position dans les applications (comme Google Maps)"</string>
     <string name="location_neighborhood_level" msgid="4656658097932515921">"Position géographique déterminée par réseaux Wi-Fi et/ou mobile"</string>
     <string name="location_gps" msgid="6296125378829097831">"Utiliser les satellites GPS"</string>
-    <!-- outdated translation 6460740847018275745 -->     <string name="location_street_level" msgid="7456259025474443314">"Localisation à la rue près (décocher pour économiser la batterie)"</string>
+    <string name="location_street_level" msgid="7456259025474443314">"Lors de la géolocalisation, localisation à la rue près"</string>
     <string name="location_gps_disabled" msgid="6632537158777308128">"Localiser au niveau rue (requiert + de batterie et une vue dégagée)"</string>
     <string name="assisted_gps" msgid="4649317129586736885">"Utiliser le GPS assisté"</string>
     <string name="assisted_gps_enabled" msgid="8751899609589792803">"Utiliser le serveur pour assister le GPS (désactiver pour réduire l\'utilisation du réseau)"</string>
@@ -692,17 +692,15 @@
     <string name="application_size_label" msgid="5055196275624686382">"Application"</string>
     <string name="data_size_label" msgid="8679376373625710107">"Données"</string>
     <string name="uninstall_text" msgid="3644892466144802466">"Désinstaller"</string>
-    <!-- no translation found for disable_text (6544054052049395202) -->
-    <skip />
-    <!-- no translation found for enable_text (9217362512327828987) -->
-    <skip />
+    <string name="disable_text" msgid="6544054052049395202">"Désactiver"</string>
+    <string name="enable_text" msgid="9217362512327828987">"Activer"</string>
     <string name="clear_user_data_text" msgid="5597622864770098388">"Effacer les données"</string>
     <string name="app_factory_reset" msgid="6635744722502563022">"Désinstaller les mises à jour"</string>
     <string name="auto_launch_enable_text" msgid="2630656657744196691">"Vous avez choisi de lancer cette application par défaut pour certaines actions."</string>
     <string name="auto_launch_disable_text" msgid="7800385822185540166">"Aucun paramètre par défaut défini"</string>
     <string name="clear_activities" msgid="7408923511535174430">"Effacer les actions par défaut"</string>
     <string name="unknown" msgid="1592123443519355854">"Inconnu"</string>
-    <!-- outdated translation 8622029358896599842 -->     <string name="sort_order_alpha" msgid="1410278099123670628">"Trier"</string>
+    <string name="sort_order_alpha" msgid="1410278099123670628">"Trier par nom"</string>
     <string name="sort_order_size" msgid="7024513286636502362">"Trier par taille"</string>
     <string name="manage_space_text" msgid="8852711522447794676">"Gérer l\'espace"</string>
     <string name="filter" msgid="2018011724373033887">"Filtrer"</string>
@@ -711,10 +709,8 @@
     <string name="filter_apps_third_party" msgid="7786348047690140979">"Téléchargées"</string>
     <string name="filter_apps_running" msgid="7767071454371350486">"En cours d\'exécution"</string>
     <string name="filter_apps_onsdcard" msgid="1477351142334784771">"Sur la carte SD"</string>
-    <!-- no translation found for disabled (9206776641295849915) -->
-    <skip />
-    <!-- no translation found for no_applications (5190227407135243904) -->
-    <skip />
+    <string name="disabled" msgid="9206776641295849915">"Désactivée"</string>
+    <string name="no_applications" msgid="5190227407135243904">"Aucune application"</string>
     <string name="recompute_size" msgid="7722567982831691718">"Calcul de la taille..."</string>
     <string name="clear_data_dlg_title" msgid="4470209520936375508">"Supprimer"</string>
     <string name="clear_data_dlg_text" msgid="8368035073300828451">"Toutes les données de cette application vont être définitivement supprimées, y compris tous les fichiers, les paramètres, les comptes, les bases de données, etc."</string>
@@ -742,19 +738,18 @@
     <string name="invalid_location" msgid="4934491353200240499">"L\'emplacement d\'installation indiqué n\'est pas valide."</string>
     <string name="system_package" msgid="1030561474413022831">"Les mises à jour du système ne peuvent pas être installées sur des supports externes."</string>
     <string name="force_stop_dlg_title" msgid="4289453224368188476">"Forcer l\'arrêt"</string>
-    <!-- outdated translation 3381302041569982075 -->     <string name="force_stop_dlg_text" msgid="5157374701213502922">"Cette application sera immédiatement redémarrée. Voulez-vous vraiment forcer sa fermeture ?"</string>
+    <string name="force_stop_dlg_text" msgid="5157374701213502922">"Êtes-vous sûr ? Forcer l\'arrêt d\'une application peut entraîner des dysfonctionnements."</string>
     <string name="move_app_failed_dlg_title" msgid="4337731903265156405">"Déplacer l\'application"</string>
     <string name="move_app_failed_dlg_text" msgid="8824246817947643697">"Échec du déplacement de l\'application. <xliff:g id="REASON">%1$s</xliff:g>"</string>
     <string name="app_install_location_title" msgid="2068975150026852168">"Emplacement d\'installation souhaité"</string>
     <string name="app_install_location_summary" msgid="879753854530300436">"Modifiez l\'emplacement d\'installation par défaut pour les nouvelles applications."</string>
-    <!-- no translation found for storageuse_settings_title (5657014373502630403) -->
-    <skip />
+    <string name="storageuse_settings_title" msgid="5657014373502630403">"Utilisation du stockage"</string>
     <!-- no translation found for storageuse_settings_summary (2556057379120846792) -->
     <skip />
     <string name="runningservices_settings_title" msgid="8097287939865165213">"Services en cours d\'exécution"</string>
     <string name="runningservices_settings_summary" msgid="854608995821032748">"Afficher et contrôler les services en cours d\'exécution"</string>
     <string name="service_restarting" msgid="2242747937372354306">"Redémarrage en cours"</string>
-    <!-- outdated translation 6981216347270280598 -->     <string name="no_running_services" msgid="2059536495597645347">"Aucun service en cours d\'exécution"</string>
+    <string name="no_running_services" msgid="2059536495597645347">"Pas de services en cours"</string>
     <string name="service_started_by_app" msgid="6575184738671598131">"Service démarré par l\'application"</string>
     <!-- no translation found for service_client_name (4037193625611815517) -->
     <skip />
@@ -807,7 +802,6 @@
     <string name="testing" msgid="6584352735303604146">"Test"</string>
     <string name="testing_phone_info" msgid="8656693364332840056">"Informations sur le téléphone"</string>
     <string name="testing_battery_info" msgid="3497865525976497848">"Informations sur la batterie"</string>
-    <string name="testing_battery_history" msgid="3043329445810695647">"Historique de la batterie"</string>
     <string name="quick_launch_title" msgid="7904609846945905306">"Lancement rapide"</string>
     <string name="quick_launch_summary" msgid="3453825712466417452">"Configurer des raccourcis clavier pour lancer des applications"</string>
     <string name="quick_launch_assign_application" msgid="4521368464929956350">"Choisir une application"</string>
@@ -866,16 +860,12 @@
     <string name="battery_since_reset" msgid="7464546661121187045">"Utilisation de la batterie depuis la dernière réinitialisation"</string>
     <string name="battery_stats_on_battery" msgid="4970762168505236033">"Sur la batterie : <xliff:g id="TIME">%1$s</xliff:g>"</string>
     <string name="battery_stats_duration" msgid="7464501326709469282">"Débranché depuis <xliff:g id="TIME">%1$s</xliff:g>"</string>
-    <!-- no translation found for battery_stats_charging_label (4223311142875178785) -->
-    <skip />
-    <!-- no translation found for battery_stats_screen_on_label (7150221809877509708) -->
-    <skip />
-    <!-- no translation found for battery_stats_gps_on_label (1193657533641951256) -->
-    <skip />
-    <string name="battery_stats_wifi_running_label" msgid="4100552585961214960">"WiFi"</string>
-    <string name="battery_stats_wake_lock_label" msgid="1908942681902324095">"Activé"</string>
-    <!-- no translation found for battery_stats_phone_signal_label (6822042940376636775) -->
-    <skip />
+    <string name="battery_stats_charging_label" msgid="4223311142875178785">"Batterie en charge"</string>
+    <string name="battery_stats_screen_on_label" msgid="7150221809877509708">"Écran activé"</string>
+    <string name="battery_stats_gps_on_label" msgid="1193657533641951256">"GPS activé"</string>
+    <string name="battery_stats_wifi_running_label" msgid="4100552585961214960">"WI-FI"</string>
+    <string name="battery_stats_wake_lock_label" msgid="1908942681902324095">"En activité"</string>
+    <string name="battery_stats_phone_signal_label" msgid="6822042940376636775">"Signal du téléphone"</string>
     <!-- no translation found for battery_stats_last_duration (1535831453827905957) -->
     <skip />
     <string name="awake" msgid="387122265874485088">"Durée de fonctionnement de l\'appareil"</string>
@@ -920,9 +910,9 @@
     <string name="battery_desc_bluetooth" msgid="7535520658674621902">"Batterie utilisée par Bluetooth"</string>
     <string name="battery_sugg_bluetooth_basic" msgid="817276933922157788">"Désactivez Bluetooth lorsque vous ne l\'utilisez pas."</string>
     <string name="battery_sugg_bluetooth_headset" msgid="8214816222115517479">"Essayez de vous connecter à un autre appareil Bluetooth"</string>
-    <!-- outdated translation 8123202939321333639 -->     <string name="battery_desc_apps" msgid="6665712811746233450">"Batterie utilisée par les applications en cours d\'exécution"</string>
+    <string name="battery_desc_apps" msgid="6665712811746233450">"Batterie utilisée par l\'application"</string>
     <string name="battery_sugg_apps_info" msgid="6065882899391322442">"Arrêter ou désinstaller l\'application"</string>
-    <!-- outdated translation 4145005297393800223 -->     <string name="battery_sugg_apps_gps" msgid="4545056413090932541">"Désactivez le GPS lorsque vous ne l\'utilisez pas."</string>
+    <string name="battery_sugg_apps_gps" msgid="4545056413090932541">"Contrôlez manuellement le GPS pour éviter que l\'application ne l\'utilise."</string>
     <string name="battery_sugg_apps_settings" msgid="8021302847272481168">"L\'application dispose peut-être de paramètres permettant de réduire l\'utilisation de la batterie."</string>
     <string name="menu_stats_unplugged" msgid="8296577130840261624">"Débranché depuis <xliff:g id="UNPLUGGED">%1$s</xliff:g>"</string>
     <string name="menu_stats_last_unplugged" msgid="5922246077592434526">"Depuis le dernier débranchement (<xliff:g id="UNPLUGGED">%1$s</xliff:g>)"</string>
