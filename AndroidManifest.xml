@@ -147,13 +147,14 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".wifi.WifiApSettings">
+        <activity-alias android:name=".wifi.WifiApSettings"
+            android:targetActivity="Settings">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.VOICE_LAUNCH" />
             </intent-filter>
-        </activity>
+        </activity-alias>
 
         <activity android:name="ApnSettings" android:label="@string/apn_settings"
                   android:configChanges="orientation|keyboardHidden"
@@ -184,14 +185,15 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".TetherSettings"
-                android:clearTaskOnLaunch="true">
+        <activity-alias android:name=".TetherSettings"
+            android:clearTaskOnLaunch="true"
+            android:targetActivity="Settings">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.VOICE_LAUNCH" />
             </intent-filter>
-        </activity>
+        </activity-alias>
 
         <activity android:name=".vpn.VpnSettings"
                 android:configChanges="orientation|keyboardHidden"

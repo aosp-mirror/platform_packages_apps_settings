@@ -27,13 +27,10 @@
         android:persistent="false" />
 
     <PreferenceScreen
+        android:fragment="com.android.settings.wifi.WifiApSettings"
         android:key="wifi_ap_settings"
         android:title="@string/wifi_tether_settings_text"
         android:summary="@string/wifi_tether_settings_subtext" >
-        <intent
-            android:action="android.intent.action.MAIN"
-            android:targetPackage="com.android.settings"
-            android:targetClass="com.android.settings.wifi.WifiApSettings" />
     </PreferenceScreen>
 
     <CheckBoxPreference

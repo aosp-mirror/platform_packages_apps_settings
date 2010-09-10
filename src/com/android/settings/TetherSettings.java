@@ -18,27 +18,22 @@ package com.android.settings;
 
 import com.android.settings.wifi.WifiApEnabler;
 
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothPan;
-import android.bluetooth.IBluetooth;
-import android.os.Bundle;
-import android.os.IBinder;
-import android.os.RemoteException;
-import android.os.ServiceManager;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.res.AssetManager;
 import android.net.ConnectivityManager;
+import android.os.Bundle;
 import android.os.Environment;
 import android.preference.CheckBoxPreference;
 import android.preference.Preference;
-import android.preference.PreferenceActivity;
 import android.preference.PreferenceScreen;
-import android.util.Log;
 import android.webkit.WebView;
 
 import java.io.InputStream;
@@ -48,7 +43,7 @@ import java.util.Locale;
 /*
  * Displays preferences for Tethering.
  */
-public class TetherSettings extends PreferenceActivity {
+public class TetherSettings extends SettingsPreferenceFragment {
     private static final String TAG = "TetheringSettings";
 
     private static final String USB_TETHER_SETTINGS = "usb_tether_settings";
@@ -86,11 +81,16 @@ public class TetherSettings extends PreferenceActivity {
     private BluetoothPan mBluetoothPan;
 
     @Override
-    protected void onCreate(Bundle icicle) {
+    public void onCreate(Bundle icicle) {
         super.onCreate(icicle);
-
-        mBluetoothPan = new BluetoothPan(this);
         addPreferencesFromResource(R.xml.tether_prefs);
+    }
+
+    @Override
+    public void onActivityCreated(Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+        final Activity activity = getActivity();
+        mBluetoothPan = new BluetoothPan(activity);
 
         mEnableWifiAp = (CheckBoxPreference) findPreference(ENABLE_WIFI_AP);
         mWifiApSettings = (PreferenceScreen) findPreference(WIFI_AP_SETTINGS);
@@ -131,31 +131,31 @@ public class TetherSettings extends PreferenceActivity {
             }
         }
         if (wifiAvailable && usbAvailable && bluetoothAvailable){
-            setTitle(R.string.tether_settings_title_all);
+            activity.setTitle(R.string.tether_settings_title_all);
         } else if (wifiAvailable && usbAvailable){
-            setTitle(R.string.tether_settings_title_all);
+            activity.setTitle(R.string.tether_settings_title_all);
         } else if (wifiAvailable && bluetoothAvailable){
-            setTitle(R.string.tether_settings_title_all);
+            activity.setTitle(R.string.tether_settings_title_all);
         } else if (wifiAvailable) {
-            setTitle(R.string.tether_settings_title_wifi);
+            activity.setTitle(R.string.tether_settings_title_wifi);
         } else if (usbAvailable && bluetoothAvailable) {
-            setTitle(R.string.tether_settings_title_usb_bluetooth);
+            activity.setTitle(R.string.tether_settings_title_usb_bluetooth);
         } else if (usbAvailable) {
-            setTitle(R.string.tether_settings_title_usb);
+            activity.setTitle(R.string.tether_settings_title_usb);
         } else {
-            setTitle(R.string.tether_settings_title_bluetooth);
+            activity.setTitle(R.string.tether_settings_title_bluetooth);
         }
-        mWifiApEnabler = new WifiApEnabler(this, mEnableWifiAp);
-        mView = new WebView(this);
+        mWifiApEnabler = new WifiApEnabler(activity, mEnableWifiAp);
+        mView = new WebView(activity);
     }
 
     @Override
-    protected Dialog onCreateDialog(int id) {
+    public Dialog onCreateDialog(int id) {
         if (id == DIALOG_TETHER_HELP) {
             Locale locale = Locale.getDefault();
 
             // check for the full language + country resource, if not there, try just language
-            AssetManager am = getAssets();
+            final AssetManager am = getActivity().getAssets();
             String path = HELP_PATH.replace("%y", locale.getLanguage().toLowerCase());
             path = path.replace("%z", "_"+locale.getCountry().toLowerCase());
             boolean useCountry = true;
@@ -185,7 +185,7 @@ public class TetherSettings extends PreferenceActivity {
 
             mView.loadUrl(url);
 
-            return new AlertDialog.Builder(this)
+            return new AlertDialog.Builder(getActivity())
                 .setCancelable(true)
                 .setTitle(R.string.tethering_help_button_text)
                 .setView(mView)
@@ -218,31 +218,33 @@ public class TetherSettings extends PreferenceActivity {
     }
 
     @Override
-    protected void onResume() {
+    public void onResume() {
         super.onResume();
+
+        final Activity activity = getActivity();
 
         mTetherChangeReceiver = new TetherChangeReceiver();
         IntentFilter filter = new IntentFilter(ConnectivityManager.ACTION_TETHER_STATE_CHANGED);
-        Intent intent = registerReceiver(mTetherChangeReceiver, filter);
+        Intent intent = activity.registerReceiver(mTetherChangeReceiver, filter);
 
         filter = new IntentFilter();
         filter.addAction(Intent.ACTION_MEDIA_SHARED);
         filter.addAction(Intent.ACTION_MEDIA_UNSHARED);
         filter.addDataScheme("file");
-        registerReceiver(mTetherChangeReceiver, filter);
+        activity.registerReceiver(mTetherChangeReceiver, filter);
 
         filter = new IntentFilter();
         filter.addAction(BluetoothAdapter.ACTION_STATE_CHANGED);
-        registerReceiver(mTetherChangeReceiver, filter);
+        activity.registerReceiver(mTetherChangeReceiver, filter);
 
-        if (intent != null) mTetherChangeReceiver.onReceive(this, intent);
+        if (intent != null) mTetherChangeReceiver.onReceive(activity, intent);
         mWifiApEnabler.resume();
     }
 
     @Override
-    protected void onPause() {
+    public void onPause() {
         super.onPause();
-        unregisterReceiver(mTetherChangeReceiver);
+        getActivity().unregisterReceiver(mTetherChangeReceiver);
         mTetherChangeReceiver = null;
         mWifiApEnabler.pause();
     }
@@ -458,7 +460,8 @@ public class TetherSettings extends PreferenceActivity {
         } else if (preference == mTetherHelp) {
             showDialog(DIALOG_TETHER_HELP);
         }
-        return false;
+
+        return super.onPreferenceTreeClick(preferenceScreen, preference);
     }
 
     private String findIface(String[] ifaces, String[] regexes) {

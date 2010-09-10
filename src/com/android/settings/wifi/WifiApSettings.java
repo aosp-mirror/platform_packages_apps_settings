@@ -17,29 +17,24 @@
 package com.android.settings.wifi;
 
 import com.android.settings.R;
+import com.android.settings.SettingsPreferenceFragment;
+
+import android.app.Activity;
 import android.app.Dialog;
-import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.DialogInterface;
-import android.content.Intent;
-import android.content.IntentFilter;
-import android.preference.ListPreference;
-import android.preference.Preference;
-import android.preference.PreferenceActivity;
-import android.preference.PreferenceScreen;
-import android.preference.CheckBoxPreference;
-import android.provider.Settings;
-import android.util.Log;
 import android.net.wifi.WifiConfiguration;
-import android.net.wifi.WifiConfiguration.AuthAlgorithm;
 import android.net.wifi.WifiConfiguration.KeyMgmt;
 import android.net.wifi.WifiManager;
 import android.os.Bundle;
+import android.preference.CheckBoxPreference;
+import android.preference.Preference;
+import android.preference.PreferenceScreen;
 
 /*
  * Displays preferences for Tethering.
  */
-public class WifiApSettings extends PreferenceActivity
+public class WifiApSettings extends SettingsPreferenceFragment
                             implements DialogInterface.OnClickListener {
 
     private static final String WIFI_AP_SSID_AND_SECURITY = "wifi_ap_ssid_and_security";
@@ -61,26 +56,34 @@ public class WifiApSettings extends PreferenceActivity
     private WifiConfiguration mWifiConfig = null;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        addPreferencesFromResource(R.xml.wifi_ap_settings);
+    }
+
+    @Override
+    public void onActivityCreated(Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+        final Activity activity = getActivity();
 
         mWifiManager = (WifiManager) getSystemService(Context.WIFI_SERVICE);
         mWifiConfig = mWifiManager.getWifiApConfiguration();
         mSecurityType = getResources().getStringArray(R.array.wifi_ap_security);
 
-        addPreferencesFromResource(R.xml.wifi_ap_settings);
+
 
         mCreateNetwork = findPreference(WIFI_AP_SSID_AND_SECURITY);
         mEnableWifiAp = (CheckBoxPreference) findPreference(ENABLE_WIFI_AP);
 
-        mWifiApEnabler = new WifiApEnabler(this, mEnableWifiAp);
+        mWifiApEnabler = new WifiApEnabler(activity, mEnableWifiAp);
 
         if(mWifiConfig == null) {
-            String s = getString(com.android.internal.R.string.wifi_tether_configure_ssid_default);
-            mCreateNetwork.setSummary(String.format(getString(CONFIG_SUBTEXT),
+            final String s = activity.getString(
+                    com.android.internal.R.string.wifi_tether_configure_ssid_default);
+            mCreateNetwork.setSummary(String.format(activity.getString(CONFIG_SUBTEXT),
                                                     s, mSecurityType[OPEN_INDEX]));
         } else {
-            mCreateNetwork.setSummary(String.format(getString(CONFIG_SUBTEXT),
+            mCreateNetwork.setSummary(String.format(activity.getString(CONFIG_SUBTEXT),
                                       mWifiConfig.SSID,
                                       mWifiConfig.allowedKeyManagement.get(KeyMgmt.WPA_PSK) ?
                                       mSecurityType[WPA_INDEX] : mSecurityType[OPEN_INDEX]));
@@ -88,22 +91,23 @@ public class WifiApSettings extends PreferenceActivity
     }
 
     @Override
-    protected Dialog onCreateDialog(int id) {
+    public Dialog onCreateDialog(int id) {
         if (id == DIALOG_AP_SETTINGS) {
-            mDialog = new WifiApDialog(this, this, mWifiConfig);
+            final Activity activity = getActivity();
+            mDialog = new WifiApDialog(activity, this, mWifiConfig);
             return mDialog;
         }
         return null;
     }
 
     @Override
-    protected void onResume() {
+    public void onResume() {
         super.onResume();
         mWifiApEnabler.resume();
     }
 
     @Override
-    protected void onPause() {
+    public void onPause() {
         super.onPause();
         mWifiApEnabler.pause();
     }
@@ -117,7 +121,6 @@ public class WifiApSettings extends PreferenceActivity
     }
 
     public void onClick(DialogInterface dialogInterface, int button) {
-
         if (button == DialogInterface.BUTTON_POSITIVE) {
             mWifiConfig = mDialog.getConfig();
             if (mWifiConfig != null) {
@@ -135,7 +138,7 @@ public class WifiApSettings extends PreferenceActivity
                 } else {
                     mWifiManager.setWifiApConfiguration(mWifiConfig);
                 }
-                mCreateNetwork.setSummary(String.format(getString(CONFIG_SUBTEXT),
+                mCreateNetwork.setSummary(String.format(getActivity().getString(CONFIG_SUBTEXT),
                             mWifiConfig.SSID,
                             mWifiConfig.allowedKeyManagement.get(KeyMgmt.WPA_PSK) ?
                             mSecurityType[WPA_INDEX] : mSecurityType[OPEN_INDEX]));
