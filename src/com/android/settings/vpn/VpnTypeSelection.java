@@ -17,13 +17,14 @@
 package com.android.settings.vpn;
 
 import com.android.settings.R;
+import com.android.settings.SettingsPreferenceFragment;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.net.vpn.VpnManager;
 import android.net.vpn.VpnType;
 import android.os.Bundle;
 import android.preference.Preference;
-import android.preference.PreferenceActivity;
 import android.preference.PreferenceScreen;
 
 import java.util.HashMap;
@@ -32,7 +33,7 @@ import java.util.Map;
 /**
  * The activity to select a VPN type.
  */
-public class VpnTypeSelection extends PreferenceActivity {
+public class VpnTypeSelection extends SettingsPreferenceFragment {
     private Map<String, VpnType> mTypeMap = new HashMap<String, VpnType>();
 
     @Override
@@ -46,19 +47,20 @@ public class VpnTypeSelection extends PreferenceActivity {
     @Override
     public boolean onPreferenceTreeClick(PreferenceScreen ps, Preference pref) {
         setResult(mTypeMap.get(pref.getTitle().toString()));
-        finish();
+        finishFragment();
         return true;
     }
 
     private void initTypeList() {
         PreferenceScreen root = getPreferenceScreen();
+        final Activity activity = getActivity();
         for (VpnType t : VpnManager.getSupportedVpnTypes()) {
             String displayName = t.getDisplayName();
             String message = String.format(
-                    getString(R.string.vpn_edit_title_add), displayName);
+                    activity.getString(R.string.vpn_edit_title_add), displayName);
             mTypeMap.put(message, t);
 
-            Preference pref = new Preference(this);
+            Preference pref = new Preference(activity);
             pref.setTitle(message);
             pref.setSummary(t.getDescriptionId());
             root.addPreference(pref);
@@ -66,8 +68,8 @@ public class VpnTypeSelection extends PreferenceActivity {
     }
 
     private void setResult(VpnType type) {
-        Intent intent = new Intent(this, VpnSettings.class);
+        Intent intent = new Intent(getActivity(), VpnSettings.class);
         intent.putExtra(VpnSettings.KEY_VPN_TYPE, type.toString());
-        setResult(RESULT_OK, intent);
+        setResult(Activity.RESULT_OK, intent);
     }
 }

@@ -19,6 +19,7 @@ package com.android.settings;
 import android.app.Activity;
 import android.app.Dialog;
 import android.app.DialogFragment;
+import android.app.Fragment;
 import android.content.ContentResolver;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -58,6 +59,10 @@ public class SettingsPreferenceFragment extends PreferenceFragment
     private SettingsDialogFragment mDialogFragment;
 
     private OnStateListener mOnStateListener;
+    private FragmentStarter mFragmentStarter;
+
+    private int mResultCode = Activity.RESULT_CANCELED;
+    private Intent mResultData;
 
     private Button mNextButton;
 
@@ -74,6 +79,43 @@ public class SettingsPreferenceFragment extends PreferenceFragment
         mOnStateListener = listener;
     }
 
+    /**
+     * Letting the class, assumed to be Fragment, start another Fragment object.
+     * The target Fragment object is stored in the caller Fragment using
+     * {@link Fragment#setTargetFragment(Fragment, int)}. The caller
+     * is able to obtain result code and result data via
+     * {@link SettingsPreferenceFragment#getResultCode()} and
+     * {@link SettingsPreferenceFragment#getResultData()} accordingly.
+     */
+    interface FragmentStarter {
+        public boolean startFragment(
+                Fragment caller, String fragmentClass, int requestCode, Bundle extras);
+    }
+
+    public void setFragmentStarter(FragmentStarter starter) {
+        mFragmentStarter = starter;
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+
+        final Fragment f = getTargetFragment();
+        final int requestCode = getTargetRequestCode();
+
+        // TargetFragment becomes invalid when this object is resumed. Notify it to
+        // FragmentManager. Without this code, FragmentManager wrongly take the TargetFragment
+        // as live, and throws IllegalStateException.
+        setTargetFragment(null, -1);
+
+        if (f != null && (f instanceof SettingsPreferenceFragment)) {
+            final SettingsPreferenceFragment spf = (SettingsPreferenceFragment)f;
+            final int resultCode = spf.getResultCode();
+            final Intent resultData = spf.getResultData();
+            onActivityResult(requestCode, resultCode, resultData);
+        }
+    }
+
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
@@ -84,6 +126,32 @@ public class SettingsPreferenceFragment extends PreferenceFragment
         }
 
         setupButtonBar();
+    }
+
+    public final void setResult(int resultCode) {
+        mResultCode = resultCode;
+        mResultData = null;
+    }
+
+    public final void setResult(int resultCode, Intent data) {
+        mResultCode = resultCode;
+        mResultData = data;
+    }
+
+    public final int getResultCode() {
+        return mResultCode;
+    }
+
+    public final Intent getResultData() {
+        return mResultData;
+    }
+
+    /*
+     * The name is intentionally made different from Activity#finish(), so that
+     * users won't misunderstand its meaning.
+     */
+    public final void finishFragment() {
+        getActivity().onBackPressed();
     }
 
     @Override
@@ -177,6 +245,16 @@ public class SettingsPreferenceFragment extends PreferenceFragment
 
     public void finish() {
         getActivity().onBackPressed();
+    }
+
+    public boolean startFragment(
+            Fragment caller, String fragmentClass, int requestCode, Bundle extras) {
+        if (mFragmentStarter != null) {
+            return mFragmentStarter.startFragment(caller, fragmentClass, requestCode, extras);
+        } else {
+            Log.w(TAG, "FragmentStarter is not set.");
+            return false;
+        }
     }
 
     /**

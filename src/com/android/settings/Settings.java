@@ -41,7 +41,8 @@ import java.util.ArrayList;
  */
 public class Settings extends Activity
         implements PreferenceFragment.OnPreferenceStartFragmentCallback,
-        SettingsPreferenceFragment.OnStateListener {
+        SettingsPreferenceFragment.OnStateListener,
+        SettingsPreferenceFragment.FragmentStarter {
 
     private static final boolean DBG = false;
 
@@ -143,7 +144,9 @@ public class Settings extends Activity
         if (DBG) Log.d(TAG, "showFragment");
        Fragment f = Fragment.instantiate(this, fragmentClass, extras);
         if (f instanceof SettingsPreferenceFragment) {
-            ((SettingsPreferenceFragment) f).setOnStateListener(this);
+            SettingsPreferenceFragment spf = (SettingsPreferenceFragment) f;
+            spf.setOnStateListener(this);
+            spf.setFragmentStarter(this);
         }
         mBreadCrumbs.clear();
         getFragmentManager().popBackStack(BACK_STACK_PREFS, POP_BACK_STACK_INCLUSIVE);
@@ -176,9 +179,17 @@ public class Settings extends Activity
 
     public boolean onPreferenceStartFragment(PreferenceFragment caller, Preference pref) {
         if (DBG) Log.d(TAG, "onPreferenceStartFragment");
-        Fragment f = Fragment.instantiate(this, pref.getFragment(), pref.getExtras());
+        return startFragment(caller, pref.getFragment(), -1, pref.getExtras());
+    }
+
+    public boolean startFragment(
+            Fragment caller, String fragmentClass, int requestCode, Bundle extras) {
+        Fragment f = Fragment.instantiate(this, fragmentClass, extras);
+        caller.setTargetFragment(f, requestCode);
         if (f instanceof SettingsPreferenceFragment) {
-            ((SettingsPreferenceFragment) f).setOnStateListener(this);
+            SettingsPreferenceFragment spf = (SettingsPreferenceFragment) f;
+            spf.setOnStateListener(this);
+            spf.setFragmentStarter(this);
         }
         getFragmentManager().openTransaction().replace(R.id.prefs, f)
                 .addToBackStack(BACK_STACK_PREFS).commit();

@@ -59,13 +59,10 @@
     </PreferenceScreen>
 
     <PreferenceScreen
+        android:fragment="com.android.settings.vpn.VpnSettings"
         android:key="vpn_settings"
         android:title="@string/vpn_settings_title"
         android:summary="@string/vpn_settings_summary" >
-        <intent
-            android:action="android.intent.action.MAIN"
-            android:targetPackage="com.android.settings"
-            android:targetClass="com.android.settings.vpn.VpnSettings" />
     </PreferenceScreen>
 
     <PreferenceScreen

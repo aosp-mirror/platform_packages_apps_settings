@@ -17,11 +17,14 @@
 package com.android.settings.vpn;
 
 import com.android.settings.R;
+import com.android.settings.SettingsPreferenceFragment;
 
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
-import android.content.ComponentName;
+import android.app.Fragment;
 import android.content.BroadcastReceiver;
+import android.content.ComponentName;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -37,12 +40,10 @@ import android.net.vpn.VpnType;
 import android.os.Bundle;
 import android.os.ConditionVariable;
 import android.os.IBinder;
-import android.os.Parcelable;
 import android.preference.Preference;
-import android.preference.PreferenceActivity;
+import android.preference.Preference.OnPreferenceClickListener;
 import android.preference.PreferenceCategory;
 import android.preference.PreferenceScreen;
-import android.preference.Preference.OnPreferenceClickListener;
 import android.security.Credentials;
 import android.security.KeyStore;
 import android.text.TextUtils;
@@ -69,8 +70,8 @@ import java.util.Map;
 /**
  * The preference activity for configuring VPN settings.
  */
-public class VpnSettings extends PreferenceActivity implements
-        DialogInterface.OnClickListener {
+public class VpnSettings extends SettingsPreferenceFragment
+        implements DialogInterface.OnClickListener {
     // Key to the field exchanged for profile editing.
     static final String KEY_VPN_PROFILE = "vpn_profile";
 
@@ -122,7 +123,7 @@ public class VpnSettings extends PreferenceActivity implements
 
     private KeyStore mKeyStore = KeyStore.getInstance();
 
-    private VpnManager mVpnManager = new VpnManager(this);
+    private VpnManager mVpnManager;
 
     private ConnectivityReceiver mConnectivityReceiver =
             new ConnectivityReceiver();
@@ -137,7 +138,13 @@ public class VpnSettings extends PreferenceActivity implements
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         addPreferencesFromResource(R.xml.vpn_settings);
+    }
 
+    @Override
+    public void onActivityCreated(Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+
+        mVpnManager = new VpnManager(getActivity());
         // restore VpnProfile list and construct VpnPreference map
         mVpnListContainer = (PreferenceCategory) findPreference(PREF_VPN_LIST);
 
@@ -168,22 +175,24 @@ public class VpnSettings extends PreferenceActivity implements
         if ((mUnlockAction != null) && isKeyStoreUnlocked()) {
             Runnable action = mUnlockAction;
             mUnlockAction = null;
-            runOnUiThread(action);
+            getActivity().runOnUiThread(action);
         }
     }
 
     @Override
-    protected void onDestroy() {
-        super.onDestroy();
+    public void onDestroyView() {
         unregisterForContextMenu(getListView());
         mVpnManager.unregisterConnectivityReceiver(mConnectivityReceiver);
         if ((mShowingDialog != null) && mShowingDialog.isShowing()) {
             mShowingDialog.dismiss();
         }
+        // This should be called after the procedure above as ListView inside this Fragment
+        // will be deleted here.
+        super.onDestroyView();
     }
 
     @Override
-    protected Dialog onCreateDialog (int id) {
+    public Dialog onCreateDialog (int id) {
         switch (id) {
             case DIALOG_CONNECT:
                 return createConnectDialog();
@@ -203,13 +212,14 @@ public class VpnSettings extends PreferenceActivity implements
     }
 
     private Dialog createConnectDialog() {
-        return new AlertDialog.Builder(this)
+        final Activity activity = getActivity();
+        return new AlertDialog.Builder(activity)
                 .setView(mConnectingActor.createConnectView())
-                .setTitle(String.format(getString(R.string.vpn_connect_to),
+                .setTitle(String.format(activity.getString(R.string.vpn_connect_to),
                         mActiveProfile.getName()))
-                .setPositiveButton(getString(R.string.vpn_connect_button),
+                .setPositiveButton(activity.getString(R.string.vpn_connect_button),
                         this)
-                .setNegativeButton(getString(android.R.string.cancel),
+                .setNegativeButton(activity.getString(android.R.string.cancel),
                         this)
                 .setOnCancelListener(new DialogInterface.OnCancelListener() {
                             public void onCancel(DialogInterface dialog) {
@@ -291,7 +301,7 @@ public class VpnSettings extends PreferenceActivity implements
     }
 
     private AlertDialog.Builder createCommonDialogBuilder() {
-        return new AlertDialog.Builder(this)
+        return new AlertDialog.Builder(getActivity())
                 .setTitle(android.R.string.dialog_alert_title)
                 .setIcon(android.R.drawable.ic_dialog_alert)
                 .setPositiveButton(R.string.vpn_yes_button,
@@ -364,9 +374,9 @@ public class VpnSettings extends PreferenceActivity implements
     }
 
     @Override
-    protected void onActivityResult(final int requestCode, final int resultCode,
+    public void onActivityResult(final int requestCode, final int resultCode,
             final Intent data) {
-        if ((resultCode == RESULT_CANCELED) || (data == null)) {
+        if ((resultCode == Activity.RESULT_CANCELED) || (data == null)) {
             Log.d(TAG, "no result returned by editor");
             return;
         }
@@ -381,11 +391,12 @@ public class VpnSettings extends PreferenceActivity implements
                 return;
             }
 
+            final Activity activity = getActivity();
             int index = getProfileIndexFromId(p.getId());
             if (checkDuplicateName(p, index)) {
                 final VpnProfile profile = p;
-                Util.showErrorMessage(this, String.format(
-                        getString(R.string.vpn_error_duplicate_name),
+                Util.showErrorMessage(activity, String.format(
+                        activity.getString(R.string.vpn_error_duplicate_name),
                         p.getName()),
                         new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int w) {
@@ -407,30 +418,32 @@ public class VpnSettings extends PreferenceActivity implements
             try {
                 if (index < 0) {
                     addProfile(p);
-                    Util.showShortToastMessage(this, String.format(
-                            getString(R.string.vpn_profile_added), p.getName()));
+                    Util.showShortToastMessage(activity, String.format(
+                            activity.getString(R.string.vpn_profile_added), p.getName()));
                 } else {
                     replaceProfile(index, p);
-                    Util.showShortToastMessage(this, String.format(
-                            getString(R.string.vpn_profile_replaced),
+                    Util.showShortToastMessage(activity, String.format(
+                            activity.getString(R.string.vpn_profile_replaced),
                             p.getName()));
                 }
             } catch (IOException e) {
                 final VpnProfile profile = p;
-                Util.showErrorMessage(this, e + ": " + e.getMessage(),
+                Util.showErrorMessage(activity, e + ": " + e.getMessage(),
                         new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int w) {
                                 startVpnEditor(profile);
                             }
                         });
             }
+
+            // Remove cached VpnEditor as it is needless anymore.
         } else {
             throw new RuntimeException("unknown request code: " + requestCode);
         }
     }
 
     // Called when the buttons on the connect dialog are clicked.
-    //@Override
+    @Override
     public synchronized void onClick(DialogInterface dialog, int which) {
         if (which == CONNECT_BUTTON) {
             Dialog d = (Dialog) dialog;
@@ -440,12 +453,15 @@ public class VpnSettings extends PreferenceActivity implements
                 removeDialog(DIALOG_CONNECT);
                 return;
             } else {
-                dismissDialog(DIALOG_CONNECT);
+                // dismissDialog(DIALOG_CONNECT);
+                removeDialog(DIALOG_CONNECT);
+
+                final Activity activity = getActivity();
                 // show error dialog
-                mShowingDialog = new AlertDialog.Builder(this)
+                mShowingDialog = new AlertDialog.Builder(activity)
                         .setTitle(android.R.string.dialog_alert_title)
                         .setIcon(android.R.drawable.ic_dialog_alert)
-                        .setMessage(String.format(getString(
+                        .setMessage(String.format(activity.getString(
                                 R.string.vpn_error_miss_entering), error))
                         .setPositiveButton(R.string.vpn_back_button,
                                 new DialogInterface.OnClickListener() {
@@ -513,7 +529,7 @@ public class VpnSettings extends PreferenceActivity implements
                         }
                     }
                 };
-        mShowingDialog = new AlertDialog.Builder(this)
+        mShowingDialog = new AlertDialog.Builder(getActivity())
                 .setTitle(android.R.string.dialog_alert_title)
                 .setIcon(android.R.drawable.ic_dialog_alert)
                 .setMessage(R.string.vpn_confirm_profile_deletion)
@@ -559,7 +575,7 @@ public class VpnSettings extends PreferenceActivity implements
     // Adds a preference in mVpnListContainer
     private VpnPreference addPreferenceFor(
             VpnProfile p, boolean addToContainer) {
-        VpnPreference pref = new VpnPreference(this, p);
+        VpnPreference pref = new VpnPreference(getActivity(), p);
         mVpnPreferenceMap.put(p.getName(), pref);
         if (addToContainer) mVpnListContainer.addPreference(pref);
 
@@ -599,8 +615,8 @@ public class VpnSettings extends PreferenceActivity implements
     }
 
     private void startVpnTypeSelection() {
-        Intent intent = new Intent(this, VpnTypeSelection.class);
-        startActivityForResult(intent, REQUEST_SELECT_VPN_TYPE);
+        startFragment(this, VpnTypeSelection.class.getCanonicalName(),
+                REQUEST_SELECT_VPN_TYPE, null);
     }
 
     private boolean isKeyStoreUnlocked() {
@@ -614,16 +630,14 @@ public class VpnSettings extends PreferenceActivity implements
                 L2tpIpsecPskProfile pskProfile = (L2tpIpsecPskProfile) p;
                 String presharedKey = pskProfile.getPresharedKey();
                 if (!TextUtils.isEmpty(presharedKey)) return true;
-                // pass through
-
+                // $FALL-THROUGH$
             case L2TP:
                 L2tpProfile l2tpProfile = (L2tpProfile) p;
                 if (l2tpProfile.isSecretEnabled() &&
                         !TextUtils.isEmpty(l2tpProfile.getSecretString())) {
                     return true;
                 }
-                // pass through
-
+                // $FALL-THROUGH$
             default:
                 return false;
         }
@@ -648,14 +662,15 @@ public class VpnSettings extends PreferenceActivity implements
     private boolean unlockKeyStore(VpnProfile p, Runnable action) {
         if (isKeyStoreUnlocked()) return true;
         mUnlockAction = action;
-        Credentials.getInstance().unlock(this);
+        Credentials.getInstance().unlock(getActivity());
         return false;
     }
 
     private void startVpnEditor(final VpnProfile profile) {
-        Intent intent = new Intent(this, VpnEditor.class);
-        intent.putExtra(KEY_VPN_PROFILE, (Parcelable) profile);
-        startActivityForResult(intent, REQUEST_ADD_OR_EDIT_PROFILE);
+        Bundle args = new Bundle();
+        args.putParcelable(KEY_VPN_PROFILE, profile);
+        startFragment(this, VpnEditor.class.getCanonicalName(),
+                REQUEST_ADD_OR_EDIT_PROFILE, args);
     }
 
     private synchronized void connect(final VpnProfile p) {
@@ -714,7 +729,7 @@ public class VpnSettings extends PreferenceActivity implements
 
         case CONNECTING:
             mConnectingActor = getActor(p);
-            // pass through
+            // $FALL-THROUGH$
         case DISCONNECTING:
             mActiveProfile = p;
             disableProfilePreferencesIfOneActive();
@@ -810,11 +825,6 @@ public class VpnSettings extends PreferenceActivity implements
             public int compare(VpnProfile p1, VpnProfile p2) {
                 return p1.getName().compareTo(p2.getName());
             }
-
-            public boolean equals(VpnProfile p) {
-                // not used
-                return false;
-            }
         });
         for (VpnProfile p : mVpnProfileList) {
             Preference pref = addPreferenceFor(p, false);
@@ -855,20 +865,21 @@ public class VpnSettings extends PreferenceActivity implements
     }
 
     private String getProfileSummaryString(VpnProfile p) {
+        final Activity activity = getActivity();
         switch (p.getState()) {
         case CONNECTING:
-            return getString(R.string.vpn_connecting);
+            return activity.getString(R.string.vpn_connecting);
         case DISCONNECTING:
-            return getString(R.string.vpn_disconnecting);
+            return activity.getString(R.string.vpn_disconnecting);
         case CONNECTED:
-            return getString(R.string.vpn_connected);
+            return activity.getString(R.string.vpn_connected);
         default:
-            return getString(R.string.vpn_connect_hint);
+            return activity.getString(R.string.vpn_connect_hint);
         }
     }
 
     private VpnProfileActor getActor(VpnProfile p) {
-        return new AuthenticationActor(this, p);
+        return new AuthenticationActor(getActivity(), p);
     }
 
     private VpnProfile createVpnProfile(String type) {
@@ -938,8 +949,7 @@ public class VpnSettings extends PreferenceActivity implements
                     Log.e(TAG, "keystore write failed: key=" + key);
                 }
                 pskProfile.setPresharedKey(key);
-                // pass through
-
+                // $FALL-THROUGH$
             case L2TP_IPSEC:
             case L2TP:
                 L2tpProfile l2tpProfile = (L2tpProfile) p;
@@ -1007,8 +1017,6 @@ public class VpnSettings extends PreferenceActivity implements
 
     // managing status check in a background thread
     private class StatusChecker {
-        private List<VpnProfile> mList;
-
         synchronized void check(final List<VpnProfile> list) {
             final ConditionVariable cv = new ConditionVariable();
             cv.close();
@@ -1027,7 +1035,7 @@ public class VpnSettings extends PreferenceActivity implements
                             changeState(p, VpnState.IDLE);
                         }
                     }
-                    VpnSettings.this.unbindService(this);
+                    getActivity().unbindService(this);
                     showPreferences();
                 }
 
@@ -1035,7 +1043,7 @@ public class VpnSettings extends PreferenceActivity implements
                     cv.open();
 
                     setDefaultState(list);
-                    VpnSettings.this.unbindService(this);
+                    getActivity().unbindService(this);
                     showPreferences();
                 }
             };
