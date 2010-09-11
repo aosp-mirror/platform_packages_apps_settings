@@ -45,6 +45,12 @@ public class RingerVolumePreference extends VolumePreference implements
         R.id.media_volume_seekbar,
         R.id.alarm_volume_seekbar
     };
+
+    private static final int[] NEED_VOICE_CAPABILITY_ID = new int[] {
+            com.android.internal.R.id.seekbar, R.id.notification_volume_title,
+            R.id.notification_volume_seekbar
+    };
+
     private static final int[] SEEKBAR_TYPE = new int[] {
         AudioManager.STREAM_NOTIFICATION,
         AudioManager.STREAM_MUSIC,
@@ -83,17 +89,28 @@ public class RingerVolumePreference extends VolumePreference implements
                 getContext().getContentResolver(),
                 Settings.System.NOTIFICATIONS_USE_RING_VOLUME, 1) == 1);
         setNotificationVolumeVisibility(!mNotificationsUseRingVolumeCheckbox.isChecked());
+        disableSettingsThatNeedVoice(view);
+    }
+
+    private void disableSettingsThatNeedVoice(View parent) {
+        final boolean voiceCapable = getContext().getResources()
+                .getBoolean(com.android.internal.R.bool.config_voice_capable);
+        if (!voiceCapable) {
+            for (int id : NEED_VOICE_CAPABILITY_ID) {
+                parent.findViewById(id).setVisibility(View.GONE);
+            }
+        }
     }
 
     @Override
     protected void onDialogClosed(boolean positiveResult) {
         super.onDialogClosed(positiveResult);
-        
+
         if (!positiveResult) {
             for (SeekBarVolumizer vol : mSeekBarVolumizer) {
                 if (vol != null) vol.revertVolume();
             }
-        }        
+        }
         cleanup();
     }
 
@@ -102,13 +119,13 @@ public class RingerVolumePreference extends VolumePreference implements
         super.onActivityStop();
         cleanup();
     }
-    
+
     public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
         setNotificationVolumeVisibility(!isChecked);
-        
+
         Settings.System.putInt(getContext().getContentResolver(),
                 Settings.System.NOTIFICATIONS_USE_RING_VOLUME, isChecked ? 1 : 0);
-        
+
         if (isChecked) {
             // The user wants the notification to be same as ring, so do a
             // one-time sync right now

@@ -49,11 +49,20 @@ public class SoundSettings extends SettingsPreferenceFragment implements
     private static final String KEY_SOUND_SETTINGS = "sound_settings";
     private static final String KEY_NOTIFICATION_PULSE = "notification_pulse";
     private static final String KEY_LOCK_SOUNDS = "lock_sounds";
+    private static final String KEY_RINGTONE = "ringtone";
+    private static final String KEY_NOTIFICATION_SOUND = "notification_sound";
+    private static final String KEY_CATEGORY_CALLS = "category_calls";
+    private static final String KEY_CATEGORY_NOTIFICATION = "category_notification";
 
     private static final String VALUE_VIBRATE_NEVER = "never";
     private static final String VALUE_VIBRATE_ALWAYS = "always";
     private static final String VALUE_VIBRATE_ONLY_SILENT = "silent";
     private static final String VALUE_VIBRATE_UNLESS_SILENT = "notsilent";
+
+    private static final String[] NEED_VOICE_CAPABILITY = {
+            KEY_RINGTONE, KEY_DTMF_TONE, KEY_CATEGORY_CALLS,
+            KEY_EMERGENCY_TONE
+    };
 
     private CheckBoxPreference mSilent;
 
@@ -145,6 +154,14 @@ public class SoundSettings extends SettingsPreferenceFragment implements
             }
         }
 
+        if (!Utils.isVoiceCapable(getActivity())) {
+            for (String prefKey : NEED_VOICE_CAPABILITY) {
+                Preference pref = findPreference(prefKey);
+                if (pref != null) {
+                    getPreferenceScreen().removePreference(pref);
+                }
+            }
+        }
     }
 
     @Override

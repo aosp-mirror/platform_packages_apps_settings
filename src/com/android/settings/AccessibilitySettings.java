@@ -136,7 +136,8 @@ public class AccessibilitySettings extends SettingsPreferenceFragment {
             displayNoAppsAlert();
         }
 
-        if (KeyCharacterMap.deviceHasKey(KeyEvent.KEYCODE_POWER)) {
+        if (KeyCharacterMap.deviceHasKey(KeyEvent.KEYCODE_POWER)
+                && Utils.isVoiceCapable(getActivity())) {
             int incallPowerBehavior = Settings.Secure.getInt(getContentResolver(),
                     Settings.Secure.INCALL_POWER_BUTTON_BEHAVIOR,
                     Settings.Secure.INCALL_POWER_BUTTON_BEHAVIOR_DEFAULT);
@@ -148,7 +149,8 @@ public class AccessibilitySettings extends SettingsPreferenceFragment {
             mPowerButtonEndsCallCheckBox.setChecked(powerButtonCheckboxEnabled);
             mPowerButtonEndsCallCheckBox.setEnabled(true);
         } else {
-            // No POWER key on the current device; this entire category is irrelevant.
+            // No POWER key on the current device or no voice capability;
+            // this entire category is irrelevant.
             getPreferenceScreen().removePreference(mPowerButtonCategory);
         }
     }

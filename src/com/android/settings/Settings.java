@@ -18,7 +18,6 @@ package com.android.settings;
 
 import android.app.Activity;
 import android.app.Fragment;
-import android.app.Fragment.InstantiationException;
 import android.content.Intent;
 import android.os.Bundle;
 import android.preference.Preference;
@@ -130,17 +129,12 @@ public class Settings extends Activity
     }
 
     private boolean showFragment(String fragmentClass, Bundle extras) {
-        try {
-            Fragment f = Fragment.instantiate(this, fragmentClass, extras);
-            if (f instanceof SettingsPreferenceFragment) {
-                ((SettingsPreferenceFragment) f).setOnStateListener(this);
-            }
-            getFragmentManager().openTransaction().replace(R.id.prefs, f).commit();
-            return true;
-        } catch (InstantiationException exc) {
-            Log.d(TAG, "Couldn't instantiate fragment " + fragmentClass);
-            return false;
+        Fragment f = Fragment.instantiate(this, fragmentClass, extras);
+        if (f instanceof SettingsPreferenceFragment) {
+            ((SettingsPreferenceFragment) f).setOnStateListener(this);
         }
+        getFragmentManager().openTransaction().replace(R.id.prefs, f).commit();
+        return true;
     }
 
     private void addToBreadCrumbs(Fragment fragment) {
@@ -209,9 +203,6 @@ public class Settings extends Activity
             PreferenceGroup parent = (PreferenceGroup) findPreference(KEY_PARENT);
             Utils.updatePreferenceToSpecificActivityOrRemove(activity, parent,
                     KEY_SYNC_SETTINGS, 0);
-            Utils.updatePreferenceToSpecificActivityOrRemove(activity, parent,
-                    KEY_SEARCH_SETTINGS, 0);
-
             Preference dockSettings = parent.findPreference(KEY_DOCK_SETTINGS);
             if (activity.getResources().getBoolean(R.bool.has_dock_settings) == false
                     && dockSettings != null) {
@@ -222,6 +213,11 @@ public class Settings extends Activity
                     KEY_OPERATOR_SETTINGS);
             Utils.updatePreferenceToSpecificActivityFromMetaDataOrRemove(activity, parent,
                     KEY_MANUFACTURER_SETTINGS);
+
+            Preference callSettings = parent.findPreference(KEY_CALL_SETTINGS);
+            if (!Utils.isVoiceCapable(activity) && callSettings != null) {
+                parent.removePreference(callSettings);
+            }
         }
 
         @Override

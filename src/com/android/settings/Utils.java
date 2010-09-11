@@ -16,22 +16,23 @@
 
 package com.android.settings;
 
+import java.util.List;
+
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
-import android.os.SystemProperties;
 import android.content.pm.PackageManager.NameNotFoundException;
 import android.content.res.Resources;
 import android.content.res.Resources.NotFoundException;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.os.SystemProperties;
 import android.preference.Preference;
 import android.preference.PreferenceGroup;
+import android.telephony.TelephonyManager;
 import android.text.TextUtils;
-
-import java.util.List;
 
 public class Utils {
 
@@ -206,5 +207,14 @@ public class Utils {
      */
     public static boolean isMonkeyRunning() {
         return SystemProperties.getBoolean("ro.monkey", false);
+    }
+
+    /**
+     * Returns whether the device is voice-capable (meaning, it is also a phone).
+     */
+    public static boolean isVoiceCapable(Context context) {
+        TelephonyManager telephony =
+                (TelephonyManager) context.getSystemService(Context.TELEPHONY_SERVICE);
+        return telephony != null && telephony.isVoiceCapable();
     }
 }
