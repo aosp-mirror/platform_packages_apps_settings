@@ -236,15 +236,6 @@ public class LanguageSettings extends SettingsPreferenceFragment {
         if (Utils.isMonkeyRunning()) {
             return false;
         }
-        final String fragmentClass = preference.getFragment();
-        if (fragmentClass != null) {
-            final Activity activity = getActivity();
-            if (activity instanceof com.android.settings.Settings) {
-                return ((com.android.settings.Settings) activity).showFragment(preference);
-            } else {
-                Log.w(TAG, "Fragment is available while the parent is not Settings Activity.");
-            }
-        }
 
         if (preference instanceof CheckBoxPreference) {
             final CheckBoxPreference chkPref = (CheckBoxPreference) preference;
@@ -301,7 +292,9 @@ public class LanguageSettings extends SettingsPreferenceFragment {
                 mLastTickedInputMethodId = null;
             }
         } else if (preference instanceof PreferenceScreen) {
-            if (KEY_INPUT_METHOD.equals(preference.getKey())) {
+            if (preference.getFragment() != null) {
+                // Fragment will be handled correctly by the super class.
+            } else if (KEY_INPUT_METHOD.equals(preference.getKey())) {
                 InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
                 imm.showInputMethodPicker();
             } else if (preference.getIntent() == null) {
