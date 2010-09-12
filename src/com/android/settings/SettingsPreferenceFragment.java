@@ -32,10 +32,15 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 
+interface DialogCreatable {
+    public Dialog onCreateDialog(int dialogId);
+}
+
 /**
  * Base class for Settings fragments, with some helper functions and dialog management.
  */
-public class SettingsPreferenceFragment extends PreferenceFragment {
+public class SettingsPreferenceFragment extends PreferenceFragment
+        implements DialogCreatable {
 
     private static final String TAG = "SettingsPreferenceFragment";
 
@@ -121,9 +126,10 @@ public class SettingsPreferenceFragment extends PreferenceFragment {
             Log.e(TAG, "Old dialog fragment not null!");
         }
         mDialogFragment = new SettingsDialogFragment(this, dialogId);
-        mDialogFragment.show(getActivity(), Integer.toString(dialogId));
+        mDialogFragment.show(getActivity().getFragmentManager(), Integer.toString(dialogId));
     }
 
+    @Override
     public Dialog onCreateDialog(int dialogId) {
         return null;
     }
@@ -139,9 +145,9 @@ public class SettingsPreferenceFragment extends PreferenceFragment {
     static class SettingsDialogFragment extends DialogFragment {
         private int mDialogId;
 
-        private SettingsPreferenceFragment mFragment;
+        private DialogCreatable mFragment;
 
-        SettingsDialogFragment(SettingsPreferenceFragment fragment, int dialogId) {
+        SettingsDialogFragment(DialogCreatable fragment, int dialogId) {
             mDialogId = dialogId;
             mFragment = fragment;
         }
