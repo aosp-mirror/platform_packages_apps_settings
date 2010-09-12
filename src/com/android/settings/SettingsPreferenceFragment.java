@@ -51,6 +51,8 @@ public class SettingsPreferenceFragment extends PreferenceFragment {
 
     private Button mNextButton;
 
+    private boolean mReportedCreation;
+
     interface OnStateListener {
 
         void onCreated(SettingsPreferenceFragment fragment);
@@ -65,8 +67,10 @@ public class SettingsPreferenceFragment extends PreferenceFragment {
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        if (mOnStateListener != null) {
+        if (mOnStateListener != null && !mReportedCreation) {
             mOnStateListener.onCreated(this);
+            // So that we don't report it on the way back to this fragment
+            mReportedCreation = true;
         }
 
         setupButtonBar();
