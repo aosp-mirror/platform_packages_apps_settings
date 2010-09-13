@@ -103,7 +103,8 @@
                   android:theme="@android:style/Theme.NoTitleBar"
                   android:clearTaskOnLaunch="true"
                   android:screenOrientation="landscape"
-                  android:exported="true" />
+                  android:exported="true"
+                  android:theme="@android:style/Theme.Holo.NoTitleBar" />
 
         <activity android:name=".wifi.AdvancedSettings"
                 android:label="@string/wifi_ip_settings_titlebar"

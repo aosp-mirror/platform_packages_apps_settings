@@ -40,7 +40,7 @@ public class WifiSettingsForSetupWizardXL extends Activity implements OnClickLis
 
     static {
         stateMap.put(DetailedState.IDLE, DetailedState.DISCONNECTED);
-        stateMap.put(DetailedState.SCANNING, DetailedState.DISCONNECTED);
+        stateMap.put(DetailedState.SCANNING, DetailedState.SCANNING);
         stateMap.put(DetailedState.CONNECTING, DetailedState.CONNECTING);
         stateMap.put(DetailedState.AUTHENTICATING, DetailedState.CONNECTING);
         stateMap.put(DetailedState.OBTAINING_IPADDR, DetailedState.CONNECTING);
@@ -111,28 +111,40 @@ public class WifiSettingsForSetupWizardXL extends Activity implements OnClickLis
 
     public void updateConnectionState(DetailedState originalState) {
         final DetailedState state = stateMap.get(originalState);
-        final String message;
-        mProgressBar.setIndeterminate(false);
         switch (state) {
+        case SCANNING: {
+            // Let users know the device is working correctly though currently there's
+            // no visible network on the list.
+            if (mWifiSettings.getAccessPointsCount() == 0) {
+                mProgressBar.setIndeterminate(true);
+                mProgressText.setText(Summary.get(this, DetailedState.SCANNING));
+            } else {
+                // Users already already connected to a network, or see available networks.
+                mProgressBar.setIndeterminate(false);
+            }
+            break;
+        }
         case CONNECTING: {
-            message = Summary.get(this, state);
+            mProgressBar.setIndeterminate(false);
             mProgressBar.setProgress(1);
             mStatusText.setText(R.string.wifi_setup_status_connecting);
+            mProgressText.setText(Summary.get(this, state));
             break;
         }
         case CONNECTED: {
-            message = Summary.get(this, state);
+            mProgressBar.setIndeterminate(false);
             mProgressBar.setProgress(2);
             mStatusText.setText(R.string.wifi_setup_status_connected);
+            mProgressText.setText(Summary.get(this, state));
             break;
         }
         default:  // Not connected.
-            message = getString(R.string.wifi_setup_not_connected);
+            mProgressBar.setIndeterminate(false);
             mProgressBar.setProgress(0);
             mStatusText.setText(R.string.wifi_setup_status_select_network);
+            mProgressText.setText(getString(R.string.wifi_setup_not_connected));
             break;
         }
-        mProgressText.setText(message);
     }
 
     public void onWifiConfigPreferenceAttached(boolean isNewNetwork) {

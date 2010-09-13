@@ -667,4 +667,12 @@ public class WifiSettings extends SettingsPreferenceFragment
         mSelectedAccessPoint = null;
         showConfigUi(null, true);
     }
+
+    /* package */ int getAccessPointsCount() {
+        if (mAccessPoints != null) {
+            return mAccessPoints.getPreferenceCount();
+        } else {
+            return 0;
+        }
+    }
 }
