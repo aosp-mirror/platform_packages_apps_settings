@@ -114,6 +114,8 @@ public class BluetoothPairingDialog extends AlertActivity implements DialogInter
             }
             mPasskey = String.format("%06d", passkey);
             createDisplayPasskeyDialog();
+        } else if (mType == BluetoothDevice.PAIRING_VARIANT_OOB_CONSENT) {
+            createConsentDialog();
         } else {
             Log.e(TAG, "Incorrect pairing type received, not showing any dialog");
         }
@@ -171,6 +173,9 @@ public class BluetoothPairingDialog extends AlertActivity implements DialogInter
         } else if (mType == BluetoothDevice.PAIRING_VARIANT_DISPLAY_PASSKEY) {
             mPairingView.setVisibility(View.GONE);
             messageView.setText(getString(R.string.bluetooth_display_passkey_msg, name, mPasskey));
+        } else if (mType == BluetoothDevice.PAIRING_VARIANT_OOB_CONSENT) {
+            mPairingView.setVisibility(View.GONE);
+            messageView.setText(getString(R.string.bluetooth_incoming_pairing_msg, name));
         } else {
             Log.e(TAG, "Incorrect pairing type received, not creating view");
         }
@@ -247,6 +252,8 @@ public class BluetoothPairingDialog extends AlertActivity implements DialogInter
             mDevice.setPairingConfirmation(true);
         } else if (mType == BluetoothDevice.PAIRING_VARIANT_DISPLAY_PASSKEY) {
             // Do Nothing.
+        } else if (mType == BluetoothDevice.PAIRING_VARIANT_OOB_CONSENT) {
+            mDevice.setRemoteOutOfBandData();
         } else {
             Log.e(TAG, "Incorrect pairing type received");
         }
