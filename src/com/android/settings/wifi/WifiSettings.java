@@ -228,7 +228,6 @@ public class WifiSettings extends SettingsPreferenceFragment
             }
             }
         } else {
-            Log.d("@@@", "updateAccessPoints");
             updateAccessPoints();
         }
     }
