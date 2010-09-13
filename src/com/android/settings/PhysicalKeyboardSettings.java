@@ -20,12 +20,11 @@ import android.content.ContentResolver;
 import android.os.Bundle;
 import android.preference.CheckBoxPreference;
 import android.preference.Preference;
-import android.preference.PreferenceActivity;
 import android.preference.PreferenceScreen;
 import android.provider.Settings.System;
 
-public class PhysicalKeyboardSettings extends PreferenceActivity {
-    
+public class PhysicalKeyboardSettings extends SettingsPreferenceFragment {
+
     private final String[] mSettingsUiKey = {
             "auto_caps",
             "auto_replace",
@@ -47,14 +46,14 @@ public class PhysicalKeyboardSettings extends PreferenceActivity {
     };
 
     @Override
-    protected void onCreate(Bundle icicle) {
+    public void onCreate(Bundle icicle) {
         super.onCreate(icicle);
 
         addPreferencesFromResource(R.xml.keyboard_settings);
     }
     
     @Override
-    protected void onResume() {
+    public void onResume() {
         super.onResume();
         ContentResolver resolver = getContentResolver();
         for (int i = 0; i < mSettingsUiKey.length; i++) {
@@ -66,7 +65,8 @@ public class PhysicalKeyboardSettings extends PreferenceActivity {
 
 
     @Override
-    public boolean onPreferenceTreeClick(PreferenceScreen preferenceScreen, Preference preference) {
+    public boolean onPreferenceTreeClick(
+            PreferenceScreen preferenceScreen, Preference preference) {
 
         // Physical keyboard stuff
         for (int i = 0; i < mSettingsUiKey.length; i++) {

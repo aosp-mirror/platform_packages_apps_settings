@@ -32,6 +32,11 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 
+/**
+ * Letting the class, assumed to be Fragment, create a Dialog on it. Should be useful
+ * you want to utilize some capability in {@link SettingsPreferenceFragment} but don't want
+ * the class inherit the class itself (See {@link ProxySelector} for example).
+ */
 interface DialogCreatable {
     public Dialog onCreateDialog(int dialogId);
 }
