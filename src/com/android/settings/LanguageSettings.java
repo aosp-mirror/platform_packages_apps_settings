@@ -295,7 +295,8 @@ public class LanguageSettings extends SettingsPreferenceFragment {
             if (preference.getFragment() != null) {
                 // Fragment will be handled correctly by the super class.
             } else if (KEY_INPUT_METHOD.equals(preference.getKey())) {
-                InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+                final InputMethodManager imm = (InputMethodManager)
+                        getSystemService(Context.INPUT_METHOD_SERVICE);
                 imm.showInputMethodPicker();
             } else if (preference.getIntent() == null) {
                 PreferenceScreen pref = (PreferenceScreen) preference;

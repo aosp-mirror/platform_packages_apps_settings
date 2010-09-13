@@ -34,20 +34,16 @@
     </PreferenceCategory>
 
     <PreferenceScreen
-            android:key="hardkeyboard_category"
-            android:title="@string/builtin_keyboard_settings_title"
-            android:summary="@string/builtin_keyboard_settings_summary">
-        <intent android:action="android.intent.action.MAIN"
-                android:targetPackage="com.android.settings"
-                android:targetClass="com.android.settings.PhysicalKeyboardSettings"/>
+        android:fragment="com.android.settings.PhysicalKeyboardSettings"
+        android:key="hardkeyboard_category"
+        android:title="@string/builtin_keyboard_settings_title"
+        android:summary="@string/builtin_keyboard_settings_summary">
     </PreferenceScreen>
     
     <PreferenceScreen 
-            android:title="@string/user_dict_settings_title" 
-            android:summary="@string/user_dict_settings_summary">
-        <intent android:action="android.intent.action.MAIN"
-                android:targetPackage="com.android.settings"
-                android:targetClass="com.android.settings.UserDictionarySettings" />
+        android:fragment="com.android.settings.UserDictionarySettings"
+        android:title="@string/user_dict_settings_title" 
+        android:summary="@string/user_dict_settings_summary">
     </PreferenceScreen>
 
 </PreferenceScreen>
