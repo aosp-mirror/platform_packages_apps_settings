@@ -354,7 +354,11 @@ public class ManageApplications extends TabActivity implements
                     holder.appIcon.setImageDrawable(entry.icon);
                 }
                 holder.updateSizeText(ManageApplications.this);
-                holder.disabled.setVisibility(entry.info.enabled ? View.GONE : View.VISIBLE);
+                if (InstalledAppDetails.SUPPORT_DISABLE_APPS) {
+                    holder.disabled.setVisibility(entry.info.enabled ? View.GONE : View.VISIBLE);
+                } else {
+                    holder.disabled.setVisibility(View.GONE);
+                }
             }
             mActive.remove(convertView);
             mActive.add(convertView);
