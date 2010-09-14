@@ -788,14 +788,14 @@ public class DockService extends Service implements AlertDialog.OnMultiChoiceCli
         SharedPreferences.Editor editor = getSharedPreferences(SHARED_PREFERENCES_NAME,
                 Context.MODE_PRIVATE).edit();
         editor.putBoolean(key, bool);
-        editor.commit();
+        editor.apply();
     }
 
     private void setSettingInt(String key, int value) {
         SharedPreferences.Editor editor = getSharedPreferences(SHARED_PREFERENCES_NAME,
                 Context.MODE_PRIVATE).edit();
         editor.putInt(key, value);
-        editor.commit();
+        editor.apply();
     }
 
     private void removeSetting(String key) {
@@ -803,8 +803,7 @@ public class DockService extends Service implements AlertDialog.OnMultiChoiceCli
                 Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPref.edit();
         editor.remove(key);
-        editor.commit();
-        return;
+        editor.apply();
     }
 
     public synchronized void onServiceConnected() {
