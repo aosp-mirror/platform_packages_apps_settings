@@ -17,35 +17,40 @@
 package com.android.settings.wifi;
 
 import com.android.settings.R;
+import com.android.settings.SettingsPreferenceFragment;
 
+import android.app.Activity;
 import android.net.wifi.WifiInfo;
 import android.net.wifi.WifiManager;
 import android.os.Bundle;
+import android.os.SystemProperties;
 import android.preference.ListPreference;
 import android.preference.Preference;
-import android.preference.PreferenceActivity;
 import android.provider.Settings;
 import android.text.TextUtils;
 import android.widget.Toast;
-import android.os.SystemProperties;
 
-public class AdvancedSettings extends PreferenceActivity
+public class AdvancedSettings extends SettingsPreferenceFragment
         implements Preference.OnPreferenceChangeListener {
 
     private static final String KEY_MAC_ADDRESS = "mac_address";
     private static final String KEY_CURRENT_IP_ADDRESS = "current_ip_address";
     private static final String KEY_NUM_CHANNELS = "num_channels";
     private static final String KEY_SLEEP_POLICY = "sleep_policy";
-    
+
     //Tracks ro.debuggable (1 on userdebug builds)
     private static int DEBUGGABLE;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        
         addPreferencesFromResource(R.xml.wifi_advanced_settings);
-        
+    }
+
+    @Override
+    public void onActivityCreated(Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+
         DEBUGGABLE = SystemProperties.getInt("ro.debuggable", 0);
 
         /**
@@ -68,9 +73,9 @@ public class AdvancedSettings extends PreferenceActivity
     }
     
     @Override
-    protected void onResume() {
+    public void onResume() {
         super.onResume();
-        
+
         /**
          * Remove user control of regulatory domain
          * channel count settings in non userdebug builds
@@ -86,7 +91,7 @@ public class AdvancedSettings extends PreferenceActivity
         ListPreference pref = (ListPreference) findPreference(KEY_NUM_CHANNELS);
         pref.setOnPreferenceChangeListener(this);
 
-        WifiManager wifiManager = (WifiManager) getSystemService(WIFI_SERVICE);
+        WifiManager wifiManager = (WifiManager) getSystemService(Activity.WIFI_SERVICE);
         /*
          * Generate the list of valid channel counts to show in the ListPreference.
          * The values are numerical, so the only text to be localized is the
@@ -94,7 +99,7 @@ public class AdvancedSettings extends PreferenceActivity
          */
         int[] validChannelCounts = wifiManager.getValidChannelCounts();
         if (validChannelCounts == null) {
-            Toast.makeText(this, R.string.wifi_setting_num_channels_error,
+            Toast.makeText(getActivity(), R.string.wifi_setting_num_channels_error,
                            Toast.LENGTH_SHORT).show();
             pref.setEnabled(false);
             return;
@@ -104,8 +109,8 @@ public class AdvancedSettings extends PreferenceActivity
 
         for (int i = 0; i < validChannelCounts.length; i++) {
             entryValues[i] = String.valueOf(validChannelCounts[i]);
-            entries[i] = getString(R.string.wifi_setting_num_channels_channel_phrase,
-                                   validChannelCounts[i]);
+            entries[i] = getActivity().getString(R.string.wifi_setting_num_channels_channel_phrase,
+                    validChannelCounts[i]);
         }
         pref.setEntries(entries);
         pref.setEntryValues(entryValues);
@@ -131,13 +136,13 @@ public class AdvancedSettings extends PreferenceActivity
         if (key.equals(KEY_NUM_CHANNELS)) {
             try {
                 int numChannels = Integer.parseInt((String) newValue);
-                WifiManager wifiManager = (WifiManager) getSystemService(WIFI_SERVICE);
+                WifiManager wifiManager = (WifiManager) getSystemService(Activity.WIFI_SERVICE);
                 if (!wifiManager.setNumAllowedChannels(numChannels, true)) {
-                    Toast.makeText(this, R.string.wifi_setting_num_channels_error,
+                    Toast.makeText(getActivity(), R.string.wifi_setting_num_channels_error,
                             Toast.LENGTH_SHORT).show();
                 }
             } catch (NumberFormatException e) {
-                Toast.makeText(this, R.string.wifi_setting_num_channels_error,
+                Toast.makeText(getActivity(), R.string.wifi_setting_num_channels_error,
                         Toast.LENGTH_SHORT).show();
                 return false;
             }
@@ -147,24 +152,23 @@ public class AdvancedSettings extends PreferenceActivity
                 Settings.System.putInt(getContentResolver(),
                         Settings.System.WIFI_SLEEP_POLICY, Integer.parseInt(((String) newValue)));
             } catch (NumberFormatException e) {
-                Toast.makeText(this, R.string.wifi_setting_sleep_policy_error,
+                Toast.makeText(getActivity(), R.string.wifi_setting_sleep_policy_error,
                         Toast.LENGTH_SHORT).show();
                 return false;
             }
-
         }
         
         return true;
     }
 
     private void refreshWifiInfo() {
-        WifiManager wifiManager = (WifiManager) getSystemService(WIFI_SERVICE);
+        WifiManager wifiManager = (WifiManager) getSystemService(Activity.WIFI_SERVICE);
         WifiInfo wifiInfo = wifiManager.getConnectionInfo();
 
         Preference wifiMacAddressPref = findPreference(KEY_MAC_ADDRESS);
         String macAddress = wifiInfo == null ? null : wifiInfo.getMacAddress();
         wifiMacAddressPref.setSummary(!TextUtils.isEmpty(macAddress) ? macAddress 
-                : getString(R.string.status_unavailable));
+                : getActivity().getString(R.string.status_unavailable));
 
         Preference wifiIpAddressPref = findPreference(KEY_CURRENT_IP_ADDRESS);
         String ipAddress = null;
@@ -178,7 +182,7 @@ public class AdvancedSettings extends PreferenceActivity
             }
         }
         wifiIpAddressPref.setSummary(ipAddress == null ?
-                getString(R.string.status_unavailable) : ipAddress);
+                getActivity().getString(R.string.status_unavailable) : ipAddress);
     }
 
 }
