@@ -144,7 +144,7 @@ public class BluetoothDiscoverableEnabler implements Preference.OnPreferenceChan
     private void persistDiscoverableEndTimestamp(long endTimestamp) {
         SharedPreferences.Editor editor = mLocalManager.getSharedPreferences().edit();
         editor.putLong(SHARED_PREFERENCES_KEY_DISCOVERABLE_END_TIMESTAMP, endTimestamp);
-        editor.commit();
+        editor.apply();
     }
 
     private void handleModeChanged(int mode) {
