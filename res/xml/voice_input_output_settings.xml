@@ -35,10 +35,7 @@
             android:title="@string/voice_output_category" />
 
     <PreferenceScreen android:key="tts_settings"
-            android:title="@string/tts_settings_title">
-        <intent android:action="android.intent.action.MAIN"
-                android:targetPackage="com.android.settings"
-                android:targetClass="com.android.settings.TextToSpeechSettings" />
-    </PreferenceScreen>
+            android:fragment="com.android.settings.TextToSpeechSettings"
+            android:title="@string/tts_settings_title" />
 
 </PreferenceScreen>
