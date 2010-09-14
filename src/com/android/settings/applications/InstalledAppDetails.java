@@ -69,6 +69,7 @@ import android.widget.TextView;
 public class InstalledAppDetails extends Activity
         implements View.OnClickListener, ApplicationsState.Callbacks {
     private static final String TAG="InstalledAppDetails";
+    static final boolean SUPPORT_DISABLE_APPS = false;
     
     private PackageManager mPm;
     private ApplicationsState mState;
@@ -259,30 +260,32 @@ public class InstalledAppDetails extends Activity
         } else {
             if ((mAppEntry.info.flags & ApplicationInfo.FLAG_SYSTEM) != 0) {
                 enabled = false;
-                try {
-                    // Try to prevent the user from bricking their phone
-                    // by not allowing disabling of apps signed with the
-                    // system cert and any launcher app in the system.
-                    PackageInfo sys = mPm.getPackageInfo("android",
-                            PackageManager.GET_SIGNATURES);
-                    Intent intent = new Intent(Intent.ACTION_MAIN);
-                    intent.addCategory(Intent.CATEGORY_HOME);
-                    intent.setPackage(mAppEntry.info.packageName);
-                    List<ResolveInfo> homes = mPm.queryIntentActivities(intent, 0);
-                    if ((homes != null && homes.size() > 0) ||
-                            (mPackageInfo != null &&
-                                    sys.signatures[0].equals(mPackageInfo.signatures[0]))) {
-                        // Disable button for core system applications.
-                        mUninstallButton.setText(R.string.disable_text);
-                    } else if (mAppEntry.info.enabled) {
-                        mUninstallButton.setText(R.string.disable_text);
-                        enabled = true;
-                    } else {
-                        mUninstallButton.setText(R.string.enable_text);
-                        enabled = true;
+                if (SUPPORT_DISABLE_APPS) {
+                    try {
+                        // Try to prevent the user from bricking their phone
+                        // by not allowing disabling of apps signed with the
+                        // system cert and any launcher app in the system.
+                        PackageInfo sys = mPm.getPackageInfo("android",
+                                PackageManager.GET_SIGNATURES);
+                        Intent intent = new Intent(Intent.ACTION_MAIN);
+                        intent.addCategory(Intent.CATEGORY_HOME);
+                        intent.setPackage(mAppEntry.info.packageName);
+                        List<ResolveInfo> homes = mPm.queryIntentActivities(intent, 0);
+                        if ((homes != null && homes.size() > 0) ||
+                                (mPackageInfo != null &&
+                                        sys.signatures[0].equals(mPackageInfo.signatures[0]))) {
+                            // Disable button for core system applications.
+                            mUninstallButton.setText(R.string.disable_text);
+                        } else if (mAppEntry.info.enabled) {
+                            mUninstallButton.setText(R.string.disable_text);
+                            enabled = true;
+                        } else {
+                            mUninstallButton.setText(R.string.enable_text);
+                            enabled = true;
+                        }
+                    } catch (PackageManager.NameNotFoundException e) {
+                        Log.w(TAG, "Unable to get package info", e);
                     }
-                } catch (PackageManager.NameNotFoundException e) {
-                    Log.w(TAG, "Unable to get package info", e);
                 }
             } else {
                 mUninstallButton.setText(R.string.uninstall_text);
