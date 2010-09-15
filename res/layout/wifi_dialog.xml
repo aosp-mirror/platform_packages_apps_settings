@@ -170,5 +170,98 @@
                     android:layout_height="wrap_content"
                     android:text="@string/wifi_show_password" />
         </LinearLayout>
+
+        <LinearLayout android:id="@+id/ipfields"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:visibility="gone">
+
+            <TextView
+                    style="?android:attr/textAppearanceSmallInverse"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dip"
+                    android:text="@string/wifi_ip_settings" />
+
+            <Spinner android:id="@+id/ipsettings"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:prompt="@string/wifi_ip_settings"
+                    android:entries="@array/wifi_ip_settings" />
+
+        </LinearLayout>
+
+        <LinearLayout android:id="@+id/staticip"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:visibility="gone">
+            <TextView
+                    style="?android:attr/textAppearanceSmallInverse"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dip"
+                    android:text="@string/wifi_ip_address" />
+
+            <EditText android:id="@+id/ipaddress"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:singleLine="true"
+                    android:inputType="textNoSuggestions" />
+
+            <TextView
+                    style="?android:attr/textAppearanceSmallInverse"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dip"
+                    android:text="@string/wifi_gateway" />
+
+            <EditText android:id="@+id/gateway"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:singleLine="true"
+                    android:inputType="textNoSuggestions" />
+
+            <TextView
+                    style="?android:attr/textAppearanceSmallInverse"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dip"
+                    android:text="@string/wifi_netmask" />
+
+            <EditText android:id="@+id/netmask"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:singleLine="true"
+                    android:inputType="textNoSuggestions" />
+
+            <TextView
+                    style="?android:attr/textAppearanceSmallInverse"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dip"
+                    android:text="@string/wifi_dns1" />
+
+            <EditText android:id="@+id/dns1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:singleLine="true"
+                    android:inputType="textNoSuggestions" />
+
+            <TextView
+                    style="?android:attr/textAppearanceSmallInverse"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dip"
+                    android:text="@string/wifi_dns2" />
+
+            <EditText android:id="@+id/dns2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:singleLine="true"
+                    android:inputType="textNoSuggestions" />
+
+        </LinearLayout>
     </LinearLayout>
 </ScrollView>

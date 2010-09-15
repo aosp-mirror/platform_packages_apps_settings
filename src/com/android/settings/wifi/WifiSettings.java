@@ -288,9 +288,7 @@ public class WifiSettings extends SettingsPreferenceFragment
                 }
                 if (mSelectedAccessPoint.networkId != -1) {
                     menu.add(Menu.NONE, MENU_ID_FORGET, 0, R.string.wifi_menu_forget);
-                    if (mSelectedAccessPoint.security != AccessPoint.SECURITY_NONE) {
-                        menu.add(Menu.NONE, MENU_ID_MODIFY, 0, R.string.wifi_menu_modify);
-                    }
+                    menu.add(Menu.NONE, MENU_ID_MODIFY, 0, R.string.wifi_menu_modify);
                 }
             }
         }
