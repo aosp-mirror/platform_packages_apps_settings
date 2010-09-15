@@ -277,7 +277,7 @@ public class RequestPermissionActivity extends Activity implements
         editor.putLong(
                 BluetoothDiscoverableEnabler.SHARED_PREFERENCES_KEY_DISCOVERABLE_END_TIMESTAMP,
                 endTimestamp);
-        editor.commit();
+        editor.apply();
     }
 
     @Override

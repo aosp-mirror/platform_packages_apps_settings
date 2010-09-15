@@ -356,7 +356,7 @@ public class LocalBluetoothManager {
                 deviceAddress);
         editor.putLong(LocalBluetoothManager.SHARED_PREFERENCES_KEY_LAST_SELECTED_DEVICE_TIME,
                 System.currentTimeMillis());
-        editor.commit();
+        editor.apply();
     }
 
     public boolean hasDockAutoConnectSetting(String addr) {
@@ -371,12 +371,12 @@ public class LocalBluetoothManager {
     public void saveDockAutoConnectSetting(String addr, boolean autoConnect) {
         SharedPreferences.Editor editor = getSharedPreferences().edit();
         editor.putBoolean(SHARED_PREFERENCES_KEY_DOCK_AUTO_CONNECT + addr, autoConnect);
-        editor.commit();
+        editor.apply();
     }
 
     public void removeDockAutoConnectSetting(String addr) {
         SharedPreferences.Editor editor = getSharedPreferences().edit();
         editor.remove(SHARED_PREFERENCES_KEY_DOCK_AUTO_CONNECT + addr);
-        editor.commit();
+        editor.apply();
     }
 }
