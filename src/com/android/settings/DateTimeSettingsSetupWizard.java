@@ -19,6 +19,7 @@ package com.android.settings;
 import com.android.settings.ZonePicker.ZoneSelectionListener;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.provider.Settings;
@@ -26,6 +27,7 @@ import android.provider.Settings.SettingNotFoundException;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.Window;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.CompoundButton.OnCheckedChangeListener;
@@ -44,6 +46,7 @@ public class DateTimeSettingsSetupWizard extends Activity
     private Button mTimeZone;
     private TimePicker mTimePicker;
     private DatePicker mDatePicker;
+    private InputMethodManager mInputMethodManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -90,6 +93,8 @@ public class DateTimeSettingsSetupWizard extends Activity
         mDatePicker = (DatePicker)findViewById(R.id.date_picker);
         mDatePicker.setEnabled(!autoDateTimeEnabled);
 
+        mInputMethodManager = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
+
         ((ZonePicker)getFragmentManager().findFragmentById(R.id.zone_picker_fragment))
                 .setZoneSelectionListener(this);
 
@@ -135,8 +140,11 @@ public class DateTimeSettingsSetupWizard extends Activity
         mTimePicker.setEnabled(!autoEnabled);
         mDatePicker.setEnabled(!autoEnabled);
         if (autoEnabled) {
-            mTimePicker.clearFocus();
-            mDatePicker.clearFocus();
+            final View focusedView = getCurrentFocus();
+            if (focusedView != null) {
+                mInputMethodManager.hideSoftInputFromWindow(focusedView.getWindowToken(), 0);
+                focusedView.clearFocus();
+            }
         }
     }
 
