@@ -123,6 +123,7 @@ public class DateTimeSettingsSetupWizard extends Activity
 
     @Override
     public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+        final boolean autoEnabled = isChecked;  // just for readibility.
         Settings.System.putInt(getContentResolver(),
                 Settings.System.AUTO_TIME,
                 isChecked ? 1 : 0);
@@ -130,9 +131,13 @@ public class DateTimeSettingsSetupWizard extends Activity
             findViewById(R.id.current_time_zone).setVisibility(View.VISIBLE);
             findViewById(R.id.zone_picker).setVisibility(View.GONE);
         }
-        mTimeZone.setEnabled(!isChecked);
-        mTimePicker.setEnabled(!isChecked);
-        mDatePicker.setEnabled(!isChecked);
+        mTimeZone.setEnabled(!autoEnabled);
+        mTimePicker.setEnabled(!autoEnabled);
+        mDatePicker.setEnabled(!autoEnabled);
+        if (autoEnabled) {
+            mTimePicker.clearFocus();
+            mDatePicker.clearFocus();
+        }
     }
 
     @Override
