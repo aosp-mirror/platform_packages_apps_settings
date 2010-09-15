@@ -16,6 +16,8 @@
 
 package com.android.settings;
 
+import java.util.Locale;
+
 public class LocalePicker extends com.android.internal.app.LocalePicker
         implements com.android.internal.app.LocalePicker.LocaleSelectionListener {
     public LocalePicker() {
@@ -24,7 +26,8 @@ public class LocalePicker extends com.android.internal.app.LocalePicker
     }
 
     @Override
-    public void onLocaleSelected() {
+    public void onLocaleSelected(Locale locale) {
         getActivity().onBackPressed();
+        LocalePicker.updateLocale(locale);
     }
 }
