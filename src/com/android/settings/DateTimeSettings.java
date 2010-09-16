@@ -16,6 +16,7 @@
 
 package com.android.settings;
 
+import android.app.Activity;
 import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.app.TimePickerDialog;
@@ -133,8 +134,8 @@ public class DateTimeSettings extends SettingsPreferenceFragment
         filter.addAction(Intent.ACTION_TIME_CHANGED);
         filter.addAction(Intent.ACTION_TIMEZONE_CHANGED);
         getActivity().registerReceiver(mIntentReceiver, filter, null, null);
-        
-        updateTimeAndDateDisplay();
+
+        updateTimeAndDateDisplay(getActivity());
     }
 
     @Override 
@@ -144,8 +145,8 @@ public class DateTimeSettings extends SettingsPreferenceFragment
         getPreferenceScreen().getSharedPreferences().unregisterOnSharedPreferenceChangeListener(this);
     }
     
-    private void updateTimeAndDateDisplay() {
-        java.text.DateFormat shortDateFormat = DateFormat.getDateFormat(getActivity());
+    private void updateTimeAndDateDisplay(Context context) {
+        java.text.DateFormat shortDateFormat = DateFormat.getDateFormat(context);
         final Calendar now = Calendar.getInstance();
         Date dummyDate = mDummyDate.getTime();
         mTimePref.setSummary(DateFormat.getTimeFormat(getActivity()).format(now.getTime()));
@@ -157,13 +158,19 @@ public class DateTimeSettings extends SettingsPreferenceFragment
     @Override
     public void onDateSet(DatePicker view, int year, int month, int day) {
         setDate(year, month, day);
-        updateTimeAndDateDisplay();
+        final Activity activity = getActivity();
+        if (activity != null) {
+            updateTimeAndDateDisplay(activity);
+        }
     }
 
     @Override
     public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
         setTime(hourOfDay, minute);
-        updateTimeAndDateDisplay();
+        final Activity activity = getActivity();
+        if (activity != null) {
+            updateTimeAndDateDisplay(activity);
+        }
 
         // We don't need to call timeUpdated() here because the TIME_CHANGED
         // broadcast is sent by the AlarmManager as a side effect of setting the
@@ -177,7 +184,7 @@ public class DateTimeSettings extends SettingsPreferenceFragment
                     getResources().getString(R.string.default_date_format));
             Settings.System.putString(getContentResolver(), 
                     Settings.System.DATE_FORMAT, format);
-            updateTimeAndDateDisplay();
+            updateTimeAndDateDisplay(getActivity());
         } else if (key.equals(KEY_AUTO_TIME)) {
             boolean autoEnabled = preferences.getBoolean(key, true);
             Settings.System.putInt(getContentResolver(), 
@@ -260,7 +267,7 @@ public class DateTimeSettings extends SettingsPreferenceFragment
             showDialog(DIALOG_TIMEPICKER);
         } else if (preference == mTime24Pref) {
             set24Hour(((CheckBoxPreference)mTime24Pref).isChecked());
-            updateTimeAndDateDisplay();
+            updateTimeAndDateDisplay(getActivity());
             timeUpdated();
         }
         return super.onPreferenceTreeClick(preferenceScreen, preference);
@@ -269,7 +276,7 @@ public class DateTimeSettings extends SettingsPreferenceFragment
     @Override
     public void onActivityResult(int requestCode, int resultCode,
             Intent data) {
-        updateTimeAndDateDisplay();
+        updateTimeAndDateDisplay(getActivity());
     }
     
     private void timeUpdated() {
@@ -374,7 +381,10 @@ public class DateTimeSettings extends SettingsPreferenceFragment
     private BroadcastReceiver mIntentReceiver = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
-            updateTimeAndDateDisplay();
+            final Activity activity = getActivity();
+            if (activity != null) {
+                updateTimeAndDateDisplay(activity);
+            }
         }
     };
 }
