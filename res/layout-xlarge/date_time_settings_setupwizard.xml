@@ -19,7 +19,7 @@
               android:layout_width="fill_parent"
               android:layout_height="fill_parent"
               android:paddingTop="70dip"
-              android:paddingBottom="40dip"
+              android:paddingBottom="100dip"
               android:paddingLeft="60dip"
               android:paddingRight="60dip">
 
@@ -29,7 +29,7 @@
               android:layout_height="wrap_content"
               android:layout_weight="0"
               android:gravity="center"
-              android:layout_marginBottom="10dip"
+              android:layout_marginBottom="30dip"
               android:layout_alignParentTop="true"
               android:textSize="64dip"
               android:textColor="#FF30FF30"
@@ -41,69 +41,98 @@
                   android:layout_height="fill_parent"
                   android:layout_weight="1">
         <!-- Left side: time zone setting -->
-        <LinearLayout android:orientation="vertical"
-                      android:layout_width="0px"
-                      android:layout_weight="1"
-                      android:layout_height="fill_parent">
-            <!-- TODO: replace with appropratie UI component -->
-            <CheckBox android:id="@+id/time_zone_auto"
-                      android:layout_width="wrap_content"
-                      android:layout_height="wrap_content"
-                      android:gravity="right|center_horizontal"
-                      android:layout_marginBottom="5dip"
-                      android:textSize="32dip"
-                      android:text="@string/time_zone_auto_stub"/>
-
-            <!-- text should manually be set. -->
-            <Button android:id="@+id/current_time_zone"
-                    android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
-                    android:textSize="24dip"
-                    android:layout_alignParentTop="true" />
-            <LinearLayout android:id="@+id/zone_picker"
+        <RelativeLayout android:layout_width="0px"
+                        android:layout_weight="1"
+                        android:layout_height="fill_parent"
+                        android:layout_marginRight="50dip">
+            <LinearLayout android:id="@+id/timezone"
                           android:orientation="vertical"
                           android:layout_width="fill_parent"
-                          android:layout_height="fill_parent"
-                          android:paddingLeft="10dip"
-                          android:paddingBottom="20dip"
-                          android:gravity="center"
-                          android:visibility="gone"
-                          android:clickable="true">
-                <fragment android:id="@+id/zone_picker_fragment"
-                          class="com.android.settings.ZonePicker"
-                          android:layout_width="fill_parent"
-                          android:layout_height="wrap_content" />
+                          android:layout_height="wrap_content"
+                          android:layout_weight="1"
+                          android:layout_alignParentTop="true">
+
+                <CheckBox android:id="@+id/time_zone_auto"
+                          android:layout_width="wrap_content"
+                          android:layout_height="wrap_content"
+                          android:gravity="right|center_horizontal"
+                          android:layout_marginBottom="5dip"
+                          android:textSize="32dip"
+                          android:text="@string/time_zone_auto_stub"/>
+
+                <!-- text should manually be set. -->
+                <Button android:id="@+id/current_time_zone"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:textSize="24dip"
+                        android:layout_alignParentTop="true" />
+                <LinearLayout android:id="@+id/zone_picker"
+                              android:orientation="vertical"
+                              android:layout_width="fill_parent"
+                              android:layout_height="350dip"
+                              android:paddingLeft="10dip"
+                              android:paddingBottom="20dip"
+                              android:gravity="center"
+                              android:visibility="gone"
+                              android:clickable="true">
+                    <fragment android:id="@+id/zone_picker_fragment"
+                              class="com.android.settings.ZonePicker"
+                              android:layout_width="fill_parent"
+                              android:layout_height="wrap_content" />
+                </LinearLayout>
             </LinearLayout>
-        </LinearLayout>
+            <Button android:id="@+id/skip_button"
+                    android:layout_width="300dip"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0"
+                    android:layout_alignParentBottom="true"
+                    android:layout_centerHorizontal="true"
+                    android:textSize="32dip"
+                    android:text="@string/skip_label"/>
+        </RelativeLayout>
 
         <!-- Right side: date & time setting -->
-        <LinearLayout android:orientation="vertical"
-                      android:layout_width="0px"
-                      android:layout_weight="1"
-                      android:layout_height="fill_parent">
-
-            <!-- TODO: replace with appropratie UI component -->
-            <CheckBox android:id="@+id/date_time_auto"
-                      android:layout_width="wrap_content"
-                      android:layout_height="wrap_content"
-                      android:gravity="right|center_horizontal"
-                      android:textSize="32dip"
-                      android:text="@string/date_time_auto" />
-
-            <LinearLayout android:orientation="horizontal"
+        <RelativeLayout android:layout_width="0px"
+                        android:layout_weight="1"
+                        android:layout_height="fill_parent"
+                        android:layout_marginLeft="50dip">
+            <LinearLayout android:id="@+id/datetime"
+                          android:orientation="vertical"
                           android:layout_width="fill_parent"
-                          android:layout_height="wrap_content">
-                <TimePicker android:id="@+id/time_picker"
-                            android:layout_width="0px"
-                            android:layout_weight=".5"
-                            android:layout_height="wrap_content"
-                            android:visibility="visible"/>
-                <DatePicker android:id="@+id/date_picker"
-                            android:layout_width="0px"
-                            android:layout_weight=".5"
-                            android:layout_height="wrap_content"/>
+                          android:layout_height="wrap_content"
+                          android:layout_weight="1"
+                          android:layout_alignParentTop="true">
+
+                <CheckBox android:id="@+id/date_time_auto"
+                          android:layout_width="wrap_content"
+                          android:layout_height="wrap_content"
+                          android:gravity="right|center_horizontal"
+                          android:textSize="32dip"
+                          android:text="@string/date_time_auto" />
+
+                <LinearLayout android:orientation="horizontal"
+                              android:layout_width="fill_parent"
+                              android:layout_height="wrap_content">
+                    <TimePicker android:id="@+id/time_picker"
+                                android:layout_width="0px"
+                                android:layout_weight=".5"
+                                android:layout_height="wrap_content"
+                                android:visibility="visible"/>
+                    <DatePicker android:id="@+id/date_picker"
+                                android:layout_width="0px"
+                                android:layout_weight=".5"
+                                android:layout_height="wrap_content"/>
+                </LinearLayout>
             </LinearLayout>
-        </LinearLayout>
+            <Button android:id="@+id/next_button"
+                    android:layout_width="300dip"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0"
+                    android:layout_alignParentBottom="true"
+                    android:layout_centerHorizontal="true"
+                    android:textSize="32dip"
+                    android:text="@string/next_label" />
+        </RelativeLayout>
     </LinearLayout>
 
     <LinearLayout android:id="@+id/bottom"
@@ -112,22 +141,6 @@
                   android:gravity="center"
                   android:layout_height="wrap_content"
                   android:layout_weight="0">
-        <Button android:id="@+id/skip_button"
-                android:layout_width="300dip"
-                android:layout_height="wrap_content"
-                android:layout_alignParentBottom="true"
-                android:layout_alignParentLeft="true"
-                android:layout_marginRight="50dip"
-                android:textSize="32dip"
-                android:text="@string/skip_label"/>
 
-        <Button android:id="@+id/next_button"
-                android:layout_width="300dip"
-                android:layout_height="wrap_content"
-                android:layout_alignParentBottom="true"
-                android:layout_alignParentRight="true"
-                android:layout_marginLeft="50dip"
-                android:textSize="32dip"
-                android:text="@string/next_label" />
     </LinearLayout>
 </LinearLayout>
