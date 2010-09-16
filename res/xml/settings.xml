@@ -93,10 +93,10 @@
              preference. -->
 
         <com.android.settings.IconPreferenceScreen
+            android:fragment="com.android.settings.ManageAccountsSettings"
             settings:icon="@drawable/ic_settings_sync"
             android:title="@string/sync_settings"
             android:key="sync_settings">
-            <intent android:action="android.settings.SYNC_SETTINGS" />
         </com.android.settings.IconPreferenceScreen>
 
         <!-- Privacy -->

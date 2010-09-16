@@ -830,6 +830,17 @@
             </intent-filter>
         </activity>
 
+        <activity-alias
+            android:name="ManageAccountsSettings"
+            android:label="@string/sync_settings"
+            android:targetActivity="Settings">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <action android:name="android.settings.SYNC_SETTINGS" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity-alias>
+
         <receiver android:name=".widget.SettingsAppWidgetProvider" android:label="@string/gadget_title">
             <intent-filter>
                 <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
