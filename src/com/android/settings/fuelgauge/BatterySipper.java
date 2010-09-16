@@ -45,8 +45,11 @@ class BatterySipper implements Comparable<BatterySipper> {
     long usageTime;
     long cpuTime;
     long gpsTime;
+    long wifiRunningTime;
     long cpuFgTime;
     long wakeLockTime;
+    long tcpBytesReceived;
+    long tcpBytesSent;
     double percent;
     double noCoveragePercent;
     String defaultPackageName;
