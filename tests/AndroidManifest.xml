@@ -37,4 +37,9 @@
         android:label="Settings Launch Performance">
     </instrumentation>
 
+    <instrumentation android:name="android.test.InstrumentationTestRunner"
+        android:targetPackage="com.android.settings"
+        android:label="Settings Test Cases">
+    </instrumentation>
+
 </manifest>

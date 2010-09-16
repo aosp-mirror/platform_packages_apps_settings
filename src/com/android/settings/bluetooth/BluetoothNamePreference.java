@@ -27,8 +27,8 @@ import android.content.IntentFilter;
 import android.preference.EditTextPreference;
 import android.text.Editable;
 import android.text.InputFilter;
+import android.text.Spanned;
 import android.text.TextWatcher;
-import android.text.InputFilter.LengthFilter;
 import android.util.AttributeSet;
 import android.widget.Button;
 import android.widget.EditText;
@@ -40,8 +40,7 @@ import android.widget.EditText;
  */
 public class BluetoothNamePreference extends EditTextPreference implements TextWatcher {
     private static final String TAG = "BluetoothNamePreference";
-    // TODO(): Investigate bluetoothd/dbus crash when length is set to 248, limit as per spec.
-    private static final int BLUETOOTH_NAME_MAX_LENGTH = 200;
+    private static final int BLUETOOTH_NAME_MAX_LENGTH_BYTES = 248;
 
     private LocalBluetoothManager mLocalManager;
 
@@ -75,8 +74,11 @@ public class BluetoothNamePreference extends EditTextPreference implements TextW
 
         // Make sure the OK button is disabled (if necessary) after rotation
         EditText et = getEditText();
-        et.setFilters(new InputFilter[] {new LengthFilter(BLUETOOTH_NAME_MAX_LENGTH)});
         if (et != null) {
+            et.setFilters(new InputFilter[] {
+                    new Utf8ByteLengthFilter(BLUETOOTH_NAME_MAX_LENGTH_BYTES)
+            });
+
             et.addTextChangedListener(this);
             Dialog d = getDialog();
             if (d instanceof AlertDialog) {
@@ -135,5 +137,69 @@ public class BluetoothNamePreference extends EditTextPreference implements TextW
     // TextWatcher interface
     public void onTextChanged(CharSequence s, int start, int before, int count) {
         // not used
+    }
+
+    /**
+     * This filter will constrain edits so that the text length is not
+     * greater than the specified number of bytes using UTF-8 encoding.
+     * <p>The JNI method used by {@link android.server.BluetoothService}
+     * to convert UTF-16 to UTF-8 doesn't support surrogate pairs,
+     * therefore code points outside of the basic multilingual plane
+     * (0000-FFFF) will be encoded as a pair of 3-byte UTF-8 characters,
+     * rather than a single 4-byte UTF-8 encoding. Dalvik implements this
+     * conversion in {@code convertUtf16ToUtf8()} in
+     * {@code dalvik/vm/UtfString.c}.
+     * <p>This JNI method is unlikely to change in the future due to
+     * backwards compatibility requirements. It's also unclear whether
+     * the installed base of Bluetooth devices would correctly handle the
+     * encoding of surrogate pairs in UTF-8 as 4 bytes rather than 6.
+     * However, this filter will still work in scenarios where surrogate
+     * pairs are encoded as 4 bytes, with the caveat that the maximum
+     * length will be constrained more conservatively than necessary.
+     */
+    public static class Utf8ByteLengthFilter implements InputFilter {
+        private int mMaxBytes;
+
+        public Utf8ByteLengthFilter(int maxBytes) {
+            mMaxBytes = maxBytes;
+        }
+
+        public CharSequence filter(CharSequence source, int start, int end,
+                                   Spanned dest, int dstart, int dend) {
+            int srcByteCount = 0;
+            // count UTF-8 bytes in source substring
+            for (int i = start; i < end; i++) {
+                char c = source.charAt(i);
+                srcByteCount += (c < 0x0080) ? 1 : (c < 0x0800 ? 2 : 3);
+            }
+            int destLen = dest.length();
+            int destByteCount = 0;
+            // count UTF-8 bytes in destination excluding replaced section
+            for (int i = 0; i < destLen; i++) {
+                if (i < dstart || i >= dend) {
+                    char c = dest.charAt(i);
+                    destByteCount += (c < 0x0080) ? 1 : (c < 0x0800 ? 2 : 3);
+                }
+            }
+            int keepBytes = mMaxBytes - destByteCount;
+            if (keepBytes <= 0) {
+                return "";
+            } else if (keepBytes >= srcByteCount) {
+                return null; // use original dest string
+            } else {
+                // find end position of largest sequence that fits in keepBytes
+                for (int i = start; i < end; i++) {
+                    char c = source.charAt(i);
+                    keepBytes -= (c < 0x0080) ? 1 : (c < 0x0800 ? 2 : 3);
+                    if (keepBytes < 0) {
+                        return source.subSequence(start, i);
+                    }
+                }
+                // If the entire substring fits, we should have returned null
+                // above, so this line should not be reached. If for some
+                // reason it is, return null to use the original dest string.
+                return null;
+            }
+        }
     }
 }
