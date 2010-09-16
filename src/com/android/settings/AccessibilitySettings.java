@@ -88,11 +88,6 @@ public class AccessibilitySettings extends SettingsPreferenceFragment {
             POWER_BUTTON_ENDS_CALL_CHECKBOX);
 
         addAccessibilitServicePreferences();
-    }
-
-    @Override
-    public void onResume() {
-        super.onResume();
 
         final HashSet<String> enabled = new HashSet<String>();
         String settingValue = Settings.Secure.getString(getContentResolver(),
