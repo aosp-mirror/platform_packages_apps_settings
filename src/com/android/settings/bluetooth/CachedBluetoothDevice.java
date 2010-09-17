@@ -88,10 +88,10 @@ public class CachedBluetoothDevice implements Comparable<CachedBluetoothDevice> 
     // See mConnectAttempted
     private static final long MAX_UUID_DELAY_FOR_AUTO_CONNECT = 5000;
 
-    
+
     /**
      * Describes the current device and profile for logging.
-     * 
+     *
      * @param profile Profile to describe
      * @return Description of the device and profile
      */
@@ -104,7 +104,7 @@ public class CachedBluetoothDevice implements Comparable<CachedBluetoothDevice> 
 
         return sb.toString();
     }
-    
+
     private String describe(Profile profile) {
         return describe(this, profile);
     }
@@ -261,7 +261,7 @@ public class CachedBluetoothDevice implements Comparable<CachedBluetoothDevice> 
                         .getProfileManager(mLocalManager, profile);
                 if (profileManager.isPreferred(mDevice)) {
                     ++preferredProfiles;
-                    disconnectConnected(profile);
+                    disconnectConnected(this, profile);
                     connectInt(this, profile);
                 }
             }
@@ -284,7 +284,7 @@ public class CachedBluetoothDevice implements Comparable<CachedBluetoothDevice> 
                 LocalBluetoothProfileManager profileManager = LocalBluetoothProfileManager
                         .getProfileManager(mLocalManager, profile);
                 profileManager.setPreferred(mDevice, false);
-                disconnectConnected(profile);
+                disconnectConnected(this, profile);
                 connectInt(this, profile);
             }
         }
@@ -294,19 +294,20 @@ public class CachedBluetoothDevice implements Comparable<CachedBluetoothDevice> 
         mConnectAttempted = SystemClock.elapsedRealtime();
         // Reset the only-show-one-error-dialog tracking variable
         mIsConnectingErrorPossible = true;
-        disconnectConnected(profile);
+        disconnectConnected(this, profile);
         connectInt(this, profile);
     }
 
-    private void disconnectConnected(Profile profile) {
+    private void disconnectConnected(CachedBluetoothDevice device, Profile profile) {
         LocalBluetoothProfileManager profileManager =
             LocalBluetoothProfileManager.getProfileManager(mLocalManager, profile);
         CachedBluetoothDeviceManager cachedDeviceManager = mLocalManager.getCachedDeviceManager();
         Set<BluetoothDevice> devices = profileManager.getConnectedDevices();
         if (devices == null) return;
-        for (BluetoothDevice device : devices) {
-            CachedBluetoothDevice cachedDevice = cachedDeviceManager.findDevice(device);
-            if (cachedDevice != null) {
+        for (BluetoothDevice btDevice : devices) {
+            CachedBluetoothDevice cachedDevice = cachedDeviceManager.findDevice(btDevice);
+
+            if (cachedDevice != null && !cachedDevice.equals(device)) {
                 disconnectInt(cachedDevice, profile);
             }
         }
