@@ -447,7 +447,7 @@ public class WifiConfigController implements TextWatcher,
 
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-        if (view == mSecuritySpinner) {
+        if (parent == mSecuritySpinner) {
             mAccessPointSecurity = position;
             showSecurityFields();
             enableSubmitIfAppropriate();
