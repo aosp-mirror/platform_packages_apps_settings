@@ -188,7 +188,6 @@ public class WifiSettings extends SettingsPreferenceFragment
         mAddNetwork = findPreference("add_network");
 
         registerForContextMenu(getListView());
-
         setHasOptionsMenu(true);
     }
 
@@ -267,7 +266,7 @@ public class WifiSettings extends SettingsPreferenceFragment
                 }
                 return true;
             case MENU_ID_ADVANCED:
-                startActivity(new Intent(getActivity(), AdvancedSettings.class));
+                startFragment(this, AdvancedSettings.class.getCanonicalName(), -1, null);
                 return true;
         }
         return super.onOptionsItemSelected(item);
