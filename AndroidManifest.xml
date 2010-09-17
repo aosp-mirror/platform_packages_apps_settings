@@ -384,7 +384,7 @@
         <activity-alias android:name=".ManageApplications"
             android:targetActivity=".applications.ManageApplications"
             android:exported="true" />
-        
+
         <activity android:name=".applications.InstalledAppDetails"
                 android:theme="@android:style/Theme.NoTitleBar"
                 android:label="@string/application_info_label">
@@ -407,7 +407,7 @@
                 <category android:name="com.android.settings.SHORTCUT" />
             </intent-filter>
         </activity-alias>
-        
+
         <!-- Provide direct entry into manage apps showing running services. -->
         <activity-alias android:name=".applications.StorageUse"
                 android:label="@string/storageuse_settings_title"
@@ -420,7 +420,7 @@
                 <category android:name="com.android.settings.SHORTCUT" />
             </intent-filter>
         </activity-alias>
-        
+
         <activity android:name=".applications.RunningServiceDetails"
                 android:theme="@android:style/Theme.NoTitleBar"
                 android:label="@string/runningservicedetails_settings_title">

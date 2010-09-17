@@ -48,47 +48,50 @@ public class DateTimeSettings extends SettingsPreferenceFragment
 
     private static final String HOURS_12 = "12";
     private static final String HOURS_24 = "24";
-    
+
     // Used for showing the current date format, which looks like "12/31/2010", "2010/12/13", etc.
     // The date value is dummy (independent of actual date).
     private Calendar mDummyDate;
 
     private static final String KEY_DATE_FORMAT = "date_format";
     private static final String KEY_AUTO_TIME = "auto_time";
+    private static final String KEY_AUTO_TIME_ZONE = "auto_zone";
 
     private static final int DIALOG_DATEPICKER = 0;
     private static final int DIALOG_TIMEPICKER = 1;
-    
-    private CheckBoxPreference mAutoPref;
+
+    private CheckBoxPreference mAutoTimePref;
     private Preference mTimePref;
     private Preference mTime24Pref;
+    private CheckBoxPreference mAutoTimeZonePref;
     private Preference mTimeZone;
     private Preference mDatePref;
     private ListPreference mDateFormat;
-    
+
     @Override
     public void onCreate(Bundle icicle) {
         super.onCreate(icicle);
-        
+
         addPreferencesFromResource(R.xml.date_time_prefs);
-        
-        initUI();        
+
+        initUI();
     }
-    
+
     private void initUI() {
-        boolean autoEnabled = getAutoState();
+        boolean autoTimeEnabled = getAutoState(Settings.System.AUTO_TIME);
+        boolean autoTimeZoneEnabled = getAutoState(Settings.System.AUTO_TIME_ZONE);
 
         mDummyDate = Calendar.getInstance();
         mDummyDate.set(mDummyDate.get(Calendar.YEAR), 11, 31, 13, 0, 0);
-        
-        mAutoPref = (CheckBoxPreference) findPreference(KEY_AUTO_TIME);
-        mAutoPref.setChecked(autoEnabled);
+
+        mAutoTimePref = (CheckBoxPreference) findPreference(KEY_AUTO_TIME);
+        mAutoTimePref.setChecked(autoTimeEnabled);
         mTimePref = findPreference("time");
         mTime24Pref = findPreference("24 hour");
         mTimeZone = findPreference("timezone");
         mDatePref = findPreference("date");
         mDateFormat = (ListPreference) findPreference(KEY_DATE_FORMAT);
-        
+
         String [] dateFormats = getResources().getStringArray(R.array.date_format_values);
         String [] formattedDates = new String[dateFormats.length];
         String currentFormat = getDateFormat();
@@ -109,22 +112,23 @@ public class DateTimeSettings extends SettingsPreferenceFragment
                 formattedDates[i] = formatted;
             }
         }
-        
+
         mDateFormat.setEntries(formattedDates);
         mDateFormat.setEntryValues(R.array.date_format_values);
         mDateFormat.setValue(currentFormat);
-        
-        mTimePref.setEnabled(!autoEnabled);
-        mDatePref.setEnabled(!autoEnabled);
-        mTimeZone.setEnabled(!autoEnabled);
+
+        mTimePref.setEnabled(!autoTimeEnabled);
+        mDatePref.setEnabled(!autoTimeEnabled);
+        mTimeZone.setEnabled(!autoTimeZoneEnabled);
     }
 
-    
+
     @Override
     public void onResume() {
         super.onResume();
-        
-        getPreferenceScreen().getSharedPreferences().registerOnSharedPreferenceChangeListener(this);
+
+        getPreferenceScreen().getSharedPreferences()
+                .registerOnSharedPreferenceChangeListener(this);
 
         ((CheckBoxPreference)mTime24Pref).setChecked(is24Hour());
 
@@ -138,13 +142,14 @@ public class DateTimeSettings extends SettingsPreferenceFragment
         updateTimeAndDateDisplay(getActivity());
     }
 
-    @Override 
+    @Override
     public void onPause() {
         super.onPause();
         getActivity().unregisterReceiver(mIntentReceiver);
-        getPreferenceScreen().getSharedPreferences().unregisterOnSharedPreferenceChangeListener(this);
+        getPreferenceScreen().getSharedPreferences()
+                .unregisterOnSharedPreferenceChangeListener(this);
     }
-    
+
     private void updateTimeAndDateDisplay(Context context) {
         java.text.DateFormat shortDateFormat = DateFormat.getDateFormat(context);
         final Calendar now = Calendar.getInstance();
@@ -180,19 +185,22 @@ public class DateTimeSettings extends SettingsPreferenceFragment
     @Override
     public void onSharedPreferenceChanged(SharedPreferences preferences, String key) {
         if (key.equals(KEY_DATE_FORMAT)) {
-            String format = preferences.getString(key, 
+            String format = preferences.getString(key,
                     getResources().getString(R.string.default_date_format));
-            Settings.System.putString(getContentResolver(), 
+            Settings.System.putString(getContentResolver(),
                     Settings.System.DATE_FORMAT, format);
             updateTimeAndDateDisplay(getActivity());
         } else if (key.equals(KEY_AUTO_TIME)) {
             boolean autoEnabled = preferences.getBoolean(key, true);
-            Settings.System.putInt(getContentResolver(), 
-                    Settings.System.AUTO_TIME, 
+            Settings.System.putInt(getContentResolver(), Settings.System.AUTO_TIME,
                     autoEnabled ? 1 : 0);
             mTimePref.setEnabled(!autoEnabled);
             mDatePref.setEnabled(!autoEnabled);
-            mTimeZone.setEnabled(!autoEnabled);
+        } else if (key.equals(KEY_AUTO_TIME_ZONE)) {
+            boolean autoZoneEnabled = preferences.getBoolean(key, true);
+            Settings.System.putInt(
+                    getContentResolver(), Settings.System.AUTO_TIME_ZONE, autoZoneEnabled ? 1 : 0);
+            mTimeZone.setEnabled(!autoZoneEnabled);
         }
     }
 
@@ -272,39 +280,38 @@ public class DateTimeSettings extends SettingsPreferenceFragment
         }
         return super.onPreferenceTreeClick(preferenceScreen, preference);
     }
-    
+
     @Override
     public void onActivityResult(int requestCode, int resultCode,
             Intent data) {
         updateTimeAndDateDisplay(getActivity());
     }
-    
+
     private void timeUpdated() {
         Intent timeChanged = new Intent(Intent.ACTION_TIME_CHANGED);
         getActivity().sendBroadcast(timeChanged);
     }
-    
+
     /*  Get & Set values from the system settings  */
-    
+
     private boolean is24Hour() {
         return DateFormat.is24HourFormat(getActivity());
     }
-    
+
     private void set24Hour(boolean is24Hour) {
         Settings.System.putString(getContentResolver(),
                 Settings.System.TIME_12_24,
                 is24Hour? HOURS_24 : HOURS_12);
     }
-    
+
     private String getDateFormat() {
-        return Settings.System.getString(getContentResolver(), 
+        return Settings.System.getString(getContentResolver(),
                 Settings.System.DATE_FORMAT);
     }
-    
-    private boolean getAutoState() {
+
+    private boolean getAutoState(String name) {
         try {
-            return Settings.System.getInt(getContentResolver(), 
-                Settings.System.AUTO_TIME) > 0;            
+            return Settings.System.getInt(getContentResolver(), name) > 0;
         } catch (SettingNotFoundException snfe) {
             return true;
         }
@@ -346,7 +353,7 @@ public class DateTimeSettings extends SettingsPreferenceFragment
             append(", ").
             append(tz.getDisplayName(daylight, TimeZone.LONG));
 
-        return sb.toString();        
+        return sb.toString();
     }
 
     private static char[] formatOffset(int off) {
@@ -364,7 +371,7 @@ public class DateTimeSettings extends SettingsPreferenceFragment
             buf[3] = '+';
         }
 
-        int hours = off / 60; 
+        int hours = off / 60;
         int minutes = off % 60;
 
         buf[4] = (char) ('0' + hours / 10);
@@ -377,7 +384,7 @@ public class DateTimeSettings extends SettingsPreferenceFragment
 
         return buf;
     }
-    
+
     private BroadcastReceiver mIntentReceiver = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {

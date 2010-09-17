@@ -498,12 +498,22 @@
     <string name="date_and_time_settings_title">Date &amp; time</string>
     <!-- Main Settings screen setting option summary text for the item to go into the date and time settings. -->
     <string name="date_and_time_settings_summary">Set date, time, time zone &amp; formats</string>
-    <!-- Date & time setting screen setting check box title if the date and time should be determined automatically -->
-    <string name="date_time_auto">Automatic</string>
-    <!-- Date & time setting screen setting option summary text when Automatic check box is selected (that is, when date and time should be determined automatically) -->
-    <string name="date_time_auto_summaryOn">Use network-provided values</string>
-    <!-- Date & time setting screen setting option summary text when Automatic check box is clear -->
-    <string name="date_time_auto_summaryOff">Use network-provided values</string>
+    <!-- Date & time setting screen setting check box title if the date and time should be determined automatically [CHAR LIMIT=25] -->
+    <string name="date_time_auto">Automatic date &amp; time</string>
+    <!-- Date & time setting screen setting option summary text when Automatic check box is selected
+        (that is, when date and time should be determined automatically) [CHAR LIMIT=100] -->
+    <string name="date_time_auto_summaryOn">Use network-provided time</string>
+    <!-- Date & time setting screen setting option summary text when Automatic check box is clear
+        [CHAR LIMIT=100] -->
+    <string name="date_time_auto_summaryOff">Use network-provided time</string>
+    <!-- Date & time setting screen setting check box title if the time zone should be determined automatically [CHAR LIMIT=25] -->
+    <string name="zone_auto">Automatic time zone</string>
+    <!-- Date & time setting screen setting option summary text when Automatic time zone check box is selected (that is, when date and time should be determined automatically)
+        [CHAR LIMIT=100]  -->
+    <string name="zone_auto_summaryOn">Use network-provided time zone</string>
+    <!-- Date & time setting screen setting option summary text when Automatic time zone check box is clear
+        [CHAR LIMIT=100] -->
+    <string name="zone_auto_summaryOff">Use network-provided time zone</string>
     <!-- Date & time setting screen setting check box title -->
     <string name="date_time_24hour">Use 24-hour format</string>
     <!-- Date & time setting screen setting option title -->
@@ -525,7 +535,7 @@
     <string name="lock_after_timeout">Lock device after timeout</string>
     <!-- Security settings screen, setting option summary to change screen timeout -->
     <string name="lock_after_timeout_summary">Adjust the delay before the device automatically locks</string>
-    
+
     <!-- Main Settings screen setting option title for the item to take you the security and location screen -->
     <string name="security_settings_title">Location &amp; security</string>
     <!-- Location & security settings screen title -->
@@ -1927,7 +1937,7 @@ found in the list of installed applications.</string>
     <!-- Message that a process's provider is in use. -->
     <string name="process_provider_in_use_description">Provider <xliff:g id="comp_name">%1$s</xliff:g>
         is in use.</string>
-    
+
     <!-- Language Settings --> <skip />
     <!-- Title of setting on main settings screen.  This item will take the user to the screen to tweak settings realted to locale and text -->
     <string name="language_settings">Language &amp; keyboard</string>
@@ -2077,7 +2087,7 @@ found in the list of installed applications.</string>
 
     <!-- Used to show an amount of time in the form "s seconds" in BatteryHistory -->
     <string name="battery_history_seconds"><xliff:g id="seconds">%1$d</xliff:g>s</string>
-    
+
     <!-- XXX remove? Strings used for displaying usage statistics -->
     <string name="usage_stats_label">Usage statistics</string>
 
