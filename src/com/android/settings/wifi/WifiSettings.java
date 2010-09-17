@@ -33,6 +33,7 @@ import android.net.wifi.ScanResult;
 import android.net.wifi.SupplicantState;
 import android.net.wifi.WifiConfiguration;
 import android.net.wifi.WifiConfiguration.KeyMgmt;
+import static android.net.wifi.WifiConfiguration.INVALID_NETWORK_ID;
 import android.net.wifi.WifiInfo;
 import android.net.wifi.WifiManager;
 import android.os.Bundle;
@@ -44,7 +45,6 @@ import android.preference.PreferenceScreen;
 import android.provider.Settings.Secure;
 import android.security.Credentials;
 import android.security.KeyStore;
-import android.util.Log;
 import android.view.ContextMenu;
 import android.view.ContextMenu.ContextMenuInfo;
 import android.view.Menu;
@@ -102,7 +102,7 @@ public class WifiSettings extends SettingsPreferenceFragment
     private DetailedState mLastState;
     private WifiInfo mLastInfo;
 
-    private int mKeyStoreNetworkId = -1;
+    private int mKeyStoreNetworkId = INVALID_NETWORK_ID;
 
     // should Next button only be enabled when we have a connection?
     private boolean mEnableNextOnConnection;
@@ -198,10 +198,11 @@ public class WifiSettings extends SettingsPreferenceFragment
             mWifiEnabler.resume();
         }
         getActivity().registerReceiver(mReceiver, mFilter);
-        if (mKeyStoreNetworkId != -1 && KeyStore.getInstance().test() == KeyStore.NO_ERROR) {
+        if (mKeyStoreNetworkId != INVALID_NETWORK_ID &&
+                KeyStore.getInstance().test() == KeyStore.NO_ERROR) {
             mWifiManager.connectNetwork(mKeyStoreNetworkId);
         }
-        mKeyStoreNetworkId = -1;
+        mKeyStoreNetworkId = INVALID_NETWORK_ID;
         if (mInXlSetupWizard) {
             // We show "Now scanning"
             final int wifiState = mWifiManager.getWifiState();
@@ -285,7 +286,7 @@ public class WifiSettings extends SettingsPreferenceFragment
                         && mSelectedAccessPoint.getState() == null) {
                     menu.add(Menu.NONE, MENU_ID_CONNECT, 0, R.string.wifi_menu_connect);
                 }
-                if (mSelectedAccessPoint.networkId != -1) {
+                if (mSelectedAccessPoint.networkId != INVALID_NETWORK_ID) {
                     menu.add(Menu.NONE, MENU_ID_FORGET, 0, R.string.wifi_menu_forget);
                     menu.add(Menu.NONE, MENU_ID_MODIFY, 0, R.string.wifi_menu_modify);
                 }
@@ -300,7 +301,7 @@ public class WifiSettings extends SettingsPreferenceFragment
         }
         switch (item.getItemId()) {
             case MENU_ID_CONNECT: {
-                if (mSelectedAccessPoint.networkId != -1) {
+                if (mSelectedAccessPoint.networkId != INVALID_NETWORK_ID) {
                     if (!requireKeyStore(mSelectedAccessPoint.getConfig())) {
                         mWifiManager.connectNetwork(mSelectedAccessPoint.networkId);
                     }
@@ -601,23 +602,36 @@ public class WifiSettings extends SettingsPreferenceFragment
 
     /* package */ void submit() {
         final WifiConfigUiBase uiBase = (mDialog != null ? mDialog : mConfigPreference);
-        final WifiConfiguration config = uiBase.getController().getConfig();
+        final WifiConfigController configController = uiBase.getController();
 
-        if (config == null) {
-            if (mSelectedAccessPoint != null
-                    && !requireKeyStore(mSelectedAccessPoint.getConfig())) {
-                mWifiManager.connectNetwork(mSelectedAccessPoint.networkId);
-            }
-        } else if (config.networkId != -1) {
-            if (mSelectedAccessPoint != null) {
-                mWifiManager.saveNetwork(config);
-            }
-        } else {
-            if (uiBase.isEdit() || requireKeyStore(config)) {
-                mWifiManager.saveNetwork(config);
-            } else {
-                mWifiManager.connectNetwork(config);
-            }
+        switch(configController.chosenNetworkSetupMethod()) {
+            case WifiConfigController.WPS_PBC:
+                mWifiManager.startWpsPbc(mSelectedAccessPoint.bssid);
+                break;
+            case WifiConfigController.WPS_PIN:
+                int apPin = configController.getWpsPin();
+                mWifiManager.startWpsPin(mSelectedAccessPoint.bssid, apPin);
+                break;
+            case WifiConfigController.MANUAL:
+                final WifiConfiguration config = configController.getConfig();
+
+                if (config == null) {
+                    if (mSelectedAccessPoint != null
+                            && !requireKeyStore(mSelectedAccessPoint.getConfig())) {
+                        mWifiManager.connectNetwork(mSelectedAccessPoint.networkId);
+                    }
+                } else if (config.networkId != INVALID_NETWORK_ID) {
+                    if (mSelectedAccessPoint != null) {
+                        mWifiManager.saveNetwork(config);
+                    }
+                } else {
+                    if (uiBase.isEdit() || requireKeyStore(config)) {
+                        mWifiManager.saveNetwork(config);
+                    } else {
+                        mWifiManager.connectNetwork(config);
+                    }
+                }
+                break;
         }
 
         detachConfigPreference();

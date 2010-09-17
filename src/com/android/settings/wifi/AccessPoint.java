@@ -69,8 +69,10 @@ class AccessPoint extends Preference {
     static final int SECURITY_EAP = 3;
 
     final String ssid;
+    final String bssid;
     final int security;
     final int networkId;
+    boolean wpsAvailable = false;
 
     private WifiConfiguration mConfig;
     private int mRssi;
@@ -104,6 +106,7 @@ class AccessPoint extends Preference {
         super(context);
         setWidgetLayoutResource(R.layout.preference_widget_wifi_signal);
         ssid = (config.SSID == null ? "" : removeDoubleQuotes(config.SSID));
+        bssid = config.BSSID;
         security = getSecurity(config);
         networkId = config.networkId;
         mConfig = config;
@@ -114,7 +117,10 @@ class AccessPoint extends Preference {
         super(context);
         setWidgetLayoutResource(R.layout.preference_widget_wifi_signal);
         ssid = result.SSID;
+        bssid = result.BSSID;
         security = getSecurity(result);
+        wpsAvailable = security != SECURITY_NONE && security != SECURITY_EAP &&
+                result.capabilities.contains("WPS");
         networkId = -1;
         mRssi = result.level;
     }
@@ -218,8 +224,13 @@ class AccessPoint extends Preference {
             if (security == SECURITY_NONE) {
                 setSummary(status);
             } else {
-                String format = context.getString((status == null) ?
-                        R.string.wifi_secured : R.string.wifi_secured_with_status);
+                String format;
+                if (wpsAvailable && mConfig == null) {
+                    format = context.getString(R.string.wifi_secured_with_wps);
+                } else {
+                    format = context.getString((status == null) ?
+                            R.string.wifi_secured : R.string.wifi_secured_with_status);
+                }
                 String[] type = context.getResources().getStringArray(R.array.wifi_security);
                 setSummary(String.format(format, type[security], status));
             }
