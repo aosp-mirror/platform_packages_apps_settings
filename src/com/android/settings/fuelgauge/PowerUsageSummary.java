@@ -25,6 +25,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.os.Parcel;
+import android.os.Process;
 import android.os.RemoteException;
 import android.os.ServiceManager;
 import android.os.SystemClock;
@@ -67,7 +68,8 @@ public class PowerUsageSummary extends PreferenceActivity implements Runnable {
 
     IBatteryStats mBatteryInfo;
     BatteryStatsImpl mStats;
-    private List<BatterySipper> mUsageList = new ArrayList<BatterySipper>();
+    private final List<BatterySipper> mUsageList = new ArrayList<BatterySipper>();
+    private final List<BatterySipper> mWifiSippers = new ArrayList<BatterySipper>();
 
     private PreferenceGroup mAppListGroup;
 
@@ -79,7 +81,11 @@ public class PowerUsageSummary extends PreferenceActivity implements Runnable {
     private long mStatsPeriod = 0;
     private double mMaxPower = 1;
     private double mTotalPower;
+    private double mWifiPower;
     private PowerProfile mPowerProfile;
+
+    // How much the apps together have left WIFI running.
+    private long mAppWifiRunning;
 
     /** Queue for fetching name and icon for an application */
     private ArrayList<BatterySipper> mRequestQueue = new ArrayList<BatterySipper>();
@@ -162,6 +168,7 @@ public class PowerUsageSummary extends PreferenceActivity implements Runnable {
                     R.string.usage_type_cpu_foreground,
                     R.string.usage_type_wake_lock,
                     R.string.usage_type_gps,
+                    R.string.usage_type_wifi_running,
                     R.string.usage_type_data_send,
                     R.string.usage_type_data_recv,
                     R.string.usage_type_audio,
@@ -172,8 +179,9 @@ public class PowerUsageSummary extends PreferenceActivity implements Runnable {
                     sipper.cpuFgTime,
                     sipper.wakeLockTime,
                     sipper.gpsTime,
-                    uid != null? uid.getTcpBytesSent(mStatsType) : 0,
-                    uid != null? uid.getTcpBytesReceived(mStatsType) : 0,
+                    sipper.wifiRunningTime,
+                    sipper.tcpBytesSent,
+                    sipper.tcpBytesReceived,
                     0,
                     0
                 };
@@ -201,6 +209,25 @@ public class PowerUsageSummary extends PreferenceActivity implements Runnable {
                 };
             }
             break;
+            case WIFI:
+            {
+                types = new int[] {
+                    R.string.usage_type_wifi_running,
+                    R.string.usage_type_cpu,
+                    R.string.usage_type_cpu_foreground,
+                    R.string.usage_type_wake_lock,
+                    R.string.usage_type_data_send,
+                    R.string.usage_type_data_recv,
+                };
+                values = new double[] {
+                    sipper.usageTime,
+                    sipper.cpuTime,
+                    sipper.cpuFgTime,
+                    sipper.wakeLockTime,
+                    sipper.tcpBytesSent,
+                    sipper.tcpBytesReceived,
+                };
+            } break;
             default:
             {
                 types = new int[] {
@@ -267,9 +294,12 @@ public class PowerUsageSummary extends PreferenceActivity implements Runnable {
         }
         mMaxPower = 0;
         mTotalPower = 0;
+        mWifiPower = 0;
+        mAppWifiRunning = 0;
 
         mAppListGroup.removeAll();
         mUsageList.clear();
+        mWifiSippers.clear();
         processAppUsage();
         processMiscUsage();
 
@@ -402,8 +432,15 @@ public class PowerUsageSummary extends PreferenceActivity implements Runnable {
             wakelockTime /= 1000; // convert to millis
 
             // Add cost of data traffic
-            power += (u.getTcpBytesReceived(mStatsType) + u.getTcpBytesSent(mStatsType))
-                    * averageCostPerByte;
+            long tcpBytesReceived = u.getTcpBytesReceived(mStatsType);
+            long tcpBytesSent = u.getTcpBytesSent(mStatsType);
+            power += (tcpBytesReceived+tcpBytesSent) * averageCostPerByte;
+
+            // Add cost of keeping WIFI running.
+            long wifiRunningTimeMs = u.getWifiRunningTime(uSecTime, which) / 1000;
+            mAppWifiRunning += wifiRunningTimeMs;
+            power += (wifiRunningTimeMs
+                    * mPowerProfile.getAveragePower(PowerProfile.POWER_WIFI_ON)) / 1000;
 
             // Process Sensor usage
             Map<Integer, ? extends BatteryStats.Uid.Sensor> sensorStats = u.getSensorStats();
@@ -433,6 +470,8 @@ public class PowerUsageSummary extends PreferenceActivity implements Runnable {
                 power += (multiplier * sensorTime) / 1000;
             }
 
+            if (DEBUG) Log.i(TAG, "UID " + u.getUid() + ": power=" + power);
+
             // Add the app to the list if it is consuming power
             if (power != 0) {
                 BatterySipper app = new BatterySipper(this, mRequestQueue, mHandler,
@@ -440,12 +479,23 @@ public class PowerUsageSummary extends PreferenceActivity implements Runnable {
                         new double[] {power});
                 app.cpuTime = cpuTime;
                 app.gpsTime = gpsTime;
+                app.wifiRunningTime = wifiRunningTimeMs;
                 app.cpuFgTime = cpuFgTime;
                 app.wakeLockTime = wakelockTime;
-                mUsageList.add(app);
+                app.tcpBytesReceived = tcpBytesReceived;
+                app.tcpBytesSent = tcpBytesSent;
+                if (u.getUid() == Process.WIFI_UID) {
+                    mWifiSippers.add(app);
+                } else {
+                    mUsageList.add(app);
+                }
             }
-            if (power > mMaxPower) mMaxPower = power;
-            mTotalPower += power;
+            if (u.getUid() == Process.WIFI_UID) {
+                mWifiPower += power;
+            } else {
+                if (power > mMaxPower) mMaxPower = power;
+                mTotalPower += power;
+            }
             if (DEBUG) Log.i(TAG, "Added power = " + power);
         }
     }
@@ -503,12 +553,28 @@ public class PowerUsageSummary extends PreferenceActivity implements Runnable {
 
     private void addWiFiUsage(long uSecNow) {
         long onTimeMs = mStats.getWifiOnTime(uSecNow, mStatsType) / 1000;
-        long runningTimeMs = mStats.getWifiRunningTime(uSecNow, mStatsType) / 1000;
+        long runningTimeMs = mStats.getGlobalWifiRunningTime(uSecNow, mStatsType) / 1000;
+        if (DEBUG) Log.i(TAG, "WIFI runningTime=" + runningTimeMs
+                + " app runningTime=" + mAppWifiRunning);
+        runningTimeMs -= mAppWifiRunning;
+        if (runningTimeMs < 0) runningTimeMs = 0;
         double wifiPower = (onTimeMs * 0 /* TODO */
                 * mPowerProfile.getAveragePower(PowerProfile.POWER_WIFI_ON)
             + runningTimeMs * mPowerProfile.getAveragePower(PowerProfile.POWER_WIFI_ON)) / 1000;
-        addEntry(getString(R.string.power_wifi), DrainType.WIFI, runningTimeMs,
-                R.drawable.ic_settings_wifi, wifiPower);
+        if (DEBUG) Log.i(TAG, "WIFI power=" + wifiPower + " from procs=" + mWifiPower);
+        BatterySipper bs = addEntry(getString(R.string.power_wifi), DrainType.WIFI, runningTimeMs,
+                R.drawable.ic_settings_wifi, wifiPower + mWifiPower);
+        for (int i=0; i<mWifiSippers.size(); i++) {
+            BatterySipper wbs = mWifiSippers.get(i);
+            if (DEBUG) Log.i(TAG, "WIFI adding sipper " + wbs + ": cpu=" + wbs.cpuTime);
+            bs.cpuTime += wbs.cpuTime;
+            bs.gpsTime += wbs.gpsTime;
+            bs.wifiRunningTime += wbs.wifiRunningTime;
+            bs.cpuFgTime += wbs.cpuFgTime;
+            bs.wakeLockTime += wbs.wakeLockTime;
+            bs.tcpBytesReceived += wbs.tcpBytesReceived;
+            bs.tcpBytesSent += wbs.tcpBytesSent;
+        }
     }
 
     private void addIdleUsage(long uSecNow) {
@@ -594,6 +660,7 @@ public class PowerUsageSummary extends PreferenceActivity implements Runnable {
             parcel.setDataPosition(0);
             mStats = com.android.internal.os.BatteryStatsImpl.CREATOR
                     .createFromParcel(parcel);
+            mStats.distributeWorkLocked(BatteryStats.STATS_SINCE_CHARGED);
         } catch (RemoteException e) {
             Log.e(TAG, "RemoteException:", e);
         }
