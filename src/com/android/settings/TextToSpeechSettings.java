@@ -16,29 +16,30 @@
 
 package com.android.settings;
 
-import static android.provider.Settings.Secure.TTS_USE_DEFAULTS;
-import static android.provider.Settings.Secure.TTS_DEFAULT_RATE;
-import static android.provider.Settings.Secure.TTS_DEFAULT_LANG;
 import static android.provider.Settings.Secure.TTS_DEFAULT_COUNTRY;
-import static android.provider.Settings.Secure.TTS_DEFAULT_VARIANT;
+import static android.provider.Settings.Secure.TTS_DEFAULT_LANG;
+import static android.provider.Settings.Secure.TTS_DEFAULT_RATE;
 import static android.provider.Settings.Secure.TTS_DEFAULT_SYNTH;
+import static android.provider.Settings.Secure.TTS_DEFAULT_VARIANT;
 import static android.provider.Settings.Secure.TTS_ENABLED_PLUGINS;
+import static android.provider.Settings.Secure.TTS_USE_DEFAULTS;
 
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.ContentResolver;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
 import android.os.Bundle;
+import android.preference.CheckBoxPreference;
 import android.preference.ListPreference;
 import android.preference.Preference;
 import android.preference.Preference.OnPreferenceClickListener;
-import android.preference.PreferenceActivity;
 import android.preference.PreferenceGroup;
 import android.preference.PreferenceScreen;
-import android.preference.CheckBoxPreference;
 import android.provider.Settings;
 import android.provider.Settings.SettingNotFoundException;
 import android.speech.tts.TextToSpeech;
@@ -49,7 +50,7 @@ import java.util.List;
 import java.util.Locale;
 import java.util.StringTokenizer;
 
-public class TextToSpeechSettings extends PreferenceActivity implements
+public class TextToSpeechSettings extends SettingsPreferenceFragment implements
         Preference.OnPreferenceChangeListener, Preference.OnPreferenceClickListener,
         TextToSpeech.OnInitListener {
 
@@ -90,8 +91,6 @@ public class TextToSpeechSettings extends PreferenceActivity implements
     private String             mDefaultEng = "";
     private int                mDefaultRate = TextToSpeech.Engine.DEFAULT_RATE;
 
-    // Array of strings used to demonstrate TTS in the different languages.
-    private String[] mDemoStrings;
     // Index of the current string to use for the demo.
     private int      mDemoStringIndex = 0;
 
@@ -109,16 +108,14 @@ public class TextToSpeechSettings extends PreferenceActivity implements
     private static final int GET_SAMPLE_TEXT = 1983;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         addPreferencesFromResource(R.xml.tts_settings);
 
-        addEngineSpecificSettings();
+        final Activity activity = getActivity();
+        addEngineSpecificSettings(activity);
 
-        mDemoStrings = getResources().getStringArray(R.array.tts_demo_strings);
-
-        setVolumeControlStream(TextToSpeech.Engine.DEFAULT_STREAM);
+        activity.setVolumeControlStream(TextToSpeech.Engine.DEFAULT_STREAM);
 
         mEnableDemo = false;
         mTtsStarted = false;
@@ -128,12 +125,12 @@ public class TextToSpeechSettings extends PreferenceActivity implements
         mDefaultCountry = currentLocale.getISO3Country();
         mDefaultLocVariant = currentLocale.getVariant();
 
-        mTts = new TextToSpeech(this, this);
+        mTts = new TextToSpeech(activity, this);
     }
 
 
     @Override
-    protected void onStart() {
+    public void onStart() {
         super.onStart();
         if (mTtsStarted){
             // whenever we return to this screen, we don't know the state of the
@@ -147,7 +144,7 @@ public class TextToSpeechSettings extends PreferenceActivity implements
 
 
     @Override
-    protected void onDestroy() {
+    public void onDestroy() {
         super.onDestroy();
         if (mTts != null) {
             mTts.shutdown();
@@ -155,7 +152,7 @@ public class TextToSpeechSettings extends PreferenceActivity implements
     }
 
     @Override
-    protected void onPause() {
+    public void onPause() {
         super.onPause();
         if ((mDefaultRatePref != null) && (mDefaultRatePref.getDialog() != null)) {
             mDefaultRatePref.getDialog().dismiss();
@@ -168,9 +165,7 @@ public class TextToSpeechSettings extends PreferenceActivity implements
         }
     }
 
-
-
-    private void addEngineSpecificSettings() {
+    private void addEngineSpecificSettings(Context context) {
         PreferenceGroup enginesCategory = (PreferenceGroup) findPreference("tts_engines_section");
         Intent intent = new Intent("android.intent.action.START_TTS_ENGINE");
         ResolveInfo[] enginesArray = new ResolveInfo[0];
@@ -180,14 +175,14 @@ public class TextToSpeechSettings extends PreferenceActivity implements
             String prefKey = "";
             final String pluginPackageName = enginesArray[i].activityInfo.packageName;
             if (!enginesArray[i].activityInfo.packageName.equals(SYSTEM_TTS)) {
-                CheckBoxPreference chkbxPref = new CheckBoxPreference(this);
+                CheckBoxPreference chkbxPref = new CheckBoxPreference(context);
                 prefKey = KEY_PLUGIN_ENABLED_PREFIX + pluginPackageName;
                 chkbxPref.setKey(prefKey);
                 chkbxPref.setTitle(enginesArray[i].loadLabel(pm));
                 enginesCategory.addPreference(chkbxPref);
             }
             if (pluginHasSettings(pluginPackageName)) {
-                Preference pref = new Preference(this);
+                Preference pref = new Preference(context);
                 prefKey = KEY_PLUGIN_SETTINGS_PREFIX + pluginPackageName;
                 pref.setKey(prefKey);
                 pref.setTitle(enginesArray[i].loadLabel(pm));
@@ -360,7 +355,7 @@ public class TextToSpeechSettings extends PreferenceActivity implements
                 mDefaultLocVariant = new String();
             }
             mTts.setLanguage(new Locale(mDefaultLanguage, mDefaultCountry, mDefaultLocVariant));
-            mTts.setSpeechRate((float)(mDefaultRate/100.0f));
+            mTts.setSpeechRate(mDefaultRate/100.0f);
             initDefaultSettings();
             initClickers();
             updateWidgetState();
@@ -378,7 +373,8 @@ public class TextToSpeechSettings extends PreferenceActivity implements
     /**
      * Called when voice data integrity check returns
      */
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (requestCode == VOICE_DATA_INTEGRITY_CHECK) {
             if (data == null){
                 // The CHECK_TTS_DATA activity for the plugin did not run properly;
@@ -402,7 +398,7 @@ public class TextToSpeechSettings extends PreferenceActivity implements
             }
             if (available.size() > 0){
                 if (mTts == null) {
-                    mTts = new TextToSpeech(this, this);
+                    mTts = new TextToSpeech(getActivity(), this);
                 }
                 ListPreference ttsLanguagePref =
                         (ListPreference) findPreference("tts_default_lang");
@@ -478,7 +474,7 @@ public class TextToSpeechSettings extends PreferenceActivity implements
             updateWidgetState();
         } else if (requestCode == GET_SAMPLE_TEXT) {
             if (resultCode == TextToSpeech.LANG_AVAILABLE) {
-                String sample = getString(R.string.tts_demo);
+                String sample = getActivity().getString(R.string.tts_demo);
                 if ((data != null) && (data.getStringExtra("sampleText") != null)) {
                     sample = data.getStringExtra("sampleText");
                 }
@@ -491,7 +487,6 @@ public class TextToSpeechSettings extends PreferenceActivity implements
             }
         }
     }
-
 
     public boolean onPreferenceChange(Preference preference, Object objValue) {
         if (KEY_TTS_USE_DEFAULT.equals(preference.getKey())) {
@@ -507,7 +502,7 @@ public class TextToSpeechSettings extends PreferenceActivity implements
                 Settings.Secure.putInt(getContentResolver(),
                         TTS_DEFAULT_RATE, mDefaultRate);
                 if (mTts != null) {
-                    mTts.setSpeechRate((float)(mDefaultRate/100.0f));
+                    mTts.setSpeechRate(mDefaultRate/100.0f);
                 }
                 Log.i(TAG, "TTS default rate is " + mDefaultRate);
             } catch (NumberFormatException e) {
@@ -575,10 +570,11 @@ public class TextToSpeechSettings extends PreferenceActivity implements
             if (!chkPref.getKey().equals(KEY_TTS_USE_DEFAULT)){
                 if (chkPref.isChecked()) {
                     chkPref.setChecked(false);
-                    AlertDialog d = (new AlertDialog.Builder(this))
+                    AlertDialog d = (new AlertDialog.Builder(getActivity()))
                             .setTitle(android.R.string.dialog_alert_title)
                             .setIcon(android.R.drawable.ic_dialog_alert)
-                            .setMessage(getString(R.string.tts_engine_security_warning,
+                            .setMessage(
+                                    getActivity().getString(R.string.tts_engine_security_warning,
                                     chkPref.getTitle()))
                             .setCancelable(true)
                             .setPositiveButton(android.R.string.ok,
