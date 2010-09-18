@@ -563,15 +563,17 @@ public class BatteryHistoryChart extends View {
                     }
                 }
                 
-            } else if (curLevelPath != null) {
-                finishPaths(x+1, h, levelh, startX, lastY, curLevelPath, lastX,
-                        lastCharging, lastScreenOn, lastGpsOn, lastWifiRunning,
-                        lastWakeLock, lastPhoneSignalBin, lastLinePath);
-                lastX = lastY = -1;
-                curLevelPath = null;
-                lastLinePath = null;
-                lastCharging = lastScreenOn = lastGpsOn = lastWakeLock = false;
-                lastPhoneSignalBin = 0;
+            } else if (rec.cmd != BatteryStats.HistoryItem.CMD_OVERFLOW) {
+                if (curLevelPath != null) {
+                    finishPaths(x+1, h, levelh, startX, lastY, curLevelPath, lastX,
+                            lastCharging, lastScreenOn, lastGpsOn, lastWifiRunning,
+                            lastWakeLock, lastPhoneSignalBin, lastLinePath);
+                    lastX = lastY = -1;
+                    curLevelPath = null;
+                    lastLinePath = null;
+                    lastCharging = lastScreenOn = lastGpsOn = lastWakeLock = false;
+                    lastPhoneSignalBin = 0;
+                }
             }
             
             rec = rec.next;
