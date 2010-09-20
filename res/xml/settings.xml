@@ -118,21 +118,6 @@
                 android:targetClass="com.android.settings.deviceinfo.Memory" />
         </com.android.settings.IconPreferenceScreen>
 
-        <!-- Search. 
-             The settings activity will ensure that this is resolved to an
-             activity on the system image, otherwise it will remove this
-             preference.
-             The intent action is the same as
-             android.app.SearchManager.INTENT_ACTION_SEARCH_SETTINGS.
-             -->
-
-        <com.android.settings.IconPreferenceScreen
-            settings:icon="@drawable/ic_settings_search"
-            android:title="@string/search_settings"
-            android:key="search_settings">
-            <intent android:action="android.search.action.SEARCH_SETTINGS" />
-        </com.android.settings.IconPreferenceScreen>
-
         <!-- Language -->
 
         <com.android.settings.IconPreferenceScreen
