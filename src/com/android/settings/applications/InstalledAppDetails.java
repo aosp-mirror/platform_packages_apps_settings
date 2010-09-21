@@ -18,6 +18,7 @@ package com.android.settings.applications;
 
 import com.android.internal.content.PackageHelper;
 import com.android.settings.R;
+import com.android.settings.applications.ApplicationsState.AppEntry;
 
 import android.app.Activity;
 import android.app.ActivityManager;
@@ -382,6 +383,10 @@ public class InstalledAppDetails extends Activity
     @Override
     public void onPackageListChanged() {
         refreshUi();
+    }
+
+    @Override
+    public void onRebuildComplete(ArrayList<AppEntry> apps) {
     }
 
     @Override

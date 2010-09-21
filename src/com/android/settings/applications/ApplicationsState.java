@@ -42,6 +42,7 @@ public class ApplicationsState {
     public static interface Callbacks {
         public void onRunningStateChanged(boolean running);
         public void onPackageListChanged();
+        public void onRebuildComplete(ArrayList<AppEntry> apps);
         public void onPackageIconChanged();
         public void onPackageSizeChanged(String packageName);
         public void onAllSizesComputed();
@@ -154,6 +155,14 @@ public class ApplicationsState {
     long mCurId = 1;
     String mCurComputingSizePkg;
 
+    // Rebuilding of app list.  Synchronized on mRebuildSync.
+    final Object mRebuildSync = new Object();
+    boolean mRebuildRequested;
+    boolean mRebuildAsync;
+    AppFilter mRebuildFilter;
+    Comparator<AppEntry> mRebuildComparator;
+    ArrayList<AppEntry> mRebuildResult;
+
     /**
      * Receives notifications when applications are added/removed.
      */
@@ -209,8 +218,9 @@ public class ApplicationsState {
     }
 
     class MainHandler extends Handler {
-        static final int MSG_PACKAGE_LIST_CHANGED = 1;
-        static final int MSG_PACKAGE_ICON_CHANGED = 2;
+        static final int MSG_REBUILD_COMPLETE = 1;
+        static final int MSG_PACKAGE_LIST_CHANGED = 2;
+        static final int MSG_PACKAGE_ICON_CHANGED = 3;
         static final int MSG_PACKAGE_SIZE_CHANGED = 4;
         static final int MSG_ALL_SIZES_COMPUTED = 5;
         static final int MSG_RUNNING_STATE_CHANGED = 6;
@@ -218,6 +228,11 @@ public class ApplicationsState {
         @Override
         public void handleMessage(Message msg) {
             switch (msg.what) {
+                case MSG_REBUILD_COMPLETE: {
+                    if (mCurCallbacks != null) {
+                        mCurCallbacks.onRebuildComplete((ArrayList<AppEntry>)msg.obj);
+                    }
+                } break;
                 case MSG_PACKAGE_LIST_CHANGED: {
                     if (mCurCallbacks != null) {
                         mCurCallbacks.onPackageListChanged();
@@ -305,20 +320,89 @@ public class ApplicationsState {
 
     // Creates a new list of app entries with the given filter and comparator.
     ArrayList<AppEntry> rebuild(AppFilter filter, Comparator<AppEntry> comparator) {
-        ArrayList<AppEntry> filteredApps = new ArrayList<AppEntry>();
+        synchronized (mRebuildSync) {
+            mRebuildRequested = true;
+            mRebuildAsync = false;
+            mRebuildFilter = filter;
+            mRebuildComparator = comparator;
+            mRebuildResult = null;
+            if (!mBackgroundHandler.hasMessages(BackgroundHandler.MSG_REBUILD_LIST)) {
+                mBackgroundHandler.sendEmptyMessage(BackgroundHandler.MSG_REBUILD_LIST);
+            }
+
+            // We will wait for .25s for the list to be built.
+            long waitend = SystemClock.uptimeMillis()+250;
+
+            while (mRebuildResult == null) {
+                long now = SystemClock.uptimeMillis();
+                if (now >= waitend) {
+                    break;
+                }
+                try {
+                    mRebuildSync.wait(waitend - now);
+                } catch (InterruptedException e) {
+                }
+            }
+
+            mRebuildAsync = true;
+
+            return mRebuildResult;
+        }
+    }
+
+    void handleRebuildList() {
+        AppFilter filter;
+        Comparator<AppEntry> comparator;
+        synchronized (mRebuildSync) {
+            if (!mRebuildRequested) {
+                return;
+            }
+
+            filter = mRebuildFilter;
+            comparator = mRebuildComparator;
+            mRebuildRequested = false;
+            mRebuildFilter = null;
+            mRebuildComparator = null;
+        }
+
+        Process.setThreadPriority(Process.THREAD_PRIORITY_FOREGROUND);
+
+        List<ApplicationInfo> apps;
         synchronized (mEntriesMap) {
-            if (DEBUG) Log.i(TAG, "Rebuilding...");
-            for (int i=0; i<mApplications.size(); i++) {
-                ApplicationInfo info = mApplications.get(i);
-                if (filter == null || filter.filterApp(info)) {
+            apps = new ArrayList<ApplicationInfo>(mApplications);
+        }
+
+        ArrayList<AppEntry> filteredApps = new ArrayList<AppEntry>();
+        if (DEBUG) Log.i(TAG, "Rebuilding...");
+        for (int i=0; i<apps.size(); i++) {
+            ApplicationInfo info = apps.get(i);
+            if (filter == null || filter.filterApp(info)) {
+                synchronized (mEntriesMap) {
                     AppEntry entry = getEntryLocked(info);
                     if (DEBUG) Log.i(TAG, "Using " + info.packageName + ": " + entry);
                     filteredApps.add(entry);
                 }
             }
         }
+
         Collections.sort(filteredApps, comparator);
-        return filteredApps;
+
+        synchronized (mRebuildSync) {
+            if (!mRebuildRequested) {
+                if (!mRebuildAsync) {
+                    mRebuildResult = filteredApps;
+                    mRebuildSync.notifyAll();
+                } else {
+                    if (!mMainHandler.hasMessages(MainHandler.MSG_REBUILD_COMPLETE)) {
+                        Message msg = mMainHandler.obtainMessage(
+                                MainHandler.MSG_REBUILD_COMPLETE, filteredApps);
+                        mMainHandler.sendMessage(msg);
+                    }
+                }
+            }
+        }
+
+        Process.setThreadPriority(Process.THREAD_PRIORITY_BACKGROUND);
     }
 
     AppEntry getEntry(String packageName) {
@@ -447,9 +531,10 @@ public class ApplicationsState {
     final HandlerThread mThread;
     final BackgroundHandler mBackgroundHandler;
     class BackgroundHandler extends Handler {
-        static final int MSG_LOAD_ENTRIES = 1;
-        static final int MSG_LOAD_ICONS = 2;
-        static final int MSG_LOAD_SIZES = 3;
+        static final int MSG_REBUILD_LIST = 1;
+        static final int MSG_LOAD_ENTRIES = 2;
+        static final int MSG_LOAD_ICONS = 3;
+        static final int MSG_LOAD_SIZES = 4;
 
         boolean mRunning;
 
@@ -498,7 +583,12 @@ public class ApplicationsState {
 
         @Override
         public void handleMessage(Message msg) {
+            // Always try rebuilding list first thing, if needed.
+            handleRebuildList();
+
             switch (msg.what) {
+                case MSG_REBUILD_LIST: {
+                } break;
                 case MSG_LOAD_ENTRIES: {
                     int numDone = 0;
                     synchronized (mEntriesMap) {
