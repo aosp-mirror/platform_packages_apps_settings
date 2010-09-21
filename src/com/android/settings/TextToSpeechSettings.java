@@ -37,9 +37,9 @@ import android.os.Bundle;
 import android.preference.CheckBoxPreference;
 import android.preference.ListPreference;
 import android.preference.Preference;
-import android.preference.Preference.OnPreferenceClickListener;
 import android.preference.PreferenceGroup;
 import android.preference.PreferenceScreen;
+import android.preference.Preference.OnPreferenceClickListener;
 import android.provider.Settings;
 import android.provider.Settings.SettingNotFoundException;
 import android.speech.tts.TextToSpeech;
@@ -126,6 +126,7 @@ public class TextToSpeechSettings extends SettingsPreferenceFragment implements
         mDefaultLocVariant = currentLocale.getVariant();
 
         mTts = new TextToSpeech(activity, this);
+        initClickers();
     }
 
 
@@ -136,7 +137,6 @@ public class TextToSpeechSettings extends SettingsPreferenceFragment implements
             // whenever we return to this screen, we don't know the state of the
             // system, so we have to recheck that we can play the demo, or it must be disabled.
             // TODO make the TTS service listen to "changes in the system", i.e. sd card un/mount
-            initClickers();
             updateWidgetState();
             checkVoiceData();
         }
@@ -357,7 +357,6 @@ public class TextToSpeechSettings extends SettingsPreferenceFragment implements
             mTts.setLanguage(new Locale(mDefaultLanguage, mDefaultCountry, mDefaultLocVariant));
             mTts.setSpeechRate(mDefaultRate/100.0f);
             initDefaultSettings();
-            initClickers();
             updateWidgetState();
             checkVoiceData();
             mTtsStarted = true;

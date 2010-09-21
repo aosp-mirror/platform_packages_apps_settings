@@ -106,6 +106,8 @@ public class SecuritySettings extends SettingsPreferenceFragment
     private LockPatternUtils mLockPatternUtils;
     private ListPreference mLockAfter;
     
+    private SettingsObserver mSettingsObserver;
+
     private final class SettingsObserver implements Observer {
         public void update(Observable o, Object arg) {
             updateToggles();
@@ -125,14 +127,24 @@ public class SecuritySettings extends SettingsPreferenceFragment
         createPreferenceHierarchy();
 
         updateToggles();
+    }
 
+    @Override
+    public void onStart() {
+        super.onStart();
         // listen for Location Manager settings changes
         Cursor settingsCursor = getContentResolver().query(Settings.Secure.CONTENT_URI, null,
                 "(" + Settings.System.NAME + "=?)",
                 new String[]{Settings.Secure.LOCATION_PROVIDERS_ALLOWED},
                 null);
         mContentQueryMap = new ContentQueryMap(settingsCursor, Settings.System.NAME, true, null);
-        mContentQueryMap.addObserver(new SettingsObserver());
+        mContentQueryMap.addObserver(mSettingsObserver = new SettingsObserver());
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        mContentQueryMap.deleteObserver(mSettingsObserver);
     }
 
     private PreferenceScreen createPreferenceHierarchy() {
