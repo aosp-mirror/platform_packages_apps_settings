@@ -23,6 +23,7 @@ import android.app.TabActivity;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.ApplicationInfo;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.Settings;
@@ -47,6 +48,7 @@ import android.widget.AdapterView.OnItemClickListener;
 
 import java.util.ArrayList;
 import java.util.Comparator;
+import java.util.List;
 
 /**
  * Activity to pick an application that will be used to display installation information and
@@ -152,6 +154,7 @@ public class ManageApplications extends TabActivity implements
         private ArrayList<ApplicationsState.AppEntry> mEntries;
         private boolean mResumed;
         private int mLastFilterMode=-1, mLastSortMode=-1;
+        private boolean mWaitingForData;
         CharSequence mCurFilterPrefix;
 
         private Filter mFilter = new Filter() {
@@ -184,7 +187,7 @@ public class ManageApplications extends TabActivity implements
                 mState.resume(this);
                 mLastFilterMode = filter;
                 mLastSortMode = sort;
-                rebuild();
+                rebuild(true);
             } else {
                 rebuild(filter, sort);
             }
@@ -203,10 +206,10 @@ public class ManageApplications extends TabActivity implements
             }
             mLastFilterMode = filter;
             mLastSortMode = sort;
-            rebuild();
+            rebuild(true);
         }
         
-        public void rebuild() {
+        public void rebuild(boolean eraseold) {
             if (DEBUG) Log.i(TAG, "Rebuilding app list...");
             ApplicationsState.AppFilter filterObj;
             Comparator<AppEntry> comparatorObj;
@@ -229,9 +232,28 @@ public class ManageApplications extends TabActivity implements
                     comparatorObj = ApplicationsState.ALPHA_COMPARATOR;
                     break;
             }
-            mBaseEntries = mState.rebuild(filterObj, comparatorObj);
-            mEntries = applyPrefixFilter(mCurFilterPrefix, mBaseEntries);
+            ArrayList<ApplicationsState.AppEntry> entries
+                    = mState.rebuild(filterObj, comparatorObj);
+            if (entries == null && !eraseold) {
+                // Don't have new list yet, but can continue using the old one.
+                return;
+            }
+            mBaseEntries = entries;
+            if (mBaseEntries != null) {
+                mEntries = applyPrefixFilter(mCurFilterPrefix, mBaseEntries);
+            } else {
+                mEntries = null;
+            }
             notifyDataSetChanged();
+
+            if (entries == null) {
+                mWaitingForData = true;
+                mListContainer.setVisibility(View.INVISIBLE);
+                mLoadingContainer.setVisibility(View.VISIBLE);
+            } else {
+                mListContainer.setVisibility(View.VISIBLE);
+                mLoadingContainer.setVisibility(View.GONE);
+            }
         }
 
         ArrayList<ApplicationsState.AppEntry> applyPrefixFilter(CharSequence prefix,
@@ -260,8 +282,18 @@ public class ManageApplications extends TabActivity implements
         }
 
         @Override
+        public void onRebuildComplete(ArrayList<AppEntry> apps) {
+            mListContainer.setVisibility(View.VISIBLE);
+            mLoadingContainer.setVisibility(View.GONE);
+            mWaitingForData = false;
+            mBaseEntries = apps;
+            mEntries = applyPrefixFilter(mCurFilterPrefix, mBaseEntries);
+            notifyDataSetChanged();
+        }
+
+        @Override
         public void onPackageListChanged() {
-            rebuild();
+            rebuild(false);
         }
 
         @Override
@@ -284,7 +316,7 @@ public class ManageApplications extends TabActivity implements
                         // user viewed, and are sorting by size...  they may
                         // have cleared data, so we immediately want to resort
                         // the list with the new size to reflect it to the user.
-                        rebuild();
+                        rebuild(false);
                     }
                     return;
                 }
@@ -294,7 +326,7 @@ public class ManageApplications extends TabActivity implements
         @Override
         public void onAllSizesComputed() {
             if (mLastSortMode == SORT_ORDER_SIZE) {
-                rebuild();
+                rebuild(false);
             }
         }
         
@@ -566,6 +598,7 @@ public class ManageApplications extends TabActivity implements
             if (mCurView != which) {
                 mRunningProcessesView.setVisibility(View.GONE);
                 mListContainer.setVisibility(View.VISIBLE);
+                mLoadingContainer.setVisibility(View.GONE);
             }
             if (mActivityResumed) {
                 mApplicationsAdapter.resume(mFilterApps, mSortOrder);

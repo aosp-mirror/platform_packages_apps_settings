@@ -18,7 +18,6 @@ package com.android.settings.fuelgauge;
 
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.drawable.Drawable;
 import android.hardware.SensorManager;
 import android.os.BatteryStats;
 import android.os.Bundle;
@@ -70,6 +69,7 @@ public class PowerUsageSummary extends PreferenceActivity implements Runnable {
     BatteryStatsImpl mStats;
     private final List<BatterySipper> mUsageList = new ArrayList<BatterySipper>();
     private final List<BatterySipper> mWifiSippers = new ArrayList<BatterySipper>();
+    private final List<BatterySipper> mBluetoothSippers = new ArrayList<BatterySipper>();
 
     private PreferenceGroup mAppListGroup;
 
@@ -82,6 +82,7 @@ public class PowerUsageSummary extends PreferenceActivity implements Runnable {
     private double mMaxPower = 1;
     private double mTotalPower;
     private double mWifiPower;
+    private double mBluetoothPower;
     private PowerProfile mPowerProfile;
 
     // How much the apps together have left WIFI running.
@@ -228,6 +229,25 @@ public class PowerUsageSummary extends PreferenceActivity implements Runnable {
                     sipper.tcpBytesReceived,
                 };
             } break;
+            case BLUETOOTH:
+            {
+                types = new int[] {
+                    R.string.usage_type_on_time,
+                    R.string.usage_type_cpu,
+                    R.string.usage_type_cpu_foreground,
+                    R.string.usage_type_wake_lock,
+                    R.string.usage_type_data_send,
+                    R.string.usage_type_data_recv,
+                };
+                values = new double[] {
+                    sipper.usageTime,
+                    sipper.cpuTime,
+                    sipper.cpuFgTime,
+                    sipper.wakeLockTime,
+                    sipper.tcpBytesSent,
+                    sipper.tcpBytesReceived,
+                };
+            } break;
             default:
             {
                 types = new int[] {
@@ -295,11 +315,13 @@ public class PowerUsageSummary extends PreferenceActivity implements Runnable {
         mMaxPower = 0;
         mTotalPower = 0;
         mWifiPower = 0;
+        mBluetoothPower = 0;
         mAppWifiRunning = 0;
 
         mAppListGroup.removeAll();
         mUsageList.clear();
         mWifiSippers.clear();
+        mBluetoothSippers.clear();
         processAppUsage();
         processMiscUsage();
 
@@ -400,11 +422,15 @@ public class PowerUsageSummary extends PreferenceActivity implements Runnable {
                     }
                     cpuTime += tmpCpuTime;
                     power += processPower;
-                    if (highestDrain < processPower) {
+                    if (packageWithHighestDrain == null
+                            || packageWithHighestDrain.startsWith("*")) {
+                        highestDrain = processPower;
+                        packageWithHighestDrain = ent.getKey();
+                    } else if (highestDrain < processPower
+                            && !ent.getKey().startsWith("*")) {
                         highestDrain = processPower;
                         packageWithHighestDrain = ent.getKey();
                     }
-
                 }
                 if (DEBUG) Log.i(TAG, "Max drain of " + highestDrain 
                         + " by " + packageWithHighestDrain);
@@ -486,12 +512,16 @@ public class PowerUsageSummary extends PreferenceActivity implements Runnable {
                 app.tcpBytesSent = tcpBytesSent;
                 if (u.getUid() == Process.WIFI_UID) {
                     mWifiSippers.add(app);
+                } else if (u.getUid() == Process.BLUETOOTH_GID) {
+                    mBluetoothSippers.add(app);
                 } else {
                     mUsageList.add(app);
                 }
             }
             if (u.getUid() == Process.WIFI_UID) {
                 mWifiPower += power;
+            } else if (u.getUid() == Process.BLUETOOTH_GID) {
+                mBluetoothPower += power;
             } else {
                 if (power > mMaxPower) mMaxPower = power;
                 mTotalPower += power;
@@ -551,6 +581,20 @@ public class PowerUsageSummary extends PreferenceActivity implements Runnable {
         }
     }
 
+    private void aggregateSippers(BatterySipper bs, List<BatterySipper> from, String tag) {
+        for (int i=0; i<from.size(); i++) {
+            BatterySipper wbs = from.get(i);
+            if (DEBUG) Log.i(TAG, tag + " adding sipper " + wbs + ": cpu=" + wbs.cpuTime);
+            bs.cpuTime += wbs.cpuTime;
+            bs.gpsTime += wbs.gpsTime;
+            bs.wifiRunningTime += wbs.wifiRunningTime;
+            bs.cpuFgTime += wbs.cpuFgTime;
+            bs.wakeLockTime += wbs.wakeLockTime;
+            bs.tcpBytesReceived += wbs.tcpBytesReceived;
+            bs.tcpBytesSent += wbs.tcpBytesSent;
+        }
+    }
+
     private void addWiFiUsage(long uSecNow) {
         long onTimeMs = mStats.getWifiOnTime(uSecNow, mStatsType) / 1000;
         long runningTimeMs = mStats.getGlobalWifiRunningTime(uSecNow, mStatsType) / 1000;
@@ -564,17 +608,7 @@ public class PowerUsageSummary extends PreferenceActivity implements Runnable {
         if (DEBUG) Log.i(TAG, "WIFI power=" + wifiPower + " from procs=" + mWifiPower);
         BatterySipper bs = addEntry(getString(R.string.power_wifi), DrainType.WIFI, runningTimeMs,
                 R.drawable.ic_settings_wifi, wifiPower + mWifiPower);
-        for (int i=0; i<mWifiSippers.size(); i++) {
-            BatterySipper wbs = mWifiSippers.get(i);
-            if (DEBUG) Log.i(TAG, "WIFI adding sipper " + wbs + ": cpu=" + wbs.cpuTime);
-            bs.cpuTime += wbs.cpuTime;
-            bs.gpsTime += wbs.gpsTime;
-            bs.wifiRunningTime += wbs.wifiRunningTime;
-            bs.cpuFgTime += wbs.cpuFgTime;
-            bs.wakeLockTime += wbs.wakeLockTime;
-            bs.tcpBytesReceived += wbs.tcpBytesReceived;
-            bs.tcpBytesSent += wbs.tcpBytesSent;
-        }
+        aggregateSippers(bs, mWifiSippers, "WIFI");
     }
 
     private void addIdleUsage(long uSecNow) {
@@ -592,9 +626,9 @@ public class PowerUsageSummary extends PreferenceActivity implements Runnable {
         int btPingCount = mStats.getBluetoothPingCount();
         btPower += (btPingCount
                 * mPowerProfile.getAveragePower(PowerProfile.POWER_BLUETOOTH_AT_CMD)) / 1000;
-
-        addEntry(getString(R.string.power_bluetooth), DrainType.BLUETOOTH, btOnTimeMs,
-                R.drawable.ic_settings_bluetooth, btPower);
+        BatterySipper bs = addEntry(getString(R.string.power_bluetooth), DrainType.BLUETOOTH,
+                btOnTimeMs, R.drawable.ic_settings_bluetooth, btPower + mBluetoothPower);
+        aggregateSippers(bs, mBluetoothSippers, "Bluetooth");
     }
 
     private double getAverageDataCost() {
