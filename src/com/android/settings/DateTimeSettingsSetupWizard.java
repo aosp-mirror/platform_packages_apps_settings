@@ -43,6 +43,8 @@ public class DateTimeSettingsSetupWizard extends Activity
     private boolean mXLargeScreenSize;
 
     /* Available only in XL */
+    private CompoundButton mAutoDateTimeButton;
+    private CompoundButton mAutoTimeZoneButton;
     private Button mTimeZone;
     private TimePicker mTimePicker;
     private DatePicker mDatePicker;
@@ -65,28 +67,25 @@ public class DateTimeSettingsSetupWizard extends Activity
     }
 
     public void initUiForXl() {
-        // TODO: use system value
-        final boolean autoTimeZoneEnabled = false;
-        final CompoundButton autoTimeZoneButton =
-                (CompoundButton)findViewById(R.id.time_zone_auto);
-        autoTimeZoneButton.setChecked(autoTimeZoneEnabled);
-        autoTimeZoneButton.setOnCheckedChangeListener(this);
-        // TODO: remove this after the system support.
-        autoTimeZoneButton.setEnabled(false);
-
-        final boolean autoDateTimeEnabled = isAutoDateTimeEnabled();
-        final CompoundButton autoDateTimeButton =
-                (CompoundButton)findViewById(R.id.date_time_auto);
-        autoDateTimeButton.setChecked(autoDateTimeEnabled);
-        autoDateTimeButton.setText(autoDateTimeEnabled ? R.string.date_time_auto_summaryOn :
-                R.string.date_time_auto_summaryOff);
-        autoDateTimeButton.setOnCheckedChangeListener(this);
+        final boolean autoTimeZoneEnabled = isAutoTimeZoneEnabled();
+        mAutoTimeZoneButton = (CompoundButton)findViewById(R.id.time_zone_auto);
+        mAutoTimeZoneButton.setChecked(autoTimeZoneEnabled);
+        mAutoTimeZoneButton.setOnCheckedChangeListener(this);
+        mAutoTimeZoneButton.setText(autoTimeZoneEnabled ? R.string.zone_auto_summaryOn :
+                R.string.zone_auto_summaryOff);
 
         final TimeZone tz = TimeZone.getDefault();
         mTimeZone = (Button)findViewById(R.id.current_time_zone);
         mTimeZone.setText(DateTimeSettings.getTimeZoneText(tz));
         mTimeZone.setOnClickListener(this);
-        mTimeZone.setEnabled(!autoDateTimeEnabled);
+        mTimeZone.setEnabled(!autoTimeZoneEnabled);
+
+        final boolean autoDateTimeEnabled = isAutoDateTimeEnabled();
+        mAutoDateTimeButton = (CompoundButton)findViewById(R.id.date_time_auto);
+        mAutoDateTimeButton.setChecked(autoDateTimeEnabled);
+        mAutoDateTimeButton.setText(autoDateTimeEnabled ? R.string.date_time_auto_summaryOn :
+                R.string.date_time_auto_summaryOff);
+        mAutoDateTimeButton.setOnCheckedChangeListener(this);
 
         mTimePicker = (TimePicker)findViewById(R.id.time_picker);
         mTimePicker.setEnabled(!autoDateTimeEnabled);
@@ -112,6 +111,13 @@ public class DateTimeSettingsSetupWizard extends Activity
         }
         case R.id.next_button: {
             if (mXLargeScreenSize) {
+                Settings.System.putInt(getContentResolver(), Settings.System.AUTO_TIME_ZONE,
+                        mAutoTimeZoneButton.isChecked() ? 1 : 0);
+                Settings.System.putInt(getContentResolver(), Settings.System.AUTO_TIME,
+                        mAutoDateTimeButton.isChecked() ? 1 : 0);
+                // Note: in non-XL, Date & Time is stored by DatePickerDialog/TimePickerDialog,
+                // so we don't need to save those values there, while in XL, we need to as
+                // we don't use those Dialogs.
                 DateTimeSettings.setDate(mDatePicker.getYear(), mDatePicker.getMonth(),
                         mDatePicker.getDayOfMonth());
                 DateTimeSettings.setTime(
@@ -129,16 +135,27 @@ public class DateTimeSettingsSetupWizard extends Activity
     @Override
     public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
         final boolean autoEnabled = isChecked;  // just for readibility.
-        Settings.System.putInt(getContentResolver(),
-                Settings.System.AUTO_TIME,
-                isChecked ? 1 : 0);
-        if (isChecked) {
-            findViewById(R.id.current_time_zone).setVisibility(View.VISIBLE);
-            findViewById(R.id.zone_picker).setVisibility(View.GONE);
+        if (buttonView == mAutoTimeZoneButton) {
+            // In XL screen, we save all the state only when the next button is pressed.
+            if (!mXLargeScreenSize) {
+                Settings.System.putInt(getContentResolver(),
+                        Settings.System.AUTO_TIME_ZONE,
+                        isChecked ? 1 : 0);
+            }
+            mTimeZone.setEnabled(!autoEnabled);
+            if (isChecked) {
+                findViewById(R.id.current_time_zone).setVisibility(View.VISIBLE);
+                findViewById(R.id.zone_picker).setVisibility(View.GONE);
+            }
+        } else if (buttonView == mAutoDateTimeButton) {
+            if (!mXLargeScreenSize) {
+                Settings.System.putInt(getContentResolver(),
+                        Settings.System.AUTO_TIME,
+                        isChecked ? 1 : 0);
+            }
+            mTimePicker.setEnabled(!autoEnabled);
+            mDatePicker.setEnabled(!autoEnabled);
         }
-        mTimeZone.setEnabled(!autoEnabled);
-        mTimePicker.setEnabled(!autoEnabled);
-        mDatePicker.setEnabled(!autoEnabled);
         if (autoEnabled) {
             final View focusedView = getCurrentFocus();
             if (focusedView != null) {
@@ -163,6 +180,15 @@ public class DateTimeSettingsSetupWizard extends Activity
     private boolean isAutoDateTimeEnabled() {
         try {
             return Settings.System.getInt(getContentResolver(), Settings.System.AUTO_TIME) > 0;
+        } catch (SettingNotFoundException e) {
+            return true;
+        }
+    }
+
+    private boolean isAutoTimeZoneEnabled() {
+        try {
+            return Settings.System.getInt(getContentResolver(),
+                    Settings.System.AUTO_TIME_ZONE) > 0;
         } catch (SettingNotFoundException e) {
             return true;
         }
