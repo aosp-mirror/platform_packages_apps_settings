@@ -21,11 +21,14 @@ import android.content.DialogInterface;
 import android.content.res.Resources;
 import android.net.DhcpInfo;
 import android.net.NetworkInfo.DetailedState;
+import android.net.Proxy;
+import android.net.ProxyProperties;
 import android.net.wifi.WifiConfiguration;
 import android.net.wifi.WifiConfiguration.IpAssignment;
 import android.net.wifi.WifiConfiguration.AuthAlgorithm;
 import android.net.wifi.WifiConfiguration.KeyMgmt;
 import static android.net.wifi.WifiConfiguration.INVALID_NETWORK_ID;
+import android.net.wifi.WifiConfiguration.ProxySettings;
 import android.net.wifi.WifiInfo;
 import android.security.Credentials;
 import android.security.KeyStore;
@@ -42,7 +45,11 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.android.settings.ProxySelector;
 import com.android.settings.R;
+
+import java.net.InetAddress;
+import java.net.InetSocketAddress;
 import java.net.UnknownHostException;
 
 /**
@@ -74,12 +81,17 @@ public class WifiConfigController implements TextWatcher,
     private TextView mEapAnonymousView;
 
     /* This value comes from "wifi_ip_settings" resource array */
+    private static final int DHCP = 0;
     private static final int STATIC_IP = 1;
 
     /* These values come from "wifi_network_setup" resource array */
     public static final int MANUAL = 0;
     public static final int WPS_PBC = 1;
     public static final int WPS_PIN = 2;
+
+    /* These values come from "wifi_proxy_settings" resource array */
+    public static final int PROXY_NONE = 0;
+    public static final int PROXY_STATIC = 1;
 
     private Spinner mNetworkSetupSpinner;
     private Spinner mIpSettingsSpinner;
@@ -88,6 +100,11 @@ public class WifiConfigController implements TextWatcher,
     private TextView mNetmaskView;
     private TextView mDns1View;
     private TextView mDns2View;
+
+    private Spinner mProxySettingsSpinner;
+    private TextView mProxyHostView;
+    private TextView mProxyPortView;
+    private TextView mProxyExclusionListView;
 
     static boolean requireKeyStore(WifiConfiguration config) {
         if (config == null) {
@@ -126,6 +143,12 @@ public class WifiConfigController implements TextWatcher,
             mConfigUi.setSubmitButton(context.getString(R.string.wifi_save));
         } else {
             mConfigUi.setTitle(mAccessPoint.ssid);
+
+            mIpSettingsSpinner = (Spinner) mView.findViewById(R.id.ip_settings);
+            mIpSettingsSpinner.setOnItemSelectedListener(this);
+            mProxySettingsSpinner = (Spinner) mView.findViewById(R.id.proxy_settings);
+            mProxySettingsSpinner.setOnItemSelectedListener(this);
+
             ViewGroup group = (ViewGroup) mView.findViewById(R.id.info);
 
             DetailedState state = mAccessPoint.getState();
@@ -152,6 +175,21 @@ public class WifiConfigController implements TextWatcher,
                 }
             }
 
+            if (mAccessPoint.networkId != INVALID_NETWORK_ID) {
+                WifiConfiguration config = mAccessPoint.getConfig();
+                if (config.ipAssignment == IpAssignment.STATIC) {
+                    mIpSettingsSpinner.setSelection(STATIC_IP);
+                } else {
+                    mIpSettingsSpinner.setSelection(DHCP);
+                }
+
+                if (config.proxySettings == ProxySettings.STATIC) {
+                    mProxySettingsSpinner.setSelection(PROXY_STATIC);
+                } else {
+                    mProxySettingsSpinner.setSelection(PROXY_NONE);
+                }
+            }
+
             /* Show network setup options only for a new network */
             if (mAccessPoint.networkId == INVALID_NETWORK_ID && mAccessPoint.wpsAvailable) {
                 showNetworkSetupFields();
@@ -160,6 +198,7 @@ public class WifiConfigController implements TextWatcher,
             if (mAccessPoint.networkId == INVALID_NETWORK_ID || mEdit) {
                 showSecurityFields();
                 showIpConfigFields();
+                showProxyFields();
             }
 
             if (mEdit) {
@@ -176,12 +215,6 @@ public class WifiConfigController implements TextWatcher,
             }
         }
 
-        if (mAccessPoint != null && mAccessPoint.networkId != INVALID_NETWORK_ID) {
-            WifiConfiguration config = mAccessPoint.getConfig();
-            if (config.ipAssignment == IpAssignment.STATIC) {
-                mIpSettingsSpinner.setSelection(STATIC_IP);
-            }
-        }
 
         mConfigUi.setCancelButton(context.getString(R.string.wifi_cancel));
         if (mConfigUi.getSubmitButton() != null) {
@@ -290,7 +323,8 @@ public class WifiConfigController implements TextWatcher,
                     return null;
         }
 
-        config.ipAssignment = (mIpSettingsSpinner.getSelectedItemPosition() == STATIC_IP) ?
+        config.ipAssignment = (mIpSettingsSpinner != null &&
+                mIpSettingsSpinner.getSelectedItemPosition() == STATIC_IP) ?
                 IpAssignment.STATIC : IpAssignment.DHCP;
 
         if (config.ipAssignment == IpAssignment.STATIC) {
@@ -307,7 +341,26 @@ public class WifiConfigController implements TextWatcher,
             } catch (UnknownHostException e) {
                 Toast.makeText(mConfigUi.getContext(), R.string.wifi_ip_settings_invalid_ip,
                         Toast.LENGTH_LONG).show();
-                return null;
+                config.ipAssignment = IpAssignment.UNASSIGNED;
+            }
+        }
+
+        config.proxySettings = (mProxySettingsSpinner != null &&
+                mProxySettingsSpinner.getSelectedItemPosition() == PROXY_STATIC) ?
+                ProxySettings.STATIC : ProxySettings.NONE;
+
+        if (config.proxySettings == ProxySettings.STATIC) {
+            String host = mProxyHostView.getText().toString();
+            String port = mProxyPortView.getText().toString();
+            String exclusionList = mProxyExclusionListView.getText().toString();
+            int result = ProxySelector.validate(host, port, exclusionList);
+            if (result == 0) {
+                config.proxyProperties.setSocketAddress(
+                        InetSocketAddress.createUnresolved(host, Integer.parseInt(port)));
+                config.proxyProperties.setExclusionList(exclusionList);
+            } else {
+                Toast.makeText(mConfigUi.getContext(), result, Toast.LENGTH_LONG).show();
+                config.proxySettings = ProxySettings.UNASSIGNED;
             }
         }
 
@@ -409,11 +462,6 @@ public class WifiConfigController implements TextWatcher,
 
         mView.findViewById(R.id.ip_fields).setVisibility(View.VISIBLE);
 
-        if (mIpSettingsSpinner == null) {
-            mIpSettingsSpinner = (Spinner) mView.findViewById(R.id.ip_settings);
-            mIpSettingsSpinner.setOnItemSelectedListener(this);
-        }
-
         if (mAccessPoint != null && mAccessPoint.networkId != INVALID_NETWORK_ID) {
             config = mAccessPoint.getConfig();
         }
@@ -434,13 +482,46 @@ public class WifiConfigController implements TextWatcher,
                     mGatewayView.setText(intToIpString(ipConfig.gateway));
                     mNetmaskView.setText(intToIpString(ipConfig.netmask));
                     mDns1View.setText(intToIpString(ipConfig.dns1));
-                    mDns2View.setText(intToIpString(ipConfig.dns2));
+                    if (ipConfig.dns2 != 0) mDns2View.setText(intToIpString(ipConfig.dns2));
                 }
             }
         } else {
             mView.findViewById(R.id.staticip).setVisibility(View.GONE);
         }
     }
+
+    private void showProxyFields() {
+        WifiConfiguration config = null;
+
+        mView.findViewById(R.id.proxy_settings_fields).setVisibility(View.VISIBLE);
+
+        if (mAccessPoint != null && mAccessPoint.networkId != INVALID_NETWORK_ID) {
+            config = mAccessPoint.getConfig();
+        }
+
+        if (mProxySettingsSpinner.getSelectedItemPosition() == PROXY_STATIC) {
+            mView.findViewById(R.id.proxy_fields).setVisibility(View.VISIBLE);
+            if (mProxyHostView == null) {
+                mProxyHostView = (TextView) mView.findViewById(R.id.proxy_hostname);
+                mProxyPortView = (TextView) mView.findViewById(R.id.proxy_port);
+                mProxyExclusionListView = (TextView) mView.findViewById(R.id.proxy_exclusionlist);
+            }
+            if (config != null) {
+                ProxyProperties proxyProperties = config.proxyProperties;
+                if (proxyProperties != null) {
+                    InetSocketAddress sockAddr = proxyProperties.getSocketAddress();
+                    if (sockAddr != null) {
+                        mProxyHostView.setText(sockAddr.getHostName());
+                        mProxyPortView.setText(Integer.toString(sockAddr.getPort()));
+                        mProxyExclusionListView.setText(proxyProperties.getExclusionList());
+                    }
+                }
+            }
+        } else {
+            mView.findViewById(R.id.proxy_fields).setVisibility(View.GONE);
+        }
+    }
+
 
 
     private void loadCertificates(Spinner spinner, String prefix) {
@@ -509,8 +590,10 @@ public class WifiConfigController implements TextWatcher,
             mAccessPointSecurity = position;
             showSecurityFields();
             enableSubmitIfAppropriate();
-        } else if (parent == mNetworkSetupSpinner){
+        } else if (parent == mNetworkSetupSpinner) {
             showNetworkSetupFields();
+        } else if (parent == mProxySettingsSpinner) {
+            showProxyFields();
         } else {
             showIpConfigFields();
         }

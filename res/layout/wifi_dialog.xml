@@ -306,5 +306,69 @@
                     android:inputType="textNoSuggestions" />
 
         </LinearLayout>
+        <LinearLayout android:id="@+id/proxy_settings_fields"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:visibility="gone">
+
+            <TextView
+                    style="?android:attr/textAppearanceSmallInverse"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dip"
+                    android:text="@string/proxy_settings_title" />
+
+            <Spinner android:id="@+id/proxy_settings"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:prompt="@string/proxy_settings_title"
+                    android:entries="@array/wifi_proxy_settings" />
+        </LinearLayout>
+
+        <LinearLayout android:id="@+id/proxy_fields"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:visibility="gone">
+            <TextView
+                    style="?android:attr/textAppearanceSmallInverse"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dip"
+                    android:text="@string/proxy_hostname_label" />
+
+            <EditText android:id="@+id/proxy_hostname"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:singleLine="true"
+                    android:inputType="textNoSuggestions" />
+            <TextView
+                    style="?android:attr/textAppearanceSmallInverse"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dip"
+                    android:text="@string/proxy_port_label" />
+
+            <EditText android:id="@+id/proxy_port"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:singleLine="true"
+                    android:inputType="textNoSuggestions" />
+            <TextView
+                    style="?android:attr/textAppearanceSmallInverse"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dip"
+                    android:text="@string/proxy_exclusionlist_label" />
+
+            <EditText android:id="@+id/proxy_exclusionlist"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:singleLine="true"
+                    android:inputType="textNoSuggestions" />
+
+        </LinearLayout>
+
     </LinearLayout>
 </ScrollView>

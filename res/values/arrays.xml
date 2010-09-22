@@ -361,6 +361,14 @@
         <item>Static</item>
     </string-array>
 
+    <!-- Wi-Fi proxy settings. -->
+    <!-- Note that adding/removing/moving the items will need wifi settings code change. -->
+    <string-array name="wifi_proxy_settings">
+        <!-- No HTTP proxy is used for the current wifi network [CHAR LIMIT=25] -->
+        <item>None</item>
+        <!-- Static HTTP proxy settings are used for the current wifi network [CHAR LIMIT=25] -->
+        <item>Static</item>
+    </string-array>
 
     <!-- Sound settings for emergency tone. -->
     <string-array name="emergency_tone_entries">

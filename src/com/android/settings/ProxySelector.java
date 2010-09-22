@@ -197,7 +197,7 @@ public class ProxySelector extends Fragment implements DialogCreatable {
      * validate syntax of hostname and port entries
      * @return 0 on success, string resource ID on failure
      */
-    int validate(String hostname, String port, String exclList) {
+    public static int validate(String hostname, String port, String exclList) {
         Matcher match = HOSTNAME_PATTERN.matcher(hostname);
         Matcher listMatch = EXCLLIST_PATTERN.matcher(exclList);
 
