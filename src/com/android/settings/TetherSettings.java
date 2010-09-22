@@ -35,7 +35,6 @@ import android.os.Environment;
 import android.preference.CheckBoxPreference;
 import android.preference.Preference;
 import android.preference.PreferenceScreen;
-import android.util.Log;
 import android.webkit.WebView;
 
 import java.io.InputStream;
@@ -220,8 +219,8 @@ public class TetherSettings extends SettingsPreferenceFragment {
     }
 
     @Override
-    public void onResume() {
-        super.onResume();
+    public void onStart() {
+        super.onStart();
 
         final Activity activity = getActivity();
 
@@ -244,8 +243,8 @@ public class TetherSettings extends SettingsPreferenceFragment {
     }
 
     @Override
-    public void onPause() {
-        super.onPause();
+    public void onStop() {
+        super.onStop();
         getActivity().unregisterReceiver(mTetherChangeReceiver);
         mTetherChangeReceiver = null;
         mWifiApEnabler.pause();
