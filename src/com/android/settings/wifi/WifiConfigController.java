@@ -73,7 +73,8 @@ public class WifiConfigController implements TextWatcher,
     private TextView mEapIdentityView;
     private TextView mEapAnonymousView;
 
-    private static final String STATIC_IP = "Static";
+    /* This value comes from "wifi_ip_settings" resource array */
+    private static final int STATIC_IP = 1;
 
     /* These values come from "wifi_network_setup" resource array */
     public static final int MANUAL = 0;
@@ -175,7 +176,7 @@ public class WifiConfigController implements TextWatcher,
         if (mAccessPoint != null && mAccessPoint.networkId != INVALID_NETWORK_ID) {
             WifiConfiguration config = mAccessPoint.getConfig();
             if (config.ipAssignment == IpAssignment.STATIC) {
-                setSelection(mIpSettingsSpinner, STATIC_IP);
+                mIpSettingsSpinner.setSelection(STATIC_IP);
             }
         }
 
@@ -286,7 +287,7 @@ public class WifiConfigController implements TextWatcher,
                     return null;
         }
 
-        config.ipAssignment = mIpSettingsSpinner.getSelectedItem().toString().equals(STATIC_IP) ?
+        config.ipAssignment = (mIpSettingsSpinner.getSelectedItemPosition() == STATIC_IP) ?
                 IpAssignment.STATIC : IpAssignment.DHCP;
 
         if (config.ipAssignment == IpAssignment.STATIC) {
@@ -414,7 +415,7 @@ public class WifiConfigController implements TextWatcher,
             config = mAccessPoint.getConfig();
         }
 
-        if (mIpSettingsSpinner.getSelectedItem().equals(STATIC_IP)) {
+        if (mIpSettingsSpinner.getSelectedItemPosition() == STATIC_IP) {
             mView.findViewById(R.id.staticip).setVisibility(View.VISIBLE);
             if (mIpAddressView == null) {
                 mIpAddressView = (TextView) mView.findViewById(R.id.ipaddress);

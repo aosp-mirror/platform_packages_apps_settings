@@ -353,10 +353,11 @@
     </string-array>
 
     <!-- Wi-Fi IP settings. -->
+   <!-- Note that adding/removing/moving the items will need wifi settings code change. -->
     <string-array name="wifi_ip_settings">
-        <!-- Do not translate. -->
+        <!-- Use DHCP (Dynamic Host Configuration Protocol) for obtaining IP settings [CHAR LIMIT=25] -->
         <item>DHCP</item>
-        <!-- Do not translate. -->
+        <!-- Use statically defined IP settings [CHAR LIMIT=25]-->
         <item>Static</item>
     </string-array>
 
