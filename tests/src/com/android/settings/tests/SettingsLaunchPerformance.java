@@ -26,7 +26,7 @@ import java.util.Map;
  * Instrumentation class for Settings launch performance testing.
  */
 public class SettingsLaunchPerformance extends LaunchPerformanceBase {
- 
+
     public static final String LOG_TAG = "SettingsLaunchPerformance";
 
     public SettingsLaunchPerformance() {
