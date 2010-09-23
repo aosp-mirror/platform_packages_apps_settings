@@ -29,6 +29,49 @@
                 android:layout_height="wrap_content"
                 android:orientation="vertical" />
 
+        <LinearLayout android:id="@+id/setup_fields"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:visibility="gone">
+
+            <TextView
+                    style="?android:attr/textAppearanceSmallInverse"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dip"
+                    android:text="@string/wifi_network_setup" />
+
+            <Spinner android:id="@+id/network_setup"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:prompt="@string/wifi_network_setup"
+                    android:entries="@array/wifi_network_setup" />
+
+        </LinearLayout>
+
+        <LinearLayout android:id="@+id/wps_fields"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:visibility="gone">
+
+            <TextView
+                    style="?android:attr/textAppearanceSmallInverse"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dip"
+                    android:text="@string/wifi_wps_pin" />
+
+            <EditText android:id="@+id/wps_pin"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:singleLine="true"
+                    android:inputType="textPassword" />
+
+        </LinearLayout>
+
+
         <LinearLayout android:id="@+id/type"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -62,7 +105,7 @@
                     android:entries="@array/wifi_security" />
         </LinearLayout>
 
-        <LinearLayout android:id="@+id/fields"
+        <LinearLayout android:id="@+id/security_fields"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
@@ -171,7 +214,7 @@
                     android:text="@string/wifi_show_password" />
         </LinearLayout>
 
-        <LinearLayout android:id="@+id/ipfields"
+        <LinearLayout android:id="@+id/ip_fields"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
@@ -184,7 +227,7 @@
                     android:layout_marginTop="8dip"
                     android:text="@string/wifi_ip_settings" />
 
-            <Spinner android:id="@+id/ipsettings"
+            <Spinner android:id="@+id/ip_settings"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:prompt="@string/wifi_ip_settings"
