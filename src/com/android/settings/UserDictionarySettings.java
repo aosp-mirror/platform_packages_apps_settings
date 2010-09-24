@@ -41,6 +41,7 @@ import android.view.WindowManager;
 import android.view.ContextMenu.ContextMenuInfo;
 import android.widget.AlphabetIndexer;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.SectionIndexer;
@@ -59,7 +60,10 @@ public class UserDictionarySettings extends ListFragment implements DialogCreata
     private static final String[] QUERY_PROJECTION = {
         UserDictionary.Words._ID, UserDictionary.Words.WORD
     };
-    
+
+    private static final int INDEX_ID = 0;
+    private static final int INDEX_WORD = 1;
+
     // Either the locale is empty (means the word is applicable to all locales)
     // or the word equals our current locale
     private static final String QUERY_SELECTION = UserDictionary.Words.LOCALE + "=? OR "
@@ -152,9 +156,9 @@ public class UserDictionarySettings extends ListFragment implements DialogCreata
 
     private ListAdapter createAdapter() {
         return new MyAdapter(getActivity(),
-                android.R.layout.simple_list_item_1, mCursor,
-                new String[] { UserDictionary.Words.WORD },
-                new int[] { android.R.id.text1 });
+                R.layout.user_dictionary_item, mCursor,
+                new String[] { UserDictionary.Words.WORD, UserDictionary.Words._ID },
+                new int[] { android.R.id.text1, R.id.delete_button }, this);
     }
     
     @Override
@@ -285,15 +289,35 @@ public class UserDictionarySettings extends ListFragment implements DialogCreata
                 UserDictionary.Words.CONTENT_URI, DELETE_SELECTION, new String[] { word });
     }
 
-    private static class MyAdapter extends SimpleCursorAdapter implements SectionIndexer {
-        private AlphabetIndexer mIndexer;        
-        
-        public MyAdapter(Context context, int layout, Cursor c, String[] from, int[] to) {
+    private static class MyAdapter extends SimpleCursorAdapter implements SectionIndexer,
+            View.OnClickListener {
+
+        private AlphabetIndexer mIndexer;
+        private UserDictionarySettings mSettings;
+
+        private ViewBinder mViewBinder = new ViewBinder() {
+
+            public boolean setViewValue(View v, Cursor c, int columnIndex) {
+                if (v instanceof ImageView && columnIndex == INDEX_ID) {
+                    v.setOnClickListener(MyAdapter.this);
+                    v.setTag(c.getString(INDEX_WORD));
+                    return true;
+                }
+
+                return false;
+            }
+        };
+
+        public MyAdapter(Context context, int layout, Cursor c, String[] from, int[] to,
+                UserDictionarySettings settings) {
             super(context, layout, c, from, to);
 
+            mSettings = settings;
             int wordColIndex = c.getColumnIndexOrThrow(UserDictionary.Words.WORD);
-            String alphabet = context.getString(com.android.internal.R.string.fast_scroll_alphabet);
-            mIndexer = new AlphabetIndexer(c, wordColIndex, alphabet); 
+            String alphabet = context.getString(
+                    com.android.internal.R.string.fast_scroll_alphabet);
+            mIndexer = new AlphabetIndexer(c, wordColIndex, alphabet);
+            setViewBinder(mViewBinder);
         }
 
         public int getPositionForSection(int section) {
@@ -306,6 +330,10 @@ public class UserDictionarySettings extends ListFragment implements DialogCreata
 
         public Object[] getSections() {
             return mIndexer.getSections();
+        }
+
+        public void onClick(View v) {
+            mSettings.deleteWord((String) v.getTag());
         }
     }
 }
