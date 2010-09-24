@@ -27,19 +27,21 @@
                     android:layout_width="0px"
                     android:layout_weight=".3"
                     android:layout_height="fill_parent"
-                    android:paddingRight="10dip"
+                    android:paddingRight="50dip"
                     android:paddingBottom="10dip">
         <TextView android:id="@+id/wifi_setup_title"
                   android:layout_width="fill_parent"
                   android:layout_height="wrap_content"
-                  android:gravity="center|top"
+                  android:layout_alignParentRight="true"
+                  android:gravity="right"
                   android:textSize="48dip"
-                  android:textColor="#FF30FF30"
+                  android:textColor="#FFC5DF28"
                   android:text="@string/wifi_setup_title"/>
         <Button android:id="@+id/wifi_setup_cancel"
-                android:layout_width="fill_parent"
+                android:layout_width="220dip"
                 android:layout_height="wrap_content"
                 android:layout_alignParentBottom="true"
+                android:layout_alignParentRight="true"
                 android:textSize="24dip"
                 android:text="@string/wifi_cancel"
                 android:visibility="gone" />
@@ -51,15 +53,15 @@
                   android:layout_weight=".4"
                   android:layout_height="fill_parent"
                   android:paddingTop="20dip"
-                  android:paddingLeft="10dip"
-                  android:paddingRight="30dip"
+                  android:paddingLeft="50dip"
+                  android:paddingRight="50dip"
                   android:paddingBottom="15dip">
         <!-- Assume the text size of this text should be same as Preference's
              texts. See also preference.xml -->
         <TextView android:id="@+id/wifi_setup_status"
                   android:layout_width="fill_parent"
                   android:layout_height="wrap_content"
-                  android:background="#ff113344"
+                  android:background="#ff555555"
                   android:paddingLeft="5dip"
                   android:paddingTop="5dip"
                   android:paddingBottom="5dip"
@@ -78,29 +80,28 @@
                     android:layout_weight=".3"
                     android:layout_height="fill_parent"
                     android:paddingTop="22dip"
-                    android:paddingLeft="30dip"
+                    android:paddingLeft="50dip"
                     android:paddingBottom="10dip">
         <TextView android:id="@+id/scanning_progress_text"
                   android:layout_width="fill_parent"
                   android:layout_height="wrap_content"
                   android:layout_alignParentTop="true"
-                  android:textSize="24dip"
-                  android:text="@string/progress_scanning"/>
+                  android:textSize="24dip"/>
         <ProgressBar android:id="@+id/scanning_progress_bar"
-                     android:layout_width="100dip"
+                     android:layout_width="220dip"
                      android:layout_height="wrap_content"
                      android:layout_below="@id/scanning_progress_text"
                      style="?android:attr/progressBarStyleHorizontal" />
 
         <Button android:id="@+id/wifi_setup_connect"
-                android:layout_width="fill_parent"
+                android:layout_width="220dip"
                 android:layout_height="wrap_content"
                 android:layout_alignParentBottom="true"
                 android:textSize="24dip"
                 android:text="@string/wifi_connect"
                 android:visibility="gone" />
         <Button android:id="@+id/wifi_setup_forget"
-                android:layout_width="fill_parent"
+                android:layout_width="220dip"
                 android:layout_height="wrap_content"
                 android:layout_alignParentBottom="true"
                 android:textSize="24dip"
@@ -108,7 +109,7 @@
                 android:visibility="gone" />
 
         <Button android:id="@+id/wifi_setup_skip_or_next"
-                android:layout_width="fill_parent"
+                android:layout_width="220dip"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="30dip"
                 android:layout_alignParentBottom="true"
@@ -116,14 +117,14 @@
                 android:text="@string/wifi_setup_skip" />
 
         <Button android:id="@+id/wifi_setup_refresh_list"
-                android:layout_width="fill_parent"
+                android:layout_width="220dip"
                 android:layout_height="wrap_content"
                 android:layout_above="@id/wifi_setup_skip_or_next"
                 android:textSize="24dip"
                 android:text="@string/wifi_setup_refresh_list" />
 
         <Button android:id="@+id/wifi_setup_add_network"
-                android:layout_width="fill_parent"
+                android:layout_width="220dip"
                 android:layout_height="wrap_content"
                 android:layout_above="@id/wifi_setup_refresh_list"
                 android:textSize="24dip"
