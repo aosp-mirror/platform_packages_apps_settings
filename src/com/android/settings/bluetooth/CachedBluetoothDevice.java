@@ -86,6 +86,8 @@ public class CachedBluetoothDevice implements Comparable<CachedBluetoothDevice> 
     // See mConnectAttempted
     private static final long MAX_UUID_DELAY_FOR_AUTO_CONNECT = 5000;
 
+    /** Auto-connect after pairing only if locally initiated. */
+    private boolean mConnectAfterPairing;
 
     /**
      * Describes the current device and profile for logging.
@@ -343,7 +345,10 @@ public class CachedBluetoothDevice implements Comparable<CachedBluetoothDevice> 
         if (!mDevice.createBond()) {
             mLocalManager.showError(mDevice, R.string.bluetooth_error_title,
                     R.string.bluetooth_pairing_error_message);
+            return;
         }
+
+        mConnectAfterPairing = true;  // auto-connect after pairing
     }
 
     public void unpair() {
@@ -589,9 +594,19 @@ public class CachedBluetoothDevice implements Comparable<CachedBluetoothDevice> 
     public void onBondingStateChanged(int bondState) {
         if (bondState == BluetoothDevice.BOND_NONE) {
             mProfiles.clear();
+            mConnectAfterPairing = false;  // cancel auto-connect
         }
 
         refresh();
+
+        if (bondState == BluetoothDevice.BOND_BONDED) {
+            if (mDevice.isBluetoothDock()) {
+                onBondingDockConnect();
+            } else if (mConnectAfterPairing) {
+                connect();
+            }
+            mConnectAfterPairing = false;
+        }
     }
 
     public void setBtClass(BluetoothClass btClass) {
