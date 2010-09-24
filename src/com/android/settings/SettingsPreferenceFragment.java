@@ -58,43 +58,10 @@ public class SettingsPreferenceFragment extends PreferenceFragment
 
     private SettingsDialogFragment mDialogFragment;
 
-    private OnStateListener mOnStateListener;
-    private FragmentStarter mFragmentStarter;
-
     private int mResultCode = Activity.RESULT_CANCELED;
     private Intent mResultData;
 
     private Button mNextButton;
-
-    private boolean mReportedCreation;
-
-    interface OnStateListener {
-
-        void onCreated(SettingsPreferenceFragment fragment);
-
-        void onDestroyed(SettingsPreferenceFragment fragment);
-    }
-
-    public void setOnStateListener(OnStateListener listener) {
-        mOnStateListener = listener;
-    }
-
-    /**
-     * Letting the class, assumed to be Fragment, start another Fragment object.
-     * The target Fragment object is stored in the caller Fragment using
-     * {@link Fragment#setTargetFragment(Fragment, int)}. The caller
-     * is able to obtain result code and result data via
-     * {@link SettingsPreferenceFragment#getResultCode()} and
-     * {@link SettingsPreferenceFragment#getResultData()} accordingly.
-     */
-    interface FragmentStarter {
-        public boolean startFragment(
-                Fragment caller, String fragmentClass, int requestCode, Bundle extras);
-    }
-
-    public void setFragmentStarter(FragmentStarter starter) {
-        mFragmentStarter = starter;
-    }
 
     @Override
     public void onResume() {
@@ -119,12 +86,6 @@ public class SettingsPreferenceFragment extends PreferenceFragment
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        if (mOnStateListener != null && !mReportedCreation) {
-            mOnStateListener.onCreated(this);
-            // So that we don't report it on the way back to this fragment
-            mReportedCreation = true;
-        }
-
         setupButtonBar();
     }
 
@@ -152,14 +113,6 @@ public class SettingsPreferenceFragment extends PreferenceFragment
      */
     public final void finishFragment() {
         getActivity().onBackPressed();
-    }
-
-    @Override
-    public void onDestroy() {
-        super.onDestroy();
-        if (mOnStateListener != null) {
-            mOnStateListener.onDestroyed(this);
-        }
     }
 
     // Some helpers for functions used by the settings fragments when they were activities
@@ -249,10 +202,16 @@ public class SettingsPreferenceFragment extends PreferenceFragment
 
     public boolean startFragment(
             Fragment caller, String fragmentClass, int requestCode, Bundle extras) {
-        if (mFragmentStarter != null) {
-            return mFragmentStarter.startFragment(caller, fragmentClass, requestCode, extras);
+        if (getActivity() instanceof PreferenceActivity) {
+            PreferenceActivity preferenceActivity = (PreferenceActivity)getActivity();
+            Fragment f = Fragment.instantiate(getActivity(), fragmentClass, extras);
+            caller.setTargetFragment(f, requestCode);
+            preferenceActivity.switchToHeader(fragmentClass, extras);
+            return true;
         } else {
-            Log.w(TAG, "FragmentStarter is not set.");
+            Log.w(TAG, "Parent isn't PreferenceActivity, thus there's no way to launch the "
+                    + "given Fragment (name: " + fragmentClass + ", requestCode: " + requestCode
+                    + ")");
             return false;
         }
     }

@@ -26,8 +26,7 @@ import java.util.List;
 /**
  * Top-level settings activity to handle single pane and double pane UI layout.
  */
-public class Settings extends PreferenceActivity implements
-        SettingsPreferenceFragment.FragmentStarter {
+public class Settings extends PreferenceActivity {
 
     // TODO: Update Call Settings based on airplane mode state.
 
@@ -88,16 +87,5 @@ public class Settings extends PreferenceActivity implements
 
     private boolean needsDockSettings() {
         return getResources().getBoolean(R.bool.has_dock_settings);
-    }
-
-    public boolean startFragment(Fragment caller, String fragmentClass, int requestCode,
-            Bundle extras) {
-        Fragment f = Fragment.instantiate(this, fragmentClass, extras);
-        caller.setTargetFragment(f, requestCode);
-        if (f instanceof SettingsPreferenceFragment) {
-            SettingsPreferenceFragment spf = (SettingsPreferenceFragment) f;
-            spf.setFragmentStarter(this);
-        }
-        return true;
     }
 }
