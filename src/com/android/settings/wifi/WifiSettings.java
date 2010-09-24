@@ -87,6 +87,12 @@ public class WifiSettings extends SettingsPreferenceFragment
     // Note: this is only effective in Setup Wizard with XL screen size.
     private static final String EXTRA_ENABLE_NEXT_ON_CONNECT = "wifi_enable_next_on_connect";
 
+    // In SetupWizard XL, We limit the number of showable access points so that the
+    // ListView won't become larger than the screen.
+    //
+    // This constant doesn't affect other contexts other than SetupWizard XL.
+    private static int MAX_MENU_COUNT_IN_XL = 7;
+
     private final IntentFilter mFilter;
     private final BroadcastReceiver mReceiver;
     private final Scanner mScanner;
@@ -112,6 +118,10 @@ public class WifiSettings extends SettingsPreferenceFragment
     // TODO: merge into one
     private WifiConfigPreference mConfigPreference;
     private WifiDialog mDialog;
+
+    // Used only in SetupWizard XL, which remembers the network a user selected and
+    // refrain other available networks when trying to connect it.
+    private AccessPoint mConnectingAccessPoint;
 
     private boolean mRefrainListUpdate;
 
@@ -370,7 +380,10 @@ public class WifiSettings extends SettingsPreferenceFragment
 
         mConfigPreference = new WifiConfigPreference(this, this, accessPoint, edit);
         toggleButtonsVisibility(false);
-
+        final Activity activity = getActivity();
+        if (activity instanceof WifiSettingsForSetupWizardXL) {
+            ((WifiSettingsForSetupWizardXL)activity).onWifiConfigPreferenceAttached(edit);
+        }
         updateAccessPoints();
         mScanner.pause();
     }
@@ -422,8 +435,10 @@ public class WifiSettings extends SettingsPreferenceFragment
             }
         }
 
-        if (mConfigPreference != null) {
-            mAccessPoints.removeAll();
+        mAccessPoints.removeAll();
+        if (mConnectingAccessPoint != null) {
+            mAccessPoints.addPreference(mConnectingAccessPoint);
+        } else if (mConfigPreference != null) {
             final AccessPoint parent = mConfigPreference.getAccessPoint();
             if (parent != null) {
                 parent.setSelectable(false);
@@ -433,9 +448,14 @@ public class WifiSettings extends SettingsPreferenceFragment
         } else {
             // AccessPoints are automatically sorted with TreeSet.
             final Collection<AccessPoint> accessPoints = constructAccessPoints();
-            mAccessPoints.removeAll();
+
+            int count = MAX_MENU_COUNT_IN_XL;
             for (AccessPoint accessPoint : accessPoints) {
                 mAccessPoints.addPreference(accessPoint);
+                count--;
+                if (count <= 0) {
+                    break;
+                }
             }
         }
     }
@@ -520,7 +540,8 @@ public class WifiSettings extends SettingsPreferenceFragment
             // Maybe there's a WifiConfigPreference
             Preference preference = mAccessPoints.getPreference(i);
             if (preference instanceof AccessPoint) {
-                ((AccessPoint) preference).update(mLastInfo, mLastState);
+                final AccessPoint accessPoint = (AccessPoint) preference;
+                accessPoint.update(mLastInfo, mLastState);
             }
         }
 
@@ -634,6 +655,11 @@ public class WifiSettings extends SettingsPreferenceFragment
                 break;
         }
 
+        if (mInXlSetupWizard && mConfigPreference != null) {
+            mConnectingAccessPoint = mSelectedAccessPoint;
+            mConnectingAccessPoint.setSelectable(false);
+        }
+
         detachConfigPreference();
     }
 
@@ -656,6 +682,7 @@ public class WifiSettings extends SettingsPreferenceFragment
         }
 
         mConfigPreference = null;
+        mConnectingAccessPoint = null;
         mAccessPoints.removeAll();
 
         final Activity activity = getActivity();

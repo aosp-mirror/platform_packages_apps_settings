@@ -56,6 +56,13 @@ public class WifiSettingsForSetupWizardXL extends Activity implements OnClickLis
     private WifiSettings mWifiSettings;
     private TextView mStatusText;
 
+    // This count reduces every time when there's a notification about WiFi status change.
+    // During the term this is >0, The system shows the message "connecting", regardless
+    // of the actual WiFi status. After this count's becoming 0, the status message correctly
+    // reflects what WiFi Picker told it. This is a tweak for letting users not confused
+    // with instable WiFi state during the first scan.
+    private int mIgnoringWifiNotificationCount = 5;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -70,6 +77,7 @@ public class WifiSettingsForSetupWizardXL extends Activity implements OnClickLis
 
     public void setup() {
         mProgressText = (TextView)findViewById(R.id.scanning_progress_text);
+        mProgressText.setText(Summary.get(this, DetailedState.SCANNING));
         mProgressBar = (ProgressBar)findViewById(R.id.scanning_progress_bar);
         mProgressBar.setMax(2);
         mProgressBar.setIndeterminate(true);
@@ -104,11 +112,13 @@ public class WifiSettingsForSetupWizardXL extends Activity implements OnClickLis
             mWifiSettings.forget();
             break;
         case R.id.wifi_setup_cancel:
+            mStatusText.setText(R.string.wifi_setup_status_select_network);
             mWifiSettings.detachConfigPreference();
             break;
         }
     }
 
+    // Called from WifiSettings
     public void updateConnectionState(DetailedState originalState) {
         final DetailedState state = stateMap.get(originalState);
         switch (state) {
@@ -136,23 +146,29 @@ public class WifiSettingsForSetupWizardXL extends Activity implements OnClickLis
             mProgressBar.setProgress(2);
             mStatusText.setText(R.string.wifi_setup_status_connected);
             mProgressText.setText(Summary.get(this, state));
+            setResult(Activity.RESULT_OK);
+            finish();
             break;
         }
         default:  // Not connected.
-            mProgressBar.setIndeterminate(false);
-            mProgressBar.setProgress(0);
-            mStatusText.setText(R.string.wifi_setup_status_select_network);
-            mProgressText.setText(getString(R.string.wifi_setup_not_connected));
+            if (mWifiSettings.getAccessPointsCount() == 0 &&
+                    mIgnoringWifiNotificationCount > 0) {
+                mIgnoringWifiNotificationCount--;
+                mProgressBar.setIndeterminate(true);
+                mProgressText.setText(Summary.get(this, DetailedState.SCANNING));
+                return;
+            } else {
+                mProgressBar.setIndeterminate(false);
+                mProgressBar.setProgress(0);
+                mStatusText.setText(R.string.wifi_setup_status_select_network);
+                mProgressText.setText(getString(R.string.wifi_setup_not_connected));
+            }
             break;
         }
     }
 
     public void onWifiConfigPreferenceAttached(boolean isNewNetwork) {
-        if (isNewNetwork) {
-            mStatusText.setText(R.string.wifi_setup_status_new_network);
-        } else {
-            mStatusText.setText(R.string.wifi_setup_status_existing_network);
-        }
+        mStatusText.setText(R.string.wifi_setup_status_edit_network);
     }
 
     public void onForget() {
