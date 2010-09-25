@@ -83,7 +83,7 @@ public class BluetoothEventRedirector {
                 if (bondState == BluetoothDevice.BOND_NONE) {
                     if (device.isBluetoothDock()) {
                         // After a dock is unpaired, we will forget the
-                        // setttings
+                        // settings
                         mManager.removeDockAutoConnectSetting(device.getAddress());
 
                         // if the device is undocked, remove it from the list as

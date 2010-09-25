@@ -31,7 +31,7 @@ public class SettingsBtStatus {
 
     public static final int CONNECTION_STATUS_UNKNOWN = 0;
     public static final int CONNECTION_STATUS_ACTIVE = 1;
-    /** Use {@link #isConnected} to check for the connected state */
+    /** Use {@link #isConnectionStatusConnected} to check for the connected state */
     public static final int CONNECTION_STATUS_CONNECTED = 2;
     public static final int CONNECTION_STATUS_CONNECTING = 3;
     public static final int CONNECTION_STATUS_DISCONNECTED = 4;
