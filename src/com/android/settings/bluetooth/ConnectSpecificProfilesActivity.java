@@ -72,7 +72,7 @@ public class ConnectSpecificProfilesActivity extends PreferenceActivity
         }
 
         if (device == null) {
-            Log.w(TAG, "Activity started without a remote blueototh device");
+            Log.w(TAG, "Activity started without a remote Bluetooth device");
             finish();
         }
 

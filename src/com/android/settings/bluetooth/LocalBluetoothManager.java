@@ -45,9 +45,8 @@ public class LocalBluetoothManager {
 
     private static final String SHARED_PREFERENCES_NAME = "bluetooth_settings";
 
+    /** Singleton instance. */
     private static LocalBluetoothManager INSTANCE;
-    /** Used when obtaining a reference to the singleton instance. */
-    private static Object INSTANCE_LOCK = new Object();
     private boolean mInitialized;
 
     private Context mContext;
@@ -86,7 +85,7 @@ public class LocalBluetoothManager {
     private long mLastScan;
 
     public static LocalBluetoothManager getInstance(Context context) {
-        synchronized (INSTANCE_LOCK) {
+        synchronized (LocalBluetoothManager.class) {
             if (INSTANCE == null) {
                 INSTANCE = new LocalBluetoothManager();
             }

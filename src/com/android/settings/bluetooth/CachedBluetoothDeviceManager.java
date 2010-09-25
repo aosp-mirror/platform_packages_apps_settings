@@ -182,15 +182,6 @@ public class CachedBluetoothDeviceManager {
         }
 
         cachedDevice.onBondingStateChanged(bondState);
-
-        if (bondState == BluetoothDevice.BOND_BONDED) {
-            // Auto-connect after pairing
-            if (!device.isBluetoothDock()) {
-                cachedDevice.connect();
-            } else {
-                cachedDevice.onBondingDockConnect();
-            }
-        }
     }
 
     /**
