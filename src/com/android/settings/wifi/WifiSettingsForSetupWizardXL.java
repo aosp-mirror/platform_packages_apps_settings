@@ -19,8 +19,11 @@ package com.android.settings.wifi;
 import com.android.settings.R;
 
 import android.app.Activity;
+import android.app.StatusBarManager;
+import android.content.Context;
 import android.net.NetworkInfo.DetailedState;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.Window;
@@ -34,6 +37,7 @@ import java.util.EnumMap;
  * WifiSetings Activity specific for SetupWizard with X-Large screen size.
  */
 public class WifiSettingsForSetupWizardXL extends Activity implements OnClickListener {
+    private static final String TAG = WifiSettingsForSetupWizardXL.class.getSimpleName();
 
     private static final EnumMap<DetailedState, DetailedState> stateMap =
         new EnumMap<DetailedState, DetailedState>(DetailedState.class);
@@ -56,6 +60,8 @@ public class WifiSettingsForSetupWizardXL extends Activity implements OnClickLis
     private WifiSettings mWifiSettings;
     private TextView mStatusText;
 
+    private StatusBarManager mStatusBarManager;
+
     // This count reduces every time when there's a notification about WiFi status change.
     // During the term this is >0, The system shows the message "connecting", regardless
     // of the actual WiFi status. After this count's becoming 0, the status message correctly
@@ -73,6 +79,25 @@ public class WifiSettingsForSetupWizardXL extends Activity implements OnClickLis
         setup();
         // XXX: should we use method?
         getIntent().putExtra(WifiSettings.IN_XL_SETUP_WIZARD, true);
+
+        mStatusBarManager = (StatusBarManager)getSystemService(Context.STATUS_BAR_SERVICE);
+        if (mStatusBarManager != null) {
+            mStatusBarManager.disable(StatusBarManager.DISABLE_EXPAND
+                    | StatusBarManager.DISABLE_NOTIFICATION_ICONS
+                    | StatusBarManager.DISABLE_NOTIFICATION_ALERTS
+                    | StatusBarManager.DISABLE_SYSTEM_INFO
+                    | StatusBarManager.DISABLE_NAVIGATION);
+        } else {
+            Log.e(TAG, "StatusBarManager isn't available.");
+        }
+    }
+
+    @Override
+    public void onDestroy() {
+        if (mStatusBarManager != null) {
+            mStatusBarManager.disable(StatusBarManager.DISABLE_NONE);
+        }
+        super.onDestroy();
     }
 
     public void setup() {

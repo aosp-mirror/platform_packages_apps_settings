@@ -19,11 +19,13 @@ package com.android.settings;
 import com.android.settings.ZonePicker.ZoneSelectionListener;
 
 import android.app.Activity;
+import android.app.StatusBarManager;
 import android.content.Context;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.provider.Settings;
 import android.provider.Settings.SettingNotFoundException;
+import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.Window;
@@ -39,6 +41,7 @@ import java.util.TimeZone;
 
 public class DateTimeSettingsSetupWizard extends Activity
         implements OnClickListener, ZoneSelectionListener, OnCheckedChangeListener{
+    private static final String TAG = DateTimeSettingsSetupWizard.class.getSimpleName();
 
     private boolean mXLargeScreenSize;
 
@@ -50,11 +53,14 @@ public class DateTimeSettingsSetupWizard extends Activity
     private DatePicker mDatePicker;
     private InputMethodManager mInputMethodManager;
 
+    private StatusBarManager mStatusBarManager;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         requestWindowFeature(Window.FEATURE_NO_TITLE); 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.date_time_settings_setupwizard);
+        mStatusBarManager = (StatusBarManager)getSystemService(Context.STATUS_BAR_SERVICE);
 
         mXLargeScreenSize = (getResources().getConfiguration().screenLayout
                 & Configuration.SCREENLAYOUT_SIZE_MASK)
@@ -99,6 +105,24 @@ public class DateTimeSettingsSetupWizard extends Activity
 
         ((Button)findViewById(R.id.next_button)).setOnClickListener(this);
         ((Button)findViewById(R.id.skip_button)).setOnClickListener(this);
+
+        if (mStatusBarManager != null) {
+            mStatusBarManager.disable(StatusBarManager.DISABLE_EXPAND
+                    | StatusBarManager.DISABLE_NOTIFICATION_ICONS
+                    | StatusBarManager.DISABLE_NOTIFICATION_ALERTS
+                    | StatusBarManager.DISABLE_SYSTEM_INFO
+                    | StatusBarManager.DISABLE_NAVIGATION);
+        } else {
+            Log.e(TAG, "StatusBarManager isn't available.");
+        }
+    }
+
+    @Override
+    public void onDestroy() {
+        if (mStatusBarManager != null) {
+            mStatusBarManager.disable(StatusBarManager.DISABLE_NONE);
+        }
+        super.onDestroy();
     }
 
     @Override
