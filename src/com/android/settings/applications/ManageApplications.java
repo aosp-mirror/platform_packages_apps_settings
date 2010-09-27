@@ -431,6 +431,9 @@ public class ManageApplications extends TabActivity implements
             mSortOrder = SORT_ORDER_SIZE;
             mFilterApps = FILTER_APPS_ALL;
             defaultTabTag = TAB_ALL;
+        } else if (action.equals(Settings.ACTION_MANAGE_ALL_APPLICATIONS_SETTINGS)) {
+            // Select the all-apps tab, with the default sorting
+            defaultTabTag = TAB_ALL;
         }
         
         if (savedInstanceState != null) {
