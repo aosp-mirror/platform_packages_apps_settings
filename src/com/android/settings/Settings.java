@@ -17,6 +17,7 @@
 package com.android.settings;
 
 import android.app.Fragment;
+import android.content.Intent;
 import android.os.Bundle;
 import android.preference.PreferenceActivity;
 
@@ -29,6 +30,32 @@ public class Settings extends PreferenceActivity implements
         SettingsPreferenceFragment.FragmentStarter {
 
     // TODO: Update Call Settings based on airplane mode state.
+
+    /**
+     * Checks if the component name in the intent is different from the Settings class and
+     * returns the class name to load as a fragment.
+     */
+    private String getStartingFragmentClass(Intent intent) {
+        final String intentClass = intent.getComponent().getClassName();
+        if (intentClass.equals(getClass().getName())) return null;
+
+        return intentClass;
+    }
+
+    /**
+     * Override initial header when an activity-alias is causing Settings to be launched
+     * for a specific fragment encoded in the android:name parameter.
+     */
+    @Override
+    public Header onGetInitialHeader() {
+        String fragmentClass = getStartingFragmentClass(super.getIntent());
+        if (fragmentClass != null) {
+            Header header = new Header();
+            header.fragment = fragmentClass;
+            return header;
+        }
+        return super.onGetInitialHeader();
+    }
 
     /**
      * Populate the activity with the top-level headers.
