@@ -68,6 +68,28 @@ public class SettingsAppWidgetProvider extends AppWidgetProvider {
     private static final int STATE_UNKNOWN = 4;
     private static final int STATE_INTERMEDIATE = 5;
 
+    // Position in the widget bar, to enable different graphics for left, center and right buttons
+    private static final int POS_LEFT = 0;
+    private static final int POS_CENTER = 1;
+    private static final int POS_RIGHT = 2;
+
+    private static final int[] IND_DRAWABLE_OFF = {
+        R.drawable.appwidget_settings_ind_off_l,
+        R.drawable.appwidget_settings_ind_off_c,
+        R.drawable.appwidget_settings_ind_off_r
+    };
+
+    private static final int[] IND_DRAWABLE_MID = {
+        R.drawable.appwidget_settings_ind_mid_l,
+        R.drawable.appwidget_settings_ind_mid_c,
+        R.drawable.appwidget_settings_ind_mid_r
+    };
+
+    private static final int[] IND_DRAWABLE_ON = {
+        R.drawable.appwidget_settings_ind_on_l,
+        R.drawable.appwidget_settings_ind_on_c,
+        R.drawable.appwidget_settings_ind_on_r
+    };
 
     /**
      * Minimum and maximum brightnesses.  Don't go to 0 since that makes the display unusable
@@ -152,22 +174,28 @@ public class SettingsAppWidgetProvider extends AppWidgetProvider {
         public abstract int getButtonImageId(boolean on);
 
         /**
+         * Returns the position in the button bar - either POS_LEFT, POS_RIGHT or POS_CENTER.
+         */
+        public int getPosition() { return POS_CENTER; }
+
+        /**
          * Updates the remote views depending on the state (off, on,
          * turning off, turning on) of the setting.
          */
         public final void setImageViewResources(Context context, RemoteViews views) {
             int buttonId = getButtonId();
             int indicatorId = getIndicatorId();
+            int pos = getPosition();
             switch (getTriState(context)) {
                 case STATE_DISABLED:
                     views.setImageViewResource(buttonId, getButtonImageId(false));
                     views.setImageViewResource(
-                        indicatorId, R.drawable.appwidget_settings_ind_off_l);
+                        indicatorId, IND_DRAWABLE_OFF[pos]);
                     break;
                 case STATE_ENABLED:
                     views.setImageViewResource(buttonId, getButtonImageId(true));
                     views.setImageViewResource(
-                        indicatorId, R.drawable.appwidget_settings_ind_on_l);
+                        indicatorId, IND_DRAWABLE_ON[pos]);
                     break;
                 case STATE_INTERMEDIATE:
                     // In the transitional state, the bottom green bar
@@ -178,11 +206,11 @@ public class SettingsAppWidgetProvider extends AppWidgetProvider {
                     if (isTurningOn()) {
                         views.setImageViewResource(buttonId, getButtonImageId(true));
                         views.setImageViewResource(
-                            indicatorId, R.drawable.appwidget_settings_ind_mid_l);
+                            indicatorId, IND_DRAWABLE_MID[pos]);
                     } else {
                         views.setImageViewResource(buttonId, getButtonImageId(false));
                         views.setImageViewResource(
-                            indicatorId, R.drawable.appwidget_settings_ind_off_l);
+                            indicatorId, IND_DRAWABLE_OFF[pos]);
                     }
                     break;
             }
@@ -297,6 +325,9 @@ public class SettingsAppWidgetProvider extends AppWidgetProvider {
             return on ? R.drawable.ic_appwidget_settings_wifi_on
                     : R.drawable.ic_appwidget_settings_wifi_off;
         }
+
+        @Override
+        public int getPosition() { return POS_LEFT; }
 
         @Override
         public int getActualState(Context context) {
