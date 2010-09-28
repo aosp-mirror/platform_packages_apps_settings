@@ -44,6 +44,8 @@ import java.util.List;
 public class LanguageSettings extends PreferenceActivity {
     
     private static final String KEY_PHONE_LANGUAGE = "phone_language";
+    private static final String KEY_KEYBOARD_SETTINGS_CATEGORY = "keyboard_settings_category";
+    private static final String KEY_HARDKEYBOARD_CATEGORY = "hardkeyboard_category";
     private boolean mHaveHardKeyboard;
 
     private List<InputMethodInfo> mInputMethodProperties;
@@ -68,7 +70,7 @@ public class LanguageSettings extends PreferenceActivity {
 
         if (getAssets().getLocales().length == 1) {
             getPreferenceScreen().
-                removePreference(findPreference("language_category"));
+                removePreference(findPreference(KEY_PHONE_LANGUAGE));
         } else {
             mLanguagePref = findPreference(KEY_PHONE_LANGUAGE);
         }
@@ -76,7 +78,7 @@ public class LanguageSettings extends PreferenceActivity {
         Configuration config = getResources().getConfiguration();
         if (config.keyboard != Configuration.KEYBOARD_QWERTY) {
             getPreferenceScreen().removePreference(
-                    getPreferenceScreen().findPreference("hardkeyboard_category"));
+                    getPreferenceScreen().findPreference(KEY_HARDKEYBOARD_CATEGORY));
         } else {
             mHaveHardKeyboard = true;
         }
@@ -97,7 +99,8 @@ public class LanguageSettings extends PreferenceActivity {
         mLastInputMethodId = Settings.Secure.getString(getContentResolver(),
             Settings.Secure.DEFAULT_INPUT_METHOD);
         
-        PreferenceGroup textCategory = (PreferenceGroup) findPreference("text_category");
+        PreferenceGroup keyboardSettingsCategory = (PreferenceGroup) findPreference(
+                KEY_KEYBOARD_SETTINGS_CATEGORY);
         
         int N = (mInputMethodProperties == null ? 0 : mInputMethodProperties
                 .size());
@@ -113,7 +116,7 @@ public class LanguageSettings extends PreferenceActivity {
                 CheckBoxPreference chkbxPref = new CheckBoxPreference(this);
                 chkbxPref.setKey(prefKey);
                 chkbxPref.setTitle(label);
-                textCategory.addPreference(chkbxPref);
+                keyboardSettingsCategory.addPreference(chkbxPref);
                 mCheckboxes.add(chkbxPref);
             }
 
@@ -133,7 +136,7 @@ public class LanguageSettings extends PreferenceActivity {
                             R.string.input_methods_settings_label_format, label);
                     prefScreen.setSummary(settingsLabel);
                 }
-                textCategory.addPreference(prefScreen);
+                keyboardSettingsCategory.addPreference(prefScreen);
             }
         }
     }
