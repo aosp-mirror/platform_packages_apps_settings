@@ -27,6 +27,7 @@ import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.Window;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -52,7 +53,7 @@ public class WifiSettingsForSetupWizardXL extends Activity implements OnClickLis
         stateMap.put(DetailedState.SUSPENDED, DetailedState.SUSPENDED);  // ?
         stateMap.put(DetailedState.DISCONNECTING, DetailedState.DISCONNECTED);
         stateMap.put(DetailedState.DISCONNECTED, DetailedState.DISCONNECTED);
-        stateMap.put(DetailedState.FAILED, DetailedState.DISCONNECTED);
+        stateMap.put(DetailedState.FAILED, DetailedState.FAILED);
     }
 
     private TextView mProgressText;
@@ -61,6 +62,7 @@ public class WifiSettingsForSetupWizardXL extends Activity implements OnClickLis
     private TextView mStatusText;
 
     private StatusBarManager mStatusBarManager;
+    private InputMethodManager mInputMethodManager;
 
     // This count reduces every time when there's a notification about WiFi status change.
     // During the term this is >0, The system shows the message "connecting", regardless
@@ -76,6 +78,7 @@ public class WifiSettingsForSetupWizardXL extends Activity implements OnClickLis
         setContentView(R.layout.wifi_settings_for_setup_wizard_xl);
         mWifiSettings =
                 (WifiSettings)getFragmentManager().findFragmentById(R.id.wifi_setup_fragment);
+        mInputMethodManager = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
         setup();
         // XXX: should we use method?
         getIntent().putExtra(WifiSettings.IN_XL_SETUP_WIZARD, true);
@@ -141,10 +144,19 @@ public class WifiSettingsForSetupWizardXL extends Activity implements OnClickLis
             mWifiSettings.detachConfigPreference();
             break;
         }
+        hideSoftwareKeyboard();
+    }
+
+    private void hideSoftwareKeyboard() {
+        final View focusedView = getCurrentFocus();
+        if (focusedView != null) {
+            mInputMethodManager.hideSoftInputFromWindow(focusedView.getWindowToken(), 0);
+            focusedView.clearFocus();
+        }
     }
 
     // Called from WifiSettings
-    public void updateConnectionState(DetailedState originalState) {
+    /* package */ void updateConnectionState(DetailedState originalState) {
         final DetailedState state = stateMap.get(originalState);
         switch (state) {
         case SCANNING: {
@@ -173,6 +185,13 @@ public class WifiSettingsForSetupWizardXL extends Activity implements OnClickLis
             mProgressText.setText(Summary.get(this, state));
             setResult(Activity.RESULT_OK);
             finish();
+            break;
+        }
+        case FAILED: {
+            mProgressBar.setIndeterminate(false);
+            mProgressBar.setProgress(0);
+            mStatusText.setText(R.string.wifi_setup_status_select_network);
+            mProgressText.setText(Summary.get(this, state));
             break;
         }
         default:  // Not connected.
@@ -205,5 +224,6 @@ public class WifiSettingsForSetupWizardXL extends Activity implements OnClickLis
     public void onRefreshAccessPoints() {
         mProgressBar.setIndeterminate(true);
         mProgressText.setText(Summary.get(this, DetailedState.SCANNING));
+        mStatusText.setText(Summary.get(this, DetailedState.SCANNING));
     }
 }

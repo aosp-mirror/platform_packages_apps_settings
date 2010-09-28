@@ -16,6 +16,8 @@
 
 package com.android.settings.wifi;
 
+import static android.net.wifi.WifiConfiguration.INVALID_NETWORK_ID;
+
 import com.android.settings.ProgressCategoryBase;
 import com.android.settings.R;
 import com.android.settings.SettingsPreferenceFragment;
@@ -33,7 +35,6 @@ import android.net.wifi.ScanResult;
 import android.net.wifi.SupplicantState;
 import android.net.wifi.WifiConfiguration;
 import android.net.wifi.WifiConfiguration.KeyMgmt;
-import static android.net.wifi.WifiConfiguration.INVALID_NETWORK_ID;
 import android.net.wifi.WifiInfo;
 import android.net.wifi.WifiManager;
 import android.os.Bundle;
@@ -45,6 +46,7 @@ import android.preference.PreferenceScreen;
 import android.provider.Settings.Secure;
 import android.security.Credentials;
 import android.security.KeyStore;
+import android.util.Log;
 import android.view.ContextMenu;
 import android.view.ContextMenu.ContextMenuInfo;
 import android.view.Menu;
@@ -547,6 +549,10 @@ public class WifiSettings extends SettingsPreferenceFragment
 
         final Activity activity = getActivity();
         if (activity instanceof WifiSettingsForSetupWizardXL) {
+            if (mLastState == DetailedState.FAILED) {
+                // We clean up the status and let users select another network if they want.
+                refreshAccessPoints();
+            }
             ((WifiSettingsForSetupWizardXL)activity).updateConnectionState(mLastState);
         }
     }
@@ -625,6 +631,7 @@ public class WifiSettings extends SettingsPreferenceFragment
         final WifiConfigUiBase uiBase = (mDialog != null ? mDialog : mConfigPreference);
         final WifiConfigController configController = uiBase.getController();
 
+        boolean successful = true;
         switch(configController.chosenNetworkSetupMethod()) {
             case WifiConfigController.WPS_PBC:
                 mWifiManager.startWpsPbc(mSelectedAccessPoint.bssid);
@@ -638,8 +645,11 @@ public class WifiSettings extends SettingsPreferenceFragment
 
                 if (config == null) {
                     if (mSelectedAccessPoint != null
-                            && !requireKeyStore(mSelectedAccessPoint.getConfig())) {
+                            && !requireKeyStore(mSelectedAccessPoint.getConfig())
+                            && mSelectedAccessPoint.networkId != INVALID_NETWORK_ID) {
                         mWifiManager.connectNetwork(mSelectedAccessPoint.networkId);
+                    } else {
+                        successful = false;
                     }
                 } else if (config.networkId != INVALID_NETWORK_ID) {
                     if (mSelectedAccessPoint != null) {
@@ -655,7 +665,8 @@ public class WifiSettings extends SettingsPreferenceFragment
                 break;
         }
 
-        if (mInXlSetupWizard && mConfigPreference != null) {
+        if (mInXlSetupWizard && successful && mConfigPreference != null) {
+            // Now connecting to the AccessPoint.
             mConnectingAccessPoint = mSelectedAccessPoint;
             mConnectingAccessPoint.setSelectable(false);
         }
@@ -685,9 +696,8 @@ public class WifiSettings extends SettingsPreferenceFragment
         mConnectingAccessPoint = null;
         mAccessPoints.removeAll();
 
-        final Activity activity = getActivity();
-        if (activity instanceof WifiSettingsForSetupWizardXL) {
-            ((WifiSettingsForSetupWizardXL)activity).onRefreshAccessPoints();
+        if (mInXlSetupWizard) {
+            ((WifiSettingsForSetupWizardXL)getActivity()).onRefreshAccessPoints();
         }
     }
 
