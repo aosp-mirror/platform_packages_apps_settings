@@ -35,9 +35,12 @@ import android.content.res.Resources;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.RemoteCallback;
+import android.text.TextUtils.TruncateAt;
 import android.util.Log;
+import android.view.Display;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.widget.AppSecurityPermissions;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -50,6 +53,10 @@ public class DeviceAdminAdd extends Activity {
     static final String TAG = "DeviceAdminAdd";
     
     static final int DIALOG_WARNING = 1;
+
+    private static final int MAX_ADD_MSG_LINES_PORTRAIT = 5;
+    private static final int MAX_ADD_MSG_LINES_LANDSCAPE = 2;
+    private static final int MAX_ADD_MSG_LINES = 15;
     
     Handler mHandler;
     
@@ -62,6 +69,7 @@ public class DeviceAdminAdd extends Activity {
     TextView mAdminName;
     TextView mAdminDescription;
     TextView mAddMsg;
+    boolean mAddMsgEllipsized = true;
     TextView mAdminWarning;
     ViewGroup mAdminPolicies;
     Button mActionButton;
@@ -138,7 +146,17 @@ public class DeviceAdminAdd extends Activity {
         mAdminIcon = (ImageView)findViewById(R.id.admin_icon);
         mAdminName = (TextView)findViewById(R.id.admin_name);
         mAdminDescription = (TextView)findViewById(R.id.admin_description);
+
         mAddMsg = (TextView)findViewById(R.id.add_msg);
+        mAddMsg.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                toggleMessageEllipsis(v);
+            }
+        });
+
+        // toggleMessageEllipsis also handles initial layout:
+        toggleMessageEllipsis(mAddMsg);
+
         mAdminWarning = (TextView)findViewById(R.id.admin_warning);
         mAdminPolicies = (ViewGroup)findViewById(R.id.admin_policies);
         mCancelButton = (Button)findViewById(R.id.cancel_button);
@@ -280,5 +298,27 @@ public class DeviceAdminAdd extends Activity {
             mAdding = true;
         }
     }
-    
+
+
+    void toggleMessageEllipsis(View v) {
+        TextView tv = (TextView) v;
+
+        mAddMsgEllipsized = ! mAddMsgEllipsized;
+        tv.setEllipsize(mAddMsgEllipsized ? TruncateAt.END : null);
+        tv.setMaxLines(mAddMsgEllipsized ? getEllipsizedLines() : MAX_ADD_MSG_LINES);
+
+        ImageView iv = (ImageView) findViewById(R.id.add_msg_expander);
+        iv.setImageResource(mAddMsgEllipsized ?
+            com.android.internal.R.drawable.expander_ic_minimized :
+            com.android.internal.R.drawable.expander_ic_maximized);
+    }
+
+    int getEllipsizedLines() {
+        Display d = ((WindowManager) getSystemService(Context.WINDOW_SERVICE))
+                    .getDefaultDisplay();
+
+        return d.getHeight() > d.getWidth() ?
+            MAX_ADD_MSG_LINES_PORTRAIT : MAX_ADD_MSG_LINES_LANDSCAPE;
+    }
+
 }
