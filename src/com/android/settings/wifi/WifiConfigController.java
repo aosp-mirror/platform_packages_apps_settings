@@ -90,6 +90,9 @@ public class WifiConfigController implements TextWatcher,
     private TextView mDns2View;
 
     static boolean requireKeyStore(WifiConfiguration config) {
+        if (config == null) {
+            return false;
+        }
         String values[] = {config.ca_cert.value(), config.client_cert.value(),
                 config.private_key.value()};
         for (String value : values) {
