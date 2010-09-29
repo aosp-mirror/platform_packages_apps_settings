@@ -17,6 +17,9 @@
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:settings="http://schemas.android.com/apk/res/com.android.settings">
 
+    <PreferenceCategory android:key="language_settings_category"
+            android:title="@string/language_settings_category" />
+
     <PreferenceScreen
             android:key="phone_language"
             android:title="@string/phone_language">
@@ -25,8 +28,16 @@
                 android:targetClass="com.android.settings.LocalePicker"/>
     </PreferenceScreen>
 
-    <PreferenceCategory android:key="text_category"
-            android:title="@string/text_category" />
+    <PreferenceScreen
+            android:title="@string/user_dict_settings_title"
+            android:summary="@string/user_dict_settings_summary">
+        <intent android:action="android.intent.action.MAIN"
+                android:targetPackage="com.android.settings"
+                android:targetClass="com.android.settings.UserDictionarySettings" />
+    </PreferenceScreen>
+
+    <PreferenceCategory android:key="keyboard_settings_category"
+            android:title="@string/keyboard_settings_category" />
 
     <PreferenceScreen
             android:key="hardkeyboard_category"
@@ -35,14 +46,6 @@
         <intent android:action="android.intent.action.MAIN"
                 android:targetPackage="com.android.settings"
                 android:targetClass="com.android.settings.PhysicalKeyboardSettings"/>
-    </PreferenceScreen>
-    
-    <PreferenceScreen 
-            android:title="@string/user_dict_settings_title" 
-            android:summary="@string/user_dict_settings_summary">
-        <intent android:action="android.intent.action.MAIN"
-                android:targetPackage="com.android.settings"
-                android:targetClass="com.android.settings.UserDictionarySettings" />
     </PreferenceScreen>
 
 </PreferenceScreen>
