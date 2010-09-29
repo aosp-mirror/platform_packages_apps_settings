@@ -688,6 +688,7 @@ public class WifiSettings extends SettingsPreferenceFragment
     }
 
     /* package */ void refreshAccessPoints() {
+        mWifiManager.disconnect();
         if (mWifiManager.isWifiEnabled()) {
             mScanner.resume();
         }

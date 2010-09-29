@@ -2703,6 +2703,9 @@ found in the list of installed applications.</string>
          Used in Wifi Setup For Setup Wizard with XL screen. -->
     <string name="wifi_setup_next">Next</string>
 
+    <!-- The message shown above available networks when the device is scanning
+         available networks [CHAR LIMIT=35] -->
+    <string name="wifi_setup_status_scanning">Scanning networks...</string>
     <!-- Message shown above available network when there's no connected network.
          Used in Wifi Setup For Setup Wizard with XL screen. -->
     <string name="wifi_setup_status_select_network">Touch to select network</string>
@@ -2722,14 +2725,13 @@ found in the list of installed applications.</string>
          is established.
          Used in Wifi Setup For Setup Wizard with XL screen. -->
     <string name="wifi_setup_status_connecting">Connecting...</string>
-    <!-- The message show above available networks when connection is established.
-         Used in Wifi Setup For Setup Wizard with XL screen. -->
-    <string name="wifi_setup_status_connected">Connected</string>
+    <!-- The message shown above available networks when connection is established,
+         letting a user to proceed to the next step of the SetupWizard.
+         Used in Wifi Setup For Setup Wizard with XL screen. [CHAR LIMIT=35] -->
+    <string name="wifi_setup_status_proceed_to_next">Proceed to the next step</string>
 
     <!-- Do not translate. This is a stub which will be removed soon. -->
     <string name="time_zone_auto_stub" translatable="false">Select Time Zone</string>
-
-
 
     <!-- Message when sync is currently failing [CHAR LIMIT=100] -->
     <string name="sync_is_failing">Sync is currently experiencing problems. It will be back shortly.</string>

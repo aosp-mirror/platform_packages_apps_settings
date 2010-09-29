@@ -65,10 +65,15 @@ public class WifiSettingsForSetupWizardXL extends Activity implements OnClickLis
     private InputMethodManager mInputMethodManager;
 
     // This count reduces every time when there's a notification about WiFi status change.
-    // During the term this is >0, The system shows the message "connecting", regardless
-    // of the actual WiFi status. After this count's becoming 0, the status message correctly
-    // reflects what WiFi Picker told it. This is a tweak for letting users not confused
-    // with instable WiFi state during the first scan.
+    // During the term this is >0, The system refrains some actions which are not appropriate
+    // at that timing.
+    // - When network is connected at that timing, this screen doesn't call finish().
+    //   This count is set to 0 when being detected (not decremente).
+    // - When network status is "disconnected", we just show the message "connecting"
+    //   regardless of the actual WiFi status.
+    //   (After this count's becoming 0, the status message correctly reflects what WiFi Picker
+    //    told it)
+    // This is a tweak for letting users not confused with WiFi state during a first first steps.
     private int mIgnoringWifiNotificationCount = 5;
 
     @Override
@@ -84,6 +89,11 @@ public class WifiSettingsForSetupWizardXL extends Activity implements OnClickLis
         getIntent().putExtra(WifiSettings.IN_XL_SETUP_WIZARD, true);
 
         mStatusBarManager = (StatusBarManager)getSystemService(Context.STATUS_BAR_SERVICE);
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
         if (mStatusBarManager != null) {
             mStatusBarManager.disable(StatusBarManager.DISABLE_EXPAND
                     | StatusBarManager.DISABLE_NOTIFICATION_ICONS
@@ -96,20 +106,22 @@ public class WifiSettingsForSetupWizardXL extends Activity implements OnClickLis
     }
 
     @Override
-    public void onDestroy() {
+    public void onStop() {
         if (mStatusBarManager != null) {
             mStatusBarManager.disable(StatusBarManager.DISABLE_NONE);
         }
-        super.onDestroy();
+        super.onStop();
     }
 
     public void setup() {
         mProgressText = (TextView)findViewById(R.id.scanning_progress_text);
-        mProgressText.setText(Summary.get(this, DetailedState.SCANNING));
         mProgressBar = (ProgressBar)findViewById(R.id.scanning_progress_bar);
         mProgressBar.setMax(2);
-        mProgressBar.setIndeterminate(true);
         mStatusText = (TextView)findViewById(R.id.wifi_setup_status);
+
+        mProgressText.setText(Summary.get(this, DetailedState.SCANNING));
+        mProgressBar.setIndeterminate(true);
+        mStatusText.setText(R.string.wifi_setup_status_scanning);
 
         ((Button)findViewById(R.id.wifi_setup_refresh_list)).setOnClickListener(this);
         ((Button)findViewById(R.id.wifi_setup_add_network)).setOnClickListener(this);
@@ -181,10 +193,18 @@ public class WifiSettingsForSetupWizardXL extends Activity implements OnClickLis
         case CONNECTED: {
             mProgressBar.setIndeterminate(false);
             mProgressBar.setProgress(2);
-            mStatusText.setText(R.string.wifi_setup_status_connected);
             mProgressText.setText(Summary.get(this, state));
-            setResult(Activity.RESULT_OK);
-            finish();
+            mStatusText.setText(R.string.wifi_setup_status_proceed_to_next);
+
+            if (mIgnoringWifiNotificationCount > 0) {
+                // The network is already available before doing anything. We avoid skip this
+                // screen to avoid unnecessary trouble by doing so.
+                mIgnoringWifiNotificationCount = 0;
+            } else {
+                mProgressText.setText(Summary.get(this, state));
+                setResult(Activity.RESULT_OK);
+                finish();
+            }
             break;
         }
         case FAILED: {
@@ -200,7 +220,6 @@ public class WifiSettingsForSetupWizardXL extends Activity implements OnClickLis
                 mIgnoringWifiNotificationCount--;
                 mProgressBar.setIndeterminate(true);
                 mProgressText.setText(Summary.get(this, DetailedState.SCANNING));
-                return;
             } else {
                 mProgressBar.setIndeterminate(false);
                 mProgressBar.setProgress(0);
@@ -222,8 +241,9 @@ public class WifiSettingsForSetupWizardXL extends Activity implements OnClickLis
     }
 
     public void onRefreshAccessPoints() {
+        mIgnoringWifiNotificationCount = 5;
         mProgressBar.setIndeterminate(true);
         mProgressText.setText(Summary.get(this, DetailedState.SCANNING));
-        mStatusText.setText(Summary.get(this, DetailedState.SCANNING));
+        mStatusText.setText(R.string.wifi_setup_status_scanning);
     }
 }
