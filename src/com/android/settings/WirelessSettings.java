@@ -20,7 +20,6 @@ import android.bluetooth.BluetoothAdapter;
 import android.content.Context;
 import android.content.Intent;
 import android.net.ConnectivityManager;
-import android.net.wifi.WifiManager;
 import android.os.Bundle;
 import android.os.ServiceManager;
 import android.os.SystemProperties;
@@ -29,28 +28,30 @@ import android.preference.Preference;
 import android.preference.PreferenceActivity;
 import android.preference.PreferenceScreen;
 import android.provider.Settings;
-import android.util.Log;
-
 import com.android.internal.telephony.TelephonyIntents;
 import com.android.internal.telephony.TelephonyProperties;
 import com.android.settings.bluetooth.BluetoothEnabler;
 import com.android.settings.wifi.WifiEnabler;
+import com.android.settings.nfc.NfcEnabler;
 
 public class WirelessSettings extends PreferenceActivity {
 
     private static final String KEY_TOGGLE_AIRPLANE = "toggle_airplane";
     private static final String KEY_TOGGLE_BLUETOOTH = "toggle_bluetooth";
     private static final String KEY_TOGGLE_WIFI = "toggle_wifi";
+    private static final String KEY_TOGGLE_NFC = "toggle_nfc";
     private static final String KEY_WIFI_SETTINGS = "wifi_settings";
     private static final String KEY_BT_SETTINGS = "bt_settings";
     private static final String KEY_VPN_SETTINGS = "vpn_settings";
     private static final String KEY_TETHER_SETTINGS = "tether_settings";
+
     public static final String EXIT_ECM_RESULT = "exit_ecm_result";
     public static final int REQUEST_CODE_EXIT_ECM = 1;
 
     private AirplaneModeEnabler mAirplaneModeEnabler;
     private CheckBoxPreference mAirplaneModePreference;
     private WifiEnabler mWifiEnabler;
+    private NfcEnabler mNfcEnabler;
     private BluetoothEnabler mBtEnabler;
 
     /**
@@ -91,11 +92,13 @@ public class WirelessSettings extends PreferenceActivity {
         CheckBoxPreference airplane = (CheckBoxPreference) findPreference(KEY_TOGGLE_AIRPLANE);
         CheckBoxPreference wifi = (CheckBoxPreference) findPreference(KEY_TOGGLE_WIFI);
         CheckBoxPreference bt = (CheckBoxPreference) findPreference(KEY_TOGGLE_BLUETOOTH);
+        CheckBoxPreference nfc = (CheckBoxPreference) findPreference(KEY_TOGGLE_NFC);
 
         mAirplaneModeEnabler = new AirplaneModeEnabler(this, airplane);
         mAirplaneModePreference = (CheckBoxPreference) findPreference(KEY_TOGGLE_AIRPLANE);
         mWifiEnabler = new WifiEnabler(this, wifi);
         mBtEnabler = new BluetoothEnabler(this, bt);
+        mNfcEnabler = new NfcEnabler(this, nfc);
 
         String toggleable = Settings.System.getString(getContentResolver(),
                 Settings.System.AIRPLANE_MODE_TOGGLEABLE_RADIOS);
@@ -113,9 +116,14 @@ public class WirelessSettings extends PreferenceActivity {
             findPreference(KEY_BT_SETTINGS).setDependency(KEY_TOGGLE_AIRPLANE);
         }
 
-        // Disable Bluetooth Settings if Bluetooth service is not available.
+        // Remove Bluetooth Settings if Bluetooth service is not available.
         if (ServiceManager.getService(BluetoothAdapter.BLUETOOTH_SERVICE) == null) {
-            findPreference(KEY_BT_SETTINGS).setEnabled(false);
+            getPreferenceScreen().removePreference(bt);
+        }
+
+        // Remove NFC if its not available
+        if (ServiceManager.getService(Context.NFC_SERVICE) == null) {
+            getPreferenceScreen().removePreference(nfc);
         }
 
         // Disable Tethering if it's not allowed
@@ -145,21 +153,23 @@ public class WirelessSettings extends PreferenceActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        
+
         mAirplaneModeEnabler.resume();
         mWifiEnabler.resume();
         mBtEnabler.resume();
+        mNfcEnabler.resume();
     }
-    
+
     @Override
     protected void onPause() {
         super.onPause();
-        
+
         mAirplaneModeEnabler.pause();
         mWifiEnabler.pause();
         mBtEnabler.pause();
+        mNfcEnabler.pause();
     }
-    
+
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (requestCode == REQUEST_CODE_EXIT_ECM) {
