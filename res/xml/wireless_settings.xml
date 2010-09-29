@@ -39,6 +39,12 @@
     </PreferenceScreen>
 
     <CheckBoxPreference
+        android:key="toggle_nfc"
+        android:title="@string/nfc_quick_toggle_title"
+        android:summary="@string/nfc_quick_toggle_summary"
+        android:persistent="false" />
+
+    <CheckBoxPreference
         android:key="toggle_bluetooth"
         android:title="@string/bluetooth_quick_toggle_title"
         android:summary="@string/bluetooth_quick_toggle_summary"
