@@ -18,14 +18,23 @@
         xmlns:settings="http://schemas.android.com/apk/res/com.android.settings"
         android:title="@string/language_keyboard_settings_title">
 
+    <PreferenceCategory android:key="language_settings_category"
+            android:title="@string/language_settings_category" />
+
     <PreferenceScreen
        android:fragment="com.android.settings.LocalePicker"
        android:key="phone_language"
        android:title="@string/phone_language">
     </PreferenceScreen>
 
-    <PreferenceCategory android:key="text_category"
-            android:title="@string/text_category">
+    <PreferenceScreen
+        android:fragment="com.android.settings.UserDictionarySettings"
+        android:title="@string/user_dict_settings_title"
+        android:summary="@string/user_dict_settings_summary">
+    </PreferenceScreen>
+
+    <PreferenceCategory android:key="keyboard_settings_category"
+            android:title="@string/keyboard_settings_category">
 
         <PreferenceScreen android:key="input_method"
                 android:title="@string/input_method"
@@ -38,12 +47,6 @@
         android:key="hardkeyboard_category"
         android:title="@string/builtin_keyboard_settings_title"
         android:summary="@string/builtin_keyboard_settings_summary">
-    </PreferenceScreen>
-    
-    <PreferenceScreen 
-        android:fragment="com.android.settings.UserDictionarySettings"
-        android:title="@string/user_dict_settings_title" 
-        android:summary="@string/user_dict_settings_summary">
     </PreferenceScreen>
 
 </PreferenceScreen>
