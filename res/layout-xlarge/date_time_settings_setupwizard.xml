@@ -33,7 +33,7 @@
               android:layout_marginBottom="30dip"
               android:layout_alignParentTop="true"
               android:textSize="64dip"
-              android:textColor="#FF30FF30"
+              android:textColor="#FF99cc00"
               android:text="@string/date_and_time_settings_title"/>
 
     <LinearLayout android:id="@+id/main"
@@ -53,13 +53,14 @@
                           android:layout_weight="1"
                           android:layout_alignParentTop="true">
 
+                <!--
                 <CheckBox android:id="@+id/time_zone_auto"
                           android:layout_width="wrap_content"
                           android:layout_height="wrap_content"
                           android:gravity="right|center_horizontal"
                           android:layout_marginBottom="5dip"
                           android:textSize="32dip"
-                          android:text="@string/time_zone_auto_stub"/>
+                          android:text="@string/time_zone_auto_stub"/> -->
 
                 <!-- text should manually be set. -->
                 <Button android:id="@+id/current_time_zone"
