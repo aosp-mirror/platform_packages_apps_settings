@@ -71,6 +71,7 @@ public class InstalledAppDetails extends Activity
         implements View.OnClickListener, ApplicationsState.Callbacks {
     private static final String TAG="InstalledAppDetails";
     static final boolean SUPPORT_DISABLE_APPS = false;
+    private static final boolean localLOGV = false;
     
     private PackageManager mPm;
     private ApplicationsState mState;
@@ -80,7 +81,7 @@ public class InstalledAppDetails extends Activity
     private boolean mMoveInProgress = false;
     private boolean mUpdatedSysApp = false;
     private Button mActivitiesButton;
-    private boolean localLOGV = false;
+    private boolean mCanClearData = true;
     private TextView mAppVersion;
     private TextView mTotalSize;
     private TextView mAppSize;
@@ -182,12 +183,20 @@ public class InstalledAppDetails extends Activity
     }
     
     private void initDataButtons() {
-        if (mAppEntry.info.manageSpaceActivityName != null) {
-            mClearDataButton.setText(R.string.manage_space_text);
-        } else {
+        if ((mAppEntry.info.flags&(ApplicationInfo.FLAG_SYSTEM
+                | ApplicationInfo.FLAG_ALLOW_CLEAR_USER_DATA))
+                == ApplicationInfo.FLAG_SYSTEM) {
             mClearDataButton.setText(R.string.clear_user_data_text);
+            mClearDataButton.setEnabled(false);
+            mCanClearData = false;
+        } else {
+            if (mAppEntry.info.manageSpaceActivityName != null) {
+                mClearDataButton.setText(R.string.manage_space_text);
+            } else {
+                mClearDataButton.setText(R.string.clear_user_data_text);
+            }
+            mClearDataButton.setOnClickListener(this);
         }
-        mClearDataButton.setOnClickListener(this);
     }
 
     private CharSequence getMoveErrMsg(int errCode) {
@@ -505,7 +514,7 @@ public class InstalledAppDetails extends Activity
                 mTotalSize.setText(getSizeStr(mAppEntry.size));
             }
             
-            if (mAppEntry.dataSize <= 0) {
+            if (mAppEntry.dataSize <= 0 || !mCanClearData) {
                 mClearDataButton.setEnabled(false);
             } else {
                 mClearDataButton.setEnabled(true);
