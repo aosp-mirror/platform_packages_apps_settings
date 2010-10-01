@@ -17,6 +17,7 @@
 package com.android.settings;
 
 import android.app.AlertDialog;
+import android.app.Dialog;
 import android.app.Service;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -46,7 +47,7 @@ import java.util.Map;
 /**
  * Activity with the accessibility settings.
  */
-public class AccessibilitySettings extends SettingsPreferenceFragment {
+public class AccessibilitySettings extends SettingsPreferenceFragment implements DialogCreatable {
     private static final String DEFAULT_SCREENREADER_MARKET_LINK =
         "market://search?q=pname:com.google.android.marvin.talkback";
 
@@ -65,12 +66,19 @@ public class AccessibilitySettings extends SettingsPreferenceFragment {
     private final String POWER_BUTTON_ENDS_CALL_CHECKBOX =
         "power_button_ends_call";
 
-    private CheckBoxPreference mToggleCheckBox;
+    private static final int DIALOG_ID_DISABLE_ACCESSIBILITY = 1;
+    private static final int DIALOG_ID_ENABLE_SCRIPT_INJECTION = 2;
+    private static final int DIALOG_ID_ENABLE_ACCESSIBILITY_SERVICE = 3;
+    private static final int DIALOG_ID_NO_ACCESSIBILITY_SERVICES = 4;
 
+    private CheckBoxPreference mToggleAccessibilityCheckBox;
     private CheckBoxPreference mToggleScriptInjectionCheckBox;
+    private CheckBoxPreference mToggleAccessibilityServiceCheckBox;
 
     private PreferenceCategory mPowerButtonCategory;
     private CheckBoxPreference mPowerButtonEndsCallCheckBox;
+
+    private PreferenceGroup mAccessibilityServicesCategory;
 
     private Map<String, ServiceInfo> mAccessibilityServices =
         new LinkedHashMap<String, ServiceInfo>();
@@ -78,14 +86,16 @@ public class AccessibilitySettings extends SettingsPreferenceFragment {
     private TextUtils.SimpleStringSplitter mStringColonSplitter =
         new TextUtils.SimpleStringSplitter(':');
 
-    private PreferenceGroup mAccessibilityServicesCategory;
-
     @Override
     public void onCreate(Bundle icicle) {
         super.onCreate(icicle);
+
         addPreferencesFromResource(R.xml.accessibility_settings);
 
-        mToggleCheckBox = (CheckBoxPreference) findPreference(
+        mAccessibilityServicesCategory =
+            (PreferenceGroup) findPreference(ACCESSIBILITY_SERVICES_CATEGORY);
+
+        mToggleAccessibilityCheckBox = (CheckBoxPreference) findPreference(
                 TOGGLE_ACCESSIBILITY_SERVICE_CHECKBOX);
 
         mToggleScriptInjectionCheckBox = (CheckBoxPreference) findPreference(
@@ -94,50 +104,6 @@ public class AccessibilitySettings extends SettingsPreferenceFragment {
         mPowerButtonCategory = (PreferenceCategory) findPreference(POWER_BUTTON_CATEGORY);
         mPowerButtonEndsCallCheckBox = (CheckBoxPreference) findPreference(
                 POWER_BUTTON_ENDS_CALL_CHECKBOX);
-
-        addAccessibilitServicePreferences();
-
-        final HashSet<String> enabled = new HashSet<String>();
-        String settingValue = Settings.Secure.getString(getContentResolver(),
-                Settings.Secure.ENABLED_ACCESSIBILITY_SERVICES);
-        if (settingValue != null) {
-            TextUtils.SimpleStringSplitter splitter = mStringColonSplitter;
-            splitter.setString(settingValue);
-            while (splitter.hasNext()) {
-                enabled.add(splitter.next());
-            }
-        }
-
-        Map<String, ServiceInfo> accessibilityServices = mAccessibilityServices;
-
-        for (String key : accessibilityServices.keySet()) {
-            CheckBoxPreference preference = (CheckBoxPreference) findPreference(key);
-            if (preference != null) {
-                preference.setChecked(enabled.contains(key));
-            }
-        }
-
-        int serviceState = Settings.Secure.getInt(getContentResolver(),
-            Settings.Secure.ACCESSIBILITY_ENABLED, 0);
-
-        if (!accessibilityServices.isEmpty()) {
-            if (serviceState == 1) {
-                mToggleCheckBox.setChecked(true);
-            } else {
-                setAccessibilityServicePreferencesState(false);
-            }
-            mToggleCheckBox.setEnabled(true);
-        } else {
-            if (serviceState == 1) {
-                // no service and accessibility is enabled => disable
-                Settings.Secure.putInt(getContentResolver(),
-                    Settings.Secure.ACCESSIBILITY_ENABLED, 0);
-            }
-            mToggleCheckBox.setEnabled(false);
-            // Notify user that they do not have any accessibility apps
-            // installed and direct them to Market to get TalkBack
-            displayNoAppsAlert();
-        }
 
         // set the accessibility script injection category
         boolean scriptInjectionEnabled = (Settings.Secure.getInt(getContentResolver(),
@@ -169,6 +135,55 @@ public class AccessibilitySettings extends SettingsPreferenceFragment {
         super.onPause();
 
         persistEnabledAccessibilityServices();
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+
+        addAccessibilitServicePreferences();
+
+        final HashSet<String> enabled = new HashSet<String>();
+        String settingValue = Settings.Secure.getString(getContentResolver(),
+                Settings.Secure.ENABLED_ACCESSIBILITY_SERVICES);
+        if (settingValue != null) {
+            TextUtils.SimpleStringSplitter splitter = mStringColonSplitter;
+            splitter.setString(settingValue);
+            while (splitter.hasNext()) {
+                enabled.add(splitter.next());
+            }
+        }
+
+        Map<String, ServiceInfo> accessibilityServices = mAccessibilityServices;
+
+        for (String key : accessibilityServices.keySet()) {
+            CheckBoxPreference preference = (CheckBoxPreference) findPreference(key);
+            if (preference != null) {
+                preference.setChecked(enabled.contains(key));
+            }
+        }
+
+        int serviceState = Settings.Secure.getInt(getContentResolver(),
+            Settings.Secure.ACCESSIBILITY_ENABLED, 0);
+
+        if (!accessibilityServices.isEmpty()) {
+            if (serviceState == 1) {
+                mToggleAccessibilityCheckBox.setChecked(true);
+            } else {
+                setAccessibilityServicePreferencesState(false);
+            }
+            mToggleAccessibilityCheckBox.setEnabled(true);
+        } else {
+            if (serviceState == 1) {
+                // no service and accessibility is enabled => disable
+                Settings.Secure.putInt(getContentResolver(),
+                    Settings.Secure.ACCESSIBILITY_ENABLED, 0);
+            }
+            mToggleAccessibilityCheckBox.setEnabled(false);
+            // Notify user that they do not have any accessibility apps
+            // installed and direct them to Market to get TalkBack
+            displayNoAppsAlert();
+        }
     }
 
     /**
@@ -224,30 +239,9 @@ public class AccessibilitySettings extends SettingsPreferenceFragment {
                 Settings.Secure.ACCESSIBILITY_ENABLED, 1);
             setAccessibilityServicePreferencesState(true);
         } else {
-            final CheckBoxPreference checkBoxPreference = preference;
-            // TODO: DialogFragment?
-            AlertDialog dialog = (new AlertDialog.Builder(getActivity()))
-                .setTitle(android.R.string.dialog_alert_title)
-                .setIcon(android.R.drawable.ic_dialog_alert)
-                .setMessage(getResources().
-                        getString(R.string.accessibility_service_disable_warning))
-                .setCancelable(true)
-                .setPositiveButton(android.R.string.ok,
-                    new DialogInterface.OnClickListener() {
-                        public void onClick(DialogInterface dialog, int which) {
-                            Settings.Secure.putInt(getContentResolver(),
-                                Settings.Secure.ACCESSIBILITY_ENABLED, 0);
-                            setAccessibilityServicePreferencesState(false);
-                        }
-                })
-                .setNegativeButton(android.R.string.cancel,
-                    new DialogInterface.OnClickListener() {
-                        public void onClick(DialogInterface dialog, int which) {
-                            checkBoxPreference.setChecked(true);
-                        }
-                })
-                .create();
-            dialog.show();
+            // set right enabled state since the user may press back
+            preference.setChecked(true);
+            showDialog(DIALOG_ID_DISABLE_ACCESSIBILITY);
         }
     }
 
@@ -258,29 +252,9 @@ public class AccessibilitySettings extends SettingsPreferenceFragment {
      */
     private void handleToggleAccessibilityScriptInjection(CheckBoxPreference preference) {
         if (preference.isChecked()) {
-            final CheckBoxPreference checkBoxPreference = preference;
-            // TODO: DialogFragment?
-            AlertDialog dialog = (new AlertDialog.Builder(getActivity()))
-                .setTitle(android.R.string.dialog_alert_title)
-                .setIcon(android.R.drawable.ic_dialog_alert)
-                .setMessage(getActivity().getString(
-                        R.string.accessibility_script_injection_security_warning))
-                .setCancelable(true)
-                .setPositiveButton(android.R.string.ok,
-                    new DialogInterface.OnClickListener() {
-                        public void onClick(DialogInterface dialog, int which) {
-                            Settings.Secure.putInt(getContentResolver(),
-                            Settings.Secure.ACCESSIBILITY_SCRIPT_INJECTION, 1);
-                        }
-                })
-                .setNegativeButton(android.R.string.cancel,
-                    new DialogInterface.OnClickListener() {
-                        public void onClick(DialogInterface dialog, int which) {
-                            checkBoxPreference.setChecked(false);
-                        }
-                    })
-                .create();
-                dialog.show();
+            // set right enabled state since the user may press back
+            preference.setChecked(false);
+            showDialog(DIALOG_ID_ENABLE_SCRIPT_INJECTION);
         } else {
             Settings.Secure.putInt(getContentResolver(),
                 Settings.Secure.ACCESSIBILITY_SCRIPT_INJECTION, 0);
@@ -294,31 +268,10 @@ public class AccessibilitySettings extends SettingsPreferenceFragment {
      */
     private void handleEnableAccessibilityServiceStateChange(CheckBoxPreference preference) {
         if (preference.isChecked()) {
-            final CheckBoxPreference checkBoxPreference = preference;
-            // TODO: DialogFragment?
-            AlertDialog dialog = (new AlertDialog.Builder(getActivity()))
-                .setTitle(android.R.string.dialog_alert_title)
-                .setIcon(android.R.drawable.ic_dialog_alert)
-                .setMessage(getResources().
-                        getString(R.string.accessibility_service_security_warning,
-                                mAccessibilityServices.get(preference.getKey())
-                                .applicationInfo.loadLabel(getActivity().getPackageManager())))
-                .setCancelable(true)
-                .setPositiveButton(android.R.string.ok,
-                        new DialogInterface.OnClickListener() {
-                            public void onClick(DialogInterface dialog, int which) {
-                                checkBoxPreference.setChecked(true);
-                                persistEnabledAccessibilityServices();
-                            }
-                })
-                .setNegativeButton(android.R.string.cancel,
-                        new DialogInterface.OnClickListener() {
-                            public void onClick(DialogInterface dialog, int which) {
-                                checkBoxPreference.setChecked(false);
-                            }
-                })
-                .create();
-            dialog.show();
+            mToggleAccessibilityServiceCheckBox = preference;
+            // set right enabled state since the user may press back
+            preference.setChecked(false);
+            showDialog(DIALOG_ID_ENABLE_ACCESSIBILITY_SERVICE);
         } else {
             persistEnabledAccessibilityServices();
         }
@@ -354,25 +307,23 @@ public class AccessibilitySettings extends SettingsPreferenceFragment {
 
         List<ServiceInfo> installedServices = accessibilityManager.getAccessibilityServiceList();
 
-        mAccessibilityServicesCategory =
-            (PreferenceGroup) findPreference(ACCESSIBILITY_SERVICES_CATEGORY);
-
         if (installedServices.isEmpty()) {
             getPreferenceScreen().removePreference(mAccessibilityServicesCategory);
-            mAccessibilityServicesCategory = null;
             return;
         }
+
+        getPreferenceScreen().addPreference(mAccessibilityServicesCategory);
 
         for (int i = 0, count = installedServices.size(); i < count; ++i) {
             ServiceInfo serviceInfo = installedServices.get(i);
             String key = serviceInfo.packageName + "/" + serviceInfo.name;
 
-            mAccessibilityServices.put(key, serviceInfo);
-
-            CheckBoxPreference preference = new CheckBoxPreference(getActivity());
-            preference.setKey(key);
-            preference.setTitle(serviceInfo.loadLabel(getActivity().getPackageManager()));
-            mAccessibilityServicesCategory.addPreference(preference);
+            if (mAccessibilityServices.put(key, serviceInfo) == null) {
+                CheckBoxPreference preference = new CheckBoxPreference(getActivity());
+                preference.setKey(key);
+                preference.setTitle(serviceInfo.loadLabel(getActivity().getPackageManager()));
+                mAccessibilityServicesCategory.addPreference(preference);
+            }
         }
     }
 
@@ -385,34 +336,91 @@ public class AccessibilitySettings extends SettingsPreferenceFragment {
         try {
             PackageManager pm = getActivity().getPackageManager();
             ApplicationInfo info = pm.getApplicationInfo("com.android.vending", 0);
+            showDialog(DIALOG_ID_NO_ACCESSIBILITY_SERVICES);
         } catch (NameNotFoundException e) {
             // This is a no-op if the user does not have Android Market
             return;
         }
-        // TODO: DialogFragment?
-        AlertDialog.Builder noAppsAlert = new AlertDialog.Builder(getActivity());
-        noAppsAlert.setTitle(R.string.accessibility_service_no_apps_title);
-        noAppsAlert.setMessage(R.string.accessibility_service_no_apps_message);
+    }
 
-        noAppsAlert.setPositiveButton(android.R.string.ok,
-            new DialogInterface.OnClickListener() {
-                public void onClick(DialogInterface dialog, int which) {
-                    String screenreaderMarketLink =
-                        SystemProperties.get("ro.screenreader.market",
-                                DEFAULT_SCREENREADER_MARKET_LINK);
-                    Uri marketUri = Uri.parse(screenreaderMarketLink);
-                    Intent marketIntent = new Intent(Intent.ACTION_VIEW, marketUri);
-                    startActivity(marketIntent);
-                    getFragmentManager().popBackStack();
-                }
-            });
-
-        noAppsAlert.setNegativeButton(android.R.string.cancel,
-            new DialogInterface.OnClickListener() {
-                public void onClick(DialogInterface dialog, int which) {
-                }
-            });
-
-        noAppsAlert.show();
+    @Override
+    public Dialog onCreateDialog(int dialogId) {
+        switch (dialogId) {
+            case DIALOG_ID_DISABLE_ACCESSIBILITY:
+                return (new AlertDialog.Builder(getActivity()))
+                    .setTitle(android.R.string.dialog_alert_title)
+                    .setIcon(android.R.drawable.ic_dialog_alert)
+                    .setMessage(getResources().
+                            getString(R.string.accessibility_service_disable_warning))
+                    .setCancelable(true)
+                    .setPositiveButton(android.R.string.ok,
+                        new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int which) {
+                                Settings.Secure.putInt(getContentResolver(),
+                                    Settings.Secure.ACCESSIBILITY_ENABLED, 0);
+                                mToggleAccessibilityCheckBox.setChecked(false);
+                                setAccessibilityServicePreferencesState(false);
+                            }
+                    })
+                    .setNegativeButton(android.R.string.cancel, null)
+                    .create();
+            case DIALOG_ID_ENABLE_SCRIPT_INJECTION:
+                return new AlertDialog.Builder(getActivity())
+                .setTitle(android.R.string.dialog_alert_title)
+                .setIcon(android.R.drawable.ic_dialog_alert)
+                .setMessage(getActivity().getString(
+                        R.string.accessibility_script_injection_security_warning))
+                .setCancelable(true)
+                .setPositiveButton(android.R.string.ok,
+                    new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int which) {
+                            Settings.Secure.putInt(getContentResolver(),
+                            Settings.Secure.ACCESSIBILITY_SCRIPT_INJECTION, 1);
+                            mToggleScriptInjectionCheckBox.setChecked(true);
+                        }
+                })
+                .setNegativeButton(android.R.string.cancel, null)
+                .create();
+            case DIALOG_ID_ENABLE_ACCESSIBILITY_SERVICE:
+                return new AlertDialog.Builder(getActivity())
+                    .setTitle(android.R.string.dialog_alert_title)
+                    .setIcon(android.R.drawable.ic_dialog_alert)
+                    .setMessage(getResources().getString(
+                            R.string.accessibility_service_security_warning,
+                            mAccessibilityServices.get(mToggleAccessibilityServiceCheckBox.getKey())
+                            .applicationInfo.loadLabel(getActivity().getPackageManager())))
+                    .setCancelable(true)
+                    .setPositiveButton(android.R.string.ok,
+                            new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int which) {
+                                    mToggleAccessibilityServiceCheckBox.setChecked(true);
+                                    persistEnabledAccessibilityServices();
+                                }
+                    })
+                    .setNegativeButton(android.R.string.cancel, null)
+                    .create();
+            case DIALOG_ID_NO_ACCESSIBILITY_SERVICES:
+                return new AlertDialog.Builder(getActivity())
+                    .setTitle(R.string.accessibility_service_no_apps_title)
+                    .setMessage(R.string.accessibility_service_no_apps_message)
+                    .setPositiveButton(android.R.string.ok,
+                        new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int which) {
+                                // dismiss the dialog before launching the activity otherwise
+                                // the dialog removal occurs after onSaveInstanceState which
+                                // triggers an exception
+                                dialog.dismiss();
+                                String screenreaderMarketLink = SystemProperties.get(
+                                    "ro.screenreader.market", DEFAULT_SCREENREADER_MARKET_LINK);
+                                Uri marketUri = Uri.parse(screenreaderMarketLink);
+                                Intent marketIntent = new Intent(Intent.ACTION_VIEW, marketUri);
+                                startActivity(marketIntent);
+                            }
+                    })
+                    .setNegativeButton(android.R.string.cancel, null)
+                    .create();
+            default:
+                return null;
+        }
     }
 }
