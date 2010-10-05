@@ -77,6 +77,7 @@ public class InstalledAppDetails extends Activity
     private ApplicationsState mState;
     private ApplicationsState.AppEntry mAppEntry;
     private PackageInfo mPackageInfo;
+    private CanBeOnSdCardChecker mCanBeOnSdCardChecker;
     private Button mUninstallButton;
     private boolean mMoveInProgress = false;
     private boolean mUpdatedSysApp = false;
@@ -229,30 +230,8 @@ public class InstalledAppDetails extends Activity
             moveDisable = false;
         } else {
             mMoveAppButton.setText(R.string.move_app_to_sdcard);
-            if ((mAppEntry.info.flags & ApplicationInfo.FLAG_FORWARD_LOCK) == 0 &&
-                    (mAppEntry.info.flags & ApplicationInfo.FLAG_SYSTEM) == 0 &&
-                    mPackageInfo != null) {
-                if (mPackageInfo.installLocation == PackageInfo.INSTALL_LOCATION_PREFER_EXTERNAL ||
-                        mPackageInfo.installLocation == PackageInfo.INSTALL_LOCATION_AUTO) {
-                    moveDisable = false;
-                } else if (mPackageInfo.installLocation
-                        == PackageInfo.INSTALL_LOCATION_UNSPECIFIED) {
-                    IPackageManager ipm  = IPackageManager.Stub.asInterface(
-                            ServiceManager.getService("package"));
-                    int loc;
-                    try {
-                        loc = ipm.getInstallLocation();
-                    } catch (RemoteException e) {
-                        Log.e(TAG, "Is Pakage Manager running?");
-                        return;
-                    }
-                    if (loc == PackageHelper.APP_INSTALL_EXTERNAL) {
-                        // For apps with no preference and the default value set
-                        // to install on sdcard.
-                        moveDisable = false;
-                    }
-                }
-            }
+            mCanBeOnSdCardChecker.init();
+            moveDisable = !mCanBeOnSdCardChecker.check(mAppEntry.info);
         }
         if (moveDisable) {
             mMoveAppButton.setEnabled(false);
@@ -315,6 +294,8 @@ public class InstalledAppDetails extends Activity
         
         mState = ApplicationsState.getInstance(getApplication());
         mPm = getPackageManager();
+        
+        mCanBeOnSdCardChecker = new CanBeOnSdCardChecker();
         
         setContentView(R.layout.installed_app_details);
         
