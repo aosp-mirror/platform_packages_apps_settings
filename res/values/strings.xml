@@ -993,16 +993,22 @@
     <string name="wifi_ip_settings_menu_save">Save</string>
     <!-- Menu ietm to cancel the IP settings -->
     <string name="wifi_ip_settings_menu_cancel">Cancel</string>
-    <!-- Error message if the IP address is not valid -->
-    <string name="wifi_ip_settings_invalid_ip">Please type a valid IP address.</string>
+    <!-- Error message if the IP address is not valid [CHAR LIMIT=50]-->
+    <string name="wifi_ip_settings_invalid_ip_address">Please type a valid IP address.</string>
+    <!-- Error message if the gateway is not valid [CHAR LIMIT=50]-->
+    <string name="wifi_ip_settings_invalid_gateway">Please type a valid gateway address.</string>
+    <!-- Error message if the dns is not valid [CHAR LIMIT=50]-->
+    <string name="wifi_ip_settings_invalid_dns">Please type a valid dns address.</string>
+    <!-- Error message if the network prefix length is not valid [CHAR LIMIT=50]-->
+    <string name="wifi_ip_settings_invalid_network_prefix_length">Please type a network prefix length between 0 and 32.</string>
     <!-- Label for the DNS (first one) -->
     <string name="wifi_dns1">DNS 1</string>
     <!-- Label for the DNS (second one)-->
     <string name="wifi_dns2">DNS 2</string>
     <!-- Label for the gateway of the network -->
     <string name="wifi_gateway">Gateway</string>
-    <!-- Label for the netmask of the network -->
-    <string name="wifi_netmask">Netmask</string>
+    <!-- Label for the network prefix of the network [CHAR LIMIT=25]-->
+    <string name="wifi_network_prefix_length">Network prefix length</string>
 
     <!-- Wifi AP settings-->
     <!-- Label for wifi tether checkbox. Toggles Access Point on/off -->
