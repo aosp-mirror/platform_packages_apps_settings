@@ -16,9 +16,7 @@
 
 package com.android.settings;
 
-import android.app.Fragment;
 import android.content.Intent;
-import android.os.Bundle;
 import android.preference.PreferenceActivity;
 
 import java.util.List;
@@ -29,6 +27,18 @@ import java.util.List;
 public class Settings extends PreferenceActivity {
 
     // TODO: Update Call Settings based on airplane mode state.
+
+    @Override
+    public Intent getIntent() {
+        String startingFragment = getStartingFragmentClass(super.getIntent());
+        if (startingFragment != null && !onIsMultiPane()) {
+            Intent modIntent = new Intent(super.getIntent());
+            modIntent.putExtra(EXTRA_SHOW_FRAGMENT, startingFragment);
+            modIntent.putExtra(EXTRA_SHOW_FRAGMENT_ARGUMENTS, super.getIntent().getExtras());
+            return modIntent;
+        }
+        return super.getIntent();
+    }
 
     /**
      * Checks if the component name in the intent is different from the Settings class and
@@ -51,6 +61,7 @@ public class Settings extends PreferenceActivity {
         if (fragmentClass != null) {
             Header header = new Header();
             header.fragment = fragmentClass;
+            header.fragmentArguments = getIntent().getExtras();
             return header;
         }
         return super.onGetInitialHeader();
