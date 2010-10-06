@@ -607,7 +607,6 @@ public class WifiSettings extends SettingsPreferenceFragment
         if (mInXlSetupWizard) {
             final Button button =
                     (Button)getActivity().findViewById(R.id.wifi_setup_skip_or_next);
-            button.setEnabled(true);
             if (wifiAvailable) {
                 button.setText(R.string.wifi_setup_next);
             } else {

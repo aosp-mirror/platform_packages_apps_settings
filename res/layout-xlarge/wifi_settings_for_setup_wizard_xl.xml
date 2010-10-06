@@ -109,26 +109,29 @@
                 android:text="@string/wifi_forget"
                 android:visibility="gone" />
 
+        <Button android:id="@+id/wifi_setup_add_network"
+                android:layout_width="220dip"
+                android:layout_height="wrap_content"
+                android:layout_above="@+id/wifi_setup_refresh_list"
+                android:textSize="24dip"
+                android:text="@string/wifi_setup_add_network"
+                android:enabled="false" />
+
+        <Button android:id="@+id/wifi_setup_refresh_list"
+                android:layout_width="220dip"
+                android:layout_height="wrap_content"
+                android:layout_above="@+id/wifi_setup_skip_or_next"
+                android:textSize="24dip"
+                android:text="@string/wifi_setup_refresh_list"
+                android:enabled="false" />
+
         <Button android:id="@+id/wifi_setup_skip_or_next"
                 android:layout_width="220dip"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="30dip"
                 android:layout_alignParentBottom="true"
                 android:textSize="24dip"
-                android:text="@string/wifi_setup_skip" />
-
-        <Button android:id="@+id/wifi_setup_refresh_list"
-                android:layout_width="220dip"
-                android:layout_height="wrap_content"
-                android:layout_above="@id/wifi_setup_skip_or_next"
-                android:textSize="24dip"
-                android:text="@string/wifi_setup_refresh_list" />
-
-        <Button android:id="@+id/wifi_setup_add_network"
-                android:layout_width="220dip"
-                android:layout_height="wrap_content"
-                android:layout_above="@id/wifi_setup_refresh_list"
-                android:textSize="24dip"
-                android:text="@string/wifi_setup_add_network" />
+                android:text="@string/wifi_setup_skip"
+                android:enabled="false" />
     </RelativeLayout>
 </LinearLayout>

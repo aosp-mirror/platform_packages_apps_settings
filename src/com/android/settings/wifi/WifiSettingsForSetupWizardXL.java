@@ -61,7 +61,6 @@ public class WifiSettingsForSetupWizardXL extends Activity implements OnClickLis
     private WifiSettings mWifiSettings;
     private TextView mStatusText;
 
-    private StatusBarManager mStatusBarManager;
     private InputMethodManager mInputMethodManager;
 
     // This count reduces every time when there's a notification about WiFi status change.
@@ -87,30 +86,6 @@ public class WifiSettingsForSetupWizardXL extends Activity implements OnClickLis
         setup();
         // XXX: should we use method?
         getIntent().putExtra(WifiSettings.IN_XL_SETUP_WIZARD, true);
-
-        mStatusBarManager = (StatusBarManager)getSystemService(Context.STATUS_BAR_SERVICE);
-    }
-
-    @Override
-    public void onResume() {
-        super.onResume();
-        if (mStatusBarManager != null) {
-            mStatusBarManager.disable(StatusBarManager.DISABLE_EXPAND
-                    | StatusBarManager.DISABLE_NOTIFICATION_ICONS
-                    | StatusBarManager.DISABLE_NOTIFICATION_ALERTS
-                    | StatusBarManager.DISABLE_SYSTEM_INFO
-                    | StatusBarManager.DISABLE_NAVIGATION);
-        } else {
-            Log.e(TAG, "StatusBarManager isn't available.");
-        }
-    }
-
-    @Override
-    public void onStop() {
-        if (mStatusBarManager != null) {
-            mStatusBarManager.disable(StatusBarManager.DISABLE_NONE);
-        }
-        super.onStop();
     }
 
     public void setup() {
@@ -195,6 +170,7 @@ public class WifiSettingsForSetupWizardXL extends Activity implements OnClickLis
             mProgressBar.setProgress(2);
             mProgressText.setText(Summary.get(this, state));
             mStatusText.setText(R.string.wifi_setup_status_proceed_to_next);
+            enableButtons();
 
             if (mIgnoringWifiNotificationCount > 0) {
                 // The network is already available before doing anything. We avoid skip this
@@ -212,6 +188,7 @@ public class WifiSettingsForSetupWizardXL extends Activity implements OnClickLis
             mProgressBar.setProgress(0);
             mStatusText.setText(R.string.wifi_setup_status_select_network);
             mProgressText.setText(Summary.get(this, state));
+            enableButtons();
             break;
         }
         default:  // Not connected.
@@ -225,9 +202,17 @@ public class WifiSettingsForSetupWizardXL extends Activity implements OnClickLis
                 mProgressBar.setProgress(0);
                 mStatusText.setText(R.string.wifi_setup_status_select_network);
                 mProgressText.setText(getString(R.string.wifi_setup_not_connected));
+                enableButtons();
             }
+
             break;
         }
+    }
+
+    private void enableButtons() {
+        ((Button)findViewById(R.id.wifi_setup_refresh_list)).setEnabled(true);
+        ((Button)findViewById(R.id.wifi_setup_add_network)).setEnabled(true);
+        ((Button)findViewById(R.id.wifi_setup_skip_or_next)).setEnabled(true);
     }
 
     public void onWifiConfigPreferenceAttached(boolean isNewNetwork) {
