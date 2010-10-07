@@ -816,15 +816,15 @@
             </intent-filter>
         </activity>
 
-        <receiver android:name=".widget.SettingsAppWidgetProvider" android:label="@string/gadget_title">
+        <receiver android:name=".widget.SettingsAppWidgetProvider"
+                android:label="@string/gadget_title" android:exported="false">
             <intent-filter>
                 <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
                 <action android:name="android.net.wifi.WIFI_STATE_CHANGED" />
                 <action android:name="android.net.conn.BACKGROUND_DATA_SETTING_CHANGED" />
                 <action android:name="android.bluetooth.adapter.action.STATE_CHANGED" />
                 <action android:name="android.location.PROVIDERS_CHANGED" />
-                <!-- hack: using CLOSE_SYSTEM_DIALOGS to pick up (possible) sync changes -->
-                <action android:name="android.intent.action.CLOSE_SYSTEM_DIALOGS" />
+                <action android:name="com.android.sync.SYNC_CONN_STATUS_CHANGED" />
             </intent-filter>
             <meta-data android:name="android.appwidget.provider" android:resource="@xml/appwidget_info" />
         </receiver>
