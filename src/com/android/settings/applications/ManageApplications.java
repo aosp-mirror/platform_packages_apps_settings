@@ -16,6 +16,7 @@
 
 package com.android.settings.applications;
 
+import com.android.internal.content.PackageHelper;
 import com.android.settings.R;
 import com.android.settings.applications.ApplicationsState.AppEntry;
 
@@ -24,8 +25,12 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.ApplicationInfo;
+import android.content.pm.IPackageManager;
+import android.content.pm.PackageInfo;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.RemoteException;
+import android.os.ServiceManager;
 import android.provider.Settings;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -38,6 +43,7 @@ import android.view.animation.AnimationUtils;
 import android.widget.AbsListView;
 import android.widget.AdapterView;
 import android.widget.BaseAdapter;
+import android.widget.CheckBox;
 import android.widget.Filter;
 import android.widget.Filterable;
 import android.widget.ImageView;
@@ -49,6 +55,48 @@ import android.widget.AdapterView.OnItemClickListener;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
+
+final class CanBeOnSdCardChecker {
+    final IPackageManager mPm;
+    int mInstallLocation;
+    
+    CanBeOnSdCardChecker() {
+        mPm = IPackageManager.Stub.asInterface(
+                ServiceManager.getService("package"));
+    }
+    
+    void init() {
+        try {
+            mInstallLocation = mPm.getInstallLocation();
+        } catch (RemoteException e) {
+            Log.e("CanBeOnSdCardChecker", "Is Package Manager running?");
+            return;
+        }
+    }
+    
+    boolean check(ApplicationInfo info) {
+        boolean canBe = false;
+        if ((info.flags & ApplicationInfo.FLAG_EXTERNAL_STORAGE) != 0) {
+            canBe = true;
+        } else {
+            if ((info.flags & ApplicationInfo.FLAG_FORWARD_LOCK) == 0 &&
+                    (info.flags & ApplicationInfo.FLAG_SYSTEM) == 0) {
+                if (info.installLocation == PackageInfo.INSTALL_LOCATION_PREFER_EXTERNAL ||
+                        info.installLocation == PackageInfo.INSTALL_LOCATION_AUTO) {
+                    canBe = true;
+                } else if (info.installLocation
+                        == PackageInfo.INSTALL_LOCATION_UNSPECIFIED) {
+                    if (mInstallLocation == PackageHelper.APP_INSTALL_EXTERNAL) {
+                        // For apps with no preference and the default value set
+                        // to install on sdcard.
+                        canBe = true;
+                    }
+                }
+            }
+        }
+        return canBe;
+    }
+}
 
 /**
  * Activity to pick an application that will be used to display installation information and
@@ -125,6 +173,7 @@ public class ManageApplications extends TabActivity implements
         ImageView appIcon;
         TextView appSize;
         TextView disabled;
+        CheckBox checkBox;
         
         void updateSizeText(ManageApplications ma) {
             if (DEBUG) Log.i(TAG, "updateSizeText of " + entry.label + " " + entry
@@ -364,6 +413,7 @@ public class ManageApplications extends TabActivity implements
                 holder.appIcon = (ImageView) convertView.findViewById(R.id.app_icon);
                 holder.appSize = (TextView) convertView.findViewById(R.id.app_size);
                 holder.disabled = (TextView) convertView.findViewById(R.id.app_disabled);
+                holder.checkBox = (CheckBox) convertView.findViewById(R.id.app_on_sdcard);
                 convertView.setTag(holder);
             } else {
                 // Get the ViewHolder back to get fast access to the TextView
@@ -390,6 +440,13 @@ public class ManageApplications extends TabActivity implements
                     holder.disabled.setVisibility(entry.info.enabled ? View.GONE : View.VISIBLE);
                 } else {
                     holder.disabled.setVisibility(View.GONE);
+                }
+                if (mLastFilterMode == FILTER_APPS_SDCARD) {
+                    holder.checkBox.setVisibility(View.VISIBLE);
+                    holder.checkBox.setChecked((entry.info.flags
+                            & ApplicationInfo.FLAG_EXTERNAL_STORAGE) != 0);
+                } else {
+                    holder.checkBox.setVisibility(View.GONE);
                 }
             }
             mActive.remove(convertView);
