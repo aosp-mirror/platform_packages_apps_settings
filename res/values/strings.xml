@@ -1237,14 +1237,11 @@
     <string name="device_status">Status</string>
     <!-- About phone screen, summary of the item to go into the phone status screen -->
     <string name="device_status_summary">Phone number, signal, etc.</string>
-    <!-- Main settings screen item's title to go into the SD card and storage settings screen [CHAR LIMIT=25] -->
-    <string name="storage_settings" product="nosdcard">Shared &amp; secure storage storage</string>
-    <!-- Main settings screen item's title to go into the SD card and storage settings screen-->
-    <string name="storage_settings" product="default">SD card &amp; phone storage</string>
-    <!-- SD card and storage settings screen title [CHAR LIMIT=25] -->
-    <string name="storage_settings_title" product="nosdcard">Shared &amp; secure storage settings</string>
-    <!-- SD card and storage settings screen title -->
-    <string name="storage_settings_title" product="default">SD card &amp; phone storage settings</string>
+
+    <!-- Main settings screen item's title to go into the storage settings screen [CHAR LIMIT=25] -->
+    <string name="storage_settings">Storage</string>
+    <!-- Storage settings screen title [CHAR LIMIT=25] -->
+    <string name="storage_settings_title">Storage settings</string>
     <!-- [CHAR LIMIT=100] Main settings screen item's summary for the SD card and storage settings -->
     <string name="storage_settings_summary" product="nosdcard">Unmount shared storage, view available storage</string>
     <!-- [CHAR LIMIT=100] Main settings screen item's summary for the SD card and storage settings -->
@@ -1284,7 +1281,7 @@
     <!-- About phone, status item title.  How much time the device has had its main CPU awake. -->
     <string name="status_awake_time">Awake time</string>
     <!-- SD card & phone storage settings screen heading. This is displayed above items that pertain to the phone's internal storage  -->
-    <string name="internal_memory">Internal phone storage</string>
+    <string name="internal_memory">Secure storage</string>
     <!-- SD card & phone storage settings screen heading. This is displayed above items that pertain to the SD card [CHAR LIMIT=30] -->
     <string name="sd_memory" product="nosdcard">Shared storage</string>
     <!-- SD card & phone storage settings screen heading. This is displayed above items that pertain to the SD card -->
@@ -1294,14 +1291,11 @@
     <!-- SD card & phone storage settings screen heading.  The total amount of storage space for some storage partition.  For example, this is listed under both the "Internal phone storage" section and the "SD card" section -->
     <string name="memory_size">Total space</string>
     <!-- SD card & phone storage settings item title that will result in the phone unmounting the SD card.  This will be done before the user phyiscally removes the SD card from the phone.  Kind of like the "Safely remove" on some operating systems.   [CHAR LIMIT=25] -->
-    <string name="sd_eject" product="nosdcard">Unmount shared storage</string>
-    <!-- SD card & phone storage settings item title that will result in the phone unmounting the SD card.  This will be done before the user phyiscally removes the SD card from the phone.  Kind of like the "Safely remove" on some operating systems.   -->
-    <string name="sd_eject" product="default">Unmount SD card</string>
+    <string name="sd_eject" product="default">Unmount</string>
     <!-- SD card & phone storage settings item title that will result in the phone unmounting the SD card.  This will be done before the user phyiscally removes the SD card from the phone.  Kind of like the "Safely remove" on some operating systems.   [CHAR LIMIT=30] -->
-    <string name="sd_eject_summary" product="nosdcard">Unmount the shared storage so you can format it</string>
+    <string name="sd_eject_summary" product="nosdcard">Unmount the internal shared storage so you can format it</string>
     <!-- SD card & phone storage settings item title that will result in the phone unmounting the SD card.  This will be done before the user phyiscally removes the SD card from the phone.  Kind of like the "Safely remove" on some operating systems.   -->
-    <string name="sd_eject_summary" product="default">Unmount the SD card for safe removal</string>
-
+    <string name="sd_eject_summary" product="default">Unmount the SD card so you can safely remove or format it</string>
 
     <!-- SD card & phone storage settings item summary that is displayed when no SD card is inserted.  This version of the string can probably never come up on current hardware. [CHAR LIMIT=25] -->
     <string name="sd_insert_summary" product="nosdcard">Insert shared storage for mounting</string>
@@ -1316,11 +1310,9 @@
     <!-- SD card & phone storage settings item title that will result in the phone mounting the SD card. -->
     <string name="sd_mount_summary" product="default">Mount the SD card</string>
     <!-- SD card & phone storage settings item title that will result in the phone formatting the SD card.   [CHAR LIMIT=25] -->
-    <string name="sd_format" product="nosdcard">Format shared storage</string>
-    <!-- SD card & phone storage settings item title that will result in the phone formatting the SD card.   -->
-    <string name="sd_format" product="default">Format SD card</string>
+    <string name="sd_format">Format</string>
     <!-- SD card & phone storage settings item title that will result in the phone unmounting the SD card.   [CHAR LIMIT=30] -->
-    <string name="sd_format_summary" product="nosdcard">Format (erase) the shared storage</string>
+    <string name="sd_format_summary" product="nosdcard">Format (erase) the internal shared storage</string>
     <!-- SD card & phone storage settings item title that will result in the phone unmounting the SD card.   -->
     <string name="sd_format_summary" product="default">Format (erase) the SD card</string>
     <!-- SD card status when it is not available status -->
@@ -1449,9 +1441,9 @@
 
     <!-- Media Format -->
     <!-- SD card & phone storage settings screen, setting option name under Internal phone storage heading [CHAR LIMIT=25] -->
-    <string name="media_format_title" product="nosdcard">Format shared storage.</string>
+    <string name="media_format_title" product="nosdcard">Format shared storage</string>
     <!-- SD card & phone storage settings screen, setting option name under Internal phone storage heading -->
-    <string name="media_format_title" product="default">Format SD card.</string>
+    <string name="media_format_title" product="default">Format SD card</string>
     <!-- SD card & phone storage settings screen, setting option summary text under Internal phone storage heading [CHAR LIMIT=30] -->
     <string name="media_format_summary" product="nosdcard">Erases all data in shared storage</string>
     <!-- SD card & phone storage settings screen, setting option summary text under Internal phone storage heading -->
