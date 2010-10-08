@@ -20,7 +20,10 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.res.Resources;
 import android.net.DhcpInfo;
+import android.net.LinkAddress;
+import android.net.LinkProperties;
 import android.net.NetworkInfo.DetailedState;
+import android.net.NetworkUtils;
 import android.net.Proxy;
 import android.net.ProxyProperties;
 import android.net.wifi.WifiConfiguration;
@@ -36,6 +39,7 @@ import android.text.Editable;
 import android.text.InputType;
 import android.text.TextWatcher;
 import android.text.format.Formatter;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
@@ -51,6 +55,7 @@ import com.android.settings.R;
 import java.net.InetAddress;
 import java.net.InetSocketAddress;
 import java.net.UnknownHostException;
+import java.util.Iterator;
 
 /**
  * The class for allowing UIs like {@link WifiDialog} and {@link WifiConfigPreference} to
@@ -93,11 +98,13 @@ public class WifiConfigController implements TextWatcher,
     public static final int PROXY_NONE = 0;
     public static final int PROXY_STATIC = 1;
 
+    private static final String TAG = "WifiConfigController";
+
     private Spinner mNetworkSetupSpinner;
     private Spinner mIpSettingsSpinner;
     private TextView mIpAddressView;
     private TextView mGatewayView;
-    private TextView mNetmaskView;
+    private TextView mNetworkPrefixLengthView;
     private TextView mDns1View;
     private TextView mDns2View;
 
@@ -330,17 +337,12 @@ public class WifiConfigController implements TextWatcher,
         if (config.ipAssignment == IpAssignment.STATIC) {
             //TODO: A better way to do this is to not dismiss the
             //dialog as long as one of the fields is invalid
-            try {
-                config.ipConfig.ipAddress = stringToIpAddr(mIpAddressView.getText().toString());
-                config.ipConfig.gateway = stringToIpAddr(mGatewayView.getText().toString());
-                config.ipConfig.netmask = stringToIpAddr(mNetmaskView.getText().toString());
-                config.ipConfig.dns1 = stringToIpAddr(mDns1View.getText().toString());
-                if (mDns2View.getText() != null && mDns2View.getText().length() > 0) {
-                    config.ipConfig.dns2 = stringToIpAddr(mDns2View.getText().toString());
-                }
-            } catch (UnknownHostException e) {
-                Toast.makeText(mConfigUi.getContext(), R.string.wifi_ip_settings_invalid_ip,
-                        Toast.LENGTH_LONG).show();
+            LinkProperties linkProperties = new LinkProperties();
+            int result = validateIpConfigFields(linkProperties);
+            if (result == 0) {
+                config.linkProperties = linkProperties;
+            } else {
+                Toast.makeText(mConfigUi.getContext(), result, Toast.LENGTH_LONG).show();
                 config.ipAssignment = IpAssignment.UNASSIGNED;
             }
         }
@@ -355,9 +357,11 @@ public class WifiConfigController implements TextWatcher,
             String exclusionList = mProxyExclusionListView.getText().toString();
             int result = ProxySelector.validate(host, port, exclusionList);
             if (result == 0) {
-                config.proxyProperties.setSocketAddress(
+                ProxyProperties proxyProperties= new ProxyProperties();
+                proxyProperties.setSocketAddress(
                         InetSocketAddress.createUnresolved(host, Integer.parseInt(port)));
-                config.proxyProperties.setExclusionList(exclusionList);
+                proxyProperties.setExclusionList(exclusionList);
+                config.linkProperties.setHttpProxy(proxyProperties);
             } else {
                 Toast.makeText(mConfigUi.getContext(), result, Toast.LENGTH_LONG).show();
                 config.proxySettings = ProxySettings.UNASSIGNED;
@@ -365,6 +369,51 @@ public class WifiConfigController implements TextWatcher,
         }
 
         return config;
+    }
+
+    private int validateIpConfigFields(LinkProperties linkProperties) {
+        try {
+            String ipAddr = mIpAddressView.getText().toString();
+            if (!NetworkUtils.isIpAddress(ipAddr)) {
+                return R.string.wifi_ip_settings_invalid_ip_address;
+            }
+            InetAddress inetAddr = InetAddress.getByName(ipAddr);
+
+            int networkPrefixLength = Integer.parseInt(mNetworkPrefixLengthView.getText()
+                    .toString());
+            if (networkPrefixLength < 0 || networkPrefixLength > 32) {
+                return R.string.wifi_ip_settings_invalid_network_prefix_length;
+            }
+
+            linkProperties.addLinkAddress(new LinkAddress(inetAddr, networkPrefixLength));
+
+            String gateway = mGatewayView.getText().toString();
+            if (!NetworkUtils.isIpAddress(gateway)) {
+                return R.string.wifi_ip_settings_invalid_gateway;
+            }
+            linkProperties.setGateway(InetAddress.getByName(gateway));
+
+            String dns = mDns1View.getText().toString();
+            if (!NetworkUtils.isIpAddress(dns)) {
+                return R.string.wifi_ip_settings_invalid_dns;
+            }
+            linkProperties.addDns(InetAddress.getByName(dns));
+            if (mDns2View.length() > 0) {
+                dns = mDns2View.getText().toString();
+                if (!NetworkUtils.isIpAddress(dns)) {
+                    return R.string.wifi_ip_settings_invalid_dns;
+                }
+                linkProperties.addDns(InetAddress.getByName(dns));
+            }
+
+        } catch (NumberFormatException ignore) {
+            return R.string.wifi_ip_settings_invalid_network_prefix_length;
+        } catch (UnknownHostException e) {
+            //Should not happen since we have already validated addresses
+            Log.e(TAG, "Failure to validate IP configuration " + e);
+            return R.string.wifi_ip_settings_invalid_ip_address;
+        }
+        return 0;
     }
 
     int chosenNetworkSetupMethod() {
@@ -471,18 +520,30 @@ public class WifiConfigController implements TextWatcher,
             if (mIpAddressView == null) {
                 mIpAddressView = (TextView) mView.findViewById(R.id.ipaddress);
                 mGatewayView = (TextView) mView.findViewById(R.id.gateway);
-                mNetmaskView = (TextView) mView.findViewById(R.id.netmask);
+                mNetworkPrefixLengthView = (TextView) mView.findViewById(
+                        R.id.network_prefix_length);
                 mDns1View = (TextView) mView.findViewById(R.id.dns1);
                 mDns2View = (TextView) mView.findViewById(R.id.dns2);
             }
             if (config != null) {
-                DhcpInfo ipConfig = config.ipConfig;
-                if (ipConfig != null && ipConfig.ipAddress != 0) {
-                    mIpAddressView.setText(intToIpString(ipConfig.ipAddress));
-                    mGatewayView.setText(intToIpString(ipConfig.gateway));
-                    mNetmaskView.setText(intToIpString(ipConfig.netmask));
-                    mDns1View.setText(intToIpString(ipConfig.dns1));
-                    if (ipConfig.dns2 != 0) mDns2View.setText(intToIpString(ipConfig.dns2));
+                LinkProperties linkProperties = config.linkProperties;
+                Iterator<LinkAddress> iterator = linkProperties.getLinkAddresses().iterator();
+                if (iterator.hasNext()) {
+                    LinkAddress linkAddress = iterator.next();
+                    mIpAddressView.setText(linkAddress.getAddress().getHostAddress());
+                    mNetworkPrefixLengthView.setText(Integer.toString(linkAddress
+                            .getNetworkPrefixLength()));
+                }
+                InetAddress gateway = linkProperties.getGateway();
+                if (gateway != null) {
+                    mGatewayView.setText(linkProperties.getGateway().getHostAddress());
+                }
+                Iterator<InetAddress> dnsIterator = linkProperties.getDnses().iterator();
+                if (dnsIterator.hasNext()) {
+                    mDns1View.setText(dnsIterator.next().getHostAddress());
+                }
+                if (dnsIterator.hasNext()) {
+                    mDns2View.setText(dnsIterator.next().getHostAddress());
                 }
             }
         } else {
@@ -507,7 +568,7 @@ public class WifiConfigController implements TextWatcher,
                 mProxyExclusionListView = (TextView) mView.findViewById(R.id.proxy_exclusionlist);
             }
             if (config != null) {
-                ProxyProperties proxyProperties = config.proxyProperties;
+                ProxyProperties proxyProperties = config.linkProperties.getHttpProxy();
                 if (proxyProperties != null) {
                     InetSocketAddress sockAddr = proxyProperties.getSocketAddress();
                     if (sockAddr != null) {
@@ -602,29 +663,4 @@ public class WifiConfigController implements TextWatcher,
     @Override
     public void onNothingSelected(AdapterView<?> parent) {
     }
-
-    /* TODO: should go away when we move to IPv6 based config storage */
-    private static int stringToIpAddr(String addrString) throws UnknownHostException {
-        try {
-            String[] parts = addrString.split("\\.");
-            if (parts.length != 4) {
-                throw new UnknownHostException(addrString);
-            }
-
-            int a = Integer.parseInt(parts[0]);
-            int b = Integer.parseInt(parts[1]) << 8;
-            int c = Integer.parseInt(parts[2]) << 16;
-            int d = Integer.parseInt(parts[3]) << 24;
-
-            return a | b | c | d;
-        } catch (NumberFormatException e) {
-            throw new UnknownHostException(addrString);
-        }
-    }
-
-    private static String intToIpString(int i) {
-        return (i & 0xFF) + "." + ((i >>  8 ) & 0xFF) + "." +((i >> 16 ) & 0xFF) + "." +
-            ((i >> 24 ) & 0xFF);
-    }
-
 }
