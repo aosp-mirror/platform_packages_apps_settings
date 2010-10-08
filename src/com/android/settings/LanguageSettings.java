@@ -54,7 +54,6 @@ public class LanguageSettings extends SettingsPreferenceFragment {
     final TextUtils.SimpleStringSplitter mStringColonSplitter
             = new TextUtils.SimpleStringSplitter(':');
     
-    private String mLastInputMethodId;
     private String mLastTickedInputMethodId;
 
     private AlertDialog mDialog = null;
@@ -97,9 +96,6 @@ public class LanguageSettings extends SettingsPreferenceFragment {
 
         mInputMethodProperties = imm.getInputMethodList();
 
-        mLastInputMethodId = Settings.Secure.getString(getContentResolver(),
-            Settings.Secure.DEFAULT_INPUT_METHOD);
-        
         PreferenceGroup keyboardSettingsCategory = (PreferenceGroup) findPreference(
                 KEY_KEYBOARD_SETTINGS_CATEGORY);
         
@@ -184,8 +180,11 @@ public class LanguageSettings extends SettingsPreferenceFragment {
     public void onPause() {
         super.onPause();
 
-        StringBuilder builder = new StringBuilder(256);
-        StringBuilder disabledSysImes = new StringBuilder(256);
+        final String lastInputMethodId = Settings.Secure.getString(getContentResolver(),
+                Settings.Secure.DEFAULT_INPUT_METHOD);
+
+        StringBuilder builder = new StringBuilder();
+        StringBuilder disabledSysImes = new StringBuilder();
 
         int firstEnabled = -1;
         int N = mInputMethodProperties.size();
@@ -193,7 +192,7 @@ public class LanguageSettings extends SettingsPreferenceFragment {
             final InputMethodInfo property = mInputMethodProperties.get(i);
             final String id = property.getId();
             CheckBoxPreference pref = (CheckBoxPreference) findPreference(id);
-            boolean hasIt = id.equals(mLastInputMethodId);
+            boolean hasIt = id.equals(lastInputMethodId);
             boolean systemIme = isSystemIme(property); 
             if (((N == 1 || systemIme) && !mHaveHardKeyboard) 
                     || (pref != null && pref.isChecked())) {
@@ -203,7 +202,7 @@ public class LanguageSettings extends SettingsPreferenceFragment {
                     firstEnabled = i;
                 }
             } else if (hasIt) {
-                mLastInputMethodId = mLastTickedInputMethodId;
+                lastInputMethodId = mLastTickedInputMethodId;
             }
             // If it's a disabled system ime, add it to the disabled list so that it
             // doesn't get enabled automatically on any changes to the package list
@@ -214,11 +213,11 @@ public class LanguageSettings extends SettingsPreferenceFragment {
         }
 
         // If the last input method is unset, set it as the first enabled one.
-        if (null == mLastInputMethodId || "".equals(mLastInputMethodId)) {
+        if (null == lastInputMethodId || "".equals(lastInputMethodId)) {
             if (firstEnabled >= 0) {
-                mLastInputMethodId = mInputMethodProperties.get(firstEnabled).getId();
+                lastInputMethodId = mInputMethodProperties.get(firstEnabled).getId();
             } else {
-                mLastInputMethodId = null;
+                lastInputMethodId = null;
             }
         }
         
@@ -228,7 +227,7 @@ public class LanguageSettings extends SettingsPreferenceFragment {
                 Settings.Secure.DISABLED_SYSTEM_INPUT_METHODS, disabledSysImes.toString());
         Settings.Secure.putString(getContentResolver(),
             Settings.Secure.DEFAULT_INPUT_METHOD,
-            mLastInputMethodId != null ? mLastInputMethodId : "");
+            lastInputMethodId != null ? lastInputMethodId : "");
     }
 
     @Override
@@ -299,7 +298,7 @@ public class LanguageSettings extends SettingsPreferenceFragment {
             } else if (KEY_INPUT_METHOD.equals(preference.getKey())) {
                 final InputMethodManager imm = (InputMethodManager)
                         getSystemService(Context.INPUT_METHOD_SERVICE);
-                imm.showInputMethodPicker();
+                imm.showInputMethodSubtypePicker();
             } else if (preference.getIntent() == null) {
                 PreferenceScreen pref = (PreferenceScreen) preference;
                 String activityName = pref.getKey();
