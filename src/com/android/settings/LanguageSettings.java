@@ -180,7 +180,7 @@ public class LanguageSettings extends SettingsPreferenceFragment {
     public void onPause() {
         super.onPause();
 
-        final String lastInputMethodId = Settings.Secure.getString(getContentResolver(),
+        String lastInputMethodId = Settings.Secure.getString(getContentResolver(),
                 Settings.Secure.DEFAULT_INPUT_METHOD);
 
         StringBuilder builder = new StringBuilder();
