@@ -94,6 +94,12 @@ public class ManageAccountsSettings extends PreferenceFragment
     }
 
     @Override
+    public void onResume() {
+        super.onResume();
+        onSyncStateUpdated();
+    }
+
+    @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
