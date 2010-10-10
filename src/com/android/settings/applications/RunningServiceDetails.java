@@ -4,11 +4,14 @@ import com.android.settings.R;
 
 import android.app.Activity;
 import android.app.ActivityManager;
+import android.app.AlertDialog;
 import android.app.ApplicationErrorReport;
+import android.app.Dialog;
 import android.app.PendingIntent;
 import android.content.ActivityNotFoundException;
 import android.content.ComponentName;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentSender;
 import android.content.pm.ApplicationInfo;
@@ -19,14 +22,8 @@ import android.content.pm.PackageManager.NameNotFoundException;
 import android.content.res.Resources;
 import android.os.Bundle;
 import android.os.Debug;
-import android.os.Handler;
-import android.os.HandlerThread;
-import android.os.Looper;
-import android.os.Message;
-import android.os.Process;
 import android.os.SystemClock;
 import android.provider.Settings;
-import android.text.format.DateUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -36,11 +33,9 @@ import android.widget.TextView;
 
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.List;
 
 public class RunningServiceDetails extends Activity
         implements RunningState.OnRefreshUiListener {
@@ -49,10 +44,13 @@ public class RunningServiceDetails extends Activity
     static final String KEY_UID = "uid";
     static final String KEY_PROCESS = "process";
     
+    static final int DIALOG_CONFIRM_STOP = 1;
+    
     ActivityManager mAm;
     LayoutInflater mInflater;
     
     RunningState mState;
+    boolean mHaveData;
     
     int mUid;
     String mProcessName;
@@ -80,6 +78,27 @@ public class RunningServiceDetails extends Activity
         PendingIntent mManageIntent;
         ComponentName mInstaller;
 
+        void stopActiveService(boolean confirmed) {
+            RunningState.ServiceItem si = mServiceItem;
+            if (!confirmed) {
+                if ((si.mServiceInfo.applicationInfo.flags&ApplicationInfo.FLAG_SYSTEM) != 0) {
+                    Bundle args = new Bundle();
+                    args.putParcelable("comp", si.mRunningService.service);
+                    removeDialog(DIALOG_CONFIRM_STOP);
+                    showDialog(DIALOG_CONFIRM_STOP, args);
+                    return;
+                }
+            }
+            stopService(new Intent().setComponent(si.mRunningService.service));
+            if (mMergedItem == null || mMergedItem.mServices.size() <= 1) {
+                // If there was only one service, we are finishing it,
+                // so no reason for the UI to stick around.
+                finish();
+            } else {
+                mState.updateNow();
+            }
+        }
+        
         public void onClick(View v) {
             if (v == mReportButton) {
                 ApplicationErrorReport report = new ApplicationErrorReport();
@@ -145,16 +164,8 @@ public class RunningServiceDetails extends Activity
                 } catch (ActivityNotFoundException e) {
                     Log.w(TAG, e);
                 }
-            } else if (mActiveItem.mItem instanceof RunningState.ServiceItem) {
-                RunningState.ServiceItem si = (RunningState.ServiceItem)mActiveItem.mItem;
-                stopService(new Intent().setComponent(si.mRunningService.service));
-                if (mMergedItem == null || mMergedItem.mServices.size() <= 1) {
-                    // If there was only one service, we are finishing it,
-                    // so no reason for the UI to stick around.
-                    finish();
-                } else {
-                    mState.updateNow();
-                }
+            } else if (mServiceItem != null) {
+                stopActiveService(false);
             } else {
                 // Heavy-weight process.  We'll do a force-stop on it.
                 mAm.forceStopPackage(mActiveItem.mItem.mPackageInfo.packageName);
@@ -398,34 +409,88 @@ public class RunningServiceDetails extends Activity
         mSnippet.setBackgroundResource(com.android.internal.R.drawable.title_bar_medium);
         mSnippet.setPadding(0, mSnippet.getPaddingTop(), 0, mSnippet.getPaddingBottom());
         mSnippetViewHolder = new RunningProcessesView.ViewHolder(mSnippet);
+        
+        // We want to retrieve the data right now, so any active managed
+        // dialog that gets created can find it.
+        ensureData();
     }
 
     @Override
     protected void onPause() {
         super.onPause();
+        mHaveData = false;
         mState.pause();
     }
 
     @Override
     protected void onResume() {
         super.onResume();
-        mState.resume(this);
-
-        // We want to go away if the service being shown no longer exists,
-        // so we need to ensure we have done the initial data retrieval before
-        // showing our ui.
-        mState.waitForData();
-
-        // And since we know we have the data, let's show the UI right away
-        // to avoid flicker.
-        refreshUi(true);
+        ensureData();
     }
 
     @Override
     protected void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
     }
+    
+    ActiveDetail activeDetailForService(ComponentName comp) {
+        for (int i=0; i<mActiveDetails.size(); i++) {
+            ActiveDetail ad = mActiveDetails.get(i);
+            if (ad.mServiceItem != null && ad.mServiceItem.mRunningService != null
+                    && comp.equals(ad.mServiceItem.mRunningService.service)) {
+                return ad;
+            }
+        }
+        return null;
+    }
+    
+    @Override
+    protected Dialog onCreateDialog(int id, Bundle args) {
+        switch (id) {
+            case DIALOG_CONFIRM_STOP: {
+                final ComponentName comp = (ComponentName)args.getParcelable("comp");
+                if (activeDetailForService(comp) == null) {
+                    return null;
+                }
+                
+                return new AlertDialog.Builder(this)
+                        .setTitle(getString(R.string.runningservicedetails_stop_dlg_title))
+                        .setIcon(android.R.drawable.ic_dialog_alert)
+                        .setMessage(getString(R.string.runningservicedetails_stop_dlg_text))
+                        .setPositiveButton(R.string.dlg_ok,
+                                new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int which) {
+                                ActiveDetail ad = activeDetailForService(comp);
+                                if (ad != null) {
+                                    ad.stopActiveService(true);
+                                }
+                            }
+                        })
+                        .setNegativeButton(R.string.dlg_cancel, null)
+                        .create();
+            }
+            
+            default:
+                return super.onCreateDialog(id, args);
+        }
+    }
 
+    void ensureData() {
+        if (!mHaveData) {
+            mHaveData = true;
+            mState.resume(this);
+
+            // We want to go away if the service being shown no longer exists,
+            // so we need to ensure we have done the initial data retrieval before
+            // showing our ui.
+            mState.waitForData();
+
+            // And since we know we have the data, let's show the UI right away
+            // to avoid flicker.
+            refreshUi(true);
+        }
+    }
+    
     void updateTimes() {
         if (mSnippetActiveItem != null) {
             mSnippetActiveItem.updateTime(RunningServiceDetails.this, mBuilder);
