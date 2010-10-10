@@ -451,12 +451,19 @@ public class WifiSettings extends SettingsPreferenceFragment
             // AccessPoints are automatically sorted with TreeSet.
             final Collection<AccessPoint> accessPoints = constructAccessPoints();
 
-            int count = MAX_MENU_COUNT_IN_XL;
-            for (AccessPoint accessPoint : accessPoints) {
-                mAccessPoints.addPreference(accessPoint);
-                count--;
-                if (count <= 0) {
-                    break;
+            if (mInXlSetupWizard) {
+                //limit access points on set up wizard
+                int count = MAX_MENU_COUNT_IN_XL;
+                for (AccessPoint accessPoint : accessPoints) {
+                    mAccessPoints.addPreference(accessPoint);
+                    count--;
+                    if (count <= 0) {
+                        break;
+                    }
+                }
+            } else {
+                for (AccessPoint accessPoint : accessPoints) {
+                    mAccessPoints.addPreference(accessPoint);
                 }
             }
         }
