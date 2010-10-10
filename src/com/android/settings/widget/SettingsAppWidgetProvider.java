@@ -23,8 +23,8 @@ import android.bluetooth.BluetoothAdapter;
 import android.content.ComponentName;
 import android.content.ContentResolver;
 import android.content.Context;
-import android.content.IContentService;
 import android.content.Intent;
+import android.content.SyncStorageEngine;
 import android.content.pm.PackageManager;
 import android.location.LocationManager;
 import android.net.ConnectivityManager;
@@ -538,9 +538,6 @@ public class SettingsAppWidgetProvider extends AppWidgetProvider {
 
         @Override
         public void onActualStateChange(Context context, Intent unused) {
-            // Well, ACTION_CLOSE_SYSTEM_DIALOGS fired.  So _maybe_
-            // the Sync settings changed.
-            // TODO: find something more reliable.
             setCurrentState(context, getActualState(context));
         }
 
@@ -713,11 +710,8 @@ public class SettingsAppWidgetProvider extends AppWidgetProvider {
             sBluetoothState.onActualStateChange(context, intent);
         } else if (LocationManager.PROVIDERS_CHANGED_ACTION.equals(action)) {
             sGpsState.onActualStateChange(context, intent);
-        } else if (Intent.ACTION_CLOSE_SYSTEM_DIALOGS.equals(action)) {
-            // Sadly, for lack of a "sync settings changed" intent,
-            // this is where we check where sync is enabled or not.
-            // It's not 100% reliable though as there are paths where
-            // this doesn't fire.
+        } else if (SyncStorageEngine.SYNC_CONNECTION_SETTING_CHANGED_INTENT.getAction()
+                .equals(action)) {
             sSyncState.onActualStateChange(context, intent);
         } else if (intent.hasCategory(Intent.CATEGORY_ALTERNATIVE)) {
             Uri data = intent.getData();
