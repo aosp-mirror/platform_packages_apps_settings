@@ -237,9 +237,9 @@ public class CachedBluetoothDevice implements Comparable<CachedBluetoothDevice> 
     }
 
     /*package*/ void onBondingDockConnect() {
-        // Don't connect just set the timer.
-        // TODO(): Fix the actual problem
-        mConnectAttempted = SystemClock.elapsedRealtime();
+        // Attempt to connect if UUIDs are available. Otherwise,
+        // we will connect when the ACTION_UUID intent arrives.
+        connect();
     }
 
     private void connectWithoutResettingTimer() {
