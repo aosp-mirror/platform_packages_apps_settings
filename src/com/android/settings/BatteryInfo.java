@@ -142,6 +142,8 @@ public class BatteryInfo extends Activity {
                     healthString = getString(R.string.battery_info_health_over_voltage);
                 } else if (health == BatteryManager.BATTERY_HEALTH_UNSPECIFIED_FAILURE) {
                     healthString = getString(R.string.battery_info_health_unspecified_failure);
+                } else if (health == BatteryManager.BATTERY_HEALTH_COLD) {
+                    healthString = getString(R.string.battery_info_health_cold);
                 } else {
                     healthString = getString(R.string.battery_info_health_unknown);
                 }
