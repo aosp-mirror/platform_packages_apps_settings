@@ -16,7 +16,10 @@
 
 package com.android.settings;
 
+import android.content.ComponentName;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.content.pm.ResolveInfo;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.SystemClock;
@@ -25,12 +28,14 @@ import android.preference.Preference;
 import android.preference.PreferenceActivity;
 import android.preference.PreferenceGroup;
 import android.preference.PreferenceScreen;
+import android.provider.Settings;
 import android.util.Log;
 import android.view.MotionEvent;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -45,15 +50,26 @@ public class DeviceInfoSettings extends PreferenceActivity {
     private static final String KEY_COPYRIGHT = "copyright";
     private static final String KEY_SYSTEM_UPDATE_SETTINGS = "system_update_settings";
     private static final String PROPERTY_URL_SAFETYLEGAL = "ro.url.safetylegal";
-    
+
     long[] mHits = new long[3];
-    
+
     @Override
     protected void onCreate(Bundle icicle) {
         super.onCreate(icicle);
-        
+
         addPreferencesFromResource(R.xml.device_info_settings);
-       
+
+        // If we don't have an IME tutorial, remove that option
+        String currentIme = Settings.Secure.getString(getContentResolver(),
+                Settings.Secure.DEFAULT_INPUT_METHOD);
+        ComponentName component = ComponentName.unflattenFromString(currentIme);
+        Intent imeIntent = new Intent(component.getPackageName() + ".tutorial");
+        PackageManager pm = getPackageManager();
+        List<ResolveInfo> tutorials = pm.queryIntentActivities(imeIntent, 0);
+        if(tutorials == null || tutorials.isEmpty()) {
+            getPreferenceScreen().removePreference(findPreference("system_tutorial"));
+        }
+
         setStringSummary("firmware_version", Build.VERSION.RELEASE);
         findPreference("firmware_version").setEnabled(true);
         setValueSummary("baseband_version", "gsm.version.baseband");
@@ -69,7 +85,7 @@ public class DeviceInfoSettings extends PreferenceActivity {
          * Settings is a generic app and should not contain any device-specific
          * info.
          */
-        
+
         // These are contained in the "container" preference group
         PreferenceGroup parentPreference = (PreferenceGroup) findPreference(KEY_CONTAINER);
         Utils.updatePreferenceToSpecificActivityOrRemove(this, parentPreference, KEY_TERMS,
@@ -80,7 +96,7 @@ public class DeviceInfoSettings extends PreferenceActivity {
                 Utils.UPDATE_PREFERENCE_FLAG_SET_TITLE_TO_MATCHING_ACTIVITY);
         Utils.updatePreferenceToSpecificActivityOrRemove(this, parentPreference, KEY_TEAM,
                 Utils.UPDATE_PREFERENCE_FLAG_SET_TITLE_TO_MATCHING_ACTIVITY);
-        
+
         // These are contained by the root preference screen
         parentPreference = getPreferenceScreen();
         Utils.updatePreferenceToSpecificActivityOrRemove(this, parentPreference,
@@ -89,7 +105,7 @@ public class DeviceInfoSettings extends PreferenceActivity {
         Utils.updatePreferenceToSpecificActivityOrRemove(this, parentPreference, KEY_CONTRIBUTORS,
                 Utils.UPDATE_PREFERENCE_FLAG_SET_TITLE_TO_MATCHING_ACTIVITY);
     }
-    
+
     @Override
     public boolean onPreferenceTreeClick(PreferenceScreen preferenceScreen, Preference preference) {
         if (preference.getKey().equals("firmware_version")) {
@@ -130,11 +146,11 @@ public class DeviceInfoSettings extends PreferenceActivity {
                 getResources().getString(R.string.device_info_default));
         }
     }
-    
+
     private void setValueSummary(String preference, String property) {
         try {
             findPreference(preference).setSummary(
-                    SystemProperties.get(property, 
+                    SystemProperties.get(property,
                             getResources().getString(R.string.device_info_default)));
         } catch (RuntimeException e) {
 
@@ -177,7 +193,7 @@ public class DeviceInfoSettings extends PreferenceActivity {
                         m.group(2)).append(" ").append(m.group(3)).append("\n")
                         .append(m.group(4))).toString();
             }
-        } catch (IOException e) {  
+        } catch (IOException e) {
             Log.e(TAG,
                 "IO Exception when getting kernel version for Device Info screen",
                 e);
