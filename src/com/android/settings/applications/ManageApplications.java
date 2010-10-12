@@ -614,6 +614,14 @@ public class ManageApplications extends TabActivity implements
     
     @Override
     public boolean onPrepareOptionsMenu(Menu menu) {
+        /*
+         * The running processes screen doesn't use the mApplicationsAdapter
+         * so bringing up this menu in that case doesn't make any sense.
+         */
+        if (mCurView == VIEW_RUNNING) {
+            return false;
+        }
+
         menu.findItem(SORT_ORDER_ALPHA).setVisible(mSortOrder != SORT_ORDER_ALPHA);
         menu.findItem(SORT_ORDER_SIZE).setVisible(mSortOrder != SORT_ORDER_SIZE);
         return true;
