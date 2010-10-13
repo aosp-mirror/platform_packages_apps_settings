@@ -165,19 +165,12 @@ public class CachedBluetoothDevice implements Comparable<CachedBluetoothDevice> 
         LocalBluetoothProfileManager profileManager =
                 LocalBluetoothProfileManager.getProfileManager(mLocalManager, profile);
         int status = profileManager.getConnectionStatus(cachedDevice.mDevice);
-        if (SettingsBtStatus.isConnectionStatusConnected(status)) {
-            if (profileManager.disconnect(cachedDevice.mDevice)) {
-                if (D) {
-                    Log.d(TAG, "Command sent successfully:DISCONNECT " + describe(profile));
-                }
-                return true;
+        if (profileManager.disconnect(cachedDevice.mDevice)) {
+            if (D) {
+                Log.d(TAG, "Command sent successfully:DISCONNECT " + describe(profile));
             }
-            if (V) {
-                Log.v(TAG, "Framework rejected command immediately:DISCONNECT " +
-                        describe(profile));
-            }
+            return true;
         }
-
         return false;
     }
 
@@ -321,17 +314,13 @@ public class CachedBluetoothDevice implements Comparable<CachedBluetoothDevice> 
         LocalBluetoothProfileManager profileManager =
                 LocalBluetoothProfileManager.getProfileManager(mLocalManager, profile);
         int status = profileManager.getConnectionStatus(cachedDevice.mDevice);
-        if (!SettingsBtStatus.isConnectionStatusConnected(status)) {
-            if (profileManager.connect(cachedDevice.mDevice)) {
-                if (D) {
-                    Log.d(TAG, "Command sent successfully:CONNECT " + describe(profile));
-                }
-                return true;
+        if (profileManager.connect(cachedDevice.mDevice)) {
+            if (D) {
+                Log.d(TAG, "Command sent successfully:CONNECT " + describe(profile));
             }
-            Log.i(TAG, "Failed to connect " + profile.toString() + " to " + cachedDevice.mName);
-        } else {
-            Log.i(TAG, "Already connected");
+            return true;
         }
+        Log.i(TAG, "Failed to connect " + profile.toString() + " to " + cachedDevice.mName);
 
         return false;
     }
