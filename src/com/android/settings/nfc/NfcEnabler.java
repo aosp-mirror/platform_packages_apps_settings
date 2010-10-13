@@ -17,9 +17,8 @@
 package com.android.settings.nfc;
 
 import com.android.settings.R;
-import com.trustedlogic.trustednfc.android.NfcException;
-import com.trustedlogic.trustednfc.android.NfcManager;
 import android.content.Context;
+import android.nfc.NfcAdapter;
 import android.preference.Preference;
 import android.preference.CheckBoxPreference;
 import android.provider.Settings;
@@ -35,23 +34,23 @@ public class NfcEnabler implements Preference.OnPreferenceChangeListener {
 
     private final Context mContext;
     private final CheckBoxPreference mCheckbox;
-    private final NfcManager mNfcManager;
+    private final NfcAdapter mNfcAdapter;
 
     private boolean mNfcState;
 
     public NfcEnabler(Context context, CheckBoxPreference checkBoxPreference) {
         mContext = context;
         mCheckbox = checkBoxPreference;
-        mNfcManager = (NfcManager) context.getSystemService(Context.NFC_SERVICE);
+        mNfcAdapter = NfcAdapter.getDefaultAdapter();
 
-        if (mNfcManager == null) {
+        if (mNfcAdapter == null) {
             // NFC is not supported
             mCheckbox.setEnabled(false);
         }
     }
 
     public void resume() {
-        if (mNfcManager == null) {
+        if (mNfcAdapter == null) {
             return;
         }
 		mCheckbox.setOnPreferenceChangeListener(this);
@@ -61,7 +60,7 @@ public class NfcEnabler implements Preference.OnPreferenceChangeListener {
     }
 
     public void pause() {
-        if (mNfcManager == null) {
+        if (mNfcAdapter == null) {
             return;
         }
         mCheckbox.setOnPreferenceChangeListener(null);
@@ -77,18 +76,13 @@ public class NfcEnabler implements Preference.OnPreferenceChangeListener {
 
     private void setEnabled() {
         if (mNfcState) {
-            try {
-                mNfcManager.enable();
-            } catch (NfcException e) {
-                Log.w(TAG, "NFC enabling failed: " + e.getMessage());
+            if (!mNfcAdapter.enableTagDiscovery()) {
+                Log.w(TAG, "NFC enabling failed");
 				mNfcState = false;
             }
-
         } else {
-            try {
-                mNfcManager.disable();
-            } catch (NfcException e) {
-                Log.w(TAG, "NFC disabling failed: " + e.getMessage());
+            if (!mNfcAdapter.disableTagDiscovery()) {
+                Log.w(TAG, "NFC disabling failed");
 				mNfcState = true;
             }
         }
