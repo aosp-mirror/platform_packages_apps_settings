@@ -379,7 +379,8 @@ public abstract class LocalBluetoothProfileManager {
 
         @Override
         public boolean disconnect(BluetoothDevice device) {
-            if (mService.getCurrentHeadset().equals(device)) {
+            BluetoothDevice currDevice = mService.getCurrentHeadset();
+            if (currDevice != null && currDevice.equals(device)) {
                 // Downgrade prority as user is disconnecting the headset.
                 if (mService.getPriority(device) > BluetoothHeadset.PRIORITY_ON) {
                     mService.setPriority(device, BluetoothHeadset.PRIORITY_ON);
