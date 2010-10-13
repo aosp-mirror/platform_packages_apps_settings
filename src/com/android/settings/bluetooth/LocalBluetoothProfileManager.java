@@ -309,6 +309,8 @@ public abstract class LocalBluetoothProfileManager {
         private BluetoothHeadset mService;
         private Handler mUiHandler = new Handler();
         private boolean profileReady = false;
+        private BluetoothDevice mDelayedConnectDevice = null;
+        private BluetoothDevice mDelayedDisconnectDevice = null;
 
         public HeadsetProfileManager(LocalBluetoothManager localManager) {
             super(localManager);
@@ -318,19 +320,43 @@ public abstract class LocalBluetoothProfileManager {
         public void onServiceConnected() {
             profileReady = true;
             // This could be called on a non-UI thread, funnel to UI thread.
-            mUiHandler.post(new Runnable() {
+            // Delay for a few seconds to allow other proxies to connect.
+            mUiHandler.postDelayed(new Runnable() {
                 public void run() {
-                    /*
-                     * We just bound to the service, so refresh the UI of the
-                     * headset device.
-                     */
                     BluetoothDevice device = mService.getCurrentHeadset();
-                    if (device == null) return;
-                    mLocalManager.getCachedDeviceManager()
+
+                    if (mDelayedConnectDevice != null) {
+                        Log.i(TAG, "service ready: connecting...");
+                        BluetoothDevice newDevice = mDelayedConnectDevice;
+                        mDelayedConnectDevice = null;
+
+                        if (!newDevice.equals(device)) {
+                            if (device != null) {
+                                Log.i(TAG, "disconnecting old headset");
+                                mService.disconnectHeadset(device);
+                            }
+                            Log.i(TAG, "connecting to pending headset");
+                            mService.connectHeadset(newDevice);
+                        }
+                    } else if (mDelayedDisconnectDevice != null) {
+                        Log.i(TAG, "service ready: disconnecting...");
+                        if (mDelayedDisconnectDevice.equals(device)) {
+                            Log.i(TAG, "disconnecting headset");
+                            mService.disconnectHeadset(device);
+                        }
+                        mDelayedDisconnectDevice = null;
+                    } else {
+                        /*
+                         * We just bound to the service, so refresh the UI of the
+                         * headset device.
+                         */
+                        if (device == null) return;
+                        mLocalManager.getCachedDeviceManager()
                             .onProfileStateChanged(device, Profile.HEADSET,
                                                    BluetoothHeadset.STATE_CONNECTED);
+                    }
                 }
-            });
+            }, 2000);  // wait 2 seconds for other proxies to connect
 
             if (mServiceListeners.size() > 0) {
                 Iterator<ServiceListener> it = mServiceListeners.iterator();
@@ -368,6 +394,16 @@ public abstract class LocalBluetoothProfileManager {
 
         @Override
         public boolean connect(BluetoothDevice device) {
+            // Delay connection until onServiceConnected() if the
+            // manager isn't ready
+            if (!isManagerReady()) {
+                Log.w(TAG, "HeadsetProfileManager delaying connect, "
+                        + "manager not ready");
+                mDelayedConnectDevice = device;
+                mDelayedDisconnectDevice = null;
+                return true;  // hopefully it will succeed
+            }
+
             // Since connectHeadset fails if already connected to a headset, we
             // disconnect from any headset first
             BluetoothDevice currDevice = mService.getCurrentHeadset();
@@ -379,6 +415,16 @@ public abstract class LocalBluetoothProfileManager {
 
         @Override
         public boolean disconnect(BluetoothDevice device) {
+            // Delay connection until onServiceConnected() if the
+            // manager isn't ready
+            if (!isManagerReady()) {
+                Log.w(TAG, "HeadsetProfileManager delaying disconnect, "
+                        + "manager not ready");
+                mDelayedConnectDevice = null;
+                mDelayedDisconnectDevice = device;
+                return true;  // hopefully it will succeed
+            }
+
             BluetoothDevice currDevice = mService.getCurrentHeadset();
             if (currDevice != null && currDevice.equals(device)) {
                 // Downgrade prority as user is disconnecting the headset.
