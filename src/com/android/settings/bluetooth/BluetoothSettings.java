@@ -41,11 +41,10 @@ import android.preference.CheckBoxPreference;
 import android.preference.Preference;
 import android.preference.PreferenceScreen;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.ContextMenu;
-import android.view.ContextMenu.ContextMenuInfo;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ContextMenu.ContextMenuInfo;
 import android.widget.AdapterView.AdapterContextMenuInfo;
 
 import java.util.List;
@@ -148,7 +147,8 @@ public class BluetoothSettings extends SettingsPreferenceFragment
         final Intent intent = activity.getIntent();
 
         // This additional argument comes from PreferenceScreen (See TetherSettings.java).
-        String action = getArguments().getString(ACTION);
+        Bundle args = getArguments();
+        String action = args != null ? args.getString(ACTION) : null;
         if (TextUtils.isEmpty(action)) {
             action = intent.getAction();
         }
