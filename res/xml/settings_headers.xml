@@ -109,7 +109,7 @@
 
     <!-- Storage -->
 
-    <header 
+    <header
         android:fragment="com.android.settings.deviceinfo.Memory"
         android:icon="@drawable/ic_settings_storage"
         android:title="@string/storage_settings">
@@ -154,6 +154,14 @@
         android:fragment="com.android.settings.DateTimeSettings"
         android:icon="@drawable/ic_settings_date_time"
         android:title="@string/date_and_time_settings_title">
+    </header>
+
+    <!-- Owner info -->
+
+    <header
+        android:fragment="com.android.settings.OwnerInfo"
+        android:icon="@drawable/ic_settings_about"
+        android:title="@string/owner_info_settings_title">
     </header>
 
     <!-- About Device -->
