@@ -35,26 +35,43 @@
                 android:text="@string/no_running_services"
                 android:textAppearance="?android:attr/textAppearanceLarge" />
     </FrameLayout>
-    <view class="com.android.settings.applications.RunningProcessesView$LinearColorBar"
+    <view class="com.android.settings.applications.LinearColorBar"
             android:id="@+id/color_bar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="-5dp"
             android:orientation="horizontal"
-            android:padding="4dp">
+            android:paddingTop="30dp"
+            android:paddingLeft="2dp"
+            android:paddingRight="2dp"
+            android:paddingBottom="1dp">
         <TextView android:id="@+id/foregroundText"
-            android:layout_width="wrap_content"
+            android:layout_width="0px"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:focusable="true"
+            android:gravity="left|bottom"
             android:textAppearance="?android:attr/textAppearanceSmallInverse"
-            android:color="?android:attr/textColorPrimaryInverse"
+            android:textColor="#000"
             android:singleLine="true" />
-        <TextView android:id="@+id/backgroundText"
-            android:layout_gravity="center_vertical|right"
+        <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="0"
             android:textAppearance="?android:attr/textAppearanceSmallInverse"
-            android:color="?android:attr/textColorPrimaryInverse"
+            android:textColor="#000"
+            android:textStyle="bold"
+            android:singleLine="true"
+            android:text="@string/memory" />
+        <TextView android:id="@+id/backgroundText"
+            android:layout_gravity="center_vertical|right"
+            android:layout_width="0px"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:focusable="true"
+            android:gravity="right|bottom"
+            android:textAppearance="?android:attr/textAppearanceSmallInverse"
+            android:textColor="#000"
             android:singleLine="true" />
     </view>
 </LinearLayout>

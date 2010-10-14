@@ -16,7 +16,8 @@
 
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <PreferenceCategory android:title="@string/sd_memory">
+    <PreferenceCategory android:key="memory_sd"
+            android:title="@string/sd_memory">
         <Preference android:key="memory_sd_size" 
             style="?android:attr/preferenceInformationStyle" 
             android:title="@string/memory_size"

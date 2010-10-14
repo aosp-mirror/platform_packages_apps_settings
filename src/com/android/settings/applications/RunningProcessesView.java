@@ -22,9 +22,7 @@ import android.app.ActivityManager;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Canvas;
-import android.graphics.Paint;
-import android.graphics.Rect;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.os.SystemClock;
 import android.os.SystemProperties;
@@ -39,7 +37,6 @@ import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.AbsListView.RecyclerListener;
@@ -71,6 +68,7 @@ public class RunningProcessesView extends FrameLayout
     RunningState.BaseItem mCurSelected;
     
     ListView mListView;
+    ServiceListAdapter mAdapter;
     LinearColorBar mColorBar;
     TextView mBackgroundProcessText;
     TextView mForegroundProcessText;
@@ -93,6 +91,7 @@ public class RunningProcessesView extends FrameLayout
         ActivityManager.RunningServiceInfo mService;
         ViewHolder mHolder;
         long mFirstRunTime;
+        boolean mSetBackground;
         
         void updateTime(Context context, StringBuilder builder) {
             TextView uptimeView = null;
@@ -109,14 +108,21 @@ public class RunningProcessesView extends FrameLayout
                     mHolder.size.setText(size);
                 }
                 
-                if (mItem instanceof RunningState.MergedItem) {
-                    // This item represents both services and proceses,
+                if (mItem.mBackground) {
+                    // This is a background process; no uptime.
+                    if (!mSetBackground) {
+                        mSetBackground = true;
+                        mHolder.uptime.setText("");
+                    }
+                } else if (mItem instanceof RunningState.MergedItem) {
+                    // This item represents both services and processes,
                     // so show the service uptime below.
                     uptimeView = mHolder.uptime;
                 }
             }
             
             if (uptimeView != null) {
+                mSetBackground = false;
                 if (mFirstRunTime >= 0) {
                     //Log.i("foo", "Time for " + mItem.mDisplayLabel
                     //        + ": " + (SystemClock.uptimeMillis()-mFirstRunTime));
@@ -159,16 +165,29 @@ public class RunningProcessesView extends FrameLayout
         public ActiveItem bind(RunningState state, RunningState.BaseItem item,
                 StringBuilder builder) {
             synchronized (state.mLock) {
+                PackageManager pm = rootView.getContext().getPackageManager();
+                if (item.mPackageInfo == null && item instanceof RunningState.MergedItem) {
+                    // Items for background processes don't normally load
+                    // their labels for performance reasons.  Do it now.
+                    ((RunningState.MergedItem)item).mProcess.ensureLabel(pm);
+                    item.mPackageInfo = ((RunningState.MergedItem)item).mProcess.mPackageInfo;
+                    item.mDisplayLabel = ((RunningState.MergedItem)item).mProcess.mDisplayLabel;
+                }
                 name.setText(item.mDisplayLabel);
                 ActiveItem ai = new ActiveItem();
                 ai.mRootView = rootView;
                 ai.mItem = item;
                 ai.mHolder = this;
                 ai.mFirstRunTime = item.mActiveSince;
-                description.setText(item.mDescription);
+                if (item.mBackground) {
+                    description.setText(rootView.getContext().getText(R.string.cached));
+                } else {
+                    description.setText(item.mDescription);
+                }
                 item.mCurSizeStr = null;
-                icon.setImageDrawable(item.mPackageInfo.loadIcon(
-                        rootView.getContext().getPackageManager()));
+                if (item.mPackageInfo != null) {
+                    icon.setImageDrawable(item.mPackageInfo.loadIcon(pm));
+                }
                 icon.setVisibility(View.VISIBLE);
                 ai.updateTime(rootView.getContext(), builder);
                 return ai;
@@ -185,6 +204,7 @@ public class RunningProcessesView extends FrameLayout
     class ServiceListAdapter extends BaseAdapter {
         final RunningState mState;
         final LayoutInflater mInflater;
+        boolean mShowBackground;
         ArrayList<RunningState.MergedItem> mItems;
         
         ServiceListAdapter(RunningState state) {
@@ -194,8 +214,24 @@ public class RunningProcessesView extends FrameLayout
             refreshItems();
         }
 
+        void setShowBackground(boolean showBackground) {
+            if (mShowBackground != showBackground) {
+                mShowBackground = showBackground;
+                mState.setWatchingBackgroundItems(showBackground);
+                refreshItems();
+                notifyDataSetChanged();
+                mColorBar.setShowingGreen(mShowBackground);
+            }
+        }
+
+        boolean getShowBackground() {
+            return mShowBackground;
+        }
+
         void refreshItems() {
-            ArrayList<RunningState.MergedItem> newItems = mState.getCurrentMergedItems();
+            ArrayList<RunningState.MergedItem> newItems =
+                mShowBackground ? mState.getCurrentBackgroundItems()
+                        : mState.getCurrentMergedItems();
             if (mItems != newItems) {
                 mItems = newItems;
             }
@@ -262,67 +298,6 @@ public class RunningProcessesView extends FrameLayout
                 RunningState.MergedItem item = mItems.get(position);
                 ActiveItem ai = vh.bind(mState, item, mBuilder);
                 mActiveItems.put(view, ai);
-            }
-        }
-    }
-    
-    public static class LinearColorBar extends LinearLayout {
-        private float mRedRatio;
-        private float mYellowRatio;
-        private float mGreenRatio;
-        
-        final Rect mRect = new Rect();
-        final Paint mPaint = new Paint();
-        
-        public LinearColorBar(Context context, AttributeSet attrs) {
-            super(context, attrs);
-            setWillNotDraw(false);
-            mPaint.setStyle(Paint.Style.FILL);
-        }
-
-        public void setRatios(float red, float yellow, float green) {
-            mRedRatio = red;
-            mYellowRatio = yellow;
-            mGreenRatio = green;
-            invalidate();
-        }
-        
-        @Override
-        protected void onDraw(Canvas canvas) {
-            super.onDraw(canvas);
-            
-            int width = getWidth();
-            mRect.top = 0;
-            mRect.bottom = getHeight();
-            
-            int left = 0;
-            
-            int right = left + (int)(width*mRedRatio);
-            if (left < right) {
-                mRect.left = left;
-                mRect.right = right;
-                mPaint.setColor(0xffff8080);
-                canvas.drawRect(mRect, mPaint);
-                width -= (right-left);
-                left = right;
-            }
-            
-            right = left + (int)(width*mYellowRatio);
-            if (left < right) {
-                mRect.left = left;
-                mRect.right = right;
-                mPaint.setColor(0xffffff00);
-                canvas.drawRect(mRect, mPaint);
-                width -= (right-left);
-                left = right;
-            }
-            
-            right = left + width;
-            if (left < right) {
-                mRect.left = left;
-                mRect.right = right;
-                mPaint.setColor(0xff80ff80);
-                canvas.drawRect(mRect, mPaint);
             }
         }
     }
@@ -434,7 +409,7 @@ public class RunningProcessesView extends FrameLayout
                     + mLastForegroundProcessMemory + mLastServiceProcessMemory;
             mColorBar.setRatios(mLastForegroundProcessMemory/totalMem,
                     mLastServiceProcessMemory/totalMem,
-                    (availMem+mLastBackgroundProcessMemory)/totalMem);
+                    mLastBackgroundProcessMemory/totalMem);
         }
     }
     
@@ -445,6 +420,7 @@ public class RunningProcessesView extends FrameLayout
         Intent intent = new Intent();
         intent.putExtra(RunningServiceDetails.KEY_UID, mi.mProcess.mUid);
         intent.putExtra(RunningServiceDetails.KEY_PROCESS, mi.mProcess.mProcessName);
+        intent.putExtra(RunningServiceDetails.KEY_BACKGROUND, mAdapter.mShowBackground);
         intent.setClass(getContext(), RunningServiceDetails.class);
         getContext().startActivity(intent);
     }
@@ -470,10 +446,23 @@ public class RunningProcessesView extends FrameLayout
         }
         mListView.setOnItemClickListener(this);
         mListView.setRecyclerListener(this);
-        mListView.setAdapter(new ServiceListAdapter(mState));
+        mAdapter = new ServiceListAdapter(mState);
+        mListView.setAdapter(mAdapter);
         mColorBar = (LinearColorBar)findViewById(R.id.color_bar);
         mBackgroundProcessText = (TextView)findViewById(R.id.backgroundText);
+        mBackgroundProcessText.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mAdapter.setShowBackground(true);
+            }
+        });
         mForegroundProcessText = (TextView)findViewById(R.id.foregroundText);
+        mForegroundProcessText.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mAdapter.setShowBackground(false);
+            }
+        });
         
         // Magic!  Implementation detail!  Don't count on this!
         SECONDARY_SERVER_MEM =
