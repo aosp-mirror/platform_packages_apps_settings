@@ -46,7 +46,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:singleLine="true"
-                    android:inputType="textNoSuggestions" />
+                    android:inputType="textNoSuggestions"
+                    android:maxLength="32" />
 
             <TextView
                     style="?android:attr/textAppearanceSmall"
@@ -79,7 +80,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:singleLine="true"
-                    android:password="true" />
+                    android:password="true"
+                    android:maxLength="63" />
 
             <TextView android:id="@+id/hint"
                     style="?android:attr/textAppearanceSmallInverse"
