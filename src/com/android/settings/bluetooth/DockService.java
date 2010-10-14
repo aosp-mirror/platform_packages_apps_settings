@@ -718,9 +718,12 @@ public class DockService extends Service implements AlertDialog.OnMultiChoiceCli
                 // Checked but not connected
                 callConnect = true;
             } else if (!mCheckedItems[i]) {
-                // Unchecked but connected
-                if (DEBUG) Log.d(TAG, "applyBtSettings - Disconnecting");
-                cachedDevice.disconnect(mProfiles[i]);
+                // Unchecked, may or may not be connected.
+                int status = profileManager.getConnectionStatus(cachedDevice.getDevice());
+                if (SettingsBtStatus.isConnectionStatusConnected(status)) {
+                    if (DEBUG) Log.d(TAG, "applyBtSettings - Disconnecting");
+                    cachedDevice.disconnect(mProfiles[i]);
+                }
             }
             profileManager.setPreferred(device, mCheckedItems[i]);
             if (DEBUG) {
