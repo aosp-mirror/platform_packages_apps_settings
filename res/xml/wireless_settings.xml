@@ -39,12 +39,6 @@
     </PreferenceScreen>
 
     <CheckBoxPreference
-        android:key="toggle_nfc"
-        android:title="@string/nfc_quick_toggle_title"
-        android:summary="@string/nfc_quick_toggle_summary"
-        android:persistent="false" />
-
-    <CheckBoxPreference
         android:key="toggle_bluetooth"
         android:title="@string/bluetooth_quick_toggle_title"
         android:summary="@string/bluetooth_quick_toggle_summary"
@@ -70,6 +64,12 @@
         android:title="@string/vpn_settings_title"
         android:summary="@string/vpn_settings_summary" >
     </PreferenceScreen>
+
+    <CheckBoxPreference
+        android:key="toggle_nfc"
+        android:title="@string/nfc_quick_toggle_title"
+        android:summary="@string/nfc_quick_toggle_summary"
+        android:persistent="false" />
 
     <PreferenceScreen
         android:title="@string/network_settings_title"
