@@ -30,7 +30,7 @@ import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.CompoundButton.OnCheckedChangeListener;
 
-public class OwnerInfo extends Fragment {
+public class OwnerInfoSettings extends Fragment {
     private View mView;
     private CheckBox mCheckbox;
     private EditText mEditText;
