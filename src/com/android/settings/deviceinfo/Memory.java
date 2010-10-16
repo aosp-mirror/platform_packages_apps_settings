@@ -26,13 +26,9 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.DialogInterface.OnCancelListener;
 import android.content.pm.ApplicationInfo;
-import android.content.pm.PackageManager;
-import android.content.pm.PackageManager.NameNotFoundException;
 import android.content.res.Resources;
 import android.os.Bundle;
-import android.os.Handler;
 import android.os.IBinder;
-import android.os.Message;
 import android.os.RemoteException;
 import android.os.Environment;
 import android.os.storage.IMountService;
@@ -42,6 +38,7 @@ import android.os.storage.StorageManager;
 import android.os.storage.StorageEventListener;
 import android.preference.Preference;
 import android.preference.PreferenceActivity;
+import android.preference.PreferenceGroup;
 import android.preference.PreferenceScreen;
 import android.text.format.Formatter;
 import android.util.Log;
@@ -50,9 +47,7 @@ import android.widget.Toast;
 import com.android.settings.R;
 
 import java.io.File;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 public class Memory extends PreferenceActivity implements OnCancelListener {
     private static final String TAG = "Memory";
@@ -66,6 +61,8 @@ public class Memory extends PreferenceActivity implements OnCancelListener {
 
     private static final String MEMORY_SD_FORMAT = "memory_sd_format";
 
+    private static final String MEMORY_SD_GROUP = "memory_sd";
+
     private static final int DLG_CONFIRM_UNMOUNT = 1;
     private static final int DLG_ERROR_UNMOUNT = 2;
 
@@ -75,6 +72,9 @@ public class Memory extends PreferenceActivity implements OnCancelListener {
     private Preference mSdAvail;
     private Preference mSdMountToggle;
     private Preference mSdFormat;
+    private PreferenceGroup mSdMountPreferenceGroup;
+
+    boolean mSdMountToggleAdded = true;
     
     // Access using getMountService()
     private IMountService mMountService = null;
@@ -97,6 +97,8 @@ public class Memory extends PreferenceActivity implements OnCancelListener {
         mSdAvail = findPreference(MEMORY_SD_AVAIL);
         mSdMountToggle = findPreference(MEMORY_SD_MOUNT_TOGGLE);
         mSdFormat = findPreference(MEMORY_SD_FORMAT);
+
+        mSdMountPreferenceGroup = (PreferenceGroup)findPreference(MEMORY_SD_GROUP);
     }
     
     @Override
@@ -225,7 +227,6 @@ public class Memory extends PreferenceActivity implements OnCancelListener {
     private boolean hasAppsAccessingStorage() throws RemoteException {
         String extStoragePath = Environment.getExternalStorageDirectory().toString();
         IMountService mountService = getMountService();
-        boolean showPidDialog = false;
         int stUsers[] = mountService.getStorageUsers(extStoragePath);
         if (stUsers != null && stUsers.length > 0) {
             return true;
@@ -275,9 +276,15 @@ public class Memory extends PreferenceActivity implements OnCancelListener {
             readOnly = mRes.getString(R.string.read_only);
         }
  
-        mSdFormat.setEnabled(false);
-
         if (status.equals(Environment.MEDIA_MOUNTED)) {
+            if (!Environment.isExternalStorageRemovable()) {
+                // This device has built-in storage that is not removable.
+                // There is no reason for the user to unmount it.
+                if (mSdMountToggleAdded) {
+                    mSdMountPreferenceGroup.removePreference(mSdMountToggle);
+                    mSdMountToggleAdded = false;
+                }
+            }
             try {
                 File path = Environment.getExternalStorageDirectory();
                 StatFs stat = new StatFs(path.getPath());
@@ -303,10 +310,18 @@ public class Memory extends PreferenceActivity implements OnCancelListener {
             mSdAvail.setSummary(mRes.getString(R.string.sd_unavailable));
 
 
+            if (!Environment.isExternalStorageRemovable()) {
+                if (status.equals(Environment.MEDIA_UNMOUNTED)) {
+                    if (!mSdMountToggleAdded) {
+                        mSdMountPreferenceGroup.addPreference(mSdMountToggle);
+                        mSdMountToggleAdded = true;
+                    }
+                }
+            }
+
             if (status.equals(Environment.MEDIA_UNMOUNTED) ||
                 status.equals(Environment.MEDIA_NOFS) ||
                 status.equals(Environment.MEDIA_UNMOUNTABLE) ) {
-                mSdFormat.setEnabled(true);
                 mSdMountToggle.setEnabled(true);
                 mSdMountToggle.setTitle(mRes.getString(R.string.sd_mount));
                 mSdMountToggle.setSummary(mRes.getString(R.string.sd_mount_summary));
