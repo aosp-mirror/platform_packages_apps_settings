@@ -28,6 +28,7 @@ import android.bluetooth.BluetoothAdapter;
 import android.content.Context;
 import android.content.Intent;
 import android.net.ConnectivityManager;
+import android.nfc.NfcAdapter;
 import android.os.Bundle;
 import android.os.ServiceManager;
 import android.os.SystemProperties;
@@ -126,7 +127,7 @@ public class WirelessSettings extends SettingsPreferenceFragment {
         }
 
         // Remove NFC if its not available
-        if (ServiceManager.getService(Context.NFC_SERVICE) == null) {
+        if (NfcAdapter.getDefaultAdapter() == null) {
             getPreferenceScreen().removePreference(nfc);
         }
 
