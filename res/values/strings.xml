@@ -91,9 +91,9 @@
     <string name="sdcard_unmount" product="default">Unmount SD card</string>
 
     <!-- Used for diagnostic info screens, precise translation isn't needed. Formats the SD card in the phone, meaning it will be erased and reformatted [CHAR LIMIT=25] -->
-    <string name="sdcard_format" product="nosdcard">Format USB storage</string>
+    <string name="sdcard_format" product="nosdcard">Erase USB storage</string>
     <!-- Used for diagnostic info screens, precise translation isn't needed. Formats the SD card in the phone, meaning it will be erased and reformatted -->
-    <string name="sdcard_format" product="default">Format SD card</string>
+    <string name="sdcard_format" product="default">Erase SD card</string>
 
     <!-- choice for the font size spinner -->
     <string name="small_font">Small</string>
@@ -961,16 +961,16 @@
     <string name="getConnectionInfo" translatable="false">getConnectionInfo</string>
     <!-- Do not translate. Used for diagnostic screens, precise translation is not necessary
          Menu item on Wifi information screen-->
-    <string name="wifi_api_test" translatable="false">Wifi API</string>
+    <string name="wifi_api_test" translatable="false">Wi-Fi API</string>
     <!-- Do not translate. Used for diagnostic screens, precise translation is not necessary
          Menu item on Wifi information screen-->
-    <string name="wifi_status_test" translatable="false">Wifi Status</string>
+    <string name="wifi_status_test" translatable="false">Wi-Fi Status</string>
     <!-- Do not translate. Used for diagnostic screens, precise translation is not necessary
          Button text on Wifi Status screen-->
     <string name="wifi_update" translatable="false">Refresh Stats</string>
     <!-- Do not translate. Used for diagnostic screens, precise translation is not necessary
          Label on Wifi Status screen-->
-    <string name="wifi_state_label" translatable="false">Wifi State :</string>
+    <string name="wifi_state_label" translatable="false">Wi-Fi State :</string>
     <!-- Do not translate. Used for diagnostic screens, precise translation is not necessary
          Label on Wifi Status screen-->
     <string name="network_state_label" translatable="false">Network State :</string>
@@ -1019,7 +1019,7 @@
 
     <!-- Do not translate. Used for diagnostic screens, precise translation is not necessary
          Menu item on Wifi information screen-->
-    <string name="wifi_config_info" translatable="false">Wifi Config</string>
+    <string name="wifi_config_info" translatable="false">Wi-Fi Config</string>
     <!-- Do not translate. Used for diagnostic screens, precise translation is not necessary
          Label on Wifi Configuration screen-->
     <string name="config_list_label" translatable="false">Configured Networks</string>
@@ -1295,9 +1295,9 @@
     <!-- SD card & phone storage settings item title that will result in the phone unmounting the SD card.  This will be done before the user phyiscally removes the SD card from the phone.  Kind of like the "Safely remove" on some operating systems.   [CHAR LIMIT=25] -->
     <string name="sd_eject" product="default">Unmount SD card</string>
     <!-- SD card & phone storage settings item title that will result in the phone unmounting the SD card.  This will be done before the user phyiscally removes the SD card from the phone.  Kind of like the "Safely remove" on some operating systems.   [CHAR LIMIT=30] -->
-    <string name="sd_eject_summary" product="nosdcard">Unmount the internal USB storage so you can format it</string>
+    <string name="sd_eject_summary" product="nosdcard">Unmount the internal USB storage so you can erase it</string>
     <!-- SD card & phone storage settings item title that will result in the phone unmounting the SD card.  This will be done before the user phyiscally removes the SD card from the phone.  Kind of like the "Safely remove" on some operating systems.   -->
-    <string name="sd_eject_summary" product="default">Unmount the SD card so you can safely remove or format it</string>
+    <string name="sd_eject_summary" product="default">Unmount the SD card so you can safely remove or erase it</string>
 
     <!-- SD card & phone storage settings item summary that is displayed when no SD card is inserted.  This version of the string can probably never come up on current hardware. [CHAR LIMIT=25] -->
     <string name="sd_insert_summary" product="nosdcard">Insert USB storage for mounting</string>
@@ -1312,9 +1312,9 @@
     <!-- SD card & phone storage settings item title that will result in the phone formatting the SD card.   [CHAR LIMIT=25] -->
     <string name="sd_format" product="default">Erase SD card</string>
     <!-- SD card & phone storage settings item title that will result in the phone unmounting the SD card.   [CHAR LIMIT=30] -->
-    <string name="sd_format_summary" product="nosdcard">Erases all data on the phone\'s internal USB storage, such such as music and photos.</string>
+    <string name="sd_format_summary" product="nosdcard">Erases all data on the phone\'s internal USB storage, such as music and photos</string>
     <!-- SD card & phone storage settings item title that will result in the phone unmounting the SD card.   -->
-    <string name="sd_format_summary" product="default">Erases all data on the phone\'s SD card, such as music and photos.</string>
+    <string name="sd_format_summary" product="default">Erases all data on the phone\'s SD card, such as music and photos</string>
     <!-- SD card status when it is not available status -->
     <string name="sd_unavailable">Unavailable</string>
     <!-- SD card status when it is mounted as read only  -->
@@ -1465,17 +1465,17 @@
     <!-- SD card & phone storage settings screen, button on screen after user selects Factory data reset -->
     <string name="media_format_button_text" product="default">Erase SD card</string>
     <!-- SD card & phone storage settings screen, message on screen after user selects Format media button [CHAR LIMIT=NONE] -->
-    <string name="media_format_final_desc" product="nosdcard">Format USB storage, erasing all files stored there? Action cannot be reversed!</string>
+    <string name="media_format_final_desc" product="nosdcard">Erase USB storage, deleting all files stored there? Action cannot be reversed!</string>
     <!-- SD card & phone storage settings screen, message on screen after user selects Format media button [CHAR LIMIT=NONE] -->
-    <string name="media_format_final_desc" product="default">Format SD card, erasing all files stored there? Action cannot be reversed!</string>
+    <string name="media_format_final_desc" product="default">Erase SD card, deleting all files stored there? Action cannot be reversed!</string>
     <!-- SD card & phone storage settings screen, button on screen after user selects Format media button -->
     <string name="media_format_final_button_text">Erase everything</string>
     <!-- Message to draw an unlock pattern before clearing the device -->
     <string name="media_format_gesture_prompt">Draw your unlock pattern</string>
     <!-- Explanation of drawing unlock pattern to format card [CHAR LIMIT=NONE] -->
-    <string name="media_format_gesture_explanation" product="nosdcard">You must draw your unlock pattern to confirm that you want to format the USB storage.</string>
+    <string name="media_format_gesture_explanation" product="nosdcard">You must draw your unlock pattern to confirm that you want to erase the USB storage.</string>
     <!-- Explanation of drawing unlock pattern to format card [CHAR LIMIT=NONE] -->
-    <string name="media_format_gesture_explanation" product="default">You must draw your unlock pattern to confirm that you want to format the SD card.</string>
+    <string name="media_format_gesture_explanation" product="default">You must draw your unlock pattern to confirm that you want to erase the SD card.</string>
 
     <!-- Main settings screen, Call settings title for item to go into the call settings -->
     <string name="call_settings_title">Call settings</string>
@@ -2143,7 +2143,7 @@ found in the list of installed applications.</string>
     <!-- [CHAR LIMIT=25] Label for battery stats gps on state graph -->
     <string name="battery_stats_gps_on_label">GPS on</string>
     <!-- [CHAR LIMIT=25] Label for battery stats wifi running state graph -->
-    <string name="battery_stats_wifi_running_label">WIFI</string>
+    <string name="battery_stats_wifi_running_label">Wi-Fi</string>
     <!-- [CHAR LIMIT=25] Label for battery stats wake lock state graph -->
     <string name="battery_stats_wake_lock_label">Awake</string>
     <!-- [CHAR LIMIT=25] Label for battery stats phone signal strength graph -->
@@ -2153,9 +2153,9 @@ found in the list of installed applications.</string>
     <!-- CPU awake time title -->
     <string name="awake">Device awake time</string>
     <!-- Wifi on time -->
-    <string name="wifi_on_time">WiFi on time</string>
+    <string name="wifi_on_time">Wi-Fi on time</string>
     <!-- Bluetooth on time -->
-    <string name="bluetooth_on_time">WiFi on time</string>
+    <string name="bluetooth_on_time">Wi-Fi on time</string>
     <!-- Application name and battery usage percentage -->
     <string name="usage_name_percent"><xliff:g id="name">%1$s</xliff:g>" - "
             <xliff:g id="number" example="30">%2$s</xliff:g><xliff:g id="percent" example="%">%%</xliff:g></string>
@@ -2215,7 +2215,7 @@ found in the list of installed applications.</string>
     <!-- Label for display settings -->
     <string name="battery_action_display">Display settings</string>
     <!-- Label for wifi settings -->
-    <string name="battery_action_wifi">WiFi settings</string>
+    <string name="battery_action_wifi">Wi-Fi settings</string>
     <!-- Label for bluetooth settings -->
     <string name="battery_action_bluetooth">Bluetooth settings</string>
 
