@@ -91,10 +91,5 @@ public class NfcEnabler implements Preference.OnPreferenceChangeListener {
 
     private void updateUi() {
         mCheckbox.setChecked(mNfcState);
-        if (mNfcState) {
-            mCheckbox.setSummary(null);
-        } else {
-            mCheckbox.setSummary(R.string.nfc_quick_toggle_summary);
-        }
     }
 }
