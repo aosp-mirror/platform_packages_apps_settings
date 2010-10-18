@@ -85,9 +85,9 @@ public class RunningState {
     final ServiceProcessComparator mServiceProcessComparator
             = new ServiceProcessComparator();
     
-    // Additional heavy-weight processes to be shown to the user, even if
+    // Additional interesting processes to be shown to the user, even if
     // there is no service running in them.
-    final ArrayList<ProcessItem> mHeavyProcesses = new ArrayList<ProcessItem>();
+    final ArrayList<ProcessItem> mInterestingProcesses = new ArrayList<ProcessItem>();
     
     // All currently running processes, for finding dependencies etc.
     final SparseArray<ProcessItem> mRunningProcesses
@@ -109,9 +109,11 @@ public class RunningState {
     
     boolean mResumed;
     boolean mHaveData;
+    boolean mWatchingBackgroundItems;
 
     ArrayList<BaseItem> mItems = new ArrayList<BaseItem>();
     ArrayList<MergedItem> mMergedItems = new ArrayList<MergedItem>();
+    ArrayList<MergedItem> mBackgroundItems = new ArrayList<MergedItem>();
     
     int mNumBackgroundProcesses;
     long mBackgroundProcessMemory;
@@ -207,6 +209,7 @@ public class RunningState {
         String mSizeStr;
         String mCurSizeStr;
         boolean mNeedDivider;
+        boolean mBackground;
         
         public BaseItem(boolean isProcess) {
             mIsProcess = isProcess;
@@ -437,26 +440,36 @@ public class RunningState {
         final ArrayList<ProcessItem> mOtherProcesses = new ArrayList<ProcessItem>();
         final ArrayList<ServiceItem> mServices = new ArrayList<ServiceItem>();
         
+        private int mLastNumProcesses = -1, mLastNumServices = -1;
+
         MergedItem() {
             super(false);
         }
         
-        boolean update(Context context) {
+        boolean update(Context context, boolean background) {
             mPackageInfo = mProcess.mPackageInfo;
             mDisplayLabel = mProcess.mDisplayLabel;
             mLabel = mProcess.mLabel;
+            mBackground = background;
             
-            int numProcesses = (mProcess.mPid > 0 ? 1 : 0) + mOtherProcesses.size();
-            int numServices = mServices.size();
-            int resid = R.string.running_processes_item_description_s_s;
-            if (numProcesses != 1) {
-                resid = numServices != 1
-                        ? R.string.running_processes_item_description_p_p
-                        : R.string.running_processes_item_description_p_s;
-            } else if (numServices != 1) {
-                resid = R.string.running_processes_item_description_s_p;
+            if (!mBackground) {
+                int numProcesses = (mProcess.mPid > 0 ? 1 : 0) + mOtherProcesses.size();
+                int numServices = mServices.size();
+                if (mLastNumProcesses != numProcesses || mLastNumServices != numServices) {
+                    mLastNumProcesses = numProcesses;
+                    mLastNumServices = numServices;
+                    int resid = R.string.running_processes_item_description_s_s;
+                    if (numProcesses != 1) {
+                        resid = numServices != 1
+                                ? R.string.running_processes_item_description_p_p
+                                : R.string.running_processes_item_description_p_s;
+                    } else if (numServices != 1) {
+                        resid = R.string.running_processes_item_description_s_p;
+                    }
+                    mDescription = context.getResources().getString(resid, numProcesses,
+                            numServices);
+                }
             }
-            mDescription = context.getResources().getString(resid, numProcesses, numServices);
             
             mActiveSince = -1;
             for (int i=0; i<mServices.size(); i++) {
@@ -587,6 +600,19 @@ public class RunningState {
         }
     }
 
+    private boolean isInterestingProcess(ActivityManager.RunningAppProcessInfo pi) {
+        if ((pi.flags&ActivityManager.RunningAppProcessInfo.FLAG_CANT_SAVE_STATE) != 0) {
+            return true;
+        }
+        if ((pi.flags&ActivityManager.RunningAppProcessInfo.FLAG_PERSISTENT) == 0
+                && pi.importance == ActivityManager.RunningAppProcessInfo.IMPORTANCE_FOREGROUND
+                && pi.importanceReasonCode
+                        == ActivityManager.RunningAppProcessInfo.REASON_UNKNOWN) {
+            return true;
+        }
+        return false;
+    }
+
     private boolean update(Context context, ActivityManager am) {
         final PackageManager pm = context.getPackageManager();
         
@@ -666,10 +692,10 @@ public class RunningState {
                 proc.mDependentProcesses.clear();
             }
             
-            if ((pi.flags&ActivityManager.RunningAppProcessInfo.FLAG_CANT_SAVE_STATE) != 0) {
-                if (!mHeavyProcesses.contains(proc)) {
+            if (isInterestingProcess(pi)) {
+                if (!mInterestingProcesses.contains(proc)) {
                     changed = true;
-                    mHeavyProcesses.add(proc);
+                    mInterestingProcesses.add(proc);
                 }
                 proc.mCurSeq = mSequence;
                 proc.ensureLabel(pm);
@@ -706,13 +732,13 @@ public class RunningState {
             }
         }
         
-        // Remove any old heavy processes.
-        int NHP = mHeavyProcesses.size();
+        // Remove any old interesting processes.
+        int NHP = mInterestingProcesses.size();
         for (int i=0; i<NHP; i++) {
-            ProcessItem proc = mHeavyProcesses.get(i);
+            ProcessItem proc = mInterestingProcesses.get(i);
             if (mRunningProcesses.get(proc.mPid) == null) {
                 changed = true;
-                mHeavyProcesses.remove(i);
+                mInterestingProcesses.remove(i);
                 i--;
                 NHP--;
             }
@@ -841,21 +867,21 @@ public class RunningState {
                     }
                 }
                 
-                mergedItem.update(context);
+                mergedItem.update(context, false);
                 newMergedItems.add(mergedItem);
             }
             
-            // Finally, heavy-weight processes need to be shown and will
+            // Finally, interesting processes need to be shown and will
             // go at the top.
-            NHP = mHeavyProcesses.size();
+            NHP = mInterestingProcesses.size();
             for (int i=0; i<NHP; i++) {
-                ProcessItem proc = mHeavyProcesses.get(i);
+                ProcessItem proc = mInterestingProcesses.get(i);
                 if (proc.mClient == null && proc.mServices.size() <= 0) {
                     if (proc.mMergedItem == null) {
                         proc.mMergedItem = new MergedItem();
                         proc.mMergedItem.mProcess = proc;
                     }
-                    proc.mMergedItem.update(context);
+                    proc.mMergedItem.update(context, false);
                     newMergedItems.add(0, proc.mMergedItem);
                     mProcessItems.add(proc);
                 }
@@ -900,6 +926,7 @@ public class RunningState {
         long backgroundProcessMemory = 0;
         long foregroundProcessMemory = 0;
         long serviceProcessMemory = 0;
+        ArrayList<MergedItem> newBackgroundItems = null;
         try {
             final int numProc = mAllProcessItems.size();
             int[] pids = new int[numProc];
@@ -908,7 +935,8 @@ public class RunningState {
             }
             Debug.MemoryInfo[] mem = ActivityManagerNative.getDefault()
                     .getProcessMemoryInfo(pids);
-            for (int i=pids.length-1; i>=0; i--) {
+            int bgIndex = 0;
+            for (int i=0; i<pids.length; i++) {
                 ProcessItem proc = mAllProcessItems.get(i);
                 changed |= proc.updateSize(context, mem[i], mSequence);
                 if (proc.mCurSeq == mSequence) {
@@ -916,6 +944,28 @@ public class RunningState {
                 } else if (proc.mRunningProcessInfo.importance >=
                         ActivityManager.RunningAppProcessInfo.IMPORTANCE_BACKGROUND) {
                     backgroundProcessMemory += proc.mSize;
+                    MergedItem mergedItem;
+                    if (newBackgroundItems != null) {
+                        mergedItem = proc.mMergedItem = new MergedItem();
+                        proc.mMergedItem.mProcess = proc;
+                        newBackgroundItems.add(mergedItem);
+                    } else {
+                        if (bgIndex >= mBackgroundItems.size()
+                                || mBackgroundItems.get(bgIndex).mProcess != proc) {
+                            newBackgroundItems = new ArrayList<MergedItem>(numBackgroundProcesses);
+                            for (int bgi=0; bgi<bgIndex; bgi++) {
+                                newBackgroundItems.add(mBackgroundItems.get(bgi));
+                            }
+                            mergedItem = proc.mMergedItem = new MergedItem();
+                            proc.mMergedItem.mProcess = proc;
+                            newBackgroundItems.add(mergedItem);
+                        } else {
+                            mergedItem = mBackgroundItems.get(bgIndex);
+                        }
+                    }
+                    mergedItem.update(context, true);
+                    mergedItem.updateSize(context);
+                    bgIndex++;
                 } else if (proc.mRunningProcessInfo.importance <=
                         ActivityManager.RunningAppProcessInfo.IMPORTANCE_VISIBLE) {
                     foregroundProcessMemory += proc.mSize;
@@ -924,6 +974,16 @@ public class RunningState {
         } catch (RemoteException e) {
         }
         
+        if (newBackgroundItems == null) {
+            // One or more at the bottom may no longer exit.
+            if (mBackgroundItems.size() > numBackgroundProcesses) {
+                newBackgroundItems = new ArrayList<MergedItem>(numBackgroundProcesses);
+                for (int bgi=0; bgi<numBackgroundProcesses; bgi++) {
+                    newBackgroundItems.add(mBackgroundItems.get(bgi));
+                }
+            }
+        }
+
         for (int i=0; i<mMergedItems.size(); i++) {
             mMergedItems.get(i).updateSize(context);
         }
@@ -935,6 +995,12 @@ public class RunningState {
             mBackgroundProcessMemory = backgroundProcessMemory;
             mForegroundProcessMemory = foregroundProcessMemory;
             mServiceProcessMemory = serviceProcessMemory;
+            if (newBackgroundItems != null) {
+                mBackgroundItems = newBackgroundItems;
+                if (mWatchingBackgroundItems) {
+                    changed = true;
+                }
+            }
             if (!mHaveData) {
                 mHaveData = true;
                 mLock.notifyAll();
@@ -950,9 +1016,21 @@ public class RunningState {
         }
     }
     
+    void setWatchingBackgroundItems(boolean watching) {
+        synchronized (mLock) {
+            mWatchingBackgroundItems = watching;
+        }
+    }
+
     ArrayList<MergedItem> getCurrentMergedItems() {
         synchronized (mLock) {
             return mMergedItems;
+        }
+    }
+
+    ArrayList<MergedItem> getCurrentBackgroundItems() {
+        synchronized (mLock) {
+            return mBackgroundItems;
         }
     }
 }

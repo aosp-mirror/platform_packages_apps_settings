@@ -43,6 +43,7 @@ public class RunningServiceDetails extends Activity
     
     static final String KEY_UID = "uid";
     static final String KEY_PROCESS = "process";
+    static final String KEY_BACKGROUND = "background";
     
     static final int DIALOG_CONFIRM_STOP = 1;
     
@@ -54,6 +55,7 @@ public class RunningServiceDetails extends Activity
     
     int mUid;
     String mProcessName;
+    boolean mShowBackground;
     
     RunningState.MergedItem mMergedItem;
     
@@ -90,9 +92,14 @@ public class RunningServiceDetails extends Activity
                 }
             }
             stopService(new Intent().setComponent(si.mRunningService.service));
-            if (mMergedItem == null || mMergedItem.mServices.size() <= 1) {
+            if (mMergedItem == null) {
+                // If this is gone, we are gone.
+                mState.updateNow();
+                finish();
+            } else if (!mShowBackground && mMergedItem.mServices.size() <= 1) {
                 // If there was only one service, we are finishing it,
                 // so no reason for the UI to stick around.
+                mState.updateNow();
                 finish();
             } else {
                 mState.updateNow();
@@ -166,6 +173,10 @@ public class RunningServiceDetails extends Activity
                 }
             } else if (mServiceItem != null) {
                 stopActiveService(false);
+            } else if (mActiveItem.mItem.mBackground) {
+                // Background process.  Just kill it.
+                mAm.killBackgroundProcesses(mActiveItem.mItem.mPackageInfo.packageName);
+                finish();
             } else {
                 // Heavy-weight process.  We'll do a force-stop on it.
                 mAm.forceStopPackage(mActiveItem.mItem.mPackageInfo.packageName);
@@ -178,7 +189,8 @@ public class RunningServiceDetails extends Activity
     
     boolean findMergedItem() {
         RunningState.MergedItem item = null;
-        ArrayList<RunningState.MergedItem> newItems = mState.getCurrentMergedItems();
+        ArrayList<RunningState.MergedItem> newItems = mShowBackground
+                ? mState.getCurrentBackgroundItems() : mState.getCurrentMergedItems();
         if (newItems != null) {
             for (int i=0; i<newItems.size(); i++) {
                 RunningState.MergedItem mi = newItems.get(i);
@@ -189,6 +201,7 @@ public class RunningServiceDetails extends Activity
                 }
             }
         }
+
         if (mMergedItem != item) {
             mMergedItem = item;
             return true;
@@ -227,7 +240,9 @@ public class RunningServiceDetails extends Activity
                     si.mServiceInfo.packageName, si.mServiceInfo.descriptionRes,
                     si.mServiceInfo.applicationInfo));
         } else {
-            if (detail.mManageIntent != null) {
+            if (mi.mBackground) {
+                description.setText(R.string.background_process_stop_description);
+            } else if (detail.mManageIntent != null) {
                 try {
                     Resources clientr = getPackageManager().getResourcesForApplication(
                             si.mRunningService.clientPackage);
@@ -254,7 +269,7 @@ public class RunningServiceDetails extends Activity
         // check if error reporting is enabled in secure settings
         int enabled = Settings.Secure.getInt(getContentResolver(),
                 Settings.Secure.SEND_ACTION_APP_ERROR, 0);
-        if (enabled != 0) {
+        if (enabled != 0 && si != null) {
             detail.mInstaller = ApplicationErrorReport.getErrorReportReceiver(
                     this, si.mServiceInfo.packageName, si.mServiceInfo.applicationInfo.flags);
             detail.mReportButton.setEnabled(detail.mInstaller != null);
@@ -351,7 +366,7 @@ public class RunningServiceDetails extends Activity
             
             if (mMergedItem.mServices.size() <= 0) {
                 // This item does not have any services, so it must be
-                // a heavy-weight process...  we will put a fake service
+                // another interesting process...  we will put a fake service
                 // entry for it, to allow the user to "stop" it.
                 addServiceDetailsView(null, mMergedItem);
             }
@@ -396,6 +411,7 @@ public class RunningServiceDetails extends Activity
         
         mUid = getIntent().getIntExtra(KEY_UID, 0);
         mProcessName = getIntent().getStringExtra(KEY_PROCESS);
+        mShowBackground = getIntent().getBooleanExtra(KEY_BACKGROUND, false);
         
         mAm = (ActivityManager)getSystemService(Context.ACTIVITY_SERVICE);
         mInflater = (LayoutInflater)getSystemService(Context.LAYOUT_INFLATER_SERVICE);

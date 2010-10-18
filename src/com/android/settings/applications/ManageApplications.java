@@ -29,9 +29,12 @@ import android.content.pm.IPackageManager;
 import android.content.pm.PackageInfo;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Environment;
 import android.os.RemoteException;
 import android.os.ServiceManager;
+import android.os.StatFs;
 import android.provider.Settings;
+import android.text.format.Formatter;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -126,6 +129,8 @@ public class ManageApplications extends TabActivity implements
 
     public static final int SORT_ORDER_ALPHA = MENU_OPTIONS_BASE + 4;
     public static final int SORT_ORDER_SIZE = MENU_OPTIONS_BASE + 5;
+    public static final int SHOW_RUNNING_SERVICES = MENU_OPTIONS_BASE + 6;
+    public static final int SHOW_BACKGROUND_PROCESSES = MENU_OPTIONS_BASE + 7;
     // sort order
     private int mSortOrder = SORT_ORDER_ALPHA;
     // Filter value
@@ -152,6 +157,11 @@ public class ManageApplications extends TabActivity implements
     // Custom view used to display running processes
     private RunningProcessesView mRunningProcessesView;
     
+    LinearColorBar mColorBar;
+    TextView mStorageChartLabel;
+    TextView mUsedStorageText;
+    TextView mFreeStorageText;
+
     // These are for keeping track of activity and tab switch state.
     private int mCurView;
     private boolean mCreatedRunning;
@@ -160,6 +170,11 @@ public class ManageApplications extends TabActivity implements
     private boolean mActivityResumed;
     private Object mNonConfigInstance;
     
+    private StatFs mDataFileStats;
+    private StatFs mSDCardFileStats;
+    private boolean mLastShowedInternalStorage = true;
+    private long mLastUsedStorage, mLastAppStorage, mLastFreeStorage;
+
     final Runnable mRunningProcessesAvail = new Runnable() {
         public void run() {
             handleRunningProcessesAvail();
@@ -222,6 +237,7 @@ public class ManageApplications extends TabActivity implements
                 mCurFilterPrefix = constraint;
                 mEntries = (ArrayList<ApplicationsState.AppEntry>)results.values;
                 notifyDataSetChanged();
+                updateStorageUsage();
             }
         };
 
@@ -294,6 +310,7 @@ public class ManageApplications extends TabActivity implements
                 mEntries = null;
             }
             notifyDataSetChanged();
+            updateStorageUsage();
 
             if (entries == null) {
                 mWaitingForData = true;
@@ -338,6 +355,7 @@ public class ManageApplications extends TabActivity implements
             mBaseEntries = apps;
             mEntries = applyPrefixFilter(mCurFilterPrefix, mBaseEntries);
             notifyDataSetChanged();
+            updateStorageUsage();
         }
 
         @Override
@@ -367,6 +385,7 @@ public class ManageApplications extends TabActivity implements
                         // the list with the new size to reflect it to the user.
                         rebuild(false);
                     }
+                    updateStorageUsage();
                     return;
                 }
             }
@@ -502,6 +521,9 @@ public class ManageApplications extends TabActivity implements
         
         mNonConfigInstance = getLastNonConfigurationInstance();
         
+        mDataFileStats = new StatFs("/data");
+        mSDCardFileStats = new StatFs(Environment.getExternalStorageDirectory().toString());
+
         // initialize some window features
         requestWindowFeature(Window.FEATURE_RIGHT_ICON);
         requestWindowFeature(Window.FEATURE_INDETERMINATE_PROGRESS);
@@ -526,6 +548,10 @@ public class ManageApplications extends TabActivity implements
         mListView = lv;
         lv.setRecyclerListener(mApplicationsAdapter);
         mListView.setAdapter(mApplicationsAdapter);
+        mColorBar = (LinearColorBar)mListContainer.findViewById(R.id.storage_color_bar);
+        mStorageChartLabel = (TextView)mListContainer.findViewById(R.id.storageChartLabel);
+        mUsedStorageText = (TextView)mListContainer.findViewById(R.id.usedStorageText);
+        mFreeStorageText = (TextView)mListContainer.findViewById(R.id.freeStorageText);
         mRunningProcessesView = (RunningProcessesView)mRootView.findViewById(
                 R.id.running_processes);
 
@@ -609,6 +635,8 @@ public class ManageApplications extends TabActivity implements
                 .setIcon(android.R.drawable.ic_menu_sort_alphabetically);
         menu.add(0, SORT_ORDER_SIZE, 2, R.string.sort_order_size)
                 .setIcon(android.R.drawable.ic_menu_sort_by_size); 
+        menu.add(0, SHOW_RUNNING_SERVICES, 3, R.string.show_running_services);
+        menu.add(0, SHOW_BACKGROUND_PROCESSES, 3, R.string.show_background_processes);
         return true;
     }
     
@@ -619,11 +647,17 @@ public class ManageApplications extends TabActivity implements
          * so bringing up this menu in that case doesn't make any sense.
          */
         if (mCurView == VIEW_RUNNING) {
-            return false;
+            boolean showingBackground = mRunningProcessesView.mAdapter.getShowBackground();
+            menu.findItem(SORT_ORDER_ALPHA).setVisible(false);
+            menu.findItem(SORT_ORDER_SIZE).setVisible(false);
+            menu.findItem(SHOW_RUNNING_SERVICES).setVisible(showingBackground);
+            menu.findItem(SHOW_BACKGROUND_PROCESSES).setVisible(!showingBackground);
+        } else {
+            menu.findItem(SORT_ORDER_ALPHA).setVisible(mSortOrder != SORT_ORDER_ALPHA);
+            menu.findItem(SORT_ORDER_SIZE).setVisible(mSortOrder != SORT_ORDER_SIZE);
+            menu.findItem(SHOW_RUNNING_SERVICES).setVisible(false);
+            menu.findItem(SHOW_BACKGROUND_PROCESSES).setVisible(false);
         }
-
-        menu.findItem(SORT_ORDER_ALPHA).setVisible(mSortOrder != SORT_ORDER_ALPHA);
-        menu.findItem(SORT_ORDER_SIZE).setVisible(mSortOrder != SORT_ORDER_SIZE);
         return true;
     }
 
@@ -632,7 +666,13 @@ public class ManageApplications extends TabActivity implements
         int menuId = item.getItemId();
         if ((menuId == SORT_ORDER_ALPHA) || (menuId == SORT_ORDER_SIZE)) {
             mSortOrder = menuId;
-            mApplicationsAdapter.rebuild(mFilterApps, mSortOrder);
+            if (mCurView != VIEW_RUNNING) {
+                mApplicationsAdapter.rebuild(mFilterApps, mSortOrder);
+            }
+        } else if (menuId == SHOW_RUNNING_SERVICES) {
+            mRunningProcessesView.mAdapter.setShowBackground(false);
+        } else if (menuId == SHOW_BACKGROUND_PROCESSES) {
+            mRunningProcessesView.mAdapter.setShowBackground(true);
         }
         return true;
     }
@@ -656,6 +696,82 @@ public class ManageApplications extends TabActivity implements
     static final int VIEW_NOTHING = 0;
     static final int VIEW_LIST = 1;
     static final int VIEW_RUNNING = 2;
+
+    void updateStorageUsage() {
+        if (mCurView == VIEW_RUNNING) {
+            return;
+        }
+
+        long freeStorage = 0;
+        long appStorage = 0;
+        long totalStorage = 0;
+        CharSequence newLabel = null;
+
+        if (mFilterApps == FILTER_APPS_SDCARD) {
+            if (mLastShowedInternalStorage) {
+                mLastShowedInternalStorage = false;
+            }
+            newLabel = this.getText(R.string.sd_card_storage);
+            mSDCardFileStats.restat(Environment.getExternalStorageDirectory().toString());
+            try {
+                totalStorage = (long)mSDCardFileStats.getBlockCount() *
+                        mSDCardFileStats.getBlockSize();
+                freeStorage = (long) mSDCardFileStats.getAvailableBlocks() *
+                mSDCardFileStats.getBlockSize();
+            } catch (IllegalArgumentException e) {
+                // use the old value of mFreeMem
+            }
+        } else {
+            if (!mLastShowedInternalStorage) {
+                mLastShowedInternalStorage = true;
+            }
+            newLabel = this.getText(R.string.internal_storage);
+            mDataFileStats.restat("/data");
+            try {
+                totalStorage = (long)mDataFileStats.getBlockCount() *
+                        mDataFileStats.getBlockSize();
+                freeStorage = (long) mDataFileStats.getAvailableBlocks() *
+                    mDataFileStats.getBlockSize();
+            } catch (IllegalArgumentException e) {
+            }
+            final int N = mApplicationsAdapter.getCount();
+            for (int i=0; i<N; i++) {
+                ApplicationsState.AppEntry ae = mApplicationsAdapter.getAppEntry(i);
+                appStorage += ae.codeSize + ae.dataSize;
+                freeStorage += ae.cacheSize;
+            }
+        }
+        if (newLabel != null) {
+            mStorageChartLabel.setText(newLabel);
+        }
+        if (totalStorage > 0) {
+            mColorBar.setRatios((totalStorage-freeStorage-appStorage)/(float)totalStorage,
+                    appStorage/(float)totalStorage, freeStorage/(float)totalStorage);
+            long usedStorage = totalStorage - freeStorage;
+            if (mLastUsedStorage != usedStorage) {
+                mLastUsedStorage = usedStorage;
+                String sizeStr = Formatter.formatShortFileSize(this, usedStorage);
+                mUsedStorageText.setText(getResources().getString(
+                        R.string.service_foreground_processes, sizeStr));
+            }
+            if (mLastFreeStorage != freeStorage) {
+                mLastFreeStorage = freeStorage;
+                String sizeStr = Formatter.formatShortFileSize(this, freeStorage);
+                mFreeStorageText.setText(getResources().getString(
+                        R.string.service_background_processes, sizeStr));
+            }
+        } else {
+            mColorBar.setRatios(0, 0, 0);
+            if (mLastUsedStorage != -1) {
+                mLastUsedStorage = -1;
+                mUsedStorageText.setText("");
+            }
+            if (mLastFreeStorage != -1) {
+                mLastFreeStorage = -1;
+                mFreeStorageText.setText("");
+            }
+        }
+    }
 
     private void selectView(int which) {
         if (which == VIEW_LIST) {
@@ -724,6 +840,7 @@ public class ManageApplications extends TabActivity implements
         
         mFilterApps = newOption;
         selectView(VIEW_LIST);
+        updateStorageUsage();
     }
 
     public void onTabChanged(String tabId) {

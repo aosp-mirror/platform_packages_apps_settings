@@ -18,21 +18,62 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent" >
 
-    <FrameLayout android:id="@+id/list_container"
+    <LinearLayout android:id="@+id/list_container"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:orientation="vertical"
             android:visibility="gone">
-        <ListView android:id="@android:id/list"
-            android:drawSelectorOnTop="false"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent" />
-        <TextView android:id="@android:id/empty"
+        <FrameLayout android:layout_width="match_parent"
+                android:layout_height="0px"
+                android:layout_weight="1">
+            <ListView android:id="@android:id/list"
+                android:drawSelectorOnTop="false"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:gravity="center"
-                android:text="@string/no_applications"
-                android:textAppearance="?android:attr/textAppearanceLarge" />
-    </FrameLayout>
+                android:layout_height="match_parent" />
+            <TextView android:id="@android:id/empty"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:text="@string/no_applications"
+                    android:textAppearance="?android:attr/textAppearanceLarge" />
+        </FrameLayout>
+        <view class="com.android.settings.applications.LinearColorBar"
+                android:id="@+id/storage_color_bar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="-5dp"
+                android:orientation="horizontal"
+                android:paddingTop="30dp"
+                android:paddingLeft="2dp"
+                android:paddingRight="2dp"
+                android:paddingBottom="1dp">
+            <TextView android:id="@+id/usedStorageText"
+                android:layout_width="0px"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:textAppearance="?android:attr/textAppearanceSmallInverse"
+                android:textColor="#000"
+                android:singleLine="true" />
+            <TextView android:id="@+id/storageChartLabel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="0"
+                android:textAppearance="?android:attr/textAppearanceSmallInverse"
+                android:textColor="#000"
+                android:textStyle="bold"
+                android:singleLine="true"
+                android:text="@string/internal_storage" />
+            <TextView android:id="@+id/freeStorageText"
+                android:layout_gravity="center_vertical|right"
+                android:layout_width="0px"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="right"
+                android:textAppearance="?android:attr/textAppearanceSmallInverse"
+                android:textColor="#000"
+                android:singleLine="true" />
+        </view>
+    </LinearLayout>
 
     <view class="com.android.settings.applications.RunningProcessesView"
             android:id="@+id/running_processes"
