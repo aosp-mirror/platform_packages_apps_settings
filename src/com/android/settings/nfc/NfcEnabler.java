@@ -17,10 +17,15 @@
 package com.android.settings.nfc;
 
 import com.android.settings.R;
+
+import android.content.BroadcastReceiver;
 import android.content.Context;
+import android.content.Intent;
+import android.content.IntentFilter;
 import android.nfc.NfcAdapter;
-import android.preference.Preference;
+import android.os.Handler;
 import android.preference.CheckBoxPreference;
+import android.preference.Preference;
 import android.provider.Settings;
 import android.util.Log;
 
@@ -35,6 +40,20 @@ public class NfcEnabler implements Preference.OnPreferenceChangeListener {
     private final Context mContext;
     private final CheckBoxPreference mCheckbox;
     private final NfcAdapter mNfcAdapter;
+    private final IntentFilter mIntentFilter;
+    private final Handler mHandler = new Handler();
+
+    private final BroadcastReceiver mReceiver = new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            String action = intent.getAction();
+            if (NfcAdapter.ACTION_ADAPTER_STATE_CHANGE.equals(action)) {
+                handleNfcStateChanged(intent.getBooleanExtra(
+                    NfcAdapter.EXTRA_NEW_BOOLEAN_STATE,
+                    false));
+            }
+        }
+    };
 
     private boolean mNfcState;
 
@@ -47,49 +66,66 @@ public class NfcEnabler implements Preference.OnPreferenceChangeListener {
             // NFC is not supported
             mCheckbox.setEnabled(false);
         }
+
+        mIntentFilter = new IntentFilter(NfcAdapter.ACTION_ADAPTER_STATE_CHANGE);
+
     }
 
     public void resume() {
         if (mNfcAdapter == null) {
             return;
         }
-		mCheckbox.setOnPreferenceChangeListener(this);
-		mNfcState = Settings.System.getInt(mContext.getContentResolver(),
-		        Settings.System.NFC_ON, 0) != 0;
-		updateUi();
+        mContext.registerReceiver(mReceiver, mIntentFilter);
+        mCheckbox.setOnPreferenceChangeListener(this);
+        mNfcState = Settings.System.getInt(mContext.getContentResolver(),
+                Settings.System.NFC_ON, 0) != 0;
+        mCheckbox.setChecked(mNfcState);
     }
 
     public void pause() {
         if (mNfcAdapter == null) {
             return;
         }
+        mContext.unregisterReceiver(mReceiver);
         mCheckbox.setOnPreferenceChangeListener(null);
     }
 
     public boolean onPreferenceChange(Preference preference, Object value) {
-        // Turn on/off Nfc
-        mNfcState = (Boolean) value;
-        setEnabled();
+        // Turn NFC on/off
 
+        final boolean desiredState = (Boolean) value;
+        mCheckbox.setEnabled(false);
+
+        // Start async update of the NFC adapter state, as the API is
+        // unfortunately blocking...
+        new Thread("toggleNFC") {
+            public void run() {
+                Log.d(TAG, "Setting NFC enabled state to: " + desiredState);
+                boolean success = false;
+                if (desiredState) {
+                    success = mNfcAdapter.enableTagDiscovery();
+                } else {
+                    success = mNfcAdapter.disableTagDiscovery();
+                }
+                if (success) {
+                    Log.d(TAG, "Successfully changed NFC enabled state to " + desiredState);
+                    // UI will be updated by BroadcastReceiver, above.
+                } else {
+                    Log.w(TAG, "Error setting NFC enabled state to " + desiredState);
+                    mHandler.post(new Runnable() {
+                            public void run() {
+                                mCheckbox.setEnabled(true);
+                                mCheckbox.setSummary(R.string.nfc_toggle_error);
+                            }
+                        });
+                }
+            }
+        }.start();
         return false;
     }
 
-    private void setEnabled() {
-        if (mNfcState) {
-            if (!mNfcAdapter.enableTagDiscovery()) {
-                Log.w(TAG, "NFC enabling failed");
-				mNfcState = false;
-            }
-        } else {
-            if (!mNfcAdapter.disableTagDiscovery()) {
-                Log.w(TAG, "NFC disabling failed");
-				mNfcState = true;
-            }
-        }
-		updateUi();
-	}
-
-    private void updateUi() {
-        mCheckbox.setChecked(mNfcState);
+    private void handleNfcStateChanged(boolean newState) {
+        mCheckbox.setChecked(newState);
+        mCheckbox.setEnabled(true);
     }
 }
