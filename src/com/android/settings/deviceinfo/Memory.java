@@ -42,6 +42,8 @@ import android.os.storage.StorageEventListener;
 import android.os.storage.StorageManager;
 import android.preference.CheckBoxPreference;
 import android.preference.Preference;
+import android.preference.PreferenceActivity;
+import android.preference.PreferenceGroup;
 import android.preference.PreferenceScreen;
 import android.provider.Settings;
 import android.text.format.Formatter;
@@ -63,6 +65,8 @@ public class Memory extends SettingsPreferenceFragment implements OnCancelListen
 
     private static final String MEMORY_SD_FORMAT = "memory_sd_format";
 
+    private static final String MEMORY_SD_GROUP = "memory_sd";
+
     private static final String PTP_MODE_TOGGLE = "ptp_mode_toggle";
 
     private static final int DLG_CONFIRM_UNMOUNT = 1;
@@ -74,6 +78,10 @@ public class Memory extends SettingsPreferenceFragment implements OnCancelListen
     private Preference mSdAvail;
     private Preference mSdMountToggle;
     private Preference mSdFormat;
+    private PreferenceGroup mSdMountPreferenceGroup;
+
+    boolean mSdMountToggleAdded = true;
+
     private CheckBoxPreference mPtpModeToggle;
     
     // Access using getMountService()
@@ -97,6 +105,7 @@ public class Memory extends SettingsPreferenceFragment implements OnCancelListen
         mSdAvail = findPreference(MEMORY_SD_AVAIL);
         mSdMountToggle = findPreference(MEMORY_SD_MOUNT_TOGGLE);
         mSdFormat = findPreference(MEMORY_SD_FORMAT);
+        mSdMountPreferenceGroup = (PreferenceGroup)findPreference(MEMORY_SD_GROUP);
 
         mPtpModeToggle = (CheckBoxPreference)findPreference(PTP_MODE_TOGGLE);
         if (Usb.isFunctionSupported(Usb.USB_FUNCTION_MTP)) {
@@ -289,9 +298,15 @@ public class Memory extends SettingsPreferenceFragment implements OnCancelListen
             readOnly = mRes.getString(R.string.read_only);
         }
  
-        mSdFormat.setEnabled(false);
-
         if (status.equals(Environment.MEDIA_MOUNTED)) {
+            if (!Environment.isExternalStorageRemovable()) {
+                // This device has built-in storage that is not removable.
+                // There is no reason for the user to unmount it.
+                if (mSdMountToggleAdded) {
+                    mSdMountPreferenceGroup.removePreference(mSdMountToggle);
+                    mSdMountToggleAdded = false;
+                }
+            }
             try {
                 File path = Environment.getExternalStorageDirectory();
                 StatFs stat = new StatFs(path.getPath());
@@ -317,10 +332,18 @@ public class Memory extends SettingsPreferenceFragment implements OnCancelListen
             mSdAvail.setSummary(mRes.getString(R.string.sd_unavailable));
 
 
+            if (!Environment.isExternalStorageRemovable()) {
+                if (status.equals(Environment.MEDIA_UNMOUNTED)) {
+                    if (!mSdMountToggleAdded) {
+                        mSdMountPreferenceGroup.addPreference(mSdMountToggle);
+                        mSdMountToggleAdded = true;
+                    }
+                }
+            }
+
             if (status.equals(Environment.MEDIA_UNMOUNTED) ||
                 status.equals(Environment.MEDIA_NOFS) ||
                 status.equals(Environment.MEDIA_UNMOUNTABLE) ) {
-                mSdFormat.setEnabled(true);
                 mSdMountToggle.setEnabled(true);
                 mSdMountToggle.setTitle(mRes.getString(R.string.sd_mount));
                 mSdMountToggle.setSummary(mRes.getString(R.string.sd_mount_summary));

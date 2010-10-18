@@ -16,22 +16,14 @@
 
 package com.android.settings;
 
-import com.android.internal.widget.LockPatternUtils;
-
 import android.app.Activity;
-import android.app.AlertDialog;
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.storage.IMountService;
-import android.os.ServiceManager;
-import android.os.SystemProperties;
-import android.os.Environment;
-import android.text.TextUtils;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
+
+import com.android.internal.os.storage.ExternalStorageFormatter;
 
 /**
  * Confirm and execute a format of the sdcard.
@@ -46,7 +38,6 @@ public class MediaFormat extends Activity {
     private static final int KEYGUARD_REQUEST = 55;
 
     private LayoutInflater mInflater;
-    private LockPatternUtils mLockUtils;
 
     private View mInitialView;
     private Button mInitiateButton;
@@ -64,23 +55,10 @@ public class MediaFormat extends Activity {
                 if (Utils.isMonkeyRunning()) {
                     return;
                 }
-                final IMountService service =
-                        IMountService.Stub.asInterface(ServiceManager.getService("mount"));
-                if (service != null) {
-                    new Thread() {
-                        public void run() {
-                            try {
-                                service.formatVolume(Environment.getExternalStorageDirectory().toString());
-                            } catch (Exception e) {
-                                // Intentionally blank - there's nothing we can do here
-                                Log.w("MediaFormat", "Unable to invoke IMountService.formatMedia()");
-                            }
-                        }
-                    }.start();
-                } else {
-                    Log.w("MediaFormat", "Unable to locate IMountService");
-                }
-            finish();
+                Intent intent = new Intent(ExternalStorageFormatter.FORMAT_ONLY);
+                intent.setComponent(ExternalStorageFormatter.COMPONENT_NAME);
+                startService(intent);
+                finish();
             }
         };
 
@@ -171,7 +149,6 @@ public class MediaFormat extends Activity {
         mInitialView = null;
         mFinalView = null;
         mInflater = LayoutInflater.from(this);
-        mLockUtils = new LockPatternUtils(this);
 
         establishInitialState();
     }
@@ -184,7 +161,8 @@ public class MediaFormat extends Activity {
     public void onPause() {
         super.onPause();
 
-        establishInitialState();
+        if (!isFinishing()) {
+            establishInitialState();
+        }
     }
-
 }
