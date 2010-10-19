@@ -197,7 +197,7 @@ public abstract class LocalBluetoothProfileManager {
         mLocalManager = localManager;
     }
 
-    public abstract Set<BluetoothDevice> getConnectedDevices();
+    public abstract List<BluetoothDevice> getConnectedDevices();
 
     public abstract boolean connect(BluetoothDevice device);
 
@@ -261,7 +261,7 @@ public abstract class LocalBluetoothProfileManager {
         }
 
         @Override
-        public Set<BluetoothDevice> getConnectedDevices() {
+        public List<BluetoothDevice> getConnectedDevices() {
             return mService.getDevicesMatchingConnectionStates(
                   new int[] {BluetoothProfile.STATE_CONNECTED,
                              BluetoothProfile.STATE_CONNECTING,
@@ -270,7 +270,7 @@ public abstract class LocalBluetoothProfileManager {
 
         @Override
         public boolean connect(BluetoothDevice device) {
-            Set<BluetoothDevice> sinks = getConnectedDevices();
+            List<BluetoothDevice> sinks = getConnectedDevices();
             if (sinks != null) {
                 for (BluetoothDevice sink : sinks) {
                     mService.disconnect(sink);
@@ -378,14 +378,11 @@ public abstract class LocalBluetoothProfileManager {
                      * We just bound to the service, so refresh the UI of the
                      * headset device.
                      */
-                    Set<BluetoothDevice> deviceSet = mService.getConnectedDevices();
-                    if (deviceSet.size() == 0) return;
-
-                    BluetoothDevice[] devices =
-                        deviceSet.toArray(new BluetoothDevice[deviceSet.size()]);
+                    List<BluetoothDevice> deviceList = mService.getConnectedDevices();
+                    if (deviceList.size() == 0) return;
 
                     mLocalManager.getCachedDeviceManager()
-                            .onProfileStateChanged(devices[0], Profile.HEADSET,
+                            .onProfileStateChanged(deviceList.get(0), Profile.HEADSET,
                                                    BluetoothProfile.STATE_CONNECTED);
                 }
             });
@@ -415,7 +412,7 @@ public abstract class LocalBluetoothProfileManager {
         }
 
         @Override
-        public Set<BluetoothDevice> getConnectedDevices() {
+        public List<BluetoothDevice> getConnectedDevices() {
             return mService.getConnectedDevices();
         }
 
@@ -426,9 +423,8 @@ public abstract class LocalBluetoothProfileManager {
 
         @Override
         public boolean disconnect(BluetoothDevice device) {
-            Set<BluetoothDevice> deviceSet = getConnectedDevices();
-            BluetoothDevice[] devices = deviceSet.toArray(new BluetoothDevice[deviceSet.size()]);
-            if (devices.length != 0 && devices[0].equals(device)) {
+            List<BluetoothDevice> deviceList = getConnectedDevices();
+            if (deviceList.size() != 0 && deviceList.get(0).equals(device)) {
                 // Downgrade prority as user is disconnecting the headset.
                 if (mService.getPriority(device) > BluetoothProfile.PRIORITY_ON) {
                     mService.setPriority(device, BluetoothProfile.PRIORITY_ON);
@@ -441,10 +437,9 @@ public abstract class LocalBluetoothProfileManager {
 
         @Override
         public int getConnectionStatus(BluetoothDevice device) {
-            Set<BluetoothDevice> deviceSet = getConnectedDevices();
-            BluetoothDevice[] devices = deviceSet.toArray(new BluetoothDevice[deviceSet.size()]);
+            List<BluetoothDevice> deviceList = getConnectedDevices();
 
-            return devices.length > 0 && devices[0].equals(device)
+            return deviceList.size() > 0 && deviceList.get(0).equals(device)
                     ? convertState(mService.getConnectionState(device))
                     : SettingsBtStatus.CONNECTION_STATUS_DISCONNECTED;
         }
@@ -506,7 +501,7 @@ public abstract class LocalBluetoothProfileManager {
         }
 
         @Override
-        public Set<BluetoothDevice> getConnectedDevices() {
+        public List<BluetoothDevice> getConnectedDevices() {
             return null;
         }
 
@@ -605,7 +600,7 @@ public abstract class LocalBluetoothProfileManager {
         }
 
         @Override
-        public Set<BluetoothDevice> getConnectedDevices() {
+        public List<BluetoothDevice> getConnectedDevices() {
             return mService.getConnectedInputDevices();
         }
 
@@ -703,7 +698,7 @@ public abstract class LocalBluetoothProfileManager {
         }
 
         @Override
-        public Set<BluetoothDevice> getConnectedDevices() {
+        public List<BluetoothDevice> getConnectedDevices() {
             return mService.getConnectedDevices();
         }
 
