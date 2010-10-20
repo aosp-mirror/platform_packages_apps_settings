@@ -869,6 +869,7 @@
     <string name="nfc_quick_toggle_title">NFC</string>
     <!-- Used in the 1st-level settings screen as the turn-on summary -->
     <string name="nfc_quick_toggle_summary">Use Near Field Communication to read and exchange tags</string>
+    <string name="nfc_toggle_error" msgid="8998642457947607263">An error occurred.</string>
 
     <!-- Wi-Fi Settings --> <skip />
     <!-- Used in the 1st-level settings screen to turn on Wi-Fi -->
@@ -1335,9 +1336,9 @@
     <!-- About phone screen, summary of the item to go into the phone status screen -->
     <string name="device_status_summary">Phone number, signal, etc.</string>
     <!-- Main settings screen item's title to go into the SD card and storage settings screen [CHAR LIMIT=25] -->
-    <string name="storage_settings" product="nosdcard">Shared &amp; secure storage storage</string>
+    <string name="storage_settings" product="nosdcard">Shared &amp; secure storage</string>
     <!-- Main settings screen item's title to go into the SD card and storage settings screen-->
-    <string name="storage_settings">Storage</string>
+    <string name="storage_settings" product="default">Storage</string>
     <!-- SD card and storage settings screen title -->
     <string name="storage_settings_title">Storage settings</string>
     <!-- [CHAR LIMIT=100] Main settings screen item's summary for the SD card and storage settings -->
@@ -1412,7 +1413,7 @@
     <!-- SD card & phone storage settings item title that will result in the phone mounting the SD card. [CHAR LIMIT=30] -->
     <string name="sd_mount_summary" product="nosdcard">Mount the internal USB storage</string>
     <!-- SD card & phone storage settings item title that will result in the phone mounting the SD card. -->
-    <string name="sd_mount_summary">Mount the SD card</string>
+    <string name="sd_mount_summary" product="default">Mount the SD card</string>
     <!-- SD card & phone storage settings item title that will result in the phone formatting the USB storage.   [CHAR LIMIT=25] -->
     <string name="sd_format" product="nosdcard">Erase USB storage</string>
     <!-- SD card & phone storage settings item title that will result in the phone formatting the SD card.   [CHAR LIMIT=25] -->

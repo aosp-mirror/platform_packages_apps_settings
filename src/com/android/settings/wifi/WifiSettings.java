@@ -93,7 +93,7 @@ public class WifiSettings extends SettingsPreferenceFragment
     // ListView won't become larger than the screen.
     //
     // This constant doesn't affect other contexts other than SetupWizard XL.
-    private static int MAX_MENU_COUNT_IN_XL = 7;
+    private static int MAX_MENU_COUNT_IN_XL = 6;
 
     private final IntentFilter mFilter;
     private final BroadcastReceiver mReceiver;
