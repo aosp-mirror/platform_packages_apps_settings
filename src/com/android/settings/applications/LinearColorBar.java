@@ -16,7 +16,7 @@ import android.widget.LinearLayout;
 
 public class LinearColorBar extends LinearLayout {
     static final int LEFT_COLOR = 0xffa0a0a0;
-    static final int MIDDLE_COLOR = 0xff7070ff;
+    static final int MIDDLE_COLOR = 0xffa0a0a0;
     static final int RIGHT_COLOR = 0xffa0c0a0;
 
     private float mRedRatio;
@@ -47,6 +47,7 @@ public class LinearColorBar extends LinearLayout {
                 ? 2 : 1;
         mEdgeGradientPaint.setStrokeWidth(mLineWidth);
         mEdgeGradientPaint.setAntiAlias(true);
+        
     }
 
     public void setRatios(float red, float yellow, float green) {
@@ -111,22 +112,33 @@ public class LinearColorBar extends LinearLayout {
             mColorPath.reset();
             mEdgePath.reset();
             if (indicatorLeft < indicatorRight) {
+                final int midTopY = mRect.top;
+                final int midBottomY = 0;
+                final int xoff = 2;
                 mColorPath.moveTo(indicatorLeft, mRect.top);
-                mColorPath.lineTo(-1, 0);
-                mColorPath.lineTo(width, 0);
-                mColorPath.lineTo(indicatorRight, mRect.top);
+                mColorPath.cubicTo(indicatorLeft, midBottomY,
+                        -xoff, midTopY,
+                        -xoff, 0);
+                mColorPath.lineTo(width+xoff-1, 0);
+                mColorPath.cubicTo(width+xoff-1, midTopY,
+                        indicatorRight, midBottomY,
+                        indicatorRight, mRect.top);
                 mColorPath.close();
-                float lineOffset = mLineWidth+.5f;
-                mEdgePath.moveTo(indicatorLeft+lineOffset, mRect.top);
-                mEdgePath.lineTo(-1+lineOffset, 0);
-                mEdgePath.moveTo(indicatorRight-lineOffset, mRect.top);
-                mEdgePath.lineTo(width-lineOffset, 0);
+                final float lineOffset = mLineWidth+.5f;
+                mEdgePath.moveTo(-xoff+lineOffset, 0);
+                mEdgePath.cubicTo(-xoff+lineOffset, midTopY,
+                        indicatorLeft+lineOffset, midBottomY,
+                        indicatorLeft+lineOffset, mRect.top);
+                mEdgePath.moveTo(width+xoff-1-lineOffset, 0);
+                mEdgePath.cubicTo(width+xoff-1-lineOffset, midTopY,
+                        indicatorRight-lineOffset, midBottomY,
+                        indicatorRight-lineOffset, mRect.top);
             }
             mLastInterestingLeft = indicatorLeft;
             mLastInterestingRight = indicatorRight;
         }
 
-        if (!mColorPath.isEmpty()) {
+        if (!mEdgePath.isEmpty()) {
             canvas.drawPath(mEdgePath, mEdgeGradientPaint);
             canvas.drawPath(mColorPath, mColorGradientPaint);
         }
