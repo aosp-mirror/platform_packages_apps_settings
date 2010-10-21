@@ -23,6 +23,7 @@ import com.android.settings.R;
 import com.android.settings.SettingsPreferenceFragment;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -642,9 +643,17 @@ public class WifiSettings extends SettingsPreferenceFragment
             case WifiConfigController.WPS_PBC:
                 mWifiManager.startWpsPbc(mSelectedAccessPoint.bssid);
                 break;
-            case WifiConfigController.WPS_PIN:
+            case WifiConfigController.WPS_PIN_FROM_ACCESS_POINT:
                 int apPin = configController.getWpsPin();
-                mWifiManager.startWpsPin(mSelectedAccessPoint.bssid, apPin);
+                mWifiManager.startWpsWithPinFromAccessPoint(mSelectedAccessPoint.bssid, apPin);
+                break;
+            case WifiConfigController.WPS_PIN_FROM_DEVICE:
+                int pin = mWifiManager.startWpsWithPinFromDevice(mSelectedAccessPoint.bssid);
+                new AlertDialog.Builder(getActivity())
+                .setTitle(R.string.wifi_wps_pin_method_configuration)
+                .setMessage(getResources().getString(R.string.wifi_wps_pin_output, pin))
+                .setPositiveButton(android.R.string.ok, null)
+                .show();
                 break;
             case WifiConfigController.MANUAL:
                 final WifiConfiguration config = configController.getConfig();
