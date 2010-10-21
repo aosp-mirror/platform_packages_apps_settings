@@ -36,6 +36,7 @@ import android.os.StatFs;
 import android.provider.Settings;
 import android.text.format.Formatter;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -43,6 +44,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
 import android.view.animation.AnimationUtils;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.AbsListView;
 import android.widget.AdapterView;
 import android.widget.BaseAdapter;
@@ -57,7 +59,6 @@ import android.widget.AdapterView.OnItemClickListener;
 
 import java.util.ArrayList;
 import java.util.Comparator;
-import java.util.List;
 
 final class CanBeOnSdCardChecker {
     final IPackageManager mPm;
@@ -118,7 +119,7 @@ public class ManageApplications extends TabActivity implements
     
     // constant value that can be used to check return code from sub activity.
     private static final int INSTALLED_APP_DETAILS = 1;
-    
+
     // sort order that can be changed through the menu can be sorted alphabetically
     // or size(descending)
     private static final int MENU_OPTIONS_BASE = 0;
@@ -676,6 +677,18 @@ public class ManageApplications extends TabActivity implements
         }
         return true;
     }
+    
+    @Override
+    public boolean onKeyUp(int keyCode, KeyEvent event) {
+        if (keyCode == KeyEvent.KEYCODE_SEARCH && event.isTracking()) {
+            if (mCurView != VIEW_RUNNING) {
+                ((InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE))
+                        .showSoftInputUnchecked(0, null);
+            }
+            return true;
+        }
+        return super.onKeyUp(keyCode, event);
+    }
 
     public void onItemClick(AdapterView<?> parent, View view, int position,
             long id) {
@@ -738,8 +751,8 @@ public class ManageApplications extends TabActivity implements
             for (int i=0; i<N; i++) {
                 ApplicationsState.AppEntry ae = mApplicationsAdapter.getAppEntry(i);
                 appStorage += ae.codeSize + ae.dataSize;
-                freeStorage += ae.cacheSize;
             }
+            freeStorage += mApplicationsState.sumCacheSizes();
         }
         if (newLabel != null) {
             mStorageChartLabel.setText(newLabel);
@@ -831,6 +844,8 @@ public class ManageApplications extends TabActivity implements
         } else if (TAB_SDCARD.equalsIgnoreCase(tabId)) {
             newOption = FILTER_APPS_SDCARD;
         } else if (TAB_RUNNING.equalsIgnoreCase(tabId)) {
+            ((InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE))
+                    .hideSoftInputFromWindow(getWindow().getDecorView().getWindowToken(), 0);
             selectView(VIEW_RUNNING);
             return;
         } else {

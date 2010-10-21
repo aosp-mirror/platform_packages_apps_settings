@@ -285,6 +285,8 @@ public class BatteryHistoryChart extends View {
             }
         }
         
+        a.recycle();
+        
         mTextPaint.setColor(textColor.getDefaultColor());
         mTextPaint.setTextSize(textSize);
         
