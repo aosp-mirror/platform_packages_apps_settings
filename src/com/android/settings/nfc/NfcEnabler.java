@@ -77,8 +77,7 @@ public class NfcEnabler implements Preference.OnPreferenceChangeListener {
         }
         mContext.registerReceiver(mReceiver, mIntentFilter);
         mCheckbox.setOnPreferenceChangeListener(this);
-        mNfcState = Settings.System.getInt(mContext.getContentResolver(),
-                Settings.System.NFC_ON, 0) != 0;
+        mNfcState = mNfcAdapter.isEnabled();
         mCheckbox.setChecked(mNfcState);
     }
 
@@ -103,9 +102,9 @@ public class NfcEnabler implements Preference.OnPreferenceChangeListener {
                 Log.d(TAG, "Setting NFC enabled state to: " + desiredState);
                 boolean success = false;
                 if (desiredState) {
-                    success = mNfcAdapter.enableTagDiscovery();
+                    success = mNfcAdapter.enable();
                 } else {
-                    success = mNfcAdapter.disableTagDiscovery();
+                    success = mNfcAdapter.disable();
                 }
                 if (success) {
                     Log.d(TAG, "Successfully changed NFC enabled state to " + desiredState);
