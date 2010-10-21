@@ -21,6 +21,7 @@ import android.os.SystemClock;
 import android.text.format.Formatter;
 import android.util.Log;
 
+import java.io.File;
 import java.text.Collator;
 import java.text.Normalizer;
 import java.text.Normalizer.Form;
@@ -66,14 +67,17 @@ public class ApplicationsState {
     }
 
     public static class AppEntry {
-        final String label;
+        final File apkFile;
         final long id;
+        String label;
         long size;
         
         long cacheSize;
         long codeSize;
         long dataSize;
 
+        boolean mounted;
+        
         String getNormalizedLabel() {
             if (normalizedLabel != null) {
                 return normalizedLabel;
@@ -92,12 +96,47 @@ public class ApplicationsState {
         String normalizedLabel;
 
         AppEntry(Context context, ApplicationInfo info, long id) {
-            CharSequence label = info.loadLabel(context.getPackageManager());
-            this.label = label != null ? label.toString() : info.packageName;
+            apkFile = new File(info.sourceDir);
             this.id = id;
             this.info = info;
             this.size = SIZE_UNKNOWN;
             this.sizeStale = true;
+            ensureLabel(context);
+        }
+        
+        void ensureLabel(Context context) {
+            if (this.label == null || !this.mounted) {
+                if (!this.apkFile.exists()) {
+                    this.mounted = false;
+                    this.label = info.packageName;
+                } else {
+                    this.mounted = true;
+                    CharSequence label = info.loadLabel(context.getPackageManager());
+                    this.label = label != null ? label.toString() : info.packageName;
+                }
+            }
+        }
+        
+        boolean ensureIconLocked(Context context, PackageManager pm) {
+            if (this.icon == null) {
+                if (this.apkFile.exists()) {
+                    this.icon = this.info.loadIcon(pm);
+                    return true;
+                } else {
+                    this.mounted = false;
+                    this.icon = context.getResources().getDrawable(
+                            com.android.internal.R.drawable.sym_app_on_sd_unavailable_icon);
+                }
+            } else if (!this.mounted) {
+                // If the app wasn't mounted but is now mounted, reload
+                // its icon.
+                if (this.apkFile.exists()) {
+                    this.mounted = true;
+                    this.icon = this.info.loadIcon(pm);
+                    return true;
+                }
+            }
+            return false;
         }
     }
 
@@ -217,9 +256,11 @@ public class ApplicationsState {
                      return;
                  }
                  boolean avail = Intent.ACTION_EXTERNAL_APPLICATIONS_AVAILABLE.equals(actionStr);
-                 for (String pkgName : pkgList) {
-                     if (avail) addPackage(pkgName);
-                     else removePackage(pkgName);
+                 if (avail) {
+                     for (String pkgName : pkgList) {
+                         removePackage(pkgName);
+                         addPackage(pkgName);
+                     }
                  }
              }
          }
@@ -312,6 +353,13 @@ public class ApplicationsState {
             for (int i=0; i<mAppEntries.size(); i++) {
                 mAppEntries.get(i).sizeStale = true;
             }
+            for (int i=0; i<mApplications.size(); i++) {
+                final ApplicationInfo info = mApplications.get(i);
+                final AppEntry entry = mEntriesMap.get(info.packageName);
+                if (entry != null) {
+                    entry.info = info;
+                }
+            }
             mCurComputingSizePkg = null;
             if (!mBackgroundHandler.hasMessages(BackgroundHandler.MSG_LOAD_ENTRIES)) {
                 mBackgroundHandler.sendEmptyMessage(BackgroundHandler.MSG_LOAD_ENTRIES);
@@ -391,6 +439,7 @@ public class ApplicationsState {
             if (filter == null || filter.filterApp(info)) {
                 synchronized (mEntriesMap) {
                     AppEntry entry = getEntryLocked(info);
+                    entry.ensureLabel(mContext);
                     if (DEBUG) Log.i(TAG, "Using " + info.packageName + ": " + entry);
                     filteredApps.add(entry);
                 }
@@ -438,12 +487,10 @@ public class ApplicationsState {
             return;
         }
         synchronized (entry) {
-            if (entry.icon == null) {
-                entry.icon = entry.info.loadIcon(mPm);
-            }
+            entry.ensureIconLocked(mContext, mPm);
         }
     }
-
+    
     void requestSize(String packageName) {
         synchronized (mEntriesMap) {
             AppEntry entry = mEntriesMap.get(packageName);
@@ -453,6 +500,16 @@ public class ApplicationsState {
         }
     }
 
+    long sumCacheSizes() {
+        long sum = 0;
+        synchronized (mEntriesMap) {
+            for (int i=mAppEntries.size()-1; i>=0; i--) {
+                sum += mAppEntries.get(i).cacheSize;
+            }
+        }
+        return sum;
+    }
+    
     int indexOfApplicationInfoLocked(String pkgName) {
         for (int i=mApplications.size()-1; i>=0; i--) {
             if (mApplications.get(i).packageName.equals(pkgName)) {
@@ -630,16 +687,17 @@ public class ApplicationsState {
                     synchronized (mEntriesMap) {
                         for (int i=0; i<mAppEntries.size() && numDone<2; i++) {
                             AppEntry entry = mAppEntries.get(i);
-                            if (entry.icon == null) {
-                                if (!mRunning) {
-                                    mRunning = true;
-                                    Message m = mMainHandler.obtainMessage(
-                                            MainHandler.MSG_RUNNING_STATE_CHANGED, 1);
-                                    mMainHandler.sendMessage(m);
-                                }
-                                numDone++;
+                            if (entry.icon == null || !entry.mounted) {
                                 synchronized (entry) {
-                                    entry.icon = entry.info.loadIcon(mPm);
+                                    if (entry.ensureIconLocked(mContext, mPm)) {
+                                        if (!mRunning) {
+                                            mRunning = true;
+                                            Message m = mMainHandler.obtainMessage(
+                                                    MainHandler.MSG_RUNNING_STATE_CHANGED, 1);
+                                            mMainHandler.sendMessage(m);
+                                        }
+                                        numDone++;
+                                    }
                                 }
                             }
                         }
