@@ -19,11 +19,10 @@ package com.android.settings.wifi;
 import com.android.settings.R;
 
 import android.app.Activity;
-import android.app.StatusBarManager;
 import android.content.Context;
 import android.net.NetworkInfo.DetailedState;
 import android.os.Bundle;
-import android.util.Log;
+import android.text.TextUtils;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.Window;
@@ -117,6 +116,11 @@ public class WifiSettingsForSetupWizardXL extends Activity implements OnClickLis
             mWifiSettings.onAddNetworkPressed();
             break;
         case R.id.wifi_setup_skip_or_next:
+            if (TextUtils.equals(getString(R.string.wifi_setup_skip), ((Button)view).getText())) {
+                // We don't want to let Wifi enabled when a user press skip without choosing
+                // any access point.
+                mWifiSettings.disableWifi();
+            }
             setResult(Activity.RESULT_OK);
             finish();
             break;

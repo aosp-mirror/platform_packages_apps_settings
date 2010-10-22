@@ -732,4 +732,8 @@ public class WifiSettings extends SettingsPreferenceFragment
             return 0;
         }
     }
+
+    /* package */ void disableWifi() {
+        mWifiManager.setWifiEnabled(false);
+    }
 }
