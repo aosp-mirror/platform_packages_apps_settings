@@ -585,7 +585,7 @@ public class ApplicationsState {
 
     private long getTotalSize(PackageStats ps) {
         if (ps != null) {
-            return ps.cacheSize+ps.codeSize+ps.dataSize;
+            return ps.codeSize+ps.dataSize;
         }
         return SIZE_INVALID;
     }
