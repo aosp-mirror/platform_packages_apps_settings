@@ -59,7 +59,7 @@ public class BatteryHistoryChart extends View {
 
         void init(int width) {
             if (width > 0) {
-                mTicks = new int[width+2];
+                mTicks = new int[width*2];
             } else {
                 mTicks = null;
             }
@@ -68,7 +68,7 @@ public class BatteryHistoryChart extends View {
         }
 
         void addTick(int x, int bin) {
-            if (bin != mLastBin) {
+            if (bin != mLastBin && mNumTicks < mTicks.length) {
                 mTicks[mNumTicks] = x | bin << CHART_DATA_BIN_SHIFT;
                 mNumTicks++;
                 mLastBin = bin;
@@ -284,6 +284,8 @@ public class BatteryHistoryChart extends View {
                     break;
             }
         }
+        
+        a.recycle();
         
         mTextPaint.setColor(textColor.getDefaultColor());
         mTextPaint.setTextSize(textSize);

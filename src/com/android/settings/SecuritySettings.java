@@ -36,10 +36,11 @@ import android.os.SystemProperties;
 import android.preference.CheckBoxPreference;
 import android.preference.ListPreference;
 import android.preference.Preference;
+import android.preference.Preference.OnPreferenceChangeListener;
 import android.preference.PreferenceCategory;
+import android.preference.PreferenceGroup;
 import android.preference.PreferenceManager;
 import android.preference.PreferenceScreen;
-import android.preference.Preference.OnPreferenceChangeListener;
 import android.provider.Settings;
 import android.security.Credentials;
 import android.security.KeyStore;
@@ -78,15 +79,17 @@ public class SecuritySettings extends SettingsPreferenceFragment
     private CheckBoxPreference mShowPassword;
 
     // Location Settings
+    private static final String LOCATION_CATEGORY = "location_category";
     private static final String LOCATION_NETWORK = "location_network";
     private static final String LOCATION_GPS = "location_gps";
     private static final String ASSISTED_GPS = "assisted_gps";
+    private static final String USE_LOCATION = "location_use_for_services";
     private static final String LOCK_AFTER_TIMEOUT_KEY = "lock_after_timeout";
     private static final int SET_OR_CHANGE_LOCK_METHOD_REQUEST = 123;
     private static final int FALLBACK_LOCK_AFTER_TIMEOUT_VALUE = 5000; // compatible with pre-Froyo
 
     // Credential storage
-    private CredentialStorage mCredentialStorage = new CredentialStorage();
+    private final CredentialStorage mCredentialStorage = new CredentialStorage();
 
     // Encrypted file system
     private  CheckBoxPreference mEncryptedFSEnabled;
@@ -94,6 +97,7 @@ public class SecuritySettings extends SettingsPreferenceFragment
     private CheckBoxPreference mNetwork;
     private CheckBoxPreference mGps;
     private CheckBoxPreference mAssistedGps;
+    private CheckBoxPreference mUseLocation;
 
     DevicePolicyManager mDPM;
 
@@ -158,6 +162,22 @@ public class SecuritySettings extends SettingsPreferenceFragment
         mNetwork = (CheckBoxPreference) getPreferenceScreen().findPreference(LOCATION_NETWORK);
         mGps = (CheckBoxPreference) getPreferenceScreen().findPreference(LOCATION_GPS);
         mAssistedGps = (CheckBoxPreference) getPreferenceScreen().findPreference(ASSISTED_GPS);
+        if (GoogleLocationSettingHelper.isAvailable(getActivity())) {
+            // GSF present, Add setting for 'Use My Location'
+            PreferenceGroup locationCat = (PreferenceGroup) root.findPreference(LOCATION_CATEGORY);
+            CheckBoxPreference useLocation = new CheckBoxPreference(getActivity());
+            useLocation.setKey(USE_LOCATION);
+            useLocation.setTitle(R.string.use_location_title);
+            useLocation.setSummaryOn(R.string.use_location_summary_enabled);
+            useLocation.setSummaryOff(R.string.use_location_summary_disabled);
+            useLocation.setChecked(
+                    GoogleLocationSettingHelper.getUseLocationForServices(getActivity())
+                    == GoogleLocationSettingHelper.USE_LOCATION_FOR_SERVICES_ON);
+            useLocation.setPersistent(false);
+            useLocation.setOnPreferenceChangeListener(this);
+            locationCat.addPreference(useLocation);
+            mUseLocation = useLocation;
+        }
 
         PreferenceManager pm = getPreferenceManager();
 
@@ -398,7 +418,7 @@ public class SecuritySettings extends SettingsPreferenceFragment
         private static final int DLG_RESET = DLG_PASSWORD + 1;
         private static final int DLG_ENABLE_EFS = DLG_RESET + 1;
 
-        private KeyStore mKeyStore = KeyStore.getInstance();
+        private final KeyStore mKeyStore = KeyStore.getInstance();
         private int mState;
         private boolean mSubmit = false;
         private boolean mExternal = false;
@@ -748,6 +768,14 @@ public class SecuritySettings extends SettingsPreferenceFragment
             } catch (NumberFormatException e) {
                 Log.e("SecuritySettings", "could not persist lockAfter timeout setting", e);
             }
+        } else if (preference == mUseLocation) {
+            boolean newValue = value == null ? false : (Boolean) value;
+            GoogleLocationSettingHelper.setUseLocationForServices(getActivity(), newValue);
+            // We don't want to change the value immediately here, since the user may click
+            // disagree in the dialog that pops up. When the activity we just launched exits, this
+            // activity will be restated and the new value re-read, so the checkbox will get its
+            // new value then.
+            return false;
         }
         return true;
     }

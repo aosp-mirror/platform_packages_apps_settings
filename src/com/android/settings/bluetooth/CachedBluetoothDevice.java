@@ -300,7 +300,7 @@ public class CachedBluetoothDevice implements Comparable<CachedBluetoothDevice> 
         LocalBluetoothProfileManager profileManager =
             LocalBluetoothProfileManager.getProfileManager(mLocalManager, profile);
         CachedBluetoothDeviceManager cachedDeviceManager = mLocalManager.getCachedDeviceManager();
-        Set<BluetoothDevice> devices = profileManager.getConnectedDevices();
+        List<BluetoothDevice> devices = profileManager.getConnectedDevices();
         if (devices == null) return;
         for (BluetoothDevice btDevice : devices) {
             CachedBluetoothDevice cachedDevice = cachedDeviceManager.findDevice(btDevice);

@@ -196,10 +196,9 @@ public class LocalBluetoothManager {
 
                 // If we are playing music, don't scan unless forced.
                 if (mBluetoothA2dp != null) {
-                    Set<BluetoothDevice> sinks = mBluetoothA2dp.getConnectedDevices();
+                    List<BluetoothDevice> sinks = mBluetoothA2dp.getConnectedDevices();
                     if (sinks.size() > 0) {
-                        BluetoothDevice sink = sinks.toArray(new BluetoothDevice[sinks.size()])[0];
-                        if (mBluetoothA2dp.isA2dpPlaying(sink)) return;
+                        if (mBluetoothA2dp.isA2dpPlaying(sinks.get(0))) return;
                     }
                 }
             }
