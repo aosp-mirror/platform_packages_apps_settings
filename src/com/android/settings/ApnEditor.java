@@ -234,6 +234,8 @@ public class ApnEditor extends PreferenceActivity
             int authVal = mCursor.getInt(AUTH_TYPE_INDEX);
             if (authVal != -1) {
                 mAuthType.setValueIndex(authVal);
+            } else {
+                mAuthType.setValue(null);
             }
 
         }
