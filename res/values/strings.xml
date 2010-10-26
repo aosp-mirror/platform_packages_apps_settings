@@ -782,7 +782,14 @@
 
     <!-- Bluetooth settings: The title of the preference (list item) that initiates a scan for devices -->
     <string name="bluetooth_preference_scan_title">Scan for devices</string>
-
+    <!-- Bluetooth settings: The title of the preference (list item) that finds nearby devices [CHAR LIMIT=30] -->
+    <string name="bluetooth_preference_find_nearby_title">Find nearby devices</string>
+    <!-- Bluetooth settings: The sub heading for device settings. [CHAR LIMIT=30] -->
+    <string name="bluetooth_preference_device_settings">Device settings</string>
+    <!-- Bluetooth settings: The sub heading for paired devices. [CHAR LIMIT=30] -->
+    <string name="bluetooth_preference_paired_devices">Paired devices</string>
+    <!-- Bluetooth settings: The sub heading for found devices when scanning. [CHAR LIMIT=30] -->
+    <string name="bluetooth_preference_found_devices">Found devices</string>
     <!-- Bluetooth settings.  Context menu item for a device.  Action will connect to all profiles on the device. -->
     <string name="bluetooth_device_context_connect">Connect</string>
     <!-- Bluetooth settings.  Context menu item for a device.  Action will disconnect from all profiles on the device. -->
@@ -823,12 +830,18 @@
 
     <!-- Bluetooth settings.  Connection options screen.  The title of the screen. -->
     <string name="bluetooth_device_advanced_title"><xliff:g id="device_name">%1$s</xliff:g> options</string>
+    <!-- Bluetooth settings. Connection options screen. Title of device actions section. [CHAR LIMIT=30] -->
+    <string name="bluetooth_device_advanced_device_actions_title">Device actions</string>
     <!-- Bluetooth settings.  Connection options screen.  The title of the checkbox that controls whether the device is in "online" mode or "offline" mode.  This essentially is the checkbox that controls whether any checks / unchecks on a profile should be applied immediately, or next time the device is connected. -->
     <string name="bluetooth_device_advanced_online_mode_title">Connect</string>
     <!-- Bluetooth settings.  Connection options screen.  The summary of the online mode checkbox.  This describes what the setting does in the context of the screen. -->
     <string name="bluetooth_device_advanced_online_mode_summary">Connect to Bluetooth device</string>
     <!-- Bluetooth settings.  Connection options screen.  The title of the header that is above all of the profiles. -->
     <string name="bluetooth_device_advanced_profile_header_title">Profiles</string>
+    <!-- Bluetooth settings. Connection options screen. Title for option to rename the device. [CHAR LIMIT=30] -->
+    <string name="bluetooth_device_advanced_rename_device">Rename device</string>
+    <!-- Bluetooth settings. Connection options screen. Title for checkbox to enable incoming file transfers [CHAR LIMIT=30] -->
+    <string name="bluetooth_device_advanced_enable_opp_title">Allow incoming file transfers</string>
     <!-- Bluetooth settings.  Connection options screen.  The summary for the A2DP checkbox preference when A2DP is connected. -->
     <string name="bluetooth_a2dp_profile_summary_connected">Connected to media audio</string>
     <!-- Bluetooth settings.  Connection options screen.  The summary for the headset checkbox preference when headset is connected. -->

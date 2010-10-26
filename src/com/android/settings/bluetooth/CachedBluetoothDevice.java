@@ -16,28 +16,31 @@
 
 package com.android.settings.bluetooth;
 
+import com.android.settings.R;
+
+import com.android.settings.SettingsPreferenceFragment;
+import com.android.settings.bluetooth.LocalBluetoothProfileManager.Profile;
+
 import android.app.AlertDialog;
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothClass;
 import android.bluetooth.BluetoothDevice;
 import android.content.Context;
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.content.res.Resources;
+import android.graphics.drawable.Drawable;
 import android.os.ParcelUuid;
 import android.os.SystemClock;
+import android.preference.Preference;
+import android.preference.PreferenceActivity;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.ContextMenu;
 import android.view.Menu;
 import android.view.MenuItem;
 
-import com.android.settings.R;
-import com.android.settings.bluetooth.LocalBluetoothProfileManager.Profile;
-
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
 
 /**
  * CachedBluetoothDevice represents a remote Bluetooth device. It contains
@@ -63,6 +66,7 @@ public class CachedBluetoothDevice implements Comparable<CachedBluetoothDevice> 
     private String mName;
     private short mRssi;
     private BluetoothClass mBtClass;
+    private Context mContext;
 
     private List<Profile> mProfiles = new ArrayList<Profile>();
 
@@ -138,6 +142,7 @@ public class CachedBluetoothDevice implements Comparable<CachedBluetoothDevice> 
         }
 
         mDevice = device;
+        mContext = context;
 
         fillData();
     }
@@ -655,6 +660,20 @@ public class CachedBluetoothDevice implements Comparable<CachedBluetoothDevice> 
         return SettingsBtStatus.getPairingStatusSummary(getBondState());
     }
 
+    public List<Drawable> getProfileIcons() {
+        ArrayList<Drawable> drawables = new ArrayList<Drawable>();
+
+        for (Profile profile : mProfiles) {
+            LocalBluetoothProfileManager profileManager = LocalBluetoothProfileManager
+                    .getProfileManager(mLocalManager, profile);
+            int iconResource = profileManager.getDrawableResource();
+            if (iconResource != 0) {
+                drawables.add(mContext.getResources().getDrawable(iconResource));
+            }
+        }
+
+        return drawables;
+    }
     /**
      * We have special summaries when particular profiles are connected. This
      * checks for those states and returns an applicable summary.
@@ -781,7 +800,7 @@ public class CachedBluetoothDevice implements Comparable<CachedBluetoothDevice> 
      *
      * @param item The item that was clicked.
      */
-    public void onContextItemSelected(MenuItem item) {
+    public void onContextItemSelected(MenuItem item, SettingsPreferenceFragment fragment) {
         switch (item.getItemId()) {
             case CONTEXT_ITEM_DISCONNECT:
                 disconnect();
@@ -796,19 +815,32 @@ public class CachedBluetoothDevice implements Comparable<CachedBluetoothDevice> 
                 break;
 
             case CONTEXT_ITEM_CONNECT_ADVANCED:
-                Intent intent = new Intent();
-                // Need an activity context to open this in our task
-                Context context = mLocalManager.getForegroundActivity();
-                if (context == null) {
-                    // Fallback on application context, and open in a new task
-                    context = mLocalManager.getContext();
-                    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                }
-                intent.setClass(context, ConnectSpecificProfilesActivity.class);
-                intent.putExtra(ConnectSpecificProfilesActivity.EXTRA_DEVICE, mDevice);
-                context.startActivity(intent);
+            onClickedAdvancedOptions(fragment);
                 break;
         }
+    }
+
+    public void onClickedAdvancedOptions(SettingsPreferenceFragment fragment) {
+        // TODO: Verify if there really is a case when there's no foreground
+        // activity
+
+        // Intent intent = new Intent();
+        // // Need an activity context to open this in our task
+        // Context context = mLocalManager.getForegroundActivity();
+        // if (context == null) {
+        // // Fallback on application context, and open in a new task
+        // context = mLocalManager.getContext();
+        // intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        // }
+        // intent.setClass(context, ConnectSpecificProfilesActivity.class);
+        // intent.putExtra(ConnectSpecificProfilesActivity.EXTRA_DEVICE,
+        // mDevice);
+        // context.startActivity(intent);
+        Preference pref = new Preference(fragment.getActivity());
+        pref.setTitle(getName());
+        pref.setFragment(DeviceProfilesSettings.class.getName());
+        pref.getExtras().putParcelable(DeviceProfilesSettings.EXTRA_DEVICE, mDevice);
+        ((PreferenceActivity) fragment.getActivity()).onPreferenceStartFragment(fragment, pref);
     }
 
     public void registerCallback(Callback callback) {

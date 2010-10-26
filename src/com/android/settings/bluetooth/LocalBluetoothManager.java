@@ -47,7 +47,7 @@ public class LocalBluetoothManager {
     private static final String SHARED_PREFERENCES_NAME = "bluetooth_settings";
 
     /** Singleton instance. */
-    private static LocalBluetoothManager INSTANCE;
+    private static LocalBluetoothManager sInstance;
     private boolean mInitialized;
 
     private Context mContext;
@@ -87,17 +87,17 @@ public class LocalBluetoothManager {
 
     public static LocalBluetoothManager getInstance(Context context) {
         synchronized (LocalBluetoothManager.class) {
-            if (INSTANCE == null) {
-                INSTANCE = new LocalBluetoothManager();
+            if (sInstance == null) {
+                sInstance = new LocalBluetoothManager();
             }
 
-            if (!INSTANCE.init(context)) {
+            if (!sInstance.init(context)) {
                 return null;
             }
 
-            LocalBluetoothProfileManager.init(INSTANCE);
+            LocalBluetoothProfileManager.init(sInstance);
 
-            return INSTANCE;
+            return sInstance;
         }
     }
 

@@ -31,12 +31,10 @@ import android.os.ParcelUuid;
 import android.util.Log;
 
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 
 /**
  * LocalBluetoothProfileManager is an abstract class defining the basic
@@ -123,7 +121,8 @@ public abstract class LocalBluetoothProfileManager {
         }
     }
 
-    private static LinkedList<ServiceListener> mServiceListeners = new LinkedList<ServiceListener>();
+    private static LinkedList<ServiceListener> mServiceListeners =
+            new LinkedList<ServiceListener>();
 
     public static void addServiceListener(ServiceListener l) {
         mServiceListeners.add(l);
@@ -220,6 +219,10 @@ public abstract class LocalBluetoothProfileManager {
     }
 
     public abstract boolean isProfileReady();
+
+    public int getDrawableResource() {
+        return R.drawable.ic_bt_headphones_a2dp;
+    }
 
     // TODO: int instead of enum
     public enum Profile {
@@ -346,6 +349,11 @@ public abstract class LocalBluetoothProfileManager {
         @Override
         public boolean isProfileReady() {
             return true;
+        }
+
+        @Override
+        public int getDrawableResource() {
+            return R.drawable.ic_bt_headphones_a2dp;
         }
     }
 
@@ -489,6 +497,11 @@ public abstract class LocalBluetoothProfileManager {
                 return SettingsBtStatus.CONNECTION_STATUS_UNKNOWN;
             }
         }
+
+        @Override
+        public int getDrawableResource() {
+            return R.drawable.ic_bt_headset_hfp;
+        }
     }
 
     /**
@@ -562,6 +575,12 @@ public abstract class LocalBluetoothProfileManager {
             default:
                 return SettingsBtStatus.CONNECTION_STATUS_UNKNOWN;
             }
+        }
+
+        @Override
+        public int getDrawableResource() {
+            // TODO:
+            return 0;
         }
     }
 
@@ -645,6 +664,12 @@ public abstract class LocalBluetoothProfileManager {
                 mService.setInputDevicePriority(device, BluetoothInputDevice.PRIORITY_OFF);
             }
         }
+
+        @Override
+        public int getDrawableResource() {
+            // TODO:
+            return 0;
+        }
     }
 
     private static class PanProfileManager extends LocalBluetoothProfileManager {
@@ -720,6 +745,12 @@ public abstract class LocalBluetoothProfileManager {
         @Override
         public void setPreferred(BluetoothDevice device, boolean preferred) {
             return;
+        }
+
+        @Override
+        public int getDrawableResource() {
+            // TODO:
+            return 0;
         }
     }
 }
