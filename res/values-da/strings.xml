@@ -45,13 +45,16 @@
     <string name="radioInfo_display_asu" msgid="1422248392727818082">"asu"</string>
     <string name="radioInfo_lac" msgid="8415219164758307156">"LAC"</string>
     <string name="radioInfo_cid" msgid="4362599198392643138">"CID"</string>
-    <string name="sdcard_unmount" msgid="3364184561355611897">"Demonter SD-kort"</string>
-    <string name="sdcard_format" msgid="362497552060004057">"Formater SD-kort"</string>
+    <string name="sdcard_unmount" product="nosdcard" msgid="6325292633327972272">"Demonter USB-lager"</string>
+    <string name="sdcard_unmount" product="default" msgid="3364184561355611897">"Demonter SD-kort"</string>
+    <string name="sdcard_format" product="nosdcard" msgid="6285310523155166716">"Slet USB-lager"</string>
+    <string name="sdcard_format" product="default" msgid="6713185532039187532">"Slet SD-kort"</string>
     <string name="small_font" msgid="2295331917424072635">"Lille"</string>
     <string name="medium_font" msgid="2068475425515133701">"Normal"</string>
     <string name="large_font" msgid="599055175160971446">"Stor"</string>
     <string name="font_size_save" msgid="3450855718056759095">"OK"</string>
-    <string name="sdcard_setting" msgid="5922637503871474866">"SD-kort"</string>
+    <string name="sdcard_setting" product="nosdcard" msgid="8281011784066476192">"USB-lager"</string>
+    <string name="sdcard_setting" product="default" msgid="5922637503871474866">"SD-kort"</string>
     <string name="battery_info_status_label" msgid="8109155295509700309">"Batteristatus:"</string>
     <string name="battery_info_power_label" msgid="7465140230991349382">"Strømstik:"</string>
     <string name="battery_info_scale_label" msgid="3649763192389778437">"Batteriskala:"</string>
@@ -84,6 +87,8 @@
     <string name="battery_info_health_dead" msgid="1725917445762829059">"Dødt"</string>
     <string name="battery_info_health_over_voltage" msgid="2420269351664490121">"Over spænding:"</string>
     <string name="battery_info_health_unspecified_failure" msgid="6347021103185471590">"Ukendt fejl"</string>
+    <!-- no translation found for battery_info_health_cold (3835692786176707318) -->
+    <skip />
     <string name="bluetooth" msgid="5549625000628014477">"Bluetooth"</string>
     <string name="bluetooth_visibility" msgid="2930835434091839916">"Søgbar"</string>
     <string name="bluetooth_is_discoverable" msgid="1205694503775884903">"Søgbar i <xliff:g id="DISCOVERABLE_TIME_PERIOD">%1$s</xliff:g> sekunder ..."</string>
@@ -130,23 +135,18 @@
     <string name="intent_sender_startactivity_text" msgid="5080516029580421895">"Start <xliff:g id="ACTIVITY">activity</xliff:g>"</string>
     <string name="intent_sender_resource_label" msgid="6963659726895482829">"<xliff:g id="RESOURCE">Resource</xliff:g>:"</string>
     <string name="intent_sender_account_label" msgid="465210404475603404">"Konto:"</string>
-    <!-- no translation found for proxy_settings_title (6262282922722097473) -->
-    <skip />
-    <!-- no translation found for proxy_settings_summary (7898928000758321486) -->
-    <skip />
+    <string name="proxy_settings_title" msgid="6262282922722097473">"Proxyindstillinger"</string>
+    <string name="proxy_settings_summary" msgid="7898928000758321486">"Angiv den globale HTTP-proxy og udeladelseslister"</string>
     <string name="proxy_clear_text" msgid="5555400754952012657">"Ryd"</string>
     <string name="proxy_port_label" msgid="2623639656638472491">"Port"</string>
-    <!-- no translation found for proxy_exclusionlist_label (204409815790850313) -->
-    <skip />
+    <string name="proxy_exclusionlist_label" msgid="204409815790850313">"Ingen proxy for"</string>
     <string name="proxy_defaultView_text" msgid="6387985519141433291">"Gendan standarder"</string>
-    <!-- no translation found for proxy_action_text (2957063145357903951) -->
-    <skip />
+    <string name="proxy_action_text" msgid="2957063145357903951">"Udført"</string>
     <string name="proxy_hostname_label" msgid="7531298584350977540">"Værtsnavn"</string>
     <string name="proxy_error" msgid="8926675299638611451">"Bemærk"</string>
     <string name="proxy_error_dismiss" msgid="4993171795485460060">"OK"</string>
     <string name="proxy_error_invalid_host" msgid="9120776460063182119">"Det indtastede værtsnavn er ikke gyldigt."</string>
-    <!-- no translation found for proxy_error_invalid_exclusion_list (4753810662233875893) -->
-    <skip />
+    <string name="proxy_error_invalid_exclusion_list" msgid="4753810662233875893">"Den indtastede udeladelsesliste er ikke korrekt formateret. Indtast en kommaseparareret liste over udeladte domæner."</string>
     <string name="proxy_error_empty_port" msgid="3525734169948795417">"Du skal udfylde portfeltet."</string>
     <string name="proxy_error_empty_host_set_port" msgid="2451694104858226781">"Portfeltet skal være tomt, hvis værtsfeltet er tomt."</string>
     <string name="proxy_error_invalid_port" msgid="1816315605424943626">"Den indtastede port er ikke gyldig."</string>
@@ -189,16 +189,21 @@
     <string name="sdcard_changes_instructions" msgid="1364712901180556244">"Ændringerne træder i kraft, når USB-kablet tilsluttes igen"</string>
     <string name="sdcard_settings_screen_mass_storage_text" msgid="3741220147296482474">"Aktiver USB-masselagring"</string>
     <string name="sdcard_settings_total_bytes_label" msgid="9184160745785062144">"Bytes i alt:"</string>
-    <string name="sdcard_settings_not_present_status" msgid="6666688653496819947">"Der er intet SD-kort"</string>
+    <string name="sdcard_settings_not_present_status" product="nosdcard" msgid="2902787003418172125">"USB-lager ikke monteret"</string>
+    <string name="sdcard_settings_not_present_status" product="default" msgid="6666688653496819947">"Der er intet SD-kort"</string>
     <string name="sdcard_settings_available_bytes_label" msgid="763232429899373001">"Ledige bytes:"</string>
-    <string name="sdcard_settings_mass_storage_status" msgid="4786433969313661655">"SD-kortet bruges som en masselagringsenhed"</string>
-    <string name="sdcard_settings_unmounted_status" msgid="3812022095683863087">"SD-kortet kan nu fjernes sikkert"</string>
-    <string name="sdcard_settings_bad_removal_status" msgid="5145797653495907970">"SD-kortet blev fjernet, mens det stadig var i brug."</string>
+    <string name="sdcard_settings_mass_storage_status" product="nosdcard" msgid="2736378870889777857">"USB bruges som masselager"</string>
+    <string name="sdcard_settings_mass_storage_status" product="default" msgid="4786433969313661655">"SD-kortet bruges som en masselagringsenhed"</string>
+    <string name="sdcard_settings_unmounted_status" product="nosdcard" msgid="7503300818792750913">"USB-lager kan fjernes sikkert"</string>
+    <string name="sdcard_settings_unmounted_status" product="default" msgid="3812022095683863087">"SD-kortet kan nu fjernes sikkert"</string>
+    <string name="sdcard_settings_bad_removal_status" product="nosdcard" msgid="7761390725880773697">"USB-lager fjernet under brug!"</string>
+    <string name="sdcard_settings_bad_removal_status" product="default" msgid="5145797653495907970">"SD-kortet blev fjernet, mens det stadig var i brug."</string>
     <string name="sdcard_settings_used_bytes_label" msgid="8820289486001170836">"Brugte bytes:"</string>
-    <string name="sdcard_settings_scanning_status" msgid="2763464949274455656">"Scanner SD-kort efter medier ..."</string>
-    <string name="sdcard_settings_read_only_status" msgid="5706115860484118911">"SD-kortet er monteret som skrivebeskyttet"</string>
-    <!-- no translation found for skip_label (47510779345218297) -->
-    <skip />
+    <string name="sdcard_settings_scanning_status" product="nosdcard" msgid="7503429447676219564">"Scanner USB-lager for medier…"</string>
+    <string name="sdcard_settings_scanning_status" product="default" msgid="2763464949274455656">"Scanner SD-kort efter medier ..."</string>
+    <string name="sdcard_settings_read_only_status" product="nosdcard" msgid="3771783090621312312">"USB-lager er skrivebeskyttet"</string>
+    <string name="sdcard_settings_read_only_status" product="default" msgid="5706115860484118911">"SD-kortet er monteret som skrivebeskyttet"</string>
+    <string name="skip_label" msgid="47510779345218297">"Skip"</string>
     <string name="next_label" msgid="4693520878012668114">"Næste"</string>
     <string name="language_picker_title" msgid="5349877711342869319">"Sprog"</string>
     <string name="activity_picker_label" msgid="4910700713930693329">"Vælg aktivitet"</string>
@@ -206,10 +211,12 @@
     <string name="battery_info_label" msgid="4132685016148679403">"Batterioplysninger"</string>
     <string name="display_label" msgid="7403874003169865762">"Visning"</string>
     <string name="phone_info_label" msgid="2127552523124277664">"Telefonoplysninger"</string>
-    <string name="sd_card_settings_label" msgid="5743100901106177102">"SD-kort"</string>
+    <string name="sd_card_settings_label" product="nosdcard" msgid="8101475181301178428">"USB-lager"</string>
+    <string name="sd_card_settings_label" product="default" msgid="5743100901106177102">"SD-kort"</string>
     <string name="proxy_settings_label" msgid="3271174136184391743">"Proxyindstillinger"</string>
     <string name="cancel" msgid="6859253417269739139">"Annuller"</string>
     <string name="settings_label" msgid="1626402585530130914">"Indstillinger"</string>
+    <string name="settings_label_launcher" msgid="8344735489639482340">"Indstillinger"</string>
     <string name="settings_shortcut" msgid="3672145147925639262">"Indstillinger"</string>
     <string name="airplane_mode" msgid="8837269988154128601">"Flytilstand"</string>
     <string name="airplane_mode_summary" msgid="3154817401368780988">"Deaktiver alle trådløse forbindelser"</string>
@@ -229,18 +236,12 @@
     <string name="sum_carrier_select" msgid="6648929373316748020">"Vælg en netværksudbyder"</string>
     <string name="date_and_time_settings_title" msgid="3350640463596716780">"Dato og tid"</string>
     <string name="date_and_time_settings_summary" msgid="2435705040205950381">"Angiv dato, tid, tidszone og formater"</string>
-    <!-- no translation found for date_time_auto (7076906458515908345) -->
-    <skip />
-    <!-- no translation found for date_time_auto_summaryOn (4609619490075140381) -->
-    <skip />
-    <!-- no translation found for date_time_auto_summaryOff (8698762649061882791) -->
-    <skip />
-    <!-- no translation found for zone_auto (334783869352026648) -->
-    <skip />
-    <!-- no translation found for zone_auto_summaryOn (6142830927278458314) -->
-    <skip />
-    <!-- no translation found for zone_auto_summaryOff (2597745783162041390) -->
-    <skip />
+    <string name="date_time_auto" msgid="7076906458515908345">"Automatisk dato og tid"</string>
+    <string name="date_time_auto_summaryOn" msgid="4609619490075140381">"Brug netværkets tid"</string>
+    <string name="date_time_auto_summaryOff" msgid="8698762649061882791">"Brug netværkets tid"</string>
+    <string name="zone_auto" msgid="334783869352026648">"Automatisk tidszone"</string>
+    <string name="zone_auto_summaryOn" msgid="6142830927278458314">"Brug netværkets tidszone"</string>
+    <string name="zone_auto_summaryOff" msgid="2597745783162041390">"Brug netværkets tidszone"</string>
     <string name="date_time_24hour" msgid="1193032284921000063">"Brug 24-timers format"</string>
     <string name="date_time_set_time" msgid="5716856602742530696">"Angiv tid"</string>
     <string name="date_time_set_timezone" msgid="5045627174274377814">"Vælg tidszone"</string>
@@ -250,6 +251,10 @@
     <string name="zone_list_menu_sort_by_timezone" msgid="2720190443744884114">"Sorter efter tidszone"</string>
     <string name="lock_after_timeout" msgid="9100576335787336455">"Lås enheden efter timeout"</string>
     <string name="lock_after_timeout_summary" msgid="5751027735105958453">"Juster forsinkelsen, inden enheden automatisk låses"</string>
+    <!-- no translation found for show_owner_info_on_lockscreen_label (5074906168357568434) -->
+    <skip />
+    <!-- no translation found for owner_info_settings_title (2723190010708381889) -->
+    <skip />
     <string name="security_settings_title" msgid="5168491784222013179">"Placering og sikkerhed"</string>
     <string name="location_security_settings_title" msgid="4624434296446625554">"Indstillinger for placering og sikkerhed"</string>
     <string name="security_settings_summary" msgid="967393342537986570">"Angiv Min placering, oplåsning af skærmen, låsning af SIM-kort og oplysningslagring"</string>
@@ -316,8 +321,8 @@
     <string name="lockpassword_ok_label" msgid="313822574062553672">"OK"</string>
     <string name="lockpassword_cancel_label" msgid="8818529276331121899">"Annuller"</string>
     <string name="device_admin_title" msgid="3562216873644263804">"Enhedsadministration"</string>
-    <string name="manage_device_admin" msgid="3864120111085199551">"Vælg enhedsadministratorer"</string>
-    <string name="manage_device_admin_summary" msgid="915390201809231575">"Tilføj eller fjern enhedsadministratorer"</string>
+    <!-- outdated translation 3864120111085199551 -->     <string name="manage_device_admin" msgid="5059296715271077278">"Vælg enhedsadministratorer"</string>
+    <!-- outdated translation 915390201809231575 -->     <string name="manage_device_admin_summary" msgid="7672709110988761075">"Tilføj eller fjern enhedsadministratorer"</string>
     <string name="bluetooth_quick_toggle_title" msgid="1037056952714061893">"Bluetooth"</string>
     <string name="bluetooth_quick_toggle_summary" msgid="5293641680139873341">"Slå Bluetooth til"</string>
     <string name="bluetooth_settings" msgid="2725796451253089609">"Indstillinger for Bluetooth"</string>
@@ -376,6 +381,11 @@
     <string name="bluetooth_dock_settings_headset" msgid="1001821426078644650">"Som højttalertelefon"</string>
     <string name="bluetooth_dock_settings_a2dp" msgid="8791004998846630574">"Til musik og medier"</string>
     <string name="bluetooth_dock_settings_remember" msgid="5551459057010609115">"Husk indstillinger"</string>
+    <string name="nfc_quick_toggle_title" msgid="6769159366307299004">"NFC"</string>
+    <string name="nfc_quick_toggle_summary" msgid="1988408027741447231">"Brug Near Field Communication til at læse og udveksle tags"</string>
+    <!-- no translation found for nfc_toggle_error (2233172102497535522) -->
+    <!-- no translation found for nfc_toggle_error (8998642457947607263) -->
+    <skip />
     <string name="wifi_quick_toggle_title" msgid="874495178395350104">"Wi-Fi"</string>
     <string name="wifi_quick_toggle_summary" msgid="1047950931623694366">"Slå Wi-Fi til"</string>
     <string name="wifi_settings" msgid="4746946030627213196">"Indstillinger for Wi-Fi"</string>
@@ -395,9 +405,11 @@
     <string name="wifi_menu_connect" msgid="4996220309848349408">"Opret forbindelse til netværk"</string>
     <string name="wifi_menu_forget" msgid="8736964302477327114">"Glem netværk"</string>
     <string name="wifi_menu_modify" msgid="2068554918652440105">"Rediger netværk"</string>
-    <!-- no translation found for wifi_network_setup (7974851890019344870) -->
+    <string name="wifi_network_setup" msgid="7974851890019344870">"Netværkskonfiguration"</string>
+    <string name="wifi_wps_pin" msgid="5471842298708321115">"Indtast pin via adgangspunkt"</string>
+    <!-- no translation found for wifi_wps_pin_method_configuration (9019042137789692817) -->
     <skip />
-    <!-- no translation found for wifi_wps_pin (5471842298708321115) -->
+    <!-- no translation found for wifi_wps_pin_output (8682102965680650853) -->
     <skip />
     <string name="wifi_ssid" msgid="641393708309146745">"Netværk-SSID"</string>
     <string name="wifi_security" msgid="6603611185592956936">"Sikkerhed"</string>
@@ -412,18 +424,17 @@
     <string name="wifi_eap_identity" msgid="4359453783379679103">"Identitet"</string>
     <string name="wifi_eap_anonymous" msgid="2989469344116577955">"Anonym identitet"</string>
     <string name="wifi_password" msgid="5948219759936151048">"Adgangskode"</string>
-    <!-- no translation found for wifi_show_password (6461249871236968884) -->
-    <skip />
-    <!-- no translation found for wifi_ip_settings (3359331401377059481) -->
-    <skip />
+    <string name="wifi_show_password" msgid="6461249871236968884">"Vis adgangskode"</string>
+    <string name="wifi_ip_settings" msgid="3359331401377059481">"IP-indstillinger"</string>
     <string name="wifi_unchanged" msgid="3410422020930397102">"(uændret)"</string>
     <string name="wifi_unspecified" msgid="5431501214192991253">"(ikke specificeret)"</string>
     <string name="wifi_remembered" msgid="8426719916135950136">"Husket"</string>
     <string name="wifi_disabled" msgid="2104752038187543712">"Deaktiveret"</string>
     <string name="wifi_not_in_range" msgid="1136191511238508967">"Ikke inden for rækkevidde"</string>
-    <string name="wifi_secured" msgid="6759903183748011566">"Sikret med <xliff:g id="WIFI_SECURITY">%1$s</xliff:g>"</string>
-    <!-- no translation found for wifi_secured_with_wps (1822538701086256007) -->
+    <!-- no translation found for wifi_open_with_wps (2606968531452521147) -->
     <skip />
+    <string name="wifi_secured" msgid="6759903183748011566">"Sikret med <xliff:g id="WIFI_SECURITY">%1$s</xliff:g>"</string>
+    <string name="wifi_secured_with_wps" msgid="1822538701086256007">"Sikret med <xliff:g id="WIFI_SECURITY">%1$s</xliff:g> (WPS tilgængelig)"</string>
     <string name="wifi_secured_with_status" msgid="6489317496506267302">"<xliff:g id="WIFI_STATUS">%2$s</xliff:g>, sikret med <xliff:g id="WIFI_SECURITY">%1$s</xliff:g>"</string>
     <string name="wifi_connect" msgid="1076622875777072845">"Forbind"</string>
     <string name="wifi_forget" msgid="8168174695608386644">"Glem"</string>
@@ -442,11 +453,19 @@
     <string name="wifi_ip_settings_titlebar" msgid="4345739031248760326">"IP-indstillinger"</string>
     <string name="wifi_ip_settings_menu_save" msgid="7296724066102908366">"Gem"</string>
     <string name="wifi_ip_settings_menu_cancel" msgid="6582567330136502340">"Annuller"</string>
-    <string name="wifi_ip_settings_invalid_ip" msgid="8057085083985255580">"Indtast en gyldig IP-adresse."</string>
+    <!-- no translation found for wifi_ip_settings_invalid_ip_address (6387653152103405443) -->
+    <skip />
+    <!-- no translation found for wifi_ip_settings_invalid_gateway (6383012465511093067) -->
+    <skip />
+    <!-- no translation found for wifi_ip_settings_invalid_dns (3428867750550854065) -->
+    <skip />
+    <!-- no translation found for wifi_ip_settings_invalid_network_prefix_length (8145730615716855433) -->
+    <skip />
     <string name="wifi_dns1" msgid="7344118050720080045">"DNS 1"</string>
     <string name="wifi_dns2" msgid="1368601006824882659">"DNS 2"</string>
     <string name="wifi_gateway" msgid="163914742461092086">"Gateway"</string>
-    <string name="wifi_netmask" msgid="4520635321425529085">"Netmask"</string>
+    <!-- no translation found for wifi_network_prefix_length (3028785234245085998) -->
+    <skip />
     <string name="wifi_tether_checkbox_text" msgid="6961605862058056788">"Bærbart Wi-Fi-hotspot"</string>
     <string name="wifi_tether_enabled_subtext" msgid="8948641212931906143">"Det bærbare hotspot <xliff:g id="NETWORK_SSID">%1$s</xliff:g> er aktivt"</string>
     <string name="wifi_tether_failed_subtext" msgid="2654888578056042315">"Fejl ved bærbart Wi-Fi-hotspot"</string>
@@ -489,7 +508,7 @@
     <string name="sound_effects_enable_title" msgid="3197313718929122833">"Lyd ved valg"</string>
     <string name="sound_effects_enable_summary_on" msgid="6154141289879491329">"Afspil lyd, når der foretages et valg på skærmen"</string>
     <string name="sound_effects_enable_summary_off" msgid="3447739581759560125">"Afspil lyd, når der foretages et valg på skærmen"</string>
-    <string name="lock_sounds_enable_title" msgid="1575990840389107141">"Lyde ved skærmlås "</string>
+    <string name="lock_sounds_enable_title" msgid="1575990840389107141">"Lyde ved skærmlås"</string>
     <string name="lock_sounds_enable_summary_on" msgid="145741024028391473">"Afspil lyde, når skærmen låses og låses op"</string>
     <string name="lock_sounds_enable_summary_off" msgid="8481243116223542804">"Afspil lyde, når skærmen låses og låses op"</string>
     <string name="haptic_feedback_enable_title" msgid="6311736559245411290">"Feedback ved berøring"</string>
@@ -558,11 +577,11 @@
     <string name="device_status_activity_title" msgid="1411201799384697904">"Status"</string>
     <string name="device_status" msgid="607405385799807324">"Status"</string>
     <string name="device_status_summary" msgid="2599162787451519618">"Telefonnummer, signal osv."</string>
-    <!-- no translation found for storage_settings (4211799979832404953) -->
-    <skip />
-    <!-- no translation found for storage_settings_title (8746016738388094064) -->
-    <skip />
-    <string name="storage_settings_summary" msgid="9176693537325988610">"Demonter SD-kort, vis ledig lagerplads"</string>
+    <!-- outdated translation 6761505449439392808 -->     <string name="storage_settings" product="nosdcard" msgid="8758910337658683955">"Lag. af delt og sik. huk."</string>
+    <string name="storage_settings" product="default" msgid="4211799979832404953">"Lagerplads"</string>
+    <string name="storage_settings_title" msgid="8746016738388094064">"Indstillinger for lager"</string>
+    <string name="storage_settings_summary" product="nosdcard" msgid="3543813623294870759">"Demonter USB-lager, vis ledig lagerplads"</string>
+    <string name="storage_settings_summary" product="default" msgid="9176693537325988610">"Demonter SD-kort, vis ledig lagerplads"</string>
     <string name="status_number" msgid="5123197324870153205">"Mit telefonnummer"</string>
     <string name="status_min_number" msgid="3519504522179420597">"MIN"</string>
     <string name="status_prl_version" msgid="8499039751817386529">"PRL-version"</string>
@@ -578,26 +597,39 @@
     <string name="status_unavailable" msgid="7862009036663793314">"Utilgængelig"</string>
     <string name="status_up_time" msgid="7294859476816760399">"Oppetid"</string>
     <string name="status_awake_time" msgid="2393949909051183652">"Opvågningstid"</string>
-    <string name="internal_memory" msgid="1130932766236387454">"Intern lagerplads på telefonen"</string>
-    <string name="sd_memory" msgid="151871913888051515">"SD-kort"</string>
+    <string name="internal_memory" msgid="9129595691484260784">"Internt lager"</string>
+    <string name="sd_memory" product="nosdcard" msgid="2510246194083052841">"USB-lager"</string>
+    <string name="sd_memory" product="default" msgid="151871913888051515">"SD-kort"</string>
     <string name="memory_available" msgid="418542433817289474">"Ledig plads"</string>
     <string name="memory_size" msgid="6629067715017232195">"Plads i alt"</string>
-    <string name="sd_eject" msgid="6915293408836853020">"Demonter SD-kort"</string>
-    <string name="sd_eject_summary" msgid="3315557796211542962">"Demonter SD-kortet til sikker fjernelse"</string>
+    <string name="sd_eject" product="nosdcard" msgid="4988563376492400073">"Demonter delt hukommelse"</string>
+    <string name="sd_eject" product="default" msgid="6915293408836853020">"Demonter SD-kort"</string>
+    <string name="sd_eject_summary" product="nosdcard" msgid="5009296896648072891">"Demonter det interne USB-lager"</string>
+    <string name="sd_eject_summary" product="default" msgid="3300599435073550246">"Demonter SD-kortet for at fjerne det sikkert"</string>
     <string name="ptp_mode" msgid="3954718349875117695">"Aktiver PTP-tilstand"</string>
     <string name="ptp_mode_summary" msgid="8709697530987890394">"Vises på USB som en PTP-kameraenhed i stedet for en MTP-enhed"</string>
-    <string name="sd_insert_summary" msgid="2048640010381803841">"Insæt et SD-kort, der skal monteres"</string>
-    <string name="sd_mount" msgid="5940523765187704135">"Montér SD-kort"</string>
-    <string name="sd_mount_summary" msgid="4936591681679097699">"Montér SD-kortet"</string>
-    <string name="sd_format" msgid="5448738337382712203">"Formater SD-kort"</string>
-    <string name="sd_format_summary" msgid="6616491027883134004">"Formater (slet) SD-kortet"</string>
+    <string name="sd_insert_summary" product="nosdcard" msgid="5264016886409577313">"Isæt USB-lager til mont."</string>
+    <string name="sd_insert_summary" product="default" msgid="2048640010381803841">"Insæt et SD-kort, der skal monteres"</string>
+    <!-- outdated translation 2160896630836199702 -->     <string name="sd_mount" product="nosdcard" msgid="8966695015677343116">"Isæt delt hukommelse"</string>
+    <string name="sd_mount" product="default" msgid="5940523765187704135">"Montér SD-kort"</string>
+    <!-- outdated translation 6733254203291665551 -->     <string name="sd_mount_summary" product="nosdcard" msgid="1794150364965145726">"Monter det interne USB-lager"</string>
+    <string name="sd_mount_summary" product="default" msgid="4936591681679097699">"Montér SD-kortet"</string>
+    <string name="sd_format" product="nosdcard" msgid="2148179271623099054">"Slet USB-lager"</string>
+    <string name="sd_format" product="default" msgid="2576054280507119870">"Slet SD-kort"</string>
+    <string name="sd_format_summary" product="nosdcard" msgid="1504606546865152514">"Sletter alle data på telefonens interne USB-lager, f.eks. musik og billeder."</string>
+    <string name="sd_format_summary" product="default" msgid="915849621390821841">"Sletter alle data på telefonens SD-kort, f.eks. musik og billeder"</string>
     <string name="sd_unavailable" msgid="8580107589533213904">"Utilgængelig"</string>
     <string name="read_only" msgid="6702420168629076340">" (Skrivebeskyttet)"</string>
-    <string name="dlg_confirm_unmount_title" msgid="8612140627310646730">"Demonter SD-kort"</string>
-    <string name="dlg_confirm_unmount_text" msgid="5851214273718817727">"Hvis du demonterer SD-kortet, vil nogle af de programmer, som du bruger, stoppe, og de kan være utilgængelige, indtil du monterer SD-kortet igen."</string>
-    <string name="dlg_error_unmount_title" msgid="4004106918266783081">"Demonteringen af SD-kortet mislykkedes"</string>
-    <string name="dlg_error_unmount_text" msgid="9188972789897713180">"SD-kortet kan ikke demonteres. Prøv igen senere. "</string>
-    <string name="unmount_inform_text" msgid="3213378327712151498">"SD-kortet demonteres. Se status i meddelelsesområdet."</string>
+    <string name="dlg_confirm_unmount_title" product="nosdcard" msgid="2349876662428231297">"Demonter USB-lager"</string>
+    <string name="dlg_confirm_unmount_title" product="default" msgid="8612140627310646730">"Demonter SD-kort"</string>
+    <string name="dlg_confirm_unmount_text" product="nosdcard" msgid="3390169455621185223">"Hvis du demonterer USB-lager, vil nogle af de programmer, som du bruger, stoppe, og de kan være utilgængelige, indtil du monterer USB-lager igen."</string>
+    <string name="dlg_confirm_unmount_text" product="default" msgid="5851214273718817727">"Hvis du demonterer SD-kortet, vil nogle af de programmer, som du bruger, stoppe, og de kan være utilgængelige, indtil du monterer SD-kortet igen."</string>
+    <string name="dlg_error_unmount_title" product="nosdcard" msgid="7695491947411836733">"Demontering af USB mislykkedes"</string>
+    <string name="dlg_error_unmount_title" product="default" msgid="4004106918266783081">"Demonteringen af SD-kortet mislykkedes"</string>
+    <string name="dlg_error_unmount_text" product="nosdcard" msgid="1450864147013376592">"USB-lager kan ikke demonteres. Prøv igen senere."</string>
+    <string name="dlg_error_unmount_text" product="default" msgid="9188972789897713180">"SD-kortet kan ikke demonteres. Prøv igen senere."</string>
+    <string name="unmount_inform_text" product="nosdcard" msgid="7120241136790744265">"USB-lager demonteres."</string>
+    <string name="unmount_inform_text" product="default" msgid="1904212716075458402">"SD-kort bliver demonteret."</string>
     <string name="sd_ejecting_title" msgid="8824572198034365468">"Demontering"</string>
     <string name="sd_ejecting_summary" msgid="2028753069184908491">"Demontering i gang"</string>
     <string name="battery_status_title" msgid="9159414319574976203">"Batteristatus"</string>
@@ -637,21 +669,32 @@
     <string name="restore_default_apn_completed" msgid="3990449939234957281">"Nulstillingen af APN-standardindstillinger er afsluttet"</string>
     <string name="master_clear_title" msgid="5907939616087039756">"Gendannelse af fabriksdata"</string>
     <string name="master_clear_summary" msgid="4986154238001088492">"Sletter alle data på telefonen"</string>
-    <string name="master_clear_desc" msgid="7823268823499739178">"Dette sletter alle data fra din telefon, inklusive :"\n<li>"Din Google-konto"</li>\n<li>"System- og programdata samt indstillinger"</li>\n<li>"Downloadede programmer"</li>\n"Det sletter ikke:"\n<li>"Nuværende systemsoftware og programbundter"</li>\n<li>"SD-kortfiler, som f.eks. musik og fotos"</li></string>
+    <string name="master_clear_desc" product="nosdcard" msgid="2163013814299528247">"Dette sletter alle data fra telefonens "<b>"interne lager"</b>", bl.a.:"\n\n<li>"din Google-konto"</li>\n<li>"system- og programdata og -indstillinger"</li>\n<li>"downloadede programmer"</li>\n\n"Slet musik, billeder og andre brugerdata ved også at slette "<b>"USB-lager"</b>"."\n\n</string>
+    <string name="master_clear_desc" product="default" msgid="1741944496458365969">"Dette sletter alle data fra telefonens "<b>"interne lager"</b>", bl.a. :"\n\n<li>"din Google-konto"</li>\n<li>"system- og programdata og -indstillinger"</li>\n<li>"downloadede programmer"</li>\n\n"Slet musik, billeder og andre brugerdata ved også at slette "<b>"SD-kortet"</b>"."\n\n</string>
+    <string name="erase_external_storage" product="nosdcard" msgid="969364037450286809">"Slet USB-lager"</string>
+    <string name="erase_external_storage" product="default" msgid="1397239046334307625">"Slet SD-kort"</string>
+    <string name="erase_external_storage_description" product="nosdcard" msgid="1657838142707381027">"Slet alle data på telefonens interne USB-lager, f.eks. musik og billeder."</string>
+    <string name="erase_external_storage_description" product="default" msgid="8100175974635894073">"Slet alle data på telefonens SD-kort, f.eks. musik og billeder."</string>
     <string name="master_clear_button_text" msgid="7550632653343157971">"Nulstil telefon"</string>
     <string name="master_clear_final_desc" msgid="6917971132484622696">"Slet alle dine personlige oplysninger og downloadede programmer? Denne handlíng kan ikke fortrydes."</string>
     <string name="master_clear_final_button_text" msgid="5390908019019242910">"Slet alt"</string>
     <string name="master_clear_gesture_prompt" msgid="1428645764883536750">"Tegn dit oplåsningsmønster"</string>
     <string name="master_clear_gesture_explanation" msgid="8901714274312707918">"Du skal tegne dit oplåsningsmønster for at bekræfte, at telefonen nulstilles."</string>
     <string name="master_clear_failed" msgid="8655202125010189406">"Der blev ikke foretaget nogen nulstilling, fordi tjenesten Systemoprydning ikke er tilgængelig."</string>
-    <string name="media_format_title" msgid="4671276096695789895">"Formater SD-kort."</string>
-    <string name="media_format_summary" msgid="3805714639375830120">"Sletter alle data på SD-kortet"</string>
-    <string name="media_format_desc" msgid="1142563222357820834">"Denne handling rydder det SD-kort, der sidder i telefonen. Du mister ALLE data på kortet!"</string>
-    <string name="media_format_button_text" msgid="370856400090190151">"Formater SD-kort"</string>
-    <string name="media_format_final_desc" msgid="1776666694910717198">"Vil du formatere dit SD-kort og slette alle dine medier? Handlingen kan ikke annulleres."</string>
+    <string name="media_format_title" product="nosdcard" msgid="3999653431422767156">"Slet USB-lager"</string>
+    <string name="media_format_title" product="default" msgid="4427528440306787972">"Slet SD-kort"</string>
+    <string name="media_format_summary" product="nosdcard" msgid="776603298628082065">"Sletter alle data i USB-lager"</string>
+    <string name="media_format_summary" product="default" msgid="3805714639375830120">"Sletter alle data på SD-kortet"</string>
+    <string name="media_format_desc" product="nosdcard" msgid="4553860683952763905">"Denne handling sletter USB-lager. Du mister "<b>"alle"</b>" data!"</string>
+    <string name="media_format_desc" product="default" msgid="1598627584181935513">"Denne handling rydder SD-kortet. Du mister "<b>"alle"</b>" data på kortet!"</string>
+    <string name="media_format_button_text" product="nosdcard" msgid="6293669371185352810">"Slet USB-lager"</string>
+    <string name="media_format_button_text" product="default" msgid="6721544380069373626">"Slet SD-kort"</string>
+    <string name="media_format_final_desc" product="nosdcard" msgid="8094635533378487255">"Vil du slette USB-lager og alle filer, som er gemt der? Handlingen kan ikke fortrydes!"</string>
+    <string name="media_format_final_desc" product="default" msgid="9015504991522581434">"Vil du slette SD-kort og alle filer, som er gemt der? Handlingen kan ikke fortrydes!"</string>
     <string name="media_format_final_button_text" msgid="4881713344315923175">"Slet alt"</string>
     <string name="media_format_gesture_prompt" msgid="3109349468816856670">"Tegn dit oplåsningsmønster"</string>
-    <string name="media_format_gesture_explanation" msgid="4239529439389660159">"Du skal tegne dit oplåsningsmønster for at bekræfte et SD-kortformat."</string>
+    <string name="media_format_gesture_explanation" product="nosdcard" msgid="1379736318750958338">"Du skal tegne dit oplåsningsmønster for at bekræfte, at du vil slette USB-lager."</string>
+    <string name="media_format_gesture_explanation" product="default" msgid="1681213416497647321">"Du skal tegne dit oplåsningsmønster for at bekræfte, at du vil slette SD-kortet."</string>
     <string name="call_settings_title" msgid="5188713413939232801">"Indstillinger for opkald"</string>
     <string name="call_settings_summary" msgid="7291195704801002886">"Opsæt voicemail, viderestilling af opkald, ventende opkald, opkalds-id"</string>
     <string name="tether_settings_title_usb" msgid="6688416425801386511">"USB-tethering"</string>
@@ -680,10 +723,8 @@
     <string name="bluetooth_tethering_errored_subtext" msgid="1344187103463073993">"Fejl ved Bluetooth-tethering"</string>
     <string name="bluetooth_tethering_overflow_error" msgid="2222060504731415763">"Tethering kan ikke bruges til mere end <xliff:g id="MAXCONNECTION">%1$d</xliff:g> enheder"</string>
     <string name="bluetooth_untether_blank" msgid="2871192409329334813">"Tethering til <xliff:g id="DEVICE_NAME">%1$s</xliff:g> vil blive afbrudt."</string>
-    <!-- no translation found for bluetooth_tether_settings_text (2273368767599539525) -->
-    <skip />
-    <!-- no translation found for bluetooth_tether_settings_subtext (5970033999897946708) -->
-    <skip />
+    <string name="bluetooth_tether_settings_text" msgid="2273368767599539525">"Indstillinger for Bluetooth-tethering"</string>
+    <string name="bluetooth_tether_settings_subtext" msgid="5970033999897946708">"Vælg Bluetooth-enheder til tethering"</string>
     <string name="tethering_help_button_text" msgid="656117495547173630">"Hjælp"</string>
     <string name="network_settings_title" msgid="7967552516440151852">"Mobilnetværk"</string>
     <string name="network_settings_summary" msgid="5149750850846813553">"Angiv indstillinger for roaming, netværk, APN\'er"</string>
@@ -697,6 +738,11 @@
     <string name="assisted_gps" msgid="4649317129586736885">"Brug assisteret GPS"</string>
     <string name="assisted_gps_enabled" msgid="8751899609589792803">"Brug serveren til at assistere GPS (fjern markering for at mindske netværksforbrug)"</string>
     <string name="assisted_gps_disabled" msgid="6982698333968010748">"Brug serveren til at assistere GPS (fjern markering for at forbedre GPS-ydelsen)"</string>
+    <!-- outdated translation 5447030582538504247 -->     <string name="use_location_title" msgid="3214740644957841179">"Brug Min placering"</string>
+    <!-- no translation found for use_location_summary_disabled (1876901471649359806) -->
+    <skip />
+    <!-- no translation found for use_location_summary_enabled (984549156918597265) -->
+    <skip />
     <string name="about_settings" msgid="1743378368185371685">"Om telefonen"</string>
     <string name="about_settings_summary" msgid="3302263393543848667">"Vis juridiske oplysninger, telefonstatus, softwareversion"</string>
     <string name="legal_information" msgid="5769301644270604095">"Juridiske oplysninger"</string>
@@ -785,15 +831,21 @@
     <string name="unknown" msgid="1592123443519355854">"Ukendte"</string>
     <string name="sort_order_alpha" msgid="1410278099123670628">"Sorter efter navn"</string>
     <string name="sort_order_size" msgid="7024513286636502362">"Sorter efter størrelse"</string>
+    <string name="show_running_services" msgid="5736278767975544570">"Vis kørende tjenester"</string>
+    <string name="show_background_processes" msgid="2009840211972293429">"Cachelagrede processer"</string>
     <string name="manage_space_text" msgid="8852711522447794676">"Administrer plads"</string>
     <string name="filter" msgid="2018011724373033887">"Filter"</string>
     <string name="filter_dlg_title" msgid="6507663329723966854">"Vælg indstillinger for filtret"</string>
     <string name="filter_apps_all" msgid="5142129378749391876">"Alle"</string>
     <string name="filter_apps_third_party" msgid="7786348047690140979">"Overført"</string>
     <string name="filter_apps_running" msgid="7767071454371350486">"Kørende"</string>
-    <string name="filter_apps_onsdcard" msgid="1477351142334784771">"På SD-kort"</string>
+    <string name="filter_apps_onsdcard" product="nosdcard" msgid="4843063154701023349">"USB-lager"</string>
+    <string name="filter_apps_onsdcard" product="default" msgid="1477351142334784771">"På SD-kort"</string>
     <string name="disabled" msgid="9206776641295849915">"Deaktiveret"</string>
     <string name="no_applications" msgid="5190227407135243904">"Ingen programmer."</string>
+    <string name="internal_storage" msgid="1584700623164275282">"Internt lager"</string>
+    <string name="sd_card_storage" product="nosdcard" msgid="2673203150465132465">"USB-lager"</string>
+    <string name="sd_card_storage" product="default" msgid="7623513618171928235">"SD-kortlager"</string>
     <string name="recompute_size" msgid="7722567982831691718">"Beregner størrelse igen ..."</string>
     <string name="clear_data_dlg_title" msgid="4470209520936375508">"Slet"</string>
     <string name="clear_data_dlg_text" msgid="8368035073300828451">"Alle dette programs data slettes permanent. Det omfatter alle filer, indstillinger, konti, databaser osv."</string>
@@ -813,7 +865,8 @@
     <string name="version_text" msgid="9189073826278676425">"version <xliff:g id="VERSION_NUM">%1$s</xliff:g>"</string>
     <string name="move_app" msgid="5042838441401731346">"Flyt"</string>
     <string name="move_app_to_internal" msgid="3895430471913858185">"Flyt til telefon"</string>
-    <string name="move_app_to_sdcard" msgid="1143379049903056407">"Flyt til SD-kort"</string>
+    <string name="move_app_to_sdcard" product="nosdcard" msgid="4350451696315265420">"Flyt til USB-lager"</string>
+    <string name="move_app_to_sdcard" product="default" msgid="1143379049903056407">"Flyt til SD-kort"</string>
     <string name="moving" msgid="6431016143218876491">"Flytter"</string>
     <string name="insufficient_storage" msgid="8566913062094452962">"Der er ikke nok lagerplads tilbage."</string>
     <string name="does_not_exist" msgid="837163572898468245">"Programmet eksisterer ikke."</string>
@@ -827,17 +880,18 @@
     <string name="app_install_location_title" msgid="2068975150026852168">"Foretrukken installationsplacering"</string>
     <string name="app_install_location_summary" msgid="879753854530300436">"Skift den foretrukne installationsplacering for nye programmer."</string>
     <string name="storageuse_settings_title" msgid="5657014373502630403">"Lagerforbrug"</string>
-    <!-- no translation found for storageuse_settings_summary (2556057379120846792) -->
-    <skip />
+    <string name="storageuse_settings_summary" msgid="2556057379120846792">"Vis lagerplads, der bruges af programmer"</string>
     <string name="runningservices_settings_title" msgid="8097287939865165213">"Kørende tjenester"</string>
     <string name="runningservices_settings_summary" msgid="854608995821032748">"Vis og kontroller kørende tjenester"</string>
     <string name="service_restarting" msgid="2242747937372354306">"Genstarter"</string>
+    <string name="cached" msgid="1059590879740175019">"Cachelagret baggrundsproces"</string>
     <string name="no_running_services" msgid="2059536495597645347">"Intet kører."</string>
     <string name="service_started_by_app" msgid="6575184738671598131">"Startet af program."</string>
     <!-- no translation found for service_client_name (4037193625611815517) -->
     <skip />
-    <string name="service_background_processes" msgid="4939976652114824214">"<xliff:g id="MEMORY">%1$s</xliff:g> ledig"</string>
-    <string name="service_foreground_processes" msgid="2474726487867913314">"<xliff:g id="MEMORY">%1$s</xliff:g> i brug"</string>
+    <string name="service_background_processes" msgid="6844156253576174488">"<xliff:g id="MEMORY">%1$s</xliff:g> ledig"</string>
+    <string name="service_foreground_processes" msgid="7583975676795574276">"<xliff:g id="MEMORY">%1$s</xliff:g> brugt"</string>
+    <string name="memory" msgid="6609961111091483458">"RAM"</string>
     <!-- no translation found for service_process_name (4098932168654826656) -->
     <skip />
     <string name="running_processes_item_description_s_s" msgid="5790575965282023145">"<xliff:g id="NUMPROCESS">%1$d</xliff:g> proces og <xliff:g id="NUMSERVICES">%2$d</xliff:g> tjeneste"</string>
@@ -852,12 +906,17 @@
     <string name="service_manage" msgid="1876642087421959194">"Indstillinger"</string>
     <string name="service_stop_description" msgid="3261798282116866961">"Denne tjeneste er startet af dens program. Hvis du stopper den, mislykkes programmet."</string>
     <string name="heavy_weight_stop_description" msgid="6855241582643136019">"Dette program kan ikke stoppes på en sikker måde. Det kan slette noget af dit seneste arbejde."</string>
+    <string name="background_process_stop_description" msgid="1728354083304746737">"Dette er en gammel programproces, der beholdes for større hastighed, hvis der bliver brug for den igen. Der er normalt ingen grund til at stoppe den."</string>
     <string name="service_manage_description" msgid="7050092269951613102">"<xliff:g id="CLIENT_NAME">%1$s</xliff:g>: aktuelt i brug. Tryk på Indstillinger for at håndtere."</string>
     <string name="main_running_process_description" msgid="929204645380391397">"Den hovedproces, der er i brug."</string>
     <string name="process_service_in_use_description" msgid="8993335064403217080">"Tjenesten <xliff:g id="COMP_NAME">%1$s</xliff:g> er i brug."</string>
     <string name="process_provider_in_use_description" msgid="5586603325677678940">"Udbyderen <xliff:g id="COMP_NAME">%1$s</xliff:g> er i brug."</string>
+    <string name="runningservicedetails_stop_dlg_title" msgid="4253292537154337233">"Stop systemtjeneste?"</string>
+    <string name="runningservicedetails_stop_dlg_text" msgid="6929716497425738387">"Er du sikker på, at du vil stoppe denne systemtjeneste? Hvis du gør, kan nogle af funktionerne på din telefon holde op med at fungere korrekt, indtil du slukker og tænder igen."</string>
     <string name="language_settings" msgid="502219872342167227">"Sprog og tastatur"</string>
     <string name="language_keyboard_settings_title" msgid="3455826933385341107">"Indstillinger for sprog og tastatur"</string>
+    <string name="language_settings_category" msgid="2288258489940617043">"Sprogindstillinger"</string>
+    <string name="keyboard_settings_category" msgid="7060453865544070642">"Indstillinger for tastatur"</string>
     <string name="phone_language" msgid="1165758957501090679">"Vælg sprog"</string>
     <string name="phone_language_summary" msgid="3871309445655554211"></string>
     <string name="auto_replace" msgid="6199184757891937822">"Automatisk erstatning"</string>
@@ -897,9 +956,13 @@
     <string name="input_method" msgid="5434026103176856164">"Inputmetode"</string>
     <string name="input_methods_settings_summary" msgid="7571173442946675205">"Administrer valgmuligheder for tekstinput"</string>
     <string name="input_methods_settings_label_format" msgid="6002887604815693322">"<xliff:g id="IME_NAME">%1$s</xliff:g>-indstillinger"</string>
+    <!-- no translation found for input_methods_and_subtype_enabler_title (6850705060511001699) -->
+    <skip />
+    <!-- no translation found for input_methods_and_subtype_enabler_title_format (2977431588856991351) -->
+    <skip />
     <string name="onscreen_keyboard_settings_summary" msgid="5841558383556238653">"Indstillinger for skærmens tastatur"</string>
-    <string name="builtin_keyboard_settings_title" msgid="8169889453770863227">"Enhedens tastatur"</string>
-    <string name="builtin_keyboard_settings_summary" msgid="6404687907454621637">"Indstillinger for indbygget tastatur"</string>
+    <string name="builtin_keyboard_settings_title" msgid="5274990495405941804">"Indbygget tastatur"</string>
+    <string name="builtin_keyboard_settings_summary" msgid="7990296351888096836">"Indstillinger for indbygget fysisk tastatur"</string>
     <string name="development_settings_title" msgid="6719732334835420989">"Udvikling"</string>
     <string name="development_settings_summary" msgid="2151320488701538355">"Angiv indstillinger for programudvikling"</string>
     <string name="enable_adb" msgid="7982306934419797485">"USB-fejlretning"</string>
@@ -931,16 +994,11 @@
     <string name="accessibility_service_security_warning" msgid="4066258132331302670">"Denne tilgængelighedstjeneste vil muligvis være i stand til at indsamle al den tekst, du indtaster, inklusive personlige data, kreditkortoplysninger undtagen adgangskoder. Den kan også registrere dine interaktioner med brugergrænsefladen. Den kommer fra programmet <xliff:g id="ACCESSIBILITY_SERVICE_NAME">%1$s</xliff:g>. Vil du aktivere denne tilgængelighedstjeneste?"</string>
     <string name="accessibility_service_disable_warning" msgid="8930591383312775132">"Deaktiver tilgængelighed?"</string>
     <string name="accessibility_service_no_apps_title" msgid="898893674114288531">"Der blev ikke fundet programmer med relateret tilgængelighed"</string>
-    <!-- no translation found for accessibility_service_no_apps_message (2663371323410332529) -->
-    <skip />
-    <!-- no translation found for accessibility_script_injection_category (8649951751131431904) -->
-    <skip />
-    <!-- no translation found for accessibility_script_injection_enabled (6927896081016611012) -->
-    <skip />
-    <!-- no translation found for accessibility_script_injection_enabled_summary (3629525134901617621) -->
-    <skip />
-    <!-- no translation found for accessibility_script_injection_security_warning (9078893361741942109) -->
-    <skip />
+    <string name="accessibility_service_no_apps_message" msgid="2663371323410332529">"Du har ingen tilgængelighedsprogrammer."\n\n"Du kan downloade en skærmlæser på Android Marked."\n\n"Klik på OK for at installere skærmlæseren."</string>
+    <string name="accessibility_script_injection_category" msgid="8649951751131431904">"Tilgængelighedsscripts"</string>
+    <string name="accessibility_script_injection_enabled" msgid="6927896081016611012">"Download tilgængelighedsscripts"</string>
+    <string name="accessibility_script_injection_enabled_summary" msgid="3629525134901617621">"Tillad, at programmer henter tilgængelighedsscripts fra Google"</string>
+    <string name="accessibility_script_injection_security_warning" msgid="9078893361741942109">"Nogle programmer kan bede Google om at downloade scripts til din telefon, som gør deres indhold mere tilgængeligt. Vil du tillade, at Google installerer tilgængelighedsscripts på din telefon?"</string>
     <string name="accessibility_power_button_category" msgid="8545885236482339928">"Afbryderknap"</string>
     <string name="accessibility_power_button_ends_call" msgid="7698764194501089533">"Afbryderknappen afslutter opkaldet"</string>
     <string name="accessibility_power_button_ends_call_summary" msgid="8878097632186291462">"Hvis du trykker på Sluk under et opkald, afsluttes opkaldet i stedet for at slukke skærmen"</string>
@@ -953,14 +1011,14 @@
     <string name="battery_stats_charging_label" msgid="4223311142875178785">"Oplader"</string>
     <string name="battery_stats_screen_on_label" msgid="7150221809877509708">"Skærm til"</string>
     <string name="battery_stats_gps_on_label" msgid="1193657533641951256">"GPS slået til"</string>
-    <string name="battery_stats_wifi_running_label" msgid="4100552585961214960">"Wi-Fi"</string>
+    <string name="battery_stats_wifi_running_label" msgid="3093545080361658269">"Wi-Fi"</string>
     <string name="battery_stats_wake_lock_label" msgid="1908942681902324095">"Aktiv"</string>
     <string name="battery_stats_phone_signal_label" msgid="6822042940376636775">"Telefonsignal"</string>
     <!-- no translation found for battery_stats_last_duration (1535831453827905957) -->
     <skip />
     <string name="awake" msgid="387122265874485088">"Enhedens opvågningstid"</string>
-    <string name="wifi_on_time" msgid="4630925382578609056">"Wi-Fi til tiden"</string>
-    <string name="bluetooth_on_time" msgid="4478515071957280711">"Wi-Fi til tiden"</string>
+    <string name="wifi_on_time" msgid="6310209835617490616">"Wi-Fi til tiden"</string>
+    <string name="bluetooth_on_time" msgid="6157799524996162271">"Wi-Fi til tiden"</string>
     <string name="usage_name_percent" msgid="7976919382448235858">"<xliff:g id="NAME">%1$s</xliff:g> -  <xliff:g id="NUMBER">%2$s</xliff:g><xliff:g id="PERCENT">%%</xliff:g>"</string>
     <string name="details_title" msgid="7564809986329021063">"Oplysninger om batteriforbrug"</string>
     <string name="details_subtitle" msgid="32593908269911734">"Brugsdetaljer"</string>
@@ -976,8 +1034,7 @@
     <string name="usage_type_cpu_foreground" msgid="6500579611933211831">"CPU forgrund"</string>
     <string name="usage_type_wake_lock" msgid="5125438890233677880">"Hold aktiv"</string>
     <string name="usage_type_gps" msgid="7989688715128160790">"GPS"</string>
-    <!-- no translation found for usage_type_wifi_running (8234997940652067049) -->
-    <skip />
+    <string name="usage_type_wifi_running" msgid="8234997940652067049">"Wi-Fi aktiv"</string>
     <string name="usage_type_phone" msgid="9108247984998041853">"Telefon"</string>
     <string name="usage_type_data_send" msgid="2857401966985425427">"Data sendt"</string>
     <string name="usage_type_data_recv" msgid="7251090882025234185">"Data modtaget"</string>
@@ -989,7 +1046,7 @@
     <string name="battery_action_app_details" msgid="3275013531871113681">"Programoplysninger"</string>
     <string name="battery_action_app_settings" msgid="350562653472577250">"Indstillinger for programmer"</string>
     <string name="battery_action_display" msgid="5302763261448580102">"Indstillinger for visning"</string>
-    <string name="battery_action_wifi" msgid="5452076674659927993">"Indstillinger for Wi-Fi"</string>
+    <string name="battery_action_wifi" msgid="2272741639606146903">"Indstillinger for Wi-Fi"</string>
     <string name="battery_action_bluetooth" msgid="8374789049507723142">"Indstillinger for Bluetooth"</string>
     <string name="battery_desc_voice" msgid="8980322055722959211">"Batteri brugt af stemmeopkald"</string>
     <string name="battery_desc_standby" msgid="3009080001948091424">"Batteri brugt, når telefon ikke er aktiv"</string>
@@ -1142,8 +1199,10 @@
     <string name="credentials_access_summary" msgid="319662078718574168">"Giv programmer adgang til sikre certifikater og andre oplysninger"</string>
     <string name="credentials_unlock" msgid="1463040326264133844">"Indtast adgangskode"</string>
     <string name="credentials_unlock_hint" msgid="594679530407918031">"Indtast adgangskoden til oplysningslagringen."</string>
-    <string name="credentials_install_certificates" msgid="177337517568022236">"Installer fra SD-kort"</string>
-    <string name="credentials_install_certificates_summary" msgid="7737001268684193093">"Installer krypterede certifikater fra SD-kortet"</string>
+    <string name="credentials_install_certificates" product="nosdcard" msgid="619171634797689906">"Installer fra USB-lager"</string>
+    <string name="credentials_install_certificates" product="default" msgid="177337517568022236">"Installer fra SD-kort"</string>
+    <string name="credentials_install_certificates_summary" product="nosdcard" msgid="8920330112631198575">"Installer krypt. cert. fra USB"</string>
+    <string name="credentials_install_certificates_summary" product="default" msgid="7737001268684193093">"Installer krypterede certifikater fra SD-kortet"</string>
     <string name="credentials_set_password" msgid="9104473585811899989">"Angiv adgangskode"</string>
     <string name="credentials_set_password_summary" msgid="8287876917562085701">"Angiv eller skift adgangskode til oplysningslagringen"</string>
     <string name="credentials_reset" msgid="9170150870552453457">"Ryd lager"</string>
@@ -1180,11 +1239,11 @@
     <string name="backup_section_title" msgid="8856083167469467588">"Sikkerhedskopiering og gendannelse"</string>
     <string name="personal_data_section_title" msgid="7815209034443782061">"Personlige oplysninger"</string>
     <string name="backup_data_title" msgid="1239105919852668016">"Sikkerhedskopier mine data"</string>
-    <string name="backup_data_summary" msgid="5662190190240860035">"Sikkerhedskopier mine indstillinger og andre programdata."</string>
+    <string name="backup_data_summary" msgid="6515285107793232815">"Sikkerhedskopier programdata, Wi-Fi-adgangskoder og andre indstillinger på Googles servere"</string>
     <string name="auto_restore_title" msgid="5397528966329126506">"Automatisk gendannelse"</string>
-    <string name="auto_restore_summary" msgid="6867766474057290177">"Hvis jeg geninstallerer et program, skal sikkerhedskopierede indstillinger eller andre data gendannes."</string>
+    <string name="auto_restore_summary" msgid="83177150536734378">"Hvis jeg geninstallerer et program, skal sikkerhedskopierede indstillinger eller andre data gendannes"</string>
     <string name="backup_erase_dialog_title" msgid="3438255037256586237">"Sikkerhedskopi"</string>
-    <string name="backup_erase_dialog_message" msgid="2948090854996352245">"Er du sikker på, at du vil holde op med at sikkerhedskopiere dine indstillinger og programdata og slette alle kopier på Googles servere?"</string>
+    <string name="backup_erase_dialog_message" msgid="7766283133557587608">"Er du sikker på, at du vil afbryde sikkerhedskopieringen af dine Wi-Fi-adgangskoder, bogmærker og andre indstillinger og slette alle kopier på Googles servere?"</string>
     <string name="device_admin_settings_title" msgid="1335557832906433309">"Enhedsadministrationsindstillinger"</string>
     <string name="active_device_admin_msg" msgid="6930903262612422111">"Enhedsadministrator"</string>
     <string name="remove_device_admin" msgid="3596845261596451437">"Deaktiver"</string>
@@ -1206,35 +1265,24 @@
     <string name="wifi_setup_refresh_list" msgid="3411615711486911064">"Opdater liste"</string>
     <string name="wifi_setup_skip" msgid="6661541841684895522">"Spring over"</string>
     <string name="wifi_setup_next" msgid="3388694784447820477">"Næste"</string>
+    <string name="wifi_setup_status_scanning" msgid="7424598483871053657">"Scanner netværk..."</string>
     <string name="wifi_setup_status_select_network" msgid="4438531984292574854">"Tryk for at vælge netværk"</string>
     <string name="wifi_setup_status_existing_network" msgid="6394925174802598186">"Opret forbindelse til eksisterende netværk"</string>
-    <!-- no translation found for wifi_setup_status_edit_network (6582036394332822032) -->
-    <skip />
+    <string name="wifi_setup_status_edit_network" msgid="6582036394332822032">"Angiv netværkskonfiguration"</string>
     <string name="wifi_setup_status_new_network" msgid="7468952850452301083">"Opret forbindelse til nyt netværk"</string>
     <string name="wifi_setup_status_connecting" msgid="2594117697215042584">"Opretter forbindelse..."</string>
-    <string name="wifi_setup_status_connected" msgid="5350876766935146953">"Tilsluttet"</string>
+    <string name="wifi_setup_status_proceed_to_next" msgid="9071951312604559022">"Fortsæt til næste trin"</string>
     <string name="sync_is_failing" msgid="1591561768344128377">"Der er i øjeblikket problemer med synkroniseringen. Den etableres igen om lidt."</string>
-    <!-- no translation found for add_account_label (7811707265834013767) -->
-    <skip />
-    <!-- no translation found for header_general_sync_settings (3487451896424238469) -->
-    <skip />
-    <!-- no translation found for background_data (5779592891375473817) -->
-    <skip />
-    <!-- no translation found for background_data_summary (3630389249212620467) -->
-    <skip />
-    <!-- no translation found for background_data_dialog_title (745974259246047425) -->
-    <skip />
-    <!-- no translation found for background_data_dialog_message (9155730118215371308) -->
-    <skip />
+    <string name="add_account_label" msgid="7811707265834013767">"Tilføj konto"</string>
+    <string name="header_general_sync_settings" msgid="3487451896424238469">"Synkroniseringsindstillinger"</string>
+    <string name="background_data" msgid="5779592891375473817">"Baggrundsdata"</string>
+    <string name="background_data_summary" msgid="3630389249212620467">"Programmer kan altid synkronisere, sende og modtage data"</string>
+    <string name="background_data_dialog_title" msgid="745974259246047425">"Bemærk"</string>
+    <string name="background_data_dialog_message" msgid="9155730118215371308">"Deaktivering af baggrundsdata forlænger batteriets levetid og mindsker databrug. Nogle programmer kan muligvis stadig bruge baggrundsdataforbindelsen."</string>
     <string name="sync_automatically" msgid="7558810110682562376">"Automatisk synkronisering"</string>
-    <!-- no translation found for sync_automatically_summary (6662623174608419931) -->
-    <skip />
-    <!-- no translation found for header_manage_accounts (6869002423884539607) -->
-    <skip />
-    <!-- no translation found for sync_enabled (4551148952179416813) -->
-    <skip />
-    <!-- no translation found for sync_disabled (8511659877596511991) -->
-    <skip />
-    <!-- no translation found for sync_error (5060969083117872149) -->
-    <skip />
+    <string name="sync_automatically_summary" msgid="6662623174608419931">"Programmer synkroniserer data automatisk"</string>
+    <string name="header_manage_accounts" msgid="6869002423884539607">"Administrer konti"</string>
+    <string name="sync_enabled" msgid="4551148952179416813">"Synkronisering til"</string>
+    <string name="sync_disabled" msgid="8511659877596511991">"Synkronisering slået fra"</string>
+    <string name="sync_error" msgid="5060969083117872149">"Synkroniseringsfejl"</string>
 </resources>
