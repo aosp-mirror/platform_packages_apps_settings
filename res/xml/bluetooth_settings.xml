@@ -18,6 +18,9 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:title="@string/bluetooth_settings" >
 
+    <PreferenceCategory
+        android:title="@string/bluetooth_preference_device_settings"/>
+
     <CheckBoxPreference
         android:key="bt_checkbox"
         android:title="@string/bluetooth"
@@ -40,15 +43,16 @@
         android:summaryOff="@string/bluetooth_not_discoverable"
         android:persistent="false" />
 
-    <Preference
-        android:key="bt_scan"
-        android:dependency="bt_checkbox"
-        android:title="@string/bluetooth_preference_scan_title" />
-
-    <com.android.settings.ProgressCategory
+    <PreferenceCategory
         android:key="bt_device_list"
-        android:title="@string/bluetooth_devices"
+        android:title="@string/bluetooth_preference_paired_devices"
         android:dependency="bt_checkbox"
         android:orderingFromXml="false" />
+
+    <Preference
+        android:key="bt_find_nearby"
+        android:dependency="bt_checkbox"
+        android:fragment="com.android.settings.bluetooth.BluetoothSettings$FindNearby"
+        android:title="@string/bluetooth_preference_find_nearby_title" />
 
 </PreferenceScreen>
