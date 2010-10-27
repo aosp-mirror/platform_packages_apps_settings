@@ -92,7 +92,8 @@ public class WifiConfigController implements TextWatcher,
     /* These values come from "wifi_network_setup" resource array */
     public static final int MANUAL = 0;
     public static final int WPS_PBC = 1;
-    public static final int WPS_PIN = 2;
+    public static final int WPS_PIN_FROM_ACCESS_POINT = 2;
+    public static final int WPS_PIN_FROM_DEVICE = 3;
 
     /* These values come from "wifi_proxy_settings" resource array */
     public static final int PROXY_NONE = 0;
@@ -491,14 +492,15 @@ public class WifiConfigController implements TextWatcher,
         int pos = mNetworkSetupSpinner.getSelectedItemPosition();
 
         /* Show pin text input if needed */
-        if (pos == WPS_PIN) {
+        if (pos == WPS_PIN_FROM_ACCESS_POINT) {
             mView.findViewById(R.id.wps_fields).setVisibility(View.VISIBLE);
         } else {
             mView.findViewById(R.id.wps_fields).setVisibility(View.GONE);
         }
 
         /* show/hide manual security fields appropriately */
-        if ((pos == WPS_PIN) || (pos == WPS_PBC)) {
+        if ((pos == WPS_PIN_FROM_ACCESS_POINT) || (pos == WPS_PIN_FROM_DEVICE)
+                || (pos == WPS_PBC)) {
             mView.findViewById(R.id.security_fields).setVisibility(View.GONE);
         } else {
             mView.findViewById(R.id.security_fields).setVisibility(View.VISIBLE);

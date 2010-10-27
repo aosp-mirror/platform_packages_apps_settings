@@ -262,6 +262,19 @@
             </intent-filter>
         </activity-alias>
 
+        <activity-alias android:name="InputMethodAndSubtypeEnabler"
+                        android:label="@string/input_methods_and_subtype_enabler_title"
+                        android:clearTaskOnLaunch="true"
+                        android:targetActivity="Settings">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <action android:name="android.settings.INPUT_METHOD_AND_SUBTYPE_ENABLER" />
+                <category android:name="android.intent.category.VOICE_LAUNCH" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="com.android.settings.SHORTCUT" />
+            </intent-filter>
+        </activity-alias>
+
         <activity android:name="PhysicalKeyboardSettings"
                 android:label="@string/builtin_keyboard_settings_title">
             <intent-filter>

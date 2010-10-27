@@ -119,7 +119,7 @@ class AccessPoint extends Preference {
         ssid = result.SSID;
         bssid = result.BSSID;
         security = getSecurity(result);
-        wpsAvailable = security != SECURITY_NONE && security != SECURITY_EAP &&
+        wpsAvailable = security != SECURITY_EAP &&
                 result.capabilities.contains("WPS");
         networkId = -1;
         mRssi = result.level;
@@ -222,7 +222,11 @@ class AccessPoint extends Preference {
             }
 
             if (security == SECURITY_NONE) {
-                setSummary(status);
+                if (wpsAvailable && mConfig == null) {
+                    setSummary(context.getString(R.string.wifi_open_with_wps));
+                } else {
+                    setSummary(status);
+                }
             } else {
                 String format;
                 if (wpsAvailable && mConfig == null) {
