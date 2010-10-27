@@ -182,8 +182,8 @@ public class WifiSettingsForSetupWizardXL extends Activity implements OnClickLis
                 mIgnoringWifiNotificationCount = 0;
             } else {
                 mProgressText.setText(Summary.get(this, state));
-                setResult(Activity.RESULT_OK);
-                finish();
+                // setResult(Activity.RESULT_OK);
+                // finish();
             }
             break;
         }
