@@ -19,22 +19,31 @@ package com.android.settings.bluetooth;
 import com.android.settings.R;
 
 import android.content.Context;
+import android.graphics.drawable.Drawable;
 import android.preference.Preference;
 import android.util.TypedValue;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
+import android.view.View.OnClickListener;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 
 /**
  * BluetoothDevicePreference is the preference type used to display each remote
  * Bluetooth device in the Bluetooth Settings screen.
  */
-public class BluetoothDevicePreference extends Preference implements CachedBluetoothDevice.Callback {
+public class BluetoothDevicePreference extends Preference implements
+        CachedBluetoothDevice.Callback, OnClickListener {
     private static final String TAG = "BluetoothDevicePreference";
 
     private static int sDimAlpha = Integer.MIN_VALUE;
 
     private CachedBluetoothDevice mCachedDevice;
     private int mAccessibleProfile;
+
+    private ImageView mDeviceSettings;
+    private OnClickListener mOnSettingsClickListener;
 
     /**
      * Cached local copy of whether the device is busy. This is only updated
@@ -64,6 +73,10 @@ public class BluetoothDevicePreference extends Preference implements CachedBluet
 
     public CachedBluetoothDevice getCachedDevice() {
         return mCachedDevice;
+    }
+
+    public void setOnSettingsClickListener(OnClickListener listener) {
+        mOnSettingsClickListener = listener;
     }
 
     @Override
@@ -117,6 +130,34 @@ public class BluetoothDevicePreference extends Preference implements CachedBluet
         ImageView btClass = (ImageView) view.findViewById(R.id.btClass);
         btClass.setImageResource(mCachedDevice.getBtClassDrawable());
         btClass.setAlpha(isEnabled() ? 255 : sDimAlpha);
+
+        mDeviceSettings = (ImageView) view.findViewById(R.id.deviceDetails);
+        if (mOnSettingsClickListener != null) {
+            mDeviceSettings.setOnClickListener(this);
+            mDeviceSettings.setTag(mCachedDevice);
+        } else { // Hide the settings icon and divider
+            mDeviceSettings.setVisibility(View.GONE);
+            ImageView divider = (ImageView) view.findViewById(R.id.divider);
+            if (divider != null) {
+                divider.setVisibility(View.GONE);
+            }
+        }
+
+        LayoutInflater inflater = (LayoutInflater)
+                getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        ViewGroup profilesGroup = (ViewGroup) view.findViewById(R.id.profileIcons);
+        for (Drawable icon : mCachedDevice.getProfileIcons()) {
+            inflater.inflate(R.layout.profile_icon_small, profilesGroup, true);
+            ImageView imageView =
+                    (ImageView) profilesGroup.getChildAt(profilesGroup.getChildCount() - 1);
+            imageView.setImageDrawable(icon);
+        }
+    }
+
+    public void onClick(View v) {
+        if (v == mDeviceSettings) {
+            if (mOnSettingsClickListener != null) mOnSettingsClickListener.onClick(v);
+        }
     }
 
     @Override

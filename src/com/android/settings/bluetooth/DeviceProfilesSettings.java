@@ -16,31 +16,41 @@
 
 package com.android.settings.bluetooth;
 
+import com.android.settings.R;
+import com.android.settings.SettingsPreferenceFragment;
+import com.android.settings.bluetooth.LocalBluetoothProfileManager.Profile;
+
 import android.bluetooth.BluetoothDevice;
-import android.content.Intent;
+import android.content.Context;
 import android.os.Bundle;
 import android.preference.CheckBoxPreference;
+import android.preference.EditTextPreference;
 import android.preference.Preference;
-import android.preference.PreferenceActivity;
 import android.preference.PreferenceGroup;
+import android.preference.PreferenceScreen;
 import android.text.TextUtils;
 import android.util.Log;
+import android.view.View;
 
-import com.android.settings.R;
-import com.android.settings.bluetooth.LocalBluetoothProfileManager.Profile;
+import java.util.HashMap;
 
 /**
  * ConnectSpecificProfilesActivity presents the user with all of the profiles
  * for a particular device, and allows him to choose which should be connected
  * (or disconnected).
  */
-public class ConnectSpecificProfilesActivity extends PreferenceActivity
-        implements CachedBluetoothDevice.Callback, Preference.OnPreferenceChangeListener {
-    private static final String TAG = "ConnectSpecificProfilesActivity";
+public class DeviceProfilesSettings extends SettingsPreferenceFragment
+        implements CachedBluetoothDevice.Callback, Preference.OnPreferenceChangeListener,
+                View.OnClickListener {
+    private static final String TAG = "DeviceProfilesSettings";
 
-    private static final String KEY_ONLINE_MODE = "online_mode";
     private static final String KEY_TITLE = "title";
+    private static final String KEY_RENAME_DEVICE = "rename_device";
     private static final String KEY_PROFILE_CONTAINER = "profile_container";
+    private static final String KEY_UNPAIR = "unpair";
+    private static final String KEY_ALLOW_INCOMING = "allow_incoming";
+
+    private static final String AUTO_CONNECT_KEY_SUFFIX = "X";
 
     public static final String EXTRA_DEVICE = "device";
 
@@ -48,27 +58,21 @@ public class ConnectSpecificProfilesActivity extends PreferenceActivity
     private CachedBluetoothDevice mCachedDevice;
 
     private PreferenceGroup mProfileContainer;
-    private CheckBoxPreference mOnlineModePreference;
-
-    /**
-     * The current mode of this activity and its checkboxes (either online mode
-     * or offline mode). In online mode, user interactions with the profile
-     * checkboxes will also toggle the profile's connectivity. In offline mode,
-     * they will not, and only the preferred state will be saved for the
-     * profile.
-     */
-    private boolean mOnlineMode;
+    private CheckBoxPreference mAllowIncomingPref;
+    private EditTextPreference mDeviceNamePref;
+    private HashMap<String,CheckBoxPreference> mAutoConnectPrefs
+            = new HashMap<String,CheckBoxPreference>();
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         BluetoothDevice device;
         if (savedInstanceState != null) {
             device = savedInstanceState.getParcelable(EXTRA_DEVICE);
         } else {
-            Intent intent = getIntent();
-            device = intent.getParcelableExtra(EXTRA_DEVICE);
+            Bundle args = getArguments();
+            device = args.getParcelable(EXTRA_DEVICE);
         }
 
         if (device == null) {
@@ -76,7 +80,7 @@ public class ConnectSpecificProfilesActivity extends PreferenceActivity
             finish();
         }
 
-        mManager = LocalBluetoothManager.getInstance(this);
+        mManager = LocalBluetoothManager.getInstance(getActivity());
         mCachedDevice = mManager.getCachedDeviceManager().findDevice(device);
         if (mCachedDevice == null) {
             Log.w(TAG, "Device not found, cannot connect to it");
@@ -84,39 +88,43 @@ public class ConnectSpecificProfilesActivity extends PreferenceActivity
         }
 
         addPreferencesFromResource(R.xml.bluetooth_device_advanced);
+        getPreferenceScreen().setOrderingAsAdded(false);
+
         mProfileContainer = (PreferenceGroup) findPreference(KEY_PROFILE_CONTAINER);
+        mAllowIncomingPref = (CheckBoxPreference) findPreference(KEY_ALLOW_INCOMING);
+        mAllowIncomingPref.setChecked(isIncomingFileTransfersAllowed());
+
+        mDeviceNamePref = (EditTextPreference) findPreference(KEY_RENAME_DEVICE);
+        mDeviceNamePref.setSummary(mCachedDevice.getName());
+        mDeviceNamePref.setText(mCachedDevice.getName());
 
         // Set the title of the screen
-        findPreference(KEY_TITLE).setTitle(
-                getString(R.string.bluetooth_device_advanced_title, mCachedDevice.getName()));
-
-        // Listen for check/uncheck of the online mode checkbox
-        mOnlineModePreference = (CheckBoxPreference) findPreference(KEY_ONLINE_MODE);
-        mOnlineModePreference.setOnPreferenceChangeListener(this);
+        findPreference(KEY_TITLE).setTitle(getResources()
+                .getString(R.string.bluetooth_device_advanced_title, mCachedDevice.getName()));
 
         // Add a preference for each profile
         addPreferencesForProfiles();
     }
 
     @Override
-    protected void onSaveInstanceState(Bundle outState) {
+    public void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
 
         outState.putParcelable(EXTRA_DEVICE, mCachedDevice.getDevice());
     }
 
     @Override
-    protected void onResume() {
+    public void onResume() {
         super.onResume();
 
-        mManager.setForegroundActivity(this);
+        mManager.setForegroundActivity(getActivity());
         mCachedDevice.registerCallback(this);
 
         refresh();
     }
 
     @Override
-    protected void onPause() {
+    public void onPause() {
         super.onPause();
 
         mCachedDevice.unregisterCallback(this);
@@ -138,18 +146,20 @@ public class ConnectSpecificProfilesActivity extends PreferenceActivity
      * @return A preference that allows the user to choose whether this profile
      *         will be connected to.
      */
-    private CheckBoxPreference createProfilePreference(Profile profile) {
-        CheckBoxPreference pref = new CheckBoxPreference(this);
+    private Preference createProfilePreference(Profile profile) {
+        BluetoothProfilePreference pref = new BluetoothProfilePreference(getActivity(), profile);
         pref.setKey(profile.toString());
         pref.setTitle(profile.localizedString);
+        pref.setExpanded(false);
         pref.setPersistent(false);
-        pref.setOnPreferenceChangeListener(this);
+        pref.setOrder(getProfilePreferenceIndex(profile));
+        pref.setOnExpandClickListener(this);
 
         LocalBluetoothProfileManager profileManager = LocalBluetoothProfileManager
                 .getProfileManager(mManager, profile);
 
         /**
-         * Gray out checkbox while connecting and disconnecting
+         * Gray out profile while connecting and disconnecting
          */
         pref.setEnabled(!mCachedDevice.isBusy());
 
@@ -158,37 +168,46 @@ public class ConnectSpecificProfilesActivity extends PreferenceActivity
         return pref;
     }
 
-    public boolean onPreferenceChange(Preference preference, Object newValue) {
+    @Override
+    public boolean onPreferenceTreeClick(PreferenceScreen screen, Preference preference) {
         String key = preference.getKey();
-        if (TextUtils.isEmpty(key) || newValue == null) return true;
+        if (preference instanceof BluetoothProfilePreference) {
+            onProfileClicked(preference, Profile.valueOf(key));
+            return true;
+        } else if (key.equals(KEY_UNPAIR)) {
+            unpairDevice();
+            finish();
+            return true;
+        }
 
-        if (key.equals(KEY_ONLINE_MODE)) {
-            onOnlineModeCheckedStateChanged((Boolean) newValue);
+        return false;
+    }
 
+    public boolean onPreferenceChange(Preference preference, Object newValue) {
+        if (preference == mAllowIncomingPref) {
+            setIncomingFileTransfersAllowed(mAllowIncomingPref.isChecked());
+        } else if (preference == mDeviceNamePref) {
+            // TODO: Verify and check for error conditions
+            mCachedDevice.setName(mDeviceNamePref.getText());
         } else {
-            Profile profile = getProfileOf(preference);
-            if (profile == null) return false;
-            onProfileCheckedStateChanged(profile, (Boolean) newValue);
+            return false;
         }
 
         return true;
     }
 
-    private void onOnlineModeCheckedStateChanged(boolean checked) {
-        setOnlineMode(checked, true);
-    }
-
-    private void onProfileCheckedStateChanged(Profile profile, boolean checked) {
+    private void onProfileClicked(Preference preference, Profile profile) {
         LocalBluetoothProfileManager profileManager = LocalBluetoothProfileManager
                 .getProfileManager(mManager, profile);
-        profileManager.setPreferred(mCachedDevice.getDevice(), checked);
-        if (mOnlineMode) {
-            if (checked) {
-                mCachedDevice.connect(profile);
-            } else {
-                mCachedDevice.disconnect(profile);
-            }
-        }
+        // TODO: Get the current state and flip it, updating the summary for the preference
+
+//        profileManager.setPreferred(mCachedDevice.getDevice(), checked);
+//
+//        if (checked) {
+//            mCachedDevice.connect(profile);
+//        } else {
+//            mCachedDevice.disconnect(profile);
+//        }
     }
 
     public void onDeviceAttributesChanged(CachedBluetoothDevice cachedDevice) {
@@ -196,51 +215,12 @@ public class ConnectSpecificProfilesActivity extends PreferenceActivity
     }
 
     private void refresh() {
-        // We are in 'online mode' if we are connected, connecting, or disconnecting
-        setOnlineMode(mCachedDevice.isConnected() || mCachedDevice.isBusy(), false);
         refreshProfiles();
-    }
-
-    /**
-     * Switches between online/offline mode.
-     *
-     * @param onlineMode Whether to be in online mode, or offline mode.
-     * @param takeAction Whether to take action (i.e., connect or disconnect)
-     *            based on the new online mode.
-     */
-    private void setOnlineMode(boolean onlineMode, boolean takeAction) {
-        mOnlineMode = onlineMode;
-
-        if (takeAction) {
-            if (onlineMode) {
-                mCachedDevice.connect();
-            } else {
-                mCachedDevice.disconnect();
-            }
-        }
-
-        refreshOnlineModePreference();
-    }
-
-    private void refreshOnlineModePreference() {
-        mOnlineModePreference.setChecked(mOnlineMode);
-
-        /* Gray out checkbox while connecting and disconnecting */
-        mOnlineModePreference.setEnabled(!mCachedDevice.isBusy());
-
-        /**
-         * If the device is online, show status. Otherwise, show a summary that
-         * describes what the checkbox does.
-         */
-        mOnlineModePreference.setSummary(mOnlineMode ?
-                mCachedDevice.getSummary(CachedBluetoothDevice.OTHER_PROFILES)
-                : R.string.bluetooth_device_advanced_online_mode_summary);
     }
 
     private void refreshProfiles() {
         for (Profile profile : mCachedDevice.getConnectableProfiles()) {
-            CheckBoxPreference profilePref =
-                    (CheckBoxPreference) findPreference(profile.toString());
+            Preference profilePref = findPreference(profile.toString());
             if (profilePref == null) {
                 profilePref = createProfilePreference(profile);
                 mProfileContainer.addPreference(profilePref);
@@ -250,7 +230,7 @@ public class ConnectSpecificProfilesActivity extends PreferenceActivity
         }
     }
 
-    private void refreshProfilePreference(CheckBoxPreference profilePref, Profile profile) {
+    private void refreshProfilePreference(Preference profilePref, Profile profile) {
         BluetoothDevice device = mCachedDevice.getDevice();
         LocalBluetoothProfileManager profileManager = LocalBluetoothProfileManager
                 .getProfileManager(mManager, profile);
@@ -262,9 +242,9 @@ public class ConnectSpecificProfilesActivity extends PreferenceActivity
          */
         profilePref.setEnabled(!mCachedDevice.isBusy());
         profilePref.setSummary(getProfileSummary(profileManager, profile, device,
-                connectionStatus, mOnlineMode));
-
-        profilePref.setChecked(profileManager.isPreferred(device));
+                connectionStatus, isDeviceOnline()));
+        // TODO:
+        //profilePref.setChecked(profileManager.isPreferred(device));
     }
 
     private Profile getProfileOf(Preference pref) {
@@ -307,4 +287,60 @@ public class ConnectSpecificProfilesActivity extends PreferenceActivity
         }
     }
 
+    public void onClick(View v) {
+        if (v.getTag() instanceof Profile) {
+            Profile prof = (Profile) v.getTag();
+            CheckBoxPreference autoConnectPref = mAutoConnectPrefs.get(prof.toString());
+            if (autoConnectPref == null) {
+                autoConnectPref = new CheckBoxPreference(getActivity());
+                autoConnectPref.setKey(prof.toString() + AUTO_CONNECT_KEY_SUFFIX);
+                autoConnectPref.setTitle(getCheckBoxTitle(prof));
+                autoConnectPref.setOrder(getProfilePreferenceIndex(prof) + 1);
+                autoConnectPref.setChecked(getAutoConnect(prof));
+                mAutoConnectPrefs.put(prof.name(), autoConnectPref);
+            }
+            BluetoothProfilePreference profilePref =
+                    (BluetoothProfilePreference) findPreference(prof.toString());
+            if (profilePref != null) {
+                if (profilePref.isExpanded()) {
+                    mProfileContainer.addPreference(autoConnectPref);
+                } else {
+                    mProfileContainer.removePreference(autoConnectPref);
+                }
+            }
+        }
+    }
+
+    private int getProfilePreferenceIndex(Profile prof) {
+        return mProfileContainer.getOrder() + prof.ordinal() * 10;
+    }
+
+    private void unpairDevice() {
+        mCachedDevice.unpair();
+    }
+
+    private boolean isDeviceOnline() {
+        // TODO: Verify
+        return mCachedDevice.isConnected() || mCachedDevice.isBusy();
+    }
+
+    private void setIncomingFileTransfersAllowed(boolean allow) {
+        // TODO:
+        Log.d(TAG, "Set allow incoming = " + allow);
+    }
+
+    private boolean isIncomingFileTransfersAllowed() {
+        // TODO:
+        return true;
+    }
+
+    private String getCheckBoxTitle(Profile prof) {
+        // TODO: Use resources and base it on profile if necessary
+        return "Auto connect";
+    }
+
+    private boolean getAutoConnect(Profile prof) {
+        // TODO: Get the auto connect toggle state for the profile
+        return true;
+    }
 }
