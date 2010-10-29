@@ -47,8 +47,9 @@ public class RingerVolumePreference extends VolumePreference implements
     };
 
     private static final int[] NEED_VOICE_CAPABILITY_ID = new int[] {
-            com.android.internal.R.id.seekbar, R.id.notification_volume_title,
-            R.id.notification_volume_seekbar
+            R.id.ringtone_label,
+            com.android.internal.R.id.seekbar,
+            R.id.same_notification_volume
     };
 
     private static final int[] SEEKBAR_TYPE = new int[] {
@@ -85,16 +86,17 @@ public class RingerVolumePreference extends VolumePreference implements
         mNotificationsUseRingVolumeCheckbox =
                 (CheckBox) view.findViewById(R.id.same_notification_volume);
         mNotificationsUseRingVolumeCheckbox.setOnCheckedChangeListener(this);
-        mNotificationsUseRingVolumeCheckbox.setChecked(Settings.System.getInt(
-                getContext().getContentResolver(),
-                Settings.System.NOTIFICATIONS_USE_RING_VOLUME, 1) == 1);
+        mNotificationsUseRingVolumeCheckbox.setChecked(
+                Utils.isVoiceCapable(getContext())
+                && Settings.System.getInt(
+                        getContext().getContentResolver(),
+                        Settings.System.NOTIFICATIONS_USE_RING_VOLUME, 1) == 1);
         setNotificationVolumeVisibility(!mNotificationsUseRingVolumeCheckbox.isChecked());
         disableSettingsThatNeedVoice(view);
     }
 
     private void disableSettingsThatNeedVoice(View parent) {
-        final boolean voiceCapable = getContext().getResources()
-                .getBoolean(com.android.internal.R.bool.config_voice_capable);
+        final boolean voiceCapable = Utils.isVoiceCapable(getContext());
         if (!voiceCapable) {
             for (int id : NEED_VOICE_CAPABILITY_ID) {
                 parent.findViewById(id).setVisibility(View.GONE);
