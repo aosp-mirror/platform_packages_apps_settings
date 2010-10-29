@@ -17,6 +17,7 @@
 package com.android.settings;
 
 import android.content.Intent;
+import android.os.Bundle;
 import android.preference.PreferenceActivity;
 
 import java.util.List;
@@ -34,6 +35,13 @@ public class Settings extends PreferenceActivity {
         if (startingFragment != null && !onIsMultiPane()) {
             Intent modIntent = new Intent(super.getIntent());
             modIntent.putExtra(EXTRA_SHOW_FRAGMENT, startingFragment);
+            Bundle args = super.getIntent().getExtras();
+            if (args != null) {
+                args = new Bundle(args);
+            } else {
+                args = new Bundle();
+            }
+            args.putParcelable("intent", super.getIntent());
             modIntent.putExtra(EXTRA_SHOW_FRAGMENT_ARGUMENTS, super.getIntent().getExtras());
             return modIntent;
         }
@@ -45,8 +53,13 @@ public class Settings extends PreferenceActivity {
      * returns the class name to load as a fragment.
      */
     private String getStartingFragmentClass(Intent intent) {
-        final String intentClass = intent.getComponent().getClassName();
+        String intentClass = intent.getComponent().getClassName();
         if (intentClass.equals(getClass().getName())) return null;
+
+        if ("com.android.settings.ManageApplications".equals(intentClass)) {
+            // Old name of manage apps.
+            intentClass = com.android.settings.applications.ManageApplications.class.getName();
+        }
 
         return intentClass;
     }
