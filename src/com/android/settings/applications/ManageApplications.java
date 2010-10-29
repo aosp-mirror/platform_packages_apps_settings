@@ -350,6 +350,12 @@ public class ManageApplications extends TabActivity implements
 
         @Override
         public void onRebuildComplete(ArrayList<AppEntry> apps) {
+            if (mLoadingContainer.getVisibility() == View.VISIBLE) {
+                mLoadingContainer.startAnimation(AnimationUtils.loadAnimation(
+                        ManageApplications.this, android.R.anim.fade_out));
+                mListContainer.startAnimation(AnimationUtils.loadAnimation(
+                        ManageApplications.this, android.R.anim.fade_in));
+            }
             mListContainer.setVisibility(View.VISIBLE);
             mLoadingContainer.setVisibility(View.GONE);
             mWaitingForData = false;
