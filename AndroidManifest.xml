@@ -382,6 +382,47 @@
             </intent-filter>
         </activity-alias>
 
+        <activity-alias android:name=".applications.ManageApplications"
+                  android:label="@string/manageapplications_settings_title"
+                  android:clearTaskOnLaunch="true"
+                  android:targetActivity="Settings">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <action android:name="android.intent.action.MANAGE_PACKAGE_STORAGE" />
+                <action android:name="android.settings.MANAGE_APPLICATIONS_SETTINGS" />
+                <action android:name="android.settings.MANAGE_ALL_APPLICATIONS_SETTINGS" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.VOICE_LAUNCH" />
+                <category android:name="com.android.settings.SHORTCUT" />
+            </intent-filter>
+        </activity-alias>
+
+        <!-- Keep compatibility with old shortcuts. -->
+        <activity-alias android:name=".ManageApplications"
+                  android:label="@string/manageapplications_settings_title"
+                  android:clearTaskOnLaunch="true"
+                  android:exported="true"
+                  android:targetActivity="Settings">
+        </activity-alias>
+
+        <!-- Still need a top-level activity for showing app details.  Aliasing
+             trick is so the code that is now a fragment can still be called
+             InstalledAppDetails. -->
+        <activity android:name=".applications.InstalledAppDetailsTop"
+                  android:label="@string/application_info_label"
+                  android:exported="true">
+        </activity>
+        <activity-alias android:name=".applications.InstalledAppDetails"
+                  android:label="@string/application_info_label"
+                  android:targetActivity=".applications.InstalledAppDetailsTop">
+            <intent-filter>
+                <action android:name="android.settings.APPLICATION_DETAILS_SETTINGS" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <data android:scheme="package" />
+            </intent-filter>
+        </activity-alias>
+
+        <!--
         <activity android:name=".applications.ManageApplications"
                   android:label="@string/manageapplications_settings_title"
                   android:clearTaskOnLaunch="true"
@@ -398,7 +439,6 @@
             </intent-filter>
         </activity>
 
-        <!-- Keep compatibility with old shortcuts. -->
         <activity-alias android:name=".ManageApplications"
             android:targetActivity=".applications.ManageApplications"
             android:exported="true" />
@@ -412,6 +452,7 @@
                 <data android:scheme="package" />
             </intent-filter>
         </activity>
+        -->
 
         <!-- Provide direct entry into manage apps showing running services. -->
         <activity-alias android:name=".RunningServices"
