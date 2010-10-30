@@ -22,7 +22,7 @@
     android:paddingTop="60dip"
     android:paddingLeft="100dip"
     android:paddingRight="100dip"
-    android:paddingBottom="100dip">
+    android:paddingBottom="40dip">
 
     <TextView
         android:id="@+id/wifi_setup_title"
@@ -139,12 +139,22 @@
                 android:enabled="false" />
     </RelativeLayout>
 
+    <Button android:id="@+id/wifi_setup_detail"
+            android:layout_width="260dip"
+            android:layout_height="60dip"
+            android:layout_above="@+id/wifi_setup_cancel"
+            android:layout_alignLeft="@+id/wifi_setup_cancel"
+            android:layout_marginBottom="30dip"
+            android:textSize="24dip"
+            android:text="@string/wifi_detail"
+            android:visibility="gone" />
+
     <Button android:id="@+id/wifi_setup_cancel"
             android:layout_width="260dip"
             android:layout_height="60dip"
             android:layout_alignParentBottom="true"
             android:layout_toLeftOf="@id/right_buttons"
             android:textSize="24dip"
-            android:text="@string/wifi_cancel"
+            android:text="@string/wifi_back"
             android:visibility="gone" />
 </RelativeLayout>

@@ -103,6 +103,7 @@ public class WifiSettingsForSetupWizardXL extends Activity implements OnClickLis
         ((Button)findViewById(R.id.wifi_setup_connect)).setOnClickListener(this);
         ((Button)findViewById(R.id.wifi_setup_forget)).setOnClickListener(this);
         ((Button)findViewById(R.id.wifi_setup_cancel)).setOnClickListener(this);
+        ((Button)findViewById(R.id.wifi_setup_detail)).setOnClickListener(this);
     }
 
     @Override
@@ -133,6 +134,9 @@ public class WifiSettingsForSetupWizardXL extends Activity implements OnClickLis
         case R.id.wifi_setup_cancel:
             mStatusText.setText(R.string.wifi_setup_status_select_network);
             mWifiSettings.detachConfigPreference();
+            break;
+        case R.id.wifi_setup_detail:
+            mWifiSettings.showDialogForSelectedPreference();
             break;
         }
         hideSoftwareKeyboard();

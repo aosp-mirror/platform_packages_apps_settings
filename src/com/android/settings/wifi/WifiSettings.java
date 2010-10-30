@@ -94,7 +94,7 @@ public class WifiSettings extends SettingsPreferenceFragment
     // ListView won't become larger than the screen.
     //
     // This constant doesn't affect other contexts other than SetupWizard XL.
-    private static int MAX_MENU_COUNT_IN_XL = 6;
+    private static int MAX_MENU_COUNT_IN_XL = 8;
 
     private final IntentFilter mFilter;
     private final BroadcastReceiver mReceiver;
@@ -107,6 +107,7 @@ public class WifiSettings extends SettingsPreferenceFragment
     private Preference mAddNetwork;
     // An access point being editted is stored here.
     private AccessPoint mSelectedAccessPoint;
+    private boolean mEdit;
 
     private DetailedState mLastState;
     private WifiInfo mLastInfo;
@@ -365,10 +366,12 @@ public class WifiSettings extends SettingsPreferenceFragment
         synchronized (this) {
             mRefrainListUpdate = false;
         }
+        mEdit = edit;
         if (mInXlSetupWizard) {
             final Activity activity = getActivity();
             activity.findViewById(R.id.wifi_setup_connect).setVisibility(View.VISIBLE);
             activity.findViewById(R.id.wifi_setup_cancel).setVisibility(View.VISIBLE);
+            activity.findViewById(R.id.wifi_setup_detail).setVisibility(View.VISIBLE);
             showConfigPreference(accessPoint, edit);
         } else {
             showDialog(accessPoint, edit);
@@ -400,6 +403,7 @@ public class WifiSettings extends SettingsPreferenceFragment
             activity.findViewById(R.id.wifi_setup_connect).setVisibility(View.GONE);
             activity.findViewById(R.id.wifi_setup_forget).setVisibility(View.GONE);
             activity.findViewById(R.id.wifi_setup_cancel).setVisibility(View.GONE);
+            activity.findViewById(R.id.wifi_setup_detail).setVisibility(View.GONE);
         } else {
             activity.findViewById(R.id.wifi_setup_add_network).setVisibility(View.GONE);
             activity.findViewById(R.id.wifi_setup_refresh_list).setVisibility(View.GONE);
@@ -415,6 +419,10 @@ public class WifiSettings extends SettingsPreferenceFragment
         }
         mDialog = new WifiDialog(getActivity(), this, accessPoint, edit);
         mDialog.show();
+    }
+
+    /* package */ void showDialogForSelectedPreference() {
+        showDialog(mSelectedAccessPoint, mEdit);
     }
 
     private boolean requireKeyStore(WifiConfiguration config) {
