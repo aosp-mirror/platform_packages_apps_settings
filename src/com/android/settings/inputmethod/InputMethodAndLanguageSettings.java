@@ -14,7 +14,11 @@
  * limitations under the License.
  */
 
-package com.android.settings;
+package com.android.settings.inputmethod;
+
+import com.android.settings.R;
+import com.android.settings.SettingsPreferenceFragment;
+import com.android.settings.Utils;
 
 import android.app.AlertDialog;
 import android.content.Context;
@@ -34,8 +38,7 @@ import android.view.inputmethod.InputMethodManager;
 import java.util.ArrayList;
 import java.util.List;
 
-public class LanguageSettings extends SettingsPreferenceFragment {
-    private static final String TAG = LanguageSettings.class.getSimpleName();
+public class InputMethodAndLanguageSettings extends SettingsPreferenceFragment {
 
     private static final String KEY_PHONE_LANGUAGE = "phone_language";
     private static final String KEY_INPUT_METHOD = "input_method";
@@ -140,7 +143,8 @@ public class LanguageSettings extends SettingsPreferenceFragment {
     public void onResume() {
         super.onResume();
 
-        InputMethodAndSubtypeUtil.loadInputMethodSubtypeList(this, mInputMethodProperties);
+        InputMethodAndSubtypeUtil.loadInputMethodSubtypeList(
+                this, getContentResolver(), mInputMethodProperties);
         mLastTickedInputMethodId = null;
 
         if (mLanguagePref != null) {
@@ -156,8 +160,8 @@ public class LanguageSettings extends SettingsPreferenceFragment {
     @Override
     public void onPause() {
         super.onPause();
-        InputMethodAndSubtypeUtil.saveInputMethodSubtypeList(this, mInputMethodProperties,
-                mHaveHardKeyboard, mLastTickedInputMethodId);
+        InputMethodAndSubtypeUtil.saveInputMethodSubtypeList(this, getContentResolver(),
+                mInputMethodProperties, mHaveHardKeyboard, mLastTickedInputMethodId);
     }
 
     @Override

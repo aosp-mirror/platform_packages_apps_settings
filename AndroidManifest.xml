@@ -248,7 +248,7 @@
             </intent-filter>
         </activity-alias>
 
-        <activity-alias android:name="LanguageSettings"
+        <activity-alias android:name=".inputmethod.InputMethodAndLanguageSettings"
                 android:label="@string/language_keyboard_settings_title"
                 android:clearTaskOnLaunch="true"
                 android:targetActivity="Settings"
@@ -262,7 +262,7 @@
             </intent-filter>
         </activity-alias>
 
-        <activity-alias android:name="InputMethodAndSubtypeEnabler"
+        <activity-alias android:name=".inputmethod.InputMethodAndSubtypeEnabler"
                         android:label="@string/input_methods_and_subtype_enabler_title"
                         android:clearTaskOnLaunch="true"
                         android:targetActivity="Settings">

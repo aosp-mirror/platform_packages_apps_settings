@@ -14,8 +14,11 @@
  * limitations under the License.
  */
 
-package com.android.settings;
+package com.android.settings.inputmethod;
 
+import com.android.settings.SettingsPreferenceFragment;
+
+import android.content.ContentResolver;
 import android.content.pm.ApplicationInfo;
 import android.preference.CheckBoxPreference;
 import android.preference.PreferenceScreen;
@@ -33,9 +36,10 @@ public class InputMethodAndSubtypeUtil {
             = new TextUtils.SimpleStringSplitter(':');
 
     public static void saveInputMethodSubtypeList(
-            SettingsPreferenceFragment context, List<InputMethodInfo> inputMethodProperties,
+            SettingsPreferenceFragment context, ContentResolver resolver,
+            List<InputMethodInfo> inputMethodProperties,
             boolean hasHardKeyboard, String lastTickedInputMethodId) {
-        String lastInputMethodId = Settings.Secure.getString(context.getContentResolver(),
+        String lastInputMethodId = Settings.Secure.getString(resolver,
                 Settings.Secure.DEFAULT_INPUT_METHOD);
 
         StringBuilder builder = new StringBuilder();
@@ -77,19 +81,19 @@ public class InputMethodAndSubtypeUtil {
             }
         }
 
-        Settings.Secure.putString(context.getContentResolver(),
+        Settings.Secure.putString(resolver,
                 Settings.Secure.ENABLED_INPUT_METHODS, builder.toString());
-        Settings.Secure.putString(context.getContentResolver(),
+        Settings.Secure.putString(resolver,
                 Settings.Secure.DISABLED_SYSTEM_INPUT_METHODS, disabledSysImes.toString());
-        Settings.Secure.putString(context.getContentResolver(),
-                Settings.Secure.DEFAULT_INPUT_METHOD,
+        Settings.Secure.putString(resolver, Settings.Secure.DEFAULT_INPUT_METHOD,
                 lastInputMethodId != null ? lastInputMethodId : "");
     }
 
-    public static void loadInputMethodSubtypeList(SettingsPreferenceFragment context,
+    public static void loadInputMethodSubtypeList(
+            SettingsPreferenceFragment context, ContentResolver resolver,
             List<InputMethodInfo> inputMethodProperties) {
         final HashSet<String> enabled = new HashSet<String>();
-        String enabledStr = Settings.Secure.getString(context.getContentResolver(),
+        String enabledStr = Settings.Secure.getString(resolver,
                 Settings.Secure.ENABLED_INPUT_METHODS);
         if (enabledStr != null) {
             final TextUtils.SimpleStringSplitter splitter = sStringColonSplitter;
