@@ -44,25 +44,24 @@
     </PreferenceScreen>
         
     <PreferenceScreen
-        android:fragment="com.android.settings.applications.ManageApplications"
-        android:title="@string/manageapplications_settings_title"
-        android:summary="@string/manageapplications_settings_summary">
+            android:fragment="com.android.settings.applications.ManageApplications"
+            android:title="@string/manageapplications_settings_title"
+            android:summary="@string/manageapplications_settings_summary">
     </PreferenceScreen>
 
     <PreferenceScreen
+            android:fragment="com.android.settings.applications.ManageApplications"
             android:title="@string/runningservices_settings_title"
             android:summary="@string/runningservices_settings_summary">
-        <intent android:action="android.intent.action.MAIN"
-                android:targetPackage="com.android.settings"
-                android:targetClass="com.android.settings.RunningServices" />
+        <extra android:name="classname" android:value="com.android.settings.RunningServices" />
     </PreferenceScreen>
 
     <PreferenceScreen
+            android:fragment="com.android.settings.applications.ManageApplications"
             android:title="@string/storageuse_settings_title"
             android:summary="@string/storageuse_settings_summary">
-        <intent android:action="android.intent.action.MAIN"
-                android:targetPackage="com.android.settings"
-                android:targetClass="com.android.settings.applications.StorageUse" />
+        <extra android:name="classname"
+                android:value="com.android.settings.applications.StorageUse" />
     </PreferenceScreen>
 
     <PreferenceScreen

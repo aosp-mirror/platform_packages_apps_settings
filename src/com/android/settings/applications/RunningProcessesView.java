@@ -20,16 +20,16 @@ import com.android.settings.R;
 
 import android.app.ActivityManager;
 import android.app.Dialog;
+import android.app.Fragment;
 import android.content.Context;
-import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.os.SystemClock;
 import android.os.SystemProperties;
+import android.preference.PreferenceActivity;
 import android.text.format.DateUtils;
 import android.text.format.Formatter;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -60,6 +60,8 @@ public class RunningProcessesView extends FrameLayout
     ActivityManager mAm;
     
     RunningState mState;
+    
+    Fragment mOwner;
     
     Runnable mDataAvail;
 
@@ -417,14 +419,22 @@ public class RunningProcessesView extends FrameLayout
         ListView l = (ListView)parent;
         RunningState.MergedItem mi = (RunningState.MergedItem)l.getAdapter().getItem(position);
         mCurSelected = mi;
-        Intent intent = new Intent();
-        intent.putExtra(RunningServiceDetails.KEY_UID, mi.mProcess.mUid);
-        intent.putExtra(RunningServiceDetails.KEY_PROCESS, mi.mProcess.mProcessName);
-        intent.putExtra(RunningServiceDetails.KEY_BACKGROUND, mAdapter.mShowBackground);
-        intent.setClass(getContext(), RunningServiceDetails.class);
-        getContext().startActivity(intent);
+        startServiceDetailsActivity(mi);
     }
 
+    // utility method used to start sub activity
+    private void startServiceDetailsActivity(RunningState.MergedItem mi) {
+        // start new fragment to display extended information
+        Bundle args = new Bundle();
+        args.putInt(RunningServiceDetails.KEY_UID, mi.mProcess.mUid);
+        args.putString(RunningServiceDetails.KEY_PROCESS, mi.mProcess.mProcessName);
+        args.putBoolean(RunningServiceDetails.KEY_BACKGROUND, mAdapter.mShowBackground);
+
+        PreferenceActivity pa = (PreferenceActivity)mOwner.getActivity();
+        pa.startPreferencePanel(RunningServiceDetails.class.getName(), args,
+                R.string.runningservicedetails_settings_title, null, null, 0);
+    }
+    
     public void onMovedToScrapHeap(View view) {
         mActiveItems.remove(view);
     }
@@ -472,9 +482,11 @@ public class RunningProcessesView extends FrameLayout
     public void doPause() {
         mState.pause();
         mDataAvail = null;
+        mOwner = null;
     }
 
-    public boolean doResume(Runnable dataAvail) {
+    public boolean doResume(Fragment owner, Runnable dataAvail) {
+        mOwner = owner;
         mState.resume(this);
         if (mState.hasData()) {
             // If the state already has its data, then let's populate our

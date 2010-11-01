@@ -457,7 +457,7 @@
         <!-- Provide direct entry into manage apps showing running services. -->
         <activity-alias android:name=".RunningServices"
                 android:label="@string/runningservices_settings_title"
-            android:targetActivity=".applications.ManageApplications">
+                android:targetActivity="Settings">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.DEFAULT" />
@@ -470,7 +470,7 @@
         <!-- Provide direct entry into manage apps showing running services. -->
         <activity-alias android:name=".applications.StorageUse"
                 android:label="@string/storageuse_settings_title"
-            android:targetActivity=".applications.ManageApplications">
+                android:targetActivity="Settings">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.DEFAULT" />
@@ -479,11 +479,6 @@
                 <category android:name="com.android.settings.SHORTCUT" />
             </intent-filter>
         </activity-alias>
-
-        <activity android:name=".applications.RunningServiceDetails"
-                android:theme="@android:style/Theme.NoTitleBar"
-                android:label="@string/runningservicedetails_settings_title">
-        </activity>
 
         <activity-alias android:name="SecuritySettings"
                 android:label="@string/location_security_settings_title"
@@ -686,15 +681,17 @@
             </intent-filter>
         </activity>
 
-        <activity android:name="DevelopmentSettings"
-                android:label="@string/development_settings_title">
+        <activity-alias android:name="DevelopmentSettings"
+                android:label="@string/development_settings_title"
+                android:targetActivity="Settings"
+                android:clearTaskOnLaunch="true"
+                >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <action android:name="com.android.settings.APPLICATION_DEVELOPMENT_SETTINGS" />
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
-        </activity>
-
+        </activity-alias>
 
 
 

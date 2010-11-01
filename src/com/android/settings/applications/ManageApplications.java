@@ -21,14 +21,11 @@ import com.android.settings.R;
 import com.android.settings.applications.ApplicationsState.AppEntry;
 
 import android.app.Fragment;
-import android.app.TabActivity;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.IPackageManager;
 import android.content.pm.PackageInfo;
-import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.os.RemoteException;
@@ -38,14 +35,12 @@ import android.preference.PreferenceActivity;
 import android.provider.Settings;
 import android.text.format.Formatter;
 import android.util.Log;
-import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.Window;
 import android.view.animation.AnimationUtils;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.AbsListView;
@@ -57,7 +52,6 @@ import android.widget.Filterable;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TabHost;
-import android.widget.TabWidget;
 import android.widget.TextView;
 import android.widget.AdapterView.OnItemClickListener;
 
@@ -167,6 +161,8 @@ public class ManageApplications extends Fragment implements
     TextView mUsedStorageText;
     TextView mFreeStorageText;
 
+    private Menu mOptionsMenu;
+    
     // These are for keeping track of activity and tab switch state.
     private int mCurView;
     private boolean mCreatedRunning;
@@ -518,11 +514,14 @@ public class ManageApplications extends Fragment implements
         Intent intent = getActivity().getIntent();
         String action = intent.getAction();
         String defaultTabTag = TAB_DOWNLOADED;
-        if (intent.getComponent().getClassName().equals(
-                "com.android.settings.RunningServices")) {
+        String className = getArguments() != null
+                ? getArguments().getString("classname") : null;
+        if (className == null) {
+            className = intent.getComponent().getClassName();
+        }
+        if (className.equals("com.android.settings.RunningServices")) {
             defaultTabTag = TAB_RUNNING;
-        } else if (intent.getComponent().getClassName().equals(
-                "com.android.settings.applications.StorageUse")
+        } else if (className.equals("com.android.settings.applications.StorageUse")
                 || action.equals(Intent.ACTION_MANAGE_PACKAGE_STORAGE)) {
             mSortOrder = SORT_ORDER_SIZE;
             mFilterApps = FILTER_APPS_ALL;
@@ -577,6 +576,8 @@ public class ManageApplications extends Fragment implements
         mRunningProcessesView = (RunningProcessesView)mRootView.findViewById(
                 R.id.running_processes);
 
+        mCreatedRunning = mResumedRunning = false;
+        
         View tabRoot = mInflater.inflate(com.android.internal.R.layout.tab_content, null);
         mTabHost = (TabHost)tabRoot.findViewById(com.android.internal.R.id.tabhost);
         mTabHost.setup();
@@ -589,10 +590,12 @@ public class ManageApplications extends Fragment implements
                 .setIndicator(getActivity().getString(R.string.filter_apps_all),
                         getActivity().getResources().getDrawable(R.drawable.ic_tab_all))
                 .setContent(this));
-        tabHost.addTab(tabHost.newTabSpec(TAB_SDCARD)
-                .setIndicator(getActivity().getString(R.string.filter_apps_onsdcard),
-                        getActivity().getResources().getDrawable(R.drawable.ic_tab_sdcard))
-                .setContent(this));
+        if (!Environment.isExternalStorageEmulated()) {
+            tabHost.addTab(tabHost.newTabSpec(TAB_SDCARD)
+                    .setIndicator(getActivity().getString(R.string.filter_apps_onsdcard),
+                            getActivity().getResources().getDrawable(R.drawable.ic_tab_sdcard))
+                    .setContent(this));
+        }
         tabHost.addTab(tabHost.newTabSpec(TAB_RUNNING)
                 .setIndicator(getActivity().getString(R.string.filter_apps_running),
                         getActivity().getResources().getDrawable(R.drawable.ic_tab_running))
@@ -613,6 +616,7 @@ public class ManageApplications extends Fragment implements
         super.onResume();
         mActivityResumed = true;
         showCurrentTab();
+        updateOptionsMenu();
     }
 
     @Override
@@ -620,8 +624,8 @@ public class ManageApplications extends Fragment implements
         super.onSaveInstanceState(outState);
         outState.putInt("sortOrder", mSortOrder);
         outState.putInt("filterApps", mFilterApps);
-        if (mTabHost != null) {
-            outState.putString("defautTabTag", mTabHost.getCurrentTabTag());
+        if (mDefaultTab != null) {
+            outState.putString("defautTabTag", mDefaultTab);
         }
     }
 
@@ -645,52 +649,63 @@ public class ManageApplications extends Fragment implements
     
     // utility method used to start sub activity
     private void startApplicationDetailsActivity() {
-        // Create intent to start new activity
-        Intent intent = new Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS,
-                Uri.fromParts("package", mCurrentPkgName, null));
         // start new fragment to display extended information
         Bundle args = new Bundle();
         args.putString(InstalledAppDetails.ARG_PACKAGE_NAME, mCurrentPkgName);
 
         PreferenceActivity pa = (PreferenceActivity)getActivity();
-        if (pa.isMultiPane()) {
-            Fragment frag = new InstalledAppDetails();
-            frag.setTargetFragment(this, INSTALLED_APP_DETAILS);
-            frag.setArguments(args);
-            frag.setTargetFragment(this, INSTALLED_APP_DETAILS);
-            pa.startPreferenceFragment(frag, true);
-        } else {
-            pa.startWithFragment(InstalledAppDetails.class.getName(), args);
-        }
+        pa.startPreferencePanel(InstalledAppDetails.class.getName(), args,
+                R.string.application_info_label, null, this, INSTALLED_APP_DETAILS);
     }
     
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        Log.i(TAG, "onCreateOptionsMenu in " + this + ": " + menu);
+        mOptionsMenu = menu;
         menu.add(0, SORT_ORDER_ALPHA, 1, R.string.sort_order_alpha)
-                .setIcon(android.R.drawable.ic_menu_sort_alphabetically);
+                .setIcon(android.R.drawable.ic_menu_sort_alphabetically)
+                .setShowAsAction(MenuItem.SHOW_AS_ACTION_IF_ROOM);
         menu.add(0, SORT_ORDER_SIZE, 2, R.string.sort_order_size)
-                .setIcon(android.R.drawable.ic_menu_sort_by_size); 
-        menu.add(0, SHOW_RUNNING_SERVICES, 3, R.string.show_running_services);
-        menu.add(0, SHOW_BACKGROUND_PROCESSES, 3, R.string.show_background_processes);
+                .setIcon(android.R.drawable.ic_menu_sort_by_size)
+                .setShowAsAction(MenuItem.SHOW_AS_ACTION_IF_ROOM);
+        menu.add(0, SHOW_RUNNING_SERVICES, 3, R.string.show_running_services)
+                .setShowAsAction(MenuItem.SHOW_AS_ACTION_IF_ROOM);
+        menu.add(0, SHOW_BACKGROUND_PROCESSES, 3, R.string.show_background_processes)
+                .setShowAsAction(MenuItem.SHOW_AS_ACTION_IF_ROOM);
+        updateOptionsMenu();
     }
     
     @Override
     public void onPrepareOptionsMenu(Menu menu) {
+        updateOptionsMenu();
+    }
+    
+    @Override
+    public void onDestroyOptionsMenu() {
+        mOptionsMenu = null;
+    }
+    
+    void updateOptionsMenu() {
+        if (mOptionsMenu == null) {
+            return;
+        }
+        
         /*
          * The running processes screen doesn't use the mApplicationsAdapter
          * so bringing up this menu in that case doesn't make any sense.
          */
         if (mCurView == VIEW_RUNNING) {
-            boolean showingBackground = mRunningProcessesView.mAdapter.getShowBackground();
-            menu.findItem(SORT_ORDER_ALPHA).setVisible(false);
-            menu.findItem(SORT_ORDER_SIZE).setVisible(false);
-            menu.findItem(SHOW_RUNNING_SERVICES).setVisible(showingBackground);
-            menu.findItem(SHOW_BACKGROUND_PROCESSES).setVisible(!showingBackground);
+            boolean showingBackground = mRunningProcessesView != null
+                    ? mRunningProcessesView.mAdapter.getShowBackground() : false;
+            mOptionsMenu.findItem(SORT_ORDER_ALPHA).setVisible(false);
+            mOptionsMenu.findItem(SORT_ORDER_SIZE).setVisible(false);
+            mOptionsMenu.findItem(SHOW_RUNNING_SERVICES).setVisible(showingBackground);
+            mOptionsMenu.findItem(SHOW_BACKGROUND_PROCESSES).setVisible(!showingBackground);
         } else {
-            menu.findItem(SORT_ORDER_ALPHA).setVisible(mSortOrder != SORT_ORDER_ALPHA);
-            menu.findItem(SORT_ORDER_SIZE).setVisible(mSortOrder != SORT_ORDER_SIZE);
-            menu.findItem(SHOW_RUNNING_SERVICES).setVisible(false);
-            menu.findItem(SHOW_BACKGROUND_PROCESSES).setVisible(false);
+            mOptionsMenu.findItem(SORT_ORDER_ALPHA).setVisible(mSortOrder != SORT_ORDER_ALPHA);
+            mOptionsMenu.findItem(SORT_ORDER_SIZE).setVisible(mSortOrder != SORT_ORDER_SIZE);
+            mOptionsMenu.findItem(SHOW_RUNNING_SERVICES).setVisible(false);
+            mOptionsMenu.findItem(SHOW_BACKGROUND_PROCESSES).setVisible(false);
         }
     }
 
@@ -707,6 +722,7 @@ public class ManageApplications extends Fragment implements
         } else if (menuId == SHOW_BACKGROUND_PROCESSES) {
             mRunningProcessesView.mAdapter.setShowBackground(true);
         }
+        updateOptionsMenu();
         return true;
     }
     
@@ -822,7 +838,7 @@ public class ManageApplications extends Fragment implements
             }
             boolean haveData = true;
             if (mActivityResumed && !mResumedRunning) {
-                haveData = mRunningProcessesView.doResume(mRunningProcessesAvail);
+                haveData = mRunningProcessesView.doResume(this, mRunningProcessesAvail);
                 mResumedRunning = true;
             }
             mApplicationsAdapter.pause();
@@ -850,7 +866,7 @@ public class ManageApplications extends Fragment implements
     }
 
     public void showCurrentTab() {
-        String tabId = mTabHost.getCurrentTabTag();
+        String tabId = mDefaultTab = mTabHost.getCurrentTabTag();
         int newOption;
         if (TAB_DOWNLOADED.equalsIgnoreCase(tabId)) {
             newOption = FILTER_APPS_THIRD_PARTY;
@@ -872,6 +888,7 @@ public class ManageApplications extends Fragment implements
         mFilterApps = newOption;
         selectView(VIEW_LIST);
         updateStorageUsage();
+        updateOptionsMenu();
     }
 
     public void onTabChanged(String tabId) {

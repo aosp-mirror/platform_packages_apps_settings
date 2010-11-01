@@ -18,21 +18,20 @@ package com.android.settings;
 
 import android.app.AlertDialog;
 import android.app.Dialog;
+import android.content.ContentResolver;
 import android.content.DialogInterface;
 import android.os.BatteryManager;
 import android.os.Bundle;
-import android.os.SystemProperties;
 import android.preference.Preference;
-import android.preference.PreferenceActivity;
+import android.preference.PreferenceFragment;
 import android.preference.PreferenceScreen;
 import android.preference.CheckBoxPreference;
 import android.provider.Settings;
-import android.text.TextUtils;
 
 /*
  * Displays preferences for application developers.
  */
-public class DevelopmentSettings extends PreferenceActivity
+public class DevelopmentSettings extends PreferenceFragment
         implements DialogInterface.OnClickListener, DialogInterface.OnDismissListener {
 
     private static final String ENABLE_ADB = "enable_adb";
@@ -49,7 +48,7 @@ public class DevelopmentSettings extends PreferenceActivity
     private Dialog mOkDialog;
 
     @Override
-    protected void onCreate(Bundle icicle) {
+    public void onCreate(Bundle icicle) {
         super.onCreate(icicle);
 
         addPreferencesFromResource(R.xml.development_prefs);
@@ -60,14 +59,15 @@ public class DevelopmentSettings extends PreferenceActivity
     }
 
     @Override
-    protected void onResume() {
+    public void onResume() {
         super.onResume();
 
-        mEnableAdb.setChecked(Settings.Secure.getInt(getContentResolver(),
+        final ContentResolver cr = getActivity().getContentResolver();
+        mEnableAdb.setChecked(Settings.Secure.getInt(cr,
                 Settings.Secure.ADB_ENABLED, 0) != 0);
-        mKeepScreenOn.setChecked(Settings.System.getInt(getContentResolver(),
+        mKeepScreenOn.setChecked(Settings.System.getInt(cr,
                 Settings.System.STAY_ON_WHILE_PLUGGED_IN, 0) != 0);
-        mAllowMockLocation.setChecked(Settings.Secure.getInt(getContentResolver(),
+        mAllowMockLocation.setChecked(Settings.Secure.getInt(cr,
                 Settings.Secure.ALLOW_MOCK_LOCATION, 0) != 0);
     }
 
@@ -82,8 +82,8 @@ public class DevelopmentSettings extends PreferenceActivity
             if (mEnableAdb.isChecked()) {
                 mOkClicked = false;
                 if (mOkDialog != null) dismissDialog();
-                mOkDialog = new AlertDialog.Builder(this).setMessage(
-                        getResources().getString(R.string.adb_warning_message))
+                mOkDialog = new AlertDialog.Builder(getActivity()).setMessage(
+                        getActivity().getResources().getString(R.string.adb_warning_message))
                         .setTitle(R.string.adb_warning_title)
                         .setIcon(android.R.drawable.ic_dialog_alert)
                         .setPositiveButton(android.R.string.yes, this)
@@ -91,14 +91,17 @@ public class DevelopmentSettings extends PreferenceActivity
                         .show();
                 mOkDialog.setOnDismissListener(this);
             } else {
-                Settings.Secure.putInt(getContentResolver(), Settings.Secure.ADB_ENABLED, 0);
+                Settings.Secure.putInt(getActivity().getContentResolver(),
+                        Settings.Secure.ADB_ENABLED, 0);
             }
         } else if (preference == mKeepScreenOn) {
-            Settings.System.putInt(getContentResolver(), Settings.System.STAY_ON_WHILE_PLUGGED_IN, 
+            Settings.System.putInt(getActivity().getContentResolver(),
+                    Settings.System.STAY_ON_WHILE_PLUGGED_IN, 
                     mKeepScreenOn.isChecked() ? 
                     (BatteryManager.BATTERY_PLUGGED_AC | BatteryManager.BATTERY_PLUGGED_USB) : 0);
         } else if (preference == mAllowMockLocation) {
-            Settings.Secure.putInt(getContentResolver(), Settings.Secure.ALLOW_MOCK_LOCATION,
+            Settings.Secure.putInt(getActivity().getContentResolver(),
+                    Settings.Secure.ALLOW_MOCK_LOCATION,
                     mAllowMockLocation.isChecked() ? 1 : 0);
         }
 
@@ -114,7 +117,8 @@ public class DevelopmentSettings extends PreferenceActivity
     public void onClick(DialogInterface dialog, int which) {
         if (which == DialogInterface.BUTTON_POSITIVE) {
             mOkClicked = true;
-            Settings.Secure.putInt(getContentResolver(), Settings.Secure.ADB_ENABLED, 1);
+            Settings.Secure.putInt(getActivity().getContentResolver(),
+                    Settings.Secure.ADB_ENABLED, 1);
         } else {
             // Reset the toggle
             mEnableAdb.setChecked(false);
