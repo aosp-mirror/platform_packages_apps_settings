@@ -23,62 +23,149 @@ import android.content.pm.ApplicationInfo;
 import android.preference.CheckBoxPreference;
 import android.preference.PreferenceScreen;
 import android.provider.Settings;
+import android.provider.Settings.SettingNotFoundException;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.inputmethod.InputMethodInfo;
 import android.view.inputmethod.InputMethodSubtype;
 
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 
 public class InputMethodAndSubtypeUtil {
 
-    private static final TextUtils.SimpleStringSplitter sStringColonSplitter
-            = new TextUtils.SimpleStringSplitter(':');
+    private static final boolean DEBUG = false;
+    static final String TAG = "InputMethdAndSubtypeUtil";
+
+    private static final char INPUT_METHOD_SEPARATER = ':';
+    private static final char INPUT_METHOD_SUBTYPE_SEPARATER = ';';
+    private static final int NOT_A_SUBTYPE_ID = -1;
+
+    private static final TextUtils.SimpleStringSplitter sStringInputMethodSplitter
+            = new TextUtils.SimpleStringSplitter(INPUT_METHOD_SEPARATER);
+
+    private static final TextUtils.SimpleStringSplitter sStringInputMethodSubtypeSplitter
+            = new TextUtils.SimpleStringSplitter(INPUT_METHOD_SUBTYPE_SEPARATER);
+
+    private static boolean isInputMethodSubtypeSelected(ContentResolver resolver) {
+        try {
+            return Settings.Secure.getInt(resolver,
+                    Settings.Secure.SELECTED_INPUT_METHOD_SUBTYPE) != NOT_A_SUBTYPE_ID;
+        } catch (SettingNotFoundException e) {
+            return false;
+        }
+    }
+
+    private static void putSelectedInputMethodSubtype(ContentResolver resolver, int hashCode) {
+        Settings.Secure.putInt(resolver, Settings.Secure.SELECTED_INPUT_METHOD_SUBTYPE, hashCode);
+    }
+
+    // Needs to modify InputMethodManageService if you want to change the format of saved string.
+    private static HashMap<String, HashSet<String>> getEnabledInputMethodsAndSubtypeList(
+            ContentResolver resolver) {
+        final String enabledInputMethodsStr = Settings.Secure.getString(
+                resolver, Settings.Secure.ENABLED_INPUT_METHODS);
+        HashMap<String, HashSet<String>> imsList
+                = new HashMap<String, HashSet<String>>();
+        if (DEBUG) {
+            Log.d(TAG, "--- Load enabled input methods: " + enabledInputMethodsStr);
+        }
+
+        if (TextUtils.isEmpty(enabledInputMethodsStr)) {
+            return imsList;
+        }
+        sStringInputMethodSplitter.setString(enabledInputMethodsStr);
+        while (sStringInputMethodSplitter.hasNext()) {
+            String nextImsStr = sStringInputMethodSplitter.next();
+            sStringInputMethodSubtypeSplitter.setString(nextImsStr);
+            if (sStringInputMethodSubtypeSplitter.hasNext()) {
+                HashSet<String> subtypeHashes = new HashSet<String>();
+                // The first element is ime id.
+                String imeId = sStringInputMethodSubtypeSplitter.next();
+                while (sStringInputMethodSubtypeSplitter.hasNext()) {
+                    subtypeHashes.add(sStringInputMethodSubtypeSplitter.next());
+                }
+                imsList.put(imeId, subtypeHashes);
+            }
+        }
+        return imsList;
+    }
 
     public static void saveInputMethodSubtypeList(
             SettingsPreferenceFragment context, ContentResolver resolver,
             List<InputMethodInfo> inputMethodProperties,
             boolean hasHardKeyboard, String lastTickedInputMethodId) {
-        String lastInputMethodId = Settings.Secure.getString(resolver,
+        String currentInputMethodId = Settings.Secure.getString(resolver,
                 Settings.Secure.DEFAULT_INPUT_METHOD);
 
         StringBuilder builder = new StringBuilder();
         StringBuilder disabledSysImes = new StringBuilder();
+        InputMethodInfo firstEnabledIMI = null;
+        int firstSubtypeHashCode = NOT_A_SUBTYPE_ID;
 
-        int firstEnabled = -1;
-        int N = inputMethodProperties.size();
-        for (int i = 0; i < N; ++i) {
-            final InputMethodInfo property = inputMethodProperties.get(i);
+        final boolean onlyOneIME = inputMethodProperties.size() == 1;
+        for (InputMethodInfo property : inputMethodProperties) {
             final String id = property.getId();
             CheckBoxPreference pref = (CheckBoxPreference) context.findPreference(id);
-            boolean currentInputMethod = id.equals(lastInputMethodId);
+            boolean isCurrentInputMethod = id.equals(currentInputMethodId);
             boolean systemIme = isSystemIme(property);
             // TODO: Append subtypes by using the separator ";"
-            if (((N == 1 || systemIme) && !hasHardKeyboard)
+            if (((onlyOneIME || systemIme) && !hasHardKeyboard)
                     || (pref != null && pref.isChecked())) {
-                if (builder.length() > 0) builder.append(':');
+                if (builder.length() > 0) builder.append(INPUT_METHOD_SEPARATER);
                 builder.append(id);
-                if (firstEnabled < 0) {
-                    firstEnabled = i;
+                if (firstEnabledIMI == null) {
+                    firstEnabledIMI = property;
                 }
-            } else if (currentInputMethod) {
-                lastInputMethodId = lastTickedInputMethodId;
+                for (InputMethodSubtype subtype : property.getSubtypes()) {
+                    CheckBoxPreference subtypePref = (CheckBoxPreference) context.findPreference(
+                            id + subtype.hashCode());
+                    if (subtypePref != null && subtypePref.isChecked()) {
+                        builder.append(INPUT_METHOD_SUBTYPE_SEPARATER).append(subtype.hashCode());
+                        if (firstSubtypeHashCode == NOT_A_SUBTYPE_ID) {
+                            firstSubtypeHashCode = subtype.hashCode();
+                        }
+                    }
+                }
+            } else if (isCurrentInputMethod) {
+                // We are processing the current input method, but found that it's not enabled.
+                // This means that the current input method has been uninstalled.
+                // If currentInputMethod is already uninstalled, selects last ticked IME
+                currentInputMethodId = lastTickedInputMethodId;
             }
             // If it's a disabled system ime, add it to the disabled list so that it
             // doesn't get enabled automatically on any changes to the package list
             if (pref != null && !pref.isChecked() && systemIme && hasHardKeyboard) {
-                if (disabledSysImes.length() > 0) disabledSysImes.append(":");
+                if (disabledSysImes.length() > 0) disabledSysImes.append(INPUT_METHOD_SEPARATER);
                 disabledSysImes.append(id);
             }
         }
 
         // If the last input method is unset, set it as the first enabled one.
-        if (TextUtils.isEmpty(lastInputMethodId)) {
-            if (firstEnabled >= 0) {
-                lastInputMethodId = inputMethodProperties.get(firstEnabled).getId();
+        if (TextUtils.isEmpty(currentInputMethodId)) {
+            if (firstEnabledIMI != null) {
+                currentInputMethodId = firstEnabledIMI.getId();
             } else {
-                lastInputMethodId = null;
+                currentInputMethodId = null;
             }
+        }
+
+        if (DEBUG) {
+            Log.d(TAG, "--- Save enabled inputmethod settings. :" + builder.toString());
+            Log.d(TAG, "--- Save disable system inputmethod settings. :"
+                    + disabledSysImes.toString());
+            Log.d(TAG, "--- Save default inputmethod settings. :" + currentInputMethodId);
+        }
+
+        // redefines SelectedSubtype when all subtypes are unchecked or there is no subtype
+        // selected.
+        if (firstSubtypeHashCode == NOT_A_SUBTYPE_ID || !isInputMethodSubtypeSelected(resolver)) {
+            if (DEBUG) {
+                Log.d(TAG, "--- Set inputmethod subtype because it's not defined."
+                        + firstSubtypeHashCode);
+            }
+            putSelectedInputMethodSubtype(resolver, firstSubtypeHashCode);
         }
 
         Settings.Secure.putString(resolver,
@@ -86,34 +173,23 @@ public class InputMethodAndSubtypeUtil {
         Settings.Secure.putString(resolver,
                 Settings.Secure.DISABLED_SYSTEM_INPUT_METHODS, disabledSysImes.toString());
         Settings.Secure.putString(resolver, Settings.Secure.DEFAULT_INPUT_METHOD,
-                lastInputMethodId != null ? lastInputMethodId : "");
+                currentInputMethodId != null ? currentInputMethodId : "");
     }
 
     public static void loadInputMethodSubtypeList(
             SettingsPreferenceFragment context, ContentResolver resolver,
             List<InputMethodInfo> inputMethodProperties) {
-        final HashSet<String> enabled = new HashSet<String>();
-        String enabledStr = Settings.Secure.getString(resolver,
-                Settings.Secure.ENABLED_INPUT_METHODS);
-        if (enabledStr != null) {
-            final TextUtils.SimpleStringSplitter splitter = sStringColonSplitter;
-            splitter.setString(enabledStr);
-            while (splitter.hasNext()) {
-                enabled.add(splitter.next());
-            }
-        }
+        HashMap<String, HashSet<String>> enabledSubtypes =
+                getEnabledInputMethodsAndSubtypeList(resolver);
 
-        // Update the statuses of the Check Boxes.
-        int N = inputMethodProperties.size();
-        // TODO: Use iterator.
-        for (int i = 0; i < N; ++i) {
-            final String id = inputMethodProperties.get(i).getId();
-            CheckBoxPreference pref = (CheckBoxPreference) context.findPreference(
-                    inputMethodProperties.get(i).getId());
+        for (InputMethodInfo property : inputMethodProperties) {
+            final String id = property.getId();
+            CheckBoxPreference pref = (CheckBoxPreference) context.findPreference(id);
             if (pref != null) {
-                boolean isEnabled = enabled.contains(id);
+                boolean isEnabled = enabledSubtypes.containsKey(id);
                 pref.setChecked(isEnabled);
                 setSubtypesPreferenceEnabled(context, inputMethodProperties, id, isEnabled);
+                updateSubtypesPreferenceChecked(context, inputMethodProperties, enabledSubtypes);
             }
         }
     }
@@ -121,17 +197,41 @@ public class InputMethodAndSubtypeUtil {
     public static void setSubtypesPreferenceEnabled(SettingsPreferenceFragment context,
             List<InputMethodInfo> inputMethodProperties, String id, boolean enabled) {
         PreferenceScreen preferenceScreen = context.getPreferenceScreen();
-        final int N = inputMethodProperties.size();
-        // TODO: Use iterator.
-        for (int i = 0; i < N; i++) {
-            InputMethodInfo imi = inputMethodProperties.get(i);
+        for (InputMethodInfo imi : inputMethodProperties) {
             if (id.equals(imi.getId())) {
-                for (InputMethodSubtype subtype: imi.getSubtypes()) {
-                    preferenceScreen.findPreference(id + subtype.hashCode()).setEnabled(enabled);
+                for (InputMethodSubtype subtype : imi.getSubtypes()) {
+                    CheckBoxPreference pref = (CheckBoxPreference) preferenceScreen.findPreference(
+                            id + subtype.hashCode());
+                    if (pref != null) {
+                        pref.setEnabled(enabled);
+                    }
                 }
             }
         }
     }
+
+    public static void updateSubtypesPreferenceChecked(SettingsPreferenceFragment context,
+            List<InputMethodInfo> inputMethodProperties,
+            HashMap<String, HashSet<String>> enabledSubtypes) {
+        PreferenceScreen preferenceScreen = context.getPreferenceScreen();
+        for (InputMethodInfo imi : inputMethodProperties) {
+            String id = imi.getId();
+            HashSet<String> enabledSubtypesSet = enabledSubtypes.get(id);
+            for (InputMethodSubtype subtype : imi.getSubtypes()) {
+                String hashCode = String.valueOf(subtype.hashCode());
+                if (DEBUG) {
+                    Log.d(TAG, "--- Set checked state: " + "id" + ", " + hashCode + ", "
+                            + enabledSubtypesSet.contains(hashCode));
+                }
+                CheckBoxPreference pref = (CheckBoxPreference) preferenceScreen.findPreference(
+                        id + hashCode);
+                if (pref != null) {
+                    pref.setChecked(enabledSubtypesSet.contains(hashCode));
+                }
+            }
+        }
+    }
+
     public static boolean isSystemIme(InputMethodInfo property) {
         return (property.getServiceInfo().applicationInfo.flags
                 & ApplicationInfo.FLAG_SYSTEM) != 0;
