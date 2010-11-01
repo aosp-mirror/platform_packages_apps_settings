@@ -44,11 +44,9 @@
     </PreferenceScreen>
         
     <PreferenceScreen
-            android:title="@string/manageapplications_settings_title"
-            android:summary="@string/manageapplications_settings_summary">
-        <intent android:action="android.intent.action.MAIN"
-                android:targetPackage="com.android.settings"
-                android:targetClass="com.android.settings.ManageApplications" />
+        android:fragment="com.android.settings.applications.ManageApplications"
+        android:title="@string/manageapplications_settings_title"
+        android:summary="@string/manageapplications_settings_summary">
     </PreferenceScreen>
 
     <PreferenceScreen

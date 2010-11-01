@@ -39,6 +39,7 @@ import java.util.regex.Pattern;
 public class ApplicationsState {
     static final String TAG = "ApplicationsState";
     static final boolean DEBUG = false;
+    static final boolean DEBUG_LOCKING = false;
 
     public static interface Callbacks {
         public void onRunningStateChanged(boolean running);
@@ -66,15 +67,17 @@ public class ApplicationsState {
                 .replaceAll("").toLowerCase();
     }
 
-    public static class AppEntry {
+    public static class SizeInfo {
+        long cacheSize;
+        long codeSize;
+        long dataSize;
+    }
+    
+    public static class AppEntry extends SizeInfo {
         final File apkFile;
         final long id;
         String label;
         long size;
-        
-        long cacheSize;
-        long codeSize;
-        long dataSize;
 
         boolean mounted;
         
@@ -334,9 +337,31 @@ public class ApplicationsState {
                 Process.THREAD_PRIORITY_BACKGROUND);
         mThread.start();
         mBackgroundHandler = new BackgroundHandler(mThread.getLooper());
+        
+        /**
+         * This is a trick to prevent the foreground thread from being delayed.
+         * The problem is that Dalvik monitors are initially spin locks, to keep
+         * them lightweight.  This leads to unfair contention -- Even though the
+         * background thread only holds the lock for a short amount of time, if
+         * it keeps running and locking again it can prevent the main thread from
+         * acquiring its lock for a long time...  sometimes even > 5 seconds
+         * (leading to an ANR).
+         * 
+         * Dalvik will promote a monitor to a "real" lock if it detects enough
+         * contention on it.  It doesn't figure this out fast enough for us
+         * here, though, so this little trick will force it to turn into a real
+         * lock immediately.
+         */
+        synchronized (mEntriesMap) {
+            try {
+                mEntriesMap.wait(1);
+            } catch (InterruptedException e) {
+            }
+        }
     }
 
     void resume(Callbacks callbacks) {
+        if (DEBUG_LOCKING) Log.v(TAG, "resume about to acquire lock...");
         synchronized (mEntriesMap) {
             mCurCallbacks = callbacks;
             mResumed = true;
@@ -364,13 +389,16 @@ public class ApplicationsState {
             if (!mBackgroundHandler.hasMessages(BackgroundHandler.MSG_LOAD_ENTRIES)) {
                 mBackgroundHandler.sendEmptyMessage(BackgroundHandler.MSG_LOAD_ENTRIES);
             }
+            if (DEBUG_LOCKING) Log.v(TAG, "...resume releasing lock");
         }
     }
 
     void pause() {
+        if (DEBUG_LOCKING) Log.v(TAG, "pause about to acquire lock...");
         synchronized (mEntriesMap) {
             mCurCallbacks = null;
             mResumed = false;
+            if (DEBUG_LOCKING) Log.v(TAG, "...pause releasing lock");
         }
     }
 
@@ -438,10 +466,12 @@ public class ApplicationsState {
             ApplicationInfo info = apps.get(i);
             if (filter == null || filter.filterApp(info)) {
                 synchronized (mEntriesMap) {
+                    if (DEBUG_LOCKING) Log.v(TAG, "rebuild acquired lock");
                     AppEntry entry = getEntryLocked(info);
                     entry.ensureLabel(mContext);
                     if (DEBUG) Log.i(TAG, "Using " + info.packageName + ": " + entry);
                     filteredApps.add(entry);
+                    if (DEBUG_LOCKING) Log.v(TAG, "rebuild releasing lock");
                 }
             }
         }
@@ -467,6 +497,7 @@ public class ApplicationsState {
     }
 
     AppEntry getEntry(String packageName) {
+        if (DEBUG_LOCKING) Log.v(TAG, "getEntry about to acquire lock...");
         synchronized (mEntriesMap) {
             AppEntry entry = mEntriesMap.get(packageName);
             if (entry == null) {
@@ -478,6 +509,7 @@ public class ApplicationsState {
                     }
                 }
             }
+            if (DEBUG_LOCKING) Log.v(TAG, "...getEntry releasing lock");
             return entry;
         }
     }
@@ -492,20 +524,25 @@ public class ApplicationsState {
     }
     
     void requestSize(String packageName) {
+        if (DEBUG_LOCKING) Log.v(TAG, "requestSize about to acquire lock...");
         synchronized (mEntriesMap) {
             AppEntry entry = mEntriesMap.get(packageName);
             if (entry != null) {
                 mPm.getPackageSizeInfo(packageName, mBackgroundHandler.mStatsObserver);
             }
+            if (DEBUG_LOCKING) Log.v(TAG, "...requestSize releasing lock");
         }
     }
 
     long sumCacheSizes() {
         long sum = 0;
+        if (DEBUG_LOCKING) Log.v(TAG, "sumCacheSizes about to acquire lock...");
         synchronized (mEntriesMap) {
+            if (DEBUG_LOCKING) Log.v(TAG, "-> sumCacheSizes now has lock");
             for (int i=mAppEntries.size()-1; i>=0; i--) {
                 sum += mAppEntries.get(i).cacheSize;
             }
+            if (DEBUG_LOCKING) Log.v(TAG, "...sumCacheSizes releasing lock");
         }
         return sum;
     }
@@ -522,15 +559,18 @@ public class ApplicationsState {
     void addPackage(String pkgName) {
         try {
             synchronized (mEntriesMap) {
+                if (DEBUG_LOCKING) Log.v(TAG, "addPackage acquired lock");
                 if (DEBUG) Log.i(TAG, "Adding package " + pkgName);
                 if (!mResumed) {
                     // If we are not resumed, we will do a full query the
                     // next time we resume, so there is no reason to do work
                     // here.
+                    if (DEBUG_LOCKING) Log.v(TAG, "addPackage release lock: not resumed");
                     return;
                 }
                 if (indexOfApplicationInfoLocked(pkgName) >= 0) {
                     if (DEBUG) Log.i(TAG, "Package already exists!");
+                    if (DEBUG_LOCKING) Log.v(TAG, "addPackage release lock: already exists");
                     return;
                 }
                 ApplicationInfo info = mPm.getApplicationInfo(pkgName,
@@ -543,6 +583,7 @@ public class ApplicationsState {
                 if (!mMainHandler.hasMessages(MainHandler.MSG_PACKAGE_LIST_CHANGED)) {
                     mMainHandler.sendEmptyMessage(MainHandler.MSG_PACKAGE_LIST_CHANGED);
                 }
+                if (DEBUG_LOCKING) Log.v(TAG, "addPackage releasing lock");
             }
         } catch (NameNotFoundException e) {
         }
@@ -550,6 +591,7 @@ public class ApplicationsState {
 
     void removePackage(String pkgName) {
         synchronized (mEntriesMap) {
+            if (DEBUG_LOCKING) Log.v(TAG, "removePackage acquired lock");
             int idx = indexOfApplicationInfoLocked(pkgName);
             if (DEBUG) Log.i(TAG, "removePackage: " + pkgName + " @ " + idx);
             if (idx >= 0) {
@@ -564,6 +606,7 @@ public class ApplicationsState {
                     mMainHandler.sendEmptyMessage(MainHandler.MSG_PACKAGE_LIST_CHANGED);
                 }
             }
+            if (DEBUG_LOCKING) Log.v(TAG, "removePackage releasing lock");
         }
     }
 
@@ -611,6 +654,7 @@ public class ApplicationsState {
             public void onGetStatsCompleted(PackageStats stats, boolean succeeded) {
                 boolean sizeChanged = false;
                 synchronized (mEntriesMap) {
+                    if (DEBUG_LOCKING) Log.v(TAG, "onGetStatsCompleted acquired lock");
                     AppEntry entry = mEntriesMap.get(stats.packageName);
                     if (entry != null) {
                         synchronized (entry) {
@@ -642,6 +686,7 @@ public class ApplicationsState {
                         mCurComputingSizePkg = null;
                         sendEmptyMessage(MSG_LOAD_SIZES);
                     }
+                    if (DEBUG_LOCKING) Log.v(TAG, "onGetStatsCompleted releasing lock");
                 }
             }
         };
@@ -661,6 +706,7 @@ public class ApplicationsState {
                 case MSG_LOAD_ENTRIES: {
                     int numDone = 0;
                     synchronized (mEntriesMap) {
+                        if (DEBUG_LOCKING) Log.v(TAG, "MSG_LOAD_ENTRIES acquired lock");
                         for (int i=0; i<mApplications.size() && numDone<6; i++) {
                             if (!mRunning) {
                                 mRunning = true;
@@ -674,6 +720,7 @@ public class ApplicationsState {
                                 getEntryLocked(info);
                             }
                         }
+                        if (DEBUG_LOCKING) Log.v(TAG, "MSG_LOAD_ENTRIES releasing lock");
                     }
 
                     if (numDone >= 6) {
@@ -685,6 +732,7 @@ public class ApplicationsState {
                 case MSG_LOAD_ICONS: {
                     int numDone = 0;
                     synchronized (mEntriesMap) {
+                        if (DEBUG_LOCKING) Log.v(TAG, "MSG_LOAD_ICONS acquired lock");
                         for (int i=0; i<mAppEntries.size() && numDone<2; i++) {
                             AppEntry entry = mAppEntries.get(i);
                             if (entry.icon == null || !entry.mounted) {
@@ -701,6 +749,7 @@ public class ApplicationsState {
                                 }
                             }
                         }
+                        if (DEBUG_LOCKING) Log.v(TAG, "MSG_LOAD_ICONS releasing lock");
                     }
                     if (numDone > 0) {
                         if (!mMainHandler.hasMessages(MainHandler.MSG_PACKAGE_ICON_CHANGED)) {
@@ -715,7 +764,9 @@ public class ApplicationsState {
                 } break;
                 case MSG_LOAD_SIZES: {
                     synchronized (mEntriesMap) {
+                        if (DEBUG_LOCKING) Log.v(TAG, "MSG_LOAD_SIZES acquired lock");
                         if (mCurComputingSizePkg != null) {
+                            if (DEBUG_LOCKING) Log.v(TAG, "MSG_LOAD_SIZES releasing: currently computing");
                             return;
                         }
 
@@ -735,6 +786,7 @@ public class ApplicationsState {
                                     mCurComputingSizePkg = entry.info.packageName;
                                     mPm.getPackageSizeInfo(mCurComputingSizePkg, mStatsObserver);
                                 }
+                                if (DEBUG_LOCKING) Log.v(TAG, "MSG_LOAD_SIZES releasing: now computing");
                                 return;
                             }
                         }
@@ -745,6 +797,7 @@ public class ApplicationsState {
                                     MainHandler.MSG_RUNNING_STATE_CHANGED, 0);
                             mMainHandler.sendMessage(m);
                         }
+                        if (DEBUG_LOCKING) Log.v(TAG, "MSG_LOAD_SIZES releasing lock");
                     }
                 } break;
             }

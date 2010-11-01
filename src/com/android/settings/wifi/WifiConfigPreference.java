@@ -45,7 +45,8 @@ public class WifiConfigPreference extends Preference implements WifiConfigUiBase
             AccessPoint accessPoint, boolean edit) {
         super(wifiSettings.getActivity());
         mWifiSettings = wifiSettings;
-        setLayoutResource(R.layout.wifi_config_preference);
+        // setLayoutResource(R.layout.wifi_config_preference);
+        setLayoutResource(R.layout.wifi_config_preference2);
         mListener = listener;
         mAccessPoint = accessPoint;
         mEdit = edit;

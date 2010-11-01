@@ -433,7 +433,7 @@ public class RunningProcessesView extends FrameLayout
         super(context, attrs);
     }
     
-    public void doCreate(Bundle savedInstanceState, Object nonConfigurationInstace) {
+    public void doCreate(Bundle savedInstanceState) {
         mAm = (ActivityManager)getContext().getSystemService(Context.ACTIVITY_SERVICE);
         mState = RunningState.getInstance(getContext());
         LayoutInflater inflater = (LayoutInflater)getContext().getSystemService(
@@ -484,10 +484,6 @@ public class RunningProcessesView extends FrameLayout
         }
         mDataAvail = dataAvail;
         return false;
-    }
-
-    public Object doRetainNonConfigurationInstance() {
-        return null;
     }
 
     void updateTimes() {

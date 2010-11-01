@@ -20,6 +20,7 @@ import com.android.internal.content.PackageHelper;
 import com.android.settings.R;
 import com.android.settings.applications.ApplicationsState.AppEntry;
 
+import android.app.Fragment;
 import android.app.TabActivity;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -33,12 +34,14 @@ import android.os.Environment;
 import android.os.RemoteException;
 import android.os.ServiceManager;
 import android.os.StatFs;
+import android.preference.PreferenceActivity;
 import android.provider.Settings;
 import android.text.format.Formatter;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
@@ -54,6 +57,7 @@ import android.widget.Filterable;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TabHost;
+import android.widget.TabWidget;
 import android.widget.TextView;
 import android.widget.AdapterView.OnItemClickListener;
 
@@ -108,8 +112,8 @@ final class CanBeOnSdCardChecker {
  * can be launched through Settings or via the ACTION_MANAGE_PACKAGE_STORAGE
  * intent.
  */
-public class ManageApplications extends TabActivity implements
-        OnItemClickListener, DialogInterface.OnCancelListener,
+public class ManageApplications extends Fragment implements
+        OnItemClickListener,
         TabHost.TabContentFactory, TabHost.OnTabChangeListener {
     static final String TAG = "ManageApplications";
     static final boolean DEBUG = false;
@@ -169,12 +173,24 @@ public class ManageApplications extends TabActivity implements
 
     private boolean mResumedRunning;
     private boolean mActivityResumed;
-    private Object mNonConfigInstance;
     
     private StatFs mDataFileStats;
     private StatFs mSDCardFileStats;
     private boolean mLastShowedInternalStorage = true;
     private long mLastUsedStorage, mLastAppStorage, mLastFreeStorage;
+
+    static final String TAB_DOWNLOADED = "Downloaded";
+    static final String TAB_RUNNING = "Running";
+    static final String TAB_ALL = "All";
+    static final String TAB_SDCARD = "OnSdCard";
+    private View mRootView;
+
+    // -------------- Copied from TabActivity --------------
+
+    private TabHost mTabHost;
+    private String mDefaultTab = null;
+
+    // -------------- Copied from TabActivity --------------
 
     final Runnable mRunningProcessesAvail = new Runnable() {
         public void run() {
@@ -345,11 +361,17 @@ public class ManageApplications extends TabActivity implements
 
         @Override
         public void onRunningStateChanged(boolean running) {
-            setProgressBarIndeterminateVisibility(running);
+            getActivity().setProgressBarIndeterminateVisibility(running);
         }
 
         @Override
         public void onRebuildComplete(ArrayList<AppEntry> apps) {
+            if (mLoadingContainer.getVisibility() == View.VISIBLE) {
+                mLoadingContainer.startAnimation(AnimationUtils.loadAnimation(
+                        getActivity(), android.R.anim.fade_out));
+                mListContainer.startAnimation(AnimationUtils.loadAnimation(
+                        getActivity(), android.R.anim.fade_in));
+            }
             mListContainer.setVisibility(View.VISIBLE);
             mLoadingContainer.setVisibility(View.GONE);
             mWaitingForData = false;
@@ -447,7 +469,7 @@ public class ManageApplications extends TabActivity implements
                 holder.entry = entry;
                 if (entry.label != null) {
                     holder.appName.setText(entry.label);
-                    holder.appName.setTextColor(getResources().getColorStateList(
+                    holder.appName.setTextColor(getActivity().getResources().getColorStateList(
                             entry.info.enabled ? android.R.color.primary_text_dark
                                     : android.R.color.secondary_text_dark));
                 }
@@ -485,18 +507,15 @@ public class ManageApplications extends TabActivity implements
         }
     }
     
-    static final String TAB_DOWNLOADED = "Downloaded";
-    static final String TAB_RUNNING = "Running";
-    static final String TAB_ALL = "All";
-    static final String TAB_SDCARD = "OnSdCard";
-    private View mRootView;
-    
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        mApplicationsState = ApplicationsState.getInstance(getApplication());
+
+        setHasOptionsMenu(true);
+
+        mApplicationsState = ApplicationsState.getInstance(getActivity().getApplication());
         mApplicationsAdapter = new ApplicationsAdapter(mApplicationsState);
-        Intent intent = getIntent();
+        Intent intent = getActivity().getIntent();
         String action = intent.getAction();
         String defaultTabTag = TAB_DOWNLOADED;
         if (intent.getComponent().getClassName().equals(
@@ -520,19 +539,21 @@ public class ManageApplications extends TabActivity implements
             if (tmp != null) defaultTabTag = tmp;
         }
         
-        mNonConfigInstance = getLastNonConfigurationInstance();
+        mDefaultTab = defaultTabTag;
         
         mDataFileStats = new StatFs("/data");
         mSDCardFileStats = new StatFs(Environment.getExternalStorageDirectory().toString());
 
-        // initialize some window features
-        requestWindowFeature(Window.FEATURE_RIGHT_ICON);
-        requestWindowFeature(Window.FEATURE_INDETERMINATE_PROGRESS);
-        mInvalidSizeStr = getText(R.string.invalid_size_value);
-        mComputingSizeStr = getText(R.string.computing_size);
+        mInvalidSizeStr = getActivity().getText(R.string.invalid_size_value);
+        mComputingSizeStr = getActivity().getText(R.string.computing_size);
+    }
+
+
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         // initialize the inflater
-        mInflater = (LayoutInflater)getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        mRootView = mInflater.inflate(R.layout.manage_applications, null);
+        mInflater = inflater;
+        mRootView = inflater.inflate(R.layout.manage_applications, null);
         mLoadingContainer = mRootView.findViewById(R.id.loading_container);
         mListContainer = mRootView.findViewById(R.id.list_container);
         // Create adapter and list view here
@@ -556,54 +577,56 @@ public class ManageApplications extends TabActivity implements
         mRunningProcessesView = (RunningProcessesView)mRootView.findViewById(
                 R.id.running_processes);
 
-        final TabHost tabHost = getTabHost();
+        View tabRoot = mInflater.inflate(com.android.internal.R.layout.tab_content, null);
+        mTabHost = (TabHost)tabRoot.findViewById(com.android.internal.R.id.tabhost);
+        mTabHost.setup();
+        final TabHost tabHost = mTabHost;
         tabHost.addTab(tabHost.newTabSpec(TAB_DOWNLOADED)
-                .setIndicator(getString(R.string.filter_apps_third_party),
-                        getResources().getDrawable(R.drawable.ic_tab_download))
+                .setIndicator(getActivity().getString(R.string.filter_apps_third_party),
+                        getActivity().getResources().getDrawable(R.drawable.ic_tab_download))
                 .setContent(this));
         tabHost.addTab(tabHost.newTabSpec(TAB_ALL)
-                .setIndicator(getString(R.string.filter_apps_all),
-                        getResources().getDrawable(R.drawable.ic_tab_all))
+                .setIndicator(getActivity().getString(R.string.filter_apps_all),
+                        getActivity().getResources().getDrawable(R.drawable.ic_tab_all))
                 .setContent(this));
         tabHost.addTab(tabHost.newTabSpec(TAB_SDCARD)
-                .setIndicator(getString(R.string.filter_apps_onsdcard),
-                        getResources().getDrawable(R.drawable.ic_tab_sdcard))
+                .setIndicator(getActivity().getString(R.string.filter_apps_onsdcard),
+                        getActivity().getResources().getDrawable(R.drawable.ic_tab_sdcard))
                 .setContent(this));
         tabHost.addTab(tabHost.newTabSpec(TAB_RUNNING)
-                .setIndicator(getString(R.string.filter_apps_running),
-                        getResources().getDrawable(R.drawable.ic_tab_running))
+                .setIndicator(getActivity().getString(R.string.filter_apps_running),
+                        getActivity().getResources().getDrawable(R.drawable.ic_tab_running))
                 .setContent(this));
-        tabHost.setCurrentTabByTag(defaultTabTag);
+        tabHost.setCurrentTabByTag(mDefaultTab);
         tabHost.setOnTabChangedListener(this);
+
+        return tabRoot;
     }
-    
+
     @Override
     public void onStart() {
         super.onStart();
     }
 
     @Override
-    protected void onResume() {
+    public void onResume() {
         super.onResume();
         mActivityResumed = true;
         showCurrentTab();
     }
 
     @Override
-    protected void onSaveInstanceState(Bundle outState) {
+    public void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
         outState.putInt("sortOrder", mSortOrder);
         outState.putInt("filterApps", mFilterApps);
-        outState.putString("defautTabTag", getTabHost().getCurrentTabTag());
+        if (mTabHost != null) {
+            outState.putString("defautTabTag", mTabHost.getCurrentTabTag());
+        }
     }
 
     @Override
-    public Object onRetainNonConfigurationInstance() {
-        return mRunningProcessesView.doRetainNonConfigurationInstance();
-    }
-    
-    @Override
-    protected void onPause() {
+    public void onPause() {
         super.onPause();
         mActivityResumed = false;
         mApplicationsAdapter.pause();
@@ -614,8 +637,7 @@ public class ManageApplications extends TabActivity implements
     }
 
     @Override
-    protected void onActivityResult(int requestCode, int resultCode,
-            Intent data) {
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (requestCode == INSTALLED_APP_DETAILS && mCurrentPkgName != null) {
             mApplicationsState.requestSize(mCurrentPkgName);
         }
@@ -626,23 +648,34 @@ public class ManageApplications extends TabActivity implements
         // Create intent to start new activity
         Intent intent = new Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS,
                 Uri.fromParts("package", mCurrentPkgName, null));
-        // start new activity to display extended information
-        startActivityForResult(intent, INSTALLED_APP_DETAILS);
+        // start new fragment to display extended information
+        Bundle args = new Bundle();
+        args.putString(InstalledAppDetails.ARG_PACKAGE_NAME, mCurrentPkgName);
+
+        PreferenceActivity pa = (PreferenceActivity)getActivity();
+        if (pa.isMultiPane()) {
+            Fragment frag = new InstalledAppDetails();
+            frag.setTargetFragment(this, INSTALLED_APP_DETAILS);
+            frag.setArguments(args);
+            frag.setTargetFragment(this, INSTALLED_APP_DETAILS);
+            pa.startPreferenceFragment(frag, true);
+        } else {
+            pa.startWithFragment(InstalledAppDetails.class.getName(), args);
+        }
     }
     
     @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         menu.add(0, SORT_ORDER_ALPHA, 1, R.string.sort_order_alpha)
                 .setIcon(android.R.drawable.ic_menu_sort_alphabetically);
         menu.add(0, SORT_ORDER_SIZE, 2, R.string.sort_order_size)
                 .setIcon(android.R.drawable.ic_menu_sort_by_size); 
         menu.add(0, SHOW_RUNNING_SERVICES, 3, R.string.show_running_services);
         menu.add(0, SHOW_BACKGROUND_PROCESSES, 3, R.string.show_background_processes);
-        return true;
     }
     
     @Override
-    public boolean onPrepareOptionsMenu(Menu menu) {
+    public void onPrepareOptionsMenu(Menu menu) {
         /*
          * The running processes screen doesn't use the mApplicationsAdapter
          * so bringing up this menu in that case doesn't make any sense.
@@ -659,7 +692,6 @@ public class ManageApplications extends TabActivity implements
             menu.findItem(SHOW_RUNNING_SERVICES).setVisible(false);
             menu.findItem(SHOW_BACKGROUND_PROCESSES).setVisible(false);
         }
-        return true;
     }
 
     @Override
@@ -678,18 +710,6 @@ public class ManageApplications extends TabActivity implements
         return true;
     }
     
-    @Override
-    public boolean onKeyUp(int keyCode, KeyEvent event) {
-        if (keyCode == KeyEvent.KEYCODE_SEARCH && event.isTracking()) {
-            if (mCurView != VIEW_RUNNING) {
-                ((InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE))
-                        .showSoftInputUnchecked(0, null);
-            }
-            return true;
-        }
-        return super.onKeyUp(keyCode, event);
-    }
-
     public void onItemClick(AdapterView<?> parent, View view, int position,
             long id) {
         ApplicationsState.AppEntry entry = mApplicationsAdapter.getAppEntry(position);
@@ -697,11 +717,6 @@ public class ManageApplications extends TabActivity implements
         startApplicationDetailsActivity();
     }
     
-    // Finish the activity if the user presses the back button to cancel the activity
-    public void onCancel(DialogInterface dialog) {
-        finish();
-    }
-
     public View createTabContent(String tag) {
         return mRootView;
     }
@@ -724,7 +739,7 @@ public class ManageApplications extends TabActivity implements
             if (mLastShowedInternalStorage) {
                 mLastShowedInternalStorage = false;
             }
-            newLabel = this.getText(R.string.sd_card_storage);
+            newLabel = getActivity().getText(R.string.sd_card_storage);
             mSDCardFileStats.restat(Environment.getExternalStorageDirectory().toString());
             try {
                 totalStorage = (long)mSDCardFileStats.getBlockCount() *
@@ -738,7 +753,7 @@ public class ManageApplications extends TabActivity implements
             if (!mLastShowedInternalStorage) {
                 mLastShowedInternalStorage = true;
             }
-            newLabel = this.getText(R.string.internal_storage);
+            newLabel = getActivity().getText(R.string.internal_storage);
             mDataFileStats.restat("/data");
             try {
                 totalStorage = (long)mDataFileStats.getBlockCount() *
@@ -763,14 +778,14 @@ public class ManageApplications extends TabActivity implements
             long usedStorage = totalStorage - freeStorage;
             if (mLastUsedStorage != usedStorage) {
                 mLastUsedStorage = usedStorage;
-                String sizeStr = Formatter.formatShortFileSize(this, usedStorage);
-                mUsedStorageText.setText(getResources().getString(
+                String sizeStr = Formatter.formatShortFileSize(getActivity(), usedStorage);
+                mUsedStorageText.setText(getActivity().getResources().getString(
                         R.string.service_foreground_processes, sizeStr));
             }
             if (mLastFreeStorage != freeStorage) {
                 mLastFreeStorage = freeStorage;
-                String sizeStr = Formatter.formatShortFileSize(this, freeStorage);
-                mFreeStorageText.setText(getResources().getString(
+                String sizeStr = Formatter.formatShortFileSize(getActivity(), freeStorage);
+                mFreeStorageText.setText(getActivity().getResources().getString(
                         R.string.service_background_processes, sizeStr));
             }
         } else {
@@ -802,7 +817,7 @@ public class ManageApplications extends TabActivity implements
             }
         } else if (which == VIEW_RUNNING) {
             if (!mCreatedRunning) {
-                mRunningProcessesView.doCreate(null, mNonConfigInstance);
+                mRunningProcessesView.doCreate(null);
                 mCreatedRunning = true;
             }
             boolean haveData = true;
@@ -826,16 +841,16 @@ public class ManageApplications extends TabActivity implements
     void handleRunningProcessesAvail() {
         if (mCurView == VIEW_RUNNING) {
             mLoadingContainer.startAnimation(AnimationUtils.loadAnimation(
-                    this, android.R.anim.fade_out));
+                    getActivity(), android.R.anim.fade_out));
             mRunningProcessesView.startAnimation(AnimationUtils.loadAnimation(
-                    this, android.R.anim.fade_in));
+                    getActivity(), android.R.anim.fade_in));
             mRunningProcessesView.setVisibility(View.VISIBLE);
             mLoadingContainer.setVisibility(View.GONE);
         }
     }
 
     public void showCurrentTab() {
-        String tabId = getTabHost().getCurrentTabTag();
+        String tabId = mTabHost.getCurrentTabTag();
         int newOption;
         if (TAB_DOWNLOADED.equalsIgnoreCase(tabId)) {
             newOption = FILTER_APPS_THIRD_PARTY;
@@ -844,8 +859,9 @@ public class ManageApplications extends TabActivity implements
         } else if (TAB_SDCARD.equalsIgnoreCase(tabId)) {
             newOption = FILTER_APPS_SDCARD;
         } else if (TAB_RUNNING.equalsIgnoreCase(tabId)) {
-            ((InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE))
-                    .hideSoftInputFromWindow(getWindow().getDecorView().getWindowToken(), 0);
+            ((InputMethodManager)getActivity().getSystemService(Context.INPUT_METHOD_SERVICE))
+                    .hideSoftInputFromWindow(
+                            getActivity().getWindow().getDecorView().getWindowToken(), 0);
             selectView(VIEW_RUNNING);
             return;
         } else {

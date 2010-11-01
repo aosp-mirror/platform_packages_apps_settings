@@ -14,9 +14,12 @@
  * limitations under the License.
  */
 
-package com.android.settings;
+package com.android.settings.inputmethod;
 
-import android.app.Activity;
+import com.android.settings.R;
+import com.android.settings.SettingsPreferenceFragment;
+import com.android.settings.Utils;
+
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -28,18 +31,14 @@ import android.preference.CheckBoxPreference;
 import android.preference.Preference;
 import android.preference.PreferenceGroup;
 import android.preference.PreferenceScreen;
-import android.provider.Settings;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.inputmethod.InputMethodInfo;
 import android.view.inputmethod.InputMethodManager;
 
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
 
-public class LanguageSettings extends SettingsPreferenceFragment {
-    private static final String TAG = LanguageSettings.class.getSimpleName();
+public class InputMethodAndLanguageSettings extends SettingsPreferenceFragment {
 
     private static final String KEY_PHONE_LANGUAGE = "phone_language";
     private static final String KEY_INPUT_METHOD = "input_method";
@@ -85,14 +84,15 @@ public class LanguageSettings extends SettingsPreferenceFragment {
         mCheckboxes = new ArrayList<CheckBoxPreference>();
         onCreateIMM();
     }
-    
+
     private boolean isSystemIme(InputMethodInfo property) {
         return (property.getServiceInfo().applicationInfo.flags
                 & ApplicationInfo.FLAG_SYSTEM) != 0;
     }
-    
+
     private void onCreateIMM() {
-        InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+        InputMethodManager imm = (InputMethodManager) getSystemService(
+                Context.INPUT_METHOD_SERVICE);
 
         mInputMethodProperties = imm.getInputMethodList();
 
@@ -143,27 +143,8 @@ public class LanguageSettings extends SettingsPreferenceFragment {
     public void onResume() {
         super.onResume();
 
-        final HashSet<String> enabled = new HashSet<String>();
-        String enabledStr = Settings.Secure.getString(getContentResolver(),
-                Settings.Secure.ENABLED_INPUT_METHODS);
-        if (enabledStr != null) {
-            final TextUtils.SimpleStringSplitter splitter = mStringColonSplitter;
-            splitter.setString(enabledStr);
-            while (splitter.hasNext()) {
-                enabled.add(splitter.next());
-            }
-        }
-        
-        // Update the statuses of the Check Boxes.
-        int N = mInputMethodProperties.size();
-        for (int i = 0; i < N; ++i) {
-            final String id = mInputMethodProperties.get(i).getId();
-            CheckBoxPreference pref = (CheckBoxPreference) findPreference(mInputMethodProperties
-                    .get(i).getId());
-            if (pref != null) {
-                pref.setChecked(enabled.contains(id));
-            }
-        }
+        InputMethodAndSubtypeUtil.loadInputMethodSubtypeList(
+                this, getContentResolver(), mInputMethodProperties);
         mLastTickedInputMethodId = null;
 
         if (mLanguagePref != null) {
@@ -179,60 +160,13 @@ public class LanguageSettings extends SettingsPreferenceFragment {
     @Override
     public void onPause() {
         super.onPause();
-
-        String lastInputMethodId = Settings.Secure.getString(getContentResolver(),
-                Settings.Secure.DEFAULT_INPUT_METHOD);
-
-        StringBuilder builder = new StringBuilder();
-        StringBuilder disabledSysImes = new StringBuilder();
-
-        int firstEnabled = -1;
-        int N = mInputMethodProperties.size();
-        for (int i = 0; i < N; ++i) {
-            final InputMethodInfo property = mInputMethodProperties.get(i);
-            final String id = property.getId();
-            CheckBoxPreference pref = (CheckBoxPreference) findPreference(id);
-            boolean hasIt = id.equals(lastInputMethodId);
-            boolean systemIme = isSystemIme(property); 
-            if (((N == 1 || systemIme) && !mHaveHardKeyboard) 
-                    || (pref != null && pref.isChecked())) {
-                if (builder.length() > 0) builder.append(':');
-                builder.append(id);
-                if (firstEnabled < 0) {
-                    firstEnabled = i;
-                }
-            } else if (hasIt) {
-                lastInputMethodId = mLastTickedInputMethodId;
-            }
-            // If it's a disabled system ime, add it to the disabled list so that it
-            // doesn't get enabled automatically on any changes to the package list
-            if (pref != null && !pref.isChecked() && systemIme && mHaveHardKeyboard) {
-                if (disabledSysImes.length() > 0) disabledSysImes.append(":");
-                disabledSysImes.append(id);
-            }
-        }
-
-        // If the last input method is unset, set it as the first enabled one.
-        if (null == lastInputMethodId || "".equals(lastInputMethodId)) {
-            if (firstEnabled >= 0) {
-                lastInputMethodId = mInputMethodProperties.get(firstEnabled).getId();
-            } else {
-                lastInputMethodId = null;
-            }
-        }
-        
-        Settings.Secure.putString(getContentResolver(),
-            Settings.Secure.ENABLED_INPUT_METHODS, builder.toString());
-        Settings.Secure.putString(getContentResolver(),
-                Settings.Secure.DISABLED_SYSTEM_INPUT_METHODS, disabledSysImes.toString());
-        Settings.Secure.putString(getContentResolver(),
-            Settings.Secure.DEFAULT_INPUT_METHOD,
-            lastInputMethodId != null ? lastInputMethodId : "");
+        InputMethodAndSubtypeUtil.saveInputMethodSubtypeList(this, getContentResolver(),
+                mInputMethodProperties, mHaveHardKeyboard, mLastTickedInputMethodId);
     }
 
     @Override
     public boolean onPreferenceTreeClick(PreferenceScreen preferenceScreen, Preference preference) {
-        
+
         // Input Method stuff
         if (Utils.isMonkeyRunning()) {
             return false;
