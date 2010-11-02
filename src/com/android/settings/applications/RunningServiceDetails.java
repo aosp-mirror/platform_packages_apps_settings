@@ -2,11 +2,12 @@ package com.android.settings.applications;
 
 import com.android.settings.R;
 
-import android.app.Activity;
 import android.app.ActivityManager;
 import android.app.AlertDialog;
 import android.app.ApplicationErrorReport;
 import android.app.Dialog;
+import android.app.DialogFragment;
+import android.app.Fragment;
 import android.app.PendingIntent;
 import android.content.ActivityNotFoundException;
 import android.content.ComponentName;
@@ -37,7 +38,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
 
-public class RunningServiceDetails extends Activity
+public class RunningServiceDetails extends Fragment
         implements RunningState.OnRefreshUiListener {
     static final String TAG = "RunningServicesDetails";
     
@@ -59,6 +60,7 @@ public class RunningServiceDetails extends Activity
     
     RunningState.MergedItem mMergedItem;
     
+    View mRootView;
     ViewGroup mAllDetails;
     ViewGroup mSnippet;
     RunningProcessesView.ActiveItem mSnippetActiveItem;
@@ -84,14 +86,11 @@ public class RunningServiceDetails extends Activity
             RunningState.ServiceItem si = mServiceItem;
             if (!confirmed) {
                 if ((si.mServiceInfo.applicationInfo.flags&ApplicationInfo.FLAG_SYSTEM) != 0) {
-                    Bundle args = new Bundle();
-                    args.putParcelable("comp", si.mRunningService.service);
-                    removeDialog(DIALOG_CONFIRM_STOP);
-                    showDialog(DIALOG_CONFIRM_STOP, args);
+                    showConfirmStopDialog(si.mRunningService.service);
                     return;
                 }
             }
-            stopService(new Intent().setComponent(si.mRunningService.service));
+            getActivity().stopService(new Intent().setComponent(si.mRunningService.service));
             if (mMergedItem == null) {
                 // If this is gone, we are gone.
                 mState.updateNow();
@@ -125,7 +124,7 @@ public class RunningServiceDetails extends Activity
                 }
                 ComponentName comp = new ComponentName(mServiceItem.mServiceInfo.packageName,
                         mServiceItem.mServiceInfo.name);
-                File filename = getFileStreamPath("service_dump.txt");
+                File filename = getActivity().getFileStreamPath("service_dump.txt");
                 FileOutputStream output = null;
                 try {
                     output = new FileOutputStream(filename);
@@ -160,7 +159,7 @@ public class RunningServiceDetails extends Activity
 
             if (mManageIntent != null) {
                 try {
-                    startIntentSender(mManageIntent.getIntentSender(), null,
+                    getActivity().startIntentSender(mManageIntent.getIntentSender(), null,
                             Intent.FLAG_ACTIVITY_NEW_TASK
                                     | Intent.FLAG_ACTIVITY_CLEAR_WHEN_TASK_RESET,
                             Intent.FLAG_ACTIVITY_CLEAR_WHEN_TASK_RESET, 0);
@@ -236,7 +235,7 @@ public class RunningServiceDetails extends Activity
         
         TextView description = (TextView)root.findViewById(R.id.comp_description);
         if (si != null && si.mServiceInfo.descriptionRes != 0) {
-            description.setText(getPackageManager().getText(
+            description.setText(getActivity().getPackageManager().getText(
                     si.mServiceInfo.packageName, si.mServiceInfo.descriptionRes,
                     si.mServiceInfo.applicationInfo));
         } else {
@@ -244,15 +243,15 @@ public class RunningServiceDetails extends Activity
                 description.setText(R.string.background_process_stop_description);
             } else if (detail.mManageIntent != null) {
                 try {
-                    Resources clientr = getPackageManager().getResourcesForApplication(
+                    Resources clientr = getActivity().getPackageManager().getResourcesForApplication(
                             si.mRunningService.clientPackage);
                     String label = clientr.getString(si.mRunningService.clientLabel);
-                    description.setText(getString(R.string.service_manage_description,
+                    description.setText(getActivity().getString(R.string.service_manage_description,
                             label));
                 } catch (PackageManager.NameNotFoundException e) {
                 }
             } else {
-                description.setText(getText(si != null
+                description.setText(getActivity().getText(si != null
                         ? R.string.service_stop_description
                         : R.string.heavy_weight_stop_description));
             }
@@ -260,18 +259,19 @@ public class RunningServiceDetails extends Activity
         
         detail.mStopButton = (Button)root.findViewById(R.id.left_button);
         detail.mStopButton.setOnClickListener(detail);
-        detail.mStopButton.setText(getText(detail.mManageIntent != null
+        detail.mStopButton.setText(getActivity().getText(detail.mManageIntent != null
                 ? R.string.service_manage : R.string.service_stop));
 
         detail.mReportButton = (Button)root.findViewById(R.id.right_button);
         detail.mReportButton.setOnClickListener(detail);
         detail.mReportButton.setText(com.android.internal.R.string.report);
         // check if error reporting is enabled in secure settings
-        int enabled = Settings.Secure.getInt(getContentResolver(),
+        int enabled = Settings.Secure.getInt(getActivity().getContentResolver(),
                 Settings.Secure.SEND_ACTION_APP_ERROR, 0);
         if (enabled != 0 && si != null) {
             detail.mInstaller = ApplicationErrorReport.getErrorReportReceiver(
-                    this, si.mServiceInfo.packageName, si.mServiceInfo.applicationInfo.flags);
+                    getActivity(), si.mServiceInfo.packageName,
+                    si.mServiceInfo.applicationInfo.flags);
             detail.mReportButton.setEnabled(detail.mInstaller != null);
         } else {
             detail.mReportButton.setEnabled(false);
@@ -312,9 +312,9 @@ public class RunningServiceDetails extends Activity
                     textid = R.string.process_provider_in_use_description;
                     if (rpi.importanceReasonComponent != null) {
                         try {
-                            ProviderInfo prov = getPackageManager().getProviderInfo(
+                            ProviderInfo prov = getActivity().getPackageManager().getProviderInfo(
                                     rpi.importanceReasonComponent, 0);
-                            label = RunningState.makeLabel(getPackageManager(),
+                            label = RunningState.makeLabel(getActivity().getPackageManager(),
                                     prov.name, prov);
                         } catch (NameNotFoundException e) {
                         }
@@ -324,9 +324,9 @@ public class RunningServiceDetails extends Activity
                     textid = R.string.process_service_in_use_description;
                     if (rpi.importanceReasonComponent != null) {
                         try {
-                            ServiceInfo serv = getPackageManager().getServiceInfo(
+                            ServiceInfo serv = getActivity().getPackageManager().getServiceInfo(
                                     rpi.importanceReasonComponent, 0);
-                            label = RunningState.makeLabel(getPackageManager(),
+                            label = RunningState.makeLabel(getActivity().getPackageManager(),
                                     serv.name, serv);
                         } catch (NameNotFoundException e) {
                         }
@@ -334,7 +334,7 @@ public class RunningServiceDetails extends Activity
                     break;
             }
             if (textid != 0 && label != null) {
-                description.setText(getString(textid, label));
+                description.setText(getActivity().getString(textid, label));
             }
         }
         
@@ -405,23 +405,30 @@ public class RunningServiceDetails extends Activity
         }
     }
     
+    private void finish() {
+        getActivity().onBackPressed();
+    }
+    
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         
-        mUid = getIntent().getIntExtra(KEY_UID, 0);
-        mProcessName = getIntent().getStringExtra(KEY_PROCESS);
-        mShowBackground = getIntent().getBooleanExtra(KEY_BACKGROUND, false);
+        mUid = getArguments().getInt(KEY_UID, 0);
+        mProcessName = getArguments().getString(KEY_PROCESS);
+        mShowBackground = getArguments().getBoolean(KEY_BACKGROUND, false);
         
-        mAm = (ActivityManager)getSystemService(Context.ACTIVITY_SERVICE);
-        mInflater = (LayoutInflater)getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        mAm = (ActivityManager)getActivity().getSystemService(Context.ACTIVITY_SERVICE);
+        mInflater = (LayoutInflater)getActivity().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         
-        mState = RunningState.getInstance(this);
+        mState = RunningState.getInstance(getActivity());
+    }
+    
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        View view = mRootView = inflater.inflate(R.layout.running_service_details, null);
         
-        setContentView(R.layout.running_service_details);
-        
-        mAllDetails = (ViewGroup)findViewById(R.id.all_details);
-        mSnippet = (ViewGroup)findViewById(R.id.snippet);
+        mAllDetails = (ViewGroup)view.findViewById(R.id.all_details);
+        mSnippet = (ViewGroup)view.findViewById(R.id.snippet);
         mSnippet.setBackgroundResource(com.android.internal.R.drawable.title_bar_medium);
         mSnippet.setPadding(0, mSnippet.getPaddingTop(), 0, mSnippet.getPaddingBottom());
         mSnippetViewHolder = new RunningProcessesView.ViewHolder(mSnippet);
@@ -429,26 +436,23 @@ public class RunningServiceDetails extends Activity
         // We want to retrieve the data right now, so any active managed
         // dialog that gets created can find it.
         ensureData();
+        
+        return view;
     }
 
     @Override
-    protected void onPause() {
+    public void onPause() {
         super.onPause();
         mHaveData = false;
         mState.pause();
     }
 
     @Override
-    protected void onResume() {
+    public void onResume() {
         super.onResume();
         ensureData();
     }
 
-    @Override
-    protected void onSaveInstanceState(Bundle outState) {
-        super.onSaveInstanceState(outState);
-    }
-    
     ActiveDetail activeDetailForService(ComponentName comp) {
         for (int i=0; i<mActiveDetails.size(); i++) {
             ActiveDetail ad = mActiveDetails.get(i);
@@ -460,34 +464,56 @@ public class RunningServiceDetails extends Activity
         return null;
     }
     
-    @Override
-    protected Dialog onCreateDialog(int id, Bundle args) {
-        switch (id) {
-            case DIALOG_CONFIRM_STOP: {
-                final ComponentName comp = (ComponentName)args.getParcelable("comp");
-                if (activeDetailForService(comp) == null) {
-                    return null;
-                }
-                
-                return new AlertDialog.Builder(this)
-                        .setTitle(getString(R.string.runningservicedetails_stop_dlg_title))
-                        .setIcon(android.R.drawable.ic_dialog_alert)
-                        .setMessage(getString(R.string.runningservicedetails_stop_dlg_text))
-                        .setPositiveButton(R.string.dlg_ok,
-                                new DialogInterface.OnClickListener() {
-                            public void onClick(DialogInterface dialog, int which) {
-                                ActiveDetail ad = activeDetailForService(comp);
-                                if (ad != null) {
-                                    ad.stopActiveService(true);
+    private void showConfirmStopDialog(ComponentName comp) {
+        DialogFragment newFragment = MyAlertDialogFragment.newConfirmStop(
+                DIALOG_CONFIRM_STOP, comp);
+        newFragment.setTargetFragment(this, 0);
+        newFragment.show(getFragmentManager(), "confirmstop");
+    }
+    
+    public static class MyAlertDialogFragment extends DialogFragment {
+
+        public static MyAlertDialogFragment newConfirmStop(int id, ComponentName comp) {
+            MyAlertDialogFragment frag = new MyAlertDialogFragment();
+            Bundle args = new Bundle();
+            args.putInt("id", id);
+            args.putParcelable("comp", comp);
+            frag.setArguments(args);
+            return frag;
+        }
+
+        RunningServiceDetails getOwner() {
+            return (RunningServiceDetails)getTargetFragment();
+        }
+
+        @Override
+        public Dialog onCreateDialog(Bundle savedInstanceState) {
+            int id = getArguments().getInt("id");
+            switch (id) {
+                case DIALOG_CONFIRM_STOP: {
+                    final ComponentName comp = (ComponentName)getArguments().getParcelable("comp");
+                    if (getOwner().activeDetailForService(comp) == null) {
+                        return null;
+                    }
+                    
+                    return new AlertDialog.Builder(getActivity())
+                            .setTitle(getActivity().getString(R.string.runningservicedetails_stop_dlg_title))
+                            .setIcon(android.R.drawable.ic_dialog_alert)
+                            .setMessage(getActivity().getString(R.string.runningservicedetails_stop_dlg_text))
+                            .setPositiveButton(R.string.dlg_ok,
+                                    new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int which) {
+                                    ActiveDetail ad = getOwner().activeDetailForService(comp);
+                                    if (ad != null) {
+                                        ad.stopActiveService(true);
+                                    }
                                 }
-                            }
-                        })
-                        .setNegativeButton(R.string.dlg_cancel, null)
-                        .create();
+                            })
+                            .setNegativeButton(R.string.dlg_cancel, null)
+                            .create();
+                }
             }
-            
-            default:
-                return super.onCreateDialog(id, args);
+            throw new IllegalArgumentException("unknown id " + id);
         }
     }
 
@@ -509,11 +535,10 @@ public class RunningServiceDetails extends Activity
     
     void updateTimes() {
         if (mSnippetActiveItem != null) {
-            mSnippetActiveItem.updateTime(RunningServiceDetails.this, mBuilder);
+            mSnippetActiveItem.updateTime(getActivity(), mBuilder);
         }
         for (int i=0; i<mActiveDetails.size(); i++) {
-            mActiveDetails.get(i).mActiveItem.updateTime(
-                    RunningServiceDetails.this, mBuilder);
+            mActiveDetails.get(i).mActiveItem.updateTime(getActivity(), mBuilder);
         }
     }
 

@@ -56,7 +56,9 @@ public class Settings extends PreferenceActivity {
         String intentClass = intent.getComponent().getClassName();
         if (intentClass.equals(getClass().getName())) return null;
 
-        if ("com.android.settings.ManageApplications".equals(intentClass)) {
+        if ("com.android.settings.ManageApplications".equals(intentClass)
+                || "com.android.settings.RunningServices".equals(intentClass)
+                || "com.android.settings.applications.StorageUse".equals(intentClass)) {
             // Old name of manage apps.
             intentClass = com.android.settings.applications.ManageApplications.class.getName();
         }

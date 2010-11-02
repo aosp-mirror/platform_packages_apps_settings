@@ -40,9 +40,11 @@ import android.content.pm.PackageManager.NameNotFoundException;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.Environment;
 import android.os.Handler;
 import android.os.Message;
 import android.os.RemoteException;
+import android.preference.PreferenceActivity;
 import android.text.format.Formatter;
 import android.util.Log;
 
@@ -222,6 +224,10 @@ public class InstalledAppDetails extends Fragment
     }
 
     private void initMoveButton() {
+        if (Environment.isExternalStorageEmulated()) {
+            mMoveAppButton.setVisibility(View.INVISIBLE);
+            return;
+        }
         boolean dataOnly = false;
         dataOnly = (mPackageInfo == null) && (mAppEntry != null);
         boolean moveDisable = true;
@@ -470,13 +476,8 @@ public class InstalledAppDetails extends Fragment
         if(localLOGV) Log.i(TAG, "appChanged="+appChanged);
         Intent intent = new Intent();
         intent.putExtra(ManageApplications.APP_CHG, appChanged);
-        Fragment target = getTargetFragment();
-        if (target != null) {
-            target.onActivityResult(getTargetRequestCode(), Activity.RESULT_OK, intent);
-        }
-        if (finish) {
-            getActivity().onBackPressed();
-        }
+        PreferenceActivity pa = (PreferenceActivity)getActivity();
+        pa.finishPreferencePanel(this, Activity.RESULT_OK, intent);
     }
     
     private void refreshSizeInfo() {
