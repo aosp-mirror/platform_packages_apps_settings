@@ -155,7 +155,6 @@ public class SettingsPreferenceFragment extends PreferenceFragment
         mDialogFragment.show(getActivity().getFragmentManager(), Integer.toString(dialogId));
     }
 
-    @Override
     public Dialog onCreateDialog(int dialogId) {
         return null;
     }

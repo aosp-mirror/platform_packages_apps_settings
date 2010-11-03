@@ -225,7 +225,7 @@ public abstract class LocalBluetoothProfileManager {
     }
 
     // TODO: int instead of enum
-    public enum Profile {
+    public static enum Profile {
         HEADSET(R.string.bluetooth_profile_headset),
         A2DP(R.string.bluetooth_profile_a2dp),
         OPP(R.string.bluetooth_profile_opp),
@@ -433,7 +433,7 @@ public abstract class LocalBluetoothProfileManager {
         public boolean disconnect(BluetoothDevice device) {
             List<BluetoothDevice> deviceList = getConnectedDevices();
             if (deviceList.size() != 0 && deviceList.get(0).equals(device)) {
-                // Downgrade prority as user is disconnecting the headset.
+                // Downgrade priority as user is disconnecting the headset.
                 if (mService.getPriority(device) > BluetoothProfile.PRIORITY_ON) {
                     mService.setPriority(device, BluetoothProfile.PRIORITY_ON);
                 }

@@ -46,8 +46,8 @@ public class BluetoothPairingDialog extends AlertActivity implements DialogInter
         TextWatcher {
     private static final String TAG = "BluetoothPairingDialog";
 
-    private final int BLUETOOTH_PIN_MAX_LENGTH = 16;
-    private final int BLUETOOTH_PASSKEY_MAX_LENGTH = 6;
+    private static final int BLUETOOTH_PIN_MAX_LENGTH = 16;
+    private static final int BLUETOOTH_PASSKEY_MAX_LENGTH = 6;
     private LocalBluetoothManager mLocalManager;
     private BluetoothDevice mDevice;
     private int mType;
