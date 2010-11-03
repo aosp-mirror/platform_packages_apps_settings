@@ -16,8 +16,6 @@
 
 package com.android.settings;
 
-import com.android.settings.SettingsPreferenceFragment.SettingsDialogFragment;
-
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
@@ -30,7 +28,6 @@ import android.os.Bundle;
 import android.provider.UserDictionary;
 import android.text.InputType;
 import android.util.Log;
-import android.view.ContextMenu;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -38,7 +35,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
-import android.view.ContextMenu.ContextMenuInfo;
 import android.widget.AlphabetIndexer;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -47,7 +43,8 @@ import android.widget.ListView;
 import android.widget.SectionIndexer;
 import android.widget.SimpleCursorAdapter;
 import android.widget.TextView;
-import android.widget.AdapterView.AdapterContextMenuInfo;
+
+import com.android.settings.SettingsPreferenceFragment.SettingsDialogFragment;
 
 import java.util.Locale;
 
@@ -72,9 +69,6 @@ public class UserDictionarySettings extends ListFragment implements DialogCreata
     private static final String DELETE_SELECTION = UserDictionary.Words.WORD + "=?";
 
     private static final String EXTRA_WORD = "word";
-    
-    private static final int CONTEXT_MENU_EDIT = Menu.FIRST;
-    private static final int CONTEXT_MENU_DELETE = Menu.FIRST + 1;
     
     private static final int OPTIONS_MENU_ADD = Menu.FIRST;
 
@@ -116,7 +110,6 @@ public class UserDictionarySettings extends ListFragment implements DialogCreata
         listView.setFastScrollEnabled(true);
         listView.setEmptyView(emptyView);
 
-        registerForContextMenu(listView);
         setHasOptionsMenu(true);
 
         if (savedInstanceState != null) {
@@ -163,41 +156,10 @@ public class UserDictionarySettings extends ListFragment implements DialogCreata
     
     @Override
     public void onListItemClick(ListView l, View v, int position, long id) {
-        getActivity().openContextMenu(v);
-    }
-
-    @Override
-    public void onCreateContextMenu(ContextMenu menu, View v, ContextMenuInfo menuInfo) {
-        if (!(menuInfo instanceof AdapterContextMenuInfo)) return;
-        
-        AdapterContextMenuInfo adapterMenuInfo = (AdapterContextMenuInfo) menuInfo;
-        menu.setHeaderTitle(getWord(adapterMenuInfo.position));
-        menu.add(0, CONTEXT_MENU_EDIT, 0, 
-                R.string.user_dict_settings_context_menu_edit_title);
-        menu.add(0, CONTEXT_MENU_DELETE, 0, 
-                R.string.user_dict_settings_context_menu_delete_title);
-    }
-    
-    @Override
-    public boolean onContextItemSelected(MenuItem item) {
-        ContextMenuInfo menuInfo = item.getMenuInfo();
-        if (!(menuInfo instanceof AdapterContextMenuInfo)) return false;
-        
-        AdapterContextMenuInfo adapterMenuInfo = (AdapterContextMenuInfo) menuInfo;
-        String word = getWord(adapterMenuInfo.position);
-        if (word == null) return true;
-
-        switch (item.getItemId()) {
-            case CONTEXT_MENU_DELETE:
-                deleteWord(word);
-                return true;
-                
-            case CONTEXT_MENU_EDIT:
-                showAddOrEditDialog(word);
-                return true;
+        String word = getWord(position);
+        if (word != null) {
+            showAddOrEditDialog(word);
         }
-        
-        return false;
     }
 
     @Override
@@ -231,14 +193,16 @@ public class UserDictionarySettings extends ListFragment implements DialogCreata
     @Override
     public Dialog onCreateDialog(int id) {
         final Activity activity = getActivity();
-        final View content = activity.getLayoutInflater().inflate(R.layout.dialog_edittext, null);
+        final AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(activity);
+        final LayoutInflater inflater = LayoutInflater.from(dialogBuilder.getContext());
+        final View content = inflater.inflate(R.layout.dialog_edittext, null);
         final EditText editText = (EditText) content.findViewById(R.id.edittext);
         editText.setText(mDialogEditingWord);
         // No prediction in soft keyboard mode. TODO: Create a better way to disable prediction
         editText.setInputType(InputType.TYPE_CLASS_TEXT 
                 | InputType.TYPE_TEXT_FLAG_AUTO_COMPLETE);
 
-        AlertDialog dialog =  new AlertDialog.Builder(activity)
+        AlertDialog dialog = dialogBuilder
                 .setTitle(mDialogEditingWord != null 
                         ? R.string.user_dict_settings_edit_dialog_title 
                         : R.string.user_dict_settings_add_dialog_title)

@@ -13,7 +13,6 @@
      See the License for the specific language governing permissions and
      limitations under the License.
 -->
-
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
     <!-- Strings for Dialog yes button -->
     <string name="yes">"Yes"</string>
@@ -215,7 +214,7 @@
     <!-- Bluetooth settings.  Message when connecting to a device -->
     <string name="bluetooth_connecting">Connecting\u2026</string>
     <!-- Bluetooth settings.  Message when the device state is unknown -->
-    <string name="bluetooth_unknown"></string>
+    <string name="bluetooth_unknown" />
     <!--Bluetooth settings screen, summary text under individual Bluetooth devices when not paired yet -->
     <string name="bluetooth_not_connected">Pair with this device</string>
     <!--Bluetooth settings screen, summary text under individual Bluetooth devices when pairing -->
@@ -240,13 +239,17 @@
     <string name="bluetooth_permission_request">"Bluetooth permission request"</string>
 
     <!-- Strings for asking to the user whether to allow an app to enable bluetooth -->
-    <string name="bluetooth_ask_enablement">"An application on your phone is requesting permission to turn on Bluetooth. Do you want to do this?"</string>
+    <string name="bluetooth_ask_enablement">"An application is requesting permission to turn on Bluetooth. Do you want to do this?"</string>
 
     <!-- Strings for asking to the user whether to allow an app to enable discovery mode -->
-    <string name="bluetooth_ask_discovery">"An application on your phone is requesting permission to make your phone discoverable by other Bluetooth devices for <xliff:g id="timeout">%1$d</xliff:g> seconds. Do you want to do this?"</string>
+    <string name="bluetooth_ask_discovery" product="tablet">"An application on your tablet is requesting permission to make your tablet discoverable by other Bluetooth devices for <xliff:g id="timeout">%1$d</xliff:g> seconds. Do you want to do this?"</string>
+    <!-- Strings for asking to the user whether to allow an app to enable discovery mode -->
+    <string name="bluetooth_ask_discovery" product="default">"An application on your phone is requesting permission to make your phone discoverable by other Bluetooth devices for <xliff:g id="timeout">%1$d</xliff:g> seconds. Do you want to do this?"</string>
 
     <!-- Strings for asking to the user whether to allow an app to enable bluetooth and discovery mode -->
-    <string name="bluetooth_ask_enablement_and_discovery">"An application on your phone is requesting permission to turn on Bluetooth and to make your phone discoverable by other devices for <xliff:g id="timeout">%1$d</xliff:g> seconds. Do you want to do this?"</string>
+    <string name="bluetooth_ask_enablement_and_discovery" product="tablet">"An application on your tablet is requesting permission to turn on Bluetooth and to make your tablet discoverable by other devices for <xliff:g id="timeout">%1$d</xliff:g> seconds. Do you want to do this?"</string>
+    <!-- Strings for asking to the user whether to allow an app to enable bluetooth and discovery mode -->
+    <string name="bluetooth_ask_enablement_and_discovery" product="default">"An application on your phone is requesting permission to turn on Bluetooth and to make your phone discoverable by other devices for <xliff:g id="timeout">%1$d</xliff:g> seconds. Do you want to do this?"</string>
 
     <!-- Strings for msg to display to user while bluetooth is turning on -->
     <string name="bluetooth_turning_on">"Turning on Bluetooth\u2026"</string>
@@ -261,7 +264,7 @@
     <!-- Do not translate. Used for diagnostic screens, precise translation is not necessary -->
     <string name="bluetooth_device_info_connectButton_text">Turn on Bluetooth</string>
     <!-- Do not translate. Used for diagnostic screens, precise translation is not necessary -->
-    <string name="bluetooth_device_info_deviceInfo_text"></string>
+    <string name="bluetooth_device_info_deviceInfo_text" />
 
     <!-- Date & time settings screen title -->
     <string name="date_and_time">Date &amp; time settings</string>
@@ -442,7 +445,7 @@
     <!-- Message when the SD card is mounted as read only -->
     <string name="sdcard_settings_read_only_status" product="default">SD card mounted read-only</string>
     <!-- SetupWizard strings used by DateTimeSettingsSetupWizard.  The button label for going to the next screen without storing the setting. [CHAR LIMIT=5] -->
-    <string name="skip_label" >Skip</string>
+    <string name="skip_label">Skip</string>
     <!-- SetupWizard strings used by DateTimeSettingsSetupWizard.  The button label for going to the next screen. -->
     <string name="next_label">Next</string>
 
@@ -461,7 +464,9 @@
     <!-- The title of the activity to adjust display settings -->
     <string name="display_label">Display</string>
     <!-- The title of the activity to see phone info -->
-    <string name="phone_info_label">Phone info</string>
+    <string name="phone_info_label" product="tablet">Tablet info</string>
+    <!-- The title of the activity to see phone info -->
+    <string name="phone_info_label" product="default">Phone info</string>
     <!-- The title of the activity to adjust SD card settings [CHAR LIMIT=25] -->
     <string name="sd_card_settings_label" product="nosdcard">USB storage</string>
     <!-- The title of the activity to adjust SD card settings-->
@@ -615,7 +620,7 @@
     <string name="unlock_set_unlock_password_summary">Enter a password to unlock screen</string>
 
     <!-- Summary for preference that has been disabled by DevicePolicyAdmin -->
-    <string name="unlock_set_unlock_disabled_summary">Disabled by remote phone administrator</string>
+    <string name="unlock_set_unlock_disabled_summary">Disabled by remote device administrator</string>
 
 
     <!-- Title for option to turn of password/pin/pattern unlock. -->
@@ -809,7 +814,9 @@
     <!-- Bluetooth settings.  The user-visible string that is used whenever referring to the A2DP profile. -->
     <string name="bluetooth_profile_a2dp">Media</string>
     <!-- Bluetooth settings.  The user-visible string that is used whenever referring to the headset or handsfree profile. -->
-    <string name="bluetooth_profile_headset">Phone</string>
+    <string name="bluetooth_profile_headset" product="tablet">Tablet</string>
+    <!-- Bluetooth settings.  The user-visible string that is used whenever referring to the headset or handsfree profile. -->
+    <string name="bluetooth_profile_headset" product="default">Phone</string>
     <!-- Bluetooth settings.  The user-visible string that is used whenever referring to the OPP profile. -->
     <string name="bluetooth_profile_opp">Transfer</string>
     <!-- Bluetooth settings. The user-visible string that is used whenever referring to the HID profile. -->
@@ -820,7 +827,9 @@
     <!-- Bluetooth settings.  The summary string when a device is connected to the A2DP profile. -->
     <string name="bluetooth_summary_connected_to_a2dp">Connected to media audio</string>
     <!-- Bluetooth settings.  The summary string when a device is connected to the headset profile. -->
-    <string name="bluetooth_summary_connected_to_headset">Connected to phone audio</string>
+    <string name="bluetooth_summary_connected_to_headset" product="tablet">Connected to tablet audio</string>
+    <!-- Bluetooth settings.  The summary string when a device is connected to the headset profile. -->
+    <string name="bluetooth_summary_connected_to_headset" product="default">Connected to phone audio</string>
     <!-- Bluetooth settings.  The summary string when a device is connected to the A2DP and headset profiles. -->
     <string name="bluetooth_summary_connected_to_a2dp_headset">Connected to phone and media audio</string>
     <!-- Bluetooth settings. The summary string when a device is connected to the HID profile. -->
@@ -1151,7 +1160,7 @@
     <!-- Sound settings screen, setting option summary text when going into silent mode.  Media WILL NOT be silenced in silent mode, but alarms WILL be silenced. -->
     <string name="silent_mode_incl_alarm_summary">All sounds except media are silenced</string>
     <!-- Sound settings screen, setting option name to pick ringtone (a list dialog comes up)-->
-    <string name="ringtone_title">Phone ringtone</string>
+    <string name="ringtone_title">Incoming call ringtone</string>
     <!-- Sound settings screen, setting option summary text -->
     <string name="ringtone_summary">""</string>
     <!-- Sound settings screen, volume title -->
@@ -1233,19 +1242,27 @@
     <!-- Dock audio summary for docked to car dock -->
     <string name="dock_audio_summary_car">Settings for the attached car dock</string>
     <!-- Dock audio summary for undocked -->
-    <string name="dock_audio_summary_none">Phone not docked</string>
+    <string name="dock_audio_summary_none" product="tablet">Tablet not docked</string>
+    <!-- Dock audio summary for undocked -->
+    <string name="dock_audio_summary_none" product="default">Phone not docked</string>
     <!-- Dock audio summary for docked to unknown -->
     <string name="dock_audio_summary_unknown">Settings for the attached dock</string>
     <!-- Dock not found dialog title -->
     <string name="dock_not_found_title">Dock not found</string>
     <!-- Dock not found dialog text -->
-    <string name="dock_not_found_text">The phone must be docked to configure dock audio</string>
+    <string name="dock_not_found_text" product="tablet">The tablet must be docked to configure dock audio</string>
+    <!-- Dock not found dialog text -->
+    <string name="dock_not_found_text" product="default">The phone must be docked to configure dock audio</string>
     <!-- Dock settings screen, dock events SFX setting check box label -->
     <string name="dock_sounds_enable_title">Dock insertion sound</string>
     <!-- Dock settings screen, setting option summary text when check box is selected -->
-    <string name="dock_sounds_enable_summary_on">Play sound when inserting or removing phone from dock</string>
+    <string name="dock_sounds_enable_summary_on" product="tablet">Play sound when inserting or removing tablet from dock</string>
+    <!-- Dock settings screen, setting option summary text when check box is selected -->
+    <string name="dock_sounds_enable_summary_on" product="default">Play sound when inserting or removing phone from dock</string>
     <!-- Sound settings screen, setting option summary text when check box is clear -->
-    <string name="dock_sounds_enable_summary_off">Don\'t play sound when inserting or removing phone from dock</string>
+    <string name="dock_sounds_enable_summary_off" product="tablet">Don\'t play sound when inserting or removing tablet from dock</string>
+    <!-- Sound settings screen, setting option summary text when check box is clear -->
+    <string name="dock_sounds_enable_summary_off" product="default">Don\'t play sound when inserting or removing phone from dock</string>
 
     <!-- Acounts & Sync settings screen setting option name to go into the screen for data sync settings-->
     <string name="sync_settings">Accounts &amp; sync</string>
@@ -1269,9 +1286,13 @@
     <!-- Sound & display settings screen, accelerometer-based rotation check box label -->
     <string name="accelerometer_title">Auto-rotate screen</string>
     <!-- Sound & display settings screen, accelerometer-based rotation summary text when check box is selected -->
-    <string name="accelerometer_summary_on">Switch orientation automatically when rotating phone</string>
+    <string name="accelerometer_summary_on" product="tablet">Switch orientation automatically when rotating tablet</string>
+    <!-- Sound & display settings screen, accelerometer-based rotation summary text when check box is selected -->
+    <string name="accelerometer_summary_on" product="default">Switch orientation automatically when rotating phone</string>
     <!-- Sound & display settings screen, accelerometer-based rotation summary text when check box is clear -->
-    <string name="accelerometer_summary_off">Switch orientation automatically when rotating phone</string>
+    <string name="accelerometer_summary_off" product="tablet">Switch orientation automatically when rotating tablet</string>
+    <!-- Sound & display settings screen, accelerometer-based rotation summary text when check box is clear -->
+    <string name="accelerometer_summary_off" product="default">Switch orientation automatically when rotating phone</string>
     <!-- Sound & display settings screen, setting option name to change brightness -->
     <string name="brightness">Brightness</string>
     <!-- Sound & display settings screen, setting option summary to change brightness -->
@@ -1292,9 +1313,13 @@
     <!-- SIM card lock settings screen, setting check box label -->
     <string name="sim_pin_toggle">Lock SIM card</string>
     <!-- SIM card lock settings screen, setting option summary text when SIM lock check box is selected -->
-    <string name="sim_lock_on">Require PIN to use phone</string>
+    <string name="sim_lock_on" product="tablet">Require PIN to use tablet</string>
+    <!-- SIM card lock settings screen, setting option summary text when SIM lock check box is selected -->
+    <string name="sim_lock_on" product="default">Require PIN to use phone</string>
     <!-- SIM card lock settings screen, setting option summary text when SIM lock check box is clear -->
-    <string name="sim_lock_off">Require PIN to use phone</string>
+    <string name="sim_lock_off" product="tablet">Require PIN to use tablet</string>
+    <!-- SIM card lock settings screen, setting option summary text when SIM lock check box is clear -->
+    <string name="sim_lock_off" product="default">Require PIN to use phone</string>
     <!-- SIM card lock settings screen, setting option name to change the SIM PIN -->
     <string name="sim_pin_change">Change SIM PIN</string>
     <!-- SIM card lock settings screen, SIM PIN dialog message instruction -->
@@ -1326,7 +1351,9 @@
     <string name="sim_enter_cancel">Cancel</string>
 
     <!-- Advanced (used for diagnostics) device info activity title -->
-    <string name="device_info_settings">Phone status</string>
+    <string name="device_info_settings" product="tablet">Tablet status</string>
+    <!-- Advanced (used for diagnostics) device info activity title -->
+    <string name="device_info_settings" product="default">Phone status</string>
 
     <!-- About phone screen, list item title.  Takes the user to the screen for seeing and installing system updates. -->
     <string name="system_update_settings_list_item_title">System updates</string>
@@ -1438,6 +1465,8 @@
     <!-- SD card & phone storage settings item title that will result in the phone formatting the SD card.   [CHAR LIMIT=25] -->
     <string name="sd_format" product="default">Erase SD card</string>
     <!-- SD card & phone storage settings item title that will result in the phone unmounting the SD card.   [CHAR LIMIT=30] -->
+    <string name="sd_format_summary" product="tablet">Erases all data on the tablet\'s internal USB storage, such as music and photos</string>
+    <!-- SD card & phone storage settings item title that will result in the phone unmounting the SD card.   [CHAR LIMIT=30] -->
     <string name="sd_format_summary" product="nosdcard">Erases all data on the phone\'s internal USB storage, such as music and photos</string>
     <!-- SD card & phone storage settings item title that will result in the phone unmounting the SD card.   -->
     <string name="sd_format_summary" product="default">Erases all data on the phone\'s SD card, such as music and photos</string>
@@ -1547,21 +1576,28 @@
     <!-- SD card & phone storage settings screen, setting option name under Internal phone storage heading -->
     <string name="master_clear_title">Factory data reset</string>
     <!-- SD card & phone storage settings screen, setting option summary text under Internal phone storage heading -->
-    <string name="master_clear_summary">Erases all data on phone</string>
+    <string name="master_clear_summary" product="tablet">Erases all data on tablet</string>
+    <!-- SD card & phone storage settings screen, setting option summary text under Internal phone storage heading -->
+    <string name="master_clear_summary" product="default">Erases all data on phone</string>
+    <!-- SD card & phone storage settings screen, message on screen after user selects Factory data reset [CHAR LIMIT=NONE] -->
+    <string name="master_clear_desc" product="tablet">"This will erase all data from your tablet\'s <b>internal storage</b>, including:\n\n<li>Your Google account</li>\n<li>System and application data and settings</li>\n<li>Downloaded applications</li>\n\nTo clear all data on this tablet the <b>USB storage</b> needs to be erased.\n\n"</string>
     <!-- SD card & phone storage settings screen, message on screen after user selects Factory data reset [CHAR LIMIT=NONE] -->
     <string name="master_clear_desc" product="nosdcard">"This will erase all data from your phone\'s <b>internal storage</b>, including:\n\n<li>Your Google account</li>\n<li>System and application data and settings</li>\n<li>Downloaded applications</li>\n\nTo clear all data on this phone the <b>USB storage</b> needs to be erased.\n\n"</string>
     <!-- SD card & phone storage settings screen, message on screen after user selects Factory data reset -->
-    <string name="master_clear_desc" product="default" >"This will erase all data from your phone\'s <b>internal storage</b>, including:\n\n<li>Your Google account</li>\n<li>System and application data and settings</li>\n<li>Downloaded applications</li>\n\nTo also clear music, pictures, and other user data, the <b>SD card</b> needs to be erased.\n\n"</string>
+    <string name="master_clear_desc" product="default">"This will erase all data from your phone\'s <b>internal storage</b>, including:\n\n<li>Your Google account</li>\n<li>System and application data and settings</li>\n<li>Downloaded applications</li>\n\nTo also clear music, pictures, and other user data, the <b>SD card</b> needs to be erased.\n\n"</string>
     <!-- SD card & phone storage settings screen, label for check box to erase USB storage [CHAR LIMIT=30] -->
     <string name="erase_external_storage" product="nosdcard">Erase USB storage</string>
     <!-- SD card & phone storage settings screen, label for check box to erase SD card [CHAR LIMIT=30] -->
     <string name="erase_external_storage" product="default">Erase SD card</string>
     <!-- SD card & phone storage settings screen, description for check box to erase USB storage [CHAR LIMIT=30] -->
-    <string name="erase_external_storage_description" product="nosdcard">Erase all the data on the phone\'s internal USB storage, such as music or photos.</string>
+    <string name="erase_external_storage_description" product="tablet">Erase all the data on the tablet\'s internal USB storage, such as music or photos.</string>
     <!-- SD card & phone storage settings screen, description for check box to erase USB storage [CHAR LIMIT=30] -->
+    <string name="erase_external_storage_description" product="nosdcard">Erase all the data on the phone\'s internal USB storage, such as music or photos.</string>
     <string name="erase_external_storage_description" product="default">Erase all the data on the phone\'s SD card, such as music or photos.</string>
     <!-- SD card & phone storage settings screen, button on screen after user selects Factory data reset -->
-    <string name="master_clear_button_text">Reset phone</string>
+    <string name="master_clear_button_text" product="tablet">Reset tablet</string>
+    <!-- SD card & phone storage settings screen, button on screen after user selects Factory data reset -->
+    <string name="master_clear_button_text" product="default">Reset phone</string>
     <!-- SD card & phone storage settings screen, message on screen after user selects Reset phone button -->
     <string name="master_clear_final_desc">Erase all of your personal information and any downloaded applications? It is impossible to reverse this action!</string>
     <!-- SD card & phone storage settings screen, button on screen after user selects Reset phone button -->
@@ -1569,7 +1605,7 @@
     <!-- Message to draw an unlock pattern before clearing the device -->
     <string name="master_clear_gesture_prompt">Draw your unlock pattern</string>
     <!-- Explanation of drawing unlockp attern to reset phone -->
-    <string name="master_clear_gesture_explanation">You must draw your unlock pattern to confirm a phone reset.</string>
+    <string name="master_clear_gesture_explanation">You must draw your unlock pattern to confirm a factory data reset.</string>
     <!-- Master clear failed message -->
     <string name="master_clear_failed">No reset was performed because the System Clear service is not available.</string>
 
@@ -1622,19 +1658,29 @@
 
     <!-- Tethering controls, the item summary for the user to go into the tethering settings -->
     <!-- Tethering controls, the item summary for the user to go into the tethering settings when only USB tethering is available [CHAR LIMIT=100]-->
-    <string name="tether_settings_summary_usb">Share your phone\'s mobile data connection via USB</string>
+    <string name="tether_settings_summary_usb" product="tablet">Share your tablet\'s mobile data connection via USB</string>
+    <!-- Tethering controls, the item summary for the user to go into the tethering settings when only USB tethering is available [CHAR LIMIT=100]-->
+    <string name="tether_settings_summary_usb" product="default">Share your phone\'s mobile data connection via USB</string>
     <!-- Tethering controls, the item summary for the user to go into the tethering settings when only Wifi tethering is available [CHAR LIMIT=100]-->
-    <string name="tether_settings_summary_wifi">Share your phone\'s mobile connection as a portable Wi-Fi hotspot</string>
+    <string name="tether_settings_summary_wifi">Share your mobile data connection as a portable Wi-Fi hotspot</string>
     <!-- Tethering controls, the item summary for the user to go into the tethering settings when only Bluetooth tethering is available [CHAR LIMIT=100]-->
-    <string name="tether_settings_summary_bluetooth">Share your phone\'s mobile connection via Bluetooth</string>
+    <string name="tether_settings_summary_bluetooth">Share your mobile data connection via Bluetooth</string>
     <!-- Tethering controls, the item summary for the user to go into the tethering settings when USB and Wifi tethering are available [CHAR LIMIT=100]-->
-    <string name="tether_settings_summary_usb_wifi">Share your phone\'s mobile data connection via USB or as a portable Wi-Fi hotspot</string>
+    <string name="tether_settings_summary_usb_wifi" product="tablet">Share your tablet\'s mobile data connection via USB or as a portable Wi-Fi hotspot</string>
+    <!-- Tethering controls, the item summary for the user to go into the tethering settings when USB and Wifi tethering are available [CHAR LIMIT=100]-->
+    <string name="tether_settings_summary_usb_wifi" product="default">Share your phone\'s mobile data connection via USB or as a portable Wi-Fi hotspot</string>
     <!-- Tethering controls, the item summary for the user to go into the tethering settings when USB and Bluetooth tethering are available [CHAR LIMIT=100]-->
-    <string name="tether_settings_summary_usb_bluetooth">Share your phone\'s mobile data connection via USB or Bluetooth</string>
+    <string name="tether_settings_summary_usb_bluetooth" product="tablet">Share your tablet\'s mobile data connection via USB or Bluetooth</string>
+    <!-- Tethering controls, the item summary for the user to go into the tethering settings when USB and Bluetooth tethering are available [CHAR LIMIT=100]-->
+    <string name="tether_settings_summary_usb_bluetooth" product="default">Share your phone\'s mobile data connection via USB or Bluetooth</string>
     <!-- Tethering controls, the item summary for the user to go into the tethering settings when Bluetooth and Wifi tethering are available [CHAR LIMIT=100]-->
-    <string name="tether_settings_summary_wifi_bluetooth">Share your phone\'s mobile data connection via Bluetooth or as a portable Wi-Fi hotspot</string>
+    <string name="tether_settings_summary_wifi_bluetooth" product="tablet">Share your tablet\'s mobile data connection via Bluetooth or as a portable Wi-Fi hotspot</string>
+    <!-- Tethering controls, the item summary for the user to go into the tethering settings when Bluetooth and Wifi tethering are available [CHAR LIMIT=100]-->
+    <string name="tether_settings_summary_wifi_bluetooth" product="default">Share your phone\'s mobile data connection via Bluetooth or as a portable Wi-Fi hotspot</string>
     <!-- Tethering controls, the item summary for the user to go into the tethering settings when USB, Wifi, and Bluetooth tethering are available [CHAR LIMIT=100]-->
-    <string name="tether_settings_summary_all">Share your phone\'s mobile data connection via USB, Wi-Fi, or Bluetooth</string>
+    <string name="tether_settings_summary_all" product="tablet">Share your tablet\'s mobile data connection via USB, Wi-Fi, or Bluetooth</string>
+    <!-- Tethering controls, the item summary for the user to go into the tethering settings when USB, Wifi, and Bluetooth tethering are available [CHAR LIMIT=100]-->
+    <string name="tether_settings_summary_all" product="default">Share your phone\'s mobile data connection via USB, Wi-Fi, or Bluetooth</string>
 
     <!-- USB Tethering options -->
     <string name="usb_title">USB</string>
@@ -1706,9 +1752,11 @@
 
     <!-- About --> <skip />
     <!-- Main settings screen, setting title for the user to go into the About phone screen -->
-    <string name="about_settings">About phone</string>
+    <string name="about_settings" product="tablet">About tablet</string>
+    <!-- Main settings screen, setting title for the user to go into the About phone screen -->
+    <string name="about_settings" product="default">About phone</string>
     <!-- Main settings screen, setting summary for the user to go into the About phone screen-->
-    <string name="about_settings_summary">View legal info, phone status, software version</string>
+    <string name="about_settings_summary">View legal info, status, software version</string>
     <!-- About phone settings screen, setting option name to go to dialog that shows legal info -->
     <string name="legal_information">Legal information</string>
     <!-- About phone settings screen, setting option name to see a list of contributors -->
@@ -1725,7 +1773,9 @@
     <!-- About phone settings screen, running the System Tutorial -->
     <string name="system_tutorial_list_item_title">System tutorial</string>
     <!-- About phone settings screen, summary of what System Tutorial does -->
-    <string name="system_tutorial_list_item_summary">Learn how to use your phone</string>
+    <string name="system_tutorial_list_item_summary" product="tablet">Learn how to use your tablet</string>
+    <!-- About phone settings screen, summary of what System Tutorial does -->
+    <string name="system_tutorial_list_item_summary" product="default">Learn how to use your phone</string>
 
     <!-- Title for actual Settings license activity. --> <skip />
     <!-- About phone settings, Legal information setting option name and title of dialog box holding license info -->
@@ -1740,7 +1790,7 @@
     <!-- About phone settings, Safety Legal information setting option name and title of dialog box holding safety legal info -->
     <string name="settings_safetylegal_activity_title">Safety information</string>
     <!-- About phone settings screen, Safety legal dialog message when data network is not connected -->
-    <string name="settings_safetylegal_activity_unreachable">Your phone is not connected to a data service. To view this information now, go to %s from any computer connected to the Internet.</string>
+    <string name="settings_safetylegal_activity_unreachable">You do not have a data connection. To view this information now, go to %s from any computer connected to the Internet.</string>
     <!-- About phone settings screen, Safety Legal dialog title until the link is fully loaded -->
     <string name="settings_safetylegal_activity_loading">Loading\u2026</string>
 
@@ -1774,11 +1824,11 @@
     <!-- Security & location settings screen, change unlock pattern screen instruction when the user chooses "Change unlock pattern".  We first ask the user toe nter the current pattern, and this is the message seen -->
     <string name="lockpattern_need_to_unlock">Confirm saved pattern</string>
     <!-- Do not translate. -->
-    <string name="lockpattern_need_to_unlock_footer"></string>
+    <string name="lockpattern_need_to_unlock_footer" />
     <!-- Security & location settings screen, change unlock pattern screen instruction if user draws incorrect pattern -->
     <string name="lockpattern_need_to_unlock_wrong">Sorry, try again:</string>
     <!-- Do not translate. -->
-    <string name="lockpattern_need_to_unlock_wrong_footer"></string>
+    <string name="lockpattern_need_to_unlock_wrong_footer" />
     <!-- Security & location settings screen, change unlock pattern screen instruction on top of screen.  This si when they are supposed to draw a new unlock pattern (for example, if they are changing their unlock patterns)..-->
     <string name="lockpattern_recording_intro_header">Draw an unlock pattern</string>
     <!-- Security & location settings screen, change unlock pattern screen hint on bottom of screen.  We are telling them to press the menu button to see more options or help. -->
@@ -1827,9 +1877,19 @@
     <!-- ChooseLockPatternTutorial, button labels: Continue to the next page of the tutorial -->
     <string name="next_button_label">Next</string>
     <!-- ChooseLockPatternTutorial, tutorial screen title -->
-    <string name="lock_title">Securing your phone</string>
+    <string name="lock_title" product="tablet">Securing your tablet</string>
+    <!-- ChooseLockPatternTutorial, tutorial screen title -->
+    <string name="lock_title" product="default">Securing your phone</string>
     <!-- ChooseLockPatternTutorial, tutorial screen text -->
-    <string name="lock_intro_message"><font size="17">Protect your phone from unauthorized use by creating a personal screen unlock pattern.
+    <string name="lock_intro_message" product="tablet"><font size="17">Protect your tablet from unauthorized use by creating a personal screen unlock pattern.
+        \n<font height="17">\n</font><b>1</b>\u00A0 On the next screen, watch while an example pattern is drawn.
+        \n<font height="17">\n</font><b>2</b>\u00A0 When ready, draw your own personal unlock pattern. Experiment with different patterns but connect at least four dots.
+        \n<font height="17">\n</font><b>3</b>\u00A0 Redraw your pattern to confirm.
+        \n<font height="17">\n</font><b>Ready to start? Touch \u201CNext\u201D</b>.
+        \n<font height="3">\n</font>To leave your tablet unprotected, touch \u201CCancel\u201D.</font>
+    </string>
+    <!-- ChooseLockPatternTutorial, tutorial screen text -->
+    <string name="lock_intro_message" product="default"><font size="17">Protect your phone from unauthorized use by creating a personal screen unlock pattern.
         \n<font height="17">\n</font><b>1</b>\u00A0 On the next screen, watch while an example pattern is drawn.
         \n<font height="17">\n</font><b>2</b>\u00A0 When ready, draw your own personal unlock pattern. Experiment with different patterns but connect at least four dots.
         \n<font height="17">\n</font><b>3</b>\u00A0 Redraw your pattern to confirm.
@@ -1861,7 +1921,12 @@
     <!-- Applications settings screen, setting check box summary.  This is the summary for "Unknown sources" checkbox  -->
     <string name="install_unknown_applications">Allow installation of non-Market applications</string>
     <!-- Applications settings screen, message text of alert that appears if user selects the "Unknown sources" check box -->
-    <string name="install_all_warning">Your phone and personal data are more vulnerable to attack by applications
+    <string name="install_all_warning" product="tablet">Your tablet and personal data are more vulnerable to attack by applications
+ from unknown sources. You agree that you are solely responsible for any
+ damage to your tablet or loss of data that may result from using
+ these applications.</string>
+    <!-- Applications settings screen, message text of alert that appears if user selects the "Unknown sources" check box -->
+    <string name="install_all_warning" product="default">Your phone and personal data are more vulnerable to attack by applications
  from unknown sources. You agree that you are solely responsible for any
  damage to your phone or loss of data that may result from using
  these applications.</string>
@@ -1972,7 +2037,9 @@ found in the list of installed applications.</string>
     <!-- Manage applications, text for dialog if clear data fails-->
     <string name="clear_failed_dlg_text">Failed clearing data for application</string>
     <!-- Manage applications, individual application info screen, text that appears under the "Permissions" heading. This describes the permissions that the application has. -->
-    <string name="security_settings_desc">This application can access the following on your phone:</string>
+    <string name="security_settings_desc" product="tablet">This application can access the following on your tablet:</string>
+    <!-- Manage applications, individual application info screen, text that appears under the "Permissions" heading. This describes the permissions that the application has. -->
+    <string name="security_settings_desc" product="default">This application can access the following on your phone:</string>
     <string name="computing_size">Computing\u2026</string>
     <string name="invalid_size_value">Unable to compute package size</string>
     <!-- String displayed when list is empty -->
@@ -1982,7 +2049,9 @@ found in the list of installed applications.</string>
     <!-- Manage applications, text for Move button -->
     <string name="move_app">Move</string>
     <!-- Manage applications, text for Move button to move app to internal storage -->
-    <string name="move_app_to_internal">Move to phone</string>
+    <string name="move_app_to_internal" product="tablet">Move to tablet</string>
+    <!-- Manage applications, text for Move button to move app to internal storage -->
+    <string name="move_app_to_internal" product="default">Move to phone</string>
     <!-- Manage applications, text for Move button  to move app to sdcard [CHAR LIMIT=25] -->
     <string name="move_app_to_sdcard" product="nosdcard">Move to USB storage</string>
     <!-- Manage applications, text for Move button  to move app to sdcard -->
@@ -2086,7 +2155,11 @@ found in the list of installed applications.</string>
     <!-- Running service details, stop confirmation dialog title. Displays when user selects selects to stop a system service. -->
     <string name="runningservicedetails_stop_dlg_title">Stop system service?</string>
     <!-- Running service details, stop confirmation descriptive text. Displays when user selects selects to stop a system service. -->
-    <string name="runningservicedetails_stop_dlg_text">Are you sure you want to stop this system service? If you do, some
+    <string name="runningservicedetails_stop_dlg_text" product="tablet">Are you sure you want to stop this system service? If you do, some
+        features of your tablet may stop working correctly until you power it off
+        and then on again.</string>
+    <!-- Running service details, stop confirmation descriptive text. Displays when user selects selects to stop a system service. -->
+    <string name="runningservicedetails_stop_dlg_text" product="default">Are you sure you want to stop this system service? If you do, some
         features of your phone may stop working correctly until you power it off
         and then on again.</string>
 
@@ -2152,7 +2225,9 @@ found in the list of installed applications.</string>
     <!-- This is for diagnostics screen. The title of a screen with various items realted to launching screens that will giev the user info. For example, it contains "Phone information" and "Battery information" -->
     <string name="testing">Testing</string>
     <!-- In the Testing screen.  The item title of the activity that shows a bunch of phone-related information.  -->
-    <string name="testing_phone_info">Phone information</string>
+    <string name="testing_phone_info" product="tablet">Tablet information</string>
+    <!-- In the Testing screen.  The item title of the activity that shows a bunch of phone-related information.  -->
+    <string name="testing_phone_info" product="default">Phone information</string>
     <!-- In the Testing screen. The item title of the activity that shows a bunch of battery-related information.  -->
     <string name="testing_battery_info">Battery information</string>
     <!-- Do not translate. In the Testing screen. The item title of the activity that shows a bunch of SIM-related operations.  -->
@@ -2257,7 +2332,7 @@ found in the list of installed applications.</string>
     <string name="usage_time_label">Usage time</string>
 
     <!-- Accessibility settings -->
-    <skip/>
+    <skip />
 
     <!-- Settings title in main settings screen for accessibility settings -->
     <string name="accessibility_settings">Accessibility</string>
@@ -2298,7 +2373,12 @@ found in the list of installed applications.</string>
     <string name="accessibility_script_injection_enabled_summary">Allow applications to download accessibility scripts from Google</string>
     <!-- Warning message about security implications of downloading accessibility scripts,
          displayed as a dialog message when the user selects to enable script downloading. [CHAR LIMIT="NONE"] -->
-    <string name="accessibility_script_injection_security_warning">Some applications can ask Google
+    <string name="accessibility_script_injection_security_warning" product="tablet">Some applications can ask Google
+        to download scripts to your tablet that make their content more accessible. Are you sure you
+        want to allow Google to install accessibility scripts on your tablet?</string>
+    <!-- Warning message about security implications of downloading accessibility scripts,
+         displayed as a dialog message when the user selects to enable script downloading. [CHAR LIMIT="NONE"] -->
+    <string name="accessibility_script_injection_security_warning" product="default">Some applications can ask Google
         to download scripts to your phone that make their content more accessible. Are you sure you
         want to allow Google to install accessibility scripts on your phone?</string>
     <!-- Accessibility settings: Power button category -->
@@ -2309,7 +2389,7 @@ found in the list of installed applications.</string>
     <string name="accessibility_power_button_ends_call_summary">During a call, pressing Power ends call instead of turning off screen</string>
 
     <!-- App Fuel Gauge strings -->
-    <skip/>
+    <skip />
 
     <!-- Activity title for App Fuel Gauge summary -->
     <string name="power_usage_summary_title">Battery use</string>
@@ -2334,7 +2414,7 @@ found in the list of installed applications.</string>
     <!-- [CHAR LIMIT=25] Label for battery stats wake lock state graph -->
     <string name="battery_stats_wake_lock_label">Awake</string>
     <!-- [CHAR LIMIT=25] Label for battery stats phone signal strength graph -->
-    <string name="battery_stats_phone_signal_label">Phone signal</string>
+    <string name="battery_stats_phone_signal_label">Mobile network signal</string>
     <!-- Battery usage during last unplugged period -->
     <string name="battery_stats_last_duration">@string/menu_stats_last_unplugged</string>
     <!-- CPU awake time title -->
@@ -2367,7 +2447,9 @@ found in the list of installed applications.</string>
     <!-- Label for power consumed by Calling -->
     <string name="power_phone">Voice calls</string>
     <!-- Label for power consumed when Idle -->
-    <string name="power_idle">Phone idle</string>
+    <string name="power_idle" product="tablet">Tablet idle</string>
+    <!-- Label for power consumed when Idle -->
+    <string name="power_idle" product="default">Phone idle</string>
 
     <!-- Label for CPU usage time -->
     <string name="usage_type_cpu">CPU total</string>
@@ -2380,7 +2462,9 @@ found in the list of installed applications.</string>
     <!-- [CHAR LIMIT=25] Label for WIFI usage time -->
     <string name="usage_type_wifi_running">Wi-Fi running</string>
     <!-- Label for Phone usage time -->
-    <string name="usage_type_phone">Phone</string>
+    <string name="usage_type_phone" product="tablet">Tablet</string>
+    <!-- Label for Phone usage time -->
+    <string name="usage_type_phone" product="default">Phone</string>
     <!-- Label for Data sent -->
     <string name="usage_type_data_send">Data sent</string>
     <!-- Label for Data received -->
@@ -2410,7 +2494,9 @@ found in the list of installed applications.</string>
     <string name="battery_desc_voice">Battery used by voice calls</string>
 
     <!-- Description for standby detail -->
-    <string name="battery_desc_standby">Battery used when phone is idle</string>
+    <string name="battery_desc_standby" product="tablet">Battery used when tablet is idle</string>
+    <!-- Description for standby detail -->
+    <string name="battery_desc_standby" product="default">Battery used when phone is idle</string>
 
     <!-- Description for cell radio detail -->
     <string name="battery_desc_radio">Battery used by cell radio</string>
@@ -2773,7 +2859,7 @@ found in the list of installed applications.</string>
     <!-- Sound settings screen, setting option summary text -->
     <string name="emergency_tone_summary">Set behavior when an emergency call is placed</string>
 
-    <!-- Privacy Settings screen --><skip/>
+    <!-- Privacy Settings screen --><skip />
     <!-- Privacy settings menu title -->
     <string name="privacy_settings">Privacy</string>
     <!-- Privacy settings activity title -->
@@ -2795,7 +2881,7 @@ found in the list of installed applications.</string>
     <!-- Dialog title for confirmation to erase backup data from server -->
     <string name="backup_erase_dialog_message">Are you sure you want to stop backing up your Wi-Fi passwords, bookmarks, and other settings and application data and erase all copies on Google servers?</string>
 
-    <!-- Device admin settings screen --><skip/>
+    <!-- Device admin settings screen --><skip />
     <!-- Device admin settings activity title -->
     <string name="device_admin_settings_title">Device administration settings</string>
     <!-- Label for screen showing the active device policy -->
@@ -2902,7 +2988,7 @@ found in the list of installed applications.</string>
     <!-- Header title for list of accounts on Accounts & Synchronization settings [CHAR LIMIT=30] -->
     <string name="header_manage_accounts">Manage accounts</string>
 
-    <!-- Sync status messages on Accounts & Synchronization settings --><skip/>
+    <!-- Sync status messages on Accounts & Synchronization settings --><skip />
     <!-- Sync status shown when sync is enabled [CHAR LIMIT=20] -->
     <string name="sync_enabled">Sync is ON</string>
     <!-- Sync status shown when sync is disabled [CHAR LIMIT=20] -->
