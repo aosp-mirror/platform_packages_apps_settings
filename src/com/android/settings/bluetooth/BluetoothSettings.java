@@ -251,7 +251,6 @@ public class BluetoothSettings extends SettingsPreferenceFragment
         }
     }
 
-    @Override
     public void onUserLeaveHint() {
         mLocalManager.stopScanning();
     }

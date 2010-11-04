@@ -74,6 +74,8 @@ public class WifiSettingsForSetupWizardXL extends Activity implements OnClickLis
     // This is a tweak for letting users not confused with WiFi state during a first first steps.
     private int mIgnoringWifiNotificationCount = 5;
 
+    private boolean mShowingConnectingMessageManually = false;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -127,6 +129,14 @@ public class WifiSettingsForSetupWizardXL extends Activity implements OnClickLis
             break;
         case R.id.wifi_setup_connect:
             mWifiSettings.submit();
+
+            // updateConnectionState() isn't called soon after the user's "connect" action,
+            // and the user still sees "not connected" message for a while, which looks strange.
+            // We instead manually show "connecting" message before the system gets actual
+            // "connecting" message from Wi-Fi module.
+            showConnectingStatus();
+            mShowingConnectingMessageManually = true;
+            mIgnoringWifiNotificationCount = 2;
             break;
         case R.id.wifi_setup_forget:
             mWifiSettings.forget();
@@ -167,10 +177,8 @@ public class WifiSettingsForSetupWizardXL extends Activity implements OnClickLis
             break;
         }
         case CONNECTING: {
-            mProgressBar.setIndeterminate(false);
-            mProgressBar.setProgress(1);
-            mStatusText.setText(R.string.wifi_setup_status_connecting);
-            mProgressText.setText(Summary.get(this, state));
+            mShowingConnectingMessageManually = false;
+            showConnectingStatus();
             break;
         }
         case CONNECTED: {
@@ -200,12 +208,15 @@ public class WifiSettingsForSetupWizardXL extends Activity implements OnClickLis
             break;
         }
         default:  // Not connected.
-            if (mWifiSettings.getAccessPointsCount() == 0 &&
-                    mIgnoringWifiNotificationCount > 0) {
+            if (mWifiSettings.getAccessPointsCount() == 0 && mIgnoringWifiNotificationCount > 0) {
                 mIgnoringWifiNotificationCount--;
                 mProgressBar.setIndeterminate(true);
                 mProgressText.setText(Summary.get(this, DetailedState.SCANNING));
+            } else if (mShowingConnectingMessageManually && mIgnoringWifiNotificationCount > 0) {
+                mIgnoringWifiNotificationCount--;
+                showConnectingStatus();
             } else {
+                mShowingConnectingMessageManually = false;
                 mProgressBar.setIndeterminate(false);
                 mProgressBar.setProgress(0);
                 mStatusText.setText(R.string.wifi_setup_status_select_network);
@@ -215,6 +226,13 @@ public class WifiSettingsForSetupWizardXL extends Activity implements OnClickLis
 
             break;
         }
+    }
+
+    private void showConnectingStatus() {
+        mProgressBar.setIndeterminate(false);
+        mProgressBar.setProgress(1);
+        mStatusText.setText(R.string.wifi_setup_status_connecting);
+        mProgressText.setText(Summary.get(this, DetailedState.CONNECTING));
     }
 
     private void enableButtons() {

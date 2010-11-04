@@ -837,6 +837,17 @@
     <!-- Bluetooth settings. The summary string when a device is connected to the PAN profile. [CHAR LIMIT=35]-->
     <string name="bluetooth_summary_connected_to_pan">Tethered</string>
 
+    <!-- Bluetooth settings.  Message for disconnecting from the A2DP profile. -->
+    <string name="bluetooth_disconnect_a2dp_profile"><xliff:g id="device_name">%1$s</xliff:g> will be disconnected from media audio.</string>
+    <!-- Bluetooth settings.  Message for disconnecting from the headset profile. -->
+    <string name="bluetooth_disconnect_headset_profile" product="tablet"><xliff:g id="device_name">%1$s</xliff:g> will be disconnected from tablet audio.</string>
+    <!-- Bluetooth settings.  Message for disconnecting from the headset profile. -->
+    <string name="bluetooth_disconnect_headset_profile" product="default"><xliff:g id="device_name">%1$s</xliff:g> will be disconnected from phone audio.</string>
+    <!-- Bluetooth settings.  Message for disconnecting from the HID profile. -->
+    <string name="bluetooth_disconnect_hid_profile"><xliff:g id="device_name">%1$s</xliff:g> will be disconnected from input device.</string>
+    <!-- Bluetooth settings.  Message for disconnecting from the PAN profile. -->
+    <string name="bluetooth_disconnect_pan_profile"><xliff:g id="device_name">%1$s</xliff:g> will be disconnected from tethering.</string>
+
     <!-- Bluetooth settings.  Connection options screen.  The title of the screen. -->
     <string name="bluetooth_device_advanced_title"><xliff:g id="device_name">%1$s</xliff:g> options</string>
     <!-- Bluetooth settings. Connection options screen. Title of device actions section. [CHAR LIMIT=30] -->
@@ -1608,6 +1619,8 @@
     <string name="master_clear_gesture_explanation">You must draw your unlock pattern to confirm a factory data reset.</string>
     <!-- Master clear failed message -->
     <string name="master_clear_failed">No reset was performed because the System Clear service is not available.</string>
+    <!-- Master clear confirmation screen title [CHAR LIMIT=30] -->
+    <string name="master_clear_confirm_title">Confirm reset</string>
 
     <!-- Media Format -->
     <!-- SD card & phone storage settings screen, setting option name under Internal phone storage heading [CHAR LIMIT=25] -->

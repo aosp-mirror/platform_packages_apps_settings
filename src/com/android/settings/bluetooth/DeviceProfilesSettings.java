@@ -21,7 +21,6 @@ import com.android.settings.SettingsPreferenceFragment;
 import com.android.settings.bluetooth.LocalBluetoothProfileManager.Profile;
 
 import android.bluetooth.BluetoothDevice;
-import android.content.Context;
 import android.os.Bundle;
 import android.preference.CheckBoxPreference;
 import android.preference.EditTextPreference;
@@ -35,8 +34,8 @@ import android.view.View;
 import java.util.HashMap;
 
 /**
- * ConnectSpecificProfilesActivity presents the user with all of the profiles
- * for a particular device, and allows him to choose which should be connected
+ * This preference fragment presents the user with all of the profiles
+ * for a particular device, and allows them to be individually connected
  * (or disconnected).
  */
 public class DeviceProfilesSettings extends SettingsPreferenceFragment
@@ -155,9 +154,6 @@ public class DeviceProfilesSettings extends SettingsPreferenceFragment
         pref.setOrder(getProfilePreferenceIndex(profile));
         pref.setOnExpandClickListener(this);
 
-        LocalBluetoothProfileManager profileManager = LocalBluetoothProfileManager
-                .getProfileManager(mManager, profile);
-
         /**
          * Gray out profile while connecting and disconnecting
          */
@@ -172,7 +168,7 @@ public class DeviceProfilesSettings extends SettingsPreferenceFragment
     public boolean onPreferenceTreeClick(PreferenceScreen screen, Preference preference) {
         String key = preference.getKey();
         if (preference instanceof BluetoothProfilePreference) {
-            onProfileClicked(preference, Profile.valueOf(key));
+            onProfileClicked(Profile.valueOf(key));
             return true;
         } else if (key.equals(KEY_UNPAIR)) {
             unpairDevice();
@@ -196,18 +192,24 @@ public class DeviceProfilesSettings extends SettingsPreferenceFragment
         return true;
     }
 
-    private void onProfileClicked(Preference preference, Profile profile) {
+    private void onProfileClicked(Profile profile) {
+        BluetoothDevice device = mCachedDevice.getDevice();
         LocalBluetoothProfileManager profileManager = LocalBluetoothProfileManager
                 .getProfileManager(mManager, profile);
-        // TODO: Get the current state and flip it, updating the summary for the preference
 
-//        profileManager.setPreferred(mCachedDevice.getDevice(), checked);
-//
-//        if (checked) {
-//            mCachedDevice.connect(profile);
-//        } else {
-//            mCachedDevice.disconnect(profile);
-//        }
+        int status = profileManager.getConnectionStatus(device);
+        boolean isConnected =
+                SettingsBtStatus.isConnectionStatusConnected(status);
+
+        // TODO: only change the preference on disconnect if user confirms
+        // TODO: add method to change priority of individual profiles
+        // profileManager.setPreferred(device, !isConnected);
+
+        if (isConnected) {
+            mCachedDevice.askDisconnect(profile);
+        } else {
+            mCachedDevice.connect(profile);
+        }
     }
 
     public void onDeviceAttributesChanged(CachedBluetoothDevice cachedDevice) {

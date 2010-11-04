@@ -16,14 +16,18 @@
 
 package com.android.settings;
 
-import com.android.internal.os.storage.ExternalStorageFormatter;
-import com.android.internal.widget.LockPatternUtils;
+import com.android.settings.R;
 
 import android.app.Activity;
+import android.app.Fragment;
 import android.content.Intent;
+import android.content.res.Resources;
 import android.os.Bundle;
+import android.preference.Preference;
+import android.preference.PreferenceActivity;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.CheckBox;
 
@@ -34,43 +38,19 @@ import android.widget.CheckBox;
  * has defined one, followed by a final strongly-worded "THIS WILL ERASE EVERYTHING
  * ON THE PHONE" prompt.  If at any time the phone is allowed to go to sleep, is
  * locked, et cetera, then the confirmation sequence is abandoned.
+ *
+ * This is the initial screen.
  */
-public class MasterClear extends Activity {
+public class MasterClear extends Fragment {
 
     private static final int KEYGUARD_REQUEST = 55;
 
-    private LayoutInflater mInflater;
-    private LockPatternUtils mLockUtils;
+    static final String ERASE_EXTERNAL_EXTRA = "erase_sd";
 
-    private View mInitialView;
+    private View mContentView;
     private Button mInitiateButton;
     private View mExternalStorageContainer;
     private CheckBox mExternalStorage;
-
-    private View mFinalView;
-    private Button mFinalButton;
-
-    /**
-     * The user has gone through the multiple confirmation, so now we go ahead
-     * and invoke the Checkin Service to reset the device to its factory-default
-     * state (rebooting in the process).
-     */
-    private Button.OnClickListener mFinalClickListener = new Button.OnClickListener() {
-            public void onClick(View v) {
-                if (Utils.isMonkeyRunning()) {
-                    return;
-                }
-
-                if (mExternalStorage.isChecked()) {
-                    Intent intent = new Intent(ExternalStorageFormatter.FORMAT_AND_FACTORY_RESET);
-                    intent.setComponent(ExternalStorageFormatter.COMPONENT_NAME);
-                    startService(intent);
-                } else {
-                    sendBroadcast(new Intent("android.intent.action.MASTER_CLEAR"));
-                    // Intent handling is asynchronous -- assume it will happen soon.
-                }
-            }
-        };
 
     /**
      * Keyguard validation is run using the standard {@link ConfirmLockPattern}
@@ -79,14 +59,15 @@ public class MasterClear extends Activity {
      * @return true if confirmation launched
      */
     private boolean runKeyguardConfirmation(int request) {
-        return new ChooseLockSettingsHelper(this)
+        Resources res = getActivity().getResources();
+        return new ChooseLockSettingsHelper(getActivity(), this)
                 .launchConfirmationActivity(request,
-                        getText(R.string.master_clear_gesture_prompt),
-                        getText(R.string.master_clear_gesture_explanation));
+                        res.getText(R.string.master_clear_gesture_prompt),
+                        res.getText(R.string.master_clear_gesture_explanation));
     }
 
     @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
         if (requestCode != KEYGUARD_REQUEST) {
@@ -96,12 +77,18 @@ public class MasterClear extends Activity {
         // If the user entered a valid keyguard trace, present the final
         // confirmation prompt; otherwise, go back to the initial state.
         if (resultCode == Activity.RESULT_OK) {
-            establishFinalConfirmationState();
-        } else if (resultCode == Activity.RESULT_CANCELED) {
-            finish();
+            showFinalConfirmation();
         } else {
             establishInitialState();
         }
+    }
+
+    private void showFinalConfirmation() {
+        Preference preference = new Preference(getActivity());
+        preference.setFragment(MasterClearConfirm.class.getName());
+        preference.setTitle(R.string.master_clear_confirm_title);
+        preference.getExtras().putBoolean(ERASE_EXTERNAL_EXTRA, mExternalStorage.isChecked());
+        ((PreferenceActivity) getActivity()).onPreferenceStartFragment(null, preference);
     }
 
     /**
@@ -110,26 +97,13 @@ public class MasterClear extends Activity {
      * is no keyguard available, we simply go to the final confirmation prompt.
      */
     private Button.OnClickListener mInitiateListener = new Button.OnClickListener() {
-            public void onClick(View v) {
-                if (!runKeyguardConfirmation(KEYGUARD_REQUEST)) {
-                    establishFinalConfirmationState();
-                }
+
+        public void onClick(View v) {
+            if (!runKeyguardConfirmation(KEYGUARD_REQUEST)) {
+                showFinalConfirmation();
             }
-        };
-
-    /**
-     * Configure the UI for the final confirmation interaction
-     */
-    private void establishFinalConfirmationState() {
-        if (mFinalView == null) {
-            mFinalView = mInflater.inflate(R.layout.master_clear_final, null);
-            mFinalButton =
-                    (Button) mFinalView.findViewById(R.id.execute_master_clear);
-            mFinalButton.setOnClickListener(mFinalClickListener);
         }
-
-        setContentView(mFinalView);
-    }
+    };
 
     /**
      * In its initial state, the activity presents a button for the user to
@@ -144,48 +118,25 @@ public class MasterClear extends Activity {
      * to change contents.
      */
     private void establishInitialState() {
-        if (mInitialView == null) {
-            mInitialView = mInflater.inflate(R.layout.master_clear_primary, null);
-            mInitiateButton =
-                    (Button) mInitialView.findViewById(R.id.initiate_master_clear);
-            mInitiateButton.setOnClickListener(mInitiateListener);
-            mExternalStorageContainer =
-                mInitialView.findViewById(R.id.erase_external_container);
-            mExternalStorage =
-                    (CheckBox) mInitialView.findViewById(R.id.erase_external);
-            mExternalStorageContainer.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    mExternalStorage.toggle();
-                }
-            });
-        }
+        mInitiateButton = (Button) mContentView.findViewById(R.id.initiate_master_clear);
+        mInitiateButton.setOnClickListener(mInitiateListener);
+        mExternalStorageContainer = mContentView.findViewById(R.id.erase_external_container);
+        mExternalStorage = (CheckBox) mContentView.findViewById(R.id.erase_external);
 
-        setContentView(mInitialView);
+        mExternalStorageContainer.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                mExternalStorage.toggle();
+            }
+        });
     }
 
     @Override
-    protected void onCreate(Bundle savedState) {
-        super.onCreate(savedState);
-
-        mInitialView = null;
-        mFinalView = null;
-        mInflater = LayoutInflater.from(this);
-        mLockUtils = new LockPatternUtils(this);
-
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+            Bundle savedInstanceState) {
+        mContentView = inflater.inflate(R.layout.master_clear, null);
         establishInitialState();
-    }
-
-    /** Abandon all progress through the confirmation sequence by returning
-     * to the initial view any time the activity is interrupted (e.g. by
-     * idle timeout).
-     */
-    @Override
-    public void onPause() {
-        super.onPause();
-
-        if (!isFinishing()) {
-            establishInitialState();
-        }
+        return mContentView;
     }
 }

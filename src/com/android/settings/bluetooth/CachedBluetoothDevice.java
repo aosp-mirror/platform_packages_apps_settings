@@ -104,18 +104,14 @@ public class CachedBluetoothDevice implements Comparable<CachedBluetoothDevice> 
      * @param profile Profile to describe
      * @return Description of the device and profile
      */
-    private String describe(CachedBluetoothDevice cachedDevice, Profile profile) {
+    private String describe(Profile profile) {
         StringBuilder sb = new StringBuilder();
-        sb.append("Address:").append(cachedDevice.mDevice);
+        sb.append("Address:").append(mDevice);
         if (profile != null) {
             sb.append(" Profile:").append(profile.name());
         }
 
         return sb.toString();
-    }
-
-    private String describe(Profile profile) {
-        return describe(this, profile);
     }
 
     public void onProfileStateChanged(Profile profile, int newProfileState) {
@@ -166,20 +162,13 @@ public class CachedBluetoothDevice implements Comparable<CachedBluetoothDevice> 
     }
 
     public void disconnect(Profile profile) {
-        disconnectInt(this, profile);
-    }
-
-    private boolean disconnectInt(CachedBluetoothDevice cachedDevice, Profile profile) {
         LocalBluetoothProfileManager profileManager =
                 LocalBluetoothProfileManager.getProfileManager(mLocalManager, profile);
-        int status = profileManager.getConnectionStatus(cachedDevice.mDevice);
-        if (profileManager.disconnect(cachedDevice.mDevice)) {
+        if (profileManager.disconnect(mDevice)) {
             if (D) {
                 Log.d(TAG, "Command sent successfully:DISCONNECT " + describe(profile));
             }
-            return true;
         }
-        return false;
     }
 
     public void askDisconnect() {
@@ -204,6 +193,57 @@ public class CachedBluetoothDevice implements Comparable<CachedBluetoothDevice> 
             }
         };
 
+        showDisconnectDialog(context, disconnectListener, message);
+    }
+
+    public void askDisconnect(final Profile profile) {
+        Context context = mLocalManager.getForegroundActivity();
+        if (context == null) {
+            // Cannot ask, since we need an activity context
+            disconnect(profile);
+            return;
+        }
+
+        Resources res = context.getResources();
+
+        String name = getName();
+        if (TextUtils.isEmpty(name)) {
+            name = res.getString(R.string.bluetooth_device);
+        }
+        int disconnectMessage;
+        switch (profile) {
+            case A2DP:
+                disconnectMessage = R.string.bluetooth_disconnect_a2dp_profile;
+                break;
+            case HEADSET:
+                disconnectMessage = R.string.bluetooth_disconnect_headset_profile;
+                break;
+            case HID:
+                disconnectMessage = R.string.bluetooth_disconnect_hid_profile;
+                break;
+            case PAN:
+                disconnectMessage = R.string.bluetooth_disconnect_pan_profile;
+                break;
+            default:
+                Log.w(TAG, "askDisconnect: unexpected profile " + profile);
+                disconnectMessage = R.string.bluetooth_disconnect_blank;
+                break;
+        }
+        String message = res.getString(disconnectMessage, name);
+
+        DialogInterface.OnClickListener disconnectListener =
+                new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int which) {
+                disconnect(profile);
+            }
+        };
+
+        showDisconnectDialog(context, disconnectListener, message);
+    }
+
+    private void showDisconnectDialog(Context context,
+            DialogInterface.OnClickListener disconnectListener,
+            String message) {
         if (mDialog == null) {
             mDialog = new AlertDialog.Builder(context)
                     .setPositiveButton(android.R.string.ok, disconnectListener)
@@ -213,6 +253,10 @@ public class CachedBluetoothDevice implements Comparable<CachedBluetoothDevice> 
             if (mDialog.isShowing()) {
                 mDialog.dismiss();
             }
+            // use disconnectListener for the correct profile(s)
+            CharSequence okText = context.getText(android.R.string.ok);
+            mDialog.setButton(DialogInterface.BUTTON_POSITIVE,
+                    okText, disconnectListener);
         }
         mDialog.setTitle(getName());
         mDialog.setMessage(message);
@@ -311,7 +355,7 @@ public class CachedBluetoothDevice implements Comparable<CachedBluetoothDevice> 
             CachedBluetoothDevice cachedDevice = cachedDeviceManager.findDevice(btDevice);
 
             if (cachedDevice != null && !cachedDevice.equals(device)) {
-                disconnectInt(cachedDevice, profile);
+                cachedDevice.disconnect(profile);
             }
         }
     }
@@ -321,7 +365,7 @@ public class CachedBluetoothDevice implements Comparable<CachedBluetoothDevice> 
 
         LocalBluetoothProfileManager profileManager =
                 LocalBluetoothProfileManager.getProfileManager(mLocalManager, profile);
-        int status = profileManager.getConnectionStatus(cachedDevice.mDevice);
+
         if (profileManager.connect(cachedDevice.mDevice)) {
             if (D) {
                 Log.d(TAG, "Command sent successfully:CONNECT " + describe(profile));

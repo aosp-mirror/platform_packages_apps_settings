@@ -26,7 +26,7 @@
 
     <TextView
         android:id="@+id/wifi_setup_title"
-        android:layout_width="fill_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
@@ -39,13 +39,13 @@
          android:id="@+id/scanning_progress_bar"
          android:layout_width="100dip"
          android:layout_height="wrap_content"
-         android:layout_alignParentRight="true"
          android:layout_above="@+id/scanning_progress_text"
+         android:layout_alignParentRight="true"
          style="?android:attr/progressBarStyleHorizontal" />
 
     <TextView
         android:id="@+id/scanning_progress_text"
-        android:layout_width="fill_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
         android:layout_above="@+id/top_divider"
@@ -85,27 +85,23 @@
              android:layout_height="wrap_content" />
     </FrameLayout>
 
-
-    <RelativeLayout
+    <LinearLayout
         android:id="@+id/right_buttons"
-        android:layout_width="300dip"
-        android:layout_height="match_parent"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
         android:layout_alignParentRight="true"
         android:layout_alignParentBottom="true">
 
         <Button android:id="@+id/wifi_setup_connect"
                 android:layout_width="260dip"
                 android:layout_height="60dip"
-                android:layout_alignParentRight="true"
-                android:layout_alignParentBottom="true"
                 android:textSize="24dip"
                 android:text="@string/wifi_connect"
                 android:visibility="gone" />
         <Button android:id="@+id/wifi_setup_forget"
                 android:layout_width="260dip"
                 android:layout_height="60dip"
-                android:layout_alignParentRight="true"
-                android:layout_alignParentBottom="true"
                 android:textSize="24dip"
                 android:text="@string/wifi_forget"
                 android:visibility="gone" />
@@ -113,8 +109,6 @@
         <Button android:id="@+id/wifi_setup_add_network"
                 android:layout_width="260dip"
                 android:layout_height="60dip"
-                android:layout_above="@+id/wifi_setup_refresh_list"
-                android:layout_alignParentRight="true"
                 android:textSize="24dip"
                 android:text="@string/wifi_setup_add_network"
                 android:enabled="false" />
@@ -122,8 +116,6 @@
         <Button android:id="@+id/wifi_setup_refresh_list"
                 android:layout_width="260dip"
                 android:layout_height="60dip"
-                android:layout_above="@+id/wifi_setup_skip_or_next"
-                android:layout_alignParentRight="true"
                 android:textSize="24dip"
                 android:text="@string/wifi_setup_refresh_list"
                 android:enabled="false" />
@@ -132,12 +124,10 @@
                 android:layout_width="260dip"
                 android:layout_height="60dip"
                 android:layout_marginTop="30dip"
-                android:layout_alignParentRight="true"
-                android:layout_alignParentBottom="true"
                 android:textSize="24dip"
                 android:text="@string/wifi_setup_skip"
                 android:enabled="false" />
-    </RelativeLayout>
+    </LinearLayout>
 
     <Button android:id="@+id/wifi_setup_detail"
             android:layout_width="260dip"

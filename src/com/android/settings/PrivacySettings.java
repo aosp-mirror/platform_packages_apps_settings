@@ -98,7 +98,7 @@ public class PrivacySettings extends SettingsPreferenceFragment implements
             }
         }
 
-        return false;
+        return super.onPreferenceTreeClick(preferenceScreen, preference);
     }
 
     private void showEraseBackupDialog() {

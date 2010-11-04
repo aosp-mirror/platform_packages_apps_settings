@@ -70,7 +70,7 @@ public class LocalBluetoothManager {
     // If a device was picked from the device picker or was in discoverable mode
     // in the last 60 seconds, show the pairing dialogs in foreground instead
     // of raising notifications
-    private static long GRACE_PERIOD_TO_SHOW_DIALOGS_IN_FOREGROUND = 60 * 1000;
+    private static final int GRACE_PERIOD_TO_SHOW_DIALOGS_IN_FOREGROUND = 60 * 1000;
 
     public static final String SHARED_PREFERENCES_KEY_DISCOVERING_TIMESTAMP =
         "last_discovering_time";

@@ -48,13 +48,17 @@ public class InputMethodAndSubtypeUtil {
     private static final TextUtils.SimpleStringSplitter sStringInputMethodSubtypeSplitter
             = new TextUtils.SimpleStringSplitter(INPUT_METHOD_SUBTYPE_SEPARATER);
 
-    private static boolean isInputMethodSubtypeSelected(ContentResolver resolver) {
+    private static int getInputMethodSubtypeSelected(ContentResolver resolver) {
         try {
             return Settings.Secure.getInt(resolver,
-                    Settings.Secure.SELECTED_INPUT_METHOD_SUBTYPE) != NOT_A_SUBTYPE_ID;
+                    Settings.Secure.SELECTED_INPUT_METHOD_SUBTYPE);
         } catch (SettingNotFoundException e) {
-            return false;
+            return NOT_A_SUBTYPE_ID;
         }
+    }
+
+    private static boolean isInputMethodSubtypeSelected(ContentResolver resolver) {
+        return getInputMethodSubtypeSelected(resolver) != NOT_A_SUBTYPE_ID;
     }
 
     private static void putSelectedInputMethodSubtype(ContentResolver resolver, int hashCode) {
@@ -98,6 +102,7 @@ public class InputMethodAndSubtypeUtil {
             boolean hasHardKeyboard, String lastTickedInputMethodId) {
         String currentInputMethodId = Settings.Secure.getString(resolver,
                 Settings.Secure.DEFAULT_INPUT_METHOD);
+        final int selectedInputMethodSubtype = getInputMethodSubtypeSelected(resolver);
 
         StringBuilder builder = new StringBuilder();
         StringBuilder disabledSysImes = new StringBuilder();
@@ -105,6 +110,7 @@ public class InputMethodAndSubtypeUtil {
         int firstSubtypeHashCode = NOT_A_SUBTYPE_ID;
 
         final boolean onlyOneIME = inputMethodProperties.size() == 1;
+        boolean existsSelectedIME = false;
         for (InputMethodInfo property : inputMethodProperties) {
             final String id = property.getId();
             CheckBoxPreference pref = (CheckBoxPreference) context.findPreference(id);
@@ -123,8 +129,12 @@ public class InputMethodAndSubtypeUtil {
                             id + subtype.hashCode());
                     if (subtypePref != null && subtypePref.isChecked()) {
                         builder.append(INPUT_METHOD_SUBTYPE_SEPARATER).append(subtype.hashCode());
-                        if (firstSubtypeHashCode == NOT_A_SUBTYPE_ID) {
-                            firstSubtypeHashCode = subtype.hashCode();
+                        if (isCurrentInputMethod) {
+                            if (selectedInputMethodSubtype == subtype.hashCode()) {
+                                existsSelectedIME = true;
+                            } else if (firstSubtypeHashCode == NOT_A_SUBTYPE_ID) {
+                                firstSubtypeHashCode = subtype.hashCode();
+                            }
                         }
                     }
                 }
@@ -158,9 +168,10 @@ public class InputMethodAndSubtypeUtil {
             Log.d(TAG, "--- Save default inputmethod settings. :" + currentInputMethodId);
         }
 
-        // redefines SelectedSubtype when all subtypes are unchecked or there is no subtype
-        // selected.
-        if (firstSubtypeHashCode == NOT_A_SUBTYPE_ID || !isInputMethodSubtypeSelected(resolver)) {
+        // Redefines SelectedSubtype when all subtypes are unchecked or there is no subtype
+        // selected. And if the selected subtype of the current input method was disabled,
+        // We should reset the selected input method's subtype.
+        if (!existsSelectedIME || !isInputMethodSubtypeSelected(resolver)) {
             if (DEBUG) {
                 Log.d(TAG, "--- Set inputmethod subtype because it's not defined."
                         + firstSubtypeHashCode);

@@ -496,7 +496,7 @@ public class DockService extends Service implements AlertDialog.OnMultiChoiceCli
     private CharSequence[] initBtSettings(DockService service, BluetoothDevice device, int state,
             boolean firstTime) {
         // TODO Avoid hardcoding dock and profiles. Read from system properties
-        int numOfProfiles = 0;
+        int numOfProfiles;
         switch (state) {
             case Intent.EXTRA_DOCK_STATE_DESK:
                 numOfProfiles = 1;
@@ -729,7 +729,7 @@ public class DockService extends Service implements AlertDialog.OnMultiChoiceCli
             profileManager.setPreferred(device, mCheckedItems[i]);
             if (DEBUG) {
                 if (mCheckedItems[i] != profileManager.isPreferred(device)) {
-                    Log.e(TAG, "Can't save prefered value");
+                    Log.e(TAG, "Can't save preferred value");
                 }
             }
         }

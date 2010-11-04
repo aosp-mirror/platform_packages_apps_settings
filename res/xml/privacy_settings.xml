@@ -33,15 +33,11 @@
     </PreferenceCategory>
 
     <PreferenceCategory
-            android:title="@string/personal_data_section_title">
+            android:title="@string/personal_data_section_title"/>
         <!-- Factory reset -->
-        <PreferenceScreen
-                android:title="@string/master_clear_title"
-                android:summary="@string/master_clear_summary">
-            <intent android:action="android.intent.action.MAIN"
-                    android:targetPackage="com.android.settings"
-                    android:targetClass="com.android.settings.MasterClear" />
-        </PreferenceScreen>
-    </PreferenceCategory>
+    <PreferenceScreen
+        android:title="@string/master_clear_title"
+        android:summary="@string/master_clear_summary"
+        android:fragment="com.android.settings.MasterClear" />
 
 </PreferenceScreen>
