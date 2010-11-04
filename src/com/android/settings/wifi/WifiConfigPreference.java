@@ -21,22 +21,30 @@ import com.android.settings.R;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.preference.Preference;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
+import android.widget.EditText;
 
 /**
  * Preference letting users modify a setting for Wifi network. This work as an alternative UI
  * for {@link WifiDialog} without shouwing popup Dialog.
  */
 public class WifiConfigPreference extends Preference implements WifiConfigUiBase {
+    private static final String TAG = "WifiConfigPreference";
+
     private WifiSettings mWifiSettings;
     private View mView;
     private final DialogInterface.OnClickListener mListener;
     private WifiConfigController mController;
     private AccessPoint mAccessPoint;
     private boolean mEdit;
+
+    // Stores an View id to be focused. Used when view isn't available while setFocus() is called.
+    private int mFocusId = -1;
 
     private LayoutInflater mInflater;
 
@@ -57,18 +65,47 @@ public class WifiConfigPreference extends Preference implements WifiConfigUiBase
     @Override
     protected View onCreateView(ViewGroup parent) {
         // Called every time the list is created.
-        if (mView != null) {
-            // TODO: we need to re-forcus something.
-            return mView;
+        if (mView == null) {
+            mView = mInflater.inflate(getLayoutResource(), parent, false);
+            mController = new WifiConfigController(this, mView, mAccessPoint, mEdit, mListener);
         }
-        mView = mInflater.inflate(getLayoutResource(), parent, false);
-        mController = new WifiConfigController(this, mView, mAccessPoint, mEdit, mListener);
+
+        if (mFocusId >= 0) {
+            trySetFocusAndLaunchSoftInput(mFocusId);
+            mFocusId = -1;
+        }
+
         return mView;
     }
 
     @Override
     public WifiConfigController getController() {
         return mController;
+    }
+
+    public void setFocus(int id) {
+        if (mView != null) {
+            trySetFocusAndLaunchSoftInput(id);
+            mFocusId = -1;
+        } else {
+            mFocusId = id;
+        }
+    }
+
+    private void trySetFocusAndLaunchSoftInput(int id) {
+        final View viewToBeFocused = mView.findViewById(id);
+        if (viewToBeFocused != null && viewToBeFocused.getVisibility() == View.VISIBLE) {
+            viewToBeFocused.requestFocus();
+            // TODO: doesn't work.
+            if (viewToBeFocused instanceof EditText) {
+                Log.d(TAG, "Focused View is EditText. We try showing the software keyboard");
+                // viewToBeFocused.performClick();
+                final InputMethodManager inputMethodManager =
+                        (InputMethodManager)
+                                getContext().getSystemService(Context.INPUT_METHOD_SERVICE);
+                inputMethodManager.showSoftInput(viewToBeFocused, 0);
+            }
+        }
     }
 
     public View findViewById(int id) {

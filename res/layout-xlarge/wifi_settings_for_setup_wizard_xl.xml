@@ -93,17 +93,19 @@
         android:layout_alignParentRight="true"
         android:layout_alignParentBottom="true">
 
-        <Button android:id="@+id/wifi_setup_connect"
-                android:layout_width="260dip"
-                android:layout_height="60dip"
-                android:textSize="24dip"
-                android:text="@string/wifi_connect"
-                android:visibility="gone" />
         <Button android:id="@+id/wifi_setup_forget"
                 android:layout_width="260dip"
                 android:layout_height="60dip"
                 android:textSize="24dip"
                 android:text="@string/wifi_forget"
+                android:visibility="gone" />
+
+        <Button android:id="@+id/wifi_setup_connect"
+                android:layout_width="260dip"
+                android:layout_height="60dip"
+                android:layout_marginTop="20dip"
+                android:textSize="24dip"
+                android:text="@string/wifi_connect"
                 android:visibility="gone" />
 
         <Button android:id="@+id/wifi_setup_add_network"
@@ -134,7 +136,6 @@
             android:layout_height="60dip"
             android:layout_above="@+id/wifi_setup_cancel"
             android:layout_alignLeft="@+id/wifi_setup_cancel"
-            android:layout_marginBottom="30dip"
             android:textSize="24dip"
             android:text="@string/wifi_detail"
             android:visibility="gone" />
@@ -142,6 +143,7 @@
     <Button android:id="@+id/wifi_setup_cancel"
             android:layout_width="260dip"
             android:layout_height="60dip"
+            android:layout_marginTop="20dip"
             android:layout_alignParentBottom="true"
             android:layout_toLeftOf="@id/right_buttons"
             android:textSize="24dip"
