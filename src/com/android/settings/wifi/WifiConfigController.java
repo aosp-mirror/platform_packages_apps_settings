@@ -375,7 +375,7 @@ public class WifiConfigController implements TextWatcher,
     private int validateIpConfigFields(LinkProperties linkProperties) {
         try {
             String ipAddr = mIpAddressView.getText().toString();
-            if (!NetworkUtils.isIpAddress(ipAddr)) {
+            if (!InetAddress.isNumeric(ipAddr)) {
                 return R.string.wifi_ip_settings_invalid_ip_address;
             }
             InetAddress inetAddr = InetAddress.getByName(ipAddr);
@@ -389,19 +389,19 @@ public class WifiConfigController implements TextWatcher,
             linkProperties.addLinkAddress(new LinkAddress(inetAddr, networkPrefixLength));
 
             String gateway = mGatewayView.getText().toString();
-            if (!NetworkUtils.isIpAddress(gateway)) {
+            if (!InetAddress.isNumeric(gateway)) {
                 return R.string.wifi_ip_settings_invalid_gateway;
             }
             linkProperties.setGateway(InetAddress.getByName(gateway));
 
             String dns = mDns1View.getText().toString();
-            if (!NetworkUtils.isIpAddress(dns)) {
+            if (!InetAddress.isNumeric(dns)) {
                 return R.string.wifi_ip_settings_invalid_dns;
             }
             linkProperties.addDns(InetAddress.getByName(dns));
             if (mDns2View.length() > 0) {
                 dns = mDns2View.getText().toString();
-                if (!NetworkUtils.isIpAddress(dns)) {
+                if (!InetAddress.isNumeric(dns)) {
                     return R.string.wifi_ip_settings_invalid_dns;
                 }
                 linkProperties.addDns(InetAddress.getByName(dns));
