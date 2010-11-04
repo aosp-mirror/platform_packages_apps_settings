@@ -20,6 +20,7 @@ import com.android.settings.R;
 import com.android.settings.SettingsPreferenceFragment;
 
 import android.app.Activity;
+import android.content.Context;
 import android.net.wifi.WifiInfo;
 import android.net.wifi.WifiManager;
 import android.os.Bundle;
@@ -29,13 +30,18 @@ import android.preference.Preference;
 import android.provider.Settings;
 import android.text.TextUtils;
 import android.widget.Toast;
+import android.util.Log;
 
 public class AdvancedSettings extends SettingsPreferenceFragment
         implements Preference.OnPreferenceChangeListener {
 
+    private static final String TAG = "AdvancedSettings";
     private static final String KEY_MAC_ADDRESS = "mac_address";
     private static final String KEY_CURRENT_IP_ADDRESS = "current_ip_address";
     private static final String KEY_SLEEP_POLICY = "sleep_policy";
+    private static final String KEY_FREQUENCY_BAND = "frequency_band";
+
+    private WifiManager mWifiManager;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -46,22 +52,36 @@ public class AdvancedSettings extends SettingsPreferenceFragment
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
+        mWifiManager = (WifiManager) getSystemService(Context.WIFI_SERVICE);
     }
 
     @Override
     public void onResume() {
         super.onResume();
-
-        initSleepPolicyPreference();
+        initPreferences();
         refreshWifiInfo();
     }
 
-    private void initSleepPolicyPreference() {
+    private void initPreferences() {
         ListPreference pref = (ListPreference) findPreference(KEY_SLEEP_POLICY);
         pref.setOnPreferenceChangeListener(this);
         int value = Settings.System.getInt(getContentResolver(),
-                Settings.System.WIFI_SLEEP_POLICY,Settings. System.WIFI_SLEEP_POLICY_DEFAULT);
+                Settings.System.WIFI_SLEEP_POLICY, Settings.System.WIFI_SLEEP_POLICY_DEFAULT);
         pref.setValue(String.valueOf(value));
+
+        pref = (ListPreference) findPreference(KEY_FREQUENCY_BAND);
+
+        if (mWifiManager.isDualBandSupported()) {
+            pref.setOnPreferenceChangeListener(this);
+            value = mWifiManager.getFrequencyBand();
+            if (value != -1) {
+                pref.setValue(String.valueOf(value));
+            } else {
+                Log.e(TAG, "Failed to fetch frequency band");
+            }
+        } else {
+            getPreferenceScreen().removePreference(pref);
+        }
     }
 
     public boolean onPreferenceChange(Preference preference, Object newValue) {
@@ -77,14 +97,21 @@ public class AdvancedSettings extends SettingsPreferenceFragment
                         Toast.LENGTH_SHORT).show();
                 return false;
             }
+        } else if (key.equals(KEY_FREQUENCY_BAND)) {
+            try {
+                mWifiManager.setFrequencyBand(Integer.parseInt(((String) newValue)), true);
+            } catch (NumberFormatException e) {
+                Toast.makeText(getActivity(), R.string.wifi_setting_frequency_band_error,
+                        Toast.LENGTH_SHORT).show();
+                return false;
+            }
         }
 
         return true;
     }
 
     private void refreshWifiInfo() {
-        WifiManager wifiManager = (WifiManager) getSystemService(Activity.WIFI_SERVICE);
-        WifiInfo wifiInfo = wifiManager.getConnectionInfo();
+        WifiInfo wifiInfo = mWifiManager.getConnectionInfo();
 
         Preference wifiMacAddressPref = findPreference(KEY_MAC_ADDRESS);
         String macAddress = wifiInfo == null ? null : wifiInfo.getMacAddress();

@@ -25,6 +25,15 @@
             android:entries="@array/wifi_sleep_policy_entries"
             android:entryValues="@array/wifi_sleep_policy_values"
             />
+
+    <ListPreference
+            android:key="frequency_band"
+            android:title="@string/wifi_setting_frequency_band_title"
+            android:summary="@string/wifi_setting_frequency_band_summary"
+            android:persistent="false"
+            android:entries="@array/wifi_frequency_band_entries"
+            android:entryValues="@array/wifi_frequency_band_values"
+            />
     
     <Preference android:key="mac_address" 
         style="?android:attr/preferenceInformationStyle" 
