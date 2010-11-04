@@ -108,7 +108,11 @@ public class NfcEnabler implements Preference.OnPreferenceChangeListener {
                 }
                 if (success) {
                     Log.d(TAG, "Successfully changed NFC enabled state to " + desiredState);
-                    // UI will be updated by BroadcastReceiver, above.
+                    mHandler.post(new Runnable() {
+                        public void run() {
+                            handleNfcStateChanged(desiredState);
+                        }
+                    });
                 } else {
                     Log.w(TAG, "Error setting NFC enabled state to " + desiredState);
                     mHandler.post(new Runnable() {
@@ -126,5 +130,6 @@ public class NfcEnabler implements Preference.OnPreferenceChangeListener {
     private void handleNfcStateChanged(boolean newState) {
         mCheckbox.setChecked(newState);
         mCheckbox.setEnabled(true);
+        mCheckbox.setSummary(R.string.nfc_quick_toggle_summary);
     }
 }
