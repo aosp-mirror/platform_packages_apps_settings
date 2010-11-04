@@ -17,9 +17,13 @@
 package com.android.settings;
 
 import android.content.Intent;
+import android.content.pm.ActivityInfo;
+import android.content.pm.PackageManager;
+import android.content.pm.PackageManager.NameNotFoundException;
 import android.os.Bundle;
 import android.preference.PreferenceActivity;
 
+import java.util.HashMap;
 import java.util.List;
 
 /**
@@ -27,7 +31,35 @@ import java.util.List;
  */
 public class Settings extends PreferenceActivity {
 
+    private static final String META_DATA_KEY_HEADER_ID =
+            "com.android.settings.TOP_LEVEL_HEADER_ID";
+    private static final String META_DATA_KEY_FRAGMENT_CLASS =
+            "com.android.settings.FRAGMENT_CLASS";
+
+    private String mFragmentClass;
+    private int mTopLevelHeaderId;
+
     // TODO: Update Call Settings based on airplane mode state.
+
+    protected HashMap<Integer, Integer> mHeaderIndexMap = new HashMap<Integer, Integer>();
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        getMetaData();
+        super.onCreate(savedInstanceState);
+
+        // TODO: Do this only if 2-pane mode
+        highlightHeader();
+    }
+
+    private void highlightHeader() {
+        if (mTopLevelHeaderId != 0) {
+            Integer index = mHeaderIndexMap.get(mTopLevelHeaderId);
+            if (index != null) {
+                getListView().setItemChecked(index, true);
+            }
+        }
+    }
 
     @Override
     public Intent getIntent() {
@@ -52,7 +84,9 @@ public class Settings extends PreferenceActivity {
      * Checks if the component name in the intent is different from the Settings class and
      * returns the class name to load as a fragment.
      */
-    private String getStartingFragmentClass(Intent intent) {
+    protected String getStartingFragmentClass(Intent intent) {
+        if (mFragmentClass != null) return mFragmentClass;
+
         String intentClass = intent.getComponent().getClassName();
         if (intentClass.equals(getClass().getName())) return null;
 
@@ -96,7 +130,8 @@ public class Settings extends PreferenceActivity {
         int i = 0;
         while (i < target.size()) {
             Header header = target.get(i);
-            long id = header.id;
+            // Ids are integers, so downcasting
+            int id = (int) header.id;
             if (id == R.id.dock_settings) {
                 if (!needsDockSettings())
                     target.remove(header);
@@ -106,12 +141,55 @@ public class Settings extends PreferenceActivity {
                 if (!Utils.isVoiceCapable(this))
                     target.remove(header);
             }
-            if (target.get(i) == header)
+            // Increment if the current one wasn't removed by the Utils code.
+            if (target.get(i) == header) {
+                mHeaderIndexMap.put(id, i);
                 i++;
+            }
         }
     }
 
     private boolean needsDockSettings() {
         return getResources().getBoolean(R.bool.has_dock_settings);
     }
+
+    private void getMetaData() {
+        try {
+            ActivityInfo ai = getPackageManager().getActivityInfo(getComponentName(),
+                    PackageManager.GET_META_DATA);
+            if (ai == null || ai.metaData == null) return;
+            mTopLevelHeaderId = ai.metaData.getInt(META_DATA_KEY_HEADER_ID);
+            mFragmentClass = ai.metaData.getString(META_DATA_KEY_FRAGMENT_CLASS);
+        } catch (NameNotFoundException nnfe) {
+        }
+    }
+
+    /*
+     * Settings subclasses for launching independently.
+     */
+
+    public static class BluetoothSettingsActivity extends Settings { }
+    public static class WirelessSettingsActivity extends Settings { }
+    public static class TetherSettingsActivity extends Settings { }
+    public static class VpnSettingsActivity extends Settings { }
+    public static class DateTimeSettingsActivity extends Settings { }
+    public static class StorageSettingsActivity extends Settings { }
+    public static class WifiSettingsActivity extends Settings { }
+    public static class InputMethodAndLanguageSettingsActivity extends Settings { }
+    public static class InputMethodAndSubtypeEnablerActivity extends Settings { }
+    public static class LocalePickerActivity extends Settings { }
+    public static class UserDictionarySettingsActivity extends Settings { }
+    public static class SoundSettingsActivity extends Settings { }
+    public static class DisplaySettingsActivity extends Settings { }
+    public static class DeviceInfoSettingsActivity extends Settings { }
+    public static class ApplicationSettingsActivity extends Settings { }
+    public static class ManageApplicationsActivity extends Settings { }
+    public static class StorageUseActivity extends Settings { }
+    public static class DevelopmentSettingsActivity extends Settings { }
+    public static class AccessibilitySettingsActivity extends Settings { }
+    public static class SecuritySettingsActivity extends Settings { }
+    public static class PrivacySettingsActivity extends Settings { }
+    public static class DockSettingsActivity extends Settings { }
+    public static class RunningServicesActivity extends Settings { }
+    public static class VoiceInputOutputSettingsActivity extends Settings { }
 }

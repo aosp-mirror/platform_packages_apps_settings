@@ -53,7 +53,7 @@
             android:fragment="com.android.settings.applications.ManageApplications"
             android:title="@string/runningservices_settings_title"
             android:summary="@string/runningservices_settings_summary">
-        <extra android:name="classname" android:value="com.android.settings.RunningServices" />
+        <extra android:name="classname" android:value="com.android.settings.Settings$RunningServicesActivity" />
     </PreferenceScreen>
 
     <PreferenceScreen
@@ -61,7 +61,7 @@
             android:title="@string/storageuse_settings_title"
             android:summary="@string/storageuse_settings_summary">
         <extra android:name="classname"
-                android:value="com.android.settings.applications.StorageUse" />
+                android:value="com.android.settings.Settings$StorageUseActivity" />
     </PreferenceScreen>
 
     <PreferenceScreen
@@ -75,10 +75,8 @@
 
     <PreferenceScreen 
             android:title="@string/development_settings_title" 
-            android:summary="@string/development_settings_summary">
-        <intent android:action="android.intent.action.MAIN"
-                android:targetPackage="com.android.settings"
-                android:targetClass="com.android.settings.DevelopmentSettings" />
+            android:summary="@string/development_settings_summary"
+            android:fragment="com.android.settings.DevelopmentSettings">
     </PreferenceScreen>
     
 </PreferenceScreen>

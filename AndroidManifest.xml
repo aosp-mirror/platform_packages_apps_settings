@@ -52,7 +52,7 @@
         <activity android:name="Settings"
                 android:label="@string/settings_label_launcher"
                 android:taskAffinity="com.android.settings"
-                android:theme="@android:style/Theme.Holo"
+                android:theme="@android:style/Theme.Holo.Extended"
                 >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -71,9 +71,9 @@
 
         <!-- Wireless Controls -->
 
-        <activity-alias android:name="WirelessSettings"
+        <activity android:name="Settings$WirelessSettingsActivity"
+                android:theme="@android:style/Theme.Holo.Extended"
                 android:label="@string/wireless_networks_settings_title"
-                android:targetActivity="Settings"
                 >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -82,16 +82,20 @@
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.VOICE_LAUNCH" />
             </intent-filter>
-        </activity-alias>
+            <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
+                android:value="com.android.settings.WirelessSettings" />
+            <meta-data android:name="com.android.settings.TOP_LEVEL_HEADER_ID"
+                android:resource="@id/wireless_settings" />
+        </activity>
 
 
         <!-- Top-level settings -->
 
-        <activity-alias android:name=".wifi.WifiSettings"
+        <activity android:name="Settings$WifiSettingsActivity"
+                android:theme="@android:style/Theme.Holo.Extended"
                 android:label="@string/wifi_settings"
                 android:configChanges="orientation|keyboardHidden"
                 android:clearTaskOnLaunch="true"
-                android:targetActivity="Settings"
                 >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -101,7 +105,11 @@
                 <category android:name="android.intent.category.VOICE_LAUNCH" />
                 <category android:name="com.android.settings.SHORTCUT" />
             </intent-filter>
-        </activity-alias>
+            <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
+                android:value="com.android.settings.wifi.WifiSettings" />
+            <meta-data android:name="com.android.settings.TOP_LEVEL_HEADER_ID"
+                android:resource="@id/wireless_settings" />
+        </activity>
 
         <activity android:name=".wifi.WifiSettingsForSetupWizardXL"
                   android:theme="@android:style/Theme.Holo.NoActionBar"
@@ -174,11 +182,10 @@
             </intent-filter>
         </activity>
 
-        <activity-alias android:name=".bluetooth.BluetoothSettings"
-                  android:label="@string/bluetooth_settings_title"
-                  android:clearTaskOnLaunch="true"
-                  android:targetActivity="Settings"
-                  >
+        <activity android:name="Settings$BluetoothSettingsActivity"
+                android:theme="@android:style/Theme.Holo.Extended"
+                android:label="@string/bluetooth_settings_title"
+                android:clearTaskOnLaunch="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <action android:name="android.settings.BLUETOOTH_SETTINGS" />
@@ -190,22 +197,31 @@
                 <action android:name="android.bluetooth.devicepicker.action.LAUNCH" />
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
-        </activity-alias>
+            <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
+                android:value="com.android.settings.bluetooth.BluetoothSettings" />
+            <meta-data android:name="com.android.settings.TOP_LEVEL_HEADER_ID"
+                android:resource="@id/wireless_settings" />
+        </activity>
 
-        <activity-alias android:name=".TetherSettings"
-            android:clearTaskOnLaunch="true"
-            android:targetActivity="Settings">
+        <activity android:name="Settings$TetherSettingsActivity"
+                android:theme="@android:style/Theme.Holo.Extended"
+                android:clearTaskOnLaunch="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.VOICE_LAUNCH" />
             </intent-filter>
-        </activity-alias>
+            <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
+                android:value="com.android.settings.TetherSettings" />
+            <meta-data android:name="com.android.settings.TOP_LEVEL_HEADER_ID"
+                android:resource="@id/wireless_settings" />
+        </activity>
 
-        <activity-alias android:name=".vpn.VpnSettings"
+        <activity android:name="Settings$VpnSettingsActivity"
+                android:theme="@android:style/Theme.Holo.Extended"
+                android:label="@string/vpn_settings_activity_title"
                 android:configChanges="orientation|keyboardHidden"
-                android:clearTaskOnLaunch="true"
-                android:targetActivity="Settings">
+                android:clearTaskOnLaunch="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <action android:name="android.net.vpn.SETTINGS" />
@@ -213,19 +229,26 @@
                 <category android:name="android.intent.category.VOICE_LAUNCH" />
                 <category android:name="com.android.settings.SHORTCUT" />
             </intent-filter>
-        </activity-alias>
+            <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
+                android:value="com.android.settings.vpn.VpnSettings" />
+            <meta-data android:name="com.android.settings.TOP_LEVEL_HEADER_ID"
+                android:resource="@id/wireless_settings" />
+        </activity>
 
-        <activity-alias android:name="DateTimeSettings"
-                android:label="@string/date_and_time"
-                android:targetActivity="Settings"
-                >
+        <activity android:name="Settings$DateTimeSettingsActivity"
+                android:theme="@android:style/Theme.Holo.Extended"
+                android:label="@string/date_and_time" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <action android:name="android.settings.DATE_SETTINGS" />
                 <category android:name="android.intent.category.VOICE_LAUNCH" />
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
-        </activity-alias>
+            <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
+                android:value="com.android.settings.DateTimeSettings" />
+            <meta-data android:name="com.android.settings.TOP_LEVEL_HEADER_ID"
+                android:resource="@id/date_time_settings" />
+        </activity>
 
         <activity android:name="DateTimeSettingsSetupWizard"
                   android:label="@string/date_and_time"
@@ -236,23 +259,26 @@
             </intent-filter>
         </activity>
 
-        <activity-alias android:name="LocalePicker"
-                        android:label="@string/language_picker_title"
-                        android:clearTaskOnLaunch="true"
-                        android:targetActivity="Settings">
+        <activity android:name="Settings$LocalePickerActivity"
+                android:theme="@android:style/Theme.Holo.Extended"
+                android:label="@string/language_picker_title"
+                android:clearTaskOnLaunch="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <action android:name="android.settings.LOCALE_SETTINGS" />
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.VOICE_LAUNCH" />
             </intent-filter>
-        </activity-alias>
+            <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
+                android:value="com.android.settings.LocalePicker" />
+            <meta-data android:name="com.android.settings.TOP_LEVEL_HEADER_ID"
+                android:resource="@id/language_settings" />
+        </activity>
 
-        <activity-alias android:name=".inputmethod.InputMethodAndLanguageSettings"
+        <activity android:name="Settings$InputMethodAndLanguageSettingsActivity"
+                android:theme="@android:style/Theme.Holo.Extended"
                 android:label="@string/language_keyboard_settings_title"
-                android:clearTaskOnLaunch="true"
-                android:targetActivity="Settings"
-                >
+                android:clearTaskOnLaunch="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <action android:name="android.settings.INPUT_METHOD_SETTINGS" />
@@ -260,12 +286,16 @@
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="com.android.settings.SHORTCUT" />
             </intent-filter>
-        </activity-alias>
+            <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
+                android:value="com.android.settings.inputmethod.InputMethodAndLanguageSettings" />
+            <meta-data android:name="com.android.settings.TOP_LEVEL_HEADER_ID"
+                android:resource="@id/language_settings" />
+        </activity>
 
-        <activity-alias android:name=".inputmethod.InputMethodAndSubtypeEnabler"
-                        android:label="@string/input_methods_and_subtype_enabler_title"
-                        android:clearTaskOnLaunch="true"
-                        android:targetActivity="Settings">
+        <activity android:name="Settings$InputMethodAndSubtypeEnablerActivity"
+                android:theme="@android:style/Theme.Holo.Extended"
+                android:label="@string/input_methods_and_subtype_enabler_title"
+                android:clearTaskOnLaunch="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <action android:name="android.settings.INPUT_METHOD_AND_SUBTYPE_ENABLER" />
@@ -273,7 +303,11 @@
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="com.android.settings.SHORTCUT" />
             </intent-filter>
-        </activity-alias>
+            <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
+                android:value="com.android.settings.inputmethod.InputMethodAndSubtypeEnabler" />
+            <meta-data android:name="com.android.settings.TOP_LEVEL_HEADER_ID"
+                android:resource="@id/language_settings" />
+        </activity>
 
         <activity android:name="PhysicalKeyboardSettings"
                 android:label="@string/builtin_keyboard_settings_title">
@@ -283,7 +317,8 @@
             </intent-filter>
         </activity>
 
-        <activity android:name="UserDictionarySettings"
+        <activity android:name="Settings$UserDictionarySettingsActivity"
+                android:theme="@android:style/Theme.Holo.Extended"
                 android:label="@string/user_dict_settings_titlebar"
                 android:clearTaskOnLaunch="true">
             <intent-filter>
@@ -294,13 +329,16 @@
                 <category android:name="android.intent.category.VOICE_LAUNCH" />
                 <category android:name="com.android.settings.SHORTCUT" />
             </intent-filter>
+            <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
+                android:value="com.android.settings.UserDictionarySettings" />
+            <meta-data android:name="com.android.settings.TOP_LEVEL_HEADER_ID"
+                android:resource="@id/language_settings" />
         </activity>
 
-        <activity-alias android:name="SoundSettings"
+        <activity android:name="Settings$SoundSettingsActivity"
+                android:theme="@android:style/Theme.Holo.Extended"
                 android:label="@string/sound_settings"
-                android:clearTaskOnLaunch="true"
-                android:targetActivity="Settings"
-                >
+                android:clearTaskOnLaunch="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <action android:name="com.android.settings.SOUND_SETTINGS" />
@@ -309,11 +347,15 @@
                 <category android:name="android.intent.category.VOICE_LAUNCH" />
                 <category android:name="com.android.settings.SHORTCUT" />
             </intent-filter>
-        </activity-alias>
+            <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
+                android:value="com.android.settings.SoundSettings" />
+            <meta-data android:name="com.android.settings.TOP_LEVEL_HEADER_ID"
+                android:resource="@id/sound_settings" />
+        </activity>
 
-        <activity-alias android:name="DisplaySettings"
+        <activity android:name="Settings$DisplaySettingsActivity"
+                android:theme="@android:style/Theme.Holo.Extended"
                 android:label="@string/display_settings"
-                android:targetActivity="Settings"
                 android:clearTaskOnLaunch="true"
                 >
             <intent-filter>
@@ -324,13 +366,16 @@
                 <category android:name="android.intent.category.VOICE_LAUNCH" />
                 <category android:name="com.android.settings.SHORTCUT" />
             </intent-filter>
-        </activity-alias>
+            <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
+                android:value="com.android.settings.DisplaySettings" />
+            <meta-data android:name="com.android.settings.TOP_LEVEL_HEADER_ID"
+                android:resource="@id/display_settings" />
+        </activity>
 
-        <activity-alias android:name="DockSettings"
+        <activity android:name="Settings$DockSettingsActivity"
+                android:theme="@android:style/Theme.Holo.Extended"
                 android:label="@string/dock_settings_title"
-                android:clearTaskOnLaunch="true"
-                android:targetActivity="Settings"
-                >
+                android:clearTaskOnLaunch="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <action android:name="com.android.settings.DOCK_SETTINGS" />
@@ -338,19 +383,26 @@
                 <category android:name="android.intent.category.VOICE_LAUNCH" />
                 <category android:name="com.android.settings.SHORTCUT" />
             </intent-filter>
-        </activity-alias>
+            <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
+                android:value="com.android.settings.DockSettings" />
+            <meta-data android:name="com.android.settings.TOP_LEVEL_HEADER_ID"
+                android:resource="@id/dock_settings" />
+        </activity>
 
-        <activity-alias android:name="DeviceInfoSettings"
-                android:label="@string/device_info_settings"
-                android:targetActivity="Settings"
-                >
+        <activity android:name="Settings$DeviceInfoSettingsActivity"
+                android:theme="@android:style/Theme.Holo.Extended"
+                android:label="@string/device_info_settings">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <action android:name="android.settings.DEVICE_INFO_SETTINGS" />
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.VOICE_LAUNCH" />
             </intent-filter>
-        </activity-alias>
+            <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
+                android:value="com.android.settings.DeviceInfoSettings" />
+            <meta-data android:name="com.android.settings.TOP_LEVEL_HEADER_ID"
+                android:resource="@id/about_settings" />
+        </activity>
 
         <activity android:name="SettingsLicenseActivity"
                 android:label="@string/settings_license_activity_title"
@@ -370,22 +422,25 @@
             </intent-filter>
         </activity>
 
-        <activity-alias android:name="ApplicationSettings"
-                android:label="@string/applications_settings_header"
-                android:targetActivity="Settings"
-                >
+        <activity android:name="Settings$ApplicationSettingsActivity"
+                android:theme="@android:style/Theme.Holo.Extended"
+                android:label="@string/applications_settings_header">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <action android:name="android.settings.APPLICATION_SETTINGS" />
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.VOICE_LAUNCH" />
             </intent-filter>
-        </activity-alias>
+            <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
+                android:value="com.android.settings.ApplicationSettings" />
+            <meta-data android:name="com.android.settings.TOP_LEVEL_HEADER_ID"
+                android:resource="@id/application_settings" />
+        </activity>
 
-        <activity-alias android:name=".applications.ManageApplications"
-                  android:label="@string/manageapplications_settings_title"
-                  android:clearTaskOnLaunch="true"
-                  android:targetActivity="Settings">
+        <activity android:name="Settings$ManageApplicationsActivity"
+                android:theme="@android:style/Theme.Holo.Extended"
+                android:label="@string/manageapplications_settings_title"
+                android:clearTaskOnLaunch="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <action android:name="android.intent.action.MANAGE_PACKAGE_STORAGE" />
@@ -395,14 +450,18 @@
                 <category android:name="android.intent.category.VOICE_LAUNCH" />
                 <category android:name="com.android.settings.SHORTCUT" />
             </intent-filter>
-        </activity-alias>
+            <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
+                android:value="com.android.settings.applications.ManageApplications" />
+            <meta-data android:name="com.android.settings.TOP_LEVEL_HEADER_ID"
+                android:resource="@id/application_settings" />
+        </activity>
 
         <!-- Keep compatibility with old shortcuts. -->
         <activity-alias android:name=".ManageApplications"
                   android:label="@string/manageapplications_settings_title"
                   android:clearTaskOnLaunch="true"
                   android:exported="true"
-                  android:targetActivity="Settings">
+                  android:targetActivity="Settings$ManageApplicationsActivity">
         </activity-alias>
 
         <!-- Still need a top-level activity for showing app details.  Aliasing
@@ -455,9 +514,9 @@
         -->
 
         <!-- Provide direct entry into manage apps showing running services. -->
-        <activity-alias android:name=".RunningServices"
-                android:label="@string/runningservices_settings_title"
-                android:targetActivity="Settings">
+        <activity android:name="Settings$RunningServicesActivity"
+                android:theme="@android:style/Theme.Holo.Extended"
+                android:label="@string/runningservices_settings_title">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.DEFAULT" />
@@ -465,12 +524,16 @@
                 <category android:name="android.intent.category.VOICE_LAUNCH" />
                 <category android:name="com.android.settings.SHORTCUT" />
             </intent-filter>
-        </activity-alias>
+            <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
+                android:value="com.android.settings.applications.ManageApplications" />
+            <meta-data android:name="com.android.settings.TOP_LEVEL_HEADER_ID"
+                android:resource="@id/application_settings" />
+        </activity>
 
         <!-- Provide direct entry into manage apps showing running services. -->
-        <activity-alias android:name=".applications.StorageUse"
-                android:label="@string/storageuse_settings_title"
-                android:targetActivity="Settings">
+        <activity android:name="Settings$StorageUseActivity"
+                android:theme="@android:style/Theme.Holo.Extended"
+                android:label="@string/storageuse_settings_title">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.DEFAULT" />
@@ -478,14 +541,17 @@
                 <category android:name="android.intent.category.VOICE_LAUNCH" />
                 <category android:name="com.android.settings.SHORTCUT" />
             </intent-filter>
-        </activity-alias>
+            <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
+                android:value="com.android.settings.applications.ManageApplications" />
+            <meta-data android:name="com.android.settings.TOP_LEVEL_HEADER_ID"
+                android:resource="@id/application_settings" />
+        </activity>
 
-        <activity-alias android:name="SecuritySettings"
+        <activity android:name="Settings$SecuritySettingsActivity"
+                android:theme="@android:style/Theme.Holo.Extended"
                 android:label="@string/location_security_settings_title"
                 android:configChanges="orientation|keyboardHidden"
-                android:targetActivity="Settings"
-                android:clearTaskOnLaunch="true"
-                >
+                android:clearTaskOnLaunch="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <action android:name="android.settings.SECURITY_SETTINGS" />
@@ -495,7 +561,11 @@
                 <category android:name="android.intent.category.VOICE_LAUNCH" />
                 <category android:name="com.android.settings.SHORTCUT" />
             </intent-filter>
-        </activity-alias>
+            <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
+                android:value="com.android.settings.SecuritySettings" />
+            <meta-data android:name="com.android.settings.TOP_LEVEL_HEADER_ID"
+                android:resource="@id/security_settings" />
+        </activity>
 
         <activity android:name="CredentialInstaller"
                 android:theme="@android:style/Theme.Translucent.NoTitleBar">
@@ -505,19 +575,22 @@
             </intent-filter>
         </activity>
 
-        <activity-alias android:name="PrivacySettings"
+        <activity android:name="Settings$PrivacySettingsActivity"
+                android:theme="@android:style/Theme.Holo.Extended"
                 android:label="@string/privacy_settings_title"
                 android:configChanges="orientation|keyboardHidden"
-                android:clearTaskOnLaunch="true"
-                android:targetActivity="Settings"
-                >
+                android:clearTaskOnLaunch="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <action android:name="android.settings.PRIVACY_SETTINGS" />
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.VOICE_LAUNCH" />
             </intent-filter>
-        </activity-alias>
+            <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
+                android:value="com.android.settings.PrivacySettings" />
+            <meta-data android:name="com.android.settings.TOP_LEVEL_HEADER_ID"
+                android:resource="@id/privacy_settings" />
+        </activity>
 
         <activity android:name="DeviceAdminSettings"
                 android:label="@string/device_admin_settings_title"
@@ -552,20 +625,23 @@
             </intent-filter>
         </activity>
 
-        <activity-alias android:name="AccessibilitySettings"
-                android:label="@string/accessibility_settings_title"
-                android:targetActivity="Settings">
+        <activity android:name="Settings$AccessibilitySettingsActivity"
+                android:theme="@android:style/Theme.Holo.Extended"
+                android:label="@string/accessibility_settings_title">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <action android:name="android.settings.ACCESSIBILITY_SETTINGS" />
-                <!-- Wtf...  this action is bogus!  Can we remove it? -->
-                <action android:name="ACCESSIBILITY_FEEDBACK_SETTINGS" />
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.VOICE_LAUNCH" />
             </intent-filter>
-        </activity-alias>
+            <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
+                android:value="com.android.settings.AccessibilitySettings" />
+            <meta-data android:name="com.android.settings.TOP_LEVEL_HEADER_ID"
+                android:resource="@id/accessibility_settings" />
+        </activity>
 
-        <activity-alias android:name="VoiceInputOutputSettings"
+        <activity android:name="Settings$VoiceInputOutputSettingsActivity"
+                android:theme="@android:style/Theme.Holo.Extended"
                 android:label="@string/voice_input_output_settings"
                 android:targetActivity="Settings">
             <intent-filter>
@@ -573,7 +649,11 @@
                 <action android:name="com.android.settings.VOICE_INPUT_OUTPUT_SETTINGS" />
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
-        </activity-alias>
+            <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
+                android:value="com.android.settings.VoiceInputOutputSettings" />
+            <meta-data android:name="com.android.settings.TOP_LEVEL_HEADER_ID"
+                android:resource="@id/voice_input_output_settings" />
+        </activity>
 
         <activity android:name="TextToSpeechSettings" android:label="@string/tts_settings">
             <intent-filter>
@@ -616,6 +696,7 @@
             android:label="@string/lockpattern_change_lock_pattern_label">
         </activity>
 
+        <!-- Runs in the phone process since it needs access to the Phone object -->
         <activity android:name=".deviceinfo.Status" android:label="@string/device_status_activity_title"
                 android:process="com.android.phone">
             <intent-filter>
@@ -625,8 +706,8 @@
             </intent-filter>
         </activity>
 
-        <activity-alias android:name=".deviceinfo.Memory"
-                android:targetActivity="Settings"
+        <activity android:name="Settings$StorageSettingsActivity"
+                android:theme="@android:style/Theme.Holo.Extended"
                 android:label="@string/storage_settings_title">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -635,7 +716,11 @@
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.VOICE_LAUNCH" />
             </intent-filter>
-        </activity-alias>
+            <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
+                android:value="com.android.settings.deviceinfo.Memory" />
+            <meta-data android:name="com.android.settings.TOP_LEVEL_HEADER_ID"
+                android:resource="@id/storage_settings" />
+        </activity>
 
         <activity android:name="ApnEditor" android:label="@string/apn_edit">
             <intent-filter>
@@ -681,17 +766,20 @@
             </intent-filter>
         </activity>
 
-        <activity-alias android:name="DevelopmentSettings"
+        <activity android:name="Settings$DevelopmentSettingsActivity"
+                android:theme="@android:style/Theme.Holo.Extended"
                 android:label="@string/development_settings_title"
-                android:targetActivity="Settings"
-                android:clearTaskOnLaunch="true"
-                >
+                android:clearTaskOnLaunch="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <action android:name="com.android.settings.APPLICATION_DEVELOPMENT_SETTINGS" />
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
-        </activity-alias>
+            <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
+                android:value="com.android.settings.DevelopmentSettings" />
+            <meta-data android:name="com.android.settings.TOP_LEVEL_HEADER_ID"
+                android:resource="@id/application_settings" />
+        </activity>
 
 
 
@@ -883,16 +971,20 @@
             </intent-filter>
         </activity>
 
-        <activity-alias
-            android:name="ManageAccountsSettings"
-            android:label="@string/sync_settings"
-            android:targetActivity="Settings">
+        <activity
+                android:name="Settings$ManageAccountsSettingsActivity"
+                android:theme="@android:style/Theme.Holo.Extended"
+                android:label="@string/sync_settings">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <action android:name="android.settings.SYNC_SETTINGS" />
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
-        </activity-alias>
+            <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
+                android:value="com.android.settings.ManageAccountsSettings" />
+            <meta-data android:name="com.android.settings.TOP_LEVEL_HEADER_ID"
+                android:resource="@id/sync_settings" />
+        </activity>
 
         <receiver android:name=".widget.SettingsAppWidgetProvider"
                 android:label="@string/gadget_title" android:exported="false">
