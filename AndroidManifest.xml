@@ -62,7 +62,8 @@
             </intent-filter>
         </activity>
 
-        <activity android:name="CreateShortcut" android:label="@string/settings_shortcut">
+        <activity android:name="CreateShortcut" android:label="@string/settings_shortcut"
+            android:theme="@style/Theme.CreateShortCut">
             <intent-filter>
                 <action android:name="android.intent.action.CREATE_SHORTCUT" />
                 <category android:name="android.intent.category.DEFAULT" />
