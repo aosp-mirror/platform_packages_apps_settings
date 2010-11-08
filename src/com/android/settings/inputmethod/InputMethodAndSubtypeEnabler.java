@@ -199,11 +199,8 @@ public class InputMethodAndSubtypeEnabler extends SettingsPreferenceFragment {
                         subtypeLabel = pm.getText(property.getPackageName(), nameResId,
                                 property.getServiceInfo().applicationInfo);
                     } else {
-                        int modeResId = subtype.getModeResId();
+                        String mode = subtype.getMode();
                         CharSequence language = subtype.getLocale();
-                        CharSequence mode = modeResId == 0 ? null
-                                : pm.getText(property.getPackageName(), modeResId,
-                                        property.getServiceInfo().applicationInfo);
                         // TODO: Use more friendly Title and UI
                         subtypeLabel = (mode == null ? "" : mode) + ","
                                 + (language == null ? "" : language);

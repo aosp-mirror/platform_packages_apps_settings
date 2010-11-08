@@ -16,9 +16,12 @@
 
 package com.android.settings.applications;
 
-import com.android.internal.content.PackageHelper;
 import com.android.settings.R;
+
+import com.android.internal.content.PackageHelper;
 import com.android.settings.applications.ApplicationsState.AppEntry;
+import com.android.settings.Settings.RunningServicesActivity;
+import com.android.settings.Settings.StorageUseActivity;
 
 import android.app.Fragment;
 import android.content.Context;
@@ -519,9 +522,9 @@ public class ManageApplications extends Fragment implements
         if (className == null) {
             className = intent.getComponent().getClassName();
         }
-        if (className.equals("com.android.settings.RunningServices")) {
+        if (className.equals(RunningServicesActivity.class.getName())) {
             defaultTabTag = TAB_RUNNING;
-        } else if (className.equals("com.android.settings.applications.StorageUse")
+        } else if (className.equals(StorageUseActivity.class.getName())
                 || action.equals(Intent.ACTION_MANAGE_PACKAGE_STORAGE)) {
             mSortOrder = SORT_ORDER_SIZE;
             mFilterApps = FILTER_APPS_ALL;

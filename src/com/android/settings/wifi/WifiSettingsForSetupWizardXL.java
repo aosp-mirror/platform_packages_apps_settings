@@ -23,6 +23,7 @@ import android.content.Context;
 import android.net.NetworkInfo.DetailedState;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.Window;
@@ -129,14 +130,7 @@ public class WifiSettingsForSetupWizardXL extends Activity implements OnClickLis
             break;
         case R.id.wifi_setup_connect:
             mWifiSettings.submit();
-
-            // updateConnectionState() isn't called soon after the user's "connect" action,
-            // and the user still sees "not connected" message for a while, which looks strange.
-            // We instead manually show "connecting" message before the system gets actual
-            // "connecting" message from Wi-Fi module.
-            showConnectingStatus();
-            mShowingConnectingMessageManually = true;
-            mIgnoringWifiNotificationCount = 2;
+            onConnectButtonPressed();
             break;
         case R.id.wifi_setup_forget:
             mWifiSettings.forget();
@@ -186,7 +180,10 @@ public class WifiSettingsForSetupWizardXL extends Activity implements OnClickLis
             mProgressBar.setProgress(2);
             mProgressText.setText(Summary.get(this, state));
             mStatusText.setText(R.string.wifi_setup_status_proceed_to_next);
-            enableButtons();
+            // We don't want "Add network" button here. User can press it after pressing
+            // "Refresh" button.
+            ((Button)findViewById(R.id.wifi_setup_refresh_list)).setEnabled(true);
+            ((Button)findViewById(R.id.wifi_setup_skip_or_next)).setEnabled(true);
 
             if (mIgnoringWifiNotificationCount > 0) {
                 // The network is already available before doing anything. We avoid skip this
@@ -219,7 +216,6 @@ public class WifiSettingsForSetupWizardXL extends Activity implements OnClickLis
                 mShowingConnectingMessageManually = false;
                 mProgressBar.setIndeterminate(false);
                 mProgressBar.setProgress(0);
-                mStatusText.setText(R.string.wifi_setup_status_select_network);
                 mProgressText.setText(getString(R.string.wifi_setup_not_connected));
                 enableButtons();
             }
@@ -254,7 +250,21 @@ public class WifiSettingsForSetupWizardXL extends Activity implements OnClickLis
     public void onRefreshAccessPoints() {
         mIgnoringWifiNotificationCount = 5;
         mProgressBar.setIndeterminate(true);
+        ((Button)findViewById(R.id.wifi_setup_add_network)).setEnabled(false);
+        ((Button)findViewById(R.id.wifi_setup_refresh_list)).setEnabled(false);
         mProgressText.setText(Summary.get(this, DetailedState.SCANNING));
         mStatusText.setText(R.string.wifi_setup_status_scanning);
+    }
+
+    /* package */ void onConnectButtonPressed() {
+        // updateConnectionState() isn't called soon after the user's "connect" action,
+        // and the user still sees "not connected" message for a while, which looks strange.
+        // We instead manually show "connecting" message before the system gets actual
+        // "connecting" message from Wi-Fi module.
+        showConnectingStatus();
+        ((Button)findViewById(R.id.wifi_setup_add_network)).setEnabled(false);
+        ((Button)findViewById(R.id.wifi_setup_refresh_list)).setEnabled(false);
+        mShowingConnectingMessageManually = true;
+        mIgnoringWifiNotificationCount = 2;
     }
 }

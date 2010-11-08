@@ -47,7 +47,6 @@ import android.preference.PreferenceScreen;
 import android.provider.Settings.Secure;
 import android.security.Credentials;
 import android.security.KeyStore;
-import android.util.Log;
 import android.view.ContextMenu;
 import android.view.ContextMenu.ContextMenuInfo;
 import android.view.Menu;
@@ -639,6 +638,10 @@ public class WifiSettings extends SettingsPreferenceFragment
             forget();
         } else if (button == WifiDialog.BUTTON_SUBMIT) {
             submit();
+            final Activity activity = getActivity();
+            if (activity instanceof WifiSettingsForSetupWizardXL) {
+                ((WifiSettingsForSetupWizardXL)activity).onConnectButtonPressed();
+            }
         }
     }
 
@@ -740,6 +743,11 @@ public class WifiSettings extends SettingsPreferenceFragment
     /* package */ void onAddNetworkPressed() {
         mSelectedAccessPoint = null;
         showConfigUi(null, true);
+
+        // Set focus to the EditText the user needs to configure.
+        if (mConfigPreference != null) {
+            mConfigPreference.setFocus(R.id.ssid);
+        }
     }
 
     /* package */ int getAccessPointsCount() {

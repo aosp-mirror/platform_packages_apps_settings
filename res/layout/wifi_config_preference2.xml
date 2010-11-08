@@ -56,7 +56,32 @@
                   android:layout_height="wrap_content"
                   android:text="@string/wifi_show_password" />
     </LinearLayout>
+    <LinearLayout android:id="@+id/type"
+                 android:layout_width="fill_parent"
+                 android:layout_height="wrap_content"
+                 android:orientation="vertical"
+                 android:visibility="gone">
 
+       <TextView android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                 android:text="@string/wifi_ssid" />
+
+       <EditText android:id="@+id/ssid"
+                 android:layout_width="fill_parent"
+                 android:layout_height="wrap_content"
+                 android:singleLine="true"
+                 android:inputType="textNoSuggestions" />
+
+       <TextView android:layout_width="fill_parent"
+                 android:layout_height="wrap_content"
+                 android:text="@string/wifi_security" />
+
+       <Spinner android:id="@+id/security"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:prompt="@string/wifi_security"
+                android:entries="@array/wifi_security" />
+    </LinearLayout> <!-- android:id="@+id/type" -->
 
     <!-- All the views below are "gone".
          We want them as data storage, not as UI components. -->
@@ -108,33 +133,6 @@
                   android:singleLine="true"
                   android:inputType="textPassword" />
     </LinearLayout> -->
-
-    <LinearLayout android:id="@+id/type"
-                 android:layout_width="fill_parent"
-                 android:layout_height="wrap_content"
-                 android:orientation="vertical"
-                 android:visibility="gone">
-
-       <TextView android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                 android:text="@string/wifi_ssid" />
-
-       <EditText android:id="@+id/ssid"
-                 android:layout_width="fill_parent"
-                 android:layout_height="wrap_content"
-                 android:singleLine="true"
-                 android:inputType="textNoSuggestions" />
-
-       <TextView android:layout_width="fill_parent"
-                 android:layout_height="wrap_content"
-                 android:text="@string/wifi_security" />
-
-       <Spinner android:id="@+id/security"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:prompt="@string/wifi_security"
-                android:entries="@array/wifi_security" />
-    </LinearLayout> <!-- android:id="@+id/type" -->
 
     <!--  android:id="@+id/security_fields" -->
     <LinearLayout
