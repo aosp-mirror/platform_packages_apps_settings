@@ -32,7 +32,12 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.SharedPreferences;
+import android.os.Handler;
 import android.util.Log;
+
+import java.util.concurrent.LinkedBlockingQueue;
+import java.util.concurrent.ThreadPoolExecutor;
+import java.util.concurrent.TimeUnit;
 
 /**
  * BluetoothEventRedirector receives broadcasts and callbacks from the Bluetooth
@@ -42,9 +47,14 @@ import android.util.Log;
 public class BluetoothEventRedirector {
     private static final String TAG = "BluetoothEventRedirector";
 
-    private LocalBluetoothManager mManager;
+    private final LocalBluetoothManager mManager;
 
-    private BroadcastReceiver mBroadcastReceiver = new BroadcastReceiver() {
+    private final ThreadPoolExecutor mSerialExecutor = new ThreadPoolExecutor(
+        0, 1, 1000L, TimeUnit.MILLISECONDS, new LinkedBlockingQueue<Runnable>());
+
+    private final Handler mHandler = new Handler();
+
+    private final BroadcastReceiver mBroadcastReceiver = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
             Log.v(TAG, "Received " + intent.getAction());
@@ -57,13 +67,11 @@ public class BluetoothEventRedirector {
                                         BluetoothAdapter.ERROR);
                 mManager.setBluetoothStateInt(state);
             } else if (action.equals(BluetoothAdapter.ACTION_DISCOVERY_STARTED)) {
-                persistDiscoveringTimestamp();
-                mManager.onScanningStateChanged(true);
-
+                PendingResult pr = goAsync();  // so loading shared prefs doesn't kill animation
+                persistDiscoveringTimestamp(pr, true);
             } else if (action.equals(BluetoothAdapter.ACTION_DISCOVERY_FINISHED)) {
-                persistDiscoveringTimestamp();
-                mManager.onScanningStateChanged(false);
-
+                PendingResult pr = goAsync();  // so loading shared prefs doesn't kill animation
+                persistDiscoveringTimestamp(pr, false);
             } else if (action.equals(BluetoothDevice.ACTION_FOUND)) {
                 short rssi = intent.getShortExtra(BluetoothDevice.EXTRA_RSSI, Short.MIN_VALUE);
                 BluetoothClass btClass = intent.getParcelableExtra(BluetoothDevice.EXTRA_CLASS);
@@ -222,10 +230,26 @@ public class BluetoothEventRedirector {
         return null;
     }
 
-    private void persistDiscoveringTimestamp() {
-        SharedPreferences.Editor editor = mManager.getSharedPreferences().edit();
-        editor.putLong(LocalBluetoothManager.SHARED_PREFERENCES_KEY_DISCOVERING_TIMESTAMP,
-                System.currentTimeMillis());
-        editor.apply();
+    private void persistDiscoveringTimestamp(
+        final BroadcastReceiver.PendingResult pr, final boolean newState) {
+        // Load the shared preferences and edit it on a background
+        // thread (but serialized!), but then post back to the main
+        // thread to run the onScanningStateChanged callbacks which
+        // update the UI...
+        mSerialExecutor.submit(new Runnable() {
+                public void run() {
+                    SharedPreferences.Editor editor = mManager.getSharedPreferences().edit();
+                    editor.putLong(
+                        LocalBluetoothManager.SHARED_PREFERENCES_KEY_DISCOVERING_TIMESTAMP,
+                        System.currentTimeMillis());
+                    editor.apply();
+                    mHandler.post(new Runnable() {
+                            public void run() {
+                                mManager.onScanningStateChanged(newState);
+                                pr.finish();
+                            }
+                        });
+                }
+            });
     }
 }
