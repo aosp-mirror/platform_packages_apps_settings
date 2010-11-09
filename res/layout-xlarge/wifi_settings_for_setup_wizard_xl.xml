@@ -75,7 +75,7 @@
     <FrameLayout
         android:id="@+id/wifi_setup"
         android:layout_width="400dip"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:layout_below="@+id/wifi_setup_status">
         <fragment
@@ -84,6 +84,23 @@
              android:layout_width="match_parent"
              android:layout_height="wrap_content" />
     </FrameLayout>
+    <FrameLayout
+        android:id="@+id/wifi_config_ui"
+        android:layout_width="400dip"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/wifi_setup_status"
+        android:visibility="gone" />
+
+    <Button android:id="@+id/wifi_setup_detail"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/wifi_config_ui"
+            android:layout_alignLeft="@id/wifi_config_ui"
+            android:textSize="18dip"
+            android:text="@string/wifi_setup_detail"
+            android:gravity="left|center_vertical"
+            android:visibility="gone" />
 
     <LinearLayout
         android:id="@+id/right_buttons"
@@ -97,7 +114,7 @@
                 android:layout_width="260dip"
                 android:layout_height="60dip"
                 android:textSize="24dip"
-                android:text="@string/wifi_forget"
+                android:text="@string/wifi_setup_forget"
                 android:visibility="gone" />
 
         <Button android:id="@+id/wifi_setup_connect"
@@ -105,7 +122,8 @@
                 android:layout_height="60dip"
                 android:layout_marginTop="20dip"
                 android:textSize="24dip"
-                android:text="@string/wifi_connect"
+                android:text="@string/wifi_setup_connect"
+                android:enabled="false"
                 android:visibility="gone" />
 
         <Button android:id="@+id/wifi_setup_add_network"
@@ -131,15 +149,7 @@
                 android:enabled="false" />
     </LinearLayout>
 
-    <Button android:id="@+id/wifi_setup_detail"
-            android:layout_width="260dip"
-            android:layout_height="60dip"
-            android:layout_above="@+id/wifi_setup_cancel"
-            android:layout_alignLeft="@+id/wifi_setup_cancel"
-            android:textSize="24dip"
-            android:text="@string/wifi_detail"
-            android:visibility="gone" />
-
+    <!-- This misleading name is for keeping consistency between non-XL layouts -->
     <Button android:id="@+id/wifi_setup_cancel"
             android:layout_width="260dip"
             android:layout_height="60dip"
@@ -147,6 +157,6 @@
             android:layout_alignParentBottom="true"
             android:layout_toLeftOf="@id/right_buttons"
             android:textSize="24dip"
-            android:text="@string/wifi_back"
+            android:text="@string/wifi_setup_back"
             android:visibility="gone" />
 </RelativeLayout>

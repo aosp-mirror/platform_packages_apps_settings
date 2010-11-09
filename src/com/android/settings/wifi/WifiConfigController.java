@@ -128,8 +128,8 @@ public class WifiConfigController implements TextWatcher,
         return false;
     }
 
-    public WifiConfigController(WifiConfigUiBase parent, View view, AccessPoint accessPoint,
-            boolean edit, DialogInterface.OnClickListener listener) {
+    public WifiConfigController(
+            WifiConfigUiBase parent, View view, AccessPoint accessPoint, boolean edit) {
         mConfigUi = parent;
 
         mView = view;
@@ -141,7 +141,7 @@ public class WifiConfigController implements TextWatcher,
         final Context context = mConfigUi.getContext();
         final Resources resources = context.getResources();
 
-        if (mAccessPoint == null) {
+        if (mAccessPoint == null) { // new network
             mConfigUi.setTitle(R.string.wifi_add_network);
             mView.findViewById(R.id.type).setVisibility(View.VISIBLE);
             mSsidView = (TextView) mView.findViewById(R.id.ssid);
@@ -624,6 +624,10 @@ public class WifiConfigController implements TextWatcher,
                 }
             }
         }
+    }
+
+    public boolean isEdit() {
+        return mEdit;
     }
 
     @Override
