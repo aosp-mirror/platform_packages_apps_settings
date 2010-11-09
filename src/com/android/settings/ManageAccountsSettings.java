@@ -16,9 +16,8 @@
 
 package com.android.settings;
 
-import com.google.android.collect.Maps;
-
 import com.android.settings.SettingsPreferenceFragment.SettingsDialogFragment;
+import com.google.android.collect.Maps;
 
 import android.accounts.Account;
 import android.accounts.AccountManager;
@@ -45,6 +44,9 @@ import android.preference.PreferenceFragment;
 import android.preference.PreferenceScreen;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -56,7 +58,8 @@ import java.util.HashSet;
 import java.util.Map;
 
 public class ManageAccountsSettings extends PreferenceFragment
-        implements View.OnClickListener, OnAccountsUpdateListener, DialogCreatable {
+ implements OnAccountsUpdateListener,
+        DialogCreatable {
     private static final String TAG = ManageAccountsSettings.class.getSimpleName();
 
     private static final String AUTHORITIES_FILTER_KEY = "authorities";
@@ -66,6 +69,8 @@ public class ManageAccountsSettings extends PreferenceFragment
     private static final String MANAGE_ACCOUNTS_CATEGORY_KEY = "manageAccountsCategory";
     private static final String BACKGROUND_DATA_CHECKBOX_KEY = "backgroundDataCheckBox";
     private static final int DIALOG_DISABLE_BACKGROUND_DATA = 1;
+
+    private static final int MENU_ADD_ACCOUNT = Menu.FIRST;
 
     private CheckBoxPreference mBackgroundDataCheckBox;
     private PreferenceCategory mManageAccountsCategory;
@@ -84,6 +89,8 @@ public class ManageAccountsSettings extends PreferenceFragment
     @Override
     public void onCreate(Bundle icicle) {
         super.onCreate(icicle);
+
+        setHasOptionsMenu(true);
     }
 
     @Override
@@ -118,8 +125,6 @@ public class ManageAccountsSettings extends PreferenceFragment
 
         mManageAccountsCategory = (PreferenceCategory)findPreference(MANAGE_ACCOUNTS_CATEGORY_KEY);
         mAuthorities = activity.getIntent().getStringArrayExtra(AUTHORITIES_FILTER_KEY);
-        mAddAccountButton = (Button)view.findViewById(R.id.add_account_button);
-        mAddAccountButton.setOnClickListener(this);
 
         AccountManager.get(activity).addOnAccountsUpdatedListener(this, null, true);
         updateAuthDescriptions(activity);
@@ -188,6 +193,21 @@ public class ManageAccountsSettings extends PreferenceFragment
         }
         mDialogFragment = new SettingsDialogFragment(this, dialogId);
         mDialogFragment.show(getActivity().getFragmentManager(), Integer.toString(dialogId));
+    }
+
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        MenuItem actionItem =
+                menu.add(0, MENU_ADD_ACCOUNT, 0, R.string.add_account_label)
+                .setIcon(R.drawable.ic_menu_add);
+        actionItem.setShowAsAction(MenuItem.SHOW_AS_ACTION_IF_ROOM
+                | MenuItem.SHOW_AS_ACTION_WITH_TEXT);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        onAddAccountClicked();
+        return true;
     }
 
     private void setBackgroundDataInt(boolean enabled) {
@@ -309,12 +329,10 @@ public class ManageAccountsSettings extends PreferenceFragment
         }
     }
 
-    public void onClick(View v) {
-        if (v == mAddAccountButton) {
-            Intent intent = new Intent("android.settings.ADD_ACCOUNT_SETTINGS");
-            intent.putExtra(AUTHORITIES_FILTER_KEY, mAuthorities);
-            startActivity(intent);
-        }
+    public void onAddAccountClicked() {
+        Intent intent = new Intent("android.settings.ADD_ACCOUNT_SETTINGS");
+        intent.putExtra(AUTHORITIES_FILTER_KEY, mAuthorities);
+        startActivity(intent);
     }
 
     /* The logic below is copied from AcountPrefernceBase */

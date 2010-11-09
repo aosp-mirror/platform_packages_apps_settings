@@ -86,6 +86,9 @@ public class DateTimeSettings extends SettingsPreferenceFragment
 
         mAutoTimePref = (CheckBoxPreference) findPreference(KEY_AUTO_TIME);
         mAutoTimePref.setChecked(autoTimeEnabled);
+        mAutoTimeZonePref = (CheckBoxPreference) findPreference(KEY_AUTO_TIME_ZONE);
+        mAutoTimeZonePref.setChecked(autoTimeZoneEnabled);
+
         mTimePref = findPreference("time");
         mTime24Pref = findPreference("24 hour");
         mTimeZone = findPreference("timezone");
@@ -313,7 +316,7 @@ public class DateTimeSettings extends SettingsPreferenceFragment
         try {
             return Settings.System.getInt(getContentResolver(), name) > 0;
         } catch (SettingNotFoundException snfe) {
-            return true;
+            return false;
         }
     }
 

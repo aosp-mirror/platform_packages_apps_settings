@@ -18,18 +18,27 @@ package com.android.settings;
 
 import com.android.settings.R;
 
+import android.accounts.Account;
+import android.accounts.AccountManager;
+import android.accounts.AuthenticatorDescription;
 import android.app.Activity;
 import android.app.Fragment;
+import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.content.res.Resources;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.preference.Preference;
 import android.preference.PreferenceActivity;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.CheckBox;
+import android.widget.LinearLayout;
+import android.widget.TextView;
 
 /**
  * Confirm and execute a reset of the device to a clean "just out of the box"
@@ -42,6 +51,7 @@ import android.widget.CheckBox;
  * This is the initial screen.
  */
 public class MasterClear extends Fragment {
+    private static final String TAG = "MasterClear";
 
     private static final int KEYGUARD_REQUEST = 55;
 
@@ -130,12 +140,72 @@ public class MasterClear extends Fragment {
                 mExternalStorage.toggle();
             }
         });
+
+        loadAccountList();
+    }
+
+    private void loadAccountList() {
+        View accountsLabel = mContentView.findViewById(R.id.accounts_label);
+        LinearLayout contents = (LinearLayout)mContentView.findViewById(R.id.accounts);
+
+        Context context = getActivity();
+
+        AccountManager mgr = AccountManager.get(context);
+        Account[] accounts = mgr.getAccounts();
+        final int N = accounts.length;
+        if (N == 0) {
+            accountsLabel.setVisibility(View.GONE);
+            contents.setVisibility(View.GONE);
+            return;
+        }
+
+        LayoutInflater inflater = (LayoutInflater)context.getSystemService(
+                Context.LAYOUT_INFLATER_SERVICE);
+
+        AuthenticatorDescription[] descs = AccountManager.get(context).getAuthenticatorTypes();
+        final int M = descs.length;
+
+        for (int i=0; i<N; i++) {
+            Account account = accounts[i];
+            AuthenticatorDescription desc = null;
+            for (int j=0; j<M; j++) {
+                if (account.type.equals(descs[j].type)) {
+                    desc = descs[j];
+                    break;
+                }
+            }
+            if (desc == null) {
+                Log.w(TAG, "No descriptor for account name=" + account.name
+                        + " type=" + account.type);
+                continue;
+            }
+            Drawable icon;
+            try {
+                Context authContext = context.createPackageContext(desc.packageName, 0);
+                icon = authContext.getResources().getDrawable(desc.iconId);
+            } catch (PackageManager.NameNotFoundException e) {
+                Log.w(TAG, "No icon for account type " + desc.type);
+                icon = null;
+            }
+
+            TextView child = (TextView)inflater.inflate(R.layout.master_clear_account,
+                    contents, false);
+            child.setText(account.name);
+            if (icon != null) {
+                child.setCompoundDrawablesWithIntrinsicBounds(icon, null, null, null);
+            }
+            contents.addView(child);
+        }
+
+        accountsLabel.setVisibility(View.VISIBLE);
+        contents.setVisibility(View.VISIBLE);
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
             Bundle savedInstanceState) {
         mContentView = inflater.inflate(R.layout.master_clear, null);
+
         establishInitialState();
         return mContentView;
     }

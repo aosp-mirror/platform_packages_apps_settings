@@ -463,6 +463,7 @@ public class WifiSettings extends SettingsPreferenceFragment
                 //limit access points on set up wizard
                 int count = MAX_MENU_COUNT_IN_XL;
                 for (AccessPoint accessPoint : accessPoints) {
+                    accessPoint.setLayoutResource(R.layout.custom_preference);
                     mAccessPoints.addPreference(accessPoint);
                     count--;
                     if (count <= 0) {
