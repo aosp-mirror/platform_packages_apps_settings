@@ -42,8 +42,6 @@ public class InputMethodAndSubtypeEnabler extends SettingsPreferenceFragment {
 
     private List<InputMethodInfo> mInputMethodProperties;
 
-    private String mLastTickedInputMethodId;
-
     private AlertDialog mDialog = null;
 
     @Override
@@ -60,14 +58,13 @@ public class InputMethodAndSubtypeEnabler extends SettingsPreferenceFragment {
         super.onResume();
         InputMethodAndSubtypeUtil.loadInputMethodSubtypeList(
                 this, getContentResolver(), mInputMethodProperties);
-        mLastTickedInputMethodId = null;
     }
 
     @Override
     public void onPause() {
         super.onPause();
         InputMethodAndSubtypeUtil.saveInputMethodSubtypeList(this, getContentResolver(),
-                mInputMethodProperties, mHaveHardKeyboard, mLastTickedInputMethodId);
+                mInputMethodProperties, mHaveHardKeyboard);
     }
 
     @Override
@@ -89,7 +86,6 @@ public class InputMethodAndSubtypeEnabler extends SettingsPreferenceFragment {
                             InputMethodAndSubtypeUtil.setSubtypesPreferenceEnabled(
                                     this, mInputMethodProperties, id, true);
                             // This is a built-in IME, so no need to warn.
-                            mLastTickedInputMethodId = id;
                             return super.onPreferenceTreeClick(preferenceScreen, preference);
                         }
                         break;
@@ -111,7 +107,6 @@ public class InputMethodAndSubtypeEnabler extends SettingsPreferenceFragment {
                                             InputMethodAndSubtypeUtil.setSubtypesPreferenceEnabled(
                                                     InputMethodAndSubtypeEnabler.this,
                                                     mInputMethodProperties, id, true);
-                                            mLastTickedInputMethodId = id;
                                         }
 
                             })
@@ -132,9 +127,6 @@ public class InputMethodAndSubtypeEnabler extends SettingsPreferenceFragment {
                         selImi.getServiceInfo().applicationInfo.loadLabel(getPackageManager())));
                 mDialog.show();
             } else {
-                if (id.equals(mLastTickedInputMethodId)) {
-                    mLastTickedInputMethodId = null;
-                }
                 InputMethodAndSubtypeUtil.setSubtypesPreferenceEnabled(
                         this, mInputMethodProperties, id, false);
             }

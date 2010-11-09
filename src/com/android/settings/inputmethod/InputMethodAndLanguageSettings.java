@@ -52,8 +52,6 @@ public class InputMethodAndLanguageSettings extends SettingsPreferenceFragment {
 
     final TextUtils.SimpleStringSplitter mStringColonSplitter
             = new TextUtils.SimpleStringSplitter(':');
-    
-    private String mLastTickedInputMethodId;
 
     private AlertDialog mDialog = null;
     
@@ -145,7 +143,6 @@ public class InputMethodAndLanguageSettings extends SettingsPreferenceFragment {
 
         InputMethodAndSubtypeUtil.loadInputMethodSubtypeList(
                 this, getContentResolver(), mInputMethodProperties);
-        mLastTickedInputMethodId = null;
 
         if (mLanguagePref != null) {
             Configuration conf = getResources().getConfiguration();
@@ -161,7 +158,7 @@ public class InputMethodAndLanguageSettings extends SettingsPreferenceFragment {
     public void onPause() {
         super.onPause();
         InputMethodAndSubtypeUtil.saveInputMethodSubtypeList(this, getContentResolver(),
-                mInputMethodProperties, mHaveHardKeyboard, mLastTickedInputMethodId);
+                mInputMethodProperties, mHaveHardKeyboard);
     }
 
     @Override
@@ -184,7 +181,6 @@ public class InputMethodAndLanguageSettings extends SettingsPreferenceFragment {
                         selImi = imi;
                         if (isSystemIme(imi)) {
                             // This is a built-in IME, so no need to warn.
-                            mLastTickedInputMethodId = id;
                             return super.onPreferenceTreeClick(preferenceScreen, preference);
                         }
                     }
@@ -203,7 +199,6 @@ public class InputMethodAndLanguageSettings extends SettingsPreferenceFragment {
                                     new DialogInterface.OnClickListener() {
                                         public void onClick(DialogInterface dialog, int which) {
                                             chkPref.setChecked(true);
-                                            mLastTickedInputMethodId = id;
                                         }
 
                             })
@@ -223,8 +218,6 @@ public class InputMethodAndLanguageSettings extends SettingsPreferenceFragment {
                         R.string.ime_security_warning,
                         selImi.getServiceInfo().applicationInfo.loadLabel(getPackageManager())));
                 mDialog.show();
-            } else if (id.equals(mLastTickedInputMethodId)) {
-                mLastTickedInputMethodId = null;
             }
         } else if (preference instanceof PreferenceScreen) {
             if (preference.getFragment() != null) {
