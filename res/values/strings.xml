@@ -1597,11 +1597,14 @@
     <!-- SD card & phone storage settings screen, setting option summary text under Internal phone storage heading -->
     <string name="master_clear_summary" product="default">Erases all data on phone</string>
     <!-- SD card & phone storage settings screen, message on screen after user selects Factory data reset [CHAR LIMIT=NONE] -->
-    <string name="master_clear_desc" product="tablet">"This will erase all data from your tablet\'s <b>internal storage</b>, including:\n\n<li>Your Google account</li>\n<li>System and application data and settings</li>\n<li>Downloaded applications</li>\n\nTo clear all data on this tablet the <b>USB storage</b> needs to be erased.\n\n"</string>
+    <string name="master_clear_desc" product="tablet">"This will erase all data from your tablet\'s <b>internal storage</b>, including:\n\n<li>Your Google account</li>\n<li>System and application data and settings</li>\n<li>Downloaded applications</li>"</string>
     <!-- SD card & phone storage settings screen, message on screen after user selects Factory data reset [CHAR LIMIT=NONE] -->
-    <string name="master_clear_desc" product="nosdcard">"This will erase all data from your phone\'s <b>internal storage</b>, including:\n\n<li>Your Google account</li>\n<li>System and application data and settings</li>\n<li>Downloaded applications</li>\n\nTo clear all data on this phone the <b>USB storage</b> needs to be erased.\n\n"</string>
-    <!-- SD card & phone storage settings screen, message on screen after user selects Factory data reset -->
-    <string name="master_clear_desc" product="default">"This will erase all data from your phone\'s <b>internal storage</b>, including:\n\n<li>Your Google account</li>\n<li>System and application data and settings</li>\n<li>Downloaded applications</li>\n\nTo also clear music, pictures, and other user data, the <b>SD card</b> needs to be erased.\n\n"</string>
+    <string name="master_clear_desc" product="default">"This will erase all data from your phone\'s <b>internal storage</b>, including:\n\n<li>Your Google account</li>\n<li>System and application data and settings</li>\n<li>Downloaded applications"</li></string>
+    <!-- SD card & phone storage settings screen, instructions and list of current accounts.  The list of accounts follows this text[CHAR LIMIT=NONE] -->
+    <string name="master_clear_accounts" product="default">"\n\nYou are currently signed into the following accounts:\n"</string>
+    <!-- SD card & phone storage settings screen, instructions about whether to also erase the external storage (SD card) when erasing the internal storage [CHAR LIMIT=NONE] -->
+    <string name="master_clear_desc_erase_external_storage" product="nosdcard">"\n\nTo also clear music, pictures, and other user data, the <b>USB storage</b> needs to be erased."</string>
+    <string name="master_clear_desc_erase_external_storage" product="default">"\n\nTo also clear music, pictures, and other user data, the <b>SD card</b> needs to be erased."</string>
     <!-- SD card & phone storage settings screen, label for check box to erase USB storage [CHAR LIMIT=30] -->
     <string name="erase_external_storage" product="nosdcard">Erase USB storage</string>
     <!-- SD card & phone storage settings screen, label for check box to erase SD card [CHAR LIMIT=30] -->

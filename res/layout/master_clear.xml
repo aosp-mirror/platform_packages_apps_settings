@@ -35,6 +35,22 @@
                 android:layout_height="wrap_content"
                 android:textSize="18sp"
                 android:text="@string/master_clear_desc" />
+            <TextView android:id="@+id/accounts_label"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:visibility="gone"
+                android:textSize="18sp"
+                android:text="@string/master_clear_accounts" />
+            <LinearLayout android:id="@+id/accounts"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:visibility="gone" />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="18sp"
+                android:text="@string/master_clear_desc_erase_external_storage" />
             <LinearLayout android:id="@+id/erase_external_container"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
