@@ -457,6 +457,10 @@ public class PowerUsageSummary extends PreferenceActivity implements Runnable {
             }
             wakelockTime /= 1000; // convert to millis
 
+            // Add cost of holding a wake lock
+            power += (wakelockTime
+                    * mPowerProfile.getAveragePower(PowerProfile.POWER_CPU_AWAKE)) / 1000;
+            
             // Add cost of data traffic
             long tcpBytesReceived = u.getTcpBytesReceived(mStatsType);
             long tcpBytesSent = u.getTcpBytesSent(mStatsType);
