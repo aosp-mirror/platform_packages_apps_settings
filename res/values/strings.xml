@@ -1481,12 +1481,10 @@
     <string name="sd_format" product="nosdcard">Erase USB storage</string>
     <!-- SD card & phone storage settings item title that will result in the phone formatting the SD card.   [CHAR LIMIT=25] -->
     <string name="sd_format" product="default">Erase SD card</string>
-    <!-- SD card & phone storage settings item title that will result in the phone unmounting the SD card.   [CHAR LIMIT=30] -->
-    <string name="sd_format_summary" product="tablet">Erases all data on the tablet\'s internal USB storage, such as music and photos</string>
-    <!-- SD card & phone storage settings item title that will result in the phone unmounting the SD card.   [CHAR LIMIT=30] -->
-    <string name="sd_format_summary" product="nosdcard">Erases all data on the phone\'s internal USB storage, such as music and photos</string>
+    <!-- SD card & phone storage settings item title that will result in the phone unmounting the SD card.   [CHAR LIMIT=80] -->
+    <string name="sd_format_summary" product="nosdcard">Erases all data on the internal USB storage, such as music and photos</string>
     <!-- SD card & phone storage settings item title that will result in the phone unmounting the SD card.   -->
-    <string name="sd_format_summary" product="default">Erases all data on the phone\'s SD card, such as music and photos</string>
+    <string name="sd_format_summary" product="default">Erases all data on the SD card, such as music and photos</string>
     <!-- SD card status when it is not available status -->
     <string name="sd_unavailable">Unavailable</string>
     <!-- SD card status when it is mounted as read only  -->
@@ -1609,11 +1607,10 @@
     <string name="erase_external_storage" product="nosdcard">Erase USB storage</string>
     <!-- SD card & phone storage settings screen, label for check box to erase SD card [CHAR LIMIT=30] -->
     <string name="erase_external_storage" product="default">Erase SD card</string>
-    <!-- SD card & phone storage settings screen, description for check box to erase USB storage [CHAR LIMIT=30] -->
-    <string name="erase_external_storage_description" product="tablet">Erase all the data on the tablet\'s internal USB storage, such as music or photos.</string>
-    <!-- SD card & phone storage settings screen, description for check box to erase USB storage [CHAR LIMIT=30] -->
-    <string name="erase_external_storage_description" product="nosdcard">Erase all the data on the phone\'s internal USB storage, such as music or photos.</string>
-    <string name="erase_external_storage_description" product="default">Erase all the data on the phone\'s SD card, such as music or photos.</string>
+    <!-- SD card & phone storage settings screen, description for check box to erase USB storage [CHAR LIMIT=NONE] -->
+    <string name="erase_external_storage_description" product="nosdcard">Erase all the data on the internal USB storage, such as music or photos.</string>
+    <!-- SD card & phone storage settings screen, description for check box to erase USB storage [CHAR LIMIT=NONE] -->
+    <string name="erase_external_storage_description" product="default">Erase all the data on the SD card, such as music or photos.</string>
     <!-- SD card & phone storage settings screen, button on screen after user selects Factory data reset -->
     <string name="master_clear_button_text" product="tablet">Reset tablet</string>
     <!-- SD card & phone storage settings screen, button on screen after user selects Factory data reset -->
