@@ -115,9 +115,11 @@
     <string name="bluetooth_notif_message" msgid="5381418499788668724">"Eşleşmek için seç "</string>
     <string name="device_picker" msgid="8721012448931226323">"Bluetooth cihazı seçicisi"</string>
     <string name="bluetooth_permission_request" msgid="1523129741266262748">"Bluetooth izin isteği"</string>
-    <string name="bluetooth_ask_enablement" msgid="2342558978033892004">"Telefonunuzdaki bir uygulama, Bluetooth\'u açmak için izin istiyor. Bunu yapmak istiyor musunuz?"</string>
-    <string name="bluetooth_ask_discovery" msgid="669870705606180872">"Telefonunuzdaki bir uygulama telefonunuzu <xliff:g id="TIMEOUT">%1$d</xliff:g> saniye boyunca diğer Bluetooth cihazları tarafından bulunabilir duruma getirmek için izin istiyor. Bunu yapmak istiyor musunuz?"</string>
-    <string name="bluetooth_ask_enablement_and_discovery" msgid="7220210326619399542">"Telefonunuzdaki bir uygulama, <xliff:g id="TIMEOUT">%1$d</xliff:g> saniye boyunca Bluetooth\'u açmak ve telefonunuzu diğer cihazlar tarafından bulunabilir duruma getirmek için izin istiyor. Bunu yapmak istiyor musunuz?"</string>
+    <!-- outdated translation 2342558978033892004 -->     <string name="bluetooth_ask_enablement" msgid="8211158472876087588">"Telefonunuzdaki bir uygulama, Bluetooth\'u açmak için izin istiyor. Bunu yapmak istiyor musunuz?"</string>
+    <!-- outdated translation 669870705606180872 -->     <string name="bluetooth_ask_discovery" product="tablet" msgid="5950965604673262829">"Telefonunuzdaki bir uygulama telefonunuzu <xliff:g id="TIMEOUT">%1$d</xliff:g> saniye boyunca diğer Bluetooth cihazları tarafından bulunabilir duruma getirmek için izin istiyor. Bunu yapmak istiyor musunuz?"</string>
+    <string name="bluetooth_ask_discovery" product="default" msgid="669870705606180872">"Telefonunuzdaki bir uygulama telefonunuzu <xliff:g id="TIMEOUT">%1$d</xliff:g> saniye boyunca diğer Bluetooth cihazları tarafından bulunabilir duruma getirmek için izin istiyor. Bunu yapmak istiyor musunuz?"</string>
+    <!-- outdated translation 7220210326619399542 -->     <string name="bluetooth_ask_enablement_and_discovery" product="tablet" msgid="5716077575971497298">"Telefonunuzdaki bir uygulama, <xliff:g id="TIMEOUT">%1$d</xliff:g> saniye boyunca Bluetooth\'u açmak ve telefonunuzu diğer cihazlar tarafından bulunabilir duruma getirmek için izin istiyor. Bunu yapmak istiyor musunuz?"</string>
+    <string name="bluetooth_ask_enablement_and_discovery" product="default" msgid="7220210326619399542">"Telefonunuzdaki bir uygulama, <xliff:g id="TIMEOUT">%1$d</xliff:g> saniye boyunca Bluetooth\'u açmak ve telefonunuzu diğer cihazlar tarafından bulunabilir duruma getirmek için izin istiyor. Bunu yapmak istiyor musunuz?"</string>
     <string name="bluetooth_turning_on" msgid="3107102168379705771">"Bluetooth açılıyor..."</string>
     <string name="date_and_time" msgid="4114084177056654663">"Tarih ve saat ayarları"</string>
     <string name="date_time_12_hour_sample" msgid="3259617262618020574">"13:00"</string>
@@ -210,14 +212,15 @@
     <string name="device_info_label" msgid="6551553813651711205">"Cihaz bilgileri"</string>
     <string name="battery_info_label" msgid="4132685016148679403">"Pil bilgileri"</string>
     <string name="display_label" msgid="7403874003169865762">"Ekran"</string>
-    <string name="phone_info_label" msgid="2127552523124277664">"Telefon bilgileri"</string>
+    <!-- outdated translation 2127552523124277664 -->     <string name="phone_info_label" product="tablet" msgid="7820855350955963628">"Telefon bilgileri"</string>
+    <string name="phone_info_label" product="default" msgid="2127552523124277664">"Telefon bilgileri"</string>
     <string name="sd_card_settings_label" product="nosdcard" msgid="8101475181301178428">"USB depolama birimi"</string>
     <string name="sd_card_settings_label" product="default" msgid="5743100901106177102">"SD kart"</string>
     <string name="proxy_settings_label" msgid="3271174136184391743">"Proxy ayarları"</string>
     <string name="cancel" msgid="6859253417269739139">"İptal"</string>
     <string name="settings_label" msgid="1626402585530130914">"Ayarlar"</string>
     <string name="settings_label_launcher" msgid="8344735489639482340">"Ayarlar"</string>
-    <string name="settings_shortcut" msgid="3672145147925639262">"Ayarlar"</string>
+    <!-- outdated translation 3672145147925639262 -->     <string name="settings_shortcut" msgid="8597387747077828217">"Ayarlar"</string>
     <string name="airplane_mode" msgid="8837269988154128601">"Uçak modu"</string>
     <string name="airplane_mode_summary" msgid="3154817401368780988">"Tüm kablosuz bağlantıları devre dışı bırak"</string>
     <string name="airplane_mode_turning_on" msgid="8871739222526957255">"Kablosuz bağlantılar devre dışı bırakılıyor…"</string>
@@ -251,10 +254,8 @@
     <string name="zone_list_menu_sort_by_timezone" msgid="2720190443744884114">"Saat dilimine göre sırala"</string>
     <string name="lock_after_timeout" msgid="9100576335787336455">"Zaman aşımı süresi dolduktan sonra cihazı kilitle"</string>
     <string name="lock_after_timeout_summary" msgid="5751027735105958453">"Cihaz otomatik olarak kilitlenmeden önceki gecikmeyi ayarlayın"</string>
-    <!-- no translation found for show_owner_info_on_lockscreen_label (5074906168357568434) -->
-    <skip />
-    <!-- no translation found for owner_info_settings_title (2723190010708381889) -->
-    <skip />
+    <string name="show_owner_info_on_lockscreen_label" msgid="5074906168357568434">"Kilitli ekranda sahip bilgilerini göster"</string>
+    <string name="owner_info_settings_title" msgid="2723190010708381889">"Sahip bilgileri"</string>
     <string name="security_settings_title" msgid="5168491784222013179">"Konum ve güvenlik"</string>
     <string name="location_security_settings_title" msgid="4624434296446625554">"Konum ve güvenlik ayarları"</string>
     <string name="security_settings_summary" msgid="967393342537986570">"Konumum, ekran kil. açma, SIM kart kil., kim. bilg. dep.kilidini ayarla"</string>
@@ -273,7 +274,7 @@
     <string name="unlock_set_unlock_pin_summary" msgid="4131169672844263316">"Ekran kilidinin açılması için sayısal bir PIN girin"</string>
     <string name="unlock_set_unlock_password_title" msgid="8775603825675090937">"Şifre"</string>
     <string name="unlock_set_unlock_password_summary" msgid="4623254789833899286">"Ekran kilidini açmak için kullanılacak bir şifre girin"</string>
-    <string name="unlock_set_unlock_disabled_summary" msgid="736557879526940324">"Telefonun uzaktan yöneticisi tarafından devre dışı bırakıldı"</string>
+    <!-- outdated translation 736557879526940324 -->     <string name="unlock_set_unlock_disabled_summary" msgid="8816944391772300580">"Telefonun uzaktan yöneticisi tarafından devre dışı bırakıldı"</string>
     <string name="unlock_disable_lock_title" msgid="1427036227416979120">"Ekran kilidini kapat"</string>
     <string name="unlock_disable_lock_pattern_summary" msgid="6801602880568869201">"Kilit açma desenini kaldır"</string>
     <string name="unlock_disable_lock_pin_summary" msgid="8856842745366993387">"Kilit açma PIN\'ini kaldır"</string>
@@ -345,6 +346,14 @@
     <string name="bluetooth_pairing_rejected_error_message" msgid="1648157108520832454">"Eşleştirme <xliff:g id="DEVICE_NAME">%1$s</xliff:g> tarafından reddedildi."</string>
     <string name="bluetooth_connecting_error_message" msgid="1779660510084746802">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> noktasına bağlanırken bir sorun oluştu."</string>
     <string name="bluetooth_preference_scan_title" msgid="2277464653118896016">"Cihazları tara"</string>
+    <!-- no translation found for bluetooth_preference_find_nearby_title (5087410003465463318) -->
+    <skip />
+    <!-- no translation found for bluetooth_preference_device_settings (907776049862799122) -->
+    <skip />
+    <!-- no translation found for bluetooth_preference_paired_devices (1970524193086791964) -->
+    <skip />
+    <!-- no translation found for bluetooth_preference_found_devices (3133019331974936204) -->
+    <skip />
     <string name="bluetooth_device_context_connect" msgid="3997659895003244941">"Bağlan"</string>
     <string name="bluetooth_device_context_disconnect" msgid="8220072022970148683">"Bağlantıyı kes"</string>
     <string name="bluetooth_device_context_pair_connect" msgid="7611522504813927727">"Eşleştir ve bağlan"</string>
@@ -353,19 +362,37 @@
     <string name="bluetooth_device_context_connect_advanced" msgid="2643129703569788771">"Seçenekler…"</string>
     <string name="bluetooth_connect_specific_profiles_title" msgid="6952214406025825164">"Bağlan…"</string>
     <string name="bluetooth_profile_a2dp" msgid="3259633293424539529">"Medya"</string>
-    <string name="bluetooth_profile_headset" msgid="1874975688666658946">"Telefon"</string>
+    <!-- outdated translation 1874975688666658946 -->     <string name="bluetooth_profile_headset" product="tablet" msgid="2252738313413646294">"Telefon"</string>
+    <string name="bluetooth_profile_headset" product="default" msgid="1874975688666658946">"Telefon"</string>
     <string name="bluetooth_profile_opp" msgid="3799470046565284440">"Aktar"</string>
     <string name="bluetooth_profile_hid" msgid="3000858580917633478">"Giriş Cihazı"</string>
     <string name="bluetooth_profile_pan" msgid="4225813400648547154">"İnternet paylaşımı"</string>
     <string name="bluetooth_summary_connected_to_a2dp" msgid="510833839847758664">"Medya sesine bağlanıldı"</string>
-    <string name="bluetooth_summary_connected_to_headset" msgid="4876496372728623918">"Telefon sesine bağlandı"</string>
+    <!-- outdated translation 4876496372728623918 -->     <string name="bluetooth_summary_connected_to_headset" product="tablet" msgid="598335151406893070">"Telefon sesine bağlandı"</string>
+    <string name="bluetooth_summary_connected_to_headset" product="default" msgid="4876496372728623918">"Telefon sesine bağlandı"</string>
     <string name="bluetooth_summary_connected_to_a2dp_headset" msgid="3045032710457800891">"Telefon ve medya sesine bağlandı"</string>
     <string name="bluetooth_summary_connected_to_hid" msgid="8147499644396475561">"Giriş cihazına bağlı"</string>
     <string name="bluetooth_summary_connected_to_pan" msgid="3157622705092537266">"İnternet paylaşımı oluşturuldu"</string>
+    <!-- no translation found for bluetooth_disconnect_a2dp_profile (3524648279150937177) -->
+    <skip />
+    <!-- no translation found for bluetooth_disconnect_headset_profile (3656117361616583255) -->
+    <skip />
+    <!-- no translation found for bluetooth_disconnect_headset_profile (8343033989250953720) -->
+    <skip />
+    <!-- no translation found for bluetooth_disconnect_hid_profile (3282295189719352075) -->
+    <skip />
+    <!-- no translation found for bluetooth_disconnect_pan_profile (877883150720888525) -->
+    <skip />
     <string name="bluetooth_device_advanced_title" msgid="528816860793581131">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> seçenek"</string>
+    <!-- no translation found for bluetooth_device_advanced_device_actions_title (3793430949811946844) -->
+    <skip />
     <string name="bluetooth_device_advanced_online_mode_title" msgid="3689050071425683114">"Bağlan"</string>
     <string name="bluetooth_device_advanced_online_mode_summary" msgid="1204424107263248336">"Bluetooth cihazına bağlan"</string>
     <string name="bluetooth_device_advanced_profile_header_title" msgid="3764437426089639639">"Profiller"</string>
+    <!-- no translation found for bluetooth_device_advanced_rename_device (350508394033808532) -->
+    <skip />
+    <!-- no translation found for bluetooth_device_advanced_enable_opp_title (8222550640371627365) -->
+    <skip />
     <string name="bluetooth_a2dp_profile_summary_connected" msgid="963376081347721598">"Medya sesine bağlanıldı"</string>
     <string name="bluetooth_headset_profile_summary_connected" msgid="7661070206715520671">"Telefon sesine bağlandı"</string>
     <string name="bluetooth_opp_profile_summary_connected" msgid="2611913495968309066">"Dosya aktarım sunucusuna bağlandı"</string>
@@ -407,10 +434,8 @@
     <string name="wifi_menu_modify" msgid="2068554918652440105">"Ağı değiştir"</string>
     <string name="wifi_network_setup" msgid="7974851890019344870">"Ağ Kurulumu"</string>
     <string name="wifi_wps_pin" msgid="5471842298708321115">"Erişim noktasının PIN\'ini girin"</string>
-    <!-- no translation found for wifi_wps_pin_method_configuration (9019042137789692817) -->
-    <skip />
-    <!-- no translation found for wifi_wps_pin_output (8682102965680650853) -->
-    <skip />
+    <string name="wifi_wps_pin_method_configuration" msgid="9019042137789692817">"WPS PIN yöntemi yapılandırması"</string>
+    <string name="wifi_wps_pin_output" msgid="8682102965680650853">"Erişim noktasına <xliff:g id="WPS_PIN">%1$s</xliff:g> PIN\'ini girin"</string>
     <string name="wifi_ssid" msgid="641393708309146745">"Ağ SSID\'si"</string>
     <string name="wifi_security" msgid="6603611185592956936">"Güvenlik"</string>
     <string name="wifi_signal" msgid="5514120261628065287">"Sinyal gücü"</string>
@@ -431,8 +456,7 @@
     <string name="wifi_remembered" msgid="8426719916135950136">"Anımsandı"</string>
     <string name="wifi_disabled" msgid="2104752038187543712">"Devre dışı"</string>
     <string name="wifi_not_in_range" msgid="1136191511238508967">"Kapsama alanı dışında"</string>
-    <!-- no translation found for wifi_open_with_wps (2606968531452521147) -->
-    <skip />
+    <string name="wifi_open_with_wps" msgid="2606968531452521147">"WPS var"</string>
     <string name="wifi_secured" msgid="6759903183748011566">"<xliff:g id="WIFI_SECURITY">%1$s</xliff:g> ile güvenlik altına alındı"</string>
     <string name="wifi_secured_with_wps" msgid="1822538701086256007">"Güvenliği <xliff:g id="WIFI_SECURITY">%1$s</xliff:g> ile sağlanmaktadır (WPS kullanılabilir)"</string>
     <string name="wifi_secured_with_status" msgid="6489317496506267302">"<xliff:g id="WIFI_STATUS">%2$s</xliff:g>, <xliff:g id="WIFI_SECURITY">%1$s</xliff:g> ile güvenlik altına alındı"</string>
@@ -440,32 +464,33 @@
     <string name="wifi_forget" msgid="8168174695608386644">"Unut"</string>
     <string name="wifi_save" msgid="3331121567988522826">"Kaydet"</string>
     <string name="wifi_cancel" msgid="6763568902542968964">"İptal"</string>
+    <!-- no translation found for wifi_back (249038475821092060) -->
+    <skip />
+    <!-- no translation found for wifi_detail (6321441611324424140) -->
+    <skip />
     <string name="wifi_advanced_titlebar" msgid="5419052271935350999">"Gelişmiş"</string>
-    <string name="wifi_setting_num_channels_title" msgid="694031537019656132">"Denetleme alan adı"</string>
-    <string name="wifi_setting_num_channels_summary" msgid="4889355096717099141">"Kullanılacak kanal sayısını ayarla"</string>
-    <string name="wifi_setting_num_channels_error" msgid="5765443843427870721">"Denetleme alanı ayarlanırken bir sorun oldu."</string>
-    <string name="wifi_setting_num_channels_channel_phrase" msgid="1269381923672908636">"<xliff:g id="NUM_CHANNELS">%1$d</xliff:g> kanal"</string>
     <string name="wifi_setting_sleep_policy_title" msgid="1367731352485585528">"Kablosuz uyku politikası"</string>
     <string name="wifi_setting_sleep_policy_summary" msgid="7573693311804602041">"Kablosuzdan mobil veriye geçme zamanını belirt"</string>
     <string name="wifi_setting_sleep_policy_error" msgid="5103670439972135148">"Uyku politikası ayarlanırken bir sorun oluştu."</string>
+    <!-- no translation found for wifi_setting_frequency_band_title (7493768705046080060) -->
+    <skip />
+    <!-- no translation found for wifi_setting_frequency_band_summary (3250740757118009784) -->
+    <skip />
+    <!-- no translation found for wifi_setting_frequency_band_error (837281974489794378) -->
+    <skip />
     <string name="wifi_advanced_mac_address_title" msgid="6571335466330978393">"MAC adresi"</string>
     <string name="wifi_advanced_ip_address_title" msgid="6215297094363164846">"IP adresi"</string>
     <string name="wifi_ip_settings_titlebar" msgid="4345739031248760326">"IP ayarları"</string>
     <string name="wifi_ip_settings_menu_save" msgid="7296724066102908366">"Kaydet"</string>
     <string name="wifi_ip_settings_menu_cancel" msgid="6582567330136502340">"İptal"</string>
-    <!-- no translation found for wifi_ip_settings_invalid_ip_address (6387653152103405443) -->
-    <skip />
-    <!-- no translation found for wifi_ip_settings_invalid_gateway (6383012465511093067) -->
-    <skip />
-    <!-- no translation found for wifi_ip_settings_invalid_dns (3428867750550854065) -->
-    <skip />
-    <!-- no translation found for wifi_ip_settings_invalid_network_prefix_length (8145730615716855433) -->
-    <skip />
+    <string name="wifi_ip_settings_invalid_ip_address" msgid="6387653152103405443">"Lütfen geçerli bir IP adresi yazın."</string>
+    <string name="wifi_ip_settings_invalid_gateway" msgid="6383012465511093067">"Lütfen geçerli bir ağ geçidi adresi yazın."</string>
+    <string name="wifi_ip_settings_invalid_dns" msgid="3428867750550854065">"Lütfen geçerli bir DNS adresi yazın."</string>
+    <string name="wifi_ip_settings_invalid_network_prefix_length" msgid="8145730615716855433">"Lütfen 0 ile 32 arasında bir ağ önek uzunluğu yazın."</string>
     <string name="wifi_dns1" msgid="7344118050720080045">"DNS 1"</string>
     <string name="wifi_dns2" msgid="1368601006824882659">"DNS 2"</string>
     <string name="wifi_gateway" msgid="163914742461092086">"Geçit"</string>
-    <!-- no translation found for wifi_network_prefix_length (3028785234245085998) -->
-    <skip />
+    <string name="wifi_network_prefix_length" msgid="3028785234245085998">"Ağ önek uzunluğu"</string>
     <string name="wifi_tether_checkbox_text" msgid="6961605862058056788">"Taşınabilir kablosuz ortak erişim noktası"</string>
     <string name="wifi_tether_enabled_subtext" msgid="8948641212931906143">"Taşınabilir ortak erişim noktası <xliff:g id="NETWORK_SSID">%1$s</xliff:g> etkin"</string>
     <string name="wifi_tether_failed_subtext" msgid="2654888578056042315">"Taşınabilir kablosuz ortak erişim noktası hatası"</string>
@@ -481,7 +506,7 @@
     <string name="silent_mode_title" msgid="3181479108593217704">"Sessiz mod"</string>
     <string name="silent_mode_summary" msgid="3309650676072917899">"Medya ve alarmlar dışında tüm sesleri kapat"</string>
     <string name="silent_mode_incl_alarm_summary" msgid="2088830834182228458">"Medya dışında tüm sesler susturulur"</string>
-    <string name="ringtone_title" msgid="5379026328015343686">"Telefon zil sesi"</string>
+    <!-- outdated translation 5379026328015343686 -->     <string name="ringtone_title" msgid="7037881886694206550">"Telefon zil sesi"</string>
     <string name="ringtone_summary" msgid="2630023412632683493"></string>
     <string name="all_volume_title" msgid="8741571721868253103">"Ses"</string>
     <string name="ring_volume_title" msgid="7938706566797464165">"Zil sesi düzeyi"</string>
@@ -521,13 +546,17 @@
     <string name="dock_audio_settings_title" msgid="3324750259959570305">"Ses"</string>
     <string name="dock_audio_summary_desk" msgid="6487784412371139335">"Takılı masaüstü yuvası için ayarlar"</string>
     <string name="dock_audio_summary_car" msgid="6740897586006248450">"Takılı araç yuvası için ayarlar"</string>
-    <string name="dock_audio_summary_none" msgid="289909253741048784">"Telefon yuvaya takılı değil"</string>
+    <!-- outdated translation 289909253741048784 -->     <string name="dock_audio_summary_none" product="tablet" msgid="8215337394914283607">"Telefon yuvaya takılı değil"</string>
+    <string name="dock_audio_summary_none" product="default" msgid="289909253741048784">"Telefon yuvaya takılı değil"</string>
     <string name="dock_audio_summary_unknown" msgid="4465059868974255693">"Takılı yuva için ayarlar"</string>
     <string name="dock_not_found_title" msgid="3290961741828952424">"Yuva bulunamadı"</string>
-    <string name="dock_not_found_text" msgid="3035260358985111855">"Yuva ses ayarlarını yapılandırmak için telefon yuvaya takılı olmalıdır"</string>
+    <!-- outdated translation 3035260358985111855 -->     <string name="dock_not_found_text" product="tablet" msgid="7935403744079168804">"Yuva ses ayarlarını yapılandırmak için telefon yuvaya takılı olmalıdır"</string>
+    <string name="dock_not_found_text" product="default" msgid="3035260358985111855">"Yuva ses ayarlarını yapılandırmak için telefon yuvaya takılı olmalıdır"</string>
     <string name="dock_sounds_enable_title" msgid="3659084028644948905">"Yuvaya yerleştirme sesi"</string>
-    <string name="dock_sounds_enable_summary_on" msgid="8491180514199743771">"Telefon yuvaya yerleştirilirken veya yuvadan çıkarılırken ses çal"</string>
-    <string name="dock_sounds_enable_summary_off" msgid="3151046599205265919">"Telefon yuvaya yerleştirilirken veya yuvadan çıkarılırken ses çalma"</string>
+    <!-- outdated translation 8491180514199743771 -->     <string name="dock_sounds_enable_summary_on" product="tablet" msgid="838102386448981339">"Telefon yuvaya yerleştirilirken veya yuvadan çıkarılırken ses çal"</string>
+    <string name="dock_sounds_enable_summary_on" product="default" msgid="8491180514199743771">"Telefon yuvaya yerleştirilirken veya yuvadan çıkarılırken ses çal"</string>
+    <!-- outdated translation 3151046599205265919 -->     <string name="dock_sounds_enable_summary_off" product="tablet" msgid="5077843049805652363">"Telefon yuvaya yerleştirilirken veya yuvadan çıkarılırken ses çalma"</string>
+    <string name="dock_sounds_enable_summary_off" product="default" msgid="3151046599205265919">"Telefon yuvaya yerleştirilirken veya yuvadan çıkarılırken ses çalma"</string>
     <string name="sync_settings" msgid="9186125469300013491">"Hesaplar ve senkronizasyon"</string>
     <string name="sync_settings_summary" msgid="2962179505214965667">"Hesapları ekle veya kaldır ve hesap ayarlarını değiştir"</string>
     <string name="search_settings" msgid="1910951467596035063">"Ara"</string>
@@ -537,8 +566,10 @@
     <string name="animations_summary_on" msgid="8843613112130484436">"Pencereleri açıp kapatırken animasyon kullan"</string>
     <string name="animations_summary_off" msgid="2777026828025551983">"Pencereleri açıp kapatırken animasyon kullan"</string>
     <string name="accelerometer_title" msgid="7854608399547349157">"Ekranı otomatik döndür"</string>
-    <string name="accelerometer_summary_on" msgid="1133737282813048021">"Telefonu döndürürken yönü otomatik değiştir"</string>
-    <string name="accelerometer_summary_off" msgid="5485489363715740761">"Telefonu döndürürken yönü otomatik değiştir"</string>
+    <!-- outdated translation 1133737282813048021 -->     <string name="accelerometer_summary_on" product="tablet" msgid="429982132339828942">"Telefonu döndürürken yönü otomatik değiştir"</string>
+    <string name="accelerometer_summary_on" product="default" msgid="1133737282813048021">"Telefonu döndürürken yönü otomatik değiştir"</string>
+    <!-- outdated translation 5485489363715740761 -->     <string name="accelerometer_summary_off" product="tablet" msgid="4781734213242521682">"Telefonu döndürürken yönü otomatik değiştir"</string>
+    <string name="accelerometer_summary_off" product="default" msgid="5485489363715740761">"Telefonu döndürürken yönü otomatik değiştir"</string>
     <string name="brightness" msgid="2354961343555249270">"Parlaklık"</string>
     <string name="brightness_summary" msgid="838917350127550703">"Ekranın parlaklığını ayarla"</string>
     <string name="screen_timeout" msgid="4882669461447531301">"Ekran zaman aşımı"</string>
@@ -548,8 +579,10 @@
     <string name="sim_lock_settings_category" msgid="5136244267576697004">"SIM kart kilidini ayarla"</string>
     <string name="sim_lock_settings_title" msgid="9018585580955414596">"SIM kart kilidi"</string>
     <string name="sim_pin_toggle" msgid="1742123478029451888">"SIM kartı kilitle"</string>
-    <string name="sim_lock_on" msgid="2503536505568814324">"Telefonu kullanmak için PIN iste"</string>
-    <string name="sim_lock_off" msgid="258981978215428916">"Telefonu kullanmak için PIN iste"</string>
+    <!-- outdated translation 2503536505568814324 -->     <string name="sim_lock_on" product="tablet" msgid="5058355081270397764">"Telefonu kullanmak için PIN iste"</string>
+    <string name="sim_lock_on" product="default" msgid="2503536505568814324">"Telefonu kullanmak için PIN iste"</string>
+    <!-- outdated translation 258981978215428916 -->     <string name="sim_lock_off" product="tablet" msgid="2813800553917012356">"Telefonu kullanmak için PIN iste"</string>
+    <string name="sim_lock_off" product="default" msgid="258981978215428916">"Telefonu kullanmak için PIN iste"</string>
     <string name="sim_pin_change" msgid="6311414184279932368">"SIM PIN kodunu değiştir"</string>
     <string name="sim_enter_pin" msgid="6608715137008508432">"SIM PIN kodu"</string>
     <string name="sim_enable_sim_lock" msgid="4517742794997166918">"SIM kartı kilitle"</string>
@@ -565,7 +598,8 @@
     <string name="sim_lock_failed" msgid="6676748290838006404">"SIM kart kilit durumu değiştirilemiyor."\n"PIN kodu yanlış olabilir."</string>
     <string name="sim_enter_ok" msgid="6475946836899218919">"Tamam"</string>
     <string name="sim_enter_cancel" msgid="6240422158517208036">"İptal"</string>
-    <string name="device_info_settings" msgid="475872867864762157">"Telefon durumu"</string>
+    <!-- outdated translation 475872867864762157 -->     <string name="device_info_settings" product="tablet" msgid="1119755927536987178">"Telefon durumu"</string>
+    <string name="device_info_settings" product="default" msgid="475872867864762157">"Telefon durumu"</string>
     <string name="system_update_settings_list_item_title" msgid="3342887311059985961">"Sistem güncellemeleri"</string>
     <string name="system_update_settings_list_item_summary" msgid="3853057315907710747"></string>
     <string name="firmware_version" msgid="4801135784886859972">"Android sürümü"</string>
@@ -577,7 +611,7 @@
     <string name="device_status_activity_title" msgid="1411201799384697904">"Durum"</string>
     <string name="device_status" msgid="607405385799807324">"Durum"</string>
     <string name="device_status_summary" msgid="2599162787451519618">"Telefon numarası, sinyal vb."</string>
-    <!-- outdated translation 6761505449439392808 -->     <string name="storage_settings" product="nosdcard" msgid="8758910337658683955">"Paylaşılan ve güvenli deplm birimi"</string>
+    <string name="storage_settings" product="nosdcard" msgid="8758910337658683955">"Paylşln ve güvnli dep brm"</string>
     <string name="storage_settings" product="default" msgid="4211799979832404953">"Depolama"</string>
     <string name="storage_settings_title" msgid="8746016738388094064">"Depolama ayarları"</string>
     <string name="storage_settings_summary" product="nosdcard" msgid="3543813623294870759">"USB depolama biriminin bağlantısını kes, kullanılabilir depolama alanını görüntüle"</string>
@@ -610,14 +644,14 @@
     <string name="ptp_mode_summary" msgid="8709697530987890394">"USB\'de MTP cihazı yerine PTP kamera cihazı olarak görün"</string>
     <string name="sd_insert_summary" product="nosdcard" msgid="5264016886409577313">"Bğl için USB dep brm takn"</string>
     <string name="sd_insert_summary" product="default" msgid="2048640010381803841">"Eklemek için bir SD kart yerleştirin"</string>
-    <!-- outdated translation 2160896630836199702 -->     <string name="sd_mount" product="nosdcard" msgid="8966695015677343116">"Payl deplm birimini bağla"</string>
+    <string name="sd_mount" product="nosdcard" msgid="8966695015677343116">"USB depl birimini ekleyin"</string>
     <string name="sd_mount" product="default" msgid="5940523765187704135">"SD kartı ekle"</string>
     <!-- outdated translation 6733254203291665551 -->     <string name="sd_mount_summary" product="nosdcard" msgid="1794150364965145726">"Dahili USB depol birimini ekle"</string>
     <string name="sd_mount_summary" product="default" msgid="4936591681679097699">"SD kartı ekle"</string>
     <string name="sd_format" product="nosdcard" msgid="2148179271623099054">"USB depolama birimini sil"</string>
     <string name="sd_format" product="default" msgid="2576054280507119870">"SD kartı sil"</string>
-    <string name="sd_format_summary" product="nosdcard" msgid="1504606546865152514">"Telefonunun USB depolama birimindeki müzik ve foto gibi tüm veriler silinir."</string>
-    <string name="sd_format_summary" product="default" msgid="915849621390821841">"Telefonun SD kartındaki müzik ve foto gibi tüm veriler silinir."</string>
+    <!-- outdated translation 1504606546865152514 -->     <string name="sd_format_summary" product="nosdcard" msgid="6331905044907914603">"Telefonunun USB depolama birimindeki müzik ve foto gibi tüm veriler silinir."</string>
+    <!-- outdated translation 1504606546865152514 -->     <string name="sd_format_summary" product="default" msgid="212703692181793109">"Telefonunun USB depolama birimindeki müzik ve foto gibi tüm veriler silinir."</string>
     <string name="sd_unavailable" msgid="8580107589533213904">"Kullanılamıyor"</string>
     <string name="read_only" msgid="6702420168629076340">" (Salt okunur)"</string>
     <string name="dlg_confirm_unmount_title" product="nosdcard" msgid="2349876662428231297">"USB dep brmnn bağln kes"</string>
@@ -668,19 +702,35 @@
     <string name="menu_restore" msgid="8260067415075573273">"Varsayılana sıfırla"</string>
     <string name="restore_default_apn_completed" msgid="3990449939234957281">"Varsayılan APN ayarlarını sıfırlama tamamlandı"</string>
     <string name="master_clear_title" msgid="5907939616087039756">"Fabrika verilerine sıfırla"</string>
-    <string name="master_clear_summary" msgid="4986154238001088492">"Telefondaki tüm verileri siler"</string>
-    <string name="master_clear_desc" product="nosdcard" msgid="2163013814299528247">"Bu işlem, "<b></b>\n"Google hesabınız"\n<li></li>"Sistem ve uygulama verileri ve ayarları"\n<li></li>"İndirilen uygulamalar"\n<li></li>" da dahil olmak üzere telefonunuzun "\n"dahili depolama birimindeki"\n" tüm verilerin silinmesine neden olur. Bu telefondaki tüm verilerin silinmesi için "<b>"USB depolama biriminin"</b>" silinmesi gerekir."\n\n</string>
-    <string name="master_clear_desc" product="default" msgid="1741944496458365969">"Bu işlem, "\n\n<li>"Google hesabınız"</li>\n<li>"Sistem ve uygulama verileri ve ayarları"</li>\n<li>"İndirilen uygulamalar"</li>\n\n" da dahil olmak üzere telefonunuzun "<b>"dahili depolama birimindeki"</b>" tüm verilerin silinmesine neden olur. Müzik, resimler ve diğer kullanıcı verilerinin de silinmesi için "<b>"SD kartın"</b>" silinmesi gerekir."\n\n</string>
+    <!-- outdated translation 4986154238001088492 -->     <string name="master_clear_summary" product="tablet" msgid="4036344100254678429">"Telefondaki tüm verileri siler"</string>
+    <string name="master_clear_summary" product="default" msgid="4986154238001088492">"Telefondaki tüm verileri siler"</string>
+    <!-- unknown placeholder TAG_B_0 in master_clear_desc -->
+    <skip />
+    <!-- no translation found for master_clear_desc (1305457209008369655) -->
+    <skip />
+    <!-- unknown placeholder TAG_B_0 in master_clear_desc -->
+    <skip />
+    <!-- no translation found for master_clear_desc (2950536633526374209) -->
+    <skip />
+    <!-- no translation found for master_clear_accounts (6412857499147999073) -->
+    <skip />
+    <!-- no translation found for master_clear_desc_erase_external_storage (4740866328425123395) -->
+    <skip />
+    <!-- no translation found for master_clear_desc_erase_external_storage (7339100478676372901) -->
+    <skip />
     <string name="erase_external_storage" product="nosdcard" msgid="969364037450286809">"USB depolama birimini sil"</string>
     <string name="erase_external_storage" product="default" msgid="1397239046334307625">"SD kartı sil"</string>
-    <string name="erase_external_storage_description" product="nosdcard" msgid="1657838142707381027">"Telefonunun USB depolama birimindeki müzik veya foto gibi tüm veriler silinir."</string>
-    <string name="erase_external_storage_description" product="default" msgid="8100175974635894073">"Telefonunun SD kartındaki müzik ve foto gibi tüm veriler silinir."</string>
-    <string name="master_clear_button_text" msgid="7550632653343157971">"Telefonu sıfırla"</string>
+    <!-- outdated translation 1657838142707381027 -->     <string name="erase_external_storage_description" product="nosdcard" msgid="444834593696342279">"Telefonunun USB depolama birimindeki müzik veya foto gibi tüm veriler silinir."</string>
+    <!-- outdated translation 1657838142707381027 -->     <string name="erase_external_storage_description" product="default" msgid="46603515218075174">"Telefonunun USB depolama birimindeki müzik veya foto gibi tüm veriler silinir."</string>
+    <!-- outdated translation 7550632653343157971 -->     <string name="master_clear_button_text" product="tablet" msgid="3130786116528304116">"Telefonu sıfırla"</string>
+    <string name="master_clear_button_text" product="default" msgid="7550632653343157971">"Telefonu sıfırla"</string>
     <string name="master_clear_final_desc" msgid="6917971132484622696">"Tüm kişisel bilgilerinizi ve indirilen tüm uygulamaları silmek istiyor musunuz? Bu işlem geri döndürülemez!"</string>
     <string name="master_clear_final_button_text" msgid="5390908019019242910">"Her şeyi sil"</string>
     <string name="master_clear_gesture_prompt" msgid="1428645764883536750">"Kilit açma deseninizi çizin"</string>
-    <string name="master_clear_gesture_explanation" msgid="8901714274312707918">"Telefon sıfırlamayı onaylamak için kilit açma deseninizi çizmelisiniz."</string>
+    <!-- outdated translation 8901714274312707918 -->     <string name="master_clear_gesture_explanation" msgid="2234954758550554549">"Telefon sıfırlamayı onaylamak için kilit açma deseninizi çizmelisiniz."</string>
     <string name="master_clear_failed" msgid="8655202125010189406">"Sistem Temizleme hizmeti kullanılamadığından sıfırlama yapılmadı."</string>
+    <!-- no translation found for master_clear_confirm_title (4845794266129586839) -->
+    <skip />
     <string name="media_format_title" product="nosdcard" msgid="3999653431422767156">"USB depolama birimini sil"</string>
     <string name="media_format_title" product="default" msgid="4427528440306787972">"SD kartı sil"</string>
     <string name="media_format_summary" product="nosdcard" msgid="776603298628082065">"USB dep brmdki tüm verlr siler"</string>
@@ -702,13 +752,18 @@
     <string name="tether_settings_title_bluetooth" msgid="355855408317564420">"Bluetooth internet paylşm"</string>
     <string name="tether_settings_title_usb_bluetooth" msgid="5355828977109785001">"İnternet paylşm oluşturma"</string>
     <string name="tether_settings_title_all" msgid="8356136101061143841">"İnt pay ve taş ort erş nk"</string>
-    <string name="tether_settings_summary_usb" msgid="3562431455625637370">"Telefonunuzun mobil veri bağlantısını USB üzerinden paylaşın"</string>
-    <string name="tether_settings_summary_wifi" msgid="4690912027002467246">"Telefonunuzun mobil bağlantısını taşınabilir kablosuz ortak erişim noktası olarak paylaşın"</string>
-    <string name="tether_settings_summary_bluetooth" msgid="4363059913219151114">"Telefonunuzun mobil veri bağlantısını Bluetooth üzerinden paylaşın"</string>
-    <string name="tether_settings_summary_usb_wifi" msgid="3700323208282018772">"Telfnunuzun mobil veri bağl\'nı USB ile veya taşınablr kablosuz ortak erişim noktası olarak paylaşın"</string>
-    <string name="tether_settings_summary_usb_bluetooth" msgid="4008195891276675882">"Telefonunuzun mobil veri bağlantısını USB veya Bluetooth üzerinden paylaşın"</string>
-    <string name="tether_settings_summary_wifi_bluetooth" msgid="2753904149495692201">"Telfnunuzun mobil veri bağl\'nı Bluetooth ile veya taşınblr kblsz ortak erşm noktası olarak paylaşın"</string>
-    <string name="tether_settings_summary_all" msgid="1171769255924636665">"Telefonunuzun mobil veri bağlantısını USB, Kablosuz veya Bluetooth üzerinden paylaşın"</string>
+    <!-- outdated translation 3562431455625637370 -->     <string name="tether_settings_summary_usb" product="tablet" msgid="785883365108362248">"Telefonunuzun mobil veri bağlantısını USB üzerinden paylaşın"</string>
+    <string name="tether_settings_summary_usb" product="default" msgid="3562431455625637370">"Telefonunuzun mobil veri bağlantısını USB üzerinden paylaşın"</string>
+    <!-- outdated translation 4690912027002467246 -->     <string name="tether_settings_summary_wifi" msgid="5474383125137372164">"Telefonunuzun mobil bağlantısını taşınabilir kablosuz ortak erişim noktası olarak paylaşın"</string>
+    <!-- outdated translation 4363059913219151114 -->     <string name="tether_settings_summary_bluetooth" msgid="2407506656353819750">"Telefonunuzun mobil veri bağlantısını Bluetooth üzerinden paylaşın"</string>
+    <!-- outdated translation 3700323208282018772 -->     <string name="tether_settings_summary_usb_wifi" product="tablet" msgid="3834674129575844910">"Telfnunuzun mobil veri bağl\'nı USB ile veya taşınablr kablosuz ortak erişim noktası olarak paylaşın"</string>
+    <string name="tether_settings_summary_usb_wifi" product="default" msgid="3700323208282018772">"Telfnunuzun mobil veri bağl\'nı USB ile veya taşınablr kablosuz ortak erişim noktası olarak paylaşın"</string>
+    <!-- outdated translation 4008195891276675882 -->     <string name="tether_settings_summary_usb_bluetooth" product="tablet" msgid="1245080236509560839">"Telefonunuzun mobil veri bağlantısını USB veya Bluetooth üzerinden paylaşın"</string>
+    <string name="tether_settings_summary_usb_bluetooth" product="default" msgid="4008195891276675882">"Telefonunuzun mobil veri bağlantısını USB veya Bluetooth üzerinden paylaşın"</string>
+    <!-- outdated translation 2753904149495692201 -->     <string name="tether_settings_summary_wifi_bluetooth" product="tablet" msgid="1924576461932311140">"Telfnunuzun mobil veri bağl\'nı Bluetooth ile veya taşınblr kblsz ortak erşm noktası olarak paylaşın"</string>
+    <string name="tether_settings_summary_wifi_bluetooth" product="default" msgid="2753904149495692201">"Telfnunuzun mobil veri bağl\'nı Bluetooth ile veya taşınblr kblsz ortak erşm noktası olarak paylaşın"</string>
+    <!-- outdated translation 1171769255924636665 -->     <string name="tether_settings_summary_all" product="tablet" msgid="6612660164315153427">"Telefonunuzun mobil veri bağlantısını USB, Kablosuz veya Bluetooth üzerinden paylaşın"</string>
+    <string name="tether_settings_summary_all" product="default" msgid="1171769255924636665">"Telefonunuzun mobil veri bağlantısını USB, Kablosuz veya Bluetooth üzerinden paylaşın"</string>
     <string name="usb_title" msgid="7483344855356312510">"USB"</string>
     <string name="usb_tethering_button_text" msgid="585829947108007917">"USB bağlantısı"</string>
     <string name="usb_tethering_available_subtext" msgid="156779271296152605">"USB bağlandı, bağlantıyı kontrol edin"</string>
@@ -743,21 +798,23 @@
     <skip />
     <!-- no translation found for use_location_summary_enabled (984549156918597265) -->
     <skip />
-    <string name="about_settings" msgid="1743378368185371685">"Telefon hakkında"</string>
-    <string name="about_settings_summary" msgid="3302263393543848667">"Yasal bilgileri, telefon durumunu, yazılım sürümünü görüntüle"</string>
+    <!-- outdated translation 1743378368185371685 -->     <string name="about_settings" product="tablet" msgid="593457295516533765">"Telefon hakkında"</string>
+    <string name="about_settings" product="default" msgid="1743378368185371685">"Telefon hakkında"</string>
+    <!-- outdated translation 3302263393543848667 -->     <string name="about_settings_summary" msgid="3371517697156165959">"Yasal bilgileri, telefon durumunu, yazılım sürümünü görüntüle"</string>
     <string name="legal_information" msgid="5769301644270604095">"Yasal bilgiler"</string>
     <string name="contributors_title" msgid="5917703088825286504">"Katkıda bulunanlar"</string>
     <string name="copyright_title" msgid="865906688917260647">"Telif Hakkı"</string>
     <string name="license_title" msgid="1990487604356037871">"Lisans"</string>
     <string name="terms_title" msgid="7697580845616764642">"Şartlar ve koşullar"</string>
     <string name="system_tutorial_list_item_title" msgid="9082844446660969729">"Sistem eğiticisi"</string>
-    <string name="system_tutorial_list_item_summary" msgid="3861815254521030201">"Telefonunuzu nasıl kullanacağınızı öğrenin"</string>
+    <!-- outdated translation 3861815254521030201 -->     <string name="system_tutorial_list_item_summary" product="tablet" msgid="3341504384445734067">"Telefonunuzu nasıl kullanacağınızı öğrenin"</string>
+    <string name="system_tutorial_list_item_summary" product="default" msgid="3861815254521030201">"Telefonunuzu nasıl kullanacağınızı öğrenin"</string>
     <string name="settings_license_activity_title" msgid="7553683406244228650">"Açık kaynak lisansları"</string>
     <string name="settings_license_activity_unavailable" msgid="4210539215951487627">"Lisanslar yüklenirken bir sorun oluştu."</string>
     <string name="settings_license_activity_loading" msgid="3337535809093591740">"Yükleniyor…"</string>
     <string name="settings_safetylegal_title" msgid="1289483965535937431">"Güvenlik bilgileri"</string>
     <string name="settings_safetylegal_activity_title" msgid="6901214628496951727">"Güvenlik bilgileri"</string>
-    <string name="settings_safetylegal_activity_unreachable" msgid="3198912875259612887">"Telefonunuz bir veri hizmetine bağlı değil. Bu bilgiyi şimdi görüntülemek için İnternet\'e bağlı herhangi bir bilgisayardan %s adresine gidin."</string>
+    <!-- outdated translation 3198912875259612887 -->     <string name="settings_safetylegal_activity_unreachable" msgid="170670055116721810">"Telefonunuz bir veri hizmetine bağlı değil. Bu bilgiyi şimdi görüntülemek için İnternet\'e bağlı herhangi bir bilgisayardan %s adresine gidin."</string>
     <string name="settings_safetylegal_activity_loading" msgid="8059022597639516348">"Yükleniyor…"</string>
     <string name="lockpassword_choose_your_password_header" msgid="8624900666929394990">"Şifrenizi seçin"</string>
     <string name="lockpassword_choose_your_pin_header" msgid="7598849519816138302">"PIN\'inizi seçin"</string>
@@ -796,8 +853,10 @@
     <string name="lockpattern_too_many_failed_confirmation_attempts_footer" msgid="6759029360597122873">"<xliff:g id="NUMBER">%d</xliff:g> saniye içinde yeniden deneyin."</string>
     <string name="skip_button_label" msgid="8680422740354436943">"İptal"</string>
     <string name="next_button_label" msgid="8890792540116568321">"İleri"</string>
-    <string name="lock_title" msgid="4059246467204273930">"Telefonunuzu güvenlik altına alma"</string>
-    <string name="lock_intro_message" msgid="9100785646737118042"><font size="17">"Kişisel bir ekran kilidi açma deseni oluşturarak telefonunuzu yetkisiz kullanımdan koruyun. "\n<font height="17">\n</font><b>"1"</b>"  Bir sonraki ekranda örnek bir desenin çizilişini izleyin. "\n<font height="17">\n</font><b>"2"</b>"  Hazır olduğunuzda, kendi kişisel kilit açma deseninizi çizin. Değişik desenleri deneyebilirsiniz ancak en az dört noktayı birleştirin. "\n<font height="17">\n</font><b>"3"</b>"  Onaylamak için deseninizi yeniden çizin. "\n<font height="17">\n</font><b>"Başlamaya hazır mısınız? \"İleri\"ye dokunun"</b>". "\n<font height="3">\n</font>"Telefonunuzu korumasız bırakmak için \"İptal\"e dokunun."</font></string>
+    <!-- outdated translation 4059246467204273930 -->     <string name="lock_title" product="tablet" msgid="2909697418179419990">"Telefonunuzu güvenlik altına alma"</string>
+    <string name="lock_title" product="default" msgid="4059246467204273930">"Telefonunuzu güvenlik altına alma"</string>
+    <!-- outdated translation 9100785646737118042 -->     <string name="lock_intro_message" product="tablet" msgid="4544669202394019747"><font size="17">"Kişisel bir ekran kilidi açma deseni oluşturarak telefonunuzu yetkisiz kullanımdan koruyun. "\n<font height="17">\n</font><b>"1"</b>"  Bir sonraki ekranda örnek bir desenin çizilişini izleyin. "\n<font height="17">\n</font><b>"2"</b>"  Hazır olduğunuzda, kendi kişisel kilit açma deseninizi çizin. Değişik desenleri deneyebilirsiniz ancak en az dört noktayı birleştirin. "\n<font height="17">\n</font><b>"3"</b>"  Onaylamak için deseninizi yeniden çizin. "\n<font height="17">\n</font><b>"Başlamaya hazır mısınız? \"İleri\"ye dokunun"</b>". "\n<font height="3">\n</font>"Telefonunuzu korumasız bırakmak için \"İptal\"e dokunun."</font></string>
+    <string name="lock_intro_message" product="default" msgid="9100785646737118042"><font size="17">"Kişisel bir ekran kilidi açma deseni oluşturarak telefonunuzu yetkisiz kullanımdan koruyun. "\n<font height="17">\n</font><b>"1"</b>"  Bir sonraki ekranda örnek bir desenin çizilişini izleyin. "\n<font height="17">\n</font><b>"2"</b>"  Hazır olduğunuzda, kendi kişisel kilit açma deseninizi çizin. Değişik desenleri deneyebilirsiniz ancak en az dört noktayı birleştirin. "\n<font height="17">\n</font><b>"3"</b>"  Onaylamak için deseninizi yeniden çizin. "\n<font height="17">\n</font><b>"Başlamaya hazır mısınız? \"İleri\"ye dokunun"</b>". "\n<font height="3">\n</font>"Telefonunuzu korumasız bırakmak için \"İptal\"e dokunun."</font></string>
     <string name="lock_example_title" msgid="8052305554017485410">"Örnek desen"</string>
     <string name="lock_example_message" msgid="1838650097090632706">"En az dört noktayı birleştirin."\n" "\n"Kendi deseninizi çizmeye hazır olduğunuzda \"İleri\"ye dokunun."</string>
     <string name="manageapplications_settings_title" msgid="5712405848153426706">"Uygulamaları yönet"</string>
@@ -807,7 +866,8 @@
     <string name="applications_settings_header" msgid="6018266337275422250">"Uygulama ayarları"</string>
     <string name="install_applications" msgid="4872012136210802181">"Bilinmeyen kaynaklar"</string>
     <string name="install_unknown_applications" msgid="6612824788917283662">"Market üzerinden alınmayan uygulamaların yüklenmesine izin ver"</string>
-    <string name="install_all_warning" msgid="1923717607319933741">"Telefonunuz ve kişisel verileriniz, bilinmeyen kaynaklardan gelen uygulamaların saldırılarına karşı daha savunmasızdır. Bu uygulamaları kullanmanız sonucunda telefonunuzun başına gelebilecek her tür hasardan ve veri kaybından tarafınızın sorumlu olduğunu kabul edersiniz."</string>
+    <!-- outdated translation 1923717607319933741 -->     <string name="install_all_warning" product="tablet" msgid="8143969767997876735">"Telefonunuz ve kişisel verileriniz, bilinmeyen kaynaklardan gelen uygulamaların saldırılarına karşı daha savunmasızdır. Bu uygulamaları kullanmanız sonucunda telefonunuzun başına gelebilecek her tür hasardan ve veri kaybından tarafınızın sorumlu olduğunu kabul edersiniz."</string>
+    <string name="install_all_warning" product="default" msgid="1923717607319933741">"Telefonunuz ve kişisel verileriniz, bilinmeyen kaynaklardan gelen uygulamaların saldırılarına karşı daha savunmasızdır. Bu uygulamaları kullanmanız sonucunda telefonunuzun başına gelebilecek her tür hasardan ve veri kaybından tarafınızın sorumlu olduğunu kabul edersiniz."</string>
     <string name="application_info_label" msgid="1150486628158409543">"Uygulama bilgileri"</string>
     <string name="storage_label" msgid="8700867073480107253">"Depolama"</string>
     <string name="auto_launch_label" msgid="3012617472833815382">"Varsayılan olarak başlat"</string>
@@ -858,13 +918,15 @@
     <string name="app_factory_reset_dlg_text" msgid="438395129140568893">"Bu Android sistem uygulamasıyla ilgili tüm güncellemeleri kaldırmak istiyor musunuz?"</string>
     <string name="clear_failed_dlg_title" msgid="2387060805294783175">"Verileri temizle"</string>
     <string name="clear_failed_dlg_text" msgid="7943411157007320290">"Veriler uygulama için temizlenemedi"</string>
-    <string name="security_settings_desc" msgid="3116027624526915561">"Bu uygulama telefonunuzda aşağıdakilere erişebilir:"</string>
+    <!-- outdated translation 3116027624526915561 -->     <string name="security_settings_desc" product="tablet" msgid="6158636779728455276">"Bu uygulama telefonunuzda aşağıdakilere erişebilir:"</string>
+    <string name="security_settings_desc" product="default" msgid="3116027624526915561">"Bu uygulama telefonunuzda aşağıdakilere erişebilir:"</string>
     <string name="computing_size" msgid="1599186977475211186">"Hesaplanıyor…"</string>
     <string name="invalid_size_value" msgid="1901940003700269523">"Paket boyutu hesaplanamıyor"</string>
     <string name="empty_list_msg" msgid="2901049162265094971">"Yüklenmiş hiçbir üçüncü taraf uygulamalarınız yok."</string>
     <string name="version_text" msgid="9189073826278676425">"sürüm <xliff:g id="VERSION_NUM">%1$s</xliff:g>"</string>
     <string name="move_app" msgid="5042838441401731346">"Taşı"</string>
-    <string name="move_app_to_internal" msgid="3895430471913858185">"Telefona taşı"</string>
+    <!-- outdated translation 3895430471913858185 -->     <string name="move_app_to_internal" product="tablet" msgid="2299714147283854957">"Telefona taşı"</string>
+    <string name="move_app_to_internal" product="default" msgid="3895430471913858185">"Telefona taşı"</string>
     <string name="move_app_to_sdcard" product="nosdcard" msgid="4350451696315265420">"USB depl birimine taşı"</string>
     <string name="move_app_to_sdcard" product="default" msgid="1143379049903056407">"SD karta taşı"</string>
     <string name="moving" msgid="6431016143218876491">"Taşınıyor"</string>
@@ -912,7 +974,8 @@
     <string name="process_service_in_use_description" msgid="8993335064403217080">"<xliff:g id="COMP_NAME">%1$s</xliff:g> hizmeti kullanımda."</string>
     <string name="process_provider_in_use_description" msgid="5586603325677678940">"Sağlayıcı <xliff:g id="COMP_NAME">%1$s</xliff:g> kullanımda."</string>
     <string name="runningservicedetails_stop_dlg_title" msgid="4253292537154337233">"Sis hiz durdrlsn mu?"</string>
-    <string name="runningservicedetails_stop_dlg_text" msgid="6929716497425738387">"Bu sistem hiz durdurulmasını istediğinize emin misiniz? Durdurulursa, telefonunuzun bazı özellikleri, telfn kapatılıp yeniden açılmadan düzgün çalışmayabilir."</string>
+    <!-- outdated translation 6929716497425738387 -->     <string name="runningservicedetails_stop_dlg_text" product="tablet" msgid="5420033091144016389">"Bu sistem hiz durdurulmasını istediğinize emin misiniz? Durdurulursa, telefonunuzun bazı özellikleri, telfn kapatılıp yeniden açılmadan düzgün çalışmayabilir."</string>
+    <string name="runningservicedetails_stop_dlg_text" product="default" msgid="6929716497425738387">"Bu sistem hiz durdurulmasını istediğinize emin misiniz? Durdurulursa, telefonunuzun bazı özellikleri, telfn kapatılıp yeniden açılmadan düzgün çalışmayabilir."</string>
     <string name="language_settings" msgid="502219872342167227">"Dil ve klavye"</string>
     <string name="language_keyboard_settings_title" msgid="3455826933385341107">"Dil ve klavye ayarları"</string>
     <string name="language_settings_category" msgid="2288258489940617043">"Dil ayarları"</string>
@@ -921,7 +984,7 @@
     <string name="phone_language_summary" msgid="3871309445655554211"></string>
     <string name="auto_replace" msgid="6199184757891937822">"Otomatik değiştir"</string>
     <string name="auto_replace_summary" msgid="370288728200084466">"Yanlış yazılmış kelimeleri düzelt"</string>
-    <string name="auto_caps" msgid="581633131114124121">"Otomatik büyük harf"</string>
+    <!-- outdated translation 581633131114124121 -->     <string name="auto_caps" msgid="6379232078052591265">"Otomatik büyük harf"</string>
     <string name="auto_caps_summary" msgid="6358102538315261466">"Cümlelerin ilk harfini büyük yap"</string>
     <string name="auto_punctuate" msgid="4595367243950425833">"Otomatik noktalama"</string>
     <string name="hardkeyboard_category" msgid="5957168411305769899">"Fiziksel klavye ayarları"</string>
@@ -939,7 +1002,8 @@
     <string name="user_dict_settings_context_menu_delete_title" msgid="9140703913776549054">"Sil"</string>
     <string name="user_dict_settings_empty_text" msgid="6209268025109242806">"Kullanıcı sözlüğünüzde hiçbir kelime yok. Menüyü kullanarak kelime ekleyebilirsiniz."</string>
     <string name="testing" msgid="6584352735303604146">"Test ediliyor"</string>
-    <string name="testing_phone_info" msgid="8656693364332840056">"Telefon bilgileri"</string>
+    <!-- outdated translation 8656693364332840056 -->     <string name="testing_phone_info" product="tablet" msgid="193561832258534798">"Telefon bilgileri"</string>
+    <string name="testing_phone_info" product="default" msgid="8656693364332840056">"Telefon bilgileri"</string>
     <string name="testing_battery_info" msgid="3497865525976497848">"Pil bilgileri"</string>
     <string name="quick_launch_title" msgid="7904609846945905306">"Hızlı başlat"</string>
     <string name="quick_launch_summary" msgid="3453825712466417452">"Uygulama başlatma klavye kısayollarını ayarla"</string>
@@ -998,7 +1062,8 @@
     <string name="accessibility_script_injection_category" msgid="8649951751131431904">"Erişilebilirlik komut dsy"</string>
     <string name="accessibility_script_injection_enabled" msgid="6927896081016611012">"Erişilebilirlik komut dosyalarını indir"</string>
     <string name="accessibility_script_injection_enabled_summary" msgid="3629525134901617621">"Uyg., Google\'dan erişilebilirlik komut dosyaları indirms izin ver"</string>
-    <string name="accessibility_script_injection_security_warning" msgid="9078893361741942109">"Bazı uygulamalar, içeriklerinin daha erişilebilir olması için Google\'dan telefonunuza komut dosyaları indirmesini isteyebilir. Google\'ın telefonunuza erişilebilirlik komut dosyaları yüklemesine izin vermek istediğinizden emin misiniz?"</string>
+    <!-- outdated translation 9078893361741942109 -->     <string name="accessibility_script_injection_security_warning" product="tablet" msgid="1113600871264359828">"Bazı uygulamalar, içeriklerinin daha erişilebilir olması için Google\'dan telefonunuza komut dosyaları indirmesini isteyebilir. Google\'ın telefonunuza erişilebilirlik komut dosyaları yüklemesine izin vermek istediğinizden emin misiniz?"</string>
+    <string name="accessibility_script_injection_security_warning" product="default" msgid="9078893361741942109">"Bazı uygulamalar, içeriklerinin daha erişilebilir olması için Google\'dan telefonunuza komut dosyaları indirmesini isteyebilir. Google\'ın telefonunuza erişilebilirlik komut dosyaları yüklemesine izin vermek istediğinizden emin misiniz?"</string>
     <string name="accessibility_power_button_category" msgid="8545885236482339928">"Güç düğmesi"</string>
     <string name="accessibility_power_button_ends_call" msgid="7698764194501089533">"Güç düğmesi çağrıyı sonlandırır"</string>
     <string name="accessibility_power_button_ends_call_summary" msgid="8878097632186291462">"Çağrı sırasında, Güç düğmesine basıldığında ekranın kapanması yerine çağrı sonlanır"</string>
@@ -1013,7 +1078,7 @@
     <string name="battery_stats_gps_on_label" msgid="1193657533641951256">"GPS açık"</string>
     <string name="battery_stats_wifi_running_label" msgid="3093545080361658269">"Kablosuz"</string>
     <string name="battery_stats_wake_lock_label" msgid="1908942681902324095">"Uyanık"</string>
-    <string name="battery_stats_phone_signal_label" msgid="6822042940376636775">"Telefon sinyali"</string>
+    <!-- outdated translation 6822042940376636775 -->     <string name="battery_stats_phone_signal_label" msgid="4137799310329041341">"Telefon sinyali"</string>
     <!-- no translation found for battery_stats_last_duration (1535831453827905957) -->
     <skip />
     <string name="awake" msgid="387122265874485088">"Cihazın açılma zamanı"</string>
@@ -1029,13 +1094,15 @@
     <string name="power_bluetooth" msgid="4373329044379008289">"Bluetooth"</string>
     <string name="power_cell" msgid="6596471490976003056">"Telefon beklemesi"</string>
     <string name="power_phone" msgid="5392641106474567277">"Sesli aramalar"</string>
-    <string name="power_idle" msgid="9055659695602194990">"Telefon boşta"</string>
+    <!-- outdated translation 9055659695602194990 -->     <string name="power_idle" product="tablet" msgid="4612478572401640759">"Telefon boşta"</string>
+    <string name="power_idle" product="default" msgid="9055659695602194990">"Telefon boşta"</string>
     <string name="usage_type_cpu" msgid="715162150698338714">"Toplam CPU"</string>
     <string name="usage_type_cpu_foreground" msgid="6500579611933211831">"CPU ön planı"</string>
     <string name="usage_type_wake_lock" msgid="5125438890233677880">"Uyanık tut"</string>
     <string name="usage_type_gps" msgid="7989688715128160790">"GPS"</string>
     <string name="usage_type_wifi_running" msgid="8234997940652067049">"Kablosuz çalışıyor"</string>
-    <string name="usage_type_phone" msgid="9108247984998041853">"Telefon"</string>
+    <!-- outdated translation 9108247984998041853 -->     <string name="usage_type_phone" product="tablet" msgid="262638572890253393">"Telefon"</string>
+    <string name="usage_type_phone" product="default" msgid="9108247984998041853">"Telefon"</string>
     <string name="usage_type_data_send" msgid="2857401966985425427">"Gönderilen veriler"</string>
     <string name="usage_type_data_recv" msgid="7251090882025234185">"Alınan veriler"</string>
     <string name="usage_type_audio" msgid="6957269406840886290">"Ses"</string>
@@ -1049,7 +1116,8 @@
     <string name="battery_action_wifi" msgid="2272741639606146903">"Kablosuz ayarları"</string>
     <string name="battery_action_bluetooth" msgid="8374789049507723142">"Bluetooth ayarları"</string>
     <string name="battery_desc_voice" msgid="8980322055722959211">"Sesli aramalar tarafından kullanılan pil"</string>
-    <string name="battery_desc_standby" msgid="3009080001948091424">"Telefon boştayken kullanılan pil"</string>
+    <!-- outdated translation 3009080001948091424 -->     <string name="battery_desc_standby" product="tablet" msgid="6284747418668280364">"Telefon boştayken kullanılan pil"</string>
+    <string name="battery_desc_standby" product="default" msgid="3009080001948091424">"Telefon boştayken kullanılan pil"</string>
     <string name="battery_desc_radio" msgid="5479196477223185367">"Telefon radyosu tarafından kullanılan pil"</string>
     <string name="battery_sugg_radio" msgid="8211336978326295047">"Cep telefonunun kapsama alanı dışında olduğu yerlerde pilden tasarruf etmek için uçak moduna geçin"</string>
     <string name="battery_desc_display" msgid="5432795282958076557">"Ekran ve arka aydınlatma ışığı tarafından kullanılan pil"</string>

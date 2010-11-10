@@ -115,9 +115,11 @@
     <string name="bluetooth_notif_message" msgid="5381418499788668724">"Tscherner per associar cuntut "</string>
     <string name="device_picker" msgid="8721012448931226323">"Tscherna dad apparats bluetooth"</string>
     <string name="bluetooth_permission_request" msgid="1523129741266262748">"Dumonda d\'autorisaziun Bluetooth"</string>
-    <string name="bluetooth_ask_enablement" msgid="2342558978033892004">"Ina applicaziun sin Voss telefon dumonda l\'autorisaziun dad activar bluetooth. Permetter?"</string>
-    <string name="bluetooth_ask_discovery" msgid="669870705606180872">"Ina applicaziun sin Voss telefonin dumonda l\'autorisaziun dad activar la visibilitad da Voss telefonin per auters apparats da bluetooth durant <xliff:g id="TIMEOUT">%1$d</xliff:g> secundas. Vulais Vus quai?"</string>
-    <string name="bluetooth_ask_enablement_and_discovery" msgid="7220210326619399542">"Ina applicaziun sin Voss telefonin dumonda l\'autorisaziun dad activar bluetooth e far visibel Voss telefonin per auters apparats durant <xliff:g id="TIMEOUT">%1$d</xliff:g> secundas. Vulais Vus quai?"</string>
+    <!-- outdated translation 2342558978033892004 -->     <string name="bluetooth_ask_enablement" msgid="8211158472876087588">"Ina applicaziun sin Voss telefon dumonda l\'autorisaziun dad activar bluetooth. Permetter?"</string>
+    <!-- outdated translation 669870705606180872 -->     <string name="bluetooth_ask_discovery" product="tablet" msgid="5950965604673262829">"Ina applicaziun sin Voss telefonin dumonda l\'autorisaziun dad activar la visibilitad da Voss telefonin per auters apparats da bluetooth durant <xliff:g id="TIMEOUT">%1$d</xliff:g> secundas. Vulais Vus quai?"</string>
+    <string name="bluetooth_ask_discovery" product="default" msgid="669870705606180872">"Ina applicaziun sin Voss telefonin dumonda l\'autorisaziun dad activar la visibilitad da Voss telefonin per auters apparats da bluetooth durant <xliff:g id="TIMEOUT">%1$d</xliff:g> secundas. Vulais Vus quai?"</string>
+    <!-- outdated translation 7220210326619399542 -->     <string name="bluetooth_ask_enablement_and_discovery" product="tablet" msgid="5716077575971497298">"Ina applicaziun sin Voss telefonin dumonda l\'autorisaziun dad activar bluetooth e far visibel Voss telefonin per auters apparats durant <xliff:g id="TIMEOUT">%1$d</xliff:g> secundas. Vulais Vus quai?"</string>
+    <string name="bluetooth_ask_enablement_and_discovery" product="default" msgid="7220210326619399542">"Ina applicaziun sin Voss telefonin dumonda l\'autorisaziun dad activar bluetooth e far visibel Voss telefonin per auters apparats durant <xliff:g id="TIMEOUT">%1$d</xliff:g> secundas. Vulais Vus quai?"</string>
     <string name="bluetooth_turning_on" msgid="3107102168379705771">"Bluetooth vegn activà…"</string>
     <string name="date_and_time" msgid="4114084177056654663">"Parameters da data e da temp"</string>
     <string name="date_time_12_hour_sample" msgid="3259617262618020574">"1:00:00"</string>
@@ -135,22 +137,18 @@
     <string name="intent_sender_startactivity_text" msgid="5080516029580421895">"Iniziar <xliff:g id="ACTIVITY">activity</xliff:g>"</string>
     <string name="intent_sender_resource_label" msgid="6963659726895482829">"<xliff:g id="RESOURCE">Resource</xliff:g>:"</string>
     <string name="intent_sender_account_label" msgid="465210404475603404">"Conto:"</string>
-    <!-- no translation found for proxy_settings_title (6262282922722097473) -->
-    <skip />
-    <!-- no translation found for proxy_settings_summary (7898928000758321486) -->
-    <skip />
+    <string name="proxy_settings_title" msgid="6262282922722097473">"Parameters proxy"</string>
+    <string name="proxy_settings_summary" msgid="7898928000758321486">"Definir il proxy HTTP global e las glistas d\'exclusiun"</string>
     <string name="proxy_clear_text" msgid="5555400754952012657">"Stizzar"</string>
     <string name="proxy_port_label" msgid="2623639656638472491">"Port"</string>
-    <!-- no translation found for proxy_exclusionlist_label (204409815790850313) -->
-    <skip />
+    <string name="proxy_exclusionlist_label" msgid="204409815790850313">"Nagin proxy per"</string>
     <string name="proxy_defaultView_text" msgid="6387985519141433291">"Restaurar il standard"</string>
-    <!-- outdated translation 477348175123635416 -->     <string name="proxy_action_text" msgid="2957063145357903951">"Memorisar"</string>
+    <string name="proxy_action_text" msgid="2957063145357903951">"Finì"</string>
     <string name="proxy_hostname_label" msgid="7531298584350977540">"Num da host"</string>
     <string name="proxy_error" msgid="8926675299638611451">"Attenziun"</string>
     <string name="proxy_error_dismiss" msgid="4993171795485460060">"OK"</string>
     <string name="proxy_error_invalid_host" msgid="9120776460063182119">"Il num da host endatà è nunvalid."</string>
-    <!-- no translation found for proxy_error_invalid_exclusion_list (4753810662233875893) -->
-    <skip />
+    <string name="proxy_error_invalid_exclusion_list" msgid="4753810662233875893">"\"La glista d\'exclusiun che Vus avais endatà n\'è betg formatada correctamain. Endatai per plaschair ina glista da domenas exclusas, separadas cun commas.\""</string>
     <string name="proxy_error_empty_port" msgid="3525734169948795417">"Vus stuais endatar ina valur en il champ Port."</string>
     <string name="proxy_error_empty_host_set_port" msgid="2451694104858226781">"\"Il champ «Port» sto esser vid, sch\'il champ «Host» è vid.\""</string>
     <string name="proxy_error_invalid_port" msgid="1816315605424943626">"Il port endatà è nunvalid."</string>
@@ -210,12 +208,13 @@
     <!-- no translation found for skip_label (47510779345218297) -->
     <skip />
     <string name="next_label" msgid="4693520878012668114">"Vinavant"</string>
-    <!-- outdated translation 4034157617842965844 -->     <string name="language_picker_title" msgid="5349877711342869319">"Lingua"</string>
+    <string name="language_picker_title" msgid="5349877711342869319">"Lingua"</string>
     <string name="activity_picker_label" msgid="4910700713930693329">"Tscherner in\'acziun"</string>
     <string name="device_info_label" msgid="6551553813651711205">"Infurmaziuns da l\'apparat"</string>
     <string name="battery_info_label" msgid="4132685016148679403">"Infurmaziuns da l\'accu"</string>
     <string name="display_label" msgid="7403874003169865762">"Visur"</string>
-    <string name="phone_info_label" msgid="2127552523124277664">"Infos davart il telefon"</string>
+    <!-- outdated translation 2127552523124277664 -->     <string name="phone_info_label" product="tablet" msgid="7820855350955963628">"Infos davart il telefon"</string>
+    <string name="phone_info_label" product="default" msgid="2127552523124277664">"Infos davart il telefon"</string>
     <!-- outdated translation 5743100901106177102 -->     <string name="sd_card_settings_label" product="nosdcard" msgid="8101475181301178428">"Carta SD"</string>
     <string name="sd_card_settings_label" product="default" msgid="5743100901106177102">"Carta SD"</string>
     <string name="proxy_settings_label" msgid="3271174136184391743">"Parameters proxy"</string>
@@ -223,7 +222,7 @@
     <string name="settings_label" msgid="1626402585530130914">"Parameters"</string>
     <!-- no translation found for settings_label_launcher (8344735489639482340) -->
     <skip />
-    <string name="settings_shortcut" msgid="3672145147925639262">"Parameters"</string>
+    <!-- outdated translation 3672145147925639262 -->     <string name="settings_shortcut" msgid="8597387747077828217">"Parameters"</string>
     <string name="airplane_mode" msgid="8837269988154128601">"Modus d\'aviun"</string>
     <string name="airplane_mode_summary" msgid="3154817401368780988">"Deactivar tut las connexiuns senza fil"</string>
     <string name="airplane_mode_turning_on" msgid="8871739222526957255">"Deactivar connexiuns senza fil…"</string>
@@ -271,28 +270,20 @@
     <string name="security_settings_summary" msgid="967393342537986570">"\"Definir ils parameters da Mia posiziun, da la debloccada dal visur, da la bloccada da la carta SIM e da la bloccada da la memoria da las infurmaziuns d\'annunzia\""</string>
     <string name="cdma_security_settings_summary" msgid="6068799952798901542">"\"Definir mia posiziun, debloccar il visur, bloccar la memoria dad infurmaziuns d\'annunzia\""</string>
     <string name="security_passwords_title" msgid="2930627259125138363">"Pleds-clav"</string>
-    <!-- no translation found for lock_settings_picker_title (3973555216065628262) -->
-    <skip />
-    <!-- no translation found for unlock_set_unlock_launch_picker_title (1129684221223017902) -->
-    <skip />
-    <!-- no translation found for unlock_set_unlock_launch_picker_summary (1667332113134720845) -->
-    <skip />
-    <!-- no translation found for unlock_set_unlock_launch_picker_change_title (6987228635944678726) -->
-    <skip />
-    <!-- no translation found for unlock_set_unlock_launch_picker_change_summary (2790960639554590668) -->
-    <skip />
-    <!-- no translation found for unlock_set_unlock_none_title (3760684669884671990) -->
-    <skip />
-    <!-- no translation found for unlock_set_unlock_none_summary (2658550480388272618) -->
-    <skip />
-    <!-- outdated translation 1896502750816432974 -->     <string name="unlock_set_unlock_pattern_title" msgid="2912067603917311700">"Crear in schema da debloccaziun"</string>
-    <!-- outdated translation 1235339327020445576 -->     <string name="unlock_set_unlock_pattern_summary" msgid="3018395214738645405">"Per debloccar stuais Vus dissegnar in schema."</string>
-    <!-- outdated translation 2206721045699671063 -->     <string name="unlock_set_unlock_pin_title" msgid="5846029709462329515">"Definir il PIN per debloccar"</string>
-    <!-- outdated translation 3898840802187521463 -->     <string name="unlock_set_unlock_pin_summary" msgid="4131169672844263316">"Per debloccar è in PIN numeric necessari"</string>
-    <!-- outdated translation 2410408982973923603 -->     <string name="unlock_set_unlock_password_title" msgid="8775603825675090937">"Definir il pled-clav da debloccaziun"</string>
-    <!-- outdated translation 4711043487823726994 -->     <string name="unlock_set_unlock_password_summary" msgid="4623254789833899286">"Per debloccar vegn dumandà in pled-clav."</string>
-    <!-- no translation found for unlock_set_unlock_disabled_summary (736557879526940324) -->
-    <skip />
+    <string name="lock_settings_picker_title" msgid="3973555216065628262">"Segirezza da la debloccaziun dal visur"</string>
+    <string name="unlock_set_unlock_launch_picker_title" msgid="1129684221223017902">"Endrizzar la bloccaziun dal visur"</string>
+    <string name="unlock_set_unlock_launch_picker_summary" msgid="1667332113134720845">"\"Bloccar il visur cun agid dad in schema, in code PIN u in pled-clav\""</string>
+    <string name="unlock_set_unlock_launch_picker_change_title" msgid="6987228635944678726">"Midar la bloccaziun dal visur"</string>
+    <string name="unlock_set_unlock_launch_picker_change_summary" msgid="2790960639554590668">"\"Modifitgar u deactivar las bloccaziuns (code PIN, schema e pled-clav).\""</string>
+    <string name="unlock_set_unlock_none_title" msgid="3760684669884671990">"Nagin"</string>
+    <string name="unlock_set_unlock_none_summary" msgid="2658550480388272618">"Deactivar la segirezza da debloccaziun dal visur"</string>
+    <string name="unlock_set_unlock_pattern_title" msgid="2912067603917311700">"Schema"</string>
+    <string name="unlock_set_unlock_pattern_summary" msgid="3018395214738645405">"Dissegnar in schema per debloccar il visur"</string>
+    <string name="unlock_set_unlock_pin_title" msgid="5846029709462329515">"PIN"</string>
+    <string name="unlock_set_unlock_pin_summary" msgid="4131169672844263316">"Endatai in PIN numeric per debloccar il visur"</string>
+    <string name="unlock_set_unlock_password_title" msgid="8775603825675090937">"Pled-clav"</string>
+    <string name="unlock_set_unlock_password_summary" msgid="4623254789833899286">"Endatai in pled-clav per debloccar il visur"</string>
+    <!-- outdated translation 736557879526940324 -->     <string name="unlock_set_unlock_disabled_summary" msgid="8816944391772300580">"Deactivà dad in administratur a distanza"</string>
     <string name="unlock_disable_lock_title" msgid="1427036227416979120">"Deactivar la bloccada dal visur"</string>
     <string name="unlock_disable_lock_pattern_summary" msgid="6801602880568869201">"Allontanar in schema da debloccaziun"</string>
     <string name="unlock_disable_lock_pin_summary" msgid="8856842745366993387">"Allontanar il PIN da debloccaziun"</string>
@@ -302,31 +293,41 @@
     <string name="unlock_change_lock_password_title" msgid="5606298470358768865">"Midar il pled-clav da debloccaziun"</string>
     <string name="lockpassword_password_too_short" msgid="7328975683669256660">"Il pled-clav sto cuntegnair almain %d caracters."</string>
     <string name="lockpassword_pin_too_short" msgid="2252847623267704683">"Il PIN sto cuntegnair almain %d caracters."</string>
-    <!-- outdated translation 6506047902828925216 -->     <string name="lockpassword_press_continue" msgid="122706614386757182">"\"Tscherni \"\"Vinavant\"\", sche Vus essas a fin.\""</string>
+    <string name="lockpassword_press_continue" msgid="122706614386757182">"Smatgai sin Vinavant sche Vus essas a fin."</string>
     <string name="lockpassword_continue_label" msgid="4602203784934526940">"Vinavant"</string>
     <string name="lockpassword_password_too_long" msgid="7354418473281442589">"Il PIN dastga cuntegnair maximalmain %d caracters."</string>
     <string name="lockpassword_pin_too_long" msgid="6290317580664119373">"Il PIN dastga sin il pli cuntegnair %d segns."</string>
     <string name="lockpassword_pin_contains_non_digits" msgid="3379277100136600632">"Il PIN dastga mo cuntegnair las cifras 0-9."</string>
-    <!-- no translation found for lockpassword_pin_recently_used (2729073062730842496) -->
-    <skip />
+    <string name="lockpassword_pin_recently_used" msgid="2729073062730842496">"L\'administratur dad apparats na permetta betg l\'utilisaziun dad in PIN precedent"</string>
     <string name="lockpassword_illegal_character" msgid="6204396794254688549">"Il pled-clav cuntegna in caracter nunvalid."</string>
     <string name="lockpassword_password_requires_alpha" msgid="5668524505560400449">"Il pled-clav sto cuntegnair almain in caracter"</string>
     <string name="lockpassword_password_requires_digit" msgid="4840579514154254907">"Il pled-clav sto cuntegnair almain ina cifra"</string>
     <string name="lockpassword_password_requires_symbol" msgid="4140602725865312078">"Il pled-clav sto cuntegnair almain in simbol"</string>
-    <!-- no translation found for lockpassword_password_requires_letters:one (1462968118065694590) -->
-    <!-- no translation found for lockpassword_password_requires_letters:other (7278096339907683541) -->
-    <!-- no translation found for lockpassword_password_requires_lowercase:one (2048653993044269649) -->
-    <!-- no translation found for lockpassword_password_requires_lowercase:other (588499075580432178) -->
-    <!-- no translation found for lockpassword_password_requires_uppercase:one (7677454174080582601) -->
-    <!-- no translation found for lockpassword_password_requires_uppercase:other (2183090598541826806) -->
-    <!-- no translation found for lockpassword_password_requires_numeric:one (8585088032818933985) -->
-    <!-- no translation found for lockpassword_password_requires_numeric:other (995673409754935278) -->
-    <!-- no translation found for lockpassword_password_requires_symbols:one (3930886641317826293) -->
-    <!-- no translation found for lockpassword_password_requires_symbols:other (3047460862484105274) -->
-    <!-- no translation found for lockpassword_password_requires_nonletter:one (1716355580615489062) -->
-    <!-- no translation found for lockpassword_password_requires_nonletter:other (5574191164708145973) -->
-    <!-- no translation found for lockpassword_password_recently_used (2739642871806935825) -->
-    <skip />
+  <plurals name="lockpassword_password_requires_letters">
+    <item quantity="one" msgid="1462968118065694590">"Il pled-clav sto cuntegnair almain 1 bustab."</item>
+    <item quantity="other" msgid="7278096339907683541">"Il pled-clav sto cuntegnair almain %d bustabs."</item>
+  </plurals>
+  <plurals name="lockpassword_password_requires_lowercase">
+    <item quantity="one" msgid="2048653993044269649">"Il pled-clav sto cuntegnair almain ina minuscla"</item>
+    <item quantity="other" msgid="588499075580432178">"Il pled-clav sto cuntegnair almain %d minusclas."</item>
+  </plurals>
+  <plurals name="lockpassword_password_requires_uppercase">
+    <item quantity="one" msgid="7677454174080582601">"Il pled-clav sto cuntegnair almain ina maiuscla"</item>
+    <item quantity="other" msgid="2183090598541826806">"Il pled-clav sto cuntegnair almain %d maiusclas"</item>
+  </plurals>
+  <plurals name="lockpassword_password_requires_numeric">
+    <item quantity="one" msgid="8585088032818933985">"Il pled-clav sto cuntegnair almain ina cifra"</item>
+    <item quantity="other" msgid="995673409754935278">"Il pled-clav sto cuntegnair almain %d cifras."</item>
+  </plurals>
+  <plurals name="lockpassword_password_requires_symbols">
+    <item quantity="one" msgid="3930886641317826293">"Il pled-clav sto cuntegnair almain in segn spezial"</item>
+    <item quantity="other" msgid="3047460862484105274">"Il pled-clav sto cuntegnair almain %d segns spezials."</item>
+  </plurals>
+  <plurals name="lockpassword_password_requires_nonletter">
+    <item quantity="one" msgid="1716355580615489062">"Il pled-clav sto cuntegnair almain in caracter che n\'è betg in bustab."</item>
+    <item quantity="other" msgid="5574191164708145973">"Il pled-clav sto almain cuntegnair %d caracters che n\'èn betg bustabs."</item>
+  </plurals>
+    <string name="lockpassword_password_recently_used" msgid="2739642871806935825">"L\'administratur dad apparats na permetta betg l\'utilisaziun dad in pled-clav precedent"</string>
     <string name="lockpassword_ok_label" msgid="313822574062553672">"OK"</string>
     <string name="lockpassword_cancel_label" msgid="8818529276331121899">"Interrumper"</string>
     <string name="device_admin_title" msgid="3562216873644263804">"Administraziun dals apparats"</string>
@@ -354,6 +355,14 @@
     <string name="bluetooth_pairing_rejected_error_message" msgid="1648157108520832454">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> ha refusà l\'associaziun."</string>
     <string name="bluetooth_connecting_error_message" msgid="1779660510084746802">"Ina errur è cumparida durant l\'emprova da connectar cun <xliff:g id="DEVICE_NAME">%1$s</xliff:g>."</string>
     <string name="bluetooth_preference_scan_title" msgid="2277464653118896016">"Tschertgar apparats"</string>
+    <!-- no translation found for bluetooth_preference_find_nearby_title (5087410003465463318) -->
+    <skip />
+    <!-- no translation found for bluetooth_preference_device_settings (907776049862799122) -->
+    <skip />
+    <!-- no translation found for bluetooth_preference_paired_devices (1970524193086791964) -->
+    <skip />
+    <!-- no translation found for bluetooth_preference_found_devices (3133019331974936204) -->
+    <skip />
     <string name="bluetooth_device_context_connect" msgid="3997659895003244941">"Connectar"</string>
     <string name="bluetooth_device_context_disconnect" msgid="8220072022970148683">"Deconnectar"</string>
     <string name="bluetooth_device_context_pair_connect" msgid="7611522504813927727">"Associar e connectar"</string>
@@ -362,36 +371,47 @@
     <string name="bluetooth_device_context_connect_advanced" msgid="2643129703569788771">"Opziuns…"</string>
     <string name="bluetooth_connect_specific_profiles_title" msgid="6952214406025825164">"Connectar cun…"</string>
     <string name="bluetooth_profile_a2dp" msgid="3259633293424539529">"Multimedia"</string>
-    <string name="bluetooth_profile_headset" msgid="1874975688666658946">"Telefon"</string>
+    <!-- outdated translation 1874975688666658946 -->     <string name="bluetooth_profile_headset" product="tablet" msgid="2252738313413646294">"Telefon"</string>
+    <string name="bluetooth_profile_headset" product="default" msgid="1874975688666658946">"Telefon"</string>
     <string name="bluetooth_profile_opp" msgid="3799470046565284440">"Transmissiun"</string>
-    <!-- no translation found for bluetooth_profile_hid (3000858580917633478) -->
-    <skip />
-    <!-- no translation found for bluetooth_profile_pan (4225813400648547154) -->
-    <skip />
+    <string name="bluetooth_profile_hid" msgid="3000858580917633478">"Apparat d\'endataziun"</string>
+    <string name="bluetooth_profile_pan" msgid="4225813400648547154">"Tethering"</string>
     <string name="bluetooth_summary_connected_to_a2dp" msgid="510833839847758664">"Connectà cun il sistem d\'audio da las medias"</string>
-    <string name="bluetooth_summary_connected_to_headset" msgid="4876496372728623918">"Connectà cun ils parameters audio dal telefon"</string>
+    <!-- outdated translation 4876496372728623918 -->     <string name="bluetooth_summary_connected_to_headset" product="tablet" msgid="598335151406893070">"Connectà cun ils parameters audio dal telefon"</string>
+    <string name="bluetooth_summary_connected_to_headset" product="default" msgid="4876496372728623918">"Connectà cun ils parameters audio dal telefon"</string>
     <string name="bluetooth_summary_connected_to_a2dp_headset" msgid="3045032710457800891">"Connectà cun ils parameters audio dal telefonin e da las medias"</string>
-    <!-- no translation found for bluetooth_summary_connected_to_hid (8147499644396475561) -->
+    <string name="bluetooth_summary_connected_to_hid" msgid="8147499644396475561">"Connectà cun in apparat d\'endataziun"</string>
+    <string name="bluetooth_summary_connected_to_pan" msgid="3157622705092537266">"Tethering activ"</string>
+    <!-- no translation found for bluetooth_disconnect_a2dp_profile (3524648279150937177) -->
     <skip />
-    <!-- no translation found for bluetooth_summary_connected_to_pan (3157622705092537266) -->
+    <!-- no translation found for bluetooth_disconnect_headset_profile (3656117361616583255) -->
+    <skip />
+    <!-- no translation found for bluetooth_disconnect_headset_profile (8343033989250953720) -->
+    <skip />
+    <!-- no translation found for bluetooth_disconnect_hid_profile (3282295189719352075) -->
+    <skip />
+    <!-- no translation found for bluetooth_disconnect_pan_profile (877883150720888525) -->
     <skip />
     <string name="bluetooth_device_advanced_title" msgid="528816860793581131">"Opziuns da <xliff:g id="DEVICE_NAME">%1$s</xliff:g>"</string>
+    <!-- no translation found for bluetooth_device_advanced_device_actions_title (3793430949811946844) -->
+    <skip />
     <string name="bluetooth_device_advanced_online_mode_title" msgid="3689050071425683114">"Connectar"</string>
     <string name="bluetooth_device_advanced_online_mode_summary" msgid="1204424107263248336">"Connectar cun in apparat bluetooth"</string>
     <string name="bluetooth_device_advanced_profile_header_title" msgid="3764437426089639639">"Profils"</string>
+    <!-- no translation found for bluetooth_device_advanced_rename_device (350508394033808532) -->
+    <skip />
+    <!-- no translation found for bluetooth_device_advanced_enable_opp_title (8222550640371627365) -->
+    <skip />
     <string name="bluetooth_a2dp_profile_summary_connected" msgid="963376081347721598">"Connectà cun ils parameters audio da las medias"</string>
     <string name="bluetooth_headset_profile_summary_connected" msgid="7661070206715520671">"Connectà cun il sistem dad audio dal telefonin"</string>
     <string name="bluetooth_opp_profile_summary_connected" msgid="2611913495968309066">"Connectà cun il server da transmissiun da datotecas"</string>
     <string name="bluetooth_opp_profile_summary_not_connected" msgid="1267091356089086285">"Betg connectà cun il server da transmissiun da datotecas"</string>
-    <!-- no translation found for bluetooth_hid_profile_summary_connected (3381760054215168689) -->
-    <skip />
-    <!-- no translation found for bluetooth_pan_profile_summary_connected (7456487225516323485) -->
-    <skip />
+    <string name="bluetooth_hid_profile_summary_connected" msgid="3381760054215168689">"Connectà cun in apparat d\'endataziun"</string>
+    <string name="bluetooth_pan_profile_summary_connected" msgid="7456487225516323485">"Tethering activ"</string>
     <string name="bluetooth_a2dp_profile_summary_use_for" msgid="4630849022250168427">"Utilisar per ils parameters dad audio da las medias"</string>
     <string name="bluetooth_headset_profile_summary_use_for" msgid="8705753622443862627">"Utilisar per ils parameters audio dal telefon"</string>
     <string name="bluetooth_opp_profile_summary_use_for" msgid="1255674547144769756">"Utilisar per la transmissiun da datotecas"</string>
-    <!-- no translation found for bluetooth_hid_profile_summary_use_for (232727040453645139) -->
-    <skip />
+    <string name="bluetooth_hid_profile_summary_use_for" msgid="232727040453645139">"Utilisar per l\'input"</string>
     <string name="bluetooth_dock_settings" msgid="3218335822716052885">"Parameters da la basa"</string>
     <string name="bluetooth_dock_settings_title" msgid="5543069893044375188">"Utilisar la basa per l\'audio"</string>
     <string name="bluetooth_dock_settings_headset" msgid="1001821426078644650">"Sco telefon ad autpledader"</string>
@@ -438,8 +458,7 @@
     <string name="wifi_speed" msgid="3526198708812322037">"Sveltezza da la connexiun"</string>
     <string name="wifi_ip_address" msgid="1440054061044402918">"Adressa IP"</string>
     <string name="wifi_eap_method" msgid="8529436133640730382">"Metoda EAP"</string>
-    <!-- no translation found for please_select_phase2 (5231074529772044898) -->
-    <skip />
+    <string name="please_select_phase2" msgid="5231074529772044898">"Autentificaziun fasa 2"</string>
     <string name="wifi_eap_ca_cert" msgid="3521574865488892851">"Certificat CA"</string>
     <string name="wifi_eap_user_cert" msgid="1291089413368160789">"Certificat utilisader"</string>
     <string name="wifi_eap_identity" msgid="4359453783379679103">"Identitad"</string>
@@ -463,17 +482,22 @@
     <string name="wifi_forget" msgid="8168174695608386644">"Allontanar"</string>
     <string name="wifi_save" msgid="3331121567988522826">"Memorisar"</string>
     <string name="wifi_cancel" msgid="6763568902542968964">"Interrumper"</string>
+    <!-- no translation found for wifi_back (249038475821092060) -->
+    <skip />
+    <!-- no translation found for wifi_detail (6321441611324424140) -->
+    <skip />
     <string name="wifi_advanced_titlebar" msgid="5419052271935350999">"Avanzà"</string>
-    <string name="wifi_setting_num_channels_title" msgid="694031537019656132">"Domena regulatur"</string>
-    <string name="wifi_setting_num_channels_summary" msgid="4889355096717099141">"Definir il dumber da chanals dad utilisar"</string>
-    <string name="wifi_setting_num_channels_error" msgid="5765443843427870721">"Cun endrizzar la domena è cumparì in problem."</string>
-    <string name="wifi_setting_num_channels_channel_phrase" msgid="1269381923672908636">"<xliff:g id="NUM_CHANNELS">%1$d</xliff:g> chanals"</string>
     <string name="wifi_setting_sleep_policy_title" msgid="1367731352485585528">"Directiva da standby WLAN"</string>
     <string name="wifi_setting_sleep_policy_summary" msgid="7573693311804602041">"Definir cura ch\'i duai vegnir midà da WLAN sin la rait da telefon"</string>
     <string name="wifi_setting_sleep_policy_error" msgid="5103670439972135148">"Cun endrizzar ina directiva da standby è cumparì in problem."</string>
-    <string name="wifi_advanced_mac_address_title" msgid="6571335466330978393">"Adressa MAC"</string>
-    <!-- no translation found for wifi_advanced_ip_address_title (6215297094363164846) -->
+    <!-- no translation found for wifi_setting_frequency_band_title (7493768705046080060) -->
     <skip />
+    <!-- no translation found for wifi_setting_frequency_band_summary (3250740757118009784) -->
+    <skip />
+    <!-- no translation found for wifi_setting_frequency_band_error (837281974489794378) -->
+    <skip />
+    <string name="wifi_advanced_mac_address_title" msgid="6571335466330978393">"Adressa MAC"</string>
+    <string name="wifi_advanced_ip_address_title" msgid="6215297094363164846">"Adressa IP"</string>
     <string name="wifi_ip_settings_titlebar" msgid="4345739031248760326">"Parameters IP"</string>
     <string name="wifi_ip_settings_menu_save" msgid="7296724066102908366">"Memorisar"</string>
     <string name="wifi_ip_settings_menu_cancel" msgid="6582567330136502340">"Interrumper"</string>
@@ -490,30 +514,30 @@
     <string name="wifi_gateway" msgid="163914742461092086">"Gateway"</string>
     <!-- no translation found for wifi_network_prefix_length (3028785234245085998) -->
     <skip />
-    <!-- outdated translation 796007268580464534 -->     <string name="wifi_tether_checkbox_text" msgid="6961605862058056788">"WiFi-Tethering"</string>
-    <!-- outdated translation 6758080605207549918 -->     <string name="wifi_tether_enabled_subtext" msgid="8948641212931906143">"Punct d\'access <xliff:g id="NETWORK_SSID">%1$s</xliff:g> activ"</string>
-    <!-- outdated translation 4379214348183654280 -->     <string name="wifi_tether_failed_subtext" msgid="2654888578056042315">"Errur da WiFi-Tethering"</string>
-    <!-- outdated translation 8831276059149506799 -->     <string name="wifi_tether_settings_text" msgid="123573487844470195">"Parameters da tethering cun WiFi"</string>
-    <!-- outdated translation 3415164631321782704 -->     <string name="wifi_tether_settings_subtext" msgid="8064755682383367008">"Configurar ed administrar il punct d\'access"</string>
-    <!-- outdated translation 3233393750798545228 -->     <string name="wifi_tether_settings_title" msgid="3749063216348284432">"Parameters da tethering cun WiFi"</string>
-    <!-- outdated translation 7849700175083202171 -->     <string name="wifi_tether_configure_ap_text" msgid="3474995108398156258">"Configurar il punct d\'access"</string>
-    <!-- outdated translation 54089556089657247 -->     <string name="wifi_tether_configure_subtext" msgid="1927454307836232128">"Punct d\'access <xliff:g id="NETWORK_SSID">%1$s</xliff:g> <xliff:g id="NETWORK_SECURITY">%2$s</xliff:g>"</string>
-    <!-- outdated translation 4491822321218336928 -->     <string name="wifi_tether_configure_ssid_default" msgid="8467525402622138547">"Punct d\'access Android"</string>
+    <string name="wifi_tether_checkbox_text" msgid="6961605862058056788">"Punct d\'access WLAN mobil"</string>
+    <string name="wifi_tether_enabled_subtext" msgid="8948641212931906143">"Punct d\'access WLAN mobil <xliff:g id="NETWORK_SSID">%1$s</xliff:g> activ"</string>
+    <string name="wifi_tether_failed_subtext" msgid="2654888578056042315">"Errur en connex cun il punct d\'access WLAN mobil"</string>
+    <string name="wifi_tether_settings_text" msgid="123573487844470195">"Parameters dal punct d\'access WLAN"</string>
+    <string name="wifi_tether_settings_subtext" msgid="8064755682383367008">"Configurar ed administrar il punct d\'access WLAN mobil"</string>
+    <string name="wifi_tether_settings_title" msgid="3749063216348284432">"Parameters dal punct d\'access WLAN mobil"</string>
+    <string name="wifi_tether_configure_ap_text" msgid="3474995108398156258">"Configurar il punct d\'access WLAN"</string>
+    <string name="wifi_tether_configure_subtext" msgid="1927454307836232128">"Punct d\'access WLAN mobil <xliff:g id="NETWORK_SSID">%1$s</xliff:g> <xliff:g id="NETWORK_SECURITY">%2$s</xliff:g>"</string>
+    <string name="wifi_tether_configure_ssid_default" msgid="8467525402622138547">"AndroidHotspot"</string>
     <string name="sound_settings_title" msgid="8735891486683305886">"Tun"</string>
     <string name="display_settings_title" msgid="1708697328627382561">"Visur"</string>
     <string name="sound_settings" msgid="5007659014828162881">"Parameters da tun"</string>
     <string name="silent_mode_title" msgid="3181479108593217704">"Modus silenzius"</string>
     <string name="silent_mode_summary" msgid="3309650676072917899">"\"Nagin tun, danor per medias e svegliarin\""</string>
     <string name="silent_mode_incl_alarm_summary" msgid="2088830834182228458">"Tut ils tuns exclus quels da datotecas da multimedia èn deactivads"</string>
-    <string name="ringtone_title" msgid="5379026328015343686">"Tun da scalin"</string>
+    <!-- outdated translation 5379026328015343686 -->     <string name="ringtone_title" msgid="7037881886694206550">"Tun da scalin"</string>
     <string name="ringtone_summary" msgid="2630023412632683493"></string>
     <string name="all_volume_title" msgid="8741571721868253103">"Volumen"</string>
     <string name="ring_volume_title" msgid="7938706566797464165">"Volumen dal tun da scalin"</string>
     <string name="ring_volume_summary" msgid="7055497624193116879"></string>
     <string name="vibrate_in_silent_title" msgid="3897968069156767036">"Vibrar en il modus silenzius"</string>
     <string name="vibrate_in_silent_summary" msgid="3312600513070076281">"Permetter la vibraziun en il modus silenzius"</string>
-    <!-- outdated translation 5408984084125311526 -->     <string name="vibrate_title" msgid="6045820877942801599">"Vibraziun"</string>
-    <!-- outdated translation 5224303668448643275 -->     <string name="vibrate_summary" msgid="7378130397830790458">"Vibraziun per ils cloms che entran"</string>
+    <string name="vibrate_title" msgid="6045820877942801599">"Vibrar"</string>
+    <string name="vibrate_summary" msgid="7378130397830790458">"Vibrar en cas da cloms ed avis"</string>
     <string name="notification_sound_title" msgid="6316316069880531693">"Tun dad avis"</string>
     <string name="notification_sound_summary" msgid="2953599929394109819"></string>
     <string name="notification_pulse_title" msgid="1247988024534030629">"Glisch d\'avis pulsanta"</string>
@@ -545,13 +569,17 @@
     <string name="dock_audio_settings_title" msgid="3324750259959570305">"Audio"</string>
     <string name="dock_audio_summary_desk" msgid="6487784412371139335">"Parameters da la basa desktop attatgada"</string>
     <string name="dock_audio_summary_car" msgid="6740897586006248450">"Parameters da la basa da l\'auto associada"</string>
-    <string name="dock_audio_summary_none" msgid="289909253741048784">"Il telefon n\'è betg attatgà a la basa."</string>
+    <!-- outdated translation 289909253741048784 -->     <string name="dock_audio_summary_none" product="tablet" msgid="8215337394914283607">"Il telefon n\'è betg attatgà a la basa."</string>
+    <string name="dock_audio_summary_none" product="default" msgid="289909253741048784">"Il telefon n\'è betg attatgà a la basa."</string>
     <string name="dock_audio_summary_unknown" msgid="4465059868974255693">"Parameters da la basa attatgada"</string>
     <string name="dock_not_found_title" msgid="3290961741828952424">"Betg chattà la basa"</string>
-    <string name="dock_not_found_text" msgid="3035260358985111855">"\"Per configurar ils parameters audio da la basa, sto il telefonin esser attatgà a la basa.\""</string>
+    <!-- outdated translation 3035260358985111855 -->     <string name="dock_not_found_text" product="tablet" msgid="7935403744079168804">"\"Per configurar ils parameters audio da la basa, sto il telefonin esser attatgà a la basa.\""</string>
+    <string name="dock_not_found_text" product="default" msgid="3035260358985111855">"\"Per configurar ils parameters audio da la basa, sto il telefonin esser attatgà a la basa.\""</string>
     <string name="dock_sounds_enable_title" msgid="3659084028644948905">"Tun cun attatgar a la basa"</string>
-    <string name="dock_sounds_enable_summary_on" msgid="8491180514199743771">"Sunar in tun cun attatgar il telefonin a la basa u cun separar el da la tala"</string>
-    <string name="dock_sounds_enable_summary_off" msgid="3151046599205265919">"Betg sunar in tun cun attatgar il telefonin a la basa u cun separar el da la tala"</string>
+    <!-- outdated translation 8491180514199743771 -->     <string name="dock_sounds_enable_summary_on" product="tablet" msgid="838102386448981339">"Sunar in tun cun attatgar il telefonin a la basa u cun separar el da la tala"</string>
+    <string name="dock_sounds_enable_summary_on" product="default" msgid="8491180514199743771">"Sunar in tun cun attatgar il telefonin a la basa u cun separar el da la tala"</string>
+    <!-- outdated translation 3151046599205265919 -->     <string name="dock_sounds_enable_summary_off" product="tablet" msgid="5077843049805652363">"Betg sunar in tun cun attatgar il telefonin a la basa u cun separar el da la tala"</string>
+    <string name="dock_sounds_enable_summary_off" product="default" msgid="3151046599205265919">"Betg sunar in tun cun attatgar il telefonin a la basa u cun separar el da la tala"</string>
     <string name="sync_settings" msgid="9186125469300013491">"Contos e sincronisaziun"</string>
     <string name="sync_settings_summary" msgid="2962179505214965667">"Agiuntar u allontanar contos e modifitgar lur parameters"</string>
     <string name="search_settings" msgid="1910951467596035063">"Tschertgar"</string>
@@ -561,8 +589,10 @@
     <string name="animations_summary_on" msgid="8843613112130484436">"Mussar ina animaziun cun avrir e serrar fanestras"</string>
     <string name="animations_summary_off" msgid="2777026828025551983">"Animar las fanestras cun avrir e serrar"</string>
     <string name="accelerometer_title" msgid="7854608399547349157">"Rotar automaticamain il visur"</string>
-    <string name="accelerometer_summary_on" msgid="1133737282813048021">"Midar automaticamain l\'orientaziun cun rotar il telefonin"</string>
-    <string name="accelerometer_summary_off" msgid="5485489363715740761">"Midar automaticamain l\'orientaziun cun volver il telefonin"</string>
+    <!-- outdated translation 1133737282813048021 -->     <string name="accelerometer_summary_on" product="tablet" msgid="429982132339828942">"Midar automaticamain l\'orientaziun cun rotar il telefonin"</string>
+    <string name="accelerometer_summary_on" product="default" msgid="1133737282813048021">"Midar automaticamain l\'orientaziun cun rotar il telefonin"</string>
+    <!-- outdated translation 5485489363715740761 -->     <string name="accelerometer_summary_off" product="tablet" msgid="4781734213242521682">"Midar automaticamain l\'orientaziun cun volver il telefonin"</string>
+    <string name="accelerometer_summary_off" product="default" msgid="5485489363715740761">"Midar automaticamain l\'orientaziun cun volver il telefonin"</string>
     <string name="brightness" msgid="2354961343555249270">"Clerezza"</string>
     <string name="brightness_summary" msgid="838917350127550703">"Adattar la clerezza dal visur"</string>
     <string name="screen_timeout" msgid="4882669461447531301">"Timeout dal visur"</string>
@@ -572,8 +602,10 @@
     <string name="sim_lock_settings_category" msgid="5136244267576697004">"Configurar la bloccada SIM"</string>
     <string name="sim_lock_settings_title" msgid="9018585580955414596">"Bloccaziun da la SIM"</string>
     <string name="sim_pin_toggle" msgid="1742123478029451888">"Bloccar la carta SIM"</string>
-    <string name="sim_lock_on" msgid="2503536505568814324">"Dumandar il PIN per utilisar il telefonin"</string>
-    <string name="sim_lock_off" msgid="258981978215428916">"Dumandar il PIN per utilisar il telefonin"</string>
+    <!-- outdated translation 2503536505568814324 -->     <string name="sim_lock_on" product="tablet" msgid="5058355081270397764">"Dumandar il PIN per utilisar il telefonin"</string>
+    <string name="sim_lock_on" product="default" msgid="2503536505568814324">"Dumandar il PIN per utilisar il telefonin"</string>
+    <!-- outdated translation 258981978215428916 -->     <string name="sim_lock_off" product="tablet" msgid="2813800553917012356">"Dumandar il PIN per utilisar il telefonin"</string>
+    <string name="sim_lock_off" product="default" msgid="258981978215428916">"Dumandar il PIN per utilisar il telefonin"</string>
     <string name="sim_pin_change" msgid="6311414184279932368">"Midar il PIN da la carta SIM"</string>
     <string name="sim_enter_pin" msgid="6608715137008508432">"PIN per la carta SIM"</string>
     <string name="sim_enable_sim_lock" msgid="4517742794997166918">"Bloccar la SIM"</string>
@@ -589,7 +621,8 @@
     <string name="sim_lock_failed" msgid="6676748290838006404">"Impussibel da midar il status da la bloccaziun da la carta SIM."\n"Forsa in PIN nuncorrect."</string>
     <string name="sim_enter_ok" msgid="6475946836899218919">"OK"</string>
     <string name="sim_enter_cancel" msgid="6240422158517208036">"Interrumper"</string>
-    <string name="device_info_settings" msgid="475872867864762157">"Status dal telefonin"</string>
+    <!-- outdated translation 475872867864762157 -->     <string name="device_info_settings" product="tablet" msgid="1119755927536987178">"Status dal telefonin"</string>
+    <string name="device_info_settings" product="default" msgid="475872867864762157">"Status dal telefonin"</string>
     <string name="system_update_settings_list_item_title" msgid="3342887311059985961">"Actualisaziuns dal sistem"</string>
     <string name="system_update_settings_list_item_summary" msgid="3853057315907710747"></string>
     <string name="firmware_version" msgid="4801135784886859972">"Versiun dad Android"</string>
@@ -601,9 +634,9 @@
     <string name="device_status_activity_title" msgid="1411201799384697904">"Status"</string>
     <string name="device_status" msgid="607405385799807324">"Status"</string>
     <string name="device_status_summary" msgid="2599162787451519618">"\"Numer da telefon, signal, etc.\""</string>
-    <!-- outdated translation 6681164315506788024 -->     <string name="storage_settings" product="nosdcard" msgid="8758910337658683955">"Carta SD &amp; memoria"</string>
-    <!-- outdated translation 6681164315506788024 -->     <string name="storage_settings" product="default" msgid="4211799979832404953">"Carta SD &amp; memoria"</string>
-    <!-- outdated translation 5379463509034022773 -->     <string name="storage_settings_title" msgid="8746016738388094064">"Parameters da la carta SD &amp; memoria dal telefonin."</string>
+    <!-- outdated translation 4211799979832404953 -->     <string name="storage_settings" product="nosdcard" msgid="8758910337658683955">"Memoria"</string>
+    <string name="storage_settings" product="default" msgid="4211799979832404953">"Memoria"</string>
+    <string name="storage_settings_title" msgid="8746016738388094064">"Parameters da memorisaziun"</string>
     <!-- outdated translation 9176693537325988610 -->     <string name="storage_settings_summary" product="nosdcard" msgid="3543813623294870759">"\"Prender ora la carta SD, mussar la capacitad da memorisar disponibla\""</string>
     <string name="storage_settings_summary" product="default" msgid="9176693537325988610">"\"Prender ora la carta SD, mussar la capacitad da memorisar disponibla\""</string>
     <string name="status_number" msgid="5123197324870153205">"Mes numer da telefon"</string>
@@ -642,8 +675,8 @@
     <string name="sd_mount_summary" product="default" msgid="4936591681679097699">"Montar la carta SD"</string>
     <!-- outdated translation 5448738337382712203 -->     <string name="sd_format" product="nosdcard" msgid="2148179271623099054">"Formatar la carta SD"</string>
     <!-- outdated translation 5448738337382712203 -->     <string name="sd_format" product="default" msgid="2576054280507119870">"Formatar la carta SD"</string>
-    <!-- outdated translation 6616491027883134004 -->     <string name="sd_format_summary" product="nosdcard" msgid="1504606546865152514">"Formatar (stizzar) la carta SD"</string>
-    <!-- outdated translation 6616491027883134004 -->     <string name="sd_format_summary" product="default" msgid="915849621390821841">"Formatar (stizzar) la carta SD"</string>
+    <!-- outdated translation 6616491027883134004 -->     <string name="sd_format_summary" product="nosdcard" msgid="6331905044907914603">"Formatar (stizzar) la carta SD"</string>
+    <!-- outdated translation 6616491027883134004 -->     <string name="sd_format_summary" product="default" msgid="212703692181793109">"Formatar (stizzar) la carta SD"</string>
     <string name="sd_unavailable" msgid="8580107589533213904">"Betg disponibel"</string>
     <string name="read_only" msgid="6702420168629076340">" (mo per lectura)"</string>
     <!-- outdated translation 8612140627310646730 -->     <string name="dlg_confirm_unmount_title" product="nosdcard" msgid="2349876662428231297">"Demontar la carta SD"</string>
@@ -694,29 +727,33 @@
     <string name="menu_restore" msgid="8260067415075573273">"Reinizialisar ils parameters da standard"</string>
     <string name="restore_default_apn_completed" msgid="3990449939234957281">"Terminà la reinizialisaziun dals parameters APN predefinids"</string>
     <string name="master_clear_title" msgid="5907939616087039756">"Restaurar il stadi original"</string>
-    <string name="master_clear_summary" msgid="4986154238001088492">"Stizza tut las datas dal telefonin"</string>
-    <!-- unknown placeholder TAG_LI_0 in master_clear_desc -->
+    <!-- outdated translation 4986154238001088492 -->     <string name="master_clear_summary" product="tablet" msgid="4036344100254678429">"Stizza tut las datas dal telefonin"</string>
+    <string name="master_clear_summary" product="default" msgid="4986154238001088492">"Stizza tut las datas dal telefonin"</string>
+    <!-- outdated translation 4359253344708970059 -->     <string name="master_clear_desc" product="tablet" msgid="1305457209008369655">"Questa acziun vegn a reinizialisar il telefonin e restaurar sias valurs originalas. Tut las datas ed applicaziuns telechargiadas vegnan stizzadas!"</string>
+    <!-- outdated translation 4359253344708970059 -->     <string name="master_clear_desc" product="default" msgid="2950536633526374209">"Questa acziun vegn a reinizialisar il telefonin e restaurar sias valurs originalas. Tut las datas ed applicaziuns telechargiadas vegnan stizzadas!"</string>
+    <!-- no translation found for master_clear_accounts (6412857499147999073) -->
     <skip />
-    <!-- no translation found for master_clear_desc (2163013814299528247) -->
+    <!-- no translation found for master_clear_desc_erase_external_storage (4740866328425123395) -->
     <skip />
-    <!-- unknown placeholder TAG_LI_0 in master_clear_desc -->
-    <skip />
-    <!-- no translation found for master_clear_desc (1741944496458365969) -->
+    <!-- no translation found for master_clear_desc_erase_external_storage (7339100478676372901) -->
     <skip />
     <!-- no translation found for erase_external_storage (969364037450286809) -->
     <skip />
     <!-- no translation found for erase_external_storage (1397239046334307625) -->
     <skip />
-    <!-- no translation found for erase_external_storage_description (1657838142707381027) -->
+    <!-- no translation found for erase_external_storage_description (444834593696342279) -->
     <skip />
-    <!-- no translation found for erase_external_storage_description (8100175974635894073) -->
+    <!-- no translation found for erase_external_storage_description (46603515218075174) -->
     <skip />
-    <string name="master_clear_button_text" msgid="7550632653343157971">"Reinizialisar il telefon"</string>
+    <!-- outdated translation 7550632653343157971 -->     <string name="master_clear_button_text" product="tablet" msgid="3130786116528304116">"Reinizialisar il telefon"</string>
+    <string name="master_clear_button_text" product="default" msgid="7550632653343157971">"Reinizialisar il telefon"</string>
     <string name="master_clear_final_desc" msgid="6917971132484622696">"Stizzar tut las datas persunalas e las applicaziuns telechargiadas? Quest pass na po betg vegnir revocà!"</string>
     <string name="master_clear_final_button_text" msgid="5390908019019242910">"Stizzar tut"</string>
     <string name="master_clear_gesture_prompt" msgid="1428645764883536750">"Dissegnai Voss schema da debloccaziun"</string>
-    <string name="master_clear_gesture_explanation" msgid="8901714274312707918">"Vus stuais dissegnar Voss schema da debloccaziun per confermar la reinizialisaziun dal telefonin."</string>
+    <!-- outdated translation 8901714274312707918 -->     <string name="master_clear_gesture_explanation" msgid="2234954758550554549">"Vus stuais dissegnar Voss schema da debloccaziun per confermar la reinizialisaziun dal telefonin."</string>
     <string name="master_clear_failed" msgid="8655202125010189406">"Las datas n\'han betg pudì vegnir reinizialisadas perquai ch\'il servetsch da purificaziun dal sistem n\'è betg disponibel."</string>
+    <!-- no translation found for master_clear_confirm_title (4845794266129586839) -->
+    <skip />
     <!-- outdated translation 4671276096695789895 -->     <string name="media_format_title" product="nosdcard" msgid="3999653431422767156">"Formatar la carta SD."</string>
     <!-- outdated translation 4671276096695789895 -->     <string name="media_format_title" product="default" msgid="4427528440306787972">"Formatar la carta SD."</string>
     <!-- outdated translation 3805714639375830120 -->     <string name="media_format_summary" product="nosdcard" msgid="776603298628082065">"Stizza tut las datas sin la carta SD"</string>
@@ -733,30 +770,23 @@
     <!-- outdated translation 4239529439389660159 -->     <string name="media_format_gesture_explanation" product="default" msgid="1681213416497647321">"Vus stuais dissegnar Voss schema da debloccaziun per confermar la formataziun da la carta SD."</string>
     <string name="call_settings_title" msgid="5188713413939232801">"Parameters da clom"</string>
     <string name="call_settings_summary" msgid="7291195704801002886">"\"Configurar messadis vocals, renviar cloms, cloms spetgants, identificaziun dal clamader\""</string>
-    <!-- no translation found for tether_settings_title_usb (6688416425801386511) -->
-    <skip />
-    <!-- no translation found for tether_settings_title_wifi (3277144155960302049) -->
-    <skip />
-    <!-- no translation found for tether_settings_title_bluetooth (355855408317564420) -->
-    <skip />
-    <!-- no translation found for tether_settings_title_usb_bluetooth (5355828977109785001) -->
-    <skip />
-    <!-- no translation found for tether_settings_title_all (8356136101061143841) -->
-    <skip />
-    <!-- no translation found for tether_settings_summary_usb (3562431455625637370) -->
-    <skip />
-    <!-- no translation found for tether_settings_summary_wifi (4690912027002467246) -->
-    <skip />
-    <!-- no translation found for tether_settings_summary_bluetooth (4363059913219151114) -->
-    <skip />
-    <!-- no translation found for tether_settings_summary_usb_wifi (3700323208282018772) -->
-    <skip />
-    <!-- no translation found for tether_settings_summary_usb_bluetooth (4008195891276675882) -->
-    <skip />
-    <!-- no translation found for tether_settings_summary_wifi_bluetooth (2753904149495692201) -->
-    <skip />
-    <!-- no translation found for tether_settings_summary_all (1171769255924636665) -->
-    <skip />
+    <string name="tether_settings_title_usb" msgid="6688416425801386511">"USB tethering"</string>
+    <string name="tether_settings_title_wifi" msgid="3277144155960302049">"Punct d\'access WLAN mobil"</string>
+    <string name="tether_settings_title_bluetooth" msgid="355855408317564420">"Bluetooth tethering"</string>
+    <string name="tether_settings_title_usb_bluetooth" msgid="5355828977109785001">"Tethering"</string>
+    <string name="tether_settings_title_all" msgid="8356136101061143841">"Tethering &amp; punct d\'access purtabel"</string>
+    <!-- outdated translation 3562431455625637370 -->     <string name="tether_settings_summary_usb" product="tablet" msgid="785883365108362248">"Cundividi la connexiun da datas mobila da Voss telefonin cun agid dad in cabel USB."</string>
+    <string name="tether_settings_summary_usb" product="default" msgid="3562431455625637370">"Cundividi la connexiun da datas mobila da Voss telefonin cun agid dad in cabel USB."</string>
+    <!-- outdated translation 4690912027002467246 -->     <string name="tether_settings_summary_wifi" msgid="5474383125137372164">"Transfurmai Voss telefonin en in punct d\'access WLAN"</string>
+    <!-- outdated translation 4363059913219151114 -->     <string name="tether_settings_summary_bluetooth" msgid="2407506656353819750">"Cundividi la connexiun mobila da Voss telefonin cun agid da bluetooth"</string>
+    <!-- outdated translation 3700323208282018772 -->     <string name="tether_settings_summary_usb_wifi" product="tablet" msgid="3834674129575844910">"Cundividi la connexiun da datas mobila da Voss telefonin cun agid dad in cabel USB u sco punct d\'access da WLAN mobil."</string>
+    <string name="tether_settings_summary_usb_wifi" product="default" msgid="3700323208282018772">"Cundividi la connexiun da datas mobila da Voss telefonin cun agid dad in cabel USB u sco punct d\'access da WLAN mobil."</string>
+    <!-- outdated translation 4008195891276675882 -->     <string name="tether_settings_summary_usb_bluetooth" product="tablet" msgid="1245080236509560839">"Cundividi la connexiun da datas mobila da Voss telefonin cun agid da bluetooth u dad in cabel USB"</string>
+    <string name="tether_settings_summary_usb_bluetooth" product="default" msgid="4008195891276675882">"Cundividi la connexiun da datas mobila da Voss telefonin cun agid da bluetooth u dad in cabel USB"</string>
+    <!-- outdated translation 2753904149495692201 -->     <string name="tether_settings_summary_wifi_bluetooth" product="tablet" msgid="1924576461932311140">"Cundividi la connexiun da datas mobila da Voss telefonin cun agid da bluetooth u sco punct d\'access da WLAN mobil."</string>
+    <string name="tether_settings_summary_wifi_bluetooth" product="default" msgid="2753904149495692201">"Cundividi la connexiun da datas mobila da Voss telefonin cun agid da bluetooth u sco punct d\'access da WLAN mobil."</string>
+    <!-- outdated translation 1171769255924636665 -->     <string name="tether_settings_summary_all" product="tablet" msgid="6612660164315153427">"\"Cundividi la connexiun da datas mobila da Voss telefonin cun agid dad USB, WLAN u bluetooth.\""</string>
+    <string name="tether_settings_summary_all" product="default" msgid="1171769255924636665">"\"Cundividi la connexiun da datas mobila da Voss telefonin cun agid dad USB, WLAN u bluetooth.\""</string>
     <string name="usb_title" msgid="7483344855356312510">"USB"</string>
     <string name="usb_tethering_button_text" msgid="585829947108007917">"USB tethering"</string>
     <string name="usb_tethering_available_subtext" msgid="156779271296152605">"Stabilì la connexiun USB; activai l\'opziun correspundenta per tethering."</string>
@@ -764,25 +794,16 @@
     <string name="usb_tethering_storage_active_subtext" msgid="6608933594288072573">"Tethering n\'è betg pussaivel durant l\'utilisaziun da memoria USB"</string>
     <string name="usb_tethering_unavailable_subtext" msgid="1044622421184007254">"USB betg connectà"</string>
     <string name="usb_tethering_errored_subtext" msgid="1377574819427841992">"Errur da tethering cun USB"</string>
-    <!-- no translation found for bluetooth_tether_checkbox_text (2379175828878753652) -->
-    <skip />
-    <!-- no translation found for bluetooth_tethering_available_subtext (3317112145693933963) -->
-    <skip />
-    <!-- no translation found for bluetooth_tethering_connected_subtext (893888246368164894) -->
-    <skip />
-    <!-- no translation found for bluetooth_tethering_off_subtext (1798863866978968964) -->
-    <skip />
-    <!-- no translation found for bluetooth_tethering_errored_subtext (1344187103463073993) -->
-    <skip />
-    <!-- no translation found for bluetooth_tethering_overflow_error (2222060504731415763) -->
-    <skip />
-    <!-- no translation found for bluetooth_untether_blank (2871192409329334813) -->
-    <skip />
-    <!-- no translation found for bluetooth_tether_settings_text (2273368767599539525) -->
-    <skip />
-    <!-- no translation found for bluetooth_tether_settings_subtext (5970033999897946708) -->
-    <skip />
-    <!-- outdated translation 7322604807045355030 -->     <string name="tethering_help_button_text" msgid="656117495547173630">"Agid davart tethering"</string>
+    <string name="bluetooth_tether_checkbox_text" msgid="2379175828878753652">"Bluetooth tethering"</string>
+    <string name="bluetooth_tethering_available_subtext" msgid="3317112145693933963">"\"Bluetooth tethering è activà, ma betg connectà\""</string>
+    <string name="bluetooth_tethering_connected_subtext" msgid="893888246368164894">"Bluetooth tethering è activà e connectà"</string>
+    <string name="bluetooth_tethering_off_subtext" msgid="1798863866978968964">"Bluetooth tethering deactivà"</string>
+    <string name="bluetooth_tethering_errored_subtext" msgid="1344187103463073993">"Errur da bluetooth tethering"</string>
+    <string name="bluetooth_tethering_overflow_error" msgid="2222060504731415763">"Tethering cun dapli che <xliff:g id="MAXCONNECTION">%1$d</xliff:g> apparats n\'è betg pussaivel"</string>
+    <string name="bluetooth_untether_blank" msgid="2871192409329334813">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> vegn deconnectà dal tethering."</string>
+    <string name="bluetooth_tether_settings_text" msgid="2273368767599539525">"Parameters dal tethering bluetooth"</string>
+    <string name="bluetooth_tether_settings_subtext" msgid="5970033999897946708">"Tscherni apparats bluetooth per il tethering"</string>
+    <string name="tethering_help_button_text" msgid="656117495547173630">"Agid"</string>
     <string name="network_settings_title" msgid="7967552516440151852">"Raits mobilas"</string>
     <string name="network_settings_summary" msgid="5149750850846813553">"\"Definir las opziuns da roaming, raits, APNs\""</string>
     <string name="location_title" msgid="1029961368397484576">"Mes lieu"</string>
@@ -790,32 +811,33 @@
     <string name="location_networks_disabled" msgid="2708968452901433980">"Mussar la posiziun en applicaziuns (sco chartas) cun utilisar raits senza fil"</string>
     <string name="location_neighborhood_level" msgid="4656658097932515921">"Posiziun geografica determinada da WLAN e/u raits mobilas"</string>
     <string name="location_gps" msgid="6296125378829097831">"Utilisar ils satellits GPS"</string>
-    <!-- outdated translation 6460740847018275745 -->     <string name="location_street_level" msgid="7456259025474443314">"Localisar sin il nivel da vias (deactivar per spargnar accu)"</string>
+    <string name="location_street_level" msgid="7456259025474443314">"Localisar sin il nivel da vias"</string>
     <string name="location_gps_disabled" msgid="6632537158777308128">"Localisar sin nivel da vias (dovra dapli accu e tschiel avert)"</string>
     <string name="assisted_gps" msgid="4649317129586736885">"Utilisar il GPS assistì"</string>
     <string name="assisted_gps_enabled" msgid="8751899609589792803">"Utilisar in server per sustegnair il GPS (deactivar per reducir l\'utilisaziun da la rait)"</string>
     <string name="assisted_gps_disabled" msgid="6982698333968010748">"Utilisar"</string>
-    <!-- no translation found for use_location_title (3214740644957841179) -->
-    <skip />
+    <!-- outdated translation 5447030582538504247 -->     <string name="use_location_title" msgid="3214740644957841179">"Utilisar mia posiziun"</string>
     <!-- no translation found for use_location_summary_disabled (1876901471649359806) -->
     <skip />
     <!-- no translation found for use_location_summary_enabled (984549156918597265) -->
     <skip />
-    <string name="about_settings" msgid="1743378368185371685">"Davart il telefonin"</string>
-    <string name="about_settings_summary" msgid="3302263393543848667">"\"Mussar infurmaziuns legalas, status dal telefonin e versiun da la software\""</string>
+    <!-- outdated translation 1743378368185371685 -->     <string name="about_settings" product="tablet" msgid="593457295516533765">"Davart il telefonin"</string>
+    <string name="about_settings" product="default" msgid="1743378368185371685">"Davart il telefonin"</string>
+    <!-- outdated translation 3302263393543848667 -->     <string name="about_settings_summary" msgid="3371517697156165959">"\"Mussar infurmaziuns legalas, status dal telefonin e versiun da la software\""</string>
     <string name="legal_information" msgid="5769301644270604095">"Infurmaziuns legalas"</string>
     <string name="contributors_title" msgid="5917703088825286504">"Contribuents"</string>
     <string name="copyright_title" msgid="865906688917260647">"Copyright"</string>
     <string name="license_title" msgid="1990487604356037871">"Licenza"</string>
     <string name="terms_title" msgid="7697580845616764642">"Cundiziuns d\'utilisaziun"</string>
     <string name="system_tutorial_list_item_title" msgid="9082844446660969729">"Mussavia dal sistem"</string>
-    <string name="system_tutorial_list_item_summary" msgid="3861815254521030201">"Co utilisar Voss telefon?"</string>
+    <!-- outdated translation 3861815254521030201 -->     <string name="system_tutorial_list_item_summary" product="tablet" msgid="3341504384445734067">"Co utilisar Voss telefon?"</string>
+    <string name="system_tutorial_list_item_summary" product="default" msgid="3861815254521030201">"Co utilisar Voss telefon?"</string>
     <string name="settings_license_activity_title" msgid="7553683406244228650">"Licenzas open source"</string>
     <string name="settings_license_activity_unavailable" msgid="4210539215951487627">"Cun chargiar las licenzas è cumparì ina errur."</string>
     <string name="settings_license_activity_loading" msgid="3337535809093591740">"Chargiar…"</string>
     <string name="settings_safetylegal_title" msgid="1289483965535937431">"Infurmaziuns da segirezza"</string>
     <string name="settings_safetylegal_activity_title" msgid="6901214628496951727">"Infurmaziuns da segirezza"</string>
-    <string name="settings_safetylegal_activity_unreachable" msgid="3198912875259612887">"\"Voss telefon n\'è betg connectà cun in servetsch da datas. Per consultar ussa questas infurmaziuns, accedi a %s cun agid d\'in computer cun access a l\'internet.\""</string>
+    <!-- outdated translation 3198912875259612887 -->     <string name="settings_safetylegal_activity_unreachable" msgid="170670055116721810">"\"Voss telefon n\'è betg connectà cun in servetsch da datas. Per consultar ussa questas infurmaziuns, accedi a %s cun agid d\'in computer cun access a l\'internet.\""</string>
     <string name="settings_safetylegal_activity_loading" msgid="8059022597639516348">"Chargiar…"</string>
     <string name="lockpassword_choose_your_password_header" msgid="8624900666929394990">"Tscherner Voss pled-clav"</string>
     <string name="lockpassword_choose_your_pin_header" msgid="7598849519816138302">"Tscherner Voss PIN"</string>
@@ -854,8 +876,10 @@
     <string name="lockpattern_too_many_failed_confirmation_attempts_footer" msgid="6759029360597122873">"Empruvar anc ina giada en <xliff:g id="NUMBER">%d</xliff:g> secundas."</string>
     <string name="skip_button_label" msgid="8680422740354436943">"Interrumper"</string>
     <string name="next_button_label" msgid="8890792540116568321">"Vinavant"</string>
-    <string name="lock_title" msgid="4059246467204273930">"Segirar Voss telefonin"</string>
-    <string name="lock_intro_message" msgid="9100785646737118042">"\""<font size="17">"Protegi Voss telefon cunter l\'utilisaziun nunautorisada cun crear in schema persunal per debloccar il visur. "\n<font height="17">\n</font><b>"1"</b>"  Il suandant visur As mussa in exempel d\'in schema. "\n<font height="17">\n</font><b>"2"</b>"  Suenter pudais Vus dissegnar Voss agen schema da debloccaziun. Vus pudais empruvar pliras cumbinaziuns, ma connectai almain quatter puncts in cun l\'auter. "\n<font height="17">\n</font><b>"3"</b>"  Repeti Voss schema per confermar la tscherna. "\n<font height="17">\n</font><b>"Per entschaiver, smatgai sin \"\"Enavant\"\""</b>". "\n<font height="3">\n</font>"Sche Vus na vulais betg activar la protecziun, smatgai sin \"\"Interrumper\"\"."</font>"\""</string>
+    <!-- outdated translation 4059246467204273930 -->     <string name="lock_title" product="tablet" msgid="2909697418179419990">"Segirar Voss telefonin"</string>
+    <string name="lock_title" product="default" msgid="4059246467204273930">"Segirar Voss telefonin"</string>
+    <!-- outdated translation 9100785646737118042 -->     <string name="lock_intro_message" product="tablet" msgid="4544669202394019747">"\""<font size="17">"Protegi Voss telefon cunter l\'utilisaziun nunautorisada cun crear in schema persunal per debloccar il visur. "\n<font height="17">\n</font><b>"1"</b>"  Il suandant visur As mussa in exempel d\'in schema. "\n<font height="17">\n</font><b>"2"</b>"  Suenter pudais Vus dissegnar Voss agen schema da debloccaziun. Vus pudais empruvar pliras cumbinaziuns, ma connectai almain quatter puncts in cun l\'auter. "\n<font height="17">\n</font><b>"3"</b>"  Repeti Voss schema per confermar la tscherna. "\n<font height="17">\n</font><b>"Per entschaiver, smatgai sin \"\"Enavant\"\""</b>". "\n<font height="3">\n</font>"Sche Vus na vulais betg activar la protecziun, smatgai sin \"\"Interrumper\"\"."</font>"\""</string>
+    <string name="lock_intro_message" product="default" msgid="9100785646737118042">"\""<font size="17">"Protegi Voss telefon cunter l\'utilisaziun nunautorisada cun crear in schema persunal per debloccar il visur. "\n<font height="17">\n</font><b>"1"</b>"  Il suandant visur As mussa in exempel d\'in schema. "\n<font height="17">\n</font><b>"2"</b>"  Suenter pudais Vus dissegnar Voss agen schema da debloccaziun. Vus pudais empruvar pliras cumbinaziuns, ma connectai almain quatter puncts in cun l\'auter. "\n<font height="17">\n</font><b>"3"</b>"  Repeti Voss schema per confermar la tscherna. "\n<font height="17">\n</font><b>"Per entschaiver, smatgai sin \"\"Enavant\"\""</b>". "\n<font height="3">\n</font>"Sche Vus na vulais betg activar la protecziun, smatgai sin \"\"Interrumper\"\"."</font>"\""</string>
     <string name="lock_example_title" msgid="8052305554017485410">"Schema d\'exempel"</string>
     <string name="lock_example_message" msgid="1838650097090632706">"Colliai almain quatter puncts. "\n" "\n"Smatgai sin «Vinavant» per crear in agen schema."</string>
     <string name="manageapplications_settings_title" msgid="5712405848153426706">"Administrar las applicaziuns"</string>
@@ -865,7 +889,8 @@
     <string name="applications_settings_header" msgid="6018266337275422250">"Applicaziuns"</string>
     <string name="install_applications" msgid="4872012136210802181">"Funtaunas nunenconuschentas"</string>
     <string name="install_unknown_applications" msgid="6612824788917283662">"Permetter l\'installaziun dad applicaziuns che na derivan betg dad Android Market"</string>
-    <string name="install_all_warning" msgid="1923717607319933741">"Applicaziuns da funtaunas nunenconuschentas pon esser privlusas per Vossas datas privatas e per Voss telefonin. Vus confermais che Vus surpigliais la responsabladad per tut ils donns da Voss telefon e mintga sperdita da datas che pudessan resultar da l\'utilisaziun da questas applicaziuns."</string>
+    <!-- outdated translation 1923717607319933741 -->     <string name="install_all_warning" product="tablet" msgid="8143969767997876735">"Applicaziuns da funtaunas nunenconuschentas pon esser privlusas per Vossas datas privatas e per Voss telefonin. Vus confermais che Vus surpigliais la responsabladad per tut ils donns da Voss telefon e mintga sperdita da datas che pudessan resultar da l\'utilisaziun da questas applicaziuns."</string>
+    <string name="install_all_warning" product="default" msgid="1923717607319933741">"Applicaziuns da funtaunas nunenconuschentas pon esser privlusas per Vossas datas privatas e per Voss telefonin. Vus confermais che Vus surpigliais la responsabladad per tut ils donns da Voss telefon e mintga sperdita da datas che pudessan resultar da l\'utilisaziun da questas applicaziuns."</string>
     <string name="application_info_label" msgid="1150486628158409543">"Infos davart l\'applicaziun"</string>
     <string name="storage_label" msgid="8700867073480107253">"Memoria"</string>
     <string name="auto_launch_label" msgid="3012617472833815382">"Aviar sco standard"</string>
@@ -879,17 +904,15 @@
     <string name="application_size_label" msgid="5055196275624686382">"Applicaziun"</string>
     <string name="data_size_label" msgid="8679376373625710107">"Datas"</string>
     <string name="uninstall_text" msgid="3644892466144802466">"Deinstallar"</string>
-    <!-- no translation found for disable_text (6544054052049395202) -->
-    <skip />
-    <!-- no translation found for enable_text (9217362512327828987) -->
-    <skip />
+    <string name="disable_text" msgid="6544054052049395202">"Deactivar"</string>
+    <string name="enable_text" msgid="9217362512327828987">"Activar"</string>
     <string name="clear_user_data_text" msgid="5597622864770098388">"Stizzar las datas"</string>
     <string name="app_factory_reset" msgid="6635744722502563022">"Deinstallar las actualisaziuns"</string>
     <string name="auto_launch_enable_text" msgid="2630656657744196691">"Vus avais definì questa applicaziun sco standard per tschertas acziuns."</string>
     <string name="auto_launch_disable_text" msgid="7800385822185540166">"Nagin standard"</string>
     <string name="clear_activities" msgid="7408923511535174430">"Stizzar las acziuns predefinidas"</string>
     <string name="unknown" msgid="1592123443519355854">"Nunenconuschent"</string>
-    <!-- outdated translation 8622029358896599842 -->     <string name="sort_order_alpha" msgid="1410278099123670628">"Zavrar"</string>
+    <string name="sort_order_alpha" msgid="1410278099123670628">"Zavrar tenor num"</string>
     <string name="sort_order_size" msgid="7024513286636502362">"Zavrar tenor grondezza"</string>
     <!-- no translation found for show_running_services (5736278767975544570) -->
     <skip />
@@ -903,10 +926,8 @@
     <string name="filter_apps_running" msgid="7767071454371350486">"Vegn exequì"</string>
     <!-- outdated translation 1477351142334784771 -->     <string name="filter_apps_onsdcard" product="nosdcard" msgid="4843063154701023349">"Sin la carta SD"</string>
     <string name="filter_apps_onsdcard" product="default" msgid="1477351142334784771">"Sin la carta SD"</string>
-    <!-- no translation found for disabled (9206776641295849915) -->
-    <skip />
-    <!-- no translation found for no_applications (5190227407135243904) -->
-    <skip />
+    <string name="disabled" msgid="9206776641295849915">"Deactivà"</string>
+    <string name="no_applications" msgid="5190227407135243904">"Naginas applicaziuns."</string>
     <!-- no translation found for internal_storage (1584700623164275282) -->
     <skip />
     <!-- no translation found for sd_card_storage (2673203150465132465) -->
@@ -925,13 +946,15 @@
     <string name="app_factory_reset_dlg_text" msgid="438395129140568893">"Vulais Vus deinstallar tut las actualisaziuns per questa applicaziun da sistem dad Android?"</string>
     <string name="clear_failed_dlg_title" msgid="2387060805294783175">"Stizzar las datas"</string>
     <string name="clear_failed_dlg_text" msgid="7943411157007320290">"Betg reussì da stizzar las datas per l\'applicaziun"</string>
-    <string name="security_settings_desc" msgid="3116027624526915561">"Questa applicaziun ha access a las suandantas funcziuns da Voss telefon:"</string>
+    <!-- outdated translation 3116027624526915561 -->     <string name="security_settings_desc" product="tablet" msgid="6158636779728455276">"Questa applicaziun ha access a las suandantas funcziuns da Voss telefon:"</string>
+    <string name="security_settings_desc" product="default" msgid="3116027624526915561">"Questa applicaziun ha access a las suandantas funcziuns da Voss telefon:"</string>
     <string name="computing_size" msgid="1599186977475211186">"Calcular…"</string>
     <string name="invalid_size_value" msgid="1901940003700269523">"Impussibel da calcular la grondezza dal pachet."</string>
     <string name="empty_list_msg" msgid="2901049162265094971">"Naginas applicaziuns da terzas partidas èn installadas."</string>
     <string name="version_text" msgid="9189073826278676425">"versiun <xliff:g id="VERSION_NUM">%1$s</xliff:g>"</string>
     <string name="move_app" msgid="5042838441401731346">"Spustar"</string>
-    <string name="move_app_to_internal" msgid="3895430471913858185">"Spustar sin il telefon"</string>
+    <!-- outdated translation 3895430471913858185 -->     <string name="move_app_to_internal" product="tablet" msgid="2299714147283854957">"Spustar sin il telefon"</string>
+    <string name="move_app_to_internal" product="default" msgid="3895430471913858185">"Spustar sin il telefon"</string>
     <!-- outdated translation 1143379049903056407 -->     <string name="move_app_to_sdcard" product="nosdcard" msgid="4350451696315265420">"Spustar a la carta SD"</string>
     <string name="move_app_to_sdcard" product="default" msgid="1143379049903056407">"Spustar a la carta SD"</string>
     <string name="moving" msgid="6431016143218876491">"Spustar"</string>
@@ -941,71 +964,49 @@
     <string name="invalid_location" msgid="4934491353200240499">"Il lieu d\'installaziun inditgà è nunvalid."</string>
     <string name="system_package" msgid="1030561474413022831">"Impussibel d\'installar actualisaziuns dal sistem sin memorias externas."</string>
     <string name="force_stop_dlg_title" msgid="4289453224368188476">"Sfurzar da fermar"</string>
-    <!-- outdated translation 3381302041569982075 -->     <string name="force_stop_dlg_text" msgid="5157374701213502922">"Questa applicaziun vegn reaviada immediatamain. La vulais Vus propi sfurzar da sa serrar?"</string>
+    <string name="force_stop_dlg_text" msgid="5157374701213502922">"Ina applicaziun che vegn serrada cun forza po sa cumportar a moda nunspetgada. Vulais Vus cuntinuar?"</string>
     <string name="move_app_failed_dlg_title" msgid="4337731903265156405">"Spustar  l\'applicaziun"</string>
     <string name="move_app_failed_dlg_text" msgid="8824246817947643697">"Betg reussì da spustar l\'applicaziun. <xliff:g id="REASON">%1$s</xliff:g>"</string>
     <string name="app_install_location_title" msgid="2068975150026852168">"Posiziun preferida per installaziuns"</string>
     <string name="app_install_location_summary" msgid="879753854530300436">"Modifitgar la via d\'access preferida per l\'installaziun da novas applicaziuns."</string>
-    <!-- no translation found for storageuse_settings_title (5657014373502630403) -->
-    <skip />
-    <!-- no translation found for storageuse_settings_summary (2556057379120846792) -->
-    <skip />
+    <string name="storageuse_settings_title" msgid="5657014373502630403">"Utilisaziun da la memoria"</string>
+    <string name="storageuse_settings_summary" msgid="2556057379120846792">"Mussar la memoria utilisada tenor applicaziuns"</string>
     <string name="runningservices_settings_title" msgid="8097287939865165213">"Servetschs activs"</string>
     <string name="runningservices_settings_summary" msgid="854608995821032748">"Mussar e controllar ils servetschs che vegnan exequids"</string>
     <string name="service_restarting" msgid="2242747937372354306">"Reaviar en progress"</string>
     <!-- no translation found for cached (1059590879740175019) -->
     <skip />
-    <!-- outdated translation 6981216347270280598 -->     <string name="no_running_services" msgid="2059536495597645347">"Nagin servetsch en execuziun."</string>
-    <!-- outdated translation 8432097226392386802 -->     <string name="service_started_by_app" msgid="6575184738671598131">"Avià: Tutgar per serrar"</string>
+    <string name="no_running_services" msgid="2059536495597645347">"Nagut vegn exequì."</string>
+    <string name="service_started_by_app" msgid="6575184738671598131">"Servetsch avià da l\'applicaziun"</string>
     <!-- no translation found for service_client_name (4037193625611815517) -->
     <skip />
-    <!-- unknown placeholder FREE in service_background_processes -->
-    <skip />
-    <!-- no translation found for service_background_processes (6844156253576174488) -->
-    <skip />
-    <!-- unknown placeholder COUNT in service_foreground_processes -->
-    <skip />
-    <!-- no translation found for service_foreground_processes (7583975676795574276) -->
-    <skip />
+    <!-- outdated translation 4939976652114824214 -->     <string name="service_background_processes" msgid="6844156253576174488">"<xliff:g id="MEMORY">%1$s</xliff:g> disponibel"</string>
+    <!-- outdated translation 2474726487867913314 -->     <string name="service_foreground_processes" msgid="7583975676795574276">"<xliff:g id="MEMORY">%1$s</xliff:g> vegnan utilisads"</string>
     <!-- no translation found for memory (6609961111091483458) -->
     <skip />
     <!-- no translation found for service_process_name (4098932168654826656) -->
     <skip />
-    <!-- no translation found for running_processes_item_description_s_s (5790575965282023145) -->
-    <skip />
-    <!-- no translation found for running_processes_item_description_s_p (8019860457123222953) -->
-    <skip />
-    <!-- no translation found for running_processes_item_description_p_s (744424668287252915) -->
-    <skip />
-    <!-- no translation found for running_processes_item_description_p_p (1607384595790852782) -->
-    <skip />
-    <!-- no translation found for runningservicedetails_settings_title (6188692418986988288) -->
-    <skip />
-    <!-- no translation found for no_services (7133900764462288263) -->
-    <skip />
-    <!-- no translation found for runningservicedetails_services_title (391168243725357375) -->
-    <skip />
-    <!-- no translation found for runningservicedetails_processes_title (928115582044655268) -->
-    <skip />
-    <!-- no translation found for service_stop (6369807553277527248) -->
-    <skip />
-    <!-- no translation found for service_manage (1876642087421959194) -->
-    <skip />
-    <!-- no translation found for service_stop_description (3261798282116866961) -->
-    <skip />
-    <!-- no translation found for heavy_weight_stop_description (6855241582643136019) -->
-    <skip />
+    <string name="running_processes_item_description_s_s" msgid="5790575965282023145">"<xliff:g id="NUMPROCESS">%1$d</xliff:g> process ed <xliff:g id="NUMSERVICES">%2$d</xliff:g> servetsch"</string>
+    <string name="running_processes_item_description_s_p" msgid="8019860457123222953">"<xliff:g id="NUMPROCESS">%1$d</xliff:g> process e <xliff:g id="NUMSERVICES">%2$d</xliff:g> servetschs"</string>
+    <string name="running_processes_item_description_p_s" msgid="744424668287252915">"<xliff:g id="NUMPROCESS">%1$d</xliff:g> process ed <xliff:g id="NUMSERVICES">%2$d</xliff:g> servetsch"</string>
+    <string name="running_processes_item_description_p_p" msgid="1607384595790852782">"<xliff:g id="NUMPROCESS">%1$d</xliff:g> process e <xliff:g id="NUMSERVICES">%2$d</xliff:g> servetschs"</string>
+    <string name="runningservicedetails_settings_title" msgid="6188692418986988288">"Applicaziun vegn exequida"</string>
+    <string name="no_services" msgid="7133900764462288263">"Betg activ"</string>
+    <string name="runningservicedetails_services_title" msgid="391168243725357375">"Servetschs"</string>
+    <string name="runningservicedetails_processes_title" msgid="928115582044655268">"Process"</string>
+    <string name="service_stop" msgid="6369807553277527248">"Fermar"</string>
+    <string name="service_manage" msgid="1876642087421959194">"Parameters"</string>
+    <string name="service_stop_description" msgid="3261798282116866961">"Quest servetsch è vegnì avià da sia applicaziun. Sche Vus al serrais na po l\'applicaziun eventualmain betg pli vegnida exequida."</string>
+    <string name="heavy_weight_stop_description" msgid="6855241582643136019">"\"Impussibel da serrar correctamain questa applicaziun. Sche Vus cuntinuais, ristgais Vus da perder ina part da la lavur actuala.\""</string>
     <!-- no translation found for background_process_stop_description (1728354083304746737) -->
     <skip />
-    <!-- no translation found for service_manage_description (7050092269951613102) -->
-    <skip />
-    <!-- no translation found for main_running_process_description (929204645380391397) -->
-    <skip />
-    <!-- no translation found for process_service_in_use_description (8993335064403217080) -->
-    <skip />
-    <!-- no translation found for process_provider_in_use_description (5586603325677678940) -->
-    <skip />
+    <string name="service_manage_description" msgid="7050092269951613102">"<xliff:g id="CLIENT_NAME">%1$s</xliff:g>: vegn actualmain utilisà. Smatgar sin «Parameters» per controllar quest client."</string>
+    <string name="main_running_process_description" msgid="929204645380391397">"Il process principal che vegn utilisà actualmain"</string>
+    <string name="process_service_in_use_description" msgid="8993335064403217080">"Il servetsch <xliff:g id="COMP_NAME">%1$s</xliff:g> vegn actualmain utilisà."</string>
+    <string name="process_provider_in_use_description" msgid="5586603325677678940">"Il purschider <xliff:g id="COMP_NAME">%1$s</xliff:g> vegn actualmain utilisà."</string>
     <!-- no translation found for runningservicedetails_stop_dlg_title (4253292537154337233) -->
+    <skip />
+    <!-- no translation found for runningservicedetails_stop_dlg_text (5420033091144016389) -->
     <skip />
     <!-- no translation found for runningservicedetails_stop_dlg_text (6929716497425738387) -->
     <skip />
@@ -1019,7 +1020,7 @@
     <string name="phone_language_summary" msgid="3871309445655554211"></string>
     <string name="auto_replace" msgid="6199184757891937822">"Remplazzament auto."</string>
     <string name="auto_replace_summary" msgid="370288728200084466">"Curreger sbagls da scriver"</string>
-    <string name="auto_caps" msgid="581633131114124121">"Maiusclas auto."</string>
+    <!-- outdated translation 581633131114124121 -->     <string name="auto_caps" msgid="6379232078052591265">"Maiusclas auto."</string>
     <string name="auto_caps_summary" msgid="6358102538315261466">"Cumenzar mintga frasa cun ina maiuscla"</string>
     <string name="auto_punctuate" msgid="4595367243950425833">"Interpuncziun automatica"</string>
     <string name="hardkeyboard_category" msgid="5957168411305769899">"Parameters"</string>
@@ -1037,7 +1038,8 @@
     <string name="user_dict_settings_context_menu_delete_title" msgid="9140703913776549054">"Stizzar"</string>
     <string name="user_dict_settings_empty_text" msgid="6209268025109242806">"Vus n\'avais nagins pleds en Voss dicziunari persunal"</string>
     <string name="testing" msgid="6584352735303604146">"Test"</string>
-    <string name="testing_phone_info" msgid="8656693364332840056">"Infos davart il telefonin"</string>
+    <!-- outdated translation 8656693364332840056 -->     <string name="testing_phone_info" product="tablet" msgid="193561832258534798">"Infos davart il telefonin"</string>
+    <string name="testing_phone_info" product="default" msgid="8656693364332840056">"Infos davart il telefonin"</string>
     <string name="testing_battery_info" msgid="3497865525976497848">"Infurmaziuns davart l\'accu"</string>
     <string name="quick_launch_title" msgid="7904609846945905306">"Aviar svelt"</string>
     <string name="quick_launch_summary" msgid="3453825712466417452">"Definir cumbinaziuns da tastas per aviar applicaziuns"</string>
@@ -1051,8 +1053,7 @@
     <string name="quick_launch_display_mode_applications" msgid="3748789806447639039">"Applicaziuns"</string>
     <string name="quick_launch_display_mode_shortcuts" msgid="4177934019174169042">"Cumbinaziuns da tastas"</string>
     <string name="input_methods_settings_title" msgid="6800066636850553887">"Endataziun da text"</string>
-    <!-- no translation found for input_method (5434026103176856164) -->
-    <skip />
+    <string name="input_method" msgid="5434026103176856164">"Metoda d\'endataziun"</string>
     <string name="input_methods_settings_summary" msgid="7571173442946675205">"Administrar las opziuns d\'endataziun da text"</string>
     <string name="input_methods_settings_label_format" msgid="6002887604815693322">"Parameters <xliff:g id="IME_NAME">%1$s</xliff:g>"</string>
     <!-- no translation found for input_methods_and_subtype_enabler_title (6850705060511001699) -->
@@ -1090,8 +1091,7 @@
     <string name="toggle_accessibility_title" msgid="650839277066574497">"Agids d\'access"</string>
     <string name="accessibility_services_category" msgid="8127851026323672607">"Servetschs d\'agid d\'access"</string>
     <string name="no_accessibility_services_summary" msgid="694578333333808159">"Nagins agids d\'access installads"</string>
-    <!-- no translation found for accessibility_service_security_warning (4066258132331302670) -->
-    <skip />
+    <string name="accessibility_service_security_warning" msgid="4066258132331302670">"\"Quest agid d\'access po rimnar l\'entir text che Vus endatais, inclus Vossas datas persunalas sco numers da cartas da credit, dentant nagins pleds-clav. El po era protocollar Vossas interacziuns cun l\'interfatscha d\'utilisader. Questa metoda deriva da l\'applicaziun <xliff:g id="ACCESSIBILITY_SERVICE_NAME">%1$s</xliff:g>. Vulais Vus utilisar quest agid d\'access?\""</string>
     <string name="accessibility_service_disable_warning" msgid="8930591383312775132">"Deactivar ils agids d\'endataziun?"</string>
     <string name="accessibility_service_no_apps_title" msgid="898893674114288531">"Chattà nagina applicaziun dad agids d\'access"</string>
     <!-- outdated translation 2450056749545404807 -->     <string name="accessibility_service_no_apps_message" msgid="2663371323410332529">"Nagina applicaziun d\'agids d\'access è installada."\n\n"Vus pudais telechargiar in screen reader da l\'Android Market per Voss apparat."\n\n"Cliccai sin «OK» per installar il screen reader."</string>
@@ -1100,6 +1100,8 @@
     <!-- no translation found for accessibility_script_injection_enabled (6927896081016611012) -->
     <skip />
     <!-- no translation found for accessibility_script_injection_enabled_summary (3629525134901617621) -->
+    <skip />
+    <!-- no translation found for accessibility_script_injection_security_warning (1113600871264359828) -->
     <skip />
     <!-- no translation found for accessibility_script_injection_security_warning (9078893361741942109) -->
     <skip />
@@ -1110,21 +1112,14 @@
     <string name="power_usage_summary" msgid="7237084831082848168">"Consumaders da l\'accu"</string>
     <string name="battery_since_unplugged" msgid="338073389740738437">"Utilisaziun da l\'accu dapi la deconnexiun"</string>
     <string name="battery_since_reset" msgid="7464546661121187045">"Accu consumà dapi l\'ultima reinizialisaziun"</string>
-    <!-- no translation found for battery_stats_on_battery (4970762168505236033) -->
-    <skip />
+    <string name="battery_stats_on_battery" msgid="4970762168505236033">"Sur la battaria: <xliff:g id="TIME">%1$s</xliff:g>"</string>
     <string name="battery_stats_duration" msgid="7464501326709469282">"Deconnectà dapi <xliff:g id="TIME">%1$s</xliff:g>"</string>
-    <!-- no translation found for battery_stats_charging_label (4223311142875178785) -->
-    <skip />
-    <!-- no translation found for battery_stats_screen_on_label (7150221809877509708) -->
-    <skip />
-    <!-- no translation found for battery_stats_gps_on_label (1193657533641951256) -->
-    <skip />
-    <!-- no translation found for battery_stats_wifi_running_label (3093545080361658269) -->
-    <skip />
-    <!-- no translation found for battery_stats_wake_lock_label (1908942681902324095) -->
-    <skip />
-    <!-- no translation found for battery_stats_phone_signal_label (6822042940376636775) -->
-    <skip />
+    <string name="battery_stats_charging_label" msgid="4223311142875178785">"Vegn chargià"</string>
+    <string name="battery_stats_screen_on_label" msgid="7150221809877509708">"Visur activà"</string>
+    <string name="battery_stats_gps_on_label" msgid="1193657533641951256">"GPS activà"</string>
+    <!-- outdated translation 4100552585961214960 -->     <string name="battery_stats_wifi_running_label" msgid="3093545080361658269">"WLAN"</string>
+    <string name="battery_stats_wake_lock_label" msgid="1908942681902324095">"Alert"</string>
+    <!-- outdated translation 6822042940376636775 -->     <string name="battery_stats_phone_signal_label" msgid="4137799310329041341">"Signal da telefon"</string>
     <!-- no translation found for battery_stats_last_duration (1535831453827905957) -->
     <skip />
     <string name="awake" msgid="387122265874485088">"Temp d\'activitad da l\'apparat"</string>
@@ -1140,15 +1135,16 @@
     <string name="power_bluetooth" msgid="4373329044379008289">"Bluetooth"</string>
     <string name="power_cell" msgid="6596471490976003056">"Standby telefonin"</string>
     <string name="power_phone" msgid="5392641106474567277">"Cloms vocals"</string>
-    <string name="power_idle" msgid="9055659695602194990">"Telefon inactiv"</string>
+    <!-- outdated translation 9055659695602194990 -->     <string name="power_idle" product="tablet" msgid="4612478572401640759">"Telefon inactiv"</string>
+    <string name="power_idle" product="default" msgid="9055659695602194990">"Telefon inactiv"</string>
     <string name="usage_type_cpu" msgid="715162150698338714">"CPU - Durada totala"</string>
     <string name="usage_type_cpu_foreground" msgid="6500579611933211831">"CPU - Fund davant"</string>
-    <!-- no translation found for usage_type_wake_lock (5125438890233677880) -->
-    <skip />
+    <string name="usage_type_wake_lock" msgid="5125438890233677880">"Betg sa durmentar"</string>
     <string name="usage_type_gps" msgid="7989688715128160790">"GPS"</string>
     <!-- no translation found for usage_type_wifi_running (8234997940652067049) -->
     <skip />
-    <string name="usage_type_phone" msgid="9108247984998041853">"Telefon"</string>
+    <!-- outdated translation 9108247984998041853 -->     <string name="usage_type_phone" product="tablet" msgid="262638572890253393">"Telefon"</string>
+    <string name="usage_type_phone" product="default" msgid="9108247984998041853">"Telefon"</string>
     <string name="usage_type_data_send" msgid="2857401966985425427">"Datas tramessas"</string>
     <string name="usage_type_data_recv" msgid="7251090882025234185">"Datas recepidas"</string>
     <string name="usage_type_audio" msgid="6957269406840886290">"Audio"</string>
@@ -1162,7 +1158,8 @@
     <!-- outdated translation 5452076674659927993 -->     <string name="battery_action_wifi" msgid="2272741639606146903">"Parameters WLAN"</string>
     <string name="battery_action_bluetooth" msgid="8374789049507723142">"Parameters Bluetooth"</string>
     <string name="battery_desc_voice" msgid="8980322055722959211">"Accu utilisà per cloms"</string>
-    <string name="battery_desc_standby" msgid="3009080001948091424">"Consum da l\'accu sch\'il telefonin è inactiv"</string>
+    <!-- outdated translation 3009080001948091424 -->     <string name="battery_desc_standby" product="tablet" msgid="6284747418668280364">"Consum da l\'accu sch\'il telefonin è inactiv"</string>
+    <string name="battery_desc_standby" product="default" msgid="3009080001948091424">"Consum da l\'accu sch\'il telefonin è inactiv"</string>
     <string name="battery_desc_radio" msgid="5479196477223185367">"Accu consumà dal signal radiofonic"</string>
     <string name="battery_sugg_radio" msgid="8211336978326295047">"Midai al modus d\'aviun per spargnar accu en lieus senza access a la rait"</string>
     <string name="battery_desc_display" msgid="5432795282958076557">"La consumaziun d\'accu entras il visur e la glisch"</string>
@@ -1172,9 +1169,9 @@
     <string name="battery_desc_bluetooth" msgid="7535520658674621902">"Consumaziun da l\'accu entras Bluetooth"</string>
     <string name="battery_sugg_bluetooth_basic" msgid="817276933922157788">"Deactivai Bluetooth sche Vus n\'utilisais betg la funcziun."</string>
     <string name="battery_sugg_bluetooth_headset" msgid="8214816222115517479">"Empruvai da connectar cun in auter apparat da Bluetooth"</string>
-    <!-- outdated translation 8123202939321333639 -->     <string name="battery_desc_apps" msgid="6665712811746233450">"Consum d\'accu sche applicaziuns vegnan exequidas"</string>
+    <string name="battery_desc_apps" msgid="6665712811746233450">"Accu consumà tenor applicaziun"</string>
     <string name="battery_sugg_apps_info" msgid="6065882899391322442">"Serrar u deinstallar l\'applicaziun"</string>
-    <!-- outdated translation 4145005297393800223 -->     <string name="battery_sugg_apps_gps" msgid="4545056413090932541">"Deactivai il GPS sche Vus n\'al utilisais betg."</string>
+    <string name="battery_sugg_apps_gps" msgid="4545056413090932541">"Controllar manualmain il GPS per evitar che l\'applicaziun l\'utiliseschia"</string>
     <string name="battery_sugg_apps_settings" msgid="8021302847272481168">"L\'applicaziun dispona eventualmain da parameters che permettan da reducir il consum da l\'accu."</string>
     <string name="menu_stats_unplugged" msgid="8296577130840261624">"<xliff:g id="UNPLUGGED">%1$s</xliff:g> dapi la deconnexiun"</string>
     <string name="menu_stats_last_unplugged" msgid="5922246077592434526">"Dapi la davosa deconnexiun (<xliff:g id="UNPLUGGED">%1$s</xliff:g>)"</string>
@@ -1190,8 +1187,7 @@
     <string name="voice_output_category" msgid="2624538587784986229">"Sortida vocala"</string>
     <string name="recognizer_title" msgid="3231385184559054457">"Renconuschientscha vocala"</string>
     <string name="recognizer_settings_title" msgid="6038598099039717232">"Parameters da la reconuschientscha vocala"</string>
-    <!-- no translation found for recognizer_settings_summary (4472287934134546902) -->
-    <skip />
+    <string name="recognizer_settings_summary" msgid="4472287934134546902">"Parameters da \'<xliff:g id="RECOGNIZER_NAME">%s</xliff:g>\'"</string>
     <string name="tts_settings" msgid="8186971894801348327">"Parameters da text-en-lingua"</string>
     <string name="tts_settings_title" msgid="4182348653053000933">"Parameters da text-en-lingua"</string>
     <string name="use_default_tts_settings_title" msgid="1577063839539732930">"Adina utilisar mes param."</string>
@@ -1225,10 +1221,8 @@
     <string name="pico_not_installed" msgid="6266845418419994311">"Betg installà"</string>
     <string name="pico_voice_summary_female" msgid="8047327176247727492">"Feminin"</string>
     <string name="pico_voice_summary_male" msgid="8331266854058577610">"Masculin"</string>
-    <!-- no translation found for tts_notif_engine_install_title (7000346872482649034) -->
-    <skip />
-    <!-- no translation found for tts_notif_engine_install_message (5304661142202662693) -->
-    <skip />
+    <string name="tts_notif_engine_install_title" msgid="7000346872482649034">"Installà il modul da sintesa vocala"</string>
+    <string name="tts_notif_engine_install_message" msgid="5304661142202662693">"Activar nov modul per utilisar"</string>
     <string name="gadget_title" msgid="7455548605888590466">"Controlla d\'energia"</string>
     <string name="gadget_toggle_wifi" msgid="2382963973155082629">"Actualisar ils parameters WLAN"</string>
     <string name="gadget_toggle_bluetooth" msgid="7538903239807020826">"Actualisaziun dals parameters bluetooth"</string>
@@ -1352,18 +1346,15 @@
     <string name="emergency_tone_summary" msgid="722259232924572153">"Definir il cumportament en cas d\'in clom d\'urgenza"</string>
     <string name="privacy_settings" msgid="9206631214140954954">"Protecziun da datas"</string>
     <string name="privacy_settings_title" msgid="1987089301293213705">"Parameters da la protecziun da datas"</string>
-    <!-- outdated translation 717834414028702406 -->     <string name="backup_section_title" msgid="8856083167469467588">"Copia da segirezza e restauraziun"</string>
+    <string name="backup_section_title" msgid="8856083167469467588">"Copias da segirezza e restauraziun"</string>
     <string name="personal_data_section_title" msgid="7815209034443782061">"Datas persunalas"</string>
-    <!-- no translation found for backup_data_title (1239105919852668016) -->
-    <skip />
-    <!-- no translation found for backup_data_summary (6515285107793232815) -->
-    <skip />
+    <string name="backup_data_title" msgid="1239105919852668016">"Far copias da segirezza da mias datas"</string>
+    <!-- outdated translation 5662190190240860035 -->     <string name="backup_data_summary" msgid="6515285107793232815">"Far copias da segirezza da mes parameters e dad autras datas d\'applicaziun."</string>
     <string name="auto_restore_title" msgid="5397528966329126506">"Restauraziun automatica"</string>
-    <!-- outdated translation 2029683590724508019 -->     <string name="auto_restore_summary" msgid="83177150536734378">"Restaurar las datas d\'applicaziun suenter l\'installaziun da las applicaziuns a maun da la copia da segirezza"</string>
+    <!-- outdated translation 6867766474057290177 -->     <string name="auto_restore_summary" msgid="83177150536734378">"Restaurar ils parameters u autras datas da copias da segirezza sche jau reinstallesch ina applicaziun"</string>
     <string name="backup_erase_dialog_title" msgid="3438255037256586237">"Copia da segirezza"</string>
     <!-- outdated translation 2948090854996352245 -->     <string name="backup_erase_dialog_message" msgid="7766283133557587608">"Vulais Vus propi interrumper la copia da segirezza dals parameters e da las datas da l\'applicaziun e stizzar tut las copias sin ils servers da Google?"</string>
-    <!-- no translation found for device_admin_settings_title (1335557832906433309) -->
-    <skip />
+    <string name="device_admin_settings_title" msgid="1335557832906433309">"Parameters d\'administraziun da l\'apparat"</string>
     <string name="active_device_admin_msg" msgid="6930903262612422111">"Administratur dad apparats"</string>
     <string name="remove_device_admin" msgid="3596845261596451437">"Deactivar"</string>
     <string name="select_device_admin_msg" msgid="2645509057946368094">"Administraturs dals apparats"</string>
@@ -1374,14 +1365,10 @@
     <string name="device_admin_warning" msgid="1149471041373876923">"L\'activaziun da quest administratur pussibilitescha che l\'applicaziun <xliff:g id="APP_NAME">%1$s</xliff:g> possia exequir suandantas operaziuns:"</string>
     <string name="device_admin_status" msgid="7169948053970923035">"Quest administratur è activà e permetta a l\'applicaziun <xliff:g id="APP_NAME">%1$s</xliff:g> d\'exequir las suandantas operaziuns:"</string>
     <string name="untitled_apn" msgid="1230060359198685513">"Senza num"</string>
-    <!-- no translation found for sound_category_sound_title (1488759370067953996) -->
-    <skip />
-    <!-- no translation found for sound_category_calls_title (3688531959256239012) -->
-    <skip />
-    <!-- no translation found for sound_category_notification_title (3502115998790286943) -->
-    <skip />
-    <!-- no translation found for sound_category_feedback_title (4399742321363475393) -->
-    <skip />
+    <string name="sound_category_sound_title" msgid="1488759370067953996">"General"</string>
+    <string name="sound_category_calls_title" msgid="3688531959256239012">"Cloms entrants"</string>
+    <string name="sound_category_notification_title" msgid="3502115998790286943">"Avis"</string>
+    <string name="sound_category_feedback_title" msgid="4399742321363475393">"Commentaris"</string>
     <!-- no translation found for wifi_setup_title (3130584822275278425) -->
     <skip />
     <!-- no translation found for wifi_setup_not_connected (6997432604664057052) -->
