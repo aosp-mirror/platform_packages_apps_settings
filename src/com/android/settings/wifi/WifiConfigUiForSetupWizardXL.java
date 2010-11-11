@@ -72,14 +72,19 @@ public class WifiConfigUiForSetupWizardXL implements WifiConfigUiBase {
     private void trySetFocusAndLaunchSoftInput(int id) {
         final View viewToBeFocused = mView.findViewById(id);
         if (viewToBeFocused != null && viewToBeFocused.getVisibility() == View.VISIBLE) {
-            Log.d(TAG, "requestFocus() returned " + viewToBeFocused.requestFocus());
-            // TODO: doesn't work.
-            if (viewToBeFocused instanceof EditText) {
-                Log.d(TAG, "Focused View is EditText. We try showing the software keyboard");
-                // viewToBeFocused.performClick();
+            final boolean requestFocusResult = viewToBeFocused.requestFocus();
+            Log.i(TAG, String.format("Focus request to %x %s.", id,
+                    (requestFocusResult ? "successful" : "failed")));
+            if (requestFocusResult && viewToBeFocused instanceof EditText) {
+                Log.i(TAG, String.format(
+                        "Focused View (%x) is EditText. Try to show software keyboard", id));
                 final InputMethodManager inputMethodManager = (InputMethodManager)
                         mActivity.getSystemService(Context.INPUT_METHOD_SERVICE);
-                inputMethodManager.showSoftInput(viewToBeFocused, 0);
+                final boolean showSoftInputResult =
+                        inputMethodManager.showSoftInput(viewToBeFocused, 0);
+                if (!showSoftInputResult) {
+                    Log.w(TAG, "Failed to show software keyboard ");
+                }
             }
         }
     }
