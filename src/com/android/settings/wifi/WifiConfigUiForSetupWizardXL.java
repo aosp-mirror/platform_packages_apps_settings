@@ -33,7 +33,7 @@ import android.widget.EditText;
  * screen.
  */
 public class WifiConfigUiForSetupWizardXL implements WifiConfigUiBase {
-    private static final String TAG = "WifiConfigPreference";
+    private static final String TAG = "SetupWizard";
 
     private Button mConnectButton;
     private Button mForgetButton;
@@ -72,7 +72,7 @@ public class WifiConfigUiForSetupWizardXL implements WifiConfigUiBase {
     private void trySetFocusAndLaunchSoftInput(int id) {
         final View viewToBeFocused = mView.findViewById(id);
         if (viewToBeFocused != null && viewToBeFocused.getVisibility() == View.VISIBLE) {
-            viewToBeFocused.requestFocus();
+            Log.d(TAG, "requestFocus() returned " + viewToBeFocused.requestFocus());
             // TODO: doesn't work.
             if (viewToBeFocused instanceof EditText) {
                 Log.d(TAG, "Focused View is EditText. We try showing the software keyboard");
