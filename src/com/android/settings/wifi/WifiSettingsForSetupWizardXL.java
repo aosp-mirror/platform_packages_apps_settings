@@ -113,6 +113,10 @@ public class WifiSettingsForSetupWizardXL extends Activity implements OnClickLis
         getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE);
         
         mWifiManager = (WifiManager)getSystemService(Context.WIFI_SERVICE);
+        // There's no button here enabling wifi network, so we need to enable it without
+        // users' request.
+        mWifiManager.setWifiEnabled(true);
+
         mWifiSettings =
                 (WifiSettings)getFragmentManager().findFragmentById(R.id.wifi_setup_fragment);
         mInputMethodManager = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
