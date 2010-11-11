@@ -115,9 +115,11 @@
     <string name="bluetooth_notif_message" msgid="5381418499788668724">"Selecteer dit om te koppelen met "</string>
     <string name="device_picker" msgid="8721012448931226323">"Apparaatkiezer van Bluetooth"</string>
     <string name="bluetooth_permission_request" msgid="1523129741266262748">"Machtigingsverzoek voor Bluetooth"</string>
-    <string name="bluetooth_ask_enablement" msgid="2342558978033892004">"Een toepassing probeert Bluetooth in te schakelen. Wilt u dit toestaan?"</string>
-    <string name="bluetooth_ask_discovery" msgid="669870705606180872">"Een toepassing probeert uw telefoon <xliff:g id="TIMEOUT">%1$d</xliff:g> seconden zichtbaar te maken voor andere Bluetooth-apparaten. Wilt u dit toestaan?"</string>
-    <string name="bluetooth_ask_enablement_and_discovery" msgid="7220210326619399542">"Een toepassing probeert Bluetooth in te schakelen en uw telefoon <xliff:g id="TIMEOUT">%1$d</xliff:g> seconden zichtbaar te maken voor andere apparaten. Wilt u dit toestaan?"</string>
+    <!-- outdated translation 2342558978033892004 -->     <string name="bluetooth_ask_enablement" msgid="8211158472876087588">"Een toepassing probeert Bluetooth in te schakelen. Wilt u dit toestaan?"</string>
+    <!-- outdated translation 669870705606180872 -->     <string name="bluetooth_ask_discovery" product="tablet" msgid="5950965604673262829">"Een toepassing probeert uw telefoon <xliff:g id="TIMEOUT">%1$d</xliff:g> seconden zichtbaar te maken voor andere Bluetooth-apparaten. Wilt u dit toestaan?"</string>
+    <string name="bluetooth_ask_discovery" product="default" msgid="669870705606180872">"Een toepassing probeert uw telefoon <xliff:g id="TIMEOUT">%1$d</xliff:g> seconden zichtbaar te maken voor andere Bluetooth-apparaten. Wilt u dit toestaan?"</string>
+    <!-- outdated translation 7220210326619399542 -->     <string name="bluetooth_ask_enablement_and_discovery" product="tablet" msgid="5716077575971497298">"Een toepassing probeert Bluetooth in te schakelen en uw telefoon <xliff:g id="TIMEOUT">%1$d</xliff:g> seconden zichtbaar te maken voor andere apparaten. Wilt u dit toestaan?"</string>
+    <string name="bluetooth_ask_enablement_and_discovery" product="default" msgid="7220210326619399542">"Een toepassing probeert Bluetooth in te schakelen en uw telefoon <xliff:g id="TIMEOUT">%1$d</xliff:g> seconden zichtbaar te maken voor andere apparaten. Wilt u dit toestaan?"</string>
     <string name="bluetooth_turning_on" msgid="3107102168379705771">"Bluetooth inschakelen…"</string>
     <string name="date_and_time" msgid="4114084177056654663">"Datum- en tijdinstellingen"</string>
     <string name="date_time_12_hour_sample" msgid="3259617262618020574">"13:00 uur"</string>
@@ -210,14 +212,15 @@
     <string name="device_info_label" msgid="6551553813651711205">"Apparaatinfo"</string>
     <string name="battery_info_label" msgid="4132685016148679403">"Accu-info"</string>
     <string name="display_label" msgid="7403874003169865762">"Weergave"</string>
-    <string name="phone_info_label" msgid="2127552523124277664">"Telefooninfo"</string>
+    <!-- outdated translation 2127552523124277664 -->     <string name="phone_info_label" product="tablet" msgid="7820855350955963628">"Telefooninfo"</string>
+    <string name="phone_info_label" product="default" msgid="2127552523124277664">"Telefooninfo"</string>
     <string name="sd_card_settings_label" product="nosdcard" msgid="8101475181301178428">"USB-opslag"</string>
     <string name="sd_card_settings_label" product="default" msgid="5743100901106177102">"SD-kaart"</string>
     <string name="proxy_settings_label" msgid="3271174136184391743">"Proxy-instellingen"</string>
     <string name="cancel" msgid="6859253417269739139">"Annuleren"</string>
     <string name="settings_label" msgid="1626402585530130914">"Instellingen"</string>
     <string name="settings_label_launcher" msgid="8344735489639482340">"Instellingen"</string>
-    <string name="settings_shortcut" msgid="3672145147925639262">"Instellingen"</string>
+    <!-- outdated translation 3672145147925639262 -->     <string name="settings_shortcut" msgid="8597387747077828217">"Instellingen"</string>
     <string name="airplane_mode" msgid="8837269988154128601">"Vliegmodus"</string>
     <string name="airplane_mode_summary" msgid="3154817401368780988">"Alle draadloze verbindingen uitschakelen"</string>
     <string name="airplane_mode_turning_on" msgid="8871739222526957255">"Draadloze verbindingen uitschakelen..."</string>
@@ -251,10 +254,8 @@
     <string name="zone_list_menu_sort_by_timezone" msgid="2720190443744884114">"Sorteren op tijdzone"</string>
     <string name="lock_after_timeout" msgid="9100576335787336455">"Apparaat vergrendelen na time-out"</string>
     <string name="lock_after_timeout_summary" msgid="5751027735105958453">"De vertraging aanpassen waarna het apparaat automatisch wordt vergrendeld"</string>
-    <!-- no translation found for show_owner_info_on_lockscreen_label (5074906168357568434) -->
-    <skip />
-    <!-- no translation found for owner_info_settings_title (2723190010708381889) -->
-    <skip />
+    <string name="show_owner_info_on_lockscreen_label" msgid="5074906168357568434">"Eigenaarsgegevens weergeven op vergrendeld scherm"</string>
+    <string name="owner_info_settings_title" msgid="2723190010708381889">"Eigenaarsgegevens"</string>
     <string name="security_settings_title" msgid="5168491784222013179">"Locatie en beveiliging"</string>
     <string name="location_security_settings_title" msgid="4624434296446625554">"Locatie- en beveiligingsinstellingen"</string>
     <string name="security_settings_summary" msgid="967393342537986570">"Mijn locatie\', schermontgrendeling, SIM- en referentieopslagvergrendeling instellen"</string>
@@ -273,7 +274,7 @@
     <string name="unlock_set_unlock_pin_summary" msgid="4131169672844263316">"Numerieke PIN-code opgeven om het scherm te ontgrendelen"</string>
     <string name="unlock_set_unlock_password_title" msgid="8775603825675090937">"Wachtwoord"</string>
     <string name="unlock_set_unlock_password_summary" msgid="4623254789833899286">"Wachtwoord opgeven om het scherm te ontgrendelen"</string>
-    <string name="unlock_set_unlock_disabled_summary" msgid="736557879526940324">"Uitgeschakeld door externe telefoonbeheerder"</string>
+    <!-- outdated translation 736557879526940324 -->     <string name="unlock_set_unlock_disabled_summary" msgid="8816944391772300580">"Uitgeschakeld door externe telefoonbeheerder"</string>
     <string name="unlock_disable_lock_title" msgid="1427036227416979120">"Schermvergrendeling uitschakelen"</string>
     <string name="unlock_disable_lock_pattern_summary" msgid="6801602880568869201">"Ontgrendelingspatroon verwijderen"</string>
     <string name="unlock_disable_lock_pin_summary" msgid="8856842745366993387">"PIN-code voor ontgrendelen verwijderen"</string>
@@ -345,6 +346,14 @@
     <string name="bluetooth_pairing_rejected_error_message" msgid="1648157108520832454">"Koppeling geweigerd door <xliff:g id="DEVICE_NAME">%1$s</xliff:g>."</string>
     <string name="bluetooth_connecting_error_message" msgid="1779660510084746802">"Er is een probleem opgetreden bij het verbinden met <xliff:g id="DEVICE_NAME">%1$s</xliff:g>."</string>
     <string name="bluetooth_preference_scan_title" msgid="2277464653118896016">"Scannen naar apparaten"</string>
+    <!-- no translation found for bluetooth_preference_find_nearby_title (5087410003465463318) -->
+    <skip />
+    <!-- no translation found for bluetooth_preference_device_settings (907776049862799122) -->
+    <skip />
+    <!-- no translation found for bluetooth_preference_paired_devices (1970524193086791964) -->
+    <skip />
+    <!-- no translation found for bluetooth_preference_found_devices (3133019331974936204) -->
+    <skip />
     <string name="bluetooth_device_context_connect" msgid="3997659895003244941">"Verbinden"</string>
     <string name="bluetooth_device_context_disconnect" msgid="8220072022970148683">"Verbinding verbreken"</string>
     <string name="bluetooth_device_context_pair_connect" msgid="7611522504813927727">"Koppelen en verbinden"</string>
@@ -353,19 +362,37 @@
     <string name="bluetooth_device_context_connect_advanced" msgid="2643129703569788771">"Opties..."</string>
     <string name="bluetooth_connect_specific_profiles_title" msgid="6952214406025825164">"Verbinding maken met…"</string>
     <string name="bluetooth_profile_a2dp" msgid="3259633293424539529">"Media"</string>
-    <string name="bluetooth_profile_headset" msgid="1874975688666658946">"Telefoon"</string>
+    <!-- outdated translation 1874975688666658946 -->     <string name="bluetooth_profile_headset" product="tablet" msgid="2252738313413646294">"Telefoon"</string>
+    <string name="bluetooth_profile_headset" product="default" msgid="1874975688666658946">"Telefoon"</string>
     <string name="bluetooth_profile_opp" msgid="3799470046565284440">"Overdracht"</string>
     <string name="bluetooth_profile_hid" msgid="3000858580917633478">"Invoerapparaat"</string>
     <string name="bluetooth_profile_pan" msgid="4225813400648547154">"Tethering"</string>
     <string name="bluetooth_summary_connected_to_a2dp" msgid="510833839847758664">"Verbonden met audio van medium"</string>
-    <string name="bluetooth_summary_connected_to_headset" msgid="4876496372728623918">"Verbonden met audio van telefoon"</string>
+    <!-- outdated translation 4876496372728623918 -->     <string name="bluetooth_summary_connected_to_headset" product="tablet" msgid="598335151406893070">"Verbonden met audio van telefoon"</string>
+    <string name="bluetooth_summary_connected_to_headset" product="default" msgid="4876496372728623918">"Verbonden met audio van telefoon"</string>
     <string name="bluetooth_summary_connected_to_a2dp_headset" msgid="3045032710457800891">"Verbonden met audio van telefoon en medium"</string>
     <string name="bluetooth_summary_connected_to_hid" msgid="8147499644396475561">"Verbonden met invoerapparaat"</string>
     <string name="bluetooth_summary_connected_to_pan" msgid="3157622705092537266">"Getetherd"</string>
+    <!-- no translation found for bluetooth_disconnect_a2dp_profile (3524648279150937177) -->
+    <skip />
+    <!-- no translation found for bluetooth_disconnect_headset_profile (3656117361616583255) -->
+    <skip />
+    <!-- no translation found for bluetooth_disconnect_headset_profile (8343033989250953720) -->
+    <skip />
+    <!-- no translation found for bluetooth_disconnect_hid_profile (3282295189719352075) -->
+    <skip />
+    <!-- no translation found for bluetooth_disconnect_pan_profile (877883150720888525) -->
+    <skip />
     <string name="bluetooth_device_advanced_title" msgid="528816860793581131">"Opties voor <xliff:g id="DEVICE_NAME">%1$s</xliff:g>"</string>
+    <!-- no translation found for bluetooth_device_advanced_device_actions_title (3793430949811946844) -->
+    <skip />
     <string name="bluetooth_device_advanced_online_mode_title" msgid="3689050071425683114">"Verbinden"</string>
     <string name="bluetooth_device_advanced_online_mode_summary" msgid="1204424107263248336">"Verbinden met Bluetooth-apparaat"</string>
     <string name="bluetooth_device_advanced_profile_header_title" msgid="3764437426089639639">"Profielen"</string>
+    <!-- no translation found for bluetooth_device_advanced_rename_device (350508394033808532) -->
+    <skip />
+    <!-- no translation found for bluetooth_device_advanced_enable_opp_title (8222550640371627365) -->
+    <skip />
     <string name="bluetooth_a2dp_profile_summary_connected" msgid="963376081347721598">"Verbonden met audio van medium"</string>
     <string name="bluetooth_headset_profile_summary_connected" msgid="7661070206715520671">"Verbonden met audio van telefoon"</string>
     <string name="bluetooth_opp_profile_summary_connected" msgid="2611913495968309066">"Verbonden met server voor bestandsoverdracht"</string>
@@ -407,10 +434,8 @@
     <string name="wifi_menu_modify" msgid="2068554918652440105">"Netwerk aanpassen"</string>
     <string name="wifi_network_setup" msgid="7974851890019344870">"Netwerkinstelling"</string>
     <string name="wifi_wps_pin" msgid="5471842298708321115">"PIN opgeven via toegangspunt"</string>
-    <!-- no translation found for wifi_wps_pin_method_configuration (9019042137789692817) -->
-    <skip />
-    <!-- no translation found for wifi_wps_pin_output (8682102965680650853) -->
-    <skip />
+    <string name="wifi_wps_pin_method_configuration" msgid="9019042137789692817">"WPS-PIN-configuratiemethode"</string>
+    <string name="wifi_wps_pin_output" msgid="8682102965680650853">"Voer de PIN <xliff:g id="WPS_PIN">%1$s</xliff:g> in bij het toegangspunt"</string>
     <string name="wifi_ssid" msgid="641393708309146745">"SSID van netwerk"</string>
     <string name="wifi_security" msgid="6603611185592956936">"Beveiliging"</string>
     <string name="wifi_signal" msgid="5514120261628065287">"Signaalsterkte"</string>
@@ -431,8 +456,7 @@
     <string name="wifi_remembered" msgid="8426719916135950136">"Onthouden"</string>
     <string name="wifi_disabled" msgid="2104752038187543712">"Uitgeschakeld"</string>
     <string name="wifi_not_in_range" msgid="1136191511238508967">"Niet binnen bereik"</string>
-    <!-- no translation found for wifi_open_with_wps (2606968531452521147) -->
-    <skip />
+    <string name="wifi_open_with_wps" msgid="2606968531452521147">"WPS beschikbaar"</string>
     <string name="wifi_secured" msgid="6759903183748011566">"Beveiligd met <xliff:g id="WIFI_SECURITY">%1$s</xliff:g>"</string>
     <string name="wifi_secured_with_wps" msgid="1822538701086256007">"Beveiligd met <xliff:g id="WIFI_SECURITY">%1$s</xliff:g> (WPS beschikbaar)"</string>
     <string name="wifi_secured_with_status" msgid="6489317496506267302">"<xliff:g id="WIFI_STATUS">%2$s</xliff:g>, beveiligd met <xliff:g id="WIFI_SECURITY">%1$s</xliff:g>"</string>
@@ -440,32 +464,33 @@
     <string name="wifi_forget" msgid="8168174695608386644">"Vergeten"</string>
     <string name="wifi_save" msgid="3331121567988522826">"Opslaan"</string>
     <string name="wifi_cancel" msgid="6763568902542968964">"Annuleren"</string>
+    <!-- no translation found for wifi_back (249038475821092060) -->
+    <skip />
+    <!-- no translation found for wifi_detail (6321441611324424140) -->
+    <skip />
     <string name="wifi_advanced_titlebar" msgid="5419052271935350999">"Geavanceerd"</string>
-    <string name="wifi_setting_num_channels_title" msgid="694031537019656132">"Regulerend domein"</string>
-    <string name="wifi_setting_num_channels_summary" msgid="4889355096717099141">"Het aantal te gebruiken kanalen instellen"</string>
-    <string name="wifi_setting_num_channels_error" msgid="5765443843427870721">"Er is een probleem opgetreden bij het instellen van het regulerende domein."</string>
-    <string name="wifi_setting_num_channels_channel_phrase" msgid="1269381923672908636">"<xliff:g id="NUM_CHANNELS">%1$d</xliff:g> kanalen"</string>
     <string name="wifi_setting_sleep_policy_title" msgid="1367731352485585528">"Wi-Fi-slaapbeleid"</string>
     <string name="wifi_setting_sleep_policy_summary" msgid="7573693311804602041">"Overschakelen opgeven van Wi-Fi naar mobiele gegevens"</string>
     <string name="wifi_setting_sleep_policy_error" msgid="5103670439972135148">"Er is een probleem opgetreden bij het instellen van het slaapbeleid."</string>
+    <!-- no translation found for wifi_setting_frequency_band_title (7493768705046080060) -->
+    <skip />
+    <!-- no translation found for wifi_setting_frequency_band_summary (3250740757118009784) -->
+    <skip />
+    <!-- no translation found for wifi_setting_frequency_band_error (837281974489794378) -->
+    <skip />
     <string name="wifi_advanced_mac_address_title" msgid="6571335466330978393">"MAC-adres"</string>
     <string name="wifi_advanced_ip_address_title" msgid="6215297094363164846">"IP-adres"</string>
     <string name="wifi_ip_settings_titlebar" msgid="4345739031248760326">"IP-instellingen"</string>
     <string name="wifi_ip_settings_menu_save" msgid="7296724066102908366">"Opslaan"</string>
     <string name="wifi_ip_settings_menu_cancel" msgid="6582567330136502340">"Annuleren"</string>
-    <!-- no translation found for wifi_ip_settings_invalid_ip_address (6387653152103405443) -->
-    <skip />
-    <!-- no translation found for wifi_ip_settings_invalid_gateway (6383012465511093067) -->
-    <skip />
-    <!-- no translation found for wifi_ip_settings_invalid_dns (3428867750550854065) -->
-    <skip />
-    <!-- no translation found for wifi_ip_settings_invalid_network_prefix_length (8145730615716855433) -->
-    <skip />
+    <string name="wifi_ip_settings_invalid_ip_address" msgid="6387653152103405443">"Voer een geldig IP-adres in."</string>
+    <string name="wifi_ip_settings_invalid_gateway" msgid="6383012465511093067">"Voer een geldig gateway-adres in."</string>
+    <string name="wifi_ip_settings_invalid_dns" msgid="3428867750550854065">"Voer een geldig DNS-adres in."</string>
+    <string name="wifi_ip_settings_invalid_network_prefix_length" msgid="8145730615716855433">"Typ een netwerkprefix van 0-32 tekens."</string>
     <string name="wifi_dns1" msgid="7344118050720080045">"DNS 1"</string>
     <string name="wifi_dns2" msgid="1368601006824882659">"DNS 2"</string>
     <string name="wifi_gateway" msgid="163914742461092086">"Gateway"</string>
-    <!-- no translation found for wifi_network_prefix_length (3028785234245085998) -->
-    <skip />
+    <string name="wifi_network_prefix_length" msgid="3028785234245085998">"Lengte van netwerkprefix"</string>
     <string name="wifi_tether_checkbox_text" msgid="6961605862058056788">"Draagbare Wi-Fi-hotspot"</string>
     <string name="wifi_tether_enabled_subtext" msgid="8948641212931906143">"Draagbare hotspot <xliff:g id="NETWORK_SSID">%1$s</xliff:g> actief"</string>
     <string name="wifi_tether_failed_subtext" msgid="2654888578056042315">"Fout met draagbare Wi-Fi-hotspot"</string>
@@ -481,7 +506,7 @@
     <string name="silent_mode_title" msgid="3181479108593217704">"Stille modus"</string>
     <string name="silent_mode_summary" msgid="3309650676072917899">"Alle geluiden dempen, behalve media en alarmen"</string>
     <string name="silent_mode_incl_alarm_summary" msgid="2088830834182228458">"Alle geluiden, behalve media, worden uitgeschakeld"</string>
-    <string name="ringtone_title" msgid="5379026328015343686">"Beltoon telefoon"</string>
+    <!-- outdated translation 5379026328015343686 -->     <string name="ringtone_title" msgid="7037881886694206550">"Beltoon telefoon"</string>
     <string name="ringtone_summary" msgid="2630023412632683493"></string>
     <string name="all_volume_title" msgid="8741571721868253103">"Volume"</string>
     <string name="ring_volume_title" msgid="7938706566797464165">"Belvolume"</string>
@@ -521,13 +546,17 @@
     <string name="dock_audio_settings_title" msgid="3324750259959570305">"Audio"</string>
     <string name="dock_audio_summary_desk" msgid="6487784412371139335">"Instellingen voor het gekoppelde bureaudockstation"</string>
     <string name="dock_audio_summary_car" msgid="6740897586006248450">"Instellingen voor het gekoppelde autodockstation"</string>
-    <string name="dock_audio_summary_none" msgid="289909253741048784">"Telefoon niet gedockt"</string>
+    <!-- outdated translation 289909253741048784 -->     <string name="dock_audio_summary_none" product="tablet" msgid="8215337394914283607">"Telefoon niet gedockt"</string>
+    <string name="dock_audio_summary_none" product="default" msgid="289909253741048784">"Telefoon niet gedockt"</string>
     <string name="dock_audio_summary_unknown" msgid="4465059868974255693">"Instellingen voor het gekoppelde dockstation"</string>
     <string name="dock_not_found_title" msgid="3290961741828952424">"Dockstation niet gevonden"</string>
-    <string name="dock_not_found_text" msgid="3035260358985111855">"De telefoon moet zijn gedockt om audio-instellingen voor het dockstation in te stellen"</string>
+    <!-- outdated translation 3035260358985111855 -->     <string name="dock_not_found_text" product="tablet" msgid="7935403744079168804">"De telefoon moet zijn gedockt om audio-instellingen voor het dockstation in te stellen"</string>
+    <string name="dock_not_found_text" product="default" msgid="3035260358985111855">"De telefoon moet zijn gedockt om audio-instellingen voor het dockstation in te stellen"</string>
     <string name="dock_sounds_enable_title" msgid="3659084028644948905">"Geluid bij docken"</string>
-    <string name="dock_sounds_enable_summary_on" msgid="8491180514199743771">"Geluid afspelen wanneer de telefoon in het dock wordt geplaatst of uit het dock wordt verwijderd"</string>
-    <string name="dock_sounds_enable_summary_off" msgid="3151046599205265919">"Geen geluid afspelen wanneer de telefoon in het dock wordt geplaatst of uit het dock wordt verwijderd"</string>
+    <!-- outdated translation 8491180514199743771 -->     <string name="dock_sounds_enable_summary_on" product="tablet" msgid="838102386448981339">"Geluid afspelen wanneer de telefoon in het dock wordt geplaatst of uit het dock wordt verwijderd"</string>
+    <string name="dock_sounds_enable_summary_on" product="default" msgid="8491180514199743771">"Geluid afspelen wanneer de telefoon in het dock wordt geplaatst of uit het dock wordt verwijderd"</string>
+    <!-- outdated translation 3151046599205265919 -->     <string name="dock_sounds_enable_summary_off" product="tablet" msgid="5077843049805652363">"Geen geluid afspelen wanneer de telefoon in het dock wordt geplaatst of uit het dock wordt verwijderd"</string>
+    <string name="dock_sounds_enable_summary_off" product="default" msgid="3151046599205265919">"Geen geluid afspelen wanneer de telefoon in het dock wordt geplaatst of uit het dock wordt verwijderd"</string>
     <string name="sync_settings" msgid="9186125469300013491">"Accounts &amp; synchronisatie"</string>
     <string name="sync_settings_summary" msgid="2962179505214965667">"Accounts toevoegen of verwijderen en accountinstellingen wijzigen"</string>
     <string name="search_settings" msgid="1910951467596035063">"Zoeken"</string>
@@ -537,8 +566,10 @@
     <string name="animations_summary_on" msgid="8843613112130484436">"Animatie weergeven bij het openen en sluiten van vensters"</string>
     <string name="animations_summary_off" msgid="2777026828025551983">"Animatie weergeven bij het openen en sluiten van vensters"</string>
     <string name="accelerometer_title" msgid="7854608399547349157">"Scherm autom. draaien"</string>
-    <string name="accelerometer_summary_on" msgid="1133737282813048021">"Stand automatisch wijzigen als telefoon wordt gedraaid"</string>
-    <string name="accelerometer_summary_off" msgid="5485489363715740761">"Stand automatisch wijzigen als telefoon wordt gedraaid"</string>
+    <!-- outdated translation 1133737282813048021 -->     <string name="accelerometer_summary_on" product="tablet" msgid="429982132339828942">"Stand automatisch wijzigen als telefoon wordt gedraaid"</string>
+    <string name="accelerometer_summary_on" product="default" msgid="1133737282813048021">"Stand automatisch wijzigen als telefoon wordt gedraaid"</string>
+    <!-- outdated translation 5485489363715740761 -->     <string name="accelerometer_summary_off" product="tablet" msgid="4781734213242521682">"Stand automatisch wijzigen als telefoon wordt gedraaid"</string>
+    <string name="accelerometer_summary_off" product="default" msgid="5485489363715740761">"Stand automatisch wijzigen als telefoon wordt gedraaid"</string>
     <string name="brightness" msgid="2354961343555249270">"Helderheid"</string>
     <string name="brightness_summary" msgid="838917350127550703">"Helderheid van het scherm aanpassen"</string>
     <string name="screen_timeout" msgid="4882669461447531301">"Time-out scherm"</string>
@@ -548,8 +579,10 @@
     <string name="sim_lock_settings_category" msgid="5136244267576697004">"SIM-vergrendeling instellen"</string>
     <string name="sim_lock_settings_title" msgid="9018585580955414596">"SIM-kaartvergrendeling"</string>
     <string name="sim_pin_toggle" msgid="1742123478029451888">"SIM-kaart vergrendelen"</string>
-    <string name="sim_lock_on" msgid="2503536505568814324">"PIN-code vereist voor gebruik van telefoon"</string>
-    <string name="sim_lock_off" msgid="258981978215428916">"PIN-code vereist voor gebruik van telefoon"</string>
+    <!-- outdated translation 2503536505568814324 -->     <string name="sim_lock_on" product="tablet" msgid="5058355081270397764">"PIN-code vereist voor gebruik van telefoon"</string>
+    <string name="sim_lock_on" product="default" msgid="2503536505568814324">"PIN-code vereist voor gebruik van telefoon"</string>
+    <!-- outdated translation 258981978215428916 -->     <string name="sim_lock_off" product="tablet" msgid="2813800553917012356">"PIN-code vereist voor gebruik van telefoon"</string>
+    <string name="sim_lock_off" product="default" msgid="258981978215428916">"PIN-code vereist voor gebruik van telefoon"</string>
     <string name="sim_pin_change" msgid="6311414184279932368">"SIM PIN-code wijzigen"</string>
     <string name="sim_enter_pin" msgid="6608715137008508432">"SIM PIN-code"</string>
     <string name="sim_enable_sim_lock" msgid="4517742794997166918">"SIM-kaart vergrendelen"</string>
@@ -565,7 +598,8 @@
     <string name="sim_lock_failed" msgid="6676748290838006404">"Kan status van SIM-kaartblokkering niet wijzigen."\n"PIN-code mogelijk onjuist."</string>
     <string name="sim_enter_ok" msgid="6475946836899218919">"OK"</string>
     <string name="sim_enter_cancel" msgid="6240422158517208036">"Annuleren"</string>
-    <string name="device_info_settings" msgid="475872867864762157">"Telefoonstatus"</string>
+    <!-- outdated translation 475872867864762157 -->     <string name="device_info_settings" product="tablet" msgid="1119755927536987178">"Telefoonstatus"</string>
+    <string name="device_info_settings" product="default" msgid="475872867864762157">"Telefoonstatus"</string>
     <string name="system_update_settings_list_item_title" msgid="3342887311059985961">"Systeemupdates"</string>
     <string name="system_update_settings_list_item_summary" msgid="3853057315907710747"></string>
     <string name="firmware_version" msgid="4801135784886859972">"Android-versie"</string>
@@ -577,7 +611,7 @@
     <string name="device_status_activity_title" msgid="1411201799384697904">"Status"</string>
     <string name="device_status" msgid="607405385799807324">"Status"</string>
     <string name="device_status_summary" msgid="2599162787451519618">"Telefoonnummer, signaal, enzovoort"</string>
-    <!-- outdated translation 6761505449439392808 -->     <string name="storage_settings" product="nosdcard" msgid="8758910337658683955">"Gedeelde en beveiligde opslag"</string>
+    <string name="storage_settings" product="nosdcard" msgid="8758910337658683955">"Gedeelde en beveiligde opslag"</string>
     <string name="storage_settings" product="default" msgid="4211799979832404953">"Opslagruimte"</string>
     <string name="storage_settings_title" msgid="8746016738388094064">"Instellingen voor opslag"</string>
     <string name="storage_settings_summary" product="nosdcard" msgid="3543813623294870759">"USB-opslag ontkoppelen, beschikbare opslag weergeven"</string>
@@ -610,14 +644,14 @@
     <string name="ptp_mode_summary" msgid="8709697530987890394">"Weergeven op USB als PTP-camera-apparaat in plaats van als MTP-apparaat"</string>
     <string name="sd_insert_summary" product="nosdcard" msgid="5264016886409577313">"USB-opslag plaatsen voor koppelen"</string>
     <string name="sd_insert_summary" product="default" msgid="2048640010381803841">"Plaats een SD-kaart om deze te koppelen"</string>
-    <!-- outdated translation 2160896630836199702 -->     <string name="sd_mount" product="nosdcard" msgid="8966695015677343116">"Gedeelde opslag koppelen"</string>
+    <string name="sd_mount" product="nosdcard" msgid="8966695015677343116">"USB-opslag koppelen"</string>
     <string name="sd_mount" product="default" msgid="5940523765187704135">"SD-kaart koppelen"</string>
     <!-- outdated translation 6733254203291665551 -->     <string name="sd_mount_summary" product="nosdcard" msgid="1794150364965145726">"Interne USB-opslag koppelen"</string>
     <string name="sd_mount_summary" product="default" msgid="4936591681679097699">"De SD-kaart koppelen"</string>
     <string name="sd_format" product="nosdcard" msgid="2148179271623099054">"USB-opslag wissen"</string>
     <string name="sd_format" product="default" msgid="2576054280507119870">"SD-kaart wissen"</string>
-    <string name="sd_format_summary" product="nosdcard" msgid="1504606546865152514">"Hiermee worden alle gegevens in de interne USB-opslag van de telefoon gewist, zoals muziek en foto\'s"</string>
-    <string name="sd_format_summary" product="default" msgid="915849621390821841">"Hiermee worden alle gegevens op de SD-kaart van de telefoon gewist, zoals muziek en foto\'s"</string>
+    <!-- outdated translation 1504606546865152514 -->     <string name="sd_format_summary" product="nosdcard" msgid="6331905044907914603">"Hiermee worden alle gegevens in de interne USB-opslag van de telefoon gewist, zoals muziek en foto\'s"</string>
+    <!-- outdated translation 1504606546865152514 -->     <string name="sd_format_summary" product="default" msgid="212703692181793109">"Hiermee worden alle gegevens in de interne USB-opslag van de telefoon gewist, zoals muziek en foto\'s"</string>
     <string name="sd_unavailable" msgid="8580107589533213904">"Niet beschikbaar"</string>
     <string name="read_only" msgid="6702420168629076340">" (Alleen-lezen)"</string>
     <string name="dlg_confirm_unmount_title" product="nosdcard" msgid="2349876662428231297">"USB-opslag ontkoppelen"</string>
@@ -668,19 +702,35 @@
     <string name="menu_restore" msgid="8260067415075573273">"Standaardinstellingen herstellen"</string>
     <string name="restore_default_apn_completed" msgid="3990449939234957281">"Herstellen van standaard-APN-instellingen voltooid"</string>
     <string name="master_clear_title" msgid="5907939616087039756">"Fabrieksinstellingen terug"</string>
-    <string name="master_clear_summary" msgid="4986154238001088492">"Alle gegevens op de telefoon wissen"</string>
-    <string name="master_clear_desc" product="nosdcard" msgid="2163013814299528247">"Hiermee worden alle gegevens in de "<b>"interne opslag"</b>" van uw telefoon gewist, waaronder:"\n\n<li>"Uw Google-account"</li>\n<li>"Gegevens en instellingen van het systeem en de toepassingen"</li>\n<li>"Gedownloade toepassingen"</li>\n\n"Als u alle gegevens op deze telefoon wilt wissen, moet de "<b>"USB-opslag"</b>" worden gewist."\n\n</string>
-    <string name="master_clear_desc" product="default" msgid="1741944496458365969">"Hiermee worden alle gegevens in de "<b>"interne opslag"</b>" van uw telefoon gewist, waaronder:"\n\n<li>"Uw Google-account"</li>\n<li>"Gegevens en instellingen van het systeem en de toepassingen"</li>\n<li>"Gedownloade toepassingen"</li>\n\n"Als u ook muziek, foto\'s en andere gegevens wilt wissen, moet de "<b>"SD-kaart"</b>" worden gewist."\n\n</string>
+    <!-- outdated translation 4986154238001088492 -->     <string name="master_clear_summary" product="tablet" msgid="4036344100254678429">"Alle gegevens op de telefoon wissen"</string>
+    <string name="master_clear_summary" product="default" msgid="4986154238001088492">"Alle gegevens op de telefoon wissen"</string>
+    <!-- unknown placeholder TAG_B_0 in master_clear_desc -->
+    <skip />
+    <!-- no translation found for master_clear_desc (1305457209008369655) -->
+    <skip />
+    <!-- unknown placeholder TAG_B_0 in master_clear_desc -->
+    <skip />
+    <!-- no translation found for master_clear_desc (2950536633526374209) -->
+    <skip />
+    <!-- no translation found for master_clear_accounts (6412857499147999073) -->
+    <skip />
+    <!-- no translation found for master_clear_desc_erase_external_storage (4740866328425123395) -->
+    <skip />
+    <!-- no translation found for master_clear_desc_erase_external_storage (7339100478676372901) -->
+    <skip />
     <string name="erase_external_storage" product="nosdcard" msgid="969364037450286809">"USB-opslag wissen"</string>
     <string name="erase_external_storage" product="default" msgid="1397239046334307625">"SD-kaart wissen"</string>
-    <string name="erase_external_storage_description" product="nosdcard" msgid="1657838142707381027">"Alle gegevens in de interne USB-opslag van de telefoon wissen, zoals muziek en foto\'s."</string>
-    <string name="erase_external_storage_description" product="default" msgid="8100175974635894073">"Alle gegevens op de SD-kaart van de telefoon wissen, zoals muziek en foto\'s."</string>
-    <string name="master_clear_button_text" msgid="7550632653343157971">"Telefoon opnieuw instellen"</string>
+    <!-- outdated translation 1657838142707381027 -->     <string name="erase_external_storage_description" product="nosdcard" msgid="444834593696342279">"Alle gegevens in de interne USB-opslag van de telefoon wissen, zoals muziek en foto\'s."</string>
+    <!-- outdated translation 1657838142707381027 -->     <string name="erase_external_storage_description" product="default" msgid="46603515218075174">"Alle gegevens in de interne USB-opslag van de telefoon wissen, zoals muziek en foto\'s."</string>
+    <!-- outdated translation 7550632653343157971 -->     <string name="master_clear_button_text" product="tablet" msgid="3130786116528304116">"Telefoon opnieuw instellen"</string>
+    <string name="master_clear_button_text" product="default" msgid="7550632653343157971">"Telefoon opnieuw instellen"</string>
     <string name="master_clear_final_desc" msgid="6917971132484622696">"Alle persoonlijke gegevens en gedownloade toepassingen wissen? U kunt deze actie niet ongedaan maken."</string>
     <string name="master_clear_final_button_text" msgid="5390908019019242910">"Alles wissen"</string>
     <string name="master_clear_gesture_prompt" msgid="1428645764883536750">"Teken uw ontgrendelingspatroon"</string>
-    <string name="master_clear_gesture_explanation" msgid="8901714274312707918">"U moet uw ontgrendelingspatroon tekenen om het opnieuw instellen van de telefoon te bevestigen."</string>
+    <!-- outdated translation 8901714274312707918 -->     <string name="master_clear_gesture_explanation" msgid="2234954758550554549">"U moet uw ontgrendelingspatroon tekenen om het opnieuw instellen van de telefoon te bevestigen."</string>
     <string name="master_clear_failed" msgid="8655202125010189406">"Niet opnieuw ingesteld, omdat de service \'Systeem wissen\' niet beschikbaar is."</string>
+    <!-- no translation found for master_clear_confirm_title (4845794266129586839) -->
+    <skip />
     <string name="media_format_title" product="nosdcard" msgid="3999653431422767156">"USB-opslag wissen"</string>
     <string name="media_format_title" product="default" msgid="4427528440306787972">"SD-kaart wissen"</string>
     <string name="media_format_summary" product="nosdcard" msgid="776603298628082065">"Alle gegevens in USB-opslag wissen"</string>
@@ -702,13 +752,18 @@
     <string name="tether_settings_title_bluetooth" msgid="355855408317564420">"Bluetooth-tethering"</string>
     <string name="tether_settings_title_usb_bluetooth" msgid="5355828977109785001">"Tethering"</string>
     <string name="tether_settings_title_all" msgid="8356136101061143841">"Tethering en draagbare hotspot"</string>
-    <string name="tether_settings_summary_usb" msgid="3562431455625637370">"Deel de mobiele gegevensverbinding van uw telefoon via USB"</string>
-    <string name="tether_settings_summary_wifi" msgid="4690912027002467246">"Deel de mobiele verbinding van uw telefoon als draagbare Wi-Fi-hotspot"</string>
-    <string name="tether_settings_summary_bluetooth" msgid="4363059913219151114">"Deel de mobiele verbinding van uw telefoon via Bluetooth"</string>
-    <string name="tether_settings_summary_usb_wifi" msgid="3700323208282018772">"Deel de mobiele gegevensverbinding van uw telefoon via USB of als draagbare Wi-Fi-hotspot"</string>
-    <string name="tether_settings_summary_usb_bluetooth" msgid="4008195891276675882">"Deel de mobiele gegevensverbinding van uw telefoon via USB of Bluetooth"</string>
-    <string name="tether_settings_summary_wifi_bluetooth" msgid="2753904149495692201">"Deel de mobiele gegevensverbinding van uw telefoon via Bluetooth of als draagbare Wi-Fi-hotspot"</string>
-    <string name="tether_settings_summary_all" msgid="1171769255924636665">"Deel de mobiele gegevensverbinding van uw telefoon via USB, Wi-Fi of Bluetooth"</string>
+    <!-- outdated translation 3562431455625637370 -->     <string name="tether_settings_summary_usb" product="tablet" msgid="785883365108362248">"Deel de mobiele gegevensverbinding van uw telefoon via USB"</string>
+    <string name="tether_settings_summary_usb" product="default" msgid="3562431455625637370">"Deel de mobiele gegevensverbinding van uw telefoon via USB"</string>
+    <!-- outdated translation 4690912027002467246 -->     <string name="tether_settings_summary_wifi" msgid="5474383125137372164">"Deel de mobiele verbinding van uw telefoon als draagbare Wi-Fi-hotspot"</string>
+    <!-- outdated translation 4363059913219151114 -->     <string name="tether_settings_summary_bluetooth" msgid="2407506656353819750">"Deel de mobiele verbinding van uw telefoon via Bluetooth"</string>
+    <!-- outdated translation 3700323208282018772 -->     <string name="tether_settings_summary_usb_wifi" product="tablet" msgid="3834674129575844910">"Deel de mobiele gegevensverbinding van uw telefoon via USB of als draagbare Wi-Fi-hotspot"</string>
+    <string name="tether_settings_summary_usb_wifi" product="default" msgid="3700323208282018772">"Deel de mobiele gegevensverbinding van uw telefoon via USB of als draagbare Wi-Fi-hotspot"</string>
+    <!-- outdated translation 4008195891276675882 -->     <string name="tether_settings_summary_usb_bluetooth" product="tablet" msgid="1245080236509560839">"Deel de mobiele gegevensverbinding van uw telefoon via USB of Bluetooth"</string>
+    <string name="tether_settings_summary_usb_bluetooth" product="default" msgid="4008195891276675882">"Deel de mobiele gegevensverbinding van uw telefoon via USB of Bluetooth"</string>
+    <!-- outdated translation 2753904149495692201 -->     <string name="tether_settings_summary_wifi_bluetooth" product="tablet" msgid="1924576461932311140">"Deel de mobiele gegevensverbinding van uw telefoon via Bluetooth of als draagbare Wi-Fi-hotspot"</string>
+    <string name="tether_settings_summary_wifi_bluetooth" product="default" msgid="2753904149495692201">"Deel de mobiele gegevensverbinding van uw telefoon via Bluetooth of als draagbare Wi-Fi-hotspot"</string>
+    <!-- outdated translation 1171769255924636665 -->     <string name="tether_settings_summary_all" product="tablet" msgid="6612660164315153427">"Deel de mobiele gegevensverbinding van uw telefoon via USB, Wi-Fi of Bluetooth"</string>
+    <string name="tether_settings_summary_all" product="default" msgid="1171769255924636665">"Deel de mobiele gegevensverbinding van uw telefoon via USB, Wi-Fi of Bluetooth"</string>
     <string name="usb_title" msgid="7483344855356312510">"USB"</string>
     <string name="usb_tethering_button_text" msgid="585829947108007917">"USB-tethering"</string>
     <string name="usb_tethering_available_subtext" msgid="156779271296152605">"USB-verbinding, aanvinken om te tetheren"</string>
@@ -743,21 +798,23 @@
     <skip />
     <!-- no translation found for use_location_summary_enabled (984549156918597265) -->
     <skip />
-    <string name="about_settings" msgid="1743378368185371685">"Over de telefoon"</string>
-    <string name="about_settings_summary" msgid="3302263393543848667">"Juridische info, telefoonstatus, softwareversie weergeven"</string>
+    <!-- outdated translation 1743378368185371685 -->     <string name="about_settings" product="tablet" msgid="593457295516533765">"Over de telefoon"</string>
+    <string name="about_settings" product="default" msgid="1743378368185371685">"Over de telefoon"</string>
+    <!-- outdated translation 3302263393543848667 -->     <string name="about_settings_summary" msgid="3371517697156165959">"Juridische info, telefoonstatus, softwareversie weergeven"</string>
     <string name="legal_information" msgid="5769301644270604095">"Juridische informatie"</string>
     <string name="contributors_title" msgid="5917703088825286504">"Bijdragers"</string>
     <string name="copyright_title" msgid="865906688917260647">"Auteursrecht"</string>
     <string name="license_title" msgid="1990487604356037871">"Licentie"</string>
     <string name="terms_title" msgid="7697580845616764642">"Algemene voorwaarden"</string>
     <string name="system_tutorial_list_item_title" msgid="9082844446660969729">"Systeemhandleiding"</string>
-    <string name="system_tutorial_list_item_summary" msgid="3861815254521030201">"Meer informatie over het gebruik van uw telefoon"</string>
+    <!-- outdated translation 3861815254521030201 -->     <string name="system_tutorial_list_item_summary" product="tablet" msgid="3341504384445734067">"Meer informatie over het gebruik van uw telefoon"</string>
+    <string name="system_tutorial_list_item_summary" product="default" msgid="3861815254521030201">"Meer informatie over het gebruik van uw telefoon"</string>
     <string name="settings_license_activity_title" msgid="7553683406244228650">"Open-sourcelicenties"</string>
     <string name="settings_license_activity_unavailable" msgid="4210539215951487627">"Er is een probleem bij het laden van de licenties."</string>
     <string name="settings_license_activity_loading" msgid="3337535809093591740">"Laden..."</string>
     <string name="settings_safetylegal_title" msgid="1289483965535937431">"Veiligheidsinformatie"</string>
     <string name="settings_safetylegal_activity_title" msgid="6901214628496951727">"Veiligheidsinformatie"</string>
-    <string name="settings_safetylegal_activity_unreachable" msgid="3198912875259612887">"Uw telefoon heeft geen verbinding met een gegevensservice. Als u deze informatie nu wilt weergeven, gaat u op een computer met internetverbinding naar %s."</string>
+    <!-- outdated translation 3198912875259612887 -->     <string name="settings_safetylegal_activity_unreachable" msgid="170670055116721810">"Uw telefoon heeft geen verbinding met een gegevensservice. Als u deze informatie nu wilt weergeven, gaat u op een computer met internetverbinding naar %s."</string>
     <string name="settings_safetylegal_activity_loading" msgid="8059022597639516348">"Laden..."</string>
     <string name="lockpassword_choose_your_password_header" msgid="8624900666929394990">"Uw wachtwoord kiezen"</string>
     <string name="lockpassword_choose_your_pin_header" msgid="7598849519816138302">"Uw PIN-code kiezen"</string>
@@ -796,8 +853,10 @@
     <string name="lockpattern_too_many_failed_confirmation_attempts_footer" msgid="6759029360597122873">"Probeer het over <xliff:g id="NUMBER">%d</xliff:g> seconden opnieuw."</string>
     <string name="skip_button_label" msgid="8680422740354436943">"Annuleren"</string>
     <string name="next_button_label" msgid="8890792540116568321">"Volgende"</string>
-    <string name="lock_title" msgid="4059246467204273930">"Uw telefoon beveiligen"</string>
-    <string name="lock_intro_message" msgid="9100785646737118042"><font size="17">"Beveilig uw telefoon tegen ongeoorloofd gebruik door het instellen van een persoonlijk schermdeblokkeringspatroon. "\n<font height="17">\n</font><b>"1"</b>" Op het volgende scherm ziet u hoe een voorbeeldpatroon wordt getekend. "\n<font height="17">\n</font><b>"2"</b>" Teken uw eigen persoonlijke deblokkeringspatroon als het voorbeeld is voltooid. U kunt verschillende patronen uitproberen, maar u moet minimaal vier punten met elkaar verbinden. "\n<font height="17">\n</font><b>"3"</b>" Teken uw patroon nogmaals ter bevestiging. "\n<font height="17">\n</font><b>"Bent u er klaar voor? Selecteer \'Volgende\'"</b>". "\n<font height="3">\n</font>"Als u uw telefoon niet wilt beveiligen, selecteert u \'Annuleren\'."</font></string>
+    <!-- outdated translation 4059246467204273930 -->     <string name="lock_title" product="tablet" msgid="2909697418179419990">"Uw telefoon beveiligen"</string>
+    <string name="lock_title" product="default" msgid="4059246467204273930">"Uw telefoon beveiligen"</string>
+    <!-- outdated translation 9100785646737118042 -->     <string name="lock_intro_message" product="tablet" msgid="4544669202394019747"><font size="17">"Beveilig uw telefoon tegen ongeoorloofd gebruik door het instellen van een persoonlijk schermdeblokkeringspatroon. "\n<font height="17">\n</font><b>"1"</b>" Op het volgende scherm ziet u hoe een voorbeeldpatroon wordt getekend. "\n<font height="17">\n</font><b>"2"</b>" Teken uw eigen persoonlijke deblokkeringspatroon als het voorbeeld is voltooid. U kunt verschillende patronen uitproberen, maar u moet minimaal vier punten met elkaar verbinden. "\n<font height="17">\n</font><b>"3"</b>" Teken uw patroon nogmaals ter bevestiging. "\n<font height="17">\n</font><b>"Bent u er klaar voor? Selecteer \'Volgende\'"</b>". "\n<font height="3">\n</font>"Als u uw telefoon niet wilt beveiligen, selecteert u \'Annuleren\'."</font></string>
+    <string name="lock_intro_message" product="default" msgid="9100785646737118042"><font size="17">"Beveilig uw telefoon tegen ongeoorloofd gebruik door het instellen van een persoonlijk schermdeblokkeringspatroon. "\n<font height="17">\n</font><b>"1"</b>" Op het volgende scherm ziet u hoe een voorbeeldpatroon wordt getekend. "\n<font height="17">\n</font><b>"2"</b>" Teken uw eigen persoonlijke deblokkeringspatroon als het voorbeeld is voltooid. U kunt verschillende patronen uitproberen, maar u moet minimaal vier punten met elkaar verbinden. "\n<font height="17">\n</font><b>"3"</b>" Teken uw patroon nogmaals ter bevestiging. "\n<font height="17">\n</font><b>"Bent u er klaar voor? Selecteer \'Volgende\'"</b>". "\n<font height="3">\n</font>"Als u uw telefoon niet wilt beveiligen, selecteert u \'Annuleren\'."</font></string>
     <string name="lock_example_title" msgid="8052305554017485410">"Voorbeeldpatroon"</string>
     <string name="lock_example_message" msgid="1838650097090632706">"Verbind minimaal vier punten. "\n" "\n"Selecteer \'Volgende\' als u klaar bent om uw eigen patroon te tekenen."</string>
     <string name="manageapplications_settings_title" msgid="5712405848153426706">"Toepassingen beheren"</string>
@@ -807,7 +866,8 @@
     <string name="applications_settings_header" msgid="6018266337275422250">"Toepassingsinstellingen"</string>
     <string name="install_applications" msgid="4872012136210802181">"Onbekende bronnen"</string>
     <string name="install_unknown_applications" msgid="6612824788917283662">"Installatie van andere toepassingen dan Market-toepassingen toestaan"</string>
-    <string name="install_all_warning" msgid="1923717607319933741">"Uw telefoon en persoonlijke gegevens zijn gevoeliger voor aanvallen door toepassingen van onbekende bronnen. U gaat ermee akkoord dat u alleen verantwoordelijk bent voor enige schade aan uw telefoon of verlies van gegevens die voortkomen uit het gebruik van deze toepassingen."</string>
+    <!-- outdated translation 1923717607319933741 -->     <string name="install_all_warning" product="tablet" msgid="8143969767997876735">"Uw telefoon en persoonlijke gegevens zijn gevoeliger voor aanvallen door toepassingen van onbekende bronnen. U gaat ermee akkoord dat u alleen verantwoordelijk bent voor enige schade aan uw telefoon of verlies van gegevens die voortkomen uit het gebruik van deze toepassingen."</string>
+    <string name="install_all_warning" product="default" msgid="1923717607319933741">"Uw telefoon en persoonlijke gegevens zijn gevoeliger voor aanvallen door toepassingen van onbekende bronnen. U gaat ermee akkoord dat u alleen verantwoordelijk bent voor enige schade aan uw telefoon of verlies van gegevens die voortkomen uit het gebruik van deze toepassingen."</string>
     <string name="application_info_label" msgid="1150486628158409543">"Toepassingsinfo"</string>
     <string name="storage_label" msgid="8700867073480107253">"Opslagruimte"</string>
     <string name="auto_launch_label" msgid="3012617472833815382">"Standaard starten"</string>
@@ -858,13 +918,15 @@
     <string name="app_factory_reset_dlg_text" msgid="438395129140568893">"Wilt u alle updates voor deze Android-systeemtoepassing verwijderen?"</string>
     <string name="clear_failed_dlg_title" msgid="2387060805294783175">"Gegevens wissen"</string>
     <string name="clear_failed_dlg_text" msgid="7943411157007320290">"Het wissen van gegevens is mislukt voor de toepassing"</string>
-    <string name="security_settings_desc" msgid="3116027624526915561">"Deze toepassing heeft toegang tot de volgende opties van uw telefoon:"</string>
+    <!-- outdated translation 3116027624526915561 -->     <string name="security_settings_desc" product="tablet" msgid="6158636779728455276">"Deze toepassing heeft toegang tot de volgende opties van uw telefoon:"</string>
+    <string name="security_settings_desc" product="default" msgid="3116027624526915561">"Deze toepassing heeft toegang tot de volgende opties van uw telefoon:"</string>
     <string name="computing_size" msgid="1599186977475211186">"Berekenen…"</string>
     <string name="invalid_size_value" msgid="1901940003700269523">"Kan grootte van pakket niet berekenen"</string>
     <string name="empty_list_msg" msgid="2901049162265094971">"U heeft geen toepassingen van derden geïnstalleerd."</string>
     <string name="version_text" msgid="9189073826278676425">"versie <xliff:g id="VERSION_NUM">%1$s</xliff:g>"</string>
     <string name="move_app" msgid="5042838441401731346">"Verplaatsen"</string>
-    <string name="move_app_to_internal" msgid="3895430471913858185">"Verplaatsen naar telefoon"</string>
+    <!-- outdated translation 3895430471913858185 -->     <string name="move_app_to_internal" product="tablet" msgid="2299714147283854957">"Verplaatsen naar telefoon"</string>
+    <string name="move_app_to_internal" product="default" msgid="3895430471913858185">"Verplaatsen naar telefoon"</string>
     <string name="move_app_to_sdcard" product="nosdcard" msgid="4350451696315265420">"Verpl. naar USB-opslag"</string>
     <string name="move_app_to_sdcard" product="default" msgid="1143379049903056407">"Verplaatsen naar SD-kaart"</string>
     <string name="moving" msgid="6431016143218876491">"Verplaatsen"</string>
@@ -912,7 +974,8 @@
     <string name="process_service_in_use_description" msgid="8993335064403217080">"Service <xliff:g id="COMP_NAME">%1$s</xliff:g> in gebruik."</string>
     <string name="process_provider_in_use_description" msgid="5586603325677678940">"Provider <xliff:g id="COMP_NAME">%1$s</xliff:g> in gebruik."</string>
     <string name="runningservicedetails_stop_dlg_title" msgid="4253292537154337233">"Systeemservice stoppen?"</string>
-    <string name="runningservicedetails_stop_dlg_text" msgid="6929716497425738387">"Weet u zeker dat u deze systeemservice wilt stoppen? Als u dit doet, werken bepaalde functies van uw telefoon mogelijk pas weer correct nadat u de telefoon heeft uitgeschakeld en weer ingeschakeld."</string>
+    <!-- outdated translation 6929716497425738387 -->     <string name="runningservicedetails_stop_dlg_text" product="tablet" msgid="5420033091144016389">"Weet u zeker dat u deze systeemservice wilt stoppen? Als u dit doet, werken bepaalde functies van uw telefoon mogelijk pas weer correct nadat u de telefoon heeft uitgeschakeld en weer ingeschakeld."</string>
+    <string name="runningservicedetails_stop_dlg_text" product="default" msgid="6929716497425738387">"Weet u zeker dat u deze systeemservice wilt stoppen? Als u dit doet, werken bepaalde functies van uw telefoon mogelijk pas weer correct nadat u de telefoon heeft uitgeschakeld en weer ingeschakeld."</string>
     <string name="language_settings" msgid="502219872342167227">"Taal en toetsenbord"</string>
     <string name="language_keyboard_settings_title" msgid="3455826933385341107">"Taal- en toetsenbordinstellingen"</string>
     <string name="language_settings_category" msgid="2288258489940617043">"Taalinstellingen"</string>
@@ -921,7 +984,7 @@
     <string name="phone_language_summary" msgid="3871309445655554211"></string>
     <string name="auto_replace" msgid="6199184757891937822">"Automatisch vervangen"</string>
     <string name="auto_replace_summary" msgid="370288728200084466">"Corrigeer verkeerd getypte woorden"</string>
-    <string name="auto_caps" msgid="581633131114124121">"Automatische hoofdletters"</string>
+    <!-- outdated translation 581633131114124121 -->     <string name="auto_caps" msgid="6379232078052591265">"Automatische hoofdletters"</string>
     <string name="auto_caps_summary" msgid="6358102538315261466">"Eerste letters in zinnen met hoofdletter"</string>
     <string name="auto_punctuate" msgid="4595367243950425833">"Automatische interpunctie"</string>
     <string name="hardkeyboard_category" msgid="5957168411305769899">"Instellingen voor vast toetsenbord"</string>
@@ -939,7 +1002,8 @@
     <string name="user_dict_settings_context_menu_delete_title" msgid="9140703913776549054">"Verwijderen"</string>
     <string name="user_dict_settings_empty_text" msgid="6209268025109242806">"U heeft geen woorden in het gebruikerswoordenboek. U kunt een woord toevoegen via het menu."</string>
     <string name="testing" msgid="6584352735303604146">"Testen"</string>
-    <string name="testing_phone_info" msgid="8656693364332840056">"Telefooninformatie"</string>
+    <!-- outdated translation 8656693364332840056 -->     <string name="testing_phone_info" product="tablet" msgid="193561832258534798">"Telefooninformatie"</string>
+    <string name="testing_phone_info" product="default" msgid="8656693364332840056">"Telefooninformatie"</string>
     <string name="testing_battery_info" msgid="3497865525976497848">"Accu-informatie"</string>
     <string name="quick_launch_title" msgid="7904609846945905306">"Snelstarten"</string>
     <string name="quick_launch_summary" msgid="3453825712466417452">"Sneltoetsen instellen voor starten toepassingen"</string>
@@ -998,7 +1062,8 @@
     <string name="accessibility_script_injection_category" msgid="8649951751131431904">"Toegankelijkheidsscripts"</string>
     <string name="accessibility_script_injection_enabled" msgid="6927896081016611012">"Toegankelijkheidsscripts downloaden"</string>
     <string name="accessibility_script_injection_enabled_summary" msgid="3629525134901617621">"Toepassingen mogen toegankelijkheidsscripts downloaden via Google"</string>
-    <string name="accessibility_script_injection_security_warning" msgid="9078893361741942109">"Sommige toepassingen kunnen Google vragen scripts naar uw telefoon te downloaden die hun inhoud toegankelijker maakt. Weet u zeker dat u Google wilt toestaan toegankelijkheidsscripts op uw telefoon te installeren?"</string>
+    <!-- outdated translation 9078893361741942109 -->     <string name="accessibility_script_injection_security_warning" product="tablet" msgid="1113600871264359828">"Sommige toepassingen kunnen Google vragen scripts naar uw telefoon te downloaden die hun inhoud toegankelijker maakt. Weet u zeker dat u Google wilt toestaan toegankelijkheidsscripts op uw telefoon te installeren?"</string>
+    <string name="accessibility_script_injection_security_warning" product="default" msgid="9078893361741942109">"Sommige toepassingen kunnen Google vragen scripts naar uw telefoon te downloaden die hun inhoud toegankelijker maakt. Weet u zeker dat u Google wilt toestaan toegankelijkheidsscripts op uw telefoon te installeren?"</string>
     <string name="accessibility_power_button_category" msgid="8545885236482339928">"Aan/uit-knop"</string>
     <string name="accessibility_power_button_ends_call" msgid="7698764194501089533">"Knop beëindigt oproep"</string>
     <string name="accessibility_power_button_ends_call_summary" msgid="8878097632186291462">"Als u tijdens een oproep op de aan/uit-knop drukt, wordt de oproep beëindigd in plaats van dat het scherm wordt uitgeschakeld"</string>
@@ -1013,7 +1078,7 @@
     <string name="battery_stats_gps_on_label" msgid="1193657533641951256">"GPS ingeschakeld"</string>
     <string name="battery_stats_wifi_running_label" msgid="3093545080361658269">"Wi-Fi"</string>
     <string name="battery_stats_wake_lock_label" msgid="1908942681902324095">"Ingeschakeld"</string>
-    <string name="battery_stats_phone_signal_label" msgid="6822042940376636775">"Telefoonsignaal"</string>
+    <!-- outdated translation 6822042940376636775 -->     <string name="battery_stats_phone_signal_label" msgid="4137799310329041341">"Telefoonsignaal"</string>
     <!-- no translation found for battery_stats_last_duration (1535831453827905957) -->
     <skip />
     <string name="awake" msgid="387122265874485088">"Stand-bytijd apparaat"</string>
@@ -1029,13 +1094,15 @@
     <string name="power_bluetooth" msgid="4373329044379008289">"Bluetooth"</string>
     <string name="power_cell" msgid="6596471490976003056">"Mobiel stand-by"</string>
     <string name="power_phone" msgid="5392641106474567277">"Spraakoproepen"</string>
-    <string name="power_idle" msgid="9055659695602194990">"Telefoon inactief"</string>
+    <!-- outdated translation 9055659695602194990 -->     <string name="power_idle" product="tablet" msgid="4612478572401640759">"Telefoon inactief"</string>
+    <string name="power_idle" product="default" msgid="9055659695602194990">"Telefoon inactief"</string>
     <string name="usage_type_cpu" msgid="715162150698338714">"CPU-totaal"</string>
     <string name="usage_type_cpu_foreground" msgid="6500579611933211831">"CPU op voorgrond"</string>
     <string name="usage_type_wake_lock" msgid="5125438890233677880">"Ingeschakeld houden"</string>
     <string name="usage_type_gps" msgid="7989688715128160790">"GPS"</string>
     <string name="usage_type_wifi_running" msgid="8234997940652067049">"Wi-Fi actief"</string>
-    <string name="usage_type_phone" msgid="9108247984998041853">"Telefoon"</string>
+    <!-- outdated translation 9108247984998041853 -->     <string name="usage_type_phone" product="tablet" msgid="262638572890253393">"Telefoon"</string>
+    <string name="usage_type_phone" product="default" msgid="9108247984998041853">"Telefoon"</string>
     <string name="usage_type_data_send" msgid="2857401966985425427">"Gegevens verzonden"</string>
     <string name="usage_type_data_recv" msgid="7251090882025234185">"Gegevens ontvangen"</string>
     <string name="usage_type_audio" msgid="6957269406840886290">"Audio"</string>
@@ -1049,7 +1116,8 @@
     <string name="battery_action_wifi" msgid="2272741639606146903">"Wi-Fi-instellingen"</string>
     <string name="battery_action_bluetooth" msgid="8374789049507723142">"Bluetooth-instellingen"</string>
     <string name="battery_desc_voice" msgid="8980322055722959211">"Accu gebruikt door spraakoproepen"</string>
-    <string name="battery_desc_standby" msgid="3009080001948091424">"Accu gebruikt wanneer telefoon inactief is"</string>
+    <!-- outdated translation 3009080001948091424 -->     <string name="battery_desc_standby" product="tablet" msgid="6284747418668280364">"Accu gebruikt wanneer telefoon inactief is"</string>
+    <string name="battery_desc_standby" product="default" msgid="3009080001948091424">"Accu gebruikt wanneer telefoon inactief is"</string>
     <string name="battery_desc_radio" msgid="5479196477223185367">"Accu gebruikt door radio"</string>
     <string name="battery_sugg_radio" msgid="8211336978326295047">"Schakel over naar de vliegmodus om energie te besparen in gebieden zonder mobiel bereik"</string>
     <string name="battery_desc_display" msgid="5432795282958076557">"Accu gebruikt door scherm en achtergrondverlichting"</string>

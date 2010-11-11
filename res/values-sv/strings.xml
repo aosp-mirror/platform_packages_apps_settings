@@ -115,9 +115,11 @@
     <string name="bluetooth_notif_message" msgid="5381418499788668724">"Välj att parkoppla med "</string>
     <string name="device_picker" msgid="8721012448931226323">"Bluetooth-enhetsväljare"</string>
     <string name="bluetooth_permission_request" msgid="1523129741266262748">"Begäran om Bluetooth-behörighet"</string>
-    <string name="bluetooth_ask_enablement" msgid="2342558978033892004">"Ett program i telefonen begär tillåtelse att aktivera Bluetooth. Vill du tillåta det?"</string>
-    <string name="bluetooth_ask_discovery" msgid="669870705606180872">"Ett program i telefonen begär tillåtelse att göra telefonen synlig för andra Bluetooth-enheter i <xliff:g id="TIMEOUT">%1$d</xliff:g> sekunder. Vill du tillåta det?"</string>
-    <string name="bluetooth_ask_enablement_and_discovery" msgid="7220210326619399542">"Ett program i telefonen begär tillåtelse att aktivera Bluetooth och göra telefonen synlig för andra enheter i <xliff:g id="TIMEOUT">%1$d</xliff:g> sekunder. Vill du tillåta det?"</string>
+    <!-- outdated translation 2342558978033892004 -->     <string name="bluetooth_ask_enablement" msgid="8211158472876087588">"Ett program i telefonen begär tillåtelse att aktivera Bluetooth. Vill du tillåta det?"</string>
+    <!-- outdated translation 669870705606180872 -->     <string name="bluetooth_ask_discovery" product="tablet" msgid="5950965604673262829">"Ett program i telefonen begär tillåtelse att göra telefonen synlig för andra Bluetooth-enheter i <xliff:g id="TIMEOUT">%1$d</xliff:g> sekunder. Vill du tillåta det?"</string>
+    <string name="bluetooth_ask_discovery" product="default" msgid="669870705606180872">"Ett program i telefonen begär tillåtelse att göra telefonen synlig för andra Bluetooth-enheter i <xliff:g id="TIMEOUT">%1$d</xliff:g> sekunder. Vill du tillåta det?"</string>
+    <!-- outdated translation 7220210326619399542 -->     <string name="bluetooth_ask_enablement_and_discovery" product="tablet" msgid="5716077575971497298">"Ett program i telefonen begär tillåtelse att aktivera Bluetooth och göra telefonen synlig för andra enheter i <xliff:g id="TIMEOUT">%1$d</xliff:g> sekunder. Vill du tillåta det?"</string>
+    <string name="bluetooth_ask_enablement_and_discovery" product="default" msgid="7220210326619399542">"Ett program i telefonen begär tillåtelse att aktivera Bluetooth och göra telefonen synlig för andra enheter i <xliff:g id="TIMEOUT">%1$d</xliff:g> sekunder. Vill du tillåta det?"</string>
     <string name="bluetooth_turning_on" msgid="3107102168379705771">"Aktiverar Bluetooth …"</string>
     <string name="date_and_time" msgid="4114084177056654663">"Inställningar för datum och tid"</string>
     <string name="date_time_12_hour_sample" msgid="3259617262618020574">"Kl. 13:00"</string>
@@ -210,14 +212,15 @@
     <string name="device_info_label" msgid="6551553813651711205">"Enhetsinfo"</string>
     <string name="battery_info_label" msgid="4132685016148679403">"Batteriinformation"</string>
     <string name="display_label" msgid="7403874003169865762">"Skärm"</string>
-    <string name="phone_info_label" msgid="2127552523124277664">"Telefoninformation"</string>
+    <!-- outdated translation 2127552523124277664 -->     <string name="phone_info_label" product="tablet" msgid="7820855350955963628">"Telefoninformation"</string>
+    <string name="phone_info_label" product="default" msgid="2127552523124277664">"Telefoninformation"</string>
     <string name="sd_card_settings_label" product="nosdcard" msgid="8101475181301178428">"USB-lagring"</string>
     <string name="sd_card_settings_label" product="default" msgid="5743100901106177102">"SD-kort"</string>
     <string name="proxy_settings_label" msgid="3271174136184391743">"Proxy-inställningar"</string>
     <string name="cancel" msgid="6859253417269739139">"Avbryt"</string>
     <string name="settings_label" msgid="1626402585530130914">"Inställningar"</string>
     <string name="settings_label_launcher" msgid="8344735489639482340">"Inställningar"</string>
-    <string name="settings_shortcut" msgid="3672145147925639262">"Inställningar"</string>
+    <!-- outdated translation 3672145147925639262 -->     <string name="settings_shortcut" msgid="8597387747077828217">"Inställningar"</string>
     <string name="airplane_mode" msgid="8837269988154128601">"Flygplansläge"</string>
     <string name="airplane_mode_summary" msgid="3154817401368780988">"Inaktivera alla trådlösa anslutningar"</string>
     <string name="airplane_mode_turning_on" msgid="8871739222526957255">"Inaktiverar trådlösa anslutningar…"</string>
@@ -251,10 +254,8 @@
     <string name="zone_list_menu_sort_by_timezone" msgid="2720190443744884114">"Sortera efter tidszon"</string>
     <string name="lock_after_timeout" msgid="9100576335787336455">"Lås enheten när tidsgränsen uppnåtts"</string>
     <string name="lock_after_timeout_summary" msgid="5751027735105958453">"Justera fördröjningen innan enheten låses automatiskt"</string>
-    <!-- no translation found for show_owner_info_on_lockscreen_label (5074906168357568434) -->
-    <skip />
-    <!-- no translation found for owner_info_settings_title (2723190010708381889) -->
-    <skip />
+    <string name="show_owner_info_on_lockscreen_label" msgid="5074906168357568434">"Visa ägaruppgifter på den låsta skärmen"</string>
+    <string name="owner_info_settings_title" msgid="2723190010708381889">"Ägaruppgifter"</string>
     <string name="security_settings_title" msgid="5168491784222013179">"Plats och säkerhet"</string>
     <string name="location_security_settings_title" msgid="4624434296446625554">"Inställningar för plats och säkerhet"</string>
     <string name="security_settings_summary" msgid="967393342537986570">"Ställ in Min plats, skärmupplåsning, lås för SIM-kort och lås för uppgiftslagring"</string>
@@ -273,7 +274,7 @@
     <string name="unlock_set_unlock_pin_summary" msgid="4131169672844263316">"Ange en numerisk PIN-kod för att låsa upp skärmen"</string>
     <string name="unlock_set_unlock_password_title" msgid="8775603825675090937">"Lösenord"</string>
     <string name="unlock_set_unlock_password_summary" msgid="4623254789833899286">"Ange ett lösenord för att låsa upp skärmen"</string>
-    <string name="unlock_set_unlock_disabled_summary" msgid="736557879526940324">"Inaktiveras av en fjärradministratör"</string>
+    <!-- outdated translation 736557879526940324 -->     <string name="unlock_set_unlock_disabled_summary" msgid="8816944391772300580">"Inaktiveras av en fjärradministratör"</string>
     <string name="unlock_disable_lock_title" msgid="1427036227416979120">"Inaktivera skärmlås"</string>
     <string name="unlock_disable_lock_pattern_summary" msgid="6801602880568869201">"Ta bort grafiskt lösenord"</string>
     <string name="unlock_disable_lock_pin_summary" msgid="8856842745366993387">"Ta bort PIN-kod för upplåsning"</string>
@@ -345,6 +346,14 @@
     <string name="bluetooth_pairing_rejected_error_message" msgid="1648157108520832454">"Parkoppling avvisad av <xliff:g id="DEVICE_NAME">%1$s</xliff:g>."</string>
     <string name="bluetooth_connecting_error_message" msgid="1779660510084746802">"Det gick inte att ansluta till <xliff:g id="DEVICE_NAME">%1$s</xliff:g>."</string>
     <string name="bluetooth_preference_scan_title" msgid="2277464653118896016">"Sök efter enheter"</string>
+    <!-- no translation found for bluetooth_preference_find_nearby_title (5087410003465463318) -->
+    <skip />
+    <!-- no translation found for bluetooth_preference_device_settings (907776049862799122) -->
+    <skip />
+    <!-- no translation found for bluetooth_preference_paired_devices (1970524193086791964) -->
+    <skip />
+    <!-- no translation found for bluetooth_preference_found_devices (3133019331974936204) -->
+    <skip />
     <string name="bluetooth_device_context_connect" msgid="3997659895003244941">"Anslut"</string>
     <string name="bluetooth_device_context_disconnect" msgid="8220072022970148683">"Koppla ifrån"</string>
     <string name="bluetooth_device_context_pair_connect" msgid="7611522504813927727">"Parkoppla och anslut"</string>
@@ -353,19 +362,37 @@
     <string name="bluetooth_device_context_connect_advanced" msgid="2643129703569788771">"Alternativ..."</string>
     <string name="bluetooth_connect_specific_profiles_title" msgid="6952214406025825164">"Anslut till…"</string>
     <string name="bluetooth_profile_a2dp" msgid="3259633293424539529">"Media"</string>
-    <string name="bluetooth_profile_headset" msgid="1874975688666658946">"Telefon"</string>
+    <!-- outdated translation 1874975688666658946 -->     <string name="bluetooth_profile_headset" product="tablet" msgid="2252738313413646294">"Telefon"</string>
+    <string name="bluetooth_profile_headset" product="default" msgid="1874975688666658946">"Telefon"</string>
     <string name="bluetooth_profile_opp" msgid="3799470046565284440">"Överför"</string>
     <string name="bluetooth_profile_hid" msgid="3000858580917633478">"Indataenhet"</string>
     <string name="bluetooth_profile_pan" msgid="4225813400648547154">"Internetdelning"</string>
     <string name="bluetooth_summary_connected_to_a2dp" msgid="510833839847758664">"Ansluten till medialjud"</string>
-    <string name="bluetooth_summary_connected_to_headset" msgid="4876496372728623918">"Ansluten till telefonens ljud"</string>
+    <!-- outdated translation 4876496372728623918 -->     <string name="bluetooth_summary_connected_to_headset" product="tablet" msgid="598335151406893070">"Ansluten till telefonens ljud"</string>
+    <string name="bluetooth_summary_connected_to_headset" product="default" msgid="4876496372728623918">"Ansluten till telefonens ljud"</string>
     <string name="bluetooth_summary_connected_to_a2dp_headset" msgid="3045032710457800891">"Ansluten till telefon- och medialjud"</string>
     <string name="bluetooth_summary_connected_to_hid" msgid="8147499644396475561">"Ansluten till indataenhet"</string>
     <string name="bluetooth_summary_connected_to_pan" msgid="3157622705092537266">"Internetdelning på"</string>
+    <!-- no translation found for bluetooth_disconnect_a2dp_profile (3524648279150937177) -->
+    <skip />
+    <!-- no translation found for bluetooth_disconnect_headset_profile (3656117361616583255) -->
+    <skip />
+    <!-- no translation found for bluetooth_disconnect_headset_profile (8343033989250953720) -->
+    <skip />
+    <!-- no translation found for bluetooth_disconnect_hid_profile (3282295189719352075) -->
+    <skip />
+    <!-- no translation found for bluetooth_disconnect_pan_profile (877883150720888525) -->
+    <skip />
     <string name="bluetooth_device_advanced_title" msgid="528816860793581131">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> alternativ"</string>
+    <!-- no translation found for bluetooth_device_advanced_device_actions_title (3793430949811946844) -->
+    <skip />
     <string name="bluetooth_device_advanced_online_mode_title" msgid="3689050071425683114">"Anslut"</string>
     <string name="bluetooth_device_advanced_online_mode_summary" msgid="1204424107263248336">"Anslut till Bluetooth-enhet"</string>
     <string name="bluetooth_device_advanced_profile_header_title" msgid="3764437426089639639">"Profiler"</string>
+    <!-- no translation found for bluetooth_device_advanced_rename_device (350508394033808532) -->
+    <skip />
+    <!-- no translation found for bluetooth_device_advanced_enable_opp_title (8222550640371627365) -->
+    <skip />
     <string name="bluetooth_a2dp_profile_summary_connected" msgid="963376081347721598">"Ansluten till medialjud"</string>
     <string name="bluetooth_headset_profile_summary_connected" msgid="7661070206715520671">"Ansluten till telefonens ljud"</string>
     <string name="bluetooth_opp_profile_summary_connected" msgid="2611913495968309066">"Ansluten till filöverföringsserver"</string>
@@ -407,10 +434,8 @@
     <string name="wifi_menu_modify" msgid="2068554918652440105">"Ändra nätverk"</string>
     <string name="wifi_network_setup" msgid="7974851890019344870">"Nätverkskonfiguration"</string>
     <string name="wifi_wps_pin" msgid="5471842298708321115">"Ange PIN från åtkomstpunkten"</string>
-    <!-- no translation found for wifi_wps_pin_method_configuration (9019042137789692817) -->
-    <skip />
-    <!-- no translation found for wifi_wps_pin_output (8682102965680650853) -->
-    <skip />
+    <string name="wifi_wps_pin_method_configuration" msgid="9019042137789692817">"Konfiguration av WPS PIN-metod"</string>
+    <string name="wifi_wps_pin_output" msgid="8682102965680650853">"Ange PIN-koden <xliff:g id="WPS_PIN">%1$s</xliff:g> på åtkomstpunkten"</string>
     <string name="wifi_ssid" msgid="641393708309146745">"Nätverks-SSID"</string>
     <string name="wifi_security" msgid="6603611185592956936">"Säkerhet"</string>
     <string name="wifi_signal" msgid="5514120261628065287">"Signalstyrka"</string>
@@ -431,8 +456,7 @@
     <string name="wifi_remembered" msgid="8426719916135950136">"Lagrad"</string>
     <string name="wifi_disabled" msgid="2104752038187543712">"Inaktiverat"</string>
     <string name="wifi_not_in_range" msgid="1136191511238508967">"Inte i intervall"</string>
-    <!-- no translation found for wifi_open_with_wps (2606968531452521147) -->
-    <skip />
+    <string name="wifi_open_with_wps" msgid="2606968531452521147">"WPS tillgängligt"</string>
     <string name="wifi_secured" msgid="6759903183748011566">"Skyddad med <xliff:g id="WIFI_SECURITY">%1$s</xliff:g>"</string>
     <string name="wifi_secured_with_wps" msgid="1822538701086256007">"Skyddad av <xliff:g id="WIFI_SECURITY">%1$s</xliff:g> (WPS tillgängligt)"</string>
     <string name="wifi_secured_with_status" msgid="6489317496506267302">"<xliff:g id="WIFI_STATUS">%2$s</xliff:g>, skyddad med <xliff:g id="WIFI_SECURITY">%1$s</xliff:g>"</string>
@@ -440,32 +464,33 @@
     <string name="wifi_forget" msgid="8168174695608386644">"Glöm"</string>
     <string name="wifi_save" msgid="3331121567988522826">"Spara"</string>
     <string name="wifi_cancel" msgid="6763568902542968964">"Avbryt"</string>
+    <!-- no translation found for wifi_back (249038475821092060) -->
+    <skip />
+    <!-- no translation found for wifi_detail (6321441611324424140) -->
+    <skip />
     <string name="wifi_advanced_titlebar" msgid="5419052271935350999">"Avancerad"</string>
-    <string name="wifi_setting_num_channels_title" msgid="694031537019656132">"Föreskriftsdomän"</string>
-    <string name="wifi_setting_num_channels_summary" msgid="4889355096717099141">"Ange antalet kanaler som ska användas"</string>
-    <string name="wifi_setting_num_channels_error" msgid="5765443843427870721">"Ett problem inträffande när domänen skulle anges."</string>
-    <string name="wifi_setting_num_channels_channel_phrase" msgid="1269381923672908636">"<xliff:g id="NUM_CHANNELS">%1$d</xliff:g>-kanaler"</string>
     <string name="wifi_setting_sleep_policy_title" msgid="1367731352485585528">"Wi-Fi-policy"</string>
     <string name="wifi_setting_sleep_policy_summary" msgid="7573693311804602041">"Ange när du vill växla från Wi-Fi till mobildata"</string>
     <string name="wifi_setting_sleep_policy_error" msgid="5103670439972135148">"Ett problem inträffade när policy för viloläge skulle anges."</string>
+    <!-- no translation found for wifi_setting_frequency_band_title (7493768705046080060) -->
+    <skip />
+    <!-- no translation found for wifi_setting_frequency_band_summary (3250740757118009784) -->
+    <skip />
+    <!-- no translation found for wifi_setting_frequency_band_error (837281974489794378) -->
+    <skip />
     <string name="wifi_advanced_mac_address_title" msgid="6571335466330978393">"Mac-adress"</string>
     <string name="wifi_advanced_ip_address_title" msgid="6215297094363164846">"IP-adress"</string>
     <string name="wifi_ip_settings_titlebar" msgid="4345739031248760326">"IP-inställningar"</string>
     <string name="wifi_ip_settings_menu_save" msgid="7296724066102908366">"Spara"</string>
     <string name="wifi_ip_settings_menu_cancel" msgid="6582567330136502340">"Avbryt"</string>
-    <!-- no translation found for wifi_ip_settings_invalid_ip_address (6387653152103405443) -->
-    <skip />
-    <!-- no translation found for wifi_ip_settings_invalid_gateway (6383012465511093067) -->
-    <skip />
-    <!-- no translation found for wifi_ip_settings_invalid_dns (3428867750550854065) -->
-    <skip />
-    <!-- no translation found for wifi_ip_settings_invalid_network_prefix_length (8145730615716855433) -->
-    <skip />
+    <string name="wifi_ip_settings_invalid_ip_address" msgid="6387653152103405443">"Ange en giltig IP-adress."</string>
+    <string name="wifi_ip_settings_invalid_gateway" msgid="6383012465511093067">"Ange en giltig gateway-adress."</string>
+    <string name="wifi_ip_settings_invalid_dns" msgid="3428867750550854065">"Ange en giltig DNS-adress."</string>
+    <string name="wifi_ip_settings_invalid_network_prefix_length" msgid="8145730615716855433">"Ange en nätverksprefixlängd mellan 0 och 32."</string>
     <string name="wifi_dns1" msgid="7344118050720080045">"DNS 1"</string>
     <string name="wifi_dns2" msgid="1368601006824882659">"DNS 2"</string>
     <string name="wifi_gateway" msgid="163914742461092086">"Gateway"</string>
-    <!-- no translation found for wifi_network_prefix_length (3028785234245085998) -->
-    <skip />
+    <string name="wifi_network_prefix_length" msgid="3028785234245085998">"Nätverksprefixets längd"</string>
     <string name="wifi_tether_checkbox_text" msgid="6961605862058056788">"Mobil Wi-Fi-surfpunkt"</string>
     <string name="wifi_tether_enabled_subtext" msgid="8948641212931906143">"Mobil surfpunkt <xliff:g id="NETWORK_SSID">%1$s</xliff:g> aktiv"</string>
     <string name="wifi_tether_failed_subtext" msgid="2654888578056042315">"Fel på mobil Wi-Fi-surfpunkt"</string>
@@ -481,7 +506,7 @@
     <string name="silent_mode_title" msgid="3181479108593217704">"Tyst läge"</string>
     <string name="silent_mode_summary" msgid="3309650676072917899">"Tysta ned alla ljud utom media och alarm"</string>
     <string name="silent_mode_incl_alarm_summary" msgid="2088830834182228458">"Alla ljud utom media tystas"</string>
-    <string name="ringtone_title" msgid="5379026328015343686">"Telefonens ringsignal"</string>
+    <!-- outdated translation 5379026328015343686 -->     <string name="ringtone_title" msgid="7037881886694206550">"Telefonens ringsignal"</string>
     <string name="ringtone_summary" msgid="2630023412632683493"></string>
     <string name="all_volume_title" msgid="8741571721868253103">"Volym"</string>
     <string name="ring_volume_title" msgid="7938706566797464165">"Ringvolym"</string>
@@ -521,13 +546,17 @@
     <string name="dock_audio_settings_title" msgid="3324750259959570305">"Ljud"</string>
     <string name="dock_audio_summary_desk" msgid="6487784412371139335">"Inställningar för ansluten skrivbordsdocka"</string>
     <string name="dock_audio_summary_car" msgid="6740897586006248450">"Inställningar för ansluten bildocka"</string>
-    <string name="dock_audio_summary_none" msgid="289909253741048784">"Telefonen är inte dockad"</string>
+    <!-- outdated translation 289909253741048784 -->     <string name="dock_audio_summary_none" product="tablet" msgid="8215337394914283607">"Telefonen är inte dockad"</string>
+    <string name="dock_audio_summary_none" product="default" msgid="289909253741048784">"Telefonen är inte dockad"</string>
     <string name="dock_audio_summary_unknown" msgid="4465059868974255693">"Inställningar för ansluten dockningsenhet"</string>
     <string name="dock_not_found_title" msgid="3290961741828952424">"Ingen dockningsenhet hittades"</string>
-    <string name="dock_not_found_text" msgid="3035260358985111855">"Telefonen måste vara dockad när du konfigurerar ljudet för dockning"</string>
+    <!-- outdated translation 3035260358985111855 -->     <string name="dock_not_found_text" product="tablet" msgid="7935403744079168804">"Telefonen måste vara dockad när du konfigurerar ljudet för dockning"</string>
+    <string name="dock_not_found_text" product="default" msgid="3035260358985111855">"Telefonen måste vara dockad när du konfigurerar ljudet för dockning"</string>
     <string name="dock_sounds_enable_title" msgid="3659084028644948905">"Ljud för placering i docka"</string>
-    <string name="dock_sounds_enable_summary_on" msgid="8491180514199743771">"Spela upp ljud när telefonen placeras i eller tas bort från docka"</string>
-    <string name="dock_sounds_enable_summary_off" msgid="3151046599205265919">"Spela inte upp ljud när telefonen placeras i eller tas bort från docka"</string>
+    <!-- outdated translation 8491180514199743771 -->     <string name="dock_sounds_enable_summary_on" product="tablet" msgid="838102386448981339">"Spela upp ljud när telefonen placeras i eller tas bort från docka"</string>
+    <string name="dock_sounds_enable_summary_on" product="default" msgid="8491180514199743771">"Spela upp ljud när telefonen placeras i eller tas bort från docka"</string>
+    <!-- outdated translation 3151046599205265919 -->     <string name="dock_sounds_enable_summary_off" product="tablet" msgid="5077843049805652363">"Spela inte upp ljud när telefonen placeras i eller tas bort från docka"</string>
+    <string name="dock_sounds_enable_summary_off" product="default" msgid="3151046599205265919">"Spela inte upp ljud när telefonen placeras i eller tas bort från docka"</string>
     <string name="sync_settings" msgid="9186125469300013491">"Konton och synkronisering"</string>
     <string name="sync_settings_summary" msgid="2962179505214965667">"Lägg till eller ta bort konton och ändra kontoinställningar"</string>
     <string name="search_settings" msgid="1910951467596035063">"Sök"</string>
@@ -537,8 +566,10 @@
     <string name="animations_summary_on" msgid="8843613112130484436">"Visa animering när fönster öppnas och stängs"</string>
     <string name="animations_summary_off" msgid="2777026828025551983">"Visa animering när fönster öppnas och stängs"</string>
     <string name="accelerometer_title" msgid="7854608399547349157">"Rotera skärmen automatiskt"</string>
-    <string name="accelerometer_summary_on" msgid="1133737282813048021">"Växla riktning automatiskt när du roterar telefonen"</string>
-    <string name="accelerometer_summary_off" msgid="5485489363715740761">"Byt riktning automatiskt när du roterar telefonen"</string>
+    <!-- outdated translation 1133737282813048021 -->     <string name="accelerometer_summary_on" product="tablet" msgid="429982132339828942">"Växla riktning automatiskt när du roterar telefonen"</string>
+    <string name="accelerometer_summary_on" product="default" msgid="1133737282813048021">"Växla riktning automatiskt när du roterar telefonen"</string>
+    <!-- outdated translation 5485489363715740761 -->     <string name="accelerometer_summary_off" product="tablet" msgid="4781734213242521682">"Byt riktning automatiskt när du roterar telefonen"</string>
+    <string name="accelerometer_summary_off" product="default" msgid="5485489363715740761">"Byt riktning automatiskt när du roterar telefonen"</string>
     <string name="brightness" msgid="2354961343555249270">"Ljusstyrka"</string>
     <string name="brightness_summary" msgid="838917350127550703">"Ändra skärmens ljusstyrka"</string>
     <string name="screen_timeout" msgid="4882669461447531301">"Skärmens tidsgräns"</string>
@@ -548,8 +579,10 @@
     <string name="sim_lock_settings_category" msgid="5136244267576697004">"Ställ in lås för SIM-kort"</string>
     <string name="sim_lock_settings_title" msgid="9018585580955414596">"Lås för SIM-kort"</string>
     <string name="sim_pin_toggle" msgid="1742123478029451888">"Lås SIM-kort"</string>
-    <string name="sim_lock_on" msgid="2503536505568814324">"PIN-kod krävs för att använda telefonen"</string>
-    <string name="sim_lock_off" msgid="258981978215428916">"PIN-kod krävs för att använda telefonen"</string>
+    <!-- outdated translation 2503536505568814324 -->     <string name="sim_lock_on" product="tablet" msgid="5058355081270397764">"PIN-kod krävs för att använda telefonen"</string>
+    <string name="sim_lock_on" product="default" msgid="2503536505568814324">"PIN-kod krävs för att använda telefonen"</string>
+    <!-- outdated translation 258981978215428916 -->     <string name="sim_lock_off" product="tablet" msgid="2813800553917012356">"PIN-kod krävs för att använda telefonen"</string>
+    <string name="sim_lock_off" product="default" msgid="258981978215428916">"PIN-kod krävs för att använda telefonen"</string>
     <string name="sim_pin_change" msgid="6311414184279932368">"Byt PIN-kod"</string>
     <string name="sim_enter_pin" msgid="6608715137008508432">"PIN-kod för SIM-kort"</string>
     <string name="sim_enable_sim_lock" msgid="4517742794997166918">"Lås SIM-kort"</string>
@@ -565,7 +598,8 @@
     <string name="sim_lock_failed" msgid="6676748290838006404">"Det gick inte att ändra SIM-kortets låsstatus."\n"Du kan ha angett fel PIN-kod."</string>
     <string name="sim_enter_ok" msgid="6475946836899218919">"OK"</string>
     <string name="sim_enter_cancel" msgid="6240422158517208036">"Avbryt"</string>
-    <string name="device_info_settings" msgid="475872867864762157">"Telefonens status"</string>
+    <!-- outdated translation 475872867864762157 -->     <string name="device_info_settings" product="tablet" msgid="1119755927536987178">"Telefonens status"</string>
+    <string name="device_info_settings" product="default" msgid="475872867864762157">"Telefonens status"</string>
     <string name="system_update_settings_list_item_title" msgid="3342887311059985961">"Systemuppdateringar"</string>
     <string name="system_update_settings_list_item_summary" msgid="3853057315907710747"></string>
     <string name="firmware_version" msgid="4801135784886859972">"Android-version"</string>
@@ -577,7 +611,7 @@
     <string name="device_status_activity_title" msgid="1411201799384697904">"Status"</string>
     <string name="device_status" msgid="607405385799807324">"Status"</string>
     <string name="device_status_summary" msgid="2599162787451519618">"Telefonnummer, signal osv."</string>
-    <!-- outdated translation 6761505449439392808 -->     <string name="storage_settings" product="nosdcard" msgid="8758910337658683955">"Lagringsinställningar"</string>
+    <string name="storage_settings" product="nosdcard" msgid="8758910337658683955">"Delad och säker lagring"</string>
     <string name="storage_settings" product="default" msgid="4211799979832404953">"Lagring"</string>
     <string name="storage_settings_title" msgid="8746016738388094064">"Lagringsinställningar"</string>
     <string name="storage_settings_summary" product="nosdcard" msgid="3543813623294870759">"Demontera USB-lagringsenheten och visa tillgängligt lagringsutrymme"</string>
@@ -610,14 +644,14 @@
     <string name="ptp_mode_summary" msgid="8709697530987890394">"Visa som en PTP-kamera på USB istället för som en MTP-enhet"</string>
     <string name="sd_insert_summary" product="nosdcard" msgid="5264016886409577313">"Sätt i USB om du vill montera"</string>
     <string name="sd_insert_summary" product="default" msgid="2048640010381803841">"Sätt in ett SD-kort för montering"</string>
-    <!-- outdated translation 2160896630836199702 -->     <string name="sd_mount" product="nosdcard" msgid="8966695015677343116">"Montera delad enhet"</string>
+    <string name="sd_mount" product="nosdcard" msgid="8966695015677343116">"Sätt i USB-enheten"</string>
     <string name="sd_mount" product="default" msgid="5940523765187704135">"Montera SD-kort"</string>
     <!-- outdated translation 6733254203291665551 -->     <string name="sd_mount_summary" product="nosdcard" msgid="1794150364965145726">"Demontera intern USB-lagring"</string>
     <string name="sd_mount_summary" product="default" msgid="4936591681679097699">"Montera SD-kortet"</string>
     <string name="sd_format" product="nosdcard" msgid="2148179271623099054">"Radera USB-lagring"</string>
     <string name="sd_format" product="default" msgid="2576054280507119870">"Radera SD-kort"</string>
-    <string name="sd_format_summary" product="nosdcard" msgid="1504606546865152514">"Raderar alla data på telefonens interna USB-lagring, som musik och foton."</string>
-    <string name="sd_format_summary" product="default" msgid="915849621390821841">"Raderar alla data på telefonens SD-kort, som musik och foton"</string>
+    <!-- outdated translation 1504606546865152514 -->     <string name="sd_format_summary" product="nosdcard" msgid="6331905044907914603">"Raderar alla data på telefonens interna USB-lagring, som musik och foton."</string>
+    <!-- outdated translation 1504606546865152514 -->     <string name="sd_format_summary" product="default" msgid="212703692181793109">"Raderar alla data på telefonens interna USB-lagring, som musik och foton."</string>
     <string name="sd_unavailable" msgid="8580107589533213904">"Inte tillgängligt"</string>
     <string name="read_only" msgid="6702420168629076340">" (Skrivskyddad)"</string>
     <string name="dlg_confirm_unmount_title" product="nosdcard" msgid="2349876662428231297">"Demontera USB-enhet"</string>
@@ -668,19 +702,35 @@
     <string name="menu_restore" msgid="8260067415075573273">"Återställ standardinst."</string>
     <string name="restore_default_apn_completed" msgid="3990449939234957281">"Återställning av standardinställningar för APN har slutförts"</string>
     <string name="master_clear_title" msgid="5907939616087039756">"Återställ standardinst."</string>
-    <string name="master_clear_summary" msgid="4986154238001088492">"Raderar alla data på telefonen"</string>
-    <string name="master_clear_desc" product="nosdcard" msgid="2163013814299528247">"Alla data på telefonens "<b>"interna lagring"</b>" raderas, inklusive:"\n\n<li>"ditt Google-konto"</li>\n<li>"system- och programdata och inställningar"</li>\n<li>"hämtade appar"</li>\n\n"Om du vill ta bort alla data från telefonen måste du radera "<b>"USB-lagringsenheten"</b>"."\n\n</string>
-    <string name="master_clear_desc" product="default" msgid="1741944496458365969">"Alla data på telefonens "<b>"interna lagring"</b>" raderas, inklusive:"\n\n<li>"ditt Google-konto"</li>\n<li>"system- och programdata"</li>\n<li>"hämtade appar"</li>\n\n"Om du även vill ta bort musik, bilder och andra användardata måste du radera "<b>"SD-kortet"</b>"."\n\n</string>
+    <!-- outdated translation 4986154238001088492 -->     <string name="master_clear_summary" product="tablet" msgid="4036344100254678429">"Raderar alla data på telefonen"</string>
+    <string name="master_clear_summary" product="default" msgid="4986154238001088492">"Raderar alla data på telefonen"</string>
+    <!-- unknown placeholder TAG_B_0 in master_clear_desc -->
+    <skip />
+    <!-- no translation found for master_clear_desc (1305457209008369655) -->
+    <skip />
+    <!-- unknown placeholder TAG_B_0 in master_clear_desc -->
+    <skip />
+    <!-- no translation found for master_clear_desc (2950536633526374209) -->
+    <skip />
+    <!-- no translation found for master_clear_accounts (6412857499147999073) -->
+    <skip />
+    <!-- no translation found for master_clear_desc_erase_external_storage (4740866328425123395) -->
+    <skip />
+    <!-- no translation found for master_clear_desc_erase_external_storage (7339100478676372901) -->
+    <skip />
     <string name="erase_external_storage" product="nosdcard" msgid="969364037450286809">"Radera USB-lagring"</string>
     <string name="erase_external_storage" product="default" msgid="1397239046334307625">"Radera SD-kort"</string>
-    <string name="erase_external_storage_description" product="nosdcard" msgid="1657838142707381027">"Radera alla data på telefonens interna USB-lagring, som musik och foton."</string>
-    <string name="erase_external_storage_description" product="default" msgid="8100175974635894073">"Radera alla data på telefonens SD-kort, som musik och foton."</string>
-    <string name="master_clear_button_text" msgid="7550632653343157971">"Återställ telefonen"</string>
+    <!-- outdated translation 1657838142707381027 -->     <string name="erase_external_storage_description" product="nosdcard" msgid="444834593696342279">"Radera alla data på telefonens interna USB-lagring, som musik och foton."</string>
+    <!-- outdated translation 1657838142707381027 -->     <string name="erase_external_storage_description" product="default" msgid="46603515218075174">"Radera alla data på telefonens interna USB-lagring, som musik och foton."</string>
+    <!-- outdated translation 7550632653343157971 -->     <string name="master_clear_button_text" product="tablet" msgid="3130786116528304116">"Återställ telefonen"</string>
+    <string name="master_clear_button_text" product="default" msgid="7550632653343157971">"Återställ telefonen"</string>
     <string name="master_clear_final_desc" msgid="6917971132484622696">"Vill du ta bort all personlig information och alla hämtade program? Det går inte att ångra åtgärden!"</string>
     <string name="master_clear_final_button_text" msgid="5390908019019242910">"Radera allt"</string>
     <string name="master_clear_gesture_prompt" msgid="1428645764883536750">"Rita ditt grafiska lösenord"</string>
-    <string name="master_clear_gesture_explanation" msgid="8901714274312707918">"Du måste rita ditt grafiska lösenord om du vill återställa telefonen."</string>
+    <!-- outdated translation 8901714274312707918 -->     <string name="master_clear_gesture_explanation" msgid="2234954758550554549">"Du måste rita ditt grafiska lösenord om du vill återställa telefonen."</string>
     <string name="master_clear_failed" msgid="8655202125010189406">"Återställningen utfördes inte eftersom tjänsten för systemrensning inte är tillgänglig."</string>
+    <!-- no translation found for master_clear_confirm_title (4845794266129586839) -->
+    <skip />
     <string name="media_format_title" product="nosdcard" msgid="3999653431422767156">"Radera USB-lagring"</string>
     <string name="media_format_title" product="default" msgid="4427528440306787972">"Radera SD-kort"</string>
     <string name="media_format_summary" product="nosdcard" msgid="776603298628082065">"Raderar allt på USB-enheten"</string>
@@ -702,13 +752,18 @@
     <string name="tether_settings_title_bluetooth" msgid="355855408317564420">"Delning via Bluetooth"</string>
     <string name="tether_settings_title_usb_bluetooth" msgid="5355828977109785001">"Internetdelning"</string>
     <string name="tether_settings_title_all" msgid="8356136101061143841">"Internetdelning och surfpunkt"</string>
-    <string name="tether_settings_summary_usb" msgid="3562431455625637370">"Dela telefonens mobila dataanslutning via USB"</string>
-    <string name="tether_settings_summary_wifi" msgid="4690912027002467246">"Dela telefonens anslutning som en mobil Wi-Fi-surfpunkt"</string>
-    <string name="tether_settings_summary_bluetooth" msgid="4363059913219151114">"Dela telefonens mobila dataanslutning via Bluetooth"</string>
-    <string name="tether_settings_summary_usb_wifi" msgid="3700323208282018772">"Dela telefonens mobila dataanslutning via USB eller som en mobil Wi-Fi-surfpunkt"</string>
-    <string name="tether_settings_summary_usb_bluetooth" msgid="4008195891276675882">"Dela telefonens mobila dataanslutning via USB eller Bluetooth"</string>
-    <string name="tether_settings_summary_wifi_bluetooth" msgid="2753904149495692201">"Dela telefonens mobila dataanslutning via Bluetooth eller som en mobil Wi-Fi-surfpunkt"</string>
-    <string name="tether_settings_summary_all" msgid="1171769255924636665">"Dela telefonens mobila dataanslutning via USB, Wi-Fi eller Bluetooth"</string>
+    <!-- outdated translation 3562431455625637370 -->     <string name="tether_settings_summary_usb" product="tablet" msgid="785883365108362248">"Dela telefonens mobila dataanslutning via USB"</string>
+    <string name="tether_settings_summary_usb" product="default" msgid="3562431455625637370">"Dela telefonens mobila dataanslutning via USB"</string>
+    <!-- outdated translation 4690912027002467246 -->     <string name="tether_settings_summary_wifi" msgid="5474383125137372164">"Dela telefonens anslutning som en mobil Wi-Fi-surfpunkt"</string>
+    <!-- outdated translation 4363059913219151114 -->     <string name="tether_settings_summary_bluetooth" msgid="2407506656353819750">"Dela telefonens mobila dataanslutning via Bluetooth"</string>
+    <!-- outdated translation 3700323208282018772 -->     <string name="tether_settings_summary_usb_wifi" product="tablet" msgid="3834674129575844910">"Dela telefonens mobila dataanslutning via USB eller som en mobil Wi-Fi-surfpunkt"</string>
+    <string name="tether_settings_summary_usb_wifi" product="default" msgid="3700323208282018772">"Dela telefonens mobila dataanslutning via USB eller som en mobil Wi-Fi-surfpunkt"</string>
+    <!-- outdated translation 4008195891276675882 -->     <string name="tether_settings_summary_usb_bluetooth" product="tablet" msgid="1245080236509560839">"Dela telefonens mobila dataanslutning via USB eller Bluetooth"</string>
+    <string name="tether_settings_summary_usb_bluetooth" product="default" msgid="4008195891276675882">"Dela telefonens mobila dataanslutning via USB eller Bluetooth"</string>
+    <!-- outdated translation 2753904149495692201 -->     <string name="tether_settings_summary_wifi_bluetooth" product="tablet" msgid="1924576461932311140">"Dela telefonens mobila dataanslutning via Bluetooth eller som en mobil Wi-Fi-surfpunkt"</string>
+    <string name="tether_settings_summary_wifi_bluetooth" product="default" msgid="2753904149495692201">"Dela telefonens mobila dataanslutning via Bluetooth eller som en mobil Wi-Fi-surfpunkt"</string>
+    <!-- outdated translation 1171769255924636665 -->     <string name="tether_settings_summary_all" product="tablet" msgid="6612660164315153427">"Dela telefonens mobila dataanslutning via USB, Wi-Fi eller Bluetooth"</string>
+    <string name="tether_settings_summary_all" product="default" msgid="1171769255924636665">"Dela telefonens mobila dataanslutning via USB, Wi-Fi eller Bluetooth"</string>
     <string name="usb_title" msgid="7483344855356312510">"USB"</string>
     <string name="usb_tethering_button_text" msgid="585829947108007917">"USB-sammanlänkning"</string>
     <string name="usb_tethering_available_subtext" msgid="156779271296152605">"USB-ansluten, markera för att sammanlänka"</string>
@@ -743,21 +798,23 @@
     <skip />
     <!-- no translation found for use_location_summary_enabled (984549156918597265) -->
     <skip />
-    <string name="about_settings" msgid="1743378368185371685">"Om telefonen"</string>
-    <string name="about_settings_summary" msgid="3302263393543848667">"Visa juridisk information, telefonstatus, programversion"</string>
+    <!-- outdated translation 1743378368185371685 -->     <string name="about_settings" product="tablet" msgid="593457295516533765">"Om telefonen"</string>
+    <string name="about_settings" product="default" msgid="1743378368185371685">"Om telefonen"</string>
+    <!-- outdated translation 3302263393543848667 -->     <string name="about_settings_summary" msgid="3371517697156165959">"Visa juridisk information, telefonstatus, programversion"</string>
     <string name="legal_information" msgid="5769301644270604095">"Juridisk information"</string>
     <string name="contributors_title" msgid="5917703088825286504">"Medarbetare"</string>
     <string name="copyright_title" msgid="865906688917260647">"Upphovsrätt"</string>
     <string name="license_title" msgid="1990487604356037871">"Licens"</string>
     <string name="terms_title" msgid="7697580845616764642">"Användarvillkor"</string>
     <string name="system_tutorial_list_item_title" msgid="9082844446660969729">"Systemets självstudie"</string>
-    <string name="system_tutorial_list_item_summary" msgid="3861815254521030201">"Lär dig hur du använder din telefon"</string>
+    <!-- outdated translation 3861815254521030201 -->     <string name="system_tutorial_list_item_summary" product="tablet" msgid="3341504384445734067">"Lär dig hur du använder din telefon"</string>
+    <string name="system_tutorial_list_item_summary" product="default" msgid="3861815254521030201">"Lär dig hur du använder din telefon"</string>
     <string name="settings_license_activity_title" msgid="7553683406244228650">"Öppen källkodslicens"</string>
     <string name="settings_license_activity_unavailable" msgid="4210539215951487627">"Ett problem inträffade när licenserna lästes in."</string>
     <string name="settings_license_activity_loading" msgid="3337535809093591740">"Läser in…"</string>
     <string name="settings_safetylegal_title" msgid="1289483965535937431">"Säkerhetsinformation"</string>
     <string name="settings_safetylegal_activity_title" msgid="6901214628496951727">"Säkerhetsinformation"</string>
-    <string name="settings_safetylegal_activity_unreachable" msgid="3198912875259612887">"Din telefon är inte ansluten till en datatjänst. Besök %s på en dator som är ansluten till Internet om du vill visa informationen nu."</string>
+    <!-- outdated translation 3198912875259612887 -->     <string name="settings_safetylegal_activity_unreachable" msgid="170670055116721810">"Din telefon är inte ansluten till en datatjänst. Besök %s på en dator som är ansluten till Internet om du vill visa informationen nu."</string>
     <string name="settings_safetylegal_activity_loading" msgid="8059022597639516348">"Läser in …"</string>
     <string name="lockpassword_choose_your_password_header" msgid="8624900666929394990">"Välj ett lösenord"</string>
     <string name="lockpassword_choose_your_pin_header" msgid="7598849519816138302">"Välj en PIN-kod"</string>
@@ -796,8 +853,10 @@
     <string name="lockpattern_too_many_failed_confirmation_attempts_footer" msgid="6759029360597122873">"Försök igen om <xliff:g id="NUMBER">%d</xliff:g> sekunder."</string>
     <string name="skip_button_label" msgid="8680422740354436943">"Avbryt"</string>
     <string name="next_button_label" msgid="8890792540116568321">"Nästa"</string>
-    <string name="lock_title" msgid="4059246467204273930">"Skydda din telefon"</string>
-    <string name="lock_intro_message" msgid="9100785646737118042"><font size="17">"Skydda din telefon från obehörig användning genom att skapa ett personligt grafiskt lösenord på skärmen. "\n<font height="17">\n</font>"1"<b></b>"  Se hur ett grafiskt lösenord ritas på nästa skärm. "\n<font height="17">\n</font><b>"2"</b>" Rita ditt eget grafiska lösenord. Experimentera med olika grafiska lösenord men anslut minst fyra punkter. "\n<font height="17">\n</font><b>"3"</b>"  Rita ditt grafiska lösenord igen för att bekräfta. "\n<font height="17">\n</font><b>" Är du redo att börja? Tryck på Nästa"</b>". "\n<font height="3">\n</font>"Tryck på Avbryt om du vill lämna telefonen oskyddad."</font></string>
+    <!-- outdated translation 4059246467204273930 -->     <string name="lock_title" product="tablet" msgid="2909697418179419990">"Skydda din telefon"</string>
+    <string name="lock_title" product="default" msgid="4059246467204273930">"Skydda din telefon"</string>
+    <!-- outdated translation 9100785646737118042 -->     <string name="lock_intro_message" product="tablet" msgid="4544669202394019747"><font size="17">"Skydda din telefon från obehörig användning genom att skapa ett personligt grafiskt lösenord på skärmen. "\n<font height="17">\n</font>"1"<b></b>"  Se hur ett grafiskt lösenord ritas på nästa skärm. "\n<font height="17">\n</font><b>"2"</b>" Rita ditt eget grafiska lösenord. Experimentera med olika grafiska lösenord men anslut minst fyra punkter. "\n<font height="17">\n</font><b>"3"</b>"  Rita ditt grafiska lösenord igen för att bekräfta. "\n<font height="17">\n</font><b>" Är du redo att börja? Tryck på Nästa"</b>". "\n<font height="3">\n</font>"Tryck på Avbryt om du vill lämna telefonen oskyddad."</font></string>
+    <string name="lock_intro_message" product="default" msgid="9100785646737118042"><font size="17">"Skydda din telefon från obehörig användning genom att skapa ett personligt grafiskt lösenord på skärmen. "\n<font height="17">\n</font>"1"<b></b>"  Se hur ett grafiskt lösenord ritas på nästa skärm. "\n<font height="17">\n</font><b>"2"</b>" Rita ditt eget grafiska lösenord. Experimentera med olika grafiska lösenord men anslut minst fyra punkter. "\n<font height="17">\n</font><b>"3"</b>"  Rita ditt grafiska lösenord igen för att bekräfta. "\n<font height="17">\n</font><b>" Är du redo att börja? Tryck på Nästa"</b>". "\n<font height="3">\n</font>"Tryck på Avbryt om du vill lämna telefonen oskyddad."</font></string>
     <string name="lock_example_title" msgid="8052305554017485410">"Exempel på grafiskt lösenord"</string>
     <string name="lock_example_message" msgid="1838650097090632706">"Anslut minst fyra punkter."\n" "\n"Tryck på Nästa när du vill rita ditt eget grafiska lösenord."</string>
     <string name="manageapplications_settings_title" msgid="5712405848153426706">"Hantera program"</string>
@@ -807,7 +866,8 @@
     <string name="applications_settings_header" msgid="6018266337275422250">"Programinställningar"</string>
     <string name="install_applications" msgid="4872012136210802181">"Okända källor"</string>
     <string name="install_unknown_applications" msgid="6612824788917283662">"Tillåt installation av program som inte finns i Market"</string>
-    <string name="install_all_warning" msgid="1923717607319933741">"Din telefon och dina personliga uppgifter är mer känsliga för hot från program från okända källor. Du godkänner att du själv är ansvarig för eventuella skador på din telefon eller förlust av data som kan uppstå när du använder dessa program."</string>
+    <!-- outdated translation 1923717607319933741 -->     <string name="install_all_warning" product="tablet" msgid="8143969767997876735">"Din telefon och dina personliga uppgifter är mer känsliga för hot från program från okända källor. Du godkänner att du själv är ansvarig för eventuella skador på din telefon eller förlust av data som kan uppstå när du använder dessa program."</string>
+    <string name="install_all_warning" product="default" msgid="1923717607319933741">"Din telefon och dina personliga uppgifter är mer känsliga för hot från program från okända källor. Du godkänner att du själv är ansvarig för eventuella skador på din telefon eller förlust av data som kan uppstå när du använder dessa program."</string>
     <string name="application_info_label" msgid="1150486628158409543">"Programinformation"</string>
     <string name="storage_label" msgid="8700867073480107253">"Lagring"</string>
     <string name="auto_launch_label" msgid="3012617472833815382">"Starta som standard"</string>
@@ -858,13 +918,15 @@
     <string name="app_factory_reset_dlg_text" msgid="438395129140568893">"Vill du avinstallera alla uppdateringar av det här Android-programmet?"</string>
     <string name="clear_failed_dlg_title" msgid="2387060805294783175">"Ta bort data"</string>
     <string name="clear_failed_dlg_text" msgid="7943411157007320290">"Det gick inte att ta bort data för programmet"</string>
-    <string name="security_settings_desc" msgid="3116027624526915561">"Med det här programmet kommer du åt följande på din telefon:"</string>
+    <!-- outdated translation 3116027624526915561 -->     <string name="security_settings_desc" product="tablet" msgid="6158636779728455276">"Med det här programmet kommer du åt följande på din telefon:"</string>
+    <string name="security_settings_desc" product="default" msgid="3116027624526915561">"Med det här programmet kommer du åt följande på din telefon:"</string>
     <string name="computing_size" msgid="1599186977475211186">"Beräknar…"</string>
     <string name="invalid_size_value" msgid="1901940003700269523">"Det gick inte att räkna ut paketstorlek"</string>
     <string name="empty_list_msg" msgid="2901049162265094971">"Du har inte installerat några program från tredje part."</string>
     <string name="version_text" msgid="9189073826278676425">"version <xliff:g id="VERSION_NUM">%1$s</xliff:g>"</string>
     <string name="move_app" msgid="5042838441401731346">"Flytta"</string>
-    <string name="move_app_to_internal" msgid="3895430471913858185">"Flytta till telefon"</string>
+    <!-- outdated translation 3895430471913858185 -->     <string name="move_app_to_internal" product="tablet" msgid="2299714147283854957">"Flytta till telefon"</string>
+    <string name="move_app_to_internal" product="default" msgid="3895430471913858185">"Flytta till telefon"</string>
     <string name="move_app_to_sdcard" product="nosdcard" msgid="4350451696315265420">"Flytta till USB-enhet"</string>
     <string name="move_app_to_sdcard" product="default" msgid="1143379049903056407">"Flytta till SD-kort"</string>
     <string name="moving" msgid="6431016143218876491">"Flyttar"</string>
@@ -912,7 +974,8 @@
     <string name="process_service_in_use_description" msgid="8993335064403217080">"Tjänsten <xliff:g id="COMP_NAME">%1$s</xliff:g> används."</string>
     <string name="process_provider_in_use_description" msgid="5586603325677678940">"Leverantören <xliff:g id="COMP_NAME">%1$s</xliff:g> används."</string>
     <string name="runningservicedetails_stop_dlg_title" msgid="4253292537154337233">"Avsluta systemtjänst?"</string>
-    <string name="runningservicedetails_stop_dlg_text" msgid="6929716497425738387">"Är du säker på att du vill avsluta systemtjänsten? Vissa funktioner på telefonen kan sluta fungera och du måste eventuellt stänga av telefonen och starta om den igen för att åtgärda problemet."</string>
+    <!-- outdated translation 6929716497425738387 -->     <string name="runningservicedetails_stop_dlg_text" product="tablet" msgid="5420033091144016389">"Är du säker på att du vill avsluta systemtjänsten? Vissa funktioner på telefonen kan sluta fungera och du måste eventuellt stänga av telefonen och starta om den igen för att åtgärda problemet."</string>
+    <string name="runningservicedetails_stop_dlg_text" product="default" msgid="6929716497425738387">"Är du säker på att du vill avsluta systemtjänsten? Vissa funktioner på telefonen kan sluta fungera och du måste eventuellt stänga av telefonen och starta om den igen för att åtgärda problemet."</string>
     <string name="language_settings" msgid="502219872342167227">"Språk och tangentbord"</string>
     <string name="language_keyboard_settings_title" msgid="3455826933385341107">"Inställningar för språk och tangentbord"</string>
     <string name="language_settings_category" msgid="2288258489940617043">"Språkinställningar"</string>
@@ -921,7 +984,7 @@
     <string name="phone_language_summary" msgid="3871309445655554211"></string>
     <string name="auto_replace" msgid="6199184757891937822">"Ersätt automatiskt"</string>
     <string name="auto_replace_summary" msgid="370288728200084466">"Rätta felskrivna ord"</string>
-    <string name="auto_caps" msgid="581633131114124121">"Inled med versal"</string>
+    <!-- outdated translation 581633131114124121 -->     <string name="auto_caps" msgid="6379232078052591265">"Inled med versal"</string>
     <string name="auto_caps_summary" msgid="6358102538315261466">"Första ordet i en mening ska inledas med versal"</string>
     <string name="auto_punctuate" msgid="4595367243950425833">"Automatisk punkt"</string>
     <string name="hardkeyboard_category" msgid="5957168411305769899">"Inställningar för fysiskt tangentbord"</string>
@@ -939,7 +1002,8 @@
     <string name="user_dict_settings_context_menu_delete_title" msgid="9140703913776549054">"Radera"</string>
     <string name="user_dict_settings_empty_text" msgid="6209268025109242806">"Det finns inga ord i användarordlistan. Du lägger till ord från menyn."</string>
     <string name="testing" msgid="6584352735303604146">"Testa"</string>
-    <string name="testing_phone_info" msgid="8656693364332840056">"Telefoninformation"</string>
+    <!-- outdated translation 8656693364332840056 -->     <string name="testing_phone_info" product="tablet" msgid="193561832258534798">"Telefoninformation"</string>
+    <string name="testing_phone_info" product="default" msgid="8656693364332840056">"Telefoninformation"</string>
     <string name="testing_battery_info" msgid="3497865525976497848">"Batteriinformation"</string>
     <string name="quick_launch_title" msgid="7904609846945905306">"Snabbstart"</string>
     <string name="quick_launch_summary" msgid="3453825712466417452">"Ställ in kortkommandon för att starta program"</string>
@@ -998,7 +1062,8 @@
     <string name="accessibility_script_injection_category" msgid="8649951751131431904">"Tillgänglighetsskript"</string>
     <string name="accessibility_script_injection_enabled" msgid="6927896081016611012">"Hämta tillgänglighetsskript"</string>
     <string name="accessibility_script_injection_enabled_summary" msgid="3629525134901617621">"Tillåt att program hämtar tillgänglighetsskript från Google"</string>
-    <string name="accessibility_script_injection_security_warning" msgid="9078893361741942109">"Vissa program kan be om att få hämta skript från Google till telefonen för att innehållet ska bli mer tillgängligt. Vill du tillåta att Google installerar tillgänglighetsskript i din telefon?"</string>
+    <!-- outdated translation 9078893361741942109 -->     <string name="accessibility_script_injection_security_warning" product="tablet" msgid="1113600871264359828">"Vissa program kan be om att få hämta skript från Google till telefonen för att innehållet ska bli mer tillgängligt. Vill du tillåta att Google installerar tillgänglighetsskript i din telefon?"</string>
+    <string name="accessibility_script_injection_security_warning" product="default" msgid="9078893361741942109">"Vissa program kan be om att få hämta skript från Google till telefonen för att innehållet ska bli mer tillgängligt. Vill du tillåta att Google installerar tillgänglighetsskript i din telefon?"</string>
     <string name="accessibility_power_button_category" msgid="8545885236482339928">"Avstängningsknapp"</string>
     <string name="accessibility_power_button_ends_call" msgid="7698764194501089533">"Avstängningsknappen avslutar samtal"</string>
     <string name="accessibility_power_button_ends_call_summary" msgid="8878097632186291462">"Under ett samtal avslutar avstängningsknappen samtalet i stället för att stänga av skärmen"</string>
@@ -1013,7 +1078,7 @@
     <string name="battery_stats_gps_on_label" msgid="1193657533641951256">"GPS på"</string>
     <string name="battery_stats_wifi_running_label" msgid="3093545080361658269">"WiFi"</string>
     <string name="battery_stats_wake_lock_label" msgid="1908942681902324095">"Aktiv"</string>
-    <string name="battery_stats_phone_signal_label" msgid="6822042940376636775">"Telefonsignal"</string>
+    <!-- outdated translation 6822042940376636775 -->     <string name="battery_stats_phone_signal_label" msgid="4137799310329041341">"Telefonsignal"</string>
     <!-- no translation found for battery_stats_last_duration (1535831453827905957) -->
     <skip />
     <string name="awake" msgid="387122265874485088">"Aktiv tid för enheten"</string>
@@ -1029,13 +1094,15 @@
     <string name="power_bluetooth" msgid="4373329044379008289">"Bluetooth"</string>
     <string name="power_cell" msgid="6596471490976003056">"Mobilens viloläge"</string>
     <string name="power_phone" msgid="5392641106474567277">"Röstsamtal"</string>
-    <string name="power_idle" msgid="9055659695602194990">"Telefonen är inaktiv"</string>
+    <!-- outdated translation 9055659695602194990 -->     <string name="power_idle" product="tablet" msgid="4612478572401640759">"Telefonen är inaktiv"</string>
+    <string name="power_idle" product="default" msgid="9055659695602194990">"Telefonen är inaktiv"</string>
     <string name="usage_type_cpu" msgid="715162150698338714">"CPU totalt"</string>
     <string name="usage_type_cpu_foreground" msgid="6500579611933211831">"CPU i förgrunden"</string>
     <string name="usage_type_wake_lock" msgid="5125438890233677880">"Behåll aktiv"</string>
     <string name="usage_type_gps" msgid="7989688715128160790">"GPS"</string>
     <string name="usage_type_wifi_running" msgid="8234997940652067049">"WiFi körs"</string>
-    <string name="usage_type_phone" msgid="9108247984998041853">"Telefon"</string>
+    <!-- outdated translation 9108247984998041853 -->     <string name="usage_type_phone" product="tablet" msgid="262638572890253393">"Telefon"</string>
+    <string name="usage_type_phone" product="default" msgid="9108247984998041853">"Telefon"</string>
     <string name="usage_type_data_send" msgid="2857401966985425427">"Skickade data"</string>
     <string name="usage_type_data_recv" msgid="7251090882025234185">"Mottagna data"</string>
     <string name="usage_type_audio" msgid="6957269406840886290">"Ljud"</string>
@@ -1049,7 +1116,8 @@
     <string name="battery_action_wifi" msgid="2272741639606146903">"WiFi-inställningar"</string>
     <string name="battery_action_bluetooth" msgid="8374789049507723142">"Bluetooth-inställningar"</string>
     <string name="battery_desc_voice" msgid="8980322055722959211">"Batteri som förbrukats av röstsamtal"</string>
-    <string name="battery_desc_standby" msgid="3009080001948091424">"Batteri som förbrukas när telefonen är inaktiv"</string>
+    <!-- outdated translation 3009080001948091424 -->     <string name="battery_desc_standby" product="tablet" msgid="6284747418668280364">"Batteri som förbrukas när telefonen är inaktiv"</string>
+    <string name="battery_desc_standby" product="default" msgid="3009080001948091424">"Batteri som förbrukas när telefonen är inaktiv"</string>
     <string name="battery_desc_radio" msgid="5479196477223185367">"Batteri som förbrukats av radion"</string>
     <string name="battery_sugg_radio" msgid="8211336978326295047">"Växla till flygplansläge om du vill spara batteri när du är i ett område utan täckning"</string>
     <string name="battery_desc_display" msgid="5432795282958076557">"Batteri som förbrukats av skärm och bakgrundsbelysning"</string>
@@ -1130,7 +1198,7 @@
     <string name="vpn_mistake_button" msgid="1683383660912491270">"Nej"</string>
     <string name="vpn_menu_done" msgid="93528279226907926">"Spara"</string>
     <string name="vpn_menu_cancel" msgid="7234451214611202868">"Avbryt"</string>
-    <string name="vpn_menu_revert" msgid="4407762442281467659">"Återgå"</string>
+    <string name="vpn_menu_revert" msgid="4407762442281467659">"Tillbaka"</string>
     <string name="vpn_menu_connect" msgid="1089399414463784218">"Anslut till nätverk"</string>
     <string name="vpn_menu_disconnect" msgid="8254492450022562235">"Koppla ifrån nätverket"</string>
     <string name="vpn_menu_edit" msgid="4526245173583195618">"Redigera nätverk"</string>

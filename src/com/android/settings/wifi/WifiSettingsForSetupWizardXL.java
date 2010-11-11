@@ -21,27 +21,36 @@ import com.android.settings.R;
 import android.app.Activity;
 import android.content.Context;
 import android.net.NetworkInfo.DetailedState;
+import android.net.wifi.WifiManager;
 import android.os.Bundle;
+import android.preference.PreferenceCategory;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.ViewGroup;
 import android.view.Window;
+import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import java.util.Collection;
 import java.util.EnumMap;
 
 /**
  * WifiSetings Activity specific for SetupWizard with X-Large screen size.
  */
 public class WifiSettingsForSetupWizardXL extends Activity implements OnClickListener {
-    private static final String TAG = WifiSettingsForSetupWizardXL.class.getSimpleName();
+    private static final String TAG = "SetupWizard";
+
+    // We limit the number of showable access points so that the ListView won't become larger
+    // than the screen.
+    private static int MAX_MENU_COUNT_IN_XL = 8;
 
     private static final EnumMap<DetailedState, DetailedState> stateMap =
-        new EnumMap<DetailedState, DetailedState>(DetailedState.class);
+            new EnumMap<DetailedState, DetailedState>(DetailedState.class);
 
     static {
         stateMap.put(DetailedState.IDLE, DetailedState.DISCONNECTED);
@@ -56,10 +65,28 @@ public class WifiSettingsForSetupWizardXL extends Activity implements OnClickLis
         stateMap.put(DetailedState.FAILED, DetailedState.FAILED);
     }
 
+    private WifiManager mWifiManager;
+
     private TextView mProgressText;
     private ProgressBar mProgressBar;
     private WifiSettings mWifiSettings;
     private TextView mStatusText;
+
+    private Button mAddNetworkButton;
+    private Button mRefreshButton;
+    private Button mSkipOrNextButton;
+    private Button mConnectButton;
+    private Button mForgetButton;
+    private Button mBackButton;
+
+    // Not used now.
+    private Button mDetailButton;
+
+    // true when a user already pressed "Connect" button and waiting for connection.
+    // Also true when the device is already connected to a wifi network on launch.
+    private boolean mAfterTryConnect;
+
+    private WifiConfigUiForSetupWizardXL mWifiConfig;
 
     private InputMethodManager mInputMethodManager;
 
@@ -82,6 +109,10 @@ public class WifiSettingsForSetupWizardXL extends Activity implements OnClickLis
         super.onCreate(savedInstanceState);
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.wifi_settings_for_setup_wizard_xl);
+
+        getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE);
+        
+        mWifiManager = (WifiManager)getSystemService(Context.WIFI_SERVICE);
         mWifiSettings =
                 (WifiSettings)getFragmentManager().findFragmentById(R.id.wifi_setup_fragment);
         mInputMethodManager = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
@@ -100,48 +131,54 @@ public class WifiSettingsForSetupWizardXL extends Activity implements OnClickLis
         mProgressBar.setIndeterminate(true);
         mStatusText.setText(R.string.wifi_setup_status_scanning);
 
-        ((Button)findViewById(R.id.wifi_setup_refresh_list)).setOnClickListener(this);
-        ((Button)findViewById(R.id.wifi_setup_add_network)).setOnClickListener(this);
-        ((Button)findViewById(R.id.wifi_setup_skip_or_next)).setOnClickListener(this);
-        ((Button)findViewById(R.id.wifi_setup_connect)).setOnClickListener(this);
-        ((Button)findViewById(R.id.wifi_setup_forget)).setOnClickListener(this);
-        ((Button)findViewById(R.id.wifi_setup_cancel)).setOnClickListener(this);
-        ((Button)findViewById(R.id.wifi_setup_detail)).setOnClickListener(this);
+        mAddNetworkButton = (Button)findViewById(R.id.wifi_setup_add_network);
+        mAddNetworkButton.setOnClickListener(this);
+        mRefreshButton = (Button)findViewById(R.id.wifi_setup_refresh_list);
+        mRefreshButton.setOnClickListener(this);
+        mSkipOrNextButton = (Button)findViewById(R.id.wifi_setup_skip_or_next);
+        mSkipOrNextButton.setOnClickListener(this);
+        mConnectButton = (Button)findViewById(R.id.wifi_setup_connect);
+        mConnectButton.setOnClickListener(this);
+        mForgetButton = (Button)findViewById(R.id.wifi_setup_forget);
+        mForgetButton.setOnClickListener(this);
+        mBackButton = (Button)findViewById(R.id.wifi_setup_cancel);
+        mBackButton.setOnClickListener(this);
+        mDetailButton = (Button)findViewById(R.id.wifi_setup_detail);
+        mDetailButton.setOnClickListener(this);
+    }
+
+    private void restoreFirstButtonVisibilityState() {
+        mAddNetworkButton.setVisibility(View.VISIBLE);
+        mRefreshButton.setVisibility(View.VISIBLE);
+        mSkipOrNextButton.setVisibility(View.VISIBLE);
+        mConnectButton.setVisibility(View.GONE);
+        mForgetButton.setVisibility(View.GONE);
+        mBackButton.setVisibility(View.GONE);
+        mDetailButton.setVisibility(View.GONE);
     }
 
     @Override
     public void onClick(View view) {
-        final int id = view.getId();
-        switch (id) {
-        case R.id.wifi_setup_refresh_list:
-            mWifiSettings.refreshAccessPoints();
-            break;
-        case R.id.wifi_setup_add_network:
-            mWifiSettings.onAddNetworkPressed();
-            break;
-        case R.id.wifi_setup_skip_or_next:
+        if (view == mAddNetworkButton) {
+            onAddNetworkButtonPressed();
+        } else if (view == mRefreshButton) {
+            refreshAccessPoints(true);
+        } else if (view == mSkipOrNextButton) {
             if (TextUtils.equals(getString(R.string.wifi_setup_skip), ((Button)view).getText())) {
                 // We don't want to let Wifi enabled when a user press skip without choosing
                 // any access point.
-                mWifiSettings.disableWifi();
+                mWifiManager.setWifiEnabled(false);
             }
             setResult(Activity.RESULT_OK);
-            finish();
-            break;
-        case R.id.wifi_setup_connect:
-            mWifiSettings.submit();
+            finish();            
+        } else if (view == mConnectButton) {
             onConnectButtonPressed();
-            break;
-        case R.id.wifi_setup_forget:
-            mWifiSettings.forget();
-            break;
-        case R.id.wifi_setup_cancel:
-            mStatusText.setText(R.string.wifi_setup_status_select_network);
-            mWifiSettings.detachConfigPreference();
-            break;
-        case R.id.wifi_setup_detail:
+        } else if (view == mForgetButton) {
+            onForgetButtonPressed();
+        } else if (view == mBackButton) {
+            onBackButtonPressed();
+        } else if (view == mDetailButton) {
             mWifiSettings.showDialogForSelectedPreference();
-            break;
         }
         hideSoftwareKeyboard();
     }
@@ -157,6 +194,13 @@ public class WifiSettingsForSetupWizardXL extends Activity implements OnClickLis
     // Called from WifiSettings
     /* package */ void updateConnectionState(DetailedState originalState) {
         final DetailedState state = stateMap.get(originalState);
+
+        if (originalState == DetailedState.FAILED) {
+            // We clean up the current connectivity status and let users select another network
+            // if they want.
+            refreshAccessPoints(true);
+        }
+
         switch (state) {
         case SCANNING: {
             // Let users know the device is working correctly though currently there's
@@ -165,7 +209,7 @@ public class WifiSettingsForSetupWizardXL extends Activity implements OnClickLis
                 mProgressBar.setIndeterminate(true);
                 mProgressText.setText(Summary.get(this, DetailedState.SCANNING));
             } else {
-                // Users already already connected to a network, or see available networks.
+                // Users already connected to a network, or see available networks.
                 mProgressBar.setIndeterminate(false);
             }
             break;
@@ -180,15 +224,18 @@ public class WifiSettingsForSetupWizardXL extends Activity implements OnClickLis
             mProgressBar.setProgress(2);
             mProgressText.setText(Summary.get(this, state));
             mStatusText.setText(R.string.wifi_setup_status_proceed_to_next);
-            // We don't want "Add network" button here. User can press it after pressing
-            // "Refresh" button.
-            ((Button)findViewById(R.id.wifi_setup_refresh_list)).setEnabled(true);
-            ((Button)findViewById(R.id.wifi_setup_skip_or_next)).setEnabled(true);
+
+            mAddNetworkButton.setVisibility(View.GONE);
+            mRefreshButton.setVisibility(View.GONE);
+            mBackButton.setVisibility(View.VISIBLE);
+            mSkipOrNextButton.setVisibility(View.VISIBLE);
+            mSkipOrNextButton.setEnabled(true);
 
             if (mIgnoringWifiNotificationCount > 0) {
                 // The network is already available before doing anything. We avoid skip this
                 // screen to avoid unnecessary trouble by doing so.
                 mIgnoringWifiNotificationCount = 0;
+                mAfterTryConnect = true;
             } else {
                 mProgressText.setText(Summary.get(this, state));
                 // setResult(Activity.RESULT_OK);
@@ -201,23 +248,42 @@ public class WifiSettingsForSetupWizardXL extends Activity implements OnClickLis
             mProgressBar.setProgress(0);
             mStatusText.setText(R.string.wifi_setup_status_select_network);
             mProgressText.setText(Summary.get(this, state));
-            enableButtons();
+            
+            restoreFirstButtonVisibilityState();
+            mAddNetworkButton.setEnabled(true);
+            mRefreshButton.setEnabled(true);
+            mSkipOrNextButton.setEnabled(true);
             break;
         }
         default:  // Not connected.
             if (mWifiSettings.getAccessPointsCount() == 0 && mIgnoringWifiNotificationCount > 0) {
+                Log.d(TAG, "Currently not connected, but we show \"Scanning\" for a moment");
                 mIgnoringWifiNotificationCount--;
                 mProgressBar.setIndeterminate(true);
                 mProgressText.setText(Summary.get(this, DetailedState.SCANNING));
             } else if (mShowingConnectingMessageManually && mIgnoringWifiNotificationCount > 0) {
+                Log.i(TAG, "Currently not connected, but we show \"connecting\" for a moment.");
                 mIgnoringWifiNotificationCount--;
                 showConnectingStatus();
             } else {
+                if (mAfterTryConnect) {
+                    // TODO: how to stop connecting the network?
+                    Log.i(TAG, String.format(
+                            "State %s has been notified after trying to connect a network. ",
+                            state.toString()));
+                }
+
+
                 mShowingConnectingMessageManually = false;
                 mProgressBar.setIndeterminate(false);
                 mProgressBar.setProgress(0);
+
+                mStatusText.setText(R.string.wifi_setup_not_connected);
                 mProgressText.setText(getString(R.string.wifi_setup_not_connected));
-                enableButtons();
+
+                mAddNetworkButton.setEnabled(true);
+                mRefreshButton.setEnabled(true);
+                mSkipOrNextButton.setEnabled(true);
             }
 
             break;
@@ -231,40 +297,168 @@ public class WifiSettingsForSetupWizardXL extends Activity implements OnClickLis
         mProgressText.setText(Summary.get(this, DetailedState.CONNECTING));
     }
 
-    private void enableButtons() {
-        ((Button)findViewById(R.id.wifi_setup_refresh_list)).setEnabled(true);
-        ((Button)findViewById(R.id.wifi_setup_add_network)).setEnabled(true);
-        ((Button)findViewById(R.id.wifi_setup_skip_or_next)).setEnabled(true);
+    private void onAddNetworkButtonPressed() {
+        // onConfigUiShown() will be called.
+        mWifiSettings.onAddNetworkPressed();
+
+        // We don't need detail button since all the details are in the main screen.
+        mDetailButton.setVisibility(View.GONE);
     }
 
-    public void onWifiConfigPreferenceAttached(boolean isNewNetwork) {
+    /**
+     * Called when the screen enters wifi configuration UI. UI widget for configuring network
+     * (a.k.a. ConfigPreference) should be taken care of by caller side.
+     * This method should handle buttons' visibility/enabled.
+     * @param selectedAccessPoint AccessPoint object being selected. null when a user pressed
+     * "Add network" button, meaning there's no selected access point.
+     */
+    /* package */ void showConfigUi(AccessPoint selectedAccessPoint, boolean edit) {
+        // We don't want to keep scanning Wi-Fi networks during users' configuring one network.
+        mWifiSettings.pauseWifiScan();
+
+        findViewById(R.id.wifi_setup).setVisibility(View.GONE);
+        final ViewGroup parent = (ViewGroup)findViewById(R.id.wifi_config_ui);
+        parent.setVisibility(View.VISIBLE);
+        parent.removeAllViews();
+        mWifiConfig = new WifiConfigUiForSetupWizardXL(this, parent, selectedAccessPoint, edit);
+        final View view = mWifiConfig.getView();
+        if (selectedAccessPoint != null) {
+            view.findViewById(R.id.wifi_general_info).setVisibility(View.VISIBLE);
+            ((TextView)view.findViewById(R.id.title)).setText(selectedAccessPoint.getTitle());
+            ((TextView)view.findViewById(R.id.summary)).setText(selectedAccessPoint.getSummary());
+        } else {
+            view.findViewById(R.id.wifi_general_info).setVisibility(View.GONE);
+        }
+        parent.addView(view);
+
         mStatusText.setText(R.string.wifi_setup_status_edit_network);
+        mAddNetworkButton.setVisibility(View.GONE);
+        mRefreshButton.setVisibility(View.GONE);
+        mSkipOrNextButton.setVisibility(View.GONE);
+        mConnectButton.setVisibility(View.VISIBLE);
+        mConnectButton.setVisibility(View.VISIBLE);
+        mBackButton.setVisibility(View.VISIBLE);
+        // TODO: remove this after UI fix.
+        // mDetailButton.setVisibility(View.VISIBLE);
     }
 
-    public void onForget() {
+    // May be called when user press "connect" button in WifiDialog
+    /* package */ void onConnectButtonPressed() {
+        mAfterTryConnect = true;
+
+        mWifiSettings.submit(mWifiConfig.getController());
+
+        // updateConnectionState() isn't called soon after the user's "connect" action,
+        // and the user still sees "not connected" message for a while, which looks strange.
+        // We instead manually show "connecting" message before the system gets actual
+        // "connecting" message from Wi-Fi module.
+        showConnectingStatus();
+
+        // Might be better to delay showing this button.
+        mBackButton.setVisibility(View.VISIBLE);
+
+        findViewById(R.id.wps_fields).setVisibility(View.GONE);
+        findViewById(R.id.security_fields).setVisibility(View.GONE);
+        findViewById(R.id.type).setVisibility(View.GONE);
+
+        mSkipOrNextButton.setVisibility(View.VISIBLE);
+        mSkipOrNextButton.setEnabled(false);
+        mConnectButton.setVisibility(View.GONE);
+        mAddNetworkButton.setVisibility(View.GONE);
+        mRefreshButton.setVisibility(View.GONE);
+        mDetailButton.setVisibility(View.GONE);
+
+        mShowingConnectingMessageManually = true;
+        mIgnoringWifiNotificationCount = 1;
+    }
+
+    // May be called when user press "forget" button in WifiDialog
+    /* package */ void onForgetButtonPressed() {
+        mWifiSettings.forget();
+
+        refreshAccessPoints(false);
+        restoreFirstButtonVisibilityState();
+        mAddNetworkButton.setEnabled(true);
+        mRefreshButton.setEnabled(true);
+        mSkipOrNextButton.setEnabled(true);
+
         mProgressBar.setIndeterminate(false);
         mProgressBar.setProgress(0);
         mProgressText.setText(getString(R.string.wifi_setup_not_connected));
     }
 
-    public void onRefreshAccessPoints() {
+    private void onBackButtonPressed() {
+        if (mAfterTryConnect) {
+            mAfterTryConnect = false;
+
+            // When a user press "Back" button after pressing "Connect" button, we want to cancel
+            // the "Connect" request and refresh the whole wifi status.
+            restoreFirstButtonVisibilityState();
+            mShowingConnectingMessageManually = false;
+
+            mAddNetworkButton.setEnabled(false);
+            mRefreshButton.setEnabled(false);
+            mSkipOrNextButton.setEnabled(true);
+
+            refreshAccessPoints(true);
+        } else { // During user's Wifi configuration.
+            mWifiSettings.resumeWifiScan();
+
+            mStatusText.setText(R.string.wifi_setup_status_select_network);
+            restoreFirstButtonVisibilityState();
+
+            mAddNetworkButton.setEnabled(true);
+            mRefreshButton.setEnabled(true);
+            mSkipOrNextButton.setEnabled(true);
+        }
+
+        findViewById(R.id.wifi_setup).setVisibility(View.VISIBLE);
+        final ViewGroup parent = (ViewGroup)findViewById(R.id.wifi_config_ui);
+        parent.removeAllViews();
+        parent.setVisibility(View.GONE);
+        mWifiConfig = null;
+    }
+
+    /**
+     * @param connected true when the device is connected to a specific network.
+     */
+    /* package */ void changeNextButtonState(boolean connected) {
+        if (connected) {
+            mSkipOrNextButton.setText(R.string.wifi_setup_next);
+        } else {
+            mSkipOrNextButton.setText(R.string.wifi_setup_skip);
+        }
+    }
+
+    /**
+     * Called when the list of AccessPoints are modified and this Activity needs to refresh
+     * the list.
+     */
+    /* package */ void onAccessPointsUpdated(
+            PreferenceCategory holder, Collection<AccessPoint> accessPoints) {
+        int count = MAX_MENU_COUNT_IN_XL;
+        for (AccessPoint accessPoint : accessPoints) {
+            accessPoint.setLayoutResource(R.layout.custom_preference);
+            holder.addPreference(accessPoint);
+            count--;
+            if (count <= 0) {
+                break;
+            }
+        }
+    }
+
+    private void refreshAccessPoints(boolean disconnectNetwork) {
         mIgnoringWifiNotificationCount = 5;
         mProgressBar.setIndeterminate(true);
         ((Button)findViewById(R.id.wifi_setup_add_network)).setEnabled(false);
         ((Button)findViewById(R.id.wifi_setup_refresh_list)).setEnabled(false);
         mProgressText.setText(Summary.get(this, DetailedState.SCANNING));
         mStatusText.setText(R.string.wifi_setup_status_scanning);
-    }
 
-    /* package */ void onConnectButtonPressed() {
-        // updateConnectionState() isn't called soon after the user's "connect" action,
-        // and the user still sees "not connected" message for a while, which looks strange.
-        // We instead manually show "connecting" message before the system gets actual
-        // "connecting" message from Wi-Fi module.
-        showConnectingStatus();
-        ((Button)findViewById(R.id.wifi_setup_add_network)).setEnabled(false);
-        ((Button)findViewById(R.id.wifi_setup_refresh_list)).setEnabled(false);
-        mShowingConnectingMessageManually = true;
-        mIgnoringWifiNotificationCount = 2;
+        if (disconnectNetwork) {
+            mWifiManager.disconnect();
+        }
+
+        mWifiSettings.refreshAccessPoints();
     }
 }
