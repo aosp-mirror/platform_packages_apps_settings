@@ -54,7 +54,7 @@ class WifiDialog extends AlertDialog implements WifiConfigUiBase {
         mView = getLayoutInflater().inflate(R.layout.wifi_dialog, null);
         setView(mView);
         setInverseBackgroundForced(true);
-        mController = new WifiConfigController(this, mView, mAccessPoint, mEdit, mListener);
+        mController = new WifiConfigController(this, mView, mAccessPoint, mEdit);
         super.onCreate(savedInstanceState);
     }
 
