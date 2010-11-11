@@ -16,30 +16,38 @@
 
 package com.android.settings.fuelgauge;
 
-import android.app.Activity;
+import android.app.Fragment;
 import android.os.Bundle;
 import android.os.Parcel;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
 
 import com.android.internal.os.BatteryStatsImpl;
 import com.android.settings.R;
 
-public class BatteryHistoryDetail extends Activity {
+public class BatteryHistoryDetail extends Fragment {
     public static final String EXTRA_STATS = "stats";
 
     private BatteryStatsImpl mStats;
 
     @Override
-    protected void onCreate(Bundle icicle) {
+    public void onCreate(Bundle icicle) {
         super.onCreate(icicle);
-        byte[] data = getIntent().getByteArrayExtra(EXTRA_STATS);
+        byte[] data = getArguments().getByteArray(EXTRA_STATS);
         Parcel parcel = Parcel.obtain();
         parcel.unmarshall(data, 0, data.length);
         parcel.setDataPosition(0);
-        setContentView(R.layout.preference_batteryhistory);
         mStats = com.android.internal.os.BatteryStatsImpl.CREATOR
                 .createFromParcel(parcel);
-        BatteryHistoryChart chart = (BatteryHistoryChart)findViewById(
+    }
+    
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        View view = inflater.inflate(R.layout.preference_batteryhistory, null);
+        BatteryHistoryChart chart = (BatteryHistoryChart)view.findViewById(
                 R.id.battery_history_chart);
         chart.setStats(mStats);
+        return view;
     }
 }

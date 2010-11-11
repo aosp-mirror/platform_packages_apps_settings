@@ -470,6 +470,7 @@
              InstalledAppDetails. -->
         <activity android:name=".applications.InstalledAppDetailsTop"
                   android:label="@string/application_info_label"
+                  android:theme="@android:style/Theme.Holo.DialogWhenLarge"
                   android:exported="true">
         </activity>
         <activity-alias android:name=".applications.InstalledAppDetails"
@@ -481,38 +482,6 @@
                 <data android:scheme="package" />
             </intent-filter>
         </activity-alias>
-
-        <!--
-        <activity android:name=".applications.ManageApplications"
-                  android:label="@string/manageapplications_settings_title"
-                  android:clearTaskOnLaunch="true"
-                  android:theme="@android:style/Theme.NoTitleBar">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <action android:name="android.intent.action.MANAGE_PACKAGE_STORAGE" />
-                <action android:name="android.settings.MANAGE_APPLICATIONS_SETTINGS" />
-                <action android:name="android.settings.MANAGE_ALL_APPLICATIONS_SETTINGS" />
-                <category android:name="android.intent.category.DEFAULT" />
-                <category android:name="android.intent.category.MONKEY" />
-                <category android:name="android.intent.category.VOICE_LAUNCH" />
-                <category android:name="com.android.settings.SHORTCUT" />
-            </intent-filter>
-        </activity>
-
-        <activity-alias android:name=".ManageApplications"
-            android:targetActivity=".applications.ManageApplications"
-            android:exported="true" />
-
-        <activity android:name=".applications.InstalledAppDetails"
-                android:theme="@android:style/Theme.NoTitleBar"
-                android:label="@string/application_info_label">
-            <intent-filter>
-                <action android:name="android.settings.APPLICATION_DETAILS_SETTINGS" />
-                <category android:name="android.intent.category.DEFAULT" />
-                <data android:scheme="package" />
-            </intent-filter>
-        </activity>
-        -->
 
         <!-- Provide direct entry into manage apps showing running services. -->
         <activity android:name="Settings$RunningServicesActivity"
@@ -738,12 +707,6 @@
             </intent-filter>
         </activity>
 
-        <activity android:name="MasterClear" android:label="@string/master_clear_title">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-            </intent-filter>
-        </activity>
-
         <activity android:name="MediaFormat" android:label="@string/media_format_title">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -942,34 +905,19 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".fuelgauge.PowerUsageSummary"
-                android:theme="@android:style/Theme.NoTitleBar"
-                android:label="@string/power_usage_summary_title"
-                android:clearTaskOnLaunch="true"
-                >
+        <activity android:name="Settings$PowerUsageSummaryActivity"
+                android:theme="@android:style/Theme.Holo.Extended"
+                android:label="@string/storage_settings_title">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <action android:name="android.intent.action.POWER_USAGE_SUMMARY" />
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="com.android.settings.SHORTCUT" />
             </intent-filter>
-        </activity>
-
-        <activity android:name=".fuelgauge.PowerUsageDetail"
-                android:theme="@android:style/Theme.NoTitleBar"
-                android:label="@string/details_title">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.DEFAULT" />
-            </intent-filter>
-        </activity>
-
-        <activity android:name=".fuelgauge.BatteryHistoryDetail"
-                android:theme="@android:style/Theme.NoTitleBar">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.DEFAULT" />
-            </intent-filter>
+            <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
+                android:value="com.android.settings.fuelgauge.PowerUsageSummary" />
+            <meta-data android:name="com.android.settings.TOP_LEVEL_HEADER_ID"
+                android:resource="@id/application_settings" />
         </activity>
 
         <activity
