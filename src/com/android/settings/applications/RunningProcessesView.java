@@ -24,6 +24,7 @@ import android.app.Fragment;
 import android.content.Context;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
+import android.os.StrictMode;
 import android.os.SystemClock;
 import android.os.SystemProperties;
 import android.preference.PreferenceActivity;
@@ -335,6 +336,10 @@ public class RunningProcessesView extends FrameLayout
     }
     
     private long readAvailMem() {
+        // Permit disk reads here, as /proc/meminfo isn't really "on
+        // disk" and should be fast.  TODO: make BlockGuard ignore
+        // /proc/ and /sys/ files perhaps?
+        StrictMode.ThreadPolicy savedPolicy = StrictMode.allowThreadDiskReads();
         try {
             long memFree = 0;
             long memCached = 0;
@@ -357,6 +362,8 @@ public class RunningProcessesView extends FrameLayout
             return memFree + memCached;
         } catch (java.io.FileNotFoundException e) {
         } catch (java.io.IOException e) {
+        } finally {
+            StrictMode.setThreadPolicy(savedPolicy);
         }
         return 0;
     }
