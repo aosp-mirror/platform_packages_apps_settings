@@ -64,47 +64,9 @@ public class SettingsPreferenceFragment extends PreferenceFragment
     private Button mNextButton;
 
     @Override
-    public void onResume() {
-        super.onResume();
-
-        final Fragment f = getTargetFragment();
-        final int requestCode = getTargetRequestCode();
-
-        // TargetFragment becomes invalid when this object is resumed. Notify it to
-        // FragmentManager. Without this code, FragmentManager wrongly take the TargetFragment
-        // as live, and throws IllegalStateException.
-        setTargetFragment(null, -1);
-
-        if (f != null && (f instanceof SettingsPreferenceFragment)) {
-            final SettingsPreferenceFragment spf = (SettingsPreferenceFragment)f;
-            final int resultCode = spf.getResultCode();
-            final Intent resultData = spf.getResultData();
-            onActivityResult(requestCode, resultCode, resultData);
-        }
-    }
-
-    @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         setupButtonBar();
-    }
-
-    public final void setResult(int resultCode) {
-        mResultCode = resultCode;
-        mResultData = null;
-    }
-
-    public final void setResult(int resultCode, Intent data) {
-        mResultCode = resultCode;
-        mResultData = data;
-    }
-
-    public final int getResultCode() {
-        return mResultCode;
-    }
-
-    public final Intent getResultData() {
-        return mResultData;
     }
 
     /*
@@ -196,9 +158,8 @@ public class SettingsPreferenceFragment extends PreferenceFragment
             Fragment caller, String fragmentClass, int requestCode, Bundle extras) {
         if (getActivity() instanceof PreferenceActivity) {
             PreferenceActivity preferenceActivity = (PreferenceActivity)getActivity();
-            Fragment f = Fragment.instantiate(getActivity(), fragmentClass, extras);
-            caller.setTargetFragment(f, requestCode);
-            preferenceActivity.switchToHeader(fragmentClass, extras);
+            preferenceActivity.startPreferencePanel(fragmentClass, extras, 0, null, caller,
+                    requestCode);
             return true;
         } else {
             Log.w(TAG, "Parent isn't PreferenceActivity, thus there's no way to launch the "

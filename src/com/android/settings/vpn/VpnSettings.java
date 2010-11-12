@@ -22,7 +22,6 @@ import com.android.settings.SettingsPreferenceFragment;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
-import android.app.Fragment;
 import android.content.BroadcastReceiver;
 import android.content.ComponentName;
 import android.content.Context;
@@ -39,19 +38,21 @@ import android.net.vpn.VpnState;
 import android.net.vpn.VpnType;
 import android.os.Bundle;
 import android.os.ConditionVariable;
+import android.os.Handler;
 import android.os.IBinder;
 import android.preference.Preference;
-import android.preference.Preference.OnPreferenceClickListener;
+import android.preference.PreferenceActivity;
 import android.preference.PreferenceCategory;
 import android.preference.PreferenceScreen;
+import android.preference.Preference.OnPreferenceClickListener;
 import android.security.Credentials;
 import android.security.KeyStore;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.ContextMenu;
-import android.view.ContextMenu.ContextMenuInfo;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ContextMenu.ContextMenuInfo;
 import android.widget.AdapterView.AdapterContextMenuInfo;
 
 import java.io.File;
@@ -72,6 +73,9 @@ import java.util.Map;
  */
 public class VpnSettings extends SettingsPreferenceFragment
         implements DialogInterface.OnClickListener {
+
+    private static final boolean DEBUG = false;
+
     // Key to the field exchanged for profile editing.
     static final String KEY_VPN_PROFILE = "vpn_profile";
 
@@ -87,7 +91,7 @@ public class VpnSettings extends SettingsPreferenceFragment
     private static final String PROFILE_OBJ_FILE = ".pobj";
 
     private static final int REQUEST_ADD_OR_EDIT_PROFILE = 1;
-    private static final int REQUEST_SELECT_VPN_TYPE = 2;
+    static final int REQUEST_SELECT_VPN_TYPE = 2;
 
     private static final int CONTEXT_MENU_CONNECT_ID = ContextMenu.FIRST + 0;
     private static final int CONTEXT_MENU_DISCONNECT_ID = ContextMenu.FIRST + 1;
@@ -134,6 +138,8 @@ public class VpnSettings extends SettingsPreferenceFragment
 
     private StatusChecker mStatusChecker = new StatusChecker();
 
+    private Handler mHandler = new Handler();
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -171,7 +177,8 @@ public class VpnSettings extends SettingsPreferenceFragment
     @Override
     public void onResume() {
         super.onResume();
-
+        if (DEBUG)
+            Log.d(TAG, "onResume");
         if ((mUnlockAction != null) && isKeyStoreUnlocked()) {
             Runnable action = mUnlockAction;
             mUnlockAction = null;
@@ -282,7 +289,7 @@ public class VpnSettings extends SettingsPreferenceFragment
                 .setPositiveButton(R.string.vpn_yes_button,
                         new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int w) {
-                                startVpnEditor(mActiveProfile);
+                                startVpnEditor(mActiveProfile, false);
                             }
                         })
                 .create();
@@ -295,7 +302,7 @@ public class VpnSettings extends SettingsPreferenceFragment
                             public void onClick(DialogInterface dialog, int w) {
                                 VpnProfile p = mActiveProfile;
                                 onIdle();
-                                startVpnEditor(p);
+                                startVpnEditor(p, false);
                             }
                         });
     }
@@ -362,7 +369,7 @@ public class VpnSettings extends SettingsPreferenceFragment
             return true;
 
         case CONTEXT_MENU_EDIT_ID:
-            startVpnEditor(p);
+                startVpnEditor(p, false);
             return true;
 
         case CONTEXT_MENU_DELETE_ID:
@@ -376,14 +383,21 @@ public class VpnSettings extends SettingsPreferenceFragment
     @Override
     public void onActivityResult(final int requestCode, final int resultCode,
             final Intent data) {
+
+        if (DEBUG) Log.d(TAG, "onActivityResult , result = " + resultCode + ", data = " + data);
         if ((resultCode == Activity.RESULT_CANCELED) || (data == null)) {
             Log.d(TAG, "no result returned by editor");
             return;
         }
 
         if (requestCode == REQUEST_SELECT_VPN_TYPE) {
-            String typeName = data.getStringExtra(KEY_VPN_TYPE);
-            startVpnEditor(createVpnProfile(typeName));
+            final String typeName = data.getStringExtra(KEY_VPN_TYPE);
+            mHandler.post(new Runnable() {
+
+                public void run() {
+                    startVpnEditor(createVpnProfile(typeName), true);
+                }
+            });
         } else if (requestCode == REQUEST_ADD_OR_EDIT_PROFILE) {
             VpnProfile p = data.getParcelableExtra(KEY_VPN_PROFILE);
             if (p == null) {
@@ -400,7 +414,7 @@ public class VpnSettings extends SettingsPreferenceFragment
                         p.getName()),
                         new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int w) {
-                                startVpnEditor(profile);
+                                startVpnEditor(profile, false);
                             }
                         });
                 return;
@@ -431,7 +445,7 @@ public class VpnSettings extends SettingsPreferenceFragment
                 Util.showErrorMessage(activity, e + ": " + e.getMessage(),
                         new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int w) {
-                                startVpnEditor(profile);
+                                startVpnEditor(profile, false);
                             }
                         });
             }
@@ -615,8 +629,9 @@ public class VpnSettings extends SettingsPreferenceFragment
     }
 
     private void startVpnTypeSelection() {
-        startFragment(this, VpnTypeSelection.class.getCanonicalName(),
-                REQUEST_SELECT_VPN_TYPE, null);
+        ((PreferenceActivity)getActivity()).startPreferencePanel(
+                VpnTypeSelection.class.getCanonicalName(), null, R.string.vpn_type_title, null,
+                this, REQUEST_SELECT_VPN_TYPE);
     }
 
     private boolean isKeyStoreUnlocked() {
@@ -666,11 +681,14 @@ public class VpnSettings extends SettingsPreferenceFragment
         return false;
     }
 
-    private void startVpnEditor(final VpnProfile profile) {
+    private void startVpnEditor(final VpnProfile profile, boolean add) {
         Bundle args = new Bundle();
         args.putParcelable(KEY_VPN_PROFILE, profile);
-        startFragment(this, VpnEditor.class.getCanonicalName(),
-                REQUEST_ADD_OR_EDIT_PROFILE, args);
+        // TODO: Show different titles for add and edit.
+        ((PreferenceActivity)getActivity()).startPreferencePanel(
+                VpnEditor.class.getCanonicalName(), args,
+                add ? R.string.vpn_details_title : R.string.vpn_details_title, null,
+                this, REQUEST_ADD_OR_EDIT_PROFILE);
     }
 
     private synchronized void connect(final VpnProfile p) {

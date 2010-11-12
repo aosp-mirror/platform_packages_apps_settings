@@ -25,6 +25,7 @@ import android.net.vpn.VpnManager;
 import android.net.vpn.VpnType;
 import android.os.Bundle;
 import android.preference.Preference;
+import android.preference.PreferenceActivity;
 import android.preference.PreferenceScreen;
 
 import java.util.HashMap;
@@ -46,8 +47,9 @@ public class VpnTypeSelection extends SettingsPreferenceFragment {
 
     @Override
     public boolean onPreferenceTreeClick(PreferenceScreen ps, Preference pref) {
-        setResult(mTypeMap.get(pref.getTitle().toString()));
-        finishFragment();
+        ((PreferenceActivity)getActivity())
+                .finishPreferencePanel(this, Activity.RESULT_OK,
+                        getResultIntent(mTypeMap.get(pref.getTitle().toString())));
         return true;
     }
 
@@ -67,9 +69,9 @@ public class VpnTypeSelection extends SettingsPreferenceFragment {
         }
     }
 
-    private void setResult(VpnType type) {
+    private Intent getResultIntent(VpnType type) {
         Intent intent = new Intent(getActivity(), VpnSettings.class);
         intent.putExtra(VpnSettings.KEY_VPN_TYPE, type.toString());
-        setResult(Activity.RESULT_OK, intent);
+        return intent;
     }
 }

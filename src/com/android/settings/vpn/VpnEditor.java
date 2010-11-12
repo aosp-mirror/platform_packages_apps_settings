@@ -32,8 +32,8 @@ import android.net.vpn.VpnProfile;
 import android.os.Bundle;
 import android.os.Parcel;
 import android.os.Parcelable;
+import android.preference.PreferenceActivity;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -109,7 +109,11 @@ public class VpnEditor extends SettingsPreferenceFragment {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case MENU_SAVE:
-                if (validateAndSetResult()) finishFragment();
+                Intent resultIntent = validateAndGetResult();
+                if (resultIntent != null) {
+                    ((PreferenceActivity) getActivity()).finishPreferencePanel(
+                            this, Activity.RESULT_OK, resultIntent);
+                }
                 return true;
 
             case MENU_CANCEL:
@@ -152,22 +156,24 @@ public class VpnEditor extends SettingsPreferenceFragment {
      * Checks the validity of the inputs and set the profile as result if valid.
      * @return true if the result is successfully set
      */
-    private boolean validateAndSetResult() {
+    private Intent validateAndGetResult() {
         String errorMsg = mProfileEditor.validate();
 
         if (errorMsg != null) {
             Util.showErrorMessage(getActivity(), errorMsg);
-            return false;
+            return null;
         }
 
-        if (profileChanged()) setResult(getProfile());
-        return true;
+        if (profileChanged()) {
+            return getResult(getProfile());
+        }
+        return null;
     }
 
-    private void setResult(VpnProfile p) {
+    private Intent getResult(VpnProfile p) {
         Intent intent = new Intent(getActivity(), VpnSettings.class);
         intent.putExtra(VpnSettings.KEY_VPN_PROFILE, (Parcelable) p);
-        setResult(Activity.RESULT_OK, intent);
+        return intent;
     }
 
     private VpnProfileEditor getEditor(VpnProfile p) {
