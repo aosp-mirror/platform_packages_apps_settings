@@ -172,7 +172,7 @@ public class WifiConfigUiForSetupWizardXL implements WifiConfigUiBase, OnFocusCh
 
         @Override
         public void run() {
-            mInputMethodManager.focusIn(mViewToBeFocused);
+            // mInputMethodManager.focusIn(mViewToBeFocused);
             final boolean showSoftInputResult =
                     mInputMethodManager.showSoftInput(mViewToBeFocused, 0);
             if (!showSoftInputResult) {
