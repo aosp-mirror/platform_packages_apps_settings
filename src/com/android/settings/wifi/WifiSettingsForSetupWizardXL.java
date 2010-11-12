@@ -334,7 +334,7 @@ public class WifiSettingsForSetupWizardXL extends Activity implements OnClickLis
         } else {
             view.findViewById(R.id.wifi_general_info).setVisibility(View.GONE);
         }
-        parent.addView(view);
+        // parent.addView(view);
 
         mStatusText.setText(R.string.wifi_setup_status_edit_network);
         mAddNetworkButton.setVisibility(View.GONE);

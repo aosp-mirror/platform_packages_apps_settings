@@ -67,7 +67,7 @@ public class WifiConfigUiForSetupWizardXL implements WifiConfigUiBase, OnFocusCh
         mEdit = edit;
         mInflater = (LayoutInflater)activity.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
-        mView = mInflater.inflate(R.layout.wifi_config_ui_for_setup_wizard, parent, false);
+        mView = mInflater.inflate(R.layout.wifi_config_ui_for_setup_wizard, parent, true);
         mController = new WifiConfigController(this, mView, mAccessPoint, edit);
 
         // Set Focus to password View.
