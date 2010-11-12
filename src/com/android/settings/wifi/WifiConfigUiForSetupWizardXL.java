@@ -20,9 +20,11 @@ import com.android.settings.R;
 
 import android.app.Activity;
 import android.content.Context;
+import android.os.Handler;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.View.OnFocusChangeListener;
 import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
@@ -32,7 +34,7 @@ import android.widget.EditText;
  * Shows simplified UI for configuring a wifi network. Used only in SetupWizard for XLarge
  * screen.
  */
-public class WifiConfigUiForSetupWizardXL implements WifiConfigUiBase {
+public class WifiConfigUiForSetupWizardXL implements WifiConfigUiBase, OnFocusChangeListener {
     private static final String TAG = "SetupWizard";
 
     private Button mConnectButton;
@@ -44,6 +46,7 @@ public class WifiConfigUiForSetupWizardXL implements WifiConfigUiBase {
     private WifiConfigController mController;
     private AccessPoint mAccessPoint;
     private boolean mEdit;
+    private Handler mHandler = new Handler();
 
     private LayoutInflater mInflater;
 
@@ -66,25 +69,18 @@ public class WifiConfigUiForSetupWizardXL implements WifiConfigUiBase {
 
         mView = mInflater.inflate(R.layout.wifi_config_ui_for_setup_wizard, parent, false);
         mController = new WifiConfigController(this, mView, mAccessPoint, edit);
-        trySetFocusAndLaunchSoftInput(R.id.password);
-    }
 
-    private void trySetFocusAndLaunchSoftInput(int id) {
-        final View viewToBeFocused = mView.findViewById(id);
-        if (viewToBeFocused != null && viewToBeFocused.getVisibility() == View.VISIBLE) {
+        // Set Focus to password View.
+        final View viewToBeFocused = mView.findViewById(R.id.password);
+        if (viewToBeFocused != null && viewToBeFocused.getVisibility() == View.VISIBLE &&
+                viewToBeFocused instanceof EditText) {
+            // After acquiring the focus, we show software keyboard.
+            viewToBeFocused.setOnFocusChangeListener(this);
             final boolean requestFocusResult = viewToBeFocused.requestFocus();
-            Log.i(TAG, String.format("Focus request to %x %s.", id,
+            Log.i(TAG, String.format("Focus request  %s.",
                     (requestFocusResult ? "successful" : "failed")));
-            if (requestFocusResult && viewToBeFocused instanceof EditText) {
-                Log.i(TAG, String.format(
-                        "Focused View (%x) is EditText. Try to show software keyboard", id));
-                final InputMethodManager inputMethodManager = (InputMethodManager)
-                        mActivity.getSystemService(Context.INPUT_METHOD_SERVICE);
-                final boolean showSoftInputResult =
-                        inputMethodManager.showSoftInput(viewToBeFocused, 0);
-                if (!showSoftInputResult) {
-                    Log.w(TAG, "Failed to show software keyboard ");
-                }
+            if (!requestFocusResult) {
+                viewToBeFocused.setOnFocusChangeListener(null);
             }
         }
     }
@@ -163,5 +159,33 @@ public class WifiConfigUiForSetupWizardXL implements WifiConfigUiBase {
     @Override
     public void setTitle(CharSequence title) {
         Log.d(TAG, "Ignoring setTitle");
+    }
+
+    private static class FocusRunnable implements Runnable {
+        final InputMethodManager mInputMethodManager;
+        final View mViewToBeFocused;
+        public FocusRunnable(Context context, View viewToBeFocused) {
+            mInputMethodManager = (InputMethodManager)
+                    context.getSystemService(Context.INPUT_METHOD_SERVICE);
+            mViewToBeFocused = viewToBeFocused;
+        }
+
+        @Override
+        public void run() {
+            // mInputMethodManager.focusIn(mViewToBeFocused);
+            final boolean showSoftInputResult =
+                    mInputMethodManager.showSoftInput(mViewToBeFocused, 0);
+            if (!showSoftInputResult) {
+                Log.w(TAG, "Failed to show software keyboard ");
+            }
+        }
+    }
+
+    @Override
+    public void onFocusChange(View view, boolean hasFocus) {
+        view.setOnFocusChangeListener(null);
+        if (hasFocus) {
+            mHandler.post(new FocusRunnable(mActivity, view));
+        }
     }
 }

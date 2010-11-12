@@ -193,4 +193,5 @@ public class Settings extends PreferenceActivity {
     public static class RunningServicesActivity extends Settings { }
     public static class VoiceInputOutputSettingsActivity extends Settings { }
     public static class ManageAccountsSettingsActivity extends Settings { }
+    public static class PowerUsageSummaryActivity extends Settings { }
 }

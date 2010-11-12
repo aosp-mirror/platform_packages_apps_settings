@@ -132,13 +132,6 @@ public class SettingsPreferenceFragment extends PreferenceFragment
     }
 
     /**
-     * Returns the Resources from the owning Activity.
-     */
-    protected Resources getResources() {
-        return getActivity().getResources();
-    }
-
-    /**
      * Returns the PackageManager from the owning Activity.
      */
     protected PackageManager getPackageManager() {

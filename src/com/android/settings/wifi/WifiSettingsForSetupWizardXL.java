@@ -111,8 +111,12 @@ public class WifiSettingsForSetupWizardXL extends Activity implements OnClickLis
         setContentView(R.layout.wifi_settings_for_setup_wizard_xl);
 
         getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE);
-        
+
         mWifiManager = (WifiManager)getSystemService(Context.WIFI_SERVICE);
+        // There's no button here enabling wifi network, so we need to enable it without
+        // users' request.
+        mWifiManager.setWifiEnabled(true);
+
         mWifiSettings =
                 (WifiSettings)getFragmentManager().findFragmentById(R.id.wifi_setup_fragment);
         mInputMethodManager = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
@@ -184,6 +188,7 @@ public class WifiSettingsForSetupWizardXL extends Activity implements OnClickLis
     }
 
     private void hideSoftwareKeyboard() {
+        Log.i(TAG, "Hiding software keyboard.");
         final View focusedView = getCurrentFocus();
         if (focusedView != null) {
             mInputMethodManager.hideSoftInputFromWindow(focusedView.getWindowToken(), 0);
