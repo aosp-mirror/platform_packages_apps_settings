@@ -70,17 +70,26 @@ public class WifiConfigUiForSetupWizardXL implements WifiConfigUiBase, OnFocusCh
         mView = mInflater.inflate(R.layout.wifi_config_ui_for_setup_wizard, parent, true);
         mController = new WifiConfigController(this, mView, mAccessPoint, edit);
 
-        // Set Focus to password View.
-        final View viewToBeFocused = mView.findViewById(R.id.password);
-        if (viewToBeFocused != null && viewToBeFocused.getVisibility() == View.VISIBLE &&
-                viewToBeFocused instanceof EditText) {
-            // After acquiring the focus, we show software keyboard.
-            viewToBeFocused.setOnFocusChangeListener(this);
-            final boolean requestFocusResult = viewToBeFocused.requestFocus();
-            Log.i(TAG, String.format("Focus request  %s.",
-                    (requestFocusResult ? "successful" : "failed")));
-            if (!requestFocusResult) {
-                viewToBeFocused.setOnFocusChangeListener(null);
+        // Assumes R.id.password is inside security_fields.
+        // TODO: confirm it is ok to assume R.id.password is the only EditText to be focused, and
+        // R.id.security_fields is the only parent for possible EditTexts. Possibly we need to
+        // check parentand detect visibility manually.
+        if (mView.findViewById(R.id.security_fields).getVisibility() == View.VISIBLE) {
+            // Set Focus to password View.
+            final View viewToBeFocused = mView.findViewById(R.id.password);
+            if (viewToBeFocused == null) {
+                Log.w(TAG, "password field to be focused not found.");
+            } else if (!(viewToBeFocused instanceof EditText)) {
+                Log.w(TAG, "password field is not EditText");
+            } else {
+                // After acquiring the focus, we show software keyboard.
+                viewToBeFocused.setOnFocusChangeListener(this);
+                final boolean requestFocusResult = viewToBeFocused.requestFocus();
+                Log.i(TAG, String.format("Focus request  %s.",
+                        (requestFocusResult ? "successful" : "failed")));
+                if (!requestFocusResult) {
+                    viewToBeFocused.setOnFocusChangeListener(null);
+                }
             }
         }
     }
