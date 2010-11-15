@@ -45,10 +45,6 @@ import java.util.EnumMap;
 public class WifiSettingsForSetupWizardXL extends Activity implements OnClickListener {
     private static final String TAG = "SetupWizard";
 
-    // We limit the number of showable access points so that the ListView won't become larger
-    // than the screen.
-    private static int MAX_MENU_COUNT_IN_XL = 8;
-
     private static final EnumMap<DetailedState, DetailedState> stateMap =
             new EnumMap<DetailedState, DetailedState>(DetailedState.class);
 
@@ -441,14 +437,9 @@ public class WifiSettingsForSetupWizardXL extends Activity implements OnClickLis
      */
     /* package */ void onAccessPointsUpdated(
             PreferenceCategory holder, Collection<AccessPoint> accessPoints) {
-        int count = MAX_MENU_COUNT_IN_XL;
         for (AccessPoint accessPoint : accessPoints) {
             accessPoint.setLayoutResource(R.layout.custom_preference);
             holder.addPreference(accessPoint);
-            count--;
-            if (count <= 0) {
-                break;
-            }
         }
     }
 
