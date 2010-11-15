@@ -16,6 +16,13 @@
 
 package com.android.settings.fuelgauge;
 
+import com.android.internal.app.IBatteryStats;
+import com.android.internal.os.BatteryStatsImpl;
+import com.android.internal.os.PowerProfile;
+import com.android.settings.R;
+import com.android.settings.applications.InstalledAppDetails;
+import com.android.settings.fuelgauge.PowerUsageDetail.DrainType;
+
 import android.content.Context;
 import android.content.Intent;
 import android.hardware.SensorManager;
@@ -39,13 +46,6 @@ import android.util.SparseArray;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
-
-import com.android.internal.app.IBatteryStats;
-import com.android.internal.os.BatteryStatsImpl;
-import com.android.internal.os.PowerProfile;
-import com.android.settings.R;
-import com.android.settings.applications.InstalledAppDetails;
-import com.android.settings.fuelgauge.PowerUsageDetail.DrainType;
 
 import java.io.PrintWriter;
 import java.io.StringWriter;
@@ -309,6 +309,12 @@ public class PowerUsageSummary extends PreferenceFragment implements Runnable {
         }
     }
 
+    private void addNotAvailableMessage() {
+        Preference notAvailable = new Preference(getActivity());
+        notAvailable.setTitle(R.string.power_usage_not_available);
+        mAppListGroup.addPreference(notAvailable);
+    }
+
     private void refreshStats() {
         if (mStats == null) {
             load();
@@ -323,15 +329,19 @@ public class PowerUsageSummary extends PreferenceFragment implements Runnable {
         mUsageList.clear();
         mWifiSippers.clear();
         mBluetoothSippers.clear();
-        processAppUsage();
-        processMiscUsage();
-
         mAppListGroup.setOrderingAsAdded(false);
 
         BatteryHistoryPreference hist = new BatteryHistoryPreference(getActivity(), mStats);
         hist.setOrder(-1);
         mAppListGroup.addPreference(hist);
         
+        if (mPowerProfile.getAveragePower(PowerProfile.POWER_SCREEN_FULL) < 10) {
+            addNotAvailableMessage();
+            return;
+        }
+        processAppUsage();
+        processMiscUsage();
+
         Collections.sort(mUsageList);
         for (BatterySipper sipper : mUsageList) {
             if (sipper.getSortValue() < MIN_POWER_THRESHOLD) continue;
