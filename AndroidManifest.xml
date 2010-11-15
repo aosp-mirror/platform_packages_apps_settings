@@ -52,7 +52,8 @@
         <activity android:name="Settings"
                 android:label="@string/settings_label_launcher"
                 android:taskAffinity="com.android.settings"
-                android:theme="@android:style/Theme.Holo.Extended"
+                android:theme="@android:style/Theme.Holo"
+                android:launchMode="singleTask"
                 >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -73,7 +74,7 @@
         <!-- Wireless Controls -->
 
         <activity android:name="Settings$WirelessSettingsActivity"
-                android:theme="@android:style/Theme.Holo.Extended"
+                android:theme="@android:style/Theme.Holo"
                 android:label="@string/wireless_networks_settings_title"
                 >
             <intent-filter>
@@ -93,7 +94,7 @@
         <!-- Top-level settings -->
 
         <activity android:name="Settings$WifiSettingsActivity"
-                android:theme="@android:style/Theme.Holo.Extended"
+                android:theme="@android:style/Theme.Holo"
                 android:label="@string/wifi_settings"
                 android:configChanges="orientation|keyboardHidden"
                 android:clearTaskOnLaunch="true"
@@ -188,7 +189,7 @@
         </activity>
 
         <activity android:name="Settings$BluetoothSettingsActivity"
-                android:theme="@android:style/Theme.Holo.Extended"
+                android:theme="@android:style/Theme.Holo"
                 android:label="@string/bluetooth_settings_title"
                 android:clearTaskOnLaunch="true">
             <intent-filter>
@@ -209,7 +210,7 @@
         </activity>
 
         <activity android:name="Settings$TetherSettingsActivity"
-                android:theme="@android:style/Theme.Holo.Extended"
+                android:theme="@android:style/Theme.Holo"
                 android:clearTaskOnLaunch="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -223,7 +224,7 @@
         </activity>
 
         <activity android:name="Settings$VpnSettingsActivity"
-                android:theme="@android:style/Theme.Holo.Extended"
+                android:theme="@android:style/Theme.Holo"
                 android:label="@string/vpn_settings_activity_title"
                 android:configChanges="orientation|keyboardHidden"
                 android:clearTaskOnLaunch="true">
@@ -241,7 +242,7 @@
         </activity>
 
         <activity android:name="Settings$DateTimeSettingsActivity"
-                android:theme="@android:style/Theme.Holo.Extended"
+                android:theme="@android:style/Theme.Holo"
                 android:label="@string/date_and_time" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -265,7 +266,7 @@
         </activity>
 
         <activity android:name="Settings$LocalePickerActivity"
-                android:theme="@android:style/Theme.Holo.Extended"
+                android:theme="@android:style/Theme.Holo"
                 android:label="@string/language_picker_title"
                 android:clearTaskOnLaunch="true">
             <intent-filter>
@@ -281,7 +282,7 @@
         </activity>
 
         <activity android:name="Settings$InputMethodAndLanguageSettingsActivity"
-                android:theme="@android:style/Theme.Holo.Extended"
+                android:theme="@android:style/Theme.Holo"
                 android:label="@string/language_keyboard_settings_title"
                 android:clearTaskOnLaunch="true">
             <intent-filter>
@@ -298,7 +299,7 @@
         </activity>
 
         <activity android:name="Settings$InputMethodAndSubtypeEnablerActivity"
-                android:theme="@android:style/Theme.Holo.Extended"
+                android:theme="@android:style/Theme.Holo"
                 android:label="@string/input_methods_and_subtype_enabler_title"
                 android:clearTaskOnLaunch="true">
             <intent-filter>
@@ -324,7 +325,7 @@
         </activity>
 
         <activity android:name="Settings$UserDictionarySettingsActivity"
-                android:theme="@android:style/Theme.Holo.Extended"
+                android:theme="@android:style/Theme.Holo"
                 android:label="@string/user_dict_settings_titlebar"
                 android:clearTaskOnLaunch="true">
             <intent-filter>
@@ -342,7 +343,7 @@
         </activity>
 
         <activity android:name="Settings$SoundSettingsActivity"
-                android:theme="@android:style/Theme.Holo.Extended"
+                android:theme="@android:style/Theme.Holo"
                 android:label="@string/sound_settings"
                 android:clearTaskOnLaunch="true">
             <intent-filter>
@@ -360,7 +361,7 @@
         </activity>
 
         <activity android:name="Settings$DisplaySettingsActivity"
-                android:theme="@android:style/Theme.Holo.Extended"
+                android:theme="@android:style/Theme.Holo"
                 android:label="@string/display_settings"
                 android:clearTaskOnLaunch="true"
                 >
@@ -379,7 +380,7 @@
         </activity>
 
         <activity android:name="Settings$DockSettingsActivity"
-                android:theme="@android:style/Theme.Holo.Extended"
+                android:theme="@android:style/Theme.Holo"
                 android:label="@string/dock_settings_title"
                 android:clearTaskOnLaunch="true">
             <intent-filter>
@@ -429,7 +430,7 @@
         </activity>
 
         <activity android:name="Settings$ApplicationSettingsActivity"
-                android:theme="@android:style/Theme.Holo.Extended"
+                android:theme="@android:style/Theme.Holo"
                 android:label="@string/applications_settings_header">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -444,7 +445,7 @@
         </activity>
 
         <activity android:name="Settings$ManageApplicationsActivity"
-                android:theme="@android:style/Theme.Holo.Extended"
+                android:theme="@android:style/Theme.Holo"
                 android:label="@string/manageapplications_settings_title"
                 android:clearTaskOnLaunch="true">
             <intent-filter>
@@ -490,7 +491,7 @@
 
         <!-- Provide direct entry into manage apps showing running services. -->
         <activity android:name="Settings$RunningServicesActivity"
-                android:theme="@android:style/Theme.Holo.Extended"
+                android:theme="@android:style/Theme.Holo"
                 android:label="@string/runningservices_settings_title">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -507,7 +508,7 @@
 
         <!-- Provide direct entry into manage apps showing running services. -->
         <activity android:name="Settings$StorageUseActivity"
-                android:theme="@android:style/Theme.Holo.Extended"
+                android:theme="@android:style/Theme.Holo"
                 android:label="@string/storageuse_settings_title">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -523,7 +524,7 @@
         </activity>
 
         <activity android:name="Settings$SecuritySettingsActivity"
-                android:theme="@android:style/Theme.Holo.Extended"
+                android:theme="@android:style/Theme.Holo"
                 android:label="@string/location_security_settings_title"
                 android:configChanges="orientation|keyboardHidden"
                 android:clearTaskOnLaunch="true">
@@ -551,7 +552,7 @@
         </activity>
 
         <activity android:name="Settings$PrivacySettingsActivity"
-                android:theme="@android:style/Theme.Holo.Extended"
+                android:theme="@android:style/Theme.Holo"
                 android:label="@string/privacy_settings_title"
                 android:configChanges="orientation|keyboardHidden"
                 android:clearTaskOnLaunch="true">
@@ -603,7 +604,7 @@
         </activity>
 
         <activity android:name="Settings$AccessibilitySettingsActivity"
-                android:theme="@android:style/Theme.Holo.Extended"
+                android:theme="@android:style/Theme.Holo"
                 android:label="@string/accessibility_settings_title">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -618,7 +619,7 @@
         </activity>
 
         <activity android:name="Settings$VoiceInputOutputSettingsActivity"
-                android:theme="@android:style/Theme.Holo.Extended"
+                android:theme="@android:style/Theme.Holo"
                 android:label="@string/voice_input_output_settings"
                 android:targetActivity="Settings">
             <intent-filter>
@@ -686,7 +687,7 @@
         </activity>
 
         <activity android:name="Settings$StorageSettingsActivity"
-                android:theme="@android:style/Theme.Holo.Extended"
+                android:theme="@android:style/Theme.Holo"
                 android:label="@string/storage_settings_title">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -742,7 +743,7 @@
         </activity>
 
         <activity android:name="Settings$DevelopmentSettingsActivity"
-                android:theme="@android:style/Theme.Holo.Extended"
+                android:theme="@android:style/Theme.Holo"
                 android:label="@string/development_settings_title"
                 android:clearTaskOnLaunch="true">
             <intent-filter>
@@ -917,7 +918,7 @@
         </activity>
 
         <activity android:name="Settings$PowerUsageSummaryActivity"
-                android:theme="@android:style/Theme.Holo.Extended"
+                android:theme="@android:style/Theme.Holo"
                 android:label="@string/storage_settings_title">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -933,7 +934,7 @@
 
         <activity
                 android:name="Settings$ManageAccountsSettingsActivity"
-                android:theme="@android:style/Theme.Holo.Extended"
+                android:theme="@android:style/Theme.Holo"
                 android:label="@string/sync_settings">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
