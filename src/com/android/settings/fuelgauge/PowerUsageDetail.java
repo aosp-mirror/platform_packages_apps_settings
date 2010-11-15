@@ -42,8 +42,14 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.android.settings.DisplaySettings;
 import com.android.settings.R;
+import com.android.settings.SecuritySettings;
+import com.android.settings.WirelessSettings;
 import com.android.settings.applications.InstalledAppDetails;
+import com.android.settings.bluetooth.BluetoothSettings;
+import com.android.settings.wifi.WifiSettings;
 
 public class PowerUsageDetail extends Fragment implements Button.OnClickListener {
 
@@ -253,24 +259,30 @@ public class PowerUsageDetail extends Fragment implements Button.OnClickListener
     }
 
     private void doAction(int action) {
+        PreferenceActivity pa = (PreferenceActivity)getActivity();
         switch (action) {
             case ACTION_DISPLAY_SETTINGS:
-                startActivity(new Intent(Settings.ACTION_DISPLAY_SETTINGS));
+                pa.startPreferencePanel(DisplaySettings.class.getName(), null,
+                        R.string.display_settings_title, null, null, 0);
                 break;
             case ACTION_WIFI_SETTINGS:
-                startActivity(new Intent(Settings.ACTION_WIFI_SETTINGS));
+                pa.startPreferencePanel(WifiSettings.class.getName(), null,
+                        R.string.wifi_settings, null, null, 0);
                 break;
             case ACTION_BLUETOOTH_SETTINGS:
-                startActivity(new Intent(Settings.ACTION_BLUETOOTH_SETTINGS));
+                pa.startPreferencePanel(BluetoothSettings.class.getName(), null,
+                        R.string.bluetooth_settings, null, null, 0);
                 break;
             case ACTION_WIRELESS_SETTINGS:
-                startActivity(new Intent(Settings.ACTION_WIRELESS_SETTINGS));
+                pa.startPreferencePanel(WirelessSettings.class.getName(), null,
+                        R.string.radio_controls_title, null, null, 0);
                 break;
             case ACTION_APP_DETAILS:
                 startApplicationDetailsActivity();
                 break;
             case ACTION_SECURITY_SETTINGS:
-                startActivity(new Intent(Settings.ACTION_SECURITY_SETTINGS));
+                pa.startPreferencePanel(SecuritySettings.class.getName(), null,
+                        R.string.security_settings_title, null, null, 0);
                 break;
             case ACTION_FORCE_STOP:
                 killProcesses();

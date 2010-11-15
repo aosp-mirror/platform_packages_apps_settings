@@ -163,6 +163,7 @@ public class WifiSettingsForSetupWizardXL extends Activity implements OnClickLis
 
     @Override
     public void onClick(View view) {
+        hideSoftwareKeyboard();
         if (view == mAddNetworkButton) {
             onAddNetworkButtonPressed();
         } else if (view == mRefreshButton) {
@@ -184,7 +185,6 @@ public class WifiSettingsForSetupWizardXL extends Activity implements OnClickLis
         } else if (view == mDetailButton) {
             mWifiSettings.showDialogForSelectedPreference();
         }
-        hideSoftwareKeyboard();
     }
 
     private void hideSoftwareKeyboard() {
@@ -334,7 +334,7 @@ public class WifiSettingsForSetupWizardXL extends Activity implements OnClickLis
         } else {
             view.findViewById(R.id.wifi_general_info).setVisibility(View.GONE);
         }
-        parent.addView(view);
+        // parent.addView(view);
 
         mStatusText.setText(R.string.wifi_setup_status_edit_network);
         mAddNetworkButton.setVisibility(View.GONE);

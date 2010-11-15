@@ -98,15 +98,13 @@ public class InputMethodAndSubtypeUtil {
 
     public static void saveInputMethodSubtypeList(
             SettingsPreferenceFragment context, ContentResolver resolver,
-            List<InputMethodInfo> inputMethodProperties,
-            boolean hasHardKeyboard, String lastTickedInputMethodId) {
+            List<InputMethodInfo> inputMethodProperties, boolean hasHardKeyboard) {
         String currentInputMethodId = Settings.Secure.getString(resolver,
                 Settings.Secure.DEFAULT_INPUT_METHOD);
         final int selectedInputMethodSubtype = getInputMethodSubtypeSelected(resolver);
 
         StringBuilder builder = new StringBuilder();
         StringBuilder disabledSysImes = new StringBuilder();
-        InputMethodInfo firstEnabledIMI = null;
         int firstSubtypeHashCode = NOT_A_SUBTYPE_ID;
 
         final boolean onlyOneIME = inputMethodProperties.size() == 1;
@@ -121,9 +119,6 @@ public class InputMethodAndSubtypeUtil {
                     || (pref != null && pref.isChecked())) {
                 if (builder.length() > 0) builder.append(INPUT_METHOD_SEPARATER);
                 builder.append(id);
-                if (firstEnabledIMI == null) {
-                    firstEnabledIMI = property;
-                }
                 for (InputMethodSubtype subtype : property.getSubtypes()) {
                     CheckBoxPreference subtypePref = (CheckBoxPreference) context.findPreference(
                             id + subtype.hashCode());
@@ -141,23 +136,17 @@ public class InputMethodAndSubtypeUtil {
             } else if (isCurrentInputMethod) {
                 // We are processing the current input method, but found that it's not enabled.
                 // This means that the current input method has been uninstalled.
-                // If currentInputMethod is already uninstalled, selects last ticked IME
-                currentInputMethodId = lastTickedInputMethodId;
+                // If currentInputMethod is already uninstalled, InputMethodManagerService will
+                // find the applicable IME from the history and the system locale.
+                if (DEBUG) {
+                    Log.d(TAG, "Current IME was uninstalled or disabled.");
+                }
             }
             // If it's a disabled system ime, add it to the disabled list so that it
             // doesn't get enabled automatically on any changes to the package list
             if (pref != null && !pref.isChecked() && systemIme && hasHardKeyboard) {
                 if (disabledSysImes.length() > 0) disabledSysImes.append(INPUT_METHOD_SEPARATER);
                 disabledSysImes.append(id);
-            }
-        }
-
-        // If the last input method is unset, set it as the first enabled one.
-        if (TextUtils.isEmpty(currentInputMethodId)) {
-            if (firstEnabledIMI != null) {
-                currentInputMethodId = firstEnabledIMI.getId();
-            } else {
-                currentInputMethodId = null;
             }
         }
 
@@ -183,6 +172,8 @@ public class InputMethodAndSubtypeUtil {
                 Settings.Secure.ENABLED_INPUT_METHODS, builder.toString());
         Settings.Secure.putString(resolver,
                 Settings.Secure.DISABLED_SYSTEM_INPUT_METHODS, disabledSysImes.toString());
+        // If the current input method is unset, InputMethodManagerService will find the applicable
+        // IME from the history and the system locale.
         Settings.Secure.putString(resolver, Settings.Secure.DEFAULT_INPUT_METHOD,
                 currentInputMethodId != null ? currentInputMethodId : "");
     }
