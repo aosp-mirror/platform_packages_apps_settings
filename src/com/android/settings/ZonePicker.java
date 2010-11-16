@@ -108,6 +108,7 @@ public class ZonePicker extends ListFragment {
 
         // If current timezone is in this list, move focus to it
         setSelection(mDefault);
+        setHasOptionsMenu(true);
     }
 
     @Override
