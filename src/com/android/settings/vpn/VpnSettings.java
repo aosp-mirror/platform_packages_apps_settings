@@ -138,8 +138,6 @@ public class VpnSettings extends SettingsPreferenceFragment
 
     private StatusChecker mStatusChecker = new StatusChecker();
 
-    private Handler mHandler = new Handler();
-
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -392,12 +390,7 @@ public class VpnSettings extends SettingsPreferenceFragment
 
         if (requestCode == REQUEST_SELECT_VPN_TYPE) {
             final String typeName = data.getStringExtra(KEY_VPN_TYPE);
-            mHandler.post(new Runnable() {
-
-                public void run() {
-                    startVpnEditor(createVpnProfile(typeName), true);
-                }
-            });
+            startVpnEditor(createVpnProfile(typeName), true);
         } else if (requestCode == REQUEST_ADD_OR_EDIT_PROFILE) {
             VpnProfile p = data.getParcelableExtra(KEY_VPN_PROFILE);
             if (p == null) {
