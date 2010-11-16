@@ -38,6 +38,7 @@ public class Settings extends PreferenceActivity {
 
     private String mFragmentClass;
     private int mTopLevelHeaderId;
+    private Header mFirstHeader;
 
     // TODO: Update Call Settings based on airplane mode state.
 
@@ -50,6 +51,17 @@ public class Settings extends PreferenceActivity {
 
         // TODO: Do this only if 2-pane mode
         highlightHeader();
+    }
+
+    @Override
+    public void onNewIntent(Intent intent) {
+        super.onNewIntent(intent);
+
+        // If it is not launched from history, then reset to top-level
+        if ((intent.getFlags() & Intent.FLAG_ACTIVITY_LAUNCHED_FROM_HISTORY) == 0
+                && mFirstHeader != null) {
+            switchToHeader(mFirstHeader);
+        }
     }
 
     private void highlightHeader() {
@@ -143,6 +155,8 @@ public class Settings extends PreferenceActivity {
             }
             // Increment if the current one wasn't removed by the Utils code.
             if (target.get(i) == header) {
+                // Hold on to the first header, when we need to reset to the top-level
+                if (i == 0) mFirstHeader = header;
                 mHeaderIndexMap.put(id, i);
                 i++;
             }
