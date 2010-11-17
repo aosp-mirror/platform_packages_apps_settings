@@ -56,9 +56,9 @@ import android.view.View;
 import android.widget.AdapterView.AdapterContextMenuInfo;
 import android.widget.Toast;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
-import java.util.TreeSet;
 
 /**
  * This currently provides three types of UI.
@@ -184,7 +184,7 @@ public class WifiSettings extends SettingsPreferenceFragment
         final ProgressCategoryBase preference =
                 (ProgressCategoryBase) findPreference("access_points");
         mAccessPoints = preference;
-        mAccessPoints.setOrderingAsAdded(true);
+        mAccessPoints.setOrderingAsAdded(false);
         mAddNetwork = findPreference("add_network");
 
         registerForContextMenu(getListView());
@@ -379,8 +379,7 @@ public class WifiSettings extends SettingsPreferenceFragment
     }
 
     private Collection<AccessPoint> constructAccessPoints() {
-        Collection<AccessPoint> accessPoints =
-                new TreeSet<AccessPoint>(new AccessPoint.Comparater());
+        Collection<AccessPoint> accessPoints = new ArrayList<AccessPoint>();
 
         final List<WifiConfiguration> configs = mWifiManager.getConfiguredNetworks();
         if (configs != null) {
