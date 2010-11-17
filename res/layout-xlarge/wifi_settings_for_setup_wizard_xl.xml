@@ -30,18 +30,17 @@
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
-        android:gravity="left"
         android:textSize="40dip"
         android:textColor="#FF99cc00"
         android:text="@string/wifi_setup_title"/>
 
     <ProgressBar
-         android:id="@+id/scanning_progress_bar"
-         android:layout_width="100dip"
-         android:layout_height="wrap_content"
-         android:layout_above="@+id/scanning_progress_text"
-         android:layout_alignParentRight="true"
-         style="?android:attr/progressBarStyleHorizontal" />
+        android:id="@+id/scanning_progress_bar"
+        android:layout_width="100dip"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/scanning_progress_text"
+        android:layout_alignParentRight="true"
+        style="?android:attr/progressBarStyleHorizontal" />
 
     <TextView
         android:id="@+id/scanning_progress_text"

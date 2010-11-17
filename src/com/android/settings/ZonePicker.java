@@ -55,19 +55,16 @@ public class ZonePicker extends ListFragment {
         public void onZoneSelected(TimeZone tz);
     }
 
-    private static final String KEY_ID = "id";
-    private static final String KEY_DISPLAYNAME = "name";
-    private static final String KEY_GMT = "gmt";
-    private static final String KEY_OFFSET = "offset";
+    private static final String KEY_ID = "id";  // value: String
+    private static final String KEY_DISPLAYNAME = "name";  // value: String
+    private static final String KEY_GMT = "gmt";  // value: String
+    private static final String KEY_OFFSET = "offset";  // value: int (Integer)
     private static final String XMLTAG_TIMEZONE = "timezone";
 
     private static final int HOURS_1 = 60 * 60000;
 
     private static final int MENU_TIMEZONE = Menu.FIRST+1;
     private static final int MENU_ALPHABETICAL = Menu.FIRST;
-
-    // Initial focus position
-    private int mDefault;
 
     private boolean mSortedByTimezone;
 
@@ -76,38 +73,74 @@ public class ZonePicker extends ListFragment {
 
     private ZoneSelectionListener mListener;
 
+    /**
+     * Constructs an adapter with TimeZone list. Sorted by TimeZone in default.
+     *
+     * @param sortedByName use Name for sorting the list.
+     */
+    public static SimpleAdapter constructTimezoneAdapter(Context context,
+            boolean sortedByName) {
+        final String[] from = new String[] {KEY_DISPLAYNAME, KEY_GMT};
+        final int[] to = new int[] {android.R.id.text1, android.R.id.text2};
+
+        final String sortKey = (sortedByName ? KEY_DISPLAYNAME : KEY_OFFSET);
+        final MyComparator comparator = new MyComparator(sortKey);
+        final List<HashMap<String, Object>> sortedList = getZones(context);
+        Collections.sort(sortedList, comparator);
+        final SimpleAdapter adapter = new SimpleAdapter(context,
+                sortedList,
+                android.R.layout.simple_list_item_2,
+                from,
+                to);
+
+        return adapter;
+    }
+
+    /**
+     * Searches {@link TimeZone} from the given {@link SimpleAdapter} object, and returns
+     * the index for the TimeZone.
+     *
+     * @param adapter SimpleAdapter constructed by
+     * {@link #constructTimezoneAdapter(Context, boolean)}.
+     * @param tz TimeZone to be searched.
+     * @return Index for the given TimeZone. -1 when there's no corresponding list item.
+     * returned.
+     */
+    public static int getTimeZoneIndex(SimpleAdapter adapter, TimeZone tz) {
+        final String defaultId = tz.getID();
+        final int listSize = adapter.getCount();
+        for (int i = 0; i < listSize; i++) {
+            // Using HashMap<String, Object> induces unnecessary warning.
+            final HashMap<?,?> map = (HashMap<?,?>)adapter.getItem(i);
+            final String id = (String)map.get(KEY_ID);
+            if (defaultId.equals(id)) {
+                // If current timezone is in this list, move focus to it
+                return i;
+            }
+        }
+        return -1;
+    }
+
+    /**
+     * @param item one of items in adapters. The adapter should be constructed by
+     * {@link #constructTimezoneAdapter(Context, boolean)}.
+     * @return TimeZone object corresponding to the item.
+     */
+    public static TimeZone obtainTimeZoneFromItem(Object item) {
+        return TimeZone.getTimeZone((String)((Map<?, ?>)item).get(KEY_ID));
+    }
+
     @Override
     public void onActivityCreated(Bundle savedInstanseState) {
         super.onActivityCreated(savedInstanseState);
 
-        final String[] from = new String[] {KEY_DISPLAYNAME, KEY_GMT};
-        final int[] to = new int[] {android.R.id.text1, android.R.id.text2};
-
-        MyComparator comparator = new MyComparator(KEY_OFFSET);
-
-        Activity activity = getActivity();
-        List<HashMap> timezoneSortedList = getZones();
-        Collections.sort(timezoneSortedList, comparator);
-        mTimezoneSortedAdapter = new SimpleAdapter(activity,
-                (List) timezoneSortedList,
-                android.R.layout.simple_list_item_2,
-                from,
-                to);
-
-        List<HashMap> alphabeticalList = new ArrayList<HashMap>(timezoneSortedList);
-        comparator.setSortingKey(KEY_DISPLAYNAME);
-        Collections.sort(alphabeticalList, comparator);
-        mAlphabeticalAdapter = new SimpleAdapter(getActivity(),
-                (List) alphabeticalList,
-                android.R.layout.simple_list_item_2,
-                from,
-                to);
+        final Activity activity = getActivity();
+        mTimezoneSortedAdapter = constructTimezoneAdapter(activity, false);
+        mAlphabeticalAdapter = constructTimezoneAdapter(activity, true);
 
         // Sets the adapter
         setSorting(true);
-
-        // If current timezone is in this list, move focus to it
-        setSelection(mDefault);
+        setHasOptionsMenu(true);
     }
 
     @Override
@@ -151,16 +184,22 @@ public class ZonePicker extends ListFragment {
         mListener = listener;
     }
 
-    private void setSorting(boolean timezone) {
-        setListAdapter(timezone ? mTimezoneSortedAdapter : mAlphabeticalAdapter);
-        mSortedByTimezone = timezone;
+    private void setSorting(boolean sortByTimezone) {
+        final SimpleAdapter adapter =
+                sortByTimezone ? mTimezoneSortedAdapter : mAlphabeticalAdapter;
+        setListAdapter(adapter);
+        mSortedByTimezone = sortByTimezone;
+        final int defaultIndex = getTimeZoneIndex(adapter, TimeZone.getDefault());
+        if (defaultIndex >= 0) {
+            setSelection(defaultIndex);
+        }
     }
 
-    private List<HashMap> getZones() {
-        List<HashMap> myData = new ArrayList<HashMap>();
-        long date = Calendar.getInstance().getTimeInMillis();
+    private static List<HashMap<String, Object>> getZones(Context context) {
+        final List<HashMap<String, Object>> myData = new ArrayList<HashMap<String, Object>>();
+        final long date = Calendar.getInstance().getTimeInMillis();
         try {
-            XmlResourceParser xrp = getActivity().getResources().getXml(R.xml.timezones);
+            XmlResourceParser xrp = context.getResources().getXml(R.xml.timezones);
             while (xrp.next() != XmlResourceParser.START_TAG)
                 continue;
             xrp.next();
@@ -191,15 +230,15 @@ public class ZonePicker extends ListFragment {
         return myData;
     }
 
-    protected void addItem(List<HashMap> myData, String id, String displayName, 
-            long date) {
-        HashMap map = new HashMap();
+    private static void addItem(
+            List<HashMap<String, Object>> myData, String id, String displayName, long date) {
+        final HashMap<String, Object> map = new HashMap<String, Object>();
         map.put(KEY_ID, id);
         map.put(KEY_DISPLAYNAME, displayName);
-        TimeZone tz = TimeZone.getTimeZone(id);
-        int offset = tz.getOffset(date);
-        int p = Math.abs(offset);
-        StringBuilder name = new StringBuilder();
+        final TimeZone tz = TimeZone.getTimeZone(id);
+        final int offset = tz.getOffset(date);
+        final int p = Math.abs(offset);
+        final StringBuilder name = new StringBuilder();
         name.append("GMT");
 
         if (offset < 0) {
@@ -222,20 +261,17 @@ public class ZonePicker extends ListFragment {
         map.put(KEY_GMT, name.toString());
         map.put(KEY_OFFSET, offset);
 
-        if (id.equals(TimeZone.getDefault().getID())) {
-            mDefault = myData.size();
-        }
-
         myData.add(map);
     }
 
     @Override
-    public void onListItemClick(ListView l, View v, int position, long id) {
-        Map map = (Map) l.getItemAtPosition(position);
+    public void onListItemClick(ListView listView, View v, int position, long id) {
+        final Map<?, ?> map = (Map<?, ?>)listView.getItemAtPosition(position);
+        final String tzId = (String) map.get(KEY_ID);
+
         // Update the system timezone value
         final Activity activity = getActivity();
-        AlarmManager alarm = (AlarmManager) activity.getSystemService(Context.ALARM_SERVICE);
-        String tzId = (String) map.get(KEY_ID);
+        final AlarmManager alarm = (AlarmManager) activity.getSystemService(Context.ALARM_SERVICE);
         alarm.setTimeZone(tzId);
         final TimeZone tz = TimeZone.getTimeZone(tzId);
         if (mListener != null) {
@@ -245,7 +281,7 @@ public class ZonePicker extends ListFragment {
         }
     }
 
-    private static class MyComparator implements Comparator<HashMap> {
+    private static class MyComparator implements Comparator<HashMap<?, ?>> {
         private String mSortingKey;
 
         public MyComparator(String sortingKey) {
@@ -256,7 +292,7 @@ public class ZonePicker extends ListFragment {
             mSortingKey = sortingKey;
         }
 
-        public int compare(HashMap map1, HashMap map2) {
+        public int compare(HashMap<?, ?> map1, HashMap<?, ?> map2) {
             Object value1 = map1.get(mSortingKey);
             Object value2 = map2.get(mSortingKey);
 

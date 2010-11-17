@@ -16,30 +16,34 @@
 
 package com.android.settings;
 
-import com.android.settings.ZonePicker.ZoneSelectionListener;
-
 import android.app.Activity;
+import android.app.AlarmManager;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.provider.Settings;
 import android.provider.Settings.SettingNotFoundException;
+import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.Window;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.CompoundButton.OnCheckedChangeListener;
 import android.widget.DatePicker;
+import android.widget.ListPopupWindow;
+import android.widget.SimpleAdapter;
 import android.widget.TimePicker;
 
 import java.util.Calendar;
 import java.util.TimeZone;
 
 public class DateTimeSettingsSetupWizard extends Activity
-        implements OnClickListener, ZoneSelectionListener, OnCheckedChangeListener{
+        implements OnClickListener, OnItemClickListener, OnCheckedChangeListener{
     private static final String TAG = DateTimeSettingsSetupWizard.class.getSimpleName();
 
     // force the first status of auto datetime flag.
@@ -51,7 +55,12 @@ public class DateTimeSettingsSetupWizard extends Activity
     /* Available only in XL */
     private CompoundButton mAutoDateTimeButton;
     // private CompoundButton mAutoTimeZoneButton;
-    private Button mTimeZone;
+
+    private Button mTimeZoneButton;
+    private ListPopupWindow mTimeZonePopup;
+    private SimpleAdapter mTimeZoneAdapter;
+    private TimeZone mSelectedTimeZone;
+
     private TimePicker mTimePicker;
     private DatePicker mDatePicker;
     private InputMethodManager mInputMethodManager;
@@ -83,10 +92,12 @@ public class DateTimeSettingsSetupWizard extends Activity
                 R.string.zone_auto_summaryOff);*/
 
         final TimeZone tz = TimeZone.getDefault();
-        mTimeZone = (Button)findViewById(R.id.current_time_zone);
-        mTimeZone.setText(DateTimeSettings.getTimeZoneText(tz));
-        mTimeZone.setOnClickListener(this);
-        // mTimeZone.setEnabled(!autoTimeZoneEnabled);
+        mSelectedTimeZone = tz;
+        mTimeZoneButton = (Button)findViewById(R.id.time_zone_button);
+        mTimeZoneButton.setText(tz.getDisplayName());
+        // mTimeZoneButton.setText(DateTimeSettings.getTimeZoneText(tz));
+        mTimeZoneButton.setOnClickListener(this);
+        mTimeZoneAdapter = ZonePicker.constructTimezoneAdapter(this, false);
 
         final boolean autoDateTimeEnabled;
         final Intent intent = getIntent();
@@ -109,9 +120,6 @@ public class DateTimeSettingsSetupWizard extends Activity
 
         mInputMethodManager = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
 
-        ((ZonePicker)getFragmentManager().findFragmentById(R.id.zone_picker_fragment))
-                .setZoneSelectionListener(this);
-
         ((Button)findViewById(R.id.next_button)).setOnClickListener(this);
         ((Button)findViewById(R.id.skip_button)).setOnClickListener(this);
     }
@@ -119,9 +127,14 @@ public class DateTimeSettingsSetupWizard extends Activity
     @Override
     public void onClick(View view) {
         switch (view.getId()) {
-        case R.id.current_time_zone: {
-            findViewById(R.id.current_time_zone).setVisibility(View.GONE);
-            findViewById(R.id.zone_picker).setVisibility(View.VISIBLE);
+        case R.id.time_zone_button: {
+            mTimeZonePopup = new ListPopupWindow(this, null);
+            mTimeZonePopup.setWidth(mTimeZoneButton.getWidth());
+            mTimeZonePopup.setAnchorView(mTimeZoneButton);
+            mTimeZonePopup.setAdapter(mTimeZoneAdapter);
+            mTimeZonePopup.setOnItemClickListener(this);
+            mTimeZonePopup.setModal(true);
+            mTimeZonePopup.show();
             break;
         }
         case R.id.next_button: {
@@ -130,6 +143,15 @@ public class DateTimeSettingsSetupWizard extends Activity
                         mAutoTimeZoneButton.isChecked() ? 1 : 0); */
                 Settings.System.putInt(getContentResolver(), Settings.System.AUTO_TIME,
                         mAutoDateTimeButton.isChecked() ? 1 : 0);
+
+                final TimeZone systemTimeZone = TimeZone.getDefault();
+                if (!systemTimeZone.equals(mSelectedTimeZone)) {
+                    Log.i(TAG, "Another TimeZone is selected by a user. Changing system TimeZone.");
+                    final AlarmManager alarm = (AlarmManager)
+                            getSystemService(Context.ALARM_SERVICE);
+                    alarm.setTimeZone(mSelectedTimeZone.getID());
+                }
+
                 // Note: in non-XL, Date & Time is stored by DatePickerDialog/TimePickerDialog,
                 // so we don't need to save those values there, while in XL, we need to as
                 // we don't use those Dialogs.
@@ -182,15 +204,18 @@ public class DateTimeSettingsSetupWizard extends Activity
     }
 
     @Override
-    public void onZoneSelected(TimeZone tz) {
-        findViewById(R.id.current_time_zone).setVisibility(View.VISIBLE);
-        findViewById(R.id.zone_picker).setVisibility(View.GONE);
+    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+        final TimeZone tz = ZonePicker.obtainTimeZoneFromItem(parent.getItemAtPosition(position));
+        mSelectedTimeZone = tz;
+
         final Calendar now = Calendar.getInstance(tz);
-        mTimeZone.setText(DateTimeSettings.getTimeZoneText(tz));
+        mTimeZoneButton.setText(tz.getDisplayName());
+        // mTimeZoneButton.setText(DateTimeSettings.getTimeZoneText(tz));
         mDatePicker.updateDate(now.get(Calendar.YEAR), now.get(Calendar.MONTH),
                 now.get(Calendar.DAY_OF_MONTH));
         mTimePicker.setCurrentHour(now.get(Calendar.HOUR));
         mTimePicker.setCurrentMinute(now.get(Calendar.MINUTE));
+        mTimeZonePopup.dismiss();
     }
 
     private boolean isAutoDateTimeEnabled() {
