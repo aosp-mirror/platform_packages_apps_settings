@@ -49,7 +49,7 @@ public class AccountPreference extends Preference {
         mAccount = account;
         mAuthorities = authorities;
         mProviderIcon = icon;
-        setLayoutResource(R.layout.account_preference);
+        setWidgetLayoutResource(R.layout.account_preference);
         setTitle(mAccount.name);
         setSummary("");
         // Add account info to the intent for AccountSyncSettings
@@ -72,7 +72,7 @@ public class AccountPreference extends Preference {
     protected void onBindView(View view) {
         super.onBindView(view);
         setSummary(getSyncStatusMessage(mStatus));
-        mProviderIconView = (ImageView) view.findViewById(R.id.providerIcon);
+        mProviderIconView = (ImageView) view.findViewById(android.R.id.icon);
         mProviderIconView.setImageDrawable(mProviderIcon);
         mSyncStatusIcon = (ImageView) view.findViewById(R.id.syncStatusIcon);
         mSyncStatusIcon.setImageResource(getSyncStatusIcon(mStatus));
