@@ -114,10 +114,6 @@ public class SoundSettings extends SettingsPreferenceFragment implements
         mVibrate = (ListPreference) findPreference(KEY_VIBRATE);
         mVibrate.setOnPreferenceChangeListener(this);
 
-        if (!((Vibrator)getSystemService(Context.VIBRATOR_SERVICE)).hasVibrator()) {
-            getPreferenceScreen().removePreference(mVibrate);
-        }
-        
         mDtmfTone = (CheckBoxPreference) findPreference(KEY_DTMF_TONE);
         mDtmfTone.setPersistent(false);
         mDtmfTone.setChecked(Settings.System.getInt(resolver,
@@ -134,6 +130,11 @@ public class SoundSettings extends SettingsPreferenceFragment implements
         mLockSounds.setPersistent(false);
         mLockSounds.setChecked(Settings.System.getInt(resolver,
                 Settings.System.LOCKSCREEN_SOUNDS_ENABLED, 1) != 0);
+
+        if (!((Vibrator) getSystemService(Context.VIBRATOR_SERVICE)).hasVibrator()) {
+            getPreferenceScreen().removePreference(mVibrate);
+            getPreferenceScreen().removePreference(mHapticFeedback);
+        }
 
         if (TelephonyManager.PHONE_TYPE_CDMA == activePhoneType) {
             ListPreference emergencyTonePreference =

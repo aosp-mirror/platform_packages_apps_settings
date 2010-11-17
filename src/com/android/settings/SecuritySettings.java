@@ -33,6 +33,7 @@ import android.database.Cursor;
 import android.location.LocationManager;
 import android.os.Bundle;
 import android.os.SystemProperties;
+import android.os.Vibrator;
 import android.preference.CheckBoxPreference;
 import android.preference.ListPreference;
 import android.preference.Preference;
@@ -68,6 +69,7 @@ public class SecuritySettings extends SettingsPreferenceFragment
     private static final String KEY_LOCK_ENABLED = "lockenabled";
     private static final String KEY_VISIBLE_PATTERN = "visiblepattern";
     private static final String KEY_TACTILE_FEEDBACK_ENABLED = "unlock_tactile_feedback";
+    private static final String KEY_SECURITY_CATEGORY = "security_category";
 
     // Encrypted File Systems constants
     private static final String PROPERTY_EFS_ENABLED = "persist.security.efs.enabled";
@@ -208,6 +210,13 @@ public class SecuritySettings extends SettingsPreferenceFragment
 
         // tactile feedback. Should be common to all unlock preference screens.
         mTactileFeedback = (CheckBoxPreference) pm.findPreference(KEY_TACTILE_FEEDBACK_ENABLED);
+        if (!((Vibrator) getSystemService(Context.VIBRATOR_SERVICE)).hasVibrator()) {
+            PreferenceGroup securityCategory = (PreferenceGroup)
+                    pm.findPreference(KEY_SECURITY_CATEGORY);
+            if (securityCategory != null && mTactileFeedback != null) {
+                securityCategory.removePreference(mTactileFeedback);
+            }
+        }
 
         int activePhoneType = TelephonyManager.getDefault().getPhoneType();
 
