@@ -734,7 +734,7 @@ public class PowerUsageSummary extends PreferenceFragment implements Runnable {
                             (PowerGaugePreference) findPreference(
                                     Integer.toString(bs.uidObj.getUid()));
                     if (pgp != null) {
-                        pgp.setIcon(bs.icon);
+                        pgp.setPowerIcon(bs.icon);
                         pgp.setPercent(bs.percent);
                         pgp.setTitle(bs.name);
                     }

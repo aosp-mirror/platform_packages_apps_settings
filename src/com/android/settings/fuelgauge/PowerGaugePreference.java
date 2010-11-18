@@ -64,7 +64,7 @@ public class PowerGaugePreference extends Preference {
         return mInfo;
     }
 
-    void setIcon(Drawable icon) {
+    void setPowerIcon(Drawable icon) {
         mIcon = icon;
         notifyChanged();
     }

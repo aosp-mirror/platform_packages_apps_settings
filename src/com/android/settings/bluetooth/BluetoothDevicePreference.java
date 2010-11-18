@@ -64,7 +64,7 @@ public class BluetoothDevicePreference extends Preference implements
         mCachedDevice = cachedDevice;
         mAccessibleProfile = accessibleProfile;
 
-        setLayoutResource(R.layout.preference_bluetooth);
+        setWidgetLayoutResource(R.layout.preference_bluetooth);
 
         cachedDevice.registerCallback(this);
 
@@ -127,7 +127,7 @@ public class BluetoothDevicePreference extends Preference implements
 
         super.onBindView(view);
 
-        ImageView btClass = (ImageView) view.findViewById(R.id.btClass);
+        ImageView btClass = (ImageView) view.findViewById(android.R.id.icon);
         btClass.setImageResource(mCachedDevice.getBtClassDrawable());
         btClass.setAlpha(isEnabled() ? 255 : sDimAlpha);
 
