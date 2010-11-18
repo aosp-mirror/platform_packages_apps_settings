@@ -295,6 +295,7 @@ public class DeviceProfilesSettings extends SettingsPreferenceFragment
             CheckBoxPreference autoConnectPref = mAutoConnectPrefs.get(prof.toString());
             if (autoConnectPref == null) {
                 autoConnectPref = new CheckBoxPreference(getActivity());
+                autoConnectPref.setLayoutResource(com.android.internal.R.layout.preference_child);
                 autoConnectPref.setKey(prof.toString() + AUTO_CONNECT_KEY_SUFFIX);
                 autoConnectPref.setTitle(getCheckBoxTitle(prof));
                 autoConnectPref.setOrder(getProfilePreferenceIndex(prof) + 1);

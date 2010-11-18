@@ -48,7 +48,7 @@ public class BluetoothProfilePreference extends Preference implements OnClickLis
 
         mProfile = profile;
 
-        setLayoutResource(R.layout.preference_bluetooth_profile);
+        setWidgetLayoutResource(R.layout.preference_bluetooth_profile);
         setExpanded(false);
     }
 
@@ -73,7 +73,7 @@ public class BluetoothProfilePreference extends Preference implements OnClickLis
     protected void onBindView(View view) {
         super.onBindView(view);
 
-        ImageView btProfile = (ImageView) view.findViewById(R.id.profileIcon);
+        ImageView btProfile = (ImageView) view.findViewById(android.R.id.icon);
         btProfile.setImageDrawable(mProfileDrawable);
 
         mProfileExpandView = (ImageView) view.findViewById(R.id.profileExpand);
