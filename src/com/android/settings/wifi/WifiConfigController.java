@@ -354,14 +354,18 @@ public class WifiConfigController implements TextWatcher,
 
         if (config.proxySettings == ProxySettings.STATIC) {
             String host = mProxyHostView.getText().toString();
-            String port = mProxyPortView.getText().toString();
+            String portStr = mProxyPortView.getText().toString();
             String exclusionList = mProxyExclusionListView.getText().toString();
-            int result = ProxySelector.validate(host, port, exclusionList);
+            int port = 0;
+            int result = 0;
+            try {
+                port = Integer.parseInt(portStr);
+                result = ProxySelector.validate(host, portStr, exclusionList);
+            } catch (NumberFormatException e) {
+                result = R.string.proxy_error_invalid_port;
+            }
             if (result == 0) {
-                ProxyProperties proxyProperties= new ProxyProperties();
-                proxyProperties.setSocketAddress(
-                        InetSocketAddress.createUnresolved(host, Integer.parseInt(port)));
-                proxyProperties.setExclusionList(exclusionList);
+                ProxyProperties proxyProperties= new ProxyProperties(host, port, exclusionList);
                 config.linkProperties.setHttpProxy(proxyProperties);
             } else {
                 Toast.makeText(mConfigUi.getContext(), result, Toast.LENGTH_LONG).show();
@@ -572,12 +576,9 @@ public class WifiConfigController implements TextWatcher,
             if (config != null) {
                 ProxyProperties proxyProperties = config.linkProperties.getHttpProxy();
                 if (proxyProperties != null) {
-                    InetSocketAddress sockAddr = proxyProperties.getSocketAddress();
-                    if (sockAddr != null) {
-                        mProxyHostView.setText(sockAddr.getHostName());
-                        mProxyPortView.setText(Integer.toString(sockAddr.getPort()));
-                        mProxyExclusionListView.setText(proxyProperties.getExclusionList());
-                    }
+                    mProxyHostView.setText(proxyProperties.getHost());
+                    mProxyPortView.setText(Integer.toString(proxyProperties.getPort()));
+                    mProxyExclusionListView.setText(proxyProperties.getExclusionList());
                 }
             }
         } else {

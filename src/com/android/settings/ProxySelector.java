@@ -26,7 +26,9 @@ import android.app.admin.DevicePolicyManager;
 import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;
+import android.net.ConnectivityManager;
 import android.net.Proxy;
+import android.net.ProxyProperties;
 import android.os.Bundle;
 import android.provider.Settings;
 import android.text.Selection;
@@ -42,6 +44,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import java.net.InetSocketAddress;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -84,7 +87,7 @@ public class ProxySelector extends Fragment implements DialogCreatable {
         mView = inflater.inflate(R.layout.proxy, container, false);
         initView(mView);
         // TODO: Populate based on connection status
-        populateFields(false);
+        populateFields();
         return mView;
     }
 
@@ -152,21 +155,20 @@ public class ProxySelector extends Fragment implements DialogCreatable {
         mDefaultButton.setOnClickListener(mDefaultHandler);
     }
 
-    void populateFields(boolean useDefault) {
+    void populateFields() {
         final Activity activity = getActivity();
-        String hostname = null;
+        String hostname = "";
         int port = -1;
-        String exclList = null;
-        if (useDefault) {
-            // Use the default proxy settings provided by the carrier
-            hostname = Proxy.getDefaultHost();
-            port = Proxy.getDefaultPort();
-        } else {
-            // Use the last setting given by the user
-            ContentResolver res = getActivity().getContentResolver();
-            hostname = Proxy.getHost(activity);
-            port = Proxy.getPort(activity);
-            exclList = Settings.Secure.getString(res, Settings.Secure.HTTP_PROXY_EXCLUSION_LIST);
+        String exclList = "";
+        // Use the last setting given by the user
+        ConnectivityManager cm =
+                (ConnectivityManager)getActivity().getSystemService(Context.CONNECTIVITY_SERVICE);
+
+        ProxyProperties proxy = cm.getGlobalProxy();
+        if (proxy != null) {
+            hostname = proxy.getHost();
+            port = proxy.getPort();
+            exclList = proxy.getExclusionList();
         }
 
         if (hostname == null) {
@@ -234,7 +236,7 @@ public class ProxySelector extends Fragment implements DialogCreatable {
         String hostname = mHostnameField.getText().toString().trim();
         String portStr = mPortField.getText().toString().trim();
         String exclList = mExclusionListField.getText().toString().trim();
-        int port = -1;
+        int port = 0;
 
         int result = validate(hostname, portStr, exclList);
         if (result > 0) {
@@ -246,36 +248,21 @@ public class ProxySelector extends Fragment implements DialogCreatable {
             try {
                 port = Integer.parseInt(portStr);
             } catch (NumberFormatException ex) {
+                // should never happen - caught by validate above
                 return false;
             }
         }
-
+        ProxyProperties p = new ProxyProperties(hostname, port, exclList);
         // FIXME: The best solution would be to make a better UI that would
         // disable editing of the text boxes if the user chooses to use the
         // default settings. i.e. checking a box to always use the default
         // carrier. http:/b/issue?id=756480
-        // FIXME: This currently will not work if the default host is blank and
-        // the user has cleared the input boxes in order to not use a proxy.
-        // This is a UI problem and can be solved with some better form
-        // controls.
         // FIXME: If the user types in a proxy that matches the default, should
         // we keep that setting? Can be fixed with a new UI.
-        ContentResolver res = getActivity().getContentResolver();
-        if (hostname.equals(Proxy.getDefaultHost())
-                && port == Proxy.getDefaultPort()) {
-            // If the user hit the default button and didn't change any of
-            // the input boxes, treat it as if the user has not specified a
-            // proxy.
-            hostname = null;
-        }
+        ConnectivityManager cm =
+                (ConnectivityManager)getActivity().getSystemService(Context.CONNECTIVITY_SERVICE);
 
-        if (!TextUtils.isEmpty(hostname)) {
-            hostname += ':' + portStr;
-        }
-        Settings.Secure.putString(res, Settings.Secure.HTTP_PROXY, hostname);
-        Settings.Secure.putString(res, Settings.Secure.HTTP_PROXY_EXCLUSION_LIST, exclList);
-        getActivity().sendBroadcast(new Intent(Proxy.PROXY_CHANGE_ACTION));
-
+        cm.setGlobalProxy(p);
         return true;
     }
 
@@ -298,7 +285,7 @@ public class ProxySelector extends Fragment implements DialogCreatable {
     OnClickListener mDefaultHandler = new OnClickListener() {
             public void onClick(View v) {
                 // TODO: populate based on connection status
-                populateFields(false);
+                populateFields();
             }
         };
 
