@@ -4,9 +4,9 @@
      Licensed under the Apache License, Version 2.0 (the "License");
      you may not use this file except in compliance with the License.
      You may obtain a copy of the License at
-  
+
           http://www.apache.org/licenses/LICENSE-2.0
-  
+
      Unless required by applicable law or agreed to in writing, software
      distributed under the License is distributed on an "AS IS" BASIS,
      WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -15,43 +15,44 @@
 -->
 
 <!-- Layout used for ProgressCategory in bluetooth settings. -->
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"      
-    style="?android:attr/listSeparatorTextViewStyle">
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    style="?android:attr/listSeparatorTextViewStyle"
+    android:gravity="center_vertical"
+    android:orientation="horizontal"
+    >
 
     <!-- This and the other text view have the style of the list separator text view without the background and padding -->
-    <TextView 
+    <TextView
         style="?android:attr/listSeparatorTextViewStyle"
         android:background="@null"
-        android:paddingLeft="0dip"
+        android:paddingLeft="32dip"
         android:id="@+android:id/title"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_centerVertical="true"
+        android:layout_weight="1"
+        android:layout_gravity="center_vertical"
     />
-        
-    <ProgressBar
-        android:id="@+id/scanning_progress"
-        android:text="@string/progress_scanning"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentRight="true"
-        android:layout_centerVertical="true"
-        android:layout_marginRight="?android:attr/scrollbarSize"
-        style="?android:attr/progressBarStyleSmallTitle"
-        />
-        
-    <TextView 
+
+    <TextView
         style="?android:attr/listSeparatorTextViewStyle"
         android:background="@null"
         android:paddingLeft="0dip"
         android:id="@+id/scanning_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_centerVertical="true"
-        android:layout_toLeftOf="@id/scanning_progress"
+        android:layout_gravity="center_vertical"
         android:layout_marginRight="5sp"
         android:text="@string/progress_scanning"
         />
-        
-</RelativeLayout>
+
+    <ProgressBar
+        android:id="@+id/scanning_progress"
+        android:text="@string/progress_scanning"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:layout_marginRight="16dip"
+        style="?android:attr/progressBarStyleSmallTitle"
+        />
+
+</LinearLayout>
