@@ -121,6 +121,30 @@ public abstract class LocalBluetoothProfileManager {
         }
     }
 
+    // TODO(): Combine the init and updateLocalProfiles codes.
+    // init can get called from various paths, it makes no sense to add and then delete.
+    public static void updateLocalProfiles(LocalBluetoothManager localManager, ParcelUuid[] uuids) {
+        if (!BluetoothUuid.containsAnyUuid(uuids, HEADSET_PROFILE_UUIDS)) {
+            sProfileMap.remove(Profile.HEADSET);
+        }
+
+        if (BluetoothUuid.containsAnyUuid(uuids, A2DP_PROFILE_UUIDS)) {
+            sProfileMap.remove(Profile.A2DP);
+        }
+
+        if (BluetoothUuid.containsAnyUuid(uuids, OPP_PROFILE_UUIDS)) {
+            sProfileMap.remove(Profile.OPP);
+        }
+
+        if (BluetoothUuid.containsAnyUuid(uuids, HID_PROFILE_UUIDS)) {
+            sProfileMap.remove(Profile.HID);
+        }
+
+        if (BluetoothUuid.containsAnyUuid(uuids, PANU_PROFILE_UUIDS)) {
+            sProfileMap.remove(Profile.PAN);
+        }
+    }
+
     private static LinkedList<ServiceListener> mServiceListeners =
             new LinkedList<ServiceListener>();
 
@@ -171,23 +195,28 @@ public abstract class LocalBluetoothProfileManager {
             return;
         }
 
-        if (BluetoothUuid.containsAnyUuid(uuids, HEADSET_PROFILE_UUIDS)) {
+        if (BluetoothUuid.containsAnyUuid(uuids, HEADSET_PROFILE_UUIDS) &&
+            sProfileMap.containsKey(Profile.HEADSET)) {
             profiles.add(Profile.HEADSET);
         }
 
-        if (BluetoothUuid.containsAnyUuid(uuids, A2DP_PROFILE_UUIDS)) {
+        if (BluetoothUuid.containsAnyUuid(uuids, A2DP_PROFILE_UUIDS) &&
+            sProfileMap.containsKey(Profile.A2DP)) {
             profiles.add(Profile.A2DP);
         }
 
-        if (BluetoothUuid.containsAnyUuid(uuids, OPP_PROFILE_UUIDS)) {
+        if (BluetoothUuid.containsAnyUuid(uuids, OPP_PROFILE_UUIDS) &&
+            sProfileMap.containsKey(Profile.OPP)) {
             profiles.add(Profile.OPP);
         }
 
-        if (BluetoothUuid.containsAnyUuid(uuids, HID_PROFILE_UUIDS)) {
+        if (BluetoothUuid.containsAnyUuid(uuids, HID_PROFILE_UUIDS) &&
+            sProfileMap.containsKey(Profile.HID)) {
             profiles.add(Profile.HID);
         }
 
-        if (BluetoothUuid.containsAnyUuid(uuids, PANU_PROFILE_UUIDS)) {
+        if (BluetoothUuid.containsAnyUuid(uuids, PANU_PROFILE_UUIDS) &&
+            sProfileMap.containsKey(Profile.PAN)) {
             profiles.add(Profile.PAN);
         }
     }
