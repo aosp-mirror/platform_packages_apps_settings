@@ -26,13 +26,13 @@ import android.bluetooth.BluetoothDevice;
 import android.bluetooth.BluetoothProfile;
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.os.ParcelUuid;
 import android.util.Config;
 import android.util.Log;
 import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
 
 // TODO: have some notion of shutting down.  Maybe a minute after they leave BT settings?
 /**
@@ -48,7 +48,6 @@ public class LocalBluetoothManager {
 
     /** Singleton instance. */
     private static LocalBluetoothManager sInstance;
-    private boolean mInitialized;
 
     private Context mContext;
     /** If a BT-related activity is in the foreground, this will be it. */
@@ -89,22 +88,17 @@ public class LocalBluetoothManager {
         synchronized (LocalBluetoothManager.class) {
             if (sInstance == null) {
                 sInstance = new LocalBluetoothManager();
+                if (!sInstance.init(context)) {
+                    return null;
+                }
+                LocalBluetoothProfileManager.init(sInstance);
             }
-
-            if (!sInstance.init(context)) {
-                return null;
-            }
-
-            LocalBluetoothProfileManager.init(sInstance);
 
             return sInstance;
         }
     }
 
     private boolean init(Context context) {
-        if (mInitialized) return true;
-        mInitialized = true;
-
         // This will be around as long as this process is
         mContext = context.getApplicationContext();
 
@@ -226,6 +220,12 @@ public class LocalBluetoothManager {
 
     void setBluetoothStateInt(int state) {
         mState = state;
+
+        if (state == BluetoothAdapter.STATE_ON) {
+            ParcelUuid[] uuids = mAdapter.getUuids();
+            LocalBluetoothProfileManager.updateLocalProfiles(getInstance(mContext), uuids);
+        }
+
         if (state == BluetoothAdapter.STATE_ON ||
             state == BluetoothAdapter.STATE_OFF) {
             mCachedDeviceManager.onBluetoothStateChanged(state ==
