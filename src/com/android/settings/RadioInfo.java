@@ -17,10 +17,12 @@
 package com.android.settings;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
 import android.content.res.Resources;
+import android.net.ConnectivityManager;
 import android.net.LinkProperties;
 import android.net.Uri;
 import android.os.AsyncResult;
@@ -856,13 +858,15 @@ public class RadioInfo extends Activity {
 
     private MenuItem.OnMenuItemClickListener mToggleData = new MenuItem.OnMenuItemClickListener() {
         public boolean onMenuItemClick(MenuItem item) {
+            ConnectivityManager cm =
+                    (ConnectivityManager)getSystemService(Context.CONNECTIVITY_SERVICE);
             int state = mTelephonyManager.getDataState();
             switch (state) {
                 case TelephonyManager.DATA_CONNECTED:
-                    phone.disableDataConnectivity();
+                    cm.setMobileDataEnabled(false);
                     break;
                 case TelephonyManager.DATA_DISCONNECTED:
-                    phone.enableDataConnectivity();
+                    cm.setMobileDataEnabled(true);
                     break;
                 default:
                     // do nothing
