@@ -225,7 +225,7 @@ public class InputMethodAndLanguageSettings extends SettingsPreferenceFragment {
             } else if (KEY_INPUT_METHOD.equals(preference.getKey())) {
                 final InputMethodManager imm = (InputMethodManager)
                         getSystemService(Context.INPUT_METHOD_SERVICE);
-                imm.showInputMethodSubtypePicker();
+                imm.showInputMethodPicker();
             } else if (preference.getIntent() == null) {
                 PreferenceScreen pref = (PreferenceScreen) preference;
                 String activityName = pref.getKey();
