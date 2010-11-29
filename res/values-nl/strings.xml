@@ -116,9 +116,11 @@
     <string name="device_picker" msgid="8721012448931226323">"Apparaatkiezer van Bluetooth"</string>
     <string name="bluetooth_permission_request" msgid="1523129741266262748">"Machtigingsverzoek voor Bluetooth"</string>
     <!-- outdated translation 2342558978033892004 -->     <string name="bluetooth_ask_enablement" msgid="8211158472876087588">"Een toepassing probeert Bluetooth in te schakelen. Wilt u dit toestaan?"</string>
-    <!-- outdated translation 669870705606180872 -->     <string name="bluetooth_ask_discovery" product="tablet" msgid="5950965604673262829">"Een toepassing probeert uw telefoon <xliff:g id="TIMEOUT">%1$d</xliff:g> seconden zichtbaar te maken voor andere Bluetooth-apparaten. Wilt u dit toestaan?"</string>
+    <!-- no translation found for bluetooth_ask_discovery (5950965604673262829) -->
+    <skip />
     <string name="bluetooth_ask_discovery" product="default" msgid="669870705606180872">"Een toepassing probeert uw telefoon <xliff:g id="TIMEOUT">%1$d</xliff:g> seconden zichtbaar te maken voor andere Bluetooth-apparaten. Wilt u dit toestaan?"</string>
-    <!-- outdated translation 7220210326619399542 -->     <string name="bluetooth_ask_enablement_and_discovery" product="tablet" msgid="5716077575971497298">"Een toepassing probeert Bluetooth in te schakelen en uw telefoon <xliff:g id="TIMEOUT">%1$d</xliff:g> seconden zichtbaar te maken voor andere apparaten. Wilt u dit toestaan?"</string>
+    <!-- no translation found for bluetooth_ask_enablement_and_discovery (5716077575971497298) -->
+    <skip />
     <string name="bluetooth_ask_enablement_and_discovery" product="default" msgid="7220210326619399542">"Een toepassing probeert Bluetooth in te schakelen en uw telefoon <xliff:g id="TIMEOUT">%1$d</xliff:g> seconden zichtbaar te maken voor andere apparaten. Wilt u dit toestaan?"</string>
     <string name="bluetooth_turning_on" msgid="3107102168379705771">"Bluetooth inschakelen…"</string>
     <string name="date_and_time" msgid="4114084177056654663">"Datum- en tijdinstellingen"</string>
@@ -461,12 +463,9 @@
     <string name="wifi_setting_sleep_policy_title" msgid="1367731352485585528">"Wi-Fi-slaapbeleid"</string>
     <string name="wifi_setting_sleep_policy_summary" msgid="7573693311804602041">"Overschakelen opgeven van Wi-Fi naar mobiele gegevens"</string>
     <string name="wifi_setting_sleep_policy_error" msgid="5103670439972135148">"Er is een probleem opgetreden bij het instellen van het slaapbeleid."</string>
-    <!-- no translation found for wifi_setting_frequency_band_title (7493768705046080060) -->
-    <skip />
-    <!-- no translation found for wifi_setting_frequency_band_summary (3250740757118009784) -->
-    <skip />
-    <!-- no translation found for wifi_setting_frequency_band_error (837281974489794378) -->
-    <skip />
+    <string name="wifi_setting_frequency_band_title" msgid="7493768705046080060">"Wi-Fi-frequentieband"</string>
+    <string name="wifi_setting_frequency_band_summary" msgid="3250740757118009784">"Het frequentiebereik voor gebruik opgeven"</string>
+    <string name="wifi_setting_frequency_band_error" msgid="837281974489794378">"Probleem bij instellen van het frequentiebeleid."</string>
     <string name="wifi_advanced_mac_address_title" msgid="6571335466330978393">"MAC-adres"</string>
     <string name="wifi_advanced_ip_address_title" msgid="6215297094363164846">"IP-adres"</string>
     <string name="wifi_ip_settings_titlebar" msgid="4345739031248760326">"IP-instellingen"</string>
@@ -639,7 +638,7 @@
     <string name="sd_mount_summary" product="default" msgid="4936591681679097699">"De SD-kaart koppelen"</string>
     <string name="sd_format" product="nosdcard" msgid="2148179271623099054">"USB-opslag wissen"</string>
     <string name="sd_format" product="default" msgid="2576054280507119870">"SD-kaart wissen"</string>
-    <!-- outdated translation 1504606546865152514 -->     <string name="sd_format_summary" product="nosdcard" msgid="6331905044907914603">"Hiermee worden alle gegevens in de interne USB-opslag van de telefoon gewist, zoals muziek en foto\'s"</string>
+    <string name="sd_format_summary" product="nosdcard" msgid="6331905044907914603">"Wist alle gegevens in de interne USB-opslag, zoals muziek en foto\'s"</string>
     <!-- outdated translation 1504606546865152514 -->     <string name="sd_format_summary" product="default" msgid="212703692181793109">"Hiermee worden alle gegevens in de interne USB-opslag van de telefoon gewist, zoals muziek en foto\'s"</string>
     <string name="sd_unavailable" msgid="8580107589533213904">"Niet beschikbaar"</string>
     <string name="read_only" msgid="6702420168629076340">" (Alleen-lezen)"</string>
@@ -693,24 +692,16 @@
     <string name="master_clear_title" msgid="5907939616087039756">"Fabrieksinstellingen terug"</string>
     <!-- outdated translation 4986154238001088492 -->     <string name="master_clear_summary" product="tablet" msgid="4036344100254678429">"Alle gegevens op de telefoon wissen"</string>
     <string name="master_clear_summary" product="default" msgid="4986154238001088492">"Alle gegevens op de telefoon wissen"</string>
-    <!-- unknown placeholder TAG_B_0 in master_clear_desc -->
-    <skip />
-    <!-- no translation found for master_clear_desc (1305457209008369655) -->
-    <skip />
-    <!-- unknown placeholder TAG_B_0 in master_clear_desc -->
-    <skip />
-    <!-- no translation found for master_clear_desc (2950536633526374209) -->
-    <skip />
-    <!-- no translation found for master_clear_accounts (6412857499147999073) -->
-    <skip />
-    <!-- no translation found for master_clear_desc_erase_external_storage (4740866328425123395) -->
-    <skip />
+    <string name="master_clear_desc" product="tablet" msgid="1305457209008369655">"Hiermee worden alle gegevens in de "<b>"interne opslag"</b>" van uw tablet gewist, waaronder:"\n\n<li>"Uw Google-account"</li>\n<li>"Gegevens en instellingen van het systeem en de toepassingen"</li>\n<li>"Gedownloade toepassingen"</li></string>
+    <string name="master_clear_desc" product="default" msgid="2950536633526374209">"Hiermee worden alle gegevens in de "<b>"interne opslag"</b>" van uw telefoon gewist, waaronder:"\n\n<li>"Uw Google-account"</li>\n<li>"Gegevens en instellingen van het systeem en de toepassingen"</li>\n<li>"Gedownloade toepassingen"</li></string>
+    <string name="master_clear_accounts" product="default" msgid="6412857499147999073">\n\n"U bent momenteel aangemeld bij de volgende accounts:"\n</string>
+    <string name="master_clear_desc_erase_external_storage" product="nosdcard" msgid="4740866328425123395">\n\n"Als u ook muziek, foto\'s en andere gebruikersgegevens wilt wissen, moet de "<b>"USB-opslag"</b>" worden gewist."</string>
     <!-- no translation found for master_clear_desc_erase_external_storage (7339100478676372901) -->
     <skip />
     <string name="erase_external_storage" product="nosdcard" msgid="969364037450286809">"USB-opslag wissen"</string>
     <string name="erase_external_storage" product="default" msgid="1397239046334307625">"SD-kaart wissen"</string>
-    <!-- outdated translation 1657838142707381027 -->     <string name="erase_external_storage_description" product="nosdcard" msgid="444834593696342279">"Alle gegevens in de interne USB-opslag van de telefoon wissen, zoals muziek en foto\'s."</string>
-    <!-- outdated translation 1657838142707381027 -->     <string name="erase_external_storage_description" product="default" msgid="46603515218075174">"Alle gegevens in de interne USB-opslag van de telefoon wissen, zoals muziek en foto\'s."</string>
+    <string name="erase_external_storage_description" product="nosdcard" msgid="444834593696342279">"Alle gegevens in de interne USB-opslag wissen, zoals muziek en foto\'s."</string>
+    <string name="erase_external_storage_description" product="default" msgid="46603515218075174">"Alle gegevens op de SD-kaart wissen, zoals muziek en foto\'s."</string>
     <!-- outdated translation 7550632653343157971 -->     <string name="master_clear_button_text" product="tablet" msgid="3130786116528304116">"Telefoon opnieuw instellen"</string>
     <string name="master_clear_button_text" product="default" msgid="7550632653343157971">"Telefoon opnieuw instellen"</string>
     <string name="master_clear_final_desc" msgid="6917971132484622696">"Alle persoonlijke gegevens en gedownloade toepassingen wissen? U kunt deze actie niet ongedaan maken."</string>
@@ -718,8 +709,7 @@
     <string name="master_clear_gesture_prompt" msgid="1428645764883536750">"Teken uw ontgrendelingspatroon"</string>
     <!-- outdated translation 8901714274312707918 -->     <string name="master_clear_gesture_explanation" msgid="2234954758550554549">"U moet uw ontgrendelingspatroon tekenen om het opnieuw instellen van de telefoon te bevestigen."</string>
     <string name="master_clear_failed" msgid="8655202125010189406">"Niet opnieuw ingesteld, omdat de service \'Systeem wissen\' niet beschikbaar is."</string>
-    <!-- no translation found for master_clear_confirm_title (4845794266129586839) -->
-    <skip />
+    <string name="master_clear_confirm_title" msgid="4845794266129586839">"Opnieuw instellen bevestigen"</string>
     <string name="media_format_title" product="nosdcard" msgid="3999653431422767156">"USB-opslag wissen"</string>
     <string name="media_format_title" product="default" msgid="4427528440306787972">"SD-kaart wissen"</string>
     <string name="media_format_summary" product="nosdcard" msgid="776603298628082065">"Alle gegevens in USB-opslag wissen"</string>
@@ -782,11 +772,9 @@
     <string name="assisted_gps" msgid="4649317129586736885">"Ondersteunde GPS gebruiken"</string>
     <string name="assisted_gps_enabled" msgid="8751899609589792803">"Server gebruiken ter ondersteuning van GPS (uitschakelen om het netwerkgebruik te beperken)"</string>
     <string name="assisted_gps_disabled" msgid="6982698333968010748">"Server gebruiken ter ondersteuning van GPS (uitschakelen om GPS-prestaties te verbeteren)"</string>
-    <!-- outdated translation 5447030582538504247 -->     <string name="use_location_title" msgid="3214740644957841179">"\'Mijn locatie\' gebruiken"</string>
-    <!-- no translation found for use_location_summary_disabled (1876901471649359806) -->
-    <skip />
-    <!-- no translation found for use_location_summary_enabled (984549156918597265) -->
-    <skip />
+    <string name="use_location_title" msgid="3214740644957841179">"Locatie gebruiken voor Google Zoeken"</string>
+    <string name="use_location_summary_disabled" msgid="1876901471649359806">"Locatie gebruiken voor Google Zoeken en andere Google-services"</string>
+    <string name="use_location_summary_enabled" msgid="984549156918597265">"Locatie wordt gebruikt om Google-zoekresultaten en andere Google-services te verbeteren"</string>
     <!-- outdated translation 1743378368185371685 -->     <string name="about_settings" product="tablet" msgid="593457295516533765">"Over de telefoon"</string>
     <string name="about_settings" product="default" msgid="1743378368185371685">"Over de telefoon"</string>
     <!-- outdated translation 3302263393543848667 -->     <string name="about_settings_summary" msgid="3371517697156165959">"Juridische info, telefoonstatus, softwareversie weergeven"</string>
@@ -803,7 +791,8 @@
     <string name="settings_license_activity_loading" msgid="3337535809093591740">"Laden..."</string>
     <string name="settings_safetylegal_title" msgid="1289483965535937431">"Veiligheidsinformatie"</string>
     <string name="settings_safetylegal_activity_title" msgid="6901214628496951727">"Veiligheidsinformatie"</string>
-    <!-- outdated translation 3198912875259612887 -->     <string name="settings_safetylegal_activity_unreachable" msgid="170670055116721810">"Uw telefoon heeft geen verbinding met een gegevensservice. Als u deze informatie nu wilt weergeven, gaat u op een computer met internetverbinding naar %s."</string>
+    <!-- no translation found for settings_safetylegal_activity_unreachable (170670055116721810) -->
+    <skip />
     <string name="settings_safetylegal_activity_loading" msgid="8059022597639516348">"Laden..."</string>
     <string name="lockpassword_choose_your_password_header" msgid="8624900666929394990">"Uw wachtwoord kiezen"</string>
     <string name="lockpassword_choose_your_pin_header" msgid="7598849519816138302">"Uw PIN-code kiezen"</string>

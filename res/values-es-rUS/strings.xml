@@ -115,9 +115,11 @@
     <string name="device_picker" msgid="8721012448931226323">"Selector de dispositivo Bluetooth"</string>
     <string name="bluetooth_permission_request" msgid="1523129741266262748">"Solicitud de permiso de Bluetooth"</string>
     <!-- outdated translation 2342558978033892004 -->     <string name="bluetooth_ask_enablement" msgid="8211158472876087588">"Una aplicación de tu teléfono solicita permiso para activar Bluetooth. ¿Deseas activarlo?"</string>
-    <!-- outdated translation 669870705606180872 -->     <string name="bluetooth_ask_discovery" product="tablet" msgid="5950965604673262829">"Una aplicación de tu teléfono solicita permiso para hacer que tu teléfono pueda ser detectable por otros dispositivos de Bluetooth durante <xliff:g id="TIMEOUT">%1$d</xliff:g> segundos. ¿Deseas activarlo?"</string>
+    <!-- no translation found for bluetooth_ask_discovery (5950965604673262829) -->
+    <skip />
     <string name="bluetooth_ask_discovery" product="default" msgid="669870705606180872">"Una aplicación de tu teléfono solicita permiso para hacer que tu teléfono pueda ser detectable por otros dispositivos de Bluetooth durante <xliff:g id="TIMEOUT">%1$d</xliff:g> segundos. ¿Deseas activarlo?"</string>
-    <!-- outdated translation 7220210326619399542 -->     <string name="bluetooth_ask_enablement_and_discovery" product="tablet" msgid="5716077575971497298">"Una aplicación de tu teléfono solicita permiso para activar Bluetooth y hacer que tu teléfono pueda ser detectable por otros dispositivos durante <xliff:g id="TIMEOUT">%1$d</xliff:g> segundos. ¿Deseas activarlo?"</string>
+    <!-- no translation found for bluetooth_ask_enablement_and_discovery (5716077575971497298) -->
+    <skip />
     <string name="bluetooth_ask_enablement_and_discovery" product="default" msgid="7220210326619399542">"Una aplicación de tu teléfono solicita permiso para activar Bluetooth y hacer que tu teléfono pueda ser detectable por otros dispositivos durante <xliff:g id="TIMEOUT">%1$d</xliff:g> segundos. ¿Deseas activarlo?"</string>
     <string name="bluetooth_turning_on" msgid="3107102168379705771">"Activando Bluetooth…"</string>
     <string name="date_and_time" msgid="4114084177056654663">"Configuración de fecha y hora"</string>
@@ -458,12 +460,9 @@
     <string name="wifi_setting_sleep_policy_title" msgid="1367731352485585528">"Política de estado de inactividad de Wi-Fi"</string>
     <string name="wifi_setting_sleep_policy_summary" msgid="7573693311804602041">"Especificar cuándo se debe cambiar de Wi-Fi a datos de celular"</string>
     <string name="wifi_setting_sleep_policy_error" msgid="5103670439972135148">"Se ha producido un problema al establecer la política de estado de inactividad."</string>
-    <!-- no translation found for wifi_setting_frequency_band_title (7493768705046080060) -->
-    <skip />
-    <!-- no translation found for wifi_setting_frequency_band_summary (3250740757118009784) -->
-    <skip />
-    <!-- no translation found for wifi_setting_frequency_band_error (837281974489794378) -->
-    <skip />
+    <string name="wifi_setting_frequency_band_title" msgid="7493768705046080060">"Banda de frecuencia Wi-Fi"</string>
+    <string name="wifi_setting_frequency_band_summary" msgid="3250740757118009784">"Especificar el rango de frecuencia de la operación"</string>
+    <string name="wifi_setting_frequency_band_error" msgid="837281974489794378">"Problema al configurar la banda de frecuencias."</string>
     <string name="wifi_advanced_mac_address_title" msgid="6571335466330978393">"Dirección de MAC"</string>
     <string name="wifi_advanced_ip_address_title" msgid="6215297094363164846">"Dirección IP"</string>
     <string name="wifi_ip_settings_titlebar" msgid="4345739031248760326">"Configuración de IP"</string>
@@ -636,7 +635,7 @@
     <string name="sd_mount_summary" product="default" msgid="4936591681679097699">"Montar la tarjeta SD"</string>
     <string name="sd_format" product="nosdcard" msgid="2148179271623099054">"Borrar almacenamiento USB"</string>
     <string name="sd_format" product="default" msgid="2576054280507119870">"Borrar la tarjeta SD"</string>
-    <!-- outdated translation 1504606546865152514 -->     <string name="sd_format_summary" product="nosdcard" msgid="6331905044907914603">"Borra todos los datos del almacenamiento USB interno del teléfono, como la música y las fotos"</string>
+    <string name="sd_format_summary" product="nosdcard" msgid="6331905044907914603">"Borra todos los datos del almacenamiento USB interno, como la música y las fotos"</string>
     <!-- outdated translation 1504606546865152514 -->     <string name="sd_format_summary" product="default" msgid="212703692181793109">"Borra todos los datos del almacenamiento USB interno del teléfono, como la música y las fotos"</string>
     <string name="sd_unavailable" msgid="8580107589533213904">"No disponible"</string>
     <string name="read_only" msgid="6702420168629076340">" (Sólo lectura)"</string>
@@ -690,24 +689,16 @@
     <string name="master_clear_title" msgid="5907939616087039756">"Restabl. datos de fábrica"</string>
     <!-- outdated translation 4986154238001088492 -->     <string name="master_clear_summary" product="tablet" msgid="4036344100254678429">"Borra todos los datos del teléfono"</string>
     <string name="master_clear_summary" product="default" msgid="4986154238001088492">"Borra todos los datos del teléfono"</string>
-    <!-- unknown placeholder TAG_B_0 in master_clear_desc -->
-    <skip />
-    <!-- no translation found for master_clear_desc (1305457209008369655) -->
-    <skip />
-    <!-- unknown placeholder TAG_B_0 in master_clear_desc -->
-    <skip />
-    <!-- no translation found for master_clear_desc (2950536633526374209) -->
-    <skip />
-    <!-- no translation found for master_clear_accounts (6412857499147999073) -->
-    <skip />
-    <!-- no translation found for master_clear_desc_erase_external_storage (4740866328425123395) -->
-    <skip />
+    <string name="master_clear_desc" product="tablet" msgid="1305457209008369655">"Esto borrará todos los datos del "<b>"almacenamiento interno"</b>" de tu tableta, incluidos "\n\n<li>"Tu cuenta de Google"</li>\n<li>"Datos del sistema y aplicaciones y configuración"</li>\n<li>"Aplicaciones descargadas"</li></string>
+    <string name="master_clear_desc" product="default" msgid="2950536633526374209">"Esto borrará todos los datos del "<b>"almacenamiento interno"</b>" del teléfono, incluidos "\n\n<li>"Tu cuenta de Google"</li>\n<li>"Datos del sistema y aplicaciones y configuración"</li>\n<li>"Aplicaciones descargadas"</li></string>
+    <string name="master_clear_accounts" product="default" msgid="6412857499147999073">\n\n"Actualmente has accedido a las siguientes cuentas:"\n</string>
+    <string name="master_clear_desc_erase_external_storage" product="nosdcard" msgid="4740866328425123395">\n\n"Para borrar la música, las imágenes y otros datos del usuario, debes borrar el "<b>"almacenamiento USB"</b>"."</string>
     <!-- no translation found for master_clear_desc_erase_external_storage (7339100478676372901) -->
     <skip />
     <string name="erase_external_storage" product="nosdcard" msgid="969364037450286809">"Borrar almacenamiento USB"</string>
     <string name="erase_external_storage" product="default" msgid="1397239046334307625">"Borrar la tarjeta SD"</string>
-    <!-- outdated translation 1657838142707381027 -->     <string name="erase_external_storage_description" product="nosdcard" msgid="444834593696342279">"Borrar todos los datos del almacenamiento USB del teléfono, como la música o las fotos."</string>
-    <!-- outdated translation 1657838142707381027 -->     <string name="erase_external_storage_description" product="default" msgid="46603515218075174">"Borrar todos los datos del almacenamiento USB del teléfono, como la música o las fotos."</string>
+    <string name="erase_external_storage_description" product="nosdcard" msgid="444834593696342279">"Borrar todos los datos del almacenamiento USB, como la música o las fotos."</string>
+    <string name="erase_external_storage_description" product="default" msgid="46603515218075174">"Borra todos los datos de la tarjeta SD, como la música o las fotos."</string>
     <!-- outdated translation 7550632653343157971 -->     <string name="master_clear_button_text" product="tablet" msgid="3130786116528304116">"Restablecer el teléfono"</string>
     <string name="master_clear_button_text" product="default" msgid="7550632653343157971">"Restablecer el teléfono"</string>
     <string name="master_clear_final_desc" msgid="6917971132484622696">"¿Deseas borrar toda tu información personal y cualquier aplicación descargada?"</string>
@@ -715,8 +706,7 @@
     <string name="master_clear_gesture_prompt" msgid="1428645764883536750">"Extrae tu patrón de desbloqueo"</string>
     <!-- outdated translation 8901714274312707918 -->     <string name="master_clear_gesture_explanation" msgid="2234954758550554549">"Debes extraer tu patrón de desbloqueo para confirmar el restablecimiento de un teléfono."</string>
     <string name="master_clear_failed" msgid="8655202125010189406">"No se ha realizado ningún restablecimiento debido a que el servicio \"Borrar sistema\" no se encuentra disponible."</string>
-    <!-- no translation found for master_clear_confirm_title (4845794266129586839) -->
-    <skip />
+    <string name="master_clear_confirm_title" msgid="4845794266129586839">"Confirmar restablecimiento"</string>
     <string name="media_format_title" product="nosdcard" msgid="3999653431422767156">"Borrar almacenamiento USB"</string>
     <string name="media_format_title" product="default" msgid="4427528440306787972">"Borrar la tarjeta SD"</string>
     <string name="media_format_summary" product="nosdcard" msgid="776603298628082065">"Borra todos los datos del almacenamiento USB"</string>
@@ -798,7 +788,8 @@
     <string name="settings_license_activity_loading" msgid="3337535809093591740">"Cargando…"</string>
     <string name="settings_safetylegal_title" msgid="1289483965535937431">"Información de seguridad"</string>
     <string name="settings_safetylegal_activity_title" msgid="6901214628496951727">"Información de seguridad"</string>
-    <!-- outdated translation 3198912875259612887 -->     <string name="settings_safetylegal_activity_unreachable" msgid="170670055116721810">"Tu teléfono no está conectado al servicio de datos. Para ver esta información ahora, visita %s desde cualquier computadora conectada a Internet."</string>
+    <!-- no translation found for settings_safetylegal_activity_unreachable (170670055116721810) -->
+    <skip />
     <string name="settings_safetylegal_activity_loading" msgid="8059022597639516348">"Cargando…"</string>
     <string name="lockpassword_choose_your_password_header" msgid="8624900666929394990">"Elegir la contraseña"</string>
     <string name="lockpassword_choose_your_pin_header" msgid="7598849519816138302">"Elige tu PIN"</string>
