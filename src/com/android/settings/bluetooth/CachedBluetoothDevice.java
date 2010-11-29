@@ -25,6 +25,7 @@ import android.app.AlertDialog;
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothClass;
 import android.bluetooth.BluetoothDevice;
+import android.bluetooth.BluetoothUuid;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.res.Resources;
@@ -584,42 +585,12 @@ public class CachedBluetoothDevice implements Comparable<CachedBluetoothDevice> 
 
         if (DEBUG) {
             Log.e(TAG, "updating profiles for " + mDevice.getName());
-
-            boolean printUuids = true;
             BluetoothClass bluetoothClass = mDevice.getBluetoothClass();
 
-            if (bluetoothClass != null) {
-                if (bluetoothClass.doesClassMatch(BluetoothClass.PROFILE_HEADSET) !=
-                    mProfiles.contains(Profile.HEADSET)) {
-                    Log.v(TAG, "headset classbits != uuid");
-                    printUuids = true;
-                }
-
-                if (bluetoothClass.doesClassMatch(BluetoothClass.PROFILE_A2DP) !=
-                    mProfiles.contains(Profile.A2DP)) {
-                    Log.v(TAG, "a2dp classbits != uuid");
-                    printUuids = true;
-                }
-
-                if (bluetoothClass.doesClassMatch(BluetoothClass.PROFILE_OPP) !=
-                    mProfiles.contains(Profile.OPP)) {
-                    Log.v(TAG, "opp classbits != uuid");
-                    printUuids = true;
-                }
-
-                if (bluetoothClass.doesClassMatch(BluetoothClass.PROFILE_HID) !=
-                    mProfiles.contains(Profile.HID)) {
-                    Log.v(TAG, "hid classbits != uuid");
-                    printUuids = true;
-                }
-            }
-
-            if (printUuids) {
-                if (bluetoothClass != null) Log.v(TAG, "Class: " + bluetoothClass.toString());
-                Log.v(TAG, "UUID:");
-                for (int i = 0; i < uuids.length; i++) {
-                    Log.v(TAG, "  " + uuids[i]);
-                }
+            if (bluetoothClass != null) Log.v(TAG, "Class: " + bluetoothClass.toString());
+            Log.v(TAG, "UUID:");
+            for (int i = 0; i < uuids.length; i++) {
+                Log.v(TAG, "  " + uuids[i]);
             }
         }
         return true;

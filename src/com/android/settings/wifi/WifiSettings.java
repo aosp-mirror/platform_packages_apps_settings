@@ -56,9 +56,10 @@ import android.view.View;
 import android.widget.AdapterView.AdapterContextMenuInfo;
 import android.widget.Toast;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
-import java.util.TreeSet;
+import java.util.concurrent.atomic.AtomicBoolean;
 
 /**
  * This currently provides three types of UI.
@@ -94,6 +95,8 @@ public class WifiSettings extends SettingsPreferenceFragment
 
     private DetailedState mLastState;
     private WifiInfo mLastInfo;
+
+    private AtomicBoolean mConnected = new AtomicBoolean(false);
 
     private int mKeyStoreNetworkId = INVALID_NETWORK_ID;
 
@@ -184,7 +187,7 @@ public class WifiSettings extends SettingsPreferenceFragment
         final ProgressCategoryBase preference =
                 (ProgressCategoryBase) findPreference("access_points");
         mAccessPoints = preference;
-        mAccessPoints.setOrderingAsAdded(true);
+        mAccessPoints.setOrderingAsAdded(false);
         mAddNetwork = findPreference("add_network");
 
         registerForContextMenu(getListView());
@@ -379,8 +382,7 @@ public class WifiSettings extends SettingsPreferenceFragment
     }
 
     private Collection<AccessPoint> constructAccessPoints() {
-        Collection<AccessPoint> accessPoints =
-                new TreeSet<AccessPoint>(new AccessPoint.Comparater());
+        Collection<AccessPoint> accessPoints = new ArrayList<AccessPoint>();
 
         final List<WifiConfiguration> configs = mWifiManager.getConfiguredNetworks();
         if (configs != null) {
@@ -424,11 +426,20 @@ public class WifiSettings extends SettingsPreferenceFragment
                 WifiManager.SUPPLICANT_CONFIG_CHANGED_ACTION.equals(action)) {
                 updateAccessPoints();
         } else if (WifiManager.SUPPLICANT_STATE_CHANGED_ACTION.equals(action)) {
-            updateConnectionState(WifiInfo.getDetailedStateOf((SupplicantState)
-                    intent.getParcelableExtra(WifiManager.EXTRA_NEW_STATE)));
+            //Ignore supplicant state changes when network is connected
+            //TODO: we should deprecate SUPPLICANT_STATE_CHANGED_ACTION and
+            //introduce a broadcast that combines the supplicant and network
+            //network state change events so the apps dont have to worry about
+            //ignoring supplicant state change when network is connected
+            //to get more fine grained information.
+            if (!mConnected.get()) {
+                updateConnectionState(WifiInfo.getDetailedStateOf((SupplicantState)
+                        intent.getParcelableExtra(WifiManager.EXTRA_NEW_STATE)));
+            }
         } else if (WifiManager.NETWORK_STATE_CHANGED_ACTION.equals(action)) {
             NetworkInfo info = (NetworkInfo) intent.getParcelableExtra(
                     WifiManager.EXTRA_NETWORK_INFO);
+            mConnected.set(info.isConnected());
             changeNextButtonState(info.isConnected());
             updateConnectionState(info.getDetailedState());
         } else if (WifiManager.RSSI_CHANGED_ACTION.equals(action)) {
