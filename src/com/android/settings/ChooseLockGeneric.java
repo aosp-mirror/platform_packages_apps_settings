@@ -29,6 +29,7 @@ import android.preference.PreferenceScreen;
 
 public class ChooseLockGeneric extends PreferenceActivity {
     private static final int MIN_PASSWORD_LENGTH = 4;
+    private static final String KEY_UNLOCK_SET_OFF = "unlock_set_off";
     private static final String KEY_UNLOCK_SET_NONE = "unlock_set_none";
     private static final String KEY_UNLOCK_SET_PIN = "unlock_set_pin";
     private static final String KEY_UNLOCK_SET_PASSWORD = "unlock_set_password";
@@ -68,14 +69,16 @@ public class ChooseLockGeneric extends PreferenceActivity {
             Preference preference) {
         final String key = preference.getKey();
         boolean handled = true;
-        if (KEY_UNLOCK_SET_NONE.equals(key)) {
-            updateUnlockMethodAndFinish(DevicePolicyManager.PASSWORD_QUALITY_UNSPECIFIED);
+        if (KEY_UNLOCK_SET_OFF.equals(key)) {
+            updateUnlockMethodAndFinish(DevicePolicyManager.PASSWORD_QUALITY_UNSPECIFIED, true);
+        } else if (KEY_UNLOCK_SET_NONE.equals(key)) {
+            updateUnlockMethodAndFinish(DevicePolicyManager.PASSWORD_QUALITY_UNSPECIFIED, false);
         } else if (KEY_UNLOCK_SET_PATTERN.equals(key)) {
-            updateUnlockMethodAndFinish(DevicePolicyManager.PASSWORD_QUALITY_SOMETHING);
+            updateUnlockMethodAndFinish(DevicePolicyManager.PASSWORD_QUALITY_SOMETHING, false);
         } else if (KEY_UNLOCK_SET_PIN.equals(key)) {
-            updateUnlockMethodAndFinish(DevicePolicyManager.PASSWORD_QUALITY_NUMERIC);
+            updateUnlockMethodAndFinish(DevicePolicyManager.PASSWORD_QUALITY_NUMERIC, false);
         } else if (KEY_UNLOCK_SET_PASSWORD.equals(key)) {
-            updateUnlockMethodAndFinish(DevicePolicyManager.PASSWORD_QUALITY_ALPHABETIC);
+            updateUnlockMethodAndFinish(DevicePolicyManager.PASSWORD_QUALITY_ALPHABETIC, false);
         } else {
             handled = false;
         }
@@ -113,7 +116,7 @@ public class ChooseLockGeneric extends PreferenceActivity {
             addPreferencesFromResource(R.xml.security_settings_picker);
             disableUnusablePreferences(mDPM.getPasswordQuality(null));
         } else {
-            updateUnlockMethodAndFinish(quality);
+            updateUnlockMethodAndFinish(quality, false);
         }
     }
 
@@ -131,7 +134,9 @@ public class ChooseLockGeneric extends PreferenceActivity {
             if (pref instanceof PreferenceScreen) {
                 final String key = ((PreferenceScreen) pref).getKey();
                 boolean enabled = true;
-                if (KEY_UNLOCK_SET_NONE.equals(key)) {
+                if (KEY_UNLOCK_SET_OFF.equals(key)) {
+                    enabled = quality <= DevicePolicyManager.PASSWORD_QUALITY_UNSPECIFIED;
+                } else if (KEY_UNLOCK_SET_NONE.equals(key)) {
                     enabled = quality <= DevicePolicyManager.PASSWORD_QUALITY_UNSPECIFIED;
                 } else if (KEY_UNLOCK_SET_PATTERN.equals(key)) {
                     enabled = quality <= DevicePolicyManager.PASSWORD_QUALITY_SOMETHING;
@@ -154,8 +159,10 @@ public class ChooseLockGeneric extends PreferenceActivity {
      * {@link DevicePolicyManager#PASSWORD_QUALITY_UNSPECIFIED}, password is cleared.
      *
      * @param quality the desired quality. Ignored if DevicePolicyManager requires more security.
+     * @param disabled whether or not to show LockScreen at all. Only meaningful when quality is
+     * {@link DevicePolicyManager#PASSWORD_QUALITY_UNSPECIFIED}
      */
-    void updateUnlockMethodAndFinish(int quality) {
+    void updateUnlockMethodAndFinish(int quality, boolean disabled) {
         // Sanity check. We should never get here without confirming user's existing password first.
         if (!mPasswordConfirmed) {
             throw new IllegalStateException("Tried to update password without confirming first");
@@ -191,6 +198,7 @@ public class ChooseLockGeneric extends PreferenceActivity {
             startActivity(intent);
         } else if (quality == DevicePolicyManager.PASSWORD_QUALITY_UNSPECIFIED) {
             mChooseLockSettingsHelper.utils().clearLock();
+            mChooseLockSettingsHelper.utils().setLockScreenDisabled(disabled);
             setResult(RESULT_OK);
         }
         finish();
