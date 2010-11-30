@@ -116,9 +116,11 @@
     <string name="device_picker" msgid="8721012448931226323">"Seleccionador de dispositivo Bluetooth"</string>
     <string name="bluetooth_permission_request" msgid="1523129741266262748">"Pedido de emparelhamento de Bluetooth"</string>
     <!-- outdated translation 2342558978033892004 -->     <string name="bluetooth_ask_enablement" msgid="8211158472876087588">"Uma aplicação no seu telefone está a solicitar autorização para activar o Bluetooth. Pretende fazê-lo?"</string>
-    <!-- outdated translation 669870705606180872 -->     <string name="bluetooth_ask_discovery" product="tablet" msgid="5950965604673262829">"Uma aplicação do seu telefone está a solicitar autorização para que o seu telefone possa ser detectado por outros dispositivos Bluetooth durante <xliff:g id="TIMEOUT">%1$d</xliff:g> segundos. Pretende fazê-lo?"</string>
+    <!-- no translation found for bluetooth_ask_discovery (5950965604673262829) -->
+    <skip />
     <string name="bluetooth_ask_discovery" product="default" msgid="669870705606180872">"Uma aplicação do seu telefone está a solicitar autorização para que o seu telefone possa ser detectado por outros dispositivos Bluetooth durante <xliff:g id="TIMEOUT">%1$d</xliff:g> segundos. Pretende fazê-lo?"</string>
-    <!-- outdated translation 7220210326619399542 -->     <string name="bluetooth_ask_enablement_and_discovery" product="tablet" msgid="5716077575971497298">"Uma aplicação do seu telefone está a solicitar autorização para activar o Bluetooth e para que o seu telefone possa ser detectado por outros dispositivos durante <xliff:g id="TIMEOUT">%1$d</xliff:g> segundos. Pretende fazê-lo?"</string>
+    <!-- no translation found for bluetooth_ask_enablement_and_discovery (5716077575971497298) -->
+    <skip />
     <string name="bluetooth_ask_enablement_and_discovery" product="default" msgid="7220210326619399542">"Uma aplicação do seu telefone está a solicitar autorização para activar o Bluetooth e para que o seu telefone possa ser detectado por outros dispositivos durante <xliff:g id="TIMEOUT">%1$d</xliff:g> segundos. Pretende fazê-lo?"</string>
     <string name="bluetooth_turning_on" msgid="3107102168379705771">"A ligar Bluetooth..."</string>
     <string name="date_and_time" msgid="4114084177056654663">"Definições de data e hora"</string>
@@ -461,12 +463,9 @@
     <string name="wifi_setting_sleep_policy_title" msgid="1367731352485585528">"Política de suspensão Wi-Fi"</string>
     <string name="wifi_setting_sleep_policy_summary" msgid="7573693311804602041">"Especificar quando mudar de Wi-Fi para dados móveis"</string>
     <string name="wifi_setting_sleep_policy_error" msgid="5103670439972135148">"Ocorreu um problema ao definir a política de suspensão."</string>
-    <!-- no translation found for wifi_setting_frequency_band_title (7493768705046080060) -->
-    <skip />
-    <!-- no translation found for wifi_setting_frequency_band_summary (3250740757118009784) -->
-    <skip />
-    <!-- no translation found for wifi_setting_frequency_band_error (837281974489794378) -->
-    <skip />
+    <string name="wifi_setting_frequency_band_title" msgid="7493768705046080060">"Banda de frequência Wi-Fi"</string>
+    <string name="wifi_setting_frequency_band_summary" msgid="3250740757118009784">"Especifique o intervalo de frequência de operação"</string>
+    <string name="wifi_setting_frequency_band_error" msgid="837281974489794378">"Problema ao definir a banda de frequência."</string>
     <string name="wifi_advanced_mac_address_title" msgid="6571335466330978393">"Endereço MAC"</string>
     <string name="wifi_advanced_ip_address_title" msgid="6215297094363164846">"Endereço IP"</string>
     <string name="wifi_ip_settings_titlebar" msgid="4345739031248760326">"Definições de IP"</string>
@@ -639,7 +638,7 @@
     <string name="sd_mount_summary" product="default" msgid="4936591681679097699">"Instalar cartão SD"</string>
     <string name="sd_format" product="nosdcard" msgid="2148179271623099054">"Apagar armazenamento USB"</string>
     <string name="sd_format" product="default" msgid="2576054280507119870">"Apagar cartão SD"</string>
-    <!-- outdated translation 1504606546865152514 -->     <string name="sd_format_summary" product="nosdcard" msgid="6331905044907914603">"Apaga todos os dados no armaz. USB interno do telemóvel, como músicas ou fotografias"</string>
+    <string name="sd_format_summary" product="nosdcard" msgid="6331905044907914603">"Apaga todos os dados do armazenamento USB interno, como músicas e fotografias"</string>
     <!-- outdated translation 1504606546865152514 -->     <string name="sd_format_summary" product="default" msgid="212703692181793109">"Apaga todos os dados no armaz. USB interno do telemóvel, como músicas ou fotografias"</string>
     <string name="sd_unavailable" msgid="8580107589533213904">"Indisponível"</string>
     <string name="read_only" msgid="6702420168629076340">" (Só de leitura)"</string>
@@ -693,24 +692,16 @@
     <string name="master_clear_title" msgid="5907939616087039756">"Reposição dos dados de fábrica"</string>
     <!-- outdated translation 4986154238001088492 -->     <string name="master_clear_summary" product="tablet" msgid="4036344100254678429">"Apaga todos os dados do telefone"</string>
     <string name="master_clear_summary" product="default" msgid="4986154238001088492">"Apaga todos os dados do telefone"</string>
-    <!-- unknown placeholder TAG_B_0 in master_clear_desc -->
-    <skip />
-    <!-- no translation found for master_clear_desc (1305457209008369655) -->
-    <skip />
-    <!-- unknown placeholder TAG_B_0 in master_clear_desc -->
-    <skip />
-    <!-- no translation found for master_clear_desc (2950536633526374209) -->
-    <skip />
-    <!-- no translation found for master_clear_accounts (6412857499147999073) -->
-    <skip />
-    <!-- no translation found for master_clear_desc_erase_external_storage (4740866328425123395) -->
-    <skip />
+    <string name="master_clear_desc" product="tablet" msgid="1305457209008369655">"Serão apagados todos os dados do "<b>"armazenamento interno"</b>" do tablet, incluindo:"\n\n<li>"A sua conta Google"</li>\n<li>"Dados e definições do sistema e das aplicações"</li>\n<li>"Aplicações transferidas"</li></string>
+    <string name="master_clear_desc" product="default" msgid="2950536633526374209">"Serão apagados todos os dados do "<b>"armazenamento interno"</b>" do telefone, incluindo:"\n\n<li>"A sua conta Google"</li>\n<li>"Dados e definições do sistema e das aplicações"</li>\n<li>"Aplicações transferidas"</li></string>
+    <string name="master_clear_accounts" product="default" msgid="6412857499147999073">\n\n"Actualmente, tem sessão iniciada nas seguintes contas:"\n</string>
+    <string name="master_clear_desc_erase_external_storage" product="nosdcard" msgid="4740866328425123395">\n\n"Para limpar também músicas, imagens e outros dados do utilizador, é necessário apagar o "<b>"armazenamento USB"</b>"."</string>
     <!-- no translation found for master_clear_desc_erase_external_storage (7339100478676372901) -->
     <skip />
     <string name="erase_external_storage" product="nosdcard" msgid="969364037450286809">"Apagar armazenamento USB"</string>
     <string name="erase_external_storage" product="default" msgid="1397239046334307625">"Apagar cartão SD"</string>
-    <!-- outdated translation 1657838142707381027 -->     <string name="erase_external_storage_description" product="nosdcard" msgid="444834593696342279">"Apaga todos os dados no armaz. USB interno do telemóvel, tais como músicas ou fotografias."</string>
-    <!-- outdated translation 1657838142707381027 -->     <string name="erase_external_storage_description" product="default" msgid="46603515218075174">"Apaga todos os dados no armaz. USB interno do telemóvel, tais como músicas ou fotografias."</string>
+    <string name="erase_external_storage_description" product="nosdcard" msgid="444834593696342279">"Apaga todos os dados do armazenamento USB interno, como músicas ou fotografias."</string>
+    <string name="erase_external_storage_description" product="default" msgid="46603515218075174">"Apaga todos os dados do cartão SD, como músicas ou fotografias."</string>
     <!-- outdated translation 7550632653343157971 -->     <string name="master_clear_button_text" product="tablet" msgid="3130786116528304116">"Repor telefone"</string>
     <string name="master_clear_button_text" product="default" msgid="7550632653343157971">"Repor telefone"</string>
     <string name="master_clear_final_desc" msgid="6917971132484622696">"Apagar todas as informações pessoais e as aplicações transferidas? Não é possível reverter esta acção!"</string>
@@ -718,8 +709,7 @@
     <string name="master_clear_gesture_prompt" msgid="1428645764883536750">"Desenhe o seu padrão de desbloqueio"</string>
     <!-- outdated translation 8901714274312707918 -->     <string name="master_clear_gesture_explanation" msgid="2234954758550554549">"Tem de desenhar o seu padrão de desbloqueio para confirmar uma reposição do telefone."</string>
     <string name="master_clear_failed" msgid="8655202125010189406">"Não  foi efectuada nenhuma reposição porque o serviço System Clear não está disponível."</string>
-    <!-- no translation found for master_clear_confirm_title (4845794266129586839) -->
-    <skip />
+    <string name="master_clear_confirm_title" msgid="4845794266129586839">"Confirmar reposição"</string>
     <string name="media_format_title" product="nosdcard" msgid="3999653431422767156">"Apagar armazenamento USB"</string>
     <string name="media_format_title" product="default" msgid="4427528440306787972">"Apagar cartão SD"</string>
     <string name="media_format_summary" product="nosdcard" msgid="776603298628082065">"Apaga todos dados armaz. USB"</string>
@@ -782,11 +772,9 @@
     <string name="assisted_gps" msgid="4649317129586736885">"Utilizar GPS assistido"</string>
     <string name="assisted_gps_enabled" msgid="8751899609589792803">"Utilizar o servidor para auxiliar o GPS (desmarque esta opção para reduzir a utilização da rede)"</string>
     <string name="assisted_gps_disabled" msgid="6982698333968010748">"Utilizar o servidor para auxiliar o GPS (desmarque esta opção para melhorar o desempenho do GPS)"</string>
-    <!-- outdated translation 5447030582538504247 -->     <string name="use_location_title" msgid="3214740644957841179">"Utilizar A minha localização"</string>
-    <!-- no translation found for use_location_summary_disabled (1876901471649359806) -->
-    <skip />
-    <!-- no translation found for use_location_summary_enabled (984549156918597265) -->
-    <skip />
+    <string name="use_location_title" msgid="3214740644957841179">"Usar localização para pesquisa Google"</string>
+    <string name="use_location_summary_disabled" msgid="1876901471649359806">"Usar A minha localização para a pesquisa Google e outros serviços Google"</string>
+    <string name="use_location_summary_enabled" msgid="984549156918597265">"Localização utilizada para melhorar os resultados de pesquisa do Google e outros serviços Google"</string>
     <!-- outdated translation 1743378368185371685 -->     <string name="about_settings" product="tablet" msgid="593457295516533765">"Acerca do telefone"</string>
     <string name="about_settings" product="default" msgid="1743378368185371685">"Acerca do telefone"</string>
     <!-- outdated translation 3302263393543848667 -->     <string name="about_settings_summary" msgid="3371517697156165959">"Ver informações jurídicas, estado do telefone, versão de software"</string>
@@ -803,7 +791,8 @@
     <string name="settings_license_activity_loading" msgid="3337535809093591740">"A carregar..."</string>
     <string name="settings_safetylegal_title" msgid="1289483965535937431">"Informações de segurança"</string>
     <string name="settings_safetylegal_activity_title" msgid="6901214628496951727">"Informações de segurança"</string>
-    <!-- outdated translation 3198912875259612887 -->     <string name="settings_safetylegal_activity_unreachable" msgid="170670055116721810">"O seu telefone não se encontra ligado a um serviço de dados. Para ver esta informação agora, aceda a %s a partir de qualquer computador ligado à Internet."</string>
+    <!-- no translation found for settings_safetylegal_activity_unreachable (170670055116721810) -->
+    <skip />
     <string name="settings_safetylegal_activity_loading" msgid="8059022597639516348">"A carregar..."</string>
     <string name="lockpassword_choose_your_password_header" msgid="8624900666929394990">"Escolher palavra-passe"</string>
     <string name="lockpassword_choose_your_pin_header" msgid="7598849519816138302">"Escolha o PIN"</string>
