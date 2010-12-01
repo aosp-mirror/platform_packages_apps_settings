@@ -25,9 +25,9 @@
             android:title="@string/lock_after_timeout"
             android:summary="@string/lock_after_timeout_summary"
             android:entries="@array/lock_after_timeout_entries"
-            android:entryValues="@array/lock_after_timeout_values" 
+            android:entryValues="@array/lock_after_timeout_values"
             android:persistent="false"/>
-            
+
         <PreferenceScreen
             android:key="unlock_set_or_change"
             android:title="@string/unlock_set_unlock_launch_picker_change_title"
@@ -41,6 +41,12 @@
         <CheckBoxPreference
             android:key="unlock_tactile_feedback"
             android:title="@string/lockpattern_settings_enable_tactile_feedback_title"/>
+
+        <PreferenceScreen
+            android:fragment="com.android.settings.OwnerInfoSettings"
+            android:key="owner_info_settings"
+            android:title="@string/owner_info_settings_title"
+            android:summary="@string/owner_info_settings_summary"/>
 
     </PreferenceCategory>
 
