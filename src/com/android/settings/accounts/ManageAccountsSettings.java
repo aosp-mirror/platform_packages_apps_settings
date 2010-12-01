@@ -14,9 +14,12 @@
  * limitations under the License.
  */
 
-package com.android.settings;
+package com.android.settings.accounts;
 
-import com.android.settings.SettingsPreferenceFragment.SettingsDialogFragment;
+import com.android.settings.AccountPreference;
+import com.android.settings.DialogCreatable;
+import com.android.settings.R;
+import com.android.settings.vpn.VpnTypeSelection;
 import com.google.android.collect.Maps;
 
 import android.accounts.Account;
@@ -39,8 +42,8 @@ import android.net.ConnectivityManager;
 import android.os.Bundle;
 import android.preference.CheckBoxPreference;
 import android.preference.Preference;
+import android.preference.PreferenceActivity;
 import android.preference.PreferenceCategory;
-import android.preference.PreferenceFragment;
 import android.preference.PreferenceScreen;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -57,9 +60,9 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
 
-public class ManageAccountsSettings extends PreferenceFragment
- implements OnAccountsUpdateListener,
-        DialogCreatable {
+public class ManageAccountsSettings extends AccountPreferenceBase
+        implements OnAccountsUpdateListener, DialogCreatable {
+
     private static final String TAG = ManageAccountsSettings.class.getSimpleName();
 
     private static final String AUTHORITIES_FILTER_KEY = "authorities";
@@ -71,6 +74,8 @@ public class ManageAccountsSettings extends PreferenceFragment
     private static final int DIALOG_DISABLE_BACKGROUND_DATA = 1;
 
     private static final int MENU_ADD_ACCOUNT = Menu.FIRST;
+
+    private static final int REQUEST_SHOW_SYNC_SETTINGS = 1;
 
     private CheckBoxPreference mBackgroundDataCheckBox;
     private PreferenceCategory mManageAccountsCategory;
@@ -90,6 +95,8 @@ public class ManageAccountsSettings extends PreferenceFragment
     public void onCreate(Bundle icicle) {
         super.onCreate(icicle);
 
+        addPreferencesFromResource(R.xml.manage_accounts_settings);
+        AccountManager.get(getActivity()).addOnAccountsUpdatedListener(this, null, true);
         setHasOptionsMenu(true);
     }
 
@@ -101,17 +108,10 @@ public class ManageAccountsSettings extends PreferenceFragment
     }
 
     @Override
-    public void onResume() {
-        super.onResume();
-        onSyncStateUpdated();
-    }
-
-    @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
         final Activity activity = getActivity();
-        addPreferencesFromResource(R.xml.manage_accounts_settings);
         final View view = getView();
 
         mErrorInfoView = (TextView)view.findViewById(R.id.sync_settings_error_info);
@@ -126,8 +126,7 @@ public class ManageAccountsSettings extends PreferenceFragment
         mManageAccountsCategory = (PreferenceCategory)findPreference(MANAGE_ACCOUNTS_CATEGORY_KEY);
         mAuthorities = activity.getIntent().getStringArrayExtra(AUTHORITIES_FILTER_KEY);
 
-        AccountManager.get(activity).addOnAccountsUpdatedListener(this, null, true);
-        updateAuthDescriptions(activity);
+        updateAuthDescriptions();
     }
 
     @Override
@@ -156,10 +155,21 @@ public class ManageAccountsSettings extends PreferenceFragment
         } else if (preference == mAutoSyncCheckbox) {
             ContentResolver.setMasterSyncAutomatically(mAutoSyncCheckbox.isChecked());
             onSyncStateUpdated();
+        } else if (preference instanceof AccountPreference) {
+            startAccountSettings((AccountPreference) preference);
         } else {
             return false;
         }
         return true;
+    }
+
+    private void startAccountSettings(AccountPreference acctPref) {
+        Bundle args = new Bundle();
+        args.putParcelable(AccountSyncSettings.ACCOUNT_KEY, acctPref.getAccount());
+        ((PreferenceActivity) getActivity()).startPreferencePanel(
+                AccountSyncSettings.class.getCanonicalName(), args,
+                R.string.account_sync_settings_title, acctPref.getAccount().name,
+                this, REQUEST_SHOW_SYNC_SETTINGS);
     }
 
     @Override
@@ -187,7 +197,7 @@ public class ManageAccountsSettings extends PreferenceFragment
         return null;
     }
 
-    void showDialog(int dialogId) {
+    public void showDialog(int dialogId) {
         if (mDialogFragment != null) {
             Log.e(TAG, "Old dialog fragment not null!");
         }
@@ -216,7 +226,7 @@ public class ManageAccountsSettings extends PreferenceFragment
         connManager.setBackgroundDataSetting(enabled);
     }
 
-    private void onSyncStateUpdated() {
+    protected void onSyncStateUpdated() {
         // Set background connection state
         final ConnectivityManager connManager = (ConnectivityManager)
                 getActivity().getSystemService(Context.CONNECTIVITY_SERVICE);
@@ -320,7 +330,7 @@ public class ManageAccountsSettings extends PreferenceFragment
         onSyncStateUpdated();
     }
 
-    private void onAuthDescriptionsUpdated() {
+    protected void onAuthDescriptionsUpdated() {
         // Update account icons for all account preference items
         for (int i = 0; i < mManageAccountsCategory.getPreferenceCount(); i++) {
             AccountPreference pref = (AccountPreference) mManageAccountsCategory.getPreference(i);
@@ -333,65 +343,5 @@ public class ManageAccountsSettings extends PreferenceFragment
         Intent intent = new Intent("android.settings.ADD_ACCOUNT_SETTINGS");
         intent.putExtra(AUTHORITIES_FILTER_KEY, mAuthorities);
         startActivity(intent);
-    }
-
-    /* The logic below is copied from AcountPrefernceBase */
-
-    private Drawable getDrawableForType(final String accountType) {
-        Drawable icon = null;
-        if (mTypeToAuthDescription.containsKey(accountType)) {
-            try {
-                AuthenticatorDescription desc = mTypeToAuthDescription.get(accountType);
-                Context authContext = getActivity().createPackageContext(desc.packageName, 0);
-                icon = authContext.getResources().getDrawable(desc.iconId);
-            } catch (PackageManager.NameNotFoundException e) {
-                // TODO: place holder icon for missing account icons?
-                Log.w(TAG, "No icon for account type " + accountType);
-            }
-        }
-        return icon;
-    }
-
-    private CharSequence getLabelForType(final String accountType) {
-        CharSequence label = null;
-        if (mTypeToAuthDescription.containsKey(accountType)) {
-             try {
-                 AuthenticatorDescription desc = mTypeToAuthDescription.get(accountType);
-                 Context authContext = getActivity().createPackageContext(desc.packageName, 0);
-                 label = authContext.getResources().getText(desc.labelId);
-             } catch (PackageManager.NameNotFoundException e) {
-                 Log.w(TAG, "No label for account type " + ", type " + accountType);
-             }
-        }
-        return label;
-    }
-
-    private ArrayList<String> getAuthoritiesForAccountType(String type) {
-        if (mAccountTypeToAuthorities == null) {
-            mAccountTypeToAuthorities = Maps.newHashMap();
-            SyncAdapterType[] syncAdapters = ContentResolver.getSyncAdapterTypes();
-            for (int i = 0, n = syncAdapters.length; i < n; i++) {
-                final SyncAdapterType sa = syncAdapters[i];
-                ArrayList<String> authorities = mAccountTypeToAuthorities.get(sa.accountType);
-                if (authorities == null) {
-                    authorities = new ArrayList<String>();
-                    mAccountTypeToAuthorities.put(sa.accountType, authorities);
-                }
-                if (LDEBUG) {
-                    Log.d(TAG, "added authority " + sa.authority + " to accountType "
-                            + sa.accountType);
-                }
-                authorities.add(sa.authority);
-            }
-        }
-        return mAccountTypeToAuthorities.get(type);
-    }
-
-    private void updateAuthDescriptions(Context context) {
-        mAuthDescs = AccountManager.get(context).getAuthenticatorTypes();
-        for (int i = 0; i < mAuthDescs.length; i++) {
-            mTypeToAuthDescription.put(mAuthDescs[i].type, mAuthDescs[i]);
-        }
-        onAuthDescriptionsUpdated();
     }
 }
