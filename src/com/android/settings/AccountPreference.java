@@ -52,10 +52,6 @@ public class AccountPreference extends Preference {
         setWidgetLayoutResource(R.layout.account_preference);
         setTitle(mAccount.name);
         setSummary("");
-        // Add account info to the intent for AccountSyncSettings
-        Intent intent = new Intent("android.settings.ACCOUNT_SYNC_SETTINGS");
-        intent.putExtra("account", mAccount);
-        setIntent(intent);
         setPersistent(false);
         setSyncStatus(SYNC_DISABLED);
     }

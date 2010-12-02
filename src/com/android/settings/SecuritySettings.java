@@ -58,7 +58,7 @@ import java.util.Observer;
 /**
  * Gesture lock pattern settings.
  */
-public class SecuritySettings extends SettingsPreferenceFragment 
+public class SecuritySettings extends SettingsPreferenceFragment
         implements OnPreferenceChangeListener {
     private static final String KEY_UNLOCK_SET_OR_CHANGE = "unlock_set_or_change";
 
@@ -107,11 +107,11 @@ public class SecuritySettings extends SettingsPreferenceFragment
     // This is necessary because the Network Location Provider can change settings
     // if the user does not confirm enabling the provider.
     private ContentQueryMap mContentQueryMap;
-    
+
     private ChooseLockSettingsHelper mChooseLockSettingsHelper;
     private LockPatternUtils mLockPatternUtils;
     private ListPreference mLockAfter;
-    
+
     private SettingsObserver mSettingsObserver;
 
     private final class SettingsObserver implements Observer {
@@ -183,24 +183,30 @@ public class SecuritySettings extends SettingsPreferenceFragment
 
         PreferenceManager pm = getPreferenceManager();
 
-        // Lock screen
+        // Add options for lock/unlock screen
+        int resid = 0;
         if (!mLockPatternUtils.isSecure()) {
-            addPreferencesFromResource(R.xml.security_settings_chooser);
+            if (mLockPatternUtils.isLockScreenDisabled()) {
+                resid = R.xml.security_settings_lockscreen;
+            } else {
+                resid = R.xml.security_settings_chooser;
+            }
         } else {
             switch (mLockPatternUtils.getKeyguardStoredPasswordQuality()) {
                 case DevicePolicyManager.PASSWORD_QUALITY_SOMETHING:
-                    addPreferencesFromResource(R.xml.security_settings_pattern);
+                    resid = R.xml.security_settings_pattern;
                     break;
                 case DevicePolicyManager.PASSWORD_QUALITY_NUMERIC:
-                    addPreferencesFromResource(R.xml.security_settings_pin);
+                    resid = R.xml.security_settings_pin;
                     break;
                 case DevicePolicyManager.PASSWORD_QUALITY_ALPHABETIC:
                 case DevicePolicyManager.PASSWORD_QUALITY_ALPHANUMERIC:
                 case DevicePolicyManager.PASSWORD_QUALITY_COMPLEX:
-                    addPreferencesFromResource(R.xml.security_settings_password);
+                    resid = R.xml.security_settings_password;
                     break;
             }
         }
+        addPreferencesFromResource(resid);
 
         // lock after preference
         mLockAfter = setupLockAfterPreference(pm);
@@ -276,14 +282,14 @@ public class SecuritySettings extends SettingsPreferenceFragment
     private ListPreference setupLockAfterPreference(PreferenceManager pm) {
         ListPreference result = (ListPreference) pm.findPreference(LOCK_AFTER_TIMEOUT_KEY);
         if (result != null) {
-            int lockAfterValue = Settings.Secure.getInt(getContentResolver(), 
-                    Settings.Secure.LOCK_SCREEN_LOCK_AFTER_TIMEOUT, 
+            int lockAfterValue = Settings.Secure.getInt(getContentResolver(),
+                    Settings.Secure.LOCK_SCREEN_LOCK_AFTER_TIMEOUT,
                     FALLBACK_LOCK_AFTER_TIMEOUT_VALUE);
             result.setValue(String.valueOf(lockAfterValue));
             result.setOnPreferenceChangeListener(this);
             final long adminTimeout = mDPM != null ? mDPM.getMaximumTimeToLock(null) : 0;
             final ContentResolver cr = getContentResolver();
-            final long displayTimeout = Math.max(0, 
+            final long displayTimeout = Math.max(0,
                     Settings.System.getInt(cr, SCREEN_OFF_TIMEOUT, 0));
             if (adminTimeout > 0) {
                 // This setting is a slave to display timeout when a device policy is enforced.
@@ -377,9 +383,12 @@ public class SecuritySettings extends SettingsPreferenceFragment
         } else if (preference == mAssistedGps) {
             Settings.Secure.putInt(getContentResolver(), Settings.Secure.ASSISTED_GPS_ENABLED,
                     mAssistedGps.isChecked() ? 1 : 0);
+        } else {
+            // If we didn't handle it, let preferences handle it.
+            return super.onPreferenceTreeClick(preferenceScreen, preference);
         }
 
-        return false;
+        return true;
     }
 
     /*
@@ -501,7 +510,7 @@ public class SecuritySettings extends SettingsPreferenceFragment
                 Boolean bval = (Boolean)value;
                 mWillEnableEncryptedFS = bval.booleanValue();
                 showSwitchEncryptedFSDialog();
-            } 
+            }
             return true;
         }
 

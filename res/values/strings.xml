@@ -566,8 +566,12 @@
     <string name="lock_after_timeout_summary">Adjust the delay before the device automatically locks</string>
     <!-- Text shown next to checkbox for showing owner info on LockScreen [CHAR LIMIT=50]-->
     <string name="show_owner_info_on_lockscreen_label">Show owner info on lock screen</string>
-    <!-- Text shown on top-level settings for owner info [CHAR LIMIT=20]-->
+    <!-- Text shown for title of owner info setting [CHAR LIMIT=20]-->
     <string name="owner_info_settings_title">Owner info</string>
+    <!-- Text shown for summary of owner info setting [CHAR LIMIT=40]-->
+    <string name="owner_info_settings_summary">Set or disable showing owner info on lock screen</string>
+    <!-- Hint text shown in owner info edit text [CHAR LIMIT=50] -->
+    <string name="owner_info_settings_edit_text_hint">Enter text to display on the lock screen</string>
     <!-- Main Settings screen setting option title for the item to take you the security and location screen -->
     <string name="security_settings_title">Location &amp; security</string>
     <!-- Location & security settings screen title -->
@@ -597,6 +601,12 @@
 
     <!--  Summary for PreferenceScreen to changeecurity method: None/Pattern/PIN/Password [CHAR LIMIT=45]  -->
     <string name="unlock_set_unlock_launch_picker_change_summary">Change or disable pattern, PIN, or password security</string>
+
+    <!--  Title for PreferenceScreen to enable any lockscreen method: None/Pattern/PIN/Password [CHAR LIMIT=22] -->
+    <string name="unlock_set_unlock_launch_picker_enable_title">Enable screen lock</string>
+
+    <!--  Summary for PreferenceScreen to changeecurity method: None/Pattern/PIN/Password [CHAR LIMIT=45]  -->
+    <string name="unlock_set_unlock_launch_picker_enable_summary">Choose a method to lock the screen</string>
 
     <!-- Title for preference that disables unlock security [CHAR LIMIT=22] -->
     <string name="unlock_set_unlock_off_title">Off</string>
@@ -2448,7 +2458,7 @@ found in the list of installed applications.</string>
 
     <!-- Activity title for battery usage history details -->
     <string name="history_details_title">History details</string>
-    
+
     <!-- Activity title for battery usage details for an app. or power consumer -->
     <string name="details_title">Use details</string>
     <!-- Subtitle for application/subsystem details -->
@@ -3007,6 +3017,8 @@ found in the list of installed applications.</string>
     <!-- Do not translate. This is a stub which will be removed soon. -->
     <string name="time_zone_auto_stub" translatable="false">Select Time Zone</string>
 
+    <!-- Account specific sync settings title [CHAR LIMIT=35] -->
+    <string name="account_sync_settings_title">Sync settings</string>
     <!-- Message when sync is currently failing [CHAR LIMIT=100] -->
     <string name="sync_is_failing">Sync is currently experiencing problems. It will be back shortly.</string>
     <!-- Button label to add an account [CHAR LIMIT=20] -->
@@ -3037,5 +3049,74 @@ found in the list of installed applications.</string>
     <string name="sync_disabled">Sync is OFF</string>
     <!-- Sync status shown when last sync resulted in an error [CHAR LIMIT=20] -->
     <string name="sync_error">Sync error</string>
+
+    <!-- Title of the feed synchronization activity. -->
+    <string name="app_label">Account and Sync Settings</string>
+    <!-- Error message when the sync tried to delete too many things -->
+    <string name="sync_too_many_deletes">Delete limit exceeded</string>
+    <!-- Data synchronization settings screen, setting option name -->
+    <string name="settings_backup">Back up settings</string>
+    <!-- Data synchronization settings screen, setting option summary text when check box is selected -->
+    <string name="settings_backup_summary">Back up my settings</string>
+    <!-- Data synchronization settings screen, menu option -->
+    <string name="sync_menu_sync_now">Sync now</string>
+    <!-- Data synchronization settings screen, menu option -->
+    <string name="sync_menu_sync_cancel">Cancel sync</string>
+    <!-- Data synchronization settings screen, summary of a sync provider (for example, Gmail) when autosync is off and the user wants to do a one-time sync. -->
+    <string name="sync_one_time_sync">Touch to sync now<xliff:g id="last_sync_time">\n%1$s</xliff:g></string>
+    <!-- Data synchronization settings screen, checkbox setting option name. Controls whether Gmail should be synced.  Should use "Gmail" to refer to this app.-->
+    <string name="sync_gmail">Gmail</string>
+    <!-- Data synchronization settings screen, checkbox setting option name. Controls whether Calendar shoudl be synced. -->
+    <string name="sync_calendar">Calendar</string>
+    <!-- Data synchronization settings screen, checkbox setting option name -->
+    <string name="sync_contacts">Contacts</string>
+    <!-- Dialog message for when there are too many deletes that would take place and we want user confirmation -->
+    <string name="sync_too_many_deletes_desc">There are <xliff:g id="number_of_deleted_items">%1$d</xliff:g> deleted items for <xliff:g id="type_of_sync">%2$s</xliff:g>, account <xliff:g id="account_name">%3$s</xliff:g>. What would you like to do?</string>
+    <!-- Dialog action for when there are too many deletes that would take place and we want user confirmation, and the user wants to delete the items -->
+    <string name="sync_really_delete">Delete the items.</string>
+    <!-- Dialog action for when there are too many deletes that would take place and we want user confirmation, and the user wants to undo the deletions -->
+    <string name="sync_undo_deletes">Undo the deletes.</string>
+    <!-- Dialog action for when there are too many deletes that would take place and we want user confirmation, and the user wants to do nothing for now -->
+    <string name="sync_do_nothing">Do nothing for now.</string>
+    <!-- Message introducing the user to Google Sync. -->
+    <string name="sync_plug"><font fgcolor="#ffffffff">Welcome to Google sync!</font>
+    \nA Google approach to synchronizing data to allow access to your contacts, appointments, and more from wherever you are.
+    </string>
+
+    <!-- Header title for those settings relating to application syncing. -->
+    <string name="header_application_sync_settings">Application sync settings</string>
+
+    <!-- Header for data and synchronization -->
+    <string name="header_data_and_synchronization">Data &amp; synchronization</string>
+    <!-- Preference item that lets the user change password -->
+    <string name="preference_change_password_title">Change password</string>
+    <!-- Header that appears at the top of Account Settings screen -->
+    <string name="header_account_settings">Account settings</string>
+    <!-- Button label to remove current account -->
+    <string name="remove_account_label">Remove account</string>
+    <!-- Title shown in AddAccount -->
+    <string name="header_add_an_account">Add an account</string>
+    <!-- Button shown when this activity is run from SetupWizard -->
+    <string name="finish_button_label">Finish</string>
+    <!-- Title of remove message for remove account dialog -->
+    <string name="really_remove_account_title">Remove account</string>
+    <!-- Remove account message in dialog -->
+    <string name="really_remove_account_message" product="tablet">Do you really want to remove this account? Removing it will also delete all of its messages, contacts, and other data from the tablet.
+    \nProceed?</string>
+    <!-- Remove account message in dialog -->
+    <string name="really_remove_account_message" product="default">Do you really want to remove this account? Removing it will also delete all of its messages, contacts, and other data from the phone.
+    \nProceed?</string>
+    <!-- This is shown if the autheticator for a given account fails to remove it. -->
+    <string name="remove_account_failed" product="tablet">This account is required by some applications. You can only remove it by resetting the tablet to factory defaults (which deletes all your personal data). You do that in the Settings application, under Privacy.</string>
+    <!-- This is shown if the autheticator for a given account fails to remove it. -->
+    <string name="remove_account_failed" product="default">This account is required by some applications. You can only remove it by resetting the phone to factory defaults (which deletes all your personal data). You do that in the Settings application, under Privacy.</string>
+    <!-- What to show in messaging that refers to this provider, e.g. AccountSyncSettings -->
+    <string name="provider_label">Push subscriptions</string>
+    <!-- Formatter in AccountSyncSettings for each application we wish to synchronize, e.g. "Sync Calendar" -->
+    <string name="sync_item_title">Sync <xliff:g id="authority" example="Calendar">%s</xliff:g></string>
+    <!-- Title of dialog shown when you can't manually sync an item because it's disabled -->
+    <string name="cant_sync_dialog_title">Cannot manually sync</string>
+    <!-- Messaage shown in dialog when you can't manually sync -->
+    <string name="cant_sync_dialog_message">Sync for this item is currently disabled. To change your preference, temporarily turn on background data and automatic sync.</string>
 
 </resources>
