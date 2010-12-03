@@ -346,6 +346,7 @@ public class AccountSyncSettings extends AccountPreferenceBase {
 
     @Override
     protected void onSyncStateUpdated() {
+        if (!isResumed()) return;
         // iterate over all the preferences, setting the state properly for each
         Date date = new Date();
         List<SyncInfo> currentSyncs = ContentResolver.getCurrentSyncs();
