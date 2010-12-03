@@ -241,7 +241,7 @@ public class WifiSettings extends SettingsPreferenceFragment
         switch (item.getItemId()) {
             case MENU_ID_SCAN:
                 if (mWifiManager.isWifiEnabled()) {
-                    mScanner.resume();
+                    mScanner.forceScan();
                 }
                 return true;
             case MENU_ID_ADVANCED:
@@ -497,6 +497,10 @@ public class WifiSettings extends SettingsPreferenceFragment
             if (!hasMessages(0)) {
                 sendEmptyMessage(0);
             }
+        }
+
+        void forceScan() {
+            sendEmptyMessage(0);
         }
 
         void pause() {
