@@ -40,7 +40,8 @@ import android.widget.EditText;
  */
 public class BluetoothNamePreference extends EditTextPreference implements TextWatcher {
     private static final String TAG = "BluetoothNamePreference";
-    private static final int BLUETOOTH_NAME_MAX_LENGTH_BYTES = 248;
+    // max. length reduced from 248 to 246 bytes to work around Bluez bug
+    private static final int BLUETOOTH_NAME_MAX_LENGTH_BYTES = 246;
 
     private LocalBluetoothManager mLocalManager;
 
