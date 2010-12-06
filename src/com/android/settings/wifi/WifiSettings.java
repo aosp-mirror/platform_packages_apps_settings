@@ -124,7 +124,8 @@ public class WifiSettings extends SettingsPreferenceFragment
         mFilter.addAction(WifiManager.SCAN_RESULTS_AVAILABLE_ACTION);
         mFilter.addAction(WifiManager.NETWORK_IDS_CHANGED_ACTION);
         mFilter.addAction(WifiManager.SUPPLICANT_STATE_CHANGED_ACTION);
-        mFilter.addAction(WifiManager.SUPPLICANT_CONFIG_CHANGED_ACTION);
+        mFilter.addAction(WifiManager.CONFIGURED_NETWORKS_CHANGED_ACTION);
+        mFilter.addAction(WifiManager.LINK_CONFIGURATION_CHANGED_ACTION);
         mFilter.addAction(WifiManager.NETWORK_STATE_CHANGED_ACTION);
         mFilter.addAction(WifiManager.RSSI_CHANGED_ACTION);
 
@@ -423,7 +424,8 @@ public class WifiSettings extends SettingsPreferenceFragment
             updateWifiState(intent.getIntExtra(WifiManager.EXTRA_WIFI_STATE,
                     WifiManager.WIFI_STATE_UNKNOWN));
         } else if (WifiManager.SCAN_RESULTS_AVAILABLE_ACTION.equals(action) ||
-                WifiManager.SUPPLICANT_CONFIG_CHANGED_ACTION.equals(action)) {
+                WifiManager.CONFIGURED_NETWORKS_CHANGED_ACTION.equals(action) ||
+                WifiManager.LINK_CONFIGURATION_CHANGED_ACTION.equals(action)) {
                 updateAccessPoints();
         } else if (WifiManager.SUPPLICANT_STATE_CHANGED_ACTION.equals(action)) {
             //Ignore supplicant state changes when network is connected
