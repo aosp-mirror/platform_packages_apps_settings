@@ -1456,6 +1456,12 @@
     <string name="memory_available">Available space</string>
     <!-- SD card & phone storage settings screen heading.  The total amount of storage space for some storage partition.  For example, this is listed under both the "Internal phone storage" section and the "SD card" section -->
     <string name="memory_size">Total space</string>
+    <!-- SD card & phone storage settings summary. Displayed when the total memory usage is being calculated. Will be replaced with a number like "12.3 GB" when finished calucating. -->
+    <string name="memory_calculating_size">Calculating…</string>
+    <!-- SD card & phone storage settings title. Displayed as a title when showing the total usage of applications installed. Below it will be a number like "123.4 MB" indicating used storage. [CHAR LIMIT=30] -->
+    <string name="memory_apps_usage">Application usage</string>
+    <!-- SD card & phone storage settings title. Displayed as a title when showing the total usage of media on the device. Below it will be a number like "123.4 MB" indicating used storage. [CHAR LIMIT=30] -->
+    <string name="memory_media_usage">Media usage</string>
     <!-- SD card & phone storage settings item title that will result in the phone unmounting the SD card.  This will be done before the user phyiscally removes the SD card from the phone.  Kind of like the "Safely remove" on some operating systems.   [CHAR LIMIT=25] -->
     <string name="sd_eject" product="nosdcard">Unmount shared storage</string>
     <!-- SD card & phone storage settings item title that will result in the phone unmounting the SD card.  This will be done before the user phyiscally removes the SD card from the phone.  Kind of like the "Safely remove" on some operating systems.   -->
@@ -3098,10 +3104,10 @@ found in the list of installed applications.</string>
     <string name="finish_button_label">Finish</string>
     <!-- Title of remove message for remove account dialog -->
     <string name="really_remove_account_title">Remove account</string>
-    <!-- Remove account message in dialog -->
+    <!-- Remove account message in dialog [CHAR LIMIT=NONE] -->
     <string name="really_remove_account_message" product="tablet">Do you really want to remove this account? Removing it will also delete all of its messages, contacts, and other data from the tablet.
     \nProceed?</string>
-    <!-- Remove account message in dialog -->
+    <!-- Remove account message in dialog [CHAR LIMIT=NONE] -->
     <string name="really_remove_account_message" product="default">Do you really want to remove this account? Removing it will also delete all of its messages, contacts, and other data from the phone.
     \nProceed?</string>
     <!-- This is shown if the autheticator for a given account fails to remove it. -->
