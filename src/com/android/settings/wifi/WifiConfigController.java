@@ -30,6 +30,9 @@ import android.net.wifi.WifiConfiguration;
 import android.net.wifi.WifiConfiguration.IpAssignment;
 import android.net.wifi.WifiConfiguration.AuthAlgorithm;
 import android.net.wifi.WifiConfiguration.KeyMgmt;
+import android.net.wifi.WpsConfiguration;
+import android.net.wifi.WpsConfiguration.Setup;
+
 import static android.net.wifi.WifiConfiguration.INVALID_NETWORK_ID;
 import android.net.wifi.WifiConfiguration.ProxySettings;
 import android.net.wifi.WifiInfo;
@@ -113,6 +116,10 @@ public class WifiConfigController implements TextWatcher,
     private TextView mProxyHostView;
     private TextView mProxyPortView;
     private TextView mProxyExclusionListView;
+
+    private IpAssignment mIpAssignment;
+    private ProxySettings mProxySettings;
+    private LinkProperties mLinkProperties = new LinkProperties();
 
     static boolean requireKeyStore(WifiConfiguration config) {
         if (config == null) {
@@ -331,28 +338,37 @@ public class WifiConfigController implements TextWatcher,
                     return null;
         }
 
-        config.ipAssignment = (mIpSettingsSpinner != null &&
+        validateAndFetchIpAndProxyFields();
+
+        config.proxySettings = mProxySettings;
+        config.ipAssignment = mIpAssignment;
+        config.linkProperties = new LinkProperties(mLinkProperties);
+
+        return config;
+    }
+
+    private void validateAndFetchIpAndProxyFields() {
+        mLinkProperties.clear();
+        mIpAssignment = (mIpSettingsSpinner != null &&
                 mIpSettingsSpinner.getSelectedItemPosition() == STATIC_IP) ?
                 IpAssignment.STATIC : IpAssignment.DHCP;
 
-        if (config.ipAssignment == IpAssignment.STATIC) {
+        if (mIpAssignment == IpAssignment.STATIC) {
             //TODO: A better way to do this is to not dismiss the
             //dialog as long as one of the fields is invalid
-            LinkProperties linkProperties = new LinkProperties();
-            int result = validateIpConfigFields(linkProperties);
-            if (result == 0) {
-                config.linkProperties = linkProperties;
-            } else {
+            int result = validateIpConfigFields(mLinkProperties);
+            if (result != 0) {
+                mLinkProperties.clear();
                 Toast.makeText(mConfigUi.getContext(), result, Toast.LENGTH_LONG).show();
-                config.ipAssignment = IpAssignment.UNASSIGNED;
+                mIpAssignment = IpAssignment.UNASSIGNED;
             }
         }
 
-        config.proxySettings = (mProxySettingsSpinner != null &&
+        mProxySettings = (mProxySettingsSpinner != null &&
                 mProxySettingsSpinner.getSelectedItemPosition() == PROXY_STATIC) ?
                 ProxySettings.STATIC : ProxySettings.NONE;
 
-        if (config.proxySettings == ProxySettings.STATIC) {
+        if (mProxySettings == ProxySettings.STATIC) {
             String host = mProxyHostView.getText().toString();
             String portStr = mProxyPortView.getText().toString();
             String exclusionList = mProxyExclusionListView.getText().toString();
@@ -366,14 +382,12 @@ public class WifiConfigController implements TextWatcher,
             }
             if (result == 0) {
                 ProxyProperties proxyProperties= new ProxyProperties(host, port, exclusionList);
-                config.linkProperties.setHttpProxy(proxyProperties);
+                mLinkProperties.setHttpProxy(proxyProperties);
             } else {
                 Toast.makeText(mConfigUi.getContext(), result, Toast.LENGTH_LONG).show();
-                config.proxySettings = ProxySettings.UNASSIGNED;
+                mProxySettings = ProxySettings.UNASSIGNED;
             }
         }
-
-        return config;
     }
 
     private int validateIpConfigFields(LinkProperties linkProperties) {
@@ -428,13 +442,32 @@ public class WifiConfigController implements TextWatcher,
         return MANUAL;
     }
 
-    int getWpsPin() {
-        try {
-            String wpsPin = ((TextView) mView.findViewById(R.id.wps_pin)).getText().toString();
-            return Integer.parseInt(wpsPin);
-        } catch (NumberFormatException e) {
-            return -1;
+    WpsConfiguration getWpsConfig() {
+        WpsConfiguration config = new WpsConfiguration();
+        switch (mNetworkSetupSpinner.getSelectedItemPosition()) {
+            case WPS_PBC:
+                config.setup = Setup.PBC;
+                break;
+            case WPS_PIN_FROM_ACCESS_POINT:
+                config.setup = Setup.PIN_FROM_ACCESS_POINT;
+                break;
+            case WPS_PIN_FROM_DEVICE:
+                config.setup = Setup.PIN_FROM_DEVICE;
+                break;
+            default:
+                config.setup = Setup.INVALID;
+                Log.e(TAG, "WPS not selected type");
+                return config;
         }
+        config.pin = ((TextView) mView.findViewById(R.id.wps_pin)).getText().toString();
+        config.BSSID = (mAccessPoint != null) ? mAccessPoint.bssid : null;
+
+        validateAndFetchIpAndProxyFields();
+
+        config.proxySettings = mProxySettings;
+        config.ipAssignment = mIpAssignment;
+        config.linkProperties = new LinkProperties(mLinkProperties);
+        return config;
     }
 
     private void showSecurityFields() {
