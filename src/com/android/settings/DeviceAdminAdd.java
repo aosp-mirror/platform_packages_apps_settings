@@ -81,6 +81,7 @@ public class DeviceAdminAdd extends Activity {
     final ArrayList<View> mActivePolicies = new ArrayList<View>();
     
     boolean mAdding;
+    boolean mRefreshing;
     
     @Override
     protected void onCreate(Bundle icicle) {
@@ -91,7 +92,7 @@ public class DeviceAdminAdd extends Activity {
         mDPM = (DevicePolicyManager)getSystemService(Context.DEVICE_POLICY_SERVICE);
 
         if ((getIntent().getFlags()&Intent.FLAG_ACTIVITY_NEW_TASK) != 0) {
-            Log.w(TAG, "Can now start ADD_DEVICE_ADMIN as a new task");
+            Log.w(TAG, "Cannot start ADD_DEVICE_ADMIN as a new task");
             finish();
             return;
         }
@@ -103,20 +104,10 @@ public class DeviceAdminAdd extends Activity {
             finish();
             return;
         }
-        if (DevicePolicyManager.ACTION_ADD_DEVICE_ADMIN.equals(getIntent().getAction())) {
-            // If this was an add request, then just exit immediately if the
-            // given component is already added.
-            if (mDPM.isAdminActive(cn)) {
-                setResult(Activity.RESULT_OK);
-                finish();
-                return;
-            }
-        }
         
         ActivityInfo ai;
         try {
-            ai = getPackageManager().getReceiverInfo(cn,
-                    PackageManager.GET_META_DATA);
+            ai = getPackageManager().getReceiverInfo(cn, PackageManager.GET_META_DATA);
         } catch (PackageManager.NameNotFoundException e) {
             Log.w(TAG, "Unable to retrieve device policy " + cn, e);
             finish();
@@ -126,7 +117,7 @@ public class DeviceAdminAdd extends Activity {
         ResolveInfo ri = new ResolveInfo();
         ri.activityInfo = ai;
         try {
-            mDeviceAdmin= new DeviceAdminInfo(this, ri);
+            mDeviceAdmin = new DeviceAdminInfo(this, ri);
         } catch (XmlPullParserException e) {
             Log.w(TAG, "Unable to retrieve device policy " + cn, e);
             finish();
@@ -137,8 +128,29 @@ public class DeviceAdminAdd extends Activity {
             return;
         }
         
-        mAddMsgText = getIntent().getCharSequenceExtra(
-                DevicePolicyManager.EXTRA_ADD_EXPLANATION);
+        // This admin already exists, an we have two options at this point.  If new policy
+        // bits are set, show the user the new list.  If nothing has changed, simply return
+        // "OK" immediately.
+        if (DevicePolicyManager.ACTION_ADD_DEVICE_ADMIN.equals(getIntent().getAction())) {
+            mRefreshing = false;
+            if (mDPM.isAdminActive(cn)) {
+                ArrayList<DeviceAdminInfo.PolicyInfo> newPolicies = mDeviceAdmin.getUsedPolicies();
+                for (int i = 0; i < newPolicies.size(); i++) {
+                    DeviceAdminInfo.PolicyInfo pi = newPolicies.get(i);
+                    if (!mDPM.hasGrantedPolicy(cn, pi.ident)) {
+                        mRefreshing = true;
+                        break;
+                    }
+                }
+                if (!mRefreshing) {
+                    // Nothing changed (or policies were removed) - return immediately
+                    setResult(Activity.RESULT_OK);
+                    finish();
+                    return;
+                }
+            }
+        }
+        mAddMsgText = getIntent().getCharSequenceExtra(DevicePolicyManager.EXTRA_ADD_EXPLANATION);
         
         setContentView(R.layout.device_admin_add);
         
@@ -170,7 +182,7 @@ public class DeviceAdminAdd extends Activity {
             public void onClick(View v) {
                 if (mAdding) {
                     try {
-                        mDPM.setActiveAdmin(mDeviceAdmin.getComponent());
+                        mDPM.setActiveAdmin(mDeviceAdmin.getComponent(), mRefreshing);
                         setResult(Activity.RESULT_OK);
                     } catch (RuntimeException e) {
                         // Something bad happened...  could be that it was
@@ -260,7 +272,7 @@ public class DeviceAdminAdd extends Activity {
         } else {
             mAddMsg.setVisibility(View.GONE);
         }
-        if (mDPM.isAdminActive(mDeviceAdmin.getComponent())) {
+        if (!mRefreshing && mDPM.isAdminActive(mDeviceAdmin.getComponent())) {
             if (mActivePolicies.size() == 0) {
                 ArrayList<DeviceAdminInfo.PolicyInfo> policies = mDeviceAdmin.getUsedPolicies();
                 for (int i=0; i<policies.size(); i++) {
