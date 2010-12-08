@@ -651,9 +651,8 @@
         <!-- Second and third-level settings -->
 
         <activity android:name="ConfirmLockPattern"/>
-        <activity android:name="ConfirmLockPassword"
-            android:theme="@android:style/Theme.NoTitleBar">
-        </activity>
+
+        <activity android:name="ConfirmLockPassword"/>>
 
         <activity android:name="ChooseLockGeneric">
             <intent-filter>
@@ -669,7 +668,6 @@
 
         <activity android:name="ChooseLockPassword"
                 android:label="@string/lockpattern_change_lock_pin_label"
-            android:theme="@android:style/Theme.NoTitleBar"
             android:exported="false">
         </activity>
 

@@ -18,49 +18,70 @@ package com.android.settings;
 
 import com.android.internal.widget.LockPatternUtils;
 
-import android.app.Activity;
+import android.app.Fragment;
 import android.content.Intent;
 import android.os.Bundle;
+import android.preference.PreferenceActivity;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 
-public class ChooseLockPatternTutorial extends Activity implements View.OnClickListener {
-    private View mNextButton;
-    private View mSkipButton;
+public class ChooseLockPatternTutorial extends PreferenceActivity {
+
+    // required constructor for fragments
+    public ChooseLockPatternTutorial() {
+
+    }
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        // Don't show the tutorial if the user has seen it before.
-        LockPatternUtils lockPatternUtils = new LockPatternUtils(this);
-        if (savedInstanceState == null && lockPatternUtils.isPatternEverChosen()) {
-            Intent intent = new Intent(this, ChooseLockPattern.class);
-            intent.setFlags(Intent.FLAG_ACTIVITY_FORWARD_RESULT);
-            intent.putExtra("confirm_credentials", false);
-            startActivity(intent);
-            finish();
-        } else {
-            initViews();
+    public Intent getIntent() {
+        Intent modIntent = new Intent(super.getIntent());
+        modIntent.putExtra(EXTRA_SHOW_FRAGMENT, ChooseLockPatternTutorialFragment.class.getName());
+        modIntent.putExtra(EXTRA_NO_HEADERS, true);
+        return modIntent;
+    }
+
+    public static class ChooseLockPatternTutorialFragment extends Fragment
+            implements View.OnClickListener {
+        private View mNextButton;
+        private View mSkipButton;
+
+        @Override
+        public void onCreate(Bundle savedInstanceState) {
+            super.onCreate(savedInstanceState);
+            // Don't show the tutorial if the user has seen it before.
+            LockPatternUtils lockPatternUtils = new LockPatternUtils(getActivity());
+            if (savedInstanceState == null && lockPatternUtils.isPatternEverChosen()) {
+                Intent intent = new Intent(getActivity(), ChooseLockPattern.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_FORWARD_RESULT);
+                intent.putExtra("confirm_credentials", false);
+                startActivity(intent);
+                getActivity().finish();
+            }
         }
-    }
 
-    private void initViews() {
-        setContentView(R.layout.choose_lock_pattern_tutorial);
-        mNextButton = findViewById(R.id.next_button);
-        mNextButton.setOnClickListener(this);
-        mSkipButton = findViewById(R.id.skip_button);
-        mSkipButton.setOnClickListener(this);
-    }
+        @Override
+        public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                Bundle savedInstanceState) {
+            View view = inflater.inflate(R.layout.choose_lock_pattern_tutorial, null);
+            mNextButton = view.findViewById(R.id.next_button);
+            mNextButton.setOnClickListener(this);
+            mSkipButton = view.findViewById(R.id.skip_button);
+            mSkipButton.setOnClickListener(this);
+            return view;
+        }
 
-    public void onClick(View v) {
-        if (v == mSkipButton) {
-            // Canceling, so finish all
-            setResult(ChooseLockPattern.RESULT_FINISHED);
-            finish();
-        } else if (v == mNextButton) {
-            Intent intent = new Intent(this, ChooseLockPatternExample.class);
-            intent.addFlags(Intent.FLAG_ACTIVITY_FORWARD_RESULT);
-            startActivity(intent);
-            finish();
+        public void onClick(View v) {
+            if (v == mSkipButton) {
+                // Canceling, so finish all
+                getActivity().setResult(ChooseLockPattern.RESULT_FINISHED);
+                getActivity().finish();
+            } else if (v == mNextButton) {
+                Intent intent = new Intent(getActivity(), ChooseLockPatternExample.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_FORWARD_RESULT);
+                startActivity(intent);
+                getActivity().finish();
+            }
         }
     }
 }
