@@ -220,7 +220,6 @@ public class DateTimeSettings extends SettingsPreferenceFragment
                 calendar.get(Calendar.YEAR),
                 calendar.get(Calendar.MONTH),
                 calendar.get(Calendar.DAY_OF_MONTH));
-            d.setTitle(getResources().getString(R.string.date_time_changeDate_text));
             break;
         }
         case DIALOG_TIMEPICKER: {
@@ -231,7 +230,6 @@ public class DateTimeSettings extends SettingsPreferenceFragment
                     calendar.get(Calendar.HOUR_OF_DAY),
                     calendar.get(Calendar.MINUTE),
                     DateFormat.is24HourFormat(getActivity()));
-            d.setTitle(getResources().getString(R.string.date_time_changeTime_text));
             break;
         }
         default:
