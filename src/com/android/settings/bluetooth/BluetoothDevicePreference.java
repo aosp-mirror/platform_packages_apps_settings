@@ -27,7 +27,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.View.OnClickListener;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
+
+import com.android.settings.bluetooth.LocalBluetoothProfileManager.Profile;
+
+import java.util.Map;
 
 /**
  * BluetoothDevicePreference is the preference type used to display each remote
@@ -43,11 +46,12 @@ public class BluetoothDevicePreference extends Preference implements
     private int mAccessibleProfile;
 
     private ImageView mDeviceSettings;
+
     private OnClickListener mOnSettingsClickListener;
 
     /**
      * Cached local copy of whether the device is busy. This is only updated
-     * from {@link #onDeviceAttributesChanged(CachedBluetoothDevice)}.
+     * from {@link #onDeviceAttributesChanged()}.
      */
     private boolean mIsBusy;
 
@@ -68,7 +72,7 @@ public class BluetoothDevicePreference extends Preference implements
 
         cachedDevice.registerCallback(this);
 
-        onDeviceAttributesChanged(cachedDevice);
+        onDeviceAttributesChanged();
     }
 
     public CachedBluetoothDevice getCachedDevice() {
@@ -85,7 +89,7 @@ public class BluetoothDevicePreference extends Preference implements
         mCachedDevice.unregisterCallback(this);
     }
 
-    public void onDeviceAttributesChanged(CachedBluetoothDevice cachedDevice) {
+    public void onDeviceAttributesChanged() {
 
         /*
          * The preference framework takes care of making sure the value has
@@ -99,7 +103,7 @@ public class BluetoothDevicePreference extends Preference implements
          * related to BluetoothHeadset not bound to the actual
          * BluetoothHeadsetService when we got here.
          */
-        setSummary(mCachedDevice.getSummary(mAccessibleProfile));
+        setSummary(mCachedDevice.getSummary());
 
         // Used to gray out the item
         mIsBusy = mCachedDevice.isBusy();
@@ -121,7 +125,7 @@ public class BluetoothDevicePreference extends Preference implements
     @Override
     protected void onBindView(View view) {
         // Disable this view if the bluetooth enable/disable preference view is off
-        if (null != findPreferenceInHierarchy("bt_checkbox")){
+        if (null != findPreferenceInHierarchy("bt_checkbox")) {
             setDependency("bt_checkbox");
         }
 
@@ -129,12 +133,13 @@ public class BluetoothDevicePreference extends Preference implements
 
         ImageView btClass = (ImageView) view.findViewById(android.R.id.icon);
         btClass.setImageResource(mCachedDevice.getBtClassDrawable());
-        btClass.setAlpha(isEnabled() ? 255 : sDimAlpha);
+        btClass.setAlpha(!mIsBusy ? 255 : sDimAlpha);
 
         mDeviceSettings = (ImageView) view.findViewById(R.id.deviceDetails);
         if (mOnSettingsClickListener != null) {
             mDeviceSettings.setOnClickListener(this);
             mDeviceSettings.setTag(mCachedDevice);
+            mDeviceSettings.setAlpha(!mIsBusy ? 255 : sDimAlpha);
         } else { // Hide the settings icon and divider
             mDeviceSettings.setVisibility(View.GONE);
             ImageView divider = (ImageView) view.findViewById(R.id.divider);
@@ -146,11 +151,15 @@ public class BluetoothDevicePreference extends Preference implements
         LayoutInflater inflater = (LayoutInflater)
                 getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         ViewGroup profilesGroup = (ViewGroup) view.findViewById(R.id.profileIcons);
-        for (Drawable icon : mCachedDevice.getProfileIcons()) {
+        Map<Profile, Drawable> profileIcons = mCachedDevice.getProfileIcons();
+        for (Profile profile : profileIcons.keySet()) {
+            Drawable icon = profileIcons.get(profile);
             inflater.inflate(R.layout.profile_icon_small, profilesGroup, true);
             ImageView imageView =
                     (ImageView) profilesGroup.getChildAt(profilesGroup.getChildCount() - 1);
             imageView.setImageDrawable(icon);
+            boolean profileEnabled = mCachedDevice.isConnectedProfile(profile);
+            imageView.setAlpha(profileEnabled ? 255 : sDimAlpha);
         }
     }
 

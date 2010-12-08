@@ -42,11 +42,7 @@ import android.preference.Preference;
 import android.preference.PreferenceCategory;
 import android.preference.PreferenceScreen;
 import android.text.TextUtils;
-import android.view.ContextMenu;
-import android.view.MenuItem;
 import android.view.View;
-import android.view.ContextMenu.ContextMenuInfo;
-import android.widget.AdapterView.AdapterContextMenuInfo;
 
 import java.util.List;
 import java.util.WeakHashMap;
@@ -117,6 +113,8 @@ public class BluetoothSettings extends SettingsPreferenceFragment
                             finish();
                         } else if (mScreenType == SCREEN_TYPE_TETHERING) {
                             onPanDevicePicked();
+                        } else if (mScreenType == SCREEN_TYPE_SCAN) {
+                            finish();
                         }
                     }
                 }
@@ -140,9 +138,9 @@ public class BluetoothSettings extends SettingsPreferenceFragment
         }
 
         // Note:
-        // If an application wish to show the BT device list, it can send an
-        // intent to Settings application with below extra data:
-        // -DEVICE_PICKER_FILTER_TYPE: the type of BT devices that want to show.
+        // If an application wishes to show the BT device list, it can send an
+        // intent to Settings application with the following extra data:
+        // -DEVICE_PICKER_FILTER_TYPE: the type of BT devices to show.
         // -DEVICE_PICKER_LAUNCH_PACKAGE: the package which the application belongs to.
         // -DEVICE_PICKER_LAUNCH_CLASS: the class which will receive user's selected
         // result from the BT list.
@@ -170,7 +168,7 @@ public class BluetoothSettings extends SettingsPreferenceFragment
 
             activity.setTitle(activity.getString(R.string.device_picker));
             addPreferencesFromResource(R.xml.device_picker);
-        } else if (action.equals(ACTION_LAUNCH_TETHER_PICKER)){
+        } else if (action.equals(ACTION_LAUNCH_TETHER_PICKER)) {
             mScreenType = SCREEN_TYPE_TETHERING;
             mFilterType = BluetoothDevicePicker.FILTER_TYPE_PANU;
 
@@ -197,8 +195,6 @@ public class BluetoothSettings extends SettingsPreferenceFragment
 
         mDeviceList = (PreferenceCategory) findPreference(KEY_BT_DEVICE_LIST);
 
-        registerForContextMenu(getListView());
-
         super.onActivityCreated(savedInstanceState);
     }
 
@@ -207,7 +203,7 @@ public class BluetoothSettings extends SettingsPreferenceFragment
         super.onResume();
 
         // Repopulate (which isn't too bad since it's cached in the settings
-        // bluetooth manager
+        // bluetooth manager)
         mDevicePreferenceMap.clear();
         mDeviceList.removeAll();
         if (mScreenType != SCREEN_TYPE_SCAN) {
@@ -264,6 +260,7 @@ public class BluetoothSettings extends SettingsPreferenceFragment
     }
 
     public void onClick(View v) {
+        // User clicked on advanced options icon for a device in the list
         if (v.getTag() instanceof CachedBluetoothDevice) {
             CachedBluetoothDevice device = (CachedBluetoothDevice) v.getTag();
             device.onClickedAdvancedOptions(this);
@@ -281,12 +278,12 @@ public class BluetoothSettings extends SettingsPreferenceFragment
 
         if (preference instanceof BluetoothDevicePreference) {
             BluetoothDevicePreference btPreference = (BluetoothDevicePreference)preference;
+            CachedBluetoothDevice device = btPreference.getCachedDevice();
+            mSelectedDevice = device.getDevice();
+
             if (mScreenType == SCREEN_TYPE_SETTINGS || mScreenType == SCREEN_TYPE_SCAN) {
                 btPreference.getCachedDevice().onClicked();
             } else if (mScreenType == SCREEN_TYPE_DEVICEPICKER) {
-                CachedBluetoothDevice device = btPreference.getCachedDevice();
-
-                mSelectedDevice = device.getDevice();
                 mLocalManager.stopScanning();
                 mLocalManager.persistSelectedDeviceInPicker(mSelectedDevice.getAddress());
                 if ((device.getBondState() == BluetoothDevice.BOND_BONDED) ||
@@ -296,10 +293,7 @@ public class BluetoothSettings extends SettingsPreferenceFragment
                 } else {
                     btPreference.getCachedDevice().onClicked();
                 }
-            } else if (mScreenType == SCREEN_TYPE_TETHERING){
-                CachedBluetoothDevice device = btPreference.getCachedDevice();
-
-                mSelectedDevice = device.getDevice();
+            } else if (mScreenType == SCREEN_TYPE_TETHERING) {
                 mLocalManager.stopScanning();
                 mLocalManager.persistSelectedDeviceInPicker(mSelectedDevice.getAddress());
                 if ((device.getBondState() == BluetoothDevice.BOND_BONDED)) {
@@ -315,43 +309,6 @@ public class BluetoothSettings extends SettingsPreferenceFragment
         return super.onPreferenceTreeClick(preferenceScreen, preference);
     }
 
-    @Override
-    public void onCreateContextMenu(ContextMenu menu, View v,
-            ContextMenuInfo menuInfo) {
-        //For device picker, disable Context Menu
-        if (mScreenType != SCREEN_TYPE_SETTINGS) {
-            return;
-        }
-        CachedBluetoothDevice cachedDevice = getDeviceFromMenuInfo(menuInfo);
-        if (cachedDevice == null) return;
-
-        cachedDevice.onCreateContextMenu(menu);
-    }
-
-    @Override
-    public boolean onContextItemSelected(MenuItem item) {
-        CachedBluetoothDevice cachedDevice = getDeviceFromMenuInfo(item.getMenuInfo());
-        if (cachedDevice == null) return false;
-
-        cachedDevice.onContextItemSelected(item, this);
-        return true;
-    }
-
-    private CachedBluetoothDevice getDeviceFromMenuInfo(ContextMenuInfo menuInfo) {
-        if ((menuInfo == null) || !(menuInfo instanceof AdapterContextMenuInfo)) {
-            return null;
-        }
-
-        AdapterContextMenuInfo adapterMenuInfo = (AdapterContextMenuInfo) menuInfo;
-        Preference pref = (Preference) getPreferenceScreen().getRootAdapter().getItem(
-                adapterMenuInfo.position);
-        if (pref == null || !(pref instanceof BluetoothDevicePreference)) {
-            return null;
-        }
-
-        return ((BluetoothDevicePreference) pref).getCachedDevice();
-    }
-
     public void onDeviceAdded(CachedBluetoothDevice cachedDevice) {
 
         if (mDevicePreferenceMap.get(cachedDevice) != null) {
@@ -365,6 +322,18 @@ public class BluetoothSettings extends SettingsPreferenceFragment
             }
         }
      }
+
+    public void onDeviceBondStateChanged(CachedBluetoothDevice cachedDevice,
+            int bondState) {
+        // add to "Paired devices" list after remote-initiated pairing
+        if (mDevicePreferenceMap.get(cachedDevice) == null &&
+                mScreenType == SCREEN_TYPE_SETTINGS &&
+                bondState == BluetoothDevice.BOND_BONDED) {
+            if (addDevicePreference(cachedDevice)) {
+                createDevicePreference(cachedDevice);
+            }
+        }
+    }
 
     private boolean addDevicePreference(CachedBluetoothDevice cachedDevice) {
         ParcelUuid[] uuids = cachedDevice.getDevice().getUuids();
@@ -532,4 +501,3 @@ public class BluetoothSettings extends SettingsPreferenceFragment
         }
     }
 }
-

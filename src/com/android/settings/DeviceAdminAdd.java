@@ -75,8 +75,6 @@ public class DeviceAdminAdd extends Activity {
     Button mActionButton;
     Button mCancelButton;
     
-    View mSelectLayout;
-    
     final ArrayList<View> mAddingPolicies = new ArrayList<View>();
     final ArrayList<View> mActivePolicies = new ArrayList<View>();
     

@@ -20,7 +20,9 @@ import com.android.settings.R;
 import com.android.settings.SettingsPreferenceFragment;
 import com.android.settings.bluetooth.LocalBluetoothProfileManager.Profile;
 
+import android.app.FragmentTransaction;
 import android.bluetooth.BluetoothDevice;
+import android.bluetooth.BluetoothProfile;
 import android.os.Bundle;
 import android.preference.CheckBoxPreference;
 import android.preference.EditTextPreference;
@@ -48,8 +50,6 @@ public class DeviceProfilesSettings extends SettingsPreferenceFragment
     private static final String KEY_PROFILE_CONTAINER = "profile_container";
     private static final String KEY_UNPAIR = "unpair";
     private static final String KEY_ALLOW_INCOMING = "allow_incoming";
-
-    private static final String AUTO_CONNECT_KEY_SUFFIX = "X";
 
     public static final String EXTRA_DEVICE = "device";
 
@@ -92,10 +92,12 @@ public class DeviceProfilesSettings extends SettingsPreferenceFragment
         mProfileContainer = (PreferenceGroup) findPreference(KEY_PROFILE_CONTAINER);
         mAllowIncomingPref = (CheckBoxPreference) findPreference(KEY_ALLOW_INCOMING);
         mAllowIncomingPref.setChecked(isIncomingFileTransfersAllowed());
+        mAllowIncomingPref.setOnPreferenceChangeListener(this);
 
         mDeviceNamePref = (EditTextPreference) findPreference(KEY_RENAME_DEVICE);
         mDeviceNamePref.setSummary(mCachedDevice.getName());
         mDeviceNamePref.setText(mCachedDevice.getName());
+        mDeviceNamePref.setOnPreferenceChangeListener(this);
 
         // Set the title of the screen
         findPreference(KEY_TITLE).setTitle(getResources()
@@ -181,10 +183,17 @@ public class DeviceProfilesSettings extends SettingsPreferenceFragment
 
     public boolean onPreferenceChange(Preference preference, Object newValue) {
         if (preference == mAllowIncomingPref) {
-            setIncomingFileTransfersAllowed(mAllowIncomingPref.isChecked());
+            setIncomingFileTransfersAllowed((Boolean) newValue);
         } else if (preference == mDeviceNamePref) {
-            // TODO: Verify and check for error conditions
-            mCachedDevice.setName(mDeviceNamePref.getText());
+            mCachedDevice.setName((String) newValue);
+        } else if (preference instanceof CheckBoxPreference) {
+            boolean autoConnect = (Boolean) newValue;
+            Profile prof = getProfileOf(preference);
+            LocalBluetoothProfileManager
+                    .getProfileManager(mManager, prof)
+                    .setPreferred(mCachedDevice.getDevice(),
+                            autoConnect);
+            return true;
         } else {
             return false;
         }
@@ -201,10 +210,6 @@ public class DeviceProfilesSettings extends SettingsPreferenceFragment
         boolean isConnected =
                 SettingsBtStatus.isConnectionStatusConnected(status);
 
-        // TODO: only change the preference on disconnect if user confirms
-        // TODO: add method to change priority of individual profiles
-        // profileManager.setPreferred(device, !isConnected);
-
         if (isConnected) {
             mCachedDevice.askDisconnect(profile);
         } else {
@@ -212,11 +217,24 @@ public class DeviceProfilesSettings extends SettingsPreferenceFragment
         }
     }
 
-    public void onDeviceAttributesChanged(CachedBluetoothDevice cachedDevice) {
+    public void onDeviceAttributesChanged() {
         refresh();
     }
 
     private void refresh() {
+        String deviceName = mCachedDevice.getName();
+        // TODO: figure out how to update "bread crumb" title in action bar
+//        FragmentTransaction transaction = getFragmentManager().openTransaction();
+//        transaction.setBreadCrumbTitle(deviceName);
+//        transaction.commit();
+
+        findPreference(KEY_TITLE).setTitle(getResources().getString(
+                R.string.bluetooth_device_advanced_title,
+                deviceName));
+        mDeviceNamePref = (EditTextPreference) findPreference(KEY_RENAME_DEVICE);
+        mDeviceNamePref.setSummary(deviceName);
+        mDeviceNamePref.setText(deviceName);
+
         refreshProfiles();
     }
 
@@ -296,10 +314,11 @@ public class DeviceProfilesSettings extends SettingsPreferenceFragment
             if (autoConnectPref == null) {
                 autoConnectPref = new CheckBoxPreference(getActivity());
                 autoConnectPref.setLayoutResource(com.android.internal.R.layout.preference_child);
-                autoConnectPref.setKey(prof.toString() + AUTO_CONNECT_KEY_SUFFIX);
+                autoConnectPref.setKey(prof.toString());
                 autoConnectPref.setTitle(getCheckBoxTitle(prof));
                 autoConnectPref.setOrder(getProfilePreferenceIndex(prof) + 1);
                 autoConnectPref.setChecked(getAutoConnect(prof));
+                autoConnectPref.setOnPreferenceChangeListener(this);
                 mAutoConnectPrefs.put(prof.name(), autoConnectPref);
             }
             BluetoothProfilePreference profilePref =
@@ -328,12 +347,12 @@ public class DeviceProfilesSettings extends SettingsPreferenceFragment
     }
 
     private void setIncomingFileTransfersAllowed(boolean allow) {
-        // TODO:
+        // TODO: make an IPC call into BluetoothOpp to update
         Log.d(TAG, "Set allow incoming = " + allow);
     }
 
     private boolean isIncomingFileTransfersAllowed() {
-        // TODO:
+        // TODO: get this value from BluetoothOpp ???
         return true;
     }
 
@@ -343,7 +362,7 @@ public class DeviceProfilesSettings extends SettingsPreferenceFragment
     }
 
     private boolean getAutoConnect(Profile prof) {
-        // TODO: Get the auto connect toggle state for the profile
-        return true;
+        return LocalBluetoothProfileManager.getProfileManager(mManager, prof)
+                .isPreferred(mCachedDevice.getDevice());
     }
 }
