@@ -23,7 +23,6 @@ import android.app.Fragment;
 import android.content.ContentResolver;
 import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.content.res.Resources;
 import android.os.Bundle;
 import android.preference.PreferenceActivity;
 import android.preference.PreferenceFragment;
@@ -48,9 +47,6 @@ public class SettingsPreferenceFragment extends PreferenceFragment
     private static final String EXTRA_PREFS_SET_BACK_TEXT = "extra_prefs_set_back_text";
 
     private SettingsDialogFragment mDialogFragment;
-
-    private int mResultCode = Activity.RESULT_CANCELED;
-    private Intent mResultData;
 
     private Button mNextButton;
 
@@ -114,18 +110,55 @@ public class SettingsPreferenceFragment extends PreferenceFragment
     }
 
     public static class SettingsDialogFragment extends DialogFragment {
+        private static final String KEY_DIALOG_ID = "key_dialog_id";
+        private static final String KEY_PARENT_FRAGMENT_ID = "key_parent_fragment_id";
+
         private int mDialogId;
 
-        private DialogCreatable mFragment;
+        private Fragment mParentFragment;
+
+        public SettingsDialogFragment() {
+            /* do nothing */
+        }
 
         public SettingsDialogFragment(DialogCreatable fragment, int dialogId) {
             mDialogId = dialogId;
-            mFragment = fragment;
+            if (!(fragment instanceof Fragment)) {
+                throw new IllegalArgumentException("fragment argument must be an instance of "
+                        + Fragment.class.getName());
+            }
+            mParentFragment = (Fragment) fragment;
+        }
+
+        @Override
+        public void onActivityCreated(Bundle savedInstanceState) {
+            if (savedInstanceState != null) {
+                mDialogId = savedInstanceState.getInt(KEY_DIALOG_ID, 0);
+                int mParentFragmentId = savedInstanceState.getInt(KEY_PARENT_FRAGMENT_ID, -1);
+                if (mParentFragmentId > -1) {
+                    mParentFragment = getFragmentManager().findFragmentById(mParentFragmentId);
+                    if (!(mParentFragment instanceof DialogCreatable)) {
+                        throw new IllegalArgumentException(
+                                KEY_PARENT_FRAGMENT_ID + " must implement "
+                                        + DialogCreatable.class.getName());
+                    }
+                }
+            }
+            super.onActivityCreated(savedInstanceState);
+        }
+
+        @Override
+        public void onSaveInstanceState(Bundle outState) {
+            super.onSaveInstanceState(outState);
+            if (mParentFragment != null) {
+                outState.putInt(KEY_DIALOG_ID, mDialogId);
+                outState.putInt(KEY_PARENT_FRAGMENT_ID, mParentFragment.getId());
+            }
         }
 
         @Override
         public Dialog onCreateDialog(Bundle savedInstanceState) {
-            return mFragment.onCreateDialog(mDialogId);
+            return ((DialogCreatable) mParentFragment).onCreateDialog(mDialogId);
         }
 
         public int getDialogId() {
