@@ -216,8 +216,12 @@ public class ManageAccountsSettings extends AccountPreferenceBase
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        onAddAccountClicked();
-        return true;
+        if (item.getItemId() == MENU_ADD_ACCOUNT) {
+            onAddAccountClicked();
+            return true;
+        } else {
+            return super.onOptionsItemSelected(item);
+        }
     }
 
     private void setBackgroundDataInt(boolean enabled) {

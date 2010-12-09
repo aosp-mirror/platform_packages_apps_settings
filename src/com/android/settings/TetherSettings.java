@@ -131,6 +131,7 @@ public class TetherSettings extends SettingsPreferenceFragment {
                 mBluetoothSettings.setEnabled(false);
             }
         }
+        /* Don't change the title for two-pane settings
         if (wifiAvailable && usbAvailable && bluetoothAvailable){
             activity.setTitle(R.string.tether_settings_title_all);
         } else if (wifiAvailable && usbAvailable){
@@ -146,6 +147,7 @@ public class TetherSettings extends SettingsPreferenceFragment {
         } else {
             activity.setTitle(R.string.tether_settings_title_bluetooth);
         }
+        */
         mWifiApEnabler = new WifiApEnabler(activity, mEnableWifiAp);
         mView = new WebView(activity);
     }

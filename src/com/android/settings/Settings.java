@@ -49,8 +49,12 @@ public class Settings extends PreferenceActivity {
         getMetaData();
         super.onCreate(savedInstanceState);
 
-        // TODO: Do this only if 2-pane mode
-        highlightHeader();
+        if (!onIsHidingHeaders() && onIsMultiPane()) {
+            highlightHeader();
+            // Force the title so that it doesn't get overridden by a direct launch of
+            // a specific settings screen.
+            setTitle(R.string.settings_label);
+        }
     }
 
     @Override
