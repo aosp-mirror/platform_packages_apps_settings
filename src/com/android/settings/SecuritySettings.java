@@ -90,6 +90,8 @@ public class SecuritySettings extends SettingsPreferenceFragment
     private static final int SET_OR_CHANGE_LOCK_METHOD_REQUEST = 123;
     private static final int FALLBACK_LOCK_AFTER_TIMEOUT_VALUE = 5000; // compatible with pre-Froyo
 
+    private static final String TAG = "SecuritySettings";
+
     // Credential storage
     private final CredentialStorage mCredentialStorage = new CredentialStorage();
 
@@ -359,8 +361,8 @@ public class SecuritySettings extends SettingsPreferenceFragment
 
         final LockPatternUtils lockPatternUtils = mChooseLockSettingsHelper.utils();
         if (KEY_UNLOCK_SET_OR_CHANGE.equals(key)) {
-            Intent intent = new Intent(getActivity(), ChooseLockGeneric.class);
-            startActivityForResult(intent, SET_OR_CHANGE_LOCK_METHOD_REQUEST);
+            startFragment(this, "com.android.settings.ChooseLockGeneric$ChooseLockGenericFragment",
+                    SET_OR_CHANGE_LOCK_METHOD_REQUEST, null);
         } else if (KEY_LOCK_ENABLED.equals(key)) {
             lockPatternUtils.setLockPatternEnabled(isToggled(preference));
         } else if (KEY_VISIBLE_PATTERN.equals(key)) {
