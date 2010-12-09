@@ -25,6 +25,14 @@
                 android:title="@string/backup_data_title"
                 android:summary="@string/backup_data_summary"
                 android:persistent="false" />
+        <PreferenceScreen
+                android:key="configure_transport"
+                android:dependency="backup_data"
+                android:layout="?android:attr/preferenceLayoutChild"
+                android:title="@string/backup_configure_transport_title"
+                android:summary="@string/backup_configure_transport_default_summary">
+            <intent android:action="dummy" />
+        </PreferenceScreen>
         <CheckBoxPreference
                 android:key="auto_restore"
                 android:title="@string/auto_restore_title"
