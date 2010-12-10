@@ -205,7 +205,7 @@
     <string name="bluetooth_scan_for_devices">Scan for devices</string>
     <!-- Bluetooth settings.  Message for disconnecting from a bluetooth device -->
     <string name="bluetooth_disconnect_blank"><xliff:g id="device_name">%1$s</xliff:g> will be disconnected.</string>
-    <!-- Bluetooth settings.  Message when cnonected to a device -->
+    <!-- Bluetooth settings.  Message when connected to a device -->
     <string name="bluetooth_connected">Connected</string>
     <!-- Bluetooth settings.  Message when a device is disconnected -->
     <string name="bluetooth_disconnected">Disconnected</string>
@@ -230,7 +230,7 @@
     <!-- Notification title when a Bluetooth device wants to pair with us -->
     <string name="bluetooth_notif_title">Pairing request</string>
     <!-- Notification message when a Bluetooth device wants to pair with us -->
-    <string name="bluetooth_notif_message">Select to pair with\u0020</string>
+    <string name="bluetooth_notif_message">Select to pair with <xliff:g id="device_name">%1$s</xliff:g></string>
 
     <!-- Strings for BluetoothDevicePicker -->
     <string name="device_picker">Bluetooth device picker</string>
@@ -253,13 +253,6 @@
 
     <!-- Strings for msg to display to user while bluetooth is turning on -->
     <string name="bluetooth_turning_on">"Turning on Bluetooth\u2026"</string>
-
-    <!-- Do not translate. Used for diagnostic screens, precise translation is not necessary -->
-    <string name="bluetooth_scan_text">Empty button\u2026</string>
-    <!-- Do not translate. Used for diagnostic screens, precise translation is not necessary -->
-    <string name="bluetooth_settings_text">Empty button\u2026</string>
-    <!-- Do not translate. Used for diagnostic screens, precise translation is not necessary -->
-    <string name="bluetooth_enable_text">Empty button\u2026</string>
 
     <!-- Do not translate. Used for diagnostic screens, precise translation is not necessary -->
     <string name="bluetooth_device_info_connectButton_text">Turn on Bluetooth</string>
@@ -824,9 +817,7 @@
     <!-- Bluetooth settings.  The user-visible string that is used whenever referring to the A2DP profile. -->
     <string name="bluetooth_profile_a2dp">Media</string>
     <!-- Bluetooth settings.  The user-visible string that is used whenever referring to the headset or handsfree profile. -->
-    <string name="bluetooth_profile_headset" product="tablet">Tablet</string>
-    <!-- Bluetooth settings.  The user-visible string that is used whenever referring to the headset or handsfree profile. -->
-    <string name="bluetooth_profile_headset" product="default">Phone</string>
+    <string name="bluetooth_profile_headset">Handsfree</string>
     <!-- Bluetooth settings.  The user-visible string that is used whenever referring to the OPP profile. -->
     <string name="bluetooth_profile_opp">Transfer</string>
     <!-- Bluetooth settings. The user-visible string that is used whenever referring to the HID profile. -->
@@ -850,9 +841,7 @@
     <!-- Bluetooth settings.  Message for disconnecting from the A2DP profile. -->
     <string name="bluetooth_disconnect_a2dp_profile"><xliff:g id="device_name">%1$s</xliff:g> will be disconnected from media audio.</string>
     <!-- Bluetooth settings.  Message for disconnecting from the headset profile. -->
-    <string name="bluetooth_disconnect_headset_profile" product="tablet"><xliff:g id="device_name">%1$s</xliff:g> will be disconnected from tablet audio.</string>
-    <!-- Bluetooth settings.  Message for disconnecting from the headset profile. -->
-    <string name="bluetooth_disconnect_headset_profile" product="default"><xliff:g id="device_name">%1$s</xliff:g> will be disconnected from phone audio.</string>
+    <string name="bluetooth_disconnect_headset_profile"><xliff:g id="device_name">%1$s</xliff:g> will be disconnected from handsfree audio.</string>
     <!-- Bluetooth settings.  Message for disconnecting from the HID profile. -->
     <string name="bluetooth_disconnect_hid_profile"><xliff:g id="device_name">%1$s</xliff:g> will be disconnected from input device.</string>
     <!-- Bluetooth settings.  Message for disconnecting from the PAN profile. -->
@@ -2906,6 +2895,10 @@ found in the list of installed applications.</string>
     <string name="backup_data_title">Back up my data</string>
     <!-- Summary text of the "back up data" setting -->
     <string name="backup_data_summary">Back up application data, Wi-Fi passwords, and other settings to Google servers</string>
+    <!-- Configure backup options menu title [CHAR LIMIT=25]-->
+    <string name="backup_configure_transport_title">Configure backup</string>
+    <!-- Default summary text of the "Configure backup" setting [CHAR LIMIT=80]-->
+    <string name="backup_configure_transport_default_summary">No backup destination is available.</string>
     <!-- Auto-restore menu title -->
     <string name="auto_restore_title">Automatic restore</string>
     <!-- Summary text of the "automatic restore" setting -->

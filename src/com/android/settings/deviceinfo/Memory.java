@@ -37,7 +37,7 @@ import android.content.pm.IPackageStatsObserver;
 import android.content.pm.PackageManager;
 import android.content.pm.PackageStats;
 import android.content.res.Resources;
-import android.hardware.Usb;
+import android.hardware.UsbManager;
 import android.os.Bundle;
 import android.os.Environment;
 import android.os.Handler;
@@ -392,7 +392,7 @@ public class Memory extends SettingsPreferenceFragment implements OnCancelListen
         }
 
         mPtpModeToggle = (CheckBoxPreference)findPreference(PTP_MODE_TOGGLE);
-        if (Usb.isFunctionSupported(Usb.USB_FUNCTION_MTP)) {
+        if (UsbManager.isFunctionSupported(UsbManager.USB_FUNCTION_MTP)) {
             mPtpModeToggle.setChecked(Settings.System.getInt(
                     getContentResolver(),
                     Settings.System.USE_PTP_INTERFACE, 0) != 0);

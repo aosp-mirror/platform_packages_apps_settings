@@ -32,7 +32,6 @@ public class ApplicationSettings extends SettingsPreferenceFragment implements
     
     private static final String KEY_TOGGLE_INSTALL_APPLICATIONS = "toggle_install_applications";
     private static final String KEY_APP_INSTALL_LOCATION = "app_install_location";
-    private static final String KEY_QUICK_LAUNCH = "quick_launch";
 
     // App installation location. Default is ask the user.
     private static final int APP_INSTALL_AUTO = 0;
@@ -73,12 +72,6 @@ public class ApplicationSettings extends SettingsPreferenceFragment implements
                     return false;
                 }
             });
-        }
-
-        if (getResources().getConfiguration().keyboard == Configuration.KEYBOARD_NOKEYS) {
-            // No hard keyboard, remove the setting for quick launch
-            Preference quickLaunchSetting = findPreference(KEY_QUICK_LAUNCH);
-            getPreferenceScreen().removePreference(quickLaunchSetting);
         }
     }
 

@@ -206,14 +206,20 @@
                 <category android:name="com.android.settings.SHORTCUT" />
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
-            <intent-filter>
-                <action android:name="android.bluetooth.devicepicker.action.LAUNCH" />
-                <category android:name="android.intent.category.DEFAULT" />
-            </intent-filter>
             <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
                 android:value="com.android.settings.bluetooth.BluetoothSettings" />
             <meta-data android:name="com.android.settings.TOP_LEVEL_HEADER_ID"
                 android:resource="@id/wireless_settings" />
+        </activity>
+
+        <activity android:name=".bluetooth.DevicePickerActivity"
+                android:theme="@android:style/Theme.Holo.DialogWhenLarge"
+                android:label="@string/device_picker"
+                android:clearTaskOnLaunch="true">
+            <intent-filter>
+                <action android:name="android.bluetooth.devicepicker.action.LAUNCH" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
         </activity>
 
         <activity android:name="Settings$TetherSettingsActivity"

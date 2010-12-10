@@ -165,6 +165,15 @@ public class CachedBluetoothDeviceManager {
         }
     }
 
+    private void dispatchDeviceBondStateChanged(
+            CachedBluetoothDevice cachedDevice, int bondState) {
+        synchronized (mCallbacks) {
+            for (Callback callback : mCallbacks) {
+                callback.onDeviceBondStateChanged(cachedDevice, bondState);
+            }
+        }
+    }
+
     public synchronized void onBondingStateChanged(BluetoothDevice device, int bondState) {
         CachedBluetoothDevice cachedDevice = findDevice(device);
         if (cachedDevice == null) {
@@ -176,11 +185,12 @@ public class CachedBluetoothDeviceManager {
             cachedDevice = findDevice(device);
             if (cachedDevice == null) {
                 Log.e(TAG, "Got bonding state changed for " + device +
-                        "but device not added in cache");
+                        ", but device not added in cache.");
                 return;
             }
         }
 
+        dispatchDeviceBondStateChanged(cachedDevice, bondState);
         cachedDevice.onBondingStateChanged(bondState);
     }
 

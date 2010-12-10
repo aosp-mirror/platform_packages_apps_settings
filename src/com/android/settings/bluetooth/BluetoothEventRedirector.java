@@ -47,7 +47,7 @@ import java.util.concurrent.TimeUnit;
 public class BluetoothEventRedirector {
     private static final String TAG = "BluetoothEventRedirector";
 
-    private final LocalBluetoothManager mManager;
+    /* package */ final LocalBluetoothManager mManager;
 
     private final ThreadPoolExecutor mSerialExecutor = new ThreadPoolExecutor(
         0, 1, 1000L, TimeUnit.MILLISECONDS, new LinkedBlockingQueue<Runnable>());
@@ -215,7 +215,7 @@ public class BluetoothEventRedirector {
     }
 
     // This can't be called from a broadcast receiver where the filter is set in the Manifest.
-    private String getDockedDeviceAddress(Context context) {
+    /* package */ String getDockedDeviceAddress(Context context) {
         // This works only because these broadcast intents are "sticky"
         Intent i = context.registerReceiver(null, new IntentFilter(Intent.ACTION_DOCK_EVENT));
         if (i != null) {
@@ -230,7 +230,7 @@ public class BluetoothEventRedirector {
         return null;
     }
 
-    private void persistDiscoveringTimestamp(
+    /* package */ void persistDiscoveringTimestamp(
         final BroadcastReceiver.PendingResult pr, final boolean newState) {
         // Load the shared preferences and edit it on a background
         // thread (but serialized!), but then post back to the main

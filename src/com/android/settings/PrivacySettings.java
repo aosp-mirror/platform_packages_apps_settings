@@ -22,6 +22,7 @@ import android.app.backup.IBackupManager;
 import android.content.ContentResolver;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.RemoteException;
 import android.os.ServiceManager;
@@ -41,9 +42,12 @@ public class PrivacySettings extends SettingsPreferenceFragment implements
     private static final String BACKUP_CATEGORY = "backup_category";
     private static final String BACKUP_DATA = "backup_data";
     private static final String AUTO_RESTORE = "auto_restore";
+    private static final String CONFIGURE_TRANSPORT = "configure_transport";
+    private IBackupManager mBackupManager;
     private CheckBoxPreference mBackup;
     private CheckBoxPreference mAutoRestore;
     private Dialog mConfirmDialog;
+    private PreferenceScreen mConfigure;
 
     private static final int DIALOG_ERASE_BACKUP = 2;
     private int     mDialogType;
@@ -54,8 +58,12 @@ public class PrivacySettings extends SettingsPreferenceFragment implements
         addPreferencesFromResource(R.xml.privacy_settings);
         final PreferenceScreen screen = getPreferenceScreen();
 
+        mBackupManager = IBackupManager.Stub.asInterface(
+                ServiceManager.getService(Context.BACKUP_SERVICE));
+
         mBackup = (CheckBoxPreference) screen.findPreference(BACKUP_DATA);
         mAutoRestore = (CheckBoxPreference) screen.findPreference(AUTO_RESTORE);
+        mConfigure = (PreferenceScreen) screen.findPreference(CONFIGURE_TRANSPORT);
 
         // Vendor specific
         if (getActivity().getPackageManager().
@@ -121,13 +129,31 @@ public class PrivacySettings extends SettingsPreferenceFragment implements
     private void updateToggles() {
         ContentResolver res = getContentResolver();
 
-        final boolean backupEnabled = Settings.Secure.getInt(res,
-                Settings.Secure.BACKUP_ENABLED, 0) == 1;
+        boolean backupEnabled = false;
+        Intent configIntent = null;
+        String configSummary = null;
+        try {
+            backupEnabled = mBackupManager.isBackupEnabled();
+            String transport = mBackupManager.getCurrentTransport();
+            configIntent = mBackupManager.getConfigurationIntent(transport);
+            configSummary = mBackupManager.getDestinationString(transport);
+        } catch (RemoteException e) {
+            // leave it 'false' and disable the UI; there's no backup manager
+            mBackup.setEnabled(false);
+        }
         mBackup.setChecked(backupEnabled);
 
         mAutoRestore.setChecked(Settings.Secure.getInt(res,
                 Settings.Secure.BACKUP_AUTO_RESTORE, 1) == 1);
         mAutoRestore.setEnabled(backupEnabled);
+
+        mConfigure.setEnabled(configIntent != null);
+        mConfigure.setIntent(configIntent);
+        if (configSummary != null) {
+            mConfigure.setSummary(configSummary);
+        } else {
+            mConfigure.setSummary(R.string.backup_configure_transport_default_summary);
+        }
     }
 
     public void onClick(DialogInterface dialog, int which) {
@@ -151,11 +177,9 @@ public class PrivacySettings extends SettingsPreferenceFragment implements
      * @param enable whether to enable backup
      */
     private void setBackupEnabled(boolean enable) {
-        IBackupManager bm = IBackupManager.Stub.asInterface(
-                ServiceManager.getService(Context.BACKUP_SERVICE));
-        if (bm != null) {
+        if (mBackupManager != null) {
             try {
-                bm.setBackupEnabled(enable);
+                mBackupManager.setBackupEnabled(enable);
             } catch (RemoteException e) {
                 mBackup.setChecked(!enable);
                 mAutoRestore.setEnabled(!enable);

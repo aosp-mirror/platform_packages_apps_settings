@@ -253,7 +253,6 @@ public abstract class LocalBluetoothProfileManager {
         return R.drawable.ic_bt_headphones_a2dp;
     }
 
-    // TODO: int instead of enum
     public static enum Profile {
         HEADSET(R.string.bluetooth_profile_headset),
         A2DP(R.string.bluetooth_profile_a2dp),

@@ -263,7 +263,7 @@ public class QuickLaunchSettings extends PreferenceActivity implements
         
         /** Whether the shortcut has been seen already.  The array index is the shortcut. */
         SparseBooleanArray shortcutSeen = new SparseBooleanArray();
-        KeyCharacterMap keyMap = KeyCharacterMap.load(KeyCharacterMap.BUILT_IN_KEYBOARD);
+        KeyCharacterMap keyMap = KeyCharacterMap.load(KeyCharacterMap.VIRTUAL_KEYBOARD);
 
         // Go through all the key codes and create a preference for the appropriate keys
         for (int keyCode = KeyEvent.getMaxKeyCode() - 1; keyCode >= 0; keyCode--) {

@@ -85,12 +85,13 @@ public class BluetoothPairingRequest extends BroadcastReceiver {
 
                 String name = intent.getStringExtra(BluetoothDevice.EXTRA_NAME);
                 if (TextUtils.isEmpty(name)) {
-                    name = device.getName();
+                    name = (device != null ? device.getName() :
+                            context.getString(android.R.string.unknownName));
                 }
 
                 notification.setLatestEventInfo(context,
                         res.getString(R.string.bluetooth_notif_title),
-                        res.getString(R.string.bluetooth_notif_message) + name,
+                        res.getString(R.string.bluetooth_notif_message, name),
                         pending);
                 notification.flags |= Notification.FLAG_AUTO_CANCEL;
                 notification.defaults |= Notification.DEFAULT_SOUND;

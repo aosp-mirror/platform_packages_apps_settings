@@ -32,7 +32,7 @@ import android.widget.Toast;
 
 /**
  * BluetoothEnabler is a helper to manage the Bluetooth on/off checkbox
- * preference. It is turns on/off Bluetooth and ensures the summary of the
+ * preference. It turns on/off Bluetooth and ensures the summary of the
  * preference reflects the current state.
  */
 public class BluetoothEnabler implements Preference.OnPreferenceChangeListener {
@@ -103,7 +103,7 @@ public class BluetoothEnabler implements Preference.OnPreferenceChangeListener {
         return false;
     }
 
-    private void handleStateChanged(int state) {
+    /* package */ void handleStateChanged(int state) {
         switch (state) {
             case BluetoothAdapter.STATE_TURNING_ON:
                 mCheckBox.setSummary(R.string.wifi_starting);

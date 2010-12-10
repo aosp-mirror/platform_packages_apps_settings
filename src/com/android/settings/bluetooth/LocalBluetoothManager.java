@@ -84,6 +84,8 @@ public class LocalBluetoothManager {
 
     private long mLastScan;
 
+    private LocalBluetoothManager() { }
+
     public static LocalBluetoothManager getInstance(Context context) {
         synchronized (LocalBluetoothManager.class) {
             if (sInstance == null) {
@@ -316,6 +318,7 @@ public class LocalBluetoothManager {
         void onScanningStateChanged(boolean started);
         void onDeviceAdded(CachedBluetoothDevice cachedDevice);
         void onDeviceDeleted(CachedBluetoothDevice cachedDevice);
+        void onDeviceBondStateChanged(CachedBluetoothDevice cachedDevice, int bondState);
     }
 
     public boolean shouldShowDialogInForeground(String deviceAddress) {
