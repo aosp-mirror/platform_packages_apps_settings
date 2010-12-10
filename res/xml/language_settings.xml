@@ -33,6 +33,28 @@
         android:summary="@string/user_dict_settings_summary">
     </PreferenceScreen>
 
+    <PreferenceCategory android:key="voice_input_category"
+            android:title="@string/voice_input_category" >
+
+        <!-- entries, entryValues, and defaultValue will be populated programmatically. -->
+        <ListPreference
+                android:key="recognizer"
+                android:title="@string/recognizer_title"
+                android:dialogTitle="@string/recognizer_title" />
+
+        <!-- An intent for this preference will be populated programmatically. -->
+        <PreferenceScreen android:key="recognizer_settings"
+                android:title="@string/recognizer_settings_title" />
+    </PreferenceCategory>
+
+    <PreferenceCategory android:key="voice_output_category"
+            android:title="@string/voice_output_category" >
+
+        <PreferenceScreen android:key="tts_settings"
+                android:fragment="com.android.settings.TextToSpeechSettings"
+                android:title="@string/tts_settings_title" />
+    </PreferenceCategory>
+
     <PreferenceCategory android:key="keyboard_settings_category"
             android:title="@string/keyboard_settings_category">
 

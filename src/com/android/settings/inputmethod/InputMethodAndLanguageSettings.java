@@ -19,6 +19,7 @@ package com.android.settings.inputmethod;
 import com.android.settings.R;
 import com.android.settings.SettingsPreferenceFragment;
 import com.android.settings.Utils;
+import com.android.settings.VoiceInputOutputSettings;
 
 import android.app.AlertDialog;
 import android.content.Context;
@@ -81,6 +82,8 @@ public class InputMethodAndLanguageSettings extends SettingsPreferenceFragment {
         }
         mCheckboxes = new ArrayList<CheckBoxPreference>();
         onCreateIMM();
+
+        new VoiceInputOutputSettings(this).onCreate();
     }
 
     private boolean isSystemIme(InputMethodInfo property) {
