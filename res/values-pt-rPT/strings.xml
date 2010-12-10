@@ -115,19 +115,15 @@
     <string name="bluetooth_notif_message" msgid="5381418499788668724">"Seleccionar emparelhamento com "</string>
     <string name="device_picker" msgid="8721012448931226323">"Seleccionador de dispositivo Bluetooth"</string>
     <string name="bluetooth_permission_request" msgid="1523129741266262748">"Pedido de emparelhamento de Bluetooth"</string>
-    <!-- outdated translation 2342558978033892004 -->     <string name="bluetooth_ask_enablement" msgid="8211158472876087588">"Uma aplicação no seu telefone está a solicitar autorização para activar o Bluetooth. Pretende fazê-lo?"</string>
-    <!-- no translation found for bluetooth_ask_discovery (5950965604673262829) -->
-    <skip />
+    <string name="bluetooth_ask_enablement" msgid="8211158472876087588">"Uma aplicação está a pedir autorização para activar o Bluetooth. Pretende fazê-lo?"</string>
+    <string name="bluetooth_ask_discovery" product="tablet" msgid="5950965604673262829">"Uma aplicação do seu tablet está a solicitar autorização para que o seu tablet possa ser detectável por outros dispositivos Bluetooth durante <xliff:g id="TIMEOUT">%1$d</xliff:g> segundos. Pretende fazê-lo?"</string>
     <string name="bluetooth_ask_discovery" product="default" msgid="669870705606180872">"Uma aplicação do seu telefone está a solicitar autorização para que o seu telefone possa ser detectado por outros dispositivos Bluetooth durante <xliff:g id="TIMEOUT">%1$d</xliff:g> segundos. Pretende fazê-lo?"</string>
-    <!-- no translation found for bluetooth_ask_enablement_and_discovery (5716077575971497298) -->
-    <skip />
+    <string name="bluetooth_ask_enablement_and_discovery" product="tablet" msgid="5716077575971497298">"Uma aplicação do seu tablet está a solicitar autorização para activar o Bluetooth e para que o seu tablet possa ser detectado por outros dispositivos durante <xliff:g id="TIMEOUT">%1$d</xliff:g> segundos. Pretende fazê-lo?"</string>
     <string name="bluetooth_ask_enablement_and_discovery" product="default" msgid="7220210326619399542">"Uma aplicação do seu telefone está a solicitar autorização para activar o Bluetooth e para que o seu telefone possa ser detectado por outros dispositivos durante <xliff:g id="TIMEOUT">%1$d</xliff:g> segundos. Pretende fazê-lo?"</string>
     <string name="bluetooth_turning_on" msgid="3107102168379705771">"A ligar Bluetooth..."</string>
     <string name="date_and_time" msgid="4114084177056654663">"Definições de data e hora"</string>
     <string name="date_time_12_hour_sample" msgid="3259617262618020574">"1:00 pm"</string>
     <string name="date_time_24_hour_sample" msgid="8916857570746212357">"13:00"</string>
-    <string name="date_time_changeTime_text" msgid="7037437020000867740">"Mudar hora"</string>
-    <string name="date_time_changeDate_text" msgid="5259762626498028057">"Data"</string>
     <string name="choose_timezone" msgid="7762866468013985022">"Seleccionar fuso horário"</string>
     <string name="normal_date_format" msgid="1982904221918374153">"Normal (<xliff:g id="DATE">%s</xliff:g>)"</string>
     <string name="display_preview_label" msgid="1127597250917274792">"Pré-visualização:"</string>
@@ -214,7 +210,7 @@
     <string name="device_info_label" msgid="6551553813651711205">"Informações sobre o dispositivo"</string>
     <string name="battery_info_label" msgid="4132685016148679403">"Informações da bateria"</string>
     <string name="display_label" msgid="7403874003169865762">"Visor"</string>
-    <!-- outdated translation 2127552523124277664 -->     <string name="phone_info_label" product="tablet" msgid="7820855350955963628">"Informações do telefone"</string>
+    <string name="phone_info_label" product="tablet" msgid="7820855350955963628">"Informações do tablet"</string>
     <string name="phone_info_label" product="default" msgid="2127552523124277664">"Informações do telefone"</string>
     <string name="sd_card_settings_label" product="nosdcard" msgid="8101475181301178428">"Armazenamento USB"</string>
     <string name="sd_card_settings_label" product="default" msgid="5743100901106177102">"Cartão SD"</string>
@@ -260,6 +256,8 @@
     <string name="owner_info_settings_title" msgid="2723190010708381889">"Info do proprietário"</string>
     <!-- no translation found for owner_info_settings_summary (8656024590287117256) -->
     <skip />
+    <!-- no translation found for owner_info_settings_edit_text_hint (2382525043173672857) -->
+    <skip />
     <string name="security_settings_title" msgid="5168491784222013179">"Localização e segurança"</string>
     <string name="location_security_settings_title" msgid="4624434296446625554">"Definições de localização e segurança"</string>
     <string name="security_settings_summary" msgid="967393342537986570">"Definir A minha localização, desbloqueio do ecrã, bloqueio do cartão SIM, bloqueio do armazenamento de credenciais"</string>
@@ -274,10 +272,8 @@
     <skip />
     <!-- no translation found for unlock_set_unlock_launch_picker_enable_summary (4791110798817242301) -->
     <skip />
-    <!-- no translation found for unlock_set_unlock_off_title (1613932765246180079) -->
-    <skip />
-    <!-- no translation found for unlock_set_unlock_off_summary (2992485517488881365) -->
-    <skip />
+    <string name="unlock_set_unlock_off_title" msgid="1613932765246180079">"Desactivado"</string>
+    <string name="unlock_set_unlock_off_summary" msgid="2992485517488881365">"Não mostrar o ecrã de bloqueio"</string>
     <string name="unlock_set_unlock_none_title" msgid="3760684669884671990">"Nenhuma"</string>
     <string name="unlock_set_unlock_none_summary" msgid="2658550480388272618">"Desactivar segurança de desbloqueio do ecrã"</string>
     <string name="unlock_set_unlock_pattern_title" msgid="2912067603917311700">"Padrão"</string>
@@ -286,7 +282,7 @@
     <string name="unlock_set_unlock_pin_summary" msgid="4131169672844263316">"Introduzir um PIN numérico para desbloquear o ecrã"</string>
     <string name="unlock_set_unlock_password_title" msgid="8775603825675090937">"Palavra-passe"</string>
     <string name="unlock_set_unlock_password_summary" msgid="4623254789833899286">"Introduzir uma palavra-passe para desbloquear ecrã"</string>
-    <!-- outdated translation 736557879526940324 -->     <string name="unlock_set_unlock_disabled_summary" msgid="8816944391772300580">"Desactivada pelo administrador de telefone remoto"</string>
+    <string name="unlock_set_unlock_disabled_summary" msgid="8816944391772300580">"Desactiv. pelo adminis. do dispositivo remoto"</string>
     <string name="unlock_disable_lock_title" msgid="1427036227416979120">"Desactivar bloqueio do ecrã"</string>
     <string name="unlock_disable_lock_pattern_summary" msgid="6801602880568869201">"Remover padrão de desbloqueio"</string>
     <string name="unlock_disable_lock_pin_summary" msgid="8856842745366993387">"Remover PIN de desbloqueio"</string>
@@ -370,13 +366,13 @@
     <string name="bluetooth_device_context_connect_advanced" msgid="2643129703569788771">"Opções..."</string>
     <string name="bluetooth_connect_specific_profiles_title" msgid="6952214406025825164">"Ligar a..."</string>
     <string name="bluetooth_profile_a2dp" msgid="3259633293424539529">"Multimédia"</string>
-    <!-- outdated translation 1874975688666658946 -->     <string name="bluetooth_profile_headset" product="tablet" msgid="2252738313413646294">"Telefone"</string>
+    <string name="bluetooth_profile_headset" product="tablet" msgid="2252738313413646294">"Tablet"</string>
     <string name="bluetooth_profile_headset" product="default" msgid="1874975688666658946">"Telefone"</string>
     <string name="bluetooth_profile_opp" msgid="3799470046565284440">"Transferir"</string>
     <string name="bluetooth_profile_hid" msgid="3000858580917633478">"Dispositivo de entrada"</string>
     <string name="bluetooth_profile_pan" msgid="4225813400648547154">"Ligação ponto a ponto"</string>
     <string name="bluetooth_summary_connected_to_a2dp" msgid="510833839847758664">"Ligado ao áudio de multimédia"</string>
-    <!-- outdated translation 4876496372728623918 -->     <string name="bluetooth_summary_connected_to_headset" product="tablet" msgid="598335151406893070">"Ligado ao áudio do telefone"</string>
+    <string name="bluetooth_summary_connected_to_headset" product="tablet" msgid="598335151406893070">"Ligado ao áudio do tablet"</string>
     <string name="bluetooth_summary_connected_to_headset" product="default" msgid="4876496372728623918">"Ligado ao áudio do telefone"</string>
     <string name="bluetooth_summary_connected_to_a2dp_headset" msgid="3045032710457800891">"Ligado ao áudio do telefone e de multimédia"</string>
     <string name="bluetooth_summary_connected_to_hid" msgid="8147499644396475561">"Ligado a um dispositivo de entrada"</string>
@@ -504,7 +500,7 @@
     <string name="silent_mode_title" msgid="3181479108593217704">"Modo silencioso"</string>
     <string name="silent_mode_summary" msgid="3309650676072917899">"Silenciar todos os sons, excepto multimédia e alarmes"</string>
     <string name="silent_mode_incl_alarm_summary" msgid="2088830834182228458">"Todos os sons estão silenciados, excepto multimédia"</string>
-    <!-- outdated translation 5379026328015343686 -->     <string name="ringtone_title" msgid="7037881886694206550">"Toque do telefone"</string>
+    <string name="ringtone_title" msgid="7037881886694206550">"Toque da chamada recebida"</string>
     <string name="ringtone_summary" msgid="2630023412632683493"></string>
     <string name="all_volume_title" msgid="8741571721868253103">"Volume"</string>
     <string name="ring_volume_title" msgid="7938706566797464165">"Volume da campainha"</string>
@@ -544,16 +540,16 @@
     <string name="dock_audio_settings_title" msgid="3324750259959570305">"Áudio"</string>
     <string name="dock_audio_summary_desk" msgid="6487784412371139335">"Definições da estação de ancoragem para ambiente de trabalho acoplada"</string>
     <string name="dock_audio_summary_car" msgid="6740897586006248450">"Definições da estação de ancoragem para automóvel acoplada"</string>
-    <!-- outdated translation 289909253741048784 -->     <string name="dock_audio_summary_none" product="tablet" msgid="8215337394914283607">"Telefone não ancorado"</string>
+    <string name="dock_audio_summary_none" product="tablet" msgid="8215337394914283607">"Tablet não ancorado"</string>
     <string name="dock_audio_summary_none" product="default" msgid="289909253741048784">"Telefone não ancorado"</string>
     <string name="dock_audio_summary_unknown" msgid="4465059868974255693">"Definições da estação de ancoragem acoplada"</string>
     <string name="dock_not_found_title" msgid="3290961741828952424">"Estação de ancoragem não encontrada"</string>
-    <!-- outdated translation 3035260358985111855 -->     <string name="dock_not_found_text" product="tablet" msgid="7935403744079168804">"O telefone tem de estar ancorado para configurar o áudio da estação de ancoragem"</string>
+    <string name="dock_not_found_text" product="tablet" msgid="7935403744079168804">"O tablet tem de estar ancorado para configurar o áudio da estação de ancoragem"</string>
     <string name="dock_not_found_text" product="default" msgid="3035260358985111855">"O telefone tem de estar ancorado para configurar o áudio da estação de ancoragem"</string>
     <string name="dock_sounds_enable_title" msgid="3659084028644948905">"Som de inserção na estação de ancoragem"</string>
-    <!-- outdated translation 8491180514199743771 -->     <string name="dock_sounds_enable_summary_on" product="tablet" msgid="838102386448981339">"Reproduzir som ao inserir ou remover o telefone da estação de ancoragem"</string>
+    <string name="dock_sounds_enable_summary_on" product="tablet" msgid="838102386448981339">"Reproduzir som ao inserir ou remover o tablet da estação de ancoragem"</string>
     <string name="dock_sounds_enable_summary_on" product="default" msgid="8491180514199743771">"Reproduzir som ao inserir ou remover o telefone da estação de ancoragem"</string>
-    <!-- outdated translation 3151046599205265919 -->     <string name="dock_sounds_enable_summary_off" product="tablet" msgid="5077843049805652363">"Não reproduzir som ao inserir ou remover o telefone da estação de ancoragem"</string>
+    <string name="dock_sounds_enable_summary_off" product="tablet" msgid="5077843049805652363">"Não reproduzir som ao inserir ou remover o tablet da estação de ancoragem"</string>
     <string name="dock_sounds_enable_summary_off" product="default" msgid="3151046599205265919">"Não reproduzir som ao inserir ou remover o telefone da estação de ancoragem"</string>
     <string name="sync_settings" msgid="9186125469300013491">"Contas e sincronização"</string>
     <string name="sync_settings_summary" msgid="2962179505214965667">"Adicionar ou remover contas e alterar definições de contas"</string>
@@ -564,9 +560,9 @@
     <string name="animations_summary_on" msgid="8843613112130484436">"Mostrar animação ao abrir e fechar janelas"</string>
     <string name="animations_summary_off" msgid="2777026828025551983">"Mostrar animação ao abrir e fechar janelas"</string>
     <string name="accelerometer_title" msgid="7854608399547349157">"Rodar ecrã automaticamente"</string>
-    <!-- outdated translation 1133737282813048021 -->     <string name="accelerometer_summary_on" product="tablet" msgid="429982132339828942">"Mudar orientação automaticamente ao rodar o telefone"</string>
+    <string name="accelerometer_summary_on" product="tablet" msgid="429982132339828942">"Mudar orientação automaticamente ao rodar o tablet"</string>
     <string name="accelerometer_summary_on" product="default" msgid="1133737282813048021">"Mudar orientação automaticamente ao rodar o telefone"</string>
-    <!-- outdated translation 5485489363715740761 -->     <string name="accelerometer_summary_off" product="tablet" msgid="4781734213242521682">"Mudar orientação automaticamente ao rodar o telefone"</string>
+    <string name="accelerometer_summary_off" product="tablet" msgid="4781734213242521682">"Mudar orientação automaticamente ao rodar o tablet"</string>
     <string name="accelerometer_summary_off" product="default" msgid="5485489363715740761">"Mudar orientação automaticamente ao rodar o telefone"</string>
     <string name="brightness" msgid="2354961343555249270">"Brilho"</string>
     <string name="brightness_summary" msgid="838917350127550703">"Ajustar o brilho do ecrã"</string>
@@ -577,9 +573,9 @@
     <string name="sim_lock_settings_category" msgid="5136244267576697004">"Configurar bloqueio do cartão SIM"</string>
     <string name="sim_lock_settings_title" msgid="9018585580955414596">"Bloqueio do cartão SIM"</string>
     <string name="sim_pin_toggle" msgid="1742123478029451888">"Bloquear cartão SIM"</string>
-    <!-- outdated translation 2503536505568814324 -->     <string name="sim_lock_on" product="tablet" msgid="5058355081270397764">"É necessário o PIN para utilizar o telefone"</string>
+    <string name="sim_lock_on" product="tablet" msgid="5058355081270397764">"É necessário o PIN para utilizar o tablet"</string>
     <string name="sim_lock_on" product="default" msgid="2503536505568814324">"É necessário o PIN para utilizar o telefone"</string>
-    <!-- outdated translation 258981978215428916 -->     <string name="sim_lock_off" product="tablet" msgid="2813800553917012356">"É necessário o PIN para utilizar o telefone"</string>
+    <string name="sim_lock_off" product="tablet" msgid="2813800553917012356">"É necessário o PIN para utilizar o tablet"</string>
     <string name="sim_lock_off" product="default" msgid="258981978215428916">"É necessário o PIN para utilizar o telefone"</string>
     <string name="sim_pin_change" msgid="6311414184279932368">"Mudar PIN do SIM"</string>
     <string name="sim_enter_pin" msgid="6608715137008508432">"PIN do SIM"</string>
@@ -596,7 +592,7 @@
     <string name="sim_lock_failed" msgid="6676748290838006404">"Impossível mudar estado de bloqueio do cartão SIM."\n"PIN possivelmente incorrecto."</string>
     <string name="sim_enter_ok" msgid="6475946836899218919">"OK"</string>
     <string name="sim_enter_cancel" msgid="6240422158517208036">"Cancelar"</string>
-    <!-- outdated translation 475872867864762157 -->     <string name="device_info_settings" product="tablet" msgid="1119755927536987178">"Estado do telefone"</string>
+    <string name="device_info_settings" product="tablet" msgid="1119755927536987178">"Estado do tablet"</string>
     <string name="device_info_settings" product="default" msgid="475872867864762157">"Estado do telefone"</string>
     <string name="system_update_settings_list_item_title" msgid="3342887311059985961">"Actualizações do sistema"</string>
     <string name="system_update_settings_list_item_summary" msgid="3853057315907710747"></string>
@@ -609,8 +605,7 @@
     <string name="device_status_activity_title" msgid="1411201799384697904">"Estado"</string>
     <string name="device_status" msgid="607405385799807324">"Estado"</string>
     <string name="device_status_summary" msgid="2599162787451519618">"Número de telefone, sinal, etc."</string>
-    <string name="storage_settings" product="nosdcard" msgid="8758910337658683955">"Armaz. partilhado e seguro"</string>
-    <string name="storage_settings" product="default" msgid="4211799979832404953">"Armazenamento"</string>
+    <string name="storage_settings" msgid="4211799979832404953">"Armazenamento"</string>
     <string name="storage_settings_title" msgid="8746016738388094064">"Definições de armazenamento"</string>
     <string name="storage_settings_summary" product="nosdcard" msgid="3543813623294870759">"Desmontar armazenamento USB, ver armazenamento disponível"</string>
     <string name="storage_settings_summary" product="default" msgid="9176693537325988610">"Desmontar cartão SD, ver armazenamento disponível"</string>
@@ -634,6 +629,12 @@
     <string name="sd_memory" product="default" msgid="151871913888051515">"Cartão SD"</string>
     <string name="memory_available" msgid="418542433817289474">"Espaço disponível"</string>
     <string name="memory_size" msgid="6629067715017232195">"Espaço total"</string>
+    <!-- no translation found for memory_calculating_size (2188358544203768588) -->
+    <skip />
+    <!-- no translation found for memory_apps_usage (5818922761412589352) -->
+    <skip />
+    <!-- no translation found for memory_media_usage (5655498435493764372) -->
+    <skip />
     <string name="sd_eject" product="nosdcard" msgid="4988563376492400073">"Desmont. arm. partilhado"</string>
     <string name="sd_eject" product="default" msgid="6915293408836853020">"Desmontar cartão SD"</string>
     <string name="sd_eject_summary" product="nosdcard" msgid="5009296896648072891">"Desmontar armaz. USB interno"</string>
@@ -649,7 +650,7 @@
     <string name="sd_format" product="nosdcard" msgid="2148179271623099054">"Apagar armazenamento USB"</string>
     <string name="sd_format" product="default" msgid="2576054280507119870">"Apagar cartão SD"</string>
     <string name="sd_format_summary" product="nosdcard" msgid="6331905044907914603">"Apaga todos os dados do armazenamento USB interno, como músicas e fotografias"</string>
-    <!-- outdated translation 1504606546865152514 -->     <string name="sd_format_summary" product="default" msgid="212703692181793109">"Apaga todos os dados no armaz. USB interno do telemóvel, como músicas ou fotografias"</string>
+    <!-- outdated translation 6331905044907914603 -->     <string name="sd_format_summary" product="default" msgid="212703692181793109">"Apaga todos os dados do armazenamento USB interno, como músicas e fotografias"</string>
     <string name="sd_unavailable" msgid="8580107589533213904">"Indisponível"</string>
     <string name="read_only" msgid="6702420168629076340">" (Só de leitura)"</string>
     <string name="dlg_confirm_unmount_title" product="nosdcard" msgid="2349876662428231297">"Desmontar armaz. USB"</string>
@@ -700,24 +701,23 @@
     <string name="menu_restore" msgid="8260067415075573273">"Repor predefinição"</string>
     <string name="restore_default_apn_completed" msgid="3990449939234957281">"Reposição de predefinições de APN concluída"</string>
     <string name="master_clear_title" msgid="5907939616087039756">"Reposição dos dados de fábrica"</string>
-    <!-- outdated translation 4986154238001088492 -->     <string name="master_clear_summary" product="tablet" msgid="4036344100254678429">"Apaga todos os dados do telefone"</string>
+    <string name="master_clear_summary" product="tablet" msgid="4036344100254678429">"Apaga todos os dados do tablet"</string>
     <string name="master_clear_summary" product="default" msgid="4986154238001088492">"Apaga todos os dados do telefone"</string>
     <string name="master_clear_desc" product="tablet" msgid="1305457209008369655">"Serão apagados todos os dados do "<b>"armazenamento interno"</b>" do tablet, incluindo:"\n\n<li>"A sua conta Google"</li>\n<li>"Dados e definições do sistema e das aplicações"</li>\n<li>"Aplicações transferidas"</li></string>
     <string name="master_clear_desc" product="default" msgid="2950536633526374209">"Serão apagados todos os dados do "<b>"armazenamento interno"</b>" do telefone, incluindo:"\n\n<li>"A sua conta Google"</li>\n<li>"Dados e definições do sistema e das aplicações"</li>\n<li>"Aplicações transferidas"</li></string>
     <string name="master_clear_accounts" product="default" msgid="6412857499147999073">\n\n"Actualmente, tem sessão iniciada nas seguintes contas:"\n</string>
     <string name="master_clear_desc_erase_external_storage" product="nosdcard" msgid="4740866328425123395">\n\n"Para limpar também músicas, imagens e outros dados do utilizador, é necessário apagar o "<b>"armazenamento USB"</b>"."</string>
-    <!-- no translation found for master_clear_desc_erase_external_storage (7339100478676372901) -->
-    <skip />
+    <!-- outdated translation 4740866328425123395 -->     <string name="master_clear_desc_erase_external_storage" product="default" msgid="7339100478676372901">\n\n"Para limpar também músicas, imagens e outros dados do utilizador, é necessário apagar o "<b>"armazenamento USB"</b>"."</string>
     <string name="erase_external_storage" product="nosdcard" msgid="969364037450286809">"Apagar armazenamento USB"</string>
     <string name="erase_external_storage" product="default" msgid="1397239046334307625">"Apagar cartão SD"</string>
     <string name="erase_external_storage_description" product="nosdcard" msgid="444834593696342279">"Apaga todos os dados do armazenamento USB interno, como músicas ou fotografias."</string>
     <string name="erase_external_storage_description" product="default" msgid="46603515218075174">"Apaga todos os dados do cartão SD, como músicas ou fotografias."</string>
-    <!-- outdated translation 7550632653343157971 -->     <string name="master_clear_button_text" product="tablet" msgid="3130786116528304116">"Repor telefone"</string>
+    <string name="master_clear_button_text" product="tablet" msgid="3130786116528304116">"Repor o tablet"</string>
     <string name="master_clear_button_text" product="default" msgid="7550632653343157971">"Repor telefone"</string>
     <string name="master_clear_final_desc" msgid="6917971132484622696">"Apagar todas as informações pessoais e as aplicações transferidas? Não é possível reverter esta acção!"</string>
     <string name="master_clear_final_button_text" msgid="5390908019019242910">"Apagar tudo"</string>
     <string name="master_clear_gesture_prompt" msgid="1428645764883536750">"Desenhe o seu padrão de desbloqueio"</string>
-    <!-- outdated translation 8901714274312707918 -->     <string name="master_clear_gesture_explanation" msgid="2234954758550554549">"Tem de desenhar o seu padrão de desbloqueio para confirmar uma reposição do telefone."</string>
+    <string name="master_clear_gesture_explanation" msgid="2234954758550554549">"Tem de desenhar a sua sequência de desbloqueio para confirmar uma reposição dos dados de fábrica."</string>
     <string name="master_clear_failed" msgid="8655202125010189406">"Não  foi efectuada nenhuma reposição porque o serviço System Clear não está disponível."</string>
     <string name="master_clear_confirm_title" msgid="4845794266129586839">"Confirmar reposição"</string>
     <string name="media_format_title" product="nosdcard" msgid="3999653431422767156">"Apagar armazenamento USB"</string>
@@ -785,24 +785,23 @@
     <string name="use_location_title" msgid="3214740644957841179">"Usar localização para pesquisa Google"</string>
     <string name="use_location_summary_disabled" msgid="1876901471649359806">"Usar A minha localização para a pesquisa Google e outros serviços Google"</string>
     <string name="use_location_summary_enabled" msgid="984549156918597265">"Localização utilizada para melhorar os resultados de pesquisa do Google e outros serviços Google"</string>
-    <!-- outdated translation 1743378368185371685 -->     <string name="about_settings" product="tablet" msgid="593457295516533765">"Acerca do telefone"</string>
+    <string name="about_settings" product="tablet" msgid="593457295516533765">"Acerca do tablet"</string>
     <string name="about_settings" product="default" msgid="1743378368185371685">"Acerca do telefone"</string>
-    <!-- outdated translation 3302263393543848667 -->     <string name="about_settings_summary" msgid="3371517697156165959">"Ver informações jurídicas, estado do telefone, versão de software"</string>
+    <string name="about_settings_summary" msgid="3371517697156165959">"Ver informações jurídicas, estado, versão de software"</string>
     <string name="legal_information" msgid="5769301644270604095">"Informações legais"</string>
     <string name="contributors_title" msgid="5917703088825286504">"Contribuintes"</string>
     <string name="copyright_title" msgid="865906688917260647">"Direitos de autor"</string>
     <string name="license_title" msgid="1990487604356037871">"Licença"</string>
     <string name="terms_title" msgid="7697580845616764642">"Termos e condições"</string>
     <string name="system_tutorial_list_item_title" msgid="9082844446660969729">"Tutorial do sistema"</string>
-    <!-- outdated translation 3861815254521030201 -->     <string name="system_tutorial_list_item_summary" product="tablet" msgid="3341504384445734067">"Saiba como utilizar o seu telefone"</string>
+    <string name="system_tutorial_list_item_summary" product="tablet" msgid="3341504384445734067">"Saiba como utilizar o seu tablet"</string>
     <string name="system_tutorial_list_item_summary" product="default" msgid="3861815254521030201">"Saiba como utilizar o seu telefone"</string>
     <string name="settings_license_activity_title" msgid="7553683406244228650">"Licenças open source"</string>
     <string name="settings_license_activity_unavailable" msgid="4210539215951487627">"Ocorreu um problema ao carregar as licenças."</string>
     <string name="settings_license_activity_loading" msgid="3337535809093591740">"A carregar..."</string>
     <string name="settings_safetylegal_title" msgid="1289483965535937431">"Informações de segurança"</string>
     <string name="settings_safetylegal_activity_title" msgid="6901214628496951727">"Informações de segurança"</string>
-    <!-- no translation found for settings_safetylegal_activity_unreachable (170670055116721810) -->
-    <skip />
+    <string name="settings_safetylegal_activity_unreachable" msgid="170670055116721810">"Não tem uma ligação de dados. Para visualizar estas informações agora, aceda a %s a partir de qualquer computador ligado à internet."</string>
     <string name="settings_safetylegal_activity_loading" msgid="8059022597639516348">"A carregar..."</string>
     <string name="lockpassword_choose_your_password_header" msgid="8624900666929394990">"Escolher palavra-passe"</string>
     <string name="lockpassword_choose_your_pin_header" msgid="7598849519816138302">"Escolha o PIN"</string>
@@ -841,9 +840,9 @@
     <string name="lockpattern_too_many_failed_confirmation_attempts_footer" msgid="6759029360597122873">"Tente novamente dentro de <xliff:g id="NUMBER">%d</xliff:g> segundos."</string>
     <string name="skip_button_label" msgid="8680422740354436943">"Cancelar"</string>
     <string name="next_button_label" msgid="8890792540116568321">"Seguinte"</string>
-    <!-- outdated translation 4059246467204273930 -->     <string name="lock_title" product="tablet" msgid="2909697418179419990">"Manter o telefone seguro"</string>
+    <string name="lock_title" product="tablet" msgid="2909697418179419990">"Manter a segurança do tablet"</string>
     <string name="lock_title" product="default" msgid="4059246467204273930">"Manter o telefone seguro"</string>
-    <!-- outdated translation 9100785646737118042 -->     <string name="lock_intro_message" product="tablet" msgid="4544669202394019747"><font size="17">"Proteja o seu telefone de utilização não autorizada, criando um padrão pessoal de desbloqueio do ecrã. "\n<font height="17">\n</font><b>"1"</b>"  No ecrã seguinte, observe enquanto é desenhado um padrão exemplificativo. "\n<font height="17">\n</font><b>"2"</b>"  Quando estiver pronto, desenhe o seu padrão pessoal de desbloqueio. Experimente diferentes padrões, mas ligue, pelo menos, quatro pontos. "\n<font height="17">\n</font><b>"3"</b>"  Redesenhe o seu padrão para confirmar. "\n<font height="17">\n</font><b>"Está pronto para começar? Toque em “Seguinte”"</b>". "\n<font height="3">\n</font>"Para deixar o seu telefone sem protecção, toque em “Cancelar”."</font></string>
+    <string name="lock_intro_message" product="tablet" msgid="4544669202394019747"><font size="17">"Proteja o seu tablet de utilização não autorizada, criando uma sequência pessoal de desbloqueio do ecrã. "\n<font height="17">\n</font><b>"1"</b>"  No ecrã seguinte, observe enquanto é desenhado uma sequência exemplificativa. "\n<font height="17">\n</font><b>"2"</b>"  Quando estiver pronto, desenhe a sua sequência pessoal de desbloqueio. Experimente diferentes sequências, mas ligue, pelo menos, quatro pontos. "\n<font height="17">\n</font><b>"3"</b>"  Redesenhe a sua sequência para confirmar. "\n<font height="17">\n</font><b>"Está pronto para começar? Toque em “Seguinte”"</b>". "\n<font height="3">\n</font>"Para deixar o seu tablet sem protecção, toque em “Cancelar”."</font></string>
     <string name="lock_intro_message" product="default" msgid="9100785646737118042"><font size="17">"Proteja o seu telefone de utilização não autorizada, criando um padrão pessoal de desbloqueio do ecrã. "\n<font height="17">\n</font><b>"1"</b>"  No ecrã seguinte, observe enquanto é desenhado um padrão exemplificativo. "\n<font height="17">\n</font><b>"2"</b>"  Quando estiver pronto, desenhe o seu padrão pessoal de desbloqueio. Experimente diferentes padrões, mas ligue, pelo menos, quatro pontos. "\n<font height="17">\n</font><b>"3"</b>"  Redesenhe o seu padrão para confirmar. "\n<font height="17">\n</font><b>"Está pronto para começar? Toque em “Seguinte”"</b>". "\n<font height="3">\n</font>"Para deixar o seu telefone sem protecção, toque em “Cancelar”."</font></string>
     <string name="lock_example_title" msgid="8052305554017485410">"Padrão exemplificativo"</string>
     <string name="lock_example_message" msgid="1838650097090632706">"Ligue, pelo menos, quatro pontos."\n" "\n"Toque em “Seguinte” quando estiver pronto para desenhar o seu próprio padrão."</string>
@@ -854,7 +853,7 @@
     <string name="applications_settings_header" msgid="6018266337275422250">"Definições da aplicação"</string>
     <string name="install_applications" msgid="4872012136210802181">"Fontes desconhecidas"</string>
     <string name="install_unknown_applications" msgid="6612824788917283662">"Permitir instalação de aplicações não Market"</string>
-    <!-- outdated translation 1923717607319933741 -->     <string name="install_all_warning" product="tablet" msgid="8143969767997876735">"O seu telefone e dados pessoais estão mais vulneráveis a ataques por aplicações de fontes desconhecidas. O utilizador reconhece ser o único responsável por danos no telefone ou perda de dados que possam resultar da utilização destas aplicações."</string>
+    <string name="install_all_warning" product="tablet" msgid="8143969767997876735">"O seu tablet e dados pessoais estão mais vulneráveis a ataques por aplicações de fontes desconhecidas. O utilizador reconhece ser o único responsável por danos no tablet ou perda de dados que possam resultar da utilização destas aplicações."</string>
     <string name="install_all_warning" product="default" msgid="1923717607319933741">"O seu telefone e dados pessoais estão mais vulneráveis a ataques por aplicações de fontes desconhecidas. O utilizador reconhece ser o único responsável por danos no telefone ou perda de dados que possam resultar da utilização destas aplicações."</string>
     <string name="application_info_label" msgid="1150486628158409543">"Informações da aplicação"</string>
     <string name="storage_label" msgid="8700867073480107253">"Armazenamento"</string>
@@ -906,14 +905,14 @@
     <string name="app_factory_reset_dlg_text" msgid="438395129140568893">"Pretende instalar todas as actualizações para esta aplicação de sistema do Android?"</string>
     <string name="clear_failed_dlg_title" msgid="2387060805294783175">"Limpar dados"</string>
     <string name="clear_failed_dlg_text" msgid="7943411157007320290">"Falha ao limpar os dados da aplicação"</string>
-    <!-- outdated translation 3116027624526915561 -->     <string name="security_settings_desc" product="tablet" msgid="6158636779728455276">"Esta aplicação pode aceder aos seguintes itens no seu telefone:"</string>
+    <string name="security_settings_desc" product="tablet" msgid="6158636779728455276">"Esta aplicação pode aceder aos seguintes itens no seu tablet:"</string>
     <string name="security_settings_desc" product="default" msgid="3116027624526915561">"Esta aplicação pode aceder aos seguintes itens no seu telefone:"</string>
     <string name="computing_size" msgid="1599186977475211186">"A calcular..."</string>
     <string name="invalid_size_value" msgid="1901940003700269523">"Impossível calcular tamanho do pacote"</string>
     <string name="empty_list_msg" msgid="2901049162265094971">"Não tem nenhuma aplicação de terceiros instalada."</string>
     <string name="version_text" msgid="9189073826278676425">"versão <xliff:g id="VERSION_NUM">%1$s</xliff:g>"</string>
     <string name="move_app" msgid="5042838441401731346">"Mover"</string>
-    <!-- outdated translation 3895430471913858185 -->     <string name="move_app_to_internal" product="tablet" msgid="2299714147283854957">"Mover para o telefone"</string>
+    <string name="move_app_to_internal" product="tablet" msgid="2299714147283854957">"Mover para tablet"</string>
     <string name="move_app_to_internal" product="default" msgid="3895430471913858185">"Mover para o telefone"</string>
     <string name="move_app_to_sdcard" product="nosdcard" msgid="4350451696315265420">"Mover para armaz. USB"</string>
     <string name="move_app_to_sdcard" product="default" msgid="1143379049903056407">"Mover para cartão SD"</string>
@@ -962,7 +961,7 @@
     <string name="process_service_in_use_description" msgid="8993335064403217080">"O serviço <xliff:g id="COMP_NAME">%1$s</xliff:g> está a ser utilizado."</string>
     <string name="process_provider_in_use_description" msgid="5586603325677678940">"O fornecedor <xliff:g id="COMP_NAME">%1$s</xliff:g> está a ser utilizado."</string>
     <string name="runningservicedetails_stop_dlg_title" msgid="4253292537154337233">"Parar serviço de sistema?"</string>
-    <!-- outdated translation 6929716497425738387 -->     <string name="runningservicedetails_stop_dlg_text" product="tablet" msgid="5420033091144016389">"Tem a certeza de que pretende parar este serviço do sistema? Se o fizer, algumas das funcionalidades do telemóvel poderão deixar de funcionar correctamente até desligá-lo e ligá-lo novamente."</string>
+    <string name="runningservicedetails_stop_dlg_text" product="tablet" msgid="5420033091144016389">"Tem a certeza de que pretende parar este serviço do sistema? Se o fizer, algumas das funcionalidades do tablet poderão deixar de funcionar correctamente até desligá-lo e ligá-lo novamente."</string>
     <string name="runningservicedetails_stop_dlg_text" product="default" msgid="6929716497425738387">"Tem a certeza de que pretende parar este serviço do sistema? Se o fizer, algumas das funcionalidades do telemóvel poderão deixar de funcionar correctamente até desligá-lo e ligá-lo novamente."</string>
     <string name="language_settings" msgid="502219872342167227">"Idioma e teclado"</string>
     <string name="language_keyboard_settings_title" msgid="3455826933385341107">"Definições de idioma e teclado"</string>
@@ -990,7 +989,7 @@
     <string name="user_dict_settings_context_menu_delete_title" msgid="9140703913776549054">"Eliminar"</string>
     <string name="user_dict_settings_empty_text" msgid="6209268025109242806">"Não tem qualquer palavra no dicionário do utilizador. Pode adicionar palavras através do menu."</string>
     <string name="testing" msgid="6584352735303604146">"Testes"</string>
-    <!-- outdated translation 8656693364332840056 -->     <string name="testing_phone_info" product="tablet" msgid="193561832258534798">"Informações do telefone"</string>
+    <string name="testing_phone_info" product="tablet" msgid="193561832258534798">"Informações do tablet"</string>
     <string name="testing_phone_info" product="default" msgid="8656693364332840056">"Informações do telefone"</string>
     <string name="testing_battery_info" msgid="3497865525976497848">"Informação da bateria"</string>
     <string name="quick_launch_title" msgid="7904609846945905306">"Iniciação rápida"</string>
@@ -1085,14 +1084,14 @@
     <string name="power_bluetooth" msgid="4373329044379008289">"Bluetooth"</string>
     <string name="power_cell" msgid="6596471490976003056">"inactividade do telefone"</string>
     <string name="power_phone" msgid="5392641106474567277">"Chamadas de voz"</string>
-    <!-- outdated translation 9055659695602194990 -->     <string name="power_idle" product="tablet" msgid="4612478572401640759">"Telefone inactivo"</string>
+    <string name="power_idle" product="tablet" msgid="4612478572401640759">"Tablet inactivo"</string>
     <string name="power_idle" product="default" msgid="9055659695602194990">"Telefone inactivo"</string>
     <string name="usage_type_cpu" msgid="715162150698338714">"Total da CPU"</string>
     <string name="usage_type_cpu_foreground" msgid="6500579611933211831">"primeiro plano da CPU"</string>
     <string name="usage_type_wake_lock" msgid="5125438890233677880">"Manter desperto"</string>
     <string name="usage_type_gps" msgid="7989688715128160790">"GPS"</string>
     <string name="usage_type_wifi_running" msgid="8234997940652067049">"Wi-Fi em execução"</string>
-    <!-- outdated translation 9108247984998041853 -->     <string name="usage_type_phone" product="tablet" msgid="262638572890253393">"Telefone"</string>
+    <string name="usage_type_phone" product="tablet" msgid="262638572890253393">"Tablet"</string>
     <string name="usage_type_phone" product="default" msgid="9108247984998041853">"Telefone"</string>
     <string name="usage_type_data_send" msgid="2857401966985425427">"Dados enviados"</string>
     <string name="usage_type_data_recv" msgid="7251090882025234185">"Dados recebidos"</string>
@@ -1107,7 +1106,7 @@
     <string name="battery_action_wifi" msgid="2272741639606146903">"Definições de Wi-Fi"</string>
     <string name="battery_action_bluetooth" msgid="8374789049507723142">"Definições de Bluetooth"</string>
     <string name="battery_desc_voice" msgid="8980322055722959211">"Bateria utilizada por chamadas de voz"</string>
-    <!-- outdated translation 3009080001948091424 -->     <string name="battery_desc_standby" product="tablet" msgid="6284747418668280364">"Bateria utilizada quando o telefone está inactivo"</string>
+    <string name="battery_desc_standby" product="tablet" msgid="6284747418668280364">"Bateria utilizada quando o tablet está inactivo"</string>
     <string name="battery_desc_standby" product="default" msgid="3009080001948091424">"Bateria utilizada quando o telefone está inactivo"</string>
     <string name="battery_desc_radio" msgid="5479196477223185367">"Bateria utilizada pelo rádio do telefone"</string>
     <string name="battery_sugg_radio" msgid="8211336978326295047">"Mudar para modo de avião para poupar energia em áreas sem cobertura de rede"</string>
@@ -1301,6 +1300,10 @@
     <string name="personal_data_section_title" msgid="7815209034443782061">"Dados pessoais"</string>
     <string name="backup_data_title" msgid="1239105919852668016">"Fazer uma cópia de segurança dos meus dados"</string>
     <string name="backup_data_summary" msgid="6515285107793232815">"Fazer cópia de segurança dos dados da aplicação, palavras-passe de Wi-Fi e outras definições relativas aos servidores da Google"</string>
+    <!-- no translation found for backup_configure_transport_title (1642593939931033647) -->
+    <skip />
+    <!-- no translation found for backup_configure_transport_default_summary (1855090161240800307) -->
+    <skip />
     <string name="auto_restore_title" msgid="5397528966329126506">"Restauro automático"</string>
     <string name="auto_restore_summary" msgid="83177150536734378">"Se eu reinstalar uma aplicação, restaurar as definições guardadas numa cópia de segurança ou outros dados"</string>
     <string name="backup_erase_dialog_title" msgid="3438255037256586237">"Cópia de segurança"</string>
@@ -1339,6 +1342,8 @@
     <string name="wifi_setup_status_new_network" msgid="7468952850452301083">"Ligar a uma nova rede"</string>
     <string name="wifi_setup_status_connecting" msgid="2594117697215042584">"A ligar..."</string>
     <string name="wifi_setup_status_proceed_to_next" msgid="9071951312604559022">"Continue para o passo seguinte"</string>
+    <!-- no translation found for account_sync_settings_title (4578227872921044660) -->
+    <skip />
     <!-- no translation found for sync_is_failing (1591561768344128377) -->
     <skip />
     <string name="add_account_label" msgid="7811707265834013767">"Adicionar conta"</string>
@@ -1354,4 +1359,66 @@
     <string name="sync_enabled" msgid="4551148952179416813">"Sincron. activada"</string>
     <string name="sync_disabled" msgid="8511659877596511991">"A sincronização está desactivada"</string>
     <string name="sync_error" msgid="5060969083117872149">"Erro de sincron."</string>
+    <!-- no translation found for app_label (5443184607893378389) -->
+    <skip />
+    <!-- no translation found for sync_too_many_deletes (7648720493358579441) -->
+    <skip />
+    <!-- no translation found for settings_backup (2274732978260797031) -->
+    <skip />
+    <!-- no translation found for settings_backup_summary (7916877705938054035) -->
+    <skip />
+    <!-- no translation found for sync_menu_sync_now (6154608350395805683) -->
+    <skip />
+    <!-- no translation found for sync_menu_sync_cancel (8292379009626966949) -->
+    <skip />
+    <!-- no translation found for sync_one_time_sync (6766593624598183090) -->
+    <skip />
+    <!-- no translation found for sync_gmail (714886122098006477) -->
+    <skip />
+    <!-- no translation found for sync_calendar (9056527206714733735) -->
+    <skip />
+    <!-- no translation found for sync_contacts (9174914394377828043) -->
+    <skip />
+    <!-- no translation found for sync_too_many_deletes_desc (1629933977544304140) -->
+    <skip />
+    <!-- no translation found for sync_really_delete (8501873911799839009) -->
+    <skip />
+    <!-- no translation found for sync_undo_deletes (2154022612361710595) -->
+    <skip />
+    <!-- no translation found for sync_do_nothing (5889328648484047916) -->
+    <skip />
+    <!-- no translation found for sync_plug (5952575609349860569) -->
+    <skip />
+    <!-- no translation found for header_application_sync_settings (5514539555293976035) -->
+    <skip />
+    <!-- no translation found for header_data_and_synchronization (5165024023936509896) -->
+    <skip />
+    <!-- no translation found for preference_change_password_title (8955581790270130056) -->
+    <skip />
+    <!-- no translation found for header_account_settings (5382475087121880626) -->
+    <skip />
+    <!-- no translation found for remove_account_label (5921986026504804119) -->
+    <skip />
+    <!-- no translation found for header_add_an_account (756108499532023798) -->
+    <skip />
+    <!-- no translation found for finish_button_label (481587707657751116) -->
+    <skip />
+    <!-- no translation found for really_remove_account_title (6574643117748564960) -->
+    <skip />
+    <!-- no translation found for really_remove_account_message (4448645571715719563) -->
+    <skip />
+    <!-- no translation found for really_remove_account_message (1005751790899989319) -->
+    <skip />
+    <!-- no translation found for remove_account_failed (1093911989149396624) -->
+    <skip />
+    <!-- no translation found for remove_account_failed (9174390193652391412) -->
+    <skip />
+    <!-- no translation found for provider_label (7724593781904508866) -->
+    <skip />
+    <!-- no translation found for sync_item_title (1931551540462877488) -->
+    <skip />
+    <!-- no translation found for cant_sync_dialog_title (7185199796123573317) -->
+    <skip />
+    <!-- no translation found for cant_sync_dialog_message (2372359241135295930) -->
+    <skip />
 </resources>
