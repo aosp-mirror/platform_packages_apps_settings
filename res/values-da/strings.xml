@@ -115,19 +115,15 @@
     <string name="bluetooth_notif_message" msgid="5381418499788668724">"Vælg for at parre med "</string>
     <string name="device_picker" msgid="8721012448931226323">"Vælger af Bluetooth-enheder"</string>
     <string name="bluetooth_permission_request" msgid="1523129741266262748">"Anmodning om Bluetooth-tilladelse"</string>
-    <!-- outdated translation 2342558978033892004 -->     <string name="bluetooth_ask_enablement" msgid="8211158472876087588">"Et program på din telefon anmoder om at aktivere Bluetooth. Ønsker du at gøre dette?"</string>
-    <!-- no translation found for bluetooth_ask_discovery (5950965604673262829) -->
-    <skip />
+    <string name="bluetooth_ask_enablement" msgid="8211158472876087588">"Et program anmoder om at aktivere Bluetooth. Ønsker du at gøre dette?"</string>
+    <string name="bluetooth_ask_discovery" product="tablet" msgid="5950965604673262829">"Et program på din tabletcomputeren kræver tilladelse til, at din tabletcomputeren er synlig for andre Bluetooth-enheder i <xliff:g id="TIMEOUT">%1$d</xliff:g> sekunder. Ønsker du at gøre dette?"</string>
     <string name="bluetooth_ask_discovery" product="default" msgid="669870705606180872">"Et program på din telefon kræver tilladelse til, at din telefon er synlig for andre Bluetooth-enheder i <xliff:g id="TIMEOUT">%1$d</xliff:g> sekunder. Ønsker du at gøre dette?"</string>
-    <!-- no translation found for bluetooth_ask_enablement_and_discovery (5716077575971497298) -->
-    <skip />
+    <string name="bluetooth_ask_enablement_and_discovery" product="tablet" msgid="5716077575971497298">"Et program på din tabletcomputer anmoder om tilladelse til at aktivere Bluetooth, så din tabletcomputer er synlig for andre enheder i <xliff:g id="TIMEOUT">%1$d</xliff:g> sekunder. Ønsker du at gøre dette?"</string>
     <string name="bluetooth_ask_enablement_and_discovery" product="default" msgid="7220210326619399542">"Et program på din telefon anmoder om tilladelse til at aktivere Bluetooth, så din telefon er synlig for andre enheder i <xliff:g id="TIMEOUT">%1$d</xliff:g> sekunder. Ønsker du at gøre dette?"</string>
     <string name="bluetooth_turning_on" msgid="3107102168379705771">"Aktiverer Bluetooth …"</string>
     <string name="date_and_time" msgid="4114084177056654663">"Indstillinger for dato og tid"</string>
     <string name="date_time_12_hour_sample" msgid="3259617262618020574">"1:00 pm"</string>
     <string name="date_time_24_hour_sample" msgid="8916857570746212357">"13:00"</string>
-    <string name="date_time_changeTime_text" msgid="7037437020000867740">"Skift tid"</string>
-    <string name="date_time_changeDate_text" msgid="5259762626498028057">"Dato"</string>
     <string name="choose_timezone" msgid="7762866468013985022">"Vælg tidszone"</string>
     <string name="normal_date_format" msgid="1982904221918374153">"Normal (<xliff:g id="DATE">%s</xliff:g>)"</string>
     <string name="display_preview_label" msgid="1127597250917274792">"Eksempelvisning:"</string>
@@ -214,7 +210,7 @@
     <string name="device_info_label" msgid="6551553813651711205">"Enhedsoplysninger"</string>
     <string name="battery_info_label" msgid="4132685016148679403">"Batterioplysninger"</string>
     <string name="display_label" msgid="7403874003169865762">"Visning"</string>
-    <!-- outdated translation 2127552523124277664 -->     <string name="phone_info_label" product="tablet" msgid="7820855350955963628">"Telefonoplysninger"</string>
+    <string name="phone_info_label" product="tablet" msgid="7820855350955963628">"Oplysninger om tabletcomputeren"</string>
     <string name="phone_info_label" product="default" msgid="2127552523124277664">"Telefonoplysninger"</string>
     <string name="sd_card_settings_label" product="nosdcard" msgid="8101475181301178428">"USB-lager"</string>
     <string name="sd_card_settings_label" product="default" msgid="5743100901106177102">"SD-kort"</string>
@@ -260,6 +256,8 @@
     <string name="owner_info_settings_title" msgid="2723190010708381889">"Ejeroplysninger"</string>
     <!-- no translation found for owner_info_settings_summary (8656024590287117256) -->
     <skip />
+    <!-- no translation found for owner_info_settings_edit_text_hint (2382525043173672857) -->
+    <skip />
     <string name="security_settings_title" msgid="5168491784222013179">"Placering og sikkerhed"</string>
     <string name="location_security_settings_title" msgid="4624434296446625554">"Indstillinger for placering og sikkerhed"</string>
     <string name="security_settings_summary" msgid="967393342537986570">"Angiv Min placering, oplåsning af skærmen, låsning af SIM-kort og oplysningslagring"</string>
@@ -274,10 +272,8 @@
     <skip />
     <!-- no translation found for unlock_set_unlock_launch_picker_enable_summary (4791110798817242301) -->
     <skip />
-    <!-- no translation found for unlock_set_unlock_off_title (1613932765246180079) -->
-    <skip />
-    <!-- no translation found for unlock_set_unlock_off_summary (2992485517488881365) -->
-    <skip />
+    <string name="unlock_set_unlock_off_title" msgid="1613932765246180079">"Fra"</string>
+    <string name="unlock_set_unlock_off_summary" msgid="2992485517488881365">"Vis ikke låseskærmen"</string>
     <string name="unlock_set_unlock_none_title" msgid="3760684669884671990">"Ingen"</string>
     <string name="unlock_set_unlock_none_summary" msgid="2658550480388272618">"Deaktiver sikkerhed med skærmlås"</string>
     <string name="unlock_set_unlock_pattern_title" msgid="2912067603917311700">"Mønster"</string>
@@ -286,7 +282,7 @@
     <string name="unlock_set_unlock_pin_summary" msgid="4131169672844263316">"Angiv en PIN-kode for at låse skærmen op"</string>
     <string name="unlock_set_unlock_password_title" msgid="8775603825675090937">"Adgangskode"</string>
     <string name="unlock_set_unlock_password_summary" msgid="4623254789833899286">"Angiv en adgangskode for at låse skærmen op"</string>
-    <!-- outdated translation 736557879526940324 -->     <string name="unlock_set_unlock_disabled_summary" msgid="8816944391772300580">"Deaktiveret af fjernadministrator"</string>
+    <string name="unlock_set_unlock_disabled_summary" msgid="8816944391772300580">"Deaktiveret af fjernadministrator"</string>
     <string name="unlock_disable_lock_title" msgid="1427036227416979120">"Slå skærmlås fra"</string>
     <string name="unlock_disable_lock_pattern_summary" msgid="6801602880568869201">"Fjern mønster til at låse op"</string>
     <string name="unlock_disable_lock_pin_summary" msgid="8856842745366993387">"Fjern pinkode til at låse op"</string>
@@ -370,13 +366,13 @@
     <string name="bluetooth_device_context_connect_advanced" msgid="2643129703569788771">"Indstillinger"</string>
     <string name="bluetooth_connect_specific_profiles_title" msgid="6952214406025825164">"Opret forbindelse til ..."</string>
     <string name="bluetooth_profile_a2dp" msgid="3259633293424539529">"Medier"</string>
-    <!-- outdated translation 1874975688666658946 -->     <string name="bluetooth_profile_headset" product="tablet" msgid="2252738313413646294">"Telefon"</string>
+    <string name="bluetooth_profile_headset" product="tablet" msgid="2252738313413646294">"Tabletcomputer"</string>
     <string name="bluetooth_profile_headset" product="default" msgid="1874975688666658946">"Telefon"</string>
     <string name="bluetooth_profile_opp" msgid="3799470046565284440">"Overfør"</string>
     <string name="bluetooth_profile_hid" msgid="3000858580917633478">"Inputenhed"</string>
     <string name="bluetooth_profile_pan" msgid="4225813400648547154">"Tethering"</string>
     <string name="bluetooth_summary_connected_to_a2dp" msgid="510833839847758664">"Forbundet til medielyd"</string>
-    <!-- outdated translation 4876496372728623918 -->     <string name="bluetooth_summary_connected_to_headset" product="tablet" msgid="598335151406893070">"Forbundet til telefonlyd"</string>
+    <string name="bluetooth_summary_connected_to_headset" product="tablet" msgid="598335151406893070">"Forbundet til tabletcomputerlyd"</string>
     <string name="bluetooth_summary_connected_to_headset" product="default" msgid="4876496372728623918">"Forbundet til telefonlyd"</string>
     <string name="bluetooth_summary_connected_to_a2dp_headset" msgid="3045032710457800891">"Forbundet til telefon- og medielyd"</string>
     <string name="bluetooth_summary_connected_to_hid" msgid="8147499644396475561">"Forbundet til inputenhed"</string>
@@ -504,7 +500,7 @@
     <string name="silent_mode_title" msgid="3181479108593217704">"Lydløs"</string>
     <string name="silent_mode_summary" msgid="3309650676072917899">"Fjern alle lyde undtagen medier og alarmer"</string>
     <string name="silent_mode_incl_alarm_summary" msgid="2088830834182228458">"Al lyd undtagen medier er slået fra"</string>
-    <!-- outdated translation 5379026328015343686 -->     <string name="ringtone_title" msgid="7037881886694206550">"Ringetone for telefon"</string>
+    <string name="ringtone_title" msgid="7037881886694206550">"Ringetone for indgående opkald"</string>
     <string name="ringtone_summary" msgid="2630023412632683493"></string>
     <string name="all_volume_title" msgid="8741571721868253103">"Lydstyrke"</string>
     <string name="ring_volume_title" msgid="7938706566797464165">"Lydstyrke for opkald"</string>
@@ -544,16 +540,16 @@
     <string name="dock_audio_settings_title" msgid="3324750259959570305">"Lyd"</string>
     <string name="dock_audio_summary_desk" msgid="6487784412371139335">"Indstillinger for den dockingstation der er tilsluttet din computer"</string>
     <string name="dock_audio_summary_car" msgid="6740897586006248450">"Indstillinger for den dockingstation der er tilsluttet bilen"</string>
-    <!-- outdated translation 289909253741048784 -->     <string name="dock_audio_summary_none" product="tablet" msgid="8215337394914283607">"Telefonen er ikke tilsluttet dockingstationen"</string>
+    <string name="dock_audio_summary_none" product="tablet" msgid="8215337394914283607">"Tabletcomputeren er ikke tilsluttet dockingstationen"</string>
     <string name="dock_audio_summary_none" product="default" msgid="289909253741048784">"Telefonen er ikke tilsluttet dockingstationen"</string>
     <string name="dock_audio_summary_unknown" msgid="4465059868974255693">"Indstillinger for den dockingstation der er tilsluttet"</string>
     <string name="dock_not_found_title" msgid="3290961741828952424">"Dockingstationen blev ikke fundet"</string>
-    <!-- outdated translation 3035260358985111855 -->     <string name="dock_not_found_text" product="tablet" msgid="7935403744079168804">"Telefonen skal være sluttet til dockingstationen for at lyden kan konfigureres"</string>
+    <string name="dock_not_found_text" product="tablet" msgid="7935403744079168804">"Tabletcomputeren skal være sluttet til dockingstationen for at lyden kan konfigureres"</string>
     <string name="dock_not_found_text" product="default" msgid="3035260358985111855">"Telefonen skal være sluttet til dockingstationen for at lyden kan konfigureres"</string>
     <string name="dock_sounds_enable_title" msgid="3659084028644948905">"Lyd ved isætning i dockingstation"</string>
-    <!-- outdated translation 8491180514199743771 -->     <string name="dock_sounds_enable_summary_on" product="tablet" msgid="838102386448981339">"Afspil lyd, når telefonen isættes og fjernes fra dockingstation"</string>
+    <string name="dock_sounds_enable_summary_on" product="tablet" msgid="838102386448981339">"Afspil lyd, når tabletcomputeren isættes og fjernes fra dockingstation"</string>
     <string name="dock_sounds_enable_summary_on" product="default" msgid="8491180514199743771">"Afspil lyd, når telefonen isættes og fjernes fra dockingstation"</string>
-    <!-- outdated translation 3151046599205265919 -->     <string name="dock_sounds_enable_summary_off" product="tablet" msgid="5077843049805652363">"Afspil ikke lyd, når telefonen isættes og fjernes fra dockingstation"</string>
+    <string name="dock_sounds_enable_summary_off" product="tablet" msgid="5077843049805652363">"Afspil ikke lyd, når tabletcomputeren isættes eller fjernes fra dockingstation"</string>
     <string name="dock_sounds_enable_summary_off" product="default" msgid="3151046599205265919">"Afspil ikke lyd, når telefonen isættes og fjernes fra dockingstation"</string>
     <string name="sync_settings" msgid="9186125469300013491">"Konti og synkronisering"</string>
     <string name="sync_settings_summary" msgid="2962179505214965667">"Tilføj eller fjern konti, og skift indstillinger for konto"</string>
@@ -564,9 +560,9 @@
     <string name="animations_summary_on" msgid="8843613112130484436">"Vis animationer, når der åbnes og lukkes for vinduer"</string>
     <string name="animations_summary_off" msgid="2777026828025551983">"Vis animationer, når der åbnes og lukkes for vinduer"</string>
     <string name="accelerometer_title" msgid="7854608399547349157">"Roterskærm automatisk"</string>
-    <!-- outdated translation 1133737282813048021 -->     <string name="accelerometer_summary_on" product="tablet" msgid="429982132339828942">"Skift automatisk retning, når telefonen drejes"</string>
+    <string name="accelerometer_summary_on" product="tablet" msgid="429982132339828942">"Skift automatisk retning, når tabletcomputeren drejes"</string>
     <string name="accelerometer_summary_on" product="default" msgid="1133737282813048021">"Skift automatisk retning, når telefonen drejes"</string>
-    <!-- outdated translation 5485489363715740761 -->     <string name="accelerometer_summary_off" product="tablet" msgid="4781734213242521682">"Skift automatisk retning, når telefonen drejes"</string>
+    <string name="accelerometer_summary_off" product="tablet" msgid="4781734213242521682">"Skift automatisk retning, når tabletcomputeren drejes"</string>
     <string name="accelerometer_summary_off" product="default" msgid="5485489363715740761">"Skift automatisk retning, når telefonen drejes"</string>
     <string name="brightness" msgid="2354961343555249270">"Lysstyrke"</string>
     <string name="brightness_summary" msgid="838917350127550703">"Juster skærmens lysstyrke"</string>
@@ -577,9 +573,9 @@
     <string name="sim_lock_settings_category" msgid="5136244267576697004">"Konfigurer låsning af SIM-kort"</string>
     <string name="sim_lock_settings_title" msgid="9018585580955414596">"SIM-kortlås"</string>
     <string name="sim_pin_toggle" msgid="1742123478029451888">"Lås SIM-kort"</string>
-    <!-- outdated translation 2503536505568814324 -->     <string name="sim_lock_on" product="tablet" msgid="5058355081270397764">"Kræv PIN-kode for at bruge telefonen"</string>
+    <string name="sim_lock_on" product="tablet" msgid="5058355081270397764">"Kræv PIN-kode for at bruge tabletcomputeren"</string>
     <string name="sim_lock_on" product="default" msgid="2503536505568814324">"Kræv PIN-kode for at bruge telefonen"</string>
-    <!-- outdated translation 258981978215428916 -->     <string name="sim_lock_off" product="tablet" msgid="2813800553917012356">"Kræv PIN-kode for at bruge telefonen"</string>
+    <string name="sim_lock_off" product="tablet" msgid="2813800553917012356">"Kræv PIN-kode for at bruge tabletcomputeren"</string>
     <string name="sim_lock_off" product="default" msgid="258981978215428916">"Kræv PIN-kode for at bruge telefonen"</string>
     <string name="sim_pin_change" msgid="6311414184279932368">"Skift PIN-kode til SIM-kort"</string>
     <string name="sim_enter_pin" msgid="6608715137008508432">"PIN-kode til SIM-kort"</string>
@@ -596,7 +592,7 @@
     <string name="sim_lock_failed" msgid="6676748290838006404">"SIM-kortlåsens tilstand kunne ikke ændres."\n"Det skyldes muligvis en forkert PIN-kode."</string>
     <string name="sim_enter_ok" msgid="6475946836899218919">"OK"</string>
     <string name="sim_enter_cancel" msgid="6240422158517208036">"Annuller"</string>
-    <!-- outdated translation 475872867864762157 -->     <string name="device_info_settings" product="tablet" msgid="1119755927536987178">"Telefonstatus"</string>
+    <string name="device_info_settings" product="tablet" msgid="1119755927536987178">"Status for tabletcomputeren"</string>
     <string name="device_info_settings" product="default" msgid="475872867864762157">"Telefonstatus"</string>
     <string name="system_update_settings_list_item_title" msgid="3342887311059985961">"Systemopdateringer"</string>
     <string name="system_update_settings_list_item_summary" msgid="3853057315907710747"></string>
@@ -609,8 +605,7 @@
     <string name="device_status_activity_title" msgid="1411201799384697904">"Status"</string>
     <string name="device_status" msgid="607405385799807324">"Status"</string>
     <string name="device_status_summary" msgid="2599162787451519618">"Telefonnummer, signal osv."</string>
-    <string name="storage_settings" product="nosdcard" msgid="8758910337658683955">"Delt og sikker hukommelse"</string>
-    <string name="storage_settings" product="default" msgid="4211799979832404953">"Lagerplads"</string>
+    <string name="storage_settings" msgid="4211799979832404953">"Lagerplads"</string>
     <string name="storage_settings_title" msgid="8746016738388094064">"Indstillinger for lager"</string>
     <string name="storage_settings_summary" product="nosdcard" msgid="3543813623294870759">"Demonter USB-lager, vis ledig lagerplads"</string>
     <string name="storage_settings_summary" product="default" msgid="9176693537325988610">"Demonter SD-kort, vis ledig lagerplads"</string>
@@ -634,6 +629,12 @@
     <string name="sd_memory" product="default" msgid="151871913888051515">"SD-kort"</string>
     <string name="memory_available" msgid="418542433817289474">"Ledig plads"</string>
     <string name="memory_size" msgid="6629067715017232195">"Plads i alt"</string>
+    <!-- no translation found for memory_calculating_size (2188358544203768588) -->
+    <skip />
+    <!-- no translation found for memory_apps_usage (5818922761412589352) -->
+    <skip />
+    <!-- no translation found for memory_media_usage (5655498435493764372) -->
+    <skip />
     <string name="sd_eject" product="nosdcard" msgid="4988563376492400073">"Demonter delt hukommelse"</string>
     <string name="sd_eject" product="default" msgid="6915293408836853020">"Demonter SD-kort"</string>
     <string name="sd_eject_summary" product="nosdcard" msgid="5009296896648072891">"Demonter det interne USB-lager"</string>
@@ -649,7 +650,7 @@
     <string name="sd_format" product="nosdcard" msgid="2148179271623099054">"Slet USB-lager"</string>
     <string name="sd_format" product="default" msgid="2576054280507119870">"Slet SD-kort"</string>
     <string name="sd_format_summary" product="nosdcard" msgid="6331905044907914603">"Sletter alle data på det interne USB-lager, f.eks. musik og billeder"</string>
-    <!-- outdated translation 1504606546865152514 -->     <string name="sd_format_summary" product="default" msgid="212703692181793109">"Sletter alle data på telefonens interne USB-lager, f.eks. musik og billeder."</string>
+    <!-- outdated translation 6331905044907914603 -->     <string name="sd_format_summary" product="default" msgid="212703692181793109">"Sletter alle data på det interne USB-lager, f.eks. musik og billeder"</string>
     <string name="sd_unavailable" msgid="8580107589533213904">"Utilgængelig"</string>
     <string name="read_only" msgid="6702420168629076340">" (Skrivebeskyttet)"</string>
     <string name="dlg_confirm_unmount_title" product="nosdcard" msgid="2349876662428231297">"Demonter USB-lager"</string>
@@ -700,24 +701,23 @@
     <string name="menu_restore" msgid="8260067415075573273">"Nulstil til standard"</string>
     <string name="restore_default_apn_completed" msgid="3990449939234957281">"Nulstillingen af APN-standardindstillinger er afsluttet"</string>
     <string name="master_clear_title" msgid="5907939616087039756">"Gendannelse af fabriksdata"</string>
-    <!-- outdated translation 4986154238001088492 -->     <string name="master_clear_summary" product="tablet" msgid="4036344100254678429">"Sletter alle data på telefonen"</string>
+    <string name="master_clear_summary" product="tablet" msgid="4036344100254678429">"Sletter alle data på tabletcomputeren"</string>
     <string name="master_clear_summary" product="default" msgid="4986154238001088492">"Sletter alle data på telefonen"</string>
     <string name="master_clear_desc" product="tablet" msgid="1305457209008369655">"Dette sletter alle data fra tablettens "<b>"interne lager"</b>", bl.a.:"\n\n<li>"din Google-konto"</li>\n<li>"system- og programdata og -indstillinger"</li>\n<li>"downloadede programmer"</li></string>
     <string name="master_clear_desc" product="default" msgid="2950536633526374209">"Dette sletter alle data fra telefonens "<b>"interne lager"</b>", bl.a.:"\n\n<li>"din Google-konto"</li>\n<li>"system- og programdata og -indstillinger"</li>\n<li>"downloadede programmer"</li></string>
     <string name="master_clear_accounts" product="default" msgid="6412857499147999073">\n\n"Du er i øjeblikket logget ind på disse konti:"\n</string>
     <string name="master_clear_desc_erase_external_storage" product="nosdcard" msgid="4740866328425123395">\n\n"Ryd også musik, billeder og andre brugerdata ved også at slette "<b>"USB-lager"</b>"."</string>
-    <!-- no translation found for master_clear_desc_erase_external_storage (7339100478676372901) -->
-    <skip />
+    <!-- outdated translation 4740866328425123395 -->     <string name="master_clear_desc_erase_external_storage" product="default" msgid="7339100478676372901">\n\n"Ryd også musik, billeder og andre brugerdata ved også at slette "<b>"USB-lager"</b>"."</string>
     <string name="erase_external_storage" product="nosdcard" msgid="969364037450286809">"Slet USB-lager"</string>
     <string name="erase_external_storage" product="default" msgid="1397239046334307625">"Slet SD-kort"</string>
     <string name="erase_external_storage_description" product="nosdcard" msgid="444834593696342279">"Slet alle data på det interne USB-lager, f.eks. musik og billeder."</string>
     <string name="erase_external_storage_description" product="default" msgid="46603515218075174">"Slet alle data på SD-kortet, f.eks. musik og billeder."</string>
-    <!-- outdated translation 7550632653343157971 -->     <string name="master_clear_button_text" product="tablet" msgid="3130786116528304116">"Nulstil telefon"</string>
+    <string name="master_clear_button_text" product="tablet" msgid="3130786116528304116">"Nulstil tabletcomputeren"</string>
     <string name="master_clear_button_text" product="default" msgid="7550632653343157971">"Nulstil telefon"</string>
     <string name="master_clear_final_desc" msgid="6917971132484622696">"Slet alle dine personlige oplysninger og downloadede programmer? Denne handlíng kan ikke fortrydes."</string>
     <string name="master_clear_final_button_text" msgid="5390908019019242910">"Slet alt"</string>
     <string name="master_clear_gesture_prompt" msgid="1428645764883536750">"Tegn dit oplåsningsmønster"</string>
-    <!-- outdated translation 8901714274312707918 -->     <string name="master_clear_gesture_explanation" msgid="2234954758550554549">"Du skal tegne dit oplåsningsmønster for at bekræfte, at telefonen nulstilles."</string>
+    <string name="master_clear_gesture_explanation" msgid="2234954758550554549">"Du skal tegne dit mønster til at låse op for at bekræfte, at tabletcomputeren nulstilles."</string>
     <string name="master_clear_failed" msgid="8655202125010189406">"Der blev ikke foretaget nogen nulstilling, fordi tjenesten Systemoprydning ikke er tilgængelig."</string>
     <string name="master_clear_confirm_title" msgid="4845794266129586839">"Bekræft nulstilling"</string>
     <string name="media_format_title" product="nosdcard" msgid="3999653431422767156">"Slet USB-lager"</string>
@@ -785,24 +785,23 @@
     <string name="use_location_title" msgid="3214740644957841179">"Brug placering ved Google-søgning"</string>
     <string name="use_location_summary_disabled" msgid="1876901471649359806">"Brug placering til Google-søgning og andre Google-tjenester"</string>
     <string name="use_location_summary_enabled" msgid="984549156918597265">"Placering bruges til at forbedre Google-søgeresultater og andre Google-tjenester"</string>
-    <!-- outdated translation 1743378368185371685 -->     <string name="about_settings" product="tablet" msgid="593457295516533765">"Om telefonen"</string>
+    <string name="about_settings" product="tablet" msgid="593457295516533765">"Om tabletcomputeren"</string>
     <string name="about_settings" product="default" msgid="1743378368185371685">"Om telefonen"</string>
-    <!-- outdated translation 3302263393543848667 -->     <string name="about_settings_summary" msgid="3371517697156165959">"Vis juridiske oplysninger, telefonstatus, softwareversion"</string>
+    <string name="about_settings_summary" msgid="3371517697156165959">"Vis juridiske oplysninger, status, softwareversion"</string>
     <string name="legal_information" msgid="5769301644270604095">"Juridiske oplysninger"</string>
     <string name="contributors_title" msgid="5917703088825286504">"Bidragsydere"</string>
     <string name="copyright_title" msgid="865906688917260647">"Ophavsret"</string>
     <string name="license_title" msgid="1990487604356037871">"Licens"</string>
     <string name="terms_title" msgid="7697580845616764642">"Vilkår og betingelser"</string>
     <string name="system_tutorial_list_item_title" msgid="9082844446660969729">"Selvstudie i systemet"</string>
-    <!-- outdated translation 3861815254521030201 -->     <string name="system_tutorial_list_item_summary" product="tablet" msgid="3341504384445734067">"Lær, hvordan du bruger din telefon"</string>
+    <string name="system_tutorial_list_item_summary" product="tablet" msgid="3341504384445734067">"Lær, hvordan du bruger din tabletcomputer"</string>
     <string name="system_tutorial_list_item_summary" product="default" msgid="3861815254521030201">"Lær, hvordan du bruger din telefon"</string>
     <string name="settings_license_activity_title" msgid="7553683406244228650">"Open source-licenser"</string>
     <string name="settings_license_activity_unavailable" msgid="4210539215951487627">"Der er problemer med at indlæse licenserne."</string>
     <string name="settings_license_activity_loading" msgid="3337535809093591740">"Indlæser ..."</string>
     <string name="settings_safetylegal_title" msgid="1289483965535937431">"Sikkerhedsoplysninger"</string>
     <string name="settings_safetylegal_activity_title" msgid="6901214628496951727">"Sikkerhedsoplysninger"</string>
-    <!-- no translation found for settings_safetylegal_activity_unreachable (170670055116721810) -->
-    <skip />
+    <string name="settings_safetylegal_activity_unreachable" msgid="170670055116721810">"Du har ingen dataforbindelse. For at se disse oplysninger nu skal du gå til %s fra en hvilken som helst computer, der er forbundet til internettet."</string>
     <string name="settings_safetylegal_activity_loading" msgid="8059022597639516348">"Indlæser ..."</string>
     <string name="lockpassword_choose_your_password_header" msgid="8624900666929394990">"Vælg din adgangskode"</string>
     <string name="lockpassword_choose_your_pin_header" msgid="7598849519816138302">"Vælg din pinkode"</string>
@@ -841,9 +840,9 @@
     <string name="lockpattern_too_many_failed_confirmation_attempts_footer" msgid="6759029360597122873">"Prøv igen om <xliff:g id="NUMBER">%d</xliff:g> sekunder."</string>
     <string name="skip_button_label" msgid="8680422740354436943">"Annuller"</string>
     <string name="next_button_label" msgid="8890792540116568321">"Næste"</string>
-    <!-- outdated translation 4059246467204273930 -->     <string name="lock_title" product="tablet" msgid="2909697418179419990">"Beskyt din telefon"</string>
+    <string name="lock_title" product="tablet" msgid="2909697418179419990">"Sådan beskytter du din tabletcomputer"</string>
     <string name="lock_title" product="default" msgid="4059246467204273930">"Beskyt din telefon"</string>
-    <!-- outdated translation 9100785646737118042 -->     <string name="lock_intro_message" product="tablet" msgid="4544669202394019747"><font size="17">"Beskyt din telefon mod uautoriseret brug ved at oprette et personligt mønster til at låse skærmen op. "\n<font height="17">\n</font><b>"1"</b>"  På næste skærm kan du se et eksempel på, hvordan mønsteret tegnes. "\n<font height="17">\n</font><b>"2"</b>"  Når du er klar, kan du tegne dit eget personlige mønster til at låse op. Eksperimenter med forskellige mønstre, men forbind mindst fire punkter. "\n<font height="17">\n</font><b>"3"</b>"  Tegn dit mønster igen for at bekræfte. "\n<font height="17">\n</font><b>"Er du klar? Tryk på \"Næste\""</b>". "\n<font height="3">\n</font>"Du kan lade din telefon være ubeskyttet ved at trykke på \"Annuller\"."</font></string>
+    <string name="lock_intro_message" product="tablet" msgid="4544669202394019747"><font size="17">"Beskyt din tabletcomputer mod uautoriseret brug ved at oprette et personligt mønster til at låse skærmen op. "\n<font height="17">\n</font><b>"1"</b>"  På næste skærm kan du se et eksempel på, hvordan mønsteret tegnes. "\n<font height="17">\n</font><b>"2"</b>"  Når du er klar, kan du tegne dit eget personlige mønster til at låse op. Eksperimenter med forskellige mønstre, men forbind mindst fire punkter. "\n<font height="17">\n</font><b>"3"</b>"  Tegn dit mønster igen for at bekræfte. "\n<font height="17">\n</font><b>"Er du klar? Tryk på \"Næste\""</b>". "\n<font height="3">\n</font>"Du kan lade din tabletcomputer være ubeskyttet ved at trykke på \"Annuller\"."</font></string>
     <string name="lock_intro_message" product="default" msgid="9100785646737118042"><font size="17">"Beskyt din telefon mod uautoriseret brug ved at oprette et personligt mønster til at låse skærmen op. "\n<font height="17">\n</font><b>"1"</b>"  På næste skærm kan du se et eksempel på, hvordan mønsteret tegnes. "\n<font height="17">\n</font><b>"2"</b>"  Når du er klar, kan du tegne dit eget personlige mønster til at låse op. Eksperimenter med forskellige mønstre, men forbind mindst fire punkter. "\n<font height="17">\n</font><b>"3"</b>"  Tegn dit mønster igen for at bekræfte. "\n<font height="17">\n</font><b>"Er du klar? Tryk på \"Næste\""</b>". "\n<font height="3">\n</font>"Du kan lade din telefon være ubeskyttet ved at trykke på \"Annuller\"."</font></string>
     <string name="lock_example_title" msgid="8052305554017485410">"Eksempel på et mønster"</string>
     <string name="lock_example_message" msgid="1838650097090632706">"Forbind mindst fire punkter."\n" "\n"Tryk på \"Næste\", når du er klar til at tegne dit eget mønster."</string>
@@ -854,7 +853,7 @@
     <string name="applications_settings_header" msgid="6018266337275422250">"Indstillinger for programmer"</string>
     <string name="install_applications" msgid="4872012136210802181">"Ukendte kilder"</string>
     <string name="install_unknown_applications" msgid="6612824788917283662">"Tillad installation af programmer, der ikke stammer fra Marked"</string>
-    <!-- outdated translation 1923717607319933741 -->     <string name="install_all_warning" product="tablet" msgid="8143969767997876735">"Din telefon og dine personlige oplysninger er mere sårbare over for angreb af programmer fra ukendte kilder. Du accepterer, at du alene er ansvarlig for skader på din telefon eller tab af data, der kan skyldes brug af disse programmer."</string>
+    <string name="install_all_warning" product="tablet" msgid="8143969767997876735">"Din tabletcomputer og dine personlige oplysninger er mere sårbare over for angreb af programmer fra ukendte kilder. Du accepterer, at du alene er ansvarlig for skader på din tabletcomputer eller tab af data, der kan skyldes brug af disse programmer."</string>
     <string name="install_all_warning" product="default" msgid="1923717607319933741">"Din telefon og dine personlige oplysninger er mere sårbare over for angreb af programmer fra ukendte kilder. Du accepterer, at du alene er ansvarlig for skader på din telefon eller tab af data, der kan skyldes brug af disse programmer."</string>
     <string name="application_info_label" msgid="1150486628158409543">"Programoplysninger"</string>
     <string name="storage_label" msgid="8700867073480107253">"Lagring"</string>
@@ -906,14 +905,14 @@
     <string name="app_factory_reset_dlg_text" msgid="438395129140568893">"Ønsker du at afinstallere alle opdateringer til dette Android-systemprogram?"</string>
     <string name="clear_failed_dlg_title" msgid="2387060805294783175">"Ryd data"</string>
     <string name="clear_failed_dlg_text" msgid="7943411157007320290">"Rydning af data til programmet mislykkedes"</string>
-    <!-- outdated translation 3116027624526915561 -->     <string name="security_settings_desc" product="tablet" msgid="6158636779728455276">"Dette program har adgang til følgende på din telefon:"</string>
+    <string name="security_settings_desc" product="tablet" msgid="6158636779728455276">"Dette program har adgang til følgende på din tabletcomputer:"</string>
     <string name="security_settings_desc" product="default" msgid="3116027624526915561">"Dette program har adgang til følgende på din telefon:"</string>
     <string name="computing_size" msgid="1599186977475211186">"Beregner ..."</string>
     <string name="invalid_size_value" msgid="1901940003700269523">"Pakkestørrelsen kunne ikke beregnes"</string>
     <string name="empty_list_msg" msgid="2901049162265094971">"Du har ikke installeret nogen tredjepartsprogrammer."</string>
     <string name="version_text" msgid="9189073826278676425">"version <xliff:g id="VERSION_NUM">%1$s</xliff:g>"</string>
     <string name="move_app" msgid="5042838441401731346">"Flyt"</string>
-    <!-- outdated translation 3895430471913858185 -->     <string name="move_app_to_internal" product="tablet" msgid="2299714147283854957">"Flyt til telefon"</string>
+    <string name="move_app_to_internal" product="tablet" msgid="2299714147283854957">"Flyt til tabletcomputer"</string>
     <string name="move_app_to_internal" product="default" msgid="3895430471913858185">"Flyt til telefon"</string>
     <string name="move_app_to_sdcard" product="nosdcard" msgid="4350451696315265420">"Flyt til USB-lager"</string>
     <string name="move_app_to_sdcard" product="default" msgid="1143379049903056407">"Flyt til SD-kort"</string>
@@ -962,7 +961,7 @@
     <string name="process_service_in_use_description" msgid="8993335064403217080">"Tjenesten <xliff:g id="COMP_NAME">%1$s</xliff:g> er i brug."</string>
     <string name="process_provider_in_use_description" msgid="5586603325677678940">"Udbyderen <xliff:g id="COMP_NAME">%1$s</xliff:g> er i brug."</string>
     <string name="runningservicedetails_stop_dlg_title" msgid="4253292537154337233">"Stop systemtjeneste?"</string>
-    <!-- outdated translation 6929716497425738387 -->     <string name="runningservicedetails_stop_dlg_text" product="tablet" msgid="5420033091144016389">"Er du sikker på, at du vil stoppe denne systemtjeneste? Hvis du gør, kan nogle af funktionerne på din telefon holde op med at fungere korrekt, indtil du slukker og tænder igen."</string>
+    <string name="runningservicedetails_stop_dlg_text" product="tablet" msgid="5420033091144016389">"Er du sikker på, at du vil stoppe denne systemtjeneste? Hvis du gør det, kan du være nødt til at slukke og tænde igen, før tabletcomputeren fungerer, som den skal."</string>
     <string name="runningservicedetails_stop_dlg_text" product="default" msgid="6929716497425738387">"Er du sikker på, at du vil stoppe denne systemtjeneste? Hvis du gør, kan nogle af funktionerne på din telefon holde op med at fungere korrekt, indtil du slukker og tænder igen."</string>
     <string name="language_settings" msgid="502219872342167227">"Sprog og tastatur"</string>
     <string name="language_keyboard_settings_title" msgid="3455826933385341107">"Indstillinger for sprog og tastatur"</string>
@@ -990,7 +989,7 @@
     <string name="user_dict_settings_context_menu_delete_title" msgid="9140703913776549054">"Slet"</string>
     <string name="user_dict_settings_empty_text" msgid="6209268025109242806">"Du har ikke nogen ord i brugerordbogen. Du kan tilføje et ord gennem menuen."</string>
     <string name="testing" msgid="6584352735303604146">"Tester"</string>
-    <!-- outdated translation 8656693364332840056 -->     <string name="testing_phone_info" product="tablet" msgid="193561832258534798">"Telefonoplysninger"</string>
+    <string name="testing_phone_info" product="tablet" msgid="193561832258534798">"Oplysninger om tabletcomputer"</string>
     <string name="testing_phone_info" product="default" msgid="8656693364332840056">"Telefonoplysninger"</string>
     <string name="testing_battery_info" msgid="3497865525976497848">"Batterioplysninger"</string>
     <string name="quick_launch_title" msgid="7904609846945905306">"Hurtig start"</string>
@@ -1085,14 +1084,14 @@
     <string name="power_bluetooth" msgid="4373329044379008289">"Bluetooth"</string>
     <string name="power_cell" msgid="6596471490976003056">"Cellestandby"</string>
     <string name="power_phone" msgid="5392641106474567277">"Stemmeopkald"</string>
-    <!-- outdated translation 9055659695602194990 -->     <string name="power_idle" product="tablet" msgid="4612478572401640759">"Telefonen er ikke aktiv"</string>
+    <string name="power_idle" product="tablet" msgid="4612478572401640759">"Tabletcomputeren er ikke aktiv"</string>
     <string name="power_idle" product="default" msgid="9055659695602194990">"Telefonen er ikke aktiv"</string>
     <string name="usage_type_cpu" msgid="715162150698338714">"CPU i alt"</string>
     <string name="usage_type_cpu_foreground" msgid="6500579611933211831">"CPU forgrund"</string>
     <string name="usage_type_wake_lock" msgid="5125438890233677880">"Hold aktiv"</string>
     <string name="usage_type_gps" msgid="7989688715128160790">"GPS"</string>
     <string name="usage_type_wifi_running" msgid="8234997940652067049">"Wi-Fi aktiv"</string>
-    <!-- outdated translation 9108247984998041853 -->     <string name="usage_type_phone" product="tablet" msgid="262638572890253393">"Telefon"</string>
+    <string name="usage_type_phone" product="tablet" msgid="262638572890253393">"Tabletcomputer"</string>
     <string name="usage_type_phone" product="default" msgid="9108247984998041853">"Telefon"</string>
     <string name="usage_type_data_send" msgid="2857401966985425427">"Data sendt"</string>
     <string name="usage_type_data_recv" msgid="7251090882025234185">"Data modtaget"</string>
@@ -1107,7 +1106,7 @@
     <string name="battery_action_wifi" msgid="2272741639606146903">"Indstillinger for Wi-Fi"</string>
     <string name="battery_action_bluetooth" msgid="8374789049507723142">"Indstillinger for Bluetooth"</string>
     <string name="battery_desc_voice" msgid="8980322055722959211">"Batteri brugt af stemmeopkald"</string>
-    <!-- outdated translation 3009080001948091424 -->     <string name="battery_desc_standby" product="tablet" msgid="6284747418668280364">"Batteri brugt, når telefon ikke er aktiv"</string>
+    <string name="battery_desc_standby" product="tablet" msgid="6284747418668280364">"Batteri brugt, når tabletcomputeren ikke er aktiv"</string>
     <string name="battery_desc_standby" product="default" msgid="3009080001948091424">"Batteri brugt, når telefon ikke er aktiv"</string>
     <string name="battery_desc_radio" msgid="5479196477223185367">"Batteri brugt af celleradio"</string>
     <string name="battery_sugg_radio" msgid="8211336978326295047">"Skift til flytilstand for at spare på strømmen i områder uden mobildækning."</string>
@@ -1301,6 +1300,10 @@
     <string name="personal_data_section_title" msgid="7815209034443782061">"Personlige oplysninger"</string>
     <string name="backup_data_title" msgid="1239105919852668016">"Sikkerhedskopier mine data"</string>
     <string name="backup_data_summary" msgid="6515285107793232815">"Sikkerhedskopier programdata, Wi-Fi-adgangskoder og andre indstillinger på Googles servere"</string>
+    <!-- no translation found for backup_configure_transport_title (1642593939931033647) -->
+    <skip />
+    <!-- no translation found for backup_configure_transport_default_summary (1855090161240800307) -->
+    <skip />
     <string name="auto_restore_title" msgid="5397528966329126506">"Automatisk gendannelse"</string>
     <string name="auto_restore_summary" msgid="83177150536734378">"Hvis jeg geninstallerer et program, skal sikkerhedskopierede indstillinger eller andre data gendannes"</string>
     <string name="backup_erase_dialog_title" msgid="3438255037256586237">"Sikkerhedskopi"</string>
@@ -1339,6 +1342,8 @@
     <string name="wifi_setup_status_new_network" msgid="7468952850452301083">"Opret forbindelse til nyt netværk"</string>
     <string name="wifi_setup_status_connecting" msgid="2594117697215042584">"Opretter forbindelse..."</string>
     <string name="wifi_setup_status_proceed_to_next" msgid="9071951312604559022">"Fortsæt til næste trin"</string>
+    <!-- no translation found for account_sync_settings_title (4578227872921044660) -->
+    <skip />
     <string name="sync_is_failing" msgid="1591561768344128377">"Der er i øjeblikket problemer med synkroniseringen. Den etableres igen om lidt."</string>
     <string name="add_account_label" msgid="7811707265834013767">"Tilføj konto"</string>
     <string name="header_general_sync_settings" msgid="3487451896424238469">"Synkroniseringsindstillinger"</string>
@@ -1352,4 +1357,56 @@
     <string name="sync_enabled" msgid="4551148952179416813">"Synkronisering til"</string>
     <string name="sync_disabled" msgid="8511659877596511991">"Synkronisering slået fra"</string>
     <string name="sync_error" msgid="5060969083117872149">"Synkroniseringsfejl"</string>
+    <!-- no translation found for app_label (5443184607893378389) -->
+    <skip />
+    <string name="sync_too_many_deletes" msgid="7648720493358579441">"Grænse for sletning er overskredet."</string>
+    <!-- no translation found for settings_backup (2274732978260797031) -->
+    <skip />
+    <!-- no translation found for settings_backup_summary (7916877705938054035) -->
+    <skip />
+    <string name="sync_menu_sync_now" msgid="6154608350395805683">"Synkroniser nu"</string>
+    <string name="sync_menu_sync_cancel" msgid="8292379009626966949">"Annuller synkronisering"</string>
+    <!-- no translation found for sync_one_time_sync (6766593624598183090) -->
+    <skip />
+    <string name="sync_gmail" msgid="714886122098006477">"Gmail"</string>
+    <string name="sync_calendar" msgid="9056527206714733735">"Kalender"</string>
+    <string name="sync_contacts" msgid="9174914394377828043">"Kontaktpersoner"</string>
+    <string name="sync_too_many_deletes_desc" msgid="1629933977544304140">"Der er <xliff:g id="NUMBER_OF_DELETED_ITEMS">%1$d</xliff:g> slettede elementer til <xliff:g id="TYPE_OF_SYNC">%2$s</xliff:g>, konto <xliff:g id="ACCOUNT_NAME">%3$s</xliff:g>. Hvad vil du gøre?"</string>
+    <string name="sync_really_delete" msgid="8501873911799839009">"Slet enhederne."</string>
+    <string name="sync_undo_deletes" msgid="2154022612361710595">"Annuller sletningerne."</string>
+    <string name="sync_do_nothing" msgid="5889328648484047916">"Gør ikke noget lige nu."</string>
+    <!-- no translation found for sync_plug (5952575609349860569) -->
+    <skip />
+    <!-- no translation found for header_application_sync_settings (5514539555293976035) -->
+    <skip />
+    <!-- no translation found for header_data_and_synchronization (5165024023936509896) -->
+    <skip />
+    <!-- no translation found for preference_change_password_title (8955581790270130056) -->
+    <skip />
+    <!-- no translation found for header_account_settings (5382475087121880626) -->
+    <skip />
+    <!-- no translation found for remove_account_label (5921986026504804119) -->
+    <skip />
+    <!-- no translation found for header_add_an_account (756108499532023798) -->
+    <skip />
+    <!-- no translation found for finish_button_label (481587707657751116) -->
+    <skip />
+    <!-- no translation found for really_remove_account_title (6574643117748564960) -->
+    <skip />
+    <!-- no translation found for really_remove_account_message (4448645571715719563) -->
+    <skip />
+    <!-- no translation found for really_remove_account_message (1005751790899989319) -->
+    <skip />
+    <!-- no translation found for remove_account_failed (1093911989149396624) -->
+    <skip />
+    <!-- no translation found for remove_account_failed (9174390193652391412) -->
+    <skip />
+    <!-- no translation found for provider_label (7724593781904508866) -->
+    <skip />
+    <!-- no translation found for sync_item_title (1931551540462877488) -->
+    <skip />
+    <!-- no translation found for cant_sync_dialog_title (7185199796123573317) -->
+    <skip />
+    <!-- no translation found for cant_sync_dialog_message (2372359241135295930) -->
+    <skip />
 </resources>
