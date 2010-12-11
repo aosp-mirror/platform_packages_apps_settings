@@ -21,10 +21,7 @@ import android.app.Dialog;
 import android.app.Service;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.pm.ApplicationInfo;
-import android.content.pm.PackageManager;
 import android.content.pm.ServiceInfo;
-import android.content.pm.PackageManager.NameNotFoundException;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.SystemProperties;
@@ -51,7 +48,7 @@ public class AccessibilitySettings extends SettingsPreferenceFragment implements
     private static final String DEFAULT_SCREENREADER_MARKET_LINK =
         "market://search?q=pname:com.google.android.marvin.talkback";
 
-    private final String TOGGLE_ACCESSIBILITY_SERVICE_CHECKBOX =
+    private final String TOGGLE_ACCESSIBILITY_CHECKBOX =
         "toggle_accessibility_service_checkbox";
 
     private static final String ACCESSIBILITY_SERVICES_CATEGORY =
@@ -63,8 +60,11 @@ public class AccessibilitySettings extends SettingsPreferenceFragment implements
     private static final String POWER_BUTTON_CATEGORY =
         "power_button_category";
 
-    private final String POWER_BUTTON_ENDS_CALL_CHECKBOX =
+    private static final String POWER_BUTTON_ENDS_CALL_CHECKBOX =
         "power_button_ends_call";
+
+    private final String KEY_TOGGLE_ACCESSIBILITY_SERVICE_CHECKBOX =
+        "key_toggle_accessibility_service_checkbox";
 
     private static final int DIALOG_ID_DISABLE_ACCESSIBILITY = 1;
     private static final int DIALOG_ID_ENABLE_SCRIPT_INJECTION = 2;
@@ -96,7 +96,7 @@ public class AccessibilitySettings extends SettingsPreferenceFragment implements
             (PreferenceGroup) findPreference(ACCESSIBILITY_SERVICES_CATEGORY);
 
         mToggleAccessibilityCheckBox = (CheckBoxPreference) findPreference(
-                TOGGLE_ACCESSIBILITY_SERVICE_CHECKBOX);
+                TOGGLE_ACCESSIBILITY_CHECKBOX);
 
         mToggleScriptInjectionCheckBox = (CheckBoxPreference) findPreference(
                 TOGGLE_ACCESSIBILITY_SCRIPT_INJECTION_CHECKBOX);
@@ -131,16 +131,7 @@ public class AccessibilitySettings extends SettingsPreferenceFragment implements
     }
 
     @Override
-    public void onPause() {
-        super.onPause();
-
-        persistEnabledAccessibilityServices();
-    }
-
-    @Override
-    public void onResume() {
-        super.onResume();
-
+    public void onActivityCreated(Bundle savedInstanceState) {
         addAccessibilitServicePreferences();
 
         final HashSet<String> enabled = new HashSet<String>();
@@ -169,6 +160,9 @@ public class AccessibilitySettings extends SettingsPreferenceFragment implements
         if (!accessibilityServices.isEmpty()) {
             if (serviceState == 1) {
                 mToggleAccessibilityCheckBox.setChecked(true);
+                if (savedInstanceState != null) {
+                    restoreInstanceStrate(savedInstanceState);
+                }
             } else {
                 setAccessibilityServicePreferencesState(false);
             }
@@ -182,7 +176,41 @@ public class AccessibilitySettings extends SettingsPreferenceFragment implements
             mToggleAccessibilityCheckBox.setEnabled(false);
             // Notify user that they do not have any accessibility apps
             // installed and direct them to Market to get TalkBack
-            displayNoAppsAlert();
+            showDialog(DIALOG_ID_NO_ACCESSIBILITY_SERVICES);
+        }
+
+        super.onActivityCreated(savedInstanceState);
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+
+        persistEnabledAccessibilityServices();
+    }
+
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+        if (mToggleAccessibilityServiceCheckBox != null) {
+            outState.putString(KEY_TOGGLE_ACCESSIBILITY_SERVICE_CHECKBOX,
+                    mToggleAccessibilityServiceCheckBox.getKey());
+        }
+    }
+
+    /**
+     * Restores the instance state from <code>savedInstanceState</code>.
+     */
+    private void restoreInstanceStrate(Bundle savedInstanceState) {
+        String key = savedInstanceState.getString(KEY_TOGGLE_ACCESSIBILITY_SERVICE_CHECKBOX);
+        if (key != null) {
+            Preference preference = findPreference(key);
+            if (!(preference instanceof CheckBoxPreference)) {
+                throw new IllegalArgumentException(
+                        KEY_TOGGLE_ACCESSIBILITY_SERVICE_CHECKBOX
+                                + " must be mapped to an instance of a "
+                                + CheckBoxPreference.class.getName());
+            }
+            mToggleAccessibilityServiceCheckBox = (CheckBoxPreference) preference;
         }
     }
 
@@ -208,7 +236,7 @@ public class AccessibilitySettings extends SettingsPreferenceFragment implements
     public boolean onPreferenceTreeClick(PreferenceScreen preferenceScreen, Preference preference) {
         final String key = preference.getKey();
 
-        if (TOGGLE_ACCESSIBILITY_SERVICE_CHECKBOX.equals(key)) {
+        if (TOGGLE_ACCESSIBILITY_CHECKBOX.equals(key)) {
             handleEnableAccessibilityStateChange((CheckBoxPreference) preference);
         } else if (POWER_BUTTON_ENDS_CALL_CHECKBOX.equals(key)) {
             boolean isChecked = ((CheckBoxPreference) preference).isChecked();
@@ -324,22 +352,6 @@ public class AccessibilitySettings extends SettingsPreferenceFragment implements
                 preference.setTitle(serviceInfo.loadLabel(getActivity().getPackageManager()));
                 mAccessibilityServicesCategory.addPreference(preference);
             }
-        }
-    }
-
-    /**
-     * Displays a message telling the user that they do not have any accessibility
-     * related apps installed and that they can get TalkBack (Google's free screen
-     * reader) from Market.
-     */
-    private void displayNoAppsAlert() {
-        try {
-            PackageManager pm = getActivity().getPackageManager();
-            ApplicationInfo info = pm.getApplicationInfo("com.android.vending", 0);
-            showDialog(DIALOG_ID_NO_ACCESSIBILITY_SERVICES);
-        } catch (NameNotFoundException e) {
-            // This is a no-op if the user does not have Android Market
-            return;
         }
     }
 
