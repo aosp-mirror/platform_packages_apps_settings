@@ -48,9 +48,13 @@ public abstract class LocalBluetoothProfileManager {
         BluetoothUuid.Handsfree,
     };
 
-    /* package */ static final ParcelUuid[] A2DP_PROFILE_UUIDS = new ParcelUuid[] {
+    /* package */ static final ParcelUuid[] A2DP_SINK_PROFILE_UUIDS = new ParcelUuid[] {
         BluetoothUuid.AudioSink,
         BluetoothUuid.AdvAudioDist,
+    };
+
+    /* package */ static final ParcelUuid[] A2DP_SRC_PROFILE_UUIDS = new ParcelUuid[] {
+        BluetoothUuid.AudioSource
     };
 
     /* package */ static final ParcelUuid[] OPP_PROFILE_UUIDS = new ParcelUuid[] {
@@ -124,25 +128,24 @@ public abstract class LocalBluetoothProfileManager {
     // TODO(): Combine the init and updateLocalProfiles codes.
     // init can get called from various paths, it makes no sense to add and then delete.
     public static void updateLocalProfiles(LocalBluetoothManager localManager, ParcelUuid[] uuids) {
-        if (!BluetoothUuid.containsAnyUuid(uuids, HEADSET_PROFILE_UUIDS)) {
+        if (!BluetoothUuid.isUuidPresent(uuids, BluetoothUuid.Handsfree_AG) &&
+            !BluetoothUuid.isUuidPresent(uuids, BluetoothUuid.HSP_AG)) {
             sProfileMap.remove(Profile.HEADSET);
         }
 
-        if (BluetoothUuid.containsAnyUuid(uuids, A2DP_PROFILE_UUIDS)) {
+        if (!BluetoothUuid.containsAnyUuid(uuids, A2DP_SRC_PROFILE_UUIDS)) {
             sProfileMap.remove(Profile.A2DP);
         }
 
-        if (BluetoothUuid.containsAnyUuid(uuids, OPP_PROFILE_UUIDS)) {
+        if (!BluetoothUuid.containsAnyUuid(uuids, OPP_PROFILE_UUIDS)) {
             sProfileMap.remove(Profile.OPP);
         }
 
-        if (BluetoothUuid.containsAnyUuid(uuids, HID_PROFILE_UUIDS)) {
-            sProfileMap.remove(Profile.HID);
-        }
-
-        if (BluetoothUuid.containsAnyUuid(uuids, PANU_PROFILE_UUIDS)) {
+        if (!BluetoothUuid.containsAnyUuid(uuids, PANU_PROFILE_UUIDS)) {
             sProfileMap.remove(Profile.PAN);
         }
+
+        // There is no local SDP record for HID and Settings app doesn't control PBAP
     }
 
     private static LinkedList<ServiceListener> mServiceListeners =
@@ -186,21 +189,28 @@ public abstract class LocalBluetoothProfileManager {
      * NOTE: This list happens to define the connection order. We should put this logic in a more
      * well known place when this method is no longer temporary.
      * @param uuids of the remote device
+     * @param localUuids UUIDs of the local device
      * @param profiles The list of profiles to fill
      */
-    public static void updateProfiles(ParcelUuid[] uuids, List<Profile> profiles) {
+    public static void updateProfiles(ParcelUuid[] uuids, ParcelUuid[] localUuids,
+        List<Profile> profiles) {
         profiles.clear();
 
         if (uuids == null) {
             return;
         }
 
-        if (BluetoothUuid.containsAnyUuid(uuids, HEADSET_PROFILE_UUIDS) &&
-            sProfileMap.containsKey(Profile.HEADSET)) {
-            profiles.add(Profile.HEADSET);
+        if (sProfileMap.containsKey(Profile.HEADSET)) {
+            if ((BluetoothUuid.isUuidPresent(localUuids, BluetoothUuid.HSP_AG) &&
+                BluetoothUuid.isUuidPresent(uuids, BluetoothUuid.HSP)) ||
+                (BluetoothUuid.isUuidPresent(localUuids, BluetoothUuid.Handsfree_AG) &&
+                BluetoothUuid.isUuidPresent(uuids, BluetoothUuid.Handsfree))) {
+                    profiles.add(Profile.HEADSET);
+            }
         }
 
-        if (BluetoothUuid.containsAnyUuid(uuids, A2DP_PROFILE_UUIDS) &&
+
+        if (BluetoothUuid.containsAnyUuid(uuids, A2DP_SINK_PROFILE_UUIDS) &&
             sProfileMap.containsKey(Profile.A2DP)) {
             profiles.add(Profile.A2DP);
         }
