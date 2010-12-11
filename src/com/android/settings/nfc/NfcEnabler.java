@@ -60,7 +60,7 @@ public class NfcEnabler implements Preference.OnPreferenceChangeListener {
     public NfcEnabler(Context context, CheckBoxPreference checkBoxPreference) {
         mContext = context;
         mCheckbox = checkBoxPreference;
-        mNfcAdapter = NfcAdapter.getDefaultAdapter();
+        mNfcAdapter = NfcAdapter.getDefaultAdapter(context);
 
         if (mNfcAdapter == null) {
             // NFC is not supported
