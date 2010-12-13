@@ -254,11 +254,6 @@
     <!-- Strings for msg to display to user while bluetooth is turning on -->
     <string name="bluetooth_turning_on">"Turning on Bluetooth\u2026"</string>
 
-    <!-- Do not translate. Used for diagnostic screens, precise translation is not necessary -->
-    <string name="bluetooth_device_info_connectButton_text">Turn on Bluetooth</string>
-    <!-- Do not translate. Used for diagnostic screens, precise translation is not necessary -->
-    <string name="bluetooth_device_info_deviceInfo_text" />
-
     <!-- Date & time settings screen title -->
     <string name="date_and_time">Date &amp; time settings</string>
     <!-- Date/time settings.  Summary of the checkbox for choosing between 12 hour time or 24 hour time.  Sample of 12-hour time -->
@@ -745,12 +740,10 @@
 
     <!-- Title for the dialog to enter PIN.  -->
     <string name="bluetooth_pairing_request">Bluetooth pairing request</string>
-    <!-- Title for the bluetooth device info screen. -->
-    <string name="bluetooth_device_info">Bluetooth device info</string>
     <!-- Message when bluetooth dialog for pin entry is showing -->
-    <string name="bluetooth_enter_pin_msg">\nType PIN to pair with \u0022<xliff:g id="device_name">%1$s</xliff:g>\u0022. (Try 0000 or 1234.)</string>
+    <string name="bluetooth_enter_pin_msg">\nEnter PIN to pair with \u0022<xliff:g id="device_name">%1$s</xliff:g>\u0022. (Try 0000 or 1234.) You may need to enter the same PIN on the Bluetooth device.</string>
     <!-- Message when bluetooth dialog for passkey entry is showing -->
-    <string name="bluetooth_enter_passkey_msg">\nType passkey to pair with \u0022<xliff:g id="device_name">%1$s</xliff:g>\u0022.</string>
+    <string name="bluetooth_enter_passkey_msg">\nEnter passkey to pair with \u0022<xliff:g id="device_name">%1$s</xliff:g>\u0022.</string>
     <!-- Message when bluetooth dialog for confirmation of passkey is showing -->
     <string name="bluetooth_confirm_passkey_msg">To pair with \u0022<xliff:g id="device_name">%1$s</xliff:g>\u0022, confirm that it is showing the passkey: <xliff:g id="passkey">%2$s</xliff:g>.</string>
     <!-- Message when bluetooth incoming pairing request for (2.1 devices) dialog is showing -->
@@ -778,15 +771,6 @@
 
     <!-- Message for the error dialog when BT connecting operation fails generically. -->
     <string name="bluetooth_connecting_error_message">There was a problem connecting to <xliff:g id="device_name">%1$s</xliff:g>.</string>
-
-    <!-- Do not translate -->
-    <string name="bluetooth_device_info_alias">Device alias</string>
-    <!-- Do not translate -->
-    <string name="bluetooth_device_info_no_alias">Type alias here\u2026</string>
-    <!-- Do not translate -->
-    <string name="bluetooth_device_info_delete">Remove this device</string>
-    <!-- Do not translate -->
-    <string name="bluetooth_device_info_sdp">List supported services</string>
 
     <!-- Bluetooth settings: The title of the preference (list item) that initiates a scan for devices -->
     <string name="bluetooth_preference_scan_title">Scan for devices</string>
