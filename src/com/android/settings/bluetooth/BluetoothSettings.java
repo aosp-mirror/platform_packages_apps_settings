@@ -353,7 +353,7 @@ public class BluetoothSettings extends SettingsPreferenceFragment
         case BluetoothDevicePicker.FILTER_TYPE_AUDIO:
             if (uuids != null) {
                 if (BluetoothUuid.containsAnyUuid(uuids,
-                        LocalBluetoothProfileManager.A2DP_PROFILE_UUIDS))  return true;
+                        LocalBluetoothProfileManager.A2DP_SINK_PROFILE_UUIDS))  return true;
 
                 if (BluetoothUuid.containsAnyUuid(uuids,
                         LocalBluetoothProfileManager.HEADSET_PROFILE_UUIDS))  return true;
