@@ -209,7 +209,6 @@ public class Settings extends PreferenceActivity {
     public static class PrivacySettingsActivity extends Settings { }
     public static class DockSettingsActivity extends Settings { }
     public static class RunningServicesActivity extends Settings { }
-    public static class VoiceInputOutputSettingsActivity extends Settings { }
     public static class ManageAccountsSettingsActivity extends Settings { }
     public static class PowerUsageSummaryActivity extends Settings { }
     public static class AccountSyncSettingsActivity extends Settings { }

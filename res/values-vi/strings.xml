@@ -115,19 +115,15 @@
     <string name="bluetooth_notif_message" msgid="5381418499788668724">"Chọn để ghép nối với "</string>
     <string name="device_picker" msgid="8721012448931226323">"Trình chọn thiết bị Bluetooth"</string>
     <string name="bluetooth_permission_request" msgid="1523129741266262748">"Yêu cầu quyền Bluetooth"</string>
-    <!-- outdated translation 2342558978033892004 -->     <string name="bluetooth_ask_enablement" msgid="8211158472876087588">"Ứng dụng trên điện thoại của bạn đang yêu cầu quyền bật Bluetooth. Bạn có muốn thực hiện thao tác này không?"</string>
-    <!-- no translation found for bluetooth_ask_discovery (5950965604673262829) -->
-    <skip />
+    <string name="bluetooth_ask_enablement" msgid="8211158472876087588">"Ứng dụng đang yêu cầu quyền bật Bluetooth. Bạn có muốn thực hiện thao tác này không?"</string>
+    <string name="bluetooth_ask_discovery" product="tablet" msgid="5950965604673262829">"Ứng dụng trên máy tính bảng của bạn đang yêu cầu quyền đặt máy tính bảng ở chế độ có thể phát hiện bởi các thiết bị Bluetooth khác trong <xliff:g id="TIMEOUT">%1$d</xliff:g> giây. Bạn có muốn thực hiện thao tác này không?"</string>
     <string name="bluetooth_ask_discovery" product="default" msgid="669870705606180872">"Ứng dụng trên điện thoại của bạn đang yêu cầu quyền đặt điện thoại của bạn ở chế độ có thể phát hiện bởi các thiết bị Bluetooth khác trong <xliff:g id="TIMEOUT">%1$d</xliff:g> giây. Bạn có muốn thực hiện thao tác này không?"</string>
-    <!-- no translation found for bluetooth_ask_enablement_and_discovery (5716077575971497298) -->
-    <skip />
+    <string name="bluetooth_ask_enablement_and_discovery" product="tablet" msgid="5716077575971497298">"Ứng dụng trên máy tính bảng của bạn đang yêu cầu quyền bật Bluetooth và đặt máy tính bảng của bạn ở chế độ có thể phát hiện bởi các thiết bị khác trong <xliff:g id="TIMEOUT">%1$d</xliff:g> giây. Bạn có muốn thực hiện thao tác này không?"</string>
     <string name="bluetooth_ask_enablement_and_discovery" product="default" msgid="7220210326619399542">"Ứng dụng trên điện thoại của bạn đang yêu cầu quyền bật Bluetooth và đặt điện thoại của bạn ở chế độ có thể phát hiện bởi các thiết bị khác trong <xliff:g id="TIMEOUT">%1$d</xliff:g> giây. Bạn có muốn thực hiện thao tác này không?"</string>
     <string name="bluetooth_turning_on" msgid="3107102168379705771">"Đang bật Bluetooth…"</string>
     <string name="date_and_time" msgid="4114084177056654663">"Cài đặt ngày &amp; giờ"</string>
     <string name="date_time_12_hour_sample" msgid="3259617262618020574">"1:00 chiều"</string>
     <string name="date_time_24_hour_sample" msgid="8916857570746212357">"13:00"</string>
-    <string name="date_time_changeTime_text" msgid="7037437020000867740">"Thay đổi thời gian"</string>
-    <string name="date_time_changeDate_text" msgid="5259762626498028057">"Ngày"</string>
     <string name="choose_timezone" msgid="7762866468013985022">"Chọn múi giờ"</string>
     <string name="normal_date_format" msgid="1982904221918374153">"Thường (<xliff:g id="DATE">%s</xliff:g>)"</string>
     <string name="display_preview_label" msgid="1127597250917274792">"Xem trước:"</string>
@@ -219,7 +215,7 @@
     <string name="device_info_label" msgid="6551553813651711205">"Thông tin thiết bị"</string>
     <string name="battery_info_label" msgid="4132685016148679403">"Thông tin pin"</string>
     <string name="display_label" msgid="7403874003169865762">"Hiển thị"</string>
-    <!-- outdated translation 2127552523124277664 -->     <string name="phone_info_label" product="tablet" msgid="7820855350955963628">"Thông tin điện thoại"</string>
+    <string name="phone_info_label" product="tablet" msgid="7820855350955963628">"Thông tin về máy tính bảng"</string>
     <string name="phone_info_label" product="default" msgid="2127552523124277664">"Thông tin điện thoại"</string>
     <!-- outdated translation 5743100901106177102 -->     <string name="sd_card_settings_label" product="nosdcard" msgid="8101475181301178428">"Thẻ SD"</string>
     <string name="sd_card_settings_label" product="default" msgid="5743100901106177102">"Thẻ SD"</string>
@@ -273,6 +269,8 @@
     <skip />
     <!-- no translation found for owner_info_settings_summary (8656024590287117256) -->
     <skip />
+    <!-- no translation found for owner_info_settings_edit_text_hint (2382525043173672857) -->
+    <skip />
     <string name="security_settings_title" msgid="5168491784222013179">"Vị trí &amp; bảo mật"</string>
     <string name="location_security_settings_title" msgid="4624434296446625554">"Cài đặt vị trí &amp; bảo mật"</string>
     <string name="security_settings_summary" msgid="967393342537986570">"Đặt Vị trí của tôi, mở khoá màn hình, khoá thẻ SIM, khoá bộ nhớ thông tin xác thực"</string>
@@ -287,10 +285,8 @@
     <skip />
     <!-- no translation found for unlock_set_unlock_launch_picker_enable_summary (4791110798817242301) -->
     <skip />
-    <!-- no translation found for unlock_set_unlock_off_title (1613932765246180079) -->
-    <skip />
-    <!-- no translation found for unlock_set_unlock_off_summary (2992485517488881365) -->
-    <skip />
+    <string name="unlock_set_unlock_off_title" msgid="1613932765246180079">"Tắt"</string>
+    <string name="unlock_set_unlock_off_summary" msgid="2992485517488881365">"Không hiển thị màn hình khóa"</string>
     <string name="unlock_set_unlock_none_title" msgid="3760684669884671990">"Không"</string>
     <string name="unlock_set_unlock_none_summary" msgid="2658550480388272618">"Vô hiệu hoá bảo mật mở khoá màn hình"</string>
     <string name="unlock_set_unlock_pattern_title" msgid="2912067603917311700">"Hình"</string>
@@ -299,7 +295,7 @@
     <string name="unlock_set_unlock_pin_summary" msgid="4131169672844263316">"Nhập mã PIN số để mở khoá màn hình"</string>
     <string name="unlock_set_unlock_password_title" msgid="8775603825675090937">"Mật khẩu"</string>
     <string name="unlock_set_unlock_password_summary" msgid="4623254789833899286">"Nhập mật khẩu để mở khoá màn hình"</string>
-    <!-- outdated translation 736557879526940324 -->     <string name="unlock_set_unlock_disabled_summary" msgid="8816944391772300580">"Bị vô hiệu hoá bởi quản trị viên điện thoại từ xa"</string>
+    <string name="unlock_set_unlock_disabled_summary" msgid="8816944391772300580">"Bị vô hiệu hóa bởi quản trị viên thiết bị từ xa"</string>
     <string name="unlock_disable_lock_title" msgid="1427036227416979120">"Tắt khoá màn hình"</string>
     <string name="unlock_disable_lock_pattern_summary" msgid="6801602880568869201">"Xoá hình mở khoá"</string>
     <string name="unlock_disable_lock_pin_summary" msgid="8856842745366993387">"Xoá mã PIN mở khoá"</string>
@@ -377,7 +373,7 @@
     <string name="bluetooth_device_context_connect_advanced" msgid="2643129703569788771">"Tuỳ chọn…"</string>
     <string name="bluetooth_connect_specific_profiles_title" msgid="6952214406025825164">"Kết nối với…"</string>
     <string name="bluetooth_profile_a2dp" msgid="3259633293424539529">"Phương tiện"</string>
-    <!-- outdated translation 1874975688666658946 -->     <string name="bluetooth_profile_headset" product="tablet" msgid="2252738313413646294">"Điện thoại"</string>
+    <string name="bluetooth_profile_headset" product="tablet" msgid="2252738313413646294">"Máy tính bảng"</string>
     <string name="bluetooth_profile_headset" product="default" msgid="1874975688666658946">"Điện thoại"</string>
     <string name="bluetooth_profile_opp" msgid="3799470046565284440">"Chuyển"</string>
     <!-- no translation found for bluetooth_profile_hid (3000858580917633478) -->
@@ -385,7 +381,7 @@
     <!-- no translation found for bluetooth_profile_pan (4225813400648547154) -->
     <skip />
     <string name="bluetooth_summary_connected_to_a2dp" msgid="510833839847758664">"Đã kết nối với âm thanh phương tiện"</string>
-    <!-- outdated translation 4876496372728623918 -->     <string name="bluetooth_summary_connected_to_headset" product="tablet" msgid="598335151406893070">"Đã kết nối với âm thanh điện thoại"</string>
+    <string name="bluetooth_summary_connected_to_headset" product="tablet" msgid="598335151406893070">"Đã kết nối với âm thanh máy tính bảng"</string>
     <string name="bluetooth_summary_connected_to_headset" product="default" msgid="4876496372728623918">"Đã kết nối với âm thanh điện thoại"</string>
     <string name="bluetooth_summary_connected_to_a2dp_headset" msgid="3045032710457800891">"Đã kết nối với điện thoại và âm thanh phương tiện"</string>
     <!-- no translation found for bluetooth_summary_connected_to_hid (8147499644396475561) -->
@@ -539,7 +535,7 @@
     <string name="silent_mode_title" msgid="3181479108593217704">"Chế độ im lặng"</string>
     <string name="silent_mode_summary" msgid="3309650676072917899">"Đặt chế độ im lặng cho tất cả âm thanh ngoại trừ phương tiện &amp; báo thức"</string>
     <string name="silent_mode_incl_alarm_summary" msgid="2088830834182228458">"Tất cả âm thanh ngoại trừ phương tiện được đặt chế độ im lặng"</string>
-    <!-- outdated translation 5379026328015343686 -->     <string name="ringtone_title" msgid="7037881886694206550">"Nhạc chuông điện thoại"</string>
+    <string name="ringtone_title" msgid="7037881886694206550">"Nhạc chuông cuộc gọi đến"</string>
     <string name="ringtone_summary" msgid="2630023412632683493"></string>
     <string name="all_volume_title" msgid="8741571721868253103">"Âm lượng"</string>
     <string name="ring_volume_title" msgid="7938706566797464165">"Âm lượng chuông"</string>
@@ -579,16 +575,16 @@
     <string name="dock_audio_settings_title" msgid="3324750259959570305">"Âm thanh"</string>
     <string name="dock_audio_summary_desk" msgid="6487784412371139335">"Cài đặt cho đế để bàn được gắn vào"</string>
     <string name="dock_audio_summary_car" msgid="6740897586006248450">"Cài đặt cho đế trên ô tô được gắn vào"</string>
-    <!-- outdated translation 289909253741048784 -->     <string name="dock_audio_summary_none" product="tablet" msgid="8215337394914283607">"Điện thoại chưa được gắn đế"</string>
+    <string name="dock_audio_summary_none" product="tablet" msgid="8215337394914283607">"Máy tính bảng không được lắp đế"</string>
     <string name="dock_audio_summary_none" product="default" msgid="289909253741048784">"Điện thoại chưa được gắn đế"</string>
     <string name="dock_audio_summary_unknown" msgid="4465059868974255693">"Cài đặt cho đế được gắn vào"</string>
     <string name="dock_not_found_title" msgid="3290961741828952424">"Không tìm thấy đế"</string>
-    <!-- outdated translation 3035260358985111855 -->     <string name="dock_not_found_text" product="tablet" msgid="7935403744079168804">"Điện thoại phải được gắn đế để định cấu hình âm thanh đế"</string>
+    <string name="dock_not_found_text" product="tablet" msgid="7935403744079168804">"Máy tính bảng phải được gắn đế để định cấu hình âm thanh đế"</string>
     <string name="dock_not_found_text" product="default" msgid="3035260358985111855">"Điện thoại phải được gắn đế để định cấu hình âm thanh đế"</string>
     <string name="dock_sounds_enable_title" msgid="3659084028644948905">"Âm thanh khi lắp đế"</string>
-    <!-- outdated translation 8491180514199743771 -->     <string name="dock_sounds_enable_summary_on" product="tablet" msgid="838102386448981339">"Phát âm thanh khi lắp hoặc tháo điện thoại khỏi đế"</string>
+    <string name="dock_sounds_enable_summary_on" product="tablet" msgid="838102386448981339">"Phát âm thanh khi lắp hoặc tháo máy tính bảng khỏi đế"</string>
     <string name="dock_sounds_enable_summary_on" product="default" msgid="8491180514199743771">"Phát âm thanh khi lắp hoặc tháo điện thoại khỏi đế"</string>
-    <!-- outdated translation 3151046599205265919 -->     <string name="dock_sounds_enable_summary_off" product="tablet" msgid="5077843049805652363">"Không phát âm thanh khi lắp hoặc tháo điện thoại khỏi đế"</string>
+    <string name="dock_sounds_enable_summary_off" product="tablet" msgid="5077843049805652363">"Không phát âm thanh khi lắp hoặc tháo máy tính bảng khỏi đế"</string>
     <string name="dock_sounds_enable_summary_off" product="default" msgid="3151046599205265919">"Không phát âm thanh khi lắp hoặc tháo điện thoại khỏi đế"</string>
     <string name="sync_settings" msgid="9186125469300013491">"Tài khoản &amp; đồng bộ hoá"</string>
     <string name="sync_settings_summary" msgid="2962179505214965667">"Thêm hoặc xoá tài khoản và thay đổi cài đặt tài khoản"</string>
@@ -599,9 +595,9 @@
     <string name="animations_summary_on" msgid="8843613112130484436">"Hiển thị hoạt ảnh khi mở &amp; đóng cửa sổ"</string>
     <string name="animations_summary_off" msgid="2777026828025551983">"Hiển thị hoạt ảnh khi mở &amp; đóng cửa sổ"</string>
     <string name="accelerometer_title" msgid="7854608399547349157">"Tự động xoay màn hình"</string>
-    <!-- outdated translation 1133737282813048021 -->     <string name="accelerometer_summary_on" product="tablet" msgid="429982132339828942">"Tự động chuyển hướng khi xoay điện thoại"</string>
+    <string name="accelerometer_summary_on" product="tablet" msgid="429982132339828942">"Tự động chuyển hướng khi xoay máy tính bảng"</string>
     <string name="accelerometer_summary_on" product="default" msgid="1133737282813048021">"Tự động chuyển hướng khi xoay điện thoại"</string>
-    <!-- outdated translation 5485489363715740761 -->     <string name="accelerometer_summary_off" product="tablet" msgid="4781734213242521682">"Tự động chuyển hướng khi xoay điện thoại"</string>
+    <string name="accelerometer_summary_off" product="tablet" msgid="4781734213242521682">"Tự động chuyển hướng khi xoay máy tính bảng"</string>
     <string name="accelerometer_summary_off" product="default" msgid="5485489363715740761">"Tự động chuyển hướng khi xoay điện thoại"</string>
     <string name="brightness" msgid="2354961343555249270">"Độ sáng"</string>
     <string name="brightness_summary" msgid="838917350127550703">"Điều chỉnh độ sáng của màn hình"</string>
@@ -612,9 +608,9 @@
     <string name="sim_lock_settings_category" msgid="5136244267576697004">"Thiết lập khoá thẻ SIM"</string>
     <string name="sim_lock_settings_title" msgid="9018585580955414596">"Khoá thẻ SIM"</string>
     <string name="sim_pin_toggle" msgid="1742123478029451888">"Khoá thẻ SIM"</string>
-    <!-- outdated translation 2503536505568814324 -->     <string name="sim_lock_on" product="tablet" msgid="5058355081270397764">"Yêu cầu mã PIN để sử dụng điện thoại"</string>
+    <string name="sim_lock_on" product="tablet" msgid="5058355081270397764">"Yêu cầu PIN để sử dụng máy tính bảng"</string>
     <string name="sim_lock_on" product="default" msgid="2503536505568814324">"Yêu cầu mã PIN để sử dụng điện thoại"</string>
-    <!-- outdated translation 258981978215428916 -->     <string name="sim_lock_off" product="tablet" msgid="2813800553917012356">"Yêu cầu mã PIN để sử dụng điện thoại"</string>
+    <string name="sim_lock_off" product="tablet" msgid="2813800553917012356">"Yêu cầu PIN để sử dụng máy tính bảng"</string>
     <string name="sim_lock_off" product="default" msgid="258981978215428916">"Yêu cầu mã PIN để sử dụng điện thoại"</string>
     <string name="sim_pin_change" msgid="6311414184279932368">"Thay đổi mã PIN của SIM"</string>
     <string name="sim_enter_pin" msgid="6608715137008508432">"Mã PIN của SIM"</string>
@@ -631,7 +627,7 @@
     <string name="sim_lock_failed" msgid="6676748290838006404">"Không thể thay đổi trạng thái khoá thẻ SIM."\n"Có thể mã PIN không chính xác."</string>
     <string name="sim_enter_ok" msgid="6475946836899218919">"OK"</string>
     <string name="sim_enter_cancel" msgid="6240422158517208036">"Huỷ"</string>
-    <!-- outdated translation 475872867864762157 -->     <string name="device_info_settings" product="tablet" msgid="1119755927536987178">"Trạng thái điện thoại"</string>
+    <string name="device_info_settings" product="tablet" msgid="1119755927536987178">"Trạng thái máy tính bảng"</string>
     <string name="device_info_settings" product="default" msgid="475872867864762157">"Trạng thái điện thoại"</string>
     <string name="system_update_settings_list_item_title" msgid="3342887311059985961">"Bản cập nhật hệ thống"</string>
     <string name="system_update_settings_list_item_summary" msgid="3853057315907710747"></string>
@@ -644,9 +640,8 @@
     <string name="device_status_activity_title" msgid="1411201799384697904">"Trạng thái"</string>
     <string name="device_status" msgid="607405385799807324">"Trạng thái"</string>
     <string name="device_status_summary" msgid="2599162787451519618">"Số điện thoại, tín hiệu, v.v..."</string>
-    <!-- outdated translation 6681164315506788024 -->     <string name="storage_settings" product="nosdcard" msgid="8758910337658683955">"Thẻ SD &amp; bộ nhớ điện thoại"</string>
     <!-- unknown quoting pattern: original -1, translation 1 -->
-    <!-- outdated translation 6681164315506788024 -->     <string name="storage_settings" product="default" msgid="4211799979832404953">"Thẻ SD &amp;amp; bộ nhớ điện thoại"</string>
+    <!-- outdated translation 6681164315506788024 -->     <string name="storage_settings" msgid="4211799979832404953">"Thẻ SD &amp;amp; bộ nhớ điện thoại"</string>
     <!-- unknown quoting pattern: original -1, translation 1 -->
     <!-- outdated translation 5379463509034022773 -->     <string name="storage_settings_title" msgid="8746016738388094064">"Cài đặt thẻ SD &amp;amp; bộ nhớ điện thoại"</string>
     <!-- outdated translation 9176693537325988610 -->     <string name="storage_settings_summary" product="nosdcard" msgid="3543813623294870759">"Tháo thẻ SD, xem dung lượng còn trống"</string>
@@ -671,6 +666,12 @@
     <string name="sd_memory" product="default" msgid="151871913888051515">"Thẻ SD"</string>
     <string name="memory_available" msgid="418542433817289474">"Dung lượng còn trống"</string>
     <string name="memory_size" msgid="6629067715017232195">"Tổng dung lượng"</string>
+    <!-- no translation found for memory_calculating_size (2188358544203768588) -->
+    <skip />
+    <!-- no translation found for memory_apps_usage (5818922761412589352) -->
+    <skip />
+    <!-- no translation found for memory_media_usage (5655498435493764372) -->
+    <skip />
     <!-- outdated translation 6915293408836853020 -->     <string name="sd_eject" product="nosdcard" msgid="4988563376492400073">"Tháo thẻ SD"</string>
     <string name="sd_eject" product="default" msgid="6915293408836853020">"Tháo thẻ SD"</string>
     <!-- outdated translation 3315557796211542962 -->     <string name="sd_eject_summary" product="nosdcard" msgid="5009296896648072891">"Tháo thẻ SD để tháo an toàn"</string>
@@ -739,7 +740,7 @@
     <string name="menu_restore" msgid="8260067415075573273">"Đặt lại về mặc định"</string>
     <string name="restore_default_apn_completed" msgid="3990449939234957281">"Đặt lại cài đặt APN mặc định đã hoàn tất"</string>
     <string name="master_clear_title" msgid="5907939616087039756">"Đặt lại về dữ liệu gốc"</string>
-    <!-- outdated translation 4986154238001088492 -->     <string name="master_clear_summary" product="tablet" msgid="4036344100254678429">"Xoá tất cả dữ liệu trên điện thoại"</string>
+    <string name="master_clear_summary" product="tablet" msgid="4036344100254678429">"Xóa tất cả dữ liệu trên máy tính bảng"</string>
     <string name="master_clear_summary" product="default" msgid="4986154238001088492">"Xoá tất cả dữ liệu trên điện thoại"</string>
     <!-- unknown placeholder BREAK_10 in master_clear_desc -->
     <skip />
@@ -763,12 +764,12 @@
     <skip />
     <!-- no translation found for erase_external_storage_description (46603515218075174) -->
     <skip />
-    <!-- outdated translation 7550632653343157971 -->     <string name="master_clear_button_text" product="tablet" msgid="3130786116528304116">"Đặt lại điện thoại"</string>
+    <string name="master_clear_button_text" product="tablet" msgid="3130786116528304116">"Đặt lại máy tính bảng"</string>
     <string name="master_clear_button_text" product="default" msgid="7550632653343157971">"Đặt lại điện thoại"</string>
     <string name="master_clear_final_desc" msgid="6917971132484622696">"Xoá tất cả thông tin cá nhân của bạn và bất kỳ ứng dụng đã tải xuống nào? Không thể hoàn tác tác vụ này!"</string>
     <string name="master_clear_final_button_text" msgid="5390908019019242910">"Xoá mọi thứ"</string>
     <string name="master_clear_gesture_prompt" msgid="1428645764883536750">"Vẽ hình mở khoá của bạn"</string>
-    <!-- outdated translation 8901714274312707918 -->     <string name="master_clear_gesture_explanation" msgid="2234954758550554549">"Bạn phải vẽ hình mở khoá của mình để xác nhận đặt lại điện thoại."</string>
+    <string name="master_clear_gesture_explanation" msgid="2234954758550554549">"Bạn phải vẽ hình mở khóa của mình để xác nhận đặt lại về dữ liệu gốc."</string>
     <string name="master_clear_failed" msgid="8655202125010189406">"Không đặt lại nào được thực hiện vì dịch vụ Xoá Hệ thống không khả dụng."</string>
     <!-- no translation found for master_clear_confirm_title (4845794266129586839) -->
     <skip />
@@ -861,24 +862,23 @@
     <skip />
     <!-- no translation found for use_location_summary_enabled (984549156918597265) -->
     <skip />
-    <!-- outdated translation 1743378368185371685 -->     <string name="about_settings" product="tablet" msgid="593457295516533765">"Giới thiệu về điện thoại"</string>
+    <string name="about_settings" product="tablet" msgid="593457295516533765">"Giới thiệu về máy tính bảng"</string>
     <string name="about_settings" product="default" msgid="1743378368185371685">"Giới thiệu về điện thoại"</string>
-    <!-- outdated translation 3302263393543848667 -->     <string name="about_settings_summary" msgid="3371517697156165959">"Xem thông tin pháp lý, trạng thái điện thoại, phiên bản phần mềm"</string>
+    <string name="about_settings_summary" msgid="3371517697156165959">"Xem thông tin pháp lý, trạng thái, phiên bản phần mềm"</string>
     <string name="legal_information" msgid="5769301644270604095">"Thông tin pháp lý"</string>
     <string name="contributors_title" msgid="5917703088825286504">"Người đóng góp"</string>
     <string name="copyright_title" msgid="865906688917260647">"Bản quyền"</string>
     <string name="license_title" msgid="1990487604356037871">"Giấy phép"</string>
     <string name="terms_title" msgid="7697580845616764642">"Điều khoản và điều kiện"</string>
     <string name="system_tutorial_list_item_title" msgid="9082844446660969729">"Hướng dẫn hệ thống"</string>
-    <!-- outdated translation 3861815254521030201 -->     <string name="system_tutorial_list_item_summary" product="tablet" msgid="3341504384445734067">"Tìm hiểu cách sử dụng điện thoại của bạn"</string>
+    <string name="system_tutorial_list_item_summary" product="tablet" msgid="3341504384445734067">"Tìm hiểu cách sử dụng máy tính bảng của bạn"</string>
     <string name="system_tutorial_list_item_summary" product="default" msgid="3861815254521030201">"Tìm hiểu cách sử dụng điện thoại của bạn"</string>
     <string name="settings_license_activity_title" msgid="7553683406244228650">"Giấy phép nguồn mở"</string>
     <string name="settings_license_activity_unavailable" msgid="4210539215951487627">"Đã xảy ra sự cố khi tải giấy phép."</string>
     <string name="settings_license_activity_loading" msgid="3337535809093591740">"Đang tải…"</string>
     <string name="settings_safetylegal_title" msgid="1289483965535937431">"Thông tin an toàn"</string>
     <string name="settings_safetylegal_activity_title" msgid="6901214628496951727">"Thông tin an toàn"</string>
-    <!-- no translation found for settings_safetylegal_activity_unreachable (170670055116721810) -->
-    <skip />
+    <string name="settings_safetylegal_activity_unreachable" msgid="170670055116721810">"Bạn không có kết nối dữ liệu. Để xem thông tin này ngay bây giờ, hãy truy cập %s từ bất kỳ máy tính nào đã kết nối Internet."</string>
     <string name="settings_safetylegal_activity_loading" msgid="8059022597639516348">"Đang tải…"</string>
     <string name="lockpassword_choose_your_password_header" msgid="8624900666929394990">"Chọn mật khẩu của bạn"</string>
     <string name="lockpassword_choose_your_pin_header" msgid="7598849519816138302">"Chọn mã PIN của bạn"</string>
@@ -917,9 +917,9 @@
     <string name="lockpattern_too_many_failed_confirmation_attempts_footer" msgid="6759029360597122873">"Hãy thử lại sau <xliff:g id="NUMBER">%d</xliff:g> giây."</string>
     <string name="skip_button_label" msgid="8680422740354436943">"Huỷ"</string>
     <string name="next_button_label" msgid="8890792540116568321">"Tiếp theo"</string>
-    <!-- outdated translation 4059246467204273930 -->     <string name="lock_title" product="tablet" msgid="2909697418179419990">"Đang bảo vệ điện thoại của bạn"</string>
+    <string name="lock_title" product="tablet" msgid="2909697418179419990">"Bảo mật máy tính bảng của bạn"</string>
     <string name="lock_title" product="default" msgid="4059246467204273930">"Đang bảo vệ điện thoại của bạn"</string>
-    <!-- outdated translation 9100785646737118042 -->     <string name="lock_intro_message" product="tablet" msgid="4544669202394019747"><font size="17">"Bảo vệ điện thoại của bạn khỏi việc sử dụng trái phép bằng cách tạo hình mở khoá màn hình cá nhân. "\n<font height="17">\n</font><b>"1"</b>"  Trên màn hình tiếp theo, hãy xem khi một hình ví dụ được vẽ. "\n<font height="17">\n</font><b>"2"</b>"  Khi đã sẵn sàng, hãy vẽ hình mở khoá cá nhân của riêng bạn. Thử nghiệm với các hình khác nhau nhưng kết nối ít nhất bốn điểm. "\n<font height="17">\n</font><b>"3"</b>"  Vẽ lại hình của bạn để xác nhận. "\n<font height="17">\n</font><b>"Bạn đã sẵn sàng bắt đầu? Chạm vào “Tiếp theo”"</b>". "\n<font height="3">\n</font>"Để điện thoại không được bảo vệ, hãy chạm vào “Huỷ”."</font></string>
+    <string name="lock_intro_message" product="tablet" msgid="4544669202394019747"><font size="17">"Bảo vệ máy tính bảng của bạn khỏi việc sử dụng trái phép bằng cách tạo hình mở khóa màn hình cá nhân. "\n<font height="17">\n</font><b>"1"</b>"  Trên màn hình tiếp theo, hãy xem khi một hình ví dụ được vẽ. "\n<font height="17">\n</font><b>"2"</b>"  Khi đã sẵn sàng, hãy vẽ hình mở khóa cá nhân của riêng bạn. Thử nghiệm với các hình khác nhau nhưng kết nối ít nhất bốn điểm. "\n<font height="17">\n</font><b>"3"</b>"  Vẽ lại hình của bạn để xác nhận. "\n<font height="17">\n</font><b>"Bạn đã sẵn sàng bắt đầu? Chạm vào “Tiếp theo”"</b>". "\n<font height="3">\n</font>"Để máy tính bảng không được bảo vệ, hãy chạm vào “Hủy”."</font></string>
     <string name="lock_intro_message" product="default" msgid="9100785646737118042"><font size="17">"Bảo vệ điện thoại của bạn khỏi việc sử dụng trái phép bằng cách tạo hình mở khoá màn hình cá nhân. "\n<font height="17">\n</font><b>"1"</b>"  Trên màn hình tiếp theo, hãy xem khi một hình ví dụ được vẽ. "\n<font height="17">\n</font><b>"2"</b>"  Khi đã sẵn sàng, hãy vẽ hình mở khoá cá nhân của riêng bạn. Thử nghiệm với các hình khác nhau nhưng kết nối ít nhất bốn điểm. "\n<font height="17">\n</font><b>"3"</b>"  Vẽ lại hình của bạn để xác nhận. "\n<font height="17">\n</font><b>"Bạn đã sẵn sàng bắt đầu? Chạm vào “Tiếp theo”"</b>". "\n<font height="3">\n</font>"Để điện thoại không được bảo vệ, hãy chạm vào “Huỷ”."</font></string>
     <string name="lock_example_title" msgid="8052305554017485410">"Hình ví dụ"</string>
     <string name="lock_example_message" msgid="1838650097090632706">"Kết nối ít nhất bốn điểm."\n" "\n"Chạm vào “Tiếp theo” khi bạn sẵn sàng vẽ hình của riêng mình."</string>
@@ -930,7 +930,7 @@
     <string name="applications_settings_header" msgid="6018266337275422250">"Cài đặt ứng dụng"</string>
     <string name="install_applications" msgid="4872012136210802181">"Nguồn không xác định"</string>
     <string name="install_unknown_applications" msgid="6612824788917283662">"Cho phép cài đặt các ứng dụng không phải của Market"</string>
-    <!-- outdated translation 1923717607319933741 -->     <string name="install_all_warning" product="tablet" msgid="8143969767997876735">"Điện thoại và dữ liệu cá nhân của bạn dễ bị các ứng dụng từ các nguồn không xác định tấn công hơn. Bạn đồng ý rằng bạn tự chịu trách nhiệm về bất kỳ thiệt hại nào đối với điện thoại hoặc việc mất dữ liệu có thể gây ra do việc sử dụng các ứng dụng này."</string>
+    <string name="install_all_warning" product="tablet" msgid="8143969767997876735">"Máy tính bảng và dữ liệu cá nhân của bạn dễ bị các ứng dụng từ các nguồn không xác định tấn công hơn. Bạn đồng ý rằng bạn tự chịu trách nhiệm về bất kỳ thiệt hại nào đối với máy tính bảng hoặc việc mất dữ liệu có thể gây ra do việc sử dụng các ứng dụng này."</string>
     <string name="install_all_warning" product="default" msgid="1923717607319933741">"Điện thoại và dữ liệu cá nhân của bạn dễ bị các ứng dụng từ các nguồn không xác định tấn công hơn. Bạn đồng ý rằng bạn tự chịu trách nhiệm về bất kỳ thiệt hại nào đối với điện thoại hoặc việc mất dữ liệu có thể gây ra do việc sử dụng các ứng dụng này."</string>
     <string name="application_info_label" msgid="1150486628158409543">"Thông tin ứng dụng"</string>
     <string name="storage_label" msgid="8700867073480107253">"Dung lượng"</string>
@@ -991,14 +991,14 @@
     <string name="app_factory_reset_dlg_text" msgid="438395129140568893">"Bạn có muốn gỡ cài đặt tất cả các bản cập nhật cho ứng dụng hệ thống Android này không?"</string>
     <string name="clear_failed_dlg_title" msgid="2387060805294783175">"Xoá dữ liệu"</string>
     <string name="clear_failed_dlg_text" msgid="7943411157007320290">"Không thể xoá dữ liệu cho ứng dụng"</string>
-    <!-- outdated translation 3116027624526915561 -->     <string name="security_settings_desc" product="tablet" msgid="6158636779728455276">"Ứng dụng này có thể truy cập các mục sau trên điện thoại của bạn:"</string>
+    <string name="security_settings_desc" product="tablet" msgid="6158636779728455276">"Ứng dụng này có thể truy cập các mục sau trên máy tính bảng của bạn:"</string>
     <string name="security_settings_desc" product="default" msgid="3116027624526915561">"Ứng dụng này có thể truy cập các mục sau trên điện thoại của bạn:"</string>
     <string name="computing_size" msgid="1599186977475211186">"Đang tính toán…"</string>
     <string name="invalid_size_value" msgid="1901940003700269523">"Không thể tính toán kích thước gói"</string>
     <string name="empty_list_msg" msgid="2901049162265094971">"Bạn chưa cài đặt ứng dụng của bên thứ ba nào."</string>
     <string name="version_text" msgid="9189073826278676425">"phiên bản <xliff:g id="VERSION_NUM">%1$s</xliff:g>"</string>
     <string name="move_app" msgid="5042838441401731346">"Chuyển"</string>
-    <!-- outdated translation 3895430471913858185 -->     <string name="move_app_to_internal" product="tablet" msgid="2299714147283854957">"Chuyển sang điện thoại"</string>
+    <string name="move_app_to_internal" product="tablet" msgid="2299714147283854957">"Di chuyển tới máy tính bảng"</string>
     <string name="move_app_to_internal" product="default" msgid="3895430471913858185">"Chuyển sang điện thoại"</string>
     <!-- outdated translation 1143379049903056407 -->     <string name="move_app_to_sdcard" product="nosdcard" msgid="4350451696315265420">"Chuyển sang thẻ SD"</string>
     <string name="move_app_to_sdcard" product="default" msgid="1143379049903056407">"Chuyển sang thẻ SD"</string>
@@ -1071,10 +1071,8 @@
     <skip />
     <!-- no translation found for runningservicedetails_stop_dlg_title (4253292537154337233) -->
     <skip />
-    <!-- no translation found for runningservicedetails_stop_dlg_text (5420033091144016389) -->
-    <skip />
-    <!-- no translation found for runningservicedetails_stop_dlg_text (6929716497425738387) -->
-    <skip />
+    <string name="runningservicedetails_stop_dlg_text" product="tablet" msgid="5420033091144016389">"Bạn có chắc chắn muốn ngừng dịch vụ hệ thống này không? Nếu bạn ngừng dịch vụ, một số tính năng của máy tính bảng của bạn có thể ngừng hoạt động chính xác cho đến khi bạn tắt dịch vụ rồi bật lại."</string>
+    <!-- outdated translation 5420033091144016389 -->     <string name="runningservicedetails_stop_dlg_text" product="default" msgid="6929716497425738387">"Bạn có chắc chắn muốn ngừng dịch vụ hệ thống này không? Nếu bạn ngừng dịch vụ, một số tính năng của máy tính bảng của bạn có thể ngừng hoạt động chính xác cho đến khi bạn tắt dịch vụ rồi bật lại."</string>
     <string name="language_settings" msgid="502219872342167227">"Ngôn ngữ &amp; bàn phím"</string>
     <string name="language_keyboard_settings_title" msgid="3455826933385341107">"Cài đặt ngôn ngữ &amp; bàn phím"</string>
     <!-- no translation found for language_settings_category (2288258489940617043) -->
@@ -1103,7 +1101,7 @@
     <string name="user_dict_settings_context_menu_delete_title" msgid="9140703913776549054">"Xoá"</string>
     <string name="user_dict_settings_empty_text" msgid="6209268025109242806">"Bạn không có từ nào trong từ điển người dùng. Bạn có thể thêm từ qua trình đơn."</string>
     <string name="testing" msgid="6584352735303604146">"Đang kiểm tra"</string>
-    <!-- outdated translation 8656693364332840056 -->     <string name="testing_phone_info" product="tablet" msgid="193561832258534798">"Thông tin điện thoại"</string>
+    <string name="testing_phone_info" product="tablet" msgid="193561832258534798">"Thông tin về máy tính bảng"</string>
     <string name="testing_phone_info" product="default" msgid="8656693364332840056">"Thông tin điện thoại"</string>
     <string name="testing_battery_info" msgid="3497865525976497848">"Thông tin pin"</string>
     <string name="quick_launch_title" msgid="7904609846945905306">"Khởi chạy nhanh"</string>
@@ -1212,7 +1210,7 @@
     <string name="power_bluetooth" msgid="4373329044379008289">"Bluetooth"</string>
     <string name="power_cell" msgid="6596471490976003056">"Chế độ chờ của điện thoại di động"</string>
     <string name="power_phone" msgid="5392641106474567277">"Cuộc gọi thoại"</string>
-    <!-- outdated translation 9055659695602194990 -->     <string name="power_idle" product="tablet" msgid="4612478572401640759">"Điện thoại ở chế độ rảnh"</string>
+    <string name="power_idle" product="tablet" msgid="4612478572401640759">"Máy tính bảng ở chế độ rảnh"</string>
     <string name="power_idle" product="default" msgid="9055659695602194990">"Điện thoại ở chế độ rảnh"</string>
     <string name="usage_type_cpu" msgid="715162150698338714">"CPU tổng"</string>
     <string name="usage_type_cpu_foreground" msgid="6500579611933211831">"Nền trước CPU"</string>
@@ -1221,7 +1219,7 @@
     <string name="usage_type_gps" msgid="7989688715128160790">"GPS"</string>
     <!-- no translation found for usage_type_wifi_running (8234997940652067049) -->
     <skip />
-    <!-- outdated translation 9108247984998041853 -->     <string name="usage_type_phone" product="tablet" msgid="262638572890253393">"Điện thoại"</string>
+    <string name="usage_type_phone" product="tablet" msgid="262638572890253393">"Máy tính bảng"</string>
     <string name="usage_type_phone" product="default" msgid="9108247984998041853">"Điện thoại"</string>
     <string name="usage_type_data_send" msgid="2857401966985425427">"Dữ liệu đã gửi"</string>
     <string name="usage_type_data_recv" msgid="7251090882025234185">"Dữ liệu đã nhận được"</string>
@@ -1236,7 +1234,7 @@
     <!-- outdated translation 5452076674659927993 -->     <string name="battery_action_wifi" msgid="2272741639606146903">"Cài đặt WiFi"</string>
     <string name="battery_action_bluetooth" msgid="8374789049507723142">"Cài đặt Bluetooth"</string>
     <string name="battery_desc_voice" msgid="8980322055722959211">"Pin được các cuộc gọi thoại sử dụng"</string>
-    <!-- outdated translation 3009080001948091424 -->     <string name="battery_desc_standby" product="tablet" msgid="6284747418668280364">"Pin được sử dụng khi điện thoại ở chế độ rảnh"</string>
+    <string name="battery_desc_standby" product="tablet" msgid="6284747418668280364">"Pin được sử dụng khi máy tính bảng ở chế độ rảnh"</string>
     <string name="battery_desc_standby" product="default" msgid="3009080001948091424">"Pin được sử dụng khi điện thoại ở chế độ rảnh"</string>
     <string name="battery_desc_radio" msgid="5479196477223185367">"Pin được vô tuyến tế bào sử dụng"</string>
     <string name="battery_sugg_radio" msgid="8211336978326295047">"Chuyển sang chế độ trên máy bay để tiết kiệm pin trong khu vực không có phủ sóng điện thoại di động"</string>
@@ -1442,6 +1440,10 @@
     <string name="personal_data_section_title" msgid="7815209034443782061">"Dữ liệu cá nhân"</string>
     <string name="backup_data_title" msgid="1239105919852668016">"Sao lưu dữ liệu của tôi"</string>
     <!-- outdated translation 5662190190240860035 -->     <string name="backup_data_summary" msgid="6515285107793232815">"Sao lưu cài đặt và dữ liệu ứng dụng khác của tôi."</string>
+    <!-- no translation found for backup_configure_transport_title (1642593939931033647) -->
+    <skip />
+    <!-- no translation found for backup_configure_transport_default_summary (1855090161240800307) -->
+    <skip />
     <string name="auto_restore_title" msgid="5397528966329126506">"Tự động khôi phục"</string>
     <!-- outdated translation 6867766474057290177 -->     <string name="auto_restore_summary" msgid="83177150536734378">"Nếu tôi cài đặt lại ứng dụng, hãy khôi phục cài đặt hoặc dữ liệu khác đã được sao lưu."</string>
     <string name="backup_erase_dialog_title" msgid="3438255037256586237">"Sao lưu"</string>
@@ -1499,6 +1501,8 @@
     <skip />
     <!-- no translation found for wifi_setup_status_proceed_to_next (9071951312604559022) -->
     <skip />
+    <!-- no translation found for account_sync_settings_title (4578227872921044660) -->
+    <skip />
     <!-- no translation found for sync_is_failing (1591561768344128377) -->
     <skip />
     <!-- no translation found for add_account_label (7811707265834013767) -->
@@ -1524,5 +1528,67 @@
     <!-- no translation found for sync_disabled (8511659877596511991) -->
     <skip />
     <!-- no translation found for sync_error (5060969083117872149) -->
+    <skip />
+    <!-- no translation found for app_label (5443184607893378389) -->
+    <skip />
+    <!-- no translation found for sync_too_many_deletes (7648720493358579441) -->
+    <skip />
+    <!-- no translation found for settings_backup (2274732978260797031) -->
+    <skip />
+    <!-- no translation found for settings_backup_summary (7916877705938054035) -->
+    <skip />
+    <!-- no translation found for sync_menu_sync_now (6154608350395805683) -->
+    <skip />
+    <!-- no translation found for sync_menu_sync_cancel (8292379009626966949) -->
+    <skip />
+    <!-- no translation found for sync_one_time_sync (6766593624598183090) -->
+    <skip />
+    <!-- no translation found for sync_gmail (714886122098006477) -->
+    <skip />
+    <!-- no translation found for sync_calendar (9056527206714733735) -->
+    <skip />
+    <!-- no translation found for sync_contacts (9174914394377828043) -->
+    <skip />
+    <!-- no translation found for sync_too_many_deletes_desc (1629933977544304140) -->
+    <skip />
+    <!-- no translation found for sync_really_delete (8501873911799839009) -->
+    <skip />
+    <!-- no translation found for sync_undo_deletes (2154022612361710595) -->
+    <skip />
+    <!-- no translation found for sync_do_nothing (5889328648484047916) -->
+    <skip />
+    <!-- no translation found for sync_plug (5952575609349860569) -->
+    <skip />
+    <!-- no translation found for header_application_sync_settings (5514539555293976035) -->
+    <skip />
+    <!-- no translation found for header_data_and_synchronization (5165024023936509896) -->
+    <skip />
+    <!-- no translation found for preference_change_password_title (8955581790270130056) -->
+    <skip />
+    <!-- no translation found for header_account_settings (5382475087121880626) -->
+    <skip />
+    <!-- no translation found for remove_account_label (5921986026504804119) -->
+    <skip />
+    <!-- no translation found for header_add_an_account (756108499532023798) -->
+    <skip />
+    <!-- no translation found for finish_button_label (481587707657751116) -->
+    <skip />
+    <!-- no translation found for really_remove_account_title (6574643117748564960) -->
+    <skip />
+    <!-- no translation found for really_remove_account_message (4448645571715719563) -->
+    <skip />
+    <!-- no translation found for really_remove_account_message (1005751790899989319) -->
+    <skip />
+    <!-- no translation found for remove_account_failed (1093911989149396624) -->
+    <skip />
+    <!-- no translation found for remove_account_failed (9174390193652391412) -->
+    <skip />
+    <!-- no translation found for provider_label (7724593781904508866) -->
+    <skip />
+    <!-- no translation found for sync_item_title (1931551540462877488) -->
+    <skip />
+    <!-- no translation found for cant_sync_dialog_title (7185199796123573317) -->
+    <skip />
+    <!-- no translation found for cant_sync_dialog_message (2372359241135295930) -->
     <skip />
 </resources>

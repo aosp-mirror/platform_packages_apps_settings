@@ -16,9 +16,6 @@
 
 package com.android.settings;
 
-import org.xmlpull.v1.XmlPullParser;
-import org.xmlpull.v1.XmlPullParserException;
-
 import android.content.ComponentName;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -28,7 +25,6 @@ import android.content.pm.PackageManager.NameNotFoundException;
 import android.content.res.Resources;
 import android.content.res.TypedArray;
 import android.content.res.XmlResourceParser;
-import android.os.Bundle;
 import android.preference.ListPreference;
 import android.preference.Preference;
 import android.preference.PreferenceCategory;
@@ -45,15 +41,16 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 
+import org.xmlpull.v1.XmlPullParser;
+import org.xmlpull.v1.XmlPullParserException;
+
 /**
  * Settings screen for voice input/output.
  */
-public class VoiceInputOutputSettings extends SettingsPreferenceFragment
-        implements OnPreferenceChangeListener {
-    
+public class VoiceInputOutputSettings implements OnPreferenceChangeListener {
+
     private static final String TAG = "VoiceInputOutputSettings";
-    
-    private static final String KEY_PARENT = "parent";
+
     private static final String KEY_VOICE_INPUT_CATEGORY = "voice_input_category";
     private static final String KEY_RECOGNIZER = "recognizer";
     private static final String KEY_RECOGNIZER_SETTINGS = "recognizer_settings";
@@ -62,41 +59,42 @@ public class VoiceInputOutputSettings extends SettingsPreferenceFragment
     private PreferenceCategory mVoiceInputCategory;
     private ListPreference mRecognizerPref;
     private PreferenceScreen mSettingsPref;
-    
+    private SettingsPreferenceFragment mFragment;
+
     private HashMap<String, ResolveInfo> mAvailableRecognizersMap;
-    
-    @Override
-    public void onCreate(Bundle icicle) {
-        super.onCreate(icicle);
 
-        addPreferencesFromResource(R.xml.voice_input_output_settings);
+    public VoiceInputOutputSettings(SettingsPreferenceFragment fragment) {
+        mFragment = fragment;
+    }
 
-        mParent = (PreferenceGroup) findPreference(KEY_PARENT);
+    public void onCreate() {
+
+        mParent = (PreferenceGroup) mFragment.getPreferenceScreen();
         mVoiceInputCategory = (PreferenceCategory) mParent.findPreference(KEY_VOICE_INPUT_CATEGORY);
-        mRecognizerPref = (ListPreference) mParent.findPreference(KEY_RECOGNIZER);
+        mRecognizerPref = (ListPreference) mVoiceInputCategory.findPreference(KEY_RECOGNIZER);
         mRecognizerPref.setOnPreferenceChangeListener(this);
-        mSettingsPref = (PreferenceScreen) mParent.findPreference(KEY_RECOGNIZER_SETTINGS);
-        
+        mSettingsPref = (PreferenceScreen)
+                mVoiceInputCategory.findPreference(KEY_RECOGNIZER_SETTINGS);
+
         mAvailableRecognizersMap = new HashMap<String, ResolveInfo>();
-        
+
         populateOrRemoveRecognizerPreference();
     }
-    
+
     private void populateOrRemoveRecognizerPreference() {
-        List<ResolveInfo> availableRecognitionServices = getPackageManager().queryIntentServices(
+        List<ResolveInfo> availableRecognitionServices =
+                mFragment.getPackageManager().queryIntentServices(
                 new Intent(RecognitionService.SERVICE_INTERFACE), PackageManager.GET_META_DATA);
         int numAvailable = availableRecognitionServices.size();
         
         if (numAvailable == 0) {
             // No recognizer available - remove all related preferences.
-            removePreference(mVoiceInputCategory);
-            removePreference(mRecognizerPref);
-            removePreference(mSettingsPref);
+            mFragment.getPreferenceScreen().removePreference(mVoiceInputCategory);
         } else if (numAvailable == 1) {
             // Only one recognizer available, so don't show the list of choices, but do
             // set up the link to settings for the available recognizer.
-            removePreference(mRecognizerPref);
-            
+            mVoiceInputCategory.removePreference(mRecognizerPref);
+
             // But first set up the available recognizers map with just the one recognizer.
             ResolveInfo resolveInfo = availableRecognitionServices.get(0);
             String recognizerComponent =
@@ -106,20 +104,14 @@ public class VoiceInputOutputSettings extends SettingsPreferenceFragment
             mAvailableRecognizersMap.put(recognizerComponent, resolveInfo);
             
             String currentSetting = Settings.Secure.getString(
-                    getContentResolver(), Settings.Secure.VOICE_RECOGNITION_SERVICE);
+                    mFragment.getContentResolver(), Settings.Secure.VOICE_RECOGNITION_SERVICE);
             updateSettingsLink(currentSetting);
         } else {
             // Multiple recognizers available, so show the full list of choices.
             populateRecognizerPreference(availableRecognitionServices);
         }
     }
-    
-    private void removePreference(Preference pref) {
-        if (pref != null) {
-            mParent.removePreference(pref);
-        }
-    }
-    
+
     private void populateRecognizerPreference(List<ResolveInfo> recognizers) {
         int size = recognizers.size();
         CharSequence[] entries = new CharSequence[size];
@@ -127,7 +119,7 @@ public class VoiceInputOutputSettings extends SettingsPreferenceFragment
         
         // Get the current value from the secure setting.
         String currentSetting = Settings.Secure.getString(
-                getContentResolver(), Settings.Secure.VOICE_RECOGNITION_SERVICE);
+                mFragment.getContentResolver(), Settings.Secure.VOICE_RECOGNITION_SERVICE);
         
         // Iterate through all the available recognizers and load up their info to show
         // in the preference. Also build up a map of recognizer component names to their
@@ -140,7 +132,7 @@ public class VoiceInputOutputSettings extends SettingsPreferenceFragment
             
             mAvailableRecognizersMap.put(recognizerComponent, resolveInfo);
 
-            entries[i] = resolveInfo.loadLabel(getPackageManager());
+            entries[i] = resolveInfo.loadLabel(mFragment.getPackageManager());
             values[i] = recognizerComponent;
         }
         
@@ -159,13 +151,14 @@ public class VoiceInputOutputSettings extends SettingsPreferenceFragment
         XmlResourceParser parser = null;
         String settingsActivity = null;
         try {
-            parser = si.loadXmlMetaData(getPackageManager(), RecognitionService.SERVICE_META_DATA);
+            parser = si.loadXmlMetaData(mFragment.getPackageManager(),
+                    RecognitionService.SERVICE_META_DATA);
             if (parser == null) {
                 throw new XmlPullParserException("No " + RecognitionService.SERVICE_META_DATA +
                         " meta-data for " + si.packageName);
             }
             
-            Resources res = getPackageManager().getResourcesForApplication(
+            Resources res = mFragment.getPackageManager().getResourcesForApplication(
                     si.applicationInfo);
             
             AttributeSet attrs = Xml.asAttributeSet(parser);
@@ -200,25 +193,24 @@ public class VoiceInputOutputSettings extends SettingsPreferenceFragment
             // No settings preference available - hide the preference.
             Log.w(TAG, "no recognizer settings available for " + si.packageName);
             mSettingsPref.setIntent(null);
-            mParent.removePreference(mSettingsPref);
+            mVoiceInputCategory.removePreference(mSettingsPref);
         } else {
             Intent i = new Intent(Intent.ACTION_MAIN);
             i.setComponent(new ComponentName(si.packageName, settingsActivity));
             mSettingsPref.setIntent(i);
-            mRecognizerPref.setSummary(currentRecognizer.loadLabel(getPackageManager()));
+            mRecognizerPref.setSummary(currentRecognizer.loadLabel(mFragment.getPackageManager()));
         }
     }
     
     public boolean onPreferenceChange(Preference preference, Object newValue) {
         if (preference == mRecognizerPref) {
             String setting = (String) newValue;
-            
+
             // Put the new value back into secure settings.
-            Settings.Secure.putString(
-                    getContentResolver(),
+            Settings.Secure.putString(mFragment.getContentResolver(),
                     Settings.Secure.VOICE_RECOGNITION_SERVICE,
                     setting);
-            
+
             // Update the settings item so it points to the right settings.
             updateSettingsLink(setting);
         }
