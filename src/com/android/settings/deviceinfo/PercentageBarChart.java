@@ -16,8 +16,12 @@
 
 package com.android.settings.deviceinfo;
 
+import com.android.settings.R;
+
 import android.content.Context;
+import android.content.res.TypedArray;
 import android.graphics.Canvas;
+import android.graphics.Color;
 import android.graphics.Paint;
 import android.util.AttributeSet;
 import android.view.View;
@@ -28,7 +32,7 @@ import java.util.Collection;
  * 
  */
 public class PercentageBarChart extends View {
-    private final Paint mBackgroundPaint = new Paint();
+    private final Paint mEmptyPaint = new Paint();
 
     private Collection<Entry> mEntries;
 
@@ -45,20 +49,39 @@ public class PercentageBarChart extends View {
     public PercentageBarChart(Context context, AttributeSet attrs) {
         super(context, attrs);
 
-        mBackgroundPaint.setARGB(255, 64, 64, 64);
-        mBackgroundPaint.setStyle(Paint.Style.FILL);
+        TypedArray a = context.obtainStyledAttributes(attrs, R.styleable.PercentageBarChart, 0, 0);
+
+        int emptyColor = Color.BLACK;
+
+        int n = a.getIndexCount();
+        for (int i = 0; i < n; i++) {
+            int attr = a.getIndex(i);
+
+            switch (attr) {
+                case R.styleable.PercentageBarChart_emptyColor:
+                    emptyColor = a.getColor(attr, 0);
+                    break;
+            }
+        }
+
+        a.recycle();
+
+        mEmptyPaint.setColor(emptyColor);
+        mEmptyPaint.setStyle(Paint.Style.FILL);
     }
 
     @Override
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
 
-        final int width = getWidth();
-        final int height = getHeight();
+        final int left = getPaddingLeft();
+        final int right = getWidth() - getPaddingRight();
+        final int top = getPaddingTop();
+        final int bottom = getHeight() - getPaddingBottom();
 
-        canvas.drawPaint(mBackgroundPaint);
+        final int width = right - left;
 
-        int lastX = 0;
+        int lastX = left;
 
         if (mEntries != null) {
             for (final Entry e : mEntries) {
@@ -70,14 +93,16 @@ public class PercentageBarChart extends View {
                 }
 
                 final int nextX = lastX + entryWidth;
-                if (nextX >= width) {
+                if (nextX >= right) {
                     break;
                 }
 
-                canvas.drawRect(lastX, 0, nextX, height, e.paint);
+                canvas.drawRect(lastX, top, nextX, bottom, e.paint);
                 lastX = nextX;
             }
         }
+
+        canvas.drawRect(lastX, top, lastX + width, bottom, mEmptyPaint);
     }
 
     /**
@@ -85,7 +110,7 @@ public class PercentageBarChart extends View {
      * calling {@link #invalidate()}.
      */
     public void setBackgroundColor(int color) {
-        mBackgroundPaint.setColor(color);
+        mEmptyPaint.setColor(color);
     }
 
     /**
