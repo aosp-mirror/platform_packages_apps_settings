@@ -142,6 +142,8 @@ public class BluetoothEventRedirector {
                         Profile.HID, newState);
 
             } else if (action.equals(BluetoothPan.ACTION_PAN_STATE_CHANGED)) {
+                // TODO: uncomment and execute for reverse tethering only
+/*
                 final int newState = intent.getIntExtra(
                         BluetoothPan.EXTRA_PAN_STATE, 0);
                 final int oldState = intent.getIntExtra(
@@ -152,6 +154,7 @@ public class BluetoothEventRedirector {
                 }
                 mManager.getCachedDeviceManager().onProfileStateChanged(device,
                         Profile.PAN, newState);
+*/
 
             } else if (action.equals(BluetoothDevice.ACTION_CLASS_CHANGED)) {
                 mManager.getCachedDeviceManager().onBtClassChanged(device);
