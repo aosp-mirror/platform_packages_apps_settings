@@ -29,26 +29,32 @@ import android.preference.CheckBoxPreference;
 import android.preference.Preference;
 import android.preference.PreferenceCategory;
 import android.preference.PreferenceScreen;
+import android.text.TextUtils;
 import android.view.inputmethod.InputMethodInfo;
 import android.view.inputmethod.InputMethodManager;
 import android.view.inputmethod.InputMethodSubtype;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 public class InputMethodAndSubtypeEnabler extends SettingsPreferenceFragment {
 
-    private boolean mHaveHardKeyboard;
-
-    private List<InputMethodInfo> mInputMethodProperties;
+    public static final String EXTRA_INPUT_METHOD_ID = "input_method_id";
 
     private AlertDialog mDialog = null;
+    private boolean mHaveHardKeyboard;
+    final private HashMap<String, List<Preference>> mInputMethodPrefsMap =
+        new HashMap<String, List<Preference>>();
+    private List<InputMethodInfo> mInputMethodProperties;
+    private String mInputMethodId;
 
     @Override
     public void onCreate(Bundle icicle) {
         super.onCreate(icicle);
         Configuration config = getResources().getConfiguration();
         mHaveHardKeyboard = (config.keyboard == Configuration.KEYBOARD_QWERTY);
+        mInputMethodId = getActivity().getIntent().getStringExtra(EXTRA_INPUT_METHOD_ID);
         onCreateIMM();
         setPreferenceScreen(createPreferenceHierarchy());
     }
@@ -57,7 +63,7 @@ public class InputMethodAndSubtypeEnabler extends SettingsPreferenceFragment {
     public void onResume() {
         super.onResume();
         InputMethodAndSubtypeUtil.loadInputMethodSubtypeList(
-                this, getContentResolver(), mInputMethodProperties);
+                this, getContentResolver(), mInputMethodProperties, mInputMethodPrefsMap);
     }
 
     @Override
@@ -156,53 +162,48 @@ public class InputMethodAndSubtypeEnabler extends SettingsPreferenceFragment {
         PreferenceScreen root = getPreferenceManager().createPreferenceScreen(getActivity());
 
         int N = (mInputMethodProperties == null ? 0 : mInputMethodProperties.size());
-        // TODO: Use iterator.
+
         for (int i = 0; i < N; ++i) {
+            final InputMethodInfo imi = mInputMethodProperties.get(i);
+            if (imi.getSubtypes().size() <= 1) continue;
+            String imiId = imi.getId();
+            // Add to this subtype the list when no IME is specified or when the IME of this
+            // subtype is the specified IME.
+            if (!TextUtils.isEmpty(mInputMethodId) && !mInputMethodId.equals(imiId)) {
+                continue;
+            }
             PreferenceCategory keyboardSettingsCategory = new PreferenceCategory(getActivity());
             root.addPreference(keyboardSettingsCategory);
-            InputMethodInfo property = mInputMethodProperties.get(i);
-            String prefKey = property.getId();
 
             PackageManager pm = getPackageManager();
-            CharSequence label = property.loadLabel(pm);
-            boolean systemIME = InputMethodAndSubtypeUtil.isSystemIme(property);
+            CharSequence label = imi.loadLabel(pm);
 
-            keyboardSettingsCategory.setTitle(label);
+            keyboardSettingsCategory.setTitle(getResources().getString(
+                    R.string.input_methods_and_subtype_enabler_title_format, label));
+            keyboardSettingsCategory.setKey(imiId);
 
-            // Add a check box.
-            // Don't show the toggle if it's the only keyboard in the system, or it's a system IME.
-            if (mHaveHardKeyboard || (N > 1 && !systemIME)) {
-                CheckBoxPreference chkbxPref = new CheckBoxPreference(getActivity());
-                chkbxPref.setKey(prefKey);
-                chkbxPref.setTitle(label);
-                keyboardSettingsCategory.addPreference(chkbxPref);
-            }
-
-            ArrayList<InputMethodSubtype> subtypes = property.getSubtypes();
+            ArrayList<InputMethodSubtype> subtypes = imi.getSubtypes();
+            ArrayList<Preference> subtypePreferences = new ArrayList<Preference>();
             if (subtypes.size() > 0) {
-                PreferenceCategory subtypesCategory = new PreferenceCategory(getActivity());
-                subtypesCategory.setTitle(getResources().getString(
-                        R.string.input_methods_and_subtype_enabler_title_format, label));
-                root.addPreference(subtypesCategory);
                 for (InputMethodSubtype subtype: subtypes) {
                     CharSequence subtypeLabel;
                     int nameResId = subtype.getNameResId();
                     if (nameResId != 0) {
-                        subtypeLabel = pm.getText(property.getPackageName(), nameResId,
-                                property.getServiceInfo().applicationInfo);
+                        subtypeLabel = pm.getText(imi.getPackageName(), nameResId,
+                                imi.getServiceInfo().applicationInfo);
                     } else {
                         String mode = subtype.getMode();
                         CharSequence language = subtype.getLocale();
-                        // TODO: Use more friendly Title and UI
                         subtypeLabel = (mode == null ? "" : mode) + ","
                                 + (language == null ? "" : language);
                     }
                     CheckBoxPreference chkbxPref = new CheckBoxPreference(getActivity());
-                    chkbxPref.setKey(prefKey + subtype.hashCode());
+                    chkbxPref.setKey(imiId + subtype.hashCode());
                     chkbxPref.setTitle(subtypeLabel);
-                    chkbxPref.setSummary(label);
-                    subtypesCategory.addPreference(chkbxPref);
+                    keyboardSettingsCategory.addPreference(chkbxPref);
+                    subtypePreferences.add(chkbxPref);
                 }
+                mInputMethodPrefsMap.put(imiId, subtypePreferences);
             }
         }
         return root;
