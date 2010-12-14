@@ -51,7 +51,6 @@ public class TetherSettings extends SettingsPreferenceFragment {
     private static final String ENABLE_WIFI_AP = "enable_wifi_ap";
     private static final String WIFI_AP_SETTINGS = "wifi_ap_settings";
     private static final String ENABLE_BLUETOOTH_TETHERING = "enable_bluetooth_tethering";
-    private static final String BLUETOOTH_TETHER_SETTINGS = "bluetooth_tether_settings";
     private static final String TETHERING_HELP = "tethering_help";
     private static final String USB_HELP_MODIFIER = "usb_";
     private static final String WIFI_HELP_MODIFIER = "wifi_";
@@ -68,7 +67,6 @@ public class TetherSettings extends SettingsPreferenceFragment {
     private WifiApEnabler mWifiApEnabler;
 
     private CheckBoxPreference mBluetoothTether;
-    private PreferenceScreen mBluetoothSettings;
 
     private PreferenceScreen mTetherHelp;
 
@@ -97,7 +95,6 @@ public class TetherSettings extends SettingsPreferenceFragment {
         mWifiApSettings = (PreferenceScreen) findPreference(WIFI_AP_SETTINGS);
         mUsbTether = (CheckBoxPreference) findPreference(USB_TETHER_SETTINGS);
         mBluetoothTether = (CheckBoxPreference) findPreference(ENABLE_BLUETOOTH_TETHERING);
-        mBluetoothSettings = (PreferenceScreen) findPreference(BLUETOOTH_TETHER_SETTINGS);
         mTetherHelp = (PreferenceScreen) findPreference(TETHERING_HELP);
 
         ConnectivityManager cm =
@@ -121,14 +118,11 @@ public class TetherSettings extends SettingsPreferenceFragment {
         }
         if (!bluetoothAvailable) {
             getPreferenceScreen().removePreference(mBluetoothTether);
-            getPreferenceScreen().removePreference(mBluetoothSettings);
         } else {
             if (mBluetoothPan.isTetheringOn()) {
                 mBluetoothTether.setChecked(true);
-                mBluetoothSettings.setEnabled(true);
             } else {
                 mBluetoothTether.setChecked(false);
-                mBluetoothSettings.setEnabled(false);
             }
         }
         /* Don't change the title for two-pane settings
@@ -360,17 +354,14 @@ public class TetherSettings extends SettingsPreferenceFragment {
         int btState = adapter.getState();
         if (btState == BluetoothAdapter.STATE_TURNING_OFF) {
             mBluetoothTether.setEnabled(false);
-            mBluetoothSettings.setEnabled(false);
             mBluetoothTether.setSummary(R.string.wifi_stopping);
         } else if (btState == BluetoothAdapter.STATE_TURNING_ON) {
             mBluetoothTether.setEnabled(false);
-            mBluetoothSettings.setEnabled(false);
             mBluetoothTether.setSummary(R.string.bluetooth_turning_on);
         } else if (mBluetoothPan.isTetheringOn()) {
             mBluetoothTether.setChecked(true);
             if (btState == BluetoothAdapter.STATE_ON) {
                 mBluetoothTether.setEnabled(true);
-                mBluetoothSettings.setEnabled(true);
                 if (bluetoothTethered) {
                     mBluetoothTether.setSummary(R.string.bluetooth_tethering_connected_subtext);
                 } else if (bluetoothErrored) {
@@ -382,7 +373,6 @@ public class TetherSettings extends SettingsPreferenceFragment {
         } else {
             mBluetoothTether.setEnabled(true);
             mBluetoothTether.setChecked(false);
-            mBluetoothSettings.setEnabled(false);
             mBluetoothTether.setSummary(R.string.bluetooth_tethering_off_subtext);
         }
     }
@@ -433,9 +423,6 @@ public class TetherSettings extends SettingsPreferenceFragment {
                     adapter.enable();
                     mBluetoothTether.setSummary(R.string.bluetooth_turning_on);
                     mBluetoothTether.setEnabled(false);
-                    mBluetoothSettings.setEnabled(false);
-                } else {
-                    mBluetoothSettings.setEnabled(true);
                 }
 
                 mBluetoothPan.setBluetoothTethering(true);
@@ -453,16 +440,12 @@ public class TetherSettings extends SettingsPreferenceFragment {
                 }
 
                 mBluetoothPan.setBluetoothTethering(false);
-                mBluetoothSettings.setEnabled(false);
                 if (errored) {
                     mBluetoothTether.setSummary(R.string.bluetooth_tethering_errored_subtext);
                 } else {
                     mBluetoothTether.setSummary(R.string.bluetooth_tethering_off_subtext);
                 }
             }
-        } else if (preference == mBluetoothSettings) {
-            preference.getExtras().putString(BluetoothSettings.ACTION,
-                    BluetoothSettings.ACTION_LAUNCH_TETHER_PICKER);
         } else if (preference == mTetherHelp) {
             showDialog(DIALOG_TETHER_HELP);
             return true;

@@ -42,6 +42,7 @@ import android.preference.Preference;
 import android.preference.PreferenceCategory;
 import android.preference.PreferenceScreen;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 
 import java.util.List;
@@ -65,24 +66,21 @@ public class BluetoothSettings extends SettingsPreferenceFragment
 
     private static final int SCREEN_TYPE_SETTINGS = 0;
     private static final int SCREEN_TYPE_DEVICEPICKER = 1;
-    private static final int SCREEN_TYPE_TETHERING = 2;
-    private static final int SCREEN_TYPE_SCAN = 3;
+    private static final int SCREEN_TYPE_SCAN = 2;
 
     public static final String ACTION = "bluetooth_action";
-    public static final String ACTION_LAUNCH_TETHER_PICKER =
-            "com.android.settings.bluetooth.action.LAUNCH_TETHER_PICKER";
     public static final String ACTION_LAUNCH_SCAN_MODE =
             "com.android.settings.bluetooth.action.LAUNCH_SCAN_MODE";
 
-    private int mScreenType;
+    /*package*/ int mScreenType;
     private int mFilterType;
     private boolean mNeedAuth;
     private String mLaunchPackage;
     private String mLaunchClass;
 
-    private BluetoothDevice mSelectedDevice= null;
+    /*package*/ BluetoothDevice mSelectedDevice= null;
 
-    private LocalBluetoothManager mLocalManager;
+    /*package*/ LocalBluetoothManager mLocalManager;
 
     private BluetoothEnabler mEnabler;
     private BluetoothDiscoverableEnabler mDiscoverableEnabler;
@@ -111,8 +109,6 @@ public class BluetoothSettings extends SettingsPreferenceFragment
                         if (mScreenType == SCREEN_TYPE_DEVICEPICKER) {
                             sendDevicePickedIntent(device);
                             finish();
-                        } else if (mScreenType == SCREEN_TYPE_TETHERING) {
-                            onPanDevicePicked();
                         } else if (mScreenType == SCREEN_TYPE_SCAN) {
                             finish();
                         }
@@ -165,12 +161,6 @@ public class BluetoothSettings extends SettingsPreferenceFragment
                     BluetoothDevicePicker.FILTER_TYPE_ALL);
             mLaunchPackage = intent.getStringExtra(BluetoothDevicePicker.EXTRA_LAUNCH_PACKAGE);
             mLaunchClass = intent.getStringExtra(BluetoothDevicePicker.EXTRA_LAUNCH_CLASS);
-
-            activity.setTitle(activity.getString(R.string.device_picker));
-            addPreferencesFromResource(R.xml.device_picker);
-        } else if (action.equals(ACTION_LAUNCH_TETHER_PICKER)) {
-            mScreenType = SCREEN_TYPE_TETHERING;
-            mFilterType = BluetoothDevicePicker.FILTER_TYPE_PANU;
 
             activity.setTitle(activity.getString(R.string.device_picker));
             addPreferencesFromResource(R.xml.device_picker);
@@ -293,15 +283,9 @@ public class BluetoothSettings extends SettingsPreferenceFragment
                 } else {
                     btPreference.getCachedDevice().onClicked();
                 }
-            } else if (mScreenType == SCREEN_TYPE_TETHERING) {
-                mLocalManager.stopScanning();
-                mLocalManager.persistSelectedDeviceInPicker(mSelectedDevice.getAddress());
-                if ((device.getBondState() == BluetoothDevice.BOND_BONDED)) {
-                    onPanDevicePicked();
-                    // don't call finish so that users can see it connecting
-                } else {
-                    btPreference.getCachedDevice().onClicked();
-                }
+            } else {
+                Log.e(TAG, "onPreferenceTreeClick has invalid mScreenType: "
+                        + mScreenType);
             }
             return true;
         }
@@ -391,14 +375,10 @@ public class BluetoothSettings extends SettingsPreferenceFragment
     }
 
     private void createDevicePreference(CachedBluetoothDevice cachedDevice) {
-        BluetoothDevicePreference preference;
-        if (mScreenType == SCREEN_TYPE_TETHERING) {
-            preference = new BluetoothDevicePreference(
-                    getActivity(), cachedDevice, CachedBluetoothDevice.PAN_PROFILE);
-        } else {
-            preference = new BluetoothDevicePreference(
-                    getActivity(), cachedDevice, CachedBluetoothDevice.OTHER_PROFILES);
-        }
+        BluetoothDevicePreference preference = new BluetoothDevicePreference(
+                getActivity(), cachedDevice,
+                CachedBluetoothDevice.OTHER_PROFILES);
+
         if (mScreenType == SCREEN_TYPE_SETTINGS) {
             preference.setOnSettingsClickListener(this);
         }
@@ -422,7 +402,8 @@ public class BluetoothSettings extends SettingsPreferenceFragment
             ((ProgressCategory) mDeviceList).setProgress(start);
         }
     }
-    private void onBluetoothStateChanged(int bluetoothState) {
+
+    /*package*/ void onBluetoothStateChanged(int bluetoothState) {
         // When bluetooth is enabled (and we are in the activity, which we are),
         // we should start a scan
         if (bluetoothState == BluetoothAdapter.STATE_ON) {
@@ -434,47 +415,7 @@ public class BluetoothSettings extends SettingsPreferenceFragment
         }
     }
 
-    private void onPanDevicePicked() {
-        final Activity activity = getActivity();
-        final LocalBluetoothProfileManager profileManager =
-            LocalBluetoothProfileManager.getProfileManager(mLocalManager, Profile.PAN);
-        int status = profileManager.getConnectionStatus(mSelectedDevice);
-        if (SettingsBtStatus.isConnectionStatusConnected(status)) {
-            String name = mSelectedDevice.getName();
-            if (TextUtils.isEmpty(name)) {
-                name = activity.getString(R.string.bluetooth_device);
-            }
-            String message = activity.getString(R.string.bluetooth_untether_blank, name);
-            DialogInterface.OnClickListener disconnectListener =
-                new DialogInterface.OnClickListener() {
-                public void onClick(DialogInterface dialog, int which) {
-                    profileManager.disconnect(mSelectedDevice);
-                }
-            };
-            new AlertDialog.Builder(activity)
-                .setTitle(name)
-                .setMessage(message)
-                .setPositiveButton(android.R.string.ok, disconnectListener)
-                .setNegativeButton(android.R.string.cancel, null)
-                .create()
-                .show();
-        } else if (status == SettingsBtStatus.CONNECTION_STATUS_DISCONNECTED) {
-            if (profileManager.getConnectedDevices().size() >= BluetoothPan.MAX_CONNECTIONS) {
-                new AlertDialog.Builder(activity)
-                    .setIcon(android.R.drawable.ic_dialog_alert)
-                    .setTitle(R.string.bluetooth_error_title)
-                    .setMessage(activity.getString(R.string.bluetooth_tethering_overflow_error,
-                            BluetoothPan.MAX_CONNECTIONS))
-                    .setNegativeButton(android.R.string.ok, null)
-                    .create()
-                    .show();
-                return;
-            }
-            profileManager.connect(mSelectedDevice);
-        }
-    }
-
-    private void sendDevicePickedIntent(BluetoothDevice device) {
+    /*package*/ void sendDevicePickedIntent(BluetoothDevice device) {
         Intent intent = new Intent(BluetoothDevicePicker.ACTION_DEVICE_SELECTED);
         intent.putExtra(BluetoothDevice.EXTRA_DEVICE, device);
         if (mScreenType == SCREEN_TYPE_DEVICEPICKER &&
