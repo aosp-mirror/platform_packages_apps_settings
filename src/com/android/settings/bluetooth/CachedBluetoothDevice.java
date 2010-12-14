@@ -589,7 +589,11 @@ public class CachedBluetoothDevice implements Comparable<CachedBluetoothDevice> 
         ParcelUuid[] uuids = mDevice.getUuids();
         if (uuids == null) return false;
 
-        LocalBluetoothProfileManager.updateProfiles(uuids, mProfiles);
+        BluetoothAdapter adapter = mLocalManager.getBluetoothAdapter();
+        ParcelUuid[] localUuids = adapter.getUuids();
+        if (localUuids == null) return false;
+
+        LocalBluetoothProfileManager.updateProfiles(uuids, localUuids, mProfiles);
 
         if (DEBUG) {
             Log.e(TAG, "updating profiles for " + mDevice.getName());

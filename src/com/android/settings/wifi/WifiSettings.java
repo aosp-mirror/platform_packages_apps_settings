@@ -559,14 +559,11 @@ public class WifiSettings extends SettingsPreferenceFragment
     /* package */ void submit(WifiConfigController configController) {
         switch(configController.chosenNetworkSetupMethod()) {
             case WifiConfigController.WPS_PBC:
-                mWifiManager.startWpsPbc(mSelectedAccessPoint.bssid);
-                break;
             case WifiConfigController.WPS_PIN_FROM_ACCESS_POINT:
-                int apPin = configController.getWpsPin();
-                mWifiManager.startWpsWithPinFromAccessPoint(mSelectedAccessPoint.bssid, apPin);
+                mWifiManager.startWps(configController.getWpsConfig());
                 break;
             case WifiConfigController.WPS_PIN_FROM_DEVICE:
-                int pin = mWifiManager.startWpsWithPinFromDevice(mSelectedAccessPoint.bssid);
+                String pin = mWifiManager.startWps(configController.getWpsConfig());
                 new AlertDialog.Builder(getActivity())
                         .setTitle(R.string.wifi_wps_pin_method_configuration)
                         .setMessage(getResources().getString(R.string.wifi_wps_pin_output, pin))
