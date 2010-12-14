@@ -197,6 +197,17 @@ public class VpnSettings extends SettingsPreferenceFragment
     }
 
     @Override
+    public void onDestroy() {
+        super.onDestroy();
+        // Remove any onClick listeners
+        if (mVpnListContainer != null) {
+            for (int i = 0; i < mVpnListContainer.getPreferenceCount(); i++) {
+                mVpnListContainer.getPreference(i).setOnPreferenceClickListener(null);
+            }
+        }
+    }
+
+    @Override
     public Dialog onCreateDialog (int id) {
         switch (id) {
             case DIALOG_CONNECT:
@@ -1050,6 +1061,7 @@ public class VpnSettings extends SettingsPreferenceFragment
                             changeState(p, VpnState.IDLE);
                         }
                     }
+                    if (getActivity() == null) return;
                     getActivity().unbindService(this);
                     showPreferences();
                 }
@@ -1058,6 +1070,7 @@ public class VpnSettings extends SettingsPreferenceFragment
                     cv.open();
 
                     setDefaultState(list);
+                    if (getActivity() == null) return;
                     getActivity().unbindService(this);
                     showPreferences();
                 }

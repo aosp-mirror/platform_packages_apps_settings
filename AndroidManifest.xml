@@ -118,6 +118,10 @@
                 android:value="com.android.settings.wifi.WifiSettings" />
             <meta-data android:name="com.android.settings.TOP_LEVEL_HEADER_ID"
                 android:resource="@id/wireless_settings" />
+            <meta-data android:name="com.android.settings.PARENT_FRAGMENT_TITLE"
+                android:resource="@string/wireless_networks_settings_title" />
+            <meta-data android:name="com.android.settings.PARENT_FRAGMENT_CLASS"
+                android:value="com.android.settings.Settings$WirelessSettingsActivity" />
         </activity>
 
         <activity android:name=".wifi.WifiSettingsForSetupWizardXL"
@@ -210,6 +214,10 @@
                 android:value="com.android.settings.bluetooth.BluetoothSettings" />
             <meta-data android:name="com.android.settings.TOP_LEVEL_HEADER_ID"
                 android:resource="@id/wireless_settings" />
+            <meta-data android:name="com.android.settings.PARENT_FRAGMENT_TITLE"
+                android:resource="@string/wireless_networks_settings_title" />
+            <meta-data android:name="com.android.settings.PARENT_FRAGMENT_CLASS"
+                android:value="com.android.settings.Settings$WirelessSettingsActivity" />
         </activity>
 
         <activity android:name=".bluetooth.DevicePickerActivity"
@@ -234,6 +242,10 @@
                 android:value="com.android.settings.TetherSettings" />
             <meta-data android:name="com.android.settings.TOP_LEVEL_HEADER_ID"
                 android:resource="@id/wireless_settings" />
+            <meta-data android:name="com.android.settings.PARENT_FRAGMENT_TITLE"
+                android:resource="@string/wireless_networks_settings_title" />
+            <meta-data android:name="com.android.settings.PARENT_FRAGMENT_CLASS"
+                android:value="com.android.settings.Settings$WirelessSettingsActivity" />
         </activity>
 
         <activity android:name="Settings$VpnSettingsActivity"
@@ -252,6 +264,10 @@
                 android:value="com.android.settings.vpn.VpnSettings" />
             <meta-data android:name="com.android.settings.TOP_LEVEL_HEADER_ID"
                 android:resource="@id/wireless_settings" />
+            <meta-data android:name="com.android.settings.PARENT_FRAGMENT_TITLE"
+                android:resource="@string/wireless_networks_settings_title" />
+            <meta-data android:name="com.android.settings.PARENT_FRAGMENT_CLASS"
+                android:value="com.android.settings.Settings$WirelessSettingsActivity" />
         </activity>
 
         <activity android:name="Settings$DateTimeSettingsActivity"
@@ -327,6 +343,10 @@
                 android:value="com.android.settings.inputmethod.InputMethodAndSubtypeEnabler" />
             <meta-data android:name="com.android.settings.TOP_LEVEL_HEADER_ID"
                 android:resource="@id/language_settings" />
+            <meta-data android:name="com.android.settings.PARENT_FRAGMENT_TITLE"
+                android:resource="@string/language_keyboard_settings_title" />
+            <meta-data android:name="com.android.settings.PARENT_FRAGMENT_CLASS"
+                android:value="com.android.settings.Settings$InputMethodAndLanguageSettingsActivity" />
         </activity>
 
         <activity android:name="PhysicalKeyboardSettings"
@@ -354,6 +374,10 @@
                 android:value="com.android.settings.UserDictionarySettings" />
             <meta-data android:name="com.android.settings.TOP_LEVEL_HEADER_ID"
                 android:resource="@id/language_settings" />
+            <meta-data android:name="com.android.settings.PARENT_FRAGMENT_TITLE"
+                android:resource="@string/language_keyboard_settings_title" />
+            <meta-data android:name="com.android.settings.PARENT_FRAGMENT_CLASS"
+                android:value="com.android.settings.Settings$InputMethodAndLanguageSettingsActivity" />
         </activity>
 
         <activity android:name="Settings$SoundSettingsActivity"
@@ -475,6 +499,10 @@
                 android:value="com.android.settings.applications.ManageApplications" />
             <meta-data android:name="com.android.settings.TOP_LEVEL_HEADER_ID"
                 android:resource="@id/application_settings" />
+            <meta-data android:name="com.android.settings.PARENT_FRAGMENT_TITLE"
+                android:resource="@string/applications_settings_header" />
+            <meta-data android:name="com.android.settings.PARENT_FRAGMENT_CLASS"
+                android:value="com.android.settings.Settings$ApplicationSettingsActivity" />
         </activity>
 
         <!-- Keep compatibility with old shortcuts. -->
@@ -518,6 +546,10 @@
                 android:value="com.android.settings.applications.ManageApplications" />
             <meta-data android:name="com.android.settings.TOP_LEVEL_HEADER_ID"
                 android:resource="@id/application_settings" />
+            <meta-data android:name="com.android.settings.PARENT_FRAGMENT_TITLE"
+                android:resource="@string/applications_settings_header" />
+            <meta-data android:name="com.android.settings.PARENT_FRAGMENT_CLASS"
+                android:value="com.android.settings.Settings$ApplicationSettingsActivity" />
         </activity>
 
         <!-- Provide direct entry into manage apps showing running services. -->
@@ -535,6 +567,10 @@
                 android:value="com.android.settings.applications.ManageApplications" />
             <meta-data android:name="com.android.settings.TOP_LEVEL_HEADER_ID"
                 android:resource="@id/application_settings" />
+            <meta-data android:name="com.android.settings.PARENT_FRAGMENT_TITLE"
+                android:resource="@string/applications_settings_header" />
+            <meta-data android:name="com.android.settings.PARENT_FRAGMENT_CLASS"
+                android:value="com.android.settings.Settings$ApplicationSettingsActivity" />
         </activity>
 
         <activity android:name="Settings$SecuritySettingsActivity"
@@ -752,6 +788,10 @@
                 android:value="com.android.settings.DevelopmentSettings" />
             <meta-data android:name="com.android.settings.TOP_LEVEL_HEADER_ID"
                 android:resource="@id/application_settings" />
+            <meta-data android:name="com.android.settings.PARENT_FRAGMENT_TITLE"
+                android:resource="@string/applications_settings_header" />
+            <meta-data android:name="com.android.settings.PARENT_FRAGMENT_CLASS"
+                android:value="com.android.settings.Settings$ApplicationSettingsActivity" />
         </activity>
 
 
@@ -927,6 +967,10 @@
                 android:value="com.android.settings.fuelgauge.PowerUsageSummary" />
             <meta-data android:name="com.android.settings.TOP_LEVEL_HEADER_ID"
                 android:resource="@id/application_settings" />
+            <meta-data android:name="com.android.settings.PARENT_FRAGMENT_TITLE"
+                android:resource="@string/applications_settings_header" />
+            <meta-data android:name="com.android.settings.PARENT_FRAGMENT_CLASS"
+                android:value="com.android.settings.Settings$ApplicationSettingsActivity" />
         </activity>
 
         <activity
