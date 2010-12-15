@@ -21,33 +21,42 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <!-- left side: lock pattern -->
-    <com.android.internal.widget.LockPatternView android:id="@+id/lockPattern"
-         android:layout_width="wrap_content"
-         android:layout_height="wrap_content" />
-
-    <!-- right side: instructions and buttons -->
-    <LinearLayout
-        android:orientation="vertical"
+    <RelativeLayout
         android:layout_width="0dip"
         android:layout_height="match_parent"
-        android:layout_weight="1.0">
+        android:layout_weight="1">
 
+        <!-- left side: lock pattern -->
+        <com.android.internal.widget.LockPatternView android:id="@+id/lockPattern"
+             android:layout_width="354dip"
+             android:layout_height="354dip"
+             android:layout_gravity="center_horizontal"
+             android:layout_marginTop="72dip"
+             android:layout_marginLeft="111dip"
+             aspect="square"/>
+
+        <!-- right side: instructions and buttons -->
         <!-- header message -->
         <TextView android:id="@+id/headerText"
-            android:layout_width="match_parent"
+            android:layout_width="542dip"
             android:layout_height="wrap_content"
-            android:gravity="left"
+            android:layout_marginTop="88dip"
+            android:layout_alignParentTop="true"
+            android:layout_toRightOf="@id/lockPattern"
+            android:layout_marginLeft="100dip"
             android:textSize="22sp"/>
 
         <!-- footer message -->
         <TextView android:id="@+id/footerText"
-            android:layout_width="match_parent"
+            android:layout_width="542dip"
             android:layout_height="wrap_content"
-            android:layout_marginTop="40dip"
-            android:gravity="left"
+            android:layout_below="@id/headerText"
+            android:layout_marginTop="16dip"
+            android:layout_toRightOf="@id/lockPattern"
+            android:layout_marginLeft="100dip"
             android:textSize="22sp"/>
-    </LinearLayout>
+
+    </RelativeLayout>
 
 </com.android.internal.widget.LinearLayoutWithDefaultTouchRecepient>
 

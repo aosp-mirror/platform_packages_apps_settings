@@ -689,23 +689,13 @@
             </intent-filter>
         </activity>
 
-        <activity android:name="ChooseLockPattern"
-                android:label="@string/lockpattern_change_lock_pattern_label"
-                android:exported="false">
-        </activity>
+        <activity android:name="ChooseLockPattern" android:exported="false"/>
 
-        <activity android:name="ChooseLockPassword"
-                android:label="@string/lockpattern_change_lock_pin_label"
-            android:exported="false">
-        </activity>
+        <activity android:name="ChooseLockPassword" android:exported="false"/>
 
-        <activity android:name="ChooseLockPatternTutorial"
-            android:label="@string/lockpattern_change_lock_pattern_label">
-        </activity>
+        <activity android:name="ChooseLockPatternTutorial"/>
 
-        <activity android:name="ChooseLockPatternExample"
-            android:label="@string/lockpattern_change_lock_pattern_label">
-        </activity>
+        <activity android:name="ChooseLockPatternExample"/>
 
         <!-- Runs in the phone process since it needs access to the Phone object -->
         <activity android:name=".deviceinfo.Status"

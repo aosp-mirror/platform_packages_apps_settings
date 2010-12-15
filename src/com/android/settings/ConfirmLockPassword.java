@@ -26,6 +26,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.preference.PreferenceActivity;
+import android.text.InputType;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -98,6 +99,11 @@ public class ConfirmLockPassword extends PreferenceActivity {
             mKeyboardHelper.setKeyboardMode(isAlpha ? PasswordEntryKeyboardHelper.KEYBOARD_MODE_ALPHA
                     : PasswordEntryKeyboardHelper.KEYBOARD_MODE_NUMERIC);
             mKeyboardView.requestFocus();
+
+            int currentType = mPasswordEntry.getInputType();
+            mPasswordEntry.setInputType(isAlpha ? currentType
+                    : (currentType | InputType.TYPE_CLASS_NUMBER));
+
             return view;
         }
 
