@@ -248,6 +248,22 @@
                 android:value="com.android.settings.Settings$WirelessSettingsActivity" />
         </activity>
 
+        <!-- Keep compatibility with old shortcuts. -->
+        <activity-alias android:name=".TetherSettings"
+                  android:label="@string/tether_settings_title_all"
+                  android:clearTaskOnLaunch="true"
+                  android:exported="true"
+                  android:targetActivity="Settings$TetherSettingsActivity">
+            <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
+                android:value="com.android.settings.TetherSettings" />
+            <meta-data android:name="com.android.settings.TOP_LEVEL_HEADER_ID"
+                android:resource="@id/wireless_settings" />
+            <meta-data android:name="com.android.settings.PARENT_FRAGMENT_TITLE"
+                android:resource="@string/wireless_networks_settings_title" />
+            <meta-data android:name="com.android.settings.PARENT_FRAGMENT_CLASS"
+                android:value="com.android.settings.Settings$WirelessSettingsActivity" />
+        </activity-alias>
+
         <activity android:name="Settings$VpnSettingsActivity"
                 android:theme="@android:style/Theme.Holo"
                 android:label="@string/vpn_settings_activity_title"
@@ -771,6 +787,7 @@
                 android:clearTaskOnLaunch="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+                <action android:name="android.settings.APPLICATION_DEVELOPMENT_SETTINGS" />
                 <action android:name="com.android.settings.APPLICATION_DEVELOPMENT_SETTINGS" />
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
@@ -784,6 +801,26 @@
                 android:value="com.android.settings.Settings$ApplicationSettingsActivity" />
         </activity>
 
+        <activity-alias android:name="DevelopmentSettings"
+                  android:clearTaskOnLaunch="true"
+                  android:exported="true"
+                  android:label="@string/development_settings_title"
+                  android:targetActivity="Settings$DevelopmentSettingsActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <action android:name="android.settings.APPLICATION_DEVELOPMENT_SETTINGS" />
+                <action android:name="com.android.settings.APPLICATION_DEVELOPMENT_SETTINGS" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+            <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
+                android:value="com.android.settings.DevelopmentSettings" />
+            <meta-data android:name="com.android.settings.TOP_LEVEL_HEADER_ID"
+                android:resource="@id/application_settings" />
+            <meta-data android:name="com.android.settings.PARENT_FRAGMENT_TITLE"
+                android:resource="@string/applications_settings_header" />
+            <meta-data android:name="com.android.settings.PARENT_FRAGMENT_CLASS"
+                android:value="com.android.settings.Settings$ApplicationSettingsActivity" />
+        </activity-alias>
 
 
         <!-- Bluetooth stuff -->
