@@ -231,6 +231,8 @@ public class ManageAccountsSettings extends AccountPreferenceBase
     }
 
     protected void onSyncStateUpdated() {
+        // Catch any delayed delivery of update messages
+        if (getActivity() == null) return;
         // Set background connection state
         final ConnectivityManager connManager = (ConnectivityManager)
                 getActivity().getSystemService(Context.CONNECTIVITY_SERVICE);
