@@ -112,7 +112,8 @@
     <string name="progress_scanning" msgid="3760897655335759141">"Scannen..."</string>
     <string name="bluetooth_notif_ticker" msgid="4726721390078512173">"Bluetooth-Pairing-Anfrage"</string>
     <string name="bluetooth_notif_title" msgid="2485175521845371514">"Pairing-Anfrage"</string>
-    <string name="bluetooth_notif_message" msgid="5381418499788668724">"Zum Pairing auswählen "</string>
+    <!-- no translation found for bluetooth_notif_message (618099089987569242) -->
+    <skip />
     <string name="device_picker" msgid="8721012448931226323">"Bluetooth-Geräteauswahl"</string>
     <string name="bluetooth_permission_request" msgid="1523129741266262748">"Bluetooth-Berechtigungsanfrage"</string>
     <string name="bluetooth_ask_enablement" msgid="8211158472876087588">"Eine Anwendung beantragt eine Berechtigung zum Aktivieren von Bluetooth. Möchten Sie dies tun?"</string>
@@ -121,7 +122,7 @@
     <string name="bluetooth_ask_enablement_and_discovery" product="tablet" msgid="5716077575971497298">"Eine Anwendung auf Ihrem Tablet beantragt die Berechtigung, Bluetooth zu aktivieren und Ihr Tablet für <xliff:g id="TIMEOUT">%1$d</xliff:g> Sekunden für andere Geräte sichtbar zu machen. Möchten Sie dies tun?"</string>
     <string name="bluetooth_ask_enablement_and_discovery" product="default" msgid="7220210326619399542">"Eine Anwendung auf Ihrem Telefon beantragt die Berechtigung, Bluetooth zu aktivieren und Ihr Telefon für <xliff:g id="TIMEOUT">%1$d</xliff:g> Sekunden für andere Telefone sichtbar zu machen. Möchten Sie dies tun?"</string>
     <string name="bluetooth_turning_on" msgid="3107102168379705771">"Bluetooth wird aktiviert..."</string>
-    <string name="date_and_time" msgid="4114084177056654663">"Einstellungen"</string>
+    <string name="date_and_time" msgid="4114084177056654663">"Einstellungen für Datum &amp;amp Uhrzeit"</string>
     <string name="date_time_12_hour_sample" msgid="3259617262618020574">"1:00"</string>
     <string name="date_time_24_hour_sample" msgid="8916857570746212357">"13:00"</string>
     <string name="choose_timezone" msgid="7762866468013985022">"Zeitzone auswählen"</string>
@@ -210,7 +211,7 @@
     <string name="device_info_label" msgid="6551553813651711205">"Geräteinfo"</string>
     <string name="battery_info_label" msgid="4132685016148679403">"Akkuinfo"</string>
     <string name="display_label" msgid="7403874003169865762">"Display"</string>
-    <string name="phone_info_label" product="tablet" msgid="7820855350955963628">"Tabletinformationen"</string>
+    <string name="phone_info_label" product="tablet" msgid="7820855350955963628">"Tablet-Informationen"</string>
     <string name="phone_info_label" product="default" msgid="2127552523124277664">"Telefoninfo"</string>
     <string name="sd_card_settings_label" product="nosdcard" msgid="8101475181301178428">"USB-Speicher"</string>
     <string name="sd_card_settings_label" product="default" msgid="5743100901106177102">"SD-Karte"</string>
@@ -254,10 +255,8 @@
     <string name="lock_after_timeout_summary" msgid="5751027735105958453">"Dauer bis zur automatischen Sperrung des Geräts anpassen"</string>
     <string name="show_owner_info_on_lockscreen_label" msgid="5074906168357568434">"Inhaberinformationen auf Sperrbildschirm anzeigen"</string>
     <string name="owner_info_settings_title" msgid="2723190010708381889">"Inhaberinformationen"</string>
-    <!-- no translation found for owner_info_settings_summary (8656024590287117256) -->
-    <skip />
-    <!-- no translation found for owner_info_settings_edit_text_hint (2382525043173672857) -->
-    <skip />
+    <string name="owner_info_settings_summary" msgid="8656024590287117256">"Anzeige von Inhaberinformationen auf dem Sperrbildschirm aktivieren oder deaktivieren"</string>
+    <string name="owner_info_settings_edit_text_hint" msgid="2382525043173672857">"Text für Sperrbildschirm eingeben"</string>
     <string name="security_settings_title" msgid="5168491784222013179">"Standort &amp; Sicherheit"</string>
     <string name="location_security_settings_title" msgid="4624434296446625554">"Einstellungen für Standort &amp; Sicherheit"</string>
     <string name="security_settings_summary" msgid="967393342537986570">"Meinen Standort, Display-Entsperrung, SIM-Kartensperre und Sperre für Anmeldeinformationsspeicher festlegen"</string>
@@ -268,10 +267,8 @@
     <string name="unlock_set_unlock_launch_picker_summary" msgid="1667332113134720845">"Display mit einem Muster, einer PIN oder einem Passwort sperren"</string>
     <string name="unlock_set_unlock_launch_picker_change_title" msgid="6987228635944678726">"Display-Sperre ändern"</string>
     <string name="unlock_set_unlock_launch_picker_change_summary" msgid="2790960639554590668">"Sperre (Muster, PIN, Passwort) ändern oder deaktivieren"</string>
-    <!-- no translation found for unlock_set_unlock_launch_picker_enable_title (6781842145908947514) -->
-    <skip />
-    <!-- no translation found for unlock_set_unlock_launch_picker_enable_summary (4791110798817242301) -->
-    <skip />
+    <string name="unlock_set_unlock_launch_picker_enable_title" msgid="6781842145908947514">"Bildschirmsperre aktivieren"</string>
+    <string name="unlock_set_unlock_launch_picker_enable_summary" msgid="4791110798817242301">"Methode zum Sperren des Bildschirms wählen"</string>
     <string name="unlock_set_unlock_off_title" msgid="1613932765246180079">"Aus"</string>
     <string name="unlock_set_unlock_off_summary" msgid="2992485517488881365">"Sperrbildschirm nicht anzeigen"</string>
     <string name="unlock_set_unlock_none_title" msgid="3760684669884671990">"Keine"</string>
@@ -366,8 +363,7 @@
     <string name="bluetooth_device_context_connect_advanced" msgid="2643129703569788771">"Optionen..."</string>
     <string name="bluetooth_connect_specific_profiles_title" msgid="6952214406025825164">"Verbinden mit..."</string>
     <string name="bluetooth_profile_a2dp" msgid="3259633293424539529">"Medien"</string>
-    <string name="bluetooth_profile_headset" product="tablet" msgid="2252738313413646294">"Tablet"</string>
-    <string name="bluetooth_profile_headset" product="default" msgid="1874975688666658946">"Telefon"</string>
+    <!-- outdated translation 2252738313413646294 -->     <string name="bluetooth_profile_headset" msgid="81844079120986198">"Tablet"</string>
     <string name="bluetooth_profile_opp" msgid="3799470046565284440">"Übertragung"</string>
     <string name="bluetooth_profile_hid" msgid="3000858580917633478">"Eingabegerät"</string>
     <string name="bluetooth_profile_pan" msgid="4225813400648547154">"Tethering"</string>
@@ -379,9 +375,7 @@
     <string name="bluetooth_summary_connected_to_pan" msgid="3157622705092537266">"Tethering aktiv"</string>
     <!-- no translation found for bluetooth_disconnect_a2dp_profile (3524648279150937177) -->
     <skip />
-    <!-- no translation found for bluetooth_disconnect_headset_profile (3656117361616583255) -->
-    <skip />
-    <!-- no translation found for bluetooth_disconnect_headset_profile (8343033989250953720) -->
+    <!-- no translation found for bluetooth_disconnect_headset_profile (8635908811168780720) -->
     <skip />
     <!-- no translation found for bluetooth_disconnect_hid_profile (3282295189719352075) -->
     <skip />
@@ -569,7 +563,7 @@
     <string name="screen_timeout" msgid="4882669461447531301">"Display-Timeout"</string>
     <string name="screen_timeout_summary" msgid="2905757633140605334">"Verzögerung vor automatischer Bildschirmabschaltung anpassen"</string>
     <string name="automatic_brightness" msgid="5014143533884135461">"Automatische Helligkeit"</string>
-    <string name="sim_lock_settings" msgid="3392331196873564292">"Einstellungen"</string>
+    <string name="sim_lock_settings" msgid="3392331196873564292">"Einstellungen für SIM-Karten-Sperre"</string>
     <string name="sim_lock_settings_category" msgid="5136244267576697004">"SIM-Sperre einrichten"</string>
     <string name="sim_lock_settings_title" msgid="9018585580955414596">"SIM-Kartensperre"</string>
     <string name="sim_pin_toggle" msgid="1742123478029451888">"SIM-Karte sperren"</string>
@@ -592,7 +586,7 @@
     <string name="sim_lock_failed" msgid="6676748290838006404">"Status der SIM-Kartensperre kann nicht geändert werden."\n"Möglicherweise falsche PIN."</string>
     <string name="sim_enter_ok" msgid="6475946836899218919">"OK"</string>
     <string name="sim_enter_cancel" msgid="6240422158517208036">"Abbrechen"</string>
-    <string name="device_info_settings" product="tablet" msgid="1119755927536987178">"Tabletstatus"</string>
+    <string name="device_info_settings" product="tablet" msgid="1119755927536987178">"Tablet-Status"</string>
     <string name="device_info_settings" product="default" msgid="475872867864762157">"Telefonstatus"</string>
     <string name="system_update_settings_list_item_title" msgid="3342887311059985961">"Systemaktualisierungen"</string>
     <string name="system_update_settings_list_item_summary" msgid="3853057315907710747"></string>
@@ -631,10 +625,8 @@
     <string name="memory_size" msgid="6629067715017232195">"Gesamtspeicher"</string>
     <!-- no translation found for memory_calculating_size (2188358544203768588) -->
     <skip />
-    <!-- no translation found for memory_apps_usage (5818922761412589352) -->
-    <skip />
-    <!-- no translation found for memory_media_usage (5655498435493764372) -->
-    <skip />
+    <string name="memory_apps_usage" msgid="5818922761412589352">"Anwendungsnutzung"</string>
+    <string name="memory_media_usage" msgid="5655498435493764372">"Mediennutzung"</string>
     <string name="sd_eject" product="nosdcard" msgid="4988563376492400073">"Freig. Speicher trennen"</string>
     <string name="sd_eject" product="default" msgid="6915293408836853020">"SD-Karte entnehmen"</string>
     <string name="sd_eject_summary" product="nosdcard" msgid="5009296896648072891">"Internen USB-Speicher trennen"</string>
@@ -963,7 +955,7 @@
     <string name="runningservicedetails_stop_dlg_title" msgid="4253292537154337233">"Systemdienst beenden?"</string>
     <string name="runningservicedetails_stop_dlg_text" product="tablet" msgid="5420033091144016389">"Möchten Sie diesen Systemdienst wirklich beenden? Möglicherweise funktionieren dann einige Funktionen Ihres Tablets nicht mehr richtig, bis Sie es aus- und wieder einschalten."</string>
     <string name="runningservicedetails_stop_dlg_text" product="default" msgid="6929716497425738387">"Möchten Sie diesen Systemdienst wirklich beenden? Möglicherweise funktionieren dann einige Funktionen Ihres Telefons nicht mehr richtig, bis Sie es aus- und wieder einschalten."</string>
-    <string name="language_settings" msgid="502219872342167227">"Sprache &amp; Tastatur"</string>
+    <!-- outdated translation 2939555761536357092 -->     <string name="language_settings" msgid="5292716747264442359">"Gebietsschema &amp; Text"</string>
     <string name="language_keyboard_settings_title" msgid="3455826933385341107">"Einstellungen für Sprache &amp; Tastatur"</string>
     <string name="language_settings_category" msgid="2288258489940617043">"Spracheinstellungen"</string>
     <string name="keyboard_settings_category" msgid="7060453865544070642">"Tastatureinstellungen"</string>
@@ -989,7 +981,7 @@
     <string name="user_dict_settings_context_menu_delete_title" msgid="9140703913776549054">"Löschen"</string>
     <string name="user_dict_settings_empty_text" msgid="6209268025109242806">"Keine Wörter im Ihrem Wörterbuch vorhanden. Sie können über das Menü ein Wort hinzufügen."</string>
     <string name="testing" msgid="6584352735303604146">"Test"</string>
-    <string name="testing_phone_info" product="tablet" msgid="193561832258534798">"Tabletinformationen"</string>
+    <string name="testing_phone_info" product="tablet" msgid="193561832258534798">"Tablet-Informationen"</string>
     <string name="testing_phone_info" product="default" msgid="8656693364332840056">"Telefoninformation"</string>
     <string name="testing_battery_info" msgid="3497865525976497848">"Akkuinformationen"</string>
     <string name="quick_launch_title" msgid="7904609846945905306">"Schnellstart"</string>
@@ -1052,7 +1044,7 @@
     <string name="accessibility_script_injection_security_warning" product="tablet" msgid="1113600871264359828">"Einige Anwendungen können Google auffordern, Skripts auf Ihr Tablet-Gerät herunterzuladen, um den Zugriff auf deren Inhalte zu erleichtern. Sind Sie sicher, dass Sie Google gestatten möchten, Skripts für Eingabehilfen auf Ihrem Tablet zu installieren?"</string>
     <string name="accessibility_script_injection_security_warning" product="default" msgid="9078893361741942109">"Einige Anwendungen können Google auffordern, Skripts auf Ihr Telefon herunterzuladen, um den Zugriff auf deren Content zu erleichtern. Sind Sie sicher, dass Sie Google gestatten möchten, Skripts für Eingabehilfen auf Ihrem Telefon zu installieren?"</string>
     <string name="accessibility_power_button_category" msgid="8545885236482339928">"Ein-/Austaste"</string>
-    <string name="accessibility_power_button_ends_call" msgid="7698764194501089533">"Ein/Aus beendet Anruf"</string>
+    <string name="accessibility_power_button_ends_call" msgid="7698764194501089533">"Ein-/Austaste beendet Anruf"</string>
     <string name="accessibility_power_button_ends_call_summary" msgid="8878097632186291462">"Das Drücken der Ein-/Austaste während eines Anrufs beendet den Anruf (statt den Bildschirm auszuschalten)"</string>
     <string name="power_usage_summary_title" msgid="5180282911164282324">"Akkuverbrauch"</string>
     <string name="power_usage_summary" msgid="7237084831082848168">"Was zum Akkuverbrauch beiträgt"</string>
@@ -1343,8 +1335,7 @@
     <string name="wifi_setup_status_new_network" msgid="7468952850452301083">"Mit neuem Netzwerk verbinden"</string>
     <string name="wifi_setup_status_connecting" msgid="2594117697215042584">"Verbindung wird hergestellt..."</string>
     <string name="wifi_setup_status_proceed_to_next" msgid="9071951312604559022">"Weiter zum nächsten Schritt"</string>
-    <!-- no translation found for account_sync_settings_title (4578227872921044660) -->
-    <skip />
+    <string name="account_sync_settings_title" msgid="4578227872921044660">"Synchronisierungseinstellungen"</string>
     <string name="sync_is_failing" msgid="1591561768344128377">"Bei der Synchronisierung treten derzeit Probleme auf. Sie wird in Kürze fortgesetzt."</string>
     <string name="add_account_label" msgid="7811707265834013767">"Konto hinzufügen"</string>
     <string name="header_general_sync_settings" msgid="3487451896424238469">"Allg. Synchron.-Einstellungen"</string>
@@ -1361,8 +1352,7 @@
     <!-- no translation found for app_label (5443184607893378389) -->
     <skip />
     <string name="sync_too_many_deletes" msgid="7648720493358579441">"Löschbegrenzung überschritten"</string>
-    <!-- no translation found for settings_backup (2274732978260797031) -->
-    <skip />
+    <string name="settings_backup" msgid="2274732978260797031">"Einstellungen sichern"</string>
     <!-- no translation found for settings_backup_summary (7916877705938054035) -->
     <skip />
     <string name="sync_menu_sync_now" msgid="6154608350395805683">"Jetzt synchronisieren"</string>
@@ -1394,10 +1384,8 @@
     <skip />
     <!-- no translation found for really_remove_account_title (6574643117748564960) -->
     <skip />
-    <!-- no translation found for really_remove_account_message (4448645571715719563) -->
-    <skip />
-    <!-- no translation found for really_remove_account_message (1005751790899989319) -->
-    <skip />
+    <string name="really_remove_account_message" product="tablet" msgid="4448645571715719563">"Möchten Sie dieses Konto wirklich entfernen? Hierdurch werden auch die zugehörigen Nachrichten, Kontakte und anderen Daten von dem Tablet gelöscht. "\n"Vorgang fortsetzen?"</string>
+    <string name="really_remove_account_message" product="default" msgid="1005751790899989319">"Möchten Sie dieses Konto wirklich entfernen? Hierdurch werden auch die zugehörigen Nachrichten, Kontakte und anderen Daten auf dem Telefon gelöscht. "\n"Vorgang fortsetzen?"</string>
     <!-- no translation found for remove_account_failed (1093911989149396624) -->
     <skip />
     <!-- no translation found for remove_account_failed (9174390193652391412) -->
