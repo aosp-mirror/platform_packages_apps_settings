@@ -29,6 +29,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.preference.PreferenceActivity;
 import android.text.Editable;
+import android.text.InputType;
 import android.text.Selection;
 import android.text.Spannable;
 import android.text.TextUtils;
@@ -190,6 +191,10 @@ public class ChooseLockPassword extends PreferenceActivity {
 
             mHeaderText = (TextView) view.findViewById(R.id.headerText);
             mKeyboardView.requestFocus();
+
+            int currentType = mPasswordEntry.getInputType();
+            mPasswordEntry.setInputType(mIsAlphaMode ? currentType
+                    : (currentType | InputType.TYPE_CLASS_NUMBER));
 
             Intent intent = getActivity().getIntent();
             final boolean confirmCredentials = intent.getBooleanExtra("confirm_credentials", true);
