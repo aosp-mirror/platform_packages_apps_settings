@@ -20,6 +20,7 @@ import android.app.Activity;
 import android.app.AlarmManager;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.ActivityInfo;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.provider.Settings;
@@ -90,6 +91,8 @@ public class DateTimeSettingsSetupWizard extends Activity
         mAutoTimeZoneButton.setOnCheckedChangeListener(this);
         mAutoTimeZoneButton.setText(autoTimeZoneEnabled ? R.string.zone_auto_summaryOn :
                 R.string.zone_auto_summaryOff);*/
+
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
 
         final TimeZone tz = TimeZone.getDefault();
         mSelectedTimeZone = tz;

@@ -127,6 +127,7 @@
         </RelativeLayout>
     </LinearLayout>
 
+    <!-- TODO: remove this button when we are sure it is needless -->
     <Button
         android:id="@+id/skip_button"
         android:layout_width="250dip"
@@ -135,7 +136,8 @@
         android:layout_toLeftOf="@+id/next_button"
         android:layout_marginRight="20dip"
         android:textSize="24dip"
-        android:text="@string/skip_label"/>
+        android:text="@string/skip_label"
+        android:visibility="gone" />
 
     <Button
         android:id="@+id/next_button"
