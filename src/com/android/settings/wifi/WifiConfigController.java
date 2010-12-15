@@ -121,6 +121,9 @@ public class WifiConfigController implements TextWatcher,
     private ProxySettings mProxySettings;
     private LinkProperties mLinkProperties = new LinkProperties();
 
+    // True when this instance is used in SetupWizard XL context.
+    private final boolean mInXlSetupWizard;
+
     static boolean requireKeyStore(WifiConfiguration config) {
         if (config == null) {
             return false;
@@ -138,6 +141,7 @@ public class WifiConfigController implements TextWatcher,
     public WifiConfigController(
             WifiConfigUiBase parent, View view, AccessPoint accessPoint, boolean edit) {
         mConfigUi = parent;
+        mInXlSetupWizard = (parent instanceof WifiConfigUiForSetupWizardXL);
 
         mView = view;
         mAccessPoint = accessPoint;
@@ -472,6 +476,13 @@ public class WifiConfigController implements TextWatcher,
 
     private void showSecurityFields() {
         if (mAccessPointSecurity == AccessPoint.SECURITY_NONE) {
+            mView.findViewById(R.id.security_fields).setVisibility(View.GONE);
+            return;
+        } else if (mAccessPointSecurity == AccessPoint.SECURITY_EAP && mInXlSetupWizard) {
+            // In SetupWizard for XLarge screen, we don't have enough space for showing
+            // configurations needed for EAP. We instead disable the whole feature there and let
+            // users configure those networks after the setup.
+            mView.findViewById(R.id.eap_not_supported).setVisibility(View.VISIBLE);
             mView.findViewById(R.id.security_fields).setVisibility(View.GONE);
             return;
         }

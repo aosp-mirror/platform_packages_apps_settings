@@ -323,6 +323,8 @@ public class WifiSettingsForSetupWizardXL extends Activity implements OnClickLis
 
         if (selectedAccessPoint.security == AccessPoint.SECURITY_NONE) {
             mStatusText.setText(R.string.wifi_setup_status_unsecured_network);
+        } else if (selectedAccessPoint.security == AccessPoint.SECURITY_EAP) {
+            mStatusText.setText(R.string.wifi_setup_status_eap_not_supported);
         } else {
             mStatusText.setText(R.string.wifi_setup_status_edit_network);
         }

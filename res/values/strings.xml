@@ -2993,17 +2993,25 @@ found in the list of installed applications.</string>
          if needed. Used in Wifi Setup with XL screen. [CHAR LIMIT=35] -->
     <string name="wifi_setup_status_edit_network">Enter network configuration</string>
     <!-- The message shown above available networks when a user clicked "Add network"
-         button. Used in Wifi Setup For Setup Wizard with XL screen. -->
+         button. Used in Wifi Setup For Setup Wizard with XL screen. [CHAR LIMIT=35] -->
     <string name="wifi_setup_status_new_network">Connect to new network</string>
     <!-- The message shown above available networks when a user clicked one of available
          networks or created another profile and he/she is waiting for the connection
          is established.
-         Used in Wifi Setup For Setup Wizard with XL screen. -->
+         Used in Wifi Setup For Setup Wizard with XL screen. [CHAR LIMIT=35] -->
     <string name="wifi_setup_status_connecting">Connecting...</string>
     <!-- The message shown above available networks when connection is established,
          letting a user to proceed to the next step of the SetupWizard.
          Used in Wifi Setup For Setup Wizard with XL screen. [CHAR LIMIT=35] -->
     <string name="wifi_setup_status_proceed_to_next">Proceed to the next step</string>
+    <!-- The message shown above available networks when a user clicked a network secured by
+         EAP. We don't allow the user to connect it.
+         Used in Wifi Setup For Setup Wizard with XL screen. [CHAR LIMIT=35] -->
+    <string name="wifi_setup_status_eap_not_supported">EAP not supported</string>
+    <!-- Message shown when users select EAP in WiFi settings for SetupWizard,
+         saying EAP can't be configured in SetupWizard flow.
+         [CHAR LIMIT=NONE] -->
+    <string name="wifi_setup_eap_not_supported">You can\u0027t configure an EAP Wi-Fi connection during setup. After setup, you can do that in Settings, under Wireless &amp; Networks.</string>
 
     <!-- Do not translate. This is a stub which will be removed soon. -->
     <string name="time_zone_auto_stub" translatable="false">Select Time Zone</string>

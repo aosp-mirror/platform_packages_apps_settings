@@ -105,6 +105,18 @@
                 android:entries="@array/wifi_security" />
     </LinearLayout> <!-- android:id="@+id/type" -->
 
+    <LinearLayout android:id="@+id/eap_not_supported"
+                  android:layout_width="fill_parent"
+                  android:layout_height="wrap_content"
+                  android:layout_marginTop="20dip"
+                  android:orientation="vertical"
+                  android:visibility="gone">
+        <TextView android:layout_width="match_parent"
+                  android:layout_height="wrap_content"
+                  android:textSize="22sp"
+                  android:text="@string/wifi_setup_eap_not_supported" />
+    </LinearLayout>
+
     <!-- All the views below are "gone".
          We want them as data storage, not as UI components. -->
     <LinearLayout
