@@ -33,10 +33,14 @@ import android.provider.Settings;
 import android.text.TextUtils;
 import android.widget.Toast;
 
+import java.util.concurrent.atomic.AtomicBoolean;
+
 public class WifiEnabler implements Preference.OnPreferenceChangeListener {
-    private final Context mContext; 
+    private final Context mContext;
     private final CheckBoxPreference mCheckBox;
     private final CharSequence mOriginalSummary;
+
+    private AtomicBoolean mConnected = new AtomicBoolean(false);
 
     private final WifiManager mWifiManager;
     private final IntentFilter mIntentFilter;
@@ -48,11 +52,15 @@ public class WifiEnabler implements Preference.OnPreferenceChangeListener {
                 handleWifiStateChanged(intent.getIntExtra(
                         WifiManager.EXTRA_WIFI_STATE, WifiManager.WIFI_STATE_UNKNOWN));
             } else if (WifiManager.SUPPLICANT_STATE_CHANGED_ACTION.equals(action)) {
-                handleStateChanged(WifiInfo.getDetailedStateOf((SupplicantState)
-                        intent.getParcelableExtra(WifiManager.EXTRA_NEW_STATE)));
+                if (!mConnected.get()) {
+                    handleStateChanged(WifiInfo.getDetailedStateOf((SupplicantState)
+                            intent.getParcelableExtra(WifiManager.EXTRA_NEW_STATE)));
+                }
             } else if (WifiManager.NETWORK_STATE_CHANGED_ACTION.equals(action)) {
-                handleStateChanged(((NetworkInfo) intent.getParcelableExtra(
-                        WifiManager.EXTRA_NETWORK_INFO)).getDetailedState());
+                NetworkInfo info = (NetworkInfo) intent.getParcelableExtra(
+                        WifiManager.EXTRA_NETWORK_INFO);
+                mConnected.set(info.isConnected());
+                handleStateChanged(info.getDetailedState());
             }
         }
     };
@@ -75,15 +83,15 @@ public class WifiEnabler implements Preference.OnPreferenceChangeListener {
         mContext.registerReceiver(mReceiver, mIntentFilter);
         mCheckBox.setOnPreferenceChangeListener(this);
     }
-    
+
     public void pause() {
         mContext.unregisterReceiver(mReceiver);
         mCheckBox.setOnPreferenceChangeListener(null);
     }
-    
+
     public boolean onPreferenceChange(Preference preference, Object value) {
         boolean enable = (Boolean) value;
-    
+
         // Show toast message if Wi-Fi is not allowed in airplane mode
         if (enable && !WirelessSettings
                 .isRadioAllowed(mContext, Settings.System.RADIO_WIFI)) {
@@ -109,7 +117,7 @@ public class WifiEnabler implements Preference.OnPreferenceChangeListener {
         // Don't update UI to opposite state until we're sure
         return false;
     }
-    
+
     private void handleWifiStateChanged(int state) {
         switch (state) {
             case WifiManager.WIFI_STATE_ENABLING:
