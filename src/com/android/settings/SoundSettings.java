@@ -261,6 +261,8 @@ public class SoundSettings extends SettingsPreferenceFragment implements
 
     // updateState in fact updates the UI to reflect the system state
     private void updateState(boolean force) {
+        if (getActivity() == null) return;
+
         final int ringerMode = mAudioManager.getRingerMode();
 
         // NB: in the UI we now simply call this "silent mode". A separate

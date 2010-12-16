@@ -17,35 +17,35 @@
         xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/topLayout"
     android:orientation="vertical"
-    android:layout_width="wrap_content"
+    android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/black">
+    android:gravity="center_horizontal">
 
+    <!-- top: instructions and buttons -->
+    <!-- header message -->
     <TextView android:id="@+id/headerText"
-        android:layout_width="match_parent"
-        android:layout_height="0dip"
-        android:layout_weight="1.0"
-        android:gravity="center"
-        android:textSize="18sp"/>
+        android:layout_width="542dip"
+        android:layout_height="78dip"
+        android:layout_marginTop="96dip"
+        android:textSize="22sp"/>
 
-    <View
-         android:background="@*android:drawable/code_lock_top"
-         android:layout_width="match_parent"
-         android:layout_height="2dip" />
-    <com.android.internal.widget.LockPatternView android:id="@+id/lockPattern"
-         android:layout_width="wrap_content"
-         android:layout_height="wrap_content" />
-    <View
-         android:background="@*android:drawable/code_lock_bottom"
-         android:layout_width="match_parent"
-         android:layout_height="8dip" />
-
+    <!-- footer message -->
     <TextView android:id="@+id/footerText"
+        android:layout_width="542dip"
+        android:layout_height="78dip"
+        android:layout_marginTop="16dip"
+        android:textSize="22sp"/>
+
+    <!-- bottom: lock pattern -->
+    <com.android.internal.widget.LockPatternView android:id="@+id/lockPattern"
+         android:layout_width="354dip"
+         android:layout_height="354dip"
+         android:layout_marginTop="80dip"
+         aspect="square"/>
+
+    <View
         android:layout_width="match_parent"
         android:layout_height="0dip"
-        android:layout_weight="1.0"
-        android:gravity="center"
-        android:textSize="14sp"/>
-
+        android:layout_weight="1"/>
 
 </com.android.internal.widget.LinearLayoutWithDefaultTouchRecepient>
