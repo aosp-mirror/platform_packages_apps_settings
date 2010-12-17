@@ -36,6 +36,8 @@ public class PercentageBarChart extends View {
 
     private Collection<Entry> mEntries;
 
+    private int mMinTickWidth = 1;
+
     public static class Entry {
         public final float percentage;
         public final Paint paint;
@@ -49,21 +51,9 @@ public class PercentageBarChart extends View {
     public PercentageBarChart(Context context, AttributeSet attrs) {
         super(context, attrs);
 
-        TypedArray a = context.obtainStyledAttributes(attrs, R.styleable.PercentageBarChart, 0, 0);
-
-        int emptyColor = Color.BLACK;
-
-        int n = a.getIndexCount();
-        for (int i = 0; i < n; i++) {
-            int attr = a.getIndex(i);
-
-            switch (attr) {
-                case R.styleable.PercentageBarChart_emptyColor:
-                    emptyColor = a.getColor(attr, 0);
-                    break;
-            }
-        }
-
+        TypedArray a = context.obtainStyledAttributes(attrs, R.styleable.PercentageBarChart);
+        mMinTickWidth = a.getDimensionPixelSize(R.styleable.PercentageBarChart_minTickWidth, 1);
+        int emptyColor = a.getColor(R.styleable.PercentageBarChart_emptyColor, Color.BLACK);
         a.recycle();
 
         mEmptyPaint.setColor(emptyColor);
@@ -89,7 +79,7 @@ public class PercentageBarChart extends View {
                 if (e.percentage == 0f) {
                     entryWidth = 0;
                 } else {
-                    entryWidth = Math.max(1, (int) (width * e.percentage));
+                    entryWidth = Math.max(mMinTickWidth, (int) (width * e.percentage));
                 }
 
                 final int nextX = lastX + entryWidth;
