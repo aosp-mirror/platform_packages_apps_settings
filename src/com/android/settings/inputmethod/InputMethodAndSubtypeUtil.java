@@ -21,6 +21,7 @@ import com.android.settings.SettingsPreferenceFragment;
 import android.content.ContentResolver;
 import android.content.pm.ApplicationInfo;
 import android.preference.CheckBoxPreference;
+import android.preference.Preference;
 import android.preference.PreferenceScreen;
 import android.provider.Settings;
 import android.provider.Settings.SettingNotFoundException;
@@ -32,6 +33,7 @@ import android.view.inputmethod.InputMethodSubtype;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 
 public class InputMethodAndSubtypeUtil {
 
@@ -47,6 +49,42 @@ public class InputMethodAndSubtypeUtil {
 
     private static final TextUtils.SimpleStringSplitter sStringInputMethodSubtypeSplitter
             = new TextUtils.SimpleStringSplitter(INPUT_METHOD_SUBTYPE_SEPARATER);
+
+    private static void buildEnabledInputMethodsString(
+            StringBuilder builder, String imi, HashSet<String> subtypes) {
+        builder.append(imi);
+        // Inputmethod and subtypes are saved in the settings as follows:
+        // ime0;subtype0;subtype1:ime1;subtype0:ime2:ime3;subtype0;subtype1
+        for (String subtypeId: subtypes) {
+            builder.append(INPUT_METHOD_SUBTYPE_SEPARATER).append(subtypeId);
+        }
+    }
+
+    public static void buildInputMethodsAndSubtypesString(
+            StringBuilder builder, HashMap<String, HashSet<String>> imsList) {
+        boolean needsAppendSeparator = false;
+        for (String imi: imsList.keySet()) {
+            if (needsAppendSeparator) {
+                builder.append(INPUT_METHOD_SEPARATER);
+            } else {
+                needsAppendSeparator = true;
+            }
+            buildEnabledInputMethodsString(builder, imi, imsList.get(imi));
+        }
+    }
+
+    public static void buildDisabledSystemInputMethods(
+            StringBuilder builder, HashSet<String> imes) {
+        boolean needsAppendSeparator = false;
+        for (String ime: imes) {
+            if (needsAppendSeparator) {
+                builder.append(INPUT_METHOD_SEPARATER);
+            } else {
+                needsAppendSeparator = true;
+            }
+            builder.append(ime);
+        }
+    }
 
     private static int getInputMethodSubtypeSelected(ContentResolver resolver) {
         try {
@@ -96,82 +134,117 @@ public class InputMethodAndSubtypeUtil {
         return imsList;
     }
 
-    public static void saveInputMethodSubtypeList(
-            SettingsPreferenceFragment context, ContentResolver resolver,
-            List<InputMethodInfo> inputMethodProperties, boolean hasHardKeyboard) {
+    private static HashSet<String> getDisabledSystemIMEs(ContentResolver resolver) {
+        HashSet<String> set = new HashSet<String>();
+        String disabledIMEsStr = Settings.Secure.getString(
+                resolver, Settings.Secure.DISABLED_SYSTEM_INPUT_METHODS);
+        sStringInputMethodSplitter.setString(disabledIMEsStr);
+        while(sStringInputMethodSplitter.hasNext()) {
+            set.add(sStringInputMethodSplitter.next());
+        }
+        return set;
+    }
+
+    public static void saveInputMethodSubtypeList(SettingsPreferenceFragment context,
+            ContentResolver resolver, List<InputMethodInfo> inputMethodInfos,
+            boolean hasHardKeyboard) {
         String currentInputMethodId = Settings.Secure.getString(resolver,
                 Settings.Secure.DEFAULT_INPUT_METHOD);
         final int selectedInputMethodSubtype = getInputMethodSubtypeSelected(resolver);
+        HashMap<String, HashSet<String>> enabledIMEAndSubtypesMap =
+                getEnabledInputMethodsAndSubtypeList(resolver);
+        HashSet<String> disabledSystemIMEs = getDisabledSystemIMEs(resolver);
 
-        StringBuilder builder = new StringBuilder();
-        StringBuilder disabledSysImes = new StringBuilder();
-        int firstSubtypeHashCode = NOT_A_SUBTYPE_ID;
-
-        final boolean onlyOneIME = inputMethodProperties.size() == 1;
-        boolean existsSelectedIME = false;
-        for (InputMethodInfo property : inputMethodProperties) {
-            final String id = property.getId();
-            CheckBoxPreference pref = (CheckBoxPreference) context.findPreference(id);
-            boolean isCurrentInputMethod = id.equals(currentInputMethodId);
-            boolean systemIme = isSystemIme(property);
-            // TODO: Append subtypes by using the separator ";"
-            if (((onlyOneIME || systemIme) && !hasHardKeyboard)
-                    || (pref != null && pref.isChecked())) {
-                if (builder.length() > 0) builder.append(INPUT_METHOD_SEPARATER);
-                builder.append(id);
-                for (InputMethodSubtype subtype : property.getSubtypes()) {
+        final boolean onlyOneIME = inputMethodInfos.size() == 1;
+        boolean existsSelectedSubtype = false;
+        for (InputMethodInfo imi : inputMethodInfos) {
+            final String imiId = imi.getId();
+            Preference pref = context.findPreference(imiId);
+            if (pref == null) continue;
+            // In the Configure input method screen or in the subtype enabler screen.
+            // pref is instance of CheckBoxPreference in the Configure input method screen.
+            final boolean isImeChecked = (pref instanceof CheckBoxPreference) ?
+                    ((CheckBoxPreference) pref).isChecked()
+                            : enabledIMEAndSubtypesMap.containsKey(imiId);
+            boolean isCurrentInputMethod = imiId.equals(currentInputMethodId);
+            boolean systemIme = isSystemIme(imi);
+            if (((onlyOneIME || systemIme) && !hasHardKeyboard) || isImeChecked) {
+                if (!enabledIMEAndSubtypesMap.containsKey(imiId)) {
+                    // imiId has just been enabled
+                    enabledIMEAndSubtypesMap.put(imiId, new HashSet<String>());
+                }
+                HashSet<String> subtypesSet = enabledIMEAndSubtypesMap.get(imiId);
+                for (InputMethodSubtype subtype : imi.getSubtypes()) {
+                    final String subtypeHashCodeStr = String.valueOf(subtype.hashCode());
                     CheckBoxPreference subtypePref = (CheckBoxPreference) context.findPreference(
-                            id + subtype.hashCode());
-                    if (subtypePref != null && subtypePref.isChecked()) {
-                        builder.append(INPUT_METHOD_SUBTYPE_SEPARATER).append(subtype.hashCode());
+                            imiId + subtypeHashCodeStr);
+                    // In the Configure input method screen which does not have subtype preferences.
+                    if (subtypePref == null) continue;
+                    if (subtypePref.isChecked()) {
+                        subtypesSet.add(subtypeHashCodeStr);
                         if (isCurrentInputMethod) {
                             if (selectedInputMethodSubtype == subtype.hashCode()) {
-                                existsSelectedIME = true;
-                            } else if (firstSubtypeHashCode == NOT_A_SUBTYPE_ID) {
-                                firstSubtypeHashCode = subtype.hashCode();
+                                existsSelectedSubtype = true;
                             }
                         }
+                    } else {
+                        subtypesSet.remove(subtypeHashCodeStr);
                     }
                 }
-            } else if (isCurrentInputMethod) {
-                // We are processing the current input method, but found that it's not enabled.
-                // This means that the current input method has been uninstalled.
-                // If currentInputMethod is already uninstalled, InputMethodManagerService will
-                // find the applicable IME from the history and the system locale.
-                if (DEBUG) {
-                    Log.d(TAG, "Current IME was uninstalled or disabled.");
+            } else {
+                enabledIMEAndSubtypesMap.remove(imiId);
+                if (isCurrentInputMethod) {
+                    // We are processing the current input method, but found that it's not enabled.
+                    // This means that the current input method has been uninstalled.
+                    // If currentInputMethod is already uninstalled, InputMethodManagerService will
+                    // find the applicable IME from the history and the system locale.
+                    if (DEBUG) {
+                        Log.d(TAG, "Current IME was uninstalled or disabled.");
+                    }
                 }
             }
             // If it's a disabled system ime, add it to the disabled list so that it
             // doesn't get enabled automatically on any changes to the package list
-            if (pref != null && !pref.isChecked() && systemIme && hasHardKeyboard) {
-                if (disabledSysImes.length() > 0) disabledSysImes.append(INPUT_METHOD_SEPARATER);
-                disabledSysImes.append(id);
+            if (systemIme && hasHardKeyboard) {
+                if (disabledSystemIMEs.contains(imiId)) {
+                    if (isImeChecked) {
+                        disabledSystemIMEs.remove(imiId);
+                    }
+                } else {
+                    if (!isImeChecked) {
+                        disabledSystemIMEs.add(imiId);
+                    }
+                }
             }
         }
 
+        StringBuilder builder = new StringBuilder();
+        buildInputMethodsAndSubtypesString(builder, enabledIMEAndSubtypesMap);
+        StringBuilder disabledSysImesBuilder = new StringBuilder();
+        buildDisabledSystemInputMethods(disabledSysImesBuilder, disabledSystemIMEs);
         if (DEBUG) {
             Log.d(TAG, "--- Save enabled inputmethod settings. :" + builder.toString());
             Log.d(TAG, "--- Save disable system inputmethod settings. :"
-                    + disabledSysImes.toString());
+                    + disabledSysImesBuilder.toString());
             Log.d(TAG, "--- Save default inputmethod settings. :" + currentInputMethodId);
         }
 
         // Redefines SelectedSubtype when all subtypes are unchecked or there is no subtype
         // selected. And if the selected subtype of the current input method was disabled,
         // We should reset the selected input method's subtype.
-        if (!existsSelectedIME || !isInputMethodSubtypeSelected(resolver)) {
+        if (!existsSelectedSubtype || !isInputMethodSubtypeSelected(resolver)) {
             if (DEBUG) {
-                Log.d(TAG, "--- Set inputmethod subtype because it's not defined."
-                        + firstSubtypeHashCode);
+                Log.d(TAG, "--- Reset inputmethod subtype because it's not defined.");
             }
-            putSelectedInputMethodSubtype(resolver, firstSubtypeHashCode);
+            putSelectedInputMethodSubtype(resolver, NOT_A_SUBTYPE_ID);
         }
 
         Settings.Secure.putString(resolver,
                 Settings.Secure.ENABLED_INPUT_METHODS, builder.toString());
-        Settings.Secure.putString(resolver,
-                Settings.Secure.DISABLED_SYSTEM_INPUT_METHODS, disabledSysImes.toString());
+        if (disabledSysImesBuilder.length() > 0) {
+            Settings.Secure.putString(resolver, Settings.Secure.DISABLED_SYSTEM_INPUT_METHODS,
+                    disabledSysImesBuilder.toString());
+        }
         // If the current input method is unset, InputMethodManagerService will find the applicable
         // IME from the history and the system locale.
         Settings.Secure.putString(resolver, Settings.Secure.DEFAULT_INPUT_METHOD,
@@ -180,18 +253,25 @@ public class InputMethodAndSubtypeUtil {
 
     public static void loadInputMethodSubtypeList(
             SettingsPreferenceFragment context, ContentResolver resolver,
-            List<InputMethodInfo> inputMethodProperties) {
+            List<InputMethodInfo> inputMethodInfos,
+            final Map<String, List<Preference>> inputMethodPrefsMap) {
         HashMap<String, HashSet<String>> enabledSubtypes =
-                getEnabledInputMethodsAndSubtypeList(resolver);
+            getEnabledInputMethodsAndSubtypeList(resolver);
 
-        for (InputMethodInfo property : inputMethodProperties) {
-            final String id = property.getId();
-            CheckBoxPreference pref = (CheckBoxPreference) context.findPreference(id);
-            if (pref != null) {
-                boolean isEnabled = enabledSubtypes.containsKey(id);
-                pref.setChecked(isEnabled);
-                setSubtypesPreferenceEnabled(context, inputMethodProperties, id, isEnabled);
-                updateSubtypesPreferenceChecked(context, inputMethodProperties, enabledSubtypes);
+        for (InputMethodInfo imi : inputMethodInfos) {
+            final String imiId = imi.getId();
+            Preference pref = context.findPreference(imiId);
+            if (pref != null && pref instanceof CheckBoxPreference) {
+                CheckBoxPreference checkBoxPreference = (CheckBoxPreference) pref;
+                boolean isEnabled = enabledSubtypes.containsKey(imiId);
+                checkBoxPreference.setChecked(isEnabled);
+                if (inputMethodPrefsMap != null) {
+                    for (Preference childPref: inputMethodPrefsMap.get(imiId)) {
+                        childPref.setEnabled(isEnabled);
+                    }
+                }
+                setSubtypesPreferenceEnabled(context, inputMethodInfos, imiId, isEnabled);
+                updateSubtypesPreferenceChecked(context, inputMethodInfos, enabledSubtypes);
             }
         }
     }

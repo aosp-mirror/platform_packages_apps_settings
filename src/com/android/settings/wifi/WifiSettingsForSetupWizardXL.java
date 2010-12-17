@@ -265,7 +265,6 @@ public class WifiSettingsForSetupWizardXL extends Activity implements OnClickLis
         mProgressBar.setIndeterminate(false);
         mProgressBar.setProgress(0);
 
-        mStatusText.setText(stateString);
         mProgressText.setText(stateString);
 
         mAddNetworkButton.setEnabled(true);
@@ -322,7 +321,13 @@ public class WifiSettingsForSetupWizardXL extends Activity implements OnClickLis
         }
         // parent.addView(view);
 
-        mStatusText.setText(R.string.wifi_setup_status_edit_network);
+        if (selectedAccessPoint.security == AccessPoint.SECURITY_NONE) {
+            mStatusText.setText(R.string.wifi_setup_status_unsecured_network);
+        } else if (selectedAccessPoint.security == AccessPoint.SECURITY_EAP) {
+            mStatusText.setText(R.string.wifi_setup_status_eap_not_supported);
+        } else {
+            mStatusText.setText(R.string.wifi_setup_status_edit_network);
+        }
         mAddNetworkButton.setVisibility(View.GONE);
         mRefreshButton.setVisibility(View.GONE);
         mSkipOrNextButton.setVisibility(View.GONE);

@@ -57,18 +57,20 @@
 
     <PreferenceCategory android:key="keyboard_settings_category"
             android:title="@string/keyboard_settings_category">
-
-        <PreferenceScreen android:key="input_method"
-                android:title="@string/input_method"
+        <PreferenceScreen android:key="current_input_method"
+                android:title="@string/current_input_method"
                 android:widgetLayout="@*android:layout/preference_dialog" />
 
+        <ListPreference android:key="input_method_selector"
+                android:title="@string/input_method_selector"
+                android:persistent="true"
+                android:entryValues="@array/input_method_selector_values"
+                android:entries="@array/input_method_selector_titles"
+                android:defaultValue="@string/input_method_selector_visibility_default_value"/>
+
+        <PreferenceScreen android:key="configure_input_method"
+                android:title="@string/configure_input_method">
+                <intent android:action="android.settings.INPUT_METHOD_SETTINGS"/>
+        </PreferenceScreen>
     </PreferenceCategory>
-
-    <PreferenceScreen
-        android:fragment="com.android.settings.PhysicalKeyboardSettings"
-        android:key="hardkeyboard_category"
-        android:title="@string/builtin_keyboard_settings_title"
-        android:summary="@string/builtin_keyboard_settings_summary">
-    </PreferenceScreen>
-
 </PreferenceScreen>

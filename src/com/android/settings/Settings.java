@@ -302,6 +302,7 @@ public class Settings extends PreferenceActivity {
     public static class StorageSettingsActivity extends Settings { }
     public static class WifiSettingsActivity extends Settings { }
     public static class InputMethodAndLanguageSettingsActivity extends Settings { }
+    public static class InputMethodConfigActivity extends Settings { }
     public static class InputMethodAndSubtypeEnablerActivity extends Settings { }
     public static class LocalePickerActivity extends Settings { }
     public static class UserDictionarySettingsActivity extends Settings { }

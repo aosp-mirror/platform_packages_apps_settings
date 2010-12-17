@@ -42,7 +42,7 @@ public class PrivacySettings extends SettingsPreferenceFragment implements
     private static final String BACKUP_CATEGORY = "backup_category";
     private static final String BACKUP_DATA = "backup_data";
     private static final String AUTO_RESTORE = "auto_restore";
-    private static final String CONFIGURE_TRANSPORT = "configure_transport";
+    private static final String CONFIGURE_ACCOUNT = "configure_account";
     private IBackupManager mBackupManager;
     private CheckBoxPreference mBackup;
     private CheckBoxPreference mAutoRestore;
@@ -63,7 +63,7 @@ public class PrivacySettings extends SettingsPreferenceFragment implements
 
         mBackup = (CheckBoxPreference) screen.findPreference(BACKUP_DATA);
         mAutoRestore = (CheckBoxPreference) screen.findPreference(AUTO_RESTORE);
-        mConfigure = (PreferenceScreen) screen.findPreference(CONFIGURE_TRANSPORT);
+        mConfigure = (PreferenceScreen) screen.findPreference(CONFIGURE_ACCOUNT);
 
         // Vendor specific
         if (getActivity().getPackageManager().
@@ -152,7 +152,7 @@ public class PrivacySettings extends SettingsPreferenceFragment implements
         if (configSummary != null) {
             mConfigure.setSummary(configSummary);
         } else {
-            mConfigure.setSummary(R.string.backup_configure_transport_default_summary);
+            mConfigure.setSummary(R.string.backup_configure_account_default_summary);
         }
     }
 
