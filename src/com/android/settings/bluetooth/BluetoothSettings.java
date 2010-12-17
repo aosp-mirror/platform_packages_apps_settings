@@ -16,23 +16,19 @@
 
 package com.android.settings.bluetooth;
 
-import com.android.settings.bluetooth.LocalBluetoothProfileManager.Profile;
 import com.android.settings.ProgressCategory;
 import com.android.settings.R;
 import com.android.settings.SettingsPreferenceFragment;
 import com.android.settings.UserLeaveHintListener;
 
 import android.app.Activity;
-import android.app.AlertDialog;
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothClass;
 import android.bluetooth.BluetoothDevice;
 import android.bluetooth.BluetoothDevicePicker;
-import android.bluetooth.BluetoothPan;
 import android.bluetooth.BluetoothUuid;
 import android.content.BroadcastReceiver;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.Bundle;
@@ -62,7 +58,6 @@ public class BluetoothSettings extends SettingsPreferenceFragment
     private static final String KEY_BT_DEVICE_LIST = "bt_device_list";
     private static final String KEY_BT_NAME = "bt_name";
     private static final String KEY_BT_SCAN = "bt_scan";
-    private static final String KEY_BT_FIND_NEARBY = "bt_find_nearby";
 
     private static final int SCREEN_TYPE_SETTINGS = 0;
     private static final int SCREEN_TYPE_DEVICEPICKER = 1;
@@ -117,11 +112,6 @@ public class BluetoothSettings extends SettingsPreferenceFragment
             }
         }
     };
-
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-    }
 
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
@@ -376,8 +366,7 @@ public class BluetoothSettings extends SettingsPreferenceFragment
 
     private void createDevicePreference(CachedBluetoothDevice cachedDevice) {
         BluetoothDevicePreference preference = new BluetoothDevicePreference(
-                getActivity(), cachedDevice,
-                CachedBluetoothDevice.OTHER_PROFILES);
+                getActivity(), cachedDevice);
 
         if (mScreenType == SCREEN_TYPE_SETTINGS) {
             preference.setOnSettingsClickListener(this);

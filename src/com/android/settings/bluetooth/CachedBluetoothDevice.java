@@ -25,7 +25,6 @@ import android.app.AlertDialog;
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothClass;
 import android.bluetooth.BluetoothDevice;
-import android.bluetooth.BluetoothUuid;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.res.Resources;
@@ -36,8 +35,6 @@ import android.preference.Preference;
 import android.preference.PreferenceActivity;
 import android.text.TextUtils;
 import android.util.Log;
-import android.view.Menu;
-import android.view.MenuItem;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -50,14 +47,11 @@ import java.util.Map;
  * functionality that can be performed on the device (connect, pair, disconnect,
  * etc.).
  */
-public class CachedBluetoothDevice implements Comparable<CachedBluetoothDevice> {
+class CachedBluetoothDevice implements Comparable<CachedBluetoothDevice> {
     private static final String TAG = "CachedBluetoothDevice";
     private static final boolean D = LocalBluetoothManager.D;
     private static final boolean V = LocalBluetoothManager.V;
     private static final boolean DEBUG = false;
-
-    public static final int PAN_PROFILE = 1;
-    public static final int OTHER_PROFILES = 2;
 
     private final BluetoothDevice mDevice;
     private String mName;
@@ -275,7 +269,7 @@ public class CachedBluetoothDevice implements Comparable<CachedBluetoothDevice> 
 
         mConnectAttempted = SystemClock.elapsedRealtime();
 
-        connectWithoutResettingTimer();
+        connectWithoutResettingTimer(true);
     }
 
     /*package*/ void onBondingDockConnect() {
@@ -284,7 +278,7 @@ public class CachedBluetoothDevice implements Comparable<CachedBluetoothDevice> 
         connect();
     }
 
-    private void connectWithoutResettingTimer() {
+    private void connectWithoutResettingTimer(boolean connectAllProfiles) {
         // Try to initialize the profiles if there were not.
         if (mProfiles.size() == 0) {
             if (!updateProfiles()) {
@@ -300,7 +294,7 @@ public class CachedBluetoothDevice implements Comparable<CachedBluetoothDevice> 
 
         int preferredProfiles = 0;
         for (Profile profile : mProfiles) {
-            if (isConnectableProfile(profile)) {
+            if (connectAllProfiles ? profile.isConnectable() : profile.isAutoConnectable()) {
                 LocalBluetoothProfileManager profileManager = LocalBluetoothProfileManager
                         .getProfileManager(mLocalManager, profile);
                 if (profileManager.isPreferred(mDevice)) {
@@ -313,18 +307,18 @@ public class CachedBluetoothDevice implements Comparable<CachedBluetoothDevice> 
         if (DEBUG) Log.d(TAG, "Preferred profiles = " + preferredProfiles);
 
         if (preferredProfiles == 0) {
-            connectAllProfiles();
+            connectAllAutoConnectableProfiles();
         }
     }
 
-    private void connectAllProfiles() {
+    private void connectAllAutoConnectableProfiles() {
         if (!ensurePaired()) return;
 
         // Reset the only-show-one-error-dialog tracking variable
         mIsConnectingErrorPossible = true;
 
         for (Profile profile : mProfiles) {
-            if (isConnectableProfile(profile)) {
+            if (profile.isAutoConnectable()) {
                 LocalBluetoothProfileManager profileManager = LocalBluetoothProfileManager
                         .getProfileManager(mLocalManager, profile);
                 profileManager.setPreferred(mDevice, true);
@@ -378,7 +372,7 @@ public class CachedBluetoothDevice implements Comparable<CachedBluetoothDevice> 
         if (!mIsConnectingErrorPossible) return;
         mIsConnectingErrorPossible = false;
 
-        mLocalManager.showError(mDevice, R.string.bluetooth_error_title,
+        mLocalManager.showError(mDevice,
                 R.string.bluetooth_connecting_error_message);
     }
 
@@ -400,7 +394,7 @@ public class CachedBluetoothDevice implements Comparable<CachedBluetoothDevice> 
         }
 
         if (!mDevice.createBond()) {
-            mLocalManager.showError(mDevice, R.string.bluetooth_error_title,
+            mLocalManager.showError(mDevice,
                     R.string.bluetooth_pairing_error_message);
             return;
         }
@@ -635,7 +629,7 @@ public class CachedBluetoothDevice implements Comparable<CachedBluetoothDevice> 
         if (mProfiles.size() > 0
                 && (mConnectAttempted + MAX_UUID_DELAY_FOR_AUTO_CONNECT) > SystemClock
                         .elapsedRealtime()) {
-            connectWithoutResettingTimer();
+            connectWithoutResettingTimer(false);
         }
         dispatchAttributesChanged();
     }
@@ -699,16 +693,11 @@ public class CachedBluetoothDevice implements Comparable<CachedBluetoothDevice> 
     public List<Profile> getConnectableProfiles() {
         ArrayList<Profile> connectableProfiles = new ArrayList<Profile>();
         for (Profile profile : mProfiles) {
-            if (isConnectableProfile(profile)) {
+            if (profile.isConnectable()) {
                 connectableProfiles.add(profile);
             }
         }
         return connectableProfiles;
-    }
-
-    private boolean isConnectableProfile(Profile profile) {
-        return profile.equals(Profile.HEADSET) || profile.equals(Profile.A2DP) ||
-                profile.equals(Profile.HID);
     }
 
     public void onClickedAdvancedOptions(SettingsPreferenceFragment fragment) {

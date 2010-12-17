@@ -40,7 +40,7 @@ import java.util.Map;
  * LocalBluetoothProfileManager is an abstract class defining the basic
  * functionality related to a profile.
  */
-public abstract class LocalBluetoothProfileManager {
+abstract class LocalBluetoothProfileManager {
     private static final String TAG = "LocalBluetoothProfileManager";
 
     /* package */ static final ParcelUuid[] HEADSET_PROFILE_UUIDS = new ParcelUuid[] {
@@ -97,10 +97,10 @@ public abstract class LocalBluetoothProfileManager {
     }
 
     // TODO: close profiles when we're shutting down
-    private static Map<Profile, LocalBluetoothProfileManager> sProfileMap =
+    private static final Map<Profile, LocalBluetoothProfileManager> sProfileMap =
             new HashMap<Profile, LocalBluetoothProfileManager>();
 
-    protected LocalBluetoothManager mLocalManager;
+    protected final LocalBluetoothManager mLocalManager;
 
     public static void init(LocalBluetoothManager localManager) {
         synchronized (sProfileMap) {
@@ -141,14 +141,10 @@ public abstract class LocalBluetoothProfileManager {
             sProfileMap.remove(Profile.OPP);
         }
 
-        if (!BluetoothUuid.containsAnyUuid(uuids, PANU_PROFILE_UUIDS)) {
-            sProfileMap.remove(Profile.PAN);
-        }
-
         // There is no local SDP record for HID and Settings app doesn't control PBAP
     }
 
-    private static LinkedList<ServiceListener> mServiceListeners =
+    private static final LinkedList<ServiceListener> mServiceListeners =
             new LinkedList<ServiceListener>();
 
     public static void addServiceListener(ServiceListener l) {
@@ -225,7 +221,7 @@ public abstract class LocalBluetoothProfileManager {
             profiles.add(Profile.HID);
         }
 
-        if (BluetoothUuid.containsAnyUuid(uuids, PANU_PROFILE_UUIDS) &&
+        if (BluetoothUuid.containsAnyUuid(uuids, NAP_PROFILE_UUIDS) &&
             sProfileMap.containsKey(Profile.PAN)) {
             profiles.add(Profile.PAN);
         }
@@ -259,21 +255,32 @@ public abstract class LocalBluetoothProfileManager {
 
     public abstract boolean isProfileReady();
 
-    public int getDrawableResource() {
-        return R.drawable.ic_bt_headphones_a2dp;
-    }
+    public abstract int getDrawableResource();
 
     public static enum Profile {
-        HEADSET(R.string.bluetooth_profile_headset),
-        A2DP(R.string.bluetooth_profile_a2dp),
-        OPP(R.string.bluetooth_profile_opp),
-        HID(R.string.bluetooth_profile_hid),
-        PAN(R.string.bluetooth_profile_pan);
+        HEADSET(R.string.bluetooth_profile_headset, true, true),
+        A2DP(R.string.bluetooth_profile_a2dp, true, true),
+        OPP(R.string.bluetooth_profile_opp, false, false),
+        HID(R.string.bluetooth_profile_hid, true, true),
+        PAN(R.string.bluetooth_profile_pan, true, false);
 
         public final int localizedString;
+        private final boolean mConnectable;
+        private final boolean mAutoConnectable;
 
-        private Profile(int localizedString) {
+        private Profile(int localizedString, boolean connectable,
+                boolean autoConnectable) {
             this.localizedString = localizedString;
+            this.mConnectable = connectable;
+            this.mAutoConnectable = autoConnectable;
+        }
+
+        public boolean isConnectable() {
+            return mConnectable;
+        }
+
+        public boolean isAutoConnectable() {
+            return mAutoConnectable;
         }
     }
 
@@ -401,7 +408,7 @@ public abstract class LocalBluetoothProfileManager {
     private static class HeadsetProfileManager extends LocalBluetoothProfileManager
             implements BluetoothProfile.ServiceListener {
         private BluetoothHeadset mService;
-        private Handler mUiHandler = new Handler();
+        private final Handler mUiHandler = new Handler();
         private boolean profileReady = false;
 
         // TODO(): The calls must get queued if mService becomes null.
@@ -623,7 +630,7 @@ public abstract class LocalBluetoothProfileManager {
     }
 
     private static class HidProfileManager extends LocalBluetoothProfileManager {
-        private BluetoothInputDevice mService;
+        private final BluetoothInputDevice mService;
 
         public HidProfileManager(LocalBluetoothManager localManager) {
             super(localManager);
@@ -711,7 +718,7 @@ public abstract class LocalBluetoothProfileManager {
     }
 
     private static class PanProfileManager extends LocalBluetoothProfileManager {
-        private BluetoothPan mService;
+        private final BluetoothPan mService;
 
         public PanProfileManager(LocalBluetoothManager localManager) {
             super(localManager);
@@ -777,17 +784,18 @@ public abstract class LocalBluetoothProfileManager {
 
         @Override
         public boolean isPreferred(BluetoothDevice device) {
-            return false;
+            return true;
         }
 
         @Override
         public void setPreferred(BluetoothDevice device, boolean preferred) {
+            // ignore: isPreferred is always true for PAN
             return;
         }
 
         @Override
         public int getDrawableResource() {
-            // TODO:
+            // TODO: return PAN icon resource ID
             return 0;
         }
     }

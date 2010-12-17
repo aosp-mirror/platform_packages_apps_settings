@@ -72,7 +72,7 @@ public class RequestPermissionActivity extends Activity implements
 
     private AlertDialog mDialog = null;
 
-    private BroadcastReceiver mReceiver = new BroadcastReceiver() {
+    private final BroadcastReceiver mReceiver = new BroadcastReceiver() {
 
         @Override
         public void onReceive(Context context, Intent intent) {

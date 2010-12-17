@@ -57,12 +57,11 @@ public class LocalBluetoothManager {
     private BluetoothAdapter mAdapter;
 
     private CachedBluetoothDeviceManager mCachedDeviceManager;
-    private BluetoothEventRedirector mEventRedirector;
     private BluetoothA2dp mBluetoothA2dp;
 
     private int mState = BluetoothAdapter.ERROR;
 
-    private List<Callback> mCallbacks = new ArrayList<Callback>();
+    private final List<Callback> mCallbacks = new ArrayList<Callback>();
 
     private static final int SCAN_EXPIRATION_MS = 5 * 60 * 1000; // 5 mins
 
@@ -111,15 +110,14 @@ public class LocalBluetoothManager {
 
         mCachedDeviceManager = new CachedBluetoothDeviceManager(this);
 
-        mEventRedirector = new BluetoothEventRedirector(this);
-        mEventRedirector.start();
+        new BluetoothEventRedirector(this).registerReceiver();
 
         mAdapter.getProfileProxy(mContext, mProfileListener, BluetoothProfile.A2DP);
 
         return true;
     }
 
-    private BluetoothProfile.ServiceListener mProfileListener =
+    private final BluetoothProfile.ServiceListener mProfileListener =
       new BluetoothProfile.ServiceListener() {
         public void onServiceConnected(int profile, BluetoothProfile proxy) {
             mBluetoothA2dp = (BluetoothA2dp) proxy;
@@ -286,7 +284,7 @@ public class LocalBluetoothManager {
         }
     }
 
-    public void showError(BluetoothDevice device, int titleResId, int messageResId) {
+    public void showError(BluetoothDevice device, int messageResId) {
         CachedBluetoothDevice cachedDevice = mCachedDeviceManager.findDevice(device);
         String name = null;
         if (cachedDevice == null) {
@@ -304,7 +302,7 @@ public class LocalBluetoothManager {
             // Need an activity context to show a dialog
             mErrorDialog = new AlertDialog.Builder(mForegroundActivity)
                 .setIcon(android.R.drawable.ic_dialog_alert)
-                .setTitle(titleResId)
+                .setTitle(R.string.bluetooth_error_title)
                 .setMessage(message)
                 .setPositiveButton(android.R.string.ok, null)
                 .show();

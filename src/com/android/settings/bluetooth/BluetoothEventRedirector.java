@@ -44,7 +44,7 @@ import java.util.concurrent.TimeUnit;
  * API and dispatches the event on the UI thread to the right class in the
  * Settings.
  */
-public class BluetoothEventRedirector {
+class BluetoothEventRedirector {
     private static final String TAG = "BluetoothEventRedirector";
 
     /* package */ final LocalBluetoothManager mManager;
@@ -142,20 +142,20 @@ public class BluetoothEventRedirector {
                         Profile.HID, newState);
 
             } else if (action.equals(BluetoothPan.ACTION_PAN_STATE_CHANGED)) {
-                // TODO: uncomment and execute for reverse tethering only
-/*
-                final int newState = intent.getIntExtra(
-                        BluetoothPan.EXTRA_PAN_STATE, 0);
-                final int oldState = intent.getIntExtra(
-                        BluetoothPan.EXTRA_PREVIOUS_PAN_STATE, 0);
-                if (newState == BluetoothPan.STATE_DISCONNECTED &&
-                        oldState == BluetoothPan.STATE_CONNECTING) {
-                    Log.i(TAG, "Failed to connect BT PAN");
+                final int role = intent.getIntExtra(
+                        BluetoothPan.EXTRA_LOCAL_ROLE, 0);
+                if (role == BluetoothPan.LOCAL_PANU_ROLE) {
+                    final int newState = intent.getIntExtra(
+                            BluetoothPan.EXTRA_PAN_STATE, 0);
+                    final int oldState = intent.getIntExtra(
+                            BluetoothPan.EXTRA_PREVIOUS_PAN_STATE, 0);
+                    if (newState == BluetoothPan.STATE_DISCONNECTED &&
+                            oldState == BluetoothPan.STATE_CONNECTING) {
+                        Log.i(TAG, "Failed to connect BT PAN");
+                    }
+                    mManager.getCachedDeviceManager().onProfileStateChanged(device,
+                            Profile.PAN, newState);
                 }
-                mManager.getCachedDeviceManager().onProfileStateChanged(device,
-                        Profile.PAN, newState);
-*/
-
             } else if (action.equals(BluetoothDevice.ACTION_CLASS_CHANGED)) {
                 mManager.getCachedDeviceManager().onBtClassChanged(device);
 
@@ -164,7 +164,7 @@ public class BluetoothEventRedirector {
 
             } else if (action.equals(BluetoothDevice.ACTION_PAIRING_CANCEL)) {
                 int errorMsg = R.string.bluetooth_pairing_error_message;
-                mManager.showError(device, R.string.bluetooth_error_title, errorMsg);
+                mManager.showError(device, errorMsg);
 
             } else if (action.equals(Intent.ACTION_DOCK_EVENT)) {
                 // Remove if unpair device upon undocking
@@ -183,7 +183,7 @@ public class BluetoothEventRedirector {
         mManager = localBluetoothManager;
     }
 
-    public void start() {
+    public void registerReceiver() {
         IntentFilter filter = new IntentFilter();
 
         // Bluetooth on/off broadcasts

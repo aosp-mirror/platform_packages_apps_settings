@@ -20,9 +20,7 @@ import com.android.settings.R;
 import com.android.settings.SettingsPreferenceFragment;
 import com.android.settings.bluetooth.LocalBluetoothProfileManager.Profile;
 
-import android.app.FragmentTransaction;
 import android.bluetooth.BluetoothDevice;
-import android.bluetooth.BluetoothProfile;
 import android.os.Bundle;
 import android.preference.CheckBoxPreference;
 import android.preference.EditTextPreference;
@@ -59,7 +57,7 @@ public class DeviceProfilesSettings extends SettingsPreferenceFragment
     private PreferenceGroup mProfileContainer;
     private CheckBoxPreference mAllowIncomingPref;
     private EditTextPreference mDeviceNamePref;
-    private HashMap<String,CheckBoxPreference> mAutoConnectPrefs
+    private final HashMap<String,CheckBoxPreference> mAutoConnectPrefs
             = new HashMap<String,CheckBoxPreference>();
 
     @Override
@@ -155,6 +153,14 @@ public class DeviceProfilesSettings extends SettingsPreferenceFragment
         pref.setPersistent(false);
         pref.setOrder(getProfilePreferenceIndex(profile));
         pref.setOnExpandClickListener(this);
+
+        LocalBluetoothProfileManager profileManager =
+                LocalBluetoothProfileManager.getProfileManager(mManager, profile);
+        int iconResource = profileManager.getDrawableResource();
+        if (iconResource != 0) {
+            pref.setProfileDrawable(mManager.getContext()
+                    .getResources().getDrawable(iconResource));
+        }
 
         /**
          * Gray out profile while connecting and disconnecting
@@ -302,6 +308,8 @@ public class DeviceProfilesSettings extends SettingsPreferenceFragment
                 return R.string.bluetooth_headset_profile_summary_use_for;
             case HID:
                 return R.string.bluetooth_hid_profile_summary_use_for;
+            case PAN:
+                return R.string.bluetooth_pan_profile_summary_use_for;
             default:
                 return 0;
         }
@@ -315,7 +323,7 @@ public class DeviceProfilesSettings extends SettingsPreferenceFragment
                 autoConnectPref = new CheckBoxPreference(getActivity());
                 autoConnectPref.setLayoutResource(com.android.internal.R.layout.preference_child);
                 autoConnectPref.setKey(prof.toString());
-                autoConnectPref.setTitle(getCheckBoxTitle(prof));
+                autoConnectPref.setTitle(R.string.bluetooth_auto_connect);
                 autoConnectPref.setOrder(getProfilePreferenceIndex(prof) + 1);
                 autoConnectPref.setChecked(getAutoConnect(prof));
                 autoConnectPref.setOnPreferenceChangeListener(this);
@@ -354,11 +362,6 @@ public class DeviceProfilesSettings extends SettingsPreferenceFragment
     private boolean isIncomingFileTransfersAllowed() {
         // TODO: get this value from BluetoothOpp ???
         return true;
-    }
-
-    private String getCheckBoxTitle(Profile prof) {
-        // TODO: Use resources and base it on profile if necessary
-        return "Auto connect";
     }
 
     private boolean getAutoConnect(Profile prof) {

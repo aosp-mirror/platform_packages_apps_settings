@@ -254,6 +254,9 @@
     <!-- Strings for msg to display to user while bluetooth is turning on -->
     <string name="bluetooth_turning_on">"Turning on Bluetooth\u2026"</string>
 
+    <!-- Strings for device profile auto connect setting -->
+    <string name="bluetooth_auto_connect">Auto connect</string>
+
     <!-- Date & time settings screen title -->
     <string name="date_and_time">Date &amp; time settings</string>
     <!-- Date/time settings.  Summary of the checkbox for choosing between 12 hour time or 24 hour time.  Sample of 12-hour time -->
@@ -809,19 +812,6 @@
     <!-- Bluetooth settings. The user-visible string that is used whenever referring to the PAN profile. [CHAR LIMIT=25]-->
     <string name="bluetooth_profile_pan">Tethering</string>
 
-    <!-- Bluetooth settings.  The summary string when a device is connected to the A2DP profile. -->
-    <string name="bluetooth_summary_connected_to_a2dp">Connected to media audio</string>
-    <!-- Bluetooth settings.  The summary string when a device is connected to the headset profile. -->
-    <string name="bluetooth_summary_connected_to_headset" product="tablet">Connected to tablet audio</string>
-    <!-- Bluetooth settings.  The summary string when a device is connected to the headset profile. -->
-    <string name="bluetooth_summary_connected_to_headset" product="default">Connected to phone audio</string>
-    <!-- Bluetooth settings.  The summary string when a device is connected to the A2DP and headset profiles. -->
-    <string name="bluetooth_summary_connected_to_a2dp_headset">Connected to phone and media audio</string>
-    <!-- Bluetooth settings. The summary string when a device is connected to the HID profile. -->
-    <string name="bluetooth_summary_connected_to_hid">Connected to input device</string>
-    <!-- Bluetooth settings. The summary string when a device is connected to the PAN profile. [CHAR LIMIT=35]-->
-    <string name="bluetooth_summary_connected_to_pan">Tethered</string>
-
     <!-- Bluetooth settings.  Message for disconnecting from the A2DP profile. -->
     <string name="bluetooth_disconnect_a2dp_profile"><xliff:g id="device_name">%1$s</xliff:g> will be disconnected from media audio.</string>
     <!-- Bluetooth settings.  Message for disconnecting from the headset profile. -->
@@ -868,6 +858,10 @@
          for the HID checkbox preference that describes how checking it
          will set the HID profile as preferred. -->
     <string name="bluetooth_hid_profile_summary_use_for">Use for input</string>
+    <!-- Bluetooth settings. Connection options screen. The summary
+         for the PAN checkbox preference that describes how checking it
+         will set the PAN profile as preferred. -->
+    <string name="bluetooth_pan_profile_summary_use_for">Use for Internet access</string>
 
     <!-- Bluetooth settings.  Dock Setting Title -->
     <string name="bluetooth_dock_settings">Dock Settings</string>

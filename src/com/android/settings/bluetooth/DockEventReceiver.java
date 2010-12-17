@@ -16,8 +16,6 @@
 
 package com.android.settings.bluetooth;
 
-import com.android.settings.bluetooth.LocalBluetoothProfileManager.Profile;
-
 import android.app.Service;
 import android.bluetooth.BluetoothA2dp;
 import android.bluetooth.BluetoothAdapter;
@@ -27,7 +25,6 @@ import android.bluetooth.BluetoothProfile;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
-import android.content.IntentFilter;
 import android.os.PowerManager;
 import android.util.Log;
 

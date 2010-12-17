@@ -53,7 +53,6 @@ public class DockSettings extends SettingsPreferenceFragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        ContentResolver resolver = getContentResolver();
         addPreferencesFromResource(R.xml.dock_settings);
 
         initDockSettings();

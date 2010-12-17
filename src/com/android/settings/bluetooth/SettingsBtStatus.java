@@ -24,7 +24,7 @@ import com.android.settings.R;
  * SettingsBtStatus is a helper class that contains constants for various status
  * codes.
  */
-public class SettingsBtStatus {
+class SettingsBtStatus {
     private static final String TAG = "SettingsBtStatus";
 
     // Connection status

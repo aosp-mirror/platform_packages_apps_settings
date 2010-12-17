@@ -42,8 +42,7 @@ public class BluetoothDevicePreference extends Preference implements
 
     private static int sDimAlpha = Integer.MIN_VALUE;
 
-    private CachedBluetoothDevice mCachedDevice;
-    private int mAccessibleProfile;
+    private final CachedBluetoothDevice mCachedDevice;
 
     private ImageView mDeviceSettings;
 
@@ -55,8 +54,7 @@ public class BluetoothDevicePreference extends Preference implements
      */
     private boolean mIsBusy;
 
-    public BluetoothDevicePreference(Context context, CachedBluetoothDevice cachedDevice,
-            int accessibleProfile) {
+    public BluetoothDevicePreference(Context context, CachedBluetoothDevice cachedDevice) {
         super(context);
 
         if (sDimAlpha == Integer.MIN_VALUE) {
@@ -66,7 +64,6 @@ public class BluetoothDevicePreference extends Preference implements
         }
 
         mCachedDevice = cachedDevice;
-        mAccessibleProfile = accessibleProfile;
 
         setWidgetLayoutResource(R.layout.preference_bluetooth);
 

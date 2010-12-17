@@ -22,9 +22,7 @@ import com.android.settings.R;
 import android.content.Context;
 import android.graphics.drawable.Drawable;
 import android.preference.Preference;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.view.View.OnClickListener;
 import android.widget.ImageView;
 
@@ -39,7 +37,7 @@ public class BluetoothProfilePreference extends Preference implements OnClickLis
     private Drawable mProfileDrawable;
     private boolean mExpanded;
     private ImageView mProfileExpandView;
-    private Profile mProfile;
+    private final Profile mProfile;
 
     private OnClickListener mOnExpandClickListener;
 
@@ -77,11 +75,15 @@ public class BluetoothProfilePreference extends Preference implements OnClickLis
         btProfile.setImageDrawable(mProfileDrawable);
 
         mProfileExpandView = (ImageView) view.findViewById(R.id.profileExpand);
-        mProfileExpandView.setOnClickListener(this);
-        mProfileExpandView.setTag(mProfile);
+        if (mProfile == Profile.PAN) {
+            mProfileExpandView.setVisibility(View.GONE);
+        } else {
+            mProfileExpandView.setOnClickListener(this);
+            mProfileExpandView.setTag(mProfile);
 
-        mProfileExpandView.setImageResource(mExpanded ? R.drawable.ic_preferences_expanded
+            mProfileExpandView.setImageResource(mExpanded ? R.drawable.ic_preferences_expanded
                 : R.drawable.ic_preferences_collapsed);
+        }
     }
 
     public void onClick(View v) {

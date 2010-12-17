@@ -27,7 +27,6 @@ import android.content.IntentFilter;
 import android.preference.Preference;
 import android.preference.CheckBoxPreference;
 import android.provider.Settings;
-import android.text.TextUtils;
 import android.widget.Toast;
 
 /**

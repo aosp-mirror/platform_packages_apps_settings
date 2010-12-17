@@ -32,7 +32,7 @@ import java.util.Set;
 /**
  * CachedBluetoothDeviceManager manages the set of remote Bluetooth devices.
  */
-public class CachedBluetoothDeviceManager {
+class CachedBluetoothDeviceManager {
     private static final String TAG = "CachedBluetoothDeviceManager";
 
     final LocalBluetoothManager mLocalManager;
@@ -207,22 +207,22 @@ public class CachedBluetoothDeviceManager {
         switch(reason) {
         case BluetoothDevice.UNBOND_REASON_AUTH_FAILED:
             errorMsg = R.string.bluetooth_pairing_pin_error_message;
-            mLocalManager.showError(device, R.string.bluetooth_error_title, errorMsg);
+            mLocalManager.showError(device, errorMsg);
             break;
         case BluetoothDevice.UNBOND_REASON_AUTH_REJECTED:
             errorMsg = R.string.bluetooth_pairing_rejected_error_message;
-            mLocalManager.showError(device, R.string.bluetooth_error_title, errorMsg);
+            mLocalManager.showError(device, errorMsg);
             break;
         case BluetoothDevice.UNBOND_REASON_REMOTE_DEVICE_DOWN:
             errorMsg = R.string.bluetooth_pairing_device_down_error_message;
-            mLocalManager.showError(device, R.string.bluetooth_error_title, errorMsg);
+            mLocalManager.showError(device, errorMsg);
             break;
         case BluetoothDevice.UNBOND_REASON_DISCOVERY_IN_PROGRESS:
         case BluetoothDevice.UNBOND_REASON_AUTH_TIMEOUT:
         case BluetoothDevice.UNBOND_REASON_REPEATED_ATTEMPTS:
         case BluetoothDevice.UNBOND_REASON_REMOTE_AUTH_CANCELED:
             errorMsg = R.string.bluetooth_pairing_error_message;
-            mLocalManager.showError(device, R.string.bluetooth_error_title, errorMsg);
+            mLocalManager.showError(device, errorMsg);
             break;
         default:
             Log.w(TAG, "showUnbondMessage: Not displaying any message for reason:" + reason);
