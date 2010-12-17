@@ -26,11 +26,11 @@
                 android:summary="@string/backup_data_summary"
                 android:persistent="false" />
         <PreferenceScreen
-                android:key="configure_transport"
-                android:dependency="backup_data"
-                android:layout="?android:attr/preferenceLayoutChild"
-                android:title="@string/backup_configure_transport_title"
-                android:summary="@string/backup_configure_transport_default_summary">
+                android:key="configure_account"
+                android:title="@string/backup_configure_account_title"
+                android:summary="@string/backup_configure_account_default_summary"
+                android:persistent="false">
+            <!-- the Intent declared here is always overwritten by a real one -->
             <intent android:action="dummy" />
         </PreferenceScreen>
         <CheckBoxPreference
