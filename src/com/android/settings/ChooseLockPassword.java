@@ -183,7 +183,8 @@ public class ChooseLockPassword extends PreferenceActivity {
             mPasswordEntry.setOnEditorActionListener(this);
             mPasswordEntry.addTextChangedListener(this);
 
-            mKeyboardHelper = new PasswordEntryKeyboardHelper(getActivity(),
+            final Activity activity = getActivity();
+            mKeyboardHelper = new PasswordEntryKeyboardHelper(activity,
                     mKeyboardView, mPasswordEntry);
             mKeyboardHelper.setKeyboardMode(mIsAlphaMode ?
                     PasswordEntryKeyboardHelper.KEYBOARD_MODE_ALPHA
@@ -211,6 +212,14 @@ public class ChooseLockPassword extends PreferenceActivity {
                     mUiStage = Stage.valueOf(state);
                     updateStage(mUiStage);
                 }
+            }
+            // Update the breadcrumb (title) if this is embedded in a PreferenceActivity
+            if (activity instanceof PreferenceActivity) {
+                final PreferenceActivity preferenceActivity = (PreferenceActivity) activity;
+                int id = mIsAlphaMode ? R.string.lockpassword_confirm_your_password_header
+                        : R.string.lockpassword_confirm_your_pin_header;
+                CharSequence title = getText(id);
+                preferenceActivity.showBreadCrumbs(title, title);
             }
 
             return view;

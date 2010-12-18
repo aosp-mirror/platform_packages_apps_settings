@@ -710,24 +710,33 @@
 
         <!-- Second and third-level settings -->
 
-        <activity android:name="ConfirmLockPattern"/>
 
-        <activity android:name="ConfirmLockPassword"/>>
+        <!-- Lock screen settings -->
+        <activity android:name="ConfirmLockPattern"
+            android:label="@string/lockpassword_confirm_your_pattern_header"/>
 
-        <activity android:name="ChooseLockGeneric">
+        <activity android:name="ConfirmLockPassword"
+            android:label="@string/lockpassword_confirm_your_password_header"/>>
+
+        <activity android:name="ChooseLockGeneric"
+            android:label="@string/lockpassword_choose_lock_generic_header">
             <intent-filter>
                 <action android:name="android.app.action.SET_NEW_PASSWORD" />
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
 
-        <activity android:name="ChooseLockPattern" android:exported="false"/>
+        <activity android:name="ChooseLockPattern" android:exported="false"
+            android:label="@string/lockpassword_choose_your_pattern_header"/>
 
-        <activity android:name="ChooseLockPassword" android:exported="false"/>
+        <activity android:name="ChooseLockPassword" android:exported="false"
+            android:label="@string/lockpassword_choose_your_password_header"/>
 
-        <activity android:name="ChooseLockPatternTutorial"/>
+        <activity android:name="ChooseLockPatternTutorial"
+            android:label="@string/lockpassword_choose_your_pattern_header"/>
 
-        <activity android:name="ChooseLockPatternExample"/>
+        <activity android:name="ChooseLockPatternExample"
+            android:label="@string/lockpassword_choose_your_pattern_header"/>
 
         <!-- Runs in the phone process since it needs access to the Phone object -->
         <activity android:name=".deviceinfo.Status"

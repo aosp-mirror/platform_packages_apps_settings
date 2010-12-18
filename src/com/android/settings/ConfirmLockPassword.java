@@ -20,6 +20,7 @@ import com.android.internal.widget.LockPatternUtils;
 import com.android.internal.widget.PasswordEntryKeyboardHelper;
 import com.android.internal.widget.PasswordEntryKeyboardView;
 
+import android.app.Activity;
 import android.app.Fragment;
 import android.app.admin.DevicePolicyManager;
 import android.content.Intent;
@@ -94,15 +95,27 @@ public class ConfirmLockPassword extends PreferenceActivity {
                     || DevicePolicyManager.PASSWORD_QUALITY_COMPLEX == storedQuality;
             mHeaderText.setText(isAlpha ? R.string.lockpassword_confirm_your_password_header
                     : R.string.lockpassword_confirm_your_pin_header);
-            mKeyboardHelper = new PasswordEntryKeyboardHelper(getActivity(),
-                        mKeyboardView, mPasswordEntry);
-            mKeyboardHelper.setKeyboardMode(isAlpha ? PasswordEntryKeyboardHelper.KEYBOARD_MODE_ALPHA
+
+            final Activity activity = getActivity();
+            mKeyboardHelper = new PasswordEntryKeyboardHelper(activity,
+                    mKeyboardView, mPasswordEntry);
+            mKeyboardHelper.setKeyboardMode(isAlpha ?
+                    PasswordEntryKeyboardHelper.KEYBOARD_MODE_ALPHA
                     : PasswordEntryKeyboardHelper.KEYBOARD_MODE_NUMERIC);
             mKeyboardView.requestFocus();
 
             int currentType = mPasswordEntry.getInputType();
             mPasswordEntry.setInputType(isAlpha ? currentType
                     : (currentType | InputType.TYPE_CLASS_NUMBER));
+
+            // Update the breadcrumb (title) if this is embedded in a PreferenceActivity
+            if (activity instanceof PreferenceActivity) {
+                final PreferenceActivity preferenceActivity = (PreferenceActivity) activity;
+                int id = isAlpha ? R.string.lockpassword_confirm_your_password_header
+                        : R.string.lockpassword_confirm_your_pin_header;
+                CharSequence title = getText(id);
+                preferenceActivity.showBreadCrumbs(title, title);
+            }
 
             return view;
         }
