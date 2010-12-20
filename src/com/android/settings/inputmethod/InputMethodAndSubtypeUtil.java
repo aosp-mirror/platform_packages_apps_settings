@@ -138,6 +138,9 @@ public class InputMethodAndSubtypeUtil {
         HashSet<String> set = new HashSet<String>();
         String disabledIMEsStr = Settings.Secure.getString(
                 resolver, Settings.Secure.DISABLED_SYSTEM_INPUT_METHODS);
+        if (TextUtils.isEmpty(disabledIMEsStr)) {
+            return set;
+        }
         sStringInputMethodSplitter.setString(disabledIMEsStr);
         while(sStringInputMethodSplitter.hasNext()) {
             set.add(sStringInputMethodSplitter.next());
