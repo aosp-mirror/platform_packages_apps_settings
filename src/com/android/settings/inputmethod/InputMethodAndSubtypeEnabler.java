@@ -44,14 +44,18 @@ public class InputMethodAndSubtypeEnabler extends SettingsPreferenceFragment {
 
     private AlertDialog mDialog = null;
     private boolean mHaveHardKeyboard;
-    final private HashMap<String, List<Preference>> mInputMethodPrefsMap =
-        new HashMap<String, List<Preference>>();
+    final private HashMap<String, List<Preference>> mInputMethodAndSubtypePrefsMap =
+            new HashMap<String, List<Preference>>();
+    final private HashMap<String, CheckBoxPreference> mSubtypeAutoSelectionCBMap =
+            new HashMap<String, CheckBoxPreference>();
+    private InputMethodManager mImm;
     private List<InputMethodInfo> mInputMethodProperties;
     private String mInputMethodId;
 
     @Override
     public void onCreate(Bundle icicle) {
         super.onCreate(icicle);
+        mImm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
         Configuration config = getResources().getConfiguration();
         mHaveHardKeyboard = (config.keyboard == Configuration.KEYBOARD_QWERTY);
         mInputMethodId = getActivity().getIntent().getStringExtra(EXTRA_INPUT_METHOD_ID);
@@ -63,12 +67,15 @@ public class InputMethodAndSubtypeEnabler extends SettingsPreferenceFragment {
     public void onResume() {
         super.onResume();
         InputMethodAndSubtypeUtil.loadInputMethodSubtypeList(
-                this, getContentResolver(), mInputMethodProperties, mInputMethodPrefsMap);
+                this, getContentResolver(), mInputMethodProperties, mInputMethodAndSubtypePrefsMap);
+        updateAutoSelectionCB();
     }
 
     @Override
     public void onPause() {
         super.onPause();
+        // Clear all subtypes of all IMEs to make sure
+        clearImplicitlyEnabledSubtypes(null);
         InputMethodAndSubtypeUtil.saveInputMethodSubtypeList(this, getContentResolver(),
                 mInputMethodProperties, mHaveHardKeyboard);
     }
@@ -79,8 +86,18 @@ public class InputMethodAndSubtypeEnabler extends SettingsPreferenceFragment {
 
         if (preference instanceof CheckBoxPreference) {
             final CheckBoxPreference chkPref = (CheckBoxPreference) preference;
+
+            for (String imiId: mSubtypeAutoSelectionCBMap.keySet()) {
+                if (mSubtypeAutoSelectionCBMap.get(imiId) == chkPref) {
+                    // We look for the first preference item in subtype enabler.
+                    // The first item is used for turning on/off subtype auto selection.
+                    // We are in the subtype enabler and trying selecting subtypes automatically.
+                    setSubtypeAutoSelectionEnabled(imiId, chkPref.isChecked());
+                    return super.onPreferenceTreeClick(preferenceScreen, preference);
+                }
+            }
+
             final String id = chkPref.getKey();
-            // TODO: Check subtype or not here
             if (chkPref.isChecked()) {
                 InputMethodInfo selImi = null;
                 final int N = mInputMethodProperties.size();
@@ -166,21 +183,28 @@ public class InputMethodAndSubtypeEnabler extends SettingsPreferenceFragment {
         for (int i = 0; i < N; ++i) {
             final InputMethodInfo imi = mInputMethodProperties.get(i);
             if (imi.getSubtypes().size() <= 1) continue;
-            String imiId = imi.getId();
-            // Add to this subtype the list when no IME is specified or when the IME of this
+            final String imiId = imi.getId();
+            // Add this subtype to the list when no IME is specified or when the IME of this
             // subtype is the specified IME.
             if (!TextUtils.isEmpty(mInputMethodId) && !mInputMethodId.equals(imiId)) {
                 continue;
             }
             PreferenceCategory keyboardSettingsCategory = new PreferenceCategory(getActivity());
             root.addPreference(keyboardSettingsCategory);
-
             PackageManager pm = getPackageManager();
             CharSequence label = imi.loadLabel(pm);
 
-            keyboardSettingsCategory.setTitle(getResources().getString(
-                    R.string.input_methods_and_subtype_enabler_title_format, label));
+            keyboardSettingsCategory.setTitle(label);
             keyboardSettingsCategory.setKey(imiId);
+            // TODO: Use toggle Preference if images are ready.
+            CheckBoxPreference autoCB = new CheckBoxPreference(getActivity());
+            autoCB.setTitle(R.string.use_system_language_to_select_input_method_subtypes);
+            mSubtypeAutoSelectionCBMap.put(imiId, autoCB);
+            keyboardSettingsCategory.addPreference(autoCB);
+
+            PreferenceCategory activeInputMethodsCategory = new PreferenceCategory(getActivity());
+            activeInputMethodsCategory.setTitle(R.string.active_input_method_subtypes);
+            root.addPreference(activeInputMethodsCategory);
 
             ArrayList<InputMethodSubtype> subtypes = imi.getSubtypes();
             ArrayList<Preference> subtypePreferences = new ArrayList<Preference>();
@@ -200,12 +224,92 @@ public class InputMethodAndSubtypeEnabler extends SettingsPreferenceFragment {
                     CheckBoxPreference chkbxPref = new CheckBoxPreference(getActivity());
                     chkbxPref.setKey(imiId + subtype.hashCode());
                     chkbxPref.setTitle(subtypeLabel);
-                    keyboardSettingsCategory.addPreference(chkbxPref);
+                    activeInputMethodsCategory.addPreference(chkbxPref);
                     subtypePreferences.add(chkbxPref);
                 }
-                mInputMethodPrefsMap.put(imiId, subtypePreferences);
+                mInputMethodAndSubtypePrefsMap.put(imiId, subtypePreferences);
             }
         }
         return root;
+    }
+
+    private boolean isNoSubtypesExplicitlySelected(String imiId) {
+        boolean allSubtypesOff = true;
+        final List<Preference> subtypePrefs = mInputMethodAndSubtypePrefsMap.get(imiId);
+        for (Preference subtypePref: subtypePrefs) {
+            if (subtypePref instanceof CheckBoxPreference
+                    && ((CheckBoxPreference)subtypePref).isChecked()) {
+                allSubtypesOff = false;
+                break;
+            }
+        }
+        return allSubtypesOff;
+    }
+
+    private void setSubtypeAutoSelectionEnabled(String imiId, boolean autoSelectionEnabled) {
+        mSubtypeAutoSelectionCBMap.get(imiId).setChecked(autoSelectionEnabled);
+        final List<Preference> subtypePrefs = mInputMethodAndSubtypePrefsMap.get(imiId);
+        for (Preference subtypePref: subtypePrefs) {
+            if (subtypePref instanceof CheckBoxPreference) {
+                // When autoSelectionEnabled is true, all subtype prefs need to be disabled with
+                // implicitly checked subtypes. In case of false, all subtype prefs need to be
+                // enabled.
+                subtypePref.setEnabled(!autoSelectionEnabled);
+                if (autoSelectionEnabled) {
+                    ((CheckBoxPreference)subtypePref).setChecked(false);
+                }
+            }
+        }
+        if (autoSelectionEnabled) {
+            InputMethodAndSubtypeUtil.saveInputMethodSubtypeList(this, getContentResolver(),
+                    mInputMethodProperties, mHaveHardKeyboard);
+            setCheckedImplicitlyEnabledSubtypes(imiId);
+        }
+    }
+
+    private void setCheckedImplicitlyEnabledSubtypes(String targetImiId) {
+        updateImplicitlyEnabledSubtypes(targetImiId, true);
+    }
+
+    private void clearImplicitlyEnabledSubtypes(String targetImiId) {
+        updateImplicitlyEnabledSubtypes(targetImiId, false);
+    }
+
+    private void updateImplicitlyEnabledSubtypes(String targetImiId, boolean check) {
+        // When targetImiId is null, apply to all subtypes of all IMEs
+        for (InputMethodInfo imi: mInputMethodProperties) {
+            String imiId = imi.getId();
+            if (targetImiId != null && !targetImiId.equals(imiId)) continue;
+            final CheckBoxPreference autoCB = mSubtypeAutoSelectionCBMap.get(imiId);
+            // No need to update implicitly enabled subtypes when the user has unchecked the
+            // "subtype auto selection".
+            if (autoCB == null || !autoCB.isChecked()) continue;
+            final List<Preference> subtypePrefs = mInputMethodAndSubtypePrefsMap.get(imiId);
+            final List<InputMethodSubtype> implicitlyEnabledSubtypes =
+                    mImm.getEnabledInputMethodSubtypeList(imi, true);
+            if (subtypePrefs == null || implicitlyEnabledSubtypes == null) continue;
+            for (Preference subtypePref: subtypePrefs) {
+                if (subtypePref instanceof CheckBoxPreference) {
+                    CheckBoxPreference cb = (CheckBoxPreference)subtypePref;
+                    cb.setChecked(false);
+                    if (check) {
+                        for (InputMethodSubtype subtype: implicitlyEnabledSubtypes) {
+                            String implicitlyEnabledSubtypePrefKey = imiId + subtype.hashCode();
+                            if (cb.getKey().equals(implicitlyEnabledSubtypePrefKey)) {
+                                cb.setChecked(true);
+                                break;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    private void updateAutoSelectionCB() {
+        for (String imiId: mInputMethodAndSubtypePrefsMap.keySet()) {
+            setSubtypeAutoSelectionEnabled(imiId, isNoSubtypesExplicitlySelected(imiId));
+        }
+        setCheckedImplicitlyEnabledSubtypes(null);
     }
 }

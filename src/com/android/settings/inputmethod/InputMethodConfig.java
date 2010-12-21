@@ -34,6 +34,7 @@ import android.provider.Settings;
 import android.text.TextUtils;
 import android.view.inputmethod.InputMethodInfo;
 import android.view.inputmethod.InputMethodManager;
+import android.view.inputmethod.InputMethodSubtype;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -49,7 +50,9 @@ public class InputMethodConfig extends SettingsPreferenceFragment {
     private boolean mHaveHardKeyboard;
     // Map of imi and its preferences
     final private HashMap<String, List<Preference>> mInputMethodPrefsMap =
-        new HashMap<String, List<Preference>>();
+            new HashMap<String, List<Preference>>();
+    final private HashMap<InputMethodInfo, Preference> mActiveInputMethodsPrefMap =
+            new HashMap<InputMethodInfo, Preference>();
     private List<InputMethodInfo> mInputMethodProperties;
 
 
@@ -71,6 +74,7 @@ public class InputMethodConfig extends SettingsPreferenceFragment {
         super.onResume();
         InputMethodAndSubtypeUtil.loadInputMethodSubtypeList(
                 this, getContentResolver(), mInputMethodProperties, mInputMethodPrefsMap);
+        updateActiveInputMethodsSummary();
     }
 
     @Override
@@ -205,6 +209,7 @@ public class InputMethodConfig extends SettingsPreferenceFragment {
             intent.putExtra(InputMethodAndSubtypeEnabler.EXTRA_INPUT_METHOD_ID, imiId);
             prefScreen.setIntent(intent);
             keyboardSettingsCategory.addPreference(prefScreen);
+            mActiveInputMethodsPrefMap.put(imi, prefScreen);
             mInputMethodPrefsMap.get(imiId).add(prefScreen);
         }
 
@@ -233,5 +238,26 @@ public class InputMethodConfig extends SettingsPreferenceFragment {
             addInputMethodPreference(root, mInputMethodProperties.get(i), N);
         }
         return root;
+    }
+
+    private void updateActiveInputMethodsSummary() {
+        final InputMethodManager imm =
+                (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+        final PackageManager pm = getPackageManager();
+        for (InputMethodInfo imi: mActiveInputMethodsPrefMap.keySet()) {
+            Preference pref = mActiveInputMethodsPrefMap.get(imi);
+            List<InputMethodSubtype> subtypes = imm.getEnabledInputMethodSubtypeList(imi, true);
+            StringBuilder summary = new StringBuilder();
+            boolean subtypeAdded = false;
+            for (InputMethodSubtype subtype: subtypes) {
+                if (subtypeAdded) {
+                    summary.append(", ");
+                }
+                summary.append(pm.getText(imi.getPackageName(), subtype.getNameResId(),
+                        imi.getServiceInfo().applicationInfo));
+                subtypeAdded = true;
+            }
+            pref.setSummary(summary.toString());
+        }
     }
 }
