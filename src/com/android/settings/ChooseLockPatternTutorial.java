@@ -16,7 +16,10 @@
 
 package com.android.settings;
 
+import java.util.ArrayList;
+
 import com.android.internal.widget.LockPatternUtils;
+import com.android.internal.widget.LockPatternView;
 
 import android.app.Fragment;
 import android.content.Intent;
@@ -45,6 +48,7 @@ public class ChooseLockPatternTutorial extends PreferenceActivity {
             implements View.OnClickListener {
         private View mNextButton;
         private View mSkipButton;
+        private LockPatternView mPatternView;
 
         @Override
         public void onCreate(Bundle savedInstanceState) {
@@ -68,6 +72,17 @@ public class ChooseLockPatternTutorial extends PreferenceActivity {
             mNextButton.setOnClickListener(this);
             mSkipButton = view.findViewById(R.id.skip_button);
             mSkipButton.setOnClickListener(this);
+
+            // Set up LockPatternView to be a non-interactive demo animation
+            mPatternView = (LockPatternView) view.findViewById(R.id.lockPattern);
+            ArrayList<LockPatternView.Cell> demoPattern = new ArrayList<LockPatternView.Cell>();
+            demoPattern.add(LockPatternView.Cell.of(0,0));
+            demoPattern.add(LockPatternView.Cell.of(0,1));
+            demoPattern.add(LockPatternView.Cell.of(1,1));
+            demoPattern.add(LockPatternView.Cell.of(2,1));
+            mPatternView.setPattern(LockPatternView.DisplayMode.Animate, demoPattern);
+            mPatternView.disableInput();
+
             return view;
         }
 
@@ -77,7 +92,7 @@ public class ChooseLockPatternTutorial extends PreferenceActivity {
                 getActivity().setResult(ChooseLockPattern.RESULT_FINISHED);
                 getActivity().finish();
             } else if (v == mNextButton) {
-                Intent intent = new Intent(getActivity(), ChooseLockPatternExample.class);
+                Intent intent = new Intent(getActivity(), ChooseLockPattern.class);
                 intent.addFlags(Intent.FLAG_ACTIVITY_FORWARD_RESULT);
                 startActivity(intent);
                 getActivity().finish();

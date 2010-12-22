@@ -720,6 +720,12 @@
     <!-- Label for ChoosePassword/PIN OK button -->
     <string name="lockpassword_cancel_label">Cancel</string>
 
+    <!-- Label for LockPatternTutorial Cancel button -->
+    <string name="lockpattern_tutorial_cancel_label">Cancel</string>
+
+    <!-- Label for LockPatternTutorial Continue button -->
+    <string name="lockpattern_tutorial_continue_label">Next</string>
+
     <!-- In the security screen, the header title for settings related to device admins -->
     <string name="device_admin_title">Device administration</string>
 
@@ -1875,12 +1881,8 @@
     <!-- ChooseLockPatternTutorial, tutorial screen title -->
     <string name="lock_title" product="default">Securing your phone</string>
     <!-- ChooseLockPatternTutorial, tutorial screen text -->
-    <string name="lock_intro_message" product="tablet"><font size="17">Protect your tablet from unauthorized use by creating a personal screen unlock pattern.
-        \n<font height="17">\n</font><b>1</b>\u00A0 On the next screen, watch while an example pattern is drawn.
-        \n<font height="17">\n</font><b>2</b>\u00A0 When ready, draw your own personal unlock pattern. Experiment with different patterns but connect at least four dots.
-        \n<font height="17">\n</font><b>3</b>\u00A0 Redraw your pattern to confirm.
-        \n<font height="17">\n</font><b>Ready to start? Touch \u201CNext\u201D</b>.
-        \n<font height="3">\n</font>To leave your tablet unprotected, touch \u201CCancel\u201D.</font>
+    <string name="lock_intro_message" product="tablet">Protect your tablet from unauthorized use by creating a personal screen unlock pattern. Use your finger to connect the dots in any order on the next screen.  You must connect at least four dots.
+        \n\nReady to start? Touch \u201CNext\u201D.
     </string>
     <!-- ChooseLockPatternTutorial, tutorial screen text -->
     <string name="lock_intro_message" product="default"><font size="17">Protect your phone from unauthorized use by creating a personal screen unlock pattern.
@@ -1889,14 +1891,6 @@
         \n<font height="17">\n</font><b>3</b>\u00A0 Redraw your pattern to confirm.
         \n<font height="17">\n</font><b>Ready to start? Touch \u201CNext\u201D</b>.
         \n<font height="3">\n</font>To leave your phone unprotected, touch \u201CCancel\u201D.</font>
-    </string>
-
-    <!-- ChooseLockPatternExample --> <skip />
-    <!-- ChooseLockPatternExample, screen title that shows an example pattern -->
-    <string name="lock_example_title">Example pattern</string>
-    <!-- ChooseLockPatternExample, screen hint text at bottom of screen. These are instructions and rules for drawing a good patttern -->
-    <string name="lock_example_message">Connect at least four dots.\n
-        \nTouch \u201CNext\u201D when you\u2019re ready to draw your own pattern.
     </string>
 
     <!-- Applications Settings --> <skip />
