@@ -45,15 +45,15 @@
     <string name="radioInfo_display_asu" msgid="1422248392727818082">"asu"</string>
     <string name="radioInfo_lac" msgid="8415219164758307156">"LAC"</string>
     <string name="radioInfo_cid" msgid="4362599198392643138">"ИД клијента"</string>
-    <!-- outdated translation 3364184561355611897 -->     <string name="sdcard_unmount" product="nosdcard" msgid="6325292633327972272">"Ослобађање SD картице"</string>
+    <string name="sdcard_unmount" product="nosdcard" msgid="6325292633327972272">"Искључи USB меморију"</string>
     <string name="sdcard_unmount" product="default" msgid="3364184561355611897">"Ослобађање SD картице"</string>
-    <!-- outdated translation 362497552060004057 -->     <string name="sdcard_format" product="nosdcard" msgid="6285310523155166716">"Форматирање SD картице"</string>
-    <!-- outdated translation 362497552060004057 -->     <string name="sdcard_format" product="default" msgid="6713185532039187532">"Форматирање SD картице"</string>
+    <string name="sdcard_format" product="nosdcard" msgid="6285310523155166716">"Брисање USB меморије"</string>
+    <string name="sdcard_format" product="default" msgid="6713185532039187532">"Избриши SD картицу"</string>
     <string name="small_font" msgid="2295331917424072635">"Мала"</string>
     <string name="medium_font" msgid="2068475425515133701">"Средња"</string>
     <string name="large_font" msgid="599055175160971446">"Велика"</string>
     <string name="font_size_save" msgid="3450855718056759095">"Потврди"</string>
-    <!-- outdated translation 5922637503871474866 -->     <string name="sdcard_setting" product="nosdcard" msgid="8281011784066476192">"SD картица"</string>
+    <string name="sdcard_setting" product="nosdcard" msgid="8281011784066476192">"USB меморија"</string>
     <string name="sdcard_setting" product="default" msgid="5922637503871474866">"SD картица"</string>
     <string name="battery_info_status_label" msgid="8109155295509700309">"Статус батерије:"</string>
     <string name="battery_info_power_label" msgid="7465140230991349382">"Електрична утичница:"</string>
@@ -87,8 +87,7 @@
     <string name="battery_info_health_dead" msgid="1725917445762829059">"Празна"</string>
     <string name="battery_info_health_over_voltage" msgid="2420269351664490121">"Преко напона"</string>
     <string name="battery_info_health_unspecified_failure" msgid="6347021103185471590">"Непозната грешка"</string>
-    <!-- no translation found for battery_info_health_cold (3835692786176707318) -->
-    <skip />
+    <string name="battery_info_health_cold" msgid="3835692786176707318">"Незанимљиво"</string>
     <string name="bluetooth" msgid="5549625000628014477">"Bluetooth"</string>
     <string name="bluetooth_visibility" msgid="2930835434091839916">"Видљив"</string>
     <string name="bluetooth_is_discoverable" msgid="1205694503775884903">"Видљив на <xliff:g id="DISCOVERABLE_TIME_PERIOD">%1$s</xliff:g> секунде(и)…"</string>
@@ -116,12 +115,14 @@
     <skip />
     <string name="device_picker" msgid="8721012448931226323">"Bluetooth бирач уређаја"</string>
     <string name="bluetooth_permission_request" msgid="1523129741266262748">"Захтев за Bluetooth дозволу"</string>
-    <string name="bluetooth_ask_enablement" msgid="8211158472876087588">"Апликација захтева дозволу да укључи Bluetooth. Желите ли да то урадите?"</string>
-    <string name="bluetooth_ask_discovery" product="tablet" msgid="5950965604673262829">"Апликација на таблету захтева дозволу да учини таблет видљивим за друге Bluetooth уређаје на <xliff:g id="TIMEOUT">%1$d</xliff:g> секунде(и). Желите ли да то дозволите?"</string>
+    <string name="bluetooth_ask_enablement" msgid="8211158472876087588">"Апликација захтева дозволу да укључи Bluetooth. Желите ли то да учините?"</string>
+    <string name="bluetooth_ask_discovery" product="tablet" msgid="5950965604673262829">"Апликација са таблета захтева дозволу да таблет учини видљивим другим Bluetooth уређајима на <xliff:g id="TIMEOUT">%1$d</xliff:g> секунди. Желите ли да то учините?"</string>
     <string name="bluetooth_ask_discovery" product="default" msgid="669870705606180872">"Апликација на телефону захтева дозволу да учини ваш телефон видљивим за друге Bluetooth уређаје на <xliff:g id="TIMEOUT">%1$d</xliff:g> секунде(и). Желите ли ово да урадите?"</string>
-    <string name="bluetooth_ask_enablement_and_discovery" product="tablet" msgid="5716077575971497298">"Апликација на таблету захтева дозволу да укључи Bluetooth и да учини таблет видљивим за друге уређаје на <xliff:g id="TIMEOUT">%1$d</xliff:g> секунде(и). Желите ли да то дозволите?"</string>
+    <string name="bluetooth_ask_enablement_and_discovery" product="tablet" msgid="5716077575971497298">"Апликација са таблета захтева дозволу да укључи Bluetooth и таблет учини видљивим другим уређајима на <xliff:g id="TIMEOUT">%1$d</xliff:g> секунди. Желите ли да то учините?"</string>
     <string name="bluetooth_ask_enablement_and_discovery" product="default" msgid="7220210326619399542">"Апликација на телефону захтева дозволу да укључи Bluetooth и да учини ваш телефон видљивим за друге уређаје на <xliff:g id="TIMEOUT">%1$d</xliff:g> секунде(и). Желите ли ово да урадите?"</string>
     <string name="bluetooth_turning_on" msgid="3107102168379705771">"Укључивање Bluetooth-а…"</string>
+    <!-- no translation found for bluetooth_auto_connect (8013003320667198460) -->
+    <skip />
     <string name="date_and_time" msgid="4114084177056654663">"Подешавања датума и времена"</string>
     <string name="date_time_12_hour_sample" msgid="3259617262618020574">"13:00"</string>
     <string name="date_time_24_hour_sample" msgid="8916857570746212357">"13:00"</string>
@@ -136,22 +137,18 @@
     <string name="intent_sender_startactivity_text" msgid="5080516029580421895">"Покрени <xliff:g id="ACTIVITY">activity</xliff:g>"</string>
     <string name="intent_sender_resource_label" msgid="6963659726895482829">"<xliff:g id="RESOURCE">Resource</xliff:g>:"</string>
     <string name="intent_sender_account_label" msgid="465210404475603404">"Налог:"</string>
-    <!-- no translation found for proxy_settings_title (6262282922722097473) -->
-    <skip />
-    <!-- no translation found for proxy_settings_summary (7898928000758321486) -->
-    <skip />
+    <!-- outdated translation 6262282922722097473 -->     <string name="proxy_settings_title" msgid="5912878565897294401">"Прокси подешавања"</string>
+    <string name="proxy_settings_summary" msgid="7898928000758321486">"Подесите глобални HTTP прокси и листе изузимања"</string>
     <string name="proxy_clear_text" msgid="5555400754952012657">"Обриши"</string>
     <string name="proxy_port_label" msgid="2623639656638472491">"Порт"</string>
-    <!-- no translation found for proxy_exclusionlist_label (204409815790850313) -->
-    <skip />
+    <string name="proxy_exclusionlist_label" msgid="204409815790850313">"Нема проксија за"</string>
     <string name="proxy_defaultView_text" msgid="6387985519141433291">"Врати на подразумевано"</string>
-    <!-- outdated translation 477348175123635416 -->     <string name="proxy_action_text" msgid="2957063145357903951">"Сачувај"</string>
+    <string name="proxy_action_text" msgid="2957063145357903951">"Done"</string>
     <string name="proxy_hostname_label" msgid="7531298584350977540">"Назив хоста"</string>
     <string name="proxy_error" msgid="8926675299638611451">"Пажња"</string>
     <string name="proxy_error_dismiss" msgid="4993171795485460060">"Потврди"</string>
     <string name="proxy_error_invalid_host" msgid="9120776460063182119">"Унели сте неважећи назив хоста."</string>
-    <!-- no translation found for proxy_error_invalid_exclusion_list (4753810662233875893) -->
-    <skip />
+    <string name="proxy_error_invalid_exclusion_list" msgid="4753810662233875893">"Листа изузимања коју сте унели није исправно обликована. Унесите листу раздвојену зарезима која садржи изузете домене."</string>
     <string name="proxy_error_empty_port" msgid="3525734169948795417">"Потребно је да попуните поље порта."</string>
     <string name="proxy_error_empty_host_set_port" msgid="2451694104858226781">"Поље за порт мора да буде празно ако је поље за назив хоста празно."</string>
     <string name="proxy_error_invalid_port" msgid="1816315605424943626">"Унели сте неважећи порт."</string>
@@ -194,44 +191,42 @@
     <string name="sdcard_changes_instructions" msgid="1364712901180556244">"Промене ступају на снагу када USB кабл буде поново повезан"</string>
     <string name="sdcard_settings_screen_mass_storage_text" msgid="3741220147296482474">"Омогући USB масовно складиштење"</string>
     <string name="sdcard_settings_total_bytes_label" msgid="9184160745785062144">"Укупно бајтова:"</string>
-    <!-- outdated translation 6666688653496819947 -->     <string name="sdcard_settings_not_present_status" product="nosdcard" msgid="2902787003418172125">"Нема SD картице"</string>
+    <string name="sdcard_settings_not_present_status" product="nosdcard" msgid="2902787003418172125">"USB меморија није прикључена"</string>
     <string name="sdcard_settings_not_present_status" product="default" msgid="6666688653496819947">"Нема SD картице"</string>
     <string name="sdcard_settings_available_bytes_label" msgid="763232429899373001">"Доступни бајтови:"</string>
-    <!-- outdated translation 4786433969313661655 -->     <string name="sdcard_settings_mass_storage_status" product="nosdcard" msgid="2736378870889777857">"SD картица се користи као уређај за масовно складиштење"</string>
+    <string name="sdcard_settings_mass_storage_status" product="nosdcard" msgid="2736378870889777857">"USB меморија се користи као масовна меморија"</string>
     <string name="sdcard_settings_mass_storage_status" product="default" msgid="4786433969313661655">"SD картица се користи као уређај за масовно складиштење"</string>
-    <!-- outdated translation 3812022095683863087 -->     <string name="sdcard_settings_unmounted_status" product="nosdcard" msgid="7503300818792750913">"Сада можете безбедно да уклоните SD картицу"</string>
+    <string name="sdcard_settings_unmounted_status" product="nosdcard" msgid="7503300818792750913">"САда је безбедно уклонити USB меморију"</string>
     <string name="sdcard_settings_unmounted_status" product="default" msgid="3812022095683863087">"Сада можете безбедно да уклоните SD картицу"</string>
-    <!-- outdated translation 5145797653495907970 -->     <string name="sdcard_settings_bad_removal_status" product="nosdcard" msgid="7761390725880773697">"SD картица је уклоњена док је и даље била у употреби!"</string>
+    <string name="sdcard_settings_bad_removal_status" product="nosdcard" msgid="7761390725880773697">"USB меморија је уклоњена током коришћења!"</string>
     <string name="sdcard_settings_bad_removal_status" product="default" msgid="5145797653495907970">"SD картица је уклоњена док је и даље била у употреби!"</string>
     <string name="sdcard_settings_used_bytes_label" msgid="8820289486001170836">"Коришћени бајтови:"</string>
-    <!-- outdated translation 2763464949274455656 -->     <string name="sdcard_settings_scanning_status" product="nosdcard" msgid="7503429447676219564">"Скенирање SD картица за медије…"</string>
+    <string name="sdcard_settings_scanning_status" product="nosdcard" msgid="7503429447676219564">"Тражење медија у USB меморији…"</string>
     <string name="sdcard_settings_scanning_status" product="default" msgid="2763464949274455656">"Скенирање SD картица за медије…"</string>
-    <!-- outdated translation 5706115860484118911 -->     <string name="sdcard_settings_read_only_status" product="nosdcard" msgid="3771783090621312312">"SD картица је постављена само за читање"</string>
+    <string name="sdcard_settings_read_only_status" product="nosdcard" msgid="3771783090621312312">"USB меморија је само за читање"</string>
     <string name="sdcard_settings_read_only_status" product="default" msgid="5706115860484118911">"SD картица је постављена само за читање"</string>
-    <!-- no translation found for skip_label (47510779345218297) -->
-    <skip />
+    <string name="skip_label" msgid="47510779345218297">"Прес."</string>
     <string name="next_label" msgid="4693520878012668114">"Следеће"</string>
-    <!-- outdated translation 4034157617842965844 -->     <string name="language_picker_title" msgid="5349877711342869319">"Локалитет"</string>
+    <string name="language_picker_title" msgid="5349877711342869319">"Језик"</string>
     <string name="activity_picker_label" msgid="4910700713930693329">"Избор активности"</string>
     <string name="device_info_label" msgid="6551553813651711205">"Информације о уређају"</string>
     <string name="battery_info_label" msgid="4132685016148679403">"Информације о батерији"</string>
     <string name="display_label" msgid="7403874003169865762">"Приказ"</string>
     <string name="phone_info_label" product="tablet" msgid="7820855350955963628">"Информације о таблету"</string>
     <string name="phone_info_label" product="default" msgid="2127552523124277664">"Информације о телефону"</string>
-    <!-- outdated translation 5743100901106177102 -->     <string name="sd_card_settings_label" product="nosdcard" msgid="8101475181301178428">"SD картица"</string>
+    <string name="sd_card_settings_label" product="nosdcard" msgid="8101475181301178428">"USB меморија"</string>
     <string name="sd_card_settings_label" product="default" msgid="5743100901106177102">"SD картица"</string>
     <string name="proxy_settings_label" msgid="3271174136184391743">"Подешавања за прокси"</string>
     <string name="cancel" msgid="6859253417269739139">"Откажи"</string>
     <string name="settings_label" msgid="1626402585530130914">"Подешавања"</string>
-    <!-- no translation found for settings_label_launcher (8344735489639482340) -->
-    <skip />
-    <!-- outdated translation 3672145147925639262 -->     <string name="settings_shortcut" msgid="8597387747077828217">"Подешавања"</string>
+    <string name="settings_label_launcher" msgid="8344735489639482340">"Подешавања"</string>
+    <string name="settings_shortcut" msgid="8597387747077828217">"Изаберите пречицу подешавања"</string>
     <string name="airplane_mode" msgid="8837269988154128601">"Режим рада у авиону"</string>
     <string name="airplane_mode_summary" msgid="3154817401368780988">"Онемогућавање свих бежичних веза"</string>
     <string name="airplane_mode_turning_on" msgid="8871739222526957255">"Онемогућавање бежичних веза..."</string>
     <string name="airplane_mode_turning_off" msgid="3393168549611505996">"Омогућавање бежичних веза..."</string>
     <string name="radio_controls_title" msgid="5868688473587168882">"Бежично и мреже"</string>
-    <string name="wireless_networks_settings_title" msgid="149274247949769551">"Подешавања бежичне мреже"</string>
+    <!-- outdated translation 149274247949769551 -->     <string name="wireless_networks_settings_title" msgid="3643009077742794212">"Подешавања бежичне мреже"</string>
     <string name="radio_controls_summary" msgid="2998818677094465517">"Управљање Wi-Fi мрежом, Bluetooth-ом, режимом рада у авиону, мобилним мрежама и VPN-ом"</string>
     <string name="roaming" msgid="3596055926335478572">"Пренос података у ромингу"</string>
     <string name="roaming_enable" msgid="3737380951525303961">"Повезивање са услугом за податке током роминга"</string>
@@ -244,15 +239,12 @@
     <string name="sum_carrier_select" msgid="6648929373316748020">"Избор мрежног оператера"</string>
     <string name="date_and_time_settings_title" msgid="3350640463596716780">"Датум и време"</string>
     <string name="date_and_time_settings_summary" msgid="2435705040205950381">"Подешавање датума, времена, временске зоне и формата"</string>
-    <!-- outdated translation 3086083265745944725 -->     <string name="date_time_auto" msgid="7076906458515908345">"Аутоматски"</string>
-    <!-- outdated translation 9034585614665299846 -->     <string name="date_time_auto_summaryOn" msgid="4609619490075140381">"Коришћење вредности које је мрежа обезбедила"</string>
-    <!-- outdated translation 3900356736797266448 -->     <string name="date_time_auto_summaryOff" msgid="8698762649061882791">"Коришћење вредности које је мрежа обезбедила"</string>
-    <!-- no translation found for zone_auto (334783869352026648) -->
-    <skip />
-    <!-- no translation found for zone_auto_summaryOn (6142830927278458314) -->
-    <skip />
-    <!-- no translation found for zone_auto_summaryOff (2597745783162041390) -->
-    <skip />
+    <string name="date_time_auto" msgid="7076906458515908345">"Аутоматски датум и време"</string>
+    <string name="date_time_auto_summaryOn" msgid="4609619490075140381">"Користи време мреже"</string>
+    <string name="date_time_auto_summaryOff" msgid="8698762649061882791">"Користи време мреже"</string>
+    <string name="zone_auto" msgid="334783869352026648">"Аутоматска временска зона"</string>
+    <string name="zone_auto_summaryOn" msgid="6142830927278458314">"Користи временску зону мреже"</string>
+    <string name="zone_auto_summaryOff" msgid="2597745783162041390">"Користи временску зону мреже"</string>
     <string name="date_time_24hour" msgid="1193032284921000063">"Користи 24-часовни формат"</string>
     <string name="date_time_set_time" msgid="5716856602742530696">"Подешавање времена"</string>
     <string name="date_time_set_timezone" msgid="5045627174274377814">"Избор временске зоне"</string>
@@ -260,15 +252,11 @@
     <string name="date_time_date_format" msgid="436706100255870967">"Избор формата датума"</string>
     <string name="zone_list_menu_sort_alphabetically" msgid="5683377702671088588">"Сортирај према абецеди"</string>
     <string name="zone_list_menu_sort_by_timezone" msgid="2720190443744884114">"Сортирај према временској зони"</string>
-    <!-- no translation found for lock_after_timeout (9100576335787336455) -->
-    <skip />
-    <!-- no translation found for lock_after_timeout_summary (5751027735105958453) -->
-    <skip />
-    <!-- no translation found for show_owner_info_on_lockscreen_label (5074906168357568434) -->
-    <skip />
-    <!-- no translation found for owner_info_settings_title (2723190010708381889) -->
-    <skip />
-    <string name="owner_info_settings_summary" msgid="8656024590287117256">"Омог./онем. инф. о власн. на екр. закљ."</string>
+    <string name="lock_after_timeout" msgid="9100576335787336455">"Закључај уређај после времена чекања"</string>
+    <string name="lock_after_timeout_summary" msgid="5751027735105958453">"Подесите одлагање пре него што се уређај аутоматски закључа"</string>
+    <string name="show_owner_info_on_lockscreen_label" msgid="5074906168357568434">"Прикажи информације о власнику на закључ. екрану"</string>
+    <string name="owner_info_settings_title" msgid="2723190010708381889">"Власник информација"</string>
+    <string name="owner_info_settings_summary" msgid="8656024590287117256">"Омог/онем. податке о власнику на екр. закљ."</string>
     <string name="owner_info_settings_edit_text_hint" msgid="2382525043173672857">"Унесите текст за приказ на екрану за закључавање"</string>
     <string name="security_settings_title" msgid="5168491784222013179">"Локација и безбедност"</string>
     <string name="location_security_settings_title" msgid="4624434296446625554">"Подешавања локације и безбедности"</string>
@@ -292,7 +280,7 @@
     <string name="unlock_set_unlock_pin_summary" msgid="4131169672844263316">"Уношење нумеричког PIN кода за откључавање екрана"</string>
     <string name="unlock_set_unlock_password_title" msgid="8775603825675090937">"Лозинка"</string>
     <string name="unlock_set_unlock_password_summary" msgid="4623254789833899286">"Уношење лозинке за откључавање екрана"</string>
-    <string name="unlock_set_unlock_disabled_summary" msgid="8816944391772300580">"Онемогућио даљински администратор уређаја"</string>
+    <string name="unlock_set_unlock_disabled_summary" msgid="8816944391772300580">"Онемогућио администратор удаљеног уређаја"</string>
     <string name="unlock_disable_lock_title" msgid="1427036227416979120">"Искључивање закључавања екрана"</string>
     <string name="unlock_disable_lock_pattern_summary" msgid="6801602880568869201">"Уклањање шаблона за откључавање"</string>
     <string name="unlock_disable_lock_pin_summary" msgid="8856842745366993387">"Уклањање PIN кода за откључавање"</string>
@@ -302,45 +290,60 @@
     <string name="unlock_change_lock_password_title" msgid="5606298470358768865">"Промена лозинке за откључавање"</string>
     <string name="lockpassword_password_too_short" msgid="7328975683669256660">"Минимални број знакова који лозинка мора да садржи је %d"</string>
     <string name="lockpassword_pin_too_short" msgid="2252847623267704683">"Минимални број знакова у PIN коду је %d"</string>
-    <!-- outdated translation 6506047902828925216 -->     <string name="lockpassword_press_continue" msgid="122706614386757182">"Притисните „Настави“ када буде завршено"</string>
+    <string name="lockpassword_press_continue" msgid="122706614386757182">"Додирните „Настави“ када завршите"</string>
     <string name="lockpassword_continue_label" msgid="4602203784934526940">"Настави"</string>
     <string name="lockpassword_password_too_long" msgid="7354418473281442589">"Максимални број цифара у PIN коду је %d"</string>
     <string name="lockpassword_pin_too_long" msgid="6290317580664119373">"Максимални број цифара у PIN коду је %d"</string>
     <string name="lockpassword_pin_contains_non_digits" msgid="3379277100136600632">"PIN мора да садржи само бројеве од 0 до 9"</string>
-    <!-- no translation found for lockpassword_pin_recently_used (2729073062730842496) -->
-    <skip />
+    <string name="lockpassword_pin_recently_used" msgid="2729073062730842496">"Администратор уређаја не дозвољава употребу недавно коришћеног PIN-а"</string>
     <string name="lockpassword_illegal_character" msgid="6204396794254688549">"Лозинка садржи неважећи знак"</string>
     <string name="lockpassword_password_requires_alpha" msgid="5668524505560400449">"Лозинка мора да садржи најмање једно слово"</string>
     <string name="lockpassword_password_requires_digit" msgid="4840579514154254907">"Лозинка мора да садржи најмање једну цифру"</string>
     <string name="lockpassword_password_requires_symbol" msgid="4140602725865312078">"Лозинка мора да садржи најмање један симбол"</string>
-    <!-- no translation found for lockpassword_password_requires_letters:one (1462968118065694590) -->
-    <!-- no translation found for lockpassword_password_requires_letters:other (7278096339907683541) -->
-    <!-- no translation found for lockpassword_password_requires_lowercase:one (2048653993044269649) -->
-    <!-- no translation found for lockpassword_password_requires_lowercase:other (588499075580432178) -->
-    <!-- no translation found for lockpassword_password_requires_uppercase:one (7677454174080582601) -->
-    <!-- no translation found for lockpassword_password_requires_uppercase:other (2183090598541826806) -->
-    <!-- no translation found for lockpassword_password_requires_numeric:one (8585088032818933985) -->
-    <!-- no translation found for lockpassword_password_requires_numeric:other (995673409754935278) -->
-    <!-- no translation found for lockpassword_password_requires_symbols:one (3930886641317826293) -->
-    <!-- no translation found for lockpassword_password_requires_symbols:other (3047460862484105274) -->
-    <!-- no translation found for lockpassword_password_requires_nonletter:one (1716355580615489062) -->
-    <!-- no translation found for lockpassword_password_requires_nonletter:other (5574191164708145973) -->
-    <!-- no translation found for lockpassword_password_recently_used (2739642871806935825) -->
-    <skip />
+  <plurals name="lockpassword_password_requires_letters">
+    <item quantity="one" msgid="1462968118065694590">"Лозинка мора да садржи најмање 1 слово"</item>
+    <item quantity="other" msgid="7278096339907683541">"Број слова које лозинка мора да садржи: најмање %d"</item>
+  </plurals>
+  <plurals name="lockpassword_password_requires_lowercase">
+    <item quantity="one" msgid="2048653993044269649">"Лозинка мора да садржи најмање 1 мало слово"</item>
+    <item quantity="other" msgid="588499075580432178">"Број малих слова које лозинка мора да садржи: најмање %d"</item>
+  </plurals>
+  <plurals name="lockpassword_password_requires_uppercase">
+    <item quantity="one" msgid="7677454174080582601">"Лозинка мора да садржи најмање 1 велико слово"</item>
+    <item quantity="other" msgid="2183090598541826806">"Број великих слова које лозинка мора да садржи: најмање %d"</item>
+  </plurals>
+  <plurals name="lockpassword_password_requires_numeric">
+    <item quantity="one" msgid="8585088032818933985">"Лозинка мора да садржи најмање 1 цифру"</item>
+    <item quantity="other" msgid="995673409754935278">"Број цифара које лозинка мора да садржи: најмање %d"</item>
+  </plurals>
+  <plurals name="lockpassword_password_requires_symbols">
+    <item quantity="one" msgid="3930886641317826293">"Лозинка мора да садржи најмање 1 специјални симбол"</item>
+    <item quantity="other" msgid="3047460862484105274">"Број специјалних симбола које лозинка мора да садржи: најмање %d"</item>
+  </plurals>
+  <plurals name="lockpassword_password_requires_nonletter">
+    <item quantity="one" msgid="1716355580615489062">"Лозинка мора да садржи најмање 1 знак који није слово"</item>
+    <item quantity="other" msgid="5574191164708145973">"Број знакова који нису слова које лозинка мора да садржи: најмање %d"</item>
+  </plurals>
+    <string name="lockpassword_password_recently_used" msgid="2739642871806935825">"Администратор уређаја не дозвољава употребу недавно коришћене лозинке"</string>
     <string name="lockpassword_ok_label" msgid="313822574062553672">"Потврди"</string>
     <string name="lockpassword_cancel_label" msgid="8818529276331121899">"Откажи"</string>
+    <!-- no translation found for lockpattern_tutorial_cancel_label (6431583477570493261) -->
+    <skip />
+    <!-- no translation found for lockpattern_tutorial_continue_label (3559793618653400434) -->
+    <skip />
     <string name="device_admin_title" msgid="3562216873644263804">"Администрација уређаја"</string>
-    <!-- outdated translation 3864120111085199551 -->     <string name="manage_device_admin" msgid="5059296715271077278">"Избор администратора уређаја"</string>
-    <!-- outdated translation 915390201809231575 -->     <string name="manage_device_admin_summary" msgid="7672709110988761075">"Додавање или уклањање администратора уређаја"</string>
+    <string name="manage_device_admin" msgid="5059296715271077278">"Администратори уређаја"</string>
+    <string name="manage_device_admin_summary" msgid="7672709110988761075">"Преглед или деактивирање администратора уређаја"</string>
     <string name="bluetooth_quick_toggle_title" msgid="1037056952714061893">"Bluetooth"</string>
     <string name="bluetooth_quick_toggle_summary" msgid="5293641680139873341">"Укључи Bluetooth"</string>
     <string name="bluetooth_settings" msgid="2725796451253089609">"Подешавања за Bluetooth"</string>
     <string name="bluetooth_settings_title" msgid="2824020086246268296">"Подешавања за Bluetooth"</string>
     <string name="bluetooth_settings_summary" msgid="2091062709530570462">"Управљање везама, подешавање назива и видљивости уређаја"</string>
     <string name="bluetooth_pairing_request" msgid="6385750334766370310">"Захтев за Bluetooth упаривање"</string>
-    <string name="bluetooth_device_info" msgid="6644515376523965073">"Информације о Bluetooth уређају"</string>
-    <string name="bluetooth_enter_pin_msg" msgid="856962526754150334">\n"Унесите PIN да бисте упарили са уређајем „<xliff:g id="DEVICE_NAME">%1$s</xliff:g>“. (Покушајте са 0000 или 1234.)"</string>
-    <string name="bluetooth_enter_passkey_msg" msgid="8121515818772179228">\n"Унесите приступни кôд да бисте се упарили са уређајем „<xliff:g id="DEVICE_NAME">%1$s</xliff:g>“."</string>
+    <!-- no translation found for bluetooth_enter_pin_msg (1499285355129256289) -->
+    <skip />
+    <!-- no translation found for bluetooth_enter_passkey_msg (8301499416158195044) -->
+    <skip />
     <string name="bluetooth_confirm_passkey_msg" msgid="1205362283945104263">"Да бисте упарили са уређајем „<xliff:g id="DEVICE_NAME">%1$s</xliff:g>“, потврдите да се приказује приступни кôд: <xliff:g id="PASSKEY">%2$s</xliff:g>."</string>
     <string name="bluetooth_incoming_pairing_msg" msgid="1076613564387784476">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g>"\n" жели да се упари."</string>
     <string name="bluetooth_display_passkey_msg" msgid="3048496029389441579">"Унесите <xliff:g id="PASSKEY">%2$s</xliff:g> на „<xliff:g id="DEVICE_NAME">%1$s</xliff:g>“ да бисте упарили."</string>
@@ -354,14 +357,10 @@
     <string name="bluetooth_pairing_rejected_error_message" msgid="1648157108520832454">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> је одбио/ла упаривање"</string>
     <string name="bluetooth_connecting_error_message" msgid="1779660510084746802">"Дошло је до проблема приликом повезивања са уређајем <xliff:g id="DEVICE_NAME">%1$s</xliff:g>."</string>
     <string name="bluetooth_preference_scan_title" msgid="2277464653118896016">"Скенирање за уређаје"</string>
-    <!-- no translation found for bluetooth_preference_find_nearby_title (5087410003465463318) -->
-    <skip />
-    <!-- no translation found for bluetooth_preference_device_settings (907776049862799122) -->
-    <skip />
-    <!-- no translation found for bluetooth_preference_paired_devices (1970524193086791964) -->
-    <skip />
-    <!-- no translation found for bluetooth_preference_found_devices (3133019331974936204) -->
-    <skip />
+    <string name="bluetooth_preference_find_nearby_title" msgid="5087410003465463318">"Проналажење оближњих уређаја"</string>
+    <string name="bluetooth_preference_device_settings" msgid="907776049862799122">"Подешавања уређаја"</string>
+    <string name="bluetooth_preference_paired_devices" msgid="1970524193086791964">"Упарени уређаји"</string>
+    <string name="bluetooth_preference_found_devices" msgid="3133019331974936204">"Пронађени уређаји"</string>
     <string name="bluetooth_device_context_connect" msgid="3997659895003244941">"Повежи"</string>
     <string name="bluetooth_device_context_disconnect" msgid="8220072022970148683">"Прекини везу"</string>
     <string name="bluetooth_device_context_pair_connect" msgid="7611522504813927727">"Упари и повежи"</string>
@@ -372,61 +371,40 @@
     <string name="bluetooth_profile_a2dp" msgid="3259633293424539529">"Медији"</string>
     <!-- outdated translation 2252738313413646294 -->     <string name="bluetooth_profile_headset" msgid="81844079120986198">"Таблет"</string>
     <string name="bluetooth_profile_opp" msgid="3799470046565284440">"Пренеси"</string>
-    <!-- no translation found for bluetooth_profile_hid (3000858580917633478) -->
-    <skip />
-    <!-- no translation found for bluetooth_profile_pan (4225813400648547154) -->
-    <skip />
-    <string name="bluetooth_summary_connected_to_a2dp" msgid="510833839847758664">"Повезано са звуком медија"</string>
-    <string name="bluetooth_summary_connected_to_headset" product="tablet" msgid="598335151406893070">"Повезан са звуком таблета"</string>
-    <string name="bluetooth_summary_connected_to_headset" product="default" msgid="4876496372728623918">"Повезано са звуком телефона"</string>
-    <string name="bluetooth_summary_connected_to_a2dp_headset" msgid="3045032710457800891">"Повезано са звуком телефона и медија"</string>
-    <!-- no translation found for bluetooth_summary_connected_to_hid (8147499644396475561) -->
-    <skip />
-    <!-- no translation found for bluetooth_summary_connected_to_pan (3157622705092537266) -->
-    <skip />
-    <!-- no translation found for bluetooth_disconnect_a2dp_profile (3524648279150937177) -->
-    <skip />
+    <string name="bluetooth_profile_hid" msgid="3000858580917633478">"Улазни уређај"</string>
+    <string name="bluetooth_profile_pan" msgid="4225813400648547154">"Повезивање са Интернетом"</string>
+    <string name="bluetooth_disconnect_a2dp_profile" msgid="3524648279150937177">"Уређај <xliff:g id="DEVICE_NAME">%1$s</xliff:g> ће бити искључен са звука медија."</string>
     <!-- no translation found for bluetooth_disconnect_headset_profile (8635908811168780720) -->
     <skip />
-    <!-- no translation found for bluetooth_disconnect_hid_profile (3282295189719352075) -->
-    <skip />
-    <!-- no translation found for bluetooth_disconnect_pan_profile (877883150720888525) -->
-    <skip />
+    <string name="bluetooth_disconnect_hid_profile" msgid="3282295189719352075">"Веза између уређаја <xliff:g id="DEVICE_NAME">%1$s</xliff:g> и улазног уређаја ће бити прекинута."</string>
+    <string name="bluetooth_disconnect_pan_profile" msgid="877883150720888525">"Интернет веза уређаја <xliff:g id="DEVICE_NAME">%1$s</xliff:g> ће бити прекинута."</string>
     <string name="bluetooth_device_advanced_title" msgid="528816860793581131">"Опције за <xliff:g id="DEVICE_NAME">%1$s</xliff:g>"</string>
-    <!-- no translation found for bluetooth_device_advanced_device_actions_title (3793430949811946844) -->
-    <skip />
+    <string name="bluetooth_device_advanced_device_actions_title" msgid="3793430949811946844">"Радње уређаја"</string>
     <string name="bluetooth_device_advanced_online_mode_title" msgid="3689050071425683114">"Повежи"</string>
     <string name="bluetooth_device_advanced_online_mode_summary" msgid="1204424107263248336">"Повезивање са Bluetooth уређајем"</string>
     <string name="bluetooth_device_advanced_profile_header_title" msgid="3764437426089639639">"Профили"</string>
-    <!-- no translation found for bluetooth_device_advanced_rename_device (350508394033808532) -->
-    <skip />
-    <!-- no translation found for bluetooth_device_advanced_enable_opp_title (8222550640371627365) -->
-    <skip />
+    <string name="bluetooth_device_advanced_rename_device" msgid="350508394033808532">"Преименовање уређаја"</string>
+    <string name="bluetooth_device_advanced_enable_opp_title" msgid="8222550640371627365">"Дозв. све долаз. преносе дат."</string>
     <string name="bluetooth_a2dp_profile_summary_connected" msgid="963376081347721598">"Повезано са звуком медија"</string>
     <string name="bluetooth_headset_profile_summary_connected" msgid="7661070206715520671">"Повезано са звуком телефона"</string>
     <string name="bluetooth_opp_profile_summary_connected" msgid="2611913495968309066">"Повезано са сервером за пренос датотека"</string>
     <string name="bluetooth_opp_profile_summary_not_connected" msgid="1267091356089086285">"Није повезано са сервером за пренос датотека"</string>
-    <!-- no translation found for bluetooth_hid_profile_summary_connected (3381760054215168689) -->
-    <skip />
-    <!-- no translation found for bluetooth_pan_profile_summary_connected (7456487225516323485) -->
-    <skip />
+    <string name="bluetooth_hid_profile_summary_connected" msgid="3381760054215168689">"Повезан са улазним уређајем"</string>
+    <string name="bluetooth_pan_profile_summary_connected" msgid="7456487225516323485">"Повезано са Интернетом"</string>
     <string name="bluetooth_a2dp_profile_summary_use_for" msgid="4630849022250168427">"Коришћење за звук медија"</string>
     <string name="bluetooth_headset_profile_summary_use_for" msgid="8705753622443862627">"Коришћење за аудио телефона"</string>
     <string name="bluetooth_opp_profile_summary_use_for" msgid="1255674547144769756">"Коришћење за пренос датотека"</string>
-    <!-- no translation found for bluetooth_hid_profile_summary_use_for (232727040453645139) -->
+    <string name="bluetooth_hid_profile_summary_use_for" msgid="232727040453645139">"Користи за улаз"</string>
+    <!-- no translation found for bluetooth_pan_profile_summary_use_for (5664884523822068653) -->
     <skip />
     <string name="bluetooth_dock_settings" msgid="3218335822716052885">"Подешавања базне станице"</string>
     <string name="bluetooth_dock_settings_title" msgid="5543069893044375188">"Коришћење постоља за звук"</string>
     <string name="bluetooth_dock_settings_headset" msgid="1001821426078644650">"Као звучник телефона"</string>
     <string name="bluetooth_dock_settings_a2dp" msgid="8791004998846630574">"За музику и медије"</string>
     <string name="bluetooth_dock_settings_remember" msgid="5551459057010609115">"Запамти подешавања"</string>
-    <!-- no translation found for nfc_quick_toggle_title (6769159366307299004) -->
-    <skip />
-    <!-- no translation found for nfc_quick_toggle_summary (1988408027741447231) -->
-    <skip />
-    <!-- no translation found for nfc_toggle_error (2233172102497535522) -->
-    <!-- no translation found for nfc_toggle_error (8998642457947607263) -->
-    <skip />
+    <string name="nfc_quick_toggle_title" msgid="6769159366307299004">"NFC"</string>
+    <string name="nfc_quick_toggle_summary" msgid="1988408027741447231">"Користите NFC технологију за читање и размену ознака"</string>
+    <string name="nfc_toggle_error" msgid="2233172102497535522">"Дошло је до грешке."</string>
     <string name="wifi_quick_toggle_title" msgid="874495178395350104">"Wi-Fi"</string>
     <string name="wifi_quick_toggle_summary" msgid="1047950931623694366">"Укључивање Wi-Fi мреже"</string>
     <string name="wifi_settings" msgid="4746946030627213196">"Wi-Fi подешавања"</string>
@@ -446,14 +424,10 @@
     <string name="wifi_menu_connect" msgid="4996220309848349408">"Повежи са мрежом"</string>
     <string name="wifi_menu_forget" msgid="8736964302477327114">"Заборави мрежу"</string>
     <string name="wifi_menu_modify" msgid="2068554918652440105">"Измени мрежу"</string>
-    <!-- no translation found for wifi_network_setup (7974851890019344870) -->
-    <skip />
-    <!-- no translation found for wifi_wps_pin (5471842298708321115) -->
-    <skip />
-    <!-- no translation found for wifi_wps_pin_method_configuration (9019042137789692817) -->
-    <skip />
-    <!-- no translation found for wifi_wps_pin_output (8682102965680650853) -->
-    <skip />
+    <string name="wifi_network_setup" msgid="7974851890019344870">"Подешавање мреже"</string>
+    <string name="wifi_wps_pin" msgid="5471842298708321115">"Унесите PIN са приступне тачке"</string>
+    <string name="wifi_wps_pin_method_configuration" msgid="9019042137789692817">"Конфигурисање метода WPS PIN-а"</string>
+    <string name="wifi_wps_pin_output" msgid="8682102965680650853">"Унесите PIN <xliff:g id="WPS_PIN">%1$s</xliff:g> на приступној тачки"</string>
     <string name="wifi_ssid" msgid="641393708309146745">"Мрежни SSID"</string>
     <string name="wifi_security" msgid="6603611185592956936">"Безбедност"</string>
     <string name="wifi_signal" msgid="5514120261628065287">"Јачина сигнала"</string>
@@ -467,19 +441,16 @@
     <string name="wifi_eap_identity" msgid="4359453783379679103">"Идентитет"</string>
     <string name="wifi_eap_anonymous" msgid="2989469344116577955">"Анонимни идентитет"</string>
     <string name="wifi_password" msgid="5948219759936151048">"Лозинка"</string>
-    <!-- outdated translation 4235237470701732009 -->     <string name="wifi_show_password" msgid="6461249871236968884">"Прикажи лозинку."</string>
-    <!-- no translation found for wifi_ip_settings (3359331401377059481) -->
-    <skip />
+    <string name="wifi_show_password" msgid="6461249871236968884">"Прикажи лозинку"</string>
+    <string name="wifi_ip_settings" msgid="3359331401377059481">"IP подешавања"</string>
     <string name="wifi_unchanged" msgid="3410422020930397102">"(непромењено)"</string>
     <string name="wifi_unspecified" msgid="5431501214192991253">"(није наведено)"</string>
     <string name="wifi_remembered" msgid="8426719916135950136">"Запамћено"</string>
     <string name="wifi_disabled" msgid="2104752038187543712">"Онемогућено"</string>
     <string name="wifi_not_in_range" msgid="1136191511238508967">"Није у опсегу"</string>
-    <!-- no translation found for wifi_open_with_wps (2606968531452521147) -->
-    <skip />
+    <string name="wifi_open_with_wps" msgid="2606968531452521147">"WPS је доступан"</string>
     <string name="wifi_secured" msgid="6759903183748011566">"Обезбеђено помоћу <xliff:g id="WIFI_SECURITY">%1$s</xliff:g>"</string>
-    <!-- no translation found for wifi_secured_with_wps (1822538701086256007) -->
-    <skip />
+    <string name="wifi_secured_with_wps" msgid="1822538701086256007">"Обезбеђена помоћу <xliff:g id="WIFI_SECURITY">%1$s</xliff:g> (WPS је доступан)"</string>
     <string name="wifi_secured_with_status" msgid="6489317496506267302">"<xliff:g id="WIFI_STATUS">%2$s</xliff:g>, обезбеђено помоћу <xliff:g id="WIFI_SECURITY">%1$s</xliff:g>"</string>
     <string name="wifi_connect" msgid="1076622875777072845">"Повежи"</string>
     <string name="wifi_forget" msgid="8168174695608386644">"Заборави"</string>
@@ -489,31 +460,22 @@
     <string name="wifi_setting_sleep_policy_title" msgid="1367731352485585528">"Смернице за Wi-Fi у режиму спавања"</string>
     <string name="wifi_setting_sleep_policy_summary" msgid="7573693311804602041">"Одређивање времена пребацивања са Wi-Fi мреже на мобилну мрежу података"</string>
     <string name="wifi_setting_sleep_policy_error" msgid="5103670439972135148">"Дошло је до проблема приликом подешавања смерница за режим спавања."</string>
-    <!-- no translation found for wifi_setting_frequency_band_title (7493768705046080060) -->
-    <skip />
-    <!-- no translation found for wifi_setting_frequency_band_summary (3250740757118009784) -->
-    <skip />
-    <!-- no translation found for wifi_setting_frequency_band_error (837281974489794378) -->
-    <skip />
+    <string name="wifi_setting_frequency_band_title" msgid="7493768705046080060">"Wi-Fi опсег фреквенција"</string>
+    <string name="wifi_setting_frequency_band_summary" msgid="3250740757118009784">"Наведите опсег фреквенција за операцију"</string>
+    <string name="wifi_setting_frequency_band_error" msgid="837281974489794378">"Проблем приликом подешавања опсега фреквенција."</string>
     <string name="wifi_advanced_mac_address_title" msgid="6571335466330978393">"MAC адреса"</string>
-    <!-- no translation found for wifi_advanced_ip_address_title (6215297094363164846) -->
-    <skip />
+    <string name="wifi_advanced_ip_address_title" msgid="6215297094363164846">"IP адреса"</string>
     <string name="wifi_ip_settings_titlebar" msgid="4345739031248760326">"IP подешавања"</string>
     <string name="wifi_ip_settings_menu_save" msgid="7296724066102908366">"Сачувај"</string>
     <string name="wifi_ip_settings_menu_cancel" msgid="6582567330136502340">"Откажи"</string>
-    <!-- no translation found for wifi_ip_settings_invalid_ip_address (6387653152103405443) -->
-    <skip />
-    <!-- no translation found for wifi_ip_settings_invalid_gateway (6383012465511093067) -->
-    <skip />
-    <!-- no translation found for wifi_ip_settings_invalid_dns (3428867750550854065) -->
-    <skip />
-    <!-- no translation found for wifi_ip_settings_invalid_network_prefix_length (8145730615716855433) -->
-    <skip />
+    <string name="wifi_ip_settings_invalid_ip_address" msgid="6387653152103405443">"Унесите важећу IP адресу."</string>
+    <string name="wifi_ip_settings_invalid_gateway" msgid="6383012465511093067">"Унесите важећу адресу мрежног пролаза."</string>
+    <string name="wifi_ip_settings_invalid_dns" msgid="3428867750550854065">"Унесите важећу DNS адресу."</string>
+    <string name="wifi_ip_settings_invalid_network_prefix_length" msgid="8145730615716855433">"Унесите префикс мреже дужине између 0 и 32 знака."</string>
     <string name="wifi_dns1" msgid="7344118050720080045">"DNS 1"</string>
     <string name="wifi_dns2" msgid="1368601006824882659">"DNS 2"</string>
     <string name="wifi_gateway" msgid="163914742461092086">"Мрежни пролаз"</string>
-    <!-- no translation found for wifi_network_prefix_length (3028785234245085998) -->
-    <skip />
+    <string name="wifi_network_prefix_length" msgid="3028785234245085998">"Дужина префикса мреже"</string>
     <string name="wifi_tether_checkbox_text" msgid="6961605862058056788">"Преносна Wi-Fi приступна тачка"</string>
     <string name="wifi_tether_enabled_subtext" msgid="8948641212931906143">"Преносна приступна тачка <xliff:g id="NETWORK_SSID">%1$s</xliff:g> је активна"</string>
     <string name="wifi_tether_failed_subtext" msgid="2654888578056042315">"Грешка у преносној Wi-Fi приступној тачки"</string>
@@ -569,16 +531,16 @@
     <string name="dock_audio_settings_title" msgid="3324750259959570305">"Аудио"</string>
     <string name="dock_audio_summary_desk" msgid="6487784412371139335">"Подешавања за прикључено стоно постоље"</string>
     <string name="dock_audio_summary_car" msgid="6740897586006248450">"Подешавања за прикључено постоље за аутомобил"</string>
-    <string name="dock_audio_summary_none" product="tablet" msgid="8215337394914283607">"Таблет није на постољу"</string>
+    <string name="dock_audio_summary_none" product="tablet" msgid="8215337394914283607">"Таблет није на базној станици"</string>
     <string name="dock_audio_summary_none" product="default" msgid="289909253741048784">"Телефон није причвршћен"</string>
     <string name="dock_audio_summary_unknown" msgid="4465059868974255693">"Подешавања за прикључено постоље"</string>
     <string name="dock_not_found_title" msgid="3290961741828952424">"Постоље није пронађено"</string>
-    <string name="dock_not_found_text" product="tablet" msgid="7935403744079168804">"Таблет треба да буде на постољу да би се конфигурисао звук током мировања"</string>
+    <string name="dock_not_found_text" product="tablet" msgid="7935403744079168804">"Таблет мора да буде на базној станици да бисте могли да конфигуришете звук базне станице"</string>
     <string name="dock_not_found_text" product="default" msgid="3035260358985111855">"Телефон мора да буде на постољу да би се конфигурисао звук током мировања"</string>
     <string name="dock_sounds_enable_title" msgid="3659084028644948905">"Звук уметања постоља"</string>
-    <string name="dock_sounds_enable_summary_on" product="tablet" msgid="838102386448981339">"Пусти звук када се таблет ставља на постоље или уклања са њега"</string>
+    <string name="dock_sounds_enable_summary_on" product="tablet" msgid="838102386448981339">"Репродукуј звук приликом постављања таблета на базну станицу или уклањања са ње"</string>
     <string name="dock_sounds_enable_summary_on" product="default" msgid="8491180514199743771">"Пуштање звука када се телефон ставља на постоље или уклања са њега"</string>
-    <string name="dock_sounds_enable_summary_off" product="tablet" msgid="5077843049805652363">"Не пуштај звук приликом уметања таблета на постоље или уклањања са њега"</string>
+    <string name="dock_sounds_enable_summary_off" product="tablet" msgid="5077843049805652363">"Не репродукуј звук приликом постављања таблета на базну станицу или уклањања са ње"</string>
     <string name="dock_sounds_enable_summary_off" product="default" msgid="3151046599205265919">"Не пуштај звук приликом уметања телефона на постоље или уклањања са њега"</string>
     <string name="sync_settings" msgid="9186125469300013491">"Налози и синхронизација"</string>
     <string name="sync_settings_summary" msgid="2962179505214965667">"Додавање или уклањање налога и промена подешавања налога"</string>
@@ -589,9 +551,9 @@
     <string name="animations_summary_on" msgid="8843613112130484436">"Приказивање анимације приликом отварања и затварања прозора"</string>
     <string name="animations_summary_off" msgid="2777026828025551983">"Приказивање анимације приликом отварања и затварања прозора"</string>
     <string name="accelerometer_title" msgid="7854608399547349157">"Аутоматско ротирање екрана"</string>
-    <string name="accelerometer_summary_on" product="tablet" msgid="429982132339828942">"Аутоматски промени положај приликом ротације таблета"</string>
+    <string name="accelerometer_summary_on" product="tablet" msgid="429982132339828942">"Промени положај аутоматски приликом ротирања таблета"</string>
     <string name="accelerometer_summary_on" product="default" msgid="1133737282813048021">"Аутоматска промена положаја приликом ротације телефона"</string>
-    <string name="accelerometer_summary_off" product="tablet" msgid="4781734213242521682">"Аутоматски промени положај приликом ротације таблета"</string>
+    <string name="accelerometer_summary_off" product="tablet" msgid="4781734213242521682">"Промени положај аутоматски приликом ротирања таблета"</string>
     <string name="accelerometer_summary_off" product="default" msgid="5485489363715740761">"Аутоматска промена положаја приликом ротације телефона"</string>
     <string name="brightness" msgid="2354961343555249270">"Осветљеност"</string>
     <string name="brightness_summary" msgid="838917350127550703">"Прилагођавање осветљености екрана"</string>
@@ -602,9 +564,9 @@
     <string name="sim_lock_settings_category" msgid="5136244267576697004">"Подешавање закључавања SIM картице"</string>
     <string name="sim_lock_settings_title" msgid="9018585580955414596">"Закључавање SIM картице"</string>
     <string name="sim_pin_toggle" msgid="1742123478029451888">"Закључај SIM картицу"</string>
-    <string name="sim_lock_on" product="tablet" msgid="5058355081270397764">"Захтевај PIN за коришћење таблета"</string>
+    <string name="sim_lock_on" product="tablet" msgid="5058355081270397764">"Захтевај PIN ради употребе таблета"</string>
     <string name="sim_lock_on" product="default" msgid="2503536505568814324">"Захтевање PIN кода за коришћење телефона"</string>
-    <string name="sim_lock_off" product="tablet" msgid="2813800553917012356">"Захтевај PIN за коришћење таблета"</string>
+    <string name="sim_lock_off" product="tablet" msgid="2813800553917012356">"Захтевај PIN ради употребе таблета"</string>
     <string name="sim_lock_off" product="default" msgid="258981978215428916">"Захтевање PIN кода за коришћење телефона"</string>
     <string name="sim_pin_change" msgid="6311414184279932368">"Промени SIM PIN"</string>
     <string name="sim_enter_pin" msgid="6608715137008508432">"SIM PIN"</string>
@@ -634,9 +596,9 @@
     <string name="device_status_activity_title" msgid="1411201799384697904">"Статус"</string>
     <string name="device_status" msgid="607405385799807324">"Статус"</string>
     <string name="device_status_summary" msgid="2599162787451519618">"Број телефона, сигнал итд."</string>
-    <!-- outdated translation 6681164315506788024 -->     <string name="storage_settings" msgid="4211799979832404953">"SD картица и складиште телефона"</string>
-    <!-- outdated translation 5379463509034022773 -->     <string name="storage_settings_title" msgid="8746016738388094064">"SD картица и подешавања складишта телефона"</string>
-    <!-- outdated translation 9176693537325988610 -->     <string name="storage_settings_summary" product="nosdcard" msgid="3543813623294870759">"Ослобађање SD картице, приказ доступног складишта"</string>
+    <string name="storage_settings" msgid="4211799979832404953">"Меморија"</string>
+    <string name="storage_settings_title" msgid="8746016738388094064">"Подешавања меморије"</string>
+    <string name="storage_settings_summary" product="nosdcard" msgid="3543813623294870759">"Искључивање USB меморије, приказ доступне меморије"</string>
     <string name="storage_settings_summary" product="default" msgid="9176693537325988610">"Ослобађање SD картице, приказ доступног складишта"</string>
     <string name="status_number" msgid="5123197324870153205">"Мој број телефона"</string>
     <string name="status_min_number" msgid="3519504522179420597">"MIN"</string>
@@ -653,8 +615,8 @@
     <string name="status_unavailable" msgid="7862009036663793314">"Недоступно"</string>
     <string name="status_up_time" msgid="7294859476816760399">"Време рада"</string>
     <string name="status_awake_time" msgid="2393949909051183652">"Време буђења"</string>
-    <!-- outdated translation 1130932766236387454 -->     <string name="internal_memory" msgid="9129595691484260784">"Складиште унутрашњег телефона"</string>
-    <!-- outdated translation 151871913888051515 -->     <string name="sd_memory" product="nosdcard" msgid="2510246194083052841">"SD картица"</string>
+    <string name="internal_memory" msgid="9129595691484260784">"Интерна меморија"</string>
+    <string name="sd_memory" product="nosdcard" msgid="2510246194083052841">"USB меморија"</string>
     <string name="sd_memory" product="default" msgid="151871913888051515">"SD картица"</string>
     <string name="memory_available" msgid="418542433817289474">"Доступан простор"</string>
     <string name="memory_size" msgid="6629067715017232195">"Укупан простор"</string>
@@ -662,36 +624,32 @@
     <skip />
     <string name="memory_apps_usage" msgid="5818922761412589352">"Простор попуњен апликацијама"</string>
     <string name="memory_media_usage" msgid="5655498435493764372">"Искоришћен меморијски простор"</string>
-    <!-- outdated translation 6915293408836853020 -->     <string name="sd_eject" product="nosdcard" msgid="4988563376492400073">"Ослобађање SD картице"</string>
+    <string name="sd_eject" product="nosdcard" msgid="4988563376492400073">"Искљ. дељене меморије"</string>
     <string name="sd_eject" product="default" msgid="6915293408836853020">"Ослобађање SD картице"</string>
-    <!-- outdated translation 3315557796211542962 -->     <string name="sd_eject_summary" product="nosdcard" msgid="5009296896648072891">"Ослобађање SD картице ради безбедног уклањања"</string>
-    <!-- outdated translation 3315557796211542962 -->     <string name="sd_eject_summary" product="default" msgid="3300599435073550246">"Ослобађање SD картице ради безбедног уклањања"</string>
-    <!-- no translation found for ptp_mode (3954718349875117695) -->
-    <skip />
-    <!-- no translation found for ptp_mode_summary (8709697530987890394) -->
-    <skip />
-    <!-- outdated translation 2048640010381803841 -->     <string name="sd_insert_summary" product="nosdcard" msgid="5264016886409577313">"Уметање SD картице за прикључивање"</string>
+    <string name="sd_eject_summary" product="nosdcard" msgid="5009296896648072891">"Искљ. интерне USB меморије"</string>
+    <string name="sd_eject_summary" product="default" msgid="3300599435073550246">"Искључите SD картицу да бисте је безбедно уклонили"</string>
+    <string name="sd_insert_summary" product="nosdcard" msgid="5264016886409577313">"Уметните USB за прикључивање"</string>
     <string name="sd_insert_summary" product="default" msgid="2048640010381803841">"Уметање SD картице за прикључивање"</string>
-    <!-- outdated translation 5940523765187704135 -->     <string name="sd_mount" product="nosdcard" msgid="8966695015677343116">"Прикључивање SD картице"</string>
+    <string name="sd_mount" product="nosdcard" msgid="8966695015677343116">"Прикључите USB меморију"</string>
     <string name="sd_mount" product="default" msgid="5940523765187704135">"Прикључивање SD картице"</string>
-    <!-- outdated translation 4936591681679097699 -->     <string name="sd_mount_summary" product="nosdcard" msgid="1794150364965145726">"Прикључивање SD картице"</string>
+    <string name="sd_mount_summary" product="nosdcard" msgid="1794150364965145726">"Прикључите USB меморију"</string>
     <string name="sd_mount_summary" product="default" msgid="4936591681679097699">"Прикључивање SD картице"</string>
-    <!-- outdated translation 5448738337382712203 -->     <string name="sd_format" product="nosdcard" msgid="2148179271623099054">"Форматирање SD картице"</string>
-    <!-- outdated translation 5448738337382712203 -->     <string name="sd_format" product="default" msgid="2576054280507119870">"Форматирање SD картице"</string>
-    <!-- outdated translation 6616491027883134004 -->     <string name="sd_format_summary" product="nosdcard" msgid="6331905044907914603">"Форматирање (брисање) SD картице"</string>
-    <!-- outdated translation 6616491027883134004 -->     <string name="sd_format_summary" product="default" msgid="212703692181793109">"Форматирање (брисање) SD картице"</string>
+    <string name="sd_format" product="nosdcard" msgid="2148179271623099054">"Брисање USB меморије"</string>
+    <string name="sd_format" product="default" msgid="2576054280507119870">"Брисање SD картице"</string>
+    <string name="sd_format_summary" product="nosdcard" msgid="6331905044907914603">"Брише све податке из интерне USB меморије, као што су музика и фотографије"</string>
+    <string name="sd_format_summary" product="default" msgid="212703692181793109">"Брише све податке са SD картице, као што су музика и фотографије"</string>
     <string name="sd_unavailable" msgid="8580107589533213904">"Недоступно"</string>
     <string name="read_only" msgid="6702420168629076340">" (Само за читање)"</string>
-    <!-- outdated translation 8612140627310646730 -->     <string name="dlg_confirm_unmount_title" product="nosdcard" msgid="2349876662428231297">"Ослобађање SD картице"</string>
+    <string name="dlg_confirm_unmount_title" product="nosdcard" msgid="2349876662428231297">"Искључи USB меморију"</string>
     <string name="dlg_confirm_unmount_title" product="default" msgid="8612140627310646730">"Ослобађање SD картице"</string>
-    <!-- outdated translation 5851214273718817727 -->     <string name="dlg_confirm_unmount_text" product="nosdcard" msgid="3390169455621185223">"Уколико ослободите SD картицу, неке апликације које користите ће се зауставити и можда неће бити доступне све док поново не прикључите SD картицу."</string>
+    <string name="dlg_confirm_unmount_text" product="nosdcard" msgid="3390169455621185223">"Ако искључите USB меморију, неке апликације које користите ће се зауставити и можда неће бити доступне док поново не прикључите USB меморију."</string>
     <string name="dlg_confirm_unmount_text" product="default" msgid="5851214273718817727">"Уколико ослободите SD картицу, неке апликације које користите ће се зауставити и можда неће бити доступне све док поново не прикључите SD картицу."</string>
-    <!-- outdated translation 4004106918266783081 -->     <string name="dlg_error_unmount_title" product="nosdcard" msgid="7695491947411836733">"Ослобађање SD картице није успело"</string>
+    <string name="dlg_error_unmount_title" product="nosdcard" msgid="7695491947411836733">"USB меморија није искључена"</string>
     <string name="dlg_error_unmount_title" product="default" msgid="4004106918266783081">"Ослобађање SD картице није успело"</string>
-    <!-- outdated translation 9188972789897713180 -->     <string name="dlg_error_unmount_text" product="nosdcard" msgid="1450864147013376592">"Није могуће ослободити SD картицу. Покушајте поново касније."</string>
+    <string name="dlg_error_unmount_text" product="nosdcard" msgid="1450864147013376592">"Није могуће искључити USB меморију. Покушајте поново касније."</string>
     <string name="dlg_error_unmount_text" product="default" msgid="9188972789897713180">"Није могуће ослободити SD картицу. Покушајте поново касније."</string>
-    <!-- outdated translation 3213378327712151498 -->     <string name="unmount_inform_text" product="nosdcard" msgid="7120241136790744265">"SD картица ће бити скинута. Статус погледајте у области са обавештењима."</string>
-    <!-- outdated translation 3213378327712151498 -->     <string name="unmount_inform_text" product="default" msgid="1904212716075458402">"SD картица ће бити скинута. Статус погледајте у области са обавештењима."</string>
+    <string name="unmount_inform_text" product="nosdcard" msgid="7120241136790744265">"USB меморија ће бити искључена."</string>
+    <string name="unmount_inform_text" product="default" msgid="1904212716075458402">"SD картица ће бити искључена."</string>
     <string name="sd_ejecting_title" msgid="8824572198034365468">"Ослобађање"</string>
     <string name="sd_ejecting_summary" msgid="2028753069184908491">"Ослобађање у току"</string>
     <string name="battery_status_title" msgid="9159414319574976203">"Статус батерије"</string>
@@ -732,82 +690,56 @@
     <string name="master_clear_title" msgid="5907939616087039756">"Враћање фабричких података"</string>
     <string name="master_clear_summary" product="tablet" msgid="4036344100254678429">"Брише све податке са таблета"</string>
     <string name="master_clear_summary" product="default" msgid="4986154238001088492">"Брише све податке у телефону"</string>
-    <!-- unknown placeholder BREAK_10 in master_clear_desc -->
-    <skip />
-    <!-- no translation found for master_clear_desc (1305457209008369655) -->
-    <skip />
-    <!-- unknown placeholder BREAK_10 in master_clear_desc -->
-    <skip />
-    <!-- no translation found for master_clear_desc (2950536633526374209) -->
-    <skip />
-    <!-- no translation found for master_clear_accounts (6412857499147999073) -->
-    <skip />
-    <!-- no translation found for master_clear_desc_erase_external_storage (4740866328425123395) -->
-    <skip />
-    <!-- no translation found for master_clear_desc_erase_external_storage (7339100478676372901) -->
-    <skip />
-    <!-- no translation found for erase_external_storage (969364037450286809) -->
-    <skip />
-    <!-- no translation found for erase_external_storage (1397239046334307625) -->
-    <skip />
-    <!-- no translation found for erase_external_storage_description (444834593696342279) -->
-    <skip />
-    <!-- no translation found for erase_external_storage_description (46603515218075174) -->
-    <skip />
-    <string name="master_clear_button_text" product="tablet" msgid="3130786116528304116">"Врати таблет на почетне вредности"</string>
+    <string name="master_clear_desc" product="tablet" msgid="1305457209008369655">"На овај начин ће се избрисати сви подаци из "<b>"интерне меморије"</b>" таблета, укључујући:"\n\n<li>"Google налог"</li>\n<li>"податке и подешавања везана за систем и апликације"</li>\n<li>"преузете апликације"</li></string>
+    <string name="master_clear_desc" product="default" msgid="2950536633526374209">"На овај начин ће се избрисати сви подаци из "<b>"интерне меморије"</b>" телефона, укључујући:"\n\n<li>"Google налог"</li>\n<li>"податке и подешавања везана за систем и апликације"</li>\n<li>"преузете апликације"</li></string>
+    <string name="master_clear_accounts" product="default" msgid="6412857499147999073">\n\n"Тренутно сте пријављени на следеће налоге:"\n</string>
+    <string name="master_clear_desc_erase_external_storage" product="nosdcard" msgid="4740866328425123395">\n\n"Ако желите да избришете и музику, слике и друге корисничке податке, мораћете да избришете садржај "<b>"USB меморије"</b>"."</string>
+    <string name="master_clear_desc_erase_external_storage" product="default" msgid="7339100478676372901">\n\n"Ако желите да избришете и музику, слике и друге корисничке податке, мораћете да избришете садржај "<b>"SD картице"</b>"."</string>
+    <string name="erase_external_storage" product="nosdcard" msgid="969364037450286809">"Избриши USB меморију"</string>
+    <string name="erase_external_storage" product="default" msgid="1397239046334307625">"Избриши SD картицу"</string>
+    <string name="erase_external_storage_description" product="nosdcard" msgid="444834593696342279">"Обриши све податке из интерне USB меморије, као што су музика и фотографије."</string>
+    <string name="erase_external_storage_description" product="default" msgid="46603515218075174">"Обриши све податке са SD картице, као што су музика и фотографије."</string>
+    <string name="master_clear_button_text" product="tablet" msgid="3130786116528304116">"Враћање таблета на подразумеване вредности"</string>
     <string name="master_clear_button_text" product="default" msgid="7550632653343157971">"Поново постави телефон"</string>
     <string name="master_clear_final_desc" msgid="6917971132484622696">"Желите ли да избришете све личне информације и преузете апликације? Ову радњу не можете да опозовете!"</string>
     <string name="master_clear_final_button_text" msgid="5390908019019242910">"Избриши све"</string>
     <string name="master_clear_gesture_prompt" msgid="1428645764883536750">"Нацртајте шаблон за откључавање"</string>
-    <string name="master_clear_gesture_explanation" msgid="2234954758550554549">"Потребно је да нацртате шаблон за откључавање да бисте потврдили враћање фабричких података."</string>
+    <string name="master_clear_gesture_explanation" msgid="2234954758550554549">"Морате да нацртате шаблон за откључавање да бисте потврдили враћање фабричких података."</string>
     <string name="master_clear_failed" msgid="8655202125010189406">"Није обављено поновно постављање зато што услуга брисања система није доступна."</string>
-    <!-- no translation found for master_clear_confirm_title (4845794266129586839) -->
-    <skip />
-    <!-- outdated translation 4671276096695789895 -->     <string name="media_format_title" product="nosdcard" msgid="3999653431422767156">"Форматирање SD картице."</string>
-    <!-- outdated translation 4671276096695789895 -->     <string name="media_format_title" product="default" msgid="4427528440306787972">"Форматирање SD картице."</string>
-    <!-- outdated translation 3805714639375830120 -->     <string name="media_format_summary" product="nosdcard" msgid="776603298628082065">"Брише све податке на SD картици"</string>
+    <string name="master_clear_confirm_title" msgid="4845794266129586839">"Потврда враћања на подр. вред."</string>
+    <string name="media_format_title" product="nosdcard" msgid="3999653431422767156">"Брисање USB меморије"</string>
+    <string name="media_format_title" product="default" msgid="4427528440306787972">"Избриши SD картицу"</string>
+    <string name="media_format_summary" product="nosdcard" msgid="776603298628082065">"Брише целу USB меморију"</string>
     <string name="media_format_summary" product="default" msgid="3805714639375830120">"Брише све податке на SD картици"</string>
-    <!-- outdated translation 1142563222357820834 -->     <string name="media_format_desc" product="nosdcard" msgid="4553860683952763905">"Ова радња избрисаће SD картицу у телефону. Изгубићете СВЕ податке на картици!"</string>
-    <!-- outdated translation 1142563222357820834 -->     <string name="media_format_desc" product="default" msgid="1598627584181935513">"Ова радња избрисаће SD картицу у телефону. Изгубићете СВЕ податке на картици!"</string>
-    <!-- outdated translation 370856400090190151 -->     <string name="media_format_button_text" product="nosdcard" msgid="6293669371185352810">"Форматирај SD картицу"</string>
-    <!-- outdated translation 370856400090190151 -->     <string name="media_format_button_text" product="default" msgid="6721544380069373626">"Форматирај SD картицу"</string>
-    <!-- outdated translation 1776666694910717198 -->     <string name="media_format_final_desc" product="nosdcard" msgid="8094635533378487255">"Желите ли да форматирате SD картицу и обришете све медије? Није могуће опозвати радњу!"</string>
-    <!-- outdated translation 1776666694910717198 -->     <string name="media_format_final_desc" product="default" msgid="9015504991522581434">"Желите ли да форматирате SD картицу и обришете све медије? Није могуће опозвати радњу!"</string>
+    <string name="media_format_desc" product="nosdcard" msgid="4553860683952763905">"Овом радњом ћете избрисати USB меморију. Изгубићете "<b>"све"</b>" податке који се ту налазе!"</string>
+    <string name="media_format_desc" product="default" msgid="1598627584181935513">"Ако извршите ову радњу, избрисаћете SD картицу. Изгубићете "<b>"све"</b>" податке са картице!"</string>
+    <string name="media_format_button_text" product="nosdcard" msgid="6293669371185352810">"Брисање USB меморије"</string>
+    <string name="media_format_button_text" product="default" msgid="6721544380069373626">"Избриши SD картицу"</string>
+    <string name="media_format_final_desc" product="nosdcard" msgid="8094635533378487255">"Желите да избришете USB меморију и све датотеке у њој? Ову радњу није могуће опозвати!"</string>
+    <string name="media_format_final_desc" product="default" msgid="9015504991522581434">"Желите да обришете SD картицу и све датотеке које су на њој сачуване? Ову радњу није могуће опозвати!"</string>
     <string name="media_format_final_button_text" msgid="4881713344315923175">"Избриши све"</string>
     <string name="media_format_gesture_prompt" msgid="3109349468816856670">"Нацртајте шаблон за откључавање"</string>
-    <!-- outdated translation 4239529439389660159 -->     <string name="media_format_gesture_explanation" product="nosdcard" msgid="1379736318750958338">"Потребно је да нацртате шаблон за откључавање да бисте потврдили форматирање SD картице."</string>
-    <!-- outdated translation 4239529439389660159 -->     <string name="media_format_gesture_explanation" product="default" msgid="1681213416497647321">"Потребно је да нацртате шаблон за откључавање да бисте потврдили форматирање SD картице."</string>
+    <string name="media_format_gesture_explanation" product="nosdcard" msgid="1379736318750958338">"Морате да нацртате шаблон за откључавање да бисте потврдили да желите да обришете USB меморију."</string>
+    <string name="media_format_gesture_explanation" product="default" msgid="1681213416497647321">"Мораћете да нацртате шаблон за откључавање да бисте потврдили да желите да обришете SD картицу."</string>
     <string name="call_settings_title" msgid="5188713413939232801">"Подешавања позива"</string>
     <string name="call_settings_summary" msgid="7291195704801002886">"Подешавање гласовне поште, преусмеравања позива, стављања позива на чекање, ИД-а позиваоца"</string>
-    <!-- outdated translation 4315031513434087777 -->     <string name="tether_settings_title_usb" msgid="6688416425801386511">"Повезивање"</string>
+    <string name="tether_settings_title_usb" msgid="6688416425801386511">"USB Интернет повезивање"</string>
     <string name="tether_settings_title_wifi" msgid="3277144155960302049">"Преносна приступна тачка"</string>
-    <!-- no translation found for tether_settings_title_bluetooth (355855408317564420) -->
-    <skip />
-    <!-- no translation found for tether_settings_title_usb_bluetooth (5355828977109785001) -->
-    <skip />
-    <!-- no translation found for tether_settings_title_all (8356136101061143841) -->
-    <skip />
-    <!-- outdated translation 3562431455625637370 -->     <string name="tether_settings_summary_usb" product="tablet" msgid="785883365108362248">"Дељење мобилне везе телефона за пренос података преко USB-а"</string>
+    <string name="tether_settings_title_bluetooth" msgid="355855408317564420">"Bluetooth Интернет веза"</string>
+    <string name="tether_settings_title_usb_bluetooth" msgid="5355828977109785001">"Повезивање са Интернетом"</string>
+    <string name="tether_settings_title_all" msgid="8356136101061143841">"Повезивање и прист. тачка"</string>
+    <string name="tether_settings_summary_usb" product="tablet" msgid="785883365108362248">"Дељење мобилне везе таблета за пренос података преко USB-а"</string>
     <string name="tether_settings_summary_usb" product="default" msgid="3562431455625637370">"Дељење мобилне везе телефона за пренос података преко USB-а"</string>
-    <!-- outdated translation 4690912027002467246 -->     <string name="tether_settings_summary_wifi" msgid="5474383125137372164">"Дељење мобилне везе телефона као преносне Wi-Fi приступне тачке"</string>
-    <!-- no translation found for tether_settings_summary_bluetooth (2407506656353819750) -->
-    <skip />
-    <!-- no translation found for tether_settings_summary_usb_wifi (3834674129575844910) -->
-    <skip />
-    <!-- no translation found for tether_settings_summary_usb_wifi (3700323208282018772) -->
-    <skip />
-    <!-- no translation found for tether_settings_summary_usb_bluetooth (1245080236509560839) -->
-    <skip />
-    <!-- no translation found for tether_settings_summary_usb_bluetooth (4008195891276675882) -->
-    <skip />
-    <!-- no translation found for tether_settings_summary_wifi_bluetooth (1924576461932311140) -->
-    <skip />
-    <!-- no translation found for tether_settings_summary_wifi_bluetooth (2753904149495692201) -->
-    <skip />
-    <!-- no translation found for tether_settings_summary_all (6612660164315153427) -->
-    <skip />
-    <!-- no translation found for tether_settings_summary_all (1171769255924636665) -->
-    <skip />
+    <string name="tether_settings_summary_wifi" msgid="5474383125137372164">"Дељење мобилне везе за пренос података као преносиве Wi-Fi приступне тачке"</string>
+    <string name="tether_settings_summary_bluetooth" msgid="2407506656353819750">"Дељење мобилне везе за пренос података преко Bluetooth-а"</string>
+    <string name="tether_settings_summary_usb_wifi" product="tablet" msgid="3834674129575844910">"Дељење мобилне везе таблета за пренос података преко USB-а или као преносиве Wi-Fi приступне тачке"</string>
+    <string name="tether_settings_summary_usb_wifi" product="default" msgid="3700323208282018772">"Дељење мобилне везе телефона за пренос података преко USB-а или као преносиве Wi-Fi приступне тачке"</string>
+    <string name="tether_settings_summary_usb_bluetooth" product="tablet" msgid="1245080236509560839">"Дељење мобилне везе таблета за пренос података преко USB-а или Bluetooth-а"</string>
+    <string name="tether_settings_summary_usb_bluetooth" product="default" msgid="4008195891276675882">"Дељење мобилне везе телефона за пренос података преко USB-а или Bluetooth-а"</string>
+    <string name="tether_settings_summary_wifi_bluetooth" product="tablet" msgid="1924576461932311140">"Дељење мобилне везе таблета за пренос података преко Bluetooth-а или преносиве Wi-Fi приступне тачке"</string>
+    <string name="tether_settings_summary_wifi_bluetooth" product="default" msgid="2753904149495692201">"Дељење мобилне везе телефона за пренос података преко Bluetooth-а или преносиве Wi-Fi прист. тачке"</string>
+    <string name="tether_settings_summary_all" product="tablet" msgid="6612660164315153427">"Дељење мобилне везе таблета за пренос података преко USB-а, Wi-Fi-а или Bluetooth-а"</string>
+    <string name="tether_settings_summary_all" product="default" msgid="1171769255924636665">"Дељење мобилне везе телефона за пренос података преко USB-а, Wi-Fi-а или Bluetooth-а"</string>
     <string name="usb_title" msgid="7483344855356312510">"USB"</string>
     <string name="usb_tethering_button_text" msgid="585829947108007917">"USB повезивање"</string>
     <string name="usb_tethering_available_subtext" msgid="156779271296152605">"USB повезан, проверите за повезивање"</string>
@@ -815,24 +747,13 @@
     <string name="usb_tethering_storage_active_subtext" msgid="6608933594288072573">"Није могуће успоставити везу када је USB складиште у употреби"</string>
     <string name="usb_tethering_unavailable_subtext" msgid="1044622421184007254">"USB није повезан"</string>
     <string name="usb_tethering_errored_subtext" msgid="1377574819427841992">"Грешка приликом USB повезивања"</string>
-    <!-- no translation found for bluetooth_tether_checkbox_text (2379175828878753652) -->
-    <skip />
-    <!-- no translation found for bluetooth_tethering_available_subtext (3317112145693933963) -->
-    <skip />
-    <!-- no translation found for bluetooth_tethering_connected_subtext (893888246368164894) -->
-    <skip />
-    <!-- no translation found for bluetooth_tethering_off_subtext (1798863866978968964) -->
-    <skip />
-    <!-- no translation found for bluetooth_tethering_errored_subtext (1344187103463073993) -->
-    <skip />
-    <!-- no translation found for bluetooth_tethering_overflow_error (2222060504731415763) -->
-    <skip />
-    <!-- no translation found for bluetooth_untether_blank (2871192409329334813) -->
-    <skip />
-    <!-- no translation found for bluetooth_tether_settings_text (2273368767599539525) -->
-    <skip />
-    <!-- no translation found for bluetooth_tether_settings_subtext (5970033999897946708) -->
-    <skip />
+    <string name="bluetooth_tether_checkbox_text" msgid="2379175828878753652">"Bluetooth Интернет веза"</string>
+    <string name="bluetooth_tethering_available_subtext" msgid="3317112145693933963">"Bluetooth Интернет веза је укључена, није повезана"</string>
+    <string name="bluetooth_tethering_connected_subtext" msgid="893888246368164894">"Bluetooth Интернет веза је укључена и успостављена"</string>
+    <string name="bluetooth_tethering_off_subtext" msgid="1798863866978968964">"Bluetooth повезивање са Интернетом је искључено"</string>
+    <string name="bluetooth_tethering_errored_subtext" msgid="1344187103463073993">"Грешка при успостављању Bluetooth Интернет везе"</string>
+    <string name="bluetooth_tethering_overflow_error" msgid="2222060504731415763">"Није могуће повезати се са више од <xliff:g id="MAXCONNECTION">%1$d</xliff:g> уређаја"</string>
+    <string name="bluetooth_untether_blank" msgid="2871192409329334813">"Интернет веза са уређајем <xliff:g id="DEVICE_NAME">%1$s</xliff:g> ће бити прекинута."</string>
     <string name="tethering_help_button_text" msgid="656117495547173630">"Помоћ"</string>
     <string name="network_settings_title" msgid="7967552516440151852">"Мобилне мреже"</string>
     <string name="network_settings_summary" msgid="5149750850846813553">"Подешавање опција за роминг, мреже и називе приступних тачака"</string>
@@ -841,41 +762,44 @@
     <string name="location_networks_disabled" msgid="2708968452901433980">"Приказивање локације у апликацијама (као што су Мапе) помоћу бежичних мрежа"</string>
     <string name="location_neighborhood_level" msgid="4656658097932515921">"Локацију одређују Wi-Fi и/или мобилне мреже"</string>
     <string name="location_gps" msgid="6296125378829097831">"Користи GPS сателите"</string>
-    <!-- outdated translation 6460740847018275745 -->     <string name="location_street_level" msgid="7456259025474443314">"Приликом лоцирања, прецизност до нивоа улице (опозовите да бисте сачували батерију)"</string>
+    <string name="location_street_level" msgid="7456259025474443314">"Приликом лоцирања тачност је на нивоу улице"</string>
     <string name="location_gps_disabled" msgid="6632537158777308128">"Лоцирај на нивоу улице (захтева још батерије и поглед на небо)"</string>
     <string name="assisted_gps" msgid="4649317129586736885">"Користи помоћни GPS"</string>
     <string name="assisted_gps_enabled" msgid="8751899609589792803">"Коришћење сервера за помоћ GPS мрежи (опозовите избор да бисте смањили коришћење мреже)"</string>
     <string name="assisted_gps_disabled" msgid="6982698333968010748">"Коришћење сервера за помоћ GPS мрежи (опозовите избор да бисте побољшали GPS учинак)"</string>
-    <!-- no translation found for use_location_title (3214740644957841179) -->
-    <skip />
-    <!-- no translation found for use_location_summary_disabled (1876901471649359806) -->
-    <skip />
-    <!-- no translation found for use_location_summary_enabled (984549156918597265) -->
-    <skip />
+    <string name="use_location_title" msgid="3214740644957841179">"Користи локацију за Google претрагу"</string>
+    <string name="use_location_summary_disabled" msgid="1876901471649359806">"Користи локацију за Google претрагу и друге Google услуге"</string>
+    <string name="use_location_summary_enabled" msgid="984549156918597265">"Локација се користи ради побољшања резултата Google претраге и других Google услуга"</string>
     <string name="about_settings" product="tablet" msgid="593457295516533765">"О таблету"</string>
     <string name="about_settings" product="default" msgid="1743378368185371685">"О телефону"</string>
-    <string name="about_settings_summary" msgid="3371517697156165959">"Приказ правних информација, статуса, верзије софтвера"</string>
+    <string name="about_settings_summary" msgid="3371517697156165959">"Преглед правних информација, статуса, верзије софтвера"</string>
     <string name="legal_information" msgid="5769301644270604095">"Правне информације"</string>
     <string name="contributors_title" msgid="5917703088825286504">"Сарадници"</string>
     <string name="copyright_title" msgid="865906688917260647">"Ауторска права"</string>
     <string name="license_title" msgid="1990487604356037871">"Лиценца"</string>
     <string name="terms_title" msgid="7697580845616764642">"Услови и одредбе"</string>
     <string name="system_tutorial_list_item_title" msgid="9082844446660969729">"Упутство за коришћење система"</string>
-    <string name="system_tutorial_list_item_summary" product="tablet" msgid="3341504384445734067">"Научите како да користите таблет"</string>
+    <string name="system_tutorial_list_item_summary" product="tablet" msgid="3341504384445734067">"Сазнајте како да користите таблет"</string>
     <string name="system_tutorial_list_item_summary" product="default" msgid="3861815254521030201">"Научите како да користите телефон"</string>
     <string name="settings_license_activity_title" msgid="7553683406244228650">"Лиценца отвореног кода"</string>
     <string name="settings_license_activity_unavailable" msgid="4210539215951487627">"Дошло је до проблема приликом учитавања лиценци."</string>
     <string name="settings_license_activity_loading" msgid="3337535809093591740">"Учитавање…"</string>
     <string name="settings_safetylegal_title" msgid="1289483965535937431">"Безбедносне информације"</string>
     <string name="settings_safetylegal_activity_title" msgid="6901214628496951727">"Безбедносне информације"</string>
-    <string name="settings_safetylegal_activity_unreachable" msgid="170670055116721810">"Немате везу за пренос података. Да бисте одмах погледали ове информације, идите на %s са било ког рачунара повезаног са Интернетом."</string>
+    <string name="settings_safetylegal_activity_unreachable" msgid="170670055116721810">"Немате везу за пренос података. Да бисте одмах погледали ове информације, идите на %s са било ког рачунара који је повезан са Интернетом."</string>
     <string name="settings_safetylegal_activity_loading" msgid="8059022597639516348">"Учитавање…"</string>
     <string name="lockpassword_choose_your_password_header" msgid="8624900666929394990">"Одаберите лозинку"</string>
+    <!-- no translation found for lockpassword_choose_your_pattern_header (6949761069941694050) -->
+    <skip />
     <string name="lockpassword_choose_your_pin_header" msgid="7598849519816138302">"Одаберите PIN"</string>
     <string name="lockpassword_confirm_your_password_header" msgid="6308478184889846633">"Потврдите лозинку"</string>
+    <!-- no translation found for lockpassword_confirm_your_pattern_header (7543433733032330821) -->
+    <skip />
     <string name="lockpassword_confirm_your_pin_header" msgid="49038294648213197">"Потврдите PIN"</string>
     <string name="lockpassword_confirm_passwords_dont_match" msgid="6850677112663979120">"Лозинке се не подударају"</string>
     <string name="lockpassword_confirm_pins_dont_match" msgid="4757532830594400147">"PIN-ови се не подударају"</string>
+    <!-- no translation found for lockpassword_choose_lock_generic_header (3811438094903786145) -->
+    <skip />
     <string name="lockpassword_password_set_toast" msgid="4875050283108629383">"Лозинка је постављена"</string>
     <string name="lockpassword_pin_set_toast" msgid="6011826444725291475">"PIN је постављен"</string>
     <string name="lockpassword_pattern_set_toast" msgid="6867259621331406236">"Шаблон је постављен"</string>
@@ -907,12 +831,13 @@
     <string name="lockpattern_too_many_failed_confirmation_attempts_footer" msgid="6759029360597122873">"Покушајте поново за <xliff:g id="NUMBER">%d</xliff:g> секунде(и)."</string>
     <string name="skip_button_label" msgid="8680422740354436943">"Откажи"</string>
     <string name="next_button_label" msgid="8890792540116568321">"Следеће"</string>
-    <string name="lock_title" product="tablet" msgid="2909697418179419990">"Заштита таблета"</string>
+    <string name="lock_title" product="tablet" msgid="2909697418179419990">"Обезбеђивање таблета"</string>
     <string name="lock_title" product="default" msgid="4059246467204273930">"Обезбеђивање телефона"</string>
-    <string name="lock_intro_message" product="tablet" msgid="4544669202394019747"><font size="17">"Заштитите таблет од неовлашћеног коришћења тако што ћете направити лични шаблон за откључавање екрана. "\n<font height="17">\n</font><b>"1."</b>"  На следећем екрану погледајте пример шаблона који ћемо нацртати. "\n<font height="17">\n</font><b>"2."</b>"  Када будете спремни, нацртајте сопствени лични шаблон за откључавање. Експериментишите са различитим шаблонима, али повежите најмање четири тачке. "\n<font height="17">\n</font><b>"3."</b>"  Нацртајте поново шаблон да бисте га потврдили. "\n<font height="17">\n</font><b>"Спремни сте за почетак? Додирните „Следеће“"</b>". "\n<font height="3">\n</font>"Да бисте оставили таблет незаштићеним, додирните „Откажи“."</font></string>
+    <!-- unknown placeholder TAG_FONT_0 in lock_intro_message -->
+    <skip />
+    <!-- no translation found for lock_intro_message (3692151094288835065) -->
+    <skip />
     <string name="lock_intro_message" product="default" msgid="9100785646737118042"><font size="17">"Заштитите телефон од неовлашћеног коришћења тако што ћете направити лични шаблон за откључавање екрана. "\n<font height="17">\n</font><b>"1"</b>"  На следећем екрану погледајте пример прављења шаблона. "\n<font height="17">\n</font><b>"2"</b>"  Када сте спремни, нацртајте сопствени лични шаблон за откључавање. Експериментишите са различитим шаблонима, али повежите најмање четири тачке. "\n<font height="17">\n</font><b>"3"</b>"  Поново нацртајте свој шаблон да бисте потврдили. "\n<font height="17">\n</font><b>"Да ли сте спремни да почнете? Додирните „Следеће“"</b>". "\n<font height="3">\n</font>"Да бисте телефон оставили без заштите, додирните „Откажи“."</font></string>
-    <string name="lock_example_title" msgid="8052305554017485410">"Пример шаблона"</string>
-    <string name="lock_example_message" msgid="1838650097090632706">"Повежите се са најмање четири тачке."\n" "\n"Додирните дугме „Следеће“ када будете спремни да нацртате сопствени шаблон."</string>
     <string name="manageapplications_settings_title" msgid="5712405848153426706">"Управљање апликацијама"</string>
     <string name="manageapplications_settings_summary" msgid="6097117021500651232">"Управљање и уклањање инсталираних апликација"</string>
     <string name="applications_settings" msgid="3736173521008476946">"Апликације"</string>
@@ -920,7 +845,7 @@
     <string name="applications_settings_header" msgid="6018266337275422250">"Подешавања апликације"</string>
     <string name="install_applications" msgid="4872012136210802181">"Непознати извори"</string>
     <string name="install_unknown_applications" msgid="6612824788917283662">"Дозволи инсталације апликација непознатог порекла"</string>
-    <string name="install_all_warning" product="tablet" msgid="8143969767997876735">"Таблет и лични подаци су подложнији нападу апликација из непознатих извора. Сагласни сте да сте само ви одговорни за сву штету на таблету или губитак података до ког може да дође услед коришћења ових апликација."</string>
+    <string name="install_all_warning" product="tablet" msgid="8143969767997876735">"Таблет и лични подаци су подложнији нападима апликација из непознатих извора. Сагласни сте да сте једино ви одговорни за оштећења таблета или губитак података који могу да настану као последица употребе ових апликација."</string>
     <string name="install_all_warning" product="default" msgid="1923717607319933741">"Телефон и лични подаци подложнији су нападу апликација од непознатих извора. Сагласни сте да сте само ви одговорни за сву штету на телефону или губитак података до ког може да дође услед коришћења ових апликација."</string>
     <string name="application_info_label" msgid="1150486628158409543">"Информације о апликацији"</string>
     <string name="storage_label" msgid="8700867073480107253">"Складиште"</string>
@@ -935,40 +860,31 @@
     <string name="application_size_label" msgid="5055196275624686382">"Апликација"</string>
     <string name="data_size_label" msgid="8679376373625710107">"Подаци"</string>
     <string name="uninstall_text" msgid="3644892466144802466">"Деинсталирај"</string>
-    <!-- no translation found for disable_text (6544054052049395202) -->
-    <skip />
-    <!-- no translation found for enable_text (9217362512327828987) -->
-    <skip />
+    <string name="disable_text" msgid="6544054052049395202">"Онемогући"</string>
+    <string name="enable_text" msgid="9217362512327828987">"Омогући"</string>
     <string name="clear_user_data_text" msgid="5597622864770098388">"Обриши податке"</string>
     <string name="app_factory_reset" msgid="6635744722502563022">"Деинсталирај ажурирања"</string>
     <string name="auto_launch_enable_text" msgid="2630656657744196691">"Изабрали сте да се ова апликација подразумевано покреће за неке радње."</string>
     <string name="auto_launch_disable_text" msgid="7800385822185540166">"Нису постављене подразумеване вредности."</string>
     <string name="clear_activities" msgid="7408923511535174430">"Обриши подразумевано"</string>
     <string name="unknown" msgid="1592123443519355854">"Непознато"</string>
-    <!-- outdated translation 8622029358896599842 -->     <string name="sort_order_alpha" msgid="1410278099123670628">"Сортирај"</string>
+    <string name="sort_order_alpha" msgid="1410278099123670628">"Сортирај према имену"</string>
     <string name="sort_order_size" msgid="7024513286636502362">"Сортирај према величини"</string>
-    <!-- no translation found for show_running_services (5736278767975544570) -->
-    <skip />
-    <!-- no translation found for show_background_processes (2009840211972293429) -->
-    <skip />
+    <string name="show_running_services" msgid="5736278767975544570">"Прикажи покренуте услуге"</string>
+    <string name="show_background_processes" msgid="2009840211972293429">"Прикажи кеширане процесе"</string>
     <string name="manage_space_text" msgid="8852711522447794676">"Управљај простором"</string>
     <string name="filter" msgid="2018011724373033887">"Филтрирај"</string>
     <string name="filter_dlg_title" msgid="6507663329723966854">"Избор опција филтера"</string>
     <string name="filter_apps_all" msgid="5142129378749391876">"Све"</string>
     <string name="filter_apps_third_party" msgid="7786348047690140979">"Преузето"</string>
     <string name="filter_apps_running" msgid="7767071454371350486">"Покретање"</string>
-    <!-- outdated translation 1477351142334784771 -->     <string name="filter_apps_onsdcard" product="nosdcard" msgid="4843063154701023349">"На SD картици"</string>
+    <string name="filter_apps_onsdcard" product="nosdcard" msgid="4843063154701023349">"USB меморија"</string>
     <string name="filter_apps_onsdcard" product="default" msgid="1477351142334784771">"На SD картици"</string>
-    <!-- no translation found for disabled (9206776641295849915) -->
-    <skip />
-    <!-- no translation found for no_applications (5190227407135243904) -->
-    <skip />
-    <!-- no translation found for internal_storage (1584700623164275282) -->
-    <skip />
-    <!-- no translation found for sd_card_storage (2673203150465132465) -->
-    <skip />
-    <!-- no translation found for sd_card_storage (7623513618171928235) -->
-    <skip />
+    <string name="disabled" msgid="9206776641295849915">"Онемогућено"</string>
+    <string name="no_applications" msgid="5190227407135243904">"Нема апликација."</string>
+    <string name="internal_storage" msgid="1584700623164275282">"Интерна меморија"</string>
+    <string name="sd_card_storage" product="nosdcard" msgid="2673203150465132465">"USB меморија"</string>
+    <string name="sd_card_storage" product="default" msgid="7623513618171928235">"SD картица"</string>
     <string name="recompute_size" msgid="7722567982831691718">"Поновно израчунавање величине..."</string>
     <string name="clear_data_dlg_title" msgid="4470209520936375508">"Брисање"</string>
     <string name="clear_data_dlg_text" msgid="8368035073300828451">"Сви подаци ове апликације ће бити трајно избрисани. То обухвата све датотеке, подешавања, налоге, базе података и слично."</string>
@@ -990,7 +906,7 @@
     <string name="move_app" msgid="5042838441401731346">"Премести"</string>
     <string name="move_app_to_internal" product="tablet" msgid="2299714147283854957">"Премести на таблет"</string>
     <string name="move_app_to_internal" product="default" msgid="3895430471913858185">"Премести у телефон"</string>
-    <!-- outdated translation 1143379049903056407 -->     <string name="move_app_to_sdcard" product="nosdcard" msgid="4350451696315265420">"Премести у SD картицу"</string>
+    <string name="move_app_to_sdcard" product="nosdcard" msgid="4350451696315265420">"Премести у USB меморију"</string>
     <string name="move_app_to_sdcard" product="default" msgid="1143379049903056407">"Премести у SD картицу"</string>
     <string name="moving" msgid="6431016143218876491">"Премештање"</string>
     <string name="insufficient_storage" msgid="8566913062094452962">"Нема довољно складишта."</string>
@@ -999,81 +915,55 @@
     <string name="invalid_location" msgid="4934491353200240499">"Наведена локација инсталације је неважећа."</string>
     <string name="system_package" msgid="1030561474413022831">"Није могуће инсталирати системска ажурирања на спољашњем медијуму."</string>
     <string name="force_stop_dlg_title" msgid="4289453224368188476">"Принудно заустављање"</string>
-    <!-- outdated translation 3381302041569982075 -->     <string name="force_stop_dlg_text" msgid="5157374701213502922">"Ова апликација ће се одмах поново покренути. Желите ли заиста да је принудно зауставите?"</string>
+    <string name="force_stop_dlg_text" msgid="5157374701213502922">"Принудно заустављање апликације може довести до неочекиваног понашања. Да ли сте сигурни?"</string>
     <string name="move_app_failed_dlg_title" msgid="4337731903265156405">"Премештање апликације"</string>
     <string name="move_app_failed_dlg_text" msgid="8824246817947643697">"Премештање апликације није успело. <xliff:g id="REASON">%1$s</xliff:g>"</string>
     <string name="app_install_location_title" msgid="2068975150026852168">"Жељена локација инсталације"</string>
     <string name="app_install_location_summary" msgid="879753854530300436">"Мењање жељене локације за инсталацију нових апликација."</string>
-    <!-- no translation found for storageuse_settings_title (5657014373502630403) -->
-    <skip />
-    <!-- no translation found for storageuse_settings_summary (2556057379120846792) -->
-    <skip />
+    <string name="storageuse_settings_title" msgid="5657014373502630403">"Коришћење меморије"</string>
+    <string name="storageuse_settings_summary" msgid="2556057379120846792">"Преглед искоришћене меморије по апликацијама"</string>
     <string name="runningservices_settings_title" msgid="8097287939865165213">"Покренуте услуге"</string>
     <string name="runningservices_settings_summary" msgid="854608995821032748">"Приказ и контрола тренутно покренутих услуга"</string>
     <string name="service_restarting" msgid="2242747937372354306">"Поновно покретање"</string>
-    <!-- no translation found for cached (1059590879740175019) -->
-    <skip />
-    <!-- outdated translation 6981216347270280598 -->     <string name="no_running_services" msgid="2059536495597645347">"Нема покренутих услуга"</string>
-    <!-- outdated translation 8432097226392386802 -->     <string name="service_started_by_app" msgid="6575184738671598131">"Покренула је апликација: додирните за заустављање"</string>
+    <string name="cached" msgid="1059590879740175019">"Кеширани позадински процес"</string>
+    <string name="no_running_services" msgid="2059536495597645347">"Нема покренутих услуга."</string>
+    <string name="service_started_by_app" msgid="6575184738671598131">"Услугу је покренула апликација."</string>
     <!-- no translation found for service_client_name (4037193625611815517) -->
     <skip />
-    <!-- no translation found for service_background_processes (6844156253576174488) -->
-    <skip />
-    <!-- no translation found for service_foreground_processes (7583975676795574276) -->
-    <skip />
-    <!-- no translation found for memory (6609961111091483458) -->
-    <skip />
+    <string name="service_background_processes" msgid="6844156253576174488">"<xliff:g id="MEMORY">%1$s</xliff:g> слободно"</string>
+    <string name="service_foreground_processes" msgid="7583975676795574276">"<xliff:g id="MEMORY">%1$s</xliff:g> иск."</string>
+    <string name="memory" msgid="6609961111091483458">"RAM"</string>
     <!-- no translation found for service_process_name (4098932168654826656) -->
     <skip />
-    <!-- no translation found for running_processes_item_description_s_s (5790575965282023145) -->
-    <skip />
-    <!-- no translation found for running_processes_item_description_s_p (8019860457123222953) -->
-    <skip />
-    <!-- no translation found for running_processes_item_description_p_s (744424668287252915) -->
-    <skip />
-    <!-- no translation found for running_processes_item_description_p_p (1607384595790852782) -->
-    <skip />
-    <!-- no translation found for runningservicedetails_settings_title (6188692418986988288) -->
-    <skip />
-    <!-- no translation found for no_services (7133900764462288263) -->
-    <skip />
-    <!-- no translation found for runningservicedetails_services_title (391168243725357375) -->
-    <skip />
-    <!-- no translation found for runningservicedetails_processes_title (928115582044655268) -->
-    <skip />
-    <!-- no translation found for service_stop (6369807553277527248) -->
-    <skip />
-    <!-- no translation found for service_manage (1876642087421959194) -->
-    <skip />
-    <!-- no translation found for service_stop_description (3261798282116866961) -->
-    <skip />
-    <!-- no translation found for heavy_weight_stop_description (6855241582643136019) -->
-    <skip />
-    <!-- no translation found for background_process_stop_description (1728354083304746737) -->
-    <skip />
-    <!-- no translation found for service_manage_description (7050092269951613102) -->
-    <skip />
-    <!-- no translation found for main_running_process_description (929204645380391397) -->
-    <skip />
-    <!-- no translation found for process_service_in_use_description (8993335064403217080) -->
-    <skip />
-    <!-- no translation found for process_provider_in_use_description (5586603325677678940) -->
-    <skip />
-    <!-- no translation found for runningservicedetails_stop_dlg_title (4253292537154337233) -->
-    <skip />
-    <string name="runningservicedetails_stop_dlg_text" product="tablet" msgid="5420033091144016389">"Да ли сте сигурни да желите да престанете са коришћењем ове системске услуге? Уколико то урадите, неке функције таблета ће можда престати да раде на прави начин док га не искључите и поново укључите."</string>
-    <!-- outdated translation 5420033091144016389 -->     <string name="runningservicedetails_stop_dlg_text" product="default" msgid="6929716497425738387">"Да ли сте сигурни да желите да престанете са коришћењем ове системске услуге? Уколико то урадите, неке функције таблета ће можда престати да раде на прави начин док га не искључите и поново укључите."</string>
+    <string name="running_processes_item_description_s_s" msgid="5790575965282023145">"<xliff:g id="NUMPROCESS">%1$d</xliff:g> процес и <xliff:g id="NUMSERVICES">%2$d</xliff:g> услуга"</string>
+    <string name="running_processes_item_description_s_p" msgid="8019860457123222953">"<xliff:g id="NUMPROCESS">%1$d</xliff:g> процес и <xliff:g id="NUMSERVICES">%2$d</xliff:g> услуге"</string>
+    <string name="running_processes_item_description_p_s" msgid="744424668287252915">"<xliff:g id="NUMPROCESS">%1$d</xliff:g> процеса и <xliff:g id="NUMSERVICES">%2$d</xliff:g> услуга"</string>
+    <string name="running_processes_item_description_p_p" msgid="1607384595790852782">"<xliff:g id="NUMPROCESS">%1$d</xliff:g> процеса и <xliff:g id="NUMSERVICES">%2$d</xliff:g> услуга"</string>
+    <string name="runningservicedetails_settings_title" msgid="6188692418986988288">"Покренута апликација"</string>
+    <string name="no_services" msgid="7133900764462288263">"Нема активних"</string>
+    <string name="runningservicedetails_services_title" msgid="391168243725357375">"Услуге"</string>
+    <string name="runningservicedetails_processes_title" msgid="928115582044655268">"Процеси"</string>
+    <string name="service_stop" msgid="6369807553277527248">"Заустави"</string>
+    <string name="service_manage" msgid="1876642087421959194">"Подешавања"</string>
+    <string name="service_stop_description" msgid="3261798282116866961">"Ову услугу је покренула одговарајућа апликација. Ако је зауставите, апликација ће отказати."</string>
+    <string name="heavy_weight_stop_description" msgid="6855241582643136019">"Ову апликацију није могуће безбедно зауставити. Ако је зауставите, може доћи до губитка дела података са којима сада радите."</string>
+    <string name="background_process_stop_description" msgid="1728354083304746737">"Ово је процес старе апликације који се чува ради боље брзине у случају да буде поново потребан. Обично нема разлога да га заустављате."</string>
+    <string name="service_manage_description" msgid="7050092269951613102">"<xliff:g id="CLIENT_NAME">%1$s</xliff:g>: тренутно се користи. Додирните „Подешавања“ да бисте га контролисали."</string>
+    <string name="main_running_process_description" msgid="929204645380391397">"Главни процес који се тренутно користи."</string>
+    <string name="process_service_in_use_description" msgid="8993335064403217080">"Услуга <xliff:g id="COMP_NAME">%1$s</xliff:g> се тренутно користи."</string>
+    <string name="process_provider_in_use_description" msgid="5586603325677678940">"Добављач <xliff:g id="COMP_NAME">%1$s</xliff:g> се тренутно користи."</string>
+    <string name="runningservicedetails_stop_dlg_title" msgid="4253292537154337233">"Желите да зауставите системску услугу?"</string>
+    <string name="runningservicedetails_stop_dlg_text" product="tablet" msgid="5420033091144016389">"Да ли заиста желите да зауставите ову системску услугу? Ако је зауставите, неке функције таблета ће можда престати исправно да раде док таблет не искључите и поново укључите."</string>
+    <string name="runningservicedetails_stop_dlg_text" product="default" msgid="6929716497425738387">"Да ли заиста желите да зауставите ову системску услугу? Ако је зауставите, неке функције телефона ће можда престати исправно да раде док телефон не искључите и поново укључите."</string>
     <!-- outdated translation 502219872342167227 -->     <string name="language_settings" msgid="5292716747264442359">"Језик и тастатура"</string>
-    <string name="language_keyboard_settings_title" msgid="3455826933385341107">"Подешавања језика и тастатуре"</string>
-    <!-- no translation found for language_settings_category (2288258489940617043) -->
-    <skip />
-    <!-- no translation found for keyboard_settings_category (7060453865544070642) -->
-    <skip />
+    <!-- outdated translation 3455826933385341107 -->     <string name="language_keyboard_settings_title" msgid="243220021717425813">"Подешавања језика и тастатуре"</string>
+    <string name="language_settings_category" msgid="2288258489940617043">"Језичка подешавања"</string>
+    <string name="keyboard_settings_category" msgid="7060453865544070642">"Подешавања тастатуре"</string>
     <string name="phone_language" msgid="1165758957501090679">"Избор језика"</string>
     <string name="phone_language_summary" msgid="3871309445655554211"></string>
     <string name="auto_replace" msgid="6199184757891937822">"Аутоматска замена"</string>
     <string name="auto_replace_summary" msgid="370288728200084466">"Исправљање погрешно унетих речи"</string>
-    <!-- outdated translation 581633131114124121 -->     <string name="auto_caps" msgid="6379232078052591265">"Aутоматска велика слова"</string>
+    <string name="auto_caps" msgid="6379232078052591265">"Аутоматско писање великих почетних слова"</string>
     <string name="auto_caps_summary" msgid="6358102538315261466">"Велико слово на почетку реченице"</string>
     <string name="auto_punctuate" msgid="4595367243950425833">"Аутоматска интерпункција"</string>
     <string name="hardkeyboard_category" msgid="5957168411305769899">"Подешавања физичке тастатуре"</string>
@@ -1106,17 +996,31 @@
     <string name="quick_launch_display_mode_applications" msgid="3748789806447639039">"Апликације"</string>
     <string name="quick_launch_display_mode_shortcuts" msgid="4177934019174169042">"Пречице"</string>
     <string name="input_methods_settings_title" msgid="6800066636850553887">"Унос текста"</string>
-    <!-- no translation found for input_method (5434026103176856164) -->
+    <string name="input_method" msgid="5434026103176856164">"Метод улаза"</string>
+    <!-- no translation found for current_input_method (2146807723398303917) -->
+    <skip />
+    <!-- no translation found for input_method_selector (4311213129681430709) -->
+    <skip />
+    <!-- no translation found for input_method_selector_show_automatically_title (1001612945471546158) -->
+    <skip />
+    <!-- no translation found for input_method_selector_always_show_title (3891824124222371634) -->
+    <skip />
+    <!-- no translation found for input_method_selector_always_hide_title (7699647095118680424) -->
+    <skip />
+    <!-- no translation found for configure_input_method (7773992829158322455) -->
+    <skip />
+    <!-- no translation found for input_method_settings (5801295625486269553) -->
+    <skip />
+    <!-- no translation found for active_input_method_subtypes (3596398805424733238) -->
     <skip />
     <string name="input_methods_settings_summary" msgid="7571173442946675205">"Управљање опцијама за унос текста"</string>
     <string name="input_methods_settings_label_format" msgid="6002887604815693322">"<xliff:g id="IME_NAME">%1$s</xliff:g> подешавања"</string>
-    <!-- no translation found for input_methods_and_subtype_enabler_title (6850705060511001699) -->
-    <skip />
-    <!-- no translation found for input_methods_and_subtype_enabler_title_format (2977431588856991351) -->
+    <!-- outdated translation 6850705060511001699 -->     <string name="input_methods_and_subtype_enabler_title" msgid="4018402267502337338">"Управљање методима улаза"</string>
+    <!-- no translation found for input_methods_and_subtype_enabler_title_format (5513389679127310099) -->
     <skip />
     <string name="onscreen_keyboard_settings_summary" msgid="5841558383556238653">"Подешавања тастатуре на екрану"</string>
-    <!-- outdated translation 8169889453770863227 -->     <string name="builtin_keyboard_settings_title" msgid="5274990495405941804">"Тастатура уређаја"</string>
-    <!-- outdated translation 6404687907454621637 -->     <string name="builtin_keyboard_settings_summary" msgid="7990296351888096836">"Уграђена подешавања за тастатуру"</string>
+    <string name="builtin_keyboard_settings_title" msgid="5274990495405941804">"Уграђена тастатура"</string>
+    <string name="builtin_keyboard_settings_summary" msgid="7990296351888096836">"Подешавања уграђене, физичке тастатуре"</string>
     <string name="development_settings_title" msgid="6719732334835420989">"Програмирање"</string>
     <string name="development_settings_summary" msgid="2151320488701538355">"Подешавање опција за развој апликације"</string>
     <string name="enable_adb" msgid="7982306934419797485">"Отклањање USB грешака"</string>
@@ -1148,46 +1052,33 @@
     <string name="accessibility_service_security_warning" msgid="4066258132331302670">"Ова услуга приступачности можда може да прикупља сав текст који уносите, укључујући личне податке, бројеве кредитних картица, осим лозинки. Такође може да евидентира интеракције корисничког интерфејса. То потиче из апликације <xliff:g id="ACCESSIBILITY_SERVICE_NAME">%1$s</xliff:g>. Желите ли да користите ову услугу приступачности?"</string>
     <string name="accessibility_service_disable_warning" msgid="8930591383312775132">"Желите ли да онемогућите приступачност?"</string>
     <string name="accessibility_service_no_apps_title" msgid="898893674114288531">"Нису пронађене апликације у вези са приступачношћу"</string>
-    <!-- outdated translation 2450056749545404807 -->     <string name="accessibility_service_no_apps_message" msgid="2663371323410332529">"Немате инсталиране апликације повезане са приступачношћу."\n\n"Читач екрана за уређај можете да преузмете са Android Market-а."\n\n"Кликните на „Потврди“ да бисте инсталирали читач екрана."</string>
-    <!-- no translation found for accessibility_script_injection_category (8649951751131431904) -->
-    <skip />
-    <!-- no translation found for accessibility_script_injection_enabled (6927896081016611012) -->
-    <skip />
-    <!-- no translation found for accessibility_script_injection_enabled_summary (3629525134901617621) -->
-    <skip />
-    <!-- no translation found for accessibility_script_injection_security_warning (1113600871264359828) -->
-    <skip />
-    <!-- no translation found for accessibility_script_injection_security_warning (9078893361741942109) -->
-    <skip />
+    <string name="accessibility_service_no_apps_message" msgid="2663371323410332529">"Није инсталирана ниједна апликација везана за приступачност."\n\n"Можете да преузмете читач екрана за свој уређај са локације Android Market."\n\n"Кликните на „У реду“ да бисте инсталирали читач екрана."</string>
+    <string name="accessibility_script_injection_category" msgid="8649951751131431904">"Скрипте за приступачност"</string>
+    <string name="accessibility_script_injection_enabled" msgid="6927896081016611012">"Преузимање скрипти за приступачност"</string>
+    <string name="accessibility_script_injection_enabled_summary" msgid="3629525134901617621">"Дозволи апликацијама да преузму скрипте за приступ. са Google-а"</string>
+    <string name="accessibility_script_injection_security_warning" product="tablet" msgid="1113600871264359828">"Неке апликације могу од Google-а да затраже да на таблет преузму скрипте помоћу којих ће садржај апликација постати приступачнији. Да ли заиста желите да дозволите Google-у да на таблет инсталира скрипте за приступачност?"</string>
+    <string name="accessibility_script_injection_security_warning" product="default" msgid="9078893361741942109">"Неке апликације могу од Google-а да затраже да на телефон преузму скрипте помоћу којих ће садржај апликација постати приступачнији. Да ли заиста желите да дозволите Google-у да на телефон инсталира скрипте за приступачност?"</string>
     <string name="accessibility_power_button_category" msgid="8545885236482339928">"Дугме за укључивање и искључивање"</string>
     <string name="accessibility_power_button_ends_call" msgid="7698764194501089533">"Дугме за укључивање/искључивање прекида позив"</string>
     <string name="accessibility_power_button_ends_call_summary" msgid="8878097632186291462">"Уколико током позива притиснете дугме за укључивање и искључивање, прекидате позив уместо да искључите екран"</string>
     <string name="power_usage_summary_title" msgid="5180282911164282324">"Коришћење батерије"</string>
     <string name="power_usage_summary" msgid="7237084831082848168">"Шта користи батерију"</string>
-    <!-- no translation found for power_usage_not_available (3583407442633768046) -->
-    <skip />
+    <string name="power_usage_not_available" msgid="3583407442633768046">"Недоступни подаци о коришћењу батерије"</string>
     <string name="battery_since_unplugged" msgid="338073389740738437">"Коришћење батерије након искључивања"</string>
     <string name="battery_since_reset" msgid="7464546661121187045">"Коришћење батерије након поновног постављања"</string>
-    <!-- no translation found for battery_stats_on_battery (4970762168505236033) -->
-    <skip />
+    <string name="battery_stats_on_battery" msgid="4970762168505236033">"<xliff:g id="TIME">%1$s</xliff:g> на батерији"</string>
     <string name="battery_stats_duration" msgid="7464501326709469282">"<xliff:g id="TIME">%1$s</xliff:g> од искључивања"</string>
-    <!-- no translation found for battery_stats_charging_label (4223311142875178785) -->
-    <skip />
-    <!-- no translation found for battery_stats_screen_on_label (7150221809877509708) -->
-    <skip />
-    <!-- no translation found for battery_stats_gps_on_label (1193657533641951256) -->
-    <skip />
-    <!-- no translation found for battery_stats_wifi_running_label (3093545080361658269) -->
-    <skip />
-    <!-- no translation found for battery_stats_wake_lock_label (1908942681902324095) -->
-    <skip />
-    <!-- no translation found for battery_stats_phone_signal_label (4137799310329041341) -->
-    <skip />
+    <string name="battery_stats_charging_label" msgid="4223311142875178785">"Пуњење"</string>
+    <string name="battery_stats_screen_on_label" msgid="7150221809877509708">"Екран је укључен"</string>
+    <string name="battery_stats_gps_on_label" msgid="1193657533641951256">"GPS је укључен"</string>
+    <string name="battery_stats_wifi_running_label" msgid="3093545080361658269">"Wi-Fi"</string>
+    <string name="battery_stats_wake_lock_label" msgid="1908942681902324095">"Буђење"</string>
+    <string name="battery_stats_phone_signal_label" msgid="4137799310329041341">"Сигнал мобилне мреже"</string>
     <!-- no translation found for battery_stats_last_duration (1535831453827905957) -->
     <skip />
     <string name="awake" msgid="387122265874485088">"Време буђења уређаја"</string>
-    <!-- outdated translation 4630925382578609056 -->     <string name="wifi_on_time" msgid="6310209835617490616">"Време укључивања WiFi мреже"</string>
-    <!-- outdated translation 4478515071957280711 -->     <string name="bluetooth_on_time" msgid="6157799524996162271">"Време укључивања WiFi мреже"</string>
+    <string name="wifi_on_time" msgid="6310209835617490616">"Wi-Fi на време"</string>
+    <string name="bluetooth_on_time" msgid="6157799524996162271">"Wi-Fi на време"</string>
     <string name="usage_name_percent" msgid="7976919382448235858">"<xliff:g id="NAME">%1$s</xliff:g> – <xliff:g id="NUMBER">%2$s</xliff:g><xliff:g id="PERCENT">%%</xliff:g>"</string>
     <!-- no translation found for history_details_title (3608240585315506067) -->
     <skip />
@@ -1204,11 +1095,9 @@
     <string name="power_idle" product="default" msgid="9055659695602194990">"Телефон у мировању"</string>
     <string name="usage_type_cpu" msgid="715162150698338714">"Укупно коришћење процесора"</string>
     <string name="usage_type_cpu_foreground" msgid="6500579611933211831">"Процесор у предњем плану"</string>
-    <!-- no translation found for usage_type_wake_lock (5125438890233677880) -->
-    <skip />
+    <string name="usage_type_wake_lock" msgid="5125438890233677880">"Задржи ван стања спавања"</string>
     <string name="usage_type_gps" msgid="7989688715128160790">"GPS"</string>
-    <!-- no translation found for usage_type_wifi_running (8234997940652067049) -->
-    <skip />
+    <string name="usage_type_wifi_running" msgid="8234997940652067049">"Wi-Fi је активан"</string>
     <string name="usage_type_phone" product="tablet" msgid="262638572890253393">"Таблет"</string>
     <string name="usage_type_phone" product="default" msgid="9108247984998041853">"Телефон"</string>
     <string name="usage_type_data_send" msgid="2857401966985425427">"Подаци су послати"</string>
@@ -1221,10 +1110,10 @@
     <string name="battery_action_app_details" msgid="3275013531871113681">"Информације о апликацији"</string>
     <string name="battery_action_app_settings" msgid="350562653472577250">"Подешавања апликације"</string>
     <string name="battery_action_display" msgid="5302763261448580102">"Подешавања приказа"</string>
-    <!-- outdated translation 5452076674659927993 -->     <string name="battery_action_wifi" msgid="2272741639606146903">"WiFi подешавања"</string>
+    <string name="battery_action_wifi" msgid="2272741639606146903">"Wi-Fi подешавања"</string>
     <string name="battery_action_bluetooth" msgid="8374789049507723142">"Подешавања за Bluetooth"</string>
     <string name="battery_desc_voice" msgid="8980322055722959211">"Батерија коју користе гласовни позиви"</string>
-    <string name="battery_desc_standby" product="tablet" msgid="6284747418668280364">"Батерија се користи у стању мировања"</string>
+    <string name="battery_desc_standby" product="tablet" msgid="6284747418668280364">"Искоришћена батерија када је таблет неактиван"</string>
     <string name="battery_desc_standby" product="default" msgid="3009080001948091424">"Батерија која се користи у стању мировања"</string>
     <string name="battery_desc_radio" msgid="5479196477223185367">"Батерија коју користи мобилни радио"</string>
     <string name="battery_sugg_radio" msgid="8211336978326295047">"Пређите на режим рада у авиону како би се сачувала батерија у областима без покривености мрежом"</string>
@@ -1235,9 +1124,9 @@
     <string name="battery_desc_bluetooth" msgid="7535520658674621902">"Батерија коју користи Bluetooth"</string>
     <string name="battery_sugg_bluetooth_basic" msgid="817276933922157788">"Искључите Bluetooth када га не користите"</string>
     <string name="battery_sugg_bluetooth_headset" msgid="8214816222115517479">"Покушајте да се повежете са другим bluetooth уређајем"</string>
-    <!-- outdated translation 8123202939321333639 -->     <string name="battery_desc_apps" msgid="6665712811746233450">"Батерија коју апликације користе током рада"</string>
+    <string name="battery_desc_apps" msgid="6665712811746233450">"Део снаге батерије коју користи апликација"</string>
     <string name="battery_sugg_apps_info" msgid="6065882899391322442">"Зауставите или деинсталирајте апликацију"</string>
-    <!-- outdated translation 4145005297393800223 -->     <string name="battery_sugg_apps_gps" msgid="4545056413090932541">"Искључите GPS када га не користите"</string>
+    <string name="battery_sugg_apps_gps" msgid="4545056413090932541">"Ручно контролишите GPS да га не би користиле апликације"</string>
     <string name="battery_sugg_apps_settings" msgid="8021302847272481168">"Апликација може да понуди подешавања како би се смањило коришћење батерије"</string>
     <string name="menu_stats_unplugged" msgid="8296577130840261624">"<xliff:g id="UNPLUGGED">%1$s</xliff:g> од искључивања"</string>
     <string name="menu_stats_last_unplugged" msgid="5922246077592434526">"Током последњег искључивања за <xliff:g id="UNPLUGGED">%1$s</xliff:g>"</string>
@@ -1287,10 +1176,8 @@
     <string name="pico_not_installed" msgid="6266845418419994311">"Није инсталирано"</string>
     <string name="pico_voice_summary_female" msgid="8047327176247727492">"Женски"</string>
     <string name="pico_voice_summary_male" msgid="8331266854058577610">"Мушки"</string>
-    <!-- no translation found for tts_notif_engine_install_title (7000346872482649034) -->
-    <skip />
-    <!-- no translation found for tts_notif_engine_install_message (5304661142202662693) -->
-    <skip />
+    <string name="tts_notif_engine_install_title" msgid="7000346872482649034">"Машина за синтезу говора инстал."</string>
+    <string name="tts_notif_engine_install_message" msgid="5304661142202662693">"Пре употребе омогућите машину"</string>
     <string name="gadget_title" msgid="7455548605888590466">"Контрола напајања"</string>
     <string name="gadget_toggle_wifi" msgid="2382963973155082629">"Ажурирање Wi-Fi подешавања"</string>
     <string name="gadget_toggle_bluetooth" msgid="7538903239807020826">"Ажурирање Bluetooth подешавања"</string>
@@ -1379,9 +1266,9 @@
     <string name="credentials_access_summary" msgid="319662078718574168">"Дозвољавање да апликације приступе безбедносним сертификатима и другим акредитивима"</string>
     <string name="credentials_unlock" msgid="1463040326264133844">"Унос лозинке"</string>
     <string name="credentials_unlock_hint" msgid="594679530407918031">"Уношење лозинке за складиште акредитива."</string>
-    <!-- outdated translation 177337517568022236 -->     <string name="credentials_install_certificates" product="nosdcard" msgid="619171634797689906">"Инсталирање са SD картице"</string>
+    <string name="credentials_install_certificates" product="nosdcard" msgid="619171634797689906">"Инсталирање са USB-а"</string>
     <string name="credentials_install_certificates" product="default" msgid="177337517568022236">"Инсталирање са SD картице"</string>
-    <!-- outdated translation 7737001268684193093 -->     <string name="credentials_install_certificates_summary" product="nosdcard" msgid="8920330112631198575">"Инсталирање шифрованих сертификата са SD картице"</string>
+    <string name="credentials_install_certificates_summary" product="nosdcard" msgid="8920330112631198575">"Инсталација шифр. сертификата из USB меморије"</string>
     <string name="credentials_install_certificates_summary" product="default" msgid="7737001268684193093">"Инсталирање шифрованих сертификата са SD картице"</string>
     <string name="credentials_set_password" msgid="9104473585811899989">"Подешавање лозинке"</string>
     <string name="credentials_set_password_summary" msgid="8287876917562085701">"Подешавање или промена лозинке за складиште акредитива"</string>
@@ -1429,15 +1316,15 @@
     <string name="backup_section_title" msgid="8856083167469467588">"Прављење резервних копија и враћање"</string>
     <string name="personal_data_section_title" msgid="7815209034443782061">"Лични подаци"</string>
     <string name="backup_data_title" msgid="1239105919852668016">"Прављење резервних копија мојих података"</string>
-    <!-- outdated translation 5662190190240860035 -->     <string name="backup_data_summary" msgid="6515285107793232815">"Прављење резервних копија подешавања и других података апликација."</string>
-    <!-- no translation found for backup_configure_transport_title (1642593939931033647) -->
+    <string name="backup_data_summary" msgid="6515285107793232815">"Направите резервну копију података о апликацијама, лозинки за Wi-Fi и других подешавања на Google серверима"</string>
+    <!-- no translation found for backup_configure_account_title (3790872965773196615) -->
     <skip />
-    <!-- no translation found for backup_configure_transport_default_summary (1855090161240800307) -->
+    <!-- no translation found for backup_configure_account_default_summary (2436933224764745553) -->
     <skip />
     <string name="auto_restore_title" msgid="5397528966329126506">"Аутоматско враћање"</string>
-    <!-- outdated translation 6867766474057290177 -->     <string name="auto_restore_summary" msgid="83177150536734378">"Уколико поново инсталирате апликацију, вратите подешавања и друге податке за које имате резервне копије."</string>
+    <string name="auto_restore_summary" msgid="83177150536734378">"Ако поново инсталирам неку апликацију, врати резервна подешавања или друге податке"</string>
     <string name="backup_erase_dialog_title" msgid="3438255037256586237">"Резервна копија"</string>
-    <!-- outdated translation 2948090854996352245 -->     <string name="backup_erase_dialog_message" msgid="7766283133557587608">"Желите ли заиста да зауставите прављење резервних копија подешавања и података апликације и избришете све примерке на Google серверима?"</string>
+    <string name="backup_erase_dialog_message" msgid="7766283133557587608">"Да ли заиста желите да престанете са прављењем резервних копија Wi-Fi лозинки, обележивача, као и других подешавања и података о апликацијама, и избришете све копије са Google сервера?"</string>
     <string name="device_admin_settings_title" msgid="1335557832906433309">"Подешавања администрације уређаја"</string>
     <string name="active_device_admin_msg" msgid="6930903262612422111">"Администратор уређаја"</string>
     <string name="remove_device_admin" msgid="3596845261596451437">"Деактивирај"</string>
@@ -1453,75 +1340,48 @@
     <string name="sound_category_calls_title" msgid="3688531959256239012">"Долазни позиви"</string>
     <string name="sound_category_notification_title" msgid="3502115998790286943">"Обавештења"</string>
     <string name="sound_category_feedback_title" msgid="4399742321363475393">"Повратне информације"</string>
-    <!-- no translation found for wifi_setup_title (3130584822275278425) -->
-    <skip />
-    <!-- no translation found for wifi_setup_not_connected (6997432604664057052) -->
-    <skip />
-    <!-- no translation found for wifi_setup_add_network (5939624680150051807) -->
-    <skip />
-    <!-- no translation found for wifi_setup_refresh_list (3411615711486911064) -->
-    <skip />
-    <!-- no translation found for wifi_setup_skip (6661541841684895522) -->
-    <skip />
-    <!-- no translation found for wifi_setup_next (3388694784447820477) -->
-    <skip />
-    <!-- no translation found for wifi_setup_back (144777383739164044) -->
-    <skip />
-    <!-- no translation found for wifi_setup_detail (2336990478140503605) -->
-    <skip />
-    <!-- no translation found for wifi_setup_connect (7954456989590237049) -->
-    <skip />
-    <!-- no translation found for wifi_setup_forget (2562847595567347526) -->
-    <skip />
-    <!-- no translation found for wifi_setup_save (3659235094218508211) -->
-    <skip />
-    <!-- no translation found for wifi_setup_cancel (3185216020264410239) -->
-    <skip />
-    <!-- no translation found for wifi_setup_status_scanning (7424598483871053657) -->
-    <skip />
+    <string name="wifi_setup_title" msgid="3130584822275278425">"WiFi подешавање"</string>
+    <string name="wifi_setup_not_connected" msgid="6997432604664057052">"Није повезано"</string>
+    <string name="wifi_setup_add_network" msgid="5939624680150051807">"Додај мрежу"</string>
+    <string name="wifi_setup_refresh_list" msgid="3411615711486911064">"Освежи листу"</string>
+    <string name="wifi_setup_skip" msgid="6661541841684895522">"Прескочи"</string>
+    <string name="wifi_setup_next" msgid="3388694784447820477">"Next"</string>
+    <string name="wifi_setup_back" msgid="144777383739164044">"Назад"</string>
+    <string name="wifi_setup_detail" msgid="2336990478140503605">"Мрежни детаљи"</string>
+    <string name="wifi_setup_connect" msgid="7954456989590237049">"Повежи"</string>
+    <string name="wifi_setup_forget" msgid="2562847595567347526">"Заборави"</string>
+    <string name="wifi_setup_save" msgid="3659235094218508211">"Сачувај"</string>
+    <string name="wifi_setup_cancel" msgid="3185216020264410239">"Откажи"</string>
+    <string name="wifi_setup_status_scanning" msgid="7424598483871053657">"Скенирање мрежа..."</string>
     <!-- no translation found for wifi_setup_status_select_network (7519563569903137003) -->
     <skip />
-    <!-- no translation found for wifi_setup_status_existing_network (6394925174802598186) -->
+    <string name="wifi_setup_status_existing_network" msgid="6394925174802598186">"Повезивање са постојећом мрежом"</string>
+    <!-- no translation found for wifi_setup_status_unsecured_network (8143046977328718252) -->
     <skip />
-    <!-- no translation found for wifi_setup_status_edit_network (6582036394332822032) -->
+    <string name="wifi_setup_status_edit_network" msgid="6582036394332822032">"Унесите конфигурацију мреже"</string>
+    <string name="wifi_setup_status_new_network" msgid="7468952850452301083">"Повезивање са новом мрежом"</string>
+    <string name="wifi_setup_status_connecting" msgid="2594117697215042584">"Повезивање..."</string>
+    <string name="wifi_setup_status_proceed_to_next" msgid="9071951312604559022">"Пређите на следећи корак"</string>
+    <!-- no translation found for wifi_setup_status_eap_not_supported (3196386445567501484) -->
     <skip />
-    <!-- no translation found for wifi_setup_status_new_network (7468952850452301083) -->
-    <skip />
-    <!-- no translation found for wifi_setup_status_connecting (2594117697215042584) -->
-    <skip />
-    <!-- no translation found for wifi_setup_status_proceed_to_next (9071951312604559022) -->
+    <!-- no translation found for wifi_setup_eap_not_supported (5083895763075722698) -->
     <skip />
     <string name="account_sync_settings_title" msgid="4578227872921044660">"Подешавања сихронизације"</string>
     <!-- no translation found for sync_is_failing (1591561768344128377) -->
     <skip />
-    <!-- no translation found for add_account_label (7811707265834013767) -->
-    <skip />
-    <!-- no translation found for header_general_sync_settings (3487451896424238469) -->
-    <skip />
-    <!-- no translation found for background_data (5779592891375473817) -->
-    <skip />
-    <!-- no translation found for background_data_summary (3630389249212620467) -->
-    <skip />
-    <!-- no translation found for background_data_dialog_title (745974259246047425) -->
-    <skip />
-    <!-- no translation found for background_data_dialog_message (9155730118215371308) -->
-    <skip />
+    <string name="add_account_label" msgid="7811707265834013767">"Додај налог"</string>
+    <string name="header_general_sync_settings" msgid="3487451896424238469">"Подеш. опште синхронизације"</string>
+    <string name="background_data" msgid="5779592891375473817">"Подаци о позадини"</string>
+    <string name="background_data_summary" msgid="3630389249212620467">"Апликације увек могу да синхронизују, шаљу и примају податке"</string>
+    <string name="background_data_dialog_title" msgid="745974259246047425">"Пажња"</string>
+    <string name="background_data_dialog_message" msgid="9155730118215371308">"Ако онемогућите позадинске податке, батерија ће трајати дуже, а употреба података ће бити мања. Неке апликације ће можда и даље користити везу са позадинским подацима."</string>
     <!-- no translation found for sync_automatically (7558810110682562376) -->
     <skip />
-    <!-- no translation found for sync_automatically_summary (6662623174608419931) -->
-    <skip />
-    <!-- no translation found for header_manage_accounts (6869002423884539607) -->
-    <skip />
-    <!-- no translation found for sync_enabled (4551148952179416813) -->
-    <skip />
-    <!-- no translation found for sync_disabled (8511659877596511991) -->
-    <skip />
-    <!-- no translation found for sync_error (5060969083117872149) -->
-    <skip />
-    <!-- no translation found for app_label (5443184607893378389) -->
-    <skip />
-    <!-- no translation found for sync_too_many_deletes (7648720493358579441) -->
-    <skip />
+    <string name="sync_automatically_summary" msgid="6662623174608419931">"Апликације синхронизују податке аутоматски"</string>
+    <string name="header_manage_accounts" msgid="6869002423884539607">"Управљање налозима"</string>
+    <string name="sync_enabled" msgid="4551148952179416813">"Синхрон. је УКЉУЧЕНА"</string>
+    <string name="sync_disabled" msgid="8511659877596511991">"Синхр. је ИСКЉУЧЕНА"</string>
+    <string name="sync_error" msgid="5060969083117872149">"Грешка при синхрон."</string>
     <string name="settings_backup" msgid="2274732978260797031">"Направи резервну копију подешавања"</string>
     <!-- no translation found for settings_backup_summary (7916877705938054035) -->
     <skip />
@@ -1536,14 +1396,6 @@
     <!-- no translation found for sync_calendar (9056527206714733735) -->
     <skip />
     <!-- no translation found for sync_contacts (9174914394377828043) -->
-    <skip />
-    <!-- no translation found for sync_too_many_deletes_desc (1629933977544304140) -->
-    <skip />
-    <!-- no translation found for sync_really_delete (8501873911799839009) -->
-    <skip />
-    <!-- no translation found for sync_undo_deletes (2154022612361710595) -->
-    <skip />
-    <!-- no translation found for sync_do_nothing (5889328648484047916) -->
     <skip />
     <!-- no translation found for sync_plug (5952575609349860569) -->
     <skip />
