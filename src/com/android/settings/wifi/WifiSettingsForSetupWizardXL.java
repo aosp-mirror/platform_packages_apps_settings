@@ -121,8 +121,6 @@ public class WifiSettingsForSetupWizardXL extends Activity implements OnClickLis
                 (WifiSettings)getFragmentManager().findFragmentById(R.id.wifi_setup_fragment);
         mInputMethodManager = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
         setup();
-        // XXX: should we use method?
-        getIntent().putExtra(WifiSettings.IN_XL_SETUP_WIZARD, true);
     }
 
     public void setup() {
@@ -243,6 +241,7 @@ public class WifiSettingsForSetupWizardXL extends Activity implements OnClickLis
             mProgressBar.setIndeterminate(false);
             mProgressBar.setProgress(2);
             mProgressText.setText(Summary.get(this, state));
+            mStatusText.setVisibility(View.VISIBLE);
             mStatusText.setText(R.string.wifi_setup_status_proceed_to_next);
 
             mAddNetworkButton.setVisibility(View.GONE);
@@ -275,6 +274,7 @@ public class WifiSettingsForSetupWizardXL extends Activity implements OnClickLis
     private void showConnectingStatus() {
         mProgressBar.setIndeterminate(false);
         mProgressBar.setProgress(1);
+        mStatusText.setVisibility(View.VISIBLE);
         mStatusText.setText(R.string.wifi_setup_status_connecting);
         mProgressText.setText(Summary.get(this, DetailedState.CONNECTING));
     }
@@ -284,6 +284,7 @@ public class WifiSettingsForSetupWizardXL extends Activity implements OnClickLis
         ((Button)findViewById(R.id.wifi_setup_add_network)).setEnabled(false);
         ((Button)findViewById(R.id.wifi_setup_refresh_list)).setEnabled(false);
         mProgressText.setText(Summary.get(this, DetailedState.SCANNING));
+        mStatusText.setVisibility(View.VISIBLE);
         mStatusText.setText(R.string.wifi_setup_status_scanning);
     }
 
@@ -327,14 +328,15 @@ public class WifiSettingsForSetupWizardXL extends Activity implements OnClickLis
         } else if (selectedAccessPoint != null &&
                 selectedAccessPoint.security == AccessPoint.SECURITY_EAP) {
             mStatusText.setText(R.string.wifi_setup_status_eap_not_supported);
+            mConnectButton.setVisibility(View.GONE);
         } else {
-            mStatusText.setText(R.string.wifi_setup_status_edit_network);
+            // mStatusText.setText(R.string.wifi_setup_status_edit_network);
+            mStatusText.setVisibility(View.GONE);
+            mConnectButton.setVisibility(View.VISIBLE);
         }
         mAddNetworkButton.setVisibility(View.GONE);
         mRefreshButton.setVisibility(View.GONE);
         mSkipOrNextButton.setVisibility(View.GONE);
-        mConnectButton.setVisibility(View.VISIBLE);
-        mConnectButton.setVisibility(View.VISIBLE);
         mBackButton.setVisibility(View.VISIBLE);
         // TODO: remove this after UI fix.
         // mDetailButton.setVisibility(View.VISIBLE);
@@ -400,6 +402,7 @@ public class WifiSettingsForSetupWizardXL extends Activity implements OnClickLis
         } else { // During user's Wifi configuration.
             mWifiSettings.resumeWifiScan();
 
+            mStatusText.setVisibility(View.VISIBLE);
             mStatusText.setText(R.string.wifi_setup_status_select_network);
             restoreFirstButtonVisibilityState();
 

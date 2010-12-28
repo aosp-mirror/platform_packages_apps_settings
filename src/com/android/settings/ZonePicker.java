@@ -80,6 +80,17 @@ public class ZonePicker extends ListFragment {
      */
     public static SimpleAdapter constructTimezoneAdapter(Context context,
             boolean sortedByName) {
+        return constructTimezoneAdapter(context, sortedByName,
+                android.R.layout.simple_list_item_2);
+    }
+
+    /**
+     * Constructs an adapter with TimeZone list. Sorted by TimeZone in default.
+     *
+     * @param sortedByName use Name for sorting the list.
+     */
+    public static SimpleAdapter constructTimezoneAdapter(Context context,
+            boolean sortedByName, int layoutId) {
         final String[] from = new String[] {KEY_DISPLAYNAME, KEY_GMT};
         final int[] to = new int[] {android.R.id.text1, android.R.id.text2};
 
@@ -89,7 +100,7 @@ public class ZonePicker extends ListFragment {
         Collections.sort(sortedList, comparator);
         final SimpleAdapter adapter = new SimpleAdapter(context,
                 sortedList,
-                android.R.layout.simple_list_item_2,
+                layoutId,
                 from,
                 to);
 
