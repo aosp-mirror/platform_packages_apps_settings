@@ -100,7 +100,8 @@ public class DateTimeSettingsSetupWizard extends Activity
         mTimeZoneButton.setText(tz.getDisplayName());
         // mTimeZoneButton.setText(DateTimeSettings.getTimeZoneText(tz));
         mTimeZoneButton.setOnClickListener(this);
-        mTimeZoneAdapter = ZonePicker.constructTimezoneAdapter(this, false);
+        mTimeZoneAdapter = ZonePicker.constructTimezoneAdapter(this, false,
+                R.layout.custom_list_item);
 
         final boolean autoDateTimeEnabled;
         final Intent intent = getIntent();
@@ -110,7 +111,7 @@ public class DateTimeSettingsSetupWizard extends Activity
             autoDateTimeEnabled = isAutoDateTimeEnabled();
         }
 
-        mAutoDateTimeButton = (CompoundButton)findViewById(R.id.date_time_auto);
+        mAutoDateTimeButton = (CompoundButton)findViewById(R.id.date_time_auto_button);
         mAutoDateTimeButton.setChecked(autoDateTimeEnabled);
         mAutoDateTimeButton.setText(autoDateTimeEnabled ? R.string.date_time_auto_summaryOn :
                 R.string.date_time_auto_summaryOff);

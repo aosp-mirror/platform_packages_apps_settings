@@ -49,10 +49,12 @@ import android.security.Credentials;
 import android.security.KeyStore;
 import android.view.ContextMenu;
 import android.view.ContextMenu.ContextMenuInfo;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.AdapterView.AdapterContextMenuInfo;
 import android.widget.Toast;
 
@@ -107,11 +109,6 @@ public class WifiSettings extends SettingsPreferenceFragment
     // this boolean extra specifies whether to disable the Next button when not connected
     private static final String EXTRA_ENABLE_NEXT_ON_CONNECT = "wifi_enable_next_on_connect";
 
-    // Indicates that this fragment is used as a part of Setup Wizard with XL screen settings.
-    // This fragment should show information which has been shown as Dialog in combined UI
-    // inside this fragment.
-    /* package */ static final String IN_XL_SETUP_WIZARD = "in_setup_wizard";
-
     // should Next button only be enabled when we have a connection?
     private boolean mEnableNextOnConnection;
     private boolean mInXlSetupWizard;
@@ -140,6 +137,23 @@ public class WifiSettings extends SettingsPreferenceFragment
     }
 
     @Override
+    public void onAttach(Activity activity) {
+        super.onAttach(activity);
+
+        mInXlSetupWizard = (activity instanceof WifiSettingsForSetupWizardXL);
+    }
+
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+            Bundle savedInstanceState) {
+        if (mInXlSetupWizard) {
+            return inflater.inflate(R.layout.custom_preference_list_fragment, container, false);
+        } else {
+            return super.onCreateView(inflater, container, savedInstanceState);
+        }
+    }
+
+    @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         // We don't call super.onActivityCreated() here, since it assumes we already set up
         // Preference (probably in onCreate()), while WifiSettings exceptionally set it up in
@@ -150,11 +164,9 @@ public class WifiSettings extends SettingsPreferenceFragment
         final Activity activity = getActivity();
         final Intent intent = activity.getIntent();
 
-
         // if we're supposed to enable/disable the Next button based on our current connection
         // state, start it off in the right state
         mEnableNextOnConnection = intent.getBooleanExtra(EXTRA_ENABLE_NEXT_ON_CONNECT, false);
-        mInXlSetupWizard = intent.getBooleanExtra(IN_XL_SETUP_WIZARD, false);
 
         if (mEnableNextOnConnection) {
             if (mEnableNextOnConnection && hasNextButton()) {
