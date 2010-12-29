@@ -96,8 +96,13 @@ public class ManageAccountsSettings extends AccountPreferenceBase
         super.onCreate(icicle);
 
         addPreferencesFromResource(R.xml.manage_accounts_settings);
-        AccountManager.get(getActivity()).addOnAccountsUpdatedListener(this, null, true);
         setHasOptionsMenu(true);
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        AccountManager.get(getActivity()).addOnAccountsUpdatedListener(this, null, true);
     }
 
     @Override
@@ -130,9 +135,9 @@ public class ManageAccountsSettings extends AccountPreferenceBase
     }
 
     @Override
-    public void onDestroy() {
+    public void onStop() {
+        super.onStop();
         AccountManager.get(getActivity()).removeOnAccountsUpdatedListener(this);
-        super.onDestroy();
     }
 
     @Override
