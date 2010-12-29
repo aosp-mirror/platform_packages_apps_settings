@@ -114,4 +114,11 @@
         android:singleLine="true"
         android:inputType="textNoSuggestions"
         />
+    <ListPreference
+        android:title="@string/apn_protocol"
+        android:dialogTitle="@string/apn_protocol"
+        android:key="apn_protocol"
+        android:entries="@array/apn_protocol_entries"
+        android:entryValues="@array/apn_protocol_values"
+        />
 </PreferenceScreen>   
