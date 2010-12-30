@@ -166,6 +166,9 @@ public class WifiConfigController implements TextWatcher,
             mIpSettingsSpinner = (Spinner) mView.findViewById(R.id.ip_settings);
             mIpSettingsSpinner.setOnItemSelectedListener(this);
             mProxySettingsSpinner = (Spinner) mView.findViewById(R.id.proxy_settings);
+            // disable proxy UI until we have better app support
+            mProxySettingsSpinner.setVisibility(View.GONE);
+            mView.findViewById(R.id.proxy_settings_title).setVisibility(View.GONE);
             mProxySettingsSpinner.setOnItemSelectedListener(this);
 
             ViewGroup group = (ViewGroup) mView.findViewById(R.id.info);

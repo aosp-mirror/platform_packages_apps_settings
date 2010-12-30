@@ -135,6 +135,8 @@ public class WirelessSettings extends SettingsPreferenceFragment {
         Preference mGlobalProxy = findPreference(KEY_PROXY_SETTINGS);
         DevicePolicyManager mDPM = (DevicePolicyManager)
                 activity.getSystemService(Context.DEVICE_POLICY_SERVICE);
+        // proxy UI disabled until we have better app support
+        getPreferenceScreen().removePreference(mGlobalProxy);
         mGlobalProxy.setEnabled(mDPM.getGlobalProxyAdmin() == null);
 
         // Disable Tethering if it's not allowed
