@@ -17,10 +17,13 @@
 package com.android.settings;
 
 import android.content.Context;
+import android.os.Parcel;
+import android.os.Parcelable;
 import android.os.RemoteException;
 import android.os.IPowerManager;
 import android.os.ServiceManager;
 import android.preference.SeekBarPreference;
+import android.preference.Preference.BaseSavedState;
 import android.provider.Settings;
 import android.provider.Settings.SettingNotFoundException;
 import android.util.AttributeSet;
@@ -37,12 +40,14 @@ public class BrightnessPreference extends SeekBarPreference implements
 
     private SeekBar mSeekBar;
     private CheckBox mCheckBox;
-    
+
     private int mOldBrightness;
     private int mOldAutomatic;
 
     private boolean mAutomaticAvailable;
-    
+
+    private boolean mRestoredOldState;
+
     // Backlight range is from 0 - 255. Need to make sure that user
     // doesn't set the backlight to 0 and get stuck
     private static final int MINIMUM_BACKLIGHT = android.os.Power.BRIGHTNESS_DIM + 10;
@@ -112,21 +117,28 @@ public class BrightnessPreference extends SeekBarPreference implements
     @Override
     protected void onDialogClosed(boolean positiveResult) {
         super.onDialogClosed(positiveResult);
-        
+
         if (positiveResult) {
             Settings.System.putInt(getContext().getContentResolver(), 
                     Settings.System.SCREEN_BRIGHTNESS,
                     mSeekBar.getProgress() + MINIMUM_BACKLIGHT);
         } else {
-            if (mAutomaticAvailable) {
-                setMode(mOldAutomatic);
-            }
-            if (!mAutomaticAvailable || mOldAutomatic == 0) {
-                setBrightness(mOldBrightness);
-            }
+            restoreOldState();
         }
     }
-    
+
+    private void restoreOldState() {
+        if (mRestoredOldState) return;
+
+        if (mAutomaticAvailable) {
+            setMode(mOldAutomatic);
+        }
+        if (!mAutomaticAvailable || mOldAutomatic == 0) {
+            setBrightness(mOldBrightness);
+        }
+        mRestoredOldState = true;
+    }
+
     private void setBrightness(int brightness) {
         try {
             IPowerManager power = IPowerManager.Stub.asInterface(
@@ -136,7 +148,7 @@ public class BrightnessPreference extends SeekBarPreference implements
             }
         } catch (RemoteException doe) {
             
-        }        
+        }
     }
 
     private void setMode(int mode) {
@@ -147,6 +159,80 @@ public class BrightnessPreference extends SeekBarPreference implements
         }
         Settings.System.putInt(getContext().getContentResolver(),
                 Settings.System.SCREEN_BRIGHTNESS_MODE, mode);
+    }
+
+    @Override
+    protected Parcelable onSaveInstanceState() {
+        final Parcelable superState = super.onSaveInstanceState();
+        if (getDialog() == null || !getDialog().isShowing()) return superState;
+
+        // Save the dialog state
+        final SavedState myState = new SavedState(superState);
+        myState.automatic = mCheckBox.isChecked();
+        myState.progress = mSeekBar.getProgress();
+        myState.oldAutomatic = mOldAutomatic == 1;
+        myState.oldProgress = mOldBrightness;
+
+        // Restore the old state when the activity or dialog is being paused
+        restoreOldState();
+        return myState;
+    }
+
+    @Override
+    protected void onRestoreInstanceState(Parcelable state) {
+        if (state == null || !state.getClass().equals(SavedState.class)) {
+            // Didn't save state for us in onSaveInstanceState
+            super.onRestoreInstanceState(state);
+            return;
+        }
+
+        SavedState myState = (SavedState) state;
+        super.onRestoreInstanceState(myState.getSuperState());
+        mOldBrightness = myState.oldProgress;
+        mOldAutomatic = myState.oldAutomatic ? 1 : 0;
+        setMode(myState.automatic ? 1 : 0);
+        setBrightness(myState.progress + MINIMUM_BACKLIGHT);
+    }
+
+    private static class SavedState extends BaseSavedState {
+
+        boolean automatic;
+        boolean oldAutomatic;
+        int progress;
+        int oldProgress;
+
+        public SavedState(Parcel source) {
+            super(source);
+            automatic = source.readInt() == 1;
+            progress = source.readInt();
+            oldAutomatic = source.readInt() == 1;
+            oldProgress = source.readInt();
+        }
+
+        @Override
+        public void writeToParcel(Parcel dest, int flags) {
+            super.writeToParcel(dest, flags);
+            dest.writeInt(automatic ? 1 : 0);
+            dest.writeInt(progress);
+            dest.writeInt(oldAutomatic ? 1 : 0);
+            dest.writeInt(oldProgress);
+        }
+
+        public SavedState(Parcelable superState) {
+            super(superState);
+        }
+
+        public static final Parcelable.Creator<SavedState> CREATOR =
+                new Parcelable.Creator<SavedState>() {
+
+            public SavedState createFromParcel(Parcel in) {
+                return new SavedState(in);
+            }
+
+            public SavedState[] newArray(int size) {
+                return new SavedState[size];
+            }
+        };
     }
 }
 
