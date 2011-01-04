@@ -45,15 +45,15 @@
     <string name="radioInfo_display_asu" msgid="1422248392727818082">"asu"</string>
     <string name="radioInfo_lac" msgid="8415219164758307156">"LAC"</string>
     <string name="radioInfo_cid" msgid="4362599198392643138">"CID"</string>
-    <!-- outdated translation 3364184561355611897 -->     <string name="sdcard_unmount" product="nosdcard" msgid="6325292633327972272">"ביטול טעינת כרטיס SD"</string>
+    <string name="sdcard_unmount" product="nosdcard" msgid="6325292633327972272">"בטל טעינת אמצעי אחסון מסוג USB"</string>
     <string name="sdcard_unmount" product="default" msgid="3364184561355611897">"ביטול טעינת כרטיס SD"</string>
-    <!-- outdated translation 362497552060004057 -->     <string name="sdcard_format" product="nosdcard" msgid="6285310523155166716">"פרמוט כרטיס SD"</string>
-    <!-- outdated translation 362497552060004057 -->     <string name="sdcard_format" product="default" msgid="6713185532039187532">"פרמוט כרטיס SD"</string>
+    <string name="sdcard_format" product="nosdcard" msgid="6285310523155166716">"מחק אמצעי אחסון מסוג USB"</string>
+    <string name="sdcard_format" product="default" msgid="6713185532039187532">"מחק כרטיס SD"</string>
     <string name="small_font" msgid="2295331917424072635">"קטן"</string>
     <string name="medium_font" msgid="2068475425515133701">"בינוני"</string>
     <string name="large_font" msgid="599055175160971446">"גדול"</string>
     <string name="font_size_save" msgid="3450855718056759095">"אישור"</string>
-    <!-- outdated translation 5922637503871474866 -->     <string name="sdcard_setting" product="nosdcard" msgid="8281011784066476192">"כרטיס SD"</string>
+    <string name="sdcard_setting" product="nosdcard" msgid="8281011784066476192">"אמצעי אחסון מסוג USB"</string>
     <string name="sdcard_setting" product="default" msgid="5922637503871474866">"כרטיס SD"</string>
     <string name="battery_info_status_label" msgid="8109155295509700309">"מצב סוללה:"</string>
     <string name="battery_info_power_label" msgid="7465140230991349382">"חיבור לחשמל:"</string>
@@ -87,8 +87,7 @@
     <string name="battery_info_health_dead" msgid="1725917445762829059">"ריקה"</string>
     <string name="battery_info_health_over_voltage" msgid="2420269351664490121">"מעל למתח חשמלי"</string>
     <string name="battery_info_health_unspecified_failure" msgid="6347021103185471590">"שגיאה לא ידועה"</string>
-    <!-- no translation found for battery_info_health_cold (3835692786176707318) -->
-    <skip />
+    <string name="battery_info_health_cold" msgid="3835692786176707318">"קר"</string>
     <string name="bluetooth" msgid="5549625000628014477">"Bluetooth"</string>
     <string name="bluetooth_visibility" msgid="2930835434091839916">"בר-גילוי"</string>
     <string name="bluetooth_is_discoverable" msgid="1205694503775884903">"גלוי למשך <xliff:g id="DISCOVERABLE_TIME_PERIOD">%1$s</xliff:g> שניות…"</string>
@@ -117,11 +116,13 @@
     <string name="device_picker" msgid="8721012448931226323">"בוחר התקני Bluetooth"</string>
     <string name="bluetooth_permission_request" msgid="1523129741266262748">"בקשת הרשאה של Bluetooth"</string>
     <string name="bluetooth_ask_enablement" msgid="8211158472876087588">"יישום מבקש הרשאה להפעיל Bluetooth. האם ברצונך לעשות זאת?"</string>
-    <string name="bluetooth_ask_discovery" product="tablet" msgid="5950965604673262829">"יישום בטבלט מבקש הרשאה להפוך את הטבלט לגלוי להתקני Bluetooth אחרים למשך <xliff:g id="TIMEOUT">%1$d</xliff:g> שניות. האם ברצונך לעשות זאת?"</string>
+    <string name="bluetooth_ask_discovery" product="tablet" msgid="5950965604673262829">"יישום בהטבלט מבקש הרשאה להפוך את הטבלט לגלוי להתקני Bluetooth אחרים למשך <xliff:g id="TIMEOUT">%1$d</xliff:g> שניות. האם ברצונך לבצע זאת?"</string>
     <string name="bluetooth_ask_discovery" product="default" msgid="669870705606180872">"יישום בטלפון מבקש הרשאה להפוך את הטלפון לגלוי להתקני Bluetooth אחרים למשך <xliff:g id="TIMEOUT">%1$d</xliff:g> שניות. האם ברצונך לעשות זאת?"</string>
-    <string name="bluetooth_ask_enablement_and_discovery" product="tablet" msgid="5716077575971497298">"יישום בטבלט מבקש הרשאה להפעיל Bluetooth ולהפוך את הטבלט לגלוי להתקנים אחרים למשך <xliff:g id="TIMEOUT">%1$d</xliff:g> שניות. האם ברצונך לעשות זאת?"</string>
+    <string name="bluetooth_ask_enablement_and_discovery" product="tablet" msgid="5716077575971497298">"יישום בטבלט מבקש הרשאה להפעיל Bluetooth ולהפוך את הטבלט לגלוי אחרים למשך <xliff:g id="TIMEOUT">%1$d</xliff:g> שניות. האם ברצונך לבצע זאת?"</string>
     <string name="bluetooth_ask_enablement_and_discovery" product="default" msgid="7220210326619399542">"יישום בטלפון מבקש הרשאה להפעיל Bluetooth ולהפוך את הטלפון לגלוי להתקנים אחרים למשך <xliff:g id="TIMEOUT">%1$d</xliff:g> שניות. האם ברצונך לבצע פעולות אלה?"</string>
     <string name="bluetooth_turning_on" msgid="3107102168379705771">"מפעיל Bluetooth…"</string>
+    <!-- no translation found for bluetooth_auto_connect (8013003320667198460) -->
+    <skip />
     <string name="date_and_time" msgid="4114084177056654663">"הגדרות תאריך ושעה"</string>
     <string name="date_time_12_hour_sample" msgid="3259617262618020574">"13:00"</string>
     <string name="date_time_24_hour_sample" msgid="8916857570746212357">"13:00"</string>
@@ -136,22 +137,18 @@
     <string name="intent_sender_startactivity_text" msgid="5080516029580421895">"הפעל את <xliff:g id="ACTIVITY">activity</xliff:g>"</string>
     <string name="intent_sender_resource_label" msgid="6963659726895482829">"<xliff:g id="RESOURCE">Resource</xliff:g>:"</string>
     <string name="intent_sender_account_label" msgid="465210404475603404">"חשבון:"</string>
-    <!-- no translation found for proxy_settings_title (6262282922722097473) -->
-    <skip />
-    <!-- no translation found for proxy_settings_summary (7898928000758321486) -->
-    <skip />
+    <!-- outdated translation 6262282922722097473 -->     <string name="proxy_settings_title" msgid="5912878565897294401">"הגדרות שרת proxy"</string>
+    <string name="proxy_settings_summary" msgid="7898928000758321486">"הגדר את שרת proxy הגלובלי של HTTP ורשימות אי הכללה"</string>
     <string name="proxy_clear_text" msgid="5555400754952012657">"נקה"</string>
     <string name="proxy_port_label" msgid="2623639656638472491">"יציאה"</string>
-    <!-- no translation found for proxy_exclusionlist_label (204409815790850313) -->
-    <skip />
+    <string name="proxy_exclusionlist_label" msgid="204409815790850313">"ללא שרת proxy"</string>
     <string name="proxy_defaultView_text" msgid="6387985519141433291">"שחזר ברירות מחדל"</string>
-    <!-- outdated translation 477348175123635416 -->     <string name="proxy_action_text" msgid="2957063145357903951">"שמור"</string>
+    <string name="proxy_action_text" msgid="2957063145357903951">"בוצע"</string>
     <string name="proxy_hostname_label" msgid="7531298584350977540">"שם מארח"</string>
     <string name="proxy_error" msgid="8926675299638611451">"לידיעתך"</string>
     <string name="proxy_error_dismiss" msgid="4993171795485460060">"אישור"</string>
     <string name="proxy_error_invalid_host" msgid="9120776460063182119">"שם המארח שהקלדת אינו חוקי."</string>
-    <!-- no translation found for proxy_error_invalid_exclusion_list (4753810662233875893) -->
-    <skip />
+    <string name="proxy_error_invalid_exclusion_list" msgid="4753810662233875893">"רשימת אי ההכללה שהקלדת אינה בפורמט המתאים. הזן רשימה מופרדת בפסיקים של דומיינים שאינם נכללים."</string>
     <string name="proxy_error_empty_port" msgid="3525734169948795417">"עליך למלא את שדה היציאה."</string>
     <string name="proxy_error_empty_host_set_port" msgid="2451694104858226781">"שדה היציאה חייב להיות ריק אם שדה המארח ריק."</string>
     <string name="proxy_error_invalid_port" msgid="1816315605424943626">"היציאה שהקלדת אינה חוקית."</string>
@@ -194,43 +191,42 @@
     <string name="sdcard_changes_instructions" msgid="1364712901180556244">"השינויים ייכנסו לתוקף לאחר חיבור מחדש של כבל ה-USB"</string>
     <string name="sdcard_settings_screen_mass_storage_text" msgid="3741220147296482474">"הפוך אחסון בנפח גדול ב-USB לפעיל"</string>
     <string name="sdcard_settings_total_bytes_label" msgid="9184160745785062144">"סך הכל בתים:"</string>
-    <!-- outdated translation 6666688653496819947 -->     <string name="sdcard_settings_not_present_status" product="nosdcard" msgid="2902787003418172125">"אין כרטיס SD"</string>
+    <string name="sdcard_settings_not_present_status" product="nosdcard" msgid="2902787003418172125">"אמצעי אחסון מסוג USB לא טעון."</string>
     <string name="sdcard_settings_not_present_status" product="default" msgid="6666688653496819947">"אין כרטיס SD"</string>
     <string name="sdcard_settings_available_bytes_label" msgid="763232429899373001">"בתים זמינים:"</string>
-    <!-- outdated translation 4786433969313661655 -->     <string name="sdcard_settings_mass_storage_status" product="nosdcard" msgid="2736378870889777857">"כרטיס ה-SD משמש כהתקן אחסון בנפח גדול"</string>
+    <string name="sdcard_settings_mass_storage_status" product="nosdcard" msgid="2736378870889777857">"אמצעי אחסון מסוג USB משמש כהתקן אחסון בנפח גדול"</string>
     <string name="sdcard_settings_mass_storage_status" product="default" msgid="4786433969313661655">"כרטיס ה-SD משמש כהתקן אחסון בנפח גדול"</string>
-    <!-- outdated translation 3812022095683863087 -->     <string name="sdcard_settings_unmounted_status" product="nosdcard" msgid="7503300818792750913">"כעת ניתן להסיר את כרטיס ה-SD בבטחה"</string>
+    <string name="sdcard_settings_unmounted_status" product="nosdcard" msgid="7503300818792750913">"כעת בטוח להסיר את אמצעי האחסון מסוג USB"</string>
     <string name="sdcard_settings_unmounted_status" product="default" msgid="3812022095683863087">"כעת ניתן להסיר את כרטיס ה-SD בבטחה"</string>
-    <!-- outdated translation 5145797653495907970 -->     <string name="sdcard_settings_bad_removal_status" product="nosdcard" msgid="7761390725880773697">"כרטיס ה-SD הוסר במהלך השימוש בו!"</string>
+    <string name="sdcard_settings_bad_removal_status" product="nosdcard" msgid="7761390725880773697">"אמצעי אחסון מסוג USB הוסר תוך כדי שימוש!"</string>
     <string name="sdcard_settings_bad_removal_status" product="default" msgid="5145797653495907970">"כרטיס ה-SD הוסר במהלך השימוש בו!"</string>
     <string name="sdcard_settings_used_bytes_label" msgid="8820289486001170836">"בתים בשימוש:"</string>
-    <!-- outdated translation 2763464949274455656 -->     <string name="sdcard_settings_scanning_status" product="nosdcard" msgid="7503429447676219564">"סורק כרטיס SD למציאת מדיה..."</string>
+    <string name="sdcard_settings_scanning_status" product="nosdcard" msgid="7503429447676219564">"סורק אמצעי אחסון מסוג USB עבור מדיה..."</string>
     <string name="sdcard_settings_scanning_status" product="default" msgid="2763464949274455656">"סורק כרטיס SD למציאת מדיה..."</string>
-    <!-- outdated translation 5706115860484118911 -->     <string name="sdcard_settings_read_only_status" product="nosdcard" msgid="3771783090621312312">"כרטיס SD טעון לקריאה בלבד"</string>
+    <string name="sdcard_settings_read_only_status" product="nosdcard" msgid="3771783090621312312">"אמצעי אחסון מסוג USB טעון לקריאה בלבד"</string>
     <string name="sdcard_settings_read_only_status" product="default" msgid="5706115860484118911">"כרטיס SD טעון לקריאה בלבד"</string>
-    <!-- no translation found for skip_label (47510779345218297) -->
-    <skip />
+    <string name="skip_label" msgid="47510779345218297">"דלג"</string>
     <string name="next_label" msgid="4693520878012668114">"הבא"</string>
-    <!-- outdated translation 4034157617842965844 -->     <string name="language_picker_title" msgid="5349877711342869319">"מקום"</string>
+    <string name="language_picker_title" msgid="5349877711342869319">"שפה"</string>
     <string name="activity_picker_label" msgid="4910700713930693329">"בחר פעילות"</string>
     <string name="device_info_label" msgid="6551553813651711205">"פרטים על ההתקן"</string>
     <string name="battery_info_label" msgid="4132685016148679403">"מידע על הסוללה"</string>
     <string name="display_label" msgid="7403874003169865762">"תצוגה"</string>
-    <string name="phone_info_label" product="tablet" msgid="7820855350955963628">"מידע על הטבלט"</string>
+    <string name="phone_info_label" product="tablet" msgid="7820855350955963628">"פרטי טבלט"</string>
     <string name="phone_info_label" product="default" msgid="2127552523124277664">"פרטי טלפון"</string>
-    <!-- outdated translation 5743100901106177102 -->     <string name="sd_card_settings_label" product="nosdcard" msgid="8101475181301178428">"כרטיס SD"</string>
+    <string name="sd_card_settings_label" product="nosdcard" msgid="8101475181301178428">"אמצעי אחסון מסוג USB"</string>
     <string name="sd_card_settings_label" product="default" msgid="5743100901106177102">"כרטיס SD"</string>
     <string name="proxy_settings_label" msgid="3271174136184391743">"הגדרות שרת proxy"</string>
     <string name="cancel" msgid="6859253417269739139">"ביטול"</string>
     <string name="settings_label" msgid="1626402585530130914">"הגדרות"</string>
     <string name="settings_label_launcher" msgid="8344735489639482340">"הגדרות"</string>
-    <!-- outdated translation 3672145147925639262 -->     <string name="settings_shortcut" msgid="8597387747077828217">"הגדרות"</string>
+    <string name="settings_shortcut" msgid="8597387747077828217">"בחר קיצור דרך של הגדרות"</string>
     <string name="airplane_mode" msgid="8837269988154128601">"מצב טיסה"</string>
     <string name="airplane_mode_summary" msgid="3154817401368780988">"השבת את כל החיבורים האלחוטיים"</string>
     <string name="airplane_mode_turning_on" msgid="8871739222526957255">"משבית חיבורים אלחוטיים..."</string>
     <string name="airplane_mode_turning_off" msgid="3393168549611505996">"מאפשר חיבורים אלחוטיים..."</string>
     <string name="radio_controls_title" msgid="5868688473587168882">"אלחוטי ורשתות"</string>
-    <string name="wireless_networks_settings_title" msgid="149274247949769551">"הגדרות רשת אלחוטית ורשת"</string>
+    <!-- outdated translation 149274247949769551 -->     <string name="wireless_networks_settings_title" msgid="3643009077742794212">"הגדרות רשת אלחוטית ורשת"</string>
     <string name="radio_controls_summary" msgid="2998818677094465517">"ניהול Wi-Fi, ‏Bluetooth, מצב טיסה, רשתות סלולריות ו-VPN"</string>
     <string name="roaming" msgid="3596055926335478572">"נדידת נתונים"</string>
     <string name="roaming_enable" msgid="3737380951525303961">"התחבר אל שירותי נתונים בעת נדידה"</string>
@@ -243,15 +239,12 @@
     <string name="sum_carrier_select" msgid="6648929373316748020">"בחר מפעיל רשת"</string>
     <string name="date_and_time_settings_title" msgid="3350640463596716780">"תאריך ושעה"</string>
     <string name="date_and_time_settings_summary" msgid="2435705040205950381">"הגדרת תאריך, שעה, אזור זמן ותבניות"</string>
-    <!-- outdated translation 3086083265745944725 -->     <string name="date_time_auto" msgid="7076906458515908345">"אוטומטי"</string>
-    <!-- outdated translation 9034585614665299846 -->     <string name="date_time_auto_summaryOn" msgid="4609619490075140381">"השתמש בערכים שסופקו על ידי הרשת"</string>
-    <!-- outdated translation 3900356736797266448 -->     <string name="date_time_auto_summaryOff" msgid="8698762649061882791">"השתמש בערכים שסופקו על ידי הרשת"</string>
-    <!-- no translation found for zone_auto (334783869352026648) -->
-    <skip />
-    <!-- no translation found for zone_auto_summaryOn (6142830927278458314) -->
-    <skip />
-    <!-- no translation found for zone_auto_summaryOff (2597745783162041390) -->
-    <skip />
+    <string name="date_time_auto" msgid="7076906458515908345">"תאריך ושעה אוטומטיים"</string>
+    <string name="date_time_auto_summaryOn" msgid="4609619490075140381">"השתמש בשעה המסופקת על ידי הרשת"</string>
+    <string name="date_time_auto_summaryOff" msgid="8698762649061882791">"השתמש בשעה המסופקת על ידי הרשת"</string>
+    <string name="zone_auto" msgid="334783869352026648">"אזור זמן אוטומטי"</string>
+    <string name="zone_auto_summaryOn" msgid="6142830927278458314">"השתמש באזור המסופק על ידי הרשת"</string>
+    <string name="zone_auto_summaryOff" msgid="2597745783162041390">"השתמש באזור המסופק על ידי הרשת"</string>
     <string name="date_time_24hour" msgid="1193032284921000063">"השתמש בתבנית של 24 שעות"</string>
     <string name="date_time_set_time" msgid="5716856602742530696">"הגדרת שעה"</string>
     <string name="date_time_set_timezone" msgid="5045627174274377814">"בחר אזור זמן"</string>
@@ -259,14 +252,10 @@
     <string name="date_time_date_format" msgid="436706100255870967">"בחר תבנית תאריך"</string>
     <string name="zone_list_menu_sort_alphabetically" msgid="5683377702671088588">"מיין לפי סדר אלפביתי"</string>
     <string name="zone_list_menu_sort_by_timezone" msgid="2720190443744884114">"מיין לפי אזור זמן"</string>
-    <!-- no translation found for lock_after_timeout (9100576335787336455) -->
-    <skip />
-    <!-- no translation found for lock_after_timeout_summary (5751027735105958453) -->
-    <skip />
-    <!-- no translation found for show_owner_info_on_lockscreen_label (5074906168357568434) -->
-    <skip />
-    <!-- no translation found for owner_info_settings_title (2723190010708381889) -->
-    <skip />
+    <string name="lock_after_timeout" msgid="9100576335787336455">"נעל את ההתקן אחרי זמן קצוב לתפוגה"</string>
+    <string name="lock_after_timeout_summary" msgid="5751027735105958453">"התאם את העיכוב לפני שההתקן ננעל באופן אוטומטי"</string>
+    <string name="show_owner_info_on_lockscreen_label" msgid="5074906168357568434">"הצג פרטי בעלים בנעילת מסך"</string>
+    <string name="owner_info_settings_title" msgid="2723190010708381889">"פרטי בעלים"</string>
     <string name="owner_info_settings_summary" msgid="8656024590287117256">"הגדר או השבת את הצגת פרטי הבעלים במסך נעול"</string>
     <string name="owner_info_settings_edit_text_hint" msgid="2382525043173672857">"הזן טקסט להצגה בנעילת המסך"</string>
     <string name="security_settings_title" msgid="5168491784222013179">"מיקום ואבטחה"</string>
@@ -301,45 +290,60 @@
     <string name="unlock_change_lock_password_title" msgid="5606298470358768865">"שנה סיסמת ביטול נעילה"</string>
     <string name="lockpassword_password_too_short" msgid="7328975683669256660">"אורך הסיסמה חייב להיות %d תווים לפחות"</string>
     <string name="lockpassword_pin_too_short" msgid="2252847623267704683">"אורכו של ה-PIN חייב להיות %d תווים לפחות"</string>
-    <!-- outdated translation 6506047902828925216 -->     <string name="lockpassword_press_continue" msgid="122706614386757182">"לחץ על \'המשך\' כשתסיים"</string>
+    <string name="lockpassword_press_continue" msgid="122706614386757182">"גע ב\'המשך\' כשתסיים"</string>
     <string name="lockpassword_continue_label" msgid="4602203784934526940">"המשך"</string>
     <string name="lockpassword_password_too_long" msgid="7354418473281442589">"אורכו של ה-PIN לא יעלה על %d ספרות"</string>
     <string name="lockpassword_pin_too_long" msgid="6290317580664119373">"אורכו של ה-PIN לא יעלה על %d ספרות"</string>
     <string name="lockpassword_pin_contains_non_digits" msgid="3379277100136600632">"ה-PIN חייב להכיל רק את הספרות 0-9"</string>
-    <!-- no translation found for lockpassword_pin_recently_used (2729073062730842496) -->
-    <skip />
+    <string name="lockpassword_pin_recently_used" msgid="2729073062730842496">"מנהל ההתקן אינו מאפשר שימוש ב-PIN שהיה בשימוש לאחרונה"</string>
     <string name="lockpassword_illegal_character" msgid="6204396794254688549">"הסיסמה מכילה תו לא חוקי"</string>
     <string name="lockpassword_password_requires_alpha" msgid="5668524505560400449">"הסיסמה חייבת להכיל אות אחת לפחות"</string>
     <string name="lockpassword_password_requires_digit" msgid="4840579514154254907">"הסיסמה חייבת להכיל ספרה אחת לפחות"</string>
     <string name="lockpassword_password_requires_symbol" msgid="4140602725865312078">"הסיסמה חייבת להכיל סמל אחד לפחות"</string>
-    <!-- no translation found for lockpassword_password_requires_letters:one (1462968118065694590) -->
-    <!-- no translation found for lockpassword_password_requires_letters:other (7278096339907683541) -->
-    <!-- no translation found for lockpassword_password_requires_lowercase:one (2048653993044269649) -->
-    <!-- no translation found for lockpassword_password_requires_lowercase:other (588499075580432178) -->
-    <!-- no translation found for lockpassword_password_requires_uppercase:one (7677454174080582601) -->
-    <!-- no translation found for lockpassword_password_requires_uppercase:other (2183090598541826806) -->
-    <!-- no translation found for lockpassword_password_requires_numeric:one (8585088032818933985) -->
-    <!-- no translation found for lockpassword_password_requires_numeric:other (995673409754935278) -->
-    <!-- no translation found for lockpassword_password_requires_symbols:one (3930886641317826293) -->
-    <!-- no translation found for lockpassword_password_requires_symbols:other (3047460862484105274) -->
-    <!-- no translation found for lockpassword_password_requires_nonletter:one (1716355580615489062) -->
-    <!-- no translation found for lockpassword_password_requires_nonletter:other (5574191164708145973) -->
-    <!-- no translation found for lockpassword_password_recently_used (2739642871806935825) -->
-    <skip />
+  <plurals name="lockpassword_password_requires_letters">
+    <item quantity="one" msgid="1462968118065694590">"הסיסמה חייבת להכיל אות אחת לפחות"</item>
+    <item quantity="other" msgid="7278096339907683541">"הסיסמה חייבת להכיל %d אותיות לפחות"</item>
+  </plurals>
+  <plurals name="lockpassword_password_requires_lowercase">
+    <item quantity="one" msgid="2048653993044269649">"הסיסמה חייבת להכיל אות קטנה אחת לפחות"</item>
+    <item quantity="other" msgid="588499075580432178">"הסיסמה חייבת להכיל %d אותיות קטנות לפחות"</item>
+  </plurals>
+  <plurals name="lockpassword_password_requires_uppercase">
+    <item quantity="one" msgid="7677454174080582601">"הסיסמה חייבת להכיל אות גדולה אחת לפחות"</item>
+    <item quantity="other" msgid="2183090598541826806">"הסיסמה חייבת להכיל %d אותיות גדולות לפחות"</item>
+  </plurals>
+  <plurals name="lockpassword_password_requires_numeric">
+    <item quantity="one" msgid="8585088032818933985">"הסיסמה חייבת להכיל ספרה אחת לפחות"</item>
+    <item quantity="other" msgid="995673409754935278">"הסיסמה חייבת להכיל %d ספרות לפחות"</item>
+  </plurals>
+  <plurals name="lockpassword_password_requires_symbols">
+    <item quantity="one" msgid="3930886641317826293">"הסיסמה צריך להכיל סמל מיוחד אחד לפחות"</item>
+    <item quantity="other" msgid="3047460862484105274">"הסיסמה חייבת להכיל %d סמלים מיוחדים לפחות"</item>
+  </plurals>
+  <plurals name="lockpassword_password_requires_nonletter">
+    <item quantity="one" msgid="1716355580615489062">"הסיסמה חייבת להכיל תו אחד לפחות שאינו אות"</item>
+    <item quantity="other" msgid="5574191164708145973">"הסיסמה חייבת להכיל %d תווים לפחות שאינם אותיות"</item>
+  </plurals>
+    <string name="lockpassword_password_recently_used" msgid="2739642871806935825">"מנהל ההתקן אינו מאפשר שימוש בסיסמה שהיתה בשימוש לאחרונה"</string>
     <string name="lockpassword_ok_label" msgid="313822574062553672">"אישור"</string>
     <string name="lockpassword_cancel_label" msgid="8818529276331121899">"ביטול"</string>
+    <!-- no translation found for lockpattern_tutorial_cancel_label (6431583477570493261) -->
+    <skip />
+    <!-- no translation found for lockpattern_tutorial_continue_label (3559793618653400434) -->
+    <skip />
     <string name="device_admin_title" msgid="3562216873644263804">"ניהול התקנים"</string>
-    <!-- outdated translation 3864120111085199551 -->     <string name="manage_device_admin" msgid="5059296715271077278">"בחר מנהלי מערכות של התקן"</string>
-    <!-- outdated translation 915390201809231575 -->     <string name="manage_device_admin_summary" msgid="7672709110988761075">"הוסף או הסר מנהלי מערכת של התקנים"</string>
+    <string name="manage_device_admin" msgid="5059296715271077278">"מנהלי התקנים"</string>
+    <string name="manage_device_admin_summary" msgid="7672709110988761075">"הצג או השבת מנהלי התקנים"</string>
     <string name="bluetooth_quick_toggle_title" msgid="1037056952714061893">"Bluetooth"</string>
     <string name="bluetooth_quick_toggle_summary" msgid="5293641680139873341">"הפעל Bluetooth"</string>
     <string name="bluetooth_settings" msgid="2725796451253089609">"הגדרות Bluetooth"</string>
     <string name="bluetooth_settings_title" msgid="2824020086246268296">"הגדרות Bluetooth"</string>
     <string name="bluetooth_settings_summary" msgid="2091062709530570462">"ניהול חיבורים, הגדרת שם התקן ויכולת גילוי"</string>
     <string name="bluetooth_pairing_request" msgid="6385750334766370310">"בקשת התאמה של Bluetooth"</string>
-    <string name="bluetooth_device_info" msgid="6644515376523965073">"פרטי התקן Bluetooth"</string>
-    <string name="bluetooth_enter_pin_msg" msgid="856962526754150334">\n"הקלד PIN כדי להתאים עם \"<xliff:g id="DEVICE_NAME">%1$s</xliff:g>\". (נסה 0000 או 1234.)"</string>
-    <string name="bluetooth_enter_passkey_msg" msgid="8121515818772179228">\n"הקלד סיסמה כדי להתאים עם \"<xliff:g id="DEVICE_NAME">%1$s</xliff:g>\"."</string>
+    <!-- no translation found for bluetooth_enter_pin_msg (1499285355129256289) -->
+    <skip />
+    <!-- no translation found for bluetooth_enter_passkey_msg (8301499416158195044) -->
+    <skip />
     <string name="bluetooth_confirm_passkey_msg" msgid="1205362283945104263">"כדי להתאים עם \"<xliff:g id="DEVICE_NAME">%1$s</xliff:g>\", אשר שהוא מופיע עם הסיסמה: <xliff:g id="PASSKEY">%2$s</xliff:g>."</string>
     <string name="bluetooth_incoming_pairing_msg" msgid="1076613564387784476">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g>"\n"רוצה להתאים."</string>
     <string name="bluetooth_display_passkey_msg" msgid="3048496029389441579">"הזן <xliff:g id="PASSKEY">%2$s</xliff:g> ב-\"<xliff:g id="DEVICE_NAME">%1$s</xliff:g>\" כדי להתאים."</string>
@@ -353,14 +357,10 @@
     <string name="bluetooth_pairing_rejected_error_message" msgid="1648157108520832454">"ההתאמה נדחתה על ידי <xliff:g id="DEVICE_NAME">%1$s</xliff:g>."</string>
     <string name="bluetooth_connecting_error_message" msgid="1779660510084746802">"אירעה בעיה בהתחברות ל-<xliff:g id="DEVICE_NAME">%1$s</xliff:g>."</string>
     <string name="bluetooth_preference_scan_title" msgid="2277464653118896016">"סרוק אחר התקנים"</string>
-    <!-- no translation found for bluetooth_preference_find_nearby_title (5087410003465463318) -->
-    <skip />
-    <!-- no translation found for bluetooth_preference_device_settings (907776049862799122) -->
-    <skip />
-    <!-- no translation found for bluetooth_preference_paired_devices (1970524193086791964) -->
-    <skip />
-    <!-- no translation found for bluetooth_preference_found_devices (3133019331974936204) -->
-    <skip />
+    <string name="bluetooth_preference_find_nearby_title" msgid="5087410003465463318">"מצא התקנים סמוכים"</string>
+    <string name="bluetooth_preference_device_settings" msgid="907776049862799122">"הגדרות התקן"</string>
+    <string name="bluetooth_preference_paired_devices" msgid="1970524193086791964">"התקנים מותאמים"</string>
+    <string name="bluetooth_preference_found_devices" msgid="3133019331974936204">"נמצאו התקנים"</string>
     <string name="bluetooth_device_context_connect" msgid="3997659895003244941">"התחבר"</string>
     <string name="bluetooth_device_context_disconnect" msgid="8220072022970148683">"התנתק"</string>
     <string name="bluetooth_device_context_pair_connect" msgid="7611522504813927727">"התאמה וחיבור"</string>
@@ -371,61 +371,40 @@
     <string name="bluetooth_profile_a2dp" msgid="3259633293424539529">"מדיה"</string>
     <!-- outdated translation 2252738313413646294 -->     <string name="bluetooth_profile_headset" msgid="81844079120986198">"טבלט"</string>
     <string name="bluetooth_profile_opp" msgid="3799470046565284440">"העבר"</string>
-    <!-- no translation found for bluetooth_profile_hid (3000858580917633478) -->
-    <skip />
-    <!-- no translation found for bluetooth_profile_pan (4225813400648547154) -->
-    <skip />
-    <string name="bluetooth_summary_connected_to_a2dp" msgid="510833839847758664">"מחובר אל אודיו של מדיה"</string>
-    <string name="bluetooth_summary_connected_to_headset" product="tablet" msgid="598335151406893070">"מחובר אל אודיו של טבלט"</string>
-    <string name="bluetooth_summary_connected_to_headset" product="default" msgid="4876496372728623918">"מחובר אל אודיו של טלפון"</string>
-    <string name="bluetooth_summary_connected_to_a2dp_headset" msgid="3045032710457800891">"מחובר לאודיו של טלפון ומדיה"</string>
-    <!-- no translation found for bluetooth_summary_connected_to_hid (8147499644396475561) -->
-    <skip />
-    <!-- no translation found for bluetooth_summary_connected_to_pan (3157622705092537266) -->
-    <skip />
-    <!-- no translation found for bluetooth_disconnect_a2dp_profile (3524648279150937177) -->
-    <skip />
+    <string name="bluetooth_profile_hid" msgid="3000858580917633478">"התקן קלט"</string>
+    <string name="bluetooth_profile_pan" msgid="4225813400648547154">"קשירה"</string>
+    <string name="bluetooth_disconnect_a2dp_profile" msgid="3524648279150937177">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> ינותק מהאודיו של המדיה."</string>
     <!-- no translation found for bluetooth_disconnect_headset_profile (8635908811168780720) -->
     <skip />
-    <!-- no translation found for bluetooth_disconnect_hid_profile (3282295189719352075) -->
-    <skip />
-    <!-- no translation found for bluetooth_disconnect_pan_profile (877883150720888525) -->
-    <skip />
+    <string name="bluetooth_disconnect_hid_profile" msgid="3282295189719352075">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> ינותק מהתקן הקלט."</string>
+    <string name="bluetooth_disconnect_pan_profile" msgid="877883150720888525">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> ינותק מהקשירה."</string>
     <string name="bluetooth_device_advanced_title" msgid="528816860793581131">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> אפשרויות"</string>
-    <!-- no translation found for bluetooth_device_advanced_device_actions_title (3793430949811946844) -->
-    <skip />
+    <string name="bluetooth_device_advanced_device_actions_title" msgid="3793430949811946844">"פעולות בהתקן"</string>
     <string name="bluetooth_device_advanced_online_mode_title" msgid="3689050071425683114">"התחבר"</string>
     <string name="bluetooth_device_advanced_online_mode_summary" msgid="1204424107263248336">"התחבר להתקן Bluetooth"</string>
     <string name="bluetooth_device_advanced_profile_header_title" msgid="3764437426089639639">"פרופילים"</string>
-    <!-- no translation found for bluetooth_device_advanced_rename_device (350508394033808532) -->
-    <skip />
-    <!-- no translation found for bluetooth_device_advanced_enable_opp_title (8222550640371627365) -->
-    <skip />
+    <string name="bluetooth_device_advanced_rename_device" msgid="350508394033808532">"שנה שם של התקן"</string>
+    <string name="bluetooth_device_advanced_enable_opp_title" msgid="8222550640371627365">"אפשר העברות קבצים נכנסות"</string>
     <string name="bluetooth_a2dp_profile_summary_connected" msgid="963376081347721598">"מחובר אל אודיו של מדיה"</string>
     <string name="bluetooth_headset_profile_summary_connected" msgid="7661070206715520671">"מחובר אל אודיו של טלפון"</string>
     <string name="bluetooth_opp_profile_summary_connected" msgid="2611913495968309066">"מחובר לשרת להעברת קבצים"</string>
     <string name="bluetooth_opp_profile_summary_not_connected" msgid="1267091356089086285">"לא מחובר לשרת להעברת קבצים"</string>
-    <!-- no translation found for bluetooth_hid_profile_summary_connected (3381760054215168689) -->
-    <skip />
-    <!-- no translation found for bluetooth_pan_profile_summary_connected (7456487225516323485) -->
-    <skip />
+    <string name="bluetooth_hid_profile_summary_connected" msgid="3381760054215168689">"מחובר להתקן קלט"</string>
+    <string name="bluetooth_pan_profile_summary_connected" msgid="7456487225516323485">"קשור"</string>
     <string name="bluetooth_a2dp_profile_summary_use_for" msgid="4630849022250168427">"השתמש עבור אודיו של מדיה"</string>
     <string name="bluetooth_headset_profile_summary_use_for" msgid="8705753622443862627">"השתמש עבור אודיו של הטלפון"</string>
     <string name="bluetooth_opp_profile_summary_use_for" msgid="1255674547144769756">"השתמש להעברת קבצים"</string>
-    <!-- no translation found for bluetooth_hid_profile_summary_use_for (232727040453645139) -->
+    <string name="bluetooth_hid_profile_summary_use_for" msgid="232727040453645139">"שימוש בקלט"</string>
+    <!-- no translation found for bluetooth_pan_profile_summary_use_for (5664884523822068653) -->
     <skip />
     <string name="bluetooth_dock_settings" msgid="3218335822716052885">"הגדרות עגינה"</string>
     <string name="bluetooth_dock_settings_title" msgid="5543069893044375188">"שימוש בעגינה לאודיו"</string>
     <string name="bluetooth_dock_settings_headset" msgid="1001821426078644650">"כדיבורית"</string>
     <string name="bluetooth_dock_settings_a2dp" msgid="8791004998846630574">"עבור מוסיקה ומדיה"</string>
     <string name="bluetooth_dock_settings_remember" msgid="5551459057010609115">"זכור הגדרות"</string>
-    <!-- no translation found for nfc_quick_toggle_title (6769159366307299004) -->
-    <skip />
-    <!-- no translation found for nfc_quick_toggle_summary (1988408027741447231) -->
-    <skip />
-    <!-- no translation found for nfc_toggle_error (2233172102497535522) -->
-    <!-- no translation found for nfc_toggle_error (8998642457947607263) -->
-    <skip />
+    <string name="nfc_quick_toggle_title" msgid="6769159366307299004">"NFC"</string>
+    <string name="nfc_quick_toggle_summary" msgid="1988408027741447231">"השתמש ב-Near Field Communication כדי לקרוא ולהחליף תגיות"</string>
+    <string name="nfc_toggle_error" msgid="2233172102497535522">"אירעה שגיאה."</string>
     <string name="wifi_quick_toggle_title" msgid="874495178395350104">"Wi-Fi"</string>
     <string name="wifi_quick_toggle_summary" msgid="1047950931623694366">"הפעל Wi-Fi"</string>
     <string name="wifi_settings" msgid="4746946030627213196">"הגדרות Wi-Fi"</string>
@@ -445,14 +424,10 @@
     <string name="wifi_menu_connect" msgid="4996220309848349408">"התחבר לרשת"</string>
     <string name="wifi_menu_forget" msgid="8736964302477327114">"שכח רשת"</string>
     <string name="wifi_menu_modify" msgid="2068554918652440105">"שנה רשת"</string>
-    <!-- no translation found for wifi_network_setup (7974851890019344870) -->
-    <skip />
-    <!-- no translation found for wifi_wps_pin (5471842298708321115) -->
-    <skip />
-    <!-- no translation found for wifi_wps_pin_method_configuration (9019042137789692817) -->
-    <skip />
-    <!-- no translation found for wifi_wps_pin_output (8682102965680650853) -->
-    <skip />
+    <string name="wifi_network_setup" msgid="7974851890019344870">"הגדרות רשת"</string>
+    <string name="wifi_wps_pin" msgid="5471842298708321115">"הזן PIN מנקודת גישה"</string>
+    <string name="wifi_wps_pin_method_configuration" msgid="9019042137789692817">"תצורה של שיטת הצמדת WPS"</string>
+    <string name="wifi_wps_pin_output" msgid="8682102965680650853">"הזן את <xliff:g id="WPS_PIN">%1$s</xliff:g> של PIN בנקודת הגישה"</string>
     <string name="wifi_ssid" msgid="641393708309146745">"SSID של הרשת"</string>
     <string name="wifi_security" msgid="6603611185592956936">"אבטחה"</string>
     <string name="wifi_signal" msgid="5514120261628065287">"עוצמת אות"</string>
@@ -466,19 +441,16 @@
     <string name="wifi_eap_identity" msgid="4359453783379679103">"זהות"</string>
     <string name="wifi_eap_anonymous" msgid="2989469344116577955">"זהות אנונימית"</string>
     <string name="wifi_password" msgid="5948219759936151048">"סיסמה"</string>
-    <!-- outdated translation 4235237470701732009 -->     <string name="wifi_show_password" msgid="6461249871236968884">"הצג סיסמה."</string>
-    <!-- no translation found for wifi_ip_settings (3359331401377059481) -->
-    <skip />
+    <string name="wifi_show_password" msgid="6461249871236968884">"הצג סיסמה"</string>
+    <string name="wifi_ip_settings" msgid="3359331401377059481">"הגדרות IP"</string>
     <string name="wifi_unchanged" msgid="3410422020930397102">"(ללא שינוי)"</string>
     <string name="wifi_unspecified" msgid="5431501214192991253">"(לא צוין)"</string>
     <string name="wifi_remembered" msgid="8426719916135950136">"זכורה"</string>
     <string name="wifi_disabled" msgid="2104752038187543712">"מושבת"</string>
     <string name="wifi_not_in_range" msgid="1136191511238508967">"לא בטווח"</string>
-    <!-- no translation found for wifi_open_with_wps (2606968531452521147) -->
-    <skip />
+    <string name="wifi_open_with_wps" msgid="2606968531452521147">"WPS זמין"</string>
     <string name="wifi_secured" msgid="6759903183748011566">"מאובטחת באמצעות <xliff:g id="WIFI_SECURITY">%1$s</xliff:g>"</string>
-    <!-- no translation found for wifi_secured_with_wps (1822538701086256007) -->
-    <skip />
+    <string name="wifi_secured_with_wps" msgid="1822538701086256007">"מאובטח באמצעות <xliff:g id="WIFI_SECURITY">%1$s</xliff:g> (WPS זמין)"</string>
     <string name="wifi_secured_with_status" msgid="6489317496506267302">"<xliff:g id="WIFI_STATUS">%2$s</xliff:g>, מאובטחת באמצעות <xliff:g id="WIFI_SECURITY">%1$s</xliff:g>"</string>
     <string name="wifi_connect" msgid="1076622875777072845">"התחבר"</string>
     <string name="wifi_forget" msgid="8168174695608386644">"שכח"</string>
@@ -488,31 +460,22 @@
     <string name="wifi_setting_sleep_policy_title" msgid="1367731352485585528">"מדיניות שינה של Wi-Fi"</string>
     <string name="wifi_setting_sleep_policy_summary" msgid="7573693311804602041">"ציין מתי לעבור מ-Wi-Fi לנתונים להתקנים ניידים"</string>
     <string name="wifi_setting_sleep_policy_error" msgid="5103670439972135148">"אירעה בעיה בהגדרת מדיניות שינה."</string>
-    <!-- no translation found for wifi_setting_frequency_band_title (7493768705046080060) -->
-    <skip />
-    <!-- no translation found for wifi_setting_frequency_band_summary (3250740757118009784) -->
-    <skip />
-    <!-- no translation found for wifi_setting_frequency_band_error (837281974489794378) -->
-    <skip />
+    <string name="wifi_setting_frequency_band_title" msgid="7493768705046080060">"תדר Wi-Fi"</string>
+    <string name="wifi_setting_frequency_band_summary" msgid="3250740757118009784">"ציין את טווח התדר של פעולה"</string>
+    <string name="wifi_setting_frequency_band_error" msgid="837281974489794378">"הייתה בעיה בהשגת התדר."</string>
     <string name="wifi_advanced_mac_address_title" msgid="6571335466330978393">"כתובת MAC"</string>
-    <!-- no translation found for wifi_advanced_ip_address_title (6215297094363164846) -->
-    <skip />
+    <string name="wifi_advanced_ip_address_title" msgid="6215297094363164846">"כתובת IP"</string>
     <string name="wifi_ip_settings_titlebar" msgid="4345739031248760326">"הגדרות IP"</string>
     <string name="wifi_ip_settings_menu_save" msgid="7296724066102908366">"שמור"</string>
     <string name="wifi_ip_settings_menu_cancel" msgid="6582567330136502340">"ביטול"</string>
-    <!-- no translation found for wifi_ip_settings_invalid_ip_address (6387653152103405443) -->
-    <skip />
-    <!-- no translation found for wifi_ip_settings_invalid_gateway (6383012465511093067) -->
-    <skip />
-    <!-- no translation found for wifi_ip_settings_invalid_dns (3428867750550854065) -->
-    <skip />
-    <!-- no translation found for wifi_ip_settings_invalid_network_prefix_length (8145730615716855433) -->
-    <skip />
+    <string name="wifi_ip_settings_invalid_ip_address" msgid="6387653152103405443">"הקלד כתובת IP חוקית."</string>
+    <string name="wifi_ip_settings_invalid_gateway" msgid="6383012465511093067">"הקלד כתובת שער חוקית."</string>
+    <string name="wifi_ip_settings_invalid_dns" msgid="3428867750550854065">"הקלד כתובת dns חוקית."</string>
+    <string name="wifi_ip_settings_invalid_network_prefix_length" msgid="8145730615716855433">"הקלד אורך של קידומת רשת בין 0 ו-32."</string>
     <string name="wifi_dns1" msgid="7344118050720080045">"DNS 1"</string>
     <string name="wifi_dns2" msgid="1368601006824882659">"DNS 2"</string>
     <string name="wifi_gateway" msgid="163914742461092086">"שער"</string>
-    <!-- no translation found for wifi_network_prefix_length (3028785234245085998) -->
-    <skip />
+    <string name="wifi_network_prefix_length" msgid="3028785234245085998">"אורך קידומת של רשת"</string>
     <string name="wifi_tether_checkbox_text" msgid="6961605862058056788">" נקודה חמה ניידת של Wi-Fi"</string>
     <string name="wifi_tether_enabled_subtext" msgid="8948641212931906143">"<xliff:g id="NETWORK_SSID">%1$s</xliff:g> פעיל של נקודה חמה ניידת"</string>
     <string name="wifi_tether_failed_subtext" msgid="2654888578056042315">"שגיאת נקודה חמה ניידת של Wi-Fi"</string>
@@ -568,16 +531,16 @@
     <string name="dock_audio_settings_title" msgid="3324750259959570305">"אודיו"</string>
     <string name="dock_audio_summary_desk" msgid="6487784412371139335">"הגדרות עבור עגינת שולחן העבודה המצורפת"</string>
     <string name="dock_audio_summary_car" msgid="6740897586006248450">"הגדרות עבור עגינת רכב המצורפת"</string>
-    <string name="dock_audio_summary_none" product="tablet" msgid="8215337394914283607">"הטבלט אינו בעגינה"</string>
+    <string name="dock_audio_summary_none" product="tablet" msgid="8215337394914283607">"טבלט לא בעגינה"</string>
     <string name="dock_audio_summary_none" product="default" msgid="289909253741048784">"הטלפון לא בעגינה"</string>
     <string name="dock_audio_summary_unknown" msgid="4465059868974255693">"הגדרות עבור העגינה המצורפת"</string>
     <string name="dock_not_found_title" msgid="3290961741828952424">"לא נמצאה עגינה"</string>
-    <string name="dock_not_found_text" product="tablet" msgid="7935403744079168804">"הטבלט חייב להיות בעגינה כדי להגדיר אודיו בעגינה"</string>
+    <string name="dock_not_found_text" product="tablet" msgid="7935403744079168804">"יש לחבר את הטבלט לעגינה כדי להגדיר את שמע העגינה"</string>
     <string name="dock_not_found_text" product="default" msgid="3035260358985111855">"הטלפון חייב להיות בעגינה כדי להגדיר אודיו בעגינה."</string>
     <string name="dock_sounds_enable_title" msgid="3659084028644948905">"צליל הכנסה לעגינה"</string>
-    <string name="dock_sounds_enable_summary_on" product="tablet" msgid="838102386448981339">"השמע צליל בעת הכנסת הטבלט לעגינה או הוצאתו מהעגינה"</string>
+    <string name="dock_sounds_enable_summary_on" product="tablet" msgid="838102386448981339">"השמע צלילים בעת הכנסה או הסרה של הטבלט בעגינה"</string>
     <string name="dock_sounds_enable_summary_on" product="default" msgid="8491180514199743771">"הפעל צליל בעת הכנסת הטלפון לעגינה או הוצאתו מהעגינה"</string>
-    <string name="dock_sounds_enable_summary_off" product="tablet" msgid="5077843049805652363">"אל תשמיע צליל בעת הכנסת הטבלט לעגינה או הוצאתו מעגינה"</string>
+    <string name="dock_sounds_enable_summary_off" product="tablet" msgid="5077843049805652363">"אל תשמיע צלילים בעת הכנסה או הסרה של הטבלט בעגינה"</string>
     <string name="dock_sounds_enable_summary_off" product="default" msgid="3151046599205265919">"אל תפעיל צליל בעת הכנסת הטלפון לעגינה או הוצאתו מעגינה"</string>
     <string name="sync_settings" msgid="9186125469300013491">"חשבונות וסנכרון"</string>
     <string name="sync_settings_summary" msgid="2962179505214965667">"הוספה או הסרה של חשבונות ושינוי הגדרות חשבון"</string>
@@ -620,7 +583,7 @@
     <string name="sim_lock_failed" msgid="6676748290838006404">"אין אפשרות לשנות את מצב הנעילה של כרטיס ה-SIM."\n"ייתכן PIN שגוי."</string>
     <string name="sim_enter_ok" msgid="6475946836899218919">"אישור"</string>
     <string name="sim_enter_cancel" msgid="6240422158517208036">"ביטול"</string>
-    <string name="device_info_settings" product="tablet" msgid="1119755927536987178">"סטטוס הטבלט"</string>
+    <string name="device_info_settings" product="tablet" msgid="1119755927536987178">"סטטוס טבלט"</string>
     <string name="device_info_settings" product="default" msgid="475872867864762157">"מצב הטלפון"</string>
     <string name="system_update_settings_list_item_title" msgid="3342887311059985961">"עדכוני מערכת"</string>
     <string name="system_update_settings_list_item_summary" msgid="3853057315907710747"></string>
@@ -633,9 +596,9 @@
     <string name="device_status_activity_title" msgid="1411201799384697904">"מצב"</string>
     <string name="device_status" msgid="607405385799807324">"מצב"</string>
     <string name="device_status_summary" msgid="2599162787451519618">"מספר טלפון, אות וכדומה"</string>
-    <!-- outdated translation 6681164315506788024 -->     <string name="storage_settings" msgid="4211799979832404953">"כרטיס SD ואחסון בטלפון"</string>
-    <!-- outdated translation 5379463509034022773 -->     <string name="storage_settings_title" msgid="8746016738388094064">"הגדרות של כרטיס SD ואחסון בטלפון"</string>
-    <!-- outdated translation 9176693537325988610 -->     <string name="storage_settings_summary" product="nosdcard" msgid="3543813623294870759">"ביטול טעינת כרטיס SD, הצגת שטח האחסון הזמין"</string>
+    <string name="storage_settings" msgid="4211799979832404953">"שטח אחסון"</string>
+    <string name="storage_settings_title" msgid="8746016738388094064">"הגדרות אחסון"</string>
+    <string name="storage_settings_summary" product="nosdcard" msgid="3543813623294870759">"בטל טעינת אמצעי אחסון מסוג USB, הצג אמצעי אחסון זמין"</string>
     <string name="storage_settings_summary" product="default" msgid="9176693537325988610">"ביטול טעינת כרטיס SD, הצגת שטח האחסון הזמין"</string>
     <string name="status_number" msgid="5123197324870153205">"מספר הטלפון שלי"</string>
     <string name="status_min_number" msgid="3519504522179420597">"דקות"</string>
@@ -652,8 +615,8 @@
     <string name="status_unavailable" msgid="7862009036663793314">"לא זמין"</string>
     <string name="status_up_time" msgid="7294859476816760399">"זמן פעולה"</string>
     <string name="status_awake_time" msgid="2393949909051183652">"זמן התעוררות"</string>
-    <!-- outdated translation 1130932766236387454 -->     <string name="internal_memory" msgid="9129595691484260784">"אחסון פנימי בטלפון"</string>
-    <!-- outdated translation 151871913888051515 -->     <string name="sd_memory" product="nosdcard" msgid="2510246194083052841">"כרטיס SD"</string>
+    <string name="internal_memory" msgid="9129595691484260784">"אחסון פנימי"</string>
+    <string name="sd_memory" product="nosdcard" msgid="2510246194083052841">"אמצעי אחסון מסוג USB"</string>
     <string name="sd_memory" product="default" msgid="151871913888051515">"כרטיס SD"</string>
     <string name="memory_available" msgid="418542433817289474">"שטח אחסון זמין"</string>
     <string name="memory_size" msgid="6629067715017232195">"סך הכל שטח"</string>
@@ -661,36 +624,32 @@
     <skip />
     <string name="memory_apps_usage" msgid="5818922761412589352">"שימוש ביישומים"</string>
     <string name="memory_media_usage" msgid="5655498435493764372">"שימוש במדיה"</string>
-    <!-- outdated translation 6915293408836853020 -->     <string name="sd_eject" product="nosdcard" msgid="4988563376492400073">"ביטול טעינת כרטיס SD"</string>
+    <string name="sd_eject" product="nosdcard" msgid="4988563376492400073">"בטל טעינת אחסון משותף"</string>
     <string name="sd_eject" product="default" msgid="6915293408836853020">"ביטול טעינת כרטיס SD"</string>
-    <!-- outdated translation 3315557796211542962 -->     <string name="sd_eject_summary" product="nosdcard" msgid="5009296896648072891">"בטל את טעינת כרטיס ה-SD לצורך הסרה בטוחה"</string>
-    <!-- outdated translation 3315557796211542962 -->     <string name="sd_eject_summary" product="default" msgid="3300599435073550246">"בטל את טעינת כרטיס ה-SD לצורך הסרה בטוחה"</string>
-    <!-- no translation found for ptp_mode (3954718349875117695) -->
-    <skip />
-    <!-- no translation found for ptp_mode_summary (8709697530987890394) -->
-    <skip />
-    <!-- outdated translation 2048640010381803841 -->     <string name="sd_insert_summary" product="nosdcard" msgid="5264016886409577313">"הכנס כרטיס SD לצורך טעינה"</string>
+    <string name="sd_eject_summary" product="nosdcard" msgid="5009296896648072891">"בטל טעינה של אמצעי אחסון פנימי מסוג USB"</string>
+    <string name="sd_eject_summary" product="default" msgid="3300599435073550246">"בטל את טעינת כרטיס ה-SD כדי שתוכל להסיר אותו בבטחה"</string>
+    <string name="sd_insert_summary" product="nosdcard" msgid="5264016886409577313">"הכנס אמצעי אחסון מסוג USB לצורך טעינה"</string>
     <string name="sd_insert_summary" product="default" msgid="2048640010381803841">"הכנס כרטיס SD לצורך טעינה"</string>
-    <!-- outdated translation 5940523765187704135 -->     <string name="sd_mount" product="nosdcard" msgid="8966695015677343116">"טען כרטיס SD"</string>
+    <string name="sd_mount" product="nosdcard" msgid="8966695015677343116">"טען אמצעי אחסון מסוג USB"</string>
     <string name="sd_mount" product="default" msgid="5940523765187704135">"טען כרטיס SD"</string>
-    <!-- outdated translation 4936591681679097699 -->     <string name="sd_mount_summary" product="nosdcard" msgid="1794150364965145726">"טען את כרטיס ה-SD"</string>
+    <string name="sd_mount_summary" product="nosdcard" msgid="1794150364965145726">"טען את אמצעי האחסון מסוג USB"</string>
     <string name="sd_mount_summary" product="default" msgid="4936591681679097699">"טען את כרטיס ה-SD"</string>
-    <!-- outdated translation 5448738337382712203 -->     <string name="sd_format" product="nosdcard" msgid="2148179271623099054">"פרמוט כרטיס SD"</string>
-    <!-- outdated translation 5448738337382712203 -->     <string name="sd_format" product="default" msgid="2576054280507119870">"פרמוט כרטיס SD"</string>
-    <!-- outdated translation 6616491027883134004 -->     <string name="sd_format_summary" product="nosdcard" msgid="6331905044907914603">"פרמט (מחק) את כרטיס ה-SD"</string>
-    <!-- outdated translation 6616491027883134004 -->     <string name="sd_format_summary" product="default" msgid="212703692181793109">"פרמט (מחק) את כרטיס ה-SD"</string>
+    <string name="sd_format" product="nosdcard" msgid="2148179271623099054">"מחק אמצעי אחסון מסוג USB"</string>
+    <string name="sd_format" product="default" msgid="2576054280507119870">"מחק כרטיס SD"</string>
+    <string name="sd_format_summary" product="nosdcard" msgid="6331905044907914603">"מוחק את כל הנתונים שבאמצעי האחסון הפנימי מסוג USB, כגון מוסיקה או תמונות."</string>
+    <string name="sd_format_summary" product="default" msgid="212703692181793109">"מוחק את כל הנתונים שבכרטיס ה-SD, כגון מוסיקה או תמונות."</string>
     <string name="sd_unavailable" msgid="8580107589533213904">"לא זמין"</string>
     <string name="read_only" msgid="6702420168629076340">" (לקריאה בלבד)"</string>
-    <!-- outdated translation 8612140627310646730 -->     <string name="dlg_confirm_unmount_title" product="nosdcard" msgid="2349876662428231297">"ביטול טעינת כרטיס SD"</string>
+    <string name="dlg_confirm_unmount_title" product="nosdcard" msgid="2349876662428231297">"בטל טעינת אמצעי אחסון מסוג USB"</string>
     <string name="dlg_confirm_unmount_title" product="default" msgid="8612140627310646730">"ביטול טעינת כרטיס SD"</string>
-    <!-- outdated translation 5851214273718817727 -->     <string name="dlg_confirm_unmount_text" product="nosdcard" msgid="3390169455621185223">"אם תבטל את טעינת כרטיס ה-SD, חלק מהיישומים שבהם אתה משתמש ייעצרו או שלא יהיו זמינים עד לטעינה חוזרת של כרטיס ה-SD."</string>
+    <string name="dlg_confirm_unmount_text" product="nosdcard" msgid="3390169455621185223">"אם לא תבטל את טעינת אמצעי האחסון מסוג USB, יישומים מסוימים שבהם אתה משתמש יופסקו וייתכן שלא יהיו זמינים עד שתטען מחדש את אמצעי האחסון מסוג USB."</string>
     <string name="dlg_confirm_unmount_text" product="default" msgid="5851214273718817727">"אם תבטל את טעינת כרטיס ה-SD, חלק מהיישומים שבהם אתה משתמש ייעצרו או שלא יהיו זמינים עד לטעינה חוזרת של כרטיס ה-SD."</string>
-    <!-- outdated translation 4004106918266783081 -->     <string name="dlg_error_unmount_title" product="nosdcard" msgid="7695491947411836733">"ביטול טעינת כרטיס SD נכשל"</string>
+    <string name="dlg_error_unmount_title" product="nosdcard" msgid="7695491947411836733">"ביטול טעינת אמצעי אחסון מסוג USB נכשלה"</string>
     <string name="dlg_error_unmount_title" product="default" msgid="4004106918266783081">"ביטול טעינת כרטיס SD נכשל"</string>
-    <!-- outdated translation 9188972789897713180 -->     <string name="dlg_error_unmount_text" product="nosdcard" msgid="1450864147013376592">"אין אפשרות לבטל טעינת כרטיס SD. נסה שוב מאוחר יותר."</string>
+    <string name="dlg_error_unmount_text" product="nosdcard" msgid="1450864147013376592">"אין אפשרות לבטל טעינה של אמצעי אחסון מסוג USB. נסה שוב מאוחר יותר."</string>
     <string name="dlg_error_unmount_text" product="default" msgid="9188972789897713180">"אין אפשרות לבטל טעינת כרטיס SD. נסה שוב מאוחר יותר."</string>
-    <!-- outdated translation 3213378327712151498 -->     <string name="unmount_inform_text" product="nosdcard" msgid="7120241136790744265">"טעינת כרטיס ה-SD תבוטל. בדוק באזור ההתראות את המצב."</string>
-    <!-- outdated translation 3213378327712151498 -->     <string name="unmount_inform_text" product="default" msgid="1904212716075458402">"טעינת כרטיס ה-SD תבוטל. בדוק באזור ההתראות את המצב."</string>
+    <string name="unmount_inform_text" product="nosdcard" msgid="7120241136790744265">"תבוטל הטעינה של אמצעי אחסון מסוג USB."</string>
+    <string name="unmount_inform_text" product="default" msgid="1904212716075458402">"הטעינה של כרטיס SD תבוטל."</string>
     <string name="sd_ejecting_title" msgid="8824572198034365468">"מבטל טעינה"</string>
     <string name="sd_ejecting_summary" msgid="2028753069184908491">"הסרת טעינה מתבצעת"</string>
     <string name="battery_status_title" msgid="9159414319574976203">"מצב סוללה"</string>
@@ -729,78 +688,58 @@
     <string name="menu_restore" msgid="8260067415075573273">"אפס לברירת מחדל"</string>
     <string name="restore_default_apn_completed" msgid="3990449939234957281">"איפוס הגדרות ברירת המחדל של APN הושלמו"</string>
     <string name="master_clear_title" msgid="5907939616087039756">"איפוס נתוני יצרן"</string>
-    <string name="master_clear_summary" product="tablet" msgid="4036344100254678429">"מחק את כל הנתונים בטבלט"</string>
+    <string name="master_clear_summary" product="tablet" msgid="4036344100254678429">"מוחק את כל הנתונים בטבלט"</string>
     <string name="master_clear_summary" product="default" msgid="4986154238001088492">"מחק את כל הנתונים בטלפון"</string>
-    <!-- outdated translation 4359253344708970059 -->     <string name="master_clear_desc" product="tablet" msgid="1305457209008369655">"פעולה זו תאפס את הטלפון למצב המקורי מהיצרן, ותמחק את כל הנתונים והיישומים שהורדת!"</string>
-    <!-- outdated translation 4359253344708970059 -->     <string name="master_clear_desc" product="default" msgid="2950536633526374209">"פעולה זו תאפס את הטלפון למצב המקורי מהיצרן, ותמחק את כל הנתונים והיישומים שהורדת!"</string>
-    <!-- no translation found for master_clear_accounts (6412857499147999073) -->
-    <skip />
-    <!-- no translation found for master_clear_desc_erase_external_storage (4740866328425123395) -->
-    <skip />
-    <!-- no translation found for master_clear_desc_erase_external_storage (7339100478676372901) -->
-    <skip />
-    <!-- no translation found for erase_external_storage (969364037450286809) -->
-    <skip />
-    <!-- no translation found for erase_external_storage (1397239046334307625) -->
-    <skip />
-    <!-- no translation found for erase_external_storage_description (444834593696342279) -->
-    <skip />
-    <!-- no translation found for erase_external_storage_description (46603515218075174) -->
-    <skip />
-    <string name="master_clear_button_text" product="tablet" msgid="3130786116528304116">"אפס את הטבלט"</string>
+    <string name="master_clear_desc" product="tablet" msgid="1305457209008369655">"פעולה זו תמחק את כל הנתונים מ"<b>"האחסון הפנימי"</b>" של הטבלט, כולל:"\n\n<li>"חשבון Google שברשותך"</li>\n<li>"הגדרות מערכת ונתוני יישומים"</li>\n<li>"יישומים שהורדו"</li></string>
+    <string name="master_clear_desc" product="default" msgid="2950536633526374209">"פעולה זו תמחק את כל הנתונים מ"<b>"האחסון הפנימי"</b>" של הטלפון, כולל:"\n\n<li>"חשבון Google שברשותך"</li>\n<li>"הגדרות מערכת ונתוני יישומים"</li>\n<li>"יישומים שהורדו"</li></string>
+    <string name="master_clear_accounts" product="default" msgid="6412857499147999073">\n\n"אתה מחובר כעת לחשבונות הבאים:"\n</string>
+    <string name="master_clear_desc_erase_external_storage" product="nosdcard" msgid="4740866328425123395">\n\n"כדי לנקות גם מוסיקה, תמונות ונתונים אחרים, יש למחוק את "<b>"אמצעי האחסון מסוג USB"</b>"."</string>
+    <string name="master_clear_desc_erase_external_storage" product="default" msgid="7339100478676372901">\n\n"כדי לנקות מוסיקה, תמונות ונתונים אחרים, יש למחוק את "<b>"כרטיס ה-SD"</b>"."</string>
+    <string name="erase_external_storage" product="nosdcard" msgid="969364037450286809">"מחק אמצעי אחסון מסוג USB"</string>
+    <string name="erase_external_storage" product="default" msgid="1397239046334307625">"מחק כרטיס SD"</string>
+    <string name="erase_external_storage_description" product="nosdcard" msgid="444834593696342279">"מחק את כל הנתונים שבאמצעי האחסון הפנימי מסוג USB, כגון מוסיקה או תמונות."</string>
+    <string name="erase_external_storage_description" product="default" msgid="46603515218075174">"מחק את כל הנתונים שבכרטיס ה-SD, כגון מוסיקה או תמונות."</string>
+    <string name="master_clear_button_text" product="tablet" msgid="3130786116528304116">"אפס טבלט"</string>
     <string name="master_clear_button_text" product="default" msgid="7550632653343157971">"אפס את הטלפון"</string>
     <string name="master_clear_final_desc" msgid="6917971132484622696">"למחוק את כל המידע האישי ויישומים שהורדו? בלתי אפשרי לבטל פעולה זו!"</string>
     <string name="master_clear_final_button_text" msgid="5390908019019242910">"מחק הכל"</string>
     <string name="master_clear_gesture_prompt" msgid="1428645764883536750">"שרטט את קו ביטול הנעילה"</string>
-    <string name="master_clear_gesture_explanation" msgid="2234954758550554549">"עליך לשרטט את הקו לביטול הנעילה כדי לאשר איפוס נתוני יצרן."</string>
+    <string name="master_clear_gesture_explanation" msgid="2234954758550554549">"עליך לשרטט את קו ביטול הנעילה כדי לאפשר איפוס נתוני יצרן."</string>
     <string name="master_clear_failed" msgid="8655202125010189406">"לא בוצע איפוס כיוון שהשירות \'ניקוי מערכת\' אינו זמין."</string>
-    <!-- no translation found for master_clear_confirm_title (4845794266129586839) -->
-    <skip />
-    <!-- outdated translation 4671276096695789895 -->     <string name="media_format_title" product="nosdcard" msgid="3999653431422767156">"פרמט כרטיס SD."</string>
-    <!-- outdated translation 4671276096695789895 -->     <string name="media_format_title" product="default" msgid="4427528440306787972">"פרמט כרטיס SD."</string>
-    <!-- outdated translation 3805714639375830120 -->     <string name="media_format_summary" product="nosdcard" msgid="776603298628082065">"מחיקת כל הנתונים בכרטיס ה-SD"</string>
+    <string name="master_clear_confirm_title" msgid="4845794266129586839">"אשר איפוס"</string>
+    <string name="media_format_title" product="nosdcard" msgid="3999653431422767156">"מחק אמצעי אחסון מסוג USB"</string>
+    <string name="media_format_title" product="default" msgid="4427528440306787972">"מחק כרטיס SD"</string>
+    <string name="media_format_summary" product="nosdcard" msgid="776603298628082065">"מוחק את כל הנתונים באמצעי אחסון מסוג USB"</string>
     <string name="media_format_summary" product="default" msgid="3805714639375830120">"מחיקת כל הנתונים בכרטיס ה-SD"</string>
-    <!-- outdated translation 1142563222357820834 -->     <string name="media_format_desc" product="nosdcard" msgid="4553860683952763905">"פעולה זו תמחק את תוכן כרטיס ה-SD בטלפון. תאבד את כל הנתונים שבכרטיס!"</string>
-    <!-- outdated translation 1142563222357820834 -->     <string name="media_format_desc" product="default" msgid="1598627584181935513">"פעולה זו תמחק את תוכן כרטיס ה-SD בטלפון. תאבד את כל הנתונים שבכרטיס!"</string>
-    <!-- outdated translation 370856400090190151 -->     <string name="media_format_button_text" product="nosdcard" msgid="6293669371185352810">"פרמוט כרטיס SD"</string>
-    <!-- outdated translation 370856400090190151 -->     <string name="media_format_button_text" product="default" msgid="6721544380069373626">"פרמוט כרטיס SD"</string>
-    <!-- outdated translation 1776666694910717198 -->     <string name="media_format_final_desc" product="nosdcard" msgid="8094635533378487255">"לפרמט את כרטיס ה-SD ולמחוק את כל המדיה? אין אפשרות לבטל את הפעולה!"</string>
-    <!-- outdated translation 1776666694910717198 -->     <string name="media_format_final_desc" product="default" msgid="9015504991522581434">"לפרמט את כרטיס ה-SD ולמחוק את כל המדיה? אין אפשרות לבטל את הפעולה!"</string>
+    <string name="media_format_desc" product="nosdcard" msgid="4553860683952763905">"פעולה זו תמחק את אמצעי אחסון מסוג USB. תאבד את "<b>"כל"</b>" הנתונים שמאוחסנים בו!"</string>
+    <string name="media_format_desc" product="default" msgid="1598627584181935513">"פעולה זו תמחק את כרטיס ה-SD. תאבד את "<b>"כל"</b>" הנתונים בכרטיס!"</string>
+    <string name="media_format_button_text" product="nosdcard" msgid="6293669371185352810">"מחק אמצעי אחסון מסוג USB"</string>
+    <string name="media_format_button_text" product="default" msgid="6721544380069373626">"מחק כרטיס SD"</string>
+    <string name="media_format_final_desc" product="nosdcard" msgid="8094635533378487255">"למחוק אמצעי אחסון מסוג USB, תוך מחיקת כל הקבצים שמאוחסנים בו? אין אפשרות להפוך את הפעולה!"</string>
+    <string name="media_format_final_desc" product="default" msgid="9015504991522581434">"למחוק כרטיס SD, תוך מחיקת כל הקבצים שמאוחסנים בו? אין אפשרות להפוך את הפעולה!"</string>
     <string name="media_format_final_button_text" msgid="4881713344315923175">"מחק הכל"</string>
     <string name="media_format_gesture_prompt" msgid="3109349468816856670">"שרטט את קו ביטול הנעילה"</string>
-    <!-- outdated translation 4239529439389660159 -->     <string name="media_format_gesture_explanation" product="nosdcard" msgid="1379736318750958338">"עליך לשרטט את קו ביטול הנעילה כדי לאשר פרמוט של כרטיס SD."</string>
-    <!-- outdated translation 4239529439389660159 -->     <string name="media_format_gesture_explanation" product="default" msgid="1681213416497647321">"עליך לשרטט את קו ביטול הנעילה כדי לאשר פרמוט של כרטיס SD."</string>
+    <string name="media_format_gesture_explanation" product="nosdcard" msgid="1379736318750958338">"עליך לשרטט את קו ביטול הנעילה כדי לאשר שברצונך למחוק את אמצעי האחסון מסוג USB."</string>
+    <string name="media_format_gesture_explanation" product="default" msgid="1681213416497647321">"עליך לשרטט את קו ביטול הנעילה כדי לאשר שברצונך למחוק את כרטיס ה-SD."</string>
     <string name="call_settings_title" msgid="5188713413939232801">"הגדרות שיחה"</string>
     <string name="call_settings_summary" msgid="7291195704801002886">"הגדרת דואר קולי, העברת שיחות, שיחה ממתינה, זיהוי מתקשר"</string>
-    <!-- outdated translation 4315031513434087777 -->     <string name="tether_settings_title_usb" msgid="6688416425801386511">"קשירה"</string>
+    <string name="tether_settings_title_usb" msgid="6688416425801386511">"קשירת USB"</string>
     <string name="tether_settings_title_wifi" msgid="3277144155960302049">"נקודה חמה ניידת"</string>
-    <!-- no translation found for tether_settings_title_bluetooth (355855408317564420) -->
-    <skip />
-    <!-- no translation found for tether_settings_title_usb_bluetooth (5355828977109785001) -->
-    <skip />
-    <!-- no translation found for tether_settings_title_all (8356136101061143841) -->
-    <skip />
-    <!-- outdated translation 3562431455625637370 -->     <string name="tether_settings_summary_usb" product="tablet" msgid="785883365108362248">"שתף את חיבורים הנתונים להתקנים ניידים של הטלפון דרך USB"</string>
+    <string name="tether_settings_title_bluetooth" msgid="355855408317564420">"קשירת Bluetooth"</string>
+    <string name="tether_settings_title_usb_bluetooth" msgid="5355828977109785001">"קשירה"</string>
+    <string name="tether_settings_title_all" msgid="8356136101061143841">"קשירה ונקודה חמה ניידת"</string>
+    <string name="tether_settings_summary_usb" product="tablet" msgid="785883365108362248">"שתף את חיבור הנתונים לנייד של הטבלט באמצעות USB"</string>
     <string name="tether_settings_summary_usb" product="default" msgid="3562431455625637370">"שתף את חיבורים הנתונים להתקנים ניידים של הטלפון דרך USB"</string>
-    <!-- outdated translation 4690912027002467246 -->     <string name="tether_settings_summary_wifi" msgid="5474383125137372164">"שתף את החיבור להתקנים ניידים של הטלפון כנקודה חמה ניידת של Wi-Fi"</string>
-    <!-- no translation found for tether_settings_summary_bluetooth (2407506656353819750) -->
-    <skip />
-    <!-- no translation found for tether_settings_summary_usb_wifi (3834674129575844910) -->
-    <skip />
-    <!-- no translation found for tether_settings_summary_usb_wifi (3700323208282018772) -->
-    <skip />
-    <!-- no translation found for tether_settings_summary_usb_bluetooth (1245080236509560839) -->
-    <skip />
-    <!-- no translation found for tether_settings_summary_usb_bluetooth (4008195891276675882) -->
-    <skip />
-    <!-- no translation found for tether_settings_summary_wifi_bluetooth (1924576461932311140) -->
-    <skip />
-    <!-- no translation found for tether_settings_summary_wifi_bluetooth (2753904149495692201) -->
-    <skip />
-    <!-- no translation found for tether_settings_summary_all (6612660164315153427) -->
-    <skip />
-    <!-- no translation found for tether_settings_summary_all (1171769255924636665) -->
-    <skip />
+    <string name="tether_settings_summary_wifi" msgid="5474383125137372164">"שתף את חיבורים הנתונים לנייד כנקודה חמה ניידת של Wi-Fi"</string>
+    <string name="tether_settings_summary_bluetooth" msgid="2407506656353819750">"שתף את חיבור הנתונים לנייד דרך Bluetooth"</string>
+    <string name="tether_settings_summary_usb_wifi" product="tablet" msgid="3834674129575844910">"שתף את חיבור הנתונים לנייד של הטבלט דרך USB או כנקודה חמה ניידת של Wi-Fi"</string>
+    <string name="tether_settings_summary_usb_wifi" product="default" msgid="3700323208282018772">"שתף את חיבור הנתונים לנייד של הטלפון דרך USB או כנקודה חמה ניידת של Wi-Fi"</string>
+    <string name="tether_settings_summary_usb_bluetooth" product="tablet" msgid="1245080236509560839">"שתף את חיבור הנתונים לנייד של הטבלט באמצעות USB או Bluetooth"</string>
+    <string name="tether_settings_summary_usb_bluetooth" product="default" msgid="4008195891276675882">"שתף את חיבור הנתונים לנייד של הטלפון באמצעות USB או Bluetooth"</string>
+    <string name="tether_settings_summary_wifi_bluetooth" product="tablet" msgid="1924576461932311140">"שתף את חיבור הנתונים לנייד של הטבלט דרך Bluetooth או כנקודה חמה ניידת של Wi-Fi"</string>
+    <string name="tether_settings_summary_wifi_bluetooth" product="default" msgid="2753904149495692201">"שתף את חיבור הנתונים לנייד של הטלפון דרך Bluetooth או כנקודה חמה ניידת של Wi-Fi"</string>
+    <string name="tether_settings_summary_all" product="tablet" msgid="6612660164315153427">"שתף את חיבור הנתונים לנייד של הטבלט באמצעות USB, Wi-Fi או Bluetooth"</string>
+    <string name="tether_settings_summary_all" product="default" msgid="1171769255924636665">"שתף את חיבור הנתונים לנייד של הטלפון באמצעות USB, ‏Wi-Fi או Bluetooth"</string>
     <string name="usb_title" msgid="7483344855356312510">"USB"</string>
     <string name="usb_tethering_button_text" msgid="585829947108007917">"קשירת USB"</string>
     <string name="usb_tethering_available_subtext" msgid="156779271296152605">"USB מחובר, בדיקה לקשירה"</string>
@@ -808,24 +747,13 @@
     <string name="usb_tethering_storage_active_subtext" msgid="6608933594288072573">"אין אפשרות לקשור כאשר אחסון USB נמצא בשימוש"</string>
     <string name="usb_tethering_unavailable_subtext" msgid="1044622421184007254">"USB מנותק"</string>
     <string name="usb_tethering_errored_subtext" msgid="1377574819427841992">"שגיאת קשירה של USB"</string>
-    <!-- no translation found for bluetooth_tether_checkbox_text (2379175828878753652) -->
-    <skip />
-    <!-- no translation found for bluetooth_tethering_available_subtext (3317112145693933963) -->
-    <skip />
-    <!-- no translation found for bluetooth_tethering_connected_subtext (893888246368164894) -->
-    <skip />
-    <!-- no translation found for bluetooth_tethering_off_subtext (1798863866978968964) -->
-    <skip />
-    <!-- no translation found for bluetooth_tethering_errored_subtext (1344187103463073993) -->
-    <skip />
-    <!-- no translation found for bluetooth_tethering_overflow_error (2222060504731415763) -->
-    <skip />
-    <!-- no translation found for bluetooth_untether_blank (2871192409329334813) -->
-    <skip />
-    <!-- no translation found for bluetooth_tether_settings_text (2273368767599539525) -->
-    <skip />
-    <!-- no translation found for bluetooth_tether_settings_subtext (5970033999897946708) -->
-    <skip />
+    <string name="bluetooth_tether_checkbox_text" msgid="2379175828878753652">"קשירת Bluetooth"</string>
+    <string name="bluetooth_tethering_available_subtext" msgid="3317112145693933963">"קשירת Bluetooth מופעלת, אך לא מחוברת"</string>
+    <string name="bluetooth_tethering_connected_subtext" msgid="893888246368164894">"קשירת Bluetooth מופעלת ומחוברת"</string>
+    <string name="bluetooth_tethering_off_subtext" msgid="1798863866978968964">"קשירת Bluetooth לא פועלת"</string>
+    <string name="bluetooth_tethering_errored_subtext" msgid="1344187103463073993">"שגיאה של קשירת Bluetooth"</string>
+    <string name="bluetooth_tethering_overflow_error" msgid="2222060504731415763">"אין אפשרות לקשור ליותר מ-<xliff:g id="MAXCONNECTION">%1$d</xliff:g> התקנים"</string>
+    <string name="bluetooth_untether_blank" msgid="2871192409329334813">"תבוטל הקשירה של <xliff:g id="DEVICE_NAME">%1$s</xliff:g>."</string>
     <string name="tethering_help_button_text" msgid="656117495547173630">"עזרה"</string>
     <string name="network_settings_title" msgid="7967552516440151852">"רשתות סלולריות"</string>
     <string name="network_settings_summary" msgid="5149750850846813553">"הגדר אפשרויות לנדידה, רשתות, APN"</string>
@@ -834,20 +762,17 @@
     <string name="location_networks_disabled" msgid="2708968452901433980">"ראה מיקום ביישומים (כגון \'מפות Google\') באמצעות רשתות אלחוטיות"</string>
     <string name="location_neighborhood_level" msgid="4656658097932515921">"המיקום נקבע באמצעות Wi-Fi ו/או רשתות סלולריות"</string>
     <string name="location_gps" msgid="6296125378829097831">"השתמש בלווייני GPS"</string>
-    <!-- outdated translation 6460740847018275745 -->     <string name="location_street_level" msgid="7456259025474443314">"בעת איתור, דייק לרמת הרחוב (בטל את הסימון כדי לשמר את הסוללה)"</string>
+    <string name="location_street_level" msgid="7456259025474443314">"בעת איתור, דייק עד לרמת הרחוב"</string>
     <string name="location_gps_disabled" msgid="6632537158777308128">"אתר לרמת רחוב (דורש צריכת סוללה נוספת כולל תצוגת שמיים)"</string>
     <string name="assisted_gps" msgid="4649317129586736885">"השתמש ב-Assisted GPS"</string>
     <string name="assisted_gps_enabled" msgid="8751899609589792803">"השתמש בשרת כדי לסייע ל-GPS (הסר את הסימון כדי לצמצם את השימוש ברשת)"</string>
     <string name="assisted_gps_disabled" msgid="6982698333968010748">"השתמש בשרת כדי לסייע ל-GPS (הסר את הסימון כדי לשפר את ביצועי GPS)"</string>
-    <!-- no translation found for use_location_title (3214740644957841179) -->
-    <skip />
-    <!-- no translation found for use_location_summary_disabled (1876901471649359806) -->
-    <skip />
-    <!-- no translation found for use_location_summary_enabled (984549156918597265) -->
-    <skip />
-    <string name="about_settings" product="tablet" msgid="593457295516533765">"אודות טבלט"</string>
+    <string name="use_location_title" msgid="3214740644957841179">"השתמש במיקום עבור חיפוש ב-Google"</string>
+    <string name="use_location_summary_disabled" msgid="1876901471649359806">"השתמש במיקום עבור תוצאות החיפוש של Google ושירותים אחרים של Google"</string>
+    <string name="use_location_summary_enabled" msgid="984549156918597265">"מיקום המשמש לשיפור תוצאות החיפוש של Google ושירותים אחרים של Google"</string>
+    <string name="about_settings" product="tablet" msgid="593457295516533765">"אודות הטבלט"</string>
     <string name="about_settings" product="default" msgid="1743378368185371685">"אודות הטלפון"</string>
-    <string name="about_settings_summary" msgid="3371517697156165959">"הצג מידע משפטי, סטטוס, גרסת תוכנה"</string>
+    <string name="about_settings_summary" msgid="3371517697156165959">"הצג מידע משפטי, מצב, גרסת תוכנה"</string>
     <string name="legal_information" msgid="5769301644270604095">"מידע משפטי"</string>
     <string name="contributors_title" msgid="5917703088825286504">"תורמים"</string>
     <string name="copyright_title" msgid="865906688917260647">"זכויות יוצרים"</string>
@@ -861,14 +786,20 @@
     <string name="settings_license_activity_loading" msgid="3337535809093591740">"טוען…"</string>
     <string name="settings_safetylegal_title" msgid="1289483965535937431">"מידע על בטיחות"</string>
     <string name="settings_safetylegal_activity_title" msgid="6901214628496951727">"מידע על בטיחות"</string>
-    <string name="settings_safetylegal_activity_unreachable" msgid="170670055116721810">"אינך מחובר לשירות נתונים. כדי להציג מידע זה כעת, עבור אל %s מכל מחשב המחובר לאינטרנט."</string>
+    <string name="settings_safetylegal_activity_unreachable" msgid="170670055116721810">"אין לך חיבור נתונים. כדי להציג מידע זה, עבור אל %s מכל מחשב המחובר לאינטרנט."</string>
     <string name="settings_safetylegal_activity_loading" msgid="8059022597639516348">"טוען…"</string>
     <string name="lockpassword_choose_your_password_header" msgid="8624900666929394990">"בחר סיסמה"</string>
+    <!-- no translation found for lockpassword_choose_your_pattern_header (6949761069941694050) -->
+    <skip />
     <string name="lockpassword_choose_your_pin_header" msgid="7598849519816138302">"בחר את ה-PIN"</string>
     <string name="lockpassword_confirm_your_password_header" msgid="6308478184889846633">"אשר את הסיסמה"</string>
+    <!-- no translation found for lockpassword_confirm_your_pattern_header (7543433733032330821) -->
+    <skip />
     <string name="lockpassword_confirm_your_pin_header" msgid="49038294648213197">"אשר את ה-PIN"</string>
     <string name="lockpassword_confirm_passwords_dont_match" msgid="6850677112663979120">"הסיסמאות לא מתאימות"</string>
     <string name="lockpassword_confirm_pins_dont_match" msgid="4757532830594400147">"קודי ה-PIN לא מתאימים"</string>
+    <!-- no translation found for lockpassword_choose_lock_generic_header (3811438094903786145) -->
+    <skip />
     <string name="lockpassword_password_set_toast" msgid="4875050283108629383">"הסיסמה הוגדרה"</string>
     <string name="lockpassword_pin_set_toast" msgid="6011826444725291475">"PIN הוגדר"</string>
     <string name="lockpassword_pattern_set_toast" msgid="6867259621331406236">"הוגדר קו"</string>
@@ -902,10 +833,11 @@
     <string name="next_button_label" msgid="8890792540116568321">"הבא"</string>
     <string name="lock_title" product="tablet" msgid="2909697418179419990">"אבטחת הטבלט"</string>
     <string name="lock_title" product="default" msgid="4059246467204273930">"אבטחת הטלפון"</string>
-    <string name="lock_intro_message" product="tablet" msgid="4544669202394019747"><font size="17">"הגן על הטבלט מפני שימוש לא מורשה על ידי יצירת קו ביטול נעילה אישי במסך. "\n<font height="17">" "\n</font><b>"1"</b>"  במסך הבא, צפה בשרטוט קו לדוגמה. "\n<font height="17">\n</font><b>"2"</b>" כשתהיה מוכן, צייר קו ביטול נעילה משלך. נסה קווים שונים, אך חבר ארבע נקודות לפחות. "\n<font height="17">\n</font><b>"3"</b>" צייר שוב את הקו כדי לאשר. "\n<font height="17">\n</font>" "<b>"מוכן להתחיל? גע ב\'הבא\'"</b>". "\n<font height="3">\n</font>"כדי להשאיר את הטבלט ללא הגנה, גע ב\'ביטול\'."</font></string>
+    <!-- unknown placeholder TAG_FONT_0 in lock_intro_message -->
+    <skip />
+    <!-- no translation found for lock_intro_message (3692151094288835065) -->
+    <skip />
     <string name="lock_intro_message" product="default" msgid="9100785646737118042"><font size="17">"הגן על הטלפון מפני שימוש לא מורשה על ידי יצירת קו ביטול נעילה אישי במסך. "\n<font height="17">\n</font><b>"1"</b>"  במסך הבא, צפה בשרטוט קו לדוגמה. "\n<font height="17">\n</font><b>"2"</b>" כשתהיה מוכן, צייר קו ביטול נעילה משלך. נסה קווים שונים אך חבר ארבע נקודות לפחות. "\n<font height="17">\n</font><b>"3"</b>"  צייר שוב את הקו כדי לאשר. "\n<font height="17">\n</font><b>"מוכן להתחיל? גע ב\'הבא\'"</b>". "\n<font height="3">\n</font>"כדי להשאיר את הטלפון ללא הגנה, גע ב\'ביטול\'."</font></string>
-    <string name="lock_example_title" msgid="8052305554017485410">"קו לדוגמה"</string>
-    <string name="lock_example_message" msgid="1838650097090632706">"חבר ארבע נקודות לפחות."\n" "\n"גע ב\'הבא\' כשתהיה מוכן לשרטט את הקו."</string>
     <string name="manageapplications_settings_title" msgid="5712405848153426706">"נהל יישומים"</string>
     <string name="manageapplications_settings_summary" msgid="6097117021500651232">"נהל והסר יישומים שהותקנו"</string>
     <string name="applications_settings" msgid="3736173521008476946">"יישומים"</string>
@@ -913,7 +845,7 @@
     <string name="applications_settings_header" msgid="6018266337275422250">"הגדרות יישום"</string>
     <string name="install_applications" msgid="4872012136210802181">"מקורות לא ידועים"</string>
     <string name="install_unknown_applications" msgid="6612824788917283662">"אפשר התקנה של יישומים שאינם מ\'חנות Android\'"</string>
-    <string name="install_all_warning" product="tablet" msgid="8143969767997876735">"הטבלט והנתונים האישיים שלך חשופים יותר למתקפה של יישומים ממקורות לא ידועים. אתה מסכים שאתה האחראי הבלעדי לנזק שייגרם לטבלט או לאובדן נתונים שעלול לקרות עקב השימוש ביישומים אלה."</string>
+    <string name="install_all_warning" product="tablet" msgid="8143969767997876735">"הטבלט והנתונים האישיים פגיעים יותר למתקפות של יישומים ממקורות לא ידועים. אתה מסכים שאתה האחראי הבלעדי על נזק לטבלט או לאובדן נתונים שעלולים לקרות עקב השימוש ביישומים אלה."</string>
     <string name="install_all_warning" product="default" msgid="1923717607319933741">"הטלפון והנתונים האישיים שלך חשופים יותר למתקפה של יישומים ממקורות לא ידועים. אתה מסכים שאתה האחראי הבלעדי לנזק שייגרם לטלפון או לאובדן נתונים שעלול לקרות עקב השימוש ביישומים אלה."</string>
     <string name="application_info_label" msgid="1150486628158409543">"מידע על היישום"</string>
     <string name="storage_label" msgid="8700867073480107253">"אחסון"</string>
@@ -928,40 +860,31 @@
     <string name="application_size_label" msgid="5055196275624686382">"יישום"</string>
     <string name="data_size_label" msgid="8679376373625710107">"נתונים"</string>
     <string name="uninstall_text" msgid="3644892466144802466">"הסר התקנה"</string>
-    <!-- no translation found for disable_text (6544054052049395202) -->
-    <skip />
-    <!-- no translation found for enable_text (9217362512327828987) -->
-    <skip />
+    <string name="disable_text" msgid="6544054052049395202">"השבת"</string>
+    <string name="enable_text" msgid="9217362512327828987">"הפוך לפעיל"</string>
     <string name="clear_user_data_text" msgid="5597622864770098388">"נקה נתונים"</string>
     <string name="app_factory_reset" msgid="6635744722502563022">"הסר התקנה של עדכונים"</string>
     <string name="auto_launch_enable_text" msgid="2630656657744196691">"בחרת להפעיל יישום זה כברירת מחדל עבור פעולות מסוימות."</string>
     <string name="auto_launch_disable_text" msgid="7800385822185540166">"לא הוגדרו ברירות מחדל."</string>
     <string name="clear_activities" msgid="7408923511535174430">"נקה ברירות מחדל"</string>
     <string name="unknown" msgid="1592123443519355854">"לא ידוע"</string>
-    <!-- outdated translation 8622029358896599842 -->     <string name="sort_order_alpha" msgid="1410278099123670628">"מיין"</string>
+    <string name="sort_order_alpha" msgid="1410278099123670628">"מיין לפי שם"</string>
     <string name="sort_order_size" msgid="7024513286636502362">"מיין לפי גודל"</string>
-    <!-- no translation found for show_running_services (5736278767975544570) -->
-    <skip />
-    <!-- no translation found for show_background_processes (2009840211972293429) -->
-    <skip />
+    <string name="show_running_services" msgid="5736278767975544570">"הצג שירותים פועלים"</string>
+    <string name="show_background_processes" msgid="2009840211972293429">"הצג תהליכים המאוחסנים בקובץ שמור"</string>
     <string name="manage_space_text" msgid="8852711522447794676">"נהל שטח אחסון"</string>
     <string name="filter" msgid="2018011724373033887">"סינון"</string>
     <string name="filter_dlg_title" msgid="6507663329723966854">"בחירת אפשרויות מסנן"</string>
     <string name="filter_apps_all" msgid="5142129378749391876">"הכל"</string>
     <string name="filter_apps_third_party" msgid="7786348047690140979">"הורד"</string>
     <string name="filter_apps_running" msgid="7767071454371350486">"פועלות"</string>
-    <!-- outdated translation 1477351142334784771 -->     <string name="filter_apps_onsdcard" product="nosdcard" msgid="4843063154701023349">"בכרטיס SD"</string>
+    <string name="filter_apps_onsdcard" product="nosdcard" msgid="4843063154701023349">"אמצעי אחסון מסוג USB"</string>
     <string name="filter_apps_onsdcard" product="default" msgid="1477351142334784771">"בכרטיס SD"</string>
-    <!-- no translation found for disabled (9206776641295849915) -->
-    <skip />
-    <!-- no translation found for no_applications (5190227407135243904) -->
-    <skip />
-    <!-- no translation found for internal_storage (1584700623164275282) -->
-    <skip />
-    <!-- no translation found for sd_card_storage (2673203150465132465) -->
-    <skip />
-    <!-- no translation found for sd_card_storage (7623513618171928235) -->
-    <skip />
+    <string name="disabled" msgid="9206776641295849915">"מושבת"</string>
+    <string name="no_applications" msgid="5190227407135243904">"אין יישומים."</string>
+    <string name="internal_storage" msgid="1584700623164275282">"אחסון פנימי"</string>
+    <string name="sd_card_storage" product="nosdcard" msgid="2673203150465132465">"אמצעי אחסון מסוג USB"</string>
+    <string name="sd_card_storage" product="default" msgid="7623513618171928235">"אחסון בכרטיס SD"</string>
     <string name="recompute_size" msgid="7722567982831691718">"מחשב מחדש את הגודל..."</string>
     <string name="clear_data_dlg_title" msgid="4470209520936375508">"מחק"</string>
     <string name="clear_data_dlg_text" msgid="8368035073300828451">"כל הנתונים של יישום זה יימחקו לצמיתות. נתונים אלה כוללים את כל הקבצים, ההגדרות, החשבונות, מסדי הנתונים וכדומה."</string>
@@ -974,7 +897,7 @@
     <string name="app_factory_reset_dlg_text" msgid="438395129140568893">"האם ברצונך להסיר את ההתקנה של כל העדכונים ביישום מערכת Android זה?"</string>
     <string name="clear_failed_dlg_title" msgid="2387060805294783175">"נקה נתונים"</string>
     <string name="clear_failed_dlg_text" msgid="7943411157007320290">"ניקוי נתונים נכשל עבור יישום"</string>
-    <string name="security_settings_desc" product="tablet" msgid="6158636779728455276">"יישום זה יכול לגשת למיקומים אלה בטבלט:"</string>
+    <string name="security_settings_desc" product="tablet" msgid="6158636779728455276">"יישום זה יכול לגשת להגדרות הבאות בטבלט:"</string>
     <string name="security_settings_desc" product="default" msgid="3116027624526915561">"יישום זה יכול לגשת למיקומים אלה בטלפון:"</string>
     <string name="computing_size" msgid="1599186977475211186">"מחשב..."</string>
     <string name="invalid_size_value" msgid="1901940003700269523">"אין אפשרות לחשב את גודל החבילה"</string>
@@ -983,7 +906,7 @@
     <string name="move_app" msgid="5042838441401731346">"העבר"</string>
     <string name="move_app_to_internal" product="tablet" msgid="2299714147283854957">"העבר לטבלט"</string>
     <string name="move_app_to_internal" product="default" msgid="3895430471913858185">"העבר לטלפון"</string>
-    <!-- outdated translation 1143379049903056407 -->     <string name="move_app_to_sdcard" product="nosdcard" msgid="4350451696315265420">"העבר לכרטיס SD"</string>
+    <string name="move_app_to_sdcard" product="nosdcard" msgid="4350451696315265420">"העבר לאמצעי אחסון מסוג USB"</string>
     <string name="move_app_to_sdcard" product="default" msgid="1143379049903056407">"העבר לכרטיס SD"</string>
     <string name="moving" msgid="6431016143218876491">"מעביר"</string>
     <string name="insufficient_storage" msgid="8566913062094452962">"לא נותר מספיק שטח אחסון."</string>
@@ -992,81 +915,55 @@
     <string name="invalid_location" msgid="4934491353200240499">"מיקום ההתקנה שצוין אינו חוקי."</string>
     <string name="system_package" msgid="1030561474413022831">"אין אפשרות להתקין עדכוני מערכת במדיה חיצונית."</string>
     <string name="force_stop_dlg_title" msgid="4289453224368188476">"אלץ עצירה"</string>
-    <!-- outdated translation 3381302041569982075 -->     <string name="force_stop_dlg_text" msgid="5157374701213502922">"יישום זה יופעל מחדש מיד. האם אתה בטוח שברצונך לאלץ עצירה?"</string>
+    <string name="force_stop_dlg_text" msgid="5157374701213502922">"אילוץ עצירת יישום יכול לגרום לו לפעילות לא תקינה. האם אתה בטוח?"</string>
     <string name="move_app_failed_dlg_title" msgid="4337731903265156405">"העבר יישום"</string>
     <string name="move_app_failed_dlg_text" msgid="8824246817947643697">"נכשל בהעברת היישום. <xliff:g id="REASON">%1$s</xliff:g>"</string>
     <string name="app_install_location_title" msgid="2068975150026852168">"מיקום התקנה מועדף"</string>
     <string name="app_install_location_summary" msgid="879753854530300436">"שנה את מיקום ההתקנה המועדף עבור יישומים חדשים."</string>
-    <!-- no translation found for storageuse_settings_title (5657014373502630403) -->
-    <skip />
-    <!-- no translation found for storageuse_settings_summary (2556057379120846792) -->
-    <skip />
+    <string name="storageuse_settings_title" msgid="5657014373502630403">"שימוש בשטח אחסון"</string>
+    <string name="storageuse_settings_summary" msgid="2556057379120846792">"הצג את שטח אחסון המשמש יישומים"</string>
     <string name="runningservices_settings_title" msgid="8097287939865165213">"שירותים פועלים"</string>
     <string name="runningservices_settings_summary" msgid="854608995821032748">"הצגה ושליטה בשירותים הפועלים כעת"</string>
     <string name="service_restarting" msgid="2242747937372354306">"מפעיל מחדש"</string>
-    <!-- no translation found for cached (1059590879740175019) -->
-    <skip />
-    <!-- outdated translation 6981216347270280598 -->     <string name="no_running_services" msgid="2059536495597645347">"אין שירותים פועלים"</string>
-    <!-- outdated translation 8432097226392386802 -->     <string name="service_started_by_app" msgid="6575184738671598131">"הופעל על ידי יישום: גע כדי לעצור"</string>
+    <string name="cached" msgid="1059590879740175019">"תהליך רקע בקובץ שמור"</string>
+    <string name="no_running_services" msgid="2059536495597645347">"דבר לא פועל."</string>
+    <string name="service_started_by_app" msgid="6575184738671598131">"הופעל על ידי היישום."</string>
     <!-- no translation found for service_client_name (4037193625611815517) -->
     <skip />
-    <!-- no translation found for service_background_processes (6844156253576174488) -->
-    <skip />
-    <!-- no translation found for service_foreground_processes (7583975676795574276) -->
-    <skip />
-    <!-- no translation found for memory (6609961111091483458) -->
-    <skip />
+    <string name="service_background_processes" msgid="6844156253576174488">"<xliff:g id="MEMORY">%1$s</xliff:g> פנוי"</string>
+    <string name="service_foreground_processes" msgid="7583975676795574276">"<xliff:g id="MEMORY">%1$s</xliff:g> בשימוש"</string>
+    <string name="memory" msgid="6609961111091483458">"RAM"</string>
     <!-- no translation found for service_process_name (4098932168654826656) -->
     <skip />
-    <!-- no translation found for running_processes_item_description_s_s (5790575965282023145) -->
-    <skip />
-    <!-- no translation found for running_processes_item_description_s_p (8019860457123222953) -->
-    <skip />
-    <!-- no translation found for running_processes_item_description_p_s (744424668287252915) -->
-    <skip />
-    <!-- no translation found for running_processes_item_description_p_p (1607384595790852782) -->
-    <skip />
-    <!-- no translation found for runningservicedetails_settings_title (6188692418986988288) -->
-    <skip />
-    <!-- no translation found for no_services (7133900764462288263) -->
-    <skip />
-    <!-- no translation found for runningservicedetails_services_title (391168243725357375) -->
-    <skip />
-    <!-- no translation found for runningservicedetails_processes_title (928115582044655268) -->
-    <skip />
-    <!-- no translation found for service_stop (6369807553277527248) -->
-    <skip />
-    <!-- no translation found for service_manage (1876642087421959194) -->
-    <skip />
-    <!-- no translation found for service_stop_description (3261798282116866961) -->
-    <skip />
-    <!-- no translation found for heavy_weight_stop_description (6855241582643136019) -->
-    <skip />
-    <!-- no translation found for background_process_stop_description (1728354083304746737) -->
-    <skip />
-    <!-- no translation found for service_manage_description (7050092269951613102) -->
-    <skip />
-    <!-- no translation found for main_running_process_description (929204645380391397) -->
-    <skip />
-    <!-- no translation found for process_service_in_use_description (8993335064403217080) -->
-    <skip />
-    <!-- no translation found for process_provider_in_use_description (5586603325677678940) -->
-    <skip />
-    <!-- no translation found for runningservicedetails_stop_dlg_title (4253292537154337233) -->
-    <skip />
-    <string name="runningservicedetails_stop_dlg_text" product="tablet" msgid="5420033091144016389">"האם אתה בטוח שברצונך להפסיק שירות מערכת זה? אם כן, תכונות מסוימות בטבלט עשויות להפסיק לפעול כהלכה עד שתכבה ותפעיל אותו שוב."</string>
-    <!-- outdated translation 5420033091144016389 -->     <string name="runningservicedetails_stop_dlg_text" product="default" msgid="6929716497425738387">"האם אתה בטוח שברצונך להפסיק שירות מערכת זה? אם כן, תכונות מסוימות בטבלט עשויות להפסיק לפעול כהלכה עד שתכבה ותפעיל אותו שוב."</string>
+    <string name="running_processes_item_description_s_s" msgid="5790575965282023145">" תהליך <xliff:g id="NUMPROCESS">%1$d</xliff:g> ושירות <xliff:g id="NUMSERVICES">%2$d</xliff:g>"</string>
+    <string name="running_processes_item_description_s_p" msgid="8019860457123222953">" תהליך <xliff:g id="NUMPROCESS">%1$d</xliff:g> ו-<xliff:g id="NUMSERVICES">%2$d</xliff:g> שירותים"</string>
+    <string name="running_processes_item_description_p_s" msgid="744424668287252915">"<xliff:g id="NUMPROCESS">%1$d</xliff:g> תהליכים ו-<xliff:g id="NUMSERVICES">%2$d</xliff:g> שירותים"</string>
+    <string name="running_processes_item_description_p_p" msgid="1607384595790852782">"<xliff:g id="NUMPROCESS">%1$d</xliff:g> תהליכים ו-<xliff:g id="NUMSERVICES">%2$d</xliff:g> שירותים"</string>
+    <string name="runningservicedetails_settings_title" msgid="6188692418986988288">"יישום פועל"</string>
+    <string name="no_services" msgid="7133900764462288263">"לא פעיל"</string>
+    <string name="runningservicedetails_services_title" msgid="391168243725357375">"שירותים"</string>
+    <string name="runningservicedetails_processes_title" msgid="928115582044655268">"תהליכים"</string>
+    <string name="service_stop" msgid="6369807553277527248">"עצור"</string>
+    <string name="service_manage" msgid="1876642087421959194">"הגדרות"</string>
+    <string name="service_stop_description" msgid="3261798282116866961">"השירות הופעל על ידי היישום שלו. עצירתו עלולה לגרום לכשל ביישום."</string>
+    <string name="heavy_weight_stop_description" msgid="6855241582643136019">"אין אפשרות להפסיק יישום זה באופן בטוח. פעולה זו עשויה לגרום לאיבוד של חלק מהעבודה הנוכחית שלך."</string>
+    <string name="background_process_stop_description" msgid="1728354083304746737">"זהו תהליך יישום ישן שנשמר לצורך מהירות טובה יותר במקרה שיהיה בו צורך שוב. בדרך כלל אין סיבה להפסיק אותו."</string>
+    <string name="service_manage_description" msgid="7050092269951613102">"<xliff:g id="CLIENT_NAME">%1$s</xliff:g>: בשימוש כרגע. גע ב\'אפשרויות\' כדי לשלוט בו."</string>
+    <string name="main_running_process_description" msgid="929204645380391397">"תהליך ראשי נמצא בשימוש."</string>
+    <string name="process_service_in_use_description" msgid="8993335064403217080">"השירות <xliff:g id="COMP_NAME">%1$s</xliff:g> נמצא בשימוש."</string>
+    <string name="process_provider_in_use_description" msgid="5586603325677678940">"הספק <xliff:g id="COMP_NAME">%1$s</xliff:g> נמצא בשימוש."</string>
+    <string name="runningservicedetails_stop_dlg_title" msgid="4253292537154337233">"להפסיק שירות מערכת?"</string>
+    <string name="runningservicedetails_stop_dlg_text" product="tablet" msgid="5420033091144016389">"האם אתה בטוח שברצונך להפסיק שירות מערכת זה? אם תעשה כן, חלק מהתכונות בטבלט עלולות להפסיק לפעול כראוי עד שתכבה ותדליק אותו שוב."</string>
+    <string name="runningservicedetails_stop_dlg_text" product="default" msgid="6929716497425738387">"האם אתה בטוח שברצונך להפסיק שירות מערכת זה? אם תעשה כן, חלק מהתכונות בטלפון עלולות להפסיק לפעול כראוי עד שתכבה ותדליק אותו שוב."</string>
     <!-- outdated translation 2939555761536357092 -->     <string name="language_settings" msgid="5292716747264442359">"אזור וטקסט"</string>
-    <string name="language_keyboard_settings_title" msgid="3455826933385341107">"הגדרות שפה ומקלדת"</string>
-    <!-- no translation found for language_settings_category (2288258489940617043) -->
-    <skip />
-    <!-- no translation found for keyboard_settings_category (7060453865544070642) -->
-    <skip />
+    <!-- outdated translation 3455826933385341107 -->     <string name="language_keyboard_settings_title" msgid="243220021717425813">"הגדרות שפה ומקלדת"</string>
+    <string name="language_settings_category" msgid="2288258489940617043">"הגדרות שפה"</string>
+    <string name="keyboard_settings_category" msgid="7060453865544070642">"הגדרות מקלדת"</string>
     <string name="phone_language" msgid="1165758957501090679">"בחר שפה"</string>
     <string name="phone_language_summary" msgid="3871309445655554211"></string>
     <string name="auto_replace" msgid="6199184757891937822">"החלפה אוטומטית"</string>
     <string name="auto_replace_summary" msgid="370288728200084466">"תיקון שגיאות הקלדה במילים"</string>
-    <!-- outdated translation 581633131114124121 -->     <string name="auto_caps" msgid="6379232078052591265">"הפיכת אותיות לרישיות באופן אוטומטי"</string>
+    <string name="auto_caps" msgid="6379232078052591265">"הפיכת אותיות לרישיות באופן אוטומטי"</string>
     <string name="auto_caps_summary" msgid="6358102538315261466">"הפוך את האות הראשונה במשפטים לאות רישית"</string>
     <string name="auto_punctuate" msgid="4595367243950425833">"פיסוק אוטומטי"</string>
     <string name="hardkeyboard_category" msgid="5957168411305769899">"הגדרות מקלדת פיזית"</string>
@@ -1084,7 +981,7 @@
     <string name="user_dict_settings_context_menu_delete_title" msgid="9140703913776549054">"מחק"</string>
     <string name="user_dict_settings_empty_text" msgid="6209268025109242806">"אין לך מילים במילון המשתמש. תוכל להוסיף מילה באמצעות התפריט."</string>
     <string name="testing" msgid="6584352735303604146">"בדיקה"</string>
-    <string name="testing_phone_info" product="tablet" msgid="193561832258534798">"מידע על הטבלט"</string>
+    <string name="testing_phone_info" product="tablet" msgid="193561832258534798">"פרטי טבלט"</string>
     <string name="testing_phone_info" product="default" msgid="8656693364332840056">"מידע על הטלפון"</string>
     <string name="testing_battery_info" msgid="3497865525976497848">"פרטי סוללה"</string>
     <string name="quick_launch_title" msgid="7904609846945905306">"הפעלה מהירה"</string>
@@ -1099,17 +996,31 @@
     <string name="quick_launch_display_mode_applications" msgid="3748789806447639039">"יישומים"</string>
     <string name="quick_launch_display_mode_shortcuts" msgid="4177934019174169042">"קיצורי דרך"</string>
     <string name="input_methods_settings_title" msgid="6800066636850553887">"קלט טקסט"</string>
-    <!-- no translation found for input_method (5434026103176856164) -->
+    <string name="input_method" msgid="5434026103176856164">"שיטת קלט"</string>
+    <!-- no translation found for current_input_method (2146807723398303917) -->
+    <skip />
+    <!-- no translation found for input_method_selector (4311213129681430709) -->
+    <skip />
+    <!-- no translation found for input_method_selector_show_automatically_title (1001612945471546158) -->
+    <skip />
+    <!-- no translation found for input_method_selector_always_show_title (3891824124222371634) -->
+    <skip />
+    <!-- no translation found for input_method_selector_always_hide_title (7699647095118680424) -->
+    <skip />
+    <!-- no translation found for configure_input_method (7773992829158322455) -->
+    <skip />
+    <!-- no translation found for input_method_settings (5801295625486269553) -->
+    <skip />
+    <!-- no translation found for active_input_method_subtypes (3596398805424733238) -->
     <skip />
     <string name="input_methods_settings_summary" msgid="7571173442946675205">"נהל אפשרות קלט טקסט"</string>
     <string name="input_methods_settings_label_format" msgid="6002887604815693322">"הגדרות <xliff:g id="IME_NAME">%1$s</xliff:g>"</string>
-    <!-- no translation found for input_methods_and_subtype_enabler_title (6850705060511001699) -->
-    <skip />
-    <!-- no translation found for input_methods_and_subtype_enabler_title_format (2977431588856991351) -->
+    <!-- outdated translation 6850705060511001699 -->     <string name="input_methods_and_subtype_enabler_title" msgid="4018402267502337338">"נהל שיטות קלט"</string>
+    <!-- no translation found for input_methods_and_subtype_enabler_title_format (5513389679127310099) -->
     <skip />
     <string name="onscreen_keyboard_settings_summary" msgid="5841558383556238653">"הגדרות מקלדת על המסך"</string>
-    <!-- outdated translation 8169889453770863227 -->     <string name="builtin_keyboard_settings_title" msgid="5274990495405941804">"מקלדת המכשיר"</string>
-    <!-- outdated translation 6404687907454621637 -->     <string name="builtin_keyboard_settings_summary" msgid="7990296351888096836">"הגדרות מקלדת מובנית"</string>
+    <string name="builtin_keyboard_settings_title" msgid="5274990495405941804">"מקלדת מובנית"</string>
+    <string name="builtin_keyboard_settings_summary" msgid="7990296351888096836">"הגדרות מקלדת מובנית, פיזית"</string>
     <string name="development_settings_title" msgid="6719732334835420989">"פיתוח"</string>
     <string name="development_settings_summary" msgid="2151320488701538355">"הגדרת אפשרויות לפיתוח יישום"</string>
     <string name="enable_adb" msgid="7982306934419797485">"ניקוי באגים של USB"</string>
@@ -1141,46 +1052,33 @@
     <string name="accessibility_service_security_warning" msgid="4066258132331302670">"ייתכן ששירות נגישות זה יוכל לאסוף את כל הטקסט שתקליד, כולל נתונים אישיים ומספרי כרטיס אשראי פרט לסיסמאות. כמו כן, הוא עשוי לרשום את האינטראקציות שלך עם ממשק המשתמש. הוא מגיע מהיישום <xliff:g id="ACCESSIBILITY_SERVICE_NAME">%1$s</xliff:g>. האם להשתמש בשירות נגישות זה?"</string>
     <string name="accessibility_service_disable_warning" msgid="8930591383312775132">"להשבית נגישות?"</string>
     <string name="accessibility_service_no_apps_title" msgid="898893674114288531">"לא נמצאו יישומים הקשורים לנגישות"</string>
-    <!-- outdated translation 2450056749545404807 -->     <string name="accessibility_service_no_apps_message" msgid="2663371323410332529">"לא מותקנים יישומים הקשורים לנגישות."\n\n"תוכל להוריד קורא מסך למכשיר מ\'חנות Android\'."\n\n"לחץ על \'אישור\' כדי להתקין את קורא המסך."</string>
-    <!-- no translation found for accessibility_script_injection_category (8649951751131431904) -->
-    <skip />
-    <!-- no translation found for accessibility_script_injection_enabled (6927896081016611012) -->
-    <skip />
-    <!-- no translation found for accessibility_script_injection_enabled_summary (3629525134901617621) -->
-    <skip />
-    <!-- no translation found for accessibility_script_injection_security_warning (1113600871264359828) -->
-    <skip />
-    <!-- no translation found for accessibility_script_injection_security_warning (9078893361741942109) -->
-    <skip />
+    <string name="accessibility_service_no_apps_message" msgid="2663371323410332529">"לא מותקנים יישומים הקשורים לנגישות."\n\n"תוכל להוריד קורא מסך עבור התקןך מ\'חנות Android\'."\n\n"לחץ על \'אישור\' כדי להתקין את קורא המסך."</string>
+    <string name="accessibility_script_injection_category" msgid="8649951751131431904">"קובצי script של נגישות"</string>
+    <string name="accessibility_script_injection_enabled" msgid="6927896081016611012">"הורד קובצי script של נגישות"</string>
+    <string name="accessibility_script_injection_enabled_summary" msgid="3629525134901617621">"אפשר ליישומים להוריד קובצי script של נגישות מ-Google"</string>
+    <string name="accessibility_script_injection_security_warning" product="tablet" msgid="1113600871264359828">"חלק מהיישומים יכולים לבקש מ-Google להוריד קובצי script לטבלט כדי שהתוכן שלהם יהיה נגיש יותר. האם אתה בטוח שברצונך לאפשר ל-Google להתקין קובצי script של נגישות בטבלט?"</string>
+    <string name="accessibility_script_injection_security_warning" product="default" msgid="9078893361741942109">"חלק מהיישומים יכולים לבקש מ-Google להוריד קובצי script לטלפון כדי שהתוכן שלהם יהיה נגיש יותר. האם אתה בטוח שברצונך לאפשר ל-Google להתקין קובצי script של נגישות בטלפון?"</string>
     <string name="accessibility_power_button_category" msgid="8545885236482339928">"לחצן הפעלה"</string>
     <string name="accessibility_power_button_ends_call" msgid="7698764194501089533">"לחצן ההפעלה מסיים את השיחה"</string>
     <string name="accessibility_power_button_ends_call_summary" msgid="8878097632186291462">"במהלך שיחה, לחיצה על לחצן ההפעלה תסיים את השיחה במקום לכבות את המסך"</string>
     <string name="power_usage_summary_title" msgid="5180282911164282324">"צריכת סוללה"</string>
     <string name="power_usage_summary" msgid="7237084831082848168">"מה השתמש בסוללה"</string>
-    <!-- no translation found for power_usage_not_available (3583407442633768046) -->
-    <skip />
+    <string name="power_usage_not_available" msgid="3583407442633768046">"נתונים על שימוש בסוללה אינם זמינים"</string>
     <string name="battery_since_unplugged" msgid="338073389740738437">"צריכת סוללה מאז הניתוק"</string>
     <string name="battery_since_reset" msgid="7464546661121187045">"צריכת סוללה מאז האיפוס"</string>
-    <!-- no translation found for battery_stats_on_battery (4970762168505236033) -->
-    <skip />
+    <string name="battery_stats_on_battery" msgid="4970762168505236033">"<xliff:g id="TIME">%1$s</xliff:g> על סוללה"</string>
     <string name="battery_stats_duration" msgid="7464501326709469282">"<xliff:g id="TIME">%1$s</xliff:g> מאז שנותק"</string>
-    <!-- no translation found for battery_stats_charging_label (4223311142875178785) -->
-    <skip />
-    <!-- no translation found for battery_stats_screen_on_label (7150221809877509708) -->
-    <skip />
-    <!-- no translation found for battery_stats_gps_on_label (1193657533641951256) -->
-    <skip />
-    <!-- no translation found for battery_stats_wifi_running_label (3093545080361658269) -->
-    <skip />
-    <!-- no translation found for battery_stats_wake_lock_label (1908942681902324095) -->
-    <skip />
-    <!-- no translation found for battery_stats_phone_signal_label (4137799310329041341) -->
-    <skip />
+    <string name="battery_stats_charging_label" msgid="4223311142875178785">"טוען"</string>
+    <string name="battery_stats_screen_on_label" msgid="7150221809877509708">"מסך מופעל"</string>
+    <string name="battery_stats_gps_on_label" msgid="1193657533641951256">"GPS מופעל"</string>
+    <string name="battery_stats_wifi_running_label" msgid="3093545080361658269">"Wi-Fi"</string>
+    <string name="battery_stats_wake_lock_label" msgid="1908942681902324095">"ער"</string>
+    <string name="battery_stats_phone_signal_label" msgid="4137799310329041341">"אות רשת סלולרית"</string>
     <!-- no translation found for battery_stats_last_duration (1535831453827905957) -->
     <skip />
     <string name="awake" msgid="387122265874485088">"זמן התעוררות של ההתקן"</string>
-    <!-- outdated translation 4630925382578609056 -->     <string name="wifi_on_time" msgid="6310209835617490616">"WiFi בזמן"</string>
-    <!-- outdated translation 4478515071957280711 -->     <string name="bluetooth_on_time" msgid="6157799524996162271">"WiFi בזמן"</string>
+    <string name="wifi_on_time" msgid="6310209835617490616">"Wi-Fi בזמן"</string>
+    <string name="bluetooth_on_time" msgid="6157799524996162271">"Wi-Fi בזמן"</string>
     <string name="usage_name_percent" msgid="7976919382448235858">"<xliff:g id="NAME">%1$s</xliff:g> -  <xliff:g id="NUMBER">%2$s</xliff:g><xliff:g id="PERCENT">%%</xliff:g>"</string>
     <!-- no translation found for history_details_title (3608240585315506067) -->
     <skip />
@@ -1193,15 +1091,13 @@
     <string name="power_bluetooth" msgid="4373329044379008289">"Bluetooth"</string>
     <string name="power_cell" msgid="6596471490976003056">"סלולרי במצב המתנה"</string>
     <string name="power_phone" msgid="5392641106474567277">"שיחות קוליות"</string>
-    <string name="power_idle" product="tablet" msgid="4612478572401640759">"טבלט במצב לא פעיל"</string>
+    <string name="power_idle" product="tablet" msgid="4612478572401640759">"טבלט לא פעיל"</string>
     <string name="power_idle" product="default" msgid="9055659695602194990">"טלפון פנוי"</string>
     <string name="usage_type_cpu" msgid="715162150698338714">"סך הכל CPU"</string>
     <string name="usage_type_cpu_foreground" msgid="6500579611933211831">"CPU בחזית"</string>
-    <!-- no translation found for usage_type_wake_lock (5125438890233677880) -->
-    <skip />
+    <string name="usage_type_wake_lock" msgid="5125438890233677880">"שמור במצב ער"</string>
     <string name="usage_type_gps" msgid="7989688715128160790">"GPS"</string>
-    <!-- no translation found for usage_type_wifi_running (8234997940652067049) -->
-    <skip />
+    <string name="usage_type_wifi_running" msgid="8234997940652067049">"Wi-Fi פועל"</string>
     <string name="usage_type_phone" product="tablet" msgid="262638572890253393">"טבלט"</string>
     <string name="usage_type_phone" product="default" msgid="9108247984998041853">"טלפון"</string>
     <string name="usage_type_data_send" msgid="2857401966985425427">"הנתונים נשלחו"</string>
@@ -1214,10 +1110,10 @@
     <string name="battery_action_app_details" msgid="3275013531871113681">"מידע על היישום"</string>
     <string name="battery_action_app_settings" msgid="350562653472577250">"הגדרות יישום"</string>
     <string name="battery_action_display" msgid="5302763261448580102">"הגדרות תצוגה"</string>
-    <!-- outdated translation 5452076674659927993 -->     <string name="battery_action_wifi" msgid="2272741639606146903">"הגדרות WiFi"</string>
+    <string name="battery_action_wifi" msgid="2272741639606146903">"הגדרות Wi-Fi"</string>
     <string name="battery_action_bluetooth" msgid="8374789049507723142">"הגדרות Bluetooth"</string>
     <string name="battery_desc_voice" msgid="8980322055722959211">"צריכת סוללה של שיחות קוליות"</string>
-    <string name="battery_desc_standby" product="tablet" msgid="6284747418668280364">"צריכת סוללה כאשר הטבלט במצב לא פעיל"</string>
+    <string name="battery_desc_standby" product="tablet" msgid="6284747418668280364">"שימוש בסוללה כשהטבלט במצב לא פעיל"</string>
     <string name="battery_desc_standby" product="default" msgid="3009080001948091424">"צריכת סוללה כאשר הטלפון במצב לא פעיל"</string>
     <string name="battery_desc_radio" msgid="5479196477223185367">"צריכת סוללה של רדיו סלולרי"</string>
     <string name="battery_sugg_radio" msgid="8211336978326295047">"עבור למצב טיסה כדי לחסוך בצריכת הסוללה באזורים שבהם אין כיסוי סלולרי"</string>
@@ -1228,9 +1124,9 @@
     <string name="battery_desc_bluetooth" msgid="7535520658674621902">"צריכה הסוללה של Bluetooth"</string>
     <string name="battery_sugg_bluetooth_basic" msgid="817276933922157788">"כבה Bluetooth כשאינך משתמש בו"</string>
     <string name="battery_sugg_bluetooth_headset" msgid="8214816222115517479">"נסה להתחבר להתקן Bluetooth אחר"</string>
-    <!-- outdated translation 8123202939321333639 -->     <string name="battery_desc_apps" msgid="6665712811746233450">"צריכת הסוללה על ידי יישומים בעת ההפעלה"</string>
+    <string name="battery_desc_apps" msgid="6665712811746233450">"ניצול סוללה על ידי היישום"</string>
     <string name="battery_sugg_apps_info" msgid="6065882899391322442">"עצור את היישום או הסר את התקנתו"</string>
-    <!-- outdated translation 4145005297393800223 -->     <string name="battery_sugg_apps_gps" msgid="4545056413090932541">"כבה את ה-GPS כשאינך משתמש בו"</string>
+    <string name="battery_sugg_apps_gps" msgid="4545056413090932541">"שלוט ב-GPS באופן ידני כדי למנוע מהיישום להשתמש בו"</string>
     <string name="battery_sugg_apps_settings" msgid="8021302847272481168">"ייתכן שהיישום יציע הגדרות לצמצום השימוש בסוללה"</string>
     <string name="menu_stats_unplugged" msgid="8296577130840261624">"<xliff:g id="UNPLUGGED">%1$s</xliff:g> מאז שנותק"</string>
     <string name="menu_stats_last_unplugged" msgid="5922246077592434526">"נותק לאחרונה מאז <xliff:g id="UNPLUGGED">%1$s</xliff:g>"</string>
@@ -1280,10 +1176,8 @@
     <string name="pico_not_installed" msgid="6266845418419994311">"לא מותקן"</string>
     <string name="pico_voice_summary_female" msgid="8047327176247727492">"נקבה"</string>
     <string name="pico_voice_summary_male" msgid="8331266854058577610">"זכר"</string>
-    <!-- no translation found for tts_notif_engine_install_title (7000346872482649034) -->
-    <skip />
-    <!-- no translation found for tts_notif_engine_install_message (5304661142202662693) -->
-    <skip />
+    <string name="tts_notif_engine_install_title" msgid="7000346872482649034">"מנוע סינתזת דיבור מותקן"</string>
+    <string name="tts_notif_engine_install_message" msgid="5304661142202662693">"הפוך מנוע חדש לפעיל לפני השימוש"</string>
     <string name="gadget_title" msgid="7455548605888590466">"Power Control"</string>
     <string name="gadget_toggle_wifi" msgid="2382963973155082629">"מעדכן הגדרת Wi-Fi"</string>
     <string name="gadget_toggle_bluetooth" msgid="7538903239807020826">"מעדכן הגדרת Bluetooth"</string>
@@ -1372,9 +1266,9 @@
     <string name="credentials_access_summary" msgid="319662078718574168">"אפשר ליישומים לגשת לאישורים מאובטחים ואישורים אחרים"</string>
     <string name="credentials_unlock" msgid="1463040326264133844">"הזן סיסמה"</string>
     <string name="credentials_unlock_hint" msgid="594679530407918031">"הזן את סיסמת אחסון האישורים."</string>
-    <!-- outdated translation 177337517568022236 -->     <string name="credentials_install_certificates" product="nosdcard" msgid="619171634797689906">"התקן מכרטיס SD"</string>
+    <string name="credentials_install_certificates" product="nosdcard" msgid="619171634797689906">"התקן מאמצעי אחסון מסוג USB"</string>
     <string name="credentials_install_certificates" product="default" msgid="177337517568022236">"התקן מכרטיס SD"</string>
-    <!-- outdated translation 7737001268684193093 -->     <string name="credentials_install_certificates_summary" product="nosdcard" msgid="8920330112631198575">"התקן אישורים מוצפנים מכרטיס SD"</string>
+    <string name="credentials_install_certificates_summary" product="nosdcard" msgid="8920330112631198575">"התקן אישורים מוצפנים מהתקן אחסון מסוג USB"</string>
     <string name="credentials_install_certificates_summary" product="default" msgid="7737001268684193093">"התקן אישורים מוצפנים מכרטיס SD"</string>
     <string name="credentials_set_password" msgid="9104473585811899989">"הגדרת סיסמה"</string>
     <string name="credentials_set_password_summary" msgid="8287876917562085701">"הגדר או שנה את סיסמת אחסון האישורים"</string>
@@ -1422,15 +1316,15 @@
     <string name="backup_section_title" msgid="8856083167469467588">"גיבוי ושחזור"</string>
     <string name="personal_data_section_title" msgid="7815209034443782061">"נתונים אישיים"</string>
     <string name="backup_data_title" msgid="1239105919852668016">"גבה את הנתונים שלי"</string>
-    <!-- outdated translation 5662190190240860035 -->     <string name="backup_data_summary" msgid="6515285107793232815">"גבה את ההגדרות שלי ונתוני יישום אחרים."</string>
-    <!-- no translation found for backup_configure_transport_title (1642593939931033647) -->
+    <string name="backup_data_summary" msgid="6515285107793232815">"גבה נתוני יישומים, סיסמאות Wi-Fi והגדרות אחרות בשרתי Google"</string>
+    <!-- no translation found for backup_configure_account_title (3790872965773196615) -->
     <skip />
-    <!-- no translation found for backup_configure_transport_default_summary (1855090161240800307) -->
+    <!-- no translation found for backup_configure_account_default_summary (2436933224764745553) -->
     <skip />
     <string name="auto_restore_title" msgid="5397528966329126506">"שחזור אוטומטי"</string>
-    <!-- outdated translation 6867766474057290177 -->     <string name="auto_restore_summary" msgid="83177150536734378">"בעת התקנת יישום מחדש, שחזר הגדרות מגובות או נתונים אחרים."</string>
+    <string name="auto_restore_summary" msgid="83177150536734378">"אם אני מתקין יישום מחדש, שחזר הגדרות מגובות או נתונים אחרים מגובים"</string>
     <string name="backup_erase_dialog_title" msgid="3438255037256586237">"גיבוי"</string>
-    <!-- outdated translation 2948090854996352245 -->     <string name="backup_erase_dialog_message" msgid="7766283133557587608">"האם אתה בטוח שברצונך להפסיק את גיבוי ההגדרות ונתוני היישומים ולמחוק את כל העותקים בשרתי Google?"</string>
+    <string name="backup_erase_dialog_message" msgid="7766283133557587608">"האם אתה בטוח שברצונך להפסיק את גיבוי הסיסמאות, הסימניות והגדרות אחרות של ה-Wi-Fi ונתוני יישומים ולמחוק את כל העותקים בשרתי Google?"</string>
     <string name="device_admin_settings_title" msgid="1335557832906433309">"הגדרות ניהול מכשיר"</string>
     <string name="active_device_admin_msg" msgid="6930903262612422111">"מנהל התקן"</string>
     <string name="remove_device_admin" msgid="3596845261596451437">"בטל הפעלה"</string>
@@ -1446,72 +1340,46 @@
     <string name="sound_category_calls_title" msgid="3688531959256239012">"שיחות נכנסות"</string>
     <string name="sound_category_notification_title" msgid="3502115998790286943">"התראות"</string>
     <string name="sound_category_feedback_title" msgid="4399742321363475393">"משוב"</string>
-    <!-- no translation found for wifi_setup_title (3130584822275278425) -->
-    <skip />
-    <!-- no translation found for wifi_setup_not_connected (6997432604664057052) -->
-    <skip />
-    <!-- no translation found for wifi_setup_add_network (5939624680150051807) -->
-    <skip />
-    <!-- no translation found for wifi_setup_refresh_list (3411615711486911064) -->
-    <skip />
-    <!-- no translation found for wifi_setup_skip (6661541841684895522) -->
-    <skip />
-    <!-- no translation found for wifi_setup_next (3388694784447820477) -->
-    <skip />
-    <!-- no translation found for wifi_setup_back (144777383739164044) -->
-    <skip />
-    <!-- no translation found for wifi_setup_detail (2336990478140503605) -->
-    <skip />
-    <!-- no translation found for wifi_setup_connect (7954456989590237049) -->
-    <skip />
-    <!-- no translation found for wifi_setup_forget (2562847595567347526) -->
-    <skip />
-    <!-- no translation found for wifi_setup_save (3659235094218508211) -->
-    <skip />
-    <!-- no translation found for wifi_setup_cancel (3185216020264410239) -->
-    <skip />
-    <!-- no translation found for wifi_setup_status_scanning (7424598483871053657) -->
-    <skip />
+    <string name="wifi_setup_title" msgid="3130584822275278425">"הגדרת WiFi"</string>
+    <string name="wifi_setup_not_connected" msgid="6997432604664057052">"לא מחובר"</string>
+    <string name="wifi_setup_add_network" msgid="5939624680150051807">"הוסף רשת"</string>
+    <string name="wifi_setup_refresh_list" msgid="3411615711486911064">"רענן רשימה"</string>
+    <string name="wifi_setup_skip" msgid="6661541841684895522">"דלג"</string>
+    <string name="wifi_setup_next" msgid="3388694784447820477">"הבא"</string>
+    <string name="wifi_setup_back" msgid="144777383739164044">"הקודם"</string>
+    <string name="wifi_setup_detail" msgid="2336990478140503605">"פרטי רשת"</string>
+    <string name="wifi_setup_connect" msgid="7954456989590237049">"התחבר"</string>
+    <string name="wifi_setup_forget" msgid="2562847595567347526">"שכח"</string>
+    <string name="wifi_setup_save" msgid="3659235094218508211">"שמור"</string>
+    <string name="wifi_setup_cancel" msgid="3185216020264410239">"ביטול"</string>
+    <string name="wifi_setup_status_scanning" msgid="7424598483871053657">"סורק רשתות..."</string>
     <!-- no translation found for wifi_setup_status_select_network (7519563569903137003) -->
     <skip />
-    <!-- no translation found for wifi_setup_status_existing_network (6394925174802598186) -->
+    <string name="wifi_setup_status_existing_network" msgid="6394925174802598186">"התחבר לרשת קיימת"</string>
+    <!-- no translation found for wifi_setup_status_unsecured_network (8143046977328718252) -->
     <skip />
-    <!-- no translation found for wifi_setup_status_edit_network (6582036394332822032) -->
+    <string name="wifi_setup_status_edit_network" msgid="6582036394332822032">"הזן תצורת רשת"</string>
+    <string name="wifi_setup_status_new_network" msgid="7468952850452301083">"התחבר לרשת חדשה"</string>
+    <string name="wifi_setup_status_connecting" msgid="2594117697215042584">"מתחבר..."</string>
+    <string name="wifi_setup_status_proceed_to_next" msgid="9071951312604559022">"המשך לשלב הבא"</string>
+    <!-- no translation found for wifi_setup_status_eap_not_supported (3196386445567501484) -->
     <skip />
-    <!-- no translation found for wifi_setup_status_new_network (7468952850452301083) -->
-    <skip />
-    <!-- no translation found for wifi_setup_status_connecting (2594117697215042584) -->
-    <skip />
-    <!-- no translation found for wifi_setup_status_proceed_to_next (9071951312604559022) -->
+    <!-- no translation found for wifi_setup_eap_not_supported (5083895763075722698) -->
     <skip />
     <string name="account_sync_settings_title" msgid="4578227872921044660">"הגדרות סנכרון"</string>
     <string name="sync_is_failing" msgid="1591561768344128377">"הסינכרון נתקל בבעיות. הוא יחזור לפעולה תוך זמן קצר."</string>
-    <!-- no translation found for add_account_label (7811707265834013767) -->
-    <skip />
-    <!-- no translation found for header_general_sync_settings (3487451896424238469) -->
-    <skip />
-    <!-- no translation found for background_data (5779592891375473817) -->
-    <skip />
-    <!-- no translation found for background_data_summary (3630389249212620467) -->
-    <skip />
-    <!-- no translation found for background_data_dialog_title (745974259246047425) -->
-    <skip />
-    <!-- no translation found for background_data_dialog_message (9155730118215371308) -->
-    <skip />
+    <string name="add_account_label" msgid="7811707265834013767">"הוסף חשבון"</string>
+    <string name="header_general_sync_settings" msgid="3487451896424238469">"הגדרות סנכרון כלליות"</string>
+    <string name="background_data" msgid="5779592891375473817">"נתוני רקע"</string>
+    <string name="background_data_summary" msgid="3630389249212620467">"יישומים יכולים לסנכרן, לשלוח ולקבל נתונים בכל עת"</string>
+    <string name="background_data_dialog_title" msgid="745974259246047425">"לידיעתך"</string>
+    <string name="background_data_dialog_message" msgid="9155730118215371308">"השבתת נתוני הרקע מאריכה את חיי הסוללה ומצמצת את השימוש בנתונים. ייתכן שיישומים מסוימים עדיין ישתמשו בחיבור נתוני הרקע."</string>
     <string name="sync_automatically" msgid="7558810110682562376">"סינכרון אוטומטי"</string>
-    <!-- no translation found for sync_automatically_summary (6662623174608419931) -->
-    <skip />
-    <!-- no translation found for header_manage_accounts (6869002423884539607) -->
-    <skip />
-    <!-- no translation found for sync_enabled (4551148952179416813) -->
-    <skip />
-    <!-- no translation found for sync_disabled (8511659877596511991) -->
-    <skip />
-    <!-- no translation found for sync_error (5060969083117872149) -->
-    <skip />
-    <!-- no translation found for app_label (5443184607893378389) -->
-    <skip />
-    <string name="sync_too_many_deletes" msgid="7648720493358579441">"חרגת ממגבלת המחיקה"</string>
+    <string name="sync_automatically_summary" msgid="6662623174608419931">"יישומים מסנכרנים נתונים באופן אוטומטי"</string>
+    <string name="header_manage_accounts" msgid="6869002423884539607">"נהל חשבונות"</string>
+    <string name="sync_enabled" msgid="4551148952179416813">"סנכרון מופעל"</string>
+    <string name="sync_disabled" msgid="8511659877596511991">"סנכרון כבוי"</string>
+    <string name="sync_error" msgid="5060969083117872149">"שגיאת סנכרון"</string>
     <string name="settings_backup" msgid="2274732978260797031">"הגדרות גיבוי"</string>
     <!-- no translation found for settings_backup_summary (7916877705938054035) -->
     <skip />
@@ -1522,10 +1390,6 @@
     <string name="sync_gmail" msgid="714886122098006477">"Gmail"</string>
     <string name="sync_calendar" msgid="9056527206714733735">"לוח שנה"</string>
     <string name="sync_contacts" msgid="9174914394377828043">"אנשי קשר"</string>
-    <string name="sync_too_many_deletes_desc" msgid="1629933977544304140">"קיימים <xliff:g id="NUMBER_OF_DELETED_ITEMS">%1$d</xliff:g> פריטים שנמחקו עבור <xliff:g id="TYPE_OF_SYNC">%2$s</xliff:g>, חשבון <xliff:g id="ACCOUNT_NAME">%3$s</xliff:g>. מה ברצונך לעשות?"</string>
-    <string name="sync_really_delete" msgid="8501873911799839009">"מחק פריטים אלה."</string>
-    <string name="sync_undo_deletes" msgid="2154022612361710595">"בטל את המחיקות."</string>
-    <string name="sync_do_nothing" msgid="5889328648484047916">"אל תעשה דבר בינתיים."</string>
     <!-- no translation found for sync_plug (5952575609349860569) -->
     <skip />
     <!-- no translation found for header_application_sync_settings (5514539555293976035) -->
