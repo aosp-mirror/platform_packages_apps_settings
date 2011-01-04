@@ -202,6 +202,7 @@ class BluetoothEventRedirector {
 
         // Fine-grained state broadcasts
         filter.addAction(BluetoothPan.ACTION_PAN_STATE_CHANGED);
+        filter.addAction(BluetoothInputDevice.ACTION_INPUT_DEVICE_STATE_CHANGED);
         filter.addAction(BluetoothA2dp.ACTION_CONNECTION_STATE_CHANGED);
         filter.addAction(BluetoothHeadset.ACTION_CONNECTION_STATE_CHANGED);
         filter.addAction(BluetoothDevice.ACTION_CLASS_CHANGED);
