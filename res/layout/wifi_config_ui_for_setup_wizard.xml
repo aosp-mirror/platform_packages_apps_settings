@@ -347,7 +347,8 @@
                 android:orientation="vertical"
                 android:visibility="gone">
 
-            <TextView android:layout_width="fill_parent"
+            <TextView android:id="@+id/proxy_settings_title"
+                    android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
                     android:text="@string/proxy_settings_title" />
 
