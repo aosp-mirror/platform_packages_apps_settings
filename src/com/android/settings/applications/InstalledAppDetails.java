@@ -408,10 +408,11 @@ public class InstalledAppDetails extends Fragment
         if (mMoveInProgress) {
             return true;
         }
-        
-        String packageName = getArguments().getString(ARG_PACKAGE_NAME);
+        final Bundle args = getArguments();
+        String packageName = (args != null) ? args.getString(ARG_PACKAGE_NAME) : null;
         if (packageName == null) {
-            Intent intent = (Intent)getArguments().getParcelable("intent");
+            Intent intent = (args == null) ?
+                    getActivity().getIntent() : (Intent) args.getParcelable("intent");
             if (intent != null) {
                 packageName = intent.getData().getSchemeSpecificPart();
             }
