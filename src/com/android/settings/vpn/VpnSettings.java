@@ -90,6 +90,9 @@ public class VpnSettings extends SettingsPreferenceFragment
     private static final String PROFILES_ROOT = VpnManager.getProfilePath() + "/";
     private static final String PROFILE_OBJ_FILE = ".pobj";
 
+    private static final String KEY_ACTIVE_PROFILE = "ActiveProfile";
+    private static final String KEY_PROFILE_CONNECTING = "ProfileConnecting";
+
     private static final int REQUEST_ADD_OR_EDIT_PROFILE = 1;
     static final int REQUEST_SELECT_VPN_TYPE = 2;
 
@@ -145,6 +148,28 @@ public class VpnSettings extends SettingsPreferenceFragment
     }
 
     @Override
+    public void onSaveInstanceState(Bundle savedInstanceState) {
+        if (mActiveProfile != null) {
+            savedInstanceState.putString(KEY_ACTIVE_PROFILE,
+                    mActiveProfile.getId());
+            savedInstanceState.putBoolean(KEY_PROFILE_CONNECTING,
+                    (mConnectingActor != null));
+        }
+        super.onSaveInstanceState(savedInstanceState);
+    }
+
+    private void restoreInstanceState(Bundle savedInstanceState) {
+        if (savedInstanceState == null) return;
+        String profileId = savedInstanceState.getString(KEY_ACTIVE_PROFILE);
+        if (profileId != null) {
+            mActiveProfile = getProfile(getProfileIndexFromId(profileId));
+            if (savedInstanceState.getBoolean(KEY_PROFILE_CONNECTING)) {
+                mConnectingActor = getActor(mActiveProfile);
+            }
+        }
+    }
+
+    @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
@@ -170,6 +195,7 @@ public class VpnSettings extends SettingsPreferenceFragment
 
         retrieveVpnListFromStorage();
         checkVpnConnectionStatusInBackground();
+        restoreInstanceState(savedInstanceState);
     }
 
     @Override
