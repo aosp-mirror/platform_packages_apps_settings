@@ -217,6 +217,7 @@ public class Memory extends SettingsPreferenceFragment implements OnCancelListen
         intentFilter.addDataScheme("file");
         getActivity().registerReceiver(mReceiver, intentFilter);
 
+        mMeasurement.invalidate();
         if (!Environment.isExternalStorageEmulated()) {
             mMeasurement.measureExternal();
         }
