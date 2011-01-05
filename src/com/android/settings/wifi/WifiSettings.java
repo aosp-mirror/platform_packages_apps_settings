@@ -356,15 +356,6 @@ public class WifiSettings extends SettingsPreferenceFragment
         mDialog.show();
     }
 
-    /**
-     * Called from {@link WifiSettingsForSetupWizardXL} when the object wants to open
-     * {@link WifiDialog} anyway, though usually it prepares its own simplified UI for
-     * configuring a wifi network.
-     */
-    /* package */ void showDialogForSelectedPreference() {
-        showDialog(mSelectedAccessPoint, mEdit);
-    }
-
     private boolean requireKeyStore(WifiConfiguration config) {
         if (WifiConfigController.requireKeyStore(config) &&
                 KeyStore.getInstance().test() != KeyStore.NO_ERROR) {

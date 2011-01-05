@@ -77,9 +77,6 @@ public class WifiSettingsForSetupWizardXL extends Activity implements OnClickLis
     private Button mForgetButton;
     private Button mBackButton;
 
-    // Not used now.
-    private Button mDetailButton;
-
     // true when a user already pressed "Connect" button and waiting for connection.
     // Also true when the device is already connected to a wifi network on launch.
     private boolean mAfterConnectAction;
@@ -98,6 +95,7 @@ public class WifiSettingsForSetupWizardXL extends Activity implements OnClickLis
     // To let users exit this Activity, we enable the button after waiting for a moment.
     private final int DELAYED_SKIP_ENABLE_TIME = 10000;  // Unit: millis
     private final Runnable mSkipButtonEnabler = new Runnable() {
+        @Override
         public void run() {
             if (DEBUG) Log.d(TAG, "Delayed skip enabler starts running.");
             mSkipOrNextButton.setEnabled(true);
@@ -145,8 +143,6 @@ public class WifiSettingsForSetupWizardXL extends Activity implements OnClickLis
         mForgetButton.setOnClickListener(this);
         mBackButton = (Button)findViewById(R.id.wifi_setup_cancel);
         mBackButton.setOnClickListener(this);
-        mDetailButton = (Button)findViewById(R.id.wifi_setup_detail);
-        mDetailButton.setOnClickListener(this);
 
         // At first, Wifi module doesn't return SCANNING state (it's too early), so we manually
         // show it.
@@ -161,7 +157,6 @@ public class WifiSettingsForSetupWizardXL extends Activity implements OnClickLis
         mConnectButton.setVisibility(View.GONE);
         mForgetButton.setVisibility(View.GONE);
         mBackButton.setVisibility(View.GONE);
-        mDetailButton.setVisibility(View.GONE);
     }
 
     @Override
@@ -191,9 +186,6 @@ public class WifiSettingsForSetupWizardXL extends Activity implements OnClickLis
         } else if (view == mBackButton) {
             if (DEBUG) Log.d(TAG, "Back button pressed");
             onBackButtonPressed();
-        } else if (view == mDetailButton) {
-            if (DEBUG) Log.d(TAG, "Detail button pressed");
-            mWifiSettings.showDialogForSelectedPreference();
         }
     }
 
@@ -292,8 +284,6 @@ public class WifiSettingsForSetupWizardXL extends Activity implements OnClickLis
         // onConfigUiShown() will be called.
         mWifiSettings.onAddNetworkPressed();
 
-        // We don't need detail button since all the details are in the main screen.
-        mDetailButton.setVisibility(View.GONE);
     }
 
     /**
@@ -338,8 +328,6 @@ public class WifiSettingsForSetupWizardXL extends Activity implements OnClickLis
         mRefreshButton.setVisibility(View.GONE);
         mSkipOrNextButton.setVisibility(View.GONE);
         mBackButton.setVisibility(View.VISIBLE);
-        // TODO: remove this after UI fix.
-        // mDetailButton.setVisibility(View.VISIBLE);
     }
 
     // May be called when user press "connect" button in WifiDialog
@@ -366,7 +354,6 @@ public class WifiSettingsForSetupWizardXL extends Activity implements OnClickLis
         mConnectButton.setVisibility(View.GONE);
         mAddNetworkButton.setVisibility(View.GONE);
         mRefreshButton.setVisibility(View.GONE);
-        mDetailButton.setVisibility(View.GONE);
     }
 
     // May be called when user press "forget" button in WifiDialog
