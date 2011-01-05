@@ -51,7 +51,7 @@ public class BluetoothPairingDialog extends AlertActivity implements DialogInter
     private LocalBluetoothManager mLocalManager;
     private BluetoothDevice mDevice;
     private int mType;
-    private String mPasskey;
+    private String mPairingKey;
     private EditText mPairingView;
     private Button mOkButton;
 
@@ -96,24 +96,29 @@ public class BluetoothPairingDialog extends AlertActivity implements DialogInter
             createUserEntryDialog();
         } else if (mType == BluetoothDevice.PAIRING_VARIANT_PASSKEY_CONFIRMATION){
             int passkey =
-                intent.getIntExtra(BluetoothDevice.EXTRA_PASSKEY, BluetoothDevice.ERROR);
+                intent.getIntExtra(BluetoothDevice.EXTRA_PAIRING_KEY, BluetoothDevice.ERROR);
             if (passkey == BluetoothDevice.ERROR) {
                 Log.e(TAG, "Invalid ConfirmationPasskey received, not showing any dialog");
                 return;
             }
-            mPasskey = String.format("%06d", passkey);
+            mPairingKey = String.format("%06d", passkey);
             createConfirmationDialog();
         } else if (mType == BluetoothDevice.PAIRING_VARIANT_CONSENT) {
             createConsentDialog();
-        } else if (mType == BluetoothDevice.PAIRING_VARIANT_DISPLAY_PASSKEY) {
-            int passkey =
-                intent.getIntExtra(BluetoothDevice.EXTRA_PASSKEY, BluetoothDevice.ERROR);
-            if (passkey == BluetoothDevice.ERROR) {
-                Log.e(TAG, "Invalid ConfirmationPasskey received, not showing any dialog");
+        } else if (mType == BluetoothDevice.PAIRING_VARIANT_DISPLAY_PASSKEY ||
+                   mType == BluetoothDevice.PAIRING_VARIANT_DISPLAY_PIN) {
+            int pairingKey =
+                intent.getIntExtra(BluetoothDevice.EXTRA_PAIRING_KEY, BluetoothDevice.ERROR);
+            if (pairingKey == BluetoothDevice.ERROR) {
+                Log.e(TAG, "Invalid Confirmation Passkey or PIN received, not showing any dialog");
                 return;
             }
-            mPasskey = String.format("%06d", passkey);
-            createDisplayPasskeyDialog();
+            if (mType == BluetoothDevice.PAIRING_VARIANT_DISPLAY_PASSKEY) {
+                mPairingKey = String.format("%06d", pairingKey);
+            } else {
+                mPairingKey = String.format("%04d", pairingKey);
+            }
+            createDisplayPasskeyOrPinDialog();
         } else if (mType == BluetoothDevice.PAIRING_VARIANT_OOB_CONSENT) {
             createConsentDialog();
         } else {
@@ -166,13 +171,15 @@ public class BluetoothPairingDialog extends AlertActivity implements DialogInter
         } else if (mType == BluetoothDevice.PAIRING_VARIANT_PASSKEY_CONFIRMATION) {
             mPairingView.setVisibility(View.GONE);
             messageView.setText(getString(R.string.bluetooth_confirm_passkey_msg, name,
-                    mPasskey));
+                    mPairingKey));
         } else if (mType == BluetoothDevice.PAIRING_VARIANT_CONSENT) {
             mPairingView.setVisibility(View.GONE);
             messageView.setText(getString(R.string.bluetooth_incoming_pairing_msg, name));
-        } else if (mType == BluetoothDevice.PAIRING_VARIANT_DISPLAY_PASSKEY) {
+        } else if (mType == BluetoothDevice.PAIRING_VARIANT_DISPLAY_PASSKEY ||
+                    mType == BluetoothDevice.PAIRING_VARIANT_DISPLAY_PIN) {
             mPairingView.setVisibility(View.GONE);
-            messageView.setText(getString(R.string.bluetooth_display_passkey_msg, name, mPasskey));
+            messageView.setText(getString(R.string.bluetooth_display_passkey_pin_msg, name,
+                    mPairingKey));
         } else if (mType == BluetoothDevice.PAIRING_VARIANT_OOB_CONSENT) {
             mPairingView.setVisibility(View.GONE);
             messageView.setText(getString(R.string.bluetooth_incoming_pairing_msg, name));
@@ -206,18 +213,23 @@ public class BluetoothPairingDialog extends AlertActivity implements DialogInter
         setupAlert();
     }
 
-    private void createDisplayPasskeyDialog() {
+    private void createDisplayPasskeyOrPinDialog() {
         final AlertController.AlertParams p = mAlertParams;
         p.mIconId = android.R.drawable.ic_dialog_info;
         p.mTitle = getString(R.string.bluetooth_pairing_request);
         p.mView = createView();
-        p.mPositiveButtonText = getString(android.R.string.ok);
-        p.mPositiveButtonListener = this;
+        p.mNegativeButtonText = getString(android.R.string.cancel);
+        p.mNegativeButtonListener = this;
         setupAlert();
 
         // Since its only a notification, send an OK to the framework,
         // indicating that the dialog has been displayed.
-        mDevice.setPairingConfirmation(true);
+        if (mType == BluetoothDevice.PAIRING_VARIANT_DISPLAY_PASSKEY) {
+            mDevice.setPairingConfirmation(true);
+        } else if (mType == BluetoothDevice.PAIRING_VARIANT_DISPLAY_PIN) {
+            byte[] pinBytes = BluetoothDevice.convertPinToBytes(mPairingKey);
+            mDevice.setPin(pinBytes);
+        }
     }
 
     @Override
@@ -252,6 +264,8 @@ public class BluetoothPairingDialog extends AlertActivity implements DialogInter
             mDevice.setPairingConfirmation(true);
         } else if (mType == BluetoothDevice.PAIRING_VARIANT_DISPLAY_PASSKEY) {
             // Do Nothing.
+        } else if (mType == BluetoothDevice.PAIRING_VARIANT_DISPLAY_PIN) {
+            // Do Nothing
         } else if (mType == BluetoothDevice.PAIRING_VARIANT_OOB_CONSENT) {
             mDevice.setRemoteOutOfBandData();
         } else {
