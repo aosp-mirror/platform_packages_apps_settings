@@ -329,7 +329,7 @@ public class ChooseLockPattern extends PreferenceActivity {
             topLayout.setDefaultTouchRecepient(mLockPatternView);
 
             final boolean confirmCredentials = getActivity().getIntent()
-                    .getBooleanExtra("confirm_credentials", true);
+                    .getBooleanExtra("confirm_credentials", false);
 
             if (savedInstanceState == null) {
                 if (confirmCredentials) {
