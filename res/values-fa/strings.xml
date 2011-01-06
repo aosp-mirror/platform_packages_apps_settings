@@ -1,0 +1,1172 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--  Copyright (C) 2007 The Android Open Source Project
+
+     Licensed under the Apache License, Version 2.0 (the "License");
+     you may not use this file except in compliance with the License.
+     You may obtain a copy of the License at
+
+          http://www.apache.org/licenses/LICENSE-2.0
+
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+ -->
+
+<resources xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <string name="yes" msgid="4676390750360727396">"بله"</string>
+    <string name="no" msgid="6731231425810196216">"خیر"</string>
+    <string name="device_info_default" msgid="7847265875578739287">"ناشناس"</string>
+    <string name="turn_on_radio" msgid="8706561489788373676">"روشن کردن رادیو"</string>
+    <string name="turn_off_radio" msgid="1820294552893884115">"خاموش کردن رادیو"</string>
+    <string name="radioInfo_menu_viewADN" msgid="8743377494429930831">"مشاهده دفترچه آدرس سیم کارت"</string>
+    <string name="radioInfo_menu_viewFDN" msgid="7934301566925610318">"مشاهده شماره های شماره گیری ثابت"</string>
+    <string name="radioInfo_menu_viewSDN" msgid="7130280686244955669">"مشاهده شماره های شماره گیری سرویس"</string>
+    <string name="radioInfo_menu_getPDP" msgid="560610293888406317">"دریافت لیست PDP"</string>
+    <string name="radioInfo_service_in" msgid="1915416319177520020">"در حال تعمیر"</string>
+    <string name="radioInfo_service_out" msgid="5238736759641916278">"خارج از سرویس"</string>
+    <string name="radioInfo_service_emergency" msgid="2485604591272668370">"فقط تماس های اضطراری"</string>
+    <string name="radioInfo_service_off" msgid="1434084741785525415">"رادیو خاموش"</string>
+    <string name="radioInfo_roaming_in" msgid="9045363884600341051">"رومینگ"</string>
+    <string name="radioInfo_roaming_not" msgid="2851853244069662307">"بدون رومینگ"</string>
+    <string name="radioInfo_phone_idle" msgid="7489244938838742820">"بلااستفاده"</string>
+    <string name="radioInfo_phone_ringing" msgid="4883724645684297895">"زنگ زدن"</string>
+    <string name="radioInfo_phone_offhook" msgid="4174402846862780998">"تماس در حال انجام"</string>
+    <string name="radioInfo_data_disconnected" msgid="1959735267890719418">"اتصال قطع شد"</string>
+    <string name="radioInfo_data_connecting" msgid="8404571440697917823">"در حال اتصال"</string>
+    <string name="radioInfo_data_connected" msgid="7074301157399238697">"اتصال برقرار شد"</string>
+    <string name="radioInfo_data_suspended" msgid="5315325487890334196">"معلق"</string>
+    <string name="radioInfo_unknown" msgid="737385314432468266">"ناشناس"</string>
+    <string name="radioInfo_display_packets" msgid="8654359809877290639">"pkts"</string>
+    <string name="radioInfo_display_bytes" msgid="4018206969492931883">"بایت"</string>
+    <string name="radioInfo_display_dbm" msgid="3621221793699882781">"dBm"</string>
+    <string name="radioInfo_display_asu" msgid="1422248392727818082">"asu"</string>
+    <string name="radioInfo_lac" msgid="8415219164758307156">"LAC"</string>
+    <string name="radioInfo_cid" msgid="4362599198392643138">"CID"</string>
+    <string name="sdcard_unmount" product="nosdcard" msgid="6325292633327972272">"قطع اتصال حافظه USB"</string>
+    <string name="sdcard_unmount" product="default" msgid="3364184561355611897">"جدا کردن کارت SD"</string>
+    <string name="sdcard_format" product="nosdcard" msgid="6285310523155166716">"پاک کردن حافظه USB"</string>
+    <string name="sdcard_format" product="default" msgid="6713185532039187532">"پاک کردن کارت SD"</string>
+    <string name="small_font" msgid="2295331917424072635">"کوچک"</string>
+    <string name="medium_font" msgid="2068475425515133701">"متوسط"</string>
+    <string name="large_font" msgid="599055175160971446">"بزرگ"</string>
+    <string name="font_size_save" msgid="3450855718056759095">"تأیید"</string>
+    <string name="sdcard_setting" product="nosdcard" msgid="8281011784066476192">"حافظه USB"</string>
+    <string name="sdcard_setting" product="default" msgid="5922637503871474866">"کارت SD"</string>
+    <string name="battery_info_status_label" msgid="8109155295509700309">"وضعیت باتری:"</string>
+    <string name="battery_info_power_label" msgid="7465140230991349382">"دوشاخه برق:"</string>
+    <string name="battery_info_scale_label" msgid="3649763192389778437">"میزان باتری:"</string>
+    <string name="battery_info_level_label" msgid="8706526709307788737">"سطح باتری:"</string>
+    <string name="battery_info_health_label" msgid="6416051542741886958">"سلامت باتری:"</string>
+    <string name="battery_info_technology_label" msgid="788304533220748681">"فن آوری باتری:"</string>
+    <string name="battery_info_voltage_label" msgid="8971764146757637863">"ولتاژ باتری:"</string>
+    <string name="battery_info_voltage_units" msgid="8658490792208288107">"میلی ولت"</string>
+    <string name="battery_info_temperature_label" msgid="1968383098818648037">"دمای باتری:"</string>
+    <string name="battery_info_temperature_units" msgid="9098950587249987550">"درجه سانتی گراد"</string>
+    <string name="battery_info_uptime" msgid="5548545143573527992">"زمان از راه اندازی مجدد:"</string>
+    <string name="battery_info_awake_battery" msgid="2557725975486185849">"زمان بیداری در باتری:"</string>
+    <string name="battery_info_awake_plugged" msgid="176716874713478188">"زمان بیداری هنگام شارژ کردن:"</string>
+    <string name="battery_info_screen_on" msgid="376277447175613889">"زمان روشن بودن صفحه:"</string>
+    <string name="battery_info_status_unknown" msgid="196130600938058547">"ناشناس"</string>
+    <string name="battery_info_status_charging" msgid="1705179948350365604">"شارژ کردن"</string>
+    <string name="battery_info_status_charging_ac" msgid="5874340256342956252">"(AC)"</string>
+    <string name="battery_info_status_charging_usb" msgid="4059070156126770959">"(USB)"</string>
+    <string name="battery_info_status_discharging" msgid="6222697503392774475">"تخلیه شارژ"</string>
+    <string name="battery_info_status_not_charging" msgid="2820070506621483576">"شارژ نمی شود"</string>
+    <string name="battery_info_status_full" msgid="2824614753861462808">"پر"</string>
+    <string name="battery_info_power_unplugged" msgid="5987246575519551081">"جدا کردن از پریز"</string>
+    <string name="battery_info_power_ac" msgid="6808516193001604634">"AC"</string>
+    <string name="battery_info_power_usb" msgid="8012931702516331797">"USB"</string>
+    <string name="battery_info_power_ac_usb" msgid="6777734146838328688">"AC+USB"</string>
+    <string name="battery_info_power_unknown" msgid="7344115502868899881">"ناشناس"</string>
+    <string name="battery_info_health_unknown" msgid="5664295556921944255">"ناشناس"</string>
+    <string name="battery_info_health_good" msgid="8070356565806711806">"خوب"</string>
+    <string name="battery_info_health_overheat" msgid="8442959549291368806">"گرمای بیش از حد"</string>
+    <string name="battery_info_health_dead" msgid="1725917445762829059">"خالی"</string>
+    <string name="battery_info_health_over_voltage" msgid="2420269351664490121">"ولتاژ زیاد"</string>
+    <string name="battery_info_health_unspecified_failure" msgid="6347021103185471590">"خطای ناشناس"</string>
+    <string name="bluetooth" msgid="5549625000628014477">"بلوتوث"</string>
+    <string name="bluetooth_visibility" msgid="2930835434091839916">"قابل شناسایی"</string>
+    <string name="bluetooth_is_discoverable" msgid="1205694503775884903">"قابل شناسایی برای <xliff:g id="DISCOVERABLE_TIME_PERIOD">%1$s</xliff:g> ثانیه..."</string>
+    <string name="bluetooth_not_discoverable" msgid="128269993123955177">"دستگاه قابل شناسایی شود"</string>
+    <string name="bluetooth_lock_voice_dialing" msgid="3139322992062086225">"قفل کردن شماره گیری صوتی"</string>
+    <string name="bluetooth_lock_voice_dialing_summary" msgid="4741338867496787042">"ممانعت از استفاده شماره گیر بلوتوث هنگام قفل شدن صفحه"</string>
+    <string name="bluetooth_devices" msgid="1886018064039454227">"دستگاه های بلوتوث"</string>
+    <string name="bluetooth_device_name" msgid="8415828355207423800">"نام دستگاه"</string>
+    <string name="bluetooth_name_not_set" msgid="2653752006416027426">"نامی تنظیم نشده، از نام حساب استفاده کنید"</string>
+    <string name="bluetooth_scan_for_devices" msgid="9214184305566815727">"اسکن برای دستگاه ها"</string>
+    <string name="bluetooth_disconnect_blank" msgid="8102076504922229274">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> قطع می شود."</string>
+    <string name="bluetooth_connected" msgid="6038755206916626419">"اتصال برقرار شد"</string>
+    <string name="bluetooth_disconnected" msgid="6557104142667339895">"اتصال قطع شد"</string>
+    <string name="bluetooth_disconnecting" msgid="8913264760027764974">"در حال قطع اتصال..."</string>
+    <string name="bluetooth_connecting" msgid="8555009514614320497">"در حال اتصال…"</string>
+    <string name="bluetooth_unknown" msgid="644716244548801421"></string>
+    <string name="bluetooth_not_connected" msgid="3389882907500605937">"جفت سازی با این دستگاه"</string>
+    <string name="bluetooth_pairing" msgid="1426882272690346242">"در حال جفت سازی..."</string>
+    <string name="bluetooth_paired" msgid="1247541089000057726">"جفت شده اما وصل نیست"</string>
+    <string name="bluetooth_device" msgid="6873461446424952003">"هندزفری/گوشی"</string>
+    <string name="progress_scanning" msgid="3760897655335759141">"اسکن کردن"</string>
+    <string name="bluetooth_notif_ticker" msgid="4726721390078512173">"درخواست جفت سازی"</string>
+    <string name="bluetooth_notif_title" msgid="2485175521845371514">"درخواست جفت سازی"</string>
+    <string name="bluetooth_notif_message" msgid="5381418499788668724">"انتخاب برای جفت سازی با "</string>
+    <string name="device_picker" msgid="8721012448931226323">"انتخاب کننده دستگاه بلوتوث"</string>
+    <string name="bluetooth_permission_request" msgid="1523129741266262748">"درخواست مجوز بلوتوث"</string>
+    <string name="bluetooth_ask_enablement" msgid="2342558978033892004">"برنامه ای در گوشی شما درخواست کرده است که بلوتوث روشن شود. می خواهید این کار را انجام دهید؟"</string>
+    <string name="bluetooth_ask_discovery" msgid="669870705606180872">"برنامه ای در گوشی شما درخواست کرده است که گوشی شما برای <xliff:g id="TIMEOUT">%1$d</xliff:g> ثانیه برای دیگر دستگاه های بلوتوث قابل شناسایی باشد. می خواهید این کار را انجام دهید؟"</string>
+    <string name="bluetooth_ask_enablement_and_discovery" msgid="7220210326619399542">"برنامه ای در گوشی شما درخواست مجوز برای روشن کردن بلوتوث کرده و اینکه دستگاه شما برای دیگر دستگاه ها به مدت <xliff:g id="TIMEOUT">%1$d</xliff:g> ثانیه قابل شناسایی باشد. می خواهید این کار را انجام دهید؟"</string>
+    <string name="bluetooth_turning_on" msgid="3107102168379705771">"خاموش کردن بلوتوث..."</string>
+    <string name="date_and_time" msgid="4114084177056654663">"تنظیمات تاریخ و ساعت"</string>
+    <string name="date_time_12_hour_sample" msgid="3259617262618020574">"1:00 بعدازظهر"</string>
+    <string name="date_time_24_hour_sample" msgid="8916857570746212357">"13:00"</string>
+    <string name="date_time_changeTime_text" msgid="7037437020000867740">"تغییر ساعت"</string>
+    <string name="date_time_changeDate_text" msgid="5259762626498028057">"تاریخ"</string>
+    <string name="choose_timezone" msgid="7762866468013985022">"انتخاب منطقه زمانی"</string>
+    <string name="normal_date_format" msgid="1982904221918374153">"معمولی (<xliff:g id="DATE">%s</xliff:g>)"</string>
+    <string name="display_preview_label" msgid="1127597250917274792">"پیش نمایش:"</string>
+    <string name="display_font_size_label" msgid="8941851418397475389">"اندازه قلم:"</string>
+    <!-- no translation found for intent_sender_data_label (6332324780477289261) -->
+    <skip />
+    <string name="intent_sender_sendbroadcast_text" msgid="1415735148895872715">"ارسال <xliff:g id="BROADCAST">broadcast</xliff:g>"</string>
+    <string name="intent_sender_action_label" msgid="616458370005452389">"<xliff:g id="ACTION">Action</xliff:g>:"</string>
+    <string name="intent_sender_startactivity_text" msgid="5080516029580421895">"شروع <xliff:g id="ACTIVITY">activity</xliff:g>"</string>
+    <string name="intent_sender_resource_label" msgid="6963659726895482829">"<xliff:g id="RESOURCE">Resource</xliff:g>:"</string>
+    <string name="intent_sender_account_label" msgid="465210404475603404">"حساب:"</string>
+    <string name="proxy_clear_text" msgid="5555400754952012657">"پاک کردن"</string>
+    <string name="proxy_port_label" msgid="2623639656638472491">"درگاه"</string>
+    <string name="proxy_defaultView_text" msgid="6387985519141433291">"بازیابی موارد پیش فرض"</string>
+    <string name="proxy_action_text" msgid="477348175123635416">"ذخیره"</string>
+    <string name="proxy_hostname_label" msgid="7531298584350977540">"نام میزبان"</string>
+    <string name="proxy_error" msgid="8926675299638611451">"توجه"</string>
+    <string name="proxy_error_dismiss" msgid="4993171795485460060">"تأیید"</string>
+    <string name="proxy_error_invalid_host" msgid="9120776460063182119">"نام میزبانی که وارد کرده اید معتبر نیست."</string>
+    <string name="proxy_error_empty_port" msgid="3525734169948795417">"باید قسمت درگاه را پر کنید."</string>
+    <string name="proxy_error_empty_host_set_port" msgid="2451694104858226781">"اگر قسمت میزبان خالی است، قسمت درگاه باید خالی باشد."</string>
+    <string name="proxy_error_invalid_port" msgid="1816315605424943626">"درگاهی که نوشته اید معتبر نیست."</string>
+    <string name="radio_info_signal_location_label" msgid="16475158265551708">"مکان:"</string>
+    <string name="radio_info_neighboring_location_label" msgid="2385625674055934880">"CID مجاور:"</string>
+    <string name="radio_info_data_attempts_label" msgid="1731106244577323381">"تلاش های داده:"</string>
+    <string name="radio_info_gprs_service_label" msgid="2331818110375395364">"سرویس GPRS:"</string>
+    <string name="radio_info_roaming_label" msgid="6141505430275138647">"رومینگ:"</string>
+    <string name="radio_info_imei_label" msgid="1220524224732944192">"IMEI:"</string>
+    <string name="radio_info_call_redirect_label" msgid="1654674226961476872">"تغییر مسیر تماس:"</string>
+    <string name="radio_info_ppp_resets_label" msgid="3241667824729310546">"تعداد بازنشانی PPP از زمان راه اندازی:"</string>
+    <string name="radio_info_gsm_disconnects_label" msgid="1683069665736339820">"GSM قطع می کند:"</string>
+    <string name="radio_info_current_network_label" msgid="3256402602440102610">"شبکه فعلی:"</string>
+    <string name="radio_info_data_successes_label" msgid="4417894113689054945">"دفعات موفقیت داده:"</string>
+    <string name="radio_info_ppp_received_label" msgid="3345184342444878849">"PPP دریافت شده:"</string>
+    <string name="radio_info_gsm_service_label" msgid="2082332114596916985">"سرویس GSM:"</string>
+    <string name="radio_info_signal_strength_label" msgid="1931937920896925766">"قدرت سیگنال:"</string>
+    <string name="radio_info_call_status_label" msgid="4896238900685510883">"وضعیت تماس:"</string>
+    <string name="radio_info_ppp_sent_label" msgid="5009102250704375687">"PPP ارسال شده:"</string>
+    <string name="radio_info_radio_resets_label" msgid="9211343458143291617">"بازنشانی های رادیو:"</string>
+    <string name="radio_info_message_waiting_label" msgid="6981842420058672207">"پیام در انتظار:"</string>
+    <string name="radio_info_phone_number_label" msgid="7192944627907412169">"شماره تلفن:"</string>
+    <string name="radio_info_band_mode_label" msgid="441469694142042022">"انتخاب باند رادیو"</string>
+    <string name="radio_info_network_type_label" msgid="3706382548257257987">"نوع شبکه:"</string>
+    <string name="radio_info_set_perferred_label" msgid="9039200405863503267">"تنظیم نوع شبکه برگزیده:"</string>
+    <string name="radio_info_ping_ipaddr" msgid="498747917793263530">"پینگ کردن آدرس IP:"</string>
+    <string name="radio_info_ping_hostname" msgid="3054888474808217853">"پینگ کردن نام میزبان(www.google.com):"</string>
+    <string name="radio_info_http_client_test" msgid="5733604021077701555">"تست سرویس گیرنده HTTP:"</string>
+    <string name="ping_test_label" msgid="7255376471490860631">"اجرای تست پینگ"</string>
+    <string name="radio_info_smsc_label" msgid="6399460520126501354">"SMSC:"</string>
+    <string name="radio_info_smsc_update_label" msgid="7258686760358791539">"به روزرسانی"</string>
+    <string name="radio_info_smsc_refresh_label" msgid="6902302130315125102">"تازه کردن"</string>
+    <string name="radio_info_toggle_dns_check_label" msgid="8292252930563286858">"تغییر وضعیت علامت DNS"</string>
+    <string name="oem_radio_info_label" msgid="6163141792477958941">"تنظیمات/اطلاعات خاص OEM"</string>
+    <string name="band_mode_title" msgid="954174198903776205">"تنظیم باند GSM/UMTS"</string>
+    <string name="band_mode_loading" msgid="548764766363847336">"در حال بارگیری لیست باند..."</string>
+    <string name="band_mode_set" msgid="5730560180249458484">"تنظیم"</string>
+    <string name="band_mode_failed" msgid="1495968863884716379">"ناموفق"</string>
+    <string name="band_mode_succeeded" msgid="2701016190055887575">"موفقت آمیز"</string>
+    <string name="sdcard_changes_instructions" msgid="1364712901180556244">"تغییرات با اتصال مجدد USB اعمال می شوند"</string>
+    <string name="sdcard_settings_screen_mass_storage_text" msgid="3741220147296482474">"فعال کردن ذخیره سازی انبوه USB"</string>
+    <string name="sdcard_settings_total_bytes_label" msgid="9184160745785062144">"مجموع بایت ها:"</string>
+    <string name="sdcard_settings_not_present_status" product="nosdcard" msgid="2902787003418172125">"حافظه USB متصل نشد"</string>
+    <string name="sdcard_settings_not_present_status" product="default" msgid="6666688653496819947">"بدون کارت SD"</string>
+    <string name="sdcard_settings_available_bytes_label" msgid="763232429899373001">"بایت های موجود:"</string>
+    <string name="sdcard_settings_mass_storage_status" product="nosdcard" msgid="2736378870889777857">"حافظه USB در حال استفاده بعنوان حافظه انبوه است"</string>
+    <string name="sdcard_settings_mass_storage_status" product="default" msgid="4786433969313661655">"کارت SD در حال استفاده بعنوان دستگاه ذخیره سازی انبوه است"</string>
+    <string name="sdcard_settings_unmounted_status" product="nosdcard" msgid="7503300818792750913">"اکنون می توانید حافظه USB را با امنیت کامل جدا کنید"</string>
+    <string name="sdcard_settings_unmounted_status" product="default" msgid="3812022095683863087">"اکنون می توانید کارت SD را با امنیت کامل جدا کنید"</string>
+    <string name="sdcard_settings_bad_removal_status" product="nosdcard" msgid="7761390725880773697">"حافظه USB در حین استفاده خارج شد!"</string>
+    <string name="sdcard_settings_bad_removal_status" product="default" msgid="5145797653495907970">"کارت SD در حین استفاده خارج شد!"</string>
+    <string name="sdcard_settings_used_bytes_label" msgid="8820289486001170836">"بایت های استفاده شده:"</string>
+    <string name="sdcard_settings_scanning_status" product="nosdcard" msgid="7503429447676219564">"در حال اسکن حافظه USB برای رسانه..."</string>
+    <string name="sdcard_settings_scanning_status" product="default" msgid="2763464949274455656">"اسکن کردن کارت SD برای رسانه..."</string>
+    <string name="sdcard_settings_read_only_status" product="nosdcard" msgid="3771783090621312312">"حافظه USB به عنوان فقط خواندنی متصل شد"</string>
+    <string name="sdcard_settings_read_only_status" product="default" msgid="5706115860484118911">"کارت SD به صورت فقط خواندنی وصل شده است"</string>
+    <string name="next_label" msgid="4693520878012668114">"بعدی"</string>
+    <string name="language_picker_title" msgid="4034157617842965844">"محل"</string>
+    <string name="select_your_language" msgid="1146235168951906084">"انتخاب زبان خود"</string>
+    <string name="activity_picker_label" msgid="4910700713930693329">"انتخاب فعالیت"</string>
+    <string name="device_info_label" msgid="6551553813651711205">"اطلاعات دستگاه"</string>
+    <string name="battery_info_label" msgid="4132685016148679403">"اطلاعات باتری"</string>
+    <string name="display_label" msgid="7403874003169865762">"نمایش"</string>
+    <string name="phone_info_label" msgid="2127552523124277664">"اطلاعات تلفن"</string>
+    <string name="sd_card_settings_label" product="nosdcard" msgid="8101475181301178428">"حافظه USB"</string>
+    <string name="sd_card_settings_label" product="default" msgid="5743100901106177102">"کارت SD"</string>
+    <string name="proxy_settings_label" msgid="3271174136184391743">"تنظیمات پروکسی"</string>
+    <string name="cancel" msgid="6859253417269739139">"لغو"</string>
+    <string name="settings_label" msgid="1626402585530130914">"تنظیمات"</string>
+    <string name="settings_label_launcher" msgid="8344735489639482340">"تنظیمات"</string>
+    <string name="settings_shortcut" msgid="3672145147925639262">"تنظیمات"</string>
+    <string name="airplane_mode" msgid="8837269988154128601">"حالت هواپیما"</string>
+    <string name="airplane_mode_summary" msgid="3154817401368780988">"تمام اتصال های بی سیم غیرفعال شود"</string>
+    <string name="airplane_mode_turning_on" msgid="8871739222526957255">"در حال غیرفعال کردن اتصال های بی سیم..."</string>
+    <string name="airplane_mode_turning_off" msgid="3393168549611505996">"فعالسازی اتصال های بی سیم..."</string>
+    <string name="radio_controls_title" msgid="5868688473587168882">"شبکه و بی سیم"</string>
+    <string name="wireless_networks_settings_title" msgid="149274247949769551">"تنظیمات شبکه و بی سیم"</string>
+    <string name="radio_controls_summary" msgid="2998818677094465517">"مدیریت Wi-Fi، بلوتوث، حالت هواپیما، شبکه های تلفن همراه و VPN ها"</string>
+    <string name="roaming" msgid="3596055926335478572">"رومینگ داده"</string>
+    <string name="roaming_enable" msgid="3737380951525303961">"اتصال به سرویس های داده هنگام رومینگ"</string>
+    <string name="roaming_disable" msgid="1295279574370898378">"اتصال به سرویس های داده هنگام رومینگ"</string>
+    <string name="roaming_reenable_message" msgid="9141007271031717369">"شما اتصال داده خود را از دست داده اید زیرا رومینگ داده را در شبکه اصلی خود خاموش کرده اید."</string>
+    <string name="roaming_turn_it_on_button" msgid="4387601818162120589">"روشن کنید"</string>
+    <string name="roaming_warning" msgid="1269870211689178511">"رومینگ داده مجاز است؟ ممکن است هزینه های خاص مربوط به رومینگ در مورد شما اعمال شود!"</string>
+    <string name="roaming_reenable_title" msgid="7626425894611573131">"توجه"</string>
+    <string name="networks" msgid="6333316876545927039">"انتخاب اپراتور"</string>
+    <string name="sum_carrier_select" msgid="6648929373316748020">"انتخاب یک اپراتور شبکه"</string>
+    <string name="date_and_time_settings_title" msgid="3350640463596716780">"تاریخ و ساعت"</string>
+    <string name="date_and_time_settings_summary" msgid="2435705040205950381">"تنظیم تاریخ، ساعت، منطقه زمانی و قالب ها"</string>
+    <string name="date_time_auto" msgid="3086083265745944725">"خودکار"</string>
+    <string name="date_time_auto_summaryOn" msgid="9034585614665299846">"استفاده از مقادیر ارائه شده توسط شبکه"</string>
+    <string name="date_time_auto_summaryOff" msgid="3900356736797266448">"استفاده از مقادیر ارائه شده توسط شبکه"</string>
+    <string name="date_time_24hour" msgid="1193032284921000063">"استفاده از قالب 24 ساعته"</string>
+    <string name="date_time_set_time" msgid="5716856602742530696">"تنظیم ساعت"</string>
+    <string name="date_time_set_timezone" msgid="5045627174274377814">"انتخاب منطقه زمانی"</string>
+    <string name="date_time_set_date" msgid="7021491668550232105">"تنظیم تاریخ"</string>
+    <string name="date_time_date_format" msgid="436706100255870967">"انتخاب قالب تاریخ"</string>
+    <string name="zone_list_menu_sort_alphabetically" msgid="5683377702671088588">"ترتیب الفبایی"</string>
+    <string name="zone_list_menu_sort_by_timezone" msgid="2720190443744884114">"ترتیب بر اساس منطقه زمانی"</string>
+    <string name="security_settings_title" msgid="5168491784222013179">"مکان و امنیت"</string>
+    <string name="location_security_settings_title" msgid="4624434296446625554">"تنظیمات مکان و امنیت"</string>
+    <string name="security_settings_summary" msgid="967393342537986570">"تنظیم مکان من، قفل صفحه، قفل سیم کارت، قفل محل ذخیره اطلاعات کاربری"</string>
+    <string name="cdma_security_settings_summary" msgid="6068799952798901542">"تنظیم مکان من، بازگشایی قفل صفحه، قفل محل ذخیره اطلاعات کاربری"</string>
+    <string name="security_passwords_title" msgid="2930627259125138363">"رمزهای ورود"</string>
+    <string name="lock_settings_picker_title" msgid="3973555216065628262">"امنیت بازگشایی قفل صفحه"</string>
+    <string name="unlock_set_unlock_launch_picker_title" msgid="1129684221223017902">"تنظیم قفل صفحه"</string>
+    <string name="unlock_set_unlock_launch_picker_summary" msgid="1667332113134720845">"قفل کردن صفحه با یک الگو، پین یا رمز ورود"</string>
+    <string name="unlock_set_unlock_launch_picker_change_title" msgid="6987228635944678726">"تغییر قفل صفحه"</string>
+    <string name="unlock_set_unlock_launch_picker_change_summary" msgid="2790960639554590668">"تغییر یا غیرفعال کردن الگو، PIN یا ایمنی رمز ورود"</string>
+    <string name="unlock_set_unlock_none_title" msgid="3760684669884671990">"هیچکدام"</string>
+    <string name="unlock_set_unlock_none_summary" msgid="2658550480388272618">"غیرفعال کردن ایمنی بازگشایی صفحه"</string>
+    <string name="unlock_set_unlock_pattern_title" msgid="2912067603917311700">"الگو"</string>
+    <string name="unlock_set_unlock_pattern_summary" msgid="3018395214738645405">"الگو را بکشید تا قفل صفحه باز شود"</string>
+    <string name="unlock_set_unlock_pin_title" msgid="5846029709462329515">"پین"</string>
+    <string name="unlock_set_unlock_pin_summary" msgid="4131169672844263316">"برای بازگشایی قفل صفحه، یک پین عددی وارد کنید"</string>
+    <string name="unlock_set_unlock_password_title" msgid="8775603825675090937">"رمز ورود"</string>
+    <string name="unlock_set_unlock_password_summary" msgid="4623254789833899286">"برای بازگشایی قفل صفحه، یک رمز ورود وارد کنید"</string>
+    <string name="unlock_set_unlock_disabled_summary" msgid="736557879526940324">"از طریق سرپرست تلفن راه دور غیرفعال شد"</string>
+    <string name="unlock_disable_lock_title" msgid="1427036227416979120">"خاموش کردن قفل صفحه"</string>
+    <string name="unlock_disable_lock_pattern_summary" msgid="6801602880568869201">"حذف الگوی بازگشایی قفل"</string>
+    <string name="unlock_disable_lock_pin_summary" msgid="8856842745366993387">"حذف پین بازگشایی قفل"</string>
+    <string name="unlock_disable_lock_password_summary" msgid="192161194564577025">"حذف رمز ورود بازگشایی قفل"</string>
+    <string name="unlock_change_lock_pattern_title" msgid="2044092014872741130">"تغییر الگوی بازگشایی قفل"</string>
+    <string name="unlock_change_lock_pin_title" msgid="806629901095938484">"تغییر پین بازگشایی قفل"</string>
+    <string name="unlock_change_lock_password_title" msgid="5606298470358768865">"تغییر رمز ورود بازگشایی قفل"</string>
+    <string name="lockpassword_password_too_short" msgid="7328975683669256660">"رمز ورود باید حداقل %d نویسه باشد"</string>
+    <string name="lockpassword_pin_too_short" msgid="2252847623267704683">"پین باید حداقل %d نویسه باشد"</string>
+    <string name="lockpassword_press_continue" msgid="6506047902828925216">"با انجام کار روی ادامه فشار دهید"</string>
+    <string name="lockpassword_continue_label" msgid="4602203784934526940">"ادامه"</string>
+    <string name="lockpassword_password_too_long" msgid="7354418473281442589">"پین نباید بیشتر از %d رقم باشد"</string>
+    <string name="lockpassword_pin_too_long" msgid="6290317580664119373">"پین نباید بیشتر از %d رقم باشد"</string>
+    <string name="lockpassword_pin_contains_non_digits" msgid="3379277100136600632">"پین باید دارای 0 تا 9 رقم باشد"</string>
+    <string name="lockpassword_illegal_character" msgid="6204396794254688549">"رمز ورود دارای یک نویسه غیرقانونی است"</string>
+    <string name="lockpassword_password_requires_alpha" msgid="5668524505560400449">"رمز ورود باید دارای حداقل یک حرف باشد"</string>
+    <string name="lockpassword_password_requires_digit" msgid="4840579514154254907">"رمز ورود باید دارای حداقل یک رقم باشد"</string>
+    <string name="lockpassword_password_requires_symbol" msgid="4140602725865312078">"رمز ورود باید دارای حداقل یک نماد باشد"</string>
+    <string name="lockpassword_ok_label" msgid="313822574062553672">"تأیید"</string>
+    <string name="lockpassword_cancel_label" msgid="8818529276331121899">"لغو"</string>
+    <string name="device_admin_title" msgid="3562216873644263804">"سرپرستی دستگاه"</string>
+    <string name="manage_device_admin" msgid="3864120111085199551">"انتخاب سرپرستان دستگاه"</string>
+    <string name="manage_device_admin_summary" msgid="915390201809231575">"افزودن یا حذف سرپرستان دستگاه"</string>
+    <string name="bluetooth_quick_toggle_title" msgid="1037056952714061893">"بلوتوث"</string>
+    <string name="bluetooth_quick_toggle_summary" msgid="5293641680139873341">"روشن کردن بلوتوث"</string>
+    <string name="bluetooth_settings" msgid="2725796451253089609">"تنظیمات بلوتوث"</string>
+    <string name="bluetooth_settings_title" msgid="2824020086246268296">"تنظیمات بلوتوث"</string>
+    <string name="bluetooth_settings_summary" msgid="2091062709530570462">"مدیریت اتصال ها، تنظیم نام دستگاه و قابلیت شناسایی"</string>
+    <string name="bluetooth_pairing_request" msgid="6385750334766370310">"درخواست جفت سازی بلوتوث"</string>
+    <string name="bluetooth_device_info" msgid="6644515376523965073">"اطلاعات دستگاه بلوتوث"</string>
+    <string name="bluetooth_enter_pin_msg" msgid="856962526754150334">\n"پین را برای جفت سازی با \"<xliff:g id="DEVICE_NAME">%1$s</xliff:g>\" بنویسید. (0000 یا 1234 را امتحان کنید.)"</string>
+    <string name="bluetooth_enter_passkey_msg" msgid="8121515818772179228">\n"رمز ورود را برای جفت سازی با \"<xliff:g id="DEVICE_NAME">%1$s</xliff:g>\" بنویسید."</string>
+    <string name="bluetooth_confirm_passkey_msg" msgid="1205362283945104263">"برای جفت سازی با \"<xliff:g id="DEVICE_NAME">%1$s</xliff:g>\"، تأیید کنید که کلید عبور را نمایش دهد: <xliff:g id="PASSKEY">%2$s</xliff:g>"</string>
+    <string name="bluetooth_incoming_pairing_msg" msgid="1076613564387784476">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g>"\n"می خواهد جفت شود."</string>
+    <string name="bluetooth_display_passkey_msg" msgid="3048496029389441579">"برای جفت سازی <xliff:g id="PASSKEY">%2$s</xliff:g> را در \"<xliff:g id="DEVICE_NAME">%1$s</xliff:g>\" وارد کنید."</string>
+    <string name="bluetooth_pairing_accept" msgid="6163520056536604875">"جفت سازی"</string>
+    <string name="bluetooth_pairing_decline" msgid="930951069988011471">"جفت نشود"</string>
+    <string name="bluetooth_remote_device" msgid="2406662802908395389">"دستگاه بلوتوث"</string>
+    <string name="bluetooth_error_title" msgid="538287072376677166">"توجه"</string>
+    <string name="bluetooth_pairing_error_message" msgid="2852744547246910349">"مشکلی در جفت سازی با <xliff:g id="DEVICE_NAME">%1$s</xliff:g> وجود داشت."</string>
+    <string name="bluetooth_pairing_pin_error_message" msgid="6065697229258906937">"مشکلی در جفت سازی با <xliff:g id="DEVICE_NAME">%1$s</xliff:g> وجود داشت زیرا پین یا کلید عبور اشتباه است."</string>
+    <string name="bluetooth_pairing_device_down_error_message" msgid="6688215193824686741">"برقراری ارتباط با <xliff:g id="DEVICE_NAME">%1$s</xliff:g> ممکن نیست."</string>
+    <string name="bluetooth_pairing_rejected_error_message" msgid="1648157108520832454">"جفت سازی توسط <xliff:g id="DEVICE_NAME">%1$s</xliff:g> رد شد."</string>
+    <string name="bluetooth_connecting_error_message" msgid="1779660510084746802">"مشکلی در اتصال به <xliff:g id="DEVICE_NAME">%1$s</xliff:g> وجود داشت."</string>
+    <string name="bluetooth_preference_scan_title" msgid="2277464653118896016">"اسکن برای دستگاه ها"</string>
+    <string name="bluetooth_device_context_connect" msgid="3997659895003244941">"اتصال"</string>
+    <string name="bluetooth_device_context_disconnect" msgid="8220072022970148683">"قطع اتصال"</string>
+    <string name="bluetooth_device_context_pair_connect" msgid="7611522504813927727">"جفت سازی و اتصال"</string>
+    <string name="bluetooth_device_context_unpair" msgid="662992425948536144">"لغو جفت سازی"</string>
+    <string name="bluetooth_device_context_disconnect_unpair" msgid="7644014238070043798">"قطع اتصال و لغو جفت سازی"</string>
+    <string name="bluetooth_device_context_connect_advanced" msgid="2643129703569788771">"گزینه ها…"</string>
+    <string name="bluetooth_connect_specific_profiles_title" msgid="6952214406025825164">"اتصال به..."</string>
+    <string name="bluetooth_profile_a2dp" msgid="3259633293424539529">"رسانه"</string>
+    <string name="bluetooth_profile_headset" msgid="1874975688666658946">"تلفن"</string>
+    <string name="bluetooth_profile_opp" msgid="3799470046565284440">"انتقال"</string>
+    <string name="bluetooth_summary_connected_to_a2dp" msgid="510833839847758664">"به رسانه صوتی متصل شد"</string>
+    <string name="bluetooth_summary_connected_to_headset" msgid="4876496372728623918">"به تلفن صوتی متصل شد"</string>
+    <string name="bluetooth_summary_connected_to_a2dp_headset" msgid="3045032710457800891">"به تلفن و رسانه صوتی متصل شد"</string>
+    <string name="bluetooth_device_advanced_title" msgid="528816860793581131">"گزینه های <xliff:g id="DEVICE_NAME">%1$s</xliff:g>"</string>
+    <string name="bluetooth_device_advanced_online_mode_title" msgid="3689050071425683114">"اتصال"</string>
+    <string name="bluetooth_device_advanced_online_mode_summary" msgid="1204424107263248336">"اتصال به دستگاه بلوتوث"</string>
+    <string name="bluetooth_device_advanced_profile_header_title" msgid="3764437426089639639">"نمایه ها"</string>
+    <string name="bluetooth_a2dp_profile_summary_connected" msgid="963376081347721598">"به رسانه صوتی متصل شد"</string>
+    <string name="bluetooth_headset_profile_summary_connected" msgid="7661070206715520671">"به تلفن صوتی متصل شد"</string>
+    <string name="bluetooth_opp_profile_summary_connected" msgid="2611913495968309066">"به سرور انتقال فایل متصل شد"</string>
+    <string name="bluetooth_opp_profile_summary_not_connected" msgid="1267091356089086285">"به سرور انتقال فایل متصل نیست"</string>
+    <string name="bluetooth_a2dp_profile_summary_use_for" msgid="4630849022250168427">"استفاده برای رسانه صوتی"</string>
+    <string name="bluetooth_headset_profile_summary_use_for" msgid="8705753622443862627">"استفاده برای تلفن صوتی"</string>
+    <string name="bluetooth_opp_profile_summary_use_for" msgid="1255674547144769756">"استفاده برای انتقال فایل"</string>
+    <string name="bluetooth_dock_settings" msgid="3218335822716052885">"تنظیمات جایگاه"</string>
+    <string name="bluetooth_dock_settings_title" msgid="5543069893044375188">"استفاده از جایگاه برای صدا"</string>
+    <string name="bluetooth_dock_settings_headset" msgid="1001821426078644650">"به عنوان تلفن دارای بلندگو"</string>
+    <string name="bluetooth_dock_settings_a2dp" msgid="8791004998846630574">"برای موسیقی و رسانه"</string>
+    <string name="bluetooth_dock_settings_remember" msgid="5551459057010609115">"به خاطر سپردن تنظیمات"</string>
+    <string name="nfc_quick_toggle_title" msgid="6769159366307299004">"NFC"</string>
+    <string name="nfc_quick_toggle_summary" msgid="1988408027741447231">"استفاده از ارتباط راه نزدیک برای خواندن و مبادله برچسب ها"</string>
+    <string name="nfc_toggle_error" msgid="2233172102497535522">"خطایی روی داد."</string>
+    <string name="wifi_quick_toggle_title" msgid="874495178395350104">"Wi-Fi"</string>
+    <string name="wifi_quick_toggle_summary" msgid="1047950931623694366">"روشن کردن Wi-Fi"</string>
+    <string name="wifi_settings" msgid="4746946030627213196">"تنظیمات WiFi"</string>
+    <string name="wifi_settings_category" msgid="2810363951104753710">"تنظیمات Wi-Fi"</string>
+    <string name="wifi_settings_summary" msgid="668767638556052820">"تنظیم و مدیریت نقاط دسترسی بی سیم"</string>
+    <string name="wifi_starting" msgid="6710266609710860129">"روشن کردن..."</string>
+    <string name="wifi_stopping" msgid="5952909472548218348">"در حال خاموش کردن..."</string>
+    <string name="wifi_error" msgid="3207971103917128179">"خطا"</string>
+    <string name="wifi_in_airplane_mode" msgid="7618393787965366655">"در حالت هواپیما"</string>
+    <string name="wifi_fail_to_scan" msgid="6194542252808587669">"اسکن کردن شبکه ها امکان پذیر نیست"</string>
+    <string name="wifi_notify_open_networks" msgid="3755768188029653293">"اعلان شبکه"</string>
+    <string name="wifi_notify_open_networks_summary" msgid="3038290727701553612">"هنگام در دسترس بودن یک شبکه باز، به من اعلام شود"</string>
+    <string name="wifi_add_network" msgid="1671334951296205616">"افزودن شبکه Wi-Fi"</string>
+    <string name="wifi_access_points" msgid="2664629396767022441">"شبکه های Wi-Fi"</string>
+    <string name="wifi_menu_scan" msgid="1470911530412095868">"اسکن"</string>
+    <string name="wifi_menu_advanced" msgid="7522252991919573664">"پیشرفته"</string>
+    <string name="wifi_menu_connect" msgid="4996220309848349408">"اتصال به شبکه"</string>
+    <string name="wifi_menu_forget" msgid="8736964302477327114">"فراموش کردن شبکه"</string>
+    <string name="wifi_menu_modify" msgid="2068554918652440105">"اصلاح کردن شبکه"</string>
+    <string name="wifi_ssid" msgid="641393708309146745">"SSID شبکه"</string>
+    <string name="wifi_security" msgid="6603611185592956936">"امنیت"</string>
+    <string name="wifi_signal" msgid="5514120261628065287">"قدرت سیگنال"</string>
+    <string name="wifi_status" msgid="4824568012414605414">"وضعیت"</string>
+    <string name="wifi_speed" msgid="3526198708812322037">"سرعت پیوند"</string>
+    <string name="wifi_ip_address" msgid="1440054061044402918">"آدرس IP"</string>
+    <string name="wifi_eap_method" msgid="8529436133640730382">"روش EAP"</string>
+    <string name="please_select_phase2" msgid="5231074529772044898">"تأیید اعتبار مرحله 2"</string>
+    <string name="wifi_eap_ca_cert" msgid="3521574865488892851">"گواهی CA"</string>
+    <string name="wifi_eap_user_cert" msgid="1291089413368160789">"گواهی کاربر"</string>
+    <string name="wifi_eap_identity" msgid="4359453783379679103">"هویت"</string>
+    <string name="wifi_eap_anonymous" msgid="2989469344116577955">"هویت ناشناس"</string>
+    <string name="wifi_password" msgid="5948219759936151048">"رمز ورود"</string>
+    <string name="wifi_show_password" msgid="4235237470701732009">"رمز ورود نمایش داده شود."</string>
+    <string name="wifi_unchanged" msgid="3410422020930397102">"(بدون تغییر)"</string>
+    <string name="wifi_unspecified" msgid="5431501214192991253">"(مشخص نشده)"</string>
+    <string name="wifi_remembered" msgid="8426719916135950136">"به خاطر سپرده شد"</string>
+    <string name="wifi_disabled" msgid="2104752038187543712">"غیرفعال شد"</string>
+    <string name="wifi_not_in_range" msgid="1136191511238508967">"در محدوده نیست"</string>
+    <string name="wifi_secured" msgid="6759903183748011566">"ایمن شده با <xliff:g id="WIFI_SECURITY">%1$s</xliff:g>"</string>
+    <string name="wifi_secured_with_status" msgid="6489317496506267302">"<xliff:g id="WIFI_STATUS">%2$s</xliff:g>، ایمن شده با <xliff:g id="WIFI_SECURITY">%1$s</xliff:g>"</string>
+    <string name="wifi_connect" msgid="1076622875777072845">"اتصال"</string>
+    <string name="wifi_forget" msgid="8168174695608386644">"فراموش کردن"</string>
+    <string name="wifi_save" msgid="3331121567988522826">"ذخیره"</string>
+    <string name="wifi_cancel" msgid="6763568902542968964">"لغو"</string>
+    <string name="wifi_advanced_titlebar" msgid="5419052271935350999">"پیشرفته"</string>
+    <string name="wifi_setting_num_channels_title" msgid="694031537019656132">"دامنه تنظیم کننده"</string>
+    <string name="wifi_setting_num_channels_summary" msgid="4889355096717099141">"تنظیم تعداد کانال های مورد نظر برای استفاده"</string>
+    <string name="wifi_setting_num_channels_error" msgid="5765443843427870721">"مشکلی درتنظیم دامنه تنظیم کننده وجود داشت."</string>
+    <string name="wifi_setting_num_channels_channel_phrase" msgid="1269381923672908636">"<xliff:g id="NUM_CHANNELS">%1$d</xliff:g> کانال"</string>
+    <string name="wifi_setting_sleep_policy_title" msgid="1367731352485585528">"سیاست توقف موقت عملکرد WiFi"</string>
+    <string name="wifi_setting_sleep_policy_summary" msgid="7573693311804602041">"زمان جابجایی Wi-Fi به داده تلفن همراه را مشخص کنید"</string>
+    <string name="wifi_setting_sleep_policy_error" msgid="5103670439972135148">"مشکلی در تنظیم قوانین خواب دستگاه وجود داشت."</string>
+    <string name="wifi_advanced_mac_address_title" msgid="6571335466330978393">"آدرس MAC"</string>
+    <string name="wifi_advanced_ip_address_title" msgid="6215297094363164846">"آدرس IP"</string>
+    <string name="wifi_ip_settings_titlebar" msgid="4345739031248760326">"تنظیمات IP"</string>
+    <string name="wifi_ip_settings_menu_save" msgid="7296724066102908366">"ذخیره"</string>
+    <string name="wifi_ip_settings_menu_cancel" msgid="6582567330136502340">"لغو"</string>
+    <string name="wifi_ip_settings_invalid_ip" msgid="8057085083985255580">"لطفاً یک آدرس IP معتبر بنویسید."</string>
+    <string name="wifi_use_static_ip" msgid="2133464242165642230">"استفاده از IP ایستا"</string>
+    <string name="wifi_dns1" msgid="7344118050720080045">"DNS 1"</string>
+    <string name="wifi_dns2" msgid="1368601006824882659">"DNS 2"</string>
+    <string name="wifi_gateway" msgid="163914742461092086">"دروازه"</string>
+    <string name="wifi_netmask" msgid="4520635321425529085">"Netmask"</string>
+    <string name="wifi_tether_checkbox_text" msgid="6961605862058056788">"نقطه اتصال Wi-Fi قابل حمل"</string>
+    <string name="wifi_tether_enabled_subtext" msgid="8948641212931906143">"نقطه اتصال قابل حمل <xliff:g id="NETWORK_SSID">%1$s</xliff:g> فعال"</string>
+    <string name="wifi_tether_failed_subtext" msgid="2654888578056042315">"خطای نقطه اتصال Wi-Fi قابل حمل"</string>
+    <string name="wifi_tether_settings_text" msgid="123573487844470195">"تنظیمات نقطه اتصال Wi-Fi قابل حمل"</string>
+    <string name="wifi_tether_settings_subtext" msgid="8064755682383367008">"تنظیم و مدیریت نقطه اتصال Wi-Fi قابل حمل"</string>
+    <string name="wifi_tether_settings_title" msgid="3749063216348284432">"تنظیمات نقطه اتصال Wi-Fi قابل حمل"</string>
+    <string name="wifi_tether_configure_ap_text" msgid="3474995108398156258">"پیکربندی نقطه اتصال Wi-Fi"</string>
+    <string name="wifi_tether_configure_subtext" msgid="1927454307836232128">"<xliff:g id="NETWORK_SSID">%1$s</xliff:g><xliff:g id="NETWORK_SECURITY">%2$s</xliff:g> نقطه اتصال Wi-Fi قابل حمل"</string>
+    <string name="wifi_tether_configure_ssid_default" msgid="8467525402622138547">"AndroidHotspot"</string>
+    <string name="sound_settings_title" msgid="8735891486683305886">"صدا"</string>
+    <string name="display_settings_title" msgid="1708697328627382561">"نمایش"</string>
+    <string name="sound_settings" msgid="5007659014828162881">"تنظیمات صوتی"</string>
+    <string name="silent_mode_title" msgid="3181479108593217704">"حالت ساکت"</string>
+    <string name="silent_mode_summary" msgid="3309650676072917899">"ساکت کردن تمام صداها بجز رسانه و هشدارها"</string>
+    <string name="silent_mode_incl_alarm_summary" msgid="2088830834182228458">"تمام صداها بجز صدای رسانه قطع می شود"</string>
+    <string name="ringtone_title" msgid="5379026328015343686">"آهنگ زنگ تلفن"</string>
+    <string name="ringtone_summary" msgid="2630023412632683493"></string>
+    <string name="all_volume_title" msgid="8741571721868253103">"میزان صدا"</string>
+    <string name="ring_volume_title" msgid="7938706566797464165">"میزان صدای زنگ"</string>
+    <string name="ring_volume_summary" msgid="7055497624193116879"></string>
+    <string name="vibrate_in_silent_title" msgid="3897968069156767036">"لرزش در حالت بیصدا"</string>
+    <string name="vibrate_in_silent_summary" msgid="3312600513070076281">"امکان ایجاد بازخورد لرزشی را در حالت بیصدا فراهم می آورد"</string>
+    <string name="vibrate_title" msgid="6045820877942801599">"لرزش"</string>
+    <string name="vibrate_summary" msgid="7378130397830790458">"بازخورد لرزشی برای تماس ها و اعلان ها"</string>
+    <string name="notification_sound_title" msgid="6316316069880531693">"آهنگ زنگ اعلان"</string>
+    <string name="notification_sound_summary" msgid="2953599929394109819"></string>
+    <string name="notification_pulse_title" msgid="1247988024534030629">"چراغ اعلان ضربانی"</string>
+    <string name="notification_pulse_summary" msgid="6899220780534617152">"تکرار چراغ گوی مکان نمای ضربانی برای اعلان های جدید"</string>
+    <string name="incoming_call_volume_title" msgid="8073714801365904099">"آهنگ زنگ"</string>
+    <string name="notification_volume_title" msgid="2012640760341080408">"اعلان"</string>
+    <string name="checkbox_notification_same_as_incoming_call" msgid="1073644356290338921">"استفاده از صدای تماس ورودی برای اعلان ها"</string>
+    <string name="notification_sound_dialog_title" msgid="7057274209079144726">"انتخاب آهنگ زنگ اعلان"</string>
+    <string name="media_volume_title" msgid="3576565767317118106">"رسانه"</string>
+    <string name="media_volume_summary" msgid="5363248930648849974">"تنظیم میزان صدا برای موسیقی و ویدیو"</string>
+    <string name="alarm_volume_title" msgid="2285597478377758706">"هشدار"</string>
+    <string name="dock_settings_summary" msgid="455802113668982481">"تنظیمات صوتی برای جایگاه پیوست شده"</string>
+    <string name="dtmf_tone_enable_title" msgid="1453831168789523185">"آهنگ های شنیداری لمسی"</string>
+    <string name="dtmf_tone_enable_summary_on" msgid="3028201873989887327">"هنگام استفاده از صفحه شماره گیری، صداهایی پخش شود"</string>
+    <string name="dtmf_tone_enable_summary_off" msgid="7791065951268525678">"هنگام استفاده از صفحه شماره گیری، صداهایی پخش شود"</string>
+    <string name="sound_effects_enable_title" msgid="3197313718929122833">"انتخاب شنیداری"</string>
+    <string name="sound_effects_enable_summary_on" msgid="6154141289879491329">"هنگام انتخاب صفحه، صدا پخش شود"</string>
+    <string name="sound_effects_enable_summary_off" msgid="3447739581759560125">"هنگام انتخاب صفحه، صدا پخش شود"</string>
+    <string name="lock_sounds_enable_title" msgid="1575990840389107141">"صداهای قفل صفحه"</string>
+    <string name="lock_sounds_enable_summary_on" msgid="145741024028391473">"هنگام قفل کردن و بازگشایی قفل صفحه، صداها پخش شود"</string>
+    <string name="lock_sounds_enable_summary_off" msgid="8481243116223542804">"هنگام قفل کردن و بازگشایی قفل صفحه، صداها پخش شود"</string>
+    <string name="haptic_feedback_enable_title" msgid="6311736559245411290">"بازخورد لمسی"</string>
+    <string name="haptic_feedback_enable_summary_on" msgid="1875779656524793053">"لرزش هنگام فشردن کلیدهای موقت و در برخی ارتباطات ویژه UI"</string>
+    <string name="haptic_feedback_enable_summary_off" msgid="7287885436963105314">"لرزش هنگام فشردن کلیدهای موقت و در برخی ارتباطات ویژه UI"</string>
+    <string name="audio_record_proc_title" msgid="4271091199976457534">"لغو پارازیت"</string>
+    <string name="audio_record_proc_summary" msgid="8113628457499616498">"هنگام صحبت کردن یا ضبط کردن، صدای اضافی پس زمینه حذف می شود."</string>
+    <string name="dock_settings" msgid="1820107306693002541">"جایگاه"</string>
+    <string name="dock_settings_title" msgid="9161438664257429372">"تنظیمات جایگاه"</string>
+    <string name="dock_audio_settings_title" msgid="3324750259959570305">"صوتی"</string>
+    <string name="dock_audio_summary_desk" msgid="6487784412371139335">"تنظیمات برای جایگاه دسک تاپ وصل شده"</string>
+    <string name="dock_audio_summary_car" msgid="6740897586006248450">"تنظیمات برای جایگاه خودرو وصل شده"</string>
+    <string name="dock_audio_summary_none" msgid="289909253741048784">"تلفن در جایگاه نیست"</string>
+    <string name="dock_audio_summary_unknown" msgid="4465059868974255693">"تنظیمات برای جایگاه وصل شده"</string>
+    <string name="dock_not_found_title" msgid="3290961741828952424">"جایگاه یافت نشد"</string>
+    <string name="dock_not_found_text" msgid="3035260358985111855">"عکس باید به دستگاه متصل شود تا امکان پیکربندی صوتی دستگاه وجود داشته باشد."</string>
+    <string name="dock_sounds_enable_title" msgid="3659084028644948905">"صدای اتصال جایگاه"</string>
+    <string name="dock_sounds_enable_summary_on" msgid="8491180514199743771">"هنگام اتصال یا جدا کردن تلفن از جایگاه، صدا پخش شود"</string>
+    <string name="dock_sounds_enable_summary_off" msgid="3151046599205265919">"هنگام اتصال یا جدا کردن گوشی از دستگاه، صدا پخش نشود"</string>
+    <string name="sync_settings" msgid="9186125469300013491">"حساب ها و همگام سازی"</string>
+    <string name="sync_settings_summary" msgid="2962179505214965667">"افزودن یا حذف حساب ها و تغییر تنظیمات حساب"</string>
+    <string name="search_settings" msgid="1910951467596035063">"جستجو"</string>
+    <string name="search_settings_summary" msgid="9205656546570654169">"مدیریت تنظیمات جستجو و سابقه"</string>
+    <string name="display_settings" msgid="3912042046350078328">"تنظیمات نمایش"</string>
+    <string name="animations_title" msgid="1062189037402346023">"انیمیشن"</string>
+    <string name="animations_summary_on" msgid="8843613112130484436">"نمایش انیمیشن هنگام باز کردن و بستن پنجره ها"</string>
+    <string name="animations_summary_off" msgid="2777026828025551983">"نمایش انیمیشن هنگام باز کردن و بستن پنجره ها"</string>
+    <string name="accelerometer_title" msgid="7854608399547349157">"چرخش خودکار صفحه"</string>
+    <string name="accelerometer_summary_on" msgid="1133737282813048021">"هنگام چرخاندن تلفن، جهت به طور خودکار تغییر می کند"</string>
+    <string name="accelerometer_summary_off" msgid="5485489363715740761">"هنگام چرخاندن تلفن، جهت به طور خودکار تغییر می کند"</string>
+    <string name="brightness" msgid="2354961343555249270">"روشنایی"</string>
+    <string name="brightness_summary" msgid="838917350127550703">"تنظیم روشنایی صفحه"</string>
+    <string name="screen_timeout" msgid="4882669461447531301">"وقفه زمانی صفحه"</string>
+    <string name="screen_timeout_summary" msgid="2905757633140605334">"تنظیم مدت زمان تأخیر قبل از خاموش شدن خودکار صفحه"</string>
+    <string name="automatic_brightness" msgid="5014143533884135461">"روشنایی خودکار"</string>
+    <string name="sim_lock_settings" msgid="3392331196873564292">"تنظیمات قفل سیم کارت"</string>
+    <string name="sim_lock_settings_category" msgid="5136244267576697004">"تنظیم قفل سیم کارت"</string>
+    <string name="sim_lock_settings_title" msgid="9018585580955414596">"قفل سیم کارت"</string>
+    <string name="sim_pin_toggle" msgid="1742123478029451888">"قفل کردن سیم کارت"</string>
+    <string name="sim_lock_on" msgid="2503536505568814324">"درخواست پین برای استفاده از تلفن"</string>
+    <string name="sim_lock_off" msgid="258981978215428916">"درخواست پین برای استفاده از تلفن"</string>
+    <string name="sim_pin_change" msgid="6311414184279932368">"تغییر پین سیم کارت"</string>
+    <string name="sim_enter_pin" msgid="6608715137008508432">"پین سیم کارت"</string>
+    <string name="sim_enable_sim_lock" msgid="4517742794997166918">"قفل کردن سیم کارت"</string>
+    <string name="sim_disable_sim_lock" msgid="7664729528754784824">"بازگشایی قفل سیم کارت"</string>
+    <string name="sim_enter_old" msgid="6074196344494634348">"پین سیم کارت قدیمی"</string>
+    <string name="sim_enter_new" msgid="8742727032729243562">"پین سیم کارت جدید"</string>
+    <string name="sim_reenter_new" msgid="3178510434642201544">"پین جدید را دوباره بنویسید"</string>
+    <string name="sim_change_pin" msgid="7328607264898359112">"پین سیم کارت"</string>
+    <string name="sim_bad_pin" msgid="2746201276896134075">"پین اشتباه است!"</string>
+    <string name="sim_pins_dont_match" msgid="4664611595579163214">"پین ها با یکدیگر مطابقت ندارند!"</string>
+    <string name="sim_change_failed" msgid="4823538458798362222">"پین تغییر نمی کند. ممکن است پین اشتباه باشد."\n</string>
+    <string name="sim_change_succeeded" msgid="8556135413096489627">"پین سیم کارت با موفقیت تغییر کرد"</string>
+    <string name="sim_lock_failed" msgid="6676748290838006404">"وضعیت قفل سیم کارت تغییر نمی کند."\n"ممکن است پین اشتباه باشد."</string>
+    <string name="sim_enter_ok" msgid="6475946836899218919">"تأیید"</string>
+    <string name="sim_enter_cancel" msgid="6240422158517208036">"لغو"</string>
+    <string name="device_info_settings" msgid="475872867864762157">"وضعیت تلفن"</string>
+    <string name="system_update_settings_list_item_title" msgid="3342887311059985961">"به روز رسانی های سیستم"</string>
+    <string name="system_update_settings_list_item_summary" msgid="3853057315907710747"></string>
+    <string name="firmware_version" msgid="4801135784886859972">"نسخه Android"</string>
+    <string name="model_number" msgid="3765737700545384794">"شماره مدل"</string>
+    <string name="baseband_version" msgid="1848990160763524801">"نسخه باند پایه"</string>
+    <string name="kernel_version" msgid="9192574954196167602">"نسخه اصلی"</string>
+    <string name="build_number" msgid="3075795840572241758">"شماره ساخت"</string>
+    <string name="device_info_not_available" msgid="8062521887156825182">"موجود نیست"</string>
+    <string name="device_status_activity_title" msgid="1411201799384697904">"وضعیت"</string>
+    <string name="device_status" msgid="607405385799807324">"وضعیت"</string>
+    <string name="device_status_summary" msgid="2599162787451519618">"شماره تلفن، سیگنال و سایر موارد"</string>
+    <string name="storage_settings" msgid="4211799979832404953">"ذخیره سازی"</string>
+    <string name="storage_settings_title" msgid="8746016738388094064">"تنظیمات ذخیره سازی"</string>
+    <string name="storage_settings_summary" product="nosdcard" msgid="3543813623294870759">"قطع اتصال حافظه USB، مشاهده حافظه موجود"</string>
+    <string name="storage_settings_summary" product="default" msgid="9176693537325988610">"جدا کردن کارت SD، مشاهده محل ذخیره موجود"</string>
+    <string name="status_number" msgid="5123197324870153205">"شماره تلفن من"</string>
+    <string name="status_min_number" msgid="3519504522179420597">"MIN"</string>
+    <string name="status_prl_version" msgid="8499039751817386529">"نسخه PRL"</string>
+    <string name="status_meid_number" msgid="1751442889111731088">"MEID"</string>
+    <string name="status_network_type" msgid="3279383550222116235">"نوع شبکه تلفن همراه"</string>
+    <string name="status_data_state" msgid="5503181397066522950">"وضعیت شبکه تلفن همراه"</string>
+    <string name="status_service_state" msgid="2323931627519429503">"وضعیت سرویس"</string>
+    <string name="status_signal_strength" msgid="3732655254188304547">"قدرت سیگنال"</string>
+    <string name="status_roaming" msgid="2638800467430913403">"رومینگ"</string>
+    <string name="status_operator" msgid="2274875196954742087">"شبکه"</string>
+    <string name="status_wifi_mac_address" msgid="33109409206264790">"آدرس Wi-Fi MAC"</string>
+    <string name="status_bt_address" msgid="4195174192087439720">"آدرس بلوتوث"</string>
+    <string name="status_unavailable" msgid="7862009036663793314">"در دسترس نیست"</string>
+    <string name="status_up_time" msgid="7294859476816760399">"زمان فعالیت"</string>
+    <string name="status_awake_time" msgid="2393949909051183652">"زمان بیداری"</string>
+    <string name="internal_memory" msgid="9129595691484260784">"حافظه داخلی"</string>
+    <string name="sd_memory" product="nosdcard" msgid="2510246194083052841">"حافظه USB"</string>
+    <string name="sd_memory" product="default" msgid="151871913888051515">"کارت SD"</string>
+    <string name="memory_available" msgid="418542433817289474">"فضای موجود"</string>
+    <string name="memory_size" msgid="6629067715017232195">"کل فضا"</string>
+    <string name="sd_eject" product="default" msgid="6915293408836853020">"جدا کردن کارت SD"</string>
+    <string name="sd_eject_summary" product="nosdcard" msgid="5009296896648072891">"قطع اتصال حافظه USB داخلی"</string>
+    <string name="sd_eject_summary" product="default" msgid="3300599435073550246">"اتصال کارت SD را قطع کنید تا بتوانید آنرا با ایمنی کامل از دستگاه جدا کنید"</string>
+    <string name="sd_insert_summary" product="nosdcard" msgid="5264016886409577313">"قرار دادن حافظه USB برای اتصال"</string>
+    <string name="sd_insert_summary" product="default" msgid="2048640010381803841">"کارت SD را برای اتصال وارد کنید"</string>
+    <string name="sd_mount" product="nosdcard" msgid="8966695015677343116">"اتصال حافظه USB"</string>
+    <string name="sd_mount" product="default" msgid="5940523765187704135">"اتصال کارت SD"</string>
+    <string name="sd_mount_summary" product="nosdcard" msgid="1794150364965145726">"اتصال حافظه USB"</string>
+    <string name="sd_mount_summary" product="default" msgid="4936591681679097699">"اتصال کارت SD"</string>
+    <string name="sd_format" product="nosdcard" msgid="2148179271623099054">"پاک کردن حافظه USB"</string>
+    <string name="sd_format" product="default" msgid="2576054280507119870">"پاک کردن کارت SD"</string>
+    <string name="sd_format_summary" product="nosdcard" msgid="1504606546865152514">"پاک کردن همه داده های موجود در حافظه USB گوشی مانند موسیقی و عکس"</string>
+    <string name="sd_format_summary" product="default" msgid="915849621390821841">"پاک کردن همه داده های موجود در کارت SD گوشی مانند موسیقی و عکس"</string>
+    <string name="sd_unavailable" msgid="8580107589533213904">"در دسترس نیست"</string>
+    <string name="read_only" msgid="6702420168629076340">" (فقط خواندنی)"</string>
+    <string name="dlg_confirm_unmount_title" product="nosdcard" msgid="2349876662428231297">"قطع اتصال حافظه USB"</string>
+    <string name="dlg_confirm_unmount_title" product="default" msgid="8612140627310646730">"جدا کردن کارت SD"</string>
+    <string name="dlg_confirm_unmount_text" product="nosdcard" msgid="3390169455621185223">"در صورت جدا کردن حافظه USB، برخی از برنامه هایی که از آنها استفاده می کنید متوقف می شوند و تا زمانی که کارت SD را جدا نکنید امکان استفاده از آنها وجود نخواهد داشت."</string>
+    <string name="dlg_confirm_unmount_text" product="default" msgid="5851214273718817727">"در صورت جدا کردن کارت SD، برخی از برنامه هایی که از آنها استفاده می کنید متوقف می شوند و تا زمانی که کارت SD را جدا نکنید امکان استفاده از آنها وجود نخواهد داشت."</string>
+    <string name="dlg_error_unmount_title" product="nosdcard" msgid="7695491947411836733">"اتصال حافظه USB قطع نشد"</string>
+    <string name="dlg_error_unmount_title" product="default" msgid="4004106918266783081">"کارت SD جدا نشد"</string>
+    <string name="dlg_error_unmount_text" product="nosdcard" msgid="1450864147013376592">"نمی توان حافظه را لغو نصب کنید. دوباره امتحان کنید."</string>
+    <string name="dlg_error_unmount_text" product="default" msgid="9188972789897713180">"نمی توان کارت SD را جدا کرد. بعداً دوباره امتحان کنید."</string>
+    <string name="unmount_inform_text" product="nosdcard" msgid="7120241136790744265">"اتصال حافظه USB قطع می شود."</string>
+    <string name="unmount_inform_text" product="default" msgid="1904212716075458402">"کارت SD جدا می شود."</string>
+    <string name="sd_ejecting_title" msgid="8824572198034365468">"جدا کردن"</string>
+    <string name="sd_ejecting_summary" msgid="2028753069184908491">"جدا کردن در حال انجام است"</string>
+    <string name="battery_status_title" msgid="9159414319574976203">"وضعیت باتری"</string>
+    <string name="battery_level_title" msgid="2965679202786873272">"سطح باتری"</string>
+    <string name="apn_settings" msgid="3743170484827528406">"APNها"</string>
+    <string name="apn_edit" msgid="1354715499708424718">"ویرایش نقطه دستیابی"</string>
+    <string name="apn_not_set" msgid="7422262558097875757">"&lt;تنظیم نشده&gt;"</string>
+    <string name="apn_name" msgid="4115580098369824123">"نام"</string>
+    <string name="apn_apn" msgid="2479425126733513353">"APN"</string>
+    <string name="apn_http_proxy" msgid="1826885957243696354">"پروکسی"</string>
+    <string name="apn_http_port" msgid="3763259523984976226">"درگاه"</string>
+    <string name="apn_user" msgid="455637547356117761">"نام کاربری"</string>
+    <string name="apn_password" msgid="5412301994998250968">"رمز ورود"</string>
+    <string name="apn_server" msgid="2436185314756372858">"سرور"</string>
+    <string name="apn_mmsc" msgid="3670124402105585737">"MMSC"</string>
+    <string name="apn_mms_proxy" msgid="5374082621073999275">"پروکسی MMS"</string>
+    <string name="apn_mms_port" msgid="4074188088199243040">"درگاه MMS"</string>
+    <string name="apn_mcc" msgid="4258628382260674636">"MCC"</string>
+    <string name="apn_mnc" msgid="8629374076888809874">"MNC"</string>
+    <string name="apn_auth_type" msgid="6167205395676037015">"نوع تأیید اعتبار"</string>
+    <string name="apn_auth_type_none" msgid="5069592676845549926">"هیچکدام"</string>
+    <string name="apn_auth_type_pap" msgid="1666934536996033383">"PAP"</string>
+    <string name="apn_auth_type_chap" msgid="3369626283789068360">"CHAP"</string>
+    <string name="apn_auth_type_pap_chap" msgid="9102343063036134541">"PAP یا CHAP"</string>
+    <string name="apn_type" msgid="469613123902220544">"نوع APN"</string>
+    <string name="menu_delete" msgid="6981294422841124659">"حذف APN"</string>
+    <string name="menu_new" msgid="3014205883303921729">"APN جدید"</string>
+    <string name="menu_save" msgid="8109345640668285399">"ذخیره"</string>
+    <string name="menu_cancel" msgid="2194502410474697474">"صرفنظر"</string>
+    <string name="error_title" msgid="1319225301794168762">"توجه"</string>
+    <string name="error_name_empty" msgid="1498238337687930558">"قسمت نام نباید خالی باشد."</string>
+    <string name="error_apn_empty" msgid="1513892291812404310">"APN نمی تواند خالی باشد."</string>
+    <string name="error_mcc_not3" msgid="4560171714156251661">"قسمت MCC باید 3 رقمی باشد."</string>
+    <string name="error_mnc_not23" msgid="8418177072458379439">"قسمت MNC باید 2 یا 3 رقم باشد."</string>
+    <string name="restore_default_apn" msgid="2724583218635739913">"بازیابی تنظیمات APN پیش فرض"</string>
+    <string name="menu_restore" msgid="8260067415075573273">"بازنشانی به موارد پیش فرض"</string>
+    <string name="restore_default_apn_completed" msgid="3990449939234957281">"بازنشانی تنظیمات APN پیش فرض انجام شد"</string>
+    <string name="master_clear_title" msgid="5907939616087039756">"بازنشانی به داده های کارخانه"</string>
+    <string name="master_clear_summary" msgid="4986154238001088492">"پاک کردن تمام داده های موجود در گوشی"</string>
+    <string name="master_clear_desc" product="nosdcard" msgid="2163013814299528247">"با این کار همه اطلاعات "<b>"حافظه داخلی"</b>" گوشی شما پاک می شود، از جمله:سیستم "\n\n<li>"حساب Google شما"</li>\n<li>"سیستم و داده های برنامه و تنظیمات"</li>\n<li>"برنامه های دانلود شده"</li>\n\n"برای پاک کردن همه داده ها در این گوشی، "<b>"حافظه USB"</b>" باید پاک شود."\n\n</string>
+    <string name="master_clear_desc" product="default" msgid="1741944496458365969">"با این کار همه اطلاعات "<b>"حافظه داخلی"</b>" گوشی شما پاک می شود، از جمله:"\n\n<li>"حساب Google شما"</li>\n<li>"سیستم و داده های برنامه و تنظیمات"</li>\n<li>"برنامه های دانلود شده"</li>\n\n"برای پاک کردن موسیقی، تصاویر و سایر داده های کاربر، "<b>"کارت SD"</b>" باید پاک شود."\n\n</string>
+    <string name="erase_external_storage" product="nosdcard" msgid="969364037450286809">"پاک کردن حافظه USB"</string>
+    <string name="erase_external_storage" product="default" msgid="1397239046334307625">"پاک کردن کارت SD"</string>
+    <string name="erase_external_storage_description" product="nosdcard" msgid="1657838142707381027">"همه داده های موجود در حافظه USB داخلی گوشی مانند موسیقی یا عکس ها را پاک کنید."</string>
+    <string name="erase_external_storage_description" product="default" msgid="8100175974635894073">"همه داده های موجود در کارت SD گوشی مانند موسیقی یا عکس ها را پاک کنید."</string>
+    <string name="master_clear_button_text" msgid="7550632653343157971">"بازنشانی تلفن"</string>
+    <string name="master_clear_final_desc" msgid="6917971132484622696">"تمام اطلاعات شخصی و هرگونه برنامه دانلود شده را پاک می کنید؟ امکان بازگرداندن این کار وجود ندارد!"</string>
+    <string name="master_clear_final_button_text" msgid="5390908019019242910">"پاک کردن همه موارد"</string>
+    <string name="master_clear_gesture_prompt" msgid="1428645764883536750">"الگوی بازگشایی قفل خود را بکشید"</string>
+    <string name="master_clear_gesture_explanation" msgid="8901714274312707918">"برای تأیید بازنشانی گوشی باید الگوی بازگشایی خود را بکشید."</string>
+    <string name="master_clear_failed" msgid="8655202125010189406">"هیچ بازنشانی انجام نشد زیرا سرویس پاکسازی سیستم در دسترس نیست."</string>
+    <string name="media_format_title" product="nosdcard" msgid="3999653431422767156">"پاک کردن حافظه USB"</string>
+    <string name="media_format_title" product="default" msgid="4427528440306787972">"پاک کردن کارت SD"</string>
+    <string name="media_format_summary" product="nosdcard" msgid="776603298628082065">"حذف همه داده های موجود در حافظه USB"</string>
+    <string name="media_format_summary" product="default" msgid="3805714639375830120">"پاک کردن تمام داده های موجود در کارت SD"</string>
+    <string name="media_format_desc" product="nosdcard" msgid="4553860683952763905">"این عملکرد حافظه USB را پاک می کند. شما "<b>"همه"</b>" داده های ذخیره شده در آنجا را از دست می دهید!"</string>
+    <string name="media_format_desc" product="default" msgid="1598627584181935513">"این عملکرد سبب پاک شدن کارت SD می شود. "<b>"تمام"</b>" اطلاعات موجود بر روی کارت را از دست خواهید داد!"</string>
+    <string name="media_format_button_text" product="nosdcard" msgid="6293669371185352810">"پاک کردن حافظه USB"</string>
+    <string name="media_format_button_text" product="default" msgid="6721544380069373626">"پاک کردن کارت SD"</string>
+    <string name="media_format_final_desc" product="nosdcard" msgid="8094635533378487255">"پاک کردن حافظه USB، حذف همه فایل های ذخیره شده در آنجا؟ این عملکرد دیگر قابل بازگشت نیست!"</string>
+    <string name="media_format_final_desc" product="default" msgid="9015504991522581434">"پاک کردن کارت SD، حذف همه فایل های ذخیره شده در آنجا؟ این عملکرد قابل بازگشت نیست!"</string>
+    <string name="media_format_final_button_text" msgid="4881713344315923175">"پاک کردن همه موارد"</string>
+    <string name="media_format_gesture_prompt" msgid="3109349468816856670">"الگوی بازگشایی قفل خود را بکشید"</string>
+    <string name="media_format_gesture_explanation" product="nosdcard" msgid="1379736318750958338">"برای تأیید پاک کردن حافظه USB، باید الگوی قفل گشایی خود را بکشید."</string>
+    <string name="media_format_gesture_explanation" product="default" msgid="1681213416497647321">"برای تأیید پاک کردن کارت SD، باید الگوی قفل گشایی خود را بکشید."</string>
+    <string name="call_settings_title" msgid="5188713413939232801">"تنظیمات تماس"</string>
+    <string name="call_settings_summary" msgid="7291195704801002886">"تنظیم پست صوتی، هدایت تماس، انتظار تماس، شناسه تماس گیرنده"</string>
+    <string name="tether_settings_title_usb" msgid="4315031513434087777">"دارای اتصال داده با سیم"</string>
+    <string name="tether_settings_title_wifi" msgid="3277144155960302049">"نقطه اتصال قابل حمل"</string>
+    <string name="tether_settings_title_both" msgid="2734066355556891504">"اتصال داده با سیم و نقطه اتصال قابل حمل"</string>
+    <string name="tether_settings_summary_usb" msgid="3562431455625637370">"اشتراک گذاری اتصال داده تلفن همراه از طریق USB"</string>
+    <string name="tether_settings_summary_wifi" msgid="4690912027002467246">"اشتراک گذاری اتصال تلفن همراه شما از طریق یک نقطه اتصال Wi-Fi قابل حمل"</string>
+    <string name="tether_settings_summary_both" msgid="7460063951190682635">"اشتراک گذاری اتصال داده تلفن همراه از طریق USB یا یک نقطه اتصال Wi-Fi قابل حمل"</string>
+    <string name="usb_title" msgid="7483344855356312510">"USB"</string>
+    <string name="usb_tethering_button_text" msgid="585829947108007917">"اتصال داده با سیم USB"</string>
+    <string name="usb_tethering_available_subtext" msgid="156779271296152605">"USB متصل شد، برای اتصال داده با سیم بررسی کنید"</string>
+    <string name="usb_tethering_active_subtext" msgid="8916210851136467042">"دارای اتصال داده با سیم"</string>
+    <string name="usb_tethering_storage_active_subtext" msgid="6608933594288072573">"هنگام استفاده از حالت ذخیره سازی USB، نمی توان از اتصال داده با سیم استفاده کرد"</string>
+    <string name="usb_tethering_unavailable_subtext" msgid="1044622421184007254">"USB متصل نیست"</string>
+    <string name="usb_tethering_errored_subtext" msgid="1377574819427841992">"خطای اتصال داده با سیم USB"</string>
+    <string name="tethering_help_button_text" msgid="656117495547173630">"راهنمایی"</string>
+    <string name="network_settings_title" msgid="7967552516440151852">"شبکه های تلفن همراه"</string>
+    <string name="network_settings_summary" msgid="5149750850846813553">"تنظیم گزینه ها برای رومینگ، شبکه ها، APNها"</string>
+    <string name="location_title" msgid="1029961368397484576">"موقعیت مکانی من"</string>
+    <string name="location_network_based" msgid="8815705866861993344">"استفاده از شبکه های بی سیم"</string>
+    <string name="location_networks_disabled" msgid="2708968452901433980">"با استفاده از شبکه های بی سیم، مکان را در برنامه ها (از قبیل Maps) مشاهده کنید."</string>
+    <string name="location_neighborhood_level" msgid="4656658097932515921">"مکان تعیین شده توسط شبکه های Wi-Fi یا شبکه های تلفن همراه"</string>
+    <string name="location_gps" msgid="6296125378829097831">"استفاده از ماهواره های GPS"</string>
+    <string name="location_street_level" msgid="7456259025474443314">"هنگام موقعیت یابی، دقت تا سطح خیابان"</string>
+    <string name="location_gps_disabled" msgid="6632537158777308128">"پیدا کردن سطح خیابان (به میزان بیشتری باتری و نمایی از آسمان نیاز است)"</string>
+    <string name="assisted_gps" msgid="4649317129586736885">"استفاده از GPS کمکی"</string>
+    <string name="assisted_gps_enabled" msgid="8751899609589792803">"استفاده از سرور برای کمک به GPS (برای کاهش میزان استفاده از شبکه، علامت آن را حذف کنید)"</string>
+    <string name="assisted_gps_disabled" msgid="6982698333968010748">"استفاده از سرور برای کمک به GPS (برای ارتقای عملکرد GPS، علامت آن را حذف کنید)"</string>
+    <string name="about_settings" msgid="1743378368185371685">"درباره تلفن"</string>
+    <string name="about_settings_summary" msgid="3302263393543848667">"مشاهده اطلاعات حقوقی، وضعیت گوشی، نسخه نرم افزار"</string>
+    <string name="legal_information" msgid="5769301644270604095">"اطلاعات حقوقی"</string>
+    <string name="contributors_title" msgid="5917703088825286504">"شرکت کنندگان"</string>
+    <string name="copyright_title" msgid="865906688917260647">"حق نسخه برداری"</string>
+    <string name="license_title" msgid="1990487604356037871">"مجوز"</string>
+    <string name="terms_title" msgid="7697580845616764642">"شرایط و مقررات"</string>
+    <string name="system_tutorial_list_item_title" msgid="9082844446660969729">"بخش آموزشی سیستم"</string>
+    <string name="system_tutorial_list_item_summary" msgid="3861815254521030201">"آموزش نحوه استفاده از گوشی"</string>
+    <string name="settings_license_activity_title" msgid="7553683406244228650">"مجوزهای منبع باز"</string>
+    <string name="settings_license_activity_unavailable" msgid="4210539215951487627">"مشکلی در بارگیری مجوزها وجود دارد."</string>
+    <string name="settings_license_activity_loading" msgid="3337535809093591740">"در حال بارگیری…"</string>
+    <string name="settings_safetylegal_title" msgid="1289483965535937431">"اطلاعات ایمنی"</string>
+    <string name="settings_safetylegal_activity_title" msgid="6901214628496951727">"اطلاعات ایمنی"</string>
+    <string name="settings_safetylegal_activity_unreachable" msgid="3198912875259612887">"گوشی شما به سرویس داده متصل نیست. برای مشاهده این اطلاعات، از هر رایانه متصل به اینترنت به %s بروید."</string>
+    <string name="settings_safetylegal_activity_loading" msgid="8059022597639516348">"در حال بارگیری…"</string>
+    <string name="lockpassword_choose_your_password_header" msgid="8624900666929394990">"رمز ورود خود را انتخاب کنید"</string>
+    <string name="lockpassword_choose_your_pin_header" msgid="7598849519816138302">"پین خود را انتخاب کنید"</string>
+    <string name="lockpassword_confirm_your_password_header" msgid="6308478184889846633">"تأیید رمز ورود خود"</string>
+    <string name="lockpassword_confirm_your_pin_header" msgid="49038294648213197">"تأیید پین خود"</string>
+    <string name="lockpassword_confirm_passwords_dont_match" msgid="6850677112663979120">"رمزهای ورود مطابقت ندارند"</string>
+    <string name="lockpassword_confirm_pins_dont_match" msgid="4757532830594400147">"پین ها با یکدیگر مطابقت ندارند"</string>
+    <string name="lockpassword_password_set_toast" msgid="4875050283108629383">"رمز ورود تنظیم شد"</string>
+    <string name="lockpassword_pin_set_toast" msgid="6011826444725291475">"پین تنظیم شد"</string>
+    <string name="lockpassword_pattern_set_toast" msgid="6867259621331406236">"الگو تنظیم شد"</string>
+    <string name="lock_settings_title" msgid="975088518210629938">"بازگشایی قفل صفحه"</string>
+    <string name="lockpattern_change_lock_pattern_label" msgid="5679630792003440352">"تغییر الگوی بازگشایی قفل"</string>
+    <string name="lockpattern_change_lock_pin_label" msgid="266707138486731661">"تغییر پین بازگشایی قفل"</string>
+    <string name="lockpattern_need_to_unlock" msgid="757935356911054465">"تأیید الگوی ذخیره شده"</string>
+    <string name="lockpattern_need_to_unlock_wrong" msgid="5629093548611791080">"متأسفیم، دوباره امتحان کنید:"</string>
+    <string name="lockpattern_recording_intro_header" msgid="308287052221942814">"یک الگوی بازگشایی قفل بکشید"</string>
+    <string name="lockpattern_recording_intro_footer" msgid="1118579101409152113">"برای دریافت راهنمایی روی منو فشار دهید."</string>
+    <string name="lockpattern_recording_inprogress" msgid="4622772178078818425">"پس از انجام کار، انگشت را رها کنید."</string>
+    <string name="lockpattern_recording_incorrect_too_short" msgid="3103250430366718996">"حداقل <xliff:g id="NUMBER">%d</xliff:g> نقطه را متصل کنید. دوباره امتحان کنید:"</string>
+    <string name="lockpattern_pattern_entered_header" msgid="5012716272001299362">"الگو ضبط شد!"</string>
+    <string name="lockpattern_need_to_confirm" msgid="5144676887162575050">"مجدداً الگو را برای تأیید بکشید:"</string>
+    <string name="lockpattern_pattern_confirmed_header" msgid="2223856038485537716">"الگوی بازگشایی قفل جدید شما:"</string>
+    <string name="lockpattern_confirm_button_text" msgid="1128204343957002841">"تأیید"</string>
+    <string name="lockpattern_restart_button_text" msgid="3337574403350953926">"کشیدن مجدد"</string>
+    <string name="lockpattern_retry_button_text" msgid="1949847413862309134">"امتحان مجدد"</string>
+    <string name="lockpattern_continue_button_text" msgid="4723771754714471410">"ادامه"</string>
+    <string name="lockpattern_settings_title" msgid="3207750489460466680">"الگوی بازگشایی قفل"</string>
+    <string name="lockpattern_settings_enable_title" msgid="6920616873671115281">"درخواست الگو"</string>
+    <string name="lockpattern_settings_enable_summary" msgid="1165707416664252167">"برای باز کردن قفل صفحه باید یک الگو بکشید"</string>
+    <string name="lockpattern_settings_enable_visible_pattern_title" msgid="104851667540971729">"استفاده از الگوی قابل مشاهده"</string>
+    <string name="lockpattern_settings_enable_tactile_feedback_title" msgid="972174133075372341">"استفاده از بازخورد لمسی"</string>
+    <string name="lockpattern_settings_choose_lock_pattern" msgid="1652352830005653447">"تنظیم الگوی بازگشایی قفل"</string>
+    <string name="lockpattern_settings_change_lock_pattern" msgid="1123908306116495545">"تغییر الگوی بازگشایی قفل"</string>
+    <string name="lockpattern_settings_help_how_to_record" msgid="2614673439060830433">"نحوه ترسیم الگوی بازگشایی قفل"</string>
+    <string name="lockpattern_too_many_failed_confirmation_attempts_header" msgid="819903817323783498">"تلاش های اشتباه زیادی انجام شده است!"</string>
+    <string name="lockpattern_too_many_failed_confirmation_attempts_footer" msgid="6759029360597122873">"در <xliff:g id="NUMBER">%d</xliff:g> ثانیه دوباره امتحان کنید."</string>
+    <string name="skip_button_label" msgid="8680422740354436943">"لغو"</string>
+    <string name="next_button_label" msgid="8890792540116568321">"بعدی"</string>
+    <string name="lock_title" msgid="4059246467204273930">"حفظ امنیت تلفن شما"</string>
+    <string name="lock_intro_message" msgid="9100785646737118042"><font size="17">"با ایجاد یک الگوی شخصی بازگشایی قفل صفحه، از تلفن خود در برابر استفاده های غیرمجاز محافظت کنید. "\n<font height="17">\n</font><b>"1"</b>"  در صفحه بعد، هنگام طراحی یک الگوی نمونه، آن را مشاهده کنید. "\n<font height="17">\n</font><b>"2"</b>"  هنگامی که آماده بودید، الگوی شخصی بازگشایی قفل خود را طراحی کنید. با الگوهای زیادی کار کنید اما حداقل چهار نقطه را به یکدیگر متصل کنید. "\n<font height="17">\n</font><b>"3"</b>"  برای تأیید مجدداً، الگوی خود را بکشید. "\n<font height="17">\n</font><b>"آماده هستید شروع کنید؟ روی \"بعدی\" کلیک کنید"</b>". "\n<font height="3">\n</font>"برای اینکه تلفن بدون محافظت باشد، روی \"لغو\" کلیک کنید."</font></string>
+    <string name="lock_example_title" msgid="8052305554017485410">"الگوی نمونه"</string>
+    <string name="lock_example_message" msgid="1838650097090632706">"حداقل چهار نقطه را متصل کنید."\n" "\n"هنگامی که برای کشیدن الگوی خود آماده شدید، \"بعدی\" را لمس کنید."</string>
+    <string name="manageapplications_settings_title" msgid="5712405848153426706">"مدیریت برنامه های کاربردی"</string>
+    <string name="manageapplications_settings_summary" msgid="6097117021500651232">"مدیریت وحذف برنامه های حذف شده"</string>
+    <string name="applications_settings" msgid="3736173521008476946">"برنامه های کاربردی"</string>
+    <string name="applications_settings_summary" msgid="2714215108369119717">"مدیریت برنامه های کاربردی، تنظیم میانبرهای راه اندازی سریع"</string>
+    <string name="applications_settings_header" msgid="6018266337275422250">"تنظیمات برنامه کاربردی"</string>
+    <string name="install_applications" msgid="4872012136210802181">"منبع ناشناس"</string>
+    <string name="install_unknown_applications" msgid="6612824788917283662">"اجازه نصب برنامه های کاربردی غیر بازاری را می دهد"</string>
+    <string name="install_all_warning" msgid="1923717607319933741">"امکان حمله به گوشی و داده های شخصی توسط برنامه های مربوط به منابع ناشناس بیشتر است. شما موافقت می کنید که تنها شما مسئول هرگونه آسیب وارد آمده به گوشی یا از بین رفتن داده ها هستید که ممکن است در پی استفاده از این برنامه ها رخ دهد."</string>
+    <string name="application_info_label" msgid="1150486628158409543">"اطلاعات برنامه کاربردی"</string>
+    <string name="storage_label" msgid="8700867073480107253">"ذخیره سازی"</string>
+    <string name="auto_launch_label" msgid="3012617472833815382">"راه اندازی به صورت پیش فرض"</string>
+    <string name="permissions_label" msgid="2605296874922726203">"مجوزها"</string>
+    <string name="cache_header_label" msgid="1877197634162461830">"حافظه پنهان"</string>
+    <string name="clear_cache_btn_text" msgid="5756314834291116325">"پاک کردن حافظه پنهان"</string>
+    <string name="cache_size_label" msgid="7505481393108282913">"حافظه پنهان"</string>
+    <string name="controls_label" msgid="7611113077086853799">"کنترل ها"</string>
+    <string name="force_stop" msgid="7435006169872876756">"توقف اجباری"</string>
+    <string name="total_size_label" msgid="1048676419552557254">"مجموع"</string>
+    <string name="application_size_label" msgid="5055196275624686382">"برنامه کاربردی"</string>
+    <string name="data_size_label" msgid="8679376373625710107">"داده"</string>
+    <string name="uninstall_text" msgid="3644892466144802466">"حذف نصب"</string>
+    <string name="disable_text" msgid="6544054052049395202">"غیرفعال کردن"</string>
+    <string name="enable_text" msgid="9217362512327828987">"فعال کردن"</string>
+    <string name="clear_user_data_text" msgid="5597622864770098388">"پاک کردن داده ها"</string>
+    <string name="app_factory_reset" msgid="6635744722502563022">"حذف نصب نسخه های به روز"</string>
+    <string name="auto_launch_enable_text" msgid="2630656657744196691">"شما انتخاب کرده اید که این برنامه به صورت پیش فرض برای چندین عملکرد راه اندازی شود."</string>
+    <string name="auto_launch_disable_text" msgid="7800385822185540166">"تنظیم پیش فرضی موجود نیست."</string>
+    <string name="clear_activities" msgid="7408923511535174430">"پاک کردن پیش فرض ها"</string>
+    <string name="unknown" msgid="1592123443519355854">"ناشناس"</string>
+    <string name="sort_order_alpha" msgid="1410278099123670628">"مرتب سازی بر اساس نام"</string>
+    <string name="sort_order_size" msgid="7024513286636502362">"ترتیب بر اساس اندازه"</string>
+    <string name="show_running_services" msgid="5736278767975544570">"نمایش سرویس های در حال اجرا"</string>
+    <string name="show_background_processes" msgid="2009840211972293429">"فرآیندهای ذخیره شده در حافظه پنهان"</string>
+    <string name="manage_space_text" msgid="8852711522447794676">"مدیریت فضا"</string>
+    <string name="filter" msgid="2018011724373033887">"فیلتر"</string>
+    <string name="filter_dlg_title" msgid="6507663329723966854">"انتخاب گزینه های فیلتر"</string>
+    <string name="filter_apps_all" msgid="5142129378749391876">"همه"</string>
+    <string name="filter_apps_third_party" msgid="7786348047690140979">"دانلود شد"</string>
+    <string name="filter_apps_running" msgid="7767071454371350486">"در حال اجرا"</string>
+    <string name="filter_apps_onsdcard" product="nosdcard" msgid="4843063154701023349">"حافظه USB"</string>
+    <string name="filter_apps_onsdcard" product="default" msgid="1477351142334784771">"در کارت SD"</string>
+    <string name="disabled" msgid="9206776641295849915">"غیر فعال شد"</string>
+    <string name="no_applications" msgid="5190227407135243904">"برنامه ای وجود ندارد."</string>
+    <string name="internal_storage" msgid="1584700623164275282">"حافظه داخلی"</string>
+    <string name="sd_card_storage" product="nosdcard" msgid="2673203150465132465">"حافظه USB"</string>
+    <string name="sd_card_storage" product="default" msgid="7623513618171928235">"حافظه کارت SD"</string>
+    <string name="recompute_size" msgid="7722567982831691718">"محاسبه مجدد اندازه..."</string>
+    <string name="clear_data_dlg_title" msgid="4470209520936375508">"حذف"</string>
+    <string name="clear_data_dlg_text" msgid="8368035073300828451">"همه داده های این برنامه به صورت دائمی حذف می شود. این امر شامل تمام فایل ها، تنظیمات، حساب ها، پایگاه های داده و دیگر موارد می شود."</string>
+    <string name="dlg_ok" msgid="2402639055725653590">"تأیید"</string>
+    <string name="dlg_cancel" msgid="1674753358972975911">"لغو"</string>
+    <string name="app_not_found_dlg_title" msgid="8458335716378083713">"برنامه کاربردی یافت نشد"</string>
+    <string name="app_not_found_dlg_text" msgid="2980271680333341554">"این برنامه در لیست برنامه های نصب شده یافت نشد."</string>
+    <string name="clear_data_failed" msgid="581956197586913865">"اطلاعات درخواست پاک نمی شود."</string>
+    <string name="app_factory_reset_dlg_title" msgid="6116199391150388147">"حذف نصب نسخه های به روز"</string>
+    <string name="app_factory_reset_dlg_text" msgid="438395129140568893">"می خواهید تمام به روز رسانی های این برنامه سیستم Android را حذف کنید؟"</string>
+    <string name="clear_failed_dlg_title" msgid="2387060805294783175">"پاک کردن داده ها"</string>
+    <string name="clear_failed_dlg_text" msgid="7943411157007320290">"پاک کردن داده های برنامه انجام نشد"</string>
+    <string name="security_settings_desc" msgid="3116027624526915561">"این برنامه کاربردی می تواند به موارد زیر در گوشی شما دسترسی داشته باشد:"</string>
+    <string name="computing_size" msgid="1599186977475211186">"در حال محاسبه..."</string>
+    <string name="invalid_size_value" msgid="1901940003700269523">"محاسبه اندازه بسته امکان پذیر نیست"</string>
+    <string name="empty_list_msg" msgid="2901049162265094971">"هیچ برنامه شخص ثالثی را نصب نکرده اید."</string>
+    <string name="version_text" msgid="9189073826278676425">"نسخه <xliff:g id="VERSION_NUM">%1$s</xliff:g>"</string>
+    <string name="move_app" msgid="5042838441401731346">"انتقال"</string>
+    <string name="move_app_to_internal" msgid="3895430471913858185">"انتقال به تلفن"</string>
+    <string name="move_app_to_sdcard" product="nosdcard" msgid="4350451696315265420">"انتقال به حافظه USB"</string>
+    <string name="move_app_to_sdcard" product="default" msgid="1143379049903056407">"انتقال به کارت SD"</string>
+    <string name="moving" msgid="6431016143218876491">"انتقال دادن"</string>
+    <string name="insufficient_storage" msgid="8566913062094452962">"فضای ذخیره سازی کافی باقی نمانده است."</string>
+    <string name="does_not_exist" msgid="837163572898468245">"برنامه کاربردی موجود نیست."</string>
+    <string name="app_forward_locked" msgid="5747805144210389585">"برنامه کاربردی در برابر کپی کردن محافظت شده است."</string>
+    <string name="invalid_location" msgid="4934491353200240499">"مکان نصب خاص معتبر نیست."</string>
+    <string name="system_package" msgid="1030561474413022831">"به روز رسانی های سیستم بر روی رسانه های خارجی نصب نمی شود."</string>
+    <string name="force_stop_dlg_title" msgid="4289453224368188476">"توقف اجباری"</string>
+    <string name="force_stop_dlg_text" msgid="5157374701213502922">"توقف اجباری یک دستگاه می تواند باعث خرابی آن شود. آیا مطمئن هستید؟"</string>
+    <string name="move_app_failed_dlg_title" msgid="4337731903265156405">"انتقال برنامه کاربردی"</string>
+    <string name="move_app_failed_dlg_text" msgid="8824246817947643697">"برنامه حذف نشد. <xliff:g id="REASON">%1$s</xliff:g>"</string>
+    <string name="app_install_location_title" msgid="2068975150026852168">"مکان نصب برگزیده"</string>
+    <string name="app_install_location_summary" msgid="879753854530300436">"تغییر مکان نصب مورد نظر برای برنامه های جدید."</string>
+    <string name="storageuse_settings_title" msgid="5657014373502630403">"استفاده از حافظه"</string>
+    <string name="storageuse_settings_summary" msgid="2556057379120846792">"مشاهده حافظه استفاده شده توسط برنامه ها"</string>
+    <string name="runningservices_settings_title" msgid="8097287939865165213">"سرویس های در حال اجرا"</string>
+    <string name="runningservices_settings_summary" msgid="854608995821032748">"مشاهده و کنترل سرویس های در حال اجرای فعلی"</string>
+    <string name="service_restarting" msgid="2242747937372354306">"در حال راه اندازی مجدد"</string>
+    <string name="cached" msgid="1059590879740175019">"پردازش پس زمینه ذخیره شده در حافظه پنهان"</string>
+    <string name="no_running_services" msgid="2059536495597645347">"چیزی در حال اجرا نیست."</string>
+    <string name="service_started_by_app" msgid="6575184738671598131">"شروع توسط برنامه."</string>
+    <!-- no translation found for service_client_name (4037193625611815517) -->
+    <skip />
+    <string name="service_background_processes" msgid="6844156253576174488">"<xliff:g id="MEMORY">%1$s</xliff:g> رایگان"</string>
+    <string name="service_foreground_processes" msgid="7583975676795574276">"<xliff:g id="MEMORY">%1$s</xliff:g> استفاده شده"</string>
+    <string name="memory" msgid="6609961111091483458">"RAM"</string>
+    <!-- no translation found for service_process_name (4098932168654826656) -->
+    <skip />
+    <string name="running_processes_item_description_s_s" msgid="5790575965282023145">"<xliff:g id="NUMPROCESS">%1$d</xliff:g> فرآیند و <xliff:g id="NUMSERVICES">%2$d</xliff:g> سرویس"</string>
+    <string name="running_processes_item_description_s_p" msgid="8019860457123222953">"<xliff:g id="NUMPROCESS">%1$d</xliff:g> فرآیند و <xliff:g id="NUMSERVICES">%2$d</xliff:g> سرویس"</string>
+    <string name="running_processes_item_description_p_s" msgid="744424668287252915">"<xliff:g id="NUMPROCESS">%1$d</xliff:g> فرآیند و <xliff:g id="NUMSERVICES">%2$d</xliff:g> سرویس"</string>
+    <string name="running_processes_item_description_p_p" msgid="1607384595790852782">"<xliff:g id="NUMPROCESS">%1$d</xliff:g> فرآیند و <xliff:g id="NUMSERVICES">%2$d</xliff:g> سرویس"</string>
+    <string name="runningservicedetails_settings_title" msgid="6188692418986988288">"برنامه در حال اجرا"</string>
+    <string name="no_services" msgid="7133900764462288263">"غیر فعال"</string>
+    <string name="runningservicedetails_services_title" msgid="391168243725357375">"سرویس ها"</string>
+    <string name="runningservicedetails_processes_title" msgid="928115582044655268">"فرآیندها"</string>
+    <string name="service_stop" msgid="6369807553277527248">"توقف"</string>
+    <string name="service_manage" msgid="1876642087421959194">"تنظیمات"</string>
+    <string name="service_stop_description" msgid="3261798282116866961">"این سرویس توسط برنامه خود راه اندازی شد. توقف آن موجب می شود برنامه کار نکند."</string>
+    <string name="heavy_weight_stop_description" msgid="6855241582643136019">"این برنامه نمی تواند به صورت امن متوقف شود. انجام این کار ممکن است باعث از دست رفتن کار فعلی شما شود."</string>
+    <string name="background_process_stop_description" msgid="1728354083304746737">"این یک فرآیند برنامه قدیمی است که جهت حفظ سرعت بهتر در صورت نیاز مجدد نگهداری و حفظ می شود. معمولاً دلیلی برای توقف آن وجود ندارد."</string>
+    <string name="service_manage_description" msgid="7050092269951613102">"<xliff:g id="CLIENT_NAME">%1$s</xliff:g>: در حال حاضر در حال استفاده است. برای کنترل آن، تنظیمات را لمس کنید."</string>
+    <string name="main_running_process_description" msgid="929204645380391397">"فرایند اصلی که در حال انجام است."</string>
+    <string name="process_service_in_use_description" msgid="8993335064403217080">"سرویس <xliff:g id="COMP_NAME">%1$s</xliff:g> در حال استفاده است."</string>
+    <string name="process_provider_in_use_description" msgid="5586603325677678940">"ارائه دهنده <xliff:g id="COMP_NAME">%1$s</xliff:g> در حال استفاده است."</string>
+    <string name="runningservicedetails_stop_dlg_title" msgid="4253292537154337233">"توقف سرویس سیستم؟"</string>
+    <string name="runningservicedetails_stop_dlg_text" msgid="6929716497425738387">"مطمئن هستید که می خواهید این سرویس سیستمی را متوقف کنید؟ در این صورت، برخی از ویژگی های گوشی شما ممکن است تا زمانی که آن را خاموش و دوباره روشن کنید، به درستی کار نکنند."</string>
+    <string name="language_settings" msgid="502219872342167227">"زبان و صفحه کلید"</string>
+    <string name="language_keyboard_settings_title" msgid="3455826933385341107">"تنظیمات زبان و صفحه کلید"</string>
+    <string name="language_settings_category" msgid="2288258489940617043">"تنظیمات زبان"</string>
+    <string name="keyboard_settings_category" msgid="7060453865544070642">"تنظیمات صفحه کلید"</string>
+    <string name="phone_language" msgid="1165758957501090679">"انتخاب زبان"</string>
+    <string name="phone_language_summary" msgid="3871309445655554211"></string>
+    <string name="auto_replace" msgid="6199184757891937822">"جایگزینی خودکار"</string>
+    <string name="auto_replace_summary" msgid="370288728200084466">"تصحیح کلمات دارای اشتباه املایی"</string>
+    <string name="auto_caps" msgid="581633131114124121">"حروف بزرگ خودکار"</string>
+    <string name="auto_caps_summary" msgid="6358102538315261466">"حرف اول در جمله ها بزرگ نوشته شود"</string>
+    <string name="auto_punctuate" msgid="4595367243950425833">"علامت گذاری خودکار"</string>
+    <string name="hardkeyboard_category" msgid="5957168411305769899">"تنظیمات صفحه کلید فیزیکی"</string>
+    <string name="auto_punctuate_summary" msgid="4372126865670574837">"برای وارد کردن \".\"، کلید فاصله را دو بار فشار دهید."</string>
+    <string name="show_password" msgid="2198798062604049206">"رمزهای ورود قابل مشاهده"</string>
+    <string name="show_password_summary" msgid="3806709974395178121">"نمایش رمز ورود همزمان با نوشتن"</string>
+    <string name="ime_security_warning" msgid="812267421486877917">"این روش وروی ممکن است بتواند تمام متنی را که می نویسید جمع آوری کند، از جمله اطلاعات شخصی مانند رمز ورود و شماره کارت اعتباری. این موارد توسط برنامه <xliff:g id="IME_APPLICATION_NAME">%1$s</xliff:g> انجام می شود. از این روش ورودی استفاده می کنید؟"</string>
+    <string name="user_dict_settings_titlebar" msgid="765659257455000490">"فرهنگ لغت کاربر"</string>
+    <string name="user_dict_settings_title" msgid="8357027437499042191">"فرهنگ لغت کاربر"</string>
+    <string name="user_dict_settings_summary" msgid="7965571192902870454"></string>
+    <string name="user_dict_settings_add_menu_title" msgid="4056762757149923551">"افزودن"</string>
+    <string name="user_dict_settings_add_dialog_title" msgid="4702613990174126482">"افزودن به فرهنگ لغت"</string>
+    <string name="user_dict_settings_edit_dialog_title" msgid="8967476444840548674">"ویرایش کلمه"</string>
+    <string name="user_dict_settings_context_menu_edit_title" msgid="2210564879320004837">"ویرایش"</string>
+    <string name="user_dict_settings_context_menu_delete_title" msgid="9140703913776549054">"حذف"</string>
+    <string name="user_dict_settings_empty_text" msgid="6209268025109242806">"هیچ کلمه ای را در فرهنگ لغت کاربر ندارید. از طریق منو می توانید یک کلمه را اضافه کنید."</string>
+    <string name="testing" msgid="6584352735303604146">"تست کردن"</string>
+    <string name="testing_phone_info" msgid="8656693364332840056">"اطلاعات تلفن"</string>
+    <string name="testing_battery_info" msgid="3497865525976497848">"اطلاعات باتری"</string>
+    <string name="quick_launch_title" msgid="7904609846945905306">"راه اندازی سریع"</string>
+    <string name="quick_launch_summary" msgid="3453825712466417452">"میانبرهای صفحه کلید را برای راه اندازی برنامه ها تنظیم کنید"</string>
+    <string name="quick_launch_assign_application" msgid="4521368464929956350">"تخصیص برنامه کاربردی"</string>
+    <string name="quick_launch_no_shortcut" msgid="5998005833838278693">"بدون میانبر"</string>
+    <string name="quick_launch_shortcut" msgid="5090405067413522300">"جستجو + <xliff:g id="SHORTCUT_LETTER">%1$s</xliff:g>"</string>
+    <string name="quick_launch_clear_dialog_title" msgid="5546543501250320220">"پاک کردن"</string>
+    <string name="quick_launch_clear_dialog_message" msgid="3921015601470260722">"میانبر شما برای <xliff:g id="SHORTCUT_LETTER">%1$s</xliff:g> (<xliff:g id="APPLICATION_NAME">%2$s</xliff:g>) پاک می شود."</string>
+    <string name="quick_launch_clear_ok_button" msgid="2634568926597586716">"تأیید"</string>
+    <string name="quick_launch_clear_cancel_button" msgid="1892854652197747064">"لغو"</string>
+    <string name="quick_launch_display_mode_applications" msgid="3748789806447639039">"برنامه های کاربردی"</string>
+    <string name="quick_launch_display_mode_shortcuts" msgid="4177934019174169042">"میانبرها"</string>
+    <string name="input_methods_settings_title" msgid="6800066636850553887">"ووردی متن"</string>
+    <string name="input_methods_settings_summary" msgid="7571173442946675205">"مدیریت گزینه های ورودی متنی"</string>
+    <string name="input_methods_settings_label_format" msgid="6002887604815693322">"<xliff:g id="IME_NAME">%1$s</xliff:g> تنظیمات"</string>
+    <string name="onscreen_keyboard_settings_summary" msgid="5841558383556238653">"تنظیمات صفحه کلید روی صفحه"</string>
+    <string name="builtin_keyboard_settings_title" msgid="5274990495405941804">"صفحه کلید داخلی"</string>
+    <string name="builtin_keyboard_settings_summary" msgid="7990296351888096836">"تنظیمات صفحه کلید واقعی، داخلی"</string>
+    <string name="development_settings_title" msgid="6719732334835420989">"توسعه"</string>
+    <string name="development_settings_summary" msgid="2151320488701538355">"تنظیم گزینه های مربوط به توسعه برنامه"</string>
+    <string name="enable_adb" msgid="7982306934419797485">"رفع عیب USB"</string>
+    <string name="enable_adb_summary" msgid="4881186971746056635">"با اتصال USB حالت رفع عیب فعال شود"</string>
+    <string name="keep_screen_on" msgid="1146389631208760344">"بیدار ماندن"</string>
+    <string name="keep_screen_on_summary" msgid="2173114350754293009">"صفحه هرگز در حین شارژ شدن به حالت خواب نمی رود"</string>
+    <string name="allow_mock_location" msgid="2787962564578664888">"مکان های کاذب مجاز هستند"</string>
+    <string name="allow_mock_location_summary" msgid="317615105156345626">"مکان های کاذب مجاز هستند"</string>
+    <string name="adb_warning_title" msgid="6234463310896563253">"رفع عیب USB انجام شود؟"</string>
+    <string name="adb_warning_message" msgid="5352555112049663033">"رفع عیب USB در حقیقت فقط برای اهداف توسعه در نظر گرفته شده است. می توان از آن برای کپی داده بین رایانه و دستگاه شما، نصب برنامه ها در دستگاه شما بدون اعلان و خواندن داده های گزارش استفاده کرد."</string>
+    <string name="gadget_picker_title" msgid="98374951396755811">"انتخاب اسبابک"</string>
+    <string name="widget_picker_title" msgid="9130684134213467557">"انتخاب ابزارک"</string>
+    <string name="battery_history_days" msgid="7110262897769622564">"<xliff:g id="DAYS">%1$d</xliff:g> روز و <xliff:g id="HOURS">%2$d</xliff:g> ساعت و <xliff:g id="MINUTES">%3$d</xliff:g> دقیقه و <xliff:g id="SECONDS">%4$d</xliff:g> ثانیه"</string>
+    <string name="battery_history_hours" msgid="7525170329826274999">"<xliff:g id="HOURS">%1$d</xliff:g> ساعت و <xliff:g id="MINUTES">%2$d</xliff:g> دقیقه و <xliff:g id="SECONDS">%3$d</xliff:g> ثانیه"</string>
+    <string name="battery_history_minutes" msgid="1467775596084148610">"<xliff:g id="MINUTES">%1$d</xliff:g>دقیقه و <xliff:g id="SECONDS">%2$d</xliff:g> ثانیه"</string>
+    <string name="battery_history_seconds" msgid="4283492130945761685">"<xliff:g id="SECONDS">%1$d</xliff:g> ثانیه"</string>
+    <string name="usage_stats_label" msgid="5890846333487083609">"آمار کاربرد"</string>
+    <string name="testing_usage_stats" msgid="7823048598893937339">"آمار کاربرد"</string>
+    <string name="display_order_text" msgid="8592776965827565271">"ترتیب بر اساس:"</string>
+    <string name="app_name_label" msgid="2000949925256858308">"برنامه کاربردی"</string>
+    <string name="launch_count_label" msgid="4019444833263957024">"تعداد"</string>
+    <string name="usage_time_label" msgid="295954901452833058">"زمان استفاده"</string>
+    <string name="accessibility_settings" msgid="3975902491934816215">"قابلیت دسترسی"</string>
+    <string name="accessibility_settings_title" msgid="2130492524656204459">"تنظیمات قابلیت دسترسی"</string>
+    <string name="accessibility_settings_summary" msgid="8185181964847149507">"مدیریت گزینه های دسترسی"</string>
+    <string name="toggle_accessibility_title" msgid="650839277066574497">"قابلیت دسترسی"</string>
+    <string name="accessibility_services_category" msgid="8127851026323672607">"سرویس های قابلیت دسترسی"</string>
+    <string name="no_accessibility_services_summary" msgid="694578333333808159">"سرویس قابلیت دسترسی نصب نشده است."</string>
+    <string name="accessibility_service_security_warning" msgid="4066258132331302670">"این سرویس قابلیت دسترسی ممکن است بتواند تمام متن هایی را که شما می نویسید جمع آوری کند، از جمله شماره کارت اعتباری و اطلاعات شخصی بجز رمزهای ورود. همچنین می تواند ارتباطات رابط کاربری شما را در سیستم ثبت کند. این کارها توسط برنامه <xliff:g id="ACCESSIBILITY_SERVICE_NAME">%1$s</xliff:g> انجام می شود. از این سرویس قابلیت دسترسی استفاده می کنید؟"</string>
+    <string name="accessibility_service_disable_warning" msgid="8930591383312775132">"دسترسی غیرفعال شود؟"</string>
+    <string name="accessibility_service_no_apps_title" msgid="898893674114288531">"هیچ برنامه ای با قابلیت دسترسی مرتبط یافت نشد"</string>
+    <string name="accessibility_service_no_apps_message" msgid="2450056749545404807">"هیچ برنامه ای در ارتباط با قابلیت دسترسی نصب نکرده اید."\n\n"یک صفحه خوان را می توانید برای دستگاه خود از Android Market دانلود کنید."\n\n"برای نصب صفحه خوان، تأیید را کلیک کنید."</string>
+    <string name="accessibility_power_button_category" msgid="8545885236482339928">"دکمه روشن/خاموش"</string>
+    <string name="accessibility_power_button_ends_call" msgid="7698764194501089533">"دکمه روشن/خاموش به تماس پایان می دهد"</string>
+    <string name="accessibility_power_button_ends_call_summary" msgid="8878097632186291462">"در حین تماس، بجای خاموش کردن صفحه، با فشار دادن دکمه روشن/خاموش، به تماس پایان داده می شود"</string>
+    <string name="power_usage_summary_title" msgid="5180282911164282324">"استفاده از باتری"</string>
+    <string name="power_usage_summary" msgid="7237084831082848168">"چه چیزی باتری را مصرف کرده است"</string>
+    <string name="battery_since_unplugged" msgid="338073389740738437">"استفاده از باتری از زمان جدا شدن"</string>
+    <string name="battery_since_reset" msgid="7464546661121187045">"استفاده از باتری از زمان بازنشانی"</string>
+    <string name="battery_stats_on_battery" msgid="4970762168505236033">"<xliff:g id="TIME">%1$s</xliff:g> در باتری"</string>
+    <string name="battery_stats_duration" msgid="7464501326709469282">"<xliff:g id="TIME">%1$s</xliff:g> از زمان جدا کردن"</string>
+    <string name="battery_stats_charging_label" msgid="4223311142875178785">"شارژ کردن"</string>
+    <string name="battery_stats_screen_on_label" msgid="7150221809877509708">"صفحه روشن"</string>
+    <string name="battery_stats_gps_on_label" msgid="1193657533641951256">"GPS در"</string>
+    <string name="battery_stats_wifi_running_label" msgid="3093545080361658269">"Wi-Fi"</string>
+    <string name="battery_stats_wake_lock_label" msgid="1908942681902324095">"بیدار"</string>
+    <string name="battery_stats_phone_signal_label" msgid="6822042940376636775">"سیگنال گوشی"</string>
+    <!-- no translation found for battery_stats_last_duration (1535831453827905957) -->
+    <skip />
+    <string name="awake" msgid="387122265874485088">"زمان بیداری دستگاه"</string>
+    <string name="wifi_on_time" msgid="6310209835617490616">"Wi-Fi به موقع"</string>
+    <string name="bluetooth_on_time" msgid="6157799524996162271">"Wi-Fi به موقع"</string>
+    <string name="usage_name_percent" msgid="7976919382448235858">"<xliff:g id="NAME">%1$s</xliff:g> -  <xliff:g id="NUMBER">%2$s</xliff:g><xliff:g id="PERCENT">%%</xliff:g>"</string>
+    <string name="details_title" msgid="7564809986329021063">"جزئیات استفاده از باتری"</string>
+    <string name="details_subtitle" msgid="32593908269911734">"جزئیات استفاده"</string>
+    <string name="controls_subtitle" msgid="390468421138288702">"تنظیم استفاده از نیرو"</string>
+    <string name="packages_subtitle" msgid="4736416171658062768">"شامل بسته ها"</string>
+    <string name="power_screen" msgid="2353149143338929583">"نمایش"</string>
+    <string name="power_wifi" msgid="2382791137776486974">"Wi-Fi"</string>
+    <string name="power_bluetooth" msgid="4373329044379008289">"بلوتوث"</string>
+    <string name="power_cell" msgid="6596471490976003056">"حالت آماده به کار تماس"</string>
+    <string name="power_phone" msgid="5392641106474567277">"تماس های صوتی"</string>
+    <string name="power_idle" msgid="9055659695602194990">"حالت بلااستفاده تلفن"</string>
+    <string name="usage_type_cpu" msgid="715162150698338714">"مقدار کل CPU"</string>
+    <string name="usage_type_cpu_foreground" msgid="6500579611933211831">"پیش زمینه CPU"</string>
+    <string name="usage_type_wake_lock" msgid="5125438890233677880">"بیدار باش"</string>
+    <string name="usage_type_gps" msgid="7989688715128160790">"GPS"</string>
+    <string name="usage_type_wifi_running" msgid="8234997940652067049">"Wi-Fi در حال اجرا"</string>
+    <string name="usage_type_phone" msgid="9108247984998041853">"تلفن"</string>
+    <string name="usage_type_data_send" msgid="2857401966985425427">"داده ارسال شده"</string>
+    <string name="usage_type_data_recv" msgid="7251090882025234185">"داده دریافت شده"</string>
+    <string name="usage_type_audio" msgid="6957269406840886290">"صوتی"</string>
+    <string name="usage_type_video" msgid="4295357792078579944">"ویدیو"</string>
+    <string name="usage_type_on_time" msgid="3351200096173733159">"زمان روشن"</string>
+    <string name="usage_type_no_coverage" msgid="3797004252954385053">"زمان بدون سیگنال"</string>
+    <string name="battery_action_stop" msgid="649958863744041872">"توقف اجباری"</string>
+    <string name="battery_action_app_details" msgid="3275013531871113681">"اطلاعات برنامه کاربردی"</string>
+    <string name="battery_action_app_settings" msgid="350562653472577250">"تنظیمات برنامه کاربردی"</string>
+    <string name="battery_action_display" msgid="5302763261448580102">"تنظیمات نمایش"</string>
+    <string name="battery_action_wifi" msgid="2272741639606146903">"تنظیمات Wi-Fi"</string>
+    <string name="battery_action_bluetooth" msgid="8374789049507723142">"تنظیمات بلوتوث"</string>
+    <string name="battery_desc_voice" msgid="8980322055722959211">"باتری استفاده شده توسط تماس های صوتی"</string>
+    <string name="battery_desc_standby" msgid="3009080001948091424">"باتری استفاده شده در حالت آماده به کار تلفن"</string>
+    <string name="battery_desc_radio" msgid="5479196477223185367">"باتری استفاده شده توسط رادیوی سلولی"</string>
+    <string name="battery_sugg_radio" msgid="8211336978326295047">"در مکان هایی که هیچ پوشش تلفن همراه وجود نداد، به حالت هواپیما جابجا می شود"</string>
+    <string name="battery_desc_display" msgid="5432795282958076557">"باتری استفاده شده توسط صفحه نمایش و نور پس زمینه"</string>
+    <string name="battery_sugg_display" msgid="3370202402045141760">"روشنایی و یا فاصله زمانی صفحه را کاهش دهید"</string>
+    <string name="battery_desc_wifi" msgid="1702486494565080431">"باتری استفاده شده توسط Wi-Fi"</string>
+    <string name="battery_sugg_wifi" msgid="7542345142282261691">"هنگامی که از Wi-Fi استفاده نمی کنید یا در مکانی که قابل استفاده نیست، آن را خاموش کنید"</string>
+    <string name="battery_desc_bluetooth" msgid="7535520658674621902">"باتری استفاده شده توسط بلوتوث"</string>
+    <string name="battery_sugg_bluetooth_basic" msgid="817276933922157788">"هنگامی که از بلوتوث استفاده نمی کنید آن را خاموش کنید"</string>
+    <string name="battery_sugg_bluetooth_headset" msgid="8214816222115517479">"اتصال به یک دستگاه بلوتوث دیگر را امتحان کنید"</string>
+    <string name="battery_desc_apps" msgid="6665712811746233450">"باتری استفاده شده توسط برنامه"</string>
+    <string name="battery_sugg_apps_info" msgid="6065882899391322442">"توقف یا حذف برنامه"</string>
+    <string name="battery_sugg_apps_gps" msgid="4545056413090932541">"کنترل دستی GPS برای جلوگیری از برنامه از استفاده از آن"</string>
+    <string name="battery_sugg_apps_settings" msgid="8021302847272481168">"این برنامه کاربردی دارای تنظیماتی است که در میزان مصرف باتری صرفه جویی می کند"</string>
+    <string name="menu_stats_unplugged" msgid="8296577130840261624">"<xliff:g id="UNPLUGGED">%1$s</xliff:g> از زمان جدا کردن"</string>
+    <string name="menu_stats_last_unplugged" msgid="5922246077592434526">"در حین قطع اتصال آخر برای <xliff:g id="UNPLUGGED">%1$s</xliff:g>"</string>
+    <string name="menu_stats_total" msgid="8973377864854807854">"مقدار کل استفاده"</string>
+    <string name="menu_stats_refresh" msgid="1676215433344981075">"تازه کردن"</string>
+    <string name="process_kernel_label" msgid="3916858646836739323">"سیستم عامل Android"</string>
+    <string name="process_mediaserver_label" msgid="6500382062945689285">"سرور رسانه"</string>
+    <string name="voice_input_output_settings" msgid="1336135218350444783">"ورودی و خروجی صوتی"</string>
+    <string name="voice_input_output_settings_title" msgid="2442850635048676991">"تنظیمات ورودی و خروجی صوتی"</string>
+    <string name="voice_search_settings_title" msgid="2775469246913196536">"جستجوی صوتی"</string>
+    <string name="keyboard_settings_title" msgid="5080115226780201234">"صفحه کلید Android"</string>
+    <string name="voice_input_category" msgid="1589318440824204736">"ورودی صوتی"</string>
+    <string name="voice_output_category" msgid="2624538587784986229">"خروجی صوتی"</string>
+    <string name="recognizer_title" msgid="3231385184559054457">"شناسایی کننده صدا"</string>
+    <string name="recognizer_settings_title" msgid="6038598099039717232">"تنظیمات شناسایی کننده صدا"</string>
+    <string name="recognizer_settings_summary" msgid="4472287934134546902">"تنظمیات \"<xliff:g id="RECOGNIZER_NAME">%s</xliff:g>\""</string>
+    <string name="tts_settings" msgid="8186971894801348327">"تنظیمات متن به صدا"</string>
+    <string name="tts_settings_title" msgid="4182348653053000933">"تنظیمات متن به صدا"</string>
+    <string name="use_default_tts_settings_title" msgid="1577063839539732930">"همیشه از تنظیمات من استفاده شود"</string>
+    <string name="use_default_tts_settings_summary" msgid="4253502106159206276">"تنظیمات پیش فرض در زیر تنظیمات برنامه را لغو می کند"</string>
+    <string name="tts_default_settings_section" msgid="5787915620218907443">"تنظیمات پیش فرض"</string>
+    <string name="tts_default_synth_title" msgid="29467896463371992">"موتور پیش فرض"</string>
+    <string name="tts_default_synth_summary" msgid="6482936537135251690">"موتور تولید صدا را بری استفاده با متن گفتاری تنظیم می کند"</string>
+    <string name="tts_default_rate_title" msgid="6030550998379310088">"سرعت گفتار"</string>
+    <string name="tts_default_rate_summary" msgid="4061815292287182801">"سرعتی که متن بیان می شود"</string>
+    <string name="tts_default_pitch_title" msgid="6135942113172488671">"زیر و بمی صدا"</string>
+    <string name="tts_default_pitch_summary" msgid="1328298665182885277">"بر صدای متن گفته شده تأثیر می گذارد"</string>
+    <string name="tts_default_lang_title" msgid="8018087612299820556">"زبان"</string>
+    <string name="tts_default_lang_summary" msgid="5219362163902707785">"صدای خاص یک زبان را برای متن گفتاری تنظیم می کند"</string>
+    <string name="tts_play_example_title" msgid="7094780383253097230">"گوش کردن به یک نمونه"</string>
+    <string name="tts_play_example_summary" msgid="8029071615047894486">"نمایش کوتاهی از صدای ترکیبی پخش شود"</string>
+    <string name="tts_install_data_title" msgid="4264378440508149986">"نصب داده های صوتی"</string>
+    <string name="tts_install_data_summary" msgid="5742135732511822589">"نصب داده های صوتی مورد نیاز برای ترکیب های صوتی"</string>
+    <string name="tts_data_installed_summary" msgid="9162111552859972809">"صداهای مورد نیاز برای ترکیب صوتی از قبل به درستی نصب نشده اند."</string>
+    <string name="tts_demo" msgid="405357591189935876">"این نمونه ای از ترکیب گفتار است."</string>
+    <string name="tts_settings_changed_demo" msgid="4926518555912328645">"تنظیمات شما تغییر کرد. این یک نمونه از نحوه کارکرد آنهاست."</string>
+    <string name="tts_engine_error" msgid="5513288178403066867">"موتوری که انتخاب کرده اید قابل اجرا نیست"</string>
+    <string name="tts_engine_error_config" msgid="5820525416624637313">"پیکربندی"</string>
+    <string name="tts_engine_error_reselect" msgid="3071453963296013376">"انتخاب یک موتور دیگر"</string>
+    <string name="tts_engine_security_warning" msgid="8786238102020223650">"این موتور ترکیب صوتی ممکن است بتواند تمام متن گفته شده را جمع آوری کند، از جمله اطلاعات شخصی مانند رمزهای ورود و شماره های کارت اعتباری. این کارها توسط موتور<xliff:g id="TTS_PLUGIN_ENGINE_NAME">%s</xliff:g> انجام می شود. استفاده از این موتور ترکیب صوتی را فعال می کنید؟"</string>
+    <string name="tts_engines_section" msgid="7515470972378742429">"موتورها"</string>
+    <string name="tts_engine_name_settings" msgid="4974538563074395920">"<xliff:g id="TTS_PLUGIN_ENGINE_NAME">%s</xliff:g> تنظیمات"</string>
+    <string name="tts_engine_name_is_enabled_summary" msgid="4909484006804022115">"<xliff:g id="TTS_PLUGIN_ENGINE_NAME">%s</xliff:g> فعال است"</string>
+    <string name="tts_engine_name_is_disabled_summary" msgid="7644198182255168200">"<xliff:g id="TTS_PLUGIN_ENGINE_NAME">%s</xliff:g> غیرفعال است"</string>
+    <string name="pico_languages_and_voices" msgid="4611320375917773238">"زبان ها و صداها"</string>
+    <string name="pico_installed" msgid="2452546687858267414">"نصب شده"</string>
+    <string name="pico_not_installed" msgid="6266845418419994311">"نصب نشد"</string>
+    <string name="pico_voice_summary_female" msgid="8047327176247727492">"مؤنث"</string>
+    <string name="pico_voice_summary_male" msgid="8331266854058577610">"مذکر"</string>
+    <string name="tts_notif_engine_install_title" msgid="7000346872482649034">"موتور ترکیب گفتار نصب شد"</string>
+    <string name="tts_notif_engine_install_message" msgid="5304661142202662693">"فعال کردن موتور جدید قبل از استفاده"</string>
+    <string name="gadget_title" msgid="7455548605888590466">"کنترل نیرو"</string>
+    <string name="gadget_toggle_wifi" msgid="2382963973155082629">"به روز رسانی تنظیمات Wi-Fi"</string>
+    <string name="gadget_toggle_bluetooth" msgid="7538903239807020826">"به روزرسانی تنظیمات بلوتوث"</string>
+    <string name="vpn_settings_activity_title" msgid="7276864950701612579">"تنظیمات VPN"</string>
+    <string name="vpn_connect_to" msgid="2541409082892684362">"اتصال به <xliff:g id="NAME">%s</xliff:g>"</string>
+    <string name="vpn_username_colon" msgid="7854930370861306247">"نام کاربری:"</string>
+    <string name="vpn_password_colon" msgid="5716278710848606626">"رمز ورود:"</string>
+    <string name="vpn_a_username" msgid="6664733641993968692">"یک نام کاربر"</string>
+    <string name="vpn_a_password" msgid="1537213632501483753">"یک رمز ورود"</string>
+    <string name="vpn_save_username" msgid="1408415289165970790">"به خاطر سپردن رمز ورود"</string>
+    <string name="vpn_connect_button" msgid="1699007212602470655">"اتصال"</string>
+    <string name="vpn_yes_button" msgid="8034531001149843119">"بله"</string>
+    <string name="vpn_no_button" msgid="7620339571187119107">"خیر"</string>
+    <string name="vpn_back_button" msgid="192036339792734970">"برگشت"</string>
+    <string name="vpn_mistake_button" msgid="1683383660912491270">"خیر"</string>
+    <string name="vpn_menu_done" msgid="93528279226907926">"ذخیره"</string>
+    <string name="vpn_menu_cancel" msgid="7234451214611202868">"لغو"</string>
+    <string name="vpn_menu_revert" msgid="4407762442281467659">"بازگرداندن"</string>
+    <string name="vpn_menu_connect" msgid="1089399414463784218">"اتصال به شبکه"</string>
+    <string name="vpn_menu_disconnect" msgid="8254492450022562235">"قطع اتصال از شبکه"</string>
+    <string name="vpn_menu_edit" msgid="4526245173583195618">"ویرایش شبکه"</string>
+    <string name="vpn_menu_delete" msgid="3326527392609513129">"حذف شبکه"</string>
+    <string name="vpn_error_miss_entering" msgid="5377667978602483250">"باید <xliff:g id="CODE">%s</xliff:g> را وارد کنید."</string>
+    <string name="vpn_error_miss_selecting" msgid="4890780825580511345">"باید <xliff:g id="OPTION">%s</xliff:g> را انتخاب کنید."</string>
+    <string name="vpn_error_duplicate_name" msgid="2693927537390963745">"نام \"<xliff:g id="NAME">%s</xliff:g>\" برای VPN از قبل وجود دارد. یک نام دیگر بیابید."</string>
+    <string name="vpn_confirm_profile_deletion" msgid="8679536635364177239">"مطمئن هستید که می خواهید این VPN را حذف کنید؟"</string>
+    <string name="vpn_confirm_add_profile_cancellation" msgid="3377869170901609182">"مطمئن هستید نمی خواهید این نمایه را ایجاد کنید؟"</string>
+    <string name="vpn_confirm_edit_profile_cancellation" msgid="7496760181072204494">"مطمئن هستید که می خواهید از تغییرات ایجاد شده در این نمایه صرفنظر کنید؟"</string>
+    <string name="vpn_confirm_reconnect" msgid="5748535476278674296">"اتصال به شبکه برقرار نمی شود. می خواهید دوباره امتحان کنید؟"</string>
+    <string name="vpn_reconnect_from_lost" msgid="2442844155623372118">"اتصال قطع شد. می خواهید دوباره متصل شوید؟"</string>
+    <string name="vpn_unknown_server_dialog_msg" msgid="3080742299823671319">"مشکل سرور برطرف نشد. می خواهید تنظیمات نام سرور خود را بررسی کنید؟"</string>
+    <string name="vpn_challenge_error_dialog_msg" msgid="6174901754230038601">"خطای بررسی هویت. می خواهید تنظیمات محرمانه خود را بررسی کنید؟"</string>
+    <string name="vpn_secret_not_set_dialog_msg" msgid="8013052814131532765">"یک یا چند مورد محرمانه در این پیکربندی VPN از بین رفته است. می خواهید تنظیمات موارد محرمانه خود را بررسی کنید؟"</string>
+    <string name="vpn_auth_error_dialog_msg" msgid="5476820106624807614">"نام کاربر یا رمز ورودی که وارد کرده اید اشتباه است. می خواهید دوباره امتحان کنید؟"</string>
+    <string name="vpn_remote_hung_up_error_dialog_msg" msgid="1566946015052633150">"سرور قفل شده است. نام کاربر یا رمز ورودی که وارد کرده اید ممکن است نادرست باشد. می خواهید دوباره امتحان کنید؟"</string>
+    <string name="vpn_remote_ppp_hung_up_error_dialog_msg" msgid="5135958511128503344">"سرور قفل شده است. ممکن است شما از فایروالی استفاده می کنید که مانع از اتصال به سرور شود. می خواهید دوباره امتحان کنید؟"</string>
+    <string name="vpn_ppp_negotiation_failed_dialog_msg" msgid="4611293656718340994">"ارتباط با سرور برقرار نشد. ممکن است سرور با گزینه رمزگذاری شما موافقت نکند. می خواهید تنظیمات رمزگذاری خود را بررسی کنید؟"</string>
+    <string name="vpn_type_title" msgid="6392933604218676224">"افزودن VPN"</string>
+    <string name="vpn_add_new_vpn" msgid="5438260689052714550">"افزودن VPN"</string>
+    <string name="vpn_edit_title_add" msgid="2121313217989682890">"افزودن <xliff:g id="NAME">%s</xliff:g> VPN"</string>
+    <string name="vpn_edit_title_edit" msgid="2457278794066617935">"جزئیات <xliff:g id="NAME">%s</xliff:g>"</string>
+    <string name="vpns" msgid="3148141862835492816">"VPNها"</string>
+    <string name="vpn_connecting" msgid="8039521381692090116">"در حال اتصال..."</string>
+    <string name="vpn_disconnecting" msgid="7748050200708257066">"در حال قطع اتصال..."</string>
+    <string name="vpn_connected" msgid="7641723116362845781">"اتصال برقرار شد"</string>
+    <string name="vpn_connect_hint" msgid="7442898962925875181">"اتصال به شبکه"</string>
+    <string name="vpn_name" msgid="1550918148476193076">"نام VPN"</string>
+    <string name="vpn_a_name" msgid="8445736942405283509">"یک نام VPN"</string>
+    <string name="vpn_profile_added" msgid="9061017910337129840">"\"<xliff:g id="NAME">%s</xliff:g>\" اضافه شده است"</string>
+    <string name="vpn_profile_replaced" msgid="587435576816273815">"تغییرات در \"<xliff:g id="NAME">%s</xliff:g>\" ایجاد می شوند"</string>
+    <string name="vpn_user_certificate_title" msgid="6812545893924071742">"تنظیم گواهی کاربر"</string>
+    <string name="vpn_user_certificate" msgid="949322691686938888">"گواهی کاربر"</string>
+    <string name="vpn_a_user_certificate" msgid="8943983437956898649">"یک گواهی کاربر"</string>
+    <string name="vpn_ca_certificate_title" msgid="7846466160795589985">"تنظیم گواهی CA"</string>
+    <string name="vpn_ca_certificate" msgid="465085144064264742">"گواهی اعتبار گواهی (CA)"</string>
+    <string name="vpn_a_ca_certificate" msgid="3374242520974884295">"یک گواهی CA"</string>
+    <string name="vpn_l2tp_secret_string_title" msgid="5039677186748940987">"تنظیم موارد محرمانه L2TP"</string>
+    <string name="vpn_l2tp_secret" msgid="529359749677142076">"مورد محرمانه L2TP"</string>
+    <string name="vpn_a_l2tp_secret" msgid="6612042930810981845">"یک مورد محرمانه L2TP"</string>
+    <string name="vpn_pptp_encryption_title" msgid="2236795167467896499">"رمزگذاری"</string>
+    <string name="vpn_pptp_encryption" msgid="2602329949737259686">"رمزگذاری PPP"</string>
+    <string name="vpn_ipsec_presharedkey_title" msgid="2184060087690539175">"تنظیم کلید از پیش مشترک شده IPSec"</string>
+    <string name="vpn_ipsec_presharedkey" msgid="5434316521616673741">"کلید از پیش مشترک شده IPSec"</string>
+    <string name="vpn_a_ipsec_presharedkey" msgid="1255301923217898418">"کلید از پیش مشترک شده IPSec"</string>
+    <string name="vpn_vpn_server_title" msgid="8897005887420358913">"تنظیم سرور VPN"</string>
+    <string name="vpn_vpn_server" msgid="1141754908824209260">"سرور VPN"</string>
+    <string name="vpn_a_vpn_server" msgid="5960906152125045853">"یک سرور VPN"</string>
+    <string name="vpn_vpn_server_dialog_title" msgid="7850850940160521918">"نام سرور VPN"</string>
+    <string name="vpn_dns_search_list_title" msgid="1022776976104584251">"دامنه های جستجوی DNS"</string>
+    <string name="vpn_dns_search_list" msgid="4230034234026605360">"دامنه های جستجوی DNS"</string>
+    <string name="vpn_field_is_set" msgid="7137320847812992243">"<xliff:g id="VALUE">%s</xliff:g> تنظیم شد"</string>
+    <string name="vpn_field_not_set" msgid="2972519243515893804">"<xliff:g id="VALUE">%s</xliff:g> تنظیم نشده"</string>
+    <string name="vpn_field_not_set_optional" msgid="8840557698252556791">"<xliff:g id="VALUE">%s</xliff:g> تنظیم نشده (اختیاری)"</string>
+    <string name="vpn_enable_field" msgid="3700967675854517191">"فعال کردن <xliff:g id="OPTION">%s</xliff:g>"</string>
+    <string name="vpn_disable_field" msgid="6905658811179634005">"غیرفعال کردن <xliff:g id="OPTION">%s</xliff:g>"</string>
+    <string name="vpn_is_enabled" msgid="1266304230417098877">"<xliff:g id="OPTION">%s</xliff:g> فعال است"</string>
+    <string name="vpn_is_disabled" msgid="2013622485867806167">"<xliff:g id="OPTION">%s</xliff:g> غیرفعال است"</string>
+    <string name="vpn_settings_title" msgid="7327468307909556719">"تنظیمات VPN"</string>
+    <string name="vpn_settings_summary" msgid="8849924181594963972">"تنظیم و مدیریت شبکه های خصوصی مجازی (VPN)"</string>
+    <string name="vpn_secret_unchanged" msgid="8700613973594154529">"(بدون تغییر)"</string>
+    <string name="vpn_secret_not_set" msgid="1037792636371641845">"(تنظیم نشده)"</string>
+    <string name="credentials_category" msgid="8536992056377271234">"ذخیره سازی اطلاعات کاربری"</string>
+    <string name="credentials_access" msgid="4843187230913860492">"استفاده از اطلاعات کاربری ایمن"</string>
+    <string name="credentials_access_summary" msgid="319662078718574168">"به برنامه های کاربردی اجازه می دهد به گواهی های ایمن و دیگر اطلاعات کاربری دسترسی داشته باشد."</string>
+    <string name="credentials_unlock" msgid="1463040326264133844">"رمز ورود را وارد کنید"</string>
+    <string name="credentials_unlock_hint" msgid="594679530407918031">"رمز ورود دستگاه ذخیره سازی اطلاعات کاربری را وارد کنید."</string>
+    <string name="credentials_install_certificates" product="nosdcard" msgid="619171634797689906">"نصب از حافظه USB"</string>
+    <string name="credentials_install_certificates" product="default" msgid="177337517568022236">"نصب از کارت SD"</string>
+    <string name="credentials_install_certificates_summary" product="nosdcard" msgid="8920330112631198575">"نصب مجوزهای رمزگذاری شده از حافظه USB"</string>
+    <string name="credentials_install_certificates_summary" product="default" msgid="7737001268684193093">"نصب گواهی های رمزگذاری شده از کارت SD"</string>
+    <string name="credentials_set_password" msgid="9104473585811899989">"تنظیم رمز ورود"</string>
+    <string name="credentials_set_password_summary" msgid="8287876917562085701">"تنظیم یا تغییر رمز ورود محل ذخیره اطلاعات کاربری"</string>
+    <string name="credentials_reset" msgid="9170150870552453457">"پاک کردن محل ذخیره سازی"</string>
+    <string name="credentials_reset_summary" msgid="1530388094693731636">"ذخیره اطلاعات کاربری تمام محتواها را پاک کرده و رمز ورود را بازنشانی کنید"</string>
+    <string name="credentials_reset_hint" msgid="819990295796804516">"مطمئن هستید می خواهید تمام اطلاعات کاربری را حذف کرده و رمز ورود دستگاه ذخیره سازی را بازنشانی کنید؟"</string>
+    <string name="credentials_old_password" msgid="7553393815538684028">"رمز ورود فعلی:"</string>
+    <string name="credentials_new_password" msgid="267487774686796938">"رمز ورود جدید:"</string>
+    <string name="credentials_confirm_password" msgid="4732250000633424345">"تأیید رمز ورود جدید:"</string>
+    <string name="credentials_first_time_hint" msgid="1567821077545346039">"یک رمز ورود را برای محل ذخیره اطلاعات کاربری تنظیم کنید (حداقل 8 نویسه)."</string>
+    <string name="credentials_wrong_password" msgid="7525192410790152041">"لطفاً رمز ورود صحیح را وارد کنید."</string>
+    <string name="credentials_reset_warning" msgid="6392481296673345268">"لطفاً رمز ورود صحیح را وارد کنید. شما یک بار دیگر قبل از پاک شدن محل ذخیره اطلاعات کاربری می توانید رمز ورود صحیح را وارد کنید."</string>
+    <string name="credentials_reset_warning_plural" msgid="454828369803055270">"لطفاً رمز ورود صحیح را وارد کنید. شما <xliff:g id="NUMBER">%1$d</xliff:g> بار دیگر قبل از پاک شدن محل ذخیره اطلاعات کاربری می توانید رمز ورود صحیح را وارد کنید."</string>
+    <string name="credentials_passwords_mismatch" msgid="5288565139590031733">"رمزهای ورود مطابقت ندارند."</string>
+    <string name="credentials_passwords_empty" msgid="8647631321684363549">"باید رمز ورود را وارد کرده و آن را تأیید کنید."</string>
+    <string name="credentials_password_empty" msgid="8292138152983330473">"لطفاً رمز ورود را وارد کنید."</string>
+    <string name="credentials_password_too_short" msgid="7502749986405522663">"رمز ورود باید حداقل 8 نویسه داشته باشد."</string>
+    <string name="credentials_erased" msgid="7700309135582200849">"محل ذخیره اطلاعات کاربری پاک شد."</string>
+    <string name="credentials_enabled" msgid="7588607413349978930">"ذخیره سازی اطلاعات کاربری فعال شد."</string>
+    <string name="credentials_disabled" msgid="7453188089059045380">"ذخیره سازی اطلاعات کاربری غیرفعال شد."</string>
+    <!-- no translation found for encrypted_fs_category (1841367653663913956) -->
+    <skip />
+    <!-- no translation found for encrypted_fs_enable (3884033081603327729) -->
+    <skip />
+    <!-- no translation found for encrypted_fs_enable_summary (5635188119509076089) -->
+    <skip />
+    <!-- no translation found for encrypted_fs_enable_dialog (919487211207214266) -->
+    <skip />
+    <!-- no translation found for encrypted_fs_disable_dialog (6960413613985682501) -->
+    <skip />
+    <!-- no translation found for encrypted_fs_enable_button (8453841319751433751) -->
+    <skip />
+    <!-- no translation found for encrypted_fs_disable_button (8468354944060220496) -->
+    <skip />
+    <!-- no translation found for encrypted_fs_cancel_button (4785921255266305799) -->
+    <skip />
+    <!-- no translation found for encrypted_fs_cancel_confirm (853572431153803557) -->
+    <skip />
+    <!-- no translation found for encrypted_fs_alert_dialog_title (583462447886934755) -->
+    <skip />
+    <string name="emergency_tone_title" msgid="1055954530111587114">"آهنگ اضطراری"</string>
+    <string name="emergency_tone_summary" msgid="722259232924572153">"واکنش موجود در هنگام برقراری تماس اضطراری را تنظیم کنید"</string>
+    <string name="privacy_settings" msgid="9206631214140954954">"رازداری"</string>
+    <string name="privacy_settings_title" msgid="1987089301293213705">"تنظیمات رازداری"</string>
+    <string name="backup_section_title" msgid="8856083167469467588">"تهیه نسخه پشتیبان و بازیابی"</string>
+    <string name="personal_data_section_title" msgid="7815209034443782061">"اطلاعات شخصی"</string>
+    <string name="backup_data_title" msgid="1239105919852668016">"تهیه نسخه پشتیبان از داده ها من"</string>
+    <string name="backup_data_summary" msgid="6515285107793232815">"تهیه نسخه پشتیبان از داده ها، رمزهای ورود Wi-Fi و سایر تنظیمات در سرورهای Google"</string>
+    <string name="auto_restore_title" msgid="5397528966329126506">"بازیابی خودکار"</string>
+    <string name="auto_restore_summary" msgid="83177150536734378">"در صورت نصب مجدد برنامه، تنظیمات تهیه نسخه پشتیبان یا دیگر داده ها بازیابی شود"</string>
+    <string name="backup_erase_dialog_title" msgid="3438255037256586237">"تهیه نسخه پشتیبان"</string>
+    <string name="backup_erase_dialog_message" msgid="7766283133557587608">"مطمئن هستید که می خواهید تهیه نسخه پشتیبان از رمزهای ورود Wi-Fi، نشانک ها، سایر تنظیمات و داده های برنامه را متوقف کرده و همه نسخه های موجود در سرورهای Google را حذف کنید؟"</string>
+    <string name="device_admin_settings_title" msgid="1335557832906433309">"تنظیمات سرپرستی دستگاه"</string>
+    <string name="active_device_admin_msg" msgid="6930903262612422111">"سرپرست دستگاه"</string>
+    <string name="remove_device_admin" msgid="3596845261596451437">"غیرفعال کردن"</string>
+    <string name="select_device_admin_msg" msgid="2645509057946368094">"سرپرست های دستگاه"</string>
+    <string name="no_device_admins" msgid="702695100241728775">"هیچ سرپرست دستگاهی موجود نیست"</string>
+    <string name="add_device_admin_msg" msgid="6246742476064507965">"سرپرست دستگاه فعال شود؟"</string>
+    <string name="add_device_admin" msgid="7133327675884827091">"فعالسازی"</string>
+    <string name="device_admin_add_title" msgid="7705551449705676363">"سرپرست دستگاه"</string>
+    <string name="device_admin_warning" msgid="1149471041373876923">"فعالسازی این سرپرست به برنامه <xliff:g id="APP_NAME">%1$s</xliff:g> امکان می دهد تا عملکردهای زیر را انجام دهید:"</string>
+    <string name="device_admin_status" msgid="7169948053970923035">"این سرپرست فعال است و این برنامه را مجاز کرده است تا <xliff:g id="APP_NAME">%1$s</xliff:g> عملکردهای زیر را انجام دهد:"</string>
+    <string name="untitled_apn" msgid="1230060359198685513">"بدون عنوان"</string>
+    <string name="sound_category_sound_title" msgid="1488759370067953996">"کلی"</string>
+    <string name="sound_category_calls_title" msgid="3688531959256239012">"تماس های ورودی"</string>
+    <string name="sound_category_notification_title" msgid="3502115998790286943">"اعلان ها"</string>
+    <string name="sound_category_feedback_title" msgid="4399742321363475393">"بازخورد"</string>
+</resources>

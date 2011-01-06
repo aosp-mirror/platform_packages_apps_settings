@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 
+/*
+**
+** Copyright 2007 The Android Open Source Project
+**
+** Licensed under the Apache License, Version 2.0 (the "License");
+** you may not use this file except in compliance with the License.
+** You may obtain a copy of the License at
+**
+**     http://www.apache.org/licenses/LICENSE-2.0
+**
+** Unless required by applicable law or agreed to in writing, software
+** distributed under the License is distributed on an "AS IS" BASIS,
+** WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+** See the License for the specific language governing permissions and
+** limitations under the License.
+*/
+ -->
+
+<resources xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+  <string-array name="timezone_filters">
+    <item msgid="5296756001147094692">"أمريكا"</item>
+    <item msgid="3005562397632768392">"أوروبا"</item>
+    <item msgid="5696915123093701218">"إفريقيا"</item>
+    <item msgid="4439789052790868249">"آسيا"</item>
+    <item msgid="956915953069815961">"أستراليا"</item>
+    <item msgid="5345178126174698955">"المحيط الهادئ"</item>
+    <item msgid="8392017019801393511">"الكل"</item>
+  </string-array>
+  <string-array name="animations_entries">
+    <item msgid="207790005475613429">"ليس هناك رسوم متحركة"</item>
+    <item msgid="6291186755504776720">"بعض الرسوم المتحركة"</item>
+    <item msgid="3856065399819979491">"جميع الرسوم المتحركة"</item>
+  </string-array>
+  <string-array name="animations_summaries">
+    <item msgid="4569165952409350897">"لا يتم عرض أية رسوم متحركة للنافذة"</item>
+    <item msgid="4460915688877708508">"يتم عرض بعض الرسوم المتحركة للنافذة"</item>
+    <item msgid="488968798204105119">"يتم عرض جميع الرسوم المتحركة للنافذة"</item>
+  </string-array>
+  <string-array name="screen_timeout_entries">
+    <item msgid="3342301044271143016">"15 ثانية"</item>
+    <item msgid="8881760709354815449">"30 ثانية"</item>
+    <item msgid="7589406073232279088">"دقيقة واحدة"</item>
+    <item msgid="7001195990902244174">"2 دقائق"</item>
+    <item msgid="5721688686241190620">"10 دقائق"</item>
+    <item msgid="7156442995039264948">"30 دقيقة"</item>
+  </string-array>
+  <string-array name="tts_rate_entries">
+    <item msgid="6041212618892492920">"بطيء للغاية"</item>
+    <item msgid="2361722960903353554">"بطيء"</item>
+    <item msgid="1145554631248513562">"عادي"</item>
+    <item msgid="7553665153391107454">"سريع"</item>
+    <item msgid="2538100882620724753">"سريع جدًا"</item>
+  </string-array>
+  <string-array name="tts_pitch_entries">
+    <item msgid="7526050907652687351">"منخفضة جدًا"</item>
+    <item msgid="2692137425242433765">"منخفضة"</item>
+    <item msgid="3332408460740717754">"عادي"</item>
+    <item msgid="4907380534957572531">"مرتفعة"</item>
+    <item msgid="4699640516390840297">"عالية جدًا"</item>
+  </string-array>
+  <string-array name="tts_lang_entries">
+    <item msgid="478030717868306353">"الإنجليزية الأمريكية"</item>
+    <item msgid="5192284521396794598">"الإنجليزية البريطانية"</item>
+    <item msgid="3000262452051711991">"الفرنسية"</item>
+    <item msgid="9214080387341763401">"الألمانية"</item>
+    <item msgid="5972100016440094433">"الإيطالية"</item>
+    <item msgid="5811378076054402537">"الإسبانية"</item>
+  </string-array>
+  <string-array name="wifi_status">
+    <item msgid="1922181315419294640"></item>
+    <item msgid="8934131797783724664">"جارٍ الفحص..."</item>
+    <item msgid="8513729475867537913">"جارٍ الاتصال…"</item>
+    <item msgid="515055375277271756">"جارٍ المصادقة…"</item>
+    <item msgid="1943354004029184381">"جارٍ الحصول على عنوان IP…"</item>
+    <item msgid="4221763391123233270">"متصل"</item>
+    <item msgid="624838831631122137">"معلق"</item>
+    <item msgid="7979680559596111948">"جارٍ فصل الاتصال..."</item>
+    <item msgid="1634960474403853625">"غير متصل"</item>
+    <item msgid="746097431216080650">"غير ناجح"</item>
+  </string-array>
+  <string-array name="wifi_status_with_ssid">
+    <item msgid="7714855332363650812"></item>
+    <item msgid="8878186979715711006">"جارٍ الفحص..."</item>
+    <item msgid="355508996603873860">"جارٍ الاتصال بجهاز <xliff:g id="NETWORK_NAME">%1$s</xliff:g>…"</item>
+    <item msgid="554971459996405634">"جارٍ المصادقة مع <xliff:g id="NETWORK_NAME">%1$s</xliff:g>…"</item>
+    <item msgid="7928343808033020343">"جارٍ الحصول على عنوان IP من <xliff:g id="NETWORK_NAME">%1$s</xliff:g>…"</item>
+    <item msgid="8937994881315223448">"متصل بـ <xliff:g id="NETWORK_NAME">%1$s</xliff:g>"</item>
+    <item msgid="1330262655415760617">"معلق"</item>
+    <item msgid="7698638434317271902">"جارٍ قطع الاتصال بـ <xliff:g id="NETWORK_NAME">%1$s</xliff:g>…"</item>
+    <item msgid="197508606402264311">"غير متصل"</item>
+    <item msgid="8578370891960825148">"غير ناجح"</item>
+  </string-array>
+  <string-array name="wifi_security">
+    <item msgid="1435933968767043814">"فتح"</item>
+    <item msgid="6318432659048829665">"WEP"</item>
+    <item msgid="2966395706508338179">"WPA/WPA2 PSK"</item>
+    <item msgid="9098390198768443435">"802.1x EAP"</item>
+  </string-array>
+  <string-array name="wifi_eap_method">
+    <item msgid="1160193392455075561">"PEAP"</item>
+    <item msgid="7981731051382306293">"طبقة النقل الآمنة"</item>
+    <item msgid="2892994535305020162">"TTLS"</item>
+  </string-array>
+  <string-array name="wifi_signal">
+    <item msgid="2245412278046491293">"ضعيفة"</item>
+    <item msgid="5615082285463430971">"جيدة"</item>
+    <item msgid="3565079809875324621">"جيد"</item>
+    <item msgid="5702329417707689835">"ممتازة"</item>
+  </string-array>
+  <string-array name="wifi_sleep_policy_entries">
+    <item msgid="3804733751095821976">"عند إيقاف الشاشة"</item>
+    <item msgid="1549288661423279207">"عدم تنفيذ ذلك مطلقًا أثناء التوصيل"</item>
+    <item msgid="1986753720941888596">"مطلقًا"</item>
+  </string-array>
+  <string-array name="usage_stats_display_order_types">
+    <item msgid="9077371706468756228">"وقت الاستخدام"</item>
+    <item msgid="1908750532762193304">"عدد عمليات التشغيل"</item>
+    <item msgid="1213951670006606353">"اسم التطبيق"</item>
+  </string-array>
+  <string-array name="wifi_eap_entries">
+    <item msgid="8615575908717909498">"PEAP"</item>
+    <item msgid="8667872640594311615">"طبقة النقل الآمنة"</item>
+    <item msgid="7182812872984827322">"TTLS"</item>
+  </string-array>
+  <string-array name="wifi_phase2_entries">
+    <item msgid="1818786254010764570">"لا شيء"</item>
+    <item msgid="6189918678874123056">"بروتوكول مصادقة كلمات المرور"</item>
+    <item msgid="1524112260493662517">"MSCHAP"</item>
+    <item msgid="5923246669412752932">"MSCHAPV2"</item>
+    <item msgid="8651992560135239389">"GTC"</item>
+  </string-array>
+  <string-array name="emergency_tone_entries">
+    <item msgid="5165439859689033665">"إيقاف"</item>
+    <item msgid="3165868966179561687">"تنبيه"</item>
+    <item msgid="6038758039030476855">"اهتزاز"</item>
+  </string-array>
+  <string-array name="apn_auth_entries">
+    <item msgid="3856896061242872146">"لا شيء"</item>
+    <item msgid="5756844015743664882">"بروتوكول مصادقة كلمات المرور"</item>
+    <item msgid="535934025797984365">"بروتوكول CHAP"</item>
+    <item msgid="8383098660619805783">"بروتوكول مصادقة كلمات المرور أو بروتوكول CHAP"</item>
+  </string-array>
+  <string-array name="app_install_location_entries">
+    <item msgid="8151497958991952759">"سعة تخزين الجهاز الداخلية"</item>
+    <item msgid="3738430123799803530">"بطاقة SD قابلة للإزالة"</item>
+    <item msgid="4498124044785815005">"ترك القرار للنظام"</item>
+  </string-array>
+  <string-array name="vibrate_entries">
+    <item msgid="3388952299521009213">"دومًا"</item>
+    <item msgid="6293147072807231256">"مطلقًا"</item>
+    <item msgid="1276641209451816572">"فقط في الوضع صامت"</item>
+    <item msgid="8418930333779132418">"فقط في الوضع صامت"</item>
+  </string-array>
+</resources>
