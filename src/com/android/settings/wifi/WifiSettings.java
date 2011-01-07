@@ -168,43 +168,47 @@ public class WifiSettings extends SettingsPreferenceFragment
         // state, start it off in the right state
         mEnableNextOnConnection = intent.getBooleanExtra(EXTRA_ENABLE_NEXT_ON_CONNECT, false);
 
-        if (mEnableNextOnConnection) {
-            if (mEnableNextOnConnection && hasNextButton()) {
-                final ConnectivityManager connectivity = (ConnectivityManager)
-                        getActivity().getSystemService(Context.CONNECTIVITY_SERVICE);
-                if (connectivity != null) {
-                    NetworkInfo info = connectivity.getNetworkInfo(ConnectivityManager.TYPE_WIFI);
-                    changeNextButtonState(info.isConnected());
+        // Avoid re-adding on returning from an overlapping activity/fragment.
+        if (getPreferenceScreen() == null || getPreferenceScreen().getPreferenceCount() < 2) {
+            if (mEnableNextOnConnection) {
+                if (mEnableNextOnConnection && hasNextButton()) {
+                    final ConnectivityManager connectivity = (ConnectivityManager)
+                            getActivity().getSystemService(Context.CONNECTIVITY_SERVICE);
+                    if (connectivity != null) {
+                        NetworkInfo info = connectivity.getNetworkInfo(
+                                ConnectivityManager.TYPE_WIFI);
+                        changeNextButtonState(info.isConnected());
+                    }
                 }
             }
-        }
 
-        if (mInXlSetupWizard) {
-            addPreferencesFromResource(R.xml.wifi_access_points_for_wifi_setup_xl);
-        } else if (intent.getBooleanExtra("only_access_points", false)) {
-            addPreferencesFromResource(R.xml.wifi_access_points);
-        } else {
-            addPreferencesFromResource(R.xml.wifi_settings);
-            mWifiEnabler = new WifiEnabler(activity,
-                    (CheckBoxPreference) findPreference("enable_wifi"));
-            mNotifyOpenNetworks =
-                    (CheckBoxPreference) findPreference("notify_open_networks");
-            mNotifyOpenNetworks.setChecked(Secure.getInt(getContentResolver(),
-                    Secure.WIFI_NETWORKS_AVAILABLE_NOTIFICATION_ON, 0) == 1);
+            if (mInXlSetupWizard) {
+                addPreferencesFromResource(R.xml.wifi_access_points_for_wifi_setup_xl);
+            } else if (intent.getBooleanExtra("only_access_points", false)) {
+                addPreferencesFromResource(R.xml.wifi_access_points);
+            } else {
+                addPreferencesFromResource(R.xml.wifi_settings);
+                mWifiEnabler = new WifiEnabler(activity,
+                        (CheckBoxPreference) findPreference("enable_wifi"));
+                mNotifyOpenNetworks =
+                        (CheckBoxPreference) findPreference("notify_open_networks");
+                mNotifyOpenNetworks.setChecked(Secure.getInt(getContentResolver(),
+                        Secure.WIFI_NETWORKS_AVAILABLE_NOTIFICATION_ON, 0) == 1);
+            }
+            // This may be either ProgressCategory or AccessPointCategoryForXL.
+            final ProgressCategoryBase preference =
+                    (ProgressCategoryBase) findPreference("access_points");
+            mAccessPoints = preference;
+            mAccessPoints.setOrderingAsAdded(false);
+            mAddNetwork = findPreference("add_network");
+
+            registerForContextMenu(getListView());
+            setHasOptionsMenu(true);
         }
 
         // After confirming PreferenceScreen is available, we call super.
         super.onActivityCreated(savedInstanceState);
 
-        // This may be either ProgressCategory or AccessPointCategoryForXL.
-        final ProgressCategoryBase preference =
-                (ProgressCategoryBase) findPreference("access_points");
-        mAccessPoints = preference;
-        mAccessPoints.setOrderingAsAdded(false);
-        mAddNetwork = findPreference("add_network");
-
-        registerForContextMenu(getListView());
-        setHasOptionsMenu(true);
     }
 
     @Override
