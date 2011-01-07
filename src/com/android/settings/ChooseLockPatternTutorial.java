@@ -44,6 +44,13 @@ public class ChooseLockPatternTutorial extends PreferenceActivity {
         return modIntent;
     }
 
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        CharSequence msg = getText(R.string.lockpassword_choose_your_pattern_header);
+        showBreadCrumbs(msg, msg);
+    }
+
     public static class ChooseLockPatternTutorialFragment extends Fragment
             implements View.OnClickListener {
         private View mNextButton;

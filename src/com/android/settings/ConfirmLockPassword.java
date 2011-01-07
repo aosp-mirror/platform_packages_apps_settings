@@ -53,6 +53,8 @@ public class ConfirmLockPassword extends PreferenceActivity {
         //getWindow().setFlags(WindowManager.LayoutParams.FLAG_ALT_FOCUSABLE_IM,
                 //WindowManager.LayoutParams.FLAG_ALT_FOCUSABLE_IM);
         super.onCreate(savedInstanceState);
+        CharSequence msg = getText(R.string.lockpassword_confirm_your_password_header);
+        showBreadCrumbs(msg, msg);
     }
 
     public static class ConfirmLockPasswordFragment extends Fragment implements OnClickListener,

@@ -62,6 +62,13 @@ public class ConfirmLockPattern extends PreferenceActivity {
     }
 
     @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        CharSequence msg = getText(R.string.lockpassword_confirm_your_pattern_header);
+        showBreadCrumbs(msg, msg);
+    }
+
+    @Override
     public Intent getIntent() {
         Intent modIntent = new Intent(super.getIntent());
         modIntent.putExtra(EXTRA_SHOW_FRAGMENT, ConfirmLockPatternFragment.class.getName());
