@@ -161,7 +161,7 @@ public class AccessibilitySettings extends SettingsPreferenceFragment implements
             if (serviceState == 1) {
                 mToggleAccessibilityCheckBox.setChecked(true);
                 if (savedInstanceState != null) {
-                    restoreInstanceStrate(savedInstanceState);
+                    restoreInstanceState(savedInstanceState);
                 }
             } else {
                 setAccessibilityServicePreferencesState(false);
@@ -200,7 +200,7 @@ public class AccessibilitySettings extends SettingsPreferenceFragment implements
     /**
      * Restores the instance state from <code>savedInstanceState</code>.
      */
-    private void restoreInstanceStrate(Bundle savedInstanceState) {
+    private void restoreInstanceState(Bundle savedInstanceState) {
         String key = savedInstanceState.getString(KEY_TOGGLE_ACCESSIBILITY_SERVICE_CHECKBOX);
         if (key != null) {
             Preference preference = findPreference(key);
@@ -230,6 +230,8 @@ public class AccessibilitySettings extends SettingsPreferenceFragment implements
             Preference pref = mAccessibilityServicesCategory.getPreference(i);
             pref.setEnabled(isEnabled);
         }
+
+        mToggleScriptInjectionCheckBox.setEnabled(isEnabled);
     }
 
     @Override
