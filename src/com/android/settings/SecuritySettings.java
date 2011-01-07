@@ -32,8 +32,11 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.location.LocationManager;
 import android.os.Bundle;
+import android.os.IBinder;
+import android.os.ServiceManager;
 import android.os.SystemProperties;
 import android.os.Vibrator;
+import android.os.storage.IMountService;
 import android.preference.CheckBoxPreference;
 import android.preference.ListPreference;
 import android.preference.Preference;
@@ -61,6 +64,8 @@ import java.util.Observer;
 public class SecuritySettings extends SettingsPreferenceFragment
         implements OnPreferenceChangeListener {
     private static final String KEY_UNLOCK_SET_OR_CHANGE = "unlock_set_or_change";
+
+    private static final String KEY_ENCRYPTION = "encryption";
 
     // Lock Settings
     private static final String PACKAGE = "com.android.settings";
@@ -184,6 +189,12 @@ public class SecuritySettings extends SettingsPreferenceFragment
         }
 
         PreferenceManager pm = getPreferenceManager();
+        
+        // Add options for device encryption
+        // TODO: It still needs to be determined how a device specifies that it supports
+        // encryption. That mechanism needs to be checked before adding the following code
+        
+        addPreferencesFromResource(R.xml.security_settings_encryption);
 
         // Add options for lock/unlock screen
         int resid = 0;
@@ -407,6 +418,8 @@ public class SecuritySettings extends SettingsPreferenceFragment
         } else if (preference == mAssistedGps) {
             Settings.Secure.putInt(getContentResolver(), Settings.Secure.ASSISTED_GPS_ENABLED,
                     mAssistedGps.isChecked() ? 1 : 0);
+        } else if (KEY_ENCRYPTION.equals(key)) {
+            new Encryption().showPasswordDialog();
         } else {
             // If we didn't handle it, let preferences handle it.
             return super.onPreferenceTreeClick(preferenceScreen, preference);
@@ -443,6 +456,89 @@ public class SecuritySettings extends SettingsPreferenceFragment
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         createPreferenceHierarchy();
+    }
+
+    private class Encryption implements DialogInterface.OnClickListener,
+            DialogInterface.OnDismissListener {
+
+        private boolean mSubmit;
+
+        public void showPasswordDialog() {
+            View view = View.inflate(SecuritySettings.this.getActivity(),
+                    R.layout.credentials_password_dialog, null);
+
+            Dialog dialog = new AlertDialog.Builder(SecuritySettings.this.getActivity())
+                    .setView(view).setTitle(R.string.credentials_set_password)
+                    .setPositiveButton(android.R.string.ok, this)
+                    .setNegativeButton(android.R.string.cancel, this).create();
+            dialog.setOnDismissListener(this);
+            dialog.show();
+        }
+
+        public void onClick(DialogInterface dialog, int button) {
+            if (button == DialogInterface.BUTTON_POSITIVE) {
+                mSubmit = true;
+            }
+        }
+
+        public void onDismiss(DialogInterface dialog) {
+            if (mSubmit) {
+                mSubmit = false;
+                if (!checkPassword((Dialog) dialog)) {
+                    ((Dialog) dialog).show();
+                    return;
+                }
+            }
+        }
+
+        // Return true if there is no error.
+        private boolean checkPassword(Dialog dialog) {
+            String newPassword = getText(dialog, R.id.new_password);
+            String confirmPassword = getText(dialog, R.id.confirm_password);
+
+            if (newPassword == null || confirmPassword == null || newPassword.length() == 0
+                    || confirmPassword.length() == 0) {
+                showError(dialog, R.string.credentials_passwords_empty);
+            } else if (!newPassword.equals(confirmPassword)) {
+                showError(dialog, R.string.credentials_passwords_mismatch);
+            } else {
+
+                IBinder service = ServiceManager.getService("mount");
+                if (service == null) {
+                    return false;
+                }
+
+                IMountService mountService = IMountService.Stub.asInterface(service);
+                try {
+                    mountService.encryptStorage(newPassword);
+                } catch (Exception e) {
+                    Log.e(TAG, "Error while encrypting...", e);
+                }
+
+                return true;
+            }
+
+            return false;
+        }
+
+        private String getText(Dialog dialog, int viewId) {
+            TextView view = (TextView) dialog.findViewById(viewId);
+            return (view == null || view.getVisibility() == View.GONE) ? null : view.getText()
+                    .toString();
+        }
+
+        private void showError(Dialog dialog, int stringId, Object... formatArgs) {
+            TextView view = (TextView) dialog.findViewById(R.id.error);
+            if (view != null) {
+                if (formatArgs == null || formatArgs.length == 0) {
+                    view.setText(stringId);
+                } else {
+                    view.setText(dialog.getContext().getString(stringId, formatArgs));
+                }
+                view.setVisibility(View.VISIBLE);
+            }
+        }
+
     }
 
     private class CredentialStorage implements DialogInterface.OnClickListener,
