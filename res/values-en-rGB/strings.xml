@@ -1,0 +1,1162 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--  Copyright (C) 2007 The Android Open Source Project
+
+     Licensed under the Apache License, Version 2.0 (the "License");
+     you may not use this file except in compliance with the License.
+     You may obtain a copy of the License at
+
+          http://www.apache.org/licenses/LICENSE-2.0
+
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+ -->
+
+<resources xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <string name="yes" msgid="4676390750360727396">"Yes"</string>
+    <string name="no" msgid="6731231425810196216">"No"</string>
+    <string name="device_info_default" msgid="7847265875578739287">"Unknown"</string>
+    <string name="turn_on_radio" msgid="8706561489788373676">"Turn on radio"</string>
+    <string name="turn_off_radio" msgid="1820294552893884115">"Turn off radio"</string>
+    <string name="radioInfo_menu_viewADN" msgid="8743377494429930831">"View SIM address book"</string>
+    <string name="radioInfo_menu_viewFDN" msgid="7934301566925610318">"View Fixed Dialling Numbers"</string>
+    <string name="radioInfo_menu_viewSDN" msgid="7130280686244955669">"View Service Dialling Numbers"</string>
+    <string name="radioInfo_menu_getPDP" msgid="560610293888406317">"Get PDP list"</string>
+    <string name="radioInfo_service_in" msgid="1915416319177520020">"In service"</string>
+    <string name="radioInfo_service_out" msgid="5238736759641916278">"Out of service"</string>
+    <string name="radioInfo_service_emergency" msgid="2485604591272668370">"Emergency calls only"</string>
+    <string name="radioInfo_service_off" msgid="1434084741785525415">"Radio off"</string>
+    <string name="radioInfo_roaming_in" msgid="9045363884600341051">"Roaming"</string>
+    <string name="radioInfo_roaming_not" msgid="2851853244069662307">"Not roaming"</string>
+    <string name="radioInfo_phone_idle" msgid="7489244938838742820">"Idle"</string>
+    <string name="radioInfo_phone_ringing" msgid="4883724645684297895">"Ringing"</string>
+    <string name="radioInfo_phone_offhook" msgid="4174402846862780998">"Call in progress"</string>
+    <string name="radioInfo_data_disconnected" msgid="1959735267890719418">"Disconnected"</string>
+    <string name="radioInfo_data_connecting" msgid="8404571440697917823">"Connecting"</string>
+    <string name="radioInfo_data_connected" msgid="7074301157399238697">"Connected"</string>
+    <string name="radioInfo_data_suspended" msgid="5315325487890334196">"Suspended"</string>
+    <string name="radioInfo_unknown" msgid="737385314432468266">"unknown"</string>
+    <string name="radioInfo_display_packets" msgid="8654359809877290639">"pkts"</string>
+    <string name="radioInfo_display_bytes" msgid="4018206969492931883">"bytes"</string>
+    <string name="radioInfo_display_dbm" msgid="3621221793699882781">"dBm"</string>
+    <string name="radioInfo_display_asu" msgid="1422248392727818082">"asu"</string>
+    <string name="radioInfo_lac" msgid="8415219164758307156">"LAC"</string>
+    <string name="radioInfo_cid" msgid="4362599198392643138">"CID"</string>
+    <string name="sdcard_unmount" product="nosdcard" msgid="6325292633327972272">"Unmount USB storage"</string>
+    <string name="sdcard_unmount" product="default" msgid="3364184561355611897">"Unmount SD card"</string>
+    <string name="sdcard_format" product="nosdcard" msgid="6285310523155166716">"Erase USB storage"</string>
+    <string name="sdcard_format" product="default" msgid="6713185532039187532">"Erase SD card"</string>
+    <string name="small_font" msgid="2295331917424072635">"Small"</string>
+    <string name="medium_font" msgid="2068475425515133701">"Medium"</string>
+    <string name="large_font" msgid="599055175160971446">"Large"</string>
+    <string name="font_size_save" msgid="3450855718056759095">"OK"</string>
+    <string name="sdcard_setting" product="nosdcard" msgid="8281011784066476192">"USB storage"</string>
+    <string name="sdcard_setting" product="default" msgid="5922637503871474866">"SD card"</string>
+    <string name="battery_info_status_label" msgid="8109155295509700309">"Battery status:"</string>
+    <string name="battery_info_power_label" msgid="7465140230991349382">"Power plug:"</string>
+    <string name="battery_info_scale_label" msgid="3649763192389778437">"Battery scale:"</string>
+    <string name="battery_info_level_label" msgid="8706526709307788737">"Battery level:"</string>
+    <string name="battery_info_health_label" msgid="6416051542741886958">"Battery health:"</string>
+    <string name="battery_info_technology_label" msgid="788304533220748681">"Battery technology:"</string>
+    <string name="battery_info_voltage_label" msgid="8971764146757637863">"Battery voltage:"</string>
+    <string name="battery_info_voltage_units" msgid="8658490792208288107">"mV"</string>
+    <string name="battery_info_temperature_label" msgid="1968383098818648037">"Battery temperature:"</string>
+    <string name="battery_info_temperature_units" msgid="9098950587249987550">"° C"</string>
+    <string name="battery_info_uptime" msgid="5548545143573527992">"Time since boot:"</string>
+    <string name="battery_info_awake_battery" msgid="2557725975486185849">"Awake time on battery:"</string>
+    <string name="battery_info_awake_plugged" msgid="176716874713478188">"Awake time when charging:"</string>
+    <string name="battery_info_screen_on" msgid="376277447175613889">"Screen ON time:"</string>
+    <string name="battery_info_status_unknown" msgid="196130600938058547">"Unknown"</string>
+    <string name="battery_info_status_charging" msgid="1705179948350365604">"Charging"</string>
+    <string name="battery_info_status_charging_ac" msgid="5874340256342956252">"(AC)"</string>
+    <string name="battery_info_status_charging_usb" msgid="4059070156126770959">"(USB)"</string>
+    <string name="battery_info_status_discharging" msgid="6222697503392774475">"Discharging"</string>
+    <string name="battery_info_status_not_charging" msgid="2820070506621483576">"Not charging"</string>
+    <string name="battery_info_status_full" msgid="2824614753861462808">"Full"</string>
+    <string name="battery_info_power_unplugged" msgid="5987246575519551081">"Unplugged"</string>
+    <string name="battery_info_power_ac" msgid="6808516193001604634">"AC"</string>
+    <string name="battery_info_power_usb" msgid="8012931702516331797">"USB"</string>
+    <string name="battery_info_power_ac_usb" msgid="6777734146838328688">"AC+USB"</string>
+    <string name="battery_info_power_unknown" msgid="7344115502868899881">"Unknown"</string>
+    <string name="battery_info_health_unknown" msgid="5664295556921944255">"Unknown"</string>
+    <string name="battery_info_health_good" msgid="8070356565806711806">"Good"</string>
+    <string name="battery_info_health_overheat" msgid="8442959549291368806">"Overheat"</string>
+    <string name="battery_info_health_dead" msgid="1725917445762829059">"Dead"</string>
+    <string name="battery_info_health_over_voltage" msgid="2420269351664490121">"Over voltage"</string>
+    <string name="battery_info_health_unspecified_failure" msgid="6347021103185471590">"Unknown error"</string>
+    <string name="bluetooth" msgid="5549625000628014477">"Bluetooth"</string>
+    <string name="bluetooth_visibility" msgid="2930835434091839916">"Discoverable"</string>
+    <string name="bluetooth_is_discoverable" msgid="1205694503775884903">"Discoverable for <xliff:g id="DISCOVERABLE_TIME_PERIOD">%1$s</xliff:g> seconds…"</string>
+    <string name="bluetooth_not_discoverable" msgid="128269993123955177">"Make device discoverable"</string>
+    <string name="bluetooth_lock_voice_dialing" msgid="3139322992062086225">"Lock voice dialling"</string>
+    <string name="bluetooth_lock_voice_dialing_summary" msgid="4741338867496787042">"Prevent use of the Bluetooth dialler when the screen is locked"</string>
+    <string name="bluetooth_devices" msgid="1886018064039454227">"Bluetooth devices"</string>
+    <string name="bluetooth_device_name" msgid="8415828355207423800">"Device name"</string>
+    <string name="bluetooth_name_not_set" msgid="2653752006416027426">"No name set, using account name"</string>
+    <string name="bluetooth_scan_for_devices" msgid="9214184305566815727">"Scan for devices"</string>
+    <string name="bluetooth_disconnect_blank" msgid="8102076504922229274">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> will be disconnected."</string>
+    <string name="bluetooth_connected" msgid="6038755206916626419">"Connected"</string>
+    <string name="bluetooth_disconnected" msgid="6557104142667339895">"Disconnected"</string>
+    <string name="bluetooth_disconnecting" msgid="8913264760027764974">"Disconnecting…"</string>
+    <string name="bluetooth_connecting" msgid="8555009514614320497">"Connecting…"</string>
+    <string name="bluetooth_unknown" msgid="644716244548801421"></string>
+    <string name="bluetooth_not_connected" msgid="3389882907500605937">"Pair with this device"</string>
+    <string name="bluetooth_pairing" msgid="1426882272690346242">"Pairing…"</string>
+    <string name="bluetooth_paired" msgid="1247541089000057726">"Paired, but not connected"</string>
+    <string name="bluetooth_device" msgid="6873461446424952003">"handsfree/headset"</string>
+    <string name="progress_scanning" msgid="3760897655335759141">"Scanning"</string>
+    <string name="bluetooth_notif_ticker" msgid="4726721390078512173">"Bluetooth pairing request"</string>
+    <string name="bluetooth_notif_title" msgid="2485175521845371514">"Pairing request"</string>
+    <string name="bluetooth_notif_message" msgid="5381418499788668724">"Select to pair with "</string>
+    <string name="device_picker" msgid="8721012448931226323">"Bluetooth device picker"</string>
+    <string name="bluetooth_permission_request" msgid="1523129741266262748">"Bluetooth permission request"</string>
+    <string name="bluetooth_ask_enablement" msgid="2342558978033892004">"An application on your phone is requesting permission to turn on Bluetooth. Do you want to do this?"</string>
+    <string name="bluetooth_ask_discovery" msgid="669870705606180872">"An application on your phone is requesting permission to make your phone discoverable by other Bluetooth devices for <xliff:g id="TIMEOUT">%1$d</xliff:g> seconds. Do you want to do this?"</string>
+    <string name="bluetooth_ask_enablement_and_discovery" msgid="7220210326619399542">"An application on your phone is requesting permission to turn on Bluetooth and make your phone discoverable by other devices for <xliff:g id="TIMEOUT">%1$d</xliff:g> seconds. Do you want to do this?"</string>
+    <string name="bluetooth_turning_on" msgid="3107102168379705771">"Turning on Bluetooth…"</string>
+    <string name="date_and_time" msgid="4114084177056654663">"Date &amp; time settings"</string>
+    <string name="date_time_12_hour_sample" msgid="3259617262618020574">"1:00 P.M."</string>
+    <string name="date_time_24_hour_sample" msgid="8916857570746212357">"13:00"</string>
+    <string name="date_time_changeTime_text" msgid="7037437020000867740">"Change time"</string>
+    <string name="date_time_changeDate_text" msgid="5259762626498028057">"Date"</string>
+    <string name="choose_timezone" msgid="7762866468013985022">"Select time zone"</string>
+    <string name="normal_date_format" msgid="1982904221918374153">"Normal (<xliff:g id="DATE">%s</xliff:g>)"</string>
+    <string name="display_preview_label" msgid="1127597250917274792">"Preview:"</string>
+    <string name="display_font_size_label" msgid="8941851418397475389">"Font size:"</string>
+    <!-- no translation found for intent_sender_data_label (6332324780477289261) -->
+    <skip />
+    <string name="intent_sender_sendbroadcast_text" msgid="1415735148895872715">"Send <xliff:g id="BROADCAST">broadcast</xliff:g>"</string>
+    <string name="intent_sender_action_label" msgid="616458370005452389">"<xliff:g id="ACTION">Action</xliff:g>:"</string>
+    <string name="intent_sender_startactivity_text" msgid="5080516029580421895">"Start <xliff:g id="ACTIVITY">activity</xliff:g>"</string>
+    <string name="intent_sender_resource_label" msgid="6963659726895482829">"<xliff:g id="RESOURCE">Resource</xliff:g>:"</string>
+    <string name="intent_sender_account_label" msgid="465210404475603404">"Account:"</string>
+    <string name="proxy_clear_text" msgid="5555400754952012657">"Clear"</string>
+    <string name="proxy_port_label" msgid="2623639656638472491">"Port"</string>
+    <string name="proxy_defaultView_text" msgid="6387985519141433291">"Restore defaults"</string>
+    <string name="proxy_action_text" msgid="477348175123635416">"Save"</string>
+    <string name="proxy_hostname_label" msgid="7531298584350977540">"Host name"</string>
+    <string name="proxy_error" msgid="8926675299638611451">"Attention"</string>
+    <string name="proxy_error_dismiss" msgid="4993171795485460060">"OK"</string>
+    <string name="proxy_error_invalid_host" msgid="9120776460063182119">"The host name that you typed is not valid."</string>
+    <string name="proxy_error_empty_port" msgid="3525734169948795417">"You must complete the port field."</string>
+    <string name="proxy_error_empty_host_set_port" msgid="2451694104858226781">"The port field must be empty if the host field is empty."</string>
+    <string name="proxy_error_invalid_port" msgid="1816315605424943626">"The port that you typed is not valid."</string>
+    <string name="radio_info_signal_location_label" msgid="16475158265551708">"Location:"</string>
+    <string name="radio_info_neighboring_location_label" msgid="2385625674055934880">"Neighbouring CID:"</string>
+    <string name="radio_info_data_attempts_label" msgid="1731106244577323381">"Data attempts:"</string>
+    <string name="radio_info_gprs_service_label" msgid="2331818110375395364">"GPRS service:"</string>
+    <string name="radio_info_roaming_label" msgid="6141505430275138647">"Roaming:"</string>
+    <string name="radio_info_imei_label" msgid="1220524224732944192">"IMEI:"</string>
+    <string name="radio_info_call_redirect_label" msgid="1654674226961476872">"Call redirect:"</string>
+    <string name="radio_info_ppp_resets_label" msgid="3241667824729310546">"Number of PPP reset since boot:"</string>
+    <string name="radio_info_gsm_disconnects_label" msgid="1683069665736339820">"GSM disconnects:"</string>
+    <string name="radio_info_current_network_label" msgid="3256402602440102610">"Current network:"</string>
+    <string name="radio_info_data_successes_label" msgid="4417894113689054945">"Data successes:"</string>
+    <string name="radio_info_ppp_received_label" msgid="3345184342444878849">"PPP received:"</string>
+    <string name="radio_info_gsm_service_label" msgid="2082332114596916985">"GSM service:"</string>
+    <string name="radio_info_signal_strength_label" msgid="1931937920896925766">"Signal strength:"</string>
+    <string name="radio_info_call_status_label" msgid="4896238900685510883">"Call status:"</string>
+    <string name="radio_info_ppp_sent_label" msgid="5009102250704375687">"PPP sent:"</string>
+    <string name="radio_info_radio_resets_label" msgid="9211343458143291617">"Radio resets:"</string>
+    <string name="radio_info_message_waiting_label" msgid="6981842420058672207">"Message waiting:"</string>
+    <string name="radio_info_phone_number_label" msgid="7192944627907412169">"Phone number:"</string>
+    <string name="radio_info_band_mode_label" msgid="441469694142042022">"Select radio band"</string>
+    <string name="radio_info_network_type_label" msgid="3706382548257257987">"Network type:"</string>
+    <string name="radio_info_set_perferred_label" msgid="9039200405863503267">"Set preferred network type:"</string>
+    <string name="radio_info_ping_ipaddr" msgid="498747917793263530">"Ping IpAddr:"</string>
+    <string name="radio_info_ping_hostname" msgid="3054888474808217853">"Ping Host Name (www.google.co.uk):"</string>
+    <string name="radio_info_http_client_test" msgid="5733604021077701555">"HTTP Client test:"</string>
+    <string name="ping_test_label" msgid="7255376471490860631">"Run ping test"</string>
+    <string name="radio_info_smsc_label" msgid="6399460520126501354">"SMSC:"</string>
+    <string name="radio_info_smsc_update_label" msgid="7258686760358791539">"Update"</string>
+    <string name="radio_info_smsc_refresh_label" msgid="6902302130315125102">"Refresh"</string>
+    <string name="radio_info_toggle_dns_check_label" msgid="8292252930563286858">"Toggle DNS check"</string>
+    <string name="oem_radio_info_label" msgid="6163141792477958941">"OEM-specific Info/Settings"</string>
+    <string name="band_mode_title" msgid="954174198903776205">"Set GSM/UMTS band"</string>
+    <string name="band_mode_loading" msgid="548764766363847336">"Loading band list…"</string>
+    <string name="band_mode_set" msgid="5730560180249458484">"Set"</string>
+    <string name="band_mode_failed" msgid="1495968863884716379">"Unsuccessful"</string>
+    <string name="band_mode_succeeded" msgid="2701016190055887575">"Successful"</string>
+    <string name="sdcard_changes_instructions" msgid="1364712901180556244">"Changes take effect when USB cable is reconnected"</string>
+    <string name="sdcard_settings_screen_mass_storage_text" msgid="3741220147296482474">"Enable USB mass storage"</string>
+    <string name="sdcard_settings_total_bytes_label" msgid="9184160745785062144">"Total bytes:"</string>
+    <string name="sdcard_settings_not_present_status" product="nosdcard" msgid="2902787003418172125">"USB storage not mounted"</string>
+    <string name="sdcard_settings_not_present_status" product="default" msgid="6666688653496819947">"No SD card"</string>
+    <string name="sdcard_settings_available_bytes_label" msgid="763232429899373001">"Available bytes:"</string>
+    <string name="sdcard_settings_mass_storage_status" product="nosdcard" msgid="2736378870889777857">"USB storage is being used as a mass storage device"</string>
+    <string name="sdcard_settings_mass_storage_status" product="default" msgid="4786433969313661655">"SD card is being used as a mass storage device"</string>
+    <string name="sdcard_settings_unmounted_status" product="nosdcard" msgid="7503300818792750913">"It is now safe to remove the USB storage"</string>
+    <string name="sdcard_settings_unmounted_status" product="default" msgid="3812022095683863087">"It is now safe to remove the SD card"</string>
+    <string name="sdcard_settings_bad_removal_status" product="nosdcard" msgid="7761390725880773697">"USB storage was removed while still in use!"</string>
+    <string name="sdcard_settings_bad_removal_status" product="default" msgid="5145797653495907970">"SD card was removed while still in use!"</string>
+    <string name="sdcard_settings_used_bytes_label" msgid="8820289486001170836">"Used bytes:"</string>
+    <string name="sdcard_settings_scanning_status" product="nosdcard" msgid="7503429447676219564">"Scanning USB storage for media…"</string>
+    <string name="sdcard_settings_scanning_status" product="default" msgid="2763464949274455656">"Scanning SD card for media…"</string>
+    <string name="sdcard_settings_read_only_status" product="nosdcard" msgid="3771783090621312312">"USB storage mounted read-only"</string>
+    <string name="sdcard_settings_read_only_status" product="default" msgid="5706115860484118911">"SD card mounted read-only"</string>
+    <string name="next_label" msgid="4693520878012668114">"Next"</string>
+    <string name="language_picker_title" msgid="4034157617842965844">"Locale"</string>
+    <string name="select_your_language" msgid="1146235168951906084">"Select your language"</string>
+    <string name="activity_picker_label" msgid="4910700713930693329">"Select activity"</string>
+    <string name="device_info_label" msgid="6551553813651711205">"Device info"</string>
+    <string name="battery_info_label" msgid="4132685016148679403">"Battery info"</string>
+    <string name="display_label" msgid="7403874003169865762">"Display"</string>
+    <string name="phone_info_label" msgid="2127552523124277664">"Phone info"</string>
+    <string name="sd_card_settings_label" product="nosdcard" msgid="8101475181301178428">"USB storage"</string>
+    <string name="sd_card_settings_label" product="default" msgid="5743100901106177102">"SD card"</string>
+    <string name="proxy_settings_label" msgid="3271174136184391743">"Proxy settings"</string>
+    <string name="cancel" msgid="6859253417269739139">"Cancel"</string>
+    <string name="settings_label" msgid="1626402585530130914">"Settings"</string>
+    <string name="settings_label_launcher" msgid="8344735489639482340">"Settings"</string>
+    <string name="settings_shortcut" msgid="3672145147925639262">"Settings"</string>
+    <string name="airplane_mode" msgid="8837269988154128601">"Airplane mode"</string>
+    <string name="airplane_mode_summary" msgid="3154817401368780988">"Disable all wireless connections"</string>
+    <string name="airplane_mode_turning_on" msgid="8871739222526957255">"Disabling wireless connections…"</string>
+    <string name="airplane_mode_turning_off" msgid="3393168549611505996">"Enabling wireless connections…"</string>
+    <string name="radio_controls_title" msgid="5868688473587168882">"Wireless &amp; networks"</string>
+    <string name="wireless_networks_settings_title" msgid="149274247949769551">"Wireless &amp; network settings"</string>
+    <string name="radio_controls_summary" msgid="2998818677094465517">"Manage Wi-Fi, Bluetooth, airplane mode, mobile networks &amp; VPNs"</string>
+    <string name="roaming" msgid="3596055926335478572">"Data roaming"</string>
+    <string name="roaming_enable" msgid="3737380951525303961">"Connect to data services when roaming"</string>
+    <string name="roaming_disable" msgid="1295279574370898378">"Connect to data services when roaming"</string>
+    <string name="roaming_reenable_message" msgid="9141007271031717369">"You have lost data connectivity because you left your home network with data roaming turned off."</string>
+    <string name="roaming_turn_it_on_button" msgid="4387601818162120589">"Turn it on"</string>
+    <string name="roaming_warning" msgid="1269870211689178511">"Allow data roaming? You may incur significant roaming charges!"</string>
+    <string name="roaming_reenable_title" msgid="7626425894611573131">"Attention"</string>
+    <string name="networks" msgid="6333316876545927039">"Operator selection"</string>
+    <string name="sum_carrier_select" msgid="6648929373316748020">"Select a network operator"</string>
+    <string name="date_and_time_settings_title" msgid="3350640463596716780">"Date &amp; time"</string>
+    <string name="date_and_time_settings_summary" msgid="2435705040205950381">"Set date, time, time zone &amp; formats"</string>
+    <string name="date_time_auto" msgid="3086083265745944725">"Automatic"</string>
+    <string name="date_time_auto_summaryOn" msgid="9034585614665299846">"Use network-provided values"</string>
+    <string name="date_time_auto_summaryOff" msgid="3900356736797266448">"Use network-provided values"</string>
+    <string name="date_time_24hour" msgid="1193032284921000063">"Use 24-hour format"</string>
+    <string name="date_time_set_time" msgid="5716856602742530696">"Set time"</string>
+    <string name="date_time_set_timezone" msgid="5045627174274377814">"Select time zone"</string>
+    <string name="date_time_set_date" msgid="7021491668550232105">"Set date"</string>
+    <string name="date_time_date_format" msgid="436706100255870967">"Select date format"</string>
+    <string name="zone_list_menu_sort_alphabetically" msgid="5683377702671088588">"Sort alphabetically"</string>
+    <string name="zone_list_menu_sort_by_timezone" msgid="2720190443744884114">"Sort by time zone"</string>
+    <string name="security_settings_title" msgid="5168491784222013179">"Location &amp; security"</string>
+    <string name="location_security_settings_title" msgid="4624434296446625554">"Location &amp; security settings"</string>
+    <string name="security_settings_summary" msgid="967393342537986570">"Set My Location, screen unlock, SIM card lock, credential storage lock"</string>
+    <string name="cdma_security_settings_summary" msgid="6068799952798901542">"Set My Location, screen unlock, credential storage lock"</string>
+    <string name="security_passwords_title" msgid="2930627259125138363">"Passwords"</string>
+    <string name="lock_settings_picker_title" msgid="3973555216065628262">"Screen-unlock security"</string>
+    <string name="unlock_set_unlock_launch_picker_title" msgid="1129684221223017902">"Set up screen lock"</string>
+    <string name="unlock_set_unlock_launch_picker_summary" msgid="1667332113134720845">"Lock screen with a pattern, PIN or password"</string>
+    <string name="unlock_set_unlock_launch_picker_change_title" msgid="6987228635944678726">"Change screen lock"</string>
+    <string name="unlock_set_unlock_launch_picker_change_summary" msgid="2790960639554590668">"Change or disable pattern, PIN or password security"</string>
+    <string name="unlock_set_unlock_none_title" msgid="3760684669884671990">"None"</string>
+    <string name="unlock_set_unlock_none_summary" msgid="2658550480388272618">"Disable screen-unlock security"</string>
+    <string name="unlock_set_unlock_pattern_title" msgid="2912067603917311700">"Pattern"</string>
+    <string name="unlock_set_unlock_pattern_summary" msgid="3018395214738645405">"Draw pattern to unlock screen"</string>
+    <string name="unlock_set_unlock_pin_title" msgid="5846029709462329515">"PIN"</string>
+    <string name="unlock_set_unlock_pin_summary" msgid="4131169672844263316">"Enter a numeric PIN to unlock screen"</string>
+    <string name="unlock_set_unlock_password_title" msgid="8775603825675090937">"Password"</string>
+    <string name="unlock_set_unlock_password_summary" msgid="4623254789833899286">"Enter a password to unlock screen"</string>
+    <string name="unlock_set_unlock_disabled_summary" msgid="736557879526940324">"Disabled by remote phone administrator"</string>
+    <string name="unlock_disable_lock_title" msgid="1427036227416979120">"Turn off screen lock"</string>
+    <string name="unlock_disable_lock_pattern_summary" msgid="6801602880568869201">"Remove unlock pattern"</string>
+    <string name="unlock_disable_lock_pin_summary" msgid="8856842745366993387">"Remove unlock PIN"</string>
+    <string name="unlock_disable_lock_password_summary" msgid="192161194564577025">"Remove unlock password"</string>
+    <string name="unlock_change_lock_pattern_title" msgid="2044092014872741130">"Change unlock pattern"</string>
+    <string name="unlock_change_lock_pin_title" msgid="806629901095938484">"Change unlock PIN"</string>
+    <string name="unlock_change_lock_password_title" msgid="5606298470358768865">"Change unlock password"</string>
+    <string name="lockpassword_password_too_short" msgid="7328975683669256660">"Password must be at least %d characters"</string>
+    <string name="lockpassword_pin_too_short" msgid="2252847623267704683">"PIN must be at least %d characters"</string>
+    <string name="lockpassword_press_continue" msgid="6506047902828925216">"Press Continue when finished"</string>
+    <string name="lockpassword_continue_label" msgid="4602203784934526940">"Continue"</string>
+    <string name="lockpassword_password_too_long" msgid="7354418473281442589">"PIN can be no longer than %d digits"</string>
+    <string name="lockpassword_pin_too_long" msgid="6290317580664119373">"PIN can be no longer than %d digits"</string>
+    <string name="lockpassword_pin_contains_non_digits" msgid="3379277100136600632">"PIN must contain only digits 0-9"</string>
+    <string name="lockpassword_illegal_character" msgid="6204396794254688549">"Password contains an illegal character"</string>
+    <string name="lockpassword_password_requires_alpha" msgid="5668524505560400449">"Password must contain at least one letter"</string>
+    <string name="lockpassword_password_requires_digit" msgid="4840579514154254907">"Password must contain at least one digit"</string>
+    <string name="lockpassword_password_requires_symbol" msgid="4140602725865312078">"Password must contain at least one symbol"</string>
+    <string name="lockpassword_ok_label" msgid="313822574062553672">"OK"</string>
+    <string name="lockpassword_cancel_label" msgid="8818529276331121899">"Cancel"</string>
+    <string name="device_admin_title" msgid="3562216873644263804">"Device administration"</string>
+    <string name="manage_device_admin" msgid="3864120111085199551">"Select device administrators"</string>
+    <string name="manage_device_admin_summary" msgid="915390201809231575">"Add or remove device administrators"</string>
+    <string name="bluetooth_quick_toggle_title" msgid="1037056952714061893">"Bluetooth"</string>
+    <string name="bluetooth_quick_toggle_summary" msgid="5293641680139873341">"Turn on Bluetooth"</string>
+    <string name="bluetooth_settings" msgid="2725796451253089609">"Bluetooth settings"</string>
+    <string name="bluetooth_settings_title" msgid="2824020086246268296">"Bluetooth settings"</string>
+    <string name="bluetooth_settings_summary" msgid="2091062709530570462">"Manage connections, set device name &amp; discoverability"</string>
+    <string name="bluetooth_pairing_request" msgid="6385750334766370310">"Bluetooth pairing request"</string>
+    <string name="bluetooth_device_info" msgid="6644515376523965073">"Bluetooth device info"</string>
+    <string name="bluetooth_enter_pin_msg" msgid="856962526754150334">\n"Type PIN to pair with \"<xliff:g id="DEVICE_NAME">%1$s</xliff:g>\". (Try 0000 or 1234.)"</string>
+    <string name="bluetooth_enter_passkey_msg" msgid="8121515818772179228">\n"Type passkey to pair with \"<xliff:g id="DEVICE_NAME">%1$s</xliff:g>\"."</string>
+    <string name="bluetooth_confirm_passkey_msg" msgid="1205362283945104263">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g>DEVICE_NAMEPASSKEY<xliff:g id="PASSKEY">%2$s</xliff:g>"</string>
+    <string name="bluetooth_incoming_pairing_msg" msgid="1076613564387784476">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g>"\n"wants to pair."</string>
+    <string name="bluetooth_display_passkey_msg" msgid="3048496029389441579">"Enter <xliff:g id="PASSKEY">%2$s</xliff:g> on \"<xliff:g id="DEVICE_NAME">%1$s</xliff:g>\" to pair."</string>
+    <string name="bluetooth_pairing_accept" msgid="6163520056536604875">"Pair"</string>
+    <string name="bluetooth_pairing_decline" msgid="930951069988011471">"Don\'t Pair"</string>
+    <string name="bluetooth_remote_device" msgid="2406662802908395389">"Bluetooth device"</string>
+    <string name="bluetooth_error_title" msgid="538287072376677166">"Attention"</string>
+    <string name="bluetooth_pairing_error_message" msgid="2852744547246910349">"There was a problem pairing with <xliff:g id="DEVICE_NAME">%1$s</xliff:g>."</string>
+    <string name="bluetooth_pairing_pin_error_message" msgid="6065697229258906937">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g>There was a problem pairing with because the PIN or Passkey is incorrect."</string>
+    <string name="bluetooth_pairing_device_down_error_message" msgid="6688215193824686741">"Cannot establish communication with <xliff:g id="DEVICE_NAME">%1$s</xliff:g>."</string>
+    <string name="bluetooth_pairing_rejected_error_message" msgid="1648157108520832454">"Pairing rejected by <xliff:g id="DEVICE_NAME">%1$s</xliff:g>."</string>
+    <string name="bluetooth_connecting_error_message" msgid="1779660510084746802">"There was a problem connecting to <xliff:g id="DEVICE_NAME">%1$s</xliff:g>."</string>
+    <string name="bluetooth_preference_scan_title" msgid="2277464653118896016">"Scan for devices"</string>
+    <string name="bluetooth_device_context_connect" msgid="3997659895003244941">"Connect"</string>
+    <string name="bluetooth_device_context_disconnect" msgid="8220072022970148683">"Disconnect"</string>
+    <string name="bluetooth_device_context_pair_connect" msgid="7611522504813927727">"Pair &amp; connect"</string>
+    <string name="bluetooth_device_context_unpair" msgid="662992425948536144">"Unpair"</string>
+    <string name="bluetooth_device_context_disconnect_unpair" msgid="7644014238070043798">"Disconnect &amp; unpair"</string>
+    <string name="bluetooth_device_context_connect_advanced" msgid="2643129703569788771">"Options…"</string>
+    <string name="bluetooth_connect_specific_profiles_title" msgid="6952214406025825164">"Connect to…"</string>
+    <string name="bluetooth_profile_a2dp" msgid="3259633293424539529">"Media"</string>
+    <string name="bluetooth_profile_headset" msgid="1874975688666658946">"Phone"</string>
+    <string name="bluetooth_profile_opp" msgid="3799470046565284440">"Transfer"</string>
+    <string name="bluetooth_summary_connected_to_a2dp" msgid="510833839847758664">"Connected to media audio"</string>
+    <string name="bluetooth_summary_connected_to_headset" msgid="4876496372728623918">"Connected to phone audio"</string>
+    <string name="bluetooth_summary_connected_to_a2dp_headset" msgid="3045032710457800891">"Connected to phone and media audio"</string>
+    <string name="bluetooth_device_advanced_title" msgid="528816860793581131">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> options"</string>
+    <string name="bluetooth_device_advanced_online_mode_title" msgid="3689050071425683114">"Connect"</string>
+    <string name="bluetooth_device_advanced_online_mode_summary" msgid="1204424107263248336">"Connect to Bluetooth device"</string>
+    <string name="bluetooth_device_advanced_profile_header_title" msgid="3764437426089639639">"Profiles"</string>
+    <string name="bluetooth_a2dp_profile_summary_connected" msgid="963376081347721598">"Connected to media audio"</string>
+    <string name="bluetooth_headset_profile_summary_connected" msgid="7661070206715520671">"Connected to phone audio"</string>
+    <string name="bluetooth_opp_profile_summary_connected" msgid="2611913495968309066">"Connected to file-transfer server"</string>
+    <string name="bluetooth_opp_profile_summary_not_connected" msgid="1267091356089086285">"Not connected to file-transfer server"</string>
+    <string name="bluetooth_a2dp_profile_summary_use_for" msgid="4630849022250168427">"Use for media audio"</string>
+    <string name="bluetooth_headset_profile_summary_use_for" msgid="8705753622443862627">"Use for phone audio"</string>
+    <string name="bluetooth_opp_profile_summary_use_for" msgid="1255674547144769756">"Use for file transfer"</string>
+    <string name="bluetooth_dock_settings" msgid="3218335822716052885">"Dock Settings"</string>
+    <string name="bluetooth_dock_settings_title" msgid="5543069893044375188">"Use dock for audio"</string>
+    <string name="bluetooth_dock_settings_headset" msgid="1001821426078644650">"As speaker phone"</string>
+    <string name="bluetooth_dock_settings_a2dp" msgid="8791004998846630574">"For music and media"</string>
+    <string name="bluetooth_dock_settings_remember" msgid="5551459057010609115">"Remember settings"</string>
+    <string name="nfc_quick_toggle_title" msgid="6769159366307299004">"NFC"</string>
+    <string name="nfc_quick_toggle_summary" msgid="1988408027741447231">"Use Near-Field Communication to read and exchange tags"</string>
+    <string name="nfc_toggle_error" msgid="2233172102497535522">"An error occurred."</string>
+    <string name="wifi_quick_toggle_title" msgid="874495178395350104">"WiFi"</string>
+    <string name="wifi_quick_toggle_summary" msgid="1047950931623694366">"Turn on Wi-Fi"</string>
+    <string name="wifi_settings" msgid="4746946030627213196">"Wi-Fi settings"</string>
+    <string name="wifi_settings_category" msgid="2810363951104753710">"Wi-Fi settings"</string>
+    <string name="wifi_settings_summary" msgid="668767638556052820">"Set up &amp; manage wireless access points"</string>
+    <string name="wifi_starting" msgid="6710266609710860129">"Turning on…"</string>
+    <string name="wifi_stopping" msgid="5952909472548218348">"Turning off…"</string>
+    <string name="wifi_error" msgid="3207971103917128179">"Error"</string>
+    <string name="wifi_in_airplane_mode" msgid="7618393787965366655">"In airplane mode"</string>
+    <string name="wifi_fail_to_scan" msgid="6194542252808587669">"Unable to scan for networks"</string>
+    <string name="wifi_notify_open_networks" msgid="3755768188029653293">"Network notification"</string>
+    <string name="wifi_notify_open_networks_summary" msgid="3038290727701553612">"Notify me when an open network is available"</string>
+    <string name="wifi_add_network" msgid="1671334951296205616">"Add WiFi network"</string>
+    <string name="wifi_access_points" msgid="2664629396767022441">"Wi-Fi networks"</string>
+    <string name="wifi_menu_scan" msgid="1470911530412095868">"Scan"</string>
+    <string name="wifi_menu_advanced" msgid="7522252991919573664">"Advanced"</string>
+    <string name="wifi_menu_connect" msgid="4996220309848349408">"Connect to network"</string>
+    <string name="wifi_menu_forget" msgid="8736964302477327114">"Forget network"</string>
+    <string name="wifi_menu_modify" msgid="2068554918652440105">"Modify network"</string>
+    <string name="wifi_ssid" msgid="641393708309146745">"Network SSID"</string>
+    <string name="wifi_security" msgid="6603611185592956936">"Security"</string>
+    <string name="wifi_signal" msgid="5514120261628065287">"Signal strength"</string>
+    <string name="wifi_status" msgid="4824568012414605414">"Status"</string>
+    <string name="wifi_speed" msgid="3526198708812322037">"Link speed"</string>
+    <string name="wifi_ip_address" msgid="1440054061044402918">"IP address"</string>
+    <string name="wifi_eap_method" msgid="8529436133640730382">"EAP method"</string>
+    <string name="please_select_phase2" msgid="5231074529772044898">"Phase-2 authentication"</string>
+    <string name="wifi_eap_ca_cert" msgid="3521574865488892851">"CA certificate"</string>
+    <string name="wifi_eap_user_cert" msgid="1291089413368160789">"User certificate"</string>
+    <string name="wifi_eap_identity" msgid="4359453783379679103">"Identity"</string>
+    <string name="wifi_eap_anonymous" msgid="2989469344116577955">"Anonymous identity"</string>
+    <string name="wifi_password" msgid="5948219759936151048">"Password"</string>
+    <string name="wifi_show_password" msgid="4235237470701732009">"Show password."</string>
+    <string name="wifi_unchanged" msgid="3410422020930397102">"(unchanged)"</string>
+    <string name="wifi_unspecified" msgid="5431501214192991253">"(unspecified)"</string>
+    <string name="wifi_remembered" msgid="8426719916135950136">"Remembered"</string>
+    <string name="wifi_disabled" msgid="2104752038187543712">"Disabled"</string>
+    <string name="wifi_not_in_range" msgid="1136191511238508967">"Not in range"</string>
+    <string name="wifi_secured" msgid="6759903183748011566">"Secured with <xliff:g id="WIFI_SECURITY">%1$s</xliff:g>"</string>
+    <string name="wifi_secured_with_status" msgid="6489317496506267302">"<xliff:g id="WIFI_STATUS">%2$s</xliff:g>, Secured with <xliff:g id="WIFI_SECURITY">%1$s</xliff:g>"</string>
+    <string name="wifi_connect" msgid="1076622875777072845">"Connect"</string>
+    <string name="wifi_forget" msgid="8168174695608386644">"Forget"</string>
+    <string name="wifi_save" msgid="3331121567988522826">"Save"</string>
+    <string name="wifi_cancel" msgid="6763568902542968964">"Cancel"</string>
+    <string name="wifi_advanced_titlebar" msgid="5419052271935350999">"Advanced"</string>
+    <string name="wifi_setting_num_channels_title" msgid="694031537019656132">"Regulatory domain"</string>
+    <string name="wifi_setting_num_channels_summary" msgid="4889355096717099141">"Set the number of channels to be used"</string>
+    <string name="wifi_setting_num_channels_error" msgid="5765443843427870721">"There was a problem setting the regulatory domain."</string>
+    <string name="wifi_setting_num_channels_channel_phrase" msgid="1269381923672908636">"<xliff:g id="NUM_CHANNELS">%1$d</xliff:g> channels"</string>
+    <string name="wifi_setting_sleep_policy_title" msgid="1367731352485585528">"Wi-Fi sleep policy"</string>
+    <string name="wifi_setting_sleep_policy_summary" msgid="7573693311804602041">"Specify when to switch from Wi-Fi to mobile data"</string>
+    <string name="wifi_setting_sleep_policy_error" msgid="5103670439972135148">"There was a problem setting the sleep policy."</string>
+    <string name="wifi_advanced_mac_address_title" msgid="6571335466330978393">"MAC address"</string>
+    <string name="wifi_advanced_ip_address_title" msgid="6215297094363164846">"IP address"</string>
+    <string name="wifi_ip_settings_titlebar" msgid="4345739031248760326">"IP settings"</string>
+    <string name="wifi_ip_settings_menu_save" msgid="7296724066102908366">"Save"</string>
+    <string name="wifi_ip_settings_menu_cancel" msgid="6582567330136502340">"Cancel"</string>
+    <string name="wifi_ip_settings_invalid_ip" msgid="8057085083985255580">"Please type a valid IP address."</string>
+    <string name="wifi_use_static_ip" msgid="2133464242165642230">"Use static IP"</string>
+    <string name="wifi_dns1" msgid="7344118050720080045">"DNS 1"</string>
+    <string name="wifi_dns2" msgid="1368601006824882659">"DNS 2"</string>
+    <string name="wifi_gateway" msgid="163914742461092086">"Gateway"</string>
+    <string name="wifi_netmask" msgid="4520635321425529085">"Netmask"</string>
+    <string name="wifi_tether_checkbox_text" msgid="6961605862058056788">"Portable Wi-Fi hotspot"</string>
+    <string name="wifi_tether_enabled_subtext" msgid="8948641212931906143">"Portable hotspot <xliff:g id="NETWORK_SSID">%1$s</xliff:g> active"</string>
+    <string name="wifi_tether_failed_subtext" msgid="2654888578056042315">"Portable Wi-Fi hotspot error"</string>
+    <string name="wifi_tether_settings_text" msgid="123573487844470195">"Portable Wi-Fi hotspot settings"</string>
+    <string name="wifi_tether_settings_subtext" msgid="8064755682383367008">"Set up &amp; manage portable Wi-Fi hotspot"</string>
+    <string name="wifi_tether_settings_title" msgid="3749063216348284432">"Portable Wi-Fi hotspot settings"</string>
+    <string name="wifi_tether_configure_ap_text" msgid="3474995108398156258">"Configure Wi-Fi hotspot"</string>
+    <string name="wifi_tether_configure_subtext" msgid="1927454307836232128">"<xliff:g id="NETWORK_SSID">%1$s</xliff:g> <xliff:g id="NETWORK_SECURITY">%2$s</xliff:g> portable Wi-Fi hotspot"</string>
+    <string name="wifi_tether_configure_ssid_default" msgid="8467525402622138547">"Android Hotspot"</string>
+    <string name="sound_settings_title" msgid="8735891486683305886">"Sound"</string>
+    <string name="display_settings_title" msgid="1708697328627382561">"Display"</string>
+    <string name="sound_settings" msgid="5007659014828162881">"Sound settings"</string>
+    <string name="silent_mode_title" msgid="3181479108593217704">"Silent mode"</string>
+    <string name="silent_mode_summary" msgid="3309650676072917899">"All sounds except media &amp; alarms"</string>
+    <string name="silent_mode_incl_alarm_summary" msgid="2088830834182228458">"All sounds except media are silenced"</string>
+    <string name="ringtone_title" msgid="5379026328015343686">"Phone ringtone"</string>
+    <string name="ringtone_summary" msgid="2630023412632683493"></string>
+    <string name="all_volume_title" msgid="8741571721868253103">"Volume"</string>
+    <string name="ring_volume_title" msgid="7938706566797464165">"Ringer volume"</string>
+    <string name="ring_volume_summary" msgid="7055497624193116879"></string>
+    <string name="vibrate_in_silent_title" msgid="3897968069156767036">"Vibrate when silent"</string>
+    <string name="vibrate_in_silent_summary" msgid="3312600513070076281">"Allow vibration feedback in silent mode"</string>
+    <string name="vibrate_title" msgid="6045820877942801599">"Vibrate"</string>
+    <string name="vibrate_summary" msgid="7378130397830790458">"Vibration feedback for calls and notifications"</string>
+    <string name="notification_sound_title" msgid="6316316069880531693">"Notification ringtone"</string>
+    <string name="notification_sound_summary" msgid="2953599929394109819"></string>
+    <string name="notification_pulse_title" msgid="1247988024534030629">"Pulse notification light"</string>
+    <string name="notification_pulse_summary" msgid="6899220780534617152">"Pulse track-ball light repeatedly for new notifications"</string>
+    <string name="incoming_call_volume_title" msgid="8073714801365904099">"Ringtone"</string>
+    <string name="notification_volume_title" msgid="2012640760341080408">"Notification"</string>
+    <string name="checkbox_notification_same_as_incoming_call" msgid="1073644356290338921">"Use incoming call volume for notifications"</string>
+    <string name="notification_sound_dialog_title" msgid="7057274209079144726">"Select notification ringtone"</string>
+    <string name="media_volume_title" msgid="3576565767317118106">"Media"</string>
+    <string name="media_volume_summary" msgid="5363248930648849974">"Set volume for music and videos"</string>
+    <string name="alarm_volume_title" msgid="2285597478377758706">"Alarm"</string>
+    <string name="dock_settings_summary" msgid="455802113668982481">"Audio settings for the attached dock"</string>
+    <string name="dtmf_tone_enable_title" msgid="1453831168789523185">"Audible touch tones"</string>
+    <string name="dtmf_tone_enable_summary_on" msgid="3028201873989887327">"Play tones when using dial pad"</string>
+    <string name="dtmf_tone_enable_summary_off" msgid="7791065951268525678">"Play tones when using dial pad"</string>
+    <string name="sound_effects_enable_title" msgid="3197313718929122833">"Audible selection"</string>
+    <string name="sound_effects_enable_summary_on" msgid="6154141289879491329">"Play sound when making screen selection"</string>
+    <string name="sound_effects_enable_summary_off" msgid="3447739581759560125">"Play sound when making screen selection"</string>
+    <string name="lock_sounds_enable_title" msgid="1575990840389107141">"Screen lock sounds"</string>
+    <string name="lock_sounds_enable_summary_on" msgid="145741024028391473">"Play sounds when locking and unlocking the screen"</string>
+    <string name="lock_sounds_enable_summary_off" msgid="8481243116223542804">"Play sounds when locking and unlocking the screen"</string>
+    <string name="haptic_feedback_enable_title" msgid="6311736559245411290">"Haptic feedback"</string>
+    <string name="haptic_feedback_enable_summary_on" msgid="1875779656524793053">"Vibrate when pressing soft keys and on certain UI interactions"</string>
+    <string name="haptic_feedback_enable_summary_off" msgid="7287885436963105314">"Vibrate when pressing soft keys and on certain UI interactions"</string>
+    <string name="audio_record_proc_title" msgid="4271091199976457534">"Noise cancellation"</string>
+    <string name="audio_record_proc_summary" msgid="8113628457499616498">"Suppress background noise when speaking or recording."</string>
+    <string name="dock_settings" msgid="1820107306693002541">"Dock"</string>
+    <string name="dock_settings_title" msgid="9161438664257429372">"Dock settings"</string>
+    <string name="dock_audio_settings_title" msgid="3324750259959570305">"Audio"</string>
+    <string name="dock_audio_summary_desk" msgid="6487784412371139335">"Settings for the attached desktop dock"</string>
+    <string name="dock_audio_summary_car" msgid="6740897586006248450">"Settings for the attached car dock"</string>
+    <string name="dock_audio_summary_none" msgid="289909253741048784">"Phone not docked"</string>
+    <string name="dock_audio_summary_unknown" msgid="4465059868974255693">"Settings for the attached dock"</string>
+    <string name="dock_not_found_title" msgid="3290961741828952424">"Dock not found"</string>
+    <string name="dock_not_found_text" msgid="3035260358985111855">"The phone must be docked to configure dock audio"</string>
+    <string name="dock_sounds_enable_title" msgid="3659084028644948905">"Dock insertion sound"</string>
+    <string name="dock_sounds_enable_summary_on" msgid="8491180514199743771">"Play sound when inserting or removing phone from dock"</string>
+    <string name="dock_sounds_enable_summary_off" msgid="3151046599205265919">"Don\'t play sound when inserting or removing phone from dock"</string>
+    <string name="sync_settings" msgid="9186125469300013491">"Accounts &amp; sync"</string>
+    <string name="sync_settings_summary" msgid="2962179505214965667">"Add or remove accounts and change account settings"</string>
+    <string name="search_settings" msgid="1910951467596035063">"Search"</string>
+    <string name="search_settings_summary" msgid="9205656546570654169">"Manage search settings and history"</string>
+    <string name="display_settings" msgid="3912042046350078328">"Display settings"</string>
+    <string name="animations_title" msgid="1062189037402346023">"Animation"</string>
+    <string name="animations_summary_on" msgid="8843613112130484436">"Show animation when opening &amp;amp:closing windows"</string>
+    <string name="animations_summary_off" msgid="2777026828025551983">"Show animation when opening &amp;amp:closing windows"</string>
+    <string name="accelerometer_title" msgid="7854608399547349157">"Auto-rotate screen"</string>
+    <string name="accelerometer_summary_on" msgid="1133737282813048021">"Switch orientation automatically when rotating phone"</string>
+    <string name="accelerometer_summary_off" msgid="5485489363715740761">"Switch orientation automatically when rotating phone"</string>
+    <string name="brightness" msgid="2354961343555249270">"Brightness"</string>
+    <string name="brightness_summary" msgid="838917350127550703">"Adjust the brightness of the screen"</string>
+    <string name="screen_timeout" msgid="4882669461447531301">"Screen timeout"</string>
+    <string name="screen_timeout_summary" msgid="2905757633140605334">"Adjust the delay before the screen turns off automatically"</string>
+    <string name="automatic_brightness" msgid="5014143533884135461">"Automatic brightness"</string>
+    <string name="sim_lock_settings" msgid="3392331196873564292">"SIM card lock settings"</string>
+    <string name="sim_lock_settings_category" msgid="5136244267576697004">"Set up SIM card lock"</string>
+    <string name="sim_lock_settings_title" msgid="9018585580955414596">"SIM card lock"</string>
+    <string name="sim_pin_toggle" msgid="1742123478029451888">"Lock SIM card"</string>
+    <string name="sim_lock_on" msgid="2503536505568814324">"Require PIN to use phone"</string>
+    <string name="sim_lock_off" msgid="258981978215428916">"Require PIN to use phone"</string>
+    <string name="sim_pin_change" msgid="6311414184279932368">"Change SIM PIN"</string>
+    <string name="sim_enter_pin" msgid="6608715137008508432">"SIM PIN"</string>
+    <string name="sim_enable_sim_lock" msgid="4517742794997166918">"Lock SIM card"</string>
+    <string name="sim_disable_sim_lock" msgid="7664729528754784824">"Unlock SIM card"</string>
+    <string name="sim_enter_old" msgid="6074196344494634348">"Old SIM PIN"</string>
+    <string name="sim_enter_new" msgid="8742727032729243562">"New SIM PIN"</string>
+    <string name="sim_reenter_new" msgid="3178510434642201544">"Retype new PIN"</string>
+    <string name="sim_change_pin" msgid="7328607264898359112">"SIM PIN"</string>
+    <string name="sim_bad_pin" msgid="2746201276896134075">"Incorrect PIN!"</string>
+    <string name="sim_pins_dont_match" msgid="4664611595579163214">"PINs don\'t match!"</string>
+    <string name="sim_change_failed" msgid="4823538458798362222">"Unable to change PIN."\n"Possibly incorrect PIN."</string>
+    <string name="sim_change_succeeded" msgid="8556135413096489627">"SIM PIN changed successfully"</string>
+    <string name="sim_lock_failed" msgid="6676748290838006404">"Unable to change SIM card lock state."\n"Possibly incorrect PIN."</string>
+    <string name="sim_enter_ok" msgid="6475946836899218919">"OK"</string>
+    <string name="sim_enter_cancel" msgid="6240422158517208036">"Cancel"</string>
+    <string name="device_info_settings" msgid="475872867864762157">"Phone status"</string>
+    <string name="system_update_settings_list_item_title" msgid="3342887311059985961">"System updates"</string>
+    <string name="system_update_settings_list_item_summary" msgid="3853057315907710747"></string>
+    <string name="firmware_version" msgid="4801135784886859972">"Android version"</string>
+    <string name="model_number" msgid="3765737700545384794">"Model number"</string>
+    <string name="baseband_version" msgid="1848990160763524801">"Baseband version"</string>
+    <string name="kernel_version" msgid="9192574954196167602">"Kernel version"</string>
+    <string name="build_number" msgid="3075795840572241758">"Build number"</string>
+    <string name="device_info_not_available" msgid="8062521887156825182">"Not available"</string>
+    <string name="device_status_activity_title" msgid="1411201799384697904">"Status"</string>
+    <string name="device_status" msgid="607405385799807324">"Status"</string>
+    <string name="device_status_summary" msgid="2599162787451519618">"phone number, signal, etc."</string>
+    <string name="storage_settings" msgid="4211799979832404953">"Storage"</string>
+    <string name="storage_settings_title" msgid="8746016738388094064">"Storage settings"</string>
+    <string name="storage_settings_summary" product="nosdcard" msgid="3543813623294870759">"Unmount USB storage, view available storage"</string>
+    <string name="storage_settings_summary" product="default" msgid="9176693537325988610">"Unmount SD card, view available storage"</string>
+    <string name="status_number" msgid="5123197324870153205">"My phone number"</string>
+    <string name="status_min_number" msgid="3519504522179420597">"MIN"</string>
+    <string name="status_prl_version" msgid="8499039751817386529">"PRL Version"</string>
+    <string name="status_meid_number" msgid="1751442889111731088">"MEID"</string>
+    <string name="status_network_type" msgid="3279383550222116235">"Mobile network type"</string>
+    <string name="status_data_state" msgid="5503181397066522950">"Mobile network state"</string>
+    <string name="status_service_state" msgid="2323931627519429503">"Service status"</string>
+    <string name="status_signal_strength" msgid="3732655254188304547">"Signal strength"</string>
+    <string name="status_roaming" msgid="2638800467430913403">"Roaming"</string>
+    <string name="status_operator" msgid="2274875196954742087">"Network"</string>
+    <string name="status_wifi_mac_address" msgid="33109409206264790">"Wi-Fi MAC address"</string>
+    <string name="status_bt_address" msgid="4195174192087439720">"Bluetooth address"</string>
+    <string name="status_unavailable" msgid="7862009036663793314">"Unavailable"</string>
+    <string name="status_up_time" msgid="7294859476816760399">"Uptime"</string>
+    <string name="status_awake_time" msgid="2393949909051183652">"Awake time"</string>
+    <string name="internal_memory" msgid="9129595691484260784">"Internal storage"</string>
+    <string name="sd_memory" product="nosdcard" msgid="2510246194083052841">"USB storage"</string>
+    <string name="sd_memory" product="default" msgid="151871913888051515">"SD card"</string>
+    <string name="memory_available" msgid="418542433817289474">"Available space"</string>
+    <string name="memory_size" msgid="6629067715017232195">"Total space"</string>
+    <string name="sd_eject" product="default" msgid="6915293408836853020">"Unmount SD card"</string>
+    <string name="sd_eject_summary" product="nosdcard" msgid="5009296896648072891">"Unmount the internal USB storage"</string>
+    <string name="sd_eject_summary" product="default" msgid="3300599435073550246">"Unmount the SD card so that you can remove it safely"</string>
+    <string name="sd_insert_summary" product="nosdcard" msgid="5264016886409577313">"Insert USB storage for mounting"</string>
+    <string name="sd_insert_summary" product="default" msgid="2048640010381803841">"Insert an SD card for mounting"</string>
+    <string name="sd_mount" product="nosdcard" msgid="8966695015677343116">"Mount USB storage"</string>
+    <string name="sd_mount" product="default" msgid="5940523765187704135">"Mount SD card"</string>
+    <string name="sd_mount_summary" product="nosdcard" msgid="1794150364965145726">"Mount the USB storage"</string>
+    <string name="sd_mount_summary" product="default" msgid="4936591681679097699">"Mount the SD card"</string>
+    <string name="sd_format" product="nosdcard" msgid="2148179271623099054">"Erase USB storage"</string>
+    <string name="sd_format" product="default" msgid="2576054280507119870">"Erase SD card"</string>
+    <string name="sd_format_summary" product="nosdcard" msgid="1504606546865152514">"Erases all data on the phone\'s internal USB storage, such as music and photos"</string>
+    <string name="sd_format_summary" product="default" msgid="915849621390821841">"Erases all data on the phone\'s SD card, such as music and photos"</string>
+    <string name="sd_unavailable" msgid="8580107589533213904">"Unavailable"</string>
+    <string name="read_only" msgid="6702420168629076340">" (Read-only)"</string>
+    <string name="dlg_confirm_unmount_title" product="nosdcard" msgid="2349876662428231297">"Unmount USB storage"</string>
+    <string name="dlg_confirm_unmount_title" product="default" msgid="8612140627310646730">"Unmount SD card"</string>
+    <string name="dlg_confirm_unmount_text" product="nosdcard" msgid="3390169455621185223">"If you unmount the USB storage, some applications that you are using will stop and may be unavailable until you remount the USB storage."</string>
+    <string name="dlg_confirm_unmount_text" product="default" msgid="5851214273718817727">"If you unmount the SD card, some applications that you are using will stop and may be unavailable until you remount the SD card."</string>
+    <string name="dlg_error_unmount_title" product="nosdcard" msgid="7695491947411836733">"Unmounting USB storage failed"</string>
+    <string name="dlg_error_unmount_title" product="default" msgid="4004106918266783081">"Unmounting SD card failed"</string>
+    <string name="dlg_error_unmount_text" product="nosdcard" msgid="1450864147013376592">"Cannot unmount USB storage. Try again later."</string>
+    <string name="dlg_error_unmount_text" product="default" msgid="9188972789897713180">"Cannot unmount SD card. Try again later."</string>
+    <string name="unmount_inform_text" product="nosdcard" msgid="7120241136790744265">"USB storage will be unmounted."</string>
+    <string name="unmount_inform_text" product="default" msgid="1904212716075458402">"SD card will be unmounted."</string>
+    <string name="sd_ejecting_title" msgid="8824572198034365468">"Unmounting"</string>
+    <string name="sd_ejecting_summary" msgid="2028753069184908491">"Unmount in progress"</string>
+    <string name="battery_status_title" msgid="9159414319574976203">"Battery status"</string>
+    <string name="battery_level_title" msgid="2965679202786873272">"Battery level"</string>
+    <string name="apn_settings" msgid="3743170484827528406">"APNs"</string>
+    <string name="apn_edit" msgid="1354715499708424718">"Edit access point"</string>
+    <string name="apn_not_set" msgid="7422262558097875757">"&lt;Not set&gt;"</string>
+    <string name="apn_name" msgid="4115580098369824123">"Name"</string>
+    <string name="apn_apn" msgid="2479425126733513353">"APN"</string>
+    <string name="apn_http_proxy" msgid="1826885957243696354">"Proxy"</string>
+    <string name="apn_http_port" msgid="3763259523984976226">"Port"</string>
+    <string name="apn_user" msgid="455637547356117761">"Username"</string>
+    <string name="apn_password" msgid="5412301994998250968">"Password"</string>
+    <string name="apn_server" msgid="2436185314756372858">"Server"</string>
+    <string name="apn_mmsc" msgid="3670124402105585737">"MMSC"</string>
+    <string name="apn_mms_proxy" msgid="5374082621073999275">"MMS proxy"</string>
+    <string name="apn_mms_port" msgid="4074188088199243040">"MMS port"</string>
+    <string name="apn_mcc" msgid="4258628382260674636">"MCC"</string>
+    <string name="apn_mnc" msgid="8629374076888809874">"MNC"</string>
+    <string name="apn_auth_type" msgid="6167205395676037015">"Authentication type"</string>
+    <string name="apn_auth_type_none" msgid="5069592676845549926">"None"</string>
+    <string name="apn_auth_type_pap" msgid="1666934536996033383">"PAP"</string>
+    <string name="apn_auth_type_chap" msgid="3369626283789068360">"CHAP"</string>
+    <string name="apn_auth_type_pap_chap" msgid="9102343063036134541">"PAP or CHAP"</string>
+    <string name="apn_type" msgid="469613123902220544">"APN type"</string>
+    <string name="menu_delete" msgid="6981294422841124659">"Delete APN"</string>
+    <string name="menu_new" msgid="3014205883303921729">"New APN"</string>
+    <string name="menu_save" msgid="8109345640668285399">"Save"</string>
+    <string name="menu_cancel" msgid="2194502410474697474">"Discard"</string>
+    <string name="error_title" msgid="1319225301794168762">"Attention"</string>
+    <string name="error_name_empty" msgid="1498238337687930558">"The Name field cannot be empty."</string>
+    <string name="error_apn_empty" msgid="1513892291812404310">"The APN cannot be empty."</string>
+    <string name="error_mcc_not3" msgid="4560171714156251661">"MCC field must be 3 digits."</string>
+    <string name="error_mnc_not23" msgid="8418177072458379439">"MNC field must be 2 or 3 digits."</string>
+    <string name="restore_default_apn" msgid="2724583218635739913">"Restoring default APN settings"</string>
+    <string name="menu_restore" msgid="8260067415075573273">"Reset to default"</string>
+    <string name="restore_default_apn_completed" msgid="3990449939234957281">"Reset default APN settings completed"</string>
+    <string name="master_clear_title" msgid="5907939616087039756">"Factory data reset"</string>
+    <string name="master_clear_summary" msgid="4986154238001088492">"Erases all data on phone"</string>
+    <string name="master_clear_desc" product="nosdcard" msgid="2163013814299528247">"This will erase all data from your phone\'s "<b>"internal storage"</b>", including:"\n\n<li>"Your Google account"</li>\n<li>"System and application data and settings"</li>\n<li>"Downloaded applications"</li>\n\n"To clear all data on this phone, the "<b>"USB storage"</b>" needs to be erased."\n\n</string>
+    <string name="master_clear_desc" product="default" msgid="1741944496458365969">"This will erase all data from your phone\'s "<b>"internal storage"</b>", including:"\n\n<li>"Your Google account"</li>\n<li>"System and application data and settings"</li>\n<li>"Downloaded applications"</li>\n\n"To clear music, pictures and other user data as well, the "<b>"SD card"</b>" needs to be erased."\n\n</string>
+    <string name="erase_external_storage" product="nosdcard" msgid="969364037450286809">"Erase USB storage"</string>
+    <string name="erase_external_storage" product="default" msgid="1397239046334307625">"Erase SD card"</string>
+    <string name="erase_external_storage_description" product="nosdcard" msgid="1657838142707381027">"Erase all the data on the phone\'s internal USB storage, such as music or photos."</string>
+    <string name="erase_external_storage_description" product="default" msgid="8100175974635894073">"Erase all the data on the phone\'s SD card, such as music or photos."</string>
+    <string name="master_clear_button_text" msgid="7550632653343157971">"Reset phone"</string>
+    <string name="master_clear_final_desc" msgid="6917971132484622696">"Erase all of your personal information and any downloaded applications? It is impossible to reverse this action!"</string>
+    <string name="master_clear_final_button_text" msgid="5390908019019242910">"Erase everything"</string>
+    <string name="master_clear_gesture_prompt" msgid="1428645764883536750">"Draw your unlock pattern"</string>
+    <string name="master_clear_gesture_explanation" msgid="8901714274312707918">"You must draw your unlock pattern to confirm a phone reset."</string>
+    <string name="master_clear_failed" msgid="8655202125010189406">"No reset was performed because the System Clear service is not available."</string>
+    <string name="media_format_title" product="nosdcard" msgid="3999653431422767156">"Erase USB storage"</string>
+    <string name="media_format_title" product="default" msgid="4427528440306787972">"Erase SD card"</string>
+    <string name="media_format_summary" product="nosdcard" msgid="776603298628082065">"Erases all data in USB storage"</string>
+    <string name="media_format_summary" product="default" msgid="3805714639375830120">"Erases all data on the SD card"</string>
+    <string name="media_format_desc" product="nosdcard" msgid="4553860683952763905">"This action will erase the USB storage. You will lose "<b>"all"</b>" data stored there!"</string>
+    <string name="media_format_desc" product="default" msgid="1598627584181935513">"This action will erase the SD card. You will lose "<b>"all"</b>" data on the card!"</string>
+    <string name="media_format_button_text" product="nosdcard" msgid="6293669371185352810">"Erase USB storage"</string>
+    <string name="media_format_button_text" product="default" msgid="6721544380069373626">"Erase SD card"</string>
+    <string name="media_format_final_desc" product="nosdcard" msgid="8094635533378487255">"Erase USB storage, deleting all files stored there? Action cannot be reversed!"</string>
+    <string name="media_format_final_desc" product="default" msgid="9015504991522581434">"Erase SD card, deleting all files stored there? Action cannot be reversed!"</string>
+    <string name="media_format_final_button_text" msgid="4881713344315923175">"Erase everything"</string>
+    <string name="media_format_gesture_prompt" msgid="3109349468816856670">"Draw your unlock pattern"</string>
+    <string name="media_format_gesture_explanation" product="nosdcard" msgid="1379736318750958338">"You must draw your unlock pattern to confirm that you want to erase the USB storage."</string>
+    <string name="media_format_gesture_explanation" product="default" msgid="1681213416497647321">"You must draw your unlock pattern to confirm that you want to erase the SD card."</string>
+    <string name="call_settings_title" msgid="5188713413939232801">"Call settings"</string>
+    <string name="call_settings_summary" msgid="7291195704801002886">"Set up voicemail, call forwarding, call waiting, caller ID"</string>
+    <string name="tether_settings_title_usb" msgid="4315031513434087777">"Tethering"</string>
+    <string name="tether_settings_title_wifi" msgid="3277144155960302049">"Portable hotspot"</string>
+    <string name="tether_settings_title_both" msgid="2734066355556891504">"Tethering &amp; portable hotspot"</string>
+    <string name="tether_settings_summary_usb" msgid="3562431455625637370">"Share your phone\'s mobile data connection via USB"</string>
+    <string name="tether_settings_summary_wifi" msgid="4690912027002467246">"Share your phone\'s mobile connection as a portable Wi-Fi hotspot"</string>
+    <string name="tether_settings_summary_both" msgid="7460063951190682635">"Share your phone\'s mobile data connection via USB or as a portable Wi-Fi hotspot"</string>
+    <string name="usb_title" msgid="7483344855356312510">"USB"</string>
+    <string name="usb_tethering_button_text" msgid="585829947108007917">"USB tethering"</string>
+    <string name="usb_tethering_available_subtext" msgid="156779271296152605">"USB connected, tick to tether"</string>
+    <string name="usb_tethering_active_subtext" msgid="8916210851136467042">"Tethered"</string>
+    <string name="usb_tethering_storage_active_subtext" msgid="6608933594288072573">"Can\'t tether when USB storage in use"</string>
+    <string name="usb_tethering_unavailable_subtext" msgid="1044622421184007254">"USB not connected"</string>
+    <string name="usb_tethering_errored_subtext" msgid="1377574819427841992">"USB tethering error"</string>
+    <string name="tethering_help_button_text" msgid="656117495547173630">"Help"</string>
+    <string name="network_settings_title" msgid="7967552516440151852">"Mobile networks"</string>
+    <string name="network_settings_summary" msgid="5149750850846813553">"Set options for roaming, networks, APNs"</string>
+    <string name="location_title" msgid="1029961368397484576">"My Location"</string>
+    <string name="location_network_based" msgid="8815705866861993344">"Use wireless networks"</string>
+    <string name="location_networks_disabled" msgid="2708968452901433980">"See location in applications (such as Maps) using wireless networks"</string>
+    <string name="location_neighborhood_level" msgid="4656658097932515921">"Location determined by Wi-Fi and/or mobile networks"</string>
+    <string name="location_gps" msgid="6296125378829097831">"Use GPS satellites"</string>
+    <string name="location_street_level" msgid="7456259025474443314">"When locating, accurate to street level"</string>
+    <string name="location_gps_disabled" msgid="6632537158777308128">"Locate to street level (requires more battery plus view of sky)"</string>
+    <string name="assisted_gps" msgid="4649317129586736885">"Use assisted GPS"</string>
+    <string name="assisted_gps_enabled" msgid="8751899609589792803">"Use server to assist GPS (un-tick to reduce network usage)"</string>
+    <string name="assisted_gps_disabled" msgid="6982698333968010748">"Use server to assist GPS (un-tick to improve GPS performance)"</string>
+    <string name="about_settings" msgid="1743378368185371685">"About phone"</string>
+    <string name="about_settings_summary" msgid="3302263393543848667">"View legal info, phone status, software version"</string>
+    <string name="legal_information" msgid="5769301644270604095">"Legal information"</string>
+    <string name="contributors_title" msgid="5917703088825286504">"Contributors"</string>
+    <string name="copyright_title" msgid="865906688917260647">"Copyright"</string>
+    <string name="license_title" msgid="1990487604356037871">"Licence"</string>
+    <string name="terms_title" msgid="7697580845616764642">"Terms and conditions"</string>
+    <string name="system_tutorial_list_item_title" msgid="9082844446660969729">"System tutorial"</string>
+    <string name="system_tutorial_list_item_summary" msgid="3861815254521030201">"Learn how to use your phone"</string>
+    <string name="settings_license_activity_title" msgid="7553683406244228650">"Open source licences"</string>
+    <string name="settings_license_activity_unavailable" msgid="4210539215951487627">"There is a problem loading the licences."</string>
+    <string name="settings_license_activity_loading" msgid="3337535809093591740">"Loading…"</string>
+    <string name="settings_safetylegal_title" msgid="1289483965535937431">"Safety information"</string>
+    <string name="settings_safetylegal_activity_title" msgid="6901214628496951727">"Safety information"</string>
+    <string name="settings_safetylegal_activity_unreachable" msgid="3198912875259612887">"Your phone is not connected to a data service. To view this information now, go to %s from any computer connected to the Internet."</string>
+    <string name="settings_safetylegal_activity_loading" msgid="8059022597639516348">"Loading…"</string>
+    <string name="lockpassword_choose_your_password_header" msgid="8624900666929394990">"Choose your password"</string>
+    <string name="lockpassword_choose_your_pin_header" msgid="7598849519816138302">"Choose your PIN"</string>
+    <string name="lockpassword_confirm_your_password_header" msgid="6308478184889846633">"Confirm your password"</string>
+    <string name="lockpassword_confirm_your_pin_header" msgid="49038294648213197">"Confirm your PIN"</string>
+    <string name="lockpassword_confirm_passwords_dont_match" msgid="6850677112663979120">"Passwords don\'t match"</string>
+    <string name="lockpassword_confirm_pins_dont_match" msgid="4757532830594400147">"PINs don\'t match"</string>
+    <string name="lockpassword_password_set_toast" msgid="4875050283108629383">"password has been set"</string>
+    <string name="lockpassword_pin_set_toast" msgid="6011826444725291475">"PIN has been set"</string>
+    <string name="lockpassword_pattern_set_toast" msgid="6867259621331406236">"Pattern has been set"</string>
+    <string name="lock_settings_title" msgid="975088518210629938">"Screen unlock"</string>
+    <string name="lockpattern_change_lock_pattern_label" msgid="5679630792003440352">"Change unlock pattern"</string>
+    <string name="lockpattern_change_lock_pin_label" msgid="266707138486731661">"Change unlock PIN"</string>
+    <string name="lockpattern_need_to_unlock" msgid="757935356911054465">"Confirm saved pattern"</string>
+    <string name="lockpattern_need_to_unlock_wrong" msgid="5629093548611791080">"Sorry, try again:"</string>
+    <string name="lockpattern_recording_intro_header" msgid="308287052221942814">"Draw an unlock pattern"</string>
+    <string name="lockpattern_recording_intro_footer" msgid="1118579101409152113">"Press Menu for help."</string>
+    <string name="lockpattern_recording_inprogress" msgid="4622772178078818425">"Release finger when done."</string>
+    <string name="lockpattern_recording_incorrect_too_short" msgid="3103250430366718996">"Connect at least <xliff:g id="NUMBER">%d</xliff:g> dots. Try again:"</string>
+    <string name="lockpattern_pattern_entered_header" msgid="5012716272001299362">"Pattern recorded!"</string>
+    <string name="lockpattern_need_to_confirm" msgid="5144676887162575050">"Draw pattern again to confirm:"</string>
+    <string name="lockpattern_pattern_confirmed_header" msgid="2223856038485537716">"Your new unlock pattern:"</string>
+    <string name="lockpattern_confirm_button_text" msgid="1128204343957002841">"Confirm"</string>
+    <string name="lockpattern_restart_button_text" msgid="3337574403350953926">"Redraw"</string>
+    <string name="lockpattern_retry_button_text" msgid="1949847413862309134">"Retry"</string>
+    <string name="lockpattern_continue_button_text" msgid="4723771754714471410">"Continue"</string>
+    <string name="lockpattern_settings_title" msgid="3207750489460466680">"Unlock pattern"</string>
+    <string name="lockpattern_settings_enable_title" msgid="6920616873671115281">"Require pattern"</string>
+    <string name="lockpattern_settings_enable_summary" msgid="1165707416664252167">"Must draw pattern to unlock screen"</string>
+    <string name="lockpattern_settings_enable_visible_pattern_title" msgid="104851667540971729">"Use visible pattern"</string>
+    <string name="lockpattern_settings_enable_tactile_feedback_title" msgid="972174133075372341">"Use tactile feedback"</string>
+    <string name="lockpattern_settings_choose_lock_pattern" msgid="1652352830005653447">"Set unlock pattern"</string>
+    <string name="lockpattern_settings_change_lock_pattern" msgid="1123908306116495545">"Change unlock pattern"</string>
+    <string name="lockpattern_settings_help_how_to_record" msgid="2614673439060830433">"How to draw an unlock pattern"</string>
+    <string name="lockpattern_too_many_failed_confirmation_attempts_header" msgid="819903817323783498">"Too many incorrect attempts!"</string>
+    <string name="lockpattern_too_many_failed_confirmation_attempts_footer" msgid="6759029360597122873">"Try again in <xliff:g id="NUMBER">%d</xliff:g> seconds."</string>
+    <string name="skip_button_label" msgid="8680422740354436943">"Cancel"</string>
+    <string name="next_button_label" msgid="8890792540116568321">"Next"</string>
+    <string name="lock_title" msgid="4059246467204273930">"Securing your phone"</string>
+    <string name="lock_intro_message" msgid="9100785646737118042"><font size="17">"Protect your phone from unauthorised use by creating a personal screen unlock pattern. "\n<font height="17">\n</font><b>"1"</b>"  On the next screen, watch while an example pattern is drawn. "\n<font height="17">\n</font><b>"2"</b>"  When ready, draw your own personal unlock pattern. Experiment with different patterns but connect at least four dots. "\n<font height="17">\n</font><b>"3"</b>"  Redraw your pattern to confirm. "\n<font height="17">\n</font><b>"Ready to start? Select “Next”"</b>". "\n<font height="3">\n</font>"To leave your phone unprotected, select “Cancel”."</font></string>
+    <string name="lock_example_title" msgid="8052305554017485410">"Example pattern"</string>
+    <string name="lock_example_message" msgid="1838650097090632706">"Connect at least four dots."\n" "\n"Select “Next” when you’re ready to draw your own pattern."</string>
+    <string name="manageapplications_settings_title" msgid="5712405848153426706">"Manage applications"</string>
+    <string name="manageapplications_settings_summary" msgid="6097117021500651232">"Manage and remove installed applications"</string>
+    <string name="applications_settings" msgid="3736173521008476946">"Applications"</string>
+    <string name="applications_settings_summary" msgid="2714215108369119717">"Manage applications, set up quick launch shortcuts"</string>
+    <string name="applications_settings_header" msgid="6018266337275422250">"Application settings"</string>
+    <string name="install_applications" msgid="4872012136210802181">"Unknown sources"</string>
+    <string name="install_unknown_applications" msgid="6612824788917283662">"Allow installation of non-Market applications"</string>
+    <string name="install_all_warning" msgid="1923717607319933741">"Your phone and personal data are more vulnerable to be attacked by applications from unknown sources. You agree that you are solely responsible for any damage to your phone or loss of data that may result from using these applications."</string>
+    <string name="application_info_label" msgid="1150486628158409543">"Application info"</string>
+    <string name="storage_label" msgid="8700867073480107253">"Storage"</string>
+    <string name="auto_launch_label" msgid="3012617472833815382">"Launch by default"</string>
+    <string name="permissions_label" msgid="2605296874922726203">"Permissions"</string>
+    <string name="cache_header_label" msgid="1877197634162461830">"Cache"</string>
+    <string name="clear_cache_btn_text" msgid="5756314834291116325">"Clear cache"</string>
+    <string name="cache_size_label" msgid="7505481393108282913">"Cache"</string>
+    <string name="controls_label" msgid="7611113077086853799">"Controls"</string>
+    <string name="force_stop" msgid="7435006169872876756">"Force stop"</string>
+    <string name="total_size_label" msgid="1048676419552557254">"Total"</string>
+    <string name="application_size_label" msgid="5055196275624686382">"Application"</string>
+    <string name="data_size_label" msgid="8679376373625710107">"Data"</string>
+    <string name="uninstall_text" msgid="3644892466144802466">"Uninstall"</string>
+    <string name="disable_text" msgid="6544054052049395202">"Disable"</string>
+    <string name="enable_text" msgid="9217362512327828987">"Enable"</string>
+    <string name="clear_user_data_text" msgid="5597622864770098388">"Clear data"</string>
+    <string name="app_factory_reset" msgid="6635744722502563022">"Uninstall updates"</string>
+    <string name="auto_launch_enable_text" msgid="2630656657744196691">"You have selected to launch this application by default for some actions."</string>
+    <string name="auto_launch_disable_text" msgid="7800385822185540166">"No defaults set."</string>
+    <string name="clear_activities" msgid="7408923511535174430">"Clear defaults"</string>
+    <string name="unknown" msgid="1592123443519355854">"Unknown"</string>
+    <string name="sort_order_alpha" msgid="1410278099123670628">"Sort by name"</string>
+    <string name="sort_order_size" msgid="7024513286636502362">"Sort by size"</string>
+    <string name="show_running_services" msgid="5736278767975544570">"Show running services"</string>
+    <string name="show_background_processes" msgid="2009840211972293429">"Show cached processes"</string>
+    <string name="manage_space_text" msgid="8852711522447794676">"Manage space"</string>
+    <string name="filter" msgid="2018011724373033887">"Filter"</string>
+    <string name="filter_dlg_title" msgid="6507663329723966854">"Select filter options"</string>
+    <string name="filter_apps_all" msgid="5142129378749391876">"All"</string>
+    <string name="filter_apps_third_party" msgid="7786348047690140979">"Downloaded"</string>
+    <string name="filter_apps_running" msgid="7767071454371350486">"Running"</string>
+    <string name="filter_apps_onsdcard" product="nosdcard" msgid="4843063154701023349">"USB storage"</string>
+    <string name="filter_apps_onsdcard" product="default" msgid="1477351142334784771">"On SD card"</string>
+    <string name="disabled" msgid="9206776641295849915">"Disabled"</string>
+    <string name="no_applications" msgid="5190227407135243904">"No applications."</string>
+    <string name="internal_storage" msgid="1584700623164275282">"Internal storage"</string>
+    <string name="sd_card_storage" product="nosdcard" msgid="2673203150465132465">"USB storage"</string>
+    <string name="sd_card_storage" product="default" msgid="7623513618171928235">"SD card storage"</string>
+    <string name="recompute_size" msgid="7722567982831691718">"Recomputing size…"</string>
+    <string name="clear_data_dlg_title" msgid="4470209520936375508">"Delete"</string>
+    <string name="clear_data_dlg_text" msgid="8368035073300828451">"All of this application\'s data will be deleted permanently. This includes all files, settings, accounts, databases and so on."</string>
+    <string name="dlg_ok" msgid="2402639055725653590">"OK"</string>
+    <string name="dlg_cancel" msgid="1674753358972975911">"Cancel"</string>
+    <string name="app_not_found_dlg_title" msgid="8458335716378083713">"Application not found"</string>
+    <string name="app_not_found_dlg_text" msgid="2980271680333341554">"The application was not found in the list of installed applications."</string>
+    <string name="clear_data_failed" msgid="581956197586913865">"Unable to clear application data."</string>
+    <string name="app_factory_reset_dlg_title" msgid="6116199391150388147">"Uninstall updates"</string>
+    <string name="app_factory_reset_dlg_text" msgid="438395129140568893">"Do you want to uninstall all updates to this Android system application?"</string>
+    <string name="clear_failed_dlg_title" msgid="2387060805294783175">"Clear data"</string>
+    <string name="clear_failed_dlg_text" msgid="7943411157007320290">"Failed clearing data for application"</string>
+    <string name="security_settings_desc" msgid="3116027624526915561">"This application can access the following on your phone:"</string>
+    <string name="computing_size" msgid="1599186977475211186">"Computing…"</string>
+    <string name="invalid_size_value" msgid="1901940003700269523">"Unable to compute package size"</string>
+    <string name="empty_list_msg" msgid="2901049162265094971">"You do not have any third-party applications installed."</string>
+    <string name="version_text" msgid="9189073826278676425">"Version <xliff:g id="VERSION_NUM">%1$s</xliff:g>"</string>
+    <string name="move_app" msgid="5042838441401731346">"Move"</string>
+    <string name="move_app_to_internal" msgid="3895430471913858185">"Move to phone"</string>
+    <string name="move_app_to_sdcard" product="nosdcard" msgid="4350451696315265420">"Move to USB storage"</string>
+    <string name="move_app_to_sdcard" product="default" msgid="1143379049903056407">"Move to SD card"</string>
+    <string name="moving" msgid="6431016143218876491">"Moving"</string>
+    <string name="insufficient_storage" msgid="8566913062094452962">"There is not enough storage left."</string>
+    <string name="does_not_exist" msgid="837163572898468245">"The application does not exist."</string>
+    <string name="app_forward_locked" msgid="5747805144210389585">"The application is copy protected."</string>
+    <string name="invalid_location" msgid="4934491353200240499">"The specified install location is not valid."</string>
+    <string name="system_package" msgid="1030561474413022831">"System updates cannot be installed on external media."</string>
+    <string name="force_stop_dlg_title" msgid="4289453224368188476">"Force stop"</string>
+    <string name="force_stop_dlg_text" msgid="5157374701213502922">"Force-stopping an application can cause it to misbehave. Are you sure?"</string>
+    <string name="move_app_failed_dlg_title" msgid="4337731903265156405">"Move application"</string>
+    <string name="move_app_failed_dlg_text" msgid="8824246817947643697">"Failed to move application. <xliff:g id="REASON">%1$s</xliff:g>"</string>
+    <string name="app_install_location_title" msgid="2068975150026852168">"Preferred install location"</string>
+    <string name="app_install_location_summary" msgid="879753854530300436">"Change the preferred installation location for new applications."</string>
+    <string name="storageuse_settings_title" msgid="5657014373502630403">"Storage use"</string>
+    <string name="storageuse_settings_summary" msgid="2556057379120846792">"View storage used by applications"</string>
+    <string name="runningservices_settings_title" msgid="8097287939865165213">"Running services"</string>
+    <string name="runningservices_settings_summary" msgid="854608995821032748">"View and control currently running services"</string>
+    <string name="service_restarting" msgid="2242747937372354306">"Restarting"</string>
+    <string name="cached" msgid="1059590879740175019">"Cached background process"</string>
+    <string name="no_running_services" msgid="2059536495597645347">"Nothing running."</string>
+    <string name="service_started_by_app" msgid="6575184738671598131">"Started by application."</string>
+    <!-- no translation found for service_client_name (4037193625611815517) -->
+    <skip />
+    <string name="service_background_processes" msgid="6844156253576174488">"<xliff:g id="MEMORY">%1$s</xliff:g> free"</string>
+    <string name="service_foreground_processes" msgid="7583975676795574276">"<xliff:g id="MEMORY">%1$s</xliff:g> used"</string>
+    <string name="memory" msgid="6609961111091483458">"RAM"</string>
+    <!-- no translation found for service_process_name (4098932168654826656) -->
+    <skip />
+    <string name="running_processes_item_description_s_s" msgid="5790575965282023145">"<xliff:g id="NUMPROCESS">%1$d</xliff:g> process and <xliff:g id="NUMSERVICES">%2$d</xliff:g> service"</string>
+    <string name="running_processes_item_description_s_p" msgid="8019860457123222953">"<xliff:g id="NUMPROCESS">%1$d</xliff:g> process and <xliff:g id="NUMSERVICES">%2$d</xliff:g> services"</string>
+    <string name="running_processes_item_description_p_s" msgid="744424668287252915">"<xliff:g id="NUMPROCESS">%1$d</xliff:g> processes and <xliff:g id="NUMSERVICES">%2$d</xliff:g> service"</string>
+    <string name="running_processes_item_description_p_p" msgid="1607384595790852782">"<xliff:g id="NUMPROCESS">%1$d</xliff:g> processes and <xliff:g id="NUMSERVICES">%2$d</xliff:g> services"</string>
+    <string name="runningservicedetails_settings_title" msgid="6188692418986988288">"Running application"</string>
+    <string name="no_services" msgid="7133900764462288263">"Not active"</string>
+    <string name="runningservicedetails_services_title" msgid="391168243725357375">"Services"</string>
+    <string name="runningservicedetails_processes_title" msgid="928115582044655268">"Processes"</string>
+    <string name="service_stop" msgid="6369807553277527248">"Stop"</string>
+    <string name="service_manage" msgid="1876642087421959194">"Settings"</string>
+    <string name="service_stop_description" msgid="3261798282116866961">"This service was started by its application. Stopping it may cause the application to fail."</string>
+    <string name="heavy_weight_stop_description" msgid="6855241582643136019">"This application cannot be stopped safely. Doing so may lose some of your current work."</string>
+    <string name="background_process_stop_description" msgid="1728354083304746737">"This is an old application process that is being kept for better speed in case it is needed again. There is usually no reason to stop it."</string>
+    <string name="service_manage_description" msgid="7050092269951613102">"<xliff:g id="CLIENT_NAME">%1$s</xliff:g>: currently in use. Touch Settings to control it."</string>
+    <string name="main_running_process_description" msgid="929204645380391397">"Main process that is in use."</string>
+    <string name="process_service_in_use_description" msgid="8993335064403217080">"Service <xliff:g id="COMP_NAME">%1$s</xliff:g> is in use."</string>
+    <string name="process_provider_in_use_description" msgid="5586603325677678940">"Provider <xliff:g id="COMP_NAME">%1$s</xliff:g> is in use."</string>
+    <string name="runningservicedetails_stop_dlg_title" msgid="4253292537154337233">"Stop system service?"</string>
+    <string name="runningservicedetails_stop_dlg_text" msgid="6929716497425738387">"Are you sure that you want to stop this system service? If you do, some features of your phone may stop working correctly until you turn it off and then on again."</string>
+    <string name="language_settings" msgid="502219872342167227">"Language &amp; keyboard"</string>
+    <string name="language_keyboard_settings_title" msgid="3455826933385341107">"Language &amp; keyboard settings"</string>
+    <string name="language_settings_category" msgid="2288258489940617043">"Language settings"</string>
+    <string name="keyboard_settings_category" msgid="7060453865544070642">"Keyboard settings"</string>
+    <string name="phone_language" msgid="1165758957501090679">"Select language"</string>
+    <string name="phone_language_summary" msgid="3871309445655554211"></string>
+    <string name="auto_replace" msgid="6199184757891937822">"Auto-replace"</string>
+    <string name="auto_replace_summary" msgid="370288728200084466">"Correct mistyped words"</string>
+    <string name="auto_caps" msgid="581633131114124121">"Auto-cap"</string>
+    <string name="auto_caps_summary" msgid="6358102538315261466">"Capitalise first letter in sentences"</string>
+    <string name="auto_punctuate" msgid="4595367243950425833">"Auto-punctuate"</string>
+    <string name="hardkeyboard_category" msgid="5957168411305769899">"Physical keyboard settings"</string>
+    <string name="auto_punctuate_summary" msgid="4372126865670574837">"Press Space key twice to insert \".\""</string>
+    <string name="show_password" msgid="2198798062604049206">"Visible passwords"</string>
+    <string name="show_password_summary" msgid="3806709974395178121">"Show password as you type"</string>
+    <string name="ime_security_warning" msgid="812267421486877917">"This input method may be able to collect all the text that you type, including personal data like passwords and credit card numbers. It comes from the application <xliff:g id="IME_APPLICATION_NAME">%1$s</xliff:g>. Use this input method?"</string>
+    <string name="user_dict_settings_titlebar" msgid="765659257455000490">"User dictionary"</string>
+    <string name="user_dict_settings_title" msgid="8357027437499042191">"User dictionary"</string>
+    <string name="user_dict_settings_summary" msgid="7965571192902870454"></string>
+    <string name="user_dict_settings_add_menu_title" msgid="4056762757149923551">"Add"</string>
+    <string name="user_dict_settings_add_dialog_title" msgid="4702613990174126482">"Add to dictionary"</string>
+    <string name="user_dict_settings_edit_dialog_title" msgid="8967476444840548674">"Edit word"</string>
+    <string name="user_dict_settings_context_menu_edit_title" msgid="2210564879320004837">"Edit"</string>
+    <string name="user_dict_settings_context_menu_delete_title" msgid="9140703913776549054">"Delete"</string>
+    <string name="user_dict_settings_empty_text" msgid="6209268025109242806">"You do not have any words in the user dictionary. You can add a word through the menu."</string>
+    <string name="testing" msgid="6584352735303604146">"Testing"</string>
+    <string name="testing_phone_info" msgid="8656693364332840056">"Phone information"</string>
+    <string name="testing_battery_info" msgid="3497865525976497848">"Battery information"</string>
+    <string name="quick_launch_title" msgid="7904609846945905306">"Quick launch"</string>
+    <string name="quick_launch_summary" msgid="3453825712466417452">"Set keyboard shortcuts to launch applications"</string>
+    <string name="quick_launch_assign_application" msgid="4521368464929956350">"Assign application"</string>
+    <string name="quick_launch_no_shortcut" msgid="5998005833838278693">"No shortcut"</string>
+    <string name="quick_launch_shortcut" msgid="5090405067413522300">"Search + <xliff:g id="SHORTCUT_LETTER">%1$s</xliff:g>"</string>
+    <string name="quick_launch_clear_dialog_title" msgid="5546543501250320220">"Clear"</string>
+    <string name="quick_launch_clear_dialog_message" msgid="3921015601470260722">"Your shortcut for <xliff:g id="SHORTCUT_LETTER">%1$s</xliff:g> (<xliff:g id="APPLICATION_NAME">%2$s</xliff:g>) will be cleared."</string>
+    <string name="quick_launch_clear_ok_button" msgid="2634568926597586716">"OK"</string>
+    <string name="quick_launch_clear_cancel_button" msgid="1892854652197747064">"Cancel"</string>
+    <string name="quick_launch_display_mode_applications" msgid="3748789806447639039">"Applications"</string>
+    <string name="quick_launch_display_mode_shortcuts" msgid="4177934019174169042">"Short cuts"</string>
+    <string name="input_methods_settings_title" msgid="6800066636850553887">"Text input"</string>
+    <string name="input_methods_settings_summary" msgid="7571173442946675205">"Manage text input options"</string>
+    <string name="input_methods_settings_label_format" msgid="6002887604815693322">"<xliff:g id="IME_NAME">%1$s</xliff:g> Settings"</string>
+    <string name="onscreen_keyboard_settings_summary" msgid="5841558383556238653">"On-screen keyboard settings"</string>
+    <string name="builtin_keyboard_settings_title" msgid="5274990495405941804">"Built-in keyboard"</string>
+    <string name="builtin_keyboard_settings_summary" msgid="7990296351888096836">"Built-in, physical keyboard settings"</string>
+    <string name="development_settings_title" msgid="6719732334835420989">"Development"</string>
+    <string name="development_settings_summary" msgid="2151320488701538355">"Set options for application development"</string>
+    <string name="enable_adb" msgid="7982306934419797485">"USB debugging"</string>
+    <string name="enable_adb_summary" msgid="4881186971746056635">"Debug mode when USB is connected"</string>
+    <string name="keep_screen_on" msgid="1146389631208760344">"Stay awake"</string>
+    <string name="keep_screen_on_summary" msgid="2173114350754293009">"Screen will never sleep while charging"</string>
+    <string name="allow_mock_location" msgid="2787962564578664888">"Allow mock locations"</string>
+    <string name="allow_mock_location_summary" msgid="317615105156345626">"Allow mock locations"</string>
+    <string name="adb_warning_title" msgid="6234463310896563253">"Allow USB debugging?"</string>
+    <string name="adb_warning_message" msgid="5352555112049663033">"USB debugging is intended for development purposes only. It can be used to copy data between your computer and your device, install applications on your device without notification and read log data."</string>
+    <string name="gadget_picker_title" msgid="98374951396755811">"Choose gadget"</string>
+    <string name="widget_picker_title" msgid="9130684134213467557">"Choose widget"</string>
+    <string name="battery_history_days" msgid="7110262897769622564">"<xliff:g id="DAYS">%1$d</xliff:g>d <xliff:g id="HOURS">%2$d</xliff:g>h <xliff:g id="MINUTES">%3$d</xliff:g>m <xliff:g id="SECONDS">%4$d</xliff:g>s"</string>
+    <string name="battery_history_hours" msgid="7525170329826274999">"<xliff:g id="HOURS">%1$d</xliff:g>h <xliff:g id="MINUTES">%2$d</xliff:g>m <xliff:g id="SECONDS">%3$d</xliff:g>s"</string>
+    <string name="battery_history_minutes" msgid="1467775596084148610">"<xliff:g id="MINUTES">%1$d</xliff:g>m <xliff:g id="SECONDS">%2$d</xliff:g>s"</string>
+    <string name="battery_history_seconds" msgid="4283492130945761685">"<xliff:g id="SECONDS">%1$d</xliff:g>s"</string>
+    <string name="usage_stats_label" msgid="5890846333487083609">"Usage statistics"</string>
+    <string name="testing_usage_stats" msgid="7823048598893937339">"Usage statistics"</string>
+    <string name="display_order_text" msgid="8592776965827565271">"Sort by:"</string>
+    <string name="app_name_label" msgid="2000949925256858308">"Application"</string>
+    <string name="launch_count_label" msgid="4019444833263957024">"Count"</string>
+    <string name="usage_time_label" msgid="295954901452833058">"Usage time"</string>
+    <string name="accessibility_settings" msgid="3975902491934816215">"Accessibility"</string>
+    <string name="accessibility_settings_title" msgid="2130492524656204459">"Accessibility settings"</string>
+    <string name="accessibility_settings_summary" msgid="8185181964847149507">"Manage accessibility options"</string>
+    <string name="toggle_accessibility_title" msgid="650839277066574497">"Accessibility"</string>
+    <string name="accessibility_services_category" msgid="8127851026323672607">"Accessibility services"</string>
+    <string name="no_accessibility_services_summary" msgid="694578333333808159">"No installed accessibility services."</string>
+    <string name="accessibility_service_security_warning" msgid="4066258132331302670">"This accessibility service may be able to collect all the text that you type, including personal data credit card numbers except passwords. It may also log your user interface interactions. It comes from the application <xliff:g id="ACCESSIBILITY_SERVICE_NAME">%1$s</xliff:g>. Use this accessibility service?"</string>
+    <string name="accessibility_service_disable_warning" msgid="8930591383312775132">"Disable accessibility?"</string>
+    <string name="accessibility_service_no_apps_title" msgid="898893674114288531">"No accessibility-related applications found"</string>
+    <string name="accessibility_service_no_apps_message" msgid="2450056749545404807">"You do not have any accessibility-related applications installed."\n\n"You can download a screen reader for your device from Android Market."\n\n"Click OK to install the screen reader."</string>
+    <string name="accessibility_power_button_category" msgid="8545885236482339928">"Power button"</string>
+    <string name="accessibility_power_button_ends_call" msgid="7698764194501089533">"Power button ends call"</string>
+    <string name="accessibility_power_button_ends_call_summary" msgid="8878097632186291462">"During a call, pressing Power ends call instead of turning off screen"</string>
+    <string name="power_usage_summary_title" msgid="5180282911164282324">"Battery use"</string>
+    <string name="power_usage_summary" msgid="7237084831082848168">"What has been using the battery"</string>
+    <string name="battery_since_unplugged" msgid="338073389740738437">"Battery use since unplugged"</string>
+    <string name="battery_since_reset" msgid="7464546661121187045">"Battery use since reset"</string>
+    <string name="battery_stats_on_battery" msgid="4970762168505236033">"<xliff:g id="TIME">%1$s</xliff:g> on battery"</string>
+    <string name="battery_stats_duration" msgid="7464501326709469282">"<xliff:g id="TIME">%1$s</xliff:g> since unplugged"</string>
+    <string name="battery_stats_charging_label" msgid="4223311142875178785">"Charging"</string>
+    <string name="battery_stats_screen_on_label" msgid="7150221809877509708">"Screen ON"</string>
+    <string name="battery_stats_gps_on_label" msgid="1193657533641951256">"GPS on"</string>
+    <string name="battery_stats_wifi_running_label" msgid="3093545080361658269">"Wi-Fi"</string>
+    <string name="battery_stats_wake_lock_label" msgid="1908942681902324095">"Awake"</string>
+    <string name="battery_stats_phone_signal_label" msgid="6822042940376636775">"Phone signal"</string>
+    <!-- no translation found for battery_stats_last_duration (1535831453827905957) -->
+    <skip />
+    <string name="awake" msgid="387122265874485088">"Device awake time"</string>
+    <string name="wifi_on_time" msgid="6310209835617490616">"Wi-Fi-on time"</string>
+    <string name="bluetooth_on_time" msgid="6157799524996162271">"Wi-Fi-on time"</string>
+    <string name="usage_name_percent" msgid="7976919382448235858">"<xliff:g id="NAME">%1$s</xliff:g> -  <xliff:g id="NUMBER">%2$s</xliff:g><xliff:g id="PERCENT">%%</xliff:g>"</string>
+    <string name="details_title" msgid="7564809986329021063">"Battery use details"</string>
+    <string name="details_subtitle" msgid="32593908269911734">"Use details"</string>
+    <string name="controls_subtitle" msgid="390468421138288702">"Adjust power use"</string>
+    <string name="packages_subtitle" msgid="4736416171658062768">"Included packages"</string>
+    <string name="power_screen" msgid="2353149143338929583">"Display"</string>
+    <string name="power_wifi" msgid="2382791137776486974">"WiFi"</string>
+    <string name="power_bluetooth" msgid="4373329044379008289">"Bluetooth"</string>
+    <string name="power_cell" msgid="6596471490976003056">"Mobile standby"</string>
+    <string name="power_phone" msgid="5392641106474567277">"Voice calls"</string>
+    <string name="power_idle" msgid="9055659695602194990">"Phone idle"</string>
+    <string name="usage_type_cpu" msgid="715162150698338714">"CPU total"</string>
+    <string name="usage_type_cpu_foreground" msgid="6500579611933211831">"CPU foreground"</string>
+    <string name="usage_type_wake_lock" msgid="5125438890233677880">"Keep awake"</string>
+    <string name="usage_type_gps" msgid="7989688715128160790">"GPS"</string>
+    <string name="usage_type_wifi_running" msgid="8234997940652067049">"Wi-Fi running"</string>
+    <string name="usage_type_phone" msgid="9108247984998041853">"Phone"</string>
+    <string name="usage_type_data_send" msgid="2857401966985425427">"Data sent"</string>
+    <string name="usage_type_data_recv" msgid="7251090882025234185">"Data received"</string>
+    <string name="usage_type_audio" msgid="6957269406840886290">"Audio"</string>
+    <string name="usage_type_video" msgid="4295357792078579944">"Video"</string>
+    <string name="usage_type_on_time" msgid="3351200096173733159">"Time on"</string>
+    <string name="usage_type_no_coverage" msgid="3797004252954385053">"Time without a signal"</string>
+    <string name="battery_action_stop" msgid="649958863744041872">"Force stop"</string>
+    <string name="battery_action_app_details" msgid="3275013531871113681">"Application info"</string>
+    <string name="battery_action_app_settings" msgid="350562653472577250">"Application settings"</string>
+    <string name="battery_action_display" msgid="5302763261448580102">"Display settings"</string>
+    <string name="battery_action_wifi" msgid="2272741639606146903">"Wi-Fi settings"</string>
+    <string name="battery_action_bluetooth" msgid="8374789049507723142">"Bluetooth settings"</string>
+    <string name="battery_desc_voice" msgid="8980322055722959211">"Battery used by voice calls"</string>
+    <string name="battery_desc_standby" msgid="3009080001948091424">"Battery used when phone is idle"</string>
+    <string name="battery_desc_radio" msgid="5479196477223185367">"Battery used by mobile radio"</string>
+    <string name="battery_sugg_radio" msgid="8211336978326295047">"Switch to airplane mode to save power in areas with no mobile coverage"</string>
+    <string name="battery_desc_display" msgid="5432795282958076557">"Battery used by the display and backlight"</string>
+    <string name="battery_sugg_display" msgid="3370202402045141760">"Reduce the screen brightness and/or screen timeout"</string>
+    <string name="battery_desc_wifi" msgid="1702486494565080431">"Battery used by WiFi"</string>
+    <string name="battery_sugg_wifi" msgid="7542345142282261691">"Turn off WiFi when not using it or where it is not available"</string>
+    <string name="battery_desc_bluetooth" msgid="7535520658674621902">"Battery used by Bluetooth"</string>
+    <string name="battery_sugg_bluetooth_basic" msgid="817276933922157788">"Turn off Bluetooth when you aren\'t using it"</string>
+    <string name="battery_sugg_bluetooth_headset" msgid="8214816222115517479">"Try connecting to a different Bluetooth device"</string>
+    <string name="battery_desc_apps" msgid="6665712811746233450">"Battery used by application"</string>
+    <string name="battery_sugg_apps_info" msgid="6065882899391322442">"Stop or uninstall the application"</string>
+    <string name="battery_sugg_apps_gps" msgid="4545056413090932541">"Manually control GPS to prevent application from using it"</string>
+    <string name="battery_sugg_apps_settings" msgid="8021302847272481168">"The application may offer settings to reduce battery use"</string>
+    <string name="menu_stats_unplugged" msgid="8296577130840261624">"<xliff:g id="UNPLUGGED">%1$s</xliff:g> since unplugged"</string>
+    <string name="menu_stats_last_unplugged" msgid="5922246077592434526">"While last for unplugged for <xliff:g id="UNPLUGGED">%1$s</xliff:g>"</string>
+    <string name="menu_stats_total" msgid="8973377864854807854">"Usage totals"</string>
+    <string name="menu_stats_refresh" msgid="1676215433344981075">"Refresh"</string>
+    <string name="process_kernel_label" msgid="3916858646836739323">"Android OS"</string>
+    <string name="process_mediaserver_label" msgid="6500382062945689285">"Media server"</string>
+    <string name="voice_input_output_settings" msgid="1336135218350444783">"Voice input &amp; output"</string>
+    <string name="voice_input_output_settings_title" msgid="2442850635048676991">"Voice input &amp; output settings"</string>
+    <string name="voice_search_settings_title" msgid="2775469246913196536">"Voice search"</string>
+    <string name="keyboard_settings_title" msgid="5080115226780201234">"Android keyboard"</string>
+    <string name="voice_input_category" msgid="1589318440824204736">"Voice input"</string>
+    <string name="voice_output_category" msgid="2624538587784986229">"Voice output"</string>
+    <string name="recognizer_title" msgid="3231385184559054457">"Voice recogniser"</string>
+    <string name="recognizer_settings_title" msgid="6038598099039717232">"Voice recogniser settings"</string>
+    <string name="recognizer_settings_summary" msgid="4472287934134546902">"Settings for \'<xliff:g id="RECOGNIZER_NAME">%s</xliff:g>\'"</string>
+    <string name="tts_settings" msgid="8186971894801348327">"Text-to-speech settings"</string>
+    <string name="tts_settings_title" msgid="4182348653053000933">"Text-to-speech settings"</string>
+    <string name="use_default_tts_settings_title" msgid="1577063839539732930">"Always use my settings"</string>
+    <string name="use_default_tts_settings_summary" msgid="4253502106159206276">"Default settings below override application settings"</string>
+    <string name="tts_default_settings_section" msgid="5787915620218907443">"default settings"</string>
+    <string name="tts_default_synth_title" msgid="29467896463371992">"Default Engine"</string>
+    <string name="tts_default_synth_summary" msgid="6482936537135251690">"Sets the speech synthesis engine to be used for spoken text"</string>
+    <string name="tts_default_rate_title" msgid="6030550998379310088">"Speech rate"</string>
+    <string name="tts_default_rate_summary" msgid="4061815292287182801">"Speed at which the text is spoken"</string>
+    <string name="tts_default_pitch_title" msgid="6135942113172488671">"Pitch"</string>
+    <string name="tts_default_pitch_summary" msgid="1328298665182885277">"Affects the tone of the spoken text"</string>
+    <string name="tts_default_lang_title" msgid="8018087612299820556">"Language"</string>
+    <string name="tts_default_lang_summary" msgid="5219362163902707785">"Sets the language-specific voice for the spoken text"</string>
+    <string name="tts_play_example_title" msgid="7094780383253097230">"Listen to an example"</string>
+    <string name="tts_play_example_summary" msgid="8029071615047894486">"Play a short demonstration of speech synthesis"</string>
+    <string name="tts_install_data_title" msgid="4264378440508149986">"Install voice data"</string>
+    <string name="tts_install_data_summary" msgid="5742135732511822589">"Install the voice data required for speech synthesis"</string>
+    <string name="tts_data_installed_summary" msgid="9162111552859972809">"Voices required for speech synthesis already properly installed"</string>
+    <string name="tts_demo" msgid="405357591189935876">"This is an example of speech synthesis."</string>
+    <string name="tts_settings_changed_demo" msgid="4926518555912328645">"Your settings have changed. This is an example of how they sound."</string>
+    <string name="tts_engine_error" msgid="5513288178403066867">"The engine that you selected is unable to run"</string>
+    <string name="tts_engine_error_config" msgid="5820525416624637313">"Configure"</string>
+    <string name="tts_engine_error_reselect" msgid="3071453963296013376">"Select another engine"</string>
+    <string name="tts_engine_security_warning" msgid="8786238102020223650">"This speech synthesis engine may be able to collect all the text that will be spoken, including personal data like passwords and credit card numbers. It comes from the <xliff:g id="TTS_PLUGIN_ENGINE_NAME">%s</xliff:g> engine. Enable the use of this speech synthesis engine?"</string>
+    <string name="tts_engines_section" msgid="7515470972378742429">"Engines"</string>
+    <string name="tts_engine_name_settings" msgid="4974538563074395920">"<xliff:g id="TTS_PLUGIN_ENGINE_NAME">%s</xliff:g> Settings"</string>
+    <string name="tts_engine_name_is_enabled_summary" msgid="4909484006804022115">"<xliff:g id="TTS_PLUGIN_ENGINE_NAME">%s</xliff:g> is enabled"</string>
+    <string name="tts_engine_name_is_disabled_summary" msgid="7644198182255168200">"<xliff:g id="TTS_PLUGIN_ENGINE_NAME">%s</xliff:g> is disabled"</string>
+    <string name="pico_languages_and_voices" msgid="4611320375917773238">"Languages and voices"</string>
+    <string name="pico_installed" msgid="2452546687858267414">"Installed"</string>
+    <string name="pico_not_installed" msgid="6266845418419994311">"Not installed"</string>
+    <string name="pico_voice_summary_female" msgid="8047327176247727492">"Female"</string>
+    <string name="pico_voice_summary_male" msgid="8331266854058577610">"Male"</string>
+    <string name="tts_notif_engine_install_title" msgid="7000346872482649034">"Speech synthesis engine installed"</string>
+    <string name="tts_notif_engine_install_message" msgid="5304661142202662693">"Enable new engine before use"</string>
+    <string name="gadget_title" msgid="7455548605888590466">"Power Control"</string>
+    <string name="gadget_toggle_wifi" msgid="2382963973155082629">"Updating WiFi setting"</string>
+    <string name="gadget_toggle_bluetooth" msgid="7538903239807020826">"Updating Bluetooth setting"</string>
+    <string name="vpn_settings_activity_title" msgid="7276864950701612579">"VPN settings"</string>
+    <string name="vpn_connect_to" msgid="2541409082892684362">"Connect to <xliff:g id="NAME">%s</xliff:g>"</string>
+    <string name="vpn_username_colon" msgid="7854930370861306247">"Username:"</string>
+    <string name="vpn_password_colon" msgid="5716278710848606626">"Password:"</string>
+    <string name="vpn_a_username" msgid="6664733641993968692">"a username"</string>
+    <string name="vpn_a_password" msgid="1537213632501483753">"a password"</string>
+    <string name="vpn_save_username" msgid="1408415289165970790">"Remember username"</string>
+    <string name="vpn_connect_button" msgid="1699007212602470655">"Connect"</string>
+    <string name="vpn_yes_button" msgid="8034531001149843119">"Yes"</string>
+    <string name="vpn_no_button" msgid="7620339571187119107">"No"</string>
+    <string name="vpn_back_button" msgid="192036339792734970">"Back"</string>
+    <string name="vpn_mistake_button" msgid="1683383660912491270">"No"</string>
+    <string name="vpn_menu_done" msgid="93528279226907926">"Save"</string>
+    <string name="vpn_menu_cancel" msgid="7234451214611202868">"Cancel"</string>
+    <string name="vpn_menu_revert" msgid="4407762442281467659">"Revert"</string>
+    <string name="vpn_menu_connect" msgid="1089399414463784218">"Connect to network"</string>
+    <string name="vpn_menu_disconnect" msgid="8254492450022562235">"Disconnect from network"</string>
+    <string name="vpn_menu_edit" msgid="4526245173583195618">"Edit network"</string>
+    <string name="vpn_menu_delete" msgid="3326527392609513129">"Delete network"</string>
+    <string name="vpn_error_miss_entering" msgid="5377667978602483250">"You must enter <xliff:g id="CODE">%s</xliff:g>."</string>
+    <string name="vpn_error_miss_selecting" msgid="4890780825580511345">"You must select <xliff:g id="OPTION">%s</xliff:g>."</string>
+    <string name="vpn_error_duplicate_name" msgid="2693927537390963745">"<xliff:g id="NAME">%s</xliff:g>the VPN  \'NAME\' already exists. Find another name."</string>
+    <string name="vpn_confirm_profile_deletion" msgid="8679536635364177239">"Are you sure that you want to delete this VPN?"</string>
+    <string name="vpn_confirm_add_profile_cancellation" msgid="3377869170901609182">"Are you sure that you don\'t want to create this profile?"</string>
+    <string name="vpn_confirm_edit_profile_cancellation" msgid="7496760181072204494">"Are you sure that you want to discard the changes made to this profile?"</string>
+    <string name="vpn_confirm_reconnect" msgid="5748535476278674296">"Unable to connect to the network. Do you want to try again?"</string>
+    <string name="vpn_reconnect_from_lost" msgid="2442844155623372118">"Connection lost. Do you want to connect again?"</string>
+    <string name="vpn_unknown_server_dialog_msg" msgid="3080742299823671319">"Server name cannot be resolved. Do you want to check your server name setting?"</string>
+    <string name="vpn_challenge_error_dialog_msg" msgid="6174901754230038601">"Challenge error. Do you want to check your secret setting?"</string>
+    <string name="vpn_secret_not_set_dialog_msg" msgid="8013052814131532765">"One or more secrets are missing in this VPN configuration. Do you want to check your secret setting?"</string>
+    <string name="vpn_auth_error_dialog_msg" msgid="5476820106624807614">"The username or password that you entered is incorrect. Do you want to try again?"</string>
+    <string name="vpn_remote_hung_up_error_dialog_msg" msgid="1566946015052633150">"Server hung up. The username or password that you entered could be incorrect. Do you want to try again?"</string>
+    <string name="vpn_remote_ppp_hung_up_error_dialog_msg" msgid="5135958511128503344">"Server hung up. It is possible that you are behind a firewall that prevents you from connecting to the server. Do you want to try again?"</string>
+    <string name="vpn_ppp_negotiation_failed_dialog_msg" msgid="4611293656718340994">"Server negotiation failed. The server may not agree with your encryption option. Do you want to check your encryption setting?"</string>
+    <string name="vpn_type_title" msgid="6392933604218676224">"Add VPN"</string>
+    <string name="vpn_add_new_vpn" msgid="5438260689052714550">"Add VPN"</string>
+    <string name="vpn_edit_title_add" msgid="2121313217989682890">"<xliff:g id="NAME">%s</xliff:g>Add VPN"</string>
+    <string name="vpn_edit_title_edit" msgid="2457278794066617935">"<xliff:g id="NAME">%s</xliff:g> details"</string>
+    <string name="vpns" msgid="3148141862835492816">"VPNs"</string>
+    <string name="vpn_connecting" msgid="8039521381692090116">"Connecting..."</string>
+    <string name="vpn_disconnecting" msgid="7748050200708257066">"Disconnecting..."</string>
+    <string name="vpn_connected" msgid="7641723116362845781">"Connected"</string>
+    <string name="vpn_connect_hint" msgid="7442898962925875181">"Connect to network"</string>
+    <string name="vpn_name" msgid="1550918148476193076">"VPN name"</string>
+    <string name="vpn_a_name" msgid="8445736942405283509">"a VPN name"</string>
+    <string name="vpn_profile_added" msgid="9061017910337129840">"\'<xliff:g id="NAME">%s</xliff:g>\' is added"</string>
+    <string name="vpn_profile_replaced" msgid="587435576816273815">"Changes are made to \'<xliff:g id="NAME">%s</xliff:g>\'"</string>
+    <string name="vpn_user_certificate_title" msgid="6812545893924071742">"Set user certificate"</string>
+    <string name="vpn_user_certificate" msgid="949322691686938888">"User certificate"</string>
+    <string name="vpn_a_user_certificate" msgid="8943983437956898649">"a user certificate"</string>
+    <string name="vpn_ca_certificate_title" msgid="7846466160795589985">"Set CA certificate"</string>
+    <string name="vpn_ca_certificate" msgid="465085144064264742">"Certificate authority (CA) certificate"</string>
+    <string name="vpn_a_ca_certificate" msgid="3374242520974884295">"a CA certificate"</string>
+    <string name="vpn_l2tp_secret_string_title" msgid="5039677186748940987">"Set L2TP secret"</string>
+    <string name="vpn_l2tp_secret" msgid="529359749677142076">"L2TP secret"</string>
+    <string name="vpn_a_l2tp_secret" msgid="6612042930810981845">"an L2TP secret"</string>
+    <string name="vpn_pptp_encryption_title" msgid="2236795167467896499">"encryption"</string>
+    <string name="vpn_pptp_encryption" msgid="2602329949737259686">"PPTP encryption"</string>
+    <string name="vpn_ipsec_presharedkey_title" msgid="2184060087690539175">"Set IPSec preshared key"</string>
+    <string name="vpn_ipsec_presharedkey" msgid="5434316521616673741">"IPSec preshared key"</string>
+    <string name="vpn_a_ipsec_presharedkey" msgid="1255301923217898418">"an IPSec preshared key"</string>
+    <string name="vpn_vpn_server_title" msgid="8897005887420358913">"Set VPN server"</string>
+    <string name="vpn_vpn_server" msgid="1141754908824209260">"VPN server"</string>
+    <string name="vpn_a_vpn_server" msgid="5960906152125045853">"a VPN server"</string>
+    <string name="vpn_vpn_server_dialog_title" msgid="7850850940160521918">"VPN server name"</string>
+    <string name="vpn_dns_search_list_title" msgid="1022776976104584251">"DNS search domains"</string>
+    <string name="vpn_dns_search_list" msgid="4230034234026605360">"DNS search domains"</string>
+    <string name="vpn_field_is_set" msgid="7137320847812992243">"<xliff:g id="VALUE">%s</xliff:g> is set"</string>
+    <string name="vpn_field_not_set" msgid="2972519243515893804">"<xliff:g id="VALUE">%s</xliff:g> not set"</string>
+    <string name="vpn_field_not_set_optional" msgid="8840557698252556791">"<xliff:g id="VALUE">%s</xliff:g> not set (optional)"</string>
+    <string name="vpn_enable_field" msgid="3700967675854517191">"Enable <xliff:g id="OPTION">%s</xliff:g>"</string>
+    <string name="vpn_disable_field" msgid="6905658811179634005">"Disable <xliff:g id="OPTION">%s</xliff:g>"</string>
+    <string name="vpn_is_enabled" msgid="1266304230417098877">"<xliff:g id="OPTION">%s</xliff:g> is enabled"</string>
+    <string name="vpn_is_disabled" msgid="2013622485867806167">"<xliff:g id="OPTION">%s</xliff:g> is disabled"</string>
+    <string name="vpn_settings_title" msgid="7327468307909556719">"VPN settings"</string>
+    <string name="vpn_settings_summary" msgid="8849924181594963972">"Set up &amp; manage Virtual Private Networks (VPNs)"</string>
+    <string name="vpn_secret_unchanged" msgid="8700613973594154529">"(unchanged)"</string>
+    <string name="vpn_secret_not_set" msgid="1037792636371641845">"(not set)"</string>
+    <string name="credentials_category" msgid="8536992056377271234">"Credential storage"</string>
+    <string name="credentials_access" msgid="4843187230913860492">"Use secure credentials"</string>
+    <string name="credentials_access_summary" msgid="319662078718574168">"Allow applications to access secure certificates and other credentials"</string>
+    <string name="credentials_unlock" msgid="1463040326264133844">"Enter Password"</string>
+    <string name="credentials_unlock_hint" msgid="594679530407918031">"Enter the credential storage password."</string>
+    <string name="credentials_install_certificates" product="nosdcard" msgid="619171634797689906">"Install from USB storage"</string>
+    <string name="credentials_install_certificates" product="default" msgid="177337517568022236">"Install from SD card"</string>
+    <string name="credentials_install_certificates_summary" product="nosdcard" msgid="8920330112631198575">"Install encrypted certificates from USB storage"</string>
+    <string name="credentials_install_certificates_summary" product="default" msgid="7737001268684193093">"Install encrypted certificates from SD card"</string>
+    <string name="credentials_set_password" msgid="9104473585811899989">"Set password"</string>
+    <string name="credentials_set_password_summary" msgid="8287876917562085701">"Set or change the credential storage password"</string>
+    <string name="credentials_reset" msgid="9170150870552453457">"Clear storage"</string>
+    <string name="credentials_reset_summary" msgid="1530388094693731636">"Clear credential storage of all contents and reset its password"</string>
+    <string name="credentials_reset_hint" msgid="819990295796804516">"Are you sure that you want to delete all credentials and reset the credential storage password?"</string>
+    <string name="credentials_old_password" msgid="7553393815538684028">"Current password:"</string>
+    <string name="credentials_new_password" msgid="267487774686796938">"New password:"</string>
+    <string name="credentials_confirm_password" msgid="4732250000633424345">"Confirm new password:"</string>
+    <string name="credentials_first_time_hint" msgid="1567821077545346039">"Set a password for the credential storage (at least 8 characters)."</string>
+    <string name="credentials_wrong_password" msgid="7525192410790152041">"Please enter the correct password."</string>
+    <string name="credentials_reset_warning" msgid="6392481296673345268">"Please enter the correct password. You have one more try to enter the correct password before the credential storage is erased."</string>
+    <string name="credentials_reset_warning_plural" msgid="454828369803055270">"Please enter the correct password. You have <xliff:g id="NUMBER">%1$d</xliff:g> more tries to enter the correct password before the credential storage is erased."</string>
+    <string name="credentials_passwords_mismatch" msgid="5288565139590031733">"passwords do not match."</string>
+    <string name="credentials_passwords_empty" msgid="8647631321684363549">"You must enter and confirm a password."</string>
+    <string name="credentials_password_empty" msgid="8292138152983330473">"Please enter the password."</string>
+    <string name="credentials_password_too_short" msgid="7502749986405522663">"The password must contain at least 8 characters."</string>
+    <string name="credentials_erased" msgid="7700309135582200849">"The credential storage is erased."</string>
+    <string name="credentials_enabled" msgid="7588607413349978930">"Credential storage is enabled."</string>
+    <string name="credentials_disabled" msgid="7453188089059045380">"Credential storage is disabled."</string>
+    <string name="encrypted_fs_category" msgid="1841367653663913956">"Encrypted File System"</string>
+    <string name="encrypted_fs_enable" msgid="3884033081603327729">"Encrypt private user data"</string>
+    <string name="encrypted_fs_enable_summary" msgid="5635188119509076089">"Enable encrypted file-system storage for private user data in this device"</string>
+    <string name="encrypted_fs_enable_dialog" msgid="919487211207214266">"Enabling Encrypted File Systems requires a device data wipe."</string>
+    <string name="encrypted_fs_disable_dialog" msgid="6960413613985682501">"Disabling Encrypted File Systems requires a device data wipe."</string>
+    <string name="encrypted_fs_enable_button" msgid="8453841319751433751">"Enable"</string>
+    <string name="encrypted_fs_disable_button" msgid="8468354944060220496">"Disable"</string>
+    <string name="encrypted_fs_cancel_button" msgid="4785921255266305799">"Cancel"</string>
+    <string name="encrypted_fs_cancel_confirm" msgid="853572431153803557">"Encrypted File Systems mode change cancelled."</string>
+    <string name="encrypted_fs_alert_dialog_title" msgid="583462447886934755">"Encrypted File Systems Warning."</string>
+    <string name="emergency_tone_title" msgid="1055954530111587114">"Emergency tone"</string>
+    <string name="emergency_tone_summary" msgid="722259232924572153">"Set behaviour when an emergency call is placed"</string>
+    <string name="privacy_settings" msgid="9206631214140954954">"Privacy"</string>
+    <string name="privacy_settings_title" msgid="1987089301293213705">"Privacy settings"</string>
+    <string name="backup_section_title" msgid="8856083167469467588">"Back up and restore"</string>
+    <string name="personal_data_section_title" msgid="7815209034443782061">"personal data"</string>
+    <string name="backup_data_title" msgid="1239105919852668016">"Back up my data"</string>
+    <string name="backup_data_summary" msgid="6515285107793232815">"Back up application data, Wi-Fi passwords and other settings, to Google servers"</string>
+    <string name="auto_restore_title" msgid="5397528966329126506">"Automatic restore"</string>
+    <string name="auto_restore_summary" msgid="83177150536734378">"If I reinstall an application, restore backed-up settings or other data"</string>
+    <string name="backup_erase_dialog_title" msgid="3438255037256586237">"Backup"</string>
+    <string name="backup_erase_dialog_message" msgid="7766283133557587608">"Are you sure that you want to stop backing up your Wi-Fi passwords, bookmarks and other settings and application data and erase all copies on Google servers?"</string>
+    <string name="device_admin_settings_title" msgid="1335557832906433309">"Device administration settings"</string>
+    <string name="active_device_admin_msg" msgid="6930903262612422111">"Device administrator"</string>
+    <string name="remove_device_admin" msgid="3596845261596451437">"Deactivate"</string>
+    <string name="select_device_admin_msg" msgid="2645509057946368094">"Device administrators"</string>
+    <string name="no_device_admins" msgid="702695100241728775">"No available device administrators"</string>
+    <string name="add_device_admin_msg" msgid="6246742476064507965">"Activate device administrator?"</string>
+    <string name="add_device_admin" msgid="7133327675884827091">"Activate"</string>
+    <string name="device_admin_add_title" msgid="7705551449705676363">"Device administrator"</string>
+    <string name="device_admin_warning" msgid="1149471041373876923">"Activating this administrator will allow the application <xliff:g id="APP_NAME">%1$s</xliff:g> to perform the following operations:"</string>
+    <string name="device_admin_status" msgid="7169948053970923035">"This administrator is active and allows the application <xliff:g id="APP_NAME">%1$s</xliff:g> to perform the following operations:"</string>
+    <string name="untitled_apn" msgid="1230060359198685513">"Untitled"</string>
+    <string name="sound_category_sound_title" msgid="1488759370067953996">"General"</string>
+    <string name="sound_category_calls_title" msgid="3688531959256239012">"Incoming calls"</string>
+    <string name="sound_category_notification_title" msgid="3502115998790286943">"Notifications"</string>
+    <string name="sound_category_feedback_title" msgid="4399742321363475393">"Feedback"</string>
+</resources>
