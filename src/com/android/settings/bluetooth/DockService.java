@@ -663,7 +663,7 @@ public class DockService extends Service implements AlertDialog.OnMultiChoiceCli
             }
 
             if (profileManager.getPreferred(device) == auto) {
-                cachedDevice.connect();
+                cachedDevice.connect(false);
                 break;
             }
         }
@@ -735,7 +735,7 @@ public class DockService extends Service implements AlertDialog.OnMultiChoiceCli
 
         if (callConnect) {
             if (DEBUG) Log.d(TAG, "applyBtSettings - Connecting");
-            cachedDevice.connect();
+            cachedDevice.connect(false);
         }
     }
 

@@ -140,7 +140,7 @@ class CachedBluetoothDevice implements Comparable<CachedBluetoothDevice> {
         if (isConnected()) {
             askDisconnect();
         } else if (bondState == BluetoothDevice.BOND_BONDED) {
-            connect();
+            connect(true);
         } else if (bondState == BluetoothDevice.BOND_NONE) {
             pair();
         }
@@ -264,18 +264,18 @@ class CachedBluetoothDevice implements Comparable<CachedBluetoothDevice> {
         super.finalize();
     }
 
-    public void connect() {
+    public void connect(boolean connectAllProfiles) {
         if (!ensurePaired()) return;
 
         mConnectAttempted = SystemClock.elapsedRealtime();
 
-        connectWithoutResettingTimer(true);
+        connectWithoutResettingTimer(connectAllProfiles);
     }
 
     /*package*/ void onBondingDockConnect() {
         // Attempt to connect if UUIDs are available. Otherwise,
         // we will connect when the ACTION_UUID intent arrives.
-        connect();
+        connect(false);
     }
 
     private void connectWithoutResettingTimer(boolean connectAllProfiles) {
@@ -646,7 +646,7 @@ class CachedBluetoothDevice implements Comparable<CachedBluetoothDevice> {
             if (mDevice.isBluetoothDock()) {
                 onBondingDockConnect();
             } else if (mConnectAfterPairing) {
-                connect();
+                connect(false);
             }
             mConnectAfterPairing = false;
         }
