@@ -81,8 +81,6 @@ public class AccountSyncSettings extends AccountPreferenceBase {
     private ArrayList<SyncStateCheckBoxPreference> mCheckBoxes =
                 new ArrayList<SyncStateCheckBoxPreference>();
     private ArrayList<String> mInvisibleAdapters = Lists.newArrayList();
-    // Tell if we will use the current SyncManager data or just the User input
-    protected boolean mUseSyncManagerFeedsState = true;
 
     @Override
     public Dialog onCreateDialog(final int id) {
@@ -264,7 +262,7 @@ public class AccountSyncSettings extends AccountPreferenceBase {
 
     @Override
     public boolean onPreferenceTreeClick(PreferenceScreen preferences, Preference preference) {
-        if (preference instanceof SyncStateCheckBoxPreference && mUseSyncManagerFeedsState) {
+        if (preference instanceof SyncStateCheckBoxPreference) {
             SyncStateCheckBoxPreference syncPref = (SyncStateCheckBoxPreference) preference;
             String authority = syncPref.getAuthority();
             Account account = syncPref.getAccount();
@@ -345,10 +343,10 @@ public class AccountSyncSettings extends AccountPreferenceBase {
     @Override
     protected void onSyncStateUpdated() {
         if (!isResumed()) return;
-        setFeedsState(mUseSyncManagerFeedsState);
+        setFeedsState();
     }
 
-    private void setFeedsState(boolean useSyncManager) {
+    private void setFeedsState() {
         // iterate over all the preferences, setting the state properly for each
         Date date = new Date();
         List<SyncInfo> currentSyncs = ContentResolver.getCurrentSyncs();
@@ -367,53 +365,49 @@ public class AccountSyncSettings extends AccountPreferenceBase {
             String authority = syncPref.getAuthority();
             Account account = syncPref.getAccount();
 
-            if (useSyncManager) {
-                SyncStatusInfo status = ContentResolver.getSyncStatus(account, authority);
-                boolean syncEnabled = ContentResolver.getSyncAutomatically(account, authority);
-                boolean authorityIsPending = status == null ? false : status.pending;
-                boolean initialSync = status == null ? false : status.initialize;
+            SyncStatusInfo status = ContentResolver.getSyncStatus(account, authority);
+            boolean syncEnabled = ContentResolver.getSyncAutomatically(account, authority);
+            boolean authorityIsPending = status == null ? false : status.pending;
+            boolean initialSync = status == null ? false : status.initialize;
 
-                boolean activelySyncing = isSyncing(currentSyncs, account, authority);
-                boolean lastSyncFailed = status != null
-                        && status.lastFailureTime != 0
-                        && status.getLastFailureMesgAsInt(0)
-                           != ContentResolver.SYNC_ERROR_SYNC_ALREADY_IN_PROGRESS;
-                if (!syncEnabled) lastSyncFailed = false;
-                if (lastSyncFailed && !activelySyncing && !authorityIsPending) {
-                    syncIsFailing = true;
-                }
-                if (Log.isLoggable(TAG, Log.VERBOSE)) {
-                    Log.d(TAG, "Update sync status: " + account + " " + authority +
-                            " active = " + activelySyncing + " pend =" +  authorityIsPending);
-                }
-
-                final long successEndTime = (status == null) ? 0 : status.lastSuccessTime;
-                if (successEndTime != 0) {
-                    date.setTime(successEndTime);
-                    final String timeString = mDateFormat.format(date) + " "
-                            + mTimeFormat.format(date);
-                    syncPref.setSummary(timeString);
-                } else {
-                    syncPref.setSummary("");
-                }
-                int syncState = ContentResolver.getIsSyncable(account, authority);
-
-                syncPref.setActive(activelySyncing && (syncState >= 0) &&
-                        !initialSync);
-                syncPref.setPending(authorityIsPending && (syncState >= 0) &&
-                        !initialSync);
-
-                syncPref.setFailed(lastSyncFailed);
-                ConnectivityManager connManager =
-                    (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
-                final boolean masterSyncAutomatically = ContentResolver.getMasterSyncAutomatically();
-                final boolean backgroundDataEnabled = connManager.getBackgroundDataSetting();
-                final boolean oneTimeSyncMode = !masterSyncAutomatically || !backgroundDataEnabled;
-                syncPref.setOneTimeSyncMode(oneTimeSyncMode);
-                syncPref.setChecked(oneTimeSyncMode || syncEnabled);
-            } else {
-                syncPref.setChecked(true);
+            boolean activelySyncing = isSyncing(currentSyncs, account, authority);
+            boolean lastSyncFailed = status != null
+                    && status.lastFailureTime != 0
+                    && status.getLastFailureMesgAsInt(0)
+                       != ContentResolver.SYNC_ERROR_SYNC_ALREADY_IN_PROGRESS;
+            if (!syncEnabled) lastSyncFailed = false;
+            if (lastSyncFailed && !activelySyncing && !authorityIsPending) {
+                syncIsFailing = true;
             }
+            if (Log.isLoggable(TAG, Log.VERBOSE)) {
+                Log.d(TAG, "Update sync status: " + account + " " + authority +
+                        " active = " + activelySyncing + " pend =" +  authorityIsPending);
+            }
+
+            final long successEndTime = (status == null) ? 0 : status.lastSuccessTime;
+            if (successEndTime != 0) {
+                date.setTime(successEndTime);
+                final String timeString = mDateFormat.format(date) + " "
+                        + mTimeFormat.format(date);
+                syncPref.setSummary(timeString);
+            } else {
+                syncPref.setSummary("");
+            }
+            int syncState = ContentResolver.getIsSyncable(account, authority);
+
+            syncPref.setActive(activelySyncing && (syncState >= 0) &&
+                    !initialSync);
+            syncPref.setPending(authorityIsPending && (syncState >= 0) &&
+                    !initialSync);
+
+            syncPref.setFailed(lastSyncFailed);
+            ConnectivityManager connManager =
+                (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+            final boolean masterSyncAutomatically = ContentResolver.getMasterSyncAutomatically();
+            final boolean backgroundDataEnabled = connManager.getBackgroundDataSetting();
+            final boolean oneTimeSyncMode = !masterSyncAutomatically || !backgroundDataEnabled;
+            syncPref.setOneTimeSyncMode(oneTimeSyncMode);
+            syncPref.setChecked(oneTimeSyncMode || syncEnabled);
         }
         mErrorInfoView.setVisibility(syncIsFailing ? View.VISIBLE : View.GONE);
         getActivity().invalidateOptionsMenu();
