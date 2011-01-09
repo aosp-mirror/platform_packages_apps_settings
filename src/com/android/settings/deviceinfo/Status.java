@@ -43,6 +43,7 @@ import com.android.internal.telephony.PhoneFactory;
 import com.android.internal.telephony.PhoneStateIntentReceiver;
 import com.android.internal.telephony.TelephonyProperties;
 import com.android.settings.R;
+import com.android.settings.Utils;
 
 import java.lang.ref.WeakReference;
 
@@ -62,8 +63,22 @@ import java.lang.ref.WeakReference;
  */
 public class Status extends PreferenceActivity {
 
+    private static final String KEY_SERVICE_STATE = "service_state";
+    private static final String KEY_OPERATOR_NAME = "operator_name";
+    private static final String KEY_ROAMING_STATE = "roaming_state";
+    private static final String KEY_NETWORK_TYPE = "network_type";
+    private static final String KEY_PHONE_NUMBER = "number";
+    private static final String KEY_IMEI_SV = "imei_sv";
+    private static final String KEY_IMEI = "imei";
+    private static final String KEY_PRL_VERSION = "prl_version";
+    private static final String KEY_MIN_NUMBER = "min_number";
+    private static final String KEY_MEID_NUMBER = "meid_number";
+    private static final String KEY_SIGNAL_STRENGTH = "signal_strength";
+    private static final String KEY_BATTERY_STATUS = "battery_status";
+    private static final String KEY_BATTERY_LEVEL = "battery_level";
     private static final String KEY_WIFI_MAC_ADDRESS = "wifi_mac_address";
     private static final String KEY_BT_ADDRESS = "bt_address";
+
     private static final int EVENT_SIGNAL_STRENGTH_CHANGED = 200;
     private static final int EVENT_SERVICE_STATE_CHANGED = 300;
 
@@ -166,69 +181,59 @@ public class Status extends PreferenceActivity {
         Preference removablePref;
 
         mHandler = new MyHandler(this);
-        
+
         mTelephonyManager = (TelephonyManager)getSystemService(TELEPHONY_SERVICE);
 
         addPreferencesFromResource(R.xml.device_info_status);
-        mBatteryLevel = findPreference("battery_level");
-        mBatteryStatus = findPreference("battery_status");
-        
+        mBatteryLevel = findPreference(KEY_BATTERY_LEVEL);
+        mBatteryStatus = findPreference(KEY_BATTERY_STATUS);
+
         mRes = getResources();
         if (sUnknown == null) {
             sUnknown = mRes.getString(R.string.device_info_default);
         }
-        
+
         mPhone = PhoneFactory.getDefaultPhone();
         // Note - missing in zaku build, be careful later...
-        mSignalStrength = findPreference("signal_strength");			
+        mSignalStrength = findPreference(KEY_SIGNAL_STRENGTH);
         mUptime = findPreference("up_time");
-        
+
         //NOTE "imei" is the "Device ID" since it represents the IMEI in GSM and the MEID in CDMA
         if (mPhone.getPhoneName().equals("CDMA")) {
-            setSummaryText("meid_number", mPhone.getMeid());
-            setSummaryText("min_number", mPhone.getCdmaMin());
-            setSummaryText("prl_version", mPhone.getCdmaPrlVersion());
+            setSummaryText(KEY_MEID_NUMBER, mPhone.getMeid());
+            setSummaryText(KEY_MIN_NUMBER, mPhone.getCdmaMin());
+            setSummaryText(KEY_PRL_VERSION, mPhone.getCdmaPrlVersion());
 
             // device is not GSM/UMTS, do not display GSM/UMTS features
             // check Null in case no specified preference in overlay xml
-            removablePref = findPreference("imei");
-            if (removablePref != null) {
-                getPreferenceScreen().removePreference(removablePref);
-            }
-            removablePref = findPreference("imei_sv");
-            if (removablePref != null) {
-                getPreferenceScreen().removePreference(removablePref);
-            }
+            removePreferenceFromScreen(KEY_IMEI);
+            removePreferenceFromScreen(KEY_IMEI_SV);
         } else {
-            setSummaryText("imei", mPhone.getDeviceId());
+            setSummaryText(KEY_IMEI, mPhone.getDeviceId());
 
-            setSummaryText("imei_sv",
+            setSummaryText(KEY_IMEI_SV,
                     ((TelephonyManager) getSystemService(TELEPHONY_SERVICE))
                         .getDeviceSoftwareVersion());
 
             // device is not CDMA, do not display CDMA features
             // check Null in case no specified preference in overlay xml
-            removablePref = findPreference("prl_version");
-            if (removablePref != null) {
-                getPreferenceScreen().removePreference(removablePref);
-            }
-            removablePref = findPreference("meid_number");
-            if (removablePref != null) {
-                getPreferenceScreen().removePreference(removablePref);
-            }
-            removablePref = findPreference("min_number");
-            if (removablePref != null) {
-                getPreferenceScreen().removePreference(removablePref);
-            }
+            removePreferenceFromScreen(KEY_PRL_VERSION);
+            removePreferenceFromScreen(KEY_MEID_NUMBER);
+            removePreferenceFromScreen(KEY_MIN_NUMBER);
         }
 
-        String rawNumber = mPhone.getLine1Number();  // may be null or empty
-        String formattedNumber = null;
-        if (!TextUtils.isEmpty(rawNumber)) {
-            formattedNumber = PhoneNumberUtils.formatNumber(rawNumber);
+        // Remove the phone number preference if the device is not voice capable.
+        if (!Utils.isVoiceCapable(this)) {
+            removePreferenceFromScreen(KEY_PHONE_NUMBER);
+        } else {
+            String rawNumber = mPhone.getLine1Number();  // may be null or empty
+            String formattedNumber = null;
+            if (!TextUtils.isEmpty(rawNumber)) {
+                formattedNumber = PhoneNumberUtils.formatNumber(rawNumber);
+            }
+            // If formattedNumber is null or empty, it'll display as "Unknown".
+            setSummaryText(KEY_PHONE_NUMBER, formattedNumber);
         }
-        // If formattedNumber is null or empty, it'll display as "Unknown".
-        setSummaryText("number", formattedNumber);
 
         mPhoneStateReceiver = new PhoneStateIntentReceiver(this, mHandler);
         mPhoneStateReceiver.notifySignalStrength(EVENT_SIGNAL_STRENGTH_CHANGED);
@@ -237,7 +242,7 @@ public class Status extends PreferenceActivity {
         setWifiStatus();
         setBtStatus();
     }
-    
+
     @Override
     protected void onResume() {
         super.onResume();
@@ -266,6 +271,17 @@ public class Status extends PreferenceActivity {
     }
 
     /**
+     * Removes the specified preference, if it exists.
+     * @param key the key for the Preference item
+     */
+    private void removePreferenceFromScreen(String key) {
+        Preference pref = findPreference(key);
+        if (pref != null) {
+            getPreferenceScreen().removePreference(pref);
+        }
+    }
+
+    /**
      * @param preference The key for the Preference item
      * @param property The system property to fetch
      * @param alt The default value, if the property doesn't exist
@@ -291,7 +307,7 @@ public class Status extends PreferenceActivity {
     
     private void updateNetworkType() {
         // Whether EDGE, UMTS, etc...
-        setSummary("network_type", TelephonyProperties.PROPERTY_DATA_NETWORK_TYPE, sUnknown);
+        setSummary(KEY_NETWORK_TYPE, TelephonyProperties.PROPERTY_DATA_NETWORK_TYPE, sUnknown);
     }
     
     private void updateDataState() {
@@ -333,14 +349,14 @@ public class Status extends PreferenceActivity {
                 break;
         }
         
-        setSummaryText("service_state", display);
+        setSummaryText(KEY_SERVICE_STATE, display);
         
         if (serviceState.getRoaming()) {
-            setSummaryText("roaming_state", mRes.getString(R.string.radioInfo_roaming_in));
+            setSummaryText(KEY_ROAMING_STATE, mRes.getString(R.string.radioInfo_roaming_in));
         } else {
-            setSummaryText("roaming_state", mRes.getString(R.string.radioInfo_roaming_not));
+            setSummaryText(KEY_ROAMING_STATE, mRes.getString(R.string.radioInfo_roaming_not));
         }
-        setSummaryText("operator_name", serviceState.getOperatorAlphaLong());
+        setSummaryText(KEY_OPERATOR_NAME, serviceState.getOperatorAlphaLong());
     }
     
     void updateSignalStrength() {
