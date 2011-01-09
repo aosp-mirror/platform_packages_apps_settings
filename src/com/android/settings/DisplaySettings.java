@@ -51,6 +51,8 @@ public class DisplaySettings extends SettingsPreferenceFragment implements
 
     private IWindowManager mWindowManager;
 
+    private ListPreference mScreenTimeoutPreference;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -64,12 +66,28 @@ public class DisplaySettings extends SettingsPreferenceFragment implements
         mAccelerometer = (CheckBoxPreference) findPreference(KEY_ACCELEROMETER);
         mAccelerometer.setPersistent(false);
 
-        ListPreference screenTimeoutPreference =
-            (ListPreference) findPreference(KEY_SCREEN_TIMEOUT);
-        screenTimeoutPreference.setValue(String.valueOf(Settings.System.getInt(
-                resolver, SCREEN_OFF_TIMEOUT, FALLBACK_SCREEN_TIMEOUT_VALUE)));
-        screenTimeoutPreference.setOnPreferenceChangeListener(this);
-        disableUnusableTimeouts(screenTimeoutPreference);
+        mScreenTimeoutPreference = (ListPreference) findPreference(KEY_SCREEN_TIMEOUT);
+        final long currentTimeout = Settings.System.getLong(resolver, SCREEN_OFF_TIMEOUT,
+                FALLBACK_SCREEN_TIMEOUT_VALUE);
+        mScreenTimeoutPreference.setValue(String.valueOf(currentTimeout));
+        mScreenTimeoutPreference.setOnPreferenceChangeListener(this);
+        disableUnusableTimeouts(mScreenTimeoutPreference);
+        updateTimeoutPreferenceDescription(resolver, currentTimeout);
+    }
+
+    private void updateTimeoutPreferenceDescription(ContentResolver resolver, long currentTimeout) {
+        final CharSequence[] entries = mScreenTimeoutPreference.getEntries();
+        final CharSequence[] values = mScreenTimeoutPreference.getEntryValues();
+        int best = 0;
+        for (int i = 0; i < values.length; i++) {
+            long timeout = Long.valueOf(values[i].toString());
+            if (currentTimeout >= timeout) {
+                best = i;
+            }
+        }
+        String summary = mScreenTimeoutPreference.getContext()
+                .getString(R.string.screen_timeout_summary, entries[best]);
+        mScreenTimeoutPreference.setSummary(summary);
     }
 
     private void disableUnusableTimeouts(ListPreference screenTimeoutPreference) {
@@ -195,6 +213,7 @@ public class DisplaySettings extends SettingsPreferenceFragment implements
             try {
                 Settings.System.putInt(getContentResolver(),
                         SCREEN_OFF_TIMEOUT, value);
+                updateTimeoutPreferenceDescription(getContentResolver(), value);
             } catch (NumberFormatException e) {
                 Log.e(TAG, "could not persist screen timeout setting", e);
             }
