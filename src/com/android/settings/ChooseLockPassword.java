@@ -70,6 +70,8 @@ public class ChooseLockPassword extends PreferenceActivity {
         //getWindow().setFlags(WindowManager.LayoutParams.FLAG_ALT_FOCUSABLE_IM,
                 //WindowManager.LayoutParams.FLAG_ALT_FOCUSABLE_IM);
         super.onCreate(savedInstanceState);
+        CharSequence msg = getText(R.string.lockpassword_choose_your_password_header);
+        showBreadCrumbs(msg, msg);
     }
 
     public static class ChooseLockPasswordFragment extends Fragment
