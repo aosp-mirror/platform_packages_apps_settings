@@ -50,7 +50,7 @@ public class PrivacySettings extends SettingsPreferenceFragment implements
     private PreferenceScreen mConfigure;
 
     private static final int DIALOG_ERASE_BACKUP = 2;
-    private int     mDialogType;
+    private int mDialogType;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -70,6 +70,14 @@ public class PrivacySettings extends SettingsPreferenceFragment implements
                 resolveContentProvider(GSETTINGS_PROVIDER, 0) == null) {
             screen.removePreference(findPreference(BACKUP_CATEGORY));
         }
+        updateToggles();
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+
+        // Refresh UI
         updateToggles();
     }
 
@@ -105,7 +113,6 @@ public class PrivacySettings extends SettingsPreferenceFragment implements
                 }
             }
         }
-
         return super.onPreferenceTreeClick(preferenceScreen, preference);
     }
 
@@ -147,12 +154,27 @@ public class PrivacySettings extends SettingsPreferenceFragment implements
                 Settings.Secure.BACKUP_AUTO_RESTORE, 1) == 1);
         mAutoRestore.setEnabled(backupEnabled);
 
-        mConfigure.setEnabled(configIntent != null);
+        final boolean configureEnabled = (configIntent != null) && backupEnabled;
+        mConfigure.setEnabled(configureEnabled);
         mConfigure.setIntent(configIntent);
-        if (configSummary != null) {
-            mConfigure.setSummary(configSummary);
+        setConfigureSummary(configSummary);
+    }
+
+    private void setConfigureSummary(String summary) {
+        if (summary != null) {
+            mConfigure.setSummary(summary);
         } else {
             mConfigure.setSummary(R.string.backup_configure_account_default_summary);
+        }
+    }
+
+    private void updateConfigureSummary() {
+        try {
+            String transport = mBackupManager.getCurrentTransport();
+            String summary = mBackupManager.getDestinationString(transport);
+            setConfigureSummary(summary);
+        } catch (RemoteException e) {
+            // Not much we can do here
         }
     }
 
@@ -161,11 +183,7 @@ public class PrivacySettings extends SettingsPreferenceFragment implements
             //updateProviders();
             if (mDialogType == DIALOG_ERASE_BACKUP) {
                 setBackupEnabled(false);
-            }
-        } else {
-            if (mDialogType == DIALOG_ERASE_BACKUP) {
-                mBackup.setChecked(true);
-                mAutoRestore.setEnabled(true);
+                updateConfigureSummary();
             }
         }
         mDialogType = 0;
@@ -188,5 +206,6 @@ public class PrivacySettings extends SettingsPreferenceFragment implements
         }
         mBackup.setChecked(enable);
         mAutoRestore.setEnabled(enable);
+        mConfigure.setEnabled(enable);
     }
 }
