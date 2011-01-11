@@ -714,7 +714,8 @@
         <!-- Lock screen settings -->
         <activity android:name="ConfirmLockPattern"/>
 
-        <activity android:name="ConfirmLockPassword"/>
+        <activity android:name="ConfirmLockPassword"
+            android:windowSoftInputMode="stateUnchanged|adjustResize"/>
 
         <activity android:name="ChooseLockGeneric"
             android:label="@string/lockpassword_choose_lock_generic_header">
@@ -726,7 +727,8 @@
 
         <activity android:name="ChooseLockPattern" android:exported="false"/>
 
-        <activity android:name="ChooseLockPassword" android:exported="false"/>
+        <activity android:name="ChooseLockPassword" android:exported="false"
+            android:windowSoftInputMode="stateUnchanged|adjustResize"/>
 
         <activity android:name="ChooseLockPatternTutorial" android:exported="false"/>
 

@@ -218,8 +218,8 @@ public class ChooseLockPassword extends PreferenceActivity {
             // Update the breadcrumb (title) if this is embedded in a PreferenceActivity
             if (activity instanceof PreferenceActivity) {
                 final PreferenceActivity preferenceActivity = (PreferenceActivity) activity;
-                int id = mIsAlphaMode ? R.string.lockpassword_confirm_your_password_header
-                        : R.string.lockpassword_confirm_your_pin_header;
+                int id = mIsAlphaMode ? R.string.lockpassword_choose_your_password_header
+                        : R.string.lockpassword_choose_your_pin_header;
                 CharSequence title = getText(id);
                 preferenceActivity.showBreadCrumbs(title, title);
             }
