@@ -223,6 +223,7 @@ public class SecuritySettings extends SettingsPreferenceFragment
 
         // lock after preference
         mLockAfter = setupLockAfterPreference(pm);
+        updateLockAfterPreferenceSummary();
 
         // visible pattern
         mVisiblePattern = (CheckBoxPreference) pm.findPreference(KEY_VISIBLE_PATTERN);
@@ -312,6 +313,27 @@ public class SecuritySettings extends SettingsPreferenceFragment
             }
         }
         return result;
+    }
+
+    private void updateLockAfterPreferenceSummary() {
+        // Not all security types have a "lock after" preference, so ignore those that don't.
+        if (mLockAfter == null) return;
+
+        // Update summary message with current value
+        long currentTimeout = Settings.Secure.getLong(getContentResolver(),
+                Settings.Secure.LOCK_SCREEN_LOCK_AFTER_TIMEOUT, 0);
+        final CharSequence[] entries = mLockAfter.getEntries();
+        final CharSequence[] values = mLockAfter.getEntryValues();
+        int best = 0;
+        for (int i = 0; i < values.length; i++) {
+            long timeout = Long.valueOf(values[i].toString());
+            if (currentTimeout >= timeout) {
+                best = i;
+            }
+        }
+        String summary = mLockAfter.getContext()
+                .getString(R.string.lock_after_timeout_summary, entries[best]);
+        mLockAfter.setSummary(summary);
     }
 
     private static void disableUnusableTimeouts(ListPreference pref, long maxTimeout) {
@@ -884,6 +906,7 @@ public class SecuritySettings extends SettingsPreferenceFragment
             } catch (NumberFormatException e) {
                 Log.e("SecuritySettings", "could not persist lockAfter timeout setting", e);
             }
+            updateLockAfterPreferenceSummary();
         } else if (preference == mUseLocation) {
             boolean newValue = value == null ? false : (Boolean) value;
             GoogleLocationSettingHelper.setUseLocationForServices(getActivity(), newValue);

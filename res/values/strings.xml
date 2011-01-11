@@ -554,15 +554,15 @@
     <!-- Security Settings --><skip />
 
     <!-- Security settings screen, setting option name to change screen timeout -->
-    <string name="lock_after_timeout">Lock device after timeout</string>
+    <string name="lock_after_timeout">Timeout</string>
     <!-- Security settings screen, setting option summary to change screen timeout -->
-    <string name="lock_after_timeout_summary">Adjust the delay before the device automatically locks</string>
+    <string name="lock_after_timeout_summary">Lock screen <xliff:g id="timeout_string">%1$s</xliff:g> after screen automatically turns off</string>
     <!-- Text shown next to checkbox for showing owner info on LockScreen [CHAR LIMIT=50]-->
     <string name="show_owner_info_on_lockscreen_label">Show owner info on lock screen</string>
     <!-- Text shown for title of owner info setting [CHAR LIMIT=20]-->
     <string name="owner_info_settings_title">Owner info</string>
     <!-- Text shown for summary of owner info setting [CHAR LIMIT=40]-->
-    <string name="owner_info_settings_summary">Set or disable showing owner info on lock screen</string>
+    <string name="owner_info_settings_summary"></string>
     <!-- Hint text shown in owner info edit text [CHAR LIMIT=50] -->
     <string name="owner_info_settings_edit_text_hint">Enter text to display on the lock screen</string>
     <!-- Main Settings screen setting option title for the item to take you the security and location screen -->
@@ -588,10 +588,7 @@
 
     <!--  Main Security lock settings --><skip />
     <!--  Title for PreferenceScreen to launch picker for security method when there is none [CHAR LIMIT=22] -->
-    <string name="unlock_set_unlock_launch_picker_title">Set up screen lock</string>
-
-    <!--  Summary for PreferenceScreen to launch picker for security method when there is none [CHAR LIMIT=45] -->
-    <string name="unlock_set_unlock_launch_picker_summary">Lock screen with a pattern, PIN, or password</string>
+    <string name="unlock_set_unlock_launch_picker_title">Configure lock screen</string>
 
     <!--  Title for PreferenceScreen to change security method: None/Pattern/PIN/Password [CHAR LIMIT=22] -->
     <string name="unlock_set_unlock_launch_picker_change_title">Change screen lock</string>
@@ -599,40 +596,47 @@
     <!--  Summary for PreferenceScreen to changeecurity method: None/Pattern/PIN/Password [CHAR LIMIT=45]  -->
     <string name="unlock_set_unlock_launch_picker_change_summary">Change or disable pattern, PIN, or password security</string>
 
-    <!--  Title for PreferenceScreen to enable any lockscreen method: None/Pattern/PIN/Password [CHAR LIMIT=22] -->
-    <string name="unlock_set_unlock_launch_picker_enable_title">Enable screen lock</string>
-
     <!--  Summary for PreferenceScreen to changeecurity method: None/Pattern/PIN/Password [CHAR LIMIT=45]  -->
     <string name="unlock_set_unlock_launch_picker_enable_summary">Choose a method to lock the screen</string>
 
     <!-- Title for preference that disables unlock security [CHAR LIMIT=22] -->
     <string name="unlock_set_unlock_off_title">Off</string>
     <!-- Summary for preference that disables unlock security [CHAR LIMIT=45] -->
-    <string name="unlock_set_unlock_off_summary">Don\u0027t show the lock screen</string>
+    <string name="unlock_set_unlock_off_summary">Never lock the screen</string>
 
     <!-- Title for preference that disables unlock security [CHAR LIMIT=22] -->
-    <string name="unlock_set_unlock_none_title">None</string>
+    <string name="unlock_set_unlock_none_title">Unsecure</string>
     <!-- Summary for preference that disables unlock security [CHAR LIMIT=45]-->
-    <string name="unlock_set_unlock_none_summary">Disable screen unlock security</string>
+    <string name="unlock_set_unlock_none_summary">Don\u0027t require a pattern, PIN, or password to unlock the screen</string>
 
     <!-- Title for preference that guides the user through creating an unlock pattern [CHAR LIMIT=22]-->
     <string name="unlock_set_unlock_pattern_title">Pattern</string>
     <!-- Summary for preference that guides the user through creating an unlock pattern [CHAR LIMIT=45] -->
-    <string name="unlock_set_unlock_pattern_summary">Draw pattern to unlock screen</string>
+    <string name="unlock_set_unlock_pattern_summary">Require a pattern to unlock the screen</string>
 
     <!-- Title for preference that guides the user through creating an unlock PIN (Personal Identification Number) [CHAR LIMIT=22] -->
     <string name="unlock_set_unlock_pin_title">PIN</string>
     <!-- Summary for preference that guides the user through creating an unlock PIN (Personal Identification Number) [CHAR LIMIT=45] -->
-    <string name="unlock_set_unlock_pin_summary">Enter a numeric PIN to unlock screen</string>
+    <string name="unlock_set_unlock_pin_summary">Require a numeric PIN to unlock the screen</string>
 
     <!-- Title for preference that guides the user through creating an unlock password [CHAR LIMIT=22] -->
     <string name="unlock_set_unlock_password_title">Password</string>
     <!-- Title for preference that guides the user through creating an unlock password [CHAR LIMIT=45] -->
-    <string name="unlock_set_unlock_password_summary">Enter a password to unlock screen</string>
+    <string name="unlock_set_unlock_password_summary">Require a password to unlock the screen</string>
 
     <!-- Summary for preference that has been disabled by DevicePolicyAdmin [CHAR LIMIT=45] -->
     <string name="unlock_set_unlock_disabled_summary">Disabled by remote device administrator</string>
 
+    <!-- Summary for "Configure lockscreen" when lock screen is off [CHAR LIMIT=45] -->
+    <string name="unlock_set_unlock_mode_off">Off</string>
+    <!-- Summary for "Configure lockscreen" when security is disabled [CHAR LIMIT=45] -->
+    <string name="unlock_set_unlock_mode_none">Unsecure</string>
+    <!-- Summary for "Configure lockscreen" when security pattern is enabled [CHAR LIMIT=45] -->
+    <string name="unlock_set_unlock_mode_pattern">Secured with pattern</string>
+    <!-- Summary for "Configure lockscreen" when security PIN is enabled [CHAR LIMIT=45] -->
+    <string name="unlock_set_unlock_mode_pin">Secured with PIN</string>
+    <!-- Summary for "Configure lockscreen" when security password is enabled [CHAR LIMIT=45] -->
+    <string name="unlock_set_unlock_mode_password">Secured with password</string>
 
     <!-- Title for option to turn of password/pin/pattern unlock. [CHAR LIMIT=22] -->
     <string name="unlock_disable_lock_title">Turn off screen lock</string>
@@ -1827,7 +1831,7 @@
 
     <!-- Lock Pattern settings -->
     <!-- Security & location settings screen, header -->
-    <string name="lock_settings_title">Screen unlock</string>
+    <string name="lock_settings_title">Lock screen</string>
     <!-- Security & location settings screen, setting option name -->
     <string name="lockpattern_change_lock_pattern_label">Change unlock pattern</string>
     <!-- Security & location settings screen, change unlock pattern screen instruction when the user chooses "Change unlock pattern".  We first ask the user toe nter the current pattern, and this is the message seen -->
