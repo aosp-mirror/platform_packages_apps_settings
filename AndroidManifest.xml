@@ -452,8 +452,8 @@
         <activity android:name="Settings$DockSettingsActivity"
                 android:theme="@android:style/Theme.Holo"
                 android:label="@string/dock_settings_title"
-                android:clearTaskOnLaunch="true"
-                android:enabled="@bool/has_dock_settings">
+                android:enabled="@bool/has_dock_settings"
+                android:clearTaskOnLaunch="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <action android:name="com.android.settings.DOCK_SETTINGS" />
@@ -984,8 +984,7 @@
         <activity android:name="AppWidgetPickActivity"
                 android:label="@string/widget_picker_title"
                 android:theme="@*android:style/Theme.Dialog.Alert"
-                android:finishOnCloseSystemDialogs="true"
-                android:enabled="@bool/has_powercontrol_widget">
+                android:finishOnCloseSystemDialogs="true">
             <intent-filter>
                 <action android:name="android.appwidget.action.APPWIDGET_PICK" />
                 <category android:name="android.intent.category.DEFAULT" />
@@ -1062,8 +1061,9 @@
             android:theme="@android:style/Theme.Holo.DialogWhenLarge"/>
 
         <receiver android:name=".widget.SettingsAppWidgetProvider"
-                android:label="@string/gadget_title" android:exported="false"
-                android:enabled="@bool/has_powercontrol_widget">
+                android:label="@string/gadget_title"
+                android:exported="false"
+                android:enabled="false">
             <intent-filter>
                 <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
                 <action android:name="android.net.wifi.WIFI_STATE_CHANGED" />
