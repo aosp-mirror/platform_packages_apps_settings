@@ -286,7 +286,8 @@ public class BluetoothSettings extends SettingsPreferenceFragment
     public void onDeviceAdded(CachedBluetoothDevice cachedDevice) {
 
         if (mDevicePreferenceMap.get(cachedDevice) != null) {
-            throw new IllegalStateException("Got onDeviceAdded, but cachedDevice already exists");
+            Log.e(TAG, "Got onDeviceAdded, but cachedDevice already exists");
+            return;
         }
 
         if (mScreenType != SCREEN_TYPE_SETTINGS
