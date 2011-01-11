@@ -34,6 +34,7 @@
         android:entries="@array/app_install_location_entries"
         android:entryValues="@array/app_install_location_values"/>
 
+    <!-- Disabled quick launch settings pending UI redesign.
     <PreferenceScreen
             android:key="quick_launch"
             android:title="@string/quick_launch_title"
@@ -42,7 +43,8 @@
                 android:targetPackage="com.android.settings"
                 android:targetClass="com.android.settings.quicklaunch.QuickLaunchSettings" />
     </PreferenceScreen>
-        
+    -->
+
     <PreferenceScreen
             android:fragment="com.android.settings.applications.ManageApplications"
             android:title="@string/manageapplications_settings_title"
