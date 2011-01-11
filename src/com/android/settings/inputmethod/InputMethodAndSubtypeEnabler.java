@@ -152,6 +152,7 @@ public class InputMethodAndSubtypeEnabler extends SettingsPreferenceFragment {
             } else {
                 InputMethodAndSubtypeUtil.setSubtypesPreferenceEnabled(
                         this, mInputMethodProperties, id, false);
+                updateAutoSelectionCB();
             }
         }
         return super.onPreferenceTreeClick(preferenceScreen, preference);
@@ -247,7 +248,9 @@ public class InputMethodAndSubtypeEnabler extends SettingsPreferenceFragment {
     }
 
     private void setSubtypeAutoSelectionEnabled(String imiId, boolean autoSelectionEnabled) {
-        mSubtypeAutoSelectionCBMap.get(imiId).setChecked(autoSelectionEnabled);
+        CheckBoxPreference autoSelectionCB = mSubtypeAutoSelectionCBMap.get(imiId);
+        if (autoSelectionCB == null) return;
+        autoSelectionCB.setChecked(autoSelectionEnabled);
         final List<Preference> subtypePrefs = mInputMethodAndSubtypePrefsMap.get(imiId);
         for (Preference subtypePref: subtypePrefs) {
             if (subtypePref instanceof CheckBoxPreference) {
