@@ -64,13 +64,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             style="?android:attr/progressBarStyleHorizontal" />
-
-        <View
-            android:id="@+id/divider"
-            android:layout_width="match_parent"
-            android:layout_height="1px"
-            android:layout_alignBottom="@id/scanning_progress_bar"
-            android:background="@color/divider_color" />
     </RelativeLayout>
 
     <TextView
@@ -80,7 +73,7 @@
         android:layout_below="@+id/top_divider"
         android:layout_alignParentLeft="true"
         android:layout_marginLeft="16dip"
-        android:layout_marginTop="32dip"
+        android:layout_marginTop="16dip"
         android:layout_marginBottom="0dip"
         android:text="@string/wifi_setup_status_select_network"
         android:textAppearance="?android:attr/textAppearanceMedium" />
@@ -112,7 +105,7 @@
             android:id="@+id/wifi_config_ui"
             android:layout_width="416dip"
             android:layout_height="wrap_content"
-            android:paddingTop="32dip"
+            android:paddingTop="16dip"
             android:visibility="gone" />
     </FrameLayout>
 
