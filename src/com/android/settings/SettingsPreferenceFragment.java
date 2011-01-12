@@ -40,20 +40,11 @@ public class SettingsPreferenceFragment extends PreferenceFragment
 
     private static final String TAG = "SettingsPreferenceFragment";
 
-    // Originally from PreferenceActivity.
-    private static final String EXTRA_PREFS_SHOW_BUTTON_BAR = "extra_prefs_show_button_bar";
-    private static final String EXTRA_PREFS_SHOW_SKIP = "extra_prefs_show_skip";
-    private static final String EXTRA_PREFS_SET_NEXT_TEXT = "extra_prefs_set_next_text";
-    private static final String EXTRA_PREFS_SET_BACK_TEXT = "extra_prefs_set_back_text";
-
     private SettingsDialogFragment mDialogFragment;
-
-    private Button mNextButton;
 
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        setupButtonBar();
     }
 
     /*
@@ -167,11 +158,11 @@ public class SettingsPreferenceFragment extends PreferenceFragment
     }
 
     protected boolean hasNextButton() {
-        return mNextButton != null;
+        return ((Settings)getActivity()).hasNextButton();
     }
 
     protected Button getNextButton() {
-        return mNextButton;
+        return ((Settings)getActivity()).getNextButton();
     }
 
     public void finish() {
@@ -193,92 +184,4 @@ public class SettingsPreferenceFragment extends PreferenceFragment
         }
     }
 
-    /**
-     * Sets up Button Bar possibly required in the Fragment. Probably available only in
-     * phones.
-     *
-     * Previously {@link PreferenceActivity} had the capability as hidden functionality.
-     */
-    private void setupButtonBar() {
-        // Originally from PreferenceActivity, which has had button bar inside its layout.
-        final Activity activity = getActivity();
-        final Intent intent = activity.getIntent();
-        final View buttonBar = activity.findViewById(com.android.internal.R.id.button_bar);
-        if (!intent.getBooleanExtra(EXTRA_PREFS_SHOW_BUTTON_BAR, false) || buttonBar == null) {
-            return;
-        }
-
-        buttonBar.setVisibility(View.VISIBLE);
-        View tmpView = activity.findViewById(com.android.internal.R.id.back_button);
-        if (tmpView != null) {
-            // TODO: Assume this is pressed only in single pane, finishing current Activity.
-            try {
-                final Button backButton = (Button)tmpView;
-                backButton.setOnClickListener(new OnClickListener() {
-                    public void onClick(View v) {
-                        activity.setResult(Activity.RESULT_CANCELED);
-                        activity.finish();
-                    }
-                });
-                if (intent.hasExtra(EXTRA_PREFS_SET_BACK_TEXT)) {
-                    String buttonText = intent.getStringExtra(EXTRA_PREFS_SET_BACK_TEXT);
-                    if (TextUtils.isEmpty(buttonText)) {
-                        backButton.setVisibility(View.GONE);
-                    }
-                    else {
-                        backButton.setText(buttonText);
-                    }
-                }
-            } catch (ClassCastException e) {
-                Log.w(TAG, "The view originally for back_button is used not as Button. " +
-                        "Ignored.");
-            }
-        }
-
-        tmpView = activity.findViewById(com.android.internal.R.id.skip_button);
-        if (tmpView != null) {
-            try {
-                final Button skipButton = (Button)tmpView;
-                skipButton.setOnClickListener(new OnClickListener() {
-                    public void onClick(View v) {
-                        activity.setResult(Activity.RESULT_OK);
-                        activity.finish();
-                    }
-                });
-                if (intent.getBooleanExtra(EXTRA_PREFS_SHOW_SKIP, false)) {
-                    skipButton.setVisibility(View.VISIBLE);
-                }
-            } catch (ClassCastException e) {
-                Log.w(TAG, "The view originally for skip_button is used not as Button. " +
-                        "Ignored.");
-            }
-        }
-
-        tmpView = activity.findViewById(com.android.internal.R.id.next_button);
-        if (tmpView != null) {
-            try {
-                mNextButton = (Button)tmpView;
-                mNextButton.setOnClickListener(new OnClickListener() {
-                    public void onClick(View v) {
-                        activity.setResult(Activity.RESULT_OK);
-                        activity.finish();
-                    }
-                });
-                // set our various button parameters
-                if (intent.hasExtra(EXTRA_PREFS_SET_NEXT_TEXT)) {
-                    String buttonText = intent.getStringExtra(EXTRA_PREFS_SET_NEXT_TEXT);
-                    if (TextUtils.isEmpty(buttonText)) {
-                        mNextButton.setVisibility(View.GONE);
-                    }
-                    else {
-                        mNextButton.setText(buttonText);
-                    }
-                }
-            } catch (ClassCastException e) {
-                Log.w(TAG, "The view originally for next_button is used not as Button. " +
-                        "Ignored.");
-                mNextButton = null;
-            }
-        }
-    }
 }
