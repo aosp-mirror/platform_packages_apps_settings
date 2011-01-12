@@ -35,28 +35,29 @@ import android.net.NetworkInfo.DetailedState;
 import android.net.wifi.ScanResult;
 import android.net.wifi.SupplicantState;
 import android.net.wifi.WifiConfiguration;
-import android.net.wifi.WifiConfiguration.KeyMgmt;
 import android.net.wifi.WifiInfo;
 import android.net.wifi.WifiManager;
+import android.net.wifi.WifiConfiguration.KeyMgmt;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.preference.CheckBoxPreference;
 import android.preference.Preference;
+import android.preference.PreferenceActivity;
 import android.preference.PreferenceScreen;
 import android.provider.Settings.Secure;
 import android.security.Credentials;
 import android.security.KeyStore;
 import android.view.ContextMenu;
-import android.view.ContextMenu.ContextMenuInfo;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView.AdapterContextMenuInfo;
+import android.view.ContextMenu.ContextMenuInfo;
 import android.widget.Toast;
+import android.widget.AdapterView.AdapterContextMenuInfo;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -171,7 +172,7 @@ public class WifiSettings extends SettingsPreferenceFragment
         // Avoid re-adding on returning from an overlapping activity/fragment.
         if (getPreferenceScreen() == null || getPreferenceScreen().getPreferenceCount() < 2) {
             if (mEnableNextOnConnection) {
-                if (mEnableNextOnConnection && hasNextButton()) {
+                if (hasNextButton()) {
                     final ConnectivityManager connectivity = (ConnectivityManager)
                             getActivity().getSystemService(Context.CONNECTIVITY_SERVICE);
                     if (connectivity != null) {

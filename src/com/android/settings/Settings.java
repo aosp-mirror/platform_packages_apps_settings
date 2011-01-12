@@ -23,10 +23,10 @@ import android.content.pm.PackageManager;
 import android.content.pm.PackageManager.NameNotFoundException;
 import android.os.Bundle;
 import android.preference.PreferenceActivity;
-import android.preference.PreferenceActivity.Header;
 import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.widget.Button;
 
 import java.util.HashMap;
 import java.util.List;
@@ -288,6 +288,16 @@ public class Settings extends PreferenceActivity {
             }
         } catch (NameNotFoundException nnfe) {
         }
+    }
+
+    @Override
+    public boolean hasNextButton() {
+        return super.hasNextButton();
+    }
+
+    @Override
+    public Button getNextButton() {
+        return super.getNextButton();
     }
 
     /*
