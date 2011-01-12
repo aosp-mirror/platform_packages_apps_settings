@@ -446,6 +446,10 @@ public class WifiSettings extends SettingsPreferenceFragment
                 updateConnectionState(WifiInfo.getDetailedStateOf((SupplicantState)
                         intent.getParcelableExtra(WifiManager.EXTRA_NEW_STATE)));
             }
+
+            if (mInXlSetupWizard) {
+                ((WifiSettingsForSetupWizardXL)getActivity()).onSupplicantStateChanged(intent);
+            }
         } else if (WifiManager.NETWORK_STATE_CHANGED_ACTION.equals(action)) {
             NetworkInfo info = (NetworkInfo) intent.getParcelableExtra(
                     WifiManager.EXTRA_NETWORK_INFO);
@@ -589,11 +593,11 @@ public class WifiSettings extends SettingsPreferenceFragment
                     }
                 } else if (config.networkId != INVALID_NETWORK_ID) {
                     if (mSelectedAccessPoint != null) {
-                        mWifiManager.saveNetwork(config);
+                        saveNetwork(config);
                     }
                 } else {
                     if (configController.isEdit() || requireKeyStore(config)) {
-                        mWifiManager.saveNetwork(config);
+                        saveNetwork(config);
                     } else {
                         mWifiManager.connectNetwork(config);
                     }
@@ -605,6 +609,14 @@ public class WifiSettings extends SettingsPreferenceFragment
             mScanner.resume();
         }
         updateAccessPoints();
+    }
+
+    private void saveNetwork(WifiConfiguration config) {
+        if (mInXlSetupWizard) {
+            ((WifiSettingsForSetupWizardXL)getActivity()).onSaveNetwork(config);
+        } else {
+            mWifiManager.saveNetwork(config);
+        }
     }
 
     /* package */ void forget() {
