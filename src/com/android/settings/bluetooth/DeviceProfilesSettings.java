@@ -20,8 +20,11 @@ import com.android.settings.R;
 import com.android.settings.SettingsPreferenceFragment;
 import com.android.settings.bluetooth.LocalBluetoothProfileManager.Profile;
 
+import android.bluetooth.BluetoothClass;
 import android.bluetooth.BluetoothDevice;
+import android.bluetooth.BluetoothUuid;
 import android.os.Bundle;
+import android.os.ParcelUuid;
 import android.preference.CheckBoxPreference;
 import android.preference.EditTextPreference;
 import android.preference.Preference;
@@ -75,6 +78,7 @@ public class DeviceProfilesSettings extends SettingsPreferenceFragment
         if (device == null) {
             Log.w(TAG, "Activity started without a remote Bluetooth device");
             finish();
+            return;
         }
 
         mManager = LocalBluetoothManager.getInstance(getActivity());
@@ -82,6 +86,7 @@ public class DeviceProfilesSettings extends SettingsPreferenceFragment
         if (mCachedDevice == null) {
             Log.w(TAG, "Device not found, cannot connect to it");
             finish();
+            return;
         }
 
         addPreferencesFromResource(R.xml.bluetooth_device_advanced);
@@ -89,8 +94,16 @@ public class DeviceProfilesSettings extends SettingsPreferenceFragment
 
         mProfileContainer = (PreferenceGroup) findPreference(KEY_PROFILE_CONTAINER);
         mAllowIncomingPref = (CheckBoxPreference) findPreference(KEY_ALLOW_INCOMING);
-        mAllowIncomingPref.setChecked(isIncomingFileTransfersAllowed());
-        mAllowIncomingPref.setOnPreferenceChangeListener(this);
+
+        // Configure incoming file transfer preference if device supports OPP
+        // or else remove the preference item
+        if (isObjectPushSupported(device)) {
+            mAllowIncomingPref.setChecked(isIncomingFileTransfersAllowed());
+            mAllowIncomingPref.setOnPreferenceChangeListener(this);
+        } else {
+            getPreferenceScreen().removePreference(mAllowIncomingPref);
+            mAllowIncomingPref = null;
+        }
 
         mDeviceNamePref = (EditTextPreference) findPreference(KEY_RENAME_DEVICE);
         mDeviceNamePref.setSummary(mCachedDevice.getName());
@@ -103,6 +116,15 @@ public class DeviceProfilesSettings extends SettingsPreferenceFragment
 
         // Add a preference for each profile
         addPreferencesForProfiles();
+    }
+
+    private boolean isObjectPushSupported(BluetoothDevice device) {
+        ParcelUuid[] uuids = device.getUuids();
+        BluetoothClass bluetoothClass = device.getBluetoothClass();
+        return (uuids != null && BluetoothUuid.containsAnyUuid(uuids,
+                LocalBluetoothProfileManager.OPP_PROFILE_UUIDS)) ||
+                (bluetoothClass != null && bluetoothClass.doesClassMatch(
+                        BluetoothClass.PROFILE_OPP));
     }
 
     @Override
