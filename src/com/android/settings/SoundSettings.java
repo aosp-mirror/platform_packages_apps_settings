@@ -43,6 +43,7 @@ public class SoundSettings extends SettingsPreferenceFragment implements
 
     private static final String KEY_SILENT = "silent";
     private static final String KEY_VIBRATE = "vibrate";
+    private static final String KEY_RING_VOLUME = "ring_volume";
     private static final String KEY_DTMF_TONE = "dtmf_tone";
     private static final String KEY_SOUND_EFFECTS = "sound_effects";
     private static final String KEY_HAPTIC_FEEDBACK = "haptic_feedback";
@@ -110,6 +111,10 @@ public class SoundSettings extends SettingsPreferenceFragment implements
         }
 
         mSilent = (CheckBoxPreference) findPreference(KEY_SILENT);
+        if (!getResources().getBoolean(R.bool.has_silent_mode)) {
+            getPreferenceScreen().removePreference(mSilent);
+            findPreference(KEY_RING_VOLUME).setDependency(null);
+        }
 
         mVibrate = (ListPreference) findPreference(KEY_VIBRATE);
         mVibrate.setOnPreferenceChangeListener(this);
