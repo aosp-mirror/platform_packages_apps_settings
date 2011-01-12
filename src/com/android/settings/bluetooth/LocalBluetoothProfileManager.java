@@ -471,6 +471,12 @@ abstract class LocalBluetoothProfileManager {
 
         @Override
         public boolean connect(BluetoothDevice device) {
+            List<BluetoothDevice> sinks = getConnectedDevices();
+            if (sinks != null) {
+                for (BluetoothDevice sink : sinks) {
+                    mService.disconnect(sink);
+                }
+            }
             return mService.connect(device);
         }
 
@@ -727,6 +733,12 @@ abstract class LocalBluetoothProfileManager {
 
         @Override
         public boolean connect(BluetoothDevice device) {
+            List<BluetoothDevice> sinks = getConnectedDevices();
+            if (sinks != null) {
+                for (BluetoothDevice sink : sinks) {
+                    mService.disconnect(sink);
+                }
+            }
             return mService.connect(device);
         }
 

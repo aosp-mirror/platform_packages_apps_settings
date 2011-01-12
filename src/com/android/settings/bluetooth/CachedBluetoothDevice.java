@@ -279,7 +279,7 @@ class CachedBluetoothDevice implements Comparable<CachedBluetoothDevice> {
     }
 
     private void connectWithoutResettingTimer(boolean connectAllProfiles) {
-        // Try to initialize the profiles if there were not.
+        // Try to initialize the profiles if they were not.
         if (mProfiles.size() == 0) {
             if (!updateProfiles()) {
                 // If UUIDs are not available yet, connect will be happen
@@ -299,7 +299,6 @@ class CachedBluetoothDevice implements Comparable<CachedBluetoothDevice> {
                         .getProfileManager(mLocalManager, profile);
                 if (profileManager.isPreferred(mDevice)) {
                     ++preferredProfiles;
-                    disconnectConnected(this, profile);
                     connectInt(this, profile);
                 }
             }
@@ -322,7 +321,6 @@ class CachedBluetoothDevice implements Comparable<CachedBluetoothDevice> {
                 LocalBluetoothProfileManager profileManager = LocalBluetoothProfileManager
                         .getProfileManager(mLocalManager, profile);
                 profileManager.setPreferred(mDevice, true);
-                disconnectConnected(this, profile);
                 connectInt(this, profile);
             }
         }
@@ -332,23 +330,7 @@ class CachedBluetoothDevice implements Comparable<CachedBluetoothDevice> {
         mConnectAttempted = SystemClock.elapsedRealtime();
         // Reset the only-show-one-error-dialog tracking variable
         mIsConnectingErrorPossible = true;
-        disconnectConnected(this, profile);
         connectInt(this, profile);
-    }
-
-    private void disconnectConnected(CachedBluetoothDevice device, Profile profile) {
-        LocalBluetoothProfileManager profileManager =
-            LocalBluetoothProfileManager.getProfileManager(mLocalManager, profile);
-        CachedBluetoothDeviceManager cachedDeviceManager = mLocalManager.getCachedDeviceManager();
-        List<BluetoothDevice> devices = profileManager.getConnectedDevices();
-        if (devices == null) return;
-        for (BluetoothDevice btDevice : devices) {
-            CachedBluetoothDevice cachedDevice = cachedDeviceManager.findDevice(btDevice);
-
-            if (cachedDevice != null && !cachedDevice.equals(device)) {
-                cachedDevice.disconnect(profile);
-            }
-        }
     }
 
     private boolean connectInt(CachedBluetoothDevice cachedDevice, Profile profile) {
