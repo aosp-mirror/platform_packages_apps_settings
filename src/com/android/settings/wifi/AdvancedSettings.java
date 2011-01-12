@@ -66,7 +66,8 @@ public class AdvancedSettings extends SettingsPreferenceFragment
         ListPreference pref = (ListPreference) findPreference(KEY_SLEEP_POLICY);
         pref.setOnPreferenceChangeListener(this);
         int value = Settings.System.getInt(getContentResolver(),
-                Settings.System.WIFI_SLEEP_POLICY, Settings.System.WIFI_SLEEP_POLICY_DEFAULT);
+                Settings.System.WIFI_SLEEP_POLICY,
+                Settings.System.WIFI_SLEEP_POLICY_NEVER_WHILE_PLUGGED);
         pref.setValue(String.valueOf(value));
 
         pref = (ListPreference) findPreference(KEY_FREQUENCY_BAND);
