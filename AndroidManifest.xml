@@ -48,6 +48,7 @@
     <uses-permission android:name="android.permission.READ_SYNC_STATS" />
     <uses-permission android:name="android.permission.READ_SYNC_SETTINGS" />
     <uses-permission android:name="android.permission.WRITE_SYNC_SETTINGS" />
+    <uses-permission android:name="android.permission.STATUS_BAR" />
 
     <application android:label="@string/settings_label"
             android:icon="@mipmap/ic_launcher_settings"
@@ -1061,6 +1062,18 @@
         <activity android:name="com.android.settings.accounts.ChooseAccountActivity"
             android:label="@string/header_add_an_account"
             android:theme="@android:style/Theme.Holo.DialogWhenLarge"/>
+            
+        <activity android:name=".CryptKeeper"
+                  android:immersive="true"
+                  android:launchMode="singleTop"
+                  android:theme="@android:style/Theme.Holo.NoActionBar"
+                  android:windowSoftInputMode="stateAlwaysHidden">
+            <intent-filter android:priority="10">
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.HOME" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
 
         <receiver android:name=".widget.SettingsAppWidgetProvider"
                 android:label="@string/gadget_title"
