@@ -124,7 +124,7 @@ public class Settings extends PreferenceActivity {
 
     /**
      * Switch to parent fragment and store the grand parent's info
-     * @param class name of the activity wrapper for the parent fragment.
+     * @param className name of the activity wrapper for the parent fragment.
      */
     private void switchToParent(String className) {
         final ComponentName cn = new ComponentName(this, className);
