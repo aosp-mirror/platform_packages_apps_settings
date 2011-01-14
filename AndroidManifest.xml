@@ -381,15 +381,6 @@
                 android:resource="@id/language_settings" />
         </activity>
 
-        <activity android:name="PhysicalKeyboardSettings"
-                android:label="@string/builtin_keyboard_settings_title"
-                android:theme="@android:style/Theme.Holo.DialogWhenLarge">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.DEFAULT" />
-            </intent-filter>
-        </activity>
-
         <activity android:name="Settings$UserDictionarySettingsActivity"
                 android:theme="@android:style/Theme.Holo"
                 android:label="@string/user_dict_settings_titlebar"
