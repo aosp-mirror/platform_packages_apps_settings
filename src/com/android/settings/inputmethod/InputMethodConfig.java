@@ -20,6 +20,7 @@ import com.android.settings.R;
 import com.android.settings.SettingsPreferenceFragment;
 
 import android.app.AlertDialog;
+import android.content.ContentResolver;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -31,6 +32,7 @@ import android.preference.Preference;
 import android.preference.PreferenceCategory;
 import android.preference.PreferenceScreen;
 import android.provider.Settings;
+import android.provider.Settings.System;
 import android.text.TextUtils;
 import android.view.inputmethod.InputMethodInfo;
 import android.view.inputmethod.InputMethodManager;
@@ -42,12 +44,17 @@ import java.util.List;
 
 public class InputMethodConfig extends SettingsPreferenceFragment {
 
-    private static final String KEY_PHYSICALKEYBOARD_CATEGORY = "hardkeyboard_category";
-    private static final String PHYSICALKEYBOARD_SETTINGS_FRAGMENT
-            = "com.android.settings.PhysicalKeyboardSettings";
+    private static final String[] sSystemSettingNames = {
+        System.TEXT_AUTO_REPLACE, System.TEXT_AUTO_CAPS, System.TEXT_AUTO_PUNCTUATE,
+    };
+
+    private static final String[] sHardKeyboardKeys = {
+        "auto_replace", "auto_caps", "auto_punctuate",
+    };
 
     private AlertDialog mDialog = null;
     private boolean mHaveHardKeyboard;
+    private PreferenceCategory mHardKeyboardCategory;
     // Map of imi and its preferences
     final private HashMap<String, List<Preference>> mInputMethodPrefsMap =
             new HashMap<String, List<Preference>>();
@@ -72,8 +79,18 @@ public class InputMethodConfig extends SettingsPreferenceFragment {
     @Override
     public void onResume() {
         super.onResume();
+
+        ContentResolver resolver = getContentResolver();
+        if (mHaveHardKeyboard) {
+            for (int i = 0; i < sHardKeyboardKeys.length; ++i) {
+                CheckBoxPreference chkPref = (CheckBoxPreference)
+                        mHardKeyboardCategory.findPreference(sHardKeyboardKeys[i]);
+                chkPref.setChecked(System.getInt(resolver, sSystemSettingNames[i], 1) > 0);
+            }
+        }
+
         InputMethodAndSubtypeUtil.loadInputMethodSubtypeList(
-                this, getContentResolver(), mInputMethodProperties, mInputMethodPrefsMap);
+                this, resolver, mInputMethodProperties, mInputMethodPrefsMap);
         updateActiveInputMethodsSummary();
     }
 
@@ -133,6 +150,17 @@ public class InputMethodConfig extends SettingsPreferenceFragment {
 
         if (preference instanceof CheckBoxPreference) {
             final CheckBoxPreference chkPref = (CheckBoxPreference) preference;
+
+            if (mHaveHardKeyboard) {
+                for (int i = 0; i < sHardKeyboardKeys.length; ++i) {
+                    if (chkPref == mHardKeyboardCategory.findPreference(sHardKeyboardKeys[i])) {
+                        System.putInt(getContentResolver(), sSystemSettingNames[i],
+                                chkPref.isChecked() ? 1 : 0);
+                        return true;
+                    }
+                }
+            }
+
             final String imiId = chkPref.getKey();
             if (chkPref.isChecked()) {
                 InputMethodInfo selImi = getInputMethodInfoFromImiId(imiId);
@@ -162,17 +190,6 @@ public class InputMethodConfig extends SettingsPreferenceFragment {
             mDialog.dismiss();
             mDialog = null;
         }
-    }
-
-    private void addHardKeyboardPreference(PreferenceScreen root) {
-        PreferenceCategory keyboardSettingsCategory = new PreferenceCategory(getActivity());
-        keyboardSettingsCategory.setTitle(R.string.builtin_keyboard_settings_title);
-        root.addPreference(keyboardSettingsCategory);
-        PreferenceScreen prefScreen = new PreferenceScreen(getActivity(), null);
-        prefScreen.setKey(KEY_PHYSICALKEYBOARD_CATEGORY);
-        prefScreen.setTitle(R.string.builtin_keyboard_settings_title);
-        prefScreen.setSummary(R.string.builtin_keyboard_settings_summary);
-        prefScreen.setFragment(PHYSICALKEYBOARD_SETTINGS_FRAGMENT);
     }
 
     private void addInputMethodPreference(PreferenceScreen root, InputMethodInfo imi,
@@ -227,10 +244,13 @@ public class InputMethodConfig extends SettingsPreferenceFragment {
     }
 
     private PreferenceScreen createPreferenceHierarchy() {
-        // Root
-        PreferenceScreen root = getPreferenceManager().createPreferenceScreen(getActivity());
+        addPreferencesFromResource(R.xml.hard_keyboard_settings);
+        PreferenceScreen root = getPreferenceScreen();
+
         if (mHaveHardKeyboard) {
-            addHardKeyboardPreference(root);
+            mHardKeyboardCategory = (PreferenceCategory) findPreference("hard_keyboard");
+        } else {
+            root.removeAll();
         }
 
         final int N = (mInputMethodProperties == null ? 0 : mInputMethodProperties.size());
