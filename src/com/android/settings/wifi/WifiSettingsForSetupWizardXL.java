@@ -30,7 +30,9 @@ import android.preference.PreferenceCategory;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
+import android.view.ContextMenu.ContextMenuInfo;
 import android.view.View.OnClickListener;
+import android.view.ContextMenu;
 import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
@@ -523,5 +525,10 @@ public class WifiSettingsForSetupWizardXL extends Activity implements OnClickLis
      */
     /* package */ void onSaveNetwork(WifiConfiguration config) {
         mWifiManager.connectNetwork(config);
+    }
+
+    @Override
+    public void onCreateContextMenu(ContextMenu menu, View view, ContextMenuInfo menuInfo) {
+        super.onCreateContextMenu(menu, view, menuInfo);
     }
 }
