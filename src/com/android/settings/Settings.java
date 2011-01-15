@@ -34,7 +34,7 @@ import java.util.List;
 /**
  * Top-level settings activity to handle single pane and double pane UI layout.
  */
-public class Settings extends PreferenceActivity {
+public class Settings extends PreferenceActivity implements ButtonBarHandler {
 
     private static final String META_DATA_KEY_HEADER_ID =
             "com.android.settings.TOP_LEVEL_HEADER_ID";
