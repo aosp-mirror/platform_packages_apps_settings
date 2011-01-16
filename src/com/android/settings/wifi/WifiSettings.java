@@ -128,11 +128,12 @@ public class WifiSettings extends SettingsPreferenceFragment
         mFilter.addAction(WifiManager.LINK_CONFIGURATION_CHANGED_ACTION);
         mFilter.addAction(WifiManager.NETWORK_STATE_CHANGED_ACTION);
         mFilter.addAction(WifiManager.RSSI_CHANGED_ACTION);
+        mFilter.addAction(WifiManager.ERROR_ACTION);
 
         mReceiver = new BroadcastReceiver() {
             @Override
             public void onReceive(Context context, Intent intent) {
-                handleEvent(intent);
+                handleEvent(context, intent);
             }
         };
 
@@ -430,7 +431,7 @@ public class WifiSettings extends SettingsPreferenceFragment
         return accessPoints;
     }
 
-    private void handleEvent(Intent intent) {
+    private void handleEvent(Context context, Intent intent) {
         String action = intent.getAction();
         if (WifiManager.WIFI_STATE_CHANGED_ACTION.equals(action)) {
             updateWifiState(intent.getIntExtra(WifiManager.EXTRA_WIFI_STATE,
@@ -462,6 +463,14 @@ public class WifiSettings extends SettingsPreferenceFragment
             updateConnectionState(info.getDetailedState());
         } else if (WifiManager.RSSI_CHANGED_ACTION.equals(action)) {
             updateConnectionState(null);
+        } else if (WifiManager.ERROR_ACTION.equals(action)) {
+            int errorCode = intent.getIntExtra(WifiManager.EXTRA_ERROR_CODE, 0);
+            switch (errorCode) {
+                case WifiManager.WPS_OVERLAP_ERROR:
+                    Toast.makeText(context, R.string.wifi_wps_overlap_error,
+                            Toast.LENGTH_SHORT).show();
+                    break;
+            }
         }
     }
 
