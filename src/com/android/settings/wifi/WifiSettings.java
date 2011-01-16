@@ -37,7 +37,9 @@ import android.net.wifi.SupplicantState;
 import android.net.wifi.WifiConfiguration;
 import android.net.wifi.WifiInfo;
 import android.net.wifi.WifiManager;
+import android.net.wifi.WpsResult;
 import android.net.wifi.WifiConfiguration.KeyMgmt;
+import android.net.wifi.WpsConfiguration;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -571,18 +573,32 @@ public class WifiSettings extends SettingsPreferenceFragment
     }
 
     /* package */ void submit(WifiConfigController configController) {
-        switch(configController.chosenNetworkSetupMethod()) {
+        int networkSetup = configController.chosenNetworkSetupMethod();
+        switch(networkSetup) {
             case WifiConfigController.WPS_PBC:
             case WifiConfigController.WPS_PIN_FROM_ACCESS_POINT:
-                mWifiManager.startWps(configController.getWpsConfig());
-                break;
             case WifiConfigController.WPS_PIN_FROM_DEVICE:
-                String pin = mWifiManager.startWps(configController.getWpsConfig());
-                new AlertDialog.Builder(getActivity())
-                        .setTitle(R.string.wifi_wps_pin_method_configuration)
-                        .setMessage(getResources().getString(R.string.wifi_wps_pin_output, pin))
-                        .setPositiveButton(android.R.string.ok, null)
-                        .show();
+                WpsResult result = mWifiManager.startWps(configController.getWpsConfig());
+                AlertDialog.Builder dialog = new AlertDialog.Builder(getActivity())
+                                        .setTitle(R.string.wifi_wps_setup_title)
+                                        .setPositiveButton(android.R.string.ok, null);
+                switch (result.status) {
+                    case FAILURE:
+                        dialog.setMessage(R.string.wifi_wps_failed);
+                        dialog.show();
+                        break;
+                    case IN_PROGRESS:
+                        dialog.setMessage(R.string.wifi_wps_in_progress);
+                        dialog.show();
+                        break;
+                    default:
+                        if (networkSetup == WifiConfigController.WPS_PIN_FROM_DEVICE) {
+                            dialog.setMessage(getResources().getString(R.string.wifi_wps_pin_output,
+                                    result.pin));
+                            dialog.show();
+                        }
+                        break;
+                }
                 break;
             case WifiConfigController.MANUAL:
                 final WifiConfiguration config = configController.getConfig();
