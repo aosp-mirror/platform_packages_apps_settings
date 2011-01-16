@@ -49,7 +49,7 @@ public class DateTimeSettingsSetupWizard extends Activity
 
     // force the first status of auto datetime flag.
     private static final String EXTRA_INITIAL_AUTO_DATETIME_VALUE =
-        "extra_initial_auto_datetime_value";
+            "extra_initial_auto_datetime_value";
 
     private boolean mXLargeScreenSize;
 
@@ -126,7 +126,10 @@ public class DateTimeSettingsSetupWizard extends Activity
         mInputMethodManager = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
 
         ((Button)findViewById(R.id.next_button)).setOnClickListener(this);
-        ((Button)findViewById(R.id.skip_button)).setOnClickListener(this);
+        final Button skipButton = (Button)findViewById(R.id.skip_button);
+        if (skipButton != null) {
+            skipButton.setOnClickListener(this);
+        }
     }
 
     @Override
