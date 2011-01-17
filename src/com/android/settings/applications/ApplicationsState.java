@@ -71,6 +71,7 @@ public class ApplicationsState {
         long cacheSize;
         long codeSize;
         long dataSize;
+        long externalSize;
     }
     
     public static class AppEntry extends SizeInfo {
@@ -626,9 +627,16 @@ public class ApplicationsState {
 
     // --------------------------------------------------------------
 
-    private long getTotalSize(PackageStats ps) {
+    private long getTotalInternalSize(PackageStats ps) {
         if (ps != null) {
-            return ps.codeSize+ps.dataSize;
+            return ps.codeSize + ps.dataSize;
+        }
+        return SIZE_INVALID;
+    }
+
+    private long getTotalExternalSize(PackageStats ps) {
+        if (ps != null) {
+            return ps.externalDataSize + ps.externalMediaSize + ps.externalCacheSize;
         }
         return SIZE_INVALID;
     }
@@ -660,15 +668,18 @@ public class ApplicationsState {
                         synchronized (entry) {
                             entry.sizeStale = false;
                             entry.sizeLoadStart = 0;
-                            long newSize = getTotalSize(stats);
+                            long externalSize = getTotalExternalSize(stats);
+                            long newSize = externalSize + getTotalInternalSize(stats);
                             if (entry.size != newSize ||
                                     entry.cacheSize != stats.cacheSize ||
                                     entry.codeSize != stats.codeSize ||
-                                    entry.dataSize != stats.dataSize) {
+                                    entry.dataSize != stats.dataSize ||
+                                    entry.externalSize != externalSize) {
                                 entry.size = newSize;
                                 entry.cacheSize = stats.cacheSize;
                                 entry.codeSize = stats.codeSize;
                                 entry.dataSize = stats.dataSize;
+                                entry.externalSize = externalSize;
                                 entry.sizeStr = getSizeStr(entry.size);
                                 if (DEBUG) Log.i(TAG, "Set size of " + entry.label + " " + entry
                                         + ": " + entry.sizeStr);

@@ -93,6 +93,7 @@ public class InstalledAppDetails extends Fragment
     private TextView mTotalSize;
     private TextView mAppSize;
     private TextView mDataSize;
+    private TextView mExternalSize;
     private ClearUserDataObserver mClearDataObserver;
     // Views related to cache info
     private TextView mCacheSize;
@@ -107,6 +108,7 @@ public class InstalledAppDetails extends Fragment
     private boolean mHaveSizes = false;
     private long mLastCodeSize = -1;
     private long mLastDataSize = -1;
+    private long mLastExternalSize = -1;
     private long mLastCacheSize = -1;
     private long mLastTotalSize = -1;
     
@@ -317,6 +319,7 @@ public class InstalledAppDetails extends Fragment
         mTotalSize = (TextView)view.findViewById(R.id.total_size_text);
         mAppSize = (TextView)view.findViewById(R.id.application_size_text);
         mDataSize = (TextView)view.findViewById(R.id.data_size_text);
+        mExternalSize = (TextView)view.findViewById(R.id.external_size_text);
         
         // Get Control button panel
         View btnPanel = view.findViewById(R.id.control_buttons_panel);
@@ -503,6 +506,10 @@ public class InstalledAppDetails extends Fragment
             if (mLastDataSize != mAppEntry.dataSize) {
                 mLastDataSize = mAppEntry.dataSize;
                 mDataSize.setText(getSizeStr(mAppEntry.dataSize));
+            }
+            if (mLastExternalSize != mAppEntry.externalSize) {
+                mLastExternalSize = mAppEntry.externalSize;
+                mExternalSize.setText(getSizeStr(mAppEntry.externalSize));
             }
             if (mLastCacheSize != mAppEntry.cacheSize) {
                 mLastCacheSize = mAppEntry.cacheSize;

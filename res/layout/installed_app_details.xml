@@ -132,6 +132,7 @@
                     android:maxLines="1" />
 
             </LinearLayout>
+
             <LinearLayout
                 android:id="@+id/info_size"
                 android:layout_width="match_parent"
@@ -169,6 +170,44 @@
                     android:maxLines="1" />
 
             </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:baselineAligned="true"
+                android:paddingTop="-1dip">
+                <TextView
+                    android:id="@+id/external_size_prefix"
+                    android:text="@string/external_size_label"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:layout_height="wrap_content"
+                    android:layout_width="wrap_content"
+                    android:maxLines="1"
+                    android:paddingTop="6dip"
+                    android:paddingLeft="6dip"/>
+                <ImageView
+                    android:id="@+id/info_size_dots"
+                    android:src="@drawable/dotted_line_480px"
+                    android:layout_width="0dip"
+                    android:layout_weight="1"
+                    android:layout_height="1px"
+                    android:layout_gravity="bottom"
+                    android:layout_marginLeft="1dip"
+                    android:layout_marginRight="1dip"
+                    android:layout_marginBottom="4dip"
+                    android:scaleType="center" />
+                <TextView
+                    android:id="@+id/external_size_text"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:paddingTop="6dip"
+                    android:paddingRight="6dip"
+                    android:layout_height="wrap_content"
+                    android:layout_width="wrap_content"
+                    android:maxLines="1" />
+
+            </LinearLayout>
+
             <!-- Clear data and install location buttons  -->
             <include
                 layout="@layout/two_buttons_panel"
