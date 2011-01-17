@@ -578,10 +578,19 @@
     <!-- In the security screen, the header title for settings related to  Passwords-->
     <string name="security_passwords_title">Passwords</string>
 
-    <string name="encryption_settings_title">Device encryption</string>
-    <string name="encrypt_title">Encrypt data on device</string>
-    <string name="encrypt_summary">Requires you to set a device unlock pin or password</string>
-
+    <string name="crypt_keeper_settings_title">Device encryption</string>
+    <string name="crypt_keeper_encrypt_title">Encrypt data on device</string>
+    <string name="crypt_keeper_encrypt_summary">Requires you to set a device unlock pin or password</string>
+    <string name="crypt_keeper_confirm_title">Confirm encrypt</string>
+    
+    <string name="crypt_keeper_desc">Device encryption will convert user data to an ecrypted state, including your accounts, system data, downloaded applications and data, photos, movies, musics, etc.\n\nEncyrption cannot be undone without performing a factory data reset, which would then erase all data.\n\nYou must set up a device lock pin or password to proceed.\n\nThis operation may take up to an hour and may not be interrupted. You must have a fully charged battery and plug in the device to initiate encryption. Running out of power during encryption will cause data loss.</string>
+    
+    <string name="crypt_keeper_button_text" product="tablet">Encrypt tablet</string>
+    <string name="crypt_keeper_button_text" product="default">Encrypt phone</string>
+    
+    <string name="crypt_keeper_final_desc">Encrypt user data? This operation is not reversible and may not be interrupted without loos of data! Encryption may take up to an hour.</string>
+    
+    
     <!-- Unlock Picker Settings --><skip />
 
     <!-- Security Picker --><skip />
