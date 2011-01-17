@@ -29,10 +29,10 @@ import android.os.Handler;
 import android.preference.PreferenceCategory;
 import android.text.TextUtils;
 import android.util.Log;
-import android.view.View;
-import android.view.ContextMenu.ContextMenuInfo;
-import android.view.View.OnClickListener;
 import android.view.ContextMenu;
+import android.view.ContextMenu.ContextMenuInfo;
+import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
@@ -69,16 +69,31 @@ public class WifiSettingsForSetupWizardXL extends Activity implements OnClickLis
 
     private WifiManager mWifiManager;
 
-    private TextView mProgressText;
+    /**
+     * Used for resizing a padding above title. Hiden when software keyboard is shown.
+     */
+    private View mTopPadding;
+
+    /**
+     * Used for resizing a padding inside Config UI. Hiden when software keyboard is shown.
+     */
+    private View mWifiConfigPadding;
+
+    private TextView mTitleView;
+    /**
+     * The name of a network currently connecting, or trying to connect.
+     * This may be empty ("") at first, and updated when configuration is changed.
+     */
+    private CharSequence mNetworkName = "";
+    private CharSequence mEditingTitle;
+
     private ProgressBar mProgressBar;
     private WifiSettings mWifiSettings;
-    private TextView mStatusText;
 
     private Button mAddNetworkButton;
     private Button mRefreshButton;
     private Button mSkipOrNextButton;
     private Button mConnectButton;
-    private Button mForgetButton;
     private Button mBackButton;
 
     // true when a user already pressed "Connect" button and waiting for connection.
@@ -130,14 +145,11 @@ public class WifiSettingsForSetupWizardXL extends Activity implements OnClickLis
     }
 
     public void setup() {
-        mProgressText = (TextView)findViewById(R.id.scanning_progress_text);
+        mTitleView = (TextView)findViewById(R.id.wifi_setup_title);
         mProgressBar = (ProgressBar)findViewById(R.id.scanning_progress_bar);
         mProgressBar.setMax(2);
-        mStatusText = (TextView)findViewById(R.id.wifi_setup_status);
 
-        mProgressText.setText(Summary.get(this, DetailedState.SCANNING));
         mProgressBar.setIndeterminate(true);
-        mStatusText.setText(R.string.wifi_setup_status_scanning);
 
         mAddNetworkButton = (Button)findViewById(R.id.wifi_setup_add_network);
         mAddNetworkButton.setOnClickListener(this);
@@ -147,10 +159,11 @@ public class WifiSettingsForSetupWizardXL extends Activity implements OnClickLis
         mSkipOrNextButton.setOnClickListener(this);
         mConnectButton = (Button)findViewById(R.id.wifi_setup_connect);
         mConnectButton.setOnClickListener(this);
-        mForgetButton = (Button)findViewById(R.id.wifi_setup_forget);
-        mForgetButton.setOnClickListener(this);
         mBackButton = (Button)findViewById(R.id.wifi_setup_cancel);
         mBackButton.setOnClickListener(this);
+
+        mTopPadding = findViewById(R.id.top_padding);
+        mWifiConfigPadding = findViewById(R.id.wifi_config_padding);
 
         // At first, Wifi module doesn't return SCANNING state (it's too early), so we manually
         // show it.
@@ -163,8 +176,8 @@ public class WifiSettingsForSetupWizardXL extends Activity implements OnClickLis
         mRefreshButton.setVisibility(View.VISIBLE);
         mSkipOrNextButton.setVisibility(View.VISIBLE);
         mConnectButton.setVisibility(View.GONE);
-        mForgetButton.setVisibility(View.GONE);
         mBackButton.setVisibility(View.GONE);
+        setPaddingVisibility(View.VISIBLE, View.GONE);
     }
 
     @Override
@@ -188,9 +201,6 @@ public class WifiSettingsForSetupWizardXL extends Activity implements OnClickLis
         } else if (view == mConnectButton) {
             if (DEBUG) Log.d(TAG, "Connect button pressed");
             onConnectButtonPressed();
-        } else if (view == mForgetButton) {
-            if (DEBUG) Log.d(TAG, "Forget button pressed");
-            onForgetButtonPressed();
         } else if (view == mBackButton) {
             if (DEBUG) Log.d(TAG, "Back button pressed");
             onBackButtonPressed();
@@ -222,7 +232,6 @@ public class WifiSettingsForSetupWizardXL extends Activity implements OnClickLis
             // no visible network on the list.
             if (mWifiSettings.getAccessPointsCount() == 0) {
                 mProgressBar.setIndeterminate(true);
-                mProgressText.setText(Summary.get(this, DetailedState.SCANNING));
             } else {
                 // Users already connected to a network, or see available networks.
                 mProgressBar.setIndeterminate(false);
@@ -234,14 +243,14 @@ public class WifiSettingsForSetupWizardXL extends Activity implements OnClickLis
             break;
         }
         case CONNECTED: {
+            hideSoftwareKeyboard();
+
             // If the device is already connected to a wifi without users' "Connect" request,
             // this can be false here. We want to treat it as "after connect action".
             mAfterConnectAction = true;
 
             mProgressBar.setIndeterminate(false);
             mProgressBar.setProgress(2);
-            mProgressText.setText(Summary.get(this, state));
-            mStatusText.setText(R.string.wifi_setup_status_proceed_to_next);
 
             mConnectButton.setVisibility(View.GONE);
             mAddNetworkButton.setVisibility(View.GONE);
@@ -250,8 +259,6 @@ public class WifiSettingsForSetupWizardXL extends Activity implements OnClickLis
             mSkipOrNextButton.setVisibility(View.VISIBLE);
             mSkipOrNextButton.setEnabled(true);
             mHandler.removeCallbacks(mSkipButtonEnabler);
-
-            mProgressText.setText(Summary.get(this, state));
             break;
         }
         default:  // DISCONNECTED, FAILED
@@ -264,31 +271,34 @@ public class WifiSettingsForSetupWizardXL extends Activity implements OnClickLis
         mProgressBar.setIndeterminate(false);
         mProgressBar.setProgress(0);
 
-        mProgressText.setText(stateString);
-
         mAddNetworkButton.setEnabled(true);
         mRefreshButton.setEnabled(true);
     }
 
     private void showConnectingStatus() {
+        // We save this title and show it when authentication failed.
+        mEditingTitle = mTitleView.getText();
+        showTitleForNetworkEditing();
         mProgressBar.setIndeterminate(false);
         mProgressBar.setProgress(1);
-        mStatusText.setText(R.string.wifi_setup_status_connecting);
-        mProgressText.setText(Summary.get(this, DetailedState.CONNECTING));
+        setPaddingVisibility(View.VISIBLE);
+    }
+
+    private void showTitleForNetworkEditing() {
+        if (TextUtils.isEmpty(mNetworkName) && mWifiConfig != null) {
+            mNetworkName = mWifiConfig.getController().getConfig().SSID;
+        }
+        mTitleView.setText(getString(R.string.wifi_setup_title_editing_network, mNetworkName));
     }
 
     private void showScanningStatus() {
         mProgressBar.setIndeterminate(true);
         ((Button)findViewById(R.id.wifi_setup_add_network)).setEnabled(false);
         ((Button)findViewById(R.id.wifi_setup_refresh_list)).setEnabled(false);
-        mProgressText.setText(Summary.get(this, DetailedState.SCANNING));
-        mStatusText.setText(R.string.wifi_setup_status_scanning);
     }
 
     private void onAddNetworkButtonPressed() {
-        // onConfigUiShown() will be called.
         mWifiSettings.onAddNetworkPressed();
-
     }
 
     /**
@@ -318,34 +328,39 @@ public class WifiSettingsForSetupWizardXL extends Activity implements OnClickLis
         mWifiConfig = new WifiConfigUiForSetupWizardXL(this, parent, selectedAccessPoint, edit);
         final View view = mWifiConfig.getView();
         if (selectedAccessPoint != null) {
-            view.findViewById(R.id.wifi_general_info).setVisibility(View.VISIBLE);
-            ((TextView)view.findViewById(R.id.title)).setText(selectedAccessPoint.getTitle());
-            ((TextView)view.findViewById(R.id.summary)).setText(selectedAccessPoint.getSummary());
+            mNetworkName = selectedAccessPoint.getTitle().toString();
+            mTitleView.setText(getString(R.string.wifi_setup_title_editing_network, mNetworkName));
         } else {
+            mNetworkName = "";
+            mTitleView.setText(R.string.wifi_setup_title_add_network);
             view.findViewById(R.id.wifi_general_info).setVisibility(View.GONE);
         }
 
         if (selectedAccessPoint != null &&
                 selectedAccessPoint.security == AccessPoint.SECURITY_NONE) {
-            mStatusText.setText(R.string.wifi_setup_status_unsecured_network);
+            // onConnectButtonPressed() will change visibility status.
+            mConnectButton.performClick();
         } else if (selectedAccessPoint != null &&
                 selectedAccessPoint.security == AccessPoint.SECURITY_EAP) {
-            mStatusText.setText(R.string.wifi_setup_status_eap_not_supported);
             mConnectButton.setVisibility(View.GONE);
+
+            mSkipOrNextButton.setVisibility(View.GONE);
+            mAddNetworkButton.setVisibility(View.GONE);
+            mRefreshButton.setVisibility(View.GONE);
+            mBackButton.setVisibility(View.VISIBLE);
         } else {
-            mStatusText.setText(R.string.wifi_setup_status_edit_network);
             mConnectButton.setVisibility(View.VISIBLE);
+
+            // WifiConfigController shows Connect button as "Save" when edit==true and a user
+            // tried to connect the network.
+            // In SetupWizard, we just show the button as "Connect" instead.
+            mConnectButton.setText(R.string.wifi_connect);
+
+            mSkipOrNextButton.setVisibility(View.GONE);
+            mAddNetworkButton.setVisibility(View.GONE);
+            mRefreshButton.setVisibility(View.GONE);
+            mBackButton.setVisibility(View.VISIBLE);
         }
-
-        // WifiConfigController shows Connect button as "Save" when edit==true and a user
-        // tried to connect the network.
-        // In SetupWizard, we just show the button as "Connect" instead.
-        mConnectButton.setText(R.string.wifi_connect);
-
-        mAddNetworkButton.setVisibility(View.GONE);
-        mRefreshButton.setVisibility(View.GONE);
-        mSkipOrNextButton.setVisibility(View.GONE);
-        mBackButton.setVisibility(View.VISIBLE);
     }
 
     // May be called when user press "connect" button in WifiDialog
@@ -388,21 +403,6 @@ public class WifiSettingsForSetupWizardXL extends Activity implements OnClickLis
         mRefreshButton.setVisibility(View.GONE);
     }
 
-    // May be called when user press "forget" button in WifiDialog
-    /* package */ void onForgetButtonPressed() {
-        mWifiSettings.forget();
-
-        refreshAccessPoints(false);
-        restoreFirstButtonVisibilityState();
-        mAddNetworkButton.setEnabled(true);
-        mRefreshButton.setEnabled(true);
-        mSkipOrNextButton.setEnabled(true);
-
-        mProgressBar.setIndeterminate(false);
-        mProgressBar.setProgress(0);
-        mProgressText.setText(getString(R.string.wifi_setup_not_connected));
-    }
-
     private void onBackButtonPressed() {
         if (mAfterConnectAction) {
             if (DEBUG) Log.d(TAG, "Back button pressed after connect action.");
@@ -421,7 +421,6 @@ public class WifiSettingsForSetupWizardXL extends Activity implements OnClickLis
         } else { // During user's Wifi configuration.
             mWifiSettings.resumeWifiScan();
 
-            mStatusText.setText(R.string.wifi_setup_status_select_network);
             restoreFirstButtonVisibilityState();
 
             mAddNetworkButton.setEnabled(true);
@@ -470,7 +469,8 @@ public class WifiSettingsForSetupWizardXL extends Activity implements OnClickLis
     }
 
     /**
-     * Called when {@link WifiSettings} received {@link WifiManager#SUPPLICANT_CHANGED_ACTION}.
+     * Called when {@link WifiSettings} received
+     * {@link WifiManager#SUPPLICANT_STATE_CHANGED_ACTION}.
      */
     /* package */ void onSupplicantStateChanged(Intent intent) {
         final int errorCode = intent.getIntExtra(WifiManager.EXTRA_SUPPLICANT_ERROR, -1);
@@ -485,10 +485,16 @@ public class WifiSettingsForSetupWizardXL extends Activity implements OnClickLis
      */
     private void onAuthenticationFailure() {
         mAfterConnectAction = false;
-        mStatusText.setText(R.string.wifi_setup_status_edit_network);
         mSkipOrNextButton.setVisibility(View.GONE);
         mConnectButton.setVisibility(View.VISIBLE);
         mConnectButton.setEnabled(true);
+
+        if (!TextUtils.isEmpty(mEditingTitle)) {
+            mTitleView.setText(mEditingTitle);
+        } else {
+            Log.w(TAG, "Title during editing/adding a network was empty.");
+            showTitleForNetworkEditing();
+        }
 
         // Restore View status which was tweaked on connection.
         final View wpsFieldView = findViewById(R.id.wps_fields);
@@ -502,19 +508,34 @@ public class WifiSettingsForSetupWizardXL extends Activity implements OnClickLis
                 final View passwordView = findViewById(R.id.password);
                 if (passwordView != null) {
                     if (passwordView.isFocused()) {
-                        final InputMethodManager inputMethodManager = (InputMethodManager)
-                                getSystemService(Context.INPUT_METHOD_SERVICE);
-                        inputMethodManager.showSoftInput(passwordView, 0);
-                    } else {
-                        mWifiConfig.requestFocusAndShowKeyboard(R.id.password);
+                        setPaddingVisibility(View.GONE);
                     }
+                    mWifiConfig.requestFocusAndShowKeyboard(R.id.password);
                 }
             }
         }
         final View typeView = findViewById(R.id.type);
         if (typeView != null) {
             typeView.setVisibility(mPreviousTypeVisibility);
+            if (mPreviousTypeVisibility == View.VISIBLE && mWifiConfig != null) {
+                final View ssidView = findViewById(R.id.ssid);
+                if (ssidView != null) {
+                    if (ssidView.isFocused()) {
+                        setPaddingVisibility(View.GONE);
+                    }
+                    mWifiConfig.requestFocusAndShowKeyboard(R.id.ssid);
+                }
+            }
         }
+    }
+
+    public void setPaddingVisibility(int visibility) {
+        setPaddingVisibility(visibility, visibility);
+    }
+
+    private void setPaddingVisibility(int topPaddingVisibility, int configVisibility) {
+        mTopPadding.setVisibility(topPaddingVisibility);
+        mWifiConfigPadding.setVisibility(configVisibility);
     }
 
     /**
