@@ -567,7 +567,7 @@ public class WifiSettings extends SettingsPreferenceFragment
     public void onClick(DialogInterface dialogInterface, int button) {
         if (mInXlSetupWizard) {
             if (button == WifiDialog.BUTTON_FORGET && mSelectedAccessPoint != null) {
-                ((WifiSettingsForSetupWizardXL)getActivity()).onForgetButtonPressed();
+                forget();
             } else if (button == WifiDialog.BUTTON_SUBMIT) {
                 ((WifiSettingsForSetupWizardXL)getActivity()).onConnectButtonPressed();
             }

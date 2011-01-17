@@ -22,7 +22,7 @@ import android.widget.Button;
 
 /**
  * Foundation interface glues between Activities and UIs like
- * {@link WifiDialog} or {@link WifiConfigPreference}.
+ * {@link WifiDialog} or {@link WifiConfigUiForSetupWizardXL}.
  */
 public interface WifiConfigUiBase {
     public Context getContext();

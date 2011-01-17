@@ -2962,8 +2962,22 @@ found in the list of installed applications.</string>
     <string name="sound_category_feedback_title">Feedback</string>
 
     <!-- Wifi Setup For Setup Wizard with XL screen -->
-    <!-- Title shown in Wifi Setup For Setup Wizard with XL screen -->
+    <!-- Title shown in Wifi Setup Wizard with XL screen -->
     <string name="wifi_setup_title">Wi-Fi setup</string>
+    <!-- Title shown in Wifi Setup Wizard with XL screen when
+         a user is configuring password for a network.
+         The argument should be the name of the network.
+         [CHAR LIMIT=50] -->
+    <string name="wifi_setup_title_editing_network">Connect to Wi-Fi network <xliff:g id="network_name" example="Happy Mobile">%s</xliff:g></string>
+    <!-- Title shown in Wifi Setup For Setup Wizard with XL screen when
+         the device is connecting a network the user specified.
+         The argument should be the name of the network.
+         [CHAR LIMIT=50] -->
+    <string name="wifi_setup_title_connecting_network">Connecting to Wi-Fi network <xliff:g id="network_name" example="Happy Mobile">%s</xliff:g>...</string>
+    <!-- Title shown in Wifi Setup For Setup Wizard with XL screen when
+         a user is adding a network.
+         [CHAR LIMIT=50] -->
+    <string name="wifi_setup_title_add_network">Add a network</string>
     <!-- Text message shown when Wifi is not connected.
          Used in Wifi Setup For Setup Wizard with XL screen. -->
     <string name="wifi_setup_not_connected">Not connected</string>
