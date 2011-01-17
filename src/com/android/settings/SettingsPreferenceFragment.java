@@ -158,11 +158,11 @@ public class SettingsPreferenceFragment extends PreferenceFragment
     }
 
     protected boolean hasNextButton() {
-        return ((Settings)getActivity()).hasNextButton();
+        return ((ButtonBarHandler)getActivity()).hasNextButton();
     }
 
     protected Button getNextButton() {
-        return ((Settings)getActivity()).getNextButton();
+        return ((ButtonBarHandler)getActivity()).getNextButton();
     }
 
     public void finish() {
