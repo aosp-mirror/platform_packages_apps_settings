@@ -158,10 +158,8 @@
 
     <Button
         android:id="@+id/next_button"
-        android:layout_width="208dip"
-        android:layout_height="48dip"
+        style="@style/setup_wizard_button"
         android:layout_alignParentBottom="true"
         android:layout_alignParentRight="true"
-        android:text="@string/next_label"
-        android:textAppearance="?android:attr/textAppearanceMedium" />
+        android:text="@string/next_label" />
 </RelativeLayout>

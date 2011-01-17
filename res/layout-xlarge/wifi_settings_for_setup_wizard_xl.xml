@@ -120,54 +120,42 @@
         android:layout_marginBottom="16dip">
 
         <Button android:id="@+id/wifi_setup_forget"
-                android:layout_width="208dip"
-                android:layout_height="48dip"
+                style="@style/setup_wizard_button"
                 android:layout_marginLeft="16dip"
                 android:text="@string/wifi_setup_forget"
-                android:textAppearance="?android:attr/textAppearanceMedium"
                 android:visibility="gone" />
 
         <Button android:id="@+id/wifi_setup_connect"
-                android:layout_width="208dip"
-                android:layout_height="48dip"
+                style="@style/setup_wizard_button"
                 android:layout_marginTop="96dip"
                 android:layout_marginLeft="16dip"
                 android:text="@string/wifi_setup_connect"
-                android:textAppearance="?android:attr/textAppearanceMedium"
                 android:enabled="false"
                 android:visibility="gone" />
 
         <Button android:id="@+id/wifi_setup_add_network"
-                android:layout_width="208dip"
-                android:layout_height="48dip"
+                style="@style/setup_wizard_button"
                 android:layout_marginLeft="16dip"
                 android:text="@string/wifi_setup_add_network"
-                android:textAppearance="?android:attr/textAppearanceMedium"
                 android:enabled="false" />
 
         <Button android:id="@+id/wifi_setup_refresh_list"
-                android:layout_width="208dip"
-                android:layout_height="48dip"
+                style="@style/setup_wizard_button"
                 android:layout_marginLeft="16dip"
                 android:text="@string/wifi_setup_refresh_list"
-                android:textAppearance="?android:attr/textAppearanceMedium"
                 android:enabled="false" />
 
         <Button android:id="@+id/wifi_setup_skip_or_next"
-                android:layout_width="208dip"
-                android:layout_height="48dip"
+                style="@style/setup_wizard_button"
                 android:layout_marginTop="96dip"
                 android:layout_marginLeft="16dip"
                 android:text="@string/wifi_setup_skip"
-                android:textAppearance="?android:attr/textAppearanceMedium"
                 android:enabled="false" />
     </LinearLayout>
 
     <!-- This misleading name is for keeping consistency between non-XL layouts -->
     <Button android:id="@+id/wifi_setup_cancel"
-            android:layout_width="208dip"
-            android:layout_height="48dip"
-            android:textAppearance="?android:attr/textAppearanceMedium"
+            style="@style/setup_wizard_button"
             android:layout_marginBottom="16dip"
             android:layout_alignBottom="@+id/content"
             android:layout_toLeftOf="@id/right_buttons"
