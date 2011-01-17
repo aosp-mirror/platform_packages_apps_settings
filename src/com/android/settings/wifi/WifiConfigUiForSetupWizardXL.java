@@ -18,7 +18,6 @@ package com.android.settings.wifi;
 
 import com.android.settings.R;
 
-import android.app.Activity;
 import android.content.Context;
 import android.os.Handler;
 import android.util.Log;
@@ -38,15 +37,16 @@ public class WifiConfigUiForSetupWizardXL implements WifiConfigUiBase, OnFocusCh
     private static final String TAG = "SetupWizard";
 
     private Button mConnectButton;
-    private Button mForgetButton;
     private Button mCancelButton;
 
-    private final Activity mActivity;
+    private final WifiSettingsForSetupWizardXL mActivity;
     private View mView;
     private WifiConfigController mController;
     private AccessPoint mAccessPoint;
     private boolean mEdit;
     private Handler mHandler = new Handler();
+
+    private final InputMethodManager mInputMethodManager;
 
     private LayoutInflater mInflater;
 
@@ -58,10 +58,10 @@ public class WifiConfigUiForSetupWizardXL implements WifiConfigUiBase, OnFocusCh
      * @param edit
      */
     public WifiConfigUiForSetupWizardXL(
-            Activity activity, ViewGroup parent, AccessPoint accessPoint, boolean edit) {
+            WifiSettingsForSetupWizardXL activity, ViewGroup parent,
+            AccessPoint accessPoint, boolean edit) {
         mActivity = activity;
         mConnectButton = (Button)activity.findViewById(R.id.wifi_setup_connect);
-        mForgetButton = (Button)activity.findViewById(R.id.wifi_setup_forget);
         mCancelButton = (Button)activity.findViewById(R.id.wifi_setup_cancel);
         mAccessPoint = accessPoint;
         mEdit = edit;
@@ -70,12 +70,14 @@ public class WifiConfigUiForSetupWizardXL implements WifiConfigUiBase, OnFocusCh
         mView = mInflater.inflate(R.layout.wifi_config_ui_for_setup_wizard, parent, true);
         mController = new WifiConfigController(this, mView, mAccessPoint, edit);
 
-        // Assumes R.id.password is inside security_fields.
-        // TODO: confirm it is ok to assume R.id.password is the only EditText to be focused, and
-        // R.id.security_fields is the only parent for possible EditTexts. Possibly we need to
-        // check parentand detect visibility manually.
+        mInputMethodManager = (InputMethodManager)
+                activity.getSystemService(Context.INPUT_METHOD_SERVICE);
+
         if (mView.findViewById(R.id.security_fields).getVisibility() == View.VISIBLE) {
             requestFocusAndShowKeyboard(R.id.password);
+        } else if (mView.findViewById(R.id.type).getVisibility() == View.VISIBLE) {
+            // Add Network flow.
+            requestFocusAndShowKeyboard(R.id.ssid);
         }
     }
 
@@ -90,13 +92,17 @@ public class WifiConfigUiForSetupWizardXL implements WifiConfigUiBase, OnFocusCh
         } else if (!(viewToBeFocused instanceof EditText)) {
             Log.w(TAG, "password field is not EditText");
         } else {
-            // After acquiring the focus, we show software keyboard.
-            viewToBeFocused.setOnFocusChangeListener(this);
-            final boolean requestFocusResult = viewToBeFocused.requestFocus();
-            Log.i(TAG, String.format("Focus request  %s.",
-                    (requestFocusResult ? "successful" : "failed")));
-            if (!requestFocusResult) {
-                viewToBeFocused.setOnFocusChangeListener(null);
+            if (viewToBeFocused.isFocused()) {
+                mInputMethodManager.showSoftInput(viewToBeFocused, 0);
+            } else {
+                // After acquiring the focus, we show software keyboard.
+                viewToBeFocused.setOnFocusChangeListener(this);
+                final boolean requestFocusResult = viewToBeFocused.requestFocus();
+                Log.i(TAG, String.format("Focus request  %s.",
+                        (requestFocusResult ? "successful" : "failed")));
+                if (!requestFocusResult) {
+                    viewToBeFocused.setOnFocusChangeListener(null);
+                }
             }
         }
     }
@@ -131,7 +137,7 @@ public class WifiConfigUiForSetupWizardXL implements WifiConfigUiBase, OnFocusCh
 
     @Override
     public Button getForgetButton() {
-        return mForgetButton;
+        return null;
     }
 
     @Override
@@ -143,16 +149,11 @@ public class WifiConfigUiForSetupWizardXL implements WifiConfigUiBase, OnFocusCh
     public void setSubmitButton(CharSequence text) {
         mConnectButton.setVisibility(View.VISIBLE);
         mConnectButton.setText(text);
-
-        // test
-        mForgetButton.setVisibility(View.GONE);
     }
 
     @Override
     public void setForgetButton(CharSequence text) {
         // In XL setup screen, we won't show Forget button for simplifying the UI.
-        // mForgetButton.setVisibility(View.VISIBLE);
-        // mForgetButton.setText(text);
     }
 
     @Override
@@ -177,12 +178,9 @@ public class WifiConfigUiForSetupWizardXL implements WifiConfigUiBase, OnFocusCh
         Log.d(TAG, "Ignoring setTitle");
     }
 
-    private static class FocusRunnable implements Runnable {
-        final InputMethodManager mInputMethodManager;
+    private class FocusRunnable implements Runnable {
         final View mViewToBeFocused;
-        public FocusRunnable(Context context, View viewToBeFocused) {
-            mInputMethodManager = (InputMethodManager)
-                    context.getSystemService(Context.INPUT_METHOD_SERVICE);
+        public FocusRunnable(View viewToBeFocused) {
             mViewToBeFocused = viewToBeFocused;
         }
 
@@ -191,7 +189,9 @@ public class WifiConfigUiForSetupWizardXL implements WifiConfigUiBase, OnFocusCh
             // mInputMethodManager.focusIn(mViewToBeFocused);
             final boolean showSoftInputResult =
                     mInputMethodManager.showSoftInput(mViewToBeFocused, 0);
-            if (!showSoftInputResult) {
+            if (showSoftInputResult) {
+                mActivity.setPaddingVisibility(View.GONE);
+            } else {
                 Log.w(TAG, "Failed to show software keyboard ");
             }
         }
@@ -201,7 +201,7 @@ public class WifiConfigUiForSetupWizardXL implements WifiConfigUiBase, OnFocusCh
     public void onFocusChange(View view, boolean hasFocus) {
         view.setOnFocusChangeListener(null);
         if (hasFocus) {
-            mHandler.post(new FocusRunnable(mActivity, view));
+            mHandler.post(new FocusRunnable(view));
         }
     }
 }
