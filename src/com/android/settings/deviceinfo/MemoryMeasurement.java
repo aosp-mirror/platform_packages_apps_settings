@@ -180,8 +180,6 @@ public class MemoryMeasurement {
 
         public static final int MSG_INVALIDATE = 6;
 
-        private List<String> mPendingApps = new ArrayList<String>();
-
         private Object mLock = new Object();
 
         private IMediaContainerService mDefaultContainer;
@@ -190,7 +188,7 @@ public class MemoryMeasurement {
 
         private volatile boolean mMeasured = false;
 
-        private long mAppsSize = 0;
+        private StatsObserver mStatsObserver;
 
         private final WeakReference<Context> mContext;
 
@@ -287,39 +285,49 @@ public class MemoryMeasurement {
             sendEmptyMessage(MSG_DISCONNECT);
         }
 
-        public void queuePackageMeasurementLocked(String packageName) {
-            mPendingApps.add(packageName);
-        }
-
         /**
          * Request measurement of each package.
          *
          * @param pm PackageManager instance to query
          */
         public void requestQueuedMeasurementsLocked(PackageManager pm) {
-            final int N = mPendingApps.size();
+            final List<String> appsList = mStatsObserver.getAppsList();
+            final int N = appsList.size();
             for (int i = 0; i < N; i++) {
-                pm.getPackageSizeInfo(mPendingApps.get(i), mStatsObserver);
+                pm.getPackageSizeInfo(appsList.get(i), mStatsObserver);
             }
         }
 
-        final IPackageStatsObserver.Stub mStatsObserver = new IPackageStatsObserver.Stub() {
+        private class StatsObserver extends IPackageStatsObserver.Stub {
+            private long mAppsSizeForThisStatsObserver = 0;
+            private final List<String> mAppsList = new ArrayList<String>();
             public void onGetStatsCompleted(PackageStats stats, boolean succeeded) {
+                if (!mStatsObserver.equals(this)) {
+                    // this callback's class object is no longer in use. ignore this callback.
+                    return;
+                }
                 if (succeeded) {
-                    mAppsSize += stats.codeSize + stats.dataSize;
+                    mAppsSizeForThisStatsObserver += stats.codeSize + stats.dataSize;
                 }
 
-                synchronized (mPendingApps) {
-                    mPendingApps.remove(stats.packageName);
+                synchronized (mAppsList) {
+                    mAppsList.remove(stats.packageName);
 
-                    if (mPendingApps.size() == 0) {
-                        mInternalAppsSize = mAppsSize;
+                    if (mAppsList.size() == 0) {
+                        mInternalAppsSize = mAppsSizeForThisStatsObserver;
 
                         onInternalMeasurementComplete();
                     }
                 }
             }
-        };
+
+            public void queuePackageMeasurementLocked(String packageName) {
+                mAppsList.add(packageName);
+            }
+            public List<String> getAppsList() {
+                return mAppsList;
+            }
+        }
 
         private void onInternalMeasurementComplete() {
             sendEmptyMessage(MSG_COMPLETED);
@@ -368,10 +376,12 @@ public class MemoryMeasurement {
                     .getInstalledApplications(PackageManager.GET_UNINSTALLED_PACKAGES
                             | PackageManager.GET_DISABLED_COMPONENTS);
             if (apps != null) {
-                synchronized (mPendingApps) {
+                // initiate measurement of all package sizes. need new StatsObserver object.
+                mStatsObserver = new StatsObserver();
+                synchronized (mStatsObserver.mAppsList) {
                     for (int i = 0; i < apps.size(); i++) {
                         final ApplicationInfo info = apps.get(i);
-                        queuePackageMeasurementLocked(info.packageName);
+                        mStatsObserver.queuePackageMeasurementLocked(info.packageName);
                     }
 
                     requestQueuedMeasurementsLocked(pm);
