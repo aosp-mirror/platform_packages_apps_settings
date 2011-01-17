@@ -204,6 +204,7 @@ public class InputMethodAndSubtypeUtil {
                     if (DEBUG) {
                         Log.d(TAG, "Current IME was uninstalled or disabled.");
                     }
+                    currentInputMethodId = null;
                 }
             }
             // If it's a disabled system ime, add it to the disabled list so that it
