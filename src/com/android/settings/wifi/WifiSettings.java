@@ -270,7 +270,9 @@ public class WifiSettings extends SettingsPreferenceFragment
 
     @Override
     public void onCreateContextMenu(ContextMenu menu, View view, ContextMenuInfo info) {
-        if (info instanceof AdapterContextMenuInfo) {
+        if (mInXlSetupWizard) {
+            ((WifiSettingsForSetupWizardXL)getActivity()).onCreateContextMenu(menu, view, info);
+        } else if (info instanceof AdapterContextMenuInfo) {
             Preference preference = (Preference) getListView().getItemAtPosition(
                     ((AdapterContextMenuInfo) info).position);
 
