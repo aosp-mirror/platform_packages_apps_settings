@@ -55,6 +55,7 @@ import android.widget.TextView;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -212,7 +213,6 @@ public class AccountSyncSettings extends AccountPreferenceBase {
         String title = getString(R.string.sync_item_title, providerLabel);
         item.setTitle(title);
         item.setKey(authority);
-        getPreferenceScreen().addPreference(item);
         mCheckBoxes.add(item);
     }
 
@@ -471,6 +471,11 @@ public class AccountSyncSettings extends AccountPreferenceBase {
                     }
                 }
             }
+        }
+
+        Collections.sort(mCheckBoxes);
+        for (int i = 0, n = mCheckBoxes.size(); i < n; i++) {
+            getPreferenceScreen().addPreference(mCheckBoxes.get(i));
         }
     }
 
