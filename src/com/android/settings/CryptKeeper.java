@@ -23,37 +23,117 @@ import android.app.Activity;
 import android.app.StatusBarManager;
 import android.content.ComponentName;
 import android.content.Context;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.inputmethodservice.KeyboardView;
 import android.os.Bundle;
+import android.os.Handler;
 import android.os.IBinder;
+import android.os.Message;
 import android.os.ServiceManager;
 import android.os.SystemProperties;
 import android.os.storage.IMountService;
+import android.text.TextUtils;
 import android.text.format.DateFormat;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.inputmethod.EditorInfo;
+import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import java.util.Date;
 
 public class CryptKeeper extends Activity implements TextView.OnEditorActionListener {
+    private static final String TAG = "CryptKeeper";
+    
     private static final String DECRYPT_STATE = "trigger_restart_framework";
+
+    private static final int UPDATE_PROGRESS = 1;
+    private static final int COOLDOWN = 2;
+
+    private static final int MAX_FAILED_ATTEMPTS = 30;
+    private static final int COOL_DOWN_ATTEMPTS = 10;
+    private static final int COOL_DOWN_INTERVAL = 30; // 30 seconds
+
+
+    private Handler mHandler = new Handler() {
+        @Override
+        public void handleMessage(Message msg) {
+            
+            switch (msg.what) {
+            
+            case UPDATE_PROGRESS:
+                String state = SystemProperties.get("vold.encrypt_progress");
+                
+                ProgressBar progressBar = (ProgressBar) findViewById(R.id.progress_bar);
+                progressBar.setProgress(0);
+                
+                try {
+                    int progress = Integer.parseInt(state);
+                    progressBar.setProgress(progress);
+                } catch (Exception e) {
+                    Log.w(TAG, "Error parsing progress: " + e.toString());
+                }
+                
+                // Check the status every 1 second
+                sendEmptyMessageDelayed(0, 1000);
+                break;
+            
+            case COOLDOWN:
+                TextView tv = (TextView) findViewById(R.id.status);
+                if (mCooldown <= 0) {
+                    // Re-enable the password entry
+                    EditText passwordEntry = (EditText) findViewById(R.id.passwordEntry);
+                    passwordEntry.setEnabled(true);
+                    
+                    tv.setText(R.string.try_again);
+                    
+                } else {
+                    
+                    CharSequence tempalte = getText(R.string.crypt_keeper_cooldown);
+                    tv.setText(TextUtils.expandTemplate(tempalte, Integer.toString(mCooldown)));
+                    
+                    mCooldown--;
+                    mHandler.sendEmptyMessageDelayed(COOLDOWN, 1000); // Tick every second
+                }
+                break;
+            }
+        }
+    };
+    
+    private int mFailedAttempts = 0;
+    private int mCooldown;
     
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.crypt_keeper);
         
         String state = SystemProperties.get("vold.decrypt");
         if ("".equals(state) || DECRYPT_STATE.equals(state)) {
+            // Disable the crypt keeper. 
             PackageManager pm = getPackageManager();
             ComponentName name = new ComponentName(this, CryptKeeper.class);
             pm.setComponentEnabledSetting(name, PackageManager.COMPONENT_ENABLED_STATE_DISABLED, 0);
             return;
         }
         
+        // Check to see why we were started.
+        String progress = SystemProperties.get("vold.encrypt_progress");
+        if ("startup".equals(progress)) {
+            setContentView(R.layout.crypt_keeper_progress);
+            encryptionProgressInit();
+        } else {
+            setContentView(R.layout.crypt_keeper_password_entry);
+            passwordEntryInit();
+        }
+    }
+    
+    private void encryptionProgressInit() {
+        mHandler.sendEmptyMessage(UPDATE_PROGRESS);
+    }
+    
+    private void passwordEntryInit() {
         TextView passwordEntry = (TextView) findViewById(R.id.passwordEntry);
         passwordEntry.setOnEditorActionListener(this);
         
@@ -92,6 +172,10 @@ public class CryptKeeper extends Activity implements TextView.OnEditorActionList
             // Get the password
             String password = v.getText().toString();
 
+            if (TextUtils.isEmpty(password)) {
+                return true;
+            }
+            
             // Now that we have the password clear the password field.
             v.setText(null);
 
@@ -102,11 +186,22 @@ public class CryptKeeper extends Activity implements TextView.OnEditorActionList
                 // For now the only way to get here is for the password to be
                 // wrong.
 
-                TextView tv = (TextView) findViewById(R.id.status);
-                tv.setText(R.string.try_again);
-
+                mFailedAttempts++;
+                
+                if (mFailedAttempts == MAX_FAILED_ATTEMPTS) {
+                    // Factory reset the device.
+                    sendBroadcast(new Intent("android.intent.action.MASTER_CLEAR"));
+                } else if ((mFailedAttempts % COOL_DOWN_ATTEMPTS) == 0) {
+                    mCooldown = COOL_DOWN_INTERVAL;
+                    EditText passwordEntry = (EditText) findViewById(R.id.passwordEntry);
+                    passwordEntry.setEnabled(false);
+                    mHandler.sendEmptyMessage(COOLDOWN);
+                } else {
+                    TextView tv = (TextView) findViewById(R.id.status);
+                    tv.setText(R.string.try_again);
+                }
             } catch (Exception e) {
-                Log.e("CryptKeeper", "Error while decrypting...", e);
+                Log.e(TAG, "Error while decrypting...", e);
             }
             
             return true;
