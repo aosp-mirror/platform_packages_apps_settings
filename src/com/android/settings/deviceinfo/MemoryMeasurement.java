@@ -307,7 +307,9 @@ public class MemoryMeasurement {
                     return;
                 }
                 if (succeeded) {
-                    mAppsSizeForThisStatsObserver += stats.codeSize + stats.dataSize;
+                    mAppsSizeForThisStatsObserver += stats.codeSize + stats.dataSize +
+                            stats.externalCacheSize + stats.externalDataSize +
+                            stats.externalMediaSize + stats.externalObbSize;
                 }
 
                 synchronized (mAppsList) {
@@ -363,8 +365,8 @@ public class MemoryMeasurement {
 
             long mediaSize;
             try {
-                // TODO get these directories from somewhere
-                mediaSize = imcs.calculateDirectorySize("/data/media");
+                mediaSize = imcs.calculateDirectorySize(
+                        Environment.getExternalStorageDirectory().getAbsolutePath());
             } catch (Exception e) {
                 Log.i(TAG, "Could not read memory from default container service");
                 return;
