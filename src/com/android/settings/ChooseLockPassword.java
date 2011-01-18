@@ -197,7 +197,7 @@ public class ChooseLockPassword extends PreferenceActivity {
 
             int currentType = mPasswordEntry.getInputType();
             mPasswordEntry.setInputType(mIsAlphaMode ? currentType
-                    : (currentType | InputType.TYPE_CLASS_NUMBER));
+                    : (InputType.TYPE_CLASS_NUMBER | InputType.TYPE_NUMBER_VARIATION_PASSWORD));
 
             Intent intent = getActivity().getIntent();
             final boolean confirmCredentials = intent.getBooleanExtra("confirm_credentials", true);
