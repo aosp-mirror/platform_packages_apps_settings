@@ -190,12 +190,16 @@ public class VpnSettings extends SettingsPreferenceFragment
         // for long-press gesture on a profile preference
         registerForContextMenu(getListView());
 
-        // listen to vpn connectivity event
-        mVpnManager.registerConnectivityReceiver(mConnectivityReceiver);
 
         retrieveVpnListFromStorage();
-        checkVpnConnectionStatusInBackground();
         restoreInstanceState(savedInstanceState);
+    }
+
+    @Override
+    public void onPause() {
+        // ignore vpn connectivity event
+        mVpnManager.unregisterConnectivityReceiver(mConnectivityReceiver);
+        super.onPause();
     }
 
     @Override
@@ -203,17 +207,21 @@ public class VpnSettings extends SettingsPreferenceFragment
         super.onResume();
         if (DEBUG)
             Log.d(TAG, "onResume");
+
+        // listen to vpn connectivity event
+        mVpnManager.registerConnectivityReceiver(mConnectivityReceiver);
+
         if ((mUnlockAction != null) && isKeyStoreUnlocked()) {
             Runnable action = mUnlockAction;
             mUnlockAction = null;
             getActivity().runOnUiThread(action);
         }
+        checkVpnConnectionStatusInBackground();
     }
 
     @Override
     public void onDestroyView() {
         unregisterForContextMenu(getListView());
-        mVpnManager.unregisterConnectivityReceiver(mConnectivityReceiver);
         if ((mShowingDialog != null) && mShowingDialog.isShowing()) {
             mShowingDialog.dismiss();
         }
