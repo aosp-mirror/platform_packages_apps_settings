@@ -25,6 +25,7 @@
             android:summaryOff="@string/sim_lock_off"/>
     <com.android.settings.EditPinPreference
             android:key="sim_pin"
+            android:dependency="sim_toggle"
             android:title="@string/sim_pin_change"
             android:dialogTitle="@string/sim_change_pin"
             android:dialogMessage="@string/sim_enter_old"
