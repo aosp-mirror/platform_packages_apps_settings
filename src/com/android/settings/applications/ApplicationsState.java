@@ -636,7 +636,8 @@ public class ApplicationsState {
 
     private long getTotalExternalSize(PackageStats ps) {
         if (ps != null) {
-            return ps.externalDataSize + ps.externalMediaSize + ps.externalCacheSize;
+            return ps.externalDataSize + ps.externalMediaSize + ps.externalCacheSize
+                    + ps.externalObbSize;
         }
         return SIZE_INVALID;
     }
