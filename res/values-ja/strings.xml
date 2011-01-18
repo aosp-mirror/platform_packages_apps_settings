@@ -239,6 +239,8 @@
     <string name="networks" msgid="6333316876545927039">"オペレーターの選択"</string>
     <string name="sum_carrier_select" msgid="6648929373316748020">"ネットワークオペレーターを選択します"</string>
     <string name="date_and_time_settings_title" msgid="3350640463596716780">"日付と時刻"</string>
+    <!-- no translation found for date_and_time_settings_title_setup_wizard (6493371065760315350) -->
+    <skip />
     <string name="date_and_time_settings_summary" msgid="2435705040205950381">"日付、時刻、タイムゾーンの設定"</string>
     <string name="date_time_auto" msgid="7076906458515908345">"日付と時刻の自動設定"</string>
     <string name="date_time_auto_summaryOn" msgid="4609619490075140381">"ネットワークから提供された時刻を使用します"</string>
@@ -267,6 +269,12 @@
     <string name="security_settings_summary" msgid="967393342537986570">"現在地、画面ロック、SIMカードロック、認証情報ストレージのロック"</string>
     <string name="cdma_security_settings_summary" msgid="6068799952798901542">"現在地、画面のロック解除、認証情報ストレージのロックを設定します"</string>
     <string name="security_passwords_title" msgid="2930627259125138363">"パスワード"</string>
+    <!-- no translation found for encryption_settings_title (5951475460321369092) -->
+    <skip />
+    <!-- no translation found for encrypt_title (5458306603524656835) -->
+    <skip />
+    <!-- no translation found for encrypt_summary (6950523460019506111) -->
+    <skip />
     <!-- outdated translation 3973555216065628262 -->     <string name="lock_settings_picker_title" msgid="8665454308380158195">"画面のロック解除セキュリティ"</string>
     <!-- outdated translation 1129684221223017902 -->     <string name="unlock_set_unlock_launch_picker_title" msgid="4461562893699328786">"画面ロックの設定"</string>
     <string name="unlock_set_unlock_launch_picker_change_title" msgid="6987228635944678726">"画面ロックの変更"</string>
@@ -444,8 +452,13 @@
     <string name="wifi_menu_modify" msgid="2068554918652440105">"ネットワークを変更"</string>
     <string name="wifi_network_setup" msgid="7974851890019344870">"ネットワーク設定"</string>
     <string name="wifi_wps_pin" msgid="5471842298708321115">"アクセスポイントに記載のPINを入力してください"</string>
-    <string name="wifi_wps_pin_method_configuration" msgid="9019042137789692817">"WPSピン方式の設定"</string>
+    <!-- no translation found for wifi_wps_setup_title (150518971269252336) -->
+    <skip />
     <string name="wifi_wps_pin_output" msgid="8682102965680650853">"アクセスポイントのピン<xliff:g id="WPS_PIN">%1$s</xliff:g>を入力"</string>
+    <!-- no translation found for wifi_wps_in_progress (2776555137392461525) -->
+    <skip />
+    <!-- no translation found for wifi_wps_failed (2277409652621482331) -->
+    <skip />
     <string name="wifi_ssid" msgid="641393708309146745">"ネットワークSSID"</string>
     <string name="wifi_security" msgid="6603611185592956936">"セキュリティ"</string>
     <string name="wifi_signal" msgid="5514120261628065287">"電波強度"</string>
@@ -474,6 +487,8 @@
     <string name="wifi_forget" msgid="8168174695608386644">"切断"</string>
     <string name="wifi_save" msgid="3331121567988522826">"保存"</string>
     <string name="wifi_cancel" msgid="6763568902542968964">"キャンセル"</string>
+    <!-- no translation found for wifi_wps_overlap_error (6820987241637459748) -->
+    <skip />
     <string name="wifi_advanced_titlebar" msgid="5419052271935350999">"詳細設定"</string>
     <string name="wifi_setting_sleep_policy_title" msgid="1367731352485585528">"Wi-Fiのスリープ設定"</string>
     <string name="wifi_setting_sleep_policy_summary" msgid="7573693311804602041">"Wi-Fiをスリープに切り替えるタイミング"</string>
@@ -876,6 +891,10 @@
     <string name="total_size_label" msgid="1048676419552557254">"合計"</string>
     <string name="application_size_label" msgid="5055196275624686382">"アプリケーション"</string>
     <string name="data_size_label" msgid="8679376373625710107">"データ"</string>
+    <!-- no translation found for external_size_label (4465530017830945766) -->
+    <skip />
+    <!-- no translation found for external_size_label (2107155737635944440) -->
+    <skip />
     <string name="uninstall_text" msgid="3644892466144802466">"アンインストール"</string>
     <string name="disable_text" msgid="6544054052049395202">"無効にする"</string>
     <string name="enable_text" msgid="9217362512327828987">"有効にする"</string>
@@ -1303,16 +1322,6 @@
     <string name="credentials_erased" msgid="7700309135582200849">"認証情報ストレージが消去されました。"</string>
     <string name="credentials_enabled" msgid="7588607413349978930">"認証情報ストレージが有効になりました。"</string>
     <string name="credentials_disabled" msgid="7453188089059045380">"認証情報ストレージが無効になりました。"</string>
-    <string name="encrypted_fs_category" msgid="1841367653663913956">"暗号化ファイルシステム"</string>
-    <string name="encrypted_fs_enable" msgid="3884033081603327729">"個人データの暗号化"</string>
-    <string name="encrypted_fs_enable_summary" msgid="5635188119509076089">"この携帯電話の個人データを格納するために暗号化ファイルシステムを有効にする"</string>
-    <string name="encrypted_fs_enable_dialog" msgid="919487211207214266">"暗号化ファイルシステムを有効にするには、携帯電話データの消去が必要です。"</string>
-    <string name="encrypted_fs_disable_dialog" msgid="6960413613985682501">"暗号化ファイルシステムを無効にするには、携帯電話データの消去が必要です。"</string>
-    <string name="encrypted_fs_enable_button" msgid="8453841319751433751">"有効にする"</string>
-    <string name="encrypted_fs_disable_button" msgid="8468354944060220496">"無効にする"</string>
-    <string name="encrypted_fs_cancel_button" msgid="4785921255266305799">"キャンセル"</string>
-    <string name="encrypted_fs_cancel_confirm" msgid="853572431153803557">"暗号化ファイルシステムのモードの変更がキャンセルされました。"</string>
-    <string name="encrypted_fs_alert_dialog_title" msgid="583462447886934755">"暗号化ファイルシステムの警告。"</string>
     <string name="emergency_tone_title" msgid="1055954530111587114">"緊急時の音"</string>
     <string name="emergency_tone_summary" msgid="722259232924572153">"緊急通報時の動作を設定します"</string>
     <string name="privacy_settings" msgid="9206631214140954954">"プライバシー"</string>
@@ -1343,6 +1352,14 @@
     <string name="sound_category_notification_title" msgid="3502115998790286943">"通知"</string>
     <string name="sound_category_feedback_title" msgid="4399742321363475393">"フィードバック"</string>
     <!-- outdated translation 3130584822275278425 -->     <string name="wifi_setup_title" msgid="661074868726906436">"Wi-Fiセットアップ"</string>
+    <!-- no translation found for wifi_setup_title_editing_network (7304321031985059969) -->
+    <skip />
+    <!-- no translation found for wifi_setup_title_connecting_network (2408378435027118687) -->
+    <skip />
+    <!-- no translation found for wifi_setup_title_connected_network (209755856836003839) -->
+    <skip />
+    <!-- no translation found for wifi_setup_title_add_network (6932651000151032301) -->
+    <skip />
     <string name="wifi_setup_not_connected" msgid="6997432604664057052">"接続されていません"</string>
     <string name="wifi_setup_add_network" msgid="5939624680150051807">"ネットワークを追加"</string>
     <string name="wifi_setup_refresh_list" msgid="3411615711486911064">"リストを更新"</string>
@@ -1419,5 +1436,9 @@
     <!-- no translation found for cant_sync_dialog_title (7185199796123573317) -->
     <skip />
     <!-- no translation found for cant_sync_dialog_message (2372359241135295930) -->
+    <skip />
+    <!-- no translation found for enter_password (3268224850821675915) -->
+    <skip />
+    <!-- no translation found for try_again (5904121494468643129) -->
     <skip />
 </resources>
