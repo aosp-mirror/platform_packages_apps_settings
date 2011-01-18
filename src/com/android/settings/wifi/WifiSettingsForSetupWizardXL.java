@@ -172,6 +172,7 @@ public class WifiSettingsForSetupWizardXL extends Activity implements OnClickLis
     }
 
     private void restoreFirstButtonVisibilityState() {
+        showDefaultTitle();
         mAddNetworkButton.setVisibility(View.VISIBLE);
         mRefreshButton.setVisibility(View.VISIBLE);
         mSkipOrNextButton.setVisibility(View.VISIBLE);
@@ -252,6 +253,7 @@ public class WifiSettingsForSetupWizardXL extends Activity implements OnClickLis
             mProgressBar.setIndeterminate(false);
             mProgressBar.setProgress(2);
 
+            showConnectedTitle();
             mConnectButton.setVisibility(View.GONE);
             mAddNetworkButton.setVisibility(View.GONE);
             mRefreshButton.setVisibility(View.GONE);
@@ -278,17 +280,35 @@ public class WifiSettingsForSetupWizardXL extends Activity implements OnClickLis
     private void showConnectingStatus() {
         // We save this title and show it when authentication failed.
         mEditingTitle = mTitleView.getText();
-        showTitleForNetworkEditing();
+        showConnectingTitle();
         mProgressBar.setIndeterminate(false);
         mProgressBar.setProgress(1);
         setPaddingVisibility(View.VISIBLE);
     }
 
-    private void showTitleForNetworkEditing() {
+    private void showDefaultTitle() {
+        mTitleView.setText(getString(R.string.wifi_setup_title));
+    }
+
+    private void showEditingTitle() {
         if (TextUtils.isEmpty(mNetworkName) && mWifiConfig != null) {
             mNetworkName = mWifiConfig.getController().getConfig().SSID;
         }
         mTitleView.setText(getString(R.string.wifi_setup_title_editing_network, mNetworkName));
+    }
+
+    private void showConnectingTitle() {
+        if (TextUtils.isEmpty(mNetworkName) && mWifiConfig != null) {
+            mNetworkName = mWifiConfig.getController().getConfig().SSID;
+        }
+        mTitleView.setText(getString(R.string.wifi_setup_title_connecting_network, mNetworkName));
+    }
+
+    private void showConnectedTitle() {
+        if (TextUtils.isEmpty(mNetworkName) && mWifiConfig != null) {
+            mNetworkName = mWifiConfig.getController().getConfig().SSID;
+        }
+        mTitleView.setText(getString(R.string.wifi_setup_title_connected_network, mNetworkName));
     }
 
     private void showScanningStatus() {
@@ -344,6 +364,7 @@ public class WifiSettingsForSetupWizardXL extends Activity implements OnClickLis
                 selectedAccessPoint.security == AccessPoint.SECURITY_EAP) {
             mConnectButton.setVisibility(View.GONE);
 
+            showEditingTitle();
             mSkipOrNextButton.setVisibility(View.GONE);
             mAddNetworkButton.setVisibility(View.GONE);
             mRefreshButton.setVisibility(View.GONE);
@@ -356,6 +377,7 @@ public class WifiSettingsForSetupWizardXL extends Activity implements OnClickLis
             // In SetupWizard, we just show the button as "Connect" instead.
             mConnectButton.setText(R.string.wifi_connect);
 
+            showEditingTitle();
             mSkipOrNextButton.setVisibility(View.GONE);
             mAddNetworkButton.setVisibility(View.GONE);
             mRefreshButton.setVisibility(View.GONE);
@@ -493,7 +515,7 @@ public class WifiSettingsForSetupWizardXL extends Activity implements OnClickLis
             mTitleView.setText(mEditingTitle);
         } else {
             Log.w(TAG, "Title during editing/adding a network was empty.");
-            showTitleForNetworkEditing();
+            showEditingTitle();
         }
 
         // Restore View status which was tweaked on connection.
