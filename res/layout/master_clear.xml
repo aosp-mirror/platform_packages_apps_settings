@@ -35,6 +35,12 @@
                 android:layout_height="wrap_content"
                 android:textSize="18sp"
                 android:text="@string/master_clear_desc" />
+            <TextView android:id="@+id/also_erases_external"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:visibility="gone"
+                android:textSize="18sp"
+                android:text="@string/master_clear_desc_also_erases_external" />
             <TextView android:id="@+id/accounts_label"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -46,7 +52,7 @@
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
                     android:visibility="gone" />
-            <TextView
+            <TextView android:id="@+id/erase_external_option_text"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textSize="18sp"

@@ -171,9 +171,7 @@ public class Memory extends SettingsPreferenceFragment implements OnCancelListen
         mSdMountPreferenceGroup = (PreferenceGroup)findPreference(MEMORY_SD_GROUP);
 
         if (Environment.isExternalStorageEmulated()) {
-            mSdMountPreferenceGroup.removePreference(mSdSize);
-            mSdMountPreferenceGroup.removePreference(mSdAvail);
-            mSdMountPreferenceGroup.removePreference(mSdMountToggle);
+            getPreferenceScreen().removePreference(mSdMountPreferenceGroup);
         }
 
         mInternalSize = findPreference(MEMORY_INTERNAL_SIZE);
