@@ -60,7 +60,7 @@
             android:layout_width="304dip"
             android:layout_height="48dip"
             android:layout_alignParentLeft="true"
-            android:layout_centerVertical="true"
+            android:layout_alignBottom="@+id/date_time_auto"
             android:gravity="left|center_vertical"
             android:textAppearance="?android:attr/textAppearanceMedium" />
 
@@ -71,7 +71,6 @@
             android:orientation="vertical"
             android:layout_toRightOf="@id/time_zone_button"
             android:layout_marginLeft="32dip"
-            android:layout_centerVertical="true"
             android:layout_alignParentRight="true">
 
             <Switch
@@ -80,7 +79,6 @@
                 android:layout_height="wrap_content"
                 android:minHeight="?android:attr/listPreferredItemHeight"
                 android:layout_marginLeft="16dip"
-                android:layout_marginRight="16dip"
                 android:text="@string/date_time_auto"
                 android:textAppearance="?android:attr/textAppearanceMedium" />
 
