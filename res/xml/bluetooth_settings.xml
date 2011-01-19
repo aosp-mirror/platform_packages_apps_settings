@@ -43,6 +43,12 @@
         android:summaryOff="@string/bluetooth_not_discoverable"
         android:persistent="false" />
 
+    <Preference
+        android:key="bt_show_received_files"
+        android:dependency="bt_checkbox"
+        android:title="@string/bluetooth_show_received_files_title"
+        android:summary="@string/bluetooth_show_received_files_summary" />
+
     <PreferenceCategory
         android:key="bt_device_list"
         android:title="@string/bluetooth_preference_paired_devices"
