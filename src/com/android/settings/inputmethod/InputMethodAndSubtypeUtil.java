@@ -177,12 +177,20 @@ public class InputMethodAndSubtypeUtil {
                     enabledIMEAndSubtypesMap.put(imiId, new HashSet<String>());
                 }
                 HashSet<String> subtypesSet = enabledIMEAndSubtypesMap.get(imiId);
+
+                boolean subtypeCleared = false;
                 for (InputMethodSubtype subtype : imi.getSubtypes()) {
                     final String subtypeHashCodeStr = String.valueOf(subtype.hashCode());
                     CheckBoxPreference subtypePref = (CheckBoxPreference) context.findPreference(
                             imiId + subtypeHashCodeStr);
                     // In the Configure input method screen which does not have subtype preferences.
                     if (subtypePref == null) continue;
+                    // Once subtype checkbox is found, subtypeSet needs to be cleared.
+                    // Because of system change, hashCode value could have been changed.
+                    if (!subtypeCleared) {
+                        subtypesSet.clear();
+                        subtypeCleared = true;
+                    }
                     if (subtypePref.isChecked()) {
                         subtypesSet.add(subtypeHashCodeStr);
                         if (isCurrentInputMethod) {
