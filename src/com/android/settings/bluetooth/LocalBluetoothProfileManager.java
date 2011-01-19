@@ -630,8 +630,7 @@ abstract class LocalBluetoothProfileManager {
 
         @Override
         public int getDrawableResource() {
-            // TODO:
-            return 0;
+            return R.drawable.ic_bt_headphones_a2dp;
         }
     }
 
@@ -718,8 +717,7 @@ abstract class LocalBluetoothProfileManager {
 
         @Override
         public int getDrawableResource() {
-            // TODO:
-            return 0;
+            return R.drawable.ic_bt_keyboard_hid;
         }
     }
 
@@ -807,8 +805,7 @@ abstract class LocalBluetoothProfileManager {
 
         @Override
         public int getDrawableResource() {
-            // TODO: return PAN icon resource ID
-            return 0;
+            return R.drawable.ic_bt_network_pan;
         }
     }
 }
