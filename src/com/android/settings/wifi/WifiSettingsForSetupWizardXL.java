@@ -258,6 +258,7 @@ public class WifiSettingsForSetupWizardXL extends Activity implements OnClickLis
             mAddNetworkButton.setVisibility(View.GONE);
             mRefreshButton.setVisibility(View.GONE);
             mBackButton.setVisibility(View.VISIBLE);
+            mBackButton.setText(R.string.wifi_setup_back);
             mSkipOrNextButton.setVisibility(View.VISIBLE);
             mSkipOrNextButton.setEnabled(true);
             mHandler.removeCallbacks(mSkipButtonEnabler);
@@ -278,6 +279,7 @@ public class WifiSettingsForSetupWizardXL extends Activity implements OnClickLis
     }
 
     private void showConnectingStatus() {
+        mBackButton.setVisibility(View.VISIBLE);
         // We save this title and show it when authentication failed.
         mEditingTitle = mTitleView.getText();
         showConnectingTitle();
@@ -369,6 +371,7 @@ public class WifiSettingsForSetupWizardXL extends Activity implements OnClickLis
             mAddNetworkButton.setVisibility(View.GONE);
             mRefreshButton.setVisibility(View.GONE);
             mBackButton.setVisibility(View.VISIBLE);
+            mBackButton.setText(R.string.wifi_setup_back);
         } else {
             mConnectButton.setVisibility(View.VISIBLE);
 
@@ -382,6 +385,7 @@ public class WifiSettingsForSetupWizardXL extends Activity implements OnClickLis
             mAddNetworkButton.setVisibility(View.GONE);
             mRefreshButton.setVisibility(View.GONE);
             mBackButton.setVisibility(View.VISIBLE);
+            mBackButton.setText(R.string.wifi_setup_cancel);
         }
     }
 
@@ -399,6 +403,7 @@ public class WifiSettingsForSetupWizardXL extends Activity implements OnClickLis
 
         // Might be better to delay showing this button.
         mBackButton.setVisibility(View.VISIBLE);
+        mBackButton.setText(R.string.wifi_setup_back);
 
         // We need to restore visibility status when the device failed to connect the network.
         final View wpsFieldView = findViewById(R.id.wps_fields);
