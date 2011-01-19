@@ -29,6 +29,7 @@ import android.content.pm.PackageManager;
 import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.os.Environment;
 import android.preference.Preference;
 import android.preference.PreferenceActivity;
 import android.util.Log;
@@ -133,13 +134,29 @@ public class MasterClear extends Fragment {
         mExternalStorageContainer = mContentView.findViewById(R.id.erase_external_container);
         mExternalStorage = (CheckBox) mContentView.findViewById(R.id.erase_external);
 
-        mExternalStorageContainer.setOnClickListener(new View.OnClickListener() {
+        /*
+         * If the external storage is emulated, it will be erased with a factory
+         * reset at any rate. There is no need to have a separate option until
+         * we have a factory reset that only erases some directories and not
+         * others.
+         */
+        if (Environment.isExternalStorageEmulated()) {
+            mExternalStorageContainer.setVisibility(View.GONE);
 
-            @Override
-            public void onClick(View v) {
-                mExternalStorage.toggle();
-            }
-        });
+            final View externalOption = mContentView.findViewById(R.id.erase_external_option_text);
+            externalOption.setVisibility(View.GONE);
+
+            final View externalAlsoErased = mContentView.findViewById(R.id.also_erases_external);
+            externalAlsoErased.setVisibility(View.VISIBLE);
+        } else {
+            mExternalStorageContainer.setOnClickListener(new View.OnClickListener() {
+
+                @Override
+                public void onClick(View v) {
+                    mExternalStorage.toggle();
+                }
+            });
+        }
 
         loadAccountList();
     }
