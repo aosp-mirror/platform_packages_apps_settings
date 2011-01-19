@@ -57,7 +57,7 @@ import java.util.List;
 public class Memory extends SettingsPreferenceFragment implements OnCancelListener,
         MeasurementReceiver {
     private static final String TAG = "Memory";
-    private static final boolean localLOGV = false;
+    static final boolean localLOGV = false;
 
     private static final String MEMORY_SD_SIZE = "memory_sd_size";
 
@@ -276,6 +276,12 @@ public class Memory extends SettingsPreferenceFragment implements OnCancelListen
         } else if (preference == mSdFormat) {
             Intent intent = new Intent(Intent.ACTION_VIEW);
             intent.setClass(getActivity(), com.android.settings.MediaFormat.class);
+            startActivity(intent);
+            return true;
+        } else if (preference == mInternalAppsUsage) {
+            Intent intent = new Intent(Intent.ACTION_MANAGE_PACKAGE_STORAGE);
+            intent.setClass(getActivity(),
+                    com.android.settings.Settings.ManageApplicationsActivity.class);
             startActivity(intent);
             return true;
         }
