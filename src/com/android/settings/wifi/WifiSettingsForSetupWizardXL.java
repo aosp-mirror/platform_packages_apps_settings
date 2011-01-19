@@ -96,6 +96,9 @@ public class WifiSettingsForSetupWizardXL extends Activity implements OnClickLis
     private Button mConnectButton;
     private Button mBackButton;
 
+    private View mConnectingStatusLayout;
+    private TextView mConnectingStatusView;
+
     // true when a user already pressed "Connect" button and waiting for connection.
     // Also true when the device is already connected to a wifi network on launch.
     private boolean mAfterConnectAction;
@@ -164,6 +167,9 @@ public class WifiSettingsForSetupWizardXL extends Activity implements OnClickLis
 
         mTopPadding = findViewById(R.id.top_padding);
         mWifiConfigPadding = findViewById(R.id.wifi_config_padding);
+
+        mConnectingStatusLayout = findViewById(R.id.connecting_status_layout);
+        mConnectingStatusView = (TextView) findViewById(R.id.connecting_status);
 
         // At first, Wifi module doesn't return SCANNING state (it's too early), so we manually
         // show it.
@@ -254,6 +260,7 @@ public class WifiSettingsForSetupWizardXL extends Activity implements OnClickLis
             mProgressBar.setProgress(2);
 
             showConnectedTitle();
+            mConnectingStatusView.setText(R.string.wifi_setup_description_connected);
             mConnectButton.setVisibility(View.GONE);
             mAddNetworkButton.setVisibility(View.GONE);
             mRefreshButton.setVisibility(View.GONE);
@@ -344,6 +351,7 @@ public class WifiSettingsForSetupWizardXL extends Activity implements OnClickLis
         mWifiSettings.pauseWifiScan();
 
         findViewById(R.id.wifi_setup).setVisibility(View.GONE);
+        mConnectingStatusLayout.setVisibility(View.GONE);
         final ViewGroup parent = (ViewGroup)findViewById(R.id.wifi_config_ui);
         parent.setVisibility(View.VISIBLE);
         parent.removeAllViews();
@@ -422,6 +430,14 @@ public class WifiSettingsForSetupWizardXL extends Activity implements OnClickLis
             typeView.setVisibility(View.GONE);
         }
 
+        // TODO: investigate whether visibility handling above is needed. Now that we hide
+        // them completely when connecting, so we may not need to do so, though we probably
+        // need to show software keyboard conditionaly.
+        final ViewGroup parent = (ViewGroup)findViewById(R.id.wifi_config_ui);
+        parent.setVisibility(View.GONE);
+        mConnectingStatusLayout.setVisibility(View.VISIBLE);
+        mConnectingStatusView.setText(R.string.wifi_setup_description_connecting);
+
         mHandler.removeCallbacks(mSkipButtonEnabler);
         mSkipOrNextButton.setVisibility(View.VISIBLE);
         mSkipOrNextButton.setEnabled(false);
@@ -456,6 +472,7 @@ public class WifiSettingsForSetupWizardXL extends Activity implements OnClickLis
         }
 
         findViewById(R.id.wifi_setup).setVisibility(View.VISIBLE);
+        mConnectingStatusLayout.setVisibility(View.GONE);
         final ViewGroup parent = (ViewGroup)findViewById(R.id.wifi_config_ui);
         parent.removeAllViews();
         parent.setVisibility(View.GONE);
@@ -522,6 +539,10 @@ public class WifiSettingsForSetupWizardXL extends Activity implements OnClickLis
             Log.w(TAG, "Title during editing/adding a network was empty.");
             showEditingTitle();
         }
+
+        final ViewGroup parent = (ViewGroup)findViewById(R.id.wifi_config_ui);
+        parent.setVisibility(View.VISIBLE);
+        mConnectingStatusLayout.setVisibility(View.GONE);
 
         // Restore View status which was tweaked on connection.
         final View wpsFieldView = findViewById(R.id.wps_fields);

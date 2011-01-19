@@ -85,30 +85,39 @@
                   android:text="@string/wifi_show_password" />
     </LinearLayout>
     <LinearLayout android:id="@+id/type"
-                 android:layout_width="match_parent"
-                 android:layout_height="wrap_content"
-                 android:orientation="vertical"
-                 android:visibility="gone">
+                  android:layout_width="match_parent"
+                  android:layout_height="wrap_content"
+                  android:orientation="vertical"
+                  android:visibility="gone">
+        <LinearLayout android:layout_width="match_parent"
+                      android:layout_height="wrap_content"
+                      android:minHeight="48dip"
+                      android:orientation="horizontal">
+            <TextView android:layout_width="wrap_content"
+                      android:minWidth="112dip"
+                      android:layout_height="wrap_content"
+                      android:text="@string/wifi_ssid" />
+            <EditText android:id="@+id/ssid"
+                      android:layout_width="398dip"
+                      android:layout_height="wrap_content"
+                      android:singleLine="true"
+                      android:inputType="textNoSuggestions" />
+        </LinearLayout>
 
-       <TextView android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                 android:text="@string/wifi_ssid" />
-
-       <EditText android:id="@+id/ssid"
-                 android:layout_width="match_parent"
-                 android:layout_height="wrap_content"
-                 android:singleLine="true"
-                 android:inputType="textNoSuggestions" />
-
-       <TextView android:layout_width="match_parent"
-                 android:layout_height="wrap_content"
-                 android:text="@string/wifi_security" />
-
-       <Spinner android:id="@+id/security"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:prompt="@string/wifi_security"
-                android:entries="@array/wifi_security" />
+        <LinearLayout android:layout_width="match_parent"
+                      android:layout_height="wrap_content"
+                      android:minHeight="48dip"
+                      android:orientation="horizontal">
+            <TextView android:layout_width="wrap_content"
+                      android:minWidth="112dip"
+                      android:layout_height="wrap_content"
+                      android:text="@string/wifi_security" />
+            <Spinner android:id="@+id/security"
+                     android:layout_width="398dip"
+                     android:layout_height="wrap_content"
+                     android:prompt="@string/wifi_security"
+                     android:entries="@array/wifi_security" />
+        </LinearLayout>
     </LinearLayout> <!-- android:id="@+id/type" -->
 
     <LinearLayout android:id="@+id/eap_not_supported"
