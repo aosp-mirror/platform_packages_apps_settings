@@ -531,6 +531,9 @@ class CachedBluetoothDevice implements Comparable<CachedBluetoothDevice> {
 
             case BluetoothClass.Device.Major.PHONE:
                 return R.drawable.ic_bt_cellphone;
+
+            case BluetoothClass.Device.Major.PERIPHERAL:
+                return getHidClassDrawable();
             }
         } else {
             Log.w(TAG, "mBtClass is null");
@@ -552,6 +555,20 @@ class CachedBluetoothDevice implements Comparable<CachedBluetoothDevice> {
             }
         }
         return 0;
+    }
+
+    private int getHidClassDrawable() {
+        switch (mBtClass.getDeviceClass()) {
+            case BluetoothClass.Device.PERIPHERAL_KEYBOARD:
+            case BluetoothClass.Device.PERIPHERAL_KEYBOARD_POINTING:
+                return R.drawable.ic_bt_keyboard_hid;
+
+            case BluetoothClass.Device.PERIPHERAL_POINTING:
+                return R.drawable.ic_bt_pointing_hid;
+
+            default:
+                return R.drawable.ic_bt_misc_hid;
+        }
     }
 
     /**
@@ -661,9 +678,14 @@ class CachedBluetoothDevice implements Comparable<CachedBluetoothDevice> {
         Map<Profile, Drawable> drawables = new HashMap<Profile, Drawable>();
 
         for (Profile profile : mProfiles) {
-            LocalBluetoothProfileManager profileManager = LocalBluetoothProfileManager
-                    .getProfileManager(mLocalManager, profile);
-            int iconResource = profileManager.getDrawableResource();
+            int iconResource;
+            if (profile == Profile.HID && mBtClass != null) {
+                iconResource = getHidClassDrawable();
+            } else {
+                LocalBluetoothProfileManager profileManager = LocalBluetoothProfileManager
+                        .getProfileManager(mLocalManager, profile);
+                iconResource = profileManager.getDrawableResource();
+            }
             if (iconResource != 0) {
                 drawables.put(profile, mContext.getResources().getDrawable(iconResource));
             }
