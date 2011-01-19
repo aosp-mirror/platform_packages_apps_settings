@@ -95,6 +95,22 @@
             android:layout_width="match_parent"
             android:layout_height="360dip"
             android:visibility="gone" />
+        <LinearLayout
+            android:id="@+id/connecting_status_layout"
+            android:layout_width="match_parent"
+            android:layout_height="360dip"
+            android:visibility="gone">
+            <TextView
+                android:id="@+id/connecting_status"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:lineSpacingExtra="12dip"
+                android:inputType="textMultiLine"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:clickable="false"
+                android:longClickable="false" />
+        </LinearLayout>
+
     </RelativeLayout>
 
     <!-- Divider -->
