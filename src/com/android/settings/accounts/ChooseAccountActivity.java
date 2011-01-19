@@ -16,9 +16,6 @@
 
 package com.android.settings.accounts;
 
-import com.android.settings.R;
-import com.google.android.collect.Maps;
-
 import android.accounts.AccountManager;
 import android.accounts.AuthenticatorDescription;
 import android.content.ContentResolver;
@@ -33,8 +30,12 @@ import android.preference.PreferenceActivity;
 import android.preference.PreferenceGroup;
 import android.preference.PreferenceScreen;
 import android.util.Log;
+import com.android.internal.util.CharSequences;
+import com.android.settings.R;
+import com.google.android.collect.Maps;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
@@ -54,12 +55,22 @@ public class ChooseAccountActivity extends PreferenceActivity {
     private Map<String, AuthenticatorDescription> mTypeToAuthDescription
             = new HashMap<String, AuthenticatorDescription>();
     
-    private static class ProviderEntry {
+    private static class ProviderEntry implements Comparable<ProviderEntry> {
         private final CharSequence name;
         private final String type;
         ProviderEntry(CharSequence providerName, String accountType) {
             name = providerName;
             type = accountType;
+        }
+
+        public int compareTo(ProviderEntry another) {
+            if (name == null) {
+                return -1;
+            }
+            if (another.name == null) {
+                return +1;
+            }
+            return CharSequences.compareToIgnoreCase(name, another.name);
         }
     }
 
@@ -131,6 +142,7 @@ public class ChooseAccountActivity extends PreferenceActivity {
             // If there's only one provider that matches, just run it.
             finishWithAccountType(mProviderList.get(0).type);
         } else if (mProviderList.size() > 0) {
+            Collections.sort(mProviderList);
             mAddAccountGroup.removeAll();
             for (ProviderEntry pref : mProviderList) {
                 Drawable drawable = getDrawableForType(pref.type);
