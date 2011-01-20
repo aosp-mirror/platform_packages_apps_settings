@@ -28,6 +28,7 @@ import android.net.vpn.L2tpIpsecProfile;
 import android.net.vpn.L2tpIpsecPskProfile;
 import android.net.vpn.L2tpProfile;
 import android.net.vpn.PptpProfile;
+import android.net.vpn.VpnManager;
 import android.net.vpn.VpnProfile;
 import android.os.Bundle;
 import android.os.Parcel;
@@ -37,6 +38,7 @@ import android.text.TextUtils;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.widget.Toast;
 
 /**
  * The activity class for editing a new or existing VPN profile.
@@ -48,6 +50,7 @@ public class VpnEditor extends SettingsPreferenceFragment {
     private static final String KEY_PROFILE = "profile";
     private static final String KEY_ORIGINAL_PROFILE_NAME = "orig_profile_name";
 
+    private VpnManager mVpnManager;
     private VpnProfileEditor mProfileEditor;
     private boolean mAddingProfile;
     private byte[] mOriginalProfileData;
@@ -63,6 +66,7 @@ public class VpnEditor extends SettingsPreferenceFragment {
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
+        mVpnManager = new VpnManager(getActivity());
 
         VpnProfile p;
         if (savedInstanceState != null) {
@@ -111,8 +115,15 @@ public class VpnEditor extends SettingsPreferenceFragment {
             case MENU_SAVE:
                 Intent resultIntent = validateAndGetResult();
                 if (resultIntent != null) {
-                    ((PreferenceActivity) getActivity()).finishPreferencePanel(
-                            this, Activity.RESULT_OK, resultIntent);
+                    PreferenceActivity activity =
+                            (PreferenceActivity) getActivity();
+                    if (!mVpnManager.isIdle()) {
+                        Toast.makeText(activity, R.string.service_busy,
+                                Toast.LENGTH_SHORT).show();
+                    } else {
+                        activity.finishPreferencePanel(this,
+                                Activity.RESULT_OK, resultIntent);
+                    }
                 }
                 return true;
 

@@ -131,7 +131,7 @@ public class VpnSettings extends SettingsPreferenceFragment
 
     private int mConnectingErrorCode = NO_ERROR;
 
-    private Dialog mShowingDialog;
+    private Dialog mShowingDialog, mConnectDialog;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -182,7 +182,6 @@ public class VpnSettings extends SettingsPreferenceFragment
         // for long-press gesture on a profile preference
         registerForContextMenu(getListView());
 
-
         retrieveVpnListFromStorage();
         restoreInstanceState(savedInstanceState);
     }
@@ -208,7 +207,13 @@ public class VpnSettings extends SettingsPreferenceFragment
             mUnlockAction = null;
             getActivity().runOnUiThread(action);
         }
-        checkVpnConnectionStatus();
+        if (mConnectDialog == null || !mConnectDialog.isShowing()) {
+            checkVpnConnectionStatus();
+        } else {
+            // Dismiss the connect dialog in case there is another instance
+            // trying to operate a vpn connection.
+            if (!mVpnManager.isIdle()) removeConnectDialog();
+        }
     }
 
     @Override
@@ -237,7 +242,8 @@ public class VpnSettings extends SettingsPreferenceFragment
     public Dialog onCreateDialog (int id) {
         switch (id) {
             case DIALOG_CONNECT:
-                return createConnectDialog();
+                mConnectDialog = createConnectDialog();
+                return mConnectDialog;
 
             case DIALOG_SECRET_NOT_SET:
                 return createSecretNotSetDialog();
@@ -253,11 +259,19 @@ public class VpnSettings extends SettingsPreferenceFragment
         }
     }
 
+    private void removeConnectDialog() {
+        if (mConnectDialog != null) {
+            mConnectDialog.dismiss();
+            mConnectDialog = null;
+            checkVpnConnectionStatus();
+        }
+    }
+
     private class ConnectDialog extends AlertDialog {
         public ConnectDialog(Context context) {
             super(context);
             setTitle(String.format(getString(R.string.vpn_connect_to),
-                    mActiveProfile.getName()));
+                    mConnectingActor.getProfile().getName()));
             setButton(DialogInterface.BUTTON_POSITIVE,
                     getString(R.string.vpn_connect_button),
                     VpnSettings.this);
@@ -498,11 +512,11 @@ public class VpnSettings extends SettingsPreferenceFragment
             String error = mConnectingActor.validateInputs(d);
             if (error == null) {
                 mConnectingActor.connect(d);
-                removeDialog(DIALOG_CONNECT);
+                removeConnectDialog();
                 return;
             } else {
                 // dismissDialog(DIALOG_CONNECT);
-                removeDialog(DIALOG_CONNECT);
+                removeConnectDialog();
 
                 final Activity activity = getActivity();
                 // show error dialog
@@ -522,8 +536,7 @@ public class VpnSettings extends SettingsPreferenceFragment
                 mShowingDialog.show();
             }
         } else {
-            removeDialog(DIALOG_CONNECT);
-            changeState(mActiveProfile, VpnState.IDLE);
+            removeConnectDialog();
         }
     }
 
