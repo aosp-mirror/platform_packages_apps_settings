@@ -210,7 +210,7 @@ public class InputMethodConfig extends SettingsPreferenceFragment {
         chkbxPref.setTitle(label);
         keyboardSettingsCategory.addPreference(chkbxPref);
         // Disable the toggle if it's the only keyboard in the system, or it's a system IME.
-        if (!mHaveHardKeyboard && (imiSize <= 1 || isSystemIME)) {
+        if (imiSize <= 1 || isSystemIME) {
             chkbxPref.setEnabled(false);
         }
 
