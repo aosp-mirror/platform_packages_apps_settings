@@ -23,12 +23,9 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.BroadcastReceiver;
-import android.content.ComponentName;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.ServiceConnection;
-import android.net.vpn.IVpnService;
 import android.net.vpn.L2tpIpsecProfile;
 import android.net.vpn.L2tpIpsecPskProfile;
 import android.net.vpn.L2tpProfile;
@@ -37,9 +34,6 @@ import android.net.vpn.VpnProfile;
 import android.net.vpn.VpnState;
 import android.net.vpn.VpnType;
 import android.os.Bundle;
-import android.os.ConditionVariable;
-import android.os.Handler;
-import android.os.IBinder;
 import android.preference.Preference;
 import android.preference.PreferenceActivity;
 import android.preference.PreferenceCategory;
@@ -139,8 +133,6 @@ public class VpnSettings extends SettingsPreferenceFragment
 
     private Dialog mShowingDialog;
 
-    private StatusChecker mStatusChecker = new StatusChecker();
-
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -216,7 +208,7 @@ public class VpnSettings extends SettingsPreferenceFragment
             mUnlockAction = null;
             getActivity().runOnUiThread(action);
         }
-        checkVpnConnectionStatusInBackground();
+        checkVpnConnectionStatus();
     }
 
     @Override
@@ -620,12 +612,8 @@ public class VpnSettings extends SettingsPreferenceFragment
         saveProfileToStorage(p);
 
         mVpnProfileList.add(p);
-        addPreferenceFor(p);
+        addPreferenceFor(p, true);
         disableProfilePreferencesIfOneActive();
-    }
-
-    private VpnPreference addPreferenceFor(VpnProfile p) {
-        return addPreferenceFor(p, true);
     }
 
     // Adds a preference in mVpnListContainer
@@ -886,18 +874,23 @@ public class VpnSettings extends SettingsPreferenceFragment
                 return p1.getName().compareTo(p2.getName());
             }
         });
+        // Delay adding preferences to mVpnListContainer until states are
+        // obtained so that the user won't see initial state transition.
         for (VpnProfile p : mVpnProfileList) {
             Preference pref = addPreferenceFor(p, false);
         }
         disableProfilePreferencesIfOneActive();
     }
 
-    private void checkVpnConnectionStatusInBackground() {
-        new Thread(new Runnable() {
-            public void run() {
-                mStatusChecker.check(mVpnProfileList);
-            }
-        }).start();
+    private void checkVpnConnectionStatus() {
+        for (VpnProfile p : mVpnProfileList) {
+            changeState(p, mVpnManager.getState(p));
+        }
+        // make preferences appear
+        for (VpnProfile p : mVpnProfileList) {
+            VpnPreference pref = mVpnPreferenceMap.get(p.getName());
+            mVpnListContainer.addPreference(pref);
+        }
     }
 
     // A sanity check. Returns true if the profile directory name and profile ID
@@ -1072,63 +1065,6 @@ public class VpnSettings extends SettingsPreferenceFragment
                         + ": connected? " + s + ", but profile does not exist;"
                         + " just ignore it");
             }
-        }
-    }
-
-    // managing status check in a background thread
-    private class StatusChecker {
-        synchronized void check(final List<VpnProfile> list) {
-            final ConditionVariable cv = new ConditionVariable();
-            cv.close();
-            mVpnManager.startVpnService();
-            ServiceConnection c = new ServiceConnection() {
-                public synchronized void onServiceConnected(
-                        ComponentName className, IBinder binder) {
-                    cv.open();
-
-                    IVpnService service = IVpnService.Stub.asInterface(binder);
-                    for (VpnProfile p : list) {
-                        try {
-                            service.checkStatus(p);
-                        } catch (Throwable e) {
-                            Log.e(TAG, " --- checkStatus(): " + p.getName(), e);
-                            changeState(p, VpnState.IDLE);
-                        }
-                    }
-                    if (getActivity() == null) return;
-                    getActivity().unbindService(this);
-                    showPreferences();
-                }
-
-                public void onServiceDisconnected(ComponentName className) {
-                    cv.open();
-
-                    setDefaultState(list);
-                    if (getActivity() == null) return;
-                    getActivity().unbindService(this);
-                    showPreferences();
-                }
-            };
-            if (mVpnManager.bindVpnService(c)) {
-                if (!cv.block(1000)) {
-                    Log.d(TAG, "checkStatus() bindService failed");
-                    setDefaultState(list);
-                }
-            } else {
-                setDefaultState(list);
-            }
-        }
-
-        private void showPreferences() {
-            for (VpnProfile p : mVpnProfileList) {
-                VpnPreference pref = mVpnPreferenceMap.get(p.getName());
-                mVpnListContainer.addPreference(pref);
-            }
-        }
-
-        private void setDefaultState(List<VpnProfile> list) {
-            for (VpnProfile p : list) changeState(p, VpnState.IDLE);
-            showPreferences();
         }
     }
 }

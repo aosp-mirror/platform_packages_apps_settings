@@ -54,11 +54,4 @@ public interface VpnProfileActor {
      * Tears down the connection.
      */
     void disconnect();
-
-    /**
-     * Checks the current status. The result is expected to be broadcast.
-     * Use {@link VpnManager#registerConnectivityReceiver()} to register a
-     * broadcast receiver and to receives the broadcast events.
-     */
-    void checkStatus();
 }
