@@ -39,9 +39,6 @@ import java.util.HashMap;
 import java.util.List;
 
 public class InputMethodAndSubtypeEnabler extends SettingsPreferenceFragment {
-
-    public static final String EXTRA_INPUT_METHOD_ID = "input_method_id";
-
     private AlertDialog mDialog = null;
     private boolean mHaveHardKeyboard;
     final private HashMap<String, List<Preference>> mInputMethodAndSubtypePrefsMap =
@@ -58,7 +55,8 @@ public class InputMethodAndSubtypeEnabler extends SettingsPreferenceFragment {
         mImm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
         Configuration config = getResources().getConfiguration();
         mHaveHardKeyboard = (config.keyboard == Configuration.KEYBOARD_QWERTY);
-        mInputMethodId = getActivity().getIntent().getStringExtra(EXTRA_INPUT_METHOD_ID);
+        mInputMethodId = getActivity().getIntent().getStringExtra(
+                android.provider.Settings.EXTRA_INPUT_METHOD_ID);
         onCreateIMM();
         setPreferenceScreen(createPreferenceHierarchy());
     }
