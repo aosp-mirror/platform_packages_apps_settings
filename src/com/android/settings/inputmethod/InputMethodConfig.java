@@ -219,7 +219,7 @@ public class InputMethodConfig extends SettingsPreferenceFragment {
         PreferenceScreen prefScreen = new PreferenceScreen(getActivity(), null);
         prefScreen.setTitle(R.string.active_input_method_subtypes);
         if (imi.getSubtypes().size() > 1) {
-            intent = new Intent(Settings.ACTION_INPUT_METHOD_AND_SUBTYPE_ENABLER);
+            intent = new Intent(Settings.ACTION_INPUT_METHOD_SUBTYPE_SETTINGS);
             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK
                     | Intent.FLAG_ACTIVITY_RESET_TASK_IF_NEEDED
                     | Intent.FLAG_ACTIVITY_CLEAR_TOP);
