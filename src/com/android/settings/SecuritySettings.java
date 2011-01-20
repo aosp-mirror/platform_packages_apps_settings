@@ -63,38 +63,31 @@ import java.util.Observer;
  */
 public class SecuritySettings extends SettingsPreferenceFragment
         implements OnPreferenceChangeListener {
-    private static final String KEY_UNLOCK_SET_OR_CHANGE = "unlock_set_or_change";
-
     private static final String KEY_ENCRYPTION = "encryption";
 
     // Lock Settings
-    private static final String PACKAGE = "com.android.settings";
-    private static final String ICC_LOCK_SETTINGS = PACKAGE + ".IccLockSettings";
-
+    private static final String KEY_UNLOCK_SET_OR_CHANGE = "unlock_set_or_change";
     private static final String KEY_LOCK_ENABLED = "lockenabled";
     private static final String KEY_VISIBLE_PATTERN = "visiblepattern";
     private static final String KEY_TACTILE_FEEDBACK_ENABLED = "unlock_tactile_feedback";
     private static final String KEY_SECURITY_CATEGORY = "security_category";
-
-    private CheckBoxPreference mVisiblePattern;
-    private CheckBoxPreference mTactileFeedback;
-
-    private CheckBoxPreference mShowPassword;
+    private static final String KEY_LOCK_AFTER_TIMEOUT = "lock_after_timeout";
+    private static final int SET_OR_CHANGE_LOCK_METHOD_REQUEST = 123;
 
     // Location Settings
-    private static final String LOCATION_CATEGORY = "location_category";
-    private static final String LOCATION_NETWORK = "location_network";
-    private static final String LOCATION_GPS = "location_gps";
-    private static final String ASSISTED_GPS = "assisted_gps";
-    private static final String USE_LOCATION = "location_use_for_services";
-    private static final String LOCK_AFTER_TIMEOUT_KEY = "lock_after_timeout";
-    private static final int SET_OR_CHANGE_LOCK_METHOD_REQUEST = 123;
-    private static final int FALLBACK_LOCK_AFTER_TIMEOUT_VALUE = 5000; // compatible with pre-Froyo
+    private static final String KEY_LOCATION_CATEGORY = "location_category";
+    private static final String KEY_LOCATION_NETWORK = "location_network";
+    private static final String KEY_LOCATION_GPS = "location_gps";
+    private static final String KEY_ASSISTED_GPS = "assisted_gps";
+    private static final String KEY_USE_LOCATION = "location_use_for_services";
+
+    // Misc Settings
+    private static final String KEY_SIM_LOCK = "sim_lock";
+    private static final String KEY_SHOW_PASSWORD = "show_password";
+    private static final String KEY_ENABLE_CREDENTIALS = "enable_credentials";
+    private static final String KEY_RESET_CREDENTIALS = "reset_credentials";
 
     private static final String TAG = "SecuritySettings";
-
-    // Credential storage
-    private final CredentialStorage mCredentialStorage = new CredentialStorage();
 
     private CheckBoxPreference mNetwork;
     private CheckBoxPreference mGps;
@@ -112,13 +105,15 @@ public class SecuritySettings extends SettingsPreferenceFragment
     private LockPatternUtils mLockPatternUtils;
     private ListPreference mLockAfter;
 
-    private SettingsObserver mSettingsObserver;
+    private Observer mSettingsObserver;
 
-    private final class SettingsObserver implements Observer {
-        public void update(Observable o, Object arg) {
-            updateToggles();
-        }
-    }
+    private CheckBoxPreference mVisiblePattern;
+    private CheckBoxPreference mTactileFeedback;
+
+    private CheckBoxPreference mShowPassword;
+
+    private CheckBoxPreference mEnableCredentials;
+    private Preference mResetCredentials;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -129,10 +124,6 @@ public class SecuritySettings extends SettingsPreferenceFragment
         mDPM = (DevicePolicyManager)getSystemService(Context.DEVICE_POLICY_SERVICE);
 
         mChooseLockSettingsHelper = new ChooseLockSettingsHelper(getActivity());
-
-        createPreferenceHierarchy();
-
-        updateToggles();
     }
 
     @Override
@@ -144,31 +135,33 @@ public class SecuritySettings extends SettingsPreferenceFragment
                 new String[]{Settings.Secure.LOCATION_PROVIDERS_ALLOWED},
                 null);
         mContentQueryMap = new ContentQueryMap(settingsCursor, Settings.System.NAME, true, null);
-        mContentQueryMap.addObserver(mSettingsObserver = new SettingsObserver());
     }
 
     @Override
     public void onStop() {
         super.onStop();
-        mContentQueryMap.deleteObserver(mSettingsObserver);
+        if (mSettingsObserver != null) {
+            mContentQueryMap.deleteObserver(mSettingsObserver);
+        }
     }
 
     private PreferenceScreen createPreferenceHierarchy() {
-        PreferenceScreen root = this.getPreferenceScreen();
+        PreferenceScreen root = getPreferenceScreen();
         if (root != null) {
             root.removeAll();
         }
         addPreferencesFromResource(R.xml.security_settings);
-        root = this.getPreferenceScreen();
+        root = getPreferenceScreen();
 
-        mNetwork = (CheckBoxPreference) getPreferenceScreen().findPreference(LOCATION_NETWORK);
-        mGps = (CheckBoxPreference) getPreferenceScreen().findPreference(LOCATION_GPS);
-        mAssistedGps = (CheckBoxPreference) getPreferenceScreen().findPreference(ASSISTED_GPS);
+        mNetwork = (CheckBoxPreference) root.findPreference(KEY_LOCATION_NETWORK);
+        mGps = (CheckBoxPreference) root.findPreference(KEY_LOCATION_GPS);
+        mAssistedGps = (CheckBoxPreference) root.findPreference(KEY_ASSISTED_GPS);
         if (GoogleLocationSettingHelper.isAvailable(getActivity())) {
             // GSF present, Add setting for 'Use My Location'
-            PreferenceGroup locationCat = (PreferenceGroup) root.findPreference(LOCATION_CATEGORY);
+            PreferenceGroup locationCat =
+                    (PreferenceGroup) root.findPreference(KEY_LOCATION_CATEGORY);
             CheckBoxPreference useLocation = new CheckBoxPreference(getActivity());
-            useLocation.setKey(USE_LOCATION);
+            useLocation.setKey(KEY_USE_LOCATION);
             useLocation.setTitle(R.string.use_location_title);
             useLocation.setSummaryOn(R.string.use_location_summary_enabled);
             useLocation.setSummaryOff(R.string.use_location_summary_disabled);
@@ -181,8 +174,6 @@ public class SecuritySettings extends SettingsPreferenceFragment
             mUseLocation = useLocation;
         }
 
-        PreferenceManager pm = getPreferenceManager();
-        
         // Add options for device encryption
         // TODO: It still needs to be determined how a device specifies that it supports
         // encryption. That mechanism needs to be checked before adding the following code
@@ -215,98 +206,62 @@ public class SecuritySettings extends SettingsPreferenceFragment
         addPreferencesFromResource(resid);
 
         // lock after preference
-        mLockAfter = setupLockAfterPreference(pm);
-        updateLockAfterPreferenceSummary();
+        mLockAfter = (ListPreference) root.findPreference(KEY_LOCK_AFTER_TIMEOUT);
+        if (mLockAfter != null) {
+            setupLockAfterPreference();
+            updateLockAfterPreferenceSummary();
+        }
 
         // visible pattern
-        mVisiblePattern = (CheckBoxPreference) pm.findPreference(KEY_VISIBLE_PATTERN);
+        mVisiblePattern = (CheckBoxPreference) root.findPreference(KEY_VISIBLE_PATTERN);
 
         // tactile feedback. Should be common to all unlock preference screens.
-        mTactileFeedback = (CheckBoxPreference) pm.findPreference(KEY_TACTILE_FEEDBACK_ENABLED);
+        mTactileFeedback = (CheckBoxPreference) root.findPreference(KEY_TACTILE_FEEDBACK_ENABLED);
         if (!((Vibrator) getSystemService(Context.VIBRATOR_SERVICE)).hasVibrator()) {
             PreferenceGroup securityCategory = (PreferenceGroup)
-                    pm.findPreference(KEY_SECURITY_CATEGORY);
+                    root.findPreference(KEY_SECURITY_CATEGORY);
             if (securityCategory != null && mTactileFeedback != null) {
                 securityCategory.removePreference(mTactileFeedback);
             }
         }
 
-        int activePhoneType = TelephonyManager.getDefault().getPhoneType();
+        // Append the rest of the settings
+        addPreferencesFromResource(R.xml.security_settings_misc);
 
-        // do not display SIM lock for CDMA phone
-        if (TelephonyManager.PHONE_TYPE_CDMA != activePhoneType)
-        {
-            PreferenceScreen simLockPreferences = getPreferenceManager()
-                    .createPreferenceScreen(getActivity());
-            simLockPreferences.setTitle(R.string.sim_lock_settings_category);
-            // Intent to launch SIM lock settings
-            simLockPreferences.setIntent(new Intent().setClassName(PACKAGE, ICC_LOCK_SETTINGS));
-            PreferenceCategory simLockCat = new PreferenceCategory(getActivity());
-            simLockCat.setTitle(R.string.sim_lock_settings_title);
-            root.addPreference(simLockCat);
-            simLockCat.addPreference(simLockPreferences);
+        // Do not display SIM lock for CDMA phone
+        if (TelephonyManager.PHONE_TYPE_CDMA == TelephonyManager.getDefault().getPhoneType()) {
+            root.removePreference(root.findPreference(KEY_SIM_LOCK));
         }
 
-        // Passwords
-        PreferenceCategory passwordsCat = new PreferenceCategory(getActivity());
-        passwordsCat.setTitle(R.string.security_passwords_title);
-        root.addPreference(passwordsCat);
-
-        CheckBoxPreference showPassword = mShowPassword = new CheckBoxPreference(getActivity());
-        showPassword.setKey("show_password");
-        showPassword.setTitle(R.string.show_password);
-        showPassword.setSummary(R.string.show_password_summary);
-        showPassword.setPersistent(false);
-        passwordsCat.addPreference(showPassword);
-
-        // Device policies
-        PreferenceCategory devicePoliciesCat = new PreferenceCategory(getActivity());
-        devicePoliciesCat.setTitle(R.string.device_admin_title);
-        root.addPreference(devicePoliciesCat);
-
-        Preference deviceAdminButton = new Preference(getActivity());
-        deviceAdminButton.setTitle(R.string.manage_device_admin);
-        deviceAdminButton.setSummary(R.string.manage_device_admin_summary);
-        Intent deviceAdminIntent = new Intent();
-        deviceAdminIntent.setClass(getActivity(), DeviceAdminSettings.class);
-        deviceAdminButton.setIntent(deviceAdminIntent);
-        devicePoliciesCat.addPreference(deviceAdminButton);
+        // Show password
+        mShowPassword = (CheckBoxPreference) root.findPreference(KEY_SHOW_PASSWORD);
 
         // Credential storage
-        PreferenceCategory credentialsCat = new PreferenceCategory(getActivity());
-        credentialsCat.setTitle(R.string.credentials_category);
-        root.addPreference(credentialsCat);
-        mCredentialStorage.createPreferences(credentialsCat);
+        mEnableCredentials = (CheckBoxPreference) root.findPreference(KEY_ENABLE_CREDENTIALS);
+        mEnableCredentials.setOnPreferenceChangeListener(this);
+        mResetCredentials = root.findPreference(KEY_RESET_CREDENTIALS);
 
         return root;
     }
 
-    private ListPreference setupLockAfterPreference(PreferenceManager pm) {
-        ListPreference result = (ListPreference) pm.findPreference(LOCK_AFTER_TIMEOUT_KEY);
-        if (result != null) {
-            int lockAfterValue = Settings.Secure.getInt(getContentResolver(),
-                    Settings.Secure.LOCK_SCREEN_LOCK_AFTER_TIMEOUT,
-                    FALLBACK_LOCK_AFTER_TIMEOUT_VALUE);
-            result.setValue(String.valueOf(lockAfterValue));
-            result.setOnPreferenceChangeListener(this);
-            final long adminTimeout = mDPM != null ? mDPM.getMaximumTimeToLock(null) : 0;
-            final ContentResolver cr = getContentResolver();
-            final long displayTimeout = Math.max(0,
-                    Settings.System.getInt(cr, SCREEN_OFF_TIMEOUT, 0));
-            if (adminTimeout > 0) {
-                // This setting is a slave to display timeout when a device policy is enforced.
-                // As such, maxLockTimeout = adminTimeout - displayTimeout.
-                // If there isn't enough time, shows "immediately" setting.
-                disableUnusableTimeouts(result, Math.max(0, adminTimeout - displayTimeout));
-            }
+    private void setupLockAfterPreference() {
+        // Compatible with pre-Froyo
+        long currentTimeout = Settings.Secure.getLong(getContentResolver(),
+                Settings.Secure.LOCK_SCREEN_LOCK_AFTER_TIMEOUT, 5000);
+        mLockAfter.setValue(String.valueOf(currentTimeout));
+        mLockAfter.setOnPreferenceChangeListener(this);
+        final long adminTimeout = (mDPM != null ? mDPM.getMaximumTimeToLock(null) : 0);
+        final long displayTimeout = Math.max(0,
+                Settings.System.getInt(getContentResolver(), SCREEN_OFF_TIMEOUT, 0));
+        if (adminTimeout > 0) {
+            // This setting is a slave to display timeout when a device policy is enforced.
+            // As such, maxLockTimeout = adminTimeout - displayTimeout.
+            // If there isn't enough time, shows "immediately" setting.
+            disableUnusableTimeouts(Math.max(0, adminTimeout - displayTimeout));
         }
-        return result;
     }
 
     private void updateLockAfterPreferenceSummary() {
-        // Not all security types have a "lock after" preference, so ignore those that don't.
-        if (mLockAfter == null) return;
-
         // Update summary message with current value
         long currentTimeout = Settings.Secure.getLong(getContentResolver(),
                 Settings.Secure.LOCK_SCREEN_LOCK_AFTER_TIMEOUT, 0);
@@ -319,14 +274,12 @@ public class SecuritySettings extends SettingsPreferenceFragment
                 best = i;
             }
         }
-        String summary = mLockAfter.getContext()
-                .getString(R.string.lock_after_timeout_summary, entries[best]);
-        mLockAfter.setSummary(summary);
+        mLockAfter.setSummary(getString(R.string.lock_after_timeout_summary, entries[best]));
     }
 
-    private static void disableUnusableTimeouts(ListPreference pref, long maxTimeout) {
-        final CharSequence[] entries = pref.getEntries();
-        final CharSequence[] values = pref.getEntryValues();
+    private void disableUnusableTimeouts(long maxTimeout) {
+        final CharSequence[] entries = mLockAfter.getEntries();
+        final CharSequence[] values = mLockAfter.getEntryValues();
         ArrayList<CharSequence> revisedEntries = new ArrayList<CharSequence>();
         ArrayList<CharSequence> revisedValues = new ArrayList<CharSequence>();
         for (int i = 0; i < values.length; i++) {
@@ -337,20 +290,20 @@ public class SecuritySettings extends SettingsPreferenceFragment
             }
         }
         if (revisedEntries.size() != entries.length || revisedValues.size() != values.length) {
-            pref.setEntries(
+            mLockAfter.setEntries(
                     revisedEntries.toArray(new CharSequence[revisedEntries.size()]));
-            pref.setEntryValues(
+            mLockAfter.setEntryValues(
                     revisedValues.toArray(new CharSequence[revisedValues.size()]));
-            final int userPreference = Integer.valueOf(pref.getValue());
+            final int userPreference = Integer.valueOf(mLockAfter.getValue());
             if (userPreference <= maxTimeout) {
-                pref.setValue(String.valueOf(userPreference));
+                mLockAfter.setValue(String.valueOf(userPreference));
             } else {
                 // There will be no highlighted selection since nothing in the list matches
                 // maxTimeout. The user can still select anything less than maxTimeout.
                 // TODO: maybe append maxTimeout to the list and mark selected.
             }
         }
-        pref.setEnabled(revisedEntries.size() > 0);
+        mLockAfter.setEnabled(revisedEntries.size() > 0);
     }
 
     @Override
@@ -360,6 +313,16 @@ public class SecuritySettings extends SettingsPreferenceFragment
         // Make sure we reload the preference hierarchy since some of these settings
         // depend on others...
         createPreferenceHierarchy();
+        updateLocationToggles();
+
+        if (mSettingsObserver == null) {
+            mSettingsObserver = new Observer() {
+                public void update(Observable o, Object arg) {
+                    updateLocationToggles();
+                }
+            };
+            mContentQueryMap.addObserver(mSettingsObserver);
+        }
 
         final LockPatternUtils lockPatternUtils = mChooseLockSettingsHelper.utils();
         if (mVisiblePattern != null) {
@@ -372,7 +335,10 @@ public class SecuritySettings extends SettingsPreferenceFragment
         mShowPassword.setChecked(Settings.System.getInt(getContentResolver(),
                 Settings.System.TEXT_SHOW_PASSWORD, 1) != 0);
 
-        mCredentialStorage.resume();
+        int state = KeyStore.getInstance().test();
+        mEnableCredentials.setChecked(state == KeyStore.NO_ERROR);
+        mEnableCredentials.setEnabled(state != KeyStore.UNINITIALIZED);
+        mResetCredentials.setEnabled(state != KeyStore.UNINITIALIZED);
     }
 
     @Override
@@ -419,7 +385,7 @@ public class SecuritySettings extends SettingsPreferenceFragment
     /*
      * Creates toggles for each available location provider
      */
-    private void updateToggles() {
+    private void updateLocationToggles() {
         ContentResolver res = getContentResolver();
         boolean gpsEnabled = Settings.Secure.isLocationProviderEnabled(
                 res, LocationManager.GPS_PROVIDER);
@@ -453,7 +419,8 @@ public class SecuritySettings extends SettingsPreferenceFragment
 
         public void showPasswordDialog() {
             View view = View.inflate(SecuritySettings.this.getActivity(),
-                    R.layout.credentials_password_dialog, null);
+                    R.layout.credentials_dialog, null);
+            view.findViewById(R.id.new_passwords).setVisibility(View.VISIBLE);
 
             Dialog dialog = new AlertDialog.Builder(SecuritySettings.this.getActivity())
                     .setView(view).setTitle(R.string.credentials_set_password)
@@ -521,307 +488,39 @@ public class SecuritySettings extends SettingsPreferenceFragment
                 if (formatArgs == null || formatArgs.length == 0) {
                     view.setText(stringId);
                 } else {
-                    view.setText(dialog.getContext().getString(stringId, formatArgs));
+                    view.setText(getString(stringId, formatArgs));
                 }
                 view.setVisibility(View.VISIBLE);
             }
         }
 
-    }
-
-    private class CredentialStorage implements DialogInterface.OnClickListener,
-            DialogInterface.OnDismissListener, Preference.OnPreferenceChangeListener,
-            Preference.OnPreferenceClickListener {
-        private static final int MINIMUM_PASSWORD_LENGTH = 8;
-
-        private final KeyStore mKeyStore = KeyStore.getInstance();
-        private int mState;
-        private boolean mSubmit = false;
-        private boolean mExternal = false;
-
-        private CheckBoxPreference mAccessCheckBox;
-        private Preference mInstallButton;
-        private Preference mPasswordButton;
-        private Preference mResetButton;
-
-        void resume() {
-            mState = mKeyStore.test();
-            updatePreferences(mState);
-
-            Intent intent = getActivity().getIntent();
-            if (!mExternal && intent != null &&
-                    Credentials.UNLOCK_ACTION.equals(intent.getAction())) {
-                mExternal = true;
-                if (mState == KeyStore.UNINITIALIZED) {
-                    showPasswordDialog();
-                } else if (mState == KeyStore.LOCKED) {
-                    showUnlockDialog();
-                } else {
-                    // TODO: Verify if this is the right way
-                    SecuritySettings.this.getFragmentManager().popBackStack();
-                }
-            }
-        }
-
-        private void initialize(String password) {
-            mKeyStore.password(password);
-            updatePreferences(KeyStore.NO_ERROR);
-        }
-
-        private void reset() {
-            mKeyStore.reset();
-            updatePreferences(KeyStore.UNINITIALIZED);
-        }
-
-        private void lock() {
-            mKeyStore.lock();
-            updatePreferences(KeyStore.LOCKED);
-        }
-
-        private int unlock(String password) {
-            mKeyStore.unlock(password);
-            return mKeyStore.getLastError();
-        }
-
-        private int changePassword(String oldPassword, String newPassword) {
-            mKeyStore.password(oldPassword, newPassword);
-            return mKeyStore.getLastError();
-        }
-
-        public boolean onPreferenceChange(Preference preference, Object value) {
-            if (preference == mAccessCheckBox) {
-                if ((Boolean) value) {
-                    showUnlockDialog();
-                } else {
-                    lock();
-                }
-                return true;
-            }
-            return false;
-        }
-
-        public boolean onPreferenceClick(Preference preference) {
-            if (preference == mInstallButton) {
-                Credentials.getInstance().installFromSdCard(SecuritySettings.this.getActivity());
-            } else if (preference == mPasswordButton) {
-                showPasswordDialog();
-            } else if (preference == mResetButton) {
-                showResetDialog();
-            } else {
-                return false;
-            }
-            return true;
-        }
-
-        public void onClick(DialogInterface dialog, int button) {
-            mSubmit = (button == DialogInterface.BUTTON_POSITIVE);
-            if (button == DialogInterface.BUTTON_NEUTRAL) {
-                reset();
-            }
-        }
-
-        public void onDismiss(DialogInterface dialog) {
-            // TODO:
-            //if (mSubmit && !isFinishing()) {
-
-            if (mSubmit) {
-                mSubmit = false;
-                if (!checkPassword((Dialog) dialog)) {
-                    ((Dialog) dialog).show();
-                    return;
-                }
-            }
-            updatePreferences(mState);
-            if (mExternal) {
-                // TODO:
-                // finish();
-            }
-        }
-
-        // Return true if there is no error.
-        private boolean checkPassword(Dialog dialog) {
-            String oldPassword = getText(dialog, R.id.old_password);
-            String newPassword = getText(dialog, R.id.new_password);
-            String confirmPassword = getText(dialog, R.id.confirm_password);
-
-            if (oldPassword != null && oldPassword.length() == 0) {
-                showError(dialog, R.string.credentials_password_empty);
-                return false;
-            } else if (newPassword == null) {
-                return !checkError(dialog, unlock(oldPassword));
-            } else if (newPassword.length() == 0 || confirmPassword.length() == 0) {
-                showError(dialog, R.string.credentials_passwords_empty);
-            } else if (newPassword.length() < MINIMUM_PASSWORD_LENGTH) {
-                showError(dialog, R.string.credentials_password_too_short);
-            } else if (!newPassword.equals(confirmPassword)) {
-                showError(dialog, R.string.credentials_passwords_mismatch);
-            } else if (oldPassword == null) {
-                initialize(newPassword);
-                return true;
-            } else {
-                return !checkError(dialog, changePassword(oldPassword, newPassword));
-            }
-            return false;
-        }
-
-        // Return false if there is no error.
-        private boolean checkError(Dialog dialog, int error) {
-            if (error == KeyStore.NO_ERROR) {
-                updatePreferences(KeyStore.NO_ERROR);
-                return false;
-            }
-            if (error == KeyStore.UNINITIALIZED) {
-                updatePreferences(KeyStore.UNINITIALIZED);
-                return false;
-            }
-            if (error < KeyStore.WRONG_PASSWORD) {
-                return false;
-            }
-            int count = error - KeyStore.WRONG_PASSWORD + 1;
-            if (count > 3) {
-                showError(dialog, R.string.credentials_wrong_password);
-            } else if (count == 1) {
-                showError(dialog, R.string.credentials_reset_warning);
-            } else {
-                showError(dialog, R.string.credentials_reset_warning_plural, count);
-            }
-            return true;
-        }
-
-        private String getText(Dialog dialog, int viewId) {
-            TextView view = (TextView) dialog.findViewById(viewId);
-            return (view == null || view.getVisibility() == View.GONE) ? null :
-                            view.getText().toString();
-        }
-
-        private void showError(Dialog dialog, int stringId, Object... formatArgs) {
-            TextView view = (TextView) dialog.findViewById(R.id.error);
-            if (view != null) {
-                if (formatArgs == null || formatArgs.length == 0) {
-                    view.setText(stringId);
-                } else {
-                    view.setText(dialog.getContext().getString(stringId, formatArgs));
-                }
-                view.setVisibility(View.VISIBLE);
-            }
-        }
-
-        private void createPreferences(PreferenceCategory category) {
-            mAccessCheckBox = new CheckBoxPreference(SecuritySettings.this.getActivity());
-            mAccessCheckBox.setTitle(R.string.credentials_access);
-            mAccessCheckBox.setSummary(R.string.credentials_access_summary);
-            mAccessCheckBox.setOnPreferenceChangeListener(this);
-            category.addPreference(mAccessCheckBox);
-
-            mInstallButton = new Preference(SecuritySettings.this.getActivity());
-            mInstallButton.setTitle(R.string.credentials_install_certificates);
-            mInstallButton.setSummary(R.string.credentials_install_certificates_summary);
-            mInstallButton.setOnPreferenceClickListener(this);
-            category.addPreference(mInstallButton);
-
-            mPasswordButton = new Preference(SecuritySettings.this.getActivity());
-            mPasswordButton.setTitle(R.string.credentials_set_password);
-            mPasswordButton.setSummary(R.string.credentials_set_password_summary);
-            mPasswordButton.setOnPreferenceClickListener(this);
-            category.addPreference(mPasswordButton);
-
-            mResetButton = new Preference(SecuritySettings.this.getActivity());
-            mResetButton.setTitle(R.string.credentials_reset);
-            mResetButton.setSummary(R.string.credentials_reset_summary);
-            mResetButton.setOnPreferenceClickListener(this);
-            category.addPreference(mResetButton);
-        }
-
-        private void updatePreferences(int state) {
-            mAccessCheckBox.setEnabled(state != KeyStore.UNINITIALIZED);
-            mAccessCheckBox.setChecked(state == KeyStore.NO_ERROR);
-            mResetButton.setEnabled(state != KeyStore.UNINITIALIZED);
-
-            // Show a toast message if the state is changed.
-            if (mState == state) {
-                return;
-            } else if (state == KeyStore.NO_ERROR) {
-                Toast.makeText(SecuritySettings.this.getActivity(), R.string.credentials_enabled,
-                        Toast.LENGTH_SHORT).show();
-            } else if (state == KeyStore.UNINITIALIZED) {
-                Toast.makeText(SecuritySettings.this.getActivity(), R.string.credentials_erased,
-                        Toast.LENGTH_SHORT).show();
-            } else if (state == KeyStore.LOCKED) {
-                Toast.makeText(SecuritySettings.this.getActivity(), R.string.credentials_disabled,
-                        Toast.LENGTH_SHORT).show();
-            }
-            mState = state;
-        }
-
-        private void showUnlockDialog() {
-            View view = View.inflate(SecuritySettings.this.getActivity(),
-                    R.layout.credentials_unlock_dialog, null);
-
-            // Show extra hint only when the action comes from outside.
-            if (mExternal) {
-                view.findViewById(R.id.hint).setVisibility(View.VISIBLE);
-            }
-
-            Dialog dialog = new AlertDialog.Builder(SecuritySettings.this.getActivity())
-                    .setView(view)
-                    .setTitle(R.string.credentials_unlock)
-                    .setPositiveButton(android.R.string.ok, this)
-                    .setNegativeButton(android.R.string.cancel, this)
-                    .create();
-            dialog.setOnDismissListener(this);
-            dialog.show();
-        }
-
-        private void showPasswordDialog() {
-            View view = View.inflate(SecuritySettings.this.getActivity(),
-                    R.layout.credentials_password_dialog, null);
-
-            if (mState == KeyStore.UNINITIALIZED) {
-                view.findViewById(R.id.hint).setVisibility(View.VISIBLE);
-            } else {
-                view.findViewById(R.id.old_password_prompt).setVisibility(View.VISIBLE);
-                view.findViewById(R.id.old_password).setVisibility(View.VISIBLE);
-            }
-
-            Dialog dialog = new AlertDialog.Builder(SecuritySettings.this.getActivity())
-                    .setView(view)
-                    .setTitle(R.string.credentials_set_password)
-                    .setPositiveButton(android.R.string.ok, this)
-                    .setNegativeButton(android.R.string.cancel, this)
-                    .create();
-            dialog.setOnDismissListener(this);
-            dialog.show();
-        }
-
-        private void showResetDialog() {
-            new AlertDialog.Builder(SecuritySettings.this.getActivity())
-                    .setTitle(android.R.string.dialog_alert_title)
-                    .setIcon(android.R.drawable.ic_dialog_alert)
-                    .setMessage(R.string.credentials_reset_hint)
-                    .setNeutralButton(getResources().getString(android.R.string.ok), this)
-                    .setNegativeButton(getResources().getString(android.R.string.cancel), this)
-                    .create().show();
-        }
     }
 
     public boolean onPreferenceChange(Preference preference, Object value) {
         if (preference == mLockAfter) {
-            int lockAfter = Integer.parseInt((String) value);
+            int timeout = Integer.parseInt((String) value);
             try {
                 Settings.Secure.putInt(getContentResolver(),
-                        Settings.Secure.LOCK_SCREEN_LOCK_AFTER_TIMEOUT, lockAfter);
+                        Settings.Secure.LOCK_SCREEN_LOCK_AFTER_TIMEOUT, timeout);
             } catch (NumberFormatException e) {
                 Log.e("SecuritySettings", "could not persist lockAfter timeout setting", e);
             }
             updateLockAfterPreferenceSummary();
         } else if (preference == mUseLocation) {
-            boolean newValue = value == null ? false : (Boolean) value;
+            boolean newValue = (value == null ? false : (Boolean) value);
             GoogleLocationSettingHelper.setUseLocationForServices(getActivity(), newValue);
             // We don't want to change the value immediately here, since the user may click
             // disagree in the dialog that pops up. When the activity we just launched exits, this
             // activity will be restated and the new value re-read, so the checkbox will get its
             // new value then.
             return false;
+        } else if (preference == mEnableCredentials) {
+            if (value != null && (Boolean) value) {
+                getActivity().startActivity(new Intent(CredentialStorage.ACTION_UNLOCK));
+                return false;
+            } else {
+                KeyStore.getInstance().lock();
+            }
         }
         return true;
     }
