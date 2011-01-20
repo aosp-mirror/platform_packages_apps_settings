@@ -626,14 +626,6 @@
                 android:resource="@id/security_settings" />
         </activity>
 
-        <activity android:name="CredentialInstaller"
-                android:theme="@android:style/Theme.Translucent.NoTitleBar">
-            <intent-filter>
-                <action android:name="android.credentials.SYSTEM_INSTALL" />
-                <category android:name="android.intent.category.DEFAULT" />
-            </intent-filter>
-        </activity>
-
         <activity android:name="Settings$PrivacySettingsActivity"
                 android:theme="@android:style/Theme.Holo"
                 android:label="@string/privacy_settings_title"
@@ -649,6 +641,18 @@
                 android:value="com.android.settings.PrivacySettings" />
             <meta-data android:name="com.android.settings.TOP_LEVEL_HEADER_ID"
                 android:resource="@id/privacy_settings" />
+        </activity>
+
+        <activity android:name="CredentialStorage"
+                android:theme="@style/Transparent"
+                android:configChanges="orientation|keyboardHidden">
+            <intent-filter>
+                <action android:name="com.android.credentials.UNLOCK" />
+                <action android:name="com.android.credentials.INSTALL" />
+                <action android:name="com.android.credentials.SET_PASSWORD" />
+                <action android:name="com.android.credentials.RESET" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
         </activity>
 
         <activity android:name="DeviceAdminSettings"
