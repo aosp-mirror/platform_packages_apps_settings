@@ -2830,55 +2830,55 @@ found in the list of installed applications.</string>
     <!-- A secret edit field's grayed out value when it has not been set -->
     <string name="vpn_secret_not_set">(not set)</string>
 
-    <!-- Title of preference group for credential storage settings -->
-    <string name="credentials_category">Credential storage</string>
-    <!-- Title of preference to enable/dislable access to credential storage -->
+    <!-- Title of preference group for credential storage settings [CHAR LIMIT=30] -->
+    <string name="credentials_title">Credential storage</string>
+    <!-- Title of preference to enable/dislable access to credential storage [CHAR LIMIT=30] -->
     <string name="credentials_access">Use secure credentials</string>
-    <!-- Summary of preference to enable/dislable access to credential storage -->
+    <!-- Summary of preference to enable/dislable access to credential storage [CHAR LIMIT=NONE] -->
     <string name="credentials_access_summary">Allow applications to access secure certificates and other credentials</string>
-    <!-- Title of dialog to enable/dislable access to credential storage -->
-    <string name="credentials_unlock">Enter password</string>
-    <!-- Description of dialog to enable/dislable access to credential storage -->
-    <string name="credentials_unlock_hint">Enter the credential storage password.</string>
-    <!-- Title of preference to install certificates from SD card [CHAR LIMIT=25] -->
-    <string name="credentials_install_certificates" product="nosdcard">Install from USB storage</string>
-    <!-- Title of preference to install certificates from SD card -->
-    <string name="credentials_install_certificates" product="default">Install from SD card</string>
-    <!-- Summary of preference to install certificates from SD card [CHAR LIMIT=25] -->
-    <string name="credentials_install_certificates_summary" product="nosdcard">Install encrypted certificates from USB storage</string>
-    <!-- Summary of preference to install certificates from SD card -->
-    <string name="credentials_install_certificates_summary" product="default">Install encrypted certificates from SD card</string>
-    <!-- Title of preference to set storage password -->
+    <!-- Title of preference to install certificates from SD card [CHAR LIMIT=30] -->
+    <string name="credentials_install" product="nosdcard">Install from USB storage</string>
+    <!-- Title of preference to install certificates from SD card [CHAR LIMIT=30] -->
+    <string name="credentials_install" product="default">Install from SD card</string>
+    <!-- Summary of preference to install certificates from SD card [CHAR LIMIT=NONE] -->
+    <string name="credentials_install_summary" product="nosdcard">Install certificates from USB storage</string>
+    <!-- Summary of preference to install certificates from SD card [CHAR LIMIT=NONE] -->
+    <string name="credentials_install_summary" product="default">Install certificates from SD card</string>
+    <!-- Title of preference to set the password for credential storage [CHAR LIMIT=30] -->
     <string name="credentials_set_password">Set password</string>
-    <!-- Summary of preference to set storage password -->
-    <string name="credentials_set_password_summary">Set or change the credential storage password</string>
-    <!-- Title of preference to reset credential storage -->
-    <string name="credentials_reset">Clear storage</string>
-    <!-- Summary of preference to reset credential storage -->
-    <string name="credentials_reset_summary">Clear credential storage of all contents and reset its password</string>
-    <!-- Description of dialog to reset the credential storage -->
-    <string name="credentials_reset_hint">Are you sure you want to delete all credentials and reset the credential storage password?</string>
-    <!-- Description for the old-password input box -->
+    <!-- Summary of preference to set the password for credential storage [CHAR LIMIT=NONE] -->
+    <string name="credentials_set_password_summary">Set or change the password for credential storage</string>
+    <!-- Title of preference to reset credential storage [CHAR LIMIT=30] -->
+    <string name="credentials_reset">Clear credentials</string>
+    <!-- Summary of preference to reset credential storage [CHAR LIMIT=NONE] -->
+    <string name="credentials_reset_summary">Remove all the contents and reset the password</string>
+
+    <!-- Title of dialog to enable credential storage [CHAR LIMIT=30] -->
+    <string name="credentials_unlock">Enter password</string>
+    <!-- Description of dialog to enable credential storage [CHAR LIMIT=NONE] -->
+    <string name="credentials_unlock_hint">Enter the password for credential storage.</string>
+    <!-- Description of dialog to set the password for credential storage [CHAR LIMIT=NONE] -->
+    <string name="credentials_password_hint">Set the password for credential storage. It must have at least 8 characters.</string>
+    <!-- Description of the input box for the old password [CHAR LIMIT=30] -->
     <string name="credentials_old_password">Current password:</string>
-    <!-- Description for the new-password input box -->
+    <!-- Description of the input box for the new password [CHAR LIMIT=30] -->
     <string name="credentials_new_password">New password:</string>
-    <!-- Description for the confirm-new-password input box -->
+    <!-- Description of the input box to confirm the new password [CHAR LIMIT=30] -->
     <string name="credentials_confirm_password">Confirm new password:</string>
-    <!-- Description when user set up the storage for the very first time -->
-    <string name="credentials_first_time_hint">Set a password for the credential storage (at least 8 characters).</string>
-    <string name="credentials_wrong_password">Please enter the correct password.</string>
-    <string name="credentials_reset_warning">Please enter the correct password. You have one more try to enter the correct password before the credential storage is erased.</string>
-    <string name="credentials_reset_warning_plural">Please enter the correct password. You have <xliff:g id="number" example="5">%1$d</xliff:g> more tries to enter the correct password before the credential storage is erased.</string>
+    <!-- Description of dialog to reset credential storage [CHAR LIMIT=NONE] -->
+    <string name="credentials_reset_hint">All the contents will be removed, and the password will be reset. Are you sure about that?</string>
+    <!-- Error message [CHAR LIMIT=NONE] -->
     <string name="credentials_passwords_mismatch">Passwords do not match.</string>
-    <string name="credentials_passwords_empty">You must enter and confirm a password.</string>
-    <string name="credentials_password_empty">Please enter the password.</string>
-    <string name="credentials_password_too_short">The password must have at least 8 characters.</string>
-    <!-- toast message -->
-    <string name="credentials_erased">The credential storage is erased.</string>
-    <!-- toast message -->
+    <!-- Error message [CHAR LIMIT=NONE] -->
+    <string name="credentials_wrong_password">Incorrect password.</string>
+    <!-- Error message [CHAR LIMIT=NONE] -->
+    <string name="credentials_reset_warning">Incorrect password. You have one more chance before credential storage is erased.</string>
+    <!-- Error message [CHAR LIMIT=NONE] -->
+    <string name="credentials_reset_warning_plural">Incorrect password. You have <xliff:g id="number" example="5">%1$d</xliff:g> more chances before credential storage is erased.</string>
+    <!-- Toast message [CHAR LIMIT=30] -->
+    <string name="credentials_erased">Credential storage is erased.</string>
+    <!-- Toast message [CHAR LIMIT=30] -->
     <string name="credentials_enabled">Credential storage is enabled.</string>
-    <!-- toast message -->
-    <string name="credentials_disabled">Credential storage is disabled.</string>
 
     <!-- Sound settings screen, setting check box label -->
     <string name="emergency_tone_title">Emergency tone</string>
