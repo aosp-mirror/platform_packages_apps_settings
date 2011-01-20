@@ -118,6 +118,8 @@ public class WifiSettingsForSetupWizardXL extends Activity implements OnClickLis
 
     private DetailedState mPreviousState = DetailedState.DISCONNECTED;
 
+    private int mBackgroundId = R.drawable.setups_bg_default;
+
     // At first, we set "Skip" button disabled so that users won't press it soon after the screen
     // migration. The button is enabled after the wifi module returns some result
     // (a list of available network, etc.) One possible problem is that the notification from the
@@ -261,6 +263,8 @@ public class WifiSettingsForSetupWizardXL extends Activity implements OnClickLis
             // this can be false here. We want to treat it as "after connect action".
             mAfterConnectAction = true;
 
+            trySetBackground(R.drawable.setups_bg_complete);
+
             mProgressBar.setIndeterminate(false);
             mProgressBar.setProgress(2);
 
@@ -376,6 +380,8 @@ public class WifiSettingsForSetupWizardXL extends Activity implements OnClickLis
             edit = true;
         }
 
+        trySetBackground(R.drawable.setups_bg_default);
+
         // We don't want to keep scanning Wi-Fi networks during users' configuring one network.
         mWifiSettings.pauseWifiScan();
 
@@ -432,6 +438,8 @@ public class WifiSettingsForSetupWizardXL extends Activity implements OnClickLis
     /* package */ void onConnectButtonPressed() {
         mAfterConnectAction = true;
 
+        trySetBackground(R.drawable.setups_bg_wifi);
+
         mWifiSettings.submit(mWifiConfig.getController());
 
         // updateConnectionState() isn't called soon after the user's "connect" action,
@@ -478,6 +486,8 @@ public class WifiSettingsForSetupWizardXL extends Activity implements OnClickLis
     }
 
     private void onBackButtonPressed() {
+        trySetBackground(R.drawable.setups_bg_default);
+
         if (mAfterConnectAction) {
             if (DEBUG) Log.d(TAG, "Back button pressed after connect action.");
             mAfterConnectAction = false;
@@ -570,6 +580,8 @@ public class WifiSettingsForSetupWizardXL extends Activity implements OnClickLis
         mConnectButton.setVisibility(View.VISIBLE);
         mConnectButton.setEnabled(true);
 
+        trySetBackground(R.drawable.setups_bg_default);
+
         if (!TextUtils.isEmpty(mEditingTitle)) {
             mTitleView.setText(mEditingTitle);
         } else {
@@ -636,5 +648,15 @@ public class WifiSettingsForSetupWizardXL extends Activity implements OnClickLis
     @Override
     public void onCreateContextMenu(ContextMenu menu, View view, ContextMenuInfo menuInfo) {
         super.onCreateContextMenu(menu, view, menuInfo);
+    }
+
+    /**
+     * Replace the current background with a new background whose id is resId if needed.
+     */
+    private void trySetBackground(int resId) {
+        if (mBackgroundId != resId) {
+            getWindow().setBackgroundDrawable(getResources().getDrawable(resId));
+            mBackgroundId = resId;
+        }
     }
 }
