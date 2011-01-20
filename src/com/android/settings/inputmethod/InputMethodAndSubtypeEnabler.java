@@ -181,7 +181,8 @@ public class InputMethodAndSubtypeEnabler extends SettingsPreferenceFragment {
 
         for (int i = 0; i < N; ++i) {
             final InputMethodInfo imi = mInputMethodProperties.get(i);
-            if (imi.getSubtypes().size() <= 1) continue;
+            final int subtypeCount = imi.getSubtypeCount();
+            if (subtypeCount <= 1) continue;
             final String imiId = imi.getId();
             // Add this subtype to the list when no IME is specified or when the IME of this
             // subtype is the specified IME.
@@ -205,10 +206,10 @@ public class InputMethodAndSubtypeEnabler extends SettingsPreferenceFragment {
             activeInputMethodsCategory.setTitle(R.string.active_input_method_subtypes);
             root.addPreference(activeInputMethodsCategory);
 
-            ArrayList<InputMethodSubtype> subtypes = imi.getSubtypes();
             ArrayList<Preference> subtypePreferences = new ArrayList<Preference>();
-            if (subtypes.size() > 0) {
-                for (InputMethodSubtype subtype: subtypes) {
+            if (subtypeCount > 0) {
+                for (int j = 0; j < subtypeCount; ++j) {
+                    InputMethodSubtype subtype = imi.getSubtypeAt(j);
                     CharSequence subtypeLabel;
                     int nameResId = subtype.getNameResId();
                     if (nameResId != 0) {

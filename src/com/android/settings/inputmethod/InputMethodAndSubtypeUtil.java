@@ -179,7 +179,9 @@ public class InputMethodAndSubtypeUtil {
                 HashSet<String> subtypesSet = enabledIMEAndSubtypesMap.get(imiId);
 
                 boolean subtypeCleared = false;
-                for (InputMethodSubtype subtype : imi.getSubtypes()) {
+                final int subtypeCount = imi.getSubtypeCount();
+                for (int i = 0; i < subtypeCount; ++i) {
+                    InputMethodSubtype subtype = imi.getSubtypeAt(i);
                     final String subtypeHashCodeStr = String.valueOf(subtype.hashCode());
                     CheckBoxPreference subtypePref = (CheckBoxPreference) context.findPreference(
                             imiId + subtypeHashCodeStr);
@@ -293,7 +295,9 @@ public class InputMethodAndSubtypeUtil {
         PreferenceScreen preferenceScreen = context.getPreferenceScreen();
         for (InputMethodInfo imi : inputMethodProperties) {
             if (id.equals(imi.getId())) {
-                for (InputMethodSubtype subtype : imi.getSubtypes()) {
+                final int subtypeCount = imi.getSubtypeCount();
+                for (int i = 0; i < subtypeCount; ++i) {
+                    InputMethodSubtype subtype = imi.getSubtypeAt(i);
                     CheckBoxPreference pref = (CheckBoxPreference) preferenceScreen.findPreference(
                             id + subtype.hashCode());
                     if (pref != null) {
@@ -311,7 +315,9 @@ public class InputMethodAndSubtypeUtil {
         for (InputMethodInfo imi : inputMethodProperties) {
             String id = imi.getId();
             HashSet<String> enabledSubtypesSet = enabledSubtypes.get(id);
-            for (InputMethodSubtype subtype : imi.getSubtypes()) {
+            final int subtypeCount = imi.getSubtypeCount();
+            for (int i = 0; i < subtypeCount; ++i) {
+                InputMethodSubtype subtype = imi.getSubtypeAt(i);
                 String hashCode = String.valueOf(subtype.hashCode());
                 if (DEBUG) {
                     Log.d(TAG, "--- Set checked state: " + "id" + ", " + hashCode + ", "
