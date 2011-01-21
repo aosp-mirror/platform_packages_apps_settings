@@ -18,14 +18,15 @@
 
     <PreferenceCategory
         android:key="security_category"
-        android:title="@string/encryption_settings_title">
+        android:title="@string/crypt_keeper_settings_title">
 
         <PreferenceScreen
             android:key="encryption"
-            android:title="@string/encrypt_title"
-            android:summary="@string/encrypt_summary"
-            android:persistent="false"/>
-
+            android:title="@string/crypt_keeper_encrypt_title"
+            android:summary="@string/crypt_keeper_encrypt_summary"
+            android:fragment="com.android.settings.CryptKeeperSettings" />
+    
     </PreferenceCategory>
+
 
 </PreferenceScreen>

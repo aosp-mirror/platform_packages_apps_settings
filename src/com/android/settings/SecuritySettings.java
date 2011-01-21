@@ -372,8 +372,6 @@ public class SecuritySettings extends SettingsPreferenceFragment
         } else if (preference == mAssistedGps) {
             Settings.Secure.putInt(getContentResolver(), Settings.Secure.ASSISTED_GPS_ENABLED,
                     mAssistedGps.isChecked() ? 1 : 0);
-        } else if (KEY_ENCRYPTION.equals(key)) {
-            new Encryption().showPasswordDialog();
         } else {
             // If we didn't handle it, let preferences handle it.
             return super.onPreferenceTreeClick(preferenceScreen, preference);

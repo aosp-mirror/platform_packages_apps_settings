@@ -31,8 +31,8 @@ import android.text.InputType;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.view.View.OnClickListener;
+import android.view.ViewGroup;
 import android.view.inputmethod.EditorInfo;
 import android.widget.TextView;
 import android.widget.TextView.OnEditorActionListener;
@@ -138,7 +138,11 @@ public class ConfirmLockPassword extends PreferenceActivity {
         private void handleNext() {
             final String pin = mPasswordEntry.getText().toString();
             if (mLockPatternUtils.checkPassword(pin)) {
-                getActivity().setResult(RESULT_OK);
+                
+                Intent intent = new Intent();
+                intent.putExtra("password", pin);
+                
+                getActivity().setResult(RESULT_OK, intent);
                 getActivity().finish();
             } else {
                 showError(R.string.lockpattern_need_to_unlock_wrong);
