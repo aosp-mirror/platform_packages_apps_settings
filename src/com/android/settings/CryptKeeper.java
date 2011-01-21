@@ -121,7 +121,8 @@ public class CryptKeeper extends Activity implements TextView.OnEditorActionList
 
         // Check to see why we were started.
         String progress = SystemProperties.get("vold.encrypt_progress");
-        if ("startup".equals(progress)) {
+
+        if (!"".equals(progress)) {
             setContentView(R.layout.crypt_keeper_progress);
             encryptionProgressInit();
         } else {
