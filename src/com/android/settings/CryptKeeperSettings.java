@@ -19,6 +19,7 @@ package com.android.settings;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Fragment;
+import android.app.admin.DevicePolicyManager;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
@@ -90,7 +91,6 @@ public class CryptKeeperSettings extends Fragment {
         }
     };
 
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedState) {
         mContentView = inflater.inflate(R.layout.crypt_keeper_settings, null);
@@ -115,6 +115,28 @@ public class CryptKeeperSettings extends Fragment {
     public void onPause() {
         super.onPause();
         getActivity().unregisterReceiver(mIntentReceiver);
+    }
+
+    /**
+     * If encryption is already started, and this launched via a "start encryption" intent,
+     * then exit immediately - it's already up and running, so there's no point in "starting" it.
+     */
+    @Override
+    public void onActivityCreated(Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+        Activity activity = getActivity();
+        Intent intent = activity.getIntent();
+        if (DevicePolicyManager.ACTION_START_ENCRYPTION.equals(intent.getAction())) {
+            DevicePolicyManager dpm = (DevicePolicyManager)
+                    activity.getSystemService(Context.DEVICE_POLICY_SERVICE);
+            if (dpm != null) {
+                int status = dpm.getStorageEncryptionStatus();
+                if (status != DevicePolicyManager.ENCRYPTION_STATUS_INACTIVE) {
+                    // There is nothing to do here, so simply finish() (which returns to caller)
+                    activity.finish();
+                }
+            }
+        }
     }
 
     /**
