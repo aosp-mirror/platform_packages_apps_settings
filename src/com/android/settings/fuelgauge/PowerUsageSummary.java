@@ -23,6 +23,7 @@ import com.android.settings.R;
 import com.android.settings.applications.InstalledAppDetails;
 import com.android.settings.fuelgauge.PowerUsageDetail.DrainType;
 
+import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;
 import android.hardware.SensorManager;
@@ -102,13 +103,16 @@ public class PowerUsageSummary extends PreferenceFragment implements Runnable {
     public void onCreate(Bundle icicle) {
         super.onCreate(icicle);
 
-        mStats = sStatsXfer;
+        if (icicle != null) {
+            mStats = sStatsXfer;
+        }
 
         addPreferencesFromResource(R.xml.power_usage_summary);
         mBatteryInfo = IBatteryStats.Stub.asInterface(
                 ServiceManager.getService("batteryinfo"));
         mAppListGroup = (PreferenceGroup) findPreference("app_list");
         mPowerProfile = new PowerProfile(getActivity());
+        setHasOptionsMenu(true);
     }
 
     @Override
@@ -284,9 +288,10 @@ public class PowerUsageSummary extends PreferenceFragment implements Runnable {
                     .setIcon(com.android.internal.R.drawable.ic_menu_info_details)
                     .setAlphabeticShortcut('t');
         }
-        menu.add(0, MENU_STATS_REFRESH, 0, R.string.menu_stats_refresh)
+        MenuItem refresh = menu.add(0, MENU_STATS_REFRESH, 0, R.string.menu_stats_refresh)
                 .setIcon(com.android.internal.R.drawable.ic_menu_refresh)
                 .setAlphabeticShortcut('r');
+        refresh.setShowAsAction(MenuItem.SHOW_AS_ACTION_IF_ROOM);
     }
 
     @Override
