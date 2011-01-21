@@ -258,6 +258,7 @@ public class WifiSettingsForSetupWizardXL extends Activity implements OnClickLis
         }
         case CONNECTED: {
             hideSoftwareKeyboard();
+            setPaddingVisibility(View.VISIBLE);
 
             // If the device is already connected to a wifi without users' "Connect" request,
             // this can be false here. We want to treat it as "after connect action".
@@ -302,7 +303,12 @@ public class WifiSettingsForSetupWizardXL extends Activity implements OnClickLis
         showConnectingTitle();
         mProgressBar.setIndeterminate(false);
         mProgressBar.setProgress(1);
-        setPaddingVisibility(View.VISIBLE);
+
+        // We may enter "Connecting" status during editing password again (if the Wifi module
+        // tries to (re)connect a network.)
+        if (mAfterConnectAction) {
+            setPaddingVisibility(View.VISIBLE);
+        }
     }
 
     private void showDefaultTitle() {
@@ -535,6 +541,14 @@ public class WifiSettingsForSetupWizardXL extends Activity implements OnClickLis
      */
     /* package */ void onAccessPointsUpdated(
             PreferenceCategory holder, Collection<AccessPoint> accessPoints) {
+        // If we already show some of access points but the bar still shows "scanning" state, it
+        // should be stopped.
+        if (mProgressBar.isIndeterminate() && accessPoints.size() > 0) {
+            mProgressBar.setIndeterminate(false);
+            mAddNetworkButton.setEnabled(true);
+            mRefreshButton.setEnabled(true);
+        }
+
         for (AccessPoint accessPoint : accessPoints) {
             accessPoint.setLayoutResource(R.layout.custom_preference);
             holder.addPreference(accessPoint);
