@@ -21,38 +21,25 @@ import static android.provider.Settings.System.SCREEN_OFF_TIMEOUT;
 
 import com.android.internal.widget.LockPatternUtils;
 
-import android.app.AlertDialog;
-import android.app.Dialog;
 import android.app.admin.DevicePolicyManager;
 import android.content.ContentQueryMap;
 import android.content.ContentResolver;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
 import android.location.LocationManager;
 import android.os.Bundle;
-import android.os.IBinder;
-import android.os.ServiceManager;
-import android.os.SystemProperties;
 import android.os.Vibrator;
-import android.os.storage.IMountService;
 import android.preference.CheckBoxPreference;
 import android.preference.ListPreference;
 import android.preference.Preference;
 import android.preference.Preference.OnPreferenceChangeListener;
-import android.preference.PreferenceCategory;
 import android.preference.PreferenceGroup;
-import android.preference.PreferenceManager;
 import android.preference.PreferenceScreen;
 import android.provider.Settings;
-import android.security.Credentials;
 import android.security.KeyStore;
 import android.telephony.TelephonyManager;
 import android.util.Log;
-import android.view.View;
-import android.widget.TextView;
-import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.Observable;
@@ -408,90 +395,6 @@ public class SecuritySettings extends SettingsPreferenceFragment
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         createPreferenceHierarchy();
-    }
-
-    private class Encryption implements DialogInterface.OnClickListener,
-            DialogInterface.OnDismissListener {
-
-        private boolean mSubmit;
-
-        public void showPasswordDialog() {
-            View view = View.inflate(SecuritySettings.this.getActivity(),
-                    R.layout.credentials_dialog, null);
-            view.findViewById(R.id.new_passwords).setVisibility(View.VISIBLE);
-
-            Dialog dialog = new AlertDialog.Builder(SecuritySettings.this.getActivity())
-                    .setView(view).setTitle(R.string.credentials_set_password)
-                    .setPositiveButton(android.R.string.ok, this)
-                    .setNegativeButton(android.R.string.cancel, this).create();
-            dialog.setOnDismissListener(this);
-            dialog.show();
-        }
-
-        public void onClick(DialogInterface dialog, int button) {
-            if (button == DialogInterface.BUTTON_POSITIVE) {
-                mSubmit = true;
-            }
-        }
-
-        public void onDismiss(DialogInterface dialog) {
-            if (mSubmit) {
-                mSubmit = false;
-                if (!checkPassword((Dialog) dialog)) {
-                    ((Dialog) dialog).show();
-                    return;
-                }
-            }
-        }
-
-        // Return true if there is no error.
-        private boolean checkPassword(Dialog dialog) {
-            String newPassword = getText(dialog, R.id.new_password);
-            String confirmPassword = getText(dialog, R.id.confirm_password);
-
-            if (newPassword == null || confirmPassword == null || newPassword.length() == 0
-                    || confirmPassword.length() == 0) {
-                showError(dialog, R.string.credentials_passwords_empty);
-            } else if (!newPassword.equals(confirmPassword)) {
-                showError(dialog, R.string.credentials_passwords_mismatch);
-            } else {
-
-                IBinder service = ServiceManager.getService("mount");
-                if (service == null) {
-                    return false;
-                }
-
-                IMountService mountService = IMountService.Stub.asInterface(service);
-                try {
-                    mountService.encryptStorage(newPassword);
-                } catch (Exception e) {
-                    Log.e(TAG, "Error while encrypting...", e);
-                }
-
-                return true;
-            }
-
-            return false;
-        }
-
-        private String getText(Dialog dialog, int viewId) {
-            TextView view = (TextView) dialog.findViewById(viewId);
-            return (view == null || view.getVisibility() == View.GONE) ? null : view.getText()
-                    .toString();
-        }
-
-        private void showError(Dialog dialog, int stringId, Object... formatArgs) {
-            TextView view = (TextView) dialog.findViewById(R.id.error);
-            if (view != null) {
-                if (formatArgs == null || formatArgs.length == 0) {
-                    view.setText(stringId);
-                } else {
-                    view.setText(getString(stringId, formatArgs));
-                }
-                view.setVisibility(View.VISIBLE);
-            }
-        }
-
     }
 
     public boolean onPreferenceChange(Preference preference, Object value) {
