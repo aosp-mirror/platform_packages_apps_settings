@@ -30,6 +30,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.IBinder;
 import android.os.Message;
+import android.os.PowerManager;
 import android.os.ServiceManager;
 import android.os.SystemProperties;
 import android.os.storage.IMountService;
@@ -46,7 +47,7 @@ import java.util.Date;
 
 public class CryptKeeper extends Activity implements TextView.OnEditorActionListener {
     private static final String TAG = "CryptKeeper";
-    
+
     private static final String DECRYPT_STATE = "trigger_restart_framework";
 
     private static final int UPDATE_PROGRESS = 1;
@@ -60,15 +61,15 @@ public class CryptKeeper extends Activity implements TextView.OnEditorActionList
     private Handler mHandler = new Handler() {
         @Override
         public void handleMessage(Message msg) {
-            
+
             switch (msg.what) {
-            
+
             case UPDATE_PROGRESS:
                 String state = SystemProperties.get("vold.encrypt_progress");
-                
+
                 ProgressBar progressBar = (ProgressBar) findViewById(R.id.progress_bar);
                 progressBar.setProgress(0);
-                
+
                 try {
                     int progress = Integer.parseInt(state);
                     progressBar.setProgress(progress);
@@ -79,21 +80,21 @@ public class CryptKeeper extends Activity implements TextView.OnEditorActionList
                 // Check the status every 1 second
                 sendEmptyMessageDelayed(0, 1000);
                 break;
-            
+
             case COOLDOWN:
                 TextView tv = (TextView) findViewById(R.id.status);
                 if (mCooldown <= 0) {
                     // Re-enable the password entry
                     EditText passwordEntry = (EditText) findViewById(R.id.passwordEntry);
                     passwordEntry.setEnabled(true);
-                    
+
                     tv.setText(R.string.try_again);
-                    
+
                 } else {
-                    
+
                     CharSequence tempalte = getText(R.string.crypt_keeper_cooldown);
                     tv.setText(TextUtils.expandTemplate(tempalte, Integer.toString(mCooldown)));
-                    
+
                     mCooldown--;
                     mHandler.sendEmptyMessageDelayed(COOLDOWN, 1000); // Tick every second
                 }
@@ -101,23 +102,23 @@ public class CryptKeeper extends Activity implements TextView.OnEditorActionList
             }
         }
     };
-    
+
     private int mFailedAttempts = 0;
     private int mCooldown;
-    
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        
+
         String state = SystemProperties.get("vold.decrypt");
         if ("".equals(state) || DECRYPT_STATE.equals(state)) {
-            // Disable the crypt keeper. 
+            // Disable the crypt keeper.
             PackageManager pm = getPackageManager();
             ComponentName name = new ComponentName(this, CryptKeeper.class);
             pm.setComponentEnabledSetting(name, PackageManager.COMPONENT_ENABLED_STATE_DISABLED, 0);
             return;
         }
-        
+
         // Check to see why we were started.
         String progress = SystemProperties.get("vold.encrypt_progress");
         if ("startup".equals(progress)) {
@@ -128,17 +129,26 @@ public class CryptKeeper extends Activity implements TextView.OnEditorActionList
             passwordEntryInit();
         }
     }
-    
+
     private void encryptionProgressInit() {
+        // Accquire a partial wakelock to prevent the device from sleeping. Note
+        // we never release this wakelock as we will be restarted after the device
+        // is encrypted.
+
+        PowerManager pm = (PowerManager) getSystemService(Context.POWER_SERVICE);
+        PowerManager.WakeLock wakeLock = pm.newWakeLock(PowerManager.PARTIAL_WAKE_LOCK, TAG);
+
+        wakeLock.acquire();
+
         mHandler.sendEmptyMessage(UPDATE_PROGRESS);
     }
-    
+
     private void passwordEntryInit() {
         TextView passwordEntry = (TextView) findViewById(R.id.passwordEntry);
         passwordEntry.setOnEditorActionListener(this);
-        
+
         KeyboardView keyboardView = (PasswordEntryKeyboardView) findViewById(R.id.keyboard);
-        
+
         PasswordEntryKeyboardHelper keyboardHelper = new PasswordEntryKeyboardHelper(this,
                 keyboardView, passwordEntry, false);
         keyboardHelper.setKeyboardMode(PasswordEntryKeyboardHelper.KEYBOARD_MODE_ALPHA);
@@ -175,7 +185,7 @@ public class CryptKeeper extends Activity implements TextView.OnEditorActionList
             if (TextUtils.isEmpty(password)) {
                 return true;
             }
-            
+
             // Now that we have the password clear the password field.
             v.setText(null);
 
@@ -203,7 +213,7 @@ public class CryptKeeper extends Activity implements TextView.OnEditorActionList
             } catch (Exception e) {
                 Log.e(TAG, "Error while decrypting...", e);
             }
-            
+
             return true;
         }
         return false;
