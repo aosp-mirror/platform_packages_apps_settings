@@ -75,9 +75,9 @@ public class CryptKeeper extends Activity implements TextView.OnEditorActionList
                 } catch (Exception e) {
                     Log.w(TAG, "Error parsing progress: " + e.toString());
                 }
-                
-                // Check the status every 1 second
-                sendEmptyMessageDelayed(0, 1000);
+
+                // Check the status every 5 second
+                sendEmptyMessageDelayed(UPDATE_PROGRESS, 5000);
                 break;
             
             case COOLDOWN:
@@ -128,6 +128,12 @@ public class CryptKeeper extends Activity implements TextView.OnEditorActionList
             setContentView(R.layout.crypt_keeper_password_entry);
             passwordEntryInit();
         }
+
+        // Disable the status bar
+        StatusBarManager sbm = (StatusBarManager) getSystemService(Context.STATUS_BAR_SERVICE);
+        sbm.disable(StatusBarManager.DISABLE_EXPAND | StatusBarManager.DISABLE_NOTIFICATION_ICONS
+                | StatusBarManager.DISABLE_NOTIFICATION_ALERTS
+                | StatusBarManager.DISABLE_SYSTEM_INFO | StatusBarManager.DISABLE_NAVIGATION);
     }
     
     private void encryptionProgressInit() {
@@ -151,12 +157,6 @@ public class CryptKeeper extends Activity implements TextView.OnEditorActionList
         String dateFormatString = getString(com.android.internal.R.string.full_wday_month_day_no_year);
         TextView date = (TextView) findViewById(R.id.date);
         date.setText(DateFormat.format(dateFormatString, new Date()));
-
-        // Disable the status bar
-        StatusBarManager sbm = (StatusBarManager) getSystemService(Context.STATUS_BAR_SERVICE);
-        sbm.disable(StatusBarManager.DISABLE_EXPAND | StatusBarManager.DISABLE_NOTIFICATION_ICONS
-                | StatusBarManager.DISABLE_NOTIFICATION_ALERTS
-                | StatusBarManager.DISABLE_SYSTEM_INFO | StatusBarManager.DISABLE_NAVIGATION);
     }
 
     private IMountService getMountService() {
@@ -184,12 +184,10 @@ public class CryptKeeper extends Activity implements TextView.OnEditorActionList
             try {
                 service.decryptStorage(password);
 
-                // For now the only way to get here is for the password to be
-                // wrong.
+                if (mFailedAttempts == 0) {
+                    // Success. Do something here within 2 seconds
 
-                mFailedAttempts++;
-                
-                if (mFailedAttempts == MAX_FAILED_ATTEMPTS) {
+                } else if (mFailedAttempts == MAX_FAILED_ATTEMPTS) {
                     // Factory reset the device.
                     sendBroadcast(new Intent("android.intent.action.MASTER_CLEAR"));
                 } else if ((mFailedAttempts % COOL_DOWN_ATTEMPTS) == 0) {
