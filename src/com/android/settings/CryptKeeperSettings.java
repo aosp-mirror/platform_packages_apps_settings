@@ -17,9 +17,14 @@
 package com.android.settings;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.app.Fragment;
+import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.content.res.Resources;
+import android.os.BatteryManager;
 import android.os.Bundle;
 import android.preference.Preference;
 import android.preference.PreferenceActivity;
@@ -45,6 +50,72 @@ public class CryptKeeperSettings extends Fragment {
 
     private View mContentView;
     private Button mInitiateButton;
+    private IntentFilter mIntentFilter;
+
+    private BroadcastReceiver mIntentReceiver = new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            String action = intent.getAction();
+            if (action.equals(Intent.ACTION_BATTERY_CHANGED)) {
+                int level = intent.getIntExtra("level", 0);
+                int status = intent.getIntExtra("status", BatteryManager.BATTERY_STATUS_UNKNOWN);
+
+                if (status == BatteryManager.BATTERY_STATUS_CHARGING && level >= 80) {
+                    mInitiateButton.setEnabled(true);
+                } else {
+                    mInitiateButton.setEnabled(false);
+                }
+            }
+        }
+    };
+
+    /**
+     * If the user clicks to begin the reset sequence, we next require a
+     * keyguard confirmation if the user has currently enabled one.  If there
+     * is no keyguard available, we prompt the user to set a password.
+     */
+    private Button.OnClickListener mInitiateListener = new Button.OnClickListener() {
+
+        public void onClick(View v) {
+            if (!runKeyguardConfirmation(KEYGUARD_REQUEST)) {
+                // TODO remove with proper flow
+                new AlertDialog.Builder(getActivity())
+                    .setTitle("No password set")
+                    .setIcon(android.R.drawable.ic_dialog_alert)
+                    .setMessage("Before you enable encryption you must set a device password.")
+                    .setPositiveButton(android.R.string.ok, null)
+                    .create()
+                    .show();
+            }
+        }
+    };
+
+
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedState) {
+        mContentView = inflater.inflate(R.layout.crypt_keeper_settings, null);
+
+        mIntentFilter = new IntentFilter();
+        mIntentFilter.addAction(Intent.ACTION_BATTERY_CHANGED);
+
+        mInitiateButton = (Button) mContentView.findViewById(R.id.initiate_encrypt);
+        mInitiateButton.setOnClickListener(mInitiateListener);
+        mInitiateButton.setEnabled(false);
+
+        return mContentView;
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        getActivity().registerReceiver(mIntentReceiver, mIntentFilter);
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        getActivity().unregisterReceiver(mIntentReceiver);
+    }
 
     /**
      * Keyguard validation is run using the standard {@link ConfirmLockPattern}
@@ -67,14 +138,12 @@ public class CryptKeeperSettings extends Fragment {
         if (requestCode != KEYGUARD_REQUEST) {
             return;
         }
-        
+
         // If the user entered a valid keyguard trace, present the final
         // confirmation prompt; otherwise, go back to the initial state.
         if (resultCode == Activity.RESULT_OK) {
             String password = data.getStringExtra("password");
             showFinalConfirmation(password);
-        } else {
-            establishInitialState();
         }
     }
 
@@ -84,46 +153,6 @@ public class CryptKeeperSettings extends Fragment {
         preference.setTitle(R.string.crypt_keeper_confirm_title);
         preference.getExtras().putString("password", password);
         ((PreferenceActivity) getActivity()).onPreferenceStartFragment(null, preference);
-    }
-
-    /**
-     * If the user clicks to begin the reset sequence, we next require a
-     * keyguard confirmation if the user has currently enabled one.  If there
-     * is no keyguard available, we simply go to the final confirmation prompt.
-     */
-    private Button.OnClickListener mInitiateListener = new Button.OnClickListener() {
-
-        public void onClick(View v) {
-            if (!runKeyguardConfirmation(KEYGUARD_REQUEST)) {
-                // TODO: Need to request a password
-               // showFinalConfirmation();
-            }
-        }
-    };
-
-    /**
-     * In its initial state, the activity presents a button for the user to
-     * click in order to initiate a confirmation sequence.  This method is
-     * called from various other points in the code to reset the activity to
-     * this base state.
-     *
-     * <p>Reinflating views from resources is expensive and prevents us from
-     * caching widget pointers, so we use a single-inflate pattern:  we lazy-
-     * inflate each view, caching all of the widget pointers we'll need at the
-     * time, then simply reuse the inflated views directly whenever we need
-     * to change contents.
-     */
-    private void establishInitialState() {
-        mInitiateButton = (Button) mContentView.findViewById(R.id.initiate_encrypt);
-        mInitiateButton.setOnClickListener(mInitiateListener);
-    }
-
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedState) {
-        mContentView = inflater.inflate(R.layout.crypt_keeper_settings, null);
-
-        establishInitialState();
-        return mContentView;
     }
 }
 
