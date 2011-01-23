@@ -65,7 +65,8 @@ public class ChooseLockGeneric extends PreferenceActivity {
             }
 
             if (!mPasswordConfirmed) {
-                ChooseLockSettingsHelper helper = new ChooseLockSettingsHelper(this.getActivity(), this);
+                ChooseLockSettingsHelper helper =
+                        new ChooseLockSettingsHelper(this.getActivity(), this);
                 if (!helper.launchConfirmationActivity(CONFIRM_EXISTING_REQUEST, null, null)) {
                     mPasswordConfirmed = true; // no password set, so no need to confirm
                     updatePreferencesOrFinish();
@@ -81,15 +82,20 @@ public class ChooseLockGeneric extends PreferenceActivity {
             final String key = preference.getKey();
             boolean handled = true;
             if (KEY_UNLOCK_SET_OFF.equals(key)) {
-                updateUnlockMethodAndFinish(DevicePolicyManager.PASSWORD_QUALITY_UNSPECIFIED, true);
+                updateUnlockMethodAndFinish(
+                        DevicePolicyManager.PASSWORD_QUALITY_UNSPECIFIED, true);
             } else if (KEY_UNLOCK_SET_NONE.equals(key)) {
-                updateUnlockMethodAndFinish(DevicePolicyManager.PASSWORD_QUALITY_UNSPECIFIED, false);
+                updateUnlockMethodAndFinish(
+                        DevicePolicyManager.PASSWORD_QUALITY_UNSPECIFIED, false);
             } else if (KEY_UNLOCK_SET_PATTERN.equals(key)) {
-                updateUnlockMethodAndFinish(DevicePolicyManager.PASSWORD_QUALITY_SOMETHING, false);
+                updateUnlockMethodAndFinish(
+                        DevicePolicyManager.PASSWORD_QUALITY_SOMETHING, false);
             } else if (KEY_UNLOCK_SET_PIN.equals(key)) {
-                updateUnlockMethodAndFinish(DevicePolicyManager.PASSWORD_QUALITY_NUMERIC, false);
+                updateUnlockMethodAndFinish(
+                        DevicePolicyManager.PASSWORD_QUALITY_NUMERIC, false);
             } else if (KEY_UNLOCK_SET_PASSWORD.equals(key)) {
-                updateUnlockMethodAndFinish(DevicePolicyManager.PASSWORD_QUALITY_ALPHABETIC, false);
+                updateUnlockMethodAndFinish(
+                        DevicePolicyManager.PASSWORD_QUALITY_ALPHABETIC, false);
             } else {
                 handled = false;
             }
@@ -116,19 +122,41 @@ public class ChooseLockGeneric extends PreferenceActivity {
         }
 
         private void updatePreferencesOrFinish() {
-            int quality = getActivity().getIntent().getIntExtra(LockPatternUtils.PASSWORD_TYPE_KEY, -1);
+            int quality = getActivity().getIntent()
+                    .getIntExtra(LockPatternUtils.PASSWORD_TYPE_KEY, -1);
             if (quality == -1) {
-                // If caller didn't specify password quality, show the UI and allow the user to choose.
-                quality = mChooseLockSettingsHelper.utils().getKeyguardStoredPasswordQuality();
+                // If caller didn't specify password quality, show UI and allow the user to choose.
+                quality = mDPM.getPasswordQuality(null);
+                quality = upgradeQualityForEncryption(quality);
                 final PreferenceScreen prefScreen = getPreferenceScreen();
                 if (prefScreen != null) {
                     prefScreen.removeAll();
                 }
                 addPreferencesFromResource(R.xml.security_settings_picker);
-                disableUnusablePreferences(mDPM.getPasswordQuality(null));
+                disableUnusablePreferences(quality);
             } else {
+                quality = upgradeQualityForEncryption(quality);
                 updateUnlockMethodAndFinish(quality, false);
             }
+        }
+
+        /**
+         * Mix in "encryption minimums" to any given quality value.  This prevents users
+         * from downgrading the pattern/pin/password to a level below the minimums.
+         *
+         * ASSUMPTION:  Setting quality is sufficient (e.g. minimum lengths will be set
+         * appropriately.)
+         */
+        private int upgradeQualityForEncryption(int quality) {
+            int encryptionStatus = mDPM.getStorageEncryptionStatus();
+            boolean encrypted = (encryptionStatus == DevicePolicyManager.ENCRYPTION_STATUS_ACTIVE)
+                    || (encryptionStatus == DevicePolicyManager.ENCRYPTION_STATUS_ACTIVATING);
+            if (encrypted) {
+                if (quality < DevicePolicyManager.PASSWORD_QUALITY_NUMERIC) {
+                    quality = DevicePolicyManager.PASSWORD_QUALITY_NUMERIC;
+                }
+            }
+            return quality;
         }
 
         /***
@@ -137,7 +165,8 @@ public class ChooseLockGeneric extends PreferenceActivity {
          * @param quality the requested quality.
          */
         private void disableUnusablePreferences(final int quality) {
-            final Preference picker = getPreferenceScreen().findPreference("security_picker_category");
+            final Preference picker =
+                    getPreferenceScreen().findPreference("security_picker_category");
             final PreferenceCategory cat = (PreferenceCategory) picker;
             final int preferenceCount = cat.getPreferenceCount();
             for (int i = 0; i < preferenceCount; i++) {
@@ -169,21 +198,23 @@ public class ChooseLockGeneric extends PreferenceActivity {
          * and minimum quality specified by DevicePolicyManager. If quality is
          * {@link DevicePolicyManager#PASSWORD_QUALITY_UNSPECIFIED}, password is cleared.
          *
-         * @param quality the desired quality. Ignored if DevicePolicyManager requires more security.
+         * @param quality the desired quality. Ignored if DevicePolicyManager requires more security
          * @param disabled whether or not to show LockScreen at all. Only meaningful when quality is
          * {@link DevicePolicyManager#PASSWORD_QUALITY_UNSPECIFIED}
          */
         void updateUnlockMethodAndFinish(int quality, boolean disabled) {
-            // Sanity check. We should never get here without confirming user's existing password first.
+            // Sanity check. We should never get here without confirming user's existing password.
             if (!mPasswordConfirmed) {
-                throw new IllegalStateException("Tried to update password without confirming first");
+                throw new IllegalStateException("Tried to update password without confirming it");
             }
 
-            // Compare minimum allowed password quality and launch appropriate security setting method
+            // Compare min allowed password quality and launch appropriate security setting method
             int minQuality = mDPM.getPasswordQuality(null);
             if (quality < minQuality) {
                 quality = minQuality;
             }
+            quality = upgradeQualityForEncryption(quality);
+
             if (quality >= DevicePolicyManager.PASSWORD_QUALITY_NUMERIC) {
                 int minLength = mDPM.getPasswordMinimumLength(null);
                 if (minLength < MIN_PASSWORD_LENGTH) {
