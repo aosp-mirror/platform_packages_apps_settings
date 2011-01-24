@@ -1430,8 +1430,10 @@
     <string name="status_imei">IMEI</string>
     <!-- Do not translate. About phone, status item title -->
     <string name="status_imei_sv">IMEI SV</string>
-    <!-- About phone, status item title.  The phone number of the current device.-->
-    <string name="status_number">My phone number</string>
+    <!-- About tablet, status item title.  The Mobile Directory Number [CHAR LIMIT=30] -->
+    <string name="status_number" product="tablet">MDN</string>
+    <!-- About phone, status item title.  The phone number of the current device [CHAR LIMIT=30] -->
+    <string name="status_number" product="default">My phone number</string>
     <!-- About phone, status item title.  The phone MIN number of the current device.-->
     <string name="status_min_number">MIN</string>
     <!-- About phone, status item title.  The phone PRL Version of the current device.-->
