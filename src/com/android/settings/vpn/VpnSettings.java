@@ -131,7 +131,9 @@ public class VpnSettings extends SettingsPreferenceFragment
 
     private int mConnectingErrorCode = NO_ERROR;
 
-    private Dialog mShowingDialog, mConnectDialog;
+    private Dialog mShowingDialog;
+
+    private boolean mConnectDialogShowing = false;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -190,14 +192,17 @@ public class VpnSettings extends SettingsPreferenceFragment
     public void onPause() {
         // ignore vpn connectivity event
         mVpnManager.unregisterConnectivityReceiver(mConnectivityReceiver);
+        if ((mShowingDialog != null) && mShowingDialog.isShowing()) {
+            mShowingDialog.dismiss();
+            mShowingDialog = null;
+        }
         super.onPause();
     }
 
     @Override
     public void onResume() {
         super.onResume();
-        if (DEBUG)
-            Log.d(TAG, "onResume");
+        if (DEBUG) Log.d(TAG, "onResume");
 
         // listen to vpn connectivity event
         mVpnManager.registerConnectivityReceiver(mConnectivityReceiver);
@@ -207,21 +212,22 @@ public class VpnSettings extends SettingsPreferenceFragment
             mUnlockAction = null;
             getActivity().runOnUiThread(action);
         }
-        if (mConnectDialog == null || !mConnectDialog.isShowing()) {
+
+        if (!mConnectDialogShowing) {
             checkVpnConnectionStatus();
         } else {
             // Dismiss the connect dialog in case there is another instance
             // trying to operate a vpn connection.
-            if (!mVpnManager.isIdle()) removeConnectDialog();
+            if (!mVpnManager.isIdle()) {
+                removeDialog(DIALOG_CONNECT);
+                checkVpnConnectionStatus();
+            }
         }
     }
 
     @Override
     public void onDestroyView() {
         unregisterForContextMenu(getListView());
-        if ((mShowingDialog != null) && mShowingDialog.isShowing()) {
-            mShowingDialog.dismiss();
-        }
         // This should be called after the procedure above as ListView inside this Fragment
         // will be deleted here.
         super.onDestroyView();
@@ -242,8 +248,23 @@ public class VpnSettings extends SettingsPreferenceFragment
     protected void showDialog(int dialogId) {
         super.showDialog(dialogId);
 
+        if (dialogId == DIALOG_CONNECT) {
+            mConnectDialogShowing = true;
+            setOnDismissListener(new DialogInterface.OnDismissListener() {
+                public void onDismiss(DialogInterface dialog) {
+                    mConnectDialogShowing = false;
+                }
+            });
+        }
         setOnCancelListener(new DialogInterface.OnCancelListener() {
             public void onCancel(DialogInterface dialog) {
+                if (mActiveProfile != null) {
+                    changeState(mActiveProfile, VpnState.IDLE);
+                }
+                // Make sure onIdle() is called as the above changeState()
+                // may not be effective if the state is already IDLE.
+                // XXX: VpnService should broadcast non-IDLE state, say UNUSABLE,
+                // when an error occurs.
                 onIdle();
             }
         });
@@ -253,8 +274,7 @@ public class VpnSettings extends SettingsPreferenceFragment
     public Dialog onCreateDialog (int id) {
         switch (id) {
             case DIALOG_CONNECT:
-                mConnectDialog = createConnectDialog();
-                return mConnectDialog;
+                return createConnectDialog();
 
             case DIALOG_SECRET_NOT_SET:
                 return createSecretNotSetDialog();
@@ -267,14 +287,6 @@ public class VpnSettings extends SettingsPreferenceFragment
             default:
                 Log.d(TAG, "create reconnect dialog for event " + id);
                 return createReconnectDialog(id);
-        }
-    }
-
-    private void removeConnectDialog() {
-        if (mConnectDialog != null) {
-            mConnectDialog.dismiss();
-            mConnectDialog = null;
-            checkVpnConnectionStatus();
         }
     }
 
@@ -508,14 +520,10 @@ public class VpnSettings extends SettingsPreferenceFragment
             String error = mConnectingActor.validateInputs(d);
             if (error == null) {
                 mConnectingActor.connect(d);
-                removeConnectDialog();
                 return;
             } else {
-                // dismissDialog(DIALOG_CONNECT);
-                removeConnectDialog();
-
-                final Activity activity = getActivity();
                 // show error dialog
+                final Activity activity = getActivity();
                 mShowingDialog = new AlertDialog.Builder(activity)
                         .setTitle(android.R.string.dialog_alert_title)
                         .setIcon(android.R.drawable.ic_dialog_alert)
@@ -529,10 +537,14 @@ public class VpnSettings extends SettingsPreferenceFragment
                                     }
                                 })
                         .create();
+                // The profile state is "connecting". If we allow the dialog to
+                // be cancelable, then we need to clear the state in the
+                // onCancel handler.
+                mShowingDialog.setCancelable(false);
                 mShowingDialog.show();
             }
         } else {
-            removeConnectDialog();
+            changeState(mActiveProfile, VpnState.IDLE);
         }
     }
 
@@ -668,7 +680,9 @@ public class VpnSettings extends SettingsPreferenceFragment
     }
 
     private void startVpnTypeSelection() {
-        ((PreferenceActivity)getActivity()).startPreferencePanel(
+        if (getActivity() == null) return;
+
+        ((PreferenceActivity) getActivity()).startPreferencePanel(
                 VpnTypeSelection.class.getCanonicalName(), null, R.string.vpn_type_title, null,
                 this, REQUEST_SELECT_VPN_TYPE);
     }
@@ -812,7 +826,7 @@ public class VpnSettings extends SettingsPreferenceFragment
     }
 
     private void onIdle() {
-        Log.d(TAG, "   onIdle()");
+        if (DEBUG) Log.d(TAG, "   onIdle()");
         mActiveProfile = null;
         mConnectingActor = null;
         enableProfilePreferences();
@@ -1070,6 +1084,8 @@ public class VpnSettings extends SettingsPreferenceFragment
                 Log.d(TAG, "received connectivity: " + profileName
                         + ": connected? " + s
                         + "   err=" + mConnectingErrorCode);
+                // XXX: VpnService should broadcast non-IDLE state, say UNUSABLE,
+                // when an error occurs.
                 changeState(pref.mProfile, s);
             } else {
                 Log.e(TAG, "received connectivity: " + profileName

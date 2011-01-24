@@ -105,8 +105,10 @@ public class SettingsPreferenceFragment extends PreferenceFragment
     }
 
     protected void removeDialog(int dialogId) {
-        if (mDialogFragment != null && mDialogFragment.getDialogId() == dialogId
-                && mDialogFragment.isVisible()) {
+        // mDialogFragment may not be visible yet in parent fragment's onResume().
+        // To be able to dismiss dialog at that time, don't check
+        // mDialogFragment.isVisible().
+        if (mDialogFragment != null && mDialogFragment.getDialogId() == dialogId) {
             mDialogFragment.dismiss();
         }
         mDialogFragment = null;
