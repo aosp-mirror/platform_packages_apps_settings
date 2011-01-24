@@ -114,6 +114,10 @@
     <string name="bluetooth_notif_title" msgid="2485175521845371514">"ペア設定リクエスト"</string>
     <!-- no translation found for bluetooth_notif_message (618099089987569242) -->
     <skip />
+    <!-- no translation found for bluetooth_show_received_files_title (816172853268536399) -->
+    <skip />
+    <!-- no translation found for bluetooth_show_received_files_summary (7322193220909480775) -->
+    <skip />
     <string name="device_picker" msgid="8721012448931226323">"Bluetooth端末の選択"</string>
     <string name="bluetooth_permission_request" msgid="1523129741266262748">"Bluetooth許可リクエスト"</string>
     <string name="bluetooth_ask_enablement" msgid="8211158472876087588">"アプリケーションがBluetoothをONにする許可をリクエストしています。許可しますか？"</string>
@@ -239,7 +243,7 @@
     <string name="networks" msgid="6333316876545927039">"オペレーターの選択"</string>
     <string name="sum_carrier_select" msgid="6648929373316748020">"ネットワークオペレーターを選択します"</string>
     <string name="date_and_time_settings_title" msgid="3350640463596716780">"日付と時刻"</string>
-    <!-- no translation found for date_and_time_settings_title_setup_wizard (6493371065760315350) -->
+    <!-- no translation found for date_and_time_settings_title_setup_wizard (2391530758339384324) -->
     <skip />
     <string name="date_and_time_settings_summary" msgid="2435705040205950381">"日付、時刻、タイムゾーンの設定"</string>
     <string name="date_time_auto" msgid="7076906458515908345">"日付と時刻の自動設定"</string>
@@ -269,11 +273,29 @@
     <string name="security_settings_summary" msgid="967393342537986570">"現在地、画面ロック、SIMカードロック、認証情報ストレージのロック"</string>
     <string name="cdma_security_settings_summary" msgid="6068799952798901542">"現在地、画面のロック解除、認証情報ストレージのロックを設定します"</string>
     <string name="security_passwords_title" msgid="2930627259125138363">"パスワード"</string>
-    <!-- no translation found for encryption_settings_title (5951475460321369092) -->
+    <!-- no translation found for crypt_keeper_settings_title (2288841695457542418) -->
     <skip />
-    <!-- no translation found for encrypt_title (5458306603524656835) -->
+    <!-- no translation found for crypt_keeper_encrypt_title (5790930764432654508) -->
     <skip />
-    <!-- no translation found for encrypt_summary (6950523460019506111) -->
+    <!-- no translation found for crypt_keeper_encrypt_summary (1447090863225003474) -->
+    <skip />
+    <!-- no translation found for crypt_keeper_confirm_title (8300073420086568022) -->
+    <skip />
+    <!-- no translation found for crypt_keeper_desc (3806424855201189058) -->
+    <skip />
+    <!-- no translation found for crypt_keeper_button_text (1189623490604750854) -->
+    <skip />
+    <!-- no translation found for crypt_keeper_button_text (2008346408473255519) -->
+    <skip />
+    <!-- no translation found for crypt_keeper_final_desc (4150888307809341579) -->
+    <skip />
+    <!-- no translation found for crypt_keeper_setup_title (1783951453124244969) -->
+    <skip />
+    <!-- no translation found for crypt_keeper_setup_description (5169437210993176052) -->
+    <skip />
+    <!-- no translation found for crypt_keeper_setup_description (5672516169559235283) -->
+    <skip />
+    <!-- no translation found for crypt_keeper_cooldown (6736063610343230255) -->
     <skip />
     <!-- outdated translation 3973555216065628262 -->     <string name="lock_settings_picker_title" msgid="8665454308380158195">"画面のロック解除セキュリティ"</string>
     <!-- outdated translation 1129684221223017902 -->     <string name="unlock_set_unlock_launch_picker_title" msgid="4461562893699328786">"画面ロックの設定"</string>
@@ -653,12 +675,12 @@
     <string name="internal_memory" msgid="9129595691484260784">"内部ストレージ"</string>
     <string name="sd_memory" product="nosdcard" msgid="2510246194083052841">"USBストレージ"</string>
     <string name="sd_memory" product="default" msgid="151871913888051515">"SDカード"</string>
-    <string name="memory_available" msgid="418542433817289474">"空き容量"</string>
-    <string name="memory_size" msgid="6629067715017232195">"合計容量"</string>
+    <!-- outdated translation 418542433817289474 -->     <string name="memory_available" msgid="5052397223077021181">"空き容量"</string>
+    <!-- outdated translation 6629067715017232195 -->     <string name="memory_size" msgid="5458889090691922288">"合計容量"</string>
     <!-- no translation found for memory_calculating_size (2188358544203768588) -->
     <skip />
-    <string name="memory_apps_usage" msgid="5818922761412589352">"アプリケーションの使用状況"</string>
-    <string name="memory_media_usage" msgid="5655498435493764372">"メディアの使用状況"</string>
+    <!-- outdated translation 5818922761412589352 -->     <string name="memory_apps_usage" msgid="9079237985722858506">"アプリケーションの使用状況"</string>
+    <!-- outdated translation 5655498435493764372 -->     <string name="memory_media_usage" msgid="3738830697707880405">"メディアの使用状況"</string>
     <string name="sd_eject" product="nosdcard" msgid="4988563376492400073">"共有ストレージのマウントを解除"</string>
     <string name="sd_eject" product="default" msgid="6915293408836853020">"SDカードのマウント解除"</string>
     <string name="sd_eject_summary" product="nosdcard" msgid="5009296896648072891">"内部USBストレージのマウント解除"</string>
@@ -728,6 +750,8 @@
     <string name="master_clear_desc" product="tablet" msgid="1305457209008369655">"この操作を行うと、以下のデータを含む"<b>"内部ストレージ"</b>"の全データが消去されます:"\n\n<li>"Googleアカウント"</li>\n<li>"システムやアプリケーションのデータと設定"</li>\n<li>"ダウンロードしたアプリケーション"</li></string>
     <string name="master_clear_desc" product="default" msgid="2950536633526374209">"この操作を行うと、以下のデータを含む"<b>"内部ストレージ"</b>"の全データが消去されます:"\n\n<li>"Googleアカウント"</li>\n<li>"システムやアプリケーションのデータと設定"</li>\n<li>"ダウンロードしたアプリケーション"</li></string>
     <string name="master_clear_accounts" product="default" msgid="6412857499147999073">\n\n"以下のアカウントにログインしています:"\n</string>
+    <!-- no translation found for master_clear_desc_also_erases_external (1903185203791274237) -->
+    <skip />
     <string name="master_clear_desc_erase_external_storage" product="nosdcard" msgid="4740866328425123395">\n\n"音楽、写真、その他のユーザーデータも消去する場合は"<b>"USBストレージ"</b>"を消去する必要があります。"</string>
     <!-- outdated translation 4740866328425123395 -->     <string name="master_clear_desc_erase_external_storage" product="default" msgid="7339100478676372901">\n\n"音楽、写真、その他のユーザーデータも消去する場合は"<b>"USBストレージ"</b>"を消去する必要があります。"</string>
     <string name="erase_external_storage" product="nosdcard" msgid="969364037450286809">"USBストレージ内データの消去"</string>
@@ -1294,34 +1318,37 @@
     <string name="vpn_settings_summary" msgid="8849924181594963972">"VPNの設定と管理"</string>
     <string name="vpn_secret_unchanged" msgid="8700613973594154529">"（変更なし）"</string>
     <string name="vpn_secret_not_set" msgid="1037792636371641845">"（未設定）"</string>
-    <string name="credentials_category" msgid="8536992056377271234">"認証情報ストレージ"</string>
+    <!-- no translation found for credentials_title (4446234003860769883) -->
+    <skip />
     <string name="credentials_access" msgid="4843187230913860492">"安全な認証情報の使用"</string>
     <string name="credentials_access_summary" msgid="319662078718574168">"安全な証明書と他の認証情報へのアクセスをアプリケーションに許可する"</string>
-    <string name="credentials_unlock" msgid="1463040326264133844">"パスワードを入力する"</string>
-    <string name="credentials_unlock_hint" msgid="594679530407918031">"認証情報ストレージパスワードを入力します。"</string>
-    <string name="credentials_install_certificates" product="nosdcard" msgid="619171634797689906">"USBストレージからのインストール"</string>
-    <string name="credentials_install_certificates" product="default" msgid="177337517568022236">"SDカードからインストール"</string>
-    <string name="credentials_install_certificates_summary" product="nosdcard" msgid="8920330112631198575">"USBストレージから暗号化された証明書をインストール"</string>
-    <string name="credentials_install_certificates_summary" product="default" msgid="7737001268684193093">"暗号化された証明書をSDカードからインストールする"</string>
+    <!-- no translation found for credentials_install (1395748667227729987) -->
+    <skip />
+    <!-- no translation found for credentials_install (953914549998062317) -->
+    <skip />
+    <!-- no translation found for credentials_install_summary (3679446246093149828) -->
+    <skip />
+    <!-- no translation found for credentials_install_summary (5737658257407822713) -->
+    <skip />
     <string name="credentials_set_password" msgid="9104473585811899989">"パスワードの設定"</string>
-    <string name="credentials_set_password_summary" msgid="8287876917562085701">"認証情報ストレージパスワードを設定または変更する"</string>
-    <string name="credentials_reset" msgid="9170150870552453457">"ストレージの消去"</string>
-    <string name="credentials_reset_summary" msgid="1530388094693731636">"認証情報ストレージのすべてのコンテンツを消去してパスワードをリセットする"</string>
-    <string name="credentials_reset_hint" msgid="819990295796804516">"すべての認証情報を削除して認証情報ストレージパスワードをリセットしてもよろしいですか？"</string>
+    <!-- outdated translation 8287876917562085701 -->     <string name="credentials_set_password_summary" msgid="6756719720826053228">"認証情報ストレージパスワードを設定または変更する"</string>
+    <!-- outdated translation 9170150870552453457 -->     <string name="credentials_reset" msgid="3239382277144980418">"ストレージの消去"</string>
+    <!-- outdated translation 1530388094693731636 -->     <string name="credentials_reset_summary" msgid="3810369467217453606">"認証情報ストレージのすべてのコンテンツを消去してパスワードをリセットする"</string>
+    <string name="credentials_unlock" msgid="1463040326264133844">"パスワードを入力する"</string>
+    <!-- outdated translation 594679530407918031 -->     <string name="credentials_unlock_hint" msgid="5889551635843338639">"認証情報ストレージパスワードを入力します。"</string>
+    <!-- no translation found for credentials_password_hint (4915128717409363024) -->
+    <skip />
     <string name="credentials_old_password" msgid="7553393815538684028">"現在のパスワード:"</string>
     <string name="credentials_new_password" msgid="267487774686796938">"新しいパスワード:"</string>
     <string name="credentials_confirm_password" msgid="4732250000633424345">"新しいパスワードの確認:"</string>
-    <string name="credentials_first_time_hint" msgid="1567821077545346039">"認証情報ストレージのパスワードを設定します（8文字以上）。"</string>
-    <string name="credentials_wrong_password" msgid="7525192410790152041">"正しいパスワードを入力してください。"</string>
-    <string name="credentials_reset_warning" msgid="6392481296673345268">"正しいパスワードを入力してください。パスワードの入力にもう1回失敗すると、認証情報ストレージが消去されます。"</string>
-    <string name="credentials_reset_warning_plural" msgid="454828369803055270">"正しいパスワードを入力してください。パスワードの入力にあと<xliff:g id="NUMBER">%1$d</xliff:g>回失敗すると、認証情報ストレージが消去されます。"</string>
+    <!-- outdated translation 819990295796804516 -->     <string name="credentials_reset_hint" msgid="2336340927894094814">"すべての認証情報を削除して認証情報ストレージパスワードをリセットしてもよろしいですか？"</string>
     <string name="credentials_passwords_mismatch" msgid="5288565139590031733">"パスワードが一致しません。"</string>
-    <string name="credentials_passwords_empty" msgid="8647631321684363549">"パスワードを入力して確認する必要があります。"</string>
-    <string name="credentials_password_empty" msgid="8292138152983330473">"パスワードを入力してください。"</string>
-    <string name="credentials_password_too_short" msgid="7502749986405522663">"パスワードを8文字以上で入力してください。"</string>
-    <string name="credentials_erased" msgid="7700309135582200849">"認証情報ストレージが消去されました。"</string>
+    <!-- outdated translation 7525192410790152041 -->     <string name="credentials_wrong_password" msgid="2541932597104054807">"正しいパスワードを入力してください。"</string>
+    <!-- outdated translation 6392481296673345268 -->     <string name="credentials_reset_warning" msgid="5320653011511797600">"正しいパスワードを入力してください。パスワードの入力にもう1回失敗すると、認証情報ストレージが消去されます。"</string>
+    <!-- no translation found for credentials_reset_warning_plural (6514085665301095279) -->
+    <skip />
+    <!-- outdated translation 7700309135582200849 -->     <string name="credentials_erased" msgid="2907836028586342969">"認証情報ストレージが消去されました。"</string>
     <string name="credentials_enabled" msgid="7588607413349978930">"認証情報ストレージが有効になりました。"</string>
-    <string name="credentials_disabled" msgid="7453188089059045380">"認証情報ストレージが無効になりました。"</string>
     <string name="emergency_tone_title" msgid="1055954530111587114">"緊急時の音"</string>
     <string name="emergency_tone_summary" msgid="722259232924572153">"緊急通報時の動作を設定します"</string>
     <string name="privacy_settings" msgid="9206631214140954954">"プライバシー"</string>
@@ -1380,7 +1407,11 @@
     <string name="wifi_setup_status_connecting" msgid="2594117697215042584">"接続中..."</string>
     <string name="wifi_setup_status_proceed_to_next" msgid="9071951312604559022">"次の手順に進む"</string>
     <string name="wifi_setup_status_eap_not_supported" msgid="3196386445567501484">"EAPはサポートされていません"</string>
-    <string name="wifi_setup_eap_not_supported" msgid="5083895763075722698">"設定時にはEAP Wi-Fi接続を設定できません。設定の完了後に[設定]の[無線とネットワーク]で設定することができます。"</string>
+    <!-- outdated translation 5083895763075722698 -->     <string name="wifi_setup_eap_not_supported" msgid="683540356393542939">"設定時にはEAP Wi-Fi接続を設定できません。設定の完了後に[設定]の[無線とネットワーク]で設定することができます。"</string>
+    <!-- no translation found for wifi_setup_description_connecting (1884664966455980182) -->
+    <skip />
+    <!-- no translation found for wifi_setup_description_connected (5235991893829582459) -->
+    <skip />
     <string name="account_sync_settings_title" msgid="4578227872921044660">"同期設定"</string>
     <string name="sync_is_failing" msgid="1591561768344128377">"現在同期で問題が発生しています。しばらくお待ちください。"</string>
     <string name="add_account_label" msgid="7811707265834013767">"アカウントを追加"</string>
@@ -1440,5 +1471,7 @@
     <!-- no translation found for enter_password (3268224850821675915) -->
     <skip />
     <!-- no translation found for try_again (5904121494468643129) -->
+    <skip />
+    <!-- no translation found for service_busy (225227519012409130) -->
     <skip />
 </resources>

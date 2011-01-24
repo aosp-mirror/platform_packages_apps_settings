@@ -113,6 +113,10 @@
     <string name="bluetooth_notif_title" msgid="2485175521845371514">"Kahilingan sa pagpares"</string>
     <!-- no translation found for bluetooth_notif_message (618099089987569242) -->
     <skip />
+    <!-- no translation found for bluetooth_show_received_files_title (816172853268536399) -->
+    <skip />
+    <!-- no translation found for bluetooth_show_received_files_summary (7322193220909480775) -->
+    <skip />
     <string name="device_picker" msgid="8721012448931226323">"Tagapili ng device ng bluetooth"</string>
     <string name="bluetooth_permission_request" msgid="1523129741266262748">"Kahilingan sa pahintulot ng bluetooth"</string>
     <string name="bluetooth_ask_enablement" msgid="8211158472876087588">"Humihiling ang application ng pahintulot na i-on ang Bluetooth. Gusto mo ba itong gawin?"</string>
@@ -238,7 +242,7 @@
     <string name="networks" msgid="6333316876545927039">"Pagpipilian ng operator"</string>
     <string name="sum_carrier_select" msgid="6648929373316748020">"Pumili ng network operator"</string>
     <string name="date_and_time_settings_title" msgid="3350640463596716780">"Petsa &amp; oras"</string>
-    <!-- no translation found for date_and_time_settings_title_setup_wizard (6493371065760315350) -->
+    <!-- no translation found for date_and_time_settings_title_setup_wizard (2391530758339384324) -->
     <skip />
     <string name="date_and_time_settings_summary" msgid="2435705040205950381">"Itakda ang petsa, oras, time zone &amp; mga format"</string>
     <string name="date_time_auto" msgid="7076906458515908345">"Awto petsa &amp; oras"</string>
@@ -268,38 +272,51 @@
     <string name="security_settings_summary" msgid="967393342537986570">"Itakda ang Aking Lokasyon, pag-unlock ng screen, lock ng SIM card, lock ng imbakan ng kredensyal"</string>
     <string name="cdma_security_settings_summary" msgid="6068799952798901542">"Itakda ang Aking Lokasyon, pag-unlock ng screen, lock ng imbakan ng kredensyal"</string>
     <string name="security_passwords_title" msgid="2930627259125138363">"Mga Password"</string>
-    <!-- no translation found for encryption_settings_title (5951475460321369092) -->
+    <!-- no translation found for crypt_keeper_settings_title (2288841695457542418) -->
     <skip />
-    <!-- no translation found for encrypt_title (5458306603524656835) -->
+    <!-- no translation found for crypt_keeper_encrypt_title (5790930764432654508) -->
     <skip />
-    <!-- no translation found for encrypt_summary (6950523460019506111) -->
+    <!-- no translation found for crypt_keeper_encrypt_summary (1447090863225003474) -->
     <skip />
-    <!-- outdated translation 3973555216065628262 -->     <string name="lock_settings_picker_title" msgid="8665454308380158195">"Security sa pag-unlock ng screen"</string>
-    <!-- outdated translation 1129684221223017902 -->     <string name="unlock_set_unlock_launch_picker_title" msgid="4461562893699328786">"I-set up ang lock ng screen"</string>
+    <!-- no translation found for crypt_keeper_confirm_title (8300073420086568022) -->
+    <skip />
+    <!-- no translation found for crypt_keeper_desc (3806424855201189058) -->
+    <skip />
+    <!-- no translation found for crypt_keeper_button_text (1189623490604750854) -->
+    <skip />
+    <!-- no translation found for crypt_keeper_button_text (2008346408473255519) -->
+    <skip />
+    <!-- no translation found for crypt_keeper_final_desc (4150888307809341579) -->
+    <skip />
+    <!-- no translation found for crypt_keeper_setup_title (1783951453124244969) -->
+    <skip />
+    <!-- no translation found for crypt_keeper_setup_description (5169437210993176052) -->
+    <skip />
+    <!-- no translation found for crypt_keeper_setup_description (5672516169559235283) -->
+    <skip />
+    <!-- no translation found for crypt_keeper_cooldown (6736063610343230255) -->
+    <skip />
+    <string name="lock_settings_picker_title" msgid="8665454308380158195">"I-configure ang screen ng lock"</string>
+    <string name="unlock_set_unlock_launch_picker_title" msgid="4461562893699328786">"I-configure ang screen ng lock"</string>
     <string name="unlock_set_unlock_launch_picker_change_title" msgid="6987228635944678726">"Baguhin ang lock ng screen"</string>
     <string name="unlock_set_unlock_launch_picker_change_summary" msgid="2790960639554590668">"Baguhin o huwag paganahin ang pattern, PIN, o seguridad ng password"</string>
     <string name="unlock_set_unlock_launch_picker_enable_summary" msgid="4791110798817242301">"Pumili ng paraan ng pag-lock ng screen"</string>
     <string name="unlock_set_unlock_off_title" msgid="1613932765246180079">"Naka-off"</string>
-    <!-- outdated translation 2992485517488881365 -->     <string name="unlock_set_unlock_off_summary" msgid="2791013557563587655">"Huwag ipakita ang naka-lock na screen"</string>
-    <!-- outdated translation 3760684669884671990 -->     <string name="unlock_set_unlock_none_title" msgid="5165705762615690332">"Wala"</string>
-    <!-- outdated translation 2658550480388272618 -->     <string name="unlock_set_unlock_none_summary" msgid="2609139908913114644">"Huwag paganahin ang seguridad sa pag-unlock ng screen"</string>
+    <string name="unlock_set_unlock_off_summary" msgid="2791013557563587655">"Huwag kailanman i-lock ang screen"</string>
+    <string name="unlock_set_unlock_none_title" msgid="5165705762615690332">"Hindi secure"</string>
+    <string name="unlock_set_unlock_none_summary" msgid="2609139908913114644">"Hindi nangangailangan ng isang pattern, PIN, o password upang ma-unlock ang screen"</string>
     <string name="unlock_set_unlock_pattern_title" msgid="2912067603917311700">"Pattern"</string>
-    <!-- outdated translation 3018395214738645405 -->     <string name="unlock_set_unlock_pattern_summary" msgid="8467282436608077882">"Kumuha ng pattern upang ma-unlock ang screen"</string>
+    <string name="unlock_set_unlock_pattern_summary" msgid="8467282436608077882">"Nangangailangan ng pattern upang i-unlock ang screen"</string>
     <string name="unlock_set_unlock_pin_title" msgid="5846029709462329515">"PIN"</string>
-    <!-- outdated translation 4131169672844263316 -->     <string name="unlock_set_unlock_pin_summary" msgid="5556722736289132512">"Magpasok ng numeric na PIN upang ma-unlock ang screen"</string>
+    <string name="unlock_set_unlock_pin_summary" msgid="5556722736289132512">"Nangangailangan ng numeric na PIN upang i-unlock ang screen"</string>
     <string name="unlock_set_unlock_password_title" msgid="8775603825675090937">"Password"</string>
-    <!-- outdated translation 4623254789833899286 -->     <string name="unlock_set_unlock_password_summary" msgid="7871968012198279034">"Magpasok ng password upang ma-unlock ang screen"</string>
+    <string name="unlock_set_unlock_password_summary" msgid="7871968012198279034">"Nangangailangan ng password upang i-unlock ang screen"</string>
     <string name="unlock_set_unlock_disabled_summary" msgid="8816944391772300580">"Hindi pinagana ng administrator ng remote device"</string>
-    <!-- no translation found for unlock_set_unlock_mode_off (378729687629105388) -->
-    <skip />
-    <!-- no translation found for unlock_set_unlock_mode_none (7953821968316697309) -->
-    <skip />
-    <!-- no translation found for unlock_set_unlock_mode_pattern (464022606293547390) -->
-    <skip />
-    <!-- no translation found for unlock_set_unlock_mode_pin (1379365142708807163) -->
-    <skip />
-    <!-- no translation found for unlock_set_unlock_mode_password (6955742995327081060) -->
-    <skip />
+    <string name="unlock_set_unlock_mode_off" msgid="378729687629105388">"Naka-off"</string>
+    <string name="unlock_set_unlock_mode_none" msgid="7953821968316697309">"Hindi secure"</string>
+    <string name="unlock_set_unlock_mode_pattern" msgid="464022606293547390">"Naka-secure na may pattern"</string>
+    <string name="unlock_set_unlock_mode_pin" msgid="1379365142708807163">"Naka-secure na may PIN"</string>
+    <string name="unlock_set_unlock_mode_password" msgid="6955742995327081060">"Naka-secure na may password"</string>
     <string name="unlock_disable_lock_title" msgid="1427036227416979120">"I-off ang lock ng screen"</string>
     <string name="unlock_disable_lock_pattern_summary" msgid="6801602880568869201">"Alisin ang naka-unlock na pattern"</string>
     <string name="unlock_disable_lock_pin_summary" msgid="8856842745366993387">"Alisin ang naka-unlock na PIN"</string>
@@ -647,12 +664,11 @@
     <string name="internal_memory" msgid="9129595691484260784">"Panloob imbakan"</string>
     <string name="sd_memory" product="nosdcard" msgid="2510246194083052841">"Imbakan na USB"</string>
     <string name="sd_memory" product="default" msgid="151871913888051515">"SD card"</string>
-    <string name="memory_available" msgid="418542433817289474">"Available na espasyo"</string>
-    <string name="memory_size" msgid="6629067715017232195">"Kabuuang espasyo"</string>
-    <!-- no translation found for memory_calculating_size (2188358544203768588) -->
-    <skip />
-    <string name="memory_apps_usage" msgid="5818922761412589352">"Paggamit ng application"</string>
-    <string name="memory_media_usage" msgid="5655498435493764372">"Paggamit ng media"</string>
+    <!-- outdated translation 418542433817289474 -->     <string name="memory_available" msgid="5052397223077021181">"Available na espasyo"</string>
+    <!-- outdated translation 6629067715017232195 -->     <string name="memory_size" msgid="5458889090691922288">"Kabuuang espasyo"</string>
+    <string name="memory_calculating_size" msgid="2188358544203768588">"Kinakalkula..."</string>
+    <!-- outdated translation 5818922761412589352 -->     <string name="memory_apps_usage" msgid="9079237985722858506">"Paggamit ng application"</string>
+    <!-- outdated translation 5655498435493764372 -->     <string name="memory_media_usage" msgid="3738830697707880405">"Paggamit ng media"</string>
     <string name="sd_eject" product="nosdcard" msgid="4988563376492400073">"Unmount nabahagi imbakan"</string>
     <string name="sd_eject" product="default" msgid="6915293408836853020">"I-unmount ang SD card"</string>
     <string name="sd_eject_summary" product="nosdcard" msgid="5009296896648072891">"I-unmount panloob USB storage"</string>
@@ -666,7 +682,7 @@
     <string name="sd_format" product="nosdcard" msgid="2148179271623099054">"Burahin imbakan na USB"</string>
     <string name="sd_format" product="default" msgid="2576054280507119870">"Burahin ang SD card"</string>
     <string name="sd_format_summary" product="nosdcard" msgid="6331905044907914603">"Buburahin lahat ng data sa panloob na imbakan na USB, gaya ng musika at larawan"</string>
-    <string name="sd_format_summary" product="default" msgid="212703692181793109">"Buburahin ang lahat ng data sa SD card, gaya ng musika at mga larawan"</string>
+    <string name="sd_format_summary" product="default" msgid="212703692181793109">"Binubura ang lahat ng data sa SD card, gaya ng mga musika at larawan"</string>
     <string name="sd_unavailable" msgid="8580107589533213904">"Hindi available"</string>
     <string name="read_only" msgid="6702420168629076340">" (Read-only)"</string>
     <string name="dlg_confirm_unmount_title" product="nosdcard" msgid="2349876662428231297">"I-unmount imbakan na USB"</string>
@@ -722,6 +738,8 @@
     <string name="master_clear_desc" product="tablet" msgid="1305457209008369655">"Buburahin nito ang lahat ng data mula sa "<b>"panloob na imbakan"</b>" ng iyong telepono, kabilang ang:"\n\n<li>"Iyong Google account"</li>\n<li>"Mga data at setting ng system at application"</li>\n<li>"Mga na-download na application"</li></string>
     <string name="master_clear_desc" product="default" msgid="2950536633526374209">"Buburahin nito ang lahat ng data mula sa "<b>"panloob na imbakan"</b>" ng iyong telepono, kabilang ang:"\n\n<li>"Iyong Google account"</li>\n<li>"Mga data at setting ng system at application"</li>\n<li>"Mga na-download na application"</li></string>
     <string name="master_clear_accounts" product="default" msgid="6412857499147999073">\n\n"Kasalukuyan kang naka-sign in sa mga sumusunod na account:"\n</string>
+    <!-- no translation found for master_clear_desc_also_erases_external (1903185203791274237) -->
+    <skip />
     <string name="master_clear_desc_erase_external_storage" product="nosdcard" msgid="4740866328425123395">\n\n"Upang i-clear din ang musika, mga larawan, at ibang data ng user, kailangang mabura ang "<b>"imbakan na USB"</b>"."</string>
     <string name="master_clear_desc_erase_external_storage" product="default" msgid="7339100478676372901">\n\n"Upang i-clear din ang musika, mga larawan, at ibang data ng user, kailangang mabura ang "<b>"SD card"</b>"."</string>
     <string name="erase_external_storage" product="nosdcard" msgid="969364037450286809">"Burahin ang imbakan na USB"</string>
@@ -796,9 +814,9 @@
     <string name="assisted_gps" msgid="4649317129586736885">"Gamitin ang may tulong na GPS"</string>
     <string name="assisted_gps_enabled" msgid="8751899609589792803">"Gumamit ng server upang tulungan ang GPS (alisan ng check upang pababain ang paggamit ng network)"</string>
     <string name="assisted_gps_disabled" msgid="6982698333968010748">"Gumamit ng server upang tulungan ang GPS (alisan ng check upang mapagbuti ang pagganap ng GPS)"</string>
-    <!-- outdated translation 3214740644957841179 -->     <string name="use_location_title" msgid="3659340070401464551">"Gamitin ang lokasyon para sa paghahanap sa Google"</string>
-    <!-- outdated translation 1876901471649359806 -->     <string name="use_location_summary_disabled" msgid="6518008620918354403">"Gamitin ang lokasyon para sa paghahanap sa Google at ibang mga serbisyo ng Google"</string>
-    <!-- outdated translation 984549156918597265 -->     <string name="use_location_summary_enabled" msgid="8110246289085796179">"Lokasyong ginamit upang mapabuti mga resulta ng paghahanap ng Google at mga ibang serbisyo ng Google"</string>
+    <string name="use_location_title" msgid="3659340070401464551">"Gamitin ang lokasyon para sa Paghahanap sa Google"</string>
+    <string name="use_location_summary_disabled" msgid="6518008620918354403">"Gamitin ang lokasyon para sa Paghahanap sa Google at ibang mga serbisyo ng Google"</string>
+    <string name="use_location_summary_enabled" msgid="8110246289085796179">"Lokasyong ginagamit upang mapabuti ang mga resulta ng Paghahanap sa Google at iba pang mga serbisyo ng Google"</string>
     <string name="about_settings" product="tablet" msgid="593457295516533765">"Tungkol sa tablet"</string>
     <string name="about_settings" product="default" msgid="1743378368185371685">"Tungkol sa telepono"</string>
     <string name="about_settings_summary" msgid="3371517697156165959">"Tingnan ang impormasyong legal, katayuan, bersyon ng software"</string>
@@ -859,10 +877,7 @@
     <string name="next_button_label" msgid="8890792540116568321">"Susunod"</string>
     <string name="lock_title" product="tablet" msgid="2909697418179419990">"Sine-secure ang iyong tablet"</string>
     <string name="lock_title" product="default" msgid="4059246467204273930">"Pag-secure ng iyong telepono"</string>
-    <!-- unknown placeholder TAG_FONT_0 in lock_intro_message -->
-    <skip />
-    <!-- no translation found for lock_intro_message (3692151094288835065) -->
-    <skip />
+    <string name="lock_intro_message" product="tablet" msgid="3692151094288835065">"Protektahan ang iyong tablet mula sa walang pahintulot na paggamit sa pamamagitan ng paglikha ng isang personal na pattern ng pag-unlock ng screen. Gamitin ang iyong daliri upang ikonekta ang mga tuldok sa anumang order sa susunod na screen. Dapat mong ikonekta ang hindi bababa sa apat na tuldok. "\n\n"Handa nang magsimula? Pindutin ang \"Susunod\"."</string>
     <string name="lock_intro_message" product="default" msgid="9100785646737118042"><font size="17">"Protektahan ang iyong telepono mula sa walang pahintulot na paggamit sa pamamagitan ng paglikha ng personal na pattern. "\n<font height="17">\n</font><b>"1"</b>"  Sa susunod na screen, manood habang kinukuha ang pattern ng halimbawa. "\n<font height="17">\n</font><b>"2"</b>"  Kapag handa na, kumuha ng iyong sariling personal na naka-unlock na pattern. Eksperimento na may iba\'t ibang mga pattern ngunit magkonekta nang hindi bababa sa apat na tuldok. "\n<font height="17">\n</font><b>"3"</b>"  Muling kunin ang iyong pattern upang makumpirma. "\n<font height="17">\n</font><b>"Handa nang magsimula? Piliin ang “Susunod”"</b>". "\n<font height="3">\n</font>"Upang iwanang hindi protektado ang iyong telepono, piliin ang “Kanselahin”."</font></string>
     <string name="manageapplications_settings_title" msgid="5712405848153426706">"Pamahalaan ang mga application"</string>
     <string name="manageapplications_settings_summary" msgid="6097117021500651232">"Pamahalaan at alisin ang naka-install na mga application"</string>
@@ -1290,34 +1305,37 @@
     <string name="vpn_settings_summary" msgid="8849924181594963972">"I-set up &amp; pamahalaan ang Mga Virtual Private Networks (mga VPN)"</string>
     <string name="vpn_secret_unchanged" msgid="8700613973594154529">"(di-nabago)"</string>
     <string name="vpn_secret_not_set" msgid="1037792636371641845">"(hindi nakatakda)"</string>
-    <string name="credentials_category" msgid="8536992056377271234">"Imbakan ng kredensyal"</string>
+    <!-- no translation found for credentials_title (4446234003860769883) -->
+    <skip />
     <string name="credentials_access" msgid="4843187230913860492">"Gumamit ng mga secure na kredensyal"</string>
     <string name="credentials_access_summary" msgid="319662078718574168">"Payagan ang mga application upang ma-access ang mga secure na certificate at iba pang mga kredensyal"</string>
-    <string name="credentials_unlock" msgid="1463040326264133844">"Magpasok ng password"</string>
-    <string name="credentials_unlock_hint" msgid="594679530407918031">"Ipasok ang password ng imbakan ng kredensyal."</string>
-    <string name="credentials_install_certificates" product="nosdcard" msgid="619171634797689906">"Install sa imbakan na USB"</string>
-    <string name="credentials_install_certificates" product="default" msgid="177337517568022236">"I-install mula sa SD card"</string>
-    <string name="credentials_install_certificates_summary" product="nosdcard" msgid="8920330112631198575">"Install na-encrypt certificate mula USB storage"</string>
-    <string name="credentials_install_certificates_summary" product="default" msgid="7737001268684193093">"I-install ang mga naka-encrypt na certificate mula sa SD card"</string>
+    <!-- no translation found for credentials_install (1395748667227729987) -->
+    <skip />
+    <!-- no translation found for credentials_install (953914549998062317) -->
+    <skip />
+    <!-- no translation found for credentials_install_summary (3679446246093149828) -->
+    <skip />
+    <!-- no translation found for credentials_install_summary (5737658257407822713) -->
+    <skip />
     <string name="credentials_set_password" msgid="9104473585811899989">"Itakda ang password"</string>
-    <string name="credentials_set_password_summary" msgid="8287876917562085701">"Itakda o baguhin ang password ng imbakan ng kredensyal"</string>
-    <string name="credentials_reset" msgid="9170150870552453457">"I-clear ang imbakan"</string>
-    <string name="credentials_reset_summary" msgid="1530388094693731636">"I-clear ang imbakan ng kredensyal ng lahat ng mga nilalaman at i-reset ang password nito"</string>
-    <string name="credentials_reset_hint" msgid="819990295796804516">"Sigurado ka bang gusto mong tanggalin ang lahat ng mga kredensyal at i-reset ang password ng imbakan ng kredensyal?"</string>
+    <!-- outdated translation 8287876917562085701 -->     <string name="credentials_set_password_summary" msgid="6756719720826053228">"Itakda o baguhin ang password ng imbakan ng kredensyal"</string>
+    <!-- outdated translation 9170150870552453457 -->     <string name="credentials_reset" msgid="3239382277144980418">"I-clear ang imbakan"</string>
+    <!-- outdated translation 1530388094693731636 -->     <string name="credentials_reset_summary" msgid="3810369467217453606">"I-clear ang imbakan ng kredensyal ng lahat ng mga nilalaman at i-reset ang password nito"</string>
+    <string name="credentials_unlock" msgid="1463040326264133844">"Magpasok ng password"</string>
+    <!-- outdated translation 594679530407918031 -->     <string name="credentials_unlock_hint" msgid="5889551635843338639">"Ipasok ang password ng imbakan ng kredensyal."</string>
+    <!-- no translation found for credentials_password_hint (4915128717409363024) -->
+    <skip />
     <string name="credentials_old_password" msgid="7553393815538684028">"Kasalukuyang password:"</string>
     <string name="credentials_new_password" msgid="267487774686796938">"Bagong password:"</string>
     <string name="credentials_confirm_password" msgid="4732250000633424345">"Kumpirmahin ang bagong password:"</string>
-    <string name="credentials_first_time_hint" msgid="1567821077545346039">"Magtakda ng password para sa imbakan ng kredensyal (hindi bababa sa 8 character)."</string>
-    <string name="credentials_wrong_password" msgid="7525192410790152041">"Pakiipasok ang tamang password."</string>
-    <string name="credentials_reset_warning" msgid="6392481296673345268">"Pakipasok ang tamang password. Mayroon ka pang isang pagsubok upang ipasok ang tamang password bago mabura ang imbakan ng kredensyal."</string>
-    <string name="credentials_reset_warning_plural" msgid="454828369803055270">"Pakipasok ang tamang password. Mayroon kang <xliff:g id="NUMBER">%1$d</xliff:g> na mga pagsubok upang ipasok ang tamang password bago mabura ang imbakan ng kredensyal."</string>
+    <!-- outdated translation 819990295796804516 -->     <string name="credentials_reset_hint" msgid="2336340927894094814">"Sigurado ka bang gusto mong tanggalin ang lahat ng mga kredensyal at i-reset ang password ng imbakan ng kredensyal?"</string>
     <string name="credentials_passwords_mismatch" msgid="5288565139590031733">"Hindi tumutugma ang iyong mga password."</string>
-    <string name="credentials_passwords_empty" msgid="8647631321684363549">"Dapat kang magpasok at magkumpirma ng password."</string>
-    <string name="credentials_password_empty" msgid="8292138152983330473">"Pakipasok ang password."</string>
-    <string name="credentials_password_too_short" msgid="7502749986405522663">"Dapat na may hindi bababa sa 8 character ang password."</string>
-    <string name="credentials_erased" msgid="7700309135582200849">"Binura ang imbakan ng kredensyal."</string>
+    <!-- outdated translation 7525192410790152041 -->     <string name="credentials_wrong_password" msgid="2541932597104054807">"Pakiipasok ang tamang password."</string>
+    <!-- outdated translation 6392481296673345268 -->     <string name="credentials_reset_warning" msgid="5320653011511797600">"Pakipasok ang tamang password. Mayroon ka pang isang pagsubok upang ipasok ang tamang password bago mabura ang imbakan ng kredensyal."</string>
+    <!-- no translation found for credentials_reset_warning_plural (6514085665301095279) -->
+    <skip />
+    <!-- outdated translation 7700309135582200849 -->     <string name="credentials_erased" msgid="2907836028586342969">"Binura ang imbakan ng kredensyal."</string>
     <string name="credentials_enabled" msgid="7588607413349978930">"Pinagana ang imbakan ng kredensyal."</string>
-    <string name="credentials_disabled" msgid="7453188089059045380">"Hindi pinagana ang imbakan ng kredensyal."</string>
     <string name="emergency_tone_title" msgid="1055954530111587114">"Tonong pang-emergency"</string>
     <string name="emergency_tone_summary" msgid="722259232924572153">"Itakda ang pag-uugali kapag naganap ang isang pang-emergency na tawag"</string>
     <string name="privacy_settings" msgid="9206631214140954954">"Privacy"</string>
@@ -1377,7 +1395,11 @@
     <string name="wifi_setup_status_connecting" msgid="2594117697215042584">"Kumukonekta..."</string>
     <string name="wifi_setup_status_proceed_to_next" msgid="9071951312604559022">"Magpatuloy sa susunod na hakbang"</string>
     <string name="wifi_setup_status_eap_not_supported" msgid="3196386445567501484">"Hindi suportado ang EAP"</string>
-    <string name="wifi_setup_eap_not_supported" msgid="5083895763075722698">"Hindi mo maisasaayos ang koneksyon ng EAP Wi-Fi sa panahon ng pagse-setup.  Matapos mong mag-setup, magagawa mo iyon sa Mga Setting, sa ialim ng Wireless at Mga Network."</string>
+    <!-- outdated translation 5083895763075722698 -->     <string name="wifi_setup_eap_not_supported" msgid="683540356393542939">"Hindi mo maisasaayos ang koneksyon ng EAP Wi-Fi sa panahon ng pagse-setup.  Matapos mong mag-setup, magagawa mo iyon sa Mga Setting, sa ialim ng Wireless at Mga Network."</string>
+    <!-- no translation found for wifi_setup_description_connecting (1884664966455980182) -->
+    <skip />
+    <!-- no translation found for wifi_setup_description_connected (5235991893829582459) -->
+    <skip />
     <string name="account_sync_settings_title" msgid="4578227872921044660">"Mga setting ng pag-sync"</string>
     <!-- no translation found for sync_is_failing (1591561768344128377) -->
     <skip />
@@ -1444,5 +1466,7 @@
     <!-- no translation found for enter_password (3268224850821675915) -->
     <skip />
     <!-- no translation found for try_again (5904121494468643129) -->
+    <skip />
+    <!-- no translation found for service_busy (225227519012409130) -->
     <skip />
 </resources>

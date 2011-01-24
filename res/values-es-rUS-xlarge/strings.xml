@@ -78,19 +78,17 @@
     <!-- XL -->
     <string name="unlock_set_unlock_launch_picker_title" msgid="3679744779726501637">"Configurar bloqueo de pantalla"</string>
     <!-- XL -->
-    <string name="unlock_set_unlock_off_summary" msgid="7637549453338831016">"Nunca bloquear la pantalla"</string>
-    <!-- XL -->
-    <string name="unlock_set_unlock_none_title" msgid="8302920869082326280">"Sin asegurar"</string>
-    <!-- XL -->
-    <string name="unlock_set_unlock_none_summary" msgid="8836395154986917752">"No se necesita un patrón, PIN o contraseña para desbloquear la pantalla"</string>
-    <!-- XL -->
-    <string name="unlock_set_unlock_pattern_summary" msgid="7704094261502377451">"Solicitar un patrón para desbloquear la pantalla"</string>
-    <!-- XL -->
     <string name="unlock_set_unlock_pin_summary" msgid="8765565920176739681">"Se necesita PIN numérico para desbloquear la pantalla."</string>
     <!-- XL -->
-    <string name="unlock_set_unlock_password_summary" msgid="5551818803088356462">"Solicitar una contraseña para desbloquear la pantalla"</string>
-    <!-- XL -->
     <string name="unlock_set_unlock_disabled_summary" msgid="5962903914511361952">"Inhabilitado por el administrador remoto de la tableta"</string>
+    <!-- XL -->
+    <string name="unlock_set_unlock_mode_off" msgid="3083317055441778577">"Apagado"</string>
+    <!-- XL -->
+    <string name="unlock_set_unlock_mode_none" msgid="2265502443989071295">"Sin asegurar"</string>
+    <!-- XL -->
+    <string name="unlock_set_unlock_mode_pattern" msgid="891892061776325935">"Asegurado con patrón"</string>
+    <!-- XL -->
+    <string name="unlock_set_unlock_mode_pin" msgid="948449971660341581">"Asegurado con número de PIN"</string>
     <!-- XL -->
     <string name="unlock_disable_lock_title" msgid="4388312117226861970">"Desactivar bloqueo de pantalla"</string>
     <!-- XL -->
@@ -208,11 +206,16 @@
     <!-- XL -->
     <string name="storage_settings" msgid="5625705972110860801">"Almacenamiento"</string>
     <!-- XL -->
+    <!-- outdated translation 6839889533822270813 -->     <string name="memory_available" msgid="2250372286227226712">"Espacio disponible"</string>
+    <!-- XL -->
+    <!-- outdated translation 8153264935196755477 -->     <string name="memory_size" msgid="6983086310871445570">"Espacio total"</string>
+    <!-- XL -->
+    <!-- outdated translation 5551133116908528844 -->     <string name="memory_apps_usage" msgid="8811448341218797998">"Uso de la aplicación"</string>
+    <!-- XL -->
+    <!-- outdated translation 7087487384373911251 -->     <string name="memory_media_usage" msgid="5170819646588027284">"Uso de medios"</string>
+    <!-- XL -->
     <string name="sd_eject" product="nosdcard" msgid="2291329760090260835">"Desactivar alm. comp."</string>
     <string name="sd_eject" product="default" msgid="4218059792434713782">"Desinstalar tarjeta SD"</string>
-    <!-- XL -->
-    <string name="sd_format_summary" product="nosdcard" msgid="8577120345088226893">"Borra todos los datos del almacenamiento USB interno, como la música y las fotos"</string>
-    <string name="sd_format_summary" product="default" msgid="2457918992362105399">"Borra todos los datos de la tarjeta SD, como la música y las fotos"</string>
     <!-- XL -->
     <string name="dlg_confirm_unmount_title" product="nosdcard" msgid="7525607480940098908">"Desmontar almacenamiento USB"</string>
     <string name="dlg_confirm_unmount_title" product="default" msgid="4564499408967738533">"Desinstalar tarjeta SD"</string>
@@ -259,12 +262,6 @@
     <string name="location_street_level" msgid="6486055483162410201">"Cuando se esté ubicando, sea preciso hasta el nivel de la calle."</string>
     <!-- XL -->
     <string name="location_gps_disabled" msgid="368445950600796860">"Localizar a nivel de calle (necesita más batería además de la vista del cielo)"</string>
-    <!-- XL -->
-    <string name="use_location_title" msgid="6603235165943700077">"Utilizar la ubicación para buscar con Google"</string>
-    <!-- XL -->
-    <string name="use_location_summary_disabled" msgid="555010365449402016">"Utilizar la ubicación para buscar con Google y otros servicios de Google"</string>
-    <!-- XL -->
-    <string name="use_location_summary_enabled" msgid="5155029913791084058">"Ubicación utilizada para mejorar los resultados de la búsqueda y otros servicios de Google"</string>
     <!-- XL -->
     <string name="about_settings" product="tablet" msgid="4492242295431251939">"Acerca de la tableta"</string>
     <string name="about_settings" product="default" msgid="5642163368100089859">"Acerca del teléfono"</string>
@@ -412,8 +409,21 @@
     <!-- XL -->
     <string name="credentials_access" msgid="4979934961780740364">"Utilizar credenciales seguras"</string>
     <!-- XL -->
-    <string name="credentials_install_certificates" product="nosdcard" msgid="6544302303222468077">"Instalar desde almacenamiento USB"</string>
-    <string name="credentials_install_certificates" product="default" msgid="6102468185992800407">"Instalar desde la tarjeta SD"</string>
+    <!-- outdated translation 8064067664775886428 -->     <string name="credentials_set_password_summary" msgid="6532910468039853955">"Establecer o cambiar la contraseña de almacenamiento de la credencial"</string>
+    <!-- XL -->
+    <!-- outdated translation 3728395601619733515 -->     <string name="credentials_reset" msgid="7020999045067036284">"Borrar almacenamiento"</string>
+    <!-- XL -->
+    <!-- outdated translation 2127419861568976637 -->     <string name="credentials_reset_summary" msgid="4407401234092698607">"Borrar todo el contenido almac. en la credencial  y restabl. su contraseña"</string>
+    <!-- XL -->
+    <!-- outdated translation 1858983840871004055 -->     <string name="credentials_unlock_hint" msgid="7153855946306424663">"Ingresar la contraseña de almacenamiento de la credencial"</string>
+    <!-- XL -->
+    <!-- outdated translation 7883277320781857760 -->     <string name="credentials_reset_hint" msgid="176255916024372250">"¿Estás seguro de que deseas eliminar todas las credenciales y restablecer la contraseña de almacenamiento de la credencial?"</string>
+    <!-- XL -->
+    <!-- outdated translation 3713854485848035838 -->     <string name="credentials_wrong_password" msgid="7953966709016714412">"Ingresa la contraseña correcta."</string>
+    <!-- XL -->
+    <!-- outdated translation 9153795503043550217 -->     <string name="credentials_reset_warning" msgid="8081967217882002549">"Ingresa la contraseña correcta. Tienes una oportunidad más para ingresar la contraseña correcta antes de que el almacenamiento de la credencial se borre."</string>
+    <!-- XL -->
+    <!-- outdated translation 2375073444893796741 -->     <string name="credentials_erased" msgid="6805972374752714669">"El almacenamiento de la credencial se ha borrado."</string>
     <!-- XL -->
     <string name="backup_data_summary" msgid="1336378642693518890">"Copias de seguridad de los datos de la aplicación, de las contraseñas de Wi-Fi y otra configuración en los servidores de Google"</string>
     <!-- XL -->
@@ -429,7 +439,7 @@
     <!-- XL -->
     <string name="wifi_setup_status_eap_not_supported" msgid="2580119613877986130">"EAP no admitido"</string>
     <!-- XL -->
-    <string name="wifi_setup_eap_not_supported" msgid="518966154814708106">"No puedes configurar la conexión Wi-Fi de EAP durante la instalación. Después de la configuración, puedes hacerlo en Configuraciones, en Redes inalámbricas &amp; redes."</string>
+    <!-- outdated translation 518966154814708106 -->     <string name="wifi_setup_eap_not_supported" msgid="5341982784987304155">"No puedes configurar la conexión Wi-Fi de EAP durante la instalación. Después de la configuración, puedes hacerlo en Configuraciones, en Redes inalámbricas &amp; redes."</string>
     <!-- XL -->
     <string name="background_data_summary" msgid="1261820775251511583">"Las aplic. pueden sinc., env. y recibir datos en cualq. mom."</string>
     <!-- XL -->
@@ -440,23 +450,9 @@
     <!-- XL -->
     <string name="bluetooth_auto_connect" msgid="5635834571497957651">"Conectar automáticamente"</string>
     <!-- XL -->
+    <!-- outdated translation 3840619834626403239 -->     <string name="date_and_time_settings_title_setup_wizard" msgid="8962151564060248021">"Configurar fecha y hora"</string>
+    <!-- XL -->
     <string name="lock_after_timeout_summary" msgid="1115580514157023005">"Bloquear pantalla <xliff:g id="TIMEOUT_STRING">%1$s</xliff:g> luego de que la pantalla se apague automáticamente"</string>
-    <!-- XL -->
-    <string name="encryption_settings_title" msgid="2646733014286658918">"Encriptación del dispositivo"</string>
-    <!-- XL -->
-    <string name="encrypt_title" msgid="6588721799092579532">"Encriptar datos en el dispositivo"</string>
-    <!-- XL -->
-    <string name="encrypt_summary" msgid="8034174282555891811">"Debes configurar un número de PIN o contraseña para desbloquear el dispositivo"</string>
-    <!-- XL -->
-    <string name="unlock_set_unlock_mode_off" msgid="3083317055441778577">"Apagado"</string>
-    <!-- XL -->
-    <string name="unlock_set_unlock_mode_none" msgid="2265502443989071295">"Sin asegurar"</string>
-    <!-- XL -->
-    <string name="unlock_set_unlock_mode_pattern" msgid="891892061776325935">"Asegurado con patrón"</string>
-    <!-- XL -->
-    <string name="unlock_set_unlock_mode_pin" msgid="948449971660341581">"Asegurado con número de PIN"</string>
-    <!-- XL -->
-    <string name="unlock_set_unlock_mode_password" msgid="527487918702728081">"Asegurado con contraseña"</string>
     <!-- XL -->
     <string name="lockpattern_tutorial_cancel_label" msgid="8891383231976441554">"Cancelar"</string>
     <!-- XL -->
@@ -478,9 +474,18 @@
     <!-- XL -->
     <string name="bluetooth_pan_profile_summary_use_for" msgid="7152329494274254683">"Utilizar para acceso a Internet"</string>
     <!-- XL -->
+    <string name="wifi_wps_setup_title" msgid="6945487824865897370">"Configuración de WPS"</string>
+    <!-- XL -->
+    <string name="wifi_wps_in_progress" msgid="2558234415910442127">"WPS ya está activado y puede tardar décimas de segundo en completarse."</string>
+    <!-- XL -->
+    <string name="wifi_wps_failed" msgid="7726760258505147875">"No se pudo iniciar WPS. Intenta nuevamente más tarde."</string>
+    <!-- XL -->
+    <string name="wifi_wps_overlap_error" msgid="5272275063214487061">"Se detectó otra sesión WPS. Intenta nuevamente en unos minutos."</string>
+    <!-- XL -->
     <string name="screen_timeout_summary" msgid="8423734042860540453">"La pantalla se apaga automáticamente después de <xliff:g id="TIMEOUT_DESCRIPTION">%1$s</xliff:g>"</string>
     <!-- XL -->
-    <string name="memory_calculating_size" msgid="4994844259856032553">"Calculando…"</string>
+    <string name="external_size_label" product="nosdcard" msgid="786653659770549163">"Almacenamiento USB"</string>
+    <string name="external_size_label" product="default" msgid="7651651416430323645">"Tarjeta SD"</string>
     <!-- XL -->
     <string name="current_input_method" msgid="1106006204280275670">"Método de entrada actual"</string>
     <!-- XL -->
@@ -505,6 +510,14 @@
     <string name="history_details_title" msgid="8910742461149938017">"Detalles del historial"</string>
     <!-- XL -->
     <string name="vpn_details_title" msgid="2756802240544287896">"Detalles de VPN"</string>
+    <!-- XL -->
+    <string name="wifi_setup_title_editing_network" msgid="2615598825563873731">"Conectarse a la red Wi-Fi<xliff:g id="NETWORK_NAME">%s</xliff:g>"</string>
+    <!-- XL -->
+    <string name="wifi_setup_title_connecting_network" msgid="7237722220567521122">"Conectando a la red Wi-Fi <xliff:g id="NETWORK_NAME">%s</xliff:g>..."</string>
+    <!-- XL -->
+    <string name="wifi_setup_title_connected_network" msgid="2648431475463903978">"Conectado una red Wi-Fi <xliff:g id="NETWORK_NAME">%s</xliff:g>"</string>
+    <!-- XL -->
+    <string name="wifi_setup_title_add_network" msgid="725322148218591950">"Agregar una red"</string>
     <!-- XL -->
     <string name="settings_backup_summary" msgid="111187787880535545">"Realizar copia de seguridad de mi configuración"</string>
     <!-- XL -->
