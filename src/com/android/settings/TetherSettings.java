@@ -16,7 +16,6 @@
 
 package com.android.settings;
 
-import com.android.settings.bluetooth.BluetoothSettings;
 import com.android.settings.wifi.WifiApEnabler;
 
 import android.app.Activity;
@@ -35,6 +34,10 @@ import android.os.Environment;
 import android.preference.CheckBoxPreference;
 import android.preference.Preference;
 import android.preference.PreferenceScreen;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.view.ViewParent;
 import android.webkit.WebView;
 
 import java.io.InputStream;
@@ -86,8 +89,10 @@ public class TetherSettings extends SettingsPreferenceFragment {
     }
 
     @Override
-    public void onActivityCreated(Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+            Bundle savedInstanceState) {
+        View view = super.onCreateView(inflater, container, savedInstanceState);
+
         final Activity activity = getActivity();
         mBluetoothPan = new BluetoothPan(activity);
 
@@ -107,7 +112,6 @@ public class TetherSettings extends SettingsPreferenceFragment {
         boolean usbAvailable = mUsbRegexs.length != 0;
         boolean wifiAvailable = mWifiRegexs.length != 0;
         boolean bluetoothAvailable = mBluetoothRegexs.length != 0;
-
 
         if (!usbAvailable || Utils.isMonkeyRunning()) {
             getPreferenceScreen().removePreference(mUsbTether);
@@ -144,6 +148,8 @@ public class TetherSettings extends SettingsPreferenceFragment {
         */
         mWifiApEnabler = new WifiApEnabler(activity, mEnableWifiAp);
         mView = new WebView(activity);
+
+        return view;
     }
 
     @Override
@@ -181,7 +187,11 @@ public class TetherSettings extends SettingsPreferenceFragment {
             }
 
             mView.loadUrl(url);
-
+            // Detach from old parent first
+            ViewParent parent = mView.getParent();
+            if (parent != null && parent instanceof ViewGroup) {
+                ((ViewGroup) parent).removeView(mView);
+            }
             return new AlertDialog.Builder(getActivity())
                 .setCancelable(true)
                 .setTitle(R.string.tethering_help_button_text)
