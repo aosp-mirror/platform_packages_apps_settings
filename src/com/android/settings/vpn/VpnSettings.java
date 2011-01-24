@@ -725,6 +725,8 @@ public class VpnSettings extends SettingsPreferenceFragment
     }
 
     private void startVpnEditor(final VpnProfile profile, boolean add) {
+        if (getActivity() == null) return;
+
         Bundle args = new Bundle();
         args.putParcelable(KEY_VPN_PROFILE, profile);
         // TODO: Show different titles for add and edit.
