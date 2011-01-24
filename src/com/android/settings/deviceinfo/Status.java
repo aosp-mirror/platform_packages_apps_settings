@@ -222,18 +222,13 @@ public class Status extends PreferenceActivity {
             removePreferenceFromScreen(KEY_MIN_NUMBER);
         }
 
-        // Remove the phone number preference if the device is not voice capable.
-        if (!Utils.isVoiceCapable(this)) {
-            removePreferenceFromScreen(KEY_PHONE_NUMBER);
-        } else {
-            String rawNumber = mPhone.getLine1Number();  // may be null or empty
-            String formattedNumber = null;
-            if (!TextUtils.isEmpty(rawNumber)) {
-                formattedNumber = PhoneNumberUtils.formatNumber(rawNumber);
-            }
-            // If formattedNumber is null or empty, it'll display as "Unknown".
-            setSummaryText(KEY_PHONE_NUMBER, formattedNumber);
+        String rawNumber = mPhone.getLine1Number();  // may be null or empty
+        String formattedNumber = null;
+        if (!TextUtils.isEmpty(rawNumber)) {
+            formattedNumber = PhoneNumberUtils.formatNumber(rawNumber);
         }
+        // If formattedNumber is null or empty, it'll display as "Unknown".
+        setSummaryText(KEY_PHONE_NUMBER, formattedNumber);
 
         mPhoneStateReceiver = new PhoneStateIntentReceiver(this, mHandler);
         mPhoneStateReceiver.notifySignalStrength(EVENT_SIGNAL_STRENGTH_CHANGED);
