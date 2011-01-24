@@ -114,6 +114,10 @@
     <string name="bluetooth_notif_title" msgid="2485175521845371514">"Żądanie parowania"</string>
     <!-- no translation found for bluetooth_notif_message (618099089987569242) -->
     <skip />
+    <!-- no translation found for bluetooth_show_received_files_title (816172853268536399) -->
+    <skip />
+    <!-- no translation found for bluetooth_show_received_files_summary (7322193220909480775) -->
+    <skip />
     <string name="device_picker" msgid="8721012448931226323">"Selektor urządzenia Bluetooth"</string>
     <string name="bluetooth_permission_request" msgid="1523129741266262748">"Prośba o pozwolenie na włączenie modułu Bluetooth"</string>
     <string name="bluetooth_ask_enablement" msgid="8211158472876087588">"Aplikacja prosi o pozwolenie na włączenie modułu Bluetooth. Czy chcesz na to zezwolić?"</string>
@@ -239,7 +243,7 @@
     <string name="networks" msgid="6333316876545927039">"Wybór operatora"</string>
     <string name="sum_carrier_select" msgid="6648929373316748020">"Wybierz operatora sieci"</string>
     <string name="date_and_time_settings_title" msgid="3350640463596716780">"Data i godzina"</string>
-    <!-- no translation found for date_and_time_settings_title_setup_wizard (6493371065760315350) -->
+    <!-- no translation found for date_and_time_settings_title_setup_wizard (2391530758339384324) -->
     <skip />
     <string name="date_and_time_settings_summary" msgid="2435705040205950381">"Ustaw format daty, godziny i strefę czasową"</string>
     <string name="date_time_auto" msgid="7076906458515908345">"Automatyczna data i godzina"</string>
@@ -269,38 +273,51 @@
     <string name="security_settings_summary" msgid="967393342537986570">"Ustaw funkcję Moja lokalizacja, odblokowywanie ekranu, blokadę karty SIM, blokadę magazynu danych logowania."</string>
     <string name="cdma_security_settings_summary" msgid="6068799952798901542">"Ustaw funkcję Moja lokalizacja, odblokowywanie ekranu, blokadę magazynu danych uwierzytelniania"</string>
     <string name="security_passwords_title" msgid="2930627259125138363">"Hasła"</string>
-    <!-- no translation found for encryption_settings_title (5951475460321369092) -->
+    <!-- no translation found for crypt_keeper_settings_title (2288841695457542418) -->
     <skip />
-    <!-- no translation found for encrypt_title (5458306603524656835) -->
+    <!-- no translation found for crypt_keeper_encrypt_title (5790930764432654508) -->
     <skip />
-    <!-- no translation found for encrypt_summary (6950523460019506111) -->
+    <!-- no translation found for crypt_keeper_encrypt_summary (1447090863225003474) -->
     <skip />
-    <!-- outdated translation 3973555216065628262 -->     <string name="lock_settings_picker_title" msgid="8665454308380158195">"Zabezpieczenie ekranu"</string>
-    <!-- outdated translation 1129684221223017902 -->     <string name="unlock_set_unlock_launch_picker_title" msgid="4461562893699328786">"Ustaw blokadę ekranu"</string>
+    <!-- no translation found for crypt_keeper_confirm_title (8300073420086568022) -->
+    <skip />
+    <!-- no translation found for crypt_keeper_desc (3806424855201189058) -->
+    <skip />
+    <!-- no translation found for crypt_keeper_button_text (1189623490604750854) -->
+    <skip />
+    <!-- no translation found for crypt_keeper_button_text (2008346408473255519) -->
+    <skip />
+    <!-- no translation found for crypt_keeper_final_desc (4150888307809341579) -->
+    <skip />
+    <!-- no translation found for crypt_keeper_setup_title (1783951453124244969) -->
+    <skip />
+    <!-- no translation found for crypt_keeper_setup_description (5169437210993176052) -->
+    <skip />
+    <!-- no translation found for crypt_keeper_setup_description (5672516169559235283) -->
+    <skip />
+    <!-- no translation found for crypt_keeper_cooldown (6736063610343230255) -->
+    <skip />
+    <string name="lock_settings_picker_title" msgid="8665454308380158195">"Konfiguruj blokadę ekranu"</string>
+    <string name="unlock_set_unlock_launch_picker_title" msgid="4461562893699328786">"Konfiguruj blokadę ekranu"</string>
     <string name="unlock_set_unlock_launch_picker_change_title" msgid="6987228635944678726">"Zmień ustawienia blokady ekranu"</string>
     <string name="unlock_set_unlock_launch_picker_change_summary" msgid="2790960639554590668">"Zmień lub wyłącz zabezpieczenie ekranu (wzór, PIN lub hasło)"</string>
     <string name="unlock_set_unlock_launch_picker_enable_summary" msgid="4791110798817242301">"Wybierz sposób blokowania ekranu"</string>
     <string name="unlock_set_unlock_off_title" msgid="1613932765246180079">"Wyłączone"</string>
-    <!-- outdated translation 2992485517488881365 -->     <string name="unlock_set_unlock_off_summary" msgid="2791013557563587655">"Nie pokazuj ekranu blokowania"</string>
-    <!-- outdated translation 3760684669884671990 -->     <string name="unlock_set_unlock_none_title" msgid="5165705762615690332">"Brak"</string>
-    <!-- outdated translation 2658550480388272618 -->     <string name="unlock_set_unlock_none_summary" msgid="2609139908913114644">"Wyłącz zabezpieczenie ekranu"</string>
+    <string name="unlock_set_unlock_off_summary" msgid="2791013557563587655">"Nigdy nie blokuj ekranu"</string>
+    <string name="unlock_set_unlock_none_title" msgid="5165705762615690332">"Brak zabezpieczenia"</string>
+    <string name="unlock_set_unlock_none_summary" msgid="2609139908913114644">"Nie wymagaj wzoru, kodu PIN ani hasła do odblokowania ekranu"</string>
     <string name="unlock_set_unlock_pattern_title" msgid="2912067603917311700">"Wzór"</string>
-    <!-- outdated translation 3018395214738645405 -->     <string name="unlock_set_unlock_pattern_summary" msgid="8467282436608077882">"Narysuj wzór do odblokowania ekran"</string>
+    <string name="unlock_set_unlock_pattern_summary" msgid="8467282436608077882">"Wymagaj wzoru do odblokowania ekranu"</string>
     <string name="unlock_set_unlock_pin_title" msgid="5846029709462329515">"Kod PIN"</string>
-    <!-- outdated translation 4131169672844263316 -->     <string name="unlock_set_unlock_pin_summary" msgid="5556722736289132512">"Wpisz kod PIN do odblokowania ekranu"</string>
+    <string name="unlock_set_unlock_pin_summary" msgid="5556722736289132512">"Wymagaj kodu PIN do odblokowania ekranu"</string>
     <string name="unlock_set_unlock_password_title" msgid="8775603825675090937">"Hasło"</string>
-    <!-- outdated translation 4623254789833899286 -->     <string name="unlock_set_unlock_password_summary" msgid="7871968012198279034">"Wpisz hasło do odblokowania ekranu"</string>
+    <string name="unlock_set_unlock_password_summary" msgid="7871968012198279034">"Wymagaj hasła do odblokowania ekranu"</string>
     <string name="unlock_set_unlock_disabled_summary" msgid="8816944391772300580">"Wyłączone przez zdalnego administratora urządzenia"</string>
-    <!-- no translation found for unlock_set_unlock_mode_off (378729687629105388) -->
-    <skip />
-    <!-- no translation found for unlock_set_unlock_mode_none (7953821968316697309) -->
-    <skip />
-    <!-- no translation found for unlock_set_unlock_mode_pattern (464022606293547390) -->
-    <skip />
-    <!-- no translation found for unlock_set_unlock_mode_pin (1379365142708807163) -->
-    <skip />
-    <!-- no translation found for unlock_set_unlock_mode_password (6955742995327081060) -->
-    <skip />
+    <string name="unlock_set_unlock_mode_off" msgid="378729687629105388">"Wyłącz"</string>
+    <string name="unlock_set_unlock_mode_none" msgid="7953821968316697309">"Brak zabezpieczenia"</string>
+    <string name="unlock_set_unlock_mode_pattern" msgid="464022606293547390">"Zabezpieczenie wzorem"</string>
+    <string name="unlock_set_unlock_mode_pin" msgid="1379365142708807163">"Zabezpieczenie kodem PIN"</string>
+    <string name="unlock_set_unlock_mode_password" msgid="6955742995327081060">"Zabezpieczenie hasłem"</string>
     <string name="unlock_disable_lock_title" msgid="1427036227416979120">"Wyłącz blokadę ekranu"</string>
     <string name="unlock_disable_lock_pattern_summary" msgid="6801602880568869201">"Usuń wzór odblokowania"</string>
     <string name="unlock_disable_lock_pin_summary" msgid="8856842745366993387">"Usuń kod PIN odblokowania"</string>
@@ -653,12 +670,11 @@
     <string name="internal_memory" msgid="9129595691484260784">"Pamięć wewnętrzna"</string>
     <string name="sd_memory" product="nosdcard" msgid="2510246194083052841">"Nośnik USB"</string>
     <string name="sd_memory" product="default" msgid="151871913888051515">"Karta SD"</string>
-    <string name="memory_available" msgid="418542433817289474">"Dostępne miejsce"</string>
-    <string name="memory_size" msgid="6629067715017232195">"Całkowita pojemność"</string>
-    <!-- no translation found for memory_calculating_size (2188358544203768588) -->
-    <skip />
-    <string name="memory_apps_usage" msgid="5818922761412589352">"Pamięć na aplikacje"</string>
-    <string name="memory_media_usage" msgid="5655498435493764372">"Pamięć na multimedia"</string>
+    <!-- outdated translation 418542433817289474 -->     <string name="memory_available" msgid="5052397223077021181">"Dostępne miejsce"</string>
+    <!-- outdated translation 6629067715017232195 -->     <string name="memory_size" msgid="5458889090691922288">"Całkowita pojemność"</string>
+    <string name="memory_calculating_size" msgid="2188358544203768588">"Obliczanie..."</string>
+    <!-- outdated translation 5818922761412589352 -->     <string name="memory_apps_usage" msgid="9079237985722858506">"Pamięć na aplikacje"</string>
+    <!-- outdated translation 5655498435493764372 -->     <string name="memory_media_usage" msgid="3738830697707880405">"Pamięć na multimedia"</string>
     <string name="sd_eject" product="nosdcard" msgid="4988563376492400073">"Odłącz pamięć współdzieloną"</string>
     <string name="sd_eject" product="default" msgid="6915293408836853020">"Odłącz kartę SD"</string>
     <string name="sd_eject_summary" product="nosdcard" msgid="5009296896648072891">"Odłącz wewnętrzny nośnik USB"</string>
@@ -672,7 +688,7 @@
     <string name="sd_format" product="nosdcard" msgid="2148179271623099054">"Wyczyść nośnik USB"</string>
     <string name="sd_format" product="default" msgid="2576054280507119870">"Wyczyść kartę SD"</string>
     <string name="sd_format_summary" product="nosdcard" msgid="6331905044907914603">"Wymazuje wszystkie dane z wewnętrznego nośnika USB, np. pliki muzyczne i zdjęcia"</string>
-    <!-- outdated translation 6331905044907914603 -->     <string name="sd_format_summary" product="default" msgid="212703692181793109">"Wymazuje wszystkie dane z wewnętrznego nośnika USB, np. pliki muzyczne i zdjęcia"</string>
+    <string name="sd_format_summary" product="default" msgid="212703692181793109">"Wymazuje z karty SD telefonu wszystkie dane, takie jak muzyka czy zdjęcia"</string>
     <string name="sd_unavailable" msgid="8580107589533213904">"Niedostępna"</string>
     <string name="read_only" msgid="6702420168629076340">" (Tylko do odczytu)"</string>
     <string name="dlg_confirm_unmount_title" product="nosdcard" msgid="2349876662428231297">"Odłącz nośnik USB"</string>
@@ -728,8 +744,10 @@
     <string name="master_clear_desc" product="tablet" msgid="1305457209008369655">"Spowoduje to wymazanie wszystkich danych z "<b>"wewnętrznej pamięci"</b>" tabletu, w tym:"\n\n<li>"danych konta Google,"</li>\n<li>"danych i ustawień systemu oraz aplikacji,"</li>\n<li>"pobranych aplikacji."</li></string>
     <string name="master_clear_desc" product="default" msgid="2950536633526374209">"Spowoduje to wymazanie wszystkich danych z "<b>"wewnętrznej pamięci"</b>" telefonu, w tym:"\n\n<li>"danych konta Google,"</li>\n<li>"danych i ustawień systemu oraz aplikacji,"</li>\n<li>"pobranych aplikacji."</li></string>
     <string name="master_clear_accounts" product="default" msgid="6412857499147999073">\n\n"Zalogowano się na następujące konta:"\n</string>
+    <!-- no translation found for master_clear_desc_also_erases_external (1903185203791274237) -->
+    <skip />
     <string name="master_clear_desc_erase_external_storage" product="nosdcard" msgid="4740866328425123395">\n\n"Aby usunąć również muzykę, zdjęcia i inne dane użytkownika, należy wymazać "<b>"nośnik USB"</b>"."</string>
-    <!-- outdated translation 4740866328425123395 -->     <string name="master_clear_desc_erase_external_storage" product="default" msgid="7339100478676372901">\n\n"Aby usunąć również muzykę, zdjęcia i inne dane użytkownika, należy wymazać "<b>"nośnik USB"</b>"."</string>
+    <string name="master_clear_desc_erase_external_storage" product="default" msgid="7339100478676372901">\n\n"Jeśli chcesz usunąć również muzykę, zdjęcia i inne dane użytkownika, konieczne będzie wymazanie zawartości "<b>"karty SD"</b>"."</string>
     <string name="erase_external_storage" product="nosdcard" msgid="969364037450286809">"Wyczyść nośnik USB"</string>
     <string name="erase_external_storage" product="default" msgid="1397239046334307625">"Wyczyść kartę SD"</string>
     <string name="erase_external_storage_description" product="nosdcard" msgid="444834593696342279">"Wymaż wszystkie dane z wewnętrznego nośnika USB, np. pliki muzyczne i zdjęcia."</string>
@@ -802,9 +820,9 @@
     <string name="assisted_gps" msgid="4649317129586736885">"Użyj wspomaganego systemu GPS"</string>
     <string name="assisted_gps_enabled" msgid="8751899609589792803">"Użyj serwera do wspomagania systemu GPS (usuń zaznaczenie, aby zmniejszyć ruch sieciowy)"</string>
     <string name="assisted_gps_disabled" msgid="6982698333968010748">"Użyj serwera do wspomagania systemu GPS (usuń zaznaczenie, aby zwiększyć wydajność systemu GPS)"</string>
-    <!-- outdated translation 3214740644957841179 -->     <string name="use_location_title" msgid="3659340070401464551">"Użyj informacji o lokalizacji na potrzeby wyszukiwarki Google"</string>
-    <!-- outdated translation 1876901471649359806 -->     <string name="use_location_summary_disabled" msgid="6518008620918354403">"Użyj informacji o lokalizacji na potrzeby wyszukiwarki Google oraz innych usług Google"</string>
-    <!-- outdated translation 984549156918597265 -->     <string name="use_location_summary_enabled" msgid="8110246289085796179">"Informacje o lokalizacji są używane na potrzeby wyników wyszukiwania Google oraz innych usług Google"</string>
+    <string name="use_location_title" msgid="3659340070401464551">"Użyj lokalizacji przy wyszukiwaniu Google"</string>
+    <string name="use_location_summary_disabled" msgid="6518008620918354403">"Użyj lokalizacji w wynikach wyszukiwania Google oraz innych usługach Google"</string>
+    <string name="use_location_summary_enabled" msgid="8110246289085796179">"Lokalizacja będzie uwzględniana w wynikach wyszukiwania Google i innych usługach Google"</string>
     <string name="about_settings" product="tablet" msgid="593457295516533765">"Informacje o tablecie"</string>
     <string name="about_settings" product="default" msgid="1743378368185371685">"Informacje o telefonie"</string>
     <string name="about_settings_summary" msgid="3371517697156165959">"Wyświetl informacje prawne, stan, wersję oprogramowania"</string>
@@ -865,10 +883,7 @@
     <string name="next_button_label" msgid="8890792540116568321">"Dalej"</string>
     <string name="lock_title" product="tablet" msgid="2909697418179419990">"Zabezpieczanie tabletu"</string>
     <string name="lock_title" product="default" msgid="4059246467204273930">"Zabezpieczanie telefonu"</string>
-    <!-- unknown placeholder TAG_FONT_0 in lock_intro_message -->
-    <skip />
-    <!-- no translation found for lock_intro_message (3692151094288835065) -->
-    <skip />
+    <string name="lock_intro_message" product="tablet" msgid="3692151094288835065">"Chroń tablet przed nieautoryzowanym użyciem przez utworzenie osobistego wzoru odblokowania ekranu. Na następnym ekranie połącz dotknięciami co najmniej cztery kropki w dowolnej kolejności."\n\n"Gotów? Dotknij opcji „Dalej”."</string>
     <string name="lock_intro_message" product="default" msgid="9100785646737118042"><font size="17">"Chroń swój telefon przed nieautoryzowanym użyciem, tworząc osobisty wzorzec odblokowywania ekranu. "\n<font height="17">\n</font><b>"1"</b>"  Na następnym ekranie obejrzyj procedurę rysowania przykładowego wzorca. "\n<font height="17">\n</font><b>"2"</b>"  Po przygotowaniu się narysuj własny osobisty wzorzec odblokowywania. Wypróbuj różne wzorce, łącząc co najmniej cztery kropki. "\n<font height="17">\n</font><b>"3"</b>"  Ponownie narysuj swój wzorzec, aby go potwierdzić. "\n<font height="17">\n</font><b>"Wszystko gotowe? Dotknij przycisku „Dalej”"</b>". "\n<font height="3">\n</font>"Aby pozostawić telefon bez ochrony, dotknij przycisku „Anuluj”."</font></string>
     <string name="manageapplications_settings_title" msgid="5712405848153426706">"Zarządzaj aplikacjami"</string>
     <string name="manageapplications_settings_summary" msgid="6097117021500651232">"Zarządzaj zainstalowanymi aplikacjami oraz usuwaj je"</string>
@@ -1297,34 +1312,37 @@
     <string name="vpn_settings_summary" msgid="8849924181594963972">"Konfiguruj wirtualne sieci prywatne (VPN) i zarządzaj nimi"</string>
     <string name="vpn_secret_unchanged" msgid="8700613973594154529">"(nie zmieniono)"</string>
     <string name="vpn_secret_not_set" msgid="1037792636371641845">"(nie ustawiono)"</string>
-    <string name="credentials_category" msgid="8536992056377271234">"Magazyn danych logowania"</string>
+    <!-- no translation found for credentials_title (4446234003860769883) -->
+    <skip />
     <string name="credentials_access" msgid="4843187230913860492">"Dostęp do poufnych danych"</string>
     <string name="credentials_access_summary" msgid="319662078718574168">"Zezwalaj aplikacjom na dostęp do bezpiecznych certyfikatów i innych danych logowania"</string>
-    <string name="credentials_unlock" msgid="1463040326264133844">"Wprowadź hasło"</string>
-    <string name="credentials_unlock_hint" msgid="594679530407918031">"Wprowadź hasło magazynu danych logowania."</string>
-    <string name="credentials_install_certificates" product="nosdcard" msgid="619171634797689906">"Zainstaluj z nośnika USB"</string>
-    <string name="credentials_install_certificates" product="default" msgid="177337517568022236">"Zainstaluj z karty SD"</string>
-    <string name="credentials_install_certificates_summary" product="nosdcard" msgid="8920330112631198575">"Instaluj szyf. cer. z USB"</string>
-    <string name="credentials_install_certificates_summary" product="default" msgid="7737001268684193093">"Zainstaluj zaszyfrowane certyfikaty z karty SD"</string>
+    <!-- no translation found for credentials_install (1395748667227729987) -->
+    <skip />
+    <!-- no translation found for credentials_install (953914549998062317) -->
+    <skip />
+    <!-- no translation found for credentials_install_summary (3679446246093149828) -->
+    <skip />
+    <!-- no translation found for credentials_install_summary (5737658257407822713) -->
+    <skip />
     <string name="credentials_set_password" msgid="9104473585811899989">"Ustaw hasło"</string>
-    <string name="credentials_set_password_summary" msgid="8287876917562085701">"Ustaw lub zmień hasło magazynu danych logowania"</string>
-    <string name="credentials_reset" msgid="9170150870552453457">"Wyczyść magazyn"</string>
-    <string name="credentials_reset_summary" msgid="1530388094693731636">"Wyczyść całą zawartość magazynu danych logowania i zresetuj jego hasło"</string>
-    <string name="credentials_reset_hint" msgid="819990295796804516">"Czy na pewno chcesz usunąć wszystkie dane logowania i zresetować hasło magazynu danych logowania?"</string>
+    <!-- outdated translation 8287876917562085701 -->     <string name="credentials_set_password_summary" msgid="6756719720826053228">"Ustaw lub zmień hasło magazynu danych logowania"</string>
+    <!-- outdated translation 9170150870552453457 -->     <string name="credentials_reset" msgid="3239382277144980418">"Wyczyść magazyn"</string>
+    <!-- outdated translation 1530388094693731636 -->     <string name="credentials_reset_summary" msgid="3810369467217453606">"Wyczyść całą zawartość magazynu danych logowania i zresetuj jego hasło"</string>
+    <string name="credentials_unlock" msgid="1463040326264133844">"Wprowadź hasło"</string>
+    <!-- outdated translation 594679530407918031 -->     <string name="credentials_unlock_hint" msgid="5889551635843338639">"Wprowadź hasło magazynu danych logowania."</string>
+    <!-- no translation found for credentials_password_hint (4915128717409363024) -->
+    <skip />
     <string name="credentials_old_password" msgid="7553393815538684028">"Bieżące hasło:"</string>
     <string name="credentials_new_password" msgid="267487774686796938">"Nowe hasło:"</string>
     <string name="credentials_confirm_password" msgid="4732250000633424345">"Potwierdź nowe hasło:"</string>
-    <string name="credentials_first_time_hint" msgid="1567821077545346039">"Ustaw hasło dla magazynu danych logowania (co najmniej 8 znaków)."</string>
-    <string name="credentials_wrong_password" msgid="7525192410790152041">"Wprowadź prawidłowe hasło."</string>
-    <string name="credentials_reset_warning" msgid="6392481296673345268">"Wprowadź prawidłowe hasło. Pozostała jedna próba wprowadzenia prawidłowego hasła, później zawartość magazynu danych logowania zostanie wyczyszczona."</string>
-    <string name="credentials_reset_warning_plural" msgid="454828369803055270">"Wprowadź prawidłowe hasło. Liczba pozostałych prób wprowadzenia prawidłowego hasła, zanim zawartość magazynu danych logowania zostanie wymazana: <xliff:g id="NUMBER">%1$d</xliff:g>."</string>
+    <!-- outdated translation 819990295796804516 -->     <string name="credentials_reset_hint" msgid="2336340927894094814">"Czy na pewno chcesz usunąć wszystkie dane logowania i zresetować hasło magazynu danych logowania?"</string>
     <string name="credentials_passwords_mismatch" msgid="5288565139590031733">"Hasła nie są identyczne."</string>
-    <string name="credentials_passwords_empty" msgid="8647631321684363549">"Musisz wprowadzić i potwierdzić hasło."</string>
-    <string name="credentials_password_empty" msgid="8292138152983330473">"Wprowadź hasło."</string>
-    <string name="credentials_password_too_short" msgid="7502749986405522663">"Hasło musi mieć co najmniej 8 znaków."</string>
-    <string name="credentials_erased" msgid="7700309135582200849">"Magazyn danych uwierzytelniania został wyczyszczony."</string>
+    <!-- outdated translation 7525192410790152041 -->     <string name="credentials_wrong_password" msgid="2541932597104054807">"Wprowadź prawidłowe hasło."</string>
+    <!-- outdated translation 6392481296673345268 -->     <string name="credentials_reset_warning" msgid="5320653011511797600">"Wprowadź prawidłowe hasło. Pozostała jedna próba wprowadzenia prawidłowego hasła, później zawartość magazynu danych logowania zostanie wyczyszczona."</string>
+    <!-- no translation found for credentials_reset_warning_plural (6514085665301095279) -->
+    <skip />
+    <!-- outdated translation 7700309135582200849 -->     <string name="credentials_erased" msgid="2907836028586342969">"Magazyn danych uwierzytelniania został wyczyszczony."</string>
     <string name="credentials_enabled" msgid="7588607413349978930">"Magazyn danych logowania jest włączony."</string>
-    <string name="credentials_disabled" msgid="7453188089059045380">"Magazyn danych logowania jest wyłączony."</string>
     <string name="emergency_tone_title" msgid="1055954530111587114">"Sygnał alarmowy"</string>
     <string name="emergency_tone_summary" msgid="722259232924572153">"Skonfiguruj sposób działania w przypadku połączenia alarmowego"</string>
     <string name="privacy_settings" msgid="9206631214140954954">"Prywatność"</string>
@@ -1383,7 +1401,11 @@
     <string name="wifi_setup_status_connecting" msgid="2594117697215042584">"Łączenie..."</string>
     <string name="wifi_setup_status_proceed_to_next" msgid="9071951312604559022">"Przejdź do następnego etapu"</string>
     <string name="wifi_setup_status_eap_not_supported" msgid="3196386445567501484">"Protokół EAP nie jest obsługiwany"</string>
-    <string name="wifi_setup_eap_not_supported" msgid="5083895763075722698">"Nie można skonfigurować połączenia Wi-Fi zabezpieczonego protokołem EAP podczas procesu konfiguracji. Można to zrobić po zakończeniu tego procesu, wybierając w Ustawieniach opcję Sieci zwykłe i bezprzewodowe."</string>
+    <!-- outdated translation 5083895763075722698 -->     <string name="wifi_setup_eap_not_supported" msgid="683540356393542939">"Nie można skonfigurować połączenia Wi-Fi zabezpieczonego protokołem EAP podczas procesu konfiguracji. Można to zrobić po zakończeniu tego procesu, wybierając w Ustawieniach opcję Sieci zwykłe i bezprzewodowe."</string>
+    <!-- no translation found for wifi_setup_description_connecting (1884664966455980182) -->
+    <skip />
+    <!-- no translation found for wifi_setup_description_connected (5235991893829582459) -->
+    <skip />
     <string name="account_sync_settings_title" msgid="4578227872921044660">"Ustawienia synchronizacji"</string>
     <string name="sync_is_failing" msgid="1591561768344128377">"W tej chwili występują problemy z synchronizacją. Synchronizacja będzie możliwa wkrótce."</string>
     <string name="add_account_label" msgid="7811707265834013767">"Dodaj konto"</string>
@@ -1443,5 +1465,7 @@
     <!-- no translation found for enter_password (3268224850821675915) -->
     <skip />
     <!-- no translation found for try_again (5904121494468643129) -->
+    <skip />
+    <!-- no translation found for service_busy (225227519012409130) -->
     <skip />
 </resources>
