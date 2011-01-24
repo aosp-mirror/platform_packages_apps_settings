@@ -16,13 +16,13 @@
 
 package com.android.settings.applications;
 
-import com.android.settings.R;
-
 import com.android.internal.content.PackageHelper;
-import com.android.settings.applications.ApplicationsState.AppEntry;
+import com.android.settings.R;
 import com.android.settings.Settings.RunningServicesActivity;
 import com.android.settings.Settings.StorageUseActivity;
+import com.android.settings.applications.ApplicationsState.AppEntry;
 
+import android.app.Activity;
 import android.app.Fragment;
 import android.content.Context;
 import android.content.Intent;
@@ -48,6 +48,7 @@ import android.view.animation.AnimationUtils;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.AbsListView;
 import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.BaseAdapter;
 import android.widget.CheckBox;
 import android.widget.Filter;
@@ -56,7 +57,6 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TabHost;
 import android.widget.TextView;
-import android.widget.AdapterView.OnItemClickListener;
 
 import java.util.ArrayList;
 import java.util.Comparator;
@@ -856,6 +856,10 @@ public class ManageApplications extends Fragment implements
             }
         }
         mCurView = which;
+        final Activity host = getActivity();
+        if (host != null) {
+            host.invalidateOptionsMenu();
+        }
     }
 
     void handleRunningProcessesAvail() {
