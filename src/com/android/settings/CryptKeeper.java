@@ -57,6 +57,9 @@ public class CryptKeeper extends Activity implements TextView.OnEditorActionList
     private static final int COOL_DOWN_ATTEMPTS = 10;
     private static final int COOL_DOWN_INTERVAL = 30; // 30 seconds
 
+    // This activity is used to fade the screen to black after the password is entered.
+    public static class Blank extends Activity {
+    }
 
     private Handler mHandler = new Handler() {
         @Override
@@ -103,7 +106,6 @@ public class CryptKeeper extends Activity implements TextView.OnEditorActionList
         }
     };
 
-    private int mFailedAttempts = 0;
     private int mCooldown;
 
     @Override
@@ -143,7 +145,7 @@ public class CryptKeeper extends Activity implements TextView.OnEditorActionList
         // is encrypted.
 
         PowerManager pm = (PowerManager) getSystemService(Context.POWER_SERVICE);
-        PowerManager.WakeLock wakeLock = pm.newWakeLock(PowerManager.PARTIAL_WAKE_LOCK, TAG);
+        PowerManager.WakeLock wakeLock = pm.newWakeLock(PowerManager.SCREEN_DIM_WAKE_LOCK, TAG);
 
         wakeLock.acquire();
 
@@ -192,15 +194,20 @@ public class CryptKeeper extends Activity implements TextView.OnEditorActionList
 
             IMountService service = getMountService();
             try {
-                service.decryptStorage(password);
+                int failedAttempts = service.decryptStorage(password);
 
-                if (mFailedAttempts == 0) {
-                    // Success. Do something here within 2 seconds
-
-                } else if (mFailedAttempts == MAX_FAILED_ATTEMPTS) {
+                if (failedAttempts == 0) {
+                    // The password was entered successfully. Start the Blank activity
+                    // so this activity animates to black before the devices starts. Note
+                    // It has 1 second to complete the animation or it will be frozen
+                    // until the boot animation comes back up.
+                    Intent intent = new Intent(this, Blank.class);
+                    finish();
+                    startActivity(intent);
+                } else if (failedAttempts == MAX_FAILED_ATTEMPTS) {
                     // Factory reset the device.
                     sendBroadcast(new Intent("android.intent.action.MASTER_CLEAR"));
-                } else if ((mFailedAttempts % COOL_DOWN_ATTEMPTS) == 0) {
+                } else if ((failedAttempts % COOL_DOWN_ATTEMPTS) == 0) {
                     mCooldown = COOL_DOWN_INTERVAL;
                     EditText passwordEntry = (EditText) findViewById(R.id.passwordEntry);
                     passwordEntry.setEnabled(false);
