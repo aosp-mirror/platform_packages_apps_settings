@@ -113,6 +113,10 @@
     <string name="bluetooth_notif_title" msgid="2485175521845371514">"Заявка за сдвояване"</string>
     <!-- no translation found for bluetooth_notif_message (618099089987569242) -->
     <skip />
+    <!-- no translation found for bluetooth_show_received_files_title (816172853268536399) -->
+    <skip />
+    <!-- no translation found for bluetooth_show_received_files_summary (7322193220909480775) -->
+    <skip />
     <string name="device_picker" msgid="8721012448931226323">"Избиране на Bluetooth устройство"</string>
     <string name="bluetooth_permission_request" msgid="1523129741266262748">"Заявка за разрешение на Bluetooth"</string>
     <string name="bluetooth_ask_enablement" msgid="8211158472876087588">"Приложение иска разрешение да включи Bluetooth. Искате ли да направите това?"</string>
@@ -238,7 +242,7 @@
     <string name="networks" msgid="6333316876545927039">"Избор на оператора"</string>
     <string name="sum_carrier_select" msgid="6648929373316748020">"Избиране на мрежов оператор"</string>
     <string name="date_and_time_settings_title" msgid="3350640463596716780">"Дата и час"</string>
-    <!-- no translation found for date_and_time_settings_title_setup_wizard (6493371065760315350) -->
+    <!-- no translation found for date_and_time_settings_title_setup_wizard (2391530758339384324) -->
     <skip />
     <string name="date_and_time_settings_summary" msgid="2435705040205950381">"Задаване на дата, час, часова зона и формати"</string>
     <string name="date_time_auto" msgid="7076906458515908345">"Автоматична дата и час"</string>
@@ -268,38 +272,51 @@
     <string name="security_settings_summary" msgid="967393342537986570">"Задаване на Моето местоположение, отключване на екран, заключване на SIM картата и на хранилището за идентификационни данни"</string>
     <string name="cdma_security_settings_summary" msgid="6068799952798901542">"Задаване на Моето местоположение, отключване на екран и заключване на хранилището за идентификационни данни"</string>
     <string name="security_passwords_title" msgid="2930627259125138363">"Пароли"</string>
-    <!-- no translation found for encryption_settings_title (5951475460321369092) -->
+    <!-- no translation found for crypt_keeper_settings_title (2288841695457542418) -->
     <skip />
-    <!-- no translation found for encrypt_title (5458306603524656835) -->
+    <!-- no translation found for crypt_keeper_encrypt_title (5790930764432654508) -->
     <skip />
-    <!-- no translation found for encrypt_summary (6950523460019506111) -->
+    <!-- no translation found for crypt_keeper_encrypt_summary (1447090863225003474) -->
     <skip />
-    <!-- outdated translation 3973555216065628262 -->     <string name="lock_settings_picker_title" msgid="8665454308380158195">"Защита за отключване на екрана"</string>
-    <!-- outdated translation 1129684221223017902 -->     <string name="unlock_set_unlock_launch_picker_title" msgid="4461562893699328786">"Настройва заключването на екрана"</string>
+    <!-- no translation found for crypt_keeper_confirm_title (8300073420086568022) -->
+    <skip />
+    <!-- no translation found for crypt_keeper_desc (3806424855201189058) -->
+    <skip />
+    <!-- no translation found for crypt_keeper_button_text (1189623490604750854) -->
+    <skip />
+    <!-- no translation found for crypt_keeper_button_text (2008346408473255519) -->
+    <skip />
+    <!-- no translation found for crypt_keeper_final_desc (4150888307809341579) -->
+    <skip />
+    <!-- no translation found for crypt_keeper_setup_title (1783951453124244969) -->
+    <skip />
+    <!-- no translation found for crypt_keeper_setup_description (5169437210993176052) -->
+    <skip />
+    <!-- no translation found for crypt_keeper_setup_description (5672516169559235283) -->
+    <skip />
+    <!-- no translation found for crypt_keeper_cooldown (6736063610343230255) -->
+    <skip />
+    <string name="lock_settings_picker_title" msgid="8665454308380158195">"Конф. на закл. на екр."</string>
+    <string name="unlock_set_unlock_launch_picker_title" msgid="4461562893699328786">"Конф. на закл. на екр."</string>
     <string name="unlock_set_unlock_launch_picker_change_title" msgid="6987228635944678726">"Промяна на заключването на екрана"</string>
     <string name="unlock_set_unlock_launch_picker_change_summary" msgid="2790960639554590668">"Промяна или деактивиране на защита с фигура, PIN или парола"</string>
     <string name="unlock_set_unlock_launch_picker_enable_summary" msgid="4791110798817242301">"Изберете начин за заключване на екрана"</string>
     <string name="unlock_set_unlock_off_title" msgid="1613932765246180079">"Изключване"</string>
-    <!-- outdated translation 2992485517488881365 -->     <string name="unlock_set_unlock_off_summary" msgid="2791013557563587655">"Без показване на заключения екран"</string>
-    <!-- outdated translation 3760684669884671990 -->     <string name="unlock_set_unlock_none_title" msgid="5165705762615690332">"Няма"</string>
-    <!-- outdated translation 2658550480388272618 -->     <string name="unlock_set_unlock_none_summary" msgid="2609139908913114644">"Деактивира защитата за отключване на екрана"</string>
+    <string name="unlock_set_unlock_off_summary" msgid="2791013557563587655">"Без заключване на екрана"</string>
+    <string name="unlock_set_unlock_none_title" msgid="5165705762615690332">"Незащитено"</string>
+    <string name="unlock_set_unlock_none_summary" msgid="2609139908913114644">"Откл. на екрана без парола, фигура или PIN"</string>
     <string name="unlock_set_unlock_pattern_title" msgid="2912067603917311700">"Фигура"</string>
-    <!-- outdated translation 3018395214738645405 -->     <string name="unlock_set_unlock_pattern_summary" msgid="8467282436608077882">"Начертайте фигура, за да отключите екрана"</string>
+    <string name="unlock_set_unlock_pattern_summary" msgid="8467282436608077882">"Изисква се фигура за отключване на екрана"</string>
     <string name="unlock_set_unlock_pin_title" msgid="5846029709462329515">"PIN"</string>
-    <!-- outdated translation 4131169672844263316 -->     <string name="unlock_set_unlock_pin_summary" msgid="5556722736289132512">"Въведете цифров PIN код, за да отключите екрана"</string>
+    <string name="unlock_set_unlock_pin_summary" msgid="5556722736289132512">"Изисква се цифров PIN за отключване на екрана"</string>
     <string name="unlock_set_unlock_password_title" msgid="8775603825675090937">"Парола"</string>
-    <!-- outdated translation 4623254789833899286 -->     <string name="unlock_set_unlock_password_summary" msgid="7871968012198279034">"Въведете парола, за да отключите екрана"</string>
+    <string name="unlock_set_unlock_password_summary" msgid="7871968012198279034">"Изисква се парола за отключване на екрана"</string>
     <string name="unlock_set_unlock_disabled_summary" msgid="8816944391772300580">"Деактивирано от отдалечен администратор на устройството"</string>
-    <!-- no translation found for unlock_set_unlock_mode_off (378729687629105388) -->
-    <skip />
-    <!-- no translation found for unlock_set_unlock_mode_none (7953821968316697309) -->
-    <skip />
-    <!-- no translation found for unlock_set_unlock_mode_pattern (464022606293547390) -->
-    <skip />
-    <!-- no translation found for unlock_set_unlock_mode_pin (1379365142708807163) -->
-    <skip />
-    <!-- no translation found for unlock_set_unlock_mode_password (6955742995327081060) -->
-    <skip />
+    <string name="unlock_set_unlock_mode_off" msgid="378729687629105388">"Изкл."</string>
+    <string name="unlock_set_unlock_mode_none" msgid="7953821968316697309">"Незащитено"</string>
+    <string name="unlock_set_unlock_mode_pattern" msgid="464022606293547390">"Защитено с фигура"</string>
+    <string name="unlock_set_unlock_mode_pin" msgid="1379365142708807163">"Защитено с PIN"</string>
+    <string name="unlock_set_unlock_mode_password" msgid="6955742995327081060">"Защитено с парола"</string>
     <string name="unlock_disable_lock_title" msgid="1427036227416979120">"Изключване на заключването на екрана"</string>
     <string name="unlock_disable_lock_pattern_summary" msgid="6801602880568869201">"Премахване на фигура за отключване"</string>
     <string name="unlock_disable_lock_pin_summary" msgid="8856842745366993387">"Премахване на PIN кода за отключване"</string>
@@ -647,12 +664,11 @@
     <string name="internal_memory" msgid="9129595691484260784">"Вътрешно хранилище"</string>
     <string name="sd_memory" product="nosdcard" msgid="2510246194083052841">"USB хранилище"</string>
     <string name="sd_memory" product="default" msgid="151871913888051515">"SD карта"</string>
-    <string name="memory_available" msgid="418542433817289474">"Налично място"</string>
-    <string name="memory_size" msgid="6629067715017232195">"Общо място"</string>
-    <!-- no translation found for memory_calculating_size (2188358544203768588) -->
-    <skip />
-    <string name="memory_apps_usage" msgid="5818922761412589352">"Използване от приложения"</string>
-    <string name="memory_media_usage" msgid="5655498435493764372">"Използване от мултимедия"</string>
+    <!-- outdated translation 418542433817289474 -->     <string name="memory_available" msgid="5052397223077021181">"Налично място"</string>
+    <!-- outdated translation 6629067715017232195 -->     <string name="memory_size" msgid="5458889090691922288">"Общо място"</string>
+    <string name="memory_calculating_size" msgid="2188358544203768588">"Изчислява се..."</string>
+    <!-- outdated translation 5818922761412589352 -->     <string name="memory_apps_usage" msgid="9079237985722858506">"Използване от приложения"</string>
+    <!-- outdated translation 5655498435493764372 -->     <string name="memory_media_usage" msgid="3738830697707880405">"Използване от мултимедия"</string>
     <string name="sd_eject" product="nosdcard" msgid="4988563376492400073">"Спиране на сподел. хран."</string>
     <string name="sd_eject" product="default" msgid="6915293408836853020">"Деактивиране на SD карта"</string>
     <string name="sd_eject_summary" product="nosdcard" msgid="5009296896648072891">"Спиране на вътрешното USB"</string>
@@ -722,6 +738,8 @@
     <string name="master_clear_desc" product="tablet" msgid="1305457209008369655">"Това ще изтрие всички данни от "<b>"вътрешното хранилище"</b>" на таблета ви, включително:"\n\n<li>"профила ви в Google;"</li>\n<li>"данни и настройки от системата и приложенията;"</li>\n<li>"изтеглени приложения."</li></string>
     <string name="master_clear_desc" product="default" msgid="2950536633526374209">"Това ще изтрие всички данни от "<b>"вътрешното хранилище"</b>" на телефона ви, включително:"\n\n<li>"профила ви в Google;"</li>\n<li>"данни и настройки от системата и приложенията;"</li>\n<li>"изтеглени приложения."</li></string>
     <string name="master_clear_accounts" product="default" msgid="6412857499147999073">\n\n"Понастоящем сте влезли в следните профили:"\n</string>
+    <!-- no translation found for master_clear_desc_also_erases_external (1903185203791274237) -->
+    <skip />
     <string name="master_clear_desc_erase_external_storage" product="nosdcard" msgid="4740866328425123395">\n\n"За да изчистите и музиката, снимките и другите потребителски данни, трябва да се изтрие "<b>"USB хранилището"</b>"."</string>
     <string name="master_clear_desc_erase_external_storage" product="default" msgid="7339100478676372901">\n\n"За да изчистите и музиката, снимките и другите потребителски данни, трябва да се изтрие "<b>"SD картата"</b>"."</string>
     <string name="erase_external_storage" product="nosdcard" msgid="969364037450286809">"Изтриване на USB хранилището"</string>
@@ -796,9 +814,9 @@
     <string name="assisted_gps" msgid="4649317129586736885">"Използване на помощ за GPS"</string>
     <string name="assisted_gps_enabled" msgid="8751899609589792803">"Използване на сървър за помощ с GPS (премахнете отметката за намаляване на употребата на мрежа)"</string>
     <string name="assisted_gps_disabled" msgid="6982698333968010748">"Използване на сървър за помощ с GPS (премахнете отметката за подобряване на качеството нa услугата)"</string>
-    <!-- outdated translation 3214740644957841179 -->     <string name="use_location_title" msgid="3659340070401464551">"Да се използва местоположението за резултати от търсенето с Google"</string>
-    <!-- outdated translation 1876901471649359806 -->     <string name="use_location_summary_disabled" msgid="6518008620918354403">"Да се използва местоположението за резултати от търсенето с Google и други наши услуги"</string>
-    <!-- outdated translation 984549156918597265 -->     <string name="use_location_summary_enabled" msgid="8110246289085796179">"Местоположението се използва за подобряване на резултатите от търсенето с Google и други наши услуги"</string>
+    <string name="use_location_title" msgid="3659340070401464551">"Да се използва местоположението за резултати от търсенето с Google"</string>
+    <string name="use_location_summary_disabled" msgid="6518008620918354403">"Да се използва местоположението за резултати от търсенето с Google и други наши услуги"</string>
+    <string name="use_location_summary_enabled" msgid="8110246289085796179">"Местоположението се използва за подобряване на резултатите от търсенето с Google и други наши услуги"</string>
     <string name="about_settings" product="tablet" msgid="593457295516533765">"Всичко за таблета"</string>
     <string name="about_settings" product="default" msgid="1743378368185371685">"Всичко за телефона"</string>
     <string name="about_settings_summary" msgid="3371517697156165959">"Преглед на състоянието, правната информация и версията на софтуера"</string>
@@ -859,10 +877,7 @@
     <string name="next_button_label" msgid="8890792540116568321">"Напред"</string>
     <string name="lock_title" product="tablet" msgid="2909697418179419990">"Подсигуряване на таблета ви"</string>
     <string name="lock_title" product="default" msgid="4059246467204273930">"Защитаване на телефона ви"</string>
-    <!-- unknown placeholder TAG_FONT_0 in lock_intro_message -->
-    <skip />
-    <!-- no translation found for lock_intro_message (3692151094288835065) -->
-    <skip />
+    <string name="lock_intro_message" product="tablet" msgid="3692151094288835065">"Защитете таблета си от неупълномощена употреба, като създадете лична фигура за отключване на екрана. Свържете с пръст в произволен ред точките на следващия екран. Трябва да свържете поне четири точки. "\n\n"Готови ли сте да започнете? Докоснете „Напред“."</string>
     <string name="lock_intro_message" product="default" msgid="9100785646737118042"><font size="17">"Защитете телефона си от неупълномощена употреба като създадете лична фигура за отключване. "\n<font height="17">\n</font><b>"1"</b>"  На следващия екран вижте как е начертана примерна фигура. "\n<font height="17">\n</font><b>"2"</b>"  Когато сте готови, начертайте своята лична фигура за отключване. Експериментирайте с различни модели, но свържете поне четири точки. "\n<font height="17">\n</font><b>"3"</b>"  Начертайте фигурата си отново за потвърждение. "\n<font height="17">\n</font><b>"Готови ли сте да започнете? Докоснете „Напред“"</b>". "\n<font height="3">\n</font>"За да оставите телефона си незащитен, докоснете „Отказ“."</font></string>
     <string name="manageapplications_settings_title" msgid="5712405848153426706">"Управление на приложенията"</string>
     <string name="manageapplications_settings_summary" msgid="6097117021500651232">"Управление и премахване на инсталирани приложения"</string>
@@ -1290,34 +1305,37 @@
     <string name="vpn_settings_summary" msgid="8849924181594963972">"Задаване и управление на частни виртуални мрежи (VPN)"</string>
     <string name="vpn_secret_unchanged" msgid="8700613973594154529">"(непроменени)"</string>
     <string name="vpn_secret_not_set" msgid="1037792636371641845">"(не е зададенo)"</string>
-    <string name="credentials_category" msgid="8536992056377271234">"Хранилище за идентификационни данни"</string>
+    <!-- no translation found for credentials_title (4446234003860769883) -->
+    <skip />
     <string name="credentials_access" msgid="4843187230913860492">"Използване на сигурни идентификационни данни"</string>
     <string name="credentials_access_summary" msgid="319662078718574168">"Даване на достъп до защитени сертификати и други идентификационни данни"</string>
-    <string name="credentials_unlock" msgid="1463040326264133844">"Въвеждане на парола"</string>
-    <string name="credentials_unlock_hint" msgid="594679530407918031">"Въведете паролата за хранилището за идентификационни данни."</string>
-    <string name="credentials_install_certificates" product="nosdcard" msgid="619171634797689906">"Инсталиране от USB"</string>
-    <string name="credentials_install_certificates" product="default" msgid="177337517568022236">"Инсталиране от SD картата"</string>
-    <string name="credentials_install_certificates_summary" product="nosdcard" msgid="8920330112631198575">"Инсталиране на шифровани сертификати от USB"</string>
-    <string name="credentials_install_certificates_summary" product="default" msgid="7737001268684193093">"Инсталиране на сертификати от SD карта"</string>
+    <!-- no translation found for credentials_install (1395748667227729987) -->
+    <skip />
+    <!-- no translation found for credentials_install (953914549998062317) -->
+    <skip />
+    <!-- no translation found for credentials_install_summary (3679446246093149828) -->
+    <skip />
+    <!-- no translation found for credentials_install_summary (5737658257407822713) -->
+    <skip />
     <string name="credentials_set_password" msgid="9104473585811899989">"Задаване на парола"</string>
-    <string name="credentials_set_password_summary" msgid="8287876917562085701">"Задаване или промяна на паролата за хранилището за идентификационни данни"</string>
-    <string name="credentials_reset" msgid="9170150870552453457">"Изчистване на хранилище"</string>
-    <string name="credentials_reset_summary" msgid="1530388094693731636">"Изчиства хранилището от цялото съдържание и му задава нова парола"</string>
-    <string name="credentials_reset_hint" msgid="819990295796804516">"Наистина ли искате да изтриете всички идентификационни данни и да зададете нова парола за хранилището им?"</string>
+    <!-- outdated translation 8287876917562085701 -->     <string name="credentials_set_password_summary" msgid="6756719720826053228">"Задаване или промяна на паролата за хранилището за идентификационни данни"</string>
+    <!-- outdated translation 9170150870552453457 -->     <string name="credentials_reset" msgid="3239382277144980418">"Изчистване на хранилище"</string>
+    <!-- outdated translation 1530388094693731636 -->     <string name="credentials_reset_summary" msgid="3810369467217453606">"Изчиства хранилището от цялото съдържание и му задава нова парола"</string>
+    <string name="credentials_unlock" msgid="1463040326264133844">"Въвеждане на парола"</string>
+    <!-- outdated translation 594679530407918031 -->     <string name="credentials_unlock_hint" msgid="5889551635843338639">"Въведете паролата за хранилището за идентификационни данни."</string>
+    <!-- no translation found for credentials_password_hint (4915128717409363024) -->
+    <skip />
     <string name="credentials_old_password" msgid="7553393815538684028">"Текуща парола:"</string>
     <string name="credentials_new_password" msgid="267487774686796938">"Нова парола:"</string>
     <string name="credentials_confirm_password" msgid="4732250000633424345">"Потвърждаване на нова парола:"</string>
-    <string name="credentials_first_time_hint" msgid="1567821077545346039">"Задаване на парола за хранилището за идентификационни данни (поне 8 знака)."</string>
-    <string name="credentials_wrong_password" msgid="7525192410790152041">"Моля, въведете правилната парола."</string>
-    <string name="credentials_reset_warning" msgid="6392481296673345268">"Моля, въведете правилната парола. Имате още един опит преди хранилището за идентификационни данни да бъде изтрито."</string>
-    <string name="credentials_reset_warning_plural" msgid="454828369803055270">"Моля, въведете правилната парола. Имате още <xliff:g id="NUMBER">%1$d</xliff:g> опита преди хранилището за идентификационни данни да бъде изтрито."</string>
+    <!-- outdated translation 819990295796804516 -->     <string name="credentials_reset_hint" msgid="2336340927894094814">"Наистина ли искате да изтриете всички идентификационни данни и да зададете нова парола за хранилището им?"</string>
     <string name="credentials_passwords_mismatch" msgid="5288565139590031733">"Паролите не си съответстват."</string>
-    <string name="credentials_passwords_empty" msgid="8647631321684363549">"Трябва да въведете и потвърдите парола."</string>
-    <string name="credentials_password_empty" msgid="8292138152983330473">"Моля, въведете паролата."</string>
-    <string name="credentials_password_too_short" msgid="7502749986405522663">"Паролата трябва да е поне 8 знака."</string>
-    <string name="credentials_erased" msgid="7700309135582200849">"Хранилището за идентификационни данни е изтрито."</string>
+    <!-- outdated translation 7525192410790152041 -->     <string name="credentials_wrong_password" msgid="2541932597104054807">"Моля, въведете правилната парола."</string>
+    <!-- outdated translation 6392481296673345268 -->     <string name="credentials_reset_warning" msgid="5320653011511797600">"Моля, въведете правилната парола. Имате още един опит преди хранилището за идентификационни данни да бъде изтрито."</string>
+    <!-- no translation found for credentials_reset_warning_plural (6514085665301095279) -->
+    <skip />
+    <!-- outdated translation 7700309135582200849 -->     <string name="credentials_erased" msgid="2907836028586342969">"Хранилището за идентификационни данни е изтрито."</string>
     <string name="credentials_enabled" msgid="7588607413349978930">"Хранилището за идентификационни данни е активирано."</string>
-    <string name="credentials_disabled" msgid="7453188089059045380">"Хранилището за идентификационни данни е деактивирано."</string>
     <string name="emergency_tone_title" msgid="1055954530111587114">"Тон за спешност"</string>
     <string name="emergency_tone_summary" msgid="722259232924572153">"Задаване на поведение при спешно обаждане"</string>
     <string name="privacy_settings" msgid="9206631214140954954">"Поверителност"</string>
@@ -1377,7 +1395,11 @@
     <string name="wifi_setup_status_connecting" msgid="2594117697215042584">"Свързва се…"</string>
     <string name="wifi_setup_status_proceed_to_next" msgid="9071951312604559022">"Напред към следващата стъпка"</string>
     <string name="wifi_setup_status_eap_not_supported" msgid="3196386445567501484">"Не се поддържа EAP"</string>
-    <string name="wifi_setup_eap_not_supported" msgid="5083895763075722698">"Не можете да конфигурирате Wi-Fi връзка с редактиране на точката за достъп (EAP) по време на настройката. След това можете да го направите в „Настройки“ под „Кабелни и безжични мрежи“."</string>
+    <!-- outdated translation 5083895763075722698 -->     <string name="wifi_setup_eap_not_supported" msgid="683540356393542939">"Не можете да конфигурирате Wi-Fi връзка с редактиране на точката за достъп (EAP) по време на настройката. След това можете да го направите в „Настройки“ под „Кабелни и безжични мрежи“."</string>
+    <!-- no translation found for wifi_setup_description_connecting (1884664966455980182) -->
+    <skip />
+    <!-- no translation found for wifi_setup_description_connected (5235991893829582459) -->
+    <skip />
     <string name="account_sync_settings_title" msgid="4578227872921044660">"Настройки за синхрон"</string>
     <!-- no translation found for sync_is_failing (1591561768344128377) -->
     <skip />
@@ -1444,5 +1466,7 @@
     <!-- no translation found for enter_password (3268224850821675915) -->
     <skip />
     <!-- no translation found for try_again (5904121494468643129) -->
+    <skip />
+    <!-- no translation found for service_busy (225227519012409130) -->
     <skip />
 </resources>

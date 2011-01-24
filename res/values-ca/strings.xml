@@ -113,6 +113,10 @@
     <string name="bluetooth_notif_title" msgid="2485175521845371514">"Sol·licitud d\'emparellament"</string>
     <!-- no translation found for bluetooth_notif_message (618099089987569242) -->
     <skip />
+    <!-- no translation found for bluetooth_show_received_files_title (816172853268536399) -->
+    <skip />
+    <!-- no translation found for bluetooth_show_received_files_summary (7322193220909480775) -->
+    <skip />
     <string name="device_picker" msgid="8721012448931226323">"Selector de dispositiu Bluetooth"</string>
     <string name="bluetooth_permission_request" msgid="1523129741266262748">"Sol·licitud de permís de Bluetooth"</string>
     <string name="bluetooth_ask_enablement" msgid="8211158472876087588">"Una aplicació està sol·licitant permís per activar Bluetooth. Vols fer-ho?"</string>
@@ -238,7 +242,7 @@
     <string name="networks" msgid="6333316876545927039">"Selecció d\'operador"</string>
     <string name="sum_carrier_select" msgid="6648929373316748020">"Seleccioneu un operador de xarxa"</string>
     <string name="date_and_time_settings_title" msgid="3350640463596716780">"Data i hora"</string>
-    <!-- no translation found for date_and_time_settings_title_setup_wizard (6493371065760315350) -->
+    <!-- no translation found for date_and_time_settings_title_setup_wizard (2391530758339384324) -->
     <skip />
     <string name="date_and_time_settings_summary" msgid="2435705040205950381">"Defineix la data, l\'hora, el fus horari i els formats"</string>
     <string name="date_time_auto" msgid="7076906458515908345">"Data i hora automàtiques"</string>
@@ -268,38 +272,51 @@
     <string name="security_settings_summary" msgid="967393342537986570">"Defineix La meva ubicació, el desbloqueig de la pantalla, el bloqueig de la targeta SIM i el bloqueig de l\'emmagatzematge de credencials"</string>
     <string name="cdma_security_settings_summary" msgid="6068799952798901542">"Defineix La meva ubicació, el desbloqueig de pantalla i el bloqueig d\'emmagatzematge de credencials"</string>
     <string name="security_passwords_title" msgid="2930627259125138363">"Contrasenyes"</string>
-    <!-- no translation found for encryption_settings_title (5951475460321369092) -->
+    <!-- no translation found for crypt_keeper_settings_title (2288841695457542418) -->
     <skip />
-    <!-- no translation found for encrypt_title (5458306603524656835) -->
+    <!-- no translation found for crypt_keeper_encrypt_title (5790930764432654508) -->
     <skip />
-    <!-- no translation found for encrypt_summary (6950523460019506111) -->
+    <!-- no translation found for crypt_keeper_encrypt_summary (1447090863225003474) -->
     <skip />
-    <!-- outdated translation 3973555216065628262 -->     <string name="lock_settings_picker_title" msgid="8665454308380158195">"Seguretat del desbloqueig de pantalla"</string>
-    <!-- outdated translation 1129684221223017902 -->     <string name="unlock_set_unlock_launch_picker_title" msgid="4461562893699328786">"Configuració del bloqueig de pantalla"</string>
+    <!-- no translation found for crypt_keeper_confirm_title (8300073420086568022) -->
+    <skip />
+    <!-- no translation found for crypt_keeper_desc (3806424855201189058) -->
+    <skip />
+    <!-- no translation found for crypt_keeper_button_text (1189623490604750854) -->
+    <skip />
+    <!-- no translation found for crypt_keeper_button_text (2008346408473255519) -->
+    <skip />
+    <!-- no translation found for crypt_keeper_final_desc (4150888307809341579) -->
+    <skip />
+    <!-- no translation found for crypt_keeper_setup_title (1783951453124244969) -->
+    <skip />
+    <!-- no translation found for crypt_keeper_setup_description (5169437210993176052) -->
+    <skip />
+    <!-- no translation found for crypt_keeper_setup_description (5672516169559235283) -->
+    <skip />
+    <!-- no translation found for crypt_keeper_cooldown (6736063610343230255) -->
+    <skip />
+    <string name="lock_settings_picker_title" msgid="8665454308380158195">"Conf. bloqueig pant."</string>
+    <string name="unlock_set_unlock_launch_picker_title" msgid="4461562893699328786">"Configuració del bloqueig de pantalla"</string>
     <string name="unlock_set_unlock_launch_picker_change_title" msgid="6987228635944678726">"Canvia el bloqueig de pantalla"</string>
     <string name="unlock_set_unlock_launch_picker_change_summary" msgid="2790960639554590668">"Canvia o desactiva la seguretat de contrasenyes, PIN o patrons"</string>
     <string name="unlock_set_unlock_launch_picker_enable_summary" msgid="4791110798817242301">"Trieu un mètode per bloquejar la pantalla"</string>
     <string name="unlock_set_unlock_off_title" msgid="1613932765246180079">"Desactivat"</string>
-    <!-- outdated translation 2992485517488881365 -->     <string name="unlock_set_unlock_off_summary" msgid="2791013557563587655">"No mostris la pantalla de bloqueig"</string>
-    <!-- outdated translation 3760684669884671990 -->     <string name="unlock_set_unlock_none_title" msgid="5165705762615690332">"Cap"</string>
-    <!-- outdated translation 2658550480388272618 -->     <string name="unlock_set_unlock_none_summary" msgid="2609139908913114644">"Desactiva la seguretat de desbloqueig de pantalla"</string>
+    <string name="unlock_set_unlock_off_summary" msgid="2791013557563587655">"No bloquegis mai la pantalla"</string>
+    <string name="unlock_set_unlock_none_title" msgid="5165705762615690332">"Sense assegurar"</string>
+    <string name="unlock_set_unlock_none_summary" msgid="2609139908913114644">"No req. patró, PIN o contr. per desbl. pant."</string>
     <string name="unlock_set_unlock_pattern_title" msgid="2912067603917311700">"Patró"</string>
-    <!-- outdated translation 3018395214738645405 -->     <string name="unlock_set_unlock_pattern_summary" msgid="8467282436608077882">"Dibuixeu el patró per desbloquejar la pantalla"</string>
+    <string name="unlock_set_unlock_pattern_summary" msgid="8467282436608077882">"Demana un patró per desbloquejar la pantalla"</string>
     <string name="unlock_set_unlock_pin_title" msgid="5846029709462329515">"PIN"</string>
-    <!-- outdated translation 4131169672844263316 -->     <string name="unlock_set_unlock_pin_summary" msgid="5556722736289132512">"Introduïu un PIN numèric per desbloquejar la pantalla"</string>
+    <string name="unlock_set_unlock_pin_summary" msgid="5556722736289132512">"Sol·licita PIN numèric per desbloq. la pant."</string>
     <string name="unlock_set_unlock_password_title" msgid="8775603825675090937">"Contrasenya"</string>
-    <!-- outdated translation 4623254789833899286 -->     <string name="unlock_set_unlock_password_summary" msgid="7871968012198279034">"Introduïu una contrasenya per desbloquejar la pantalla"</string>
+    <string name="unlock_set_unlock_password_summary" msgid="7871968012198279034">"Demana contrasenya per desbloq. la pantalla"</string>
     <string name="unlock_set_unlock_disabled_summary" msgid="8816944391772300580">"Desactivat per administrador remot de dispositiu"</string>
-    <!-- no translation found for unlock_set_unlock_mode_off (378729687629105388) -->
-    <skip />
-    <!-- no translation found for unlock_set_unlock_mode_none (7953821968316697309) -->
-    <skip />
-    <!-- no translation found for unlock_set_unlock_mode_pattern (464022606293547390) -->
-    <skip />
-    <!-- no translation found for unlock_set_unlock_mode_pin (1379365142708807163) -->
-    <skip />
-    <!-- no translation found for unlock_set_unlock_mode_password (6955742995327081060) -->
-    <skip />
+    <string name="unlock_set_unlock_mode_off" msgid="378729687629105388">"Desactivat"</string>
+    <string name="unlock_set_unlock_mode_none" msgid="7953821968316697309">"Sense assegurar"</string>
+    <string name="unlock_set_unlock_mode_pattern" msgid="464022606293547390">"Assegurada mitjançant patró"</string>
+    <string name="unlock_set_unlock_mode_pin" msgid="1379365142708807163">"Assegurada mitjançant PIN"</string>
+    <string name="unlock_set_unlock_mode_password" msgid="6955742995327081060">"Assegurada mitjançant contrasenya"</string>
     <string name="unlock_disable_lock_title" msgid="1427036227416979120">"Desactiva el bloqueig de pantalla"</string>
     <string name="unlock_disable_lock_pattern_summary" msgid="6801602880568869201">"Elimina el patró de desbloqueig"</string>
     <string name="unlock_disable_lock_pin_summary" msgid="8856842745366993387">"Elimina el PIN de desbloqueig"</string>
@@ -647,12 +664,11 @@
     <string name="internal_memory" msgid="9129595691484260784">"Emmagatzematge intern"</string>
     <string name="sd_memory" product="nosdcard" msgid="2510246194083052841">"Emmagatzematge USB"</string>
     <string name="sd_memory" product="default" msgid="151871913888051515">"Targeta SD"</string>
-    <string name="memory_available" msgid="418542433817289474">"Espai disponible"</string>
-    <string name="memory_size" msgid="6629067715017232195">"Espai total"</string>
-    <!-- no translation found for memory_calculating_size (2188358544203768588) -->
-    <skip />
-    <string name="memory_apps_usage" msgid="5818922761412589352">"Ús de l\'aplicació"</string>
-    <string name="memory_media_usage" msgid="5655498435493764372">"Ús de mitjans"</string>
+    <!-- outdated translation 418542433817289474 -->     <string name="memory_available" msgid="5052397223077021181">"Espai disponible"</string>
+    <!-- outdated translation 6629067715017232195 -->     <string name="memory_size" msgid="5458889090691922288">"Espai total"</string>
+    <string name="memory_calculating_size" msgid="2188358544203768588">"S\'està calculant..."</string>
+    <!-- outdated translation 5818922761412589352 -->     <string name="memory_apps_usage" msgid="9079237985722858506">"Ús de l\'aplicació"</string>
+    <!-- outdated translation 5655498435493764372 -->     <string name="memory_media_usage" msgid="3738830697707880405">"Ús de mitjans"</string>
     <string name="sd_eject" product="nosdcard" msgid="4988563376492400073">"Desmunta emmag. compartit"</string>
     <string name="sd_eject" product="default" msgid="6915293408836853020">"Desmunta la targeta SD"</string>
     <string name="sd_eject_summary" product="nosdcard" msgid="5009296896648072891">"Desinstal·la emmag. USB intern"</string>
@@ -666,7 +682,7 @@
     <string name="sd_format" product="nosdcard" msgid="2148179271623099054">"Esborra l\'emmagatzematge USB"</string>
     <string name="sd_format" product="default" msgid="2576054280507119870">"Esborra la targeta SD"</string>
     <string name="sd_format_summary" product="nosdcard" msgid="6331905044907914603">"Esborra totes les dades de l\'emmagatzematge USB intern, com música i fotos."</string>
-    <string name="sd_format_summary" product="default" msgid="212703692181793109">"Esborra totes les dades de la targeta SD, com música i fotos"</string>
+    <string name="sd_format_summary" product="default" msgid="212703692181793109">"Esborra totes les dades de la targeta SD, com ara la música i les fotos"</string>
     <string name="sd_unavailable" msgid="8580107589533213904">"No disponible"</string>
     <string name="read_only" msgid="6702420168629076340">" (Només de lectura)"</string>
     <string name="dlg_confirm_unmount_title" product="nosdcard" msgid="2349876662428231297">"Desmunta emmag. USB"</string>
@@ -722,8 +738,10 @@
     <string name="master_clear_desc" product="tablet" msgid="1305457209008369655">"Això esborrarà totes les dades de l\'"<b>"emmagatzematge intern"</b>" de la tauleta, entre les quals s\'inclouen:"\n\n<li>"El teu Compte de Google"</li>\n<li>"Dades i configuració del sistema i d\'aplicacions"</li>\n<li>"Aplicacions baixades"</li></string>
     <string name="master_clear_desc" product="default" msgid="2950536633526374209">"Això esborrarà totes les dades de l\'"<b>"emmagatzematge intern"</b>" del telèfon, inclosos:"\n\n<li>"El Compte de Google"</li>\n<li>"Dades i configuració del sistema i d\'aplicacions"</li>\n<li>"Aplicacions baixades"</li></string>
     <string name="master_clear_accounts" product="default" msgid="6412857499147999073">\n\n"Actualment has iniciat la sessió als comptes següents:"\n</string>
+    <!-- no translation found for master_clear_desc_also_erases_external (1903185203791274237) -->
+    <skip />
     <string name="master_clear_desc_erase_external_storage" product="nosdcard" msgid="4740866328425123395">\n\n"Per esborrar també música, imatges i altres dades d\'usuari, cal esborrar l\'"<b>"emmagatzematge USB"</b>"."</string>
-    <string name="master_clear_desc_erase_external_storage" product="default" msgid="7339100478676372901">\n\n"Per esborrar també música, imatges i altres dades d\'usuari, cal esborrar la "<b>"targeta SD"</b>"."</string>
+    <string name="master_clear_desc_erase_external_storage" product="default" msgid="7339100478676372901">\n\n"Si també vols suprimir música, imatges i altres dades de l\'usuari, cal que esborris la "<b>"targeta SD"</b>"."</string>
     <string name="erase_external_storage" product="nosdcard" msgid="969364037450286809">"Esborra l\'emmagatzematge USB"</string>
     <string name="erase_external_storage" product="default" msgid="1397239046334307625">"Esborra la targeta SD"</string>
     <string name="erase_external_storage_description" product="nosdcard" msgid="444834593696342279">"Esborra totes les dades de l\'emmagatzematge USB intern, com música o fotos."</string>
@@ -796,9 +814,9 @@
     <string name="assisted_gps" msgid="4649317129586736885">"Utilitza GPS assistit"</string>
     <string name="assisted_gps_enabled" msgid="8751899609589792803">"Utilitza el servidor per ajudar al GPS (desmarqueu-ho per reduir l\'ús de la xarxa)"</string>
     <string name="assisted_gps_disabled" msgid="6982698333968010748">"Utilitza el servidor per ajudar al GPS (desmarqueu-ho per millorar el rendiment del GPS)"</string>
-    <!-- outdated translation 3214740644957841179 -->     <string name="use_location_title" msgid="3659340070401464551">"Utilitza la ubicació per a la cerca de Google"</string>
-    <!-- outdated translation 1876901471649359806 -->     <string name="use_location_summary_disabled" msgid="6518008620918354403">"Utilitza la ubicació per a la cerca de Google i per a altres serveis de Google"</string>
-    <!-- outdated translation 984549156918597265 -->     <string name="use_location_summary_enabled" msgid="8110246289085796179">"Ubicació utilitzada per millorar els resultats de cerca de Google i altres serveis de Google"</string>
+    <string name="use_location_title" msgid="3659340070401464551">"Utilitza la ubicació per a la cerca de Google"</string>
+    <string name="use_location_summary_disabled" msgid="6518008620918354403">"Utilitza la ubicació per a la cerca de Google i per a altres serveis de Google"</string>
+    <string name="use_location_summary_enabled" msgid="8110246289085796179">"Ubicació utilitzada per millorar els resultats de la cerca de Google i altres serveis de Google"</string>
     <string name="about_settings" product="tablet" msgid="593457295516533765">"Quant a la tauleta"</string>
     <string name="about_settings" product="default" msgid="1743378368185371685">"Quant al telèfon"</string>
     <string name="about_settings_summary" msgid="3371517697156165959">"Mostra informació legal, estat, versió de programari"</string>
@@ -859,10 +877,7 @@
     <string name="next_button_label" msgid="8890792540116568321">"Següent"</string>
     <string name="lock_title" product="tablet" msgid="2909697418179419990">"Seguretat de la tauleta"</string>
     <string name="lock_title" product="default" msgid="4059246467204273930">"Protecció del telèfon"</string>
-    <!-- unknown placeholder TAG_FONT_0 in lock_intro_message -->
-    <skip />
-    <!-- no translation found for lock_intro_message (3692151094288835065) -->
-    <skip />
+    <string name="lock_intro_message" product="tablet" msgid="3692151094288835065">"Protegeix la tauleta de l\'ús no autoritzat: crea un patró personal de desbloqueig de la pantalla. Fes servir el dit per connectar els punts en l\'ordre que vulguis a la pantalla següent. Has de connectar un mínim de quatre punts. "\n\n"Estàs preparat per començar? Toca \"Següent\"."</string>
     <string name="lock_intro_message" product="default" msgid="9100785646737118042"><font size="17">"Per protegir el telèfon d\'usos no autoritzats, creeu un patró de desbloqueig de pantalla personal. "\n<font height="17">\n</font><b>"1"</b>"  A la pantalla següent veureu com es dibuixa un patró d\'exemple. "\n<font height="17">\n</font><b>"2"</b>"  Quan estigueu preparat, dibuixeu el vostre propi patró de desbloqueig personal. Experimenteu amb diversos patrons, però connecteu com a mínim quatre punts. "\n<font height="17">\n</font><b>"3"</b>"  Torneu a dibuixar el patró per confirmar-lo. "\n<font height="17">\n</font><b>"Esteu preparat per començar? Toqueu \"Següent\""</b>". "\n<font height="3">\n</font>"Per deixar el telèfon desprotegit, toqueu \"Cancel·la\"."</font></string>
     <string name="manageapplications_settings_title" msgid="5712405848153426706">"Gestiona les aplicacions"</string>
     <string name="manageapplications_settings_summary" msgid="6097117021500651232">"Gestiona i elimina les aplicacions instal·lades"</string>
@@ -1290,34 +1305,37 @@
     <string name="vpn_settings_summary" msgid="8849924181594963972">"Configura i gestiona xarxes privades virtuals (VPN)"</string>
     <string name="vpn_secret_unchanged" msgid="8700613973594154529">"(sense canvis)"</string>
     <string name="vpn_secret_not_set" msgid="1037792636371641845">"(sense definir)"</string>
-    <string name="credentials_category" msgid="8536992056377271234">"Emmagatzematge de credencials"</string>
+    <!-- no translation found for credentials_title (4446234003860769883) -->
+    <skip />
     <string name="credentials_access" msgid="4843187230913860492">"Utilitza credencials segures"</string>
     <string name="credentials_access_summary" msgid="319662078718574168">"Permet a les aplicacions accedir als certificats segurs i a altres credencials"</string>
-    <string name="credentials_unlock" msgid="1463040326264133844">"Introduïu la contrasenya"</string>
-    <string name="credentials_unlock_hint" msgid="594679530407918031">"Introduïu la contrasenya d\'emmagatzematge de credencials."</string>
-    <string name="credentials_install_certificates" product="nosdcard" msgid="619171634797689906">"Instal·la des d\'emmag. USB"</string>
-    <string name="credentials_install_certificates" product="default" msgid="177337517568022236">"Instal·la des de la targeta SD"</string>
-    <string name="credentials_install_certificates_summary" product="nosdcard" msgid="8920330112631198575">"Instal·la certificats encriptats d\'emmagatzematge USB"</string>
-    <string name="credentials_install_certificates_summary" product="default" msgid="7737001268684193093">"Instal·la els certificats encriptats des de la targeta SD"</string>
+    <!-- no translation found for credentials_install (1395748667227729987) -->
+    <skip />
+    <!-- no translation found for credentials_install (953914549998062317) -->
+    <skip />
+    <!-- no translation found for credentials_install_summary (3679446246093149828) -->
+    <skip />
+    <!-- no translation found for credentials_install_summary (5737658257407822713) -->
+    <skip />
     <string name="credentials_set_password" msgid="9104473585811899989">"Defineix la contrasenya"</string>
-    <string name="credentials_set_password_summary" msgid="8287876917562085701">"Defineix o canvia la contrasenya d\'emmagatzematge de credencials"</string>
-    <string name="credentials_reset" msgid="9170150870552453457">"Esborra l\'emmagatzematge"</string>
-    <string name="credentials_reset_summary" msgid="1530388094693731636">"Esborra tot el contingut de l\'emmagatzematge de credencials i restableix-ne la contrasenya"</string>
-    <string name="credentials_reset_hint" msgid="819990295796804516">"Esteu segur que voleu suprimir totes les credencials i restablir la contrasenya d\'emmagatzematge de credencials?"</string>
+    <!-- outdated translation 8287876917562085701 -->     <string name="credentials_set_password_summary" msgid="6756719720826053228">"Defineix o canvia la contrasenya d\'emmagatzematge de credencials"</string>
+    <!-- outdated translation 9170150870552453457 -->     <string name="credentials_reset" msgid="3239382277144980418">"Esborra l\'emmagatzematge"</string>
+    <!-- outdated translation 1530388094693731636 -->     <string name="credentials_reset_summary" msgid="3810369467217453606">"Esborra tot el contingut de l\'emmagatzematge de credencials i restableix-ne la contrasenya"</string>
+    <string name="credentials_unlock" msgid="1463040326264133844">"Introduïu la contrasenya"</string>
+    <!-- outdated translation 594679530407918031 -->     <string name="credentials_unlock_hint" msgid="5889551635843338639">"Introduïu la contrasenya d\'emmagatzematge de credencials."</string>
+    <!-- no translation found for credentials_password_hint (4915128717409363024) -->
+    <skip />
     <string name="credentials_old_password" msgid="7553393815538684028">"Contrasenya actual:"</string>
     <string name="credentials_new_password" msgid="267487774686796938">"Contrasenya nova:"</string>
     <string name="credentials_confirm_password" msgid="4732250000633424345">"Confirmeu la contrasenya nova:"</string>
-    <string name="credentials_first_time_hint" msgid="1567821077545346039">"Defineix una contrasenya per a l\'emmagatzematge de credencials (almenys 8 caràcters)."</string>
-    <string name="credentials_wrong_password" msgid="7525192410790152041">"Introduïu la contrasenya correcta."</string>
-    <string name="credentials_reset_warning" msgid="6392481296673345268">"Introduïu la contrasenya correcta. Teniu un intent més per introduir la contrasenya correcta abans que s\'esborri l\'emmagatzematge de credencials."</string>
-    <string name="credentials_reset_warning_plural" msgid="454828369803055270">"Introduïu la contrasenya correcta. Teniu <xliff:g id="NUMBER">%1$d</xliff:g> intents més per introduir la contrasenya correcta abans que s\'esborri l\'emmagatzematge de credencials."</string>
+    <!-- outdated translation 819990295796804516 -->     <string name="credentials_reset_hint" msgid="2336340927894094814">"Esteu segur que voleu suprimir totes les credencials i restablir la contrasenya d\'emmagatzematge de credencials?"</string>
     <string name="credentials_passwords_mismatch" msgid="5288565139590031733">"Les contrasenyes no coincideixen."</string>
-    <string name="credentials_passwords_empty" msgid="8647631321684363549">"Heu d\'introduir i confirmar una contrasenya."</string>
-    <string name="credentials_password_empty" msgid="8292138152983330473">"Introduïu la contrasenya."</string>
-    <string name="credentials_password_too_short" msgid="7502749986405522663">"La contrasenya ha de tenir almenys 8 caràcters."</string>
-    <string name="credentials_erased" msgid="7700309135582200849">"S\'ha esborrat l\'emmagatzematge de credencials."</string>
+    <!-- outdated translation 7525192410790152041 -->     <string name="credentials_wrong_password" msgid="2541932597104054807">"Introduïu la contrasenya correcta."</string>
+    <!-- outdated translation 6392481296673345268 -->     <string name="credentials_reset_warning" msgid="5320653011511797600">"Introduïu la contrasenya correcta. Teniu un intent més per introduir la contrasenya correcta abans que s\'esborri l\'emmagatzematge de credencials."</string>
+    <!-- no translation found for credentials_reset_warning_plural (6514085665301095279) -->
+    <skip />
+    <!-- outdated translation 7700309135582200849 -->     <string name="credentials_erased" msgid="2907836028586342969">"S\'ha esborrat l\'emmagatzematge de credencials."</string>
     <string name="credentials_enabled" msgid="7588607413349978930">"L\'emmagatzematge de credencials està activat."</string>
-    <string name="credentials_disabled" msgid="7453188089059045380">"L\'emmagatzematge de credencials està desactivat."</string>
     <string name="emergency_tone_title" msgid="1055954530111587114">"To d\'emergència"</string>
     <string name="emergency_tone_summary" msgid="722259232924572153">"Defineix el comportament quan es fa una trucada d\'emergència"</string>
     <string name="privacy_settings" msgid="9206631214140954954">"Privadesa"</string>
@@ -1377,7 +1395,11 @@
     <string name="wifi_setup_status_connecting" msgid="2594117697215042584">"S\'està connectant..."</string>
     <string name="wifi_setup_status_proceed_to_next" msgid="9071951312604559022">"Continua al pas següent"</string>
     <string name="wifi_setup_status_eap_not_supported" msgid="3196386445567501484">"EAP no és compatible"</string>
-    <string name="wifi_setup_eap_not_supported" msgid="5083895763075722698">"No pots configurar una connexió EAP Wi-Fi durant la configuració. Ho pots fer després a Configuració, dins de Xarxes sense fil."</string>
+    <!-- outdated translation 5083895763075722698 -->     <string name="wifi_setup_eap_not_supported" msgid="683540356393542939">"No pots configurar una connexió EAP Wi-Fi durant la configuració. Ho pots fer després a Configuració, dins de Xarxes sense fil."</string>
+    <!-- no translation found for wifi_setup_description_connecting (1884664966455980182) -->
+    <skip />
+    <!-- no translation found for wifi_setup_description_connected (5235991893829582459) -->
+    <skip />
     <string name="account_sync_settings_title" msgid="4578227872921044660">"Configuració de sincronització"</string>
     <!-- no translation found for sync_is_failing (1591561768344128377) -->
     <skip />
@@ -1444,5 +1466,7 @@
     <!-- no translation found for enter_password (3268224850821675915) -->
     <skip />
     <!-- no translation found for try_again (5904121494468643129) -->
+    <skip />
+    <!-- no translation found for service_busy (225227519012409130) -->
     <skip />
 </resources>
