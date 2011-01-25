@@ -431,15 +431,17 @@ public class RunningProcessesView extends FrameLayout
 
     // utility method used to start sub activity
     private void startServiceDetailsActivity(RunningState.MergedItem mi) {
-        // start new fragment to display extended information
-        Bundle args = new Bundle();
-        args.putInt(RunningServiceDetails.KEY_UID, mi.mProcess.mUid);
-        args.putString(RunningServiceDetails.KEY_PROCESS, mi.mProcess.mProcessName);
-        args.putBoolean(RunningServiceDetails.KEY_BACKGROUND, mAdapter.mShowBackground);
-
-        PreferenceActivity pa = (PreferenceActivity)mOwner.getActivity();
-        pa.startPreferencePanel(RunningServiceDetails.class.getName(), args,
-                R.string.runningservicedetails_settings_title, null, null, 0);
+        if (mOwner != null) {
+            // start new fragment to display extended information
+            Bundle args = new Bundle();
+            args.putInt(RunningServiceDetails.KEY_UID, mi.mProcess.mUid);
+            args.putString(RunningServiceDetails.KEY_PROCESS, mi.mProcess.mProcessName);
+            args.putBoolean(RunningServiceDetails.KEY_BACKGROUND, mAdapter.mShowBackground);
+    
+            PreferenceActivity pa = (PreferenceActivity)mOwner.getActivity();
+            pa.startPreferencePanel(RunningServiceDetails.class.getName(), args,
+                    R.string.runningservicedetails_settings_title, null, null, 0);
+        }
     }
     
     public void onMovedToScrapHeap(View view) {

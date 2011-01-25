@@ -78,6 +78,17 @@ public class SettingsPreferenceFragment extends PreferenceFragment
         return getActivity().getPackageManager();
     }
 
+    @Override
+    public void onDetach() {
+        if (isRemoving()) {
+            if (mDialogFragment != null) {
+                mDialogFragment.dismiss();
+                mDialogFragment = null;
+            }
+        }
+        super.onDetach();
+    }
+
     // Dialog management
 
     protected void showDialog(int dialogId) {
