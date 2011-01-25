@@ -120,4 +120,16 @@
         <item name="android:windowNoTitle">true</item>
         <item name="android:windowIsFloating">true</item>
     </style>
+
+    <style name="CryptKeeperTheme" parent="@android:style/Theme.Holo.NoActionBar">
+        <item name="android:windowAnimationStyle">@style/CryptKeeperAnimation</item>
+    </style>
+
+    <style name="CryptKeeperBlankTheme" parent="@android:style/Theme.Holo.NoActionBar">
+        <item name="android:background">#ff000000</item>
+    </style>
+
+    <style name="CryptKeeperAnimation">
+        <item name="android:windowExitAnimation">@anim/crypt_keeper_exit</item>
+    </style>
 </resources>
