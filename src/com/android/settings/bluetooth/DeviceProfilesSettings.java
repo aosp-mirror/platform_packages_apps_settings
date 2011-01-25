@@ -58,7 +58,6 @@ public class DeviceProfilesSettings extends SettingsPreferenceFragment
     private CachedBluetoothDevice mCachedDevice;
 
     private PreferenceGroup mProfileContainer;
-    private CheckBoxPreference mAllowIncomingPref;
     private EditTextPreference mDeviceNamePref;
     private final HashMap<String,CheckBoxPreference> mAutoConnectPrefs
             = new HashMap<String,CheckBoxPreference>();
@@ -93,17 +92,6 @@ public class DeviceProfilesSettings extends SettingsPreferenceFragment
         getPreferenceScreen().setOrderingAsAdded(false);
 
         mProfileContainer = (PreferenceGroup) findPreference(KEY_PROFILE_CONTAINER);
-        mAllowIncomingPref = (CheckBoxPreference) findPreference(KEY_ALLOW_INCOMING);
-
-        // Configure incoming file transfer preference if device supports OPP
-        // or else remove the preference item
-        if (isObjectPushSupported(device)) {
-            mAllowIncomingPref.setChecked(isIncomingFileTransfersAllowed());
-            mAllowIncomingPref.setOnPreferenceChangeListener(this);
-        } else {
-            getPreferenceScreen().removePreference(mAllowIncomingPref);
-            mAllowIncomingPref = null;
-        }
 
         mDeviceNamePref = (EditTextPreference) findPreference(KEY_RENAME_DEVICE);
         mDeviceNamePref.setSummary(mCachedDevice.getName());
@@ -210,9 +198,7 @@ public class DeviceProfilesSettings extends SettingsPreferenceFragment
     }
 
     public boolean onPreferenceChange(Preference preference, Object newValue) {
-        if (preference == mAllowIncomingPref) {
-            setIncomingFileTransfersAllowed((Boolean) newValue);
-        } else if (preference == mDeviceNamePref) {
+        if (preference == mDeviceNamePref) {
             mCachedDevice.setName((String) newValue);
         } else if (preference instanceof CheckBoxPreference) {
             boolean autoConnect = (Boolean) newValue;
