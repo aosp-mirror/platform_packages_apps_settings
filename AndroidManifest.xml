@@ -1079,7 +1079,7 @@
         <activity android:name=".CryptKeeper"
                   android:immersive="true"
                   android:launchMode="singleTop"
-                  android:theme="@android:style/Theme.Holo.NoActionBar"
+                  android:theme="@style/CryptKeeperTheme"
                   android:windowSoftInputMode="stateAlwaysHidden">
             <intent-filter android:priority="10">
                 <action android:name="android.intent.action.MAIN" />
@@ -1087,6 +1087,12 @@
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
+
+        <activity android:name=".CryptKeeper$Blank"
+            android:immersive="true"
+            android:launchMode="singleTop"
+            android:theme="@style/CryptKeeperBlankTheme"
+        />
 
         <!-- Pseudo-activity used to provide an intent-filter entry point to encryption settings -->
         <activity android:name="Settings$CryptKeeperSettingsActivity"
