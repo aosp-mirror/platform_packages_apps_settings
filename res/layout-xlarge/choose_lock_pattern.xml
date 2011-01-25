@@ -54,25 +54,18 @@
         android:layout_height="wrap_content">
 
         <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            style="@style/SecurityPreferenceButtonContainer"
             android:layout_alignParentRight="true"
             android:orientation="horizontal">
 
             <!-- left / top button: skip, or re-try -->
             <Button android:id="@+id/footerLeftButton"
-                android:layout_width="140dip"
-                android:layout_height="wrap_content"
-                android:ellipsize="marquee"
-                android:singleLine="true"
+                style="@style/SecurityPreferenceButton"
                 android:text="@string/lockpattern_restart_button_text"/>
 
             <!-- right / bottom button: confirm or ok -->
             <Button android:id="@+id/footerRightButton"
-                android:layout_width="140dip"
-                android:layout_height="wrap_content"
-                android:ellipsize="marquee"
-                android:singleLine="true"
+                style="@style/SecurityPreferenceButton"
                 android:text="@string/lockpattern_confirm_button_text"/>
 
         </LinearLayout>
