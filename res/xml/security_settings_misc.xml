@@ -41,11 +41,8 @@
             android:persistent="false">
         <Preference android:title="@string/manage_device_admin"
                 android:summary="@string/manage_device_admin_summary"
-                android:persistent="false">
-            <intent android:action="android.intent.action.MAIN"
-                    android:targetPackage="com.android.settings"
-                    android:targetClass="com.android.settings.DeviceAdminSettings"/>
-        </Preference>
+                android:persistent="false"
+                android:fragment="com.android.settings.DeviceAdminSettings"/>
     </PreferenceCategory>
 
     <PreferenceCategory android:title="@string/credentials_title"
