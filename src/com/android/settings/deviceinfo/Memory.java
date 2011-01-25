@@ -23,6 +23,7 @@ import com.android.settings.deviceinfo.MemoryMeasurement.MeasurementReceiver;
 import android.app.ActivityManager;
 import android.app.AlertDialog;
 import android.app.Dialog;
+import android.app.DownloadManager;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -32,9 +33,7 @@ import android.content.DialogInterface.OnCancelListener;
 import android.content.pm.ApplicationInfo;
 import android.content.res.Resources;
 import android.graphics.drawable.ShapeDrawable;
-import android.graphics.drawable.shapes.RectShape;
 import android.graphics.drawable.shapes.RoundRectShape;
-import android.hardware.UsbManager;
 import android.os.Bundle;
 import android.os.Environment;
 import android.os.Handler;
@@ -56,8 +55,7 @@ import java.util.List;
 
 public class Memory extends SettingsPreferenceFragment implements OnCancelListener,
         MeasurementReceiver {
-    private static final String TAG = "Memory";
-    static final boolean localLOGV = false;
+    private static final String TAG = "MemorySettings";
 
     private static final String MEMORY_SD_SIZE = "memory_sd_size";
 
@@ -74,8 +72,6 @@ public class Memory extends SettingsPreferenceFragment implements OnCancelListen
     private static final String MEMORY_INTERNAL_AVAIL = "memory_internal_avail";
 
     private static final String MEMORY_INTERNAL_APPS = "memory_internal_apps";
-
-    private static final String MEMORY_INTERNAL_MEDIA = "memory_internal_media";
 
     private static final String MEMORY_INTERNAL_CHART = "memory_internal_chart";
 
@@ -94,13 +90,13 @@ public class Memory extends SettingsPreferenceFragment implements OnCancelListen
     // Internal storage preferences
     private Preference mInternalSize;
     private Preference mInternalAvail;
-    private Preference mInternalMediaUsage;
     private Preference mInternalAppsUsage;
+    private final Preference[] mMediaPreferences = new Preference[Constants.NUM_MEDIA_DIRS_TRACKED];
     private UsageBarPreference mInternalUsageChart;
 
     // Internal storage chart colors
-    private int mInternalMediaColor;
     private int mInternalAppsColor;
+    private int mInternalAvailColor;
     private int mInternalUsedColor;
 
     boolean mSdMountToggleAdded = true;
@@ -134,9 +130,12 @@ public class Memory extends SettingsPreferenceFragment implements OnCancelListen
                     Bundle bundle = msg.getData();
                     final long totalSize = bundle.getLong(MemoryMeasurement.TOTAL_SIZE);
                     final long availSize = bundle.getLong(MemoryMeasurement.AVAIL_SIZE);
-                    final long mediaUsed = bundle.getLong(MemoryMeasurement.MEDIA_USED);
                     final long appsUsed = bundle.getLong(MemoryMeasurement.APPS_USED);
-                    updateUiExact(totalSize, availSize, mediaUsed, appsUsed);
+                    final long[] mediaSizes = new long[Constants.NUM_MEDIA_DIRS_TRACKED];
+                    for (int i = 0; i < Constants.NUM_MEDIA_DIRS_TRACKED; i++) {
+                        mediaSizes[i] = bundle.getLong(Constants.mMediaDirs.get(i).mKey);
+                    }
+                    updateUiExact(totalSize, availSize, appsUsed, mediaSizes);
                     break;
                 }
                 case MSG_UI_UPDATE_EXTERNAL_APPROXIMATE: {
@@ -175,31 +174,59 @@ public class Memory extends SettingsPreferenceFragment implements OnCancelListen
         }
 
         mInternalSize = findPreference(MEMORY_INTERNAL_SIZE);
-        mInternalAvail = findPreference(MEMORY_INTERNAL_AVAIL);
-        mInternalMediaUsage = findPreference(MEMORY_INTERNAL_MEDIA);
-        mInternalAppsUsage = findPreference(MEMORY_INTERNAL_APPS);
-
-        mInternalMediaColor = mRes.getColor(R.color.memory_media_usage);
         mInternalAppsColor = mRes.getColor(R.color.memory_apps_usage);
         mInternalUsedColor = android.graphics.Color.GRAY;
-
+        mInternalAvailColor = mRes.getColor(R.color.memory_avail);
+        final int buttonSize = (int) mRes.getDimension(R.dimen.device_memory_usage_button_size);
         float[] radius = new float[] {
                 5f, 5f, 5f, 5f, 5f, 5f, 5f, 5f
         };
         RoundRectShape shape1 = new RoundRectShape(radius, null, null);
 
-        ShapeDrawable mediaShape = new ShapeDrawable(shape1);
-        mediaShape.setIntrinsicWidth(32);
-        mediaShape.setIntrinsicHeight(32);
-        mediaShape.getPaint().setColor(mInternalMediaColor);
-        mInternalMediaUsage.setIcon(mediaShape);
+        // total available space
+        mInternalAvail = findPreference(MEMORY_INTERNAL_AVAIL);
+        ShapeDrawable availShape = new ShapeDrawable(shape1);
+        availShape.setIntrinsicWidth(buttonSize);
+        availShape.setIntrinsicHeight(buttonSize);
+        availShape.getPaint().setColor(mInternalAvailColor);
+        mInternalAvail.setIcon(availShape);
 
+        // used by apps
+        mInternalAppsUsage = findPreference(MEMORY_INTERNAL_APPS);
         ShapeDrawable appsShape = new ShapeDrawable(shape1);
-        appsShape.setIntrinsicWidth(32);
-        appsShape.setIntrinsicHeight(32);
+        appsShape.setIntrinsicWidth(buttonSize);
+        appsShape.setIntrinsicHeight(buttonSize);
         appsShape.getPaint().setColor(mInternalAppsColor);
         mInternalAppsUsage.setIcon(appsShape);
 
+        // space used by individual major directories on /sdcard
+        for (int i = 0; i < Constants.NUM_MEDIA_DIRS_TRACKED; i++) {
+            // nothing to be displayed for certain entries in Constants.mMediaDirs
+            if (Constants.mMediaDirs.get(i).mPreferenceName == null) {
+                continue;
+            }
+            mMediaPreferences[i] = findPreference(Constants.mMediaDirs.get(i).mPreferenceName);
+            ShapeDrawable shape = new ShapeDrawable(shape1);
+            shape.setIntrinsicWidth(buttonSize);
+            shape.setIntrinsicHeight(buttonSize);
+            int color = 0;
+            switch (i) {
+                case Constants.DOWNLOADS_INDEX:
+                    color = mRes.getColor(R.color.memory_downloads);
+                    break;
+                case Constants.PIC_VIDEO_INDEX:
+                    color = mRes.getColor(R.color.memory_video);
+                    break;
+                case Constants.MUSIC_INDEX:
+                    color = mRes.getColor(R.color.memory_audio);
+                    break;
+                case Constants.MEDIA_MISC_INDEX:
+                    color = mRes.getColor(R.color.memory_misc);
+                    break;
+            }
+            shape.getPaint().setColor(color);
+            mMediaPreferences[i].setIcon(shape);
+        }
         mInternalUsageChart = (UsageBarPreference) findPreference(MEMORY_INTERNAL_CHART);
 
         mMeasurement = MemoryMeasurement.getInstance(getActivity());
@@ -209,7 +236,7 @@ public class Memory extends SettingsPreferenceFragment implements OnCancelListen
     @Override
     public void onResume() {
         super.onResume();
-
+        mMeasurement.setReceiver(this);
         IntentFilter intentFilter = new IntentFilter(Intent.ACTION_MEDIA_SCANNER_STARTED);
         intentFilter.addAction(Intent.ACTION_MEDIA_SCANNER_FINISHED);
         intentFilter.addDataScheme("file");
@@ -281,6 +308,27 @@ public class Memory extends SettingsPreferenceFragment implements OnCancelListen
             intent.setClass(getActivity(),
                     com.android.settings.Settings.ManageApplicationsActivity.class);
             startActivity(intent);
+            return true;
+        } else if (preference == mMediaPreferences[Constants.DOWNLOADS_INDEX]) {
+            Intent intent = new Intent(DownloadManager.ACTION_VIEW_DOWNLOADS)
+                    .putExtra(DownloadManager.INTENT_EXTRAS_SORT_BY_SIZE, true);
+            startActivity(intent);
+            return true;
+        } else if (preference == mMediaPreferences[Constants.MUSIC_INDEX]) {
+            Intent intent = new Intent("android.intent.action.GET_CONTENT");
+            intent.setType("audio/mp3");
+            startActivity(intent);
+            return true;
+        } else if (preference == mMediaPreferences[Constants.PIC_VIDEO_INDEX]) {
+            Intent intent = new Intent("android.intent.action.GET_CONTENT");
+            intent.setType("image/jpeg");
+            startActivity(intent);
+            return true;
+        } else if (preference == mMediaPreferences[Constants.MEDIA_MISC_INDEX]) {
+            Context context = getActivity().getApplicationContext();
+            if (MemoryMeasurement.getInstance(context).isSizeOfMiscCategorynonZero()) {
+                startActivity(new Intent(context, MiscFilesHandler.class));
+            }
             return true;
         }
 
@@ -375,7 +423,6 @@ public class Memory extends SettingsPreferenceFragment implements OnCancelListen
         // Check if external media is in use.
         try {
            if (hasAppsAccessingStorage()) {
-               if (localLOGV) Log.i(TAG, "Do have storage users accessing media");
                // Present dialog to user
                showDialogInner(DLG_CONFIRM_UNMOUNT);
            } else {
@@ -400,19 +447,45 @@ public class Memory extends SettingsPreferenceFragment implements OnCancelListen
         }
     }
 
-    private void updateUiExact(long totalSize, long availSize, long mediaSize, long appsSize) {
+    private void updateUiExact(long totalSize, long availSize, long appsSize, long[] mediaSizes) {
         // There are other things that can take up storage, but we didn't measure it.
         // add that unaccounted-for-usage to Apps Usage
-        final long appsPlusRemaining = totalSize - availSize - mediaSize;
-
+        long appsPlusRemaining = totalSize - availSize - mediaSizes[Constants.DOWNLOADS_INDEX] -
+                mediaSizes[Constants.PIC_VIDEO_INDEX] - mediaSizes[Constants.MUSIC_INDEX] -
+                mediaSizes[Constants.MEDIA_MISC_INDEX];
         mInternalSize.setSummary(formatSize(totalSize));
         mInternalAvail.setSummary(formatSize(availSize));
-        mInternalMediaUsage.setSummary(formatSize(mediaSize));
         mInternalAppsUsage.setSummary(formatSize(appsPlusRemaining));
 
         mInternalUsageChart.clear();
-        mInternalUsageChart.addEntry(mediaSize / (float) totalSize, mInternalMediaColor);
         mInternalUsageChart.addEntry(appsPlusRemaining / (float) totalSize, mInternalAppsColor);
+
+        for (int i = 0; i < Constants.NUM_MEDIA_DIRS_TRACKED; i++) {
+            if (Constants.mMediaDirs.get(i).mPreferenceName == null) {
+                continue;
+            }
+            this.mMediaPreferences[i].setSummary(formatSize(mediaSizes[i]));
+            // don't add entry to color chart for media usage and for zero-sized dirs
+            if (i != Constants.MEDIA_INDEX && mediaSizes[i] > 0) {
+                int color = 0;
+                switch (i) {
+                    case Constants.DOWNLOADS_INDEX:
+                        color = mRes.getColor(R.color.memory_downloads);
+                        break;
+                    case Constants.PIC_VIDEO_INDEX:
+                        color = mRes.getColor(R.color.memory_video);
+                        break;
+                    case Constants.MUSIC_INDEX:
+                        color = mRes.getColor(R.color.memory_audio);
+                        break;
+                    case Constants.MEDIA_MISC_INDEX:
+                        color = mRes.getColor(R.color.memory_misc);
+                        break;
+                }
+                mInternalUsageChart.addEntry(mediaSizes[i] / (float) totalSize, color);
+            }
+        }
+        mInternalUsageChart.addEntry(availSize / (float) totalSize, mInternalAvailColor);
         mInternalUsageChart.commit();
     }
 

@@ -23,6 +23,7 @@ import android.util.Log;
 import java.io.File;
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -35,14 +36,16 @@ import java.util.List;
  *
  *   Filesystem stats (using StatFs)
  *   Directory measurements (using DefaultContainerService.measureDir)
- *   Applicaiton measurements (using PackageManager)
+ *   Application measurements (using PackageManager)
  *
  * Then the calling application would just specify the type and an argument.
  * This class would keep track of it while the calling application would
  * decide on how to use it.
  */
 public class MemoryMeasurement {
-    private static final String TAG = "MemoryMeasurement";
+    private static final String TAG = "MemorySettings";
+    private static final boolean LOCAL_LOGV = true;
+    static final boolean LOGV = LOCAL_LOGV && Log.isLoggable(TAG, Log.VERBOSE);
 
     public static final String TOTAL_SIZE = "total_size";
 
@@ -50,7 +53,7 @@ public class MemoryMeasurement {
 
     public static final String APPS_USED = "apps_used";
 
-    public static final String MEDIA_USED = "media_used";
+    private long[] mMediaSizes = new long[Constants.NUM_MEDIA_DIRS_TRACKED];
 
     private static final String DEFAULT_CONTAINER_PACKAGE = "com.android.defcontainer";
 
@@ -66,13 +69,13 @@ public class MemoryMeasurement {
     // Internal memory fields
     private long mInternalTotalSize;
     private long mInternalAvailSize;
-    private long mInternalMediaSize;
     private long mInternalAppsSize;
 
     // External memory fields
     private long mExternalTotalSize;
 
     private long mExternalAvailSize;
+    List<FileInfo> mFileInfoForMisc;
 
     private MemoryMeasurement(Context context) {
         // Start the thread that will measure the disk usage.
@@ -98,7 +101,9 @@ public class MemoryMeasurement {
     }
 
     public void setReceiver(MeasurementReceiver receiver) {
-        mReceiver = new WeakReference<MeasurementReceiver>(receiver);
+        if (mReceiver == null || mReceiver.get() == null) {
+            mReceiver = new WeakReference<MeasurementReceiver>(receiver);
+        }
     }
 
     public void measureExternal() {
@@ -134,6 +139,9 @@ public class MemoryMeasurement {
     private void sendInternalExactUpdate() {
         MeasurementReceiver receiver = (mReceiver != null) ? mReceiver.get() : null;
         if (receiver == null) {
+            if (LOGV) {
+                Log.i(TAG, "measurements dropped because receiver is null! wasted effort");
+            }
             return;
         }
 
@@ -141,7 +149,9 @@ public class MemoryMeasurement {
         bundle.putLong(TOTAL_SIZE, mInternalTotalSize);
         bundle.putLong(AVAIL_SIZE, mInternalAvailSize);
         bundle.putLong(APPS_USED, mInternalAppsSize);
-        bundle.putLong(MEDIA_USED, mInternalMediaSize);
+        for (int i = 0; i < Constants.NUM_MEDIA_DIRS_TRACKED; i++) {
+            bundle.putLong(Constants.mMediaDirs.get(i).mKey, mMediaSizes[i]);
+        }
 
         receiver.updateExactInternal(bundle);
     }
@@ -252,6 +262,7 @@ public class MemoryMeasurement {
                 case MSG_CONNECTED: {
                     IMediaContainerService imcs = (IMediaContainerService) msg.obj;
                     measureExactInternalStorage(imcs);
+                    break;
                 }
                 case MSG_DISCONNECT: {
                     synchronized (mLock) {
@@ -265,6 +276,7 @@ public class MemoryMeasurement {
                             context.unbindService(mDefContainerConn);
                         }
                     }
+                    break;
                 }
                 case MSG_COMPLETED: {
                     mMeasured = true;
@@ -356,24 +368,40 @@ public class MemoryMeasurement {
             if (context == null) {
                 return;
             }
-
             // We have to get installd to measure the package sizes.
             PackageManager pm = context.getPackageManager();
             if (pm == null) {
                 return;
             }
-
-            long mediaSize;
-            try {
-                mediaSize = imcs.calculateDirectorySize(
-                        Environment.getExternalStorageDirectory().getAbsolutePath());
-            } catch (Exception e) {
-                Log.i(TAG, "Could not read memory from default container service");
-                return;
+            // measure sizes for all except "media_misc" - which is computed
+            for (int i = 0; i < Constants.NUM_MEDIA_DIRS_TRACKED - 1; i++) {
+                mMediaSizes[i] = 0;
+                String[] dirs = Constants.mMediaDirs.get(i).mDirPaths;
+                int len = dirs.length;
+                if (len > 0) {
+                    for (int k = 0; k < len; k++) {
+                        long dirSize = getSize(imcs, dirs[k]);
+                        mMediaSizes[i] += dirSize;
+                        if (LOGV) {
+                            Log.i(TAG, "size of " + dirs[k] + ": " + dirSize);
+                        }
+                    }
+                }
             }
 
-            mInternalMediaSize = mediaSize;
+            // compute the size of "misc"
+            mMediaSizes[Constants.MEDIA_MISC_INDEX] = mMediaSizes[Constants.MEDIA_INDEX];
+            for (int i = 1; i < Constants.NUM_MEDIA_DIRS_TRACKED - 1; i++) {
+                mMediaSizes[Constants.MEDIA_MISC_INDEX] -= mMediaSizes[i];
+            }
+            if (LOGV) {
+                Log.i(TAG, "media_misc size: " + mMediaSizes[Constants.MEDIA_MISC_INDEX]);
+            }
 
+            // compute the sizes of each of the files/directories under 'misc' category
+            measureSizesOfMisc(imcs);
+
+            // compute apps sizes
             final List<ApplicationInfo> apps = pm
                     .getInstalledApplications(PackageManager.GET_UNINSTALLED_PACKAGES
                             | PackageManager.GET_DISABLED_COMPONENTS);
@@ -393,6 +421,43 @@ public class MemoryMeasurement {
             // Sending of the message back to the MeasurementReceiver is
             // completed in the PackageObserver
         }
+        private void measureSizesOfMisc(IMediaContainerService imcs) {
+            File top = Environment.getExternalStorageDirectory();
+            mFileInfoForMisc = new ArrayList<FileInfo>();
+            File[] files = top.listFiles();
+            int len = files.length;
+            if (len == 0) {
+                return;
+            }
+            // get sizes of all top level nodes in /sdcard dir except the ones already computed...
+            long counter = 0;
+            for (int i = 0; i < len; i++) {
+                String path = files[i].getAbsolutePath();
+                if (Constants.ExclusionTargetsForMiscFiles.contains(path)) {
+                    continue;
+                }
+                if (files[i].isFile()) {
+                    mFileInfoForMisc.add(new FileInfo(path, files[i].length(), counter++));
+                } else if (files[i].isDirectory()) {
+                    long dirSize = getSize(imcs, path);
+                    mFileInfoForMisc.add(new FileInfo(path, dirSize, counter++));
+                } else {
+                }
+            }
+            // sort the list of FileInfo objects collected above in descending order of their sizes
+            Collections.sort(mFileInfoForMisc);
+        }
+
+        private long getSize(IMediaContainerService imcs, String dir) {
+            try {
+                long size = imcs.calculateDirectorySize(dir);
+                return size;
+            } catch (Exception e) {
+                Log.w(TAG, "Could not read memory from default container service for " +
+                        dir, e);
+                return -1;
+            }
+        }
 
         public void measureApproximateExternalStorage() {
             File path = Environment.getExternalStorageDirectory();
@@ -411,5 +476,30 @@ public class MemoryMeasurement {
 
     public void invalidate() {
         mHandler.sendEmptyMessage(MeasurementHandler.MSG_INVALIDATE);
+    }
+
+    boolean isSizeOfMiscCategorynonZero() {
+        return mFileInfoForMisc.size() > 0;
+    }
+
+    static class FileInfo implements Comparable<FileInfo> {
+        String mFileName;
+        long mSize;
+        long mId;
+        FileInfo(String fileName, long size, long id) {
+            mFileName = fileName;
+            mSize = size;
+            mId = id;
+        }
+        @Override
+        public int compareTo(FileInfo that) {
+            if (this == that || mSize == that.mSize) return 0;
+            else if (mSize < that.mSize) return 1; // for descending sort
+            else return -1;
+        }
+        @Override
+        public String toString() {
+            return mFileName  + " : " + mSize + ", id:" + mId;
+        }
     }
 }

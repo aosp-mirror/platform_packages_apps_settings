@@ -4,6 +4,7 @@
 
     <original-package android:name="com.android.settings" />
 
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.WRITE_SETTINGS" />
     <uses-permission android:name="android.permission.WRITE_SECURE_SETTINGS" />
     <uses-permission android:name="android.permission.DEVICE_POWER" />
@@ -762,6 +763,9 @@
             <meta-data android:name="com.android.settings.TOP_LEVEL_HEADER_ID"
                 android:resource="@id/storage_settings" />
         </activity>
+
+        <activity android:name=".deviceinfo.MiscFilesHandler"
+                android:theme="@android:style/Theme.Holo.DialogWhenLarge"/>
 
         <activity android:name="ApnEditor"
                 android:label="@string/apn_edit"
