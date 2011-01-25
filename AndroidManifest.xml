@@ -656,9 +656,9 @@
             </intent-filter>
         </activity>
 
-        <activity android:name="DeviceAdminSettings"
+        <activity android:name="Settings$DeviceAdminSettingsActivity"
                 android:label="@string/device_admin_settings_title"
-                android:theme="@style/TallTitleBarTheme"
+                android:theme="@android:style/Theme.Holo"
                 android:clearTaskOnLaunch="true"
                 >
             <intent-filter>
@@ -667,11 +667,19 @@
                 <category android:name="android.intent.category.VOICE_LAUNCH" />
                 <category android:name="com.android.settings.SHORTCUT" />
             </intent-filter>
+            <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
+                android:value="com.android.settings.DeviceAdminSettings" />
+            <meta-data android:name="com.android.settings.TOP_LEVEL_HEADER_ID"
+                android:resource="@id/security_settings" />
+            <meta-data android:name="com.android.settings.PARENT_FRAGMENT_TITLE"
+                android:resource="@string/location_security_settings_title" />
+            <meta-data android:name="com.android.settings.PARENT_FRAGMENT_CLASS"
+                android:value="com.android.settings.Settings$SecuritySettingsActivity" />
         </activity>
 
         <activity android:name="DeviceAdminAdd"
                 android:label="@string/device_admin_add_title"
-                android:theme="@style/TallTitleBarTheme"
+                android:theme="@android:style/Theme.Holo.DialogWhenLarge"
                 android:clearTaskOnLaunch="true"
                 >
             <intent-filter>

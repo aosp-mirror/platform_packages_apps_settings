@@ -64,11 +64,11 @@ public class DeviceAdminAdd extends Activity {
     DeviceAdminInfo mDeviceAdmin;
     CharSequence mAddMsgText;
     
-    TextView mTitle;
     ImageView mAdminIcon;
     TextView mAdminName;
     TextView mAdminDescription;
     TextView mAddMsg;
+    ImageView mAddMsgExpander;
     boolean mAddMsgEllipsized = true;
     TextView mAdminWarning;
     ViewGroup mAdminPolicies;
@@ -149,15 +149,15 @@ public class DeviceAdminAdd extends Activity {
             }
         }
         mAddMsgText = getIntent().getCharSequenceExtra(DevicePolicyManager.EXTRA_ADD_EXPLANATION);
-        
+
         setContentView(R.layout.device_admin_add);
         
-        mTitle = (TextView)findViewById(R.id.title);
         mAdminIcon = (ImageView)findViewById(R.id.admin_icon);
         mAdminName = (TextView)findViewById(R.id.admin_name);
         mAdminDescription = (TextView)findViewById(R.id.admin_description);
 
         mAddMsg = (TextView)findViewById(R.id.add_msg);
+        mAddMsgExpander = (ImageView) findViewById(R.id.add_msg_expander);
         mAddMsg.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 toggleMessageEllipsis(v);
@@ -167,15 +167,15 @@ public class DeviceAdminAdd extends Activity {
         // toggleMessageEllipsis also handles initial layout:
         toggleMessageEllipsis(mAddMsg);
 
-        mAdminWarning = (TextView)findViewById(R.id.admin_warning);
-        mAdminPolicies = (ViewGroup)findViewById(R.id.admin_policies);
-        mCancelButton = (Button)findViewById(R.id.cancel_button);
+        mAdminWarning = (TextView) findViewById(R.id.admin_warning);
+        mAdminPolicies = (ViewGroup) findViewById(R.id.admin_policies);
+        mCancelButton = (Button) findViewById(R.id.cancel_button);
         mCancelButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 finish();
             }
         });
-        mActionButton = (Button)findViewById(R.id.action_button);
+        mActionButton = (Button) findViewById(R.id.action_button);
         mActionButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 if (mAdding) {
@@ -269,6 +269,7 @@ public class DeviceAdminAdd extends Activity {
             mAddMsg.setVisibility(View.VISIBLE);
         } else {
             mAddMsg.setVisibility(View.GONE);
+            mAddMsgExpander.setVisibility(View.GONE);
         }
         if (!mRefreshing && mDPM.isAdminActive(mDeviceAdmin.getComponent())) {
             if (mActivePolicies.size() == 0) {
@@ -285,7 +286,7 @@ public class DeviceAdminAdd extends Activity {
             setViewVisibility(mAddingPolicies, View.GONE);
             mAdminWarning.setText(getString(R.string.device_admin_status,
                     mDeviceAdmin.getActivityInfo().applicationInfo.loadLabel(getPackageManager())));
-            mTitle.setText(getText(R.string.active_device_admin_msg));
+            setTitle(getText(R.string.active_device_admin_msg));
             mActionButton.setText(getText(R.string.remove_device_admin));
             mAdding = false;
         } else {
@@ -303,7 +304,7 @@ public class DeviceAdminAdd extends Activity {
             setViewVisibility(mActivePolicies, View.GONE);
             mAdminWarning.setText(getString(R.string.device_admin_warning,
                     mDeviceAdmin.getActivityInfo().applicationInfo.loadLabel(getPackageManager())));
-            mTitle.setText(getText(R.string.add_device_admin_msg));
+            setTitle(getText(R.string.add_device_admin_msg));
             mActionButton.setText(getText(R.string.add_device_admin));
             mAdding = true;
         }
@@ -317,8 +318,7 @@ public class DeviceAdminAdd extends Activity {
         tv.setEllipsize(mAddMsgEllipsized ? TruncateAt.END : null);
         tv.setMaxLines(mAddMsgEllipsized ? getEllipsizedLines() : MAX_ADD_MSG_LINES);
 
-        ImageView iv = (ImageView) findViewById(R.id.add_msg_expander);
-        iv.setImageResource(mAddMsgEllipsized ?
+        mAddMsgExpander.setImageResource(mAddMsgEllipsized ?
             com.android.internal.R.drawable.expander_ic_minimized :
             com.android.internal.R.drawable.expander_ic_maximized);
     }

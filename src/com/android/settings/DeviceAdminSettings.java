@@ -16,25 +16,21 @@
 
 package com.android.settings;
 
+import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserException;
 
 import android.app.Activity;
-import android.app.AlertDialog;
-import android.app.Dialog;
-import android.app.ListActivity;
+import android.app.ListFragment;
 import android.app.admin.DeviceAdminInfo;
 import android.app.admin.DeviceAdminReceiver;
 import android.app.admin.DevicePolicyManager;
 import android.content.ComponentName;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
 import android.content.res.Resources;
 import android.os.Bundle;
-import android.os.Handler;
-import android.os.RemoteCallback;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -50,7 +46,7 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 
-public class DeviceAdminSettings extends ListActivity {
+public class DeviceAdminSettings extends ListFragment {
     static final String TAG = "DeviceAdminSettings";
     
     static final int DIALOG_WARNING = 1;
@@ -58,18 +54,21 @@ public class DeviceAdminSettings extends ListActivity {
     DevicePolicyManager mDPM;
     final HashSet<ComponentName> mActiveAdmins = new HashSet<ComponentName>();
     final ArrayList<DeviceAdminInfo> mAvailableAdmins = new ArrayList<DeviceAdminInfo>();
-    
-    @Override
-    protected void onCreate(Bundle icicle) {
-        super.onCreate(icicle);
 
-        mDPM = (DevicePolicyManager)getSystemService(Context.DEVICE_POLICY_SERVICE);
-        
-        setContentView(R.layout.device_admin_settings);
-    }
-    
     @Override
-    protected void onResume() {
+    public void onCreate(Bundle icicle) {
+        super.onCreate(icicle);
+    }
+
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+            Bundle savedInstanceState) {
+        mDPM = (DevicePolicyManager) getActivity().getSystemService(Context.DEVICE_POLICY_SERVICE);
+        return inflater.inflate(R.layout.device_admin_settings, container, false);
+    }
+
+    @Override
+    public void onResume() {
         super.onResume();
         updateList();
     }
@@ -82,16 +81,16 @@ public class DeviceAdminSettings extends ListActivity {
                 mActiveAdmins.add(cur.get(i));
             }
         }
-        
+
         mAvailableAdmins.clear();
-        List<ResolveInfo> avail = getPackageManager().queryBroadcastReceivers(
+        List<ResolveInfo> avail = getActivity().getPackageManager().queryBroadcastReceivers(
                 new Intent(DeviceAdminReceiver.ACTION_DEVICE_ADMIN_ENABLED),
                 PackageManager.GET_META_DATA);
         int count = avail == null ? 0 : avail.size();
         for (int i=0; i<count; i++) {
             ResolveInfo ri = avail.get(i);
             try {
-                DeviceAdminInfo dpi = new DeviceAdminInfo(this, ri);
+                DeviceAdminInfo dpi = new DeviceAdminInfo(getActivity(), ri);
                 if (dpi.isVisible() || mActiveAdmins.contains(dpi.getComponent())) {
                     mAvailableAdmins.add(dpi);
                 }
@@ -104,16 +103,16 @@ public class DeviceAdminSettings extends ListActivity {
         
         getListView().setAdapter(new PolicyListAdapter());
     }
-    
+
     @Override
-    protected void onListItemClick(ListView l, View v, int position, long id) {
+    public void onListItemClick(ListView l, View v, int position, long id) {
         DeviceAdminInfo dpi = (DeviceAdminInfo)l.getAdapter().getItem(position);
         Intent intent = new Intent();
-        intent.setClass(this, DeviceAdminAdd.class);
+        intent.setClass(getActivity(), DeviceAdminAdd.class);
         intent.putExtra(DevicePolicyManager.EXTRA_DEVICE_ADMIN, dpi.getComponent());
         startActivity(intent);
     }
-    
+
     static class ViewHolder {
         ImageView icon;
         TextView name;
@@ -125,7 +124,8 @@ public class DeviceAdminSettings extends ListActivity {
         final LayoutInflater mInflater;
         
         PolicyListAdapter() {
-            mInflater = (LayoutInflater)getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+            mInflater = (LayoutInflater)
+                    getActivity().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         }
 
         public boolean hasStableIds() {
@@ -175,13 +175,14 @@ public class DeviceAdminSettings extends ListActivity {
         }
         
         public void bindView(View view, int position) {
+            final Activity activity = getActivity();
             ViewHolder vh = (ViewHolder) view.getTag();
             DeviceAdminInfo item = mAvailableAdmins.get(position);
-            vh.icon.setImageDrawable(item.loadIcon(getPackageManager()));
-            vh.name.setText(item.loadLabel(getPackageManager()));
+            vh.icon.setImageDrawable(item.loadIcon(activity.getPackageManager()));
+            vh.name.setText(item.loadLabel(activity.getPackageManager()));
             vh.checkbox.setChecked(mActiveAdmins.contains(item.getComponent()));
             try {
-                vh.description.setText(item.loadDescription(getPackageManager()));
+                vh.description.setText(item.loadDescription(activity.getPackageManager()));
             } catch (Resources.NotFoundException e) {
             }
         }
