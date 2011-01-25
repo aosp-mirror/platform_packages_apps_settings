@@ -19,32 +19,6 @@
         android:summary="@string/applications_settings_summary"
         android:key="applications_settings">
 
-    <CheckBoxPreference
-            android:key="toggle_install_applications"
-            android:title="@string/install_applications"
-            android:summaryOff="@string/install_unknown_applications"
-            android:summaryOn="@string/install_unknown_applications"
-            android:persistent="false" />
-
-    <ListPreference
-        android:key="app_install_location"
-        android:title="@string/app_install_location_title"
-        android:summary="@string/app_install_location_summary"
-        android:persistent="false"
-        android:entries="@array/app_install_location_entries"
-        android:entryValues="@array/app_install_location_values"/>
-
-    <!-- Disabled quick launch settings pending UI redesign.
-    <PreferenceScreen
-            android:key="quick_launch"
-            android:title="@string/quick_launch_title"
-            android:summary="@string/quick_launch_summary">
-        <intent android:action="android.intent.action.MAIN"
-                android:targetPackage="com.android.settings"
-                android:targetClass="com.android.settings.quicklaunch.QuickLaunchSettings" />
-    </PreferenceScreen>
-    -->
-
     <PreferenceScreen
             android:fragment="com.android.settings.applications.ManageApplications"
             android:title="@string/manageapplications_settings_title"
@@ -73,11 +47,38 @@
             android:summary="@string/power_usage_summary">
     </PreferenceScreen>
 
+    <CheckBoxPreference
+            android:key="toggle_install_applications"
+            android:title="@string/install_applications"
+            android:summaryOff="@string/install_unknown_applications"
+            android:summaryOn="@string/install_unknown_applications"
+            android:persistent="false" />
+
+    <ListPreference
+        android:key="app_install_location"
+        android:title="@string/app_install_location_title"
+        android:summary="@string/app_install_location_summary"
+        android:persistent="false"
+        android:entries="@array/app_install_location_entries"
+        android:entryValues="@array/app_install_location_values"/>
+
+    <!-- Disabled quick launch settings pending UI redesign.
+    <PreferenceScreen
+            android:key="quick_launch"
+            android:title="@string/quick_launch_title"
+            android:summary="@string/quick_launch_summary">
+        <intent android:action="android.intent.action.MAIN"
+                android:targetPackage="com.android.settings"
+                android:targetClass="com.android.settings.quicklaunch.QuickLaunchSettings" />
+    </PreferenceScreen>
+    -->
+
+
     <PreferenceScreen 
             android:title="@string/development_settings_title" 
             android:summary="@string/development_settings_summary"
             android:fragment="com.android.settings.DevelopmentSettings">
     </PreferenceScreen>
-    
+
 </PreferenceScreen>
 
