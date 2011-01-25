@@ -333,4 +333,5 @@ public class Settings extends PreferenceActivity implements ButtonBarHandler {
     public static class AccountSyncSettingsActivity extends Settings { }
     public static class AccountSyncSettingsInAddAccountActivity extends Settings { }
     public static class CryptKeeperSettingsActivity extends Settings { }
+    public static class DeviceAdminSettingsActivity extends Settings { }
 }
