@@ -29,6 +29,7 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.location.LocationManager;
 import android.os.Bundle;
+import android.os.SystemProperties;
 import android.os.Vibrator;
 import android.preference.CheckBoxPreference;
 import android.preference.ListPreference;
@@ -50,7 +51,6 @@ import java.util.Observer;
  */
 public class SecuritySettings extends SettingsPreferenceFragment
         implements OnPreferenceChangeListener {
-    private static final String KEY_ENCRYPTION = "encryption";
 
     // Lock Settings
     private static final String KEY_UNLOCK_SET_OR_CHANGE = "unlock_set_or_change";
@@ -161,12 +161,6 @@ public class SecuritySettings extends SettingsPreferenceFragment
             mUseLocation = useLocation;
         }
 
-        // Add options for device encryption
-        // TODO: It still needs to be determined how a device specifies that it supports
-        // encryption. That mechanism needs to be checked before adding the following code
-        
-        addPreferencesFromResource(R.xml.security_settings_encryption);
-
         // Add options for lock/unlock screen
         int resid = 0;
         if (!mLockPatternUtils.isSecure()) {
@@ -191,6 +185,19 @@ public class SecuritySettings extends SettingsPreferenceFragment
             }
         }
         addPreferencesFromResource(resid);
+
+
+        // Add options for device encryption
+
+        String status = SystemProperties.get("ro.crypto.state", "unsupported");
+        if ("encrypted".equalsIgnoreCase(status)) {
+            // The device is currently encrypted
+            addPreferencesFromResource(R.xml.security_settings_encrypted);
+        } else if ("unencrypted".equalsIgnoreCase(status)) {
+            // This device support encryption but isn't encrypted
+            addPreferencesFromResource(R.xml.security_settings_unencrypted);
+        }
+
 
         // lock after preference
         mLockAfter = (ListPreference) root.findPreference(KEY_LOCK_AFTER_TIMEOUT);
