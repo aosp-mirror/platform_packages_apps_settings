@@ -184,6 +184,8 @@ public class ManageApplications extends Fragment implements
     static final String TAB_SDCARD = "OnSdCard";
     private View mRootView;
 
+    private boolean mShowBackground = false;
+    
     // -------------- Copied from TabActivity --------------
 
     private TabHost mTabHost;
@@ -539,6 +541,7 @@ public class ManageApplications extends Fragment implements
             mFilterApps = savedInstanceState.getInt("filterApps", mFilterApps);
             String tmp = savedInstanceState.getString("defaultTabTag");
             if (tmp != null) defaultTabTag = tmp;
+            mShowBackground = savedInstanceState.getBoolean("showBackground", false);
         }
         
         mDefaultTab = defaultTabTag;
@@ -631,6 +634,7 @@ public class ManageApplications extends Fragment implements
         if (mDefaultTab != null) {
             outState.putString("defautTabTag", mDefaultTab);
         }
+        outState.putBoolean("showBackground", mShowBackground);
     }
 
     @Override
@@ -666,11 +670,13 @@ public class ManageApplications extends Fragment implements
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         Log.i(TAG, "onCreateOptionsMenu in " + this + ": " + menu);
         mOptionsMenu = menu;
+        // note: icons removed for now because the cause the new action
+        // bar UI to be very confusing.
         menu.add(0, SORT_ORDER_ALPHA, 1, R.string.sort_order_alpha)
-                .setIcon(android.R.drawable.ic_menu_sort_alphabetically)
+                //.setIcon(android.R.drawable.ic_menu_sort_alphabetically)
                 .setShowAsAction(MenuItem.SHOW_AS_ACTION_IF_ROOM);
         menu.add(0, SORT_ORDER_SIZE, 2, R.string.sort_order_size)
-                .setIcon(android.R.drawable.ic_menu_sort_by_size)
+                //.setIcon(android.R.drawable.ic_menu_sort_by_size)
                 .setShowAsAction(MenuItem.SHOW_AS_ACTION_IF_ROOM);
         menu.add(0, SHOW_RUNNING_SERVICES, 3, R.string.show_running_services)
                 .setShowAsAction(MenuItem.SHOW_AS_ACTION_IF_ROOM);
@@ -722,8 +728,10 @@ public class ManageApplications extends Fragment implements
                 mApplicationsAdapter.rebuild(mFilterApps, mSortOrder);
             }
         } else if (menuId == SHOW_RUNNING_SERVICES) {
+            mShowBackground = false;
             mRunningProcessesView.mAdapter.setShowBackground(false);
         } else if (menuId == SHOW_BACKGROUND_PROCESSES) {
+            mShowBackground = true;
             mRunningProcessesView.mAdapter.setShowBackground(true);
         }
         updateOptionsMenu();
@@ -838,6 +846,7 @@ public class ManageApplications extends Fragment implements
         } else if (which == VIEW_RUNNING) {
             if (!mCreatedRunning) {
                 mRunningProcessesView.doCreate(null);
+                mRunningProcessesView.mAdapter.setShowBackground(mShowBackground);
                 mCreatedRunning = true;
             }
             boolean haveData = true;
