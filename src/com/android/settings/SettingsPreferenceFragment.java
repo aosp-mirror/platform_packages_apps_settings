@@ -21,6 +21,7 @@ import android.app.Dialog;
 import android.app.DialogFragment;
 import android.app.Fragment;
 import android.content.ContentResolver;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
@@ -111,6 +112,28 @@ public class SettingsPreferenceFragment extends PreferenceFragment
         mDialogFragment = null;
     }
 
+    /**
+     * Sets the OnCancelListener of the dialog shown. This method can only be
+     * called after showDialog(int) and before removeDialog(int). The method
+     * does nothing otherwise.
+     */
+    protected void setOnCancelListener(DialogInterface.OnCancelListener listener) {
+        if (mDialogFragment != null) {
+            mDialogFragment.mOnCancelListener = listener;
+        }
+    }
+
+    /**
+     * Sets the OnDismissListener of the dialog shown. This method can only be
+     * called after showDialog(int) and before removeDialog(int). The method
+     * does nothing otherwise.
+     */
+    protected void setOnDismissListener(DialogInterface.OnDismissListener listener) {
+        if (mDialogFragment != null) {
+            mDialogFragment.mOnDismissListener = listener;
+        }
+    }
+
     public static class SettingsDialogFragment extends DialogFragment {
         private static final String KEY_DIALOG_ID = "key_dialog_id";
         private static final String KEY_PARENT_FRAGMENT_ID = "key_parent_fragment_id";
@@ -118,6 +141,9 @@ public class SettingsPreferenceFragment extends PreferenceFragment
         private int mDialogId;
 
         private Fragment mParentFragment;
+
+        private DialogInterface.OnCancelListener mOnCancelListener;
+        private DialogInterface.OnDismissListener mOnDismissListener;
 
         public SettingsDialogFragment() {
             /* do nothing */
@@ -163,6 +189,21 @@ public class SettingsPreferenceFragment extends PreferenceFragment
             return ((DialogCreatable) mParentFragment).onCreateDialog(mDialogId);
         }
 
+        @Override
+        public void onCancel(DialogInterface dialog) {
+            super.onCancel(dialog);
+            if (mOnCancelListener != null) {
+                mOnCancelListener.onCancel(dialog);
+            }
+        }
+
+        @Override
+        public void onDismiss(DialogInterface dialog) {
+            super.onDismiss(dialog);
+            if (mOnDismissListener != null) {
+                mOnDismissListener.onDismiss(dialog);
+            }
+        }
         public int getDialogId() {
             return mDialogId;
         }
