@@ -265,7 +265,15 @@ public class WifiSettings extends SettingsPreferenceFragment
                 }
                 return true;
             case MENU_ID_ADVANCED:
-                startFragment(this, AdvancedSettings.class.getCanonicalName(), -1, null);
+                if (getActivity() instanceof PreferenceActivity) {
+                    ((PreferenceActivity) getActivity()).startPreferencePanel(
+                            AdvancedSettings.class.getCanonicalName(),
+                            null,
+                            R.string.wifi_advanced_titlebar, null,
+                            this, 0);
+                } else {
+                    startFragment(this, AdvancedSettings.class.getCanonicalName(), -1, null);
+                }
                 return true;
         }
         return super.onOptionsItemSelected(item);
