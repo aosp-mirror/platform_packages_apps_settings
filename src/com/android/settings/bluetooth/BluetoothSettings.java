@@ -18,7 +18,10 @@ package com.android.settings.bluetooth;
 
 import android.app.Activity;
 import android.bluetooth.BluetoothDevice;
+import android.content.Intent;
 import android.preference.CheckBoxPreference;
+import android.preference.Preference;
+import android.preference.PreferenceScreen;
 import android.util.Log;
 import android.view.View;
 
@@ -36,10 +39,15 @@ public class BluetoothSettings extends DeviceListPreferenceFragment
     private static final String KEY_BT_CHECKBOX = "bt_checkbox";
     private static final String KEY_BT_DISCOVERABLE = "bt_discoverable";
     private static final String KEY_BT_NAME = "bt_name";
+    private static final String KEY_BT_SHOW_RECEIVED = "bt_show_received_files";
 
     private BluetoothEnabler mEnabler;
     private BluetoothDiscoverableEnabler mDiscoverableEnabler;
     private BluetoothNamePreference mNamePreference;
+
+    /* Private intent to show the list of received files */
+    private static final String BTOPP_ACTION_OPEN_RECEIVED_FILES =
+            "android.btopp.intent.action.OPEN_RECEIVED_FILES";
 
     void addPreferencesForActivity(Activity activity) {
         addPreferencesFromResource(R.xml.bluetooth_settings);
@@ -73,6 +81,18 @@ public class BluetoothSettings extends DeviceListPreferenceFragment
         mNamePreference.pause();
         mDiscoverableEnabler.pause();
         mEnabler.pause();
+    }
+
+    @Override
+    public boolean onPreferenceTreeClick(PreferenceScreen preferenceScreen,
+            Preference preference) {
+        if (KEY_BT_SHOW_RECEIVED.equals(preference.getKey())) {
+            Intent intent = new Intent(BTOPP_ACTION_OPEN_RECEIVED_FILES);
+            getActivity().sendBroadcast(intent);
+            return true;
+        }
+
+        return super.onPreferenceTreeClick(preferenceScreen, preference);
     }
 
     public void onDeviceBondStateChanged(CachedBluetoothDevice cachedDevice,
