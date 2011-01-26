@@ -106,12 +106,13 @@ public class VpnSettings extends SettingsPreferenceFragment
     private static final String KEY_PREFIX_IPSEC_PSK = Credentials.VPN + 'i';
     private static final String KEY_PREFIX_L2TP_SECRET = Credentials.VPN + 'l';
 
+    private static List<VpnProfile> sVpnProfileList = new ArrayList<VpnProfile>();
+
     private PreferenceScreen mAddVpn;
     private PreferenceCategory mVpnListContainer;
 
     // profile name --> VpnPreference
     private Map<String, VpnPreference> mVpnPreferenceMap;
-    private List<VpnProfile> mVpnProfileList;
 
     // profile engaged in a connection
     private VpnProfile mActiveProfile;
@@ -202,7 +203,10 @@ public class VpnSettings extends SettingsPreferenceFragment
     @Override
     public void onResume() {
         super.onResume();
-        if (DEBUG) Log.d(TAG, "onResume");
+        updatePreferenceMap();
+
+        if (DEBUG)
+            Log.d(TAG, "onResume");
 
         // listen to vpn connectivity event
         mVpnManager.registerConnectivityReceiver(mConnectivityReceiver);
@@ -218,7 +222,7 @@ public class VpnSettings extends SettingsPreferenceFragment
         } else {
             // Dismiss the connect dialog in case there is another instance
             // trying to operate a vpn connection.
-            if (!mVpnManager.isIdle()) {
+            if (!mVpnManager.isIdle() || (mActiveProfile == null)) {
                 removeDialog(DIALOG_CONNECT);
                 checkVpnConnectionStatus();
             }
@@ -550,7 +554,7 @@ public class VpnSettings extends SettingsPreferenceFragment
 
     private int getProfileIndexFromId(String id) {
         int index = 0;
-        for (VpnProfile p : mVpnProfileList) {
+        for (VpnProfile p : sVpnProfileList) {
             if (p.getId().equals(id)) {
                 return index;
             } else {
@@ -560,10 +564,10 @@ public class VpnSettings extends SettingsPreferenceFragment
         return -1;
     }
 
-    // Replaces the profile at index in mVpnProfileList with p.
+    // Replaces the profile at index in sVpnProfileList with p.
     // Returns true if p's name is a duplicate.
     private boolean checkDuplicateName(VpnProfile p, int index) {
-        List<VpnProfile> list = mVpnProfileList;
+        List<VpnProfile> list = sVpnProfileList;
         VpnPreference pref = mVpnPreferenceMap.get(p.getName());
         if ((pref != null) && (index >= 0) && (index < list.size())) {
             // not a duplicate if p is to replace the profile at index
@@ -577,20 +581,24 @@ public class VpnSettings extends SettingsPreferenceFragment
         return menuInfo.position - mVpnListContainer.getOrder() - 1;
     }
 
-    // position: position in mVpnProfileList
+    // position: position in sVpnProfileList
     private VpnProfile getProfile(int position) {
-        return ((position >= 0) ? mVpnProfileList.get(position) : null);
+        return ((position >= 0) ? sVpnProfileList.get(position) : null);
     }
 
-    // position: position in mVpnProfileList
+    // position: position in sVpnProfileList
     private void deleteProfile(final int position) {
-        if ((position < 0) || (position >= mVpnProfileList.size())) return;
+        if ((position < 0) || (position >= sVpnProfileList.size())) return;
+        final VpnProfile target = sVpnProfileList.get(position);
         DialogInterface.OnClickListener onClickListener =
                 new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int which) {
-                        dialog.dismiss();
+                        // Double check if the target is still the one we want
+                        // to remove.
+                        VpnProfile p = sVpnProfileList.get(position);
+                        if (p != target) return;
                         if (which == OK_BUTTON) {
-                            VpnProfile p = mVpnProfileList.remove(position);
+                            sVpnProfileList.remove(position);
                             VpnPreference pref =
                                     mVpnPreferenceMap.remove(p.getName());
                             mVpnListContainer.removePreference(pref);
@@ -618,7 +626,7 @@ public class VpnSettings extends SettingsPreferenceFragment
                     Double.doubleToLongBits(Math.random())));
             if (id.length() >= 8) break;
         }
-        for (VpnProfile p : mVpnProfileList) {
+        for (VpnProfile p : sVpnProfileList) {
             if (p.getId().equals(id)) {
                 setProfileId(profile);
                 return;
@@ -632,7 +640,7 @@ public class VpnSettings extends SettingsPreferenceFragment
         processSecrets(p);
         saveProfileToStorage(p);
 
-        mVpnProfileList.add(p);
+        sVpnProfileList.add(p);
         addPreferenceFor(p, true);
         disableProfilePreferencesIfOneActive();
     }
@@ -654,10 +662,10 @@ public class VpnSettings extends SettingsPreferenceFragment
         return pref;
     }
 
-    // index: index to mVpnProfileList
+    // index: index to sVpnProfileList
     private void replaceProfile(int index, VpnProfile p) throws IOException {
         Map<String, VpnPreference> map = mVpnPreferenceMap;
-        VpnProfile oldProfile = mVpnProfileList.set(index, p);
+        VpnProfile oldProfile = sVpnProfileList.set(index, p);
         VpnPreference pref = map.remove(oldProfile.getName());
         if (pref.mProfile != oldProfile) {
             throw new RuntimeException("inconsistent state!");
@@ -788,7 +796,6 @@ public class VpnSettings extends SettingsPreferenceFragment
     private void changeState(VpnProfile p, VpnState state) {
         VpnState oldState = p.getState();
         if (oldState == state) return;
-
         p.setState(state);
         mVpnPreferenceMap.get(p.getName()).setSummary(
                 getProfileSummaryString(p));
@@ -835,7 +842,7 @@ public class VpnSettings extends SettingsPreferenceFragment
     private void disableProfilePreferencesIfOneActive() {
         if (mActiveProfile == null) return;
 
-        for (VpnProfile p : mVpnProfileList) {
+        for (VpnProfile p : sVpnProfileList) {
             switch (p.getState()) {
                 case CONNECTING:
                 case DISCONNECTING:
@@ -850,7 +857,7 @@ public class VpnSettings extends SettingsPreferenceFragment
     }
 
     private void enableProfilePreferences() {
-        for (VpnProfile p : mVpnProfileList) {
+        for (VpnProfile p : sVpnProfileList) {
             mVpnPreferenceMap.get(p.getName()).setEnabled(true);
         }
     }
@@ -872,12 +879,23 @@ public class VpnSettings extends SettingsPreferenceFragment
         Util.deleteFile(getProfileDir(p));
     }
 
-    private void retrieveVpnListFromStorage() {
+    private void updatePreferenceMap() {
         mVpnPreferenceMap = new LinkedHashMap<String, VpnPreference>();
-        mVpnProfileList = Collections.synchronizedList(
-                new ArrayList<VpnProfile>());
         mVpnListContainer.removeAll();
+        for (VpnProfile p : sVpnProfileList) {
+            addPreferenceFor(p, false);
+        }
+        // reset the mActiveProfile if the profile has been removed from the
+        // other instance.
+        if ((mActiveProfile != null)
+                && mVpnPreferenceMap.containsKey(mActiveProfile.getName())) {
+            onIdle();
+        }
+    }
 
+    private void retrieveVpnListFromStorage() {
+        // skip the loop if the profile is loaded already.
+        if (sVpnProfileList.size() > 0) return;
         File root = new File(PROFILES_ROOT);
         String[] dirs = root.list();
         if (dirs == null) return;
@@ -889,30 +907,25 @@ public class VpnSettings extends SettingsPreferenceFragment
                 if (p == null) continue;
                 if (!checkIdConsistency(dir, p)) continue;
 
-                mVpnProfileList.add(p);
+                sVpnProfileList.add(p);
             } catch (IOException e) {
                 Log.e(TAG, "retrieveVpnListFromStorage()", e);
             }
         }
-        Collections.sort(mVpnProfileList, new Comparator<VpnProfile>() {
+        Collections.sort(sVpnProfileList, new Comparator<VpnProfile>() {
             public int compare(VpnProfile p1, VpnProfile p2) {
                 return p1.getName().compareTo(p2.getName());
             }
         });
-        // Delay adding preferences to mVpnListContainer until states are
-        // obtained so that the user won't see initial state transition.
-        for (VpnProfile p : mVpnProfileList) {
-            Preference pref = addPreferenceFor(p, false);
-        }
         disableProfilePreferencesIfOneActive();
     }
 
     private void checkVpnConnectionStatus() {
-        for (VpnProfile p : mVpnProfileList) {
+        for (VpnProfile p : sVpnProfileList) {
             changeState(p, mVpnManager.getState(p));
         }
         // make preferences appear
-        for (VpnProfile p : mVpnProfileList) {
+        for (VpnProfile p : sVpnProfileList) {
             VpnPreference pref = mVpnPreferenceMap.get(p.getName());
             mVpnListContainer.addPreference(pref);
         }

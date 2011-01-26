@@ -78,14 +78,16 @@ public class VpnEditor extends SettingsPreferenceFragment {
             }
         }
 
-        mProfileEditor = getEditor(p);
-        mAddingProfile = TextUtils.isEmpty(p.getName());
-
-        initViewFor(p);
-
         Parcel parcel = Parcel.obtain();
         p.writeToParcel(parcel, 0);
         mOriginalProfileData = parcel.marshall();
+        parcel.setDataPosition(0);
+        VpnProfile profile = (VpnProfile) VpnProfile.CREATOR.createFromParcel(parcel);
+
+        mProfileEditor = getEditor(profile);
+        mAddingProfile = TextUtils.isEmpty(profile.getName());
+
+        initViewFor(profile);
 
         registerForContextMenu(getListView());
         setHasOptionsMenu(true);
