@@ -311,17 +311,27 @@ public class Memory extends SettingsPreferenceFragment implements OnCancelListen
                         }})
                     .setNegativeButton(R.string.cancel, null)
                     .setMessage(R.string.dlg_confirm_unmount_text)
-                    .setOnCancelListener(this)
                     .create();
         case DLG_ERROR_UNMOUNT:
                 return new AlertDialog.Builder(getActivity())
             .setTitle(R.string.dlg_error_unmount_title)
             .setNeutralButton(R.string.dlg_ok, null)
             .setMessage(R.string.dlg_error_unmount_text)
-            .setOnCancelListener(this)
             .create();
         }
         return null;
+    }
+
+    @Override
+    protected void showDialog(int id) {
+        super.showDialog(id);
+
+        switch (id) {
+        case DLG_CONFIRM_UNMOUNT:
+        case DLG_ERROR_UNMOUNT:
+            setOnCancelListener(this);
+            break;
+        }
     }
 
     private void doUnmount(boolean force) {
