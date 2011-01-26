@@ -239,6 +239,17 @@ public class VpnSettings extends SettingsPreferenceFragment
     }
 
     @Override
+    protected void showDialog(int dialogId) {
+        super.showDialog(dialogId);
+
+        setOnCancelListener(new DialogInterface.OnCancelListener() {
+            public void onCancel(DialogInterface dialog) {
+                onIdle();
+            }
+        });
+    }
+
+    @Override
     public Dialog onCreateDialog (int id) {
         switch (id) {
             case DIALOG_CONNECT:
@@ -267,27 +278,17 @@ public class VpnSettings extends SettingsPreferenceFragment
         }
     }
 
-    private class ConnectDialog extends AlertDialog {
-        public ConnectDialog(Context context) {
-            super(context);
-            setTitle(String.format(getString(R.string.vpn_connect_to),
-                    mConnectingActor.getProfile().getName()));
-            setButton(DialogInterface.BUTTON_POSITIVE,
-                    getString(R.string.vpn_connect_button),
-                    VpnSettings.this);
-            setButton(DialogInterface.BUTTON_NEGATIVE,
-                    getString(android.R.string.cancel),
-                    VpnSettings.this);
-            setView(mConnectingActor.createConnectView());
-        }
-        public void onBackPressed() {
-            changeState(mActiveProfile, VpnState.IDLE);
-            super.onBackPressed();
-        }
-    }
-
     private Dialog createConnectDialog() {
-        return new ConnectDialog(getActivity());
+        final Activity activity = getActivity();
+        return new AlertDialog.Builder(activity)
+                .setView(mConnectingActor.createConnectView())
+                .setTitle(String.format(activity.getString(R.string.vpn_connect_to),
+                        mConnectingActor.getProfile().getName()))
+                .setPositiveButton(activity.getString(R.string.vpn_connect_button),
+                        this)
+                .setNegativeButton(activity.getString(android.R.string.cancel),
+                        this)
+                .create();
     }
 
     private Dialog createReconnectDialog(int id) {
@@ -373,11 +374,6 @@ public class VpnSettings extends SettingsPreferenceFragment
                 .setNegativeButton(R.string.vpn_no_button,
                         new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int w) {
-                                onIdle();
-                            }
-                        })
-                .setOnCancelListener(new DialogInterface.OnCancelListener() {
-                            public void onCancel(DialogInterface dialog) {
                                 onIdle();
                             }
                         });
