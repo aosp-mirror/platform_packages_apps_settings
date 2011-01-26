@@ -582,23 +582,51 @@
     <!-- In the security screen, the header title for settings related to  Passwords-->
     <string name="security_passwords_title">Passwords</string>
 
-    <string name="crypt_keeper_settings_title">Device encryption</string>
+    <string name="crypt_keeper_settings_title">Encryption</string>
 
-    <string name="crypt_keeper_encrypt_title">Encrypt data on device</string>
-    <string name="crypt_keeper_encrypt_summary">Requires you to set a device unlock pin or password</string>
+    <string name="crypt_keeper_encrypt_title" product="tablet">Encrypt tablet</string>
+    <string name="crypt_keeper_encrypt_title" product="default">Encrypt phone</string>
+
+    <string name="crypt_keeper_encrypt_summary" product="tablet">
+    Require a numeric PIN or password to decrypt your tablet each time you
+    power it on</string>
+    <string name="crypt_keeper_encrypt_summary" product="default">
+    Require a numeric PIN or password to decrypt your phone each time you
+    power it on</string>
     <string name="crypt_keeper_encrypted_summary">Encrypted</string>
 
     <string name="crypt_keeper_confirm_title">Confirm encryption</string>
 
     
-    <string name="crypt_keeper_desc" product="tablet">You can encrypt your accounts, settings, downloaded applications and their data, media, and other files. Once you encrypt your tablet, you can\'t unencrypt it except by performing a factory data reset, erasing all the data on your tablet.\n\nEncryption takes up to an hour. You must start with a charged battery and keep your tablet plugged in until encryption is complete. If you interrupt the encryption process, you will lose some or all of your data.</string>
-    <string name="crypt_keeper_desc" product="default">You can encrypt your accounts, settings, downloaded applications and their data, media, and other files. Once you encrypt your phone, you can\'t unencrypt it except by performing a factory data reset, erasing all the data on your phone.\n\nEncryption takes up to an hour. You must start with a charged battery and keep your phone plugged in until encryption is complete. If you interrupt the encryption process, you will lose some or all of your data.</string>
-
+    <string name="crypt_keeper_desc" product="tablet">
+    You can encrypt your accounts, settings, downloaded applications and their data,
+    media, and other files. Once you encrypt your tablet, you must enter a numeric PIN
+    or password to decrypt it each time you power it on: you can\'t unencrypt your tablet
+    except by performing a factory data reset, erasing all your data.\n\nEncryption takes
+    an hour or more. You must start with a charged battery and keep your tablet plugged in
+    until encryption is complete. If you interrupt the encryption process, you will lose
+    some or all of your data.</string>
+    <string name="crypt_keeper_desc" product="default">
+    You can encrypt your accounts, settings, downloaded applications and their data,
+    media, and other files. Once you encrypt your phone, you must enter a numeric PIN or
+    password to decrypt it each time you power it on: you can\'t unencrypt your phone
+    except by performing a factory data reset, erasing all your data.\n\nEncryption takes
+    an hour or more. You must start with a charged battery and keep your phone plugged in
+    until encryption is complete. If you interrupt the encryption process, you will lose
+    some or all of your data.</string>
     
     <string name="crypt_keeper_button_text" product="tablet">Encrypt tablet</string>
     <string name="crypt_keeper_button_text" product="default">Encrypt phone</string>
-    
-    <string name="crypt_keeper_final_desc">Encrypt user data? This operation is not reversible and may not be interrupted without loss of data! Encryption may take up to an hour.</string>
+
+    <string name="crypt_keeper_low_charge_text">Please charge your battery and try again.</string>
+    <string name="crypt_keeper_unplugged_text">Please plug in your charger and try again.</string>
+
+    <string name="crypt_keeper_final_desc" product="tablet">
+    Encrypt tablet? This operation is irreversible and if you interrupt it,
+    you will lose data! Encryption takes an hour or more.</string>
+    <string name="crypt_keeper_final_desc" product="phone">
+    Encrypt phone? This operation is irreversible and if you interrupt it,
+    you will lose data! Encryption takes an hour or more.</string>
     
     <string name="crypt_keeper_setup_title">Encrypting</string>
 
