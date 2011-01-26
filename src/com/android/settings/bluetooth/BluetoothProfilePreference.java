@@ -80,9 +80,9 @@ public class BluetoothProfilePreference extends Preference implements OnClickLis
         } else {
             mProfileExpandView.setOnClickListener(this);
             mProfileExpandView.setTag(mProfile);
-
-            mProfileExpandView.setImageResource(mExpanded ? R.drawable.ic_preferences_expanded
-                : R.drawable.ic_preferences_collapsed);
+            mProfileExpandView.setImageResource(mExpanded
+                    ? com.android.internal.R.drawable.expander_open_holo_dark
+                    : com.android.internal.R.drawable.expander_close_holo_dark);
         }
     }
 

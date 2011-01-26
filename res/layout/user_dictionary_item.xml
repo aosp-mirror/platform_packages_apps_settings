@@ -41,13 +41,10 @@
     <ImageView
             android:id="@+id/delete_button"
             android:layout_width="wrap_content"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:paddingLeft="16dip"
-            android:paddingRight="16dip"
-            android:paddingTop="8dip"
-            android:paddingBottom="8dip"
+            android:padding="8dip"
             android:src="@drawable/ic_item_delete"
-            android:background="@android:drawable/list_selector_background"
+            android:background="?android:attr/selectableItemBackground"
         />
 </LinearLayout>
