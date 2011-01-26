@@ -58,10 +58,10 @@ public class CryptKeeperSettings extends Fragment {
         public void onReceive(Context context, Intent intent) {
             String action = intent.getAction();
             if (action.equals(Intent.ACTION_BATTERY_CHANGED)) {
-                int level = intent.getIntExtra("level", 0);
-                int status = intent.getIntExtra("status", BatteryManager.BATTERY_STATUS_UNKNOWN);
+                int level = intent.getIntExtra(BatteryManager.EXTRA_LEVEL, 0);
+                int plugged = intent.getIntExtra(BatteryManager.EXTRA_PLUGGED, 0);
 
-                if (status == BatteryManager.BATTERY_STATUS_CHARGING && level >= 80) {
+                if (plugged == BatteryManager.BATTERY_PLUGGED_AC && level >= 80) {
                     mInitiateButton.setEnabled(true);
                 } else {
                     mInitiateButton.setEnabled(false);
@@ -171,7 +171,7 @@ public class CryptKeeperSettings extends Fragment {
 
     private void showFinalConfirmation(String password) {
         Preference preference = new Preference(getActivity());
-        preference.setFragment(CryptKeeperComfirm.class.getName());
+        preference.setFragment(CryptKeeperConfirm.class.getName());
         preference.setTitle(R.string.crypt_keeper_confirm_title);
         preference.getExtras().putString("password", password);
         ((PreferenceActivity) getActivity()).onPreferenceStartFragment(null, preference);
