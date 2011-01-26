@@ -688,7 +688,7 @@ public class VpnSettings extends SettingsPreferenceFragment
     }
 
     private void startVpnTypeSelection() {
-        if (getActivity() == null) return;
+        if ((getActivity() == null) || isRemoving()) return;
 
         ((PreferenceActivity) getActivity()).startPreferencePanel(
                 VpnTypeSelection.class.getCanonicalName(), null, R.string.vpn_type_title, null,
@@ -743,7 +743,7 @@ public class VpnSettings extends SettingsPreferenceFragment
     }
 
     private void startVpnEditor(final VpnProfile profile, boolean add) {
-        if (getActivity() == null) return;
+        if ((getActivity() == null) || isRemoving()) return;
 
         Bundle args = new Bundle();
         args.putParcelable(KEY_VPN_PROFILE, profile);
