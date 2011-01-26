@@ -111,8 +111,10 @@ class CachedBluetoothDevice implements Comparable<CachedBluetoothDevice> {
                     " newProfileState " + newProfileState);
         }
 
-        int newState = LocalBluetoothProfileManager.getProfileManager(mLocalManager,
-                profile).convertState(newProfileState);
+        final LocalBluetoothProfileManager pm =
+                LocalBluetoothProfileManager.getProfileManager(mLocalManager, profile);
+        if (pm == null) return;
+        int newState = pm.convertState(newProfileState);
 
         if (newState == SettingsBtStatus.CONNECTION_STATUS_CONNECTED) {
             if (!mProfiles.contains(profile)) {
