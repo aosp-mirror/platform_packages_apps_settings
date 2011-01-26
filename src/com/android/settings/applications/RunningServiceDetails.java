@@ -2,6 +2,7 @@ package com.android.settings.applications;
 
 import com.android.settings.R;
 
+import android.app.Activity;
 import android.app.ActivityManager;
 import android.app.AlertDialog;
 import android.app.ApplicationErrorReport;
@@ -23,6 +24,7 @@ import android.content.pm.PackageManager.NameNotFoundException;
 import android.content.res.Resources;
 import android.os.Bundle;
 import android.os.Debug;
+import android.os.Handler;
 import android.os.SystemClock;
 import android.provider.Settings;
 import android.util.Log;
@@ -406,7 +408,15 @@ public class RunningServiceDetails extends Fragment
     }
     
     private void finish() {
-        getActivity().onBackPressed();
+        (new Handler()).post(new Runnable() {
+            @Override
+            public void run() {
+                Activity a = getActivity();
+                if (a != null) {
+                    a.onBackPressed();
+                }
+            }
+        });
     }
     
     @Override
