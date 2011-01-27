@@ -257,7 +257,7 @@
     <string name="unlock_set_unlock_pin_title" msgid="5846029709462329515">"PIN"</string>
     <string name="unlock_set_unlock_pin_summary" msgid="4131169672844263316">"PIN numérico para desbloquear pantalla"</string>
     <string name="unlock_set_unlock_password_title" msgid="8775603825675090937">"Contraseña"</string>
-    <string name="unlock_set_unlock_password_summary" msgid="4623254789833899286">"Contraseña para desbloq pantalla"</string>
+    <string name="unlock_set_unlock_password_summary" msgid="4623254789833899286">"Contraseña para desbloquear pantalla"</string>
     <string name="unlock_set_unlock_disabled_summary" msgid="736557879526940324">"Inhabilitado por administrador remoto"</string>
     <string name="unlock_disable_lock_title" msgid="1427036227416979120">"Desactivar bloqueo pantalla"</string>
     <string name="unlock_disable_lock_pattern_summary" msgid="6801602880568869201">"Eliminar patrón de desbloqueo"</string>
@@ -268,7 +268,7 @@
     <string name="unlock_change_lock_password_title" msgid="5606298470358768865">"Cambiar contraseña de desbloqueo"</string>
     <string name="lockpassword_password_too_short" msgid="7328975683669256660">"La contraseña debe contener al menos %d caracteres."</string>
     <string name="lockpassword_pin_too_short" msgid="2252847623267704683">"El PIN debe contener al menos %d caracteres."</string>
-    <string name="lockpassword_press_continue" msgid="6506047902828925216">"Pulsar \"Continuar\" al terminar"</string>
+    <string name="lockpassword_press_continue" msgid="6506047902828925216">"Pulsa Continuar al terminar"</string>
     <string name="lockpassword_continue_label" msgid="4602203784934526940">"Continuar"</string>
     <string name="lockpassword_password_too_long" msgid="7354418473281442589">"El PIN no puede tener más de %d dígitos."</string>
     <string name="lockpassword_pin_too_long" msgid="6290317580664119373">"El PIN no puede tener más de %d dígitos."</string>
@@ -335,9 +335,7 @@
     <string name="bluetooth_dock_settings_remember" msgid="5551459057010609115">"Ajustes de recordatorio"</string>
     <string name="nfc_quick_toggle_title" msgid="6769159366307299004">"NFC"</string>
     <string name="nfc_quick_toggle_summary" msgid="1988408027741447231">"Usar Comunicación de campo cercano (NFC) para leer e intercambiar etiquetas"</string>
-    <!-- no translation found for nfc_toggle_error (2233172102497535522) -->
-    <!-- no translation found for nfc_toggle_error (8998642457947607263) -->
-    <skip />
+    <string name="nfc_toggle_error" msgid="2233172102497535522">"Se ha producido un error."</string>
     <string name="wifi_quick_toggle_title" msgid="874495178395350104">"Wi-Fi"</string>
     <string name="wifi_quick_toggle_summary" msgid="1047950931623694366">"Activar Wi-Fi"</string>
     <string name="wifi_settings" msgid="4746946030627213196">"Ajustes de Wi-Fi"</string>
@@ -539,15 +537,15 @@
     <string name="sd_eject" product="default" msgid="6915293408836853020">"Desactivar tarjeta SD"</string>
     <string name="sd_eject_summary" product="nosdcard" msgid="5009296896648072891">"Desactivar almacenamiento USB interno"</string>
     <string name="sd_eject_summary" product="default" msgid="3300599435073550246">"Desactivar la tarjeta SD para extraerla de forma segura"</string>
-    <string name="sd_insert_summary" product="nosdcard" msgid="5264016886409577313">"Insert alm USB para activ"</string>
+    <string name="sd_insert_summary" product="nosdcard" msgid="5264016886409577313">"Inserta USB para activar almacenamiento"</string>
     <string name="sd_insert_summary" product="default" msgid="2048640010381803841">"Insertar una tarjeta SD para el montaje"</string>
     <string name="sd_mount" product="nosdcard" msgid="8966695015677343116">"Activar almacenamiento USB"</string>
     <string name="sd_mount" product="default" msgid="5940523765187704135">"Activar tarjeta SD"</string>
-    <!-- outdated translation 6733254203291665551 -->     <string name="sd_mount_summary" product="nosdcard" msgid="1794150364965145726">"Activar almacenam USB interno"</string>
+    <!-- outdated translation 1091032368296694505 -->     <string name="sd_mount_summary" product="nosdcard" msgid="1794150364965145726">"Activar el almacenamiento USB"</string>
     <string name="sd_mount_summary" product="default" msgid="4936591681679097699">"Activar tarjeta SD"</string>
     <string name="sd_format" product="nosdcard" msgid="2148179271623099054">"Borrar almacenamiento USB"</string>
     <string name="sd_format" product="default" msgid="2576054280507119870">"Borrar tarjeta SD"</string>
-    <string name="sd_format_summary" product="nosdcard" msgid="1504606546865152514">"Borr dat USB intern (mús, fot)"</string>
+    <string name="sd_format_summary" product="nosdcard" msgid="1504606546865152514">"Borra todos los datos de almacenamiento USB del teléfono, como la música o las fotos."</string>
     <string name="sd_format_summary" product="default" msgid="915849621390821841">"Permite borrar todos los datos de la tarjeta SD del teléfono, como la música y las fotos"</string>
     <string name="sd_unavailable" msgid="8580107589533213904">"No disponible"</string>
     <string name="read_only" msgid="6702420168629076340">" (Sólo lectura)"</string>
@@ -600,11 +598,11 @@
     <string name="restore_default_apn_completed" msgid="3990449939234957281">"Restablecimiento de la configuración de APN predeterminada completado"</string>
     <string name="master_clear_title" msgid="5907939616087039756">"Restablecer datos de fábrica"</string>
     <string name="master_clear_summary" msgid="4986154238001088492">"Borrar todos los datos del teléfono"</string>
-    <string name="master_clear_desc" product="nosdcard" msgid="2163013814299528247">"Se borrarán todos los datos del "<b>"almacenamiento interno"</b>" del teléfono, incluidos: la configuración y los datos de aplicaciones y del sistema de "\n\n<li>"tu cuenta de Google"</li>\n<li>","</li>\n<li>"las aplicaciones descargadas."</li>\n\n"Para eliminar todos los datos de este teléfono, debes borrar el "<b>"almacenamiento USB"</b>"."\n\n</string>
-    <string name="master_clear_desc" product="default" msgid="1741944496458365969">"Se borrarán todos los datos del "<b>"almacenamiento interno"</b>" del teléfono, incluidos: la configuración y los datos de aplicaciones y del sistema de "\n\n<li>"tu cuenta de Google"</li>\n<li>","</li>\n<li>"las aplicaciones descargadas."</li>\n\n"Si también quieres eliminar la música, las imágenes y otros datos de usuario, debes borrar la "<b>"tarjeta SD"</b>"."\n\n</string>
+    <string name="master_clear_desc" product="nosdcard" msgid="2163013814299528247">"Se borrarán todos los datos del "<b>"almacenamiento interno"</b>" del teléfono, incluidos:"\n\n<li>"tu cuenta de Google"</li>\n<li>"datos y configuración del sistema y de aplicaciones y"</li>\n<li>"las aplicaciones descargadas."</li>\n\n"Para eliminar todos los datos de este teléfono, debes borrar el "<b>"almacenamiento USB"</b>"."\n\n</string>
+    <string name="master_clear_desc" product="default" msgid="1741944496458365969">"Se borrarán todos los datos del "<b>"almacenamiento interno"</b>" del teléfono, incluidos:"\n\n<li>"tu cuenta de Google"</li>\n<li>"datos y configuración del sistema y de aplicaciones y"</li>\n<li>"las aplicaciones descargadas."</li>\n\n"Si también quieres eliminar la música, las imágenes y otros datos de usuario, debes borrar la "<b>"tarjeta SD"</b>"."\n\n</string>
     <string name="erase_external_storage" product="nosdcard" msgid="969364037450286809">"Borrar almacenamiento USB"</string>
     <string name="erase_external_storage" product="default" msgid="1397239046334307625">"Borrar tarjeta SD"</string>
-    <string name="erase_external_storage_description" product="nosdcard" msgid="1657838142707381027">"Borr dat USB intern (mús, fot)"</string>
+    <string name="erase_external_storage_description" product="nosdcard" msgid="1657838142707381027">"Borra todos los datos de almacenamiento USB del teléfono, como la música o las fotos."</string>
     <string name="erase_external_storage_description" product="default" msgid="8100175974635894073">"Borra todos los datos de la tarjeta SD, como música y fotos"</string>
     <string name="master_clear_button_text" msgid="7550632653343157971">"Reiniciar teléfono"</string>
     <string name="master_clear_final_desc" msgid="6917971132484622696">"¿Quieres borrar toda tu información personal y las aplicaciones que has descargado? Esta acción no se puede deshacer."</string>
@@ -663,7 +661,7 @@
     <string name="terms_title" msgid="7697580845616764642">"Términos y condiciones"</string>
     <string name="system_tutorial_list_item_title" msgid="9082844446660969729">"Tutorial del sistema"</string>
     <string name="system_tutorial_list_item_summary" msgid="3861815254521030201">"Aprende a utilizar tu teléfono"</string>
-    <string name="settings_license_activity_title" msgid="7553683406244228650">"Licencias de sw libre"</string>
+    <string name="settings_license_activity_title" msgid="7553683406244228650">"Licencias de código abierto"</string>
     <string name="settings_license_activity_unavailable" msgid="4210539215951487627">"Se ha producido un problema al intentar cargar las licencias."</string>
     <string name="settings_license_activity_loading" msgid="3337535809093591740">"Cargando..."</string>
     <string name="settings_safetylegal_title" msgid="1289483965535937431">"Información de seguridad"</string>
@@ -748,13 +746,13 @@
     <string name="filter" msgid="2018011724373033887">"Filtrar"</string>
     <string name="filter_dlg_title" msgid="6507663329723966854">"Seleccionar opciones de filtrado"</string>
     <string name="filter_apps_all" msgid="5142129378749391876">"Todas"</string>
-    <string name="filter_apps_third_party" msgid="7786348047690140979">"Descargada"</string>
+    <string name="filter_apps_third_party" msgid="7786348047690140979">"Descargadas"</string>
     <string name="filter_apps_running" msgid="7767071454371350486">"En ejecución"</string>
     <string name="filter_apps_onsdcard" product="nosdcard" msgid="4843063154701023349">"Almacenamiento USB"</string>
     <string name="filter_apps_onsdcard" product="default" msgid="1477351142334784771">"En tarjeta SD"</string>
     <string name="disabled" msgid="9206776641295849915">"Inhabilitada"</string>
     <string name="no_applications" msgid="5190227407135243904">"Sin aplicaciones"</string>
-    <string name="internal_storage" msgid="1584700623164275282">"Almac interno"</string>
+    <string name="internal_storage" msgid="1584700623164275282">"Almacenamiento interno"</string>
     <string name="sd_card_storage" product="nosdcard" msgid="2673203150465132465">"Almacenamiento USB"</string>
     <string name="sd_card_storage" product="default" msgid="7623513618171928235">"Tarjeta SD"</string>
     <string name="recompute_size" msgid="7722567982831691718">"Recalculando tamaño..."</string>
@@ -1101,9 +1099,9 @@
     <string name="credentials_access_summary" msgid="319662078718574168">"Permitir que las aplicaciones accedan a los certificados seguros y a otras credenciales"</string>
     <string name="credentials_unlock" msgid="1463040326264133844">"Introducir contraseña"</string>
     <string name="credentials_unlock_hint" msgid="594679530407918031">"Introduce la contraseña de almacenamiento de credenciales."</string>
-    <string name="credentials_install_certificates" product="nosdcard" msgid="619171634797689906">"Instalar desde almac USB"</string>
+    <string name="credentials_install_certificates" product="nosdcard" msgid="619171634797689906">"Instalar desde USB"</string>
     <string name="credentials_install_certificates" product="default" msgid="177337517568022236">"Instalar desde la tarjeta SD"</string>
-    <string name="credentials_install_certificates_summary" product="nosdcard" msgid="8920330112631198575">"Inst cert encr de alm USB"</string>
+    <string name="credentials_install_certificates_summary" product="nosdcard" msgid="8920330112631198575">"Instalar certificados desde USB"</string>
     <string name="credentials_install_certificates_summary" product="default" msgid="7737001268684193093">"Instalar certificados encriptados de tarjeta SD"</string>
     <string name="credentials_set_password" msgid="9104473585811899989">"Establecer contraseña"</string>
     <string name="credentials_set_password_summary" msgid="8287876917562085701">"Establecer o cambiar la contraseña de almacenamiento de credenciales"</string>
