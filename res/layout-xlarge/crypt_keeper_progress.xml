@@ -18,11 +18,12 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingTop="60dip"
+    android:paddingTop="154dip"
     android:paddingLeft="128dip"
     android:paddingRight="128dip"
     android:paddingBottom="0dip" 
     android:orientation="vertical"
+    android:background="@drawable/encryption_bg_waiting"
 >
 
     <TextView
@@ -52,12 +53,15 @@
         />
     </RelativeLayout>
     
-    
     <TextView
+        android:id="@+id/status"
         android:layout_width="match_parent"
         android:layout_height="0dip"
         android:layout_weight="1"
-        android:layout_marginLeft="16dip"
+        android:paddingLeft="152dip"
+        android:paddingTop="21dip"
+        android:textSize="18dip"
+        android:textColor="#ffffffff"
         android:text="@string/crypt_keeper_setup_description"
     />
 

@@ -29,7 +29,6 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.location.LocationManager;
 import android.os.Bundle;
-import android.os.SystemProperties;
 import android.os.Vibrator;
 import android.preference.CheckBoxPreference;
 import android.preference.ListPreference;
@@ -188,16 +187,19 @@ public class SecuritySettings extends SettingsPreferenceFragment
 
 
         // Add options for device encryption
+        DevicePolicyManager dpm =
+                (DevicePolicyManager) getSystemService(Context.DEVICE_POLICY_SERVICE);
 
-        String status = SystemProperties.get("ro.crypto.state", "unsupported");
-        if ("encrypted".equalsIgnoreCase(status)) {
-            // The device is currently encrypted
+        switch (dpm.getStorageEncryptionStatus()) {
+        case DevicePolicyManager.ENCRYPTION_STATUS_ACTIVE:
+            // The device is currently encrypted.
             addPreferencesFromResource(R.xml.security_settings_encrypted);
-        } else if ("unencrypted".equalsIgnoreCase(status)) {
-            // This device support encryption but isn't encrypted
+            break;
+        case DevicePolicyManager.ENCRYPTION_STATUS_INACTIVE:
+            // This device supports encryption but isn't encrypted.
             addPreferencesFromResource(R.xml.security_settings_unencrypted);
+            break;
         }
-
 
         // lock after preference
         mLockAfter = (ListPreference) root.findPreference(KEY_LOCK_AFTER_TIMEOUT);
