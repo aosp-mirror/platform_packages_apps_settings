@@ -32,7 +32,7 @@
         android:layout_alignParentLeft="true"
         android:layout_marginLeft="16dip"
         android:layout_alignParentTop="true"
-        android:textSize="30dip"
+        android:textSize="32dip"
         android:textColor="#FF99cc00"
         android:text="@string/date_and_time_settings_title_setup_wizard"
         android:gravity="bottom" />
@@ -62,7 +62,8 @@
             android:layout_alignParentLeft="true"
             android:layout_alignBottom="@+id/date_time_auto"
             android:gravity="left|center_vertical"
-            android:textAppearance="?android:attr/textAppearanceMedium" />
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:textSize="20dip" />
 
         <LinearLayout
             android:id="@+id/date_time_auto"
@@ -80,7 +81,8 @@
                 android:minHeight="?android:attr/listPreferredItemHeight"
                 android:layout_marginLeft="16dip"
                 android:text="@string/date_time_auto"
-                android:textAppearance="?android:attr/textAppearanceMedium" />
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:textSize="20dip" />
 
             <!-- Divider -->
             <View
@@ -108,6 +110,7 @@
                 android:layout_height="48dip"
                 android:text="@string/date_picker_title"
                 android:textAppearance="?android:attr/textAppearanceMedium"
+                android:textSize="20dip"
                 android:clickable="false"
                 android:longClickable="false"
                 android:gravity="center" />
@@ -135,6 +138,7 @@
                 android:layout_height="48dip"
                 android:text="@string/time_picker_title"
                 android:textAppearance="?android:attr/textAppearanceMedium"
+                android:textSize="20dip"
                 android:gravity="center" />
 
             <TimePicker

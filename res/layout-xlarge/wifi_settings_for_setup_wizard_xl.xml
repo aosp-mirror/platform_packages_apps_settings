@@ -45,7 +45,7 @@
         android:layout_centerVertical="true"
         android:layout_marginLeft="16dip"
         android:layout_below="@id/top_padding_layout"
-        android:textSize="30dip"
+        android:textSize="32dip"
         android:textColor="#ff99cc00"
         android:text="@string/wifi_setup_title"
         android:gravity="bottom"/>
@@ -104,9 +104,10 @@
                 android:id="@+id/connecting_status"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:lineSpacingExtra="12dip"
+                android:lineSpacingExtra="10dip"
                 android:inputType="textMultiLine"
                 android:textAppearance="?android:attr/textAppearanceMedium"
+                android:textSize="20sp"
                 android:clickable="false"
                 android:longClickable="false" />
         </LinearLayout>

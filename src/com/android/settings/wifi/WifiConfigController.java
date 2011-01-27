@@ -159,6 +159,13 @@ public class WifiConfigController implements TextWatcher,
             mSsidView.addTextChangedListener(this);
             mSecuritySpinner = ((Spinner) mView.findViewById(R.id.security));
             mSecuritySpinner.setOnItemSelectedListener(this);
+            if (context instanceof WifiSettingsForSetupWizardXL) {
+                // We want custom layout. The content must be same as the other cases.
+                mSecuritySpinner.setAdapter(
+                        new ArrayAdapter<String>(context, R.layout.wifi_setup_custom_list_item_1,
+                                android.R.id.text1,
+                                context.getResources().getStringArray(R.array.wifi_security)));
+            }
             mConfigUi.setSubmitButton(context.getString(R.string.wifi_save));
         } else {
             mConfigUi.setTitle(mAccessPoint.ssid);
