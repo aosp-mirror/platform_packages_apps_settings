@@ -30,6 +30,7 @@ import android.os.Handler;
 import android.os.ParcelUuid;
 import android.util.Log;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.LinkedList;
@@ -466,7 +467,11 @@ abstract class LocalBluetoothProfileManager {
 
         @Override
         public List<BluetoothDevice> getConnectedDevices() {
-            return mService.getConnectedDevices();
+            if (mService != null) {
+                return mService.getConnectedDevices();
+            } else {
+                return new ArrayList<BluetoothDevice>();
+            }
         }
 
         @Override
