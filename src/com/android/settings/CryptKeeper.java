@@ -64,49 +64,20 @@ public class CryptKeeper extends Activity implements TextView.OnEditorActionList
     private Handler mHandler = new Handler() {
         @Override
         public void handleMessage(Message msg) {
-
             switch (msg.what) {
-
             case UPDATE_PROGRESS:
-                String state = SystemProperties.get("vold.encrypt_progress");
-
-                ProgressBar progressBar = (ProgressBar) findViewById(R.id.progress_bar);
-                progressBar.setProgress(0);
-
-                try {
-                    int progress = Integer.parseInt(state);
-                    progressBar.setProgress(progress);
-                } catch (Exception e) {
-                    Log.w(TAG, "Error parsing progress: " + e.toString());
-                }
-
-                // Check the status every 5 second
-                sendEmptyMessageDelayed(UPDATE_PROGRESS, 5000);
+                updateProgress();
                 break;
 
             case COOLDOWN:
-                TextView tv = (TextView) findViewById(R.id.status);
-                if (mCooldown <= 0) {
-                    // Re-enable the password entry
-                    EditText passwordEntry = (EditText) findViewById(R.id.passwordEntry);
-                    passwordEntry.setEnabled(true);
-
-                    tv.setText(R.string.try_again);
-
-                } else {
-
-                    CharSequence tempalte = getText(R.string.crypt_keeper_cooldown);
-                    tv.setText(TextUtils.expandTemplate(tempalte, Integer.toString(mCooldown)));
-
-                    mCooldown--;
-                    mHandler.sendEmptyMessageDelayed(COOLDOWN, 1000); // Tick every second
-                }
+                cooldown();
                 break;
             }
         }
     };
 
     private int mCooldown;
+    PowerManager.WakeLock mWakeLock;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -139,17 +110,71 @@ public class CryptKeeper extends Activity implements TextView.OnEditorActionList
                 | StatusBarManager.DISABLE_SYSTEM_INFO | StatusBarManager.DISABLE_NAVIGATION);
     }
 
+    @Override
+    public void onStop() {
+        super.onStop();
+
+        mHandler.removeMessages(COOLDOWN);
+        mHandler.removeMessages(UPDATE_PROGRESS);
+
+        if (mWakeLock != null) {
+            mWakeLock.release();
+            mWakeLock = null;
+        }
+    }
+
     private void encryptionProgressInit() {
         // Accquire a partial wakelock to prevent the device from sleeping. Note
         // we never release this wakelock as we will be restarted after the device
         // is encrypted.
 
         PowerManager pm = (PowerManager) getSystemService(Context.POWER_SERVICE);
-        PowerManager.WakeLock wakeLock = pm.newWakeLock(PowerManager.SCREEN_DIM_WAKE_LOCK, TAG);
+        mWakeLock = pm.newWakeLock(PowerManager.FULL_WAKE_LOCK, TAG);
 
-        wakeLock.acquire();
+        mWakeLock.acquire();
 
-        mHandler.sendEmptyMessage(UPDATE_PROGRESS);
+        ProgressBar progressBar = (ProgressBar) findViewById(R.id.progress_bar);
+        progressBar.setIndeterminate(true);
+
+        updateProgress();
+    }
+
+    private void updateProgress() {
+        String state = SystemProperties.get("vold.encrypt_progress");
+
+        int progress = 0;
+        try {
+            progress = Integer.parseInt(state);
+        } catch (Exception e) {
+            Log.w(TAG, "Error parsing progress: " + e.toString());
+        }
+
+        CharSequence status = getText(R.string.crypt_keeper_setup_description);
+        TextView tv = (TextView) findViewById(R.id.status);
+        tv.setText(TextUtils.expandTemplate(status, Integer.toString(progress)));
+
+        // Check the progress every 5 seconds
+        mHandler.removeMessages(UPDATE_PROGRESS);
+        mHandler.sendEmptyMessageDelayed(UPDATE_PROGRESS, 5000);
+    }
+
+    private void cooldown() {
+        TextView tv = (TextView) findViewById(R.id.status);
+        if (mCooldown <= 0) {
+            // Re-enable the password entry
+            EditText passwordEntry = (EditText) findViewById(R.id.passwordEntry);
+            passwordEntry.setEnabled(true);
+
+            tv.setText(R.string.try_again);
+
+        } else {
+            CharSequence tempalte = getText(R.string.crypt_keeper_cooldown);
+            tv.setText(TextUtils.expandTemplate(tempalte, Integer.toString(mCooldown)));
+
+            mCooldown--;
+            mHandler.removeMessages(COOLDOWN);
+            mHandler.sendEmptyMessageDelayed(COOLDOWN, 1000); // Tick every second
+        }
     }
 
     private void passwordEntryInit() {
@@ -211,7 +236,7 @@ public class CryptKeeper extends Activity implements TextView.OnEditorActionList
                     mCooldown = COOL_DOWN_INTERVAL;
                     EditText passwordEntry = (EditText) findViewById(R.id.passwordEntry);
                     passwordEntry.setEnabled(false);
-                    mHandler.sendEmptyMessage(COOLDOWN);
+                    cooldown();
                 } else {
                     TextView tv = (TextView) findViewById(R.id.status);
                     tv.setText(R.string.try_again);

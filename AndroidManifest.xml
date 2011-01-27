@@ -1095,6 +1095,12 @@
             android:theme="@style/CryptKeeperBlankTheme"
         />
 
+        <activity android:name=".CryptKeeperConfirm$Blank"
+            android:immersive="true"
+            android:launchMode="singleTop"
+            android:theme="@style/CryptKeeperBlankTheme"
+        />
+
         <!-- Pseudo-activity used to provide an intent-filter entry point to encryption settings -->
         <activity android:name="Settings$CryptKeeperSettingsActivity"
                 android:theme="@android:style/Theme.Holo"
