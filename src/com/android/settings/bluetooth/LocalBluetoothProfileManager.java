@@ -635,7 +635,7 @@ abstract class LocalBluetoothProfileManager {
 
         @Override
         public int getDrawableResource() {
-            return R.drawable.ic_bt_headphones_a2dp;
+            return 0;   // no icon for OPP
         }
     }
 
