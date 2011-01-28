@@ -89,7 +89,7 @@
     <string name="battery_info_health_unspecified_failure" msgid="6347021103185471590">"Unbekannter Fehler"</string>
     <string name="bluetooth" msgid="5549625000628014477">"Bluetooth"</string>
     <string name="bluetooth_visibility" msgid="2930835434091839916">"Sichtbar"</string>
-    <string name="bluetooth_is_discoverable" msgid="1205694503775884903">"Für <xliff:g id="DISCOVERABLE_TIME_PERIOD">%1$s</xliff:g> Sekunden erkennbar..."</string>
+    <string name="bluetooth_is_discoverable" msgid="1205694503775884903">"Für <xliff:g id="DISCOVERABLE_TIME_PERIOD">%1$s</xliff:g> Sekunden sichtbar..."</string>
     <string name="bluetooth_not_discoverable" msgid="128269993123955177">"Gerät sichtbar machen"</string>
     <string name="bluetooth_lock_voice_dialing" msgid="3139322992062086225">"Sprachwahl sperren"</string>
     <string name="bluetooth_lock_voice_dialing_summary" msgid="4741338867496787042">"Verwendung des Bluetooth-Dialers bei gesperrtem Bildschirm verhindern"</string>
@@ -342,7 +342,7 @@
     <string name="wifi_settings_category" msgid="2810363951104753710">"WLAN-Einstellungen"</string>
     <string name="wifi_settings_summary" msgid="668767638556052820">"WLAN-Zugangspunkte festlegen und verwalten"</string>
     <string name="wifi_starting" msgid="6710266609710860129">"Aktivierung..."</string>
-    <string name="wifi_stopping" msgid="5952909472548218348">"Wird beendet..."</string>
+    <string name="wifi_stopping" msgid="5952909472548218348">"Deaktivierung..."</string>
     <string name="wifi_error" msgid="3207971103917128179">"Fehler"</string>
     <string name="wifi_in_airplane_mode" msgid="7618393787965366655">"Im Flugmodus"</string>
     <string name="wifi_fail_to_scan" msgid="6194542252808587669">"Netzwerkscan nicht möglich"</string>
@@ -475,7 +475,7 @@
     <string name="brightness" msgid="2354961343555249270">"Helligkeit"</string>
     <string name="brightness_summary" msgid="838917350127550703">"Helligkeit des Bildschirms anpassen"</string>
     <string name="screen_timeout" msgid="4882669461447531301">"Display-Timeout"</string>
-    <string name="screen_timeout_summary" msgid="2905757633140605334">"Verzögerung vor automatischer Bildschirmabschaltung anpassen"</string>
+    <string name="screen_timeout_summary" msgid="2905757633140605334">"Verzögerung bis zu automatischer Bildschirmabschaltung anpassen"</string>
     <string name="automatic_brightness" msgid="5014143533884135461">"Automatische Helligkeit"</string>
     <string name="sim_lock_settings" msgid="3392331196873564292">"Einstellungen für SIM-Karten-Sperre"</string>
     <string name="sim_lock_settings_category" msgid="5136244267576697004">"SIM-Sperre einrichten"</string>
@@ -545,7 +545,7 @@
     <string name="sd_mount_summary" product="default" msgid="4936591681679097699">"SD-Karte bereitstellen"</string>
     <string name="sd_format" product="nosdcard" msgid="2148179271623099054">"USB-Speicher löschen"</string>
     <string name="sd_format" product="default" msgid="2576054280507119870">"SD-Karte löschen"</string>
-    <string name="sd_format_summary" product="nosdcard" msgid="1504606546865152514">"Löscht alle Daten, z. B. Musik und Fotos, aus d. int. USB-Speicher d. Telefons"</string>
+    <string name="sd_format_summary" product="nosdcard" msgid="1504606546865152514">"Löscht alle Daten, z. B. Musik und Fotos, aus dem internen USB-Speicher des Telefons"</string>
     <string name="sd_format_summary" product="default" msgid="915849621390821841">"Löscht sämtliche Daten, beispielsweise Musik und Fotos, von der SD-Karte des Telefons."</string>
     <string name="sd_unavailable" msgid="8580107589533213904">"Nicht verfügbar"</string>
     <string name="read_only" msgid="6702420168629076340">" (schreibgeschützt)"</string>
@@ -602,7 +602,7 @@
     <string name="master_clear_desc" product="default" msgid="1741944496458365969">"Hierdurch werden alle Daten aus dem "<b>"internen Speicher"</b>" Ihres Telefons gelöscht, einschließlich"\n\n<li>"der System- und Anwendungsdaten und -einstellungen Ihres Google-Kontos"</li>\n<li></li>\n<li>"heruntergeladener Anwendungen"</li>\n\n"Um auch Musik, Bilder und sonstige Nutzerdaten zu löschen, müssen Sie die "<b>"SD-Karte"</b>" löschen."\n\n</string>
     <string name="erase_external_storage" product="nosdcard" msgid="969364037450286809">"USB-Speicher löschen"</string>
     <string name="erase_external_storage" product="default" msgid="1397239046334307625">"SD-Karte löschen"</string>
-    <string name="erase_external_storage_description" product="nosdcard" msgid="1657838142707381027">"Löscht alle Daten, z. B. Musik und Fotos, aus dem int. USB-Speicher des Telefons"</string>
+    <string name="erase_external_storage_description" product="nosdcard" msgid="1657838142707381027">"Löscht alle Daten, z. B. Musik und Fotos, aus dem int. USB-Speicher des Telefons"</string>
     <string name="erase_external_storage_description" product="default" msgid="8100175974635894073">"Alle Daten, z. B. Musik und Fotos, von der SD-Karte löschen"</string>
     <string name="master_clear_button_text" msgid="7550632653343157971">"Telefon zurücksetzen"</string>
     <string name="master_clear_final_desc" msgid="6917971132484622696">"Alle persönlichen Daten und heruntergeladenen Anwendungen löschen? Diese Aktion kann nicht rückgängig gemacht werden."</string>
@@ -645,7 +645,7 @@
     <string name="location_title" msgid="1029961368397484576">"Mein Standort"</string>
     <string name="location_network_based" msgid="8815705866861993344">"Drahtlosnetzwerke"</string>
     <string name="location_networks_disabled" msgid="2708968452901433980">"Standort über Drahtlosnetzwerke bestimmen (z. B. in Google Maps)"</string>
-    <string name="location_neighborhood_level" msgid="4656658097932515921">"Standort bestimmt von WLAN und/oder Mobilfunknetzen"</string>
+    <string name="location_neighborhood_level" msgid="4656658097932515921">"Standort über WLAN und/oder Mobilfunknetze bestimmen"</string>
     <string name="location_gps" msgid="6296125378829097831">"GPS-Satelliten"</string>
     <string name="location_street_level" msgid="7456259025474443314">"Genau auf Straßenebene lokalisieren"</string>
     <string name="location_gps_disabled" msgid="6632537158777308128">"Auf Straßenebene lokalisieren (höherer Akkuverbrauch, im Freien)"</string>
@@ -774,7 +774,7 @@
     <string name="version_text" msgid="9189073826278676425">"Version <xliff:g id="VERSION_NUM">%1$s</xliff:g>"</string>
     <string name="move_app" msgid="5042838441401731346">"Verschieben"</string>
     <string name="move_app_to_internal" msgid="3895430471913858185">"Auf Telefon verschieben"</string>
-    <string name="move_app_to_sdcard" product="nosdcard" msgid="4350451696315265420">"In USB-Speicher versch."</string>
+    <string name="move_app_to_sdcard" product="nosdcard" msgid="4350451696315265420">"In USB-Speicher verschieben"</string>
     <string name="move_app_to_sdcard" product="default" msgid="1143379049903056407">"Auf SD-Karte verschieben"</string>
     <string name="moving" msgid="6431016143218876491">"Verschieben"</string>
     <string name="insufficient_storage" msgid="8566913062094452962">"Es ist nicht genügend Speicher vorhanden."</string>
@@ -976,9 +976,9 @@
     <string name="voice_input_category" msgid="1589318440824204736">"Spracheingabe"</string>
     <string name="voice_output_category" msgid="2624538587784986229">"Sprachausgabe"</string>
     <string name="recognizer_title" msgid="3231385184559054457">"Spracherkennung"</string>
-    <string name="recognizer_settings_title" msgid="6038598099039717232">"Spracherkennungseinstellungen"</string>
+    <string name="recognizer_settings_title" msgid="6038598099039717232">"Spracherkennung"</string>
     <string name="recognizer_settings_summary" msgid="4472287934134546902">"Einstellungen für \'<xliff:g id="RECOGNIZER_NAME">%s</xliff:g>\'"</string>
-    <string name="tts_settings" msgid="8186971894801348327">"Text-in-Sprache-Einstellungen"</string>
+    <string name="tts_settings" msgid="8186971894801348327">"Text-in-Sprache"</string>
     <string name="tts_settings_title" msgid="4182348653053000933">"Text-in-Sprache-Einstellungen"</string>
     <string name="use_default_tts_settings_title" msgid="1577063839539732930">"Immer meine Einst. verwenden"</string>
     <string name="use_default_tts_settings_summary" msgid="4253502106159206276">"Standardeinstellungen überschreiben Anwendungseinstellungen"</string>
@@ -1100,7 +1100,7 @@
     <string name="credentials_access_summary" msgid="319662078718574168">"Anwendungen können sichere Zertifikate &amp;amp; Anmeldeinform. abrufen"</string>
     <string name="credentials_unlock" msgid="1463040326264133844">"Passwort eingeben"</string>
     <string name="credentials_unlock_hint" msgid="594679530407918031">"Geben Sie das Passwort für den Anmeldeinformationsspeicher ein."</string>
-    <string name="credentials_install_certificates" product="nosdcard" msgid="619171634797689906">"Von USB-Speicher inst."</string>
+    <string name="credentials_install_certificates" product="nosdcard" msgid="619171634797689906">"Von USB-Speicher installieren"</string>
     <string name="credentials_install_certificates" product="default" msgid="177337517568022236">"Von SD-Karte installieren"</string>
     <string name="credentials_install_certificates_summary" product="nosdcard" msgid="8920330112631198575">"Verschl. Zertifikate von USB-Speicher inst."</string>
     <string name="credentials_install_certificates_summary" product="default" msgid="7737001268684193093">"Verschlüsselte Zertifikate von SD-Karte installieren"</string>
