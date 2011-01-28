@@ -181,7 +181,7 @@ public class Memory extends SettingsPreferenceFragment implements OnCancelListen
 
         mInternalMediaColor = mRes.getColor(R.color.memory_media_usage);
         mInternalAppsColor = mRes.getColor(R.color.memory_apps_usage);
-        mInternalUsedColor = mRes.getColor(R.color.memory_used);
+        mInternalUsedColor = android.graphics.Color.GRAY;
 
         float[] radius = new float[] {
                 5f, 5f, 5f, 5f, 5f, 5f, 5f, 5f
@@ -401,23 +401,18 @@ public class Memory extends SettingsPreferenceFragment implements OnCancelListen
     }
 
     private void updateUiExact(long totalSize, long availSize, long mediaSize, long appsSize) {
+        // There are other things that can take up storage, but we didn't measure it.
+        // add that unaccounted-for-usage to Apps Usage
+        final long appsPlusRemaining = totalSize - availSize - mediaSize;
+
         mInternalSize.setSummary(formatSize(totalSize));
         mInternalAvail.setSummary(formatSize(availSize));
         mInternalMediaUsage.setSummary(formatSize(mediaSize));
-        mInternalAppsUsage.setSummary(formatSize(appsSize));
+        mInternalAppsUsage.setSummary(formatSize(appsPlusRemaining));
 
         mInternalUsageChart.clear();
         mInternalUsageChart.addEntry(mediaSize / (float) totalSize, mInternalMediaColor);
-        mInternalUsageChart.addEntry(appsSize / (float) totalSize, mInternalAppsColor);
-
-        final long usedSize = totalSize - availSize;
-
-        // There are other things that can take up storage, but we didn't
-        // measure it.
-        final long remaining = usedSize - (mediaSize + appsSize);
-        if (remaining > 0) {
-            mInternalUsageChart.addEntry(remaining / (float) totalSize, mInternalUsedColor);
-        }
+        mInternalUsageChart.addEntry(appsPlusRemaining / (float) totalSize, mInternalAppsColor);
         mInternalUsageChart.commit();
     }
 
