@@ -161,7 +161,16 @@ public class SettingsPreferenceFragment extends PreferenceFragment
         }
 
         @Override
-        public void onActivityCreated(Bundle savedInstanceState) {
+        public void onSaveInstanceState(Bundle outState) {
+            super.onSaveInstanceState(outState);
+            if (mParentFragment != null) {
+                outState.putInt(KEY_DIALOG_ID, mDialogId);
+                outState.putInt(KEY_PARENT_FRAGMENT_ID, mParentFragment.getId());
+            }
+        }
+
+        @Override
+        public Dialog onCreateDialog(Bundle savedInstanceState) {
             if (savedInstanceState != null) {
                 mDialogId = savedInstanceState.getInt(KEY_DIALOG_ID, 0);
                 int mParentFragmentId = savedInstanceState.getInt(KEY_PARENT_FRAGMENT_ID, -1);
@@ -174,20 +183,6 @@ public class SettingsPreferenceFragment extends PreferenceFragment
                     }
                 }
             }
-            super.onActivityCreated(savedInstanceState);
-        }
-
-        @Override
-        public void onSaveInstanceState(Bundle outState) {
-            super.onSaveInstanceState(outState);
-            if (mParentFragment != null) {
-                outState.putInt(KEY_DIALOG_ID, mDialogId);
-                outState.putInt(KEY_PARENT_FRAGMENT_ID, mParentFragment.getId());
-            }
-        }
-
-        @Override
-        public Dialog onCreateDialog(Bundle savedInstanceState) {
             return ((DialogCreatable) mParentFragment).onCreateDialog(mDialogId);
         }
 
