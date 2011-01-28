@@ -288,7 +288,7 @@ public class ApnEditor extends PreferenceActivity
         // If it's a new APN, then cancel will delete the new entry in onPause
         if (!mNewApn) {
             menu.add(0, MENU_DELETE, 0, R.string.menu_delete)
-                .setIcon(android.R.drawable.ic_menu_delete);
+                .setIcon(R.drawable.ic_menu_delete_holo_dark);
         }
         menu.add(0, MENU_SAVE, 0, R.string.menu_save)
             .setIcon(android.R.drawable.ic_menu_save);
