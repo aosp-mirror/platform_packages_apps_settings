@@ -60,7 +60,7 @@ public class BluetoothDevicePreference extends Preference implements
         if (sDimAlpha == Integer.MIN_VALUE) {
             TypedValue outValue = new TypedValue();
             context.getTheme().resolveAttribute(android.R.attr.disabledAlpha, outValue, true);
-            sDimAlpha = (int) (outValue.getFloat() * 255);
+            sDimAlpha = (int) ((outValue.getFloat() * 255) * 0.5);
         }
 
         mCachedDevice = cachedDevice;
