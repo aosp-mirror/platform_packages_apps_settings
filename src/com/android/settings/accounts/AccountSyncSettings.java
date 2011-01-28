@@ -222,10 +222,10 @@ public class AccountSyncSettings extends AccountPreferenceBase {
 
         MenuItem removeAccount = menu.add(0, MENU_REMOVE_ACCOUNT_ID, 0,
                                           getString(R.string.remove_account_label))
-                .setIcon(com.android.internal.R.drawable.ic_menu_delete);
+                .setIcon(R.drawable.ic_menu_delete_holo_dark);
         MenuItem syncNow = menu.add(0, MENU_SYNC_NOW_ID, 0,
                                           getString(R.string.sync_menu_sync_now))
-                .setIcon(com.android.internal.R.drawable.ic_menu_refresh);
+                .setIcon(R.drawable.ic_menu_refresh_holo_dark);
         MenuItem syncCancel = menu.add(0, MENU_SYNC_CANCEL_ID, 0,
                                        getString(R.string.sync_menu_sync_cancel))
                 .setIcon(com.android.internal.R.drawable.ic_menu_close_clear_cancel);
