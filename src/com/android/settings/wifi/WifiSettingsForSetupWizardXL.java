@@ -49,7 +49,7 @@ import java.util.EnumMap;
  */
 public class WifiSettingsForSetupWizardXL extends Activity implements OnClickListener {
     private static final String TAG = "SetupWizard";
-    private static final boolean DEBUG = true;
+    private static final boolean DEBUG = false;
 
     private static final EnumMap<DetailedState, DetailedState> stateMap =
             new EnumMap<DetailedState, DetailedState>(DetailedState.class);
@@ -222,11 +222,10 @@ public class WifiSettingsForSetupWizardXL extends Activity implements OnClickLis
     }
 
     private void hideSoftwareKeyboard() {
-        Log.i(TAG, "Hiding software keyboard.");
+        if (DEBUG) Log.i(TAG, "Hiding software keyboard.");
         final View focusedView = getCurrentFocus();
         if (focusedView != null) {
             mInputMethodManager.hideSoftInputFromWindow(focusedView.getWindowToken(), 0);
-            focusedView.clearFocus();
         }
     }
 
