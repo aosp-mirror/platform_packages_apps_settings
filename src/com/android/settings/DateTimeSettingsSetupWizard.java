@@ -101,7 +101,7 @@ public class DateTimeSettingsSetupWizard extends Activity
         // mTimeZoneButton.setText(DateTimeSettings.getTimeZoneText(tz));
         mTimeZoneButton.setOnClickListener(this);
         mTimeZoneAdapter = ZonePicker.constructTimezoneAdapter(this, false,
-                R.layout.custom_list_item);
+                R.layout.date_time_setup_custom_list_item_2);
 
         final boolean autoDateTimeEnabled;
         final Intent intent = getIntent();
