@@ -210,11 +210,13 @@ public class WifiSettings extends SettingsPreferenceFragment
             mAddNetwork = findPreference("add_network");
 
             ListPreference pref = (ListPreference) findPreference(KEY_SLEEP_POLICY);
-            pref.setOnPreferenceChangeListener(this);
-            int value = Settings.System.getInt(getContentResolver(),
-                    Settings.System.WIFI_SLEEP_POLICY,
-                    Settings.System.WIFI_SLEEP_POLICY_NEVER);
-            pref.setValue(String.valueOf(value));
+            if (pref != null) {
+                pref.setOnPreferenceChangeListener(this);
+                int value = Settings.System.getInt(getContentResolver(),
+                        Settings.System.WIFI_SLEEP_POLICY,
+                        Settings.System.WIFI_SLEEP_POLICY_NEVER);
+                pref.setValue(String.valueOf(value));
+            }
 
             registerForContextMenu(getListView());
             setHasOptionsMenu(true);
