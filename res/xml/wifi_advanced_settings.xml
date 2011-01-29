@@ -18,15 +18,6 @@
         android:title="@string/wifi_advanced_titlebar">
 
     <ListPreference
-            android:key="sleep_policy"
-            android:title="@string/wifi_setting_sleep_policy_title"
-            android:summary="@string/wifi_setting_sleep_policy_summary"
-            android:persistent="false"
-            android:entries="@array/wifi_sleep_policy_entries"
-            android:entryValues="@array/wifi_sleep_policy_values"
-            />
-
-    <ListPreference
             android:key="frequency_band"
             android:title="@string/wifi_setting_frequency_band_title"
             android:summary="@string/wifi_setting_frequency_band_summary"

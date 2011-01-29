@@ -45,9 +45,11 @@ import android.os.Handler;
 import android.os.Message;
 import android.preference.CheckBoxPreference;
 import android.preference.Preference;
+import android.preference.ListPreference;
 import android.preference.PreferenceActivity;
 import android.preference.PreferenceScreen;
 import android.provider.Settings.Secure;
+import android.provider.Settings;
 import android.security.Credentials;
 import android.security.KeyStore;
 import android.view.ContextMenu;
@@ -78,12 +80,13 @@ import java.util.concurrent.atomic.AtomicBoolean;
  * other decorations specific to that screen.
  */
 public class WifiSettings extends SettingsPreferenceFragment
-        implements DialogInterface.OnClickListener {
+        implements DialogInterface.OnClickListener, Preference.OnPreferenceChangeListener  {
     private static final int MENU_ID_SCAN = Menu.FIRST;
     private static final int MENU_ID_ADVANCED = Menu.FIRST + 1;
     private static final int MENU_ID_CONNECT = Menu.FIRST + 2;
     private static final int MENU_ID_FORGET = Menu.FIRST + 3;
     private static final int MENU_ID_MODIFY = Menu.FIRST + 4;
+    private static final String KEY_SLEEP_POLICY = "sleep_policy";
 
     private final IntentFilter mFilter;
     private final BroadcastReceiver mReceiver;
@@ -205,6 +208,13 @@ public class WifiSettings extends SettingsPreferenceFragment
             mAccessPoints = preference;
             mAccessPoints.setOrderingAsAdded(false);
             mAddNetwork = findPreference("add_network");
+
+            ListPreference pref = (ListPreference) findPreference(KEY_SLEEP_POLICY);
+            pref.setOnPreferenceChangeListener(this);
+            int value = Settings.System.getInt(getContentResolver(),
+                    Settings.System.WIFI_SLEEP_POLICY,
+                    Settings.System.WIFI_SLEEP_POLICY_NEVER);
+            pref.setValue(String.valueOf(value));
 
             registerForContextMenu(getListView());
             setHasOptionsMenu(true);
@@ -352,6 +362,25 @@ public class WifiSettings extends SettingsPreferenceFragment
         }
         return true;
     }
+
+    public boolean onPreferenceChange(Preference preference, Object newValue) {
+        String key = preference.getKey();
+        if (key == null) return true;
+
+        if (key.equals(KEY_SLEEP_POLICY)) {
+            try {
+                Settings.System.putInt(getContentResolver(),
+                        Settings.System.WIFI_SLEEP_POLICY, Integer.parseInt(((String) newValue)));
+            } catch (NumberFormatException e) {
+                Toast.makeText(getActivity(), R.string.wifi_setting_sleep_policy_error,
+                        Toast.LENGTH_SHORT).show();
+                return false;
+            }
+        }
+
+        return true;
+    }
+
 
     /**
      * Shows an appropriate Wifi configuration component.

@@ -27,7 +27,6 @@ import android.os.Bundle;
 import android.os.SystemProperties;
 import android.preference.ListPreference;
 import android.preference.Preference;
-import android.provider.Settings;
 import android.text.TextUtils;
 import android.widget.Toast;
 import android.util.Log;
@@ -38,7 +37,6 @@ public class AdvancedSettings extends SettingsPreferenceFragment
     private static final String TAG = "AdvancedSettings";
     private static final String KEY_MAC_ADDRESS = "mac_address";
     private static final String KEY_CURRENT_IP_ADDRESS = "current_ip_address";
-    private static final String KEY_SLEEP_POLICY = "sleep_policy";
     private static final String KEY_FREQUENCY_BAND = "frequency_band";
 
     private WifiManager mWifiManager;
@@ -63,18 +61,12 @@ public class AdvancedSettings extends SettingsPreferenceFragment
     }
 
     private void initPreferences() {
-        ListPreference pref = (ListPreference) findPreference(KEY_SLEEP_POLICY);
-        pref.setOnPreferenceChangeListener(this);
-        int value = Settings.System.getInt(getContentResolver(),
-                Settings.System.WIFI_SLEEP_POLICY,
-                Settings.System.WIFI_SLEEP_POLICY_NEVER_WHILE_PLUGGED);
-        pref.setValue(String.valueOf(value));
 
-        pref = (ListPreference) findPreference(KEY_FREQUENCY_BAND);
+        ListPreference pref = (ListPreference) findPreference(KEY_FREQUENCY_BAND);
 
         if (mWifiManager.isDualBandSupported()) {
             pref.setOnPreferenceChangeListener(this);
-            value = mWifiManager.getFrequencyBand();
+            int value = mWifiManager.getFrequencyBand();
             if (value != -1) {
                 pref.setValue(String.valueOf(value));
             } else {
@@ -89,16 +81,7 @@ public class AdvancedSettings extends SettingsPreferenceFragment
         String key = preference.getKey();
         if (key == null) return true;
 
-        if (key.equals(KEY_SLEEP_POLICY)) {
-            try {
-                Settings.System.putInt(getContentResolver(),
-                        Settings.System.WIFI_SLEEP_POLICY, Integer.parseInt(((String) newValue)));
-            } catch (NumberFormatException e) {
-                Toast.makeText(getActivity(), R.string.wifi_setting_sleep_policy_error,
-                        Toast.LENGTH_SHORT).show();
-                return false;
-            }
-        } else if (key.equals(KEY_FREQUENCY_BAND)) {
+        if (key.equals(KEY_FREQUENCY_BAND)) {
             try {
                 mWifiManager.setFrequencyBand(Integer.parseInt(((String) newValue)), true);
             } catch (NumberFormatException e) {
