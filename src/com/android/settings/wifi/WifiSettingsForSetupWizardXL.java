@@ -155,6 +155,9 @@ public class WifiSettingsForSetupWizardXL extends Activity implements OnClickLis
     }
 
     public void setup() {
+        final View layoutRoot = findViewById(R.id.layout_root);
+        layoutRoot.setSystemUiVisibility(View.STATUS_BAR_DISABLE_BACK);
+
         mTitleView = (TextView)findViewById(R.id.wifi_setup_title);
         mProgressBar = (ProgressBar)findViewById(R.id.scanning_progress_bar);
         mProgressBar.setMax(2);

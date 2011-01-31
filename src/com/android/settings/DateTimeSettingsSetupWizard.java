@@ -82,6 +82,9 @@ public class DateTimeSettingsSetupWizard extends Activity
     }
 
     public void initUiForXl() {
+        final View layoutRoot = findViewById(R.id.layout_root);
+        layoutRoot.setSystemUiVisibility(View.STATUS_BAR_DISABLE_BACK);
+
         // Currently just comment out codes related to auto timezone.
         // TODO: Remove them when we are sure they are unnecessary.
         /*
