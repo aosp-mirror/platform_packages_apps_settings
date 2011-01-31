@@ -91,11 +91,11 @@ public class CryptKeeperSettings extends Fragment {
 
         public void onClick(View v) {
             if (!runKeyguardConfirmation(KEYGUARD_REQUEST)) {
-                // TODO remove with proper flow
+                // TODO replace (or follow) this dialog with an explicit launch into password UI
                 new AlertDialog.Builder(getActivity())
-                    .setTitle("No password set")
+                    .setTitle(R.string.crypt_keeper_dialog_need_password_title)
                     .setIcon(android.R.drawable.ic_dialog_alert)
-                    .setMessage("Before you enable encryption you must set a device password.")
+                    .setMessage(R.string.crypt_keeper_dialog_need_password_message)
                     .setPositiveButton(android.R.string.ok, null)
                     .create()
                     .show();
