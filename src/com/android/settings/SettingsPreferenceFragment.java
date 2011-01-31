@@ -182,8 +182,11 @@ public class SettingsPreferenceFragment extends PreferenceFragment
                                         + DialogCreatable.class.getName());
                     }
                 }
-                // restore mDialogFragment in mParentFragment
-                ((SettingsPreferenceFragment) mParentFragment).mDialogFragment = this;
+                // This dialog fragment could be created from non-SettingsPreferenceFragment
+                if (mParentFragment instanceof SettingsPreferenceFragment) {
+                    // restore mDialogFragment in mParentFragment
+                    ((SettingsPreferenceFragment) mParentFragment).mDialogFragment = this;
+                }
             }
             return ((DialogCreatable) mParentFragment).onCreateDialog(mDialogId);
         }
@@ -203,6 +206,7 @@ public class SettingsPreferenceFragment extends PreferenceFragment
                 mOnDismissListener.onDismiss(dialog);
             }
         }
+
         public int getDialogId() {
             return mDialogId;
         }
@@ -211,9 +215,12 @@ public class SettingsPreferenceFragment extends PreferenceFragment
         public void onDetach() {
             super.onDetach();
 
-            // in case the dialog is not explicitly removed by removeDialog()
-            if (((SettingsPreferenceFragment) mParentFragment).mDialogFragment == this) {
-                ((SettingsPreferenceFragment) mParentFragment).mDialogFragment = null;
+            // This dialog fragment could be created from non-SettingsPreferenceFragment
+            if (mParentFragment instanceof SettingsPreferenceFragment) {
+                // in case the dialog is not explicitly removed by removeDialog()
+                if (((SettingsPreferenceFragment) mParentFragment).mDialogFragment == this) {
+                    ((SettingsPreferenceFragment) mParentFragment).mDialogFragment = null;
+                }
             }
         }
     }
