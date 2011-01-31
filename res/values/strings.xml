@@ -582,22 +582,26 @@
     <!-- In the security screen, the header title for settings related to  Passwords-->
     <string name="security_passwords_title">Passwords</string>
 
+    <!-- Title of the preferences category for preference items to control encryption -->
     <string name="crypt_keeper_settings_title">Encryption</string>
 
+    <!-- Title of the preferences item to control encryption -->
     <string name="crypt_keeper_encrypt_title" product="tablet">Encrypt tablet</string>
+    <!-- Title of the preferences item to control encryption -->
     <string name="crypt_keeper_encrypt_title" product="default">Encrypt phone</string>
 
+    <!-- Summary of the preferences item to control encryption, when encryption is inactive -->
     <string name="crypt_keeper_encrypt_summary" product="tablet">
     Require a numeric PIN or password to decrypt your tablet each time you
     power it on</string>
+    <!-- Summary of the preferences item to control encryption, when encryption is inactive -->
     <string name="crypt_keeper_encrypt_summary" product="default">
     Require a numeric PIN or password to decrypt your phone each time you
     power it on</string>
+    <!-- Summary of the preferences item to control encryption, when encryption is active -->
     <string name="crypt_keeper_encrypted_summary">Encrypted</string>
 
-    <string name="crypt_keeper_confirm_title">Confirm encryption</string>
-
-    
+    <!-- Informational text in the first confirmation screen before starting device encryption -->
     <string name="crypt_keeper_desc" product="tablet">
     You can encrypt your accounts, settings, downloaded applications and their data,
     media, and other files. Once you encrypt your tablet, you must enter a numeric PIN
@@ -606,6 +610,7 @@
     an hour or more. You must start with a charged battery and keep your tablet plugged in
     until encryption is complete. If you interrupt the encryption process, you will lose
     some or all of your data.</string>
+    <!-- Informational text in the first confirmation screen before starting device encryption -->
     <string name="crypt_keeper_desc" product="default">
     You can encrypt your accounts, settings, downloaded applications and their data,
     media, and other files. Once you encrypt your phone, you must enter a numeric PIN or
@@ -615,24 +620,40 @@
     until encryption is complete. If you interrupt the encryption process, you will lose
     some or all of your data.</string>
     
+    <!-- Button text to start encryption process -->
     <string name="crypt_keeper_button_text" product="tablet">Encrypt tablet</string>
+    <!-- Button text to start encryption process -->
     <string name="crypt_keeper_button_text" product="default">Encrypt phone</string>
 
+    <!-- Warning string that will be displayed when encryption cannot be started -->
     <string name="crypt_keeper_low_charge_text">Please charge your battery and try again.</string>
+    <!-- Warning string that will be displayed when encryption cannot be started -->
     <string name="crypt_keeper_unplugged_text">Please plug in your charger and try again.</string>
 
+    <!-- Title of the final confirmation screen before starting device encryption -->
+    <string name="crypt_keeper_confirm_title">Confirm encryption</string>
+    <!-- Warning text in the final confirmation screen before starting device encryption -->
     <string name="crypt_keeper_final_desc" product="tablet">
-    Encrypt tablet? This operation is irreversible and if you interrupt it,
-    you will lose data! Encryption takes an hour or more.</string>
+    Encrypt tablet? This operation is irreversible and if you interrupt it, you will lose data.
+    Encryption takes an hour or more, during which the tablet will restart several times.
+    </string>
+    <!-- Warning text in the final confirmation screen before starting device encryption -->
     <string name="crypt_keeper_final_desc" product="default">
-    Encrypt phone? This operation is irreversible and if you interrupt it,
-    you will lose data! Encryption takes an hour or more.</string>
-    
+    Encrypt phone? This operation is irreversible and if you interrupt it, you will lose data.
+    Encryption takes an hour or more, during which the phone will restart several times.
+    </string>
+
+    <!-- Title of the progress screen while encrypting the device -->
     <string name="crypt_keeper_setup_title">Encrypting</string>
 
-    <string name="crypt_keeper_setup_description" product="tablet">Please wait while your tablet is being encrypted. ^1% complete.</string>
-    <string name="crypt_keeper_setup_description" product="default">Please wait while your phone is being encrypted. ^1% complete.</string>
+    <!-- Informational text on the progress screen while encrypting the device -->
+    <string name="crypt_keeper_setup_description" product="tablet">Please wait while your tablet
+    is being encrypted. ^1% complete.</string>
+    <!-- Informational text on the progress screen while encrypting the device -->
+    <string name="crypt_keeper_setup_description" product="default">Please wait while your phone
+    is being encrypted. ^1% complete.</string>
 
+    <!-- Informational text on the progress screen when encrypting the device has a problem -->
     <string name="crypt_keeper_cooldown">Try again in ^1 seconds.</string>
     
     <!-- Unlock Picker Settings --><skip />
