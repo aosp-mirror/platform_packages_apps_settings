@@ -16,6 +16,8 @@
 
 package com.android.settings;
 
+import com.android.internal.widget.LockPatternUtils;
+
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Fragment;
@@ -49,8 +51,18 @@ public class CryptKeeperSettings extends Fragment {
 
     private static final int KEYGUARD_REQUEST = 55;
 
+    // This is the minimum acceptable password quality.  If the current password quality is
+    // lower than this, encryption should not be activated.
+    private static final int MIN_PASSWORD_QUALITY = DevicePolicyManager.PASSWORD_QUALITY_NUMERIC;
+
+    // Minimum battery charge level (in percent) to launch encryption.  If the battery charge is
+    // lower than this, encryption should not be activated.
+    private static final int MIN_BATTERY_LEVEL = 80;
+
     private View mContentView;
     private Button mInitiateButton;
+    private View mPowerWarning;
+    private View mBatteryWarning;
     private IntentFilter mIntentFilter;
 
     private BroadcastReceiver mIntentReceiver = new BroadcastReceiver() {
@@ -60,12 +72,12 @@ public class CryptKeeperSettings extends Fragment {
             if (action.equals(Intent.ACTION_BATTERY_CHANGED)) {
                 int level = intent.getIntExtra(BatteryManager.EXTRA_LEVEL, 0);
                 int plugged = intent.getIntExtra(BatteryManager.EXTRA_PLUGGED, 0);
-
-                if (plugged == BatteryManager.BATTERY_PLUGGED_AC && level >= 80) {
-                    mInitiateButton.setEnabled(true);
-                } else {
-                    mInitiateButton.setEnabled(false);
-                }
+                boolean levelOk = level >= MIN_BATTERY_LEVEL;
+                boolean pluggedOk = plugged == BatteryManager.BATTERY_PLUGGED_AC;
+                // Update UI elements based on power/battery status
+                mInitiateButton.setEnabled(levelOk && pluggedOk);
+                mPowerWarning.setVisibility(pluggedOk ? View.GONE : View.VISIBLE );
+                mBatteryWarning.setVisibility(levelOk ? View.GONE : View.VISIBLE);
             }
         }
     };
@@ -101,6 +113,9 @@ public class CryptKeeperSettings extends Fragment {
         mInitiateButton = (Button) mContentView.findViewById(R.id.initiate_encrypt);
         mInitiateButton.setOnClickListener(mInitiateListener);
         mInitiateButton.setEnabled(false);
+
+        mPowerWarning = mContentView.findViewById(R.id.warning_unplugged);
+        mBatteryWarning = mContentView.findViewById(R.id.warning_low_charge);
 
         return mContentView;
     }
@@ -146,6 +161,12 @@ public class CryptKeeperSettings extends Fragment {
      * @return true if confirmation launched
      */
     private boolean runKeyguardConfirmation(int request) {
+        // 1.  Confirm that we have a sufficient PIN/Password to continue
+        int quality = new LockPatternUtils(getActivity()).getKeyguardStoredPasswordQuality();
+        if (quality < MIN_PASSWORD_QUALITY) {
+            return false;
+        }
+        // 2.  Ask the user to confirm the current PIN/Password
         Resources res = getActivity().getResources();
         return new ChooseLockSettingsHelper(getActivity(), this)
                 .launchConfirmationActivity(request,

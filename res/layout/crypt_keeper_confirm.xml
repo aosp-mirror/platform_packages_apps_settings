@@ -19,18 +19,28 @@
     android:orientation="vertical"
     >
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="12dp"
-        android:layout_marginRight="12dp"
-        android:layout_marginTop="12dp"
-        android:textSize="20sp"
-        android:text="@string/crypt_keeper_final_desc" />
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dip"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_weight="1"
+    >
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dip"
+            android:layout_marginBottom="16dip"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="@string/crypt_keeper_final_desc"
+        />
+    </ScrollView>
 
     <Button android:id="@+id/execute_encrypt"
         android:layout_gravity="center_horizontal"
-        android:layout_marginTop="40dip"
+        android:layout_marginTop="16dip"
+        android:layout_marginBottom="16dip"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/crypt_keeper_button_text"
