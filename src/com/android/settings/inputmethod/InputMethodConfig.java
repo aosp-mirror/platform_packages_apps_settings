@@ -29,6 +29,7 @@ import android.content.res.Configuration;
 import android.os.Bundle;
 import android.preference.CheckBoxPreference;
 import android.preference.Preference;
+import android.preference.Preference.OnPreferenceClickListener;
 import android.preference.PreferenceCategory;
 import android.preference.PreferenceScreen;
 import android.provider.Settings;
@@ -219,12 +220,17 @@ public class InputMethodConfig extends SettingsPreferenceFragment {
         PreferenceScreen prefScreen = new PreferenceScreen(getActivity(), null);
         prefScreen.setTitle(R.string.active_input_method_subtypes);
         if (imi.getSubtypeCount() > 1) {
-            intent = new Intent(Settings.ACTION_INPUT_METHOD_SUBTYPE_SETTINGS);
-            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK
-                    | Intent.FLAG_ACTIVITY_RESET_TASK_IF_NEEDED
-                    | Intent.FLAG_ACTIVITY_CLEAR_TOP);
-            intent.putExtra(Settings.EXTRA_INPUT_METHOD_ID, imiId);
-            prefScreen.setIntent(intent);
+            prefScreen.setOnPreferenceClickListener(new OnPreferenceClickListener() {
+                @Override 
+                public boolean onPreferenceClick(Preference preference){
+                    final Bundle bundle = new Bundle();
+                    bundle.putString(Settings.EXTRA_INPUT_METHOD_ID, imiId);
+                    startFragment(InputMethodConfig.this,
+                            InputMethodAndSubtypeEnabler.class.getName(),
+                            0, bundle);
+                    return true;
+                }
+            });
             keyboardSettingsCategory.addPreference(prefScreen);
             mActiveInputMethodsPrefMap.put(imi, prefScreen);
             mInputMethodPrefsMap.get(imiId).add(prefScreen);
