@@ -335,7 +335,7 @@
     <string name="bluetooth_dock_settings_remember" msgid="5551459057010609115">"记住设置"</string>
     <string name="nfc_quick_toggle_title" msgid="6769159366307299004">"NFC"</string>
     <string name="nfc_quick_toggle_summary" msgid="1988408027741447231">"使用近距离通信读取和交换标签"</string>
-    <string name="nfc_toggle_error" msgid="2233172102497535522">"出现一个错误。"</string>
+    <string name="nfc_toggle_error" msgid="2233172102497535522">"出现错误。"</string>
     <string name="wifi_quick_toggle_title" msgid="874495178395350104">"Wi-Fi"</string>
     <string name="wifi_quick_toggle_summary" msgid="1047950931623694366">"打开 Wi-Fi"</string>
     <string name="wifi_settings" msgid="4746946030627213196">"Wi-Fi 设置"</string>
@@ -529,7 +529,7 @@
     <string name="status_unavailable" msgid="7862009036663793314">"不可用"</string>
     <string name="status_up_time" msgid="7294859476816760399">"开机时间"</string>
     <string name="status_awake_time" msgid="2393949909051183652">"唤醒时间"</string>
-    <string name="internal_memory" msgid="9129595691484260784">"内部存储设备"</string>
+    <string name="internal_memory" msgid="9129595691484260784">"内部存储空间"</string>
     <string name="sd_memory" product="nosdcard" msgid="2510246194083052841">"USB 存储设备"</string>
     <string name="sd_memory" product="default" msgid="151871913888051515">"SD 卡"</string>
     <string name="memory_available" msgid="418542433817289474">"可用空间"</string>
@@ -541,7 +541,7 @@
     <string name="sd_insert_summary" product="default" msgid="2048640010381803841">"插入 SD 卡进行安装"</string>
     <string name="sd_mount" product="nosdcard" msgid="8966695015677343116">"装载 USB 存储设备"</string>
     <string name="sd_mount" product="default" msgid="5940523765187704135">"安装 SD 卡"</string>
-    <!-- outdated translation 1091032368296694505 -->     <string name="sd_mount_summary" product="nosdcard" msgid="1794150364965145726">"装载 USB 存储设备"</string>
+    <string name="sd_mount_summary" product="nosdcard" msgid="1794150364965145726">"装载 USB 存储器"</string>
     <string name="sd_mount_summary" product="default" msgid="4936591681679097699">"安装 SD 卡"</string>
     <string name="sd_format" product="nosdcard" msgid="2148179271623099054">"格式化 USB 存储设备"</string>
     <string name="sd_format" product="default" msgid="2576054280507119870">"格式化 SD 卡"</string>
@@ -602,7 +602,7 @@
     <string name="master_clear_desc" product="default" msgid="1741944496458365969">"这会清除您手机的"<b>"内部存储设备"</b>"中的全部数据，包括："\n\n<li>"您的 Google 帐户"</li>\n<li>"系统和应用程序数据和设置"</li>\n<li>"已下载的应用程序"</li>\n\n"要清除音乐、照片和其他用户数据，请格式化 "<b>"SD 卡"</b>"。"\n\n</string>
     <string name="erase_external_storage" product="nosdcard" msgid="969364037450286809">"格式化 USB 存储设备"</string>
     <string name="erase_external_storage" product="default" msgid="1397239046334307625">"格式化 SD 卡"</string>
-    <string name="erase_external_storage_description" product="nosdcard" msgid="1657838142707381027">"清除手机的内部 USB 存储设备中的全部数据，例如音乐或照片。"</string>
+    <string name="erase_external_storage_description" product="nosdcard" msgid="1657838142707381027">"清除手机内 USB 存储设备中的全部数据，例如音乐或照片。"</string>
     <string name="erase_external_storage_description" product="default" msgid="8100175974635894073">"清除手机的 SD 卡中的全部数据，例如音乐或照片。"</string>
     <string name="master_clear_button_text" msgid="7550632653343157971">"重置手机"</string>
     <string name="master_clear_final_desc" msgid="6917971132484622696">"是否删除所有个人信息和下载的所有应用程序？此操作无法还原！"</string>
@@ -752,7 +752,7 @@
     <string name="filter_apps_onsdcard" product="default" msgid="1477351142334784771">"SD 卡中"</string>
     <string name="disabled" msgid="9206776641295849915">"已停用"</string>
     <string name="no_applications" msgid="5190227407135243904">"无应用程序。"</string>
-    <string name="internal_storage" msgid="1584700623164275282">"内部存储设备"</string>
+    <string name="internal_storage" msgid="1584700623164275282">"内部存储空间"</string>
     <string name="sd_card_storage" product="nosdcard" msgid="2673203150465132465">"USB 存储设备"</string>
     <string name="sd_card_storage" product="default" msgid="7623513618171928235">"SD 卡存储设备"</string>
     <string name="recompute_size" msgid="7722567982831691718">"正在重新计算大小..."</string>
@@ -1003,7 +1003,7 @@
     <string name="tts_engine_error_reselect" msgid="3071453963296013376">"选择其他引擎"</string>
     <string name="tts_engine_security_warning" msgid="8786238102020223650">"此语音合成引擎能够收集语音中出现的所有信息，包括密码和信用卡号码之类的个人数据。此功能由 <xliff:g id="TTS_PLUGIN_ENGINE_NAME">%s</xliff:g> 引擎提供。是否启用此语音合成引擎？"</string>
     <string name="tts_engines_section" msgid="7515470972378742429">"引擎"</string>
-    <string name="tts_engine_name_settings" msgid="4974538563074395920">"<xliff:g id="TTS_PLUGIN_ENGINE_NAME">%s</xliff:g> 设置"</string>
+    <string name="tts_engine_name_settings" msgid="4974538563074395920">"<xliff:g id="TTS_PLUGIN_ENGINE_NAME">%s</xliff:g>设置"</string>
     <string name="tts_engine_name_is_enabled_summary" msgid="4909484006804022115">"已启用 <xliff:g id="TTS_PLUGIN_ENGINE_NAME">%s</xliff:g>"</string>
     <string name="tts_engine_name_is_disabled_summary" msgid="7644198182255168200">"已停用 <xliff:g id="TTS_PLUGIN_ENGINE_NAME">%s</xliff:g>"</string>
     <string name="pico_languages_and_voices" msgid="4611320375917773238">"语言和语音"</string>
