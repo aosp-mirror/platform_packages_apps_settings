@@ -157,7 +157,15 @@ public class RequestPermissionActivity extends Activity implements
             builder.setCancelable(false);
         } else {
             // Ask the user whether to turn on discovery mode or not
-            builder.setMessage(getString(R.string.bluetooth_ask_enablement_and_discovery, mTimeout));
+            // For lasting discoverable mode there is a different message
+            // TODO(): Revisit this when public APIs for discoverable timeout are introduced.
+            if (mTimeout == BluetoothDiscoverableEnabler.DISCOVERABLE_TIMEOUT_NEVER) {
+                builder.setMessage(
+                        getString(R.string.bluetooth_ask_enablement_and_lasting_discovery));
+            } else {
+                builder.setMessage(
+                        getString(R.string.bluetooth_ask_enablement_and_discovery, mTimeout));
+            }
             builder.setPositiveButton(getString(R.string.yes), this);
             builder.setNegativeButton(getString(R.string.no), this);
         }
@@ -243,9 +251,14 @@ public class RequestPermissionActivity extends Activity implements
 
             Log.e(TAG, "Timeout = " + mTimeout);
 
-            if (mTimeout > MAX_DISCOVERABLE_TIMEOUT) {
-                mTimeout = MAX_DISCOVERABLE_TIMEOUT;
-            } else if (mTimeout <= 0) {
+            // Right now assuming for simplicity that an app can pick any int value,
+            // and if equal to BluetoothDiscoverableEnabler.DISCOVERABLE_TIMEOUT_NEVER
+            // it will be treated as a request for lasting discoverability.
+            // Alternatively, a check can be added here for enforcing the specific allowed values
+            // as listed in BluetoothDiscoverableEnabler.
+            // We need to make all these value public.
+
+            if (mTimeout <= 0) {
                 mTimeout = BluetoothDiscoverableEnabler.DEFAULT_DISCOVERABLE_TIMEOUT;
             }
         } else {
