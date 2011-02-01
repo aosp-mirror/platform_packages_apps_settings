@@ -17,13 +17,16 @@
 package com.android.settings;
 
 import android.app.Dialog;
+import android.content.ContentResolver;
 import android.content.Context;
 import android.media.AudioManager;
+import android.net.Uri;
 import android.os.Parcel;
 import android.os.Parcelable;
 import android.preference.VolumePreference;
 import android.provider.Settings;
 import android.util.AttributeSet;
+import android.view.KeyEvent;
 import android.view.View;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
@@ -40,6 +43,7 @@ public class RingerVolumePreference extends VolumePreference implements
 
     private CheckBox mNotificationsUseRingVolumeCheckbox;
     private SeekBarVolumizer [] mSeekBarVolumizer;
+    private boolean mIgnoreVolumeKeys;
     private static final int[] SEEKBAR_ID = new int[] {
         R.id.notification_volume_seekbar,
         R.id.media_volume_seekbar,
@@ -70,6 +74,7 @@ public class RingerVolumePreference extends VolumePreference implements
         setDialogIcon(R.drawable.ic_settings_sound);
 
         mSeekBarVolumizer = new SeekBarVolumizer[SEEKBAR_ID.length];
+        mIgnoreVolumeKeys = !Utils.isVoiceCapable(context);
     }
 
     @Override
@@ -78,8 +83,13 @@ public class RingerVolumePreference extends VolumePreference implements
 
         for (int i = 0; i < SEEKBAR_ID.length; i++) {
             SeekBar seekBar = (SeekBar) view.findViewById(SEEKBAR_ID[i]);
-            mSeekBarVolumizer[i] = new SeekBarVolumizer(getContext(), seekBar,
-                SEEKBAR_TYPE[i]);
+            if (SEEKBAR_TYPE[i] == AudioManager.STREAM_MUSIC) {
+                mSeekBarVolumizer[i] = new SeekBarVolumizer(getContext(), seekBar,
+                        SEEKBAR_TYPE[i], getMediaVolumeUri(getContext()));
+            } else {
+                mSeekBarVolumizer[i] = new SeekBarVolumizer(getContext(), seekBar,
+                        SEEKBAR_TYPE[i]);
+            }
         }
 
         mNotificationVolumeTitle = (TextView) view.findViewById(R.id.notification_volume_title);
@@ -93,6 +103,12 @@ public class RingerVolumePreference extends VolumePreference implements
                         Settings.System.NOTIFICATIONS_USE_RING_VOLUME, 1) == 1);
         setNotificationVolumeVisibility(!mNotificationsUseRingVolumeCheckbox.isChecked());
         disableSettingsThatNeedVoice(view);
+    }
+
+    private Uri getMediaVolumeUri(Context context) {
+        return Uri.parse(ContentResolver.SCHEME_ANDROID_RESOURCE + "://"
+                + context.getPackageName()
+                + "/" + R.raw.media_volume);
     }
 
     private void disableSettingsThatNeedVoice(View parent) {
@@ -135,6 +151,23 @@ public class RingerVolumePreference extends VolumePreference implements
                     .getSystemService(Context.AUDIO_SERVICE);
             audioManager.setStreamVolume(AudioManager.STREAM_NOTIFICATION,
                     audioManager.getStreamVolume(AudioManager.STREAM_RING), 0);
+        }
+    }
+
+    @Override
+    public boolean onKey(View v, int keyCode, KeyEvent event) {
+        boolean isdown = (event.getAction() == KeyEvent.ACTION_DOWN);
+        switch (keyCode) {
+            case KeyEvent.KEYCODE_VOLUME_DOWN:
+            case KeyEvent.KEYCODE_VOLUME_UP:
+            case KeyEvent.KEYCODE_VOLUME_MUTE:
+                if (mIgnoreVolumeKeys) {
+                    return true;
+                } else {
+                    return super.onKey(v, keyCode, event);
+                }
+            default:
+                return false;
         }
     }
 
