@@ -55,8 +55,21 @@ public class InputMethodAndSubtypeEnabler extends SettingsPreferenceFragment {
         mImm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
         Configuration config = getResources().getConfiguration();
         mHaveHardKeyboard = (config.keyboard == Configuration.KEYBOARD_QWERTY);
+
+        // Input method id should be available from an Intent when this preference is launched as a
+        // single Activity (see InputMethodAndSubtypeEnablerActivity). It should be available
+        // from a preference argument when the preference is launched as a part of the other
+        // Activity (like a right pane of 2-pane Settings app)
         mInputMethodId = getActivity().getIntent().getStringExtra(
                 android.provider.Settings.EXTRA_INPUT_METHOD_ID);
+        if (mInputMethodId == null && (getArguments() != null)) {
+            final String inputMethodId =
+                    getArguments().getString(android.provider.Settings.EXTRA_INPUT_METHOD_ID);
+            if (inputMethodId != null) {
+                mInputMethodId = inputMethodId;
+            }
+        }
+
         onCreateIMM();
         setPreferenceScreen(createPreferenceHierarchy());
     }
