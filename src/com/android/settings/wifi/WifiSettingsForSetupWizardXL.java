@@ -189,9 +189,7 @@ public class WifiSettingsForSetupWizardXL extends Activity implements OnClickLis
 
     private void restoreFirstButtonVisibilityState() {
         showDefaultTitle();
-        // TODO: uncomment this when the layout for it is ready. Note that we also have to remove
-        // android:visibility="gone" in xml then.
-        // mAddNetworkButton.setVisibility(View.VISIBLE);
+        mAddNetworkButton.setVisibility(View.VISIBLE);
         mRefreshButton.setVisibility(View.VISIBLE);
         mSkipOrNextButton.setVisibility(View.VISIBLE);
         mConnectButton.setVisibility(View.GONE);
