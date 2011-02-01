@@ -21,6 +21,7 @@ import com.android.settings.R;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.content.res.Configuration;
 import android.net.NetworkInfo.DetailedState;
 import android.net.wifi.WifiConfiguration;
 import android.net.wifi.WifiManager;
@@ -670,7 +671,8 @@ public class WifiSettingsForSetupWizardXL extends Activity implements OnClickLis
      * Replace the current background with a new background whose id is resId if needed.
      */
     private void trySetBackground(int resId) {
-        if (mBackgroundId != resId) {
+        final int orientation = getResources().getConfiguration().orientation;
+        if (orientation == Configuration.ORIENTATION_LANDSCAPE && mBackgroundId != resId) {
             getWindow().setBackgroundDrawable(getResources().getDrawable(resId));
             mBackgroundId = resId;
         }

@@ -21,8 +21,8 @@
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:paddingTop="60dip"
-    android:paddingLeft="24dip"
-    android:paddingRight="24dip"
+    android:paddingLeft="128dip"
+    android:paddingRight="128dip"
     android:paddingBottom="0dip" >
 
     <FrameLayout
@@ -106,8 +106,11 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:lineSpacingExtra="10dip"
+                android:inputType="textMultiLine"
                 android:textAppearance="?android:attr/textAppearanceMedium"
-                android:textSize="20sp" />
+                android:textSize="20sp"
+                android:clickable="false"
+                android:longClickable="false" />
         </LinearLayout>
 
     </RelativeLayout>
