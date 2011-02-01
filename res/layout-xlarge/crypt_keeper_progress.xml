@@ -14,24 +14,33 @@
      limitations under the License.
   -->
 
-<LinearLayout
+<RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:paddingTop="154dip"
     android:paddingLeft="128dip"
     android:paddingRight="128dip"
-    android:paddingBottom="0dip" 
-    android:orientation="vertical"
-    android:background="@drawable/encryption_bg_waiting"
+    android:paddingBottom="16dip"
 >
 
+    <ImageView
+        android:id="@+id/encroid"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentBottom="true"
+        android:paddingRight="65dip"
+        android:src="@drawable/encroid_waiting"
+    />
+
     <TextView
+        android:id="@+id/title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:minHeight="48dip"
+        android:layout_alignParentTop="true"
         android:layout_alignParentLeft="true"
-        android:layout_centerVertical="true"
         android:layout_marginLeft="16dip"
         android:textSize="30dip"
         android:textColor="#ff99cc00"
@@ -44,6 +53,7 @@
         android:id="@+id/top_divider"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_below="@+id/title"
     >
         <ProgressBar
             android:id="@+id/progress_bar"
@@ -52,17 +62,41 @@
             style="?android:attr/progressBarStyleHorizontal"
         />
     </RelativeLayout>
-    
+
     <TextView
         android:id="@+id/status"
         android:layout_width="match_parent"
-        android:layout_height="0dip"
-        android:layout_weight="1"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/top_divider"
         android:paddingLeft="152dip"
         android:paddingTop="21dip"
-        android:textSize="18dip"
-        android:textColor="#ffffffff"
-        android:text="@string/crypt_keeper_setup_description"
+        android:textAppearance="?android:attr/textAppearanceMedium"
     />
 
-</LinearLayout>
+    <!-- Divider -->
+    <RelativeLayout
+        android:id="@+id/bottom_divider"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingLeft="152dip"
+        android:layout_above="@+id/factory_reset"
+        android:visibility="gone"
+    >
+        <ProgressBar
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            style="?android:attr/progressBarStyleHorizontal"
+        />
+    </RelativeLayout>
+
+    <Button
+        android:id="@+id/factory_reset"
+        android:layout_width="208dip"
+        android:layout_height="48dip"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="80dip"
+        android:text="@string/master_clear_button_text"
+        android:visibility="gone"
+    />
+</RelativeLayout>
