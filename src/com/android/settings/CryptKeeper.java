@@ -35,15 +35,15 @@ import android.os.ServiceManager;
 import android.os.SystemProperties;
 import android.os.storage.IMountService;
 import android.text.TextUtils;
-import android.text.format.DateFormat;
 import android.util.Log;
 import android.view.KeyEvent;
+import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.inputmethod.EditorInfo;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.TextView;
-
-import java.util.Date;
 
 public class CryptKeeper extends Activity implements TextView.OnEditorActionListener {
     private static final String TAG = "CryptKeeper";
@@ -59,6 +59,11 @@ public class CryptKeeper extends Activity implements TextView.OnEditorActionList
 
     // This activity is used to fade the screen to black after the password is entered.
     public static class Blank extends Activity {
+        @Override
+        public void onCreate(Bundle savedInstanceState) {
+            super.onCreate(savedInstanceState);
+            setContentView(R.layout.crypt_keeper_blank);
+        }
     }
 
     private Handler mHandler = new Handler() {
@@ -105,9 +110,12 @@ public class CryptKeeper extends Activity implements TextView.OnEditorActionList
 
         // Disable the status bar
         StatusBarManager sbm = (StatusBarManager) getSystemService(Context.STATUS_BAR_SERVICE);
-        sbm.disable(StatusBarManager.DISABLE_EXPAND | StatusBarManager.DISABLE_NOTIFICATION_ICONS
+        sbm.disable(StatusBarManager.DISABLE_EXPAND
+                | StatusBarManager.DISABLE_NOTIFICATION_ICONS
                 | StatusBarManager.DISABLE_NOTIFICATION_ALERTS
-                | StatusBarManager.DISABLE_SYSTEM_INFO | StatusBarManager.DISABLE_NAVIGATION);
+                | StatusBarManager.DISABLE_SYSTEM_INFO
+                | StatusBarManager.DISABLE_NAVIGATION
+                | StatusBarManager.DISABLE_BACK);
     }
 
     @Override
@@ -139,8 +147,37 @@ public class CryptKeeper extends Activity implements TextView.OnEditorActionList
         updateProgress();
     }
 
+    private void showFactoryReset() {
+        // Hide the encryption-bot to make room for the "factory reset" button
+        findViewById(R.id.encroid).setVisibility(View.GONE);
+
+        // Show the reset button, failure text, and a divider
+        Button button = (Button) findViewById(R.id.factory_reset);
+        button.setVisibility(View.VISIBLE);
+        button.setOnClickListener(new OnClickListener() {
+            public void onClick(View v) {
+                // Factory reset the device.
+                sendBroadcast(new Intent("android.intent.action.MASTER_CLEAR"));
+            }
+        });
+
+        TextView tv = (TextView) findViewById(R.id.title);
+        tv.setText(R.string.crypt_keeper_failed_title);
+
+        tv = (TextView) findViewById(R.id.status);
+        tv.setText(R.string.crypt_keeper_failed_summary);
+
+        View view = findViewById(R.id.bottom_divider);
+        view.setVisibility(View.VISIBLE);
+    }
+
     private void updateProgress() {
         String state = SystemProperties.get("vold.encrypt_progress");
+
+        if ("error_partially_encrypted".equals(state)) {
+            showFactoryReset();
+            return;
+        }
 
         int progress = 0;
         try {
@@ -160,16 +197,18 @@ public class CryptKeeper extends Activity implements TextView.OnEditorActionList
 
     private void cooldown() {
         TextView tv = (TextView) findViewById(R.id.status);
+
         if (mCooldown <= 0) {
             // Re-enable the password entry
             EditText passwordEntry = (EditText) findViewById(R.id.passwordEntry);
             passwordEntry.setEnabled(true);
 
-            tv.setText(R.string.try_again);
-
+            tv.setVisibility(View.GONE);
         } else {
-            CharSequence tempalte = getText(R.string.crypt_keeper_cooldown);
-            tv.setText(TextUtils.expandTemplate(tempalte, Integer.toString(mCooldown)));
+            CharSequence template = getText(R.string.crypt_keeper_cooldown);
+            tv.setText(TextUtils.expandTemplate(template, Integer.toString(mCooldown)));
+
+            tv.setVisibility(View.VISIBLE);
 
             mCooldown--;
             mHandler.removeMessages(COOLDOWN);
@@ -186,14 +225,6 @@ public class CryptKeeper extends Activity implements TextView.OnEditorActionList
         PasswordEntryKeyboardHelper keyboardHelper = new PasswordEntryKeyboardHelper(this,
                 keyboardView, passwordEntry, false);
         keyboardHelper.setKeyboardMode(PasswordEntryKeyboardHelper.KEYBOARD_MODE_ALPHA);
-
-
-        passwordEntry.setCompoundDrawablesWithIntrinsicBounds(android.R.drawable.ic_lock_idle_lock,
-                0, 0, 0);
-
-        String dateFormatString = getString(com.android.internal.R.string.full_wday_month_day_no_year);
-        TextView date = (TextView) findViewById(R.id.date);
-        date.setText(DateFormat.format(dateFormatString, new Date()));
     }
 
     private IMountService getMountService() {
@@ -240,6 +271,7 @@ public class CryptKeeper extends Activity implements TextView.OnEditorActionList
                 } else {
                     TextView tv = (TextView) findViewById(R.id.status);
                     tv.setText(R.string.try_again);
+                    tv.setVisibility(View.VISIBLE);
                 }
             } catch (Exception e) {
                 Log.e(TAG, "Error while decrypting...", e);

@@ -41,6 +41,8 @@ public class CryptKeeperConfirm extends Fragment {
         public void onCreate(Bundle savedInstanceState) {
             super.onCreate(savedInstanceState);
 
+            setContentView(R.layout.crypt_keeper_blank);
+
             if (Utils.isMonkeyRunning()) {
                 finish();
             }
@@ -50,7 +52,8 @@ public class CryptKeeperConfirm extends Fragment {
                     | StatusBarManager.DISABLE_NOTIFICATION_ICONS
                     | StatusBarManager.DISABLE_NOTIFICATION_ALERTS
                     | StatusBarManager.DISABLE_SYSTEM_INFO
-                    | StatusBarManager.DISABLE_NAVIGATION);
+                    | StatusBarManager.DISABLE_NAVIGATION
+                    | StatusBarManager.DISABLE_BACK);
 
             // Post a delayed message in 700 milliseconds to enable encryption.
             // NOTE: The animation on this activity is set for 500 milliseconds

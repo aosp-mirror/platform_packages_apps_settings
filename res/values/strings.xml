@@ -111,7 +111,6 @@
     <!-- Title for a notification shown. -->
     <string name="sdcard_setting" product="default">SD card</string>
 
-
     <!-- Battery Info screen. Label for a status item.  Used for diagnostic info screens, precise translation isn't needed -->
     <string name="battery_info_status_label">Battery status:</string>
     <!-- Battery Info screen. Label for a status item.  Used for diagnostic info screens, precise translation isn't needed -->
@@ -140,7 +139,6 @@
     <string name="battery_info_awake_plugged">Awake time when charging:</string>
     <!-- Battery Info screen. Label for a status item.  Used for diagnostic info screens, precise translation isn't needed -->
     <string name="battery_info_screen_on">Screen ON time:</string>
-
 
     <!-- Battery Info screen. Value for a status item.  Used for diagnostic info screens, precise translation isn't needed -->
     <string name="battery_info_status_unknown">Unknown</string>
@@ -493,7 +491,6 @@
     <!-- Main Settings screen settings summary text for the "Wireless controls" setting -->
     <string name="radio_controls_summary">Manage Wi-Fi, Bluetooth, airplane mode, mobile networks, &amp; VPNs</string>
 
-
     <!-- mobile network settings screen, setting check box title -->
     <string name="roaming">Data roaming</string>
     <!-- mobile network settings screen, setting option summary text when check box is selected -->
@@ -619,7 +616,7 @@
     an hour or more. You must start with a charged battery and keep your phone plugged in
     until encryption is complete. If you interrupt the encryption process, you will lose
     some or all of your data.</string>
-    
+
     <!-- Button text to start encryption process -->
     <string name="crypt_keeper_button_text" product="tablet">Encrypt tablet</string>
     <!-- Button text to start encryption process -->
@@ -659,9 +656,29 @@
     <string name="crypt_keeper_setup_description" product="default">Please wait while your phone
     is being encrypted. ^1% complete.</string>
 
-    <!-- Informational text on the progress screen when encrypting the device has a problem -->
+    <!-- Informational text on the password entry screen when password entry fails-->
     <string name="crypt_keeper_cooldown">Try again in ^1 seconds.</string>
-    
+
+    <!-- Informational text on the password entry screen prompting the user for their password -->
+    <string name="crypt_keeper_enter_password">Enter your password</string>
+
+    <!-- Title of the encryption screen when encrypting the device failed -->
+    <string name="crypt_keeper_failed_title">Encryption failed</string>
+
+    <!-- Informational text when encryption fails -->
+    <string name="crypt_keeper_failed_summary" product="tablet">
+    Encryption was interrupted and can\'t complete. You must perform a factory data reset (erasing
+    all your data) before you can resume using your tablet. You can try encrypting your tablet
+    again after the reset is complete.
+    </string>
+
+    <!-- Informational text when encryption fails -->
+    <string name="crypt_keeper_failed_summary" product="default">
+    Encryption was interrupted and can\'t complete. You must perform a factory data reset (erasing
+    all your data) before you can resume using your phone. You can try encrypting your phone
+    again after the reset is complete.
+    </string>
+
     <!-- Unlock Picker Settings --><skip />
 
     <!-- Security Picker --><skip />
@@ -1159,7 +1176,6 @@
     <string name="wifi_tether_configure_subtext"><xliff:g id="network_ssid">%1$s</xliff:g> <xliff:g id="network_security">%2$s</xliff:g> portable Wi-Fi hotspot</string>
     <!-- Default access point SSID used for tethering -->
     <string name="wifi_tether_configure_ssid_default">AndroidHotspot</string>
-
 
     <!-- Do not translate. Used for diagnostic screens, precise translation is not necessary
          Wi-Fi Testing on the diagnostic screen-->
