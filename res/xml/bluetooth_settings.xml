@@ -40,6 +40,14 @@
         android:summaryOff="@string/bluetooth_not_discoverable"
         android:persistent="false" />
 
+    <ListPreference
+        android:key="bt_discoverable_timeout"
+        android:title="@string/bluetooth_visibility_timeout"
+        android:dependency="bt_discoverable"
+        android:summary="@string/bluetooth_visibility_timeout_summary"
+        android:entries="@array/bluetooth_visibility_timeout_entries"
+        android:entryValues="@array/bluetooth_visibility_timeout_values" />
+
     <Preference
         android:key="bt_scan"
         android:dependency="bt_checkbox"
