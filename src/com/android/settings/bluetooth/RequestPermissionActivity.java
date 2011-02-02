@@ -43,7 +43,7 @@ public class RequestPermissionActivity extends Activity implements
 
     private static final String TAG = "RequestPermissionActivity";
 
-    private static final int MAX_DISCOVERABLE_TIMEOUT = 300;
+    private static final int MAX_DISCOVERABLE_TIMEOUT = 3600; // 1 hr
 
     // Non-error return code: BT is starting or has started successfully. Used
     // by this Activity and RequestPermissionHelperActivity
@@ -158,13 +158,12 @@ public class RequestPermissionActivity extends Activity implements
         } else {
             // Ask the user whether to turn on discovery mode or not
             // For lasting discoverable mode there is a different message
-            // TODO(): Revisit this when public APIs for discoverable timeout are introduced.
             if (mTimeout == BluetoothDiscoverableEnabler.DISCOVERABLE_TIMEOUT_NEVER) {
                 builder.setMessage(
-                        getString(R.string.bluetooth_ask_enablement_and_lasting_discovery));
+                        getString(R.string.bluetooth_ask_lasting_discovery));
             } else {
                 builder.setMessage(
-                        getString(R.string.bluetooth_ask_enablement_and_discovery, mTimeout));
+                        getString(R.string.bluetooth_ask_discovery, mTimeout));
             }
             builder.setPositiveButton(getString(R.string.yes), this);
             builder.setNegativeButton(getString(R.string.no), this);
@@ -249,16 +248,9 @@ public class RequestPermissionActivity extends Activity implements
             mTimeout = intent.getIntExtra(BluetoothAdapter.EXTRA_DISCOVERABLE_DURATION,
                     BluetoothDiscoverableEnabler.DEFAULT_DISCOVERABLE_TIMEOUT);
 
-            Log.e(TAG, "Timeout = " + mTimeout);
+            Log.d(TAG, "Setting Bluetooth Discoverable Timeout = " + mTimeout);
 
-            // Right now assuming for simplicity that an app can pick any int value,
-            // and if equal to BluetoothDiscoverableEnabler.DISCOVERABLE_TIMEOUT_NEVER
-            // it will be treated as a request for lasting discoverability.
-            // Alternatively, a check can be added here for enforcing the specific allowed values
-            // as listed in BluetoothDiscoverableEnabler.
-            // We need to make all these value public.
-
-            if (mTimeout <= 0) {
+            if (mTimeout < 0 || mTimeout > MAX_DISCOVERABLE_TIMEOUT) {
                 mTimeout = BluetoothDiscoverableEnabler.DEFAULT_DISCOVERABLE_TIMEOUT;
             }
         } else {
