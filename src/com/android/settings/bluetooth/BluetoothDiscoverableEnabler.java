@@ -56,8 +56,6 @@ public class BluetoothDiscoverableEnabler implements Preference.OnPreferenceChan
     private static final String VALUE_DISCOVERABLE_TIMEOUT_ONE_HOUR = "onehour";
     private static final String VALUE_DISCOVERABLE_TIMEOUT_NEVER = "never";
 
-    // no need for this timeout anymore since we have the listPreference default value
-    // leaving now temporary until requestpermissionactivity is modified..
     static final int DEFAULT_DISCOVERABLE_TIMEOUT = DISCOVERABLE_TIMEOUT_TWO_MINUTES;
 
     private final Context mContext;
