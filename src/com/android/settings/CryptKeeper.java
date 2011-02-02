@@ -99,6 +99,7 @@ public class CryptKeeper extends Activity implements TextView.OnEditorActionList
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        // If we are not encrypted or encrypting, get out quickly.
         String state = SystemProperties.get("vold.decrypt");
         if ("".equals(state) || DECRYPT_STATE.equals(state)) {
             // Disable the crypt keeper.
@@ -106,17 +107,6 @@ public class CryptKeeper extends Activity implements TextView.OnEditorActionList
             ComponentName name = new ComponentName(this, CryptKeeper.class);
             pm.setComponentEnabledSetting(name, PackageManager.COMPONENT_ENABLED_STATE_DISABLED, 0);
             return;
-        }
-
-        // Check to see why we were started.
-        String progress = SystemProperties.get("vold.encrypt_progress");
-
-        if (!"".equals(progress)) {
-            setContentView(R.layout.crypt_keeper_progress);
-            encryptionProgressInit();
-        } else {
-            setContentView(R.layout.crypt_keeper_password_entry);
-            passwordEntryInit();
         }
 
         // Disable the status bar
@@ -133,6 +123,26 @@ public class CryptKeeper extends Activity implements TextView.OnEditorActionList
         if (lastInstance instanceof NonConfigurationInstanceState) {
             NonConfigurationInstanceState retained = (NonConfigurationInstanceState) lastInstance;
             mWakeLock = retained.wakelock;
+        }
+    }
+
+    /**
+     * Note, we defer the state check and screen setup to onStart() because this will be
+     * re-run if the user clicks the power button (sleeping/waking the screen), and this is
+     * especially important if we were to lose the wakelock for any reason.
+     */
+    @Override
+    public void onStart() {
+        super.onStart();
+
+        // Check to see why we were started.
+        String progress = SystemProperties.get("vold.encrypt_progress");
+        if (!"".equals(progress)) {
+            setContentView(R.layout.crypt_keeper_progress);
+            encryptionProgressInit();
+        } else {
+            setContentView(R.layout.crypt_keeper_password_entry);
+            passwordEntryInit();
         }
     }
 
