@@ -225,7 +225,8 @@ public class SecuritySettings extends SettingsPreferenceFragment
         addPreferencesFromResource(R.xml.security_settings_misc);
 
         // Do not display SIM lock for CDMA phone
-        if (TelephonyManager.PHONE_TYPE_CDMA == TelephonyManager.getDefault().getPhoneType()) {
+        if (TelephonyManager.PHONE_TYPE_CDMA ==
+                TelephonyManager.getDefault().getCurrentPhoneType()) {
             root.removePreference(root.findPreference(KEY_SIM_LOCK));
         }
 

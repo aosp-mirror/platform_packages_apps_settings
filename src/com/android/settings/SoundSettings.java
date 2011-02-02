@@ -99,7 +99,7 @@ public class SoundSettings extends SettingsPreferenceFragment implements
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         ContentResolver resolver = getContentResolver();
-        int activePhoneType = TelephonyManager.getDefault().getPhoneType();
+        int activePhoneType = TelephonyManager.getDefault().getCurrentPhoneType();
 
         mAudioManager = (AudioManager) getSystemService(Context.AUDIO_SERVICE);
 
