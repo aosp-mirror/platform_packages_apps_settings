@@ -31,6 +31,7 @@ import android.os.BatteryManager;
 import android.os.Bundle;
 import android.preference.Preference;
 import android.preference.PreferenceActivity;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -184,9 +185,11 @@ public class CryptKeeperSettings extends Fragment {
 
         // If the user entered a valid keyguard trace, present the final
         // confirmation prompt; otherwise, go back to the initial state.
-        if (resultCode == Activity.RESULT_OK) {
+        if (resultCode == Activity.RESULT_OK && data != null) {
             String password = data.getStringExtra("password");
-            showFinalConfirmation(password);
+            if (!TextUtils.isEmpty(password)) {
+                showFinalConfirmation(password);
+            }
         }
     }
 
