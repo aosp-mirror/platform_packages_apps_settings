@@ -57,6 +57,20 @@ public class CryptKeeper extends Activity implements TextView.OnEditorActionList
     private static final int COOL_DOWN_ATTEMPTS = 10;
     private static final int COOL_DOWN_INTERVAL = 30; // 30 seconds
 
+    private int mCooldown;
+    PowerManager.WakeLock mWakeLock;
+
+    /**
+     * Used to propagate state through configuration changes (e.g. screen rotation)
+     */
+    private static class NonConfigurationInstanceState {
+        final PowerManager.WakeLock wakelock;
+
+        NonConfigurationInstanceState(PowerManager.WakeLock _wakelock) {
+            wakelock = _wakelock;
+        }
+    }
+
     // This activity is used to fade the screen to black after the password is entered.
     public static class Blank extends Activity {
         @Override
@@ -80,9 +94,6 @@ public class CryptKeeper extends Activity implements TextView.OnEditorActionList
             }
         }
     };
-
-    private int mCooldown;
-    PowerManager.WakeLock mWakeLock;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -116,6 +127,13 @@ public class CryptKeeper extends Activity implements TextView.OnEditorActionList
                 | StatusBarManager.DISABLE_SYSTEM_INFO
                 | StatusBarManager.DISABLE_NAVIGATION
                 | StatusBarManager.DISABLE_BACK);
+
+        // Check for (and recover) retained instance data
+        Object lastInstance = getLastNonConfigurationInstance();
+        if (lastInstance instanceof NonConfigurationInstanceState) {
+            NonConfigurationInstanceState retained = (NonConfigurationInstanceState) lastInstance;
+            mWakeLock = retained.wakelock;
+        }
     }
 
     @Override
@@ -124,6 +142,23 @@ public class CryptKeeper extends Activity implements TextView.OnEditorActionList
 
         mHandler.removeMessages(COOLDOWN);
         mHandler.removeMessages(UPDATE_PROGRESS);
+    }
+
+    /**
+     * Reconfiguring, so propagate the wakelock to the next instance.  This runs between onStop()
+     * and onDestroy() and only if we are changing configuration (e.g. rotation).  Also clears
+     * mWakeLock so the subsequent call to onDestroy does not release it.
+     */
+    @Override
+    public Object onRetainNonConfigurationInstance() {
+        NonConfigurationInstanceState state = new NonConfigurationInstanceState(mWakeLock);
+        mWakeLock = null;
+        return state;
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
 
         if (mWakeLock != null) {
             mWakeLock.release();
