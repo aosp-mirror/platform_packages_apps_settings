@@ -18,33 +18,35 @@
               android:orientation="vertical"
               android:layout_width="match_parent"
               android:layout_height="match_parent">
-    <!-- TODO: remove this once we confirm it is needless -->
-    <LinearLayout
-        android:id="@+id/wifi_general_info"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:visibility="gone">
-        <TextView android:id="@+id/title"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:singleLine="true"
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            android:textSize="20sp"
-            android:ellipsize="marquee"
-            android:fadingEdge="horizontal" />
-
-        <TextView android:id="@+id/summary"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@android:id/title"
-            android:layout_alignLeft="@android:id/title"
-            android:textAppearance="?android:attr/textAppearanceSmall"
-            android:textColor="?android:attr/textColorSecondary"
-            android:maxLines="1" />
-    </LinearLayout>
-
     <!-- UI components that should be shown appropriately -->
+    <FrameLayout android:id="@+id/eap_not_supported"
+                  android:layout_width="match_parent"
+                  android:layout_height="wrap_content"
+                  android:minHeight="360dip"
+                  android:orientation="vertical"
+                  android:visibility="gone">
+        <TextView android:layout_width="match_parent"
+                  android:layout_height="wrap_content"
+                  android:lineSpacingExtra="12dip"
+                  android:text="@string/wifi_setup_eap_not_supported"
+                  android:textAppearance="?android:attr/textAppearanceMedium"
+                  android:textSize="20sp" />
+    </FrameLayout>
+    <!-- In "add network" flow, we have security type field (@id/security below) below
+         this View, so need a bit different layout than the other flow, in which we'll use
+         @id/eap_not_supported. -->
+    <FrameLayout android:id="@+id/eap_not_supported_for_add_network"
+                  android:layout_width="match_parent"
+                  android:layout_height="wrap_content"
+                  android:orientation="vertical"
+                  android:visibility="gone">
+        <TextView android:layout_width="match_parent"
+                  android:layout_height="wrap_content"
+                  android:lineSpacingExtra="12dip"
+                  android:text="@string/wifi_setup_eap_not_supported"
+                  android:textAppearance="?android:attr/textAppearanceMedium"
+                  android:textSize="20sp" />
+    </FrameLayout>
     <LinearLayout android:id="@+id/wps_fields"
                   android:layout_width="match_parent"
                   android:layout_height="wrap_content"
@@ -162,20 +164,6 @@
                  android:textSize="20sp"
                  android:gravity="left|center_vertical"/>
     </RelativeLayout> <!-- android:id="@+id/type" -->
-
-    <LinearLayout android:id="@+id/eap_not_supported"
-                  android:layout_width="match_parent"
-                  android:layout_height="wrap_content"
-                  android:minHeight="360dip"
-                  android:orientation="vertical"
-                  android:visibility="gone">
-        <TextView android:layout_width="match_parent"
-                  android:layout_height="wrap_content"
-                  android:lineSpacingExtra="12dip"
-                  android:text="@string/wifi_setup_eap_not_supported"
-                  android:textAppearance="?android:attr/textAppearanceMedium"
-                  android:textSize="20sp" />
-    </LinearLayout>
 
     <!-- All the views below are "gone".
          We want them as data storage, not as UI components. -->
