@@ -159,7 +159,7 @@ public class InputMethodAndSubtypeUtil {
         HashSet<String> disabledSystemIMEs = getDisabledSystemIMEs(resolver);
 
         final boolean onlyOneIME = inputMethodInfos.size() == 1;
-        boolean existsSelectedSubtype = false;
+        boolean needsToResetSelectedSubtype = false;
         for (InputMethodInfo imi : inputMethodInfos) {
             final String imiId = imi.getId();
             Preference pref = context.findPreference(imiId);
@@ -178,7 +178,7 @@ public class InputMethodAndSubtypeUtil {
                 }
                 HashSet<String> subtypesSet = enabledIMEAndSubtypesMap.get(imiId);
 
-                boolean subtypeCleared = false;
+                boolean subtypePrefFound = false;
                 final int subtypeCount = imi.getSubtypeCount();
                 for (int i = 0; i < subtypeCount; ++i) {
                     InputMethodSubtype subtype = imi.getSubtypeAt(i);
@@ -187,17 +187,21 @@ public class InputMethodAndSubtypeUtil {
                             imiId + subtypeHashCodeStr);
                     // In the Configure input method screen which does not have subtype preferences.
                     if (subtypePref == null) continue;
-                    // Once subtype checkbox is found, subtypeSet needs to be cleared.
-                    // Because of system change, hashCode value could have been changed.
-                    if (!subtypeCleared) {
+                    if (!subtypePrefFound) {
+                        // Once subtype checkbox is found, subtypeSet needs to be cleared.
+                        // Because of system change, hashCode value could have been changed.
                         subtypesSet.clear();
-                        subtypeCleared = true;
+                        // If selected subtype preference is disabled, needs to reset.
+                        needsToResetSelectedSubtype = true;
+                        subtypePrefFound = true;
                     }
                     if (subtypePref.isChecked()) {
                         subtypesSet.add(subtypeHashCodeStr);
                         if (isCurrentInputMethod) {
                             if (selectedInputMethodSubtype == subtype.hashCode()) {
-                                existsSelectedSubtype = true;
+                                // Selected subtype is still enabled, there is no need to reset
+                                // selected subtype.
+                                needsToResetSelectedSubtype = false;
                             }
                         }
                     } else {
@@ -241,12 +245,14 @@ public class InputMethodAndSubtypeUtil {
             Log.d(TAG, "--- Save disable system inputmethod settings. :"
                     + disabledSysImesBuilder.toString());
             Log.d(TAG, "--- Save default inputmethod settings. :" + currentInputMethodId);
+            Log.d(TAG, "--- Needs to reset the selected subtype :" + needsToResetSelectedSubtype);
+            Log.d(TAG, "--- Subtype is selected :" + isInputMethodSubtypeSelected(resolver));
         }
 
         // Redefines SelectedSubtype when all subtypes are unchecked or there is no subtype
         // selected. And if the selected subtype of the current input method was disabled,
         // We should reset the selected input method's subtype.
-        if (!existsSelectedSubtype || !isInputMethodSubtypeSelected(resolver)) {
+        if (needsToResetSelectedSubtype || !isInputMethodSubtypeSelected(resolver)) {
             if (DEBUG) {
                 Log.d(TAG, "--- Reset inputmethod subtype because it's not defined.");
             }
