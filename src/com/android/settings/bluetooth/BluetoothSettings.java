@@ -16,15 +16,13 @@
 
 package com.android.settings.bluetooth;
 
-import android.app.Activity;
 import android.bluetooth.BluetoothDevice;
 import android.content.Intent;
 import android.preference.CheckBoxPreference;
 import android.preference.ListPreference;
 import android.preference.Preference;
-import android.preference.PreferenceCategory;
+import android.preference.PreferenceActivity;
 import android.preference.PreferenceScreen;
-import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 
@@ -34,9 +32,7 @@ import com.android.settings.R;
  * BluetoothSettings is the Settings screen for Bluetooth configuration and
  * connection management.
  */
-public class BluetoothSettings extends DeviceListPreferenceFragment
-        implements LocalBluetoothManager.Callback, View.OnClickListener {
-
+public final class BluetoothSettings extends DeviceListPreferenceFragment {
     private static final String TAG = "BluetoothSettings";
 
     private static final String KEY_BT_CHECKBOX = "bt_checkbox";
@@ -53,13 +49,20 @@ public class BluetoothSettings extends DeviceListPreferenceFragment
     private static final String BTOPP_ACTION_OPEN_RECEIVED_FILES =
             "android.btopp.intent.action.OPEN_RECEIVED_FILES";
 
-    void addPreferencesForActivity(Activity activity) {
+    /** Initialize the filter to show bonded devices only. */
+    public BluetoothSettings() {
+        super(BluetoothDeviceFilter.BONDED_DEVICE_FILTER);
+    }
+
+    @Override
+    void addPreferencesForActivity() {
         addPreferencesFromResource(R.xml.bluetooth_settings);
 
-        mEnabler = new BluetoothEnabler(activity,
+        mEnabler = new BluetoothEnabler(getActivity(), mLocalAdapter,
                 (CheckBoxPreference) findPreference(KEY_BT_CHECKBOX));
 
-        mDiscoverableEnabler = new BluetoothDiscoverableEnabler(activity,
+        mDiscoverableEnabler = new BluetoothDiscoverableEnabler(getActivity(),
+                mLocalAdapter,
                 (CheckBoxPreference) findPreference(KEY_BT_DISCOVERABLE),
                     (ListPreference) findPreference(KEY_BT_DISCOVERABLE_TIMEOUT));
 
@@ -88,6 +91,27 @@ public class BluetoothSettings extends DeviceListPreferenceFragment
         mEnabler.pause();
     }
 
+    private final View.OnClickListener mListener = new View.OnClickListener() {
+        public void onClick(View v) {
+            // User clicked on advanced options icon for a device in the list
+            if (v.getTag() instanceof CachedBluetoothDevice) {
+                CachedBluetoothDevice
+                        device = (CachedBluetoothDevice) v.getTag();
+
+                Preference pref = new Preference(getActivity());
+                pref.setTitle(device.getName());
+                pref.setFragment(DeviceProfilesSettings.class.getName());
+                pref.getExtras().putParcelable(DeviceProfilesSettings.EXTRA_DEVICE,
+                        device.getDevice());
+                ((PreferenceActivity) getActivity())
+                        .onPreferenceStartFragment(BluetoothSettings.this,
+                                pref);
+            } else {
+                Log.w(TAG, "onClick() called for other View: " + v);
+            }
+        }
+    };
+
     @Override
     public boolean onPreferenceTreeClick(PreferenceScreen preferenceScreen,
             Preference preference) {
@@ -105,9 +129,7 @@ public class BluetoothSettings extends DeviceListPreferenceFragment
         if (bondState == BluetoothDevice.BOND_BONDED) {
             // add to "Paired devices" list after remote-initiated pairing
             if (mDevicePreferenceMap.get(cachedDevice) == null) {
-                if (addDevicePreference(cachedDevice)) {
-                    createDevicePreference(cachedDevice);
-                }
+                createDevicePreference(cachedDevice);
             }
         } else if (bondState == BluetoothDevice.BOND_NONE) {
             // remove unpaired device from paired devices list
@@ -116,21 +138,11 @@ public class BluetoothSettings extends DeviceListPreferenceFragment
     }
 
     /**
-     * Additional check to only add paired devices to list.
-     */
-    boolean addDevicePreference(CachedBluetoothDevice cachedDevice) {
-        if (cachedDevice.getBondState() == BluetoothDevice.BOND_BONDED) {
-            return super.addDevicePreference(cachedDevice);
-        } else {
-            return false;
-        }
-    }
-
-    /**
      * Add a listener, which enables the advanced settings icon.
      * @param preference the newly added preference
      */
+    @Override
     void initDevicePreference(BluetoothDevicePreference preference) {
-        preference.setOnSettingsClickListener(this);
+        preference.setOnSettingsClickListener(mListener);
     }
 }

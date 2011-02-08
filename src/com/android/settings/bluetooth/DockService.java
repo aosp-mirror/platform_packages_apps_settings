@@ -17,7 +17,6 @@
 package com.android.settings.bluetooth;
 
 import com.android.settings.R;
-import com.android.settings.bluetooth.LocalBluetoothProfileManager.Profile;
 import com.android.settings.bluetooth.LocalBluetoothProfileManager.ServiceListener;
 
 import android.app.AlertDialog;
@@ -27,7 +26,7 @@ import android.bluetooth.BluetoothA2dp;
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
 import android.bluetooth.BluetoothHeadset;
-import android.content.Context;
+import android.bluetooth.BluetoothProfile;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
@@ -44,12 +43,11 @@ import android.view.WindowManager;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 
+import java.util.Collection;
 import java.util.List;
 import java.util.Set;
 
-public class DockService extends Service implements AlertDialog.OnMultiChoiceClickListener,
-        DialogInterface.OnClickListener, DialogInterface.OnDismissListener,
-        CompoundButton.OnCheckedChangeListener, ServiceListener {
+public final class DockService extends Service implements ServiceListener {
 
     private static final String TAG = "DockService";
 
@@ -82,14 +80,11 @@ public class DockService extends Service implements AlertDialog.OnMultiChoiceCli
 
     private static final String SHARED_PREFERENCES_NAME = "dock_settings";
 
-    private static final String SHARED_PREFERENCES_KEY_DISABLE_BT_WHEN_UNDOCKED =
-        "disable_bt_when_undock";
+    private static final String KEY_DISABLE_BT_WHEN_UNDOCKED = "disable_bt_when_undock";
 
-    private static final String SHARED_PREFERENCES_KEY_DISABLE_BT =
-        "disable_bt";
+    private static final String KEY_DISABLE_BT = "disable_bt";
 
-    private static final String SHARED_PREFERENCES_KEY_CONNECT_RETRY_COUNT =
-        "connect_retry_count";
+    private static final String KEY_CONNECT_RETRY_COUNT = "connect_retry_count";
 
     /*
      * If disconnected unexpectedly, reconnect up to 6 times. Each profile counts
@@ -103,8 +98,9 @@ public class DockService extends Service implements AlertDialog.OnMultiChoiceCli
     private volatile Looper mServiceLooper;
     private volatile ServiceHandler mServiceHandler;
     private Runnable mRunnable;
-    private DockService mContext;
-    private LocalBluetoothManager mBtManager;
+    private LocalBluetoothAdapter mLocalAdapter;
+    private CachedBluetoothDeviceManager mDeviceManager;
+    private LocalBluetoothProfileManager mProfileManager;
 
     // Normally set after getting a docked event and unset when the connection
     // is severed. One exception is that mDevice could be null if the service
@@ -113,7 +109,7 @@ public class DockService extends Service implements AlertDialog.OnMultiChoiceCli
 
     // Created and used for the duration of the dialog
     private AlertDialog mDialog;
-    private Profile[] mProfiles;
+    private LocalBluetoothProfile[] mProfiles;
     private boolean[] mCheckedItems;
     private int mStartIdAssociatedWithDialog;
 
@@ -127,8 +123,19 @@ public class DockService extends Service implements AlertDialog.OnMultiChoiceCli
     public void onCreate() {
         if (DEBUG) Log.d(TAG, "onCreate");
 
-        mBtManager = LocalBluetoothManager.getInstance(this);
-        mContext = this;
+        LocalBluetoothManager manager = LocalBluetoothManager.getInstance(this);
+        if (manager == null) {
+            Log.e(TAG, "Can't get LocalBluetoothManager: exiting");
+            return;
+        }
+
+        mLocalAdapter = manager.getBluetoothAdapter();
+        mDeviceManager = manager.getCachedDeviceManager();
+        mProfileManager = manager.getProfileManager();
+        if (mProfileManager == null) {
+            Log.e(TAG, "Can't get LocalBluetoothProfileManager: exiting");
+            return;
+        }
 
         HandlerThread thread = new HandlerThread("DockService");
         thread.start();
@@ -141,12 +148,22 @@ public class DockService extends Service implements AlertDialog.OnMultiChoiceCli
     public void onDestroy() {
         if (DEBUG) Log.d(TAG, "onDestroy");
         mRunnable = null;
-        LocalBluetoothProfileManager.removeServiceListener(this);
         if (mDialog != null) {
             mDialog.dismiss();
             mDialog = null;
         }
-        mServiceLooper.quit();
+        if (mProfileManager != null) {
+            mProfileManager.removeServiceListener(this);
+        }
+        if (mServiceLooper != null) {
+            mServiceLooper.quit();
+        }
+
+        mLocalAdapter = null;
+        mDeviceManager = null;
+        mProfileManager = null;
+        mServiceLooper = null;
+        mServiceHandler = null;
     }
 
     @Override
@@ -155,9 +172,13 @@ public class DockService extends Service implements AlertDialog.OnMultiChoiceCli
         return null;
     }
 
+    private SharedPreferences getPrefs() {
+        return getSharedPreferences(SHARED_PREFERENCES_NAME, MODE_PRIVATE);
+    }
+
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
-        if (DEBUG) Log.d(TAG, "onStartCommand startId:" + startId + " flags: " + flags);
+        if (DEBUG) Log.d(TAG, "onStartCommand startId: " + startId + " flags: " + flags);
 
         if (intent == null) {
             // Nothing to process, stop.
@@ -178,24 +199,24 @@ public class DockService extends Service implements AlertDialog.OnMultiChoiceCli
          * This assumes that the intent sender has checked that this is a dock
          * and that the intent is for a disconnect
          */
+        final SharedPreferences prefs = getPrefs();
         if (BluetoothHeadset.ACTION_CONNECTION_STATE_CHANGED.equals(intent.getAction())) {
             BluetoothDevice disconnectedDevice = intent
                     .getParcelableExtra(BluetoothDevice.EXTRA_DEVICE);
-
-            int retryCount = getSettingInt(SHARED_PREFERENCES_KEY_CONNECT_RETRY_COUNT, 0);
+            int retryCount = prefs.getInt(KEY_CONNECT_RETRY_COUNT, 0);
             if (retryCount < MAX_CONNECT_RETRY) {
-                setSettingInt(SHARED_PREFERENCES_KEY_CONNECT_RETRY_COUNT, retryCount + 1);
-                handleUnexpectedDisconnect(disconnectedDevice, Profile.HEADSET, startId);
+                prefs.edit().putInt(KEY_CONNECT_RETRY_COUNT, retryCount + 1).apply();
+                handleUnexpectedDisconnect(disconnectedDevice, mProfileManager.getHeadsetProfile(), startId);
             }
             return START_NOT_STICKY;
         } else if (BluetoothA2dp.ACTION_CONNECTION_STATE_CHANGED.equals(intent.getAction())) {
             BluetoothDevice disconnectedDevice = intent
                     .getParcelableExtra(BluetoothDevice.EXTRA_DEVICE);
 
-            int retryCount = getSettingInt(SHARED_PREFERENCES_KEY_CONNECT_RETRY_COUNT, 0);
+            int retryCount = prefs.getInt(KEY_CONNECT_RETRY_COUNT, 0);
             if (retryCount < MAX_CONNECT_RETRY) {
-                setSettingInt(SHARED_PREFERENCES_KEY_CONNECT_RETRY_COUNT, retryCount + 1);
-                handleUnexpectedDisconnect(disconnectedDevice, Profile.A2DP, startId);
+                prefs.edit().putInt(KEY_CONNECT_RETRY_COUNT, retryCount + 1).apply();
+                handleUnexpectedDisconnect(disconnectedDevice, mProfileManager.getA2dpProfile(), startId);
             }
             return START_NOT_STICKY;
         }
@@ -209,7 +230,7 @@ public class DockService extends Service implements AlertDialog.OnMultiChoiceCli
         }
 
         if (msg.what == MSG_TYPE_DOCKED) {
-            removeSetting(SHARED_PREFERENCES_KEY_CONNECT_RETRY_COUNT);
+            prefs.edit().remove(KEY_CONNECT_RETRY_COUNT).apply();
         }
 
         msg.arg2 = startId;
@@ -219,7 +240,7 @@ public class DockService extends Service implements AlertDialog.OnMultiChoiceCli
     }
 
     private final class ServiceHandler extends Handler {
-        public ServiceHandler(Looper looper) {
+        private ServiceHandler(Looper looper) {
             super(looper);
         }
 
@@ -234,7 +255,6 @@ public class DockService extends Service implements AlertDialog.OnMultiChoiceCli
         int msgType = msg.what;
         final int state = msg.arg1;
         final int startId = msg.arg2;
-        boolean deferFinishCall = false;
         BluetoothDevice device = null;
         if (msg.obj != null) {
             device = (BluetoothDevice) msg.obj;
@@ -243,102 +263,27 @@ public class DockService extends Service implements AlertDialog.OnMultiChoiceCli
         if(DEBUG) Log.d(TAG, "processMessage: " + msgType + " state: " + state + " device = "
                 + (device == null ? "null" : device.toString()));
 
+        boolean deferFinishCall = false;
+
         switch (msgType) {
             case MSG_TYPE_SHOW_UI:
-                if (mDialog != null) {
-                    // Shouldn't normally happen
-                    mDialog.dismiss();
-                    mDialog = null;
-                }
-                mDevice = device;
-                createDialog(mContext, mDevice, state, startId);
+                createDialog(device, state, startId);
                 break;
 
             case MSG_TYPE_DOCKED:
-                if (DEBUG) {
-                    // TODO figure out why hasMsg always returns false if device
-                    // is supplied
-                    Log.d(TAG, "1 Has undock perm msg = "
-                            + mServiceHandler.hasMessages(MSG_TYPE_UNDOCKED_PERMANENT, mDevice));
-                    Log.d(TAG, "2 Has undock perm msg = "
-                            + mServiceHandler.hasMessages(MSG_TYPE_UNDOCKED_PERMANENT, device));
-                }
-
-                mServiceHandler.removeMessages(MSG_TYPE_UNDOCKED_PERMANENT);
-                mServiceHandler.removeMessages(MSG_TYPE_DISABLE_BT);
-                removeSetting(SHARED_PREFERENCES_KEY_DISABLE_BT);
-
-                if (!device.equals(mDevice)) {
-                    if (mDevice != null) {
-                        // Not expected. Cleanup/undock existing
-                        handleUndocked(mContext, mBtManager, mDevice);
-                    }
-
-                    mDevice = device;
-
-                    // Register first in case LocalBluetoothProfileManager
-                    // becomes ready after isManagerReady is called and it
-                    // would be too late to register a service listener.
-                    LocalBluetoothProfileManager.addServiceListener(this);
-                    if (LocalBluetoothProfileManager.isManagerReady()) {
-                        handleDocked(device, state, startId);
-                        // Not needed after all
-                        LocalBluetoothProfileManager.removeServiceListener(this);
-                    } else {
-                        final BluetoothDevice d = device;
-                        mRunnable = new Runnable() {
-                            public void run() {
-                                handleDocked(d, state, startId);
-                            }
-                        };
-                        deferFinishCall = true;
-                    }
-                }
+                deferFinishCall = msgTypeDocked(device, state, startId);
                 break;
 
             case MSG_TYPE_UNDOCKED_PERMANENT:
-                // Grace period passed. Disconnect.
-                handleUndocked(mContext, mBtManager, device);
-
-                if (DEBUG) {
-                    Log.d(TAG, "DISABLE_BT_WHEN_UNDOCKED = "
-                            + getSettingBool(SHARED_PREFERENCES_KEY_DISABLE_BT_WHEN_UNDOCKED));
-                }
-
-                if (getSettingBool(SHARED_PREFERENCES_KEY_DISABLE_BT_WHEN_UNDOCKED)) {
-                    // BT was disabled when we first docked
-                    if (!hasOtherConnectedDevices(device)) {
-                        if(DEBUG) Log.d(TAG, "QUEUED BT DISABLE");
-                        // Queue a delayed msg to disable BT
-                        Message newMsg = mServiceHandler.obtainMessage(MSG_TYPE_DISABLE_BT, 0,
-                                startId, null);
-                        mServiceHandler.sendMessageDelayed(newMsg, DISABLE_BT_GRACE_PERIOD);
-                        deferFinishCall = true;
-                    } else {
-                        // Don't disable BT if something is connected
-                        removeSetting(SHARED_PREFERENCES_KEY_DISABLE_BT_WHEN_UNDOCKED);
-                    }
-                }
+                deferFinishCall = msgTypeUndockedPermanent(device, startId);
                 break;
 
             case MSG_TYPE_UNDOCKED_TEMPORARY:
-                // Undocked event received. Queue a delayed msg to sever connection
-                Message newMsg = mServiceHandler.obtainMessage(MSG_TYPE_UNDOCKED_PERMANENT, state,
-                        startId, device);
-                mServiceHandler.sendMessageDelayed(newMsg, UNDOCKED_GRACE_PERIOD);
+                msgTypeUndockedTemporary(device, state, startId);
                 break;
 
             case MSG_TYPE_DISABLE_BT:
-                if(DEBUG) Log.d(TAG, "BT DISABLE");
-                if (mBtManager.getBluetoothAdapter().disable()) {
-                    removeSetting(SHARED_PREFERENCES_KEY_DISABLE_BT_WHEN_UNDOCKED);
-                } else {
-                    // disable() returned an error. Persist a flag to disable BT later
-                    setSettingBool(SHARED_PREFERENCES_KEY_DISABLE_BT, true);
-                    mPendingTurnOffStartId = startId;
-                    deferFinishCall = true;
-                    if(DEBUG) Log.d(TAG, "disable failed. try again later " + startId);
-                }
+                deferFinishCall = msgTypeDisableBluetooth(startId);
                 break;
         }
 
@@ -346,24 +291,127 @@ public class DockService extends Service implements AlertDialog.OnMultiChoiceCli
                 && !deferFinishCall) {
             // NOTE: We MUST not call stopSelf() directly, since we need to
             // make sure the wake lock acquired by the Receiver is released.
-            DockEventReceiver.finishStartingService(DockService.this, startId);
+            DockEventReceiver.finishStartingService(this, startId);
         }
     }
 
-    public synchronized boolean hasOtherConnectedDevices(BluetoothDevice dock) {
-        List<CachedBluetoothDevice> cachedDevices = mBtManager.getCachedDeviceManager()
-                .getCachedDevicesCopy();
-        Set<BluetoothDevice> btDevices = mBtManager.getBluetoothAdapter().getBondedDevices();
-        if (btDevices == null || cachedDevices == null || btDevices.size() == 0) {
+    private boolean msgTypeDisableBluetooth(int startId) {
+        if (DEBUG) {
+            Log.d(TAG, "BT DISABLE");
+        }
+        final SharedPreferences prefs = getPrefs();
+        if (mLocalAdapter.disable()) {
+            prefs.edit().remove(KEY_DISABLE_BT_WHEN_UNDOCKED).apply();
+            return false;
+        } else {
+            // disable() returned an error. Persist a flag to disable BT later
+            prefs.edit().putBoolean(KEY_DISABLE_BT, true).apply();
+            mPendingTurnOffStartId = startId;
+            if(DEBUG) {
+                Log.d(TAG, "disable failed. try again later " + startId);
+            }
+            return true;
+        }
+    }
+
+    private void msgTypeUndockedTemporary(BluetoothDevice device, int state,
+            int startId) {
+        // Undocked event received. Queue a delayed msg to sever connection
+        Message newMsg = mServiceHandler.obtainMessage(MSG_TYPE_UNDOCKED_PERMANENT, state,
+                startId, device);
+        mServiceHandler.sendMessageDelayed(newMsg, UNDOCKED_GRACE_PERIOD);
+    }
+
+    private boolean msgTypeUndockedPermanent(BluetoothDevice device, int startId) {
+        // Grace period passed. Disconnect.
+        handleUndocked(device);
+        final SharedPreferences prefs = getPrefs();
+
+        if (DEBUG) {
+            Log.d(TAG, "DISABLE_BT_WHEN_UNDOCKED = "
+                    + prefs.getBoolean(KEY_DISABLE_BT_WHEN_UNDOCKED, false));
+        }
+
+        if (prefs.getBoolean(KEY_DISABLE_BT_WHEN_UNDOCKED, false)) {
+            if (hasOtherConnectedDevices(device)) {
+                // Don't disable BT if something is connected
+                prefs.edit().remove(KEY_DISABLE_BT_WHEN_UNDOCKED).apply();
+            } else {
+                // BT was disabled when we first docked
+                if (DEBUG) {
+                    Log.d(TAG, "QUEUED BT DISABLE");
+                }
+                // Queue a delayed msg to disable BT
+                Message newMsg = mServiceHandler.obtainMessage(
+                        MSG_TYPE_DISABLE_BT, 0, startId, null);
+                mServiceHandler.sendMessageDelayed(newMsg,
+                        DISABLE_BT_GRACE_PERIOD);
+                return true;
+            }
+        }
+        return false;
+    }
+
+    private boolean msgTypeDocked(BluetoothDevice device, final int state,
+            final int startId) {
+        if (DEBUG) {
+            // TODO figure out why hasMsg always returns false if device
+            // is supplied
+            Log.d(TAG, "1 Has undock perm msg = "
+                    + mServiceHandler.hasMessages(MSG_TYPE_UNDOCKED_PERMANENT, mDevice));
+            Log.d(TAG, "2 Has undock perm msg = "
+                    + mServiceHandler.hasMessages(MSG_TYPE_UNDOCKED_PERMANENT, device));
+        }
+
+        mServiceHandler.removeMessages(MSG_TYPE_UNDOCKED_PERMANENT);
+        mServiceHandler.removeMessages(MSG_TYPE_DISABLE_BT);
+        getPrefs().edit().remove(KEY_DISABLE_BT).apply();
+
+        if (device != null && !device.equals(mDevice)) {
+            if (mDevice != null) {
+                // Not expected. Cleanup/undock existing
+                handleUndocked(mDevice);
+            }
+
+            mDevice = device;
+
+            // Register first in case LocalBluetoothProfileManager
+            // becomes ready after isManagerReady is called and it
+            // would be too late to register a service listener.
+            mProfileManager.addServiceListener(this);
+            if (mProfileManager.isManagerReady()) {
+                handleDocked(device, state, startId);
+                // Not needed after all
+                mProfileManager.removeServiceListener(this);
+            } else {
+                final BluetoothDevice d = device;
+                mRunnable = new Runnable() {
+                    public void run() {
+                        handleDocked(d, state, startId);  // FIXME: WTF runnable here?
+                    }
+                };
+                return true;
+            }
+        }
+        return false;
+    }
+
+    synchronized boolean hasOtherConnectedDevices(BluetoothDevice dock) {
+        Collection<CachedBluetoothDevice> cachedDevices = mDeviceManager.getCachedDevicesCopy();
+        Set<BluetoothDevice> btDevices = mLocalAdapter.getBondedDevices();
+        if (btDevices == null || cachedDevices == null || btDevices.isEmpty()) {
             return false;
         }
-        if(DEBUG) Log.d(TAG, "btDevices = " + btDevices.size());
-        if(DEBUG) Log.d(TAG, "cachedDevices = " + cachedDevices.size());
+        if(DEBUG) {
+            Log.d(TAG, "btDevices = " + btDevices.size());
+            Log.d(TAG, "cachedDeviceUIs = " + cachedDevices.size());
+        }
 
-        for (CachedBluetoothDevice device : cachedDevices) {
-            BluetoothDevice btDevice = device.getDevice();
-            if (!btDevice.equals(dock) && btDevices.contains(btDevice) && device.isConnected()) {
-                if(DEBUG) Log.d(TAG, "connected device = " + device.getName());
+        for (CachedBluetoothDevice deviceUI : cachedDevices) {
+            BluetoothDevice btDevice = deviceUI.getDevice();
+            if (!btDevice.equals(dock) && btDevices.contains(btDevice) && deviceUI
+                    .isConnected()) {
+                if(DEBUG) Log.d(TAG, "connected deviceUI = " + deviceUI.getName());
                 return true;
             }
         }
@@ -404,96 +452,128 @@ public class DockService extends Service implements AlertDialog.OnMultiChoiceCli
         return mServiceHandler.obtainMessage(msgType, state, 0, device);
     }
 
-    private boolean createDialog(DockService service, BluetoothDevice device, int state,
-            int startId) {
+    private void createDialog(BluetoothDevice device,
+            int state, int startId) {
+        if (mDialog != null) {
+            // Shouldn't normally happen
+            mDialog.dismiss();
+            mDialog = null;
+        }
+        mDevice = device;
         switch (state) {
             case Intent.EXTRA_DOCK_STATE_CAR:
             case Intent.EXTRA_DOCK_STATE_DESK:
                 break;
             default:
-                return false;
+                return;
         }
 
         startForeground(0, new Notification());
 
         // Device in a new dock.
-        boolean firstTime = !mBtManager.hasDockAutoConnectSetting(device.getAddress());
+        boolean firstTime = !LocalBluetoothPreferences.hasDockAutoConnectSetting(this, device.getAddress());
 
-        CharSequence[] items = initBtSettings(service, device, state, firstTime);
+        CharSequence[] items = initBtSettings(device, state, firstTime);
 
-        final AlertDialog.Builder ab = new AlertDialog.Builder(service);
-        ab.setTitle(service.getString(R.string.bluetooth_dock_settings_title));
+        final AlertDialog.Builder ab = new AlertDialog.Builder(this);
+        ab.setTitle(getString(R.string.bluetooth_dock_settings_title));
 
         // Profiles
-        ab.setMultiChoiceItems(items, mCheckedItems, service);
+        ab.setMultiChoiceItems(items, mCheckedItems, mMultiClickListener);
 
         // Remember this settings
-        LayoutInflater inflater = (LayoutInflater) service
-                .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        float pixelScaleFactor = service.getResources().getDisplayMetrics().density;
+        LayoutInflater inflater = (LayoutInflater)
+                getSystemService(LAYOUT_INFLATER_SERVICE);
+        float pixelScaleFactor = getResources().getDisplayMetrics().density;
         View view = inflater.inflate(R.layout.remember_dock_setting, null);
         CheckBox rememberCheckbox = (CheckBox) view.findViewById(R.id.remember);
 
         // check "Remember setting" by default if no value was saved
-        boolean checked = firstTime || mBtManager.getDockAutoConnectSetting(device.getAddress());
+        boolean checked = firstTime || LocalBluetoothPreferences.getDockAutoConnectSetting(this, device.getAddress());
         rememberCheckbox.setChecked(checked);
-        rememberCheckbox.setOnCheckedChangeListener(this);
+        rememberCheckbox.setOnCheckedChangeListener(mCheckedChangeListener);
         int viewSpacingLeft = (int) (14 * pixelScaleFactor);
         int viewSpacingRight = (int) (14 * pixelScaleFactor);
         ab.setView(view, viewSpacingLeft, 0 /* top */, viewSpacingRight, 0 /* bottom */);
         if (DEBUG) {
             Log.d(TAG, "Auto connect = "
-                    + mBtManager.getDockAutoConnectSetting(device.getAddress()));
+                    + LocalBluetoothPreferences.getDockAutoConnectSetting(this, device.getAddress()));
         }
 
         // Ok Button
-        ab.setPositiveButton(service.getString(android.R.string.ok), service);
+        ab.setPositiveButton(getString(android.R.string.ok), mClickListener);
 
         mStartIdAssociatedWithDialog = startId;
         mDialog = ab.create();
         mDialog.getWindow().setType(WindowManager.LayoutParams.TYPE_KEYGUARD_DIALOG);
-        mDialog.setOnDismissListener(service);
+        mDialog.setOnDismissListener(mDismissListener);
         mDialog.show();
-        return true;
     }
 
     // Called when the individual bt profiles are clicked.
-    public void onClick(DialogInterface dialog, int which, boolean isChecked) {
-        if (DEBUG) Log.d(TAG, "Item " + which + " changed to " + isChecked);
-        mCheckedItems[which] = isChecked;
-    }
+    private final DialogInterface.OnMultiChoiceClickListener mMultiClickListener =
+            new DialogInterface.OnMultiChoiceClickListener() {
+                public void onClick(DialogInterface dialog, int which, boolean isChecked) {
+                    if (DEBUG) {
+                        Log.d(TAG, "Item " + which + " changed to " + isChecked);
+                    }
+                    mCheckedItems[which] = isChecked;
+                }
+            };
+
 
     // Called when the "Remember" Checkbox is clicked
-    public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-        if (DEBUG) Log.d(TAG, "onCheckedChanged: Remember Settings = " + isChecked);
-        if (mDevice != null) {
-            mBtManager.saveDockAutoConnectSetting(mDevice.getAddress(), isChecked);
-        }
-    }
+    private final CompoundButton.OnCheckedChangeListener mCheckedChangeListener =
+            new CompoundButton.OnCheckedChangeListener() {
+                public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                    if (DEBUG) {
+                        Log.d(TAG, "onCheckedChanged: Remember Settings = " + isChecked);
+                    }
+                    if (mDevice != null) {
+                        LocalBluetoothPreferences.saveDockAutoConnectSetting(
+                                DockService.this, mDevice.getAddress(), isChecked);
+                    }
+                }
+            };
+
 
     // Called when the dialog is dismissed
-    public void onDismiss(DialogInterface dialog) {
-        // NOTE: We MUST not call stopSelf() directly, since we need to
-        // make sure the wake lock acquired by the Receiver is released.
-        if (mPendingDevice == null) {
-            DockEventReceiver.finishStartingService(mContext, mStartIdAssociatedWithDialog);
-        }
-        mContext.stopForeground(true);
-    }
+    private final DialogInterface.OnDismissListener mDismissListener =
+            new DialogInterface.OnDismissListener() {
+                public void onDismiss(DialogInterface dialog) {
+                    // NOTE: We MUST not call stopSelf() directly, since we need to
+                    // make sure the wake lock acquired by the Receiver is released.
+                    if (mPendingDevice == null) {
+                        DockEventReceiver.finishStartingService(
+                                DockService.this, mStartIdAssociatedWithDialog);
+                    }
+                    stopForeground(true);
+                }
+            };
 
     // Called when clicked on the OK button
-    public void onClick(DialogInterface dialog, int which) {
-        if (which == DialogInterface.BUTTON_POSITIVE && mDevice != null) {
-            if (!mBtManager.hasDockAutoConnectSetting(mDevice.getAddress())) {
-                mBtManager.saveDockAutoConnectSetting(mDevice.getAddress(), true);
-            }
+    private final DialogInterface.OnClickListener mClickListener =
+            new DialogInterface.OnClickListener() {
+                public void onClick(DialogInterface dialog, int which) {
+                    if (which == DialogInterface.BUTTON_POSITIVE
+                            && mDevice != null) {
+                        if (!LocalBluetoothPreferences
+                                .hasDockAutoConnectSetting(
+                                        DockService.this,
+                                        mDevice.getAddress())) {
+                            LocalBluetoothPreferences
+                                    .saveDockAutoConnectSetting(
+                                            DockService.this,
+                                            mDevice.getAddress(), true);
+                        }
 
-            applyBtSettings(mDevice, mStartIdAssociatedWithDialog);
-        }
-    }
+                        applyBtSettings(mDevice, mStartIdAssociatedWithDialog);
+                    }
+                }
+            };
 
-    private CharSequence[] initBtSettings(DockService service, BluetoothDevice device, int state,
-            boolean firstTime) {
+    private CharSequence[] initBtSettings(BluetoothDevice device,
+            int state, boolean firstTime) {
         // TODO Avoid hardcoding dock and profiles. Read from system properties
         int numOfProfiles;
         switch (state) {
@@ -507,96 +587,54 @@ public class DockService extends Service implements AlertDialog.OnMultiChoiceCli
                 return null;
         }
 
-        mProfiles = new Profile[numOfProfiles];
+        mProfiles = new LocalBluetoothProfile[numOfProfiles];
         mCheckedItems = new boolean[numOfProfiles];
         CharSequence[] items = new CharSequence[numOfProfiles];
 
+        // FIXME: convert switch to something else
         switch (state) {
             case Intent.EXTRA_DOCK_STATE_CAR:
-                items[0] = service.getString(R.string.bluetooth_dock_settings_headset);
-                items[1] = service.getString(R.string.bluetooth_dock_settings_a2dp);
-                mProfiles[0] = Profile.HEADSET;
-                mProfiles[1] = Profile.A2DP;
+                items[0] = getString(R.string.bluetooth_dock_settings_headset);
+                items[1] = getString(R.string.bluetooth_dock_settings_a2dp);
+                mProfiles[0] = mProfileManager.getHeadsetProfile();
+                mProfiles[1] = mProfileManager.getA2dpProfile();
                 if (firstTime) {
                     // Enable by default for car dock
                     mCheckedItems[0] = true;
                     mCheckedItems[1] = true;
                 } else {
-                    mCheckedItems[0] = LocalBluetoothProfileManager.getProfileManager(mBtManager,
-                            Profile.HEADSET).isPreferred(device);
-                    mCheckedItems[1] = LocalBluetoothProfileManager.getProfileManager(mBtManager,
-                            Profile.A2DP).isPreferred(device);
+                    mCheckedItems[0] = mProfiles[0].isPreferred(device);
+                    mCheckedItems[1] = mProfiles[1].isPreferred(device);
                 }
                 break;
 
             case Intent.EXTRA_DOCK_STATE_DESK:
-                items[0] = service.getString(R.string.bluetooth_dock_settings_a2dp);
-                mProfiles[0] = Profile.A2DP;
+                items[0] = getString(R.string.bluetooth_dock_settings_a2dp);
+                mProfiles[0] = mProfileManager.getA2dpProfile();
                 if (firstTime) {
                     // Disable by default for desk dock
                     mCheckedItems[0] = false;
                 } else {
-                    mCheckedItems[0] = LocalBluetoothProfileManager.getProfileManager(mBtManager,
-                            Profile.A2DP).isPreferred(device);
+                    mCheckedItems[0] = mProfiles[0].isPreferred(device);
                 }
                 break;
         }
         return items;
     }
 
+    // TODO: move to background thread to fix strict mode warnings
     private void handleBtStateChange(Intent intent, int startId) {
         int btState = intent.getIntExtra(BluetoothAdapter.EXTRA_STATE, BluetoothAdapter.ERROR);
         synchronized (this) {
             if(DEBUG) Log.d(TAG, "BtState = " + btState + " mPendingDevice = " + mPendingDevice);
             if (btState == BluetoothAdapter.STATE_ON) {
-                if (mPendingDevice != null) {
-                    if (mPendingDevice.equals(mDevice)) {
-                        if(DEBUG) Log.d(TAG, "applying settings");
-                        applyBtSettings(mPendingDevice, mPendingStartId);
-                    } else if(DEBUG) {
-                        Log.d(TAG, "mPendingDevice  (" + mPendingDevice + ") != mDevice ("
-                                + mDevice + ")");
-                    }
-
-                    mPendingDevice = null;
-                    DockEventReceiver.finishStartingService(mContext, mPendingStartId);
-                } else {
-                    if (DEBUG) {
-                        Log.d(TAG, "A DISABLE_BT_WHEN_UNDOCKED = "
-                                + getSettingBool(SHARED_PREFERENCES_KEY_DISABLE_BT_WHEN_UNDOCKED));
-                    }
-                    // Reconnect if docked and bluetooth was enabled by user.
-                    Intent i = registerReceiver(null, new IntentFilter(Intent.ACTION_DOCK_EVENT));
-                    if (i != null) {
-                        int state = i.getIntExtra(Intent.EXTRA_DOCK_STATE,
-                                Intent.EXTRA_DOCK_STATE_UNDOCKED);
-                        if (state != Intent.EXTRA_DOCK_STATE_UNDOCKED) {
-                            BluetoothDevice device = i
-                                    .getParcelableExtra(BluetoothDevice.EXTRA_DEVICE);
-                            if (device != null) {
-                                connectIfEnabled(device);
-                            }
-                        } else if (getSettingBool(SHARED_PREFERENCES_KEY_DISABLE_BT)
-                                && mBtManager.getBluetoothAdapter().disable()) {
-                            mPendingTurnOffStartId = startId;
-                            removeSetting(SHARED_PREFERENCES_KEY_DISABLE_BT);
-                            return;
-                        }
-                    }
-                }
-
-                if (mPendingTurnOnStartId != INVALID_STARTID) {
-                    DockEventReceiver.finishStartingService(this, mPendingTurnOnStartId);
-                    mPendingTurnOnStartId = INVALID_STARTID;
-                }
-
-                DockEventReceiver.finishStartingService(this, startId);
+                handleBluetoothStateOn(startId);
             } else if (btState == BluetoothAdapter.STATE_TURNING_OFF) {
                 // Remove the flag to disable BT if someone is turning off bt.
                 // The rational is that:
                 // a) if BT is off at undock time, no work needs to be done
                 // b) if BT is on at undock time, the user wants it on.
-                removeSetting(SHARED_PREFERENCES_KEY_DISABLE_BT_WHEN_UNDOCKED);
+                getPrefs().edit().remove(KEY_DISABLE_BT_WHEN_UNDOCKED).apply();
                 DockEventReceiver.finishStartingService(this, startId);
             } else if (btState == BluetoothAdapter.STATE_OFF) {
                 // Bluetooth was turning off as we were trying to turn it on.
@@ -605,12 +643,12 @@ public class DockService extends Service implements AlertDialog.OnMultiChoiceCli
 
                 if (mPendingTurnOffStartId != INVALID_STARTID) {
                     DockEventReceiver.finishStartingService(this, mPendingTurnOffStartId);
-                    removeSetting(SHARED_PREFERENCES_KEY_DISABLE_BT);
+                    getPrefs().edit().remove(KEY_DISABLE_BT).apply();
                     mPendingTurnOffStartId = INVALID_STARTID;
                 }
 
                 if (mPendingDevice != null) {
-                    mBtManager.getBluetoothAdapter().enable();
+                    mLocalAdapter.enable();
                     mPendingTurnOnStartId = startId;
                 } else {
                     DockEventReceiver.finishStartingService(this, startId);
@@ -619,86 +657,124 @@ public class DockService extends Service implements AlertDialog.OnMultiChoiceCli
         }
     }
 
-    private void handleUnexpectedDisconnect(BluetoothDevice disconnectedDevice, Profile profile,
-            int startId) {
-        synchronized (this) {
-            if (DEBUG) Log.d(TAG, "handling failed connect for " + disconnectedDevice);
+    private void handleBluetoothStateOn(int startId) {
+        if (mPendingDevice != null) {
+            if (mPendingDevice.equals(mDevice)) {
+                if(DEBUG) {
+                    Log.d(TAG, "applying settings");
+                }
+                applyBtSettings(mPendingDevice, mPendingStartId);
+            } else if(DEBUG) {
+                Log.d(TAG, "mPendingDevice  (" + mPendingDevice + ") != mDevice ("
+                        + mDevice + ')');
+            }
+
+            mPendingDevice = null;
+            DockEventReceiver.finishStartingService(this, mPendingStartId);
+        } else {
+            final SharedPreferences prefs = getPrefs();
+            if (DEBUG) {
+                Log.d(TAG, "A DISABLE_BT_WHEN_UNDOCKED = "
+                        + prefs.getBoolean(KEY_DISABLE_BT_WHEN_UNDOCKED, false));
+            }
+            // Reconnect if docked and bluetooth was enabled by user.
+            Intent i = registerReceiver(null, new IntentFilter(Intent.ACTION_DOCK_EVENT));
+            if (i != null) {
+                int state = i.getIntExtra(Intent.EXTRA_DOCK_STATE,
+                        Intent.EXTRA_DOCK_STATE_UNDOCKED);
+                if (state != Intent.EXTRA_DOCK_STATE_UNDOCKED) {
+                    BluetoothDevice device = i
+                            .getParcelableExtra(BluetoothDevice.EXTRA_DEVICE);
+                    if (device != null) {
+                        connectIfEnabled(device);
+                    }
+                } else if (prefs.getBoolean(KEY_DISABLE_BT, false)
+                        && mLocalAdapter.disable()) {
+                    mPendingTurnOffStartId = startId;
+                    prefs.edit().remove(KEY_DISABLE_BT).apply();
+                    return;
+                }
+            }
+        }
+
+        if (mPendingTurnOnStartId != INVALID_STARTID) {
+            DockEventReceiver.finishStartingService(this, mPendingTurnOnStartId);
+            mPendingTurnOnStartId = INVALID_STARTID;
+        }
+
+        DockEventReceiver.finishStartingService(this, startId);
+    }
+
+    private synchronized void handleUnexpectedDisconnect(BluetoothDevice disconnectedDevice,
+            LocalBluetoothProfile profile, int startId) {
+        if (DEBUG) {
+            Log.d(TAG, "handling failed connect for " + disconnectedDevice);
+        }
 
             // Reconnect if docked.
             if (disconnectedDevice != null) {
                 // registerReceiver can't be called from a BroadcastReceiver
-                Intent i = registerReceiver(null, new IntentFilter(Intent.ACTION_DOCK_EVENT));
-                if (i != null) {
-                    int state = i.getIntExtra(Intent.EXTRA_DOCK_STATE,
+                Intent intent = registerReceiver(null, new IntentFilter(Intent.ACTION_DOCK_EVENT));
+                if (intent != null) {
+                    int state = intent.getIntExtra(Intent.EXTRA_DOCK_STATE,
                             Intent.EXTRA_DOCK_STATE_UNDOCKED);
                     if (state != Intent.EXTRA_DOCK_STATE_UNDOCKED) {
-                        BluetoothDevice dockedDevice = i
+                        BluetoothDevice dockedDevice = intent
                                 .getParcelableExtra(BluetoothDevice.EXTRA_DEVICE);
                         if (dockedDevice != null && dockedDevice.equals(disconnectedDevice)) {
-                            CachedBluetoothDevice cachedDevice = getCachedBluetoothDevice(mContext,
-                                    mBtManager, dockedDevice);
-                            cachedDevice.connect(profile);
+                            CachedBluetoothDevice cachedDevice = getCachedBluetoothDevice(
+                                    dockedDevice);
+                            cachedDevice.connectProfile(profile);
                         }
                     }
                 }
             }
 
             DockEventReceiver.finishStartingService(this, startId);
-        }
     }
 
     private synchronized void connectIfEnabled(BluetoothDevice device) {
-        CachedBluetoothDevice cachedDevice = getCachedBluetoothDevice(mContext, mBtManager, device);
-        List<Profile> profiles = cachedDevice.getConnectableProfiles();
-        for (int i = 0; i < profiles.size(); i++) {
-            LocalBluetoothProfileManager profileManager = LocalBluetoothProfileManager
-                    .getProfileManager(mBtManager, profiles.get(i));
-            int auto;
-            if (Profile.A2DP == profiles.get(i)) {
-                auto = BluetoothA2dp.PRIORITY_AUTO_CONNECT;
-            } else if (Profile.HEADSET == profiles.get(i)) {
-                auto = BluetoothHeadset.PRIORITY_AUTO_CONNECT;
-            } else {
-                continue;
-            }
-
-            if (profileManager.getPreferred(device) == auto) {
+        CachedBluetoothDevice cachedDevice = getCachedBluetoothDevice(
+                device);
+        List<LocalBluetoothProfile> profiles = cachedDevice.getConnectableProfiles();
+        for (LocalBluetoothProfile profile : profiles) {
+            if (profile.getPreferred(device) == BluetoothProfile.PRIORITY_AUTO_CONNECT) {
                 cachedDevice.connect(false);
-                break;
+                return;
             }
         }
     }
 
-    private synchronized void applyBtSettings(final BluetoothDevice device, int startId) {
-        if (device == null || mProfiles == null || mCheckedItems == null)
+    private synchronized void applyBtSettings(BluetoothDevice device, int startId) {
+        if (device == null || mProfiles == null || mCheckedItems == null
+                || mLocalAdapter == null) {
             return;
+        }
 
         // Turn on BT if something is enabled
-        synchronized (this) {
-            for (boolean enable : mCheckedItems) {
-                if (enable) {
-                    int btState = mBtManager.getBluetoothState();
-                    if(DEBUG) Log.d(TAG, "BtState = " + btState);
-                    // May have race condition as the phone comes in and out and in the dock.
-                    // Always turn on BT
-                    mBtManager.getBluetoothAdapter().enable();
+        for (boolean enable : mCheckedItems) {
+            if (enable) {
+                int btState = mLocalAdapter.getBluetoothState();
+                if (DEBUG) {
+                    Log.d(TAG, "BtState = " + btState);
+                }
+                // May have race condition as the phone comes in and out and in the dock.
+                // Always turn on BT
+                mLocalAdapter.enable();
 
-                    switch (btState) {
-                        case BluetoothAdapter.STATE_OFF:
-                        case BluetoothAdapter.STATE_TURNING_OFF:
-                        case BluetoothAdapter.STATE_TURNING_ON:
-                            if (mPendingDevice != null && mPendingDevice.equals(mDevice)) {
-                                return;
-                            }
-
-                            mPendingDevice = device;
-                            mPendingStartId = startId;
-                            if (btState != BluetoothAdapter.STATE_TURNING_ON) {
-                                setSettingBool(SHARED_PREFERENCES_KEY_DISABLE_BT_WHEN_UNDOCKED,
-                                        true);
-                            }
-                            return;
+                // if adapter was previously OFF, TURNING_OFF, or TURNING_ON
+                if (btState != BluetoothAdapter.STATE_ON) {
+                    if (mPendingDevice != null && mPendingDevice.equals(mDevice)) {
+                        return;
                     }
+
+                    mPendingDevice = device;
+                    mPendingStartId = startId;
+                    if (btState != BluetoothAdapter.STATE_TURNING_ON) {
+                        getPrefs().edit().putBoolean(
+                                KEY_DISABLE_BT_WHEN_UNDOCKED, true).apply();
+                    }
+                    return;
                 }
             }
         }
@@ -706,28 +782,26 @@ public class DockService extends Service implements AlertDialog.OnMultiChoiceCli
         mPendingDevice = null;
 
         boolean callConnect = false;
-        CachedBluetoothDevice cachedDevice = getCachedBluetoothDevice(mContext, mBtManager,
+        CachedBluetoothDevice cachedDevice = getCachedBluetoothDevice(
                 device);
         for (int i = 0; i < mProfiles.length; i++) {
-            LocalBluetoothProfileManager profileManager = LocalBluetoothProfileManager
-                    .getProfileManager(mBtManager, mProfiles[i]);
-
-            if (DEBUG) Log.d(TAG, mProfiles[i].toString() + " = " + mCheckedItems[i]);
+            LocalBluetoothProfile profile = mProfiles[i];
+            if (DEBUG) Log.d(TAG, profile.toString() + " = " + mCheckedItems[i]);
 
             if (mCheckedItems[i]) {
                 // Checked but not connected
                 callConnect = true;
             } else if (!mCheckedItems[i]) {
                 // Unchecked, may or may not be connected.
-                int status = profileManager.getConnectionStatus(cachedDevice.getDevice());
-                if (SettingsBtStatus.isConnectionStatusConnected(status)) {
+                int status = profile.getConnectionStatus(cachedDevice.getDevice());
+                if (status == BluetoothProfile.STATE_CONNECTED) {
                     if (DEBUG) Log.d(TAG, "applyBtSettings - Disconnecting");
                     cachedDevice.disconnect(mProfiles[i]);
                 }
             }
-            profileManager.setPreferred(device, mCheckedItems[i]);
+            profile.setPreferred(device, mCheckedItems[i]);
             if (DEBUG) {
-                if (mCheckedItems[i] != profileManager.isPreferred(device)) {
+                if (mCheckedItems[i] != profile.isPreferred(device)) {
                     Log.e(TAG, "Can't save preferred value");
                 }
             }
@@ -739,84 +813,47 @@ public class DockService extends Service implements AlertDialog.OnMultiChoiceCli
         }
     }
 
-    private synchronized void handleDocked(final BluetoothDevice device, final int state,
-            final int startId) {
-        if (mBtManager.getDockAutoConnectSetting(device.getAddress())) {
+    private synchronized void handleDocked(BluetoothDevice device, int state,
+            int startId) {
+        if (LocalBluetoothPreferences.getDockAutoConnectSetting(this, device.getAddress())) {
             // Setting == auto connect
-            initBtSettings(mContext, device, state, false);
+            initBtSettings(device, state, false);
             applyBtSettings(mDevice, startId);
         } else {
-            createDialog(mContext, device, state, startId);
+            createDialog(device, state, startId);
         }
     }
 
-    private synchronized void handleUndocked(Context context, LocalBluetoothManager localManager,
-            BluetoothDevice device) {
+    private synchronized void handleUndocked(BluetoothDevice device) {
         mRunnable = null;
-        LocalBluetoothProfileManager.removeServiceListener(this);
+        mProfileManager.removeServiceListener(this);
         if (mDialog != null) {
             mDialog.dismiss();
             mDialog = null;
         }
         mDevice = null;
         mPendingDevice = null;
-        CachedBluetoothDevice cachedBluetoothDevice = getCachedBluetoothDevice(context,
-                localManager, device);
-        cachedBluetoothDevice.disconnect();
+        CachedBluetoothDevice cachedDevice = getCachedBluetoothDevice(device);
+        cachedDevice.disconnect();
     }
 
-    private static CachedBluetoothDevice getCachedBluetoothDevice(Context context,
-            LocalBluetoothManager localManager, BluetoothDevice device) {
-        CachedBluetoothDeviceManager cachedDeviceManager = localManager.getCachedDeviceManager();
-        CachedBluetoothDevice cachedBluetoothDevice = cachedDeviceManager.findDevice(device);
-        if (cachedBluetoothDevice == null) {
-            cachedBluetoothDevice = new CachedBluetoothDevice(context, device);
+    private CachedBluetoothDevice getCachedBluetoothDevice(BluetoothDevice device) {
+        CachedBluetoothDevice cachedDevice = mDeviceManager.findDevice(device);
+        if (cachedDevice == null) {
+            cachedDevice = mDeviceManager.addDevice(mLocalAdapter, mProfileManager, device);
         }
-        return cachedBluetoothDevice;
-    }
-
-    private boolean getSettingBool(String key) {
-        SharedPreferences sharedPref = getSharedPreferences(SHARED_PREFERENCES_NAME,
-                Context.MODE_PRIVATE);
-        return sharedPref.getBoolean(key, false);
-    }
-
-    private int getSettingInt(String key, int defaultValue) {
-        SharedPreferences sharedPref = getSharedPreferences(SHARED_PREFERENCES_NAME,
-                Context.MODE_PRIVATE);
-        return sharedPref.getInt(key, defaultValue);
-    }
-
-    private void setSettingBool(String key, boolean bool) {
-        SharedPreferences.Editor editor = getSharedPreferences(SHARED_PREFERENCES_NAME,
-                Context.MODE_PRIVATE).edit();
-        editor.putBoolean(key, bool);
-        editor.apply();
-    }
-
-    private void setSettingInt(String key, int value) {
-        SharedPreferences.Editor editor = getSharedPreferences(SHARED_PREFERENCES_NAME,
-                Context.MODE_PRIVATE).edit();
-        editor.putInt(key, value);
-        editor.apply();
-    }
-
-    private void removeSetting(String key) {
-        SharedPreferences sharedPref = getSharedPreferences(SHARED_PREFERENCES_NAME,
-                Context.MODE_PRIVATE);
-        SharedPreferences.Editor editor = sharedPref.edit();
-        editor.remove(key);
-        editor.apply();
+        return cachedDevice;
     }
 
     public synchronized void onServiceConnected() {
         if (mRunnable != null) {
             mRunnable.run();
             mRunnable = null;
-            LocalBluetoothProfileManager.removeServiceListener(this);
+            mProfileManager.removeServiceListener(this);
         }
     }
 
     public void onServiceDisconnected() {
+        // FIXME: shouldn't I do something on service disconnected too?
     }
 }

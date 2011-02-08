@@ -27,7 +27,6 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 
@@ -51,7 +50,7 @@ public class RequestPermissionActivity extends Activity implements
 
     private static final int REQUEST_CODE_START_BT = 1;
 
-    private LocalBluetoothManager mLocalManager;
+    private LocalBluetoothAdapter mLocalAdapter;
 
     private int mTimeout = BluetoothDiscoverableEnabler.DEFAULT_DISCOVERABLE_TIMEOUT;
 
@@ -66,18 +65,19 @@ public class RequestPermissionActivity extends Activity implements
 
     // True if requesting BT to be turned on
     // False if requesting BT to be turned on + discoverable mode
-    private boolean mEnableOnly = false;
+    private boolean mEnableOnly;
 
-    private boolean mUserConfirmed = false;
+    private boolean mUserConfirmed;
 
-    private AlertDialog mDialog = null;
+    private AlertDialog mDialog;
 
     private final BroadcastReceiver mReceiver = new BroadcastReceiver() {
 
         @Override
         public void onReceive(Context context, Intent intent) {
-            if (intent == null)
+            if (intent == null) {
                 return;
+            }
             if (mNeededToEnableBluetooth
                     && BluetoothAdapter.ACTION_STATE_CHANGED.equals(intent.getAction())) {
                 int state = intent.getIntExtra(BluetoothAdapter.EXTRA_STATE, BluetoothDevice.ERROR);
@@ -94,12 +94,13 @@ public class RequestPermissionActivity extends Activity implements
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        // Note: initializes mLocalAdapter and returns true on error
         if (parseIntent()) {
             finish();
             return;
         }
 
-        int btState = mLocalManager.getBluetoothState();
+        int btState = mLocalAdapter.getState();
 
         switch (btState) {
             case BluetoothAdapter.STATE_OFF:
@@ -120,28 +121,29 @@ public class RequestPermissionActivity extends Activity implements
                  */
                 registerReceiver(mReceiver,
                         new IntentFilter(BluetoothAdapter.ACTION_STATE_CHANGED));
-                Intent i = new Intent();
-                i.setClass(this, RequestPermissionHelperActivity.class);
+                Intent intent = new Intent();
+                intent.setClass(this, RequestPermissionHelperActivity.class);
                 if (mEnableOnly) {
-                    i.setAction(RequestPermissionHelperActivity.ACTION_INTERNAL_REQUEST_BT_ON);
+                    intent.setAction(RequestPermissionHelperActivity.ACTION_INTERNAL_REQUEST_BT_ON);
                 } else {
-                    i.setAction(RequestPermissionHelperActivity.
+                    intent.setAction(RequestPermissionHelperActivity.
                             ACTION_INTERNAL_REQUEST_BT_ON_AND_DISCOVERABLE);
-                    i.putExtra(BluetoothAdapter.EXTRA_DISCOVERABLE_DURATION, mTimeout);
+                    intent.putExtra(BluetoothAdapter.EXTRA_DISCOVERABLE_DURATION, mTimeout);
                 }
-                startActivityForResult(i, REQUEST_CODE_START_BT);
+                startActivityForResult(intent, REQUEST_CODE_START_BT);
                 mNeededToEnableBluetooth = true;
                 break;
             case BluetoothAdapter.STATE_ON:
                 if (mEnableOnly) {
                     // Nothing to do. Already enabled.
                     proceedAndFinish();
-                    return;
                 } else {
                     // Ask the user about enabling discovery mode
                     createDialog();
-                    break;
                 }
+                break;
+            default:
+                Log.e(TAG, "Unknown adapter state: " + btState);
         }
     }
 
@@ -176,8 +178,8 @@ public class RequestPermissionActivity extends Activity implements
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (requestCode != REQUEST_CODE_START_BT) {
-            Log.e(TAG, "Unexpected onActivityResult " + requestCode + " " + resultCode);
-            setResult(Activity.RESULT_CANCELED);
+            Log.e(TAG, "Unexpected onActivityResult " + requestCode + ' ' + resultCode);
+            setResult(RESULT_CANCELED);
             finish();
             return;
         }
@@ -191,7 +193,7 @@ public class RequestPermissionActivity extends Activity implements
         // BT and discoverable mode.
         mUserConfirmed = true;
 
-        if (mLocalManager.getBluetoothState() == BluetoothAdapter.STATE_ON) {
+        if (mLocalAdapter.getBluetoothState() == BluetoothAdapter.STATE_ON) {
             proceedAndFinish();
         } else {
             // If BT is not up yet, show "Turning on Bluetooth..."
@@ -206,7 +208,7 @@ public class RequestPermissionActivity extends Activity implements
                 break;
 
             case DialogInterface.BUTTON_NEGATIVE:
-                setResult(Activity.RESULT_CANCELED);
+                setResult(RESULT_CANCELED);
                 finish();
                 break;
         }
@@ -217,18 +219,19 @@ public class RequestPermissionActivity extends Activity implements
 
         if (mEnableOnly) {
             // BT enabled. Done
-            returnCode = Activity.RESULT_OK;
-        } else if (mLocalManager.getBluetoothAdapter().setScanMode(
+            returnCode = RESULT_OK;
+        } else if (mLocalAdapter.setScanMode(
                 BluetoothAdapter.SCAN_MODE_CONNECTABLE_DISCOVERABLE, mTimeout)) {
             // If already in discoverable mode, this will extend the timeout.
-            persistDiscoverableEndTimestamp(System.currentTimeMillis() + mTimeout * 1000);
+            LocalBluetoothPreferences.persistDiscoverableEndTimestamp(
+                    this, System.currentTimeMillis() + (long) mTimeout * 1000);
             returnCode = mTimeout;
             // Activity.RESULT_FIRST_USER should be 1
-            if (returnCode < Activity.RESULT_FIRST_USER) {
-                returnCode = Activity.RESULT_FIRST_USER;
+            if (returnCode < RESULT_FIRST_USER) {
+                returnCode = RESULT_FIRST_USER;
             }
         } else {
-            returnCode = Activity.RESULT_CANCELED;
+            returnCode = RESULT_CANCELED;
         }
 
         if (mDialog != null) {
@@ -239,6 +242,10 @@ public class RequestPermissionActivity extends Activity implements
         finish();
     }
 
+    /**
+     * Parse the received Intent and initialize mLocalBluetoothAdapter.
+     * @return true if an error occurred; false otherwise
+     */
     private boolean parseIntent() {
         Intent intent = getIntent();
         if (intent != null && intent.getAction().equals(BluetoothAdapter.ACTION_REQUEST_ENABLE)) {
@@ -257,16 +264,17 @@ public class RequestPermissionActivity extends Activity implements
             Log.e(TAG, "Error: this activity may be started only with intent "
                     + BluetoothAdapter.ACTION_REQUEST_ENABLE + " or "
                     + BluetoothAdapter.ACTION_REQUEST_DISCOVERABLE);
-            setResult(Activity.RESULT_CANCELED);
+            setResult(RESULT_CANCELED);
             return true;
         }
 
-        mLocalManager = LocalBluetoothManager.getInstance(this);
-        if (mLocalManager == null) {
-            Log.e(TAG, "Error: there's a problem starting bluetooth");
-            setResult(Activity.RESULT_CANCELED);
+        LocalBluetoothManager manager = LocalBluetoothManager.getInstance(this);
+        if (manager == null) {
+            Log.e(TAG, "Error: there's a problem starting Bluetooth");
+            setResult(RESULT_CANCELED);
             return true;
         }
+        mLocalAdapter = manager.getBluetoothAdapter();
 
         return false;
     }
@@ -274,20 +282,14 @@ public class RequestPermissionActivity extends Activity implements
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        if (mNeededToEnableBluetooth) unregisterReceiver(mReceiver);
-    }
-
-    private void persistDiscoverableEndTimestamp(long endTimestamp) {
-        SharedPreferences.Editor editor = mLocalManager.getSharedPreferences().edit();
-        editor.putLong(
-                BluetoothDiscoverableEnabler.SHARED_PREFERENCES_KEY_DISCOVERABLE_END_TIMESTAMP,
-                endTimestamp);
-        editor.apply();
+        if (mNeededToEnableBluetooth) {
+            unregisterReceiver(mReceiver);
+        }
     }
 
     @Override
     public void onBackPressed() {
-        setResult(Activity.RESULT_CANCELED);
+        setResult(RESULT_CANCELED);
         super.onBackPressed();
     }
 }

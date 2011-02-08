@@ -16,12 +16,11 @@
 
 package com.android.settings.bluetooth;
 
-import android.app.Activity;
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
 import android.bluetooth.BluetoothDevicePicker;
 import android.content.Intent;
-import android.util.Log;
+import android.os.Bundle;
 
 import com.android.settings.R;
 
@@ -29,36 +28,42 @@ import com.android.settings.R;
  * BluetoothSettings is the Settings screen for Bluetooth configuration and
  * connection management.
  */
-public class DevicePickerFragment extends DeviceListPreferenceFragment {
-
-    private static final String TAG = "BluetoothDevicePicker";
+public final class DevicePickerFragment extends DeviceListPreferenceFragment {
 
     private boolean mNeedAuth;
     private String mLaunchPackage;
     private String mLaunchClass;
 
-    void addPreferencesForActivity(Activity activity) {
-        Intent intent = activity.getIntent();
+    @Override
+    void addPreferencesForActivity() {
+        addPreferencesFromResource(R.xml.device_picker);
+
+        Intent intent = getActivity().getIntent();
         mNeedAuth = intent.getBooleanExtra(BluetoothDevicePicker.EXTRA_NEED_AUTH, false);
-        mFilterType = intent.getIntExtra(BluetoothDevicePicker.EXTRA_FILTER_TYPE,
-                BluetoothDevicePicker.FILTER_TYPE_ALL);
+        setFilter(intent.getIntExtra(BluetoothDevicePicker.EXTRA_FILTER_TYPE,
+                BluetoothDevicePicker.FILTER_TYPE_ALL));
         mLaunchPackage = intent.getStringExtra(BluetoothDevicePicker.EXTRA_LAUNCH_PACKAGE);
         mLaunchClass = intent.getStringExtra(BluetoothDevicePicker.EXTRA_LAUNCH_CLASS);
+    }
 
-        activity.setTitle(activity.getString(R.string.device_picker));
-        addPreferencesFromResource(R.xml.device_picker);
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        getActivity().setTitle(getString(R.string.device_picker));
     }
 
     @Override
     public void onResume() {
         super.onResume();
         addDevices();
-        mLocalManager.startScanning(true);
+        mLocalAdapter.startScanning(true);
     }
 
+    @Override
     void onDevicePreferenceClick(BluetoothDevicePreference btPreference) {
-        mLocalManager.stopScanning();
-        mLocalManager.persistSelectedDeviceInPicker(mSelectedDevice.getAddress());
+        mLocalAdapter.stopScanning();
+        LocalBluetoothPreferences.persistSelectedDeviceInPicker(
+                getActivity(), mSelectedDevice.getAddress());
         if ((btPreference.getCachedDevice().getBondState() ==
                 BluetoothDevice.BOND_BONDED) || !mNeedAuth) {
             sendDevicePickedIntent(mSelectedDevice);
@@ -79,15 +84,16 @@ public class DevicePickerFragment extends DeviceListPreferenceFragment {
         }
     }
 
-    void onBluetoothStateChanged(int bluetoothState) {
+    @Override
+    public void onBluetoothStateChanged(int bluetoothState) {
         super.onBluetoothStateChanged(bluetoothState);
 
         if (bluetoothState == BluetoothAdapter.STATE_ON) {
-                mLocalManager.startScanning(false);
+                mLocalAdapter.startScanning(false);
         }
     }
 
-    void sendDevicePickedIntent(BluetoothDevice device) {
+    private void sendDevicePickedIntent(BluetoothDevice device) {
         Intent intent = new Intent(BluetoothDevicePicker.ACTION_DEVICE_SELECTED);
         intent.putExtra(BluetoothDevice.EXTRA_DEVICE, device);
         if (mLaunchPackage != null && mLaunchClass != null) {

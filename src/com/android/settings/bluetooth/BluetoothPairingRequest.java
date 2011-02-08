@@ -35,17 +35,15 @@ import android.os.PowerManager;
  * confirmation entry dialog. Otherwise it puts a Notification in the status bar, which can
  * be clicked to bring up the Pairing entry dialog.
  */
-public class BluetoothPairingRequest extends BroadcastReceiver {
+public final class BluetoothPairingRequest extends BroadcastReceiver {
 
-    public static final int NOTIFICATION_ID = android.R.drawable.stat_sys_data_bluetooth;
+    private static final int NOTIFICATION_ID = android.R.drawable.stat_sys_data_bluetooth;
 
     @Override
     public void onReceive(Context context, Intent intent) {
         String action = intent.getAction();
         if (action.equals(BluetoothDevice.ACTION_PAIRING_REQUEST)) {
-
-            LocalBluetoothManager localManager = LocalBluetoothManager.getInstance(context);
-
+            // convert broadcast intent into activity intent (same action string)
             BluetoothDevice device =
                     intent.getParcelableExtra(BluetoothDevice.EXTRA_DEVICE);
             int type = intent.getIntExtra(BluetoothDevice.EXTRA_PAIRING_VARIANT,
@@ -68,39 +66,35 @@ public class BluetoothPairingRequest extends BroadcastReceiver {
                     (PowerManager)context.getSystemService(Context.POWER_SERVICE);
             String deviceAddress = device != null ? device.getAddress() : null;
             if (powerManager.isScreenOn() &&
-                localManager.shouldShowDialogInForeground(deviceAddress)) {
+                    LocalBluetoothPreferences.shouldShowDialogInForeground(context, deviceAddress)) {
                 // Since the screen is on and the BT-related activity is in the foreground,
                 // just open the dialog
                 context.startActivity(pairingIntent);
-
             } else {
-
                 // Put up a notification that leads to the dialog
                 Resources res = context.getResources();
-                Notification notification = new Notification(
-                        android.R.drawable.stat_sys_data_bluetooth,
-                        res.getString(R.string.bluetooth_notif_ticker),
-                        System.currentTimeMillis());
+                Notification.Builder builder = new Notification.Builder(context)
+                        .setSmallIcon(android.R.drawable.stat_sys_data_bluetooth)
+                        .setTicker(res.getString(R.string.bluetooth_notif_ticker));
 
                 PendingIntent pending = PendingIntent.getActivity(context, 0,
                         pairingIntent, PendingIntent.FLAG_ONE_SHOT);
 
                 String name = intent.getStringExtra(BluetoothDevice.EXTRA_NAME);
                 if (TextUtils.isEmpty(name)) {
-                    name = (device != null ? device.getName() :
-                            context.getString(android.R.string.unknownName));
+                    name = device != null ? device.getName() :
+                            context.getString(android.R.string.unknownName);
                 }
 
-                notification.setLatestEventInfo(context,
-                        res.getString(R.string.bluetooth_notif_title),
-                        res.getString(R.string.bluetooth_notif_message, name),
-                        pending);
-                notification.flags |= Notification.FLAG_AUTO_CANCEL;
-                notification.defaults |= Notification.DEFAULT_SOUND;
+                builder.setContentTitle(res.getString(R.string.bluetooth_notif_title))
+                        .setContentText(res.getString(R.string.bluetooth_notif_message, name))
+                        .setContentIntent(pending)
+                        .setAutoCancel(true)
+                        .setDefaults(Notification.DEFAULT_SOUND);
 
                 NotificationManager manager = (NotificationManager)
                         context.getSystemService(Context.NOTIFICATION_SERVICE);
-                manager.notify(NOTIFICATION_ID, notification);
+                manager.notify(NOTIFICATION_ID, builder.getNotification());
             }
 
         } else if (action.equals(BluetoothDevice.ACTION_PAIRING_CANCEL)) {

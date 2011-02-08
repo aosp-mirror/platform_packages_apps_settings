@@ -14,20 +14,20 @@
  * limitations under the License.
  */
 
-package com.android.settings.tests;
+package com.android.settings.bluetooth;
 
 import android.test.AndroidTestCase;
 import android.text.InputFilter;
 import android.text.SpannableStringBuilder;
 
-import com.android.settings.bluetooth.BluetoothNamePreference;
+import com.android.settings.bluetooth.Utf8ByteLengthFilter;
 
 import dalvik.annotation.TestLevel;
 import dalvik.annotation.TestTargetClass;
 import dalvik.annotation.TestTargetNew;
 import dalvik.annotation.TestTargets;
 
-@TestTargetClass(BluetoothNamePreference.Utf8ByteLengthFilter.class)
+@TestTargetClass(Utf8ByteLengthFilter.class)
 public class Utf8ByteLengthFilterTest extends AndroidTestCase {
 
     @TestTargets({
@@ -39,7 +39,7 @@ public class Utf8ByteLengthFilterTest extends AndroidTestCase {
         ),
         @TestTargetNew(
             level = TestLevel.COMPLETE,
-            method = "BluetoothNamePreference.Utf8ByteLengthFilter",
+            method = "Utf8ByteLengthFilter",
             args = {int.class}
         )
     })
@@ -48,7 +48,7 @@ public class Utf8ByteLengthFilterTest extends AndroidTestCase {
         CharSequence source;
         SpannableStringBuilder dest;
         // Constructor to create a LengthFilter
-        BluetoothNamePreference.Utf8ByteLengthFilter lengthFilter = new BluetoothNamePreference.Utf8ByteLengthFilter(10);
+        InputFilter lengthFilter = new Utf8ByteLengthFilter(10);
         InputFilter[] filters = {lengthFilter};
 
         // filter() implicitly invoked. If the total length > filter length, the filter will

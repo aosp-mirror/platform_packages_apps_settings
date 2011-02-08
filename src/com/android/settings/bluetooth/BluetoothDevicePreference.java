@@ -16,27 +16,32 @@
 
 package com.android.settings.bluetooth;
 
-import com.android.settings.R;
-
+import android.app.AlertDialog;
+import android.bluetooth.BluetoothClass;
+import android.bluetooth.BluetoothDevice;
+import android.bluetooth.BluetoothProfile;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.graphics.drawable.Drawable;
 import android.preference.Preference;
+import android.text.TextUtils;
+import android.util.Log;
 import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.view.View.OnClickListener;
+import android.view.ViewGroup;
 import android.widget.ImageView;
 
-import com.android.settings.bluetooth.LocalBluetoothProfileManager.Profile;
+import com.android.settings.R;
 
-import java.util.Map;
+import java.util.List;
 
 /**
  * BluetoothDevicePreference is the preference type used to display each remote
  * Bluetooth device in the Bluetooth Settings screen.
  */
-public class BluetoothDevicePreference extends Preference implements
+public final class BluetoothDevicePreference extends Preference implements
         CachedBluetoothDevice.Callback, OnClickListener {
     private static final String TAG = "BluetoothDevicePreference";
 
@@ -48,11 +53,7 @@ public class BluetoothDevicePreference extends Preference implements
 
     private OnClickListener mOnSettingsClickListener;
 
-    /**
-     * Cached local copy of whether the device is busy. This is only updated
-     * from {@link #onDeviceAttributesChanged()}.
-     */
-    private boolean mIsBusy;
+    private AlertDialog mDisconnectDialog;
 
     public BluetoothDevicePreference(Context context, CachedBluetoothDevice cachedDevice) {
         super(context);
@@ -60,19 +61,19 @@ public class BluetoothDevicePreference extends Preference implements
         if (sDimAlpha == Integer.MIN_VALUE) {
             TypedValue outValue = new TypedValue();
             context.getTheme().resolveAttribute(android.R.attr.disabledAlpha, outValue, true);
-            sDimAlpha = (int) ((outValue.getFloat() * 255) * 0.5);
+            sDimAlpha = (int) (outValue.getFloat() * 255);
         }
 
         mCachedDevice = cachedDevice;
 
         setWidgetLayoutResource(R.layout.preference_bluetooth);
 
-        cachedDevice.registerCallback(this);
+        mCachedDevice.registerCallback(this);
 
         onDeviceAttributesChanged();
     }
 
-    public CachedBluetoothDevice getCachedDevice() {
+    CachedBluetoothDevice getCachedDevice() {
         return mCachedDevice;
     }
 
@@ -84,39 +85,27 @@ public class BluetoothDevicePreference extends Preference implements
     protected void onPrepareForRemoval() {
         super.onPrepareForRemoval();
         mCachedDevice.unregisterCallback(this);
+        if (mDisconnectDialog != null) {
+            mDisconnectDialog.dismiss();
+            mDisconnectDialog = null;
+        }
     }
 
     public void onDeviceAttributesChanged() {
-
         /*
          * The preference framework takes care of making sure the value has
-         * changed before proceeding.
+         * changed before proceeding. It will also call notifyChanged() if
+         * any preference info has changed from the previous value.
          */
-
         setTitle(mCachedDevice.getName());
 
-        /*
-         * TODO: Showed "Paired" even though it was "Connected". This may be
-         * related to BluetoothHeadset not bound to the actual
-         * BluetoothHeadsetService when we got here.
-         */
-        setSummary(mCachedDevice.getSummary());
+        setSummary(getConnectionSummary());
 
         // Used to gray out the item
-        mIsBusy = mCachedDevice.isBusy();
+        setEnabled(!mCachedDevice.isBusy());
 
-        // Data has changed
-        notifyChanged();
-
-        // This could affect ordering, so notify that also
+        // This could affect ordering, so notify that
         notifyHierarchyChanged();
-    }
-
-    @Override
-    public boolean isEnabled() {
-        // Temp fix until we have 2053751 fixed in the framework
-        setEnabled(true);
-        return super.isEnabled() && !mIsBusy;
     }
 
     @Override
@@ -129,17 +118,17 @@ public class BluetoothDevicePreference extends Preference implements
         super.onBindView(view);
 
         ImageView btClass = (ImageView) view.findViewById(android.R.id.icon);
-        btClass.setImageResource(mCachedDevice.getBtClassDrawable());
-        btClass.setAlpha(!mIsBusy ? 255 : sDimAlpha);
+        btClass.setImageResource(getBtClassDrawable());
+        btClass.setAlpha(isEnabled() ? 255 : sDimAlpha);
 
         mDeviceSettings = (ImageView) view.findViewById(R.id.deviceDetails);
         if (mOnSettingsClickListener != null) {
             mDeviceSettings.setOnClickListener(this);
             mDeviceSettings.setTag(mCachedDevice);
-            mDeviceSettings.setAlpha(!mIsBusy ? 255 : sDimAlpha);
+            mDeviceSettings.setAlpha(isEnabled() ? 255 : sDimAlpha);
         } else { // Hide the settings icon and divider
             mDeviceSettings.setVisibility(View.GONE);
-            ImageView divider = (ImageView) view.findViewById(R.id.divider);
+            View divider = view.findViewById(R.id.divider);
             if (divider != null) {
                 divider.setVisibility(View.GONE);
             }
@@ -148,22 +137,38 @@ public class BluetoothDevicePreference extends Preference implements
         LayoutInflater inflater = (LayoutInflater)
                 getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         ViewGroup profilesGroup = (ViewGroup) view.findViewById(R.id.profileIcons);
-        Map<Profile, Drawable> profileIcons = mCachedDevice.getProfileIcons();
-        for (Profile profile : profileIcons.keySet()) {
-            Drawable icon = profileIcons.get(profile);
-            inflater.inflate(R.layout.profile_icon_small, profilesGroup, true);
-            ImageView imageView =
-                    (ImageView) profilesGroup.getChildAt(profilesGroup.getChildCount() - 1);
-            imageView.setImageDrawable(icon);
-            boolean profileEnabled = mCachedDevice.isConnectedProfile(profile);
-            imageView.setAlpha(profileEnabled ? 255 : sDimAlpha);
+        for (LocalBluetoothProfile profile : mCachedDevice.getProfiles()) {
+            int iconResource = profile.getDrawableResource(mCachedDevice.getBtClass());
+            if (iconResource != 0) {
+                Drawable icon = getContext().getResources().getDrawable(iconResource);
+                inflater.inflate(R.layout.profile_icon_small, profilesGroup, true);
+                ImageView imageView =
+                        (ImageView) profilesGroup.getChildAt(profilesGroup.getChildCount() - 1);
+                imageView.setImageDrawable(icon);
+                boolean profileEnabled = mCachedDevice.isConnectedProfile(profile);
+                imageView.setAlpha(profileEnabled ? 255 : sDimAlpha);
+            }
         }
     }
 
     public void onClick(View v) {
         if (v == mDeviceSettings) {
-            if (mOnSettingsClickListener != null) mOnSettingsClickListener.onClick(v);
+            if (mOnSettingsClickListener != null) {
+                mOnSettingsClickListener.onClick(v);
+            }
         }
+    }
+
+    public boolean equals(Object o) {
+        if ((o == null) || !(o instanceof BluetoothDevicePreference)) {
+            return false;
+        }
+        return mCachedDevice.equals(
+                ((BluetoothDevicePreference) o).mCachedDevice);
+    }
+
+    public int hashCode() {
+        return mCachedDevice.hashCode();
     }
 
     @Override
@@ -173,7 +178,112 @@ public class BluetoothDevicePreference extends Preference implements
             return 1;
         }
 
-        return mCachedDevice.compareTo(((BluetoothDevicePreference) another).mCachedDevice);
+        return mCachedDevice
+                .compareTo(((BluetoothDevicePreference) another).mCachedDevice);
     }
 
+    void onClicked() {
+        int bondState = mCachedDevice.getBondState();
+
+        if (mCachedDevice.isConnected()) {
+            askDisconnect();
+        } else if (bondState == BluetoothDevice.BOND_BONDED) {
+            mCachedDevice.connect(true);
+        } else if (bondState == BluetoothDevice.BOND_NONE) {
+            pair();
+        }
+    }
+
+    // Show disconnect confirmation dialog for a device.
+    private void askDisconnect() {
+        Context context = getContext();
+        String name = mCachedDevice.getName();
+        if (TextUtils.isEmpty(name)) {
+            name = context.getString(R.string.bluetooth_device);
+        }
+        String message = context.getString(R.string.bluetooth_disconnect_blank, name);
+
+        DialogInterface.OnClickListener disconnectListener = new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int which) {
+                mCachedDevice.disconnect();
+            }
+        };
+
+        mDisconnectDialog = Utils.showDisconnectDialog(context,
+                mDisconnectDialog, disconnectListener, name, message);
+    }
+
+    private void pair() {
+        if (!mCachedDevice.startPairing()) {
+            Utils.showError(getContext(), mCachedDevice.getName(),
+                    R.string.bluetooth_pairing_error_message);
+        }
+    }
+
+    private int getConnectionSummary() {
+        final CachedBluetoothDevice cachedDevice = mCachedDevice;
+        final BluetoothDevice device = cachedDevice.getDevice();
+
+        // if any profiles are connected or busy, return that status
+        for (LocalBluetoothProfile profile : cachedDevice.getProfiles()) {
+            int connectionStatus = profile.getConnectionStatus(device);
+
+            if (connectionStatus != BluetoothProfile.STATE_DISCONNECTED) {
+                return Utils.getConnectionStateSummary(connectionStatus);
+            }
+        }
+
+        switch (cachedDevice.getBondState()) {
+            case BluetoothDevice.BOND_BONDED:
+                return R.string.bluetooth_paired;
+            case BluetoothDevice.BOND_BONDING:
+                return R.string.bluetooth_pairing;
+            case BluetoothDevice.BOND_NONE:
+                return R.string.bluetooth_not_connected;
+            default:
+                return 0;
+        }
+    }
+
+    private int getBtClassDrawable() {
+        BluetoothClass btClass = mCachedDevice.getBtClass();
+        if (btClass != null) {
+            switch (btClass.getMajorDeviceClass()) {
+                case BluetoothClass.Device.Major.COMPUTER:
+                    return R.drawable.ic_bt_laptop;
+
+                case BluetoothClass.Device.Major.PHONE:
+                    return R.drawable.ic_bt_cellphone;
+
+                case BluetoothClass.Device.Major.PERIPHERAL:
+                    return HidProfile.getHidClassDrawable(btClass);
+
+                case BluetoothClass.Device.Major.IMAGING:
+                    return R.drawable.ic_bt_imaging;
+
+                default:
+                    // unrecognized device class; continue
+            }
+        } else {
+            Log.w(TAG, "mBtClass is null");
+        }
+
+        List<LocalBluetoothProfile> profiles = mCachedDevice.getProfiles();
+        for (LocalBluetoothProfile profile : profiles) {
+            int resId = profile.getDrawableResource(btClass);
+            if (resId != 0) {
+                return resId;
+            }
+        }
+        if (btClass != null) {
+            if (btClass.doesClassMatch(BluetoothClass.PROFILE_A2DP)) {
+                return R.drawable.ic_bt_headphones_a2dp;
+
+            }
+            if (btClass.doesClassMatch(BluetoothClass.PROFILE_HEADSET)) {
+                return R.drawable.ic_bt_headset_hfp;
+            }
+        }
+        return 0;
+    }
 }

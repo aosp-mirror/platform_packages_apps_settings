@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2010 The Android Open Source Project
+ * Copyright (C) 2011 The Android Open Source Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,20 +16,14 @@
 
 package com.android.settings.bluetooth;
 
-import com.android.settings.R;
-
-import android.app.Activity;
-import android.os.Bundle;
-
 /**
- * Activity for Bluetooth device picker dialog. The device picker logic
- * is implemented in the {@link BluetoothSettings} fragment.
+ * BluetoothCallback provides a callback interface for the settings
+ * UI to receive events from {@link BluetoothEventManager}.
  */
-public final class DevicePickerActivity extends Activity {
-
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.bluetooth_device_picker);
-    }
+interface BluetoothCallback {
+    void onBluetoothStateChanged(int bluetoothState);
+    void onScanningStateChanged(boolean started);
+    void onDeviceAdded(CachedBluetoothDevice cachedDevice);
+    void onDeviceDeleted(CachedBluetoothDevice cachedDevice);
+    void onDeviceBondStateChanged(CachedBluetoothDevice cachedDevice, int bondState);
 }

@@ -35,8 +35,6 @@ import android.os.Environment;
 import android.preference.CheckBoxPreference;
 import android.preference.Preference;
 import android.preference.PreferenceScreen;
-import android.view.LayoutInflater;
-import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewParent;
 import android.webkit.WebView;
@@ -49,7 +47,6 @@ import java.util.Locale;
  * Displays preferences for Tethering.
  */
 public class TetherSettings extends SettingsPreferenceFragment {
-    private static final String TAG = "TetheringSettings";
 
     private static final String USB_TETHER_SETTINGS = "usb_tether_settings";
     private static final String ENABLE_WIFI_AP = "enable_wifi_ap";
@@ -66,8 +63,6 @@ public class TetherSettings extends SettingsPreferenceFragment {
     private WebView mView;
     private CheckBoxPreference mUsbTether;
 
-    private CheckBoxPreference mEnableWifiAp;
-    private PreferenceScreen mWifiApSettings;
     private WifiApEnabler mWifiApEnabler;
 
     private CheckBoxPreference mBluetoothTether;
@@ -95,9 +90,9 @@ public class TetherSettings extends SettingsPreferenceFragment {
                     BluetoothProfile.PAN);
         }
 
-
-        mEnableWifiAp = (CheckBoxPreference) findPreference(ENABLE_WIFI_AP);
-        mWifiApSettings = (PreferenceScreen) findPreference(WIFI_AP_SETTINGS);
+        CheckBoxPreference enableWifiAp =
+                (CheckBoxPreference) findPreference(ENABLE_WIFI_AP);
+        Preference wifiApSettings = findPreference(WIFI_AP_SETTINGS);
         mUsbTether = (CheckBoxPreference) findPreference(USB_TETHER_SETTINGS);
         mBluetoothTether = (CheckBoxPreference) findPreference(ENABLE_BLUETOOTH_TETHERING);
         mTetherHelp = (PreferenceScreen) findPreference(TETHERING_HELP);
@@ -118,8 +113,8 @@ public class TetherSettings extends SettingsPreferenceFragment {
         }
 
         if (!wifiAvailable) {
-            getPreferenceScreen().removePreference(mEnableWifiAp);
-            getPreferenceScreen().removePreference(mWifiApSettings);
+            getPreferenceScreen().removePreference(enableWifiAp);
+            getPreferenceScreen().removePreference(wifiApSettings);
         }
 
         if (!bluetoothAvailable) {
@@ -132,7 +127,7 @@ public class TetherSettings extends SettingsPreferenceFragment {
             }
         }
 
-        mWifiApEnabler = new WifiApEnabler(activity, mEnableWifiAp);
+        mWifiApEnabler = new WifiApEnabler(activity, enableWifiAp);
         mView = new WebView(activity);
     }
 
@@ -154,22 +149,22 @@ public class TetherSettings extends SettingsPreferenceFragment {
             // check for the full language + country resource, if not there, try just language
             final AssetManager am = getActivity().getAssets();
             String path = HELP_PATH.replace("%y", locale.getLanguage().toLowerCase());
-            path = path.replace("%z", "_"+locale.getCountry().toLowerCase());
+            path = path.replace("%z", '_'+locale.getCountry().toLowerCase());
             boolean useCountry = true;
             InputStream is = null;
             try {
                 is = am.open(path);
-            } catch (Exception e) {
+            } catch (Exception ignored) {
                 useCountry = false;
             } finally {
                 if (is != null) {
                     try {
                         is.close();
-                    } catch (Exception e) {}
+                    } catch (Exception ignored) {}
                 }
             }
             String url = HELP_URL.replace("%y", locale.getLanguage().toLowerCase());
-            url = url.replace("%z", (useCountry ? "_"+locale.getCountry().toLowerCase() : ""));
+            url = url.replace("%z", useCountry ? '_'+locale.getCountry().toLowerCase() : "");
             if ((mUsbRegexs.length != 0) && (mWifiRegexs.length == 0)) {
                 url = url.replace("%x", USB_HELP_MODIFIER);
             } else if ((mWifiRegexs.length != 0) && (mUsbRegexs.length == 0)) {
@@ -271,10 +266,8 @@ public class TetherSettings extends SettingsPreferenceFragment {
             String[] errored) {
         ConnectivityManager cm =
                 (ConnectivityManager)getSystemService(Context.CONNECTIVITY_SERVICE);
-        boolean usbTethered = false;
         boolean usbAvailable = false;
         int usbError = ConnectivityManager.TETHER_ERROR_NO_ERROR;
-        boolean usbErrored = false;
         boolean massStorageActive =
                 Environment.MEDIA_SHARED.equals(Environment.getExternalStorageState());
         for (String s : available) {
@@ -287,11 +280,13 @@ public class TetherSettings extends SettingsPreferenceFragment {
                 }
             }
         }
+        boolean usbTethered = false;
         for (String s : tethered) {
             for (String regex : mUsbRegexs) {
                 if (s.matches(regex)) usbTethered = true;
             }
         }
+        boolean usbErrored = false;
         for (String s: errored) {
             for (String regex : mUsbRegexs) {
                 if (s.matches(regex)) usbErrored = true;
@@ -329,25 +324,23 @@ public class TetherSettings extends SettingsPreferenceFragment {
             String[] errored) {
         ConnectivityManager cm =
                 (ConnectivityManager)getSystemService(Context.CONNECTIVITY_SERVICE);
-        boolean bluetoothTethered = false;
-        boolean bluetoothAvailable = false;
         int bluetoothError = ConnectivityManager.TETHER_ERROR_NO_ERROR;
-        boolean bluetoothErrored = false;
         for (String s : available) {
             for (String regex : mBluetoothRegexs) {
                 if (s.matches(regex)) {
-                    bluetoothAvailable = true;
                     if (bluetoothError == ConnectivityManager.TETHER_ERROR_NO_ERROR) {
                         bluetoothError = cm.getLastTetherError(s);
                     }
                 }
             }
         }
+        boolean bluetoothTethered = false;
         for (String s : tethered) {
             for (String regex : mBluetoothRegexs) {
                 if (s.matches(regex)) bluetoothTethered = true;
             }
         }
+        boolean bluetoothErrored = false;
         for (String s: errored) {
             for (String regex : mBluetoothRegexs) {
                 if (s.matches(regex)) bluetoothErrored = true;
@@ -458,7 +451,7 @@ public class TetherSettings extends SettingsPreferenceFragment {
         return super.onPreferenceTreeClick(screen, preference);
     }
 
-    private String findIface(String[] ifaces, String[] regexes) {
+    private static String findIface(String[] ifaces, String[] regexes) {
         for (String iface : ifaces) {
             for (String regex : regexes) {
                 if (iface.matches(regex)) {

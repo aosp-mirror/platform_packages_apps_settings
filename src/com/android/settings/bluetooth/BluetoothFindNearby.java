@@ -16,21 +16,18 @@
 
 package com.android.settings.bluetooth;
 
-import android.app.Activity;
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
-import android.util.Log;
 
 import com.android.settings.R;
 
 /**
  * Fragment to scan and show the discoverable devices.
  */
-public class BluetoothFindNearby extends DeviceListPreferenceFragment {
+public final class BluetoothFindNearby extends DeviceListPreferenceFragment {
 
-    private static final String TAG = "BluetoothFindNearby";
-
-    void addPreferencesForActivity(Activity activity) {
+    @Override
+    void addPreferencesForActivity() {
         addPreferencesFromResource(R.xml.device_picker);
     }
 
@@ -38,35 +35,37 @@ public class BluetoothFindNearby extends DeviceListPreferenceFragment {
     public void onResume() {
         super.onResume();
         if (mSelectedDevice != null) {
-            CachedBluetoothDevice device =
-                    mLocalManager.getCachedDeviceManager().findDevice(mSelectedDevice);
-            if (device.getBondState() == BluetoothDevice.BOND_BONDED) {
+            CachedBluetoothDeviceManager manager = mLocalManager.getCachedDeviceManager();
+            CachedBluetoothDevice device = manager.findDevice(mSelectedDevice);
+            if (device != null && device.getBondState() == BluetoothDevice.BOND_BONDED) {
                 // selected device was paired, so return from this screen
                 finish();
                 return;
             }
         }
-        mLocalManager.startScanning(true);
+        mLocalAdapter.startScanning(true);
     }
 
+    @Override
     void onDevicePreferenceClick(BluetoothDevicePreference btPreference) {
-        mLocalManager.stopScanning();
+        mLocalAdapter.stopScanning();
         super.onDevicePreferenceClick(btPreference);
     }
 
-    public void onDeviceBondStateChanged(CachedBluetoothDevice cachedDevice,
-            int bondState) {
+    public void onDeviceBondStateChanged(CachedBluetoothDevice
+            cachedDevice, int bondState) {
         if (bondState == BluetoothDevice.BOND_BONDED) {
             // return from scan screen after successful auto-pairing
             finish();
         }
     }
 
-    void onBluetoothStateChanged(int bluetoothState) {
+    @Override
+    public void onBluetoothStateChanged(int bluetoothState) {
         super.onBluetoothStateChanged(bluetoothState);
 
         if (bluetoothState == BluetoothAdapter.STATE_ON) {
-                mLocalManager.startScanning(false);
+                mLocalAdapter.startScanning(false);
         }
     }
 }

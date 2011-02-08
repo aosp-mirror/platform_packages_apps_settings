@@ -16,9 +16,6 @@
 
 package com.android.settings.bluetooth;
 
-import com.android.settings.bluetooth.LocalBluetoothProfileManager.Profile;
-import com.android.settings.R;
-
 import android.content.Context;
 import android.graphics.drawable.Drawable;
 import android.preference.Preference;
@@ -26,22 +23,24 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.ImageView;
 
+import com.android.settings.R;
+
 /**
  * BluetoothProfilePreference is the preference type used to display each profile for a
  * particular bluetooth device.
  */
-public class BluetoothProfilePreference extends Preference implements OnClickListener {
+final class BluetoothProfilePreference extends Preference implements OnClickListener {
 
-    private static final String TAG = "BluetoothProfilePreference";
+//    private static final String TAG = "BluetoothProfilePreference";
 
     private Drawable mProfileDrawable;
     private boolean mExpanded;
     private ImageView mProfileExpandView;
-    private final Profile mProfile;
+    private final LocalBluetoothProfile mProfile;
 
     private OnClickListener mOnExpandClickListener;
 
-    public BluetoothProfilePreference(Context context, Profile profile) {
+    BluetoothProfilePreference(Context context, LocalBluetoothProfile profile) {
         super(context);
 
         mProfile = profile;
@@ -75,14 +74,14 @@ public class BluetoothProfilePreference extends Preference implements OnClickLis
         btProfile.setImageDrawable(mProfileDrawable);
 
         mProfileExpandView = (ImageView) view.findViewById(R.id.profileExpand);
-        if (mProfile == Profile.PAN) {
-            mProfileExpandView.setVisibility(View.GONE);
-        } else {
+        if (mProfile.isAutoConnectable()) {
             mProfileExpandView.setOnClickListener(this);
             mProfileExpandView.setTag(mProfile);
             mProfileExpandView.setImageResource(mExpanded
                     ? com.android.internal.R.drawable.expander_open_holo_dark
                     : com.android.internal.R.drawable.expander_close_holo_dark);
+        } else {
+            mProfileExpandView.setVisibility(View.GONE);
         }
     }
 

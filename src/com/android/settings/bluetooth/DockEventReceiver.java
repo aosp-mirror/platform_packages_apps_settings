@@ -28,7 +28,7 @@ import android.content.Intent;
 import android.os.PowerManager;
 import android.util.Log;
 
-public class DockEventReceiver extends BroadcastReceiver {
+public final class DockEventReceiver extends BroadcastReceiver {
 
     private static final boolean DEBUG = DockService.DEBUG;
 
@@ -39,11 +39,9 @@ public class DockEventReceiver extends BroadcastReceiver {
 
     private static final int EXTRA_INVALID = -1234;
 
-    private static final Object mStartingServiceSync = new Object();
+    private static final Object sStartingServiceSync = new Object();
 
-    private static final long WAKELOCK_TIMEOUT = 5000;
-
-    private static PowerManager.WakeLock mStartingService;
+    private static PowerManager.WakeLock sStartingService;
 
     @Override
     public void onReceive(Context context, Intent intent) {
@@ -75,7 +73,7 @@ public class DockEventReceiver extends BroadcastReceiver {
                     beginStartingService(context, i);
                     break;
                 default:
-                    if (DEBUG) Log.e(TAG, "Unknown state");
+                    Log.e(TAG, "Unknown state: " + state);
                     break;
             }
         } else if (BluetoothHeadset.ACTION_CONNECTION_STATE_CHANGED.equals(intent.getAction()) ||
@@ -118,15 +116,15 @@ public class DockEventReceiver extends BroadcastReceiver {
      * Start the service to process the current event notifications, acquiring
      * the wake lock before returning to ensure that the service will run.
      */
-    public static void beginStartingService(Context context, Intent intent) {
-        synchronized (mStartingServiceSync) {
-            if (mStartingService == null) {
+    private static void beginStartingService(Context context, Intent intent) {
+        synchronized (sStartingServiceSync) {
+            if (sStartingService == null) {
                 PowerManager pm = (PowerManager) context.getSystemService(Context.POWER_SERVICE);
-                mStartingService = pm.newWakeLock(PowerManager.PARTIAL_WAKE_LOCK,
+                sStartingService = pm.newWakeLock(PowerManager.PARTIAL_WAKE_LOCK,
                         "StartingDockService");
             }
 
-            mStartingService.acquire(WAKELOCK_TIMEOUT);
+            sStartingService.acquire();
 
             if (context.startService(intent) == null) {
                 Log.e(TAG, "Can't start DockService");
@@ -139,10 +137,13 @@ public class DockEventReceiver extends BroadcastReceiver {
      * releasing the wake lock if the service is now stopping.
      */
     public static void finishStartingService(Service service, int startId) {
-        synchronized (mStartingServiceSync) {
-            if (mStartingService != null) {
-                if (DEBUG) Log.d(TAG, "stopSelf id = "+ startId);
-                service.stopSelfResult(startId);
+        synchronized (sStartingServiceSync) {
+            if (sStartingService != null) {
+                if (DEBUG) Log.d(TAG, "stopSelf id = " + startId);
+                if (service.stopSelfResult(startId)) {
+                    Log.d(TAG, "finishStartingService: stopping service");
+                    sStartingService.release();
+                }
             }
         }
     }

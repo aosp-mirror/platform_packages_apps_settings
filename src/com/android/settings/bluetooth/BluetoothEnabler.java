@@ -34,13 +34,14 @@ import android.widget.Toast;
  * preference. It turns on/off Bluetooth and ensures the summary of the
  * preference reflects the current state.
  */
-public class BluetoothEnabler implements Preference.OnPreferenceChangeListener {
+public final class BluetoothEnabler implements Preference.OnPreferenceChangeListener {
     private final Context mContext;
     private final CheckBoxPreference mCheckBox;
     private final CharSequence mOriginalSummary;
 
-    private final LocalBluetoothManager mLocalManager;
+    private final LocalBluetoothAdapter mLocalAdapter;
     private final IntentFilter mIntentFilter;
+
     private final BroadcastReceiver mReceiver = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
@@ -49,14 +50,15 @@ public class BluetoothEnabler implements Preference.OnPreferenceChangeListener {
         }
     };
 
-    public BluetoothEnabler(Context context, CheckBoxPreference checkBox) {
+    public BluetoothEnabler(Context context, LocalBluetoothAdapter adapter,
+            CheckBoxPreference checkBox) {
         mContext = context;
         mCheckBox = checkBox;
         mOriginalSummary = checkBox.getSummary();
         checkBox.setPersistent(false);
 
-        mLocalManager = LocalBluetoothManager.getInstance(context);
-        if (mLocalManager == null) {
+        mLocalAdapter = adapter;
+        if (adapter == null) {
             // Bluetooth is not supported
             checkBox.setEnabled(false);
         }
@@ -64,19 +66,19 @@ public class BluetoothEnabler implements Preference.OnPreferenceChangeListener {
     }
 
     public void resume() {
-        if (mLocalManager == null) {
+        if (mLocalAdapter == null) {
             return;
         }
 
         // Bluetooth state is not sticky, so set it manually
-        handleStateChanged(mLocalManager.getBluetoothState());
+        handleStateChanged(mLocalAdapter.getBluetoothState());
 
         mContext.registerReceiver(mReceiver, mIntentFilter);
         mCheckBox.setOnPreferenceChangeListener(this);
     }
 
     public void pause() {
-        if (mLocalManager == null) {
+        if (mLocalAdapter == null) {
             return;
         }
 
@@ -95,14 +97,14 @@ public class BluetoothEnabler implements Preference.OnPreferenceChangeListener {
             return false;
         }
 
-        mLocalManager.setBluetoothEnabled(enable);
+        mLocalAdapter.setBluetoothEnabled(enable);
         mCheckBox.setEnabled(false);
 
         // Don't update UI to opposite state until we're sure
         return false;
     }
 
-    /* package */ void handleStateChanged(int state) {
+    void handleStateChanged(int state) {
         switch (state) {
             case BluetoothAdapter.STATE_TURNING_ON:
                 mCheckBox.setSummary(R.string.wifi_starting);

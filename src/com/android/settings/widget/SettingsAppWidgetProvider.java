@@ -38,6 +38,7 @@ import android.provider.Settings;
 import android.util.Log;
 import android.widget.RemoteViews;
 import com.android.settings.R;
+import com.android.settings.bluetooth.LocalBluetoothAdapter;
 import com.android.settings.bluetooth.LocalBluetoothManager;
 
 /**
@@ -50,7 +51,7 @@ public class SettingsAppWidgetProvider extends AppWidgetProvider {
             new ComponentName("com.android.settings",
                     "com.android.settings.widget.SettingsAppWidgetProvider");
 
-    private static LocalBluetoothManager sLocalBluetoothManager = null;
+    private static LocalBluetoothAdapter sLocalBluetoothAdapter = null;
 
     private static final int BUTTON_WIFI = 0;
     private static final int BUTTON_BRIGHTNESS = 1;
@@ -411,18 +412,19 @@ public class SettingsAppWidgetProvider extends AppWidgetProvider {
 
         @Override
         public int getActualState(Context context) {
-            if (sLocalBluetoothManager == null) {
-                sLocalBluetoothManager = LocalBluetoothManager.getInstance(context);
-                if (sLocalBluetoothManager == null) {
+            if (sLocalBluetoothAdapter == null) {
+                LocalBluetoothManager manager = LocalBluetoothManager.getInstance(context);
+                if (manager == null) {
                     return STATE_UNKNOWN;  // On emulator?
                 }
+                sLocalBluetoothAdapter = manager.getBluetoothAdapter();
             }
-            return bluetoothStateToFiveState(sLocalBluetoothManager.getBluetoothState());
+            return bluetoothStateToFiveState(sLocalBluetoothAdapter.getBluetoothState());
         }
 
         @Override
         protected void requestStateChange(Context context, final boolean desiredState) {
-            if (sLocalBluetoothManager == null) {
+            if (sLocalBluetoothAdapter == null) {
                 Log.d(TAG, "No LocalBluetoothManager");
                 return;
             }
@@ -433,7 +435,7 @@ public class SettingsAppWidgetProvider extends AppWidgetProvider {
             new AsyncTask<Void, Void, Void>() {
                 @Override
                 protected Void doInBackground(Void... args) {
-                    sLocalBluetoothManager.setBluetoothEnabled(desiredState);
+                    sLocalBluetoothAdapter.setBluetoothEnabled(desiredState);
                     return null;
                 }
             }.execute();
@@ -584,7 +586,7 @@ public class SettingsAppWidgetProvider extends AppWidgetProvider {
     public void onUpdate(Context context, AppWidgetManager appWidgetManager,
             int[] appWidgetIds) {
         // Update each requested appWidgetId
-        RemoteViews view = buildUpdate(context, -1);
+        RemoteViews view = buildUpdate(context);
 
         for (int i = 0; i < appWidgetIds.length; i++) {
             appWidgetManager.updateAppWidget(appWidgetIds[i], view);
@@ -613,22 +615,22 @@ public class SettingsAppWidgetProvider extends AppWidgetProvider {
     /**
      * Load image for given widget and build {@link RemoteViews} for it.
      */
-    static RemoteViews buildUpdate(Context context, int appWidgetId) {
+    static RemoteViews buildUpdate(Context context) {
         RemoteViews views = new RemoteViews(context.getPackageName(),
                 R.layout.widget);
-        views.setOnClickPendingIntent(R.id.btn_wifi, getLaunchPendingIntent(context, appWidgetId,
+        views.setOnClickPendingIntent(R.id.btn_wifi, getLaunchPendingIntent(context,
                 BUTTON_WIFI));
         views.setOnClickPendingIntent(R.id.btn_brightness,
                 getLaunchPendingIntent(context,
-                        appWidgetId, BUTTON_BRIGHTNESS));
+                        BUTTON_BRIGHTNESS));
         views.setOnClickPendingIntent(R.id.btn_sync,
                 getLaunchPendingIntent(context,
-                        appWidgetId, BUTTON_SYNC));
+                        BUTTON_SYNC));
         views.setOnClickPendingIntent(R.id.btn_gps,
-                getLaunchPendingIntent(context, appWidgetId, BUTTON_GPS));
+                getLaunchPendingIntent(context, BUTTON_GPS));
         views.setOnClickPendingIntent(R.id.btn_bluetooth,
                 getLaunchPendingIntent(context,
-                        appWidgetId, BUTTON_BLUETOOTH));
+                        BUTTON_BLUETOOTH));
 
         updateButtons(views, context);
         return views;
@@ -640,7 +642,7 @@ public class SettingsAppWidgetProvider extends AppWidgetProvider {
      * @param context
      */
     public static void updateWidget(Context context) {
-        RemoteViews views = buildUpdate(context, -1);
+        RemoteViews views = buildUpdate(context);
         // Update specific list of appWidgetIds if given, otherwise default to all
         final AppWidgetManager gm = AppWidgetManager.getInstance(context);
         gm.updateAppWidget(THIS_APPWIDGET, views);
@@ -680,10 +682,9 @@ public class SettingsAppWidgetProvider extends AppWidgetProvider {
      * Creates PendingIntent to notify the widget of a button click.
      *
      * @param context
-     * @param appWidgetId
      * @return
      */
-    private static PendingIntent getLaunchPendingIntent(Context context, int appWidgetId,
+    private static PendingIntent getLaunchPendingIntent(Context context,
             int buttonId) {
         Intent launchIntent = new Intent();
         launchIntent.setClass(context, SettingsAppWidgetProvider.class);

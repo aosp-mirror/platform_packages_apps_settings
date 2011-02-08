@@ -16,119 +16,80 @@
 
 package com.android.settings.bluetooth;
 
-import android.bluetooth.BluetoothAdapter;
-import android.bluetooth.BluetoothClass;
 import android.bluetooth.BluetoothDevice;
-import android.util.Log;
-
-import com.android.settings.R;
-import com.android.settings.bluetooth.LocalBluetoothManager.Callback;
-import com.android.settings.bluetooth.LocalBluetoothProfileManager.Profile;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
-import java.util.Set;
 
 /**
  * CachedBluetoothDeviceManager manages the set of remote Bluetooth devices.
  */
-class CachedBluetoothDeviceManager {
-    private static final String TAG = "CachedBluetoothDeviceManager";
+final class CachedBluetoothDeviceManager {
+//    private static final String TAG = "CachedBluetoothDeviceManager";
 
-    final LocalBluetoothManager mLocalManager;
-    final List<Callback> mCallbacks;
+    private final List<CachedBluetoothDevice> mCachedDevices =
+            new ArrayList<CachedBluetoothDevice>();
 
-    final List<CachedBluetoothDevice> mCachedDevices = new ArrayList<CachedBluetoothDevice>();
-
-    public CachedBluetoothDeviceManager(LocalBluetoothManager localManager) {
-        mLocalManager = localManager;
-        mCallbacks = localManager.getCallbacks();
-    }
-
-    private synchronized boolean readPairedDevices() {
-        BluetoothAdapter adapter = mLocalManager.getBluetoothAdapter();
-        Set<BluetoothDevice> bondedDevices = adapter.getBondedDevices();
-        if (bondedDevices == null) return false;
-
-        boolean deviceAdded = false;
-        for (BluetoothDevice device : bondedDevices) {
-            CachedBluetoothDevice cachedDevice = findDevice(device);
-            if (cachedDevice == null) {
-                cachedDevice = new CachedBluetoothDevice(mLocalManager.getContext(), device);
-                mCachedDevices.add(cachedDevice);
-                dispatchDeviceAdded(cachedDevice);
-                deviceAdded = true;
-            }
-        }
-
-        return deviceAdded;
-    }
-
-    public synchronized List<CachedBluetoothDevice> getCachedDevicesCopy() {
+    public synchronized Collection<CachedBluetoothDevice> getCachedDevicesCopy() {
         return new ArrayList<CachedBluetoothDevice>(mCachedDevices);
     }
 
-    void onBluetoothStateChanged(boolean enabled) {
-        if (enabled) {
-            readPairedDevices();
-        }
-    }
-
-    public synchronized void onDeviceAppeared(BluetoothDevice device, short rssi,
-            BluetoothClass btClass, String name) {
-        boolean deviceAdded = false;
-
-        CachedBluetoothDevice cachedDevice = findDevice(device);
-        if (cachedDevice == null) {
-            cachedDevice = new CachedBluetoothDevice(mLocalManager.getContext(), device);
-            mCachedDevices.add(cachedDevice);
-            deviceAdded = true;
-        }
-        cachedDevice.setRssi(rssi);
-        cachedDevice.setBtClass(btClass);
-        cachedDevice.setName(name);
-        cachedDevice.setVisible(true);
-
-        if (deviceAdded) {
-            dispatchDeviceAdded(cachedDevice);
-        }
-    }
-
-    public synchronized void onDeviceDisappeared(BluetoothDevice device) {
-        CachedBluetoothDevice cachedDevice = findDevice(device);
-        if (cachedDevice == null) return;
-
+    public boolean onDeviceDisappeared(CachedBluetoothDevice cachedDevice) {
         cachedDevice.setVisible(false);
-        checkForDeviceRemoval(cachedDevice);
+        return checkForDeviceRemoval(cachedDevice);
     }
 
-    private void checkForDeviceRemoval(CachedBluetoothDevice cachedDevice) {
+    private boolean checkForDeviceRemoval(
+            CachedBluetoothDevice cachedDevice) {
         if (cachedDevice.getBondState() == BluetoothDevice.BOND_NONE &&
                 !cachedDevice.isVisible()) {
             // If device isn't paired, remove it altogether
             mCachedDevices.remove(cachedDevice);
-            dispatchDeviceDeleted(cachedDevice);
+            return true;  // dispatch device deleted
         }
+        return false;
     }
 
-    public synchronized void onDeviceNameUpdated(BluetoothDevice device) {
+    public void onDeviceNameUpdated(BluetoothDevice device) {
         CachedBluetoothDevice cachedDevice = findDevice(device);
         if (cachedDevice != null) {
             cachedDevice.refreshName();
         }
     }
 
-    public synchronized CachedBluetoothDevice findDevice(BluetoothDevice device) {
-
-        for (int i = mCachedDevices.size() - 1; i >= 0; i--) {
-            CachedBluetoothDevice cachedDevice = mCachedDevices.get(i);
-
+    /**
+     * Search for existing {@link CachedBluetoothDevice} or return null
+     * if this device isn't in the cache. Use {@link #addDevice}
+     * to create and return a new {@link CachedBluetoothDevice} for
+     * a newly discovered {@link BluetoothDevice}.
+     *
+     * @param device the address of the Bluetooth device
+     * @return the cached device object for this device, or null if it has
+     *   not been previously seen
+     */
+    CachedBluetoothDevice findDevice(BluetoothDevice device) {
+        for (CachedBluetoothDevice cachedDevice : mCachedDevices) {
             if (cachedDevice.getDevice().equals(device)) {
                 return cachedDevice;
             }
         }
-
         return null;
+    }
+
+    /**
+     * Create and return a new {@link CachedBluetoothDevice}. This assumes
+     * that {@link #findDevice} has already been called and returned null.
+     * @param device the address of the new Bluetooth device
+     * @return the newly created CachedBluetoothDevice object
+     */
+    CachedBluetoothDevice addDevice(LocalBluetoothAdapter adapter,
+            LocalBluetoothProfileManager profileManager,
+            BluetoothDevice device) {
+        CachedBluetoothDevice newDevice = new CachedBluetoothDevice(adapter, profileManager,
+                device);
+        mCachedDevices.add(newDevice);
+        return newDevice;
     }
 
     /**
@@ -139,122 +100,23 @@ class CachedBluetoothDeviceManager {
      */
     public String getName(BluetoothDevice device) {
         CachedBluetoothDevice cachedDevice = findDevice(device);
-        if (cachedDevice != null) return cachedDevice.getName();
+        if (cachedDevice != null) {
+            return cachedDevice.getName();
+        }
 
         String name = device.getName();
-        if (name != null) return name;
+        if (name != null) {
+            return name;
+        }
 
         return device.getAddress();
-    }
-
-    private void dispatchDeviceAdded(CachedBluetoothDevice cachedDevice) {
-        synchronized (mCallbacks) {
-            for (Callback callback : mCallbacks) {
-                callback.onDeviceAdded(cachedDevice);
-            }
-        }
-
-        // TODO: divider between prev paired/connected and scanned
-    }
-
-    private void dispatchDeviceDeleted(CachedBluetoothDevice cachedDevice) {
-        synchronized (mCallbacks) {
-            for (Callback callback : mCallbacks) {
-                callback.onDeviceDeleted(cachedDevice);
-            }
-        }
-    }
-
-    private void dispatchDeviceBondStateChanged(
-            CachedBluetoothDevice cachedDevice, int bondState) {
-        synchronized (mCallbacks) {
-            for (Callback callback : mCallbacks) {
-                callback.onDeviceBondStateChanged(cachedDevice, bondState);
-            }
-        }
-    }
-
-    public synchronized void onBondingStateChanged(BluetoothDevice device, int bondState) {
-        CachedBluetoothDevice cachedDevice = findDevice(device);
-        if (cachedDevice == null) {
-            if (!readPairedDevices()) {
-                Log.e(TAG, "Got bonding state changed for " + device +
-                        ", but we have no record of that device.");
-                return;
-            }
-            cachedDevice = findDevice(device);
-            if (cachedDevice == null) {
-                Log.e(TAG, "Got bonding state changed for " + device +
-                        ", but device not added in cache.");
-                return;
-            }
-        }
-
-        dispatchDeviceBondStateChanged(cachedDevice, bondState);
-        cachedDevice.onBondingStateChanged(bondState);
-    }
-
-    /**
-     * Called when we have reached the un-bond state.
-     *
-     * @param device The remote device.
-     * @param reason The reason, one of the error reasons from
-     *            BluetoothDevice.UNBOND_REASON_*
-     */
-    public synchronized void showUnbondMessage(BluetoothDevice device, int reason) {
-        int errorMsg;
-
-        switch(reason) {
-        case BluetoothDevice.UNBOND_REASON_AUTH_FAILED:
-            errorMsg = R.string.bluetooth_pairing_pin_error_message;
-            mLocalManager.showError(device, errorMsg);
-            break;
-        case BluetoothDevice.UNBOND_REASON_AUTH_REJECTED:
-            errorMsg = R.string.bluetooth_pairing_rejected_error_message;
-            mLocalManager.showError(device, errorMsg);
-            break;
-        case BluetoothDevice.UNBOND_REASON_REMOTE_DEVICE_DOWN:
-            errorMsg = R.string.bluetooth_pairing_device_down_error_message;
-            mLocalManager.showError(device, errorMsg);
-            break;
-        case BluetoothDevice.UNBOND_REASON_DISCOVERY_IN_PROGRESS:
-        case BluetoothDevice.UNBOND_REASON_AUTH_TIMEOUT:
-        case BluetoothDevice.UNBOND_REASON_REPEATED_ATTEMPTS:
-        case BluetoothDevice.UNBOND_REASON_REMOTE_AUTH_CANCELED:
-            errorMsg = R.string.bluetooth_pairing_error_message;
-            mLocalManager.showError(device, errorMsg);
-            break;
-        default:
-            Log.w(TAG, "showUnbondMessage: Not displaying any message for reason:" + reason);
-            break;
-        }
-    }
-
-    public synchronized void onProfileStateChanged(BluetoothDevice device, Profile profile,
-            int newProfileState) {
-        CachedBluetoothDevice cachedDevice = findDevice(device);
-        if (cachedDevice == null) return;
-
-        cachedDevice.onProfileStateChanged(profile, newProfileState);
-        cachedDevice.refresh();
-    }
-
-    public synchronized void onConnectingError(BluetoothDevice device) {
-        CachedBluetoothDevice cachedDevice = findDevice(device);
-        if (cachedDevice == null) return;
-
-        /*
-         * Go through the device's delegate so we don't spam the user with
-         * errors connecting to different profiles, and instead make sure the
-         * user sees a single error for his single 'connect' action.
-         */
-        cachedDevice.showConnectingError();
     }
 
     public synchronized void onScanningStateChanged(boolean started) {
         if (!started) return;
 
         // If starting a new scan, clear old visibility
+        // Iterate in reverse order since devices may be removed.
         for (int i = mCachedDevices.size() - 1; i >= 0; i--) {
             CachedBluetoothDevice cachedDevice = mCachedDevices.get(i);
             cachedDevice.setVisible(false);
