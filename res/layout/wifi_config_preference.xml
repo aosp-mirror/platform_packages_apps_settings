@@ -184,84 +184,6 @@
                   android:text="@string/wifi_show_password" />
     </LinearLayout>  <!-- android:id="@+id/security_fields" -->
 
-    <LinearLayout android:id="@+id/ip_fields"
-                  android:layout_width="fill_parent"
-                  android:layout_height="wrap_content"
-                  android:orientation="vertical"
-                  android:visibility="gone">
-
-        <TextView
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/wifi_ip_settings" />
-
-        <Spinner android:id="@+id/ip_settings"
-                 android:layout_width="fill_parent"
-                 android:layout_height="wrap_content"
-                 android:prompt="@string/wifi_ip_settings"
-                 android:entries="@array/wifi_ip_settings" />
-    </LinearLayout>
-
-    <LinearLayout android:id="@+id/staticip"
-                  android:layout_width="fill_parent"
-                  android:layout_height="wrap_content"
-                  android:orientation="vertical"
-                  android:visibility="gone">
-        <TextView
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/wifi_ip_address" />
-
-        <EditText android:id="@+id/ipaddress"
-                  android:layout_width="fill_parent"
-                  android:layout_height="wrap_content"
-                  android:singleLine="true"
-                  android:inputType="textNoSuggestions" />
-
-        <TextView
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/wifi_gateway" />
-
-        <EditText android:id="@+id/gateway"
-                  android:layout_width="fill_parent"
-                  android:layout_height="wrap_content"
-                  android:singleLine="true"
-                  android:inputType="textNoSuggestions" />
-
-        <TextView
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/wifi_network_prefix_length" />
-
-        <EditText android:id="@+id/network_prefix_length"
-                  android:layout_width="fill_parent"
-                  android:layout_height="wrap_content"
-                  android:singleLine="true"
-                  android:inputType="textNoSuggestions" />
-
-        <TextView
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/wifi_dns1" />
-
-        <EditText android:id="@+id/dns1"
-                  android:layout_width="fill_parent"
-                  android:layout_height="wrap_content"
-                  android:singleLine="true"
-                  android:inputType="textNoSuggestions" />
-
-        <TextView
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/wifi_dns2" />
-
-        <EditText android:id="@+id/dns2"
-                  android:layout_width="fill_parent"
-                  android:layout_height="wrap_content"
-                  android:singleLine="true"
-                  android:inputType="textNoSuggestions" />
-
         <LinearLayout android:id="@+id/proxy_settings_fields"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
@@ -277,6 +199,23 @@
                     android:layout_height="wrap_content"
                     android:prompt="@string/proxy_settings_title"
                     android:entries="@array/wifi_proxy_settings" />
+        </LinearLayout>
+
+        <LinearLayout android:id="@+id/proxy_warning_limited_support"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:visibility="gone">
+
+            <!--  Dummy to enable right-justification of warning -->
+            <TextView
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/proxy_warning_limited_support" />
         </LinearLayout>
 
         <LinearLayout android:id="@+id/proxy_fields"
@@ -315,6 +254,84 @@
                     android:inputType="textNoSuggestions" />
 
         </LinearLayout>
+
+        <LinearLayout android:id="@+id/ip_fields"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:visibility="gone">
+
+            <TextView
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/wifi_ip_settings" />
+
+            <Spinner android:id="@+id/ip_settings"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:prompt="@string/wifi_ip_settings"
+                android:entries="@array/wifi_ip_settings" />
+        </LinearLayout>
+
+        <LinearLayout android:id="@+id/staticip"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:visibility="gone">
+            <TextView
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/wifi_ip_address" />
+
+            <EditText android:id="@+id/ipaddress"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:singleLine="true"
+                android:inputType="textNoSuggestions" />
+
+            <TextView
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/wifi_gateway" />
+
+            <EditText android:id="@+id/gateway"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:singleLine="true"
+                android:inputType="textNoSuggestions" />
+
+            <TextView
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/wifi_network_prefix_length" />
+
+            <EditText android:id="@+id/network_prefix_length"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:singleLine="true"
+                android:inputType="textNoSuggestions" />
+
+            <TextView
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/wifi_dns1" />
+
+            <EditText android:id="@+id/dns1"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:singleLine="true"
+                android:inputType="textNoSuggestions" />
+
+            <TextView
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/wifi_dns2" />
+
+            <EditText android:id="@+id/dns2"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:singleLine="true"
+                android:inputType="textNoSuggestions" />
     </LinearLayout>
 
 </LinearLayout>
