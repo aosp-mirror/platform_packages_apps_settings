@@ -50,7 +50,7 @@ import java.util.EnumMap;
  */
 public class WifiSettingsForSetupWizardXL extends Activity implements OnClickListener {
     private static final String TAG = "SetupWizard";
-    private static final boolean DEBUG = false;
+    private static final boolean DEBUG = true;
 
     private static final EnumMap<DetailedState, DetailedState> stateMap =
             new EnumMap<DetailedState, DetailedState>(DetailedState.class);
@@ -100,12 +100,19 @@ public class WifiSettingsForSetupWizardXL extends Activity implements OnClickLis
 
     private Button mConnectButton;
 
+    /**
+     * View enclosing {@link WifiSettings}.
+     */
+    private View mWifiSettingsFragmentLayout;
     private View mConnectingStatusLayout;
     private TextView mConnectingStatusView;
 
-    // true when a user already pressed "Connect" button and waiting for connection.
-    // Also true when the device is already connected to a wifi network on launch.
-    private boolean mAfterConnectAction;
+    private static final int SCREEN_STATE_DISCONNECTED = 0;
+    private static final int SCREEN_STATE_EDITING = 1;
+    private static final int SCREEN_STATE_CONNECTING = 2;
+    private static final int SCREEN_STATE_CONNECTED = 3;
+
+    private int mScreenState = SCREEN_STATE_DISCONNECTED;
 
     private WifiConfigUiForSetupWizardXL mWifiConfig;
 
@@ -156,8 +163,10 @@ public class WifiSettingsForSetupWizardXL extends Activity implements OnClickLis
     }
 
     public void setup() {
-        final View layoutRoot = findViewById(R.id.layout_root);
-        layoutRoot.setSystemUiVisibility(View.STATUS_BAR_DISABLE_BACK);
+        if (getIntent().getBooleanExtra("firstRun", false)) {
+            final View layoutRoot = findViewById(R.id.layout_root);
+            layoutRoot.setSystemUiVisibility(View.STATUS_BAR_DISABLE_BACK);
+        }
 
         mTitleView = (TextView)findViewById(R.id.wifi_setup_title);
         mProgressBar = (ProgressBar)findViewById(R.id.scanning_progress_bar);
@@ -179,6 +188,7 @@ public class WifiSettingsForSetupWizardXL extends Activity implements OnClickLis
         mTopPadding = findViewById(R.id.top_padding);
         mWifiConfigPadding = findViewById(R.id.wifi_config_padding);
 
+        mWifiSettingsFragmentLayout = findViewById(R.id.wifi_settings_fragment_layout);
         mConnectingStatusLayout = findViewById(R.id.connecting_status_layout);
         mConnectingStatusView = (TextView) findViewById(R.id.connecting_status);
 
@@ -256,42 +266,26 @@ public class WifiSettingsForSetupWizardXL extends Activity implements OnClickLis
             break;
         }
         case CONNECTING: {
-            showConnectingStatus();
+            if (mScreenState != SCREEN_STATE_DISCONNECTED &&
+                    mScreenState != SCREEN_STATE_CONNECTED) {
+                showConnectingState();
+            }
             break;
         }
         case CONNECTED: {
-            hideSoftwareKeyboard();
-            setPaddingVisibility(View.VISIBLE);
-
-            // If the device is already connected to a wifi without users' "Connect" request,
-            // this can be false here. We want to treat it as "after connect action".
-            mAfterConnectAction = true;
-
-            trySetBackground(R.drawable.setups_bg_complete);
-
-            mProgressBar.setIndeterminate(false);
-            mProgressBar.setProgress(2);
-
-            showConnectedTitle();
-            mConnectingStatusView.setText(R.string.wifi_setup_description_connected);
-            mConnectButton.setVisibility(View.GONE);
-            mAddNetworkButton.setVisibility(View.GONE);
-            mRefreshButton.setVisibility(View.GONE);
-            mBackButton.setVisibility(View.VISIBLE);
-            mBackButton.setText(R.string.wifi_setup_back);
-            mSkipOrNextButton.setVisibility(View.VISIBLE);
-            mSkipOrNextButton.setEnabled(true);
-            mHandler.removeCallbacks(mSkipButtonEnabler);
+            showConnectedState();
             break;
         }
         default:  // DISCONNECTED, FAILED
-            showDisconnectedStatus(Summary.get(this, state));
+            if (mScreenState != SCREEN_STATE_CONNECTED) {
+                showDisconnectedState(Summary.get(this, state));
+            }
             break;
         }
         mPreviousState = state;
     }
 
-    private void showDisconnectedStatus(String stateString) {
+    private void showDisconnectedState(String stateString) {
         mProgressBar.setIndeterminate(false);
         mProgressBar.setProgress(0);
 
@@ -299,7 +293,9 @@ public class WifiSettingsForSetupWizardXL extends Activity implements OnClickLis
         mRefreshButton.setEnabled(true);
     }
 
-    private void showConnectingStatus() {
+    private void showConnectingState() {
+        mScreenState = SCREEN_STATE_CONNECTING;
+
         mBackButton.setVisibility(View.VISIBLE);
         // We save this title and show it when authentication failed.
         mEditingTitle = mTitleView.getText();
@@ -307,11 +303,37 @@ public class WifiSettingsForSetupWizardXL extends Activity implements OnClickLis
         mProgressBar.setIndeterminate(false);
         mProgressBar.setProgress(1);
 
-        // We may enter "Connecting" status during editing password again (if the Wifi module
-        // tries to (re)connect a network.)
-        if (mAfterConnectAction) {
-            setPaddingVisibility(View.VISIBLE);
-        }
+        setPaddingVisibility(View.VISIBLE);
+    }
+
+    private void showConnectedState() {
+        // Once we show "connected" screen, we won't change it even when the device becomes
+        // disconnected afterwards. We keep the state unless a user explicitly cancel it
+        // (by pressing "back" button).
+        mScreenState = SCREEN_STATE_CONNECTED;
+
+        hideSoftwareKeyboard();
+        setPaddingVisibility(View.VISIBLE);
+
+        trySetBackground(R.drawable.setups_bg_complete);
+
+        mProgressBar.setIndeterminate(false);
+        mProgressBar.setProgress(2);
+
+        showConnectedTitle();
+
+        mWifiSettingsFragmentLayout.setVisibility(View.GONE);
+        mConnectingStatusLayout.setVisibility(View.VISIBLE);
+
+        mConnectingStatusView.setText(R.string.wifi_setup_description_connected);
+        mConnectButton.setVisibility(View.GONE);
+        mAddNetworkButton.setVisibility(View.GONE);
+        mRefreshButton.setVisibility(View.GONE);
+        mBackButton.setVisibility(View.VISIBLE);
+        mBackButton.setText(R.string.wifi_setup_back);
+        mSkipOrNextButton.setVisibility(View.VISIBLE);
+        mSkipOrNextButton.setEnabled(true);
+        mHandler.removeCallbacks(mSkipButtonEnabler);
     }
 
     private void showDefaultTitle() {
@@ -394,7 +416,7 @@ public class WifiSettingsForSetupWizardXL extends Activity implements OnClickLis
         // We don't want to keep scanning Wi-Fi networks during users' configuring one network.
         mWifiSettings.pauseWifiScan();
 
-        findViewById(R.id.wifi_setup).setVisibility(View.GONE);
+        mWifiSettingsFragmentLayout.setVisibility(View.GONE);
         mConnectingStatusLayout.setVisibility(View.GONE);
         final ViewGroup parent = (ViewGroup)findViewById(R.id.wifi_config_ui);
         parent.setVisibility(View.VISIBLE);
@@ -405,9 +427,6 @@ public class WifiSettingsForSetupWizardXL extends Activity implements OnClickLis
         mConnectButton.setTag(null);
         if (selectedAccessPoint == null) {  // "Add network" flow
             showAddNetworkTitle();
-            if (mWifiConfig != null) {
-                mWifiConfig.getView().findViewById(R.id.wifi_general_info).setVisibility(View.GONE);
-            }
             mConnectButton.setVisibility(View.VISIBLE);
             mConnectButton.setTag(CONNECT_BUTTON_TAG_ADD_NETWORK);
 
@@ -422,8 +441,7 @@ public class WifiSettingsForSetupWizardXL extends Activity implements OnClickLis
             showEditingTitle();
             showEditingButtonState();
             if (selectedAccessPoint.security == AccessPoint.SECURITY_EAP) {
-                mConnectButton.setVisibility(View.GONE);
-                mBackButton.setText(R.string.wifi_setup_back);
+                onEapNetworkSelected();
             } else {
                 mConnectButton.setVisibility(View.VISIBLE);
 
@@ -436,6 +454,47 @@ public class WifiSettingsForSetupWizardXL extends Activity implements OnClickLis
         }
     }
 
+    /**
+     * Called before security fields are correctly set by WifiConfigController.
+     *
+     * @param view security field view
+     * @param accessPointSecurity type of security. e.g. AccessPoint.SECURITY_NONE
+     * @return true when it is ok for the caller to init security fields. false when
+     * all security fields are managed by this method, and thus the caller shouldn't touch them.
+     */
+    /* package */ boolean initSecurityFields(View view, int accessPointSecurity) {
+        // Reset all states tweaked below.
+        view.findViewById(R.id.eap_not_supported).setVisibility(View.GONE);
+        view.findViewById(R.id.eap_not_supported_for_add_network).setVisibility(View.GONE);
+        view.findViewById(R.id.ssid_text).setVisibility(View.VISIBLE);
+        view.findViewById(R.id.ssid_layout).setVisibility(View.VISIBLE);
+
+        if (accessPointSecurity == AccessPoint.SECURITY_EAP) {
+            hideSoftwareKeyboard();
+
+            // In SetupWizard for XLarge screen, we don't have enough space for showing
+            // configurations needed for EAP. We instead disable the whole feature there and let
+            // users configure those networks after the setup.
+            if (view.findViewById(R.id.type).getVisibility() == View.VISIBLE) {
+                view.findViewById(R.id.eap_not_supported_for_add_network)
+                .setVisibility(View.VISIBLE);
+            } else {
+                view.findViewById(R.id.eap_not_supported).setVisibility(View.VISIBLE);
+            }
+            view.findViewById(R.id.security_fields).setVisibility(View.GONE);
+            view.findViewById(R.id.ssid_text).setVisibility(View.GONE);
+            view.findViewById(R.id.ssid_layout).setVisibility(View.GONE);
+            onEapNetworkSelected();
+            return false;
+        }
+        return true;
+    }
+
+    /* package */ void onEapNetworkSelected() {
+        mConnectButton.setVisibility(View.GONE);
+        mBackButton.setText(R.string.wifi_setup_back);
+    }
+
     private void showEditingButtonState() {
         mSkipOrNextButton.setVisibility(View.GONE);
         mAddNetworkButton.setVisibility(View.GONE);
@@ -445,7 +504,7 @@ public class WifiSettingsForSetupWizardXL extends Activity implements OnClickLis
 
     // May be called when user press "connect" button in WifiDialog
     /* package */ void onConnectButtonPressed() {
-        mAfterConnectAction = true;
+        mScreenState = SCREEN_STATE_CONNECTING;
 
         trySetBackground(R.drawable.setups_bg_wifi);
 
@@ -455,7 +514,7 @@ public class WifiSettingsForSetupWizardXL extends Activity implements OnClickLis
         // and the user still sees "not connected" message for a while, which looks strange.
         // We instead manually show "connecting" message before the system gets actual
         // "connecting" message from Wi-Fi module.
-        showConnectingStatus();
+        showConnectingState();
 
         // Might be better to delay showing this button.
         mBackButton.setVisibility(View.VISIBLE);
@@ -497,9 +556,9 @@ public class WifiSettingsForSetupWizardXL extends Activity implements OnClickLis
     private void onBackButtonPressed() {
         trySetBackground(R.drawable.setups_bg_default);
 
-        if (mAfterConnectAction) {
+        if (mScreenState == SCREEN_STATE_CONNECTING || mScreenState == SCREEN_STATE_CONNECTED) {
             if (DEBUG) Log.d(TAG, "Back button pressed after connect action.");
-            mAfterConnectAction = false;
+            mScreenState = SCREEN_STATE_DISCONNECTED;
 
             // When a user press "Back" button after pressing "Connect" button, we want to cancel
             // the "Connect" request and refresh the whole wifi status.
@@ -507,6 +566,10 @@ public class WifiSettingsForSetupWizardXL extends Activity implements OnClickLis
 
             mSkipOrNextButton.setEnabled(true);
             changeNextButtonState(false);  // Skip
+
+            // Wifi list becomes empty for a moment. We show "scanning" effect to a user so that
+            // he/she won't be astonished there. This stops once the scan finishes.
+            mProgressBar.setIndeterminate(true);
 
             refreshAccessPoints(true);
         } else { // During user's Wifi configuration.
@@ -519,7 +582,7 @@ public class WifiSettingsForSetupWizardXL extends Activity implements OnClickLis
             mSkipOrNextButton.setEnabled(true);
         }
 
-        findViewById(R.id.wifi_setup).setVisibility(View.VISIBLE);
+        mWifiSettingsFragmentLayout.setVisibility(View.VISIBLE);
         mConnectingStatusLayout.setVisibility(View.GONE);
         final ViewGroup parent = (ViewGroup)findViewById(R.id.wifi_config_ui);
         parent.removeAllViews();
@@ -564,7 +627,7 @@ public class WifiSettingsForSetupWizardXL extends Activity implements OnClickLis
                 ((Integer)tag == CONNECT_BUTTON_TAG_ADD_NETWORK)) {
             // In "Add network" flow, we won't get DetaledState available for changing ProgressBar
             // state. Instead we manually show previous status here.
-            showDisconnectedStatus(Summary.get(this, mPreviousState));
+            showDisconnectedState(Summary.get(this, mPreviousState));
         } else {
             showScanningStatus();
         }
@@ -592,7 +655,8 @@ public class WifiSettingsForSetupWizardXL extends Activity implements OnClickLis
      * Called once when Authentication failed.
      */
     private void onAuthenticationFailure() {
-        mAfterConnectAction = false;
+        mScreenState = SCREEN_STATE_EDITING;
+
         mSkipOrNextButton.setVisibility(View.GONE);
         mConnectButton.setVisibility(View.VISIBLE);
         mConnectButton.setEnabled(true);

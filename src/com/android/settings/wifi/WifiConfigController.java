@@ -159,7 +159,7 @@ public class WifiConfigController implements TextWatcher,
             mSsidView.addTextChangedListener(this);
             mSecuritySpinner = ((Spinner) mView.findViewById(R.id.security));
             mSecuritySpinner.setOnItemSelectedListener(this);
-            if (context instanceof WifiSettingsForSetupWizardXL) {
+            if (mInXlSetupWizard) {
                 // We want custom layout. The content must be same as the other cases.
                 mSecuritySpinner.setAdapter(
                         new ArrayAdapter<String>(context, R.layout.wifi_setup_custom_list_item_1,
@@ -485,14 +485,14 @@ public class WifiConfigController implements TextWatcher,
     }
 
     private void showSecurityFields() {
+        if (mInXlSetupWizard) {
+            // Note: XL SetupWizard won't hide "EAP" settings here.
+            if (!((WifiSettingsForSetupWizardXL)mConfigUi.getContext()).initSecurityFields(mView,
+                        mAccessPointSecurity)) {
+                return;
+            }
+        }
         if (mAccessPointSecurity == AccessPoint.SECURITY_NONE) {
-            mView.findViewById(R.id.security_fields).setVisibility(View.GONE);
-            return;
-        } else if (mAccessPointSecurity == AccessPoint.SECURITY_EAP && mInXlSetupWizard) {
-            // In SetupWizard for XLarge screen, we don't have enough space for showing
-            // configurations needed for EAP. We instead disable the whole feature there and let
-            // users configure those networks after the setup.
-            mView.findViewById(R.id.eap_not_supported).setVisibility(View.VISIBLE);
             mView.findViewById(R.id.security_fields).setVisibility(View.GONE);
             return;
         }
