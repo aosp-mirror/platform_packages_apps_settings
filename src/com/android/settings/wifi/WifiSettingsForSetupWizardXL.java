@@ -44,6 +44,7 @@ import android.widget.TextView;
 
 import java.util.Collection;
 import java.util.EnumMap;
+import java.util.List;
 
 /**
  * WifiSetings Activity specific for SetupWizard with X-Large screen size.
@@ -570,6 +571,17 @@ public class WifiSettingsForSetupWizardXL extends Activity implements OnClickLis
             // Wifi list becomes empty for a moment. We show "scanning" effect to a user so that
             // he/she won't be astonished there. This stops once the scan finishes.
             mProgressBar.setIndeterminate(true);
+
+            // Remembered networks may be re-used during SetupWizard, which confuse users.
+            // We force the module to forget them to reduce UX complexity
+            final List<WifiConfiguration> configs = mWifiManager.getConfiguredNetworks();
+            for (WifiConfiguration config : configs) {
+                if (DEBUG) {
+                    Log.d(TAG, String.format("forgeting Wi-Fi network \"%s\" (id: %d)",
+                            config.SSID, config.networkId));
+                }
+                mWifiManager.forgetNetwork(config.networkId);
+            }
 
             refreshAccessPoints(true);
         } else { // During user's Wifi configuration.
