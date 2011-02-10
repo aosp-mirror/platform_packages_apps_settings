@@ -95,6 +95,8 @@ public class DateTimeSettingsSetupWizard extends Activity
         mAutoTimeZoneButton.setText(autoTimeZoneEnabled ? R.string.zone_auto_summaryOn :
                 R.string.zone_auto_summaryOff);*/
 
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_SENSOR_LANDSCAPE);
+
         final TimeZone tz = TimeZone.getDefault();
         mSelectedTimeZone = tz;
         mTimeZoneButton = (Button)findViewById(R.id.time_zone_button);
