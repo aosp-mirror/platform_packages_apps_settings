@@ -25,6 +25,7 @@ import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.graphics.Rect;
 import android.inputmethodservice.KeyboardView;
 import android.os.Bundle;
 import android.os.Handler;
@@ -35,11 +36,14 @@ import android.os.ServiceManager;
 import android.os.SystemProperties;
 import android.os.storage.IMountService;
 import android.text.TextUtils;
+import android.util.AttributeSet;
 import android.util.Log;
 import android.view.KeyEvent;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.inputmethod.EditorInfo;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ProgressBar;
@@ -79,6 +83,38 @@ public class CryptKeeper extends Activity implements TextView.OnEditorActionList
             setContentView(R.layout.crypt_keeper_blank);
         }
     }
+
+    // Use a custom EditText to prevent the input method from showing.
+    public static class CryptEditText extends EditText {
+        InputMethodManager imm;
+
+        public CryptEditText(Context context, AttributeSet attrs) {
+            super(context, attrs);
+            imm = ((InputMethodManager) getContext().
+                    getSystemService(Context.INPUT_METHOD_SERVICE));
+        }
+
+        @Override
+        protected void onFocusChanged(boolean focused, int direction, Rect previouslyFocusedRect) {
+            super.onFocusChanged(focused, direction, previouslyFocusedRect);
+
+            if (focused && imm != null && imm.isActive(this)) {
+                imm.hideSoftInputFromWindow(getApplicationWindowToken(), 0);
+            }
+        }
+
+        @Override
+        public boolean onTouchEvent(MotionEvent event) {
+            boolean handled = super.onTouchEvent(event);
+
+            if (imm != null && imm.isActive(this)) {
+                imm.hideSoftInputFromWindow(getApplicationWindowToken(), 0);
+            }
+
+            return handled;
+        }
+    }
+
 
     private Handler mHandler = new Handler() {
         @Override
