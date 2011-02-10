@@ -89,6 +89,7 @@ public class WifiSettingsForSetupWizardXL extends Activity implements OnClickLis
     private CharSequence mEditingTitle;
 
     private ProgressBar mProgressBar;
+    private View mTopDividerNoProgress;
     private WifiSettings mWifiSettings;
 
     private Button mAddNetworkButton;
@@ -171,8 +172,11 @@ public class WifiSettingsForSetupWizardXL extends Activity implements OnClickLis
         mTitleView = (TextView)findViewById(R.id.wifi_setup_title);
         mProgressBar = (ProgressBar)findViewById(R.id.scanning_progress_bar);
         mProgressBar.setMax(2);
+        mTopDividerNoProgress = findViewById(R.id.top_divider_no_progress);
 
+        mProgressBar.setVisibility(View.VISIBLE);
         mProgressBar.setIndeterminate(true);
+        mTopDividerNoProgress.setVisibility(View.GONE);
 
         mAddNetworkButton = (Button)findViewById(R.id.wifi_setup_add_network);
         mAddNetworkButton.setOnClickListener(this);
@@ -258,10 +262,14 @@ public class WifiSettingsForSetupWizardXL extends Activity implements OnClickLis
             // Let users know the device is working correctly though currently there's
             // no visible network on the list.
             if (mWifiSettings.getAccessPointsCount() == 0) {
+                mProgressBar.setVisibility(View.VISIBLE);
                 mProgressBar.setIndeterminate(true);
+                mTopDividerNoProgress.setVisibility(View.GONE);
             } else {
                 // Users already connected to a network, or see available networks.
+                mProgressBar.setVisibility(View.GONE);
                 mProgressBar.setIndeterminate(false);
+                mTopDividerNoProgress.setVisibility(View.VISIBLE);
             }
             break;
         }
@@ -286,8 +294,10 @@ public class WifiSettingsForSetupWizardXL extends Activity implements OnClickLis
     }
 
     private void showDisconnectedState(String stateString) {
+        mProgressBar.setVisibility(View.GONE);
         mProgressBar.setIndeterminate(false);
         mProgressBar.setProgress(0);
+        mTopDividerNoProgress.setVisibility(View.VISIBLE);
 
         mAddNetworkButton.setEnabled(true);
         mRefreshButton.setEnabled(true);
@@ -300,8 +310,10 @@ public class WifiSettingsForSetupWizardXL extends Activity implements OnClickLis
         // We save this title and show it when authentication failed.
         mEditingTitle = mTitleView.getText();
         showConnectingTitle();
+        mProgressBar.setVisibility(View.VISIBLE);
         mProgressBar.setIndeterminate(false);
         mProgressBar.setProgress(1);
+        mTopDividerNoProgress.setVisibility(View.GONE);
 
         setPaddingVisibility(View.VISIBLE);
     }
@@ -317,8 +329,10 @@ public class WifiSettingsForSetupWizardXL extends Activity implements OnClickLis
 
         trySetBackground(R.drawable.setups_bg_complete);
 
+        mProgressBar.setVisibility(View.VISIBLE);
         mProgressBar.setIndeterminate(false);
         mProgressBar.setProgress(2);
+        mTopDividerNoProgress.setVisibility(View.GONE);
 
         showConnectedTitle();
 
@@ -385,7 +399,9 @@ public class WifiSettingsForSetupWizardXL extends Activity implements OnClickLis
     }
 
     private void showScanningStatus() {
+        mProgressBar.setVisibility(View.VISIBLE);
         mProgressBar.setIndeterminate(true);
+        mTopDividerNoProgress.setVisibility(View.GONE);
         mAddNetworkButton.setEnabled(false);
         mRefreshButton.setEnabled(false);
     }
@@ -569,7 +585,9 @@ public class WifiSettingsForSetupWizardXL extends Activity implements OnClickLis
 
             // Wifi list becomes empty for a moment. We show "scanning" effect to a user so that
             // he/she won't be astonished there. This stops once the scan finishes.
+            mProgressBar.setVisibility(View.VISIBLE);
             mProgressBar.setIndeterminate(true);
+            mTopDividerNoProgress.setVisibility(View.GONE);
 
             // Remembered networks may be re-used during SetupWizard, which confuse users.
             // We force the module to forget them to reduce UX complexity
@@ -621,7 +639,9 @@ public class WifiSettingsForSetupWizardXL extends Activity implements OnClickLis
         // If we already show some of access points but the bar still shows "scanning" state, it
         // should be stopped.
         if (mProgressBar.isIndeterminate() && accessPoints.size() > 0) {
+            mProgressBar.setVisibility(View.GONE);
             mProgressBar.setIndeterminate(false);
+            mTopDividerNoProgress.setVisibility(View.VISIBLE);
             mAddNetworkButton.setEnabled(true);
             mRefreshButton.setEnabled(true);
         }

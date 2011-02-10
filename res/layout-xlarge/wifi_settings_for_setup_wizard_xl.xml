@@ -52,7 +52,7 @@
         android:gravity="bottom"/>
 
     <!-- Divider -->
-    <RelativeLayout
+    <FrameLayout
         android:id="@+id/top_divider"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -62,7 +62,15 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             style="?android:attr/progressBarStyleHorizontal" />
-    </RelativeLayout>
+        <View
+            android:id="@+id/top_divider_no_progress"
+            android:layout_width="match_parent"
+            android:layout_height="3dip"
+            android:layout_marginTop="6dip"
+            android:layout_marginBottom="0dip"
+            android:background="@color/divider_color"
+            android:visibility="gone" />
+    </FrameLayout>
 
     <RelativeLayout
         android:id="@+id/content"
@@ -70,7 +78,6 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/top_divider"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="10dip"
         android:layout_marginBottom="0dip">
 
         <FrameLayout
@@ -89,17 +96,20 @@
             android:minWidth="406dip"
             android:layout_height="wrap_content"
             android:minHeight="160dip"
+            android:layout_marginTop="10dip"
             android:layout_alignParentLeft="true"
             android:visibility="gone" />
         <View
             android:id="@+id/wifi_config_padding"
             android:layout_width="match_parent"
             android:layout_height="360dip"
+            android:layout_marginTop="10dip"
             android:visibility="gone" />
         <LinearLayout
             android:id="@+id/connecting_status_layout"
             android:layout_width="match_parent"
             android:layout_height="360dip"
+            android:layout_marginTop="10dip"
             android:visibility="gone">
             <TextView
                 android:id="@+id/connecting_status"
