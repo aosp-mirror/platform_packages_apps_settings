@@ -421,7 +421,13 @@ public class WifiConfigController implements TextWatcher,
             if (!InetAddress.isNumeric(gateway)) {
                 return R.string.wifi_ip_settings_invalid_gateway;
             }
-            linkProperties.setGateway(InetAddress.getByName(gateway));
+            InetAddress gatewayAddr;
+            try {
+                gatewayAddr = InetAddress.getByName(gateway);
+            } catch (UnknownHostException e) {
+                return R.string.wifi_ip_settings_invalid_gateway;
+            }
+            linkProperties.addGateway(gatewayAddr);
 
             String dns = mDns1View.getText().toString();
             if (!InetAddress.isNumeric(dns)) {
@@ -591,9 +597,10 @@ public class WifiConfigController implements TextWatcher,
                     mNetworkPrefixLengthView.setText(Integer.toString(linkAddress
                             .getNetworkPrefixLength()));
                 }
-                InetAddress gateway = linkProperties.getGateway();
-                if (gateway != null) {
-                    mGatewayView.setText(linkProperties.getGateway().getHostAddress());
+
+                Iterator<InetAddress>gateways = linkProperties.getGateways().iterator();
+                if (gateways.hasNext()) {
+                    mGatewayView.setText(gateways.next().getHostAddress());
                 }
                 Iterator<InetAddress> dnsIterator = linkProperties.getDnses().iterator();
                 if (dnsIterator.hasNext()) {
