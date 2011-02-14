@@ -32,6 +32,7 @@ import android.content.Context;
 import android.content.SyncAdapterType;
 import android.content.SyncStatusObserver;
 import android.content.pm.PackageManager;
+import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.os.Handler;
@@ -113,7 +114,7 @@ class AccountPreferenceBase extends SettingsPreferenceFragment
                     mAccountTypeToAuthorities.put(sa.accountType, authorities);
                 }
                 if (Log.isLoggable(TAG, Log.VERBOSE)) {
-                    Log.d(TAG, "added authority " + sa.authority + " to accountType " 
+                    Log.d(TAG, "added authority " + sa.authority + " to accountType "
                             + sa.accountType);
                 }
                 authorities.add(sa.authority);
@@ -136,7 +137,10 @@ class AccountPreferenceBase extends SettingsPreferenceFragment
                 icon = authContext.getResources().getDrawable(desc.iconId);
             } catch (PackageManager.NameNotFoundException e) {
                 // TODO: place holder icon for missing account icons?
-                Log.w(TAG, "No icon for account type " + accountType);
+                Log.w(TAG, "No icon name for account type " + accountType);
+            } catch (Resources.NotFoundException e) {
+                // TODO: place holder icon for missing account icons?
+                Log.w(TAG, "No icon resource for account type " + accountType);
             }
         }
         return icon;
@@ -155,7 +159,9 @@ class AccountPreferenceBase extends SettingsPreferenceFragment
                 Context authContext = getActivity().createPackageContext(desc.packageName, 0);
                 label = authContext.getResources().getText(desc.labelId);
             } catch (PackageManager.NameNotFoundException e) {
-                Log.w(TAG, "No label for account type " + ", type " + accountType);
+                Log.w(TAG, "No label name for account type " + accountType);
+            } catch (Resources.NotFoundException e) {
+                Log.w(TAG, "No label icon for account type " + accountType);
             }
         }
         return label;
@@ -178,6 +184,8 @@ class AccountPreferenceBase extends SettingsPreferenceFragment
                             desc.accountPreferencesId, getPreferenceScreen());
                 }
             } catch (PackageManager.NameNotFoundException e) {
+                Log.w(TAG, "Couldn't load preferences.xml file from " + desc.packageName);
+            } catch (Resources.NotFoundException e) {
                 Log.w(TAG, "Couldn't load preferences.xml file from " + desc.packageName);
             }
         }
