@@ -34,7 +34,6 @@ import android.os.HandlerThread;
 import android.os.Looper;
 import android.os.Message;
 import android.os.RemoteException;
-import android.os.SystemClock;
 import android.text.format.Formatter;
 import android.util.Log;
 import android.util.SparseArray;
@@ -54,9 +53,10 @@ public class RunningState {
     static Object sGlobalLock = new Object();
     static RunningState sInstance;
 
-    static final int MSG_UPDATE_CONTENTS = 1;
-    static final int MSG_REFRESH_UI = 2;
-    static final int MSG_UPDATE_TIME = 3;
+    static final int MSG_RESET_CONTENTS = 1;
+    static final int MSG_UPDATE_CONTENTS = 2;
+    static final int MSG_REFRESH_UI = 3;
+    static final int MSG_UPDATE_TIME = 4;
 
     static final long TIME_UPDATE_DELAY = 1000;
     static final long CONTENTS_UPDATE_DELAY = 2000;
@@ -68,6 +68,8 @@ public class RunningState {
     final PackageManager mPm;
 
     OnRefreshUiListener mRefreshUiListener;
+
+    final InterestingConfigChanges mInterestingConfigChanges = new InterestingConfigChanges();
 
     // Processes that are hosting a service we are interested in, organized
     // by uid and name.  Note that this mapping does not change even across
@@ -133,6 +135,9 @@ public class RunningState {
         @Override
         public void handleMessage(Message msg) {
             switch (msg.what) {
+                case MSG_RESET_CONTENTS:
+                    reset();
+                    break;
                 case MSG_UPDATE_CONTENTS:
                     synchronized (mLock) {
                         if (!mResumed) {
@@ -561,6 +566,12 @@ public class RunningState {
         synchronized (mLock) {
             mResumed = true;
             mRefreshUiListener = listener;
+            if (mInterestingConfigChanges.applyNewConfig(mApplicationContext.getResources())) {
+                mHaveData = false;
+                mBackgroundHandler.removeMessages(MSG_RESET_CONTENTS);
+                mBackgroundHandler.removeMessages(MSG_UPDATE_CONTENTS);
+                mBackgroundHandler.sendEmptyMessage(MSG_RESET_CONTENTS);
+            }
             if (!mBackgroundHandler.hasMessages(MSG_UPDATE_CONTENTS)) {
                 mBackgroundHandler.sendEmptyMessage(MSG_UPDATE_CONTENTS);
             }
@@ -611,6 +622,15 @@ public class RunningState {
             return true;
         }
         return false;
+    }
+
+    private void reset() {
+        mServiceProcessesByName.clear();
+        mServiceProcessesByPid.clear();
+        mInterestingProcesses.clear();
+        mRunningProcesses.clear();
+        mProcessItems.clear();
+        mAllProcessItems.clear();
     }
 
     private boolean update(Context context, ActivityManager am) {
@@ -975,7 +995,7 @@ public class RunningState {
         }
         
         if (newBackgroundItems == null) {
-            // One or more at the bottom may no longer exit.
+            // One or more at the bottom may no longer exist.
             if (mBackgroundItems.size() > numBackgroundProcesses) {
                 newBackgroundItems = new ArrayList<MergedItem>(numBackgroundProcesses);
                 for (int bgi=0; bgi<numBackgroundProcesses; bgi++) {

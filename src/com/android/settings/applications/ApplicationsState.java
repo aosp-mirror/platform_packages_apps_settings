@@ -5,11 +5,14 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.content.pm.ActivityInfo;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.IPackageStatsObserver;
 import android.content.pm.PackageManager;
 import android.content.pm.PackageStats;
 import android.content.pm.PackageManager.NameNotFoundException;
+import android.content.res.Configuration;
+import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Handler;
@@ -200,6 +203,7 @@ public class ApplicationsState {
 
     // Information about all applications.  Synchronize on mAppEntries
     // to protect access to these.
+    final InterestingConfigChanges mInterestingConfigChanges = new InterestingConfigChanges();
     final HashMap<String, AppEntry> mEntriesMap = new HashMap<String, AppEntry>();
     final ArrayList<AppEntry> mAppEntries = new ArrayList<AppEntry>();
     List<ApplicationInfo> mApplications = new ArrayList<ApplicationInfo>();
@@ -376,9 +380,18 @@ public class ApplicationsState {
             if (mApplications == null) {
                 mApplications = new ArrayList<ApplicationInfo>();
             }
-            for (int i=0; i<mAppEntries.size(); i++) {
-                mAppEntries.get(i).sizeStale = true;
+
+            if (mInterestingConfigChanges.applyNewConfig(mContext.getResources())) {
+                // If an interesting part of the configuration has changed, we
+                // should completely reload the app entries.
+                mEntriesMap.clear();
+                mAppEntries.clear();
+            } else {
+                for (int i=0; i<mAppEntries.size(); i++) {
+                    mAppEntries.get(i).sizeStale = true;
+                }
             }
+
             for (int i=0; i<mApplications.size(); i++) {
                 final ApplicationInfo info = mApplications.get(i);
                 final AppEntry entry = mEntriesMap.get(info.packageName);
