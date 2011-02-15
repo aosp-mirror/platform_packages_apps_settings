@@ -274,7 +274,7 @@ public class ChooseLockPassword extends PreferenceActivity {
             if (password.length() > mPasswordMaxLength) {
                 return getString(mIsAlphaMode ?
                         R.string.lockpassword_password_too_long
-                        : R.string.lockpassword_pin_too_long, mPasswordMaxLength);
+                        : R.string.lockpassword_pin_too_long, mPasswordMaxLength + 1);
             }
             int letters = 0;
             int numbers = 0;
