@@ -334,7 +334,7 @@
     <string name="bluetooth_dock_settings_a2dp" msgid="8791004998846630574">"Для музыки и мультимедиа"</string>
     <string name="bluetooth_dock_settings_remember" msgid="5551459057010609115">"Запомнить настройки"</string>
     <string name="nfc_quick_toggle_title" msgid="6769159366307299004">"Включить NFC"</string>
-    <string name="nfc_quick_toggle_summary" msgid="1988408027741447231">"Использовать радиосвязь ближнего действия для чтения и обмена метками"</string>
+    <string name="nfc_quick_toggle_summary" msgid="1988408027741447231">"Использовать радиосвязь ближнего действия для чтения и обмена тегами"</string>
     <string name="nfc_toggle_error" msgid="2233172102497535522">"Произошла ошибка."</string>
     <string name="wifi_quick_toggle_title" msgid="874495178395350104">"Wi-Fi"</string>
     <string name="wifi_quick_toggle_summary" msgid="1047950931623694366">"Включить Wi-Fi"</string>
@@ -342,7 +342,7 @@
     <string name="wifi_settings_category" msgid="2810363951104753710">"Настройки Wi-Fi"</string>
     <string name="wifi_settings_summary" msgid="668767638556052820">"Настройка и управление точками доступа беспроводной сети"</string>
     <string name="wifi_starting" msgid="6710266609710860129">"Включение..."</string>
-    <string name="wifi_stopping" msgid="5952909472548218348">"Выключение..."</string>
+    <string name="wifi_stopping" msgid="5952909472548218348">"Отключение..."</string>
     <string name="wifi_error" msgid="3207971103917128179">"Ошибка"</string>
     <string name="wifi_in_airplane_mode" msgid="7618393787965366655">"В режиме полета"</string>
     <string name="wifi_fail_to_scan" msgid="6194542252808587669">"Не удалось выполнить поиск сети"</string>
@@ -373,7 +373,7 @@
     <string name="wifi_unspecified" msgid="5431501214192991253">"(не указано)"</string>
     <string name="wifi_remembered" msgid="8426719916135950136">"Сохранено в памяти"</string>
     <string name="wifi_disabled" msgid="2104752038187543712">"Отключено"</string>
-    <string name="wifi_not_in_range" msgid="1136191511238508967">"Вне диапазона"</string>
+    <string name="wifi_not_in_range" msgid="1136191511238508967">"Недоступна"</string>
     <string name="wifi_secured" msgid="6759903183748011566">"Защищено с помощью <xliff:g id="WIFI_SECURITY">%1$s</xliff:g>"</string>
     <string name="wifi_secured_with_status" msgid="6489317496506267302">"<xliff:g id="WIFI_STATUS">%2$s</xliff:g>, защищено с помощью <xliff:g id="WIFI_SECURITY">%1$s</xliff:g>"</string>
     <string name="wifi_connect" msgid="1076622875777072845">"Подключить"</string>
@@ -381,9 +381,9 @@
     <string name="wifi_save" msgid="3331121567988522826">"Сохранить"</string>
     <string name="wifi_cancel" msgid="6763568902542968964">"Отмена"</string>
     <string name="wifi_advanced_titlebar" msgid="5419052271935350999">"Дополнительные функции"</string>
-    <string name="wifi_setting_num_channels_title" msgid="694031537019656132">"Управляющий домен"</string>
+    <string name="wifi_setting_num_channels_title" msgid="694031537019656132">"Диапазон частот"</string>
     <string name="wifi_setting_num_channels_summary" msgid="4889355096717099141">"Настроить количество используемых каналов"</string>
-    <string name="wifi_setting_num_channels_error" msgid="5765443843427870721">"При установке управляющего домена возникла неполадка."</string>
+    <string name="wifi_setting_num_channels_error" msgid="5765443843427870721">"При установке диапазона частот возникла неполадка."</string>
     <string name="wifi_setting_num_channels_channel_phrase" msgid="1269381923672908636">"каналов: <xliff:g id="NUM_CHANNELS">%1$d</xliff:g>"</string>
     <string name="wifi_setting_sleep_policy_title" msgid="1367731352485585528">"Спящий режим"</string>
     <string name="wifi_setting_sleep_policy_summary" msgid="7573693311804602041">"При каких условиях переключаться с Wi-Fi на сотовую сеть"</string>
@@ -453,7 +453,7 @@
     <string name="dock_settings_title" msgid="9161438664257429372">"Настройки док-станции"</string>
     <string name="dock_audio_settings_title" msgid="3324750259959570305">"Аудио"</string>
     <string name="dock_audio_summary_desk" msgid="6487784412371139335">"Настройки подключенной настольной док-станции"</string>
-    <string name="dock_audio_summary_car" msgid="6740897586006248450">"Настройки подключенной автомобильной док-станции"</string>
+    <string name="dock_audio_summary_car" msgid="6740897586006248450">"Настройки док-станции автомобиля"</string>
     <string name="dock_audio_summary_none" msgid="289909253741048784">"Телефон не подключен к док-станции"</string>
     <string name="dock_audio_summary_unknown" msgid="4465059868974255693">"Настройки подключенной док-станции"</string>
     <string name="dock_not_found_title" msgid="3290961741828952424">"Док-станция не найдена."</string>
@@ -641,7 +641,7 @@
     <string name="usb_tethering_errored_subtext" msgid="1377574819427841992">"Ошибка подключения USB"</string>
     <string name="tethering_help_button_text" msgid="656117495547173630">"Справка"</string>
     <string name="network_settings_title" msgid="7967552516440151852">"Мобильная сеть"</string>
-    <string name="network_settings_summary" msgid="5149750850846813553">"Настроить параметры роуминга, сетей, точек доступа (APN)"</string>
+    <string name="network_settings_summary" msgid="5149750850846813553">"Настройка параметров роуминга, сетей и точек доступа (APN)"</string>
     <string name="location_title" msgid="1029961368397484576">"Мое местоположение"</string>
     <string name="location_network_based" msgid="8815705866861993344">"Беспроводные сети"</string>
     <string name="location_networks_disabled" msgid="2708968452901433980">"Использовать Wi-Fi и сотовые сети для определения местоположения"</string>
@@ -789,7 +789,7 @@
     <string name="app_install_location_title" msgid="2068975150026852168">"Место установки"</string>
     <string name="app_install_location_summary" msgid="879753854530300436">"Изменить установочную папку для новых приложений."</string>
     <string name="storageuse_settings_title" msgid="5657014373502630403">"Использование памяти"</string>
-    <string name="storageuse_settings_summary" msgid="2556057379120846792">"Проверьте, сколько места в памяти устройства занимают различные приложения"</string>
+    <string name="storageuse_settings_summary" msgid="2556057379120846792">"Объем памяти, занимаемый различными приложениями"</string>
     <string name="runningservices_settings_title" msgid="8097287939865165213">"Работающие приложения"</string>
     <string name="runningservices_settings_summary" msgid="854608995821032748">"Просмотр и управление работающими приложениями"</string>
     <string name="service_restarting" msgid="2242747937372354306">"Перезапуск"</string>
@@ -873,8 +873,8 @@
     <string name="enable_adb_summary" msgid="4881186971746056635">"Включить режим отладки при подключении к компьютеру по USB"</string>
     <string name="keep_screen_on" msgid="1146389631208760344">"Оставить включенным"</string>
     <string name="keep_screen_on_summary" msgid="2173114350754293009">"Во время зарядки экран будет всегда включен"</string>
-    <string name="allow_mock_location" msgid="2787962564578664888">"Отладка местоположения"</string>
-    <string name="allow_mock_location_summary" msgid="317615105156345626">"Разрешить получение отладочных данных о местоположении"</string>
+    <string name="allow_mock_location" msgid="2787962564578664888">"Фиктивные местоположения"</string>
+    <string name="allow_mock_location_summary" msgid="317615105156345626">"Разрешить использование фиктивных местоположений"</string>
     <string name="adb_warning_title" msgid="6234463310896563253">"Разрешить отладку USB?"</string>
     <string name="adb_warning_message" msgid="5352555112049663033">"Отладка по USB предназначена для целей разработки. С ее помощью можно копировать данные с компьютера на мобильное устройство и наборот, устанавливать на устройство приложения и просматривать данные журналов."</string>
     <string name="gadget_picker_title" msgid="98374951396755811">"Выбор·гаджета"</string>
@@ -990,7 +990,7 @@
     <string name="tts_default_pitch_title" msgid="6135942113172488671">"Тон"</string>
     <string name="tts_default_pitch_summary" msgid="1328298665182885277">"Влияет на высоту синтезированной речи"</string>
     <string name="tts_default_lang_title" msgid="8018087612299820556">"Язык"</string>
-    <string name="tts_default_lang_summary" msgid="5219362163902707785">"Установить в зависимости от языка голос для чтения текста"</string>
+    <string name="tts_default_lang_summary" msgid="5219362163902707785">"Выбор языка для чтения текста"</string>
     <string name="tts_play_example_title" msgid="7094780383253097230">"Прослушать пример"</string>
     <string name="tts_play_example_summary" msgid="8029071615047894486">"Воспроизвести краткую демонстрацию синтезированной речи"</string>
     <string name="tts_install_data_title" msgid="4264378440508149986">"Установка голосовых данных"</string>
@@ -1052,7 +1052,7 @@
     <string name="vpn_ppp_negotiation_failed_dialog_msg" msgid="4611293656718340994">"Связь с сервером не установлена. Возможно, не были согласованы параметры шифрования. Изменить настройки шифрования?"</string>
     <string name="vpn_type_title" msgid="6392933604218676224">"Добавить VPN"</string>
     <string name="vpn_add_new_vpn" msgid="5438260689052714550">"Добавить VPN"</string>
-    <string name="vpn_edit_title_add" msgid="2121313217989682890">"Добавить VPN \"<xliff:g id="NAME">%s</xliff:g>\""</string>
+    <string name="vpn_edit_title_add" msgid="2121313217989682890">"Добавить <xliff:g id="NAME">%s</xliff:g> VPN"</string>
     <string name="vpn_edit_title_edit" msgid="2457278794066617935">"Сведения: <xliff:g id="NAME">%s</xliff:g>"</string>
     <string name="vpns" msgid="3148141862835492816">"Сети VPN"</string>
     <string name="vpn_connecting" msgid="8039521381692090116">"Подключение..."</string>
@@ -1063,33 +1063,33 @@
     <string name="vpn_a_name" msgid="8445736942405283509">"имя VPN"</string>
     <string name="vpn_profile_added" msgid="9061017910337129840">"Профиль \"<xliff:g id="NAME">%s</xliff:g>\" добавлен"</string>
     <string name="vpn_profile_replaced" msgid="587435576816273815">"В профиль \"<xliff:g id="NAME">%s</xliff:g>\" внесены изменения"</string>
-    <string name="vpn_user_certificate_title" msgid="6812545893924071742">"Установить СП"</string>
+    <string name="vpn_user_certificate_title" msgid="6812545893924071742">"Сертификат пользователя"</string>
     <string name="vpn_user_certificate" msgid="949322691686938888">"Сертификат пользователя"</string>
     <string name="vpn_a_user_certificate" msgid="8943983437956898649">"сертификат пользователя"</string>
-    <string name="vpn_ca_certificate_title" msgid="7846466160795589985">"Установить СЦС"</string>
+    <string name="vpn_ca_certificate_title" msgid="7846466160795589985">"Сертификат ЦС"</string>
     <string name="vpn_ca_certificate" msgid="465085144064264742">"Сертификат центра сертификации"</string>
     <string name="vpn_a_ca_certificate" msgid="3374242520974884295">"сертификат центра сертификации"</string>
     <string name="vpn_l2tp_secret_string_title" msgid="5039677186748940987">"Установить ключ L2TP"</string>
-    <string name="vpn_l2tp_secret" msgid="529359749677142076">"ключ L2TP"</string>
+    <string name="vpn_l2tp_secret" msgid="529359749677142076">"Ключ L2TP"</string>
     <string name="vpn_a_l2tp_secret" msgid="6612042930810981845">"ключ L2TP"</string>
     <string name="vpn_pptp_encryption_title" msgid="2236795167467896499">"шифрование"</string>
     <string name="vpn_pptp_encryption" msgid="2602329949737259686">"Шифрование PPTP"</string>
-    <string name="vpn_ipsec_presharedkey_title" msgid="2184060087690539175">"Установить совместно используемый ключ IPSec"</string>
-    <string name="vpn_ipsec_presharedkey" msgid="5434316521616673741">"Совместно используемый ключ IPSec"</string>
-    <string name="vpn_a_ipsec_presharedkey" msgid="1255301923217898418">"совместно используемый ключ IPSec"</string>
-    <string name="vpn_vpn_server_title" msgid="8897005887420358913">"Укажите сервер VPN"</string>
+    <string name="vpn_ipsec_presharedkey_title" msgid="2184060087690539175">"Общий ключ IPSec"</string>
+    <string name="vpn_ipsec_presharedkey" msgid="5434316521616673741">"Общий ключ IPSec"</string>
+    <string name="vpn_a_ipsec_presharedkey" msgid="1255301923217898418">"общий ключ IPSec"</string>
+    <string name="vpn_vpn_server_title" msgid="8897005887420358913">"Cервер VPN"</string>
     <string name="vpn_vpn_server" msgid="1141754908824209260">"Сервер VPN"</string>
     <string name="vpn_a_vpn_server" msgid="5960906152125045853">"сервер VPN"</string>
     <string name="vpn_vpn_server_dialog_title" msgid="7850850940160521918">"Имя сервера VPN"</string>
-    <string name="vpn_dns_search_list_title" msgid="1022776976104584251">"Домены поиска DNS"</string>
+    <string name="vpn_dns_search_list_title" msgid="1022776976104584251">"DNS-суффиксы"</string>
     <string name="vpn_dns_search_list" msgid="4230034234026605360">"DNS поиска"</string>
     <string name="vpn_field_is_set" msgid="7137320847812992243">"<xliff:g id="VALUE">%s</xliff:g> установлено"</string>
-    <string name="vpn_field_not_set" msgid="2972519243515893804">"<xliff:g id="VALUE">%s</xliff:g> не установлено"</string>
+    <string name="vpn_field_not_set" msgid="2972519243515893804">"<xliff:g id="VALUE">%s</xliff:g> — не установлено"</string>
     <string name="vpn_field_not_set_optional" msgid="8840557698252556791">"<xliff:g id="VALUE">%s</xliff:g> не установлено (необязательно)"</string>
     <string name="vpn_enable_field" msgid="3700967675854517191">"Включить <xliff:g id="OPTION">%s</xliff:g>"</string>
     <string name="vpn_disable_field" msgid="6905658811179634005">"Отключить <xliff:g id="OPTION">%s</xliff:g>"</string>
-    <string name="vpn_is_enabled" msgid="1266304230417098877">"<xliff:g id="OPTION">%s</xliff:g> вкл."</string>
-    <string name="vpn_is_disabled" msgid="2013622485867806167">"<xliff:g id="OPTION">%s</xliff:g> откл."</string>
+    <string name="vpn_is_enabled" msgid="1266304230417098877">"<xliff:g id="OPTION">%s</xliff:g> – включено"</string>
+    <string name="vpn_is_disabled" msgid="2013622485867806167">"<xliff:g id="OPTION">%s</xliff:g> – отключено"</string>
     <string name="vpn_settings_title" msgid="7327468307909556719">"Настройки VPN"</string>
     <string name="vpn_settings_summary" msgid="8849924181594963972">"Настройка и управление виртуальными частными сетями (VPN)"</string>
     <string name="vpn_secret_unchanged" msgid="8700613973594154529">"(не изменялось)"</string>
