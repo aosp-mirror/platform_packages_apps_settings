@@ -102,6 +102,7 @@ public class ChooseLockPatternTutorial extends PreferenceActivity {
                 Intent intent = new Intent(getActivity(), ChooseLockPattern.class);
                 intent.addFlags(Intent.FLAG_ACTIVITY_FORWARD_RESULT);
                 startActivity(intent);
+                getActivity().overridePendingTransition(0, 0); // no animation
                 getActivity().finish();
             }
         }
