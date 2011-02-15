@@ -248,7 +248,7 @@ public class ChooseLockPattern extends PreferenceActivity {
                     LeftButtonMode.Retry, RightButtonMode.Continue, ID_EMPTY_MESSAGE, false),
             NeedToConfirm(
                     R.string.lockpattern_need_to_confirm,
-                    LeftButtonMode.CancelDisabled, RightButtonMode.ConfirmDisabled,
+                    LeftButtonMode.Cancel, RightButtonMode.ConfirmDisabled,
                     ID_EMPTY_MESSAGE, true),
             ConfirmWrong(
                     R.string.lockpattern_need_to_unlock_wrong,
