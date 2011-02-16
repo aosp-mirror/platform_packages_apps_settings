@@ -104,31 +104,28 @@ public class InputMethodConfig extends SettingsPreferenceFragment {
 
     private void showSecurityWarnDialog(InputMethodInfo imi, final CheckBoxPreference chkPref,
             final String imiId) {
-        if (mDialog == null) {
-            mDialog = (new AlertDialog.Builder(getActivity()))
-                    .setTitle(android.R.string.dialog_alert_title)
-                    .setIcon(android.R.drawable.ic_dialog_alert)
-                    .setCancelable(true)
-                    .setPositiveButton(android.R.string.ok,
-                            new DialogInterface.OnClickListener() {
-                        public void onClick(DialogInterface dialog, int which) {
-                            chkPref.setChecked(true);
-                            for (Preference pref: mInputMethodPrefsMap.get(imiId)) {
-                                pref.setEnabled(true);
-                            }
-                        }
-                    })
-                    .setNegativeButton(android.R.string.cancel,
-                            new DialogInterface.OnClickListener() {
-                        public void onClick(DialogInterface dialog, int which) {
-                        }
-                    })
-                    .create();
-        } else {
-            if (mDialog.isShowing()) {
-                mDialog.dismiss();
-            }
+        if (mDialog != null && mDialog.isShowing()) {
+            mDialog.dismiss();
         }
+        mDialog = (new AlertDialog.Builder(getActivity()))
+                .setTitle(android.R.string.dialog_alert_title)
+                .setIcon(android.R.drawable.ic_dialog_alert)
+                .setCancelable(true)
+                .setPositiveButton(android.R.string.ok,
+                        new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        chkPref.setChecked(true);
+                        for (Preference pref: mInputMethodPrefsMap.get(imiId)) {
+                            pref.setEnabled(true);
+                        }
+                    }
+                })
+                .setNegativeButton(android.R.string.cancel,
+                        new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                    }
+                })
+                .create();
         mDialog.setMessage(getResources().getString(R.string.ime_security_warning,
                 imi.getServiceInfo().applicationInfo.loadLabel(getPackageManager())));
         mDialog.show();
