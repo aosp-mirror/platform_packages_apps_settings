@@ -86,12 +86,6 @@ public class TetherSettings extends SettingsPreferenceFragment {
     public void onCreate(Bundle icicle) {
         super.onCreate(icicle);
         addPreferencesFromResource(R.xml.tether_prefs);
-    }
-
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-            Bundle savedInstanceState) {
-        View view = super.onCreateView(inflater, container, savedInstanceState);
 
         final Activity activity = getActivity();
         mBluetoothPan = new BluetoothPan(activity);
@@ -109,17 +103,19 @@ public class TetherSettings extends SettingsPreferenceFragment {
         mWifiRegexs = cm.getTetherableWifiRegexs();
         mBluetoothRegexs = cm.getTetherableBluetoothRegexs();
 
-        boolean usbAvailable = mUsbRegexs.length != 0;
-        boolean wifiAvailable = mWifiRegexs.length != 0;
-        boolean bluetoothAvailable = mBluetoothRegexs.length != 0;
+        final boolean usbAvailable = mUsbRegexs.length != 0;
+        final boolean wifiAvailable = mWifiRegexs.length != 0;
+        final boolean bluetoothAvailable = mBluetoothRegexs.length != 0;
 
         if (!usbAvailable || Utils.isMonkeyRunning()) {
             getPreferenceScreen().removePreference(mUsbTether);
         }
+
         if (!wifiAvailable) {
             getPreferenceScreen().removePreference(mEnableWifiAp);
             getPreferenceScreen().removePreference(mWifiApSettings);
         }
+
         if (!bluetoothAvailable) {
             getPreferenceScreen().removePreference(mBluetoothTether);
         } else {
@@ -129,27 +125,9 @@ public class TetherSettings extends SettingsPreferenceFragment {
                 mBluetoothTether.setChecked(false);
             }
         }
-        /* Don't change the title for two-pane settings
-        if (wifiAvailable && usbAvailable && bluetoothAvailable){
-            activity.setTitle(R.string.tether_settings_title_all);
-        } else if (wifiAvailable && usbAvailable){
-            activity.setTitle(R.string.tether_settings_title_all);
-        } else if (wifiAvailable && bluetoothAvailable){
-            activity.setTitle(R.string.tether_settings_title_all);
-        } else if (wifiAvailable) {
-            activity.setTitle(R.string.tether_settings_title_wifi);
-        } else if (usbAvailable && bluetoothAvailable) {
-            activity.setTitle(R.string.tether_settings_title_usb_bluetooth);
-        } else if (usbAvailable) {
-            activity.setTitle(R.string.tether_settings_title_usb);
-        } else {
-            activity.setTitle(R.string.tether_settings_title_bluetooth);
-        }
-        */
+
         mWifiApEnabler = new WifiApEnabler(activity, mEnableWifiAp);
         mView = new WebView(activity);
-
-        return view;
     }
 
     @Override
