@@ -113,7 +113,7 @@
     <string name="bluetooth_notif_title" msgid="2485175521845371514">"Permintaan penyandingan"</string>
     <string name="bluetooth_notif_message" msgid="618099089987569242">"Pilih untuk disandingkan dengan <xliff:g id="DEVICE_NAME">%1$s</xliff:g>"</string>
     <string name="bluetooth_show_received_files_title" msgid="816172853268536399">"Tampilkan berkas yang diterima"</string>
-    <string name="bluetooth_show_received_files_summary" msgid="7322193220909480775">"Tampilkan daftar berkas yang diterima melalui Bluetooth"</string>
+    <string name="bluetooth_show_received_files_summary" msgid="7322193220909480775">"Tampilkan daftar berkas yang diterima via Bluetooth"</string>
     <string name="device_picker" msgid="8721012448931226323">"Pemilih perangkat bluetooth"</string>
     <string name="bluetooth_permission_request" msgid="1523129741266262748">"Permintaan izin bluetooth"</string>
     <string name="bluetooth_ask_enablement" msgid="8211158472876087588">"Aplikasi meminta izin untuk menghidupkan Bluetooth. Anda ingin melakukan ini?"</string>
@@ -266,41 +266,33 @@
     <string name="security_settings_summary" msgid="967393342537986570">"Setel Lokasiku, pembuka kunci layar, kunci kartu SIM, kunci penyimpanan kredensial"</string>
     <string name="cdma_security_settings_summary" msgid="6068799952798901542">"Setel Lokasiku, pembuka kunci layar, kunci penyimpanan kredensial"</string>
     <string name="security_passwords_title" msgid="2930627259125138363">"Sandi"</string>
-    <!-- outdated translation 2288841695457542418 -->     <string name="crypt_keeper_settings_title" msgid="4219233835490520414">"Enkripsi perangkat"</string>
-    <!-- outdated translation 5790930764432654508 -->     <string name="crypt_keeper_encrypt_title" product="tablet" msgid="1060273569887301457">"Mengenkripsi data di perangkat"</string>
-    <!-- outdated translation 5790930764432654508 -->     <string name="crypt_keeper_encrypt_title" product="default" msgid="1878996487755806122">"Mengenkripsi data di perangkat"</string>
-    <!-- outdated translation 1447090863225003474 -->     <string name="crypt_keeper_encrypt_summary" product="tablet" msgid="6291564408810586">"Anda wajib menyetel pin buka kunci atau sandi perangkat"</string>
-    <!-- outdated translation 1447090863225003474 -->     <string name="crypt_keeper_encrypt_summary" product="default" msgid="514138079795442371">"Anda wajib menyetel pin buka kunci atau sandi perangkat"</string>
+    <string name="crypt_keeper_settings_title" msgid="4219233835490520414">"Enkripsi"</string>
+    <string name="crypt_keeper_encrypt_title" product="tablet" msgid="1060273569887301457">"Enkripsi tablet"</string>
+    <string name="crypt_keeper_encrypt_title" product="default" msgid="1878996487755806122">"Enkripsi ponsel"</string>
+    <string name="crypt_keeper_encrypt_summary" product="tablet" msgid="6291564408810586">"Memerlukan PIN atau sandi angka untuk mengurai enkripsi tablet tiap kali Anda menyalakannya"</string>
+    <string name="crypt_keeper_encrypt_summary" product="default" msgid="514138079795442371">"Memerlukan PIN atau sandi angka untuk mengurai enkripsi ponsel tiap kali Anda menyalakannya"</string>
     <string name="crypt_keeper_encrypted_summary" msgid="1868233637888132906">"Dienkripsi"</string>
-    <!-- outdated translation 942926028858386912 -->     <string name="crypt_keeper_desc" product="tablet" msgid="2150571569618349332">"Anda dapat mengenkripsi akun, setelan, aplikasi yang diunduh dan datanya, media, serta berkas lainnya Setelah Anda mengenkripsi ponsel, Anda tidak dapat membatalkan enkripsi kecuali dengan menyetel ulang ke setelan pabrik, yang menghapus semua data di ponsel Anda."\n\n"Enkripsi memakan waktu sampai satu jam. Anda harus memulainya dengan baterai yang sudah diisi dayanya dan terus terpasang dengan ponsel hingga enkripsi selesai. Jika menyela proses enkripsi, Anda akan kehilangan sebagian atau seluruh data."</string>
-    <!-- outdated translation 942926028858386912 -->     <string name="crypt_keeper_desc" product="default" msgid="7366703764847750586">"Anda dapat mengenkripsi akun, setelan, aplikasi yang diunduh dan datanya, media, serta berkas lainnya Setelah Anda mengenkripsi ponsel, Anda tidak dapat membatalkan enkripsi kecuali dengan menyetel ulang ke setelan pabrik, yang menghapus semua data di ponsel Anda."\n\n"Enkripsi memakan waktu sampai satu jam. Anda harus memulainya dengan baterai yang sudah diisi dayanya dan terus terpasang dengan ponsel hingga enkripsi selesai. Jika menyela proses enkripsi, Anda akan kehilangan sebagian atau seluruh data."</string>
+    <string name="crypt_keeper_desc" product="tablet" msgid="2150571569618349332">"Anda dapat mengenkripsi akun, setelan, aplikasi unduhan dan datanya, media, dan berkas Anda yang lain. Setelah mengenkripsi tablet, Anda harus memasukkan sandi atau PIN angka untuk mengurai enkripsi tiap kali menghidupkannya: Anda tidak dapat membatalkan enkripsi tablet kecuali dengan mengembalikannya ke setelan pabrik, yang berarti menghapus semua data Anda."\n\n"Enkripsi membutuhkan waktu satu jam atau lebih. Anda harus memulainya dengan baterai yang terisi penuh dayanya dan tablet harus tetap terpasang hingga enkripsi selesai. Jika Anda menghentikan proses enkripsi, Anda akan kehilangan sebagian atau seluruh data."</string>
+    <string name="crypt_keeper_desc" product="default" msgid="7366703764847750586">"Anda dapat mengenkripsi akun, setelan, aplikasi unduhan dan datanya, media, dan berkas Anda yang lain. Setelah mengenkripsi ponsel, Anda harus memasukkan sandi atau PIN angka untuk mengurai enkripsi tiap kali menghidupkannya: Anda tidak dapat membatalkan enkripsi ponsel kecuali dengan mengembalikannya ke setelan pabrik, menghapus semua data Anda."\n\n"Enkripsi membutuhkan waktu satu jam atau lebih. Anda harus memulainya dengan baterai yang terisi penuh dayanya dan ponsel harus tetap terpasang hingga enkripsi selesai. Jika Anda menghentikan proses enkripsi, Anda akan kehilangan sebagian atau seluruh data."</string>
     <string name="crypt_keeper_button_text" product="tablet" msgid="1189623490604750854">"Enkripsi tablet"</string>
     <string name="crypt_keeper_button_text" product="default" msgid="2008346408473255519">"Enkripsi ponsel"</string>
-    <!-- no translation found for crypt_keeper_low_charge_text (5920622844033087792) -->
-    <skip />
-    <!-- no translation found for crypt_keeper_unplugged_text (3360883915598669748) -->
-    <skip />
-    <!-- no translation found for crypt_keeper_dialog_need_password_title (4058971800557767) -->
-    <skip />
-    <!-- no translation found for crypt_keeper_dialog_need_password_message (17076329416977176) -->
-    <skip />
+    <string name="crypt_keeper_low_charge_text" msgid="5920622844033087792">"Isi daya baterai Anda dan coba sekali lagi."</string>
+    <string name="crypt_keeper_unplugged_text" msgid="3360883915598669748">"Pasang pengisi daya Anda dan coba sekali lagi."</string>
+    <string name="crypt_keeper_dialog_need_password_title" msgid="4058971800557767">"Tidak ada PIN atau sandi kunci layar"</string>
+    <string name="crypt_keeper_dialog_need_password_message" msgid="17076329416977176">"Anda harus menyetel PIN atau sandi kunci layar sebelum dapat memulai enkripsi."</string>
     <string name="crypt_keeper_confirm_title" msgid="3637925350381905012">"Konfirmasi enkripsi"</string>
-    <!-- outdated translation 4150888307809341579 -->     <string name="crypt_keeper_final_desc" product="tablet" msgid="2496639211575162172">"Enkripsi data pengguna? Operasi ini tidak dapat dibatalkan dan tidak boleh disela karena data akan hilang! Enkripsi memakan waktu sampai satu jam."</string>
-    <!-- outdated translation 4150888307809341579 -->     <string name="crypt_keeper_final_desc" product="default" msgid="3248595818246515395">"Enkripsi data pengguna? Operasi ini tidak dapat dibatalkan dan tidak boleh disela karena data akan hilang! Enkripsi memakan waktu sampai satu jam."</string>
+    <string name="crypt_keeper_final_desc" product="tablet" msgid="2496639211575162172">"Enkripsi tablet? Operasi ini tidak dapat dibatalkan dan jika Anda menghentikannya, data akan hilang. Enkripsi membutuhkan waktu satu jam atau lebih, saat itu tablet akan dimulai ulang beberapa kali."</string>
+    <string name="crypt_keeper_final_desc" product="default" msgid="3248595818246515395">"Enkripsi ponsel? Operasi ini tidak dapat dibatalkan dan jika Anda menghentikannya, data akan hilang. Enkripsi membutuhkan waktu satu jam atau lebih, saat itu ponsel akan dimulai ulang beberapa kali."</string>
     <string name="crypt_keeper_setup_title" msgid="1783951453124244969">"Mengenkripsi"</string>
     <!-- no translation found for crypt_keeper_setup_description (3975741105437032042) -->
     <skip />
     <!-- no translation found for crypt_keeper_setup_description (8820144832981707567) -->
     <skip />
     <string name="crypt_keeper_cooldown" msgid="6736063610343230255">"Coba lagi dalam ^1 detik."</string>
-    <!-- no translation found for crypt_keeper_enter_password (1492603008983893532) -->
-    <skip />
-    <!-- no translation found for crypt_keeper_failed_title (1166918236711686187) -->
-    <skip />
-    <!-- no translation found for crypt_keeper_failed_summary (1075638996134310507) -->
-    <skip />
-    <!-- no translation found for crypt_keeper_failed_summary (3394708817932222518) -->
-    <skip />
+    <string name="crypt_keeper_enter_password" msgid="1492603008983893532">"Masukkan sandi"</string>
+    <string name="crypt_keeper_failed_title" msgid="1166918236711686187">"Enkripsi gagal"</string>
+    <string name="crypt_keeper_failed_summary" product="tablet" msgid="1075638996134310507">"Enkripsi terhenti dan tidak dapat diselesaikan. Anda harus mengembalikan ke setelan pabrik (menghapus semua data) sebelum dapat melanjutkan penggunaan tablet. Anda dapat mencoba mengenkripsi tablet lagi setelah penyetelan ulang selesai."</string>
+    <string name="crypt_keeper_failed_summary" product="default" msgid="3394708817932222518">"Enkripsi terhenti dan tidak dapat diselesaikan. Anda harus mengembalikan ke setelan pabrik (menghapus semua data) sebelum dapat melanjutkan penggunaan ponsel. Anda dapat mencoba mengenkripsi ponsel lagi setelah penyetelan ulang selesai."</string>
     <string name="lock_settings_picker_title" msgid="8665454308380158195">"Mengonfigurasi layar kunci"</string>
     <string name="unlock_set_unlock_launch_picker_title" msgid="4461562893699328786">"Mengonfigurasi layar kunci"</string>
     <string name="unlock_set_unlock_launch_picker_change_title" msgid="6987228635944678726">"Ubah kunci layar"</string>
@@ -452,9 +444,9 @@
     <string name="wifi_fail_to_scan" msgid="6194542252808587669">"Tidak dapat memindai jaringan"</string>
     <string name="wifi_notify_open_networks" msgid="3755768188029653293">"Pemberitahuan jaringan"</string>
     <string name="wifi_notify_open_networks_summary" msgid="3038290727701553612">"Beri tahu saya ketika ada jaringan yang tersedia"</string>
-    <!-- outdated translation 5261009844232680030 -->     <string name="wifi_setting_sleep_policy_title" msgid="2256739245628081979">"Kebijakan tidur Wi-Fi"</string>
+    <string name="wifi_setting_sleep_policy_title" msgid="2256739245628081979">"Kebijakan pemutusan sambungan Wi-Fi"</string>
     <string name="wifi_setting_sleep_policy_summary" msgid="7573693311804602041">"Tentukan saat beralih dari Wi-Fi ke data seluler"</string>
-    <!-- outdated translation 5279411355928343243 -->     <string name="wifi_setting_sleep_policy_error" msgid="8174902072673071961">"Terjadi masalah saat menyetel kebijakan tidur."</string>
+    <string name="wifi_setting_sleep_policy_error" msgid="8174902072673071961">"Ada masalah saat mengubah setelan"</string>
     <string name="wifi_add_network" msgid="1671334951296205616">"Tambahkan jaringan Wi-Fi"</string>
     <string name="wifi_access_points" msgid="2664629396767022441">"Jaringan Wi-Fi"</string>
     <string name="wifi_menu_scan" msgid="1470911530412095868">"Pindai"</string>
@@ -1288,7 +1280,7 @@
     <string name="credentials_title" msgid="4446234003860769883">"Penyimpanan kredensial"</string>
     <string name="credentials_access" msgid="4843187230913860492">"Gunakan kredensial aman"</string>
     <string name="credentials_access_summary" msgid="319662078718574168">"Izinkan aplikasi mengakses sertifikat aman dan kredensial lainnya"</string>
-    <string name="credentials_install" product="nosdcard" msgid="1395748667227729987">"Memasang dari penyimpanan USB"</string>
+    <string name="credentials_install" product="nosdcard" msgid="1395748667227729987">"Pasang dari penyimpanan USB"</string>
     <string name="credentials_install" product="default" msgid="953914549998062317">"Pasang dari kartu SD"</string>
     <string name="credentials_install_summary" product="nosdcard" msgid="3679446246093149828">"Pasang sertifikat dari penyimpanan USB"</string>
     <string name="credentials_install_summary" product="default" msgid="5737658257407822713">"Pasang sertifikat dari kartu SD"</string>
@@ -1298,15 +1290,15 @@
     <string name="credentials_reset_summary" msgid="3810369467217453606">"Hapus semua konten dan setel ulang sandi"</string>
     <string name="credentials_unlock" msgid="1463040326264133844">"Masukkan sandi"</string>
     <string name="credentials_unlock_hint" msgid="5889551635843338639">"Masukkan sandi untuk penyimpanan kredensial."</string>
-    <string name="credentials_password_hint" msgid="4915128717409363024">"Setel sandi untuk penyimpanan kredensial. Paling tidak 8 karakter."</string>
+    <string name="credentials_password_hint" msgid="4915128717409363024">"Setel sandi untuk penyimpanan kredensial. Gunakan setidaknya 8 karakter."</string>
     <string name="credentials_old_password" msgid="7553393815538684028">"Sandi saat ini:"</string>
     <string name="credentials_new_password" msgid="267487774686796938">"Sandi baru:"</string>
     <string name="credentials_confirm_password" msgid="4732250000633424345">"Konfirmasi sandi baru:"</string>
-    <string name="credentials_reset_hint" msgid="2336340927894094814">"Semua konten akan dihapus, dan sandi akan disetel ulang. Yakin dengan hal ini?"</string>
+    <string name="credentials_reset_hint" msgid="2336340927894094814">"Semua konten akan dihapus dan sandi akan disetel ulang. Yakin dengan hal ini?"</string>
     <string name="credentials_passwords_mismatch" msgid="5288565139590031733">"Sandi tidak cocok."</string>
     <string name="credentials_password_too_short" msgid="7502749986405522663">"Sandi minimal terdiri dari 8 karakter."</string>
     <string name="credentials_wrong_password" msgid="2541932597104054807">"Sandi salah."</string>
-    <string name="credentials_reset_warning" msgid="5320653011511797600">"Sandi salah. Anda memiliki satu kesempatan sekali lagi sebelum penyimpanan kredensial dihapus."</string>
+    <string name="credentials_reset_warning" msgid="5320653011511797600">"Sandi salah. Anda memiliki satu kesempatan lagi sebelum penyimpanan kredensial dihapus."</string>
     <string name="credentials_reset_warning_plural" msgid="6514085665301095279">"Sandi salah. Anda memiliki <xliff:g id="NUMBER">%1$d</xliff:g> kesempatan lagi sebelum penyimpanan kredensial dihapus."</string>
     <string name="credentials_erased" msgid="2907836028586342969">"Penyimpanan kredensial dihapus."</string>
     <string name="credentials_enabled" msgid="7588607413349978930">"Penyimpanan kredensial diaktifkan."</string>
@@ -1364,9 +1356,9 @@
     <string name="wifi_setup_status_connecting" msgid="2594117697215042584">"Menyambung..."</string>
     <string name="wifi_setup_status_proceed_to_next" msgid="9071951312604559022">"Lanjut ke langkah berikutnya"</string>
     <string name="wifi_setup_status_eap_not_supported" msgid="3196386445567501484">"EAP tidak didukung"</string>
-    <string name="wifi_setup_eap_not_supported" msgid="683540356393542939">"Anda tidak dapat mengonfigurasi koneksi Wi-Fi EAP selama penyiapan. Setelah penyiapan, Anda dapat melakukannya di Setelan, pada bagian "<b>"Jaringan &amp; nirkabel"</b>"."</string>
+    <string name="wifi_setup_eap_not_supported" msgid="683540356393542939">"Anda tidak dapat mengonfigurasi koneksi Wi-Fi EAP selama penyiapan. Setelah penyiapan, Anda dapat melakukannya di Setelan, pada bagian "<b>"Nirkabel &amp; jaringan"</b>"."</string>
     <string name="wifi_setup_description_connecting" msgid="1884664966455980182">"Menyambungkan membutuhkan waktu beberapa menit..."</string>
-    <string name="wifi_setup_description_connected" msgid="5235991893829582459">"Sentuh "<b>"Berikutnya"</b>" untuk melanjutkan penyiapan. "\n\n"Sentuh "<b>"Kembali"</b>" untuk menyambung dengan jaringan Wi-Fi lainnya."</string>
+    <string name="wifi_setup_description_connected" msgid="5235991893829582459">"Sentuh "<b>"Berikutnya"</b>" untuk melanjutkan penyiapan. "\n\n"Sentuh "<b>"Kembali"</b>" untuk menyambung dengan jaringan Wi-Fi yang berbeda."</string>
     <string name="account_sync_settings_title" msgid="4578227872921044660">"Setelan sinkronisasi"</string>
     <!-- outdated translation 7257854052606796327 -->     <string name="sync_is_failing" msgid="1591561768344128377">"Saat ini sinkronisasi mengalami masalah. Sinkronisasi akan segera kembali."</string>
     <string name="add_account_label" msgid="7811707265834013767">"Tambahkan akun"</string>
