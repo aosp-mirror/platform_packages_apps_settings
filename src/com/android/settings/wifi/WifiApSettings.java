@@ -41,9 +41,6 @@ public class WifiApSettings extends SettingsPreferenceFragment
     private static final String ENABLE_WIFI_AP = "enable_wifi_ap";
     private static final int CONFIG_SUBTEXT = R.string.wifi_tether_configure_subtext;
 
-    private static final int OPEN_INDEX = 0;
-    private static final int WPA_INDEX = 1;
-
     private static final int DIALOG_AP_SETTINGS = 1;
 
     private String[] mSecurityType;
@@ -81,12 +78,12 @@ public class WifiApSettings extends SettingsPreferenceFragment
             final String s = activity.getString(
                     com.android.internal.R.string.wifi_tether_configure_ssid_default);
             mCreateNetwork.setSummary(String.format(activity.getString(CONFIG_SUBTEXT),
-                                                    s, mSecurityType[OPEN_INDEX]));
+                                                    s, mSecurityType[WifiApDialog.OPEN_INDEX]));
         } else {
+            int index = WifiApDialog.getSecurityTypeIndex(mWifiConfig);
             mCreateNetwork.setSummary(String.format(activity.getString(CONFIG_SUBTEXT),
                                       mWifiConfig.SSID,
-                                      mWifiConfig.allowedKeyManagement.get(KeyMgmt.WPA_PSK) ?
-                                      mSecurityType[WPA_INDEX] : mSecurityType[OPEN_INDEX]));
+                                      mSecurityType[index]));
         }
     }
 
@@ -138,10 +135,10 @@ public class WifiApSettings extends SettingsPreferenceFragment
                 } else {
                     mWifiManager.setWifiApConfiguration(mWifiConfig);
                 }
+                int index = WifiApDialog.getSecurityTypeIndex(mWifiConfig);
                 mCreateNetwork.setSummary(String.format(getActivity().getString(CONFIG_SUBTEXT),
                             mWifiConfig.SSID,
-                            mWifiConfig.allowedKeyManagement.get(KeyMgmt.WPA_PSK) ?
-                            mSecurityType[WPA_INDEX] : mSecurityType[OPEN_INDEX]));
+                            mSecurityType[index]));
             }
         }
     }
