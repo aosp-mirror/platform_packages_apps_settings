@@ -42,6 +42,7 @@ import android.preference.PreferenceActivity;
 import android.preference.PreferenceFragment;
 import android.preference.PreferenceGroup;
 import android.preference.PreferenceScreen;
+import android.telephony.SignalStrength;
 import android.util.Log;
 import android.util.SparseArray;
 import android.view.Menu;
@@ -572,7 +573,7 @@ public class PowerUsageSummary extends PreferenceFragment implements Runnable {
 
     private void addRadioUsage(long uSecNow) {
         double power = 0;
-        final int BINS = BatteryStats.NUM_SIGNAL_STRENGTH_BINS;
+        final int BINS = SignalStrength.NUM_SIGNAL_STRENGTH_BINS;
         long signalTimeMs = 0;
         for (int i = 0; i < BINS; i++) {
             long strengthTimeMs = mStats.getPhoneSignalStrengthTime(i, uSecNow, mStatsType) / 1000;

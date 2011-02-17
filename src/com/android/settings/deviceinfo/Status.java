@@ -373,7 +373,7 @@ public class Status extends PreferenceActivity {
 
             if (-1 == signalDbm) signalDbm = 0;
 
-            int signalAsu = mPhoneStateReceiver.getSignalStrength();
+            int signalAsu = mPhoneStateReceiver.getSignalStrengthLevelAsu();
 
             if (-1 == signalAsu) signalAsu = 0;
 
