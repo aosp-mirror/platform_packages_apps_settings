@@ -39,8 +39,26 @@
     <item msgid="4460915688877708508">"显示部分窗口动画"</item>
     <item msgid="488968798204105119">"显示所有窗口动画"</item>
   </string-array>
-    <!-- no translation found for screen_timeout_entries:6 (6864027152847611413) -->
-    <!-- no translation found for lock_after_timeout_entries:8 (4322676235684793329) -->
+  <string-array name="screen_timeout_entries">
+    <item msgid="3342301044271143016">"15 秒"</item>
+    <item msgid="8881760709354815449">"30 秒"</item>
+    <item msgid="7589406073232279088">"1 分钟"</item>
+    <item msgid="7001195990902244174">"2 分钟"</item>
+    <item msgid="7489864775127957179">"5 分钟"</item>
+    <item msgid="2314124409517439288">"10 分钟"</item>
+    <item msgid="6864027152847611413">"30 分钟"</item>
+  </string-array>
+  <string-array name="lock_after_timeout_entries">
+    <item msgid="5416834369150305288">"无延迟"</item>
+    <item msgid="6736512735606834431">"5 秒"</item>
+    <item msgid="8044619388267891375">"15 秒"</item>
+    <item msgid="1822002388249545488">"30 秒"</item>
+    <item msgid="8538071621211916519">"1 分钟"</item>
+    <item msgid="5663439580228932882">"2 分钟"</item>
+    <item msgid="49888496216106852">"5 分钟"</item>
+    <item msgid="9002737361305019353">"10 分钟"</item>
+    <item msgid="4322676235684793329">"30 分钟"</item>
+  </string-array>
   <string-array name="tts_rate_entries">
     <item msgid="6041212618892492920">"很慢"</item>
     <item msgid="2361722960903353554">"慢"</item>
@@ -98,6 +116,12 @@
     <item msgid="7981731051382306293">"TLS"</item>
     <item msgid="2892994535305020162">"TTLS"</item>
   </string-array>
+  <string-array name="bluetooth_visibility_timeout_entries">
+    <item msgid="1106621950288502195">"2 分钟"</item>
+    <item msgid="5780349442819375570">"5 分钟"</item>
+    <item msgid="1166466894270177580">"1 小时"</item>
+    <item msgid="9032073376232198148">"从不"</item>
+  </string-array>
   <string-array name="wifi_signal">
     <item msgid="2245412278046491293">"弱"</item>
     <item msgid="5615082285463430971">"一般"</item>
@@ -105,9 +129,9 @@
     <item msgid="5702329417707689835">"强"</item>
   </string-array>
   <string-array name="wifi_sleep_policy_entries">
-    <item msgid="3804733751095821976">"屏幕关闭时休眠"</item>
+    <item msgid="643915340724070374">"当屏幕关闭时（使用更多移动数据）"</item>
     <item msgid="1549288661423279207">"充电时永不休眠"</item>
-    <item msgid="1986753720941888596">"永不休眠"</item>
+    <item msgid="6592896328877671197">"从不（增加耗电量）"</item>
   </string-array>
   <string-array name="wifi_frequency_band_entries">
     <item msgid="624340809384223320">"自动"</item>
@@ -143,7 +167,7 @@
   </string-array>
   <string-array name="wifi_proxy_settings">
     <item msgid="4473276491748503377">"无"</item>
-    <item msgid="6267482274276126058">"静态"</item>
+    <!-- outdated translation 6267482274276126058 -->     <item msgid="8673874894887358090">"静态"</item>
   </string-array>
   <string-array name="emergency_tone_entries">
     <item msgid="5165439859689033665">"关"</item>
@@ -156,6 +180,9 @@
     <item msgid="535934025797984365">"CHAP"</item>
     <item msgid="8383098660619805783">"PAP 或 CHAP"</item>
   </string-array>
+    <!-- no translation found for apn_protocol_entries:0 (4852355456199302715) -->
+    <!-- no translation found for apn_protocol_entries:1 (4394161344888484571) -->
+    <!-- no translation found for apn_protocol_entries:2 (8084938354605535381) -->
   <string-array name="app_install_location_entries">
     <item msgid="8151497958991952759">"设备内部存储"</item>
     <item msgid="3738430123799803530">"可卸载的 SD 卡"</item>

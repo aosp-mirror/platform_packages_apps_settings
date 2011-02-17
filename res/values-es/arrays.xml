@@ -39,8 +39,26 @@
     <item msgid="4460915688877708508">"Aparecen algunas animaciones de ventana."</item>
     <item msgid="488968798204105119">"Aparecen todas las animaciones de ventana."</item>
   </string-array>
-    <!-- no translation found for screen_timeout_entries:6 (6864027152847611413) -->
-    <!-- no translation found for lock_after_timeout_entries:8 (4322676235684793329) -->
+  <string-array name="screen_timeout_entries">
+    <item msgid="3342301044271143016">"15 segundos"</item>
+    <item msgid="8881760709354815449">"30 segundos"</item>
+    <item msgid="7589406073232279088">"1 minuto"</item>
+    <item msgid="7001195990902244174">"2 minutos"</item>
+    <item msgid="7489864775127957179">"5 minutos"</item>
+    <item msgid="2314124409517439288">"10 minutos"</item>
+    <item msgid="6864027152847611413">"30 minutos"</item>
+  </string-array>
+  <string-array name="lock_after_timeout_entries">
+    <item msgid="5416834369150305288">"inmediatamente"</item>
+    <item msgid="6736512735606834431">"5 segundos"</item>
+    <item msgid="8044619388267891375">"15 segundos"</item>
+    <item msgid="1822002388249545488">"30 segundos"</item>
+    <item msgid="8538071621211916519">"1 minuto"</item>
+    <item msgid="5663439580228932882">"2 minutos"</item>
+    <item msgid="49888496216106852">"5 minutos"</item>
+    <item msgid="9002737361305019353">"10 minutos"</item>
+    <item msgid="4322676235684793329">"30 minutos"</item>
+  </string-array>
   <string-array name="tts_rate_entries">
     <item msgid="6041212618892492920">"Muy lenta"</item>
     <item msgid="2361722960903353554">"Lenta"</item>
@@ -98,6 +116,12 @@
     <item msgid="7981731051382306293">"TLS"</item>
     <item msgid="2892994535305020162">"TTLS"</item>
   </string-array>
+  <string-array name="bluetooth_visibility_timeout_entries">
+    <item msgid="1106621950288502195">"2 minutos"</item>
+    <item msgid="5780349442819375570">"5 minutos"</item>
+    <item msgid="1166466894270177580">"Una hora"</item>
+    <item msgid="9032073376232198148">"Nunca"</item>
+  </string-array>
   <string-array name="wifi_signal">
     <item msgid="2245412278046491293">"Mala"</item>
     <item msgid="5615082285463430971">"Aceptable"</item>
@@ -105,9 +129,9 @@
     <item msgid="5702329417707689835">"Excelente"</item>
   </string-array>
   <string-array name="wifi_sleep_policy_entries">
-    <item msgid="3804733751095821976">"Cuando la pantalla se apague"</item>
+    <item msgid="643915340724070374">"Al apagarse la pantalla (utiliza más datos móviles)"</item>
     <item msgid="1549288661423279207">"Nunca si se está cargando la batería"</item>
-    <item msgid="1986753720941888596">"Nunca"</item>
+    <item msgid="6592896328877671197">"Nunca (utiliza más batería)"</item>
   </string-array>
   <string-array name="wifi_frequency_band_entries">
     <item msgid="624340809384223320">"Automático"</item>
@@ -143,7 +167,7 @@
   </string-array>
   <string-array name="wifi_proxy_settings">
     <item msgid="4473276491748503377">"Ninguno"</item>
-    <item msgid="6267482274276126058">"Estático"</item>
+    <!-- outdated translation 6267482274276126058 -->     <item msgid="8673874894887358090">"Estático"</item>
   </string-array>
   <string-array name="emergency_tone_entries">
     <item msgid="5165439859689033665">"Desconectado"</item>
@@ -156,6 +180,9 @@
     <item msgid="535934025797984365">"CHAP"</item>
     <item msgid="8383098660619805783">"PAP o CHAP"</item>
   </string-array>
+    <!-- no translation found for apn_protocol_entries:0 (4852355456199302715) -->
+    <!-- no translation found for apn_protocol_entries:1 (4394161344888484571) -->
+    <!-- no translation found for apn_protocol_entries:2 (8084938354605535381) -->
   <string-array name="app_install_location_entries">
     <item msgid="8151497958991952759">"Almacenamiento de dispositivo interno"</item>
     <item msgid="3738430123799803530">"Tarjeta SD extraíble"</item>
