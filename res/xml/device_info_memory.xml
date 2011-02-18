@@ -41,14 +41,29 @@
         <Preference android:key="memory_internal_size"
             android:title="@string/memory_size"
             android:summary="@string/memory_calculating_size"/>
-        <Preference android:key="memory_internal_media"
-            android:title="@string/memory_media_usage"
+
+        <Preference android:key="memory_internal_avail"
+            android:title="@string/memory_available"
             android:summary="@string/memory_calculating_size"/>
+
         <Preference android:key="memory_internal_apps"
             android:title="@string/memory_apps_usage"
             android:summary="@string/memory_calculating_size"/>
-        <Preference android:key="memory_internal_avail"
-            android:title="@string/memory_available"
+
+        <Preference android:key="memory_internal_downloads"
+            android:title="@string/memory_downloads_usage"
+            android:summary="@string/memory_calculating_size"/>
+
+        <Preference android:key="memory_internal_dcim"
+            android:title="@string/memory_dcim_usage"
+            android:summary="@string/memory_calculating_size"/>
+
+        <Preference android:key="memory_internal_music"
+            android:title="@string/memory_music_usage"
+            android:summary="@string/memory_calculating_size"/>
+
+        <Preference android:key="memory_internal_media_misc"
+            android:title="@string/memory_media_misc_usage"
             android:summary="@string/memory_calculating_size"/>
     </PreferenceCategory>
 

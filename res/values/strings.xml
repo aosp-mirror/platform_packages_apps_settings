@@ -1566,10 +1566,18 @@
     <string name="memory_size">Total</string>
     <!-- SD card & phone storage settings summary. Displayed when the total memory usage is being calculated. Will be replaced with a number like "12.3 GB" when finished calucating. [CHAR LIMIT=30] -->
     <string name="memory_calculating_size">Calculating…</string>
-    <!-- SD card & phone storage settings title. Displayed as a title when showing the total usage of applications installed. Below it will be a number like "123.4 MB" indicating used storage. [CHAR LIMIT=30] -->
+    <!-- SD card & phone storage settings title. Displayed as a title when showing the total usage of applications installed. Below it will be a number like "123.4 MB" indicating used storage. [CHAR LIMIT=50] -->
     <string name="memory_apps_usage">Applications</string>
-    <!-- SD card & phone storage settings title. Displayed as a title when showing the total usage of media on the device. Below it will be a number like "123.4 MB" indicating used storage. [CHAR LIMIT=30] -->
+    <!-- SD card & phone storage settings title. Displayed as a title when showing the total usage of media on the device. Below it will be a number like "123.4 MB" indicating used storage. [CHAR LIMIT=50] -->
     <string name="memory_media_usage">Media</string>
+    <!-- SD card & phone storage settings title. Displayed as a title when showing the total usage of /sdcard/Download on the device. Below it will be a number like "123.4 MB" indicating used storage. [CHAR LIMIT=50] -->
+    <string name="memory_downloads_usage">Downloads</string>
+    <!-- SD card & phone storage settings title. Displayed as a title when showing the total usage of all pictures, videos in /sdcard/DCIM, /sdcard/Pictures folders on the device. Below it will be a number like "123.4 MB" indicating used storage. [CHAR LIMIT=50] -->
+    <string name="memory_dcim_usage">Pictures, Videos</string>
+    <!-- SD card & phone storage settings title. Displayed as a title when showing the total usage of audio files in /sdcard on the device. Below it will be a number like "123.4 MB" indicating used storage. [CHAR LIMIT=50] -->
+    <string name="memory_music_usage">Audio (music, ringtones, podcasts etc)</string>
+    <!-- SD card & phone storage settings title. Displayed as a title when showing the total usage of misc files on the device. Below it will be a number like "123.4 MB" indicating used storage. [CHAR LIMIT=50] -->
+    <string name="memory_media_misc_usage">Misc.</string>
     <!-- SD card & phone storage settings item title that will result in the phone unmounting the SD card.  This will be done before the user phyiscally removes the SD card from the phone.  Kind of like the "Safely remove" on some operating systems.   [CHAR LIMIT=25] -->
     <string name="sd_eject" product="nosdcard">Unmount shared storage</string>
     <!-- SD card & phone storage settings item title that will result in the phone unmounting the SD card.  This will be done before the user phyiscally removes the SD card from the phone.  Kind of like the "Safely remove" on some operating systems.   -->
@@ -3257,4 +3265,15 @@ found in the list of installed applications.</string>
     <!-- This error message is displayed when the vpn profile is going to be saved but the vpn service is busy [CHAR LIMIT=NONE] -->
     <string name="service_busy">Service busy, try again</string>
 
+    <!-- the following are for Settings Storage screen -->
+    <!-- Menu item/button 'delete' -->
+    <string name="delete">Delete</string>
+    <!-- Misc files [CHAR LIMIT=25] -->
+    <string name="misc_files">Misc Files</string>
+    <!-- number of misc files selected [CHAR LIMIT=20] -->
+    <string name="misc_files_selected_count">selected</string>
+    <!-- the string 'out of' displayed when saying "selected N out of M" [CHAR LIMIT=20] -->
+    <string name="misc_files_selected_count_out_of">out of</string>
+    <!--  action to select all [CHAR LIMIT=30] -->
+    <string name="select_all">Select All</string>
 </resources>
