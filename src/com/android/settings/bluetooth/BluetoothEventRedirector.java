@@ -128,13 +128,11 @@ class BluetoothEventRedirector {
 
                 mManager.getCachedDeviceManager().onProfileStateChanged(device,
                         Profile.A2DP, newState);
-            } else if (action.equals(BluetoothInputDevice.ACTION_INPUT_DEVICE_STATE_CHANGED)) {
-                final int newState = intent.getIntExtra(
-                        BluetoothInputDevice.EXTRA_INPUT_DEVICE_STATE, 0);
-                final int oldState = intent.getIntExtra(
-                        BluetoothInputDevice.EXTRA_PREVIOUS_INPUT_DEVICE_STATE, 0);
-                if (newState == BluetoothInputDevice.STATE_DISCONNECTED &&
-                        oldState == BluetoothInputDevice.STATE_CONNECTING) {
+            } else if (action.equals(BluetoothInputDevice.ACTION_CONNECTION_STATE_CHANGED)) {
+                final int newState = intent.getIntExtra(BluetoothProfile.EXTRA_STATE, 0);
+                final int oldState = intent.getIntExtra(BluetoothProfile.EXTRA_PREVIOUS_STATE, 0);
+                if (newState == BluetoothProfile.STATE_DISCONNECTED &&
+                        oldState == BluetoothProfile.STATE_CONNECTING) {
                     Log.i(TAG, "Failed to connect BT HID");
                 }
 
@@ -202,7 +200,7 @@ class BluetoothEventRedirector {
 
         // Fine-grained state broadcasts
         filter.addAction(BluetoothPan.ACTION_PAN_STATE_CHANGED);
-        filter.addAction(BluetoothInputDevice.ACTION_INPUT_DEVICE_STATE_CHANGED);
+        filter.addAction(BluetoothInputDevice.ACTION_CONNECTION_STATE_CHANGED);
         filter.addAction(BluetoothA2dp.ACTION_CONNECTION_STATE_CHANGED);
         filter.addAction(BluetoothHeadset.ACTION_CONNECTION_STATE_CHANGED);
         filter.addAction(BluetoothDevice.ACTION_CLASS_CHANGED);

@@ -639,29 +639,39 @@ abstract class LocalBluetoothProfileManager {
         }
     }
 
-    private static class HidProfileManager extends LocalBluetoothProfileManager {
-        private final BluetoothInputDevice mService;
+    private static class HidProfileManager extends LocalBluetoothProfileManager
+            implements BluetoothProfile.ServiceListener {
+        private BluetoothInputDevice mService;
 
         public HidProfileManager(LocalBluetoothManager localManager) {
             super(localManager);
-            mService = new BluetoothInputDevice(localManager.getContext());
+            BluetoothAdapter adapter = BluetoothAdapter.getDefaultAdapter();
+            adapter.getProfileProxy(localManager.getContext(), this, BluetoothProfile.INPUT_DEVICE);
+        }
+
+        public void onServiceConnected(int profile, BluetoothProfile proxy) {
+            mService = (BluetoothInputDevice) proxy;
+        }
+
+        public void onServiceDisconnected(int profile) {
+            mService = null;
         }
 
         @Override
         public boolean connect(BluetoothDevice device) {
-            return mService.connectInputDevice(device);
+            return mService.connect(device);
         }
 
         @Override
         public int convertState(int hidState) {
             switch (hidState) {
-            case BluetoothInputDevice.STATE_CONNECTED:
+            case BluetoothProfile.STATE_CONNECTED:
                 return SettingsBtStatus.CONNECTION_STATUS_CONNECTED;
-            case BluetoothInputDevice.STATE_CONNECTING:
+            case BluetoothProfile.STATE_CONNECTING:
                 return SettingsBtStatus.CONNECTION_STATUS_CONNECTING;
-            case BluetoothInputDevice.STATE_DISCONNECTED:
+            case BluetoothProfile.STATE_DISCONNECTED:
                 return SettingsBtStatus.CONNECTION_STATUS_DISCONNECTED;
-            case BluetoothInputDevice.STATE_DISCONNECTING:
+            case BluetoothProfile.STATE_DISCONNECTING:
                 return SettingsBtStatus.CONNECTION_STATUS_DISCONNECTING;
             default:
                 return SettingsBtStatus.CONNECTION_STATUS_UNKNOWN;
@@ -670,22 +680,22 @@ abstract class LocalBluetoothProfileManager {
 
         @Override
         public boolean disconnect(BluetoothDevice device) {
-            return mService.disconnectInputDevice(device);
+            return mService.disconnect(device);
         }
 
         @Override
         public List<BluetoothDevice> getConnectedDevices() {
-            return mService.getConnectedInputDevices();
+            return mService.getConnectedDevices();
         }
 
         @Override
         public int getConnectionStatus(BluetoothDevice device) {
-            return convertState(mService.getInputDeviceState(device));
+            return convertState(mService.getConnectionState(device));
         }
 
         @Override
         public int getPreferred(BluetoothDevice device) {
-            return mService.getInputDevicePriority(device);
+            return mService.getPriority(device);
         }
 
         @Override
@@ -701,7 +711,7 @@ abstract class LocalBluetoothProfileManager {
 
         @Override
         public boolean isPreferred(BluetoothDevice device) {
-            return mService.getInputDevicePriority(device) > BluetoothInputDevice.PRIORITY_OFF;
+            return mService.getPriority(device) > BluetoothProfile.PRIORITY_OFF;
         }
 
         @Override
@@ -712,11 +722,11 @@ abstract class LocalBluetoothProfileManager {
         @Override
         public void setPreferred(BluetoothDevice device, boolean preferred) {
             if (preferred) {
-                if (mService.getInputDevicePriority(device) < BluetoothInputDevice.PRIORITY_ON) {
-                    mService.setInputDevicePriority(device, BluetoothInputDevice.PRIORITY_ON);
+                if (mService.getPriority(device) < BluetoothProfile.PRIORITY_ON) {
+                    mService.setPriority(device, BluetoothProfile.PRIORITY_ON);
                 }
             } else {
-                mService.setInputDevicePriority(device, BluetoothInputDevice.PRIORITY_OFF);
+                mService.setPriority(device, BluetoothProfile.PRIORITY_OFF);
             }
         }
 
