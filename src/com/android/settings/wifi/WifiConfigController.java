@@ -402,52 +402,48 @@ public class WifiConfigController implements TextWatcher,
     }
 
     private int validateIpConfigFields(LinkProperties linkProperties) {
+        String ipAddr = mIpAddressView.getText().toString();
+        InetAddress inetAddr = null;
         try {
-            String ipAddr = mIpAddressView.getText().toString();
-            if (!InetAddress.isNumeric(ipAddr)) {
-                return R.string.wifi_ip_settings_invalid_ip_address;
-            }
-            InetAddress inetAddr = InetAddress.getByName(ipAddr);
+            inetAddr = NetworkUtils.numericToInetAddress(ipAddr);
+        } catch (IllegalArgumentException e) {
+            return R.string.wifi_ip_settings_invalid_ip_address;
+        }
 
-            int networkPrefixLength = Integer.parseInt(mNetworkPrefixLengthView.getText()
-                    .toString());
-            if (networkPrefixLength < 0 || networkPrefixLength > 32) {
-                return R.string.wifi_ip_settings_invalid_network_prefix_length;
-            }
+        int networkPrefixLength = -1;
+        try {
+            networkPrefixLength = Integer.parseInt(mNetworkPrefixLengthView.getText().toString());
+        } catch (NumberFormatException e) { }
+        if (networkPrefixLength < 0 || networkPrefixLength > 32) {
+            return R.string.wifi_ip_settings_invalid_network_prefix_length;
+        }
+        linkProperties.addLinkAddress(new LinkAddress(inetAddr, networkPrefixLength));
 
-            linkProperties.addLinkAddress(new LinkAddress(inetAddr, networkPrefixLength));
+        String gateway = mGatewayView.getText().toString();
+        InetAddress gatewayAddr = null;
+        try {
+            gatewayAddr = NetworkUtils.numericToInetAddress(gateway);
+        } catch (IllegalArgumentException e) {
+            return R.string.wifi_ip_settings_invalid_gateway;
+        }
+        linkProperties.addGateway(gatewayAddr);
 
-            String gateway = mGatewayView.getText().toString();
-            if (!InetAddress.isNumeric(gateway)) {
-                return R.string.wifi_ip_settings_invalid_gateway;
-            }
-            InetAddress gatewayAddr;
+        String dns = mDns1View.getText().toString();
+        InetAddress dnsAddr = null;
+        try {
+            dnsAddr = NetworkUtils.numericToInetAddress(dns);
+        } catch (IllegalArgumentException e) {
+            return R.string.wifi_ip_settings_invalid_dns;
+        }
+        linkProperties.addDns(dnsAddr);
+        if (mDns2View.length() > 0) {
+            dns = mDns2View.getText().toString();
             try {
-                gatewayAddr = InetAddress.getByName(gateway);
-            } catch (UnknownHostException e) {
-                return R.string.wifi_ip_settings_invalid_gateway;
-            }
-            linkProperties.addGateway(gatewayAddr);
-
-            String dns = mDns1View.getText().toString();
-            if (!InetAddress.isNumeric(dns)) {
+                dnsAddr = NetworkUtils.numericToInetAddress(dns);
+            } catch (IllegalArgumentException e) {
                 return R.string.wifi_ip_settings_invalid_dns;
             }
-            linkProperties.addDns(InetAddress.getByName(dns));
-            if (mDns2View.length() > 0) {
-                dns = mDns2View.getText().toString();
-                if (!InetAddress.isNumeric(dns)) {
-                    return R.string.wifi_ip_settings_invalid_dns;
-                }
-                linkProperties.addDns(InetAddress.getByName(dns));
-            }
-
-        } catch (NumberFormatException ignore) {
-            return R.string.wifi_ip_settings_invalid_network_prefix_length;
-        } catch (UnknownHostException e) {
-            //Should not happen since we have already validated addresses
-            Log.e(TAG, "Failure to validate IP configuration " + e);
-            return R.string.wifi_ip_settings_invalid_ip_address;
+            linkProperties.addDns(dnsAddr);
         }
         return 0;
     }
