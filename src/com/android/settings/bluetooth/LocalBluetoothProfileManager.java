@@ -736,12 +736,22 @@ abstract class LocalBluetoothProfileManager {
         }
     }
 
-    private static class PanProfileManager extends LocalBluetoothProfileManager {
-        private final BluetoothPan mService;
+    private static class PanProfileManager extends LocalBluetoothProfileManager
+            implements BluetoothProfile.ServiceListener {
+        private BluetoothPan mService;
 
         public PanProfileManager(LocalBluetoothManager localManager) {
             super(localManager);
-            mService = new BluetoothPan(localManager.getContext());
+            BluetoothAdapter adapter = BluetoothAdapter.getDefaultAdapter();
+            adapter.getProfileProxy(localManager.getContext(), this, BluetoothProfile.PAN);
+        }
+
+        public void onServiceConnected(int profile, BluetoothProfile proxy) {
+            mService = (BluetoothPan) proxy;
+        }
+
+        public void onServiceDisconnected(int profile) {
+            mService = null;
         }
 
         @Override
@@ -799,7 +809,7 @@ abstract class LocalBluetoothProfileManager {
 
         @Override
         public int getConnectionStatus(BluetoothDevice device) {
-            return convertState(mService.getPanDeviceState(device));
+            return convertState(mService.getConnectionState(device));
         }
 
         @Override
