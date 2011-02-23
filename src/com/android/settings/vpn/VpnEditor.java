@@ -22,6 +22,7 @@ import com.android.settings.SettingsPreferenceFragment;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.vpn.L2tpIpsecProfile;
@@ -152,17 +153,15 @@ public class VpnEditor extends SettingsPreferenceFragment {
     }*/
 
     private void initViewFor(VpnProfile profile) {
-        setTitle(profile);
         mProfileEditor.loadPreferencesTo(getPreferenceScreen());
     }
 
-    private void setTitle(VpnProfile profile) {
-        final Activity activity = getActivity();
-        String formatString = mAddingProfile
-                ? activity.getString(R.string.vpn_edit_title_add)
-                : activity.getString(R.string.vpn_edit_title_edit);
-        activity.setTitle(String.format(formatString,
-                profile.getType().getDisplayName()));
+    /* package */static String getTitle(Context context, VpnProfile profile, boolean adding) {
+        String formatString = adding
+                ? context.getString(R.string.vpn_edit_title_add)
+                : context.getString(R.string.vpn_edit_title_edit);
+        return String.format(formatString,
+                profile.getType().getDisplayName());
     }
 
     /**

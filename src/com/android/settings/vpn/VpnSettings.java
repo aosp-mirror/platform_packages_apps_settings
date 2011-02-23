@@ -745,7 +745,7 @@ public class VpnSettings extends SettingsPreferenceFragment
         // TODO: Show different titles for add and edit.
         ((PreferenceActivity)getActivity()).startPreferencePanel(
                 VpnEditor.class.getCanonicalName(), args,
-                add ? R.string.vpn_details_title : R.string.vpn_details_title, null,
+                0, VpnEditor.getTitle(getActivity(), profile, add),
                 this, REQUEST_ADD_OR_EDIT_PROFILE);
     }
 
