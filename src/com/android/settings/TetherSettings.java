@@ -23,6 +23,7 @@ import android.app.AlertDialog;
 import android.app.Dialog;
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothPan;
+import android.bluetooth.BluetoothProfile;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
@@ -88,7 +89,12 @@ public class TetherSettings extends SettingsPreferenceFragment {
         addPreferencesFromResource(R.xml.tether_prefs);
 
         final Activity activity = getActivity();
-        mBluetoothPan = new BluetoothPan(activity);
+        BluetoothAdapter adapter = BluetoothAdapter.getDefaultAdapter();
+        if (adapter != null) {
+            adapter.getProfileProxy(activity.getApplicationContext(), mProfileServiceListener,
+                    BluetoothProfile.PAN);
+        }
+
 
         mEnableWifiAp = (CheckBoxPreference) findPreference(ENABLE_WIFI_AP);
         mWifiApSettings = (PreferenceScreen) findPreference(WIFI_AP_SETTINGS);
@@ -119,7 +125,7 @@ public class TetherSettings extends SettingsPreferenceFragment {
         if (!bluetoothAvailable) {
             getPreferenceScreen().removePreference(mBluetoothTether);
         } else {
-            if (mBluetoothPan.isTetheringOn()) {
+            if (mBluetoothPan != null && mBluetoothPan.isTetheringOn()) {
                 mBluetoothTether.setChecked(true);
             } else {
                 mBluetoothTether.setChecked(false);
@@ -129,6 +135,16 @@ public class TetherSettings extends SettingsPreferenceFragment {
         mWifiApEnabler = new WifiApEnabler(activity, mEnableWifiAp);
         mView = new WebView(activity);
     }
+
+    private BluetoothProfile.ServiceListener mProfileServiceListener =
+        new BluetoothProfile.ServiceListener() {
+        public void onServiceConnected(int profile, BluetoothProfile proxy) {
+            mBluetoothPan = (BluetoothPan) proxy;
+        }
+        public void onServiceDisconnected(int profile) {
+            mBluetoothPan = null;
+        }
+    };
 
     @Override
     public Dialog onCreateDialog(int id) {

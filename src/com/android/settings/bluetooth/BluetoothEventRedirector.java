@@ -139,14 +139,14 @@ class BluetoothEventRedirector {
                 mManager.getCachedDeviceManager().onProfileStateChanged(device,
                         Profile.HID, newState);
 
-            } else if (action.equals(BluetoothPan.ACTION_PAN_STATE_CHANGED)) {
+            } else if (action.equals(BluetoothPan.ACTION_CONNECTION_STATE_CHANGED)) {
                 final int role = intent.getIntExtra(
                         BluetoothPan.EXTRA_LOCAL_ROLE, 0);
                 if (role == BluetoothPan.LOCAL_PANU_ROLE) {
                     final int newState = intent.getIntExtra(
-                            BluetoothPan.EXTRA_PAN_STATE, 0);
+                            BluetoothPan.EXTRA_STATE, 0);
                     final int oldState = intent.getIntExtra(
-                            BluetoothPan.EXTRA_PREVIOUS_PAN_STATE, 0);
+                            BluetoothPan.EXTRA_PREVIOUS_STATE, 0);
                     if (newState == BluetoothPan.STATE_DISCONNECTED &&
                             oldState == BluetoothPan.STATE_CONNECTING) {
                         Log.i(TAG, "Failed to connect BT PAN");
@@ -199,7 +199,7 @@ class BluetoothEventRedirector {
         filter.addAction(BluetoothDevice.ACTION_PAIRING_CANCEL);
 
         // Fine-grained state broadcasts
-        filter.addAction(BluetoothPan.ACTION_PAN_STATE_CHANGED);
+        filter.addAction(BluetoothPan.ACTION_CONNECTION_STATE_CHANGED);
         filter.addAction(BluetoothInputDevice.ACTION_CONNECTION_STATE_CHANGED);
         filter.addAction(BluetoothA2dp.ACTION_CONNECTION_STATE_CHANGED);
         filter.addAction(BluetoothHeadset.ACTION_CONNECTION_STATE_CHANGED);
