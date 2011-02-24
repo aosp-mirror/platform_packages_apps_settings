@@ -478,8 +478,8 @@ public class MemoryMeasurement {
         mHandler.sendEmptyMessage(MeasurementHandler.MSG_INVALIDATE);
     }
 
-    boolean isSizeOfMiscCategorynonZero() {
-        return mFileInfoForMisc.size() > 0;
+    boolean isSizeOfMiscCategoryNonZero() {
+        return mFileInfoForMisc != null && mFileInfoForMisc.size() > 0;
     }
 
     static class FileInfo implements Comparable<FileInfo> {

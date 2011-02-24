@@ -326,7 +326,7 @@ public class Memory extends SettingsPreferenceFragment implements OnCancelListen
             return true;
         } else if (preference == mMediaPreferences[Constants.MEDIA_MISC_INDEX]) {
             Context context = getActivity().getApplicationContext();
-            if (MemoryMeasurement.getInstance(context).isSizeOfMiscCategorynonZero()) {
+            if (MemoryMeasurement.getInstance(context).isSizeOfMiscCategoryNonZero()) {
                 startActivity(new Intent(context, MiscFilesHandler.class));
             }
             return true;
