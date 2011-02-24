@@ -160,6 +160,11 @@ public class SecuritySettings extends SettingsPreferenceFragment
             mUseLocation = useLocation;
         }
 
+        // Change the summary for wifi-only devices
+        if (Utils.isWifiOnly()) {
+            mNetwork.setSummaryOn(R.string.location_neighborhood_level_wifi);
+        }
+
         // Add options for lock/unlock screen
         int resid = 0;
         if (!mLockPatternUtils.isSecure()) {

@@ -21,6 +21,7 @@ import static android.net.wifi.WifiConfiguration.INVALID_NETWORK_ID;
 import com.android.settings.ProgressCategoryBase;
 import com.android.settings.R;
 import com.android.settings.SettingsPreferenceFragment;
+import com.android.settings.Utils;
 
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -211,11 +212,15 @@ public class WifiSettings extends SettingsPreferenceFragment
 
             ListPreference pref = (ListPreference) findPreference(KEY_SLEEP_POLICY);
             if (pref != null) {
-                pref.setOnPreferenceChangeListener(this);
-                int value = Settings.System.getInt(getContentResolver(),
-                        Settings.System.WIFI_SLEEP_POLICY,
-                        Settings.System.WIFI_SLEEP_POLICY_NEVER);
-                pref.setValue(String.valueOf(value));
+                if (Utils.isWifiOnly()) {
+                    getPreferenceScreen().removePreference(pref);
+                } else {
+                    pref.setOnPreferenceChangeListener(this);
+                    int value = Settings.System.getInt(getContentResolver(),
+                            Settings.System.WIFI_SLEEP_POLICY,
+                            Settings.System.WIFI_SLEEP_POLICY_NEVER);
+                    pref.setValue(String.valueOf(value));
+                }
             }
 
             registerForContextMenu(getListView());
