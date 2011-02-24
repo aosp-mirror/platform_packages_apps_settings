@@ -48,6 +48,7 @@ public class WirelessSettings extends SettingsPreferenceFragment {
     private static final String KEY_VPN_SETTINGS = "vpn_settings";
     private static final String KEY_TETHER_SETTINGS = "tether_settings";
     private static final String KEY_PROXY_SETTINGS = "proxy_settings";
+    private static final String KEY_MOBILE_NETWORK_SETTINGS = "mobile_network_settings";
 
     public static final String EXIT_ECM_RESULT = "exit_ecm_result";
     public static final int REQUEST_CODE_EXIT_ECM = 1;
@@ -131,6 +132,11 @@ public class WirelessSettings extends SettingsPreferenceFragment {
             getPreferenceScreen().removePreference(nfc);
         }
 
+        // Remove Mobile Network Settings if it's a wifi-only device.
+        if (Utils.isWifiOnly()) {
+            getPreferenceScreen().removePreference(findPreference(KEY_MOBILE_NETWORK_SETTINGS));
+        }
+
         // Enable Proxy selector settings if allowed.
         Preference mGlobalProxy = findPreference(KEY_PROXY_SETTINGS);
         DevicePolicyManager mDPM = (DevicePolicyManager)
@@ -139,10 +145,10 @@ public class WirelessSettings extends SettingsPreferenceFragment {
         getPreferenceScreen().removePreference(mGlobalProxy);
         mGlobalProxy.setEnabled(mDPM.getGlobalProxyAdmin() == null);
 
-        // Disable Tethering if it's not allowed
+        // Disable Tethering if it's not allowed or if it's a wifi-only device
         ConnectivityManager cm =
                 (ConnectivityManager) activity.getSystemService(Context.CONNECTIVITY_SERVICE);
-        if (!cm.isTetheringSupported()) {
+        if (!cm.isTetheringSupported() || Utils.isWifiOnly()) {
             getPreferenceScreen().removePreference(findPreference(KEY_TETHER_SETTINGS));
         } else {
             String[] usbRegexs = cm.getTetherableUsbRegexs();
