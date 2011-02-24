@@ -147,11 +147,11 @@
     <string name="proxy_settings_title" msgid="5912878565897294401">"Ajustes de proxy"</string>
     <string name="proxy_settings_summary" msgid="7898928000758321486">"Definir el proxy HTTP global y las listas de exclusión"</string>
     <string name="proxy_clear_text" msgid="5555400754952012657">"Borrar"</string>
-    <!-- outdated translation 2623639656638472491 -->     <string name="proxy_port_label" msgid="5655276502233453400">"Puerto"</string>
+    <string name="proxy_port_label" msgid="5655276502233453400">"Puerto proxy"</string>
     <string name="proxy_exclusionlist_label" msgid="204409815790850313">"Sin proxy para"</string>
     <string name="proxy_defaultView_text" msgid="6387985519141433291">"Restaurar valores predeterminados"</string>
     <string name="proxy_action_text" msgid="2957063145357903951">"Listo"</string>
-    <!-- outdated translation 7531298584350977540 -->     <string name="proxy_hostname_label" msgid="8490171412999373362">"Nombre de host"</string>
+    <string name="proxy_hostname_label" msgid="8490171412999373362">"Nombre de host de proxy"</string>
     <string name="proxy_error" msgid="8926675299638611451">"Atención"</string>
     <string name="proxy_error_dismiss" msgid="4993171795485460060">"Aceptar"</string>
     <string name="proxy_error_invalid_host" msgid="9120776460063182119">"El nombre de host introducido no es válido."</string>
@@ -159,8 +159,7 @@
     <string name="proxy_error_empty_port" msgid="3525734169948795417">"Debes completar el campo de puerto."</string>
     <string name="proxy_error_empty_host_set_port" msgid="2451694104858226781">"El campo de portal debe estar vacío si el campo de host también lo está."</string>
     <string name="proxy_error_invalid_port" msgid="1816315605424943626">"El puerto introducido no es válido."</string>
-    <!-- no translation found for proxy_warning_limited_support (7442676587591460854) -->
-    <skip />
+    <string name="proxy_warning_limited_support" msgid="7442676587591460854">"El navegador utiliza el proxy HTTP, pero no puede utilizarlo ninguna otra aplicación."</string>
     <string name="radio_info_signal_location_label" msgid="16475158265551708">"Ubicación:"</string>
     <string name="radio_info_neighboring_location_label" msgid="2385625674055934880">"CID anexo"</string>
     <string name="radio_info_data_attempts_label" msgid="1731106244577323381">"Intentos de datos:"</string>
@@ -220,7 +219,7 @@
     <string name="activity_picker_label" msgid="4910700713930693329">"Seleccionar actividad"</string>
     <string name="device_info_label" msgid="6551553813651711205">"Información del dispositivo"</string>
     <string name="battery_info_label" msgid="4132685016148679403">"Información sobre la batería"</string>
-    <string name="display_label" msgid="7403874003169865762">"Pantalla"</string>
+    <!-- outdated translation 7403874003169865762 -->     <string name="display_label" msgid="8074070940506840792">"Pantalla"</string>
     <string name="phone_info_label" product="tablet" msgid="7820855350955963628">"Información sobre la tableta"</string>
     <string name="phone_info_label" product="default" msgid="2127552523124277664">"Información sobre el teléfono"</string>
     <string name="sd_card_settings_label" product="nosdcard" msgid="8101475181301178428">"Almacenamiento USB"</string>
@@ -334,10 +333,8 @@
     <string name="lockpassword_pin_too_short" msgid="2252847623267704683">"El PIN debe contener al menos %d caracteres."</string>
     <string name="lockpassword_press_continue" msgid="122706614386757182">"Tocar Continuar al terminar"</string>
     <string name="lockpassword_continue_label" msgid="4602203784934526940">"Continuar"</string>
-    <!-- no translation found for lockpassword_password_too_long (5487426077939378487) -->
-    <skip />
-    <!-- no translation found for lockpassword_pin_too_long (6382649850551200693) -->
-    <skip />
+    <string name="lockpassword_password_too_long" msgid="5487426077939378487">"La contraseña debe tener menos de <xliff:g id="NUMBER">%d</xliff:g> caracteres."</string>
+    <string name="lockpassword_pin_too_long" msgid="6382649850551200693">"El PIN debe tener menos de <xliff:g id="NUMBER">%d</xliff:g> números."</string>
     <string name="lockpassword_pin_contains_non_digits" msgid="3379277100136600632">"El PIN solo debe contener dígitos comprendidos entre el cero y el nueve."</string>
     <string name="lockpassword_pin_recently_used" msgid="2729073062730842496">"Administrador de dispositivos no permite usar PIN reciente"</string>
     <string name="lockpassword_illegal_character" msgid="6204396794254688549">"La contraseña contiene un carácter no permitido."</string>
@@ -587,7 +584,7 @@
     <string name="sync_settings_summary" msgid="2962179505214965667">"Añadir o eliminar cuentas y modificar la configuración de las cuentas"</string>
     <string name="search_settings" msgid="1910951467596035063">"Búsqueda"</string>
     <string name="search_settings_summary" msgid="9205656546570654169">"Administrar historial y configuración de búsqueda"</string>
-    <string name="display_settings" msgid="3912042046350078328">"Ajustes de pantalla"</string>
+    <!-- outdated translation 3912042046350078328 -->     <string name="display_settings" msgid="5947830029420609057">"Ajustes de pantalla"</string>
     <string name="animations_title" msgid="1062189037402346023">"Animación"</string>
     <string name="animations_summary_on" msgid="8843613112130484436">"Mostrar animación al abrir y cerrar ventanas"</string>
     <string name="animations_summary_off" msgid="2777026828025551983">"Mostrar animación al abrir y cerrar ventanas"</string>
@@ -666,6 +663,14 @@
     <string name="memory_calculating_size" msgid="2188358544203768588">"Calculando..."</string>
     <string name="memory_apps_usage" msgid="9079237985722858506">"Aplicaciones"</string>
     <string name="memory_media_usage" msgid="3738830697707880405">"Multimedia"</string>
+    <!-- no translation found for memory_downloads_usage (3755173051677533027) -->
+    <skip />
+    <!-- no translation found for memory_dcim_usage (6679615808140067136) -->
+    <skip />
+    <!-- no translation found for memory_music_usage (4040027367622874108) -->
+    <skip />
+    <!-- no translation found for memory_media_misc_usage (235452944021647124) -->
+    <skip />
     <string name="sd_eject" product="nosdcard" msgid="4988563376492400073">"Desactivar almacenam comp"</string>
     <string name="sd_eject" product="default" msgid="6915293408836853020">"Desactivar tarjeta SD"</string>
     <string name="sd_eject_summary" product="nosdcard" msgid="5009296896648072891">"Desactivar almacenamiento USB interno"</string>
@@ -717,8 +722,7 @@
     <string name="apn_auth_type_chap" msgid="3369626283789068360">"CHAP"</string>
     <string name="apn_auth_type_pap_chap" msgid="9102343063036134541">"PAP o CHAP"</string>
     <string name="apn_type" msgid="469613123902220544">"Tipo de APN"</string>
-    <!-- no translation found for apn_protocol (3272222921649348640) -->
-    <skip />
+    <string name="apn_protocol" msgid="3272222921649348640">"Protocolo APN"</string>
     <string name="menu_delete" msgid="6981294422841124659">"Eliminar APN"</string>
     <string name="menu_new" msgid="3014205883303921729">"APN nuevo"</string>
     <string name="menu_save" msgid="8109345640668285399">"Guardar"</string>
@@ -1050,8 +1054,8 @@
     <string name="input_methods_settings_label_format" msgid="6002887604815693322">"Ajustes de <xliff:g id="IME_NAME">%1$s</xliff:g>"</string>
     <string name="input_methods_and_subtype_enabler_title" msgid="4018402267502337338">"Selecc métodos introducción activos"</string>
     <string name="onscreen_keyboard_settings_summary" msgid="5841558383556238653">"Ajustes de teclado en pantalla"</string>
-    <string name="builtin_keyboard_settings_title" msgid="5274990495405941804">"Teclado integrado"</string>
-    <string name="builtin_keyboard_settings_summary" msgid="7990296351888096836">"Ajustes de teclado físico integrado"</string>
+    <!-- outdated translation 5274990495405941804 -->     <string name="builtin_keyboard_settings_title" msgid="7688732909551116798">"Teclado integrado"</string>
+    <!-- outdated translation 7990296351888096836 -->     <string name="builtin_keyboard_settings_summary" msgid="2392531685358035899">"Ajustes de teclado físico integrado"</string>
     <string name="development_settings_title" msgid="6719732334835420989">"Desarrollo"</string>
     <string name="development_settings_summary" msgid="2151320488701538355">"Establecer opciones de desarrollo de aplicaciones"</string>
     <string name="enable_adb" msgid="7982306934419797485">"Depuración USB"</string>
@@ -1116,7 +1120,7 @@
     <string name="details_subtitle" msgid="32593908269911734">"Detalles de uso"</string>
     <string name="controls_subtitle" msgid="390468421138288702">"Ajustar uso de la batería"</string>
     <string name="packages_subtitle" msgid="4736416171658062768">"Paquetes incluidos"</string>
-    <string name="power_screen" msgid="2353149143338929583">"Pantalla"</string>
+    <!-- outdated translation 2353149143338929583 -->     <string name="power_screen" msgid="3023346080675904613">"Pantalla"</string>
     <string name="power_wifi" msgid="2382791137776486974">"Wi-Fi"</string>
     <string name="power_bluetooth" msgid="4373329044379008289">"Bluetooth"</string>
     <string name="power_cell" msgid="6596471490976003056">"Dispositivo inactivo"</string>
@@ -1139,7 +1143,7 @@
     <string name="battery_action_stop" msgid="649958863744041872">"Forzar detención"</string>
     <string name="battery_action_app_details" msgid="3275013531871113681">"Información de la aplicación"</string>
     <string name="battery_action_app_settings" msgid="350562653472577250">"Ajustes de aplicaciones"</string>
-    <string name="battery_action_display" msgid="5302763261448580102">"Ajustes de pantalla"</string>
+    <!-- outdated translation 5302763261448580102 -->     <string name="battery_action_display" msgid="7338551244519110831">"Ajustes de pantalla"</string>
     <string name="battery_action_wifi" msgid="2272741639606146903">"Ajustes de Wi-Fi"</string>
     <string name="battery_action_bluetooth" msgid="8374789049507723142">"Ajustes de Bluetooth"</string>
     <string name="battery_desc_voice" msgid="8980322055722959211">"Batería utilizada por llamadas de voz"</string>
@@ -1293,9 +1297,9 @@
     <string name="credentials_title" msgid="4446234003860769883">"Almacenamiento de credenciales"</string>
     <string name="credentials_access" msgid="4843187230913860492">"Credenciales seguras"</string>
     <string name="credentials_access_summary" msgid="319662078718574168">"Permitir que las aplicaciones accedan a los certificados seguros y a otras credenciales"</string>
-    <string name="credentials_install" product="nosdcard" msgid="1395748667227729987">"Instalar desde USB"</string>
+    <!-- outdated translation 1395748667227729987 -->     <string name="credentials_install" product="nosdcard" msgid="466093273825150847">"Instalar desde USB"</string>
     <string name="credentials_install" product="default" msgid="953914549998062317">"Instalar desde la tarjeta SD"</string>
-    <string name="credentials_install_summary" product="nosdcard" msgid="3679446246093149828">"Instalar certificados desde almacenamiento USB"</string>
+    <!-- outdated translation 3679446246093149828 -->     <string name="credentials_install_summary" product="nosdcard" msgid="4220422806818210676">"Instalar certificados desde almacenamiento USB"</string>
     <string name="credentials_install_summary" product="default" msgid="5737658257407822713">"Instalar certificados desde la tarjeta SD"</string>
     <string name="credentials_set_password" msgid="9104473585811899989">"Establecer contraseña"</string>
     <string name="credentials_set_password_summary" msgid="6756719720826053228">"Establecer o cambiar la contraseña del almacenamiento de credenciales"</string>
@@ -1415,4 +1419,14 @@
     <string name="enter_password" msgid="3268224850821675915">"Introducir contraseña para descifrar el almacenamiento"</string>
     <string name="try_again" msgid="5904121494468643129">"Inténtalo de nuevo"</string>
     <string name="service_busy" msgid="225227519012409130">"Servicio VPN ocupado. Inténtalo de nuevo."</string>
+    <!-- no translation found for delete (4219243412325163003) -->
+    <skip />
+    <!-- no translation found for misc_files (6298643430106707497) -->
+    <skip />
+    <!-- no translation found for misc_files_selected_count (9131622592106231274) -->
+    <skip />
+    <!-- no translation found for misc_files_selected_count_out_of (3181533298684350893) -->
+    <skip />
+    <!-- no translation found for select_all (6783085295161532497) -->
+    <skip />
 </resources>
