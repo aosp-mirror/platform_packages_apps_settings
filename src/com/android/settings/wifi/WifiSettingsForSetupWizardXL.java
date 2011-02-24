@@ -26,6 +26,7 @@ import android.net.wifi.WifiConfiguration;
 import android.net.wifi.WifiManager;
 import android.os.Bundle;
 import android.os.Handler;
+import android.os.Message;
 import android.preference.PreferenceCategory;
 import android.text.TextUtils;
 import android.util.Log;
@@ -40,6 +41,8 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+
+import com.android.internal.util.AsyncChannel;
 
 import java.util.Collection;
 import java.util.EnumMap;
@@ -143,6 +146,7 @@ public class WifiSettingsForSetupWizardXL extends Activity implements OnClickLis
         // There's no button here enabling wifi network, so we need to enable it without
         // users' request.
         mWifiManager.setWifiEnabled(true);
+        mWifiManager.asyncConnect(this, new WifiServiceHandler());
 
         mWifiSettings =
                 (WifiSettings)getFragmentManager().findFragmentById(R.id.wifi_setup_fragment);
@@ -187,6 +191,25 @@ public class WifiSettingsForSetupWizardXL extends Activity implements OnClickLis
         // At first, Wifi module doesn't return SCANNING state (it's too early), so we manually
         // show it.
         showScanningStatus();
+    }
+
+    private class WifiServiceHandler extends Handler {
+        @Override
+        public void handleMessage(Message msg) {
+            switch (msg.what) {
+                case AsyncChannel.CMD_CHANNEL_HALF_CONNECTED:
+                    if (msg.arg1 == AsyncChannel.STATUS_SUCCESSFUL) {
+                        //AsyncChannel in msg.obj
+                    } else {
+                        //AsyncChannel set up failure, ignore
+                        Log.e(TAG, "Failed to establish AsyncChannel connection");
+                    }
+                    break;
+                default:
+                    //Ignore
+                    break;
+            }
+        }
     }
 
     private void restoreFirstButtonVisibilityState() {
