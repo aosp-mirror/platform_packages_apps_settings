@@ -83,7 +83,7 @@
         <FrameLayout
             android:id="@+id/wifi_settings_fragment_layout"
             android:layout_width="match_parent"
-            android:layout_height="360dip">
+            android:layout_height="370dip">
             <fragment
                 class="com.android.settings.wifi.WifiSettings"
                 android:id="@+id/wifi_setup_fragment"
@@ -122,13 +122,46 @@
 
     </RelativeLayout>
 
+    <!-- Shown when @id/top_divider is using View instead of ProgressBar.
+         We need this padding to place @id/bottom_divider at the same position
+         regardless of @id/top_divider state.
+
+         Detail:
+         When ProgressBar is used in @id/top_divider, we have 7dip implicit
+         padding inside the ProgressBar object, while we don't have the
+         padding when View is used. As a result, all the objects below it
+         including @id/bottom_divider moves up/down in 7dip between those
+         two states. It is WAI for @id/content, but not for the others.
+
+         Note that we cannot let bottom dividers/buttons align with parent's
+         bottom edge using layout_alignParentBottom="true", since we'd like
+         to control bottom margin between @id/bottom_buttons and the edge
+         depending on software keyboard is shown/hidden.
+
+         We need to enclose @id/bottom_padding with @id/bottom_padding_layout
+         to let @id/bottom_divider use android:layout_below.
+         android:visibility="gone" really let the object go away,
+         causing @id/bottom_divider to lose the target for android:layout_below.
+      -->
+    <FrameLayout
+        android:id="@+id/bottom_padding_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/content">
+        <View
+             android:id="@+id/bottom_padding"
+             android:layout_width="match_parent"
+             android:layout_height="7dip"
+             android:visibility="gone" />
+    </FrameLayout>
+
     <!-- Divider -->
     <View
         android:id="@+id/bottom_divider"
         android:layout_width="match_parent"
         android:layout_height="3dip"
         android:layout_marginBottom="16dip"
-        android:layout_below="@id/content"
+        android:layout_below="@id/bottom_padding_layout"
         android:layout_alignLeft="@id/content"
         android:background="@color/divider_color" />  <!-- TODO: fix this -->
 
@@ -177,8 +210,7 @@
             <Button android:id="@+id/wifi_setup_skip_or_next"
                     style="@style/setup_wizard_button"
                     android:layout_marginLeft="16dip"
-                    android:text="@string/wifi_setup_skip"
-                    android:enabled="false" />
+                    android:text="@string/wifi_setup_skip" />
         </LinearLayout>
     </RelativeLayout>
 </RelativeLayout>
