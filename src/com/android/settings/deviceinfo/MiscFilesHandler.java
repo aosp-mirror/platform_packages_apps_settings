@@ -48,8 +48,8 @@ import java.util.List;
  */
 public class MiscFilesHandler extends ListActivity {
     private static final String TAG = "MemorySettings";
-    private String mNumSelectedStr;
-    private String mNumSelectedOutOfStr;
+    private String mNumSelectedFormat;
+    private String mNumBytesSelectedFormat;
     private MemoryMearurementAdapter mAdapter;
     private LayoutInflater mInflater;
 
@@ -58,8 +58,8 @@ public class MiscFilesHandler extends ListActivity {
         super.onCreate(savedInstanceState);
         setFinishOnTouchOutside(true);
         setTitle(R.string.misc_files);
-        mNumSelectedStr = getString(R.string.misc_files_selected_count);
-        mNumSelectedOutOfStr = getString(R.string.misc_files_selected_count_out_of);
+        mNumSelectedFormat = getString(R.string.misc_files_selected_count);
+        mNumBytesSelectedFormat = getString(R.string.misc_files_selected_count_bytes);
         mAdapter = new MemoryMearurementAdapter(this);
         mInflater = (LayoutInflater)getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         setContentView(R.layout.settings_storage_miscfiles_list);
@@ -162,8 +162,7 @@ public class MiscFilesHandler extends ListActivity {
                 boolean checked) {
             ListView lv = getListView();
             int numChecked = lv.getCheckedItemCount();
-            mode.setTitle(mNumSelectedStr + " : " + numChecked +
-                    " " + mNumSelectedOutOfStr + " " + mAdapter.getCount());
+            mode.setTitle(String.format(mNumSelectedFormat, numChecked, mAdapter.getCount()));
 
             // total the sizes of all items selected so far
             SparseBooleanArray checkedItems = lv.getCheckedItemPositions();
@@ -176,9 +175,9 @@ public class MiscFilesHandler extends ListActivity {
                     }
                 }
             }
-            mode.setSubtitle(Formatter.formatFileSize(mContext, selectedDataSize) +
-                    " " + mNumSelectedOutOfStr + " " +
-                    Formatter.formatFileSize(mContext, mAdapter.getDataSize()));
+            mode.setSubtitle(String.format(mNumBytesSelectedFormat,
+                    Formatter.formatFileSize(mContext, selectedDataSize),
+                    Formatter.formatFileSize(mContext, mAdapter.getDataSize())));
         }
     }
 
