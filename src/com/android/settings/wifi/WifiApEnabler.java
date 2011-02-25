@@ -66,6 +66,8 @@ public class WifiApEnabler implements Preference.OnPreferenceChangeListener {
                 ArrayList<String> errored = intent.getStringArrayListExtra(
                         ConnectivityManager.EXTRA_ERRORED_TETHER);
                 updateTetherState(available.toArray(), active.toArray(), errored.toArray());
+            } else if (Intent.ACTION_AIRPLANE_MODE_CHANGED.equals(action)) {
+                enableWifiCheckBox();
             }
 
         }
@@ -84,6 +86,7 @@ public class WifiApEnabler implements Preference.OnPreferenceChangeListener {
 
         mIntentFilter = new IntentFilter(WifiManager.WIFI_AP_STATE_CHANGED_ACTION);
         mIntentFilter.addAction(ConnectivityManager.ACTION_TETHER_STATE_CHANGED);
+        mIntentFilter.addAction(Intent.ACTION_AIRPLANE_MODE_CHANGED);
     }
 
     public void resume() {
@@ -103,6 +106,7 @@ public class WifiApEnabler implements Preference.OnPreferenceChangeListener {
         if(!isAirplaneMode) {
             mCheckBox.setEnabled(true);
         } else {
+            mCheckBox.setSummary(mOriginalSummary);
             mCheckBox.setEnabled(false);
         }
     }
