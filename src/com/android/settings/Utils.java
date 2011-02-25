@@ -278,4 +278,8 @@ public class Utils {
                 (TelephonyManager) context.getSystemService(Context.TELEPHONY_SERVICE);
         return telephony != null && telephony.isVoiceCapable();
     }
+
+    public static boolean isWifiOnly() {
+        return "wifi-only".equals(SystemProperties.get("ro.carrier"));
+    }
 }
