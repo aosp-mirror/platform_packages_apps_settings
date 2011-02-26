@@ -25,6 +25,7 @@ import android.content.res.Resources;
 import android.net.wifi.WifiInfo;
 import android.net.wifi.WifiManager;
 import android.os.BatteryManager;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -78,6 +79,7 @@ public class Status extends PreferenceActivity {
     private static final String KEY_BATTERY_LEVEL = "battery_level";
     private static final String KEY_WIFI_MAC_ADDRESS = "wifi_mac_address";
     private static final String KEY_BT_ADDRESS = "bt_address";
+    private static final String KEY_SERIAL_NUMBER = "serial_number";
 
     private static final int EVENT_SIGNAL_STRENGTH_CHANGED = 200;
     private static final int EVENT_SERVICE_STATE_CHANGED = 300;
@@ -236,6 +238,13 @@ public class Status extends PreferenceActivity {
         
         setWifiStatus();
         setBtStatus();
+
+        String serial = Build.SERIAL;
+        if (serial != null && !serial.equals("")) {
+            setSummaryText(KEY_SERIAL_NUMBER, serial);
+        } else {
+            removePreferenceFromScreen(KEY_SERIAL_NUMBER);
+        }
     }
 
     @Override
