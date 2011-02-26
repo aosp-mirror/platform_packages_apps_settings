@@ -215,8 +215,8 @@ public class WifiSettingsForSetupWizardXL extends Activity implements OnClickLis
                 // any access point.
                 mWifiManager.setWifiEnabled(false);
             }
-            setResult(Activity.RESULT_OK);
-            finish();            
+            setResult(RESULT_OK);
+            finish();
         } else if (view == mConnectButton) {
             if (DEBUG) Log.d(TAG, "Connect button pressed");
             onConnectButtonPressed();
