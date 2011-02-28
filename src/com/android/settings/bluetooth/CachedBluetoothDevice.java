@@ -528,14 +528,17 @@ class CachedBluetoothDevice implements Comparable<CachedBluetoothDevice> {
     public int getBtClassDrawable() {
         if (mBtClass != null) {
             switch (mBtClass.getMajorDeviceClass()) {
-            case BluetoothClass.Device.Major.COMPUTER:
-                return R.drawable.ic_bt_laptop;
+                case BluetoothClass.Device.Major.COMPUTER:
+                    return R.drawable.ic_bt_laptop;
 
-            case BluetoothClass.Device.Major.PHONE:
-                return R.drawable.ic_bt_cellphone;
+                case BluetoothClass.Device.Major.PHONE:
+                    return R.drawable.ic_bt_cellphone;
 
-            case BluetoothClass.Device.Major.PERIPHERAL:
-                return getHidClassDrawable();
+                case BluetoothClass.Device.Major.PERIPHERAL:
+                    return getHidClassDrawable();
+
+                case BluetoothClass.Device.Major.IMAGING:
+                    return R.drawable.ic_bt_imaging;
             }
         } else {
             Log.w(TAG, "mBtClass is null");
