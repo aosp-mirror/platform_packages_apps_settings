@@ -36,7 +36,6 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.view.Window;
-import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.ProgressBar;
@@ -55,32 +54,35 @@ public class WifiSettingsForSetupWizardXL extends Activity implements OnClickLis
     private static final String TAG = "SetupWizard";
     private static final boolean DEBUG = true;
 
-    private static final EnumMap<DetailedState, DetailedState> stateMap =
+    private static final EnumMap<DetailedState, DetailedState> sNetworkStateMap =
             new EnumMap<DetailedState, DetailedState>(DetailedState.class);
 
     static {
-        stateMap.put(DetailedState.IDLE, DetailedState.DISCONNECTED);
-        stateMap.put(DetailedState.SCANNING, DetailedState.SCANNING);
-        stateMap.put(DetailedState.CONNECTING, DetailedState.CONNECTING);
-        stateMap.put(DetailedState.AUTHENTICATING, DetailedState.CONNECTING);
-        stateMap.put(DetailedState.OBTAINING_IPADDR, DetailedState.CONNECTING);
-        stateMap.put(DetailedState.CONNECTED, DetailedState.CONNECTED);
-        stateMap.put(DetailedState.SUSPENDED, DetailedState.SUSPENDED);  // ?
-        stateMap.put(DetailedState.DISCONNECTING, DetailedState.DISCONNECTED);
-        stateMap.put(DetailedState.DISCONNECTED, DetailedState.DISCONNECTED);
-        stateMap.put(DetailedState.FAILED, DetailedState.FAILED);
+        sNetworkStateMap.put(DetailedState.IDLE, DetailedState.DISCONNECTED);
+        sNetworkStateMap.put(DetailedState.SCANNING, DetailedState.SCANNING);
+        sNetworkStateMap.put(DetailedState.CONNECTING, DetailedState.CONNECTING);
+        sNetworkStateMap.put(DetailedState.AUTHENTICATING, DetailedState.CONNECTING);
+        sNetworkStateMap.put(DetailedState.OBTAINING_IPADDR, DetailedState.CONNECTING);
+        sNetworkStateMap.put(DetailedState.CONNECTED, DetailedState.CONNECTED);
+        sNetworkStateMap.put(DetailedState.SUSPENDED, DetailedState.SUSPENDED);  // ?
+        sNetworkStateMap.put(DetailedState.DISCONNECTING, DetailedState.DISCONNECTED);
+        sNetworkStateMap.put(DetailedState.DISCONNECTED, DetailedState.DISCONNECTED);
+        sNetworkStateMap.put(DetailedState.FAILED, DetailedState.FAILED);
     }
 
+    /**
+     * Used with {@link Button#setTag(Object)} to remember "Connect" button is pressed in
+     * with "add network" flow.
+     */
+    private static final int CONNECT_BUTTON_TAG_ADD_NETWORK = 1;
+
+    private WifiSettings mWifiSettings;
     private WifiManager mWifiManager;
 
-    /**
-     * Used for resizing a padding above title. Hiden when software keyboard is shown.
-     */
+    /** Used for resizing a padding above title. Hiden when software keyboard is shown. */
     private View mTopPadding;
 
-    /**
-     * Used for resizing a padding inside Config UI. Hiden when software keyboard is shown.
-     */
+    /** Used for resizing a padding inside Config UI. Hiden when software keyboard is shown. */
     private View mWifiConfigPadding;
 
     private TextView mTitleView;
@@ -93,16 +95,16 @@ public class WifiSettingsForSetupWizardXL extends Activity implements OnClickLis
 
     private ProgressBar mProgressBar;
     private View mTopDividerNoProgress;
+    /**
+     * Used for resizing a padding between WifiSettings preference and bottom bar when
+     * ProgressBar is visible as a top divider.
+     */
     private View mBottomPadding;
-
-    private WifiSettings mWifiSettings;
 
     private Button mAddNetworkButton;
     private Button mRefreshButton;
     private Button mSkipOrNextButton;
     private Button mBackButton;
-
-    private static int CONNECT_BUTTON_TAG_ADD_NETWORK = 1;
 
     private Button mConnectButton;
 
@@ -113,24 +115,39 @@ public class WifiSettingsForSetupWizardXL extends Activity implements OnClickLis
     private View mConnectingStatusLayout;
     private TextView mConnectingStatusView;
 
+    /*
+     * States of current screen, which should be saved and restored when Activity is relaunched
+     * with orientation change, etc.
+     */
     private static final int SCREEN_STATE_DISCONNECTED = 0;
     private static final int SCREEN_STATE_EDITING = 1;
     private static final int SCREEN_STATE_CONNECTING = 2;
     private static final int SCREEN_STATE_CONNECTED = 3;
 
+    /** Current screen state. */
     private int mScreenState = SCREEN_STATE_DISCONNECTED;
 
     private WifiConfigUiForSetupWizardXL mWifiConfig;
 
     private InputMethodManager mInputMethodManager;
 
-    private final Handler mHandler = new Handler();
-
+    /**
+     * Used to store View visibility status.
+     *
+     * We store the status when we show "connecting" screen and use the stored data when the
+     * device failed to connect to the network.
+     */
     private int mPreviousWpsFieldsVisibility = View.GONE;
     private int mPreviousSecurityFieldsVisibility = View.GONE;
     private int mPreviousTypeVisibility = View.GONE;
 
-    private DetailedState mPreviousState = DetailedState.DISCONNECTED;
+    /**
+     * Previous network connection state reported by main Wifi module.
+     *
+     * Note that we don't use original {@link DetailedState} object but simplified one translated
+     * using sNetworkStateMap.
+     */
+    private DetailedState mPreviousNetworkState = DetailedState.DISCONNECTED;
 
     private int mBackgroundId = R.drawable.setups_bg_default;
 
@@ -139,8 +156,6 @@ public class WifiSettingsForSetupWizardXL extends Activity implements OnClickLis
         super.onCreate(savedInstanceState);
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.wifi_settings_for_setup_wizard_xl);
-
-        getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE);
 
         mWifiManager = (WifiManager)getSystemService(Context.WIFI_SERVICE);
         // There's no button here enabling wifi network, so we need to enable it without
@@ -151,10 +166,15 @@ public class WifiSettingsForSetupWizardXL extends Activity implements OnClickLis
         mWifiSettings =
                 (WifiSettings)getFragmentManager().findFragmentById(R.id.wifi_setup_fragment);
         mInputMethodManager = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
-        setup();
+
+        initViews();
+
+        // At first, Wifi module doesn't return SCANNING state (it's too early), so we manually
+        // show it.
+        showScanningStatus();
     }
 
-    public void setup() {
+    private void initViews() {
         if (getIntent().getBooleanExtra("firstRun", false)) {
             final View layoutRoot = findViewById(R.id.layout_root);
             layoutRoot.setSystemUiVisibility(View.STATUS_BAR_DISABLE_BACK);
@@ -187,10 +207,6 @@ public class WifiSettingsForSetupWizardXL extends Activity implements OnClickLis
         mWifiSettingsFragmentLayout = findViewById(R.id.wifi_settings_fragment_layout);
         mConnectingStatusLayout = findViewById(R.id.connecting_status_layout);
         mConnectingStatusView = (TextView) findViewById(R.id.connecting_status);
-
-        // At first, Wifi module doesn't return SCANNING state (it's too early), so we manually
-        // show it.
-        showScanningStatus();
     }
 
     private class WifiServiceHandler extends Handler {
@@ -259,7 +275,7 @@ public class WifiSettingsForSetupWizardXL extends Activity implements OnClickLis
 
     // Called from WifiSettings
     /* package */ void updateConnectionState(DetailedState originalState) {
-        final DetailedState state = stateMap.get(originalState);
+        final DetailedState state = sNetworkStateMap.get(originalState);
 
         if (originalState == DetailedState.FAILED) {
             // We clean up the current connectivity status and let users select another network
@@ -296,7 +312,7 @@ public class WifiSettingsForSetupWizardXL extends Activity implements OnClickLis
             }
             break;
         }
-        mPreviousState = state;
+        mPreviousNetworkState = state;
     }
 
     private void showDisconnectedState(String stateString) {
@@ -431,7 +447,7 @@ public class WifiSettingsForSetupWizardXL extends Activity implements OnClickLis
 
         trySetBackground(R.drawable.setups_bg_default);
 
-        // We don't want to keep scanning Wi-Fi networks during users' configuring one network.
+        // We don't want to keep scanning Wifi networks during users' configuring a network.
         mWifiSettings.pauseWifiScan();
 
         mWifiSettingsFragmentLayout.setVisibility(View.GONE);
@@ -441,7 +457,7 @@ public class WifiSettingsForSetupWizardXL extends Activity implements OnClickLis
         parent.removeAllViews();
         mWifiConfig = new WifiConfigUiForSetupWizardXL(this, parent, selectedAccessPoint, edit);
 
-        // For safety, we forget the tag once. Tag will be updated in this method when needed.
+        // Tag will be updated in this method when needed.
         mConnectButton.setTag(null);
         if (selectedAccessPoint == null) {  // "Add network" flow
             showAddNetworkTitle();
@@ -473,7 +489,7 @@ public class WifiSettingsForSetupWizardXL extends Activity implements OnClickLis
     }
 
     /**
-     * Called before security fields are correctly set by WifiConfigController.
+     * Called before security fields are correctly set by {@link WifiConfigController}.
      *
      * @param view security field view
      * @param accessPointSecurity type of security. e.g. AccessPoint.SECURITY_NONE
@@ -495,7 +511,7 @@ public class WifiSettingsForSetupWizardXL extends Activity implements OnClickLis
             // users configure those networks after the setup.
             if (view.findViewById(R.id.type).getVisibility() == View.VISIBLE) {
                 view.findViewById(R.id.eap_not_supported_for_add_network)
-                .setVisibility(View.VISIBLE);
+                        .setVisibility(View.VISIBLE);
             } else {
                 view.findViewById(R.id.eap_not_supported).setVisibility(View.VISIBLE);
             }
@@ -503,8 +519,12 @@ public class WifiSettingsForSetupWizardXL extends Activity implements OnClickLis
             view.findViewById(R.id.ssid_text).setVisibility(View.GONE);
             view.findViewById(R.id.ssid_layout).setVisibility(View.GONE);
             onEapNetworkSelected();
+
+            // This method did init security fields by itself. The caller must not do it.
             return false;
         }
+
+        // Let the caller init security fields.
         return true;
     }
 
@@ -528,10 +548,12 @@ public class WifiSettingsForSetupWizardXL extends Activity implements OnClickLis
 
         mWifiSettings.submit(mWifiConfig.getController());
 
-        // updateConnectionState() isn't called soon after the user's "connect" action,
-        // and the user still sees "not connected" message for a while, which looks strange.
+        // updateConnectionState() isn't called soon by the main Wifi module after the user's
+        // "connect" request, and the user still sees "not connected" message for a while, which
+        // looks strange for users though legitimate from the view of the module.
+        //
         // We instead manually show "connecting" message before the system gets actual
-        // "connecting" message from Wi-Fi module.
+        // "connecting" message from Wifi module.
         showConnectingState();
 
         // Might be better to delay showing this button.
@@ -578,7 +600,7 @@ public class WifiSettingsForSetupWizardXL extends Activity implements OnClickLis
             mScreenState = SCREEN_STATE_DISCONNECTED;
 
             // When a user press "Back" button after pressing "Connect" button, we want to cancel
-            // the "Connect" request and refresh the whole wifi status.
+            // the "Connect" request and refresh the whole Wifi status.
             restoreFirstButtonVisibilityState();
 
             mSkipOrNextButton.setEnabled(true);
@@ -655,7 +677,7 @@ public class WifiSettingsForSetupWizardXL extends Activity implements OnClickLis
                 ((Integer)tag == CONNECT_BUTTON_TAG_ADD_NETWORK)) {
             // In "Add network" flow, we won't get DetaledState available for changing ProgressBar
             // state. Instead we manually show previous status here.
-            showDisconnectedState(Summary.get(this, mPreviousState));
+            showDisconnectedState(Summary.get(this, mPreviousNetworkState));
         } else {
             showScanningStatus();
         }
@@ -736,7 +758,8 @@ public class WifiSettingsForSetupWizardXL extends Activity implements OnClickLis
     }
 
     /** Note: doesn't affect bottom padding */
-    public void setPaddingVisibility(int visibility) {
+    // Used by WifiConfigUiForSetupWizardXL
+    /* package */ void setPaddingVisibility(int visibility) {
         setPaddingVisibility(visibility, visibility);
     }
 
@@ -777,12 +800,10 @@ public class WifiSettingsForSetupWizardXL extends Activity implements OnClickLis
     }
 
     /**
-     * Called when WifiManager is requested to save a network. This method sholud include
-     * WifiManager#saveNetwork() call.
-     *
-     * Currently this method calls {@link WifiManager#connectNetwork(int)}.
+     * Called when WifiManager is requested to save a network.
      */
     /* package */ void onSaveNetwork(WifiConfiguration config) {
+        // We want to both save and connect a network. connectNetwork() does both.
         mWifiManager.connectNetwork(config);
     }
 
