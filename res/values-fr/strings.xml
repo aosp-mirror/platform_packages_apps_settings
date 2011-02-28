@@ -509,9 +509,9 @@
     <string name="wifi_tether_checkbox_text" msgid="6961605862058056788">"Point d\'accès Wi-Fi"</string>
     <string name="wifi_tether_enabled_subtext" msgid="8948641212931906143">"Point d\'accès Wi-Fi mobile <xliff:g id="NETWORK_SSID">%1$s</xliff:g> actif"</string>
     <string name="wifi_tether_failed_subtext" msgid="2654888578056042315">"Erreur liée au point d\'accès Wi-Fi mobile"</string>
-    <string name="wifi_tether_settings_text" msgid="123573487844470195">"Paramètres du point d\'accès Wi-Fi mobile"</string>
+    <string name="wifi_tether_settings_text" msgid="123573487844470195">"Paramètres du point d\'accès"</string>
     <string name="wifi_tether_settings_subtext" msgid="8064755682383367008">"Configurer et gérer le point d\'accès Wi-Fi mobile"</string>
-    <string name="wifi_tether_settings_title" msgid="3749063216348284432">"Paramètres du point d\'accès Wi-Fi mobile"</string>
+    <string name="wifi_tether_settings_title" msgid="3749063216348284432">"Paramètres du point d\'accès"</string>
     <string name="wifi_tether_configure_ap_text" msgid="3474995108398156258">"Configurer le point d\'accès Wi-Fi"</string>
     <string name="wifi_tether_configure_subtext" msgid="1927454307836232128">"Point d\'accès Wi-Fi mobile <xliff:g id="NETWORK_SSID">%1$s</xliff:g> <xliff:g id="NETWORK_SECURITY">%2$s</xliff:g>"</string>
     <string name="wifi_tether_configure_ssid_default" msgid="8467525402622138547">"AndroidHotspot"</string>
@@ -644,6 +644,8 @@
     <string name="status_operator" msgid="2274875196954742087">"Réseau"</string>
     <string name="status_wifi_mac_address" msgid="33109409206264790">"Adresse MAC Wi-Fi"</string>
     <string name="status_bt_address" msgid="4195174192087439720">"Adresse Bluetooth"</string>
+    <!-- no translation found for status_serial_number (2257111183374628137) -->
+    <skip />
     <string name="status_unavailable" msgid="7862009036663793314">"Non disponible"</string>
     <string name="status_up_time" msgid="7294859476816760399">"Durée d\'activité"</string>
     <string name="status_awake_time" msgid="2393949909051183652">"Temps en activité"</string>
@@ -755,23 +757,23 @@
     <string name="media_format_gesture_explanation" product="default" msgid="1681213416497647321">"Vous devez créer votre schéma de déverrouillage pour confirmer l\'effacement de la carte SD."</string>
     <string name="call_settings_title" msgid="5188713413939232801">"Paramètres d\'appel"</string>
     <string name="call_settings_summary" msgid="7291195704801002886">"Configurer mess. vocale, transferts d\'appel, mises en attente, numéro de l\'appelant"</string>
-    <string name="tether_settings_title_usb" msgid="6688416425801386511">"Partage de conn. par USB"</string>
+    <string name="tether_settings_title_usb" msgid="6688416425801386511">"Partage connexion Bluetooth par USB"</string>
     <string name="tether_settings_title_wifi" msgid="3277144155960302049">"Point d\'accès Wi-Fi mobile"</string>
-    <string name="tether_settings_title_bluetooth" msgid="355855408317564420">"Partage de conn Bluetooth"</string>
+    <string name="tether_settings_title_bluetooth" msgid="355855408317564420">"Partage connexion Bluetooth"</string>
     <string name="tether_settings_title_usb_bluetooth" msgid="5355828977109785001">"Partage de connexion"</string>
     <string name="tether_settings_title_all" msgid="8356136101061143841">"Partage connexion/point accès mobile"</string>
-    <string name="tether_settings_summary_usb" product="tablet" msgid="785883365108362248">"Partager la connexion Internet de la tablette via un câble USB"</string>
-    <string name="tether_settings_summary_usb" product="default" msgid="3562431455625637370">"Partager la connexion Internet de votre mobile via un câble USB"</string>
-    <string name="tether_settings_summary_wifi" msgid="5474383125137372164">"Transformer sa connexion Internet en point d\'accès Wi-Fi mobile"</string>
-    <string name="tether_settings_summary_bluetooth" msgid="2407506656353819750">"Partager la connexion Internet via Bluetooth"</string>
-    <string name="tether_settings_summary_usb_wifi" product="tablet" msgid="3834674129575844910">"Partager la connexion Internet de la tablette via USB ou transformer l\'appareil en point d\'accès Wi-Fi"</string>
-    <string name="tether_settings_summary_usb_wifi" product="default" msgid="3700323208282018772">"Partager la connexion Internet du mobile via USB ou transformer l\'appareil en point d\'accès Wi-Fi"</string>
-    <string name="tether_settings_summary_usb_bluetooth" product="tablet" msgid="1245080236509560839">"Partager la connexion Internet de la tablette via un câble USB ou Bluetooth"</string>
-    <string name="tether_settings_summary_usb_bluetooth" product="default" msgid="4008195891276675882">"Partager la connexion Internet du mobile via un câble USB ou Bluetooth"</string>
-    <string name="tether_settings_summary_wifi_bluetooth" product="tablet" msgid="1924576461932311140">"Partager la connexion Internet de la tablette via Bluetooth ou transformer l\'appareil en point d\'accès Wi-Fi"</string>
-    <string name="tether_settings_summary_wifi_bluetooth" product="default" msgid="2753904149495692201">"Partager la conn. Internet du mobile via Bluetooth ou transformer l\'appareil en point d\'accès Wi-Fi"</string>
-    <string name="tether_settings_summary_all" product="tablet" msgid="6612660164315153427">"Partager la connexion Internet de la tablette via USB, Wi-Fi ou Bluetooth"</string>
-    <string name="tether_settings_summary_all" product="default" msgid="1171769255924636665">"Partager la connexion Internet du mobile via USB, Wi-Fi ou Bluetooth"</string>
+    <string name="tether_settings_summary_usb" product="tablet" msgid="785883365108362248">"Partager la connexion de données de la tablette via un câble USB"</string>
+    <string name="tether_settings_summary_usb" product="default" msgid="3562431455625637370">"Partager la connexion de données de votre mobile via un câble USB"</string>
+    <string name="tether_settings_summary_wifi" msgid="5474383125137372164">"Transformer sa connexion de données en point d\'accès Wi-Fi mobile"</string>
+    <string name="tether_settings_summary_bluetooth" msgid="2407506656353819750">"Partager la connexion de données via Bluetooth"</string>
+    <string name="tether_settings_summary_usb_wifi" product="tablet" msgid="3834674129575844910">"Partager la connexion de données de la tablette via USB ou transformer l\'appareil en point d\'accès Wi-Fi"</string>
+    <string name="tether_settings_summary_usb_wifi" product="default" msgid="3700323208282018772">"Partager la connexion de données du mobile via USB ou transformer l\'appareil en point d\'accès Wi-Fi"</string>
+    <string name="tether_settings_summary_usb_bluetooth" product="tablet" msgid="1245080236509560839">"Partager la connexion de données de la tablette via un câble USB ou Bluetooth"</string>
+    <string name="tether_settings_summary_usb_bluetooth" product="default" msgid="4008195891276675882">"Partager la connexion de données du mobile via un câble USB ou Bluetooth"</string>
+    <string name="tether_settings_summary_wifi_bluetooth" product="tablet" msgid="1924576461932311140">"Partager la connexion de données de la tablette via Bluetooth ou transformer l\'appareil en point d\'accès Wi-Fi"</string>
+    <string name="tether_settings_summary_wifi_bluetooth" product="default" msgid="2753904149495692201">"Partager la connexion de données via Bluetooth ou transformer l\'appareil en point d\'accès Wi-Fi"</string>
+    <string name="tether_settings_summary_all" product="tablet" msgid="6612660164315153427">"Partager la connexion de données de la tablette via USB, Wi-Fi ou Bluetooth"</string>
+    <string name="tether_settings_summary_all" product="default" msgid="1171769255924636665">"Partager la connexion de données du mobile via USB, Wi-Fi ou Bluetooth"</string>
     <string name="usb_title" msgid="7483344855356312510">"USB"</string>
     <string name="usb_tethering_button_text" msgid="585829947108007917">"Via USB"</string>
     <string name="usb_tethering_available_subtext" msgid="156779271296152605">"Connexion USB établie, cochez l\'option adéquate pour partager la connexion."</string>
@@ -779,13 +781,13 @@
     <string name="usb_tethering_storage_active_subtext" msgid="6608933594288072573">"Impossible de partager la connexion lorsqu\'une mémoire de stockage USB est utilisée."</string>
     <string name="usb_tethering_unavailable_subtext" msgid="1044622421184007254">"USB non connecté"</string>
     <string name="usb_tethering_errored_subtext" msgid="1377574819427841992">"Erreur liée au partage de connexion via USB"</string>
-    <string name="bluetooth_tether_checkbox_text" msgid="2379175828878753652">"Partage de conn Bluetooth"</string>
-    <string name="bluetooth_tethering_available_subtext" msgid="3317112145693933963">"Partage de conn. Bluetooth activé, non connecté"</string>
+    <string name="bluetooth_tether_checkbox_text" msgid="2379175828878753652">"Partage connexion Bluetooth"</string>
+    <string name="bluetooth_tethering_available_subtext" msgid="3317112145693933963">"Partage connexion Bluetooth activé, non connecté"</string>
     <string name="bluetooth_tethering_connected_subtext" msgid="893888246368164894">"Partage de connexion Bluetooth activé et connecté"</string>
     <string name="bluetooth_tethering_off_subtext" msgid="1798863866978968964">"Partage de connexion Bluetooth désactivé"</string>
     <string name="bluetooth_tethering_errored_subtext" msgid="1344187103463073993">"Erreur de partage de connexion Bluetooth"</string>
-    <string name="bluetooth_tethering_overflow_error" msgid="2222060504731415763">"Partage de conn. impossible au-delà de <xliff:g id="MAXCONNECTION">%1$d</xliff:g> mobiles"</string>
-    <string name="bluetooth_untether_blank" msgid="2871192409329334813">"Le partage de conn. avec <xliff:g id="DEVICE_NAME">%1$s</xliff:g> va être annulé."</string>
+    <string name="bluetooth_tethering_overflow_error" msgid="2222060504731415763">"Partage connexion impossible au-delà de <xliff:g id="MAXCONNECTION">%1$d</xliff:g> mobiles"</string>
+    <string name="bluetooth_untether_blank" msgid="2871192409329334813">"Le partage connexion avec <xliff:g id="DEVICE_NAME">%1$s</xliff:g> va être annulé."</string>
     <string name="tethering_help_button_text" msgid="656117495547173630">"Aide"</string>
     <string name="network_settings_title" msgid="7967552516440151852">"Réseaux mobiles"</string>
     <string name="network_settings_summary" msgid="5149750850846813553">"Définir les options d\'itinérance, réseaux, noms de points d\'accès"</string>
@@ -795,7 +797,7 @@
     <string name="location_neighborhood_level" msgid="4656658097932515921">"Position géographique déterminée par réseaux Wi-Fi et/ou mobile"</string>
     <!-- no translation found for location_neighborhood_level_wifi (7457348712272184793) -->
     <skip />
-    <string name="location_gps" msgid="6296125378829097831">"Utiliser les satellites GPS"</string>
+    <string name="location_gps" msgid="6296125378829097831">"Utiliser satellites GPS"</string>
     <string name="location_street_level" msgid="7456259025474443314">"Lors de la géolocalisation, localisation à la rue près"</string>
     <string name="location_gps_disabled" msgid="6632537158777308128">"Localiser au niveau rue (requiert + de batterie et une vue dégagée)"</string>
     <string name="assisted_gps" msgid="4649317129586736885">"Utiliser le GPS assisté"</string>
@@ -820,7 +822,7 @@
     <string name="settings_license_activity_loading" msgid="3337535809093591740">"Chargement..."</string>
     <string name="settings_safetylegal_title" msgid="1289483965535937431">"Informations de sécurité"</string>
     <string name="settings_safetylegal_activity_title" msgid="6901214628496951727">"Informations de sécurité"</string>
-    <string name="settings_safetylegal_activity_unreachable" msgid="170670055116721810">"Vous n\'êtes pas connecté à Internet. Pour consulter ces informations maintenant, accédez à %s depuis un ordinateur connecté à Internet."</string>
+    <string name="settings_safetylegal_activity_unreachable" msgid="170670055116721810">"Vous n\'avez pas de connexion de données. Pour consulter ces informations maintenant, accédez à %s depuis un ordinateur connecté à Internet."</string>
     <string name="settings_safetylegal_activity_loading" msgid="8059022597639516348">"Chargement…"</string>
     <string name="lockpassword_choose_your_password_header" msgid="8624900666929394990">"Choisir votre mot de passe"</string>
     <string name="lockpassword_choose_your_pattern_header" msgid="6949761069941694050">"Choisissez votre schéma."</string>
@@ -1151,7 +1153,7 @@
     <string name="menu_stats_last_unplugged" msgid="5922246077592434526">"Depuis le dernier débranchement (<xliff:g id="UNPLUGGED">%1$s</xliff:g>)"</string>
     <string name="menu_stats_total" msgid="8973377864854807854">"Utilisation totale"</string>
     <string name="menu_stats_refresh" msgid="1676215433344981075">"Actualiser"</string>
-    <string name="process_kernel_label" msgid="3916858646836739323">"Système d\'exploitation Android"</string>
+    <string name="process_kernel_label" msgid="3916858646836739323">"Plate-forme Android"</string>
     <string name="process_mediaserver_label" msgid="6500382062945689285">"Serveur multimédia"</string>
     <string name="voice_input_output_settings" msgid="1336135218350444783">"Saisie et sortie vocales"</string>
     <string name="voice_input_output_settings_title" msgid="2442850635048676991">"Paramètres de saisie et de sortie vocales"</string>
