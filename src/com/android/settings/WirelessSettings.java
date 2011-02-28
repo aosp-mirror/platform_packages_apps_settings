@@ -148,7 +148,7 @@ public class WirelessSettings extends SettingsPreferenceFragment {
         // Disable Tethering if it's not allowed or if it's a wifi-only device
         ConnectivityManager cm =
                 (ConnectivityManager) activity.getSystemService(Context.CONNECTIVITY_SERVICE);
-        if (!cm.isTetheringSupported() || Utils.isWifiOnly()) {
+        if (!cm.isTetheringSupported()) {
             getPreferenceScreen().removePreference(findPreference(KEY_TETHER_SETTINGS));
         } else {
             String[] usbRegexs = cm.getTetherableUsbRegexs();
