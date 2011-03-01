@@ -21,7 +21,9 @@ import static android.provider.Settings.System.SCREEN_OFF_TIMEOUT;
 import android.app.admin.DevicePolicyManager;
 import android.content.ContentResolver;
 import android.content.Context;
+import android.database.ContentObserver;
 import android.os.Bundle;
+import android.os.Handler;
 import android.os.RemoteException;
 import android.os.ServiceManager;
 import android.preference.CheckBoxPreference;
@@ -52,6 +54,13 @@ public class DisplaySettings extends SettingsPreferenceFragment implements
     private IWindowManager mWindowManager;
 
     private ListPreference mScreenTimeoutPreference;
+
+    private ContentObserver mAccelerometerRotationObserver = new ContentObserver(new Handler()) {
+        @Override
+        public void onChange(boolean selfChange) {
+            updateAccelerometerRotationCheckbox();
+        }
+    };
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -131,6 +140,16 @@ public class DisplaySettings extends SettingsPreferenceFragment implements
         super.onResume();
 
         updateState(true);
+        getContentResolver().registerContentObserver(
+                Settings.System.getUriFor(Settings.System.ACCELEROMETER_ROTATION), true,
+                mAccelerometerRotationObserver);
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+
+        getContentResolver().unregisterContentObserver(mAccelerometerRotationObserver);
     }
 
     private void updateState(boolean force) {
@@ -159,6 +178,10 @@ public class DisplaySettings extends SettingsPreferenceFragment implements
         }
         mAnimations.setValueIndex(idx);
         updateAnimationsSummary(mAnimations.getValue());
+        updateAccelerometerRotationCheckbox();
+    }
+
+    private void updateAccelerometerRotationCheckbox() {
         mAccelerometer.setChecked(Settings.System.getInt(
                 getContentResolver(),
                 Settings.System.ACCELEROMETER_ROTATION, 0) != 0);

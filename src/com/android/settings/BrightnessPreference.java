@@ -16,24 +16,24 @@
 
 package com.android.settings;
 
+import android.content.ContentResolver;
 import android.content.Context;
+import android.database.ContentObserver;
+import android.os.Bundle;
+import android.os.Handler;
+import android.os.IPowerManager;
 import android.os.Parcel;
 import android.os.Parcelable;
 import android.os.RemoteException;
-import android.os.IPowerManager;
 import android.os.ServiceManager;
 import android.preference.SeekBarPreference;
-import android.preference.Preference.BaseSavedState;
 import android.provider.Settings;
 import android.provider.Settings.SettingNotFoundException;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.view.View;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.SeekBar;
-
-import java.util.Map;
 
 public class BrightnessPreference extends SeekBarPreference implements
         SeekBar.OnSeekBarChangeListener, CheckBox.OnCheckedChangeListener {
@@ -53,6 +53,20 @@ public class BrightnessPreference extends SeekBarPreference implements
     private static final int MINIMUM_BACKLIGHT = android.os.Power.BRIGHTNESS_DIM + 10;
     private static final int MAXIMUM_BACKLIGHT = android.os.Power.BRIGHTNESS_ON;
 
+    private ContentObserver mBrightnessObserver = new ContentObserver(new Handler()) {
+        @Override
+        public void onChange(boolean selfChange) {
+            onBrightnessChanged();
+        }
+    };
+
+    private ContentObserver mBrightnessModeObserver = new ContentObserver(new Handler()) {
+        @Override
+        public void onChange(boolean selfChange) {
+            onBrightnessModeChanged();
+        }
+    };
+
     public BrightnessPreference(Context context, AttributeSet attrs) {
         super(context, attrs);
 
@@ -64,28 +78,32 @@ public class BrightnessPreference extends SeekBarPreference implements
     }
 
     @Override
+    protected void showDialog(Bundle state) {
+        super.showDialog(state);
+
+        getContext().getContentResolver().registerContentObserver(
+                Settings.System.getUriFor(Settings.System.SCREEN_BRIGHTNESS), true,
+                mBrightnessObserver);
+
+        getContext().getContentResolver().registerContentObserver(
+                Settings.System.getUriFor(Settings.System.SCREEN_BRIGHTNESS_MODE), true,
+                mBrightnessModeObserver);
+        mRestoredOldState = false;
+    }
+
+    @Override
     protected void onBindDialogView(View view) {
         super.onBindDialogView(view);
 
         mSeekBar = getSeekBar(view);
         mSeekBar.setMax(MAXIMUM_BACKLIGHT - MINIMUM_BACKLIGHT);
-        try {
-            mOldBrightness = Settings.System.getInt(getContext().getContentResolver(), 
-                Settings.System.SCREEN_BRIGHTNESS);
-        } catch (SettingNotFoundException snfe) {
-            mOldBrightness = MAXIMUM_BACKLIGHT;
-        }
+        mOldBrightness = getBrightness(0);
         mSeekBar.setProgress(mOldBrightness - MINIMUM_BACKLIGHT);
 
         mCheckBox = (CheckBox)view.findViewById(R.id.automatic_mode);
         if (mAutomaticAvailable) {
             mCheckBox.setOnCheckedChangeListener(this);
-            try {
-                mOldAutomatic = Settings.System.getInt(getContext().getContentResolver(),
-                        Settings.System.SCREEN_BRIGHTNESS_MODE);
-            } catch (SettingNotFoundException snfe) {
-                mOldAutomatic = 0;
-            }
+            mOldAutomatic = getBrightnessMode(0);
             mCheckBox.setChecked(mOldAutomatic != 0);
         } else {
             mCheckBox.setVisibility(View.GONE);
@@ -114,17 +132,52 @@ public class BrightnessPreference extends SeekBarPreference implements
         }
     }
 
+    private int getBrightness(int defaultValue) {
+        int brightness = defaultValue;
+        try {
+            brightness = Settings.System.getInt(getContext().getContentResolver(),
+                    Settings.System.SCREEN_BRIGHTNESS);
+        } catch (SettingNotFoundException snfe) {
+        }
+        return brightness;
+    }
+
+    private int getBrightnessMode(int defaultValue) {
+        int brightnessMode = defaultValue;
+        try {
+            brightnessMode = Settings.System.getInt(getContext().getContentResolver(),
+                    Settings.System.SCREEN_BRIGHTNESS_MODE);
+        } catch (SettingNotFoundException snfe) {
+        }
+        return brightnessMode;
+    }
+
+    private void onBrightnessChanged() {
+        int brightness = getBrightness(MAXIMUM_BACKLIGHT);
+        mSeekBar.setProgress(brightness - MINIMUM_BACKLIGHT);
+    }
+
+    private void onBrightnessModeChanged() {
+        boolean checked = getBrightnessMode(0) != 0;
+        mCheckBox.setChecked(checked);
+    }
+
     @Override
     protected void onDialogClosed(boolean positiveResult) {
         super.onDialogClosed(positiveResult);
 
+        final ContentResolver resolver = getContext().getContentResolver();
+
         if (positiveResult) {
-            Settings.System.putInt(getContext().getContentResolver(), 
+            Settings.System.putInt(resolver,
                     Settings.System.SCREEN_BRIGHTNESS,
                     mSeekBar.getProgress() + MINIMUM_BACKLIGHT);
         } else {
             restoreOldState();
         }
+
+        resolver.unregisterContentObserver(mBrightnessObserver);
+        resolver.unregisterContentObserver(mBrightnessModeObserver);
     }
 
     private void restoreOldState() {
