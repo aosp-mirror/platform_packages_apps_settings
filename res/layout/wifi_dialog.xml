@@ -218,6 +218,7 @@
         <LinearLayout android:id="@+id/proxy_fields"
                 style="@style/wifi_section"
                 android:visibility="gone">
+
             <LinearLayout style="@style/wifi_item">
                 <TextView
                         style="@style/wifi_item_label"
@@ -225,8 +226,8 @@
 
                 <EditText android:id="@+id/proxy_hostname"
                         style="@style/wifi_item_content"
-                        android:singleLine="true"
-                        android:inputType="textNoSuggestions" />
+                        android:hint="@string/proxy_hostname_hint"
+                        android:singleLine="true" />
             </LinearLayout>
             <LinearLayout style="@style/wifi_item">
                 <TextView
@@ -235,8 +236,8 @@
 
                 <EditText android:id="@+id/proxy_port"
                         style="@style/wifi_item_content"
-                        android:singleLine="true"
-                        android:inputType="textNoSuggestions" />
+                        android:hint="@string/proxy_port_hint"
+                        android:singleLine="true" />
             </LinearLayout>
             <LinearLayout style="@style/wifi_item">
                 <TextView
@@ -245,8 +246,8 @@
 
                 <EditText android:id="@+id/proxy_exclusionlist"
                         style="@style/wifi_item_content"
-                        android:singleLine="true"
-                        android:inputType="textNoSuggestions" />
+                        android:hint="@string/proxy_exclusionlist_hint"
+                        android:singleLine="true" />
             </LinearLayout>
         </LinearLayout>
 
