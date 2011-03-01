@@ -25,6 +25,8 @@ import android.content.pm.PackageManager.NameNotFoundException;
 import android.content.res.Resources;
 import android.content.res.Resources.NotFoundException;
 import android.graphics.drawable.Drawable;
+import android.net.ConnectivityManager;
+import android.net.LinkProperties;
 import android.os.Bundle;
 import android.os.SystemProperties;
 import android.preference.Preference;
@@ -33,6 +35,8 @@ import android.preference.PreferenceActivity.Header;
 import android.telephony.TelephonyManager;
 import android.text.TextUtils;
 
+import java.net.InetAddress;
+import java.util.Iterator;
 import java.util.List;
 
 public class Utils {
@@ -281,5 +285,27 @@ public class Utils {
 
     public static boolean isWifiOnly() {
         return "wifi-only".equals(SystemProperties.get("ro.carrier"));
+    }
+
+    /**
+     * Returns the WIFI IP Addresses, if any, taking into account IPv4 and IPv6 style addresses.
+     * @param context the application context
+     * @return the formatted and comma-separated IP addresses, or null if none.
+     */
+    public static String getWifiIpAddresses(Context context) {
+        ConnectivityManager cm = (ConnectivityManager)
+                context.getSystemService(Context.CONNECTIVITY_SERVICE);
+        LinkProperties prop = cm.getLinkProperties(ConnectivityManager.TYPE_WIFI);
+        if (prop == null) return null;
+        Iterator<InetAddress> iter = prop.getAddresses().iterator();
+        // If there are no entries, return null
+        if (!iter.hasNext()) return null;
+        // Concatenate all available addresses, comma separated
+        String addresses = "";
+        while (iter.hasNext()) {
+            addresses += iter.next().getHostAddress();
+            if (iter.hasNext()) addresses += ", ";
+        }
+        return addresses;
     }
 }

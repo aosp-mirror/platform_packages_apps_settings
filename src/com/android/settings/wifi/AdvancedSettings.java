@@ -18,6 +18,7 @@ package com.android.settings.wifi;
 
 import com.android.settings.R;
 import com.android.settings.SettingsPreferenceFragment;
+import com.android.settings.Utils;
 
 import android.app.Activity;
 import android.content.Context;
@@ -103,16 +104,7 @@ public class AdvancedSettings extends SettingsPreferenceFragment
                 : getActivity().getString(R.string.status_unavailable));
 
         Preference wifiIpAddressPref = findPreference(KEY_CURRENT_IP_ADDRESS);
-        String ipAddress = null;
-        if (wifiInfo != null) {
-            long addr = wifiInfo.getIpAddress();
-            if (addr != 0) {
-                // handle negative values whe first octet > 127
-                if (addr < 0) addr += 0x100000000L;
-                ipAddress = String.format("%d.%d.%d.%d",
-                        addr & 0xFF, (addr >> 8) & 0xFF, (addr >> 16) & 0xFF, (addr >> 24) & 0xFF);
-            }
-        }
+        String ipAddress = Utils.getWifiIpAddresses(getActivity());
         wifiIpAddressPref.setSummary(ipAddress == null ?
                 getActivity().getString(R.string.status_unavailable) : ipAddress);
     }
