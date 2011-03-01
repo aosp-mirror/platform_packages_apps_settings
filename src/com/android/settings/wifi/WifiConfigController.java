@@ -154,17 +154,21 @@ public class WifiConfigController implements TextWatcher,
 
         if (mAccessPoint == null) { // new network
             mConfigUi.setTitle(R.string.wifi_add_network);
-            mView.findViewById(R.id.type).setVisibility(View.VISIBLE);
+
             mSsidView = (TextView) mView.findViewById(R.id.ssid);
             mSsidView.addTextChangedListener(this);
             mSecuritySpinner = ((Spinner) mView.findViewById(R.id.security));
             mSecuritySpinner.setOnItemSelectedListener(this);
             if (mInXlSetupWizard) {
+                mView.findViewById(R.id.type_ssid).setVisibility(View.VISIBLE);
+                mView.findViewById(R.id.type_security).setVisibility(View.VISIBLE);
                 // We want custom layout. The content must be same as the other cases.
                 mSecuritySpinner.setAdapter(
                         new ArrayAdapter<String>(context, R.layout.wifi_setup_custom_list_item_1,
                                 android.R.id.text1,
                                 context.getResources().getStringArray(R.array.wifi_security)));
+            } else {
+                mView.findViewById(R.id.type).setVisibility(View.VISIBLE);
             }
             mConfigUi.setSubmitButton(context.getString(R.string.wifi_save));
         } else {
@@ -512,7 +516,7 @@ public class WifiConfigController implements TextWatcher,
             return;
         }
         mView.findViewById(R.id.eap).setVisibility(View.VISIBLE);
-
+        
         if (mEapMethodSpinner == null) {
             mEapMethodSpinner = (Spinner) mView.findViewById(R.id.method);
             mPhase2Spinner = (Spinner) mView.findViewById(R.id.phase2);
@@ -537,7 +541,7 @@ public class WifiConfigController implements TextWatcher,
             }
         }
     }
-
+    
     private void showNetworkSetupFields() {
         mView.findViewById(R.id.setup_fields).setVisibility(View.VISIBLE);
 

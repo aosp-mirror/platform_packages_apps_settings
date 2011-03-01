@@ -505,12 +505,13 @@ public class WifiSettingsForSetupWizardXL extends Activity implements OnClickLis
         view.findViewById(R.id.ssid_layout).setVisibility(View.VISIBLE);
 
         if (accessPointSecurity == AccessPoint.SECURITY_EAP) {
+            setPaddingVisibility(View.VISIBLE);
             hideSoftwareKeyboard();
 
             // In SetupWizard for XLarge screen, we don't have enough space for showing
             // configurations needed for EAP. We instead disable the whole feature there and let
             // users configure those networks after the setup.
-            if (view.findViewById(R.id.type).getVisibility() == View.VISIBLE) {
+            if (view.findViewById(R.id.type_ssid).getVisibility() == View.VISIBLE) {
                 view.findViewById(R.id.eap_not_supported_for_add_network)
                         .setVisibility(View.VISIBLE);
             } else {
@@ -525,11 +526,26 @@ public class WifiSettingsForSetupWizardXL extends Activity implements OnClickLis
             return false;
         }
 
+        mConnectButton.setVisibility(View.VISIBLE);
+        setPaddingVisibility(View.GONE);
+
+        // In "add network" flow, we'll see multiple initSecurityFields() calls with different
+        // accessPointSecurity variable. We want to show software keyboard conditionally everytime
+        // when this method is called.
+        if (mWifiConfig != null) {
+            if (accessPointSecurity == AccessPoint.SECURITY_PSK ||
+                    accessPointSecurity == AccessPoint.SECURITY_WEP) {
+                mWifiConfig.requestFocusAndShowKeyboard(R.id.password);
+            } else {
+                mWifiConfig.requestFocusAndShowKeyboard(R.id.ssid);
+            }
+        }
+
         // Let the caller init security fields.
         return true;
     }
 
-    /* package */ void onEapNetworkSelected() {
+    private void onEapNetworkSelected() {
         mConnectButton.setVisibility(View.GONE);
         mBackButton.setText(R.string.wifi_setup_back);
     }

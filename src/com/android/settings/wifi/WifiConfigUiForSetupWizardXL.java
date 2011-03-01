@@ -75,7 +75,7 @@ public class WifiConfigUiForSetupWizardXL implements WifiConfigUiBase, OnFocusCh
 
         if (mView.findViewById(R.id.security_fields).getVisibility() == View.VISIBLE) {
             requestFocusAndShowKeyboard(R.id.password);
-        } else if (mView.findViewById(R.id.type).getVisibility() == View.VISIBLE) {
+        } else if (mView.findViewById(R.id.type_ssid).getVisibility() == View.VISIBLE) {
             // Add Network flow.
             requestFocusAndShowKeyboard(R.id.ssid);
         }
@@ -93,12 +93,15 @@ public class WifiConfigUiForSetupWizardXL implements WifiConfigUiBase, OnFocusCh
             Log.w(TAG, "password field is not EditText");
         } else {
             if (viewToBeFocused.isFocused()) {
-                mInputMethodManager.showSoftInput(viewToBeFocused, 0);
+                Log.i(TAG, "Already focused");
+                if (!mInputMethodManager.showSoftInput(viewToBeFocused, 0)) {
+                    Log.w(TAG, "Failed to show SoftInput");
+                }
             } else {
                 // After acquiring the focus, we show software keyboard.
                 viewToBeFocused.setOnFocusChangeListener(this);
                 final boolean requestFocusResult = viewToBeFocused.requestFocus();
-                Log.i(TAG, String.format("Focus request  %s.",
+                Log.i(TAG, String.format("Focus request: %s",
                         (requestFocusResult ? "successful" : "failed")));
                 if (!requestFocusResult) {
                     viewToBeFocused.setOnFocusChangeListener(null);
