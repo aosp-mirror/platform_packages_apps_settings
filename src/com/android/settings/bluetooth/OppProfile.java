@@ -16,10 +16,11 @@
 
 package com.android.settings.bluetooth;
 
+import com.android.settings.R;
+
 import android.bluetooth.BluetoothClass;
 import android.bluetooth.BluetoothDevice;
-
-import com.android.settings.R;
+import android.bluetooth.BluetoothProfile;
 
 /**
  * OppProfile handles Bluetooth OPP.
@@ -48,7 +49,7 @@ final class OppProfile implements LocalBluetoothProfile {
     }
 
     public int getConnectionStatus(BluetoothDevice device) {
-        return -1;  // FIXME: change to DISCONNECTED?
+        return BluetoothProfile.STATE_DISCONNECTED; // Settings app doesn't handle OPP
     }
 
     public boolean isPreferred(BluetoothDevice device) {
@@ -56,7 +57,7 @@ final class OppProfile implements LocalBluetoothProfile {
     }
 
     public int getPreferred(BluetoothDevice device) {
-        return -1;  // FIXME: is this correct?
+        return BluetoothProfile.PRIORITY_OFF; // Settings app doesn't handle OPP
     }
 
     public void setPreferred(BluetoothDevice device, boolean preferred) {
