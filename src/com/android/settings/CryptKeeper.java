@@ -27,6 +27,7 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Rect;
 import android.inputmethodservice.KeyboardView;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.IBinder;
@@ -63,6 +64,7 @@ public class CryptKeeper extends Activity implements TextView.OnEditorActionList
 
     private int mCooldown;
     PowerManager.WakeLock mWakeLock;
+    private EditText mPasswordEntry;
 
     /**
      * Used to propagate state through configuration changes (e.g. screen rotation)
@@ -115,6 +117,44 @@ public class CryptKeeper extends Activity implements TextView.OnEditorActionList
         }
     }
 
+    private class DecryptTask extends AsyncTask<String, Void, Integer> {
+        @Override
+        protected Integer doInBackground(String... params) {
+            IMountService service = getMountService();
+            try {
+                return service.decryptStorage(params[0]);
+            } catch (Exception e) {
+                Log.e(TAG, "Error while decrypting...", e);
+                return -1;
+            }
+        }
+
+        @Override
+        protected void onPostExecute(Integer failedAttempts) {
+            if (failedAttempts == 0) {
+                // The password was entered successfully. Start the Blank activity
+                // so this activity animates to black before the devices starts. Note
+                // It has 1 second to complete the animation or it will be frozen
+                // until the boot animation comes back up.
+                Intent intent = new Intent(CryptKeeper.this, Blank.class);
+                finish();
+                startActivity(intent);
+            } else if (failedAttempts == MAX_FAILED_ATTEMPTS) {
+                // Factory reset the device.
+                sendBroadcast(new Intent("android.intent.action.MASTER_CLEAR"));
+            } else if ((failedAttempts % COOL_DOWN_ATTEMPTS) == 0) {
+                mCooldown = COOL_DOWN_INTERVAL;
+                cooldown();
+            } else {
+                TextView tv = (TextView) findViewById(R.id.status);
+                tv.setText(R.string.try_again);
+                tv.setVisibility(View.VISIBLE);
+
+                // Reenable the password entry
+                mPasswordEntry.setEnabled(true);
+            }
+        }
+    }
 
     private Handler mHandler = new Handler() {
         @Override
@@ -281,8 +321,7 @@ public class CryptKeeper extends Activity implements TextView.OnEditorActionList
 
         if (mCooldown <= 0) {
             // Re-enable the password entry
-            EditText passwordEntry = (EditText) findViewById(R.id.passwordEntry);
-            passwordEntry.setEnabled(true);
+            mPasswordEntry.setEnabled(true);
 
             tv.setVisibility(View.GONE);
         } else {
@@ -298,13 +337,13 @@ public class CryptKeeper extends Activity implements TextView.OnEditorActionList
     }
 
     private void passwordEntryInit() {
-        TextView passwordEntry = (TextView) findViewById(R.id.passwordEntry);
-        passwordEntry.setOnEditorActionListener(this);
+        mPasswordEntry = (EditText) findViewById(R.id.passwordEntry);
+        mPasswordEntry.setOnEditorActionListener(this);
 
         KeyboardView keyboardView = (PasswordEntryKeyboardView) findViewById(R.id.keyboard);
 
         PasswordEntryKeyboardHelper keyboardHelper = new PasswordEntryKeyboardHelper(this,
-                keyboardView, passwordEntry, false);
+                keyboardView, mPasswordEntry, false);
         keyboardHelper.setKeyboardMode(PasswordEntryKeyboardHelper.KEYBOARD_MODE_ALPHA);
     }
 
@@ -329,34 +368,12 @@ public class CryptKeeper extends Activity implements TextView.OnEditorActionList
             // Now that we have the password clear the password field.
             v.setText(null);
 
-            IMountService service = getMountService();
-            try {
-                int failedAttempts = service.decryptStorage(password);
+            // Disable the password entry while checking the password. This
+            // we either be reenabled if the password was wrong or after the
+            // cooldown period.
+            mPasswordEntry.setEnabled(false);
 
-                if (failedAttempts == 0) {
-                    // The password was entered successfully. Start the Blank activity
-                    // so this activity animates to black before the devices starts. Note
-                    // It has 1 second to complete the animation or it will be frozen
-                    // until the boot animation comes back up.
-                    Intent intent = new Intent(this, Blank.class);
-                    finish();
-                    startActivity(intent);
-                } else if (failedAttempts == MAX_FAILED_ATTEMPTS) {
-                    // Factory reset the device.
-                    sendBroadcast(new Intent("android.intent.action.MASTER_CLEAR"));
-                } else if ((failedAttempts % COOL_DOWN_ATTEMPTS) == 0) {
-                    mCooldown = COOL_DOWN_INTERVAL;
-                    EditText passwordEntry = (EditText) findViewById(R.id.passwordEntry);
-                    passwordEntry.setEnabled(false);
-                    cooldown();
-                } else {
-                    TextView tv = (TextView) findViewById(R.id.status);
-                    tv.setText(R.string.try_again);
-                    tv.setVisibility(View.VISIBLE);
-                }
-            } catch (Exception e) {
-                Log.e(TAG, "Error while decrypting...", e);
-            }
+            new DecryptTask().execute(password);
 
             return true;
         }
