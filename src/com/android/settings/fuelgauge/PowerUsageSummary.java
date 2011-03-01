@@ -683,7 +683,10 @@ public class PowerUsageSummary extends PreferenceFragment implements Runnable {
         addWiFiUsage(uSecNow);
         addBluetoothUsage(uSecNow);
         addIdleUsage(uSecNow); // Not including cellular idle power
-        addRadioUsage(uSecNow);
+        // Don't compute radio usage if it's a wifi-only device
+        if (!com.android.settings.Utils.isWifiOnly()) {
+            addRadioUsage(uSecNow);
+        }
     }
 
     private BatterySipper addEntry(String label, DrainType drainType, long time, int iconId,
