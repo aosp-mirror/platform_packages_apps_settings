@@ -18,11 +18,6 @@ package com.android.settings.wifi;
 
 import static android.net.wifi.WifiConfiguration.INVALID_NETWORK_ID;
 
-import com.android.settings.ProgressCategoryBase;
-import com.android.settings.R;
-import com.android.settings.SettingsPreferenceFragment;
-import com.android.settings.Utils;
-
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.BroadcastReceiver;
@@ -53,6 +48,7 @@ import android.provider.Settings.Secure;
 import android.provider.Settings;
 import android.security.Credentials;
 import android.security.KeyStore;
+import android.util.Log;
 import android.view.ContextMenu;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -63,6 +59,12 @@ import android.view.ViewGroup;
 import android.view.ContextMenu.ContextMenuInfo;
 import android.widget.Toast;
 import android.widget.AdapterView.AdapterContextMenuInfo;
+
+import com.android.internal.util.AsyncChannel;
+import com.android.settings.ProgressCategoryBase;
+import com.android.settings.R;
+import com.android.settings.SettingsPreferenceFragment;
+import com.android.settings.Utils;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -82,6 +84,7 @@ import java.util.concurrent.atomic.AtomicBoolean;
  */
 public class WifiSettings extends SettingsPreferenceFragment
         implements DialogInterface.OnClickListener, Preference.OnPreferenceChangeListener  {
+    private static final String TAG = "WifiSettings";
     private static final int MENU_ID_SCAN = Menu.FIRST;
     private static final int MENU_ID_ADVANCED = Menu.FIRST + 1;
     private static final int MENU_ID_CONNECT = Menu.FIRST + 2;
@@ -168,6 +171,7 @@ public class WifiSettings extends SettingsPreferenceFragment
         // this method.
 
         mWifiManager = (WifiManager) getSystemService(Context.WIFI_SERVICE);
+        mWifiManager.asyncConnect(getActivity(), new WifiServiceHandler());
 
         final Activity activity = getActivity();
         final Intent intent = activity.getIntent();
@@ -238,6 +242,7 @@ public class WifiSettings extends SettingsPreferenceFragment
         if (mWifiEnabler != null) {
             mWifiEnabler.resume();
         }
+
         getActivity().registerReceiver(mReceiver, mFilter);
         if (mKeyStoreNetworkId != INVALID_NETWORK_ID &&
                 KeyStore.getInstance().test() == KeyStore.NO_ERROR) {
@@ -594,6 +599,50 @@ public class WifiSettings extends SettingsPreferenceFragment
         }
     }
 
+    private class WifiServiceHandler extends Handler {
+
+        @Override
+        public void handleMessage(Message msg) {
+            switch (msg.what) {
+                case AsyncChannel.CMD_CHANNEL_HALF_CONNECTED:
+                    if (msg.arg1 == AsyncChannel.STATUS_SUCCESSFUL) {
+                        //AsyncChannel in msg.obj
+                    } else {
+                        //AsyncChannel set up failure, ignore
+                        Log.e(TAG, "Failed to establish AsyncChannel connection");
+                    }
+                    break;
+                case WifiManager.CMD_WPS_COMPLETED:
+                    WpsResult result = (WpsResult) msg.obj;
+                    if (result == null) break;
+                    AlertDialog.Builder dialog = new AlertDialog.Builder(getActivity())
+                        .setTitle(R.string.wifi_wps_setup_title)
+                        .setPositiveButton(android.R.string.ok, null);
+                    switch (result.status) {
+                        case FAILURE:
+                            dialog.setMessage(R.string.wifi_wps_failed);
+                            dialog.show();
+                            break;
+                        case IN_PROGRESS:
+                            dialog.setMessage(R.string.wifi_wps_in_progress);
+                            dialog.show();
+                            break;
+                        default:
+                            if (result.pin != null) {
+                                dialog.setMessage(getResources().getString(
+                                        R.string.wifi_wps_pin_output, result.pin));
+                                dialog.show();
+                            }
+                            break;
+                    }
+                //TODO: more connectivity feedback
+                default:
+                    //Ignore
+                    break;
+            }
+        }
+    }
+
     /**
      * Renames/replaces "Next" button when appropriate. "Next" button usually exists in
      * Wifi setup screens, not in usual wifi settings screen.
@@ -631,27 +680,7 @@ public class WifiSettings extends SettingsPreferenceFragment
             case WifiConfigController.WPS_PBC:
             case WifiConfigController.WPS_PIN_FROM_ACCESS_POINT:
             case WifiConfigController.WPS_PIN_FROM_DEVICE:
-                WpsResult result = mWifiManager.startWps(configController.getWpsConfig());
-                AlertDialog.Builder dialog = new AlertDialog.Builder(getActivity())
-                                        .setTitle(R.string.wifi_wps_setup_title)
-                                        .setPositiveButton(android.R.string.ok, null);
-                switch (result.status) {
-                    case FAILURE:
-                        dialog.setMessage(R.string.wifi_wps_failed);
-                        dialog.show();
-                        break;
-                    case IN_PROGRESS:
-                        dialog.setMessage(R.string.wifi_wps_in_progress);
-                        dialog.show();
-                        break;
-                    default:
-                        if (networkSetup == WifiConfigController.WPS_PIN_FROM_DEVICE) {
-                            dialog.setMessage(getResources().getString(R.string.wifi_wps_pin_output,
-                                    result.pin));
-                            dialog.show();
-                        }
-                        break;
-                }
+                mWifiManager.startWps(configController.getWpsConfig());
                 break;
             case WifiConfigController.MANUAL:
                 final WifiConfiguration config = configController.getConfig();
