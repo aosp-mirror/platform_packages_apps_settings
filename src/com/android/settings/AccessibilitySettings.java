@@ -26,6 +26,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.SystemProperties;
 import android.preference.CheckBoxPreference;
+import android.preference.ListPreference;
 import android.preference.Preference;
 import android.preference.PreferenceCategory;
 import android.preference.PreferenceGroup;
@@ -44,7 +45,8 @@ import java.util.Map;
 /**
  * Activity with the accessibility settings.
  */
-public class AccessibilitySettings extends SettingsPreferenceFragment implements DialogCreatable {
+public class AccessibilitySettings extends SettingsPreferenceFragment implements DialogCreatable,
+        Preference.OnPreferenceChangeListener {
     private static final String DEFAULT_SCREENREADER_MARKET_LINK =
         "market://search?q=pname:com.google.android.marvin.talkback";
 
@@ -66,6 +68,9 @@ public class AccessibilitySettings extends SettingsPreferenceFragment implements
     private final String KEY_TOGGLE_ACCESSIBILITY_SERVICE_CHECKBOX =
         "key_toggle_accessibility_service_checkbox";
 
+    private final String KEY_LONG_PRESS_TIMEOUT_LIST_PREFERENCE =
+        "long_press_timeout_list_preference";
+
     private static final int DIALOG_ID_DISABLE_ACCESSIBILITY = 1;
     private static final int DIALOG_ID_ENABLE_SCRIPT_INJECTION = 2;
     private static final int DIALOG_ID_ENABLE_ACCESSIBILITY_SERVICE = 3;
@@ -79,6 +84,8 @@ public class AccessibilitySettings extends SettingsPreferenceFragment implements
     private CheckBoxPreference mPowerButtonEndsCallCheckBox;
 
     private PreferenceGroup mAccessibilityServicesCategory;
+
+    private ListPreference mLongPressTimeoutListPreference;
 
     private Map<String, ServiceInfo> mAccessibilityServices =
         new LinkedHashMap<String, ServiceInfo>();
@@ -105,6 +112,9 @@ public class AccessibilitySettings extends SettingsPreferenceFragment implements
         mPowerButtonEndsCallCheckBox = (CheckBoxPreference) findPreference(
                 POWER_BUTTON_ENDS_CALL_CHECKBOX);
 
+        mLongPressTimeoutListPreference = (ListPreference) findPreference(
+                KEY_LONG_PRESS_TIMEOUT_LIST_PREFERENCE);
+
         // set the accessibility script injection category
         boolean scriptInjectionEnabled = (Settings.Secure.getInt(getContentResolver(),
                 Settings.Secure.ACCESSIBILITY_SCRIPT_INJECTION, 0) == 1);
@@ -128,6 +138,8 @@ public class AccessibilitySettings extends SettingsPreferenceFragment implements
             // this entire category is irrelevant.
             getPreferenceScreen().removePreference(mPowerButtonCategory);
         }
+
+        mLongPressTimeoutListPreference.setOnPreferenceChangeListener(this);
     }
 
     @Override
@@ -195,6 +207,16 @@ public class AccessibilitySettings extends SettingsPreferenceFragment implements
             outState.putString(KEY_TOGGLE_ACCESSIBILITY_SERVICE_CHECKBOX,
                     mToggleAccessibilityServiceCheckBox.getKey());
         }
+    }
+
+    public boolean onPreferenceChange(Preference preference, Object newValue) {
+        if (preference == mLongPressTimeoutListPreference) {
+            int intValue = Integer.parseInt((String) newValue);
+            Settings.Secure.putInt(getContentResolver(),
+                Settings.Secure.LONG_PRESS_TIMEOUT, intValue);
+            return true;
+        }
+        return false;
     }
 
     /**
