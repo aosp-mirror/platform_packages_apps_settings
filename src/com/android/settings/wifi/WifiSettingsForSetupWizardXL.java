@@ -132,16 +132,6 @@ public class WifiSettingsForSetupWizardXL extends Activity implements OnClickLis
     private InputMethodManager mInputMethodManager;
 
     /**
-     * Used to store View visibility status.
-     *
-     * We store the status when we show "connecting" screen and use the stored data when the
-     * device failed to connect to the network.
-     */
-    private int mPreviousWpsFieldsVisibility = View.GONE;
-    private int mPreviousSecurityFieldsVisibility = View.GONE;
-    private int mPreviousTypeVisibility = View.GONE;
-
-    /**
      * Previous network connection state reported by main Wifi module.
      *
      * Note that we don't use original {@link DetailedState} object but simplified one translated
@@ -571,26 +561,6 @@ public class WifiSettingsForSetupWizardXL extends Activity implements OnClickLis
         mBackButton.setVisibility(View.VISIBLE);
         mBackButton.setText(R.string.wifi_setup_back);
 
-        // We need to restore visibility status when the device failed to connect the network.
-        final View wpsFieldView = findViewById(R.id.wps_fields);
-        if (wpsFieldView != null) {
-            mPreviousWpsFieldsVisibility = wpsFieldView.getVisibility();
-            wpsFieldView.setVisibility(View.GONE);
-        }
-        final View securityFieldsView = findViewById(R.id.security_fields);
-        if (securityFieldsView != null) {
-            mPreviousSecurityFieldsVisibility = securityFieldsView.getVisibility();
-            securityFieldsView.setVisibility(View.GONE);
-        }
-        final View typeView = findViewById(R.id.type);
-        if (typeView != null) {
-            mPreviousTypeVisibility = typeView.getVisibility();
-            typeView.setVisibility(View.GONE);
-        }
-
-        // TODO: investigate whether visibility handling above is needed. Now that we hide
-        // them completely when connecting, so we may not need to do so, though we probably
-        // need to show software keyboard conditionaly.
         final ViewGroup parent = (ViewGroup)findViewById(R.id.wifi_config_ui);
         parent.setVisibility(View.GONE);
         mConnectingStatusLayout.setVisibility(View.VISIBLE);
@@ -742,38 +712,6 @@ public class WifiSettingsForSetupWizardXL extends Activity implements OnClickLis
         final ViewGroup parent = (ViewGroup)findViewById(R.id.wifi_config_ui);
         parent.setVisibility(View.VISIBLE);
         mConnectingStatusLayout.setVisibility(View.GONE);
-
-        // Restore View status which was tweaked on connection.
-        final View wpsFieldView = findViewById(R.id.wps_fields);
-        if (wpsFieldView != null) {
-            wpsFieldView.setVisibility(mPreviousWpsFieldsVisibility);
-        }
-        final View securityFieldsView = findViewById(R.id.security_fields);
-        if (securityFieldsView != null) {
-            securityFieldsView.setVisibility(mPreviousSecurityFieldsVisibility);
-            if (mPreviousSecurityFieldsVisibility == View.VISIBLE && mWifiConfig != null) {
-                final View passwordView = findViewById(R.id.password);
-                if (passwordView != null) {
-                    if (passwordView.isFocused()) {
-                        setPaddingVisibility(View.GONE);
-                    }
-                    mWifiConfig.requestFocusAndShowKeyboard(R.id.password);
-                }
-            }
-        }
-        final View typeView = findViewById(R.id.type);
-        if (typeView != null) {
-            typeView.setVisibility(mPreviousTypeVisibility);
-            if (mPreviousTypeVisibility == View.VISIBLE && mWifiConfig != null) {
-                final View ssidView = findViewById(R.id.ssid);
-                if (ssidView != null) {
-                    if (ssidView.isFocused()) {
-                        setPaddingVisibility(View.GONE);
-                    }
-                    mWifiConfig.requestFocusAndShowKeyboard(R.id.ssid);
-                }
-            }
-        }
     }
 
     // Used by WifiConfigUiForSetupWizardXL
