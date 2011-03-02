@@ -80,10 +80,17 @@
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="0dip">
 
+        <!-- Padding for @id/content shown when keyboard isn't available -->
+        <View
+            android:id="@+id/content_padding"
+            android:layout_width="match_parent"
+            android:layout_height="370dip"
+            android:visibility="gone" />
+
         <FrameLayout
             android:id="@+id/wifi_settings_fragment_layout"
             android:layout_width="match_parent"
-            android:layout_height="370dip">
+            android:layout_height="377dip">
             <fragment
                 class="com.android.settings.wifi.WifiSettings"
                 android:id="@+id/wifi_setup_fragment"
@@ -98,12 +105,6 @@
             android:minHeight="160dip"
             android:layout_marginTop="10dip"
             android:layout_alignParentLeft="true"
-            android:visibility="gone" />
-        <View
-            android:id="@+id/wifi_config_padding"
-            android:layout_width="match_parent"
-            android:layout_height="360dip"
-            android:layout_marginTop="10dip"
             android:visibility="gone" />
         <LinearLayout
             android:id="@+id/connecting_status_layout"

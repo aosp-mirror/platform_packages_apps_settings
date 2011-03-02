@@ -82,8 +82,8 @@ public class WifiSettingsForSetupWizardXL extends Activity implements OnClickLis
     /** Used for resizing a padding above title. Hiden when software keyboard is shown. */
     private View mTopPadding;
 
-    /** Used for resizing a padding inside Config UI. Hiden when software keyboard is shown. */
-    private View mWifiConfigPadding;
+    /** Used for resizing a padding of main content. Hiden when software keyboard is shown. */
+    private View mContentPadding;
 
     private TextView mTitleView;
     /**
@@ -171,7 +171,7 @@ public class WifiSettingsForSetupWizardXL extends Activity implements OnClickLis
 
         // At first, Wifi module doesn't return SCANNING state (it's too early), so we manually
         // show it.
-        showScanningStatus();
+        showScanningProgressBar();
     }
 
     private void initViews() {
@@ -202,7 +202,7 @@ public class WifiSettingsForSetupWizardXL extends Activity implements OnClickLis
         mBackButton.setOnClickListener(this);
 
         mTopPadding = findViewById(R.id.top_padding);
-        mWifiConfigPadding = findViewById(R.id.wifi_config_padding);
+        mContentPadding = findViewById(R.id.content_padding);
 
         mWifiSettingsFragmentLayout = findViewById(R.id.wifi_settings_fragment_layout);
         mConnectingStatusLayout = findViewById(R.id.connecting_status_layout);
@@ -228,14 +228,14 @@ public class WifiSettingsForSetupWizardXL extends Activity implements OnClickLis
         }
     }
 
-    private void restoreFirstButtonVisibilityState() {
+    private void restoreFirstVisibilityState() {
         showDefaultTitle();
         mAddNetworkButton.setVisibility(View.VISIBLE);
         mRefreshButton.setVisibility(View.VISIBLE);
         mSkipOrNextButton.setVisibility(View.VISIBLE);
         mConnectButton.setVisibility(View.GONE);
         mBackButton.setVisibility(View.GONE);
-        setPaddingVisibility(View.VISIBLE, View.GONE);
+        setPaddingVisibility(View.VISIBLE);
     }
 
     @Override
@@ -288,10 +288,14 @@ public class WifiSettingsForSetupWizardXL extends Activity implements OnClickLis
             // Let users know the device is working correctly though currently there's
             // no visible network on the list.
             if (mWifiSettings.getAccessPointsCount() == 0) {
-                showScanningProgressBar();
+                showScanningState();
             } else {
                 // Users already see available networks.
                 showDisconnectedProgressBar();
+                if (mScreenState == SCREEN_STATE_DISCONNECTED) {
+                    mWifiSettingsFragmentLayout.setVisibility(View.VISIBLE);
+                    mBottomPadding.setVisibility(View.GONE);
+                }
             }
             break;
         }
@@ -316,6 +320,10 @@ public class WifiSettingsForSetupWizardXL extends Activity implements OnClickLis
 
     private void showDisconnectedState(String stateString) {
         showDisconnectedProgressBar();
+        if (mScreenState == SCREEN_STATE_DISCONNECTED) {
+            mWifiSettingsFragmentLayout.setVisibility(View.VISIBLE);
+            mBottomPadding.setVisibility(View.GONE);
+        }
         mAddNetworkButton.setEnabled(true);
         mRefreshButton.setEnabled(true);
     }
@@ -419,7 +427,9 @@ public class WifiSettingsForSetupWizardXL extends Activity implements OnClickLis
         mBottomPadding.setVisibility(View.GONE);
     }
 
-    private void showScanningStatus() {
+    private void showScanningState() {
+        setPaddingVisibility(View.VISIBLE);
+        mWifiSettingsFragmentLayout.setVisibility(View.GONE);
         showScanningProgressBar();
     }
 
@@ -435,6 +445,8 @@ public class WifiSettingsForSetupWizardXL extends Activity implements OnClickLis
      * "Add network" button, meaning there's no selected access point.
      */
     /* package */ void showConfigUi(AccessPoint selectedAccessPoint, boolean edit) {
+        mScreenState = SCREEN_STATE_EDITING;
+
         if (selectedAccessPoint != null &&
                 (selectedAccessPoint.security == AccessPoint.SECURITY_WEP ||
                         selectedAccessPoint.security == AccessPoint.SECURITY_PSK)) {
@@ -600,14 +612,14 @@ public class WifiSettingsForSetupWizardXL extends Activity implements OnClickLis
 
             // When a user press "Back" button after pressing "Connect" button, we want to cancel
             // the "Connect" request and refresh the whole Wifi status.
-            restoreFirstButtonVisibilityState();
+            restoreFirstVisibilityState();
 
             mSkipOrNextButton.setEnabled(true);
             changeNextButtonState(false);  // Skip
 
             // Wifi list becomes empty for a moment. We show "scanning" effect to a user so that
             // he/she won't be astonished there. This stops once the scan finishes.
-            showScanningProgressBar();
+            showScanningState();
 
             // Remembered networks may be re-used during SetupWizard, which confuse users.
             // We force the module to forget them to reduce UX complexity
@@ -620,18 +632,22 @@ public class WifiSettingsForSetupWizardXL extends Activity implements OnClickLis
                 mWifiManager.forgetNetwork(config.networkId);
             }
 
+            mWifiSettingsFragmentLayout.setVisibility(View.GONE);
             refreshAccessPoints(true);
         } else { // During user's Wifi configuration.
+            mScreenState = SCREEN_STATE_DISCONNECTED;
             mWifiSettings.resumeWifiScan();
 
-            restoreFirstButtonVisibilityState();
+            restoreFirstVisibilityState();
 
             mAddNetworkButton.setEnabled(true);
             mRefreshButton.setEnabled(true);
             mSkipOrNextButton.setEnabled(true);
+            mWifiSettingsFragmentLayout.setVisibility(View.VISIBLE);
+            showDisconnectedProgressBar();
         }
 
-        mWifiSettingsFragmentLayout.setVisibility(View.VISIBLE);
+        setPaddingVisibility(View.VISIBLE);
         mConnectingStatusLayout.setVisibility(View.GONE);
         final ViewGroup parent = (ViewGroup)findViewById(R.id.wifi_config_ui);
         parent.removeAllViews();
@@ -659,7 +675,11 @@ public class WifiSettingsForSetupWizardXL extends Activity implements OnClickLis
         // If we already show some of access points but the bar still shows "scanning" state, it
         // should be stopped.
         if (mProgressBar.isIndeterminate() && accessPoints.size() > 0) {
-            showTopDividerWithProgressBar();
+            showDisconnectedProgressBar();
+            if (mScreenState == SCREEN_STATE_DISCONNECTED) {
+                mWifiSettingsFragmentLayout.setVisibility(View.VISIBLE);
+                mBottomPadding.setVisibility(View.GONE);
+            }
             mAddNetworkButton.setEnabled(true);
             mRefreshButton.setEnabled(true);
         }
@@ -678,7 +698,7 @@ public class WifiSettingsForSetupWizardXL extends Activity implements OnClickLis
             // state. Instead we manually show previous status here.
             showDisconnectedState(Summary.get(this, mPreviousNetworkState));
         } else {
-            showScanningStatus();
+            showScanningState();
         }
 
         if (disconnectNetwork) {
@@ -756,24 +776,24 @@ public class WifiSettingsForSetupWizardXL extends Activity implements OnClickLis
         }
     }
 
-    /** Note: doesn't affect bottom padding */
     // Used by WifiConfigUiForSetupWizardXL
     /* package */ void setPaddingVisibility(int visibility) {
-        Log.d("@@@", "setPaddingVisibilyty: " + visibility, new RuntimeException());
-        setPaddingVisibility(visibility, visibility);
-    }
-
-    /** Note: doesn't affect bottom padding */
-    private void setPaddingVisibility(int topPaddingVisibility, int configVisibility) {
-        mTopPadding.setVisibility(topPaddingVisibility);
-        mWifiConfigPadding.setVisibility(configVisibility);
+        mTopPadding.setVisibility(visibility);
+        mContentPadding.setVisibility(visibility);
     }
 
     private void showDisconnectedProgressBar() {
-        mProgressBar.setVisibility(View.GONE);
-        mProgressBar.setIndeterminate(false);
-        mTopDividerNoProgress.setVisibility(View.VISIBLE);
-        mBottomPadding.setVisibility(View.VISIBLE);
+        // The device may report DISCONNECTED during connecting to a network, at which we don't
+        // want to lose bottom padding of top divider implicitly added by ProgressBar.
+        if (mScreenState == SCREEN_STATE_DISCONNECTED) {
+            mProgressBar.setVisibility(View.GONE);
+            mProgressBar.setIndeterminate(false);
+            mTopDividerNoProgress.setVisibility(View.VISIBLE);
+        } else {
+            mProgressBar.setVisibility(View.VISIBLE);
+            mProgressBar.setIndeterminate(false);
+            mTopDividerNoProgress.setVisibility(View.GONE);
+        }
     }
 
     /**
