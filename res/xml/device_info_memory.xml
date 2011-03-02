@@ -38,12 +38,9 @@
     <PreferenceCategory android:title="@string/internal_memory">
         <com.android.settings.deviceinfo.UsageBarPreference
             android:key="memory_internal_chart"/>
+
         <Preference android:key="memory_internal_size"
             android:title="@string/memory_size"
-            android:summary="@string/memory_calculating_size"/>
-
-        <Preference android:key="memory_internal_avail"
-            android:title="@string/memory_available"
             android:summary="@string/memory_calculating_size"/>
 
         <Preference android:key="memory_internal_apps"
@@ -65,6 +62,9 @@
         <Preference android:key="memory_internal_media_misc"
             android:title="@string/memory_media_misc_usage"
             android:summary="@string/memory_calculating_size"/>
-    </PreferenceCategory>
 
+        <Preference android:key="memory_internal_avail"
+            android:title="@string/memory_available"
+            android:summary="@string/memory_calculating_size"/>
+     </PreferenceCategory>
 </PreferenceScreen>
