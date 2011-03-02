@@ -213,14 +213,13 @@ public class WifiSettings extends SettingsPreferenceFragment
             ListPreference pref = (ListPreference) findPreference(KEY_SLEEP_POLICY);
             if (pref != null) {
                 if (Utils.isWifiOnly()) {
-                    getPreferenceScreen().removePreference(pref);
-                } else {
-                    pref.setOnPreferenceChangeListener(this);
-                    int value = Settings.System.getInt(getContentResolver(),
-                            Settings.System.WIFI_SLEEP_POLICY,
-                            Settings.System.WIFI_SLEEP_POLICY_NEVER);
-                    pref.setValue(String.valueOf(value));
+                    pref.setEntries(R.array.wifi_sleep_policy_entries_wifi_only);
                 }
+                pref.setOnPreferenceChangeListener(this);
+                int value = Settings.System.getInt(getContentResolver(),
+                        Settings.System.WIFI_SLEEP_POLICY,
+                        Settings.System.WIFI_SLEEP_POLICY_NEVER);
+                pref.setValue(String.valueOf(value));
             }
 
             registerForContextMenu(getListView());
