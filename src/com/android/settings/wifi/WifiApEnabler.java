@@ -152,7 +152,7 @@ public class WifiApEnabler implements Preference.OnPreferenceChangeListener {
         return false;
     }
 
-    void updateConfigSummary(WifiConfiguration wifiConfig) {
+    public void updateConfigSummary(WifiConfiguration wifiConfig) {
         String s = mContext.getString(
                 com.android.internal.R.string.wifi_tether_configure_ssid_default);
         mCheckBox.setSummary(String.format(
