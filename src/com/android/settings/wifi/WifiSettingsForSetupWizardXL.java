@@ -296,8 +296,7 @@ public class WifiSettingsForSetupWizardXL extends Activity implements OnClickLis
             break;
         }
         case CONNECTING: {
-            if (mScreenState != SCREEN_STATE_DISCONNECTED &&
-                    mScreenState != SCREEN_STATE_CONNECTED) {
+            if (mScreenState == SCREEN_STATE_CONNECTING) {
                 showConnectingState();
             }
             break;
@@ -760,6 +759,7 @@ public class WifiSettingsForSetupWizardXL extends Activity implements OnClickLis
     /** Note: doesn't affect bottom padding */
     // Used by WifiConfigUiForSetupWizardXL
     /* package */ void setPaddingVisibility(int visibility) {
+        Log.d("@@@", "setPaddingVisibilyty: " + visibility, new RuntimeException());
         setPaddingVisibility(visibility, visibility);
     }
 
