@@ -742,18 +742,28 @@ public class InstalledAppDetails extends Fragment
     private final BroadcastReceiver mCheckKillProcessesReceiver = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
-            mForceStopButton.setEnabled(getResultCode() != Activity.RESULT_CANCELED);
-            mForceStopButton.setOnClickListener(InstalledAppDetails.this);
+            updateForceStopButton(getResultCode() != Activity.RESULT_CANCELED);
         }
     };
+
+    private void updateForceStopButton(boolean enabled) {
+        mForceStopButton.setEnabled(enabled);
+        mForceStopButton.setOnClickListener(InstalledAppDetails.this);
+    }
     
     private void checkForceStop() {
         Intent intent = new Intent(Intent.ACTION_QUERY_PACKAGE_RESTART,
                 Uri.fromParts("package", mAppEntry.info.packageName, null));
         intent.putExtra(Intent.EXTRA_PACKAGES, new String[] { mAppEntry.info.packageName });
         intent.putExtra(Intent.EXTRA_UID, mAppEntry.info.uid);
-        getActivity().sendOrderedBroadcast(intent, null, mCheckKillProcessesReceiver, null,
-                Activity.RESULT_CANCELED, null, null);
+        if ((mAppEntry.info.flags&ApplicationInfo.FLAG_STOPPED) == 0) {
+            // If the app isn't explicitly stopped, then always show the
+            // force stop button.
+            updateForceStopButton(true);
+        } else {
+            getActivity().sendOrderedBroadcast(intent, null, mCheckKillProcessesReceiver, null,
+                    Activity.RESULT_CANCELED, null, null);
+        }
     }
     
     static class DisableChanger extends AsyncTask<Object, Object, Object> {
