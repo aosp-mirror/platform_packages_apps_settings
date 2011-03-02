@@ -728,6 +728,9 @@ public class WifiSettingsForSetupWizardXL extends Activity implements OnClickLis
         final ViewGroup parent = (ViewGroup)findViewById(R.id.wifi_config_ui);
         parent.setVisibility(View.VISIBLE);
         mConnectingStatusLayout.setVisibility(View.GONE);
+
+        showDisconnectedProgressBar();
+        setPaddingVisibility(View.GONE);
     }
 
     // Used by WifiConfigUiForSetupWizardXL
@@ -746,6 +749,7 @@ public class WifiSettingsForSetupWizardXL extends Activity implements OnClickLis
         } else {
             mProgressBar.setVisibility(View.VISIBLE);
             mProgressBar.setIndeterminate(false);
+            mProgressBar.setProgress(0);
             mTopDividerNoProgress.setVisibility(View.GONE);
         }
     }
