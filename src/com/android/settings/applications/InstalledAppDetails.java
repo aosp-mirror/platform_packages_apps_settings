@@ -37,10 +37,12 @@ import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
 import android.content.pm.PackageManager.NameNotFoundException;
+import android.hardware.usb.IUsbManager;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
+import android.os.IBinder;
 import android.os.Message;
 import android.os.RemoteException;
 import android.os.ServiceManager;
@@ -74,6 +76,7 @@ public class InstalledAppDetails extends Activity
     private static final boolean localLOGV = false;
     
     private PackageManager mPm;
+    private IUsbManager mUsbManager;
     private ApplicationsState mState;
     private ApplicationsState.AppEntry mAppEntry;
     private PackageInfo mPackageInfo;
@@ -294,7 +297,9 @@ public class InstalledAppDetails extends Activity
         
         mState = ApplicationsState.getInstance(getApplication());
         mPm = getPackageManager();
-        
+        IBinder b = ServiceManager.getService(Context.USB_SERVICE);
+        mUsbManager = IUsbManager.Stub.asInterface(b);
+
         mCanBeOnSdCardChecker = new CanBeOnSdCardChecker();
         
         setContentView(R.layout.installed_app_details);
@@ -421,8 +426,14 @@ public class InstalledAppDetails extends Activity
         List<IntentFilter> intentList = new ArrayList<IntentFilter>();
         mPm.getPreferredActivities(intentList, prefActList, packageName);
         if(localLOGV) Log.i(TAG, "Have "+prefActList.size()+" number of activities in prefered list");
+        boolean hasUsbDefaults = false;
+        try {
+            hasUsbDefaults = mUsbManager.hasDefaults(packageName, mAppEntry.info.uid);
+        } catch (RemoteException e) {
+            Log.e(TAG, "mUsbManager.hasDefaults", e);
+        }
         TextView autoLaunchView = (TextView)findViewById(R.id.auto_launch);
-        if (prefActList.size() <= 0) {
+        if (prefActList.size() <= 0 && !hasUsbDefaults) {
             // Disable clear activities button
             autoLaunchView.setText(R.string.auto_launch_disable_text);
             mActivitiesButton.setEnabled(false);
@@ -431,7 +442,7 @@ public class InstalledAppDetails extends Activity
             mActivitiesButton.setEnabled(true);
             mActivitiesButton.setOnClickListener(this);
         }
-         
+
         // Security permissions section
         LinearLayout permsView = (LinearLayout) findViewById(R.id.permissions_section);
         AppSecurityPermissions asp = new AppSecurityPermissions(this, packageName);
@@ -740,6 +751,11 @@ public class InstalledAppDetails extends Activity
             }
         } else if(v == mActivitiesButton) {
             mPm.clearPackagePreferredActivities(packageName);
+            try {
+                mUsbManager.clearDefaults(packageName, mAppEntry.info.uid);
+            } catch (RemoteException e) {
+                Log.e(TAG, "mUsbManager.clearDefaults", e);
+            }
             mActivitiesButton.setEnabled(false);
         } else if(v == mClearDataButton) {
             if (mAppEntry.info.manageSpaceActivityName != null) {
