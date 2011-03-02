@@ -243,8 +243,11 @@ public class WifiSettingsForSetupWizardXL extends Activity implements OnClickLis
                 // We don't want to let Wifi enabled when a user press skip without choosing
                 // any access point.
                 mWifiManager.setWifiEnabled(false);
+                // Notify "skip"
+                setResult(RESULT_FIRST_USER);
+            } else {
+                setResult(RESULT_OK);
             }
-            setResult(RESULT_OK);
             finish();
         } else if (view == mConnectButton) {
             if (DEBUG) Log.d(TAG, "Connect button pressed");
