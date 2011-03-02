@@ -39,6 +39,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class DeviceInfoSettings extends SettingsPreferenceFragment {
+
     private static final String TAG = "DeviceInfoSettings";
 
     private static final String KEY_CONTAINER = "container";
@@ -49,6 +50,11 @@ public class DeviceInfoSettings extends SettingsPreferenceFragment {
     private static final String KEY_COPYRIGHT = "copyright";
     private static final String KEY_SYSTEM_UPDATE_SETTINGS = "system_update_settings";
     private static final String PROPERTY_URL_SAFETYLEGAL = "ro.url.safetylegal";
+    private static final String KEY_KERNEL_VERSION = "kernel_version";
+    private static final String KEY_BUILD_NUMBER = "build_number";
+    private static final String KEY_DEVICE_MODEL = "device_model";
+    private static final String KEY_BASEBAND_VERSION = "baseband_version";
+    private static final String KEY_FIRMWARE_VERSION = "firmware_version";
 
     long[] mHits = new long[3];
 
@@ -69,16 +75,21 @@ public class DeviceInfoSettings extends SettingsPreferenceFragment {
             getPreferenceScreen().removePreference(findPreference("system_tutorial"));
         }
 
-        setStringSummary("firmware_version", Build.VERSION.RELEASE);
-        findPreference("firmware_version").setEnabled(true);
-        setValueSummary("baseband_version", "gsm.version.baseband");
-        setStringSummary("device_model", Build.MODEL);
-        setStringSummary("build_number", Build.DISPLAY);
-        findPreference("kernel_version").setSummary(getFormattedKernelVersion());
+        setStringSummary(KEY_FIRMWARE_VERSION, Build.VERSION.RELEASE);
+        findPreference(KEY_FIRMWARE_VERSION).setEnabled(true);
+        setValueSummary(KEY_BASEBAND_VERSION, "gsm.version.baseband");
+        setStringSummary(KEY_DEVICE_MODEL, Build.MODEL);
+        setStringSummary(KEY_BUILD_NUMBER, Build.DISPLAY);
+        findPreference(KEY_KERNEL_VERSION).setSummary(getFormattedKernelVersion());
 
         // Remove Safety information preference if PROPERTY_URL_SAFETYLEGAL is not set
         removePreferenceIfPropertyMissing(getPreferenceScreen(), "safetylegal",
                 PROPERTY_URL_SAFETYLEGAL);
+
+        // Remove Baseband version if wifi-only device
+        if (Utils.isWifiOnly()) {
+            getPreferenceScreen().removePreference(findPreference(KEY_BASEBAND_VERSION));
+        }
 
         /*
          * Settings is a generic app and should not contain any device-specific
@@ -107,7 +118,7 @@ public class DeviceInfoSettings extends SettingsPreferenceFragment {
 
     @Override
     public boolean onPreferenceTreeClick(PreferenceScreen preferenceScreen, Preference preference) {
-        if (preference.getKey().equals("firmware_version")) {
+        if (preference.getKey().equals(KEY_FIRMWARE_VERSION)) {
             System.arraycopy(mHits, 1, mHits, 0, mHits.length-1);
             mHits[mHits.length-1] = SystemClock.uptimeMillis();
             if (mHits[0] >= (SystemClock.uptimeMillis()-500)) {

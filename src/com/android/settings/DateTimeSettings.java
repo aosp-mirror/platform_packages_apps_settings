@@ -87,6 +87,12 @@ public class DateTimeSettings extends SettingsPreferenceFragment
         mAutoTimePref = (CheckBoxPreference) findPreference(KEY_AUTO_TIME);
         mAutoTimePref.setChecked(autoTimeEnabled);
         mAutoTimeZonePref = (CheckBoxPreference) findPreference(KEY_AUTO_TIME_ZONE);
+        // Override auto-timezone if it's a wifi-only device.
+        // TODO: Remove this when auto-timezone is implemented based on wifi-location.
+        if (Utils.isWifiOnly()) {
+            getPreferenceScreen().removePreference(mAutoTimeZonePref);
+            autoTimeZoneEnabled = false;
+        }
         mAutoTimeZonePref.setChecked(autoTimeZoneEnabled);
 
         mTimePref = findPreference("time");
@@ -124,7 +130,6 @@ public class DateTimeSettings extends SettingsPreferenceFragment
         mDatePref.setEnabled(!autoTimeEnabled);
         mTimeZone.setEnabled(!autoTimeZoneEnabled);
     }
-
 
     @Override
     public void onResume() {
