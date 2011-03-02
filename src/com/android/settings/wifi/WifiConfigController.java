@@ -198,11 +198,6 @@ public class WifiConfigController implements TextWatcher,
             WifiInfo info = mAccessPoint.getInfo();
             if (info != null) {
                 addRow(group, R.string.wifi_speed, info.getLinkSpeed() + WifiInfo.LINK_SPEED_UNITS);
-                // TODO: fix the ip address for IPv6.
-                int address = info.getIpAddress();
-                if (address != 0) {
-                    addRow(group, R.string.wifi_ip_address, Formatter.formatIpAddress(address));
-                }
             }
 
             if (mAccessPoint.networkId != INVALID_NETWORK_ID) {
@@ -211,6 +206,10 @@ public class WifiConfigController implements TextWatcher,
                     mIpSettingsSpinner.setSelection(STATIC_IP);
                 } else {
                     mIpSettingsSpinner.setSelection(DHCP);
+                    //Display IP addresses
+                    for(InetAddress a : config.linkProperties.getAddresses()) {
+                        addRow(group, R.string.wifi_ip_address, a.getHostAddress());
+                    }
                 }
 
                 if (config.proxySettings == ProxySettings.STATIC) {

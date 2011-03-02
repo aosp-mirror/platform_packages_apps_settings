@@ -232,6 +232,7 @@
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
                     android:singleLine="true"
+                    android:inputType="textNoSuggestions"
                     android:hint="@string/proxy_hostname_hint" />
 
             <TextView android:layout_width="fill_parent"
@@ -242,6 +243,7 @@
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
                     android:singleLine="true"
+                    android:inputType="number"
                     android:hint="@string/proxy_port_hint" />
 
             <TextView android:layout_width="fill_parent"
@@ -252,6 +254,7 @@
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
                     android:singleLine="true"
+                    android:inputType="textNoSuggestions"
                     android:hint="@string/proxy_exclusionlist_hint" />
 
         </LinearLayout>
@@ -288,6 +291,7 @@
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:singleLine="true"
+                android:hint="wifi_ip_address_hint"
                 android:inputType="textNoSuggestions" />
 
             <TextView
@@ -299,6 +303,7 @@
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:singleLine="true"
+                android:hint="wifi_gateway_hint"
                 android:inputType="textNoSuggestions" />
 
             <TextView
@@ -310,7 +315,8 @@
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:singleLine="true"
-                android:inputType="textNoSuggestions" />
+                android:hint="wifi_network_prefix_length_hint"
+                android:inputType="number" />
 
             <TextView
                 android:layout_width="fill_parent"
@@ -321,6 +327,7 @@
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:singleLine="true"
+                android:hint="wifi_dns1_hint"
                 android:inputType="textNoSuggestions" />
 
             <TextView
@@ -332,6 +339,7 @@
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:singleLine="true"
+                android:hint="wifi_dns2_hint"
                 android:inputType="textNoSuggestions" />
     </LinearLayout>
 
