@@ -19,6 +19,7 @@ package com.android.settings;
 import org.xmlpull.v1.XmlPullParserException;
 
 import android.app.Activity;
+import android.app.ActivityManagerNative;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.admin.DeviceAdminInfo;
@@ -35,6 +36,7 @@ import android.content.res.Resources;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.RemoteCallback;
+import android.os.RemoteException;
 import android.text.TextUtils.TruncateAt;
 import android.util.Log;
 import android.view.Display;
@@ -193,6 +195,12 @@ public class DeviceAdminAdd extends Activity {
                     }
                     finish();
                 } else {
+                    try {
+                        // Don't allow the admin to put a dialog up in front
+                        // of us while we interact with the user.
+                        ActivityManagerNative.getDefault().stopAppSwitches();
+                    } catch (RemoteException e) {
+                    }
                     mDPM.getRemoveWarning(mDeviceAdmin.getComponent(),
                             new RemoteCallback(mHandler) {
                         @Override
@@ -202,6 +210,10 @@ public class DeviceAdminAdd extends Activity {
                                             DeviceAdminReceiver.EXTRA_DISABLE_WARNING)
                                     : null;
                             if (msg == null) {
+                                try {
+                                    ActivityManagerNative.getDefault().resumeAppSwitches();
+                                } catch (RemoteException e) {
+                                }
                                 mDPM.removeActiveAdmin(mDeviceAdmin.getComponent());
                                 finish();
                             } else {
