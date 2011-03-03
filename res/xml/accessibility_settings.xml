@@ -44,4 +44,14 @@
                 android:persistent="false" />
     </PreferenceCategory>
 
+    <PreferenceCategory android:key="accessibility_interaction_category"
+            android:title="@string/accessibility_interaction_category">
+        <ListPreference android:key="long_press_timeout_list_preference"
+                android:title="@string/long_press_timeout_selector"
+                android:persistent="true"
+                android:entries="@array/long_press_timeout_selector_titles"
+                android:entryValues="@array/long_press_timeout_selector_values"
+                android:defaultValue="@string/long_press_timeout_selector_default_value"/>
+    </PreferenceCategory>
+
 </PreferenceScreen>
