@@ -672,13 +672,13 @@
 
     <!-- Informational text on the progress screen while encrypting the device -->
     <string name="crypt_keeper_setup_description" product="tablet">Please wait while your tablet
-    is being encrypted. ^1% complete.</string>
+    is being encrypted. <xliff:g id="percent" example="50">^1</xliff:g>% complete.</string>
     <!-- Informational text on the progress screen while encrypting the device -->
     <string name="crypt_keeper_setup_description" product="default">Please wait while your phone
-    is being encrypted. ^1% complete.</string>
+    is being encrypted. <xliff:g id="percent" example="50">^1</xliff:g>% complete.</string>
 
     <!-- Informational text on the password entry screen when password entry fails-->
-    <string name="crypt_keeper_cooldown">Try again in ^1 seconds.</string>
+    <string name="crypt_keeper_cooldown">Try again in <xliff:g id="delay" example="15">^1</xliff:g> seconds.</string>
 
     <!-- Informational text on the password entry screen prompting the user for their password -->
     <string name="crypt_keeper_enter_password">Enter your password</string>
