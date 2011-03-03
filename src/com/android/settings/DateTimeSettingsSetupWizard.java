@@ -18,13 +18,16 @@ package com.android.settings;
 
 import android.app.Activity;
 import android.app.AlarmManager;
+import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.content.pm.ActivityInfo;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.provider.Settings;
 import android.provider.Settings.SettingNotFoundException;
+import android.text.format.DateFormat;
 import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -68,7 +71,7 @@ public class DateTimeSettingsSetupWizard extends Activity
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        requestWindowFeature(Window.FEATURE_NO_TITLE); 
+        requestWindowFeature(Window.FEATURE_NO_TITLE);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.date_time_settings_setupwizard);
         mXLargeScreenSize = (getResources().getConfiguration().screenLayout
@@ -136,6 +139,22 @@ public class DateTimeSettingsSetupWizard extends Activity
     }
 
     @Override
+    public void onResume() {
+        super.onResume();
+        IntentFilter filter = new IntentFilter();
+        filter.addAction(Intent.ACTION_TIME_TICK);
+        filter.addAction(Intent.ACTION_TIME_CHANGED);
+        filter.addAction(Intent.ACTION_TIMEZONE_CHANGED);
+        registerReceiver(mIntentReceiver, filter, null, null);
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        unregisterReceiver(mIntentReceiver);
+    }
+
+    @Override
     public void onClick(View view) {
         switch (view.getId()) {
         case R.id.time_zone_button: {
@@ -163,13 +182,12 @@ public class DateTimeSettingsSetupWizard extends Activity
                     alarm.setTimeZone(mSelectedTimeZone.getID());
                 }
 
-                // Note: in non-XL, Date & Time is stored by DatePickerDialog/TimePickerDialog,
-                // so we don't need to save those values there, while in XL, we need to as
-                // we don't use those Dialogs.
-                DateTimeSettings.setDate(mDatePicker.getYear(), mDatePicker.getMonth(),
-                        mDatePicker.getDayOfMonth());
-                DateTimeSettings.setTime(
-                        mTimePicker.getCurrentHour(), mTimePicker.getCurrentMinute());
+                if (!mAutoDateTimeButton.isChecked()) {
+                    DateTimeSettings.setDate(mDatePicker.getYear(), mDatePicker.getMonth(),
+                            mDatePicker.getDayOfMonth());
+                    DateTimeSettings.setTime(
+                            mTimePicker.getCurrentHour(), mTimePicker.getCurrentMinute());
+                }
             }
         }  // $FALL-THROUGH$
         case R.id.skip_button: {
@@ -197,11 +215,9 @@ public class DateTimeSettingsSetupWizard extends Activity
             }
         } else */
         if (buttonView == mAutoDateTimeButton) {
-            if (!mXLargeScreenSize) {
-                Settings.System.putInt(getContentResolver(),
-                        Settings.System.AUTO_TIME,
-                        isChecked ? 1 : 0);
-            }
+            Settings.System.putInt(getContentResolver(),
+                    Settings.System.AUTO_TIME,
+                    isChecked ? 1 : 0);
             mTimePicker.setEnabled(!autoEnabled);
             mDatePicker.setEnabled(!autoEnabled);
         }
@@ -224,7 +240,7 @@ public class DateTimeSettingsSetupWizard extends Activity
         // mTimeZoneButton.setText(DateTimeSettings.getTimeZoneText(tz));
         mDatePicker.updateDate(now.get(Calendar.YEAR), now.get(Calendar.MONTH),
                 now.get(Calendar.DAY_OF_MONTH));
-        mTimePicker.setCurrentHour(now.get(Calendar.HOUR));
+        mTimePicker.setCurrentHour(now.get(Calendar.HOUR_OF_DAY));
         mTimePicker.setCurrentMinute(now.get(Calendar.MINUTE));
         mTimeZonePopup.dismiss();
     }
@@ -246,4 +262,20 @@ public class DateTimeSettingsSetupWizard extends Activity
             return true;
         }
     }*/
+
+    private void updateTimeAndDateDisplay() {
+        final Calendar now = Calendar.getInstance();
+        mTimeZoneButton.setText(now.getTimeZone().getDisplayName());
+        mDatePicker.updateDate(now.get(Calendar.YEAR), now.get(Calendar.MONTH),
+                now.get(Calendar.DAY_OF_MONTH));
+        mTimePicker.setCurrentHour(now.get(Calendar.HOUR_OF_DAY));
+        mTimePicker.setCurrentMinute(now.get(Calendar.MINUTE));
+    }
+
+    private BroadcastReceiver mIntentReceiver = new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            updateTimeAndDateDisplay();
+        }
+    };
 }
