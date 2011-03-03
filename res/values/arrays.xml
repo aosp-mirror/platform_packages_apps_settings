@@ -333,6 +333,17 @@
         <item>Never (uses more battery power)</item>
     </string-array>
 
+    <!-- Wi-Fi settings. Presented as a list dialog to the user to choose the Wi-Fi sleep policy. Used when
+         the device is Wi-Fi-only. [CHAR LIMIT=30] -->
+    <string-array name="wifi_sleep_policy_entries_wifi_only">
+        <!-- Wi-Fi should go to sleep when the screen turns off, for Wi-Fi-only devices. -->
+        <item>When screen turns off</item>
+        <!-- When plugged in, never go to sleep.  When on battery, go to sleep when screen turns off. -->
+        <item>Never when plugged in</item>
+        <!-- Never go to sleep. -->
+        <item>Never (uses more battery power)</item>
+    </string-array>
+
     <!-- Match with wifi_sleep_policy_entries and the values of the settings in Settings class. --> <skip />
     <!-- Do not translate. -->
     <string-array name="wifi_sleep_policy_values">
