@@ -18,13 +18,12 @@
         xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:settings="http://schemas.android.com/apk/res/com.android.settings"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="32dip"
         android:minHeight="?android:attr/listPreferredItemHeight"
         android:gravity="center_vertical"
         android:id="@+id/percentage_bar_chart"
         android:paddingRight="?android:attr/scrollbarSize"
-        android:paddingTop="6dip"
-        android:paddingBottom="6dip"
         settings:minTickWidth="6dip"
         settings:emptyColor="@color/memory_avail">
+
 </com.android.settings.deviceinfo.PercentageBarChart>

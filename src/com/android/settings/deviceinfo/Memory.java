@@ -33,7 +33,7 @@ import android.content.DialogInterface.OnCancelListener;
 import android.content.pm.ApplicationInfo;
 import android.content.res.Resources;
 import android.graphics.drawable.ShapeDrawable;
-import android.graphics.drawable.shapes.RoundRectShape;
+import android.graphics.drawable.shapes.RectShape;
 import android.os.Bundle;
 import android.os.Environment;
 import android.os.Handler;
@@ -177,27 +177,16 @@ public class Memory extends SettingsPreferenceFragment implements OnCancelListen
         mInternalAppsColor = mRes.getColor(R.color.memory_apps_usage);
         mInternalUsedColor = android.graphics.Color.GRAY;
         mInternalAvailColor = mRes.getColor(R.color.memory_avail);
-        final int buttonSize = (int) mRes.getDimension(R.dimen.device_memory_usage_button_size);
-        float[] radius = new float[] {
-                5f, 5f, 5f, 5f, 5f, 5f, 5f, 5f
-        };
-        RoundRectShape shape1 = new RoundRectShape(radius, null, null);
+        final int buttonWidth = (int) mRes.getDimension(R.dimen.device_memory_usage_button_width);
+        final int buttonHeight = (int) mRes.getDimension(R.dimen.device_memory_usage_button_height);
 
         // total available space
         mInternalAvail = findPreference(MEMORY_INTERNAL_AVAIL);
-        ShapeDrawable availShape = new ShapeDrawable(shape1);
-        availShape.setIntrinsicWidth(buttonSize);
-        availShape.setIntrinsicHeight(buttonSize);
-        availShape.getPaint().setColor(mInternalAvailColor);
-        mInternalAvail.setIcon(availShape);
+        mInternalAvail.setIcon(createRectShape(buttonHeight, buttonWidth, mInternalAvailColor));
 
         // used by apps
         mInternalAppsUsage = findPreference(MEMORY_INTERNAL_APPS);
-        ShapeDrawable appsShape = new ShapeDrawable(shape1);
-        appsShape.setIntrinsicWidth(buttonSize);
-        appsShape.setIntrinsicHeight(buttonSize);
-        appsShape.getPaint().setColor(mInternalAppsColor);
-        mInternalAppsUsage.setIcon(appsShape);
+        mInternalAppsUsage.setIcon(createRectShape(buttonHeight, buttonWidth, mInternalAppsColor));
 
         // space used by individual major directories on /sdcard
         for (int i = 0; i < Constants.NUM_MEDIA_DIRS_TRACKED; i++) {
@@ -206,9 +195,6 @@ public class Memory extends SettingsPreferenceFragment implements OnCancelListen
                 continue;
             }
             mMediaPreferences[i] = findPreference(Constants.mMediaDirs.get(i).mPreferenceName);
-            ShapeDrawable shape = new ShapeDrawable(shape1);
-            shape.setIntrinsicWidth(buttonSize);
-            shape.setIntrinsicHeight(buttonSize);
             int color = 0;
             switch (i) {
                 case Constants.DOWNLOADS_INDEX:
@@ -224,13 +210,20 @@ public class Memory extends SettingsPreferenceFragment implements OnCancelListen
                     color = mRes.getColor(R.color.memory_misc);
                     break;
             }
-            shape.getPaint().setColor(color);
-            mMediaPreferences[i].setIcon(shape);
+            mMediaPreferences[i].setIcon(createRectShape(buttonHeight, buttonWidth, color));
         }
         mInternalUsageChart = (UsageBarPreference) findPreference(MEMORY_INTERNAL_CHART);
 
         mMeasurement = MemoryMeasurement.getInstance(getActivity());
         mMeasurement.setReceiver(this);
+    }
+
+    private ShapeDrawable createRectShape(int height, int width, int color) {
+        ShapeDrawable shape = new ShapeDrawable(new RectShape());
+        shape.setIntrinsicHeight(height);
+        shape.setIntrinsicWidth(width);
+        shape.getPaint().setColor(color);
+        return shape;
     }
 
     @Override
