@@ -39,16 +39,16 @@ import com.android.settings.R;
  * Dialog to configure the SSID and security settings
  * for Access Point operation
  */
-class WifiApDialog extends AlertDialog implements View.OnClickListener,
+public class WifiApDialog extends AlertDialog implements View.OnClickListener,
         TextWatcher, AdapterView.OnItemSelectedListener {
 
     static final int BUTTON_SUBMIT = DialogInterface.BUTTON_POSITIVE;
 
     private final DialogInterface.OnClickListener mListener;
 
-    static final int OPEN_INDEX = 0;
-    static final int WPA_INDEX = 1;
-    static final int WPA2_INDEX = 2;
+    public static final int OPEN_INDEX = 0;
+    public static final int WPA_INDEX = 1;
+    public static final int WPA2_INDEX = 2;
 
     private View mView;
     private TextView mSsid;

@@ -17,6 +17,7 @@
 package com.android.settings;
 
 import com.android.settings.wifi.WifiApEnabler;
+import com.android.settings.wifi.WifiApDialog;
 
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -26,10 +27,13 @@ import android.bluetooth.BluetoothPan;
 import android.bluetooth.BluetoothProfile;
 import android.content.BroadcastReceiver;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.res.AssetManager;
 import android.net.ConnectivityManager;
+import android.net.wifi.WifiConfiguration;
+import android.net.wifi.WifiManager;
 import android.os.Bundle;
 import android.os.Environment;
 import android.preference.CheckBoxPreference;
@@ -46,7 +50,8 @@ import java.util.Locale;
 /*
  * Displays preferences for Tethering.
  */
-public class TetherSettings extends SettingsPreferenceFragment {
+public class TetherSettings extends SettingsPreferenceFragment
+        implements DialogInterface.OnClickListener {
 
     private static final String USB_TETHER_SETTINGS = "usb_tether_settings";
     private static final String ENABLE_WIFI_AP = "enable_wifi_ap";
@@ -59,6 +64,7 @@ public class TetherSettings extends SettingsPreferenceFragment {
     private static final String HELP_PATH = "html/%y%z/tethering_help.html";
 
     private static final int DIALOG_TETHER_HELP = 1;
+    private static final int DIALOG_AP_SETTINGS = 2;
 
     private WebView mView;
     private CheckBoxPreference mUsbTether;
@@ -77,6 +83,17 @@ public class TetherSettings extends SettingsPreferenceFragment {
 
     private String[] mBluetoothRegexs;
     private BluetoothPan mBluetoothPan;
+
+    private static final String WIFI_AP_SSID_AND_SECURITY = "wifi_ap_ssid_and_security";
+    private static final int CONFIG_SUBTEXT = R.string.wifi_tether_configure_subtext;
+
+    private String[] mSecurityType;
+    private Preference mCreateNetwork;
+    private CheckBoxPreference mEnableWifiAp;
+
+    private WifiApDialog mDialog;
+    private WifiManager mWifiManager;
+    private WifiConfiguration mWifiConfig = null;
 
     @Override
     public void onCreate(Bundle icicle) {
@@ -129,6 +146,30 @@ public class TetherSettings extends SettingsPreferenceFragment {
 
         mWifiApEnabler = new WifiApEnabler(activity, enableWifiAp);
         mView = new WebView(activity);
+
+        initWifiTethering();
+    }
+
+    private void initWifiTethering() {
+        final Activity activity = getActivity();
+        mWifiManager = (WifiManager) getSystemService(Context.WIFI_SERVICE);
+        mWifiConfig = mWifiManager.getWifiApConfiguration();
+        mSecurityType = getResources().getStringArray(R.array.wifi_ap_security);
+
+        mCreateNetwork = findPreference(WIFI_AP_SSID_AND_SECURITY);
+        mEnableWifiAp = (CheckBoxPreference) findPreference(ENABLE_WIFI_AP);
+
+        if (mWifiConfig == null) {
+            final String s = activity.getString(
+                    com.android.internal.R.string.wifi_tether_configure_ssid_default);
+            mCreateNetwork.setSummary(String.format(activity.getString(CONFIG_SUBTEXT),
+                    s, mSecurityType[WifiApDialog.OPEN_INDEX]));
+        } else {
+            int index = WifiApDialog.getSecurityTypeIndex(mWifiConfig);
+            mCreateNetwork.setSummary(String.format(activity.getString(CONFIG_SUBTEXT),
+                    mWifiConfig.SSID,
+                    mSecurityType[index]));
+        }
     }
 
     private BluetoothProfile.ServiceListener mProfileServiceListener =
@@ -186,7 +227,12 @@ public class TetherSettings extends SettingsPreferenceFragment {
                 .setTitle(R.string.tethering_help_button_text)
                 .setView(mView)
                 .create();
+        } else if (id == DIALOG_AP_SETTINGS) {
+            final Activity activity = getActivity();
+            mDialog = new WifiApDialog(activity, this, mWifiConfig);
+            return mDialog;
         }
+
         return null;
     }
 
@@ -446,6 +492,8 @@ public class TetherSettings extends SettingsPreferenceFragment {
         } else if (preference == mTetherHelp) {
             showDialog(DIALOG_TETHER_HELP);
             return true;
+        } else if (preference == mCreateNetwork) {
+            showDialog(DIALOG_AP_SETTINGS);
         }
 
         return super.onPreferenceTreeClick(screen, preference);
@@ -460,5 +508,31 @@ public class TetherSettings extends SettingsPreferenceFragment {
             }
         }
         return null;
+    }
+
+    public void onClick(DialogInterface dialogInterface, int button) {
+        if (button == DialogInterface.BUTTON_POSITIVE) {
+            mWifiConfig = mDialog.getConfig();
+            if (mWifiConfig != null) {
+                /**
+                 * if soft AP is running, bring up with new config
+                 * else update the configuration alone
+                 */
+                if (mWifiManager.getWifiApState() == WifiManager.WIFI_AP_STATE_ENABLED) {
+                    mWifiManager.setWifiApEnabled(mWifiConfig, true);
+                    /**
+                     * There is no tether notification on changing AP
+                     * configuration. Update status with new config.
+                     */
+                    mWifiApEnabler.updateConfigSummary(mWifiConfig);
+                } else {
+                    mWifiManager.setWifiApConfiguration(mWifiConfig);
+                }
+                int index = WifiApDialog.getSecurityTypeIndex(mWifiConfig);
+                mCreateNetwork.setSummary(String.format(getActivity().getString(CONFIG_SUBTEXT),
+                        mWifiConfig.SSID,
+                        mSecurityType[index]));
+            }
+        }
     }
 }
