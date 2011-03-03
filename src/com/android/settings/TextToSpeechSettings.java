@@ -265,6 +265,9 @@ public class TextToSpeechSettings extends SettingsPreferenceFragment implements
         }
         mDefaultRatePref.setValue(String.valueOf(mDefaultRate));
         mDefaultRatePref.setOnPreferenceChangeListener(this);
+        // apply the default rate so the TTS demo in the Settings screen uses it, even if
+        // the use of default settings is not enforced
+        mTts.setSpeechRate(mDefaultRate/100.0f);
 
         // Default language / country / variant : these three values map to a single ListPref
         // representing the matching Locale
@@ -355,7 +358,6 @@ public class TextToSpeechSettings extends SettingsPreferenceFragment implements
                 mDefaultLocVariant = new String();
             }
             mTts.setLanguage(new Locale(mDefaultLanguage, mDefaultCountry, mDefaultLocVariant));
-            mTts.setSpeechRate(mDefaultRate/100.0f);
             initDefaultSettings();
             updateWidgetState();
             checkVoiceData();
