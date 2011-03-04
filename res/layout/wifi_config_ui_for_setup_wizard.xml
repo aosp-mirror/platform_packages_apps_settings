@@ -71,6 +71,36 @@
     <TableLayout android:layout_width="match_parent"
                  android:layout_height="wrap_content"
                  android:layout_marginBottom="16dip">
+        <!-- To accomodate @id/type into TableLayout, we splitted the layout into two:
+             @id/type_ssid and @id/type_security. -->
+        <TableRow android:id="@+id/type_ssid"
+                  android:visibility="gone">
+            <TextView android:id="@+id/ssid_text"
+                      android:layout_width="wrap_content"
+                      android:minWidth="128dip"
+                      android:layout_height="wrap_content"
+                      android:minHeight="48dip"
+                      android:layout_alignParentLeft="true"
+                      android:text="@string/wifi_ssid"
+                      android:textAppearance="?android:attr/textAppearanceMedium"
+                      android:textSize="20sp"
+                      android:gravity="bottom"/>
+
+            <FrameLayout android:id="@+id/ssid_layout"
+                         android:layout_width="wrap_content"
+                         android:layout_height="wrap_content"
+                         android:layout_alignBottom="@id/ssid_text"
+                         android:layout_toRightOf="@id/ssid_text">
+                <EditText android:id="@+id/ssid"
+                          android:layout_width="368dip"
+                          android:layout_height="wrap_content"
+                          android:singleLine="true"
+                          android:inputType="textNoSuggestions"
+                          android:textAppearance="?android:attr/textAppearanceMedium"
+                          android:textSize="20sp" />
+            </FrameLayout>
+        </TableRow>
+
         <TableRow android:id="@+id/security_fields"
                   android:visibility="gone">
             <TextView android:id="@+id/password_text"
@@ -104,35 +134,6 @@
                       android:textSize="20sp" />
         </TableRow>
 
-        <!-- To accomodate @id/type into TableLayout, we splitted the layout into two:
-             @id/type_ssid and @id/type_security. -->
-        <TableRow android:id="@+id/type_ssid"
-                  android:visibility="gone">
-            <TextView android:id="@+id/ssid_text"
-                      android:layout_width="wrap_content"
-                      android:minWidth="128dip"
-                      android:layout_height="wrap_content"
-                      android:minHeight="48dip"
-                      android:layout_alignParentLeft="true"
-                      android:text="@string/wifi_ssid"
-                      android:textAppearance="?android:attr/textAppearanceMedium"
-                      android:textSize="20sp"
-                      android:gravity="bottom"/>
-
-            <FrameLayout android:id="@+id/ssid_layout"
-                         android:layout_width="wrap_content"
-                         android:layout_height="wrap_content"
-                         android:layout_alignBottom="@id/ssid_text"
-                         android:layout_toRightOf="@id/ssid_text">
-                <EditText android:id="@+id/ssid"
-                          android:layout_width="368dip"
-                          android:layout_height="wrap_content"
-                          android:singleLine="true"
-                          android:inputType="textNoSuggestions"
-                          android:textAppearance="?android:attr/textAppearanceMedium"
-                          android:textSize="20sp" />
-            </FrameLayout>
-        </TableRow>
         <TableRow android:id="@+id/type_security"
                   android:visibility="gone">
             <TextView android:id="@+id/security_text"
