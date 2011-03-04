@@ -38,6 +38,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import com.android.internal.telephony.TelephonyProperties;
+import com.android.internal.telephony.RILConstants;
 
 
 public class ApnEditor extends PreferenceActivity
@@ -430,6 +431,11 @@ public class ApnEditor extends PreferenceActivity
         }
 
         values.put(Telephony.Carriers.PROTOCOL, checkNotSet(mProtocol.getValue()));
+
+        // Hardcode IPv4 roaming for now until the carriers sort out all the
+        // billing arrangements.
+        values.put(Telephony.Carriers.ROAMING_PROTOCOL,
+                RILConstants.SETUP_DATA_PROTOCOL_IP);
 
         values.put(Telephony.Carriers.TYPE, checkNotSet(mApnType.getText()));
 
