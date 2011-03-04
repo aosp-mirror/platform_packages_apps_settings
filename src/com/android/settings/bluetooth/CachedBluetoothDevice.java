@@ -27,6 +27,7 @@ import android.util.Log;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
 
 /**
@@ -45,6 +46,7 @@ final class CachedBluetoothDevice implements Comparable<CachedBluetoothDevice> {
     private String mName;
     private short mRssi;
     private BluetoothClass mBtClass;
+    private HashMap<LocalBluetoothProfile, Integer> mProfileConnectionState;
 
     private final List<LocalBluetoothProfile> mProfiles =
             new ArrayList<LocalBluetoothProfile>();
@@ -95,6 +97,7 @@ final class CachedBluetoothDevice implements Comparable<CachedBluetoothDevice> {
                     " newProfileState " + newProfileState);
         }
 
+        mProfileConnectionState.put(profile, newProfileState);
         if (newProfileState == BluetoothProfile.STATE_CONNECTED) {
             if (!mProfiles.contains(profile)) {
                 mProfiles.add(profile);
@@ -108,6 +111,7 @@ final class CachedBluetoothDevice implements Comparable<CachedBluetoothDevice> {
         mLocalAdapter = adapter;
         mProfileManager = profileManager;
         mDevice = device;
+        mProfileConnectionState = new HashMap<LocalBluetoothProfile, Integer>();
         fillData();
     }
 
@@ -258,6 +262,16 @@ final class CachedBluetoothDevice implements Comparable<CachedBluetoothDevice> {
         }
     }
 
+    int getProfileConnectionState(LocalBluetoothProfile profile) {
+        if (mProfileConnectionState == null ||
+                mProfileConnectionState.get(profile) == null) {
+            // If cache is empty make the binder call to get the state
+            int state = profile.getConnectionStatus(mDevice);
+            mProfileConnectionState.put(profile, state);
+        }
+        return mProfileConnectionState.get(profile);
+    }
+
     // TODO: do any of these need to run async on a background thread?
     private void fillData() {
         fetchName();
@@ -337,7 +351,7 @@ final class CachedBluetoothDevice implements Comparable<CachedBluetoothDevice> {
      */
     boolean isConnected() {
         for (LocalBluetoothProfile profile : mProfiles) {
-            int status = profile.getConnectionStatus(mDevice);
+            int status = getProfileConnectionState(profile);
             if (status == BluetoothProfile.STATE_CONNECTED) {
                 return true;
             }
@@ -347,14 +361,14 @@ final class CachedBluetoothDevice implements Comparable<CachedBluetoothDevice> {
     }
 
     boolean isConnectedProfile(LocalBluetoothProfile profile) {
-        int status = profile.getConnectionStatus(mDevice);
+        int status = getProfileConnectionState(profile);
         return status == BluetoothProfile.STATE_CONNECTED;
 
     }
 
     boolean isBusy() {
         for (LocalBluetoothProfile profile : mProfiles) {
-            int status = profile.getConnectionStatus(mDevice);
+            int status = getProfileConnectionState(profile);
             if (status == BluetoothProfile.STATE_CONNECTING
                     || status == BluetoothProfile.STATE_DISCONNECTING) {
                 return true;
