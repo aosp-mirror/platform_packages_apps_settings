@@ -47,10 +47,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.Spinner;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.android.settings.ProxySelector;
 import com.android.settings.R;
@@ -258,16 +258,27 @@ public class WifiConfigController implements TextWatcher,
         group.addView(row);
     }
 
-    /* show submit button if the password is valid */
+    /* show submit button if password, ip and proxy settings are valid */
     private void enableSubmitIfAppropriate() {
+        Button submit = mConfigUi.getSubmitButton();
+        if (submit == null) return;
+        boolean enabled = false;
+
         if ((mSsidView != null && mSsidView.length() == 0) ||
             ((mAccessPoint == null || mAccessPoint.networkId == INVALID_NETWORK_ID) &&
             ((mAccessPointSecurity == AccessPoint.SECURITY_WEP && mPasswordView.length() == 0) ||
             (mAccessPointSecurity == AccessPoint.SECURITY_PSK && mPasswordView.length() < 8)))) {
-            mConfigUi.getSubmitButton().setEnabled(false);
+            enabled = false;
         } else {
-            mConfigUi.getSubmitButton().setEnabled(true);
+            enabled = true;
         }
+
+        if (ipAndProxyFieldsAreValid()) {
+            enabled = true;
+        } else {
+            enabled = false;
+        }
+        submit.setEnabled(enabled);
     }
 
     /* package */ WifiConfiguration getConfig() {
@@ -352,8 +363,6 @@ public class WifiConfigController implements TextWatcher,
                     return null;
         }
 
-        validateAndFetchIpAndProxyFields();
-
         config.proxySettings = mProxySettings;
         config.ipAssignment = mIpAssignment;
         config.linkProperties = new LinkProperties(mLinkProperties);
@@ -361,20 +370,16 @@ public class WifiConfigController implements TextWatcher,
         return config;
     }
 
-    private void validateAndFetchIpAndProxyFields() {
+    private boolean ipAndProxyFieldsAreValid() {
         mLinkProperties.clear();
         mIpAssignment = (mIpSettingsSpinner != null &&
                 mIpSettingsSpinner.getSelectedItemPosition() == STATIC_IP) ?
                 IpAssignment.STATIC : IpAssignment.DHCP;
 
         if (mIpAssignment == IpAssignment.STATIC) {
-            //TODO: A better way to do this is to not dismiss the
-            //dialog as long as one of the fields is invalid
             int result = validateIpConfigFields(mLinkProperties);
             if (result != 0) {
-                mLinkProperties.clear();
-                Toast.makeText(mConfigUi.getContext(), result, Toast.LENGTH_LONG).show();
-                mIpAssignment = IpAssignment.UNASSIGNED;
+                return false;
             }
         }
 
@@ -398,10 +403,10 @@ public class WifiConfigController implements TextWatcher,
                 ProxyProperties proxyProperties= new ProxyProperties(host, port, exclusionList);
                 mLinkProperties.setHttpProxy(proxyProperties);
             } else {
-                Toast.makeText(mConfigUi.getContext(), result, Toast.LENGTH_LONG).show();
-                mProxySettings = ProxySettings.UNASSIGNED;
+                return false;
             }
         }
+        return true;
     }
 
     private int validateIpConfigFields(LinkProperties linkProperties) {
@@ -477,8 +482,6 @@ public class WifiConfigController implements TextWatcher,
         }
         config.pin = ((TextView) mView.findViewById(R.id.wps_pin)).getText().toString();
         config.BSSID = (mAccessPoint != null) ? mAccessPoint.bssid : null;
-
-        validateAndFetchIpAndProxyFields();
 
         config.proxySettings = mProxySettings;
         config.ipAssignment = mIpAssignment;
@@ -581,11 +584,16 @@ public class WifiConfigController implements TextWatcher,
             mView.findViewById(R.id.staticip).setVisibility(View.VISIBLE);
             if (mIpAddressView == null) {
                 mIpAddressView = (TextView) mView.findViewById(R.id.ipaddress);
+                mIpAddressView.addTextChangedListener(this);
                 mGatewayView = (TextView) mView.findViewById(R.id.gateway);
+                mGatewayView.addTextChangedListener(this);
                 mNetworkPrefixLengthView = (TextView) mView.findViewById(
                         R.id.network_prefix_length);
+                mNetworkPrefixLengthView.addTextChangedListener(this);
                 mDns1View = (TextView) mView.findViewById(R.id.dns1);
+                mDns1View.addTextChangedListener(this);
                 mDns2View = (TextView) mView.findViewById(R.id.dns2);
+                mDns2View.addTextChangedListener(this);
             }
             if (config != null) {
                 LinkProperties linkProperties = config.linkProperties;
@@ -628,8 +636,11 @@ public class WifiConfigController implements TextWatcher,
             mView.findViewById(R.id.proxy_fields).setVisibility(View.VISIBLE);
             if (mProxyHostView == null) {
                 mProxyHostView = (TextView) mView.findViewById(R.id.proxy_hostname);
+                mProxyHostView.addTextChangedListener(this);
                 mProxyPortView = (TextView) mView.findViewById(R.id.proxy_port);
+                mProxyPortView.addTextChangedListener(this);
                 mProxyExclusionListView = (TextView) mView.findViewById(R.id.proxy_exclusionlist);
+                mProxyExclusionListView.addTextChangedListener(this);
             }
             if (config != null) {
                 ProxyProperties proxyProperties = config.linkProperties.getHttpProxy();
@@ -721,8 +732,10 @@ public class WifiConfigController implements TextWatcher,
             showNetworkSetupFields();
         } else if (parent == mProxySettingsSpinner) {
             showProxyFields();
+            enableSubmitIfAppropriate();
         } else {
             showIpConfigFields();
+            enableSubmitIfAppropriate();
         }
     }
 
