@@ -950,16 +950,20 @@
     <!-- Bluetooth settings. The user-visible string that is used whenever referring to the HID profile. -->
     <string name="bluetooth_profile_hid">Input Device</string>
     <!-- Bluetooth settings. The user-visible string that is used whenever referring to the PAN profile. [CHAR LIMIT=25]-->
-    <string name="bluetooth_profile_pan">Tethering</string>
+    <string name="bluetooth_profile_pan">Internet access</string>
 
-    <!-- Bluetooth settings.  Message for disconnecting from the A2DP profile. -->
+    <!-- Bluetooth settings.  Message for disconnecting from the A2DP profile. [CHAR LIMIT=80] -->
     <string name="bluetooth_disconnect_a2dp_profile"><xliff:g id="device_name">%1$s</xliff:g> will be disconnected from media audio.</string>
-    <!-- Bluetooth settings.  Message for disconnecting from the headset profile. -->
+    <!-- Bluetooth settings.  Message for disconnecting from the headset profile. [CHAR LIMIT=80] -->
     <string name="bluetooth_disconnect_headset_profile"><xliff:g id="device_name">%1$s</xliff:g> will be disconnected from handsfree audio.</string>
-    <!-- Bluetooth settings.  Message for disconnecting from the HID profile. -->
+    <!-- Bluetooth settings.  Message for disconnecting from the HID profile. [CHAR LIMIT=80] -->
     <string name="bluetooth_disconnect_hid_profile"><xliff:g id="device_name">%1$s</xliff:g> will be disconnected from input device.</string>
-    <!-- Bluetooth settings.  Message for disconnecting from the PAN profile. -->
-    <string name="bluetooth_disconnect_pan_profile"><xliff:g id="device_name">%1$s</xliff:g> will be disconnected from tethering.</string>
+    <!-- Bluetooth settings.  Message for disconnecting from the PAN profile (user role). [CHAR LIMIT=80] -->
+    <string name="bluetooth_disconnect_pan_user_profile">Internet access via <xliff:g id="device_name">%1$s</xliff:g> will be disconnected.</string>
+    <!-- Bluetooth settings.  Message for disconnecting from the PAN profile (NAP role). [CHAR LIMIT=80] -->
+    <string name="bluetooth_disconnect_pan_nap_profile" product="tablet"><xliff:g id="device_name">%1$s</xliff:g> will be disconnected from sharing this tablet\'s Internet connection.</string>
+    <!-- Bluetooth settings.  Message for disconnecting from the PAN profile (NAP role). [CHAR LIMIT=80] -->
+    <string name="bluetooth_disconnect_pan_nap_profile" product="default"><xliff:g id="device_name">%1$s</xliff:g> will be disconnected from sharing this phone\'s Internet connection.</string>
 
     <!-- Bluetooth settings.  Connection options screen.  The title of the screen. -->
     <string name="bluetooth_device_advanced_title"><xliff:g id="device_name">%1$s</xliff:g> options</string>
@@ -985,8 +989,10 @@
     <string name="bluetooth_opp_profile_summary_not_connected">Not connected to file transfer server</string>
     <!-- Bluetooth settings. Connection options screen. The summary for the HID checkbox preference when HID is connected. -->
     <string name="bluetooth_hid_profile_summary_connected">Connected to input device</string>
-    <!-- Bluetooth settings. Connection options screen. The summary for the PAN checkbox preference when PAN is connected. [CHAR LIMIT=25]-->
-    <string name="bluetooth_pan_profile_summary_connected">Tethered</string>
+    <!-- Bluetooth settings. Connection options screen. The summary for the checkbox preference when PAN is connected (user role). [CHAR LIMIT=25]-->
+    <string name="bluetooth_pan_user_profile_summary_connected">Connected to device for Internet access</string>
+    <!-- Bluetooth settings. Connection options screen. The summary for the checkbox preference when PAN is connected (NAP role). [CHAR LIMIT=25]-->
+    <string name="bluetooth_pan_nap_profile_summary_connected">Sharing local Internet connection with device</string>
 
     <!-- Bluetooth settings.  Connection options screen.  The summary for the A2DP checkbox preference that describes how checking it will set the A2DP profile as preferred. -->
     <string name="bluetooth_a2dp_profile_summary_use_for">Use for media audio</string>
@@ -1863,11 +1869,21 @@
     <!-- Label for bluetooth tether checkbox [CHAR LIMIT=25]-->
     <string name="bluetooth_tether_checkbox_text">Bluetooth tethering</string>
     <!-- Bluetooth available subtext - shown when Bluetooth tethering is turned on but it is not currently tethered to any devices [CHAR LIMIT=50]-->
-    <string name="bluetooth_tethering_available_subtext">Bluetooth tethering on, but not connected</string>
-    <!-- Bluetooth connected subtext - shown when a device is tethered over Bluetooth [CHAR LIMIT=50]-->
-    <string name="bluetooth_tethering_connected_subtext">Bluetooth tethering on and connected</string>
+    <string name="bluetooth_tethering_available_subtext" product="tablet">Sharing this tablet\'s Internet connection</string>
+    <!-- Bluetooth available subtext - shown when Bluetooth tethering is turned on but it is not currently tethered to any devices [CHAR LIMIT=50]-->
+    <string name="bluetooth_tethering_available_subtext" product="default">Sharing this phone\'s Internet connection</string>
+    <!-- Bluetooth connected subtext - shown when a device is tethered over Bluetooth [CHAR LIMIT=60]-->
+    <string name="bluetooth_tethering_device_connected_subtext" product="tablet">Sharing this tablet\'s Internet connection to 1 device</string>
+    <!-- Bluetooth connected subtext - shown when a device is tethered over Bluetooth [CHAR LIMIT=60]-->
+    <string name="bluetooth_tethering_device_connected_subtext" product="default">Sharing this phone\'s Internet connection to 1 device</string>
+    <!-- Bluetooth connected subtext - shown when multiple devices are tethered over Bluetooth [CHAR LIMIT=60]-->
+    <string name="bluetooth_tethering_devices_connected_subtext" product="tablet">Sharing this tablet\'s Internet connection to <xliff:g id="connectedDeviceCount">%1$d</xliff:g> devices</string>
+    <!-- Bluetooth connected subtext - shown when multiple devices are tethered over Bluetooth [CHAR LIMIT=60]-->
+    <string name="bluetooth_tethering_devices_connected_subtext" product="default">Sharing this phone\'s Internet connection to <xliff:g id="connectedDeviceCount">%1$d</xliff:g> devices</string>
     <!-- Bluetooth tethering off subtext - shown when Bluetooth Tethering is turned off [CHAR LIMIT=50]-->
-    <string name="bluetooth_tethering_off_subtext">Bluetooth tethering off</string>
+    <string name="bluetooth_tethering_off_subtext" product="tablet">Not sharing this tablet\'s Internet connection</string>
+    <!-- Bluetooth tethering off subtext - shown when Bluetooth Tethering is turned off [CHAR LIMIT=50]-->
+    <string name="bluetooth_tethering_off_subtext" product="default">Not sharing this phone\'s Internet connection</string>
     <!-- Bluetooth errored subtext - shown when Bluetooth is broken for some reason [CHAR LIMIT=50]-->
     <string name="bluetooth_tethering_errored_subtext">Bluetooth tethering error</string>
     <!-- Bluetooth Tethering settings. Error message shown when trying to connect an 8th device [CHAR LIMIT=50]-->

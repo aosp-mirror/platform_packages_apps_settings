@@ -239,7 +239,7 @@ public final class DeviceProfilesSettings extends SettingsPreferenceFragment
         if (TextUtils.isEmpty(name)) {
             name = context.getString(R.string.bluetooth_device);
         }
-        int disconnectMessage = profile.getDisconnectResource();
+        int disconnectMessage = profile.getDisconnectResource(device.getDevice());
         if (disconnectMessage == 0) {
             Log.w(TAG, "askDisconnect: unexpected profile " + profile);
             disconnectMessage = R.string.bluetooth_disconnect_blank;
@@ -286,6 +286,13 @@ public final class DeviceProfilesSettings extends SettingsPreferenceFragment
                 mProfileContainer.addPreference(profilePref);
             } else {
                 refreshProfilePreference(profilePref, profile);
+            }
+        }
+        for (LocalBluetoothProfile profile : mCachedDevice.getRemovedProfiles()) {
+            Preference profilePref = findPreference(profile.toString());
+            if (profilePref != null) {
+                Log.d(TAG, "Removing " + profile.toString() + " from profile list");
+                mProfileContainer.removePreference(profilePref);
             }
         }
     }

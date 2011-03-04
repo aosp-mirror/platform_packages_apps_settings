@@ -116,7 +116,7 @@ final class HidProfile implements LocalBluetoothProfile {
         return R.string.bluetooth_profile_hid;
     }
 
-    public int getDisconnectResource() {
+    public int getDisconnectResource(BluetoothDevice device) {
         return R.string.bluetooth_disconnect_hid_profile;
     }
 
