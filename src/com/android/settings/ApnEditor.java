@@ -38,6 +38,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import com.android.internal.telephony.TelephonyProperties;
+import com.android.internal.telephony.RILConstants;
 
 
 public class ApnEditor extends PreferenceActivity
@@ -48,6 +49,7 @@ public class ApnEditor extends PreferenceActivity
 
     private final static String SAVED_POS = "pos";
     private final static String KEY_AUTH_TYPE = "auth_type";
+    private final static String KEY_PROTOCOL = "apn_protocol";
 
     private static final int MENU_DELETE = Menu.FIRST;
     private static final int MENU_SAVE = Menu.FIRST + 1;
@@ -69,6 +71,7 @@ public class ApnEditor extends PreferenceActivity
     private EditTextPreference mMmsPort;
     private ListPreference mAuthType;
     private EditTextPreference mApnType;
+    private ListPreference mProtocol;
 
     private String mCurMnc;
     private String mCurMcc;
@@ -99,6 +102,7 @@ public class ApnEditor extends PreferenceActivity
             Telephony.Carriers.MMSPORT, // 13
             Telephony.Carriers.AUTH_TYPE, // 14
             Telephony.Carriers.TYPE, // 15
+            Telephony.Carriers.PROTOCOL, // 16
     };
 
     private static final int ID_INDEX = 0;
@@ -116,6 +120,7 @@ public class ApnEditor extends PreferenceActivity
     private static final int MMSPORT_INDEX = 13;
     private static final int AUTH_TYPE_INDEX = 14;
     private static final int TYPE_INDEX = 15;
+    private static final int PROTOCOL_INDEX = 16;
 
 
     @Override
@@ -139,8 +144,11 @@ public class ApnEditor extends PreferenceActivity
         mMnc = (EditTextPreference) findPreference("apn_mnc");
         mApnType = (EditTextPreference) findPreference("apn_type");
 
-        mAuthType = (ListPreference) findPreference("auth_type");
+        mAuthType = (ListPreference) findPreference(KEY_AUTH_TYPE);
         mAuthType.setOnPreferenceChangeListener(this);
+
+        mProtocol = (ListPreference) findPreference(KEY_PROTOCOL);
+        mProtocol.setOnPreferenceChangeListener(this);
 
         mRes = getResources();
 
@@ -238,6 +246,7 @@ public class ApnEditor extends PreferenceActivity
                 mAuthType.setValue(null);
             }
 
+            mProtocol.setValue(mCursor.getString(PROTOCOL_INDEX));
         }
 
         mName.setSummary(checkNull(mName.getText()));
@@ -264,6 +273,28 @@ public class ApnEditor extends PreferenceActivity
         } else {
             mAuthType.setSummary(sNotSet);
         }
+
+        mProtocol.setSummary(
+                checkNull(protocolDescription(mProtocol.getValue())));
+    }
+
+    /**
+     * Returns the UI choice (e.g., "IPv4/IPv6") corresponding to the given
+     * raw value of the protocol preference (e.g., "IPV4V6"). If unknown,
+     * return null.
+     */
+    private String protocolDescription(String raw) {
+        int protocolIndex = mProtocol.findIndexOfValue(raw);
+        if (protocolIndex == -1) {
+            return null;
+        } else {
+            String[] values = mRes.getStringArray(R.array.apn_protocol_entries);
+            try {
+                return values[protocolIndex];
+            } catch (ArrayIndexOutOfBoundsException e) {
+                return null;
+            }
+        }
     }
 
     public boolean onPreferenceChange(Preference preference, Object newValue) {
@@ -278,6 +309,16 @@ public class ApnEditor extends PreferenceActivity
             } catch (NumberFormatException e) {
                 return false;
             }
+            return true;
+        }
+
+        if (KEY_PROTOCOL.equals(key)) {
+            String protocol = protocolDescription((String) newValue);
+            if (protocol == null) {
+                return false;
+            }
+            mProtocol.setSummary(protocol);
+            mProtocol.setValue((String) newValue);
         }
         return true;
     }
@@ -388,6 +429,13 @@ public class ApnEditor extends PreferenceActivity
         if (authVal != null) {
             values.put(Telephony.Carriers.AUTH_TYPE, Integer.parseInt(authVal));
         }
+
+        values.put(Telephony.Carriers.PROTOCOL, checkNotSet(mProtocol.getValue()));
+
+        // Hardcode IPv4 roaming for now until the carriers sort out all the
+        // billing arrangements.
+        values.put(Telephony.Carriers.ROAMING_PROTOCOL,
+                RILConstants.SETUP_DATA_PROTOCOL_IP);
 
         values.put(Telephony.Carriers.TYPE, checkNotSet(mApnType.getText()));
 
