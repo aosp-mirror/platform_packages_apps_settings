@@ -226,7 +226,7 @@ public final class BluetoothDevicePreference extends Preference implements
 
         // if any profiles are connected or busy, return that status
         for (LocalBluetoothProfile profile : cachedDevice.getProfiles()) {
-            int connectionStatus = profile.getConnectionStatus(device);
+            int connectionStatus = cachedDevice.getProfileConnectionState(profile);
 
             if (connectionStatus != BluetoothProfile.STATE_DISCONNECTED) {
                 return Utils.getConnectionStateSummary(connectionStatus);
