@@ -159,6 +159,7 @@ final class LocalBluetoothProfileManager {
         } else if (mOppProfile != null) {
             Log.w(TAG, "Warning: OPP profile was previously added but the UUID is now missing.");
         }
+        mEventManager.registerProfileIntentReceiver();
 
         // There is no local SDP record for HID and Settings app doesn't control PBAP
     }
@@ -168,7 +169,7 @@ final class LocalBluetoothProfileManager {
 
     private void addProfile(LocalBluetoothProfile profile,
             String profileName, String stateChangedAction) {
-        mEventManager.addHandler(stateChangedAction, new StateChangedHandler(profile));
+        mEventManager.addProfileHandler(stateChangedAction, new StateChangedHandler(profile));
         mProfileNameMap.put(profileName, profile);
     }
 

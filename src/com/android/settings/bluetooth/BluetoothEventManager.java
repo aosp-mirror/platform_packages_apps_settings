@@ -44,8 +44,9 @@ final class BluetoothEventManager {
     private final LocalBluetoothAdapter mLocalAdapter;
     private final CachedBluetoothDeviceManager mDeviceManager;
     private LocalBluetoothProfileManager mProfileManager;
-    private final IntentFilter mIntentFilter;
+    private final IntentFilter mAdapterIntentFilter, mProfileIntentFilter;
     private final Map<String, Handler> mHandlerMap;
+    private Context mContext;
 
     private final Collection<BluetoothCallback> mCallbacks =
             new ArrayList<BluetoothCallback>();
@@ -56,7 +57,12 @@ final class BluetoothEventManager {
 
     void addHandler(String action, Handler handler) {
         mHandlerMap.put(action, handler);
-        mIntentFilter.addAction(action);
+        mAdapterIntentFilter.addAction(action);
+    }
+
+    void addProfileHandler(String action, Handler handler) {
+        mHandlerMap.put(action, handler);
+        mProfileIntentFilter.addAction(action);
     }
 
     // Set profile manager after construction due to circular dependency
@@ -65,11 +71,13 @@ final class BluetoothEventManager {
     }
 
     BluetoothEventManager(LocalBluetoothAdapter adapter,
-            CachedBluetoothDeviceManager deviceManager) {
+            CachedBluetoothDeviceManager deviceManager, Context context) {
         mLocalAdapter = adapter;
         mDeviceManager = deviceManager;
-        mIntentFilter = new IntentFilter();
+        mAdapterIntentFilter = new IntentFilter();
+        mProfileIntentFilter = new IntentFilter();
         mHandlerMap = new HashMap<String, Handler>();
+        mContext = context;
 
         // Bluetooth on/off broadcasts
         addHandler(BluetoothAdapter.ACTION_STATE_CHANGED, new AdapterStateChangedHandler());
@@ -91,28 +99,11 @@ final class BluetoothEventManager {
 
         // Dock event broadcasts
         addHandler(Intent.ACTION_DOCK_EVENT, new DockEventHandler());
+        mContext.registerReceiver(mBroadcastReceiver, mAdapterIntentFilter);
     }
 
-    /**
-     * A Bluetooth-related activity is now in the foreground. Register to
-     * start receiving Bluetooth events.
-     * @param context a Context object for the current Activity
-     */
-    void resume(Context context) {
-        if (mLocalAdapter.syncBluetoothState()) {
-            // adapter state changed while we were paused: send callbacks
-            int newState = mLocalAdapter.getState();
-            synchronized (mCallbacks) {
-                for (BluetoothCallback callback : mCallbacks) {
-                    callback.onBluetoothStateChanged(newState);
-                }
-            }
-        }
-        context.registerReceiver(mBroadcastReceiver, mIntentFilter);
-    }
-
-    void pause(Context context) {
-        context.unregisterReceiver(mBroadcastReceiver);
+    void registerProfileIntentReceiver() {
+        mContext.registerReceiver(mBroadcastReceiver, mProfileIntentFilter);
     }
 
     /** Register to start receiving callbacks for Bluetooth events. */
