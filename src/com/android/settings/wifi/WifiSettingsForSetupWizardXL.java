@@ -70,12 +70,6 @@ public class WifiSettingsForSetupWizardXL extends Activity implements OnClickLis
         sNetworkStateMap.put(DetailedState.FAILED, DetailedState.FAILED);
     }
 
-    /**
-     * Used with {@link Button#setTag(Object)} to remember "Connect" button is pressed in
-     * with "add network" flow.
-     */
-    private static final int CONNECT_BUTTON_TAG_ADD_NETWORK = 1;
-
     private WifiSettings mWifiSettings;
     private WifiManager mWifiManager;
 
@@ -161,7 +155,7 @@ public class WifiSettingsForSetupWizardXL extends Activity implements OnClickLis
 
         // At first, Wifi module doesn't return SCANNING state (it's too early), so we manually
         // show it.
-        showScanningProgressBar();
+        showScanningState();
     }
 
     private void initViews() {
@@ -285,7 +279,8 @@ public class WifiSettingsForSetupWizardXL extends Activity implements OnClickLis
             } else {
                 // Users already see available networks.
                 showDisconnectedProgressBar();
-                if (mScreenState == SCREEN_STATE_DISCONNECTED) {
+                if (mScreenState == SCREEN_STATE_DISCONNECTED &&
+                        mWifiSettings.getAccessPointsCount() > 0) {
                     mWifiSettingsFragmentLayout.setVisibility(View.VISIBLE);
                     mBottomPadding.setVisibility(View.GONE);
                 }
@@ -303,7 +298,8 @@ public class WifiSettingsForSetupWizardXL extends Activity implements OnClickLis
             break;
         }
         default:  // DISCONNECTED, FAILED
-            if (mScreenState != SCREEN_STATE_CONNECTED) {
+            if (mScreenState != SCREEN_STATE_CONNECTED &&
+                    mWifiSettings.getAccessPointsCount() > 0) {
                 showDisconnectedState(Summary.get(this, state));
             }
             break;
@@ -313,7 +309,8 @@ public class WifiSettingsForSetupWizardXL extends Activity implements OnClickLis
 
     private void showDisconnectedState(String stateString) {
         showDisconnectedProgressBar();
-        if (mScreenState == SCREEN_STATE_DISCONNECTED) {
+        if (mScreenState == SCREEN_STATE_DISCONNECTED &&
+                mWifiSettings.getAccessPointsCount() > 0) {
             mWifiSettingsFragmentLayout.setVisibility(View.VISIBLE);
             mBottomPadding.setVisibility(View.GONE);
         }
@@ -461,12 +458,9 @@ public class WifiSettingsForSetupWizardXL extends Activity implements OnClickLis
         parent.removeAllViews();
         mWifiConfig = new WifiConfigUiForSetupWizardXL(this, parent, selectedAccessPoint, edit);
 
-        // Tag will be updated in this method when needed.
-        mConnectButton.setTag(null);
         if (selectedAccessPoint == null) {  // "Add network" flow
             showAddNetworkTitle();
             mConnectButton.setVisibility(View.VISIBLE);
-            mConnectButton.setTag(CONNECT_BUTTON_TAG_ADD_NETWORK);
 
             showEditingButtonState();
         } else if (selectedAccessPoint.security == AccessPoint.SECURITY_NONE) {
@@ -632,8 +626,9 @@ public class WifiSettingsForSetupWizardXL extends Activity implements OnClickLis
             mAddNetworkButton.setEnabled(true);
             mRefreshButton.setEnabled(true);
             mSkipOrNextButton.setEnabled(true);
-            mWifiSettingsFragmentLayout.setVisibility(View.VISIBLE);
             showDisconnectedProgressBar();
+            mWifiSettingsFragmentLayout.setVisibility(View.VISIBLE);
+            mBottomPadding.setVisibility(View.GONE);
         }
 
         setPaddingVisibility(View.VISIBLE);
@@ -680,15 +675,7 @@ public class WifiSettingsForSetupWizardXL extends Activity implements OnClickLis
     }
 
     private void refreshAccessPoints(boolean disconnectNetwork) {
-        final Object tag = mConnectButton.getTag();
-        if (tag != null && (tag instanceof Integer) &&
-                ((Integer)tag == CONNECT_BUTTON_TAG_ADD_NETWORK)) {
-            // In "Add network" flow, we won't get DetaledState available for changing ProgressBar
-            // state. Instead we manually show previous status here.
-            showDisconnectedState(Summary.get(this, mPreviousNetworkState));
-        } else {
-            showScanningState();
-        }
+        showScanningState();
 
         if (disconnectNetwork) {
             mWifiManager.disconnect();
