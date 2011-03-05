@@ -18,9 +18,11 @@ package com.android.settings;
 
 import static android.provider.Settings.System.SCREEN_OFF_TIMEOUT;
 
+import android.app.ActivityManagerNative;
 import android.app.admin.DevicePolicyManager;
 import android.content.ContentResolver;
 import android.content.Context;
+import android.content.res.Configuration;
 import android.database.ContentObserver;
 import android.os.Bundle;
 import android.os.Handler;
@@ -46,11 +48,15 @@ public class DisplaySettings extends SettingsPreferenceFragment implements
     private static final String KEY_SCREEN_TIMEOUT = "screen_timeout";
     private static final String KEY_ANIMATIONS = "animations";
     private static final String KEY_ACCELEROMETER = "accelerometer";
+    private static final String KEY_FONT_SIZE = "font_size";
 
     private ListPreference mAnimations;
     private CheckBoxPreference mAccelerometer;
     private float[] mAnimationScales;
+    private ListPreference mFontSizePref;
 
+    private final Configuration mCurConfig = new Configuration();
+    
     private IWindowManager mWindowManager;
 
     private ListPreference mScreenTimeoutPreference;
@@ -82,6 +88,9 @@ public class DisplaySettings extends SettingsPreferenceFragment implements
         mScreenTimeoutPreference.setOnPreferenceChangeListener(this);
         disableUnusableTimeouts(mScreenTimeoutPreference);
         updateTimeoutPreferenceDescription(resolver, currentTimeout);
+        
+        mFontSizePref = (ListPreference) findPreference(KEY_FONT_SIZE);
+        mFontSizePref.setOnPreferenceChangeListener(this);
     }
 
     private void updateTimeoutPreferenceDescription(ContentResolver resolver, long currentTimeout) {
@@ -135,6 +144,29 @@ public class DisplaySettings extends SettingsPreferenceFragment implements
         screenTimeoutPreference.setEnabled(revisedEntries.size() > 0);
     }
 
+    int floatToIndex(float val, int resid) {
+        String[] indices = getResources().getStringArray(resid);
+        float lastVal = Float.parseFloat(indices[0]);
+        for (int i=1; i<indices.length; i++) {
+            float thisVal = Float.parseFloat(indices[i]);
+            if (val < (lastVal + (thisVal-lastVal)*.5f)) {
+                return i-1;
+            }
+            lastVal = thisVal;
+        }
+        return indices.length-1;
+    }
+    
+    public void readFontSizePreference(ListPreference pref) {
+        try {
+            mCurConfig.updateFrom(
+                ActivityManagerNative.getDefault().getConfiguration());
+        } catch (RemoteException e) {
+        }
+        pref.setValueIndex(floatToIndex(mCurConfig.fontScale,
+                R.array.entryvalues_font_size));
+    }
+    
     @Override
     public void onResume() {
         super.onResume();
@@ -179,6 +211,7 @@ public class DisplaySettings extends SettingsPreferenceFragment implements
         mAnimations.setValueIndex(idx);
         updateAnimationsSummary(mAnimations.getValue());
         updateAccelerometerRotationCheckbox();
+        readFontSizePreference(mFontSizePref);
     }
 
     private void updateAccelerometerRotationCheckbox() {
@@ -200,6 +233,14 @@ public class DisplaySettings extends SettingsPreferenceFragment implements
         }
     }
 
+    public void writeFontSizePreference(Object objValue) {
+        try {
+            mCurConfig.fontScale = Float.parseFloat(objValue.toString());
+            ActivityManagerNative.getDefault().updateConfiguration(mCurConfig);
+        } catch (RemoteException e) {
+        }
+    }
+    
     @Override
     public boolean onPreferenceTreeClick(PreferenceScreen preferenceScreen, Preference preference) {
         if (preference == mAccelerometer) {
@@ -240,6 +281,9 @@ public class DisplaySettings extends SettingsPreferenceFragment implements
             } catch (NumberFormatException e) {
                 Log.e(TAG, "could not persist screen timeout setting", e);
             }
+        }
+        if (KEY_FONT_SIZE.equals(key)) {
+            writeFontSizePreference(objValue);
         }
 
         return true;
