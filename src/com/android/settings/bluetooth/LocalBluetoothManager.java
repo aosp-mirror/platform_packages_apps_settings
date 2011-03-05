@@ -66,7 +66,7 @@ public final class LocalBluetoothManager {
 
         mCachedDeviceManager = new CachedBluetoothDeviceManager();
         mEventManager = new BluetoothEventManager(mLocalAdapter,
-                mCachedDeviceManager);
+                mCachedDeviceManager, context);
         mProfileManager = new LocalBluetoothProfileManager(context,
                 mLocalAdapter, mCachedDeviceManager, mEventManager);
     }
@@ -87,11 +87,9 @@ public final class LocalBluetoothManager {
         if (context != null) {
             Log.d(TAG, "setting foreground activity to non-null context");
             mForegroundActivity = context;
-            mEventManager.resume(context);
         } else {
             if (mForegroundActivity != null) {
                 Log.d(TAG, "setting foreground activity to null");
-                mEventManager.pause(mForegroundActivity);
                 mForegroundActivity = null;
             }
         }
