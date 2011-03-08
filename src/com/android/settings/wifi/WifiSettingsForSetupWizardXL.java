@@ -462,6 +462,7 @@ public class WifiSettingsForSetupWizardXL extends Activity implements OnClickLis
             showAddNetworkTitle();
             mConnectButton.setVisibility(View.VISIBLE);
 
+            showDisconnectedProgressBar();
             showEditingButtonState();
         } else if (selectedAccessPoint.security == AccessPoint.SECURITY_NONE) {
             mNetworkName = selectedAccessPoint.getTitle().toString();
@@ -471,6 +472,7 @@ public class WifiSettingsForSetupWizardXL extends Activity implements OnClickLis
         } else {
             mNetworkName = selectedAccessPoint.getTitle().toString();
             showEditingTitle();
+            showDisconnectedProgressBar();
             showEditingButtonState();
             if (selectedAccessPoint.security == AccessPoint.SECURITY_EAP) {
                 onEapNetworkSelected();
