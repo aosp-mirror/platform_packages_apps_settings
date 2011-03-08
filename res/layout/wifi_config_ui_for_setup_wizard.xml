@@ -74,17 +74,19 @@
         <!-- To accomodate @id/type into TableLayout, we splitted the layout into two:
              @id/type_ssid and @id/type_security. -->
         <TableRow android:id="@+id/type_ssid"
+                  android:minHeight="56dip"
                   android:visibility="gone">
             <TextView android:id="@+id/ssid_text"
                       android:layout_width="wrap_content"
                       android:minWidth="128dip"
                       android:layout_height="wrap_content"
-                      android:minHeight="48dip"
+                      android:minHeight="56dip"
+                      android:paddingRight="16dip"
                       android:layout_alignParentLeft="true"
                       android:text="@string/wifi_ssid"
                       android:textAppearance="?android:attr/textAppearanceMedium"
                       android:textSize="20sp"
-                      android:gravity="bottom"/>
+                      android:gravity="left|center_vertical" />
 
             <FrameLayout android:id="@+id/ssid_layout"
                          android:layout_width="wrap_content"
@@ -102,58 +104,67 @@
         </TableRow>
 
         <TableRow android:id="@+id/security_fields"
+                  android:minHeight="56dip"
                   android:visibility="gone">
             <TextView android:id="@+id/password_text"
                       android:layout_width="wrap_content"
                       android:minWidth="128dip"
                       android:layout_height="wrap_content"
-                      android:minHeight="48dip"
+                      android:minHeight="56dip"
                       android:text="@string/wifi_password"
                       android:textAppearance="?android:attr/textAppearanceMedium"
                       android:textSize="20sp"
-                      android:gravity="bottom" />
+                      android:gravity="left|center_vertical" />
 
-            <FrameLayout android:id="@+id/password_layout"
-                         android:layout_width="wrap_content"
-                         android:layout_height="wrap_content"
-                         android:minHeight="48dip">
+            <LinearLayout android:id="@+id/password_layout"
+                          android:layout_width="wrap_content"
+                          android:layout_height="wrap_content"
+                          android:gravity="bottom">
                 <EditText android:id="@+id/password"
                           android:layout_width="368dip"
                           android:layout_height="wrap_content"
+                          android:minHeight="56dip"
                           android:singleLine="true"
                           android:password="true"
                           android:textAppearance="?android:attr/textAppearanceMedium"
                           android:textSize="20sp" />
-            </FrameLayout>
+            </LinearLayout>
 
-            <CheckBox android:id="@+id/show_password"
-                      android:layout_width="match_parent"
-                      android:layout_height="wrap_content"
-                      android:text="@string/wifi_show_password"
-                      android:textAppearance="?android:attr/textAppearanceMedium"
-                      android:textSize="20sp" />
+            <!-- It looks CheckBox isn't aligned well with TableRow -->
+            <FrameLayout android:layout_width="wrap_content"
+                         android:layout_height="wrap_content">
+                <CheckBox android:id="@+id/show_password"
+                          android:layout_width="match_parent"
+                          android:layout_height="wrap_content"
+                          android:minHeight="56dip"
+                          android:text="@string/wifi_show_password"
+                          android:textAppearance="?android:attr/textAppearanceMedium"
+                          android:textSize="20sp" />
+            </FrameLayout>
         </TableRow>
 
         <TableRow android:id="@+id/type_security"
+                  android:minHeight="56dip"
                   android:visibility="gone">
             <TextView android:id="@+id/security_text"
                       android:layout_width="wrap_content"
                       android:minWidth="128dip"
                       android:layout_height="wrap_content"
-                      android:minHeight="48dip"
+                      android:minHeight="56dip"
                       android:text="@string/wifi_security"
                       android:textAppearance="?android:attr/textAppearanceMedium"
                       android:textSize="20sp"
                       android:gravity="bottom"/>
 
-            <Spinner android:id="@+id/security"
-                     android:layout_width="368dip"
-                     android:layout_height="wrap_content"
-                     android:minHeight="48dip"
-                     android:paddingLeft="4dip"
-                     android:textAppearance="?android:attr/textAppearanceMedium"
-                     android:textSize="20sp"
-                     android:gravity="left|center_vertical"/>
+            <FrameLayout android:layout_width="wrap_content"
+                         android:layout_height="wrap_content"
+                         android:gravity="bottom">
+                <Spinner android:id="@+id/security"
+                         android:layout_width="368dip"
+                         android:layout_height="wrap_content"
+                         android:minHeight="56dip"
+                         android:paddingLeft="4dip"/>
+            </FrameLayout>
         </TableRow>
     </TableLayout>
 
