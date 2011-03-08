@@ -218,6 +218,7 @@ public class WifiSettings extends SettingsPreferenceFragment
             if (pref != null) {
                 if (Utils.isWifiOnly()) {
                     pref.setEntries(R.array.wifi_sleep_policy_entries_wifi_only);
+                    pref.setSummary(R.string.wifi_setting_sleep_policy_summary_wifi_only);
                 }
                 pref.setOnPreferenceChangeListener(this);
                 int value = Settings.System.getInt(getContentResolver(),
