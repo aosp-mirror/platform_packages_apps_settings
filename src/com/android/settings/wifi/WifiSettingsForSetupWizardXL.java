@@ -272,18 +272,16 @@ public class WifiSettingsForSetupWizardXL extends Activity implements OnClickLis
 
         switch (state) {
         case SCANNING: {
-            // Let users know the device is working correctly though currently there's
-            // no visible network on the list.
-            if (mWifiSettings.getAccessPointsCount() == 0) {
-                showScanningState();
-            } else {
-                // Users already see available networks.
-                showDisconnectedProgressBar();
-                if (mScreenState == SCREEN_STATE_DISCONNECTED &&
-                        mWifiSettings.getAccessPointsCount() > 0) {
+            if (mScreenState == SCREEN_STATE_DISCONNECTED) {
+                if (mWifiSettings.getAccessPointsCount() == 0) {
+                    showScanningState();                    
+                } else {
+                    showDisconnectedProgressBar();
                     mWifiSettingsFragmentLayout.setVisibility(View.VISIBLE);
                     mBottomPadding.setVisibility(View.GONE);
                 }
+            } else {
+                showDisconnectedProgressBar();
             }
             break;
         }
