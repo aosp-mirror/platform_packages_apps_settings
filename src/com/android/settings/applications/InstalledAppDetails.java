@@ -736,6 +736,11 @@ public class InstalledAppDetails extends Fragment
         ActivityManager am = (ActivityManager)getActivity().getSystemService(
                 Context.ACTIVITY_SERVICE);
         am.forceStopPackage(pkgName);
+        mState.invalidatePackage(pkgName);
+        ApplicationsState.AppEntry newEnt = mState.getEntry(pkgName);
+        if (newEnt != null) {
+            mAppEntry = newEnt;
+        }
         checkForceStop();
     }
 
