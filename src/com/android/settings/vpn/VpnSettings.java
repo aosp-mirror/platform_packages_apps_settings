@@ -221,7 +221,14 @@ public class VpnSettings extends SettingsPreferenceFragment
         }
 
         if (!mConnectDialogShowing) {
-            checkVpnConnectionStatus();
+            // If mActiveProfile is not null but it's in IDLE state, then a
+            // retry dialog must be showing now as the previous connection
+            // attempt failed. In this case, don't call checkVpnConnectionStatus()
+            // as it will clean up mActiveProfile due to the IDLE state.
+            if ((mActiveProfile == null)
+                    || (mActiveProfile.getState() != VpnState.IDLE)) {
+                checkVpnConnectionStatus();
+            }
         } else {
             // Dismiss the connect dialog in case there is another instance
             // trying to operate a vpn connection.
