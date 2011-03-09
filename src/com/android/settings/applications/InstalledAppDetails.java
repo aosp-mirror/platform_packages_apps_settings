@@ -428,7 +428,7 @@ public class InstalledAppDetails extends Activity
         if(localLOGV) Log.i(TAG, "Have "+prefActList.size()+" number of activities in prefered list");
         boolean hasUsbDefaults = false;
         try {
-            hasUsbDefaults = mUsbManager.hasDefaults(packageName, mAppEntry.info.uid);
+            hasUsbDefaults = mUsbManager.hasDefaults(packageName);
         } catch (RemoteException e) {
             Log.e(TAG, "mUsbManager.hasDefaults", e);
         }
@@ -752,7 +752,7 @@ public class InstalledAppDetails extends Activity
         } else if(v == mActivitiesButton) {
             mPm.clearPackagePreferredActivities(packageName);
             try {
-                mUsbManager.clearDefaults(packageName, mAppEntry.info.uid);
+                mUsbManager.clearDefaults(packageName);
             } catch (RemoteException e) {
                 Log.e(TAG, "mUsbManager.clearDefaults", e);
             }
