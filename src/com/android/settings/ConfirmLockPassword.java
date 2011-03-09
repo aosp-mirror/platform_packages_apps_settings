@@ -108,7 +108,7 @@ public class ConfirmLockPassword extends PreferenceActivity {
 
             int currentType = mPasswordEntry.getInputType();
             mPasswordEntry.setInputType(isAlpha ? currentType
-                    : (currentType | InputType.TYPE_CLASS_NUMBER));
+                    : (InputType.TYPE_CLASS_NUMBER | InputType.TYPE_NUMBER_VARIATION_PASSWORD));
 
             // Update the breadcrumb (title) if this is embedded in a PreferenceActivity
             if (activity instanceof PreferenceActivity) {
@@ -138,10 +138,10 @@ public class ConfirmLockPassword extends PreferenceActivity {
         private void handleNext() {
             final String pin = mPasswordEntry.getText().toString();
             if (mLockPatternUtils.checkPassword(pin)) {
-                
+
                 Intent intent = new Intent();
                 intent.putExtra("password", pin);
-                
+
                 getActivity().setResult(RESULT_OK, intent);
                 getActivity().finish();
             } else {
