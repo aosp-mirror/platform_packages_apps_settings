@@ -248,8 +248,7 @@ public class ApplicationsState {
              } else if (Intent.ACTION_PACKAGE_CHANGED.equals(actionStr)) {
                  Uri data = intent.getData();
                  String pkgName = data.getEncodedSchemeSpecificPart();
-                 removePackage(pkgName);
-                 addPackage(pkgName);
+                 invalidatePackage(pkgName);
              } else if (Intent.ACTION_EXTERNAL_APPLICATIONS_AVAILABLE.equals(actionStr) ||
                      Intent.ACTION_EXTERNAL_APPLICATIONS_UNAVAILABLE.equals(actionStr)) {
                  // When applications become available or unavailable (perhaps because
@@ -266,8 +265,7 @@ public class ApplicationsState {
                  boolean avail = Intent.ACTION_EXTERNAL_APPLICATIONS_AVAILABLE.equals(actionStr);
                  if (avail) {
                      for (String pkgName : pkgList) {
-                         removePackage(pkgName);
-                         addPackage(pkgName);
+                         invalidatePackage(pkgName);
                      }
                  }
              }
@@ -624,6 +622,11 @@ public class ApplicationsState {
         }
     }
 
+    void invalidatePackage(String pkgName) {
+        removePackage(pkgName);
+        addPackage(pkgName);
+    }
+    
     AppEntry getEntryLocked(ApplicationInfo info) {
         AppEntry entry = mEntriesMap.get(info.packageName);
         if (DEBUG) Log.i(TAG, "Looking up entry of pkg " + info.packageName + ": " + entry);
