@@ -133,6 +133,8 @@ final class HeadsetProfile implements LocalBluetoothProfile {
     }
 
     public int getConnectionStatus(BluetoothDevice device) {
+        if (mService == null) return BluetoothProfile.STATE_DISCONNECTED;
+
         List<BluetoothDevice> deviceList = mService.getConnectedDevices();
 
         return !deviceList.isEmpty() && deviceList.get(0).equals(device)
