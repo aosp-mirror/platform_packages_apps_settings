@@ -110,7 +110,9 @@ final class LocalBluetoothProfileManager {
                 BluetoothInputDevice.ACTION_CONNECTION_STATE_CHANGED);
 
         mPanProfile = new PanProfile(context);
-        addProfile(mPanProfile, PanProfile.NAME, BluetoothPan.ACTION_CONNECTION_STATE_CHANGED);
+        addPanProfile(mPanProfile, PanProfile.NAME,
+                BluetoothPan.ACTION_CONNECTION_STATE_CHANGED);
+
         Log.d(TAG, "LocalBluetoothProfileManager construction complete");
     }
 
@@ -173,6 +175,13 @@ final class LocalBluetoothProfileManager {
         mProfileNameMap.put(profileName, profile);
     }
 
+    private void addPanProfile(LocalBluetoothProfile profile,
+            String profileName, String stateChangedAction) {
+        mEventManager.addProfileHandler(stateChangedAction,
+                new PanStateChangedHandler(profile));
+        mProfileNameMap.put(profileName, profile);
+    }
+
     LocalBluetoothProfile getProfileByName(String name) {
         return mProfileNameMap.get(name);
     }
@@ -190,7 +199,7 @@ final class LocalBluetoothProfileManager {
      * Generic handler for connection state change events for the specified profile.
      */
     private class StateChangedHandler implements BluetoothEventManager.Handler {
-        private final LocalBluetoothProfile mProfile;
+        final LocalBluetoothProfile mProfile;
 
         StateChangedHandler(LocalBluetoothProfile profile) {
             mProfile = profile;
@@ -212,6 +221,22 @@ final class LocalBluetoothProfileManager {
 
             cachedDevice.onProfileStateChanged(mProfile, newState);
             cachedDevice.refresh();
+        }
+    }
+
+    /** State change handler for NAP and PANU profiles. */
+    private class PanStateChangedHandler extends StateChangedHandler {
+
+        PanStateChangedHandler(LocalBluetoothProfile profile) {
+            super(profile);
+        }
+
+        @Override
+        public void onReceive(Context context, Intent intent, BluetoothDevice device) {
+            PanProfile panProfile = (PanProfile) mProfile;
+            int role = intent.getIntExtra(BluetoothPan.EXTRA_LOCAL_ROLE, 0);
+            panProfile.setLocalRole(device, role);
+            super.onReceive(context, intent, device);
         }
     }
 
@@ -269,9 +294,14 @@ final class LocalBluetoothProfileManager {
      * @param uuids of the remote device
      * @param localUuids UUIDs of the local device
      * @param profiles The list of profiles to fill
+     * @param removedProfiles list of profiles that were removed
      */
     synchronized void updateProfiles(ParcelUuid[] uuids, ParcelUuid[] localUuids,
-        Collection<LocalBluetoothProfile> profiles) {
+            Collection<LocalBluetoothProfile> profiles,
+            Collection<LocalBluetoothProfile> removedProfiles) {
+        // Copy previous profile list into removedProfiles
+        removedProfiles.clear();
+        removedProfiles.addAll(profiles);
         profiles.clear();
 
         if (uuids == null) {
@@ -280,31 +310,36 @@ final class LocalBluetoothProfileManager {
 
         if (mHeadsetProfile != null) {
             if ((BluetoothUuid.isUuidPresent(localUuids, BluetoothUuid.HSP_AG) &&
-                BluetoothUuid.isUuidPresent(uuids, BluetoothUuid.HSP)) ||
-                (BluetoothUuid.isUuidPresent(localUuids, BluetoothUuid.Handsfree_AG) &&
-                BluetoothUuid.isUuidPresent(uuids, BluetoothUuid.Handsfree))) {
-                    profiles.add(mHeadsetProfile);
+                    BluetoothUuid.isUuidPresent(uuids, BluetoothUuid.HSP)) ||
+                    (BluetoothUuid.isUuidPresent(localUuids, BluetoothUuid.Handsfree_AG) &&
+                            BluetoothUuid.isUuidPresent(uuids, BluetoothUuid.Handsfree))) {
+                profiles.add(mHeadsetProfile);
+                removedProfiles.remove(mHeadsetProfile);
             }
         }
 
         if (BluetoothUuid.containsAnyUuid(uuids, A2dpProfile.SINK_UUIDS) &&
             mA2dpProfile != null) {
             profiles.add(mA2dpProfile);
+            removedProfiles.remove(mA2dpProfile);
         }
 
         if (BluetoothUuid.isUuidPresent(uuids, BluetoothUuid.ObexObjectPush) &&
             mOppProfile != null) {
             profiles.add(mOppProfile);
+            removedProfiles.remove(mOppProfile);
         }
 
         if (BluetoothUuid.isUuidPresent(uuids, BluetoothUuid.Hid) &&
             mHidProfile != null) {
             profiles.add(mHidProfile);
+            removedProfiles.remove(mHidProfile);
         }
 
         if (BluetoothUuid.isUuidPresent(uuids, BluetoothUuid.NAP) &&
             mPanProfile != null) {
             profiles.add(mPanProfile);
+            removedProfiles.remove(mPanProfile);
         }
     }
 }

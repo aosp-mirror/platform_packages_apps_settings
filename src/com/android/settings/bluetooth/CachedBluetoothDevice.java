@@ -51,6 +51,13 @@ final class CachedBluetoothDevice implements Comparable<CachedBluetoothDevice> {
     private final List<LocalBluetoothProfile> mProfiles =
             new ArrayList<LocalBluetoothProfile>();
 
+    // List of profiles that were previously in mProfiles, but have been removed
+    private final List<LocalBluetoothProfile> mRemovedProfiles =
+            new ArrayList<LocalBluetoothProfile>();
+
+    // Device supports PANU but not NAP: remove PanProfile after device disconnects from NAP
+    private boolean mLocalNapRoleConnected;
+
     private boolean mVisible;
 
     private final Collection<Callback> mCallbacks = new ArrayList<Callback>();
@@ -100,8 +107,21 @@ final class CachedBluetoothDevice implements Comparable<CachedBluetoothDevice> {
         mProfileConnectionState.put(profile, newProfileState);
         if (newProfileState == BluetoothProfile.STATE_CONNECTED) {
             if (!mProfiles.contains(profile)) {
+                mRemovedProfiles.remove(profile);
                 mProfiles.add(profile);
+                if (profile instanceof PanProfile &&
+                        ((PanProfile) profile).isLocalRoleNap(mDevice)) {
+                    // Device doesn't support NAP, so remove PanProfile on disconnect
+                    mLocalNapRoleConnected = true;
+                }
             }
+        } else if (mLocalNapRoleConnected && profile instanceof PanProfile &&
+                ((PanProfile) profile).isLocalRoleNap(mDevice) &&
+                newProfileState == BluetoothProfile.STATE_DISCONNECTED) {
+            Log.d(TAG, "Removing PanProfile from device after NAP disconnect");
+            mProfiles.remove(profile);
+            mRemovedProfiles.add(profile);
+            mLocalNapRoleConnected = false;
         }
     }
 
@@ -391,7 +411,7 @@ final class CachedBluetoothDevice implements Comparable<CachedBluetoothDevice> {
         ParcelUuid[] localUuids = mLocalAdapter.getUuids();
         if (localUuids == null) return false;
 
-        mProfileManager.updateProfiles(uuids, localUuids, mProfiles);
+        mProfileManager.updateProfiles(uuids, localUuids, mProfiles, mRemovedProfiles);
 
         if (DEBUG) {
             Log.e(TAG, "updating profiles for " + mDevice.getName());
@@ -480,6 +500,10 @@ final class CachedBluetoothDevice implements Comparable<CachedBluetoothDevice> {
             }
         }
         return connectableProfiles;
+    }
+
+    List<LocalBluetoothProfile> getRemovedProfiles() {
+        return mRemovedProfiles;
     }
 
     void registerCallback(Callback callback) {
