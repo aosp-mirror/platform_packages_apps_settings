@@ -42,6 +42,7 @@ public class WirelessSettings extends PreferenceActivity {
     private static final String KEY_TOGGLE_WIFI = "toggle_wifi";
     private static final String KEY_TOGGLE_NFC = "toggle_nfc";
     private static final String KEY_WIFI_SETTINGS = "wifi_settings";
+    private static final String KEY_WIMAX_SETTINGS = "wimax_settings";
     private static final String KEY_BT_SETTINGS = "bt_settings";
     private static final String KEY_VPN_SETTINGS = "vpn_settings";
     private static final String KEY_TETHER_SETTINGS = "tether_settings";
@@ -103,6 +104,22 @@ public class WirelessSettings extends PreferenceActivity {
 
         String toggleable = Settings.System.getString(getContentResolver(),
                 Settings.System.AIRPLANE_MODE_TOGGLEABLE_RADIOS);
+
+        //enable/disable wimax depending on the value in config.xml
+        boolean isWimaxEnabled = this.getResources().getBoolean(
+                com.android.internal.R.bool.config_wimaxEnabled);
+        if (!isWimaxEnabled) {
+            PreferenceScreen root = getPreferenceScreen();
+            Preference ps = (Preference) findPreference(KEY_WIMAX_SETTINGS);
+            if (ps != null)
+                root.removePreference(ps);
+        } else {
+            if (toggleable == null || !toggleable.contains(Settings.System.RADIO_WIMAX )
+                    && isWimaxEnabled) {
+                Preference ps = (Preference) findPreference(KEY_WIMAX_SETTINGS);
+                ps.setDependency(KEY_TOGGLE_AIRPLANE);
+            }
+        }
 
         // Manually set dependencies for Wifi when not toggleable.
         if (toggleable == null || !toggleable.contains(Settings.System.RADIO_WIFI)) {

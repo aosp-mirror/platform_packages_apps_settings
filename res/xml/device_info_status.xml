@@ -90,6 +90,11 @@
         android:title="@string/status_imei_sv"
         android:summary="@string/device_info_not_available"
         android:persistent="false" />
+    <Preference android:key="wimax_mac_address"
+        style="?android:attr/preferenceInformationStyle"
+        android:title="@string/status_wimax_mac_address"
+        android:summary="@string/device_info_not_available"
+        android:persistent="false" />
     <Preference android:key="wifi_mac_address"
         style="?android:attr/preferenceInformationStyle" 
         android:title="@string/status_wifi_mac_address"

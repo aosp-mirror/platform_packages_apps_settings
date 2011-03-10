@@ -22,6 +22,8 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.res.Resources;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.net.wifi.WifiInfo;
 import android.net.wifi.WifiManager;
 import android.os.BatteryManager;
@@ -32,6 +34,7 @@ import android.os.SystemClock;
 import android.os.SystemProperties;
 import android.preference.Preference;
 import android.preference.PreferenceActivity;
+import android.preference.PreferenceScreen;
 import android.telephony.PhoneNumberUtils;
 import android.telephony.PhoneStateListener;
 import android.telephony.ServiceState;
@@ -62,6 +65,7 @@ import java.lang.ref.WeakReference;
  */
 public class Status extends PreferenceActivity {
 
+    private static final String KEY_WIMAX_MAC_ADDRESS = "wimax_mac_address";
     private static final String KEY_WIFI_MAC_ADDRESS = "wifi_mac_address";
     private static final String KEY_BT_ADDRESS = "bt_address";
     private static final int EVENT_SIGNAL_STRENGTH_CHANGED = 200;
@@ -233,7 +237,8 @@ public class Status extends PreferenceActivity {
         mPhoneStateReceiver = new PhoneStateIntentReceiver(this, mHandler);
         mPhoneStateReceiver.notifySignalStrength(EVENT_SIGNAL_STRENGTH_CHANGED);
         mPhoneStateReceiver.notifyServiceState(EVENT_SERVICE_STATE_CHANGED);
-        
+
+        setWimaxStatus();
         setWifiStatus();
         setBtStatus();
     }
@@ -244,7 +249,7 @@ public class Status extends PreferenceActivity {
 
         mPhoneStateReceiver.registerIntent();
         registerReceiver(mBatteryInfoReceiver, new IntentFilter(Intent.ACTION_BATTERY_CHANGED));
-        
+
         updateSignalStrength();
         updateServiceState(mPhone.getServiceState());
         updateDataState();
@@ -372,7 +377,24 @@ public class Status extends PreferenceActivity {
                         + r.getString(R.string.radioInfo_display_asu));
         }
     }
-    
+
+    private void setWimaxStatus() {
+        ConnectivityManager cm = (ConnectivityManager) getSystemService(CONNECTIVITY_SERVICE);
+        NetworkInfo ni = cm.getNetworkInfo(ConnectivityManager.TYPE_WIMAX);
+
+        if (ni == null) {
+            PreferenceScreen root = getPreferenceScreen();
+            Preference ps = (Preference) findPreference(KEY_WIMAX_MAC_ADDRESS);
+            if (ps != null)
+                root.removePreference(ps);
+        } else {
+            Preference wimaxMacAddressPref = findPreference(KEY_WIMAX_MAC_ADDRESS);
+            String macAddress = SystemProperties.get("net.wimax.mac.address",
+                    getString(R.string.status_unavailable));
+            wimaxMacAddressPref.setSummary(macAddress);
+        }
+    }
+
     private void setWifiStatus() {
         WifiManager wifiManager = (WifiManager) getSystemService(WIFI_SERVICE);
         WifiInfo wifiInfo = wifiManager.getConnectionInfo();
