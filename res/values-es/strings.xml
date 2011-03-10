@@ -225,7 +225,7 @@
     <string name="activity_picker_label" msgid="4910700713930693329">"Seleccionar actividad"</string>
     <string name="device_info_label" msgid="6551553813651711205">"Información del dispositivo"</string>
     <string name="battery_info_label" msgid="4132685016148679403">"Información sobre la batería"</string>
-    <!-- outdated translation 2877692680652637352 -->     <string name="display_label" msgid="8074070940506840792">"Pantalla"</string>
+    <string name="display_label" msgid="8074070940506840792">"Pantalla"</string>
     <string name="phone_info_label" product="tablet" msgid="7820855350955963628">"Información del tablet"</string>
     <string name="phone_info_label" product="default" msgid="2127552523124277664">"Información sobre el teléfono"</string>
     <string name="sd_card_settings_label" product="nosdcard" msgid="8101475181301178428">"Almacenamiento USB"</string>
@@ -322,7 +322,7 @@
     <string name="unlock_set_unlock_pin_summary" msgid="5556722736289132512">"PIN numérico para desbloquear la pantalla"</string>
     <string name="unlock_set_unlock_password_title" msgid="8775603825675090937">"Contraseña"</string>
     <string name="unlock_set_unlock_password_summary" msgid="7871968012198279034">"Contraseña para desbloquear la pantalla"</string>
-    <!-- outdated translation 5962903914511361952 -->     <string name="unlock_set_unlock_disabled_summary" msgid="8563103042330816018">"Inhabilitado por administrador de dispositivo remoto"</string>
+    <string name="unlock_set_unlock_disabled_summary" msgid="8563103042330816018">"Inhabilitado por administrador/política encriptación"</string>
     <string name="unlock_set_unlock_mode_off" msgid="378729687629105388">"Desactivado"</string>
     <!-- outdated translation 7953821968316697309 -->     <string name="unlock_set_unlock_mode_none" msgid="7137296704741184239">"Sin protección"</string>
     <string name="unlock_set_unlock_mode_pattern" msgid="464022606293547390">"Protección con patrón"</string>
@@ -460,6 +460,8 @@
     <string name="wifi_notify_open_networks_summary" msgid="3038290727701553612">"Informarme cuando haya una red abierta disponible"</string>
     <string name="wifi_setting_sleep_policy_title" msgid="2256739245628081979">"Política de desconexión de Wi-Fi"</string>
     <string name="wifi_setting_sleep_policy_summary" msgid="7573693311804602041">"Especificar cuándo cambiar de Wi-Fi a datos móviles"</string>
+    <!-- no translation found for wifi_setting_sleep_policy_summary_wifi_only (5025244230722670496) -->
+    <skip />
     <string name="wifi_setting_sleep_policy_error" msgid="8174902072673071961">"Error al cambiar la configuración"</string>
     <string name="wifi_add_network" msgid="1671334951296205616">"Añadir red Wi-Fi"</string>
     <string name="wifi_access_points" msgid="2664629396767022441">"Redes Wi-Fi"</string>
@@ -597,7 +599,7 @@
     <string name="sync_settings_summary" msgid="2962179505214965667">"Añadir o eliminar cuentas y modificar la configuración de las cuentas"</string>
     <string name="search_settings" msgid="1910951467596035063">"Búsqueda"</string>
     <string name="search_settings_summary" msgid="9205656546570654169">"Administrar historial y configuración de búsqueda"</string>
-    <!-- outdated translation 8194788795878596522 -->     <string name="display_settings" msgid="5947830029420609057">"Ajustes de pantalla"</string>
+    <string name="display_settings" msgid="5947830029420609057">"Ajustes de la pantalla"</string>
     <string name="animations_title" msgid="1062189037402346023">"Animación"</string>
     <string name="animations_summary_on" msgid="8843613112130484436">"Mostrar animación al abrir y cerrar ventanas"</string>
     <string name="animations_summary_off" msgid="2777026828025551983">"Mostrar animación al abrir y cerrar ventanas"</string>
@@ -678,14 +680,10 @@
     <string name="memory_calculating_size" msgid="2188358544203768588">"Calculando..."</string>
     <string name="memory_apps_usage" msgid="9079237985722858506">"Aplicaciones"</string>
     <string name="memory_media_usage" msgid="3738830697707880405">"Multimedia"</string>
-    <!-- no translation found for memory_downloads_usage (3755173051677533027) -->
-    <skip />
-    <!-- no translation found for memory_dcim_usage (6679615808140067136) -->
-    <skip />
-    <!-- no translation found for memory_music_usage (4040027367622874108) -->
-    <skip />
-    <!-- no translation found for memory_media_misc_usage (235452944021647124) -->
-    <skip />
+    <string name="memory_downloads_usage" msgid="3755173051677533027">"Descargas"</string>
+    <string name="memory_dcim_usage" msgid="6679615808140067136">"Imágenes, vídeos"</string>
+    <string name="memory_music_usage" msgid="4040027367622874108">"Audio (música, tonos, podcasts, etc.)"</string>
+    <string name="memory_media_misc_usage" msgid="235452944021647124">"Varios"</string>
     <string name="sd_eject" product="nosdcard" msgid="4988563376492400073">"Desactivar almacenam comp"</string>
     <string name="sd_eject" product="default" msgid="6915293408836853020">"Desactivar tarjeta SD"</string>
     <string name="sd_eject_summary" product="nosdcard" msgid="5009296896648072891">"Desactivar almacenamiento USB interno"</string>
@@ -825,8 +823,7 @@
     <string name="location_network_based" msgid="8815705866861993344">"Usar redes inalámbricas"</string>
     <string name="location_networks_disabled" msgid="2708968452901433980">"Para ver una ubicación en aplicaciones (por ejemplo, Google Maps)"</string>
     <string name="location_neighborhood_level" msgid="4656658097932515921">"Ubicación determinada por redes móviles o Wi-Fi"</string>
-    <!-- no translation found for location_neighborhood_level_wifi (7457348712272184793) -->
-    <skip />
+    <string name="location_neighborhood_level_wifi" msgid="7457348712272184793">"Ubicación determinada por Wi-Fi"</string>
     <string name="location_gps" msgid="6296125378829097831">"Utilizar satélites GPS"</string>
     <string name="location_street_level" msgid="7456259025474443314">"Ubicación precisa a nivel de calle"</string>
     <string name="location_gps_disabled" msgid="6632537158777308128">"Localizar en nivel de calle (requiere más batería además de la vista aérea)"</string>
@@ -1072,8 +1069,8 @@
     <string name="input_methods_settings_label_format" msgid="6002887604815693322">"Ajustes de <xliff:g id="IME_NAME">%1$s</xliff:g>"</string>
     <string name="input_methods_and_subtype_enabler_title" msgid="4018402267502337338">"Selecc métodos introducción activos"</string>
     <string name="onscreen_keyboard_settings_summary" msgid="5841558383556238653">"Ajustes de teclado en pantalla"</string>
-    <!-- outdated translation 1343597180269077814 -->     <string name="builtin_keyboard_settings_title" msgid="7688732909551116798">"Teclado integrado"</string>
-    <!-- outdated translation 7319414757379558264 -->     <string name="builtin_keyboard_settings_summary" msgid="2392531685358035899">"Ajustes de teclado físico integrado"</string>
+    <string name="builtin_keyboard_settings_title" msgid="7688732909551116798">"Teclado físico"</string>
+    <string name="builtin_keyboard_settings_summary" msgid="2392531685358035899">"Ajustes del teclado físico"</string>
     <string name="development_settings_title" msgid="6719732334835420989">"Desarrollo"</string>
     <string name="development_settings_summary" msgid="2151320488701538355">"Establecer opciones de desarrollo de aplicaciones"</string>
     <string name="enable_adb" msgid="7982306934419797485">"Depuración USB"</string>
@@ -1144,7 +1141,7 @@
     <string name="details_subtitle" msgid="32593908269911734">"Detalles de uso"</string>
     <string name="controls_subtitle" msgid="390468421138288702">"Ajustar uso de la batería"</string>
     <string name="packages_subtitle" msgid="4736416171658062768">"Paquetes incluidos"</string>
-    <!-- outdated translation 1911315588531186756 -->     <string name="power_screen" msgid="3023346080675904613">"Pantalla"</string>
+    <string name="power_screen" msgid="3023346080675904613">"Pantalla"</string>
     <string name="power_wifi" msgid="2382791137776486974">"Wi-Fi"</string>
     <string name="power_bluetooth" msgid="4373329044379008289">"Bluetooth"</string>
     <string name="power_cell" msgid="6596471490976003056">"Dispositivo inactivo"</string>
@@ -1167,7 +1164,7 @@
     <string name="battery_action_stop" msgid="649958863744041872">"Forzar detención"</string>
     <string name="battery_action_app_details" msgid="3275013531871113681">"Información de la aplicación"</string>
     <string name="battery_action_app_settings" msgid="350562653472577250">"Ajustes de aplicaciones"</string>
-    <!-- outdated translation 5299218957624962414 -->     <string name="battery_action_display" msgid="7338551244519110831">"Ajustes de pantalla"</string>
+    <string name="battery_action_display" msgid="7338551244519110831">"Ajustes de la pantalla"</string>
     <string name="battery_action_wifi" msgid="2272741639606146903">"Ajustes de Wi-Fi"</string>
     <string name="battery_action_bluetooth" msgid="8374789049507723142">"Ajustes de Bluetooth"</string>
     <string name="battery_desc_voice" msgid="8980322055722959211">"Batería utilizada por llamadas de voz"</string>
@@ -1321,9 +1318,9 @@
     <string name="credentials_title" msgid="4446234003860769883">"Almacenamiento de credenciales"</string>
     <string name="credentials_access" msgid="4843187230913860492">"Credenciales seguras"</string>
     <string name="credentials_access_summary" msgid="319662078718574168">"Permitir que las aplicaciones accedan a los certificados seguros y a otras credenciales"</string>
-    <!-- outdated translation 1395748667227729987 -->     <string name="credentials_install" product="nosdcard" msgid="466093273825150847">"Instalar desde USB"</string>
+    <string name="credentials_install" product="nosdcard" msgid="466093273825150847">"Instalar desde almacenamiento"</string>
     <string name="credentials_install" product="default" msgid="953914549998062317">"Instalar desde la tarjeta SD"</string>
-    <!-- outdated translation 3679446246093149828 -->     <string name="credentials_install_summary" product="nosdcard" msgid="4220422806818210676">"Instalar certificados desde almacenamiento USB"</string>
+    <string name="credentials_install_summary" product="nosdcard" msgid="4220422806818210676">"Instalar certificados desde almacenamiento"</string>
     <string name="credentials_install_summary" product="default" msgid="5737658257407822713">"Instalar certificados desde la tarjeta SD"</string>
     <string name="credentials_set_password" msgid="9104473585811899989">"Establecer contraseña"</string>
     <string name="credentials_set_password_summary" msgid="6756719720826053228">"Establecer o cambiar la contraseña del almacenamiento de credenciales"</string>
@@ -1443,14 +1440,11 @@
     <string name="enter_password" msgid="3268224850821675915">"Introducir contraseña para descifrar el almacenamiento"</string>
     <string name="try_again" msgid="5904121494468643129">"Inténtalo de nuevo"</string>
     <string name="service_busy" msgid="225227519012409130">"Servicio VPN ocupado. Inténtalo de nuevo."</string>
-    <!-- no translation found for delete (4219243412325163003) -->
-    <skip />
-    <!-- no translation found for misc_files (6298643430106707497) -->
-    <skip />
+    <string name="delete" msgid="4219243412325163003">"Eliminar"</string>
+    <string name="misc_files" msgid="6298643430106707497">"Archivos variados"</string>
     <!-- no translation found for misc_files_selected_count (4647048020823912088) -->
     <skip />
     <!-- no translation found for misc_files_selected_count_bytes (5603677358119178101) -->
     <skip />
-    <!-- no translation found for select_all (6783085295161532497) -->
-    <skip />
+    <string name="select_all" msgid="6783085295161532497">"Seleccionar todo"</string>
 </resources>
