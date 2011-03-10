@@ -25,13 +25,18 @@ import android.content.Context;
 
 import com.android.settings.R;
 
+import java.util.HashMap;
 import java.util.List;
 
 /**
- * PanProfile handles Bluetooth PAN profile.
+ * PanProfile handles Bluetooth PAN profile (NAP and PANU).
  */
 final class PanProfile implements LocalBluetoothProfile {
     private BluetoothPan mService;
+
+    // Tethering direction for each device
+    private final HashMap<BluetoothDevice, Integer> mDeviceRoleMap =
+            new HashMap<BluetoothDevice, Integer>();
 
     static final String NAME = "PAN";
 
@@ -111,8 +116,12 @@ final class PanProfile implements LocalBluetoothProfile {
         return R.string.bluetooth_profile_pan;
     }
 
-    public int getDisconnectResource() {
-        return R.string.bluetooth_disconnect_pan_profile;
+    public int getDisconnectResource(BluetoothDevice device) {
+        if (isLocalRoleNap(device)) {
+            return R.string.bluetooth_disconnect_pan_nap_profile;
+        } else {
+            return R.string.bluetooth_disconnect_pan_user_profile;
+        }
     }
 
     public int getSummaryResourceForDevice(BluetoothDevice device) {
@@ -122,7 +131,11 @@ final class PanProfile implements LocalBluetoothProfile {
                 return R.string.bluetooth_pan_profile_summary_use_for;
 
             case BluetoothProfile.STATE_CONNECTED:
-                return R.string.bluetooth_pan_profile_summary_connected;
+                if (isLocalRoleNap(device)) {
+                    return R.string.bluetooth_pan_nap_profile_summary_connected;
+                } else {
+                    return R.string.bluetooth_pan_user_profile_summary_connected;
+                }
 
             default:
                 return Utils.getConnectionStateSummary(state);
@@ -131,5 +144,18 @@ final class PanProfile implements LocalBluetoothProfile {
 
     public int getDrawableResource(BluetoothClass btClass) {
         return R.drawable.ic_bt_network_pan;
+    }
+
+    // Tethering direction determines UI strings.
+    void setLocalRole(BluetoothDevice device, int role) {
+        mDeviceRoleMap.put(device, role);
+    }
+
+    boolean isLocalRoleNap(BluetoothDevice device) {
+        if (mDeviceRoleMap.containsKey(device)) {
+            return mDeviceRoleMap.get(device) == BluetoothPan.LOCAL_NAP_ROLE;
+        } else {
+            return false;
+        }
     }
 }

@@ -22,13 +22,11 @@ import android.bluetooth.BluetoothHeadset;
 import android.bluetooth.BluetoothProfile;
 import android.bluetooth.BluetoothUuid;
 import android.content.Context;
-import android.os.Handler;
 import android.os.ParcelUuid;
 import android.util.Log;
 
 import com.android.settings.R;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -176,7 +174,7 @@ final class HeadsetProfile implements LocalBluetoothProfile {
         return R.string.bluetooth_profile_headset;
     }
 
-    public int getDisconnectResource() {
+    public int getDisconnectResource(BluetoothDevice device) {
         return R.string.bluetooth_disconnect_headset_profile;
     }
 
