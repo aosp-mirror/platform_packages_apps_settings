@@ -75,6 +75,34 @@
             android:layout_marginLeft="32dip"
             android:layout_alignParentRight="true">
 
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_toRightOf="@id/time_zone_button"
+                android:layout_alignParentRight="true">
+
+                <TextView
+                    android:id="@+id/date_time_auto_text"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:minHeight="?android:attr/listPreferredItemHeight"
+                    android:layout_marginLeft="16dip"
+                    android:text="@string/date_time_auto"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:textSize="20dip"
+                    android:layout_alignParentLeft="true"
+                    android:layout_toLeftOf="@+id/date_time_auto_button"
+                    android:gravity="left|center_vertical" />
+
+                <CheckBox
+                    android:id="@+id/date_time_auto_button"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_alignParentRight="true" />
+            </RelativeLayout>
+
+            <!--
             <Switch
                 android:id="@+id/date_time_auto_button"
                 android:layout_width="match_parent"
@@ -83,7 +111,7 @@
                 android:layout_marginLeft="16dip"
                 android:text="@string/date_time_auto"
                 android:textAppearance="?android:attr/textAppearanceMedium"
-                android:textSize="20dip" />
+                android:textSize="20dip" /> -->
 
             <!-- Divider -->
             <View

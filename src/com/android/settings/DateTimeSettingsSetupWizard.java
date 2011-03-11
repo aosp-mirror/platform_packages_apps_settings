@@ -27,7 +27,6 @@ import android.content.res.Configuration;
 import android.os.Bundle;
 import android.provider.Settings;
 import android.provider.Settings.SettingNotFoundException;
-import android.text.format.DateFormat;
 import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -41,6 +40,7 @@ import android.widget.CompoundButton.OnCheckedChangeListener;
 import android.widget.DatePicker;
 import android.widget.ListPopupWindow;
 import android.widget.SimpleAdapter;
+import android.widget.TextView;
 import android.widget.TimePicker;
 
 import java.util.Calendar;
@@ -119,8 +119,9 @@ public class DateTimeSettingsSetupWizard extends Activity
 
         mAutoDateTimeButton = (CompoundButton)findViewById(R.id.date_time_auto_button);
         mAutoDateTimeButton.setChecked(autoDateTimeEnabled);
-        mAutoDateTimeButton.setText(autoDateTimeEnabled ? R.string.date_time_auto_summaryOn :
-                R.string.date_time_auto_summaryOff);
+        ((TextView)findViewById(R.id.date_time_auto_text))
+                .setText(autoDateTimeEnabled ? R.string.date_time_auto_summaryOn :
+                        R.string.date_time_auto_summaryOff);
         mAutoDateTimeButton.setOnCheckedChangeListener(this);
 
         mTimePicker = (TimePicker)findViewById(R.id.time_picker);
