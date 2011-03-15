@@ -71,6 +71,12 @@
             </intent-filter>
         </activity>
 
+        <activity android:name=".SubSettings"
+                android:taskAffinity="com.android.settings"
+                android:theme="@android:style/Theme.Holo"
+                >
+        </activity>
+
         <activity android:name="CreateShortcut" android:label="@string/settings_shortcut"
             android:theme="@style/Theme.CreateShortCut">
             <intent-filter>
