@@ -229,6 +229,13 @@ public class Settings extends PreferenceActivity implements ButtonBarHandler {
         return super.onGetInitialHeader();
     }
 
+    @Override
+    public Intent onBuildStartFragmentIntent(String fragmentName, Bundle args) {
+        Intent intent = super.onBuildStartFragmentIntent(fragmentName, args);
+        intent.setClass(this, SubSettings.class);
+        return intent;
+    }
+    
     /**
      * Populate the activity with the top-level headers.
      */
