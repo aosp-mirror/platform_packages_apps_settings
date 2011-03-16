@@ -150,14 +150,12 @@
     <string name="proxy_port_label" msgid="5655276502233453400">"درگاه پروکسی"</string>
     <!-- no translation found for proxy_port_hint (56832878488386205) -->
     <skip />
-    <!-- outdated translation 4287056510182845203 -->     <string name="proxy_exclusionlist_label" msgid="7700491504623418701">"فاقد پروکسی برای"</string>
-    <!-- no translation found for proxy_exclusionlist_hint (6084099226687226948) -->
-    <skip />
+    <string name="proxy_exclusionlist_label" msgid="7700491504623418701">"پروکسی Bypass برای"</string>
+    <string name="proxy_exclusionlist_hint" msgid="6084099226687226948">"example.com,mycomp.test.com,localhost"</string>
     <string name="proxy_defaultView_text" msgid="6387985519141433291">"بازیابی موارد پیش فرض"</string>
     <string name="proxy_action_text" msgid="2957063145357903951">"انجام شد"</string>
     <string name="proxy_hostname_label" msgid="8490171412999373362">"نام میزبان پروکسی"</string>
-    <!-- no translation found for proxy_hostname_hint (2076157057003936176) -->
-    <skip />
+    <string name="proxy_hostname_hint" msgid="2076157057003936176">"proxy.example.com"</string>
     <string name="proxy_error" msgid="8926675299638611451">"توجه"</string>
     <string name="proxy_error_dismiss" msgid="4993171795485460060">"تأیید"</string>
     <string name="proxy_error_invalid_host" msgid="9120776460063182119">"نام میزبانی که وارد کرده اید معتبر نیست."</string>
@@ -298,11 +296,9 @@
     <string name="crypt_keeper_final_desc" product="tablet" msgid="2496639211575162172">"رایانه لوحی رمزگذاری شود؟ این عملیات غیر قابل بازگشت است و در صورت ایجاد وقفه در آن، داده های خود را از دست خواهید داد. رمزگذاری یک ساعت یا بیشتر طول می کشد که در طول آن، رایانه لوحی چندین بار راه اندازی مجدد می شود."</string>
     <string name="crypt_keeper_final_desc" product="default" msgid="3248595818246515395">"تلفن رمزگذاری شود؟ این عملیات غیر قابل بازگشت است و در صورت ایجاد وقفه در آن، داده های خود را از دست خواهید داد. رمزگذاری یک ساعت یا بیشتر طول می کشد که در طول آن، تلفن چندین بار راه اندازی مجدد می شود."</string>
     <string name="crypt_keeper_setup_title" msgid="1783951453124244969">"رمزگذاری"</string>
-    <!-- no translation found for crypt_keeper_setup_description (5317479293244660361) -->
-    <skip />
-    <!-- no translation found for crypt_keeper_setup_description (8166730416836285875) -->
-    <skip />
-    <!-- outdated translation 6736063610343230255 -->     <string name="crypt_keeper_cooldown" msgid="685210918307862395">"بعد از ^1 ثانیه دوباره امتحان کنید."</string>
+    <string name="crypt_keeper_setup_description" product="tablet" msgid="5317479293244660361">"لطفاً هنگام رمزگذاری رایانه لوحی خود، منتظر بمانید. <xliff:g id="PERCENT">^1</xliff:g>% کامل شد."</string>
+    <string name="crypt_keeper_setup_description" product="default" msgid="8166730416836285875">"لطفاً هنگام رمزگذاری گوشی خود، منتظر بمانید. <xliff:g id="PERCENT">^1</xliff:g>% کامل شد."</string>
+    <string name="crypt_keeper_cooldown" msgid="685210918307862395">"پس از <xliff:g id="DELAY">^1</xliff:g> ثانیه دوباره امتحان کنید."</string>
     <string name="crypt_keeper_enter_password" msgid="1492603008983893532">"رمز ورود خود را وارد کنید"</string>
     <string name="crypt_keeper_failed_title" msgid="1166918236711686187">"رمزگذاری انجام نشد"</string>
     <string name="crypt_keeper_failed_summary" product="tablet" msgid="1075638996134310507">"رمزگذاری متوقف شده و امکان تکمیل آن وجود ندارد. قبل از ادامه استفاده از رایانه لوحی باید یک عملیات بازنشانی به داده های کارخانه انجام دهید (کلیه داده های شما حذف می شود). پس از اینکه بازنشانی کامل شد می توانید رایانه لوحی خود را دوباره رمزگذاری کنید."</string>
@@ -314,7 +310,7 @@
     <string name="unlock_set_unlock_launch_picker_enable_summary" msgid="4791110798817242301">"روشی برای قفل کردن صفحه نمایش انتخاب کنید"</string>
     <string name="unlock_set_unlock_off_title" msgid="1613932765246180079">"خاموش"</string>
     <string name="unlock_set_unlock_off_summary" msgid="2791013557563587655">"هرگز صفحه قفل نشود"</string>
-    <!-- outdated translation 6897899776351307938 -->     <string name="unlock_set_unlock_none_title" msgid="7560817055143323842">"هیچکدام"</string>
+    <string name="unlock_set_unlock_none_title" msgid="7560817055143323842">"بدون امنیت"</string>
     <string name="unlock_set_unlock_none_summary" msgid="2609139908913114644">"برای باز کردن صفحه به الگو، پین یا رمز عبور نیازی نیست"</string>
     <string name="unlock_set_unlock_pattern_title" msgid="2912067603917311700">"الگو"</string>
     <string name="unlock_set_unlock_pattern_summary" msgid="8467282436608077882">"برای باز کردن قفل صفحه یک الگو لازم است"</string>
@@ -324,7 +320,7 @@
     <string name="unlock_set_unlock_password_summary" msgid="7871968012198279034">"برای باز کردن قفل صفحه یک رمز ورود لازم است"</string>
     <string name="unlock_set_unlock_disabled_summary" msgid="8563103042330816018">"توسط سرپرست سیستم یا خط مشی رمزگذاری غیر فعال شده است"</string>
     <string name="unlock_set_unlock_mode_off" msgid="378729687629105388">"خاموش"</string>
-    <!-- outdated translation 7953821968316697309 -->     <string name="unlock_set_unlock_mode_none" msgid="7137296704741184239">"ناامن"</string>
+    <string name="unlock_set_unlock_mode_none" msgid="7137296704741184239">"عدم وجود امنیت"</string>
     <string name="unlock_set_unlock_mode_pattern" msgid="464022606293547390">"ایمن شده با الگو"</string>
     <string name="unlock_set_unlock_mode_pin" msgid="1379365142708807163">"محافظت شده با پین"</string>
     <string name="unlock_set_unlock_mode_password" msgid="6955742995327081060">"ایمن شده با رمز ورود"</string>
@@ -415,16 +411,13 @@
     <string name="bluetooth_profile_headset" msgid="81844079120986198">"هندزفری"</string>
     <string name="bluetooth_profile_opp" msgid="3799470046565284440">"انتقال"</string>
     <string name="bluetooth_profile_hid" msgid="3000858580917633478">"دستگاه ورودی"</string>
-    <!-- outdated translation 5679493013173658268 -->     <string name="bluetooth_profile_pan" msgid="3391606497945147673">"اتصال به اینترنت با تلفن همراه"</string>
+    <string name="bluetooth_profile_pan" msgid="3391606497945147673">"دسترسی به اینترنت"</string>
     <string name="bluetooth_disconnect_a2dp_profile" msgid="3524648279150937177">"اتصال <xliff:g id="DEVICE_NAME">%1$s</xliff:g> از صدای رسانه قطع می شود."</string>
     <string name="bluetooth_disconnect_headset_profile" msgid="8635908811168780720">"اتصال <xliff:g id="DEVICE_NAME">%1$s</xliff:g> از صدای هندزفری قطع می شود."</string>
     <string name="bluetooth_disconnect_hid_profile" msgid="3282295189719352075">"اتصال <xliff:g id="DEVICE_NAME">%1$s</xliff:g> از دستگاه ورودی قطع می شود."</string>
-    <!-- no translation found for bluetooth_disconnect_pan_user_profile (8037627994382458698) -->
-    <skip />
-    <!-- no translation found for bluetooth_disconnect_pan_nap_profile (5455448395850929200) -->
-    <skip />
-    <!-- no translation found for bluetooth_disconnect_pan_nap_profile (5266851881175033601) -->
-    <skip />
+    <string name="bluetooth_disconnect_pan_user_profile" msgid="8037627994382458698">"دسترسی به اینترنت از طریق <xliff:g id="DEVICE_NAME">%1$s</xliff:g> قطع خواهد شد."</string>
+    <string name="bluetooth_disconnect_pan_nap_profile" product="tablet" msgid="5455448395850929200">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> از اشتراک گذاری اتصال اینترنتی این رایانه لوحی قطع خواهد شد."</string>
+    <string name="bluetooth_disconnect_pan_nap_profile" product="default" msgid="5266851881175033601">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> از اشتراک گذاری اتصال اینترنتی این تلفن قطع خواهد شد."</string>
     <string name="bluetooth_device_advanced_title" msgid="528816860793581131">"گزینه های <xliff:g id="DEVICE_NAME">%1$s</xliff:g>"</string>
     <string name="bluetooth_device_advanced_device_actions_title" msgid="3793430949811946844">"عملکردهای دستگاه"</string>
     <string name="bluetooth_device_advanced_online_mode_title" msgid="3689050071425683114">"اتصال"</string>
@@ -437,10 +430,8 @@
     <string name="bluetooth_opp_profile_summary_connected" msgid="2611913495968309066">"به سرور انتقال فایل متصل شد"</string>
     <string name="bluetooth_opp_profile_summary_not_connected" msgid="1267091356089086285">"به سرور انتقال فایل متصل نیست"</string>
     <string name="bluetooth_hid_profile_summary_connected" msgid="3381760054215168689">"به دستگاه ورودی متصل شد"</string>
-    <!-- no translation found for bluetooth_pan_user_profile_summary_connected (4602294638909590612) -->
-    <skip />
-    <!-- no translation found for bluetooth_pan_nap_profile_summary_connected (1561383706411975199) -->
-    <skip />
+    <string name="bluetooth_pan_user_profile_summary_connected" msgid="4602294638909590612">"برای دسترسی به اینترنت، به دستگاه متصل شد"</string>
+    <string name="bluetooth_pan_nap_profile_summary_connected" msgid="1561383706411975199">"اشتراک گذاری اتصال اینترنت محلی با دستگاه"</string>
     <string name="bluetooth_a2dp_profile_summary_use_for" msgid="4630849022250168427">"استفاده برای رسانه صوتی"</string>
     <string name="bluetooth_headset_profile_summary_use_for" msgid="8705753622443862627">"استفاده برای تلفن صوتی"</string>
     <string name="bluetooth_opp_profile_summary_use_for" msgid="1255674547144769756">"استفاده برای انتقال فایل"</string>
@@ -468,8 +459,7 @@
     <string name="wifi_notify_open_networks_summary" msgid="3038290727701553612">"هنگام در دسترس بودن یک شبکه باز، به من اعلام شود"</string>
     <string name="wifi_setting_sleep_policy_title" msgid="2256739245628081979">"خط مشی قطع اتصال Wi-Fi"</string>
     <string name="wifi_setting_sleep_policy_summary" msgid="7573693311804602041">"زمان جابجایی Wi-Fi به داده تلفن همراه را مشخص کنید"</string>
-    <!-- no translation found for wifi_setting_sleep_policy_summary_wifi_only (5025244230722670496) -->
-    <skip />
+    <string name="wifi_setting_sleep_policy_summary_wifi_only" msgid="5025244230722670496">"تعیین زمان قطع اتصال از Wi-Fi"</string>
     <string name="wifi_setting_sleep_policy_error" msgid="8174902072673071961">"هنگام تغییر تنظیمات مشکلی رخ داد"</string>
     <string name="wifi_add_network" msgid="1671334951296205616">"افزودن شبکه Wi-Fi"</string>
     <string name="wifi_access_points" msgid="2664629396767022441">"شبکه های Wi-Fi"</string>
@@ -675,8 +665,7 @@
     <string name="status_operator" msgid="2274875196954742087">"شبکه"</string>
     <string name="status_wifi_mac_address" msgid="33109409206264790">"آدرس Wi-Fi MAC"</string>
     <string name="status_bt_address" msgid="4195174192087439720">"آدرس بلوتوث"</string>
-    <!-- no translation found for status_serial_number (2257111183374628137) -->
-    <skip />
+    <string name="status_serial_number" msgid="2257111183374628137">"شماره سریال"</string>
     <string name="status_unavailable" msgid="7862009036663793314">"در دسترس نیست"</string>
     <string name="status_up_time" msgid="7294859476816760399">"زمان فعالیت"</string>
     <string name="status_awake_time" msgid="2393949909051183652">"زمان بیداری"</string>
@@ -759,8 +748,8 @@
     <string name="master_clear_title" msgid="5907939616087039756">"بازنشانی به داده های کارخانه"</string>
     <string name="master_clear_summary" product="tablet" msgid="4036344100254678429">"پاک کردن تمام داده های موجود در رایانه لوحی"</string>
     <string name="master_clear_summary" product="default" msgid="4986154238001088492">"پاک کردن تمام داده های موجود در گوشی"</string>
-    <!-- outdated translation 6121706363551361209 -->     <string name="master_clear_desc" product="tablet" msgid="590799767511283567">"با این کار همه اطلاعات "<b>"حافظه داخلی"</b>" رایانه لوحی شما پاک می شود، از جمله:"\n\n<li>"حساب Google شما"</li>\n<li>"سیستم و داده های برنامه و تنظیمات"</li>\n<li>"برنامه های دانلود شده"</li></string>
-    <!-- outdated translation 6121706363551361209 -->     <string name="master_clear_desc" product="default" msgid="3251400937758241249">"با این کار همه اطلاعات "<b>"حافظه داخلی"</b>" رایانه لوحی شما پاک می شود، از جمله:"\n\n<li>"حساب Google شما"</li>\n<li>"سیستم و داده های برنامه و تنظیمات"</li>\n<li>"برنامه های دانلود شده"</li></string>
+    <string name="master_clear_desc" product="tablet" msgid="590799767511283567">"با این کار همه داده های "<b>"حافظه داخلی"</b>" رایانه لوحی شما پاک می شود، از جمله:"\n\n<li>"حساب Google شما"</li>\n<li>"تنظیمات و داده های سیستم و برنامه"</li>\n<li>"برنامه های دانلود شده"</li></string>
+    <string name="master_clear_desc" product="default" msgid="3251400937758241249">"با این کار همه داده های "<b>"حافظه داخلی"</b>" گوشی شما پاک می شود، از جمله:"\n\n<li>"حساب Google شما"</li>\n<li>"تنظیمات و داده های سیستم و برنامه"</li>\n<li>"برنامه های دانلود شده"</li></string>
     <string name="master_clear_accounts" product="default" msgid="6412857499147999073">\n\n"شما در حال حاضر به حساب های زیر وارد شده اید:"\n</string>
     <string name="master_clear_desc_also_erases_external" msgid="1903185203791274237"><li>"موسیقی"</li>\n<li>"عکس ها"</li>\n<li>"سایر اطلاعات کاربر"</li></string>
     <string name="master_clear_desc_erase_external_storage" product="nosdcard" msgid="4740866328425123395">\n\n"برای پاک کردن موسیقی، عکس ها و سایر داده های کاربر، "<b>"حافظه USB"</b>" باید پاک شود."</string>
@@ -818,18 +807,14 @@
     <string name="usb_tethering_unavailable_subtext" msgid="1044622421184007254">"USB متصل نیست"</string>
     <string name="usb_tethering_errored_subtext" msgid="1377574819427841992">"خطای اتصال داده با سیم USB"</string>
     <string name="bluetooth_tether_checkbox_text" msgid="2379175828878753652">"اتصال اینترنت با تلفن همراه بلوتوث"</string>
-    <!-- outdated translation 8573646018168088420 -->     <string name="bluetooth_tethering_available_subtext" product="tablet" msgid="8811610320942954709">"اتصال اینترنت با بلوتوث تلفن همراه روشن است اما متصل نیست"</string>
-    <!-- outdated translation 8573646018168088420 -->     <string name="bluetooth_tethering_available_subtext" product="default" msgid="4229220575771946723">"اتصال اینترنت با بلوتوث تلفن همراه روشن است اما متصل نیست"</string>
-    <!-- no translation found for bluetooth_tethering_device_connected_subtext (2730938191906597896) -->
-    <skip />
-    <!-- no translation found for bluetooth_tethering_device_connected_subtext (1666736165420290466) -->
-    <skip />
-    <!-- no translation found for bluetooth_tethering_devices_connected_subtext (1180765608259580143) -->
-    <skip />
-    <!-- no translation found for bluetooth_tethering_devices_connected_subtext (8248942539362173005) -->
-    <skip />
-    <!-- outdated translation 4833146084600940242 -->     <string name="bluetooth_tethering_off_subtext" product="tablet" msgid="2093881379028235555">"اتصال اینترنت با بلوتوث تلفن همراه خاموش"</string>
-    <!-- outdated translation 4833146084600940242 -->     <string name="bluetooth_tethering_off_subtext" product="default" msgid="706860924389041342">"اتصال اینترنت با بلوتوث تلفن همراه خاموش"</string>
+    <string name="bluetooth_tethering_available_subtext" product="tablet" msgid="8811610320942954709">"اشتراک گذاری اتصال اینترنتی این رایانه لوحی"</string>
+    <string name="bluetooth_tethering_available_subtext" product="default" msgid="4229220575771946723">"اشتراک گذاری اتصال اینترنتی این تلفن"</string>
+    <string name="bluetooth_tethering_device_connected_subtext" product="tablet" msgid="2730938191906597896">"اشتراک گذاری اتصال اینترنتی این رایانه لوحی با 1 دستگاه"</string>
+    <string name="bluetooth_tethering_device_connected_subtext" product="default" msgid="1666736165420290466">"اشتراک گذاری اتصال اینترنتی این تلفن با 1 دستگاه"</string>
+    <string name="bluetooth_tethering_devices_connected_subtext" product="tablet" msgid="1180765608259580143">"اشتراک گذاری اتصال اینترنتی این رایانه لوحی با <xliff:g id="CONNECTEDDEVICECOUNT">%1$d</xliff:g> دستگاه"</string>
+    <string name="bluetooth_tethering_devices_connected_subtext" product="default" msgid="8248942539362173005">"اشتراک گذاری اتصال اینترنتی این تلفن با <xliff:g id="CONNECTEDDEVICECOUNT">%1$d</xliff:g> دستگاه"</string>
+    <string name="bluetooth_tethering_off_subtext" product="tablet" msgid="2093881379028235555">"اتصال اینترنتی این رایانه لوحی پشتیبانی نمی شود"</string>
+    <string name="bluetooth_tethering_off_subtext" product="default" msgid="706860924389041342">"اتصال اینترنتی این تلفن اشتراک گذاری نمی شود"</string>
     <string name="bluetooth_tethering_errored_subtext" msgid="1344187103463073993">"خطای اتصال اینترنت با تلفن همراه بلوتوث"</string>
     <string name="bluetooth_tethering_overflow_error" msgid="2222060504731415763">"اتصال اینترنتی با تلفن همراه به بیش از <xliff:g id="MAXCONNECTION">%1$d</xliff:g> دستگاه امکان پذیر نیست"</string>
     <string name="bluetooth_untether_blank" msgid="2871192409329334813">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> از اتصال اینترنتی با تلفن همراه قطع می شود."</string>
@@ -1055,7 +1040,7 @@
     <string name="user_dict_settings_edit_dialog_title" msgid="8967476444840548674">"ویرایش کلمه"</string>
     <string name="user_dict_settings_context_menu_edit_title" msgid="2210564879320004837">"ویرایش"</string>
     <string name="user_dict_settings_context_menu_delete_title" msgid="9140703913776549054">"حذف"</string>
-    <!-- outdated translation 2359596356158452427 -->     <string name="user_dict_settings_empty_text" product="tablet" msgid="1766522102636921529">"هیچ کلمه ای را در فرهنگ لغت کاربر ندارید. از طریق منو می توانید یک کلمه را اضافه کنید."</string>
+    <string name="user_dict_settings_empty_text" product="tablet" msgid="1766522102636921529">"کلمه ای در فرهنگ لغت کاربر شما موجود نیست. می توانید با لمس کردن دکمه افزودن ( + ) یک کلمه را اضافه کنید."</string>
     <string name="user_dict_settings_empty_text" product="default" msgid="6209268025109242806">"هیچ کلمه ای را در فرهنگ لغت کاربر ندارید. از طریق منو می توانید یک کلمه را اضافه کنید."</string>
     <string name="testing" msgid="6584352735303604146">"تست کردن"</string>
     <string name="testing_phone_info" product="tablet" msgid="193561832258534798">"اطلاعات رایانه لوحی"</string>
@@ -1128,12 +1113,9 @@
     <string name="accessibility_power_button_category" msgid="8545885236482339928">"دکمه روشن/خاموش"</string>
     <string name="accessibility_power_button_ends_call" msgid="7698764194501089533">"دکمه روشن/خاموش به تماس پایان می دهد"</string>
     <string name="accessibility_power_button_ends_call_summary" msgid="8878097632186291462">"در حین تماس، بجای خاموش کردن صفحه، با فشار دادن دکمه روشن/خاموش، به تماس پایان داده می شود"</string>
-    <!-- no translation found for touchscreen_gestures_category (3109869155350859625) -->
-    <skip />
-    <!-- no translation found for long_press_timeout_selector_title (1396876537252863044) -->
-    <skip />
-    <!-- no translation found for long_press_timeout_selector_summary (2261114502740278996) -->
-    <skip />
+    <string name="touchscreen_gestures_category" msgid="3109869155350859625">"حرکات صفحه لمسی"</string>
+    <string name="long_press_timeout_selector_title" msgid="1396876537252863044">"تأخیر لمس کردن و نگه داشتن"</string>
+    <string name="long_press_timeout_selector_summary" msgid="2261114502740278996">"تأخیر تا زمانی که یک لمس به عنوان لمس تفسیر شود و نگه داشتن"</string>
     <string name="power_usage_summary_title" msgid="5180282911164282324">"استفاده از باتری"</string>
     <string name="power_usage_summary" msgid="7237084831082848168">"چه چیزی باتری را مصرف کرده است"</string>
     <string name="power_usage_not_available" msgid="3583407442633768046">"اطلاعات مصرف باتری موجود نیست"</string>
@@ -1459,9 +1441,8 @@
     <string name="service_busy" msgid="225227519012409130">"سرویس مشغول است، دوباره امتحان کنید"</string>
     <string name="delete" msgid="4219243412325163003">"حذف"</string>
     <string name="misc_files" msgid="6298643430106707497">"فایل های متفرقه"</string>
-    <!-- no translation found for misc_files_selected_count (4647048020823912088) -->
-    <skip />
-    <!-- no translation found for misc_files_selected_count_bytes (5603677358119178101) -->
+    <string name="misc_files_selected_count" msgid="4647048020823912088">"<xliff:g id="NUMBER">%1$d</xliff:g> مورد انتخاب شده از <xliff:g id="TOTAL">%2$d</xliff:g> مورد"</string>
+    <!-- no translation found for misc_files_selected_count_bytes (2876232009069114352) -->
     <skip />
     <string name="select_all" msgid="6783085295161532497">"انتخاب همه"</string>
 </resources>

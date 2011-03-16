@@ -150,14 +150,12 @@
     <string name="proxy_port_label" msgid="5655276502233453400">"Port proxy:"</string>
     <!-- no translation found for proxy_port_hint (56832878488386205) -->
     <skip />
-    <!-- outdated translation 4287056510182845203 -->     <string name="proxy_exclusionlist_label" msgid="7700491504623418701">"Nepoužívať server proxy na"</string>
-    <!-- no translation found for proxy_exclusionlist_hint (6084099226687226948) -->
-    <skip />
+    <string name="proxy_exclusionlist_label" msgid="7700491504623418701">"Nepoužívať server proxy pre"</string>
+    <string name="proxy_exclusionlist_hint" msgid="6084099226687226948">"example.com,mycomp.test.com,localhost"</string>
     <string name="proxy_defaultView_text" msgid="6387985519141433291">"Obnoviť predvolené nastavenia"</string>
     <string name="proxy_action_text" msgid="2957063145357903951">"Hotovo"</string>
     <string name="proxy_hostname_label" msgid="8490171412999373362">"Názov hostiteľa servera proxy"</string>
-    <!-- no translation found for proxy_hostname_hint (2076157057003936176) -->
-    <skip />
+    <string name="proxy_hostname_hint" msgid="2076157057003936176">"proxy.example.com"</string>
     <string name="proxy_error" msgid="8926675299638611451">"Pozor"</string>
     <string name="proxy_error_dismiss" msgid="4993171795485460060">"OK"</string>
     <string name="proxy_error_invalid_host" msgid="9120776460063182119">"Zadaný názov hostiteľa nie je platný."</string>
@@ -298,11 +296,9 @@
     <string name="crypt_keeper_final_desc" product="tablet" msgid="2496639211575162172">"Chcete tablet zašifrovať? Táto operácia je nevratná a ak ju prerušíte, prídete o údaje. Šifrovanie môže trvať viac ako hodinu. Tablet sa počas tejto doby niekoľkokrát reštartuje."</string>
     <string name="crypt_keeper_final_desc" product="default" msgid="3248595818246515395">"Chcete telefón zašifrovať? Táto operácia je nevratná a ak ju prerušíte, prídete o údaje. Šifrovanie môže trvať viac ako hodinu. Počas tejto doby sa telefón niekoľkokrát reštartuje."</string>
     <string name="crypt_keeper_setup_title" msgid="1783951453124244969">"Šifrovanie"</string>
-    <!-- no translation found for crypt_keeper_setup_description (5317479293244660361) -->
-    <skip />
-    <!-- no translation found for crypt_keeper_setup_description (8166730416836285875) -->
-    <skip />
-    <!-- outdated translation 6736063610343230255 -->     <string name="crypt_keeper_cooldown" msgid="685210918307862395">"Počet sekúnd zostávajúcich do ďalšieho pokusu: ^1."</string>
+    <string name="crypt_keeper_setup_description" product="tablet" msgid="5317479293244660361">"Čakajte, kým sa tablet zašifruje. Dokončené: <xliff:g id="PERCENT">^1</xliff:g> %"</string>
+    <string name="crypt_keeper_setup_description" product="default" msgid="8166730416836285875">"Čakajte, kým sa telefón zašifruje. Dokončené: <xliff:g id="PERCENT">^1</xliff:g> %"</string>
+    <string name="crypt_keeper_cooldown" msgid="685210918307862395">"Počet sekúnd zostávajúcich do ďalšieho pokusu: <xliff:g id="DELAY">^1</xliff:g>."</string>
     <string name="crypt_keeper_enter_password" msgid="1492603008983893532">"Zadajte svoje heslo"</string>
     <string name="crypt_keeper_failed_title" msgid="1166918236711686187">"Šifrovanie zlyhalo"</string>
     <string name="crypt_keeper_failed_summary" product="tablet" msgid="1075638996134310507">"Šifrovanie bolo prerušené a nedá sa dokončiť. Pred ďalším používaním tabletu musíte obnoviť továrenské nastavenia (vymažú sa všetky údaje). Po obnovení nastavení budete môcť tablet znova zašifrovať."</string>
@@ -314,7 +310,7 @@
     <string name="unlock_set_unlock_launch_picker_enable_summary" msgid="4791110798817242301">"Vyberte spôsob uzamknutia obrazovky"</string>
     <string name="unlock_set_unlock_off_title" msgid="1613932765246180079">"Vypnuté"</string>
     <string name="unlock_set_unlock_off_summary" msgid="2791013557563587655">"Nikdy nezamykať obrazovku"</string>
-    <!-- outdated translation 6897899776351307938 -->     <string name="unlock_set_unlock_none_title" msgid="7560817055143323842">"Žiadne"</string>
+    <string name="unlock_set_unlock_none_title" msgid="7560817055143323842">"Nezabezpečené"</string>
     <string name="unlock_set_unlock_none_summary" msgid="2609139908913114644">"Pri odomknutí nevyžadovať vzor, PIN ani heslo"</string>
     <string name="unlock_set_unlock_pattern_title" msgid="2912067603917311700">"Vzor"</string>
     <string name="unlock_set_unlock_pattern_summary" msgid="8467282436608077882">"Vyžadovať vzor na odomknutie obrazovky"</string>
@@ -324,7 +320,7 @@
     <string name="unlock_set_unlock_password_summary" msgid="7871968012198279034">"Požadovať heslo na odomknutie obrazovky"</string>
     <string name="unlock_set_unlock_disabled_summary" msgid="8563103042330816018">"Zakázané správcom alebo pravidlami šifrovania"</string>
     <string name="unlock_set_unlock_mode_off" msgid="378729687629105388">"Vypnuté"</string>
-    <!-- outdated translation 7953821968316697309 -->     <string name="unlock_set_unlock_mode_none" msgid="7137296704741184239">"Nezabezpečené"</string>
+    <string name="unlock_set_unlock_mode_none" msgid="7137296704741184239">"Bez zabezpečenia"</string>
     <string name="unlock_set_unlock_mode_pattern" msgid="464022606293547390">"Zabezpečené vzorom"</string>
     <string name="unlock_set_unlock_mode_pin" msgid="1379365142708807163">"Zabezpečené pomocou kódu PIN"</string>
     <string name="unlock_set_unlock_mode_password" msgid="6955742995327081060">"Zabezpečené heslom"</string>
@@ -415,16 +411,13 @@
     <string name="bluetooth_profile_headset" msgid="81844079120986198">"Handsfree"</string>
     <string name="bluetooth_profile_opp" msgid="3799470046565284440">"Prenos"</string>
     <string name="bluetooth_profile_hid" msgid="3000858580917633478">"Vstupné zariadenie"</string>
-    <!-- outdated translation 5679493013173658268 -->     <string name="bluetooth_profile_pan" msgid="3391606497945147673">"Zdieľanie dátového pripojenia"</string>
+    <string name="bluetooth_profile_pan" msgid="3391606497945147673">"Prístup na Internet"</string>
     <string name="bluetooth_disconnect_a2dp_profile" msgid="3524648279150937177">"Zariadenie <xliff:g id="DEVICE_NAME">%1$s</xliff:g> bude odpojené od zvukovej jednotky média."</string>
     <string name="bluetooth_disconnect_headset_profile" msgid="8635908811168780720">"Zariadenie <xliff:g id="DEVICE_NAME">%1$s</xliff:g> bude odpojené od zvukovej jednotky handsfree."</string>
     <string name="bluetooth_disconnect_hid_profile" msgid="3282295189719352075">"Profil <xliff:g id="DEVICE_NAME">%1$s</xliff:g> bude odpojený od vstupného zariadenia."</string>
-    <!-- no translation found for bluetooth_disconnect_pan_user_profile (8037627994382458698) -->
-    <skip />
-    <!-- no translation found for bluetooth_disconnect_pan_nap_profile (5455448395850929200) -->
-    <skip />
-    <!-- no translation found for bluetooth_disconnect_pan_nap_profile (5266851881175033601) -->
-    <skip />
+    <string name="bluetooth_disconnect_pan_user_profile" msgid="8037627994382458698">"Prístup na Internet prostredníctvom zariadenia <xliff:g id="DEVICE_NAME">%1$s</xliff:g> bude ukončený."</string>
+    <string name="bluetooth_disconnect_pan_nap_profile" product="tablet" msgid="5455448395850929200">"Zariadenie <xliff:g id="DEVICE_NAME">%1$s</xliff:g> prestane zdieľať internetové pripojenie tohto tabletu."</string>
+    <string name="bluetooth_disconnect_pan_nap_profile" product="default" msgid="5266851881175033601">"Zariadenie <xliff:g id="DEVICE_NAME">%1$s</xliff:g> prestane zdieľať internetové pripojenie tohto telefónu."</string>
     <string name="bluetooth_device_advanced_title" msgid="528816860793581131">"Možnosti zariadenia <xliff:g id="DEVICE_NAME">%1$s</xliff:g>"</string>
     <string name="bluetooth_device_advanced_device_actions_title" msgid="3793430949811946844">"Akcie zariadenia"</string>
     <string name="bluetooth_device_advanced_online_mode_title" msgid="3689050071425683114">"Pripojiť"</string>
@@ -437,10 +430,8 @@
     <string name="bluetooth_opp_profile_summary_connected" msgid="2611913495968309066">"Pripojené na server pre prenos údajov"</string>
     <string name="bluetooth_opp_profile_summary_not_connected" msgid="1267091356089086285">"Nepripojené k serveru pre prenos súborov"</string>
     <string name="bluetooth_hid_profile_summary_connected" msgid="3381760054215168689">"Pripojené na vstupné zariadenie"</string>
-    <!-- no translation found for bluetooth_pan_user_profile_summary_connected (4602294638909590612) -->
-    <skip />
-    <!-- no translation found for bluetooth_pan_nap_profile_summary_connected (1561383706411975199) -->
-    <skip />
+    <string name="bluetooth_pan_user_profile_summary_connected" msgid="4602294638909590612">"Pripoj. k zariad. s príst. na Internet"</string>
+    <string name="bluetooth_pan_nap_profile_summary_connected" msgid="1561383706411975199">"Zdieľa miestne internet. pripoj. so zariad"</string>
     <string name="bluetooth_a2dp_profile_summary_use_for" msgid="4630849022250168427">"Umožňuje pripojenie zvukového média"</string>
     <string name="bluetooth_headset_profile_summary_use_for" msgid="8705753622443862627">"Použiť pre zvuk telefónu"</string>
     <string name="bluetooth_opp_profile_summary_use_for" msgid="1255674547144769756">"Použiť na prenos súborov"</string>
@@ -468,8 +459,7 @@
     <string name="wifi_notify_open_networks_summary" msgid="3038290727701553612">"Oznamovať dostupné nezabezpečené siete"</string>
     <string name="wifi_setting_sleep_policy_title" msgid="2256739245628081979">"Pravidlá odpojenia siete Wi-Fi"</string>
     <string name="wifi_setting_sleep_policy_summary" msgid="7573693311804602041">"Určiť, kedy prepnúť zo siete Wi-Fi na mobilný prenos údajov"</string>
-    <!-- no translation found for wifi_setting_sleep_policy_summary_wifi_only (5025244230722670496) -->
-    <skip />
+    <string name="wifi_setting_sleep_policy_summary_wifi_only" msgid="5025244230722670496">"Určte, kedy odpojiť od siete Wi-Fi"</string>
     <string name="wifi_setting_sleep_policy_error" msgid="8174902072673071961">"Pri zmene nastavení sa vyskytol problém"</string>
     <string name="wifi_add_network" msgid="1671334951296205616">"Pridať sieť Wi-Fi"</string>
     <string name="wifi_access_points" msgid="2664629396767022441">"Siete Wi-Fi"</string>
@@ -675,8 +665,7 @@
     <string name="status_operator" msgid="2274875196954742087">"Sieť"</string>
     <string name="status_wifi_mac_address" msgid="33109409206264790">"Adresa MAC siete Wi-Fi"</string>
     <string name="status_bt_address" msgid="4195174192087439720">"Adresa zariadenia Bluetooth"</string>
-    <!-- no translation found for status_serial_number (2257111183374628137) -->
-    <skip />
+    <string name="status_serial_number" msgid="2257111183374628137">"Sériové číslo"</string>
     <string name="status_unavailable" msgid="7862009036663793314">"Nie sú k dispozícii"</string>
     <string name="status_up_time" msgid="7294859476816760399">"Doba prevádzky"</string>
     <string name="status_awake_time" msgid="2393949909051183652">"Doba prevádzky"</string>
@@ -759,8 +748,8 @@
     <string name="master_clear_title" msgid="5907939616087039756">"Obnovenie továrenských nastavení"</string>
     <string name="master_clear_summary" product="tablet" msgid="4036344100254678429">"Vymaže všetky údaje v tablete"</string>
     <string name="master_clear_summary" product="default" msgid="4986154238001088492">"Vymaže všetky údaje v telefóne"</string>
-    <!-- outdated translation 6121706363551361209 -->     <string name="master_clear_desc" product="tablet" msgid="590799767511283567">"Táto operácia vymaže všetky údaje v "<b>"internom ukladacom priestore"</b>" tabletu vrátane:"\n\n<li>"účtu Google,"</li>\n<li>"údajov a nastavení systému a aplikácií,"</li>\n<li>"prevzatých aplikácií."</li></string>
-    <!-- outdated translation 6121706363551361209 -->     <string name="master_clear_desc" product="default" msgid="3251400937758241249">"Táto operácia vymaže všetky údaje v "<b>"internom ukladacom priestore"</b>" tabletu vrátane:"\n\n<li>"účtu Google,"</li>\n<li>"údajov a nastavení systému a aplikácií,"</li>\n<li>"prevzatých aplikácií."</li></string>
+    <string name="master_clear_desc" product="tablet" msgid="590799767511283567">"Táto operácia vymaže všetky údaje v "<b>"internom ukladacom priestore"</b>" tabletu, vrátane:"\n\n<li>"účtu Google,"</li>\n<li>"údajov a nastavení systému a aplikácií,"</li>\n<li>"prevzatých aplikácií."</li></string>
+    <string name="master_clear_desc" product="default" msgid="3251400937758241249">"Táto operácia vymaže všetky údaje v "<b>"internom ukladacom priestore"</b>" telefónu, vrátane:"\n\n<li>"účtu Google,"</li>\n<li>"údajov a nastavení systému a aplikácií,"</li>\n<li>"prevzatých aplikácií."</li></string>
     <string name="master_clear_accounts" product="default" msgid="6412857499147999073">\n\n"Aktuálne ste prihlásení do nasledujúcich účtov:"\n</string>
     <string name="master_clear_desc_also_erases_external" msgid="1903185203791274237"><li>"Hudba"</li>\n<li>"Fotografie"</li>\n<li>"Iné používateľské údaje"</li></string>
     <string name="master_clear_desc_erase_external_storage" product="nosdcard" msgid="4740866328425123395">\n\n"Ak chcete vymazať aj hudbu, obrázky a ďalšie používateľské údaje, musíte vymazať "<b>"ukladací priestor USB"</b>"."</string>
@@ -818,18 +807,14 @@
     <string name="usb_tethering_unavailable_subtext" msgid="1044622421184007254">"Pripojenie USB nie je k dispozícii"</string>
     <string name="usb_tethering_errored_subtext" msgid="1377574819427841992">"Chyba zdieľania dátového pripojenia prostredníctvom USB"</string>
     <string name="bluetooth_tether_checkbox_text" msgid="2379175828878753652">"Zdieľanie dát. pripoj. cez Bluetooth"</string>
-    <!-- outdated translation 8573646018168088420 -->     <string name="bluetooth_tethering_available_subtext" product="tablet" msgid="8811610320942954709">"Zdieľanie dátového pripojenia cez Bluetooth je zapnuté, ale nie pripojené."</string>
-    <!-- outdated translation 8573646018168088420 -->     <string name="bluetooth_tethering_available_subtext" product="default" msgid="4229220575771946723">"Zdieľanie dátového pripojenia cez Bluetooth je zapnuté, ale nie pripojené."</string>
-    <!-- no translation found for bluetooth_tethering_device_connected_subtext (2730938191906597896) -->
-    <skip />
-    <!-- no translation found for bluetooth_tethering_device_connected_subtext (1666736165420290466) -->
-    <skip />
-    <!-- no translation found for bluetooth_tethering_devices_connected_subtext (1180765608259580143) -->
-    <skip />
-    <!-- no translation found for bluetooth_tethering_devices_connected_subtext (8248942539362173005) -->
-    <skip />
-    <!-- outdated translation 4833146084600940242 -->     <string name="bluetooth_tethering_off_subtext" product="tablet" msgid="2093881379028235555">"Zdieľanie dátového pripojenia cez Bluetooth bolo deaktivované"</string>
-    <!-- outdated translation 4833146084600940242 -->     <string name="bluetooth_tethering_off_subtext" product="default" msgid="706860924389041342">"Zdieľanie dátového pripojenia cez Bluetooth bolo deaktivované"</string>
+    <string name="bluetooth_tethering_available_subtext" product="tablet" msgid="8811610320942954709">"Zdieľa internetové pripojenie tohto tabletu"</string>
+    <string name="bluetooth_tethering_available_subtext" product="default" msgid="4229220575771946723">"Zdieľa internetové pripojenie tohto telefónu"</string>
+    <string name="bluetooth_tethering_device_connected_subtext" product="tablet" msgid="2730938191906597896">"Internetové pripojenie tabletu zdieľa jedno zariadenie"</string>
+    <string name="bluetooth_tethering_device_connected_subtext" product="default" msgid="1666736165420290466">"Internetové pripojenie telefónu zdieľa jedno zariadenie"</string>
+    <string name="bluetooth_tethering_devices_connected_subtext" product="tablet" msgid="1180765608259580143">"Zariadenia zdieľajúce internetové pripojenie tabletu (<xliff:g id="CONNECTEDDEVICECOUNT">%1$d</xliff:g>)"</string>
+    <string name="bluetooth_tethering_devices_connected_subtext" product="default" msgid="8248942539362173005">"Zariadenia zdieľajúce internetové pripojenie telefónu: <xliff:g id="CONNECTEDDEVICECOUNT">%1$d</xliff:g>"</string>
+    <string name="bluetooth_tethering_off_subtext" product="tablet" msgid="2093881379028235555">"Nezdieľa internetové pripojenie tohto tabletu"</string>
+    <string name="bluetooth_tethering_off_subtext" product="default" msgid="706860924389041342">"Nezdieľa internetové pripojenie tohto telefónu"</string>
     <string name="bluetooth_tethering_errored_subtext" msgid="1344187103463073993">"Chyba pri zdieľ. dátového pripojenia cez Bluetooth"</string>
     <string name="bluetooth_tethering_overflow_error" msgid="2222060504731415763">"Max. počet zariad. na zdieľ. dát. pripoj.: <xliff:g id="MAXCONNECTION">%1$d</xliff:g>"</string>
     <string name="bluetooth_untether_blank" msgid="2871192409329334813">"Ukončí sa zdieľané dát. pripojenie zariad. <xliff:g id="DEVICE_NAME">%1$s</xliff:g>."</string>
@@ -1055,7 +1040,7 @@
     <string name="user_dict_settings_edit_dialog_title" msgid="8967476444840548674">"Upraviť slovo"</string>
     <string name="user_dict_settings_context_menu_edit_title" msgid="2210564879320004837">"Upraviť"</string>
     <string name="user_dict_settings_context_menu_delete_title" msgid="9140703913776549054">"Odstrániť"</string>
-    <!-- outdated translation 2359596356158452427 -->     <string name="user_dict_settings_empty_text" product="tablet" msgid="1766522102636921529">"V používateľskom slovníku nie sú žiadne slová. Slovo môžete pridať pomocou ponuky."</string>
+    <string name="user_dict_settings_empty_text" product="tablet" msgid="1766522102636921529">"V používateľskom slovníku nie sú žiadne slová. Slovo môžete pridať dotknutím sa tlačidla Pridať ( + )."</string>
     <string name="user_dict_settings_empty_text" product="default" msgid="6209268025109242806">"V používateľskom slovníku nie sú žiadne slová. Slovo môžete pridať pomocou ponuky."</string>
     <string name="testing" msgid="6584352735303604146">"Testovanie"</string>
     <string name="testing_phone_info" product="tablet" msgid="193561832258534798">"Informácie o tablete"</string>
@@ -1128,12 +1113,9 @@
     <string name="accessibility_power_button_category" msgid="8545885236482339928">"Tlačidlo Napájanie"</string>
     <string name="accessibility_power_button_ends_call" msgid="7698764194501089533">"Tlačidlo Napájanie ukončuje hovor"</string>
     <string name="accessibility_power_button_ends_call_summary" msgid="8878097632186291462">"Stlačenie tlačidla Napájanie počas hovoru namiesto vypnutia obrazovky ukončí hovor"</string>
-    <!-- no translation found for touchscreen_gestures_category (3109869155350859625) -->
-    <skip />
-    <!-- no translation found for long_press_timeout_selector_title (1396876537252863044) -->
-    <skip />
-    <!-- no translation found for long_press_timeout_selector_summary (2261114502740278996) -->
-    <skip />
+    <string name="touchscreen_gestures_category" msgid="3109869155350859625">"Gestá dotykovej obrazovky"</string>
+    <string name="long_press_timeout_selector_title" msgid="1396876537252863044">"Doba dotyku a podržania"</string>
+    <string name="long_press_timeout_selector_summary" msgid="2261114502740278996">"Doba, po ktorej sa dotyk interpretuje ako dotyk a následné podržanie"</string>
     <string name="power_usage_summary_title" msgid="5180282911164282324">"Využitie batérie"</string>
     <string name="power_usage_summary" msgid="7237084831082848168">"Čo využíva batériu"</string>
     <string name="power_usage_not_available" msgid="3583407442633768046">"Údaje o spotrebe sú nedostup."</string>
@@ -1459,9 +1441,8 @@
     <string name="service_busy" msgid="225227519012409130">"Služba je zaneprázdnená, skúste to znova"</string>
     <string name="delete" msgid="4219243412325163003">"Odstrániť"</string>
     <string name="misc_files" msgid="6298643430106707497">"Rôzne súbory"</string>
-    <!-- no translation found for misc_files_selected_count (4647048020823912088) -->
-    <skip />
-    <!-- no translation found for misc_files_selected_count_bytes (5603677358119178101) -->
+    <string name="misc_files_selected_count" msgid="4647048020823912088">"vybraté: <xliff:g id="NUMBER">%1$d</xliff:g> z <xliff:g id="TOTAL">%2$d</xliff:g>"</string>
+    <!-- no translation found for misc_files_selected_count_bytes (2876232009069114352) -->
     <skip />
     <string name="select_all" msgid="6783085295161532497">"Vybrať všetko"</string>
 </resources>
