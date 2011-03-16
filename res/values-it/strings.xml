@@ -150,14 +150,12 @@
     <string name="proxy_port_label" msgid="5655276502233453400">"Porta proxy"</string>
     <!-- no translation found for proxy_port_hint (56832878488386205) -->
     <skip />
-    <!-- outdated translation 4287056510182845203 -->     <string name="proxy_exclusionlist_label" msgid="7700491504623418701">"Nessun proxy per"</string>
-    <!-- no translation found for proxy_exclusionlist_hint (6084099226687226948) -->
-    <skip />
+    <string name="proxy_exclusionlist_label" msgid="7700491504623418701">"Ignora proxy per"</string>
+    <string name="proxy_exclusionlist_hint" msgid="6084099226687226948">"example.com,mycomp.test.com,localhost"</string>
     <string name="proxy_defaultView_text" msgid="6387985519141433291">"Ripristina predefinite"</string>
     <string name="proxy_action_text" msgid="2957063145357903951">"Fine"</string>
     <string name="proxy_hostname_label" msgid="8490171412999373362">"Hostname proxy"</string>
-    <!-- no translation found for proxy_hostname_hint (2076157057003936176) -->
-    <skip />
+    <string name="proxy_hostname_hint" msgid="2076157057003936176">"proxy.example.com"</string>
     <string name="proxy_error" msgid="8926675299638611451">"Attenzione"</string>
     <string name="proxy_error_dismiss" msgid="4993171795485460060">"OK"</string>
     <string name="proxy_error_invalid_host" msgid="9120776460063182119">"Il nome host specificato non è valido."</string>
@@ -298,11 +296,9 @@
     <string name="crypt_keeper_final_desc" product="tablet" msgid="2496639211575162172">"Eseguire la crittografia del tablet? Questa operazione non è reversibile e la sua interruzione causerà la perdita di dati. La crittografia richiede almeno un\'ora, durante la quale il tablet verrà riavviato diverse volte."</string>
     <string name="crypt_keeper_final_desc" product="default" msgid="3248595818246515395">"Eseguire la crittografia del telefono? Questa operazione non è reversibile e la sua interruzione causerà la perdita di dati. La crittografia richiede almeno un\'ora, durante la quale il telefono verrà riavviato diverse volte."</string>
     <string name="crypt_keeper_setup_title" msgid="1783951453124244969">"Crittografia"</string>
-    <!-- no translation found for crypt_keeper_setup_description (5317479293244660361) -->
-    <skip />
-    <!-- no translation found for crypt_keeper_setup_description (8166730416836285875) -->
-    <skip />
-    <!-- outdated translation 6736063610343230255 -->     <string name="crypt_keeper_cooldown" msgid="685210918307862395">"Riprova fra ^1 secondi."</string>
+    <string name="crypt_keeper_setup_description" product="tablet" msgid="5317479293244660361">"Attendi mentre il tablet viene crittografato. <xliff:g id="PERCENT">^1</xliff:g>% completato."</string>
+    <string name="crypt_keeper_setup_description" product="default" msgid="8166730416836285875">"Attendi mentre il telefono viene crittografato. <xliff:g id="PERCENT">^1</xliff:g>% completato."</string>
+    <string name="crypt_keeper_cooldown" msgid="685210918307862395">"Riprova tra <xliff:g id="DELAY">^1</xliff:g> secondi."</string>
     <string name="crypt_keeper_enter_password" msgid="1492603008983893532">"Inserisci la password"</string>
     <string name="crypt_keeper_failed_title" msgid="1166918236711686187">"Crittografia non riuscita"</string>
     <string name="crypt_keeper_failed_summary" product="tablet" msgid="1075638996134310507">"La crittografia è stata interrotta e non è possibile completarla. Devi eseguire un ripristino dati di fabbrica (cancellando tutti i tuoi dati) per poter riprendere a utilizzare il tablet. Puoi provare a crittografare di nuovo il tablet al termine del ripristino."</string>
@@ -314,7 +310,7 @@
     <string name="unlock_set_unlock_launch_picker_enable_summary" msgid="4791110798817242301">"Scegli un metodo per bloccare lo schermo"</string>
     <string name="unlock_set_unlock_off_title" msgid="1613932765246180079">"Non attivo"</string>
     <string name="unlock_set_unlock_off_summary" msgid="2791013557563587655">"Non bloccare mai lo schermo"</string>
-    <!-- outdated translation 6897899776351307938 -->     <string name="unlock_set_unlock_none_title" msgid="7560817055143323842">"Nessuno"</string>
+    <string name="unlock_set_unlock_none_title" msgid="7560817055143323842">"Non protetto"</string>
     <string name="unlock_set_unlock_none_summary" msgid="2609139908913114644">"Non occorrono sequenza, PIN o password per sbloccare lo schermo"</string>
     <string name="unlock_set_unlock_pattern_title" msgid="2912067603917311700">"Sequenza"</string>
     <string name="unlock_set_unlock_pattern_summary" msgid="8467282436608077882">"Richiedi una sequenza per sbloccare lo schermo"</string>
@@ -324,7 +320,7 @@
     <string name="unlock_set_unlock_password_summary" msgid="7871968012198279034">"Richiedi password per sbloccare lo schermo"</string>
     <string name="unlock_set_unlock_disabled_summary" msgid="8563103042330816018">"Disattivata da ammin. o da norma di crittografia"</string>
     <string name="unlock_set_unlock_mode_off" msgid="378729687629105388">"Off"</string>
-    <!-- outdated translation 7953821968316697309 -->     <string name="unlock_set_unlock_mode_none" msgid="7137296704741184239">"Non protetto"</string>
+    <string name="unlock_set_unlock_mode_none" msgid="7137296704741184239">"Nessuna protezione"</string>
     <string name="unlock_set_unlock_mode_pattern" msgid="464022606293547390">"Protetto con sequenza"</string>
     <string name="unlock_set_unlock_mode_pin" msgid="1379365142708807163">"Protetto con PIN"</string>
     <string name="unlock_set_unlock_mode_password" msgid="6955742995327081060">"Protetto con password"</string>
@@ -415,16 +411,13 @@
     <string name="bluetooth_profile_headset" msgid="81844079120986198">"Vivavoce"</string>
     <string name="bluetooth_profile_opp" msgid="3799470046565284440">"Trasferisci"</string>
     <string name="bluetooth_profile_hid" msgid="3000858580917633478">"Dispositivo di input"</string>
-    <!-- outdated translation 5679493013173658268 -->     <string name="bluetooth_profile_pan" msgid="3391606497945147673">"Tethering"</string>
+    <string name="bluetooth_profile_pan" msgid="3391606497945147673">"Accesso Internet"</string>
     <string name="bluetooth_disconnect_a2dp_profile" msgid="3524648279150937177">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> verrà disconnesso dall\'audio multimediale."</string>
     <string name="bluetooth_disconnect_headset_profile" msgid="8635908811168780720">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> verrà disconnesso dall\'audio vivavoce."</string>
     <string name="bluetooth_disconnect_hid_profile" msgid="3282295189719352075">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> verrà disconnesso dal dispositivo di input."</string>
-    <!-- no translation found for bluetooth_disconnect_pan_user_profile (8037627994382458698) -->
-    <skip />
-    <!-- no translation found for bluetooth_disconnect_pan_nap_profile (5455448395850929200) -->
-    <skip />
-    <!-- no translation found for bluetooth_disconnect_pan_nap_profile (5266851881175033601) -->
-    <skip />
+    <string name="bluetooth_disconnect_pan_user_profile" msgid="8037627994382458698">"L\'accesso Internet tramite <xliff:g id="DEVICE_NAME">%1$s</xliff:g> verrà disconnesso."</string>
+    <string name="bluetooth_disconnect_pan_nap_profile" product="tablet" msgid="5455448395850929200">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> verrà disconnesso dalla condivisione della connessione Internet del tablet."</string>
+    <string name="bluetooth_disconnect_pan_nap_profile" product="default" msgid="5266851881175033601">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> verrà disconnesso dalla condivisione della connessione Internet del telefono."</string>
     <string name="bluetooth_device_advanced_title" msgid="528816860793581131">"Opzioni <xliff:g id="DEVICE_NAME">%1$s</xliff:g>"</string>
     <string name="bluetooth_device_advanced_device_actions_title" msgid="3793430949811946844">"Azioni dispositivo"</string>
     <string name="bluetooth_device_advanced_online_mode_title" msgid="3689050071425683114">"Connetti"</string>
@@ -437,10 +430,8 @@
     <string name="bluetooth_opp_profile_summary_connected" msgid="2611913495968309066">"Collegato al server di trasferimento file"</string>
     <string name="bluetooth_opp_profile_summary_not_connected" msgid="1267091356089086285">"Non collegato al server di trasferimento file"</string>
     <string name="bluetooth_hid_profile_summary_connected" msgid="3381760054215168689">"Connesso a dispositivo di input"</string>
-    <!-- no translation found for bluetooth_pan_user_profile_summary_connected (4602294638909590612) -->
-    <skip />
-    <!-- no translation found for bluetooth_pan_nap_profile_summary_connected (1561383706411975199) -->
-    <skip />
+    <string name="bluetooth_pan_user_profile_summary_connected" msgid="4602294638909590612">"Connesso a dispositivo per accesso Internet"</string>
+    <string name="bluetooth_pan_nap_profile_summary_connected" msgid="1561383706411975199">"Condivisione connessione Internet locale con dispositivo"</string>
     <string name="bluetooth_a2dp_profile_summary_use_for" msgid="4630849022250168427">"Usa per audio media"</string>
     <string name="bluetooth_headset_profile_summary_use_for" msgid="8705753622443862627">"Usa per audio telefono"</string>
     <string name="bluetooth_opp_profile_summary_use_for" msgid="1255674547144769756">"Usa per trasferimento file"</string>
@@ -468,8 +459,7 @@
     <string name="wifi_notify_open_networks_summary" msgid="3038290727701553612">"Avvisa quando è disponibile una rete aperta"</string>
     <string name="wifi_setting_sleep_policy_title" msgid="2256739245628081979">"Norma di scollegamento Wi-Fi"</string>
     <string name="wifi_setting_sleep_policy_summary" msgid="7573693311804602041">"Specifica quando passare da Wi-Fi a dati cellulare"</string>
-    <!-- no translation found for wifi_setting_sleep_policy_summary_wifi_only (5025244230722670496) -->
-    <skip />
+    <string name="wifi_setting_sleep_policy_summary_wifi_only" msgid="5025244230722670496">"Specifica quando eseguire la disconnessione dalla rete Wi-Fi"</string>
     <string name="wifi_setting_sleep_policy_error" msgid="8174902072673071961">"Si è verificato un problema durante la modifica dell\'impostazione"</string>
     <string name="wifi_add_network" msgid="1671334951296205616">"Aggiungi rete Wi-Fi"</string>
     <string name="wifi_access_points" msgid="2664629396767022441">"Reti Wi-Fi"</string>
@@ -675,8 +665,7 @@
     <string name="status_operator" msgid="2274875196954742087">"Rete"</string>
     <string name="status_wifi_mac_address" msgid="33109409206264790">"Indirizzo MAC Wi-Fi"</string>
     <string name="status_bt_address" msgid="4195174192087439720">"Indirizzo Bluetooth"</string>
-    <!-- no translation found for status_serial_number (2257111183374628137) -->
-    <skip />
+    <string name="status_serial_number" msgid="2257111183374628137">"Numero di serie"</string>
     <string name="status_unavailable" msgid="7862009036663793314">"Non disponibile"</string>
     <string name="status_up_time" msgid="7294859476816760399">"Tempo di attività"</string>
     <string name="status_awake_time" msgid="2393949909051183652">"Tempo di attività"</string>
@@ -759,8 +748,8 @@
     <string name="master_clear_title" msgid="5907939616087039756">"Ripristino dati di fabbrica"</string>
     <string name="master_clear_summary" product="tablet" msgid="4036344100254678429">"Cancella tutti i dati sul tablet"</string>
     <string name="master_clear_summary" product="default" msgid="4986154238001088492">"Cancella tutti i dati sul telefono"</string>
-    <!-- outdated translation 6121706363551361209 -->     <string name="master_clear_desc" product="tablet" msgid="590799767511283567">"Questa operazione cancellerà tutti i dati dall\'"<b>"archivio interno"</b>" del tablet, compresi:"\n\n<li>"L\'account Google"</li>\n<li>"I dati e le impostazioni di sistema e delle applicazioni"</li>\n<li>"Le applicazioni scaricate"</li></string>
-    <!-- outdated translation 6121706363551361209 -->     <string name="master_clear_desc" product="default" msgid="3251400937758241249">"Questa operazione cancellerà tutti i dati dall\'"<b>"archivio interno"</b>" del tablet, compresi:"\n\n<li>"L\'account Google"</li>\n<li>"I dati e le impostazioni di sistema e delle applicazioni"</li>\n<li>"Le applicazioni scaricate"</li></string>
+    <string name="master_clear_desc" product="tablet" msgid="590799767511283567">"Questa operazione cancellerà tutti i dati dall\'"<b>"archivio interno"</b>" del tablet, compresi:"\n\n<li>"L\'account Google"</li>\n<li>"I dati e le impostazioni di sistema e delle applicazioni"</li>\n<li>"Le applicazioni scaricate"</li></string>
+    <string name="master_clear_desc" product="default" msgid="3251400937758241249">"Questa operazione cancellerà tutti i dati dall\'"<b>"archivio interno"</b>" del telefono, compresi:"\n\n<li>"L\'account Google"</li>\n<li>"I dati e le impostazioni di sistema e delle applicazioni"</li>\n<li>"Le applicazioni scaricate"</li></string>
     <string name="master_clear_accounts" product="default" msgid="6412857499147999073">\n\n"Al momento sei collegato ai seguenti account:"\n</string>
     <string name="master_clear_desc_also_erases_external" msgid="1903185203791274237"><li>"Musica"</li>\n<li>"Foto"</li>\n<li>"Altri dati utente"</li></string>
     <string name="master_clear_desc_erase_external_storage" product="nosdcard" msgid="4740866328425123395">\n\n"Per cancellare anche musica, foto e altri dati dell\'utente, è necessario cancellare i dati dell\'"<b>"archivio USB"</b>"."</string>
@@ -818,18 +807,14 @@
     <string name="usb_tethering_unavailable_subtext" msgid="1044622421184007254">"USB non connessa"</string>
     <string name="usb_tethering_errored_subtext" msgid="1377574819427841992">"Errore tethering USB"</string>
     <string name="bluetooth_tether_checkbox_text" msgid="2379175828878753652">"Tethering Bluetooth"</string>
-    <!-- outdated translation 8573646018168088420 -->     <string name="bluetooth_tethering_available_subtext" product="tablet" msgid="8811610320942954709">"Tethering Bluetooth attivo ma non connesso"</string>
-    <!-- outdated translation 8573646018168088420 -->     <string name="bluetooth_tethering_available_subtext" product="default" msgid="4229220575771946723">"Tethering Bluetooth attivo ma non connesso"</string>
-    <!-- no translation found for bluetooth_tethering_device_connected_subtext (2730938191906597896) -->
-    <skip />
-    <!-- no translation found for bluetooth_tethering_device_connected_subtext (1666736165420290466) -->
-    <skip />
-    <!-- no translation found for bluetooth_tethering_devices_connected_subtext (1180765608259580143) -->
-    <skip />
-    <!-- no translation found for bluetooth_tethering_devices_connected_subtext (8248942539362173005) -->
-    <skip />
-    <!-- outdated translation 4833146084600940242 -->     <string name="bluetooth_tethering_off_subtext" product="tablet" msgid="2093881379028235555">"Tethering Bluetooth non attivo"</string>
-    <!-- outdated translation 4833146084600940242 -->     <string name="bluetooth_tethering_off_subtext" product="default" msgid="706860924389041342">"Tethering Bluetooth non attivo"</string>
+    <string name="bluetooth_tethering_available_subtext" product="tablet" msgid="8811610320942954709">"Condivisione connessione Internet di questo tablet"</string>
+    <string name="bluetooth_tethering_available_subtext" product="default" msgid="4229220575771946723">"Condivisione connessione Internet di questo telefono"</string>
+    <string name="bluetooth_tethering_device_connected_subtext" product="tablet" msgid="2730938191906597896">"Condivisione connessione Internet tablet con 1 dispositivo"</string>
+    <string name="bluetooth_tethering_device_connected_subtext" product="default" msgid="1666736165420290466">"Condivisione connessione Internet telefono con 1 dispositivo"</string>
+    <string name="bluetooth_tethering_devices_connected_subtext" product="tablet" msgid="1180765608259580143">"Condivisione connessione Internet tablet con <xliff:g id="CONNECTEDDEVICECOUNT">%1$d</xliff:g> dispositivi"</string>
+    <string name="bluetooth_tethering_devices_connected_subtext" product="default" msgid="8248942539362173005">"Condivisione connessione Internet telefono con <xliff:g id="CONNECTEDDEVICECOUNT">%1$d</xliff:g> dispositivi"</string>
+    <string name="bluetooth_tethering_off_subtext" product="tablet" msgid="2093881379028235555">"Connessione Internet del tablet non condivisa"</string>
+    <string name="bluetooth_tethering_off_subtext" product="default" msgid="706860924389041342">"Connessione Internet del telefono non condivisa"</string>
     <string name="bluetooth_tethering_errored_subtext" msgid="1344187103463073993">"Errore tethering Bluetooth"</string>
     <string name="bluetooth_tethering_overflow_error" msgid="2222060504731415763">"Tethering impossibile con più di <xliff:g id="MAXCONNECTION">%1$d</xliff:g> dispositivi"</string>
     <string name="bluetooth_untether_blank" msgid="2871192409329334813">"Sarà annullato il tethering per <xliff:g id="DEVICE_NAME">%1$s</xliff:g>."</string>
@@ -1055,7 +1040,7 @@
     <string name="user_dict_settings_edit_dialog_title" msgid="8967476444840548674">"Modifica parola"</string>
     <string name="user_dict_settings_context_menu_edit_title" msgid="2210564879320004837">"Modifica"</string>
     <string name="user_dict_settings_context_menu_delete_title" msgid="9140703913776549054">"Elimina"</string>
-    <!-- outdated translation 2359596356158452427 -->     <string name="user_dict_settings_empty_text" product="tablet" msgid="1766522102636921529">"Non sono presenti parole nel dizionario utente. Puoi aggiungere una parola mediante il menu."</string>
+    <string name="user_dict_settings_empty_text" product="tablet" msgid="1766522102636921529">"Non sono presenti parole nel dizionario utente. Puoi aggiungere una parola toccando il pulsante Aggiungi (+)."</string>
     <string name="user_dict_settings_empty_text" product="default" msgid="6209268025109242806">"Non sono presenti parole nel dizionario utente. Puoi aggiungere una parola mediante il menu."</string>
     <string name="testing" msgid="6584352735303604146">"Verifica in corso"</string>
     <string name="testing_phone_info" product="tablet" msgid="193561832258534798">"Informazioni sul tablet"</string>
@@ -1128,12 +1113,9 @@
     <string name="accessibility_power_button_category" msgid="8545885236482339928">"Pulsante di accensione"</string>
     <string name="accessibility_power_button_ends_call" msgid="7698764194501089533">"Termina chiamata"</string>
     <string name="accessibility_power_button_ends_call_summary" msgid="8878097632186291462">"Durante una chiamata, la pressione del pulsante di accensione termina la chiamata invece di spegnere lo schermo"</string>
-    <!-- no translation found for touchscreen_gestures_category (3109869155350859625) -->
-    <skip />
-    <!-- no translation found for long_press_timeout_selector_title (1396876537252863044) -->
-    <skip />
-    <!-- no translation found for long_press_timeout_selector_summary (2261114502740278996) -->
-    <skip />
+    <string name="touchscreen_gestures_category" msgid="3109869155350859625">"Gesti touchscreen"</string>
+    <string name="long_press_timeout_selector_title" msgid="1396876537252863044">"Ritardo tocco e pressione prolungata"</string>
+    <string name="long_press_timeout_selector_summary" msgid="2261114502740278996">"Ritardo per interpretare il tocco come tocco e pressione prolungata"</string>
     <string name="power_usage_summary_title" msgid="5180282911164282324">"Utilizzo batteria"</string>
     <string name="power_usage_summary" msgid="7237084831082848168">"Consumo batteria"</string>
     <string name="power_usage_not_available" msgid="3583407442633768046">"Dati uso batteria non dispon."</string>
@@ -1459,9 +1441,8 @@
     <string name="service_busy" msgid="225227519012409130">"Servizio occupato, riprova"</string>
     <string name="delete" msgid="4219243412325163003">"Elimina"</string>
     <string name="misc_files" msgid="6298643430106707497">"File vari"</string>
-    <!-- no translation found for misc_files_selected_count (4647048020823912088) -->
-    <skip />
-    <!-- no translation found for misc_files_selected_count_bytes (5603677358119178101) -->
+    <string name="misc_files_selected_count" msgid="4647048020823912088">"selezionati <xliff:g id="NUMBER">%1$d</xliff:g> di <xliff:g id="TOTAL">%2$d</xliff:g>"</string>
+    <!-- no translation found for misc_files_selected_count_bytes (2876232009069114352) -->
     <skip />
     <string name="select_all" msgid="6783085295161532497">"Seleziona tutto"</string>
 </resources>
