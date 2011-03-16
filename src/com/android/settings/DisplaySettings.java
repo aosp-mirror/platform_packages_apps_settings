@@ -76,6 +76,12 @@ public class DisplaySettings extends SettingsPreferenceFragment implements
 
         addPreferencesFromResource(R.xml.display_settings);
 
+        // Fetch this once before attaching a listener for changes.
+        try {
+            mAnimationScales = mWindowManager.getAnimationScales();
+        } catch (RemoteException e) {
+            // Shouldn't happen and not much can be done anyway.
+        }
         mAnimations = (ListPreference) findPreference(KEY_ANIMATIONS);
         mAnimations.setOnPreferenceChangeListener(this);
         mAccelerometer = (CheckBoxPreference) findPreference(KEY_ACCELEROMETER);
@@ -189,6 +195,7 @@ public class DisplaySettings extends SettingsPreferenceFragment implements
         try {
             mAnimationScales = mWindowManager.getAnimationScales();
         } catch (RemoteException e) {
+            // Shouldn't happen and not much can be done anyway.
         }
         if (mAnimationScales != null) {
             if (mAnimationScales.length >= 1) {
