@@ -150,14 +150,12 @@
     <string name="proxy_port_label" msgid="5655276502233453400">"Θύρα διακομιστή μεσολάβησης"</string>
     <!-- no translation found for proxy_port_hint (56832878488386205) -->
     <skip />
-    <!-- outdated translation 4287056510182845203 -->     <string name="proxy_exclusionlist_label" msgid="7700491504623418701">"Δεν υπάρχει διακομιστής μεσολάβησης για"</string>
-    <!-- no translation found for proxy_exclusionlist_hint (6084099226687226948) -->
-    <skip />
+    <string name="proxy_exclusionlist_label" msgid="7700491504623418701">"Διακομιστής μεσολάβησης παράκαμψης για"</string>
+    <string name="proxy_exclusionlist_hint" msgid="6084099226687226948">"example.com,mycomp.test.com,localhost"</string>
     <string name="proxy_defaultView_text" msgid="6387985519141433291">"Επαναφορά προεπιλογών"</string>
     <string name="proxy_action_text" msgid="2957063145357903951">"Ολοκληρώθηκε"</string>
     <string name="proxy_hostname_label" msgid="8490171412999373362">"Όνομα κεντρικού υπολογιστή διακομιστή μεσολάβησης"</string>
-    <!-- no translation found for proxy_hostname_hint (2076157057003936176) -->
-    <skip />
+    <string name="proxy_hostname_hint" msgid="2076157057003936176">"proxy.example.com"</string>
     <string name="proxy_error" msgid="8926675299638611451">"Προσοχή"</string>
     <string name="proxy_error_dismiss" msgid="4993171795485460060">"OK"</string>
     <string name="proxy_error_invalid_host" msgid="9120776460063182119">"Το όνομα κεντρικού υπολογιστή που πληκτρολογήσατε δεν είναι έγκυρο."</string>
@@ -298,11 +296,9 @@
     <string name="crypt_keeper_final_desc" product="tablet" msgid="2496639211575162172">"Κρυπτογράφηση tablet; Αυτή η λειτουργία είναι μη αναστρέψιμη και αν τη διακόψετε θα χαθούν δεδομένα. Η κρυπτογράφηση διαρκεί μία ώρα και περισσότερο, κατά τη διάρκεια της οποία το tablet θα κάνει επανεκκίνηση πολλές φορές."</string>
     <string name="crypt_keeper_final_desc" product="default" msgid="3248595818246515395">"Κρυπτογράφηση τηλεφώνου; Αυτή η λειτουργία είναι μη αναστρέψιμη και αν τη διακόψετε θα χαθούν δεδομένα. Η κρυπτογράφηση διαρκεί μία ώρα και περισσότερο, κατά τη διάρκεια της οποία το τηλέφωνο θα κάνει επανεκκίνηση πολλές φορές."</string>
     <string name="crypt_keeper_setup_title" msgid="1783951453124244969">"Κρυπτογράφηση"</string>
-    <!-- no translation found for crypt_keeper_setup_description (5317479293244660361) -->
-    <skip />
-    <!-- no translation found for crypt_keeper_setup_description (8166730416836285875) -->
-    <skip />
-    <!-- outdated translation 6736063610343230255 -->     <string name="crypt_keeper_cooldown" msgid="685210918307862395">"Προσπαθήστε ξανά σε ^1 δευτερόλεπτα."</string>
+    <string name="crypt_keeper_setup_description" product="tablet" msgid="5317479293244660361">"Περιμένετε μέχρι να γίνει κρυπτογράφηση του Tablet. <xliff:g id="PERCENT">^1</xliff:g>% ολοκληρώθηκε."</string>
+    <string name="crypt_keeper_setup_description" product="default" msgid="8166730416836285875">"Περιμένετε μέχρι να γίνει κρυπτογράφηση του τηλεφώνου σας. <xliff:g id="PERCENT">^1</xliff:g>% ολοκληρώθηκε."</string>
+    <string name="crypt_keeper_cooldown" msgid="685210918307862395">"Προσπαθήστε ξανά σε <xliff:g id="DELAY">^1</xliff:g> δευτερόλεπτα."</string>
     <string name="crypt_keeper_enter_password" msgid="1492603008983893532">"Εισάγετε τον κωδικό πρόσβασής σας"</string>
     <string name="crypt_keeper_failed_title" msgid="1166918236711686187">"Η κρυπτογράφηση απέτυχε"</string>
     <string name="crypt_keeper_failed_summary" product="tablet" msgid="1075638996134310507">"Η κρυπτογράφηση έχει διακοπεί και δεν είναι δυνατή η ολοκλήρωσή της. Πρέπει να κάνετε επαναφορά των εργοστασιακών σας ρυθμίσεων (διαγράφοντας όλα σας τα δεδομένα) προτού συνεχίσετε να χρησιμοποιείτε το tablet σας. Μπορείτε να δοκιμάσετε ξανά να κάνετε κρυπτογράφηση του tablet σας μετά την ολοκλήρωση της επαναφοράς."</string>
@@ -314,7 +310,7 @@
     <string name="unlock_set_unlock_launch_picker_enable_summary" msgid="4791110798817242301">"Επιλέξτε μια μέθοδο για κλείδωμα της οθόνης"</string>
     <string name="unlock_set_unlock_off_title" msgid="1613932765246180079">"Απενεργοποίηση"</string>
     <string name="unlock_set_unlock_off_summary" msgid="2791013557563587655">"Να μην κλειδώνεται ποτέ η οθόνη"</string>
-    <!-- outdated translation 6897899776351307938 -->     <string name="unlock_set_unlock_none_title" msgid="7560817055143323842">"Κανένας"</string>
+    <string name="unlock_set_unlock_none_title" msgid="7560817055143323842">"Μη ασφαλισμένο"</string>
     <string name="unlock_set_unlock_none_summary" msgid="2609139908913114644">"Δε χρειάζεται  μοτίβο, PIN ή κωδικό για ξεκλείδωμα της οθόνης"</string>
     <string name="unlock_set_unlock_pattern_title" msgid="2912067603917311700">"Μοτίβο"</string>
     <string name="unlock_set_unlock_pattern_summary" msgid="8467282436608077882">"Για ξεκλείδωμα της οθόνης απαιτείται μοτίβο"</string>
@@ -324,7 +320,7 @@
     <string name="unlock_set_unlock_password_summary" msgid="7871968012198279034">"Για ξεκλείδαμα της οθόνης απαιτείται κωδικός"</string>
     <string name="unlock_set_unlock_disabled_summary" msgid="8563103042330816018">"Απενεργ. από το διαχειρ. ή την πολιτική κρυπτογρ."</string>
     <string name="unlock_set_unlock_mode_off" msgid="378729687629105388">"Απενεργοποίηση"</string>
-    <!-- outdated translation 7953821968316697309 -->     <string name="unlock_set_unlock_mode_none" msgid="7137296704741184239">"Δεν έχει ασφαλιστεί"</string>
+    <string name="unlock_set_unlock_mode_none" msgid="7137296704741184239">"Χωρίς ασφάλεια"</string>
     <string name="unlock_set_unlock_mode_pattern" msgid="464022606293547390">"Έχει ασφαλιστεί με μοτίβο"</string>
     <string name="unlock_set_unlock_mode_pin" msgid="1379365142708807163">"Έχει ασφαλιστεί με PIN"</string>
     <string name="unlock_set_unlock_mode_password" msgid="6955742995327081060">"Έχει ασφαλιστεί με κωδικό πρόσβασης"</string>
@@ -415,16 +411,13 @@
     <string name="bluetooth_profile_headset" msgid="81844079120986198">"Handsfree"</string>
     <string name="bluetooth_profile_opp" msgid="3799470046565284440">"Μεταφορά"</string>
     <string name="bluetooth_profile_hid" msgid="3000858580917633478">"Συσκευή εισόδου"</string>
-    <!-- outdated translation 5679493013173658268 -->     <string name="bluetooth_profile_pan" msgid="3391606497945147673">"Σύνδεση μέσω τηλεφώνου"</string>
+    <string name="bluetooth_profile_pan" msgid="3391606497945147673">"Πρόσβαση στο Διαδίκτυο"</string>
     <string name="bluetooth_disconnect_a2dp_profile" msgid="3524648279150937177">"Η συσκευή <xliff:g id="DEVICE_NAME">%1$s</xliff:g> θα αποσυνδεθεί από τον ήχο μέσων."</string>
     <string name="bluetooth_disconnect_headset_profile" msgid="8635908811168780720">"Η συσκευή <xliff:g id="DEVICE_NAME">%1$s</xliff:g> θα αποσυνδεθεί από τον ήχο handsfree."</string>
     <string name="bluetooth_disconnect_hid_profile" msgid="3282295189719352075">"Η συσκευή <xliff:g id="DEVICE_NAME">%1$s</xliff:g> θα αποσυνδεθεί από τη συσκευή εισόδου."</string>
-    <!-- no translation found for bluetooth_disconnect_pan_user_profile (8037627994382458698) -->
-    <skip />
-    <!-- no translation found for bluetooth_disconnect_pan_nap_profile (5455448395850929200) -->
-    <skip />
-    <!-- no translation found for bluetooth_disconnect_pan_nap_profile (5266851881175033601) -->
-    <skip />
+    <string name="bluetooth_disconnect_pan_user_profile" msgid="8037627994382458698">"Θα γίνει αποσύνδεση της πρόσβασης στο Διαδίκτυο μέσω του <xliff:g id="DEVICE_NAME">%1$s</xliff:g>"</string>
+    <string name="bluetooth_disconnect_pan_nap_profile" product="tablet" msgid="5455448395850929200">"Η συσκευή <xliff:g id="DEVICE_NAME">%1$s</xliff:g> θα αποσυνδεθεί από την κοινή χρήση σύνδεσης tablet στο Διαδίκτυο."</string>
+    <string name="bluetooth_disconnect_pan_nap_profile" product="default" msgid="5266851881175033601">"Η συσκευή <xliff:g id="DEVICE_NAME">%1$s</xliff:g> θα αποσυνδεθεί από κοινή χρήση σύνδεσης τηλεφώνου στο Διαδίκτυο."</string>
     <string name="bluetooth_device_advanced_title" msgid="528816860793581131">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> επιλογές"</string>
     <string name="bluetooth_device_advanced_device_actions_title" msgid="3793430949811946844">"Ενέργειες συσκευής"</string>
     <string name="bluetooth_device_advanced_online_mode_title" msgid="3689050071425683114">"Σύνδεση"</string>
@@ -437,10 +430,8 @@
     <string name="bluetooth_opp_profile_summary_connected" msgid="2611913495968309066">"Συνδεδεμένο σε διακομιστή μεταφοράς αρχείων"</string>
     <string name="bluetooth_opp_profile_summary_not_connected" msgid="1267091356089086285">"Δεν έχει συνδεθεί σε διακομιστή μεταφοράς αρχείων"</string>
     <string name="bluetooth_hid_profile_summary_connected" msgid="3381760054215168689">"Συνδέθηκε σε συσκευή εισόδου"</string>
-    <!-- no translation found for bluetooth_pan_user_profile_summary_connected (4602294638909590612) -->
-    <skip />
-    <!-- no translation found for bluetooth_pan_nap_profile_summary_connected (1561383706411975199) -->
-    <skip />
+    <string name="bluetooth_pan_user_profile_summary_connected" msgid="4602294638909590612">"Σύνδεση με συσκευές για σύνδεση στο Διαδίκτυο"</string>
+    <string name="bluetooth_pan_nap_profile_summary_connected" msgid="1561383706411975199">"Κοινή χρήση σύνδεσης στο Διαδίκτυο με συσκευή"</string>
     <string name="bluetooth_a2dp_profile_summary_use_for" msgid="4630849022250168427">"Χρήση για ήχο πολυμέσων"</string>
     <string name="bluetooth_headset_profile_summary_use_for" msgid="8705753622443862627">"Χρήση για ήχο τηλεφώνου"</string>
     <string name="bluetooth_opp_profile_summary_use_for" msgid="1255674547144769756">"Χρήση για τη μεταφορά αρχείων"</string>
@@ -468,8 +459,7 @@
     <string name="wifi_notify_open_networks_summary" msgid="3038290727701553612">"Να ειδοποιούμαι όταν υπάρχει διαθέσιμο ανοικτό δίκτυο"</string>
     <string name="wifi_setting_sleep_policy_title" msgid="2256739245628081979">"Πολιτική αποσύνδεσης Wi-Fi"</string>
     <string name="wifi_setting_sleep_policy_summary" msgid="7573693311804602041">"Ορισμός εναλλαγής από δεδομένα Wi-Fi σε δεδομένα κινητού"</string>
-    <!-- no translation found for wifi_setting_sleep_policy_summary_wifi_only (5025244230722670496) -->
-    <skip />
+    <string name="wifi_setting_sleep_policy_summary_wifi_only" msgid="5025244230722670496">"Καθορίστε πότε θα γίνει αποσύνδεση από το Wi-Fi"</string>
     <string name="wifi_setting_sleep_policy_error" msgid="8174902072673071961">"Προέκυψε κάποιο πρόβλημα κατά την αλλαγή της ρύθμισης"</string>
     <string name="wifi_add_network" msgid="1671334951296205616">"Προσθήκη δικτύου Wi-Fi"</string>
     <string name="wifi_access_points" msgid="2664629396767022441">"Δίκτυα Wi-Fi"</string>
@@ -675,8 +665,7 @@
     <string name="status_operator" msgid="2274875196954742087">"Δίκτυο"</string>
     <string name="status_wifi_mac_address" msgid="33109409206264790">"Διεύθυνση MAC Wi-Fi"</string>
     <string name="status_bt_address" msgid="4195174192087439720">"Διεύθυνση Bluetooth"</string>
-    <!-- no translation found for status_serial_number (2257111183374628137) -->
-    <skip />
+    <string name="status_serial_number" msgid="2257111183374628137">"Σειριακός αριθμός"</string>
     <string name="status_unavailable" msgid="7862009036663793314">"Μη διαθέσιμο"</string>
     <string name="status_up_time" msgid="7294859476816760399">"Χρόνος από την τελευταία εκκίνηση"</string>
     <string name="status_awake_time" msgid="2393949909051183652">"Χρόνος αφύπνισης"</string>
@@ -759,8 +748,8 @@
     <string name="master_clear_title" msgid="5907939616087039756">"Επαναφορά εργοστασιακών δεδομένων"</string>
     <string name="master_clear_summary" product="tablet" msgid="4036344100254678429">"Διαγραφή όλων των δεδομένων στο tablet"</string>
     <string name="master_clear_summary" product="default" msgid="4986154238001088492">"Διαγραφή όλων των δεδομένων στο τηλέφωνο"</string>
-    <!-- outdated translation 6121706363551361209 -->     <string name="master_clear_desc" product="tablet" msgid="590799767511283567">"Αυτή η ενέργεια θα διαγράψει όλα τα δεδομένα από τον "<b>"εσωτερικό χώρο αποθήκευσης"</b>" του υπολογιστή σας tablet, συμπεριλαμβανομένων των εξής:"\n\n<li>"Λογαριασμός Google"</li>\n<li>"Ρυθμίσεις δεδομένων συστήματος και εφαρμογών"</li>\n<li>"Εφαρμογές από λήψη"</li></string>
-    <!-- outdated translation 6121706363551361209 -->     <string name="master_clear_desc" product="default" msgid="3251400937758241249">"Αυτή η ενέργεια θα διαγράψει όλα τα δεδομένα από τον "<b>"εσωτερικό χώρο αποθήκευσης"</b>" του υπολογιστή σας tablet, συμπεριλαμβανομένων των εξής:"\n\n<li>"Λογαριασμός Google"</li>\n<li>"Ρυθμίσεις δεδομένων συστήματος και εφαρμογών"</li>\n<li>"Εφαρμογές από λήψη"</li></string>
+    <string name="master_clear_desc" product="tablet" msgid="590799767511283567">"Αυτή η ενέργεια θα διαγράψει όλα τα δεδομένα από τον "<b>"εσωτερικό χώρο αποθήκευσης"</b>" του tablet, συμπεριλαμβανομένων των εξής:"\n\n<li>"Ο Λογαριασμός σας Google"</li>\n<li>"Δεδομένα και ρυθμίσεις συστήματος και εφαρμογών"</li>\n<li>"Ληφθείσες εφαρμογές"</li></string>
+    <string name="master_clear_desc" product="default" msgid="3251400937758241249">"Αυτή η ενέργεια θα διαγράψει όλα τα δεδομένα από τον "<b>"εσωτερικό χώρο αποθήκευσης"</b>" του τηλεφώνου σας, συμπεριλαμβανομένων των εξής:"\n\n<li>"Ο Λογαριασμός σας Google"</li>\n<li>"Δεδομένα και ρυθμίσεις συστήματος και εφαρμογών"</li>\n<li>"Ληφθείσες εφαρμογές"</li></string>
     <string name="master_clear_accounts" product="default" msgid="6412857499147999073">\n\n"Αυτήν τη στιγμή είστε συνδεδεμένοι στους παρακάτω λογαριασμούς:"\n</string>
     <string name="master_clear_desc_also_erases_external" msgid="1903185203791274237"><li>"Μουσική"</li>\n<li>"Φωτογραφίες"</li>\n<li>"Άλλα δεδομένα χρήστη"</li></string>
     <string name="master_clear_desc_erase_external_storage" product="nosdcard" msgid="4740866328425123395">\n\n"Πρέπει να γίνει διαγραφή του "<b>"χώρου αποθήκευσης USB"</b>" για να γίνει, επίσης, εκκαθάριση της μουσικής, των εικόνων και άλλων δεδομένων."</string>
@@ -818,18 +807,14 @@
     <string name="usb_tethering_unavailable_subtext" msgid="1044622421184007254">"Το USB δεν συνδέθηκε"</string>
     <string name="usb_tethering_errored_subtext" msgid="1377574819427841992">"Σφάλμα της σύνδεσης μέσω κινητής συσκευής με USB"</string>
     <string name="bluetooth_tether_checkbox_text" msgid="2379175828878753652">"Bluetooth tethering"</string>
-    <!-- outdated translation 8573646018168088420 -->     <string name="bluetooth_tethering_available_subtext" product="tablet" msgid="8811610320942954709">"Το Bluetooth μέσω τηλεφώνου είναι ενεργό, αλλά όχι συνδεδεμένο"</string>
-    <!-- outdated translation 8573646018168088420 -->     <string name="bluetooth_tethering_available_subtext" product="default" msgid="4229220575771946723">"Το Bluetooth μέσω τηλεφώνου είναι ενεργό, αλλά όχι συνδεδεμένο"</string>
-    <!-- no translation found for bluetooth_tethering_device_connected_subtext (2730938191906597896) -->
-    <skip />
-    <!-- no translation found for bluetooth_tethering_device_connected_subtext (1666736165420290466) -->
-    <skip />
-    <!-- no translation found for bluetooth_tethering_devices_connected_subtext (1180765608259580143) -->
-    <skip />
-    <!-- no translation found for bluetooth_tethering_devices_connected_subtext (8248942539362173005) -->
-    <skip />
-    <!-- outdated translation 4833146084600940242 -->     <string name="bluetooth_tethering_off_subtext" product="tablet" msgid="2093881379028235555">"Η σύνδεση Bluetooth μέσω τηλεφώνου είναι απενεργοποιημένη"</string>
-    <!-- outdated translation 4833146084600940242 -->     <string name="bluetooth_tethering_off_subtext" product="default" msgid="706860924389041342">"Η σύνδεση Bluetooth μέσω τηλεφώνου είναι απενεργοποιημένη"</string>
+    <string name="bluetooth_tethering_available_subtext" product="tablet" msgid="8811610320942954709">"Κοινή χρήση της σύνδεσης του tablet στο Διαδίκτυο"</string>
+    <string name="bluetooth_tethering_available_subtext" product="default" msgid="4229220575771946723">"Κοινή χρήση της σύνδεσης τηλεφώνου στο Διαδίκτυο"</string>
+    <string name="bluetooth_tethering_device_connected_subtext" product="tablet" msgid="2730938191906597896">"Κοινή χρήση σύνδεσης tablet στο Διαδίκτυο με 1 συσκευή"</string>
+    <string name="bluetooth_tethering_device_connected_subtext" product="default" msgid="1666736165420290466">"Κοινή χρήση σύνδεσης τηλεφώνου στο Διαδίκτυο με 1 συσκευή"</string>
+    <string name="bluetooth_tethering_devices_connected_subtext" product="tablet" msgid="1180765608259580143">"Κοινή χρήση σύνδεσης tablet στο Διαδίκτυο με <xliff:g id="CONNECTEDDEVICECOUNT">%1$d</xliff:g> συσκευές"</string>
+    <string name="bluetooth_tethering_devices_connected_subtext" product="default" msgid="8248942539362173005">"Κοινή χρήση σύνδεσης τηλεφώνου στο Διαδίκτυο με <xliff:g id="CONNECTEDDEVICECOUNT">%1$d</xliff:g> συσκευές"</string>
+    <string name="bluetooth_tethering_off_subtext" product="tablet" msgid="2093881379028235555">"Χωρίς κοινή χρήση σύνδεσης tablet στο Διαδίκτυο"</string>
+    <string name="bluetooth_tethering_off_subtext" product="default" msgid="706860924389041342">"Χωρίς κοινή χρήση σύνδεσης τηλεφώνου στο Διαδίκτυο"</string>
     <string name="bluetooth_tethering_errored_subtext" msgid="1344187103463073993">"Σφάλμα Bluetooth tethering"</string>
     <string name="bluetooth_tethering_overflow_error" msgid="2222060504731415763">"Δεν γίνεται σύνδ. σε περισσότερες από <xliff:g id="MAXCONNECTION">%1$d</xliff:g> συσκευές"</string>
     <string name="bluetooth_untether_blank" msgid="2871192409329334813">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> θα αποσυνδεθεί."</string>
@@ -1055,7 +1040,7 @@
     <string name="user_dict_settings_edit_dialog_title" msgid="8967476444840548674">"Επεξεργασία λέξης"</string>
     <string name="user_dict_settings_context_menu_edit_title" msgid="2210564879320004837">"Επεξεργασία"</string>
     <string name="user_dict_settings_context_menu_delete_title" msgid="9140703913776549054">"Διαγραφή"</string>
-    <!-- outdated translation 2359596356158452427 -->     <string name="user_dict_settings_empty_text" product="tablet" msgid="1766522102636921529">"Δεν υπάρχουν λέξεις καταχωρημένες στο λεξικό χρήστη. Μπορείτε να προσθέσετε μια λέξη μέσω του μενού."</string>
+    <string name="user_dict_settings_empty_text" product="tablet" msgid="1766522102636921529">"Δεν υπάρχουν λέξεις καταχωρισμένες στο λεξικό χρήστη. Μπορείτε να προσθέσετε μια λέξη πατώντας το κουμπί Προσθήκη ( + )."</string>
     <string name="user_dict_settings_empty_text" product="default" msgid="6209268025109242806">"Δεν υπάρχουν λέξεις καταχωρημένες στο λεξικό χρήστη. Μπορείτε να προσθέσετε μια λέξη μέσω του μενού."</string>
     <string name="testing" msgid="6584352735303604146">"Δοκιμή"</string>
     <string name="testing_phone_info" product="tablet" msgid="193561832258534798">"Πληροφορίες tablet"</string>
@@ -1128,12 +1113,9 @@
     <string name="accessibility_power_button_category" msgid="8545885236482339928">"Κουμπί λειτουργίας"</string>
     <string name="accessibility_power_button_ends_call" msgid="7698764194501089533">"Το κουμπί λειτουργίας τερματίζει τις κλήσεις"</string>
     <string name="accessibility_power_button_ends_call_summary" msgid="8878097632186291462">"Κατά τη διάρκεια μιας κλήσης, το πάτημα του κουμπιού λειτουργίας τερματίζει τις κλήσεις αντί να απενεργοποιεί την οθόνη"</string>
-    <!-- no translation found for touchscreen_gestures_category (3109869155350859625) -->
-    <skip />
-    <!-- no translation found for long_press_timeout_selector_title (1396876537252863044) -->
-    <skip />
-    <!-- no translation found for long_press_timeout_selector_summary (2261114502740278996) -->
-    <skip />
+    <string name="touchscreen_gestures_category" msgid="3109869155350859625">"Κινήσεις δαχτύλων στην οθόνη αφής"</string>
+    <string name="long_press_timeout_selector_title" msgid="1396876537252863044">"Καθυστέρηση παρατεταμένου αγγίγματος"</string>
+    <string name="long_press_timeout_selector_summary" msgid="2261114502740278996">"Καθυστέρηση μέχρι ένα άγγιγμα να ερμηνευθεί ως παρατεταμένο άγγιγμα"</string>
     <string name="power_usage_summary_title" msgid="5180282911164282324">"Χρήση μπαταρίας"</string>
     <string name="power_usage_summary" msgid="7237084831082848168">"Τι χρησιμοποιούσε την μπαταρία"</string>
     <string name="power_usage_not_available" msgid="3583407442633768046">"Δεν υπάρχουν δεδομένα χρήσης"</string>
@@ -1459,9 +1441,8 @@
     <string name="service_busy" msgid="225227519012409130">"Η υπηρεσία είναι απασχολημένη, προσπαθήστε αργότερα"</string>
     <string name="delete" msgid="4219243412325163003">"Διαγραφή"</string>
     <string name="misc_files" msgid="6298643430106707497">"Διάφορα αρχεία"</string>
-    <!-- no translation found for misc_files_selected_count (4647048020823912088) -->
-    <skip />
-    <!-- no translation found for misc_files_selected_count_bytes (5603677358119178101) -->
+    <string name="misc_files_selected_count" msgid="4647048020823912088">"Επιλέχθηκαν <xliff:g id="NUMBER">%1$d</xliff:g> από <xliff:g id="TOTAL">%2$d</xliff:g>"</string>
+    <!-- no translation found for misc_files_selected_count_bytes (2876232009069114352) -->
     <skip />
     <string name="select_all" msgid="6783085295161532497">"Επιλογή όλων"</string>
 </resources>
