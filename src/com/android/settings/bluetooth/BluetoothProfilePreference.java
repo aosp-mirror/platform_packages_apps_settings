@@ -78,8 +78,8 @@ final class BluetoothProfilePreference extends Preference implements OnClickList
             mProfileExpandView.setOnClickListener(this);
             mProfileExpandView.setTag(mProfile);
             mProfileExpandView.setImageResource(mExpanded
-                    ? com.android.internal.R.drawable.expander_open_holo_dark
-                    : com.android.internal.R.drawable.expander_close_holo_dark);
+                    ? com.android.internal.R.drawable.expander_close_holo_dark
+                    : com.android.internal.R.drawable.expander_open_holo_dark);
         } else {
             mProfileExpandView.setVisibility(View.GONE);
         }
