@@ -148,14 +148,12 @@
     <string name="proxy_settings_summary" msgid="7898928000758321486">"Đặt proxy HTTP chung và danh sách loại trừ"</string>
     <string name="proxy_clear_text" msgid="5555400754952012657">"Xoá"</string>
     <string name="proxy_port_label" msgid="5655276502233453400">"Cổng proxy"</string>
-    <!-- outdated translation 4287056510182845203 -->     <string name="proxy_exclusionlist_label" msgid="7700491504623418701">"Không có proxy cho"</string>
-    <!-- no translation found for proxy_exclusionlist_hint (6084099226687226948) -->
-    <skip />
+    <string name="proxy_exclusionlist_label" msgid="7700491504623418701">"Bỏ qua proxy cho"</string>
+    <string name="proxy_exclusionlist_hint" msgid="6084099226687226948">"example.com,mycomp.test.com,localhost"</string>
     <string name="proxy_defaultView_text" msgid="6387985519141433291">"Khôi phục mặc định"</string>
     <string name="proxy_action_text" msgid="2957063145357903951">"Xong"</string>
     <string name="proxy_hostname_label" msgid="8490171412999373362">"Tên máy chủ proxy"</string>
-    <!-- no translation found for proxy_hostname_hint (2076157057003936176) -->
-    <skip />
+    <string name="proxy_hostname_hint" msgid="2076157057003936176">"proxy.example.com"</string>
     <string name="proxy_error" msgid="8926675299638611451">"Chú ý"</string>
     <string name="proxy_error_dismiss" msgid="4993171795485460060">"OK"</string>
     <string name="proxy_error_invalid_host" msgid="9120776460063182119">"Tên máy chủ lưu trữ bạn nhập không hợp lệ."</string>
@@ -296,11 +294,9 @@
     <string name="crypt_keeper_final_desc" product="tablet" msgid="2496639211575162172">"Mã hóa máy tính bảng? Tác vụ này không thể đảo ngược được và nếu bạn làm gián đoạn tác vụ này, bạn sẽ mất dữ liệu. Quá trình mã hóa diễn ra từ một tiếng trở lên, trong thời gian này máy tính bảng sẽ khởi động lại nhiều lần."</string>
     <string name="crypt_keeper_final_desc" product="default" msgid="3248595818246515395">"Mã hóa điện thoại? Tác vụ này không thể đảo ngược và nếu bạn làm gián đoạn tác vụ này, bạn sẽ mất dữ liệu. Quá trình mã hóa diễn ra một tiếng trở lên, trong quá trình này điện thoại sẽ khởi động lại nhiều lần."</string>
     <string name="crypt_keeper_setup_title" msgid="1783951453124244969">"Đang mã hóa"</string>
-    <!-- no translation found for crypt_keeper_setup_description (5317479293244660361) -->
-    <skip />
-    <!-- no translation found for crypt_keeper_setup_description (8166730416836285875) -->
-    <skip />
-    <!-- outdated translation 6736063610343230255 -->     <string name="crypt_keeper_cooldown" msgid="685210918307862395">"Hãy thử lại sau ^1 giây."</string>
+    <string name="crypt_keeper_setup_description" product="tablet" msgid="5317479293244660361">"Vui lòng đợi trong khi máy tính bảng của bạn được mã hóa. Hoàn tất <xliff:g id="PERCENT">^1</xliff:g>%."</string>
+    <string name="crypt_keeper_setup_description" product="default" msgid="8166730416836285875">"Vui lòng đợi trong khi điện thoại của bạn được mã hóa. Hoàn tất <xliff:g id="PERCENT">^1</xliff:g>%."</string>
+    <string name="crypt_keeper_cooldown" msgid="685210918307862395">"Hãy thử lại sau <xliff:g id="DELAY">^1</xliff:g> giây."</string>
     <string name="crypt_keeper_enter_password" msgid="1492603008983893532">"Nhập mật khẩu của bạn"</string>
     <string name="crypt_keeper_failed_title" msgid="1166918236711686187">"Mã hóa không thành công"</string>
     <string name="crypt_keeper_failed_summary" product="tablet" msgid="1075638996134310507">"Quá trình mã hóa bị gián đoạn và không thể hoàn tất. Bạn phải thực hiện đặt lại dữ liệu gốc (xóa tất cả dữ liệu của bạn) trước khi bạn có thể tiếp tục sử dụng điện thoại của mình. Bạn có thể thử mã hóa lại điện thoại của bạn sau khi quá trình đặt lại hoàn tất."</string>
@@ -312,7 +308,7 @@
     <string name="unlock_set_unlock_launch_picker_enable_summary" msgid="4791110798817242301">"Chọn phương thức khóa màn hình"</string>
     <string name="unlock_set_unlock_off_title" msgid="1613932765246180079">"Tắt"</string>
     <string name="unlock_set_unlock_off_summary" msgid="2791013557563587655">"Không khóa màn hình"</string>
-    <!-- outdated translation 6897899776351307938 -->     <string name="unlock_set_unlock_none_title" msgid="7560817055143323842">"Không chọn"</string>
+    <string name="unlock_set_unlock_none_title" msgid="7560817055143323842">"Không an toàn"</string>
     <string name="unlock_set_unlock_none_summary" msgid="2609139908913114644">"Không yêu cầu hình, PIN hoặc mật khẩu để mở khóa màn hình"</string>
     <string name="unlock_set_unlock_pattern_title" msgid="2912067603917311700">"Hình"</string>
     <string name="unlock_set_unlock_pattern_summary" msgid="8467282436608077882">"Yêu cầu hình để mở khóa màn hình"</string>
@@ -322,7 +318,7 @@
     <string name="unlock_set_unlock_password_summary" msgid="7871968012198279034">"Yêu cầu mật khẩu để mở khóa màn hình"</string>
     <string name="unlock_set_unlock_disabled_summary" msgid="8563103042330816018">"Bị vô hiệu hóa bởi quản trị viên hoặc chính sách mã hóa"</string>
     <string name="unlock_set_unlock_mode_off" msgid="378729687629105388">"Tắt"</string>
-    <!-- outdated translation 7953821968316697309 -->     <string name="unlock_set_unlock_mode_none" msgid="7137296704741184239">"Không bảo mật"</string>
+    <string name="unlock_set_unlock_mode_none" msgid="7137296704741184239">"Không có bảo mật"</string>
     <string name="unlock_set_unlock_mode_pattern" msgid="464022606293547390">"Được bảo mật bằng hình"</string>
     <string name="unlock_set_unlock_mode_pin" msgid="1379365142708807163">"Được bảo mật bằng PIN"</string>
     <string name="unlock_set_unlock_mode_password" msgid="6955742995327081060">"Được bảo mật bằng mật khẩu"</string>
@@ -413,16 +409,13 @@
     <string name="bluetooth_profile_headset" msgid="81844079120986198">"Thiết bị rảnh tay"</string>
     <string name="bluetooth_profile_opp" msgid="3799470046565284440">"Chuyển"</string>
     <string name="bluetooth_profile_hid" msgid="3000858580917633478">"Thiết bị nhập"</string>
-    <!-- outdated translation 5679493013173658268 -->     <string name="bluetooth_profile_pan" msgid="3391606497945147673">"Đang dùng làm điểm truy cập Internet"</string>
+    <string name="bluetooth_profile_pan" msgid="3391606497945147673">"Truy cập Internet"</string>
     <string name="bluetooth_disconnect_a2dp_profile" msgid="3524648279150937177">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> sẽ bị ngắt kết nối khỏi âm thanh phương tiện."</string>
     <string name="bluetooth_disconnect_headset_profile" msgid="8635908811168780720">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> sẽ bị ngắt kết nối khỏi âm thanh thiết bị rảnh tay."</string>
     <string name="bluetooth_disconnect_hid_profile" msgid="3282295189719352075">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> sẽ bị ngắt kết nối khỏi thiết bị nhập."</string>
-    <!-- no translation found for bluetooth_disconnect_pan_user_profile (8037627994382458698) -->
-    <skip />
-    <!-- no translation found for bluetooth_disconnect_pan_nap_profile (5455448395850929200) -->
-    <skip />
-    <!-- no translation found for bluetooth_disconnect_pan_nap_profile (5266851881175033601) -->
-    <skip />
+    <string name="bluetooth_disconnect_pan_user_profile" msgid="8037627994382458698">"Truy cập Internet qua <xliff:g id="DEVICE_NAME">%1$s</xliff:g> sẽ bị ngắt kết nối."</string>
+    <string name="bluetooth_disconnect_pan_nap_profile" product="tablet" msgid="5455448395850929200">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> sẽ bị ngắt kết nối khỏi chia sẻ kết nối Internet của máy tính bảng này."</string>
+    <string name="bluetooth_disconnect_pan_nap_profile" product="default" msgid="5266851881175033601">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> sẽ bị ngắt kết nối khỏi chia sẻ kết nối Internet của điện thoại này."</string>
     <string name="bluetooth_device_advanced_title" msgid="528816860793581131">"Tuỳ chọn <xliff:g id="DEVICE_NAME">%1$s</xliff:g>"</string>
     <string name="bluetooth_device_advanced_device_actions_title" msgid="3793430949811946844">"Hoạt động của thiết bị"</string>
     <string name="bluetooth_device_advanced_online_mode_title" msgid="3689050071425683114">"Kết nối"</string>
@@ -435,10 +428,8 @@
     <string name="bluetooth_opp_profile_summary_connected" msgid="2611913495968309066">"Đã kết nối với máy chủ chuyển tệp"</string>
     <string name="bluetooth_opp_profile_summary_not_connected" msgid="1267091356089086285">"Chưa kết nối với máy chủ chuyển tệp"</string>
     <string name="bluetooth_hid_profile_summary_connected" msgid="3381760054215168689">"Đã kết nối với thiết bị nhập"</string>
-    <!-- no translation found for bluetooth_pan_user_profile_summary_connected (4602294638909590612) -->
-    <skip />
-    <!-- no translation found for bluetooth_pan_nap_profile_summary_connected (1561383706411975199) -->
-    <skip />
+    <string name="bluetooth_pan_user_profile_summary_connected" msgid="4602294638909590612">"Đã kết nối với thiết bị để truy cập Internet"</string>
+    <string name="bluetooth_pan_nap_profile_summary_connected" msgid="1561383706411975199">"Chia sẻ kết nối Internet cục bộ với thiết bị"</string>
     <string name="bluetooth_a2dp_profile_summary_use_for" msgid="4630849022250168427">"Sử dụng cho âm thanh phương tiện"</string>
     <string name="bluetooth_headset_profile_summary_use_for" msgid="8705753622443862627">"Sử dụng cho âm thanh điện thoại"</string>
     <string name="bluetooth_opp_profile_summary_use_for" msgid="1255674547144769756">"Sử dụng để chuyển tệp"</string>
@@ -466,8 +457,7 @@
     <string name="wifi_notify_open_networks_summary" msgid="3038290727701553612">"Thông báo cho tôi khi mạng mở khả dụng"</string>
     <string name="wifi_setting_sleep_policy_title" msgid="2256739245628081979">"Chính sách ngắt kết nối Wi-Fi"</string>
     <string name="wifi_setting_sleep_policy_summary" msgid="7573693311804602041">"Chỉ định thời điểm sẽ chuyển từ Wi-Fi sang dữ liệu di động"</string>
-    <!-- no translation found for wifi_setting_sleep_policy_summary_wifi_only (5025244230722670496) -->
-    <skip />
+    <string name="wifi_setting_sleep_policy_summary_wifi_only" msgid="5025244230722670496">"Chỉ rõ thời điểm ngắt kết nối Wi-Fi"</string>
     <string name="wifi_setting_sleep_policy_error" msgid="8174902072673071961">"Đã xảy ra sự cố khi thay đổi cài đặt"</string>
     <string name="wifi_add_network" msgid="1671334951296205616">"Thêm mạng Wi-Fi"</string>
     <string name="wifi_access_points" msgid="2664629396767022441">"Mạng Wi-Fi"</string>
@@ -591,7 +581,7 @@
     <string name="dock_sounds_enable_summary_on" product="default" msgid="8491180514199743771">"Phát âm thanh khi lắp hoặc tháo điện thoại khỏi đế"</string>
     <string name="dock_sounds_enable_summary_off" product="tablet" msgid="5077843049805652363">"Không phát âm thanh khi lắp hoặc tháo máy tính bảng khỏi đế"</string>
     <string name="dock_sounds_enable_summary_off" product="default" msgid="3151046599205265919">"Không phát âm thanh khi lắp hoặc tháo điện thoại khỏi đế"</string>
-    <string name="sync_settings" msgid="9186125469300013491">"Tài khoản &amp; đồng bộ hoá"</string>
+    <string name="sync_settings" msgid="9186125469300013491">"Tài khoản &amp; đồng bộ hóa"</string>
     <string name="sync_settings_summary" msgid="2962179505214965667">"Thêm hoặc xoá tài khoản và thay đổi cài đặt tài khoản"</string>
     <string name="search_settings" msgid="1910951467596035063">"Tìm kiếm"</string>
     <string name="search_settings_summary" msgid="9205656546570654169">"Quản lý cài đặt và lịch sử tìm kiếm"</string>
@@ -609,12 +599,9 @@
     <string name="screen_timeout" msgid="6962654593018319466">"Thời gian chờ"</string>
     <string name="screen_timeout_summary" msgid="4471347210332380587">"Màn hình tự động tắt sau <xliff:g id="TIMEOUT_DESCRIPTION">%1$s</xliff:g>"</string>
     <string name="automatic_brightness" msgid="5014143533884135461">"Độ sáng tự động"</string>
-    <!-- no translation found for title_font_size (4405544325522105222) -->
-    <skip />
-    <!-- no translation found for summary_font_size (7548243392515500554) -->
-    <skip />
-    <!-- no translation found for dialog_title_font_size (4503471078477715461) -->
-    <skip />
+    <string name="title_font_size" msgid="4405544325522105222">"Kích thước phông chữ"</string>
+    <string name="summary_font_size" msgid="7548243392515500554">"Kích thước phông chữ chung"</string>
+    <string name="dialog_title_font_size" msgid="4503471078477715461">"Chọn kích thước phông chữ"</string>
     <string name="sim_lock_settings" msgid="3392331196873564292">"Cài đặt khoá thẻ SIM"</string>
     <string name="sim_lock_settings_category" msgid="5136244267576697004">"Thiết lập khoá thẻ SIM"</string>
     <string name="sim_lock_settings_title" msgid="9018585580955414596">"Khoá thẻ SIM"</string>
@@ -669,8 +656,7 @@
     <string name="status_operator" msgid="2274875196954742087">"Mạng"</string>
     <string name="status_wifi_mac_address" msgid="33109409206264790">"Địa chỉ MAC của Wi-Fi"</string>
     <string name="status_bt_address" msgid="4195174192087439720">"Địa chỉ Bluetooth"</string>
-    <!-- no translation found for status_serial_number (2257111183374628137) -->
-    <skip />
+    <string name="status_serial_number" msgid="2257111183374628137">"Số sê-ri"</string>
     <string name="status_unavailable" msgid="7862009036663793314">"Không rảnh"</string>
     <string name="status_up_time" msgid="7294859476816760399">"Thời gian hoạt động"</string>
     <string name="status_awake_time" msgid="2393949909051183652">"Thời gian thức"</string>
@@ -753,8 +739,8 @@
     <string name="master_clear_title" msgid="5907939616087039756">"Đặt lại về dữ liệu gốc"</string>
     <string name="master_clear_summary" product="tablet" msgid="4036344100254678429">"Xóa tất cả dữ liệu trên máy tính bảng"</string>
     <string name="master_clear_summary" product="default" msgid="4986154238001088492">"Xoá tất cả dữ liệu trên điện thoại"</string>
-    <!-- outdated translation 6121706363551361209 -->     <string name="master_clear_desc" product="tablet" msgid="590799767511283567">"Tác vụ này sẽ xóa tất cả dữ liệu khỏi "<b>"bộ nhớ trong"</b>" của máy tính bảng của bạn, bao gồm:"\n\n<li>"Tài khoản Google của bạn"</li>\n<li>"Dữ liệu và cài đặt hệ thống và ứng dụng"</li>\n<li>"Ứng dụng đã tải xuống"</li></string>
-    <!-- outdated translation 6121706363551361209 -->     <string name="master_clear_desc" product="default" msgid="3251400937758241249">"Tác vụ này sẽ xóa tất cả dữ liệu khỏi "<b>"bộ nhớ trong"</b>" của máy tính bảng của bạn, bao gồm:"\n\n<li>"Tài khoản Google của bạn"</li>\n<li>"Dữ liệu và cài đặt hệ thống và ứng dụng"</li>\n<li>"Ứng dụng đã tải xuống"</li></string>
+    <string name="master_clear_desc" product="tablet" msgid="590799767511283567">"Tác vụ này sẽ xóa tất cả dữ liệu khỏi "<b>"bộ nhớ trong"</b>" của máy tính bảng, bao gồm:"\n\n<li>"Tài khoản Google của bạn"</li>\n<li>"Dữ liệu và cài đặt hệ thống và ứng dụng"</li>\n<li>"Ứng dụng đã tải xuống"</li></string>
+    <string name="master_clear_desc" product="default" msgid="3251400937758241249">"Tác vụ này sẽ xóa tất cả dữ liệu khỏi "<b>"bộ nhớ trong"</b>" của điện thoại, bao gồm:"\n\n<li>"Tài khoản Google của bạn"</li>\n<li>"Dữ liệu và cài đặt hệ thống và ứng dụng"</li>\n<li>"Ứng dụng đã tải xuống"</li></string>
     <string name="master_clear_accounts" product="default" msgid="6412857499147999073">\n\n"Bạn hiện đã đăng nhập vào các tài khoản sau đây:"\n</string>
     <string name="master_clear_desc_also_erases_external" msgid="1903185203791274237"><li>"Nhạc"</li>\n<li>"Ảnh"</li>\n<li>"Dữ liệu người dùng khác"</li></string>
     <string name="master_clear_desc_erase_external_storage" product="nosdcard" msgid="4740866328425123395">\n\n"Đồng thời, để xóa nhạc, hình ảnh và dữ liệu người dùng khác, cần xóa "<b>"bộ nhớ USB"</b>"."</string>
@@ -812,18 +798,14 @@
     <string name="usb_tethering_unavailable_subtext" msgid="1044622421184007254">"USB chưa được kết nối"</string>
     <string name="usb_tethering_errored_subtext" msgid="1377574819427841992">"Lỗi dùng làm điểm truy cập Internet qua USB"</string>
     <string name="bluetooth_tether_checkbox_text" msgid="2379175828878753652">"Dùng làm điểm truy cập Internet qua Bluetooth"</string>
-    <!-- outdated translation 8573646018168088420 -->     <string name="bluetooth_tethering_available_subtext" product="tablet" msgid="8811610320942954709">"Bật dùng làm điểm truy cập Internet qua Bluetooth nhưng chưa được kết nối"</string>
-    <!-- outdated translation 8573646018168088420 -->     <string name="bluetooth_tethering_available_subtext" product="default" msgid="4229220575771946723">"Bật dùng làm điểm truy cập Internet qua Bluetooth nhưng chưa được kết nối"</string>
-    <!-- no translation found for bluetooth_tethering_device_connected_subtext (2730938191906597896) -->
-    <skip />
-    <!-- no translation found for bluetooth_tethering_device_connected_subtext (1666736165420290466) -->
-    <skip />
-    <!-- no translation found for bluetooth_tethering_devices_connected_subtext (1180765608259580143) -->
-    <skip />
-    <!-- no translation found for bluetooth_tethering_devices_connected_subtext (8248942539362173005) -->
-    <skip />
-    <!-- outdated translation 4833146084600940242 -->     <string name="bluetooth_tethering_off_subtext" product="tablet" msgid="2093881379028235555">"Tắt dùng làm điểm truy cập Internet qua Bluetooth"</string>
-    <!-- outdated translation 4833146084600940242 -->     <string name="bluetooth_tethering_off_subtext" product="default" msgid="706860924389041342">"Tắt dùng làm điểm truy cập Internet qua Bluetooth"</string>
+    <string name="bluetooth_tethering_available_subtext" product="tablet" msgid="8811610320942954709">"Chia sẻ kết nối Internet của máy tính bảng này"</string>
+    <string name="bluetooth_tethering_available_subtext" product="default" msgid="4229220575771946723">"Chia sẻ kết nối Internet của điện thoại này"</string>
+    <string name="bluetooth_tethering_device_connected_subtext" product="tablet" msgid="2730938191906597896">"Chia sẻ k.nối Internet của máy tính bảng này với 1 thiết bị"</string>
+    <string name="bluetooth_tethering_device_connected_subtext" product="default" msgid="1666736165420290466">"Chia sẻ kết nối Internet của điện thoại này với 1 thiết bị"</string>
+    <string name="bluetooth_tethering_devices_connected_subtext" product="tablet" msgid="1180765608259580143">"Chia sẻ k.nối Internet của máy tính bảng này với <xliff:g id="CONNECTEDDEVICECOUNT">%1$d</xliff:g> th.bị"</string>
+    <string name="bluetooth_tethering_devices_connected_subtext" product="default" msgid="8248942539362173005">"Chia sẻ kết nối Internet của ĐT này với <xliff:g id="CONNECTEDDEVICECOUNT">%1$d</xliff:g> thiết bị"</string>
+    <string name="bluetooth_tethering_off_subtext" product="tablet" msgid="2093881379028235555">"Ko chia sẻ kết nối Internet của máy tính bảng này"</string>
+    <string name="bluetooth_tethering_off_subtext" product="default" msgid="706860924389041342">"Không chia sẻ kết nối Internet của điện thoại này"</string>
     <string name="bluetooth_tethering_errored_subtext" msgid="1344187103463073993">"Lỗi dùng làm điểm truy cập Internet qua Bluetooth"</string>
     <string name="bluetooth_tethering_overflow_error" msgid="2222060504731415763">"Không thể chia sẻ với nhiều hơn <xliff:g id="MAXCONNECTION">%1$d</xliff:g> điện thoại"</string>
     <string name="bluetooth_untether_blank" msgid="2871192409329334813">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> sẽ được tháo."</string>
@@ -1049,7 +1031,7 @@
     <string name="user_dict_settings_edit_dialog_title" msgid="8967476444840548674">"Chỉnh sửa từ"</string>
     <string name="user_dict_settings_context_menu_edit_title" msgid="2210564879320004837">"Chỉnh sửa"</string>
     <string name="user_dict_settings_context_menu_delete_title" msgid="9140703913776549054">"Xoá"</string>
-    <!-- outdated translation 2359596356158452427 -->     <string name="user_dict_settings_empty_text" product="tablet" msgid="1766522102636921529">"Bạn không có từ nào trong từ điển người dùng. Bạn có thể thêm từ qua trình đơn."</string>
+    <string name="user_dict_settings_empty_text" product="tablet" msgid="1766522102636921529">"Bạn không có bất kỳ từ nào trong từ điển người dùng. Bạn có thể thêm từ bằng cách chạm vào nút Thêm ( + )."</string>
     <string name="user_dict_settings_empty_text" product="default" msgid="6209268025109242806">"Bạn không có từ nào trong từ điển người dùng. Bạn có thể thêm từ qua trình đơn."</string>
     <string name="testing" msgid="6584352735303604146">"Đang kiểm tra"</string>
     <string name="testing_phone_info" product="tablet" msgid="193561832258534798">"Thông tin về máy tính bảng"</string>
@@ -1122,12 +1104,9 @@
     <string name="accessibility_power_button_category" msgid="8545885236482339928">"Nút Nguồn"</string>
     <string name="accessibility_power_button_ends_call" msgid="7698764194501089533">"Nút Nguồn kết thúc cuộc gọi"</string>
     <string name="accessibility_power_button_ends_call_summary" msgid="8878097632186291462">"Trong suốt cuộc gọi, việc nhấn phím Nguồn sẽ kết thúc cuộc gọi thay vì tắt màn hình"</string>
-    <!-- no translation found for touchscreen_gestures_category (3109869155350859625) -->
-    <skip />
-    <!-- no translation found for long_press_timeout_selector_title (1396876537252863044) -->
-    <skip />
-    <!-- no translation found for long_press_timeout_selector_summary (2261114502740278996) -->
-    <skip />
+    <string name="touchscreen_gestures_category" msgid="3109869155350859625">"Thao tác dành cho màn hình cảm ứng"</string>
+    <string name="long_press_timeout_selector_title" msgid="1396876537252863044">"Thời gian chờ cho Chạm &amp; giữ"</string>
+    <string name="long_press_timeout_selector_summary" msgid="2261114502740278996">"Thời gian chờ cho đến khi thao tác chạm được hiểu là chạm &amp; giữ"</string>
     <string name="power_usage_summary_title" msgid="5180282911164282324">"Sử dụng pin"</string>
     <string name="power_usage_summary" msgid="7237084831082848168">"Cái gì đang sử dụng pin"</string>
     <string name="power_usage_not_available" msgid="3583407442633768046">"Không có dữ liệu sử dụng pin"</string>
@@ -1416,7 +1395,7 @@
     <string name="background_data_summary" msgid="3630389249212620467">"Ứng dụng có thể đồng bộ hóa, gửi và nhận dữ liệu bất kỳ lúc nào"</string>
     <string name="background_data_dialog_title" msgid="745974259246047425">"Chú ý"</string>
     <string name="background_data_dialog_message" msgid="9155730118215371308">"Vô hiệu hóa dữ liệu nền sẽ kéo dài tuổi thọ pin và giảm việc sử dụng dữ liệu. Một số ứng dụng vẫn có thể sử dụng kết nối dữ liệu nền."</string>
-    <!-- outdated translation 7232356254121075216 -->     <string name="sync_automatically" msgid="7558810110682562376">"Tự động đồng bộ hóa"</string>
+    <string name="sync_automatically" msgid="7558810110682562376">"Tự động đồng bộ hóa"</string>
     <string name="sync_automatically_summary" msgid="6662623174608419931">"Ứng dụng tự động đồng bộ hóa dữ liệu"</string>
     <string name="header_manage_accounts" msgid="6869002423884539607">"Quản lý tài khoản"</string>
     <string name="sync_enabled" msgid="4551148952179416813">"Đồng bộ hóa BẬT"</string>
@@ -1424,13 +1403,13 @@
     <string name="sync_error" msgid="5060969083117872149">"Lỗi đồng bộ hóa"</string>
     <string name="settings_backup" msgid="2274732978260797031">"Sao lưu cài đặt"</string>
     <string name="settings_backup_summary" msgid="7916877705938054035">"Sao lưu cài đặt của tôi"</string>
-    <!-- outdated translation 4438555069848430041 -->     <string name="sync_menu_sync_now" msgid="6154608350395805683">"Đồng bộ hóa ngay bây giờ"</string>
-    <!-- outdated translation 260091941807229790 -->     <string name="sync_menu_sync_cancel" msgid="8292379009626966949">"Hủy đồng bộ hóa"</string>
+    <string name="sync_menu_sync_now" msgid="6154608350395805683">"Đồng bộ hóa ngay bây giờ"</string>
+    <string name="sync_menu_sync_cancel" msgid="8292379009626966949">"Hủy đồng bộ hóa"</string>
     <string name="sync_one_time_sync" msgid="6766593624598183090">"Chạm để đồng bộ hóa ngay bây giờ<xliff:g id="LAST_SYNC_TIME">
 %1$s</xliff:g>"</string>
-    <!-- outdated translation 2427506589849697841 -->     <string name="sync_gmail" msgid="714886122098006477">"Gmail"</string>
-    <!-- outdated translation 6328872198278573611 -->     <string name="sync_calendar" msgid="9056527206714733735">"Lịch"</string>
-    <!-- outdated translation 6010441370923919977 -->     <string name="sync_contacts" msgid="9174914394377828043">"Danh bạ"</string>
+    <string name="sync_gmail" msgid="714886122098006477">"Gmail"</string>
+    <string name="sync_calendar" msgid="9056527206714733735">"Lịch"</string>
+    <string name="sync_contacts" msgid="9174914394377828043">"Danh bạ"</string>
     <string name="sync_plug" msgid="5952575609349860569"><font fgcolor="#ffffffff">"Chào mừng bạn đến với Google sync!"</font>" "\n"Một giải pháp đồng bộ hóa dữ liệu của Google cho phép quyền truy cập vào danh bạ, các cuộc hẹn và hơn thế nữa cho dù bạn ở đâu."</string>
     <string name="header_application_sync_settings" msgid="5514539555293976035">"Cài đặt đồng bộ hóa ứng dụng"</string>
     <string name="header_data_and_synchronization" msgid="5165024023936509896">"Dữ liệu &amp; đồng bộ hóa"</string>
@@ -1453,9 +1432,8 @@
     <string name="service_busy" msgid="225227519012409130">"Dịch vụ bận, thử lại"</string>
     <string name="delete" msgid="4219243412325163003">"Xóa"</string>
     <string name="misc_files" msgid="6298643430106707497">"Tệp khác"</string>
-    <!-- no translation found for misc_files_selected_count (4647048020823912088) -->
-    <skip />
-    <!-- no translation found for misc_files_selected_count_bytes (5603677358119178101) -->
+    <string name="misc_files_selected_count" msgid="4647048020823912088">"đã chọn <xliff:g id="NUMBER">%1$d</xliff:g> trong tổng số <xliff:g id="TOTAL">%2$d</xliff:g>"</string>
+    <!-- no translation found for misc_files_selected_count_bytes (2876232009069114352) -->
     <skip />
     <string name="select_all" msgid="6783085295161532497">"Chọn tất cả"</string>
 </resources>

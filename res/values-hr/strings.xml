@@ -148,14 +148,12 @@
     <string name="proxy_settings_summary" msgid="7898928000758321486">"Postavi globalni HTTP proxy i popise za isključivanje"</string>
     <string name="proxy_clear_text" msgid="5555400754952012657">"Očisti"</string>
     <string name="proxy_port_label" msgid="5655276502233453400">"Priključak proxy poslužitelja"</string>
-    <!-- outdated translation 4287056510182845203 -->     <string name="proxy_exclusionlist_label" msgid="7700491504623418701">"Nema proxy postavki za"</string>
-    <!-- no translation found for proxy_exclusionlist_hint (6084099226687226948) -->
-    <skip />
+    <string name="proxy_exclusionlist_label" msgid="7700491504623418701">"Zaobiđi proxy za"</string>
+    <string name="proxy_exclusionlist_hint" msgid="6084099226687226948">"example.com,mycomp.test.com,localhost"</string>
     <string name="proxy_defaultView_text" msgid="6387985519141433291">"Vrati zadano"</string>
     <string name="proxy_action_text" msgid="2957063145357903951">"Gotovo"</string>
     <string name="proxy_hostname_label" msgid="8490171412999373362">"Naziv hosta proxy poslužitelja"</string>
-    <!-- no translation found for proxy_hostname_hint (2076157057003936176) -->
-    <skip />
+    <string name="proxy_hostname_hint" msgid="2076157057003936176">"proxy.example.com"</string>
     <string name="proxy_error" msgid="8926675299638611451">"Pažnja"</string>
     <string name="proxy_error_dismiss" msgid="4993171795485460060">"U redu"</string>
     <string name="proxy_error_invalid_host" msgid="9120776460063182119">"Naziv hosta nije valjan."</string>
@@ -296,11 +294,9 @@
     <string name="crypt_keeper_final_desc" product="tablet" msgid="2496639211575162172">"Kriptirati tablet računalo? Ta je operacija nepovratna i izgubit ćete podatke ako je prekinete. Kriptiranje traje sat vremena ili dulje, a za to vrijeme tablet računalo nekoliko će se puta ponovno pokrenuti."</string>
     <string name="crypt_keeper_final_desc" product="default" msgid="3248595818246515395">"Kriptirati telefon? Ta je operacija nepovratna i izgubit ćete podatke ako je prekinete. Kriptiranje traje sat vremena, a i dulje, tijekom kojih će se telefon nekoliko puta ponovno pokrenuti."</string>
     <string name="crypt_keeper_setup_title" msgid="1783951453124244969">"Kriptiranje"</string>
-    <!-- no translation found for crypt_keeper_setup_description (5317479293244660361) -->
-    <skip />
-    <!-- no translation found for crypt_keeper_setup_description (8166730416836285875) -->
-    <skip />
-    <!-- outdated translation 6736063610343230255 -->     <string name="crypt_keeper_cooldown" msgid="685210918307862395">"Pokušajte ponovo za 1 s."</string>
+    <string name="crypt_keeper_setup_description" product="tablet" msgid="5317479293244660361">"Pričekajte dok ne završi kriptiranje vašeg tablet računala. <xliff:g id="PERCENT">^1</xliff:g>% dovršeno."</string>
+    <string name="crypt_keeper_setup_description" product="default" msgid="8166730416836285875">"Pričekajte dok ne završi kriptiranje vašeg telefona. <xliff:g id="PERCENT">^1</xliff:g>% dovršeno."</string>
+    <string name="crypt_keeper_cooldown" msgid="685210918307862395">"Pokušajte ponovo za <xliff:g id="DELAY">^1</xliff:g> s."</string>
     <string name="crypt_keeper_enter_password" msgid="1492603008983893532">"Unesite zaporku"</string>
     <string name="crypt_keeper_failed_title" msgid="1166918236711686187">"Enkripcija nije uspjela"</string>
     <string name="crypt_keeper_failed_summary" product="tablet" msgid="1075638996134310507">"Enkripcija je prekinuta i ne može se dovršiti. Morate izvršiti vraćanje na tvorničko stanje (izbrisati sve svoje podatke) prije nego što nastavite upotrebljavati tablet računalo. Kada se vraćanje na tvorničko stanje završi, možete ga ponovno pokušati kriptirati."</string>
@@ -312,7 +308,7 @@
     <string name="unlock_set_unlock_launch_picker_enable_summary" msgid="4791110798817242301">"Odaberite metodu za zaključavanje zaslona"</string>
     <string name="unlock_set_unlock_off_title" msgid="1613932765246180079">"Isključeno"</string>
     <string name="unlock_set_unlock_off_summary" msgid="2791013557563587655">"Nikada ne zaključavaj zaslon"</string>
-    <!-- outdated translation 6897899776351307938 -->     <string name="unlock_set_unlock_none_title" msgid="7560817055143323842">"Ništa"</string>
+    <string name="unlock_set_unlock_none_title" msgid="7560817055143323842">"Nije zaštićeno"</string>
     <string name="unlock_set_unlock_none_summary" msgid="2609139908913114644">"Bez uzorka, PIN-a ili zap. za otklj. zaslona"</string>
     <string name="unlock_set_unlock_pattern_title" msgid="2912067603917311700">"Uzorak"</string>
     <string name="unlock_set_unlock_pattern_summary" msgid="8467282436608077882">"Potreban je uzorak za otključavanje zaslona"</string>
@@ -322,7 +318,7 @@
     <string name="unlock_set_unlock_password_summary" msgid="7871968012198279034">"Potrebna je zaporka za otključavanje zaslona"</string>
     <string name="unlock_set_unlock_disabled_summary" msgid="8563103042330816018">"Onemogućio administrator ili pravila enkripcije"</string>
     <string name="unlock_set_unlock_mode_off" msgid="378729687629105388">"Isključeno"</string>
-    <!-- outdated translation 7953821968316697309 -->     <string name="unlock_set_unlock_mode_none" msgid="7137296704741184239">"Nesigurno"</string>
+    <string name="unlock_set_unlock_mode_none" msgid="7137296704741184239">"Nema zaštite"</string>
     <string name="unlock_set_unlock_mode_pattern" msgid="464022606293547390">"Osigurano uzorkom"</string>
     <string name="unlock_set_unlock_mode_pin" msgid="1379365142708807163">"Osigurano PIN-om"</string>
     <string name="unlock_set_unlock_mode_password" msgid="6955742995327081060">"Osigurano zaporkom"</string>
@@ -413,16 +409,13 @@
     <string name="bluetooth_profile_headset" msgid="81844079120986198">"Handsfree"</string>
     <string name="bluetooth_profile_opp" msgid="3799470046565284440">"Prijenos"</string>
     <string name="bluetooth_profile_hid" msgid="3000858580917633478">"Ulazni uređaj"</string>
-    <!-- outdated translation 5679493013173658268 -->     <string name="bluetooth_profile_pan" msgid="3391606497945147673">"Ograničavanje"</string>
+    <string name="bluetooth_profile_pan" msgid="3391606497945147673">"Pristup internetu"</string>
     <string name="bluetooth_disconnect_a2dp_profile" msgid="3524648279150937177">"Uređaj <xliff:g id="DEVICE_NAME">%1$s</xliff:g> bit će isključen sa zvuka medija."</string>
     <string name="bluetooth_disconnect_headset_profile" msgid="8635908811168780720">"Handsfree zvuk za uređaj <xliff:g id="DEVICE_NAME">%1$s</xliff:g> bit će isključen."</string>
     <string name="bluetooth_disconnect_hid_profile" msgid="3282295189719352075">"Uređaj <xliff:g id="DEVICE_NAME">%1$s</xliff:g> bit će isključen s ulaznog uređaja."</string>
-    <!-- no translation found for bluetooth_disconnect_pan_user_profile (8037627994382458698) -->
-    <skip />
-    <!-- no translation found for bluetooth_disconnect_pan_nap_profile (5455448395850929200) -->
-    <skip />
-    <!-- no translation found for bluetooth_disconnect_pan_nap_profile (5266851881175033601) -->
-    <skip />
+    <string name="bluetooth_disconnect_pan_user_profile" msgid="8037627994382458698">"Pristup internetu putem uređaja <xliff:g id="DEVICE_NAME">%1$s</xliff:g> bit će prekinut."</string>
+    <string name="bluetooth_disconnect_pan_nap_profile" product="tablet" msgid="5455448395850929200">"Uređaj <xliff:g id="DEVICE_NAME">%1$s</xliff:g> bit će isključen iz dijeljenja internetske veze ovog tableta."</string>
+    <string name="bluetooth_disconnect_pan_nap_profile" product="default" msgid="5266851881175033601">"Uređaj <xliff:g id="DEVICE_NAME">%1$s</xliff:g> bit će isključen iz dijeljenja internetske veze ovog telefona."</string>
     <string name="bluetooth_device_advanced_title" msgid="528816860793581131">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> opcije"</string>
     <string name="bluetooth_device_advanced_device_actions_title" msgid="3793430949811946844">"Radnje uređaja"</string>
     <string name="bluetooth_device_advanced_online_mode_title" msgid="3689050071425683114">"Poveži"</string>
@@ -435,10 +428,8 @@
     <string name="bluetooth_opp_profile_summary_connected" msgid="2611913495968309066">"Povezano s poslužiteljem za prijenos datoteka"</string>
     <string name="bluetooth_opp_profile_summary_not_connected" msgid="1267091356089086285">"Niste povezani s poslužiteljem za prijenos datoteka"</string>
     <string name="bluetooth_hid_profile_summary_connected" msgid="3381760054215168689">"Povezano s ulaznim uređajem"</string>
-    <!-- no translation found for bluetooth_pan_user_profile_summary_connected (4602294638909590612) -->
-    <skip />
-    <!-- no translation found for bluetooth_pan_nap_profile_summary_connected (1561383706411975199) -->
-    <skip />
+    <string name="bluetooth_pan_user_profile_summary_connected" msgid="4602294638909590612">"Povezano s uređajem za pristup internetu"</string>
+    <string name="bluetooth_pan_nap_profile_summary_connected" msgid="1561383706411975199">"Dijeljenje lokalne internetske veze s uređajem"</string>
     <string name="bluetooth_a2dp_profile_summary_use_for" msgid="4630849022250168427">"Koristi za medijski zvuk"</string>
     <string name="bluetooth_headset_profile_summary_use_for" msgid="8705753622443862627">"Koristi za telefonski zvuk"</string>
     <string name="bluetooth_opp_profile_summary_use_for" msgid="1255674547144769756">"Koristi za prijenos datoteke"</string>
@@ -466,8 +457,7 @@
     <string name="wifi_notify_open_networks_summary" msgid="3038290727701553612">"Obavijesti me ako postoji otvorena mreža"</string>
     <string name="wifi_setting_sleep_policy_title" msgid="2256739245628081979">"Pravila isključivanja za Wi-Fi"</string>
     <string name="wifi_setting_sleep_policy_summary" msgid="7573693311804602041">"Navedite trenutak za prebacivanje sa značajke Wi-Fi na mobilne podatke"</string>
-    <!-- no translation found for wifi_setting_sleep_policy_summary_wifi_only (5025244230722670496) -->
-    <skip />
+    <string name="wifi_setting_sleep_policy_summary_wifi_only" msgid="5025244230722670496">"Odredite kada uređaj treba isključiti s Wi-Fi mreže"</string>
     <string name="wifi_setting_sleep_policy_error" msgid="8174902072673071961">"Pojavio se problem s promjenom postavke"</string>
     <string name="wifi_add_network" msgid="1671334951296205616">"Dodaj Wi-Fi mrežu"</string>
     <string name="wifi_access_points" msgid="2664629396767022441">"Wi-Fi mreže"</string>
@@ -609,12 +599,9 @@
     <string name="screen_timeout" msgid="6962654593018319466">"Privremeni prekid"</string>
     <string name="screen_timeout_summary" msgid="4471347210332380587">"Zaslon se isključuje automatski nakon <xliff:g id="TIMEOUT_DESCRIPTION">%1$s</xliff:g>"</string>
     <string name="automatic_brightness" msgid="5014143533884135461">"Automatska svjetlina"</string>
-    <!-- no translation found for title_font_size (4405544325522105222) -->
-    <skip />
-    <!-- no translation found for summary_font_size (7548243392515500554) -->
-    <skip />
-    <!-- no translation found for dialog_title_font_size (4503471078477715461) -->
-    <skip />
+    <string name="title_font_size" msgid="4405544325522105222">"Veličina fonta"</string>
+    <string name="summary_font_size" msgid="7548243392515500554">"Opća veličina fonta"</string>
+    <string name="dialog_title_font_size" msgid="4503471078477715461">"Odabir veličine fonta"</string>
     <string name="sim_lock_settings" msgid="3392331196873564292">"Postavke zaključavanja SIM kartice"</string>
     <string name="sim_lock_settings_category" msgid="5136244267576697004">"Postavite zaključavanje SIM kartice"</string>
     <string name="sim_lock_settings_title" msgid="9018585580955414596">"SIM kartica je zaključana"</string>
@@ -669,8 +656,7 @@
     <string name="status_operator" msgid="2274875196954742087">"Mreža"</string>
     <string name="status_wifi_mac_address" msgid="33109409206264790">"Wi-Fi MAC adresa"</string>
     <string name="status_bt_address" msgid="4195174192087439720">"Bluetooth adresa"</string>
-    <!-- no translation found for status_serial_number (2257111183374628137) -->
-    <skip />
+    <string name="status_serial_number" msgid="2257111183374628137">"Serijski broj"</string>
     <string name="status_unavailable" msgid="7862009036663793314">"Nije dostupno"</string>
     <string name="status_up_time" msgid="7294859476816760399">"Vrijeme aktivnosti"</string>
     <string name="status_awake_time" msgid="2393949909051183652">"Vrijeme bez mirovanja"</string>
@@ -753,8 +739,8 @@
     <string name="master_clear_title" msgid="5907939616087039756">"Vraćanje na tvorničko stanje"</string>
     <string name="master_clear_summary" product="tablet" msgid="4036344100254678429">"Briše sve podatke na tabletnom uređaju"</string>
     <string name="master_clear_summary" product="default" msgid="4986154238001088492">"Izbriši sve podatke na telefonu"</string>
-    <!-- outdated translation 6121706363551361209 -->     <string name="master_clear_desc" product="tablet" msgid="590799767511283567">"To će izbrisati sve podatke iz "<b>"unutarnje pohrane"</b>" vašeg tabletnog računala, uključujući:"\n\n<li>"Vaš Google Račun"</li>\n<li>"Sistemske podatke i podatke aplikacije i postavke"</li>\n<li>"Preuzete aplikacije"</li></string>
-    <!-- outdated translation 6121706363551361209 -->     <string name="master_clear_desc" product="default" msgid="3251400937758241249">"To će izbrisati sve podatke iz "<b>"unutarnje pohrane"</b>" vašeg tabletnog računala, uključujući:"\n\n<li>"Vaš Google Račun"</li>\n<li>"Sistemske podatke i podatke aplikacije i postavke"</li>\n<li>"Preuzete aplikacije"</li></string>
+    <string name="master_clear_desc" product="tablet" msgid="590799767511283567">"To će izbrisati sve podatke iz "<b>"interne pohrane"</b>" vašeg tabletnog uređaja, uključujući:"\n\n<li>"Vaš Google Račun"</li>\n<li>"Sistemske i aplikacijske podatke i postavke"</li>\n<li>"Preuzete aplikacije"</li></string>
+    <string name="master_clear_desc" product="default" msgid="3251400937758241249">"To će izbrisati sve podatke iz "<b>"interne pohrane"</b>", uključujući:"\n\n<li>"Vaš Google Račun"</li>\n<li>"Sistemske i aplikacijske podatke i postavke"</li>\n<li>"Preuzete aplikacije"</li></string>
     <string name="master_clear_accounts" product="default" msgid="6412857499147999073">\n\n"Trenutačno ste prijavljeni na sljedeće račune:"\n</string>
     <string name="master_clear_desc_also_erases_external" msgid="1903185203791274237"><li>"Glazba"</li>\n<li>"Fotografije"</li>\n<li>"Ostali korisnički podaci"</li></string>
     <string name="master_clear_desc_erase_external_storage" product="nosdcard" msgid="4740866328425123395">\n\n"Da biste također izbrisali glazbu, slike i ostale korisničke podatke, "<b>"memorija USB"</b>" treba biti izbrisana."</string>
@@ -812,18 +798,14 @@
     <string name="usb_tethering_unavailable_subtext" msgid="1044622421184007254">"USB nije priključen"</string>
     <string name="usb_tethering_errored_subtext" msgid="1377574819427841992">"Pogreška ograničenja USB-a"</string>
     <string name="bluetooth_tether_checkbox_text" msgid="2379175828878753652">"Dijeljenje veze Bluetoothom"</string>
-    <!-- outdated translation 8573646018168088420 -->     <string name="bluetooth_tethering_available_subtext" product="tablet" msgid="8811610320942954709">"Uključeno je dijeljenje veze Bluetoothom, ali veza nije uspostavljena"</string>
-    <!-- outdated translation 8573646018168088420 -->     <string name="bluetooth_tethering_available_subtext" product="default" msgid="4229220575771946723">"Uključeno je dijeljenje veze Bluetoothom, ali veza nije uspostavljena"</string>
-    <!-- no translation found for bluetooth_tethering_device_connected_subtext (2730938191906597896) -->
-    <skip />
-    <!-- no translation found for bluetooth_tethering_device_connected_subtext (1666736165420290466) -->
-    <skip />
-    <!-- no translation found for bluetooth_tethering_devices_connected_subtext (1180765608259580143) -->
-    <skip />
-    <!-- no translation found for bluetooth_tethering_devices_connected_subtext (8248942539362173005) -->
-    <skip />
-    <!-- outdated translation 4833146084600940242 -->     <string name="bluetooth_tethering_off_subtext" product="tablet" msgid="2093881379028235555">"Ograničavanje Bluetootha je isključeno"</string>
-    <!-- outdated translation 4833146084600940242 -->     <string name="bluetooth_tethering_off_subtext" product="default" msgid="706860924389041342">"Ograničavanje Bluetootha je isključeno"</string>
+    <string name="bluetooth_tethering_available_subtext" product="tablet" msgid="8811610320942954709">"Dijeljenje internetske veze ovog tableta"</string>
+    <string name="bluetooth_tethering_available_subtext" product="default" msgid="4229220575771946723">"Dijeljenje internetske veze ovog uređaja"</string>
+    <string name="bluetooth_tethering_device_connected_subtext" product="tablet" msgid="2730938191906597896">"Internetska veza tableta dijeli se s 1 uređajem"</string>
+    <string name="bluetooth_tethering_device_connected_subtext" product="default" msgid="1666736165420290466">"Internetska veza telefona dijeli se s 1 uređajem"</string>
+    <string name="bluetooth_tethering_devices_connected_subtext" product="tablet" msgid="1180765608259580143">"Broj uređaja s kojima se dijeli int. veza tableta: <xliff:g id="CONNECTEDDEVICECOUNT">%1$d</xliff:g>"</string>
+    <string name="bluetooth_tethering_devices_connected_subtext" product="default" msgid="8248942539362173005">"Broj uređaja s kojima se dijeli int. veza telefona: <xliff:g id="CONNECTEDDEVICECOUNT">%1$d</xliff:g>"</string>
+    <string name="bluetooth_tethering_off_subtext" product="tablet" msgid="2093881379028235555">"Ne dijeli se internetska veza ovog tableta"</string>
+    <string name="bluetooth_tethering_off_subtext" product="default" msgid="706860924389041342">"Ne dijeli se internetska veza ovog telefona"</string>
     <string name="bluetooth_tethering_errored_subtext" msgid="1344187103463073993">"Pogreška u dijeljenju veze Bluetoothom"</string>
     <string name="bluetooth_tethering_overflow_error" msgid="2222060504731415763">"Ne može se dijeliti veza za više od <xliff:g id="MAXCONNECTION">%1$d</xliff:g> uređaja"</string>
     <string name="bluetooth_untether_blank" msgid="2871192409329334813">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> će biti oslobođen."</string>
@@ -1049,7 +1031,7 @@
     <string name="user_dict_settings_edit_dialog_title" msgid="8967476444840548674">"Uredi riječ"</string>
     <string name="user_dict_settings_context_menu_edit_title" msgid="2210564879320004837">"Uređivanje"</string>
     <string name="user_dict_settings_context_menu_delete_title" msgid="9140703913776549054">"Izbriši"</string>
-    <!-- outdated translation 2359596356158452427 -->     <string name="user_dict_settings_empty_text" product="tablet" msgid="1766522102636921529">"Nemate nijednu riječ u korisničkom rječniku. Riječ možete dodati putem izbornika."</string>
+    <string name="user_dict_settings_empty_text" product="tablet" msgid="1766522102636921529">"Nemate nijednu riječ u korisničkom rječniku. Riječ možete dodati dodirom na gumb Dodaj (+).."</string>
     <string name="user_dict_settings_empty_text" product="default" msgid="6209268025109242806">"Nemate nijednu riječ u korisničkom rječniku. Riječ možete dodati putem izbornika."</string>
     <string name="testing" msgid="6584352735303604146">"Testiranje"</string>
     <string name="testing_phone_info" product="tablet" msgid="193561832258534798">"Informacije o tabletnom uređaju"</string>
@@ -1122,12 +1104,9 @@
     <string name="accessibility_power_button_category" msgid="8545885236482339928">"Tipka za uključivanje/isključivanje"</string>
     <string name="accessibility_power_button_ends_call" msgid="7698764194501089533">"Tipka za uključivanje/isključivanje/poziv"</string>
     <string name="accessibility_power_button_ends_call_summary" msgid="8878097632186291462">"Tijekom poziva pritisnite Napajanje sa završetkom poziva umjesto isključivanja zaslona"</string>
-    <!-- no translation found for touchscreen_gestures_category (3109869155350859625) -->
-    <skip />
-    <!-- no translation found for long_press_timeout_selector_title (1396876537252863044) -->
-    <skip />
-    <!-- no translation found for long_press_timeout_selector_summary (2261114502740278996) -->
-    <skip />
+    <string name="touchscreen_gestures_category" msgid="3109869155350859625">"Geste za dodirni zaslon"</string>
+    <string name="long_press_timeout_selector_title" msgid="1396876537252863044">"Dodirnite i držite odgodu"</string>
+    <string name="long_press_timeout_selector_summary" msgid="2261114502740278996">"Odgoda dok se dodir ne protumači kao dodir i držanje"</string>
     <string name="power_usage_summary_title" msgid="5180282911164282324">"Iskorištenost baterije"</string>
     <string name="power_usage_summary" msgid="7237084831082848168">"Što troši bateriju"</string>
     <string name="power_usage_not_available" msgid="3583407442633768046">"Pod. o potroš. bat. nedostupni"</string>
@@ -1416,7 +1395,7 @@
     <string name="background_data_summary" msgid="3630389249212620467">"Aplikacije mogu sink., slati i primati podatke bilo kada"</string>
     <string name="background_data_dialog_title" msgid="745974259246047425">"Pažnja"</string>
     <string name="background_data_dialog_message" msgid="9155730118215371308">"Onemogućavanje pozadinskih podataka produljuje trajanje baterije i smanjuje upotrebu podataka. Neke aplikacije još uvijek mogu upotrebljavati pozadinsku podatkovnu mrežu."</string>
-    <!-- outdated translation 7232356254121075216 -->     <string name="sync_automatically" msgid="7558810110682562376">"Automatska sinkronizacija"</string>
+    <string name="sync_automatically" msgid="7558810110682562376">"Automatska sinkronizacija"</string>
     <string name="sync_automatically_summary" msgid="6662623174608419931">"Aplikacije podatke sinkroniziraju automatski"</string>
     <string name="header_manage_accounts" msgid="6869002423884539607">"Upravljaj računima"</string>
     <string name="sync_enabled" msgid="4551148952179416813">"Sink. uključena"</string>
@@ -1424,13 +1403,13 @@
     <string name="sync_error" msgid="5060969083117872149">"Pogreška sink."</string>
     <string name="settings_backup" msgid="2274732978260797031">"Postavke sigurnosne kopije"</string>
     <string name="settings_backup_summary" msgid="7916877705938054035">"Stvori sigurnosnu kopiju postavki"</string>
-    <!-- outdated translation 4438555069848430041 -->     <string name="sync_menu_sync_now" msgid="6154608350395805683">"Sinkroniziraj sada"</string>
-    <!-- outdated translation 260091941807229790 -->     <string name="sync_menu_sync_cancel" msgid="8292379009626966949">"Otkaži sinkronizaciju"</string>
+    <string name="sync_menu_sync_now" msgid="6154608350395805683">"Sinkroniziraj sada"</string>
+    <string name="sync_menu_sync_cancel" msgid="8292379009626966949">"Otkaži sinkronizaciju"</string>
     <string name="sync_one_time_sync" msgid="6766593624598183090">"Dodirnite da biste odmah sinkronizirali<xliff:g id="LAST_SYNC_TIME">
 %1$s</xliff:g>"</string>
-    <!-- outdated translation 2427506589849697841 -->     <string name="sync_gmail" msgid="714886122098006477">"Gmail"</string>
-    <!-- outdated translation 6328872198278573611 -->     <string name="sync_calendar" msgid="9056527206714733735">"Kalendar"</string>
-    <!-- outdated translation 6010441370923919977 -->     <string name="sync_contacts" msgid="9174914394377828043">"Kontakti"</string>
+    <string name="sync_gmail" msgid="714886122098006477">"Gmail"</string>
+    <string name="sync_calendar" msgid="9056527206714733735">"Kalendar"</string>
+    <string name="sync_contacts" msgid="9174914394377828043">"Kontakti"</string>
     <string name="sync_plug" msgid="5952575609349860569"><font fgcolor="#ffffffff">"Dobro došli u Google sinkronizaciju!"</font>" "\n"Googleov pristup sinkronizaciji podataka za mogućnost pristupa kontaktima, sastancima i drugim stavkama s bilo kojeg mjesta."</string>
     <string name="header_application_sync_settings" msgid="5514539555293976035">"Postavke sinkronizacije aplikacije"</string>
     <string name="header_data_and_synchronization" msgid="5165024023936509896">"Podaci i sinkronizacija"</string>
@@ -1453,9 +1432,8 @@
     <string name="service_busy" msgid="225227519012409130">"Usluga je zauzeta, pokušajte ponovo"</string>
     <string name="delete" msgid="4219243412325163003">"Izbriši"</string>
     <string name="misc_files" msgid="6298643430106707497">"Razne datoteke"</string>
-    <!-- no translation found for misc_files_selected_count (4647048020823912088) -->
-    <skip />
-    <!-- no translation found for misc_files_selected_count_bytes (5603677358119178101) -->
+    <string name="misc_files_selected_count" msgid="4647048020823912088">"odabrano <xliff:g id="NUMBER">%1$d</xliff:g> od <xliff:g id="TOTAL">%2$d</xliff:g>"</string>
+    <!-- no translation found for misc_files_selected_count_bytes (2876232009069114352) -->
     <skip />
     <string name="select_all" msgid="6783085295161532497">"Odaberi sve"</string>
 </resources>
