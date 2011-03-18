@@ -230,8 +230,10 @@ public class Settings extends PreferenceActivity implements ButtonBarHandler {
     }
 
     @Override
-    public Intent onBuildStartFragmentIntent(String fragmentName, Bundle args) {
-        Intent intent = super.onBuildStartFragmentIntent(fragmentName, args);
+    public Intent onBuildStartFragmentIntent(String fragmentName, Bundle args,
+            int titleRes, int shortTitleRes) {
+        Intent intent = super.onBuildStartFragmentIntent(fragmentName, args,
+                titleRes, shortTitleRes);
         intent.setClass(this, SubSettings.class);
         return intent;
     }
