@@ -113,9 +113,9 @@
     <string name="bluetooth_notif_message" msgid="5381418499788668724">"Selecteer dit om te koppelen met "</string>
     <string name="device_picker" msgid="8721012448931226323">"Apparaatkiezer van Bluetooth"</string>
     <string name="bluetooth_permission_request" msgid="1523129741266262748">"Machtigingsverzoek voor Bluetooth"</string>
-    <string name="bluetooth_ask_enablement" msgid="2342558978033892004">"Een toepassing probeert Bluetooth in te schakelen. Wilt u dit toestaan?"</string>
-    <string name="bluetooth_ask_discovery" msgid="669870705606180872">"Een toepassing probeert uw telefoon <xliff:g id="TIMEOUT">%1$d</xliff:g> seconden zichtbaar te maken voor andere Bluetooth-apparaten. Wilt u dit toestaan?"</string>
-    <string name="bluetooth_ask_enablement_and_discovery" msgid="7220210326619399542">"Een toepassing probeert Bluetooth in te schakelen en uw telefoon <xliff:g id="TIMEOUT">%1$d</xliff:g> seconden zichtbaar te maken voor andere apparaten. Wilt u dit toestaan?"</string>
+    <string name="bluetooth_ask_enablement" msgid="2342558978033892004">"Een app probeert Bluetooth in te schakelen. Wilt u dit toestaan?"</string>
+    <string name="bluetooth_ask_discovery" msgid="669870705606180872">"Een app probeert uw telefoon <xliff:g id="TIMEOUT">%1$d</xliff:g> seconden zichtbaar te maken voor andere Bluetooth-apparaten. Wilt u dit toestaan?"</string>
+    <string name="bluetooth_ask_enablement_and_discovery" msgid="7220210326619399542">"Een app probeert Bluetooth in te schakelen en uw telefoon <xliff:g id="TIMEOUT">%1$d</xliff:g> seconden zichtbaar te maken voor andere apparaten. Wilt u dit toestaan?"</string>
     <string name="bluetooth_turning_on" msgid="3107102168379705771">"Bluetooth inschakelen…"</string>
     <string name="date_and_time" msgid="4114084177056654663">"Datum- en tijdinstellingen"</string>
     <string name="date_time_12_hour_sample" msgid="3259617262618020574">"13:00 uur"</string>
@@ -584,6 +584,7 @@
     <string name="apn_auth_type_chap" msgid="3369626283789068360">"CHAP"</string>
     <string name="apn_auth_type_pap_chap" msgid="9102343063036134541">"PAP of CHAP"</string>
     <string name="apn_type" msgid="469613123902220544">"APN-type"</string>
+    <string name="apn_protocol" msgid="3272222921649348640">"APN-protocol"</string>
     <string name="menu_delete" msgid="6981294422841124659">"APN verwijderen"</string>
     <string name="menu_new" msgid="3014205883303921729">"Nieuwe APN"</string>
     <string name="menu_save" msgid="8109345640668285399">"Opslaan"</string>
@@ -711,7 +712,7 @@
     <string name="lock_example_message" msgid="1838650097090632706">"Verbind minimaal vier punten. "\n" "\n"Selecteer \'Volgende\' als u klaar bent om uw eigen patroon te tekenen."</string>
     <string name="manageapplications_settings_title" msgid="5712405848153426706">"Toepassingen beheren"</string>
     <string name="manageapplications_settings_summary" msgid="6097117021500651232">"Geïnstalleerde toepassingen beheren en verwijderen"</string>
-    <string name="applications_settings" msgid="3736173521008476946">"Toepassingen"</string>
+    <string name="applications_settings" msgid="3736173521008476946">"Apps"</string>
     <string name="applications_settings_summary" msgid="2714215108369119717">"Toepassingen beheren, sneltoetsen voor snelstarten instellen"</string>
     <string name="applications_settings_header" msgid="6018266337275422250">"Toepassingsinstellingen"</string>
     <string name="install_applications" msgid="4872012136210802181">"Onbekende bronnen"</string>
@@ -727,14 +728,14 @@
     <string name="controls_label" msgid="7611113077086853799">"Bedieningselementen"</string>
     <string name="force_stop" msgid="7435006169872876756">"Nu stoppen"</string>
     <string name="total_size_label" msgid="1048676419552557254">"Totaal"</string>
-    <string name="application_size_label" msgid="5055196275624686382">"Toepassing"</string>
+    <string name="application_size_label" msgid="5055196275624686382">"App"</string>
     <string name="data_size_label" msgid="8679376373625710107">"Gegevens"</string>
     <string name="uninstall_text" msgid="3644892466144802466">"Verwijderen"</string>
     <string name="disable_text" msgid="6544054052049395202">"Uitschakelen"</string>
     <string name="enable_text" msgid="9217362512327828987">"Inschakelen"</string>
     <string name="clear_user_data_text" msgid="5597622864770098388">"Gegevens wissen"</string>
     <string name="app_factory_reset" msgid="6635744722502563022">"Updates verwijderen"</string>
-    <string name="auto_launch_enable_text" msgid="2630656657744196691">"U heeft ervoor gekozen om deze toepassing standaard te starten voor bepaalde acties."</string>
+    <string name="auto_launch_enable_text" msgid="2630656657744196691">"U heeft ervoor gekozen deze app standaard te starten voor bepaalde acties."</string>
     <string name="auto_launch_disable_text" msgid="7800385822185540166">"Geen standaardwaarden ingesteld."</string>
     <string name="clear_activities" msgid="7408923511535174430">"Standaardwaarden wissen"</string>
     <string name="unknown" msgid="1592123443519355854">"Onbekend"</string>
@@ -757,17 +758,17 @@
     <string name="sd_card_storage" product="default" msgid="7623513618171928235">"SD-kaartopslag"</string>
     <string name="recompute_size" msgid="7722567982831691718">"Grootte opnieuw berekenen..."</string>
     <string name="clear_data_dlg_title" msgid="4470209520936375508">"Verwijderen"</string>
-    <string name="clear_data_dlg_text" msgid="8368035073300828451">"Alle gegevens van deze toepassing worden permanent verwijderd. Dit omvat alle bestanden, instellingen, accounts, databases, enzovoort."</string>
+    <string name="clear_data_dlg_text" msgid="8368035073300828451">"Alle gegevens van deze app worden permanent verwijderd. Dit omvat alle bestanden, instellingen, accounts, databases, enzovoort."</string>
     <string name="dlg_ok" msgid="2402639055725653590">"OK"</string>
     <string name="dlg_cancel" msgid="1674753358972975911">"Annuleren"</string>
-    <string name="app_not_found_dlg_title" msgid="8458335716378083713">"Toepassing niet gevonden"</string>
-    <string name="app_not_found_dlg_text" msgid="2980271680333341554">"De toepassing is niet gevonden in de lijst met geïnstalleerde toepassingen."</string>
+    <string name="app_not_found_dlg_title" msgid="8458335716378083713">"App niet gevonden"</string>
+    <string name="app_not_found_dlg_text" msgid="2980271680333341554">"De app is niet gevonden in de lijst met geïnstalleerde apps."</string>
     <string name="clear_data_failed" msgid="581956197586913865">"Kan toepassingsgegevens niet wissen."</string>
     <string name="app_factory_reset_dlg_title" msgid="6116199391150388147">"Updates verwijderen"</string>
     <string name="app_factory_reset_dlg_text" msgid="438395129140568893">"Wilt u alle updates voor deze Android-systeemtoepassing verwijderen?"</string>
     <string name="clear_failed_dlg_title" msgid="2387060805294783175">"Gegevens wissen"</string>
-    <string name="clear_failed_dlg_text" msgid="7943411157007320290">"Het wissen van gegevens is mislukt voor de toepassing"</string>
-    <string name="security_settings_desc" msgid="3116027624526915561">"Deze toepassing heeft toegang tot de volgende opties van uw telefoon:"</string>
+    <string name="clear_failed_dlg_text" msgid="7943411157007320290">"Het wissen van gegevens is mislukt voor de app"</string>
+    <string name="security_settings_desc" msgid="3116027624526915561">"Deze app heeft toegang tot de volgende opties van uw telefoon:"</string>
     <string name="computing_size" msgid="1599186977475211186">"Berekenen…"</string>
     <string name="invalid_size_value" msgid="1901940003700269523">"Kan grootte van pakket niet berekenen"</string>
     <string name="empty_list_msg" msgid="2901049162265094971">"U heeft geen toepassingen van derden geïnstalleerd."</string>
@@ -778,14 +779,14 @@
     <string name="move_app_to_sdcard" product="default" msgid="1143379049903056407">"Verplaatsen naar SD-kaart"</string>
     <string name="moving" msgid="6431016143218876491">"Verplaatsen"</string>
     <string name="insufficient_storage" msgid="8566913062094452962">"Er is niet voldoende opslag beschikbaar."</string>
-    <string name="does_not_exist" msgid="837163572898468245">"De toepassing bestaat niet."</string>
-    <string name="app_forward_locked" msgid="5747805144210389585">"De toepassing is beveiligd tegen kopiëren."</string>
+    <string name="does_not_exist" msgid="837163572898468245">"De app bestaat niet."</string>
+    <string name="app_forward_locked" msgid="5747805144210389585">"De app is beveiligd tegen kopiëren."</string>
     <string name="invalid_location" msgid="4934491353200240499">"De opgegeven installatielocatie is niet geldig."</string>
     <string name="system_package" msgid="1030561474413022831">"Systeemupdates kunnen niet worden geïnstalleerd op externe media."</string>
     <string name="force_stop_dlg_title" msgid="4289453224368188476">"Gedwongen stoppen"</string>
-    <string name="force_stop_dlg_text" msgid="5157374701213502922">"Als u een toepassing geforceerd stopt, kan de toepassing zich onverwacht gedragen. Weet u het zeker?"</string>
-    <string name="move_app_failed_dlg_title" msgid="4337731903265156405">"Toepassing verplaatsen"</string>
-    <string name="move_app_failed_dlg_text" msgid="8824246817947643697">"Verplaatsen van toepassing is mislukt. <xliff:g id="REASON">%1$s</xliff:g>"</string>
+    <string name="force_stop_dlg_text" msgid="5157374701213502922">"Als u een app geforceerd stopt, kan de app zich onverwacht gedragen. Weet u het zeker?"</string>
+    <string name="move_app_failed_dlg_title" msgid="4337731903265156405">"App verplaatsen"</string>
+    <string name="move_app_failed_dlg_text" msgid="8824246817947643697">"Verplaatsen van app is mislukt. <xliff:g id="REASON">%1$s</xliff:g>"</string>
     <string name="app_install_location_title" msgid="2068975150026852168">"Voorkeursinstallatielocatie"</string>
     <string name="app_install_location_summary" msgid="879753854530300436">"De voorkeursinstallatielocatie voor nieuwe toepassingen wijzigen."</string>
     <string name="storageuse_settings_title" msgid="5657014373502630403">"Opslaggebruik"</string>
@@ -795,7 +796,7 @@
     <string name="service_restarting" msgid="2242747937372354306">"Opnieuw starten"</string>
     <string name="cached" msgid="1059590879740175019">"Gecacht achtergrondproces"</string>
     <string name="no_running_services" msgid="2059536495597645347">"Niets wordt uitgevoerd."</string>
-    <string name="service_started_by_app" msgid="6575184738671598131">"Gestart door toepassing."</string>
+    <string name="service_started_by_app" msgid="6575184738671598131">"Gestart door app."</string>
     <!-- no translation found for service_client_name (4037193625611815517) -->
     <skip />
     <string name="service_background_processes" msgid="6844156253576174488">"<xliff:g id="MEMORY">%1$s</xliff:g> vrij"</string>
@@ -807,14 +808,14 @@
     <string name="running_processes_item_description_s_p" msgid="8019860457123222953">"<xliff:g id="NUMPROCESS">%1$d</xliff:g> proces en <xliff:g id="NUMSERVICES">%2$d</xliff:g> services"</string>
     <string name="running_processes_item_description_p_s" msgid="744424668287252915">"<xliff:g id="NUMPROCESS">%1$d</xliff:g> processen en <xliff:g id="NUMSERVICES">%2$d</xliff:g> service"</string>
     <string name="running_processes_item_description_p_p" msgid="1607384595790852782">"<xliff:g id="NUMPROCESS">%1$d</xliff:g> processen en <xliff:g id="NUMSERVICES">%2$d</xliff:g> services"</string>
-    <string name="runningservicedetails_settings_title" msgid="6188692418986988288">"Uitgevoerde toepassing"</string>
+    <string name="runningservicedetails_settings_title" msgid="6188692418986988288">"Uitgevoerde app"</string>
     <string name="no_services" msgid="7133900764462288263">"Niet actief"</string>
     <string name="runningservicedetails_services_title" msgid="391168243725357375">"Services"</string>
     <string name="runningservicedetails_processes_title" msgid="928115582044655268">"Processen"</string>
     <string name="service_stop" msgid="6369807553277527248">"Stoppen"</string>
     <string name="service_manage" msgid="1876642087421959194">"Instellingen"</string>
-    <string name="service_stop_description" msgid="3261798282116866961">"Deze service is gestart door de toepassing. Als de service wordt gestopt, kan de toepassing vastlopen."</string>
-    <string name="heavy_weight_stop_description" msgid="6855241582643136019">"Deze toepassing kan niet veilig worden gestopt. Als de toepassing wordt gestopt, kunt u een deel van uw huidige werk kwijtraken."</string>
+    <string name="service_stop_description" msgid="3261798282116866961">"Deze service is gestart door de app. Als de service wordt gestopt, kan de app vastlopen."</string>
+    <string name="heavy_weight_stop_description" msgid="6855241582643136019">"Deze app kan niet veilig worden gestopt. Als de app wordt gestopt, kunt u een deel van uw huidige werk kwijtraken."</string>
     <string name="background_process_stop_description" msgid="1728354083304746737">"Dit is een oud toepassingsproces dat is behouden voor hogere snelheid in geval het weer nodig is. Er is meestal geen reden om dit te stoppen."</string>
     <string name="service_manage_description" msgid="7050092269951613102">"<xliff:g id="CLIENT_NAME">%1$s</xliff:g>: momenteel in gebruik. Raak \'Instellingen\' aan om dit te bedienen."</string>
     <string name="main_running_process_description" msgid="929204645380391397">"Hoofdproces dat in gebruik is."</string>
@@ -837,7 +838,7 @@
     <string name="auto_punctuate_summary" msgid="4372126865670574837">"Druk twee keer op de spatiebalk om een punt (.) in te voegen"</string>
     <string name="show_password" msgid="2198798062604049206">"Zichtbare wachtwoorden"</string>
     <string name="show_password_summary" msgid="3806709974395178121">"Wachtwoord weergeven tijdens het typen"</string>
-    <string name="ime_security_warning" msgid="812267421486877917">"Deze invoermethode verzamelt mogelijk alle tekst die u typt, inclusief persoonlijke gegevens zoals wachtwoorden en creditcardnummers. De methode is afkomstig uit de toepassing <xliff:g id="IME_APPLICATION_NAME">%1$s</xliff:g>. Deze invoermethode inschakelen?"</string>
+    <string name="ime_security_warning" msgid="812267421486877917">"Deze invoermethode verzamelt mogelijk alle tekst die u typt, inclusief persoonlijke gegevens zoals wachtwoorden en creditcardnummers. De methode is afkomstig uit de app <xliff:g id="IME_APPLICATION_NAME">%1$s</xliff:g>. Deze invoermethode inschakelen?"</string>
     <string name="user_dict_settings_titlebar" msgid="765659257455000490">"Gebruikerswoordenboek"</string>
     <string name="user_dict_settings_title" msgid="8357027437499042191">"Gebruikerswoordenboek"</string>
     <string name="user_dict_settings_summary" msgid="7965571192902870454"></string>
@@ -852,14 +853,14 @@
     <string name="testing_battery_info" msgid="3497865525976497848">"Accu-informatie"</string>
     <string name="quick_launch_title" msgid="7904609846945905306">"Snelstarten"</string>
     <string name="quick_launch_summary" msgid="3453825712466417452">"Sneltoetsen instellen voor starten toepassingen"</string>
-    <string name="quick_launch_assign_application" msgid="4521368464929956350">"Toepassing toewijzen"</string>
+    <string name="quick_launch_assign_application" msgid="4521368464929956350">"App toewijzen"</string>
     <string name="quick_launch_no_shortcut" msgid="5998005833838278693">"Geen sneltoets"</string>
     <string name="quick_launch_shortcut" msgid="5090405067413522300">"Zoeken + <xliff:g id="SHORTCUT_LETTER">%1$s</xliff:g>"</string>
     <string name="quick_launch_clear_dialog_title" msgid="5546543501250320220">"Wissen"</string>
     <string name="quick_launch_clear_dialog_message" msgid="3921015601470260722">"Uw sneltoets voor <xliff:g id="SHORTCUT_LETTER">%1$s</xliff:g> (<xliff:g id="APPLICATION_NAME">%2$s</xliff:g>) wordt gewist."</string>
     <string name="quick_launch_clear_ok_button" msgid="2634568926597586716">"OK"</string>
     <string name="quick_launch_clear_cancel_button" msgid="1892854652197747064">"Annuleren"</string>
-    <string name="quick_launch_display_mode_applications" msgid="3748789806447639039">"Toepassingen"</string>
+    <string name="quick_launch_display_mode_applications" msgid="3748789806447639039">"Apps"</string>
     <string name="quick_launch_display_mode_shortcuts" msgid="4177934019174169042">"Sneltoetsen"</string>
     <string name="input_methods_settings_title" msgid="6800066636850553887">"Tekstinvoer"</string>
     <string name="input_methods_settings_summary" msgid="7571173442946675205">"Opties voor tekstinvoer beheren"</string>
@@ -886,7 +887,7 @@
     <string name="usage_stats_label" msgid="5890846333487083609">"Gebruiksstatistieken"</string>
     <string name="testing_usage_stats" msgid="7823048598893937339">"Gebruiksstatistieken"</string>
     <string name="display_order_text" msgid="8592776965827565271">"Sorteren op:"</string>
-    <string name="app_name_label" msgid="2000949925256858308">"Toepassing"</string>
+    <string name="app_name_label" msgid="2000949925256858308">"App"</string>
     <string name="launch_count_label" msgid="4019444833263957024">"Aantal"</string>
     <string name="usage_time_label" msgid="295954901452833058">"Gebruikstijd"</string>
     <string name="accessibility_settings" msgid="3975902491934816215">"Toegankelijkheid"</string>
@@ -895,7 +896,7 @@
     <string name="toggle_accessibility_title" msgid="650839277066574497">"Toegankelijkheid"</string>
     <string name="accessibility_services_category" msgid="8127851026323672607">"Toegankelijkheidsservices"</string>
     <string name="no_accessibility_services_summary" msgid="694578333333808159">"Geen geïnstalleerde toegankelijkheidsservices."</string>
-    <string name="accessibility_service_security_warning" msgid="4066258132331302670">"Deze toegankelijkheidsservice verzamelt mogelijk alle tekst die u typt, inclusief persoonlijke gegevens en creditcardnummers, maar geen wachtwoorden. De service kan ook uw interacties met de gebruikersinterface vastleggen. De service is afkomstig uit de toepassing <xliff:g id="ACCESSIBILITY_SERVICE_NAME">%1$s</xliff:g>. Deze toegankelijkheidsservice inschakelen?"</string>
+    <string name="accessibility_service_security_warning" msgid="4066258132331302670">"Deze toegankelijkheidsservice verzamelt mogelijk alle tekst die u typt, inclusief persoonlijke gegevens en creditcardnummers, maar geen wachtwoorden. De service kan ook uw interacties met de gebruikersinterface vastleggen. De service is afkomstig uit de app <xliff:g id="ACCESSIBILITY_SERVICE_NAME">%1$s</xliff:g>. Deze toegankelijkheidsservice inschakelen?"</string>
     <string name="accessibility_service_disable_warning" msgid="8930591383312775132">"Toegankelijkheid uitschakelen?"</string>
     <string name="accessibility_service_no_apps_title" msgid="898893674114288531">"Geen toepassingen voor toegankelijkheid gevonden"</string>
     <string name="accessibility_service_no_apps_message" msgid="2450056749545404807">"Er zijn geen toepassingen voor toegankelijkheid geïnstalleerd."\n\n"U kunt een schermlezer voor uw apparaat downloaden van Android Market."\n\n"Klik op \'OK\' om de schermlezer te installeren."</string>
@@ -959,10 +960,10 @@
     <string name="battery_desc_bluetooth" msgid="7535520658674621902">"Accu gebruikt door Bluetooth"</string>
     <string name="battery_sugg_bluetooth_basic" msgid="817276933922157788">"Schakel Bluetooth uit wanneer u deze functie niet gebruikt"</string>
     <string name="battery_sugg_bluetooth_headset" msgid="8214816222115517479">"Probeer verbinding te maken met een ander Bluetooth-apparaat"</string>
-    <string name="battery_desc_apps" msgid="6665712811746233450">"Accu gebruikt door toepassing"</string>
-    <string name="battery_sugg_apps_info" msgid="6065882899391322442">"De toepassing stoppen of verwijderen"</string>
-    <string name="battery_sugg_apps_gps" msgid="4545056413090932541">"GPS handmatig beheren om te voorkomen dat de toepassing hiervan gebruikmaakt"</string>
-    <string name="battery_sugg_apps_settings" msgid="8021302847272481168">"De toepassing kan instellingen aanbieden om het accugebruik te beperken"</string>
+    <string name="battery_desc_apps" msgid="6665712811746233450">"Accu gebruikt door app"</string>
+    <string name="battery_sugg_apps_info" msgid="6065882899391322442">"De app stoppen of verwijderen"</string>
+    <string name="battery_sugg_apps_gps" msgid="4545056413090932541">"GPS handmatig beheren om te voorkomen dat de app hiervan gebruikmaakt"</string>
+    <string name="battery_sugg_apps_settings" msgid="8021302847272481168">"De app kan instellingen aanbieden om het accugebruik te beperken"</string>
     <string name="menu_stats_unplugged" msgid="8296577130840261624">"<xliff:g id="UNPLUGGED">%1$s</xliff:g> sinds losgekoppeld"</string>
     <string name="menu_stats_last_unplugged" msgid="5922246077592434526">"Sinds laatst losgekoppeld voor <xliff:g id="UNPLUGGED">%1$s</xliff:g>"</string>
     <string name="menu_stats_total" msgid="8973377864854807854">"Gebruikstotalen"</string>
@@ -971,7 +972,7 @@
     <string name="process_mediaserver_label" msgid="6500382062945689285">"Mediaserver"</string>
     <string name="voice_input_output_settings" msgid="1336135218350444783">"Spraakinvoer en -uitvoer"</string>
     <string name="voice_input_output_settings_title" msgid="2442850635048676991">"Instellingen voor spraakinvoer en -uitvoer"</string>
-    <string name="voice_search_settings_title" msgid="2775469246913196536">"Voice Search"</string>
+    <string name="voice_search_settings_title" msgid="2775469246913196536">"Spraakgestuurd zoeken"</string>
     <string name="keyboard_settings_title" msgid="5080115226780201234">"Android-toetsenbord"</string>
     <string name="voice_input_category" msgid="1589318440824204736">"Spraakinvoer"</string>
     <string name="voice_output_category" msgid="2624538587784986229">"Spraakuitvoer"</string>
@@ -981,7 +982,7 @@
     <string name="tts_settings" msgid="8186971894801348327">"Instellingen tekst-naar-spraak"</string>
     <string name="tts_settings_title" msgid="4182348653053000933">"Instellingen tekst-naar-spraak"</string>
     <string name="use_default_tts_settings_title" msgid="1577063839539732930">"Mijn instellingen gebruiken"</string>
-    <string name="use_default_tts_settings_summary" msgid="4253502106159206276">"Onderstaande standaardinstellingen overschrijven instellingen van toepassing"</string>
+    <string name="use_default_tts_settings_summary" msgid="4253502106159206276">"Onderstaande standaardinstellingen overschrijven instellingen van app"</string>
     <string name="tts_default_settings_section" msgid="5787915620218907443">"Standaardinstellingen"</string>
     <string name="tts_default_synth_title" msgid="29467896463371992">"Standaardengine"</string>
     <string name="tts_default_synth_summary" msgid="6482936537135251690">"De engine voor spraaksynthese instellen die moet worden gebruikt voor gesproken tekst"</string>
@@ -1141,7 +1142,7 @@
     <string name="backup_data_title" msgid="1239105919852668016">"Back-up maken van mijn gegevens"</string>
     <string name="backup_data_summary" msgid="6515285107793232815">"Een back-up van toepassingsgegevens, Wi-Fi-wachtwoorden en andere instellingen maken op de Google-servers"</string>
     <string name="auto_restore_title" msgid="5397528966329126506">"Automatisch terugzetten"</string>
-    <string name="auto_restore_summary" msgid="83177150536734378">"In een back-up opgeslagen instellingen of andere gegevens herstellen als ik een toepassing opnieuw installeer"</string>
+    <string name="auto_restore_summary" msgid="83177150536734378">"In een back-up opgeslagen instellingen of andere gegevens herstellen als ik een app opnieuw installeer"</string>
     <string name="backup_erase_dialog_title" msgid="3438255037256586237">"Back-up"</string>
     <string name="backup_erase_dialog_message" msgid="7766283133557587608">"Weet u zeker dat u het maken van back-ups van uw Wi-Fi-wachtwoorden, bladwijzers en andere instellingen en toepassingsgegevens wilt stoppen en alle kopieën op Google-servers wilt wissen?"</string>
     <string name="device_admin_settings_title" msgid="1335557832906433309">"Instellingen voor apparaatbeheer"</string>
@@ -1152,11 +1153,14 @@
     <string name="add_device_admin_msg" msgid="6246742476064507965">"Apparaatbeheerder activeren?"</string>
     <string name="add_device_admin" msgid="7133327675884827091">"Activeren"</string>
     <string name="device_admin_add_title" msgid="7705551449705676363">"Apparaatbeheerder"</string>
-    <string name="device_admin_warning" msgid="1149471041373876923">"Als u deze beheerder activeert, staat u de toepassing <xliff:g id="APP_NAME">%1$s</xliff:g> toe de volgende bewerkingen uit te voeren:"</string>
-    <string name="device_admin_status" msgid="7169948053970923035">"Deze beheerder is actief en staat de toepassing <xliff:g id="APP_NAME">%1$s</xliff:g> toe de volgende bewerkingen uit te voeren:"</string>
+    <string name="device_admin_warning" msgid="1149471041373876923">"Als u deze beheerder activeert, staat u de app <xliff:g id="APP_NAME">%1$s</xliff:g> toe de volgende bewerkingen uit te voeren:"</string>
+    <string name="device_admin_status" msgid="7169948053970923035">"Deze beheerder is actief en staat de app <xliff:g id="APP_NAME">%1$s</xliff:g> toe de volgende bewerkingen uit te voeren:"</string>
     <string name="untitled_apn" msgid="1230060359198685513">"Naamloos"</string>
     <string name="sound_category_sound_title" msgid="1488759370067953996">"Algemeen"</string>
     <string name="sound_category_calls_title" msgid="3688531959256239012">"Inkomende oproepen"</string>
     <string name="sound_category_notification_title" msgid="3502115998790286943">"Meldingen"</string>
     <string name="sound_category_feedback_title" msgid="4399742321363475393">"Feedback"</string>
+    <string name="wimax_settings" msgid="1574837328738396794">"4G-instellingen"</string>
+    <string name="wimax_settings_summary" msgid="3207355006084135453">"4G-netwerk en modem instellen en beheren"</string>
+    <string name="status_wimax_mac_address" msgid="8390791848661413416">"4G MAC-adres"</string>
 </resources>
