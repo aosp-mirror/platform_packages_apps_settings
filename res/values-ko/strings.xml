@@ -25,7 +25,7 @@
     <string name="radioInfo_menu_viewFDN" msgid="7934301566925610318">"발신 허용 번호 보기"</string>
     <string name="radioInfo_menu_viewSDN" msgid="7130280686244955669">"SDN(Service Dialing Numbers) 보기"</string>
     <string name="radioInfo_menu_getPDP" msgid="560610293888406317">"PDP 목록 가져오기"</string>
-    <string name="radioInfo_service_in" msgid="1915416319177520020">"서비스 상태"</string>
+    <string name="radioInfo_service_in" msgid="1915416319177520020">"서비스 중"</string>
     <string name="radioInfo_service_out" msgid="5238736759641916278">"서비스 지역 벗어남"</string>
     <string name="radioInfo_service_emergency" msgid="2485604591272668370">"긴급 통화만"</string>
     <string name="radioInfo_service_off" msgid="1434084741785525415">"무선 연결 끊김"</string>
@@ -103,7 +103,7 @@
     <string name="bluetooth_disconnecting" msgid="8913264760027764974">"연결을 끊는 중…"</string>
     <string name="bluetooth_connecting" msgid="8555009514614320497">"연결 중…"</string>
     <string name="bluetooth_unknown" msgid="644716244548801421"></string>
-    <string name="bluetooth_not_connected" msgid="3389882907500605937">"장치와 페어링"</string>
+    <string name="bluetooth_not_connected" msgid="3389882907500605937">"이 장치와 페어링 하기"</string>
     <string name="bluetooth_pairing" msgid="1426882272690346242">"페어링 중..."</string>
     <string name="bluetooth_paired" msgid="1247541089000057726">"페어링된 상태이지만 연결되지 않음"</string>
     <string name="bluetooth_device" msgid="6873461446424952003">"핸즈프리/헤드셋"</string>
@@ -584,6 +584,7 @@
     <string name="apn_auth_type_chap" msgid="3369626283789068360">"CHAP"</string>
     <string name="apn_auth_type_pap_chap" msgid="9102343063036134541">"PAP 또는 CHAP"</string>
     <string name="apn_type" msgid="469613123902220544">"APN 유형"</string>
+    <string name="apn_protocol" msgid="3272222921649348640">"APN 프로토콜"</string>
     <string name="menu_delete" msgid="6981294422841124659">"APN 삭제"</string>
     <string name="menu_new" msgid="3014205883303921729">"새 APN"</string>
     <string name="menu_save" msgid="8109345640668285399">"저장"</string>
@@ -648,7 +649,7 @@
     <string name="location_neighborhood_level" msgid="4656658097932515921">"Wi-Fi 및/또는 모바일 네트워크에서 측정된 위치"</string>
     <string name="location_gps" msgid="6296125378829097831">"GPS 위성 사용"</string>
     <string name="location_street_level" msgid="7456259025474443314">"도로 수준으로 정확하게 탐색"</string>
-    <string name="location_gps_disabled" msgid="6632537158777308128">"도로 수준으로 탐색(항공사진이 더해져 배터리 추가로 필요)"</string>
+    <string name="location_gps_disabled" msgid="6632537158777308128">"도로 수준으로 위치 탐색(배터리 소모가 증가되며 실내에서는 정확도가 떨어질 수 있음)"</string>
     <string name="assisted_gps" msgid="4649317129586736885">"GPS 도우미 사용"</string>
     <string name="assisted_gps_enabled" msgid="8751899609589792803">"서버를 사용하여 GPS 보조(네트워크 사용량을 줄이려면 선택 취소)"</string>
     <string name="assisted_gps_disabled" msgid="6982698333968010748">"서버를 사용하여 GPS 보조(GPS 성능을 개선하려면 선택 취소)"</string>
@@ -745,7 +746,7 @@
     <string name="manage_space_text" msgid="8852711522447794676">"공간 관리"</string>
     <string name="filter" msgid="2018011724373033887">"필터"</string>
     <string name="filter_dlg_title" msgid="6507663329723966854">"필터 옵션 선택"</string>
-    <string name="filter_apps_all" msgid="5142129378749391876">"모두"</string>
+    <string name="filter_apps_all" msgid="5142129378749391876">"전체"</string>
     <string name="filter_apps_third_party" msgid="7786348047690140979">"다운로드"</string>
     <string name="filter_apps_running" msgid="7767071454371350486">"실행 중"</string>
     <string name="filter_apps_onsdcard" product="nosdcard" msgid="4843063154701023349">"USB 저장소"</string>
@@ -789,7 +790,7 @@
     <string name="app_install_location_title" msgid="2068975150026852168">"기본 설치 위치"</string>
     <string name="app_install_location_summary" msgid="879753854530300436">"새 애플리케이션에 대한 기본 설치 위치를 변경합니다."</string>
     <string name="storageuse_settings_title" msgid="5657014373502630403">"저장공간 사용량"</string>
-    <string name="storageuse_settings_summary" msgid="2556057379120846792">"애플리케이션에서 사용한 저장소 보기"</string>
+    <string name="storageuse_settings_summary" msgid="2556057379120846792">"애플리케이션에서 사용 중인 용량 보기"</string>
     <string name="runningservices_settings_title" msgid="8097287939865165213">"실행 중인 서비스"</string>
     <string name="runningservices_settings_summary" msgid="854608995821032748">"현재 실행 중인 서비스 보기 및 제어"</string>
     <string name="service_restarting" msgid="2242747937372354306">"다시 시작하는 중"</string>
@@ -903,7 +904,7 @@
     <string name="accessibility_power_button_ends_call" msgid="7698764194501089533">"전원 버튼으로 통화 종료"</string>
     <string name="accessibility_power_button_ends_call_summary" msgid="8878097632186291462">"전화를 거는 동안 전원 버튼을 누르면 화면이 꺼지지 않고 통화가 종료"</string>
     <string name="power_usage_summary_title" msgid="5180282911164282324">"배터리 사용"</string>
-    <string name="power_usage_summary" msgid="7237084831082848168">"배터리를 사용한 항목"</string>
+    <string name="power_usage_summary" msgid="7237084831082848168">"배터리 사용 세부정보"</string>
     <string name="battery_since_unplugged" msgid="338073389740738437">"플러그를 뽑은 이후 배터리 전원 사용"</string>
     <string name="battery_since_reset" msgid="7464546661121187045">"초기화 이후 배터리 사용"</string>
     <string name="battery_stats_on_battery" msgid="4970762168505236033">"배터리 사용 시간: <xliff:g id="TIME">%1$s</xliff:g>"</string>
@@ -1096,7 +1097,7 @@
     <string name="vpn_secret_not_set" msgid="1037792636371641845">"(설정 안함)"</string>
     <string name="credentials_category" msgid="8536992056377271234">"자격증명 저장소"</string>
     <string name="credentials_access" msgid="4843187230913860492">"보안 자격증명 사용"</string>
-    <string name="credentials_access_summary" msgid="319662078718574168">"애플리케이션이 보안 인증서 및 다른 자격증명에 액세스 허용"</string>
+    <string name="credentials_access_summary" msgid="319662078718574168">"애플리케이션이 보안 인증서 및 다른 자격증명에 액세스하도록 허용"</string>
     <string name="credentials_unlock" msgid="1463040326264133844">"비밀번호 입력"</string>
     <string name="credentials_unlock_hint" msgid="594679530407918031">"자격증명 저장소 비밀번호를 입력하세요."</string>
     <string name="credentials_install_certificates" product="nosdcard" msgid="619171634797689906">"USB 저장소에서 설치"</string>
@@ -1141,7 +1142,7 @@
     <string name="backup_data_title" msgid="1239105919852668016">"내 데이터 백업"</string>
     <string name="backup_data_summary" msgid="6515285107793232815">"애플리케이션 데이터, Wi-Fi 비밀번호 및 기타 설정을 Google 서버에 백업"</string>
     <string name="auto_restore_title" msgid="5397528966329126506">"자동 복원"</string>
-    <string name="auto_restore_summary" msgid="83177150536734378">"애플리케이션을 다시 설치하면 백업한 설정이나 다른 데이터를 복원합니다"</string>
+    <string name="auto_restore_summary" msgid="83177150536734378">"애플리케이션을 다시 설치할 때 백업한 설정 등의 데이터 복원"</string>
     <string name="backup_erase_dialog_title" msgid="3438255037256586237">"백업"</string>
     <string name="backup_erase_dialog_message" msgid="7766283133557587608">"Wi-Fi 비밀번호, 북마크, 기타 설정 및 애플리케이션 데이터 백업을 중지하고 Google 서버에 있는 모든 사본을 지우시겠습니까?"</string>
     <string name="device_admin_settings_title" msgid="1335557832906433309">"기기 관리 설정"</string>
@@ -1159,4 +1160,7 @@
     <string name="sound_category_calls_title" msgid="3688531959256239012">"수신전화"</string>
     <string name="sound_category_notification_title" msgid="3502115998790286943">"알림"</string>
     <string name="sound_category_feedback_title" msgid="4399742321363475393">"반응"</string>
+    <string name="wimax_settings" msgid="1574837328738396794">"4G 설정"</string>
+    <string name="wimax_settings_summary" msgid="3207355006084135453">"4G 네트워크와 모뎀 설정 및 관리"</string>
+    <string name="status_wimax_mac_address" msgid="8390791848661413416">"4G MAC 주소"</string>
 </resources>
