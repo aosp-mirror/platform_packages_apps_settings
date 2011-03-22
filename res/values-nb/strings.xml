@@ -163,7 +163,7 @@
     <string name="proxy_error_empty_port" msgid="3525734169948795417">"Du må skrive inn et portnummer."</string>
     <string name="proxy_error_empty_host_set_port" msgid="2451694104858226781">"Feltet for portnummer må være tomt om feltet for vertsnavn er tomt."</string>
     <string name="proxy_error_invalid_port" msgid="1816315605424943626">"Portnummeret er ikke gyldig."</string>
-    <string name="proxy_warning_limited_support" msgid="7442676587591460854">"HTTP-mellomtjeneren brukes av nettleseren, men kan ikke brukes av andre programmer"</string>
+    <string name="proxy_warning_limited_support" msgid="7442676587591460854">"HTTP-mellomtjeneren brukes av nettleseren, men kan ikke brukes av andre applikasjoner"</string>
     <string name="radio_info_signal_location_label" msgid="16475158265551708">"Plassering:"</string>
     <string name="radio_info_neighboring_location_label" msgid="2385625674055934880">"Nabo-CID:"</string>
     <string name="radio_info_data_attempts_label" msgid="1731106244577323381">"Dataforsøk:"</string>
@@ -284,8 +284,8 @@
     <string name="crypt_keeper_encrypt_summary" product="tablet" msgid="6291564408810586">"Krev personlig tallkode eller passord for å dekryptere nettbrettet hver gang du slår det på"</string>
     <string name="crypt_keeper_encrypt_summary" product="default" msgid="514138079795442371">"Numerisk personlig kode eller passord kreves for å dekryptere telefonen hver gang du slår den på"</string>
     <string name="crypt_keeper_encrypted_summary" msgid="1868233637888132906">"Kryptert"</string>
-    <string name="crypt_keeper_desc" product="tablet" msgid="2150571569618349332">"Du kan kryptere kontoer, innstillinger, nedlastede programmer med tilhørende data, mediefiler og andre filer. Når du har kryptert nettbrettet, må du angi en personlig tallkode eller passord for å dekryptere det hver gang du slår det på. Du kan kun fjerne krypteringen på nettbrettet ved å utføre en tilbakestilling til fabrikkstandard, noe som vil medføre sletting av all data."\n\n"Kryptering tar minst én time, og du må starte med ladet batteri og beholde nettbrettet tilkoblet helt til krypteringen er fullført. Du kan miste alle eller deler av dataene hvis du avbryter krypteringprosessen."</string>
-    <string name="crypt_keeper_desc" product="default" msgid="7366703764847750586">"Du kan kryptere kontoer, innstillinger, nedlastede programmer med tilhørende data, mediefiler og andre filer. Når du har kryptert telefonen, må du angi en numerisk personlig kode eller passord for å dekryptere den hver gang du slår den på. Du kan kun fjerne krypteringen på telefonen ved å utføre en tilbakestilling til fabrikkstandard, noe som vil medføre sletting av alle data."\n\n"Kryptering tar minst én time, og du må starte med et ladet batteri og beholde telefonen tilkoblet helt til krypteringen er fullført. Du kan miste alle eller deler av dataene hvis du avbryter krypteringprosessen."</string>
+    <string name="crypt_keeper_desc" product="tablet" msgid="2150571569618349332">"Du kan kryptere kontoer, innstillinger, nedlastede applikasjoner med tilhørende data, mediefiler og andre filer. Når du har kryptert nettbrettet, må du angi en personlig tallkode eller passord for å dekryptere det hver gang du slår det på. Du kan kun fjerne krypteringen på nettbrettet ved å utføre en tilbakestilling til fabrikkstandard, noe som vil medføre sletting av alle data."\n\n"Kryptering tar minst én time, og du må starte med ladet batteri og beholde nettbrettet tilkoblet helt til krypteringen er fullført. Du kan miste alle eller deler av dataene hvis du avbryter krypteringprosessen."</string>
+    <string name="crypt_keeper_desc" product="default" msgid="7366703764847750586">"Du kan kryptere kontoer, innstillinger, nedlastede applikasjoner med tilhørende data, mediefiler og andre filer. Når du har kryptert telefonen, må du angi en personlig tallkode eller et passord for å dekryptere den hver gang du slår den på. Du kan kun fjerne krypteringen på telefonen ved å gjenopprette fabrikkinnstillingene, noe som vil medføre sletting av alle data."\n\n"Kryptering tar minst én time, og du må starte med ladet batteri og beholde telefonen tilkoblet helt til krypteringen er fullført. Du kan miste alle eller deler av dataene hvis du avbryter krypteringprosessen."</string>
     <string name="crypt_keeper_button_text" product="tablet" msgid="1189623490604750854">"Krypter nettbrett"</string>
     <string name="crypt_keeper_button_text" product="default" msgid="2008346408473255519">"Krypter telefon"</string>
     <string name="crypt_keeper_low_charge_text" msgid="5920622844033087792">"Lad batteriet, og prøv på nytt."</string>
@@ -675,7 +675,7 @@
     <string name="memory_available" msgid="5052397223077021181">"Tilgjengelig"</string>
     <string name="memory_size" msgid="6629067715017232195">"Total plass"</string>
     <string name="memory_calculating_size" msgid="2188358544203768588">"Beregner …"</string>
-    <string name="memory_apps_usage" msgid="9079237985722858506">"Programmer"</string>
+    <string name="memory_apps_usage" msgid="9079237985722858506">"Applikasjoner"</string>
     <string name="memory_media_usage" msgid="3738830697707880405">"Medier"</string>
     <string name="memory_downloads_usage" msgid="3755173051677533027">"Nedlastinger"</string>
     <string name="memory_dcim_usage" msgid="6679615808140067136">"Bilder, videoer"</string>
@@ -748,8 +748,8 @@
     <string name="master_clear_title" msgid="5907939616087039756">"Fabrikkinnstillinger"</string>
     <string name="master_clear_summary" product="tablet" msgid="4036344100254678429">"Sletter alle data på nettbrettet"</string>
     <string name="master_clear_summary" product="default" msgid="4986154238001088492">"Fjern alle data fra telefonen"</string>
-    <string name="master_clear_desc" product="tablet" msgid="590799767511283567">"Denne handlingen vil slette alle data fra nettbrettets "<b>"interne lagringsplass"</b>", inkludert:"\n\n<li>"Google-kontoen din"</li>\n<li>"Innstillinger og data for system og programmer"</li>\n<li>"Nedlastede programmer"</li></string>
-    <string name="master_clear_desc" product="default" msgid="3251400937758241249">"Denne handlingen vil slette alle data fra telefonens "<b>"interne lagringsplass"</b>", herunder:"\n\n<li>"Google-kontoen din"</li>\n<li>"Innstillinger og data for system og programmer"</li>\n<li>"Nedlastede programmer"</li></string>
+    <string name="master_clear_desc" product="tablet" msgid="590799767511283567">"Denne handlingen vil slette alle data fra nettbrettets "<b>"interne lagringsplass"</b>", inkludert:"\n\n<li>"Google-kontoen din"</li>\n<li>"Innstillinger og data for system og applikasjoner"</li>\n<li>"Nedlastede applikasjoner"</li></string>
+    <string name="master_clear_desc" product="default" msgid="3251400937758241249">"Denne handlingen sletter alle data fra telefonens "<b>"interne lagringsplass"</b>", herunder:"\n\n<li>"Google-kontoen din"</li>\n<li>"Innstillinger og data for system og applikasjoner"</li>\n<li>"Nedlastede applikasjoner"</li></string>
     <string name="master_clear_accounts" product="default" msgid="6412857499147999073">\n\n"Du er for øyeblikket pålogget følgende kontoer:"\n</string>
     <string name="master_clear_desc_also_erases_external" msgid="1903185203791274237"><li>"Musikk"</li>\n<li>"Bilder"</li>\n<li>"Andre brukerdata"</li></string>
     <string name="master_clear_desc_erase_external_storage" product="nosdcard" msgid="4740866328425123395">\n\n"For i tillegg å slette musikk, bilder og andre brukerdata, må "<b>"USB-lagringen"</b>" tømmes."</string>
@@ -903,8 +903,8 @@
     <string name="applications_settings_summary" msgid="2714215108369119717">"Installerte applikasjoner, hurtigtaster"</string>
     <string name="applications_settings_header" msgid="6018266337275422250">"Innstillinger for applikasjoner"</string>
     <string name="install_applications" msgid="4872012136210802181">"Ukjente kilder"</string>
-    <string name="install_unknown_applications" msgid="6612824788917283662">"Tillat installasjon av programmer som ikke finnes på Android-markedet"</string>
-    <string name="install_all_warning" product="tablet" msgid="8143969767997876735">"Nettbrettet og dine personlige opplysninger er mer sårbare for angrep av programmer fra ukjente kilder. Du godtar at du selv er ansvarlig for skader på nettbrettet eller tap av data som kan oppstå ved bruk av disse programmene."</string>
+    <string name="install_unknown_applications" msgid="6612824788917283662">"Tillat installasjon av applikasjoner som ikke kommer fra Android-markedet"</string>
+    <string name="install_all_warning" product="tablet" msgid="8143969767997876735">"Nettbrettet og dine personlige opplysninger er mer sårbare for angrep av applikasjoner fra ukjente kilder. Du godtar at du selv er ansvarlig for skader på nettbrettet eller tap av data som kan oppstå ved bruk av disse applikasjonene."</string>
     <string name="install_all_warning" product="default" msgid="1923717607319933741">"Telefonen og dine personlige data er mer sårbare mot angrep fra applikasjoner som kommer fra ukjente kilder. Du godtar at du selv er ansvarlig for enhver skade på telefonen eller tap av data som måtte oppstå fra bruk av slike applikasjoner."</string>
     <string name="application_info_label" msgid="1150486628158409543">"Applikasjonsinformasjon"</string>
     <string name="storage_label" msgid="8700867073480107253">"Lagring"</string>
@@ -942,7 +942,7 @@
     <string name="filter_apps_onsdcard" product="nosdcard" msgid="4843063154701023349">"USB-lagring"</string>
     <string name="filter_apps_onsdcard" product="default" msgid="1477351142334784771">"På minnekort"</string>
     <string name="disabled" msgid="9206776641295849915">"Deaktivert"</string>
-    <string name="no_applications" msgid="5190227407135243904">"Ingen programmer."</string>
+    <string name="no_applications" msgid="5190227407135243904">"Ingen applikasjoner."</string>
     <string name="internal_storage" msgid="1584700623164275282">"Intern lagring"</string>
     <string name="sd_card_storage" product="nosdcard" msgid="2673203150465132465">"USB-lagring"</string>
     <string name="sd_card_storage" product="default" msgid="7623513618171928235">"SD-kortlagring"</string>
@@ -980,9 +980,9 @@
     <string name="move_app_failed_dlg_title" msgid="4337731903265156405">"Flytt program"</string>
     <string name="move_app_failed_dlg_text" msgid="8824246817947643697">"Fikk ikke flyttet programmet. <xliff:g id="REASON">%1$s</xliff:g>"</string>
     <string name="app_install_location_title" msgid="2068975150026852168">"Foretrukket installeringssted"</string>
-    <string name="app_install_location_summary" msgid="879753854530300436">"Endre foretrukket plassering for installasjon av nye programmer."</string>
+    <string name="app_install_location_summary" msgid="879753854530300436">"Endre foretrukket plassering for installasjon av nye applikasjoner."</string>
     <string name="storageuse_settings_title" msgid="5657014373502630403">"Bruk av lagringsplass"</string>
-    <string name="storageuse_settings_summary" msgid="2556057379120846792">"Vis lagringsplass for programmer"</string>
+    <string name="storageuse_settings_summary" msgid="2556057379120846792">"Vis lagringsplass brukt av applikasjoner"</string>
     <string name="runningservices_settings_title" msgid="8097287939865165213">"Kjørende tjenester"</string>
     <string name="runningservices_settings_summary" msgid="854608995821032748">"Vis og kontroller tjenester som kjører for øyeblikket"</string>
     <string name="service_restarting" msgid="2242747937372354306">"Starter på nytt"</string>
@@ -1108,8 +1108,8 @@
     <string name="accessibility_script_injection_category" msgid="8649951751131431904">"Tilgjengelighetsskript"</string>
     <string name="accessibility_script_injection_enabled" msgid="6927896081016611012">"Last ned tilgjengelighetsskript"</string>
     <string name="accessibility_script_injection_enabled_summary" msgid="3629525134901617621">"Tillat prog. å laste ned tilgjengelighetsskript fra Google"</string>
-    <string name="accessibility_script_injection_security_warning" product="tablet" msgid="1113600871264359828">"Enkelte programmer kan be Google om å laste ned skript til tavleenheten som gjør programinnholdet mer tilgjengelig. Er du sikker på at du vil tillate Google å installere tilgjengelighetsskript på tavleenheten?"</string>
-    <string name="accessibility_script_injection_security_warning" product="default" msgid="9078893361741942109">"Enkelte programmer kan be Google om å laste ned skript til telefonen som gjøres programinnholdet mer tilgjengelig. Er du sikker på at du vil tillate Google å installere tilgjengelighetsskript på telefonen?"</string>
+    <string name="accessibility_script_injection_security_warning" product="tablet" msgid="1113600871264359828">"Enkelte applikasjoner kan be Google om å laste ned skript til nettbrettet som gjør innholdet deres mer tilgjengelig. Er du sikker på at du vil tillate Google å installere tilgjengelighetsskript på nettbrettet?"</string>
+    <string name="accessibility_script_injection_security_warning" product="default" msgid="9078893361741942109">"Enkelte applikasjoner kan be Google om å laste ned skript til telefonen som gjør innholdet deres mer tilgjengelig. Er du sikker på at du vil tillate Google å installere tilgjengelighetsskript på telefonen?"</string>
     <string name="accessibility_power_button_category" msgid="8545885236482339928">"På/av-knapp"</string>
     <string name="accessibility_power_button_ends_call" msgid="7698764194501089533">"Legg på med på/av"</string>
     <string name="accessibility_power_button_ends_call_summary" msgid="8878097632186291462">"Ved å trykke på av-knappen under en samtale, avsluttes samtalen i stedet for at skjermen slås av"</string>
@@ -1180,7 +1180,7 @@
     <string name="battery_sugg_bluetooth_headset" msgid="8214816222115517479">"Prøv å koble til en annen Bluetooth-enhet"</string>
     <string name="battery_desc_apps" msgid="6665712811746233450">"Batteri brukt av program"</string>
     <string name="battery_sugg_apps_info" msgid="6065882899391322442">"Stopp eller avinstaller applikasjonen"</string>
-    <string name="battery_sugg_apps_gps" msgid="4545056413090932541">"Kontroller GPS manuelt, for å forhindre at programmer bruker funksjonen"</string>
+    <string name="battery_sugg_apps_gps" msgid="4545056413090932541">"Kontroller GPS manuelt, for å forhindre at applikasjoner bruker funksjonen"</string>
     <string name="battery_sugg_apps_settings" msgid="8021302847272481168">"Applikasjonen har muligens innstillinger som kan redusere batteribruken"</string>
     <string name="menu_stats_unplugged" msgid="8296577130840261624">"<xliff:g id="UNPLUGGED">%1$s</xliff:g> siden strømmen ble frakoblet"</string>
     <string name="menu_stats_last_unplugged" msgid="5922246077592434526">"Siste gang uten strøm i <xliff:g id="UNPLUGGED">%1$s</xliff:g>"</string>
@@ -1371,7 +1371,7 @@
     <string name="wifi_setup_title" msgid="661074868726906436">"Wi-Fi-konfigurering"</string>
     <string name="wifi_setup_title_editing_network" msgid="7304321031985059969">"Koble til Wi-Fi-nettverk <xliff:g id="NETWORK_NAME">%s</xliff:g>"</string>
     <string name="wifi_setup_title_connecting_network" msgid="2408378435027118687">"Kobler til Wi-Fi-nettverk <xliff:g id="NETWORK_NAME">%s</xliff:g> ..."</string>
-    <string name="wifi_setup_title_connected_network" msgid="209755856836003839">"Koblet til et Wi-Fi-nettverk <xliff:g id="NETWORK_NAME">%s</xliff:g>"</string>
+    <string name="wifi_setup_title_connected_network" msgid="209755856836003839">"Koblet til Wi-Fi-nettverket <xliff:g id="NETWORK_NAME">%s</xliff:g>"</string>
     <string name="wifi_setup_title_add_network" msgid="6932651000151032301">"Legg til et nettverk"</string>
     <string name="wifi_setup_not_connected" msgid="6997432604664057052">"Ikke tilkoblet"</string>
     <string name="wifi_setup_add_network" msgid="5939624680150051807">"Legg til nettverk"</string>
@@ -1401,11 +1401,11 @@
     <string name="add_account_label" msgid="7811707265834013767">"Legg til konto"</string>
     <string name="header_general_sync_settings" msgid="3487451896424238469">"Generelle synk.innst."</string>
     <string name="background_data" msgid="5779592891375473817">"Bakgrunnsdata"</string>
-    <string name="background_data_summary" msgid="3630389249212620467">"Programmer kan synkronisere, sende og motta data"</string>
+    <string name="background_data_summary" msgid="3630389249212620467">"Apper kan når som helst synkronisere, sende og motta data"</string>
     <string name="background_data_dialog_title" msgid="745974259246047425">"Obs"</string>
-    <string name="background_data_dialog_message" msgid="9155730118215371308">"Deaktivering av bakgrunnsdata sparer batteri og reduserer datatrafikken. Noen programmer kan fortsatt bruke tilkoblingen for bakgrunnsdata."</string>
+    <string name="background_data_dialog_message" msgid="9155730118215371308">"Deaktivering av bakgrunnsdata sparer batteri og reduserer datatrafikken. Det kan hende noen apper fortsatt bruker tilkoblingen for bakgrunnsdata."</string>
     <string name="sync_automatically" msgid="7558810110682562376">"Automatisk synkronisering"</string>
-    <string name="sync_automatically_summary" msgid="6662623174608419931">"Programmer synkroniser data automatisk"</string>
+    <string name="sync_automatically_summary" msgid="6662623174608419931">"Applikasjoner synkroniserer data automatisk"</string>
     <string name="header_manage_accounts" msgid="6869002423884539607">"Administrer kontoer"</string>
     <string name="sync_enabled" msgid="4551148952179416813">"Synkronisering er på"</string>
     <string name="sync_disabled" msgid="8511659877596511991">"Synkronisering er av"</string>
@@ -1430,8 +1430,8 @@
     <string name="really_remove_account_title" msgid="6574643117748564960">"Fjern konto"</string>
     <string name="really_remove_account_message" product="tablet" msgid="4448645571715719563">"Er du sikker på at du vil fjerne denne kontoen? Hvis du fjerner den, fjernes samtidig alle data som er tilknyttet kontoen. "\n"Vil du fortsette?"</string>
     <string name="really_remove_account_message" product="default" msgid="1005751790899989319">"Er du sikker på at du vil fjerne denne kontoen? Hvis du fjerner den, fjernes samtidig alle data som er tilknyttet kontoen. "\n"Vil du fortsette?"</string>
-    <string name="remove_account_failed" product="tablet" msgid="1093911989149396624">"Denne kontoen er påkrevd av ett eller flere programmer. Du kan kun fjerne den ved å tilbakestille nettbrettet til fabrikkstandard (dette sletter alle personlige data). Dette gjør du under Innstillinger og Personvern."</string>
-    <string name="remove_account_failed" product="default" msgid="9174390193652391412">"Denne kontoen er påkrevd av ett eller flere programmer. Du kan kun fjerne den ved å tilbakestille telefonen til fabrikkstandard (dette sletter alle personlige data). Dette gjør du under Innstillinger og Personvern."</string>
+    <string name="remove_account_failed" product="tablet" msgid="1093911989149396624">"Denne kontoen er påkrevd av enkelte applikasjoner. Du kan kun fjerne den ved å tilbakestille nettbrettet til fabrikkinnstillingene (noe som sletter alle personlige data). Dette gjør du under Innstillinger og Personvern."</string>
+    <string name="remove_account_failed" product="default" msgid="9174390193652391412">"Denne kontoen er påkrevd av enkelte applikasjoner. Du kan kun fjerne den ved å tilbakestille telefonen til fabrikkstandard (noe som sletter alle personlige data). Dette gjør du under Innstillinger og Personvern."</string>
     <string name="provider_label" msgid="7724593781904508866">"Push-abonnementer"</string>
     <string name="sync_item_title" msgid="1931551540462877488">"Synkroniser <xliff:g id="AUTHORITY">%s</xliff:g>"</string>
     <string name="cant_sync_dialog_title" msgid="7185199796123573317">"Kan ikke synkronisere manuelt"</string>
