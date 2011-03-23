@@ -21,22 +21,29 @@ import android.app.Dialog;
 import android.content.ContentResolver;
 import android.content.DialogInterface;
 import android.os.BatteryManager;
+import android.os.Build;
 import android.os.Bundle;
+import android.os.SystemProperties;
+import android.preference.CheckBoxPreference;
+import android.preference.ListPreference;
 import android.preference.Preference;
 import android.preference.PreferenceFragment;
 import android.preference.PreferenceScreen;
-import android.preference.CheckBoxPreference;
+import android.preference.Preference.OnPreferenceChangeListener;
 import android.provider.Settings;
 
 /*
  * Displays preferences for application developers.
  */
 public class DevelopmentSettings extends PreferenceFragment
-        implements DialogInterface.OnClickListener, DialogInterface.OnDismissListener {
+        implements DialogInterface.OnClickListener, DialogInterface.OnDismissListener,
+                OnPreferenceChangeListener {
 
     private static final String ENABLE_ADB = "enable_adb";
     private static final String KEEP_SCREEN_ON = "keep_screen_on";
     private static final String ALLOW_MOCK_LOCATION = "allow_mock_location";
+    private static final String HDCP_CHECKING_KEY = "hdcp_checking";
+    private static final String HDCP_CHECKING_PROPERTY = "persist.sys.hdcp_checking";
 
     private CheckBoxPreference mEnableAdb;
     private CheckBoxPreference mKeepScreenOn;
@@ -56,6 +63,18 @@ public class DevelopmentSettings extends PreferenceFragment
         mEnableAdb = (CheckBoxPreference) findPreference(ENABLE_ADB);
         mKeepScreenOn = (CheckBoxPreference) findPreference(KEEP_SCREEN_ON);
         mAllowMockLocation = (CheckBoxPreference) findPreference(ALLOW_MOCK_LOCATION);
+
+        removeHdcpOptionsForProduction();
+    }
+
+    private void removeHdcpOptionsForProduction() {
+        if ("user".equals(Build.TYPE)) {
+            Preference hdcpChecking = findPreference(HDCP_CHECKING_KEY);
+            if (hdcpChecking != null) {
+                // Remove the preference
+                getPreferenceScreen().removePreference(hdcpChecking);
+            }
+        }
     }
 
     @Override
@@ -69,6 +88,26 @@ public class DevelopmentSettings extends PreferenceFragment
                 Settings.System.STAY_ON_WHILE_PLUGGED_IN, 0) != 0);
         mAllowMockLocation.setChecked(Settings.Secure.getInt(cr,
                 Settings.Secure.ALLOW_MOCK_LOCATION, 0) != 0);
+        updateHdcpValues();
+    }
+
+    private void updateHdcpValues() {
+        int index = 1; // Defaults to drm-only. Needs to match with R.array.hdcp_checking_values
+        ListPreference hdcpChecking = (ListPreference) findPreference(HDCP_CHECKING_KEY);
+        if (hdcpChecking != null) {
+            String currentValue = SystemProperties.get(HDCP_CHECKING_PROPERTY);
+            String[] values = getResources().getStringArray(R.array.hdcp_checking_values);
+            String[] summaries = getResources().getStringArray(R.array.hdcp_checking_summaries);
+            for (int i = 0; i < values.length; i++) {
+                if (currentValue.equals(values[i])) {
+                    index = i;
+                    break;
+                }
+            }
+            hdcpChecking.setValue(values[index]);
+            hdcpChecking.setSummary(summaries[index]);
+            hdcpChecking.setOnPreferenceChangeListener(this);
+        }
     }
 
     @Override
@@ -136,5 +175,15 @@ public class DevelopmentSettings extends PreferenceFragment
     public void onDestroy() {
         dismissDialog();
         super.onDestroy();
+    }
+
+    @Override
+    public boolean onPreferenceChange(Preference preference, Object newValue) {
+        if (HDCP_CHECKING_KEY.equals(preference.getKey())) {
+            SystemProperties.set(HDCP_CHECKING_PROPERTY, newValue.toString());
+            updateHdcpValues();
+            return true;
+        }
+        return false;
     }
 }

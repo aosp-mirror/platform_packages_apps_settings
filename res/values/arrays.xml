@@ -553,11 +553,32 @@
         <item>Long</item>
     </string-array>
 
-    <!-- Valeus for the list of long press timeout options. -->
+    <!-- Values for the list of long press timeout options. -->
     <string-array name="long_press_timeout_selector_values" translatable="false">
         <item>500</item>
         <item>1000</item>
         <item>1500</item>
     </string-array>
 
+    <!-- Titles for HDCP checking preference. [CHAR LIMIT=35] -->
+    <string-array name="hdcp_checking_titles">
+        <item>Never check</item>
+        <item>Check for DRM content only</item>
+        <item>Always check</item>
+    </string-array>
+
+    <!-- Values for HDCP checking preference. -->
+    <string-array name="hdcp_checking_values" translatable="false" >
+        <item>never</item>
+        <item>drm-only</item>
+        <item>always</item>
+    </string-array>
+
+    <!-- Summaries for HDCP checking preference. [CHAR LIMIT=100]-->
+    <string-array name="hdcp_checking_summaries" >
+        <item>Never use HDCP checking</item>
+        <item>Use HDCP checking for DRM content only</item>
+        <item>Always use HDCP checking</item>
+    </string-array>
 </resources>
+
