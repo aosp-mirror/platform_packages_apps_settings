@@ -62,13 +62,12 @@ public class ProxySelector extends Fragment implements DialogCreatable {
     private static final String HOSTNAME_REGEXP =
             "^$|^[a-zA-Z0-9]+(\\-[a-zA-Z0-9]+)*(\\.[a-zA-Z0-9]+(\\-[a-zA-Z0-9]+)*)*$";
     private static final Pattern HOSTNAME_PATTERN;
-    private static final String EXCLLIST_REGEXP =
-            "$|^(.?[a-zA-Z0-9]+(\\-[a-zA-Z0-9]+)*(\\.[a-zA-Z0-9]+(\\-[a-zA-Z0-9]+)*)*)+" +
-            "(,(.?[a-zA-Z0-9]+(\\-[a-zA-Z0-9]+)*(\\.[a-zA-Z0-9]+(\\-[a-zA-Z0-9]+)*)*))*$";
-    private static final Pattern EXCLLIST_PATTERN;
+    private static final String EXCLUSION_REGEXP =
+            "$|^(.?[a-zA-Z0-9]+(\\-[a-zA-Z0-9]+)*(\\.[a-zA-Z0-9]+(\\-[a-zA-Z0-9]+)*)*)+$";
+    private static final Pattern EXCLUSION_PATTERN;
     static {
         HOSTNAME_PATTERN = Pattern.compile(HOSTNAME_REGEXP);
-        EXCLLIST_PATTERN = Pattern.compile(EXCLLIST_REGEXP);
+        EXCLUSION_PATTERN = Pattern.compile(EXCLUSION_REGEXP);
     }
 
     private static final int ERROR_DIALOG_ID = 0;
@@ -201,11 +200,14 @@ public class ProxySelector extends Fragment implements DialogCreatable {
      */
     public static int validate(String hostname, String port, String exclList) {
         Matcher match = HOSTNAME_PATTERN.matcher(hostname);
-        Matcher listMatch = EXCLLIST_PATTERN.matcher(exclList);
+        String exclListArray[] = exclList.split(",");
 
         if (!match.matches()) return R.string.proxy_error_invalid_host;
 
-        if (!listMatch.matches()) return R.string.proxy_error_invalid_exclusion_list;
+        for (String excl : exclListArray) {
+            Matcher m = EXCLUSION_PATTERN.matcher(excl);
+            if (!m.matches()) return R.string.proxy_error_invalid_exclusion_list;
+        }
 
         if (hostname.length() > 0 && port.length() == 0) {
             return R.string.proxy_error_empty_port;
