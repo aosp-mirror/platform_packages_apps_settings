@@ -58,7 +58,7 @@ public final class BluetoothSettings extends DeviceListPreferenceFragment {
     void addPreferencesForActivity() {
         addPreferencesFromResource(R.xml.bluetooth_settings);
 
-        mEnabler = new BluetoothEnabler(getActivity(), mLocalAdapter,
+        mEnabler = new BluetoothEnabler(getActivity(),
                 (CheckBoxPreference) findPreference(KEY_BT_CHECKBOX));
 
         mDiscoverableEnabler = new BluetoothDiscoverableEnabler(getActivity(),
