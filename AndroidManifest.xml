@@ -330,7 +330,8 @@
 
         <activity android:name="SettingsLicenseActivity"
                 android:label="@string/settings_license_activity_title"
-                android:theme="@*android:style/Theme.Dialog.Alert">
+                android:theme="@*android:style/Theme.Dialog.Alert"
+                android:configChanges="orientation">
             <intent-filter>
                 <action android:name="android.settings.LICENSE" />
                 <category android:name="android.intent.category.DEFAULT" />
