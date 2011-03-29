@@ -272,7 +272,7 @@
     <string name="crypt_keeper_encrypt_summary" product="tablet" msgid="6291564408810586">"Kræv en numerisk pinkode eller adgangskode for at dekryptere din tablet, hver gang du tænder for den"</string>
     <string name="crypt_keeper_encrypt_summary" product="default" msgid="514138079795442371">"Kræv en numerisk pinkode eller adgangskode for at dekryptere din telefon, hver gang du tænder for den"</string>
     <string name="crypt_keeper_encrypted_summary" msgid="1868233637888132906">"Krypteret"</string>
-    <string name="crypt_keeper_desc" product="tablet" msgid="2150571569618349332">"Du kan kryptere dine konti, indstillinger, downloadede applikationer og deres data, medier og andre filer. Når du krypterer din tablet, skal du indtaste en numerisk pinkode eller adgangskode for at dekryptere den, hver gang du tænder for den. Du kan dekryptere den ved at udføre en nulstilling af fabriksdata. Derved slettes alle dine data."\n\n"Krypteringen tager én time eller mere. Du skal starte med et opladt batteri og sørge for, at din telefon forbliver tilsluttet, indtil krypteringen er gennemført. Hvis du afbryder krypteringsprocessen, vil du miste dine data delvist eller helt."</string>
+    <string name="crypt_keeper_desc" product="tablet" msgid="2150571569618349332">"Du kan kryptere dine konti, indstillinger, downloadede programmer og deres data, medier og andre filer. Når du krypterer din tablet, skal du indtaste en numerisk pinkode eller adgangskode for at dekryptere den, hver gang du tænder for den. Du kan dekryptere den ved at udføre en nulstilling af fabriksdata. Derved slettes alle dine data."\n\n"Krypteringen tager én time eller mere. Du skal starte med et opladt batteri og sørge for, at din tablet forbliver tilsluttet, indtil krypteringen er gennemført. Hvis du afbryder krypteringsprocessen, vil du miste dine data delvist eller helt."</string>
     <string name="crypt_keeper_desc" product="default" msgid="7366703764847750586">"Du kan kryptere dine konti, indstillinger, downloadede applikationer og deres data, medier og andre filer. Når du krypterer din telefon, skal du indtaste en numerisk pinkode eller adgangskode for at dekryptere den, hver gang du tænder for den. Du kun dekryptere den ved at udføre en nulstilling af fabriksdata. Derved slettes alle dine data."\n\n"Krypteringen tager én time eller mere. Du skal starte med et opladt batteri og sørge for, at din telefon forbliver tilsluttet, indtil krypteringen er gennemført. Hvis du afbryder krypteringsprocessen, vil du miste dine data delvist eller helt."</string>
     <string name="crypt_keeper_button_text" product="tablet" msgid="1189623490604750854">"Krypter tablet"</string>
     <string name="crypt_keeper_button_text" product="default" msgid="2008346408473255519">"Krypter telefon"</string>
@@ -446,6 +446,7 @@
     <string name="wifi_notify_open_networks_summary" msgid="3038290727701553612">"Fortæl mig, når der er et tilgængeligt åbent netværk"</string>
     <string name="wifi_setting_sleep_policy_title" msgid="2256739245628081979">"Politik for frakobling af Wi-Fi"</string>
     <string name="wifi_setting_sleep_policy_summary" msgid="7573693311804602041">"Angiv, hvornår der skal skiftes fra Wi-Fi til mobile data"</string>
+    <string name="wifi_setting_sleep_policy_summary_wifi_only" msgid="5025244230722670496">"Angiv, hvornår forbindelsen til Wi-Fi skal afbrydes"</string>
     <string name="wifi_setting_sleep_policy_error" msgid="8174902072673071961">"Der opstod et problem ved ændring af indstillingen"</string>
     <string name="wifi_add_network" msgid="1671334951296205616">"Tilføj Wi-Fi-netværk"</string>
     <string name="wifi_access_points" msgid="2664629396767022441">"Wi-Fi-netværk"</string>
@@ -644,8 +645,7 @@
     <string name="status_operator" msgid="2274875196954742087">"Netværk"</string>
     <string name="status_wifi_mac_address" msgid="33109409206264790">"MAC-adresse for Wi-Fi"</string>
     <string name="status_bt_address" msgid="4195174192087439720">"Bluetooth-adresse"</string>
-    <!-- no translation found for status_serial_number (2257111183374628137) -->
-    <skip />
+    <string name="status_serial_number" msgid="2257111183374628137">"Serienummer"</string>
     <string name="status_unavailable" msgid="7862009036663793314">"Utilgængelig"</string>
     <string name="status_up_time" msgid="7294859476816760399">"Oppetid"</string>
     <string name="status_awake_time" msgid="2393949909051183652">"Opvågningstid"</string>
@@ -733,7 +733,7 @@
     <string name="erase_external_storage" product="default" msgid="1397239046334307625">"Slet SD-kort"</string>
     <string name="erase_external_storage_description" product="nosdcard" msgid="444834593696342279">"Slet alle data på det interne USB-lager, f.eks. musik og billeder."</string>
     <string name="erase_external_storage_description" product="default" msgid="46603515218075174">"Slet alle data på SD-kortet, f.eks. musik og billeder."</string>
-    <string name="master_clear_button_text" product="tablet" msgid="3130786116528304116">"Nulstil tabletcomputeren"</string>
+    <string name="master_clear_button_text" product="tablet" msgid="3130786116528304116">"Nulstil tablet"</string>
     <string name="master_clear_button_text" product="default" msgid="7550632653343157971">"Nulstil telefon"</string>
     <string name="master_clear_final_desc" msgid="6917971132484622696">"Slet alle dine personlige oplysninger og downloadede programmer? Denne handlíng kan ikke fortrydes."</string>
     <string name="master_clear_final_button_text" msgid="5390908019019242910">"Slet alt"</string>
@@ -795,8 +795,7 @@
     <string name="location_network_based" msgid="8815705866861993344">"Brug trådløse netværk"</string>
     <string name="location_networks_disabled" msgid="2708968452901433980">"Se placering i programmer (som f.eks. Maps) ved hjælp af trådløse netværk"</string>
     <string name="location_neighborhood_level" msgid="4656658097932515921">"Placering afgøres af Wi-Fi og/eller mobilnetværk"</string>
-    <!-- no translation found for location_neighborhood_level_wifi (7457348712272184793) -->
-    <skip />
+    <string name="location_neighborhood_level_wifi" msgid="7457348712272184793">"Placeringen fastlægges af Wi-Fi"</string>
     <string name="location_gps" msgid="6296125378829097831">"Brug GPS-satellitter"</string>
     <string name="location_street_level" msgid="7456259025474443314">"Præcis placering på gadeplan"</string>
     <string name="location_gps_disabled" msgid="6632537158777308128">"Placering på gadeplan (mere batterikrævende, skal bruges i det fri)"</string>
@@ -1078,7 +1077,7 @@
     <string name="accessibility_script_injection_category" msgid="8649951751131431904">"Tilgængelighedsscripts"</string>
     <string name="accessibility_script_injection_enabled" msgid="6927896081016611012">"Download tilgængelighedsscripts"</string>
     <string name="accessibility_script_injection_enabled_summary" msgid="3629525134901617621">"Tillad, at programmer henter tilgængelighedsscripts fra Google"</string>
-    <string name="accessibility_script_injection_security_warning" product="tablet" msgid="1113600871264359828">"Nogle programmer kan bede Google om at downloade scripts til din tabletcomputer, som gør deres indhold mere tilgængeligt. Vil du tillade, at Google installerer tilgængelighedsscripts på din tabletcomputer?"</string>
+    <string name="accessibility_script_injection_security_warning" product="tablet" msgid="1113600871264359828">"Nogle programmer kan bede Google om at downloade scripts til din tablet, som gør deres indhold mere tilgængeligt. Vil du tillade, at Google installerer tilgængelighedsscripts på din tablet?"</string>
     <string name="accessibility_script_injection_security_warning" product="default" msgid="9078893361741942109">"Nogle programmer kan bede Google om at downloade scripts til din telefon, som gør deres indhold mere tilgængeligt. Vil du tillade, at Google installerer tilgængelighedsscripts på din telefon?"</string>
     <string name="accessibility_power_button_category" msgid="8545885236482339928">"Afbryderknap"</string>
     <string name="accessibility_power_button_ends_call" msgid="7698764194501089533">"Afbryderknappen afslutter opkaldet"</string>

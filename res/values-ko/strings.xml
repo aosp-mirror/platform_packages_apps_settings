@@ -25,7 +25,7 @@
     <string name="radioInfo_menu_viewFDN" msgid="7934301566925610318">"발신 허용 번호 보기"</string>
     <string name="radioInfo_menu_viewSDN" msgid="7130280686244955669">"SDN(Service Dialing Numbers) 보기"</string>
     <string name="radioInfo_menu_getPDP" msgid="560610293888406317">"PDP 목록 가져오기"</string>
-    <string name="radioInfo_service_in" msgid="1915416319177520020">"서비스 상태"</string>
+    <string name="radioInfo_service_in" msgid="1915416319177520020">"서비스 중"</string>
     <string name="radioInfo_service_out" msgid="5238736759641916278">"서비스 지역 벗어남"</string>
     <string name="radioInfo_service_emergency" msgid="2485604591272668370">"긴급 통화만"</string>
     <string name="radioInfo_service_off" msgid="1434084741785525415">"무선 연결 끊김"</string>
@@ -446,6 +446,7 @@
     <string name="wifi_notify_open_networks_summary" msgid="3038290727701553612">"개방형 네트워크를 사용할 수 있을 때 알림"</string>
     <string name="wifi_setting_sleep_policy_title" msgid="2256739245628081979">"Wi-Fi 연결 해제 정책"</string>
     <string name="wifi_setting_sleep_policy_summary" msgid="7573693311804602041">"Wi-Fi에서 모바일 데이터로 전환될 때 표시"</string>
+    <string name="wifi_setting_sleep_policy_summary_wifi_only" msgid="5025244230722670496">"언제 Wi-Fi 연결을 중단할지 설정"</string>
     <string name="wifi_setting_sleep_policy_error" msgid="8174902072673071961">"설정을 변경하는 중 문제가 발생했습니다."</string>
     <string name="wifi_add_network" msgid="1671334951296205616">"Wi-Fi 네트워크 추가"</string>
     <string name="wifi_access_points" msgid="2664629396767022441">"Wi-Fi 네트워크"</string>
@@ -644,8 +645,7 @@
     <string name="status_operator" msgid="2274875196954742087">"네트워크"</string>
     <string name="status_wifi_mac_address" msgid="33109409206264790">"Wi-Fi MAC 주소"</string>
     <string name="status_bt_address" msgid="4195174192087439720">"Bluetooth 주소"</string>
-    <!-- no translation found for status_serial_number (2257111183374628137) -->
-    <skip />
+    <string name="status_serial_number" msgid="2257111183374628137">"일련번호"</string>
     <string name="status_unavailable" msgid="7862009036663793314">"사용할 수 없음"</string>
     <string name="status_up_time" msgid="7294859476816760399">"가동 시간"</string>
     <string name="status_awake_time" msgid="2393949909051183652">"무중단 가동 시간"</string>
@@ -795,11 +795,10 @@
     <string name="location_network_based" msgid="8815705866861993344">"무선 네트워크 사용"</string>
     <string name="location_networks_disabled" msgid="2708968452901433980">"무선 네트워크를 사용하는 애플리케이션(예: 지도)에서 위치 보기"</string>
     <string name="location_neighborhood_level" msgid="4656658097932515921">"Wi-Fi 및/또는 모바일 네트워크에서 측정된 위치"</string>
-    <!-- no translation found for location_neighborhood_level_wifi (7457348712272184793) -->
-    <skip />
+    <string name="location_neighborhood_level_wifi" msgid="7457348712272184793">"Wi-Fi에서 측정된 위치"</string>
     <string name="location_gps" msgid="6296125378829097831">"GPS 위성 사용"</string>
     <string name="location_street_level" msgid="7456259025474443314">"도로 수준으로 정확하게 탐색"</string>
-    <string name="location_gps_disabled" msgid="6632537158777308128">"도로 수준으로 탐색(항공사진이 더해져 배터리 추가로 필요)"</string>
+    <string name="location_gps_disabled" msgid="6632537158777308128">"도로 수준으로 위치 탐색(배터리 소모가 증가되며 실내에서는 정확도가 떨어질 수 있음)"</string>
     <string name="assisted_gps" msgid="4649317129586736885">"GPS 도우미 사용"</string>
     <string name="assisted_gps_enabled" msgid="8751899609589792803">"서버를 사용하여 GPS 보조(네트워크 사용량을 줄이려면 선택 취소)"</string>
     <string name="assisted_gps_disabled" msgid="6982698333968010748">"서버를 사용하여 GPS 보조(GPS 성능을 개선하려면 선택 취소)"</string>

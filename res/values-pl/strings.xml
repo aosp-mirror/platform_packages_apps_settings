@@ -220,7 +220,7 @@
     <string name="cancel" msgid="6859253417269739139">"Anuluj"</string>
     <string name="settings_label" msgid="1626402585530130914">"Ustawienia"</string>
     <string name="settings_label_launcher" msgid="8344735489639482340">"Ustawienia"</string>
-    <string name="settings_shortcut" msgid="8597387747077828217">"Wybierz skrót do ustawień"</string>
+    <string name="settings_shortcut" msgid="8597387747077828217">"Skrót do ustawień"</string>
     <string name="airplane_mode" msgid="8837269988154128601">"Tryb samolotowy"</string>
     <string name="airplane_mode_summary" msgid="3154817401368780988">"Wyłącz wszystkie połączenia bezprzewodowe"</string>
     <string name="airplane_mode_turning_on" msgid="8871739222526957255">"Wyłączanie połączeń bezprzewodowych..."</string>
@@ -255,7 +255,7 @@
     <string name="zone_list_menu_sort_by_timezone" msgid="2720190443744884114">"Sortuj według strefy czasowej"</string>
     <string name="date_picker_title" msgid="1338210036394128512">"Data"</string>
     <string name="time_picker_title" msgid="483460752287255019">"Godzina"</string>
-    <string name="lock_after_timeout" msgid="940509402681580537">"Czas oczekiwania"</string>
+    <string name="lock_after_timeout" msgid="940509402681580537">"Wygaszanie"</string>
     <string name="lock_after_timeout_summary" msgid="4726009794344934278">"Zablokuj po <xliff:g id="TIMEOUT_STRING">%1$s</xliff:g> od automatycznego wygaszenia ekranu"</string>
     <string name="show_owner_info_on_lockscreen_label" msgid="5074906168357568434">"Pokaż informacje o właścicielu na ekranie blokady"</string>
     <string name="owner_info_settings_title" msgid="2723190010708381889">"Informacje o właścicielu"</string>
@@ -446,6 +446,7 @@
     <string name="wifi_notify_open_networks_summary" msgid="3038290727701553612">"Powiadom mnie, gdy będę w zasięgu otwartej sieci"</string>
     <string name="wifi_setting_sleep_policy_title" msgid="2256739245628081979">"Zasady rozłączania Wi-Fi"</string>
     <string name="wifi_setting_sleep_policy_summary" msgid="7573693311804602041">"Określ, kiedy przełączyć Wi-Fi na komórkowe połączenie danych"</string>
+    <string name="wifi_setting_sleep_policy_summary_wifi_only" msgid="5025244230722670496">"Określ czas odłączenia od sieci Wi-Fi"</string>
     <string name="wifi_setting_sleep_policy_error" msgid="8174902072673071961">"Wystąpił problem ze zmianą ustawienia"</string>
     <string name="wifi_add_network" msgid="1671334951296205616">"Dodaj sieć Wi-Fi"</string>
     <string name="wifi_access_points" msgid="2664629396767022441">"Sieci Wi-Fi"</string>
@@ -587,7 +588,7 @@
     <string name="accelerometer_summary_off" product="default" msgid="5485489363715740761">"Automatycznie przełącz orientację przy obracaniu telefonu"</string>
     <string name="brightness" msgid="2354961343555249270">"Jasność ekranu"</string>
     <string name="brightness_summary" msgid="838917350127550703">"Dostosuj jasność ekranu"</string>
-    <string name="screen_timeout" msgid="6962654593018319466">"Czas oczekiwania"</string>
+    <string name="screen_timeout" msgid="6962654593018319466">"Wygaszanie"</string>
     <string name="screen_timeout_summary" msgid="4471347210332380587">"Ekran wyłączy się automatycznie po upływie <xliff:g id="TIMEOUT_DESCRIPTION">%1$s</xliff:g>"</string>
     <string name="automatic_brightness" msgid="5014143533884135461">"Automatyczna jasność"</string>
     <string name="sim_lock_settings" msgid="3392331196873564292">"Ustawienia blokady karty SIM"</string>
@@ -644,8 +645,7 @@
     <string name="status_operator" msgid="2274875196954742087">"Sieć"</string>
     <string name="status_wifi_mac_address" msgid="33109409206264790">"Adres MAC karty Wi-Fi"</string>
     <string name="status_bt_address" msgid="4195174192087439720">"Adres Bluetooth"</string>
-    <!-- no translation found for status_serial_number (2257111183374628137) -->
-    <skip />
+    <string name="status_serial_number" msgid="2257111183374628137">"Numer seryjny"</string>
     <string name="status_unavailable" msgid="7862009036663793314">"Niedostępny"</string>
     <string name="status_up_time" msgid="7294859476816760399">"Czas działania"</string>
     <string name="status_awake_time" msgid="2393949909051183652">"Czas działania (włączony)"</string>
@@ -723,8 +723,8 @@
     <string name="master_clear_title" msgid="5907939616087039756">"Ustawienia fabryczne"</string>
     <string name="master_clear_summary" product="tablet" msgid="4036344100254678429">"Wymazuje wszystkie dane z tabletu"</string>
     <string name="master_clear_summary" product="default" msgid="4986154238001088492">"Wymazuje wszystkie dane w telefonie"</string>
-    <string name="master_clear_desc" product="tablet" msgid="1305457209008369655">"Spowoduje to wymazanie wszystkich danych z "<b>"wewnętrznej pamięci"</b>" tabletu, w tym:"\n\n<li>"danych konta Google,"</li>\n<li>"danych i ustawień systemu oraz aplikacji,"</li>\n<li>"pobranych aplikacji."</li></string>
-    <string name="master_clear_desc" product="default" msgid="2950536633526374209">"Spowoduje to wymazanie wszystkich danych z "<b>"wewnętrznej pamięci"</b>" telefonu, w tym:"\n\n<li>"danych konta Google,"</li>\n<li>"danych i ustawień systemu oraz aplikacji,"</li>\n<li>"pobranych aplikacji."</li></string>
+    <string name="master_clear_desc" product="tablet" msgid="1305457209008369655">"Skasujesz wszystkie dane z "<b>"wewnętrznej pamięci"</b>" tabletu, w tym:"\n\n<li>"Dane konta Google,"</li>\n<li>"Dane i ustawienia systemu oraz aplikacji,"</li>\n<li>"Pobrane aplikacje."</li></string>
+    <string name="master_clear_desc" product="default" msgid="2950536633526374209">"Skasujesz wszystkie dane z "<b>"wewnętrznej pamięci"</b>" telefonu, w tym:"\n\n<li>"dane konta Google,"</li>\n<li>"dane i ustawienia systemu oraz aplikacji,"</li>\n<li>"pobrane aplikacje."</li></string>
     <string name="master_clear_accounts" product="default" msgid="6412857499147999073">\n\n"Zalogowano się na następujące konta:"\n</string>
     <string name="master_clear_desc_also_erases_external" msgid="1903185203791274237"><li>"Muzyka"</li>\n<li>"Zdjęcia"</li>\n<li>"Inne dane użytkownika"</li></string>
     <string name="master_clear_desc_erase_external_storage" product="nosdcard" msgid="4740866328425123395">\n\n"Aby usunąć również muzykę, zdjęcia i inne dane użytkownika, należy wymazać "<b>"nośnik USB"</b>"."</string>
@@ -795,8 +795,7 @@
     <string name="location_network_based" msgid="8815705866861993344">"Użyj sieci Wi-Fi"</string>
     <string name="location_networks_disabled" msgid="2708968452901433980">"Określ moją lokalizację w aplikacjach (takich jak Mapy), korzystając z sieci bezprzewodowych"</string>
     <string name="location_neighborhood_level" msgid="4656658097932515921">"Lokalizacja określana jest za pomocą Wi-Fi i/lub sieci komórkowych"</string>
-    <!-- no translation found for location_neighborhood_level_wifi (7457348712272184793) -->
-    <skip />
+    <string name="location_neighborhood_level_wifi" msgid="7457348712272184793">"Lokalizacja określona na podstawie sieci Wi-Fi"</string>
     <string name="location_gps" msgid="6296125378829097831">"Użyj satelitów GPS"</string>
     <string name="location_street_level" msgid="7456259025474443314">"Określaj lokalizację z dokładnością do ulicy"</string>
     <string name="location_gps_disabled" msgid="6632537158777308128">"Podaje dokładne położenie (zużywa więcej baterii, działa na zewnątrz)"</string>
@@ -1002,7 +1001,7 @@
     <string name="auto_punctuate_summary" msgid="4372126865670574837">"Naciśnij dwukrotnie klawisz spacji, aby wstawić kropkę"</string>
     <string name="show_password" msgid="2198798062604049206">"Widoczne hasła"</string>
     <string name="show_password_summary" msgid="3806709974395178121">"Pokazuj hasło podczas wpisywania"</string>
-    <string name="ime_security_warning" msgid="812267421486877917">"Ta metoda wprowadzania może gromadzić cały wpisywany tekst, w tym dane osobiste w postaci haseł i numerów kart kredytowych. Metoda pochodzi z aplikacji <xliff:g id="IME_APPLICATION_NAME">%1$s</xliff:g>. Czy użyć tej metody wprowadzania?"</string>
+    <string name="ime_security_warning" msgid="812267421486877917">"Ten sposób wprowadzania tekstu może gromadzić całą wpisaną treść, w tym dane osobiste w postaci haseł i numerów kart kredytowych. Dotyczy to aplikacji <xliff:g id="IME_APPLICATION_NAME">%1$s</xliff:g>. Czy użyć tego sposobu wprowadzania tekstu?"</string>
     <string name="user_dict_settings_titlebar" msgid="765659257455000490">"Słownik użytkownika"</string>
     <string name="user_dict_settings_title" msgid="8357027437499042191">"Słownik użytkownika"</string>
     <string name="user_dict_settings_summary" msgid="7965571192902870454"></string>
@@ -1028,9 +1027,9 @@
     <string name="quick_launch_display_mode_applications" msgid="3748789806447639039">"Aplikacje"</string>
     <string name="quick_launch_display_mode_shortcuts" msgid="4177934019174169042">"Skróty"</string>
     <string name="input_methods_settings_title" msgid="6800066636850553887">"Wprowadzanie tekstu"</string>
-    <string name="input_method" msgid="5434026103176856164">"Metoda wprowadzania"</string>
-    <string name="current_input_method" msgid="2146807723398303917">"Bieżąca metoda wprowadzania"</string>
-    <string name="input_method_selector" msgid="4311213129681430709">"Wybór metody wprowadzania"</string>
+    <string name="input_method" msgid="5434026103176856164">"Sposób wprowadzania tekstu"</string>
+    <string name="current_input_method" msgid="2146807723398303917">"Bieżący sposób wprowadzania tekstu"</string>
+    <string name="input_method_selector" msgid="4311213129681430709">"Wybór sposobu wprowadzania tekstu"</string>
     <string name="input_method_selector_show_automatically_title" msgid="1001612945471546158">"Automatyczny"</string>
     <string name="input_method_selector_always_show_title" msgid="3891824124222371634">"Zawsze pokazuj"</string>
     <string name="input_method_selector_always_hide_title" msgid="7699647095118680424">"Zawsze ukrywaj"</string>
@@ -1362,7 +1361,7 @@
     <string name="wifi_setup_status_eap_not_supported" msgid="3196386445567501484">"Protokół EAP nie jest obsługiwany"</string>
     <string name="wifi_setup_eap_not_supported" msgid="683540356393542939">"Podczas procesu konfiguracji nie można skonfigurować połączenia Wi-Fi zabezpieczonego protokołem EAP. Można to zrobić po zakończeniu tego procesu, wybierając w Ustawieniach opcję "<b>"Sieci zwykłe i bezprzewodowe"</b>"."</string>
     <string name="wifi_setup_description_connecting" msgid="1884664966455980182">"Nawiązanie połączenia może potrwać kilka minut..."</string>
-    <string name="wifi_setup_description_connected" msgid="5235991893829582459">"Dotknij opcji "<b>"Dalej"</b>", aby kontynuować konfigurację."\n\n"Dotknij opcji "<b>"Wstecz"</b>", aby połączyć się z inną siecią Wi-Fi."</string>
+    <string name="wifi_setup_description_connected" msgid="5235991893829582459">"Dotknij opcji "<b>"Dalej"</b>", aby kontynuować konfigurację."\n\n"Wybierz "<b>"Wróć"</b>", aby połączyć się z inną siecią Wi-Fi."</string>
     <string name="account_sync_settings_title" msgid="4578227872921044660">"Ustawienia synchronizacji"</string>
     <string name="sync_is_failing" msgid="1591561768344128377">"W tej chwili występują problemy z synchronizacją. Synchronizacja będzie możliwa wkrótce."</string>
     <string name="add_account_label" msgid="7811707265834013767">"Dodaj konto"</string>

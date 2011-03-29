@@ -446,6 +446,7 @@
     <string name="wifi_notify_open_networks_summary" msgid="3038290727701553612">"هنگام در دسترس بودن یک شبکه باز، به من اعلام شود"</string>
     <string name="wifi_setting_sleep_policy_title" msgid="2256739245628081979">"خط مشی قطع اتصال Wi-Fi"</string>
     <string name="wifi_setting_sleep_policy_summary" msgid="7573693311804602041">"زمان جابجایی Wi-Fi به داده تلفن همراه را مشخص کنید"</string>
+    <string name="wifi_setting_sleep_policy_summary_wifi_only" msgid="5025244230722670496">"تعیین زمان قطع اتصال از Wi-Fi"</string>
     <string name="wifi_setting_sleep_policy_error" msgid="8174902072673071961">"هنگام تغییر تنظیمات مشکلی رخ داد"</string>
     <string name="wifi_add_network" msgid="1671334951296205616">"افزودن شبکه Wi-Fi"</string>
     <string name="wifi_access_points" msgid="2664629396767022441">"شبکه های Wi-Fi"</string>
@@ -644,8 +645,7 @@
     <string name="status_operator" msgid="2274875196954742087">"شبکه"</string>
     <string name="status_wifi_mac_address" msgid="33109409206264790">"آدرس Wi-Fi MAC"</string>
     <string name="status_bt_address" msgid="4195174192087439720">"آدرس بلوتوث"</string>
-    <!-- no translation found for status_serial_number (2257111183374628137) -->
-    <skip />
+    <string name="status_serial_number" msgid="2257111183374628137">"شماره سریال"</string>
     <string name="status_unavailable" msgid="7862009036663793314">"در دسترس نیست"</string>
     <string name="status_up_time" msgid="7294859476816760399">"زمان فعالیت"</string>
     <string name="status_awake_time" msgid="2393949909051183652">"زمان بیداری"</string>
@@ -795,8 +795,7 @@
     <string name="location_network_based" msgid="8815705866861993344">"استفاده از شبکه های بی سیم"</string>
     <string name="location_networks_disabled" msgid="2708968452901433980">"با استفاده از شبکه های بی سیم، مکان را در برنامه ها (از قبیل Maps) مشاهده کنید."</string>
     <string name="location_neighborhood_level" msgid="4656658097932515921">"مکان تعیین شده توسط شبکه های Wi-Fi یا شبکه های تلفن همراه"</string>
-    <!-- no translation found for location_neighborhood_level_wifi (7457348712272184793) -->
-    <skip />
+    <string name="location_neighborhood_level_wifi" msgid="7457348712272184793">"موقعیت مکانی تعیین شده توسط Wi-Fi"</string>
     <string name="location_gps" msgid="6296125378829097831">"استفاده از ماهواره های GPS"</string>
     <string name="location_street_level" msgid="7456259025474443314">"هنگام موقعیت یابی، دقت تا سطح خیابان"</string>
     <string name="location_gps_disabled" msgid="6632537158777308128">"پیدا کردن سطح خیابان (به میزان بیشتری باتری و نمایی از آسمان نیاز است)"</string>
@@ -1371,7 +1370,7 @@
     <string name="background_data_summary" msgid="3630389249212620467">"برنامه ها در هر زمان می توانند داده ها را همگام کرده، ارسال و دریافت کنند"</string>
     <string name="background_data_dialog_title" msgid="745974259246047425">"توجه"</string>
     <string name="background_data_dialog_message" msgid="9155730118215371308">"غیرفعال کردن داده های پس زمینه طول عمر باتری را بیشتر کرده و مصرف داده ها را کاهش می دهد. برخی از برنامه ها ممکن است همچنان از اتصال داده در پس زمینه استفاده کنند."</string>
-    <!-- outdated translation 7232356254121075216 -->     <string name="sync_automatically" msgid="7558810110682562376">"همگام سازی خودکار"</string>
+    <string name="sync_automatically" msgid="7558810110682562376">"همگام سازی خودکار"</string>
     <string name="sync_automatically_summary" msgid="6662623174608419931">"همگام سازی خودکار داده ها توسط برنامه ها"</string>
     <string name="header_manage_accounts" msgid="6869002423884539607">"مدیریت حساب ها"</string>
     <string name="sync_enabled" msgid="4551148952179416813">"همگام سازی روشن است"</string>
@@ -1379,13 +1378,13 @@
     <string name="sync_error" msgid="5060969083117872149">"خطای همگام سازی"</string>
     <string name="settings_backup" msgid="2274732978260797031">"تهیه پشتیبان از تنظیمات"</string>
     <string name="settings_backup_summary" msgid="7916877705938054035">"تهیه نسخه پشتیبان از تنظیمات من"</string>
-    <!-- outdated translation 4438555069848430041 -->     <string name="sync_menu_sync_now" msgid="6154608350395805683">"همگام سازی اکنون"</string>
-    <!-- outdated translation 260091941807229790 -->     <string name="sync_menu_sync_cancel" msgid="8292379009626966949">"لغو همگام سازی"</string>
+    <string name="sync_menu_sync_now" msgid="6154608350395805683">"هم اکنون همگام سازی کنید"</string>
+    <string name="sync_menu_sync_cancel" msgid="8292379009626966949">"لغو همگام سازی"</string>
     <string name="sync_one_time_sync" msgid="6766593624598183090">"لمس کنید تا اکنون همگام سازی شود<xliff:g id="LAST_SYNC_TIME">
 %1$s</xliff:g>"</string>
-    <!-- outdated translation 2427506589849697841 -->     <string name="sync_gmail" msgid="714886122098006477">"Gmail"</string>
-    <!-- outdated translation 6328872198278573611 -->     <string name="sync_calendar" msgid="9056527206714733735">"تقویم"</string>
-    <!-- outdated translation 6010441370923919977 -->     <string name="sync_contacts" msgid="9174914394377828043">"مخاطبین"</string>
+    <string name="sync_gmail" msgid="714886122098006477">"Gmail"</string>
+    <string name="sync_calendar" msgid="9056527206714733735">"تقویم"</string>
+    <string name="sync_contacts" msgid="9174914394377828043">"مخاطبین"</string>
     <string name="sync_plug" msgid="5952575609349860569"><font fgcolor="#ffffffff">"به همگام ساز Google خوش آمدید!"</font>" "\n"این رویکردی از Google است برای همگام سازی داده ها و ایجاد امکان دسترسی به مخاطبین، قرارها و موارد بیشتر از هر کجا که هستید."</string>
     <string name="header_application_sync_settings" msgid="5514539555293976035">"تنظیمات همگام سازی برنامه کاربردی"</string>
     <string name="header_data_and_synchronization" msgid="5165024023936509896">"داده و همگام سازی"</string>

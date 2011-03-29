@@ -269,7 +269,7 @@
     <string name="crypt_keeper_settings_title" msgid="4219233835490520414">"Κρυπτογράφηση"</string>
     <string name="crypt_keeper_encrypt_title" product="tablet" msgid="1060273569887301457">"Κρυπτογράφηση tablet"</string>
     <string name="crypt_keeper_encrypt_title" product="default" msgid="1878996487755806122">"Κρυπτογράφηση τηλεφώνου"</string>
-    <string name="crypt_keeper_encrypt_summary" product="tablet" msgid="6291564408810586">"Να απαιτείται ένας αριθμητικός κωδικός PIN ή ένας κωδικός πρόσβασης για την αποκρυπτογράφηση του tablet σας κάθε φορά που το ενεργοποιείτε"</string>
+    <string name="crypt_keeper_encrypt_summary" product="tablet" msgid="6291564408810586">"Να απαιτείται ένας αριθμητικός κωδικός PIN ή ένας κωδικός πρόσβασης για την αποκρυπτογράφηση του tablet κάθε φορά που το ενεργοποιείτε"</string>
     <string name="crypt_keeper_encrypt_summary" product="default" msgid="514138079795442371">"Να απαιτείται ένας αριθμητικός κωδικός PIN ή ένας κωδικός πρόσβασης για την αποκρυπτογράφηση του τηλεφώνου σας κάθε φορά που το ενεργοποιείτε"</string>
     <string name="crypt_keeper_encrypted_summary" msgid="1868233637888132906">"Κρυπτογραφημένο"</string>
     <string name="crypt_keeper_desc" product="tablet" msgid="2150571569618349332">"Μπορείτε να κάνετε κρυπτογράφηση λογαριασμών, ρυθμίσεων, εφαρμογών των οποίων έχετε πραγματοποιήσει λήψη και των δεδομένων, των μέσων και άλλων αρχείων τους. Μόλις κρυπτογραφήσετε το tablet σας, θα πρέπει να εισαγάγετε έναν αριθμητικό κωδικό PIN ή έναν κωδικό πρόσβασης για να το αποκρυπτογραφείτε κάθε φορά που το ενεργοποιείτε: δεν μπορείτε να αποκρυπτογραφήσετε το tablet σας, εκτός αν κάνετε επαναφορά των εργοστασιακών σας ρυθμίσεων, διαγράφοντας όλα τα δεδομένα σας."\n\n"Η κρυπτογράφηση διαρκεί μία ώρα ή περισσότερο. Πρέπει να ξεκινήσετε με φορτισμένη μπαταρία και το tablet σας θα πρέπει να παραμείνει συνδεδεμένο μέχρι να ολοκληρωθεί η κρυπτογράφηση. Αν διακόψετε τη διαδικασία της κρυπτογράφησης, θα χάσετε όλα ή κάποια από τα δεδομένα σας."</string>
@@ -446,6 +446,7 @@
     <string name="wifi_notify_open_networks_summary" msgid="3038290727701553612">"Να ειδοποιούμαι όταν υπάρχει διαθέσιμο ανοικτό δίκτυο"</string>
     <string name="wifi_setting_sleep_policy_title" msgid="2256739245628081979">"Πολιτική αποσύνδεσης Wi-Fi"</string>
     <string name="wifi_setting_sleep_policy_summary" msgid="7573693311804602041">"Ορισμός εναλλαγής από δεδομένα Wi-Fi σε δεδομένα κινητού"</string>
+    <string name="wifi_setting_sleep_policy_summary_wifi_only" msgid="5025244230722670496">"Καθορίστε πότε θα γίνει αποσύνδεση από το Wi-Fi"</string>
     <string name="wifi_setting_sleep_policy_error" msgid="8174902072673071961">"Προέκυψε κάποιο πρόβλημα κατά την αλλαγή της ρύθμισης"</string>
     <string name="wifi_add_network" msgid="1671334951296205616">"Προσθήκη δικτύου Wi-Fi"</string>
     <string name="wifi_access_points" msgid="2664629396767022441">"Δίκτυα Wi-Fi"</string>
@@ -644,8 +645,7 @@
     <string name="status_operator" msgid="2274875196954742087">"Δίκτυο"</string>
     <string name="status_wifi_mac_address" msgid="33109409206264790">"Διεύθυνση MAC Wi-Fi"</string>
     <string name="status_bt_address" msgid="4195174192087439720">"Διεύθυνση Bluetooth"</string>
-    <!-- no translation found for status_serial_number (2257111183374628137) -->
-    <skip />
+    <string name="status_serial_number" msgid="2257111183374628137">"Σειριακός αριθμός"</string>
     <string name="status_unavailable" msgid="7862009036663793314">"Μη διαθέσιμο"</string>
     <string name="status_up_time" msgid="7294859476816760399">"Χρόνος από την τελευταία εκκίνηση"</string>
     <string name="status_awake_time" msgid="2393949909051183652">"Χρόνος αφύπνισης"</string>
@@ -795,8 +795,7 @@
     <string name="location_network_based" msgid="8815705866861993344">"Χρήση ασύρματων δικτύων"</string>
     <string name="location_networks_disabled" msgid="2708968452901433980">"Προβ.τοποθ.σε εφαρμ.(όπως π.χ. στους Χάρτες) με χρήση ασύρ.δικτ."</string>
     <string name="location_neighborhood_level" msgid="4656658097932515921">"Η τοποθ.προσδ.από δίκτ.Wi-Fi και/ή δίκτ.κινητ.τηλεφ."</string>
-    <!-- no translation found for location_neighborhood_level_wifi (7457348712272184793) -->
-    <skip />
+    <string name="location_neighborhood_level_wifi" msgid="7457348712272184793">"Η τοποθεσία καθορίζεται από το Wi-Fi"</string>
     <string name="location_gps" msgid="6296125378829097831">"Χρήση δορυφόρων GPS"</string>
     <string name="location_street_level" msgid="7456259025474443314">"Κατά την εύρεση τοποθεσίας, η ακρίβεια είναι σε επίπεδο δρόμου"</string>
     <string name="location_gps_disabled" msgid="6632537158777308128">"Εντοπ.σε επίπ.δρόμου (απαιτ.μεγ.καταν.μπαταρ.και μετάβ.σε ανοικτό χώρο)"</string>
@@ -1078,7 +1077,7 @@
     <string name="accessibility_script_injection_category" msgid="8649951751131431904">"Σενάρια προσβασιμότητας"</string>
     <string name="accessibility_script_injection_enabled" msgid="6927896081016611012">"Λήψη σεναρίων προσβασιμότητας"</string>
     <string name="accessibility_script_injection_enabled_summary" msgid="3629525134901617621">"Να επιτρ. στις εφ/γές η λήψη σεναρίων προσβ/τας από την Google"</string>
-    <string name="accessibility_script_injection_security_warning" product="tablet" msgid="1113600871264359828">"Ορισμένες εφαρμογές ενδέχεται να ζητήσουν από την Google τη λήψη σεναρίων στον υπολογιστή tablet σας, τα οποία κάνουν το περιεχόμενό τους πιο προσβάσιμο. Είστε βέβαιοι ότι θέλετε να επιτρέψετε στην Google να εγκαθιστά σενάρια προσβασιμότητας στον υπολογιστή tablet σας;"</string>
+    <string name="accessibility_script_injection_security_warning" product="tablet" msgid="1113600871264359828">"Ορισμένες εφαρμογές ενδέχεται να ζητήσουν από την Google τη λήψη σεναρίων στο  tablet σας, τα οποία κάνουν το περιεχόμενό τους πιο προσβάσιμο. Είστε βέβαιοι ότι θέλετε να επιτρέψετε στην Google να εγκαθιστά σενάρια προσβασιμότητας στο tablet σας;"</string>
     <string name="accessibility_script_injection_security_warning" product="default" msgid="9078893361741942109">"Ορισμένες εφαρμογές ενδέχεται να ζητήσουν από την Google τη λήψη σεναρίων στο τηλέφωνό σας, τα οποία κάνουν το περιεχόμενό τους πιο προσβάσιμο. Θέλετε σίγουρα να επιτρέψετε στην Google να εγκαθιστά σενάρια προσβασιμότητας στο τηλέφωνό σας;"</string>
     <string name="accessibility_power_button_category" msgid="8545885236482339928">"Κουμπί λειτουργίας"</string>
     <string name="accessibility_power_button_ends_call" msgid="7698764194501089533">"Το κουμπί λειτουργίας τερματίζει τις κλήσεις"</string>

@@ -446,6 +446,7 @@
     <string name="wifi_notify_open_networks_summary" msgid="3038290727701553612">"Thông báo cho tôi khi mạng mở khả dụng"</string>
     <string name="wifi_setting_sleep_policy_title" msgid="2256739245628081979">"Chính sách ngắt kết nối Wi-Fi"</string>
     <string name="wifi_setting_sleep_policy_summary" msgid="7573693311804602041">"Chỉ định thời điểm sẽ chuyển từ Wi-Fi sang dữ liệu di động"</string>
+    <string name="wifi_setting_sleep_policy_summary_wifi_only" msgid="5025244230722670496">"Chỉ rõ thời điểm ngắt kết nối Wi-Fi"</string>
     <string name="wifi_setting_sleep_policy_error" msgid="8174902072673071961">"Đã xảy ra sự cố khi thay đổi cài đặt"</string>
     <string name="wifi_add_network" msgid="1671334951296205616">"Thêm mạng Wi-Fi"</string>
     <string name="wifi_access_points" msgid="2664629396767022441">"Mạng Wi-Fi"</string>
@@ -572,7 +573,7 @@
     <string name="dock_sounds_enable_summary_on" product="default" msgid="8491180514199743771">"Phát âm thanh khi lắp hoặc tháo điện thoại khỏi đế"</string>
     <string name="dock_sounds_enable_summary_off" product="tablet" msgid="5077843049805652363">"Không phát âm thanh khi lắp hoặc tháo máy tính bảng khỏi đế"</string>
     <string name="dock_sounds_enable_summary_off" product="default" msgid="3151046599205265919">"Không phát âm thanh khi lắp hoặc tháo điện thoại khỏi đế"</string>
-    <string name="sync_settings" msgid="9186125469300013491">"Tài khoản &amp; đồng bộ hoá"</string>
+    <string name="sync_settings" msgid="9186125469300013491">"Tài khoản &amp; đồng bộ hóa"</string>
     <string name="sync_settings_summary" msgid="2962179505214965667">"Thêm hoặc xoá tài khoản và thay đổi cài đặt tài khoản"</string>
     <string name="search_settings" msgid="1910951467596035063">"Tìm kiếm"</string>
     <string name="search_settings_summary" msgid="9205656546570654169">"Quản lý cài đặt và lịch sử tìm kiếm"</string>
@@ -644,8 +645,7 @@
     <string name="status_operator" msgid="2274875196954742087">"Mạng"</string>
     <string name="status_wifi_mac_address" msgid="33109409206264790">"Địa chỉ MAC của Wi-Fi"</string>
     <string name="status_bt_address" msgid="4195174192087439720">"Địa chỉ Bluetooth"</string>
-    <!-- no translation found for status_serial_number (2257111183374628137) -->
-    <skip />
+    <string name="status_serial_number" msgid="2257111183374628137">"Số sê-ri"</string>
     <string name="status_unavailable" msgid="7862009036663793314">"Không rảnh"</string>
     <string name="status_up_time" msgid="7294859476816760399">"Thời gian hoạt động"</string>
     <string name="status_awake_time" msgid="2393949909051183652">"Thời gian thức"</string>
@@ -795,8 +795,7 @@
     <string name="location_network_based" msgid="8815705866861993344">"Sử dụng mạng không dây"</string>
     <string name="location_networks_disabled" msgid="2708968452901433980">"Xem vị trí trong ứng dụng (chẳng hạn như Maps) bằng mạng không dây"</string>
     <string name="location_neighborhood_level" msgid="4656658097932515921">"Vị trí được xác định bằng mạng Wi-Fi và/hoặc mạng di động"</string>
-    <!-- no translation found for location_neighborhood_level_wifi (7457348712272184793) -->
-    <skip />
+    <string name="location_neighborhood_level_wifi" msgid="7457348712272184793">"Vị trí được xác định bằng Wi-Fi"</string>
     <string name="location_gps" msgid="6296125378829097831">"Sử dụng các vệ tinh GPS"</string>
     <string name="location_street_level" msgid="7456259025474443314">"Khi định vị, chính xác đến mức đường phố"</string>
     <string name="location_gps_disabled" msgid="6632537158777308128">"Định vị đến mức đường phố (yêu cầu thêm pin cộng với chế độ xem bầu trời)"</string>
@@ -1371,7 +1370,7 @@
     <string name="background_data_summary" msgid="3630389249212620467">"Ứng dụng có thể đồng bộ hóa, gửi và nhận dữ liệu bất kỳ lúc nào"</string>
     <string name="background_data_dialog_title" msgid="745974259246047425">"Chú ý"</string>
     <string name="background_data_dialog_message" msgid="9155730118215371308">"Vô hiệu hóa dữ liệu nền sẽ kéo dài tuổi thọ pin và giảm việc sử dụng dữ liệu. Một số ứng dụng vẫn có thể sử dụng kết nối dữ liệu nền."</string>
-    <!-- outdated translation 7232356254121075216 -->     <string name="sync_automatically" msgid="7558810110682562376">"Tự động đồng bộ hóa"</string>
+    <string name="sync_automatically" msgid="7558810110682562376">"Tự động đồng bộ hóa"</string>
     <string name="sync_automatically_summary" msgid="6662623174608419931">"Ứng dụng tự động đồng bộ hóa dữ liệu"</string>
     <string name="header_manage_accounts" msgid="6869002423884539607">"Quản lý tài khoản"</string>
     <string name="sync_enabled" msgid="4551148952179416813">"Đồng bộ hóa BẬT"</string>
@@ -1379,13 +1378,13 @@
     <string name="sync_error" msgid="5060969083117872149">"Lỗi đồng bộ hóa"</string>
     <string name="settings_backup" msgid="2274732978260797031">"Sao lưu cài đặt"</string>
     <string name="settings_backup_summary" msgid="7916877705938054035">"Sao lưu cài đặt của tôi"</string>
-    <!-- outdated translation 4438555069848430041 -->     <string name="sync_menu_sync_now" msgid="6154608350395805683">"Đồng bộ hóa ngay bây giờ"</string>
-    <!-- outdated translation 260091941807229790 -->     <string name="sync_menu_sync_cancel" msgid="8292379009626966949">"Hủy đồng bộ hóa"</string>
+    <string name="sync_menu_sync_now" msgid="6154608350395805683">"Đồng bộ hóa ngay bây giờ"</string>
+    <string name="sync_menu_sync_cancel" msgid="8292379009626966949">"Hủy đồng bộ hóa"</string>
     <string name="sync_one_time_sync" msgid="6766593624598183090">"Chạm để đồng bộ hóa ngay bây giờ<xliff:g id="LAST_SYNC_TIME">
 %1$s</xliff:g>"</string>
-    <!-- outdated translation 2427506589849697841 -->     <string name="sync_gmail" msgid="714886122098006477">"Gmail"</string>
-    <!-- outdated translation 6328872198278573611 -->     <string name="sync_calendar" msgid="9056527206714733735">"Lịch"</string>
-    <!-- outdated translation 6010441370923919977 -->     <string name="sync_contacts" msgid="9174914394377828043">"Danh bạ"</string>
+    <string name="sync_gmail" msgid="714886122098006477">"Gmail"</string>
+    <string name="sync_calendar" msgid="9056527206714733735">"Lịch"</string>
+    <string name="sync_contacts" msgid="9174914394377828043">"Danh bạ"</string>
     <string name="sync_plug" msgid="5952575609349860569"><font fgcolor="#ffffffff">"Chào mừng bạn đến với Google sync!"</font>" "\n"Một giải pháp đồng bộ hóa dữ liệu của Google cho phép quyền truy cập vào danh bạ, các cuộc hẹn và hơn thế nữa cho dù bạn ở đâu."</string>
     <string name="header_application_sync_settings" msgid="5514539555293976035">"Cài đặt đồng bộ hóa ứng dụng"</string>
     <string name="header_data_and_synchronization" msgid="5165024023936509896">"Dữ liệu &amp; đồng bộ hóa"</string>

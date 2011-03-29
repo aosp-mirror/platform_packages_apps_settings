@@ -201,7 +201,7 @@
     <string name="sdcard_settings_bad_removal_status" product="nosdcard" msgid="7761390725880773697">"USB memorija uklonjena je dok se upotrebljavala!"</string>
     <string name="sdcard_settings_bad_removal_status" product="default" msgid="5145797653495907970">"SD kartica je uklonjena tijekom upotrebe!"</string>
     <string name="sdcard_settings_used_bytes_label" msgid="8820289486001170836">"Iskorišteni bajtovi:"</string>
-    <string name="sdcard_settings_scanning_status" product="nosdcard" msgid="7503429447676219564">"Skeniranje USB poh. za medije…"</string>
+    <string name="sdcard_settings_scanning_status" product="nosdcard" msgid="7503429447676219564">"Skeniranje USB mem. za medije…"</string>
     <string name="sdcard_settings_scanning_status" product="default" msgid="2763464949274455656">"Pretraživanje medija na SD kartici skeniranjem…"</string>
     <string name="sdcard_settings_read_only_status" product="nosdcard" msgid="3771783090621312312">"USB poh. uklj. samo za čitanje"</string>
     <string name="sdcard_settings_read_only_status" product="default" msgid="5706115860484118911">"SD kartica priključena je u načinu samo za čitanje"</string>
@@ -446,6 +446,7 @@
     <string name="wifi_notify_open_networks_summary" msgid="3038290727701553612">"Obavijesti me ako postoji otvorena mreža"</string>
     <string name="wifi_setting_sleep_policy_title" msgid="2256739245628081979">"Pravila isključivanja za Wi-Fi"</string>
     <string name="wifi_setting_sleep_policy_summary" msgid="7573693311804602041">"Navedite trenutak za prebacivanje sa značajke Wi-Fi na mobilne podatke"</string>
+    <string name="wifi_setting_sleep_policy_summary_wifi_only" msgid="5025244230722670496">"Odredite kada uređaj treba isključiti s Wi-Fi mreže"</string>
     <string name="wifi_setting_sleep_policy_error" msgid="8174902072673071961">"Pojavio se problem s promjenom postavke"</string>
     <string name="wifi_add_network" msgid="1671334951296205616">"Dodaj Wi-Fi mrežu"</string>
     <string name="wifi_access_points" msgid="2664629396767022441">"Wi-Fi mreže"</string>
@@ -644,8 +645,7 @@
     <string name="status_operator" msgid="2274875196954742087">"Mreža"</string>
     <string name="status_wifi_mac_address" msgid="33109409206264790">"Wi-Fi MAC adresa"</string>
     <string name="status_bt_address" msgid="4195174192087439720">"Bluetooth adresa"</string>
-    <!-- no translation found for status_serial_number (2257111183374628137) -->
-    <skip />
+    <string name="status_serial_number" msgid="2257111183374628137">"Serijski broj"</string>
     <string name="status_unavailable" msgid="7862009036663793314">"Nije dostupno"</string>
     <string name="status_up_time" msgid="7294859476816760399">"Vrijeme aktivnosti"</string>
     <string name="status_awake_time" msgid="2393949909051183652">"Vrijeme bez mirovanja"</string>
@@ -661,7 +661,7 @@
     <string name="sd_eject" product="default" msgid="6915293408836853020">"Isključi SD karticu"</string>
     <string name="sd_eject_summary" product="nosdcard" msgid="5009296896648072891">"Isključi unutarnju USB memoriju"</string>
     <string name="sd_eject_summary" product="default" msgid="3300599435073550246">"Isključite karticu SD radi sigurnog uklanjanja"</string>
-    <string name="sd_insert_summary" product="nosdcard" msgid="5264016886409577313">"Umetni mem. USB za uklj."</string>
+    <string name="sd_insert_summary" product="nosdcard" msgid="5264016886409577313">"Umetni USB mem. za uklj."</string>
     <string name="sd_insert_summary" product="default" msgid="2048640010381803841">"Umetnite SD karticu za uključivanje"</string>
     <string name="sd_mount" product="nosdcard" msgid="8966695015677343116">"Uključi memoriju USB"</string>
     <string name="sd_mount" product="default" msgid="5940523765187704135">"Uključivanje SD kartice"</string>
@@ -677,7 +677,7 @@
     <string name="dlg_confirm_unmount_title" product="default" msgid="8612140627310646730">"Isključi SD karticu"</string>
     <string name="dlg_confirm_unmount_text" product="nosdcard" msgid="3390169455621185223">"Ako isključite memoriju USB, neke će se aplikacije koje upotrebljavate zaustaviti i mogu biti nedostupne dok ponovno ne uključite memoriju USB."</string>
     <string name="dlg_confirm_unmount_text" product="default" msgid="5851214273718817727">"Ako isključite SD karticu, dio aplikacija koje koristite zaustavit će rad i možda će biti nedostupne sve dok ponovno ne uključite SD karticu."</string>
-    <string name="dlg_error_unmount_title" product="nosdcard" msgid="7695491947411836733">"Isključ. memorije USB neuspjelo"</string>
+    <string name="dlg_error_unmount_title" product="nosdcard" msgid="7695491947411836733">"Neusp. isključ. USB memorije"</string>
     <string name="dlg_error_unmount_title" product="default" msgid="4004106918266783081">"Isključivanje SD kartice nije uspjelo"</string>
     <string name="dlg_error_unmount_text" product="nosdcard" msgid="1450864147013376592">"Memorija USB ne može se isključiti. Pokušajte ponovno kasnije."</string>
     <string name="dlg_error_unmount_text" product="default" msgid="9188972789897713180">"Nije moguće isključiti SD karticu. Pokušajte ponovno."</string>
@@ -795,8 +795,7 @@
     <string name="location_network_based" msgid="8815705866861993344">"Koristiti bežične mreže"</string>
     <string name="location_networks_disabled" msgid="2708968452901433980">"Pogledajte lokaciju u aplikacijama (primjerice Karte) pomoću bežične veze"</string>
     <string name="location_neighborhood_level" msgid="4656658097932515921">"Lokacija je utvrđena značajkom Wi-Fi i/ili mobilnim mrežama"</string>
-    <!-- no translation found for location_neighborhood_level_wifi (7457348712272184793) -->
-    <skip />
+    <string name="location_neighborhood_level_wifi" msgid="7457348712272184793">"Lokacija utvrđena pomoću Wi-Fi točke"</string>
     <string name="location_gps" msgid="6296125378829097831">"Koristi GPS satelite"</string>
     <string name="location_street_level" msgid="7456259025474443314">"Kod lociranja, točnost je na razini ulice"</string>
     <string name="location_gps_disabled" msgid="6632537158777308128">"Lociranje do razine ulice (troši više baterije i treba imati pogled na nebo)"</string>
@@ -1371,7 +1370,7 @@
     <string name="background_data_summary" msgid="3630389249212620467">"Aplikacije mogu sink., slati i primati podatke bilo kada"</string>
     <string name="background_data_dialog_title" msgid="745974259246047425">"Pažnja"</string>
     <string name="background_data_dialog_message" msgid="9155730118215371308">"Onemogućavanje pozadinskih podataka produljuje trajanje baterije i smanjuje upotrebu podataka. Neke aplikacije još uvijek mogu upotrebljavati pozadinsku podatkovnu mrežu."</string>
-    <!-- outdated translation 7232356254121075216 -->     <string name="sync_automatically" msgid="7558810110682562376">"Automatska sinkronizacija"</string>
+    <string name="sync_automatically" msgid="7558810110682562376">"Automatska sinkronizacija"</string>
     <string name="sync_automatically_summary" msgid="6662623174608419931">"Aplikacije podatke sinkroniziraju automatski"</string>
     <string name="header_manage_accounts" msgid="6869002423884539607">"Upravljaj računima"</string>
     <string name="sync_enabled" msgid="4551148952179416813">"Sink. uključena"</string>
@@ -1379,13 +1378,13 @@
     <string name="sync_error" msgid="5060969083117872149">"Pogreška sink."</string>
     <string name="settings_backup" msgid="2274732978260797031">"Postavke sigurnosne kopije"</string>
     <string name="settings_backup_summary" msgid="7916877705938054035">"Stvori sigurnosnu kopiju postavki"</string>
-    <!-- outdated translation 4438555069848430041 -->     <string name="sync_menu_sync_now" msgid="6154608350395805683">"Sinkroniziraj sada"</string>
-    <!-- outdated translation 260091941807229790 -->     <string name="sync_menu_sync_cancel" msgid="8292379009626966949">"Otkaži sinkronizaciju"</string>
+    <string name="sync_menu_sync_now" msgid="6154608350395805683">"Sinkroniziraj sada"</string>
+    <string name="sync_menu_sync_cancel" msgid="8292379009626966949">"Otkaži sinkronizaciju"</string>
     <string name="sync_one_time_sync" msgid="6766593624598183090">"Dodirnite da biste odmah sinkronizirali<xliff:g id="LAST_SYNC_TIME">
 %1$s</xliff:g>"</string>
-    <!-- outdated translation 2427506589849697841 -->     <string name="sync_gmail" msgid="714886122098006477">"Gmail"</string>
-    <!-- outdated translation 6328872198278573611 -->     <string name="sync_calendar" msgid="9056527206714733735">"Kalendar"</string>
-    <!-- outdated translation 6010441370923919977 -->     <string name="sync_contacts" msgid="9174914394377828043">"Kontakti"</string>
+    <string name="sync_gmail" msgid="714886122098006477">"Gmail"</string>
+    <string name="sync_calendar" msgid="9056527206714733735">"Kalendar"</string>
+    <string name="sync_contacts" msgid="9174914394377828043">"Kontakti"</string>
     <string name="sync_plug" msgid="5952575609349860569"><font fgcolor="#ffffffff">"Dobro došli u Google sinkronizaciju!"</font>" "\n"Googleov pristup sinkronizaciji podataka za mogućnost pristupa kontaktima, sastancima i drugim stavkama s bilo kojeg mjesta."</string>
     <string name="header_application_sync_settings" msgid="5514539555293976035">"Postavke sinkronizacije aplikacije"</string>
     <string name="header_data_and_synchronization" msgid="5165024023936509896">"Podaci i sinkronizacija"</string>

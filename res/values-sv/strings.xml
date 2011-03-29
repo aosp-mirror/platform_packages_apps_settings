@@ -270,10 +270,10 @@
     <string name="crypt_keeper_encrypt_title" product="tablet" msgid="1060273569887301457">"Kryptera pekdatorn"</string>
     <string name="crypt_keeper_encrypt_title" product="default" msgid="1878996487755806122">"Kryptera telefonen"</string>
     <string name="crypt_keeper_encrypt_summary" product="tablet" msgid="6291564408810586">"Kräv PIN-kod eller lösenord för att dekryptera pekdatorn varje gång den slås på"</string>
-    <string name="crypt_keeper_encrypt_summary" product="default" msgid="514138079795442371">"Kräv PIN-kod eller lösenord för att dekryptera telefonen varje gång den slås på"</string>
+    <string name="crypt_keeper_encrypt_summary" product="default" msgid="514138079795442371">"Ange PIN-kod eller lösenord för att dekryptera telefonen varje gång den slås på"</string>
     <string name="crypt_keeper_encrypted_summary" msgid="1868233637888132906">"Krypterad"</string>
     <string name="crypt_keeper_desc" product="tablet" msgid="2150571569618349332">"Du kan kryptera konton, inställningar, hämtade appar och tillhörande data, media och andra filer. När du har krypterat pekdatorn måste du ange en PIN-kod eller ett lösenord varje gång slår på enheten för att den ska dekrypteras. Pekdatorn kan inte avkrypteras utan att standardinställningarna återställs, vilket innebär att alla data tas bort."\n\n"Krypteringen kan ta en timme eller mer. Se till att batteriet är laddat innan du börjar och låt laddaren vara ansluten tills krypteringen är klar. Om du avbryter krypteringen kan du förlora en del eller alla data."</string>
-    <string name="crypt_keeper_desc" product="default" msgid="7366703764847750586">"Du kan kryptera konton, inställningar, hämtade appar och tillhörande data, media och andra filer. När du har krypterat telefonen måste du ange en PIN-kod eller ett lösenord varje gång slår på enheten för att den ska dekrypteras. Telefonen kan inte avkrypteras utan att standardinställningarna återställs, vilket innebär att alla data tas bort."\n\n"Krypteringen kan en timme eller mer. Se till att batteriet är laddat innan du börjar och låt laddaren vara ansluten tills krypteringen är klar. Om du avbryter krypteringen kan du förlora en del eller alla data."</string>
+    <string name="crypt_keeper_desc" product="default" msgid="7366703764847750586">"Du kan kryptera konton, inställningar, hämtade appar och tillhörande data, media och andra filer. När du har krypterat telefonen måste du ange en PIN-kod eller ett lösenord varje gång slår på enheten för att den ska dekrypteras. Telefonen kan inte avkrypteras utan att standardinställningarna återställs, vilket innebär att alla data tas bort."\n\n"Krypteringen kan ta en timme eller mer. Se till att batteriet är laddat innan du börjar och låt laddaren vara ansluten tills krypteringen är klar. Om du avbryter krypteringen kan du förlora en del eller alla data."</string>
     <string name="crypt_keeper_button_text" product="tablet" msgid="1189623490604750854">"Kryptera pekdatorn"</string>
     <string name="crypt_keeper_button_text" product="default" msgid="2008346408473255519">"Kryptera telefonen"</string>
     <string name="crypt_keeper_low_charge_text" msgid="5920622844033087792">"Ladda batteriet och försök igen."</string>
@@ -301,7 +301,7 @@
     <string name="unlock_set_unlock_off_title" msgid="1613932765246180079">"Av"</string>
     <string name="unlock_set_unlock_off_summary" msgid="2791013557563587655">"Lås aldrig skärmen"</string>
     <string name="unlock_set_unlock_none_title" msgid="5165705762615690332">"Oskyddad"</string>
-    <string name="unlock_set_unlock_none_summary" msgid="2609139908913114644">"Kräv inte någon typ av lösenord för att låsa upp skärmen"</string>
+    <string name="unlock_set_unlock_none_summary" msgid="2609139908913114644">"Kräver ej unikt lösenord för att låsa upp skärmen"</string>
     <string name="unlock_set_unlock_pattern_title" msgid="2912067603917311700">"Grafiskt lösenord"</string>
     <string name="unlock_set_unlock_pattern_summary" msgid="8467282436608077882">"Kräv grafiskt lösenord för att låsa upp"</string>
     <string name="unlock_set_unlock_pin_title" msgid="5846029709462329515">"PIN"</string>
@@ -446,6 +446,7 @@
     <string name="wifi_notify_open_networks_summary" msgid="3038290727701553612">"Meddela mig när ett öppet nätverk är tillgängligt"</string>
     <string name="wifi_setting_sleep_policy_title" msgid="2256739245628081979">"Wi-Fi-bortkopplingspolicy"</string>
     <string name="wifi_setting_sleep_policy_summary" msgid="7573693311804602041">"Ange när du vill växla från Wi-Fi till mobildata"</string>
+    <string name="wifi_setting_sleep_policy_summary_wifi_only" msgid="5025244230722670496">"Ange när du vill koppla från Wi-Fi"</string>
     <string name="wifi_setting_sleep_policy_error" msgid="8174902072673071961">"Ett problem inträffade när inställningen ändrades"</string>
     <string name="wifi_add_network" msgid="1671334951296205616">"Lägg till Wi-Fi-nätverk"</string>
     <string name="wifi_access_points" msgid="2664629396767022441">"Wi-Fi-nätverk"</string>
@@ -644,8 +645,7 @@
     <string name="status_operator" msgid="2274875196954742087">"Nätverk"</string>
     <string name="status_wifi_mac_address" msgid="33109409206264790">"Wi-Fi Mac-adress"</string>
     <string name="status_bt_address" msgid="4195174192087439720">"Bluetooth-adress"</string>
-    <!-- no translation found for status_serial_number (2257111183374628137) -->
-    <skip />
+    <string name="status_serial_number" msgid="2257111183374628137">"Serienummer"</string>
     <string name="status_unavailable" msgid="7862009036663793314">"Inte tillgängligt"</string>
     <string name="status_up_time" msgid="7294859476816760399">"Tid sedan systemstart"</string>
     <string name="status_awake_time" msgid="2393949909051183652">"Aktiveringstid"</string>
@@ -795,8 +795,7 @@
     <string name="location_network_based" msgid="8815705866861993344">"Använd trådlösa nätverk"</string>
     <string name="location_networks_disabled" msgid="2708968452901433980">"Se plats i programmen (till exempel kartor) med hjälp av trådlösa nätverk"</string>
     <string name="location_neighborhood_level" msgid="4656658097932515921">"Plats fastställs av Wi-Fi och/eller mobila nätverk"</string>
-    <!-- no translation found for location_neighborhood_level_wifi (7457348712272184793) -->
-    <skip />
+    <string name="location_neighborhood_level_wifi" msgid="7457348712272184793">"Platsen fastställs av Wi-Fi"</string>
     <string name="location_gps" msgid="6296125378829097831">"Använd GPS-satelliter"</string>
     <string name="location_street_level" msgid="7456259025474443314">"Korrekt på gatunivå när du söker"</string>
     <string name="location_gps_disabled" msgid="6632537158777308128">"Hitta till gatunivå (kräver mer batteri och fungerar endast utomhus)"</string>
@@ -997,7 +996,7 @@
     <string name="auto_replace_summary" msgid="370288728200084466">"Rätta felskrivna ord"</string>
     <string name="auto_caps" msgid="6379232078052591265">"Automatiska versaler"</string>
     <string name="auto_caps_summary" msgid="6358102538315261466">"Första ordet i en mening ska inledas med versal"</string>
-    <string name="auto_punctuate" msgid="4595367243950425833">"Automatisk punkt"</string>
+    <string name="auto_punctuate" msgid="4595367243950425833">"Automatisk interpunktion"</string>
     <string name="hardkeyboard_category" msgid="5957168411305769899">"Inställningar för fysiskt tangentbord"</string>
     <string name="auto_punctuate_summary" msgid="4372126865670574837">"Tryck på blanksteg två gånger om du vill infoga \".\""</string>
     <string name="show_password" msgid="2198798062604049206">"Synliga lösenord"</string>
@@ -1335,7 +1334,7 @@
     <string name="sound_category_calls_title" msgid="3688531959256239012">"Inkommande samtal"</string>
     <string name="sound_category_notification_title" msgid="3502115998790286943">"Aviseringar"</string>
     <string name="sound_category_feedback_title" msgid="4399742321363475393">"Signaler"</string>
-    <string name="wifi_setup_title" msgid="661074868726906436">"Wi-Fi-konfiguration"</string>
+    <string name="wifi_setup_title" msgid="661074868726906436">"WiFi-konfiguration"</string>
     <string name="wifi_setup_title_editing_network" msgid="7304321031985059969">"Anslut till Wi-Fi-nätverk <xliff:g id="NETWORK_NAME">%s</xliff:g>"</string>
     <string name="wifi_setup_title_connecting_network" msgid="2408378435027118687">"Ansluter till Wi-Fi-nätverk <xliff:g id="NETWORK_NAME">%s</xliff:g>..."</string>
     <string name="wifi_setup_title_connected_network" msgid="209755856836003839">"Ansluten till Wi-Fi-nätverk <xliff:g id="NETWORK_NAME">%s</xliff:g>"</string>
