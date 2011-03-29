@@ -19,8 +19,6 @@ package com.android.settings;
 import com.android.internal.telephony.TelephonyIntents;
 import com.android.internal.telephony.TelephonyProperties;
 import com.android.settings.bluetooth.BluetoothEnabler;
-import com.android.settings.bluetooth.LocalBluetoothAdapter;
-import com.android.settings.bluetooth.LocalBluetoothManager;
 import com.android.settings.wifi.WifiEnabler;
 import com.android.settings.nfc.NfcEnabler;
 
@@ -105,8 +103,7 @@ public class WirelessSettings extends SettingsPreferenceFragment {
         mAirplaneModeEnabler = new AirplaneModeEnabler(activity, airplane);
         mAirplaneModePreference = (CheckBoxPreference) findPreference(KEY_TOGGLE_AIRPLANE);
         mWifiEnabler = new WifiEnabler(activity, wifi);
-        mBtEnabler = new BluetoothEnabler(activity,
-                LocalBluetoothManager.getInstance(activity).getBluetoothAdapter(), bt);
+        mBtEnabler = new BluetoothEnabler(activity, bt);
         mNfcEnabler = new NfcEnabler(activity, nfc);
 
         String toggleable = Settings.System.getString(activity.getContentResolver(),
@@ -128,6 +125,7 @@ public class WirelessSettings extends SettingsPreferenceFragment {
         // Remove Bluetooth Settings if Bluetooth service is not available.
         if (ServiceManager.getService(BluetoothAdapter.BLUETOOTH_SERVICE) == null) {
             getPreferenceScreen().removePreference(bt);
+            getPreferenceScreen().removePreference(findPreference(KEY_BT_SETTINGS));
         }
 
         // Remove NFC if its not available

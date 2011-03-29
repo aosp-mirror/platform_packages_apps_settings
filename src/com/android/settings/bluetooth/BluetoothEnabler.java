@@ -50,17 +50,19 @@ public final class BluetoothEnabler implements Preference.OnPreferenceChangeList
         }
     };
 
-    public BluetoothEnabler(Context context, LocalBluetoothAdapter adapter,
-            CheckBoxPreference checkBox) {
+    public BluetoothEnabler(Context context, CheckBoxPreference checkBox) {
         mContext = context;
         mCheckBox = checkBox;
         mOriginalSummary = checkBox.getSummary();
         checkBox.setPersistent(false);
 
-        mLocalAdapter = adapter;
-        if (adapter == null) {
+        LocalBluetoothManager manager = LocalBluetoothManager.getInstance(context);
+        if (manager == null) {
             // Bluetooth is not supported
+            mLocalAdapter = null;
             checkBox.setEnabled(false);
+        } else {
+            mLocalAdapter = manager.getBluetoothAdapter();
         }
         mIntentFilter = new IntentFilter(BluetoothAdapter.ACTION_STATE_CHANGED);
     }
