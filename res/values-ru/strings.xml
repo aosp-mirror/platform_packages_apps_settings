@@ -210,7 +210,7 @@
     <string name="sdcard_settings_mass_storage_status" product="default" msgid="4786433969313661655">"SD-карта используется в качестве устройства массовой памяти"</string>
     <string name="sdcard_settings_unmounted_status" product="nosdcard" msgid="7503300818792750913">"USB-накопитель можно отключить"</string>
     <string name="sdcard_settings_unmounted_status" product="default" msgid="3812022095683863087">"SD-карта может быть извлечена"</string>
-    <string name="sdcard_settings_bad_removal_status" product="nosdcard" msgid="7761390725880773697">"Накопитель извлечен во время использования!"</string>
+    <string name="sdcard_settings_bad_removal_status" product="nosdcard" msgid="7761390725880773697">"Накопитель извлечен при исп.!"</string>
     <string name="sdcard_settings_bad_removal_status" product="default" msgid="5145797653495907970">"SD-карта была извлечена во время использования!"</string>
     <string name="sdcard_settings_used_bytes_label" msgid="8820289486001170836">"Использовано байтов:"</string>
     <string name="sdcard_settings_scanning_status" product="nosdcard" msgid="7503429447676219564">"Сканирование USB-накопителя..."</string>
@@ -303,19 +303,19 @@
     <string name="crypt_keeper_failed_title" msgid="1166918236711686187">"Ошибка шифрования"</string>
     <string name="crypt_keeper_failed_summary" product="tablet" msgid="1075638996134310507">"Шифрование прервано и не может быть возобновлено. Чтобы получить возможность пользоваться планшетным ПК, необходимо выполнить сброс настроек, при этом все данные будут удалены. После сброса настроек можно повторно запустить процедуру шифрования."</string>
     <string name="crypt_keeper_failed_summary" product="default" msgid="3394708817932222518">"Шифрование прервано и не может быть возобновлено. Чтобы получить возможность пользоваться телефоном, необходимо выполнить сброс настроек, при этом все данные будут удалены. После сброса настроек можно повторно запустить процедуру шифрования."</string>
-    <string name="lock_settings_picker_title" msgid="8665454308380158195">"Настройка блокировки экрана"</string>
-    <string name="unlock_set_unlock_launch_picker_title" msgid="4461562893699328786">"Настройка блокировки экрана"</string>
+    <string name="lock_settings_picker_title" msgid="8665454308380158195">"Настройка блок. экрана"</string>
+    <string name="unlock_set_unlock_launch_picker_title" msgid="4461562893699328786">"Настройка блок. экрана"</string>
     <string name="unlock_set_unlock_launch_picker_change_title" msgid="6987228635944678726">"Сменить способ блокировки"</string>
     <string name="unlock_set_unlock_launch_picker_change_summary" msgid="2790960639554590668">"Смена или отключение графического ключа, PIN-кода и пароля"</string>
     <string name="unlock_set_unlock_launch_picker_enable_summary" msgid="4791110798817242301">"Выбрать метод блокировки экрана"</string>
     <string name="unlock_set_unlock_off_title" msgid="1613932765246180079">"Отключение"</string>
     <string name="unlock_set_unlock_off_summary" msgid="2791013557563587655">"Никогда не блокировать экран"</string>
     <string name="unlock_set_unlock_none_title" msgid="7560817055143323842">"Безопасность отключена"</string>
-    <string name="unlock_set_unlock_none_summary" msgid="2609139908913114644">"Отключение графического ключа, PIN-кода или пароля для разблокировки экрана"</string>
+    <string name="unlock_set_unlock_none_summary" msgid="2609139908913114644">"Откл. граф. ключа, PIN, пароля разбл. экрана"</string>
     <string name="unlock_set_unlock_pattern_title" msgid="2912067603917311700">"Графический ключ"</string>
     <string name="unlock_set_unlock_pattern_summary" msgid="8467282436608077882">"Создать графический ключ для разблокировки экрана"</string>
     <string name="unlock_set_unlock_pin_title" msgid="5846029709462329515">"PIN"</string>
-    <string name="unlock_set_unlock_pin_summary" msgid="5556722736289132512">"Создать цифровой PIN-код для разблокировки экрана"</string>
+    <string name="unlock_set_unlock_pin_summary" msgid="5556722736289132512">"Создать цифровой PIN-код для разбл. экрана"</string>
     <string name="unlock_set_unlock_password_title" msgid="8775603825675090937">"Пароль"</string>
     <string name="unlock_set_unlock_password_summary" msgid="7871968012198279034">"Создать пароль для разблокировки экрана"</string>
     <string name="unlock_set_unlock_disabled_summary" msgid="8563103042330816018">"Отключено администратором или политикой шифрования"</string>
@@ -685,7 +685,7 @@
     <string name="sd_eject" product="default" msgid="6915293408836853020">"Извлечь SD-карту"</string>
     <string name="sd_eject_summary" product="nosdcard" msgid="5009296896648072891">"Отключить внутр. USB-накопитель"</string>
     <string name="sd_eject_summary" product="default" msgid="3300599435073550246">"Отключение SD-карты для ее безопасного извлечения из устройства"</string>
-    <string name="sd_insert_summary" product="nosdcard" msgid="5264016886409577313">"Вставить USB-накопитель для подключения"</string>
+    <string name="sd_insert_summary" product="nosdcard" msgid="5264016886409577313">"Вставить USB-накопитель"</string>
     <string name="sd_insert_summary" product="default" msgid="2048640010381803841">"Вставьте SD-карту для подключения"</string>
     <string name="sd_mount" product="nosdcard" msgid="8966695015677343116">"Подключить USB-накопитель"</string>
     <string name="sd_mount" product="default" msgid="5940523765187704135">"Подключить SD-карту"</string>
@@ -1316,14 +1316,14 @@
     <string name="vpn_secret_not_set" msgid="1037792636371641845">"(не настроено)"</string>
     <string name="credentials_title" msgid="4446234003860769883">"Хранилище регистрационных данных"</string>
     <string name="credentials_access" msgid="4843187230913860492">"Доступ к хранилищу"</string>
-    <string name="credentials_access_summary" msgid="319662078718574168">"Разрешить приложениям использовать хранилище сертификатов и рег. данных"</string>
+    <string name="credentials_access_summary" msgid="319662078718574168">"Разрешить приложениям использовать хранилище сертификатов и учет. данных"</string>
     <string name="credentials_install" product="nosdcard" msgid="466093273825150847">"Устанавливать с карты памяти."</string>
     <string name="credentials_install" product="default" msgid="953914549998062317">"Установка с SD-карты"</string>
     <string name="credentials_install_summary" product="nosdcard" msgid="4220422806818210676">"Устанавливать сертификаты с карты памяти"</string>
     <string name="credentials_install_summary" product="default" msgid="5737658257407822713">"Установить сертификаты с SD-карты"</string>
     <string name="credentials_set_password" msgid="9104473585811899989">"Установить пароль"</string>
     <string name="credentials_set_password_summary" msgid="6756719720826053228">"Установить или изменить пароль для хранилища регистрационных данных"</string>
-    <string name="credentials_reset" msgid="3239382277144980418">"Очистить регистрационные данные"</string>
+    <string name="credentials_reset" msgid="3239382277144980418">"Очистить учетные данные"</string>
     <string name="credentials_reset_summary" msgid="3810369467217453606">"Удалить все содержание и сбросить пароль"</string>
     <string name="credentials_unlock" msgid="1463040326264133844">"Ввод пароля"</string>
     <string name="credentials_unlock_hint" msgid="5889551635843338639">"Введите пароль для хранилища регистрационных данных."</string>
@@ -1442,7 +1442,10 @@
     <string name="delete" msgid="4219243412325163003">"Удалить"</string>
     <string name="misc_files" msgid="6298643430106707497">"Разное"</string>
     <string name="misc_files_selected_count" msgid="4647048020823912088">"выбрано <xliff:g id="NUMBER">%1$d</xliff:g> из <xliff:g id="TOTAL">%2$d</xliff:g>"</string>
-    <!-- no translation found for misc_files_selected_count_bytes (2876232009069114352) -->
-    <skip />
+    <string name="misc_files_selected_count_bytes" msgid="2876232009069114352">"<xliff:g id="NUMBER">%1$s</xliff:g> из <xliff:g id="TOTAL">%2$s</xliff:g>"</string>
     <string name="select_all" msgid="6783085295161532497">"Выбрать все"</string>
+    <!-- no translation found for hdcp_checking_title (8605478913544273282) -->
+    <skip />
+    <!-- no translation found for hdcp_checking_dialog_title (5141305530923283) -->
+    <skip />
 </resources>
