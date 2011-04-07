@@ -208,7 +208,7 @@
     <string name="sdcard_settings_mass_storage_status" product="default" msgid="4786433969313661655">"SD-Karte wird als Massenspeichergerät verwendet"</string>
     <string name="sdcard_settings_unmounted_status" product="nosdcard" msgid="7503300818792750913">"USB-Speicher kann nun entfernt werden"</string>
     <string name="sdcard_settings_unmounted_status" product="default" msgid="3812022095683863087">"Die SD-Karte kann jetzt entfernt werden."</string>
-    <string name="sdcard_settings_bad_removal_status" product="nosdcard" msgid="7761390725880773697">"USB-Speicher wurde während Verw. entfernt."</string>
+    <string name="sdcard_settings_bad_removal_status" product="nosdcard" msgid="7761390725880773697">"USB-Speicher während Verwendung entfernt"</string>
     <string name="sdcard_settings_bad_removal_status" product="default" msgid="5145797653495907970">"Die SD-Karte wurde während der Verwendung entfernt!"</string>
     <string name="sdcard_settings_used_bytes_label" msgid="8820289486001170836">"Verwendete Bytes:"</string>
     <string name="sdcard_settings_scanning_status" product="nosdcard" msgid="7503429447676219564">"USB-Sp. auf Medien scannen"</string>
@@ -301,8 +301,8 @@
     <string name="crypt_keeper_failed_title" msgid="1166918236711686187">"Verschlüsselung fehlgeschlagen"</string>
     <string name="crypt_keeper_failed_summary" product="tablet" msgid="1075638996134310507">"Die Verschlüsselung wurde unterbrochen und kann nicht abgeschlossen werden. Damit Sie Ihr Tablet wieder verwenden können, müssen Sie es auf die Werkseinstellungen zurücksetzen, wobei alle Ihre Daten gelöscht werden. Nachdem das Tablet zurückgesetzt wurde, können Sie es erneut verschlüsseln."</string>
     <string name="crypt_keeper_failed_summary" product="default" msgid="3394708817932222518">"Die Verschlüsselung wurde unterbrochen und kann nicht abgeschlossen werden. Damit Sie Ihr Telefon wieder verwenden können, müssen Sie es auf die Werkseinstellungen zurücksetzen, wobei alle Ihre Daten gelöscht werden. Nachdem das Telefon zurückgesetzt wurde, können Sie es erneut verschlüsseln."</string>
-    <string name="lock_settings_picker_title" msgid="8665454308380158195">"Bildschirmsperre konf."</string>
-    <string name="unlock_set_unlock_launch_picker_title" msgid="4461562893699328786">"Bildschirmsperre konf."</string>
+    <string name="lock_settings_picker_title" msgid="8665454308380158195">"Display-Sperre konf."</string>
+    <string name="unlock_set_unlock_launch_picker_title" msgid="4461562893699328786">"Display-Sperre konf."</string>
     <string name="unlock_set_unlock_launch_picker_change_title" msgid="6987228635944678726">"Display-Sperre ändern"</string>
     <string name="unlock_set_unlock_launch_picker_change_summary" msgid="2790960639554590668">"Sperre (Muster, PIN, Passwort) ändern oder deaktivieren"</string>
     <string name="unlock_set_unlock_launch_picker_enable_summary" msgid="4791110798817242301">"Methode zum Sperren des Bildschirms wählen"</string>
@@ -457,7 +457,7 @@
     <string name="wifi_notify_open_networks_summary" msgid="3038290727701553612">"Benachrichtigen, wenn ein offenes Netzwerk verfügbar ist"</string>
     <string name="wifi_setting_sleep_policy_title" msgid="2256739245628081979">"WLAN-Standby-Richtlinie"</string>
     <string name="wifi_setting_sleep_policy_summary" msgid="7573693311804602041">"Festlegen, wann von WLAN auf mobile Daten umgeschaltet werden soll"</string>
-    <string name="wifi_setting_sleep_policy_summary_wifi_only" msgid="5025244230722670496">"Geben Sie an, wann die WLAN-Verbindung getrennt werden soll."</string>
+    <string name="wifi_setting_sleep_policy_summary_wifi_only" msgid="5025244230722670496">"Legen Sie fest, wann die WLAN-Verbindung getrennt werden soll."</string>
     <string name="wifi_setting_sleep_policy_error" msgid="8174902072673071961">"Beim Ändern der Einstellung ist ein Problem aufgetreten."</string>
     <string name="wifi_add_network" msgid="1671334951296205616">"WLAN-Netzwerk hinzufügen"</string>
     <string name="wifi_access_points" msgid="2664629396767022441">"WLAN-Netzwerke"</string>
@@ -672,7 +672,7 @@
     <string name="memory_dcim_usage" msgid="6679615808140067136">"Bilder, Videos"</string>
     <string name="memory_music_usage" msgid="4040027367622874108">"Audio (Musik, Klingeltöne, Podcasts usw.)"</string>
     <string name="memory_media_misc_usage" msgid="235452944021647124">"Sonstiges"</string>
-    <string name="sd_eject" product="nosdcard" msgid="4988563376492400073">"Freig. Speicher trennen"</string>
+    <string name="sd_eject" product="nosdcard" msgid="4988563376492400073">"Gem. Speicher trennen"</string>
     <string name="sd_eject" product="default" msgid="6915293408836853020">"SD-Karte entnehmen"</string>
     <string name="sd_eject_summary" product="nosdcard" msgid="5009296896648072891">"Internen USB-Speicher trennen"</string>
     <string name="sd_eject_summary" product="default" msgid="3300599435073550246">"SD-Karte trennen, damit Sie sie sicher entfernen können"</string>
@@ -803,9 +803,9 @@
     <string name="bluetooth_tethering_device_connected_subtext" product="tablet" msgid="2730938191906597896">"Internetverbindung des Tablets für ein Gerät freigegeben"</string>
     <string name="bluetooth_tethering_device_connected_subtext" product="default" msgid="1666736165420290466">"Internetverbindung des Telefons für ein Gerät freigegeben"</string>
     <string name="bluetooth_tethering_devices_connected_subtext" product="tablet" msgid="1180765608259580143">"Internetverbindung des Tablets für <xliff:g id="CONNECTEDDEVICECOUNT">%1$d</xliff:g> Geräte freigegeben"</string>
-    <string name="bluetooth_tethering_devices_connected_subtext" product="default" msgid="8248942539362173005">"Internetverbindung d. Telefons für <xliff:g id="CONNECTEDDEVICECOUNT">%1$d</xliff:g> Geräte freigegeben"</string>
-    <string name="bluetooth_tethering_off_subtext" product="tablet" msgid="2093881379028235555">"Internetverbindung d. Tablets nicht freigegeben"</string>
-    <string name="bluetooth_tethering_off_subtext" product="default" msgid="706860924389041342">"Internetverbindung d. Telefons nicht freigegeben"</string>
+    <string name="bluetooth_tethering_devices_connected_subtext" product="default" msgid="8248942539362173005">"Internetverbindung des Telefons für <xliff:g id="CONNECTEDDEVICECOUNT">%1$d</xliff:g> Geräte freigegeben"</string>
+    <string name="bluetooth_tethering_off_subtext" product="tablet" msgid="2093881379028235555">"Internetverbindung des Tablets nicht freigegeben"</string>
+    <string name="bluetooth_tethering_off_subtext" product="default" msgid="706860924389041342">"Internetverbindung des Telefons nicht freigegeben"</string>
     <string name="bluetooth_tethering_errored_subtext" msgid="1344187103463073993">"Bluetooth-Tethering-Fehler"</string>
     <string name="bluetooth_tethering_overflow_error" msgid="2222060504731415763">"Tethering nur für maximal <xliff:g id="MAXCONNECTION">%1$d</xliff:g> Geräte möglich"</string>
     <string name="bluetooth_untether_blank" msgid="2871192409329334813">"Tethering für <xliff:g id="DEVICE_NAME">%1$s</xliff:g> wird deaktiviert."</string>
@@ -825,7 +825,7 @@
     <string name="assisted_gps_disabled" msgid="6982698333968010748">"Server zur Unterstützung von GPS verwenden (zur Verbesserung der GPS-Leistung deaktivieren)"</string>
     <string name="use_location_title" msgid="3659340070401464551">"Standort für Google-Suche verwenden"</string>
     <string name="use_location_summary_disabled" msgid="6518008620918354403">"Standort für Google-Suche und andere Google-Services verwenden"</string>
-    <string name="use_location_summary_enabled" msgid="8110246289085796179">"Standort wird zur Verbesserung der Google-Suchergebnisse und anderer Google-Services verwendet."</string>
+    <string name="use_location_summary_enabled" msgid="8110246289085796179">"Standort wird zur Verbesserung der Google-Suchergebnisse und anderer Google-Dienste verwendet."</string>
     <string name="about_settings" product="tablet" msgid="593457295516533765">"Über das Tablet"</string>
     <string name="about_settings" product="default" msgid="1743378368185371685">"Über das Telefon"</string>
     <string name="about_settings_summary" msgid="3371517697156165959">"Rechtliche Hinweise, Status und Softwareversion anzeigen"</string>
@@ -1190,7 +1190,7 @@
     <string name="recognizer_settings_summary" msgid="4472287934134546902">"Einstellungen für \'<xliff:g id="RECOGNIZER_NAME">%s</xliff:g>\'"</string>
     <string name="tts_settings" msgid="8186971894801348327">"Text-in-Sprache"</string>
     <string name="tts_settings_title" msgid="4182348653053000933">"Text-in-Sprache-Einstellungen"</string>
-    <string name="use_default_tts_settings_title" msgid="1577063839539732930">"Immer meine Einst. verwenden"</string>
+    <string name="use_default_tts_settings_title" msgid="1577063839539732930">"Immer meine Einstellungen verwenden"</string>
     <string name="use_default_tts_settings_summary" msgid="4253502106159206276">"Standardeinstellungen überschreiben Anwendungseinstellungen"</string>
     <string name="tts_default_settings_section" msgid="5787915620218907443">"Standardeinstellungen"</string>
     <string name="tts_default_synth_title" msgid="29467896463371992">"Standardmodul"</string>
@@ -1433,7 +1433,8 @@
     <string name="delete" msgid="4219243412325163003">"Löschen"</string>
     <string name="misc_files" msgid="6298643430106707497">"Sonstige Dateien"</string>
     <string name="misc_files_selected_count" msgid="4647048020823912088">"<xliff:g id="NUMBER">%1$d</xliff:g> von <xliff:g id="TOTAL">%2$d</xliff:g> ausgewählt"</string>
-    <!-- no translation found for misc_files_selected_count_bytes (2876232009069114352) -->
-    <skip />
+    <string name="misc_files_selected_count_bytes" msgid="2876232009069114352">"<xliff:g id="NUMBER">%1$s</xliff:g> von <xliff:g id="TOTAL">%2$s</xliff:g>"</string>
     <string name="select_all" msgid="6783085295161532497">"Alle auswählen"</string>
+    <string name="hdcp_checking_title" msgid="8605478913544273282">"HDCP-Prüfung"</string>
+    <string name="hdcp_checking_dialog_title" msgid="5141305530923283">"HDCP-Prüfverhalten festl."</string>
 </resources>
