@@ -18,6 +18,7 @@ package com.android.settings;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.preference.CheckBoxPreference;
@@ -26,11 +27,13 @@ import android.preference.Preference;
 import android.preference.PreferenceScreen;
 import android.preference.Preference.OnPreferenceChangeListener;
 import android.provider.Settings;
+import android.util.Log;
 
 public class ApplicationSettings extends SettingsPreferenceFragment implements
         DialogInterface.OnClickListener {
     
     private static final String KEY_TOGGLE_INSTALL_APPLICATIONS = "toggle_install_applications";
+    private static final String KEY_TOGGLE_ADVANCED_SETTINGS = "toggle_advanced_settings";
     private static final String KEY_APP_INSTALL_LOCATION = "app_install_location";
 
     // App installation location. Default is ask the user.
@@ -43,9 +46,8 @@ public class ApplicationSettings extends SettingsPreferenceFragment implements
     private static final String APP_INSTALL_AUTO_ID = "auto";
     
     private CheckBoxPreference mToggleAppInstallation;
-
+    private CheckBoxPreference mToggleAdvancedSettings;
     private ListPreference mInstallLocation;
-
     private DialogInterface mWarnInstallApps;
 
     @Override
@@ -54,8 +56,18 @@ public class ApplicationSettings extends SettingsPreferenceFragment implements
 
         addPreferencesFromResource(R.xml.application_settings);
 
-        mToggleAppInstallation = (CheckBoxPreference) findPreference(KEY_TOGGLE_INSTALL_APPLICATIONS);
+        mToggleAppInstallation = (CheckBoxPreference)findPreference(
+                KEY_TOGGLE_INSTALL_APPLICATIONS);
         mToggleAppInstallation.setChecked(isNonMarketAppsAllowed());
+
+        mToggleAdvancedSettings = (CheckBoxPreference)findPreference(
+                KEY_TOGGLE_ADVANCED_SETTINGS);
+        mToggleAdvancedSettings.setChecked(isAdvancedSettingsEnabled());
+
+        // not ready for prime time yet
+        if (false) {
+            getPreferenceScreen().removePreference(mInstallLocation);
+        }
 
         mInstallLocation = (ListPreference) findPreference(KEY_APP_INSTALL_LOCATION);
         // Is app default install location set?
@@ -110,6 +122,9 @@ public class ApplicationSettings extends SettingsPreferenceFragment implements
             } else {
                 setNonMarketAppsAllowed(false);
             }
+        } else if (preference == mToggleAdvancedSettings) {
+            boolean value = mToggleAdvancedSettings.isChecked();
+            setAdvancedSettingsEnabled(value);
         }
 
         return super.onPreferenceTreeClick(preferenceScreen, preference);
@@ -127,7 +142,23 @@ public class ApplicationSettings extends SettingsPreferenceFragment implements
         Settings.Secure.putInt(getContentResolver(), Settings.Secure.INSTALL_NON_MARKET_APPS, 
                                 enabled ? 1 : 0);
     }
-    
+
+    private boolean isAdvancedSettingsEnabled() {
+        return Settings.System.getInt(getContentResolver(), 
+                                      Settings.System.ADVANCED_SETTINGS,
+                                      Settings.System.ADVANCED_SETTINGS_DEFAULT) > 0;
+    }
+
+    private void setAdvancedSettingsEnabled(boolean enabled) {
+        int value = enabled ? 1 : 0;
+        // Change the system setting
+        Settings.Secure.putInt(getContentResolver(), Settings.System.ADVANCED_SETTINGS, value);
+        // TODO: the settings thing should broadcast this for thread safety purposes.
+        Intent intent = new Intent(Intent.ACTION_ADVANCED_SETTINGS_CHANGED);
+        intent.putExtra("state", value);
+        getActivity().sendBroadcast(intent);
+    }
+
     private boolean isNonMarketAppsAllowed() {
         return Settings.Secure.getInt(getContentResolver(), 
                                       Settings.Secure.INSTALL_NON_MARKET_APPS, 0) > 0;

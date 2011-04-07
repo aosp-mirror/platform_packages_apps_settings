@@ -54,6 +54,13 @@
             android:summaryOn="@string/install_unknown_applications"
             android:persistent="false" />
 
+    <CheckBoxPreference
+            android:key="toggle_advanced_settings"
+            android:title="@string/advanced_settings"
+            android:summaryOff="@string/advanced_settings_summary"
+            android:summaryOn="@string/advanced_settings_summary"
+            android:persistent="false" />
+
     <ListPreference
         android:key="app_install_location"
         android:title="@string/app_install_location_title"
