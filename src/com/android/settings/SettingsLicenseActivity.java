@@ -21,7 +21,6 @@ import android.os.Handler;
 import android.os.Message;
 import android.os.SystemProperties;
 import android.text.TextUtils;
-import android.util.Config;
 import android.util.Log;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
@@ -46,7 +45,7 @@ import java.util.zip.GZIPInputStream;
 public class SettingsLicenseActivity extends Activity {
 
     private static final String TAG = "SettingsLicenseActivity";
-    private static final boolean LOGV = false || Config.LOGV;
+    private static final boolean LOGV = false || false;
 
     private static final String DEFAULT_LICENSE_PATH = "/system/etc/NOTICE.html.gz";
     private static final String PROPERTY_LICENSE_PATH = "ro.config.license_path";
