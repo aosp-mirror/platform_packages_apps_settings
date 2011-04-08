@@ -23,6 +23,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SyncAdapterType;
 import android.content.pm.PackageManager;
+import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.preference.Preference;
@@ -199,7 +200,10 @@ public class ChooseAccountActivity extends PreferenceActivity {
                 icon = authContext.getResources().getDrawable(desc.iconId);
             } catch (PackageManager.NameNotFoundException e) {
                 // TODO: place holder icon for missing account icons?
-                Log.w(TAG, "No icon for account type " + accountType);
+                Log.w(TAG, "No icon name for account type " + accountType);
+            } catch (Resources.NotFoundException e) {
+                // TODO: place holder icon for missing account icons?
+                Log.w(TAG, "No icon resource for account type " + accountType);
             }
         }
         return icon;
@@ -218,7 +222,9 @@ public class ChooseAccountActivity extends PreferenceActivity {
                 Context authContext = createPackageContext(desc.packageName, 0);
                 label = authContext.getResources().getText(desc.labelId);
             } catch (PackageManager.NameNotFoundException e) {
-                Log.w(TAG, "No label for account type " + ", type " + accountType);
+                Log.w(TAG, "No label name for account type " + accountType);
+            } catch (Resources.NotFoundException e) {
+                Log.w(TAG, "No label resource for account type " + accountType);
             }
         }
         return label;
