@@ -64,7 +64,7 @@ public class DevelopmentSettings extends PreferenceFragment
         mKeepScreenOn = (CheckBoxPreference) findPreference(KEEP_SCREEN_ON);
         mAllowMockLocation = (CheckBoxPreference) findPreference(ALLOW_MOCK_LOCATION);
 
-        //removeHdcpOptionsForProduction();
+        removeHdcpOptionsForProduction();
     }
 
     private void removeHdcpOptionsForProduction() {
