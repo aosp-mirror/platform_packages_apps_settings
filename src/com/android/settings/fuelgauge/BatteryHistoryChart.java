@@ -368,9 +368,9 @@ public class BatteryHistoryChart extends View {
                     }
                     if (rec.batteryLevel != lastLevel || pos == 1) {
                         lastLevel = rec.batteryLevel;
-                        lastInteresting = pos;
-                        mHistEnd = rec.time;
                     }
+                    lastInteresting = pos;
+                    mHistEnd = rec.time;
                     aggrStates |= rec.states;
                 }
             }
@@ -438,7 +438,13 @@ public class BatteryHistoryChart extends View {
                 2, getResources().getDisplayMetrics());
         if (h > (textHeight*6)) {
             mLargeMode = true;
-            mLineWidth = textHeight/2;
+            if (h > (textHeight*15)) {
+                // Plenty of room for the chart.
+                mLineWidth = textHeight/2;
+            } else {
+                // Compress lines to make more room for chart.
+                mLineWidth = textHeight/3;
+            }
             mLevelTop = textHeight + mLineWidth;
             mScreenOnPaint.setARGB(255, 32, 64, 255);
             mGpsOnPaint.setARGB(255, 32, 64, 255);
@@ -472,7 +478,8 @@ public class BatteryHistoryChart extends View {
             mWifiRunningOffset = mWakeLockOffset + barOffset;
             mGpsOnOffset = mWifiRunningOffset + (mHaveWifi ? barOffset : 0);
             mPhoneSignalOffset = mGpsOnOffset + (mHaveGps ? barOffset : 0);
-            mLevelOffset = mPhoneSignalOffset + (mHavePhoneSignal ? barOffset : 0) + mLineWidth;
+            mLevelOffset = mPhoneSignalOffset + (mHavePhoneSignal ? barOffset : 0)
+                    + ((mLineWidth*3)/2);
             if (mHavePhoneSignal) {
                 mPhoneSignalChart.init(w);
             }
@@ -670,8 +677,8 @@ public class BatteryHistoryChart extends View {
         if (!mBatCriticalPath.isEmpty()) {
             canvas.drawPath(mBatCriticalPath, mBatteryCriticalPaint);
         }
-        int top = height - (mHavePhoneSignal ? mPhoneSignalOffset - (mLineWidth/2) : 0);
         if (mHavePhoneSignal) {
+            int top = height-mPhoneSignalOffset - (mLineWidth/2);
             mPhoneSignalChart.draw(canvas, top, mLineWidth);
         }
         if (!mScreenOnPath.isEmpty()) {
