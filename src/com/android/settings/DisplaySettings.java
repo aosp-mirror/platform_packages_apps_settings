@@ -23,6 +23,12 @@ import android.app.admin.DevicePolicyManager;
 import android.content.ContentResolver;
 import android.content.Context;
 import android.content.res.Configuration;
+
+import android.app.ActivityManagerNative;
+import android.app.admin.DevicePolicyManager;
+import android.content.ContentResolver;
+import android.content.Context;
+import android.content.res.Configuration;
 import android.database.ContentObserver;
 import android.os.Bundle;
 import android.os.Handler;
@@ -93,25 +99,42 @@ public class DisplaySettings extends SettingsPreferenceFragment implements
         mScreenTimeoutPreference.setValue(String.valueOf(currentTimeout));
         mScreenTimeoutPreference.setOnPreferenceChangeListener(this);
         disableUnusableTimeouts(mScreenTimeoutPreference);
-        updateTimeoutPreferenceDescription(resolver, currentTimeout);
-        
+        updateTimeoutPreferenceDescription(resolver, mScreenTimeoutPreference,
+                R.string.screen_timeout_summary, currentTimeout);
+
         mFontSizePref = (ListPreference) findPreference(KEY_FONT_SIZE);
         mFontSizePref.setOnPreferenceChangeListener(this);
     }
 
-    private void updateTimeoutPreferenceDescription(ContentResolver resolver, long currentTimeout) {
-        final CharSequence[] entries = mScreenTimeoutPreference.getEntries();
-        final CharSequence[] values = mScreenTimeoutPreference.getEntryValues();
-        int best = 0;
-        for (int i = 0; i < values.length; i++) {
-            long timeout = Long.valueOf(values[i].toString());
-            if (currentTimeout >= timeout) {
-                best = i;
+    private void updateTimeoutPreferenceDescription(
+            ContentResolver resolver,
+            ListPreference pref, 
+            int summaryStrings,
+            long currentTimeout) {
+        updateTimeoutPreferenceDescription(resolver, pref, summaryStrings, 0, currentTimeout);
+    }
+    private void updateTimeoutPreferenceDescription(
+            ContentResolver resolver,
+            ListPreference pref, 
+            int summaryStrings,
+            int zeroString,
+            long currentTimeout) {
+        String summary;
+        if (currentTimeout == 0) {
+            summary = pref.getContext().getString(zeroString);
+        } else {
+            final CharSequence[] entries = pref.getEntries();
+            final CharSequence[] values = pref.getEntryValues();
+            int best = 0;
+            for (int i = 0; i < values.length; i++) {
+                long timeout = Long.valueOf(values[i].toString());
+                if (currentTimeout >= timeout) {
+                    best = i;
+                }
             }
+            summary = pref.getContext().getString(summaryStrings, entries[best]);
         }
-        String summary = mScreenTimeoutPreference.getContext()
-                .getString(R.string.screen_timeout_summary, entries[best]);
-        mScreenTimeoutPreference.setSummary(summary);
+        pref.setSummary(summary);
     }
 
     private void disableUnusableTimeouts(ListPreference screenTimeoutPreference) {
@@ -255,7 +278,7 @@ public class DisplaySettings extends SettingsPreferenceFragment implements
                     Settings.System.ACCELEROMETER_ROTATION,
                     mAccelerometer.isChecked() ? 1 : 0);
         }
-        return true;
+        return super.onPreferenceTreeClick(preferenceScreen, preference);
     }
 
     public boolean onPreferenceChange(Preference preference, Object objValue) {
@@ -284,7 +307,8 @@ public class DisplaySettings extends SettingsPreferenceFragment implements
             try {
                 Settings.System.putInt(getContentResolver(),
                         SCREEN_OFF_TIMEOUT, value);
-                updateTimeoutPreferenceDescription(getContentResolver(), value);
+                updateTimeoutPreferenceDescription(getContentResolver(), mScreenTimeoutPreference,
+                        R.string.screen_timeout_summary, value);
             } catch (NumberFormatException e) {
                 Log.e(TAG, "could not persist screen timeout setting", e);
             }

@@ -42,6 +42,13 @@
                 android:entries="@array/screen_timeout_entries"
                 android:entryValues="@array/screen_timeout_values" />
                 
+        <PreferenceScreen 
+                android:title="@string/dream_settings_title" 
+                android:summary="@string/dream_settings_summary"
+                android:fragment="com.android.settings.DreamSettings"
+                >
+        </PreferenceScreen>
+
         <ListPreference
                 android:key="font_size"
                 android:title="@string/title_font_size"
@@ -49,5 +56,5 @@
                 android:entries="@array/entries_font_size"
                 android:entryValues="@array/entryvalues_font_size"
                 android:dialogTitle="@string/dialog_title_font_size" />
-        
+
 </PreferenceScreen>
