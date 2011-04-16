@@ -405,8 +405,10 @@ public class ChooseLockPassword extends PreferenceActivity {
         }
 
         public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
-            // Check if this was the result of hitting the enter key
-            if (actionId == EditorInfo.IME_NULL && event.getAction() == KeyEvent.ACTION_DOWN) {
+            // Check if this was the result of hitting the enter or "done" key
+            if (actionId == EditorInfo.IME_NULL
+                    || actionId == EditorInfo.IME_ACTION_DONE
+                    || actionId == EditorInfo.IME_ACTION_NEXT) {
                 handleNext();
                 return true;
             }
