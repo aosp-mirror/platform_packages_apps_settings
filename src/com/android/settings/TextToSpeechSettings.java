@@ -182,6 +182,7 @@ public class TextToSpeechSettings extends SettingsPreferenceFragment implements
                 prefKey = KEY_PLUGIN_ENABLED_PREFIX + engineName;
                 enablePref.setKey(prefKey);
                 enablePref.setTitle(engine.label);
+                enablePref.setOnPreferenceClickListener(this);
                 mEnginesGroup.addPreference(enablePref);
             }
             if (engineHasSettings(engineName)) {
