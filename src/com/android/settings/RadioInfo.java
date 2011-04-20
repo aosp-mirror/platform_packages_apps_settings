@@ -755,41 +755,41 @@ public class RadioInfo extends Activity {
     private final void updatePdpList() {
         StringBuilder sb = new StringBuilder("========DATA=======\n");
 
-        List<DataConnection> dcs = phone.getCurrentDataConnectionList();
-
-        for (DataConnection dc : dcs) {
-            sb.append("    State=").append(dc.getStateAsString()).append("\n");
-            if (dc.isActive()) {
-                long timeElapsed =
-                    (System.currentTimeMillis() - dc.getConnectionTime())/1000;
-                sb.append("    connected at ")
-                  .append(DateUtils.timeString(dc.getConnectionTime()))
-                  .append(" and elapsed ")
-                  .append(DateUtils.formatElapsedTime(timeElapsed));
-
-                if (dc instanceof GsmDataConnection) {
-                    GsmDataConnection pdp = (GsmDataConnection)dc;
-                    sb.append("\n    to ")
-                      .append(pdp.getApn().toString());
-                }
-                sb.append("\nLinkProperties: ");
-                sb.append(phone.getLinkProperties(phone.getActiveApnTypes()[0]).toString());
-            } else if (dc.isInactive()) {
-                sb.append("    disconnected with last try at ")
-                  .append(DateUtils.timeString(dc.getLastFailTime()))
-                  .append("\n    fail because ")
-                  .append(dc.getLastFailCause().toString());
-            } else {
-                if (dc instanceof GsmDataConnection) {
-                    GsmDataConnection pdp = (GsmDataConnection)dc;
-                    sb.append("    is connecting to ")
-                      .append(pdp.getApn().toString());
-                } else {
-                    sb.append("    is connecting");
-                }
-            }
-            sb.append("\n===================");
-        }
+//        List<DataConnection> dcs = phone.getCurrentDataConnectionList();
+//
+//        for (DataConnection dc : dcs) {
+//            sb.append("    State=").append(dc.getStateAsString()).append("\n");
+//            if (dc.isActive()) {
+//                long timeElapsed =
+//                    (System.currentTimeMillis() - dc.getConnectionTime())/1000;
+//                sb.append("    connected at ")
+//                  .append(DateUtils.timeString(dc.getConnectionTime()))
+//                  .append(" and elapsed ")
+//                  .append(DateUtils.formatElapsedTime(timeElapsed));
+//
+//                if (dc instanceof GsmDataConnection) {
+//                    GsmDataConnection pdp = (GsmDataConnection)dc;
+//                    sb.append("\n    to ")
+//                      .append(pdp.getApn().toString());
+//                }
+//                sb.append("\nLinkProperties: ");
+//                sb.append(phone.getLinkProperties(phone.getActiveApnTypes()[0]).toString());
+//            } else if (dc.isInactive()) {
+//                sb.append("    disconnected with last try at ")
+//                  .append(DateUtils.timeString(dc.getLastFailTime()))
+//                  .append("\n    fail because ")
+//                  .append(dc.getLastFailCause().toString());
+//            } else {
+//                if (dc instanceof GsmDataConnection) {
+//                    GsmDataConnection pdp = (GsmDataConnection)dc;
+//                    sb.append("    is connecting to ")
+//                      .append(pdp.getApn().toString());
+//                } else {
+//                    sb.append("    is connecting");
+//                }
+//            }
+//            sb.append("\n===================");
+//        }
 
         disconnects.setText(sb.toString());
     }
