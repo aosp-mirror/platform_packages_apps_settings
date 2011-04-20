@@ -425,7 +425,7 @@ public class MemoryMeasurement {
             File top = Environment.getExternalStorageDirectory();
             mFileInfoForMisc = new ArrayList<FileInfo>();
             File[] files = top.listFiles();
-            int len = files.length;
+            int len = files != null ? files.length : 0;
             if (len == 0) {
                 return;
             }
