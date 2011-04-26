@@ -27,13 +27,16 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.preference.PreferenceActivity;
+import android.text.Editable;
 import android.text.InputType;
+import android.text.TextWatcher;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.view.inputmethod.EditorInfo;
+import android.widget.Button;
 import android.widget.TextView;
 import android.widget.TextView.OnEditorActionListener;
 
@@ -58,7 +61,7 @@ public class ConfirmLockPassword extends PreferenceActivity {
     }
 
     public static class ConfirmLockPasswordFragment extends Fragment implements OnClickListener,
-            OnEditorActionListener {
+            OnEditorActionListener, TextWatcher {
         private static final long ERROR_MESSAGE_TIMEOUT = 3000;
         private TextView mPasswordEntry;
         private LockPatternUtils mLockPatternUtils;
@@ -66,6 +69,7 @@ public class ConfirmLockPassword extends PreferenceActivity {
         private Handler mHandler = new Handler();
         private PasswordEntryKeyboardHelper mKeyboardHelper;
         private PasswordEntryKeyboardView mKeyboardView;
+        private Button mContinueButton;
 
 
         // required constructor for fragments
@@ -87,9 +91,14 @@ public class ConfirmLockPassword extends PreferenceActivity {
             // Disable IME on our window since we provide our own keyboard
 
             view.findViewById(R.id.cancel_button).setOnClickListener(this);
-            view.findViewById(R.id.next_button).setOnClickListener(this);
+            mContinueButton = (Button) view.findViewById(R.id.next_button);
+            mContinueButton.setOnClickListener(this);
+            mContinueButton.setEnabled(false); // disable until the user enters at least one char
+
             mPasswordEntry = (TextView) view.findViewById(R.id.password_entry);
             mPasswordEntry.setOnEditorActionListener(this);
+            mPasswordEntry.addTextChangedListener(this);
+
             mKeyboardView = (PasswordEntryKeyboardView) view.findViewById(R.id.keyboard);
             mHeaderText = (TextView) view.findViewById(R.id.headerText);
             final boolean isAlpha = DevicePolicyManager.PASSWORD_QUALITY_ALPHABETIC == storedQuality
@@ -172,6 +181,7 @@ public class ConfirmLockPassword extends PreferenceActivity {
             }, ERROR_MESSAGE_TIMEOUT);
         }
 
+        // {@link OnEditorActionListener} methods.
         public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
             // Check if this was the result of hitting the enter or "done" key
             if (actionId == EditorInfo.IME_NULL
@@ -181,6 +191,17 @@ public class ConfirmLockPassword extends PreferenceActivity {
                 return true;
             }
             return false;
+        }
+
+        // {@link TextWatcher} methods.
+        public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+        }
+
+        public void onTextChanged(CharSequence s, int start, int before, int count) {
+        }
+
+        public void afterTextChanged(Editable s) {
+            mContinueButton.setEnabled(mPasswordEntry.getText().length() > 0);
         }
     }
 }
