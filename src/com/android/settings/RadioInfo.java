@@ -774,15 +774,18 @@ public class RadioInfo extends Activity {
                     sb.append("\n    to ")
                       .append(pdp.getApn().toString());
                 }
-                sb.append("\ninterface: ")
-                  .append(phone.getInterfaceName(phone.getActiveApnTypes()[0]))
-                  .append("\naddress: ")
-                  .append(phone.getIpAddress(phone.getActiveApnTypes()[0]))
-                  .append("\ngateway: ")
-                  .append(phone.getGateway(phone.getActiveApnTypes()[0]));
-                String[] dns = phone.getDnsServers(phone.getActiveApnTypes()[0]);
-                if (dns != null) {
-                    sb.append("\ndns: ").append(dns[0]).append(", ").append(dns[1]);
+                String[] activeApnTypes = phone.getActiveApnTypes();
+                if (activeApnTypes.length > 0) {
+                    sb.append("\ninterface: ")
+                      .append(phone.getInterfaceName(activeApnTypes[0]))
+                      .append("\naddress: ")
+                      .append(phone.getIpAddress(activeApnTypes[0]))
+                      .append("\ngateway: ")
+                      .append(phone.getGateway(activeApnTypes[0]));
+                    String[] dns = phone.getDnsServers(activeApnTypes[0]);
+                    if (dns != null) {
+                        sb.append("\ndns: ").append(dns[0]).append(", ").append(dns[1]);
+                    }
                 }
             } else if (dc.isInactive()) {
                 sb.append("    disconnected with last try at ")
