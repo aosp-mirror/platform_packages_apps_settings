@@ -26,6 +26,7 @@ import android.net.NetworkInfo.DetailedState;
 import android.net.NetworkUtils;
 import android.net.Proxy;
 import android.net.ProxyProperties;
+import android.net.RouteInfo;
 import android.net.wifi.WifiConfiguration;
 import android.net.wifi.WifiConfiguration.IpAssignment;
 import android.net.wifi.WifiConfiguration.AuthAlgorithm;
@@ -434,7 +435,7 @@ public class WifiConfigController implements TextWatcher,
         } catch (IllegalArgumentException e) {
             return R.string.wifi_ip_settings_invalid_gateway;
         }
-        linkProperties.addGateway(gatewayAddr);
+        linkProperties.addRoute(new RouteInfo(gatewayAddr));
 
         String dns = mDns1View.getText().toString();
         InetAddress dnsAddr = null;
@@ -518,7 +519,7 @@ public class WifiConfigController implements TextWatcher,
             return;
         }
         mView.findViewById(R.id.eap).setVisibility(View.VISIBLE);
-        
+
         if (mEapMethodSpinner == null) {
             mEapMethodSpinner = (Spinner) mView.findViewById(R.id.method);
             mPhase2Spinner = (Spinner) mView.findViewById(R.id.phase2);
@@ -605,10 +606,13 @@ public class WifiConfigController implements TextWatcher,
                             .getNetworkPrefixLength()));
                 }
 
-                Iterator<InetAddress>gateways = linkProperties.getGateways().iterator();
-                if (gateways.hasNext()) {
-                    mGatewayView.setText(gateways.next().getHostAddress());
+                for (RouteInfo route : linkProperties.getRoutes()) {
+                    if (route.isDefaultRoute()) {
+                        mGatewayView.setText(route.getGateway().getHostAddress());
+                        break;
+                    }
                 }
+
                 Iterator<InetAddress> dnsIterator = linkProperties.getDnses().iterator();
                 if (dnsIterator.hasNext()) {
                     mDns1View.setText(dnsIterator.next().getHostAddress());
