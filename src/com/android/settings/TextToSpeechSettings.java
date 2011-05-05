@@ -35,6 +35,7 @@ import android.os.Bundle;
 import android.preference.CheckBoxPreference;
 import android.preference.ListPreference;
 import android.preference.Preference;
+import android.preference.Preference.OnPreferenceClickListener;
 import android.preference.PreferenceGroup;
 import android.provider.Settings;
 import android.provider.Settings.SettingNotFoundException;
@@ -193,16 +194,16 @@ public class TextToSpeechSettings extends SettingsPreferenceFragment implements
                 CharSequence settingsLabel = getResources().getString(
                         R.string.tts_engine_name_settings, engine.label);
                 pref.setSummary(settingsLabel);
-                // TODO: add a new API for this
-//                pref.setOnPreferenceClickListener(new OnPreferenceClickListener(){
-//                            public boolean onPreferenceClick(Preference preference){
-//                                Intent i = new Intent();
-//                                i.setClassName(pluginPackageName,
-//                                        pluginPackageName + ".EngineSettings");
-//                                startActivity(i);
-//                                return true;
-//                            }
-//                        });
+                // TODO: Add a new API for this.
+                pref.setOnPreferenceClickListener(new OnPreferenceClickListener() {
+                            public boolean onPreferenceClick(Preference preference) {
+                                Intent i = new Intent();
+                                i.setClassName(engineName,
+                                        engineName + ".EngineSettings");
+                                startActivity(i);
+                                return true;
+                            }
+                        });
                 mEnginesGroup.addPreference(pref);
             }
         }
