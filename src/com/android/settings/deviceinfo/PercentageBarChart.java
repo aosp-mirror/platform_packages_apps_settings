@@ -71,20 +71,21 @@ public class PercentageBarChart extends View {
 
         final int width = right - left;
 
-        int lastX = left;
+        float lastX = left;
 
         if (mEntries != null) {
             for (final Entry e : mEntries) {
-                final int entryWidth;
-                if (e.percentage == 0f) {
-                    entryWidth = 0;
+                final float entryWidth;
+                if (e.percentage == 0.0f) {
+                    entryWidth = 0.0f;
                 } else {
-                    entryWidth = Math.max(mMinTickWidth, (int) (width * e.percentage));
+                    entryWidth = Math.max(mMinTickWidth, width * e.percentage);
                 }
 
-                final int nextX = lastX + entryWidth;
-                if (nextX >= right) {
-                    break;
+                final float nextX = lastX + entryWidth;
+                if (nextX > right) {
+                    canvas.drawRect(lastX, top, right, bottom, e.paint);
+                    return;
                 }
 
                 canvas.drawRect(lastX, top, nextX, bottom, e.paint);
@@ -92,13 +93,14 @@ public class PercentageBarChart extends View {
             }
         }
 
-        canvas.drawRect(lastX, top, lastX + width, bottom, mEmptyPaint);
+        canvas.drawRect(lastX, top, right, bottom, mEmptyPaint);
     }
 
     /**
      * Sets the background for this chart. Callers are responsible for later
      * calling {@link #invalidate()}.
      */
+    @Override
     public void setBackgroundColor(int color) {
         mEmptyPaint.setColor(color);
     }
