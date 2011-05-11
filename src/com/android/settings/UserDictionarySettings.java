@@ -101,7 +101,10 @@ public class UserDictionarySettings extends ListFragment implements DialogCreata
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
-        mCursor = createCursor();
+        final Intent intent = getActivity().getIntent();
+        final String locale = intent.getStringExtra("locale");
+
+        mCursor = createCursor(null != locale ? locale : Locale.getDefault().toString());
         TextView emptyView = (TextView)mView.findViewById(R.id.empty);
         emptyView.setText(R.string.user_dict_settings_empty_text);
 
@@ -117,12 +120,12 @@ public class UserDictionarySettings extends ListFragment implements DialogCreata
             mAddedWordAlready = savedInstanceState.getBoolean(INSTANCE_KEY_ADDED_WORD, false);
         }
     }
-    
+
     @Override
     public void onResume() {
         super.onResume();
         final Intent intent = getActivity().getIntent();
-        if (!mAddedWordAlready 
+        if (!mAddedWordAlready
                 && intent.getAction().equals("com.android.settings.USER_DICTIONARY_INSERT")) {
             final String word = intent.getStringExtra(EXTRA_WORD);
             mAutoReturn = true;
@@ -139,11 +142,10 @@ public class UserDictionarySettings extends ListFragment implements DialogCreata
         outState.putBoolean(INSTANCE_KEY_ADDED_WORD, mAddedWordAlready);
     }
 
-    private Cursor createCursor() {
-        String currentLocale = Locale.getDefault().toString();
+    private Cursor createCursor(final String locale) {
         // Case-insensitive sort
         return getActivity().managedQuery(UserDictionary.Words.CONTENT_URI, QUERY_PROJECTION,
-                QUERY_SELECTION, new String[] { currentLocale },
+                QUERY_SELECTION, new String[] { locale },
                 "UPPER(" + UserDictionary.Words.WORD + ")");
     }
 

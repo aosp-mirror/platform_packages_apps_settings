@@ -21,14 +21,22 @@ import com.android.settings.SettingsPreferenceFragment;
 import com.android.settings.Utils;
 import com.android.settings.VoiceInputOutputSettings;
 
+import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.content.res.Configuration;
+import android.database.Cursor;
 import android.os.Bundle;
 import android.preference.ListPreference;
 import android.preference.Preference;
+import android.preference.PreferenceGroup;
 import android.preference.PreferenceScreen;
 import android.provider.Settings;
 import android.view.inputmethod.InputMethodManager;
+import android.provider.UserDictionary;
+
+import java.util.Locale;
+import java.util.TreeMap;
 
 public class InputMethodAndLanguageSettings extends SettingsPreferenceFragment
         implements Preference.OnPreferenceChangeListener{
@@ -36,6 +44,9 @@ public class InputMethodAndLanguageSettings extends SettingsPreferenceFragment
     private static final String KEY_PHONE_LANGUAGE = "phone_language";
     private static final String KEY_CURRENT_INPUT_METHOD = "current_input_method";
     private static final String KEY_INPUT_METHOD_SELECTOR = "input_method_selector";
+    private static final String KEY_LANGUAGE_SETTINGS_CATEGORY = "language_settings_category";
+    private static final String USER_DICTIONARY_SETTINGS_INTENT_ACTION =
+            "android.settings.USER_DICTIONARY_SETTINGS";
 
     private int mDefaultInputMethodSelectorVisibility = 0;
     private ListPreference mShowInputMethodSelectorPref;
@@ -59,6 +70,9 @@ public class InputMethodAndLanguageSettings extends SettingsPreferenceFragment
         } else {
             mLanguagePref = findPreference(KEY_PHONE_LANGUAGE);
         }
+
+        createUserDictSettings((PreferenceGroup) findPreference(KEY_LANGUAGE_SETTINGS_CATEGORY));
+
         mShowInputMethodSelectorPref = (ListPreference)findPreference(
                 KEY_INPUT_METHOD_SELECTOR);
         mShowInputMethodSelectorPref.setOnPreferenceChangeListener(this);
@@ -75,6 +89,51 @@ public class InputMethodAndLanguageSettings extends SettingsPreferenceFragment
             mShowInputMethodSelectorPref.setSummary(inputMethodSelectorTitles[value]);
             mShowInputMethodSelectorPref.setValue(String.valueOf(value));
         }
+    }
+
+    /**
+     * Creates the entries that allow the user to go into the user dictionary for each locale.
+     * @param userDictGroup The group to put the settings in.
+     */
+    protected void createUserDictSettings(PreferenceGroup userDictGroup) {
+        final Activity activity = getActivity();
+        final Cursor locales = activity.managedQuery(UserDictionary.Words.CONTENT_URI,
+                new String[] { UserDictionary.Words.LOCALE },
+                null, null, null);
+        final TreeMap<String, Preference> prefs = new TreeMap<String, Preference>();
+        int order = findPreference(KEY_PHONE_LANGUAGE).getOrder();
+        if (!locales.moveToFirst()) {
+            prefs.put("", createUserDictionaryPreference(null, activity, ++order));
+        } else {
+            final int columnIndex = locales.getColumnIndex(UserDictionary.Words.LOCALE);
+            do {
+                final String locale = locales.getString(columnIndex);
+                if (!prefs.containsKey(locale))
+                    prefs.put(locale, createUserDictionaryPreference(locale, activity, ++order));
+            } while (locales.moveToNext());
+        }
+        for (final Preference p : prefs.values()) {
+            userDictGroup.addPreference(p);
+        }
+    }
+
+    /**
+     * Create a single User Dictionary Preference object, with its parameters set.
+     * @param locale The locale for which this user dictionary is for.
+     * @return The corresponding preference.
+     */
+    protected Preference createUserDictionaryPreference(String locale, Activity activity,
+            int order) {
+        final Preference newPref = new Preference(getActivity());
+        newPref.setOrder(order);
+        newPref.setTitle(activity.getString(R.string.user_dict_settings_title));
+        final Intent intent = new Intent(USER_DICTIONARY_SETTINGS_INTENT_ACTION);
+        if (null != locale) {
+            newPref.setSummary(new Locale(locale).getDisplayName());
+            intent.putExtra("locale", locale);
+        }
+        newPref.setIntent(intent);
+        return newPref;
     }
 
     @Override

@@ -19,19 +19,18 @@
         android:title="@string/language_keyboard_settings_title">
 
     <PreferenceCategory android:key="language_settings_category"
-            android:title="@string/language_settings_category" />
+            android:title="@string/language_settings_category">
 
-    <PreferenceScreen
-       android:fragment="com.android.settings.LocalePicker"
-       android:key="phone_language"
-       android:title="@string/phone_language">
-    </PreferenceScreen>
+        <PreferenceScreen
+                 android:fragment="com.android.settings.LocalePicker"
+                 android:key="phone_language"
+                 android:order="0"
+                 android:title="@string/phone_language">
+        </PreferenceScreen>
 
-    <PreferenceScreen
-        android:fragment="com.android.settings.UserDictionarySettings"
-        android:title="@string/user_dict_settings_title"
-        android:summary="@string/user_dict_settings_summary">
-    </PreferenceScreen>
+      <!-- User dictionaries entries will be populated programmatically. -->
+
+    </PreferenceCategory>
 
     <PreferenceCategory android:key="voice_input_category"
             android:title="@string/voice_input_category" >
