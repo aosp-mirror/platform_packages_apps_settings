@@ -36,8 +36,10 @@ import android.telephony.TelephonyManager;
 import android.text.TextUtils;
 
 import java.net.InetAddress;
+import java.util.Arrays;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Locale;
 
 public class Utils {
 
@@ -307,5 +309,25 @@ public class Utils {
             if (iter.hasNext()) addresses += ", ";
         }
         return addresses;
+    }
+
+    public static Locale createLocaleFromString(String localeStr) {
+        // TODO: is there a better way to actually construct a locale that will match?
+        // The main problem is, on top of Java specs, locale.toString() and
+        // new Locale(locale.toString()).toString() do not return equal() strings in
+        // many cases, because the constructor takes the only string as the language
+        // code. So : new Locale("en", "US").toString() => "en_US"
+        // And : new Locale("en_US").toString() => "en_us"
+        if (null == localeStr)
+            return Locale.getDefault();
+        String[] brokenDownLocale = localeStr.split("_", 3);
+        // split may not return a 0-length array.
+        if (1 == brokenDownLocale.length) {
+            return new Locale(brokenDownLocale[0]);
+        } else if (2 == brokenDownLocale.length) {
+            return new Locale(brokenDownLocale[0], brokenDownLocale[1]);
+        } else {
+            return new Locale(brokenDownLocale[0], brokenDownLocale[1], brokenDownLocale[2]);
+        }
     }
 }

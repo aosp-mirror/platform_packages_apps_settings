@@ -46,6 +46,7 @@ import android.widget.TextView;
 
 import com.android.settings.SettingsPreferenceFragment.SettingsDialogFragment;
 
+import java.util.Arrays;
 import java.util.Locale;
 
 public class UserDictionarySettings extends ListFragment implements DialogCreatable {
@@ -63,23 +64,29 @@ public class UserDictionarySettings extends ListFragment implements DialogCreata
 
     // Either the locale is empty (means the word is applicable to all locales)
     // or the word equals our current locale
-    private static final String QUERY_SELECTION = UserDictionary.Words.LOCALE + "=? OR "
-            + UserDictionary.Words.LOCALE + " is null";
+    private static final String QUERY_SELECTION =
+            UserDictionary.Words.LOCALE + "=?";
+    private static final String QUERY_SELECTION_ALL_LOCALES =
+            UserDictionary.Words.LOCALE + " is null";
 
     private static final String DELETE_SELECTION = UserDictionary.Words.WORD + "=?";
 
     private static final String EXTRA_WORD = "word";
-    
+
     private static final int OPTIONS_MENU_ADD = Menu.FIRST;
 
     private static final int DIALOG_ADD_OR_EDIT = 0;
-    
+
+    private static final int FREQUENCY_FOR_USER_DICTIONARY_ADDS = 250;
+
     /** The word being edited in the dialog (null means the user is adding a word). */
     private String mDialogEditingWord;
 
     private View mView;
     private Cursor mCursor;
-    
+
+    protected String mLocale;
+
     private boolean mAddedWordAlready;
     private boolean mAutoReturn;
 
@@ -102,9 +109,24 @@ public class UserDictionarySettings extends ListFragment implements DialogCreata
         super.onActivityCreated(savedInstanceState);
 
         final Intent intent = getActivity().getIntent();
-        final String locale = intent.getStringExtra("locale");
+        final String localeFromIntent =
+                null == intent ? null : intent.getStringExtra("locale");
 
-        mCursor = createCursor(null != locale ? locale : Locale.getDefault().toString());
+        final Bundle arguments = getArguments();
+        final String localeFromArguments =
+                null == arguments ? null : arguments.getString("locale");
+
+        final String locale;
+        if (null != localeFromArguments) {
+            locale = localeFromArguments;
+        } else if (null != localeFromIntent) {
+            locale = localeFromIntent;
+        } else {
+            locale = null;
+        }
+
+        mLocale = locale;
+        mCursor = createCursor(locale);
         TextView emptyView = (TextView)mView.findViewById(R.id.empty);
         emptyView.setText(R.string.user_dict_settings_empty_text);
 
@@ -143,10 +165,27 @@ public class UserDictionarySettings extends ListFragment implements DialogCreata
     }
 
     private Cursor createCursor(final String locale) {
-        // Case-insensitive sort
-        return getActivity().managedQuery(UserDictionary.Words.CONTENT_URI, QUERY_PROJECTION,
-                QUERY_SELECTION, new String[] { locale },
-                "UPPER(" + UserDictionary.Words.WORD + ")");
+        // Locale can be any of:
+        // - The string representation of a locale, as returned by Locale#toString()
+        // - The empty string. This means we want a cursor returning words valid for all locales.
+        // - null. This means we want a cursor for the current locale, whatever this is.
+        // Note that this contrasts with the data inside the database, where NULL means "all
+        // locales" and there should never be an empty string. The confusion is called by the
+        // historical use of null for "all locales".
+        // TODO: it should be easy to make this more readable by making the special values
+        // human-readable, like "all_locales" and "current_locales" strings, provided they
+        // can be guaranteed not to match locales that may exist.
+        if ("".equals(locale)) {
+            // Case-insensitive sort
+            return getActivity().managedQuery(UserDictionary.Words.CONTENT_URI, QUERY_PROJECTION,
+                    QUERY_SELECTION_ALL_LOCALES, null,
+                    "UPPER(" + UserDictionary.Words.WORD + ")");
+        } else {
+            final String queryLocale = null != locale ? locale : Locale.getDefault().toString();
+            return getActivity().managedQuery(UserDictionary.Words.CONTENT_URI, QUERY_PROJECTION,
+                    QUERY_SELECTION, new String[] { queryLocale },
+                    "UPPER(" + UserDictionary.Words.WORD + ")");
+        }
     }
 
     private ListAdapter createAdapter() {
@@ -155,7 +194,7 @@ public class UserDictionarySettings extends ListFragment implements DialogCreata
                 new String[] { UserDictionary.Words.WORD, UserDictionary.Words._ID },
                 new int[] { android.R.id.text1, R.id.delete_button }, this);
     }
-    
+
     @Override
     public void onListItemClick(ListView l, View v, int position, long id) {
         String word = getWord(position);
@@ -237,13 +276,28 @@ public class UserDictionarySettings extends ListFragment implements DialogCreata
             // The user was editing a word, so do a delete/add
             deleteWord(mDialogEditingWord);
         }
-        
+
         // Disallow duplicates
         deleteWord(word);
-        
+
         // TODO: present UI for picking whether to add word to all locales, or current.
-        UserDictionary.Words.addWord(getActivity(), word.toString(),
-                250, UserDictionary.Words.LOCALE_TYPE_ALL);
+        if (null == mLocale) {
+            // Null means insert with the default system locale.
+            UserDictionary.Words.addWord(getActivity(), word.toString(),
+                    FREQUENCY_FOR_USER_DICTIONARY_ADDS, UserDictionary.Words.LOCALE_TYPE_CURRENT);
+        } else if ("".equals(mLocale)) {
+            // Empty string means insert for all languages.
+            UserDictionary.Words.addWord(getActivity(), word.toString(),
+                    FREQUENCY_FOR_USER_DICTIONARY_ADDS, UserDictionary.Words.LOCALE_TYPE_ALL);
+        } else {
+            // TODO: fix the framework so that it can accept a locale when we add a word
+            // to the user dictionary instead of querying the system locale.
+            final Locale prevLocale = Locale.getDefault();
+            Locale.setDefault(Utils.createLocaleFromString(mLocale));
+            UserDictionary.Words.addWord(getActivity(), word.toString(),
+                    FREQUENCY_FOR_USER_DICTIONARY_ADDS, UserDictionary.Words.LOCALE_TYPE_CURRENT);
+            Locale.setDefault(prevLocale);
+        }
         if (!mCursor.requery()) {
             throw new IllegalStateException("can't requery on already-closed cursor.");
         }

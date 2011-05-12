@@ -24,11 +24,11 @@
         <PreferenceScreen
                  android:fragment="com.android.settings.LocalePicker"
                  android:key="phone_language"
-                 android:order="0"
-                 android:title="@string/phone_language">
-        </PreferenceScreen>
+                 android:title="@string/phone_language"/>
 
-      <!-- User dictionaries entries will be populated programmatically. -->
+        <!-- User dictionary preference title and fragment will be set programmatically. -->
+        <PreferenceScreen
+                 android:key="key_user_dictionary_settings" />
 
     </PreferenceCategory>
 
