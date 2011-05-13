@@ -108,7 +108,7 @@ public class InputMethodAndLanguageSettings extends SettingsPreferenceFragment
             final int columnIndex = locales.getColumnIndex(UserDictionary.Words.LOCALE);
             do {
                 final String locale = locales.getString(columnIndex);
-                if (!prefs.containsKey(locale))
+                if (locale != null && !prefs.containsKey(locale))
                     prefs.put(locale, createUserDictionaryPreference(locale, activity, ++order));
             } while (locales.moveToNext());
         }
