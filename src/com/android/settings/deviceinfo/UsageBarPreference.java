@@ -36,17 +36,17 @@ public class UsageBarPreference extends Preference {
 
     public UsageBarPreference(Context context, AttributeSet attrs, int defStyle) {
         super(context, attrs, defStyle);
-        setWidgetLayoutResource(R.layout.preference_memoryusage);
+        setLayoutResource(R.layout.preference_memoryusage);
     }
 
     public UsageBarPreference(Context context) {
         super(context);
-        setWidgetLayoutResource(R.layout.preference_memoryusage);
+        setLayoutResource(R.layout.preference_memoryusage);
     }
 
     public UsageBarPreference(Context context, AttributeSet attrs) {
         super(context, attrs);
-        setWidgetLayoutResource(R.layout.preference_memoryusage);
+        setLayoutResource(R.layout.preference_memoryusage);
     }
 
     public void addEntry(float percentage, int color) {
