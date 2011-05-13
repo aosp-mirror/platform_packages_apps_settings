@@ -374,24 +374,24 @@ public class MemoryMeasurement {
                 return;
             }
             // measure sizes for all except "media_misc" - which is computed
-            for (int i = 0; i < Constants.NUM_MEDIA_DIRS_TRACKED - 1; i++) {
+            for (int i = 0; i < Constants.NUM_MEDIA_DIRS_TRACKED; i++) {
+                if (i == Constants.MEDIA_MISC_INDEX) continue;
                 mMediaSizes[i] = 0;
                 String[] dirs = Constants.mMediaDirs.get(i).mDirPaths;
                 int len = dirs.length;
-                if (len > 0) {
-                    for (int k = 0; k < len; k++) {
-                        long dirSize = getSize(imcs, dirs[k]);
-                        mMediaSizes[i] += dirSize;
-                        if (LOGV) {
-                            Log.i(TAG, "size of " + dirs[k] + ": " + dirSize);
-                        }
+                for (int k = 0; k < len; k++) {
+                    long dirSize = getSize(imcs, dirs[k]);
+                    mMediaSizes[i] += dirSize;
+                    if (LOGV) {
+                        Log.i(TAG, "size of " + dirs[k] + ": " + dirSize);
                     }
                 }
             }
 
             // compute the size of "misc"
             mMediaSizes[Constants.MEDIA_MISC_INDEX] = mMediaSizes[Constants.MEDIA_INDEX];
-            for (int i = 1; i < Constants.NUM_MEDIA_DIRS_TRACKED - 1; i++) {
+            for (int i = 0; i < Constants.NUM_MEDIA_DIRS_TRACKED; i++) {
+                if (i == Constants.MEDIA_INDEX || i == Constants.MEDIA_MISC_INDEX) continue;
                 mMediaSizes[Constants.MEDIA_MISC_INDEX] -= mMediaSizes[i];
             }
             if (LOGV) {
@@ -421,6 +421,7 @@ public class MemoryMeasurement {
             // Sending of the message back to the MeasurementReceiver is
             // completed in the PackageObserver
         }
+
         private void measureSizesOfMisc(IMediaContainerService imcs) {
             File top = Environment.getExternalStorageDirectory();
             mFileInfoForMisc = new ArrayList<FileInfo>();
@@ -442,6 +443,7 @@ public class MemoryMeasurement {
                     long dirSize = getSize(imcs, path);
                     mFileInfoForMisc.add(new FileInfo(path, dirSize, counter++));
                 } else {
+                    // Non file, non directory
                 }
             }
             // sort the list of FileInfo objects collected above in descending order of their sizes
