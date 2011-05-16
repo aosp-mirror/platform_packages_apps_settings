@@ -18,6 +18,7 @@ package com.android.settings.deviceinfo;
 
 import com.android.settings.R;
 import com.android.settings.SettingsPreferenceFragment;
+import com.android.settings.deviceinfo.Constants.MediaDirectory;
 import com.android.settings.deviceinfo.MemoryMeasurement.MeasurementReceiver;
 
 import android.app.ActivityManager;
@@ -191,25 +192,13 @@ public class Memory extends SettingsPreferenceFragment implements OnCancelListen
         // space used by individual major directories on /sdcard
         for (int i = 0; i < Constants.NUM_MEDIA_DIRS_TRACKED; i++) {
             // nothing to be displayed for certain entries in Constants.mMediaDirs
-            if (Constants.mMediaDirs.get(i).mPreferenceName == null) {
+            final MediaDirectory mediaDirectory = Constants.mMediaDirs.get(i);
+            final String preferenceName = mediaDirectory.mPreferenceName;
+            if (preferenceName == null) {
                 continue;
             }
-            mMediaPreferences[i] = findPreference(Constants.mMediaDirs.get(i).mPreferenceName);
-            int color = 0;
-            switch (i) {
-                case Constants.DOWNLOADS_INDEX:
-                    color = mRes.getColor(R.color.memory_downloads);
-                    break;
-                case Constants.PIC_VIDEO_INDEX:
-                    color = mRes.getColor(R.color.memory_video);
-                    break;
-                case Constants.MUSIC_INDEX:
-                    color = mRes.getColor(R.color.memory_audio);
-                    break;
-                case Constants.MEDIA_MISC_INDEX:
-                    color = mRes.getColor(R.color.memory_misc);
-                    break;
-            }
+            mMediaPreferences[i] = findPreference(preferenceName);
+            final int color = mRes.getColor(mediaDirectory.mColor);
             mMediaPreferences[i].setIcon(createRectShape(buttonHeight, buttonWidth, color));
         }
         mInternalUsageChart = (UsageBarPreference) findPreference(MEMORY_INTERNAL_CHART);
@@ -443,9 +432,14 @@ public class Memory extends SettingsPreferenceFragment implements OnCancelListen
     private void updateUiExact(long totalSize, long availSize, long appsSize, long[] mediaSizes) {
         // There are other things that can take up storage, but we didn't measure it.
         // add that unaccounted-for-usage to Apps Usage
-        long appsPlusRemaining = totalSize - availSize - mediaSizes[Constants.DOWNLOADS_INDEX] -
-                mediaSizes[Constants.PIC_VIDEO_INDEX] - mediaSizes[Constants.MUSIC_INDEX] -
-                mediaSizes[Constants.MEDIA_MISC_INDEX];
+        long appsPlusRemaining = totalSize - availSize;
+        for (int i = 0; i < Constants.NUM_MEDIA_DIRS_TRACKED; i++) {
+            if (Constants.mMediaDirs.get(i).mPreferenceName == null) {
+                continue;
+            }
+            appsPlusRemaining -= mediaSizes[i];
+        }
+
         mInternalSize.setSummary(formatSize(totalSize));
         mInternalAvail.setSummary(formatSize(availSize));
         mInternalAppsUsage.setSummary(formatSize(appsPlusRemaining));
@@ -459,22 +453,8 @@ public class Memory extends SettingsPreferenceFragment implements OnCancelListen
             }
             this.mMediaPreferences[i].setSummary(formatSize(mediaSizes[i]));
             // don't add entry to color chart for media usage and for zero-sized dirs
-            if (i != Constants.MEDIA_INDEX && mediaSizes[i] > 0) {
-                int color = 0;
-                switch (i) {
-                    case Constants.DOWNLOADS_INDEX:
-                        color = mRes.getColor(R.color.memory_downloads);
-                        break;
-                    case Constants.PIC_VIDEO_INDEX:
-                        color = mRes.getColor(R.color.memory_video);
-                        break;
-                    case Constants.MUSIC_INDEX:
-                        color = mRes.getColor(R.color.memory_audio);
-                        break;
-                    case Constants.MEDIA_MISC_INDEX:
-                        color = mRes.getColor(R.color.memory_misc);
-                        break;
-                }
+            if (mediaSizes[i] > 0) {
+                final int color = mRes.getColor(Constants.mMediaDirs.get(i).mColor);
                 mInternalUsageChart.addEntry(mediaSizes[i] / (float) totalSize, color);
             }
         }
@@ -520,8 +500,7 @@ public class Memory extends SettingsPreferenceFragment implements OnCancelListen
 
             } catch (IllegalArgumentException e) {
                 // this can occur if the SD card is removed, but we haven't
-                // received the
-                // ACTION_MEDIA_REMOVED Intent yet.
+                // received the ACTION_MEDIA_REMOVED Intent yet.
                 status = Environment.MEDIA_REMOVED;
             }
         } else {

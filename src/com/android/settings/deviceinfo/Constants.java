@@ -15,6 +15,8 @@
  */
 package com.android.settings.deviceinfo;
 
+import com.android.settings.R;
+
 import android.os.Environment;
 
 import java.util.ArrayList;
@@ -36,10 +38,12 @@ class Constants {
         final String[] mDirPaths;
         final String mKey;
         final String mPreferenceName;
-        MediaDirectory(String pref, String debugInfo, String... paths) {
-            mDirPaths = paths;
-            mKey = debugInfo;
+        final int mColor; // Required when mPreferenceName is not null
+        MediaDirectory(String pref, String debugInfo, int color, String... paths) {
             mPreferenceName = pref;
+            mKey = debugInfo;
+            mColor = color;
+            mDirPaths = paths;
         }
     }
     static final ArrayList<MediaDirectory> mMediaDirs = new ArrayList<MediaDirectory>();
@@ -48,15 +52,18 @@ class Constants {
         mMediaDirs.add(MEDIA_INDEX,
                 new MediaDirectory(null,
                         "/sdcard",
+                        0,
                         Environment.getExternalStorageDirectory().getAbsolutePath()));
         mMediaDirs.add(DOWNLOADS_INDEX,
                 new MediaDirectory("memory_internal_downloads",
                         "/sdcard/download",
+                        R.color.memory_downloads,
                         Environment.getExternalStoragePublicDirectory(
                                 Environment.DIRECTORY_DOWNLOADS).getAbsolutePath()));
         mMediaDirs.add(PIC_VIDEO_INDEX,
                 new MediaDirectory("memory_internal_dcim",
                         "/sdcard/pic_video",
+                        R.color.memory_video,
                         Environment.getExternalStoragePublicDirectory(
                                 Environment.DIRECTORY_DCIM).getAbsolutePath(),
                         Environment.getExternalStoragePublicDirectory(
@@ -66,6 +73,7 @@ class Constants {
         mMediaDirs.add(MUSIC_INDEX,
                 new MediaDirectory("memory_internal_music",
                         "/sdcard/audio",
+                        R.color.memory_audio,
                         Environment.getExternalStoragePublicDirectory(
                                 Environment.DIRECTORY_MUSIC).getAbsolutePath(),
                         Environment.getExternalStoragePublicDirectory(
@@ -79,24 +87,24 @@ class Constants {
         mMediaDirs.add(MEDIA_APPS_DATA_INDEX,
                 new MediaDirectory(null,
                         "/sdcard/Android",
+                        0,
                         Environment.getExternalStorageAndroidDataDir().getAbsolutePath()));
         mMediaDirs.add(MEDIA_MISC_INDEX,
                 new MediaDirectory("memory_internal_media_misc",
                         "misc on /sdcard",
-                        "not relevant"));
+                        R.color.memory_misc,
+                        new String[] {})); // No associated directory to add to exclusion list
         // prepare a lit of strings representing dirpaths that should be skipped while looking
         // for 'other' files
-        for (int j = 0; j < Constants.NUM_MEDIA_DIRS_TRACKED - 1; j++) {
+        for (int j = 0; j < Constants.NUM_MEDIA_DIRS_TRACKED; j++) {
             String[] dirs = Constants.mMediaDirs.get(j).mDirPaths;
             int len = dirs.length;
-            if (len > 0) {
-                for (int k = 0; k < len; k++) {
-                    ExclusionTargetsForMiscFiles.add(dirs[k]);
-                }
+            for (int k = 0; k < len; k++) {
+                ExclusionTargetsForMiscFiles.add(dirs[k]);
             }
-            // also add /sdcard/Android
-            ExclusionTargetsForMiscFiles.add(
-                    Environment.getExternalStorageDirectory().getAbsolutePath() + "/Android");
         }
+        // also add /sdcard/Android
+        ExclusionTargetsForMiscFiles.add(
+                Environment.getExternalStorageDirectory().getAbsolutePath() + "/Android");
     }
 }
