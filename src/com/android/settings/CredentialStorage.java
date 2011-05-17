@@ -27,6 +27,8 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.IBinder;
 import android.os.RemoteException;
+import android.security.KeyChain;
+import android.security.KeyChain.KeyChainConnection;
 import android.security.IKeyChainService;
 import android.security.KeyStore;
 import android.text.Editable;
@@ -246,35 +248,18 @@ public class CredentialStorage extends Activity implements TextWatcher,
 
             mKeyStore.reset();
 
-            final BlockingQueue<IKeyChainService> q = new LinkedBlockingQueue<IKeyChainService>(1);
-            ServiceConnection keyChainServiceConnection = new ServiceConnection() {
-                @Override public void onServiceConnected(ComponentName name, IBinder service) {
-                    try {
-                        q.put(IKeyChainService.Stub.asInterface(service));
-                    } catch (InterruptedException e) {
-                        throw new AssertionError(e);
-                    }
-                }
-                @Override public void onServiceDisconnected(ComponentName name) {}
-            };
-            boolean isBound = bindService(new Intent(IKeyChainService.class.getName()),
-                                          keyChainServiceConnection,
-                                          Context.BIND_AUTO_CREATE);
-            if (!isBound) {
-                Log.w(TAG, "could not bind to KeyChainService");
-                return false;
-            }
-            IKeyChainService keyChainService;
             try {
-                keyChainService = q.take();
-                return keyChainService.reset();
+                KeyChainConnection keyChainConnection = KeyChain.bind(CredentialStorage.this);
+                try {
+                    return keyChainConnection.getService().reset();
+                } catch (RemoteException e) {
+                    return false;
+                } finally {
+                    keyChainConnection.close();
+                }
             } catch (InterruptedException e) {
                 Thread.currentThread().interrupt();
                 return false;
-            } catch (RemoteException e) {
-                return false;
-            } finally {
-                unbindService(keyChainServiceConnection);
             }
         }
 
