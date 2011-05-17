@@ -18,9 +18,16 @@ package com.android.settings;
 
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.content.ComponentName;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.ServiceConnection;
+import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.IBinder;
+import android.os.RemoteException;
+import android.security.IKeyChainService;
 import android.security.KeyStore;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -30,6 +37,8 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.util.concurrent.BlockingQueue;
+import java.util.concurrent.LinkedBlockingQueue;
 import java.io.UnsupportedEncodingException;
 
 public class CredentialStorage extends Activity implements TextWatcher,
@@ -43,7 +52,8 @@ public class CredentialStorage extends Activity implements TextWatcher,
     private static final String TAG = "CredentialStorage";
 
     private KeyStore mKeyStore = KeyStore.getInstance();
-    private boolean mSubmit = false;
+    private boolean mPositive = false;
+    private boolean mNeutral = false;
     private Bundle mBundle;
 
     private TextView mOldPassword;
@@ -177,16 +187,13 @@ public class CredentialStorage extends Activity implements TextWatcher,
     }
 
     public void onClick(DialogInterface dialog, int button) {
-        mSubmit = (button == DialogInterface.BUTTON_POSITIVE);
-        if (button == DialogInterface.BUTTON_NEUTRAL) {
-            mKeyStore.reset();
-            Toast.makeText(this, R.string.credentials_erased, Toast.LENGTH_SHORT).show();
-        }
+        mPositive = (button == DialogInterface.BUTTON_POSITIVE);
+        mNeutral = (button == DialogInterface.BUTTON_NEUTRAL);
     }
 
     public void onDismiss(DialogInterface dialog) {
-        if (mSubmit) {
-            mSubmit = false;
+        if (mPositive) {
+            mPositive = false;
             mError.setVisibility(View.VISIBLE);
 
             if (mNewPassword == null) {
@@ -225,6 +232,61 @@ public class CredentialStorage extends Activity implements TextWatcher,
                 return;
             }
         }
+        if (mNeutral) {
+            mNeutral = false;
+            new ResetKeyStoreAndKeyChain().execute();
+            return;
+        }
         finish();
+    }
+
+    private class ResetKeyStoreAndKeyChain extends AsyncTask<Void, Void, Boolean> {
+
+        @Override protected Boolean doInBackground(Void... unused) {
+
+            mKeyStore.reset();
+
+            final BlockingQueue<IKeyChainService> q = new LinkedBlockingQueue<IKeyChainService>(1);
+            ServiceConnection keyChainServiceConnection = new ServiceConnection() {
+                @Override public void onServiceConnected(ComponentName name, IBinder service) {
+                    try {
+                        q.put(IKeyChainService.Stub.asInterface(service));
+                    } catch (InterruptedException e) {
+                        throw new AssertionError(e);
+                    }
+                }
+                @Override public void onServiceDisconnected(ComponentName name) {}
+            };
+            boolean isBound = bindService(new Intent(IKeyChainService.class.getName()),
+                                          keyChainServiceConnection,
+                                          Context.BIND_AUTO_CREATE);
+            if (!isBound) {
+                Log.w(TAG, "could not bind to KeyChainService");
+                return false;
+            }
+            IKeyChainService keyChainService;
+            try {
+                keyChainService = q.take();
+                return keyChainService.reset();
+            } catch (InterruptedException e) {
+                Thread.currentThread().interrupt();
+                return false;
+            } catch (RemoteException e) {
+                return false;
+            } finally {
+                unbindService(keyChainServiceConnection);
+            }
+        }
+
+        @Override protected void onPostExecute(Boolean success) {
+            if (success) {
+                Toast.makeText(CredentialStorage.this,
+                               R.string.credentials_erased, Toast.LENGTH_SHORT).show();
+            } else {
+                Toast.makeText(CredentialStorage.this,
+                               R.string.credentials_not_erased, Toast.LENGTH_SHORT).show();
+            }
+            finish();
+        }
     }
 }
