@@ -271,13 +271,11 @@ public class WifiConfigController implements TextWatcher,
             (mAccessPointSecurity == AccessPoint.SECURITY_PSK && mPasswordView.length() < 8)))) {
             enabled = false;
         } else {
-            enabled = true;
-        }
-
-        if (ipAndProxyFieldsAreValid()) {
-            enabled = true;
-        } else {
-            enabled = false;
+            if (ipAndProxyFieldsAreValid()) {
+                enabled = true;
+            } else {
+                enabled = false;
+            }
         }
         submit.setEnabled(enabled);
     }
