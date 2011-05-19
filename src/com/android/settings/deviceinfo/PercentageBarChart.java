@@ -99,6 +99,7 @@ public class PercentageBarChart extends View {
      * Sets the background for this chart. Callers are responsible for later
      * calling {@link #invalidate()}.
      */
+    @Override
     public void setBackgroundColor(int color) {
         mEmptyPaint.setColor(color);
     }

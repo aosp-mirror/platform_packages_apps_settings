@@ -16,140 +16,52 @@
 
 package com.android.settings.deviceinfo;
 
-import com.android.settings.R;
-import com.android.settings.SettingsPreferenceFragment;
-import com.android.settings.deviceinfo.MemoryMeasurement.MeasurementReceiver;
-
-import android.app.ActivityManager;
 import android.app.AlertDialog;
 import android.app.Dialog;
-import android.app.DownloadManager;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.DialogInterface.OnCancelListener;
 import android.content.Intent;
 import android.content.IntentFilter;
-import android.content.DialogInterface.OnCancelListener;
-import android.content.pm.ApplicationInfo;
 import android.content.res.Resources;
-import android.graphics.drawable.ShapeDrawable;
-import android.graphics.drawable.shapes.RectShape;
 import android.os.Bundle;
 import android.os.Environment;
-import android.os.Handler;
 import android.os.IBinder;
-import android.os.Message;
+import android.os.Parcelable;
 import android.os.RemoteException;
 import android.os.ServiceManager;
 import android.os.storage.IMountService;
 import android.os.storage.StorageEventListener;
 import android.os.storage.StorageManager;
+import android.os.storage.StorageVolume;
 import android.preference.Preference;
-import android.preference.PreferenceGroup;
 import android.preference.PreferenceScreen;
-import android.text.format.Formatter;
 import android.util.Log;
 import android.widget.Toast;
 
-import java.util.List;
+import com.android.settings.R;
+import com.android.settings.SettingsPreferenceFragment;
 
-public class Memory extends SettingsPreferenceFragment implements OnCancelListener,
-        MeasurementReceiver {
+public class Memory extends SettingsPreferenceFragment implements OnCancelListener {
     private static final String TAG = "MemorySettings";
-
-    private static final String MEMORY_SD_SIZE = "memory_sd_size";
-
-    private static final String MEMORY_SD_AVAIL = "memory_sd_avail";
-
-    private static final String MEMORY_SD_MOUNT_TOGGLE = "memory_sd_mount_toggle";
-
-    private static final String MEMORY_SD_FORMAT = "memory_sd_format";
-
-    private static final String MEMORY_SD_GROUP = "memory_sd";
-
-    private static final String MEMORY_INTERNAL_SIZE = "memory_internal_size";
-
-    private static final String MEMORY_INTERNAL_AVAIL = "memory_internal_avail";
-
-    private static final String MEMORY_INTERNAL_APPS = "memory_internal_apps";
-
-    private static final String MEMORY_INTERNAL_CHART = "memory_internal_chart";
 
     private static final int DLG_CONFIRM_UNMOUNT = 1;
     private static final int DLG_ERROR_UNMOUNT = 2;
 
-    private Resources mRes;
+    private Resources mResources;
 
-    // External storage preferences
-    private Preference mSdSize;
-    private Preference mSdAvail;
-    private Preference mSdMountToggle;
-    private Preference mSdFormat;
-    private PreferenceGroup mSdMountPreferenceGroup;
-
-    // Internal storage preferences
-    private Preference mInternalSize;
-    private Preference mInternalAvail;
-    private Preference mInternalAppsUsage;
-    private final Preference[] mMediaPreferences = new Preference[Constants.NUM_MEDIA_DIRS_TRACKED];
-    private UsageBarPreference mInternalUsageChart;
-
-    // Internal storage chart colors
-    private int mInternalAppsColor;
-    private int mInternalAvailColor;
-    private int mInternalUsedColor;
-
-    boolean mSdMountToggleAdded = true;
+    // The mountToggle Preference that has been clicked.
+    // The click event will be discarded if this value is not null. Reset to null after (un)mount.
+    private Preference mClickedMountToggle;
+    private String mClickedMountPoint;
     
     // Access using getMountService()
     private IMountService mMountService = null;
 
     private StorageManager mStorageManager = null;
 
-    // Updates the memory usage bar graph.
-    private static final int MSG_UI_UPDATE_INTERNAL_APPROXIMATE = 1;
-
-    // Updates the memory usage bar graph.
-    private static final int MSG_UI_UPDATE_INTERNAL_EXACT = 2;
-
-    // Updates the memory usage stats for external.
-    private static final int MSG_UI_UPDATE_EXTERNAL_APPROXIMATE = 3;
-
-    private Handler mUpdateHandler = new Handler() {
-        @Override
-        public void handleMessage(Message msg) {
-            switch (msg.what) {
-                case MSG_UI_UPDATE_INTERNAL_APPROXIMATE: {
-                    Bundle bundle = msg.getData();
-                    final long totalSize = bundle.getLong(MemoryMeasurement.TOTAL_SIZE);
-                    final long availSize = bundle.getLong(MemoryMeasurement.AVAIL_SIZE);
-                    updateUiApproximate(totalSize, availSize);
-                    break;
-                }
-                case MSG_UI_UPDATE_INTERNAL_EXACT: {
-                    Bundle bundle = msg.getData();
-                    final long totalSize = bundle.getLong(MemoryMeasurement.TOTAL_SIZE);
-                    final long availSize = bundle.getLong(MemoryMeasurement.AVAIL_SIZE);
-                    final long appsUsed = bundle.getLong(MemoryMeasurement.APPS_USED);
-                    final long[] mediaSizes = new long[Constants.NUM_MEDIA_DIRS_TRACKED];
-                    for (int i = 0; i < Constants.NUM_MEDIA_DIRS_TRACKED; i++) {
-                        mediaSizes[i] = bundle.getLong(Constants.mMediaDirs.get(i).mKey);
-                    }
-                    updateUiExact(totalSize, availSize, appsUsed, mediaSizes);
-                    break;
-                }
-                case MSG_UI_UPDATE_EXTERNAL_APPROXIMATE: {
-                    Bundle bundle = msg.getData();
-                    final long totalSize = bundle.getLong(MemoryMeasurement.TOTAL_SIZE);
-                    final long availSize = bundle.getLong(MemoryMeasurement.AVAIL_SIZE);
-                    updateExternalStorage(totalSize, availSize);
-                    break;
-                }
-            }
-        }
-    };
-
-    private MemoryMeasurement mMeasurement;
+    private StorageVolumePreferenceCategory[] mStorageVolumePreferenceCategories;
 
     @Override
     public void onCreate(Bundle icicle) {
@@ -162,84 +74,39 @@ public class Memory extends SettingsPreferenceFragment implements OnCancelListen
 
         addPreferencesFromResource(R.xml.device_info_memory);
 
-        mRes = getResources();
-        mSdSize = findPreference(MEMORY_SD_SIZE);
-        mSdAvail = findPreference(MEMORY_SD_AVAIL);
-        mSdMountToggle = findPreference(MEMORY_SD_MOUNT_TOGGLE);
-        mSdFormat = findPreference(MEMORY_SD_FORMAT);
-        mSdMountPreferenceGroup = (PreferenceGroup)findPreference(MEMORY_SD_GROUP);
+        mResources = getResources();
 
-        if (Environment.isExternalStorageEmulated()) {
-            getPreferenceScreen().removePreference(mSdMountPreferenceGroup);
-        }
-
-        mInternalSize = findPreference(MEMORY_INTERNAL_SIZE);
-        mInternalAppsColor = mRes.getColor(R.color.memory_apps_usage);
-        mInternalUsedColor = android.graphics.Color.GRAY;
-        mInternalAvailColor = mRes.getColor(R.color.memory_avail);
-        final int buttonWidth = (int) mRes.getDimension(R.dimen.device_memory_usage_button_width);
-        final int buttonHeight = (int) mRes.getDimension(R.dimen.device_memory_usage_button_height);
-
-        // total available space
-        mInternalAvail = findPreference(MEMORY_INTERNAL_AVAIL);
-        mInternalAvail.setIcon(createRectShape(buttonHeight, buttonWidth, mInternalAvailColor));
-
-        // used by apps
-        mInternalAppsUsage = findPreference(MEMORY_INTERNAL_APPS);
-        mInternalAppsUsage.setIcon(createRectShape(buttonHeight, buttonWidth, mInternalAppsColor));
-
-        // space used by individual major directories on /sdcard
-        for (int i = 0; i < Constants.NUM_MEDIA_DIRS_TRACKED; i++) {
-            // nothing to be displayed for certain entries in Constants.mMediaDirs
-            if (Constants.mMediaDirs.get(i).mPreferenceName == null) {
-                continue;
+        try {
+            IMountService mountService = IMountService.Stub.asInterface(ServiceManager
+                    .getService("mount"));
+            Parcelable[] volumes = mountService.getVolumeList();
+            int length = volumes.length;
+            mStorageVolumePreferenceCategories = new StorageVolumePreferenceCategory[length];
+            for (int i = 0; i < length; i++) {
+                StorageVolume storageVolume = (StorageVolume) volumes[i];
+                StorageVolumePreferenceCategory storagePreferenceCategory =
+                    new StorageVolumePreferenceCategory(getActivity(), mResources, storageVolume,
+                            i == 0); // The first volume is the primary volume
+                mStorageVolumePreferenceCategories[i] = storagePreferenceCategory;
+                getPreferenceScreen().addPreference(storagePreferenceCategory);
+                storagePreferenceCategory.init();
             }
-            mMediaPreferences[i] = findPreference(Constants.mMediaDirs.get(i).mPreferenceName);
-            int color = 0;
-            switch (i) {
-                case Constants.DOWNLOADS_INDEX:
-                    color = mRes.getColor(R.color.memory_downloads);
-                    break;
-                case Constants.PIC_VIDEO_INDEX:
-                    color = mRes.getColor(R.color.memory_video);
-                    break;
-                case Constants.MUSIC_INDEX:
-                    color = mRes.getColor(R.color.memory_audio);
-                    break;
-                case Constants.MEDIA_MISC_INDEX:
-                    color = mRes.getColor(R.color.memory_misc);
-                    break;
-            }
-            mMediaPreferences[i].setIcon(createRectShape(buttonHeight, buttonWidth, color));
+        } catch (Exception e) {
+            Log.e(TAG, "couldn't talk to MountService", e);
         }
-        mInternalUsageChart = (UsageBarPreference) findPreference(MEMORY_INTERNAL_CHART);
-
-        mMeasurement = MemoryMeasurement.getInstance(getActivity());
-        mMeasurement.setReceiver(this);
-    }
-
-    private ShapeDrawable createRectShape(int height, int width, int color) {
-        ShapeDrawable shape = new ShapeDrawable(new RectShape());
-        shape.setIntrinsicHeight(height);
-        shape.setIntrinsicWidth(width);
-        shape.getPaint().setColor(color);
-        return shape;
     }
 
     @Override
     public void onResume() {
         super.onResume();
-        mMeasurement.setReceiver(this);
         IntentFilter intentFilter = new IntentFilter(Intent.ACTION_MEDIA_SCANNER_STARTED);
         intentFilter.addAction(Intent.ACTION_MEDIA_SCANNER_FINISHED);
         intentFilter.addDataScheme("file");
-        getActivity().registerReceiver(mReceiver, intentFilter);
+        getActivity().registerReceiver(mMediaScannerReceiver, intentFilter);
 
-        mMeasurement.invalidate();
-        if (!Environment.isExternalStorageEmulated()) {
-            mMeasurement.measureExternal();
+        for (int i = 0; i < mStorageVolumePreferenceCategories.length; i++) {
+            mStorageVolumePreferenceCategories[i].onResume();
         }
-        mMeasurement.measureInternal();
     }
 
     StorageEventListener mStorageListener = new StorageEventListener() {
@@ -248,8 +115,12 @@ public class Memory extends SettingsPreferenceFragment implements OnCancelListen
             Log.i(TAG, "Received storage state changed notification that " +
                     path + " changed state from " + oldState +
                     " to " + newState);
-            if (!Environment.isExternalStorageEmulated()) {
-                mMeasurement.measureExternal();
+            for (int i = 0; i < mStorageVolumePreferenceCategories.length; i++) {
+                StorageVolumePreferenceCategory svpc = mStorageVolumePreferenceCategories[i];
+                if (path.equals(svpc.getMountPoint())) {
+                    svpc.onStorageStateChanged();
+                    break;
+                }
             }
         }
     };
@@ -257,8 +128,10 @@ public class Memory extends SettingsPreferenceFragment implements OnCancelListen
     @Override
     public void onPause() {
         super.onPause();
-        getActivity().unregisterReceiver(mReceiver);
-        mMeasurement.cleanUp();
+        getActivity().unregisterReceiver(mMediaScannerReceiver);
+        for (int i = 0; i < mStorageVolumePreferenceCategories.length; i++) {
+            mStorageVolumePreferenceCategories[i].onPause();
+        }
     }
 
     @Override
@@ -283,60 +156,38 @@ public class Memory extends SettingsPreferenceFragment implements OnCancelListen
     
     @Override
     public boolean onPreferenceTreeClick(PreferenceScreen preferenceScreen, Preference preference) {
-        if (preference == mSdMountToggle) {
-            String status = Environment.getExternalStorageState();
-            if (status.equals(Environment.MEDIA_MOUNTED)) {
-                unmount();
-            } else {
-                mount();
+        for (int i = 0; i < mStorageVolumePreferenceCategories.length; i++) {
+            StorageVolumePreferenceCategory svpc = mStorageVolumePreferenceCategories[i];
+            Intent intent = svpc.intentForClick(preference);
+            if (intent != null) {
+                startActivity(intent);
+                return true;
             }
-            return true;
-        } else if (preference == mSdFormat) {
-            Intent intent = new Intent(Intent.ACTION_VIEW);
-            intent.setClass(getActivity(), com.android.settings.MediaFormat.class);
-            startActivity(intent);
-            return true;
-        } else if (preference == mInternalAppsUsage) {
-            Intent intent = new Intent(Intent.ACTION_MANAGE_PACKAGE_STORAGE);
-            intent.setClass(getActivity(),
-                    com.android.settings.Settings.ManageApplicationsActivity.class);
-            startActivity(intent);
-            return true;
-        } else if (preference == mMediaPreferences[Constants.DOWNLOADS_INDEX]) {
-            Intent intent = new Intent(DownloadManager.ACTION_VIEW_DOWNLOADS)
-                    .putExtra(DownloadManager.INTENT_EXTRAS_SORT_BY_SIZE, true);
-            startActivity(intent);
-            return true;
-        } else if (preference == mMediaPreferences[Constants.MUSIC_INDEX]) {
-            Intent intent = new Intent("android.intent.action.GET_CONTENT");
-            intent.setType("audio/mp3");
-            startActivity(intent);
-            return true;
-        } else if (preference == mMediaPreferences[Constants.PIC_VIDEO_INDEX]) {
-            Intent intent = new Intent("android.intent.action.GET_CONTENT");
-            intent.setType("image/jpeg");
-            startActivity(intent);
-            return true;
-        } else if (preference == mMediaPreferences[Constants.MEDIA_MISC_INDEX]) {
-            Context context = getActivity().getApplicationContext();
-            if (MemoryMeasurement.getInstance(context).isSizeOfMiscCategoryNonZero()) {
-                startActivity(new Intent(context, MiscFilesHandler.class));
+
+            boolean mountToggleClicked = svpc.mountToggleClicked(preference);
+            if (mountToggleClicked && mClickedMountToggle == null) {
+                mClickedMountToggle = preference;
+                mClickedMountPoint = svpc.getMountPoint();
+                String state = svpc.getStorageVolumeState();
+                if (state.equals(Environment.MEDIA_MOUNTED) ||
+                        state.equals(Environment.MEDIA_MOUNTED_READ_ONLY)) {
+                    unmount();
+                } else {
+                    mount();
+                }
+                return true;
             }
-            return true;
         }
 
         return false;
     }
      
-    private final BroadcastReceiver mReceiver = new BroadcastReceiver() {
+    private final BroadcastReceiver mMediaScannerReceiver = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
-            mMeasurement.invalidate();
-
-            if (!Environment.isExternalStorageEmulated()) {
-                mMeasurement.measureExternal();
+            for (int i = 0; i < mStorageVolumePreferenceCategories.length; i++) {
+                mStorageVolumePreferenceCategories[i].onMediaScannerFinished();
             }
-            mMeasurement.measureInternal();
         }
     };
 
@@ -348,7 +199,7 @@ public class Memory extends SettingsPreferenceFragment implements OnCancelListen
                     .setTitle(R.string.dlg_confirm_unmount_title)
                     .setPositiveButton(R.string.dlg_ok, new DialogInterface.OnClickListener() {
                         public void onClick(DialogInterface dialog, int which) {
-                            doUnmount(true);
+                            doUnmount();
                         }})
                     .setNegativeButton(R.string.cancel, null)
                     .setMessage(R.string.dlg_confirm_unmount_text)
@@ -368,28 +219,27 @@ public class Memory extends SettingsPreferenceFragment implements OnCancelListen
         super.showDialog(id);
 
         switch (id) {
-        case DLG_CONFIRM_UNMOUNT:
-        case DLG_ERROR_UNMOUNT:
-            setOnCancelListener(this);
-            break;
+            case DLG_CONFIRM_UNMOUNT:
+            case DLG_ERROR_UNMOUNT:
+                setOnCancelListener(this);
+                break;
         }
     }
 
-    private void doUnmount(boolean force) {
+    private void doUnmount() {
         // Present a toast here
         Toast.makeText(getActivity(), R.string.unmount_inform_text, Toast.LENGTH_SHORT).show();
         IMountService mountService = getMountService();
-        String extStoragePath = Environment.getExternalStorageDirectory().toString();
         try {
-            mSdMountToggle.setEnabled(false);
-            mSdMountToggle.setTitle(mRes.getString(R.string.sd_ejecting_title));
-            mSdMountToggle.setSummary(mRes.getString(R.string.sd_ejecting_summary));
-            mountService.unmountVolume(extStoragePath, force);
+            mClickedMountToggle.setEnabled(false);
+            mClickedMountToggle.setTitle(mResources.getString(R.string.sd_ejecting_title));
+            mClickedMountToggle.setSummary(mResources.getString(R.string.sd_ejecting_summary));
+            mountService.unmountVolume(mClickedMountPoint, true);
         } catch (RemoteException e) {
-            // Informative dialog to user that
-            // unmount failed.
+            // Informative dialog to user that unmount failed.
             showDialogInner(DLG_ERROR_UNMOUNT);
         }
+        mClickedMountToggle = null;
     }
 
     private void showDialogInner(int id) {
@@ -398,17 +248,21 @@ public class Memory extends SettingsPreferenceFragment implements OnCancelListen
     }
 
     private boolean hasAppsAccessingStorage() throws RemoteException {
-        String extStoragePath = Environment.getExternalStorageDirectory().toString();
         IMountService mountService = getMountService();
-        int stUsers[] = mountService.getStorageUsers(extStoragePath);
+        int stUsers[] = mountService.getStorageUsers(mClickedMountPoint);
         if (stUsers != null && stUsers.length > 0) {
             return true;
         }
+        // TODO FIXME Parameterize with mountPoint and uncomment.
+        // On HC-MR2, no apps can be installed on sd and the emulated internal storage is not
+        // removable: application cannot interfere with unmount
+        /*
         ActivityManager am = (ActivityManager)getSystemService(Context.ACTIVITY_SERVICE);
         List<ApplicationInfo> list = am.getRunningExternalApplications();
         if (list != null && list.size() > 0) {
             return true;
         }
+        */
         return false;
     }
 
@@ -419,12 +273,13 @@ public class Memory extends SettingsPreferenceFragment implements OnCancelListen
                // Present dialog to user
                showDialogInner(DLG_CONFIRM_UNMOUNT);
            } else {
-               doUnmount(true);
+               doUnmount();
            }
         } catch (RemoteException e) {
             // Very unlikely. But present an error dialog anyway
             Log.e(TAG, "Is MountService running?");
             showDialogInner(DLG_ERROR_UNMOUNT);
+            mClickedMountToggle = null;
         }
     }
 
@@ -432,151 +287,17 @@ public class Memory extends SettingsPreferenceFragment implements OnCancelListen
         IMountService mountService = getMountService();
         try {
             if (mountService != null) {
-                mountService.mountVolume(Environment.getExternalStorageDirectory().toString());
+                mountService.mountVolume(mClickedMountPoint);
             } else {
                 Log.e(TAG, "Mount service is null, can't mount");
             }
         } catch (RemoteException ex) {
+            // Not much can be done
         }
-    }
-
-    private void updateUiExact(long totalSize, long availSize, long appsSize, long[] mediaSizes) {
-        // There are other things that can take up storage, but we didn't measure it.
-        // add that unaccounted-for-usage to Apps Usage
-        long appsPlusRemaining = totalSize - availSize - mediaSizes[Constants.DOWNLOADS_INDEX] -
-                mediaSizes[Constants.PIC_VIDEO_INDEX] - mediaSizes[Constants.MUSIC_INDEX] -
-                mediaSizes[Constants.MEDIA_MISC_INDEX];
-        mInternalSize.setSummary(formatSize(totalSize));
-        mInternalAvail.setSummary(formatSize(availSize));
-        mInternalAppsUsage.setSummary(formatSize(appsPlusRemaining));
-
-        mInternalUsageChart.clear();
-        mInternalUsageChart.addEntry(appsPlusRemaining / (float) totalSize, mInternalAppsColor);
-
-        for (int i = 0; i < Constants.NUM_MEDIA_DIRS_TRACKED; i++) {
-            if (Constants.mMediaDirs.get(i).mPreferenceName == null) {
-                continue;
-            }
-            this.mMediaPreferences[i].setSummary(formatSize(mediaSizes[i]));
-            // don't add entry to color chart for media usage and for zero-sized dirs
-            if (i != Constants.MEDIA_INDEX && mediaSizes[i] > 0) {
-                int color = 0;
-                switch (i) {
-                    case Constants.DOWNLOADS_INDEX:
-                        color = mRes.getColor(R.color.memory_downloads);
-                        break;
-                    case Constants.PIC_VIDEO_INDEX:
-                        color = mRes.getColor(R.color.memory_video);
-                        break;
-                    case Constants.MUSIC_INDEX:
-                        color = mRes.getColor(R.color.memory_audio);
-                        break;
-                    case Constants.MEDIA_MISC_INDEX:
-                        color = mRes.getColor(R.color.memory_misc);
-                        break;
-                }
-                mInternalUsageChart.addEntry(mediaSizes[i] / (float) totalSize, color);
-            }
-        }
-        mInternalUsageChart.addEntry(availSize / (float) totalSize, mInternalAvailColor);
-        mInternalUsageChart.commit();
-    }
-
-    private void updateUiApproximate(long totalSize, long availSize) {
-        mInternalSize.setSummary(formatSize(totalSize));
-        mInternalAvail.setSummary(formatSize(availSize));
-
-        final long usedSize = totalSize - availSize;
-
-        mInternalUsageChart.clear();
-        mInternalUsageChart.addEntry(usedSize / (float) totalSize, mInternalUsedColor);
-        mInternalUsageChart.commit();
-    }
-
-    private void updateExternalStorage(long totalSize, long availSize) {
-        String status = Environment.getExternalStorageState();
-        String readOnly = "";
-        if (status.equals(Environment.MEDIA_MOUNTED_READ_ONLY)) {
-            status = Environment.MEDIA_MOUNTED;
-            readOnly = mRes.getString(R.string.read_only);
-        }
-
-        if (status.equals(Environment.MEDIA_MOUNTED)) {
-            if (!Environment.isExternalStorageRemovable()) {
-                // This device has built-in storage that is not removable.
-                // There is no reason for the user to unmount it.
-                if (mSdMountToggleAdded) {
-                    mSdMountPreferenceGroup.removePreference(mSdMountToggle);
-                    mSdMountToggleAdded = false;
-                }
-            }
-            try {
-                mSdSize.setSummary(formatSize(totalSize));
-                mSdAvail.setSummary(formatSize(availSize) + readOnly);
-
-                mSdMountToggle.setEnabled(true);
-                mSdMountToggle.setTitle(mRes.getString(R.string.sd_eject));
-                mSdMountToggle.setSummary(mRes.getString(R.string.sd_eject_summary));
-
-            } catch (IllegalArgumentException e) {
-                // this can occur if the SD card is removed, but we haven't
-                // received the
-                // ACTION_MEDIA_REMOVED Intent yet.
-                status = Environment.MEDIA_REMOVED;
-            }
-        } else {
-            mSdSize.setSummary(mRes.getString(R.string.sd_unavailable));
-            mSdAvail.setSummary(mRes.getString(R.string.sd_unavailable));
-
-            if (!Environment.isExternalStorageRemovable()) {
-                if (status.equals(Environment.MEDIA_UNMOUNTED)) {
-                    if (!mSdMountToggleAdded) {
-                        mSdMountPreferenceGroup.addPreference(mSdMountToggle);
-                        mSdMountToggleAdded = true;
-                    }
-                }
-            }
-
-            if (status.equals(Environment.MEDIA_UNMOUNTED) || status.equals(Environment.MEDIA_NOFS)
-                    || status.equals(Environment.MEDIA_UNMOUNTABLE)) {
-                mSdMountToggle.setEnabled(true);
-                mSdMountToggle.setTitle(mRes.getString(R.string.sd_mount));
-                mSdMountToggle.setSummary(mRes.getString(R.string.sd_mount_summary));
-            } else {
-                mSdMountToggle.setEnabled(false);
-                mSdMountToggle.setTitle(mRes.getString(R.string.sd_mount));
-                mSdMountToggle.setSummary(mRes.getString(R.string.sd_insert_summary));
-            }
-        }
-    }
-
-    private String formatSize(long size) {
-        return Formatter.formatFileSize(getActivity(), size);
+        mClickedMountToggle = null;
     }
 
     public void onCancel(DialogInterface dialog) {
-        // TODO: Is this really required?
-        // finish();
-    }
-
-    @Override
-    public void updateApproximateExternal(Bundle bundle) {
-        final Message message = mUpdateHandler.obtainMessage(MSG_UI_UPDATE_EXTERNAL_APPROXIMATE);
-        message.setData(bundle);
-        mUpdateHandler.sendMessage(message);
-    }
-
-    @Override
-    public void updateApproximateInternal(Bundle bundle) {
-        final Message message = mUpdateHandler.obtainMessage(MSG_UI_UPDATE_INTERNAL_APPROXIMATE);
-        message.setData(bundle);
-        mUpdateHandler.sendMessage(message);
-    }
-
-    @Override
-    public void updateExactInternal(Bundle bundle) {
-        final Message message = mUpdateHandler.obtainMessage(MSG_UI_UPDATE_INTERNAL_EXACT);
-        message.setData(bundle);
-        mUpdateHandler.sendMessage(message);
+        mClickedMountToggle = null;
     }
 }
