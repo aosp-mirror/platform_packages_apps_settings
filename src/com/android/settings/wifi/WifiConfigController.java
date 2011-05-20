@@ -265,10 +265,18 @@ public class WifiConfigController implements TextWatcher,
         if (submit == null) return;
         boolean enabled = false;
 
+        boolean passwordInvalid = false;
+
+        /* Check password invalidity for manual network set up alone */
+        if (chosenNetworkSetupMethod() == MANUAL &&
+            ((mAccessPointSecurity == AccessPoint.SECURITY_WEP && mPasswordView.length() == 0) ||
+            (mAccessPointSecurity == AccessPoint.SECURITY_PSK && mPasswordView.length() < 8))) {
+            passwordInvalid = true;
+        }
+
         if ((mSsidView != null && mSsidView.length() == 0) ||
             ((mAccessPoint == null || mAccessPoint.networkId == INVALID_NETWORK_ID) &&
-            ((mAccessPointSecurity == AccessPoint.SECURITY_WEP && mPasswordView.length() == 0) ||
-            (mAccessPointSecurity == AccessPoint.SECURITY_PSK && mPasswordView.length() < 8)))) {
+            passwordInvalid)) {
             enabled = false;
         } else {
             if (ipAndProxyFieldsAreValid()) {
@@ -729,16 +737,14 @@ public class WifiConfigController implements TextWatcher,
         if (parent == mSecuritySpinner) {
             mAccessPointSecurity = position;
             showSecurityFields();
-            enableSubmitIfAppropriate();
         } else if (parent == mNetworkSetupSpinner) {
             showNetworkSetupFields();
         } else if (parent == mProxySettingsSpinner) {
             showProxyFields();
-            enableSubmitIfAppropriate();
         } else {
             showIpConfigFields();
-            enableSubmitIfAppropriate();
         }
+        enableSubmitIfAppropriate();
     }
 
     @Override
