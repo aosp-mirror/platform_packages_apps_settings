@@ -197,7 +197,7 @@ public class WifiConfigController implements TextWatcher,
             }
 
             WifiInfo info = mAccessPoint.getInfo();
-            if (info != null) {
+            if (info != null && info.getLinkSpeed() != -1) {
                 addRow(group, R.string.wifi_speed, info.getLinkSpeed() + WifiInfo.LINK_SPEED_UNITS);
             }
 
