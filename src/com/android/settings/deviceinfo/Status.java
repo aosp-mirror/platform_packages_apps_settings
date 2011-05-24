@@ -191,6 +191,9 @@ public class Status extends PreferenceActivity {
         if (mPhone.getPhoneName().equals("CDMA")) {
             setSummaryText("meid_number", mPhone.getMeid());
             setSummaryText("min_number", mPhone.getCdmaMin());
+            if (getResources().getBoolean(R.bool.config_msid_enable)) {
+                findPreference("min_number").setTitle(R.string.status_msid_number);
+            }
             setSummaryText("prl_version", mPhone.getCdmaPrlVersion());
 
             // device is not GSM/UMTS, do not display GSM/UMTS features
