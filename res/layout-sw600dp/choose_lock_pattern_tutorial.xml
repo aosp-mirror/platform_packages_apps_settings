@@ -23,12 +23,18 @@
 
     <!-- top: instructions and buttons -->
     <!-- header message -->
-    <TextView android:id="@+id/headerText"
-        android:layout_width="542dip"
-        android:layout_height="78dip"
-        android:layout_marginTop="96dip"
-        android:textSize="22sp"
-        android:text="@string/lock_intro_message"/>
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="96dip">
+
+        <TextView android:id="@+id/headerText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text="@string/lock_intro_message"/>
+
+    </ScrollView>
 
     <!-- bottom: lock pattern -->
     <com.android.internal.widget.LockPatternView android:id="@+id/lockPattern"
