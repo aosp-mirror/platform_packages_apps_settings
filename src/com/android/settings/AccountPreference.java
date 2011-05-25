@@ -54,6 +54,7 @@ public class AccountPreference extends Preference {
         setSummary("");
         setPersistent(false);
         setSyncStatus(SYNC_DISABLED);
+        setIcon(mProviderIcon);
     }
 
     public Account getAccount() {
@@ -68,8 +69,6 @@ public class AccountPreference extends Preference {
     protected void onBindView(View view) {
         super.onBindView(view);
         setSummary(getSyncStatusMessage(mStatus));
-        mProviderIconView = (ImageView) view.findViewById(android.R.id.icon);
-        mProviderIconView.setImageDrawable(mProviderIcon);
         mSyncStatusIcon = (ImageView) view.findViewById(R.id.syncStatusIcon);
         mSyncStatusIcon.setImageResource(getSyncStatusIcon(mStatus));
     }
