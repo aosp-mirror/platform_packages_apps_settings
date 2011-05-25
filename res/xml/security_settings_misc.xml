@@ -47,25 +47,12 @@
 
     <PreferenceCategory android:title="@string/credentials_title"
             android:persistent="false">
-        <CheckBoxPreference android:key="enable_credentials"
-                android:title="@string/credentials_access"
-                android:summary="@string/credentials_access_summary"
-                android:persistent="false"/>
-
         <Preference android:title="@string/credentials_install"
                 android:summary="@string/credentials_install_summary"
                 android:persistent="false">
             <intent android:action="android.credentials.INSTALL"
                     android:targetPackage="com.android.certinstaller"
                     android:targetClass="com.android.certinstaller.CertInstallerMain"/>
-        </Preference>
-
-        <Preference android:title="@string/credentials_set_password"
-                android:summary="@string/credentials_set_password_summary"
-                android:persistent="false">
-            <intent android:action="com.android.credentials.SET_PASSWORD"
-                    android:targetPackage="com.android.settings"
-                    android:targetClass="com.android.settings.CredentialStorage"/>
         </Preference>
 
         <Preference android:key="reset_credentials"

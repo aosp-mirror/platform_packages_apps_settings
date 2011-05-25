@@ -18,18 +18,14 @@ package com.android.settings;
 
 import android.app.Activity;
 import android.app.AlertDialog;
-import android.content.ComponentName;
-import android.content.Context;
+import android.app.admin.DevicePolicyManager;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.ServiceConnection;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.os.IBinder;
 import android.os.RemoteException;
-import android.security.KeyChain;
 import android.security.KeyChain.KeyChainConnection;
-import android.security.IKeyChainService;
+import android.security.KeyChain;
 import android.security.KeyStore;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -38,208 +34,105 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
+import com.android.internal.widget.LockPatternUtils;
 
-import java.util.concurrent.BlockingQueue;
-import java.util.concurrent.LinkedBlockingQueue;
-import java.io.UnsupportedEncodingException;
-
-public class CredentialStorage extends Activity implements TextWatcher,
-        DialogInterface.OnClickListener, DialogInterface.OnDismissListener {
-
-    public static final String ACTION_UNLOCK = "com.android.credentials.UNLOCK";
-    public static final String ACTION_SET_PASSWORD = "com.android.credentials.SET_PASSWORD";
-    public static final String ACTION_INSTALL = "com.android.credentials.INSTALL";
-    public static final String ACTION_RESET = "com.android.credentials.RESET";
+public class CredentialStorage extends Activity {
 
     private static final String TAG = "CredentialStorage";
 
-    private KeyStore mKeyStore = KeyStore.getInstance();
-    private boolean mPositive = false;
-    private boolean mNeutral = false;
+    public static final String ACTION_UNLOCK = "com.android.credentials.UNLOCK";
+    public static final String ACTION_INSTALL = "com.android.credentials.INSTALL";
+    public static final String ACTION_RESET = "com.android.credentials.RESET";
+
+    // This is the minimum acceptable password quality.  If the current password quality is
+    // lower than this, keystore should not be activated.
+    static final int MIN_PASSWORD_QUALITY = DevicePolicyManager.PASSWORD_QUALITY_SOMETHING;
+
+    private final KeyStore mKeyStore = KeyStore.getInstance();
     private Bundle mBundle;
 
-    private TextView mOldPassword;
-    private TextView mNewPassword;
-    private TextView mConfirmPassword;
-    private TextView mError;
-    private Button mButton;
-
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
+    @Override protected void onResume() {
+        super.onResume();
 
         Intent intent = getIntent();
         String action = intent.getAction();
-        int state = mKeyStore.test();
 
         if (ACTION_RESET.equals(action)) {
-            showResetDialog();
-        } else if (ACTION_SET_PASSWORD.equals(action)) {
-            showPasswordDialog(state == KeyStore.UNINITIALIZED);
+            new ResetDialog();
         } else {
+            if (!checkKeyguardQuality()) {
+                new ConfigureLockScreenDialog();
+                return;
+            }
             if (ACTION_INSTALL.equals(action) &&
                     "com.android.certinstaller".equals(getCallingPackage())) {
                 mBundle = intent.getExtras();
             }
-            if (state == KeyStore.UNINITIALIZED) {
-                showPasswordDialog(true);
-            } else if (state == KeyStore.LOCKED) {
-                showUnlockDialog();
-            } else {
-                install();
-                finish();
+            // ACTION_UNLOCK also handled here
+            switch (mKeyStore.state()) {
+                case UNINITIALIZED:
+                    // if we had a keyguard set, we should be initialized
+                    throw new AssertionError();
+                case LOCKED:
+                    // if we have a keyguard, why didn't we unlock?
+                    // possibly old style password, display prompt
+                    new UnlockDialog();
+                    break;
+                case UNLOCKED:
+                    install();
+                    finish();
+                    break;
             }
         }
+    }
+
+    private boolean checkKeyguardQuality() {
+        int quality = new LockPatternUtils(this).getActivePasswordQuality();
+        return (quality >= MIN_PASSWORD_QUALITY);
     }
 
     private void install() {
         if (mBundle != null && !mBundle.isEmpty()) {
-            try {
-                for (String key : mBundle.keySet()) {
-                    byte[] value = mBundle.getByteArray(key);
-                    if (value != null && !mKeyStore.put(key.getBytes("UTF-8"), value)) {
-                        Log.e(TAG, "Failed to install " + key);
-                        return;
-                    }
-                }
-                setResult(RESULT_OK);
-            } catch (UnsupportedEncodingException e) {
-                // Should never happen.
-                throw new RuntimeException(e);
-            }
-        }
-    }
-
-    private void showResetDialog() {
-        AlertDialog dialog = new AlertDialog.Builder(this)
-                .setTitle(android.R.string.dialog_alert_title)
-                .setIcon(android.R.drawable.ic_dialog_alert)
-                .setMessage(R.string.credentials_reset_hint)
-                .setNeutralButton(android.R.string.ok, this)
-                .setNegativeButton(android.R.string.cancel, this)
-                .create();
-        dialog.setOnDismissListener(this);
-        dialog.show();
-    }
-
-    private void showPasswordDialog(boolean firstTime) {
-        View view = View.inflate(this, R.layout.credentials_dialog, null);
-
-        ((TextView) view.findViewById(R.id.hint)).setText(R.string.credentials_password_hint);
-        if (!firstTime) {
-            view.findViewById(R.id.old_password_prompt).setVisibility(View.VISIBLE);
-            mOldPassword = (TextView) view.findViewById(R.id.old_password);
-            mOldPassword.setVisibility(View.VISIBLE);
-            mOldPassword.addTextChangedListener(this);
-        }
-        view.findViewById(R.id.new_passwords).setVisibility(View.VISIBLE);
-        mNewPassword = (TextView) view.findViewById(R.id.new_password);
-        mNewPassword.addTextChangedListener(this);
-        mConfirmPassword = (TextView) view.findViewById(R.id.confirm_password);
-        mConfirmPassword.addTextChangedListener(this);
-        mError = (TextView) view.findViewById(R.id.error);
-
-        AlertDialog dialog = new AlertDialog.Builder(this)
-                .setView(view)
-                .setTitle(R.string.credentials_set_password)
-                .setPositiveButton(android.R.string.ok, this)
-                .setNegativeButton(android.R.string.cancel, this)
-                .create();
-        dialog.setOnDismissListener(this);
-        dialog.show();
-        mButton = dialog.getButton(DialogInterface.BUTTON_POSITIVE);
-        mButton.setEnabled(false);
-    }
-
-    private void showUnlockDialog() {
-        View view = View.inflate(this, R.layout.credentials_dialog, null);
-
-        ((TextView) view.findViewById(R.id.hint)).setText(R.string.credentials_unlock_hint);
-        mOldPassword = (TextView) view.findViewById(R.id.old_password);
-        mOldPassword.setVisibility(View.VISIBLE);
-        mOldPassword.addTextChangedListener(this);
-        mError = (TextView) view.findViewById(R.id.error);
-
-        AlertDialog dialog = new AlertDialog.Builder(this)
-                .setView(view)
-                .setTitle(R.string.credentials_unlock)
-                .setPositiveButton(android.R.string.ok, this)
-                .setNegativeButton(android.R.string.cancel, this)
-                .create();
-        dialog.setOnDismissListener(this);
-        dialog.show();
-        mButton = dialog.getButton(DialogInterface.BUTTON_POSITIVE);
-        mButton.setEnabled(false);
-    }
-
-    public void afterTextChanged(Editable editable) {
-        if ((mOldPassword == null || mOldPassword.getText().length() > 0) &&
-            (mNewPassword == null || mNewPassword.getText().length() >= 8) &&
-            (mConfirmPassword == null || mConfirmPassword.getText().length() >= 8)) {
-            mButton.setEnabled(true);
-        } else {
-            mButton.setEnabled(false);
-        }
-    }
-
-    public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-    }
-
-    public void onTextChanged(CharSequence s,int start, int before, int count) {
-    }
-
-    public void onClick(DialogInterface dialog, int button) {
-        mPositive = (button == DialogInterface.BUTTON_POSITIVE);
-        mNeutral = (button == DialogInterface.BUTTON_NEUTRAL);
-    }
-
-    public void onDismiss(DialogInterface dialog) {
-        if (mPositive) {
-            mPositive = false;
-            mError.setVisibility(View.VISIBLE);
-
-            if (mNewPassword == null) {
-                mKeyStore.unlock(mOldPassword.getText().toString());
-            } else {
-                String newPassword = mNewPassword.getText().toString();
-                String confirmPassword = mConfirmPassword.getText().toString();
-
-                if (!newPassword.equals(confirmPassword)) {
-                    mError.setText(R.string.credentials_passwords_mismatch);
-                    ((AlertDialog) dialog).show();
+            for (String key : mBundle.keySet()) {
+                byte[] value = mBundle.getByteArray(key);
+                if (value != null && !mKeyStore.put(key, value)) {
+                    Log.e(TAG, "Failed to install " + key);
                     return;
-                } else if (mOldPassword == null) {
-                    mKeyStore.password(newPassword);
-                } else {
-                    mKeyStore.password(mOldPassword.getText().toString(), newPassword);
                 }
             }
+            setResult(RESULT_OK);
+        }
+    }
 
-            int error = mKeyStore.getLastError();
-            if (error == KeyStore.NO_ERROR) {
-                Toast.makeText(this, R.string.credentials_enabled, Toast.LENGTH_SHORT).show();
-                install();
-            } else if (error == KeyStore.UNINITIALIZED) {
-                Toast.makeText(this, R.string.credentials_erased,  Toast.LENGTH_SHORT).show();
-            } else if (error >= KeyStore.WRONG_PASSWORD) {
-                int count = error - KeyStore.WRONG_PASSWORD + 1;
-                if (count > 3) {
-                    mError.setText(R.string.credentials_wrong_password);
-                } else if (count == 1) {
-                    mError.setText(R.string.credentials_reset_warning);
-                } else {
-                    mError.setText(getString(R.string.credentials_reset_warning_plural, count));
-                }
-                ((AlertDialog) dialog).show();
+    private class ResetDialog
+            implements DialogInterface.OnClickListener, DialogInterface.OnDismissListener
+    {
+        private boolean mResetConfirmed;
+
+        private ResetDialog() {
+            AlertDialog dialog = new AlertDialog.Builder(CredentialStorage.this)
+                    .setTitle(android.R.string.dialog_alert_title)
+                    .setIcon(android.R.drawable.ic_dialog_alert)
+                    .setMessage(R.string.credentials_reset_hint)
+                    .setPositiveButton(android.R.string.ok, this)
+                    .setNegativeButton(android.R.string.cancel, this)
+                    .create();
+            dialog.setOnDismissListener(this);
+            dialog.show();
+        }
+
+        @Override public void onClick(DialogInterface dialog, int button) {
+            mResetConfirmed = (button == DialogInterface.BUTTON_POSITIVE);
+        }
+
+        @Override public void onDismiss(DialogInterface dialog) {
+            if (mResetConfirmed) {
+                mResetConfirmed = false;
+                new ResetKeyStoreAndKeyChain().execute();
                 return;
             }
+            finish();
         }
-        if (mNeutral) {
-            mNeutral = false;
-            new ResetKeyStoreAndKeyChain().execute();
-            return;
-        }
-        finish();
     }
 
     private class ResetKeyStoreAndKeyChain extends AsyncTask<Void, Void, Boolean> {
@@ -270,6 +163,116 @@ public class CredentialStorage extends Activity implements TextWatcher,
             } else {
                 Toast.makeText(CredentialStorage.this,
                                R.string.credentials_not_erased, Toast.LENGTH_SHORT).show();
+            }
+            finish();
+        }
+    }
+
+    private class ConfigureLockScreenDialog
+            implements DialogInterface.OnClickListener, DialogInterface.OnDismissListener
+    {
+        private boolean mConfigureConfirmed;
+
+        private ConfigureLockScreenDialog() {
+            AlertDialog dialog = new AlertDialog.Builder(CredentialStorage.this)
+                    .setTitle(android.R.string.dialog_alert_title)
+                    .setIcon(android.R.drawable.ic_dialog_alert)
+                    .setMessage(R.string.credentials_configure_lock_screen_hint)
+                    .setPositiveButton(android.R.string.ok, this)
+                    .setNegativeButton(android.R.string.cancel, this)
+                    .create();
+            dialog.setOnDismissListener(this);
+            dialog.show();
+        }
+
+        @Override public void onClick(DialogInterface dialog, int button) {
+            mConfigureConfirmed = (button == DialogInterface.BUTTON_POSITIVE);
+        }
+
+        @Override public void onDismiss(DialogInterface dialog) {
+            if (mConfigureConfirmed) {
+                mConfigureConfirmed = false;
+                Intent intent = new Intent(DevicePolicyManager.ACTION_SET_NEW_PASSWORD);
+                intent.putExtra(ChooseLockGeneric.ChooseLockGenericFragment.MINIMUM_QUALITY_KEY,
+                                MIN_PASSWORD_QUALITY);
+                startActivity(intent);
+                return;
+            }
+            finish();
+        }
+    }
+
+    private class UnlockDialog implements TextWatcher,
+            DialogInterface.OnClickListener, DialogInterface.OnDismissListener
+    {
+        private boolean mUnlockConfirmed;
+
+        private final Button mButton;
+        private final TextView mOldPassword;
+        private final TextView mError;
+
+        private UnlockDialog() {
+            View view = View.inflate(CredentialStorage.this, R.layout.credentials_dialog, null);
+
+            ((TextView) view.findViewById(R.id.hint)).setText(R.string.credentials_unlock_hint);
+            mOldPassword = (TextView) view.findViewById(R.id.old_password);
+            mOldPassword.setVisibility(View.VISIBLE);
+            mOldPassword.addTextChangedListener(this);
+            mError = (TextView) view.findViewById(R.id.error);
+
+            AlertDialog dialog = new AlertDialog.Builder(CredentialStorage.this)
+                    .setView(view)
+                    .setTitle(R.string.credentials_unlock)
+                    .setPositiveButton(android.R.string.ok, this)
+                    .setNegativeButton(android.R.string.cancel, this)
+                    .create();
+            dialog.setOnDismissListener(this);
+            dialog.show();
+            mButton = dialog.getButton(DialogInterface.BUTTON_POSITIVE);
+            mButton.setEnabled(false);
+        }
+
+        @Override public void afterTextChanged(Editable editable) {
+            mButton.setEnabled(mOldPassword == null || mOldPassword.getText().length() > 0);
+        }
+
+        @Override public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+        }
+
+        @Override public void onTextChanged(CharSequence s,int start, int before, int count) {
+        }
+
+        @Override public void onClick(DialogInterface dialog, int button) {
+            mUnlockConfirmed = (button == DialogInterface.BUTTON_POSITIVE);
+        }
+
+        @Override public void onDismiss(DialogInterface dialog) {
+            if (mUnlockConfirmed) {
+                mUnlockConfirmed = false;
+                mError.setVisibility(View.VISIBLE);
+                mKeyStore.unlock(mOldPassword.getText().toString());
+                int error = mKeyStore.getLastError();
+                if (error == KeyStore.NO_ERROR) {
+                    Toast.makeText(CredentialStorage.this,
+                                   R.string.credentials_enabled,
+                                   Toast.LENGTH_SHORT).show();
+                    install();
+                } else if (error == KeyStore.UNINITIALIZED) {
+                    Toast.makeText(CredentialStorage.this,
+                                   R.string.credentials_erased,
+                                   Toast.LENGTH_SHORT).show();
+                } else if (error >= KeyStore.WRONG_PASSWORD) {
+                    int count = error - KeyStore.WRONG_PASSWORD + 1;
+                    if (count > 3) {
+                        mError.setText(R.string.credentials_wrong_password);
+                    } else if (count == 1) {
+                        mError.setText(R.string.credentials_reset_warning);
+                    } else {
+                        mError.setText(getString(R.string.credentials_reset_warning_plural, count));
+                    }
+                    ((AlertDialog) dialog).show();
+                    return;
+                }
             }
             finish();
         }

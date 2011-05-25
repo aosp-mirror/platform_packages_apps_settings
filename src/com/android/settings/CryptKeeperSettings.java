@@ -37,16 +37,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 
-/**
- * Confirm and execute a reset of the device to a clean "just out of the box"
- * state.  Multiple confirmations are required: first, a general "are you sure
- * you want to do this?" prompt, followed by a keyguard pattern trace if the user
- * has defined one, followed by a final strongly-worded "THIS WILL ERASE EVERYTHING
- * ON THE PHONE" prompt.  If at any time the phone is allowed to go to sleep, is
- * locked, et cetera, then the confirmation sequence is abandoned.
- *
- * This is the initial screen.
- */
 public class CryptKeeperSettings extends Fragment {
     private static final String TAG = "CryptKeeper";
 
@@ -54,7 +44,7 @@ public class CryptKeeperSettings extends Fragment {
 
     // This is the minimum acceptable password quality.  If the current password quality is
     // lower than this, encryption should not be activated.
-    private static final int MIN_PASSWORD_QUALITY = DevicePolicyManager.PASSWORD_QUALITY_NUMERIC;
+    static final int MIN_PASSWORD_QUALITY = DevicePolicyManager.PASSWORD_QUALITY_NUMERIC;
 
     // Minimum battery charge level (in percent) to launch encryption.  If the battery charge is
     // lower than this, encryption should not be activated.
@@ -163,7 +153,7 @@ public class CryptKeeperSettings extends Fragment {
      */
     private boolean runKeyguardConfirmation(int request) {
         // 1.  Confirm that we have a sufficient PIN/Password to continue
-        int quality = new LockPatternUtils(getActivity()).getKeyguardStoredPasswordQuality();
+        int quality = new LockPatternUtils(getActivity()).getActivePasswordQuality();
         if (quality < MIN_PASSWORD_QUALITY) {
             return false;
         }
