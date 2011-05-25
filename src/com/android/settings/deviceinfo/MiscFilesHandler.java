@@ -16,12 +16,11 @@
 
 package com.android.settings.deviceinfo;
 
-import com.android.settings.R;
-import com.android.settings.deviceinfo.MemoryMeasurement.FileInfo;
-
+import android.app.Activity;
 import android.app.ListActivity;
 import android.content.Context;
 import android.os.Bundle;
+import android.os.storage.StorageVolume;
 import android.text.format.Formatter;
 import android.util.Log;
 import android.util.SparseBooleanArray;
@@ -38,6 +37,9 @@ import android.widget.BaseAdapter;
 import android.widget.CompoundButton;
 import android.widget.CompoundButton.OnCheckedChangeListener;
 import android.widget.ListView;
+
+import com.android.settings.R;
+import com.android.settings.deviceinfo.StorageMeasurement.FileInfo;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -107,7 +109,7 @@ public class MiscFilesHandler extends ListActivity {
                             //item not selected
                             continue;
                         }
-                        if (MemoryMeasurement.LOGV) {
+                        if (StorageMeasurement.LOGV) {
                             Log.i(TAG, "deleting: " + mAdapter.getItem(i));
                         }
                         // delete the file
@@ -156,6 +158,7 @@ public class MiscFilesHandler extends ListActivity {
         }
 
         public void onDestroyActionMode(ActionMode mode) {
+            // This block intentionally left blank
         }
 
         public void onItemCheckedStateChanged(ActionMode mode, int position, long id,
@@ -181,17 +184,21 @@ public class MiscFilesHandler extends ListActivity {
         }
     }
 
-    public class MemoryMearurementAdapter extends BaseAdapter {
-        private ArrayList<MemoryMeasurement.FileInfo> mData = null;
+    class MemoryMearurementAdapter extends BaseAdapter {
+        private ArrayList<StorageMeasurement.FileInfo> mData = null;
         private long mDataSize = 0;
         private Context mContext;
 
-        public MemoryMearurementAdapter(Context context) {
-            mContext = context;
-            MemoryMeasurement mMeasurement = MemoryMeasurement.getInstance(context);
-            mData = (ArrayList<MemoryMeasurement.FileInfo>)mMeasurement.mFileInfoForMisc;
+        public MemoryMearurementAdapter(Activity activity) {
+            mContext = activity;
+            final Bundle extras = activity.getIntent().getExtras();
+            final StorageVolume storageVolume = extras.getParcelable(
+                    StorageVolumePreferenceCategory.STORAGE_VOLUME);
+            StorageMeasurement mMeasurement = 
+                StorageMeasurement.getInstance(activity, storageVolume, false);
+            mData = (ArrayList<StorageMeasurement.FileInfo>) mMeasurement.mFileInfoForMisc;
             if (mData != null) {
-                for (MemoryMeasurement.FileInfo info : mData) {
+                for (StorageMeasurement.FileInfo info : mData) {
                     mDataSize += info.mSize;
                 }
             }
@@ -203,7 +210,7 @@ public class MiscFilesHandler extends ListActivity {
         }
 
         @Override
-        public MemoryMeasurement.FileInfo getItem(int position) {
+        public StorageMeasurement.FileInfo getItem(int position) {
             if (mData == null || mData.size() <= position) {
                 return null;
             }
@@ -217,13 +224,14 @@ public class MiscFilesHandler extends ListActivity {
             }
             return mData.get(position).mId;
         }
+
         public void removeAll(List<Object> objs) {
             if (mData == null) {
                 return;
             }
             for (Object o : objs) {
                 mData.remove(o);
-                mDataSize -= ((MemoryMeasurement.FileInfo) o).mSize;
+                mDataSize -= ((StorageMeasurement.FileInfo) o).mSize;
             }
         }
 

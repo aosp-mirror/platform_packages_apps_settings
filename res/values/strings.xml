@@ -313,8 +313,8 @@
     <string name="proxy_clear_text">Clear</string>
     <!-- HTTP proxy settings. The port number label. -->
     <string name="proxy_port_label">Proxy port</string>
-    <!-- HTTP proxy settings. The hint text field for port. [CHAR LIMIT=50]-->
-    <string name="proxy_port_hint">8080</string>
+    <!-- HTTP proxy settings. The hint text field for port. -->
+    <string name="proxy_port_hint" translatable="false">8080</string>
     <!-- HTTP proxy settings. The exclusion list label. -->
     <string name="proxy_exclusionlist_label">Bypass proxy for</string>
     <!-- HTTP proxy settings. The hint text for proxy exclusion list. [CHAR LIMIT=50]-->
@@ -1100,8 +1100,8 @@
     <string name="wifi_speed">Link speed</string>
     <!-- Label for the IP address of the connection -->
     <string name="wifi_ip_address">IP address</string>
-    <!-- Hint text for the IP address [CHAR LIMIT=25]-->
-    <string name="wifi_ip_address_hint">192.168.1.128</string>
+    <!-- Hint text for the IP address -->
+    <string name="wifi_ip_address_hint" translatable="false">192.168.1.128</string>
     <!-- Label for the EAP method of the network -->
     <string name="wifi_eap_method">EAP method</string>
     <!-- Label for the phase2 -->
@@ -1181,20 +1181,20 @@
     <string name="wifi_ip_settings_invalid_network_prefix_length">Please type a network prefix length between 0 and 32.</string>
     <!-- Label for the DNS (first one) -->
     <string name="wifi_dns1">DNS 1</string>
-    <!-- Hint text for DNS [CHAR LIMIT=25]-->
-    <string name="wifi_dns1_hint">8.8.8.8</string>
+    <!-- Hint text for DNS -->
+    <string name="wifi_dns1_hint" translatable="false">8.8.8.8</string>
     <!-- Label for the DNS (second one)-->
     <string name="wifi_dns2">DNS 2</string>
-    <!-- Hint text for DNS [CHAR LIMIT=25]-->
-    <string name="wifi_dns2_hint">4.4.4.4</string>
+    <!-- Hint text for DNS -->
+    <string name="wifi_dns2_hint" translatable="false">4.4.4.4</string>
     <!-- Label for the gateway of the network -->
     <string name="wifi_gateway">Gateway</string>
-    <!-- Hint text for the gateway [CHAR LIMIT=25]-->
-    <string name="wifi_gateway_hint">192.168.1.1</string>
+    <!-- Hint text for the gateway -->
+    <string name="wifi_gateway_hint" translatable="false">192.168.1.1</string>
     <!-- Label for the network prefix of the network [CHAR LIMIT=25]-->
     <string name="wifi_network_prefix_length">Network prefix length</string>
-    <!-- Hint text for network prefix length [CHAR LIMIT=25] -->
-    <string name="wifi_network_prefix_length_hint">24</string>
+    <!-- Hint text for network prefix length -->
+    <string name="wifi_network_prefix_length_hint" translatable="false">24</string>
 
     <!-- Wifi AP settings-->
     <!-- Label for wifi tether checkbox. Toggles Access Point on/off -->
@@ -1591,7 +1591,7 @@
     <!-- SD card & phone storage settings title. Displayed as a title when showing the total usage of media on the device. Below it will be a number like "123.4 MB" indicating used storage. [CHAR LIMIT=50] -->
     <string name="memory_media_usage">Media</string>
     <!-- SD card & phone storage settings title. Displayed as a title when showing the total usage of /sdcard/Download on the device. Below it will be a number like "123.4 MB" indicating used storage. [CHAR LIMIT=50] -->
-    <string name="memory_downloads_usage">Downloads</string>
+    <string name="memory_downloads_usage">Downloads</string>    
     <!-- SD card & phone storage settings title. Displayed as a title when showing the total usage of all pictures, videos in /sdcard/DCIM, /sdcard/Pictures folders on the device. Below it will be a number like "123.4 MB" indicating used storage. [CHAR LIMIT=50] -->
     <string name="memory_dcim_usage">Pictures, Videos</string>
     <!-- SD card & phone storage settings title. Displayed as a title when showing the total usage of audio files in /sdcard on the device. Below it will be a number like "123.4 MB" indicating used storage. [CHAR LIMIT=50] -->
@@ -1618,10 +1618,10 @@
     <!-- SD card & phone storage settings item title that will result in the phone mounting the SD card. -->
     <string name="sd_mount" product="default">Mount SD card</string>
 
-    <!-- Subtext for Mount USB storage in Storage settings. User should never see this. -->
-    <string name="sd_mount_summary" product="nosdcard">Mount the USB storage</string>
-    <!-- SD card & phone storage settings item title that will result in the phone mounting the SD card. -->
-    <string name="sd_mount_summary" product="default">Mount the SD card</string>
+    <!-- Subtext for Mount USB storage in Storage settings. User should never see this since we use automount. -->
+    <string name="sd_mount_summary" product="nosdcard"></string>
+    <!-- Subtext for Mount SD Card in Storage settings. User should never see this since we use automount. -->
+    <string name="sd_mount_summary" product="default"></string>
     <!-- SD card & phone storage settings item title that will result in the phone formatting the USB storage.   [CHAR LIMIT=25] -->
     <string name="sd_format" product="nosdcard">Erase USB storage</string>
     <!-- SD card & phone storage settings item title that will result in the phone formatting the SD card.   [CHAR LIMIT=25] -->
@@ -1630,9 +1630,7 @@
     <string name="sd_format_summary" product="nosdcard">Erases all data on the internal USB storage, such as music and photos</string>
     <!-- SD card & phone storage settings item title that will result in the phone unmounting the SD card.   [CHAR LIMIT=80] -->
     <string name="sd_format_summary" product="default">Erases all data on the SD card, such as music and photos</string>
-    <!-- SD card status when it is not available status -->
-    <string name="sd_unavailable">Unavailable</string>
-    <!-- SD card status when it is mounted as read only  -->
+    <!-- SD card status when it is mounted as read only. Will be appended to size, starts with an unbreakable space -->
     <string name="read_only">\u0020(Read-only)</string>
     <!-- SD card eject confirmation dialog title   [CHAR LIMIT=25] -->
     <string name="dlg_confirm_unmount_title" product="nosdcard">Unmount USB storage</string>

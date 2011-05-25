@@ -17,54 +17,6 @@
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
         android:title="@string/storage_settings_title">
 
-    <PreferenceCategory android:key="memory_sd"
-            android:title="@string/sd_memory">
-        <Preference android:key="memory_sd_size" 
-            style="?android:attr/preferenceInformationStyle" 
-            android:title="@string/memory_size"
-            android:summary="00"/>
-        <Preference android:key="memory_sd_avail" 
-            style="?android:attr/preferenceInformationStyle" 
-            android:title="@string/memory_available"
-            android:summary="00"/>
-        <Preference android:key="memory_sd_mount_toggle"
-            android:title="@string/sd_eject"
-            android:summary="@string/sd_eject_summary"/>
-        <Preference android:key="memory_sd_format"
-            android:title="@string/sd_format"
-            android:summary="@string/sd_format_summary"/>
-    </PreferenceCategory>
+<!-- Preference categories are dynamically created based on the list of available storage volumes -->
 
-    <PreferenceCategory android:title="@string/internal_memory">
-        <com.android.settings.deviceinfo.UsageBarPreference
-            android:key="memory_internal_chart"/>
-
-        <Preference android:key="memory_internal_size"
-            android:title="@string/memory_size"
-            android:summary="@string/memory_calculating_size"/>
-
-        <Preference android:key="memory_internal_apps"
-            android:title="@string/memory_apps_usage"
-            android:summary="@string/memory_calculating_size"/>
-
-        <Preference android:key="memory_internal_downloads"
-            android:title="@string/memory_downloads_usage"
-            android:summary="@string/memory_calculating_size"/>
-
-        <Preference android:key="memory_internal_dcim"
-            android:title="@string/memory_dcim_usage"
-            android:summary="@string/memory_calculating_size"/>
-
-        <Preference android:key="memory_internal_music"
-            android:title="@string/memory_music_usage"
-            android:summary="@string/memory_calculating_size"/>
-
-        <Preference android:key="memory_internal_media_misc"
-            android:title="@string/memory_media_misc_usage"
-            android:summary="@string/memory_calculating_size"/>
-
-        <Preference android:key="memory_internal_avail"
-            android:title="@string/memory_available"
-            android:summary="@string/memory_calculating_size"/>
-     </PreferenceCategory>
 </PreferenceScreen>
