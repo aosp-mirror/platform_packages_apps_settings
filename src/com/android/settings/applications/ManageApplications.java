@@ -585,7 +585,7 @@ public class ManageApplications extends Fragment implements
         mCreatedRunning = mResumedRunning = false;
         mCurView = VIEW_NOTHING;
         
-        View tabRoot = mInflater.inflate(com.android.internal.R.layout.tab_content, null);
+        View tabRoot = mInflater.inflate(R.layout.manage_apps_tab_content, null);
         mTabHost = (TabHost)tabRoot.findViewById(com.android.internal.R.id.tabhost);
         mTabHost.setup();
         final TabHost tabHost = mTabHost;
