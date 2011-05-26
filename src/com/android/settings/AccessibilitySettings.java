@@ -16,6 +16,7 @@
 
 package com.android.settings;
 
+import android.accessibilityservice.AccessibilityServiceInfo;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.Service;
@@ -78,7 +79,7 @@ public class AccessibilitySettings extends SettingsPreferenceFragment implements
 
     private CheckBoxPreference mToggleAccessibilityCheckBox;
     private CheckBoxPreference mToggleScriptInjectionCheckBox;
-    private CheckBoxPreference mToggleAccessibilityServiceCheckBox;
+    private SettingsCheckBoxPreference mToggleAccessibilityServiceCheckBox;
 
     private PreferenceCategory mPowerButtonCategory;
     private CheckBoxPreference mPowerButtonEndsCallCheckBox;
@@ -87,8 +88,8 @@ public class AccessibilitySettings extends SettingsPreferenceFragment implements
 
     private ListPreference mLongPressTimeoutListPreference;
 
-    private Map<String, ServiceInfo> mAccessibilityServices =
-        new LinkedHashMap<String, ServiceInfo>();
+    private Map<String, AccessibilityServiceInfo> mAccessibilityServices =
+        new LinkedHashMap<String, AccessibilityServiceInfo>();
 
     private TextUtils.SimpleStringSplitter mStringColonSplitter =
         new TextUtils.SimpleStringSplitter(':');
@@ -157,7 +158,7 @@ public class AccessibilitySettings extends SettingsPreferenceFragment implements
             }
         }
 
-        Map<String, ServiceInfo> accessibilityServices = mAccessibilityServices;
+        Map<String, AccessibilityServiceInfo> accessibilityServices = mAccessibilityServices;
 
         for (String key : accessibilityServices.keySet()) {
             CheckBoxPreference preference = (CheckBoxPreference) findPreference(key);
@@ -230,9 +231,9 @@ public class AccessibilitySettings extends SettingsPreferenceFragment implements
                 throw new IllegalArgumentException(
                         KEY_TOGGLE_ACCESSIBILITY_SERVICE_CHECKBOX
                                 + " must be mapped to an instance of a "
-                                + CheckBoxPreference.class.getName());
+                                + SettingsCheckBoxPreference.class.getName());
             }
-            mToggleAccessibilityServiceCheckBox = (CheckBoxPreference) preference;
+            mToggleAccessibilityServiceCheckBox = (SettingsCheckBoxPreference) preference;
         }
     }
 
@@ -274,7 +275,7 @@ public class AccessibilitySettings extends SettingsPreferenceFragment implements
         } else if (TOGGLE_ACCESSIBILITY_SCRIPT_INJECTION_CHECKBOX.equals(key)) {
             handleToggleAccessibilityScriptInjection((CheckBoxPreference) preference);
         } else if (preference instanceof CheckBoxPreference) {
-            handleEnableAccessibilityServiceStateChange((CheckBoxPreference) preference);
+            handleEnableAccessibilityServiceStateChange((SettingsCheckBoxPreference) preference);
         }
 
         return super.onPreferenceTreeClick(preferenceScreen, preference);
@@ -318,7 +319,8 @@ public class AccessibilitySettings extends SettingsPreferenceFragment implements
      *
      * @param preference The preference.
      */
-    private void handleEnableAccessibilityServiceStateChange(CheckBoxPreference preference) {
+    private void handleEnableAccessibilityServiceStateChange(
+            SettingsCheckBoxPreference preference) {
         if (preference.isChecked()) {
             mToggleAccessibilityServiceCheckBox = preference;
             // set right enabled state since the user may press back
@@ -357,7 +359,8 @@ public class AccessibilitySettings extends SettingsPreferenceFragment implements
         AccessibilityManager accessibilityManager =
             (AccessibilityManager) getSystemService(Service.ACCESSIBILITY_SERVICE);
 
-        List<ServiceInfo> installedServices = accessibilityManager.getAccessibilityServiceList();
+        List<AccessibilityServiceInfo> installedServices =
+            accessibilityManager.getInstalledAccessibilityServiceList();
 
         if (installedServices.isEmpty()) {
             getPreferenceScreen().removePreference(mAccessibilityServicesCategory);
@@ -367,12 +370,22 @@ public class AccessibilitySettings extends SettingsPreferenceFragment implements
         getPreferenceScreen().addPreference(mAccessibilityServicesCategory);
 
         for (int i = 0, count = installedServices.size(); i < count; ++i) {
-            ServiceInfo serviceInfo = installedServices.get(i);
-            String key = serviceInfo.packageName + "/" + serviceInfo.name;
+            AccessibilityServiceInfo accessibilityServiceInfo = installedServices.get(i);
+            String key = accessibilityServiceInfo.getId();
 
-            if (mAccessibilityServices.put(key, serviceInfo) == null) {
-                CheckBoxPreference preference = new CheckBoxPreference(getActivity());
+            if (mAccessibilityServices.put(key, accessibilityServiceInfo) == null) {
+                String settingsActivityName = accessibilityServiceInfo.getSettingsActivityName();
+                Intent settingsIntent = null;
+                if (!TextUtils.isEmpty(settingsActivityName)) {
+                    String packageName = accessibilityServiceInfo.getResolveInfo()
+                        .serviceInfo.packageName;
+                    settingsIntent = new Intent(Intent.ACTION_MAIN);
+                    settingsIntent.setClassName(packageName, settingsActivityName);
+                }
+                SettingsCheckBoxPreference preference = new SettingsCheckBoxPreference(
+                        getActivity(), settingsIntent);
                 preference.setKey(key);
+                ServiceInfo serviceInfo = accessibilityServiceInfo.getResolveInfo().serviceInfo;
                 preference.setTitle(serviceInfo.loadLabel(getActivity().getPackageManager()));
                 mAccessibilityServicesCategory.addPreference(preference);
             }
@@ -424,7 +437,8 @@ public class AccessibilitySettings extends SettingsPreferenceFragment implements
                     .setMessage(getResources().getString(
                             R.string.accessibility_service_security_warning,
                             mAccessibilityServices.get(mToggleAccessibilityServiceCheckBox.getKey())
-                            .applicationInfo.loadLabel(getActivity().getPackageManager())))
+                            .getResolveInfo().serviceInfo.applicationInfo.loadLabel(
+                                    getActivity().getPackageManager())))
                     .setCancelable(true)
                     .setPositiveButton(android.R.string.ok,
                             new DialogInterface.OnClickListener() {
