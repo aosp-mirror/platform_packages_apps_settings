@@ -1599,7 +1599,7 @@
     <!-- SD card & phone storage settings title. Displayed as a title when showing the total usage of media on the device. Below it will be a number like "123.4 MB" indicating used storage. [CHAR LIMIT=50] -->
     <string name="memory_media_usage">Media</string>
     <!-- SD card & phone storage settings title. Displayed as a title when showing the total usage of /sdcard/Download on the device. Below it will be a number like "123.4 MB" indicating used storage. [CHAR LIMIT=50] -->
-    <string name="memory_downloads_usage">Downloads</string>
+    <string name="memory_downloads_usage">Downloads</string>    
     <!-- SD card & phone storage settings title. Displayed as a title when showing the total usage of all pictures, videos in /sdcard/DCIM, /sdcard/Pictures folders on the device. Below it will be a number like "123.4 MB" indicating used storage. [CHAR LIMIT=50] -->
     <string name="memory_dcim_usage">Pictures, Videos</string>
     <!-- SD card & phone storage settings title. Displayed as a title when showing the total usage of audio files in /sdcard on the device. Below it will be a number like "123.4 MB" indicating used storage. [CHAR LIMIT=50] -->
@@ -1626,10 +1626,10 @@
     <!-- SD card & phone storage settings item title that will result in the phone mounting the SD card. -->
     <string name="sd_mount" product="default">Mount SD card</string>
 
-    <!-- Subtext for Mount USB storage in Storage settings. User should never see this. -->
-    <string name="sd_mount_summary" product="nosdcard">Mount the USB storage</string>
-    <!-- SD card & phone storage settings item title that will result in the phone mounting the SD card. -->
-    <string name="sd_mount_summary" product="default">Mount the SD card</string>
+    <!-- Subtext for Mount USB storage in Storage settings. User should never see this since we use automount. -->
+    <string name="sd_mount_summary" product="nosdcard"></string>
+    <!-- Subtext for Mount SD Card in Storage settings. User should never see this since we use automount. -->
+    <string name="sd_mount_summary" product="default"></string>
     <!-- SD card & phone storage settings item title that will result in the phone formatting the USB storage.   [CHAR LIMIT=25] -->
     <string name="sd_format" product="nosdcard">Erase USB storage</string>
     <!-- SD card & phone storage settings item title that will result in the phone formatting the SD card.   [CHAR LIMIT=25] -->
@@ -1638,9 +1638,7 @@
     <string name="sd_format_summary" product="nosdcard">Erases all data on the internal USB storage, such as music and photos</string>
     <!-- SD card & phone storage settings item title that will result in the phone unmounting the SD card.   [CHAR LIMIT=80] -->
     <string name="sd_format_summary" product="default">Erases all data on the SD card, such as music and photos</string>
-    <!-- SD card status when it is not available status -->
-    <string name="sd_unavailable">Unavailable</string>
-    <!-- SD card status when it is mounted as read only  -->
+    <!-- SD card status when it is mounted as read only. Will be appended to size, starts with an unbreakable space -->
     <string name="read_only">\u0020(Read-only)</string>
     <!-- SD card eject confirmation dialog title   [CHAR LIMIT=25] -->
     <string name="dlg_confirm_unmount_title" product="nosdcard">Unmount USB storage</string>
