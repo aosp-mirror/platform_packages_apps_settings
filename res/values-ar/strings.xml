@@ -148,8 +148,6 @@
     <string name="proxy_settings_summary" msgid="7898928000758321486">"تعيين خادم HTTP الوكيل وقوائم الاستبعاد"</string>
     <string name="proxy_clear_text" msgid="5555400754952012657">"محو"</string>
     <string name="proxy_port_label" msgid="5655276502233453400">"منفذ الخادم الوكيل"</string>
-    <!-- no translation found for proxy_port_hint (56832878488386205) -->
-    <skip />
     <string name="proxy_exclusionlist_label" msgid="7700491504623418701">"تجاوز الخادم الوكيل لـ"</string>
     <string name="proxy_exclusionlist_hint" msgid="6084099226687226948">"example.com,mycomp.test.com,localhost"</string>
     <string name="proxy_defaultView_text" msgid="6387985519141433291">"استعادة الإعدادات الافتراضية"</string>
@@ -480,8 +478,6 @@
     <string name="wifi_status" msgid="4824568012414605414">"الحالة"</string>
     <string name="wifi_speed" msgid="3526198708812322037">"سرعة الربط"</string>
     <string name="wifi_ip_address" msgid="1440054061044402918">"عنوان IP"</string>
-    <!-- no translation found for wifi_ip_address_hint (8743430259685731436) -->
-    <skip />
     <string name="wifi_eap_method" msgid="8529436133640730382">"طريقة EAP"</string>
     <string name="please_select_phase2" msgid="5231074529772044898">"مصادقة المرحلة الثانية"</string>
     <string name="wifi_eap_ca_cert" msgid="3521574865488892851">"شهادة CA"</string>
@@ -519,17 +515,9 @@
     <string name="wifi_ip_settings_invalid_dns" msgid="3428867750550854065">"الرجاء كتابة عنوان نظام أسماء نطاقات صالح."</string>
     <string name="wifi_ip_settings_invalid_network_prefix_length" msgid="8145730615716855433">"الرجاء كتابة بادئة شبكة يترواح طولها بين 0 و32."</string>
     <string name="wifi_dns1" msgid="7344118050720080045">"نظام أسماء النطاقات 1"</string>
-    <!-- no translation found for wifi_dns1_hint (6456813483795602877) -->
-    <skip />
     <string name="wifi_dns2" msgid="1368601006824882659">"نظام أسماء النطاقات 2"</string>
-    <!-- no translation found for wifi_dns2_hint (7619765588130757472) -->
-    <skip />
     <string name="wifi_gateway" msgid="163914742461092086">"البوابة"</string>
-    <!-- no translation found for wifi_gateway_hint (8795112538577969474) -->
-    <skip />
     <string name="wifi_network_prefix_length" msgid="3028785234245085998">"طول بادئة الشبكة"</string>
-    <!-- no translation found for wifi_network_prefix_length_hint (5443152484519915633) -->
-    <skip />
     <string name="wifi_tether_checkbox_text" msgid="6961605862058056788">"نقطة اتصال Wi-Fi المحمولة"</string>
     <string name="wifi_tether_enabled_subtext" msgid="8948641212931906143">"نقطة الاتصال المحمولة <xliff:g id="NETWORK_SSID">%1$s</xliff:g> نشطة"</string>
     <string name="wifi_tether_failed_subtext" msgid="2654888578056042315">"خطأ في نقطة اتصال Wi-Fi المتنقلة"</string>
@@ -689,13 +677,12 @@
     <string name="sd_insert_summary" product="default" msgid="2048640010381803841">"إدراج بطاقة SD للتحميل"</string>
     <string name="sd_mount" product="nosdcard" msgid="8966695015677343116">"تركيب وحدة تخزين USB"</string>
     <string name="sd_mount" product="default" msgid="5940523765187704135">"تحميل بطاقة SD"</string>
-    <string name="sd_mount_summary" product="nosdcard" msgid="1794150364965145726">"تركيب وحدة تخزين USB"</string>
-    <string name="sd_mount_summary" product="default" msgid="4936591681679097699">"تحميل بطاقة SD"</string>
+    <string name="sd_mount_summary" product="nosdcard" msgid="4673411327373419641"></string>
+    <string name="sd_mount_summary" product="default" msgid="4673411327373419641"></string>
     <string name="sd_format" product="nosdcard" msgid="2148179271623099054">"محو وحدة تخزين USB"</string>
     <string name="sd_format" product="default" msgid="2576054280507119870">"محو بطاقة SD"</string>
     <string name="sd_format_summary" product="nosdcard" msgid="6331905044907914603">"محو كل البيانات على وحدة تخزين USB الداخلية، مثل الموسيقى والصور"</string>
     <string name="sd_format_summary" product="default" msgid="212703692181793109">"محو كل البيانات على بطاقة SD، مثل الموسيقى والصور"</string>
-    <string name="sd_unavailable" msgid="8580107589533213904">"غير متاح"</string>
     <string name="read_only" msgid="6702420168629076340">" (للقراءة فقط)"</string>
     <string name="dlg_confirm_unmount_title" product="nosdcard" msgid="2349876662428231297">"إلغاء تركيب وحدة تخزين USB"</string>
     <string name="dlg_confirm_unmount_title" product="default" msgid="8612140627310646730">"إلغاء تحميل بطاقة SD"</string>
@@ -753,7 +740,7 @@
     <string name="master_clear_accounts" product="default" msgid="6412857499147999073">\n\n"تم تسجيل دخولك حاليًا في الحسابات التالية:"\n</string>
     <string name="master_clear_desc_also_erases_external" msgid="1903185203791274237"><li>"الموسيقى"</li>\n<li>"الصور"</li>\n<li>"بيانات المستخدم الأخرى"</li></string>
     <string name="master_clear_desc_erase_external_storage" product="nosdcard" msgid="4740866328425123395">\n\n"لمسح الموسيقى والصور وبيانات المستخدم الأخرى أيضًا، يلزم محو "<b>"وحدة تخزين USB"</b>"."</string>
-    <!-- syntax error in translation for master_clear_desc_erase_external_storage (7339100478676372901) org.xmlpull.v1.XmlPullParserException: expected: /string read: b (position:END_TAG </b>@1:177 in java.io.StringReader@2e8f4fb3)  -->
+    <!-- syntax error in translation for master_clear_desc_erase_external_storage (7339100478676372901) org.xmlpull.v1.XmlPullParserException: expected: /string read: b (position:END_TAG </b>@1:177 in java.io.StringReader@7d29f3b5)  -->
     <string name="erase_external_storage" product="nosdcard" msgid="969364037450286809">"محو وحدة تخزين USB"</string>
     <string name="erase_external_storage" product="default" msgid="1397239046334307625">"محو بطاقة SD"</string>
     <string name="erase_external_storage_description" product="nosdcard" msgid="444834593696342279">"محو كل البيانات على وحدة تخزين USB الداخلية، مثل الموسيقى والصور."</string>
