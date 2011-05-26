@@ -76,7 +76,7 @@ public class DateTimeSettingsSetupWizard extends Activity
         setContentView(R.layout.date_time_settings_setupwizard);
         mXLargeScreenSize = (getResources().getConfiguration().screenLayout
                 & Configuration.SCREENLAYOUT_SIZE_MASK)
-                == Configuration.SCREENLAYOUT_SIZE_XLARGE;
+                >= Configuration.SCREENLAYOUT_SIZE_LARGE;
         if (mXLargeScreenSize) {
             initUiForXl();
         } else {
