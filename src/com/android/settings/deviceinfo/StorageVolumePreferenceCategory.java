@@ -26,8 +26,7 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.os.Handler;
 import android.os.Message;
-import android.os.ServiceManager;
-import android.os.storage.IMountService;
+import android.os.storage.StorageManager;
 import android.os.storage.StorageVolume;
 import android.preference.Preference;
 import android.preference.PreferenceCategory;
@@ -59,6 +58,8 @@ public class StorageVolumePreferenceCategory extends PreferenceCategory implemen
     private Resources mResources;
 
     private StorageVolume mStorageVolume;
+
+    private StorageManager mStorageManager = null;
 
     private StorageMeasurement mMeasurement;
 
@@ -126,9 +127,6 @@ public class StorageVolumePreferenceCategory extends PreferenceCategory implemen
     // Updates the memory usage bar graph.
     private static final int MSG_UI_UPDATE_EXACT = 2;
 
-    // Key for the extra StorageVolume bundle added to the Misc intent.
-    static final String STORAGE_VOLUME = "storage_volume";
-
     private Handler mUpdateHandler = new Handler() {
         @Override
         public void handleMessage(Message msg) {
@@ -157,10 +155,11 @@ public class StorageVolumePreferenceCategory extends PreferenceCategory implemen
     };
 
     public StorageVolumePreferenceCategory(Context context, Resources resources,
-            StorageVolume storageVolume, boolean isPrimary) {
+            StorageVolume storageVolume, StorageManager storageManager, boolean isPrimary) {
         super(context);
         mResources = resources;
         mStorageVolume = storageVolume;
+        mStorageManager = storageManager;
         setTitle(storageVolume.getDescription());
         mMeasurement = StorageMeasurement.getInstance(context, storageVolume, isPrimary);
         mMeasurement.setReceiver(this);
@@ -196,18 +195,8 @@ public class StorageVolumePreferenceCategory extends PreferenceCategory implemen
         mFormatPreference.setSummary(R.string.sd_format_summary);
     }
 
-    public String getMountPoint() {
-        return mStorageVolume.getPath();
-    }
-
-    public String getStorageVolumeState() {
-        try {
-            IMountService mountService =
-                IMountService.Stub.asInterface(ServiceManager.getService("mount"));
-            return mountService.getVolumeState(getMountPoint());
-        } catch (Exception rex) {
-            return Environment.MEDIA_REMOVED;
-        }
+    public StorageVolume getStorageVolume() {
+        return mStorageVolume;
     }
 
     /**
@@ -237,10 +226,10 @@ public class StorageVolumePreferenceCategory extends PreferenceCategory implemen
     private void updatePreferencesFromState() {
         resetPreferences();
 
-        String state = getStorageVolumeState();
+        String state = mStorageManager.getVolumeState(mStorageVolume.getPath());
 
         String readOnly = "";
-        if (state.equals(Environment.MEDIA_MOUNTED_READ_ONLY)) {
+        if (Environment.MEDIA_MOUNTED_READ_ONLY.equals(state)) {
             state = Environment.MEDIA_MOUNTED;
             readOnly = mResources.getString(R.string.read_only);
             removePreference(mFormatPreference);
@@ -250,21 +239,21 @@ public class StorageVolumePreferenceCategory extends PreferenceCategory implemen
             removePreference(mFormatPreference);
         }
 
-        if (!mStorageVolume.isRemovable() && !state.equals(Environment.MEDIA_UNMOUNTED)) {
+        if (!mStorageVolume.isRemovable() && !Environment.MEDIA_UNMOUNTED.equals(state)) {
             // This device has built-in storage that is not removable.
             // There is no reason for the user to unmount it.
             removePreference(mMountTogglePreference);
         }
 
-        if (state.equals(Environment.MEDIA_MOUNTED)) {
+        if (Environment.MEDIA_MOUNTED.equals(state)) {
             mPreferences[AVAILABLE].setSummary(mPreferences[AVAILABLE].getSummary() + readOnly);
 
             mMountTogglePreference.setEnabled(true);
             mMountTogglePreference.setTitle(mResources.getString(R.string.sd_eject));
             mMountTogglePreference.setSummary(mResources.getString(R.string.sd_eject_summary));
         } else {
-            if (state.equals(Environment.MEDIA_UNMOUNTED) || state.equals(Environment.MEDIA_NOFS)
-                    || state.equals(Environment.MEDIA_UNMOUNTABLE)) {
+            if (Environment.MEDIA_UNMOUNTED.equals(state) || Environment.MEDIA_NOFS.equals(state)
+                    || Environment.MEDIA_UNMOUNTABLE.equals(state)) {
                 mMountTogglePreference.setEnabled(true);
                 mMountTogglePreference.setTitle(mResources.getString(R.string.sd_mount));
                 mMountTogglePreference.setSummary(mResources.getString(R.string.sd_mount_summary));
@@ -391,6 +380,7 @@ public class StorageVolumePreferenceCategory extends PreferenceCategory implemen
         if (preference == mFormatPreference) {
             intent = new Intent(Intent.ACTION_VIEW);
             intent.setClass(getContext(), com.android.settings.MediaFormat.class);
+            intent.putExtra(StorageVolume.EXTRA_STORAGE_VOLUME, mStorageVolume);
         } else if (preference == mPreferences[APPLICATIONS]) {
             intent = new Intent(Intent.ACTION_MANAGE_PACKAGE_STORAGE);
             intent.setClass(getContext(),
@@ -408,7 +398,7 @@ public class StorageVolumePreferenceCategory extends PreferenceCategory implemen
             Context context = getContext().getApplicationContext();
             if (mMeasurement.getMiscSize() > 0) {
                 intent = new Intent(context, MiscFilesHandler.class);
-                intent.putExtra(STORAGE_VOLUME, mStorageVolume);
+                intent.putExtra(StorageVolume.EXTRA_STORAGE_VOLUME, mStorageVolume);
             }
         }
 

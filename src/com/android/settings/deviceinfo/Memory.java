@@ -28,7 +28,6 @@ import android.content.res.Resources;
 import android.os.Bundle;
 import android.os.Environment;
 import android.os.IBinder;
-import android.os.Parcelable;
 import android.os.RemoteException;
 import android.os.ServiceManager;
 import android.os.storage.IMountService;
@@ -76,23 +75,17 @@ public class Memory extends SettingsPreferenceFragment implements OnCancelListen
 
         mResources = getResources();
 
-        try {
-            IMountService mountService = IMountService.Stub.asInterface(ServiceManager
-                    .getService("mount"));
-            Parcelable[] volumes = mountService.getVolumeList();
-            int length = volumes.length;
-            mStorageVolumePreferenceCategories = new StorageVolumePreferenceCategory[length];
-            for (int i = 0; i < length; i++) {
-                StorageVolume storageVolume = (StorageVolume) volumes[i];
-                StorageVolumePreferenceCategory storagePreferenceCategory =
-                    new StorageVolumePreferenceCategory(getActivity(), mResources, storageVolume,
-                            i == 0); // The first volume is the primary volume
-                mStorageVolumePreferenceCategories[i] = storagePreferenceCategory;
-                getPreferenceScreen().addPreference(storagePreferenceCategory);
-                storagePreferenceCategory.init();
-            }
-        } catch (Exception e) {
-            Log.e(TAG, "couldn't talk to MountService", e);
+        StorageVolume[] storageVolumes = mStorageManager.getVolumeList();
+        int length = storageVolumes.length;
+        mStorageVolumePreferenceCategories = new StorageVolumePreferenceCategory[length];
+        for (int i = 0; i < length; i++) {
+            StorageVolume storageVolume = storageVolumes[i];
+            StorageVolumePreferenceCategory storagePreferenceCategory =
+                new StorageVolumePreferenceCategory(getActivity(), mResources, storageVolume,
+                        mStorageManager, i == 0); // The first volume is the primary volume
+            mStorageVolumePreferenceCategories[i] = storagePreferenceCategory;
+            getPreferenceScreen().addPreference(storagePreferenceCategory);
+            storagePreferenceCategory.init();
         }
     }
 
@@ -117,7 +110,7 @@ public class Memory extends SettingsPreferenceFragment implements OnCancelListen
                     " to " + newState);
             for (int i = 0; i < mStorageVolumePreferenceCategories.length; i++) {
                 StorageVolumePreferenceCategory svpc = mStorageVolumePreferenceCategories[i];
-                if (path.equals(svpc.getMountPoint())) {
+                if (path.equals(svpc.getStorageVolume().getPath())) {
                     svpc.onStorageStateChanged();
                     break;
                 }
@@ -167,10 +160,11 @@ public class Memory extends SettingsPreferenceFragment implements OnCancelListen
             boolean mountToggleClicked = svpc.mountToggleClicked(preference);
             if (mountToggleClicked && mClickedMountToggle == null) {
                 mClickedMountToggle = preference;
-                mClickedMountPoint = svpc.getMountPoint();
-                String state = svpc.getStorageVolumeState();
-                if (state.equals(Environment.MEDIA_MOUNTED) ||
-                        state.equals(Environment.MEDIA_MOUNTED_READ_ONLY)) {
+                final StorageVolume storageVolume = svpc.getStorageVolume();
+                mClickedMountPoint = storageVolume.getPath();
+                String state = mStorageManager.getVolumeState(storageVolume.getPath());
+                if (Environment.MEDIA_MOUNTED.equals(state) ||
+                        Environment.MEDIA_MOUNTED_READ_ONLY.equals(state)) {
                     unmount();
                 } else {
                     mount();
