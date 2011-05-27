@@ -75,7 +75,11 @@ public class RequestPermissionHelperActivity extends AlertActivity implements
         if (mEnableOnly) {
             tv.setText(getString(R.string.bluetooth_ask_enablement));
         } else {
-            tv.setText(getString(R.string.bluetooth_ask_enablement_and_discovery, mTimeout));
+            if (mTimeout == BluetoothDiscoverableEnabler.DISCOVERABLE_TIMEOUT_NEVER) {
+                tv.setText(getString(R.string.bluetooth_ask_enablement_and_lasting_discovery));
+            } else {
+                tv.setText(getString(R.string.bluetooth_ask_enablement_and_discovery, mTimeout));
+            }
         }
 
         p.mPositiveButtonText = getString(R.string.yes);

@@ -31,9 +31,13 @@ import android.content.IntentFilter;
 import android.os.Bundle;
 import android.os.ParcelUuid;
 import android.preference.CheckBoxPreference;
+import android.preference.ListPreference;
 import android.preference.Preference;
 import android.preference.PreferenceActivity;
 import android.preference.PreferenceScreen;
+import android.preference.PreferenceCategory;
+import android.preference.PreferenceScreen;
+import android.text.TextUtils;
 import android.view.ContextMenu;
 import android.view.MenuItem;
 import android.view.View;
@@ -55,6 +59,7 @@ public class BluetoothSettings extends PreferenceActivity
     private static final String KEY_BT_CHECKBOX = "bt_checkbox";
     private static final String KEY_BT_DISCOVERABLE = "bt_discoverable";
     private static final String KEY_BT_DEVICE_LIST = "bt_device_list";
+    private static final String KEY_BT_DISCOVERABLE_TIMEOUT = "bt_discoverable_timeout";
     private static final String KEY_BT_NAME = "bt_name";
     private static final String KEY_BT_SCAN = "bt_scan";
 
@@ -141,9 +146,9 @@ public class BluetoothSettings extends PreferenceActivity
                     this,
                     (CheckBoxPreference) findPreference(KEY_BT_CHECKBOX));
 
-            mDiscoverableEnabler = new BluetoothDiscoverableEnabler(
-                    this,
-                    (CheckBoxPreference) findPreference(KEY_BT_DISCOVERABLE));
+            mDiscoverableEnabler = new BluetoothDiscoverableEnabler(this,
+                    (CheckBoxPreference) findPreference(KEY_BT_DISCOVERABLE),
+                    (ListPreference) findPreference(KEY_BT_DISCOVERABLE_TIMEOUT));
 
             mNamePreference = (BluetoothNamePreference) findPreference(KEY_BT_NAME);
 
