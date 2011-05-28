@@ -24,11 +24,11 @@ import android.content.pm.ResolveInfo;
 import android.content.res.Resources;
 import android.net.ConnectivityManager;
 import android.net.LinkProperties;
+import android.net.TrafficStats;
 import android.net.Uri;
 import android.os.AsyncResult;
 import android.os.Bundle;
 import android.os.Handler;
-import android.os.INetStatService;
 import android.os.Message;
 import android.os.RemoteException;
 import android.os.ServiceManager;
@@ -133,7 +133,6 @@ public class RadioInfo extends Activity {
     private TelephonyManager mTelephonyManager;
     private Phone phone = null;
     private PhoneStateIntentReceiver mPhoneStateReceiver;
-    private INetStatService netstat;
 
     private String mPingIpAddrResult;
     private String mPingHostnameResult;
@@ -310,8 +309,6 @@ public class RadioInfo extends Activity {
                 mHandler.obtainMessage(EVENT_QUERY_PREFERRED_TYPE_DONE));
         phone.getNeighboringCids(
                 mHandler.obtainMessage(EVENT_QUERY_NEIGHBORING_CIDS_DONE));
-
-        netstat = INetStatService.Stub.asInterface(ServiceManager.getService("netstat"));
 
         CellLocation.requestLocationUpdate();
     }
@@ -625,19 +622,16 @@ public class RadioInfo extends Activity {
     private final void updateDataStats2() {
         Resources r = getResources();
 
-        try {
-            long txPackets = netstat.getMobileTxPackets();
-            long rxPackets = netstat.getMobileRxPackets();
-            long txBytes   = netstat.getMobileTxBytes();
-            long rxBytes   = netstat.getMobileRxBytes();
+        long txPackets = TrafficStats.getMobileTxPackets();
+        long rxPackets = TrafficStats.getMobileRxPackets();
+        long txBytes   = TrafficStats.getMobileTxBytes();
+        long rxBytes   = TrafficStats.getMobileRxBytes();
 
-            String packets = r.getString(R.string.radioInfo_display_packets);
-            String bytes   = r.getString(R.string.radioInfo_display_bytes);
+        String packets = r.getString(R.string.radioInfo_display_packets);
+        String bytes   = r.getString(R.string.radioInfo_display_bytes);
 
-            sent.setText(txPackets + " " + packets + ", " + txBytes + " " + bytes);
-            received.setText(rxPackets + " " + packets + ", " + rxBytes + " " + bytes);
-        } catch (RemoteException e) {
-        }
+        sent.setText(txPackets + " " + packets + ", " + txBytes + " " + bytes);
+        received.setText(rxPackets + " " + packets + ", " + rxBytes + " " + bytes);
     }
 
     /**
