@@ -21,8 +21,8 @@
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:paddingTop="60dip"
-    android:paddingLeft="128dip"
-    android:paddingRight="128dip"
+    android:paddingLeft="@dimen/screen_margin_sides"
+    android:paddingRight="@dimen/screen_margin_sides"
     android:paddingBottom="0dip" >
 
     <FrameLayout
@@ -101,7 +101,7 @@
         <FrameLayout
             android:id="@+id/wifi_settings_fragment_layout"
             android:layout_width="716dip"
-            android:layout_height="377dip">
+            android:layout_height="370dip">
             <fragment
                 class="com.android.settings.wifi.WifiSettings"
                 android:id="@+id/wifi_setup_fragment"
