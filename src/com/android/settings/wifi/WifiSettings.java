@@ -245,7 +245,7 @@ public class WifiSettings extends SettingsPreferenceFragment
 
         getActivity().registerReceiver(mReceiver, mFilter);
         if (mKeyStoreNetworkId != INVALID_NETWORK_ID &&
-                KeyStore.getInstance().test() == KeyStore.NO_ERROR) {
+                KeyStore.getInstance().state() == KeyStore.State.UNLOCKED) {
             mWifiManager.connectNetwork(mKeyStoreNetworkId);
         }
         mKeyStoreNetworkId = INVALID_NETWORK_ID;
@@ -417,7 +417,7 @@ public class WifiSettings extends SettingsPreferenceFragment
 
     private boolean requireKeyStore(WifiConfiguration config) {
         if (WifiConfigController.requireKeyStore(config) &&
-                KeyStore.getInstance().test() != KeyStore.NO_ERROR) {
+                KeyStore.getInstance().state() != KeyStore.State.UNLOCKED) {
             mKeyStoreNetworkId = config.networkId;
             Credentials.getInstance().unlock(getActivity());
             return true;

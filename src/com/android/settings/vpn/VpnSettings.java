@@ -55,6 +55,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.nio.charset.Charsets;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -698,7 +699,7 @@ public class VpnSettings extends SettingsPreferenceFragment
     }
 
     private boolean isKeyStoreUnlocked() {
-        return mKeyStore.test() == KeyStore.NO_ERROR;
+        return mKeyStore.state() == KeyStore.State.UNLOCKED;
     }
 
     // Returns true if the profile needs to access keystore
@@ -1034,7 +1035,7 @@ public class VpnSettings extends SettingsPreferenceFragment
                 String presharedKey = pskProfile.getPresharedKey();
                 String key = KEY_PREFIX_IPSEC_PSK + p.getId();
                 if (!TextUtils.isEmpty(presharedKey) &&
-                        !mKeyStore.put(key, presharedKey)) {
+                        !mKeyStore.put(key, presharedKey.getBytes(Charsets.UTF_8))) {
                     Log.e(TAG, "keystore write failed: key=" + key);
                 }
                 pskProfile.setPresharedKey(key);
@@ -1046,7 +1047,7 @@ public class VpnSettings extends SettingsPreferenceFragment
                 if (l2tpProfile.isSecretEnabled()) {
                     String secret = l2tpProfile.getSecretString();
                     if (!TextUtils.isEmpty(secret) &&
-                            !mKeyStore.put(key, secret)) {
+                            !mKeyStore.put(key, secret.getBytes(Charsets.UTF_8))) {
                         Log.e(TAG, "keystore write failed: key=" + key);
                     }
                     l2tpProfile.setSecretString(key);

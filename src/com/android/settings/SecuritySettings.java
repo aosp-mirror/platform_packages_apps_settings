@@ -70,7 +70,6 @@ public class SecuritySettings extends SettingsPreferenceFragment
     // Misc Settings
     private static final String KEY_SIM_LOCK = "sim_lock";
     private static final String KEY_SHOW_PASSWORD = "show_password";
-    private static final String KEY_ENABLE_CREDENTIALS = "enable_credentials";
     private static final String KEY_RESET_CREDENTIALS = "reset_credentials";
 
     private static final String TAG = "SecuritySettings";
@@ -98,7 +97,6 @@ public class SecuritySettings extends SettingsPreferenceFragment
 
     private CheckBoxPreference mShowPassword;
 
-    private CheckBoxPreference mEnableCredentials;
     private Preference mResetCredentials;
 
     @Override
@@ -239,8 +237,6 @@ public class SecuritySettings extends SettingsPreferenceFragment
         mShowPassword = (CheckBoxPreference) root.findPreference(KEY_SHOW_PASSWORD);
 
         // Credential storage
-        mEnableCredentials = (CheckBoxPreference) root.findPreference(KEY_ENABLE_CREDENTIALS);
-        mEnableCredentials.setOnPreferenceChangeListener(this);
         mResetCredentials = root.findPreference(KEY_RESET_CREDENTIALS);
 
         return root;
@@ -337,10 +333,8 @@ public class SecuritySettings extends SettingsPreferenceFragment
         mShowPassword.setChecked(Settings.System.getInt(getContentResolver(),
                 Settings.System.TEXT_SHOW_PASSWORD, 1) != 0);
 
-        int state = KeyStore.getInstance().test();
-        mEnableCredentials.setChecked(state == KeyStore.NO_ERROR);
-        mEnableCredentials.setEnabled(state != KeyStore.UNINITIALIZED);
-        mResetCredentials.setEnabled(state != KeyStore.UNINITIALIZED);
+        KeyStore.State state = KeyStore.getInstance().state();
+        mResetCredentials.setEnabled(state != KeyStore.State.UNINITIALIZED);
     }
 
     @Override
@@ -430,13 +424,6 @@ public class SecuritySettings extends SettingsPreferenceFragment
             // activity will be restated and the new value re-read, so the checkbox will get its
             // new value then.
             return false;
-        } else if (preference == mEnableCredentials) {
-            if (value != null && (Boolean) value) {
-                getActivity().startActivity(new Intent(CredentialStorage.ACTION_UNLOCK));
-                return false;
-            } else {
-                KeyStore.getInstance().lock();
-            }
         }
         return true;
     }
