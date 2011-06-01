@@ -478,6 +478,7 @@ public class StorageMeasurement {
         File top = new File(mStorageVolume.getPath());
         mFileInfoForMisc = new ArrayList<FileInfo>();
         File[] files = top.listFiles();
+        if (files == null) return;
         final int len = files.length;
         // Get sizes of all top level nodes except the ones already computed...
         long counter = 0;
