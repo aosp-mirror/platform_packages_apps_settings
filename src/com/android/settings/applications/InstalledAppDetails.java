@@ -60,6 +60,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AppSecurityPermissions;
 import android.widget.Button;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -74,7 +76,8 @@ import android.widget.TextView;
  * uninstall the application.
  */
 public class InstalledAppDetails extends Fragment
-        implements View.OnClickListener, ApplicationsState.Callbacks {
+        implements View.OnClickListener, CompoundButton.OnCheckedChangeListener,
+        ApplicationsState.Callbacks {
     private static final String TAG="InstalledAppDetails";
     static final boolean SUPPORT_DISABLE_APPS = false;
     private static final boolean localLOGV = false;
@@ -92,6 +95,9 @@ public class InstalledAppDetails extends Fragment
     private boolean mMoveInProgress = false;
     private boolean mUpdatedSysApp = false;
     private Button mActivitiesButton;
+    private View mScreenCompatSection;
+    private CheckBox mAskCompatibilityCB;
+    private CheckBox mEnableCompatibilityCB;
     private boolean mCanClearData = true;
     private TextView mAppVersion;
     private TextView mTotalSize;
@@ -345,6 +351,11 @@ public class InstalledAppDetails extends Fragment
 
         mActivitiesButton = (Button)view.findViewById(R.id.clear_activities_button);
         
+        // Screen compatibility control
+        mScreenCompatSection = view.findViewById(R.id.screen_compatibility_section);
+        mAskCompatibilityCB = (CheckBox)view.findViewById(R.id.ask_compatibility_cb);
+        mEnableCompatibilityCB = (CheckBox)view.findViewById(R.id.enable_compatibility_cb);
+
         return view;
     }
 
@@ -466,7 +477,22 @@ public class InstalledAppDetails extends Fragment
             mActivitiesButton.setEnabled(true);
             mActivitiesButton.setOnClickListener(this);
         }
-         
+
+        // Screen compatibility section.
+        ActivityManager am = (ActivityManager)
+                getActivity().getSystemService(Context.ACTIVITY_SERVICE);
+        int compatMode = am.getPackageScreenCompatMode(packageName);
+        if (compatMode == ActivityManager.COMPAT_MODE_DISABLED
+                || compatMode == ActivityManager.COMPAT_MODE_ENABLED) {
+            mScreenCompatSection.setVisibility(View.VISIBLE);
+            mAskCompatibilityCB.setChecked(am.getPackageAskScreenCompat(packageName));
+            mAskCompatibilityCB.setOnCheckedChangeListener(this);
+            mEnableCompatibilityCB.setChecked(compatMode == ActivityManager.COMPAT_MODE_ENABLED);
+            mEnableCompatibilityCB.setOnCheckedChangeListener(this);
+        } else {
+            mScreenCompatSection.setVisibility(View.GONE);
+        }
+
         // Security permissions section
         LinearLayout permsView = (LinearLayout) mRootView.findViewById(R.id.permissions_section);
         AppSecurityPermissions asp = new AppSecurityPermissions(getActivity(), packageName);
@@ -844,6 +870,19 @@ public class InstalledAppDetails extends Fragment
             mMoveInProgress = true;
             refreshButtons();
             mPm.movePackage(mAppEntry.info.packageName, mPackageMoveObserver, moveFlags);
+        }
+    }
+
+    @Override
+    public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+        String packageName = mAppEntry.info.packageName;
+        ActivityManager am = (ActivityManager)
+                getActivity().getSystemService(Context.ACTIVITY_SERVICE);
+        if (buttonView == mAskCompatibilityCB) {
+            am.setPackageAskScreenCompat(packageName, isChecked);
+        } else if (buttonView == mEnableCompatibilityCB) {
+            am.setPackageScreenCompatMode(packageName, isChecked ?
+                    ActivityManager.COMPAT_MODE_ENABLED : ActivityManager.COMPAT_MODE_DISABLED);
         }
     }
 }
