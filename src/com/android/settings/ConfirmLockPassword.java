@@ -149,7 +149,7 @@ public class ConfirmLockPassword extends PreferenceActivity {
             if (mLockPatternUtils.checkPassword(pin)) {
 
                 Intent intent = new Intent();
-                intent.putExtra("password", pin);
+                intent.putExtra(ChooseLockSettingsHelper.EXTRA_KEY_PASSWORD, pin);
 
                 getActivity().setResult(RESULT_OK, intent);
                 getActivity().finish();
