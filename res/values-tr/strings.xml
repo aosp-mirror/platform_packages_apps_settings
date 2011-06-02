@@ -316,7 +316,7 @@
     <string name="unlock_set_unlock_pin_summary" msgid="5556722736289132512">"Ekr kilidini açmak için sayısal PIN gerektir"</string>
     <string name="unlock_set_unlock_password_title" msgid="8775603825675090937">"Şifre"</string>
     <string name="unlock_set_unlock_password_summary" msgid="7871968012198279034">"Ekranın kilidini açmak için şifre gerektir"</string>
-    <string name="unlock_set_unlock_disabled_summary" msgid="8563103042330816018">"Yönetc veya şifr politikası trfn devre dışı brkldı"</string>
+    <!-- outdated translation 5962903914511361952 -->     <string name="unlock_set_unlock_disabled_summary" msgid="2120729867788851674">"Cihazın uzaktan yöneticisi tarafından devre dışı bırakıldı"</string>
     <string name="unlock_set_unlock_mode_off" msgid="378729687629105388">"Kapalı"</string>
     <string name="unlock_set_unlock_mode_none" msgid="7137296704741184239">"Güvenlik yok"</string>
     <string name="unlock_set_unlock_mode_pattern" msgid="464022606293547390">"Desenle güvenlik etkin"</string>
@@ -599,6 +599,13 @@
     <string name="brightness_summary" msgid="838917350127550703">"Ekranın parlaklığını ayarla"</string>
     <string name="screen_timeout" msgid="6962654593018319466">"Zaman aşımı"</string>
     <string name="screen_timeout_summary" msgid="4471347210332380587">"<xliff:g id="TIMEOUT_DESCRIPTION">%1$s</xliff:g> sonra ekran otomatik olarak kapanır"</string>
+    <string name="dream_settings_title" msgid="6536876013377446805">"Android Dreams"</string>
+    <string name="dream_settings_summary" msgid="6809871648071408259">"Ekran koruyucular ve diğer boşta kalma oyalayıcıları"</string>
+    <string name="dream_component_title" msgid="505229894674572578">"Seçili rüya"</string>
+    <string name="dream_timeout_title" msgid="1385909618566514628">"Etkinleştirme zamanı"</string>
+    <string name="dream_timeout_summary" msgid="6721955887728454226">"<xliff:g id="TIMEOUT_DESCRIPTION">%1$s</xliff:g> boşta kaldıktan sonra"</string>
+    <string name="dream_timeout_zero_summary" msgid="2450290346381400092">"Hiçbir zaman"</string>
+    <string name="dream_test" msgid="5968002644622194481">"Deneyin!"</string>
     <string name="automatic_brightness" msgid="5014143533884135461">"Otomatik parlaklık"</string>
     <string name="title_font_size" msgid="4405544325522105222">"Yazı tipi boyutu"</string>
     <string name="summary_font_size" msgid="7548243392515500554">"Tüm yazı tipi boyutları"</string>
@@ -681,13 +688,12 @@
     <string name="sd_insert_summary" product="default" msgid="2048640010381803841">"Eklemek için bir SD kart yerleştirin"</string>
     <string name="sd_mount" product="nosdcard" msgid="8966695015677343116">"USB depl birimini ekleyin"</string>
     <string name="sd_mount" product="default" msgid="5940523765187704135">"SD kartı ekle"</string>
-    <string name="sd_mount_summary" product="nosdcard" msgid="1794150364965145726">"Dahili USB depolama birimini ekle"</string>
-    <string name="sd_mount_summary" product="default" msgid="4936591681679097699">"SD kartı ekle"</string>
+    <string name="sd_mount_summary" product="nosdcard" msgid="4673411327373419641"></string>
+    <string name="sd_mount_summary" product="default" msgid="4673411327373419641"></string>
     <string name="sd_format" product="nosdcard" msgid="2148179271623099054">"USB depolama birimini sil"</string>
     <string name="sd_format" product="default" msgid="2576054280507119870">"SD kartı sil"</string>
     <string name="sd_format_summary" product="nosdcard" msgid="6331905044907914603">"Dahili USB depolama birimindeki müzik ve fotoğraf gibi tüm verileri siler"</string>
     <string name="sd_format_summary" product="default" msgid="212703692181793109">"SD karttaki müzik ve fotoğraf gibi tüm verileri siler"</string>
-    <string name="sd_unavailable" msgid="8580107589533213904">"Kullanılamıyor"</string>
     <string name="read_only" msgid="6702420168629076340">" (Salt okunur)"</string>
     <string name="dlg_confirm_unmount_title" product="nosdcard" msgid="2349876662428231297">"USB dep brmnn bağln kes"</string>
     <string name="dlg_confirm_unmount_title" product="default" msgid="8612140627310646730">"SD kartının bağlantısını kes"</string>
@@ -903,6 +909,7 @@
     <string name="application_info_label" msgid="1150486628158409543">"Uygulama bilgileri"</string>
     <string name="storage_label" msgid="8700867073480107253">"Depolama"</string>
     <string name="auto_launch_label" msgid="3012617472833815382">"Varsayılan olarak başlat"</string>
+    <string name="screen_compatibility_label" msgid="663250687205465394">"Ekran uyumluluğu"</string>
     <string name="permissions_label" msgid="2605296874922726203">"İzinler"</string>
     <string name="cache_header_label" msgid="1877197634162461830">"Önbellek"</string>
     <string name="clear_cache_btn_text" msgid="5756314834291116325">"Önbelleği temizle"</string>
@@ -922,6 +929,9 @@
     <string name="auto_launch_enable_text" msgid="2630656657744196691">"Bu uygulamayı bazı işlemler için varsayılan olarak başlatmayı seçtiniz."</string>
     <string name="auto_launch_disable_text" msgid="7800385822185540166">"Hiçbir varsayılan ayarlanmadı."</string>
     <string name="clear_activities" msgid="7408923511535174430">"Varsayılanları temizle"</string>
+    <string name="screen_compatibility_text" msgid="2398570332021220651">"Bu uygulama, ekranınıza göre tasarlanmamış olabilir; ekranınızda nasıl duracağını buradan kontrol edebilirsiniz."</string>
+    <string name="ask_compatibility" msgid="7225195569089607846">"Başlarken sor"</string>
+    <string name="enable_compatibility" msgid="3257284255974065538">"Uygulamayı ölçekle"</string>
     <string name="unknown" msgid="1592123443519355854">"Bilinmiyor"</string>
     <string name="sort_order_alpha" msgid="1410278099123670628">"Ada göre sırala"</string>
     <string name="sort_order_size" msgid="7024513286636502362">"Boyuta göre sırala"</string>
@@ -1109,6 +1119,8 @@
     <string name="accessibility_power_button_category" msgid="8545885236482339928">"Güç düğmesi"</string>
     <string name="accessibility_power_button_ends_call" msgid="7698764194501089533">"Güç düğmesi çağrıyı sonlandırır"</string>
     <string name="accessibility_power_button_ends_call_summary" msgid="8878097632186291462">"Çağrı sırasında, Güç düğmesine basıldığında ekranın kapanması yerine çağrı sonlanır"</string>
+    <!-- no translation found for settings_button (3006713718908152930) -->
+    <skip />
     <string name="touchscreen_gestures_category" msgid="3109869155350859625">"Dokunmatik ekran hareketleri"</string>
     <string name="long_press_timeout_selector_title" msgid="1396876537252863044">"Dokunma ve tutma bekleme süresi"</string>
     <string name="long_press_timeout_selector_summary" msgid="2261114502740278996">"Dokunmanın, dokunma ve tutma olarak yorumlanmasına kadar geçen süre"</string>
@@ -1316,19 +1328,21 @@
     <string name="credentials_install_summary" product="nosdcard" msgid="4220422806818210676">"Sertifikaları depolama biriminden yükle"</string>
     <string name="credentials_install_summary" product="default" msgid="5737658257407822713">"Sertifikaları SD karttan yükle"</string>
     <string name="credentials_reset" msgid="3239382277144980418">"Kimlik bilgilerini temizle"</string>
-    <string name="credentials_reset_summary" msgid="3810369467217453606">"Tüm içeriği kaldır ve şifreyi sıfırla"</string>
+    <!-- outdated translation 2127419861568976637 -->     <string name="credentials_reset_summary" msgid="3369361230171260282">"Tüm içeriklerin kimlik bilgileri deposunu temizleyin ve bu depolama alanının şifresini sıfırlayın"</string>
     <string name="credentials_unlock" msgid="1463040326264133844">"Şifreyi girin"</string>
     <string name="credentials_unlock_hint" msgid="5889551635843338639">"Kimlik bilgileri deposu için şifre girin."</string>
     <string name="credentials_old_password" msgid="7553393815538684028">"Geçerli şifre:"</string>
-    <string name="credentials_reset_hint" msgid="2336340927894094814">"Tüm içerik kaldırılacak ve şifre sıfırlanacak. Bundan emin misiniz?"</string>
+    <!-- outdated translation 7883277320781857760 -->     <string name="credentials_reset_hint" msgid="1566409057833618877">"Tüm kimlik bilgilerini silmek ve kimlik bilgileri deposunun şifresini sıfırlamak istediğinizden emin misiniz?"</string>
     <string name="credentials_password_too_short" msgid="7502749986405522663">"Şifre, en az 8 karakterden oluşmalıdır."</string>
     <string name="credentials_wrong_password" msgid="2541932597104054807">"Yanlış şifre."</string>
     <string name="credentials_reset_warning" msgid="5320653011511797600">"Yanlış şifre. Kimlik bilgileri deposu silinmeden önce tek bir şansınız kaldı."</string>
     <string name="credentials_reset_warning_plural" msgid="6514085665301095279">"Yanlış şifre. Kimlik bilgileri deposu silinmeden önce <xliff:g id="NUMBER">%1$d</xliff:g> şansınız kaldı."</string>
     <string name="credentials_erased" msgid="2907836028586342969">"Kimlik bilgileri deposu silindi."</string>
-    <!-- no translation found for credentials_not_erased (7098106773249438137) -->
+    <!-- no translation found for credentials_not_erased (397954733557821269) -->
     <skip />
     <string name="credentials_enabled" msgid="7588607413349978930">"Kimlik bilgileri deposu etkin."</string>
+    <!-- no translation found for credentials_configure_lock_screen_hint (6816970208840577219) -->
+    <skip />
     <string name="emergency_tone_title" msgid="1055954530111587114">"Acil sesi"</string>
     <string name="emergency_tone_summary" msgid="722259232924572153">"Acil çağrı yapıldığında nasıl işlev göreceğini ayarlayın"</string>
     <string name="privacy_settings" msgid="9206631214140954954">"Gizlilik"</string>

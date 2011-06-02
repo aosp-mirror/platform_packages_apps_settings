@@ -316,7 +316,7 @@
     <string name="unlock_set_unlock_pin_summary" msgid="5556722736289132512">"需要数字 PIN 才能解锁屏幕"</string>
     <string name="unlock_set_unlock_password_title" msgid="8775603825675090937">"密码"</string>
     <string name="unlock_set_unlock_password_summary" msgid="7871968012198279034">"需要密码才能解锁屏幕"</string>
-    <string name="unlock_set_unlock_disabled_summary" msgid="8563103042330816018">"已被管理员或加密政策停用"</string>
+    <!-- outdated translation 5962903914511361952 -->     <string name="unlock_set_unlock_disabled_summary" msgid="2120729867788851674">"已由远程设备管理员停用"</string>
     <string name="unlock_set_unlock_mode_off" msgid="378729687629105388">"关闭"</string>
     <string name="unlock_set_unlock_mode_none" msgid="7137296704741184239">"无安全措施"</string>
     <string name="unlock_set_unlock_mode_pattern" msgid="464022606293547390">"使用图案设置安全保护"</string>
@@ -599,6 +599,13 @@
     <string name="brightness_summary" msgid="838917350127550703">"调整屏幕亮度"</string>
     <string name="screen_timeout" msgid="6962654593018319466">"超时"</string>
     <string name="screen_timeout_summary" msgid="4471347210332380587">"屏幕会在 <xliff:g id="TIMEOUT_DESCRIPTION">%1$s</xliff:g>后自动关闭"</string>
+    <string name="dream_settings_title" msgid="6536876013377446805">"Android Dream"</string>
+    <string name="dream_settings_summary" msgid="6809871648071408259">"屏幕保护程序和其他待机程序"</string>
+    <string name="dream_component_title" msgid="505229894674572578">"所选 Dream"</string>
+    <string name="dream_timeout_title" msgid="1385909618566514628">"激活时间"</string>
+    <string name="dream_timeout_summary" msgid="6721955887728454226">"闲置 <xliff:g id="TIMEOUT_DESCRIPTION">%1$s</xliff:g>后"</string>
+    <string name="dream_timeout_zero_summary" msgid="2450290346381400092">"从不"</string>
+    <string name="dream_test" msgid="5968002644622194481">"试试看！"</string>
     <string name="automatic_brightness" msgid="5014143533884135461">"自动调整亮度"</string>
     <string name="title_font_size" msgid="4405544325522105222">"字体大小"</string>
     <string name="summary_font_size" msgid="7548243392515500554">"整体字体大小"</string>
@@ -681,13 +688,12 @@
     <string name="sd_insert_summary" product="default" msgid="2048640010381803841">"插入 SD 卡进行安装"</string>
     <string name="sd_mount" product="nosdcard" msgid="8966695015677343116">"装载 USB 存储设备"</string>
     <string name="sd_mount" product="default" msgid="5940523765187704135">"安装 SD 卡"</string>
-    <string name="sd_mount_summary" product="nosdcard" msgid="1794150364965145726">"装载 USB 存储器"</string>
-    <string name="sd_mount_summary" product="default" msgid="4936591681679097699">"安装 SD 卡"</string>
+    <string name="sd_mount_summary" product="nosdcard" msgid="4673411327373419641"></string>
+    <string name="sd_mount_summary" product="default" msgid="4673411327373419641"></string>
     <string name="sd_format" product="nosdcard" msgid="2148179271623099054">"格式化 USB 存储设备"</string>
     <string name="sd_format" product="default" msgid="2576054280507119870">"格式化 SD 卡"</string>
     <string name="sd_format_summary" product="nosdcard" msgid="6331905044907914603">"清除内部 USB 存储设备中的全部数据，例如音乐和照片"</string>
     <string name="sd_format_summary" product="default" msgid="212703692181793109">"清除 SD 卡中的全部数据，例如音乐和照片"</string>
-    <string name="sd_unavailable" msgid="8580107589533213904">"不可用"</string>
     <string name="read_only" msgid="6702420168629076340">" （只读）"</string>
     <string name="dlg_confirm_unmount_title" product="nosdcard" msgid="2349876662428231297">"卸载 USB 存储设备"</string>
     <string name="dlg_confirm_unmount_title" product="default" msgid="8612140627310646730">"卸载 SD 卡"</string>
@@ -903,6 +909,7 @@
     <string name="application_info_label" msgid="1150486628158409543">"应用程序信息"</string>
     <string name="storage_label" msgid="8700867073480107253">"存储"</string>
     <string name="auto_launch_label" msgid="3012617472833815382">"默认启动"</string>
+    <string name="screen_compatibility_label" msgid="663250687205465394">"屏幕兼容性"</string>
     <string name="permissions_label" msgid="2605296874922726203">"权限"</string>
     <string name="cache_header_label" msgid="1877197634162461830">"缓存"</string>
     <string name="clear_cache_btn_text" msgid="5756314834291116325">"清除缓存"</string>
@@ -922,6 +929,9 @@
     <string name="auto_launch_enable_text" msgid="2630656657744196691">"您已选择在默认情况下对某些操作启动此应用程序。"</string>
     <string name="auto_launch_disable_text" msgid="7800385822185540166">"无默认设置。"</string>
     <string name="clear_activities" msgid="7408923511535174430">"清除默认设置"</string>
+    <string name="screen_compatibility_text" msgid="2398570332021220651">"此应用程序可能不是针对您的屏幕而设计的；您可以在此处调整其显示尺寸/比例，使其适合您的屏幕。"</string>
+    <string name="ask_compatibility" msgid="7225195569089607846">"启动时确认"</string>
+    <string name="enable_compatibility" msgid="3257284255974065538">"调整应用程序的显示尺寸/比例"</string>
     <string name="unknown" msgid="1592123443519355854">"未知"</string>
     <string name="sort_order_alpha" msgid="1410278099123670628">"按姓名排序"</string>
     <string name="sort_order_size" msgid="7024513286636502362">"按大小排序"</string>
@@ -1109,6 +1119,8 @@
     <string name="accessibility_power_button_category" msgid="8545885236482339928">"“电源”按钮"</string>
     <string name="accessibility_power_button_ends_call" msgid="7698764194501089533">"按“电源”按钮结束通话"</string>
     <string name="accessibility_power_button_ends_call_summary" msgid="8878097632186291462">"通话时，按下“电源”将结束通话而不是关闭屏幕"</string>
+    <!-- no translation found for settings_button (3006713718908152930) -->
+    <skip />
     <string name="touchscreen_gestures_category" msgid="3109869155350859625">"触摸屏手势"</string>
     <string name="long_press_timeout_selector_title" msgid="1396876537252863044">"触摸和按住延迟"</string>
     <string name="long_press_timeout_selector_summary" msgid="2261114502740278996">"延迟至用户执行触摸和按住操作"</string>
@@ -1316,19 +1328,21 @@
     <string name="credentials_install_summary" product="nosdcard" msgid="4220422806818210676">"从存储设备安装证书"</string>
     <string name="credentials_install_summary" product="default" msgid="5737658257407822713">"从 SD 卡安装证书"</string>
     <string name="credentials_reset" msgid="3239382277144980418">"清除凭据"</string>
-    <string name="credentials_reset_summary" msgid="3810369467217453606">"删除所有内容并重置密码"</string>
+    <!-- outdated translation 2127419861568976637 -->     <string name="credentials_reset_summary" msgid="3369361230171260282">"清除所有内容的凭证存储并重置其密码"</string>
     <string name="credentials_unlock" msgid="1463040326264133844">"输入密码"</string>
     <string name="credentials_unlock_hint" msgid="5889551635843338639">"输入凭据存储密码。"</string>
     <string name="credentials_old_password" msgid="7553393815538684028">"当前密码："</string>
-    <string name="credentials_reset_hint" msgid="2336340927894094814">"系统会删除所有内容并重置密码。您确定要执行此操作吗？"</string>
+    <!-- outdated translation 7883277320781857760 -->     <string name="credentials_reset_hint" msgid="1566409057833618877">"确定要删除所有凭证，并且重置凭证存储密码吗？"</string>
     <string name="credentials_password_too_short" msgid="7502749986405522663">"密码至少应包含 8 个字符。"</string>
     <string name="credentials_wrong_password" msgid="2541932597104054807">"密码不正确。"</string>
     <string name="credentials_reset_warning" msgid="5320653011511797600">"密码不正确。您还可以重试一次，如果输入的密码仍不正确，系统将删除凭据存储。"</string>
     <string name="credentials_reset_warning_plural" msgid="6514085665301095279">"密码不正确。您还可以重试 <xliff:g id="NUMBER">%1$d</xliff:g> 次，如果输入的密码仍不正确，系统将删除凭据存储。"</string>
     <string name="credentials_erased" msgid="2907836028586342969">"凭据存储已删除。"</string>
-    <!-- no translation found for credentials_not_erased (7098106773249438137) -->
+    <!-- no translation found for credentials_not_erased (397954733557821269) -->
     <skip />
     <string name="credentials_enabled" msgid="7588607413349978930">"凭证存储已启用。"</string>
+    <!-- no translation found for credentials_configure_lock_screen_hint (6816970208840577219) -->
+    <skip />
     <string name="emergency_tone_title" msgid="1055954530111587114">"紧急提示音"</string>
     <string name="emergency_tone_summary" msgid="722259232924572153">"设置进行紧急呼救时的行为"</string>
     <string name="privacy_settings" msgid="9206631214140954954">"隐私权"</string>

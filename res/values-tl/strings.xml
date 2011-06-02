@@ -316,7 +316,7 @@
     <string name="unlock_set_unlock_pin_summary" msgid="5556722736289132512">"Nangangailangan ng numeric na PIN upang i-unlock ang screen"</string>
     <string name="unlock_set_unlock_password_title" msgid="8775603825675090937">"Password"</string>
     <string name="unlock_set_unlock_password_summary" msgid="7871968012198279034">"Nangangailangan ng password upang i-unlock ang screen"</string>
-    <string name="unlock_set_unlock_disabled_summary" msgid="8563103042330816018">"Hindi pinagana ng admin o patakaran sa encryption"</string>
+    <!-- outdated translation 5962903914511361952 -->     <string name="unlock_set_unlock_disabled_summary" msgid="2120729867788851674">"Hindi pinagana ng administrator ng remote device"</string>
     <string name="unlock_set_unlock_mode_off" msgid="378729687629105388">"Naka-off"</string>
     <string name="unlock_set_unlock_mode_none" msgid="7137296704741184239">"Walang seguridad"</string>
     <string name="unlock_set_unlock_mode_pattern" msgid="464022606293547390">"Naka-secure na may pattern"</string>
@@ -599,6 +599,13 @@
     <string name="brightness_summary" msgid="838917350127550703">"Ayusin ang liwanag ng screen"</string>
     <string name="screen_timeout" msgid="6962654593018319466">"Timeout"</string>
     <string name="screen_timeout_summary" msgid="4471347210332380587">"Awtomatikong nag-o-off ang screen pagkatapos ng <xliff:g id="TIMEOUT_DESCRIPTION">%1$s</xliff:g>"</string>
+    <string name="dream_settings_title" msgid="6536876013377446805">"Android Dreams"</string>
+    <string name="dream_settings_summary" msgid="6809871648071408259">"Mga screen saver at iba pang mga dibersyon ng idle"</string>
+    <string name="dream_component_title" msgid="505229894674572578">"Napiling dream"</string>
+    <string name="dream_timeout_title" msgid="1385909618566514628">"Kailan ia-activate"</string>
+    <string name="dream_timeout_summary" msgid="6721955887728454226">"Pagkatapos ng idle ng paggugol ng <xliff:g id="TIMEOUT_DESCRIPTION">%1$s</xliff:g>"</string>
+    <string name="dream_timeout_zero_summary" msgid="2450290346381400092">"Hindi Kailanman"</string>
+    <string name="dream_test" msgid="5968002644622194481">"Subukan ito!"</string>
     <string name="automatic_brightness" msgid="5014143533884135461">"Awtomatikong pagliwanag"</string>
     <string name="title_font_size" msgid="4405544325522105222">"Laki ng font"</string>
     <string name="summary_font_size" msgid="7548243392515500554">"Pangkalahatang laki ng mga font"</string>
@@ -681,13 +688,12 @@
     <string name="sd_insert_summary" product="default" msgid="2048640010381803841">"Maglagay ng SD card para sa pag-mount"</string>
     <string name="sd_mount" product="nosdcard" msgid="8966695015677343116">"I-mount imbakan na USB"</string>
     <string name="sd_mount" product="default" msgid="5940523765187704135">"I-mount ang SD card"</string>
-    <string name="sd_mount_summary" product="nosdcard" msgid="1794150364965145726">"I-mount ang imbakan na USB"</string>
-    <string name="sd_mount_summary" product="default" msgid="4936591681679097699">"I-mount ang SD card"</string>
+    <string name="sd_mount_summary" product="nosdcard" msgid="4673411327373419641"></string>
+    <string name="sd_mount_summary" product="default" msgid="4673411327373419641"></string>
     <string name="sd_format" product="nosdcard" msgid="2148179271623099054">"Burahin imbakan na USB"</string>
     <string name="sd_format" product="default" msgid="2576054280507119870">"Burahin ang SD card"</string>
     <string name="sd_format_summary" product="nosdcard" msgid="6331905044907914603">"Buburahin lahat ng data sa panloob na imbakan na USB, gaya ng musika at larawan"</string>
     <string name="sd_format_summary" product="default" msgid="212703692181793109">"Binubura ang lahat ng data sa SD card, gaya ng mga musika at larawan"</string>
-    <string name="sd_unavailable" msgid="8580107589533213904">"Hindi available"</string>
     <string name="read_only" msgid="6702420168629076340">" (Read-only)"</string>
     <string name="dlg_confirm_unmount_title" product="nosdcard" msgid="2349876662428231297">"I-unmount imbakan na USB"</string>
     <string name="dlg_confirm_unmount_title" product="default" msgid="8612140627310646730">"I-unmount ang SD card"</string>
@@ -903,6 +909,7 @@
     <string name="application_info_label" msgid="1150486628158409543">"Impormasyon ng application"</string>
     <string name="storage_label" msgid="8700867073480107253">"Imbakan"</string>
     <string name="auto_launch_label" msgid="3012617472833815382">"Paglunsad bilang default"</string>
+    <string name="screen_compatibility_label" msgid="663250687205465394">"Pagiging tugma ng screen"</string>
     <string name="permissions_label" msgid="2605296874922726203">"Mga Pahintulot"</string>
     <string name="cache_header_label" msgid="1877197634162461830">"Cache"</string>
     <string name="clear_cache_btn_text" msgid="5756314834291116325">"I-clear ang cache"</string>
@@ -922,6 +929,9 @@
     <string name="auto_launch_enable_text" msgid="2630656657744196691">"Pinili mong ilunsad ang application na ito bilang default para sa ilang pagkilos."</string>
     <string name="auto_launch_disable_text" msgid="7800385822185540166">"Walang nakatakdang mga default."</string>
     <string name="clear_activities" msgid="7408923511535174430">"I-clear ang mga default"</string>
+    <string name="screen_compatibility_text" msgid="2398570332021220651">"Maaaring hindi nakadisenyo ang application na ito para sa iyong screen; makokontrol mo kung paano ito umaakma sa iyong screen dito."</string>
+    <string name="ask_compatibility" msgid="7225195569089607846">"Magtanong kapag nailunsad"</string>
+    <string name="enable_compatibility" msgid="3257284255974065538">"I-scale ang application"</string>
     <string name="unknown" msgid="1592123443519355854">"Hindi Kilala"</string>
     <string name="sort_order_alpha" msgid="1410278099123670628">"Pag-uri-uriin sa pangalan"</string>
     <string name="sort_order_size" msgid="7024513286636502362">"Pag-uri-uriin ayon sa laki"</string>
@@ -1027,10 +1037,8 @@
     <string name="show_password_summary" msgid="3806709974395178121">"Ipakita ang password habang nagta-type ka"</string>
     <string name="ime_security_warning" msgid="812267421486877917">"Maaaring magawa ng pamamaraan ng pag-input na ito na makolekta ang lahat ng teksto na iyong tina-type, kasama ang personal na data tulad ng mga password at mga numero ng credit card. Nanggagaling ito mula sa application na <xliff:g id="IME_APPLICATION_NAME">%1$s</xliff:g>. Gamitin ang pamamaraan ng pag-input na ito?"</string>
     <string name="user_dict_settings_titlebar" msgid="765659257455000490">"Diksyunaryo ng user"</string>
-    <!-- no translation found for user_dict_single_settings_title (5454855286173849284) -->
-    <skip />
-    <!-- no translation found for user_dict_multiple_settings_title (326583195525296750) -->
-    <skip />
+    <string name="user_dict_single_settings_title" msgid="5454855286173849284">"Diksyunaryo ng user"</string>
+    <string name="user_dict_multiple_settings_title" msgid="326583195525296750">"Pamahalaan ang mga diksyunaryo ng user"</string>
     <string name="user_dict_settings_summary" msgid="7965571192902870454"></string>
     <string name="user_dict_settings_add_menu_title" msgid="4056762757149923551">"Magdagdag"</string>
     <string name="user_dict_settings_add_dialog_title" msgid="4702613990174126482">"Idagdag sa diksyunaryo"</string>
@@ -1039,8 +1047,7 @@
     <string name="user_dict_settings_context_menu_delete_title" msgid="9140703913776549054">"Tanggalin"</string>
     <string name="user_dict_settings_empty_text" product="tablet" msgid="1766522102636921529">"Wala kang anumang mga salita sa diksyunaryo ng user. Maaari kang magdagdag ng salita sa pamamagitan ng pagpindot ng pindutan na Magdagdag ( + )."</string>
     <string name="user_dict_settings_empty_text" product="default" msgid="6209268025109242806">"Wala kang anumang mga salita sa diksyunaryo ng user. Maaari kang magdagdag ng salita sa pamamagitan ng menu."</string>
-    <!-- no translation found for user_dict_settings_all_languages (7713910347678213719) -->
-    <skip />
+    <string name="user_dict_settings_all_languages" msgid="7713910347678213719">"Lahat ng mga wika"</string>
     <string name="testing" msgid="6584352735303604146">"Pagsubok"</string>
     <string name="testing_phone_info" product="tablet" msgid="193561832258534798">"Impormasyon ng tablet"</string>
     <string name="testing_phone_info" product="default" msgid="8656693364332840056">"Impormasyon ng telepono"</string>
@@ -1112,6 +1119,8 @@
     <string name="accessibility_power_button_category" msgid="8545885236482339928">"Pindutan ng power"</string>
     <string name="accessibility_power_button_ends_call" msgid="7698764194501089533">"Winawakasan ng pindutan ng power ang tawag"</string>
     <string name="accessibility_power_button_ends_call_summary" msgid="8878097632186291462">"Sa panahon ng pagtawag, tinatapos ng Power ang tawag sa halip na i-off ang screen"</string>
+    <!-- no translation found for settings_button (3006713718908152930) -->
+    <skip />
     <string name="touchscreen_gestures_category" msgid="3109869155350859625">"Mga kilos na touchscreen"</string>
     <string name="long_press_timeout_selector_title" msgid="1396876537252863044">"Pagkaantala ng pagpindot na matagal"</string>
     <string name="long_press_timeout_selector_summary" msgid="2261114502740278996">"Pagkaantala hanggang makilala ang isang pagpindot bilang pagpindot nang matagal"</string>
@@ -1319,19 +1328,21 @@
     <string name="credentials_install_summary" product="nosdcard" msgid="4220422806818210676">"Mag-install ng mga certificate mula sa storage"</string>
     <string name="credentials_install_summary" product="default" msgid="5737658257407822713">"Mag-install ng mga certificate mula sa SD card"</string>
     <string name="credentials_reset" msgid="3239382277144980418">"I-clear ang mga kredensyal"</string>
-    <string name="credentials_reset_summary" msgid="3810369467217453606">"Alisin ang lahat ng mga nilalaman at i-reset ang password"</string>
+    <!-- outdated translation 2127419861568976637 -->     <string name="credentials_reset_summary" msgid="3369361230171260282">"I-clear ang imbakan ng kredensyal ng lahat ng mga nilalaman at i-reset ang password nito"</string>
     <string name="credentials_unlock" msgid="1463040326264133844">"Magpasok ng password"</string>
     <string name="credentials_unlock_hint" msgid="5889551635843338639">"Ipasok ang password para sa storage ng kredensyal."</string>
     <string name="credentials_old_password" msgid="7553393815538684028">"Kasalukuyang password:"</string>
-    <string name="credentials_reset_hint" msgid="2336340927894094814">"Maaalis ang lahat ng mga nilalaman, at mare-reset ang password. Sigurado ka ba tungkol doon?"</string>
+    <!-- outdated translation 7883277320781857760 -->     <string name="credentials_reset_hint" msgid="1566409057833618877">"Sigurado ka bang gusto mong tanggalin ang lahat ng mga kredensyal at i-reset ang password ng imbakan ng kredensyal?"</string>
     <string name="credentials_password_too_short" msgid="7502749986405522663">"Dapat na may hindi bababa sa 8 character ang password."</string>
     <string name="credentials_wrong_password" msgid="2541932597104054807">"Hindi tamang password."</string>
     <string name="credentials_reset_warning" msgid="5320653011511797600">"Hindi tamang password. Mayroon kang isa pang pagkakataon bago mabura ang imbakan ng kredensyal."</string>
     <string name="credentials_reset_warning_plural" msgid="6514085665301095279">"Hindi tamang password. Mayroon kang <xliff:g id="NUMBER">%1$d</xliff:g> pang pagkakataon bago mabura ang imbakan ng kredensyal."</string>
     <string name="credentials_erased" msgid="2907836028586342969">"Binura storage ng kredensyal."</string>
-    <!-- no translation found for credentials_not_erased (7098106773249438137) -->
+    <!-- no translation found for credentials_not_erased (397954733557821269) -->
     <skip />
     <string name="credentials_enabled" msgid="7588607413349978930">"Pinagana ang imbakan ng kredensyal."</string>
+    <!-- no translation found for credentials_configure_lock_screen_hint (6816970208840577219) -->
+    <skip />
     <string name="emergency_tone_title" msgid="1055954530111587114">"Tonong pang-emergency"</string>
     <string name="emergency_tone_summary" msgid="722259232924572153">"Itakda ang pag-uugali kapag naganap ang isang pang-emergency na tawag"</string>
     <string name="privacy_settings" msgid="9206631214140954954">"Privacy"</string>

@@ -316,7 +316,7 @@
     <string name="unlock_set_unlock_pin_summary" msgid="5556722736289132512">"ต้องใช้ PIN ตัวเลขเพื่อปลดล็อคหน้าจอ"</string>
     <string name="unlock_set_unlock_password_title" msgid="8775603825675090937">"รหัสผ่าน"</string>
     <string name="unlock_set_unlock_password_summary" msgid="7871968012198279034">"ต้องใช้รหัสผ่านเพื่อปลดล็อคหน้าจอ"</string>
-    <string name="unlock_set_unlock_disabled_summary" msgid="8563103042330816018">"ปิดใช้งานโดยผู้ดูแลระบบหรือนโยบายการเข้ารหัส"</string>
+    <!-- outdated translation 5962903914511361952 -->     <string name="unlock_set_unlock_disabled_summary" msgid="2120729867788851674">"ปิดใช้งานโดยผู้ดูแลระบบอุปกรณ์รีโมต"</string>
     <string name="unlock_set_unlock_mode_off" msgid="378729687629105388">"ปิด"</string>
     <string name="unlock_set_unlock_mode_none" msgid="7137296704741184239">"ไม่มีการรักษาความปลอดภัย"</string>
     <string name="unlock_set_unlock_mode_pattern" msgid="464022606293547390">"รักษาความปลอดภัยด้วยรูปแบบ"</string>
@@ -599,6 +599,13 @@
     <string name="brightness_summary" msgid="838917350127550703">"ปรับความสว่างหน้าจอ"</string>
     <string name="screen_timeout" msgid="6962654593018319466">"ระยะหมดเวลา"</string>
     <string name="screen_timeout_summary" msgid="4471347210332380587">"หน้าจอปิดการทำงานโดยอัตโนมัติหลังจาก <xliff:g id="TIMEOUT_DESCRIPTION">%1$s</xliff:g>"</string>
+    <string name="dream_settings_title" msgid="6536876013377446805">"Android Dreams"</string>
+    <string name="dream_settings_summary" msgid="6809871648071408259">"โปรแกรมรักษาหน้าจอและการควบคุมการไม่มีกิจกรรมอื่นๆ"</string>
+    <string name="dream_component_title" msgid="505229894674572578">"Dream ที่เลือก"</string>
+    <string name="dream_timeout_title" msgid="1385909618566514628">"เวลาที่เปิดใช้งาน"</string>
+    <string name="dream_timeout_summary" msgid="6721955887728454226">"หลังจากไม่มีกิจกรรมเป็นเวลา <xliff:g id="TIMEOUT_DESCRIPTION">%1$s</xliff:g>"</string>
+    <string name="dream_timeout_zero_summary" msgid="2450290346381400092">"ไม่เลย"</string>
+    <string name="dream_test" msgid="5968002644622194481">"ลองใช้งาน!"</string>
     <string name="automatic_brightness" msgid="5014143533884135461">"ปรับความสว่างอัตโนมัติ"</string>
     <string name="title_font_size" msgid="4405544325522105222">"ขนาดอักษร"</string>
     <string name="summary_font_size" msgid="7548243392515500554">"ขนาดโดยรวมของอักษร"</string>
@@ -681,13 +688,12 @@
     <string name="sd_insert_summary" product="default" msgid="2048640010381803841">"เสียบการ์ด SD เพื่อต่อเชื่อม"</string>
     <string name="sd_mount" product="nosdcard" msgid="8966695015677343116">"ต่อเชื่อมที่เก็บข้อมูล USB"</string>
     <string name="sd_mount" product="default" msgid="5940523765187704135">"ต่อเชื่อมการ์ด SD"</string>
-    <string name="sd_mount_summary" product="nosdcard" msgid="1794150364965145726">"ต่อเชื่อมที่เก็บข้อมูล USB"</string>
-    <string name="sd_mount_summary" product="default" msgid="4936591681679097699">"ต่อเชื่อมการ์ด SD"</string>
+    <string name="sd_mount_summary" product="nosdcard" msgid="4673411327373419641"></string>
+    <string name="sd_mount_summary" product="default" msgid="4673411327373419641"></string>
     <string name="sd_format" product="nosdcard" msgid="2148179271623099054">"ลบที่เก็บข้อมูล USB"</string>
     <string name="sd_format" product="default" msgid="2576054280507119870">"ลบการ์ด SD"</string>
     <string name="sd_format_summary" product="nosdcard" msgid="6331905044907914603">"ลบข้อมูลทั้งหมดบนที่เก็บข้อมูล USB ภายใน เช่น เพลงและรูปภาพ"</string>
     <string name="sd_format_summary" product="default" msgid="212703692181793109">"ลบข้อมูลทั้งหมดบนการ์ด SD เช่น เพลงและรูปภาพ"</string>
-    <string name="sd_unavailable" msgid="8580107589533213904">"ไม่ว่าง"</string>
     <string name="read_only" msgid="6702420168629076340">" (อ่านอย่างเดียว)"</string>
     <string name="dlg_confirm_unmount_title" product="nosdcard" msgid="2349876662428231297">"ยกเลิกการต่อเชื่อมที่เก็บข้อมูล USB"</string>
     <string name="dlg_confirm_unmount_title" product="default" msgid="8612140627310646730">"ยกเลิกการต่อเชื่อมการ์ด SD"</string>
@@ -903,6 +909,7 @@
     <string name="application_info_label" msgid="1150486628158409543">"ข้อมูลแอปพลิเคชัน"</string>
     <string name="storage_label" msgid="8700867073480107253">"พื้นที่เก็บข้อมูล"</string>
     <string name="auto_launch_label" msgid="3012617472833815382">"เริ่มใช้งานตามค่าเริ่มต้น"</string>
+    <string name="screen_compatibility_label" msgid="663250687205465394">"ความเข้ากันได้ของหน้าจอ"</string>
     <string name="permissions_label" msgid="2605296874922726203">"การอนุญาต"</string>
     <string name="cache_header_label" msgid="1877197634162461830">"แคช"</string>
     <string name="clear_cache_btn_text" msgid="5756314834291116325">"ล้างแคช"</string>
@@ -922,6 +929,9 @@
     <string name="auto_launch_enable_text" msgid="2630656657744196691">"คุณได้เลือกเริ่มการใช้งานแอปพลิเคชันนี้โดยค่าเริ่มต้นสำหรับการทำงานบางอย่าง"</string>
     <string name="auto_launch_disable_text" msgid="7800385822185540166">"ไม่ได้ตั้งค่าเริ่มต้น"</string>
     <string name="clear_activities" msgid="7408923511535174430">"ล้างค่าเริ่มต้น"</string>
+    <string name="screen_compatibility_text" msgid="2398570332021220651">"แอปพลิเคชันนี้อาจไม่ได้รับการออกแบบมาสำหรับหน้าจอของคุณ คุณสามารถควบคุมวิธีที่แอปพลิเคชันถูกปรับให้เข้ากับหน้าจอของคุณได้ที่นี่"</string>
+    <string name="ask_compatibility" msgid="7225195569089607846">"ถามเมื่อเปิดโปรแกรม"</string>
+    <string name="enable_compatibility" msgid="3257284255974065538">"กำหนดขนาดแอปพลิเคชัน"</string>
     <string name="unknown" msgid="1592123443519355854">"ไม่ทราบ"</string>
     <string name="sort_order_alpha" msgid="1410278099123670628">"จัดเรียงตามชื่อ"</string>
     <string name="sort_order_size" msgid="7024513286636502362">"จัดเรียงตามขนาด"</string>
@@ -1027,10 +1037,8 @@
     <string name="show_password_summary" msgid="3806709974395178121">"แสดงรหัสผ่านขณะพิมพ์"</string>
     <string name="ime_security_warning" msgid="812267421486877917">"วิธีป้อนข้อมูลนี้อาจเก็บข้อความทั้งหมดที่คุณพิมพ์ รวมถึงข้อมูลส่วนบุคคล เช่น รหัสผ่านและหมายเลขบัตรเครดิต โดยมาจากแอปพลิเคชัน<xliff:g id="IME_APPLICATION_NAME">%1$s</xliff:g> ใช้วิธีป้อนข้อมูลนี้หรือไม่"</string>
     <string name="user_dict_settings_titlebar" msgid="765659257455000490">"พจนานุกรมของผู้ใช้"</string>
-    <!-- no translation found for user_dict_single_settings_title (5454855286173849284) -->
-    <skip />
-    <!-- no translation found for user_dict_multiple_settings_title (326583195525296750) -->
-    <skip />
+    <string name="user_dict_single_settings_title" msgid="5454855286173849284">"พจนานุกรมของผู้ใช้"</string>
+    <string name="user_dict_multiple_settings_title" msgid="326583195525296750">"จัดการพจนานุกรมของผู้ใช้"</string>
     <string name="user_dict_settings_summary" msgid="7965571192902870454"></string>
     <string name="user_dict_settings_add_menu_title" msgid="4056762757149923551">"เพิ่ม"</string>
     <string name="user_dict_settings_add_dialog_title" msgid="4702613990174126482">"เพิ่มลงในพจนานุกรม"</string>
@@ -1039,8 +1047,7 @@
     <string name="user_dict_settings_context_menu_delete_title" msgid="9140703913776549054">"ลบ"</string>
     <string name="user_dict_settings_empty_text" product="tablet" msgid="1766522102636921529">"คุณไม่มีคำใดๆ ในพจนานุกรมผู้ใช้ คุณสามารถเพิ่มคำได้โดยแตะปุ่ม เพิ่ม ( + )"</string>
     <string name="user_dict_settings_empty_text" product="default" msgid="6209268025109242806">"คุณไม่มีคำใดๆ ในพจนานุกรมผู้ใช้ คุณสามารถเพิ่มคำได้ผ่านทางเมนู"</string>
-    <!-- no translation found for user_dict_settings_all_languages (7713910347678213719) -->
-    <skip />
+    <string name="user_dict_settings_all_languages" msgid="7713910347678213719">"ทุกภาษา"</string>
     <string name="testing" msgid="6584352735303604146">"กำลังทดสอบ"</string>
     <string name="testing_phone_info" product="tablet" msgid="193561832258534798">"ข้อมูลแท็บเล็ต"</string>
     <string name="testing_phone_info" product="default" msgid="8656693364332840056">"ข้อมูลโทรศัพท์"</string>
@@ -1112,6 +1119,8 @@
     <string name="accessibility_power_button_category" msgid="8545885236482339928">"ปุ่มเปิด/ปิดเครื่อง"</string>
     <string name="accessibility_power_button_ends_call" msgid="7698764194501089533">"กดปุ่มเปิด/ปิดเพื่อวางสาย"</string>
     <string name="accessibility_power_button_ends_call_summary" msgid="8878097632186291462">"ขณะโทร การกดปุ่มเปิด/ปิดเครื่องจะวางสายแทนที่จะปิดหน้าจอ"</string>
+    <!-- no translation found for settings_button (3006713718908152930) -->
+    <skip />
     <string name="touchscreen_gestures_category" msgid="3109869155350859625">"ลักษณะการลากนิ้วบนจอสัมผัส"</string>
     <string name="long_press_timeout_selector_title" msgid="1396876537252863044">"การหน่วงเวลาการแตะ &amp; ค้างไว้"</string>
     <string name="long_press_timeout_selector_summary" msgid="2261114502740278996">"หน่วงเวลาจนกว่าจะแตะหมายถึงการแตะ&amp;ค้าง"</string>
@@ -1319,19 +1328,21 @@
     <string name="credentials_install_summary" product="nosdcard" msgid="4220422806818210676">"ติดตั้งใบรับรองจากที่เก็บข้อมูล"</string>
     <string name="credentials_install_summary" product="default" msgid="5737658257407822713">"ติดตั้งใบรับรองจากการ์ด SD"</string>
     <string name="credentials_reset" msgid="3239382277144980418">"ล้างข้อมูลรับรอง"</string>
-    <string name="credentials_reset_summary" msgid="3810369467217453606">"นำข้อมูลทั้งหมดออกและรีเซ็ตรหัสผ่าน"</string>
+    <!-- outdated translation 2127419861568976637 -->     <string name="credentials_reset_summary" msgid="3369361230171260282">"ล้างข้อมูลทั้งหมดในที่จัดเก็บข้อมูลรับรองและรีเซ็ตรหัสผ่าน"</string>
     <string name="credentials_unlock" msgid="1463040326264133844">"ป้อนรหัสผ่าน"</string>
     <string name="credentials_unlock_hint" msgid="5889551635843338639">"ใส่รหัสผ่านสำหรับที่จัดเก็บข้อมูลรับรอง"</string>
     <string name="credentials_old_password" msgid="7553393815538684028">"รหัสผ่านปัจจุบัน:"</string>
-    <string name="credentials_reset_hint" msgid="2336340927894094814">"เนื้อหาทั้งหมดจะถูกลบและมีการรีเซ็ตรหัสผ่านนี้ คุณแน่ใจหรือไม่"</string>
+    <!-- outdated translation 7883277320781857760 -->     <string name="credentials_reset_hint" msgid="1566409057833618877">"คุณแน่ใจหรือไม่ว่าต้องการลบข้อมูลรับรองทั้งหมดและรีเซ็ตรหัสผ่านที่เก็บข้อมูลรับรอง"</string>
     <string name="credentials_password_too_short" msgid="7502749986405522663">"รหัสผ่านต้องมีอักขระอย่างน้อย 8 ตัว"</string>
     <string name="credentials_wrong_password" msgid="2541932597104054807">"รหัสผ่านไม่ถูกต้อง"</string>
     <string name="credentials_reset_warning" msgid="5320653011511797600">"รหัสผ่านไม่ถูกต้อง คุณมีโอกาสหนึ่งครั้งก่อนที่ที่จัดเก็บข้อมูลรับรองจะถูกลบ"</string>
     <string name="credentials_reset_warning_plural" msgid="6514085665301095279">"รหัสผ่านไม่ถูกต้อง คุณมีโอกาสอีก <xliff:g id="NUMBER">%1$d</xliff:g> ครั้งก่อนที่ที่จัดเก็บข้อมูลรับรองจะถูกลบ"</string>
     <string name="credentials_erased" msgid="2907836028586342969">"ที่จัดเก็บข้อมูลรับรองถูกลบ"</string>
-    <!-- no translation found for credentials_not_erased (7098106773249438137) -->
+    <!-- no translation found for credentials_not_erased (397954733557821269) -->
     <skip />
     <string name="credentials_enabled" msgid="7588607413349978930">"เปิดการใช้งานที่จัดเก็บข้อมูลรับรองไว้"</string>
+    <!-- no translation found for credentials_configure_lock_screen_hint (6816970208840577219) -->
+    <skip />
     <string name="emergency_tone_title" msgid="1055954530111587114">"โทนเสียงฉุกเฉิน"</string>
     <string name="emergency_tone_summary" msgid="722259232924572153">"ตั้งค่าการทำงานเมื่อมีการโทรหาหมายเลขฉุกเฉิน"</string>
     <string name="privacy_settings" msgid="9206631214140954954">"ข้อมูลส่วนบุคคล"</string>

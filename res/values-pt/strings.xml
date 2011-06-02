@@ -111,7 +111,7 @@
     <string name="bluetooth_pairing" msgid="1426882272690346242">"Pareando…"</string>
     <string name="bluetooth_paired" msgid="1247541089000057726">"Pareado, mas não conectado"</string>
     <string name="bluetooth_device" msgid="6873461446424952003">"viva-voz/fone de ouvido"</string>
-    <string name="progress_scanning" msgid="3760897655335759141">"Verificando"</string>
+    <string name="progress_scanning" msgid="3760897655335759141">"Procurando"</string>
     <string name="bluetooth_notif_ticker" msgid="4726721390078512173">"Solicitação de pareamento Bluetooth"</string>
     <string name="bluetooth_notif_title" msgid="2485175521845371514">"Solicitação de pareamento"</string>
     <string name="bluetooth_notif_message" msgid="618099089987569242">"Selecione para parear <xliff:g id="DEVICE_NAME">%1$s</xliff:g>"</string>
@@ -316,7 +316,7 @@
     <string name="unlock_set_unlock_pin_summary" msgid="5556722736289132512">"Exige senha numérica para desbloquear a tela"</string>
     <string name="unlock_set_unlock_password_title" msgid="8775603825675090937">"Senha"</string>
     <string name="unlock_set_unlock_password_summary" msgid="7871968012198279034">"Exige uma senha para desbloquear a tela"</string>
-    <string name="unlock_set_unlock_disabled_summary" msgid="8563103042330816018">"Desativado pelo administrador ou pela política de criptografia"</string>
+    <!-- outdated translation 5962903914511361952 -->     <string name="unlock_set_unlock_disabled_summary" msgid="2120729867788851674">"Desativ. pelo administrador remoto do aparelho"</string>
     <string name="unlock_set_unlock_mode_off" msgid="378729687629105388">"Desativado"</string>
     <string name="unlock_set_unlock_mode_none" msgid="7137296704741184239">"Sem segurança"</string>
     <string name="unlock_set_unlock_mode_pattern" msgid="464022606293547390">"Protegido com padrão"</string>
@@ -599,6 +599,13 @@
     <string name="brightness_summary" msgid="838917350127550703">"Ajustar o brilho da tela"</string>
     <string name="screen_timeout" msgid="6962654593018319466">"Tempo limite"</string>
     <string name="screen_timeout_summary" msgid="4471347210332380587">"A tela é automaticamente desativada após <xliff:g id="TIMEOUT_DESCRIPTION">%1$s</xliff:g>"</string>
+    <string name="dream_settings_title" msgid="6536876013377446805">"Android Dreams"</string>
+    <string name="dream_settings_summary" msgid="6809871648071408259">"Protetores de tela e outras distrações"</string>
+    <string name="dream_component_title" msgid="505229894674572578">"Sonho selecionado"</string>
+    <string name="dream_timeout_title" msgid="1385909618566514628">"Quando ativar"</string>
+    <string name="dream_timeout_summary" msgid="6721955887728454226">"Após <xliff:g id="TIMEOUT_DESCRIPTION">%1$s</xliff:g> inativo"</string>
+    <string name="dream_timeout_zero_summary" msgid="2450290346381400092">"Nunca"</string>
+    <string name="dream_test" msgid="5968002644622194481">"Experimente!"</string>
     <string name="automatic_brightness" msgid="5014143533884135461">"Brilho automático"</string>
     <string name="title_font_size" msgid="4405544325522105222">"Tamanho da fonte"</string>
     <string name="summary_font_size" msgid="7548243392515500554">"Tamanho total das fontes"</string>
@@ -681,13 +688,12 @@
     <string name="sd_insert_summary" product="default" msgid="2048640010381803841">"Insira um cartão SD para conexão"</string>
     <string name="sd_mount" product="nosdcard" msgid="8966695015677343116">"Conectar armazenam. USB"</string>
     <string name="sd_mount" product="default" msgid="5940523765187704135">"Conectar cartão SD"</string>
-    <string name="sd_mount_summary" product="nosdcard" msgid="1794150364965145726">"Montar o armazenamento USB"</string>
-    <string name="sd_mount_summary" product="default" msgid="4936591681679097699">"Conectar o cartão SD"</string>
+    <string name="sd_mount_summary" product="nosdcard" msgid="4673411327373419641"></string>
+    <string name="sd_mount_summary" product="default" msgid="4673411327373419641"></string>
     <string name="sd_format" product="nosdcard" msgid="2148179271623099054">"Apagar armazenamento USB"</string>
     <string name="sd_format" product="default" msgid="2576054280507119870">"Apagar cartão SD"</string>
     <string name="sd_format_summary" product="nosdcard" msgid="6331905044907914603">"Apaga todos os dados do armazenamento USB interno, como músicas e fotos"</string>
     <string name="sd_format_summary" product="default" msgid="212703692181793109">"Apaga todos os dados do cartão SD, como músicas e fotos"</string>
-    <string name="sd_unavailable" msgid="8580107589533213904">"Não disponível"</string>
     <string name="read_only" msgid="6702420168629076340">" (Somente leitura)"</string>
     <string name="dlg_confirm_unmount_title" product="nosdcard" msgid="2349876662428231297">"Desconectar armaz. USB"</string>
     <string name="dlg_confirm_unmount_title" product="default" msgid="8612140627310646730">"Desconectar cartão SD"</string>
@@ -903,6 +909,7 @@
     <string name="application_info_label" msgid="1150486628158409543">"Informações do aplicativo"</string>
     <string name="storage_label" msgid="8700867073480107253">"Armazenamento"</string>
     <string name="auto_launch_label" msgid="3012617472833815382">"Iniciar por padrão"</string>
+    <string name="screen_compatibility_label" msgid="663250687205465394">"Compatibilidade de tela"</string>
     <string name="permissions_label" msgid="2605296874922726203">"Permissões"</string>
     <string name="cache_header_label" msgid="1877197634162461830">"Cache"</string>
     <string name="clear_cache_btn_text" msgid="5756314834291116325">"Limpar cache"</string>
@@ -922,6 +929,9 @@
     <string name="auto_launch_enable_text" msgid="2630656657744196691">"Você selecionou a inicialização padrão deste aplicativo para algumas ações."</string>
     <string name="auto_launch_disable_text" msgid="7800385822185540166">"Nenhum padrão definido."</string>
     <string name="clear_activities" msgid="7408923511535174430">"Limpar padrão"</string>
+    <string name="screen_compatibility_text" msgid="2398570332021220651">"Talvez este aplicativo não seja desenvolvido para sua tela. Você pode controlar o ajuste da tela aqui."</string>
+    <string name="ask_compatibility" msgid="7225195569089607846">"Perguntar ao iniciar"</string>
+    <string name="enable_compatibility" msgid="3257284255974065538">"Dimensionar aplicativo"</string>
     <string name="unknown" msgid="1592123443519355854">"Desconhecido"</string>
     <string name="sort_order_alpha" msgid="1410278099123670628">"Classificar por nome"</string>
     <string name="sort_order_size" msgid="7024513286636502362">"Classificar por tamanho"</string>
@@ -1109,6 +1119,8 @@
     <string name="accessibility_power_button_category" msgid="8545885236482339928">"Botão Liga/desliga"</string>
     <string name="accessibility_power_button_ends_call" msgid="7698764194501089533">"Botão Liga/desliga encerra a chamada"</string>
     <string name="accessibility_power_button_ends_call_summary" msgid="8878097632186291462">"Durante uma chamada, pressionar o botão Liga/desliga encerra a chamada em vez de desativar a tela."</string>
+    <!-- no translation found for settings_button (3006713718908152930) -->
+    <skip />
     <string name="touchscreen_gestures_category" msgid="3109869155350859625">"Gestos da tela de toque"</string>
     <string name="long_press_timeout_selector_title" msgid="1396876537252863044">"Atraso ao tocar e pressionar"</string>
     <string name="long_press_timeout_selector_summary" msgid="2261114502740278996">"Prolongue até que um toque seja interpretado como tocar e manter pressionado"</string>
@@ -1316,19 +1328,21 @@
     <string name="credentials_install_summary" product="nosdcard" msgid="4220422806818210676">"Instalar certificados do armazenamento"</string>
     <string name="credentials_install_summary" product="default" msgid="5737658257407822713">"Instalar certificados do cartão SD"</string>
     <string name="credentials_reset" msgid="3239382277144980418">"Limpar credenciais"</string>
-    <string name="credentials_reset_summary" msgid="3810369467217453606">"Remover todos os conteúdos e redefinir a senha"</string>
+    <!-- outdated translation 2127419861568976637 -->     <string name="credentials_reset_summary" msgid="3369361230171260282">"Remover todo o conteúdo do armazenamento de credenciais e redefinir a senha"</string>
     <string name="credentials_unlock" msgid="1463040326264133844">"Inserir senha"</string>
     <string name="credentials_unlock_hint" msgid="5889551635843338639">"Digite a senha para o armazenamento de credencial."</string>
     <string name="credentials_old_password" msgid="7553393815538684028">"Senha atual:"</string>
-    <string name="credentials_reset_hint" msgid="2336340927894094814">"Todos os conteúdos serão removidos e a senha será redefinida. Tem certeza de que deseja fazer isso?"</string>
+    <!-- outdated translation 7883277320781857760 -->     <string name="credentials_reset_hint" msgid="1566409057833618877">"Tem certeza de que deseja excluir todas as credenciais e redefinir a senha do armazenamento de credenciais?"</string>
     <string name="credentials_password_too_short" msgid="7502749986405522663">"A senha deve ter no mínimo 8 caracteres."</string>
     <string name="credentials_wrong_password" msgid="2541932597104054807">"Senha incorreta."</string>
     <string name="credentials_reset_warning" msgid="5320653011511797600">"Senha incorreta. Você tem uma ou mais tentativas antes do armazenamento de credencial ser apagado."</string>
     <string name="credentials_reset_warning_plural" msgid="6514085665301095279">"Senha incorreta. Você tem mais <xliff:g id="NUMBER">%1$d</xliff:g> tentativas antes do armazenamento de credencial ser apagado."</string>
     <string name="credentials_erased" msgid="2907836028586342969">"O armazenamento de credenciais foi apagado."</string>
-    <!-- no translation found for credentials_not_erased (7098106773249438137) -->
+    <!-- no translation found for credentials_not_erased (397954733557821269) -->
     <skip />
     <string name="credentials_enabled" msgid="7588607413349978930">"O armazenamento de credenciais foi ativado."</string>
+    <!-- no translation found for credentials_configure_lock_screen_hint (6816970208840577219) -->
+    <skip />
     <string name="emergency_tone_title" msgid="1055954530111587114">"Tom de emergência"</string>
     <string name="emergency_tone_summary" msgid="722259232924572153">"Definir comportamento durante uma chamada de emergência"</string>
     <string name="privacy_settings" msgid="9206631214140954954">"Privacidade"</string>
@@ -1374,7 +1388,7 @@
     <string name="wifi_setup_forget" msgid="2562847595567347526">"Esquecer"</string>
     <string name="wifi_setup_save" msgid="3659235094218508211">"Salvar"</string>
     <string name="wifi_setup_cancel" msgid="3185216020264410239">"Cancelar"</string>
-    <string name="wifi_setup_status_scanning" msgid="7424598483871053657">"Verificando redes..."</string>
+    <string name="wifi_setup_status_scanning" msgid="7424598483871053657">"Procurando redes..."</string>
     <string name="wifi_setup_status_select_network" msgid="7519563569903137003">"Toque em uma rede para se conectar a ela"</string>
     <string name="wifi_setup_status_existing_network" msgid="6394925174802598186">"Conectar-se à rede existente"</string>
     <string name="wifi_setup_status_unsecured_network" msgid="8143046977328718252">"Conectar-se à rede não segura"</string>

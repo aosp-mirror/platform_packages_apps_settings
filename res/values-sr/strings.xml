@@ -316,7 +316,7 @@
     <string name="unlock_set_unlock_pin_summary" msgid="5556722736289132512">"За откључавање екрана је потребан нумерички PIN"</string>
     <string name="unlock_set_unlock_password_title" msgid="8775603825675090937">"Лозинка"</string>
     <string name="unlock_set_unlock_password_summary" msgid="7871968012198279034">"Захтевање лозинке за откључавање екрана"</string>
-    <string name="unlock_set_unlock_disabled_summary" msgid="8563103042330816018">"Онемогућио администратор или смернице за шифровање"</string>
+    <!-- outdated translation 5962903914511361952 -->     <string name="unlock_set_unlock_disabled_summary" msgid="2120729867788851674">"Онемогућио администратор удаљеног уређаја"</string>
     <string name="unlock_set_unlock_mode_off" msgid="378729687629105388">"Искључено"</string>
     <string name="unlock_set_unlock_mode_none" msgid="7137296704741184239">"Безбедност је онемогућена"</string>
     <string name="unlock_set_unlock_mode_pattern" msgid="464022606293547390">"Обезбеђено помоћу шаблона"</string>
@@ -599,6 +599,13 @@
     <string name="brightness_summary" msgid="838917350127550703">"Прилагођавање осветљености екрана"</string>
     <string name="screen_timeout" msgid="6962654593018319466">"Време чекања"</string>
     <string name="screen_timeout_summary" msgid="4471347210332380587">"Екран се аутоматски искључује након <xliff:g id="TIMEOUT_DESCRIPTION">%1$s</xliff:g>"</string>
+    <string name="dream_settings_title" msgid="6536876013377446805">"Android Dreams"</string>
+    <string name="dream_settings_summary" msgid="6809871648071408259">"Чувари екрана и други начини за прекид неактивности"</string>
+    <string name="dream_component_title" msgid="505229894674572578">"Selected dream"</string>
+    <string name="dream_timeout_title" msgid="1385909618566514628">"Када да се активира"</string>
+    <string name="dream_timeout_summary" msgid="6721955887728454226">"Након <xliff:g id="TIMEOUT_DESCRIPTION">%1$s</xliff:g> стања неактивности"</string>
+    <string name="dream_timeout_zero_summary" msgid="2450290346381400092">"Никад"</string>
+    <string name="dream_test" msgid="5968002644622194481">"Испробај!"</string>
     <string name="automatic_brightness" msgid="5014143533884135461">"Аутоматски ниво осветљености"</string>
     <string name="title_font_size" msgid="4405544325522105222">"Величина фонта"</string>
     <string name="summary_font_size" msgid="7548243392515500554">"Општа величина фонтова"</string>
@@ -681,13 +688,12 @@
     <string name="sd_insert_summary" product="default" msgid="2048640010381803841">"Уметање SD картице за прикључивање"</string>
     <string name="sd_mount" product="nosdcard" msgid="8966695015677343116">"Прикључите USB меморију"</string>
     <string name="sd_mount" product="default" msgid="5940523765187704135">"Прикључивање SD картице"</string>
-    <string name="sd_mount_summary" product="nosdcard" msgid="1794150364965145726">"Прикључите USB меморију"</string>
-    <string name="sd_mount_summary" product="default" msgid="4936591681679097699">"Прикључивање SD картице"</string>
+    <string name="sd_mount_summary" product="nosdcard" msgid="4673411327373419641"></string>
+    <string name="sd_mount_summary" product="default" msgid="4673411327373419641"></string>
     <string name="sd_format" product="nosdcard" msgid="2148179271623099054">"Брисање USB меморије"</string>
     <string name="sd_format" product="default" msgid="2576054280507119870">"Брисање SD картице"</string>
     <string name="sd_format_summary" product="nosdcard" msgid="6331905044907914603">"Брише све податке из интерне USB меморије, као што су музика и фотографије"</string>
     <string name="sd_format_summary" product="default" msgid="212703692181793109">"Брише све податке са SD картице, као што су музика и фотографије"</string>
-    <string name="sd_unavailable" msgid="8580107589533213904">"Недоступно"</string>
     <string name="read_only" msgid="6702420168629076340">" (Само за читање)"</string>
     <string name="dlg_confirm_unmount_title" product="nosdcard" msgid="2349876662428231297">"Искључи USB меморију"</string>
     <string name="dlg_confirm_unmount_title" product="default" msgid="8612140627310646730">"Ослобађање SD картице"</string>
@@ -903,6 +909,7 @@
     <string name="application_info_label" msgid="1150486628158409543">"Информације о апликацији"</string>
     <string name="storage_label" msgid="8700867073480107253">"Складиште"</string>
     <string name="auto_launch_label" msgid="3012617472833815382">"Подразумевано покрени"</string>
+    <string name="screen_compatibility_label" msgid="663250687205465394">"Компатибилност екрана"</string>
     <string name="permissions_label" msgid="2605296874922726203">"Дозволе"</string>
     <string name="cache_header_label" msgid="1877197634162461830">"Кеш"</string>
     <string name="clear_cache_btn_text" msgid="5756314834291116325">"Обриши кеш"</string>
@@ -922,6 +929,9 @@
     <string name="auto_launch_enable_text" msgid="2630656657744196691">"Изабрали сте да се ова апликација подразумевано покреће за неке радње."</string>
     <string name="auto_launch_disable_text" msgid="7800385822185540166">"Нису постављене подразумеване вредности."</string>
     <string name="clear_activities" msgid="7408923511535174430">"Обриши подразумевано"</string>
+    <string name="screen_compatibility_text" msgid="2398570332021220651">"Ова апликација можда није дизајнирана за ваш екран; овде можете да управљате тиме како ће се прилагодити екрану."</string>
+    <string name="ask_compatibility" msgid="7225195569089607846">"Питај при покретању"</string>
+    <string name="enable_compatibility" msgid="3257284255974065538">"Подеси апликацију"</string>
     <string name="unknown" msgid="1592123443519355854">"Непознато"</string>
     <string name="sort_order_alpha" msgid="1410278099123670628">"Сортирај према имену"</string>
     <string name="sort_order_size" msgid="7024513286636502362">"Сортирај према величини"</string>
@@ -1109,6 +1119,8 @@
     <string name="accessibility_power_button_category" msgid="8545885236482339928">"Дугме за укључивање и искључивање"</string>
     <string name="accessibility_power_button_ends_call" msgid="7698764194501089533">"Дугме за укључивање/искључивање прекида позив"</string>
     <string name="accessibility_power_button_ends_call_summary" msgid="8878097632186291462">"Уколико током позива притиснете дугме за укључивање и искључивање, прекидате позив уместо да искључите екран"</string>
+    <!-- no translation found for settings_button (3006713718908152930) -->
+    <skip />
     <string name="touchscreen_gestures_category" msgid="3109869155350859625">"Покрети на додирном екрану"</string>
     <string name="long_press_timeout_selector_title" msgid="1396876537252863044">"Одлагање притискa и задржавањa"</string>
     <string name="long_press_timeout_selector_summary" msgid="2261114502740278996">"Одлагање док се додир не интерпретира као притисак и задржавање"</string>
@@ -1316,19 +1328,21 @@
     <string name="credentials_install_summary" product="nosdcard" msgid="4220422806818210676">"Инсталирај сертификате из меморије"</string>
     <string name="credentials_install_summary" product="default" msgid="5737658257407822713">"Инсталирање сертификата са SD картице"</string>
     <string name="credentials_reset" msgid="3239382277144980418">"Брисање акредитива"</string>
-    <string name="credentials_reset_summary" msgid="3810369467217453606">"Уклањање целокупног садржаја и поновно постављање лозинке"</string>
+    <!-- outdated translation 2127419861568976637 -->     <string name="credentials_reset_summary" msgid="3369361230171260282">"Брисање свог садржаја из складишта акредитива и поновно постављање лозинке"</string>
     <string name="credentials_unlock" msgid="1463040326264133844">"Унос лозинке"</string>
     <string name="credentials_unlock_hint" msgid="5889551635843338639">"Унесите лозинку за складиште акредитива."</string>
     <string name="credentials_old_password" msgid="7553393815538684028">"Тренутна лозинка:"</string>
-    <string name="credentials_reset_hint" msgid="2336340927894094814">"Сав садржај ће бити уклоњен, а лозинка ће бити поново постављена. Јесте ли сигурни да то желите?"</string>
+    <!-- outdated translation 7883277320781857760 -->     <string name="credentials_reset_hint" msgid="1566409057833618877">"Желите ли заиста да избришете све акредитиве и поново поставите лозинку за складиште акредитива?"</string>
     <string name="credentials_password_too_short" msgid="7502749986405522663">"Лозинка мора да има најмање 8 знакова."</string>
     <string name="credentials_wrong_password" msgid="2541932597104054807">"Нетачна лозинка."</string>
     <string name="credentials_reset_warning" msgid="5320653011511797600">"Нетачна лозинка. Имате још један унос пре брисања складишта акредитива."</string>
     <string name="credentials_reset_warning_plural" msgid="6514085665301095279">"Нетачна лозинка. Имате још <xliff:g id="NUMBER">%1$d</xliff:g> уноса пре брисања складишта акредитива."</string>
     <string name="credentials_erased" msgid="2907836028586342969">"Складиште акред. је избрисано."</string>
-    <!-- no translation found for credentials_not_erased (7098106773249438137) -->
+    <!-- no translation found for credentials_not_erased (397954733557821269) -->
     <skip />
     <string name="credentials_enabled" msgid="7588607413349978930">"Складиште акредитива је омогућено."</string>
+    <!-- no translation found for credentials_configure_lock_screen_hint (6816970208840577219) -->
+    <skip />
     <string name="emergency_tone_title" msgid="1055954530111587114">"Тон за хитне позиве"</string>
     <string name="emergency_tone_summary" msgid="722259232924572153">"Подешавање понашања када се успоставља хитни позив"</string>
     <string name="privacy_settings" msgid="9206631214140954954">"Приватност"</string>

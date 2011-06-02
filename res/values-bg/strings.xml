@@ -316,7 +316,7 @@
     <string name="unlock_set_unlock_pin_summary" msgid="5556722736289132512">"Изисква се цифров PIN за отключване на екрана"</string>
     <string name="unlock_set_unlock_password_title" msgid="8775603825675090937">"Парола"</string>
     <string name="unlock_set_unlock_password_summary" msgid="7871968012198279034">"Изисква се парола за отключване на екрана"</string>
-    <string name="unlock_set_unlock_disabled_summary" msgid="8563103042330816018">"Деактивирано от админ. или правилата за шифроване"</string>
+    <!-- outdated translation 5962903914511361952 -->     <string name="unlock_set_unlock_disabled_summary" msgid="2120729867788851674">"Деактивирано от отдалечен администратор на устройството"</string>
     <string name="unlock_set_unlock_mode_off" msgid="378729687629105388">"Изкл."</string>
     <string name="unlock_set_unlock_mode_none" msgid="7137296704741184239">"Без защита"</string>
     <string name="unlock_set_unlock_mode_pattern" msgid="464022606293547390">"Защитено с фигура"</string>
@@ -599,6 +599,13 @@
     <string name="brightness_summary" msgid="838917350127550703">"Наглася яркостта на екрана"</string>
     <string name="screen_timeout" msgid="6962654593018319466">"Време за изчакване"</string>
     <string name="screen_timeout_summary" msgid="4471347210332380587">"Екранът се изключва автоматично след <xliff:g id="TIMEOUT_DESCRIPTION">%1$s</xliff:g>"</string>
+    <string name="dream_settings_title" msgid="6536876013377446805">"Сънища в Android"</string>
+    <string name="dream_settings_summary" msgid="6809871648071408259">"Скрийнсейвъри и други средства за отвличане на вниманието, когато системата не е активна"</string>
+    <string name="dream_component_title" msgid="505229894674572578">"Избран сън"</string>
+    <string name="dream_timeout_title" msgid="1385909618566514628">"Кога да се активира"</string>
+    <string name="dream_timeout_summary" msgid="6721955887728454226">"След <xliff:g id="TIMEOUT_DESCRIPTION">%1$s</xliff:g> неактивност"</string>
+    <string name="dream_timeout_zero_summary" msgid="2450290346381400092">"Никога"</string>
+    <string name="dream_test" msgid="5968002644622194481">"Пробвайте!"</string>
     <string name="automatic_brightness" msgid="5014143533884135461">"Автоматична яркост"</string>
     <string name="title_font_size" msgid="4405544325522105222">"Размер на шрифта"</string>
     <string name="summary_font_size" msgid="7548243392515500554">"Общ размер на шрифтовете"</string>
@@ -681,13 +688,12 @@
     <string name="sd_insert_summary" product="default" msgid="2048640010381803841">"Поставете SD карта за активиране"</string>
     <string name="sd_mount" product="nosdcard" msgid="8966695015677343116">"Свързване на USB"</string>
     <string name="sd_mount" product="default" msgid="5940523765187704135">"Активиране на SD карта"</string>
-    <string name="sd_mount_summary" product="nosdcard" msgid="1794150364965145726">"Свързване на USB хранилището"</string>
-    <string name="sd_mount_summary" product="default" msgid="4936591681679097699">"Активиране на SD картата"</string>
+    <string name="sd_mount_summary" product="nosdcard" msgid="4673411327373419641"></string>
+    <string name="sd_mount_summary" product="default" msgid="4673411327373419641"></string>
     <string name="sd_format" product="nosdcard" msgid="2148179271623099054">"Изтриване на USB"</string>
     <string name="sd_format" product="default" msgid="2576054280507119870">"Изтриване на SD картата"</string>
     <string name="sd_format_summary" product="nosdcard" msgid="6331905044907914603">"Изтрива всички данни във вътрешното USB хранилище, като музика и снимки"</string>
     <string name="sd_format_summary" product="default" msgid="212703692181793109">"Изтрива всички данни в SD картата, като музика и снимки"</string>
-    <string name="sd_unavailable" msgid="8580107589533213904">"Няма достъп"</string>
     <string name="read_only" msgid="6702420168629076340">" (Само за четене)"</string>
     <string name="dlg_confirm_unmount_title" product="nosdcard" msgid="2349876662428231297">"Спиране на USB"</string>
     <string name="dlg_confirm_unmount_title" product="default" msgid="8612140627310646730">"Деактивиране на SD карта"</string>
@@ -903,6 +909,7 @@
     <string name="application_info_label" msgid="1150486628158409543">"Информация за приложение"</string>
     <string name="storage_label" msgid="8700867073480107253">"Хранилище"</string>
     <string name="auto_launch_label" msgid="3012617472833815382">"Стартиране по подразбиране"</string>
+    <string name="screen_compatibility_label" msgid="663250687205465394">"Съвместимост на екрана"</string>
     <string name="permissions_label" msgid="2605296874922726203">"Разрешения"</string>
     <string name="cache_header_label" msgid="1877197634162461830">"Кеш"</string>
     <string name="clear_cache_btn_text" msgid="5756314834291116325">"Изчистване на кеша"</string>
@@ -922,6 +929,9 @@
     <string name="auto_launch_enable_text" msgid="2630656657744196691">"Избрахте да стартирате това приложение по подразбиране за някои действия."</string>
     <string name="auto_launch_disable_text" msgid="7800385822185540166">"Не са зададени стандартни."</string>
     <string name="clear_activities" msgid="7408923511535174430">"Изчистване на стандартни"</string>
+    <string name="screen_compatibility_text" msgid="2398570332021220651">"Възможно е това приложение да не е създадено за екрана ви. Можете да контролирате оттук как то се настройва към него."</string>
+    <string name="ask_compatibility" msgid="7225195569089607846">"Да се пита при стартиране"</string>
+    <string name="enable_compatibility" msgid="3257284255974065538">"Мащабиране на приложението"</string>
     <string name="unknown" msgid="1592123443519355854">"Неизвестно"</string>
     <string name="sort_order_alpha" msgid="1410278099123670628">"Сортиране по име"</string>
     <string name="sort_order_size" msgid="7024513286636502362">"Сортиране по размер"</string>
@@ -1109,6 +1119,8 @@
     <string name="accessibility_power_button_category" msgid="8545885236482339928">"Бутон за захранване"</string>
     <string name="accessibility_power_button_ends_call" msgid="7698764194501089533">"Бутонът за захранване приключва обаждането"</string>
     <string name="accessibility_power_button_ends_call_summary" msgid="8878097632186291462">"По време на обаждане, натискането на „Захранване“ го приключва вместо да изключва екрана"</string>
+    <!-- no translation found for settings_button (3006713718908152930) -->
+    <skip />
     <string name="touchscreen_gestures_category" msgid="3109869155350859625">"Жестове за сензорния екран"</string>
     <string name="long_press_timeout_selector_title" msgid="1396876537252863044">"Забавяне при докосване и задържане"</string>
     <string name="long_press_timeout_selector_summary" msgid="2261114502740278996">"Забавяне, докато докосването се тълкува като докосване и задържане"</string>
@@ -1316,19 +1328,21 @@
     <string name="credentials_install_summary" product="nosdcard" msgid="4220422806818210676">"Инсталиране на сертификати от хранилището"</string>
     <string name="credentials_install_summary" product="default" msgid="5737658257407822713">"Инсталиране на сертификати от SD картата"</string>
     <string name="credentials_reset" msgid="3239382277144980418">"Изчистване на идент. данни"</string>
-    <string name="credentials_reset_summary" msgid="3810369467217453606">"Премахване на цялото съдържание и задаване на нова парола"</string>
+    <!-- outdated translation 2127419861568976637 -->     <string name="credentials_reset_summary" msgid="3369361230171260282">"Изчиства хранилището от цялото съдържание и му задава нова парола"</string>
     <string name="credentials_unlock" msgid="1463040326264133844">"Въвеждане на парола"</string>
     <string name="credentials_unlock_hint" msgid="5889551635843338639">"Въведете паролата за хранилището за идентификационни данни."</string>
     <string name="credentials_old_password" msgid="7553393815538684028">"Текуща парола:"</string>
-    <string name="credentials_reset_hint" msgid="2336340927894094814">"Цялото съдържание ще бъде премахнато и ще бъде зададена нова парола. Наистина ли искате да го направите?"</string>
+    <!-- outdated translation 7883277320781857760 -->     <string name="credentials_reset_hint" msgid="1566409057833618877">"Наистина ли искате да изтриете всички идентификационни данни и да зададете нова парола за хранилището им?"</string>
     <string name="credentials_password_too_short" msgid="7502749986405522663">"Паролата трябва да е поне 8 знака."</string>
     <string name="credentials_wrong_password" msgid="2541932597104054807">"Паролата е неправилна."</string>
     <string name="credentials_reset_warning" msgid="5320653011511797600">"Паролата е неправилна. Имате още един опит, преди хранилището за идентификационни данни да бъде изтрито."</string>
     <string name="credentials_reset_warning_plural" msgid="6514085665301095279">"Паролата е неправилна. Имате още <xliff:g id="NUMBER">%1$d</xliff:g> опита, преди хранилището за идентификационни данни да бъде изтрито."</string>
     <string name="credentials_erased" msgid="2907836028586342969">"Хранилище с данни: изтрито."</string>
-    <!-- no translation found for credentials_not_erased (7098106773249438137) -->
+    <!-- no translation found for credentials_not_erased (397954733557821269) -->
     <skip />
     <string name="credentials_enabled" msgid="7588607413349978930">"Хранилището за идентификационни данни е активирано."</string>
+    <!-- no translation found for credentials_configure_lock_screen_hint (6816970208840577219) -->
+    <skip />
     <string name="emergency_tone_title" msgid="1055954530111587114">"Тон за спешност"</string>
     <string name="emergency_tone_summary" msgid="722259232924572153">"Задаване на поведение при спешно обаждане"</string>
     <string name="privacy_settings" msgid="9206631214140954954">"Поверителност"</string>

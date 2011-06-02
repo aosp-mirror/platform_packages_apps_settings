@@ -316,7 +316,7 @@
     <string name="unlock_set_unlock_pin_summary" msgid="5556722736289132512">"Yêu cầu PIN số để mở khóa màn hình"</string>
     <string name="unlock_set_unlock_password_title" msgid="8775603825675090937">"Mật khẩu"</string>
     <string name="unlock_set_unlock_password_summary" msgid="7871968012198279034">"Yêu cầu mật khẩu để mở khóa màn hình"</string>
-    <string name="unlock_set_unlock_disabled_summary" msgid="8563103042330816018">"Bị vô hiệu hóa bởi quản trị viên hoặc chính sách mã hóa"</string>
+    <!-- outdated translation 5962903914511361952 -->     <string name="unlock_set_unlock_disabled_summary" msgid="2120729867788851674">"Bị vô hiệu hóa bởi quản trị viên điện thoại từ xa"</string>
     <string name="unlock_set_unlock_mode_off" msgid="378729687629105388">"Tắt"</string>
     <string name="unlock_set_unlock_mode_none" msgid="7137296704741184239">"Không có bảo mật"</string>
     <string name="unlock_set_unlock_mode_pattern" msgid="464022606293547390">"Được bảo mật bằng hình"</string>
@@ -599,6 +599,13 @@
     <string name="brightness_summary" msgid="838917350127550703">"Điều chỉnh độ sáng của màn hình"</string>
     <string name="screen_timeout" msgid="6962654593018319466">"Thời gian chờ"</string>
     <string name="screen_timeout_summary" msgid="4471347210332380587">"Màn hình tự động tắt sau <xliff:g id="TIMEOUT_DESCRIPTION">%1$s</xliff:g>"</string>
+    <string name="dream_settings_title" msgid="6536876013377446805">"Android Dreams"</string>
+    <string name="dream_settings_summary" msgid="6809871648071408259">"Trình bảo vệ màn hình và các trò tiêu khiển nhàn rỗi khác"</string>
+    <string name="dream_component_title" msgid="505229894674572578">"Mô-đun đã chọn"</string>
+    <string name="dream_timeout_title" msgid="1385909618566514628">"Thời điểm kích hoạt"</string>
+    <string name="dream_timeout_summary" msgid="6721955887728454226">"Sau <xliff:g id="TIMEOUT_DESCRIPTION">%1$s</xliff:g> không hoạt động"</string>
+    <string name="dream_timeout_zero_summary" msgid="2450290346381400092">"Không bao giờ"</string>
+    <string name="dream_test" msgid="5968002644622194481">"Hãy dùng thử!"</string>
     <string name="automatic_brightness" msgid="5014143533884135461">"Độ sáng tự động"</string>
     <string name="title_font_size" msgid="4405544325522105222">"Kích thước phông chữ"</string>
     <string name="summary_font_size" msgid="7548243392515500554">"Kích thước phông chữ chung"</string>
@@ -681,13 +688,12 @@
     <string name="sd_insert_summary" product="default" msgid="2048640010381803841">"Lắp thẻ SD để gắn"</string>
     <string name="sd_mount" product="nosdcard" msgid="8966695015677343116">"Kết nối bộ nhớ USB"</string>
     <string name="sd_mount" product="default" msgid="5940523765187704135">"Lắp thẻ SD"</string>
-    <string name="sd_mount_summary" product="nosdcard" msgid="1794150364965145726">"Kết nối bộ nhớ USB"</string>
-    <string name="sd_mount_summary" product="default" msgid="4936591681679097699">"Lắp thẻ SD"</string>
+    <string name="sd_mount_summary" product="nosdcard" msgid="4673411327373419641"></string>
+    <string name="sd_mount_summary" product="default" msgid="4673411327373419641"></string>
     <string name="sd_format" product="nosdcard" msgid="2148179271623099054">"Xóa bộ nhớ USB"</string>
     <string name="sd_format" product="default" msgid="2576054280507119870">"Xóa thẻ SD"</string>
     <string name="sd_format_summary" product="nosdcard" msgid="6331905044907914603">"Xóa tất cả dữ liệu trên bộ nhớ trong USB, chẳng hạn như nhạc và ảnh"</string>
     <string name="sd_format_summary" product="default" msgid="212703692181793109">"Xóa tất cả dữ liệu trên thẻ SD, chẳng hạn như nhạc và ảnh"</string>
-    <string name="sd_unavailable" msgid="8580107589533213904">"Không rảnh"</string>
     <string name="read_only" msgid="6702420168629076340">" (Chỉ đọc)"</string>
     <string name="dlg_confirm_unmount_title" product="nosdcard" msgid="2349876662428231297">"Ngắt kết nối bộ nhớ USB"</string>
     <string name="dlg_confirm_unmount_title" product="default" msgid="8612140627310646730">"Tháo thẻ SD"</string>
@@ -903,6 +909,7 @@
     <string name="application_info_label" msgid="1150486628158409543">"Thông tin ứng dụng"</string>
     <string name="storage_label" msgid="8700867073480107253">"Dung lượng"</string>
     <string name="auto_launch_label" msgid="3012617472833815382">"Khởi chạy theo mặc định"</string>
+    <string name="screen_compatibility_label" msgid="663250687205465394">"Khả năng tương thích với màn hình"</string>
     <string name="permissions_label" msgid="2605296874922726203">"Quyền"</string>
     <string name="cache_header_label" msgid="1877197634162461830">"Bộ nhớ cache"</string>
     <string name="clear_cache_btn_text" msgid="5756314834291116325">"Xoá bộ nhớ cache"</string>
@@ -922,6 +929,9 @@
     <string name="auto_launch_enable_text" msgid="2630656657744196691">"Bạn đã chọn khởi chạy ứng dụng này theo mặc định cho một số tác vụ."</string>
     <string name="auto_launch_disable_text" msgid="7800385822185540166">"Chưa đặt mặc định."</string>
     <string name="clear_activities" msgid="7408923511535174430">"Xoá mặc định"</string>
+    <string name="screen_compatibility_text" msgid="2398570332021220651">"Có thể ứng dụng này không được thiết kế cho màn hình của bạn; bạn có thể kiểm soát cách ứng dụng điều chỉnh phù hợp với màn hình của mình tại đây."</string>
+    <string name="ask_compatibility" msgid="7225195569089607846">"Hỏi khi khởi chạy"</string>
+    <string name="enable_compatibility" msgid="3257284255974065538">"Ứng dụng quy mô lớn"</string>
     <string name="unknown" msgid="1592123443519355854">"Không xác định"</string>
     <string name="sort_order_alpha" msgid="1410278099123670628">"Sắp xếp theo tên"</string>
     <string name="sort_order_size" msgid="7024513286636502362">"Sắp xếp theo kích thước"</string>
@@ -1109,6 +1119,8 @@
     <string name="accessibility_power_button_category" msgid="8545885236482339928">"Nút Nguồn"</string>
     <string name="accessibility_power_button_ends_call" msgid="7698764194501089533">"Nút Nguồn kết thúc cuộc gọi"</string>
     <string name="accessibility_power_button_ends_call_summary" msgid="8878097632186291462">"Trong suốt cuộc gọi, việc nhấn phím Nguồn sẽ kết thúc cuộc gọi thay vì tắt màn hình"</string>
+    <!-- no translation found for settings_button (3006713718908152930) -->
+    <skip />
     <string name="touchscreen_gestures_category" msgid="3109869155350859625">"Thao tác dành cho màn hình cảm ứng"</string>
     <string name="long_press_timeout_selector_title" msgid="1396876537252863044">"Thời gian chờ cho Chạm &amp; giữ"</string>
     <string name="long_press_timeout_selector_summary" msgid="2261114502740278996">"Thời gian chờ cho đến khi thao tác chạm được hiểu là chạm &amp; giữ"</string>
@@ -1316,19 +1328,21 @@
     <string name="credentials_install_summary" product="nosdcard" msgid="4220422806818210676">"Cài đặt chứng chỉ từ bộ nhớ"</string>
     <string name="credentials_install_summary" product="default" msgid="5737658257407822713">"Cài đặt chứng chỉ từ thẻ SD"</string>
     <string name="credentials_reset" msgid="3239382277144980418">"Xóa thông tin xác thực"</string>
-    <string name="credentials_reset_summary" msgid="3810369467217453606">"Xóa tất cả nội dung và đặt lại mật khẩu"</string>
+    <!-- outdated translation 2127419861568976637 -->     <string name="credentials_reset_summary" msgid="3369361230171260282">"Xóa bộ nhớ thông tin xác thực của tất cả nội dung và đặt lại mật khẩu của nó"</string>
     <string name="credentials_unlock" msgid="1463040326264133844">"Nhập mật khẩu"</string>
     <string name="credentials_unlock_hint" msgid="5889551635843338639">"Nhập mật khẩu cho bộ nhớ thông tin xác thực."</string>
     <string name="credentials_old_password" msgid="7553393815538684028">"Mật khẩu hiện tại:"</string>
-    <string name="credentials_reset_hint" msgid="2336340927894094814">"Tất cả nội dung sẽ bị xóa và mật khẩu sẽ được đặt lại. Bạn có chắc chắn việc đó không?"</string>
+    <!-- outdated translation 7883277320781857760 -->     <string name="credentials_reset_hint" msgid="1566409057833618877">"Bạn có chắc chắn muốn xóa tất cả thông tin xác thực và đặt lại mật khẩu lưu trữ thông tin xác thực không?"</string>
     <string name="credentials_password_too_short" msgid="7502749986405522663">"Mật khẩu phải có ít nhất 8 ký tự."</string>
     <string name="credentials_wrong_password" msgid="2541932597104054807">"Mật khẩu không chính xác."</string>
     <string name="credentials_reset_warning" msgid="5320653011511797600">"Mật khẩu không chính xác. Bạn còn một cơ hội nữa trước khi bộ nhớ thông tin xác thực bị xóa."</string>
     <string name="credentials_reset_warning_plural" msgid="6514085665301095279">"Mật khẩu không chính xác. Bạn có <xliff:g id="NUMBER">%1$d</xliff:g> cơ hội nữa trước khi bộ nhớ thông tin xác thực bị xóa."</string>
     <string name="credentials_erased" msgid="2907836028586342969">"Bộ nhớ thông tin xác thực đã bị xóa."</string>
-    <!-- no translation found for credentials_not_erased (7098106773249438137) -->
+    <!-- no translation found for credentials_not_erased (397954733557821269) -->
     <skip />
     <string name="credentials_enabled" msgid="7588607413349978930">"Bộ nhớ thông tin xác thực đã bật."</string>
+    <!-- no translation found for credentials_configure_lock_screen_hint (6816970208840577219) -->
+    <skip />
     <string name="emergency_tone_title" msgid="1055954530111587114">"Âm khẩn cấp"</string>
     <string name="emergency_tone_summary" msgid="722259232924572153">"Đặt chế độ khi cuộc gọi khẩn cấp được thực hiện"</string>
     <string name="privacy_settings" msgid="9206631214140954954">"Bảo mật"</string>
