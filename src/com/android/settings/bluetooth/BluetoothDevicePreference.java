@@ -120,7 +120,7 @@ public final class BluetoothDevicePreference extends Preference implements
         ImageView btClass = (ImageView) view.findViewById(android.R.id.icon);
         btClass.setImageResource(getBtClassDrawable());
         btClass.setAlpha(isEnabled() ? 255 : sDimAlpha);
-
+        btClass.setVisibility(View.VISIBLE);
         mDeviceSettings = (ImageView) view.findViewById(R.id.deviceDetails);
         if (mOnSettingsClickListener != null) {
             mDeviceSettings.setOnClickListener(this);
