@@ -71,4 +71,12 @@
                 <intent android:action="android.settings.INPUT_METHOD_SETTINGS"/>
         </PreferenceScreen>
     </PreferenceCategory>
+
+    <PreferenceCategory android:key="pointer_settings_category"
+            android:title="@string/pointer_settings_category">
+        <com.android.settings.PointerSpeedPreference
+                android:key="pointer_speed"
+                android:title="@string/pointer_speed"
+                android:dialogTitle="@string/pointer_speed" />
+    </PreferenceCategory>
 </PreferenceScreen>
