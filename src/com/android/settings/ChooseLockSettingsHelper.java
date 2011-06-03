@@ -23,7 +23,10 @@ import android.app.Fragment;
 import android.app.admin.DevicePolicyManager;
 import android.content.Intent;
 
-public class ChooseLockSettingsHelper {
+public final class ChooseLockSettingsHelper {
+
+    static final String EXTRA_KEY_PASSWORD = "password";
+
     private LockPatternUtils mLockPatternUtils;
     private Activity mActivity;
     private Fragment mFragment;
@@ -49,8 +52,7 @@ public class ChooseLockSettingsHelper {
      * @return true if one exists and we launched an activity to confirm it
      * @see #onActivityResult(int, int, android.content.Intent)
      */
-    protected boolean launchConfirmationActivity(int request,
-            CharSequence message, CharSequence details) {
+    boolean launchConfirmationActivity(int request, CharSequence message, CharSequence details) {
         boolean launched = false;
         switch (mLockPatternUtils.getKeyguardStoredPasswordQuality()) {
             case DevicePolicyManager.PASSWORD_QUALITY_SOMETHING:

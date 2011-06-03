@@ -256,7 +256,12 @@ public class ConfirmLockPattern extends PreferenceActivity {
 
             public void onPatternDetected(List<LockPatternView.Cell> pattern) {
                 if (mLockPatternUtils.checkPattern(pattern)) {
-                    getActivity().setResult(Activity.RESULT_OK);
+
+                    Intent intent = new Intent();
+                    intent.putExtra(ChooseLockSettingsHelper.EXTRA_KEY_PASSWORD,
+                                    LockPatternUtils.patternToString(pattern));
+
+                    getActivity().setResult(Activity.RESULT_OK, intent);
                     getActivity().finish();
                 } else {
                     if (pattern.size() >= LockPatternUtils.MIN_PATTERN_REGISTER_FAIL &&

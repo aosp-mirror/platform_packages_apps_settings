@@ -176,7 +176,7 @@ public class CryptKeeperSettings extends Fragment {
         // If the user entered a valid keyguard trace, present the final
         // confirmation prompt; otherwise, go back to the initial state.
         if (resultCode == Activity.RESULT_OK && data != null) {
-            String password = data.getStringExtra("password");
+            String password = data.getStringExtra(ChooseLockSettingsHelper.EXTRA_KEY_PASSWORD);
             if (!TextUtils.isEmpty(password)) {
                 showFinalConfirmation(password);
             }
