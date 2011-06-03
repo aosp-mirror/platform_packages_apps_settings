@@ -289,6 +289,12 @@ public class StorageVolumePreferenceCategory extends PreferenceCategory implemen
 
         mPreferences[TOTAL_SIZE].setSummary(formatSize(totalSize));
 
+        if (!mMeasurement.isPrimary()) {
+            // TODO FIXME: external SD card will not report any size. Show used space in bar graph
+            final long usedSize = totalSize - availSize;
+            mUsageBarPreference.addEntry(usedSize / (float) totalSize, android.graphics.Color.GRAY);
+        }
+
         updatePreference(appsSize, totalSize, APPLICATIONS);
 
         long totalMediaSize = 0;
