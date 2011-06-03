@@ -72,6 +72,7 @@ public class AddAccountSettings extends Activity {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         final String[] authorities =
                 getIntent().getStringArrayExtra(AccountPreferenceBase.AUTHORITIES_FILTER_KEY);
         final String[] accountTypes =
