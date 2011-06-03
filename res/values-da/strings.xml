@@ -316,7 +316,7 @@
     <string name="unlock_set_unlock_pin_summary" msgid="5556722736289132512">"Kræv en numerisk PIN-kode for at låse skærmen op"</string>
     <string name="unlock_set_unlock_password_title" msgid="8775603825675090937">"Adgangskode"</string>
     <string name="unlock_set_unlock_password_summary" msgid="7871968012198279034">"Kræv en adgangskode for at låse skærmen op"</string>
-    <string name="unlock_set_unlock_disabled_summary" msgid="8563103042330816018">"Deaktiveret af administrator/krypteringspolitik"</string>
+    <!-- outdated translation 5962903914511361952 -->     <string name="unlock_set_unlock_disabled_summary" msgid="2120729867788851674">"Deaktiveret af fjernadministrator"</string>
     <string name="unlock_set_unlock_mode_off" msgid="378729687629105388">"Fra"</string>
     <string name="unlock_set_unlock_mode_none" msgid="7137296704741184239">"Ingen sikkerhed"</string>
     <string name="unlock_set_unlock_mode_pattern" msgid="464022606293547390">"Sikret med mønster"</string>
@@ -599,6 +599,13 @@
     <string name="brightness_summary" msgid="838917350127550703">"Juster skærmens lysstyrke"</string>
     <string name="screen_timeout" msgid="6962654593018319466">"Timeout"</string>
     <string name="screen_timeout_summary" msgid="4471347210332380587">"Skærmen slukker automatisk efter <xliff:g id="TIMEOUT_DESCRIPTION">%1$s</xliff:g>"</string>
+    <string name="dream_settings_title" msgid="6536876013377446805">"Android Dreams"</string>
+    <string name="dream_settings_summary" msgid="6809871648071408259">"Pauseskærme og andre afledninger ved inaktivitet"</string>
+    <string name="dream_component_title" msgid="505229894674572578">"Valgt drøm"</string>
+    <string name="dream_timeout_title" msgid="1385909618566514628">"Hvornår der skal aktiveres"</string>
+    <string name="dream_timeout_summary" msgid="6721955887728454226">"Efter <xliff:g id="TIMEOUT_DESCRIPTION">%1$s</xliff:g> inaktivitet"</string>
+    <string name="dream_timeout_zero_summary" msgid="2450290346381400092">"Aldrig"</string>
+    <string name="dream_test" msgid="5968002644622194481">"Prøv det!"</string>
     <string name="automatic_brightness" msgid="5014143533884135461">"Automatisk lysstyrke"</string>
     <string name="title_font_size" msgid="4405544325522105222">"Skrifttypestørrelse"</string>
     <string name="summary_font_size" msgid="7548243392515500554">"Samlede skrifttypestørrelser"</string>
@@ -681,13 +688,12 @@
     <string name="sd_insert_summary" product="default" msgid="2048640010381803841">"Insæt et SD-kort, der skal monteres"</string>
     <string name="sd_mount" product="nosdcard" msgid="8966695015677343116">"Isæt USB-lager"</string>
     <string name="sd_mount" product="default" msgid="5940523765187704135">"Montér SD-kort"</string>
-    <string name="sd_mount_summary" product="nosdcard" msgid="1794150364965145726">"Monter USB-lager"</string>
-    <string name="sd_mount_summary" product="default" msgid="4936591681679097699">"Montér SD-kortet"</string>
+    <string name="sd_mount_summary" product="nosdcard" msgid="4673411327373419641"></string>
+    <string name="sd_mount_summary" product="default" msgid="4673411327373419641"></string>
     <string name="sd_format" product="nosdcard" msgid="2148179271623099054">"Slet USB-lager"</string>
     <string name="sd_format" product="default" msgid="2576054280507119870">"Slet SD-kort"</string>
     <string name="sd_format_summary" product="nosdcard" msgid="6331905044907914603">"Sletter alle data på det interne USB-lager, f.eks. musik og billeder"</string>
     <string name="sd_format_summary" product="default" msgid="212703692181793109">"Sletter alle data på telefonens SD-kort, f.eks. musik og billeder"</string>
-    <string name="sd_unavailable" msgid="8580107589533213904">"Utilgængelig"</string>
     <string name="read_only" msgid="6702420168629076340">" (Skrivebeskyttet)"</string>
     <string name="dlg_confirm_unmount_title" product="nosdcard" msgid="2349876662428231297">"Demonter USB-lager"</string>
     <string name="dlg_confirm_unmount_title" product="default" msgid="8612140627310646730">"Demonter SD-kort"</string>
@@ -903,6 +909,7 @@
     <string name="application_info_label" msgid="1150486628158409543">"Programoplysninger"</string>
     <string name="storage_label" msgid="8700867073480107253">"Lagring"</string>
     <string name="auto_launch_label" msgid="3012617472833815382">"Start som standard"</string>
+    <string name="screen_compatibility_label" msgid="663250687205465394">"Skærmkompatibilitet"</string>
     <string name="permissions_label" msgid="2605296874922726203">"Tilladelser"</string>
     <string name="cache_header_label" msgid="1877197634162461830">"Cache"</string>
     <string name="clear_cache_btn_text" msgid="5756314834291116325">"Ryd cache"</string>
@@ -922,6 +929,9 @@
     <string name="auto_launch_enable_text" msgid="2630656657744196691">"Du har valgt at starte dette program som standard for nogle handlinger."</string>
     <string name="auto_launch_disable_text" msgid="7800385822185540166">"Der er ikke angivet nogen standarder."</string>
     <string name="clear_activities" msgid="7408923511535174430">"Ryd standarder"</string>
+    <string name="screen_compatibility_text" msgid="2398570332021220651">"Denne applikation er muligvis ikke beregnet til din skærm. Du kan kontrollere, hvordan den tilpasser sig din skærm her."</string>
+    <string name="ask_compatibility" msgid="7225195569089607846">"Spørg, når der startes"</string>
+    <string name="enable_compatibility" msgid="3257284255974065538">"Skaler applikationen"</string>
     <string name="unknown" msgid="1592123443519355854">"Ukendte"</string>
     <string name="sort_order_alpha" msgid="1410278099123670628">"Sorter efter navn"</string>
     <string name="sort_order_size" msgid="7024513286636502362">"Sorter efter størrelse"</string>
@@ -1109,6 +1119,8 @@
     <string name="accessibility_power_button_category" msgid="8545885236482339928">"Afbryderknap"</string>
     <string name="accessibility_power_button_ends_call" msgid="7698764194501089533">"Afbryderknappen afslutter opkaldet"</string>
     <string name="accessibility_power_button_ends_call_summary" msgid="8878097632186291462">"Hvis du trykker på Sluk under et opkald, afsluttes opkaldet i stedet for at slukke skærmen"</string>
+    <!-- no translation found for settings_button (3006713718908152930) -->
+    <skip />
     <string name="touchscreen_gestures_category" msgid="3109869155350859625">"Berøringsskærmbevægelser"</string>
     <string name="long_press_timeout_selector_title" msgid="1396876537252863044">"Tryk og hold udsættelse nede"</string>
     <string name="long_press_timeout_selector_summary" msgid="2261114502740278996">"Udsæt, indtil et tryk tolkes som et tryk, og hold nede"</string>
@@ -1316,19 +1328,21 @@
     <string name="credentials_install_summary" product="nosdcard" msgid="4220422806818210676">"Installer certifikater fra lager"</string>
     <string name="credentials_install_summary" product="default" msgid="5737658257407822713">"Installer certifikater fra SD-kortet"</string>
     <string name="credentials_reset" msgid="3239382277144980418">"Ryd oplysninger"</string>
-    <string name="credentials_reset_summary" msgid="3810369467217453606">"Fjern alt indhold, og nulstil adgangskoden"</string>
+    <!-- outdated translation 2127419861568976637 -->     <string name="credentials_reset_summary" msgid="3369361230171260282">"Slet al indhold på loginlageret, og nulstil adgangskoden"</string>
     <string name="credentials_unlock" msgid="1463040326264133844">"Indtast adgangskode"</string>
     <string name="credentials_unlock_hint" msgid="5889551635843338639">"Indtast adgangskoden for oplysningslagring."</string>
     <string name="credentials_old_password" msgid="7553393815538684028">"Nuværende adgangskode:"</string>
-    <string name="credentials_reset_hint" msgid="2336340927894094814">"Alt indholdet vil blive slettet, og adgangskoden vil blive nulstillet. Er du sikker på, at du vil gøre det?"</string>
+    <!-- outdated translation 7883277320781857760 -->     <string name="credentials_reset_hint" msgid="1566409057833618877">"Er du sikker på, at du vil slette alle oplysninger og nulstille adgangskoden til loginlager?"</string>
     <string name="credentials_password_too_short" msgid="7502749986405522663">"Adgangskoden skal indeholde mindst 8 tegn."</string>
     <string name="credentials_wrong_password" msgid="2541932597104054807">"Ugyldig adgangskode."</string>
     <string name="credentials_reset_warning" msgid="5320653011511797600">"Forkert adgangskode. Du har ét forsøg mere, inden oplysningslagringen slettes."</string>
     <string name="credentials_reset_warning_plural" msgid="6514085665301095279">"Forkert adgangskode. Du har <xliff:g id="NUMBER">%1$d</xliff:g> forsøg mere, inden oplysningslagringen slettes."</string>
     <string name="credentials_erased" msgid="2907836028586342969">"Oplysningslagring er slettet."</string>
-    <!-- no translation found for credentials_not_erased (7098106773249438137) -->
+    <!-- no translation found for credentials_not_erased (397954733557821269) -->
     <skip />
     <string name="credentials_enabled" msgid="7588607413349978930">"Oplysningslagring er aktiveret."</string>
+    <!-- no translation found for credentials_configure_lock_screen_hint (6816970208840577219) -->
+    <skip />
     <string name="emergency_tone_title" msgid="1055954530111587114">"Nødtone"</string>
     <string name="emergency_tone_summary" msgid="722259232924572153">"Angiv adfærd ved nødopkald"</string>
     <string name="privacy_settings" msgid="9206631214140954954">"Fortrolighed"</string>

@@ -316,7 +316,7 @@
     <string name="unlock_set_unlock_pin_summary" msgid="5556722736289132512">"برای باز کردن قفل صفحه یک پین عددی لازم است"</string>
     <string name="unlock_set_unlock_password_title" msgid="8775603825675090937">"رمز ورود"</string>
     <string name="unlock_set_unlock_password_summary" msgid="7871968012198279034">"برای باز کردن قفل صفحه یک رمز ورود لازم است"</string>
-    <string name="unlock_set_unlock_disabled_summary" msgid="8563103042330816018">"توسط سرپرست سیستم یا خط مشی رمزگذاری غیر فعال شده است"</string>
+    <!-- outdated translation 5962903914511361952 -->     <string name="unlock_set_unlock_disabled_summary" msgid="2120729867788851674">"از طریق سرپرست دستگاه راه دور غیرفعال شد"</string>
     <string name="unlock_set_unlock_mode_off" msgid="378729687629105388">"خاموش"</string>
     <string name="unlock_set_unlock_mode_none" msgid="7137296704741184239">"عدم وجود امنیت"</string>
     <string name="unlock_set_unlock_mode_pattern" msgid="464022606293547390">"ایمن شده با الگو"</string>
@@ -599,6 +599,13 @@
     <string name="brightness_summary" msgid="838917350127550703">"تنظیم روشنایی صفحه"</string>
     <string name="screen_timeout" msgid="6962654593018319466">"وقفه زمانی"</string>
     <string name="screen_timeout_summary" msgid="4471347210332380587">"صفحه بعد از <xliff:g id="TIMEOUT_DESCRIPTION">%1$s</xliff:g> به صورت خودکار خاموش می شود"</string>
+    <string name="dream_settings_title" msgid="6536876013377446805">"Android Dreams"</string>
+    <string name="dream_settings_summary" msgid="6809871648071408259">"محافظ های صفحه و سایر حالت های عدم استفاده"</string>
+    <string name="dream_component_title" msgid="505229894674572578">"رویای انتخابی"</string>
+    <string name="dream_timeout_title" msgid="1385909618566514628">"چه وقت باید فعال کرد"</string>
+    <string name="dream_timeout_summary" msgid="6721955887728454226">"پس از <xliff:g id="TIMEOUT_DESCRIPTION">%1$s</xliff:g> عدم استفاده"</string>
+    <string name="dream_timeout_zero_summary" msgid="2450290346381400092">"هیچوقت"</string>
+    <string name="dream_test" msgid="5968002644622194481">"امتحان کنید!"</string>
     <string name="automatic_brightness" msgid="5014143533884135461">"روشنایی خودکار"</string>
     <string name="title_font_size" msgid="4405544325522105222">"اندازه قلم"</string>
     <string name="summary_font_size" msgid="7548243392515500554">"اندازه کلی قلم ها"</string>
@@ -681,13 +688,12 @@
     <string name="sd_insert_summary" product="default" msgid="2048640010381803841">"کارت SD را برای اتصال وارد کنید"</string>
     <string name="sd_mount" product="nosdcard" msgid="8966695015677343116">"اتصال حافظه USB"</string>
     <string name="sd_mount" product="default" msgid="5940523765187704135">"اتصال کارت SD"</string>
-    <string name="sd_mount_summary" product="nosdcard" msgid="1794150364965145726">"اتصال حافظه USB"</string>
-    <string name="sd_mount_summary" product="default" msgid="4936591681679097699">"اتصال کارت SD"</string>
+    <string name="sd_mount_summary" product="nosdcard" msgid="4673411327373419641"></string>
+    <string name="sd_mount_summary" product="default" msgid="4673411327373419641"></string>
     <string name="sd_format" product="nosdcard" msgid="2148179271623099054">"پاک کردن حافظه USB"</string>
     <string name="sd_format" product="default" msgid="2576054280507119870">"پاک کردن کارت SD"</string>
     <string name="sd_format_summary" product="nosdcard" msgid="6331905044907914603">"پاک کردن همه داده های موجود در حافظه USB داخلی مانند موسیقی و عکس"</string>
     <string name="sd_format_summary" product="default" msgid="212703692181793109">"همه داده های موجود در کارت SD مانند موسیقی و عکس ها را پاک می کند"</string>
-    <string name="sd_unavailable" msgid="8580107589533213904">"در دسترس نیست"</string>
     <string name="read_only" msgid="6702420168629076340">" (فقط خواندنی)"</string>
     <string name="dlg_confirm_unmount_title" product="nosdcard" msgid="2349876662428231297">"قطع اتصال حافظه USB"</string>
     <string name="dlg_confirm_unmount_title" product="default" msgid="8612140627310646730">"جدا کردن کارت SD"</string>
@@ -903,6 +909,7 @@
     <string name="application_info_label" msgid="1150486628158409543">"اطلاعات برنامه کاربردی"</string>
     <string name="storage_label" msgid="8700867073480107253">"ذخیره سازی"</string>
     <string name="auto_launch_label" msgid="3012617472833815382">"راه اندازی به صورت پیش فرض"</string>
+    <string name="screen_compatibility_label" msgid="663250687205465394">"سازگاری با صفحه نمایش"</string>
     <string name="permissions_label" msgid="2605296874922726203">"مجوزها"</string>
     <string name="cache_header_label" msgid="1877197634162461830">"حافظه پنهان"</string>
     <string name="clear_cache_btn_text" msgid="5756314834291116325">"پاک کردن حافظه پنهان"</string>
@@ -922,6 +929,9 @@
     <string name="auto_launch_enable_text" msgid="2630656657744196691">"شما انتخاب کرده اید که این برنامه به صورت پیش فرض برای چندین عملکرد راه اندازی شود."</string>
     <string name="auto_launch_disable_text" msgid="7800385822185540166">"تنظیم پیش فرضی موجود نیست."</string>
     <string name="clear_activities" msgid="7408923511535174430">"پاک کردن پیش فرض ها"</string>
+    <string name="screen_compatibility_text" msgid="2398570332021220651">"ممکن است این برنامه برای صفحه شما طراحی نشده باشد، نحوه تنظیم آن برای صفحه را می توانید از این قسمت کنترل کنید."</string>
+    <string name="ask_compatibility" msgid="7225195569089607846">"هنگام راه اندازی سؤال شود"</string>
+    <string name="enable_compatibility" msgid="3257284255974065538">"برنامه مقیاس"</string>
     <string name="unknown" msgid="1592123443519355854">"ناشناس"</string>
     <string name="sort_order_alpha" msgid="1410278099123670628">"مرتب سازی بر اساس نام"</string>
     <string name="sort_order_size" msgid="7024513286636502362">"ترتیب بر اساس اندازه"</string>
@@ -1109,6 +1119,8 @@
     <string name="accessibility_power_button_category" msgid="8545885236482339928">"دکمه روشن/خاموش"</string>
     <string name="accessibility_power_button_ends_call" msgid="7698764194501089533">"دکمه روشن/خاموش به تماس پایان می دهد"</string>
     <string name="accessibility_power_button_ends_call_summary" msgid="8878097632186291462">"در حین تماس، بجای خاموش کردن صفحه، با فشار دادن دکمه روشن/خاموش، به تماس پایان داده می شود"</string>
+    <!-- no translation found for settings_button (3006713718908152930) -->
+    <skip />
     <string name="touchscreen_gestures_category" msgid="3109869155350859625">"حرکات صفحه لمسی"</string>
     <string name="long_press_timeout_selector_title" msgid="1396876537252863044">"تأخیر لمس کردن و نگه داشتن"</string>
     <string name="long_press_timeout_selector_summary" msgid="2261114502740278996">"تأخیر تا زمانی که یک لمس به عنوان لمس تفسیر شود و نگه داشتن"</string>
@@ -1316,19 +1328,21 @@
     <string name="credentials_install_summary" product="nosdcard" msgid="4220422806818210676">"نصب گواهی ها از حافظه"</string>
     <string name="credentials_install_summary" product="default" msgid="5737658257407822713">"نصب مجوزها از کارت SD"</string>
     <string name="credentials_reset" msgid="3239382277144980418">"پاک کردن اطلاعات کاربری"</string>
-    <string name="credentials_reset_summary" msgid="3810369467217453606">"حذف همه محتواها و بازنشانی رمز ورود"</string>
+    <!-- outdated translation 2127419861568976637 -->     <string name="credentials_reset_summary" msgid="3369361230171260282">"محل ذخیره اطلاعات کاربری تمام محتواها را پاک کرده و رمز ورود را بازنشانی کنید"</string>
     <string name="credentials_unlock" msgid="1463040326264133844">"رمز ورود را وارد کنید"</string>
     <string name="credentials_unlock_hint" msgid="5889551635843338639">"رمز ورود را برای حافظه اطلاعات کاربری وارد کنید."</string>
     <string name="credentials_old_password" msgid="7553393815538684028">"رمز ورود فعلی:"</string>
-    <string name="credentials_reset_hint" msgid="2336340927894094814">"همه محتواها حذف می شود و رمز ورود بازنشانی می شود. آیا مطمئن هستید؟"</string>
+    <!-- outdated translation 7883277320781857760 -->     <string name="credentials_reset_hint" msgid="1566409057833618877">"مطمئن هستید می خواهید تمام اطلاعات کاربری را حذف کرده و رمز ورود دستگاه ذخیره سازی را بازنشانی کنید؟"</string>
     <string name="credentials_password_too_short" msgid="7502749986405522663">"رمز ورود باید حداقل 8 نویسه داشته باشد."</string>
     <string name="credentials_wrong_password" msgid="2541932597104054807">"رمز ورود نادرست است."</string>
     <string name="credentials_reset_warning" msgid="5320653011511797600">"رمز ورود نادرست است. قبل از پاک کردن حافظه اطلاعات کاربری، یک بار دیگر می توانید رمز خود را وارد کنید."</string>
     <string name="credentials_reset_warning_plural" msgid="6514085665301095279">"رمز ورود نادرست است. قبل از پاک شدن حافظه اطلاعات کاربری، <xliff:g id="NUMBER">%1$d</xliff:g> بار دیگر می توانید رمز ورود را وارد کنید."</string>
     <string name="credentials_erased" msgid="2907836028586342969">"حافظه اطلاعات کاربری پاک شد."</string>
-    <!-- no translation found for credentials_not_erased (7098106773249438137) -->
+    <!-- no translation found for credentials_not_erased (397954733557821269) -->
     <skip />
     <string name="credentials_enabled" msgid="7588607413349978930">"ذخیره سازی اطلاعات کاربری فعال شد."</string>
+    <!-- no translation found for credentials_configure_lock_screen_hint (6816970208840577219) -->
+    <skip />
     <string name="emergency_tone_title" msgid="1055954530111587114">"آهنگ اضطراری"</string>
     <string name="emergency_tone_summary" msgid="722259232924572153">"واکنش موجود در هنگام برقراری تماس اضطراری را تنظیم کنید"</string>
     <string name="privacy_settings" msgid="9206631214140954954">"رازداری"</string>

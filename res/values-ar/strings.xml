@@ -316,7 +316,7 @@
     <string name="unlock_set_unlock_pin_summary" msgid="5556722736289132512">"طلب رقم تعريف شخصي رقمي لإلغاء تأمين الشاشة"</string>
     <string name="unlock_set_unlock_password_title" msgid="8775603825675090937">"كلمة المرور"</string>
     <string name="unlock_set_unlock_password_summary" msgid="7871968012198279034">"طلب كلمة مرور لإلغاء تأمين الشاشة"</string>
-    <string name="unlock_set_unlock_disabled_summary" msgid="8563103042330816018">"معطل بواسطة المشرف أو سياسة التشفير"</string>
+    <!-- outdated translation 5962903914511361952 -->     <string name="unlock_set_unlock_disabled_summary" msgid="2120729867788851674">"معطل بواسطة مشرف جهاز التحكم عن بعد"</string>
     <string name="unlock_set_unlock_mode_off" msgid="378729687629105388">"إيقاف"</string>
     <string name="unlock_set_unlock_mode_none" msgid="7137296704741184239">"بدون تأمين"</string>
     <string name="unlock_set_unlock_mode_pattern" msgid="464022606293547390">"محمي باستخدام نقش"</string>
@@ -599,6 +599,13 @@
     <string name="brightness_summary" msgid="838917350127550703">"ضبط سطوع الشاشة"</string>
     <string name="screen_timeout" msgid="6962654593018319466">"المهلة"</string>
     <string name="screen_timeout_summary" msgid="4471347210332380587">"يتم إغلاق الشاشة تلقائيًا بعد <xliff:g id="TIMEOUT_DESCRIPTION">%1$s</xliff:g>"</string>
+    <string name="dream_settings_title" msgid="6536876013377446805">"Android Dreams"</string>
+    <string name="dream_settings_summary" msgid="6809871648071408259">"شاشات التوقف وتحولات الخمول الأخرى"</string>
+    <string name="dream_component_title" msgid="505229894674572578">"الحلم المحدد"</string>
+    <string name="dream_timeout_title" msgid="1385909618566514628">"وقت التنشيط"</string>
+    <string name="dream_timeout_summary" msgid="6721955887728454226">"بعد انقضاء مدة <xliff:g id="TIMEOUT_DESCRIPTION">%1$s</xliff:g> من الخمول"</string>
+    <string name="dream_timeout_zero_summary" msgid="2450290346381400092">"مطلقًا"</string>
+    <string name="dream_test" msgid="5968002644622194481">"جرِّب بنفسك."</string>
     <string name="automatic_brightness" msgid="5014143533884135461">"سطوع تلقائي"</string>
     <string name="title_font_size" msgid="4405544325522105222">"حجم الخط"</string>
     <string name="summary_font_size" msgid="7548243392515500554">"الحجم الإجمالي للخطوط"</string>
@@ -681,13 +688,12 @@
     <string name="sd_insert_summary" product="default" msgid="2048640010381803841">"إدراج بطاقة SD للتحميل"</string>
     <string name="sd_mount" product="nosdcard" msgid="8966695015677343116">"تركيب وحدة تخزين USB"</string>
     <string name="sd_mount" product="default" msgid="5940523765187704135">"تحميل بطاقة SD"</string>
-    <string name="sd_mount_summary" product="nosdcard" msgid="1794150364965145726">"تركيب وحدة تخزين USB"</string>
-    <string name="sd_mount_summary" product="default" msgid="4936591681679097699">"تحميل بطاقة SD"</string>
+    <string name="sd_mount_summary" product="nosdcard" msgid="4673411327373419641"></string>
+    <string name="sd_mount_summary" product="default" msgid="4673411327373419641"></string>
     <string name="sd_format" product="nosdcard" msgid="2148179271623099054">"محو وحدة تخزين USB"</string>
     <string name="sd_format" product="default" msgid="2576054280507119870">"محو بطاقة SD"</string>
     <string name="sd_format_summary" product="nosdcard" msgid="6331905044907914603">"محو كل البيانات على وحدة تخزين USB الداخلية، مثل الموسيقى والصور"</string>
     <string name="sd_format_summary" product="default" msgid="212703692181793109">"محو كل البيانات على بطاقة SD، مثل الموسيقى والصور"</string>
-    <string name="sd_unavailable" msgid="8580107589533213904">"غير متاح"</string>
     <string name="read_only" msgid="6702420168629076340">" (للقراءة فقط)"</string>
     <string name="dlg_confirm_unmount_title" product="nosdcard" msgid="2349876662428231297">"إلغاء تركيب وحدة تخزين USB"</string>
     <string name="dlg_confirm_unmount_title" product="default" msgid="8612140627310646730">"إلغاء تحميل بطاقة SD"</string>
@@ -745,7 +751,7 @@
     <string name="master_clear_accounts" product="default" msgid="6412857499147999073">\n\n"تم تسجيل دخولك حاليًا في الحسابات التالية:"\n</string>
     <string name="master_clear_desc_also_erases_external" msgid="1903185203791274237"><li>"الموسيقى"</li>\n<li>"الصور"</li>\n<li>"بيانات المستخدم الأخرى"</li></string>
     <string name="master_clear_desc_erase_external_storage" product="nosdcard" msgid="4740866328425123395">\n\n"لمسح الموسيقى والصور وبيانات المستخدم الأخرى أيضًا، يلزم محو "<b>"وحدة تخزين USB"</b>"."</string>
-    <!-- syntax error in translation for master_clear_desc_erase_external_storage (7339100478676372901) org.xmlpull.v1.XmlPullParserException: expected: /string read: b (position:END_TAG </b>@1:177 in java.io.StringReader@1ff4689e)  -->
+    <!-- syntax error in translation for master_clear_desc_erase_external_storage (7339100478676372901) org.xmlpull.v1.XmlPullParserException: expected: /string read: b (position:END_TAG </b>@1:177 in java.io.StringReader@4d125127)  -->
     <string name="erase_external_storage" product="nosdcard" msgid="969364037450286809">"محو وحدة تخزين USB"</string>
     <string name="erase_external_storage" product="default" msgid="1397239046334307625">"محو بطاقة SD"</string>
     <string name="erase_external_storage_description" product="nosdcard" msgid="444834593696342279">"محو كل البيانات على وحدة تخزين USB الداخلية، مثل الموسيقى والصور."</string>
@@ -903,6 +909,7 @@
     <string name="application_info_label" msgid="1150486628158409543">"معلومات التطبيق"</string>
     <string name="storage_label" msgid="8700867073480107253">"التخزين"</string>
     <string name="auto_launch_label" msgid="3012617472833815382">"تشغيل بشكل افتراضي"</string>
+    <string name="screen_compatibility_label" msgid="663250687205465394">"توافق الشاشة"</string>
     <string name="permissions_label" msgid="2605296874922726203">"الأذونات"</string>
     <string name="cache_header_label" msgid="1877197634162461830">"ذاكرة التخزين المؤقت"</string>
     <string name="clear_cache_btn_text" msgid="5756314834291116325">"محو ذاكرة التخزين المؤقت"</string>
@@ -922,6 +929,9 @@
     <string name="auto_launch_enable_text" msgid="2630656657744196691">"لقد حددت تشغيل هذا التطبيق بشكل افتراضي لبعض الإجراءات."</string>
     <string name="auto_launch_disable_text" msgid="7800385822185540166">"لم يتم تعيين إعدادات افتراضية."</string>
     <string name="clear_activities" msgid="7408923511535174430">"محو الإعدادات الافتراضية"</string>
+    <string name="screen_compatibility_text" msgid="2398570332021220651">"ربما لم يتم تصميم هذا التطبيق ليلائم شاشتك، يمكنك التحكم في كيفية ضبطه ليلائم شاشتك هنا."</string>
+    <string name="ask_compatibility" msgid="7225195569089607846">"السؤال عند الإطلاق"</string>
+    <string name="enable_compatibility" msgid="3257284255974065538">"مقياس التطبيق"</string>
     <string name="unknown" msgid="1592123443519355854">"غير معروف"</string>
     <string name="sort_order_alpha" msgid="1410278099123670628">"تصنيف بحسب الاسم"</string>
     <string name="sort_order_size" msgid="7024513286636502362">"تصنيف بحسب الحجم"</string>
@@ -1109,6 +1119,8 @@
     <string name="accessibility_power_button_category" msgid="8545885236482339928">"زر الطاقة"</string>
     <string name="accessibility_power_button_ends_call" msgid="7698764194501089533">"زر الطاقة ينهي الاتصال"</string>
     <string name="accessibility_power_button_ends_call_summary" msgid="8878097632186291462">"أثناء الاتصال، سيؤدي الضغط على زر الطاقة إلى إنهاء الاتصال بدلاً من إيقاف الشاشة"</string>
+    <!-- no translation found for settings_button (3006713718908152930) -->
+    <skip />
     <string name="touchscreen_gestures_category" msgid="3109869155350859625">"إيماءات الشاشة التي تعمل باللمس"</string>
     <string name="long_press_timeout_selector_title" msgid="1396876537252863044">"مهلة اللمس مع الاستمرار"</string>
     <string name="long_press_timeout_selector_summary" msgid="2261114502740278996">"مهلة إلى أن يتم تفسير اللمس كلمس مع الاستمرار"</string>
@@ -1316,19 +1328,21 @@
     <string name="credentials_install_summary" product="nosdcard" msgid="4220422806818210676">"تثبيت الشهادات من وحدة تخزين"</string>
     <string name="credentials_install_summary" product="default" msgid="5737658257407822713">"تثبيت الشهادات من بطاقة SD"</string>
     <string name="credentials_reset" msgid="3239382277144980418">"محو بيانات الاعتماد"</string>
-    <string name="credentials_reset_summary" msgid="3810369467217453606">"إزالة جميع المحتويات وإعادة تعيين كلمة المرور"</string>
+    <!-- outdated translation 2127419861568976637 -->     <string name="credentials_reset_summary" msgid="3369361230171260282">"مسح جميع المحتويات من تخزين بيانات الاعتماد وإعادة تعيين كلمة المرور"</string>
     <string name="credentials_unlock" msgid="1463040326264133844">"إدخال كلمة المرور"</string>
     <string name="credentials_unlock_hint" msgid="5889551635843338639">"أدخل كلمة المرور تخزين بيانات الاعتماد."</string>
     <string name="credentials_old_password" msgid="7553393815538684028">"كلمة المرور الحالية:"</string>
-    <string name="credentials_reset_hint" msgid="2336340927894094814">"ستتم إزالة كل المحتويات، وإعادة تعيين كلمة المرور. هل تريد بالتأكيد إجراء ذلك؟"</string>
+    <!-- outdated translation 7883277320781857760 -->     <string name="credentials_reset_hint" msgid="1566409057833618877">"هل تريد بالتأكيد حذف جميع بيانات الاعتماد وإعادة تعيين كلمة مرور تخزين بيانات الاعتماد؟"</string>
     <string name="credentials_password_too_short" msgid="7502749986405522663">"يجب أن تحتوي كلمة المرور على 8 أحرف على الأقل."</string>
     <string name="credentials_wrong_password" msgid="2541932597104054807">"كلمة مرور غير صحيحة."</string>
     <string name="credentials_reset_warning" msgid="5320653011511797600">"كلمة مرور غير صحيحة. بقي لديك محاولة واحدة أخرى قبل مسح تخزين بيانات الاعتماد."</string>
     <string name="credentials_reset_warning_plural" msgid="6514085665301095279">"كلمة مرور غير صحيحة. بقي لديك <xliff:g id="NUMBER">%1$d</xliff:g> من المحاولات قبل مسح تخزين بيانات الاعتماد."</string>
     <string name="credentials_erased" msgid="2907836028586342969">"تم مسح تخزين بيانات الاعتماد."</string>
-    <!-- no translation found for credentials_not_erased (7098106773249438137) -->
+    <!-- no translation found for credentials_not_erased (397954733557821269) -->
     <skip />
     <string name="credentials_enabled" msgid="7588607413349978930">"تم تمكين تخزين بيانات الاعتماد."</string>
+    <!-- no translation found for credentials_configure_lock_screen_hint (6816970208840577219) -->
+    <skip />
     <string name="emergency_tone_title" msgid="1055954530111587114">"نغمة الطوارئ"</string>
     <string name="emergency_tone_summary" msgid="722259232924572153">"تعيين السلوك عند إجراء اتصال بالطوارئ"</string>
     <string name="privacy_settings" msgid="9206631214140954954">"الخصوصية"</string>

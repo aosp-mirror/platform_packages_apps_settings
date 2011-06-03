@@ -316,7 +316,7 @@
     <string name="unlock_set_unlock_pin_summary" msgid="5556722736289132512">"화면 잠금을 해제하려면 숫자 PIN이 필요합니다."</string>
     <string name="unlock_set_unlock_password_title" msgid="8775603825675090937">"비밀번호"</string>
     <string name="unlock_set_unlock_password_summary" msgid="7871968012198279034">"화면 잠금을 해제하려면 비밀번호가 필요합니다."</string>
-    <string name="unlock_set_unlock_disabled_summary" msgid="8563103042330816018">"관리자 또는 암호화 정책에 따라 사용 중지됨"</string>
+    <!-- outdated translation 5962903914511361952 -->     <string name="unlock_set_unlock_disabled_summary" msgid="2120729867788851674">"원격 기기 관리자가 사용 중지함"</string>
     <string name="unlock_set_unlock_mode_off" msgid="378729687629105388">"사용 안함"</string>
     <string name="unlock_set_unlock_mode_none" msgid="7137296704741184239">"보안 사용 안함"</string>
     <string name="unlock_set_unlock_mode_pattern" msgid="464022606293547390">"패턴으로 보안"</string>
@@ -599,6 +599,13 @@
     <string name="brightness_summary" msgid="838917350127550703">"화면 밝기 조정"</string>
     <string name="screen_timeout" msgid="6962654593018319466">"시간제한"</string>
     <string name="screen_timeout_summary" msgid="4471347210332380587">"<xliff:g id="TIMEOUT_DESCRIPTION">%1$s</xliff:g> 후에 화면이 자동으로 꺼짐"</string>
+    <string name="dream_settings_title" msgid="6536876013377446805">"Android 드림"</string>
+    <string name="dream_settings_summary" msgid="6809871648071408259">"화면 보호기 및 기타 유휴 상태 전환"</string>
+    <string name="dream_component_title" msgid="505229894674572578">"선택한 드림"</string>
+    <string name="dream_timeout_title" msgid="1385909618566514628">"활성화 시기"</string>
+    <string name="dream_timeout_summary" msgid="6721955887728454226">"<xliff:g id="TIMEOUT_DESCRIPTION">%1$s</xliff:g> 후 유휴 상태"</string>
+    <string name="dream_timeout_zero_summary" msgid="2450290346381400092">"사용 안함"</string>
+    <string name="dream_test" msgid="5968002644622194481">"이제 직접 사용해 보세요!"</string>
     <string name="automatic_brightness" msgid="5014143533884135461">"자동 밝기"</string>
     <string name="title_font_size" msgid="4405544325522105222">"글꼴 크기"</string>
     <string name="summary_font_size" msgid="7548243392515500554">"전체 글꼴 크기"</string>
@@ -681,13 +688,12 @@
     <string name="sd_insert_summary" product="default" msgid="2048640010381803841">"마운트할 SD 카드 삽입"</string>
     <string name="sd_mount" product="nosdcard" msgid="8966695015677343116">"USB 저장소 마운트"</string>
     <string name="sd_mount" product="default" msgid="5940523765187704135">"SD 카드 마운트"</string>
-    <string name="sd_mount_summary" product="nosdcard" msgid="1794150364965145726">"USB 저장소 마운트"</string>
-    <string name="sd_mount_summary" product="default" msgid="4936591681679097699">"SD 카드 마운트"</string>
+    <string name="sd_mount_summary" product="nosdcard" msgid="4673411327373419641"></string>
+    <string name="sd_mount_summary" product="default" msgid="4673411327373419641"></string>
     <string name="sd_format" product="nosdcard" msgid="2148179271623099054">"USB 저장소 지우기"</string>
     <string name="sd_format" product="default" msgid="2576054280507119870">"SD 카드 지우기"</string>
     <string name="sd_format_summary" product="nosdcard" msgid="6331905044907914603">"내부 USB 저장소에 있는 모든 데이터(예: 음악 및 사진)를 지웁니다."</string>
     <string name="sd_format_summary" product="default" msgid="212703692181793109">"SD 카드에 있는 모든 데이터(예: 음악 및 사진) 지우기"</string>
-    <string name="sd_unavailable" msgid="8580107589533213904">"사용할 수 없음"</string>
     <string name="read_only" msgid="6702420168629076340">" (읽기전용)"</string>
     <string name="dlg_confirm_unmount_title" product="nosdcard" msgid="2349876662428231297">"USB 저장소 마운트 해제"</string>
     <string name="dlg_confirm_unmount_title" product="default" msgid="8612140627310646730">"SD 카드 마운트 해제"</string>
@@ -903,6 +909,7 @@
     <string name="application_info_label" msgid="1150486628158409543">"애플리케이션 정보"</string>
     <string name="storage_label" msgid="8700867073480107253">"저장공간"</string>
     <string name="auto_launch_label" msgid="3012617472833815382">"기본으로 실행"</string>
+    <string name="screen_compatibility_label" msgid="663250687205465394">"화면 호환성"</string>
     <string name="permissions_label" msgid="2605296874922726203">"권한"</string>
     <string name="cache_header_label" msgid="1877197634162461830">"캐시"</string>
     <string name="clear_cache_btn_text" msgid="5756314834291116325">"캐시 지우기"</string>
@@ -922,6 +929,9 @@
     <string name="auto_launch_enable_text" msgid="2630656657744196691">"이 애플리케이션을 해당 작업에 대한 기본 프로그램으로 실행하도록 선택했습니다."</string>
     <string name="auto_launch_disable_text" msgid="7800385822185540166">"기본값이 설정되지 않았습니다."</string>
     <string name="clear_activities" msgid="7408923511535174430">"기본 작업 지우기"</string>
+    <string name="screen_compatibility_text" msgid="2398570332021220651">"이 애플리케이션은 사용 중인 화면에 맞게 개발되지 않았을 수 있습니다. 여기에서 애플리케이션이 화면에 조정되는 방식을 선택할 수 있습니다."</string>
+    <string name="ask_compatibility" msgid="7225195569089607846">"설치 시 확인"</string>
+    <string name="enable_compatibility" msgid="3257284255974065538">"애플리케이션 확장"</string>
     <string name="unknown" msgid="1592123443519355854">"알 수 없음"</string>
     <string name="sort_order_alpha" msgid="1410278099123670628">"이름순 정렬"</string>
     <string name="sort_order_size" msgid="7024513286636502362">"크기순 정렬"</string>
@@ -1109,6 +1119,8 @@
     <string name="accessibility_power_button_category" msgid="8545885236482339928">"전원 버튼"</string>
     <string name="accessibility_power_button_ends_call" msgid="7698764194501089533">"전원 버튼으로 통화 종료"</string>
     <string name="accessibility_power_button_ends_call_summary" msgid="8878097632186291462">"전화를 거는 동안 전원 버튼을 누르면 화면이 꺼지지 않고 통화가 종료"</string>
+    <!-- no translation found for settings_button (3006713718908152930) -->
+    <skip />
     <string name="touchscreen_gestures_category" msgid="3109869155350859625">"터치스크린 동작"</string>
     <string name="long_press_timeout_selector_title" msgid="1396876537252863044">"길게 누르기 지연"</string>
     <string name="long_press_timeout_selector_summary" msgid="2261114502740278996">"터치가 길게 누르기로 해석될 때까지 지연"</string>
@@ -1316,19 +1328,21 @@
     <string name="credentials_install_summary" product="nosdcard" msgid="4220422806818210676">"저장소에서 인증서 설치"</string>
     <string name="credentials_install_summary" product="default" msgid="5737658257407822713">"SD 카드에서 인증서 설치"</string>
     <string name="credentials_reset" msgid="3239382277144980418">"자격증명 삭제"</string>
-    <string name="credentials_reset_summary" msgid="3810369467217453606">"콘텐츠를 모두 삭제하고 비밀번호 재설정"</string>
+    <!-- outdated translation 2127419861568976637 -->     <string name="credentials_reset_summary" msgid="3369361230171260282">"모든 콘텐츠의 자격증명 저장소 삭제 및 비밀번호 재설정"</string>
     <string name="credentials_unlock" msgid="1463040326264133844">"비밀번호 입력"</string>
     <string name="credentials_unlock_hint" msgid="5889551635843338639">"자격증명 저장소에 대한 비밀번호를 입력하세요."</string>
     <string name="credentials_old_password" msgid="7553393815538684028">"현재 비밀번호:"</string>
-    <string name="credentials_reset_hint" msgid="2336340927894094814">"콘텐츠가 모두 삭제되고 비밀번호가 재설정됩니다. 계속하시겠습니까?"</string>
+    <!-- outdated translation 7883277320781857760 -->     <string name="credentials_reset_hint" msgid="1566409057833618877">"모든 자격증명을 삭제하고 자격증명 저장소 비밀번호를 재설정하시겠습니까?"</string>
     <string name="credentials_password_too_short" msgid="7502749986405522663">"비밀번호는 8자 이상이어야 합니다."</string>
     <string name="credentials_wrong_password" msgid="2541932597104054807">"비밀번호가 잘못되었습니다."</string>
     <string name="credentials_reset_warning" msgid="5320653011511797600">"비밀번호가 잘못되었습니다. 한 번 더 실패하면 자격증명 저장소가 지워집니다."</string>
     <string name="credentials_reset_warning_plural" msgid="6514085665301095279">"비밀번호가 잘못되었습니다. <xliff:g id="NUMBER">%1$d</xliff:g>번 더 실패하면 자격증명 저장소가 지워집니다."</string>
     <string name="credentials_erased" msgid="2907836028586342969">"자격증명 저장소가 삭제되었습니다."</string>
-    <!-- no translation found for credentials_not_erased (7098106773249438137) -->
+    <!-- no translation found for credentials_not_erased (397954733557821269) -->
     <skip />
     <string name="credentials_enabled" msgid="7588607413349978930">"자격증명 저장소를 사용합니다."</string>
+    <!-- no translation found for credentials_configure_lock_screen_hint (6816970208840577219) -->
+    <skip />
     <string name="emergency_tone_title" msgid="1055954530111587114">"긴급 신호음"</string>
     <string name="emergency_tone_summary" msgid="722259232924572153">"긴급 통화 중 동작 설정"</string>
     <string name="privacy_settings" msgid="9206631214140954954">"개인정보 보호"</string>

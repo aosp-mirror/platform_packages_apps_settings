@@ -316,7 +316,7 @@
     <string name="unlock_set_unlock_pin_summary" msgid="5556722736289132512">"画面ロックを数値PINで解除する"</string>
     <string name="unlock_set_unlock_password_title" msgid="8775603825675090937">"パスワード"</string>
     <string name="unlock_set_unlock_password_summary" msgid="7871968012198279034">"画面ロックをパスワードで解除する"</string>
-    <string name="unlock_set_unlock_disabled_summary" msgid="8563103042330816018">"管理者または暗号化ポリシーにより無効化"</string>
+    <!-- outdated translation 5962903914511361952 -->     <string name="unlock_set_unlock_disabled_summary" msgid="2120729867788851674">"リモートの端末管理者が無効にしました"</string>
     <string name="unlock_set_unlock_mode_off" msgid="378729687629105388">"OFF"</string>
     <string name="unlock_set_unlock_mode_none" msgid="7137296704741184239">"セキュリティなし"</string>
     <string name="unlock_set_unlock_mode_pattern" msgid="464022606293547390">"パターンで保護されています"</string>
@@ -599,6 +599,13 @@
     <string name="brightness_summary" msgid="838917350127550703">"画面の明るさを調整する"</string>
     <string name="screen_timeout" msgid="6962654593018319466">"タイムアウト"</string>
     <string name="screen_timeout_summary" msgid="4471347210332380587">"画面を<xliff:g id="TIMEOUT_DESCRIPTION">%1$s</xliff:g>後に自動的にOFFにする"</string>
+    <string name="dream_settings_title" msgid="6536876013377446805">"Androidスクリーンセーバー"</string>
+    <string name="dream_settings_summary" msgid="6809871648071408259">"スクリーンセーバーとその他のアイドルツール"</string>
+    <string name="dream_component_title" msgid="505229894674572578">"選択されているスクリーンセーバー"</string>
+    <string name="dream_timeout_title" msgid="1385909618566514628">"起動のタイミング"</string>
+    <string name="dream_timeout_summary" msgid="6721955887728454226">"アイドル状態が<xliff:g id="TIMEOUT_DESCRIPTION">%1$s</xliff:g>続いた後"</string>
+    <string name="dream_timeout_zero_summary" msgid="2450290346381400092">"起動しない"</string>
+    <string name="dream_test" msgid="5968002644622194481">"再生してみる"</string>
     <string name="automatic_brightness" msgid="5014143533884135461">"明るさを自動調整"</string>
     <string name="title_font_size" msgid="4405544325522105222">"フォントサイズ"</string>
     <string name="summary_font_size" msgid="7548243392515500554">"全体のフォントサイズ"</string>
@@ -681,13 +688,12 @@
     <string name="sd_insert_summary" product="default" msgid="2048640010381803841">"マウントするSDカードを挿入"</string>
     <string name="sd_mount" product="nosdcard" msgid="8966695015677343116">"USBストレージをマウント"</string>
     <string name="sd_mount" product="default" msgid="5940523765187704135">"SDカードをマウント"</string>
-    <string name="sd_mount_summary" product="nosdcard" msgid="1794150364965145726">"USBストレージをマウント"</string>
-    <string name="sd_mount_summary" product="default" msgid="4936591681679097699">"SDカードをマウント"</string>
+    <string name="sd_mount_summary" product="nosdcard" msgid="4673411327373419641"></string>
+    <string name="sd_mount_summary" product="default" msgid="4673411327373419641"></string>
     <string name="sd_format" product="nosdcard" msgid="2148179271623099054">"USBストレージ内データを消去"</string>
     <string name="sd_format" product="default" msgid="2576054280507119870">"SDカード内データを消去"</string>
     <string name="sd_format_summary" product="nosdcard" msgid="6331905044907914603">"内部USBストレージ内の全データ（音楽、写真など）の消去"</string>
     <string name="sd_format_summary" product="default" msgid="212703692181793109">"SDカード内の全データ（音楽、写真など）の消去"</string>
-    <string name="sd_unavailable" msgid="8580107589533213904">"使用不可"</string>
     <string name="read_only" msgid="6702420168629076340">" （読み取り専用）"</string>
     <string name="dlg_confirm_unmount_title" product="nosdcard" msgid="2349876662428231297">"USBストレージのマウント解除"</string>
     <string name="dlg_confirm_unmount_title" product="default" msgid="8612140627310646730">"SDカードのマウント解除"</string>
@@ -903,6 +909,7 @@
     <string name="application_info_label" msgid="1150486628158409543">"アプリケーション情報"</string>
     <string name="storage_label" msgid="8700867073480107253">"メモリ"</string>
     <string name="auto_launch_label" msgid="3012617472833815382">"デフォルトでの起動"</string>
+    <string name="screen_compatibility_label" msgid="663250687205465394">"画面の互換性"</string>
     <string name="permissions_label" msgid="2605296874922726203">"許可"</string>
     <string name="cache_header_label" msgid="1877197634162461830">"キャッシュ"</string>
     <string name="clear_cache_btn_text" msgid="5756314834291116325">"キャッシュを消去"</string>
@@ -922,6 +929,9 @@
     <string name="auto_launch_enable_text" msgid="2630656657744196691">"特定の操作で使用する既定アプリケーションとして設定されています。"</string>
     <string name="auto_launch_disable_text" msgid="7800385822185540166">"設定されていません。"</string>
     <string name="clear_activities" msgid="7408923511535174430">"設定を消去"</string>
+    <string name="screen_compatibility_text" msgid="2398570332021220651">"このアプリケーションはお使いの画面用に設計されていない可能性があります。お使いの画面にどのように合わせるかをここで設定できます。"</string>
+    <string name="ask_compatibility" msgid="7225195569089607846">"起動時に確認する"</string>
+    <string name="enable_compatibility" msgid="3257284255974065538">"アプリケーションを拡大/縮小"</string>
     <string name="unknown" msgid="1592123443519355854">"不明"</string>
     <string name="sort_order_alpha" msgid="1410278099123670628">"名前順"</string>
     <string name="sort_order_size" msgid="7024513286636502362">"サイズ順"</string>
@@ -1109,6 +1119,8 @@
     <string name="accessibility_power_button_category" msgid="8545885236482339928">"電源ボタン"</string>
     <string name="accessibility_power_button_ends_call" msgid="7698764194501089533">"電源ボタンで通話を終了する"</string>
     <string name="accessibility_power_button_ends_call_summary" msgid="8878097632186291462">"画面をOFFにするのではなく電源ボタンを押して通話を終了する"</string>
+    <!-- no translation found for settings_button (3006713718908152930) -->
+    <skip />
     <string name="touchscreen_gestures_category" msgid="3109869155350859625">"タッチスクリーンジェスチャー"</string>
     <string name="long_press_timeout_selector_title" msgid="1396876537252863044">"長押しの時間"</string>
     <string name="long_press_timeout_selector_summary" msgid="2261114502740278996">"タップして長押しと判断されるまでの時間"</string>
@@ -1316,19 +1328,21 @@
     <string name="credentials_install_summary" product="nosdcard" msgid="4220422806818210676">"ストレージから証明書をインストールする"</string>
     <string name="credentials_install_summary" product="default" msgid="5737658257407822713">"証明書をSDカードからインストールする"</string>
     <string name="credentials_reset" msgid="3239382277144980418">"認証ストレージの消去"</string>
-    <string name="credentials_reset_summary" msgid="3810369467217453606">"すべてのコンテンツを削除してパスワードをリセットする"</string>
+    <!-- outdated translation 2127419861568976637 -->     <string name="credentials_reset_summary" msgid="3369361230171260282">"認証情報ストレージのすべてのコンテンツを消去してパスワードをリセットする"</string>
     <string name="credentials_unlock" msgid="1463040326264133844">"パスワードを入力する"</string>
     <string name="credentials_unlock_hint" msgid="5889551635843338639">"認証ストレージのパスワードを入力してください。"</string>
     <string name="credentials_old_password" msgid="7553393815538684028">"現在のパスワード:"</string>
-    <string name="credentials_reset_hint" msgid="2336340927894094814">"コンテンツはすべて削除され、パスワードはリセットされます。操作を実行してもよろしいですか？"</string>
+    <!-- outdated translation 7883277320781857760 -->     <string name="credentials_reset_hint" msgid="1566409057833618877">"すべての認証情報を削除して認証情報ストレージパスワードをリセットしてもよろしいですか？"</string>
     <string name="credentials_password_too_short" msgid="7502749986405522663">"パスワードを8文字以上で入力してください。"</string>
     <string name="credentials_wrong_password" msgid="2541932597104054807">"パスワードが正しくありません。"</string>
     <string name="credentials_reset_warning" msgid="5320653011511797600">"パスワードが正しくありません。あと1回失敗すると、認証情報ストレージが消去されます。"</string>
     <string name="credentials_reset_warning_plural" msgid="6514085665301095279">"パスワードが正しくありません。あと<xliff:g id="NUMBER">%1$d</xliff:g>回失敗すると、認証情報ストレージが消去されます。"</string>
     <string name="credentials_erased" msgid="2907836028586342969">"認証情報ストレージを消去"</string>
-    <!-- no translation found for credentials_not_erased (7098106773249438137) -->
+    <!-- no translation found for credentials_not_erased (397954733557821269) -->
     <skip />
     <string name="credentials_enabled" msgid="7588607413349978930">"認証情報ストレージが有効になりました。"</string>
+    <!-- no translation found for credentials_configure_lock_screen_hint (6816970208840577219) -->
+    <skip />
     <string name="emergency_tone_title" msgid="1055954530111587114">"緊急時の音"</string>
     <string name="emergency_tone_summary" msgid="722259232924572153">"緊急通報時の動作を設定します"</string>
     <string name="privacy_settings" msgid="9206631214140954954">"バックアップと復元"</string>

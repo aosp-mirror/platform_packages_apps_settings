@@ -316,7 +316,7 @@
     <string name="unlock_set_unlock_pin_summary" msgid="5556722736289132512">"Požadovať na odomknutie obrazovky číselný kód PIN"</string>
     <string name="unlock_set_unlock_password_title" msgid="8775603825675090937">"Heslo"</string>
     <string name="unlock_set_unlock_password_summary" msgid="7871968012198279034">"Požadovať heslo na odomknutie obrazovky"</string>
-    <string name="unlock_set_unlock_disabled_summary" msgid="8563103042330816018">"Zakázané správcom alebo pravidlami šifrovania"</string>
+    <!-- outdated translation 5962903914511361952 -->     <string name="unlock_set_unlock_disabled_summary" msgid="2120729867788851674">"Zakázané vzdialeným správcom zariadenia"</string>
     <string name="unlock_set_unlock_mode_off" msgid="378729687629105388">"Vypnuté"</string>
     <string name="unlock_set_unlock_mode_none" msgid="7137296704741184239">"Bez zabezpečenia"</string>
     <string name="unlock_set_unlock_mode_pattern" msgid="464022606293547390">"Zabezpečené vzorom"</string>
@@ -599,6 +599,13 @@
     <string name="brightness_summary" msgid="838917350127550703">"Nastavenia jasu obrazovky"</string>
     <string name="screen_timeout" msgid="6962654593018319466">"Časový limit"</string>
     <string name="screen_timeout_summary" msgid="4471347210332380587">"Obrazovka sa automaticky vypne po <xliff:g id="TIMEOUT_DESCRIPTION">%1$s</xliff:g>"</string>
+    <string name="dream_settings_title" msgid="6536876013377446805">"Sny Android"</string>
+    <string name="dream_settings_summary" msgid="6809871648071408259">"Šetriče obrazovky a ďalšie akcie pri nečinnosti"</string>
+    <string name="dream_component_title" msgid="505229894674572578">"Vybratý sen"</string>
+    <string name="dream_timeout_title" msgid="1385909618566514628">"Čas aktivácie"</string>
+    <string name="dream_timeout_summary" msgid="6721955887728454226">"Po nečinnosti <xliff:g id="TIMEOUT_DESCRIPTION">%1$s</xliff:g>"</string>
+    <string name="dream_timeout_zero_summary" msgid="2450290346381400092">"Nikdy"</string>
+    <string name="dream_test" msgid="5968002644622194481">"Skúsiť"</string>
     <string name="automatic_brightness" msgid="5014143533884135461">"Automatický jas"</string>
     <string name="title_font_size" msgid="4405544325522105222">"Veľkosť písma"</string>
     <string name="summary_font_size" msgid="7548243392515500554">"Celková veľkosť písiem"</string>
@@ -681,13 +688,12 @@
     <string name="sd_insert_summary" product="default" msgid="2048640010381803841">"Vložte kartu SD, ktorú chcete pripojiť"</string>
     <string name="sd_mount" product="nosdcard" msgid="8966695015677343116">"Pripoj. ukl. priestor USB"</string>
     <string name="sd_mount" product="default" msgid="5940523765187704135">"Pripojiť kartu SD"</string>
-    <string name="sd_mount_summary" product="nosdcard" msgid="1794150364965145726">"Pripojiť ukladací priestor USB"</string>
-    <string name="sd_mount_summary" product="default" msgid="4936591681679097699">"Pripojiť kartu SD"</string>
+    <string name="sd_mount_summary" product="nosdcard" msgid="4673411327373419641"></string>
+    <string name="sd_mount_summary" product="default" msgid="4673411327373419641"></string>
     <string name="sd_format" product="nosdcard" msgid="2148179271623099054">"Vymazať ukladací priestor USB"</string>
     <string name="sd_format" product="default" msgid="2576054280507119870">"Vymazať kartu SD"</string>
     <string name="sd_format_summary" product="nosdcard" msgid="6331905044907914603">"Vymaže vš. údaje v internom uklad. priestore USB, napr. hudbu alebo fotografie."</string>
     <string name="sd_format_summary" product="default" msgid="212703692181793109">"Vymaže všetky údaje na karte SD, ako je hudba alebo fotografie"</string>
-    <string name="sd_unavailable" msgid="8580107589533213904">"Nie sú k dispozícii"</string>
     <string name="read_only" msgid="6702420168629076340">" (Iba na čítanie)"</string>
     <string name="dlg_confirm_unmount_title" product="nosdcard" msgid="2349876662428231297">"Odpoj. uklad. priestor USB"</string>
     <string name="dlg_confirm_unmount_title" product="default" msgid="8612140627310646730">"Odpojiť kartu SD"</string>
@@ -903,6 +909,7 @@
     <string name="application_info_label" msgid="1150486628158409543">"Informácie o aplikácii"</string>
     <string name="storage_label" msgid="8700867073480107253">"Ukladací priestor"</string>
     <string name="auto_launch_label" msgid="3012617472833815382">"Spúšťať ako predvolenú"</string>
+    <string name="screen_compatibility_label" msgid="663250687205465394">"Kompatibilita obrazovky"</string>
     <string name="permissions_label" msgid="2605296874922726203">"Povolenia"</string>
     <string name="cache_header_label" msgid="1877197634162461830">"Vyrovnávacia pamäť"</string>
     <string name="clear_cache_btn_text" msgid="5756314834291116325">"Vymazať vyrovnávaciu pamäť"</string>
@@ -922,6 +929,9 @@
     <string name="auto_launch_enable_text" msgid="2630656657744196691">"Aplikácia bola nastavená, aby sa pri niektorých akciách spúšťala ako predvolená."</string>
     <string name="auto_launch_disable_text" msgid="7800385822185540166">"Nie je predvolená pre žiadne akcie."</string>
     <string name="clear_activities" msgid="7408923511535174430">"Vymazať predvolené nastavenia"</string>
+    <string name="screen_compatibility_text" msgid="2398570332021220651">"Táto aplikácia pravdepodobne nie je určená pre vašu obrazovku. Tu môžete nastaviť, ako sa aplikácia obrazovke prispôsobí."</string>
+    <string name="ask_compatibility" msgid="7225195569089607846">"Opýtať sa pri spustení"</string>
+    <string name="enable_compatibility" msgid="3257284255974065538">"Prispôsobiť veľkosť aplikácie"</string>
     <string name="unknown" msgid="1592123443519355854">"Neznáme"</string>
     <string name="sort_order_alpha" msgid="1410278099123670628">"Zoradiť podľa názvu"</string>
     <string name="sort_order_size" msgid="7024513286636502362">"Zoradiť podľa veľkosti"</string>
@@ -1109,6 +1119,8 @@
     <string name="accessibility_power_button_category" msgid="8545885236482339928">"Tlačidlo Napájanie"</string>
     <string name="accessibility_power_button_ends_call" msgid="7698764194501089533">"Tlačidlo Napájanie ukončuje hovor"</string>
     <string name="accessibility_power_button_ends_call_summary" msgid="8878097632186291462">"Stlačenie tlačidla Napájanie počas hovoru namiesto vypnutia obrazovky ukončí hovor"</string>
+    <!-- no translation found for settings_button (3006713718908152930) -->
+    <skip />
     <string name="touchscreen_gestures_category" msgid="3109869155350859625">"Gestá dotykovej obrazovky"</string>
     <string name="long_press_timeout_selector_title" msgid="1396876537252863044">"Doba dotyku a podržania"</string>
     <string name="long_press_timeout_selector_summary" msgid="2261114502740278996">"Doba, po ktorej sa dotyk interpretuje ako dotyk a následné podržanie"</string>
@@ -1316,19 +1328,21 @@
     <string name="credentials_install_summary" product="nosdcard" msgid="4220422806818210676">"Inštalovať certifikáty z ukladacieho priestoru"</string>
     <string name="credentials_install_summary" product="default" msgid="5737658257407822713">"Inštalovať certifikáty z karty SD"</string>
     <string name="credentials_reset" msgid="3239382277144980418">"Vymazať poverenia"</string>
-    <string name="credentials_reset_summary" msgid="3810369467217453606">"Odstrániť všetok obsah a obnoviť heslo"</string>
+    <!-- outdated translation 2127419861568976637 -->     <string name="credentials_reset_summary" msgid="3369361230171260282">"Vymazať celý obsah ukladacieho priestoru poverení a obnoviť heslo"</string>
     <string name="credentials_unlock" msgid="1463040326264133844">"Zadajte heslo"</string>
     <string name="credentials_unlock_hint" msgid="5889551635843338639">"Zadajte heslo pre ukladací priestor poverení."</string>
     <string name="credentials_old_password" msgid="7553393815538684028">"Aktuálne heslo:"</string>
-    <string name="credentials_reset_hint" msgid="2336340927894094814">"Všetok obsah bude odstránený a heslo bude obnovené. Naozaj chcete pokračovať?"</string>
+    <!-- outdated translation 7883277320781857760 -->     <string name="credentials_reset_hint" msgid="1566409057833618877">"Naozaj chcete odstrániť všetky poverenia a obnoviť heslo do ukladacieho priestoru poverení?"</string>
     <string name="credentials_password_too_short" msgid="7502749986405522663">"Heslo musí mať aspoň 8 znakov."</string>
     <string name="credentials_wrong_password" msgid="2541932597104054807">"Nesprávne heslo."</string>
     <string name="credentials_reset_warning" msgid="5320653011511797600">"Nesprávne heslo. Do vymazania ukladacieho priestoru poverení vám zostáva jeden pokus."</string>
     <string name="credentials_reset_warning_plural" msgid="6514085665301095279">"Nesprávne heslo. Počet zostávajúcich pokusov do vymazania ukladacieho priestoru poverení: <xliff:g id="NUMBER">%1$d</xliff:g>."</string>
     <string name="credentials_erased" msgid="2907836028586342969">"Ukl. priestor pover. je vymaz."</string>
-    <!-- no translation found for credentials_not_erased (7098106773249438137) -->
+    <!-- no translation found for credentials_not_erased (397954733557821269) -->
     <skip />
     <string name="credentials_enabled" msgid="7588607413349978930">"Ukladací priestor poverení je aktivovaný."</string>
+    <!-- no translation found for credentials_configure_lock_screen_hint (6816970208840577219) -->
+    <skip />
     <string name="emergency_tone_title" msgid="1055954530111587114">"Tiesňové vyzváňanie"</string>
     <string name="emergency_tone_summary" msgid="722259232924572153">"Nastaviť správanie pri tiesňovom volaní"</string>
     <string name="privacy_settings" msgid="9206631214140954954">"Ochrana osobných údajov"</string>

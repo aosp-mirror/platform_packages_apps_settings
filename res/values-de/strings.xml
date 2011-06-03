@@ -316,7 +316,7 @@
     <string name="unlock_set_unlock_pin_summary" msgid="5556722736289132512">"Numerische PIN zur Display-Entsp. erfordern"</string>
     <string name="unlock_set_unlock_password_title" msgid="8775603825675090937">"Passwort"</string>
     <string name="unlock_set_unlock_password_summary" msgid="7871968012198279034">"Passwort zur Displayentsperrung erfordern"</string>
-    <string name="unlock_set_unlock_disabled_summary" msgid="8563103042330816018">"Vom Admin./per Verschlüsselungsrichtlinie deaktiviert"</string>
+    <!-- outdated translation 5962903914511361952 -->     <string name="unlock_set_unlock_disabled_summary" msgid="2120729867788851674">"Vom Remote-Geräteadministrator deaktiviert"</string>
     <string name="unlock_set_unlock_mode_off" msgid="378729687629105388">"Aus"</string>
     <string name="unlock_set_unlock_mode_none" msgid="7137296704741184239">"Keine Sicherheit"</string>
     <string name="unlock_set_unlock_mode_pattern" msgid="464022606293547390">"Durch Muster geschützt"</string>
@@ -599,6 +599,13 @@
     <string name="brightness_summary" msgid="838917350127550703">"Helligkeit des Bildschirms anpassen"</string>
     <string name="screen_timeout" msgid="6962654593018319466">"Timeout"</string>
     <string name="screen_timeout_summary" msgid="4471347210332380587">"Bildschirm wird nach <xliff:g id="TIMEOUT_DESCRIPTION">%1$s</xliff:g> automatisch abgeschaltet."</string>
+    <string name="dream_settings_title" msgid="6536876013377446805">"Android-Träume"</string>
+    <string name="dream_settings_summary" msgid="6809871648071408259">"Bildschirmschoner und andere Unterhaltung bei Nichtaktivität"</string>
+    <string name="dream_component_title" msgid="505229894674572578">"Ausgewählter Traum"</string>
+    <string name="dream_timeout_title" msgid="1385909618566514628">"Zeitpunkt der Aktivierung"</string>
+    <string name="dream_timeout_summary" msgid="6721955887728454226">"Nach <xliff:g id="TIMEOUT_DESCRIPTION">%1$s</xliff:g> ohne Aktivität"</string>
+    <string name="dream_timeout_zero_summary" msgid="2450290346381400092">"Nie"</string>
+    <string name="dream_test" msgid="5968002644622194481">"Probieren Sie es aus!"</string>
     <string name="automatic_brightness" msgid="5014143533884135461">"Automatische Helligkeit"</string>
     <string name="title_font_size" msgid="4405544325522105222">"Schriftgröße"</string>
     <string name="summary_font_size" msgid="7548243392515500554">"Allgemeine Schriftgröße"</string>
@@ -681,13 +688,12 @@
     <string name="sd_insert_summary" product="default" msgid="2048640010381803841">"SD-Karte zur Bereitstellung einlegen"</string>
     <string name="sd_mount" product="nosdcard" msgid="8966695015677343116">"USB-Speicher bereitst."</string>
     <string name="sd_mount" product="default" msgid="5940523765187704135">"SD-Karte bereitstellen"</string>
-    <string name="sd_mount_summary" product="nosdcard" msgid="1794150364965145726">"USB-Speicher bereitstellen"</string>
-    <string name="sd_mount_summary" product="default" msgid="4936591681679097699">"SD-Karte bereitstellen"</string>
+    <string name="sd_mount_summary" product="nosdcard" msgid="4673411327373419641"></string>
+    <string name="sd_mount_summary" product="default" msgid="4673411327373419641"></string>
     <string name="sd_format" product="nosdcard" msgid="2148179271623099054">"USB-Speicher löschen"</string>
     <string name="sd_format" product="default" msgid="2576054280507119870">"SD-Karte löschen"</string>
     <string name="sd_format_summary" product="nosdcard" msgid="6331905044907914603">"Löscht alle Daten, z. B. Musik und Fotos, aus dem internen USB-Speicher"</string>
     <string name="sd_format_summary" product="default" msgid="212703692181793109">"Löscht sämtliche Daten wie Musik und Fotos von der SD-Karte"</string>
-    <string name="sd_unavailable" msgid="8580107589533213904">"Nicht verfügbar"</string>
     <string name="read_only" msgid="6702420168629076340">" (schreibgeschützt)"</string>
     <string name="dlg_confirm_unmount_title" product="nosdcard" msgid="2349876662428231297">"USB-Speicher trennen"</string>
     <string name="dlg_confirm_unmount_title" product="default" msgid="8612140627310646730">"SD-Karte entnehmen"</string>
@@ -903,6 +909,7 @@
     <string name="application_info_label" msgid="1150486628158409543">"Anwendungsinfo"</string>
     <string name="storage_label" msgid="8700867073480107253">"Speicher"</string>
     <string name="auto_launch_label" msgid="3012617472833815382">"Standardmäßig starten"</string>
+    <string name="screen_compatibility_label" msgid="663250687205465394">"Bildschirmkompatibilität"</string>
     <string name="permissions_label" msgid="2605296874922726203">"Berechtigungen"</string>
     <string name="cache_header_label" msgid="1877197634162461830">"Cache"</string>
     <string name="clear_cache_btn_text" msgid="5756314834291116325">"Cache löschen"</string>
@@ -922,6 +929,9 @@
     <string name="auto_launch_enable_text" msgid="2630656657744196691">"Sie haben diese Anwendung für einige Aktionen als Standard festgelegt."</string>
     <string name="auto_launch_disable_text" msgid="7800385822185540166">"Kein Standard"</string>
     <string name="clear_activities" msgid="7408923511535174430">"Standardeinstellung zurücksetzen"</string>
+    <string name="screen_compatibility_text" msgid="2398570332021220651">"Möglicherweise ist diese App nicht auf Ihren Bildschirm ausgelegt. Hier können Sie festlegen, wie sie an Ihren Bildschirm angepasst wird."</string>
+    <string name="ask_compatibility" msgid="7225195569089607846">"Beim Start fragen"</string>
+    <string name="enable_compatibility" msgid="3257284255974065538">"App skalieren"</string>
     <string name="unknown" msgid="1592123443519355854">"Unbekannt"</string>
     <string name="sort_order_alpha" msgid="1410278099123670628">"Nach Namen sortieren"</string>
     <string name="sort_order_size" msgid="7024513286636502362">"Nach Größe sortieren"</string>
@@ -1109,6 +1119,8 @@
     <string name="accessibility_power_button_category" msgid="8545885236482339928">"Ein-/Austaste"</string>
     <string name="accessibility_power_button_ends_call" msgid="7698764194501089533">"Ein-/Austaste beendet Anruf"</string>
     <string name="accessibility_power_button_ends_call_summary" msgid="8878097632186291462">"Das Drücken der Ein-/Austaste während eines Anrufs beendet den Anruf (statt den Bildschirm auszuschalten)"</string>
+    <!-- no translation found for settings_button (3006713718908152930) -->
+    <skip />
     <string name="touchscreen_gestures_category" msgid="3109869155350859625">"Touchscreen-Gesten"</string>
     <string name="long_press_timeout_selector_title" msgid="1396876537252863044">"Berühren und Halten-Reaktionszeit"</string>
     <string name="long_press_timeout_selector_summary" msgid="2261114502740278996">"Dauer, bis eine Berührung als Berühren und Halten interpretiert wird"</string>
@@ -1316,19 +1328,21 @@
     <string name="credentials_install_summary" product="nosdcard" msgid="4220422806818210676">"Zertifikate von Speicher installieren"</string>
     <string name="credentials_install_summary" product="default" msgid="5737658257407822713">"Zertifikate von SD-Karte installieren"</string>
     <string name="credentials_reset" msgid="3239382277144980418">"Anmeldedaten löschen"</string>
-    <string name="credentials_reset_summary" msgid="3810369467217453606">"Sämtliche Inhalte entfernen und Passwort zurücksetzen"</string>
+    <!-- outdated translation 2127419861568976637 -->     <string name="credentials_reset_summary" msgid="3369361230171260282">"Inhalt des Anmeldeinformationsspeichers löschen und Passwort zurücksetzen"</string>
     <string name="credentials_unlock" msgid="1463040326264133844">"Passwort eingeben"</string>
     <string name="credentials_unlock_hint" msgid="5889551635843338639">"Geben Sie das Passwort für den Anmeldedatenspeicher ein."</string>
     <string name="credentials_old_password" msgid="7553393815538684028">"Aktuelles Passwort:"</string>
-    <string name="credentials_reset_hint" msgid="2336340927894094814">"Sämtliche Inhalte werden gelöscht und das Passwort wird zurückgesetzt. Möchten Sie wirklich fortfahren?"</string>
+    <!-- outdated translation 7883277320781857760 -->     <string name="credentials_reset_hint" msgid="1566409057833618877">"Möchten Sie wirklich alle Anmeldeinformationen löschen und das Passwort für den Anmeldeinformationsspeicher zurücksetzen?"</string>
     <string name="credentials_password_too_short" msgid="7502749986405522663">"Das Passwort muss mindestens acht Zeichen lang sein."</string>
     <string name="credentials_wrong_password" msgid="2541932597104054807">"Falsches Passwort"</string>
     <string name="credentials_reset_warning" msgid="5320653011511797600">"Falsches Passwort. Sie haben noch einen Versuch, bevor Ihr Anmeldedatenspeicher gelöscht wird."</string>
     <string name="credentials_reset_warning_plural" msgid="6514085665301095279">"Falsches Passwort. Sie haben noch <xliff:g id="NUMBER">%1$d</xliff:g> Versuche, bevor Ihr Anmeldedatenspeicher gelöscht wird."</string>
     <string name="credentials_erased" msgid="2907836028586342969">"Speicher wurde gelöscht."</string>
-    <!-- no translation found for credentials_not_erased (7098106773249438137) -->
+    <!-- no translation found for credentials_not_erased (397954733557821269) -->
     <skip />
     <string name="credentials_enabled" msgid="7588607413349978930">"Der Anmeldeinformationsspeicher ist aktiviert."</string>
+    <!-- no translation found for credentials_configure_lock_screen_hint (6816970208840577219) -->
+    <skip />
     <string name="emergency_tone_title" msgid="1055954530111587114">"Notfallsignal"</string>
     <string name="emergency_tone_summary" msgid="722259232924572153">"Verhalten bei einem Notruf festlegen"</string>
     <string name="privacy_settings" msgid="9206631214140954954">"Datenschutz"</string>

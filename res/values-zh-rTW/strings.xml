@@ -316,7 +316,7 @@
     <string name="unlock_set_unlock_pin_summary" msgid="5556722736289132512">"需輸入數字 PIN 替螢幕解鎖"</string>
     <string name="unlock_set_unlock_password_title" msgid="8775603825675090937">"密碼"</string>
     <string name="unlock_set_unlock_password_summary" msgid="7871968012198279034">"需輸入密碼替螢幕解鎖"</string>
-    <string name="unlock_set_unlock_disabled_summary" msgid="8563103042330816018">"由管理員停用，或因加密政策而遭停用"</string>
+    <!-- outdated translation 5962903914511361952 -->     <string name="unlock_set_unlock_disabled_summary" msgid="2120729867788851674">"已由遠端裝置管理員停用"</string>
     <string name="unlock_set_unlock_mode_off" msgid="378729687629105388">"關閉"</string>
     <string name="unlock_set_unlock_mode_none" msgid="7137296704741184239">"無安全性設定"</string>
     <string name="unlock_set_unlock_mode_pattern" msgid="464022606293547390">"以解鎖圖形設定安全保護"</string>
@@ -599,6 +599,13 @@
     <string name="brightness_summary" msgid="838917350127550703">"調整螢幕亮度"</string>
     <string name="screen_timeout" msgid="6962654593018319466">"逾時"</string>
     <string name="screen_timeout_summary" msgid="4471347210332380587">"<xliff:g id="TIMEOUT_DESCRIPTION">%1$s</xliff:g>後自動關閉螢幕"</string>
+    <string name="dream_settings_title" msgid="6536876013377446805">"Android Dreams"</string>
+    <string name="dream_settings_summary" msgid="6809871648071408259">"螢幕保護程式和其他閒置處理方式"</string>
+    <string name="dream_component_title" msgid="505229894674572578">"選取的 Dream"</string>
+    <string name="dream_timeout_title" msgid="1385909618566514628">"啟動時間"</string>
+    <string name="dream_timeout_summary" msgid="6721955887728454226">"閒置 <xliff:g id="TIMEOUT_DESCRIPTION">%1$s</xliff:g>後"</string>
+    <string name="dream_timeout_zero_summary" msgid="2450290346381400092">"不要"</string>
+    <string name="dream_test" msgid="5968002644622194481">"試試看！"</string>
     <string name="automatic_brightness" msgid="5014143533884135461">"自動調整亮度"</string>
     <string name="title_font_size" msgid="4405544325522105222">"字型大小"</string>
     <string name="summary_font_size" msgid="7548243392515500554">"整體字型大小"</string>
@@ -681,13 +688,12 @@
     <string name="sd_insert_summary" product="default" msgid="2048640010381803841">"插入要掛載的 SD 卡"</string>
     <string name="sd_mount" product="nosdcard" msgid="8966695015677343116">"掛接 USB 儲存裝置"</string>
     <string name="sd_mount" product="default" msgid="5940523765187704135">"掛載 SD 卡"</string>
-    <string name="sd_mount_summary" product="nosdcard" msgid="1794150364965145726">"掛接 USB 儲存裝置"</string>
-    <string name="sd_mount_summary" product="default" msgid="4936591681679097699">"掛載 SD 卡"</string>
+    <string name="sd_mount_summary" product="nosdcard" msgid="4673411327373419641"></string>
+    <string name="sd_mount_summary" product="default" msgid="4673411327373419641"></string>
     <string name="sd_format" product="nosdcard" msgid="2148179271623099054">"清除 USB 儲存裝置"</string>
     <string name="sd_format" product="default" msgid="2576054280507119870">"清除 SD 卡"</string>
     <string name="sd_format_summary" product="nosdcard" msgid="6331905044907914603">"清除內部 USB 儲存裝置中的所有資料，例如音樂和相片"</string>
     <string name="sd_format_summary" product="default" msgid="212703692181793109">"清除 SD 卡中的所有資料，例如音樂和相片"</string>
-    <string name="sd_unavailable" msgid="8580107589533213904">"無法取得資訊"</string>
     <string name="read_only" msgid="6702420168629076340">" (唯讀)"</string>
     <string name="dlg_confirm_unmount_title" product="nosdcard" msgid="2349876662428231297">"無法卸載 USB 儲存裝置"</string>
     <string name="dlg_confirm_unmount_title" product="default" msgid="8612140627310646730">"卸載 SD 卡"</string>
@@ -903,6 +909,7 @@
     <string name="application_info_label" msgid="1150486628158409543">"應用程式資訊"</string>
     <string name="storage_label" msgid="8700867073480107253">"儲存空間"</string>
     <string name="auto_launch_label" msgid="3012617472833815382">"預設為啟動"</string>
+    <string name="screen_compatibility_label" msgid="663250687205465394">"螢幕相容性"</string>
     <string name="permissions_label" msgid="2605296874922726203">"權限"</string>
     <string name="cache_header_label" msgid="1877197634162461830">"快取"</string>
     <string name="clear_cache_btn_text" msgid="5756314834291116325">"清除快取"</string>
@@ -922,6 +929,9 @@
     <string name="auto_launch_enable_text" msgid="2630656657744196691">"您已設定在某些操作下啟動此應用程式。"</string>
     <string name="auto_launch_disable_text" msgid="7800385822185540166">"沒有預設值。"</string>
     <string name="clear_activities" msgid="7408923511535174430">"清除預設值"</string>
+    <string name="screen_compatibility_text" msgid="2398570332021220651">"這個應用程式可能與您的螢幕不相容；您可以在這裡控制應用程式，將其調整為與您的螢幕相容。"</string>
+    <string name="ask_compatibility" msgid="7225195569089607846">"啓動時詢問"</string>
+    <string name="enable_compatibility" msgid="3257284255974065538">"調整應用程式大小"</string>
     <string name="unknown" msgid="1592123443519355854">"不明"</string>
     <string name="sort_order_alpha" msgid="1410278099123670628">"按名稱排序"</string>
     <string name="sort_order_size" msgid="7024513286636502362">"依大小排序"</string>
@@ -1109,6 +1119,8 @@
     <string name="accessibility_power_button_category" msgid="8545885236482339928">"電源鍵"</string>
     <string name="accessibility_power_button_ends_call" msgid="7698764194501089533">"電源鍵可結束通話"</string>
     <string name="accessibility_power_button_ends_call_summary" msgid="8878097632186291462">"通話時按下電源鍵結束通話，不會關閉螢幕"</string>
+    <!-- no translation found for settings_button (3006713718908152930) -->
+    <skip />
     <string name="touchscreen_gestures_category" msgid="3109869155350859625">"觸控式螢幕手勢"</string>
     <string name="long_press_timeout_selector_title" msgid="1396876537252863044">"輕觸並按住延遲"</string>
     <string name="long_press_timeout_selector_summary" msgid="2261114502740278996">"延遲等到裝置將觸控操作解讀為輕觸並按住為止"</string>
@@ -1316,19 +1328,21 @@
     <string name="credentials_install_summary" product="nosdcard" msgid="4220422806818210676">"從儲存裝置安裝憑證"</string>
     <string name="credentials_install_summary" product="default" msgid="5737658257407822713">"從 SD 卡安裝憑證"</string>
     <string name="credentials_reset" msgid="3239382277144980418">"清除憑證"</string>
-    <string name="credentials_reset_summary" msgid="3810369467217453606">"移除所有內容並重設密碼"</string>
+    <!-- outdated translation 2127419861568976637 -->     <string name="credentials_reset_summary" msgid="3369361230171260282">"清除認證儲存空間的所有內容，並重設密碼"</string>
     <string name="credentials_unlock" msgid="1463040326264133844">"輸入密碼"</string>
     <string name="credentials_unlock_hint" msgid="5889551635843338639">"輸入憑證儲存空間的密碼。"</string>
     <string name="credentials_old_password" msgid="7553393815538684028">"目前的密碼："</string>
-    <string name="credentials_reset_hint" msgid="2336340927894094814">"這會移除所有內容並重設密碼，您確定要繼續進行嗎？"</string>
+    <!-- outdated translation 7883277320781857760 -->     <string name="credentials_reset_hint" msgid="1566409057833618877">"您確定要刪除所有憑證，並重設認證儲存空間密碼嗎？"</string>
     <string name="credentials_password_too_short" msgid="7502749986405522663">"密碼最少必須包含 8 個字元。"</string>
     <string name="credentials_wrong_password" msgid="2541932597104054807">"密碼不正確。"</string>
     <string name="credentials_reset_warning" msgid="5320653011511797600">"密碼不正確。您還有 1 次輸入密碼的機會，如果輸入錯誤，憑證儲存空間將遭到清除。"</string>
     <string name="credentials_reset_warning_plural" msgid="6514085665301095279">"密碼不正確。您還有 <xliff:g id="NUMBER">%1$d</xliff:g> 次輸入密碼的機會，如果輸入錯誤，憑證儲存空間將遭到清除。"</string>
     <string name="credentials_erased" msgid="2907836028586342969">"憑證儲存空間已清除。"</string>
-    <!-- no translation found for credentials_not_erased (7098106773249438137) -->
+    <!-- no translation found for credentials_not_erased (397954733557821269) -->
     <skip />
     <string name="credentials_enabled" msgid="7588607413349978930">"已啟用認證儲存空間。"</string>
+    <!-- no translation found for credentials_configure_lock_screen_hint (6816970208840577219) -->
+    <skip />
     <string name="emergency_tone_title" msgid="1055954530111587114">"緊急警示音"</string>
     <string name="emergency_tone_summary" msgid="722259232924572153">"設定撥打緊急電話時的運作方式"</string>
     <string name="privacy_settings" msgid="9206631214140954954">"隱私設定"</string>

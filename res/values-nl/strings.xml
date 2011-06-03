@@ -316,7 +316,7 @@
     <string name="unlock_set_unlock_pin_summary" msgid="5556722736289132512">"Numerieke PIN-code vereist voor schermontgr."</string>
     <string name="unlock_set_unlock_password_title" msgid="8775603825675090937">"Wachtwoord"</string>
     <string name="unlock_set_unlock_password_summary" msgid="7871968012198279034">"Wachtwoord vereist voor schermontgrendeling"</string>
-    <string name="unlock_set_unlock_disabled_summary" msgid="8563103042330816018">"Uitgeschakeld door beheerder of coderingsbeleid"</string>
+    <!-- outdated translation 5962903914511361952 -->     <string name="unlock_set_unlock_disabled_summary" msgid="2120729867788851674">"Uitgeschakeld door externe apparaatbeheerder"</string>
     <string name="unlock_set_unlock_mode_off" msgid="378729687629105388">"Uitgeschakeld"</string>
     <string name="unlock_set_unlock_mode_none" msgid="7137296704741184239">"Geen beveiliging"</string>
     <string name="unlock_set_unlock_mode_pattern" msgid="464022606293547390">"Beveiligd met patroon"</string>
@@ -599,6 +599,13 @@
     <string name="brightness_summary" msgid="838917350127550703">"Helderheid van het scherm aanpassen"</string>
     <string name="screen_timeout" msgid="6962654593018319466">"Time-out"</string>
     <string name="screen_timeout_summary" msgid="4471347210332380587">"Het scherm wordt automatisch uitgeschakeld na <xliff:g id="TIMEOUT_DESCRIPTION">%1$s</xliff:g>"</string>
+    <string name="dream_settings_title" msgid="6536876013377446805">"Android Dreams"</string>
+    <string name="dream_settings_summary" msgid="6809871648071408259">"Screensavers en andere opties voor inactiviteit"</string>
+    <string name="dream_component_title" msgid="505229894674572578">"Geselecteerde droom"</string>
+    <string name="dream_timeout_title" msgid="1385909618566514628">"Activeringsmoment"</string>
+    <string name="dream_timeout_summary" msgid="6721955887728454226">"Na <xliff:g id="TIMEOUT_DESCRIPTION">%1$s</xliff:g> inactiviteit"</string>
+    <string name="dream_timeout_zero_summary" msgid="2450290346381400092">"Nooit"</string>
+    <string name="dream_test" msgid="5968002644622194481">"Probeer het zelf!"</string>
     <string name="automatic_brightness" msgid="5014143533884135461">"Automatische helderheid"</string>
     <string name="title_font_size" msgid="4405544325522105222">"Lettergrootte"</string>
     <string name="summary_font_size" msgid="7548243392515500554">"Algemene lettergrootte"</string>
@@ -681,13 +688,12 @@
     <string name="sd_insert_summary" product="default" msgid="2048640010381803841">"Plaats een SD-kaart om deze te koppelen"</string>
     <string name="sd_mount" product="nosdcard" msgid="8966695015677343116">"USB-opslag koppelen"</string>
     <string name="sd_mount" product="default" msgid="5940523765187704135">"SD-kaart koppelen"</string>
-    <string name="sd_mount_summary" product="nosdcard" msgid="1794150364965145726">"USB-opslag koppelen"</string>
-    <string name="sd_mount_summary" product="default" msgid="4936591681679097699">"De SD-kaart koppelen"</string>
+    <string name="sd_mount_summary" product="nosdcard" msgid="4673411327373419641"></string>
+    <string name="sd_mount_summary" product="default" msgid="4673411327373419641"></string>
     <string name="sd_format" product="nosdcard" msgid="2148179271623099054">"USB-opslag wissen"</string>
     <string name="sd_format" product="default" msgid="2576054280507119870">"SD-kaart wissen"</string>
     <string name="sd_format_summary" product="nosdcard" msgid="6331905044907914603">"Wist alle gegevens in de interne USB-opslag, zoals muziek en foto\'s"</string>
     <string name="sd_format_summary" product="default" msgid="212703692181793109">"Hiermee worden alle gegevens op de SD-kaart gewist, zoals muziek en foto\'s"</string>
-    <string name="sd_unavailable" msgid="8580107589533213904">"Niet beschikbaar"</string>
     <string name="read_only" msgid="6702420168629076340">" (Alleen-lezen)"</string>
     <string name="dlg_confirm_unmount_title" product="nosdcard" msgid="2349876662428231297">"USB-opslag ontkoppelen"</string>
     <string name="dlg_confirm_unmount_title" product="default" msgid="8612140627310646730">"SD-kaart ontkoppelen"</string>
@@ -903,6 +909,7 @@
     <string name="application_info_label" msgid="1150486628158409543">"Toepassingsinfo"</string>
     <string name="storage_label" msgid="8700867073480107253">"Opslagruimte"</string>
     <string name="auto_launch_label" msgid="3012617472833815382">"Standaard starten"</string>
+    <string name="screen_compatibility_label" msgid="663250687205465394">"Schermcompatibiliteit"</string>
     <string name="permissions_label" msgid="2605296874922726203">"Machtigingen"</string>
     <string name="cache_header_label" msgid="1877197634162461830">"Cachegeheugen"</string>
     <string name="clear_cache_btn_text" msgid="5756314834291116325">"Cache wissen"</string>
@@ -922,6 +929,9 @@
     <string name="auto_launch_enable_text" msgid="2630656657744196691">"U heeft ervoor gekozen deze app standaard te starten voor bepaalde acties."</string>
     <string name="auto_launch_disable_text" msgid="7800385822185540166">"Geen standaardwaarden ingesteld."</string>
     <string name="clear_activities" msgid="7408923511535174430">"Standaardwaarden wissen"</string>
+    <string name="screen_compatibility_text" msgid="2398570332021220651">"Deze app is mogelijk niet ontworpen voor uw scherm. U kunt hier bepalen hoe de app wordt aangepast aan uw scherm."</string>
+    <string name="ask_compatibility" msgid="7225195569089607846">"Vragen bij starten"</string>
+    <string name="enable_compatibility" msgid="3257284255974065538">"App schalen"</string>
     <string name="unknown" msgid="1592123443519355854">"Onbekend"</string>
     <string name="sort_order_alpha" msgid="1410278099123670628">"Sorteren op naam"</string>
     <string name="sort_order_size" msgid="7024513286636502362">"Sorteren op grootte"</string>
@@ -1109,6 +1119,8 @@
     <string name="accessibility_power_button_category" msgid="8545885236482339928">"Aan/uit-knop"</string>
     <string name="accessibility_power_button_ends_call" msgid="7698764194501089533">"Knop beëindigt oproep"</string>
     <string name="accessibility_power_button_ends_call_summary" msgid="8878097632186291462">"Als u tijdens een oproep op de aan/uit-knop drukt, wordt de oproep beëindigd in plaats van dat het scherm wordt uitgeschakeld"</string>
+    <!-- no translation found for settings_button (3006713718908152930) -->
+    <skip />
     <string name="touchscreen_gestures_category" msgid="3109869155350859625">"Gebaren voor het aanraakscherm"</string>
     <string name="long_press_timeout_selector_title" msgid="1396876537252863044">"Vertraging voor blijven aanraken"</string>
     <string name="long_press_timeout_selector_summary" msgid="2261114502740278996">"Vertraging totdat een aanraking wordt geïnterpreteerd als blijven aanraken"</string>
@@ -1316,19 +1328,21 @@
     <string name="credentials_install_summary" product="nosdcard" msgid="4220422806818210676">"Certificaten vanuit opslag installeren"</string>
     <string name="credentials_install_summary" product="default" msgid="5737658257407822713">"Certificaten installeren vanaf SD-kaart"</string>
     <string name="credentials_reset" msgid="3239382277144980418">"Referenties wissen"</string>
-    <string name="credentials_reset_summary" msgid="3810369467217453606">"Alle inhoud verwijderen en het wachtwoord opnieuw instellen"</string>
+    <!-- outdated translation 2127419861568976637 -->     <string name="credentials_reset_summary" msgid="3369361230171260282">"Referentieopslag voor inhoud wissen en wachtwoord opnieuw instellen"</string>
     <string name="credentials_unlock" msgid="1463040326264133844">"Voer het wachtwoord in"</string>
     <string name="credentials_unlock_hint" msgid="5889551635843338639">"Geef het wachtwoord voor de opslag van referenties op."</string>
     <string name="credentials_old_password" msgid="7553393815538684028">"Huidig wachtwoord:"</string>
-    <string name="credentials_reset_hint" msgid="2336340927894094814">"Alle inhoud wordt verwijderd en het wachtwoord wordt opnieuw ingesteld. Weet u het zeker?"</string>
+    <!-- outdated translation 7883277320781857760 -->     <string name="credentials_reset_hint" msgid="1566409057833618877">"Weet u zeker dat u alle referenties wilt verwijderen en het wachtwoord voor de opslag van referenties opnieuw wilt instellen?"</string>
     <string name="credentials_password_too_short" msgid="7502749986405522663">"Het wachtwoord moet uit ten minste 8 tekens bestaan."</string>
     <string name="credentials_wrong_password" msgid="2541932597104054807">"Onjuist wachtwoord."</string>
     <string name="credentials_reset_warning" msgid="5320653011511797600">"Onjuist wachtwoord. U heeft nog één poging voordat de opslag van referenties wordt gewist."</string>
     <string name="credentials_reset_warning_plural" msgid="6514085665301095279">"Onjuist wachtwoord. U heeft nog <xliff:g id="NUMBER">%1$d</xliff:g> pogingen voordat de opslag van referenties wordt gewist."</string>
     <string name="credentials_erased" msgid="2907836028586342969">"Opslag van referenties is gewist."</string>
-    <!-- no translation found for credentials_not_erased (7098106773249438137) -->
+    <!-- no translation found for credentials_not_erased (397954733557821269) -->
     <skip />
     <string name="credentials_enabled" msgid="7588607413349978930">"De opslag van referenties is ingeschakeld."</string>
+    <!-- no translation found for credentials_configure_lock_screen_hint (6816970208840577219) -->
+    <skip />
     <string name="emergency_tone_title" msgid="1055954530111587114">"Toon voor noodoproep"</string>
     <string name="emergency_tone_summary" msgid="722259232924572153">"Gedrag bij noodoproepen instellen"</string>
     <string name="privacy_settings" msgid="9206631214140954954">"Back-up &amp; herstellen"</string>

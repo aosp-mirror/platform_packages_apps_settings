@@ -316,7 +316,7 @@
     <string name="unlock_set_unlock_pin_summary" msgid="5556722736289132512">"Pieprasīt ciparu PIN, lai atbloķētu ekrānu"</string>
     <string name="unlock_set_unlock_password_title" msgid="8775603825675090937">"Parole"</string>
     <string name="unlock_set_unlock_password_summary" msgid="7871968012198279034">"Pieprasīt paroli, lai atbloķētu ekrānu"</string>
-    <string name="unlock_set_unlock_disabled_summary" msgid="8563103042330816018">"Atspējoja administrators vai šifrēšanas politika."</string>
+    <!-- outdated translation 5962903914511361952 -->     <string name="unlock_set_unlock_disabled_summary" msgid="2120729867788851674">"Atspējoja attālās ierīces administrators"</string>
     <string name="unlock_set_unlock_mode_off" msgid="378729687629105388">"Izslēgts"</string>
     <string name="unlock_set_unlock_mode_none" msgid="7137296704741184239">"Drošība nav iespējota"</string>
     <string name="unlock_set_unlock_mode_pattern" msgid="464022606293547390">"Aizsargāts ar kombināciju"</string>
@@ -599,6 +599,13 @@
     <string name="brightness_summary" msgid="838917350127550703">"Noregulēt ekrāna spilgtumu"</string>
     <string name="screen_timeout" msgid="6962654593018319466">"Noildze"</string>
     <string name="screen_timeout_summary" msgid="4471347210332380587">"Ekrāns automātiski izslēdzas pēc šāda laika: <xliff:g id="TIMEOUT_DESCRIPTION">%1$s</xliff:g>"</string>
+    <string name="dream_settings_title" msgid="6536876013377446805">"Android ekrānsaudzētāji"</string>
+    <string name="dream_settings_summary" msgid="6809871648071408259">"Ekrānsaudzētāji un citas izklaides iespējas dīkstāves laikā"</string>
+    <string name="dream_component_title" msgid="505229894674572578">"Atlasītais ekrānsaudzētājs"</string>
+    <string name="dream_timeout_title" msgid="1385909618566514628">"Aktivizēšanas laiks"</string>
+    <string name="dream_timeout_summary" msgid="6721955887728454226">"Pēc dīkstāves laika: <xliff:g id="TIMEOUT_DESCRIPTION">%1$s</xliff:g>"</string>
+    <string name="dream_timeout_zero_summary" msgid="2450290346381400092">"Nekad"</string>
+    <string name="dream_test" msgid="5968002644622194481">"Izmēģināt"</string>
     <string name="automatic_brightness" msgid="5014143533884135461">"Automātisks spilgtums"</string>
     <string name="title_font_size" msgid="4405544325522105222">"Fonta lielums"</string>
     <string name="summary_font_size" msgid="7548243392515500554">"Vispārējs fontu lielums"</string>
@@ -681,13 +688,12 @@
     <string name="sd_insert_summary" product="default" msgid="2048640010381803841">"Ievietot SD karti uzstādīšanai"</string>
     <string name="sd_mount" product="nosdcard" msgid="8966695015677343116">"Uzstādīt USB krātuvi"</string>
     <string name="sd_mount" product="default" msgid="5940523765187704135">"Pievienot SD karti"</string>
-    <string name="sd_mount_summary" product="nosdcard" msgid="1794150364965145726">"Uzstādīt USB atmiņu"</string>
-    <string name="sd_mount_summary" product="default" msgid="4936591681679097699">"Pievienot SD karti"</string>
+    <string name="sd_mount_summary" product="nosdcard" msgid="4673411327373419641"></string>
+    <string name="sd_mount_summary" product="default" msgid="4673411327373419641"></string>
     <string name="sd_format" product="nosdcard" msgid="2148179271623099054">"Dzēst USB krātuvi"</string>
     <string name="sd_format" product="default" msgid="2576054280507119870">"Dzēst SD karti"</string>
     <string name="sd_format_summary" product="nosdcard" msgid="6331905044907914603">"Dzēst visus iekšējā USB krātuvē saglabātos datus, piem., mūziku vai fotoattēlus."</string>
     <string name="sd_format_summary" product="default" msgid="212703692181793109">"Dzēš visus SD kartē saglabātos datus, piemēram, mūzikas failus un fotoattēlus."</string>
-    <string name="sd_unavailable" msgid="8580107589533213904">"Nepieejams"</string>
     <string name="read_only" msgid="6702420168629076340">" (Tikai lasāms)"</string>
     <string name="dlg_confirm_unmount_title" product="nosdcard" msgid="2349876662428231297">"Atvienot USB krātuvi"</string>
     <string name="dlg_confirm_unmount_title" product="default" msgid="8612140627310646730">"Atvienot SD karti"</string>
@@ -903,6 +909,7 @@
     <string name="application_info_label" msgid="1150486628158409543">"Informācija par lietojumprogrammu"</string>
     <string name="storage_label" msgid="8700867073480107253">"Krātuve"</string>
     <string name="auto_launch_label" msgid="3012617472833815382">"Uzsākšana pēc noklusējuma"</string>
+    <string name="screen_compatibility_label" msgid="663250687205465394">"Ekrāna saderība"</string>
     <string name="permissions_label" msgid="2605296874922726203">"Atļaujas"</string>
     <string name="cache_header_label" msgid="1877197634162461830">"Kešatmiņa"</string>
     <string name="clear_cache_btn_text" msgid="5756314834291116325">"Notīrīt kešatmiņu"</string>
@@ -922,6 +929,9 @@
     <string name="auto_launch_enable_text" msgid="2630656657744196691">"Esat atlasījis opciju dažām darbībām uzsākt šo lietojumprogrammu pēc noklusējuma."</string>
     <string name="auto_launch_disable_text" msgid="7800385822185540166">"Nav iestatīti noklusējumi."</string>
     <string name="clear_activities" msgid="7408923511535174430">"Notīrīt noklusējumus"</string>
+    <string name="screen_compatibility_text" msgid="2398570332021220651">"Iespējams, šī lietojumprogramma nav izstrādāta jūsu ierīces ekrānam. Šeit varat kontrolēt tās pielāgošanu savas ierīces ekrānam."</string>
+    <string name="ask_compatibility" msgid="7225195569089607846">"Jautāt palaišanas laikā"</string>
+    <string name="enable_compatibility" msgid="3257284255974065538">"Mērogot lietojumprogrammu"</string>
     <string name="unknown" msgid="1592123443519355854">"Nezināms"</string>
     <string name="sort_order_alpha" msgid="1410278099123670628">"Kārtot pēc nosaukuma"</string>
     <string name="sort_order_size" msgid="7024513286636502362">"Kārtot pēc izmēra"</string>
@@ -1109,6 +1119,8 @@
     <string name="accessibility_power_button_category" msgid="8545885236482339928">"Barošanas poga"</string>
     <string name="accessibility_power_button_ends_call" msgid="7698764194501089533">"Ar barošanas pogu tiek beigts zvans"</string>
     <string name="accessibility_power_button_ends_call_summary" msgid="8878097632186291462">"Zvana laikā nospiežot barošanas pogu, tiek izbeigts zvans nevis izslēgts ekrāns"</string>
+    <!-- no translation found for settings_button (3006713718908152930) -->
+    <skip />
     <string name="touchscreen_gestures_category" msgid="3109869155350859625">"Skārienekrāna žesti"</string>
     <string name="long_press_timeout_selector_title" msgid="1396876537252863044">"Aizk., pieskar. un turot nosp."</string>
     <string name="long_press_timeout_selector_summary" msgid="2261114502740278996">"Aizkavēt tik ilgi, kamēr pieskāriens tiek interpretēts kā pieskāriens un turēšana."</string>
@@ -1316,19 +1328,21 @@
     <string name="credentials_install_summary" product="nosdcard" msgid="4220422806818210676">"Instalēt sertifikātus no atmiņas"</string>
     <string name="credentials_install_summary" product="default" msgid="5737658257407822713">"Instalēt sertifikātus no SD kartes"</string>
     <string name="credentials_reset" msgid="3239382277144980418">"Akreditācijas datu notīrīšana"</string>
-    <string name="credentials_reset_summary" msgid="3810369467217453606">"Noņemt visu saturu un atiestatīt paroli"</string>
+    <!-- outdated translation 2127419861568976637 -->     <string name="credentials_reset_summary" msgid="3369361230171260282">"Notīrīt visa satura akreditācijas datu krātuvi un atiestatīt tās paroli"</string>
     <string name="credentials_unlock" msgid="1463040326264133844">"Paroles ievadīšana"</string>
     <string name="credentials_unlock_hint" msgid="5889551635843338639">"Ievadiet akreditācijas datu krātuves paroli."</string>
     <string name="credentials_old_password" msgid="7553393815538684028">"Pašreizējā parole:"</string>
-    <string name="credentials_reset_hint" msgid="2336340927894094814">"Tiks noņemts viss saturs, un tiks atiestatīta parole. Vai tiešām vēlaties veikt šo darbību?"</string>
+    <!-- outdated translation 7883277320781857760 -->     <string name="credentials_reset_hint" msgid="1566409057833618877">"Vai tiešām vēlaties dzēst visus akreditācijas datus un atiestatīt akreditācijas datu krātuves paroli?"</string>
     <string name="credentials_password_too_short" msgid="7502749986405522663">"Parolē jābūt vismaz astoņām rakstzīmēm."</string>
     <string name="credentials_wrong_password" msgid="2541932597104054807">"Nepareiza parole."</string>
     <string name="credentials_reset_warning" msgid="5320653011511797600">"Nepareiza parole. Varat vēl mēģināt vienu reizi, pirms tiek izdzēsta akreditācijas datu krātuve."</string>
     <string name="credentials_reset_warning_plural" msgid="6514085665301095279">"Nepareiza parole. Varat vēl mēģināt <xliff:g id="NUMBER">%1$d</xliff:g> reizes, pirms tiek izdzēsta akreditācijas datu krātuve."</string>
     <string name="credentials_erased" msgid="2907836028586342969">"Akreditācijas datu krātuve ir izdzēsta."</string>
-    <!-- no translation found for credentials_not_erased (7098106773249438137) -->
+    <!-- no translation found for credentials_not_erased (397954733557821269) -->
     <skip />
     <string name="credentials_enabled" msgid="7588607413349978930">"Akreditācijas datu krātuve ir iespējota."</string>
+    <!-- no translation found for credentials_configure_lock_screen_hint (6816970208840577219) -->
+    <skip />
     <string name="emergency_tone_title" msgid="1055954530111587114">"Ārkārtas signāls"</string>
     <string name="emergency_tone_summary" msgid="722259232924572153">"Iestatīt uzvedību, kad tiek veikts ārkārtas zvans"</string>
     <string name="privacy_settings" msgid="9206631214140954954">"Konfidencialitāte"</string>
