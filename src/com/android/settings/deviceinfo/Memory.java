@@ -257,7 +257,8 @@ public class Memory extends SettingsPreferenceFragment implements OnCancelListen
             return true;
         }
         */
-        return false;
+        // Better safe than sorry. Assume the storage is used to ask for confirmation.
+        return true;
     }
 
     private void unmount() {
