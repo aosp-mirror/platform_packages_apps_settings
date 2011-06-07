@@ -60,6 +60,9 @@ public class DateTimeSettings extends SettingsPreferenceFragment
     private static final int DIALOG_DATEPICKER = 0;
     private static final int DIALOG_TIMEPICKER = 1;
 
+    // have we been launched from the setup wizard?
+    protected static final String EXTRA_IS_FIRST_RUN = "firstRun";
+
     private CheckBoxPreference mAutoTimePref;
     private Preference mTimePref;
     private Preference mTime24Pref;
@@ -81,15 +84,18 @@ public class DateTimeSettings extends SettingsPreferenceFragment
         boolean autoTimeEnabled = getAutoState(Settings.System.AUTO_TIME);
         boolean autoTimeZoneEnabled = getAutoState(Settings.System.AUTO_TIME_ZONE);
 
+        Intent intent = getActivity().getIntent();
+        boolean isFirstRun = intent.getBooleanExtra(EXTRA_IS_FIRST_RUN, false);
+
         mDummyDate = Calendar.getInstance();
         mDummyDate.set(mDummyDate.get(Calendar.YEAR), 11, 31, 13, 0, 0);
 
         mAutoTimePref = (CheckBoxPreference) findPreference(KEY_AUTO_TIME);
         mAutoTimePref.setChecked(autoTimeEnabled);
         mAutoTimeZonePref = (CheckBoxPreference) findPreference(KEY_AUTO_TIME_ZONE);
-        // Override auto-timezone if it's a wifi-only device.
-        // TODO: Remove this when auto-timezone is implemented based on wifi-location.
-        if (Utils.isWifiOnly()) {
+        // Override auto-timezone if it's a wifi-only device or if we're still in setup wizard.
+        // TODO: Remove the wifiOnly test when auto-timezone is implemented based on wifi-location.
+        if (Utils.isWifiOnly() || isFirstRun) {
             getPreferenceScreen().removePreference(mAutoTimeZonePref);
             autoTimeZoneEnabled = false;
         }
@@ -100,6 +106,10 @@ public class DateTimeSettings extends SettingsPreferenceFragment
         mTimeZone = findPreference("timezone");
         mDatePref = findPreference("date");
         mDateFormat = (ListPreference) findPreference(KEY_DATE_FORMAT);
+        if (isFirstRun) {
+            getPreferenceScreen().removePreference(mTime24Pref);
+            getPreferenceScreen().removePreference(mDateFormat);
+        }
 
         String [] dateFormats = getResources().getStringArray(R.array.date_format_values);
         String [] formattedDates = new String[dateFormats.length];
@@ -158,7 +168,7 @@ public class DateTimeSettings extends SettingsPreferenceFragment
                 .unregisterOnSharedPreferenceChangeListener(this);
     }
 
-    private void updateTimeAndDateDisplay(Context context) {
+    public void updateTimeAndDateDisplay(Context context) {
         java.text.DateFormat shortDateFormat = DateFormat.getDateFormat(context);
         final Calendar now = Calendar.getInstance();
         Date dummyDate = mDummyDate.getTime();
