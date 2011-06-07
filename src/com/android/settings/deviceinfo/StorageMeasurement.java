@@ -525,4 +525,11 @@ public class StorageMeasurement {
             return mFileName  + " : " + mSize + ", id:" + mId;
         }
     }
+
+    /**
+     * TODO remove this method, only used because external SD Card needs a special treatment.
+     */
+    boolean isPrimary() {
+        return mIsPrimary;
+    }
 }
