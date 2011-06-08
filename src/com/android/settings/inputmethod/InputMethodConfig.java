@@ -266,7 +266,6 @@ public class InputMethodConfig extends SettingsPreferenceFragment {
     private void updateActiveInputMethodsSummary() {
         final InputMethodManager imm =
                 (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
-        final PackageManager pm = getPackageManager();
         for (InputMethodInfo imi: mActiveInputMethodsPrefMap.keySet()) {
             Preference pref = mActiveInputMethodsPrefMap.get(imi);
             List<InputMethodSubtype> subtypes = imm.getEnabledInputMethodSubtypeList(imi, true);
@@ -276,8 +275,9 @@ public class InputMethodConfig extends SettingsPreferenceFragment {
                 if (subtypeAdded) {
                     summary.append(", ");
                 }
-                summary.append(pm.getText(imi.getPackageName(), subtype.getNameResId(),
-                        imi.getServiceInfo().applicationInfo));
+                final CharSequence subtypeLabel = subtype.getDisplayName(getActivity(),
+                        imi.getPackageName(), imi.getServiceInfo().applicationInfo);
+                summary.append(subtypeLabel);
                 subtypeAdded = true;
             }
             pref.setSummary(summary.toString());
