@@ -21,7 +21,6 @@ import android.app.Dialog;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.DialogInterface;
-import android.content.DialogInterface.OnCancelListener;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.res.Resources;
@@ -42,7 +41,7 @@ import android.widget.Toast;
 import com.android.settings.R;
 import com.android.settings.SettingsPreferenceFragment;
 
-public class Memory extends SettingsPreferenceFragment implements OnCancelListener {
+public class Memory extends SettingsPreferenceFragment {
     private static final String TAG = "MemorySettings";
 
     private static final int DLG_CONFIRM_UNMOUNT = 1;
@@ -50,9 +49,10 @@ public class Memory extends SettingsPreferenceFragment implements OnCancelListen
 
     private Resources mResources;
 
-    // The mountToggle Preference that has been clicked.
-    // The click event will be discarded if this value is not null. Reset to null after (un)mount.
-    private Preference mClickedMountToggle;
+    // The mountToggle Preference that has last been clicked.
+    // Assumes no two successive unmount event on 2 different volumes are performed before the first
+    // one's preference is disabled
+    private Preference mLastClickedMountToggle;
     private String mClickedMountPoint;
     
     // Access using getMountService()
@@ -157,9 +157,8 @@ public class Memory extends SettingsPreferenceFragment implements OnCancelListen
                 return true;
             }
 
-            boolean mountToggleClicked = svpc.mountToggleClicked(preference);
-            if (mountToggleClicked && mClickedMountToggle == null) {
-                mClickedMountToggle = preference;
+            if (svpc.mountToggleClicked(preference)) {
+                mLastClickedMountToggle = preference;
                 final StorageVolume storageVolume = svpc.getStorageVolume();
                 mClickedMountPoint = storageVolume.getPath();
                 String state = mStorageManager.getVolumeState(storageVolume.getPath());
@@ -208,32 +207,19 @@ public class Memory extends SettingsPreferenceFragment implements OnCancelListen
         return null;
     }
 
-    @Override
-    protected void showDialog(int id) {
-        super.showDialog(id);
-
-        switch (id) {
-            case DLG_CONFIRM_UNMOUNT:
-            case DLG_ERROR_UNMOUNT:
-                setOnCancelListener(this);
-                break;
-        }
-    }
-
     private void doUnmount() {
         // Present a toast here
         Toast.makeText(getActivity(), R.string.unmount_inform_text, Toast.LENGTH_SHORT).show();
         IMountService mountService = getMountService();
         try {
-            mClickedMountToggle.setEnabled(false);
-            mClickedMountToggle.setTitle(mResources.getString(R.string.sd_ejecting_title));
-            mClickedMountToggle.setSummary(mResources.getString(R.string.sd_ejecting_summary));
+            mLastClickedMountToggle.setEnabled(false);
+            mLastClickedMountToggle.setTitle(mResources.getString(R.string.sd_ejecting_title));
+            mLastClickedMountToggle.setSummary(mResources.getString(R.string.sd_ejecting_summary));
             mountService.unmountVolume(mClickedMountPoint, true);
         } catch (RemoteException e) {
             // Informative dialog to user that unmount failed.
             showDialogInner(DLG_ERROR_UNMOUNT);
         }
-        mClickedMountToggle = null;
     }
 
     private void showDialogInner(int id) {
@@ -274,7 +260,6 @@ public class Memory extends SettingsPreferenceFragment implements OnCancelListen
             // Very unlikely. But present an error dialog anyway
             Log.e(TAG, "Is MountService running?");
             showDialogInner(DLG_ERROR_UNMOUNT);
-            mClickedMountToggle = null;
         }
     }
 
@@ -289,10 +274,5 @@ public class Memory extends SettingsPreferenceFragment implements OnCancelListen
         } catch (RemoteException ex) {
             // Not much can be done
         }
-        mClickedMountToggle = null;
-    }
-
-    public void onCancel(DialogInterface dialog) {
-        mClickedMountToggle = null;
     }
 }
