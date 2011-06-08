@@ -188,7 +188,8 @@ public class InputMethodAndSubtypeEnabler extends SettingsPreferenceFragment {
 
     private PreferenceScreen createPreferenceHierarchy() {
         // Root
-        PreferenceScreen root = getPreferenceManager().createPreferenceScreen(getActivity());
+        final PreferenceScreen root = getPreferenceManager().createPreferenceScreen(getActivity());
+        final Context context = getActivity();
 
         int N = (mInputMethodProperties == null ? 0 : mInputMethodProperties.size());
 
@@ -202,7 +203,7 @@ public class InputMethodAndSubtypeEnabler extends SettingsPreferenceFragment {
             if (!TextUtils.isEmpty(mInputMethodId) && !mInputMethodId.equals(imiId)) {
                 continue;
             }
-            PreferenceCategory keyboardSettingsCategory = new PreferenceCategory(getActivity());
+            PreferenceCategory keyboardSettingsCategory = new PreferenceCategory(context);
             root.addPreference(keyboardSettingsCategory);
             PackageManager pm = getPackageManager();
             CharSequence label = imi.loadLabel(pm);
@@ -210,31 +211,22 @@ public class InputMethodAndSubtypeEnabler extends SettingsPreferenceFragment {
             keyboardSettingsCategory.setTitle(label);
             keyboardSettingsCategory.setKey(imiId);
             // TODO: Use toggle Preference if images are ready.
-            CheckBoxPreference autoCB = new CheckBoxPreference(getActivity());
+            CheckBoxPreference autoCB = new CheckBoxPreference(context);
             autoCB.setTitle(R.string.use_system_language_to_select_input_method_subtypes);
             mSubtypeAutoSelectionCBMap.put(imiId, autoCB);
             keyboardSettingsCategory.addPreference(autoCB);
 
-            PreferenceCategory activeInputMethodsCategory = new PreferenceCategory(getActivity());
+            PreferenceCategory activeInputMethodsCategory = new PreferenceCategory(context);
             activeInputMethodsCategory.setTitle(R.string.active_input_method_subtypes);
             root.addPreference(activeInputMethodsCategory);
 
             ArrayList<Preference> subtypePreferences = new ArrayList<Preference>();
             if (subtypeCount > 0) {
                 for (int j = 0; j < subtypeCount; ++j) {
-                    InputMethodSubtype subtype = imi.getSubtypeAt(j);
-                    CharSequence subtypeLabel;
-                    int nameResId = subtype.getNameResId();
-                    if (nameResId != 0) {
-                        subtypeLabel = pm.getText(imi.getPackageName(), nameResId,
-                                imi.getServiceInfo().applicationInfo);
-                    } else {
-                        String mode = subtype.getMode();
-                        CharSequence language = subtype.getLocale();
-                        subtypeLabel = (mode == null ? "" : mode) + ","
-                                + (language == null ? "" : language);
-                    }
-                    CheckBoxPreference chkbxPref = new CheckBoxPreference(getActivity());
+                    final InputMethodSubtype subtype = imi.getSubtypeAt(j);
+                    final CharSequence subtypeLabel = subtype.getDisplayName(context,
+                            imi.getPackageName(), imi.getServiceInfo().applicationInfo);
+                    final CheckBoxPreference chkbxPref = new CheckBoxPreference(context);
                     chkbxPref.setKey(imiId + subtype.hashCode());
                     chkbxPref.setTitle(subtypeLabel);
                     activeInputMethodsCategory.addPreference(chkbxPref);
