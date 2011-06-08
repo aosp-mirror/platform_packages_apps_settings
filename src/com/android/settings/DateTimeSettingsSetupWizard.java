@@ -129,9 +129,6 @@ public class DateTimeSettingsSetupWizard extends Activity
 
         mAutoDateTimeButton = (CompoundButton)findViewById(R.id.date_time_auto_button);
         mAutoDateTimeButton.setChecked(autoDateTimeEnabled);
-        ((TextView)findViewById(R.id.date_time_auto_text))
-                .setText(autoDateTimeEnabled ? R.string.date_time_auto_summaryOn :
-                        R.string.date_time_auto_summaryOff);
         mAutoDateTimeButton.setOnCheckedChangeListener(this);
 
         mTimePicker = (TimePicker)findViewById(R.id.time_picker);
