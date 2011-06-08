@@ -21,6 +21,7 @@ import com.android.settings.R;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.ActivityInfo;
 import android.net.NetworkInfo.DetailedState;
 import android.net.wifi.WifiConfiguration;
 import android.net.wifi.WifiManager;
@@ -53,6 +54,10 @@ import java.util.List;
 public class WifiSettingsForSetupWizardXL extends Activity implements OnClickListener {
     private static final String TAG = "SetupWizard";
     private static final boolean DEBUG = true;
+
+    // lock orientation into landscape or portrait
+    private static final String EXTRA_PREFS_LANDSCAPE_LOCK = "extra_prefs_landscape_lock";
+    private static final String EXTRA_PREFS_PORTRAIT_LOCK = "extra_prefs_portrait_lock";
 
     private static final EnumMap<DetailedState, DetailedState> sNetworkStateMap =
             new EnumMap<DetailedState, DetailedState>(DetailedState.class);
@@ -159,9 +164,17 @@ public class WifiSettingsForSetupWizardXL extends Activity implements OnClickLis
     }
 
     private void initViews() {
-        if (getIntent().getBooleanExtra("firstRun", false)) {
+        Intent intent = getIntent();
+
+        if (intent.getBooleanExtra("firstRun", false)) {
             final View layoutRoot = findViewById(R.id.layout_root);
             layoutRoot.setSystemUiVisibility(View.STATUS_BAR_DISABLE_BACK);
+        }
+        if (intent.getBooleanExtra(EXTRA_PREFS_LANDSCAPE_LOCK, false)) {
+            setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_SENSOR_LANDSCAPE);
+        }
+        if (intent.getBooleanExtra(EXTRA_PREFS_PORTRAIT_LOCK, false)) {
+            setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_SENSOR_PORTRAIT);
         }
 
         mTitleView = (TextView)findViewById(R.id.wifi_setup_title);
