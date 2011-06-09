@@ -89,4 +89,9 @@
         android:summary="@string/proxy_settings_summary" >
     </PreferenceScreen>
 
+    <PreferenceScreen
+        android:fragment="com.android.settings.DataUsageSummary"
+        android:key="data_usage_summary"
+        android:title="@string/data_usage_summary_title" />
+
 </PreferenceScreen>
