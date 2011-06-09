@@ -509,6 +509,7 @@ public class WifiSettings extends SettingsPreferenceFragment
                     WifiManager.EXTRA_NETWORK_INFO);
             mConnected.set(info.isConnected());
             changeNextButtonState(info.isConnected());
+            updateAccessPoints();
             updateConnectionState(info.getDetailedState());
         } else if (WifiManager.RSSI_CHANGED_ACTION.equals(action)) {
             updateConnectionState(null);

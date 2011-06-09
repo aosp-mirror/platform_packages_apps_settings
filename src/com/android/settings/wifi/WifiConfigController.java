@@ -207,11 +207,12 @@ public class WifiConfigController implements TextWatcher,
                     mIpSettingsSpinner.setSelection(STATIC_IP);
                 } else {
                     mIpSettingsSpinner.setSelection(DHCP);
-                    //Display IP addresses
-                    for(InetAddress a : config.linkProperties.getAddresses()) {
-                        addRow(group, R.string.wifi_ip_address, a.getHostAddress());
-                    }
                 }
+                //Display IP addresses
+                for(InetAddress a : config.linkProperties.getAddresses()) {
+                    addRow(group, R.string.wifi_ip_address, a.getHostAddress());
+                }
+
 
                 if (config.proxySettings == ProxySettings.STATIC) {
                     mProxySettingsSpinner.setSelection(PROXY_STATIC);
