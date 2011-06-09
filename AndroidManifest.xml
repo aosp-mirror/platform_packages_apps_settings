@@ -620,15 +620,33 @@
                 android:value="com.android.settings.Settings$ApplicationSettingsActivity" />
         </activity>
 
+        <activity android:name="Settings$LocationSettingsActivity"
+                android:theme="@android:style/Theme.Holo"
+                android:label="@string/location_settings_title"
+                android:configChanges="orientation|keyboardHidden"
+                android:clearTaskOnLaunch="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <action android:name="android.settings.LOCATION_SOURCE_SETTINGS" />
+                <action android:name="android.credentials.UNLOCK" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.VOICE_LAUNCH" />
+                <category android:name="com.android.settings.SHORTCUT" />
+            </intent-filter>
+            <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
+                android:value="com.android.settings.LocationSettings" />
+            <meta-data android:name="com.android.settings.TOP_LEVEL_HEADER_ID"
+                android:resource="@id/location_settings" />
+        </activity>
+
         <activity android:name="Settings$SecuritySettingsActivity"
                 android:theme="@android:style/Theme.Holo"
-                android:label="@string/location_security_settings_title"
+                android:label="@string/security_settings_title"
                 android:configChanges="orientation|keyboardHidden"
                 android:clearTaskOnLaunch="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <action android:name="android.settings.SECURITY_SETTINGS" />
-                <action android:name="android.settings.LOCATION_SOURCE_SETTINGS" />
                 <action android:name="android.credentials.UNLOCK" />
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.VOICE_LAUNCH" />
@@ -684,7 +702,7 @@
             <meta-data android:name="com.android.settings.TOP_LEVEL_HEADER_ID"
                 android:resource="@id/security_settings" />
             <meta-data android:name="com.android.settings.PARENT_FRAGMENT_TITLE"
-                android:resource="@string/location_security_settings_title" />
+                android:resource="@string/security_settings_title" />
             <meta-data android:name="com.android.settings.PARENT_FRAGMENT_CLASS"
                 android:value="com.android.settings.Settings$SecuritySettingsActivity" />
         </activity>

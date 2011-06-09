@@ -528,7 +528,6 @@ public class Settings extends PreferenceActivity implements ButtonBarHandler {
     /*
      * Settings subclasses for launching independently.
      */
-
     public static class BluetoothSettingsActivity extends Settings { /* empty */ }
     public static class WirelessSettingsActivity extends Settings { /* empty */ }
     public static class TetherSettingsActivity extends Settings { /* empty */ }
@@ -550,6 +549,7 @@ public class Settings extends PreferenceActivity implements ButtonBarHandler {
     public static class DevelopmentSettingsActivity extends Settings { /* empty */ }
     public static class AccessibilitySettingsActivity extends Settings { /* empty */ }
     public static class SecuritySettingsActivity extends Settings { /* empty */ }
+    public static class LocationSettingsActivity extends Settings { /* empty */ }
     public static class PrivacySettingsActivity extends Settings { /* empty */ }
     public static class DockSettingsActivity extends Settings { /* empty */ }
     public static class RunningServicesActivity extends Settings { /* empty */ }

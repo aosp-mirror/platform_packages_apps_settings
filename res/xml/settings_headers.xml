@@ -119,7 +119,14 @@
         android:title="@string/sync_settings"
         android:id="@+id/sync_settings" />
 
-    <!-- Security & Location -->
+    <!-- Location -->
+    <header
+        android:fragment="com.android.settings.LocationSettings"
+        android:icon="@drawable/ic_settings_location"
+        android:title="@string/location_settings_title"
+        android:id="@+id/location_settings" />
+
+    <!-- Security -->
     <header
         android:fragment="com.android.settings.SecuritySettings"
         android:icon="@drawable/ic_settings_security"
