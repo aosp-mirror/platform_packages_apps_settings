@@ -63,6 +63,7 @@ public class ApplicationSettings extends SettingsPreferenceFragment implements
         mToggleAdvancedSettings = (CheckBoxPreference)findPreference(
                 KEY_TOGGLE_ADVANCED_SETTINGS);
         mToggleAdvancedSettings.setChecked(isAdvancedSettingsEnabled());
+        getPreferenceScreen().removePreference(mToggleAdvancedSettings);
 
         // not ready for prime time yet
         if (false) {
