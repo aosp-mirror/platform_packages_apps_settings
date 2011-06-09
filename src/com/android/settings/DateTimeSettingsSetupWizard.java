@@ -97,8 +97,15 @@ public class DateTimeSettingsSetupWizard extends Activity
         mTimeZoneAdapter = ZonePicker.constructTimezoneAdapter(this, false,
             R.layout.date_time_setup_custom_list_item_2);
 
-        final View layoutRoot = findViewById(R.id.layout_root);
-        layoutRoot.setSystemUiVisibility(View.STATUS_BAR_DISABLE_BACK);
+        // For the normal view, disable Back since changes stick immediately
+        // and can't be canceled, and we already have a Next button. For xLarge,
+        // though, we save up our changes and set them upon Next, so Back can
+        // cancel. And also, in xlarge, we need the keyboard dismiss button
+        // to be available.
+        if (!mUsingXLargeLayout) {
+            final View layoutRoot = findViewById(R.id.layout_root);
+            layoutRoot.setSystemUiVisibility(View.STATUS_BAR_DISABLE_BACK);
+        }
     }
 
     public void initUiForXl() {
