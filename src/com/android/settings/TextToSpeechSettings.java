@@ -40,6 +40,8 @@ import android.preference.PreferenceGroup;
 import android.provider.Settings;
 import android.provider.Settings.SettingNotFoundException;
 import android.speech.tts.TextToSpeech;
+import android.speech.tts.TextToSpeech.EngineInfo;
+import android.speech.tts.TtsEngines;
 import android.text.TextUtils;
 import android.util.Log;
 
@@ -52,7 +54,6 @@ public class TextToSpeechSettings extends SettingsPreferenceFragment implements
         Preference.OnPreferenceChangeListener, Preference.OnPreferenceClickListener,
         TextToSpeech.OnInitListener {
 
-    private static final boolean DBG = true;
     private static final String TAG = "TextToSpeechSettings";
 
     private static final String KEY_TTS_PLAY_EXAMPLE = "tts_play_example";
@@ -95,6 +96,7 @@ public class TextToSpeechSettings extends SettingsPreferenceFragment implements
     private boolean mVoicesMissing = false;
 
     private TextToSpeech mTts = null;
+    private TtsEngines mEnginesHelper = null;
     private boolean mTtsStarted = false;
 
     /**
@@ -133,6 +135,7 @@ public class TextToSpeechSettings extends SettingsPreferenceFragment implements
         mEnginesGroup = (PreferenceGroup) findPreference(KEY_TTS_ENGINES);
 
         mTts = new TextToSpeech(getActivity().getApplicationContext(), this);
+        mEnginesHelper = new TtsEngines(getActivity().getApplicationContext());
 
         initDefaultSettings();
         addEngineSpecificSettings();
@@ -174,22 +177,20 @@ public class TextToSpeechSettings extends SettingsPreferenceFragment implements
 
     private void addEngineSpecificSettings() {
         Context context = getActivity();
-        List<TextToSpeech.EngineInfo> engines = mTts.getEngines();
-        for (TextToSpeech.EngineInfo engine : engines) {
-            String prefKey = "";
+        List<EngineInfo> engines = mTts.getEngines();
+        for (EngineInfo engine : engines) {
             final String engineName = engine.name;
-            if (!engineName.equals(TextToSpeech.Engine.DEFAULT_ENGINE)) {
+            if (!engine.system) {
                 CheckBoxPreference enablePref = new CheckBoxPreference(context);
-                prefKey = KEY_PLUGIN_ENABLED_PREFIX + engineName;
-                enablePref.setKey(prefKey);
+                enablePref.setKey(KEY_PLUGIN_ENABLED_PREFIX + engineName);
                 enablePref.setTitle(engine.label);
                 enablePref.setOnPreferenceClickListener(this);
                 mEnginesGroup.addPreference(enablePref);
             }
+
             if (engineHasSettings(engineName)) {
                 Preference pref = new Preference(context);
-                prefKey = KEY_PLUGIN_SETTINGS_PREFIX + engineName;
-                pref.setKey(prefKey);
+                pref.setKey(KEY_PLUGIN_SETTINGS_PREFIX + engineName);
                 pref.setTitle(engine.label);
                 CharSequence settingsLabel = getResources().getString(
                         R.string.tts_engine_name_settings, engine.label);
@@ -681,14 +682,14 @@ public class TextToSpeechSettings extends SettingsPreferenceFragment implements
     }
 
     private void loadEngines() {
-        List<TextToSpeech.EngineInfo> engines = mTts.getEngines();
+        List<EngineInfo> engines = mEnginesHelper.getEngines();
         ArrayList<CharSequence> entries = new ArrayList<CharSequence>();
         ArrayList<CharSequence> values = new ArrayList<CharSequence>();
         StringBuilder enabledEngines = new StringBuilder();
 
-        for (TextToSpeech.EngineInfo engine : engines) {
+        for (EngineInfo engine : engines) {
             Log.v(TAG, "Engine: " + engine);
-            if (isEngineEnabled(engine.name)) {
+            if (mEnginesHelper.isEngineEnabled(engine.name)) {
                 entries.add(engine.label);
                 values.add(engine.name);
                 if (enabledEngines.length() > 0) enabledEngines.append(' ');
@@ -708,18 +709,12 @@ public class TextToSpeechSettings extends SettingsPreferenceFragment implements
         String selectedEngine = Settings.Secure.getString(getContentResolver(), TTS_DEFAULT_SYNTH);
         int selectedEngineIndex = mDefaultSynthPref.findIndexOfValue(selectedEngine);
         if (selectedEngineIndex == -1){
-            selectedEngineIndex =
-                    mDefaultSynthPref.findIndexOfValue(TextToSpeech.Engine.DEFAULT_ENGINE);
+            selectedEngineIndex = mDefaultSynthPref.findIndexOfValue(
+                    mEnginesHelper.getHighestRankedEngineName());
         }
         if (selectedEngineIndex >= 0) {
             mDefaultSynthPref.setValueIndex(selectedEngineIndex);
         }
-    }
-
-    private boolean isEngineEnabled(String engineName) {
-        if (engineName.equals(TextToSpeech.Engine.DEFAULT_ENGINE)) return true;
-        String enginePref = KEY_PLUGIN_ENABLED_PREFIX + engineName;
-        return getPreferenceManager().getSharedPreferences().getBoolean(enginePref, false);
     }
 
 }
