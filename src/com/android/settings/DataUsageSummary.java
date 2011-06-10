@@ -16,122 +16,167 @@
 
 package com.android.settings;
 
-import static com.android.settings.widget.ChartView.buildChartParams;
-import static com.android.settings.widget.ChartView.buildSweepParams;
+import static android.net.NetworkPolicyManager.computeLastCycleBoundary;
+import static android.net.NetworkPolicyManager.computeNextCycleBoundary;
+import static android.net.TrafficStats.TEMPLATE_MOBILE_3G_LOWER;
+import static android.net.TrafficStats.TEMPLATE_MOBILE_4G;
+import static android.net.TrafficStats.TEMPLATE_MOBILE_ALL;
+import static android.net.TrafficStats.TEMPLATE_WIFI;
+import static android.view.ViewGroup.LayoutParams.MATCH_PARENT;
 
 import android.app.Fragment;
 import android.content.Context;
 import android.content.pm.PackageManager;
-import android.graphics.Color;
+import android.net.INetworkPolicyManager;
 import android.net.INetworkStatsService;
+import android.net.NetworkPolicy;
 import android.net.NetworkStats;
 import android.net.NetworkStatsHistory;
-import android.net.TrafficStats;
 import android.os.Bundle;
 import android.os.RemoteException;
 import android.os.ServiceManager;
+import android.preference.CheckBoxPreference;
+import android.preference.Preference;
 import android.text.format.DateUtils;
 import android.text.format.Formatter;
+import android.text.format.Time;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.ViewGroup;
+import android.widget.AbsListView;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
+import android.widget.AdapterView.OnItemSelectedListener;
+import android.widget.ArrayAdapter;
 import android.widget.BaseAdapter;
+import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.Spinner;
+import android.widget.TabHost;
+import android.widget.TabHost.OnTabChangeListener;
+import android.widget.TabHost.TabContentFactory;
+import android.widget.TabHost.TabSpec;
+import android.widget.TabWidget;
 import android.widget.TextView;
 
-import com.android.settings.widget.ChartAxis;
-import com.android.settings.widget.ChartGridView;
-import com.android.settings.widget.ChartNetworkSeriesView;
-import com.android.settings.widget.ChartSweepView;
-import com.android.settings.widget.ChartSweepView.OnSweepListener;
-import com.android.settings.widget.ChartView;
-import com.android.settings.widget.InvertedChartAxis;
+import com.android.settings.widget.DataUsageChartView;
+import com.android.settings.widget.DataUsageChartView.DataUsageChartListener;
 import com.google.android.collect.Lists;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
+import java.util.Locale;
 
 public class DataUsageSummary extends Fragment {
     private static final String TAG = "DataUsage";
+    private static final boolean LOGD = true;
 
-    // TODO: teach about wifi-vs-mobile data with tabs
+    private static final int TEMPLATE_INVALID = -1;
+
+    private static final String TAB_3G = "3g";
+    private static final String TAB_4G = "4g";
+    private static final String TAB_MOBILE = "mobile";
+    private static final String TAB_WIFI = "wifi";
 
     private static final long KB_IN_BYTES = 1024;
     private static final long MB_IN_BYTES = KB_IN_BYTES * 1024;
     private static final long GB_IN_BYTES = MB_IN_BYTES * 1024;
 
     private INetworkStatsService mStatsService;
+    private INetworkPolicyManager mPolicyService;
 
-    private ViewGroup mChartContainer;
-    private ListView mList;
-
-    private ChartAxis mAxisTime;
-    private ChartAxis mAxisData;
-
-    private ChartView mChart;
-    private ChartNetworkSeriesView mSeries;
-
-    private ChartSweepView mSweepTime1;
-    private ChartSweepView mSweepTime2;
-    private ChartSweepView mSweepDataWarn;
-    private ChartSweepView mSweepDataLimit;
-
+    private TabHost mTabHost;
+    private TabWidget mTabWidget;
+    private ListView mListView;
     private DataUsageAdapter mAdapter;
 
-    // TODO: persist warning/limit into policy service
-    private static final long DATA_WARN = (long) 3.2 * GB_IN_BYTES;
-    private static final long DATA_LIMIT = (long) 4.8 * GB_IN_BYTES;
+    private View mHeader;
+    private LinearLayout mSwitches;
+
+    private CheckBoxPreference mDataEnabled;
+    private CheckBoxPreference mDisableAtLimit;
+    private View mDataEnabledView;
+    private View mDisableAtLimitView;
+
+    private DataUsageChartView mChart;
+
+    private Spinner mCycleSpinner;
+    private CycleAdapter mCycleAdapter;
+
+    private boolean mSplit4G = false;
+    private boolean mShowWifi = false;
+
+    private int mTemplate = TEMPLATE_INVALID;
+
+    private NetworkPolicy mPolicy;
+    private NetworkStatsHistory mHistory;
+
+    // TODO: policy service should always provide valid stub policy
 
     @Override
-    public View onCreateView(
-            LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-
-        final Context context = inflater.getContext();
-        final long now = System.currentTimeMillis();
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setHasOptionsMenu(true);
 
         mStatsService = INetworkStatsService.Stub.asInterface(
                 ServiceManager.getService(Context.NETWORK_STATS_SERVICE));
+        mPolicyService = INetworkPolicyManager.Stub.asInterface(
+                ServiceManager.getService(Context.NETWORK_POLICY_SERVICE));
+    }
 
-        mAxisTime = new TimeAxis();
-        mAxisData = new InvertedChartAxis(new DataAxis());
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+            Bundle savedInstanceState) {
 
-        mChart = new ChartView(context, mAxisTime, mAxisData);
-        mChart.setPadding(20, 20, 20, 20);
-
-        mChart.addView(new ChartGridView(context, mAxisTime, mAxisData), buildChartParams());
-
-        mSeries = new ChartNetworkSeriesView(context, mAxisTime, mAxisData);
-        mChart.addView(mSeries, buildChartParams());
-
-        mSweepTime1 = new ChartSweepView(context, mAxisTime, now - DateUtils.DAY_IN_MILLIS * 14,
-                Color.parseColor("#ffffff"));
-        mSweepTime2 = new ChartSweepView(context, mAxisTime, now - DateUtils.DAY_IN_MILLIS * 7,
-                Color.parseColor("#ffffff"));
-        mSweepDataWarn = new ChartSweepView(
-                context, mAxisData, DATA_WARN, Color.parseColor("#f7931d"));
-        mSweepDataLimit = new ChartSweepView(
-                context, mAxisData, DATA_LIMIT, Color.parseColor("#be1d2c"));
-
-        mChart.addView(mSweepTime1, buildSweepParams());
-        mChart.addView(mSweepTime2, buildSweepParams());
-        mChart.addView(mSweepDataWarn, buildSweepParams());
-        mChart.addView(mSweepDataLimit, buildSweepParams());
-
-        mSeries.bindSweepRange(mSweepTime1, mSweepTime2);
-
-        mSweepTime1.addOnSweepListener(mSweepListener);
-        mSweepTime2.addOnSweepListener(mSweepListener);
-
-        mAdapter = new DataUsageAdapter();
-
+        final Context context = inflater.getContext();
         final View view = inflater.inflate(R.layout.data_usage_summary, container, false);
 
-        mChartContainer = (ViewGroup) view.findViewById(R.id.chart_container);
-        mChartContainer.addView(mChart);
+        mTabHost = (TabHost) view.findViewById(android.R.id.tabhost);
+        mTabWidget = (TabWidget) view.findViewById(android.R.id.tabs);
+        mListView = (ListView) view.findViewById(android.R.id.list);
 
-        mList = (ListView) view.findViewById(R.id.list);
-        mList.setAdapter(mAdapter);
+        mTabHost.setup();
+        mTabHost.setOnTabChangedListener(mTabListener);
+
+        mHeader = inflater.inflate(R.layout.data_usage_header, mListView, false);
+        mListView.addHeaderView(mHeader, null, false);
+
+        mDataEnabled = new CheckBoxPreference(context);
+        mDisableAtLimit = new CheckBoxPreference(context);
+
+        // kick refresh once to force-create views
+        refreshPreferenceViews();
+
+        // TODO: remove once thin preferences are supported (48dip)
+        mDataEnabledView.setLayoutParams(new LinearLayout.LayoutParams(MATCH_PARENT, 72));
+        mDisableAtLimitView.setLayoutParams(new LinearLayout.LayoutParams(MATCH_PARENT, 72));
+
+        mDataEnabledView.setOnClickListener(mDataEnabledListener);
+        mDisableAtLimitView.setOnClickListener(mDisableAtLimitListener);
+
+        mSwitches = (LinearLayout) mHeader.findViewById(R.id.switches);
+        mSwitches.addView(mDataEnabledView);
+        mSwitches.addView(mDisableAtLimitView);
+
+        mCycleSpinner = (Spinner) mHeader.findViewById(R.id.cycles);
+        mCycleAdapter = new CycleAdapter(context);
+        mCycleSpinner.setAdapter(mCycleAdapter);
+        mCycleSpinner.setOnItemSelectedListener(mCycleListener);
+
+        mChart = new DataUsageChartView(context);
+        mChart.setListener(mChartListener);
+        mChart.setLayoutParams(new AbsListView.LayoutParams(MATCH_PARENT, 350));
+        mListView.addHeaderView(mChart, null, false);
+
+        mAdapter = new DataUsageAdapter();
+        mListView.setOnItemClickListener(mListListener);
+        mListView.setAdapter(mAdapter);
 
         return view;
     }
@@ -140,88 +185,445 @@ public class DataUsageSummary extends Fragment {
     public void onResume() {
         super.onResume();
 
-        updateSummaryData();
-        updateDetailData();
-
+        // this kicks off chain reaction which creates tabs, binds the body to
+        // selected network, and binds chart, cycles and detail list.
+        updateTabs();
     }
 
-    private void updateSummaryData() {
-        try {
-            final NetworkStatsHistory history = mStatsService.getHistoryForNetwork(
-                    TrafficStats.TEMPLATE_MOBILE_ALL);
-            mSeries.bindNetworkStats(history);
-        } catch (RemoteException e) {
-            Log.w(TAG, "problem reading stats");
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        inflater.inflate(R.menu.data_usage, menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // TODO: persist checked-ness of options to restore tabs later
+
+        switch (item.getItemId()) {
+            case R.id.action_split_4g: {
+                mSplit4G = !item.isChecked();
+                item.setChecked(mSplit4G);
+                updateTabs();
+                return true;
+            }
+            case R.id.action_show_wifi: {
+                mShowWifi = !item.isChecked();
+                item.setChecked(mShowWifi);
+                updateTabs();
+                return true;
+            }
+        }
+        return false;
+    }
+
+    /**
+     * Rebuild all tabs based on {@link #mSplit4G} and {@link #mShowWifi},
+     * hiding the tabs entirely when applicable. Selects first tab, and kicks
+     * off a full rebind of body contents.
+     */
+    private void updateTabs() {
+        // TODO: persist/restore if user wants mobile split, or wifi visibility
+
+        final boolean tabsVisible = mSplit4G || mShowWifi;
+        mTabWidget.setVisibility(tabsVisible ? View.VISIBLE : View.GONE);
+        mTabHost.clearAllTabs();
+
+        if (mSplit4G) {
+            mTabHost.addTab(buildTabSpec(TAB_3G, R.string.data_usage_tab_3g));
+            mTabHost.addTab(buildTabSpec(TAB_4G, R.string.data_usage_tab_4g));
+        }
+
+        if (mShowWifi) {
+            if (!mSplit4G) {
+                mTabHost.addTab(buildTabSpec(TAB_MOBILE, R.string.data_usage_tab_mobile));
+            }
+            mTabHost.addTab(buildTabSpec(TAB_WIFI, R.string.data_usage_tab_wifi));
+        }
+
+        if (mTabWidget.getTabCount() > 0) {
+            // select first tab, which will kick off updateBody()
+            mTabHost.setCurrentTab(0);
+        } else {
+            // no tabs shown; update body manually
+            updateBody();
         }
     }
 
-    private void updateDetailData() {
-        final long sweep1 = mSweepTime1.getValue();
-        final long sweep2 = mSweepTime2.getValue();
+    /**
+     * Factory that provide empty {@link View} to make {@link TabHost} happy.
+     */
+    private TabContentFactory mEmptyTabContent = new TabContentFactory() {
+        /** {@inheritDoc} */
+        public View createTabContent(String tag) {
+            return new View(mTabHost.getContext());
+        }
+    };
 
-        final long start = Math.min(sweep1, sweep2);
-        final long end = Math.max(sweep1, sweep2);
+    /**
+     * Build {@link TabSpec} with thin indicator, and empty content.
+     */
+    private TabSpec buildTabSpec(String tag, int titleRes) {
+        final LayoutInflater inflater = LayoutInflater.from(mTabWidget.getContext());
+        final View indicator = inflater.inflate(
+                R.layout.tab_indicator_thin_holo, mTabWidget, false);
+        final TextView title = (TextView) indicator.findViewById(android.R.id.title);
+        title.setText(titleRes);
+        return mTabHost.newTabSpec(tag).setIndicator(indicator).setContent(mEmptyTabContent);
+    }
+
+    private OnTabChangeListener mTabListener = new OnTabChangeListener() {
+        /** {@inheritDoc} */
+        public void onTabChanged(String tabId) {
+            // user changed tab; update body
+            updateBody();
+        }
+    };
+
+    /**
+     * Update body content based on current tab. Loads
+     * {@link NetworkStatsHistory} and {@link NetworkPolicy} from system, and
+     * binds them to visible controls.
+     */
+    private void updateBody() {
+        final String tabTag = mTabHost.getCurrentTabTag();
+        final String currentTab = tabTag != null ? tabTag : TAB_MOBILE;
+
+        if (LOGD) Log.d(TAG, "updateBody() with currentTab=" + currentTab);
+
+        if (TAB_WIFI.equals(currentTab)) {
+            // wifi doesn't have any controls
+            mDataEnabledView.setVisibility(View.GONE);
+            mDisableAtLimitView.setVisibility(View.GONE);
+            mTemplate = TEMPLATE_WIFI;
+
+        } else {
+            // make sure we show for non-wifi
+            mDataEnabledView.setVisibility(View.VISIBLE);
+            mDisableAtLimitView.setVisibility(View.VISIBLE);
+        }
+
+        if (TAB_MOBILE.equals(currentTab)) {
+            mDataEnabled.setTitle(R.string.data_usage_enable_mobile);
+            mDisableAtLimit.setTitle(R.string.data_usage_disable_mobile_limit);
+            mTemplate = TEMPLATE_MOBILE_ALL;
+
+        } else if (TAB_3G.equals(currentTab)) {
+            mDataEnabled.setTitle(R.string.data_usage_enable_3g);
+            mDisableAtLimit.setTitle(R.string.data_usage_disable_3g_limit);
+            mTemplate = TEMPLATE_MOBILE_3G_LOWER;
+
+        } else if (TAB_4G.equals(currentTab)) {
+            mDataEnabled.setTitle(R.string.data_usage_enable_4g);
+            mDisableAtLimit.setTitle(R.string.data_usage_disable_4g_limit);
+            mTemplate = TEMPLATE_MOBILE_4G;
+
+        }
+
+        // TODO: populate checkbox based on radio preferences
+        mDataEnabled.setChecked(true);
 
         try {
+            // load policy and stats for current template
+            mPolicy = mPolicyService.getNetworkPolicy(mTemplate, null);
+            mHistory = mStatsService.getHistoryForNetwork(mTemplate);
+        } catch (RemoteException e) {
+            // since we can't do much without policy or history, and we don't
+            // want to leave with half-baked UI, we bail hard.
+            throw new RuntimeException("problem reading network policy or stats", e);
+        }
+
+        // TODO: eventually service will always provide stub policy
+        if (mPolicy == null) {
+            mPolicy = new NetworkPolicy(1, 4 * GB_IN_BYTES, -1);
+        }
+
+        // bind chart to historical stats
+        mChart.bindNetworkPolicy(mPolicy);
+        mChart.bindNetworkStats(mHistory);
+
+        // generate cycle list based on policy and available history
+        updateCycleList();
+
+        // reflect policy limit in checkbox
+        mDisableAtLimit.setChecked(mPolicy.limitBytes != -1);
+
+        // force scroll to top of body
+        mListView.smoothScrollToPosition(0);
+
+        // kick preference views so they rebind from changes above
+        refreshPreferenceViews();
+    }
+
+    /**
+     * Return full time bounds (earliest and latest time recorded) of the given
+     * {@link NetworkStatsHistory}.
+     */
+    private static long[] getHistoryBounds(NetworkStatsHistory history) {
+        final long currentTime = System.currentTimeMillis();
+
+        long start = currentTime;
+        long end = currentTime;
+        if (history.bucketCount > 0) {
+            start = history.bucketStart[0];
+            end = history.bucketStart[history.bucketCount - 1];
+        }
+
+        return new long[] { start, end };
+    }
+
+    /**
+     * Rebuild {@link #mCycleAdapter} based on {@link NetworkPolicy#cycleDay}
+     * and available {@link NetworkStatsHistory} data. Always selects the newest
+     * item, updating the inspection range on {@link #mChart}.
+     */
+    private void updateCycleList() {
+        mCycleAdapter.clear();
+
+        final Context context = mCycleSpinner.getContext();
+
+        final long[] bounds = getHistoryBounds(mHistory);
+        final long historyStart = bounds[0];
+        final long historyEnd = bounds[1];
+
+        // find the next cycle boundary
+        long cycleEnd = computeNextCycleBoundary(historyEnd, mPolicy);
+
+        int guardCount = 0;
+
+        // walk backwards, generating all valid cycle ranges
+        while (cycleEnd > historyStart) {
+            final long cycleStart = computeLastCycleBoundary(cycleEnd, mPolicy);
+            Log.d(TAG, "generating cs=" + cycleStart + " to ce=" + cycleEnd + " waiting for hs="
+                    + historyStart);
+            mCycleAdapter.add(new CycleItem(context, cycleStart, cycleEnd));
+            cycleEnd = cycleStart;
+
+            // TODO: remove this guard once we have better testing
+            if (guardCount++ > 50) {
+                Log.wtf(TAG, "stuck generating ranges for bounds=" + Arrays.toString(bounds)
+                        + " and policy=" + mPolicy);
+            }
+        }
+
+        // one last cycle entry to change date
+        mCycleAdapter.add(new CycleChangeItem(context));
+
+        // force pick the current cycle (first item)
+        mCycleSpinner.setSelection(0);
+        mCycleListener.onItemSelected(mCycleSpinner, null, 0, 0);
+    }
+
+    /**
+     * Force rebind of hijacked {@link Preference} views.
+     */
+    private void refreshPreferenceViews() {
+        mDataEnabledView = mDataEnabled.getView(mDataEnabledView, mListView);
+        mDisableAtLimitView = mDisableAtLimit.getView(mDisableAtLimitView, mListView);
+    }
+
+    private OnClickListener mDataEnabledListener = new OnClickListener() {
+        /** {@inheritDoc} */
+        public void onClick(View v) {
+            mDataEnabled.setChecked(!mDataEnabled.isChecked());
+            refreshPreferenceViews();
+
+            // TODO: wire up to telephony to enable/disable radios
+        }
+    };
+
+    private OnClickListener mDisableAtLimitListener = new OnClickListener() {
+        /** {@inheritDoc} */
+        public void onClick(View v) {
+            final boolean disableAtLimit = !mDisableAtLimit.isChecked();
+            mDisableAtLimit.setChecked(disableAtLimit);
+            refreshPreferenceViews();
+
+            // TODO: push updated policy to service
+            // TODO: show interstitial warning dialog to user
+            final long limitBytes = disableAtLimit ? 5 * GB_IN_BYTES : -1;
+            mPolicy = new NetworkPolicy(mPolicy.cycleDay, mPolicy.warningBytes, limitBytes);
+            mChart.bindNetworkPolicy(mPolicy);
+        }
+    };
+
+    private OnItemClickListener mListListener = new OnItemClickListener() {
+        /** {@inheritDoc} */
+        public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+            final Object object = parent.getItemAtPosition(position);
+
+            // TODO: show app details
+            Log.d(TAG, "showing app details for " + object);
+        }
+    };
+
+    private OnItemSelectedListener mCycleListener = new OnItemSelectedListener() {
+        /** {@inheritDoc} */
+        public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+            final CycleItem cycle = (CycleItem) parent.getItemAtPosition(position);
+            if (cycle instanceof CycleChangeItem) {
+                // TODO: show "define cycle" dialog
+                // also reset back to first cycle
+                Log.d(TAG, "CHANGE CYCLE DIALOG!!");
+
+            } else {
+                if (LOGD) Log.d(TAG, "shoiwng cycle " + cycle);
+
+                // update chart to show selected cycle, and update detail data
+                // to match updated sweep bounds.
+                final long[] bounds = getHistoryBounds(mHistory);
+                mChart.setVisibleRange(cycle.start, cycle.end, bounds[1]);
+
+                updateDetailData();
+            }
+        }
+
+        /** {@inheritDoc} */
+        public void onNothingSelected(AdapterView<?> parent) {
+            // ignored
+        }
+    };
+
+    /**
+     * Update {@link #mAdapter} with sorted list of applications data usage,
+     * based on current inspection from {@link #mChart}.
+     */
+    private void updateDetailData() {
+        if (LOGD) Log.d(TAG, "updateDetailData()");
+
+        try {
+            final long[] range = mChart.getInspectRange();
             final NetworkStats stats = mStatsService.getSummaryForAllUid(
-                    start, end, TrafficStats.TEMPLATE_MOBILE_ALL);
+                    range[0], range[1], mTemplate);
             mAdapter.bindStats(stats);
         } catch (RemoteException e) {
             Log.w(TAG, "problem reading stats");
         }
     }
 
-    private OnSweepListener mSweepListener = new OnSweepListener() {
-        public void onSweep(ChartSweepView sweep, boolean sweepDone) {
-            // always update graph clip region
-            mSeries.invalidate();
+    private DataUsageChartListener mChartListener = new DataUsageChartListener() {
+        /** {@inheritDoc} */
+        public void onInspectRangeChanged() {
+            if (LOGD) Log.d(TAG, "onInspectRangeChanged()");
+            updateDetailData();
+        }
 
-            // update detail list only when done sweeping
-            if (sweepDone) {
-                updateDetailData();
+        /** {@inheritDoc} */
+        public void onLimitsChanged() {
+            if (LOGD) Log.d(TAG, "onLimitsChanged()");
+
+            // redefine policy and persist into service
+            // TODO: kick this onto background thread, since service touches disk
+
+            // TODO: remove this mPolicy null check, since later service will
+            // always define baseline value.
+            final int cycleDay = mPolicy != null ? mPolicy.cycleDay : 1;
+            final long warningBytes = mChart.getWarningBytes();
+            final long limitBytes = mDisableAtLimit.isChecked() ? -1 : mChart.getLimitBytes();
+
+            mPolicy = new NetworkPolicy(cycleDay, warningBytes, limitBytes);
+            if (LOGD) Log.d(TAG, "persisting policy=" + mPolicy);
+
+            try {
+                mPolicyService.setNetworkPolicy(mTemplate, null, mPolicy);
+            } catch (RemoteException e) {
+                Log.w(TAG, "problem persisting policy", e);
             }
         }
     };
 
 
     /**
+     * List item that reflects a specific data usage cycle.
+     */
+    public static class CycleItem {
+        public CharSequence label;
+        public long start;
+        public long end;
+
+        private static final StringBuilder sBuilder = new StringBuilder(50);
+        private static final java.util.Formatter sFormatter = new java.util.Formatter(
+                sBuilder, Locale.getDefault());
+
+        CycleItem(CharSequence label) {
+            this.label = label;
+        }
+
+        public CycleItem(Context context, long start, long end) {
+            this.label = formatDateRangeUtc(context, start, end);
+            this.start = start;
+            this.end = end;
+        }
+
+        private static String formatDateRangeUtc(Context context, long start, long end) {
+            synchronized (sBuilder) {
+                sBuilder.setLength(0);
+                return DateUtils.formatDateRange(context, sFormatter, start, end,
+                        DateUtils.FORMAT_SHOW_DATE | DateUtils.FORMAT_ABBREV_MONTH,
+                        Time.TIMEZONE_UTC).toString();
+            }
+        }
+
+        @Override
+        public String toString() {
+            return label.toString();
+        }
+    }
+
+    /**
+     * Special-case data usage cycle that triggers dialog to change
+     * {@link NetworkPolicy#cycleDay}.
+     */
+    public static class CycleChangeItem extends CycleItem {
+        public CycleChangeItem(Context context) {
+            super(context.getString(R.string.data_usage_change_cycle));
+        }
+    }
+
+    public static class CycleAdapter extends ArrayAdapter<CycleItem> {
+        public CycleAdapter(Context context) {
+            super(context, android.R.layout.simple_spinner_item);
+            setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        }
+    }
+
+    /**
      * Adapter of applications, sorted by total usage descending.
      */
     public static class DataUsageAdapter extends BaseAdapter {
-        private ArrayList<UsageRecord> mData = Lists.newArrayList();
+        private ArrayList<AppUsageItem> mItems = Lists.newArrayList();
 
-        private static class UsageRecord implements Comparable<UsageRecord> {
+        private static class AppUsageItem implements Comparable<AppUsageItem> {
             public int uid;
             public long total;
 
             /** {@inheritDoc} */
-            public int compareTo(UsageRecord another) {
+            public int compareTo(AppUsageItem another) {
                 return Long.compare(another.total, total);
             }
         }
 
         public void bindStats(NetworkStats stats) {
-            mData.clear();
+            mItems.clear();
 
             for (int i = 0; i < stats.length(); i++) {
-                final UsageRecord record = new UsageRecord();
-                record.uid = stats.uid[i];
-                record.total = stats.rx[i] + stats.tx[i];
-                mData.add(record);
+                final AppUsageItem item = new AppUsageItem();
+                item.uid = stats.uid[i];
+                item.total = stats.rx[i] + stats.tx[i];
+                mItems.add(item);
             }
 
-            Collections.sort(mData);
+            Collections.sort(mItems);
             notifyDataSetChanged();
         }
 
         @Override
         public int getCount() {
-            return mData.size();
+            return mItems.size();
         }
 
         @Override
         public Object getItem(int position) {
-            return mData.get(position);
+            return mItems.get(position);
         }
 
         @Override
@@ -242,111 +644,13 @@ public class DataUsageSummary extends Fragment {
             final TextView text1 = (TextView) convertView.findViewById(android.R.id.text1);
             final TextView text2 = (TextView) convertView.findViewById(android.R.id.text2);
 
-            final UsageRecord record = mData.get(position);
-            text1.setText(pm.getNameForUid(record.uid));
-            text2.setText(Formatter.formatFileSize(context, record.total));
+            final AppUsageItem item = mItems.get(position);
+            text1.setText(pm.getNameForUid(item.uid));
+            text2.setText(Formatter.formatFileSize(context, item.total));
 
             return convertView;
         }
 
-    }
-
-
-    public static class TimeAxis implements ChartAxis {
-        private static final long TICK_INTERVAL = DateUtils.DAY_IN_MILLIS * 7;
-
-        private long mMin;
-        private long mMax;
-        private float mSize;
-
-        public TimeAxis() {
-            // TODO: hook up these ranges to policy service
-            mMax = System.currentTimeMillis();
-            mMin = mMax - DateUtils.DAY_IN_MILLIS * 30;
-        }
-
-        /** {@inheritDoc} */
-        public void setSize(float size) {
-            this.mSize = size;
-        }
-
-        /** {@inheritDoc} */
-        public float convertToPoint(long value) {
-            return (mSize * (value - mMin)) / (mMax - mMin);
-        }
-
-        /** {@inheritDoc} */
-        public long convertToValue(float point) {
-            return (long) (mMin + ((point * (mMax - mMin)) / mSize));
-        }
-
-        /** {@inheritDoc} */
-        public CharSequence getLabel(long value) {
-            // TODO: convert to string
-            return Long.toString(value);
-        }
-
-        /** {@inheritDoc} */
-        public float[] getTickPoints() {
-            // tick mark for every week
-            final int tickCount = (int) ((mMax - mMin) / TICK_INTERVAL);
-            final float[] tickPoints = new float[tickCount];
-            for (int i = 0; i < tickCount; i++) {
-                tickPoints[i] = convertToPoint(mMax - (TICK_INTERVAL * i));
-            }
-            return tickPoints;
-        }
-
-    }
-
-    // TODO: make data axis log-scale
-
-    public static class DataAxis implements ChartAxis {
-        private long mMin;
-        private long mMax;
-        private float mSize;
-
-        public DataAxis() {
-            // TODO: adapt ranges to show when history >5GB, and handle 4G
-            // interfaces with higher limits.
-            mMin = 0;
-            mMax = 5 * GB_IN_BYTES;
-        }
-
-        /** {@inheritDoc} */
-        public void setSize(float size) {
-            this.mSize = size;
-        }
-
-        /** {@inheritDoc} */
-        public float convertToPoint(long value) {
-            return (mSize * (value - mMin)) / (mMax - mMin);
-        }
-
-        /** {@inheritDoc} */
-        public long convertToValue(float point) {
-            return (long) (mMin + ((point * (mMax - mMin)) / mSize));
-        }
-
-        /** {@inheritDoc} */
-        public CharSequence getLabel(long value) {
-            // TODO: convert to string
-            return Long.toString(value);
-        }
-
-        /** {@inheritDoc} */
-        public float[] getTickPoints() {
-            final float[] tickPoints = new float[16];
-
-            long value = mMax;
-            float mult = 0.8f;
-            for (int i = 0; i < tickPoints.length; i++) {
-                tickPoints[i] = convertToPoint(value);
-                value = (long) (value * mult);
-                mult *= 0.9;
-            }
-            return tickPoints;
-        }
     }
 
 

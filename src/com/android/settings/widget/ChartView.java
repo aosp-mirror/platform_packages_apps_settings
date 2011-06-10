@@ -22,6 +22,7 @@ import static com.google.common.base.Preconditions.checkNotNull;
 
 import android.content.Context;
 import android.graphics.Rect;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.FrameLayout;
@@ -37,8 +38,8 @@ public class ChartView extends FrameLayout {
 
     // TODO: extend something that supports two-dimensional scrolling
 
-    private final ChartAxis mHoriz;
-    private final ChartAxis mVert;
+    final ChartAxis mHoriz;
+    final ChartAxis mVert;
 
     private Rect mContent = new Rect();
 
@@ -54,8 +55,8 @@ public class ChartView extends FrameLayout {
 
     @Override
     protected void onLayout(boolean changed, int l, int t, int r, int b) {
-        mContent.set(l + getPaddingLeft(), t + getPaddingTop(), r - getPaddingRight(),
-                b - getPaddingBottom());
+        mContent.set(getPaddingLeft(), getPaddingTop(), r - l - getPaddingRight(),
+                b - t - getPaddingBottom());
         final int width = mContent.width();
         final int height = mContent.height();
 

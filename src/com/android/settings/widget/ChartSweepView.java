@@ -19,6 +19,7 @@ package com.android.settings.widget;
 import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Color;
+import android.graphics.DashPathEffect;
 import android.graphics.Paint;
 import android.graphics.Paint.Style;
 import android.view.MotionEvent;
@@ -33,6 +34,7 @@ import com.google.common.base.Preconditions;
 public class ChartSweepView extends View {
 
     private final Paint mPaintSweep;
+    private final Paint mPaintSweepDisabled;
     private final Paint mPaintShadow;
 
     private final ChartAxis mAxis;
@@ -59,6 +61,13 @@ public class ChartSweepView extends View {
         mPaintSweep.setStyle(Style.FILL_AND_STROKE);
         mPaintSweep.setAntiAlias(true);
 
+        mPaintSweepDisabled = new Paint();
+        mPaintSweepDisabled.setColor(color);
+        mPaintSweepDisabled.setStrokeWidth(1.5f);
+        mPaintSweepDisabled.setStyle(Style.FILL_AND_STROKE);
+        mPaintSweepDisabled.setPathEffect(new DashPathEffect(new float[] { 5, 5 }, 0));
+        mPaintSweepDisabled.setAntiAlias(true);
+
         mPaintShadow = new Paint();
         mPaintShadow.setColor(Color.BLACK);
         mPaintShadow.setStrokeWidth(6.0f);
@@ -81,6 +90,10 @@ public class ChartSweepView extends View {
         return mAxis;
     }
 
+    public void setValue(long value) {
+        mValue = value;
+    }
+
     public long getValue() {
         return mValue;
     }
@@ -91,6 +104,8 @@ public class ChartSweepView extends View {
 
     @Override
     public boolean onTouchEvent(MotionEvent event) {
+        if (!isEnabled()) return false;
+
         final View parent = (View) getParent();
         switch (event.getAction()) {
             case MotionEvent.ACTION_DOWN: {
@@ -98,6 +113,8 @@ public class ChartSweepView extends View {
                 return true;
             }
             case MotionEvent.ACTION_MOVE: {
+                getParent().requestDisallowInterceptTouchEvent(true);
+
                 if (mHorizontal) {
                     setTranslationY(event.getRawY() - mTracking.getRawY());
                     final float point = (getTop() + getTranslationY() + (getHeight() / 2))
@@ -143,12 +160,14 @@ public class ChartSweepView extends View {
 
         mHorizontal = width > height;
 
+        final Paint linePaint = isEnabled() ? mPaintSweep : mPaintSweepDisabled;
+
         if (mHorizontal) {
             final int centerY = height / 2;
             final int endX = width - height;
 
             canvas.drawLine(0, centerY, endX, centerY, mPaintShadow);
-            canvas.drawLine(0, centerY, endX, centerY, mPaintSweep);
+            canvas.drawLine(0, centerY, endX, centerY, linePaint);
             canvas.drawCircle(endX, centerY, 4.0f, mPaintShadow);
             canvas.drawCircle(endX, centerY, 4.0f, mPaintSweep);
         } else {
@@ -156,7 +175,7 @@ public class ChartSweepView extends View {
             final int endY = height - width;
 
             canvas.drawLine(centerX, 0, centerX, endY, mPaintShadow);
-            canvas.drawLine(centerX, 0, centerX, endY, mPaintSweep);
+            canvas.drawLine(centerX, 0, centerX, endY, linePaint);
             canvas.drawCircle(centerX, endY, 4.0f, mPaintShadow);
             canvas.drawCircle(centerX, endY, 4.0f, mPaintSweep);
         }

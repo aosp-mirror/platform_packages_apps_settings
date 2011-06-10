@@ -35,7 +35,7 @@ import com.google.common.base.Preconditions;
  */
 public class ChartNetworkSeriesView extends View {
     private static final String TAG = "ChartNetworkSeriesView";
-    private static final boolean LOGD = false;
+    private static final boolean LOGD = true;
 
     private final ChartAxis mHoriz;
     private final ChartAxis mVert;
@@ -80,6 +80,9 @@ public class ChartNetworkSeriesView extends View {
 
     public void bindNetworkStats(NetworkStatsHistory stats) {
         mStats = stats;
+
+        mPathStroke.reset();
+        mPathFill.reset();
     }
 
     public void bindSweepRange(ChartSweepView sweep1, ChartSweepView sweep2) {
@@ -99,7 +102,9 @@ public class ChartNetworkSeriesView extends View {
      * Erase any existing {@link Path} and generate series outline based on
      * currently bound {@link NetworkStatsHistory} data.
      */
-    private void generatePath() {
+    public void generatePath() {
+        if (LOGD) Log.d(TAG, "generatePath()");
+
         mPathStroke.reset();
         mPathFill.reset();
 
@@ -113,6 +118,9 @@ public class ChartNetworkSeriesView extends View {
         float firstX = 0;
         float lastX = 0;
         float lastY = 0;
+
+        // TODO: count fractional data from first bucket crossing start;
+        // currently it only accepts first full bucket.
 
         long totalData = 0;
 

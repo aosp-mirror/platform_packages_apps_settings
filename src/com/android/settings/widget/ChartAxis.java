@@ -22,6 +22,7 @@ package com.android.settings.widget;
  */
 public interface ChartAxis {
 
+    public void setBounds(long min, long max);
     public void setSize(float size);
 
     public float convertToPoint(long value);

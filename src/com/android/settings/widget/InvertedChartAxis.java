@@ -28,6 +28,11 @@ public class InvertedChartAxis implements ChartAxis {
     }
 
     /** {@inheritDoc} */
+    public void setBounds(long min, long max) {
+        mWrapped.setBounds(min, max);
+    }
+
+    /** {@inheritDoc} */
     public void setSize(float size) {
         mSize = size;
         mWrapped.setSize(size);
