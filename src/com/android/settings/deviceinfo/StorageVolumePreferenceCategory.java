@@ -63,6 +63,8 @@ public class StorageVolumePreferenceCategory extends PreferenceCategory implemen
 
     private StorageMeasurement mMeasurement;
 
+    private boolean mAllowFormat;
+
     static class CategoryInfo {
         final int mTitle;
         final int mColor;
@@ -163,6 +165,12 @@ public class StorageVolumePreferenceCategory extends PreferenceCategory implemen
         setTitle(storageVolume.getDescription());
         mMeasurement = StorageMeasurement.getInstance(context, storageVolume, isPrimary);
         mMeasurement.setReceiver(this);
+
+        // Cannot format emulated storage
+        mAllowFormat = !mStorageVolume.isEmulated();
+        // For now we are disabling reformatting secondary external storage
+        // until some interoperability problems with MTP are fixed
+        if (!isPrimary) mAllowFormat = false;
     }
 
     public void init() {
@@ -190,9 +198,11 @@ public class StorageVolumePreferenceCategory extends PreferenceCategory implemen
         mMountTogglePreference.setTitle(R.string.sd_eject);
         mMountTogglePreference.setSummary(R.string.sd_eject_summary);
 
-        mFormatPreference = new Preference(getContext());
-        mFormatPreference.setTitle(R.string.sd_format);
-        mFormatPreference.setSummary(R.string.sd_format_summary);
+        if (mAllowFormat) {
+            mFormatPreference = new Preference(getContext());
+            mFormatPreference.setTitle(R.string.sd_format);
+            mFormatPreference.setSummary(R.string.sd_format_summary);
+        }
     }
 
     public StorageVolume getStorageVolume() {
@@ -211,14 +221,18 @@ public class StorageVolumePreferenceCategory extends PreferenceCategory implemen
             removePreference(mPreferences[i]);
         }
         removePreference(mMountTogglePreference);
-        removePreference(mFormatPreference);
+        if (mFormatPreference != null) {
+            removePreference(mFormatPreference);
+        }
 
         addPreference(mUsageBarPreference);
         for (int i = 0; i < numberOfCategories; i++) {
             addPreference(mPreferences[i]);
         }
         addPreference(mMountTogglePreference);
-        addPreference(mFormatPreference);
+        if (mFormatPreference != null) {
+            addPreference(mFormatPreference);
+        }
 
         mMountTogglePreference.setEnabled(true);
     }
@@ -232,10 +246,12 @@ public class StorageVolumePreferenceCategory extends PreferenceCategory implemen
         if (Environment.MEDIA_MOUNTED_READ_ONLY.equals(state)) {
             state = Environment.MEDIA_MOUNTED;
             readOnly = mResources.getString(R.string.read_only);
-            removePreference(mFormatPreference);
+            if (mFormatPreference != null) {
+                removePreference(mFormatPreference);
+            }
         }
 
-        if (mStorageVolume.isEmulated()) {
+        if (mFormatPreference != null) {
             removePreference(mFormatPreference);
         }
 
@@ -266,7 +282,9 @@ public class StorageVolumePreferenceCategory extends PreferenceCategory implemen
             removePreference(mUsageBarPreference);
             removePreference(mPreferences[TOTAL_SIZE]);
             removePreference(mPreferences[AVAILABLE]);
-            removePreference(mFormatPreference);
+            if (mFormatPreference != null) {
+                removePreference(mFormatPreference);
+            }
         }
     }
 
