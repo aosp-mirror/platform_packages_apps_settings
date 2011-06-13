@@ -16,6 +16,7 @@
 
 package com.android.settings;
 
+import static android.net.NetworkPolicy.LIMIT_DISABLED;
 import static android.net.NetworkPolicyManager.computeLastCycleBoundary;
 import static android.net.NetworkPolicyManager.computeNextCycleBoundary;
 import static android.net.TrafficStats.TEMPLATE_MOBILE_3G_LOWER;
@@ -37,6 +38,8 @@ import android.os.RemoteException;
 import android.os.ServiceManager;
 import android.preference.CheckBoxPreference;
 import android.preference.Preference;
+import android.preference.SwitchPreference;
+import android.telephony.TelephonyManager;
 import android.text.format.DateUtils;
 import android.text.format.Formatter;
 import android.text.format.Time;
@@ -64,6 +67,7 @@ import android.widget.TabHost.TabSpec;
 import android.widget.TabWidget;
 import android.widget.TextView;
 
+import com.android.settings.net.NetworkPolicyModifier;
 import com.android.settings.widget.DataUsageChartView;
 import com.android.settings.widget.DataUsageChartView.DataUsageChartListener;
 import com.google.android.collect.Lists;
@@ -99,7 +103,7 @@ public class DataUsageSummary extends Fragment {
     private View mHeader;
     private LinearLayout mSwitches;
 
-    private CheckBoxPreference mDataEnabled;
+    private SwitchPreference mDataEnabled;
     private CheckBoxPreference mDisableAtLimit;
     private View mDataEnabledView;
     private View mDisableAtLimitView;
@@ -109,25 +113,28 @@ public class DataUsageSummary extends Fragment {
     private Spinner mCycleSpinner;
     private CycleAdapter mCycleAdapter;
 
-    private boolean mSplit4G = false;
+    // TODO: persist show wifi flag
     private boolean mShowWifi = false;
 
     private int mTemplate = TEMPLATE_INVALID;
 
-    private NetworkPolicy mPolicy;
+    private NetworkPolicyModifier mPolicyModifier;
     private NetworkStatsHistory mHistory;
-
-    // TODO: policy service should always provide valid stub policy
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setHasOptionsMenu(true);
 
         mStatsService = INetworkStatsService.Stub.asInterface(
                 ServiceManager.getService(Context.NETWORK_STATS_SERVICE));
         mPolicyService = INetworkPolicyManager.Stub.asInterface(
                 ServiceManager.getService(Context.NETWORK_POLICY_SERVICE));
+
+        final Context context = getActivity();
+        final String subscriberId = getActiveSubscriberId(context);
+        mPolicyModifier = new NetworkPolicyModifier(mPolicyService, subscriberId);
+
+        setHasOptionsMenu(true);
     }
 
     @Override
@@ -147,7 +154,7 @@ public class DataUsageSummary extends Fragment {
         mHeader = inflater.inflate(R.layout.data_usage_header, mListView, false);
         mListView.addHeaderView(mHeader, null, false);
 
-        mDataEnabled = new CheckBoxPreference(context);
+        mDataEnabled = new SwitchPreference(context);
         mDisableAtLimit = new CheckBoxPreference(context);
 
         // kick refresh once to force-create views
@@ -185,6 +192,9 @@ public class DataUsageSummary extends Fragment {
     public void onResume() {
         super.onResume();
 
+        // read current policy state from service
+        mPolicyModifier.read();
+
         // this kicks off chain reaction which creates tabs, binds the body to
         // selected network, and binds chart, cycles and detail list.
         updateTabs();
@@ -196,13 +206,18 @@ public class DataUsageSummary extends Fragment {
     }
 
     @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // TODO: persist checked-ness of options to restore tabs later
+    public void onPrepareOptionsMenu(Menu menu) {
+        final MenuItem split4g = menu.findItem(R.id.action_split_4g);
+        split4g.setChecked(mPolicyModifier.isMobilePolicySplit());
+    }
 
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.action_split_4g: {
-                mSplit4G = !item.isChecked();
-                item.setChecked(mSplit4G);
+                final boolean mobileSplit = !item.isChecked();
+                mPolicyModifier.setMobilePolicySplit(mobileSplit);
+                item.setChecked(mPolicyModifier.isMobilePolicySplit());
                 updateTabs();
                 return true;
             }
@@ -217,24 +232,23 @@ public class DataUsageSummary extends Fragment {
     }
 
     /**
-     * Rebuild all tabs based on {@link #mSplit4G} and {@link #mShowWifi},
-     * hiding the tabs entirely when applicable. Selects first tab, and kicks
-     * off a full rebind of body contents.
+     * Rebuild all tabs based on {@link NetworkPolicyModifier} and
+     * {@link #mShowWifi}, hiding the tabs entirely when applicable. Selects
+     * first tab, and kicks off a full rebind of body contents.
      */
     private void updateTabs() {
-        // TODO: persist/restore if user wants mobile split, or wifi visibility
-
-        final boolean tabsVisible = mSplit4G || mShowWifi;
+        final boolean mobileSplit = mPolicyModifier.isMobilePolicySplit();
+        final boolean tabsVisible = mobileSplit || mShowWifi;
         mTabWidget.setVisibility(tabsVisible ? View.VISIBLE : View.GONE);
         mTabHost.clearAllTabs();
 
-        if (mSplit4G) {
+        if (mobileSplit) {
             mTabHost.addTab(buildTabSpec(TAB_3G, R.string.data_usage_tab_3g));
             mTabHost.addTab(buildTabSpec(TAB_4G, R.string.data_usage_tab_4g));
         }
 
         if (mShowWifi) {
-            if (!mSplit4G) {
+            if (!mobileSplit) {
                 mTabHost.addTab(buildTabSpec(TAB_MOBILE, R.string.data_usage_tab_mobile));
             }
             mTabHost.addTab(buildTabSpec(TAB_WIFI, R.string.data_usage_tab_wifi));
@@ -323,8 +337,7 @@ public class DataUsageSummary extends Fragment {
         mDataEnabled.setChecked(true);
 
         try {
-            // load policy and stats for current template
-            mPolicy = mPolicyService.getNetworkPolicy(mTemplate, null);
+            // load stats for current template
             mHistory = mStatsService.getHistoryForNetwork(mTemplate);
         } catch (RemoteException e) {
             // since we can't do much without policy or history, and we don't
@@ -332,23 +345,31 @@ public class DataUsageSummary extends Fragment {
             throw new RuntimeException("problem reading network policy or stats", e);
         }
 
-        // TODO: eventually service will always provide stub policy
-        if (mPolicy == null) {
-            mPolicy = new NetworkPolicy(1, 4 * GB_IN_BYTES, -1);
-        }
-
         // bind chart to historical stats
-        mChart.bindNetworkPolicy(mPolicy);
         mChart.bindNetworkStats(mHistory);
 
-        // generate cycle list based on policy and available history
-        updateCycleList();
-
-        // reflect policy limit in checkbox
-        mDisableAtLimit.setChecked(mPolicy.limitBytes != -1);
+        updatePolicy();
 
         // force scroll to top of body
         mListView.smoothScrollToPosition(0);
+
+        // kick preference views so they rebind from changes above
+        refreshPreferenceViews();
+    }
+
+    /**
+     * Update chart sweeps and cycle list to reflect {@link NetworkPolicy} for
+     * current {@link #mTemplate}.
+     */
+    private void updatePolicy() {
+        final NetworkPolicy policy = mPolicyModifier.getPolicy(mTemplate);
+
+        // reflect policy limit in checkbox
+        mDisableAtLimit.setChecked(policy != null && policy.limitBytes != LIMIT_DISABLED);
+        mChart.bindNetworkPolicy(policy);
+
+        // generate cycle list based on policy and available history
+        updateCycleList(policy);
 
         // kick preference views so they rebind from changes above
         refreshPreferenceViews();
@@ -376,7 +397,7 @@ public class DataUsageSummary extends Fragment {
      * and available {@link NetworkStatsHistory} data. Always selects the newest
      * item, updating the inspection range on {@link #mChart}.
      */
-    private void updateCycleList() {
+    private void updateCycleList(NetworkPolicy policy) {
         mCycleAdapter.clear();
 
         final Context context = mCycleSpinner.getContext();
@@ -385,28 +406,36 @@ public class DataUsageSummary extends Fragment {
         final long historyStart = bounds[0];
         final long historyEnd = bounds[1];
 
-        // find the next cycle boundary
-        long cycleEnd = computeNextCycleBoundary(historyEnd, mPolicy);
+        if (policy != null) {
+            // find the next cycle boundary
+            long cycleEnd = computeNextCycleBoundary(historyEnd, policy);
 
-        int guardCount = 0;
+            int guardCount = 0;
 
-        // walk backwards, generating all valid cycle ranges
-        while (cycleEnd > historyStart) {
-            final long cycleStart = computeLastCycleBoundary(cycleEnd, mPolicy);
-            Log.d(TAG, "generating cs=" + cycleStart + " to ce=" + cycleEnd + " waiting for hs="
-                    + historyStart);
-            mCycleAdapter.add(new CycleItem(context, cycleStart, cycleEnd));
-            cycleEnd = cycleStart;
+            // walk backwards, generating all valid cycle ranges
+            while (cycleEnd > historyStart) {
+                final long cycleStart = computeLastCycleBoundary(cycleEnd, policy);
+                Log.d(TAG, "generating cs=" + cycleStart + " to ce=" + cycleEnd + " waiting for hs="
+                        + historyStart);
+                mCycleAdapter.add(new CycleItem(context, cycleStart, cycleEnd));
+                cycleEnd = cycleStart;
 
-            // TODO: remove this guard once we have better testing
-            if (guardCount++ > 50) {
-                Log.wtf(TAG, "stuck generating ranges for bounds=" + Arrays.toString(bounds)
-                        + " and policy=" + mPolicy);
+                // TODO: remove this guard once we have better testing
+                if (guardCount++ > 50) {
+                    Log.wtf(TAG, "stuck generating ranges for bounds=" + Arrays.toString(bounds)
+                            + " and policy=" + policy);
+                }
             }
-        }
 
-        // one last cycle entry to change date
-        mCycleAdapter.add(new CycleChangeItem(context));
+            // one last cycle entry to modify policy cycle day
+            mCycleAdapter.add(new CycleChangeItem(context));
+
+        } else {
+            // no valid cycle; show all data
+            // TODO: offer simple ranges like "last week" etc
+            mCycleAdapter.add(new CycleItem(context, historyStart, historyEnd));
+
+        }
 
         // force pick the current cycle (first item)
         mCycleSpinner.setSelection(0);
@@ -438,11 +467,11 @@ public class DataUsageSummary extends Fragment {
             mDisableAtLimit.setChecked(disableAtLimit);
             refreshPreferenceViews();
 
-            // TODO: push updated policy to service
+            // TODO: create policy if none exists
             // TODO: show interstitial warning dialog to user
-            final long limitBytes = disableAtLimit ? 5 * GB_IN_BYTES : -1;
-            mPolicy = new NetworkPolicy(mPolicy.cycleDay, mPolicy.warningBytes, limitBytes);
-            mChart.bindNetworkPolicy(mPolicy);
+            final long limitBytes = disableAtLimit ? 5 * GB_IN_BYTES : LIMIT_DISABLED;
+            mPolicyModifier.setPolicyLimitBytes(mTemplate, limitBytes);
+            updatePolicy();
         }
     };
 
@@ -500,6 +529,12 @@ public class DataUsageSummary extends Fragment {
         }
     }
 
+    private static String getActiveSubscriberId(Context context) {
+        final TelephonyManager telephony = (TelephonyManager) context.getSystemService(
+                Context.TELEPHONY_SERVICE);
+        return telephony.getSubscriberId();
+    }
+
     private DataUsageChartListener mChartListener = new DataUsageChartListener() {
         /** {@inheritDoc} */
         public void onInspectRangeChanged() {
@@ -508,26 +543,20 @@ public class DataUsageSummary extends Fragment {
         }
 
         /** {@inheritDoc} */
-        public void onLimitsChanged() {
-            if (LOGD) Log.d(TAG, "onLimitsChanged()");
-
-            // redefine policy and persist into service
-            // TODO: kick this onto background thread, since service touches disk
-
-            // TODO: remove this mPolicy null check, since later service will
-            // always define baseline value.
-            final int cycleDay = mPolicy != null ? mPolicy.cycleDay : 1;
+        public void onWarningChanged() {
+            if (LOGD) Log.d(TAG, "onWarningChanged()");
             final long warningBytes = mChart.getWarningBytes();
-            final long limitBytes = mDisableAtLimit.isChecked() ? -1 : mChart.getLimitBytes();
+            mPolicyModifier.setPolicyWarningBytes(mTemplate, warningBytes);
+            updatePolicy();
+        }
 
-            mPolicy = new NetworkPolicy(cycleDay, warningBytes, limitBytes);
-            if (LOGD) Log.d(TAG, "persisting policy=" + mPolicy);
-
-            try {
-                mPolicyService.setNetworkPolicy(mTemplate, null, mPolicy);
-            } catch (RemoteException e) {
-                Log.w(TAG, "problem persisting policy", e);
-            }
+        /** {@inheritDoc} */
+        public void onLimitChanged() {
+            if (LOGD) Log.d(TAG, "onLimitChanged()");
+            final long limitBytes = mDisableAtLimit.isChecked() ? mChart.getLimitBytes()
+                    : LIMIT_DISABLED;
+            mPolicyModifier.setPolicyLimitBytes(mTemplate, limitBytes);
+            updatePolicy();
         }
     };
 
@@ -605,7 +634,7 @@ public class DataUsageSummary extends Fragment {
         public void bindStats(NetworkStats stats) {
             mItems.clear();
 
-            for (int i = 0; i < stats.length(); i++) {
+            for (int i = 0; i < stats.size; i++) {
                 final AppUsageItem item = new AppUsageItem();
                 item.uid = stats.uid[i];
                 item.total = stats.rx[i] + stats.tx[i];

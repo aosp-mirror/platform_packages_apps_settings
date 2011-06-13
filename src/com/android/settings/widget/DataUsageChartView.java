@@ -21,6 +21,7 @@ import android.graphics.Color;
 import android.net.NetworkPolicy;
 import android.net.NetworkStatsHistory;
 import android.text.format.DateUtils;
+import android.view.View;
 
 import com.android.settings.widget.ChartSweepView.OnSweepListener;
 
@@ -44,7 +45,8 @@ public class DataUsageChartView extends ChartView {
 
     public interface DataUsageChartListener {
         public void onInspectRangeChanged();
-        public void onLimitsChanged();
+        public void onWarningChanged();
+        public void onLimitChanged();
     }
 
     private DataUsageChartListener mListener;
@@ -78,6 +80,9 @@ public class DataUsageChartView extends ChartView {
 
         mSeries.bindSweepRange(mSweepTime1, mSweepTime2);
 
+        mSweepDataWarn.addOnSweepListener(mWarningListener);
+        mSweepDataLimit.addOnSweepListener(mLimitListener);
+
         mSweepTime1.addOnSweepListener(mSweepListener);
         mSweepTime2.addOnSweepListener(mSweepListener);
 
@@ -92,15 +97,29 @@ public class DataUsageChartView extends ChartView {
     }
 
     public void bindNetworkPolicy(NetworkPolicy policy) {
-        if (policy.limitBytes != -1) {
+        if (policy == null) {
+            mSweepDataLimit.setVisibility(View.INVISIBLE);
+            mSweepDataWarn.setVisibility(View.INVISIBLE);
+            return;
+        }
+
+        if (policy.limitBytes != NetworkPolicy.LIMIT_DISABLED) {
+            mSweepDataLimit.setVisibility(View.VISIBLE);
             mSweepDataLimit.setValue(policy.limitBytes);
             mSweepDataLimit.setEnabled(true);
         } else {
+            // TODO: set limit default based on axis maximum
+            mSweepDataLimit.setVisibility(View.VISIBLE);
             mSweepDataLimit.setValue(5 * GB_IN_BYTES);
             mSweepDataLimit.setEnabled(false);
         }
 
-        mSweepDataWarn.setValue(policy.warningBytes);
+        if (policy.warningBytes != NetworkPolicy.WARNING_DISABLED) {
+            mSweepDataWarn.setVisibility(View.VISIBLE);
+            mSweepDataWarn.setValue(policy.warningBytes);
+        } else {
+            mSweepDataWarn.setVisibility(View.INVISIBLE);
+        }
     }
 
     private OnSweepListener mSweepListener = new OnSweepListener() {
@@ -111,6 +130,22 @@ public class DataUsageChartView extends ChartView {
             // update detail list only when done sweeping
             if (sweepDone && mListener != null) {
                 mListener.onInspectRangeChanged();
+            }
+        }
+    };
+
+    private OnSweepListener mWarningListener = new OnSweepListener() {
+        public void onSweep(ChartSweepView sweep, boolean sweepDone) {
+            if (sweepDone && mListener != null) {
+                mListener.onWarningChanged();
+            }
+        }
+    };
+
+    private OnSweepListener mLimitListener = new OnSweepListener() {
+        public void onSweep(ChartSweepView sweep, boolean sweepDone) {
+            if (sweepDone && mListener != null) {
+                mListener.onLimitChanged();
             }
         }
     };
