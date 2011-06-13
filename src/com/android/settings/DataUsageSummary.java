@@ -27,6 +27,7 @@ import static android.view.ViewGroup.LayoutParams.MATCH_PARENT;
 
 import android.app.Fragment;
 import android.content.Context;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.net.INetworkPolicyManager;
 import android.net.INetworkStatsService;
@@ -38,6 +39,7 @@ import android.os.RemoteException;
 import android.os.ServiceManager;
 import android.preference.CheckBoxPreference;
 import android.preference.Preference;
+import android.preference.PreferenceActivity;
 import android.preference.SwitchPreference;
 import android.telephony.TelephonyManager;
 import android.text.format.DateUtils;
@@ -348,7 +350,7 @@ public class DataUsageSummary extends Fragment {
         // bind chart to historical stats
         mChart.bindNetworkStats(mHistory);
 
-        updatePolicy();
+        updatePolicy(true);
 
         // force scroll to top of body
         mListView.smoothScrollToPosition(0);
@@ -361,15 +363,17 @@ public class DataUsageSummary extends Fragment {
      * Update chart sweeps and cycle list to reflect {@link NetworkPolicy} for
      * current {@link #mTemplate}.
      */
-    private void updatePolicy() {
+    private void updatePolicy(boolean refreshCycle) {
         final NetworkPolicy policy = mPolicyModifier.getPolicy(mTemplate);
 
         // reflect policy limit in checkbox
         mDisableAtLimit.setChecked(policy != null && policy.limitBytes != LIMIT_DISABLED);
         mChart.bindNetworkPolicy(policy);
 
-        // generate cycle list based on policy and available history
-        updateCycleList(policy);
+        if (refreshCycle) {
+            // generate cycle list based on policy and available history
+            updateCycleList(policy);
+        }
 
         // kick preference views so they rebind from changes above
         refreshPreferenceViews();
@@ -379,7 +383,7 @@ public class DataUsageSummary extends Fragment {
      * Return full time bounds (earliest and latest time recorded) of the given
      * {@link NetworkStatsHistory}.
      */
-    private static long[] getHistoryBounds(NetworkStatsHistory history) {
+    public static long[] getHistoryBounds(NetworkStatsHistory history) {
         final long currentTime = System.currentTimeMillis();
 
         long start = currentTime;
@@ -471,17 +475,21 @@ public class DataUsageSummary extends Fragment {
             // TODO: show interstitial warning dialog to user
             final long limitBytes = disableAtLimit ? 5 * GB_IN_BYTES : LIMIT_DISABLED;
             mPolicyModifier.setPolicyLimitBytes(mTemplate, limitBytes);
-            updatePolicy();
+            updatePolicy(false);
         }
     };
 
     private OnItemClickListener mListListener = new OnItemClickListener() {
         /** {@inheritDoc} */
         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-            final Object object = parent.getItemAtPosition(position);
+            final AppUsageItem app = (AppUsageItem) parent.getItemAtPosition(position);
 
-            // TODO: show app details
-            Log.d(TAG, "showing app details for " + object);
+            final Bundle args = new Bundle();
+            args.putInt(Intent.EXTRA_UID, app.uid);
+
+            final PreferenceActivity activity = (PreferenceActivity) getActivity();
+            activity.startPreferencePanel(DataUsageAppDetail.class.getName(), args,
+                    R.string.data_usage_summary_title, null, null, 0);
         }
     };
 
@@ -547,7 +555,7 @@ public class DataUsageSummary extends Fragment {
             if (LOGD) Log.d(TAG, "onWarningChanged()");
             final long warningBytes = mChart.getWarningBytes();
             mPolicyModifier.setPolicyWarningBytes(mTemplate, warningBytes);
-            updatePolicy();
+            updatePolicy(false);
         }
 
         /** {@inheritDoc} */
@@ -556,7 +564,7 @@ public class DataUsageSummary extends Fragment {
             final long limitBytes = mDisableAtLimit.isChecked() ? mChart.getLimitBytes()
                     : LIMIT_DISABLED;
             mPolicyModifier.setPolicyLimitBytes(mTemplate, limitBytes);
-            updatePolicy();
+            updatePolicy(false);
         }
     };
 
@@ -615,21 +623,21 @@ public class DataUsageSummary extends Fragment {
         }
     }
 
+    private static class AppUsageItem implements Comparable<AppUsageItem> {
+        public int uid;
+        public long total;
+
+        /** {@inheritDoc} */
+        public int compareTo(AppUsageItem another) {
+            return Long.compare(another.total, total);
+        }
+    }
+
     /**
      * Adapter of applications, sorted by total usage descending.
      */
     public static class DataUsageAdapter extends BaseAdapter {
         private ArrayList<AppUsageItem> mItems = Lists.newArrayList();
-
-        private static class AppUsageItem implements Comparable<AppUsageItem> {
-            public int uid;
-            public long total;
-
-            /** {@inheritDoc} */
-            public int compareTo(AppUsageItem another) {
-                return Long.compare(another.total, total);
-            }
-        }
 
         public void bindStats(NetworkStats stats) {
             mItems.clear();

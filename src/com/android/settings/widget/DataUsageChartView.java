@@ -86,6 +86,13 @@ public class DataUsageChartView extends ChartView {
         mSweepTime1.addOnSweepListener(mSweepListener);
         mSweepTime2.addOnSweepListener(mSweepListener);
 
+        mSweepDataWarn.setVisibility(View.INVISIBLE);
+        mSweepDataLimit.setVisibility(View.INVISIBLE);
+
+    }
+
+    public void setChartColor(int stroke, int fill, int disabled) {
+        mSeries.setChartColor(stroke, fill, disabled);
     }
 
     public void setListener(DataUsageChartListener listener) {

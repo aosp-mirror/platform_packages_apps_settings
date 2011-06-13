@@ -40,9 +40,9 @@ public class ChartNetworkSeriesView extends View {
     private final ChartAxis mHoriz;
     private final ChartAxis mVert;
 
-    private final Paint mPaintStroke;
-    private final Paint mPaintFill;
-    private final Paint mPaintFillDisabled;
+    private Paint mPaintStroke;
+    private Paint mPaintFill;
+    private Paint mPaintFillDisabled;
 
     private NetworkStatsHistory mStats;
 
@@ -58,24 +58,29 @@ public class ChartNetworkSeriesView extends View {
         mHoriz = Preconditions.checkNotNull(horiz, "missing horiz");
         mVert = Preconditions.checkNotNull(vert, "missing vert");
 
+        setChartColor(Color.parseColor("#24aae1"), Color.parseColor("#c050ade5"),
+                Color.parseColor("#88566abc"));
+
+        mPathStroke = new Path();
+        mPathFill = new Path();
+    }
+
+    public void setChartColor(int stroke, int fill, int disabled) {
         mPaintStroke = new Paint();
         mPaintStroke.setStrokeWidth(6.0f);
-        mPaintStroke.setColor(Color.parseColor("#24aae1"));
+        mPaintStroke.setColor(stroke);
         mPaintStroke.setStyle(Style.STROKE);
         mPaintStroke.setAntiAlias(true);
 
         mPaintFill = new Paint();
-        mPaintFill.setColor(Color.parseColor("#c050ade5"));
+        mPaintFill.setColor(fill);
         mPaintFill.setStyle(Style.FILL);
         mPaintFill.setAntiAlias(true);
 
         mPaintFillDisabled = new Paint();
-        mPaintFillDisabled.setColor(Color.parseColor("#88566abc"));
+        mPaintFillDisabled.setColor(disabled);
         mPaintFillDisabled.setStyle(Style.FILL);
         mPaintFillDisabled.setAntiAlias(true);
-
-        mPathStroke = new Path();
-        mPathFill = new Path();
     }
 
     public void bindNetworkStats(NetworkStatsHistory stats) {
