@@ -342,9 +342,11 @@ public class CryptKeeper extends Activity implements TextView.OnEditorActionList
 
         KeyboardView keyboardView = (PasswordEntryKeyboardView) findViewById(R.id.keyboard);
 
-        PasswordEntryKeyboardHelper keyboardHelper = new PasswordEntryKeyboardHelper(this,
-                keyboardView, mPasswordEntry, false);
-        keyboardHelper.setKeyboardMode(PasswordEntryKeyboardHelper.KEYBOARD_MODE_ALPHA);
+        if (keyboardView != null) {
+            PasswordEntryKeyboardHelper keyboardHelper = new PasswordEntryKeyboardHelper(this,
+                    keyboardView, mPasswordEntry, false);
+            keyboardHelper.setKeyboardMode(PasswordEntryKeyboardHelper.KEYBOARD_MODE_ALPHA);
+        }
     }
 
     private IMountService getMountService() {
@@ -357,7 +359,7 @@ public class CryptKeeper extends Activity implements TextView.OnEditorActionList
 
     @Override
     public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
-        if (actionId == EditorInfo.IME_NULL) {
+        if (actionId == EditorInfo.IME_NULL || actionId == EditorInfo.IME_ACTION_DONE) {
             // Get the password
             String password = v.getText().toString();
 

@@ -62,6 +62,8 @@ public class CryptKeeperConfirm extends Fragment {
                 public void run() {
                     IBinder service = ServiceManager.getService("mount");
                     if (service == null) {
+                        Log.e("CryptKeeper", "Failed to find the mount service");
+                        finish();
                         return;
                     }
 
