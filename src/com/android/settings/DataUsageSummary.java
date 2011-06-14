@@ -135,6 +135,7 @@ public class DataUsageSummary extends Fragment {
         final Context context = getActivity();
         final String subscriberId = getActiveSubscriberId(context);
         mPolicyModifier = new NetworkPolicyModifier(mPolicyService, subscriberId);
+        mPolicyModifier.read();
 
         setHasOptionsMenu(true);
     }
@@ -194,9 +195,6 @@ public class DataUsageSummary extends Fragment {
     public void onResume() {
         super.onResume();
 
-        // read current policy state from service
-        mPolicyModifier.read();
-
         // this kicks off chain reaction which creates tabs, binds the body to
         // selected network, and binds chart, cycles and detail list.
         updateTabs();
@@ -231,6 +229,14 @@ public class DataUsageSummary extends Fragment {
             }
         }
         return false;
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+
+        mDataEnabledView = null;
+        mDisableAtLimitView = null;
     }
 
     /**
