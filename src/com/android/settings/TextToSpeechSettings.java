@@ -683,6 +683,8 @@ public class TextToSpeechSettings extends SettingsPreferenceFragment implements
 
     private void loadEngines() {
         List<EngineInfo> engines = mEnginesHelper.getEngines();
+        updateUserEnabledEngines(engines);
+
         ArrayList<CharSequence> entries = new ArrayList<CharSequence>();
         ArrayList<CharSequence> values = new ArrayList<CharSequence>();
         StringBuilder enabledEngines = new StringBuilder();
@@ -692,12 +694,9 @@ public class TextToSpeechSettings extends SettingsPreferenceFragment implements
             if (mEnginesHelper.isEngineEnabled(engine.name)) {
                 entries.add(engine.label);
                 values.add(engine.name);
-                if (enabledEngines.length() > 0) enabledEngines.append(' ');
-                enabledEngines.append(engine.name);
             }
         }
-        ContentResolver resolver = getContentResolver();
-        Settings.Secure.putString(resolver, TTS_ENABLED_PLUGINS, enabledEngines.toString());
+
 
         CharSequence entriesArray[] = new CharSequence[entries.size()];
         CharSequence valuesArray[] = new CharSequence[values.size()];
@@ -715,6 +714,28 @@ public class TextToSpeechSettings extends SettingsPreferenceFragment implements
         if (selectedEngineIndex >= 0) {
             mDefaultSynthPref.setValueIndex(selectedEngineIndex);
         }
+    }
+
+    /*
+     * Write out the list of engines enabled by the user to a
+     * shared preference.
+     */
+    private void updateUserEnabledEngines(List<EngineInfo> engines) {
+        StringBuilder enginesList = new StringBuilder();
+        for (EngineInfo engine : engines) {
+            if (isEngineUserEnabled(engine.name)) {
+                if (enginesList.length() > 0) enginesList.append(' ');
+                enginesList.append(engine.name);
+            }
+        }
+
+        ContentResolver resolver = getContentResolver();
+        Settings.Secure.putString(resolver, TTS_ENABLED_PLUGINS, enginesList.toString());
+    }
+
+    private boolean isEngineUserEnabled(String engineName) {
+        String enginePref = KEY_PLUGIN_ENABLED_PREFIX + engineName;
+        return getPreferenceManager().getSharedPreferences().getBoolean(enginePref, false);
     }
 
 }
