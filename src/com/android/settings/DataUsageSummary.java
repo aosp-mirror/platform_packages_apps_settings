@@ -25,8 +25,12 @@ import static android.net.TrafficStats.TEMPLATE_MOBILE_ALL;
 import static android.net.TrafficStats.TEMPLATE_WIFI;
 import static android.view.ViewGroup.LayoutParams.MATCH_PARENT;
 
+import android.app.AlertDialog;
+import android.app.Dialog;
+import android.app.DialogFragment;
 import android.app.Fragment;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.net.INetworkPolicyManager;
@@ -61,6 +65,7 @@ import android.widget.ArrayAdapter;
 import android.widget.BaseAdapter;
 import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.NumberPicker;
 import android.widget.Spinner;
 import android.widget.TabHost;
 import android.widget.TabHost.OnTabChangeListener;
@@ -89,6 +94,9 @@ public class DataUsageSummary extends Fragment {
     private static final String TAB_4G = "4g";
     private static final String TAB_MOBILE = "mobile";
     private static final String TAB_WIFI = "wifi";
+
+    private static final String TAG_CONFIRM_LIMIT = "confirmLimit";
+    private static final String TAG_CYCLE_EDITOR = "cycleEditor";
 
     private static final long KB_IN_BYTES = 1024;
     private static final long MB_IN_BYTES = KB_IN_BYTES * 1024;
@@ -365,6 +373,24 @@ public class DataUsageSummary extends Fragment {
         refreshPreferenceViews();
     }
 
+    private void setPolicyCycleDay(int cycleDay) {
+        if (LOGD) Log.d(TAG, "setPolicyCycleDay()");
+        mPolicyModifier.setPolicyCycleDay(mTemplate, cycleDay);
+        updatePolicy(true);
+    }
+
+    private void setPolicyWarningBytes(long warningBytes) {
+        if (LOGD) Log.d(TAG, "setPolicyWarningBytes()");
+        mPolicyModifier.setPolicyWarningBytes(mTemplate, warningBytes);
+        updatePolicy(false);
+    }
+
+    private void setPolicyLimitBytes(long limitBytes) {
+        if (LOGD) Log.d(TAG, "setPolicyLimitBytes()");
+        mPolicyModifier.setPolicyLimitBytes(mTemplate, limitBytes);
+        updatePolicy(false);
+    }
+
     /**
      * Update chart sweeps and cycle list to reflect {@link NetworkPolicy} for
      * current {@link #mTemplate}.
@@ -474,14 +500,13 @@ public class DataUsageSummary extends Fragment {
         /** {@inheritDoc} */
         public void onClick(View v) {
             final boolean disableAtLimit = !mDisableAtLimit.isChecked();
-            mDisableAtLimit.setChecked(disableAtLimit);
-            refreshPreferenceViews();
-
-            // TODO: create policy if none exists
-            // TODO: show interstitial warning dialog to user
-            final long limitBytes = disableAtLimit ? 5 * GB_IN_BYTES : LIMIT_DISABLED;
-            mPolicyModifier.setPolicyLimitBytes(mTemplate, limitBytes);
-            updatePolicy(false);
+            if (disableAtLimit) {
+                // enabling limit; show confirmation dialog which eventually
+                // calls setPolicyLimitBytes() once user confirms.
+                ConfirmLimitFragment.show(DataUsageSummary.this);
+            } else {
+                setPolicyLimitBytes(LIMIT_DISABLED);
+            }
         }
     };
 
@@ -504,12 +529,15 @@ public class DataUsageSummary extends Fragment {
         public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
             final CycleItem cycle = (CycleItem) parent.getItemAtPosition(position);
             if (cycle instanceof CycleChangeItem) {
-                // TODO: show "define cycle" dialog
-                // also reset back to first cycle
-                Log.d(TAG, "CHANGE CYCLE DIALOG!!");
+                // show cycle editor; will eventually call setPolicyCycleDay()
+                // when user finishes editing.
+                CycleEditorFragment.show(DataUsageSummary.this);
+
+                // reset spinner to something other than "change cycle..."
+                mCycleSpinner.setSelection(0);
 
             } else {
-                if (LOGD) Log.d(TAG, "shoiwng cycle " + cycle);
+                if (LOGD) Log.d(TAG, "showing cycle " + cycle);
 
                 // update chart to show selected cycle, and update detail data
                 // to match updated sweep bounds.
@@ -558,19 +586,12 @@ public class DataUsageSummary extends Fragment {
 
         /** {@inheritDoc} */
         public void onWarningChanged() {
-            if (LOGD) Log.d(TAG, "onWarningChanged()");
-            final long warningBytes = mChart.getWarningBytes();
-            mPolicyModifier.setPolicyWarningBytes(mTemplate, warningBytes);
-            updatePolicy(false);
+            setPolicyWarningBytes(mChart.getWarningBytes());
         }
 
         /** {@inheritDoc} */
         public void onLimitChanged() {
-            if (LOGD) Log.d(TAG, "onLimitChanged()");
-            final long limitBytes = mDisableAtLimit.isChecked() ? mChart.getLimitBytes()
-                    : LIMIT_DISABLED;
-            mPolicyModifier.setPolicyLimitBytes(mTemplate, limitBytes);
-            updatePolicy(false);
+            setPolicyLimitBytes(mChart.getLimitBytes());
         }
     };
 
@@ -696,5 +717,116 @@ public class DataUsageSummary extends Fragment {
 
     }
 
+    /**
+     * Dialog to request user confirmation before setting
+     * {@link NetworkPolicy#limitBytes}.
+     */
+    public static class ConfirmLimitFragment extends DialogFragment {
+        public static final String EXTRA_MESSAGE_ID = "messageId";
+        public static final String EXTRA_LIMIT_BYTES = "limitBytes";
+
+        public static void show(DataUsageSummary parent) {
+            final Bundle args = new Bundle();
+
+            // TODO: customize default limits based on network template
+            switch (parent.mTemplate) {
+                case TEMPLATE_MOBILE_3G_LOWER: {
+                    args.putInt(EXTRA_MESSAGE_ID, R.string.data_usage_limit_dialog_3g);
+                    args.putLong(EXTRA_LIMIT_BYTES, 5 * GB_IN_BYTES);
+                    break;
+                }
+                case TEMPLATE_MOBILE_4G: {
+                    args.putInt(EXTRA_MESSAGE_ID, R.string.data_usage_limit_dialog_4g);
+                    args.putLong(EXTRA_LIMIT_BYTES, 5 * GB_IN_BYTES);
+                    break;
+                }
+                case TEMPLATE_MOBILE_ALL: {
+                    args.putInt(EXTRA_MESSAGE_ID, R.string.data_usage_limit_dialog_mobile);
+                    args.putLong(EXTRA_LIMIT_BYTES, 5 * GB_IN_BYTES);
+                    break;
+                }
+            }
+
+            final ConfirmLimitFragment dialog = new ConfirmLimitFragment();
+            dialog.setArguments(args);
+            dialog.setTargetFragment(parent, 0);
+            dialog.show(parent.getFragmentManager(), TAG_CONFIRM_LIMIT);
+        }
+
+        @Override
+        public Dialog onCreateDialog(Bundle savedInstanceState) {
+            final Context context = getActivity();
+
+            final int messageId = getArguments().getInt(EXTRA_MESSAGE_ID);
+            final long limitBytes = getArguments().getLong(EXTRA_LIMIT_BYTES);
+
+            final AlertDialog.Builder builder = new AlertDialog.Builder(context);
+            builder.setTitle(R.string.data_usage_limit_dialog_title);
+            builder.setMessage(messageId);
+
+            builder.setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
+                public void onClick(DialogInterface dialog, int which) {
+                    final DataUsageSummary target = (DataUsageSummary) getTargetFragment();
+                    if (target != null) {
+                        target.setPolicyLimitBytes(limitBytes);
+                    }
+                }
+            });
+
+            return builder.create();
+        }
+    }
+
+    /**
+     * Dialog to edit {@link NetworkPolicy#cycleDay}.
+     */
+    public static class CycleEditorFragment extends DialogFragment {
+        public static final String EXTRA_CYCLE_DAY = "cycleDay";
+
+        public static void show(DataUsageSummary parent) {
+            final NetworkPolicy policy = parent.mPolicyModifier.getPolicy(parent.mTemplate);
+            final Bundle args = new Bundle();
+            args.putInt(CycleEditorFragment.EXTRA_CYCLE_DAY, policy.cycleDay);
+
+            final CycleEditorFragment dialog = new CycleEditorFragment();
+            dialog.setArguments(args);
+            dialog.setTargetFragment(parent, 0);
+            dialog.show(parent.getFragmentManager(), TAG_CYCLE_EDITOR);
+        }
+
+        @Override
+        public Dialog onCreateDialog(Bundle savedInstanceState) {
+            final Context context = getActivity();
+
+            final AlertDialog.Builder builder = new AlertDialog.Builder(context);
+            final LayoutInflater dialogInflater = LayoutInflater.from(builder.getContext());
+
+            final View view = dialogInflater.inflate(R.layout.data_usage_cycle_editor, null, false);
+            final NumberPicker cycleDayPicker = (NumberPicker) view.findViewById(R.id.cycle_day);
+
+            final int oldCycleDay = getArguments().getInt(EXTRA_CYCLE_DAY, 1);
+
+            cycleDayPicker.setMinValue(1);
+            cycleDayPicker.setMaxValue(31);
+            cycleDayPicker.setValue(oldCycleDay);
+            cycleDayPicker.setWrapSelectorWheel(true);
+
+            builder.setTitle(R.string.data_usage_cycle_editor_title);
+            builder.setView(view);
+
+            builder.setPositiveButton(R.string.data_usage_cycle_editor_positive,
+                    new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int which) {
+                            final int cycleDay = cycleDayPicker.getValue();
+                            final DataUsageSummary target = (DataUsageSummary) getTargetFragment();
+                            if (target != null) {
+                                target.setPolicyCycleDay(cycleDay);
+                            }
+                        }
+                    });
+
+            return builder.create();
+        }
+    }
 
 }
