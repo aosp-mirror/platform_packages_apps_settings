@@ -21,8 +21,12 @@ import static android.net.NetworkPolicyManager.POLICY_REJECT_PAID_BACKGROUND;
 import static android.net.TrafficStats.TEMPLATE_MOBILE_ALL;
 import static com.android.settings.DataUsageSummary.getHistoryBounds;
 
+import android.app.AlertDialog;
+import android.app.Dialog;
+import android.app.DialogFragment;
 import android.app.Fragment;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Color;
@@ -54,6 +58,8 @@ public class DataUsageAppDetail extends Fragment {
     private static final boolean LOGD = true;
 
     private int mUid;
+
+    private static final String TAG_CONFIRM_RESTRICT = "confirmRestrict";
 
     private INetworkStatsService mStatsService;
     private INetworkPolicyManager mPolicyService;
@@ -167,6 +173,19 @@ public class DataUsageAppDetail extends Fragment {
         mText1.setText(Formatter.formatFileSize(context, totalCombined));
     }
 
+    private void setRestrictBackground(boolean restrictBackground) {
+        if (LOGD) Log.d(TAG, "setRestrictBackground()");
+        try {
+            mPolicyService.setUidPolicy(
+                    mUid, restrictBackground ? POLICY_REJECT_PAID_BACKGROUND : POLICY_NONE);
+        } catch (RemoteException e) {
+            throw new RuntimeException("unable to save policy", e);
+        }
+
+        mRestrictBackground.setChecked(restrictBackground);
+        refreshPreferenceViews();
+    }
+
     /**
      * Force rebind of hijacked {@link Preference} views.
      */
@@ -209,16 +228,48 @@ public class DataUsageAppDetail extends Fragment {
         /** {@inheritDoc} */
         public void onClick(View v) {
             final boolean restrictBackground = !mRestrictBackground.isChecked();
-            mRestrictBackground.setChecked(restrictBackground);
-            refreshPreferenceViews();
 
-            try {
-                mPolicyService.setUidPolicy(
-                        mUid, restrictBackground ? POLICY_REJECT_PAID_BACKGROUND : POLICY_NONE);
-            } catch (RemoteException e) {
-                throw new RuntimeException("unable to save policy", e);
+            if (restrictBackground) {
+                // enabling restriction; show confirmation dialog which
+                // eventually calls setRestrictBackground() once user confirms.
+                ConfirmRestrictFragment.show(DataUsageAppDetail.this);
+            } else {
+                setRestrictBackground(false);
             }
         }
     };
+
+    /**
+     * Dialog to request user confirmation before setting
+     * {@link #POLICY_REJECT_PAID_BACKGROUND}.
+     */
+    public static class ConfirmRestrictFragment extends DialogFragment {
+        public static void show(DataUsageAppDetail parent) {
+            final ConfirmRestrictFragment dialog = new ConfirmRestrictFragment();
+            dialog.setTargetFragment(parent, 0);
+            dialog.show(parent.getFragmentManager(), TAG_CONFIRM_RESTRICT);
+        }
+
+        @Override
+        public Dialog onCreateDialog(Bundle savedInstanceState) {
+            final Context context = getActivity();
+
+            final AlertDialog.Builder builder = new AlertDialog.Builder(context);
+            builder.setTitle(R.string.data_usage_app_restrict_dialog_title);
+            builder.setMessage(R.string.data_usage_app_restrict_dialog);
+
+            builder.setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
+                public void onClick(DialogInterface dialog, int which) {
+                    final DataUsageAppDetail target = (DataUsageAppDetail) getTargetFragment();
+                    if (target != null) {
+                        target.setRestrictBackground(true);
+                    }
+                }
+            });
+            builder.setNegativeButton(android.R.string.cancel, null);
+
+            return builder.create();
+        }
+    }
 
 }

@@ -127,6 +127,8 @@ public class DataUsageChartView extends ChartView {
         } else {
             mSweepDataWarn.setVisibility(View.INVISIBLE);
         }
+
+        requestLayout();
     }
 
     private OnSweepListener mSweepListener = new OnSweepListener() {
@@ -195,6 +197,7 @@ public class DataUsageChartView extends ChartView {
 
         requestLayout();
         mSeries.generatePath();
+        mSeries.invalidate();
     }
 
     public static class TimeAxis implements ChartAxis {

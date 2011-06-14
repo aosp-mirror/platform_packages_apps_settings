@@ -3399,7 +3399,27 @@ found in the list of installed applications.</string>
     <string name="data_usage_app_settings">View application settings</string>
     <!-- Checkbox label that restricts background data usage of a specific application. [CHAR LIMIT=32] -->
     <string name="data_usage_app_restrict_background">Restrict background data usage</string>
-    <!-- Summary message for checkbox that restricts background data usage of a specific application. [CHAR LIMIT=32] -->
+    <!-- Summary message for checkbox that restricts background data usage of a specific application. [CHAR LIMIT=64] -->
     <string name="data_usage_app_restrict_background_summary">Only allow application background data when using an unlimited network</string>
+    <!-- Title of dialog shown when user restricts background data usage of a specific application. [CHAR LIMIT=48] -->
+    <string name="data_usage_app_restrict_dialog_title">Restricting background data</string>
+    <!-- Body of dialog shown when user restricts background data usage of a specific application. [CHAR LIMIT=NONE] -->
+    <string name="data_usage_app_restrict_dialog">This feature may negatively impact applications which depend on background data usage.\n\nMore appropriate data usage controls may be found within this application\'s settings.</string>
+
+    <!-- Title of dialog for editing data usage cycle reset date. [CHAR LIMIT=48] -->
+    <string name="data_usage_cycle_editor_title">Usage cycle reset date</string>
+    <!-- Subtitle of dialog for editing data usage cycle reset date. [CHAR LIMIT=32] -->
+    <string name="data_usage_cycle_editor_subtitle">Date of each month:</string>
+    <!-- Positive button title for data usage cycle editor, confirming that changes should be saved. [CHAR LIMIT=32] -->
+    <string name="data_usage_cycle_editor_positive">set</string>
+
+    <!-- Title of dialog shown before user limits data usage. [CHAR LIMIT=48] -->
+    <string name="data_usage_limit_dialog_title">Limiting data usage</string>
+    <!-- First paragraph of dialog shown before user limits mobile data usage. [CHAR LIMIT=NONE] -->
+    <string name="data_usage_limit_dialog_mobile">Your mobile data connection will be disabled when the specified limit is reached.\n\nTo avoid overage charges, consider using a reduced limit, as device and carrier accounting methods may vary.</string>
+    <!-- First paragraph of dialog shown before user limits 3G data usage. [CHAR LIMIT=NONE] -->
+    <string name="data_usage_limit_dialog_3g">Your 2G-3G data connection will be disabled when the specified limit is reached.\n\nTo avoid overage charges, consider using a reduced limit, as device and carrier accounting methods may vary.</string>
+    <!-- First paragraph of dialog shown before user limits 4G data usage. [CHAR LIMIT=NONE] -->
+    <string name="data_usage_limit_dialog_4g">Your 4G data connection will be disabled when the specified limit is reached.\n\nTo avoid overage charges, consider using a reduced limit, as device and carrier accounting methods may vary.</string>
 
 </resources>

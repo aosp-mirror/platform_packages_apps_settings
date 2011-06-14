@@ -36,6 +36,8 @@ import java.util.ArrayList;
  * about which policies can coexist.
  */
 public class NetworkPolicyModifier {
+    // TODO: refactor to "Editor"
+    // TODO: be more robust when missing policies from service
 
     private INetworkPolicyManager mPolicyService;
     private String mSubscriberId;
