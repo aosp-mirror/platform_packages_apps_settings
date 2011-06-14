@@ -230,6 +230,7 @@ public class ManageAccountsSettings extends AccountPreferenceBase
     }
 
     private void setBackgroundDataInt(boolean enabled) {
+        if (getActivity() == null) return;
         final ConnectivityManager connManager = (ConnectivityManager)
                 getActivity().getSystemService(Context.CONNECTIVITY_SERVICE);
         connManager.setBackgroundDataSetting(enabled);
@@ -315,6 +316,7 @@ public class ManageAccountsSettings extends AccountPreferenceBase
 
     @Override
     public void onAccountsUpdated(Account[] accounts) {
+        if (getActivity() == null) return;
         mManageAccountsCategory.removeAll();
         for (int i = 0, n = accounts.length; i < n; i++) {
             final Account account = accounts[i];
