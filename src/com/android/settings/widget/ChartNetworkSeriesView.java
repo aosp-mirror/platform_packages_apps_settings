@@ -157,7 +157,8 @@ public class ChartNetworkSeriesView extends View {
         if (LOGD) {
             final RectF bounds = new RectF();
             mPathFill.computeBounds(bounds, true);
-            Log.d(TAG, "onLayout() rendered with bounds=" + bounds.toString());
+            Log.d(TAG, "onLayout() rendered with bounds=" + bounds.toString() + " and totalData="
+                    + totalData);
         }
 
         // drop to bottom of graph from current location

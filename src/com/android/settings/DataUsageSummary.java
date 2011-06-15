@@ -32,7 +32,10 @@ import android.app.Fragment;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.ApplicationInfo;
+import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
+import android.content.pm.PackageManager.NameNotFoundException;
 import android.net.INetworkPolicyManager;
 import android.net.INetworkStatsService;
 import android.net.NetworkPolicy;
@@ -46,6 +49,7 @@ import android.preference.Preference;
 import android.preference.PreferenceActivity;
 import android.preference.SwitchPreference;
 import android.telephony.TelephonyManager;
+import android.text.TextUtils;
 import android.text.format.DateUtils;
 import android.text.format.Formatter;
 import android.text.format.Time;
@@ -537,7 +541,10 @@ public class DataUsageSummary extends Fragment {
                 mCycleSpinner.setSelection(0);
 
             } else {
-                if (LOGD) Log.d(TAG, "showing cycle " + cycle);
+                if (LOGD) {
+                    Log.d(TAG, "showing cycle " + cycle + ", start=" + cycle.start + ", end="
+                            + cycle.end + "]");
+                }
 
                 // update chart to show selected cycle, and update detail data
                 // to match updated sweep bounds.
@@ -670,10 +677,13 @@ public class DataUsageSummary extends Fragment {
             mItems.clear();
 
             for (int i = 0; i < stats.size; i++) {
-                final AppUsageItem item = new AppUsageItem();
-                item.uid = stats.uid[i];
-                item.total = stats.rx[i] + stats.tx[i];
-                mItems.add(item);
+                final long total = stats.rx[i] + stats.tx[i];
+                if (total > 0) {
+                    final AppUsageItem item = new AppUsageItem();
+                    item.uid = stats.uid[i];
+                    item.total = total;
+                    mItems.add(item);
+                }
             }
 
             Collections.sort(mItems);
@@ -709,7 +719,7 @@ public class DataUsageSummary extends Fragment {
             final TextView text2 = (TextView) convertView.findViewById(android.R.id.text2);
 
             final AppUsageItem item = mItems.get(position);
-            text1.setText(pm.getNameForUid(item.uid));
+            text1.setText(resolveLabelForUid(pm, item.uid));
             text2.setText(Formatter.formatFileSize(context, item.total));
 
             return convertView;
@@ -827,6 +837,38 @@ public class DataUsageSummary extends Fragment {
 
             return builder.create();
         }
+    }
+
+    /**
+     * Resolve best descriptive label for the given UID.
+     */
+    public static CharSequence resolveLabelForUid(PackageManager pm, int uid) {
+        final String[] packageNames = pm.getPackagesForUid(uid);
+        final int length = packageNames != null ? packageNames.length : 0;
+
+        CharSequence label = pm.getNameForUid(uid);
+        try {
+            if (length == 1) {
+                final ApplicationInfo info = pm.getApplicationInfo(packageNames[0], 0);
+                label = info.loadLabel(pm);
+            } else if (length > 1) {
+                for (String packageName : packageNames) {
+                    final PackageInfo info = pm.getPackageInfo(packageName, 0);
+                    if (info.sharedUserLabel != 0) {
+                        label = pm.getText(packageName, info.sharedUserLabel, info.applicationInfo);
+                        if (!TextUtils.isEmpty(label)) {
+                            break;
+                        }
+                    }
+                }
+            }
+        } catch (NameNotFoundException e) {
+        }
+
+        if (TextUtils.isEmpty(label)) {
+            label = Integer.toString(uid);
+        }
+        return label;
     }
 
 }

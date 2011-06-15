@@ -32,6 +32,7 @@ import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.net.INetworkPolicyManager;
 import android.net.INetworkStatsService;
+import android.net.NetworkPolicyManager;
 import android.net.NetworkStatsHistory;
 import android.os.Bundle;
 import android.os.RemoteException;
@@ -58,6 +59,7 @@ public class DataUsageAppDetail extends Fragment {
     private static final boolean LOGD = true;
 
     private int mUid;
+    private Intent mAppSettingsIntent;
 
     private static final String TAG_CONFIRM_RESTRICT = "confirmRestrict";
 
@@ -127,23 +129,38 @@ public class DataUsageAppDetail extends Fragment {
     public void onResume() {
         super.onResume();
 
-        final Context context = getActivity();
-
-        mUid = getArguments().getInt(Intent.EXTRA_UID);
-        mTitle.setText(context.getPackageManager().getNameForUid(mUid));
-
         updateBody();
     }
 
     private void updateBody() {
+        final PackageManager pm = getActivity().getPackageManager();
+
+        mUid = getArguments().getInt(Intent.EXTRA_UID);
+        mTitle.setText(pm.getNameForUid(mUid));
+
+        // enable settings button when package provides it
+        // TODO: target torwards entire UID instead of just first package
+        final String[] packageNames = pm.getPackagesForUid(mUid);
+        if (packageNames != null && packageNames.length > 0) {
+            mAppSettingsIntent = new Intent(Intent.ACTION_MANAGE_NETWORK_USAGE);
+            mAppSettingsIntent.setPackage(packageNames[0]);
+            mAppSettingsIntent.addCategory(Intent.CATEGORY_DEFAULT);
+
+            final boolean matchFound = pm.resolveActivity(mAppSettingsIntent, 0) != null;
+            mAppSettings.setEnabled(matchFound);
+
+        } else {
+            mAppSettingsIntent = null;
+            mAppSettings.setEnabled(false);
+        }
+
         try {
             // load stats for current uid and template
             // TODO: read template from extras
-            mUidPolicy = mPolicyService.getUidPolicy(mUid);
             mHistory = mStatsService.getHistoryForUid(mUid, TEMPLATE_MOBILE_ALL);
         } catch (RemoteException e) {
-            // since we can't do much without policy or history, and we don't
-            // want to leave with half-baked UI, we bail hard.
+            // since we can't do much without history, and we don't want to
+            // leave with half-baked UI, we bail hard.
             throw new RuntimeException("problem reading network stats", e);
         }
 
@@ -155,12 +172,28 @@ public class DataUsageAppDetail extends Fragment {
         mChart.setVisibleRange(bounds[0], bounds[1] + DateUtils.WEEK_IN_MILLIS, bounds[1]);
         updateDetailData();
 
-        // update policy checkbox
-        final boolean restrictBackground = (mUidPolicy & POLICY_REJECT_PAID_BACKGROUND) != 0;
-        mRestrictBackground.setChecked(restrictBackground);
+        final Context context = getActivity();
+        if (NetworkPolicyManager.isUidValidForPolicy(context, mUid)) {
+            mRestrictBackgroundView.setVisibility(View.VISIBLE);
 
-        // kick preference views so they rebind from changes above
-        refreshPreferenceViews();
+            final int uidPolicy;
+            try {
+                uidPolicy = mPolicyService.getUidPolicy(mUid);
+            } catch (RemoteException e) {
+                // since we can't do much without policy, we bail hard.
+                throw new RuntimeException("problem reading network policy", e);
+            }
+
+            // update policy checkbox
+            final boolean restrictBackground = (mUidPolicy & POLICY_REJECT_PAID_BACKGROUND) != 0;
+            mRestrictBackground.setChecked(restrictBackground);
+
+            // kick preference views so they rebind from changes above
+            refreshPreferenceViews();
+
+        } else {
+            mRestrictBackgroundView.setVisibility(View.GONE);
+        }
     }
 
     private void updateDetailData() {
@@ -215,12 +248,7 @@ public class DataUsageAppDetail extends Fragment {
         /** {@inheritDoc} */
         public void onClick(View v) {
             // TODO: target torwards entire UID instead of just first package
-            final PackageManager pm = getActivity().getPackageManager();
-            final String packageName = pm.getPackagesForUid(mUid)[0];
-
-            final Intent intent = new Intent(Intent.ACTION_MANAGE_NETWORK_USAGE);
-            intent.setPackage(packageName);
-            startActivity(intent);
+            startActivity(mAppSettingsIntent);
         }
     };
 
