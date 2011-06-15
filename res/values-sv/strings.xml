@@ -896,6 +896,7 @@
     <string name="application_info_label" msgid="1150486628158409543">"Programinformation"</string>
     <string name="storage_label" msgid="8700867073480107253">"Lagring"</string>
     <string name="auto_launch_label" msgid="3012617472833815382">"Starta som standard"</string>
+    <string name="screen_compatibility_label" msgid="663250687205465394">"Skärmkompatibilitet"</string>
     <string name="permissions_label" msgid="2605296874922726203">"Behörigheter"</string>
     <string name="cache_header_label" msgid="1877197634162461830">"Cacheminne"</string>
     <string name="clear_cache_btn_text" msgid="5756314834291116325">"Rensa cacheminne"</string>
@@ -915,6 +916,9 @@
     <string name="auto_launch_enable_text" msgid="2630656657744196691">"Du har valt att starta denna app som standard för vissa åtgärder."</string>
     <string name="auto_launch_disable_text" msgid="7800385822185540166">"Inga standardinställningar har angetts."</string>
     <string name="clear_activities" msgid="7408923511535174430">"Rensa standardinställn."</string>
+    <string name="screen_compatibility_text" msgid="2398570332021220651">"Det är inte säkert att den här appen har skapats för din skärm. Här kan du välja hur den ska anpassas till skärmen."</string>
+    <string name="ask_compatibility" msgid="7225195569089607846">"Fråga vid start"</string>
+    <string name="enable_compatibility" msgid="3257284255974065538">"Skala appen"</string>
     <string name="unknown" msgid="1592123443519355854">"Okänd"</string>
     <string name="sort_order_alpha" msgid="1410278099123670628">"Sortera efter namn"</string>
     <string name="sort_order_size" msgid="7024513286636502362">"Sortera efter storlek"</string>
@@ -1019,6 +1023,8 @@
     <string name="show_password" msgid="2198798062604049206">"Synliga lösenord"</string>
     <string name="show_password_summary" msgid="3806709974395178121">"Visa lösenord när du skriver"</string>
     <string name="ime_security_warning" msgid="812267421486877917">"Den här inmatningsmetoden kan samla all text som du anger, inklusive personliga uppgifter som lösenord och kreditkortsnummer. Den kommer från programmet <xliff:g id="IME_APPLICATION_NAME">%1$s</xliff:g>. Ska inmatningsmetoden aktiveras?"</string>
+    <string name="pointer_settings_category" msgid="6090176550039035130">"Inställningar för mus och styrplatta"</string>
+    <string name="pointer_speed" msgid="1221342330217861616">"Markörens hastighet"</string>
     <string name="user_dict_settings_titlebar" msgid="765659257455000490">"Användarens ordlista"</string>
     <string name="user_dict_settings_title" msgid="8357027437499042191">"Användarens ordlista"</string>
     <string name="user_dict_settings_summary" msgid="7965571192902870454"></string>
@@ -1384,14 +1390,16 @@
     <string name="wifi_setup_description_connecting" msgid="1884664966455980182">"Det kan ta några minuter att ansluta..."</string>
     <string name="wifi_setup_description_connected" msgid="5235991893829582459">"Tryck på "<b>"Nästa"</b>" om·du vill fortsätta med installationen."\n\n"Tryck på "<b>"Tillbaka"</b>" om du vill ansluta till ett annat Wi-Fi-nätverk."</string>
     <string name="account_sync_settings_title" msgid="4578227872921044660">"Synkroniseringsinställningar"</string>
-    <!-- outdated translation 7257854052606796327 -->     <string name="sync_is_failing" msgid="1591561768344128377">"Det är för närvarande problem med synkronisering. Det fungerar igen om en stund."</string>
+    <!-- no translation found for sync_is_failing (1591561768344128377) -->
+    <skip />
     <string name="add_account_label" msgid="7811707265834013767">"Lägg till konto"</string>
     <string name="header_general_sync_settings" msgid="3487451896424238469">"Allmänna synkinställningar"</string>
     <string name="background_data" msgid="5779592891375473817">"Bakgrundsdata"</string>
     <string name="background_data_summary" msgid="3630389249212620467">"Appar kan synkronisera, skicka och ta emot data när som helst"</string>
     <string name="background_data_dialog_title" msgid="745974259246047425">"Obs!"</string>
     <string name="background_data_dialog_message" msgid="9155730118215371308">"Om du inaktiverar bakgrundsdata sparar du batteri och minskar dataanvändning. Vissa program kanske fortfarande använder anslutningen för bakgrundsdata."</string>
-    <!-- outdated translation 7232356254121075216 -->     <string name="sync_automatically" msgid="7558810110682562376">"Automatisk synkronisering"</string>
+    <!-- no translation found for sync_automatically (7558810110682562376) -->
+    <skip />
     <string name="sync_automatically_summary" msgid="6662623174608419931">"Programmen synkroniserar data automatiskt"</string>
     <string name="header_manage_accounts" msgid="6869002423884539607">"Hantera konton"</string>
     <string name="sync_enabled" msgid="4551148952179416813">"Synkronisering är på"</string>
@@ -1399,13 +1407,18 @@
     <string name="sync_error" msgid="5060969083117872149">"Synkroniseringsfel"</string>
     <string name="settings_backup" msgid="2274732978260797031">"Säkerhetskopiera inställningar"</string>
     <string name="settings_backup_summary" msgid="7916877705938054035">"Säkerhetskopiera mina inställningar"</string>
-    <!-- outdated translation 4438555069848430041 -->     <string name="sync_menu_sync_now" msgid="6154608350395805683">"Synka nu"</string>
-    <!-- outdated translation 260091941807229790 -->     <string name="sync_menu_sync_cancel" msgid="8292379009626966949">"Avbryt synkronisering"</string>
+    <!-- no translation found for sync_menu_sync_now (6154608350395805683) -->
+    <skip />
+    <!-- no translation found for sync_menu_sync_cancel (8292379009626966949) -->
+    <skip />
     <string name="sync_one_time_sync" msgid="6766593624598183090">"Tryck om du vill synkronisera nu<xliff:g id="LAST_SYNC_TIME">
 %1$s</xliff:g>"</string>
-    <!-- outdated translation 2427506589849697841 -->     <string name="sync_gmail" msgid="714886122098006477">"Gmail"</string>
-    <!-- outdated translation 6328872198278573611 -->     <string name="sync_calendar" msgid="9056527206714733735">"Kalender"</string>
-    <!-- outdated translation 6010441370923919977 -->     <string name="sync_contacts" msgid="9174914394377828043">"Kontakter"</string>
+    <!-- no translation found for sync_gmail (714886122098006477) -->
+    <skip />
+    <!-- no translation found for sync_calendar (9056527206714733735) -->
+    <skip />
+    <!-- no translation found for sync_contacts (9174914394377828043) -->
+    <skip />
     <string name="sync_plug" msgid="5952575609349860569"><font fgcolor="#ffffffff">"Välkommen till Google Synk!"</font>" "\n"Med Googles verktyg för att synkronisera data kommer du åt dina kontakter, kalendrar och annan information var du än befinner dig."</string>
     <string name="header_application_sync_settings" msgid="5514539555293976035">"Synkronisering för appar"</string>
     <string name="header_data_and_synchronization" msgid="5165024023936509896">"Data och synkronisering"</string>
