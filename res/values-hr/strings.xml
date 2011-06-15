@@ -521,6 +521,7 @@
     <string name="storage_settings_summary" product="default" msgid="9176693537325988610">"Isključi SD karticu, prikaži vidljivo mjesto za pohranu"</string>
     <string name="status_number" msgid="5123197324870153205">"Moj telefonski broj"</string>
     <string name="status_min_number" msgid="3519504522179420597">"MIN"</string>
+    <string name="status_msid_number" msgid="909010114445780530">"MSID"</string>
     <string name="status_prl_version" msgid="8499039751817386529">"PRL verzija"</string>
     <string name="status_meid_number" msgid="1751442889111731088">"MEID"</string>
     <string name="status_network_type" msgid="3279383550222116235">"Vrsta mobilne mreže"</string>
@@ -634,12 +635,12 @@
     <string name="call_settings_summary" msgid="7291195704801002886">"Postavite govornu poštu, preusmjeravanje poziva, ID pozivatelja"</string>
     <string name="tether_settings_title_usb" msgid="4315031513434087777">"Ograničavanje"</string>
     <string name="tether_settings_title_wifi" msgid="3277144155960302049">"Prijenosni hotspot"</string>
-    <string name="tether_settings_title_both" msgid="2734066355556891504">"Ograničavanje i prijenosni hotspot"</string>
+    <string name="tether_settings_title_both" msgid="2734066355556891504">"Dijeljenje i mobilna žarišna točka"</string>
     <string name="tether_settings_summary_usb" msgid="3562431455625637370">"Dijelite telefonsku mobilnu podatkovnu vezu preko USB-a"</string>
     <string name="tether_settings_summary_wifi" msgid="4690912027002467246">"Dijelite mobilnu vezu svog telefona kao prijenosni Wi-Fi hotspot"</string>
     <string name="tether_settings_summary_both" msgid="7460063951190682635">"Dijelite telefonsku mobilnu podatkovnu vezu preko USB-a ili u obliku prijenosnog Wi-Fi hotspota"</string>
     <string name="usb_title" msgid="7483344855356312510">"USB"</string>
-    <string name="usb_tethering_button_text" msgid="585829947108007917">"USB ograničavanje"</string>
+    <string name="usb_tethering_button_text" msgid="585829947108007917">"Dijeljenje USB-om"</string>
     <string name="usb_tethering_available_subtext" msgid="156779271296152605">"USB priključen, uključite za ograničenje"</string>
     <string name="usb_tethering_active_subtext" msgid="8916210851136467042">"Ograničeno"</string>
     <string name="usb_tethering_storage_active_subtext" msgid="6608933594288072573">"Nije moguće ograničiti ako se koristi USB pohranjivanje"</string>
@@ -721,7 +722,7 @@
     <string name="applications_settings_summary" msgid="2714215108369119717">"Upravljanje aplikacijama, postavljanje prečaca za brzo pokretanje"</string>
     <string name="applications_settings_header" msgid="6018266337275422250">"Postavke aplikacija"</string>
     <string name="install_applications" msgid="4872012136210802181">"Nepoznati izvori"</string>
-    <string name="install_unknown_applications" msgid="6612824788917283662">"Dopusti instalaciju aplikacija koje nisu s tržišta"</string>
+    <string name="install_unknown_applications" msgid="6612824788917283662">"Dopusti instalaciju aplikacija koje nisu s usluge Market"</string>
     <string name="install_all_warning" msgid="1923717607319933741">"Telefon i osobni podaci jače su ugroženi u slučaju upotrebe aplikacija iz nepoznatog izvora. Prihvaćate da ste samo odgovorni za sve štete na telefonu ili za gubitak podataka zbog upotrebe takvih aplikacija."</string>
     <string name="application_info_label" msgid="1150486628158409543">"Informacije o aplikaciji"</string>
     <string name="storage_label" msgid="8700867073480107253">"Prostor za pohranu"</string>
@@ -797,7 +798,7 @@
     <string name="storageuse_settings_title" msgid="5657014373502630403">"Upotreba pohrane"</string>
     <string name="storageuse_settings_summary" msgid="2556057379120846792">"Prikaz pohrane koju upotrebljavaju aplikacije"</string>
     <string name="runningservices_settings_title" msgid="8097287939865165213">"Pokrenute usluge"</string>
-    <string name="runningservices_settings_summary" msgid="854608995821032748">"Pogledajte i nadzirite trenutačno pokrenute veze"</string>
+    <string name="runningservices_settings_summary" msgid="854608995821032748">"Pogledajte i nadzirite pokrenute procese"</string>
     <string name="service_restarting" msgid="2242747937372354306">"Ponovno pokretanje"</string>
     <string name="cached" msgid="1059590879740175019">"Pozadinski proces u predmemoriji"</string>
     <string name="no_running_services" msgid="2059536495597645347">"Ništa se ne izvodi."</string>
@@ -875,8 +876,8 @@
     <string name="builtin_keyboard_settings_summary" msgid="7990296351888096836">"Postavke ugrađene, fizičke tipkovnice"</string>
     <string name="development_settings_title" msgid="6719732334835420989">"Razvoj"</string>
     <string name="development_settings_summary" msgid="2151320488701538355">"Postavite opcije za razvoj aplikacije"</string>
-    <string name="enable_adb" msgid="7982306934419797485">"Uklanjanje programske pogreške na USB-u"</string>
-    <string name="enable_adb_summary" msgid="4881186971746056635">"Način za otklanjanje pogrešaka ako je priključen USB"</string>
+    <string name="enable_adb" msgid="7982306934419797485">"Uklanjanje pogreške USB-a"</string>
+    <string name="enable_adb_summary" msgid="4881186971746056635">"Uklanjanje pogrešaka s priključenim USB-om"</string>
     <string name="keep_screen_on" msgid="1146389631208760344">"Ne pokreći mirovanje"</string>
     <string name="keep_screen_on_summary" msgid="2173114350754293009">"Zaslon nikad neće prijeći u mirovanje tijekom punjenja"</string>
     <string name="allow_mock_location" msgid="2787962564578664888">"Dopusti probne lokacije"</string>
@@ -906,8 +907,8 @@
     <string name="accessibility_service_no_apps_title" msgid="898893674114288531">"Nisu pronađene aplikacije koje se odnose na dostupnost"</string>
     <string name="accessibility_service_no_apps_message" msgid="2450056749545404807">"Nemate instaliranih aplikacija koje se odnose na dostupnost."\n\n"Možete preuzeti alat za čitanje zaslona za svoj uređaj na usluzi Android Market."\n\n"Kliknite U redu da biste instalirali alat za čitanje zaslona."</string>
     <string name="accessibility_power_button_category" msgid="8545885236482339928">"Tipka za uključivanje/isključivanje"</string>
-    <string name="accessibility_power_button_ends_call" msgid="7698764194501089533">"Tipka za uključivanje/isključivanje/poziv"</string>
-    <string name="accessibility_power_button_ends_call_summary" msgid="8878097632186291462">"Tijekom poziva pritisnite Napajanje sa završetkom poziva umjesto isključivanja zaslona"</string>
+    <string name="accessibility_power_button_ends_call" msgid="7698764194501089533">"Tipka za uključivanje prekida poziv"</string>
+    <string name="accessibility_power_button_ends_call_summary" msgid="8878097632186291462">"Tijekom poziva tipka za uključivanje ne isključuje zaslon, već prekida poziv."</string>
     <string name="power_usage_summary_title" msgid="5180282911164282324">"Iskorištenost baterije"</string>
     <string name="power_usage_summary" msgid="7237084831082848168">"Što troši bateriju"</string>
     <string name="battery_since_unplugged" msgid="338073389740738437">"Upotreba baterije nakon isključivanja"</string>
@@ -975,17 +976,17 @@
     <string name="menu_stats_refresh" msgid="1676215433344981075">"Osvježi"</string>
     <string name="process_kernel_label" msgid="3916858646836739323">"Android OS"</string>
     <string name="process_mediaserver_label" msgid="6500382062945689285">"Medijski poslužitelj"</string>
-    <string name="voice_input_output_settings" msgid="1336135218350444783">"Glasovni unos i izlazne vrijednosti"</string>
+    <string name="voice_input_output_settings" msgid="1336135218350444783">"Glas. ulaz i izlaz"</string>
     <string name="voice_input_output_settings_title" msgid="2442850635048676991">"Postavke za glasovni unos i izlazne vrijednosti"</string>
     <string name="voice_search_settings_title" msgid="2775469246913196536">"Glasovno pretraživanje"</string>
     <string name="keyboard_settings_title" msgid="5080115226780201234">"Android tipkovnica"</string>
-    <string name="voice_input_category" msgid="1589318440824204736">"Glasovni unos"</string>
-    <string name="voice_output_category" msgid="2624538587784986229">"Izlazne glasovne vrijednosti"</string>
+    <string name="voice_input_category" msgid="1589318440824204736">"Glasovni ulaz"</string>
+    <string name="voice_output_category" msgid="2624538587784986229">"Glasovni izlaz"</string>
     <string name="recognizer_title" msgid="3231385184559054457">"Alat za prepoznavanje glasa"</string>
     <string name="recognizer_settings_title" msgid="6038598099039717232">"Postavke alata za prepoznavanje glasa"</string>
     <string name="recognizer_settings_summary" msgid="4472287934134546902">"Postavke za \"<xliff:g id="RECOGNIZER_NAME">%s</xliff:g>\""</string>
-    <string name="tts_settings" msgid="8186971894801348327">"Postavke teksta-za-govor"</string>
-    <string name="tts_settings_title" msgid="4182348653053000933">"Postavke teksta-za-govor"</string>
+    <string name="tts_settings" msgid="8186971894801348327">"Postavke za tekst u govor"</string>
+    <string name="tts_settings_title" msgid="4182348653053000933">"Postavke za teksta u govor"</string>
     <string name="use_default_tts_settings_title" msgid="1577063839539732930">"Uvijek koristi moje postavke"</string>
     <string name="use_default_tts_settings_summary" msgid="4253502106159206276">"Donje zadane postavke poništavaju postavke aplikacije"</string>
     <string name="tts_default_settings_section" msgid="5787915620218907443">"Zadane postavke"</string>
@@ -996,9 +997,9 @@
     <string name="tts_default_pitch_title" msgid="6135942113172488671">"Visina glasa"</string>
     <string name="tts_default_pitch_summary" msgid="1328298665182885277">"Utječe na ton izgovorenog teksta"</string>
     <string name="tts_default_lang_title" msgid="8018087612299820556">"Jezik"</string>
-    <string name="tts_default_lang_summary" msgid="5219362163902707785">"Postavlja glas specifičan za jezik izgovorenog teksta"</string>
+    <string name="tts_default_lang_summary" msgid="5219362163902707785">"Postavlja jezik govora"</string>
     <string name="tts_play_example_title" msgid="7094780383253097230">"Poslušajte primjer"</string>
-    <string name="tts_play_example_summary" msgid="8029071615047894486">"Reproducirajte kratki pokaz sinteze zvuka"</string>
+    <string name="tts_play_example_summary" msgid="8029071615047894486">"Poslušajte primjer sinteze zvuka"</string>
     <string name="tts_install_data_title" msgid="4264378440508149986">"Instaliraj glasovne podatke"</string>
     <string name="tts_install_data_summary" msgid="5742135732511822589">"Instaliraj glasovne podatke potrebne za sintezu govora"</string>
     <string name="tts_data_installed_summary" msgid="9162111552859972809">"Glasovi potrebni za sintezu govora već su ispravno instalirani"</string>
@@ -1105,9 +1106,9 @@
     <string name="credentials_access_summary" msgid="319662078718574168">"Aplikacijama omogući pristup sigurnim certifikatima i drugim vjerodajnicama"</string>
     <string name="credentials_unlock" msgid="1463040326264133844">"Unesite zaporku"</string>
     <string name="credentials_unlock_hint" msgid="594679530407918031">"Unesite zaporku za pohranu vjerodajnica."</string>
-    <string name="credentials_install_certificates" product="nosdcard" msgid="619171634797689906">"Instaliraj s memorije USB"</string>
+    <string name="credentials_install_certificates" product="nosdcard" msgid="619171634797689906">"Instaliraj s USB memorije"</string>
     <string name="credentials_install_certificates" product="default" msgid="177337517568022236">"Instaliraj sa SD kartice"</string>
-    <string name="credentials_install_certificates_summary" product="nosdcard" msgid="8920330112631198575">"Inst. kript. cert. s USB"</string>
+    <string name="credentials_install_certificates_summary" product="nosdcard" msgid="8920330112631198575">"Inst. šif. pot. s USB-a"</string>
     <string name="credentials_install_certificates_summary" product="default" msgid="7737001268684193093">"Instaliraj kriptirane certifikate sa SD kartice"</string>
     <string name="credentials_set_password" msgid="9104473585811899989">"Postavi zaporku"</string>
     <string name="credentials_set_password_summary" msgid="8287876917562085701">"Postavite ili promijenite zaporku za pohranjivanje zaporke"</string>
