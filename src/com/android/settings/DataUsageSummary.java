@@ -17,6 +17,9 @@
 package com.android.settings;
 
 import static android.net.NetworkPolicy.LIMIT_DISABLED;
+import static android.net.NetworkPolicyManager.ACTION_DATA_USAGE_LIMIT;
+import static android.net.NetworkPolicyManager.ACTION_DATA_USAGE_WARNING;
+import static android.net.NetworkPolicyManager.EXTRA_NETWORK_TEMPLATE;
 import static android.net.NetworkPolicyManager.computeLastCycleBoundary;
 import static android.net.NetworkPolicyManager.computeNextCycleBoundary;
 import static android.net.TrafficStats.TEMPLATE_MOBILE_3G_LOWER;
@@ -39,6 +42,7 @@ import android.content.pm.PackageManager.NameNotFoundException;
 import android.net.INetworkPolicyManager;
 import android.net.INetworkStatsService;
 import android.net.NetworkPolicy;
+import android.net.NetworkPolicyManager;
 import android.net.NetworkStats;
 import android.net.NetworkStatsHistory;
 import android.os.AsyncTask;
@@ -102,6 +106,7 @@ public class DataUsageSummary extends Fragment {
 
     private static final String TAG_CONFIRM_LIMIT = "confirmLimit";
     private static final String TAG_CYCLE_EDITOR = "cycleEditor";
+    private static final String TAG_POLICY_LIMIT = "policyLimit";
 
     private static final long KB_IN_BYTES = 1024;
     private static final long MB_IN_BYTES = KB_IN_BYTES * 1024;
@@ -135,6 +140,8 @@ public class DataUsageSummary extends Fragment {
 
     private NetworkPolicyModifier mPolicyModifier;
     private NetworkStatsHistory mHistory;
+
+    private String mIntentTab = null;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -208,9 +215,19 @@ public class DataUsageSummary extends Fragment {
     public void onResume() {
         super.onResume();
 
+        // pick default tab based on incoming intent
+        final Intent intent = getActivity().getIntent();
+        mIntentTab = computeTabFromIntent(intent);
+
         // this kicks off chain reaction which creates tabs, binds the body to
         // selected network, and binds chart, cycles and detail list.
         updateTabs();
+
+        // template and tab has been selected; show dialog if limit passed
+        final String action = intent.getAction();
+        if (ACTION_DATA_USAGE_LIMIT.equals(action)) {
+            PolicyLimitFragment.show(this);
+        }
     }
 
     @Override
@@ -276,10 +293,15 @@ public class DataUsageSummary extends Fragment {
         }
 
         if (mTabWidget.getTabCount() > 0) {
-            // select first tab, which will kick off updateBody()
-            mTabHost.setCurrentTab(0);
+            if (mIntentTab != null) {
+                // select default tab, which will kick off updateBody()
+                mTabHost.setCurrentTabByTag(mIntentTab);
+            } else {
+                // select first tab, which will kick off updateBody()
+                mTabHost.setCurrentTab(0);
+            }
         } else {
-            // no tabs shown; update body manually
+            // no tabs visible; update body manually
             updateBody();
         }
     }
@@ -848,6 +870,84 @@ public class DataUsageSummary extends Fragment {
                     });
 
             return builder.create();
+        }
+    }
+
+    /**
+     * Dialog explaining that {@link NetworkPolicy#limitBytes} has been passed,
+     * and giving the user an option to bypass.
+     */
+    public static class PolicyLimitFragment extends DialogFragment {
+        public static final String EXTRA_TITLE_ID = "titleId";
+
+        public static void show(DataUsageSummary parent) {
+            final Bundle args = new Bundle();
+
+            switch (parent.mTemplate) {
+                case TEMPLATE_MOBILE_3G_LOWER: {
+                    args.putInt(EXTRA_TITLE_ID, R.string.data_usage_disabled_dialog_3g_title);
+                    break;
+                }
+                case TEMPLATE_MOBILE_4G: {
+                    args.putInt(EXTRA_TITLE_ID, R.string.data_usage_disabled_dialog_4g_title);
+                    break;
+                }
+                case TEMPLATE_MOBILE_ALL: {
+                    args.putInt(EXTRA_TITLE_ID, R.string.data_usage_disabled_dialog_mobile_title);
+                    break;
+                }
+            }
+
+            final PolicyLimitFragment dialog = new PolicyLimitFragment();
+            dialog.setArguments(args);
+            dialog.setTargetFragment(parent, 0);
+            dialog.show(parent.getFragmentManager(), TAG_POLICY_LIMIT);
+        }
+
+        @Override
+        public Dialog onCreateDialog(Bundle savedInstanceState) {
+            final Context context = getActivity();
+
+            final int titleId = getArguments().getInt(EXTRA_TITLE_ID);
+
+            final AlertDialog.Builder builder = new AlertDialog.Builder(context);
+            builder.setTitle(titleId);
+            builder.setMessage(R.string.data_usage_disabled_dialog);
+
+            builder.setPositiveButton(android.R.string.ok, null);
+            builder.setNegativeButton(R.string.data_usage_disabled_dialog_enable,
+                    new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int which) {
+                            final DataUsageSummary target = (DataUsageSummary) getTargetFragment();
+                            if (target != null) {
+                                // TODO: consider "allow 100mb more data", or
+                                // only bypass limit for current cycle.
+                                target.setPolicyLimitBytes(LIMIT_DISABLED);
+                            }
+                        }
+                    });
+
+            return builder.create();
+        }
+    }
+
+    /**
+     * Compute default tab that should be selected, based on
+     * {@link NetworkPolicyManager#EXTRA_NETWORK_TEMPLATE} extra.
+     */
+    private static String computeTabFromIntent(Intent intent) {
+        final int networkTemplate = intent.getIntExtra(EXTRA_NETWORK_TEMPLATE, TEMPLATE_INVALID);
+        switch (networkTemplate) {
+            case TEMPLATE_MOBILE_3G_LOWER:
+                return TAB_3G;
+            case TEMPLATE_MOBILE_4G:
+                return TAB_4G;
+            case TEMPLATE_MOBILE_ALL:
+                return TAB_MOBILE;
+            case TEMPLATE_WIFI:
+                return TAB_WIFI;
+            default:
+                return null;
         }
     }
 

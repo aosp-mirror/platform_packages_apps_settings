@@ -3415,11 +3415,22 @@ found in the list of installed applications.</string>
 
     <!-- Title of dialog shown before user limits data usage. [CHAR LIMIT=48] -->
     <string name="data_usage_limit_dialog_title">Limiting data usage</string>
-    <!-- First paragraph of dialog shown before user limits mobile data usage. [CHAR LIMIT=NONE] -->
+    <!-- Body of dialog shown before user limits mobile data usage. [CHAR LIMIT=NONE] -->
     <string name="data_usage_limit_dialog_mobile">Your mobile data connection will be disabled when the specified limit is reached.\n\nTo avoid overage charges, consider using a reduced limit, as device and carrier accounting methods may vary.</string>
-    <!-- First paragraph of dialog shown before user limits 3G data usage. [CHAR LIMIT=NONE] -->
+    <!-- Body of dialog shown before user limits 3G data usage. [CHAR LIMIT=NONE] -->
     <string name="data_usage_limit_dialog_3g">Your 2G-3G data connection will be disabled when the specified limit is reached.\n\nTo avoid overage charges, consider using a reduced limit, as device and carrier accounting methods may vary.</string>
-    <!-- First paragraph of dialog shown before user limits 4G data usage. [CHAR LIMIT=NONE] -->
+    <!-- Body of dialog shown before user limits 4G data usage. [CHAR LIMIT=NONE] -->
     <string name="data_usage_limit_dialog_4g">Your 4G data connection will be disabled when the specified limit is reached.\n\nTo avoid overage charges, consider using a reduced limit, as device and carrier accounting methods may vary.</string>
+
+    <!-- Title of dialog shown when 2G-3G data usage has exceeded limit and has been disabled. [CHAR LIMIT=48] -->
+    <string name="data_usage_disabled_dialog_3g_title">2G-3G data disabled</string>
+    <!-- Title of dialog shown when 4G data usage has exceeded limit and has been disabled. [CHAR LIMIT=48] -->
+    <string name="data_usage_disabled_dialog_4g_title">4G data disabled</string>
+    <!-- Title of dialog shown when mobile data usage has exceeded limit and has been disabled. [CHAR LIMIT=48] -->
+    <string name="data_usage_disabled_dialog_mobile_title">Mobile data disabled</string>
+    <!-- Body of dialog shown when data usage has exceeded limit and has been disabled. [CHAR LIMIT=NONE] -->
+    <string name="data_usage_disabled_dialog">The specified data usage limit has been reached.\n\nAdditional data use may incur carrier charges.</string>
+    <!-- Dialog button indicating that data connection should be re-enabled. [CHAR LIMIT=28] -->
+    <string name="data_usage_disabled_dialog_enable">re-enable data</string>
 
 </resources>
