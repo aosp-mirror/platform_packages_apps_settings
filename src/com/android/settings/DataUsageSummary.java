@@ -41,6 +41,7 @@ import android.net.INetworkStatsService;
 import android.net.NetworkPolicy;
 import android.net.NetworkStats;
 import android.net.NetworkStatsHistory;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.RemoteException;
 import android.os.ServiceManager;
@@ -568,14 +569,25 @@ public class DataUsageSummary extends Fragment {
     private void updateDetailData() {
         if (LOGD) Log.d(TAG, "updateDetailData()");
 
-        try {
-            final long[] range = mChart.getInspectRange();
-            final NetworkStats stats = mStatsService.getSummaryForAllUid(
-                    range[0], range[1], mTemplate);
-            mAdapter.bindStats(stats);
-        } catch (RemoteException e) {
-            Log.w(TAG, "problem reading stats");
-        }
+        new AsyncTask<Void, Void, NetworkStats>() {
+            @Override
+            protected NetworkStats doInBackground(Void... params) {
+                try {
+                    final long[] range = mChart.getInspectRange();
+                    return mStatsService.getSummaryForAllUid(range[0], range[1], mTemplate);
+                } catch (RemoteException e) {
+                    Log.w(TAG, "problem reading stats");
+                }
+                return null;
+            }
+
+            @Override
+            protected void onPostExecute(NetworkStats stats) {
+                if (stats != null) {
+                    mAdapter.bindStats(stats);
+                }
+            }
+        }.execute();
     }
 
     private static String getActiveSubscriberId(Context context) {
