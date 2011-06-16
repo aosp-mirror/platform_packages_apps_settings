@@ -896,6 +896,7 @@
     <string name="application_info_label" msgid="1150486628158409543">"Informações da aplicação"</string>
     <string name="storage_label" msgid="8700867073480107253">"Armazenamento"</string>
     <string name="auto_launch_label" msgid="3012617472833815382">"Iniciar por predefinição"</string>
+    <string name="screen_compatibility_label" msgid="663250687205465394">"Compatibilidade do ecrã"</string>
     <string name="permissions_label" msgid="2605296874922726203">"Permissões"</string>
     <string name="cache_header_label" msgid="1877197634162461830">"Cache"</string>
     <string name="clear_cache_btn_text" msgid="5756314834291116325">"Limpar cache"</string>
@@ -915,6 +916,9 @@
     <string name="auto_launch_enable_text" msgid="2630656657744196691">"Optou por iniciar esta aplicação por predefinição para algumas acções."</string>
     <string name="auto_launch_disable_text" msgid="7800385822185540166">"Nenhuma predefinição estabelecida."</string>
     <string name="clear_activities" msgid="7408923511535174430">"Limpar predefinições"</string>
+    <string name="screen_compatibility_text" msgid="2398570332021220651">"Esta aplicação poderá não ser concebida para o seu ecrã; pode controlar aqui o modo como se adapta ao seu ecrã."</string>
+    <string name="ask_compatibility" msgid="7225195569089607846">"Perguntar quando é iniciado"</string>
+    <string name="enable_compatibility" msgid="3257284255974065538">"Dimensionar a aplicação"</string>
     <string name="unknown" msgid="1592123443519355854">"Desconhecido"</string>
     <string name="sort_order_alpha" msgid="1410278099123670628">"Ordenar pelo nome"</string>
     <string name="sort_order_size" msgid="7024513286636502362">"Ordenar por tamanho"</string>
@@ -1019,6 +1023,8 @@
     <string name="show_password" msgid="2198798062604049206">"Palavras-passe visíveis"</string>
     <string name="show_password_summary" msgid="3806709974395178121">"Mostrar palavra-passe ao escrever"</string>
     <string name="ime_security_warning" msgid="812267421486877917">"Este método de entrada pode permitir a recolha de todo o texto que introduzir, incluindo dados pessoais como, por exemplo, palavras-passe e números de cartão de crédito. O serviço é fornecido com a aplicação <xliff:g id="IME_APPLICATION_NAME">%1$s</xliff:g>. Utilizar este método de entrada?"</string>
+    <string name="pointer_settings_category" msgid="6090176550039035130">"Definições do rato e do trackpad"</string>
+    <string name="pointer_speed" msgid="1221342330217861616">"Velocidade do ponteiro"</string>
     <string name="user_dict_settings_titlebar" msgid="765659257455000490">"Dicionário do utilizador"</string>
     <string name="user_dict_settings_title" msgid="8357027437499042191">"Dicionário do utilizador"</string>
     <string name="user_dict_settings_summary" msgid="7965571192902870454"></string>
@@ -1384,14 +1390,16 @@
     <string name="wifi_setup_description_connecting" msgid="1884664966455980182">"A ligação pode demorar alguns minutos..."</string>
     <string name="wifi_setup_description_connected" msgid="5235991893829582459">"Toque em "<b>"Seguinte"</b>" para continuar a configuração."\n\n"Toque em "<b>"Anterior"</b>" para ligar a uma rede Wi-Fi diferente."</string>
     <string name="account_sync_settings_title" msgid="4578227872921044660">"Definições de sincronização"</string>
-    <!-- outdated translation 7257854052606796327 -->     <string name="sync_is_failing" msgid="1591561768344128377">"A sincronização está actualmente com problemas e será retomada em breve."</string>
+    <!-- no translation found for sync_is_failing (1591561768344128377) -->
+    <skip />
     <string name="add_account_label" msgid="7811707265834013767">"Adicionar conta"</string>
     <string name="header_general_sync_settings" msgid="3487451896424238469">"Def. gerais de sincronização"</string>
     <string name="background_data" msgid="5779592891375473817">"Dados em segundo plano"</string>
     <string name="background_data_summary" msgid="3630389249212620467">"Aplic. podem sincr., enviar/receber dados a qualq. momento"</string>
     <string name="background_data_dialog_title" msgid="745974259246047425">"Atenção"</string>
     <string name="background_data_dialog_message" msgid="9155730118215371308">"A desactivação de dados em segundo plano economiza a bateria e reduz a utilização de dados. Algumas aplicações podem continuar a utilizar a ligação de dados em segundo plano."</string>
-    <!-- outdated translation 7232356254121075216 -->     <string name="sync_automatically" msgid="7558810110682562376">"Sincronização automática"</string>
+    <!-- no translation found for sync_automatically (7558810110682562376) -->
+    <skip />
     <string name="sync_automatically_summary" msgid="6662623174608419931">"As aplicações sincronizam os dados automaticamente"</string>
     <string name="header_manage_accounts" msgid="6869002423884539607">"Gerir contas"</string>
     <string name="sync_enabled" msgid="4551148952179416813">"Sincron. activada"</string>
@@ -1399,13 +1407,18 @@
     <string name="sync_error" msgid="5060969083117872149">"Erro de sincron."</string>
     <string name="settings_backup" msgid="2274732978260797031">"Efectuar uma cópia de segurança das definições"</string>
     <string name="settings_backup_summary" msgid="7916877705938054035">"Fazer uma cópia de segurança das minhas definições"</string>
-    <!-- outdated translation 4438555069848430041 -->     <string name="sync_menu_sync_now" msgid="6154608350395805683">"Sincronizar agora"</string>
-    <!-- outdated translation 260091941807229790 -->     <string name="sync_menu_sync_cancel" msgid="8292379009626966949">"Cancelar sincronização"</string>
+    <!-- no translation found for sync_menu_sync_now (6154608350395805683) -->
+    <skip />
+    <!-- no translation found for sync_menu_sync_cancel (8292379009626966949) -->
+    <skip />
     <string name="sync_one_time_sync" msgid="6766593624598183090">"Tocar para sincronizar agora<xliff:g id="LAST_SYNC_TIME">
 %1$s</xliff:g>"</string>
-    <!-- outdated translation 2427506589849697841 -->     <string name="sync_gmail" msgid="714886122098006477">"Gmail"</string>
-    <!-- outdated translation 6328872198278573611 -->     <string name="sync_calendar" msgid="9056527206714733735">"Calendário"</string>
-    <!-- outdated translation 6010441370923919977 -->     <string name="sync_contacts" msgid="9174914394377828043">"Contactos"</string>
+    <!-- no translation found for sync_gmail (714886122098006477) -->
+    <skip />
+    <!-- no translation found for sync_calendar (9056527206714733735) -->
+    <skip />
+    <!-- no translation found for sync_contacts (9174914394377828043) -->
+    <skip />
     <string name="sync_plug" msgid="5952575609349860569"><font fgcolor="#ffffffff">"Bem vindo ao Google Sync!"</font>" "\n"Uma abordagem do Google à sincronização de dados, que permite aceder aos contactos, compromissos e outros itens, a partir de qualquer local onde se encontre."</string>
     <string name="header_application_sync_settings" msgid="5514539555293976035">"Definições de sincronização da aplicação"</string>
     <string name="header_data_and_synchronization" msgid="5165024023936509896">"Dados e sincronização"</string>
