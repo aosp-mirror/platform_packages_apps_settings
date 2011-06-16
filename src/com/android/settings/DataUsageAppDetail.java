@@ -17,7 +17,7 @@
 package com.android.settings;
 
 import static android.net.NetworkPolicyManager.POLICY_NONE;
-import static android.net.NetworkPolicyManager.POLICY_REJECT_PAID_BACKGROUND;
+import static android.net.NetworkPolicyManager.POLICY_REJECT_METERED_BACKGROUND;
 import static android.net.TrafficStats.TEMPLATE_MOBILE_ALL;
 import static com.android.settings.DataUsageSummary.getHistoryBounds;
 
@@ -76,8 +76,6 @@ public class DataUsageAppDetail extends Fragment {
     private LinearLayout mSwitches;
 
     private DataUsageChartView mChart;
-
-    private int mUidPolicy;
     private NetworkStatsHistory mHistory;
 
     @Override
@@ -185,7 +183,7 @@ public class DataUsageAppDetail extends Fragment {
             }
 
             // update policy checkbox
-            final boolean restrictBackground = (mUidPolicy & POLICY_REJECT_PAID_BACKGROUND) != 0;
+            final boolean restrictBackground = (uidPolicy & POLICY_REJECT_METERED_BACKGROUND) != 0;
             mRestrictBackground.setChecked(restrictBackground);
 
             // kick preference views so they rebind from changes above
@@ -210,7 +208,7 @@ public class DataUsageAppDetail extends Fragment {
         if (LOGD) Log.d(TAG, "setRestrictBackground()");
         try {
             mPolicyService.setUidPolicy(
-                    mUid, restrictBackground ? POLICY_REJECT_PAID_BACKGROUND : POLICY_NONE);
+                    mUid, restrictBackground ? POLICY_REJECT_METERED_BACKGROUND : POLICY_NONE);
         } catch (RemoteException e) {
             throw new RuntimeException("unable to save policy", e);
         }
@@ -269,7 +267,7 @@ public class DataUsageAppDetail extends Fragment {
 
     /**
      * Dialog to request user confirmation before setting
-     * {@link #POLICY_REJECT_PAID_BACKGROUND}.
+     * {@link #POLICY_REJECT_METERED_BACKGROUND}.
      */
     public static class ConfirmRestrictFragment extends DialogFragment {
         public static void show(DataUsageAppDetail parent) {

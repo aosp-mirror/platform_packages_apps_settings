@@ -18,7 +18,6 @@ package com.android.settings;
 
 import static android.net.NetworkPolicy.LIMIT_DISABLED;
 import static android.net.NetworkPolicyManager.ACTION_DATA_USAGE_LIMIT;
-import static android.net.NetworkPolicyManager.ACTION_DATA_USAGE_WARNING;
 import static android.net.NetworkPolicyManager.EXTRA_NETWORK_TEMPLATE;
 import static android.net.NetworkPolicyManager.computeLastCycleBoundary;
 import static android.net.NetworkPolicyManager.computeNextCycleBoundary;
