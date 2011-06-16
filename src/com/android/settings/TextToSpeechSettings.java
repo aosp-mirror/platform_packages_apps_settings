@@ -21,7 +21,6 @@ import static android.provider.Settings.Secure.TTS_DEFAULT_LANG;
 import static android.provider.Settings.Secure.TTS_DEFAULT_RATE;
 import static android.provider.Settings.Secure.TTS_DEFAULT_SYNTH;
 import static android.provider.Settings.Secure.TTS_DEFAULT_VARIANT;
-import static android.provider.Settings.Secure.TTS_ENABLED_PLUGINS;
 import static android.provider.Settings.Secure.TTS_USE_DEFAULTS;
 
 import android.app.AlertDialog;
@@ -32,7 +31,6 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
-import android.preference.CheckBoxPreference;
 import android.preference.ListPreference;
 import android.preference.Preference;
 import android.preference.Preference.OnPreferenceClickListener;
@@ -64,7 +62,7 @@ public class TextToSpeechSettings extends SettingsPreferenceFragment implements
     private static final String KEY_TTS_DEFAULT_COUNTRY = "tts_default_country";
     private static final String KEY_TTS_DEFAULT_VARIANT = "tts_default_variant";
     private static final String KEY_TTS_DEFAULT_SYNTH = "tts_default_synth";
-    private static final String KEY_TTS_ENGINES = "tts_engines_section";
+    private static final String KEY_TTS_ENGINE_SETTINGS = "tts_engine_settings";
 
     private static final String KEY_PLUGIN_ENABLED_PREFIX = "ENABLED_";
     private static final String KEY_PLUGIN_SETTINGS_PREFIX = "SETTINGS_";
@@ -76,13 +74,14 @@ public class TextToSpeechSettings extends SettingsPreferenceFragment implements
 
     private static final String LOCALE_DELIMITER = "-";
 
-    private Preference         mPlayExample = null;
-    private Preference         mInstallData = null;
-    private CheckBoxPreference mUseDefaultPref = null;
-    private ListPreference     mDefaultRatePref = null;
-    private ListPreference     mDefaultLocPref = null;
-    private ListPreference     mDefaultSynthPref = null;
-    private PreferenceGroup    mEnginesGroup;
+    private Preference mPlayExample = null;
+
+    private ListPreference mDefaultRatePref = null;
+    private ListPreference mDefaultLocPref = null;
+    private ListPreference mDefaultSynthPref = null;
+
+    private Preference mInstallData = null;
+    private Preference mEngineSettings = null;
 
     private String             mDefaultLanguage = null;
     private String             mDefaultCountry = null;
@@ -127,18 +126,18 @@ public class TextToSpeechSettings extends SettingsPreferenceFragment implements
         mInstallData = findPreference(KEY_TTS_INSTALL_DATA);
         mInstallData.setOnPreferenceClickListener(this);
 
-        mUseDefaultPref = (CheckBoxPreference) findPreference(KEY_TTS_USE_DEFAULT);
         mDefaultSynthPref = (ListPreference) findPreference(KEY_TTS_DEFAULT_SYNTH);
         mDefaultRatePref = (ListPreference) findPreference(KEY_TTS_DEFAULT_RATE);
         mDefaultLocPref = (ListPreference) findPreference(KEY_TTS_DEFAULT_LANG);
 
-        mEnginesGroup = (PreferenceGroup) findPreference(KEY_TTS_ENGINES);
+        mEngineSettings = (Preference) findPreference(KEY_TTS_ENGINE_SETTINGS);
+        mEngineSettings.setEnabled(false);
 
         mTts = new TextToSpeech(getActivity().getApplicationContext(), this);
         mEnginesHelper = new TtsEngines(getActivity().getApplicationContext());
 
         initDefaultSettings();
-        addEngineSpecificSettings();
+        initEngineSpecificSettings();
     }
 
     @Override
@@ -175,39 +174,27 @@ public class TextToSpeechSettings extends SettingsPreferenceFragment implements
         }
     }
 
-    private void addEngineSpecificSettings() {
-        Context context = getActivity();
-        List<EngineInfo> engines = mTts.getEngines();
-        for (EngineInfo engine : engines) {
-            final String engineName = engine.name;
-            if (!engine.system) {
-                CheckBoxPreference enablePref = new CheckBoxPreference(context);
-                enablePref.setKey(KEY_PLUGIN_ENABLED_PREFIX + engineName);
-                enablePref.setTitle(engine.label);
-                enablePref.setOnPreferenceClickListener(this);
-                mEnginesGroup.addPreference(enablePref);
-            }
+    private void initEngineSpecificSettings() {
+        final String engineName = mEnginesHelper.getDefaultEngine();
+        final EngineInfo engine = mEnginesHelper.getEngineInfo(engineName);
 
-            if (engineHasSettings(engineName)) {
-                Preference pref = new Preference(context);
-                pref.setKey(KEY_PLUGIN_SETTINGS_PREFIX + engineName);
-                pref.setTitle(engine.label);
-                CharSequence settingsLabel = getResources().getString(
-                        R.string.tts_engine_name_settings, engine.label);
-                pref.setSummary(settingsLabel);
-                // TODO: Add a new API for this.
-                pref.setOnPreferenceClickListener(new OnPreferenceClickListener() {
-                            public boolean onPreferenceClick(Preference preference) {
-                                Intent i = new Intent();
-                                i.setClassName(engineName,
-                                        engineName + ".EngineSettings");
-                                startActivity(i);
-                                return true;
-                            }
-                        });
-                mEnginesGroup.addPreference(pref);
-            }
+        mEngineSettings.setTitle(getResources().getString(R.string.tts_engine_settings_title,
+                engine.label));
+
+        if (engineHasSettings(engineName)) {
+            mEngineSettings.setOnPreferenceClickListener(new OnPreferenceClickListener() {
+                public boolean onPreferenceClick(Preference preference) {
+                    Intent i = new Intent();
+                    i.setClassName(engineName, engineName + ".EngineSettings");
+                    startActivity(i);
+                    return true;
+                }
+            });
+            mEngineSettings.setEnabled(true);
+        } else {
+            mEngineSettings.setEnabled(false);
         }
+
     }
 
     private boolean engineHasSettings(String enginePackageName) {
@@ -225,12 +212,6 @@ public class TextToSpeechSettings extends SettingsPreferenceFragment implements
 
         // Find the default TTS values in the settings, initialize and store the
         // settings if they are not found.
-
-        // "Use Defaults"
-        int useDefault = Settings.Secure.getInt(resolver, TTS_USE_DEFAULTS,
-                TextToSpeech.Engine.USE_DEFAULTS);
-        mUseDefaultPref.setChecked(useDefault == 1);
-        mUseDefaultPref.setOnPreferenceChangeListener(this);
 
         // Default synthesis engine
         loadEngines();
@@ -301,6 +282,7 @@ public class TextToSpeechSettings extends SettingsPreferenceFragment implements
         intent.putExtra("country", mDefaultCountry);
         intent.putExtra("variant", mDefaultLocVariant);
         intent.setPackage(defaultEngine);
+
         try {
             Log.v(TAG, "Getting sample text: " + intent.toUri(0));
             startActivityForResult(intent, GET_SAMPLE_TEXT);
@@ -504,16 +486,21 @@ public class TextToSpeechSettings extends SettingsPreferenceFragment implements
             Log.v(TAG, " selected is " + newIndex);
             mDemoStringIndex = newIndex > -1 ? newIndex : 0;
         } else if (KEY_TTS_DEFAULT_SYNTH.equals(preference.getKey())) {
-            String defaultEng = objValue.toString();
-            Settings.Secure.putString(getContentResolver(), TTS_DEFAULT_SYNTH, defaultEng);
-            if (mTts != null) {
-                mTts.setEngineByPackageName(defaultEng);
-                mEnableDemo = false;
-                mVoicesMissing = false;
-                updateWidgetState();
-                checkVoiceData();
+            final String name = objValue.toString();
+            final EngineInfo info = mEnginesHelper.getEngineInfo(name);
+
+            if (info.system) {
+                // For system engines, do away with the alert dialog.
+                updateDefaultEngine(name);
+                initEngineSpecificSettings();
+            } else {
+                // For all other engines, display a warning message before
+                // turning them on.
+                displayDataAlert(preference, name);
             }
-            Log.v(TAG, "The default synth is: " + objValue.toString());
+
+            // We'll deal with updating the UI ourselves.
+            return false;
         }
 
         return true;
@@ -534,42 +521,13 @@ public class TextToSpeechSettings extends SettingsPreferenceFragment implements
             // quit this activity so it needs to be restarted after installation of the voice data
             finish();
             return true;
-        } else if (preference.getKey().startsWith(KEY_PLUGIN_ENABLED_PREFIX)) {
-            final CheckBoxPreference chkPref = (CheckBoxPreference) preference;
-            if (chkPref.isChecked()) {
-                chkPref.setChecked(false);
-                AlertDialog d = (new AlertDialog.Builder(getActivity()))
-                        .setTitle(android.R.string.dialog_alert_title)
-                        .setIcon(android.R.drawable.ic_dialog_alert)
-                        .setMessage(
-                                getActivity().getString(R.string.tts_engine_security_warning,
-                                chkPref.getTitle()))
-                        .setCancelable(true)
-                        .setPositiveButton(android.R.string.ok,
-                                new DialogInterface.OnClickListener() {
-                                    public void onClick(DialogInterface dialog, int which) {
-                                        chkPref.setChecked(true);
-                                        loadEngines();
-                                    }
-                        })
-                        .setNegativeButton(android.R.string.cancel,
-                                new DialogInterface.OnClickListener() {
-                                    public void onClick(DialogInterface dialog, int which) {
-                                    }
-                        })
-                        .create();
-                d.show();
-            } else {
-                loadEngines();
-            }
-            return true;
         }
+
         return false;
     }
 
     private void updateWidgetState() {
         mPlayExample.setEnabled(mEnableDemo);
-        mUseDefaultPref.setEnabled(mEnableDemo);
         mDefaultRatePref.setEnabled(mEnableDemo);
         mDefaultLocPref.setEnabled(mEnableDemo);
 
@@ -582,14 +540,18 @@ public class TextToSpeechSettings extends SettingsPreferenceFragment implements
         mDefaultLanguage = "";
         mDefaultCountry = "";
         mDefaultLocVariant = "";
-        if (tokenizer.hasMoreTokens()) {
-            mDefaultLanguage = tokenizer.nextToken().trim();
-        }
-        if (tokenizer.hasMoreTokens()) {
-            mDefaultCountry = tokenizer.nextToken().trim();
-        }
-        if (tokenizer.hasMoreTokens()) {
-            mDefaultLocVariant = tokenizer.nextToken().trim();
+
+        if (locale != null) {
+            String[] components = locale.split(LOCALE_DELIMITER);
+            if (components.length > 0) {
+                mDefaultLanguage = components[0];
+            }
+            if (components.length > 1) {
+                mDefaultCountry = components[1];
+            }
+            if (components.length > 2) {
+                mDefaultLocVariant = components[2];
+            }
         }
     }
 
@@ -683,26 +645,18 @@ public class TextToSpeechSettings extends SettingsPreferenceFragment implements
 
     private void loadEngines() {
         List<EngineInfo> engines = mEnginesHelper.getEngines();
-        updateUserEnabledEngines(engines);
+        CharSequence entries[] = new CharSequence[engines.size()];
+        CharSequence values[] = new CharSequence[engines.size()];
 
-        ArrayList<CharSequence> entries = new ArrayList<CharSequence>();
-        ArrayList<CharSequence> values = new ArrayList<CharSequence>();
-        StringBuilder enabledEngines = new StringBuilder();
-
-        for (EngineInfo engine : engines) {
-            Log.v(TAG, "Engine: " + engine);
-            if (mEnginesHelper.isEngineEnabled(engine.name)) {
-                entries.add(engine.label);
-                values.add(engine.name);
-            }
+        final int count = engines.size();
+        for (int i = 0; i < count; ++i) {
+            final EngineInfo engine = engines.get(i);
+            entries[i] = engine.label;
+            values[i] = engine.name;
         }
 
-
-        CharSequence entriesArray[] = new CharSequence[entries.size()];
-        CharSequence valuesArray[] = new CharSequence[values.size()];
-
-        mDefaultSynthPref.setEntries(entries.toArray(entriesArray));
-        mDefaultSynthPref.setEntryValues(values.toArray(valuesArray));
+        mDefaultSynthPref.setEntries(entries);
+        mDefaultSynthPref.setEntryValues(values);
 
         // Set the selected engine based on the saved preference
         String selectedEngine = Settings.Secure.getString(getContentResolver(), TTS_DEFAULT_SYNTH);
@@ -716,26 +670,51 @@ public class TextToSpeechSettings extends SettingsPreferenceFragment implements
         }
     }
 
-    /*
-     * Write out the list of engines enabled by the user to a
-     * shared preference.
-     */
-    private void updateUserEnabledEngines(List<EngineInfo> engines) {
-        StringBuilder enginesList = new StringBuilder();
-        for (EngineInfo engine : engines) {
-            if (isEngineUserEnabled(engine.name)) {
-                if (enginesList.length() > 0) enginesList.append(' ');
-                enginesList.append(engine.name);
+    private void displayDataAlert(Preference pref, final String key) {
+        Log.v(TAG, "Displaying data alert for :" + key);
+        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+        builder.setTitle(android.R.string.dialog_alert_title);
+        builder.setIcon(android.R.drawable.ic_dialog_alert);
+        builder.setMessage(getActivity().getString(
+                R.string.tts_engine_security_warning, pref.getTitle()));
+        builder.setCancelable(true);
+        builder.setPositiveButton(android.R.string.ok,
+                new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                       updateDefaultEngine(key);
+                       loadEngines();
+                       initEngineSpecificSettings();
+                    }
+                });
+        builder.setNegativeButton(android.R.string.cancel, null);
+
+        AlertDialog dialog = builder.create();
+        dialog.show();
+    }
+
+    private void updateDefaultEngine(String engine) {
+        Log.v(TAG, "Updating default synth to : " + engine);
+        if (mTts != null) {
+            try {
+                mTts.shutdown();
+                mTts = null;
+            } catch (Exception e) {
+                Log.e(TAG, "Error shutting down TTS engine" + e);
             }
         }
 
-        ContentResolver resolver = getContentResolver();
-        Settings.Secure.putString(resolver, TTS_ENABLED_PLUGINS, enginesList.toString());
-    }
+        mTts = new TextToSpeech(getActivity().getApplicationContext(), this, engine);
+        mEnableDemo = false;
+        mVoicesMissing = false;
+        updateWidgetState();
+        checkVoiceData();
 
-    private boolean isEngineUserEnabled(String engineName) {
-        String enginePref = KEY_PLUGIN_ENABLED_PREFIX + engineName;
-        return getPreferenceManager().getSharedPreferences().getBoolean(enginePref, false);
+        // Finally, persist this value to settings.
+        Settings.Secure.putString(getContentResolver(), TTS_DEFAULT_SYNTH, engine);
+        // .. and update the UI.
+        mDefaultSynthPref.setValue(engine);
+
+        Log.v(TAG, "The default synth is now: " + engine);
     }
 
 }
