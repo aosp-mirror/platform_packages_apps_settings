@@ -392,6 +392,14 @@ public class ApplicationsState {
 
             for (int i=0; i<mApplications.size(); i++) {
                 final ApplicationInfo info = mApplications.get(i);
+                // Need to trim out any applications that are disabled by
+                // something different than the user.
+                if (!info.enabled && info.enabledSetting
+                        != PackageManager.COMPONENT_ENABLED_STATE_DISABLED_USER) {
+                    mApplications.remove(i);
+                    i--;
+                    continue;
+                }
                 final AppEntry entry = mEntriesMap.get(info.packageName);
                 if (entry != null) {
                     entry.info = info;
