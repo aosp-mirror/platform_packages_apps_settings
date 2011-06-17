@@ -41,7 +41,13 @@
                 android:persistent="false"
                 android:entries="@array/screen_timeout_entries"
                 android:entryValues="@array/screen_timeout_values" />
-                
+
+        <PreferenceScreen
+                android:key="wallpaper"
+                android:title="@string/wallpaper_settings_title"
+                android:fragment="com.android.settings.WallpaperTypeSettings"
+            />
+
         <PreferenceScreen 
                 android:title="@string/dream_settings_title" 
                 android:summary="@string/dream_settings_summary"
