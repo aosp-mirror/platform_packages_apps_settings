@@ -79,7 +79,7 @@ public class InstalledAppDetails extends Fragment
         implements View.OnClickListener, CompoundButton.OnCheckedChangeListener,
         ApplicationsState.Callbacks {
     private static final String TAG="InstalledAppDetails";
-    static final boolean SUPPORT_DISABLE_APPS = false;
+    static final boolean SUPPORT_DISABLE_APPS = true;
     private static final boolean localLOGV = false;
     
     public static final String ARG_PACKAGE_NAME = "package";
@@ -829,7 +829,7 @@ public class InstalledAppDetails extends Fragment
             } else {
                 if ((mAppEntry.info.flags & ApplicationInfo.FLAG_SYSTEM) != 0) {
                     new DisableChanger(this, mAppEntry.info, mAppEntry.info.enabled ?
-                            PackageManager.COMPONENT_ENABLED_STATE_DISABLED
+                            PackageManager.COMPONENT_ENABLED_STATE_DISABLED_USER
                             : PackageManager.COMPONENT_ENABLED_STATE_DEFAULT).execute((Object)null);
                 } else {
                     uninstallPkg(packageName);
