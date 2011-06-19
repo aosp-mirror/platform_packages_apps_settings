@@ -16,13 +16,14 @@
 
 package com.android.settings.net;
 
-import static android.net.TrafficStats.TEMPLATE_MOBILE_3G_LOWER;
-import static android.net.TrafficStats.TEMPLATE_MOBILE_4G;
-import static android.net.TrafficStats.TEMPLATE_MOBILE_ALL;
+import static android.net.NetworkTemplate.MATCH_MOBILE_3G_LOWER;
+import static android.net.NetworkTemplate.MATCH_MOBILE_4G;
+import static android.net.NetworkTemplate.MATCH_MOBILE_ALL;
 import static com.android.internal.util.Preconditions.checkNotNull;
 
 import android.net.INetworkPolicyManager;
 import android.net.NetworkPolicy;
+import android.net.NetworkTemplate;
 import android.os.AsyncTask;
 import android.os.RemoteException;
 
@@ -35,18 +36,14 @@ import java.util.ArrayList;
  * Utility class to modify list of {@link NetworkPolicy}. Specifically knows
  * about which policies can coexist.
  */
-public class NetworkPolicyModifier {
-    // TODO: refactor to "Editor"
+public class NetworkPolicyEditor {
     // TODO: be more robust when missing policies from service
 
     private INetworkPolicyManager mPolicyService;
-    private String mSubscriberId;
-
     private ArrayList<NetworkPolicy> mPolicies = Lists.newArrayList();
 
-    public NetworkPolicyModifier(INetworkPolicyManager policyService, String subscriberId) {
+    public NetworkPolicyEditor(INetworkPolicyManager policyService) {
         mPolicyService = checkNotNull(policyService);
-        mSubscriberId = subscriberId;
     }
 
     public void read() {
@@ -81,64 +78,82 @@ public class NetworkPolicyModifier {
         }
     }
 
-    public NetworkPolicy getPolicy(int networkTemplate) {
+    public NetworkPolicy getPolicy(NetworkTemplate template) {
         for (NetworkPolicy policy : mPolicies) {
-            if (policy.networkTemplate == networkTemplate
-                    && Objects.equal(policy.subscriberId, mSubscriberId)) {
+            if (policy.template.equals(template)) {
                 return policy;
             }
         }
         return null;
     }
 
-    public void setPolicyCycleDay(int networkTemplate, int cycleDay) {
-        getPolicy(networkTemplate).cycleDay = cycleDay;
+    public void setPolicyCycleDay(NetworkTemplate template, int cycleDay) {
+        getPolicy(template).cycleDay = cycleDay;
         writeAsync();
     }
 
-    public void setPolicyWarningBytes(int networkTemplate, long warningBytes) {
-        getPolicy(networkTemplate).warningBytes = warningBytes;
+    public void setPolicyWarningBytes(NetworkTemplate template, long warningBytes) {
+        getPolicy(template).warningBytes = warningBytes;
         writeAsync();
     }
 
-    public void setPolicyLimitBytes(int networkTemplate, long limitBytes) {
-        getPolicy(networkTemplate).limitBytes = limitBytes;
+    public void setPolicyLimitBytes(NetworkTemplate template, long limitBytes) {
+        getPolicy(template).limitBytes = limitBytes;
         writeAsync();
     }
 
-    public boolean isMobilePolicySplit() {
-        return getPolicy(TEMPLATE_MOBILE_3G_LOWER) != null && getPolicy(TEMPLATE_MOBILE_4G) != null;
+    public boolean isMobilePolicySplit(String subscriberId) {
+        boolean has3g = false;
+        boolean has4g = false;
+        for (NetworkPolicy policy : mPolicies) {
+            final NetworkTemplate template = policy.template;
+            if (Objects.equal(subscriberId, template.getSubscriberId())) {
+                switch (template.getMatchRule()) {
+                    case MATCH_MOBILE_3G_LOWER:
+                        has3g = true;
+                        break;
+                    case MATCH_MOBILE_4G:
+                        has4g = true;
+                        break;
+                }
+            }
+        }
+        return has3g && has4g;
     }
 
-    public void setMobilePolicySplit(boolean split) {
-        final boolean beforeSplit = isMobilePolicySplit();
+    public void setMobilePolicySplit(String subscriberId, boolean split) {
+        final boolean beforeSplit = isMobilePolicySplit(subscriberId);
+
+        final NetworkTemplate template3g = new NetworkTemplate(MATCH_MOBILE_3G_LOWER, subscriberId);
+        final NetworkTemplate template4g = new NetworkTemplate(MATCH_MOBILE_4G, subscriberId);
+        final NetworkTemplate templateAll = new NetworkTemplate(MATCH_MOBILE_ALL, subscriberId);
+
         if (split == beforeSplit) {
             // already in requested state; skip
             return;
 
         } else if (beforeSplit && !split) {
             // combine, picking most restrictive policy
-            final NetworkPolicy policy3g = getPolicy(TEMPLATE_MOBILE_3G_LOWER);
-            final NetworkPolicy policy4g = getPolicy(TEMPLATE_MOBILE_4G);
+            final NetworkPolicy policy3g = getPolicy(template3g);
+            final NetworkPolicy policy4g = getPolicy(template4g);
 
             final NetworkPolicy restrictive = policy3g.compareTo(policy4g) < 0 ? policy3g
                     : policy4g;
             mPolicies.remove(policy3g);
             mPolicies.remove(policy4g);
-            mPolicies.add(new NetworkPolicy(TEMPLATE_MOBILE_ALL, restrictive.subscriberId,
-                    restrictive.cycleDay, restrictive.warningBytes, restrictive.limitBytes));
+            mPolicies.add(
+                    new NetworkPolicy(templateAll, restrictive.cycleDay, restrictive.warningBytes,
+                            restrictive.limitBytes));
             writeAsync();
 
         } else if (!beforeSplit && split) {
             // duplicate existing policy into two rules
-            final NetworkPolicy policyAll = getPolicy(TEMPLATE_MOBILE_ALL);
+            final NetworkPolicy policyAll = getPolicy(templateAll);
             mPolicies.remove(policyAll);
-            mPolicies.add(
-                    new NetworkPolicy(TEMPLATE_MOBILE_3G_LOWER, policyAll.subscriberId,
-                            policyAll.cycleDay, policyAll.warningBytes, policyAll.limitBytes));
-            mPolicies.add(
-                    new NetworkPolicy(TEMPLATE_MOBILE_4G, policyAll.subscriberId,
-                            policyAll.cycleDay, policyAll.warningBytes, policyAll.limitBytes));
+            mPolicies.add(new NetworkPolicy(
+                    template3g, policyAll.cycleDay, policyAll.warningBytes, policyAll.limitBytes));
+            mPolicies.add(new NetworkPolicy(
+                    template4g, policyAll.cycleDay, policyAll.warningBytes, policyAll.limitBytes));
             writeAsync();
 
         }

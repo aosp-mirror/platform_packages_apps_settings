@@ -18,7 +18,6 @@ package com.android.settings;
 
 import static android.net.NetworkPolicyManager.POLICY_NONE;
 import static android.net.NetworkPolicyManager.POLICY_REJECT_METERED_BACKGROUND;
-import static android.net.TrafficStats.TEMPLATE_MOBILE_ALL;
 import static com.android.settings.DataUsageSummary.getHistoryBounds;
 
 import android.app.AlertDialog;
@@ -34,6 +33,7 @@ import android.net.INetworkPolicyManager;
 import android.net.INetworkStatsService;
 import android.net.NetworkPolicyManager;
 import android.net.NetworkStatsHistory;
+import android.net.NetworkTemplate;
 import android.os.Bundle;
 import android.os.RemoteException;
 import android.os.ServiceManager;
@@ -58,7 +58,12 @@ public class DataUsageAppDetail extends Fragment {
     private static final String TAG = "DataUsage";
     private static final boolean LOGD = true;
 
+    public static final String EXTRA_UID = "uid";
+    public static final String EXTRA_NETWORK_TEMPLATE = "networkTemplate";
+
     private int mUid;
+    private NetworkTemplate mTemplate;
+
     private Intent mAppSettingsIntent;
 
     private static final String TAG_CONFIRM_RESTRICT = "confirmRestrict";
@@ -133,7 +138,9 @@ public class DataUsageAppDetail extends Fragment {
     private void updateBody() {
         final PackageManager pm = getActivity().getPackageManager();
 
-        mUid = getArguments().getInt(Intent.EXTRA_UID);
+        mUid = getArguments().getInt(EXTRA_UID);
+        mTemplate = getArguments().getParcelable(EXTRA_NETWORK_TEMPLATE);
+
         mTitle.setText(pm.getNameForUid(mUid));
 
         // enable settings button when package provides it
@@ -155,7 +162,7 @@ public class DataUsageAppDetail extends Fragment {
         try {
             // load stats for current uid and template
             // TODO: read template from extras
-            mHistory = mStatsService.getHistoryForUid(mUid, TEMPLATE_MOBILE_ALL);
+            mHistory = mStatsService.getHistoryForUid(mTemplate, mUid);
         } catch (RemoteException e) {
             // since we can't do much without history, and we don't want to
             // leave with half-baked UI, we bail hard.

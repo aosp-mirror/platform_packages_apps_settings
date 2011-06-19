@@ -21,10 +21,10 @@ import static android.net.NetworkPolicyManager.ACTION_DATA_USAGE_LIMIT;
 import static android.net.NetworkPolicyManager.EXTRA_NETWORK_TEMPLATE;
 import static android.net.NetworkPolicyManager.computeLastCycleBoundary;
 import static android.net.NetworkPolicyManager.computeNextCycleBoundary;
-import static android.net.TrafficStats.TEMPLATE_MOBILE_3G_LOWER;
-import static android.net.TrafficStats.TEMPLATE_MOBILE_4G;
-import static android.net.TrafficStats.TEMPLATE_MOBILE_ALL;
-import static android.net.TrafficStats.TEMPLATE_WIFI;
+import static android.net.NetworkTemplate.MATCH_MOBILE_3G_LOWER;
+import static android.net.NetworkTemplate.MATCH_MOBILE_4G;
+import static android.net.NetworkTemplate.MATCH_MOBILE_ALL;
+import static android.net.NetworkTemplate.MATCH_WIFI;
 import static android.view.ViewGroup.LayoutParams.MATCH_PARENT;
 
 import android.app.AlertDialog;
@@ -44,6 +44,7 @@ import android.net.NetworkPolicy;
 import android.net.NetworkPolicyManager;
 import android.net.NetworkStats;
 import android.net.NetworkStatsHistory;
+import android.net.NetworkTemplate;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.RemoteException;
@@ -82,7 +83,7 @@ import android.widget.TabHost.TabSpec;
 import android.widget.TabWidget;
 import android.widget.TextView;
 
-import com.android.settings.net.NetworkPolicyModifier;
+import com.android.settings.net.NetworkPolicyEditor;
 import com.android.settings.widget.DataUsageChartView;
 import com.android.settings.widget.DataUsageChartView.DataUsageChartListener;
 import com.google.android.collect.Lists;
@@ -135,9 +136,9 @@ public class DataUsageSummary extends Fragment {
     // TODO: persist show wifi flag
     private boolean mShowWifi = false;
 
-    private int mTemplate = TEMPLATE_INVALID;
+    private NetworkTemplate mTemplate = null;
 
-    private NetworkPolicyModifier mPolicyModifier;
+    private NetworkPolicyEditor mPolicyEditor;
     private NetworkStatsHistory mHistory;
 
     private String mIntentTab = null;
@@ -151,10 +152,8 @@ public class DataUsageSummary extends Fragment {
         mPolicyService = INetworkPolicyManager.Stub.asInterface(
                 ServiceManager.getService(Context.NETWORK_POLICY_SERVICE));
 
-        final Context context = getActivity();
-        final String subscriberId = getActiveSubscriberId(context);
-        mPolicyModifier = new NetworkPolicyModifier(mPolicyService, subscriberId);
-        mPolicyModifier.read();
+        mPolicyEditor = new NetworkPolicyEditor(mPolicyService);
+        mPolicyEditor.read();
 
         setHasOptionsMenu(true);
     }
@@ -237,7 +236,7 @@ public class DataUsageSummary extends Fragment {
     @Override
     public void onPrepareOptionsMenu(Menu menu) {
         final MenuItem split4g = menu.findItem(R.id.action_split_4g);
-        split4g.setChecked(mPolicyModifier.isMobilePolicySplit());
+        split4g.setChecked(isMobilePolicySplit());
     }
 
     @Override
@@ -245,8 +244,8 @@ public class DataUsageSummary extends Fragment {
         switch (item.getItemId()) {
             case R.id.action_split_4g: {
                 final boolean mobileSplit = !item.isChecked();
-                mPolicyModifier.setMobilePolicySplit(mobileSplit);
-                item.setChecked(mPolicyModifier.isMobilePolicySplit());
+                setMobilePolicySplit(mobileSplit);
+                item.setChecked(isMobilePolicySplit());
                 updateTabs();
                 return true;
             }
@@ -269,12 +268,12 @@ public class DataUsageSummary extends Fragment {
     }
 
     /**
-     * Rebuild all tabs based on {@link NetworkPolicyModifier} and
+     * Rebuild all tabs based on {@link NetworkPolicyEditor} and
      * {@link #mShowWifi}, hiding the tabs entirely when applicable. Selects
      * first tab, and kicks off a full rebind of body contents.
      */
     private void updateTabs() {
-        final boolean mobileSplit = mPolicyModifier.isMobilePolicySplit();
+        final boolean mobileSplit = isMobilePolicySplit();
         final boolean tabsVisible = mobileSplit || mShowWifi;
         mTabWidget.setVisibility(tabsVisible ? View.VISIBLE : View.GONE);
         mTabHost.clearAllTabs();
@@ -344,13 +343,16 @@ public class DataUsageSummary extends Fragment {
         final String tabTag = mTabHost.getCurrentTabTag();
         final String currentTab = tabTag != null ? tabTag : TAB_MOBILE;
 
+        final Context context = getActivity();
+        final String subscriberId = getActiveSubscriberId(context);
+
         if (LOGD) Log.d(TAG, "updateBody() with currentTab=" + currentTab);
 
         if (TAB_WIFI.equals(currentTab)) {
             // wifi doesn't have any controls
             mDataEnabledView.setVisibility(View.GONE);
             mDisableAtLimitView.setVisibility(View.GONE);
-            mTemplate = TEMPLATE_WIFI;
+            mTemplate = new NetworkTemplate(MATCH_WIFI, null);
 
         } else {
             // make sure we show for non-wifi
@@ -361,17 +363,17 @@ public class DataUsageSummary extends Fragment {
         if (TAB_MOBILE.equals(currentTab)) {
             mDataEnabled.setTitle(R.string.data_usage_enable_mobile);
             mDisableAtLimit.setTitle(R.string.data_usage_disable_mobile_limit);
-            mTemplate = TEMPLATE_MOBILE_ALL;
+            mTemplate = new NetworkTemplate(MATCH_MOBILE_ALL, subscriberId);
 
         } else if (TAB_3G.equals(currentTab)) {
             mDataEnabled.setTitle(R.string.data_usage_enable_3g);
             mDisableAtLimit.setTitle(R.string.data_usage_disable_3g_limit);
-            mTemplate = TEMPLATE_MOBILE_3G_LOWER;
+            mTemplate = new NetworkTemplate(MATCH_MOBILE_3G_LOWER, subscriberId);
 
         } else if (TAB_4G.equals(currentTab)) {
             mDataEnabled.setTitle(R.string.data_usage_enable_4g);
             mDisableAtLimit.setTitle(R.string.data_usage_disable_4g_limit);
-            mTemplate = TEMPLATE_MOBILE_4G;
+            mTemplate = new NetworkTemplate(MATCH_MOBILE_4G, subscriberId);
 
         }
 
@@ -401,19 +403,19 @@ public class DataUsageSummary extends Fragment {
 
     private void setPolicyCycleDay(int cycleDay) {
         if (LOGD) Log.d(TAG, "setPolicyCycleDay()");
-        mPolicyModifier.setPolicyCycleDay(mTemplate, cycleDay);
+        mPolicyEditor.setPolicyCycleDay(mTemplate, cycleDay);
         updatePolicy(true);
     }
 
     private void setPolicyWarningBytes(long warningBytes) {
         if (LOGD) Log.d(TAG, "setPolicyWarningBytes()");
-        mPolicyModifier.setPolicyWarningBytes(mTemplate, warningBytes);
+        mPolicyEditor.setPolicyWarningBytes(mTemplate, warningBytes);
         updatePolicy(false);
     }
 
     private void setPolicyLimitBytes(long limitBytes) {
         if (LOGD) Log.d(TAG, "setPolicyLimitBytes()");
-        mPolicyModifier.setPolicyLimitBytes(mTemplate, limitBytes);
+        mPolicyEditor.setPolicyLimitBytes(mTemplate, limitBytes);
         updatePolicy(false);
     }
 
@@ -422,7 +424,7 @@ public class DataUsageSummary extends Fragment {
      * current {@link #mTemplate}.
      */
     private void updatePolicy(boolean refreshCycle) {
-        final NetworkPolicy policy = mPolicyModifier.getPolicy(mTemplate);
+        final NetworkPolicy policy = mPolicyEditor.getPolicy(mTemplate);
 
         // reflect policy limit in checkbox
         mDisableAtLimit.setChecked(policy != null && policy.limitBytes != LIMIT_DISABLED);
@@ -542,7 +544,8 @@ public class DataUsageSummary extends Fragment {
             final AppUsageItem app = (AppUsageItem) parent.getItemAtPosition(position);
 
             final Bundle args = new Bundle();
-            args.putInt(Intent.EXTRA_UID, app.uid);
+            args.putParcelable(DataUsageAppDetail.EXTRA_NETWORK_TEMPLATE, mTemplate);
+            args.putInt(DataUsageAppDetail.EXTRA_UID, app.uid);
 
             final PreferenceActivity activity = (PreferenceActivity) getActivity();
             activity.startPreferencePanel(DataUsageAppDetail.class.getName(), args,
@@ -595,7 +598,7 @@ public class DataUsageSummary extends Fragment {
             protected NetworkStats doInBackground(Void... params) {
                 try {
                     final long[] range = mChart.getInspectRange();
-                    return mStatsService.getSummaryForAllUid(range[0], range[1], mTemplate);
+                    return mStatsService.getSummaryForAllUid(mTemplate, range[0], range[1]);
                 } catch (RemoteException e) {
                     Log.w(TAG, "problem reading stats");
                 }
@@ -609,6 +612,16 @@ public class DataUsageSummary extends Fragment {
                 }
             }
         }.execute();
+    }
+
+    private boolean isMobilePolicySplit() {
+        final String subscriberId = getActiveSubscriberId(getActivity());
+        return mPolicyEditor.isMobilePolicySplit(subscriberId);
+    }
+
+    private void setMobilePolicySplit(boolean split) {
+        final String subscriberId = getActiveSubscriberId(getActivity());
+        mPolicyEditor.setMobilePolicySplit(subscriberId, split);
     }
 
     private static String getActiveSubscriberId(Context context) {
@@ -772,18 +785,18 @@ public class DataUsageSummary extends Fragment {
             final Bundle args = new Bundle();
 
             // TODO: customize default limits based on network template
-            switch (parent.mTemplate) {
-                case TEMPLATE_MOBILE_3G_LOWER: {
+            switch (parent.mTemplate.getMatchRule()) {
+                case MATCH_MOBILE_3G_LOWER: {
                     args.putInt(EXTRA_MESSAGE_ID, R.string.data_usage_limit_dialog_3g);
                     args.putLong(EXTRA_LIMIT_BYTES, 5 * GB_IN_BYTES);
                     break;
                 }
-                case TEMPLATE_MOBILE_4G: {
+                case MATCH_MOBILE_4G: {
                     args.putInt(EXTRA_MESSAGE_ID, R.string.data_usage_limit_dialog_4g);
                     args.putLong(EXTRA_LIMIT_BYTES, 5 * GB_IN_BYTES);
                     break;
                 }
-                case TEMPLATE_MOBILE_ALL: {
+                case MATCH_MOBILE_ALL: {
                     args.putInt(EXTRA_MESSAGE_ID, R.string.data_usage_limit_dialog_mobile);
                     args.putLong(EXTRA_LIMIT_BYTES, 5 * GB_IN_BYTES);
                     break;
@@ -827,7 +840,7 @@ public class DataUsageSummary extends Fragment {
         public static final String EXTRA_CYCLE_DAY = "cycleDay";
 
         public static void show(DataUsageSummary parent) {
-            final NetworkPolicy policy = parent.mPolicyModifier.getPolicy(parent.mTemplate);
+            final NetworkPolicy policy = parent.mPolicyEditor.getPolicy(parent.mTemplate);
             final Bundle args = new Bundle();
             args.putInt(CycleEditorFragment.EXTRA_CYCLE_DAY, policy.cycleDay);
 
@@ -882,16 +895,16 @@ public class DataUsageSummary extends Fragment {
         public static void show(DataUsageSummary parent) {
             final Bundle args = new Bundle();
 
-            switch (parent.mTemplate) {
-                case TEMPLATE_MOBILE_3G_LOWER: {
+            switch (parent.mTemplate.getMatchRule()) {
+                case MATCH_MOBILE_3G_LOWER: {
                     args.putInt(EXTRA_TITLE_ID, R.string.data_usage_disabled_dialog_3g_title);
                     break;
                 }
-                case TEMPLATE_MOBILE_4G: {
+                case MATCH_MOBILE_4G: {
                     args.putInt(EXTRA_TITLE_ID, R.string.data_usage_disabled_dialog_4g_title);
                     break;
                 }
-                case TEMPLATE_MOBILE_ALL: {
+                case MATCH_MOBILE_ALL: {
                     args.putInt(EXTRA_TITLE_ID, R.string.data_usage_disabled_dialog_mobile_title);
                     break;
                 }
@@ -937,13 +950,13 @@ public class DataUsageSummary extends Fragment {
     private static String computeTabFromIntent(Intent intent) {
         final int networkTemplate = intent.getIntExtra(EXTRA_NETWORK_TEMPLATE, TEMPLATE_INVALID);
         switch (networkTemplate) {
-            case TEMPLATE_MOBILE_3G_LOWER:
+            case MATCH_MOBILE_3G_LOWER:
                 return TAB_3G;
-            case TEMPLATE_MOBILE_4G:
+            case MATCH_MOBILE_4G:
                 return TAB_4G;
-            case TEMPLATE_MOBILE_ALL:
+            case MATCH_MOBILE_ALL:
                 return TAB_MOBILE;
-            case TEMPLATE_WIFI:
+            case MATCH_WIFI:
                 return TAB_WIFI;
             default:
                 return null;
