@@ -130,7 +130,7 @@ public class TextToSpeechSettings extends SettingsPreferenceFragment implements
         mDefaultRatePref = (ListPreference) findPreference(KEY_TTS_DEFAULT_RATE);
         mDefaultLocPref = (ListPreference) findPreference(KEY_TTS_DEFAULT_LANG);
 
-        mEngineSettings = (Preference) findPreference(KEY_TTS_ENGINE_SETTINGS);
+        mEngineSettings = findPreference(KEY_TTS_ENGINE_SETTINGS);
         mEngineSettings.setEnabled(false);
 
         mTts = new TextToSpeech(getActivity().getApplicationContext(), this);
@@ -181,12 +181,11 @@ public class TextToSpeechSettings extends SettingsPreferenceFragment implements
         mEngineSettings.setTitle(getResources().getString(R.string.tts_engine_settings_title,
                 engine.label));
 
-        if (engineHasSettings(engineName)) {
+        final Intent settingsIntent = mEnginesHelper.getSettingsIntent(engineName);
+        if (settingsIntent != null) {
             mEngineSettings.setOnPreferenceClickListener(new OnPreferenceClickListener() {
                 public boolean onPreferenceClick(Preference preference) {
-                    Intent i = new Intent();
-                    i.setClassName(engineName, engineName + ".EngineSettings");
-                    startActivity(i);
+                    startActivity(settingsIntent);
                     return true;
                 }
             });
@@ -195,16 +194,6 @@ public class TextToSpeechSettings extends SettingsPreferenceFragment implements
             mEngineSettings.setEnabled(false);
         }
 
-    }
-
-    private boolean engineHasSettings(String enginePackageName) {
-        PackageManager pm = getPackageManager();
-        Intent i = new Intent();
-        i.setClassName(enginePackageName, enginePackageName + ".EngineSettings");
-        if (pm.resolveActivity(i, PackageManager.MATCH_DEFAULT_ONLY) != null){
-            return true;
-        }
-        return false;
     }
 
     private void initDefaultSettings() {
