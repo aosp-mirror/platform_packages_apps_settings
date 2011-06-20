@@ -375,6 +375,18 @@
             </intent-filter>
         </activity>
 
+        <activity android:name=".inputmethod.InputMethodDialogActivity"
+                android:theme="@android:style/Theme.Holo"
+                android:clearTaskOnLaunch="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <action android:name="android.settings.SHOW_INPUT_METHOD_PICKER" />
+                <category android:name="android.intent.category.VOICE_LAUNCH" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="com.android.settings.SHORTCUT" />
+            </intent-filter>
+        </activity>
+
         <activity android:name="Settings$InputMethodConfigActivity"
                 android:theme="@android:style/Theme.Holo"
                 android:label="@string/configure_input_method"
