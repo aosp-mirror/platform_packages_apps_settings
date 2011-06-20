@@ -16,8 +16,6 @@
 
 package com.android.settings.wifi;
 
-import com.android.settings.R;
-
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
@@ -28,11 +26,9 @@ import android.net.wifi.WifiManager;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
-import android.preference.PreferenceCategory;
+import android.preference.PreferenceScreen;
 import android.text.TextUtils;
 import android.util.Log;
-import android.view.ContextMenu;
-import android.view.ContextMenu.ContextMenuInfo;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
@@ -43,6 +39,7 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.android.internal.util.AsyncChannel;
+import com.android.settings.R;
 
 import java.util.Collection;
 import java.util.EnumMap;
@@ -666,9 +663,10 @@ public class WifiSettingsForSetupWizardXL extends Activity implements OnClickLis
     /**
      * Called when the list of AccessPoints are modified and this Activity needs to refresh
      * the list.
+     * @param preferenceScreen
      */
     /* package */ void onAccessPointsUpdated(
-            PreferenceCategory holder, Collection<AccessPoint> accessPoints) {
+            PreferenceScreen preferenceScreen, Collection<AccessPoint> accessPoints) {
         // If we already show some of access points but the bar still shows "scanning" state, it
         // should be stopped.
         if (mProgressBar.isIndeterminate() && accessPoints.size() > 0) {
@@ -683,7 +681,7 @@ public class WifiSettingsForSetupWizardXL extends Activity implements OnClickLis
 
         for (AccessPoint accessPoint : accessPoints) {
             accessPoint.setLayoutResource(R.layout.custom_preference);
-            holder.addPreference(accessPoint);
+            preferenceScreen.addPreference(accessPoint);
         }
     }
 
@@ -786,11 +784,6 @@ public class WifiSettingsForSetupWizardXL extends Activity implements OnClickLis
     /* package */ void onSaveNetwork(WifiConfiguration config) {
         // We want to both save and connect a network. connectNetwork() does both.
         mWifiManager.connectNetwork(config);
-    }
-
-    @Override
-    public void onCreateContextMenu(ContextMenu menu, View view, ContextMenuInfo menuInfo) {
-        super.onCreateContextMenu(menu, view, menuInfo);
     }
 
     /**

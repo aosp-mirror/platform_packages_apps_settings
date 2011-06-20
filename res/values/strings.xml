@@ -24,6 +24,16 @@
     <!-- Device Info screen. Used for a status item's value when the proper value is not known -->
     <string name="device_info_default">Unknown</string>
 
+    <!-- Category headings in left-pane header menu --> <skip />
+    <!-- Settings main menu category heading. Wireless and networks (Wi-Fi, Bluetooth, data usage...). [CHAR LIMIT=40] -->
+    <string name="header_category_wireless_networks">WIRELESS &amp; NETWORKS</string>
+    <!-- Settings main menu category heading. Device (Sound, display, battery, applications...). [CHAR LIMIT=40] -->
+    <string name="header_category_device">DEVICE</string>
+    <!-- Settings main menu category heading. Personal (Accounts, security, language, backup...). [CHAR LIMIT=40] -->
+    <string name="header_category_personal">PERSONAL</string>
+    <!-- Settings main menu category heading. System (Updates, data, accessibility, about phone). [CHAR LIMIT=40] -->
+    <string name="header_category_system">SYSTEM</string>
+
     <!-- Phone info -->
     <!-- Phone Info screen. Button label to turn on the radio . Only shown in diagnostic screen, so precise translation is not needed. -->
     <string name="turn_on_radio">Turn on radio</string>
@@ -505,8 +515,8 @@
     <string name="airplane_mode_turning_on">Disabling wireless connections\u2026</string>
     <!-- Wireless controls settings screen, setting option summary text as airplane mode is being disabled (so it is re-enabling all the wireless conenctions) -->
     <string name="airplane_mode_turning_off">Enabling wireless connections\u2026</string>
-    <!-- Main Settings screen settings title for things like Wi-Fi, bluetooth, airplane mode.  This will take you to another screen with those settings. -->
-    <string name="radio_controls_title">Wireless &amp; networks</string>
+    <!-- Main Settings screen settings title for things like airplane mode, tethering, NFC, VPN.  This will take you to another screen with those settings. -->
+    <string name="radio_controls_title">More\u2026</string>
     <!-- Wireless Settings screen title for things like Wi-Fi, bluetooth, airplane mode. -->
     <string name="wireless_networks_settings_title">Wireless &amp; networks</string>
     <!-- Main Settings screen settings summary text for the "Wireless controls" setting -->
@@ -875,9 +885,9 @@
     <!-- Bluetooth settings check box summary for turning on bluetooth -->
     <string name="bluetooth_quick_toggle_summary">Turn on Bluetooth</string>
     <!--Used as title on second screen after selecting Bluetooth settings -->
-    <string name="bluetooth_settings">Bluetooth settings</string>
+    <string name="bluetooth_settings">Bluetooth</string>
     <!--Wireless controls screen, settings title for the item to take you to the bluetooth settings screen -->
-    <string name="bluetooth_settings_title">Bluetooth settings</string>
+    <string name="bluetooth_settings_title">Bluetooth</string>
     <!--Wireless controls screen, settings summary for the item tot ake you to the bluetooth settings screen -->
     <string name="bluetooth_settings_summary">Manage connections, set device name &amp; discoverability</string>
 
@@ -937,6 +947,15 @@
     <string name="bluetooth_device_context_disconnect_unpair">Disconnect &amp; unpair</string>
     <!-- Bluetooth settings.  Context menu item for a device.  Action will take the user to another screen where they can choose exactly which profiles to connect to. -->
     <string name="bluetooth_device_context_connect_advanced">Options\u2026</string>
+    <!-- Bluetooth settings.  Menu option to Bluetooth advanced settings [CHAR LIMIT=20]-->
+    <string name="bluetooth_menu_advanced">Advanced</string>
+    <!-- Bluetooth settings. Title of the advanced bluetooth settings screen [CHAR LIMIT=30]-->
+    <string name="bluetooth_advanced_titlebar">Advanced Bluetooth</string>
+    <!-- Bluetooth Advanced settings.  Used as a label under the shortcut icon that goes to Bluetooth advanced settings. [CHAR LIMIT=20]-->
+    <string name="bluetooth_advanced_settings_label">Advanced Bluetooth</string>
+    <!-- Bluetooth settings. Text displayed when Bluetooth is off and device list is empty [CHAR LIMIT=50]-->
+    <string name="bluetooth_empty_list_bluetooth_off">Turn on bluetooth to see available devices</string>
+
 
     <!-- Bluetooth settings.  The title of the screen to pick which profiles to connect to on the device.  For example, headphones may have both A2DP and headset, this allows the user to choose which one he wants to connect to. -->
     <string name="bluetooth_connect_specific_profiles_title">Connect to\u2026</string>
@@ -1032,16 +1051,18 @@
     <string name="wifi_quick_toggle_title">Wi-Fi</string>
     <!-- Used in the 1st-level settings screen as the turn-on summary -->
     <string name="wifi_quick_toggle_summary">Turn on Wi-Fi</string>
-    <!-- Used in the 1st-level settings screen to go to the 2nd-level settings screen -->
-    <string name="wifi_settings">Wi-Fi settings</string>
+    <!-- Used in the 1st-level settings screen to go to the 2nd-level settings screen  [CHAR LIMIT=20]-->
+    <string name="wifi_settings">Wi-Fi</string>
     <!-- Title of the Wi-fi settings screen -->
     <string name="wifi_settings_category">Wi-Fi settings</string>
+    <!-- Title of the Wi-fi settings entry in the left top level menu -->
+    <string name="wifi_settings_title">Wi-Fi</string>
     <!-- Summary text of the Wi-fi settings screen -->
     <string name="wifi_settings_summary">Set up &amp; manage wireless access points</string>
     <!-- Summary text when turning Wi-Fi or bluetooth on -->
-    <string name="wifi_starting">Turning on\u2026</string>
+    <string name="wifi_starting">Turning on Wi-Fi\u2026</string>
     <!-- Summary text when turning Wi-Fi or bluetooth off -->
-    <string name="wifi_stopping">Turning off\u2026</string>
+    <string name="wifi_stopping">Turning off Wi-Fi\u2026</string>
     <!-- Summary text when Wi-Fi or bluetooth has error -->
     <string name="wifi_error">Error</string>
     <!-- Toast message when Wi-Fi or bluetooth is disallowed in airplane mode -->
@@ -1060,10 +1081,8 @@
     <string name="wifi_setting_sleep_policy_summary_wifi_only">Specify when to disconnect from Wi-Fi</string>
     <!-- Generic error message when the sleep policy could not be set. -->
     <string name="wifi_setting_sleep_policy_error">There was a problem changing the setting</string>
-    <!-- Action message to manually add a wifi network -->
-    <string name="wifi_add_network">Add Wi-Fi network</string>
-    <!-- Summary for add wifi network setting [CHAR LIMIT=50]-->
-    <string name="wifi_add_network_summary">Configure a non-broadcast network</string>
+    <!-- Action bar text message to manually add a wifi network [CHAR LIMIT=20]-->
+    <string name="wifi_add_network">Add network</string>
     <!-- Header for the list of wifi networks-->
     <string name="wifi_access_points">Wi-Fi networks</string>
     <!-- Menu option to scan Wi-Fi networks -->
@@ -1076,6 +1095,8 @@
     <string name="wifi_menu_forget">Forget network</string>
     <!-- Menu option to modify a Wi-Fi network configuration -->
     <string name="wifi_menu_modify">Modify network</string>
+    <!-- Wi-Fi settings. text displayed when WiFi is off and network list is empty [CHAR LIMIT=50]-->
+    <string name="wifi_empty_list_wifi_off">Turn on wifi to see available networks</string>
 
     <!-- Dialog for Access Points --> <skip />
     <!-- Label for network setup [CHAR LIMIT=50] -->
@@ -1168,8 +1189,9 @@
     <!-- Wi-Fi settings screen, advanced, title of the item to show the Wi-Fi device's current IP address. -->
     <string name="wifi_advanced_ip_address_title">IP address</string>
 
-    <string name="wifi_ip_settings_titlebar">IP settings</string>
-    <!-- Menu ietm to save the IP settings -->
+    <!-- Wifi Advanced settings.  Used as a label under the shortcut icon that goes to Wifi advanced settings. [CHAR LIMIT=20]-->
+    <string name="wifi_advanced_settings_label">IP settings</string>
+    <!-- Menu item to save the IP settings -->
     <string name="wifi_ip_settings_menu_save">Save</string>
     <!-- Menu ietm to cancel the IP settings -->
     <string name="wifi_ip_settings_menu_cancel">Cancel</string>
@@ -1918,6 +1940,10 @@
     <!-- Tethering help button - calls up a web view with general tethering info -->
     <string name="tethering_help_button_text">Help</string>
 
+    <!-- Wireless controls, header for the general category (airplane mode, VPN, NFC, tethering...) [CHAR LIMIT=40]-->
+    <string name="wireless_category_general">General</string>
+    <!-- Wireless controls, header for the mobile networks category (4G/ network operator...) [CHAR LIMIT=40]-->
+    <string name="wireless_category_mobile_networks">Mobile networks</string>
     <!-- Wireless controls, item title to go into the network settings -->
     <string name="network_settings_title">Mobile networks</string>
     <!-- Wireless controls, the item summary for the user to go into the network settings -->

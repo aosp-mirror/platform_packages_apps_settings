@@ -18,6 +18,7 @@ package com.android.settings.wifi;
 
 import static android.net.wifi.WifiConfiguration.INVALID_NETWORK_ID;
 
+import android.app.ActionBar;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.BroadcastReceiver;
@@ -31,40 +32,35 @@ import android.net.NetworkInfo.DetailedState;
 import android.net.wifi.ScanResult;
 import android.net.wifi.SupplicantState;
 import android.net.wifi.WifiConfiguration;
+import android.net.wifi.WifiConfiguration.KeyMgmt;
 import android.net.wifi.WifiInfo;
 import android.net.wifi.WifiManager;
 import android.net.wifi.WpsResult;
-import android.net.wifi.WifiConfiguration.KeyMgmt;
-import android.net.wifi.WpsConfiguration;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
-import android.preference.CheckBoxPreference;
 import android.preference.Preference;
-import android.preference.ListPreference;
 import android.preference.PreferenceActivity;
 import android.preference.PreferenceScreen;
-import android.provider.Settings.Secure;
-import android.provider.Settings;
 import android.security.Credentials;
 import android.security.KeyStore;
 import android.util.Log;
 import android.view.ContextMenu;
+import android.view.ContextMenu.ContextMenuInfo;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.ContextMenu.ContextMenuInfo;
-import android.widget.Toast;
 import android.widget.AdapterView.AdapterContextMenuInfo;
+import android.widget.Switch;
+import android.widget.Toast;
 
 import com.android.internal.util.AsyncChannel;
-import com.android.settings.ProgressCategoryBase;
 import com.android.settings.R;
 import com.android.settings.SettingsPreferenceFragment;
-import com.android.settings.Utils;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -83,14 +79,14 @@ import java.util.concurrent.atomic.AtomicBoolean;
  * other decorations specific to that screen.
  */
 public class WifiSettings extends SettingsPreferenceFragment
-        implements DialogInterface.OnClickListener, Preference.OnPreferenceChangeListener  {
+        implements DialogInterface.OnClickListener  {
     private static final String TAG = "WifiSettings";
     private static final int MENU_ID_SCAN = Menu.FIRST;
-    private static final int MENU_ID_ADVANCED = Menu.FIRST + 1;
-    private static final int MENU_ID_CONNECT = Menu.FIRST + 2;
-    private static final int MENU_ID_FORGET = Menu.FIRST + 3;
-    private static final int MENU_ID_MODIFY = Menu.FIRST + 4;
-    private static final String KEY_SLEEP_POLICY = "sleep_policy";
+    private static final int MENU_ID_ADD_NETWORK = Menu.FIRST + 1;
+    private static final int MENU_ID_ADVANCED = Menu.FIRST + 2;
+    private static final int MENU_ID_CONNECT = Menu.FIRST + 3;
+    private static final int MENU_ID_FORGET = Menu.FIRST + 4;
+    private static final int MENU_ID_MODIFY = Menu.FIRST + 5;
 
     private final IntentFilter mFilter;
     private final BroadcastReceiver mReceiver;
@@ -98,12 +94,8 @@ public class WifiSettings extends SettingsPreferenceFragment
 
     private WifiManager mWifiManager;
     private WifiEnabler mWifiEnabler;
-    private CheckBoxPreference mNotifyOpenNetworks;
-    private ProgressCategoryBase mAccessPoints;
-    private Preference mAddNetwork;
     // An access point being editted is stored here.
     private AccessPoint mSelectedAccessPoint;
-    private boolean mEdit;
 
     private DetailedState mLastState;
     private WifiInfo mLastInfo;
@@ -180,60 +172,48 @@ public class WifiSettings extends SettingsPreferenceFragment
         // state, start it off in the right state
         mEnableNextOnConnection = intent.getBooleanExtra(EXTRA_ENABLE_NEXT_ON_CONNECT, false);
 
-        // Avoid re-adding on returning from an overlapping activity/fragment.
-        if (getPreferenceScreen() == null || getPreferenceScreen().getPreferenceCount() < 2) {
-            if (mEnableNextOnConnection) {
-                if (hasNextButton()) {
-                    final ConnectivityManager connectivity = (ConnectivityManager)
-                            getActivity().getSystemService(Context.CONNECTIVITY_SERVICE);
-                    if (connectivity != null) {
-                        NetworkInfo info = connectivity.getNetworkInfo(
-                                ConnectivityManager.TYPE_WIFI);
-                        changeNextButtonState(info.isConnected());
-                    }
+        if (mEnableNextOnConnection) {
+            if (hasNextButton()) {
+                final ConnectivityManager connectivity = (ConnectivityManager)
+                        getActivity().getSystemService(Context.CONNECTIVITY_SERVICE);
+                if (connectivity != null) {
+                    NetworkInfo info = connectivity.getNetworkInfo(
+                            ConnectivityManager.TYPE_WIFI);
+                    changeNextButtonState(info.isConnected());
                 }
             }
-
-            if (mInXlSetupWizard) {
-                addPreferencesFromResource(R.xml.wifi_access_points_for_wifi_setup_xl);
-            } else if (intent.getBooleanExtra("only_access_points", false)) {
-                addPreferencesFromResource(R.xml.wifi_access_points);
-            } else {
-                addPreferencesFromResource(R.xml.wifi_settings);
-                mWifiEnabler = new WifiEnabler(activity,
-                        (CheckBoxPreference) findPreference("enable_wifi"));
-                mNotifyOpenNetworks =
-                        (CheckBoxPreference) findPreference("notify_open_networks");
-                mNotifyOpenNetworks.setChecked(Secure.getInt(getContentResolver(),
-                        Secure.WIFI_NETWORKS_AVAILABLE_NOTIFICATION_ON, 0) == 1);
-            }
-            // This may be either ProgressCategory or AccessPointCategoryForXL.
-            final ProgressCategoryBase preference =
-                    (ProgressCategoryBase) findPreference("access_points");
-            mAccessPoints = preference;
-            mAccessPoints.setOrderingAsAdded(false);
-            mAddNetwork = findPreference("add_network");
-
-            ListPreference pref = (ListPreference) findPreference(KEY_SLEEP_POLICY);
-            if (pref != null) {
-                if (Utils.isWifiOnly()) {
-                    pref.setEntries(R.array.wifi_sleep_policy_entries_wifi_only);
-                    pref.setSummary(R.string.wifi_setting_sleep_policy_summary_wifi_only);
-                }
-                pref.setOnPreferenceChangeListener(this);
-                int value = Settings.System.getInt(getContentResolver(),
-                        Settings.System.WIFI_SLEEP_POLICY,
-                        Settings.System.WIFI_SLEEP_POLICY_NEVER);
-                pref.setValue(String.valueOf(value));
-            }
-
-            registerForContextMenu(getListView());
-            setHasOptionsMenu(true);
         }
+
+        if (mInXlSetupWizard) {
+            addPreferencesFromResource(R.xml.wifi_access_points_for_wifi_setup_xl);
+        } else {
+            addPreferencesFromResource(R.xml.wifi_settings);
+
+            Switch actionBarSwitch = new Switch(activity);
+
+            if (activity instanceof PreferenceActivity) {
+                PreferenceActivity preferenceActivity = (PreferenceActivity) activity;
+                if (preferenceActivity.onIsHidingHeaders() || !preferenceActivity.onIsMultiPane()) {
+                    final int padding = activity.getResources().getDimensionPixelSize(
+                            R.dimen.action_bar_switch_padding);
+                    actionBarSwitch.setPadding(0, 0, padding, 0);
+                    activity.getActionBar().setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM,
+                            ActionBar.DISPLAY_SHOW_CUSTOM);
+                    activity.getActionBar().setCustomView(actionBarSwitch, new ActionBar.LayoutParams(
+                            ActionBar.LayoutParams.WRAP_CONTENT,
+                            ActionBar.LayoutParams.WRAP_CONTENT,
+                            Gravity.CENTER_VERTICAL | Gravity.RIGHT));
+                }
+            }
+
+            mWifiEnabler = new WifiEnabler(activity, actionBarSwitch);
+        }
+
+        registerForContextMenu(getListView());
+        setHasOptionsMenu(true);
 
         // After confirming PreferenceScreen is available, we call super.
         super.onActivityCreated(savedInstanceState);
-
     }
 
     @Override
@@ -249,6 +229,7 @@ public class WifiSettings extends SettingsPreferenceFragment
             mWifiManager.connectNetwork(mKeyStoreNetworkId);
         }
         mKeyStoreNetworkId = INVALID_NETWORK_ID;
+
         updateAccessPoints();
     }
 
@@ -270,8 +251,11 @@ public class WifiSettings extends SettingsPreferenceFragment
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         // We don't want menus in Setup Wizard XL.
         if (!mInXlSetupWizard) {
+            final boolean wifiIsEnabled = mWifiManager.isWifiEnabled();
             menu.add(Menu.NONE, MENU_ID_SCAN, 0, R.string.wifi_menu_scan)
-                    .setIcon(R.drawable.ic_menu_scan_network);
+                    .setIcon(R.drawable.ic_menu_scan_network).setEnabled(wifiIsEnabled);
+            menu.add(Menu.NONE, MENU_ID_ADD_NETWORK, 0, R.string.wifi_add_network)
+                    .setIcon(android.R.drawable.ic_menu_add).setEnabled(wifiIsEnabled);
             menu.add(Menu.NONE, MENU_ID_ADVANCED, 0, R.string.wifi_menu_advanced)
                     .setIcon(android.R.drawable.ic_menu_manage);
         }
@@ -284,6 +268,11 @@ public class WifiSettings extends SettingsPreferenceFragment
             case MENU_ID_SCAN:
                 if (mWifiManager.isWifiEnabled()) {
                     mScanner.forceScan();
+                }
+                return true;
+            case MENU_ID_ADD_NETWORK:
+                if (mWifiManager.isWifiEnabled()) {
+                    onAddNetworkPressed();
                 }
                 return true;
             case MENU_ID_ADVANCED:
@@ -363,43 +352,17 @@ public class WifiSettings extends SettingsPreferenceFragment
         if (preference instanceof AccessPoint) {
             mSelectedAccessPoint = (AccessPoint) preference;
             showConfigUi(mSelectedAccessPoint, false);
-        } else if (preference == mAddNetwork) {
-            onAddNetworkPressed();
-        } else if (preference == mNotifyOpenNetworks) {
-            Secure.putInt(getContentResolver(),
-                    Secure.WIFI_NETWORKS_AVAILABLE_NOTIFICATION_ON,
-                    mNotifyOpenNetworks.isChecked() ? 1 : 0);
         } else {
             return super.onPreferenceTreeClick(screen, preference);
         }
         return true;
     }
 
-    public boolean onPreferenceChange(Preference preference, Object newValue) {
-        String key = preference.getKey();
-        if (key == null) return true;
-
-        if (key.equals(KEY_SLEEP_POLICY)) {
-            try {
-                Settings.System.putInt(getContentResolver(),
-                        Settings.System.WIFI_SLEEP_POLICY, Integer.parseInt(((String) newValue)));
-            } catch (NumberFormatException e) {
-                Toast.makeText(getActivity(), R.string.wifi_setting_sleep_policy_error,
-                        Toast.LENGTH_SHORT).show();
-                return false;
-            }
-        }
-
-        return true;
-    }
-
-
     /**
      * Shows an appropriate Wifi configuration component.
      * Called when a user clicks "Add network" preference or one of available networks is selected.
      */
     private void showConfigUi(AccessPoint accessPoint, boolean edit) {
-        mEdit = edit;
         if (mInXlSetupWizard) {
             ((WifiSettingsForSetupWizardXL)getActivity()).showConfigUi(accessPoint, edit);
         } else {
@@ -430,18 +393,38 @@ public class WifiSettings extends SettingsPreferenceFragment
      * the strength of network and the security for it.
      */
     private void updateAccessPoints() {
-        mAccessPoints.removeAll();
+        final PreferenceScreen preferenceScreen = getPreferenceScreen();
+        preferenceScreen.removeAll();
+        final int wifiState = mWifiManager.getWifiState();
 
-        // AccessPoints are automatically sorted with TreeSet.
-        final Collection<AccessPoint> accessPoints = constructAccessPoints();
-        if (mInXlSetupWizard) {
-            ((WifiSettingsForSetupWizardXL)getActivity()).onAccessPointsUpdated(
-                    mAccessPoints, accessPoints);
-        } else {
-            for (AccessPoint accessPoint : accessPoints) {
-                mAccessPoints.addPreference(accessPoint);
-            }
+        switch (wifiState) {
+            case WifiManager.WIFI_STATE_ENABLED:
+                // AccessPoints are automatically sorted with TreeSet.
+                final Collection<AccessPoint> accessPoints = constructAccessPoints();
+                if (mInXlSetupWizard) {
+                    ((WifiSettingsForSetupWizardXL)getActivity()).onAccessPointsUpdated(
+                            getPreferenceScreen(), accessPoints);
+                } else {
+                    for (AccessPoint accessPoint : accessPoints) {
+                        getPreferenceScreen().addPreference(accessPoint);
+                    }
+                }
+                break;
+
+            case WifiManager.WIFI_STATE_DISABLING:
+                addMessagePreference(R.string.wifi_stopping);
+                break;
+
+            case WifiManager.WIFI_STATE_DISABLED:
+                addMessagePreference(R.string.wifi_empty_list_wifi_off);
+                break;
         }
+    }
+
+    private void addMessagePreference(int messageId) {
+        Preference emptyListPreference = new Preference(getActivity());
+        emptyListPreference.setTitle(messageId);
+        getPreferenceScreen().addPreference(emptyListPreference);
     }
 
     private Collection<AccessPoint> constructAccessPoints() {
@@ -542,9 +525,9 @@ public class WifiSettings extends SettingsPreferenceFragment
             mLastState = state;
         }
 
-        for (int i = mAccessPoints.getPreferenceCount() - 1; i >= 0; --i) {
+        for (int i = getPreferenceScreen().getPreferenceCount() - 1; i >= 0; --i) {
             // Maybe there's a WifiConfigPreference
-            Preference preference = mAccessPoints.getPreference(i);
+            Preference preference = getPreferenceScreen().getPreference(i);
             if (preference instanceof AccessPoint) {
                 final AccessPoint accessPoint = (AccessPoint) preference;
                 accessPoint.update(mLastInfo, mLastState);
@@ -557,12 +540,25 @@ public class WifiSettings extends SettingsPreferenceFragment
     }
 
     private void updateWifiState(int state) {
-        if (state == WifiManager.WIFI_STATE_ENABLED) {
-            mScanner.resume();
-        } else {
-            mScanner.pause();
-            mAccessPoints.removeAll();
+        getActivity().invalidateOptionsMenu();
+
+        switch (state) {
+            case WifiManager.WIFI_STATE_ENABLED:
+                mScanner.resume();
+                return; // not break, to avoid pause
+
+            case WifiManager.WIFI_STATE_ENABLING:
+                getPreferenceScreen().removeAll();
+                addMessagePreference(R.string.wifi_starting);
+                break;
+
+            case WifiManager.WIFI_STATE_DISABLED:
+                getPreferenceScreen().removeAll();
+                addMessagePreference(R.string.wifi_empty_list_wifi_off);
+                break;
         }
+
+        mScanner.pause();
     }
 
     private class Scanner extends Handler {
@@ -580,7 +576,6 @@ public class WifiSettings extends SettingsPreferenceFragment
 
         void pause() {
             mRetry = 0;
-            mAccessPoints.setProgress(false);
             removeMessages(0);
         }
 
@@ -594,7 +589,6 @@ public class WifiSettings extends SettingsPreferenceFragment
                         Toast.LENGTH_LONG).show();
                 return;
             }
-            mAccessPoints.setProgress(mRetry != 0);
             // Combo scans can take 5-6s to complete. Increase interval to 10s.
             sendEmptyMessageDelayed(0, 10000);
         }
@@ -636,6 +630,7 @@ public class WifiSettings extends SettingsPreferenceFragment
                             }
                             break;
                     }
+                    break;
                 //TODO: more connectivity feedback
                 default:
                     //Ignore
@@ -740,7 +735,7 @@ public class WifiSettings extends SettingsPreferenceFragment
             mScanner.resume();
         }
 
-        mAccessPoints.removeAll();
+        getPreferenceScreen().removeAll();
     }
 
     /**
@@ -753,8 +748,9 @@ public class WifiSettings extends SettingsPreferenceFragment
     }
 
     /* package */ int getAccessPointsCount() {
-        if (mAccessPoints != null) {
-            return mAccessPoints.getPreferenceCount();
+        final boolean wifiIsEnabled = mWifiManager.isWifiEnabled();
+        if (wifiIsEnabled) {
+            return getPreferenceScreen().getPreferenceCount();
         } else {
             return 0;
         }

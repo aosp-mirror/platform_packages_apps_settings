@@ -149,8 +149,8 @@
                   android:windowSoftInputMode="adjustResize"
                   android:exported="true" />
 
-        <activity-alias android:name=".wifi.AdvancedSettings"
-                android:label="@string/wifi_ip_settings_titlebar"
+        <activity-alias android:name=".wifi.AdvancedWifiSettings"
+                android:label="@string/wifi_advanced_settings_label"
                 android:targetActivity="Settings"
                 >
             <intent-filter>
@@ -238,6 +238,18 @@
             <meta-data android:name="com.android.settings.PARENT_FRAGMENT_CLASS"
                 android:value="com.android.settings.Settings$WirelessSettingsActivity" />
         </activity>
+
+        <activity-alias android:name=".bluetooth.AdvancedBluetoothSettings"
+                android:label="@string/bluetooth_advanced_settings_label"
+                android:targetActivity="Settings"
+                >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <action android:name="android.settings.BLUETOOTH_ADVANCED_SETTINGS" />
+                <category android:name="android.intent.category.VOICE_LAUNCH" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity-alias>
 
         <activity android:name=".bluetooth.DevicePickerActivity"
                 android:theme="@android:style/Theme.Holo.DialogWhenLarge"

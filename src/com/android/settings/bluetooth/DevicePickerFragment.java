@@ -89,7 +89,7 @@ public final class DevicePickerFragment extends DeviceListPreferenceFragment {
         super.onBluetoothStateChanged(bluetoothState);
 
         if (bluetoothState == BluetoothAdapter.STATE_ON) {
-                mLocalAdapter.startScanning(false);
+            mLocalAdapter.startScanning(false);
         }
     }
 

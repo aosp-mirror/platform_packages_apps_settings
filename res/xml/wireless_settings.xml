@@ -17,6 +17,9 @@
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
         android:title="@string/wireless_networks_settings_title">
 
+    <PreferenceCategory
+        android:title="@string/wireless_category_general" />
+
     <CheckBoxPreference
         android:key="toggle_airplane"
         android:title="@string/airplane_mode"
@@ -24,31 +27,17 @@
         android:persistent="false"
         android:disableDependentsState="true" />
 
-    <!-- Programmatically will have dynamic summary, but we provide the fallback summary. -->
     <CheckBoxPreference
-        android:key="toggle_wifi"
-        android:title="@string/wifi_quick_toggle_title"
-        android:summary="@string/wifi_quick_toggle_summary"
+        android:key="toggle_nfc"
+        android:title="@string/nfc_quick_toggle_title"
+        android:summary="@string/nfc_quick_toggle_summary"
         android:persistent="false" />
 
     <PreferenceScreen
-        android:fragment="com.android.settings.wifi.WifiSettings"
-        android:key="wifi_settings"
-        android:title="@string/wifi_settings"
-        android:summary="@string/wifi_settings_summary" >
-    </PreferenceScreen>
-
-    <CheckBoxPreference
-        android:key="toggle_bluetooth"
-        android:title="@string/bluetooth_quick_toggle_title"
-        android:summary="@string/bluetooth_quick_toggle_summary"
-        android:persistent="false" />
-
-    <PreferenceScreen
-        android:fragment="com.android.settings.bluetooth.BluetoothSettings"
-        android:key="bt_settings"
-        android:title="@string/bluetooth_settings_title"
-        android:summary="@string/bluetooth_settings_summary">
+        android:fragment="com.android.settings.vpn.VpnSettings"
+        android:key="vpn_settings"
+        android:title="@string/vpn_settings_title"
+        android:summary="@string/vpn_settings_summary" >
     </PreferenceScreen>
 
     <PreferenceScreen
@@ -58,18 +47,8 @@
         android:summary="@string/tether_settings_summary_all">
     </PreferenceScreen>
 
-    <PreferenceScreen
-        android:fragment="com.android.settings.vpn.VpnSettings"
-        android:key="vpn_settings"
-        android:title="@string/vpn_settings_title"
-        android:summary="@string/vpn_settings_summary" >
-    </PreferenceScreen>
-
-    <CheckBoxPreference
-        android:key="toggle_nfc"
-        android:title="@string/nfc_quick_toggle_title"
-        android:summary="@string/nfc_quick_toggle_summary"
-        android:persistent="false" />
+    <PreferenceCategory
+        android:title="@string/wireless_category_mobile_networks" />
 
     <PreferenceScreen
         android:key="mobile_network_settings"
@@ -88,10 +67,5 @@
         android:title="@string/proxy_settings_title"
         android:summary="@string/proxy_settings_summary" >
     </PreferenceScreen>
-
-    <PreferenceScreen
-        android:fragment="com.android.settings.DataUsageSummary"
-        android:key="data_usage_summary"
-        android:title="@string/data_usage_summary_title" />
 
 </PreferenceScreen>

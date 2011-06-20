@@ -50,7 +50,7 @@ public final class DeviceProfilesSettings extends SettingsPreferenceFragment
     private static final String KEY_RENAME_DEVICE = "rename_device";
     private static final String KEY_PROFILE_CONTAINER = "profile_container";
     private static final String KEY_UNPAIR = "unpair";
-    private static final String KEY_ALLOW_INCOMING = "allow_incoming";
+    //private static final String KEY_ALLOW_INCOMING = "allow_incoming";
 
     public static final String EXTRA_DEVICE = "device";
 
@@ -355,6 +355,7 @@ public final class DeviceProfilesSettings extends SettingsPreferenceFragment
         mCachedDevice.unpair();
     }
 
+    /*
     private void setIncomingFileTransfersAllowed(boolean allow) {
         // TODO: make an IPC call into BluetoothOpp to update
         Log.d(TAG, "Set allow incoming = " + allow);
@@ -364,6 +365,7 @@ public final class DeviceProfilesSettings extends SettingsPreferenceFragment
         // TODO: get this value from BluetoothOpp ???
         return true;
     }
+    */
 
     private boolean getAutoConnect(LocalBluetoothProfile prof) {
         return prof.isPreferred(mCachedDevice.getDevice());

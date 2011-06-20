@@ -16,18 +16,33 @@
 
 package com.android.settings;
 
+import android.bluetooth.BluetoothAdapter;
 import android.content.ComponentName;
+import android.content.Context;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.PackageManager.NameNotFoundException;
 import android.os.Bundle;
+import android.os.ServiceManager;
 import android.preference.PreferenceActivity;
+import android.text.TextUtils;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ImageView;
+import android.widget.ListAdapter;
+import android.widget.Switch;
+import android.widget.TextView;
 
+import com.android.settings.bluetooth.BluetoothEnabler;
+import com.android.settings.wifi.WifiEnabler;
+
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
@@ -36,10 +51,11 @@ import java.util.List;
  */
 public class Settings extends PreferenceActivity implements ButtonBarHandler {
 
+    private static final String LOG_TAG = "Settings";
     private static final String META_DATA_KEY_HEADER_ID =
-            "com.android.settings.TOP_LEVEL_HEADER_ID";
+        "com.android.settings.TOP_LEVEL_HEADER_ID";
     private static final String META_DATA_KEY_FRAGMENT_CLASS =
-            "com.android.settings.FRAGMENT_CLASS";
+        "com.android.settings.FRAGMENT_CLASS";
     private static final String META_DATA_KEY_PARENT_TITLE =
         "com.android.settings.PARENT_FRAGMENT_TITLE";
     private static final String META_DATA_KEY_PARENT_FRAGMENT_CLASS =
@@ -58,6 +74,7 @@ public class Settings extends PreferenceActivity implements ButtonBarHandler {
     // TODO: Update Call Settings based on airplane mode state.
 
     protected HashMap<Integer, Integer> mHeaderIndexMap = new HashMap<Integer, Integer>();
+    private List<Header> mHeaders;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -107,6 +124,26 @@ public class Settings extends PreferenceActivity implements ButtonBarHandler {
         }
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+
+        ListAdapter listAdapter = getListAdapter();
+        if (listAdapter instanceof HeaderAdapter) {
+            ((HeaderAdapter) listAdapter).resume();
+        }
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+
+        ListAdapter listAdapter = getListAdapter();
+        if (listAdapter instanceof HeaderAdapter) {
+            ((HeaderAdapter) listAdapter).pause();
+        }
+    }
+
     private void switchToHeaderLocal(Header header) {
         mInLocalHeaderSwitch = true;
         switchToHeader(header);
@@ -148,7 +185,7 @@ public class Settings extends PreferenceActivity implements ButtonBarHandler {
                 mParentHeader.title = parentInfo.metaData.getString(META_DATA_KEY_PARENT_TITLE);
             }
         } catch (NameNotFoundException nnfe) {
-            Log.w("Settings", "Could not find parent activity : " + className);
+            Log.w(LOG_TAG, "Could not find parent activity : " + className);
         }
     }
 
@@ -174,21 +211,22 @@ public class Settings extends PreferenceActivity implements ButtonBarHandler {
 
     @Override
     public Intent getIntent() {
-        String startingFragment = getStartingFragmentClass(super.getIntent());
+        Intent superIntent = super.getIntent();
+        String startingFragment = getStartingFragmentClass(superIntent);
         if (startingFragment != null && !onIsMultiPane()) {
-            Intent modIntent = new Intent(super.getIntent());
+            Intent modIntent = new Intent(superIntent);
             modIntent.putExtra(EXTRA_SHOW_FRAGMENT, startingFragment);
-            Bundle args = super.getIntent().getExtras();
+            Bundle args = superIntent.getExtras();
             if (args != null) {
                 args = new Bundle(args);
             } else {
                 args = new Bundle();
             }
-            args.putParcelable("intent", super.getIntent());
-            modIntent.putExtra(EXTRA_SHOW_FRAGMENT_ARGUMENTS, super.getIntent().getExtras());
+            args.putParcelable("intent", superIntent);
+            modIntent.putExtra(EXTRA_SHOW_FRAGMENT_ARGUMENTS, superIntent.getExtras());
             return modIntent;
         }
-        return super.getIntent();
+        return superIntent;
     }
 
     /**
@@ -204,7 +242,7 @@ public class Settings extends PreferenceActivity implements ButtonBarHandler {
         if ("com.android.settings.ManageApplications".equals(intentClass)
                 || "com.android.settings.RunningServices".equals(intentClass)
                 || "com.android.settings.applications.StorageUse".equals(intentClass)) {
-            // Old name of manage apps.
+            // Old names of manage apps.
             intentClass = com.android.settings.applications.ManageApplications.class.getName();
         }
 
@@ -226,7 +264,18 @@ public class Settings extends PreferenceActivity implements ButtonBarHandler {
             mCurrentHeader = header;
             return header;
         }
-        return super.onGetInitialHeader();
+
+        // Find first non-category header
+        int position = 0;
+        while (position < mHeaders.size()) {
+            Header header = mHeaders.get(position);
+            if (HeaderAdapter.getHeaderType(header) != HeaderAdapter.HEADER_TYPE_CATEGORY)
+                return header;
+            position++;
+        }
+
+        Log.e(LOG_TAG, "Unable to find a non-category header");
+        return null;
     }
 
     @Override
@@ -242,10 +291,12 @@ public class Settings extends PreferenceActivity implements ButtonBarHandler {
      * Populate the activity with the top-level headers.
      */
     @Override
-    public void onBuildHeaders(List<Header> target) {
-        loadHeadersFromResource(R.xml.settings_headers, target);
+    public void onBuildHeaders(List<Header> headers) {
+        loadHeadersFromResource(R.xml.settings_headers, headers);
 
-        updateHeaderList(target);
+        updateHeaderList(headers);
+
+        mHeaders = headers;
     }
 
     private void updateHeaderList(List<Header> target) {
@@ -262,7 +313,13 @@ public class Settings extends PreferenceActivity implements ButtonBarHandler {
             } else if (id == R.id.call_settings) {
                 if (!Utils.isVoiceCapable(this))
                     target.remove(header);
+            } else if (id == R.id.bluetooth_settings) {
+                // Remove Bluetooth Settings if Bluetooth service is not available.
+                if (ServiceManager.getService(BluetoothAdapter.BLUETOOTH_SERVICE) == null) {
+                    target.remove(header);
+                }
             }
+
             // Increment if the current one wasn't removed by the Utils code.
             if (target.get(i) == header) {
                 // Hold on to the first header, when we need to reset to the top-level
@@ -296,6 +353,7 @@ public class Settings extends PreferenceActivity implements ButtonBarHandler {
                 }
             }
         } catch (NameNotFoundException nnfe) {
+            // No recovery
         }
     }
 
@@ -309,39 +367,197 @@ public class Settings extends PreferenceActivity implements ButtonBarHandler {
         return super.getNextButton();
     }
 
+    private static class HeaderAdapter extends ArrayAdapter<Header> {
+        static final int HEADER_TYPE_CATEGORY = 0;
+        static final int HEADER_TYPE_NORMAL = 1;
+        static final int HEADER_TYPE_SWITCH = 2;
+        private static final int HEADER_TYPE_COUNT = HEADER_TYPE_SWITCH + 1;
+
+        private final WifiEnabler mWifiEnabler;
+        private final BluetoothEnabler mBluetoothEnabler;
+
+        private static class HeaderViewHolder {
+            ImageView icon;
+            TextView title;
+            TextView summary;
+            Switch switch_;
+        }
+
+        private LayoutInflater mInflater;
+
+        static int getHeaderType(Header header) {
+            if (header.fragment == null && header.intent == null) {
+                return HEADER_TYPE_CATEGORY;
+            } else if (header.id == R.id.wifi_settings || header.id == R.id.bluetooth_settings) {
+                return HEADER_TYPE_SWITCH;
+            } else {
+                return HEADER_TYPE_NORMAL;
+            }
+        }
+
+        @Override
+        public int getItemViewType(int position) {
+            Header header = getItem(position);
+            return getHeaderType(header);
+        }
+
+        @Override
+        public boolean areAllItemsEnabled() {
+            return false; // because of categories
+        }
+
+        @Override
+        public boolean isEnabled(int position) {
+            return getItemViewType(position) != HEADER_TYPE_CATEGORY;
+        }
+
+        @Override
+        public int getViewTypeCount() {
+            return HEADER_TYPE_COUNT;
+        }
+
+        @Override
+        public boolean hasStableIds() {
+            return true;
+        }
+
+        public HeaderAdapter(Context context, List<Header> objects) {
+            super(context, 0, objects);
+            mInflater = (LayoutInflater)context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+            
+            // These Switches are provided as placeholder until the adapter replaces these with actual
+            // Switches inflated from their layouts. Must be done before adapter is set in super
+            mWifiEnabler = new WifiEnabler(context, new Switch(context));
+            mBluetoothEnabler = new BluetoothEnabler(context, new Switch(context));
+        }
+
+        @Override
+        public View getView(int position, View convertView, ViewGroup parent) {
+            HeaderViewHolder holder;
+            Header header = getItem(position);
+            int headerType = getHeaderType(header);
+            View view = null;
+
+            if (convertView == null) {
+                holder = new HeaderViewHolder();
+                switch (headerType) {
+                    case HEADER_TYPE_CATEGORY:
+                        view = new TextView(getContext(), null, android.R.attr.listSeparatorTextViewStyle);
+                        holder.title = (TextView) view;
+                        break;
+
+                    case HEADER_TYPE_SWITCH:
+                        view = mInflater.inflate(R.layout.preference_header_switch_item, parent, false);
+                        holder.icon = (ImageView) view.findViewById(R.id.icon);
+                        holder.title = (TextView) view.findViewById(com.android.internal.R.id.title);
+                        holder.summary = (TextView) view.findViewById(com.android.internal.R.id.summary);
+                        holder.switch_ = (Switch) view.findViewById(R.id.switchWidget);
+                        break;
+
+                    case HEADER_TYPE_NORMAL:
+                        view = mInflater.inflate(com.android.internal.R.layout.preference_header_item, parent, false);
+                        holder.icon = (ImageView) view.findViewById(com.android.internal.R.id.icon);
+                        holder.title = (TextView) view.findViewById(com.android.internal.R.id.title);
+                        holder.summary = (TextView) view.findViewById(com.android.internal.R.id.summary);
+                        break;
+                }
+                view.setTag(holder);
+            } else {
+                view = convertView;
+                holder = (HeaderViewHolder) view.getTag();
+            }
+
+            // All view fields must be updated every time, because the view may be recycled
+            switch (headerType) {
+                case HEADER_TYPE_CATEGORY:
+                    holder.title.setText(header.getTitle(getContext().getResources()));
+                    break;
+
+                case HEADER_TYPE_SWITCH:
+                    // Would need a different treatment if the main menu had more switches
+                    if (header.id == R.id.wifi_settings) {
+                        mWifiEnabler.setSwitch(holder.switch_);
+                    } else {
+                        mBluetoothEnabler.setSwitch(holder.switch_);
+                    }
+                    // No break, fall through on purpose to update common fields
+
+                    //$FALL-THROUGH$
+                case HEADER_TYPE_NORMAL:
+                    holder.icon.setImageResource(header.iconRes);
+                    holder.title.setText(header.getTitle(getContext().getResources()));
+                    CharSequence summary = header.getSummary(getContext().getResources());
+                    if (!TextUtils.isEmpty(summary)) {
+                        holder.summary.setVisibility(View.VISIBLE);
+                        holder.summary.setText(summary);
+                    } else {
+                        holder.summary.setVisibility(View.GONE);
+                    }
+                    break;
+            }
+
+            return view;
+        }
+
+        public void resume() {
+            mWifiEnabler.resume();
+            mBluetoothEnabler.resume();
+        }
+        
+        public void pause() {
+            mWifiEnabler.pause();
+            mBluetoothEnabler.pause();
+        }
+    }
+
+    @Override
+    public void setListAdapter(ListAdapter adapter) {
+        if (mHeaders == null) {
+            mHeaders = new ArrayList<Header>();
+            // When the saved state provides the list of headers, onBuildHeaders is not called
+            // Copy the list of Headers from the adapter, preserving their order
+            for (int i = 0; i < adapter.getCount(); i++) {
+                mHeaders.add((Header) adapter.getItem(i));
+            }
+        }
+
+        // Ignore the adapter provided by PreferenceActivity and substitute ours instead
+        super.setListAdapter(new HeaderAdapter(this, mHeaders));
+    }
+
     /*
      * Settings subclasses for launching independently.
      */
 
-    public static class BluetoothSettingsActivity extends Settings { }
-    public static class WirelessSettingsActivity extends Settings { }
-    public static class TetherSettingsActivity extends Settings { }
-    public static class VpnSettingsActivity extends Settings { }
-    public static class DateTimeSettingsActivity extends Settings { }
-    public static class StorageSettingsActivity extends Settings { }
-    public static class WifiSettingsActivity extends Settings { }
-    public static class InputMethodAndLanguageSettingsActivity extends Settings { }
-    public static class InputMethodConfigActivity extends Settings { }
-    public static class InputMethodAndSubtypeEnablerActivity extends Settings { }
-    public static class LocalePickerActivity extends Settings { }
-    public static class UserDictionarySettingsActivity extends Settings { }
-    public static class SoundSettingsActivity extends Settings { }
-    public static class DisplaySettingsActivity extends Settings { }
-    public static class DeviceInfoSettingsActivity extends Settings { }
-    public static class ApplicationSettingsActivity extends Settings { }
-    public static class ManageApplicationsActivity extends Settings { }
-    public static class StorageUseActivity extends Settings { }
-    public static class DevelopmentSettingsActivity extends Settings { }
-    public static class AccessibilitySettingsActivity extends Settings { }
-    public static class SecuritySettingsActivity extends Settings { }
-    public static class PrivacySettingsActivity extends Settings { }
-    public static class DockSettingsActivity extends Settings { }
-    public static class RunningServicesActivity extends Settings { }
-    public static class ManageAccountsSettingsActivity extends Settings { }
-    public static class PowerUsageSummaryActivity extends Settings { }
-    public static class AccountSyncSettingsActivity extends Settings { }
-    public static class AccountSyncSettingsInAddAccountActivity extends Settings { }
-    public static class CryptKeeperSettingsActivity extends Settings { }
-    public static class DeviceAdminSettingsActivity extends Settings { }
-    public static class DataUsageSummaryActivity extends Settings { }
+    public static class BluetoothSettingsActivity extends Settings { /* empty */ }
+    public static class WirelessSettingsActivity extends Settings { /* empty */ }
+    public static class TetherSettingsActivity extends Settings { /* empty */ }
+    public static class VpnSettingsActivity extends Settings { /* empty */ }
+    public static class DateTimeSettingsActivity extends Settings { /* empty */ }
+    public static class StorageSettingsActivity extends Settings { /* empty */ }
+    public static class WifiSettingsActivity extends Settings { /* empty */ }
+    public static class InputMethodAndLanguageSettingsActivity extends Settings { /* empty */ }
+    public static class InputMethodConfigActivity extends Settings { /* empty */ }
+    public static class InputMethodAndSubtypeEnablerActivity extends Settings { /* empty */ }
+    public static class LocalePickerActivity extends Settings { /* empty */ }
+    public static class UserDictionarySettingsActivity extends Settings { /* empty */ }
+    public static class SoundSettingsActivity extends Settings { /* empty */ }
+    public static class DisplaySettingsActivity extends Settings { /* empty */ }
+    public static class DeviceInfoSettingsActivity extends Settings { /* empty */ }
+    public static class ApplicationSettingsActivity extends Settings { /* empty */ }
+    public static class ManageApplicationsActivity extends Settings { /* empty */ }
+    public static class StorageUseActivity extends Settings { /* empty */ }
+    public static class DevelopmentSettingsActivity extends Settings { /* empty */ }
+    public static class AccessibilitySettingsActivity extends Settings { /* empty */ }
+    public static class SecuritySettingsActivity extends Settings { /* empty */ }
+    public static class PrivacySettingsActivity extends Settings { /* empty */ }
+    public static class DockSettingsActivity extends Settings { /* empty */ }
+    public static class RunningServicesActivity extends Settings { /* empty */ }
+    public static class ManageAccountsSettingsActivity extends Settings { /* empty */ }
+    public static class PowerUsageSummaryActivity extends Settings { /* empty */ }
+    public static class AccountSyncSettingsActivity extends Settings { /* empty */ }
+    public static class AccountSyncSettingsInAddAccountActivity extends Settings { /* empty */ }
+    public static class CryptKeeperSettingsActivity extends Settings { /* empty */ }
+    public static class DeviceAdminSettingsActivity extends Settings { /* empty */ }
+    public static class DataUsageSummaryActivity extends Settings { /* empty */ }
 }

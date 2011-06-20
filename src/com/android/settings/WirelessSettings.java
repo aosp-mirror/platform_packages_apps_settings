@@ -16,35 +16,27 @@
 
 package com.android.settings;
 
-import com.android.internal.telephony.TelephonyIntents;
-import com.android.internal.telephony.TelephonyProperties;
-import com.android.settings.bluetooth.BluetoothEnabler;
-import com.android.settings.wifi.WifiEnabler;
-import com.android.settings.nfc.NfcEnabler;
-
 import android.app.Activity;
 import android.app.admin.DevicePolicyManager;
-import android.bluetooth.BluetoothAdapter;
 import android.content.Context;
 import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.nfc.NfcAdapter;
 import android.os.Bundle;
-import android.os.ServiceManager;
 import android.os.SystemProperties;
 import android.preference.CheckBoxPreference;
 import android.preference.Preference;
 import android.preference.PreferenceScreen;
 import android.provider.Settings;
 
+import com.android.internal.telephony.TelephonyIntents;
+import com.android.internal.telephony.TelephonyProperties;
+import com.android.settings.nfc.NfcEnabler;
+
 public class WirelessSettings extends SettingsPreferenceFragment {
 
     private static final String KEY_TOGGLE_AIRPLANE = "toggle_airplane";
-    private static final String KEY_TOGGLE_BLUETOOTH = "toggle_bluetooth";
-    private static final String KEY_TOGGLE_WIFI = "toggle_wifi";
     private static final String KEY_TOGGLE_NFC = "toggle_nfc";
-    private static final String KEY_WIFI_SETTINGS = "wifi_settings";
-    private static final String KEY_BT_SETTINGS = "bt_settings";
     private static final String KEY_VPN_SETTINGS = "vpn_settings";
     private static final String KEY_TETHER_SETTINGS = "tether_settings";
     private static final String KEY_PROXY_SETTINGS = "proxy_settings";
@@ -55,9 +47,7 @@ public class WirelessSettings extends SettingsPreferenceFragment {
 
     private AirplaneModeEnabler mAirplaneModeEnabler;
     private CheckBoxPreference mAirplaneModePreference;
-    private WifiEnabler mWifiEnabler;
     private NfcEnabler mNfcEnabler;
-    private BluetoothEnabler mBtEnabler;
 
     /**
      * Invoked on each preference click in this hierarchy, overrides
@@ -95,15 +85,10 @@ public class WirelessSettings extends SettingsPreferenceFragment {
         addPreferencesFromResource(R.xml.wireless_settings);
 
         final Activity activity = getActivity();
-        CheckBoxPreference airplane = (CheckBoxPreference) findPreference(KEY_TOGGLE_AIRPLANE);
-        CheckBoxPreference wifi = (CheckBoxPreference) findPreference(KEY_TOGGLE_WIFI);
-        CheckBoxPreference bt = (CheckBoxPreference) findPreference(KEY_TOGGLE_BLUETOOTH);
+        mAirplaneModePreference = (CheckBoxPreference) findPreference(KEY_TOGGLE_AIRPLANE);
         CheckBoxPreference nfc = (CheckBoxPreference) findPreference(KEY_TOGGLE_NFC);
 
-        mAirplaneModeEnabler = new AirplaneModeEnabler(activity, airplane);
-        mAirplaneModePreference = (CheckBoxPreference) findPreference(KEY_TOGGLE_AIRPLANE);
-        mWifiEnabler = new WifiEnabler(activity, wifi);
-        mBtEnabler = new BluetoothEnabler(activity, bt);
+        mAirplaneModeEnabler = new AirplaneModeEnabler(activity, mAirplaneModePreference);
         mNfcEnabler = new NfcEnabler(activity, nfc);
 
         String toggleable = Settings.System.getString(activity.getContentResolver(),
@@ -111,21 +96,12 @@ public class WirelessSettings extends SettingsPreferenceFragment {
 
         // Manually set dependencies for Wifi when not toggleable.
         if (toggleable == null || !toggleable.contains(Settings.System.RADIO_WIFI)) {
-            wifi.setDependency(KEY_TOGGLE_AIRPLANE);
-            findPreference(KEY_WIFI_SETTINGS).setDependency(KEY_TOGGLE_AIRPLANE);
             findPreference(KEY_VPN_SETTINGS).setDependency(KEY_TOGGLE_AIRPLANE);
         }
 
         // Manually set dependencies for Bluetooth when not toggleable.
         if (toggleable == null || !toggleable.contains(Settings.System.RADIO_BLUETOOTH)) {
-            bt.setDependency(KEY_TOGGLE_AIRPLANE);
-            findPreference(KEY_BT_SETTINGS).setDependency(KEY_TOGGLE_AIRPLANE);
-        }
-
-        // Remove Bluetooth Settings if Bluetooth service is not available.
-        if (ServiceManager.getService(BluetoothAdapter.BLUETOOTH_SERVICE) == null) {
-            getPreferenceScreen().removePreference(bt);
-            getPreferenceScreen().removePreference(findPreference(KEY_BT_SETTINGS));
+            // No bluetooth-dependent items in the list. Code kept in case one is added later.
         }
 
         // Remove NFC if its not available
@@ -191,8 +167,6 @@ public class WirelessSettings extends SettingsPreferenceFragment {
         super.onResume();
 
         mAirplaneModeEnabler.resume();
-        mWifiEnabler.resume();
-        mBtEnabler.resume();
         mNfcEnabler.resume();
     }
 
@@ -201,8 +175,6 @@ public class WirelessSettings extends SettingsPreferenceFragment {
         super.onPause();
 
         mAirplaneModeEnabler.pause();
-        mWifiEnabler.pause();
-        mBtEnabler.pause();
         mNfcEnabler.pause();
     }
 

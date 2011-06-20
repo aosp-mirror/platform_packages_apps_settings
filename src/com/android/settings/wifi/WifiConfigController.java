@@ -16,33 +16,29 @@
 
 package com.android.settings.wifi;
 
+import static android.net.wifi.WifiConfiguration.INVALID_NETWORK_ID;
+
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.res.Resources;
-import android.net.DhcpInfo;
 import android.net.LinkAddress;
 import android.net.LinkProperties;
 import android.net.NetworkInfo.DetailedState;
 import android.net.NetworkUtils;
-import android.net.Proxy;
 import android.net.ProxyProperties;
 import android.net.RouteInfo;
 import android.net.wifi.WifiConfiguration;
-import android.net.wifi.WifiConfiguration.IpAssignment;
 import android.net.wifi.WifiConfiguration.AuthAlgorithm;
+import android.net.wifi.WifiConfiguration.IpAssignment;
 import android.net.wifi.WifiConfiguration.KeyMgmt;
-import android.net.wifi.WpsConfiguration;
-import android.net.wifi.WpsConfiguration.Setup;
-
-import static android.net.wifi.WifiConfiguration.INVALID_NETWORK_ID;
 import android.net.wifi.WifiConfiguration.ProxySettings;
 import android.net.wifi.WifiInfo;
+import android.net.wifi.WpsConfiguration;
+import android.net.wifi.WpsConfiguration.Setup;
 import android.security.Credentials;
 import android.security.KeyStore;
 import android.text.Editable;
 import android.text.InputType;
 import android.text.TextWatcher;
-import android.text.format.Formatter;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
@@ -57,12 +53,10 @@ import com.android.settings.ProxySelector;
 import com.android.settings.R;
 
 import java.net.InetAddress;
-import java.net.InetSocketAddress;
-import java.net.UnknownHostException;
 import java.util.Iterator;
 
 /**
- * The class for allowing UIs like {@link WifiDialog} and {@link WifiConfigPreference} to
+ * The class for allowing UIs like {@link WifiDialog} and {@link WifiConfigUiBase} to
  * share the logic for controlling buttons, text fields, etc.
  */
 public class WifiConfigController implements TextWatcher,
@@ -429,7 +423,9 @@ public class WifiConfigController implements TextWatcher,
         int networkPrefixLength = -1;
         try {
             networkPrefixLength = Integer.parseInt(mNetworkPrefixLengthView.getText().toString());
-        } catch (NumberFormatException e) { }
+        } catch (NumberFormatException e) {
+            // Use -1
+        }
         if (networkPrefixLength < 0 || networkPrefixLength > 32) {
             return R.string.wifi_ip_settings_invalid_network_prefix_length;
         }
@@ -698,6 +694,7 @@ public class WifiConfigController implements TextWatcher,
 
     private void setSelection(Spinner spinner, String value) {
         if (value != null) {
+            @SuppressWarnings("unchecked")
             ArrayAdapter<String> adapter = (ArrayAdapter<String>) spinner.getAdapter();
             for (int i = adapter.getCount() - 1; i >= 0; --i) {
                 if (value.equals(adapter.getItem(i))) {
@@ -719,10 +716,12 @@ public class WifiConfigController implements TextWatcher,
 
     @Override
     public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+        // work done in afterTextChanged
     }
 
     @Override
     public void onTextChanged(CharSequence s, int start, int before, int count) {
+        // work done in afterTextChanged
     }
 
     @Override
@@ -750,5 +749,6 @@ public class WifiConfigController implements TextWatcher,
 
     @Override
     public void onNothingSelected(AdapterView<?> parent) {
+        //
     }
 }
