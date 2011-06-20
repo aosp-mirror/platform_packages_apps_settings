@@ -316,7 +316,7 @@
     <string name="unlock_set_unlock_pin_summary" msgid="5556722736289132512">"Numerische PIN zur Display-Entsp. erfordern"</string>
     <string name="unlock_set_unlock_password_title" msgid="8775603825675090937">"Passwort"</string>
     <string name="unlock_set_unlock_password_summary" msgid="7871968012198279034">"Passwort zur Displayentsperrung erfordern"</string>
-    <!-- outdated translation 5962903914511361952 -->     <string name="unlock_set_unlock_disabled_summary" msgid="2120729867788851674">"Vom Remote-Geräteadministrator deaktiviert"</string>
+    <string name="unlock_set_unlock_disabled_summary" msgid="2120729867788851674">"Von Admin, Richtlinie oder Anmeldedaten deaktiviert"</string>
     <string name="unlock_set_unlock_mode_off" msgid="378729687629105388">"Aus"</string>
     <string name="unlock_set_unlock_mode_none" msgid="7137296704741184239">"Keine Sicherheit"</string>
     <string name="unlock_set_unlock_mode_pattern" msgid="464022606293547390">"Durch Muster geschützt"</string>
@@ -381,11 +381,11 @@
     <string name="bluetooth_pairing_request" msgid="6385750334766370310">"Bluetooth-Pairing-Anfrage"</string>
     <string name="bluetooth_enter_pin_msg" msgid="1499285355129256289">\n"PIN zum Pairing mit \"<xliff:g id="DEVICE_NAME">%1$s</xliff:g>\" eingeben. Versuchen Sie es mit 0000 oder 1234. Möglicherweise müssen Sie dieselbe PIN auf dem Bluetooth-Gerät eingeben."</string>
     <string name="bluetooth_enter_passkey_msg" msgid="8301499416158195044">\n"Schlüssel zum Pairing mit \"<xliff:g id="DEVICE_NAME">%1$s</xliff:g>\" eingeben"</string>
-    <string name="bluetooth_confirm_passkey_msg" msgid="1205362283945104263">"Bestätigen Sie zum Paaren mit \"<xliff:g id="DEVICE_NAME">%1$s</xliff:g>\", dass es den folgenden Schlüssel anzeigt: <xliff:g id="PASSKEY">%2$s</xliff:g>."</string>
+    <string name="bluetooth_confirm_passkey_msg" msgid="1205362283945104263">"Bestätigen Sie zum Koppeln mit \"<xliff:g id="DEVICE_NAME">%1$s</xliff:g>\", dass es den folgenden Schlüssel anzeigt: <xliff:g id="PASSKEY">%2$s</xliff:g>."</string>
     <string name="bluetooth_incoming_pairing_msg" msgid="1076613564387784476">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g>"\n"möchte sich paaren."</string>
     <string name="bluetooth_display_passkey_pin_msg" msgid="9139892462102104755">"Geben Sie zum Pairing \"<xliff:g id="PASSKEY">%2$s</xliff:g>\" auf \"<xliff:g id="DEVICE_NAME">%1$s</xliff:g>\" ein und drücken Sie anschließend die Eingabetaste."</string>
-    <string name="bluetooth_pairing_accept" msgid="6163520056536604875">"Paaren"</string>
-    <string name="bluetooth_pairing_decline" msgid="930951069988011471">"Nicht paaren"</string>
+    <string name="bluetooth_pairing_accept" msgid="6163520056536604875">"Kopplung durchführen"</string>
+    <string name="bluetooth_pairing_decline" msgid="930951069988011471">"Keine Kopplung durchführen"</string>
     <string name="bluetooth_remote_device" msgid="2406662802908395389">"Bluetooth-Gerät"</string>
     <string name="bluetooth_error_title" msgid="538287072376677166">"Achtung"</string>
     <string name="bluetooth_pairing_error_message" msgid="2852744547246910349">"Beim Pairing mit <xliff:g id="DEVICE_NAME">%1$s</xliff:g> ist ein Problem aufgetreten."</string>
@@ -400,7 +400,7 @@
     <string name="bluetooth_preference_found_devices" msgid="3133019331974936204">"Geräte gefunden"</string>
     <string name="bluetooth_device_context_connect" msgid="3997659895003244941">"Verbinden"</string>
     <string name="bluetooth_device_context_disconnect" msgid="8220072022970148683">"Verbindung trennen"</string>
-    <string name="bluetooth_device_context_pair_connect" msgid="7611522504813927727">"Paaren und verbinden"</string>
+    <string name="bluetooth_device_context_pair_connect" msgid="7611522504813927727">"Kopplung durchführen und verbinden"</string>
     <string name="bluetooth_device_context_unpair" msgid="662992425948536144">"Pairing aufheben"</string>
     <string name="bluetooth_device_context_disconnect_unpair" msgid="7644014238070043798">"Verbindung trennen und Pairing aufheben"</string>
     <string name="bluetooth_device_context_connect_advanced" msgid="2643129703569788771">"Optionen..."</string>
@@ -599,6 +599,8 @@
     <string name="brightness_summary" msgid="838917350127550703">"Helligkeit des Bildschirms anpassen"</string>
     <string name="screen_timeout" msgid="6962654593018319466">"Timeout"</string>
     <string name="screen_timeout_summary" msgid="4471347210332380587">"Bildschirm wird nach <xliff:g id="TIMEOUT_DESCRIPTION">%1$s</xliff:g> automatisch abgeschaltet."</string>
+    <!-- no translation found for wallpaper_settings_title (5449180116365824625) -->
+    <skip />
     <string name="dream_settings_title" msgid="6536876013377446805">"Android-Träume"</string>
     <string name="dream_settings_summary" msgid="6809871648071408259">"Bildschirmschoner und andere Unterhaltung bei Nichtaktivität"</string>
     <string name="dream_component_title" msgid="505229894674572578">"Ausgewählter Traum"</string>
@@ -654,6 +656,7 @@
     <string name="status_number" product="tablet" msgid="1138837891091222272">"MDN"</string>
     <string name="status_number" product="default" msgid="5123197324870153205">"Meine Telefonnummer"</string>
     <string name="status_min_number" msgid="3519504522179420597">"MIN"</string>
+    <string name="status_msid_number" msgid="909010114445780530">"MSID"</string>
     <string name="status_prl_version" msgid="8499039751817386529">"PRL-Version"</string>
     <string name="status_meid_number" msgid="2037549729230058915">"IMEI/MEID"</string>
     <string name="status_network_type" msgid="3279383550222116235">"Art des Mobilfunknetzes"</string>
@@ -748,7 +751,7 @@
     <string name="master_clear_summary" product="default" msgid="4986154238001088492">"Löscht alle Daten auf dem Telefon"</string>
     <string name="master_clear_desc" product="tablet" msgid="590799767511283567">"Hierdurch werden alle Daten aus dem "<b>"internen Speicher"</b>" Ihres Tablets gelöscht, u. a."\n\n<li>"Ihr Google-Konto,"</li>\n<li>"die System- und Anwendungsdaten und -einstellungen"</li>\n<li>"und heruntergeladene Anwendungen"</li>"."</string>
     <string name="master_clear_desc" product="default" msgid="3251400937758241249">"Hierdurch werden alle Daten aus dem "<b>"internen Speicher"</b>" Ihres Telefons gelöscht, u. a."\n\n<li>"Ihr Google-Konto,"</li>\n<li>"die System- und Anwendungsdaten und -einstellungen"</li>\n<li>"und heruntergeladene Anwendungen"</li>"."</string>
-    <string name="master_clear_accounts" product="default" msgid="6412857499147999073">\n\n"Sie sind derzeit in folgenden Konten angemeldet:"\n</string>
+    <string name="master_clear_accounts" product="default" msgid="6412857499147999073">\n\n"Sie sind zurzeit in folgenden Konten angemeldet:"\n</string>
     <string name="master_clear_desc_also_erases_external" msgid="1903185203791274237"><li>"Musik"</li>\n<li>"Fotos"</li>\n<li>"Sonstige Nutzerdaten"</li></string>
     <string name="master_clear_desc_erase_external_storage" product="nosdcard" msgid="4740866328425123395">\n\n"Um auch Musik, Bilder und sonstige Nutzerdaten zu löschen, muss der "<b>"USB-Speicher"</b>" geleert werden."</string>
     <string name="master_clear_desc_erase_external_storage" product="default" msgid="7339100478676372901">\n\n"Damit auch Musik, Bilder und andere Nutzerdaten gelöscht werden können, muss die "<b>"SD-Karte"</b>" gelöscht werden."</string>
@@ -988,7 +991,7 @@
     <string name="storageuse_settings_title" msgid="5657014373502630403">"Speichernutzung"</string>
     <string name="storageuse_settings_summary" msgid="2556057379120846792">"Von Anwendungen verwendeten Speicher anzeigen"</string>
     <string name="runningservices_settings_title" msgid="8097287939865165213">"Aktive Dienste"</string>
-    <string name="runningservices_settings_summary" msgid="854608995821032748">"Derzeit ausgeführte Dienste anzeigen und steuern"</string>
+    <string name="runningservices_settings_summary" msgid="854608995821032748">"Zurzeit ausgeführte Dienste anzeigen und steuern"</string>
     <string name="service_restarting" msgid="2242747937372354306">"Neustart wird durchgeführt."</string>
     <string name="cached" msgid="1059590879740175019">"Hintergrundprozess im Cache"</string>
     <string name="no_running_services" msgid="2059536495597645347">"Nichts wird ausgeführt."</string>
@@ -1013,7 +1016,7 @@
     <string name="service_stop_description" msgid="3261798282116866961">"Dieser Dienst wurde von seiner Anwendung gestartet. Wird er beendet, kann die Anwendung eventuell nicht mehr ausgeführt werden."</string>
     <string name="heavy_weight_stop_description" msgid="6855241582643136019">"Diese Anwendung kann nicht sicher beendet werden. Beim Beenden könnten aktuelle Daten verloren gehen."</string>
     <string name="background_process_stop_description" msgid="1728354083304746737">"Hierbei handelt es sich um einen alten Anwendungsprozess, der zur Erzielung einer besseren Geschwindigkeit für den Fall, dass er benötigt wird, beibehalten wird. Normalerweise gibt es keinen Grund, warum er beendet werden sollte."</string>
-    <string name="service_manage_description" msgid="7050092269951613102">"<xliff:g id="CLIENT_NAME">%1$s</xliff:g>: wird derzeit verwendet. Berühren Sie zum Steuern die Einstellungen."</string>
+    <string name="service_manage_description" msgid="7050092269951613102">"<xliff:g id="CLIENT_NAME">%1$s</xliff:g>: wird zurzeit verwendet. Berühren Sie zum Steuern die Einstellungen."</string>
     <string name="main_running_process_description" msgid="929204645380391397">"Hauptprozess, der verwendet wird."</string>
     <string name="process_service_in_use_description" msgid="8993335064403217080">"Dienst <xliff:g id="COMP_NAME">%1$s</xliff:g> wird verwendet."</string>
     <string name="process_provider_in_use_description" msgid="5586603325677678940">"Anbieter <xliff:g id="COMP_NAME">%1$s</xliff:g> wird verwendet."</string>
@@ -1036,10 +1039,8 @@
     <string name="show_password" msgid="2198798062604049206">"Sichtbare Passwörter"</string>
     <string name="show_password_summary" msgid="3806709974395178121">"Passwort bei der Eingabe anzeigen"</string>
     <string name="ime_security_warning" msgid="812267421486877917">"Diese Eingabemethode kann den gesamten von Ihnen eingegebenen Text erfassen, einschließlich persönlicher Daten wie Passwörter und Kreditkartennummern. Sie ist Teil der Anwendung <xliff:g id="IME_APPLICATION_NAME">%1$s</xliff:g>. Möchten diese Eingabemethode verwenden?"</string>
-    <!-- no translation found for pointer_settings_category (6090176550039035130) -->
-    <skip />
-    <!-- no translation found for pointer_speed (1221342330217861616) -->
-    <skip />
+    <string name="pointer_settings_category" msgid="6090176550039035130">"Maus- und Touchpad-Einstellungen"</string>
+    <string name="pointer_speed" msgid="1221342330217861616">"Zeigergeschwindigkeit"</string>
     <string name="user_dict_settings_titlebar" msgid="765659257455000490">"Mein Wörterbuch"</string>
     <string name="user_dict_single_settings_title" msgid="5454855286173849284">"Mein Wörterbuch"</string>
     <string name="user_dict_multiple_settings_title" msgid="326583195525296750">"Meine Wörterbücher verwalten"</string>
@@ -1123,8 +1124,7 @@
     <string name="accessibility_power_button_category" msgid="8545885236482339928">"Ein-/Austaste"</string>
     <string name="accessibility_power_button_ends_call" msgid="7698764194501089533">"Ein-/Austaste beendet Anruf"</string>
     <string name="accessibility_power_button_ends_call_summary" msgid="8878097632186291462">"Das Drücken der Ein-/Austaste während eines Anrufs beendet den Anruf (statt den Bildschirm auszuschalten)"</string>
-    <!-- no translation found for settings_button (3006713718908152930) -->
-    <skip />
+    <string name="settings_button" msgid="3006713718908152930">"Einstellungen"</string>
     <string name="touchscreen_gestures_category" msgid="3109869155350859625">"Touchscreen-Gesten"</string>
     <string name="long_press_timeout_selector_title" msgid="1396876537252863044">"Berühren und Halten-Reaktionszeit"</string>
     <string name="long_press_timeout_selector_summary" msgid="2261114502740278996">"Dauer, bis eine Berührung als Berühren und Halten interpretiert wird"</string>
@@ -1237,6 +1237,10 @@
     <string name="tts_engine_name_settings" msgid="4974538563074395920">"<xliff:g id="TTS_PLUGIN_ENGINE_NAME">%s</xliff:g>-Einstellungen"</string>
     <string name="tts_engine_name_is_enabled_summary" msgid="4909484006804022115">"<xliff:g id="TTS_PLUGIN_ENGINE_NAME">%s</xliff:g> ist aktiviert."</string>
     <string name="tts_engine_name_is_disabled_summary" msgid="7644198182255168200">"<xliff:g id="TTS_PLUGIN_ENGINE_NAME">%s</xliff:g> ist deaktiviert."</string>
+    <!-- no translation found for tts_engine_settings_section (2346105138448751893) -->
+    <skip />
+    <!-- no translation found for tts_engine_settings_title (3499112142425680334) -->
+    <skip />
     <string name="pico_languages_and_voices" msgid="4611320375917773238">"Sprachen und Stimmen"</string>
     <string name="pico_installed" msgid="2452546687858267414">"Installiert"</string>
     <string name="pico_not_installed" msgid="6266845418419994311">"Nicht installiert"</string>
@@ -1332,21 +1336,19 @@
     <string name="credentials_install_summary" product="nosdcard" msgid="4220422806818210676">"Zertifikate von Speicher installieren"</string>
     <string name="credentials_install_summary" product="default" msgid="5737658257407822713">"Zertifikate von SD-Karte installieren"</string>
     <string name="credentials_reset" msgid="3239382277144980418">"Anmeldedaten löschen"</string>
-    <!-- outdated translation 2127419861568976637 -->     <string name="credentials_reset_summary" msgid="3369361230171260282">"Inhalt des Anmeldeinformationsspeichers löschen und Passwort zurücksetzen"</string>
+    <string name="credentials_reset_summary" msgid="3369361230171260282">"Alle Zertifikate entfernen"</string>
     <string name="credentials_unlock" msgid="1463040326264133844">"Passwort eingeben"</string>
     <string name="credentials_unlock_hint" msgid="5889551635843338639">"Geben Sie das Passwort für den Anmeldedatenspeicher ein."</string>
     <string name="credentials_old_password" msgid="7553393815538684028">"Aktuelles Passwort:"</string>
-    <!-- outdated translation 7883277320781857760 -->     <string name="credentials_reset_hint" msgid="1566409057833618877">"Möchten Sie wirklich alle Anmeldeinformationen löschen und das Passwort für den Anmeldeinformationsspeicher zurücksetzen?"</string>
+    <string name="credentials_reset_hint" msgid="1566409057833618877">"Alle Inhalte werden entfernt. Möchten Sie wirklich fortfahren?"</string>
     <string name="credentials_password_too_short" msgid="7502749986405522663">"Das Passwort muss mindestens acht Zeichen lang sein."</string>
     <string name="credentials_wrong_password" msgid="2541932597104054807">"Falsches Passwort"</string>
     <string name="credentials_reset_warning" msgid="5320653011511797600">"Falsches Passwort. Sie haben noch einen Versuch, bevor Ihr Anmeldedatenspeicher gelöscht wird."</string>
     <string name="credentials_reset_warning_plural" msgid="6514085665301095279">"Falsches Passwort. Sie haben noch <xliff:g id="NUMBER">%1$d</xliff:g> Versuche, bevor Ihr Anmeldedatenspeicher gelöscht wird."</string>
     <string name="credentials_erased" msgid="2907836028586342969">"Speicher wurde gelöscht."</string>
-    <!-- no translation found for credentials_not_erased (397954733557821269) -->
-    <skip />
+    <string name="credentials_not_erased" msgid="397954733557821269">"Anmeldedaten nicht gelöscht"</string>
     <string name="credentials_enabled" msgid="7588607413349978930">"Der Anmeldeinformationsspeicher ist aktiviert."</string>
-    <!-- no translation found for credentials_configure_lock_screen_hint (6816970208840577219) -->
-    <skip />
+    <string name="credentials_configure_lock_screen_hint" msgid="6816970208840577219">"Zur Verwendung des Anmeldeinformationsspeichers müssen Sie eine PIN oder ein Passwort für die Bildschirmsperre festlegen."</string>
     <string name="emergency_tone_title" msgid="1055954530111587114">"Notfallsignal"</string>
     <string name="emergency_tone_summary" msgid="722259232924572153">"Verhalten bei einem Notruf festlegen"</string>
     <string name="privacy_settings" msgid="9206631214140954954">"Datenschutz"</string>
@@ -1356,7 +1358,7 @@
     <string name="backup_data_title" msgid="1239105919852668016">"Meine Daten sichern"</string>
     <string name="backup_data_summary" msgid="6515285107793232815">"Anwendungsdaten, WLAN-Passwörter und andere Einstellungen auf Google-Servern sichern"</string>
     <string name="backup_configure_account_title" msgid="3790872965773196615">"Sicherungskonto"</string>
-    <string name="backup_configure_account_default_summary" msgid="2436933224764745553">"Derzeit werden in keinem Konto gesicherte Daten gespeichert."</string>
+    <string name="backup_configure_account_default_summary" msgid="2436933224764745553">"Zurzeit werden in keinem Konto gesicherte Daten gespeichert."</string>
     <string name="auto_restore_title" msgid="5397528966329126506">"Autom. Wiederherst."</string>
     <string name="auto_restore_summary" msgid="83177150536734378">"Gesicherte Einstellungen oder andere Daten wiederherstellen, wenn ich eine Anwendung neu installiere"</string>
     <string name="backup_erase_dialog_title" msgid="3438255037256586237">"Sicherung"</string>
@@ -1405,7 +1407,7 @@
     <string name="wifi_setup_description_connecting" msgid="1884664966455980182">"Der Verbindungsaufbau kann einige Minuten dauern..."</string>
     <string name="wifi_setup_description_connected" msgid="5235991893829582459">"Tippen Sie auf "<b>"Weiter"</b>", um mit der Einrichtung fortzufahren."\n\n"Tippen Sie auf "<b>"Zurück"</b>", um eine Verbindung zu einem anderen WLAN-Netzwerk herzustellen."</string>
     <string name="account_sync_settings_title" msgid="4578227872921044660">"Synchronisierungseinstellungen"</string>
-    <string name="sync_is_failing" msgid="1591561768344128377">"Bei der Synchronisierung treten derzeit Probleme auf. Sie wird in Kürze fortgesetzt."</string>
+    <string name="sync_is_failing" msgid="1591561768344128377">"Bei der Synchronisierung treten zurzeit Probleme auf. Sie wird in Kürze fortgesetzt."</string>
     <string name="add_account_label" msgid="7811707265834013767">"Konto hinzufügen"</string>
     <string name="header_general_sync_settings" msgid="3487451896424238469">"Allg. Synchron.-Einstellungen"</string>
     <string name="background_data" msgid="5779592891375473817">"Hintergrunddaten"</string>
@@ -1454,4 +1456,69 @@
     <string name="select_all" msgid="6783085295161532497">"Alle auswählen"</string>
     <string name="hdcp_checking_title" msgid="8605478913544273282">"HDCP-Prüfung"</string>
     <string name="hdcp_checking_dialog_title" msgid="5141305530923283">"HDCP-Prüfverhalten festl."</string>
+    <string name="data_usage_summary_title" msgid="3804110657238092929">"Datennutzung"</string>
+    <!-- no translation found for data_usage_cycle (5652529796195787949) -->
+    <skip />
+    <!-- no translation found for data_usage_menu_split_4g (7417435609285381968) -->
+    <skip />
+    <!-- no translation found for data_usage_menu_show_wifi (8266875319417201085) -->
+    <skip />
+    <!-- no translation found for data_usage_change_cycle (7776556448920114866) -->
+    <skip />
+    <!-- no translation found for data_usage_pick_cycle_day (4470796861757050966) -->
+    <skip />
+    <!-- no translation found for data_usage_disable_mobile_limit (289740911281022322) -->
+    <skip />
+    <!-- no translation found for data_usage_disable_4g_limit (5808210773758699800) -->
+    <skip />
+    <!-- no translation found for data_usage_disable_3g_limit (3856971004328238231) -->
+    <skip />
+    <!-- no translation found for data_usage_tab_wifi (1728851922959017766) -->
+    <skip />
+    <!-- no translation found for data_usage_tab_mobile (454140350007299045) -->
+    <skip />
+    <!-- no translation found for data_usage_tab_4g (1301978716067512235) -->
+    <skip />
+    <!-- no translation found for data_usage_tab_3g (6092169523081538718) -->
+    <skip />
+    <!-- no translation found for data_usage_enable_mobile (986782622560157977) -->
+    <skip />
+    <!-- no translation found for data_usage_enable_3g (6304006671869578254) -->
+    <skip />
+    <!-- no translation found for data_usage_enable_4g (3635854097335036738) -->
+    <skip />
+    <!-- no translation found for data_usage_app_settings (3727561362090820369) -->
+    <skip />
+    <!-- no translation found for data_usage_app_restrict_background (8856643905291165256) -->
+    <skip />
+    <!-- no translation found for data_usage_app_restrict_background_summary (1503361245973512092) -->
+    <skip />
+    <!-- no translation found for data_usage_app_restrict_dialog_title (8110736468987743260) -->
+    <skip />
+    <!-- no translation found for data_usage_app_restrict_dialog (100001698378554777) -->
+    <skip />
+    <!-- no translation found for data_usage_cycle_editor_title (1373797281540188533) -->
+    <skip />
+    <!-- no translation found for data_usage_cycle_editor_subtitle (5512903797979928416) -->
+    <skip />
+    <!-- no translation found for data_usage_cycle_editor_positive (4565302264487526138) -->
+    <skip />
+    <!-- no translation found for data_usage_limit_dialog_title (3023111643632996097) -->
+    <skip />
+    <!-- no translation found for data_usage_limit_dialog_mobile (7931094451923591578) -->
+    <skip />
+    <!-- no translation found for data_usage_limit_dialog_3g (5478553071420316963) -->
+    <skip />
+    <!-- no translation found for data_usage_limit_dialog_4g (6134008906742403777) -->
+    <skip />
+    <!-- no translation found for data_usage_disabled_dialog_3g_title (4221584306492812040) -->
+    <skip />
+    <!-- no translation found for data_usage_disabled_dialog_4g_title (715585612162185936) -->
+    <skip />
+    <!-- no translation found for data_usage_disabled_dialog_mobile_title (209516216265000221) -->
+    <skip />
+    <!-- no translation found for data_usage_disabled_dialog (2874031671067845964) -->
+    <skip />
+    <!-- no translation found for data_usage_disabled_dialog_enable (5738467047490662678) -->
+    <skip />
 </resources>

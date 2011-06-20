@@ -316,7 +316,7 @@
     <string name="unlock_set_unlock_pin_summary" msgid="5556722736289132512">"Kräv en PIN-kod för att låsa upp skärmen"</string>
     <string name="unlock_set_unlock_password_title" msgid="8775603825675090937">"Lösenord"</string>
     <string name="unlock_set_unlock_password_summary" msgid="7871968012198279034">"Kräv lösenord för att låsa upp skärmen"</string>
-    <!-- outdated translation 5962903914511361952 -->     <string name="unlock_set_unlock_disabled_summary" msgid="2120729867788851674">"Har inaktiverats av fjärradministratören"</string>
+    <string name="unlock_set_unlock_disabled_summary" msgid="2120729867788851674">"Inaktiverad p.g.a. admin., kryptering eller uppgiftslagring"</string>
     <string name="unlock_set_unlock_mode_off" msgid="378729687629105388">"Av"</string>
     <string name="unlock_set_unlock_mode_none" msgid="7137296704741184239">"Ingen säkerhet"</string>
     <string name="unlock_set_unlock_mode_pattern" msgid="464022606293547390">"Skyddad med grafiskt lösenord"</string>
@@ -599,6 +599,8 @@
     <string name="brightness_summary" msgid="838917350127550703">"Ändra skärmens ljusstyrka"</string>
     <string name="screen_timeout" msgid="6962654593018319466">"Tidsgräns"</string>
     <string name="screen_timeout_summary" msgid="4471347210332380587">"Skärmen stängs av automatiskt efter <xliff:g id="TIMEOUT_DESCRIPTION">%1$s</xliff:g>"</string>
+    <!-- no translation found for wallpaper_settings_title (5449180116365824625) -->
+    <skip />
     <string name="dream_settings_title" msgid="6536876013377446805">"Android-drömmar"</string>
     <string name="dream_settings_summary" msgid="6809871648071408259">"Skärmsläckare och andra funktioner vid inaktivitet"</string>
     <string name="dream_component_title" msgid="505229894674572578">"Vald dröm"</string>
@@ -654,6 +656,7 @@
     <string name="status_number" product="tablet" msgid="1138837891091222272">"Mobilnummer (MDN)"</string>
     <string name="status_number" product="default" msgid="5123197324870153205">"Mitt telefonnummer"</string>
     <string name="status_min_number" msgid="3519504522179420597">"MIN"</string>
+    <string name="status_msid_number" msgid="909010114445780530">"MSID"</string>
     <string name="status_prl_version" msgid="8499039751817386529">"PRL-version"</string>
     <string name="status_meid_number" msgid="2037549729230058915">"IMEI-/MEID-kod"</string>
     <string name="status_network_type" msgid="3279383550222116235">"Mobil nätverkstyp"</string>
@@ -1036,10 +1039,8 @@
     <string name="show_password" msgid="2198798062604049206">"Synliga lösenord"</string>
     <string name="show_password_summary" msgid="3806709974395178121">"Visa lösenord när du skriver"</string>
     <string name="ime_security_warning" msgid="812267421486877917">"Den här inmatningsmetoden kan samla all text som du anger, inklusive personliga uppgifter som lösenord och kreditkortsnummer. Den kommer från programmet <xliff:g id="IME_APPLICATION_NAME">%1$s</xliff:g>. Ska inmatningsmetoden aktiveras?"</string>
-    <!-- no translation found for pointer_settings_category (6090176550039035130) -->
-    <skip />
-    <!-- no translation found for pointer_speed (1221342330217861616) -->
-    <skip />
+    <string name="pointer_settings_category" msgid="6090176550039035130">"Inställningar för mus och styrplatta"</string>
+    <string name="pointer_speed" msgid="1221342330217861616">"Markörens hastighet"</string>
     <string name="user_dict_settings_titlebar" msgid="765659257455000490">"Användarens ordlista"</string>
     <string name="user_dict_single_settings_title" msgid="5454855286173849284">"Användarordlista"</string>
     <string name="user_dict_multiple_settings_title" msgid="326583195525296750">"Hantera användarordlistor"</string>
@@ -1123,8 +1124,7 @@
     <string name="accessibility_power_button_category" msgid="8545885236482339928">"Avstängningsknapp"</string>
     <string name="accessibility_power_button_ends_call" msgid="7698764194501089533">"Avstängningsknappen avslutar samtal"</string>
     <string name="accessibility_power_button_ends_call_summary" msgid="8878097632186291462">"Under ett samtal avslutar avstängningsknappen samtalet i stället för att stänga av skärmen"</string>
-    <!-- no translation found for settings_button (3006713718908152930) -->
-    <skip />
+    <string name="settings_button" msgid="3006713718908152930">"Inställningar"</string>
     <string name="touchscreen_gestures_category" msgid="3109869155350859625">"Pekskärmsrörelser"</string>
     <string name="long_press_timeout_selector_title" msgid="1396876537252863044">"Fördröjning för håll ned"</string>
     <string name="long_press_timeout_selector_summary" msgid="2261114502740278996">"Vänta tills en tryckning tolkas som lång"</string>
@@ -1237,6 +1237,10 @@
     <string name="tts_engine_name_settings" msgid="4974538563074395920">"<xliff:g id="TTS_PLUGIN_ENGINE_NAME">%s</xliff:g>-inställningar"</string>
     <string name="tts_engine_name_is_enabled_summary" msgid="4909484006804022115">"<xliff:g id="TTS_PLUGIN_ENGINE_NAME">%s</xliff:g> är aktiverad"</string>
     <string name="tts_engine_name_is_disabled_summary" msgid="7644198182255168200">"<xliff:g id="TTS_PLUGIN_ENGINE_NAME">%s</xliff:g> är inaktiverad"</string>
+    <!-- no translation found for tts_engine_settings_section (2346105138448751893) -->
+    <skip />
+    <!-- no translation found for tts_engine_settings_title (3499112142425680334) -->
+    <skip />
     <string name="pico_languages_and_voices" msgid="4611320375917773238">"Språk och röster"</string>
     <string name="pico_installed" msgid="2452546687858267414">"Installerad"</string>
     <string name="pico_not_installed" msgid="6266845418419994311">"Inte installerad"</string>
@@ -1332,21 +1336,19 @@
     <string name="credentials_install_summary" product="nosdcard" msgid="4220422806818210676">"Installera certifikat från lagringsenhet"</string>
     <string name="credentials_install_summary" product="default" msgid="5737658257407822713">"Installera certifikat från SD-kort"</string>
     <string name="credentials_reset" msgid="3239382277144980418">"Rensa användaruppgifter"</string>
-    <!-- outdated translation 2127419861568976637 -->     <string name="credentials_reset_summary" msgid="3369361230171260282">"Ta bort uppgiftslagring för allt innehåll och återställ lösenordet"</string>
+    <string name="credentials_reset_summary" msgid="3369361230171260282">"Ta bort alla certifikat"</string>
     <string name="credentials_unlock" msgid="1463040326264133844">"Ange lösenord"</string>
     <string name="credentials_unlock_hint" msgid="5889551635843338639">"Ange lösenordet för uppgiftslagring."</string>
     <string name="credentials_old_password" msgid="7553393815538684028">"Nuvarande lösenord:"</string>
-    <!-- outdated translation 7883277320781857760 -->     <string name="credentials_reset_hint" msgid="1566409057833618877">"Vill du ta bort alla uppgifter och återställa lösenordet för uppgiftslagring?"</string>
+    <string name="credentials_reset_hint" msgid="1566409057833618877">"Allt innehåll kommer att tas bort. Vill du fortsätta?"</string>
     <string name="credentials_password_too_short" msgid="7502749986405522663">"Lösenordet måste innehålla minst 8 tecken."</string>
     <string name="credentials_wrong_password" msgid="2541932597104054807">"Fel lösenord."</string>
     <string name="credentials_reset_warning" msgid="5320653011511797600">"Fel lösenord. Du har ett försök till att ange rätt lösenord, därefter raderas uppgiftslagringen"</string>
     <string name="credentials_reset_warning_plural" msgid="6514085665301095279">"Fel lösenord. Du har <xliff:g id="NUMBER">%1$d</xliff:g> försök på dig att ange rätt lösenord, därefter raderas uppgiftslagringen."</string>
     <string name="credentials_erased" msgid="2907836028586342969">"Uppgiftslagringen raderades."</string>
-    <!-- no translation found for credentials_not_erased (397954733557821269) -->
-    <skip />
+    <string name="credentials_not_erased" msgid="397954733557821269">"Uppgifter kunde inte raderas."</string>
     <string name="credentials_enabled" msgid="7588607413349978930">"Uppgiftslagring är aktiverat."</string>
-    <!-- no translation found for credentials_configure_lock_screen_hint (6816970208840577219) -->
-    <skip />
+    <string name="credentials_configure_lock_screen_hint" msgid="6816970208840577219">"Du måste ange en PIN-kod eller ett lösenord för skärmlås för att kunna använda uppgiftslagring. Vill du göra det nu?"</string>
     <string name="emergency_tone_title" msgid="1055954530111587114">"Nödsignal"</string>
     <string name="emergency_tone_summary" msgid="722259232924572153">"Ange beteende vid nödsamtal"</string>
     <string name="privacy_settings" msgid="9206631214140954954">"Sekretess"</string>
@@ -1405,14 +1407,16 @@
     <string name="wifi_setup_description_connecting" msgid="1884664966455980182">"Det kan ta några minuter att ansluta..."</string>
     <string name="wifi_setup_description_connected" msgid="5235991893829582459">"Tryck på "<b>"Nästa"</b>" om·du vill fortsätta med installationen."\n\n"Tryck på "<b>"Tillbaka"</b>" om du vill ansluta till ett annat Wi-Fi-nätverk."</string>
     <string name="account_sync_settings_title" msgid="4578227872921044660">"Synkroniseringsinställningar"</string>
-    <!-- outdated translation 7257854052606796327 -->     <string name="sync_is_failing" msgid="1591561768344128377">"Det är för närvarande problem med synkronisering. Det fungerar igen om en stund."</string>
+    <!-- no translation found for sync_is_failing (1591561768344128377) -->
+    <skip />
     <string name="add_account_label" msgid="7811707265834013767">"Lägg till konto"</string>
     <string name="header_general_sync_settings" msgid="3487451896424238469">"Allmänna synkinställningar"</string>
     <string name="background_data" msgid="5779592891375473817">"Bakgrundsdata"</string>
     <string name="background_data_summary" msgid="3630389249212620467">"Appar kan synkronisera, skicka och ta emot data när som helst"</string>
     <string name="background_data_dialog_title" msgid="745974259246047425">"Obs!"</string>
     <string name="background_data_dialog_message" msgid="9155730118215371308">"Om du inaktiverar bakgrundsdata sparar du batteri och minskar dataanvändning. Vissa program kanske fortfarande använder anslutningen för bakgrundsdata."</string>
-    <!-- outdated translation 7232356254121075216 -->     <string name="sync_automatically" msgid="7558810110682562376">"Automatisk synkronisering"</string>
+    <!-- no translation found for sync_automatically (7558810110682562376) -->
+    <skip />
     <string name="sync_automatically_summary" msgid="6662623174608419931">"Programmen synkroniserar data automatiskt"</string>
     <string name="header_manage_accounts" msgid="6869002423884539607">"Hantera konton"</string>
     <string name="sync_enabled" msgid="4551148952179416813">"Synkronisering är på"</string>
@@ -1420,13 +1424,18 @@
     <string name="sync_error" msgid="5060969083117872149">"Synkroniseringsfel"</string>
     <string name="settings_backup" msgid="2274732978260797031">"Säkerhetskopiera inställningar"</string>
     <string name="settings_backup_summary" msgid="7916877705938054035">"Säkerhetskopiera mina inställningar"</string>
-    <!-- outdated translation 4438555069848430041 -->     <string name="sync_menu_sync_now" msgid="6154608350395805683">"Synka nu"</string>
-    <!-- outdated translation 260091941807229790 -->     <string name="sync_menu_sync_cancel" msgid="8292379009626966949">"Avbryt synkronisering"</string>
+    <!-- no translation found for sync_menu_sync_now (6154608350395805683) -->
+    <skip />
+    <!-- no translation found for sync_menu_sync_cancel (8292379009626966949) -->
+    <skip />
     <string name="sync_one_time_sync" msgid="6766593624598183090">"Tryck om du vill synkronisera nu<xliff:g id="LAST_SYNC_TIME">
 %1$s</xliff:g>"</string>
-    <!-- outdated translation 2427506589849697841 -->     <string name="sync_gmail" msgid="714886122098006477">"Gmail"</string>
-    <!-- outdated translation 6328872198278573611 -->     <string name="sync_calendar" msgid="9056527206714733735">"Kalender"</string>
-    <!-- outdated translation 6010441370923919977 -->     <string name="sync_contacts" msgid="9174914394377828043">"Kontakter"</string>
+    <!-- no translation found for sync_gmail (714886122098006477) -->
+    <skip />
+    <!-- no translation found for sync_calendar (9056527206714733735) -->
+    <skip />
+    <!-- no translation found for sync_contacts (9174914394377828043) -->
+    <skip />
     <string name="sync_plug" msgid="5952575609349860569"><font fgcolor="#ffffffff">"Välkommen till Google Synk!"</font>" "\n"Med Googles verktyg för att synkronisera data kommer du åt dina kontakter, kalendrar och annan information var du än befinner dig."</string>
     <string name="header_application_sync_settings" msgid="5514539555293976035">"Synkronisering för appar"</string>
     <string name="header_data_and_synchronization" msgid="5165024023936509896">"Data och synkronisering"</string>
@@ -1454,4 +1463,69 @@
     <string name="select_all" msgid="6783085295161532497">"Markera alla"</string>
     <string name="hdcp_checking_title" msgid="8605478913544273282">"HDCP-kontroll"</string>
     <string name="hdcp_checking_dialog_title" msgid="5141305530923283">"Konfigurera HDCP-kontroll"</string>
+    <string name="data_usage_summary_title" msgid="3804110657238092929">"Dataanvändning"</string>
+    <!-- no translation found for data_usage_cycle (5652529796195787949) -->
+    <skip />
+    <!-- no translation found for data_usage_menu_split_4g (7417435609285381968) -->
+    <skip />
+    <!-- no translation found for data_usage_menu_show_wifi (8266875319417201085) -->
+    <skip />
+    <!-- no translation found for data_usage_change_cycle (7776556448920114866) -->
+    <skip />
+    <!-- no translation found for data_usage_pick_cycle_day (4470796861757050966) -->
+    <skip />
+    <!-- no translation found for data_usage_disable_mobile_limit (289740911281022322) -->
+    <skip />
+    <!-- no translation found for data_usage_disable_4g_limit (5808210773758699800) -->
+    <skip />
+    <!-- no translation found for data_usage_disable_3g_limit (3856971004328238231) -->
+    <skip />
+    <!-- no translation found for data_usage_tab_wifi (1728851922959017766) -->
+    <skip />
+    <!-- no translation found for data_usage_tab_mobile (454140350007299045) -->
+    <skip />
+    <!-- no translation found for data_usage_tab_4g (1301978716067512235) -->
+    <skip />
+    <!-- no translation found for data_usage_tab_3g (6092169523081538718) -->
+    <skip />
+    <!-- no translation found for data_usage_enable_mobile (986782622560157977) -->
+    <skip />
+    <!-- no translation found for data_usage_enable_3g (6304006671869578254) -->
+    <skip />
+    <!-- no translation found for data_usage_enable_4g (3635854097335036738) -->
+    <skip />
+    <!-- no translation found for data_usage_app_settings (3727561362090820369) -->
+    <skip />
+    <!-- no translation found for data_usage_app_restrict_background (8856643905291165256) -->
+    <skip />
+    <!-- no translation found for data_usage_app_restrict_background_summary (1503361245973512092) -->
+    <skip />
+    <!-- no translation found for data_usage_app_restrict_dialog_title (8110736468987743260) -->
+    <skip />
+    <!-- no translation found for data_usage_app_restrict_dialog (100001698378554777) -->
+    <skip />
+    <!-- no translation found for data_usage_cycle_editor_title (1373797281540188533) -->
+    <skip />
+    <!-- no translation found for data_usage_cycle_editor_subtitle (5512903797979928416) -->
+    <skip />
+    <!-- no translation found for data_usage_cycle_editor_positive (4565302264487526138) -->
+    <skip />
+    <!-- no translation found for data_usage_limit_dialog_title (3023111643632996097) -->
+    <skip />
+    <!-- no translation found for data_usage_limit_dialog_mobile (7931094451923591578) -->
+    <skip />
+    <!-- no translation found for data_usage_limit_dialog_3g (5478553071420316963) -->
+    <skip />
+    <!-- no translation found for data_usage_limit_dialog_4g (6134008906742403777) -->
+    <skip />
+    <!-- no translation found for data_usage_disabled_dialog_3g_title (4221584306492812040) -->
+    <skip />
+    <!-- no translation found for data_usage_disabled_dialog_4g_title (715585612162185936) -->
+    <skip />
+    <!-- no translation found for data_usage_disabled_dialog_mobile_title (209516216265000221) -->
+    <skip />
+    <!-- no translation found for data_usage_disabled_dialog (2874031671067845964) -->
+    <skip />
+    <!-- no translation found for data_usage_disabled_dialog_enable (5738467047490662678) -->
+    <skip />
 </resources>

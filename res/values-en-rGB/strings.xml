@@ -316,7 +316,7 @@
     <string name="unlock_set_unlock_pin_summary" msgid="5556722736289132512">"Require a numerical PIN to unlock the screen"</string>
     <string name="unlock_set_unlock_password_title" msgid="8775603825675090937">"Password"</string>
     <string name="unlock_set_unlock_password_summary" msgid="7871968012198279034">"Require a password to unlock the screen"</string>
-    <!-- outdated translation 5962903914511361952 -->     <string name="unlock_set_unlock_disabled_summary" msgid="2120729867788851674">"Disabled by remote device administrator"</string>
+    <string name="unlock_set_unlock_disabled_summary" msgid="2120729867788851674">"Disabled by administrator, encryption policy or credential storage"</string>
     <string name="unlock_set_unlock_mode_off" msgid="378729687629105388">"Off"</string>
     <string name="unlock_set_unlock_mode_none" msgid="7137296704741184239">"No security"</string>
     <string name="unlock_set_unlock_mode_pattern" msgid="464022606293547390">"Secured with pattern"</string>
@@ -599,6 +599,7 @@
     <string name="brightness_summary" msgid="838917350127550703">"Adjust the brightness of the screen"</string>
     <string name="screen_timeout" msgid="6962654593018319466">"Timeout"</string>
     <string name="screen_timeout_summary" msgid="4471347210332380587">"Screen turns off automatically after <xliff:g id="TIMEOUT_DESCRIPTION">%1$s</xliff:g>"</string>
+    <string name="wallpaper_settings_title" msgid="5449180116365824625">"Wallpaper"</string>
     <string name="dream_settings_title" msgid="6536876013377446805">"Android Dreams"</string>
     <string name="dream_settings_summary" msgid="6809871648071408259">"Screen savers and other idle diversions"</string>
     <string name="dream_component_title" msgid="505229894674572578">"Selected dream"</string>
@@ -654,6 +655,7 @@
     <string name="status_number" product="tablet" msgid="1138837891091222272">"MDN"</string>
     <string name="status_number" product="default" msgid="5123197324870153205">"My phone number"</string>
     <string name="status_min_number" msgid="3519504522179420597">"MIN"</string>
+    <string name="status_msid_number" msgid="909010114445780530">"MSID"</string>
     <string name="status_prl_version" msgid="8499039751817386529">"PRL Version"</string>
     <string name="status_meid_number" msgid="2037549729230058915">"IMEI/MEID"</string>
     <string name="status_network_type" msgid="3279383550222116235">"Mobile network type"</string>
@@ -1036,10 +1038,8 @@
     <string name="show_password" msgid="2198798062604049206">"Visible passwords"</string>
     <string name="show_password_summary" msgid="3806709974395178121">"Show password as you type"</string>
     <string name="ime_security_warning" msgid="812267421486877917">"This input method may be able to collect all the text that you type, including personal data like passwords and credit card numbers. It comes from the application <xliff:g id="IME_APPLICATION_NAME">%1$s</xliff:g>. Use this input method?"</string>
-    <!-- no translation found for pointer_settings_category (6090176550039035130) -->
-    <skip />
-    <!-- no translation found for pointer_speed (1221342330217861616) -->
-    <skip />
+    <string name="pointer_settings_category" msgid="6090176550039035130">"Mouse and track pad settings"</string>
+    <string name="pointer_speed" msgid="1221342330217861616">"Pointer speed"</string>
     <string name="user_dict_settings_titlebar" msgid="765659257455000490">"User dictionary"</string>
     <string name="user_dict_single_settings_title" msgid="5454855286173849284">"User dictionary"</string>
     <string name="user_dict_multiple_settings_title" msgid="326583195525296750">"Manage user dictionaries"</string>
@@ -1123,8 +1123,7 @@
     <string name="accessibility_power_button_category" msgid="8545885236482339928">"Power button"</string>
     <string name="accessibility_power_button_ends_call" msgid="7698764194501089533">"Power button ends call"</string>
     <string name="accessibility_power_button_ends_call_summary" msgid="8878097632186291462">"During a call, pressing Power ends call instead of turning off screen"</string>
-    <!-- no translation found for settings_button (3006713718908152930) -->
-    <skip />
+    <string name="settings_button" msgid="3006713718908152930">"Settings"</string>
     <string name="touchscreen_gestures_category" msgid="3109869155350859625">"Touch-screen gestures"</string>
     <string name="long_press_timeout_selector_title" msgid="1396876537252863044">"Touch &amp; hold delay"</string>
     <string name="long_press_timeout_selector_summary" msgid="2261114502740278996">"Delay until a touch is interpreted as a touch &amp; hold"</string>
@@ -1237,6 +1236,8 @@
     <string name="tts_engine_name_settings" msgid="4974538563074395920">"<xliff:g id="TTS_PLUGIN_ENGINE_NAME">%s</xliff:g> Settings"</string>
     <string name="tts_engine_name_is_enabled_summary" msgid="4909484006804022115">"<xliff:g id="TTS_PLUGIN_ENGINE_NAME">%s</xliff:g> is enabled"</string>
     <string name="tts_engine_name_is_disabled_summary" msgid="7644198182255168200">"<xliff:g id="TTS_PLUGIN_ENGINE_NAME">%s</xliff:g> is disabled"</string>
+    <string name="tts_engine_settings_section" msgid="2346105138448751893">"Engine settings"</string>
+    <string name="tts_engine_settings_title" msgid="3499112142425680334">"Settings for <xliff:g id="TTS_ENGINE_NAME">%s</xliff:g>"</string>
     <string name="pico_languages_and_voices" msgid="4611320375917773238">"Languages and voices"</string>
     <string name="pico_installed" msgid="2452546687858267414">"Installed"</string>
     <string name="pico_not_installed" msgid="6266845418419994311">"Not installed"</string>
@@ -1332,21 +1333,19 @@
     <string name="credentials_install_summary" product="nosdcard" msgid="4220422806818210676">"Install certificates from storage"</string>
     <string name="credentials_install_summary" product="default" msgid="5737658257407822713">"Install certificates from SD card"</string>
     <string name="credentials_reset" msgid="3239382277144980418">"Clear credentials"</string>
-    <!-- outdated translation 2127419861568976637 -->     <string name="credentials_reset_summary" msgid="3369361230171260282">"Clear credential storage of all contents and reset its password"</string>
+    <string name="credentials_reset_summary" msgid="3369361230171260282">"Remove all certificates"</string>
     <string name="credentials_unlock" msgid="1463040326264133844">"Enter Password"</string>
     <string name="credentials_unlock_hint" msgid="5889551635843338639">"Enter the password for credential storage."</string>
     <string name="credentials_old_password" msgid="7553393815538684028">"Current password:"</string>
-    <!-- outdated translation 7883277320781857760 -->     <string name="credentials_reset_hint" msgid="1566409057833618877">"Are you sure that you want to delete all credentials and reset the credential storage password?"</string>
+    <string name="credentials_reset_hint" msgid="1566409057833618877">"All the contents will be removed. Are you sure about that?"</string>
     <string name="credentials_password_too_short" msgid="7502749986405522663">"The password must contain at least 8 characters."</string>
     <string name="credentials_wrong_password" msgid="2541932597104054807">"Incorrect password."</string>
     <string name="credentials_reset_warning" msgid="5320653011511797600">"Incorrect password. You have one more chance before credential storage is erased."</string>
     <string name="credentials_reset_warning_plural" msgid="6514085665301095279">"Incorrect password. You have <xliff:g id="NUMBER">%1$d</xliff:g> more chances before credential storage is erased."</string>
     <string name="credentials_erased" msgid="2907836028586342969">"Credential storage has been erased."</string>
-    <!-- no translation found for credentials_not_erased (397954733557821269) -->
-    <skip />
+    <string name="credentials_not_erased" msgid="397954733557821269">"Credential storage could not be erased."</string>
     <string name="credentials_enabled" msgid="7588607413349978930">"Credential storage is enabled."</string>
-    <!-- no translation found for credentials_configure_lock_screen_hint (6816970208840577219) -->
-    <skip />
+    <string name="credentials_configure_lock_screen_hint" msgid="6816970208840577219">"You must set a lock-screen PIN or password before you can use credential storage. Would you like to do that now?"</string>
     <string name="emergency_tone_title" msgid="1055954530111587114">"Emergency tone"</string>
     <string name="emergency_tone_summary" msgid="722259232924572153">"Set behaviour when an emergency call is placed"</string>
     <string name="privacy_settings" msgid="9206631214140954954">"Privacy"</string>
@@ -1454,4 +1453,37 @@
     <string name="select_all" msgid="6783085295161532497">"Select All"</string>
     <string name="hdcp_checking_title" msgid="8605478913544273282">"HDCP checking"</string>
     <string name="hdcp_checking_dialog_title" msgid="5141305530923283">"Set HDCP checking behaviour"</string>
+    <string name="data_usage_summary_title" msgid="3804110657238092929">"Data usage"</string>
+    <string name="data_usage_cycle" msgid="5652529796195787949">"Data usage cycle"</string>
+    <string name="data_usage_menu_split_4g" msgid="7417435609285381968">"Split 4G usage"</string>
+    <string name="data_usage_menu_show_wifi" msgid="8266875319417201085">"Show Wi-Fi usage"</string>
+    <string name="data_usage_change_cycle" msgid="7776556448920114866">"Change cycle…"</string>
+    <string name="data_usage_pick_cycle_day" msgid="4470796861757050966">"Day of month to reset data usage cycle:"</string>
+    <string name="data_usage_disable_mobile_limit" msgid="289740911281022322">"Disable mobile data at limit"</string>
+    <string name="data_usage_disable_4g_limit" msgid="5808210773758699800">"Disable 4G data at limit"</string>
+    <string name="data_usage_disable_3g_limit" msgid="3856971004328238231">"Disable 2G-3G data at limit"</string>
+    <string name="data_usage_tab_wifi" msgid="1728851922959017766">"Wi-Fi"</string>
+    <string name="data_usage_tab_mobile" msgid="454140350007299045">"Mobile"</string>
+    <string name="data_usage_tab_4g" msgid="1301978716067512235">"4G"</string>
+    <string name="data_usage_tab_3g" msgid="6092169523081538718">"2G-3G"</string>
+    <string name="data_usage_enable_mobile" msgid="986782622560157977">"Mobile data"</string>
+    <string name="data_usage_enable_3g" msgid="6304006671869578254">"2G-3G data"</string>
+    <string name="data_usage_enable_4g" msgid="3635854097335036738">"4G data"</string>
+    <string name="data_usage_app_settings" msgid="3727561362090820369">"View application settings"</string>
+    <string name="data_usage_app_restrict_background" msgid="8856643905291165256">"Restrict background data usage"</string>
+    <string name="data_usage_app_restrict_background_summary" msgid="1503361245973512092">"Only allow application background data when using an unlimited network"</string>
+    <string name="data_usage_app_restrict_dialog_title" msgid="8110736468987743260">"Restricting background data"</string>
+    <string name="data_usage_app_restrict_dialog" msgid="100001698378554777">"This feature may negatively affect applications which depend on background data usage."\n\n"More appropriate data usage controls may be found within this application\'s settings."</string>
+    <string name="data_usage_cycle_editor_title" msgid="1373797281540188533">"Usage cycle reset date"</string>
+    <string name="data_usage_cycle_editor_subtitle" msgid="5512903797979928416">"Date of each month:"</string>
+    <string name="data_usage_cycle_editor_positive" msgid="4565302264487526138">"set"</string>
+    <string name="data_usage_limit_dialog_title" msgid="3023111643632996097">"Limiting data usage"</string>
+    <string name="data_usage_limit_dialog_mobile" msgid="7931094451923591578">"Your mobile data connection will be disabled when the specified limit is reached."\n\n"To avoid coverage charges, consider using a reduced limit, as device and operator accounting methods may vary."</string>
+    <string name="data_usage_limit_dialog_3g" msgid="5478553071420316963">"Your 2G-3G data connection will be disabled when the specified limit is reached."\n\n"To avoid coverage charges, consider using a reduced limit, as device and operator accounting methods may vary."</string>
+    <string name="data_usage_limit_dialog_4g" msgid="6134008906742403777">"Your 4G data connection will be disabled when the specified limit is reached."\n\n"To avoid coverage charges, consider using a reduced limit, as device and operator accounting methods may vary."</string>
+    <string name="data_usage_disabled_dialog_3g_title" msgid="4221584306492812040">"2G-3G data disabled"</string>
+    <string name="data_usage_disabled_dialog_4g_title" msgid="715585612162185936">"4G data disabled"</string>
+    <string name="data_usage_disabled_dialog_mobile_title" msgid="209516216265000221">"Mobile data disabled"</string>
+    <string name="data_usage_disabled_dialog" msgid="2874031671067845964">"The specified data usage limit has been reached."\n\n"Additional data use may incur operator charges."</string>
+    <string name="data_usage_disabled_dialog_enable" msgid="5738467047490662678">"re-enable data"</string>
 </resources>

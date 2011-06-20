@@ -316,7 +316,7 @@
     <string name="unlock_set_unlock_pin_summary" msgid="5556722736289132512">"Exige senha numérica para desbloquear a tela"</string>
     <string name="unlock_set_unlock_password_title" msgid="8775603825675090937">"Senha"</string>
     <string name="unlock_set_unlock_password_summary" msgid="7871968012198279034">"Exige uma senha para desbloquear a tela"</string>
-    <!-- outdated translation 5962903914511361952 -->     <string name="unlock_set_unlock_disabled_summary" msgid="2120729867788851674">"Desativ. pelo administrador remoto do aparelho"</string>
+    <string name="unlock_set_unlock_disabled_summary" msgid="2120729867788851674">"Des. pelo adm., pol. de cript. ou armaz. de cred."</string>
     <string name="unlock_set_unlock_mode_off" msgid="378729687629105388">"Desativado"</string>
     <string name="unlock_set_unlock_mode_none" msgid="7137296704741184239">"Sem segurança"</string>
     <string name="unlock_set_unlock_mode_pattern" msgid="464022606293547390">"Protegido com padrão"</string>
@@ -599,6 +599,8 @@
     <string name="brightness_summary" msgid="838917350127550703">"Ajustar o brilho da tela"</string>
     <string name="screen_timeout" msgid="6962654593018319466">"Tempo limite"</string>
     <string name="screen_timeout_summary" msgid="4471347210332380587">"A tela é automaticamente desativada após <xliff:g id="TIMEOUT_DESCRIPTION">%1$s</xliff:g>"</string>
+    <!-- no translation found for wallpaper_settings_title (5449180116365824625) -->
+    <skip />
     <string name="dream_settings_title" msgid="6536876013377446805">"Android Dreams"</string>
     <string name="dream_settings_summary" msgid="6809871648071408259">"Protetores de tela e outras distrações"</string>
     <string name="dream_component_title" msgid="505229894674572578">"Sonho selecionado"</string>
@@ -654,6 +656,7 @@
     <string name="status_number" product="tablet" msgid="1138837891091222272">"MDN"</string>
     <string name="status_number" product="default" msgid="5123197324870153205">"Meu número de telefone"</string>
     <string name="status_min_number" msgid="3519504522179420597">"MIN"</string>
+    <string name="status_msid_number" msgid="909010114445780530">"MSID"</string>
     <string name="status_prl_version" msgid="8499039751817386529">"Versão PRL"</string>
     <string name="status_meid_number" msgid="2037549729230058915">"IMEI/MEID"</string>
     <string name="status_network_type" msgid="3279383550222116235">"Tipo de rede móvel"</string>
@@ -1036,10 +1039,8 @@
     <string name="show_password" msgid="2198798062604049206">"Senhas visíveis"</string>
     <string name="show_password_summary" msgid="3806709974395178121">"Mostrar senha ao digitar"</string>
     <string name="ime_security_warning" msgid="812267421486877917">"Este método de entrada pode coletar todo o texto que você digitar, incluindo dados pessoais como senhas e números de cartão de crédito. Ele é proveniente do aplicativo <xliff:g id="IME_APPLICATION_NAME">%1$s</xliff:g>. Usar este método de entrada?"</string>
-    <!-- no translation found for pointer_settings_category (6090176550039035130) -->
-    <skip />
-    <!-- no translation found for pointer_speed (1221342330217861616) -->
-    <skip />
+    <string name="pointer_settings_category" msgid="6090176550039035130">"Configurações de mouse e trackpad"</string>
+    <string name="pointer_speed" msgid="1221342330217861616">"Velocidade do ponteiro"</string>
     <string name="user_dict_settings_titlebar" msgid="765659257455000490">"Dicionário do usuário"</string>
     <string name="user_dict_single_settings_title" msgid="5454855286173849284">"Dicionário do usuário"</string>
     <string name="user_dict_multiple_settings_title" msgid="326583195525296750">"Gerenciar dicionários do usuário"</string>
@@ -1123,8 +1124,7 @@
     <string name="accessibility_power_button_category" msgid="8545885236482339928">"Botão Liga/desliga"</string>
     <string name="accessibility_power_button_ends_call" msgid="7698764194501089533">"Botão Liga/desliga encerra a chamada"</string>
     <string name="accessibility_power_button_ends_call_summary" msgid="8878097632186291462">"Durante uma chamada, pressionar o botão Liga/desliga encerra a chamada em vez de desativar a tela."</string>
-    <!-- no translation found for settings_button (3006713718908152930) -->
-    <skip />
+    <string name="settings_button" msgid="3006713718908152930">"Configurações"</string>
     <string name="touchscreen_gestures_category" msgid="3109869155350859625">"Gestos da tela de toque"</string>
     <string name="long_press_timeout_selector_title" msgid="1396876537252863044">"Atraso ao tocar e pressionar"</string>
     <string name="long_press_timeout_selector_summary" msgid="2261114502740278996">"Prolongue até que um toque seja interpretado como tocar e manter pressionado"</string>
@@ -1237,6 +1237,10 @@
     <string name="tts_engine_name_settings" msgid="4974538563074395920">"Configurações de <xliff:g id="TTS_PLUGIN_ENGINE_NAME">%s</xliff:g>"</string>
     <string name="tts_engine_name_is_enabled_summary" msgid="4909484006804022115">"<xliff:g id="TTS_PLUGIN_ENGINE_NAME">%s</xliff:g> foi ativado"</string>
     <string name="tts_engine_name_is_disabled_summary" msgid="7644198182255168200">"<xliff:g id="TTS_PLUGIN_ENGINE_NAME">%s</xliff:g> foi desativado"</string>
+    <!-- no translation found for tts_engine_settings_section (2346105138448751893) -->
+    <skip />
+    <!-- no translation found for tts_engine_settings_title (3499112142425680334) -->
+    <skip />
     <string name="pico_languages_and_voices" msgid="4611320375917773238">"Idiomas e vozes"</string>
     <string name="pico_installed" msgid="2452546687858267414">"Instalado"</string>
     <string name="pico_not_installed" msgid="6266845418419994311">"Não instalado"</string>
@@ -1332,21 +1336,19 @@
     <string name="credentials_install_summary" product="nosdcard" msgid="4220422806818210676">"Instalar certificados do armazenamento"</string>
     <string name="credentials_install_summary" product="default" msgid="5737658257407822713">"Instalar certificados do cartão SD"</string>
     <string name="credentials_reset" msgid="3239382277144980418">"Limpar credenciais"</string>
-    <!-- outdated translation 2127419861568976637 -->     <string name="credentials_reset_summary" msgid="3369361230171260282">"Remover todo o conteúdo do armazenamento de credenciais e redefinir a senha"</string>
+    <string name="credentials_reset_summary" msgid="3369361230171260282">"Remover todos os certificados"</string>
     <string name="credentials_unlock" msgid="1463040326264133844">"Inserir senha"</string>
     <string name="credentials_unlock_hint" msgid="5889551635843338639">"Digite a senha para o armazenamento de credencial."</string>
     <string name="credentials_old_password" msgid="7553393815538684028">"Senha atual:"</string>
-    <!-- outdated translation 7883277320781857760 -->     <string name="credentials_reset_hint" msgid="1566409057833618877">"Tem certeza de que deseja excluir todas as credenciais e redefinir a senha do armazenamento de credenciais?"</string>
+    <string name="credentials_reset_hint" msgid="1566409057833618877">"Todo o conteúdo será removido. Tem certeza de que deseja fazer isso?"</string>
     <string name="credentials_password_too_short" msgid="7502749986405522663">"A senha deve ter no mínimo 8 caracteres."</string>
     <string name="credentials_wrong_password" msgid="2541932597104054807">"Senha incorreta."</string>
     <string name="credentials_reset_warning" msgid="5320653011511797600">"Senha incorreta. Você tem uma ou mais tentativas antes do armazenamento de credencial ser apagado."</string>
     <string name="credentials_reset_warning_plural" msgid="6514085665301095279">"Senha incorreta. Você tem mais <xliff:g id="NUMBER">%1$d</xliff:g> tentativas antes do armazenamento de credencial ser apagado."</string>
     <string name="credentials_erased" msgid="2907836028586342969">"O armazenamento de credenciais foi apagado."</string>
-    <!-- no translation found for credentials_not_erased (397954733557821269) -->
-    <skip />
+    <string name="credentials_not_erased" msgid="397954733557821269">"Armaz. de credenc. não apagado."</string>
     <string name="credentials_enabled" msgid="7588607413349978930">"O armazenamento de credenciais foi ativado."</string>
-    <!-- no translation found for credentials_configure_lock_screen_hint (6816970208840577219) -->
-    <skip />
+    <string name="credentials_configure_lock_screen_hint" msgid="6816970208840577219">"Você deve configurar um PIN ou uma senha da tela de bloqueio antes de usar o armazenamento de credenciais. Deseja fazer isso agora?"</string>
     <string name="emergency_tone_title" msgid="1055954530111587114">"Tom de emergência"</string>
     <string name="emergency_tone_summary" msgid="722259232924572153">"Definir comportamento durante uma chamada de emergência"</string>
     <string name="privacy_settings" msgid="9206631214140954954">"Privacidade"</string>
@@ -1454,4 +1456,69 @@
     <string name="select_all" msgid="6783085295161532497">"Selecionar todos"</string>
     <string name="hdcp_checking_title" msgid="8605478913544273282">"Verificação HDCP"</string>
     <string name="hdcp_checking_dialog_title" msgid="5141305530923283">"Config. a verificação HDCP"</string>
+    <string name="data_usage_summary_title" msgid="3804110657238092929">"Uso de dados"</string>
+    <!-- no translation found for data_usage_cycle (5652529796195787949) -->
+    <skip />
+    <!-- no translation found for data_usage_menu_split_4g (7417435609285381968) -->
+    <skip />
+    <!-- no translation found for data_usage_menu_show_wifi (8266875319417201085) -->
+    <skip />
+    <!-- no translation found for data_usage_change_cycle (7776556448920114866) -->
+    <skip />
+    <!-- no translation found for data_usage_pick_cycle_day (4470796861757050966) -->
+    <skip />
+    <!-- no translation found for data_usage_disable_mobile_limit (289740911281022322) -->
+    <skip />
+    <!-- no translation found for data_usage_disable_4g_limit (5808210773758699800) -->
+    <skip />
+    <!-- no translation found for data_usage_disable_3g_limit (3856971004328238231) -->
+    <skip />
+    <!-- no translation found for data_usage_tab_wifi (1728851922959017766) -->
+    <skip />
+    <!-- no translation found for data_usage_tab_mobile (454140350007299045) -->
+    <skip />
+    <!-- no translation found for data_usage_tab_4g (1301978716067512235) -->
+    <skip />
+    <!-- no translation found for data_usage_tab_3g (6092169523081538718) -->
+    <skip />
+    <!-- no translation found for data_usage_enable_mobile (986782622560157977) -->
+    <skip />
+    <!-- no translation found for data_usage_enable_3g (6304006671869578254) -->
+    <skip />
+    <!-- no translation found for data_usage_enable_4g (3635854097335036738) -->
+    <skip />
+    <!-- no translation found for data_usage_app_settings (3727561362090820369) -->
+    <skip />
+    <!-- no translation found for data_usage_app_restrict_background (8856643905291165256) -->
+    <skip />
+    <!-- no translation found for data_usage_app_restrict_background_summary (1503361245973512092) -->
+    <skip />
+    <!-- no translation found for data_usage_app_restrict_dialog_title (8110736468987743260) -->
+    <skip />
+    <!-- no translation found for data_usage_app_restrict_dialog (100001698378554777) -->
+    <skip />
+    <!-- no translation found for data_usage_cycle_editor_title (1373797281540188533) -->
+    <skip />
+    <!-- no translation found for data_usage_cycle_editor_subtitle (5512903797979928416) -->
+    <skip />
+    <!-- no translation found for data_usage_cycle_editor_positive (4565302264487526138) -->
+    <skip />
+    <!-- no translation found for data_usage_limit_dialog_title (3023111643632996097) -->
+    <skip />
+    <!-- no translation found for data_usage_limit_dialog_mobile (7931094451923591578) -->
+    <skip />
+    <!-- no translation found for data_usage_limit_dialog_3g (5478553071420316963) -->
+    <skip />
+    <!-- no translation found for data_usage_limit_dialog_4g (6134008906742403777) -->
+    <skip />
+    <!-- no translation found for data_usage_disabled_dialog_3g_title (4221584306492812040) -->
+    <skip />
+    <!-- no translation found for data_usage_disabled_dialog_4g_title (715585612162185936) -->
+    <skip />
+    <!-- no translation found for data_usage_disabled_dialog_mobile_title (209516216265000221) -->
+    <skip />
+    <!-- no translation found for data_usage_disabled_dialog (2874031671067845964) -->
+    <skip />
+    <!-- no translation found for data_usage_disabled_dialog_enable (5738467047490662678) -->
+    <skip />
 </resources>

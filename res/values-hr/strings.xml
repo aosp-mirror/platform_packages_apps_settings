@@ -316,7 +316,7 @@
     <string name="unlock_set_unlock_pin_summary" msgid="5556722736289132512">"Zahtijeva numerički PIN za otključavanje zaslona"</string>
     <string name="unlock_set_unlock_password_title" msgid="8775603825675090937">"Zaporka"</string>
     <string name="unlock_set_unlock_password_summary" msgid="7871968012198279034">"Potrebna je zaporka za otključavanje zaslona"</string>
-    <!-- outdated translation 5962903914511361952 -->     <string name="unlock_set_unlock_disabled_summary" msgid="2120729867788851674">"Onemogućio administrator udaljenog uređaja"</string>
+    <string name="unlock_set_unlock_disabled_summary" msgid="2120729867788851674">"Onemogućili administrator, pravila enkripcije ili pohrana vjerodajnica"</string>
     <string name="unlock_set_unlock_mode_off" msgid="378729687629105388">"Isključeno"</string>
     <string name="unlock_set_unlock_mode_none" msgid="7137296704741184239">"Nema zaštite"</string>
     <string name="unlock_set_unlock_mode_pattern" msgid="464022606293547390">"Osigurano uzorkom"</string>
@@ -599,6 +599,8 @@
     <string name="brightness_summary" msgid="838917350127550703">"Podesite svjetlinu zaslona"</string>
     <string name="screen_timeout" msgid="6962654593018319466">"Privremeni prekid"</string>
     <string name="screen_timeout_summary" msgid="4471347210332380587">"Zaslon se isključuje automatski nakon <xliff:g id="TIMEOUT_DESCRIPTION">%1$s</xliff:g>"</string>
+    <!-- no translation found for wallpaper_settings_title (5449180116365824625) -->
+    <skip />
     <string name="dream_settings_title" msgid="6536876013377446805">"Android Dreams"</string>
     <string name="dream_settings_summary" msgid="6809871648071408259">"Čuvari zaslona i ostala ometanja mirovanja"</string>
     <string name="dream_component_title" msgid="505229894674572578">"Odabrani san"</string>
@@ -654,6 +656,7 @@
     <string name="status_number" product="tablet" msgid="1138837891091222272">"MDN"</string>
     <string name="status_number" product="default" msgid="5123197324870153205">"Moj telefonski broj"</string>
     <string name="status_min_number" msgid="3519504522179420597">"MIN"</string>
+    <string name="status_msid_number" msgid="909010114445780530">"MSID"</string>
     <string name="status_prl_version" msgid="8499039751817386529">"PRL verzija"</string>
     <string name="status_meid_number" msgid="2037549729230058915">"IMEI/MEID"</string>
     <string name="status_network_type" msgid="3279383550222116235">"Vrsta mobilne mreže"</string>
@@ -798,7 +801,7 @@
     <string name="tether_settings_summary_all" product="tablet" msgid="6612660164315153427">"Dijelite mobilnu podatkovnu mrežu svojeg tabletnog uređaja putem USB-a, WiFi mreže ili Bluetootha"</string>
     <string name="tether_settings_summary_all" product="default" msgid="1171769255924636665">"Dijelite mobilnu podatkovnu mrežu svojeg telefona putem USB-a, WiFi mreže ili Bluetootha"</string>
     <string name="usb_title" msgid="7483344855356312510">"USB"</string>
-    <string name="usb_tethering_button_text" msgid="585829947108007917">"USB ograničavanje"</string>
+    <string name="usb_tethering_button_text" msgid="585829947108007917">"Dijeljenje USB-om"</string>
     <string name="usb_tethering_available_subtext" msgid="156779271296152605">"USB priključen, uključite za ograničenje"</string>
     <string name="usb_tethering_active_subtext" msgid="8916210851136467042">"Ograničeno"</string>
     <string name="usb_tethering_storage_active_subtext" msgid="6608933594288072573">"Nije moguće ograničiti ako se koristi USB pohranjivanje"</string>
@@ -901,7 +904,7 @@
     <string name="applications_settings_summary" msgid="2714215108369119717">"Upravljanje aplikacijama, postavljanje prečaca za brzo pokretanje"</string>
     <string name="applications_settings_header" msgid="6018266337275422250">"Postavke aplikacija"</string>
     <string name="install_applications" msgid="4872012136210802181">"Nepoznati izvori"</string>
-    <string name="install_unknown_applications" msgid="6612824788917283662">"Dopusti instalaciju aplikacija koje nisu s tržišta"</string>
+    <string name="install_unknown_applications" msgid="6612824788917283662">"Dopusti instalaciju aplikacija koje nisu s usluge Market"</string>
     <string name="install_all_warning" product="tablet" msgid="8143969767997876735">"Vaš tabletni uređaj i osobni podaci podložniji su napadima aplikacija s nepoznatih izvora. Slažete se da ste u potpunosti odgovorni za svu štetu nastalu na vašem tabletnom uređaju ili za gubitak podataka do kojeg može doći zbog upotrebe tih aplikacija."</string>
     <string name="install_all_warning" product="default" msgid="1923717607319933741">"Telefon i osobni podaci jače su ugroženi u slučaju upotrebe aplikacija iz nepoznatog izvora. Prihvaćate da ste samo odgovorni za sve štete na telefonu ili za gubitak podataka zbog upotrebe takvih aplikacija."</string>
     <string name="advanced_settings" msgid="1777249286757067969">"Napredne postavke"</string>
@@ -988,7 +991,7 @@
     <string name="storageuse_settings_title" msgid="5657014373502630403">"Upotreba pohrane"</string>
     <string name="storageuse_settings_summary" msgid="2556057379120846792">"Prikaz pohrane koju upotrebljavaju aplikacije"</string>
     <string name="runningservices_settings_title" msgid="8097287939865165213">"Pokrenute usluge"</string>
-    <string name="runningservices_settings_summary" msgid="854608995821032748">"Pogledajte i nadzirite trenutačno pokrenute veze"</string>
+    <string name="runningservices_settings_summary" msgid="854608995821032748">"Pogledajte i nadzirite pokrenute procese"</string>
     <string name="service_restarting" msgid="2242747937372354306">"Ponovno pokretanje"</string>
     <string name="cached" msgid="1059590879740175019">"Pozadinski proces u predmemoriji"</string>
     <string name="no_running_services" msgid="2059536495597645347">"Ništa se ne izvodi."</string>
@@ -1036,10 +1039,8 @@
     <string name="show_password" msgid="2198798062604049206">"Vidljive zaporke"</string>
     <string name="show_password_summary" msgid="3806709974395178121">"Prikaži zaporku tijekom unosa"</string>
     <string name="ime_security_warning" msgid="812267421486877917">"Ovaj način unosa može imati mogućnost prikupljanja teksta koji unosite, uključujući osobne podatke poput zaporki i brojeva kreditne kartice. To omogućuje aplikacija <xliff:g id="IME_APPLICATION_NAME">%1$s</xliff:g>. Koristiti taj način unosa?"</string>
-    <!-- no translation found for pointer_settings_category (6090176550039035130) -->
-    <skip />
-    <!-- no translation found for pointer_speed (1221342330217861616) -->
-    <skip />
+    <string name="pointer_settings_category" msgid="6090176550039035130">"Postavke miša i dodirne pločice"</string>
+    <string name="pointer_speed" msgid="1221342330217861616">"Brzina pokazivača"</string>
     <string name="user_dict_settings_titlebar" msgid="765659257455000490">"Korisnički rječnik"</string>
     <string name="user_dict_single_settings_title" msgid="5454855286173849284">"Korisnički rječnik"</string>
     <string name="user_dict_multiple_settings_title" msgid="326583195525296750">"Upravljanje korisničkim rječnicima"</string>
@@ -1085,8 +1086,8 @@
     <string name="builtin_keyboard_settings_summary" msgid="2392531685358035899">"Postavke fizičke tipkovnice"</string>
     <string name="development_settings_title" msgid="6719732334835420989">"Razvoj"</string>
     <string name="development_settings_summary" msgid="2151320488701538355">"Postavite opcije za razvoj aplikacije"</string>
-    <string name="enable_adb" msgid="7982306934419797485">"Uklanjanje programske pogreške na USB-u"</string>
-    <string name="enable_adb_summary" msgid="4881186971746056635">"Način za otklanjanje pogrešaka ako je priključen USB"</string>
+    <string name="enable_adb" msgid="7982306934419797485">"Uklanjanje pogreške USB-a"</string>
+    <string name="enable_adb_summary" msgid="4881186971746056635">"Uklanjanje pogrešaka s priključenim USB-om"</string>
     <string name="keep_screen_on" msgid="1146389631208760344">"Ne pokreći mirovanje"</string>
     <string name="keep_screen_on_summary" msgid="2173114350754293009">"Zaslon nikad neće prijeći u mirovanje tijekom punjenja"</string>
     <string name="allow_mock_location" msgid="2787962564578664888">"Dopusti probne lokacije"</string>
@@ -1121,10 +1122,9 @@
     <string name="accessibility_script_injection_security_warning" product="tablet" msgid="1113600871264359828">"Neke aplikacije mogu tražiti Google da na vaš tabletni uređaj preuzme skripte koje će njihov sadržaj učiniti dostupnijim. Jeste li sigurni da želite Googleu dopustiti instaliranje skripti za pristup vašem tabletnom uređaju?"</string>
     <string name="accessibility_script_injection_security_warning" product="default" msgid="9078893361741942109">"Neke aplikacije mogu tražiti Google da na vaš telefon preuzme skripte koje će njihov sadržaj učiniti dostupnijim. Jeste li sigurni da želite dopustiti Googleu instaliranje skripti za dostupnost na vaš telefon?"</string>
     <string name="accessibility_power_button_category" msgid="8545885236482339928">"Tipka za uključivanje/isključivanje"</string>
-    <string name="accessibility_power_button_ends_call" msgid="7698764194501089533">"Tipka za uključivanje/isključivanje/poziv"</string>
-    <string name="accessibility_power_button_ends_call_summary" msgid="8878097632186291462">"Tijekom poziva pritisnite Napajanje sa završetkom poziva umjesto isključivanja zaslona"</string>
-    <!-- no translation found for settings_button (3006713718908152930) -->
-    <skip />
+    <string name="accessibility_power_button_ends_call" msgid="7698764194501089533">"Tipka za uključivanje prekida poziv"</string>
+    <string name="accessibility_power_button_ends_call_summary" msgid="8878097632186291462">"Tijekom poziva tipka za uključivanje ne isključuje zaslon, već prekida poziv."</string>
+    <string name="settings_button" msgid="3006713718908152930">"Postavke"</string>
     <string name="touchscreen_gestures_category" msgid="3109869155350859625">"Geste za dodirni zaslon"</string>
     <string name="long_press_timeout_selector_title" msgid="1396876537252863044">"Dodirnite i držite odgodu"</string>
     <string name="long_press_timeout_selector_summary" msgid="2261114502740278996">"Odgoda dok se dodir ne protumači kao dodir i držanje"</string>
@@ -1200,17 +1200,17 @@
     <string name="menu_stats_refresh" msgid="1676215433344981075">"Osvježi"</string>
     <string name="process_kernel_label" msgid="3916858646836739323">"Android OS"</string>
     <string name="process_mediaserver_label" msgid="6500382062945689285">"Medijski poslužitelj"</string>
-    <string name="voice_input_output_settings" msgid="1336135218350444783">"Glasovni unos i izlazne vrijednosti"</string>
+    <string name="voice_input_output_settings" msgid="1336135218350444783">"Glas. ulaz i izlaz"</string>
     <string name="voice_input_output_settings_title" msgid="2442850635048676991">"Postavke za glasovni unos i izlazne vrijednosti"</string>
     <string name="voice_search_settings_title" msgid="2775469246913196536">"Glasovno pretraživanje"</string>
     <string name="keyboard_settings_title" msgid="5080115226780201234">"Android tipkovnica"</string>
-    <string name="voice_input_category" msgid="1589318440824204736">"Glasovni unos"</string>
-    <string name="voice_output_category" msgid="2624538587784986229">"Izlazne glasovne vrijednosti"</string>
+    <string name="voice_input_category" msgid="1589318440824204736">"Glasovni ulaz"</string>
+    <string name="voice_output_category" msgid="2624538587784986229">"Glasovni izlaz"</string>
     <string name="recognizer_title" msgid="3231385184559054457">"Alat za prepoznavanje glasa"</string>
     <string name="recognizer_settings_title" msgid="6038598099039717232">"Postavke alata za prepoznavanje glasa"</string>
     <string name="recognizer_settings_summary" msgid="4472287934134546902">"Postavke za \"<xliff:g id="RECOGNIZER_NAME">%s</xliff:g>\""</string>
-    <string name="tts_settings" msgid="8186971894801348327">"Postavke teksta-za-govor"</string>
-    <string name="tts_settings_title" msgid="4182348653053000933">"Postavke teksta-za-govor"</string>
+    <string name="tts_settings" msgid="8186971894801348327">"Postavke za tekst u govor"</string>
+    <string name="tts_settings_title" msgid="4182348653053000933">"Postavke za teksta u govor"</string>
     <string name="use_default_tts_settings_title" msgid="1577063839539732930">"Uvijek koristi moje postavke"</string>
     <string name="use_default_tts_settings_summary" msgid="4253502106159206276">"Donje zadane postavke poništavaju postavke aplikacije"</string>
     <string name="tts_default_settings_section" msgid="5787915620218907443">"Zadane postavke"</string>
@@ -1221,9 +1221,9 @@
     <string name="tts_default_pitch_title" msgid="6135942113172488671">"Visina glasa"</string>
     <string name="tts_default_pitch_summary" msgid="1328298665182885277">"Utječe na ton izgovorenog teksta"</string>
     <string name="tts_default_lang_title" msgid="8018087612299820556">"Jezik"</string>
-    <string name="tts_default_lang_summary" msgid="5219362163902707785">"Postavlja glas specifičan za jezik izgovorenog teksta"</string>
+    <string name="tts_default_lang_summary" msgid="5219362163902707785">"Postavlja jezik govora"</string>
     <string name="tts_play_example_title" msgid="7094780383253097230">"Poslušajte primjer"</string>
-    <string name="tts_play_example_summary" msgid="8029071615047894486">"Reproducirajte kratki pokaz sinteze zvuka"</string>
+    <string name="tts_play_example_summary" msgid="8029071615047894486">"Poslušajte primjer sinteze zvuka"</string>
     <string name="tts_install_data_title" msgid="4264378440508149986">"Instaliraj glasovne podatke"</string>
     <string name="tts_install_data_summary" msgid="5742135732511822589">"Instaliraj glasovne podatke potrebne za sintezu govora"</string>
     <string name="tts_data_installed_summary" msgid="9162111552859972809">"Glasovi potrebni za sintezu govora već su ispravno instalirani"</string>
@@ -1237,6 +1237,10 @@
     <string name="tts_engine_name_settings" msgid="4974538563074395920">"<xliff:g id="TTS_PLUGIN_ENGINE_NAME">%s</xliff:g> postavke"</string>
     <string name="tts_engine_name_is_enabled_summary" msgid="4909484006804022115">"Stavka <xliff:g id="TTS_PLUGIN_ENGINE_NAME">%s</xliff:g> je onemogućena"</string>
     <string name="tts_engine_name_is_disabled_summary" msgid="7644198182255168200">"Stavka <xliff:g id="TTS_PLUGIN_ENGINE_NAME">%s</xliff:g> je onemogućena"</string>
+    <!-- no translation found for tts_engine_settings_section (2346105138448751893) -->
+    <skip />
+    <!-- no translation found for tts_engine_settings_title (3499112142425680334) -->
+    <skip />
     <string name="pico_languages_and_voices" msgid="4611320375917773238">"Jezici i glasovi"</string>
     <string name="pico_installed" msgid="2452546687858267414">"Instalirano"</string>
     <string name="pico_not_installed" msgid="6266845418419994311">"Nije instalirano"</string>
@@ -1332,21 +1336,19 @@
     <string name="credentials_install_summary" product="nosdcard" msgid="4220422806818210676">"Instaliraj certifikate iz memorije"</string>
     <string name="credentials_install_summary" product="default" msgid="5737658257407822713">"Instaliraj certifikate s kartice SD"</string>
     <string name="credentials_reset" msgid="3239382277144980418">"Izbriši vjerodajnice"</string>
-    <!-- outdated translation 2127419861568976637 -->     <string name="credentials_reset_summary" msgid="3369361230171260282">"Isprazni cijeli sadržaj spremnika za vjerodajnice i poništi pripadajuće zaporke"</string>
+    <string name="credentials_reset_summary" msgid="3369361230171260282">"Uklanjanje svih certifikata"</string>
     <string name="credentials_unlock" msgid="1463040326264133844">"Unesite zaporku"</string>
     <string name="credentials_unlock_hint" msgid="5889551635843338639">"Unesite zaporku za pohranu vjerodajnica."</string>
     <string name="credentials_old_password" msgid="7553393815538684028">"Trenutačna zaporka:"</string>
-    <!-- outdated translation 7883277320781857760 -->     <string name="credentials_reset_hint" msgid="1566409057833618877">"Jeste li sigurni da želite izbrisati sve vjerodajnice i poništiti zaporku za pohranjivanje vjerodajnica?"</string>
+    <string name="credentials_reset_hint" msgid="1566409057833618877">"Svi sadržaji bit će uklonjeni. Jeste li sigurni?"</string>
     <string name="credentials_password_too_short" msgid="7502749986405522663">"Zaporka treba imati barem 8 znakova."</string>
     <string name="credentials_wrong_password" msgid="2541932597104054807">"Pogrešna zaporka."</string>
     <string name="credentials_reset_warning" msgid="5320653011511797600">"Pogrešna zaporka. Imate još jedan pokušaj prije brisanja pohrane vjerodajnica."</string>
     <string name="credentials_reset_warning_plural" msgid="6514085665301095279">"Pogrešna zaporka. Još imate ovoliko pokušaja prije brisanja pohrane vjerodajnica: <xliff:g id="NUMBER">%1$d</xliff:g>."</string>
     <string name="credentials_erased" msgid="2907836028586342969">"Pohrana vjerodajnica izbrisana je."</string>
-    <!-- no translation found for credentials_not_erased (397954733557821269) -->
-    <skip />
+    <string name="credentials_not_erased" msgid="397954733557821269">"Pohrana vjer. nije izbrisana."</string>
     <string name="credentials_enabled" msgid="7588607413349978930">"Pohranjivanje vjerodajnica je omogućeno."</string>
-    <!-- no translation found for credentials_configure_lock_screen_hint (6816970208840577219) -->
-    <skip />
+    <string name="credentials_configure_lock_screen_hint" msgid="6816970208840577219">"Morate postaviti PIN ili zaporku za zaključavanje zaslona kako biste mogli upotrebljavati pohranu vjerodajnica. Želite li to učiniti sada?"</string>
     <string name="emergency_tone_title" msgid="1055954530111587114">"Ton hitnog poziva"</string>
     <string name="emergency_tone_summary" msgid="722259232924572153">"Postavite način ponašanja za hitan poziv"</string>
     <string name="privacy_settings" msgid="9206631214140954954">"Privatnost"</string>
@@ -1405,7 +1407,8 @@
     <string name="wifi_setup_description_connecting" msgid="1884664966455980182">"Povezivanje može potrajati nekoliko minuta..."</string>
     <string name="wifi_setup_description_connected" msgid="5235991893829582459">"Dodirnite "<b>"Dalje"</b>" za nastavak postavljanja."\n\n"Dodirnite "<b>"Natrag"</b>" za povezivanje s drugom Wi-Fi mrežom."</string>
     <string name="account_sync_settings_title" msgid="4578227872921044660">"Sink. postavke"</string>
-    <!-- outdated translation 7257854052606796327 -->     <string name="sync_is_failing" msgid="1591561768344128377">"Sinkronizacija trenutačno ima problema. Uskoro će nastaviti s radom."</string>
+    <!-- no translation found for sync_is_failing (1591561768344128377) -->
+    <skip />
     <string name="add_account_label" msgid="7811707265834013767">"Dodavanje računa"</string>
     <string name="header_general_sync_settings" msgid="3487451896424238469">"Postavke opće sinkronizacije"</string>
     <string name="background_data" msgid="5779592891375473817">"Pozadinski podaci"</string>
@@ -1454,4 +1457,69 @@
     <string name="select_all" msgid="6783085295161532497">"Odaberi sve"</string>
     <string name="hdcp_checking_title" msgid="8605478913544273282">"HDCP provjera"</string>
     <string name="hdcp_checking_dialog_title" msgid="5141305530923283">"Postav. ponaš. HDCP prov."</string>
+    <string name="data_usage_summary_title" msgid="3804110657238092929">"Potrošnja podataka"</string>
+    <!-- no translation found for data_usage_cycle (5652529796195787949) -->
+    <skip />
+    <!-- no translation found for data_usage_menu_split_4g (7417435609285381968) -->
+    <skip />
+    <!-- no translation found for data_usage_menu_show_wifi (8266875319417201085) -->
+    <skip />
+    <!-- no translation found for data_usage_change_cycle (7776556448920114866) -->
+    <skip />
+    <!-- no translation found for data_usage_pick_cycle_day (4470796861757050966) -->
+    <skip />
+    <!-- no translation found for data_usage_disable_mobile_limit (289740911281022322) -->
+    <skip />
+    <!-- no translation found for data_usage_disable_4g_limit (5808210773758699800) -->
+    <skip />
+    <!-- no translation found for data_usage_disable_3g_limit (3856971004328238231) -->
+    <skip />
+    <!-- no translation found for data_usage_tab_wifi (1728851922959017766) -->
+    <skip />
+    <!-- no translation found for data_usage_tab_mobile (454140350007299045) -->
+    <skip />
+    <!-- no translation found for data_usage_tab_4g (1301978716067512235) -->
+    <skip />
+    <!-- no translation found for data_usage_tab_3g (6092169523081538718) -->
+    <skip />
+    <!-- no translation found for data_usage_enable_mobile (986782622560157977) -->
+    <skip />
+    <!-- no translation found for data_usage_enable_3g (6304006671869578254) -->
+    <skip />
+    <!-- no translation found for data_usage_enable_4g (3635854097335036738) -->
+    <skip />
+    <!-- no translation found for data_usage_app_settings (3727561362090820369) -->
+    <skip />
+    <!-- no translation found for data_usage_app_restrict_background (8856643905291165256) -->
+    <skip />
+    <!-- no translation found for data_usage_app_restrict_background_summary (1503361245973512092) -->
+    <skip />
+    <!-- no translation found for data_usage_app_restrict_dialog_title (8110736468987743260) -->
+    <skip />
+    <!-- no translation found for data_usage_app_restrict_dialog (100001698378554777) -->
+    <skip />
+    <!-- no translation found for data_usage_cycle_editor_title (1373797281540188533) -->
+    <skip />
+    <!-- no translation found for data_usage_cycle_editor_subtitle (5512903797979928416) -->
+    <skip />
+    <!-- no translation found for data_usage_cycle_editor_positive (4565302264487526138) -->
+    <skip />
+    <!-- no translation found for data_usage_limit_dialog_title (3023111643632996097) -->
+    <skip />
+    <!-- no translation found for data_usage_limit_dialog_mobile (7931094451923591578) -->
+    <skip />
+    <!-- no translation found for data_usage_limit_dialog_3g (5478553071420316963) -->
+    <skip />
+    <!-- no translation found for data_usage_limit_dialog_4g (6134008906742403777) -->
+    <skip />
+    <!-- no translation found for data_usage_disabled_dialog_3g_title (4221584306492812040) -->
+    <skip />
+    <!-- no translation found for data_usage_disabled_dialog_4g_title (715585612162185936) -->
+    <skip />
+    <!-- no translation found for data_usage_disabled_dialog_mobile_title (209516216265000221) -->
+    <skip />
+    <!-- no translation found for data_usage_disabled_dialog (2874031671067845964) -->
+    <skip />
+    <!-- no translation found for data_usage_disabled_dialog_enable (5738467047490662678) -->
+    <skip />
 </resources>

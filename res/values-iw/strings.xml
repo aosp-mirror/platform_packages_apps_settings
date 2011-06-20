@@ -316,7 +316,7 @@
     <string name="unlock_set_unlock_pin_summary" msgid="5556722736289132512">"דרוש PIN מספרי לביטול נעילת המסך"</string>
     <string name="unlock_set_unlock_password_title" msgid="8775603825675090937">"סיסמה"</string>
     <string name="unlock_set_unlock_password_summary" msgid="7871968012198279034">"דרושה סיסמה לביטול נעילת המסך"</string>
-    <!-- outdated translation 5962903914511361952 -->     <string name="unlock_set_unlock_disabled_summary" msgid="2120729867788851674">"הושבת על ידי מנהל התקן מרוחק"</string>
+    <string name="unlock_set_unlock_disabled_summary" msgid="2120729867788851674">"הושבת על ידי מדיניות ההצפנה של מנהל המערכת, או אחסון האישורים"</string>
     <string name="unlock_set_unlock_mode_off" msgid="378729687629105388">"כבוי"</string>
     <string name="unlock_set_unlock_mode_none" msgid="7137296704741184239">"אין אבטחה"</string>
     <string name="unlock_set_unlock_mode_pattern" msgid="464022606293547390">"מאובטח עם קו"</string>
@@ -599,6 +599,8 @@
     <string name="brightness_summary" msgid="838917350127550703">"התאמת בהירות המסך"</string>
     <string name="screen_timeout" msgid="6962654593018319466">"זמן קצוב לתפוגה"</string>
     <string name="screen_timeout_summary" msgid="4471347210332380587">"המסך נכבה אוטומטית לאחר <xliff:g id="TIMEOUT_DESCRIPTION">%1$s</xliff:g>"</string>
+    <!-- no translation found for wallpaper_settings_title (5449180116365824625) -->
+    <skip />
     <string name="dream_settings_title" msgid="6536876013377446805">"Android Dreams"</string>
     <string name="dream_settings_summary" msgid="6809871648071408259">"שומרי מסך והסחות חוסר פעילות אחרות"</string>
     <string name="dream_component_title" msgid="505229894674572578">"חלום נבחר"</string>
@@ -654,6 +656,7 @@
     <string name="status_number" product="tablet" msgid="1138837891091222272">"MDN"</string>
     <string name="status_number" product="default" msgid="5123197324870153205">"מספר הטלפון שלי"</string>
     <string name="status_min_number" msgid="3519504522179420597">"דקות"</string>
+    <string name="status_msid_number" msgid="909010114445780530">"MSID"</string>
     <string name="status_prl_version" msgid="8499039751817386529">"גרסת PRL"</string>
     <string name="status_meid_number" msgid="2037549729230058915">"IMEI / MEID"</string>
     <string name="status_network_type" msgid="3279383550222116235">"סוג רשת להתקנים ניידים"</string>
@@ -1036,10 +1039,8 @@
     <string name="show_password" msgid="2198798062604049206">"סיסמאות נראות"</string>
     <string name="show_password_summary" msgid="3806709974395178121">"הצגת סיסמה בעת ההקלדה"</string>
     <string name="ime_security_warning" msgid="812267421486877917">"ייתכן ששיטת קלט זו תוכל לאסוף את כל הטקסט שתקליד, כולל נתונים אישיים כגון סיסמאות ומספרי כרטיס אשראי. היא מגיעה מהיישום <xliff:g id="IME_APPLICATION_NAME">%1$s</xliff:g>. האם להשתמש בשיטת קלט זו?"</string>
-    <!-- no translation found for pointer_settings_category (6090176550039035130) -->
-    <skip />
-    <!-- no translation found for pointer_speed (1221342330217861616) -->
-    <skip />
+    <string name="pointer_settings_category" msgid="6090176550039035130">"הגדרות עכבר ומשטח עקיבה"</string>
+    <string name="pointer_speed" msgid="1221342330217861616">"מהירות המצביע"</string>
     <string name="user_dict_settings_titlebar" msgid="765659257455000490">"מילון משתמש"</string>
     <string name="user_dict_single_settings_title" msgid="5454855286173849284">"מילון משתמש"</string>
     <string name="user_dict_multiple_settings_title" msgid="326583195525296750">"ניהול מילוני משתמש"</string>
@@ -1123,8 +1124,7 @@
     <string name="accessibility_power_button_category" msgid="8545885236482339928">"לחצן הפעלה"</string>
     <string name="accessibility_power_button_ends_call" msgid="7698764194501089533">"לחצן ההפעלה מסיים את השיחה"</string>
     <string name="accessibility_power_button_ends_call_summary" msgid="8878097632186291462">"במהלך שיחה, לחיצה על לחצן ההפעלה תסיים את השיחה במקום לכבות את המסך"</string>
-    <!-- no translation found for settings_button (3006713718908152930) -->
-    <skip />
+    <string name="settings_button" msgid="3006713718908152930">"הגדרות"</string>
     <string name="touchscreen_gestures_category" msgid="3109869155350859625">"מחוות של מסך מגע"</string>
     <string name="long_press_timeout_selector_title" msgid="1396876537252863044">"עיכוב של \'גע והחזק\'"</string>
     <string name="long_press_timeout_selector_summary" msgid="2261114502740278996">"עיכוב עד שנגיעה תזוהה כפעולת \'גע והחזק\'"</string>
@@ -1237,6 +1237,10 @@
     <string name="tts_engine_name_settings" msgid="4974538563074395920">"הגדרות <xliff:g id="TTS_PLUGIN_ENGINE_NAME">%s</xliff:g>"</string>
     <string name="tts_engine_name_is_enabled_summary" msgid="4909484006804022115">"<xliff:g id="TTS_PLUGIN_ENGINE_NAME">%s</xliff:g> מופעל"</string>
     <string name="tts_engine_name_is_disabled_summary" msgid="7644198182255168200">"<xliff:g id="TTS_PLUGIN_ENGINE_NAME">%s</xliff:g> מושבת"</string>
+    <!-- no translation found for tts_engine_settings_section (2346105138448751893) -->
+    <skip />
+    <!-- no translation found for tts_engine_settings_title (3499112142425680334) -->
+    <skip />
     <string name="pico_languages_and_voices" msgid="4611320375917773238">"שפות וצלילים"</string>
     <string name="pico_installed" msgid="2452546687858267414">"הותקן"</string>
     <string name="pico_not_installed" msgid="6266845418419994311">"לא מותקן"</string>
@@ -1332,21 +1336,19 @@
     <string name="credentials_install_summary" product="nosdcard" msgid="4220422806818210676">"התקן אישורים מאמצעי אחסון"</string>
     <string name="credentials_install_summary" product="default" msgid="5737658257407822713">"התקן אישורים מכרטיס SD"</string>
     <string name="credentials_reset" msgid="3239382277144980418">"נקה אישורים"</string>
-    <!-- outdated translation 2127419861568976637 -->     <string name="credentials_reset_summary" msgid="3369361230171260282">"ניקוי אחסון אישורים מכל התוכן ואיפוס הסיסמה"</string>
+    <string name="credentials_reset_summary" msgid="3369361230171260282">"הסר את כל האישורים"</string>
     <string name="credentials_unlock" msgid="1463040326264133844">"הזן סיסמה"</string>
     <string name="credentials_unlock_hint" msgid="5889551635843338639">"הזן את הסיסמה עבור אחסון האישורים."</string>
     <string name="credentials_old_password" msgid="7553393815538684028">"הסיסמה הנוכחית:"</string>
-    <!-- outdated translation 7883277320781857760 -->     <string name="credentials_reset_hint" msgid="1566409057833618877">"האם אתה בטוח שברצונך למחוק את כל האישורים ולאפס את סיסמת אחסון האישורים?"</string>
+    <string name="credentials_reset_hint" msgid="1566409057833618877">"כל התוכן יוסר. האם אתה בטוח לגבי זה?"</string>
     <string name="credentials_password_too_short" msgid="7502749986405522663">"אורך הסיסמה חייב להיות 8 תווים לפחות."</string>
     <string name="credentials_wrong_password" msgid="2541932597104054807">"סיסמה שגויה."</string>
     <string name="credentials_reset_warning" msgid="5320653011511797600">"סיסמה שגויה. יש לך עוד ניסיון אחד לפני שאחסון האישורים יימחק."</string>
     <string name="credentials_reset_warning_plural" msgid="6514085665301095279">"סיסמה שגויה. יש לך <xliff:g id="NUMBER">%1$d</xliff:g> ניסיונות נוספים לפני שאחסון האישורים יימחק."</string>
     <string name="credentials_erased" msgid="2907836028586342969">"אחסון האישורים נמחק."</string>
-    <!-- no translation found for credentials_not_erased (397954733557821269) -->
-    <skip />
+    <string name="credentials_not_erased" msgid="397954733557821269">"לא היתה אפשרות למחוק את אחסון האישור."</string>
     <string name="credentials_enabled" msgid="7588607413349978930">"אחסון האישורים מופעל."</string>
-    <!-- no translation found for credentials_configure_lock_screen_hint (6816970208840577219) -->
-    <skip />
+    <string name="credentials_configure_lock_screen_hint" msgid="6816970208840577219">"עליך להגדיר PIN או סיסמה לנעילת המסך לפני שתוכל להשתמש באחסון אישורים. באם תרצה לעשות זאת עכשיו?"</string>
     <string name="emergency_tone_title" msgid="1055954530111587114">"צליל חירום"</string>
     <string name="emergency_tone_summary" msgid="722259232924572153">"הגדר אופן פעולה בעת ביצוע שיחת חירום"</string>
     <string name="privacy_settings" msgid="9206631214140954954">"פרטיות"</string>
@@ -1454,4 +1456,69 @@
     <string name="select_all" msgid="6783085295161532497">"בחר הכל"</string>
     <string name="hdcp_checking_title" msgid="8605478913544273282">"בדיקת HDCP"</string>
     <string name="hdcp_checking_dialog_title" msgid="5141305530923283">"הגדר אופן בדיקת HDCP"</string>
+    <string name="data_usage_summary_title" msgid="3804110657238092929">"שימוש בנתונים"</string>
+    <!-- no translation found for data_usage_cycle (5652529796195787949) -->
+    <skip />
+    <!-- no translation found for data_usage_menu_split_4g (7417435609285381968) -->
+    <skip />
+    <!-- no translation found for data_usage_menu_show_wifi (8266875319417201085) -->
+    <skip />
+    <!-- no translation found for data_usage_change_cycle (7776556448920114866) -->
+    <skip />
+    <!-- no translation found for data_usage_pick_cycle_day (4470796861757050966) -->
+    <skip />
+    <!-- no translation found for data_usage_disable_mobile_limit (289740911281022322) -->
+    <skip />
+    <!-- no translation found for data_usage_disable_4g_limit (5808210773758699800) -->
+    <skip />
+    <!-- no translation found for data_usage_disable_3g_limit (3856971004328238231) -->
+    <skip />
+    <!-- no translation found for data_usage_tab_wifi (1728851922959017766) -->
+    <skip />
+    <!-- no translation found for data_usage_tab_mobile (454140350007299045) -->
+    <skip />
+    <!-- no translation found for data_usage_tab_4g (1301978716067512235) -->
+    <skip />
+    <!-- no translation found for data_usage_tab_3g (6092169523081538718) -->
+    <skip />
+    <!-- no translation found for data_usage_enable_mobile (986782622560157977) -->
+    <skip />
+    <!-- no translation found for data_usage_enable_3g (6304006671869578254) -->
+    <skip />
+    <!-- no translation found for data_usage_enable_4g (3635854097335036738) -->
+    <skip />
+    <!-- no translation found for data_usage_app_settings (3727561362090820369) -->
+    <skip />
+    <!-- no translation found for data_usage_app_restrict_background (8856643905291165256) -->
+    <skip />
+    <!-- no translation found for data_usage_app_restrict_background_summary (1503361245973512092) -->
+    <skip />
+    <!-- no translation found for data_usage_app_restrict_dialog_title (8110736468987743260) -->
+    <skip />
+    <!-- no translation found for data_usage_app_restrict_dialog (100001698378554777) -->
+    <skip />
+    <!-- no translation found for data_usage_cycle_editor_title (1373797281540188533) -->
+    <skip />
+    <!-- no translation found for data_usage_cycle_editor_subtitle (5512903797979928416) -->
+    <skip />
+    <!-- no translation found for data_usage_cycle_editor_positive (4565302264487526138) -->
+    <skip />
+    <!-- no translation found for data_usage_limit_dialog_title (3023111643632996097) -->
+    <skip />
+    <!-- no translation found for data_usage_limit_dialog_mobile (7931094451923591578) -->
+    <skip />
+    <!-- no translation found for data_usage_limit_dialog_3g (5478553071420316963) -->
+    <skip />
+    <!-- no translation found for data_usage_limit_dialog_4g (6134008906742403777) -->
+    <skip />
+    <!-- no translation found for data_usage_disabled_dialog_3g_title (4221584306492812040) -->
+    <skip />
+    <!-- no translation found for data_usage_disabled_dialog_4g_title (715585612162185936) -->
+    <skip />
+    <!-- no translation found for data_usage_disabled_dialog_mobile_title (209516216265000221) -->
+    <skip />
+    <!-- no translation found for data_usage_disabled_dialog (2874031671067845964) -->
+    <skip />
+    <!-- no translation found for data_usage_disabled_dialog_enable (5738467047490662678) -->
+    <skip />
 </resources>
