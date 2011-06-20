@@ -16,6 +16,7 @@
 
 package com.android.settings;
 
+import com.android.internal.telephony.ITelephony;
 import com.android.internal.widget.PasswordEntryKeyboardHelper;
 import com.android.internal.widget.PasswordEntryKeyboardView;
 
@@ -33,9 +34,11 @@ import android.os.Handler;
 import android.os.IBinder;
 import android.os.Message;
 import android.os.PowerManager;
+import android.os.RemoteException;
 import android.os.ServiceManager;
 import android.os.SystemProperties;
 import android.os.storage.IMountService;
+import android.telephony.TelephonyManager;
 import android.text.TextUtils;
 import android.util.AttributeSet;
 import android.util.Log;
@@ -61,6 +64,9 @@ public class CryptKeeper extends Activity implements TextView.OnEditorActionList
     private static final int MAX_FAILED_ATTEMPTS = 30;
     private static final int COOL_DOWN_ATTEMPTS = 10;
     private static final int COOL_DOWN_INTERVAL = 30; // 30 seconds
+
+    // Intent action for launching the Emergency Dialer activity.
+    static final String ACTION_EMERGENCY_DIAL = "com.android.phone.EmergencyDialer.DIAL";
 
     private int mCooldown;
     PowerManager.WakeLock mWakeLock;
@@ -347,6 +353,8 @@ public class CryptKeeper extends Activity implements TextView.OnEditorActionList
                     keyboardView, mPasswordEntry, false);
             keyboardHelper.setKeyboardMode(PasswordEntryKeyboardHelper.KEYBOARD_MODE_ALPHA);
         }
+
+        updateEmergencyCallButtonState();
     }
 
     private IMountService getMountService() {
@@ -380,5 +388,74 @@ public class CryptKeeper extends Activity implements TextView.OnEditorActionList
             return true;
         }
         return false;
+    }
+
+    //
+    // Code to update the state of, and handle clicks from, the "Emergency call" button.
+    //
+    // This code is mostly duplicated from the corresponding code in
+    // LockPatternUtils and LockPatternKeyguardView under frameworks/base.
+    //
+
+    private void updateEmergencyCallButtonState() {
+        Button button = (Button) findViewById(R.id.emergencyCallButton);
+        // The button isn't present at all in some configurations.
+        if (button == null) return;
+
+        if (isEmergencyCallCapable()) {
+            button.setVisibility(View.VISIBLE);
+            button.setOnClickListener(new View.OnClickListener() {
+                    public void onClick(View v) {
+                        takeEmergencyCallAction();
+                    }
+                });
+        } else {
+            button.setVisibility(View.GONE);
+            return;
+        }
+
+        int newState = TelephonyManager.getDefault().getCallState();
+        int textId;
+        if (newState == TelephonyManager.CALL_STATE_OFFHOOK) {
+            // show "return to call" text and show phone icon
+            textId = R.string.cryptkeeper_return_to_call;
+            int phoneCallIcon = R.drawable.stat_sys_phone_call;
+            button.setCompoundDrawablesWithIntrinsicBounds(phoneCallIcon, 0, 0, 0);
+        } else {
+            textId = R.string.cryptkeeper_emergency_call;
+            int emergencyIcon = R.drawable.ic_emergency;
+            button.setCompoundDrawablesWithIntrinsicBounds(emergencyIcon, 0, 0, 0);
+        }
+        button.setText(textId);
+    }
+
+    private boolean isEmergencyCallCapable() {
+        return getResources().getBoolean(com.android.internal.R.bool.config_voice_capable);
+    }
+
+    private void takeEmergencyCallAction() {
+        if (TelephonyManager.getDefault().getCallState() == TelephonyManager.CALL_STATE_OFFHOOK) {
+            resumeCall();
+        } else {
+            launchEmergencyDialer();
+        }
+    }
+
+    private void resumeCall() {
+        ITelephony phone = ITelephony.Stub.asInterface(ServiceManager.checkService("phone"));
+        if (phone != null) {
+            try {
+                phone.showCallScreen();
+            } catch (RemoteException e) {
+                Log.e(TAG, "Error calling ITelephony service: " + e);
+            }
+        }
+    }
+
+    private void launchEmergencyDialer() {
+        Intent intent = new Intent(ACTION_EMERGENCY_DIAL);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK
+                        | Intent.FLAG_ACTIVITY_EXCLUDE_FROM_RECENTS);
+        startActivity(intent);
     }
 }
