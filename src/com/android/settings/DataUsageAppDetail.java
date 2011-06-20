@@ -32,6 +32,7 @@ import android.graphics.Color;
 import android.net.INetworkPolicyManager;
 import android.net.INetworkStatsService;
 import android.net.NetworkPolicyManager;
+import android.net.NetworkStats;
 import android.net.NetworkStatsHistory;
 import android.net.NetworkTemplate;
 import android.os.Bundle;
@@ -162,7 +163,7 @@ public class DataUsageAppDetail extends Fragment {
         try {
             // load stats for current uid and template
             // TODO: read template from extras
-            mHistory = mStatsService.getHistoryForUid(mTemplate, mUid);
+            mHistory = mStatsService.getHistoryForUid(mTemplate, mUid, NetworkStats.TAG_NONE);
         } catch (RemoteException e) {
             // since we can't do much without history, and we don't want to
             // leave with half-baked UI, we bail hard.

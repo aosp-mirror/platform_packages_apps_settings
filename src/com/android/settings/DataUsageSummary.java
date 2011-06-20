@@ -598,7 +598,7 @@ public class DataUsageSummary extends Fragment {
             protected NetworkStats doInBackground(Void... params) {
                 try {
                     final long[] range = mChart.getInspectRange();
-                    return mStatsService.getSummaryForAllUid(mTemplate, range[0], range[1]);
+                    return mStatsService.getSummaryForAllUid(mTemplate, range[0], range[1], false);
                 } catch (RemoteException e) {
                     Log.w(TAG, "problem reading stats");
                 }
