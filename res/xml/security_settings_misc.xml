@@ -39,10 +39,19 @@
 
     <PreferenceCategory android:title="@string/device_admin_title"
             android:persistent="false">
+
         <Preference android:title="@string/manage_device_admin"
                 android:summary="@string/manage_device_admin_summary"
                 android:persistent="false"
                 android:fragment="com.android.settings.DeviceAdminSettings"/>
+
+        <CheckBoxPreference
+                android:key="toggle_install_applications"
+                android:title="@string/install_applications"
+                android:summaryOff="@string/install_unknown_applications"
+                android:summaryOn="@string/install_unknown_applications"
+                android:persistent="false" />
+
     </PreferenceCategory>
 
     <PreferenceCategory android:title="@string/credentials_title"

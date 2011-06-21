@@ -14,6 +14,13 @@
      limitations under the License.
 -->
 
+<!--
+
+      This code is deprecated. This screen is no longer used in Settings.
+      The ApplicationSettings class is kept in case an external app references it directly.
+
+-->
+
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
         android:title="@string/applications_settings_header"
         android:summary="@string/applications_settings_summary"
@@ -40,20 +47,6 @@
                 android:value="com.android.settings.Settings$StorageUseActivity" />
     </PreferenceScreen>
 
-    <PreferenceScreen
-            android:key="power_usage"
-            android:fragment="com.android.settings.fuelgauge.PowerUsageSummary"
-            android:title="@string/power_usage_summary_title"
-            android:summary="@string/power_usage_summary">
-    </PreferenceScreen>
-
-    <CheckBoxPreference
-            android:key="toggle_install_applications"
-            android:title="@string/install_applications"
-            android:summaryOff="@string/install_unknown_applications"
-            android:summaryOn="@string/install_unknown_applications"
-            android:persistent="false" />
-
     <CheckBoxPreference
             android:key="toggle_advanced_settings"
             android:title="@string/advanced_settings"
@@ -79,13 +72,6 @@
                 android:targetClass="com.android.settings.quicklaunch.QuickLaunchSettings" />
     </PreferenceScreen>
     -->
-
-
-    <PreferenceScreen 
-            android:title="@string/development_settings_title" 
-            android:summary="@string/development_settings_summary"
-            android:fragment="com.android.settings.DevelopmentSettings">
-    </PreferenceScreen>
 
 </PreferenceScreen>
 
