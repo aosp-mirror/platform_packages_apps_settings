@@ -16,6 +16,8 @@
 
 package com.android.settings;
 
+import static android.net.ConnectivityManager.TYPE_MOBILE;
+import static android.net.ConnectivityManager.TYPE_WIMAX;
 import static android.net.NetworkPolicy.LIMIT_DISABLED;
 import static android.net.NetworkPolicyManager.ACTION_DATA_USAGE_LIMIT;
 import static android.net.NetworkPolicyManager.EXTRA_NETWORK_TEMPLATE;
@@ -26,6 +28,7 @@ import static android.net.NetworkTemplate.MATCH_MOBILE_4G;
 import static android.net.NetworkTemplate.MATCH_MOBILE_ALL;
 import static android.net.NetworkTemplate.MATCH_WIFI;
 import static android.view.ViewGroup.LayoutParams.MATCH_PARENT;
+import static android.view.ViewGroup.LayoutParams.WRAP_CONTENT;
 
 import android.app.AlertDialog;
 import android.app.Dialog;
@@ -34,10 +37,12 @@ import android.app.Fragment;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.PackageManager.NameNotFoundException;
+import android.net.ConnectivityManager;
 import android.net.INetworkPolicyManager;
 import android.net.INetworkStatsService;
 import android.net.NetworkPolicy;
@@ -49,10 +54,8 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.RemoteException;
 import android.os.ServiceManager;
-import android.preference.CheckBoxPreference;
 import android.preference.Preference;
 import android.preference.PreferenceActivity;
-import android.preference.SwitchPreference;
 import android.telephony.TelephonyManager;
 import android.text.TextUtils;
 import android.text.format.DateUtils;
@@ -64,7 +67,6 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.AbsListView;
 import android.widget.AdapterView;
@@ -72,10 +74,14 @@ import android.widget.AdapterView.OnItemClickListener;
 import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.ArrayAdapter;
 import android.widget.BaseAdapter;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
+import android.widget.CompoundButton.OnCheckedChangeListener;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.NumberPicker;
 import android.widget.Spinner;
+import android.widget.Switch;
 import android.widget.TabHost;
 import android.widget.TabHost.OnTabChangeListener;
 import android.widget.TabHost.TabContentFactory;
@@ -83,6 +89,7 @@ import android.widget.TabHost.TabSpec;
 import android.widget.TabWidget;
 import android.widget.TextView;
 
+import com.android.internal.telephony.Phone;
 import com.android.settings.net.NetworkPolicyEditor;
 import com.android.settings.widget.DataUsageChartView;
 import com.android.settings.widget.DataUsageChartView.DataUsageChartListener;
@@ -93,6 +100,10 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.Locale;
 
+/**
+ * Panel show data usage history across various networks, including options to
+ * inspect based on usage cycle and control through {@link NetworkPolicy}.
+ */
 public class DataUsageSummary extends Fragment {
     private static final String TAG = "DataUsage";
     private static final boolean LOGD = true;
@@ -114,6 +125,12 @@ public class DataUsageSummary extends Fragment {
 
     private INetworkStatsService mStatsService;
     private INetworkPolicyManager mPolicyService;
+    private ConnectivityManager mConnService;
+
+    private static final String PREF_FILE = "data_usage";
+    private static final String PREF_SHOW_WIFI = "show_wifi";
+
+    private SharedPreferences mPrefs;
 
     private TabHost mTabHost;
     private TabWidget mTabWidget;
@@ -123,8 +140,8 @@ public class DataUsageSummary extends Fragment {
     private View mHeader;
     private LinearLayout mSwitches;
 
-    private SwitchPreference mDataEnabled;
-    private CheckBoxPreference mDisableAtLimit;
+    private Switch mDataEnabled;
+    private CheckBox mDisableAtLimit;
     private View mDataEnabledView;
     private View mDisableAtLimitView;
 
@@ -133,7 +150,6 @@ public class DataUsageSummary extends Fragment {
     private Spinner mCycleSpinner;
     private CycleAdapter mCycleAdapter;
 
-    // TODO: persist show wifi flag
     private boolean mShowWifi = false;
 
     private NetworkTemplate mTemplate = null;
@@ -143,6 +159,9 @@ public class DataUsageSummary extends Fragment {
 
     private String mIntentTab = null;
 
+    /** Flag used to ignore listeners during binding. */
+    private boolean mBinding;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -151,9 +170,14 @@ public class DataUsageSummary extends Fragment {
                 ServiceManager.getService(Context.NETWORK_STATS_SERVICE));
         mPolicyService = INetworkPolicyManager.Stub.asInterface(
                 ServiceManager.getService(Context.NETWORK_POLICY_SERVICE));
+        mConnService = (ConnectivityManager) getActivity().getSystemService(
+                Context.CONNECTIVITY_SERVICE);
+        mPrefs = getActivity().getSharedPreferences(PREF_FILE, Context.MODE_PRIVATE);
 
         mPolicyEditor = new NetworkPolicyEditor(mPolicyService);
         mPolicyEditor.read();
+
+        mShowWifi = mPrefs.getBoolean(PREF_SHOW_WIFI, false);
 
         setHasOptionsMenu(true);
     }
@@ -175,17 +199,12 @@ public class DataUsageSummary extends Fragment {
         mHeader = inflater.inflate(R.layout.data_usage_header, mListView, false);
         mListView.addHeaderView(mHeader, null, false);
 
-        mDataEnabled = new SwitchPreference(context);
-        mDisableAtLimit = new CheckBoxPreference(context);
+        mDataEnabled = new Switch(inflater.getContext());
+        mDataEnabledView = inflatePreference(inflater, mSwitches, mDataEnabled);
+        mDataEnabled.setOnCheckedChangeListener(mDataEnabledListener);
 
-        // kick refresh once to force-create views
-        refreshPreferenceViews();
-
-        // TODO: remove once thin preferences are supported (48dip)
-        mDataEnabledView.setLayoutParams(new LinearLayout.LayoutParams(MATCH_PARENT, 72));
-        mDisableAtLimitView.setLayoutParams(new LinearLayout.LayoutParams(MATCH_PARENT, 72));
-
-        mDataEnabledView.setOnClickListener(mDataEnabledListener);
+        mDisableAtLimit = new CheckBox(inflater.getContext());
+        mDisableAtLimitView = inflatePreference(inflater, mSwitches, mDisableAtLimit);
         mDisableAtLimitView.setOnClickListener(mDisableAtLimitListener);
 
         mSwitches = (LinearLayout) mHeader.findViewById(R.id.switches);
@@ -197,9 +216,11 @@ public class DataUsageSummary extends Fragment {
         mCycleSpinner.setAdapter(mCycleAdapter);
         mCycleSpinner.setOnItemSelectedListener(mCycleListener);
 
+        final int chartHeight = getResources().getDimensionPixelSize(
+                R.dimen.data_usage_chart_height);
         mChart = new DataUsageChartView(context);
         mChart.setListener(mChartListener);
-        mChart.setLayoutParams(new AbsListView.LayoutParams(MATCH_PARENT, 350));
+        mChart.setLayoutParams(new AbsListView.LayoutParams(MATCH_PARENT, chartHeight));
         mListView.addHeaderView(mChart, null, false);
 
         mAdapter = new DataUsageAdapter();
@@ -235,8 +256,19 @@ public class DataUsageSummary extends Fragment {
 
     @Override
     public void onPrepareOptionsMenu(Menu menu) {
+        final Context context = getActivity();
+
         final MenuItem split4g = menu.findItem(R.id.action_split_4g);
+        split4g.setVisible(hasMobile4gRadio(context));
         split4g.setChecked(isMobilePolicySplit());
+
+        final MenuItem showWifi = menu.findItem(R.id.action_show_wifi);
+        showWifi.setVisible(hasMobileRadio(context) && hasWifiRadio(context));
+        showWifi.setChecked(mShowWifi);
+
+        final MenuItem settings = menu.findItem(R.id.action_settings);
+        settings.setVisible(split4g.isVisible() || showWifi.isVisible());
+
     }
 
     @Override
@@ -251,6 +283,7 @@ public class DataUsageSummary extends Fragment {
             }
             case R.id.action_show_wifi: {
                 mShowWifi = !item.isChecked();
+                mPrefs.edit().putBoolean(PREF_SHOW_WIFI, mShowWifi).apply();
                 item.setChecked(mShowWifi);
                 updateTabs();
                 return true;
@@ -273,24 +306,25 @@ public class DataUsageSummary extends Fragment {
      * first tab, and kicks off a full rebind of body contents.
      */
     private void updateTabs() {
-        final boolean mobileSplit = isMobilePolicySplit();
-        final boolean tabsVisible = mobileSplit || mShowWifi;
-        mTabWidget.setVisibility(tabsVisible ? View.VISIBLE : View.GONE);
+        final Context context = getActivity();
         mTabHost.clearAllTabs();
 
-        if (mobileSplit) {
+        final boolean mobileSplit = isMobilePolicySplit();
+        if (mobileSplit && hasMobile4gRadio(context)) {
             mTabHost.addTab(buildTabSpec(TAB_3G, R.string.data_usage_tab_3g));
             mTabHost.addTab(buildTabSpec(TAB_4G, R.string.data_usage_tab_4g));
         }
 
-        if (mShowWifi) {
+        if (mShowWifi && hasWifiRadio(context) && hasMobileRadio(context)) {
             if (!mobileSplit) {
                 mTabHost.addTab(buildTabSpec(TAB_MOBILE, R.string.data_usage_tab_mobile));
             }
             mTabHost.addTab(buildTabSpec(TAB_WIFI, R.string.data_usage_tab_wifi));
         }
 
-        if (mTabWidget.getTabCount() > 0) {
+        final boolean hasTabs = mTabWidget.getTabCount() > 0;
+        mTabWidget.setVisibility(hasTabs ? View.VISIBLE : View.GONE);
+        if (hasTabs) {
             if (mIntentTab != null) {
                 // select default tab, which will kick off updateBody()
                 mTabHost.setCurrentTabByTag(mIntentTab);
@@ -340,11 +374,21 @@ public class DataUsageSummary extends Fragment {
      * binds them to visible controls.
      */
     private void updateBody() {
-        final String tabTag = mTabHost.getCurrentTabTag();
-        final String currentTab = tabTag != null ? tabTag : TAB_MOBILE;
+        mBinding = true;
 
         final Context context = getActivity();
-        final String subscriberId = getActiveSubscriberId(context);
+        final String tabTag = mTabHost.getCurrentTabTag();
+
+        final String currentTab;
+        if (tabTag != null) {
+            currentTab = tabTag;
+        } else if (hasMobileRadio(context)) {
+            currentTab = TAB_MOBILE;
+        } else if (hasWifiRadio(context)) {
+            currentTab = TAB_WIFI;
+        } else {
+            throw new IllegalStateException("no mobile or wifi radios");
+        }
 
         if (LOGD) Log.d(TAG, "updateBody() with currentTab=" + currentTab);
 
@@ -360,25 +404,25 @@ public class DataUsageSummary extends Fragment {
             mDisableAtLimitView.setVisibility(View.VISIBLE);
         }
 
+        final String subscriberId = getActiveSubscriberId(context);
         if (TAB_MOBILE.equals(currentTab)) {
-            mDataEnabled.setTitle(R.string.data_usage_enable_mobile);
-            mDisableAtLimit.setTitle(R.string.data_usage_disable_mobile_limit);
+            setPreferenceTitle(mDataEnabledView, R.string.data_usage_enable_mobile);
+            setPreferenceTitle(mDisableAtLimitView, R.string.data_usage_disable_mobile_limit);
+            mDataEnabled.setChecked(mConnService.getMobileDataEnabled());
             mTemplate = new NetworkTemplate(MATCH_MOBILE_ALL, subscriberId);
 
         } else if (TAB_3G.equals(currentTab)) {
-            mDataEnabled.setTitle(R.string.data_usage_enable_3g);
-            mDisableAtLimit.setTitle(R.string.data_usage_disable_3g_limit);
+            setPreferenceTitle(mDataEnabledView, R.string.data_usage_enable_3g);
+            setPreferenceTitle(mDisableAtLimitView, R.string.data_usage_disable_3g_limit);
+            // TODO: bind mDataEnabled to 3G radio state
             mTemplate = new NetworkTemplate(MATCH_MOBILE_3G_LOWER, subscriberId);
 
         } else if (TAB_4G.equals(currentTab)) {
-            mDataEnabled.setTitle(R.string.data_usage_enable_4g);
-            mDisableAtLimit.setTitle(R.string.data_usage_disable_4g_limit);
+            setPreferenceTitle(mDataEnabledView, R.string.data_usage_enable_4g);
+            setPreferenceTitle(mDisableAtLimitView, R.string.data_usage_disable_4g_limit);
+            // TODO: bind mDataEnabled to 4G radio state
             mTemplate = new NetworkTemplate(MATCH_MOBILE_4G, subscriberId);
-
         }
-
-        // TODO: populate checkbox based on radio preferences
-        mDataEnabled.setChecked(true);
 
         try {
             // load stats for current template
@@ -397,8 +441,7 @@ public class DataUsageSummary extends Fragment {
         // force scroll to top of body
         mListView.smoothScrollToPosition(0);
 
-        // kick preference views so they rebind from changes above
-        refreshPreferenceViews();
+        mBinding = false;
     }
 
     private void setPolicyCycleDay(int cycleDay) {
@@ -434,9 +477,6 @@ public class DataUsageSummary extends Fragment {
             // generate cycle list based on policy and available history
             updateCycleList(policy);
         }
-
-        // kick preference views so they rebind from changes above
-        refreshPreferenceViews();
     }
 
     /**
@@ -506,25 +546,23 @@ public class DataUsageSummary extends Fragment {
         mCycleListener.onItemSelected(mCycleSpinner, null, 0, 0);
     }
 
-    /**
-     * Force rebind of hijacked {@link Preference} views.
-     */
-    private void refreshPreferenceViews() {
-        mDataEnabledView = mDataEnabled.getView(mDataEnabledView, mListView);
-        mDisableAtLimitView = mDisableAtLimit.getView(mDisableAtLimitView, mListView);
-    }
-
-    private OnClickListener mDataEnabledListener = new OnClickListener() {
+    private OnCheckedChangeListener mDataEnabledListener = new OnCheckedChangeListener() {
         /** {@inheritDoc} */
-        public void onClick(View v) {
-            mDataEnabled.setChecked(!mDataEnabled.isChecked());
-            refreshPreferenceViews();
+        public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+            if (mBinding) return;
 
-            // TODO: wire up to telephony to enable/disable radios
+            final boolean dataEnabled = isChecked;
+            mDataEnabled.setChecked(dataEnabled);
+
+            switch (mTemplate.getMatchRule()) {
+                case MATCH_MOBILE_ALL: {
+                    mConnService.setMobileDataEnabled(dataEnabled);
+                }
+            }
         }
     };
 
-    private OnClickListener mDisableAtLimitListener = new OnClickListener() {
+    private View.OnClickListener mDisableAtLimitListener = new View.OnClickListener() {
         /** {@inheritDoc} */
         public void onClick(View v) {
             final boolean disableAtLimit = !mDisableAtLimit.isChecked();
@@ -724,12 +762,10 @@ public class DataUsageSummary extends Fragment {
 
             for (int i = 0; i < stats.size; i++) {
                 final long total = stats.rx[i] + stats.tx[i];
-                if (total > 0) {
-                    final AppUsageItem item = new AppUsageItem();
-                    item.uid = stats.uid[i];
-                    item.total = total;
-                    mItems.add(item);
-                }
+                final AppUsageItem item = new AppUsageItem();
+                item.uid = stats.uid[i];
+                item.total = total;
+                mItems.add(item);
             }
 
             Collections.sort(mItems);
@@ -993,6 +1029,62 @@ public class DataUsageSummary extends Fragment {
             label = Integer.toString(uid);
         }
         return label;
+    }
+
+    /**
+     * Test if device has a mobile data radio.
+     */
+    private static boolean hasMobileRadio(Context context) {
+        final ConnectivityManager conn = (ConnectivityManager) context.getSystemService(
+                Context.CONNECTIVITY_SERVICE);
+
+        // mobile devices should have MOBILE network tracker regardless of
+        // connection status.
+        return conn.getNetworkInfo(TYPE_MOBILE) != null;
+    }
+
+    /**
+     * Test if device has a mobile 4G data radio.
+     */
+    private static boolean hasMobile4gRadio(Context context) {
+        final ConnectivityManager conn = (ConnectivityManager) context.getSystemService(
+                Context.CONNECTIVITY_SERVICE);
+        final TelephonyManager telephony = (TelephonyManager) context.getSystemService(
+                Context.TELEPHONY_SERVICE);
+
+        // WiMAX devices should have WiMAX network tracker regardless of
+        // connection status.
+        final boolean hasWimax = conn.getNetworkInfo(TYPE_WIMAX) != null;
+        final boolean hasLte = telephony.getLteOnCdmaMode() == Phone.LTE_ON_CDMA_TRUE;
+        return hasWimax || hasLte;
+    }
+
+    /**
+     * Test if device has a Wi-Fi data radio.
+     */
+    private static boolean hasWifiRadio(Context context) {
+        return context.getPackageManager().hasSystemFeature(PackageManager.FEATURE_WIFI);
+    }
+
+    /**
+     * Inflate a {@link Preference} style layout, adding the given {@link View}
+     * widget into {@link android.R.id#widget_frame}.
+     */
+    private static View inflatePreference(LayoutInflater inflater, ViewGroup root, View widget) {
+        final View view = inflater.inflate(R.layout.preference, root, false);
+        final LinearLayout widgetFrame = (LinearLayout) view.findViewById(
+                android.R.id.widget_frame);
+        widgetFrame.addView(widget, new LinearLayout.LayoutParams(WRAP_CONTENT, WRAP_CONTENT));
+        return view;
+    }
+
+    /**
+     * Set {@link android.R.id#title} for a preference view inflated with
+     * {@link #inflatePreference(LayoutInflater, View, View)}.
+     */
+    private static void setPreferenceTitle(View parent, int resId) {
+        final TextView title = (TextView) parent.findViewById(android.R.id.title);
+        title.setText(resId);
     }
 
 }
