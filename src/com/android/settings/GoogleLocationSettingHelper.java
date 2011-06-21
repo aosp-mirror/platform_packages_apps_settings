@@ -122,6 +122,7 @@ public class GoogleLocationSettingHelper {
         try {
             context.startActivity(i);
         } catch (ActivityNotFoundException e) {
+            Log.e("GoogleLocationSettingHelper", "Problem while starting GSF location activity");
         }
     }
 

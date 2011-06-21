@@ -19,15 +19,9 @@ package com.android.settings;
 
 import static android.provider.Settings.System.SCREEN_OFF_TIMEOUT;
 
-import com.android.internal.widget.LockPatternUtils;
-
 import android.app.admin.DevicePolicyManager;
-import android.content.ContentQueryMap;
-import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;
-import android.database.Cursor;
-import android.location.LocationManager;
 import android.os.Bundle;
 import android.os.Vibrator;
 import android.preference.CheckBoxPreference;
@@ -41,9 +35,9 @@ import android.security.KeyStore;
 import android.telephony.TelephonyManager;
 import android.util.Log;
 
+import com.android.internal.widget.LockPatternUtils;
+
 import java.util.ArrayList;
-import java.util.Observable;
-import java.util.Observer;
 
 /**
  * Gesture lock pattern settings.
@@ -60,37 +54,16 @@ public class SecuritySettings extends SettingsPreferenceFragment
     private static final String KEY_LOCK_AFTER_TIMEOUT = "lock_after_timeout";
     private static final int SET_OR_CHANGE_LOCK_METHOD_REQUEST = 123;
 
-    // Location Settings
-    private static final String KEY_LOCATION_CATEGORY = "location_category";
-    private static final String KEY_LOCATION_NETWORK = "location_network";
-    private static final String KEY_LOCATION_GPS = "location_gps";
-    private static final String KEY_ASSISTED_GPS = "assisted_gps";
-    private static final String KEY_USE_LOCATION = "location_use_for_services";
-
     // Misc Settings
     private static final String KEY_SIM_LOCK = "sim_lock";
     private static final String KEY_SHOW_PASSWORD = "show_password";
     private static final String KEY_RESET_CREDENTIALS = "reset_credentials";
 
-    private static final String TAG = "SecuritySettings";
-
-    private CheckBoxPreference mNetwork;
-    private CheckBoxPreference mGps;
-    private CheckBoxPreference mAssistedGps;
-    private CheckBoxPreference mUseLocation;
-
     DevicePolicyManager mDPM;
-
-    // These provide support for receiving notification when Location Manager settings change.
-    // This is necessary because the Network Location Provider can change settings
-    // if the user does not confirm enabling the provider.
-    private ContentQueryMap mContentQueryMap;
 
     private ChooseLockSettingsHelper mChooseLockSettingsHelper;
     private LockPatternUtils mLockPatternUtils;
     private ListPreference mLockAfter;
-
-    private Observer mSettingsObserver;
 
     private CheckBoxPreference mVisiblePattern;
     private CheckBoxPreference mTactileFeedback;
@@ -110,25 +83,6 @@ public class SecuritySettings extends SettingsPreferenceFragment
         mChooseLockSettingsHelper = new ChooseLockSettingsHelper(getActivity());
     }
 
-    @Override
-    public void onStart() {
-        super.onStart();
-        // listen for Location Manager settings changes
-        Cursor settingsCursor = getContentResolver().query(Settings.Secure.CONTENT_URI, null,
-                "(" + Settings.System.NAME + "=?)",
-                new String[]{Settings.Secure.LOCATION_PROVIDERS_ALLOWED},
-                null);
-        mContentQueryMap = new ContentQueryMap(settingsCursor, Settings.System.NAME, true, null);
-    }
-
-    @Override
-    public void onStop() {
-        super.onStop();
-        if (mSettingsObserver != null) {
-            mContentQueryMap.deleteObserver(mSettingsObserver);
-        }
-    }
-
     private PreferenceScreen createPreferenceHierarchy() {
         PreferenceScreen root = getPreferenceScreen();
         if (root != null) {
@@ -136,32 +90,6 @@ public class SecuritySettings extends SettingsPreferenceFragment
         }
         addPreferencesFromResource(R.xml.security_settings);
         root = getPreferenceScreen();
-
-        mNetwork = (CheckBoxPreference) root.findPreference(KEY_LOCATION_NETWORK);
-        mGps = (CheckBoxPreference) root.findPreference(KEY_LOCATION_GPS);
-        mAssistedGps = (CheckBoxPreference) root.findPreference(KEY_ASSISTED_GPS);
-        if (GoogleLocationSettingHelper.isAvailable(getActivity())) {
-            // GSF present, Add setting for 'Use My Location'
-            PreferenceGroup locationCat =
-                    (PreferenceGroup) root.findPreference(KEY_LOCATION_CATEGORY);
-            CheckBoxPreference useLocation = new CheckBoxPreference(getActivity());
-            useLocation.setKey(KEY_USE_LOCATION);
-            useLocation.setTitle(R.string.use_location_title);
-            useLocation.setSummaryOn(R.string.use_location_summary_enabled);
-            useLocation.setSummaryOff(R.string.use_location_summary_disabled);
-            useLocation.setChecked(
-                    GoogleLocationSettingHelper.getUseLocationForServices(getActivity())
-                    == GoogleLocationSettingHelper.USE_LOCATION_FOR_SERVICES_ON);
-            useLocation.setPersistent(false);
-            useLocation.setOnPreferenceChangeListener(this);
-            locationCat.addPreference(useLocation);
-            mUseLocation = useLocation;
-        }
-
-        // Change the summary for wifi-only devices
-        if (Utils.isWifiOnly()) {
-            mNetwork.setSummaryOn(R.string.location_neighborhood_level_wifi);
-        }
 
         // Add options for lock/unlock screen
         int resid = 0;
@@ -311,16 +239,6 @@ public class SecuritySettings extends SettingsPreferenceFragment
         // Make sure we reload the preference hierarchy since some of these settings
         // depend on others...
         createPreferenceHierarchy();
-        updateLocationToggles();
-
-        if (mSettingsObserver == null) {
-            mSettingsObserver = new Observer() {
-                public void update(Observable o, Object arg) {
-                    updateLocationToggles();
-                }
-            };
-            mContentQueryMap.addObserver(mSettingsObserver);
-        }
 
         final LockPatternUtils lockPatternUtils = mChooseLockSettingsHelper.utils();
         if (mVisiblePattern != null) {
@@ -338,8 +256,7 @@ public class SecuritySettings extends SettingsPreferenceFragment
     }
 
     @Override
-    public boolean onPreferenceTreeClick(PreferenceScreen preferenceScreen,
-            Preference preference) {
+    public boolean onPreferenceTreeClick(PreferenceScreen preferenceScreen, Preference preference) {
         final String key = preference.getKey();
 
         final LockPatternUtils lockPatternUtils = mChooseLockSettingsHelper.utils();
@@ -355,19 +272,6 @@ public class SecuritySettings extends SettingsPreferenceFragment
         } else if (preference == mShowPassword) {
             Settings.System.putInt(getContentResolver(), Settings.System.TEXT_SHOW_PASSWORD,
                     mShowPassword.isChecked() ? 1 : 0);
-        } else if (preference == mNetwork) {
-            Settings.Secure.setLocationProviderEnabled(getContentResolver(),
-                    LocationManager.NETWORK_PROVIDER, mNetwork.isChecked());
-        } else if (preference == mGps) {
-            boolean enabled = mGps.isChecked();
-            Settings.Secure.setLocationProviderEnabled(getContentResolver(),
-                    LocationManager.GPS_PROVIDER, enabled);
-            if (mAssistedGps != null) {
-                mAssistedGps.setEnabled(enabled);
-            }
-        } else if (preference == mAssistedGps) {
-            Settings.Secure.putInt(getContentResolver(), Settings.Secure.ASSISTED_GPS_ENABLED,
-                    mAssistedGps.isChecked() ? 1 : 0);
         } else {
             // If we didn't handle it, let preferences handle it.
             return super.onPreferenceTreeClick(preferenceScreen, preference);
@@ -376,29 +280,12 @@ public class SecuritySettings extends SettingsPreferenceFragment
         return true;
     }
 
-    /*
-     * Creates toggles for each available location provider
-     */
-    private void updateLocationToggles() {
-        ContentResolver res = getContentResolver();
-        boolean gpsEnabled = Settings.Secure.isLocationProviderEnabled(
-                res, LocationManager.GPS_PROVIDER);
-        mNetwork.setChecked(Settings.Secure.isLocationProviderEnabled(
-                res, LocationManager.NETWORK_PROVIDER));
-        mGps.setChecked(gpsEnabled);
-        if (mAssistedGps != null) {
-            mAssistedGps.setChecked(Settings.Secure.getInt(res,
-                    Settings.Secure.ASSISTED_GPS_ENABLED, 2) == 1);
-            mAssistedGps.setEnabled(gpsEnabled);
-        }
-    }
-
     private boolean isToggled(Preference pref) {
         return ((CheckBoxPreference) pref).isChecked();
     }
 
     /**
-     * @see #confirmPatternThenDisableAndClear
+     * see confirmPatternThenDisableAndClear
      */
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -416,14 +303,6 @@ public class SecuritySettings extends SettingsPreferenceFragment
                 Log.e("SecuritySettings", "could not persist lockAfter timeout setting", e);
             }
             updateLockAfterPreferenceSummary();
-        } else if (preference == mUseLocation) {
-            boolean newValue = (value == null ? false : (Boolean) value);
-            GoogleLocationSettingHelper.setUseLocationForServices(getActivity(), newValue);
-            // We don't want to change the value immediately here, since the user may click
-            // disagree in the dialog that pops up. When the activity we just launched exits, this
-            // activity will be restated and the new value re-read, so the checkbox will get its
-            // new value then.
-            return false;
         }
         return true;
     }
