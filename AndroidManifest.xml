@@ -695,6 +695,25 @@
             </intent-filter>
         </receiver>
 
+        <receiver android:name=".bluetooth.BluetoothPermissionRequest">
+            <intent-filter>
+                <action android:name="android.bluetooth.device.action.CONNECTION_ACCESS_REQUEST" />
+                <action android:name="android.bluetooth.device.action.CONNECTION_ACCESS_CANCEL" />
+            </intent-filter>
+        </receiver>
+
+        <activity android:name=".bluetooth.BluetoothPermissionActivity"
+                  android:label="@string/bluetooth_connection_permission_request"
+                  android:excludeFromRecents="true"
+                  android:permission="android.permission.BLUETOOTH_ADMIN"
+                  android:theme="@*android:style/Theme.Dialog.Alert">
+            <intent-filter>
+                <action android:name="android.bluetooth.device.action.CONNECTION_ACCESS_REQUEST" />
+                <action android:name="android.bluetooth.device.action.CONNECTION_ACCESS_CANCEL" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+
         <activity android:name="ActivityPicker"
                 android:label="@string/activity_picker_label"
                 android:theme="@*android:style/Theme.Dialog.Alert"
