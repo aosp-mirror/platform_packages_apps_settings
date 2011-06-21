@@ -39,9 +39,10 @@
              android:background="@*android:drawable/code_lock_top"
              android:layout_width="match_parent"
              android:layout_height="2dip" />
+
         <com.android.internal.widget.LockPatternView android:id="@+id/lockPattern"
-             android:layout_width="wrap_content"
-             android:layout_height="wrap_content" />
+             android:layout_width="match_parent"
+             android:layout_height="match_parent" />
 
         <!-- bottom line looks bad when button bar is their too, omit in this case -->
         <!--View

@@ -126,13 +126,15 @@
     </style>
 
     <style name="SecurityPreferenceButtonContainer" parent="@android:style/Holo.SegmentedButton">
-        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">wrap_content</item>
+        <item name="android:weightSum">2</item>
         <item name="android:dividerPadding">8dip</item>
     </style>
 
     <style name="SecurityPreferenceButton" parent="@android:style/Widget.Holo.Button.Borderless">
-        <item name="android:layout_width">140dip</item>
+        <item name="android:layout_width">0dip</item>
+        <item name="android:layout_weight">1</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:ellipsize">marquee</item>
         <item name="android:singleLine">true</item>

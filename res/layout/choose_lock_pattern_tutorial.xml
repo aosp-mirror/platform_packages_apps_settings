@@ -54,16 +54,11 @@
 
     </ScrollView>
 
-    <!-- bottom: lock pattern -->
+    <!-- bottom: lock pattern. Note the size is match_parent in both axis since requested aspect
+         is square and the pattern view will choose the smaller of the two. -->
     <com.android.internal.widget.LockPatternView android:id="@+id/lockPattern"
-         android:layout_width="300dip"
-         android:layout_height="300dip"
-         aspect="square"/>
-
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="0dip"
-        android:layout_weight="1"/>
+         android:layout_width="match_parent"
+         android:layout_height="match_parent"/>
 
     <LinearLayout
         style="@style/SecurityPreferenceButtonContainer"
