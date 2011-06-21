@@ -66,6 +66,7 @@ public final class BluetoothEnabler implements CompoundButton.OnCheckedChangeLis
 
     public void resume() {
         if (mLocalAdapter == null) {
+            mSwitch.setEnabled(false);
             return;
         }
 
@@ -91,11 +92,12 @@ public final class BluetoothEnabler implements CompoundButton.OnCheckedChangeLis
         mSwitch = switch_;
         mSwitch.setOnCheckedChangeListener(this);
 
-        final int bluetoothState = mLocalAdapter.getBluetoothState();
-        boolean isEnabled = bluetoothState == BluetoothAdapter.STATE_ON;
-        boolean isDisabled = bluetoothState == BluetoothAdapter.STATE_OFF;
-        mSwitch.setChecked(isEnabled);
-        mSwitch.setEnabled(isEnabled || isDisabled);
+        int bluetoothState = BluetoothAdapter.STATE_OFF;
+        if (mLocalAdapter != null) bluetoothState = mLocalAdapter.getBluetoothState();
+        boolean isOn = bluetoothState == BluetoothAdapter.STATE_ON;
+        boolean isOff = bluetoothState == BluetoothAdapter.STATE_OFF;
+        mSwitch.setChecked(isOn);
+        mSwitch.setEnabled(isOn || isOff);
     }
 
     public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
@@ -107,7 +109,9 @@ public final class BluetoothEnabler implements CompoundButton.OnCheckedChangeLis
             buttonView.setChecked(false);
         }
 
-        mLocalAdapter.setBluetoothEnabled(isChecked);
+        if (mLocalAdapter != null) {
+            mLocalAdapter.setBluetoothEnabled(isChecked);
+        }
         mSwitch.setEnabled(false);
     }
 

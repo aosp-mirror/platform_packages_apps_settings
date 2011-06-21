@@ -16,7 +16,6 @@
 
 package com.android.settings;
 
-import android.bluetooth.BluetoothAdapter;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
@@ -24,7 +23,6 @@ import android.content.pm.ActivityInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.PackageManager.NameNotFoundException;
 import android.os.Bundle;
-import android.os.ServiceManager;
 import android.preference.PreferenceActivity;
 import android.text.TextUtils;
 import android.util.Log;
@@ -313,9 +311,14 @@ public class Settings extends PreferenceActivity implements ButtonBarHandler {
             } else if (id == R.id.call_settings) {
                 if (!Utils.isVoiceCapable(this))
                     target.remove(header);
+            } else if (id == R.id.wifi_settings) {
+                // Remove WiFi Settings if WiFi service is not available.
+                if (!getPackageManager().hasSystemFeature(PackageManager.FEATURE_WIFI)) {
+                    target.remove(header);
+                }
             } else if (id == R.id.bluetooth_settings) {
                 // Remove Bluetooth Settings if Bluetooth service is not available.
-                if (ServiceManager.getService(BluetoothAdapter.BLUETOOTH_SERVICE) == null) {
+                if (!getPackageManager().hasSystemFeature(PackageManager.FEATURE_BLUETOOTH)) {
                     target.remove(header);
                 }
             }
