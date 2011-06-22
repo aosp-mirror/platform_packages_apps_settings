@@ -23,7 +23,7 @@
                 android:summary="@string/system_update_settings_list_item_summary">
             <intent android:action="android.settings.SYSTEM_UPDATE_SETTINGS" />
         </PreferenceScreen>
-        
+
         <!-- Device status - launches activity -->
         <PreferenceScreen android:key="status_info"
                 android:title="@string/device_status" 
@@ -31,13 +31,6 @@
             <intent android:action="android.intent.action.MAIN"
                     android:targetPackage="com.android.settings"
                     android:targetClass="com.android.settings.deviceinfo.Status" />
-        </PreferenceScreen>
-        
-        <PreferenceScreen
-                android:key="power_usage"
-                android:fragment="com.android.settings.fuelgauge.PowerUsageSummary"
-                android:title="@string/power_usage_summary_title"
-                android:summary="@string/power_usage_summary">
         </PreferenceScreen>
 
         <!-- Legal Information -->

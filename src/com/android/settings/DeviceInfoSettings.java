@@ -40,7 +40,7 @@ import java.util.regex.Pattern;
 
 public class DeviceInfoSettings extends SettingsPreferenceFragment {
 
-    private static final String TAG = "DeviceInfoSettings";
+    private static final String LOG_TAG = "DeviceInfoSettings";
 
     private static final String KEY_CONTAINER = "container";
     private static final String KEY_TEAM = "team";
@@ -128,6 +128,7 @@ public class DeviceInfoSettings extends SettingsPreferenceFragment {
                 try {
                     startActivity(intent);
                 } catch (Exception e) {
+                    Log.e(LOG_TAG, "Unable to start activity " + intent.toString());
                 }
             }
         }
@@ -142,7 +143,7 @@ public class DeviceInfoSettings extends SettingsPreferenceFragment {
             try {
                 preferenceGroup.removePreference(findPreference(preference));
             } catch (RuntimeException e) {
-                Log.d(TAG, "Property '" + property + "' missing and no '"
+                Log.d(LOG_TAG, "Property '" + property + "' missing and no '"
                         + preference + "' preference");
             }
         }
@@ -163,7 +164,7 @@ public class DeviceInfoSettings extends SettingsPreferenceFragment {
                     SystemProperties.get(property,
                             getResources().getString(R.string.device_info_default)));
         } catch (RuntimeException e) {
-
+            // No recovery
         }
     }
 
@@ -192,10 +193,10 @@ public class DeviceInfoSettings extends SettingsPreferenceFragment {
             Matcher m = p.matcher(procVersionStr);
 
             if (!m.matches()) {
-                Log.e(TAG, "Regex did not match on /proc/version: " + procVersionStr);
+                Log.e(LOG_TAG, "Regex did not match on /proc/version: " + procVersionStr);
                 return "Unavailable";
             } else if (m.groupCount() < 4) {
-                Log.e(TAG, "Regex match on /proc/version only returned " + m.groupCount()
+                Log.e(LOG_TAG, "Regex match on /proc/version only returned " + m.groupCount()
                         + " groups");
                 return "Unavailable";
             } else {
@@ -204,7 +205,7 @@ public class DeviceInfoSettings extends SettingsPreferenceFragment {
                         .append(m.group(4))).toString();
             }
         } catch (IOException e) {
-            Log.e(TAG,
+            Log.e(LOG_TAG,
                 "IO Exception when getting kernel version for Device Info screen",
                 e);
 
