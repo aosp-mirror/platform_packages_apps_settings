@@ -17,14 +17,17 @@
 package com.android.settings;
 
 import android.accessibilityservice.AccessibilityServiceInfo;
+import android.app.ActivityManagerNative;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.Service;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.ServiceInfo;
+import android.content.res.Configuration;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.RemoteException;
 import android.os.SystemProperties;
 import android.preference.CheckBoxPreference;
 import android.preference.ListPreference;
@@ -51,7 +54,12 @@ public class AccessibilitySettings extends SettingsPreferenceFragment implements
     private static final String DEFAULT_SCREENREADER_MARKET_LINK =
         "market://search?q=pname:com.google.android.marvin.talkback";
 
-    private final String TOGGLE_ACCESSIBILITY_CHECKBOX =
+    private static final float LARGE_FONT_SCALE = 1.3f;
+
+    private static final String TOGGLE_LARGE_TEXT_CHECKBOX =
+        "toggle_large_text_checkbox";
+
+    private static final String TOGGLE_ACCESSIBILITY_CHECKBOX =
         "toggle_accessibility_service_checkbox";
 
     private static final String ACCESSIBILITY_SERVICES_CATEGORY =
@@ -66,10 +74,10 @@ public class AccessibilitySettings extends SettingsPreferenceFragment implements
     private static final String POWER_BUTTON_ENDS_CALL_CHECKBOX =
         "power_button_ends_call";
 
-    private final String KEY_TOGGLE_ACCESSIBILITY_SERVICE_CHECKBOX =
+    private static final String KEY_TOGGLE_ACCESSIBILITY_SERVICE_CHECKBOX =
         "key_toggle_accessibility_service_checkbox";
 
-    private final String KEY_LONG_PRESS_TIMEOUT_LIST_PREFERENCE =
+    private static final String KEY_LONG_PRESS_TIMEOUT_LIST_PREFERENCE =
         "long_press_timeout_list_preference";
 
     private static final int DIALOG_ID_DISABLE_ACCESSIBILITY = 1;
@@ -77,6 +85,7 @@ public class AccessibilitySettings extends SettingsPreferenceFragment implements
     private static final int DIALOG_ID_ENABLE_ACCESSIBILITY_SERVICE = 3;
     private static final int DIALOG_ID_NO_ACCESSIBILITY_SERVICES = 4;
 
+    private CheckBoxPreference mToggleLargeTextCheckBox;
     private CheckBoxPreference mToggleAccessibilityCheckBox;
     private CheckBoxPreference mToggleScriptInjectionCheckBox;
     private SettingsCheckBoxPreference mToggleAccessibilityServiceCheckBox;
@@ -87,6 +96,8 @@ public class AccessibilitySettings extends SettingsPreferenceFragment implements
     private PreferenceGroup mAccessibilityServicesCategory;
 
     private ListPreference mLongPressTimeoutListPreference;
+
+    private final Configuration mCurConfig = new Configuration();
 
     private Map<String, AccessibilityServiceInfo> mAccessibilityServices =
         new LinkedHashMap<String, AccessibilityServiceInfo>();
@@ -99,6 +110,9 @@ public class AccessibilitySettings extends SettingsPreferenceFragment implements
         super.onCreate(icicle);
 
         addPreferencesFromResource(R.xml.accessibility_settings);
+
+        mToggleLargeTextCheckBox = (CheckBoxPreference) findPreference(
+                TOGGLE_LARGE_TEXT_CHECKBOX);
 
         mAccessibilityServicesCategory =
             (PreferenceGroup) findPreference(ACCESSIBILITY_SERVICES_CATEGORY);
@@ -145,7 +159,7 @@ public class AccessibilitySettings extends SettingsPreferenceFragment implements
 
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
-        addAccessibilitServicePreferences();
+        addAccessibilityServicePreferences();
 
         final HashSet<String> enabled = new HashSet<String>();
         String settingValue = Settings.Secure.getString(getContentResolver(),
@@ -191,6 +205,8 @@ public class AccessibilitySettings extends SettingsPreferenceFragment implements
             // installed and direct them to Market to get TalkBack
             showDialog(DIALOG_ID_NO_ACCESSIBILITY_SERVICES);
         }
+
+        readFontSizePreference();
 
         super.onActivityCreated(savedInstanceState);
     }
@@ -251,10 +267,10 @@ public class AccessibilitySettings extends SettingsPreferenceFragment implements
         int count = mAccessibilityServicesCategory.getPreferenceCount();
         for (int i = 0; i < count; i++) {
             Preference pref = mAccessibilityServicesCategory.getPreference(i);
-            pref.setEnabled(isEnabled);
+            if (pref != mToggleAccessibilityCheckBox) {
+                pref.setEnabled(isEnabled);
+            }
         }
-
-        mToggleScriptInjectionCheckBox.setEnabled(isEnabled);
     }
 
     @Override
@@ -263,6 +279,13 @@ public class AccessibilitySettings extends SettingsPreferenceFragment implements
 
         if (TOGGLE_ACCESSIBILITY_CHECKBOX.equals(key)) {
             handleEnableAccessibilityStateChange((CheckBoxPreference) preference);
+        } else if (TOGGLE_LARGE_TEXT_CHECKBOX.equals(key)) {
+            try {
+                mCurConfig.fontScale = mToggleLargeTextCheckBox.isChecked()
+                        ? LARGE_FONT_SCALE : 1;
+                ActivityManagerNative.getDefault().updateConfiguration(mCurConfig);
+            } catch (RemoteException e) {
+            }
         } else if (POWER_BUTTON_ENDS_CALL_CHECKBOX.equals(key)) {
             boolean isChecked = ((CheckBoxPreference) preference).isChecked();
             // The checkbox is labeled "Power button ends call"; thus the in-call
@@ -355,19 +378,21 @@ public class AccessibilitySettings extends SettingsPreferenceFragment implements
     /**
      * Adds {@link CheckBoxPreference} for enabling or disabling an accessibility services.
      */
-    private void addAccessibilitServicePreferences() {
+    private void addAccessibilityServicePreferences() {
         AccessibilityManager accessibilityManager =
             (AccessibilityManager) getSystemService(Service.ACCESSIBILITY_SERVICE);
 
         List<AccessibilityServiceInfo> installedServices =
             accessibilityManager.getInstalledAccessibilityServiceList();
 
-        if (installedServices.isEmpty()) {
-            getPreferenceScreen().removePreference(mAccessibilityServicesCategory);
-            return;
+        for (int i = 0; i < mAccessibilityServicesCategory.getPreferenceCount(); i++) {
+            Preference pref = mAccessibilityServicesCategory.getPreference(i);
+            if (pref != mToggleAccessibilityCheckBox
+                    && pref != mToggleScriptInjectionCheckBox) {
+                mAccessibilityServicesCategory.removePreference(pref);
+                i--;
+            }
         }
-
-        getPreferenceScreen().addPreference(mAccessibilityServicesCategory);
 
         for (int i = 0, count = installedServices.size(); i < count; ++i) {
             AccessibilityServiceInfo accessibilityServiceInfo = installedServices.get(i);
@@ -385,11 +410,22 @@ public class AccessibilitySettings extends SettingsPreferenceFragment implements
                 SettingsCheckBoxPreference preference = new SettingsCheckBoxPreference(
                         getActivity(), settingsIntent);
                 preference.setKey(key);
+                preference.setOrder(i);
                 ServiceInfo serviceInfo = accessibilityServiceInfo.getResolveInfo().serviceInfo;
                 preference.setTitle(serviceInfo.loadLabel(getActivity().getPackageManager()));
                 mAccessibilityServicesCategory.addPreference(preference);
             }
         }
+    }
+
+    public void readFontSizePreference() {
+        try {
+            mCurConfig.updateFrom(
+                ActivityManagerNative.getDefault().getConfiguration());
+        } catch (RemoteException e) {
+        }
+        mToggleLargeTextCheckBox.setChecked(Float.compare(mCurConfig.fontScale,
+                LARGE_FONT_SCALE) == 0);
     }
 
     @Override
