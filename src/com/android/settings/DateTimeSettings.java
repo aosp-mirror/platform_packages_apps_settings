@@ -88,7 +88,6 @@ public class DateTimeSettings extends SettingsPreferenceFragment
         boolean isFirstRun = intent.getBooleanExtra(EXTRA_IS_FIRST_RUN, false);
 
         mDummyDate = Calendar.getInstance();
-        mDummyDate.set(mDummyDate.get(Calendar.YEAR), 11, 31, 13, 0, 0);
 
         mAutoTimePref = (CheckBoxPreference) findPreference(KEY_AUTO_TIME);
         mAutoTimePref.setChecked(autoTimeEnabled);
@@ -171,6 +170,8 @@ public class DateTimeSettings extends SettingsPreferenceFragment
     public void updateTimeAndDateDisplay(Context context) {
         java.text.DateFormat shortDateFormat = DateFormat.getDateFormat(context);
         final Calendar now = Calendar.getInstance();
+        mDummyDate.setTimeZone(now.getTimeZone());
+        mDummyDate.set(now.get(Calendar.YEAR), 11, 31, 13, 0, 0);
         Date dummyDate = mDummyDate.getTime();
         mTimePref.setSummary(DateFormat.getTimeFormat(getActivity()).format(now.getTime()));
         mTimeZone.setSummary(getTimeZoneText(now.getTimeZone()));
