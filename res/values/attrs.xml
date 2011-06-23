@@ -49,4 +49,26 @@
         <!-- Minimum tick width for each slice in the bar chart. -->
         <attr name="minTickWidth" format="dimension" />
     </declare-styleable>
+
+    <declare-styleable name="ChartSweepView">
+        <attr name="sweepDrawable" format="reference" />
+        <attr name="followAxis">
+            <enum name="horizontal" value="0" />
+            <enum name="vertical" value="1" />
+        </attr>
+        <attr name="showLabel" format="boolean" />
+    </declare-styleable>
+
+    <declare-styleable name="ChartGridView">
+        <attr name="primaryDrawable" format="reference" />
+        <attr name="secondaryDrawable" format="reference" />
+        <attr name="borderDrawable" format="reference" />
+        <attr name="labelColor" format="color" />
+    </declare-styleable>
+
+    <declare-styleable name="ChartNetworkSeriesView">
+        <attr name="strokeColor" format="color" />
+        <attr name="fillColor" format="color" />
+        <attr name="fillColorSecondary" format="color" />
+    </declare-styleable>
 </resources>

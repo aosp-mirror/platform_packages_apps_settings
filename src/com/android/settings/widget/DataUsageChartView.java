@@ -17,12 +17,14 @@
 package com.android.settings.widget;
 
 import android.content.Context;
-import android.graphics.Color;
 import android.net.NetworkPolicy;
 import android.net.NetworkStatsHistory;
 import android.text.format.DateUtils;
+import android.util.AttributeSet;
+import android.view.MotionEvent;
 import android.view.View;
 
+import com.android.settings.R;
 import com.android.settings.widget.ChartSweepView.OnSweepListener;
 
 /**
@@ -35,13 +37,16 @@ public class DataUsageChartView extends ChartView {
     private static final long MB_IN_BYTES = KB_IN_BYTES * 1024;
     private static final long GB_IN_BYTES = MB_IN_BYTES * 1024;
 
+    // TODO: enforce that sweeps cant cross each other
+    // TODO: limit sweeps at graph boundaries
+
+    private ChartGridView mGrid;
     private ChartNetworkSeriesView mSeries;
 
-    // TODO: limit sweeps at graph boundaries
-    private ChartSweepView mSweepTime1;
-    private ChartSweepView mSweepTime2;
-    private ChartSweepView mSweepDataWarn;
-    private ChartSweepView mSweepDataLimit;
+    private ChartSweepView mSweepLeft;
+    private ChartSweepView mSweepRight;
+    private ChartSweepView mSweepWarning;
+    private ChartSweepView mSweepLimit;
 
     public interface DataUsageChartListener {
         public void onInspectRangeChanged();
@@ -51,46 +56,58 @@ public class DataUsageChartView extends ChartView {
 
     private DataUsageChartListener mListener;
 
-    private static ChartAxis buildTimeAxis() {
-        return new TimeAxis();
-    }
-
-    private static ChartAxis buildDataAxis() {
-        return new InvertedChartAxis(new DataAxis());
-    }
-
     public DataUsageChartView(Context context) {
-        super(context, buildTimeAxis(), buildDataAxis());
-        setPadding(20, 20, 20, 20);
-
-        addView(new ChartGridView(context, mHoriz, mVert), buildChartParams());
-
-        mSeries = new ChartNetworkSeriesView(context, mHoriz, mVert);
-        addView(mSeries, buildChartParams());
-
-        mSweepTime1 = new ChartSweepView(context, mHoriz, 0L, Color.parseColor("#ffffff"));
-        mSweepTime2 = new ChartSweepView(context, mHoriz, 0L, Color.parseColor("#ffffff"));
-        mSweepDataWarn = new ChartSweepView(context, mVert, 0L, Color.parseColor("#f7931d"));
-        mSweepDataLimit = new ChartSweepView(context, mVert, 0L, Color.parseColor("#be1d2c"));
-
-        addView(mSweepTime1, buildSweepParams());
-        addView(mSweepTime2, buildSweepParams());
-        addView(mSweepDataWarn, buildSweepParams());
-        addView(mSweepDataLimit, buildSweepParams());
-
-        mSeries.bindSweepRange(mSweepTime1, mSweepTime2);
-
-        mSweepDataWarn.addOnSweepListener(mWarningListener);
-        mSweepDataLimit.addOnSweepListener(mLimitListener);
-
-        mSweepTime1.addOnSweepListener(mSweepListener);
-        mSweepTime2.addOnSweepListener(mSweepListener);
-
-        mSweepDataWarn.setVisibility(View.INVISIBLE);
-        mSweepDataLimit.setVisibility(View.INVISIBLE);
-
+        this(context, null, 0);
     }
 
+    public DataUsageChartView(Context context, AttributeSet attrs) {
+        this(context, attrs, 0);
+    }
+
+    public DataUsageChartView(Context context, AttributeSet attrs, int defStyle) {
+        super(context, attrs, defStyle);
+        init(new TimeAxis(), new InvertedChartAxis(new DataAxis()));
+    }
+
+    @Override
+    protected void onFinishInflate() {
+        super.onFinishInflate();
+
+        mGrid = (ChartGridView) findViewById(R.id.grid);
+        mSeries = (ChartNetworkSeriesView) findViewById(R.id.series);
+
+        mSweepLeft = (ChartSweepView) findViewById(R.id.sweep_left);
+        mSweepRight = (ChartSweepView) findViewById(R.id.sweep_right);
+        mSweepLimit = (ChartSweepView) findViewById(R.id.sweep_limit);
+        mSweepWarning = (ChartSweepView) findViewById(R.id.sweep_warning);
+
+        mSweepLeft.addOnSweepListener(mSweepListener);
+        mSweepRight.addOnSweepListener(mSweepListener);
+        mSweepWarning.addOnSweepListener(mWarningListener);
+        mSweepLimit.addOnSweepListener(mLimitListener);
+
+        // tell everyone about our axis
+        mGrid.init(mHoriz, mVert);
+        mSeries.init(mHoriz, mVert);
+        mSweepLeft.init(mHoriz);
+        mSweepRight.init(mHoriz);
+        mSweepWarning.init(mVert);
+        mSweepLimit.init(mVert);
+
+        setActivated(false);
+    }
+
+    @Override
+    public void setActivated(boolean activated) {
+        super.setActivated(activated);
+
+        mSweepLeft.setEnabled(activated);
+        mSweepRight.setEnabled(activated);
+        mSweepWarning.setEnabled(activated);
+        mSweepLimit.setEnabled(activated);
+    }
+
+    @Deprecated
     public void setChartColor(int stroke, int fill, int disabled) {
         mSeries.setChartColor(stroke, fill, disabled);
     }
@@ -105,36 +122,46 @@ public class DataUsageChartView extends ChartView {
 
     public void bindNetworkPolicy(NetworkPolicy policy) {
         if (policy == null) {
-            mSweepDataLimit.setVisibility(View.INVISIBLE);
-            mSweepDataWarn.setVisibility(View.INVISIBLE);
+            mSweepLimit.setVisibility(View.INVISIBLE);
+            mSweepWarning.setVisibility(View.INVISIBLE);
             return;
         }
 
         if (policy.limitBytes != NetworkPolicy.LIMIT_DISABLED) {
-            mSweepDataLimit.setVisibility(View.VISIBLE);
-            mSweepDataLimit.setValue(policy.limitBytes);
-            mSweepDataLimit.setEnabled(true);
+            mSweepLimit.setVisibility(View.VISIBLE);
+            mSweepLimit.setValue(policy.limitBytes);
+            mSweepLimit.setEnabled(true);
         } else {
             // TODO: set limit default based on axis maximum
-            mSweepDataLimit.setVisibility(View.VISIBLE);
-            mSweepDataLimit.setValue(5 * GB_IN_BYTES);
-            mSweepDataLimit.setEnabled(false);
+            mSweepLimit.setVisibility(View.VISIBLE);
+            mSweepLimit.setValue(5 * GB_IN_BYTES);
+            mSweepLimit.setEnabled(false);
         }
 
         if (policy.warningBytes != NetworkPolicy.WARNING_DISABLED) {
-            mSweepDataWarn.setVisibility(View.VISIBLE);
-            mSweepDataWarn.setValue(policy.warningBytes);
+            mSweepWarning.setVisibility(View.VISIBLE);
+            mSweepWarning.setValue(policy.warningBytes);
         } else {
-            mSweepDataWarn.setVisibility(View.INVISIBLE);
+            mSweepWarning.setVisibility(View.INVISIBLE);
         }
 
         requestLayout();
+
+        // TODO: eventually remove this; was to work around lack of sweep clamping
+        if (policy.limitBytes < -1 || policy.limitBytes > 5 * GB_IN_BYTES) {
+            policy.limitBytes = 5 * GB_IN_BYTES;
+            mLimitListener.onSweep(mSweepLimit, true);
+        }
+        if (policy.warningBytes < -1 || policy.warningBytes > 5 * GB_IN_BYTES) {
+            policy.warningBytes = 4 * GB_IN_BYTES;
+            mWarningListener.onSweep(mSweepWarning, true);
+        }
+
     }
 
     private OnSweepListener mSweepListener = new OnSweepListener() {
         public void onSweep(ChartSweepView sweep, boolean sweepDone) {
-            // always update graph clip region
-            mSeries.invalidate();
+            mSeries.setPrimaryRange(mSweepLeft.getValue(), mSweepRight.getValue());
 
             // update detail list only when done sweeping
             if (sweepDone && mListener != null) {
@@ -159,24 +186,39 @@ public class DataUsageChartView extends ChartView {
         }
     };
 
+    @Override
+    public boolean onTouchEvent(MotionEvent event) {
+        if (isActivated()) return false;
+        switch (event.getAction()) {
+            case MotionEvent.ACTION_DOWN: {
+                return true;
+            }
+            case MotionEvent.ACTION_UP: {
+                setActivated(true);
+                return true;
+            }
+            default: {
+                return false;
+            }
+        }
+    }
+
     /**
      * Return current inspection range (start and end time) based on internal
      * {@link ChartSweepView} positions.
      */
     public long[] getInspectRange() {
-        final long sweep1 = mSweepTime1.getValue();
-        final long sweep2 = mSweepTime2.getValue();
-        final long start = Math.min(sweep1, sweep2);
-        final long end = Math.max(sweep1, sweep2);
+        final long start = mSweepLeft.getValue();
+        final long end = mSweepRight.getValue();
         return new long[] { start, end };
     }
 
     public long getWarningBytes() {
-        return mSweepDataWarn.getValue();
+        return mSweepWarning.getValue();
     }
 
     public long getLimitBytes() {
-        return mSweepDataLimit.getValue();
+        return mSweepLimit.getValue();
     }
 
     /**
@@ -192,8 +234,9 @@ public class DataUsageChartView extends ChartView {
         final long sweepMax = Math.min(end, dataBoundary);
         final long sweepMin = Math.max(start, (sweepMax - DateUtils.WEEK_IN_MILLIS));
 
-        mSweepTime1.setValue(sweepMin);
-        mSweepTime2.setValue(sweepMax);
+        mSweepLeft.setValue(sweepMin);
+        mSweepRight.setValue(sweepMax);
+        mSeries.setPrimaryRange(sweepMin, sweepMax);
 
         requestLayout();
         mSeries.generatePath();
@@ -235,6 +278,12 @@ public class DataUsageChartView extends ChartView {
 
         /** {@inheritDoc} */
         public CharSequence getLabel(long value) {
+            // TODO: convert to string
+            return Long.toString(value);
+        }
+
+        /** {@inheritDoc} */
+        public CharSequence getShortLabel(long value) {
             // TODO: convert to string
             return Long.toString(value);
         }
@@ -299,6 +348,16 @@ public class DataUsageChartView extends ChartView {
 
         /** {@inheritDoc} */
         public CharSequence getLabel(long value) {
+
+            // TODO: use exploded string here
+
+
+            // TODO: convert to string
+            return Long.toString(value);
+        }
+
+        /** {@inheritDoc} */
+        public CharSequence getShortLabel(long value) {
             // TODO: convert to string
             return Long.toString(value);
         }

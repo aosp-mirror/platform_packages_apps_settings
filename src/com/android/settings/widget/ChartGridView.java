@@ -17,12 +17,13 @@
 package com.android.settings.widget;
 
 import android.content.Context;
+import android.content.res.TypedArray;
 import android.graphics.Canvas;
-import android.graphics.Color;
-import android.graphics.Paint;
-import android.graphics.Paint.Style;
+import android.graphics.drawable.Drawable;
+import android.util.AttributeSet;
 import android.view.View;
 
+import com.android.settings.R;
 import com.google.common.base.Preconditions;
 
 /**
@@ -31,32 +32,42 @@ import com.google.common.base.Preconditions;
  */
 public class ChartGridView extends View {
 
-    private final ChartAxis mHoriz;
-    private final ChartAxis mVert;
+    // TODO: eventually teach about drawing chart labels
 
-    private final Paint mPaintHoriz;
-    private final Paint mPaintVert;
+    private ChartAxis mHoriz;
+    private ChartAxis mVert;
 
-    public ChartGridView(Context context, ChartAxis horiz, ChartAxis vert) {
-        super(context);
+    private Drawable mPrimary;
+    private Drawable mSecondary;
+    private Drawable mBorder;
 
-        mHoriz = Preconditions.checkNotNull(horiz, "missing horiz");
-        mVert = Preconditions.checkNotNull(vert, "missing vert");
+    public ChartGridView(Context context) {
+        this(context, null, 0);
+    }
+
+    public ChartGridView(Context context, AttributeSet attrs) {
+        this(context, attrs, 0);
+    }
+
+    public ChartGridView(Context context, AttributeSet attrs, int defStyle) {
+        super(context, attrs, defStyle);
 
         setWillNotDraw(false);
 
-        // TODO: convert these colors to resources
-        mPaintHoriz = new Paint();
-        mPaintHoriz.setColor(Color.parseColor("#667bb5"));
-        mPaintHoriz.setStrokeWidth(2.0f);
-        mPaintHoriz.setStyle(Style.STROKE);
-        mPaintHoriz.setAntiAlias(true);
+        final TypedArray a = context.obtainStyledAttributes(
+                attrs, R.styleable.ChartGridView, defStyle, 0);
 
-        mPaintVert = new Paint();
-        mPaintVert.setColor(Color.parseColor("#28262c"));
-        mPaintVert.setStrokeWidth(1.0f);
-        mPaintVert.setStyle(Style.STROKE);
-        mPaintVert.setAntiAlias(true);
+        mPrimary = a.getDrawable(R.styleable.ChartGridView_primaryDrawable);
+        mSecondary = a.getDrawable(R.styleable.ChartGridView_secondaryDrawable);
+        mBorder = a.getDrawable(R.styleable.ChartGridView_borderDrawable);
+        // TODO: eventually read labelColor
+
+        a.recycle();
+    }
+
+    void init(ChartAxis horiz, ChartAxis vert) {
+        mHoriz = Preconditions.checkNotNull(horiz, "missing horiz");
+        mVert = Preconditions.checkNotNull(vert, "missing vert");
     }
 
     @Override
@@ -64,16 +75,28 @@ public class ChartGridView extends View {
         final int width = getWidth();
         final int height = getHeight();
 
+        final Drawable secondary = mSecondary;
+        final int secondaryHeight = mSecondary.getIntrinsicHeight();
+
         final float[] vertTicks = mVert.getTickPoints();
         for (float y : vertTicks) {
-            canvas.drawLine(0, y, width, y, mPaintVert);
+            final int bottom = (int) Math.min(y + secondaryHeight, height);
+            secondary.setBounds(0, (int) y, width, bottom);
+            secondary.draw(canvas);
         }
+
+        final Drawable primary = mPrimary;
+        final int primaryWidth = mPrimary.getIntrinsicWidth();
+        final int primaryHeight = mPrimary.getIntrinsicHeight();
 
         final float[] horizTicks = mHoriz.getTickPoints();
         for (float x : horizTicks) {
-            canvas.drawLine(x, 0, x, height, mPaintHoriz);
+            final int right = (int) Math.min(x + primaryWidth, width);
+            primary.setBounds((int) x, 0, right, height);
+            primary.draw(canvas);
         }
 
-        canvas.drawRect(0, 0, width, height, mPaintHoriz);
+        mBorder.setBounds(0, 0, width, height);
+        mBorder.draw(canvas);
     }
 }

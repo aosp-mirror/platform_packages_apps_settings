@@ -17,6 +17,7 @@
 package com.android.settings.widget;
 
 import android.content.Context;
+import android.content.res.TypedArray;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
@@ -24,9 +25,11 @@ import android.graphics.Paint.Style;
 import android.graphics.Path;
 import android.graphics.RectF;
 import android.net.NetworkStatsHistory;
+import android.util.AttributeSet;
 import android.util.Log;
 import android.view.View;
 
+import com.android.settings.R;
 import com.google.common.base.Preconditions;
 
 /**
@@ -37,35 +40,54 @@ public class ChartNetworkSeriesView extends View {
     private static final String TAG = "ChartNetworkSeriesView";
     private static final boolean LOGD = true;
 
-    private final ChartAxis mHoriz;
-    private final ChartAxis mVert;
+    private ChartAxis mHoriz;
+    private ChartAxis mVert;
 
     private Paint mPaintStroke;
     private Paint mPaintFill;
-    private Paint mPaintFillDisabled;
+    private Paint mPaintFillSecondary;
 
     private NetworkStatsHistory mStats;
 
     private Path mPathStroke;
     private Path mPathFill;
 
-    private ChartSweepView mSweep1;
-    private ChartSweepView mSweep2;
+    private long mPrimaryLeft;
+    private long mPrimaryRight;
 
-    public ChartNetworkSeriesView(Context context, ChartAxis horiz, ChartAxis vert) {
-        super(context);
+    public ChartNetworkSeriesView(Context context) {
+        this(context, null, 0);
+    }
 
-        mHoriz = Preconditions.checkNotNull(horiz, "missing horiz");
-        mVert = Preconditions.checkNotNull(vert, "missing vert");
+    public ChartNetworkSeriesView(Context context, AttributeSet attrs) {
+        this(context, attrs, 0);
+    }
 
-        setChartColor(Color.parseColor("#24aae1"), Color.parseColor("#c050ade5"),
-                Color.parseColor("#88566abc"));
+    public ChartNetworkSeriesView(Context context, AttributeSet attrs, int defStyle) {
+        super(context, attrs, defStyle);
+
+        final TypedArray a = context.obtainStyledAttributes(
+                attrs, R.styleable.ChartNetworkSeriesView, defStyle, 0);
+
+        final int stroke = a.getColor(R.styleable.ChartNetworkSeriesView_strokeColor, Color.RED);
+        final int fill = a.getColor(R.styleable.ChartNetworkSeriesView_fillColor, Color.RED);
+        final int fillSecondary = a.getColor(
+                R.styleable.ChartNetworkSeriesView_fillColorSecondary, Color.RED);
+
+        setChartColor(stroke, fill, fillSecondary);
+
+        a.recycle();
 
         mPathStroke = new Path();
         mPathFill = new Path();
     }
 
-    public void setChartColor(int stroke, int fill, int disabled) {
+    void init(ChartAxis horiz, ChartAxis vert) {
+        mHoriz = Preconditions.checkNotNull(horiz, "missing horiz");
+        mVert = Preconditions.checkNotNull(vert, "missing vert");
+    }
+
+    public void setChartColor(int stroke, int fill, int fillSecondary) {
         mPaintStroke = new Paint();
         mPaintStroke.setStrokeWidth(6.0f);
         mPaintStroke.setColor(stroke);
@@ -77,10 +99,10 @@ public class ChartNetworkSeriesView extends View {
         mPaintFill.setStyle(Style.FILL);
         mPaintFill.setAntiAlias(true);
 
-        mPaintFillDisabled = new Paint();
-        mPaintFillDisabled.setColor(disabled);
-        mPaintFillDisabled.setStyle(Style.FILL);
-        mPaintFillDisabled.setAntiAlias(true);
+        mPaintFillSecondary = new Paint();
+        mPaintFillSecondary.setColor(fillSecondary);
+        mPaintFillSecondary.setStyle(Style.FILL);
+        mPaintFillSecondary.setAntiAlias(true);
     }
 
     public void bindNetworkStats(NetworkStatsHistory stats) {
@@ -90,12 +112,10 @@ public class ChartNetworkSeriesView extends View {
         mPathFill.reset();
     }
 
-    public void bindSweepRange(ChartSweepView sweep1, ChartSweepView sweep2) {
-        // TODO: generalize to support vertical sweeps
-        // TODO: enforce that both sweeps are along same dimension
-
-        mSweep1 = Preconditions.checkNotNull(sweep1, "missing sweep1");
-        mSweep2 = Preconditions.checkNotNull(sweep2, "missing sweep2");
+    public void setPrimaryRange(long left, long right) {
+        mPrimaryLeft = left;
+        mPrimaryRight = right;
+        invalidate();
     }
 
     @Override
@@ -168,27 +188,20 @@ public class ChartNetworkSeriesView extends View {
 
     @Override
     protected void onDraw(Canvas canvas) {
-
-        // clip to sweep area
-        final float sweep1 = mSweep1.getPoint();
-        final float sweep2 = mSweep2.getPoint();
-        final float sweepLeft = Math.min(sweep1, sweep2);
-        final float sweepRight = Math.max(sweep1, sweep2);
-
         int save;
 
         save = canvas.save();
-        canvas.clipRect(0, 0, sweepLeft, getHeight());
-        canvas.drawPath(mPathFill, mPaintFillDisabled);
+        canvas.clipRect(0, 0, mPrimaryLeft, getHeight());
+        canvas.drawPath(mPathFill, mPaintFillSecondary);
         canvas.restoreToCount(save);
 
         save = canvas.save();
-        canvas.clipRect(sweepRight, 0, getWidth(), getHeight());
-        canvas.drawPath(mPathFill, mPaintFillDisabled);
+        canvas.clipRect(mPrimaryRight, 0, getWidth(), getHeight());
+        canvas.drawPath(mPathFill, mPaintFillSecondary);
         canvas.restoreToCount(save);
 
         save = canvas.save();
-        canvas.clipRect(sweepLeft, 0, sweepRight, getHeight());
+        canvas.clipRect(mPrimaryLeft, 0, mPrimaryRight, getHeight());
         canvas.drawPath(mPathFill, mPaintFill);
         canvas.drawPath(mPathStroke, mPaintStroke);
         canvas.restoreToCount(save);

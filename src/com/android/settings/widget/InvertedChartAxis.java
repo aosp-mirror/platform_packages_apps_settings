@@ -54,6 +54,11 @@ public class InvertedChartAxis implements ChartAxis {
     }
 
     /** {@inheritDoc} */
+    public CharSequence getShortLabel(long value) {
+        return mWrapped.getShortLabel(value);
+    }
+
+    /** {@inheritDoc} */
     public float[] getTickPoints() {
         final float[] points = mWrapped.getTickPoints();
         for (int i = 0; i < points.length; i++) {

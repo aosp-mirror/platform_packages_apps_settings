@@ -17,63 +17,79 @@
 package com.android.settings.widget;
 
 import android.content.Context;
+import android.content.res.TypedArray;
 import android.graphics.Canvas;
-import android.graphics.Color;
-import android.graphics.DashPathEffect;
-import android.graphics.Paint;
-import android.graphics.Paint.Style;
+import android.graphics.Rect;
+import android.graphics.drawable.Drawable;
+import android.util.AttributeSet;
+import android.util.MathUtils;
 import android.view.MotionEvent;
 import android.view.View;
+import android.widget.FrameLayout;
 
+import com.android.settings.R;
 import com.google.common.base.Preconditions;
 
 /**
  * Sweep across a {@link ChartView} at a specific {@link ChartAxis} value, which
  * a user can drag.
  */
-public class ChartSweepView extends View {
+public class ChartSweepView extends FrameLayout {
 
-    private final Paint mPaintSweep;
-    private final Paint mPaintSweepDisabled;
-    private final Paint mPaintShadow;
+    // TODO: paint label when requested
 
-    private final ChartAxis mAxis;
+    private Drawable mSweep;
+    private int mFollowAxis;
+    private boolean mShowLabel;
+
+    private ChartAxis mAxis;
     private long mValue;
+
+    public static final int HORIZONTAL = 0;
+    public static final int VERTICAL = 1;
 
     public interface OnSweepListener {
         public void onSweep(ChartSweepView sweep, boolean sweepDone);
     }
 
     private OnSweepListener mListener;
-
-    private boolean mHorizontal;
     private MotionEvent mTracking;
 
-    public ChartSweepView(Context context, ChartAxis axis, long value, int color) {
-        super(context);
+    public ChartSweepView(Context context) {
+        this(context, null, 0);
+    }
 
+    public ChartSweepView(Context context, AttributeSet attrs) {
+        this(context, attrs, 0);
+    }
+
+    public ChartSweepView(Context context, AttributeSet attrs, int defStyle) {
+        super(context, attrs, defStyle);
+
+        final TypedArray a = context.obtainStyledAttributes(
+                attrs, R.styleable.ChartSweepView, defStyle, 0);
+
+        setSweepDrawable(a.getDrawable(R.styleable.ChartSweepView_sweepDrawable));
+        setFollowAxis(a.getInt(R.styleable.ChartSweepView_followAxis, -1));
+        setShowLabel(a.getBoolean(R.styleable.ChartSweepView_showLabel, false));
+
+        a.recycle();
+
+        setClipToPadding(false);
+        setClipChildren(false);
+        setWillNotDraw(false);
+    }
+
+    void init(ChartAxis axis) {
         mAxis = Preconditions.checkNotNull(axis, "missing axis");
-        mValue = value;
+    }
 
-        mPaintSweep = new Paint();
-        mPaintSweep.setColor(color);
-        mPaintSweep.setStrokeWidth(3.0f);
-        mPaintSweep.setStyle(Style.FILL_AND_STROKE);
-        mPaintSweep.setAntiAlias(true);
+    public int getFollowAxis() {
+        return mFollowAxis;
+    }
 
-        mPaintSweepDisabled = new Paint();
-        mPaintSweepDisabled.setColor(color);
-        mPaintSweepDisabled.setStrokeWidth(1.5f);
-        mPaintSweepDisabled.setStyle(Style.FILL_AND_STROKE);
-        mPaintSweepDisabled.setPathEffect(new DashPathEffect(new float[] { 5, 5 }, 0));
-        mPaintSweepDisabled.setAntiAlias(true);
-
-        mPaintShadow = new Paint();
-        mPaintShadow.setColor(Color.BLACK);
-        mPaintShadow.setStrokeWidth(6.0f);
-        mPaintShadow.setStyle(Style.FILL_AND_STROKE);
-        mPaintShadow.setAntiAlias(true);
-
+    public void getExtraMargins(Rect rect) {
+        mSweep.getPadding(rect);
     }
 
     public void addOnSweepListener(OnSweepListener listener) {
@@ -84,6 +100,56 @@ public class ChartSweepView extends View {
         if (mListener != null) {
             mListener.onSweep(this, sweepDone);
         }
+    }
+
+    public void setSweepDrawable(Drawable sweep) {
+        if (mSweep != null) {
+            mSweep.setCallback(null);
+            unscheduleDrawable(mSweep);
+        }
+
+        if (sweep != null) {
+            sweep.setCallback(this);
+            if (sweep.isStateful()) {
+                sweep.setState(getDrawableState());
+            }
+            sweep.setVisible(getVisibility() == VISIBLE, false);
+            mSweep = sweep;
+        } else {
+            mSweep = null;
+        }
+
+        invalidate();
+    }
+
+    public void setFollowAxis(int followAxis) {
+        mFollowAxis = followAxis;
+    }
+
+    public void setShowLabel(boolean showLabel) {
+        mShowLabel = showLabel;
+        invalidate();
+    }
+
+    @Override
+    public void jumpDrawablesToCurrentState() {
+        super.jumpDrawablesToCurrentState();
+        if (mSweep != null) {
+            mSweep.jumpToCurrentState();
+        }
+    }
+
+    @Override
+    public void setVisibility(int visibility) {
+        super.setVisibility(visibility);
+        if (mSweep != null) {
+            mSweep.setVisible(visibility == VISIBLE, false);
+        }
+    }
+
+    @Override
+    protected boolean verifyDrawable(Drawable who) {
+        return who == mSweep || super.verifyDrawable(who);
     }
 
     public ChartAxis getAxis() {
@@ -115,14 +181,24 @@ public class ChartSweepView extends View {
             case MotionEvent.ACTION_MOVE: {
                 getParent().requestDisallowInterceptTouchEvent(true);
 
-                if (mHorizontal) {
-                    setTranslationY(event.getRawY() - mTracking.getRawY());
+                if (mFollowAxis == VERTICAL) {
+                    final float chartHeight = parent.getHeight() - parent.getPaddingTop()
+                            - parent.getPaddingBottom();
+                    final float translationY = MathUtils.constrain(
+                            event.getRawY() - mTracking.getRawY(), -getTop(),
+                            chartHeight - getTop());
+                    setTranslationY(translationY);
                     final float point = (getTop() + getTranslationY() + (getHeight() / 2))
                             - parent.getPaddingTop();
                     mValue = mAxis.convertToValue(point);
                     dispatchOnSweep(false);
                 } else {
-                    setTranslationX(event.getRawX() - mTracking.getRawX());
+                    final float chartWidth = parent.getWidth() - parent.getPaddingLeft()
+                            - parent.getPaddingRight();
+                    final float translationX = MathUtils.constrain(
+                            event.getRawX() - mTracking.getRawX(), -getLeft(),
+                            chartWidth - getLeft());
+                    setTranslationX(translationX);
                     final float point = (getLeft() + getTranslationX() + (getWidth() / 2))
                             - parent.getPaddingLeft();
                     mValue = mAxis.convertToValue(point);
@@ -145,40 +221,25 @@ public class ChartSweepView extends View {
     }
 
     @Override
+    protected void drawableStateChanged() {
+        super.drawableStateChanged();
+        if (mSweep.isStateful()) {
+            mSweep.setState(getDrawableState());
+        }
+    }
+
+    @Override
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
-        // need at least 50px in each direction for grippies
-        // TODO: provide this value through params
-        setMeasuredDimension(50, 50);
+        setMeasuredDimension(mSweep.getIntrinsicWidth(), mSweep.getIntrinsicHeight());
     }
 
     @Override
     protected void onDraw(Canvas canvas) {
-
-        // draw line across larger dimension
         final int width = getWidth();
         final int height = getHeight();
 
-        mHorizontal = width > height;
-
-        final Paint linePaint = isEnabled() ? mPaintSweep : mPaintSweepDisabled;
-
-        if (mHorizontal) {
-            final int centerY = height / 2;
-            final int endX = width - height;
-
-            canvas.drawLine(0, centerY, endX, centerY, mPaintShadow);
-            canvas.drawLine(0, centerY, endX, centerY, linePaint);
-            canvas.drawCircle(endX, centerY, 4.0f, mPaintShadow);
-            canvas.drawCircle(endX, centerY, 4.0f, mPaintSweep);
-        } else {
-            final int centerX = width / 2;
-            final int endY = height - width;
-
-            canvas.drawLine(centerX, 0, centerX, endY, mPaintShadow);
-            canvas.drawLine(centerX, 0, centerX, endY, linePaint);
-            canvas.drawCircle(centerX, endY, 4.0f, mPaintShadow);
-            canvas.drawCircle(centerX, endY, 4.0f, mPaintSweep);
-        }
+        mSweep.setBounds(0, 0, width, height);
+        mSweep.draw(canvas);
     }
 
 }

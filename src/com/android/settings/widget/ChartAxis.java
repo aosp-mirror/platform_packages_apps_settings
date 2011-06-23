@@ -29,6 +29,7 @@ public interface ChartAxis {
     public long convertToValue(float point);
 
     public CharSequence getLabel(long value);
+    public CharSequence getShortLabel(long value);
 
     public float[] getTickPoints();
 

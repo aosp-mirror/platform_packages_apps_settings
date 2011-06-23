@@ -27,7 +27,6 @@ import static android.net.NetworkTemplate.MATCH_MOBILE_3G_LOWER;
 import static android.net.NetworkTemplate.MATCH_MOBILE_4G;
 import static android.net.NetworkTemplate.MATCH_MOBILE_ALL;
 import static android.net.NetworkTemplate.MATCH_WIFI;
-import static android.view.ViewGroup.LayoutParams.MATCH_PARENT;
 import static android.view.ViewGroup.LayoutParams.WRAP_CONTENT;
 
 import android.app.AlertDialog;
@@ -68,7 +67,6 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AbsListView;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.AdapterView.OnItemSelectedListener;
@@ -204,6 +202,7 @@ public class DataUsageSummary extends Fragment {
         mDataEnabled.setOnCheckedChangeListener(mDataEnabledListener);
 
         mDisableAtLimit = new CheckBox(inflater.getContext());
+        mDisableAtLimit.setClickable(false);
         mDisableAtLimitView = inflatePreference(inflater, mSwitches, mDisableAtLimit);
         mDisableAtLimitView.setOnClickListener(mDisableAtLimitListener);
 
@@ -216,11 +215,8 @@ public class DataUsageSummary extends Fragment {
         mCycleSpinner.setAdapter(mCycleAdapter);
         mCycleSpinner.setOnItemSelectedListener(mCycleListener);
 
-        final int chartHeight = getResources().getDimensionPixelSize(
-                R.dimen.data_usage_chart_height);
-        mChart = new DataUsageChartView(context);
+        mChart = (DataUsageChartView) inflater.inflate(R.layout.data_usage_chart, mListView, false);
         mChart.setListener(mChartListener);
-        mChart.setLayoutParams(new AbsListView.LayoutParams(MATCH_PARENT, chartHeight));
         mListView.addHeaderView(mChart, null, false);
 
         mAdapter = new DataUsageAdapter();
@@ -791,7 +787,7 @@ public class DataUsageSummary extends Fragment {
         public View getView(int position, View convertView, ViewGroup parent) {
             if (convertView == null) {
                 convertView = LayoutInflater.from(parent.getContext()).inflate(
-                        android.R.layout.simple_list_item_2, parent, false);
+                        R.layout.data_usage_item, parent, false);
             }
 
             final Context context = parent.getContext();
@@ -1080,7 +1076,7 @@ public class DataUsageSummary extends Fragment {
 
     /**
      * Set {@link android.R.id#title} for a preference view inflated with
-     * {@link #inflatePreference(LayoutInflater, View, View)}.
+     * {@link #inflatePreference(LayoutInflater, ViewGroup, View)}.
      */
     private static void setPreferenceTitle(View parent, int resId) {
         final TextView title = (TextView) parent.findViewById(android.R.id.title);

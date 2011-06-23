@@ -16,13 +16,11 @@
 
 package com.android.settings.widget;
 
-import static android.view.ViewGroup.LayoutParams.MATCH_PARENT;
-import static android.view.ViewGroup.LayoutParams.WRAP_CONTENT;
 import static com.google.common.base.Preconditions.checkNotNull;
 
 import android.content.Context;
 import android.graphics.Rect;
-import android.util.Log;
+import android.util.AttributeSet;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.FrameLayout;
@@ -38,19 +36,29 @@ public class ChartView extends FrameLayout {
 
     // TODO: extend something that supports two-dimensional scrolling
 
-    final ChartAxis mHoriz;
-    final ChartAxis mVert;
+    ChartAxis mHoriz;
+    ChartAxis mVert;
 
     private Rect mContent = new Rect();
 
-    public ChartView(Context context, ChartAxis horiz, ChartAxis vert) {
-        super(context);
+    public ChartView(Context context) {
+        this(context, null, 0);
+    }
 
-        mHoriz = checkNotNull(horiz, "missing horiz");
-        mVert = checkNotNull(vert, "missing vert");
+    public ChartView(Context context, AttributeSet attrs) {
+        this(context, attrs, 0);
+    }
+
+    public ChartView(Context context, AttributeSet attrs, int defStyle) {
+        super(context, attrs, defStyle);
 
         setClipToPadding(false);
         setClipChildren(false);
+    }
+
+    void init(ChartAxis horiz, ChartAxis vert) {
+        mHoriz = checkNotNull(horiz, "missing horiz");
+        mVert = checkNotNull(vert, "missing vert");
     }
 
     @Override
@@ -66,6 +74,7 @@ public class ChartView extends FrameLayout {
 
         final Rect parentRect = new Rect();
         final Rect childRect = new Rect();
+        final Rect extraMargins = new Rect();
 
         for (int i = 0; i < getChildCount(); i++) {
             final View child = getChildAt(i);
@@ -82,40 +91,27 @@ public class ChartView extends FrameLayout {
             } else if (child instanceof ChartSweepView) {
                 // sweep is always placed along specific dimension
                 final ChartSweepView sweep = (ChartSweepView) child;
-                final ChartAxis axis = sweep.getAxis();
                 final float point = sweep.getPoint();
+                sweep.getExtraMargins(extraMargins);
 
-                if (axis == mHoriz) {
+                if (sweep.getFollowAxis() == ChartSweepView.HORIZONTAL) {
                     parentRect.left = parentRect.right = (int) point + getPaddingLeft();
-                    parentRect.bottom += child.getMeasuredWidth();
+                    parentRect.top -= extraMargins.top;
+                    parentRect.bottom += extraMargins.bottom;
                     Gravity.apply(params.gravity, child.getMeasuredWidth(), parentRect.height(),
                             parentRect, childRect);
 
-                } else if (axis == mVert) {
+                } else {
                     parentRect.top = parentRect.bottom = (int) point + getPaddingTop();
-                    parentRect.right += child.getMeasuredHeight();
+                    parentRect.left -= extraMargins.left;
+                    parentRect.right += extraMargins.right;
                     Gravity.apply(params.gravity, parentRect.width(), child.getMeasuredHeight(),
                             parentRect, childRect);
-
-                } else {
-                    throw new IllegalStateException("unexpected axis");
                 }
             }
 
             child.layout(childRect.left, childRect.top, childRect.right, childRect.bottom);
         }
-    }
-
-    public static LayoutParams buildChartParams() {
-        final LayoutParams params = new LayoutParams(MATCH_PARENT, MATCH_PARENT);
-        params.gravity = Gravity.LEFT | Gravity.BOTTOM;
-        return params;
-    }
-
-    public static LayoutParams buildSweepParams() {
-        final LayoutParams params = new LayoutParams(WRAP_CONTENT, WRAP_CONTENT);
-        params.gravity = Gravity.CENTER;
-        return params;
     }
 
 }
