@@ -81,7 +81,7 @@ public class Settings extends PreferenceActivity implements ButtonBarHandler {
         super.onCreate(savedInstanceState);
         mInLocalHeaderSwitch = false;
 
-        if (!onIsHidingHeaders() && onIsMultiPane()) {
+        if (isMultiPane()) {
             highlightHeader();
             // Force the title so that it doesn't get overridden by a direct launch of
             // a specific settings screen.
@@ -193,7 +193,7 @@ public class Settings extends PreferenceActivity implements ButtonBarHandler {
 
         // If it is not launched from history, then reset to top-level
         if ((intent.getFlags() & Intent.FLAG_ACTIVITY_LAUNCHED_FROM_HISTORY) == 0
-                && mFirstHeader != null) {
+                && mFirstHeader != null && isMultiPane()) {
             switchToHeaderLocal(mFirstHeader);
         }
     }
@@ -211,7 +211,7 @@ public class Settings extends PreferenceActivity implements ButtonBarHandler {
     public Intent getIntent() {
         Intent superIntent = super.getIntent();
         String startingFragment = getStartingFragmentClass(superIntent);
-        if (startingFragment != null && !onIsMultiPane()) {
+        if (startingFragment != null && !isMultiPane()) {
             Intent modIntent = new Intent(superIntent);
             modIntent.putExtra(EXTRA_SHOW_FRAGMENT, startingFragment);
             Bundle args = superIntent.getExtras();
@@ -263,17 +263,7 @@ public class Settings extends PreferenceActivity implements ButtonBarHandler {
             return header;
         }
 
-        // Find first non-category header
-        int position = 0;
-        while (position < mHeaders.size()) {
-            Header header = mHeaders.get(position);
-            if (HeaderAdapter.getHeaderType(header) != HeaderAdapter.HEADER_TYPE_CATEGORY)
-                return header;
-            position++;
-        }
-
-        Log.e(LOG_TAG, "Unable to find a non-category header");
-        return null;
+        return mFirstHeader;
     }
 
     @Override
@@ -326,7 +316,10 @@ public class Settings extends PreferenceActivity implements ButtonBarHandler {
             // Increment if the current one wasn't removed by the Utils code.
             if (target.get(i) == header) {
                 // Hold on to the first header, when we need to reset to the top-level
-                if (i == 0) mFirstHeader = header;
+                if (mFirstHeader == null &&
+                        HeaderAdapter.getHeaderType(header) != HeaderAdapter.HEADER_TYPE_CATEGORY) {
+                    mFirstHeader = header;
+                }
                 mHeaderIndexMap.put(id, i);
                 i++;
             }
@@ -428,7 +421,7 @@ public class Settings extends PreferenceActivity implements ButtonBarHandler {
             super(context, 0, objects);
             mInflater = (LayoutInflater)context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             
-            // These Switches are provided as placeholder until the adapter replaces these with actual
+            // Temp Switches provided as placeholder until the adapter replaces these with actual
             // Switches inflated from their layouts. Must be done before adapter is set in super
             mWifiEnabler = new WifiEnabler(context, new Switch(context));
             mBluetoothEnabler = new BluetoothEnabler(context, new Switch(context));
@@ -445,23 +438,31 @@ public class Settings extends PreferenceActivity implements ButtonBarHandler {
                 holder = new HeaderViewHolder();
                 switch (headerType) {
                     case HEADER_TYPE_CATEGORY:
-                        view = new TextView(getContext(), null, android.R.attr.listSeparatorTextViewStyle);
+                        view = new TextView(getContext(), null,
+                                android.R.attr.listSeparatorTextViewStyle);
                         holder.title = (TextView) view;
                         break;
 
                     case HEADER_TYPE_SWITCH:
-                        view = mInflater.inflate(R.layout.preference_header_switch_item, parent, false);
+                        view = mInflater.inflate(R.layout.preference_header_switch_item, parent,
+                                false);
                         holder.icon = (ImageView) view.findViewById(R.id.icon);
-                        holder.title = (TextView) view.findViewById(com.android.internal.R.id.title);
-                        holder.summary = (TextView) view.findViewById(com.android.internal.R.id.summary);
+                        holder.title = (TextView)
+                                view.findViewById(com.android.internal.R.id.title);
+                        holder.summary = (TextView)
+                                view.findViewById(com.android.internal.R.id.summary);
                         holder.switch_ = (Switch) view.findViewById(R.id.switchWidget);
                         break;
 
                     case HEADER_TYPE_NORMAL:
-                        view = mInflater.inflate(com.android.internal.R.layout.preference_header_item, parent, false);
+                        view = mInflater.inflate(
+                                com.android.internal.R.layout.preference_header_item, parent,
+                                false);
                         holder.icon = (ImageView) view.findViewById(com.android.internal.R.id.icon);
-                        holder.title = (TextView) view.findViewById(com.android.internal.R.id.title);
-                        holder.summary = (TextView) view.findViewById(com.android.internal.R.id.summary);
+                        holder.title = (TextView)
+                                view.findViewById(com.android.internal.R.id.title);
+                        holder.summary = (TextView)
+                                view.findViewById(com.android.internal.R.id.summary);
                         break;
                 }
                 view.setTag(holder);
