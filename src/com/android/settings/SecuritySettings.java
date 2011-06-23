@@ -19,8 +19,10 @@ package com.android.settings;
 
 import static android.provider.Settings.System.SCREEN_OFF_TIMEOUT;
 
+import android.app.AlertDialog;
 import android.app.admin.DevicePolicyManager;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Vibrator;
@@ -43,7 +45,7 @@ import java.util.ArrayList;
  * Gesture lock pattern settings.
  */
 public class SecuritySettings extends SettingsPreferenceFragment
-        implements OnPreferenceChangeListener {
+        implements OnPreferenceChangeListener, DialogInterface.OnClickListener {
 
     // Lock Settings
     private static final String KEY_UNLOCK_SET_OR_CHANGE = "unlock_set_or_change";
@@ -58,6 +60,7 @@ public class SecuritySettings extends SettingsPreferenceFragment
     private static final String KEY_SIM_LOCK = "sim_lock";
     private static final String KEY_SHOW_PASSWORD = "show_password";
     private static final String KEY_RESET_CREDENTIALS = "reset_credentials";
+    private static final String KEY_TOGGLE_INSTALL_APPLICATIONS = "toggle_install_applications";
 
     DevicePolicyManager mDPM;
 
@@ -71,6 +74,9 @@ public class SecuritySettings extends SettingsPreferenceFragment
     private CheckBoxPreference mShowPassword;
 
     private Preference mResetCredentials;
+
+    private CheckBoxPreference mToggleAppInstallation;
+    private DialogInterface mWarnInstallApps;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -167,7 +173,48 @@ public class SecuritySettings extends SettingsPreferenceFragment
         // Credential storage
         mResetCredentials = root.findPreference(KEY_RESET_CREDENTIALS);
 
+        mToggleAppInstallation = (CheckBoxPreference) findPreference(
+                KEY_TOGGLE_INSTALL_APPLICATIONS);
+        mToggleAppInstallation.setChecked(isNonMarketAppsAllowed());
+
         return root;
+    }
+
+    private boolean isNonMarketAppsAllowed() {
+        return Settings.Secure.getInt(getContentResolver(),
+                                      Settings.Secure.INSTALL_NON_MARKET_APPS, 0) > 0;
+    }
+
+    private void setNonMarketAppsAllowed(boolean enabled) {
+        // Change the system setting
+        Settings.Secure.putInt(getContentResolver(), Settings.Secure.INSTALL_NON_MARKET_APPS,
+                                enabled ? 1 : 0);
+    }
+
+    private void warnAppInstallation() {
+        // TODO: DialogFragment?
+        mWarnInstallApps = new AlertDialog.Builder(getActivity()).setTitle(
+                getResources().getString(R.string.error_title))
+                .setIcon(com.android.internal.R.drawable.ic_dialog_alert)
+                .setMessage(getResources().getString(R.string.install_all_warning))
+                .setPositiveButton(android.R.string.yes, this)
+                .setNegativeButton(android.R.string.no, null)
+                .show();
+    }
+
+    public void onClick(DialogInterface dialog, int which) {
+        if (dialog == mWarnInstallApps && which == DialogInterface.BUTTON_POSITIVE) {
+            setNonMarketAppsAllowed(true);
+            mToggleAppInstallation.setChecked(true);
+        }
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        if (mWarnInstallApps != null) {
+            mWarnInstallApps.dismiss();
+        }
     }
 
     private void setupLockAfterPreference() {
@@ -272,6 +319,13 @@ public class SecuritySettings extends SettingsPreferenceFragment
         } else if (preference == mShowPassword) {
             Settings.System.putInt(getContentResolver(), Settings.System.TEXT_SHOW_PASSWORD,
                     mShowPassword.isChecked() ? 1 : 0);
+        } else if (preference == mToggleAppInstallation) {
+            if (mToggleAppInstallation.isChecked()) {
+                mToggleAppInstallation.setChecked(false);
+                warnAppInstallation();
+            } else {
+                setNonMarketAppsAllowed(false);
+            }
         } else {
             // If we didn't handle it, let preferences handle it.
             return super.onPreferenceTreeClick(preferenceScreen, preference);

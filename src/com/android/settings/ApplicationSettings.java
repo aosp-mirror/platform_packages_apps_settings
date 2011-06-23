@@ -16,23 +16,17 @@
 
 package com.android.settings;
 
-import android.app.AlertDialog;
-import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.res.Configuration;
 import android.os.Bundle;
 import android.preference.CheckBoxPreference;
 import android.preference.ListPreference;
 import android.preference.Preference;
-import android.preference.PreferenceScreen;
 import android.preference.Preference.OnPreferenceChangeListener;
+import android.preference.PreferenceScreen;
 import android.provider.Settings;
-import android.util.Log;
 
-public class ApplicationSettings extends SettingsPreferenceFragment implements
-        DialogInterface.OnClickListener {
+public class ApplicationSettings extends SettingsPreferenceFragment {
     
-    private static final String KEY_TOGGLE_INSTALL_APPLICATIONS = "toggle_install_applications";
     private static final String KEY_TOGGLE_ADVANCED_SETTINGS = "toggle_advanced_settings";
     private static final String KEY_APP_INSTALL_LOCATION = "app_install_location";
 
@@ -45,20 +39,14 @@ public class ApplicationSettings extends SettingsPreferenceFragment implements
     private static final String APP_INSTALL_SDCARD_ID = "sdcard";
     private static final String APP_INSTALL_AUTO_ID = "auto";
     
-    private CheckBoxPreference mToggleAppInstallation;
     private CheckBoxPreference mToggleAdvancedSettings;
     private ListPreference mInstallLocation;
-    private DialogInterface mWarnInstallApps;
 
     @Override
     public void onCreate(Bundle icicle) {
         super.onCreate(icicle);
 
         addPreferencesFromResource(R.xml.application_settings);
-
-        mToggleAppInstallation = (CheckBoxPreference)findPreference(
-                KEY_TOGGLE_INSTALL_APPLICATIONS);
-        mToggleAppInstallation.setChecked(isNonMarketAppsAllowed());
 
         mToggleAdvancedSettings = (CheckBoxPreference)findPreference(
                 KEY_TOGGLE_ADVANCED_SETTINGS);
@@ -107,41 +95,13 @@ public class ApplicationSettings extends SettingsPreferenceFragment implements
     }
 
     @Override
-    public void onDestroy() {
-        super.onDestroy();
-        if (mWarnInstallApps != null) {
-            mWarnInstallApps.dismiss();
-        }
-    }
-
-    @Override
     public boolean onPreferenceTreeClick(PreferenceScreen preferenceScreen, Preference preference) {
-        if (preference == mToggleAppInstallation) {
-            if (mToggleAppInstallation.isChecked()) {
-                mToggleAppInstallation.setChecked(false);
-                warnAppInstallation();
-            } else {
-                setNonMarketAppsAllowed(false);
-            }
-        } else if (preference == mToggleAdvancedSettings) {
+        if (preference == mToggleAdvancedSettings) {
             boolean value = mToggleAdvancedSettings.isChecked();
             setAdvancedSettingsEnabled(value);
         }
 
         return super.onPreferenceTreeClick(preferenceScreen, preference);
-    }
-
-    public void onClick(DialogInterface dialog, int which) {
-        if (dialog == mWarnInstallApps && which == DialogInterface.BUTTON_POSITIVE) {
-            setNonMarketAppsAllowed(true);
-            mToggleAppInstallation.setChecked(true);
-        }
-    }
-
-    private void setNonMarketAppsAllowed(boolean enabled) {
-        // Change the system setting
-        Settings.Secure.putInt(getContentResolver(), Settings.Secure.INSTALL_NON_MARKET_APPS, 
-                                enabled ? 1 : 0);
     }
 
     private boolean isAdvancedSettingsEnabled() {
@@ -160,11 +120,6 @@ public class ApplicationSettings extends SettingsPreferenceFragment implements
         getActivity().sendBroadcast(intent);
     }
 
-    private boolean isNonMarketAppsAllowed() {
-        return Settings.Secure.getInt(getContentResolver(), 
-                                      Settings.Secure.INSTALL_NON_MARKET_APPS, 0) > 0;
-    }
-
     private String getAppInstallLocation() {
         int selectedLocation = Settings.System.getInt(getContentResolver(),
                 Settings.Secure.DEFAULT_INSTALL_LOCATION, APP_INSTALL_AUTO);
@@ -178,16 +133,5 @@ public class ApplicationSettings extends SettingsPreferenceFragment implements
             // Default value, should not happen.
             return APP_INSTALL_AUTO_ID;
         }
-    }
-
-    private void warnAppInstallation() {
-        // TODO: DialogFragment?
-        mWarnInstallApps = new AlertDialog.Builder(getActivity()).setTitle(
-                getResources().getString(R.string.error_title))
-                .setIcon(com.android.internal.R.drawable.ic_dialog_alert)
-                .setMessage(getResources().getString(R.string.install_all_warning))
-                .setPositiveButton(android.R.string.yes, this)
-                .setNegativeButton(android.R.string.no, null)
-                .show();
     }
 }
