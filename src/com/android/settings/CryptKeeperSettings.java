@@ -63,8 +63,14 @@ public class CryptKeeperSettings extends Fragment {
             if (action.equals(Intent.ACTION_BATTERY_CHANGED)) {
                 int level = intent.getIntExtra(BatteryManager.EXTRA_LEVEL, 0);
                 int plugged = intent.getIntExtra(BatteryManager.EXTRA_PLUGGED, 0);
+                int invalidCharger = intent.getIntExtra(BatteryManager.EXTRA_INVALID_CHARGER, 0);
+
                 boolean levelOk = level >= MIN_BATTERY_LEVEL;
-                boolean pluggedOk = plugged == BatteryManager.BATTERY_PLUGGED_AC;
+                boolean pluggedOk =
+                    (plugged == BatteryManager.BATTERY_PLUGGED_AC ||
+                     plugged == BatteryManager.BATTERY_PLUGGED_USB) &&
+                     invalidCharger == 0;
+
                 // Update UI elements based on power/battery status
                 mInitiateButton.setEnabled(levelOk && pluggedOk);
                 mPowerWarning.setVisibility(pluggedOk ? View.GONE : View.VISIBLE );
