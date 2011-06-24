@@ -19,20 +19,23 @@
         android:title="@string/accessibility_settings_title">
 
     <CheckBoxPreference
-            android:key="toggle_accessibility_service_checkbox"
-            android:title="@string/toggle_accessibility_title"
+            android:key="toggle_large_text_checkbox"
+            android:title="@string/toggle_large_text_title"
             android:persistent="false"/>
 
     <PreferenceCategory android:key="accessibility_services_category"
-            android:title="@string/accessibility_services_category" />
-
-    <PreferenceCategory android:key="accessibility_script_injection_category"
-            android:title="@string/accessibility_script_injection_category">
+            android:title="@string/accessibility_services_category">
+        <CheckBoxPreference
+                android:key="toggle_accessibility_service_checkbox"
+                android:title="@string/toggle_accessibility_title"
+                android:persistent="false"
+                android:order="-10000"/>
         <CheckBoxPreference
                 android:key="toggle_accessibility_script_injection_checkbox"
                 android:title="@string/accessibility_script_injection_enabled"
                 android:summary="@string/accessibility_script_injection_enabled_summary"
-                android:persistent="false" />
+                android:persistent="false"
+                android:order="10000" />
     </PreferenceCategory>
 
     <PreferenceCategory android:key="power_button_category"
