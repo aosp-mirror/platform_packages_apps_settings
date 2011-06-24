@@ -39,6 +39,8 @@ public class ChartSweepView extends FrameLayout {
     // TODO: paint label when requested
 
     private Drawable mSweep;
+    private Rect mSweepMargins = new Rect();
+
     private int mFollowAxis;
     private boolean mShowLabel;
 
@@ -88,8 +90,28 @@ public class ChartSweepView extends FrameLayout {
         return mFollowAxis;
     }
 
-    public void getExtraMargins(Rect rect) {
-        mSweep.getPadding(rect);
+    /**
+     * Return margins of {@link #setSweepDrawable(Drawable)}, indicating how the
+     * sweep should be displayed around a content region.
+     */
+    public Rect getSweepMargins() {
+        return mSweepMargins;
+    }
+
+    /**
+     * Return the number of pixels that the "target" area is inset from the
+     * {@link View} edge, along the current {@link #setFollowAxis(int)}.
+     */
+    public float getTargetInset() {
+        if (mFollowAxis == VERTICAL) {
+            final float targetHeight = mSweep.getIntrinsicHeight() - mSweepMargins.top
+                    - mSweepMargins.bottom;
+            return mSweepMargins.top + (targetHeight / 2);
+        } else {
+            final float targetWidth = mSweep.getIntrinsicWidth() - mSweepMargins.left
+                    - mSweepMargins.right;
+            return mSweepMargins.left + (targetWidth / 2);
+        }
     }
 
     public void addOnSweepListener(OnSweepListener listener) {
@@ -115,6 +137,7 @@ public class ChartSweepView extends FrameLayout {
             }
             sweep.setVisible(getVisibility() == VISIBLE, false);
             mSweep = sweep;
+            sweep.getPadding(mSweepMargins);
         } else {
             mSweep = null;
         }
@@ -175,33 +198,51 @@ public class ChartSweepView extends FrameLayout {
         final View parent = (View) getParent();
         switch (event.getAction()) {
             case MotionEvent.ACTION_DOWN: {
-                mTracking = event.copy();
-                return true;
+
+                // only start tracking when in sweet spot
+                final boolean accept;
+                if (mFollowAxis == VERTICAL) {
+                    accept = event.getX() > getWidth() - (mSweepMargins.right * 2);
+                } else {
+                    accept = event.getY() > getHeight() - (mSweepMargins.bottom * 2);
+                }
+
+                if (accept) {
+                    mTracking = event.copy();
+                    return true;
+                } else {
+                    return false;
+                }
             }
             case MotionEvent.ACTION_MOVE: {
                 getParent().requestDisallowInterceptTouchEvent(true);
 
+                final Rect sweepMargins = mSweepMargins;
+
+                // content area of parent
+                final Rect parentContent = new Rect(parent.getPaddingLeft(), parent.getPaddingTop(),
+                        parent.getWidth() - parent.getPaddingRight(),
+                        parent.getHeight() - parent.getPaddingBottom());
+
                 if (mFollowAxis == VERTICAL) {
-                    final float chartHeight = parent.getHeight() - parent.getPaddingTop()
-                            - parent.getPaddingBottom();
-                    final float translationY = MathUtils.constrain(
-                            event.getRawY() - mTracking.getRawY(), -getTop(),
-                            chartHeight - getTop());
-                    setTranslationY(translationY);
-                    final float point = (getTop() + getTranslationY() + (getHeight() / 2))
-                            - parent.getPaddingTop();
-                    mValue = mAxis.convertToValue(point);
+                    final float currentTargetY = getTop() + getTargetInset();
+                    final float requestedTargetY = currentTargetY
+                            + (event.getRawY() - mTracking.getRawY());
+                    final float clampedTargetY = MathUtils.constrain(
+                            requestedTargetY, parentContent.top, parentContent.bottom);
+                    setTranslationY(clampedTargetY - currentTargetY);
+
+                    mValue = mAxis.convertToValue(clampedTargetY - parentContent.top);
                     dispatchOnSweep(false);
                 } else {
-                    final float chartWidth = parent.getWidth() - parent.getPaddingLeft()
-                            - parent.getPaddingRight();
-                    final float translationX = MathUtils.constrain(
-                            event.getRawX() - mTracking.getRawX(), -getLeft(),
-                            chartWidth - getLeft());
-                    setTranslationX(translationX);
-                    final float point = (getLeft() + getTranslationX() + (getWidth() / 2))
-                            - parent.getPaddingLeft();
-                    mValue = mAxis.convertToValue(point);
+                    final float currentTargetX = getLeft() + getTargetInset();
+                    final float requestedTargetX = currentTargetX
+                            + (event.getRawX() - mTracking.getRawX());
+                    final float clampedTargetX = MathUtils.constrain(
+                            requestedTargetX, parentContent.left, parentContent.right);
+                    setTranslationX(clampedTargetX - currentTargetX);
+
+                    mValue = mAxis.convertToValue(clampedTargetX - parentContent.left);
                     dispatchOnSweep(false);
                 }
                 return true;

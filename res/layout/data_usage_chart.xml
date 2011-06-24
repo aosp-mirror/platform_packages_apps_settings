@@ -17,6 +17,7 @@
 <com.android.settings.widget.DataUsageChartView
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:settings="http://schemas.android.com/apk/res/com.android.settings"
+    android:id="@+id/chart"
     android:layout_width="match_parent"
     android:layout_height="220dip"
     android:padding="16dip">
@@ -40,11 +41,19 @@
         settings:fillColor="#c050ade5"
         settings:fillColorSecondary="#88566abc" />
 
+    <com.android.settings.widget.ChartNetworkSeriesView
+        android:id="@+id/detail_series"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="left|bottom"
+        settings:strokeColor="#d88d3a"
+        settings:fillColor="#c0ba7f3e"
+        settings:fillColorSecondary="#0000" />
+
     <com.android.settings.widget.ChartSweepView
         android:id="@+id/sweep_left"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
-        android:layout_gravity="center_horizontal"
         settings:sweepDrawable="@drawable/data_sweep_left"
         settings:followAxis="horizontal"
         settings:showLabel="false" />
@@ -53,7 +62,6 @@
         android:id="@+id/sweep_right"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
-        android:layout_gravity="center_horizontal"
         settings:sweepDrawable="@drawable/data_sweep_right"
         settings:followAxis="horizontal"
         settings:showLabel="false" />
@@ -62,7 +70,6 @@
         android:id="@+id/sweep_limit"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="center_vertical"
         settings:sweepDrawable="@drawable/data_sweep_limit"
         settings:followAxis="vertical"
         settings:showLabel="true" />
@@ -71,7 +78,6 @@
         android:id="@+id/sweep_warning"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="center_vertical"
         settings:sweepDrawable="@drawable/data_sweep_warning"
         settings:followAxis="vertical"
         settings:showLabel="true" />

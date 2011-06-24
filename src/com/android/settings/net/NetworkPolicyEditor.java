@@ -16,6 +16,8 @@
 
 package com.android.settings.net;
 
+import static android.net.NetworkPolicy.LIMIT_DISABLED;
+import static android.net.NetworkPolicy.WARNING_DISABLED;
 import static android.net.NetworkTemplate.MATCH_MOBILE_3G_LOWER;
 import static android.net.NetworkTemplate.MATCH_MOBILE_4G;
 import static android.net.NetworkTemplate.MATCH_MOBILE_ALL;
@@ -51,6 +53,14 @@ public class NetworkPolicyEditor {
             final NetworkPolicy[] policies = mPolicyService.getNetworkPolicies();
             mPolicies.clear();
             for (NetworkPolicy policy : policies) {
+                // TODO: find better place to clamp these
+                if (policy.limitBytes < -1) {
+                    policy.limitBytes = LIMIT_DISABLED;
+                }
+                if (policy.warningBytes < -1) {
+                    policy.warningBytes = WARNING_DISABLED;
+                }
+
                 mPolicies.add(policy);
             }
         } catch (RemoteException e) {

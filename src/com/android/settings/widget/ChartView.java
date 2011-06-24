@@ -36,6 +36,8 @@ public class ChartView extends FrameLayout {
 
     // TODO: extend something that supports two-dimensional scrolling
 
+    private static final int SWEEP_GRAVITY = Gravity.TOP | Gravity.LEFT;
+
     ChartAxis mHoriz;
     ChartAxis mVert;
 
@@ -74,7 +76,6 @@ public class ChartView extends FrameLayout {
 
         final Rect parentRect = new Rect();
         final Rect childRect = new Rect();
-        final Rect extraMargins = new Rect();
 
         for (int i = 0; i < getChildCount(); i++) {
             final View child = getChildAt(i);
@@ -91,21 +92,23 @@ public class ChartView extends FrameLayout {
             } else if (child instanceof ChartSweepView) {
                 // sweep is always placed along specific dimension
                 final ChartSweepView sweep = (ChartSweepView) child;
+                final Rect sweepMargins = sweep.getSweepMargins();
                 final float point = sweep.getPoint();
-                sweep.getExtraMargins(extraMargins);
 
                 if (sweep.getFollowAxis() == ChartSweepView.HORIZONTAL) {
-                    parentRect.left = parentRect.right = (int) point + getPaddingLeft();
-                    parentRect.top -= extraMargins.top;
-                    parentRect.bottom += extraMargins.bottom;
-                    Gravity.apply(params.gravity, child.getMeasuredWidth(), parentRect.height(),
+                    parentRect.left = parentRect.right =
+                            (int) (sweep.getPoint() - sweep.getTargetInset()) + getPaddingLeft();
+                    parentRect.top -= sweepMargins.top;
+                    parentRect.bottom += sweepMargins.bottom;
+                    Gravity.apply(SWEEP_GRAVITY, child.getMeasuredWidth(), parentRect.height(),
                             parentRect, childRect);
 
                 } else {
-                    parentRect.top = parentRect.bottom = (int) point + getPaddingTop();
-                    parentRect.left -= extraMargins.left;
-                    parentRect.right += extraMargins.right;
-                    Gravity.apply(params.gravity, parentRect.width(), child.getMeasuredHeight(),
+                    parentRect.top = parentRect.bottom =
+                            (int) (sweep.getPoint() - sweep.getTargetInset()) + getPaddingTop();
+                    parentRect.left -= sweepMargins.left;
+                    parentRect.right += sweepMargins.right;
+                    Gravity.apply(SWEEP_GRAVITY, parentRect.width(), child.getMeasuredHeight(),
                             parentRect, childRect);
                 }
             }

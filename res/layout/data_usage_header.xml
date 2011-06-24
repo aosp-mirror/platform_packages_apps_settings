@@ -20,7 +20,7 @@
     android:orientation="vertical">
 
     <LinearLayout
-        android:id="@+id/switches"
+        android:id="@+id/network_switches"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
@@ -47,5 +47,8 @@
             android:layout_weight="1" />
 
     </LinearLayout>
+
+    <include layout="@layout/data_usage_chart" />
+    <include layout="@layout/data_usage_detail" />
 
 </LinearLayout>

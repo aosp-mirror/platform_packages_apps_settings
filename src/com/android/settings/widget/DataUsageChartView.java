@@ -38,10 +38,10 @@ public class DataUsageChartView extends ChartView {
     private static final long GB_IN_BYTES = MB_IN_BYTES * 1024;
 
     // TODO: enforce that sweeps cant cross each other
-    // TODO: limit sweeps at graph boundaries
 
     private ChartGridView mGrid;
     private ChartNetworkSeriesView mSeries;
+    private ChartNetworkSeriesView mDetailSeries;
 
     private ChartSweepView mSweepLeft;
     private ChartSweepView mSweepRight;
@@ -75,6 +75,8 @@ public class DataUsageChartView extends ChartView {
 
         mGrid = (ChartGridView) findViewById(R.id.grid);
         mSeries = (ChartNetworkSeriesView) findViewById(R.id.series);
+        mDetailSeries = (ChartNetworkSeriesView) findViewById(R.id.detail_series);
+        mDetailSeries.setVisibility(View.GONE);
 
         mSweepLeft = (ChartSweepView) findViewById(R.id.sweep_left);
         mSweepRight = (ChartSweepView) findViewById(R.id.sweep_right);
@@ -89,6 +91,7 @@ public class DataUsageChartView extends ChartView {
         // tell everyone about our axis
         mGrid.init(mHoriz, mVert);
         mSeries.init(mHoriz, mVert);
+        mDetailSeries.init(mHoriz, mVert);
         mSweepLeft.init(mHoriz);
         mSweepRight.init(mHoriz);
         mSweepWarning.init(mVert);
@@ -97,27 +100,21 @@ public class DataUsageChartView extends ChartView {
         setActivated(false);
     }
 
-    @Override
-    public void setActivated(boolean activated) {
-        super.setActivated(activated);
-
-        mSweepLeft.setEnabled(activated);
-        mSweepRight.setEnabled(activated);
-        mSweepWarning.setEnabled(activated);
-        mSweepLimit.setEnabled(activated);
-    }
-
-    @Deprecated
-    public void setChartColor(int stroke, int fill, int disabled) {
-        mSeries.setChartColor(stroke, fill, disabled);
-    }
-
     public void setListener(DataUsageChartListener listener) {
         mListener = listener;
     }
 
     public void bindNetworkStats(NetworkStatsHistory stats) {
         mSeries.bindNetworkStats(stats);
+        updatePrimaryRange();
+        requestLayout();
+    }
+
+    public void bindDetailNetworkStats(NetworkStatsHistory stats) {
+        mDetailSeries.bindNetworkStats(stats);
+        mDetailSeries.setVisibility(stats != null ? View.VISIBLE : View.GONE);
+        updatePrimaryRange();
+        requestLayout();
     }
 
     public void bindNetworkPolicy(NetworkPolicy policy) {
@@ -146,22 +143,11 @@ public class DataUsageChartView extends ChartView {
         }
 
         requestLayout();
-
-        // TODO: eventually remove this; was to work around lack of sweep clamping
-        if (policy.limitBytes < -1 || policy.limitBytes > 5 * GB_IN_BYTES) {
-            policy.limitBytes = 5 * GB_IN_BYTES;
-            mLimitListener.onSweep(mSweepLimit, true);
-        }
-        if (policy.warningBytes < -1 || policy.warningBytes > 5 * GB_IN_BYTES) {
-            policy.warningBytes = 4 * GB_IN_BYTES;
-            mWarningListener.onSweep(mSweepWarning, true);
-        }
-
     }
 
     private OnSweepListener mSweepListener = new OnSweepListener() {
         public void onSweep(ChartSweepView sweep, boolean sweepDone) {
-            mSeries.setPrimaryRange(mSweepLeft.getValue(), mSweepRight.getValue());
+            updatePrimaryRange();
 
             // update detail list only when done sweeping
             if (sweepDone && mListener != null) {
@@ -236,11 +222,24 @@ public class DataUsageChartView extends ChartView {
 
         mSweepLeft.setValue(sweepMin);
         mSweepRight.setValue(sweepMax);
-        mSeries.setPrimaryRange(sweepMin, sweepMax);
+        updatePrimaryRange();
 
         requestLayout();
         mSeries.generatePath();
         mSeries.invalidate();
+    }
+
+    private void updatePrimaryRange() {
+        final long left = mSweepLeft.getValue();
+        final long right = mSweepRight.getValue();
+
+        // prefer showing primary range on detail series, when available
+        if (mDetailSeries.getVisibility() == View.VISIBLE) {
+            mDetailSeries.setPrimaryRange(left, right);
+            mSeries.setPrimaryRange(0, 0);
+        } else {
+            mSeries.setPrimaryRange(left, right);
+        }
     }
 
     public static class TimeAxis implements ChartAxis {

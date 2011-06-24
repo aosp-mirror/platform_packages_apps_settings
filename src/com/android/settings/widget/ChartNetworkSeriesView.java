@@ -75,6 +75,7 @@ public class ChartNetworkSeriesView extends View {
                 R.styleable.ChartNetworkSeriesView_fillColorSecondary, Color.RED);
 
         setChartColor(stroke, fill, fillSecondary);
+        setWillNotDraw(false);
 
         a.recycle();
 
@@ -110,8 +111,13 @@ public class ChartNetworkSeriesView extends View {
 
         mPathStroke.reset();
         mPathFill.reset();
+        invalidate();
     }
 
+    /**
+     * Set the range to paint with {@link #mPaintFill}, leaving the remaining
+     * area to be painted with {@link #mPaintFillSecondary}.
+     */
     public void setPrimaryRange(long left, long right) {
         mPrimaryLeft = left;
         mPrimaryRight = right;
@@ -190,18 +196,21 @@ public class ChartNetworkSeriesView extends View {
     protected void onDraw(Canvas canvas) {
         int save;
 
+        final float primaryLeftPoint = mHoriz.convertToPoint(mPrimaryLeft);
+        final float primaryRightPoint = mHoriz.convertToPoint(mPrimaryRight);
+
         save = canvas.save();
-        canvas.clipRect(0, 0, mPrimaryLeft, getHeight());
+        canvas.clipRect(0, 0, primaryLeftPoint, getHeight());
         canvas.drawPath(mPathFill, mPaintFillSecondary);
         canvas.restoreToCount(save);
 
         save = canvas.save();
-        canvas.clipRect(mPrimaryRight, 0, getWidth(), getHeight());
+        canvas.clipRect(primaryRightPoint, 0, getWidth(), getHeight());
         canvas.drawPath(mPathFill, mPaintFillSecondary);
         canvas.restoreToCount(save);
 
         save = canvas.save();
-        canvas.clipRect(mPrimaryLeft, 0, mPrimaryRight, getHeight());
+        canvas.clipRect(primaryLeftPoint, 0, primaryRightPoint, getHeight());
         canvas.drawPath(mPathFill, mPaintFill);
         canvas.drawPath(mPathStroke, mPaintStroke);
         canvas.restoreToCount(save);

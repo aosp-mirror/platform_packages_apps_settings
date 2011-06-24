@@ -21,6 +21,8 @@ import static android.net.ConnectivityManager.TYPE_WIMAX;
 import static android.net.NetworkPolicy.LIMIT_DISABLED;
 import static android.net.NetworkPolicyManager.ACTION_DATA_USAGE_LIMIT;
 import static android.net.NetworkPolicyManager.EXTRA_NETWORK_TEMPLATE;
+import static android.net.NetworkPolicyManager.POLICY_NONE;
+import static android.net.NetworkPolicyManager.POLICY_REJECT_METERED_BACKGROUND;
 import static android.net.NetworkPolicyManager.computeLastCycleBoundary;
 import static android.net.NetworkPolicyManager.computeNextCycleBoundary;
 import static android.net.NetworkTemplate.MATCH_MOBILE_3G_LOWER;
@@ -29,10 +31,12 @@ import static android.net.NetworkTemplate.MATCH_MOBILE_ALL;
 import static android.net.NetworkTemplate.MATCH_WIFI;
 import static android.view.ViewGroup.LayoutParams.WRAP_CONTENT;
 
+import android.animation.LayoutTransition;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.DialogFragment;
 import android.app.Fragment;
+import android.app.FragmentTransaction;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -54,7 +58,6 @@ import android.os.Bundle;
 import android.os.RemoteException;
 import android.os.ServiceManager;
 import android.preference.Preference;
-import android.preference.PreferenceActivity;
 import android.telephony.TelephonyManager;
 import android.text.TextUtils;
 import android.text.format.DateUtils;
@@ -66,12 +69,14 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.ArrayAdapter;
 import android.widget.BaseAdapter;
+import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.CompoundButton.OnCheckedChangeListener;
@@ -106,8 +111,6 @@ public class DataUsageSummary extends Fragment {
     private static final String TAG = "DataUsage";
     private static final boolean LOGD = true;
 
-    private static final int TEMPLATE_INVALID = -1;
-
     private static final String TAB_3G = "3g";
     private static final String TAB_4G = "4g";
     private static final String TAB_MOBILE = "mobile";
@@ -116,6 +119,8 @@ public class DataUsageSummary extends Fragment {
     private static final String TAG_CONFIRM_LIMIT = "confirmLimit";
     private static final String TAG_CYCLE_EDITOR = "cycleEditor";
     private static final String TAG_POLICY_LIMIT = "policyLimit";
+    private static final String TAG_CONFIRM_RESTRICT = "confirmRestrict";
+    private static final String TAG_APP_DETAILS = "appDetails";
 
     private static final long KB_IN_BYTES = 1024;
     private static final long MB_IN_BYTES = KB_IN_BYTES * 1024;
@@ -135,25 +140,41 @@ public class DataUsageSummary extends Fragment {
     private ListView mListView;
     private DataUsageAdapter mAdapter;
 
-    private View mHeader;
-    private LinearLayout mSwitches;
+    private ViewGroup mHeader;
 
+    private LinearLayout mNetworkSwitches;
     private Switch mDataEnabled;
-    private CheckBox mDisableAtLimit;
     private View mDataEnabledView;
+    private CheckBox mDisableAtLimit;
     private View mDisableAtLimitView;
-
-    private DataUsageChartView mChart;
 
     private Spinner mCycleSpinner;
     private CycleAdapter mCycleAdapter;
+
+    private DataUsageChartView mChart;
+
+    private View mAppDetail;
+    private TextView mAppTitle;
+    private TextView mAppSubtitle;
+    private Button mAppSettings;
+
+    private LinearLayout mAppSwitches;
+    private CheckBox mAppRestrict;
+    private View mAppRestrictView;
 
     private boolean mShowWifi = false;
 
     private NetworkTemplate mTemplate = null;
 
+    private static final int UID_NONE = -1;
+    private int mUid = UID_NONE;
+
+    private Intent mAppSettingsIntent;
+
     private NetworkPolicyEditor mPolicyEditor;
+
     private NetworkStatsHistory mHistory;
+    private NetworkStatsHistory mDetailHistory;
 
     private String mIntentTab = null;
 
@@ -194,30 +215,57 @@ public class DataUsageSummary extends Fragment {
         mTabHost.setup();
         mTabHost.setOnTabChangedListener(mTabListener);
 
-        mHeader = inflater.inflate(R.layout.data_usage_header, mListView, false);
+        mHeader = (ViewGroup) inflater.inflate(R.layout.data_usage_header, mListView, false);
         mListView.addHeaderView(mHeader, null, false);
 
-        mDataEnabled = new Switch(inflater.getContext());
-        mDataEnabledView = inflatePreference(inflater, mSwitches, mDataEnabled);
-        mDataEnabled.setOnCheckedChangeListener(mDataEnabledListener);
+        {
+            // bind network switches
+            mNetworkSwitches = (LinearLayout) mHeader.findViewById(R.id.network_switches);
 
-        mDisableAtLimit = new CheckBox(inflater.getContext());
-        mDisableAtLimit.setClickable(false);
-        mDisableAtLimitView = inflatePreference(inflater, mSwitches, mDisableAtLimit);
-        mDisableAtLimitView.setOnClickListener(mDisableAtLimitListener);
+            mDataEnabled = new Switch(inflater.getContext());
+            mDataEnabledView = inflatePreference(inflater, mNetworkSwitches, mDataEnabled);
+            mDataEnabled.setOnCheckedChangeListener(mDataEnabledListener);
+            mNetworkSwitches.addView(mDataEnabledView);
 
-        mSwitches = (LinearLayout) mHeader.findViewById(R.id.switches);
-        mSwitches.addView(mDataEnabledView);
-        mSwitches.addView(mDisableAtLimitView);
+            mDisableAtLimit = new CheckBox(inflater.getContext());
+            mDisableAtLimit.setClickable(false);
+            mDisableAtLimitView = inflatePreference(inflater, mNetworkSwitches, mDisableAtLimit);
+            mDisableAtLimitView.setOnClickListener(mDisableAtLimitListener);
+            mNetworkSwitches.addView(mDisableAtLimitView);
+        }
 
+        // bind cycle dropdown
         mCycleSpinner = (Spinner) mHeader.findViewById(R.id.cycles);
         mCycleAdapter = new CycleAdapter(context);
         mCycleSpinner.setAdapter(mCycleAdapter);
         mCycleSpinner.setOnItemSelectedListener(mCycleListener);
 
-        mChart = (DataUsageChartView) inflater.inflate(R.layout.data_usage_chart, mListView, false);
+        mChart = (DataUsageChartView) mHeader.findViewById(R.id.chart);
         mChart.setListener(mChartListener);
-        mListView.addHeaderView(mChart, null, false);
+
+        {
+            // bind app detail controls
+            mAppDetail = view.findViewById(R.id.app_detail);
+            mAppTitle = (TextView) view.findViewById(R.id.app_title);
+            mAppSubtitle = (TextView) view.findViewById(R.id.app_subtitle);
+            mAppSwitches = (LinearLayout) view.findViewById(R.id.app_switches);
+
+            mAppSettings = (Button) view.findViewById(R.id.app_settings);
+            mAppSettings.setOnClickListener(mAppSettingsListener);
+
+            mAppRestrict = new CheckBox(inflater.getContext());
+            mAppRestrict.setClickable(false);
+            mAppRestrictView = inflatePreference(inflater, mAppSwitches, mAppRestrict);
+            setPreferenceTitle(mAppRestrictView, R.string.data_usage_app_restrict_background);
+            setPreferenceSummary(
+                    mAppRestrictView, R.string.data_usage_app_restrict_background_summary);
+            mAppRestrictView.setOnClickListener(mAppRestrictListener);
+            mAppSwitches.addView(mAppRestrictView);
+        }
+
+        // TODO: tweak these transitions
+        final LayoutTransition transition = new LayoutTransition();
+        mHeader.setLayoutTransition(transition);
 
         mAdapter = new DataUsageAdapter();
         mListView.setOnItemClickListener(mListListener);
@@ -433,11 +481,90 @@ public class DataUsageSummary extends Fragment {
         mChart.bindNetworkStats(mHistory);
 
         updatePolicy(true);
+        updateAppDetail();
 
         // force scroll to top of body
         mListView.smoothScrollToPosition(0);
 
         mBinding = false;
+    }
+
+    private boolean isAppDetailMode() {
+        return mUid != UID_NONE;
+    }
+
+    /**
+     * Update UID details panels to match {@link #mUid}, showing or hiding them
+     * depending on {@link #isAppDetailMode()}.
+     */
+    private void updateAppDetail() {
+        if (isAppDetailMode()) {
+            mAppDetail.setVisibility(View.VISIBLE);
+        } else {
+            mAppDetail.setVisibility(View.GONE);
+
+            // hide detail stats when not in detail mode
+            mChart.bindDetailNetworkStats(null);
+            return;
+        }
+
+        // remove warning/limit sweeps while in detail mode
+        mChart.bindNetworkPolicy(null);
+
+        final PackageManager pm = getActivity().getPackageManager();
+        mAppTitle.setText(pm.getNameForUid(mUid));
+
+        // enable settings button when package provides it
+        // TODO: target torwards entire UID instead of just first package
+        final String[] packageNames = pm.getPackagesForUid(mUid);
+        if (packageNames != null && packageNames.length > 0) {
+            mAppSettingsIntent = new Intent(Intent.ACTION_MANAGE_NETWORK_USAGE);
+            mAppSettingsIntent.setPackage(packageNames[0]);
+            mAppSettingsIntent.addCategory(Intent.CATEGORY_DEFAULT);
+
+            final boolean matchFound = pm.resolveActivity(mAppSettingsIntent, 0) != null;
+            mAppSettings.setEnabled(matchFound);
+
+        } else {
+            mAppSettingsIntent = null;
+            mAppSettings.setEnabled(false);
+        }
+
+        try {
+            // load stats for current uid and template
+            // TODO: read template from extras
+            mDetailHistory = mStatsService.getHistoryForUid(mTemplate, mUid, NetworkStats.TAG_NONE);
+        } catch (RemoteException e) {
+            // since we can't do much without history, and we don't want to
+            // leave with half-baked UI, we bail hard.
+            throw new RuntimeException("problem reading network stats", e);
+        }
+
+        // bind chart to historical stats
+        mChart.bindDetailNetworkStats(mDetailHistory);
+
+        updateDetailData();
+
+        final Context context = getActivity();
+        if (NetworkPolicyManager.isUidValidForPolicy(context, mUid)) {
+            mAppRestrictView.setVisibility(View.VISIBLE);
+
+            final int uidPolicy;
+            try {
+                uidPolicy = mPolicyService.getUidPolicy(mUid);
+            } catch (RemoteException e) {
+                // since we can't do much without policy, we bail hard.
+                throw new RuntimeException("problem reading network policy", e);
+            }
+
+            // update policy checkbox
+            final boolean restrictBackground = (uidPolicy & POLICY_REJECT_METERED_BACKGROUND) != 0;
+            mAppRestrict.setChecked(restrictBackground);
+
+        } else {
+            mAppRestrictView.setVisibility(View.GONE);
+        }
+
     }
 
     private void setPolicyCycleDay(int cycleDay) {
@@ -458,11 +585,30 @@ public class DataUsageSummary extends Fragment {
         updatePolicy(false);
     }
 
+    private void setAppRestrictBackground(boolean restrictBackground) {
+        if (LOGD) Log.d(TAG, "setRestrictBackground()");
+        try {
+            mPolicyService.setUidPolicy(
+                    mUid, restrictBackground ? POLICY_REJECT_METERED_BACKGROUND : POLICY_NONE);
+        } catch (RemoteException e) {
+            throw new RuntimeException("unable to save policy", e);
+        }
+
+        mAppRestrict.setChecked(restrictBackground);
+    }
+
     /**
      * Update chart sweeps and cycle list to reflect {@link NetworkPolicy} for
      * current {@link #mTemplate}.
      */
     private void updatePolicy(boolean refreshCycle) {
+        if (isAppDetailMode()) {
+            mNetworkSwitches.setVisibility(View.GONE);
+            // we fall through to update cycle list for detail mode
+        } else {
+            mNetworkSwitches.setVisibility(View.VISIBLE);
+        }
+
         final NetworkPolicy policy = mPolicyEditor.getPolicy(mTemplate);
 
         // reflect policy limit in checkbox
@@ -572,18 +718,34 @@ public class DataUsageSummary extends Fragment {
         }
     };
 
+    private View.OnClickListener mAppRestrictListener = new View.OnClickListener() {
+        /** {@inheritDoc} */
+        public void onClick(View v) {
+            final boolean restrictBackground = !mAppRestrict.isChecked();
+
+            if (restrictBackground) {
+                // enabling restriction; show confirmation dialog which
+                // eventually calls setRestrictBackground() once user confirms.
+                ConfirmRestrictFragment.show(DataUsageSummary.this);
+            } else {
+                setAppRestrictBackground(false);
+            }
+        }
+    };
+
+    private OnClickListener mAppSettingsListener = new OnClickListener() {
+        /** {@inheritDoc} */
+        public void onClick(View v) {
+            // TODO: target torwards entire UID instead of just first package
+            startActivity(mAppSettingsIntent);
+        }
+    };
+
     private OnItemClickListener mListListener = new OnItemClickListener() {
         /** {@inheritDoc} */
         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
             final AppUsageItem app = (AppUsageItem) parent.getItemAtPosition(position);
-
-            final Bundle args = new Bundle();
-            args.putParcelable(DataUsageAppDetail.EXTRA_NETWORK_TEMPLATE, mTemplate);
-            args.putInt(DataUsageAppDetail.EXTRA_UID, app.uid);
-
-            final PreferenceActivity activity = (PreferenceActivity) getActivity();
-            activity.startPreferencePanel(DataUsageAppDetail.class.getName(), args,
-                    R.string.data_usage_summary_title, null, null, 0);
+            AppDetailsFragment.show(DataUsageSummary.this, app.uid);
         }
     };
 
@@ -621,12 +783,30 @@ public class DataUsageSummary extends Fragment {
     };
 
     /**
-     * Update {@link #mAdapter} with sorted list of applications data usage,
-     * based on current inspection from {@link #mChart}.
+     * Update details based on {@link #mChart} inspection range depending on
+     * current mode. In network mode, updates {@link #mAdapter} with sorted list
+     * of applications data usage, and when {@link #isAppDetailMode()} update
+     * app details.
      */
     private void updateDetailData() {
         if (LOGD) Log.d(TAG, "updateDetailData()");
 
+        if (isAppDetailMode()) {
+            if (mDetailHistory != null) {
+                final Context context = mChart.getContext();
+                final long[] range = mChart.getInspectRange();
+                final long[] total = mDetailHistory.getTotalData(range[0], range[1], null);
+                final long totalCombined = total[0] + total[1];
+                mAppSubtitle.setText(Formatter.formatFileSize(context, totalCombined));
+            }
+
+            // clear any existing app list details
+            mAdapter.bindStats(null);
+
+            return;
+        }
+
+        // otherwise kick off task to update list
         new AsyncTask<Void, Void, NetworkStats>() {
             @Override
             protected NetworkStats doInBackground(Void... params) {
@@ -753,15 +933,20 @@ public class DataUsageSummary extends Fragment {
     public static class DataUsageAdapter extends BaseAdapter {
         private ArrayList<AppUsageItem> mItems = Lists.newArrayList();
 
+        /**
+         * Bind the given {@link NetworkStats}, or {@code null} to clear list.
+         */
         public void bindStats(NetworkStats stats) {
             mItems.clear();
 
-            for (int i = 0; i < stats.size; i++) {
-                final long total = stats.rx[i] + stats.tx[i];
-                final AppUsageItem item = new AppUsageItem();
-                item.uid = stats.uid[i];
-                item.total = total;
-                mItems.add(item);
+            if (stats != null) {
+                for (int i = 0; i < stats.size; i++) {
+                    final long total = stats.rx[i] + stats.tx[i];
+                    final AppUsageItem item = new AppUsageItem();
+                    item.uid = stats.uid[i];
+                    item.total = total;
+                    mItems.add(item);
+                }
             }
 
             Collections.sort(mItems);
@@ -803,6 +988,44 @@ public class DataUsageSummary extends Fragment {
             return convertView;
         }
 
+    }
+
+    /**
+     * Empty {@link Fragment} that controls display of UID details in
+     * {@link DataUsageSummary}.
+     */
+    public static class AppDetailsFragment extends Fragment {
+        public static final String EXTRA_UID = "uid";
+
+        public static void show(DataUsageSummary parent, int uid) {
+            final Bundle args = new Bundle();
+            args.putInt(EXTRA_UID, uid);
+
+            final AppDetailsFragment fragment = new AppDetailsFragment();
+            fragment.setArguments(args);
+            fragment.setTargetFragment(parent, 0);
+
+            final FragmentTransaction ft = parent.getFragmentManager().beginTransaction();
+            ft.add(fragment, TAG_APP_DETAILS);
+            ft.addToBackStack(TAG_APP_DETAILS);
+            ft.commit();
+        }
+
+        @Override
+        public void onStart() {
+            super.onStart();
+            final DataUsageSummary target = (DataUsageSummary) getTargetFragment();
+            target.mUid = getArguments().getInt(EXTRA_UID);
+            target.updateBody();
+        }
+
+        @Override
+        public void onStop() {
+            super.onStop();
+            final DataUsageSummary target = (DataUsageSummary) getTargetFragment();
+            target.mUid = UID_NONE;
+            target.updateBody();
+        }
     }
 
     /**
@@ -976,11 +1199,44 @@ public class DataUsageSummary extends Fragment {
     }
 
     /**
+     * Dialog to request user confirmation before setting
+     * {@link #POLICY_REJECT_METERED_BACKGROUND}.
+     */
+    public static class ConfirmRestrictFragment extends DialogFragment {
+        public static void show(DataUsageSummary parent) {
+            final ConfirmRestrictFragment dialog = new ConfirmRestrictFragment();
+            dialog.setTargetFragment(parent, 0);
+            dialog.show(parent.getFragmentManager(), TAG_CONFIRM_RESTRICT);
+        }
+
+        @Override
+        public Dialog onCreateDialog(Bundle savedInstanceState) {
+            final Context context = getActivity();
+
+            final AlertDialog.Builder builder = new AlertDialog.Builder(context);
+            builder.setTitle(R.string.data_usage_app_restrict_dialog_title);
+            builder.setMessage(R.string.data_usage_app_restrict_dialog);
+
+            builder.setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
+                public void onClick(DialogInterface dialog, int which) {
+                    final DataUsageSummary target = (DataUsageSummary) getTargetFragment();
+                    if (target != null) {
+                        target.setAppRestrictBackground(true);
+                    }
+                }
+            });
+            builder.setNegativeButton(android.R.string.cancel, null);
+
+            return builder.create();
+        }
+    }
+
+    /**
      * Compute default tab that should be selected, based on
      * {@link NetworkPolicyManager#EXTRA_NETWORK_TEMPLATE} extra.
      */
     private static String computeTabFromIntent(Intent intent) {
-        final int networkTemplate = intent.getIntExtra(EXTRA_NETWORK_TEMPLATE, TEMPLATE_INVALID);
+        final int networkTemplate = intent.getIntExtra(EXTRA_NETWORK_TEMPLATE, MATCH_MOBILE_ALL);
         switch (networkTemplate) {
             case MATCH_MOBILE_3G_LOWER:
                 return TAB_3G;
@@ -1081,6 +1337,16 @@ public class DataUsageSummary extends Fragment {
     private static void setPreferenceTitle(View parent, int resId) {
         final TextView title = (TextView) parent.findViewById(android.R.id.title);
         title.setText(resId);
+    }
+
+    /**
+     * Set {@link android.R.id#summary} for a preference view inflated with
+     * {@link #inflatePreference(LayoutInflater, ViewGroup, View)}.
+     */
+    private static void setPreferenceSummary(View parent, int resId) {
+        final TextView summary = (TextView) parent.findViewById(android.R.id.summary);
+        summary.setVisibility(View.VISIBLE);
+        summary.setText(resId);
     }
 
 }

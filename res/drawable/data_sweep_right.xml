@@ -17,6 +17,6 @@
 <selector xmlns:android="http://schemas.android.com/apk/res/android"
     android:exitFadeDuration="@android:integer/config_mediumAnimTime">
 
-    <item android:state_activated="true" android:drawable="@drawable/data_sweep_right_activated" />
-    <item android:state_activated="false" android:drawable="@drawable/data_sweep_right_default" />
+    <item android:state_activated="true" android:state_enabled="true" android:drawable="@drawable/data_sweep_right_activated" />
+    <item android:drawable="@drawable/data_sweep_right_default" />
 </selector>
