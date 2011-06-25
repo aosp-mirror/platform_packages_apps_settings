@@ -19,13 +19,18 @@
     android:layout_height="wrap_content"
     android:orientation="vertical">
 
-    <LinearLayout
-        android:id="@+id/network_switches"
+    <FrameLayout
+        android:id="@+id/network_switches_container"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:showDividers="middle|end"
-        android:divider="?android:attr/listDivider" />
+        android:layout_height="wrap_content">
+        <LinearLayout
+            android:id="@+id/network_switches"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:showDividers="middle|end"
+            android:divider="?android:attr/listDivider" />
+    </FrameLayout>
 
     <LinearLayout
         android:layout_width="match_parent"

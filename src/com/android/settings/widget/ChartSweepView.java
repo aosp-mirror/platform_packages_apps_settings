@@ -188,7 +188,12 @@ public class ChartSweepView extends FrameLayout {
     }
 
     public float getPoint() {
-        return mAxis.convertToPoint(mValue);
+        if (isEnabled()) {
+            return mAxis.convertToPoint(mValue);
+        } else {
+            // when disabled, show along top edge
+            return 0;
+        }
     }
 
     @Override
