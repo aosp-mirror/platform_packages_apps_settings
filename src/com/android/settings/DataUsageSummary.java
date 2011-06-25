@@ -71,6 +71,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
+import android.view.ViewTreeObserver.OnGlobalLayoutListener;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.AdapterView.OnItemSelectedListener;
@@ -136,12 +137,14 @@ public class DataUsageSummary extends Fragment {
     private SharedPreferences mPrefs;
 
     private TabHost mTabHost;
+    private ViewGroup mTabsContainer;
     private TabWidget mTabWidget;
     private ListView mListView;
     private DataUsageAdapter mAdapter;
 
     private ViewGroup mHeader;
 
+    private ViewGroup mNetworkSwitchesContainer;
     private LinearLayout mNetworkSwitches;
     private Switch mDataEnabled;
     private View mDataEnabledView;
@@ -176,6 +179,7 @@ public class DataUsageSummary extends Fragment {
     private NetworkStatsHistory mHistory;
     private NetworkStatsHistory mDetailHistory;
 
+    private String mCurrentTab = null;
     private String mIntentTab = null;
 
     /** Flag used to ignore listeners during binding. */
@@ -209,6 +213,7 @@ public class DataUsageSummary extends Fragment {
         final View view = inflater.inflate(R.layout.data_usage_summary, container, false);
 
         mTabHost = (TabHost) view.findViewById(android.R.id.tabhost);
+        mTabsContainer = (ViewGroup) view.findViewById(R.id.tabs_container);
         mTabWidget = (TabWidget) view.findViewById(android.R.id.tabs);
         mListView = (ListView) view.findViewById(android.R.id.list);
 
@@ -220,6 +225,8 @@ public class DataUsageSummary extends Fragment {
 
         {
             // bind network switches
+            mNetworkSwitchesContainer = (ViewGroup) mHeader.findViewById(
+                    R.id.network_switches_container);
             mNetworkSwitches = (LinearLayout) mHeader.findViewById(R.id.network_switches);
 
             mDataEnabled = new Switch(inflater.getContext());
@@ -263,9 +270,8 @@ public class DataUsageSummary extends Fragment {
             mAppSwitches.addView(mAppRestrictView);
         }
 
-        // TODO: tweak these transitions
-        final LayoutTransition transition = new LayoutTransition();
-        mHeader.setLayoutTransition(transition);
+        // only assign layout transitions once first layout is finished
+        mHeader.getViewTreeObserver().addOnGlobalLayoutListener(mFirstLayoutListener);
 
         mAdapter = new DataUsageAdapter();
         mListView.setOnItemClickListener(mListListener);
@@ -343,6 +349,25 @@ public class DataUsageSummary extends Fragment {
         mDataEnabledView = null;
         mDisableAtLimitView = null;
     }
+
+    /**
+     * Listener to setup {@link LayoutTransition} after first layout pass.
+     */
+    private OnGlobalLayoutListener mFirstLayoutListener = new OnGlobalLayoutListener() {
+        /** {@inheritDoc} */
+        public void onGlobalLayout() {
+            mHeader.getViewTreeObserver().removeGlobalOnLayoutListener(mFirstLayoutListener);
+
+            mTabsContainer.setLayoutTransition(new LayoutTransition());
+            mHeader.setLayoutTransition(new LayoutTransition());
+            mNetworkSwitchesContainer.setLayoutTransition(new LayoutTransition());
+
+            final LayoutTransition chartTransition = new LayoutTransition();
+            chartTransition.setStartDelay(LayoutTransition.APPEARING, 0);
+            chartTransition.setStartDelay(LayoutTransition.DISAPPEARING, 0);
+            mChart.setLayoutTransition(chartTransition);
+        }
+    };
 
     /**
      * Rebuild all tabs based on {@link NetworkPolicyEditor} and
@@ -434,6 +459,9 @@ public class DataUsageSummary extends Fragment {
             throw new IllegalStateException("no mobile or wifi radios");
         }
 
+        final boolean tabChanged = !currentTab.equals(mCurrentTab);
+        mCurrentTab = currentTab;
+
         if (LOGD) Log.d(TAG, "updateBody() with currentTab=" + currentTab);
 
         if (TAB_WIFI.equals(currentTab)) {
@@ -480,7 +508,8 @@ public class DataUsageSummary extends Fragment {
         // bind chart to historical stats
         mChart.bindNetworkStats(mHistory);
 
-        updatePolicy(true);
+        // only update policy when switching tabs
+        updatePolicy(tabChanged);
         updateAppDetail();
 
         // force scroll to top of body
@@ -607,6 +636,12 @@ public class DataUsageSummary extends Fragment {
             // we fall through to update cycle list for detail mode
         } else {
             mNetworkSwitches.setVisibility(View.VISIBLE);
+
+            // when heading back to summary without cycle refresh, kick details
+            // update to repopulate list.
+            if (!refreshCycle) {
+                updateDetailData();
+            }
         }
 
         final NetworkPolicy policy = mPolicyEditor.getPolicy(mTemplate);

@@ -129,9 +129,7 @@ public class DataUsageChartView extends ChartView {
             mSweepLimit.setValue(policy.limitBytes);
             mSweepLimit.setEnabled(true);
         } else {
-            // TODO: set limit default based on axis maximum
             mSweepLimit.setVisibility(View.VISIBLE);
-            mSweepLimit.setValue(5 * GB_IN_BYTES);
             mSweepLimit.setEnabled(false);
         }
 
@@ -186,6 +184,15 @@ public class DataUsageChartView extends ChartView {
             default: {
                 return false;
             }
+        }
+    }
+
+    @Override
+    public boolean onInterceptTouchEvent(MotionEvent ev) {
+        if (!isActivated()) {
+            return true;
+        } else {
+            return super.onInterceptTouchEvent(ev);
         }
     }
 
@@ -302,56 +309,45 @@ public class DataUsageChartView extends ChartView {
     public static class DataAxis implements ChartAxis {
         private long mMin;
         private long mMax;
-        private long mMinLog;
-        private long mMaxLog;
         private float mSize;
 
         public DataAxis() {
             // TODO: adapt ranges to show when history >5GB, and handle 4G
             // interfaces with higher limits.
-            setBounds(1 * MB_IN_BYTES, 5 * GB_IN_BYTES);
+            setBounds(0, 5 * GB_IN_BYTES);
         }
 
         /** {@inheritDoc} */
         public void setBounds(long min, long max) {
             mMin = min;
             mMax = max;
-            mMinLog = (long) Math.log(mMin);
-            mMaxLog = (long) Math.log(mMax);
         }
 
         /** {@inheritDoc} */
         public void setSize(float size) {
-            this.mSize = size;
+            mSize = size;
         }
 
         /** {@inheritDoc} */
         public float convertToPoint(long value) {
-            return (mSize * (value - mMin)) / (mMax - mMin);
-
-            // TODO: finish tweaking log scale
-//            if (value > mMin) {
-//                return (float) ((mSize * (Math.log(value) - mMinLog)) / (mMaxLog - mMinLog));
-//            } else {
-//                return 0;
-//            }
+            // TODO: this assumes range of [0,5]GB
+            final double fraction = Math.pow(
+                    10, 0.36884343106175160321 * Math.log10(value) + -3.62828151137812282556);
+            return (float) fraction * mSize;
         }
 
         /** {@inheritDoc} */
         public long convertToValue(float point) {
-            return (long) (mMin + ((point * (mMax - mMin)) / mSize));
-
-            // TODO: finish tweaking log scale
-//            return (long) Math.pow(Math.E, (mMinLog + ((point * (mMaxLog - mMinLog)) / mSize)));
+            final double y = point / mSize;
+            // TODO: this assumes range of [0,5]GB
+            final double fraction = 6.869341163271789302 * Math.pow(10, 9)
+                    * Math.pow(y, 2.71117746931646030774);
+            return (long) fraction;
         }
 
         /** {@inheritDoc} */
         public CharSequence getLabel(long value) {
-
             // TODO: use exploded string here
-
-
-            // TODO: convert to string
             return Long.toString(value);
         }
 
@@ -365,13 +361,13 @@ public class DataUsageChartView extends ChartView {
         public float[] getTickPoints() {
             final float[] tickPoints = new float[16];
 
-            long value = mMax;
-            float mult = 0.8f;
+            final long jump = ((mMax - mMin) / tickPoints.length);
+            long value = mMin;
             for (int i = 0; i < tickPoints.length; i++) {
                 tickPoints[i] = convertToPoint(value);
-                value = (long) (value * mult);
-                mult *= 0.9;
+                value += jump;
             }
+
             return tickPoints;
         }
     }

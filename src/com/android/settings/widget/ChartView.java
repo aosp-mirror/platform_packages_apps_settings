@@ -21,6 +21,7 @@ import static com.google.common.base.Preconditions.checkNotNull;
 import android.content.Context;
 import android.graphics.Rect;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.FrameLayout;
@@ -93,7 +94,6 @@ public class ChartView extends FrameLayout {
                 // sweep is always placed along specific dimension
                 final ChartSweepView sweep = (ChartSweepView) child;
                 final Rect sweepMargins = sweep.getSweepMargins();
-                final float point = sweep.getPoint();
 
                 if (sweep.getFollowAxis() == ChartSweepView.HORIZONTAL) {
                     parentRect.left = parentRect.right =
