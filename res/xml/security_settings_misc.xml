@@ -56,6 +56,11 @@
 
     <PreferenceCategory android:title="@string/credentials_title"
             android:persistent="false">
+        <Preference android:title="@string/trusted_credentials"
+                android:summary="@string/trusted_credentials_summary"
+                android:persistent="false"
+                android:fragment="com.android.settings.TrustedCredentials"/>
+
         <Preference android:title="@string/credentials_install"
                 android:summary="@string/credentials_install_summary"
                 android:persistent="false">

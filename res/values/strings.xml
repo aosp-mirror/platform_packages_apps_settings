@@ -3091,6 +3091,10 @@ found in the list of installed applications.</string>
     <string name="credentials_reset">Clear credentials</string>
     <!-- Summary of preference to reset credential storage [CHAR LIMIT=NONE] -->
     <string name="credentials_reset_summary">Remove all certificates</string>
+    <!-- Title of preference to display trusted credentials (aka CA certificates) [CHAR LIMIT=30] -->
+    <string name="trusted_credentials">Trusted credentials</string>
+    <!-- Summary of preference to display trusted credentials (aka CA certificates) [CHAR LIMIT=NONE] -->
+    <string name="trusted_credentials_summary">Display trusted CA certificates</string>
 
     <!-- Title of dialog to enable credential storage [CHAR LIMIT=30] -->
     <string name="credentials_unlock">Enter password</string>
@@ -3533,4 +3537,22 @@ found in the list of installed applications.</string>
     <string name="vpn_menu_edit">Edit network</string>
     <!-- Menu item to delete a VPN network. [CHAR LIMIT=40] -->
     <string name="vpn_menu_delete">Delete network</string>
+
+    <!-- Tab label for built-in system CA certificates. -->
+    <string name="trusted_credentials_system_tab">System</string>
+    <!-- Tab label for user added CA certificates. -->
+    <string name="trusted_credentials_user_tab">User</string>
+    <!-- Button label for disabling a system CA certificate. -->
+    <string name="trusted_credentials_disable_label">Disable</string>
+    <!-- Button label for enabling a system CA certificate. -->
+    <string name="trusted_credentials_enable_label">Enable</string>
+    <!-- Button label for removing a user CA certificate. -->
+    <string name="trusted_credentials_remove_label">Remove</string>
+    <!-- Alert dialog confirmation when enabling a system CA certificate. -->
+    <string name="trusted_credentials_enable_confirmation">Enable the system CA certificate?</string>
+    <!-- Alert dialog confirmation when disabling a system CA certificate. -->
+    <string name="trusted_credentials_disable_confirmation">Disable the system CA certificate?</string>
+    <!-- Alert dialog confirmation when removing a user CA certificate. -->
+    <string name="trusted_credentials_remove_confirmation">Permanently remove the user CA certificate?</string>
+
 </resources>
