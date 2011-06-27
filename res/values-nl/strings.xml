@@ -122,6 +122,9 @@
     <string name="bluetooth_ask_enablement_and_discovery" msgid="7220210326619399542">"Een app probeert Bluetooth in te schakelen en uw telefoon <xliff:g id="TIMEOUT">%1$d</xliff:g> seconden zichtbaar te maken voor andere apparaten. Wilt u dit toestaan?"</string>
     <string name="bluetooth_ask_enablement_and_lasting_discovery" msgid="7471195931669103553">"Een app op uw telefoon vraagt toestemming Bluetooth in te schakelen en uw telefoon vindbaar te maken voor andere apparaten. Wilt u dit toestaan?"</string>
     <string name="bluetooth_turning_on" msgid="3107102168379705771">"Bluetooth inschakelen…"</string>
+    <string name="bluetooth_connection_permission_request" msgid="4747918249032890077">"Bluetooth-verbindingsverzoek"</string>
+    <string name="bluetooth_connection_notif_message" msgid="1833221950512058309">"Raak aan om verbinding te maken met \'<xliff:g id="DEVICE_NAME">%1$s</xliff:g>\'"</string>
+    <string name="bluetooth_connection_dialog_text" msgid="8455427559949998023">"Wilt u verbinding maken met \'<xliff:g id="DEVICE_NAME">%1$s</xliff:g>\'?"</string>
     <string name="date_and_time" msgid="4114084177056654663">"Datum- en tijdinstellingen"</string>
     <string name="date_time_12_hour_sample" msgid="3259617262618020574">"13:00 uur"</string>
     <string name="date_time_24_hour_sample" msgid="8916857570746212357">"01:00:00 PM"</string>
@@ -521,6 +524,7 @@
     <string name="storage_settings_summary" product="default" msgid="9176693537325988610">"SD-kaart ontkoppelen, beschikbare opslagruimte weergeven"</string>
     <string name="status_number" msgid="5123197324870153205">"Mijn telefoonnummer"</string>
     <string name="status_min_number" msgid="3519504522179420597">"MIN"</string>
+    <string name="status_msid_number" msgid="909010114445780530">"MSID"</string>
     <string name="status_prl_version" msgid="8499039751817386529">"PRL-versie"</string>
     <string name="status_meid_number" msgid="1751442889111731088">"MEID"</string>
     <string name="status_network_type" msgid="3279383550222116235">"Type mobiel netwerk"</string>
@@ -556,8 +560,8 @@
     <string name="read_only" msgid="6702420168629076340">" (Alleen-lezen)"</string>
     <string name="dlg_confirm_unmount_title" product="nosdcard" msgid="2349876662428231297">"USB-opslag ontkoppelen"</string>
     <string name="dlg_confirm_unmount_title" product="default" msgid="8612140627310646730">"SD-kaart ontkoppelen"</string>
-    <string name="dlg_confirm_unmount_text" product="nosdcard" msgid="3390169455621185223">"Als u de USB-opslag ontkoppelt, worden bepaalde toepassingen die u gebruikt, gestopt en worden deze mogelijk pas weer beschikbaar wanneer u de USB-opslag opnieuw koppelt."</string>
-    <string name="dlg_confirm_unmount_text" product="default" msgid="5851214273718817727">"Als u de SD-kaart ontkoppelt, worden bepaalde toepassingen die u gebruikt, gestopt en worden deze mogelijk pas weer beschikbaar wanneer u de SD-kaart opnieuw koppelt."</string>
+    <string name="dlg_confirm_unmount_text" product="nosdcard" msgid="3390169455621185223">"Als u de USB-opslag ontkoppelt, worden bepaalde apps die u gebruikt, gestopt en worden deze mogelijk pas weer beschikbaar wanneer u de USB-opslag opnieuw koppelt."</string>
+    <string name="dlg_confirm_unmount_text" product="default" msgid="5851214273718817727">"Als u de SD-kaart ontkoppelt, worden bepaalde apps die u gebruikt, gestopt en worden deze mogelijk pas weer beschikbaar wanneer u de SD-kaart opnieuw koppelt."</string>
     <string name="dlg_error_unmount_title" product="nosdcard" msgid="7695491947411836733">"Ontkoppelen USB-opslag mislukt"</string>
     <string name="dlg_error_unmount_title" product="default" msgid="4004106918266783081">"Ontkoppelen van SD-kaart is mislukt"</string>
     <string name="dlg_error_unmount_text" product="nosdcard" msgid="1450864147013376592">"Kan USB-opslag niet koppelen. Probeer het later opnieuw."</string>
@@ -611,7 +615,7 @@
     <string name="erase_external_storage_description" product="nosdcard" msgid="1657838142707381027">"Alle gegevens in de interne USB-opslag van de telefoon wissen, zoals muziek en foto\'s."</string>
     <string name="erase_external_storage_description" product="default" msgid="8100175974635894073">"Alle gegevens op de SD-kaart van de telefoon wissen, zoals muziek en foto\'s."</string>
     <string name="master_clear_button_text" msgid="7550632653343157971">"Telefoon opnieuw instellen"</string>
-    <string name="master_clear_final_desc" msgid="6917971132484622696">"Alle persoonlijke gegevens en gedownloade toepassingen wissen? U kunt deze actie niet ongedaan maken."</string>
+    <string name="master_clear_final_desc" msgid="6917971132484622696">"Alle persoonlijke gegevens en gedownloade apps wissen? U kunt deze actie niet ongedaan maken."</string>
     <string name="master_clear_final_button_text" msgid="5390908019019242910">"Alles wissen"</string>
     <string name="master_clear_gesture_prompt" msgid="1428645764883536750">"Teken uw ontgrendelingspatroon"</string>
     <string name="master_clear_gesture_explanation" msgid="8901714274312707918">"U moet uw ontgrendelingspatroon tekenen om het opnieuw instellen van de telefoon te bevestigen."</string>
@@ -650,7 +654,7 @@
     <string name="network_settings_summary" msgid="5149750850846813553">"Opties voor roaming, netwerken, APN\'s instellen"</string>
     <string name="location_title" msgid="1029961368397484576">"Mijn locatie"</string>
     <string name="location_network_based" msgid="8815705866861993344">"Draadloze netwerken"</string>
-    <string name="location_networks_disabled" msgid="2708968452901433980">"Locatie in toepassingen (zoals Maps) bekijken via draadloze netwerken"</string>
+    <string name="location_networks_disabled" msgid="2708968452901433980">"Locatie in apps (zoals Maps) bekijken via draadloze netwerken"</string>
     <string name="location_neighborhood_level" msgid="4656658097932515921">"Locatie bepaald door Wi-Fi en/of mobiele netwerken"</string>
     <string name="location_gps" msgid="6296125378829097831">"GPS-satellieten"</string>
     <string name="location_street_level" msgid="7456259025474443314">"Bij lokaliseren nauwkeurig tot straatniveau"</string>
@@ -716,13 +720,13 @@
     <string name="lock_example_title" msgid="8052305554017485410">"Voorbeeldpatroon"</string>
     <string name="lock_example_message" msgid="1838650097090632706">"Verbind minimaal vier punten. "\n" "\n"Selecteer \'Volgende\' als u klaar bent om uw eigen patroon te tekenen."</string>
     <string name="manageapplications_settings_title" msgid="5712405848153426706">"Toepassingen beheren"</string>
-    <string name="manageapplications_settings_summary" msgid="6097117021500651232">"Geïnstalleerde toepassingen beheren en verwijderen"</string>
+    <string name="manageapplications_settings_summary" msgid="6097117021500651232">"Geïnstalleerde apps beheren en verwijderen"</string>
     <string name="applications_settings" msgid="3736173521008476946">"Apps"</string>
     <string name="applications_settings_summary" msgid="2714215108369119717">"Toepassingen beheren, sneltoetsen voor snelstarten instellen"</string>
     <string name="applications_settings_header" msgid="6018266337275422250">"Toepassingsinstellingen"</string>
     <string name="install_applications" msgid="4872012136210802181">"Onbekende bronnen"</string>
-    <string name="install_unknown_applications" msgid="6612824788917283662">"Installatie van andere toepassingen dan Market-toepassingen toestaan"</string>
-    <string name="install_all_warning" msgid="1923717607319933741">"Uw telefoon en persoonlijke gegevens zijn gevoeliger voor aanvallen door toepassingen van onbekende bronnen. U gaat ermee akkoord dat u alleen verantwoordelijk bent voor enige schade aan uw telefoon of verlies van gegevens die voortkomen uit het gebruik van deze toepassingen."</string>
+    <string name="install_unknown_applications" msgid="6612824788917283662">"Installatie van andere apps dan Market-apps toestaan"</string>
+    <string name="install_all_warning" msgid="1923717607319933741">"Uw telefoon en persoonlijke gegevens zijn gevoeliger voor aanvallen door apps van onbekende bronnen. U gaat ermee akkoord dat u alleen verantwoordelijk bent voor enige schade aan uw telefoon of verlies van gegevens die voortkomen uit het gebruik van deze apps."</string>
     <string name="application_info_label" msgid="1150486628158409543">"Toepassingsinfo"</string>
     <string name="storage_label" msgid="8700867073480107253">"Opslagruimte"</string>
     <string name="auto_launch_label" msgid="3012617472833815382">"Standaard starten"</string>
@@ -757,7 +761,7 @@
     <string name="filter_apps_onsdcard" product="nosdcard" msgid="4843063154701023349">"USB-opslag"</string>
     <string name="filter_apps_onsdcard" product="default" msgid="1477351142334784771">"Op SD-kaart"</string>
     <string name="disabled" msgid="9206776641295849915">"Uitgeschakeld"</string>
-    <string name="no_applications" msgid="5190227407135243904">"Geen toepassingen."</string>
+    <string name="no_applications" msgid="5190227407135243904">"Geen apps."</string>
     <string name="internal_storage" msgid="1584700623164275282">"Interne opslag"</string>
     <string name="sd_card_storage" product="nosdcard" msgid="2673203150465132465">"USB-opslag"</string>
     <string name="sd_card_storage" product="default" msgid="7623513618171928235">"SD-kaartopslag"</string>
@@ -776,7 +780,7 @@
     <string name="security_settings_desc" msgid="3116027624526915561">"Deze app heeft toegang tot de volgende opties van uw telefoon:"</string>
     <string name="computing_size" msgid="1599186977475211186">"Berekenen…"</string>
     <string name="invalid_size_value" msgid="1901940003700269523">"Kan grootte van pakket niet berekenen"</string>
-    <string name="empty_list_msg" msgid="2901049162265094971">"U heeft geen toepassingen van derden geïnstalleerd."</string>
+    <string name="empty_list_msg" msgid="2901049162265094971">"U heeft geen apps van derden geïnstalleerd."</string>
     <string name="version_text" msgid="9189073826278676425">"versie <xliff:g id="VERSION_NUM">%1$s</xliff:g>"</string>
     <string name="move_app" msgid="5042838441401731346">"Verplaatsen"</string>
     <string name="move_app_to_internal" msgid="3895430471913858185">"Verplaatsen naar telefoon"</string>
@@ -793,9 +797,9 @@
     <string name="move_app_failed_dlg_title" msgid="4337731903265156405">"App verplaatsen"</string>
     <string name="move_app_failed_dlg_text" msgid="8824246817947643697">"Verplaatsen van app is mislukt. <xliff:g id="REASON">%1$s</xliff:g>"</string>
     <string name="app_install_location_title" msgid="2068975150026852168">"Voorkeursinstallatielocatie"</string>
-    <string name="app_install_location_summary" msgid="879753854530300436">"De voorkeursinstallatielocatie voor nieuwe toepassingen wijzigen."</string>
+    <string name="app_install_location_summary" msgid="879753854530300436">"De voorkeursinstallatielocatie voor nieuwe apps wijzigen."</string>
     <string name="storageuse_settings_title" msgid="5657014373502630403">"Opslaggebruik"</string>
-    <string name="storageuse_settings_summary" msgid="2556057379120846792">"Gebruikte opslagruimte voor toepassingen weergeven"</string>
+    <string name="storageuse_settings_summary" msgid="2556057379120846792">"Gebruikte opslagruimte voor apps weergeven"</string>
     <string name="runningservices_settings_title" msgid="8097287939865165213">"Actieve services"</string>
     <string name="runningservices_settings_summary" msgid="854608995821032748">"Services die momenteel actief zijn, weergeven en beheren"</string>
     <string name="service_restarting" msgid="2242747937372354306">"Opnieuw starten"</string>
@@ -857,7 +861,7 @@
     <string name="testing_phone_info" msgid="8656693364332840056">"Telefooninformatie"</string>
     <string name="testing_battery_info" msgid="3497865525976497848">"Accu-informatie"</string>
     <string name="quick_launch_title" msgid="7904609846945905306">"Snelstarten"</string>
-    <string name="quick_launch_summary" msgid="3453825712466417452">"Sneltoetsen instellen voor starten toepassingen"</string>
+    <string name="quick_launch_summary" msgid="3453825712466417452">"Sneltoetsen instellen voor starten apps"</string>
     <string name="quick_launch_assign_application" msgid="4521368464929956350">"App toewijzen"</string>
     <string name="quick_launch_no_shortcut" msgid="5998005833838278693">"Geen sneltoets"</string>
     <string name="quick_launch_shortcut" msgid="5090405067413522300">"Zoeken + <xliff:g id="SHORTCUT_LETTER">%1$s</xliff:g>"</string>
@@ -882,7 +886,7 @@
     <string name="allow_mock_location" msgid="2787962564578664888">"Neplocaties toestaan"</string>
     <string name="allow_mock_location_summary" msgid="317615105156345626">"Neplocaties toestaan"</string>
     <string name="adb_warning_title" msgid="6234463310896563253">"USB-foutopsporing toestaan?"</string>
-    <string name="adb_warning_message" msgid="5352555112049663033">"USB-foutopsporing is alleen bedoeld voor ontwikkelingsdoeleinden. Het kan worden gebruikt om gegevens te kopiëren tussen uw computer en uw apparaat, om toepassingen zonder melding op uw apparaat te installeren en om loggegevens te lezen."</string>
+    <string name="adb_warning_message" msgid="5352555112049663033">"USB-foutopsporing is alleen bedoeld voor ontwikkelingsdoeleinden. Het kan worden gebruikt om gegevens te kopiëren tussen uw computer en uw apparaat, om apps zonder melding op uw apparaat te installeren en om loggegevens te lezen."</string>
     <string name="gadget_picker_title" msgid="98374951396755811">"Gadget kiezen"</string>
     <string name="widget_picker_title" msgid="9130684134213467557">"Widget kiezen"</string>
     <string name="battery_history_days" msgid="7110262897769622564">"<xliff:g id="DAYS">%1$d</xliff:g>d <xliff:g id="HOURS">%2$d</xliff:g>u <xliff:g id="MINUTES">%3$d</xliff:g>m <xliff:g id="SECONDS">%4$d</xliff:g>s"</string>
@@ -903,8 +907,8 @@
     <string name="no_accessibility_services_summary" msgid="694578333333808159">"Geen geïnstalleerde toegankelijkheidsservices."</string>
     <string name="accessibility_service_security_warning" msgid="4066258132331302670">"Deze toegankelijkheidsservice verzamelt mogelijk alle tekst die u typt, inclusief persoonlijke gegevens en creditcardnummers, maar geen wachtwoorden. De service kan ook uw interacties met de gebruikersinterface vastleggen. De service is afkomstig uit de app <xliff:g id="ACCESSIBILITY_SERVICE_NAME">%1$s</xliff:g>. Deze toegankelijkheidsservice inschakelen?"</string>
     <string name="accessibility_service_disable_warning" msgid="8930591383312775132">"Toegankelijkheid uitschakelen?"</string>
-    <string name="accessibility_service_no_apps_title" msgid="898893674114288531">"Geen toepassingen voor toegankelijkheid gevonden"</string>
-    <string name="accessibility_service_no_apps_message" msgid="2450056749545404807">"Er zijn geen toepassingen voor toegankelijkheid geïnstalleerd."\n\n"U kunt een schermlezer voor uw apparaat downloaden van Android Market."\n\n"Klik op \'OK\' om de schermlezer te installeren."</string>
+    <string name="accessibility_service_no_apps_title" msgid="898893674114288531">"Geen apps voor toegankelijkheid gevonden"</string>
+    <string name="accessibility_service_no_apps_message" msgid="2450056749545404807">"Er zijn geen apps voor toegankelijkheid geïnstalleerd."\n\n"U kunt een schermlezer voor uw apparaat downloaden van Android Market."\n\n"Klik op \'OK\' om de schermlezer te installeren."</string>
     <string name="accessibility_power_button_category" msgid="8545885236482339928">"Aan/uit-knop"</string>
     <string name="accessibility_power_button_ends_call" msgid="7698764194501089533">"Knop beëindigt oproep"</string>
     <string name="accessibility_power_button_ends_call_summary" msgid="8878097632186291462">"Als u tijdens een oproep op de aan/uit-knop drukt, wordt de oproep beëindigd in plaats van dat het scherm wordt uitgeschakeld"</string>

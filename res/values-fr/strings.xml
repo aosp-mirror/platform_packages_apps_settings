@@ -122,6 +122,9 @@
     <string name="bluetooth_ask_enablement_and_discovery" msgid="7220210326619399542">"Une application sur votre téléphone demande l\'autorisation d\'activer Bluetooth et de permettre à d\'autres appareils de détecter votre téléphone pendant <xliff:g id="TIMEOUT">%1$d</xliff:g> secondes. Voulez-vous l\'activer ?"</string>
     <string name="bluetooth_ask_enablement_and_lasting_discovery" msgid="7471195931669103553">"Une application de votre téléphone demande l\'autorisation d\'activer Bluetooth et de permettre à d\'autres appareils d\'identifier votre téléphone. Voulez-vous activer cette fonction ?"</string>
     <string name="bluetooth_turning_on" msgid="3107102168379705771">"Activation du Bluetooth…"</string>
+    <string name="bluetooth_connection_permission_request" msgid="4747918249032890077">"Demande de connexion Bluetooth"</string>
+    <string name="bluetooth_connection_notif_message" msgid="1833221950512058309">"Appuyez ici pour vous connecter à \"<xliff:g id="DEVICE_NAME">%1$s</xliff:g>\"."</string>
+    <string name="bluetooth_connection_dialog_text" msgid="8455427559949998023">"Voulez-vous vous connecter à \"<xliff:g id="DEVICE_NAME">%1$s</xliff:g>\" ?"</string>
     <string name="date_and_time" msgid="4114084177056654663">"Paramètres d\'heure et de date"</string>
     <string name="date_time_12_hour_sample" msgid="3259617262618020574">"1:00 pm"</string>
     <string name="date_time_24_hour_sample" msgid="8916857570746212357">"13:00"</string>
@@ -521,6 +524,7 @@
     <string name="storage_settings_summary" product="default" msgid="9176693537325988610">"Désinstaller la carte SD, afficher la mémoire disponible"</string>
     <string name="status_number" msgid="5123197324870153205">"Mon numéro de téléphone"</string>
     <string name="status_min_number" msgid="3519504522179420597">"MIN"</string>
+    <string name="status_msid_number" msgid="909010114445780530">"MSID"</string>
     <string name="status_prl_version" msgid="8499039751817386529">"Version PRL"</string>
     <string name="status_meid_number" msgid="1751442889111731088">"MEID"</string>
     <string name="status_network_type" msgid="3279383550222116235">"Type de réseau mobile"</string>
@@ -1055,7 +1059,7 @@
     <string name="vpn_auth_error_dialog_msg" msgid="5476820106624807614">"Le nom d\'utilisateur ou le mot de passe entré est incorrect. Voulez-vous réessayer ?"</string>
     <string name="vpn_remote_hung_up_error_dialog_msg" msgid="1566946015052633150">"Le serveur a raccroché. Le nom d\'utilisateur et le mot de passe que vous avez saisis sont peut-être incorrects. Voulez-vous réessayer ?"</string>
     <string name="vpn_remote_ppp_hung_up_error_dialog_msg" msgid="5135958511128503344">"Le serveur a raccroché. Il est possible que vous soyez protégé par un pare-feu qui empêche toute connexion au serveur. Souhaitez-vous réessayer ?"</string>
-    <string name="vpn_ppp_negotiation_failed_dialog_msg" msgid="4611293656718340994">"Échec de la négociation avec le serveur. Le serveur n\'est peut-être pas conforme au paramètre de cryptage. Voulez-vous vérifier le paramètre de cryptage ?"</string>
+    <string name="vpn_ppp_negotiation_failed_dialog_msg" msgid="4611293656718340994">"Échec de la négociation avec le serveur. Le serveur n\'est peut-être pas conforme au paramètre de chiffrement. Voulez-vous vérifier le paramètre de chiffrement ?"</string>
     <string name="vpn_type_title" msgid="6392933604218676224">"Ajouter un VPN"</string>
     <string name="vpn_add_new_vpn" msgid="5438260689052714550">"Ajouter un VPN"</string>
     <string name="vpn_edit_title_add" msgid="2121313217989682890">"Ajouter le VPN \"<xliff:g id="NAME">%s</xliff:g>\""</string>
@@ -1078,8 +1082,8 @@
     <string name="vpn_l2tp_secret_string_title" msgid="5039677186748940987">"Définir le secret L2TP"</string>
     <string name="vpn_l2tp_secret" msgid="529359749677142076">"Secret L2TP"</string>
     <string name="vpn_a_l2tp_secret" msgid="6612042930810981845">"un secret L2TP"</string>
-    <string name="vpn_pptp_encryption_title" msgid="2236795167467896499">"cryptage"</string>
-    <string name="vpn_pptp_encryption" msgid="2602329949737259686">"Cryptage PPTP"</string>
+    <string name="vpn_pptp_encryption_title" msgid="2236795167467896499">"chiffrement"</string>
+    <string name="vpn_pptp_encryption" msgid="2602329949737259686">"Chiffrement PPTP"</string>
     <string name="vpn_ipsec_presharedkey_title" msgid="2184060087690539175">"Définir la clé pré-partagée IPSec"</string>
     <string name="vpn_ipsec_presharedkey" msgid="5434316521616673741">"Clé pré-partagée IPSec"</string>
     <string name="vpn_a_ipsec_presharedkey" msgid="1255301923217898418">"une clé pré-partagée IPSec"</string>
@@ -1107,8 +1111,8 @@
     <string name="credentials_unlock_hint" msgid="594679530407918031">"Saisissez le mot de passe du stockage des identifiants."</string>
     <string name="credentials_install_certificates" product="nosdcard" msgid="619171634797689906">"Installation depuis USB"</string>
     <string name="credentials_install_certificates" product="default" msgid="177337517568022236">"Installer depuis la carte SD"</string>
-    <string name="credentials_install_certificates_summary" product="nosdcard" msgid="8920330112631198575">"Installer certificats cryptés depuis mémoire USB"</string>
-    <string name="credentials_install_certificates_summary" product="default" msgid="7737001268684193093">"Installer les certificats cryptés depuis la carte SD"</string>
+    <string name="credentials_install_certificates_summary" product="nosdcard" msgid="8920330112631198575">"Installer certificats chiffrés depuis mémoire USB"</string>
+    <string name="credentials_install_certificates_summary" product="default" msgid="7737001268684193093">"Installer les certificats chiffrés depuis la carte SD"</string>
     <string name="credentials_set_password" msgid="9104473585811899989">"Définir le mot de passe"</string>
     <string name="credentials_set_password_summary" msgid="8287876917562085701">"Définir/modifier le mot de passe de stockage des identifiants"</string>
     <string name="credentials_reset" msgid="9170150870552453457">"Effacer le stockage"</string>
@@ -1128,16 +1132,16 @@
     <string name="credentials_erased" msgid="7700309135582200849">"Le stockage des identifiants est effacé."</string>
     <string name="credentials_enabled" msgid="7588607413349978930">"Stockage des identifiants activé"</string>
     <string name="credentials_disabled" msgid="7453188089059045380">"Stockage des identifiants désactivé"</string>
-    <string name="encrypted_fs_category" msgid="1841367653663913956">"Système de fichiers cryptés"</string>
-    <string name="encrypted_fs_enable" msgid="3884033081603327729">"Crypter les données utilisateur privées"</string>
-    <string name="encrypted_fs_enable_summary" msgid="5635188119509076089">"Activer le stockage des données utilisateur privées dans les systèmes de fichiers cryptés de ce périphérique"</string>
-    <string name="encrypted_fs_enable_dialog" msgid="919487211207214266">"Pour activer les systèmes de fichiers cryptés, vous devez disposer d\'un outil de nettoyage des données."</string>
-    <string name="encrypted_fs_disable_dialog" msgid="6960413613985682501">"Pour désactiver des systèmes de fichiers cryptés, vous devez disposer d\'un outil de nettoyage des données."</string>
+    <string name="encrypted_fs_category" msgid="1841367653663913956">"Système de fichiers chiffrés"</string>
+    <string name="encrypted_fs_enable" msgid="3884033081603327729">"Chiffrer les données utilisateur privées"</string>
+    <string name="encrypted_fs_enable_summary" msgid="5635188119509076089">"Activer le stockage des données utilisateur privées dans les systèmes de fichiers chiffrés de ce périphérique"</string>
+    <string name="encrypted_fs_enable_dialog" msgid="919487211207214266">"Pour activer les systèmes de fichiers chiffrés, vous devez disposer d\'un outil de nettoyage des données."</string>
+    <string name="encrypted_fs_disable_dialog" msgid="6960413613985682501">"Pour désactiver des systèmes de fichiers chiffrés, vous devez disposer d\'un outil de nettoyage des données."</string>
     <string name="encrypted_fs_enable_button" msgid="8453841319751433751">"Activer"</string>
     <string name="encrypted_fs_disable_button" msgid="8468354944060220496">"Désactiver"</string>
     <string name="encrypted_fs_cancel_button" msgid="4785921255266305799">"Annuler"</string>
-    <string name="encrypted_fs_cancel_confirm" msgid="853572431153803557">"La modification apportée au mode Systèmes de fichiers cryptés a été annulée."</string>
-    <string name="encrypted_fs_alert_dialog_title" msgid="583462447886934755">"Avertissement relatif aux systèmes de fichiers cryptés"</string>
+    <string name="encrypted_fs_cancel_confirm" msgid="853572431153803557">"La modification apportée au mode Systèmes de fichiers chiffrés a été annulée."</string>
+    <string name="encrypted_fs_alert_dialog_title" msgid="583462447886934755">"Avertissement relatif aux systèmes de fichiers chiffrés"</string>
     <string name="emergency_tone_title" msgid="1055954530111587114">"Sonnerie d\'urgence"</string>
     <string name="emergency_tone_summary" msgid="722259232924572153">"Définir le comportement en cas d\'appel d\'urgence"</string>
     <string name="privacy_settings" msgid="9206631214140954954">"Confidentialité"</string>
