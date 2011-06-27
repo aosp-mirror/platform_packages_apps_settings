@@ -122,6 +122,9 @@
     <string name="bluetooth_ask_enablement_and_discovery" msgid="7220210326619399542">"Eine Anwendung auf Ihrem Telefon beantragt die Berechtigung, Bluetooth zu aktivieren und Ihr Telefon für <xliff:g id="TIMEOUT">%1$d</xliff:g> Sekunden für andere Telefone sichtbar zu machen. Möchten Sie dies tun?"</string>
     <string name="bluetooth_ask_enablement_and_lasting_discovery" msgid="7471195931669103553">"Eine Anwendung auf Ihrem Telefon beantragt die Berechtigung, Bluetooth zu aktivieren und Ihr Telefon für andere Telefone sichtbar zu machen. Möchten Sie dies tun?"</string>
     <string name="bluetooth_turning_on" msgid="3107102168379705771">"Bluetooth wird aktiviert..."</string>
+    <string name="bluetooth_connection_permission_request" msgid="4747918249032890077">"Bluetooth-Verbindungsanfrage"</string>
+    <string name="bluetooth_connection_notif_message" msgid="1833221950512058309">"Zum Herstellen einer Verbindung mit \"<xliff:g id="DEVICE_NAME">%1$s</xliff:g>\" berühren"</string>
+    <string name="bluetooth_connection_dialog_text" msgid="8455427559949998023">"Möchten Sie eine Verbindung mit \"<xliff:g id="DEVICE_NAME">%1$s</xliff:g>\" herstellen?"</string>
     <string name="date_and_time" msgid="4114084177056654663">"Einstellungen für Datum &amp; Uhrzeit"</string>
     <string name="date_time_12_hour_sample" msgid="3259617262618020574">"1:00"</string>
     <string name="date_time_24_hour_sample" msgid="8916857570746212357">"13:00"</string>
@@ -296,11 +299,11 @@
     <string name="bluetooth_device_info" msgid="6644515376523965073">"Bluetooth-Geräteinfo"</string>
     <string name="bluetooth_enter_pin_msg" msgid="856962526754150334">\n"PIN für Pairing mit \"<xliff:g id="DEVICE_NAME">%1$s</xliff:g>\" eingeben. Versuchen Sie 0000 oder 1234."</string>
     <string name="bluetooth_enter_passkey_msg" msgid="8121515818772179228">\n"Schlüssel zum Pairing mit \"<xliff:g id="DEVICE_NAME">%1$s</xliff:g>\" eingeben."</string>
-    <string name="bluetooth_confirm_passkey_msg" msgid="1205362283945104263">"Bestätigen Sie zum Paaren mit \"<xliff:g id="DEVICE_NAME">%1$s</xliff:g>\", dass es den folgenden Schlüssel anzeigt: <xliff:g id="PASSKEY">%2$s</xliff:g>."</string>
+    <string name="bluetooth_confirm_passkey_msg" msgid="1205362283945104263">"Bestätigen Sie zum Koppeln mit \"<xliff:g id="DEVICE_NAME">%1$s</xliff:g>\", dass es den folgenden Schlüssel anzeigt: <xliff:g id="PASSKEY">%2$s</xliff:g>."</string>
     <string name="bluetooth_incoming_pairing_msg" msgid="1076613564387784476">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g>"\n"möchte sich paaren."</string>
     <string name="bluetooth_display_passkey_msg" msgid="3048496029389441579">"Geben Sie zum Pairing <xliff:g id="PASSKEY">%2$s</xliff:g> in \"<xliff:g id="DEVICE_NAME">%1$s</xliff:g>\" ein."</string>
-    <string name="bluetooth_pairing_accept" msgid="6163520056536604875">"Paaren"</string>
-    <string name="bluetooth_pairing_decline" msgid="930951069988011471">"Nicht paaren"</string>
+    <string name="bluetooth_pairing_accept" msgid="6163520056536604875">"Kopplung durchführen"</string>
+    <string name="bluetooth_pairing_decline" msgid="930951069988011471">"Keine Kopplung durchführen"</string>
     <string name="bluetooth_remote_device" msgid="2406662802908395389">"Bluetooth-Gerät"</string>
     <string name="bluetooth_error_title" msgid="538287072376677166">"Achtung"</string>
     <string name="bluetooth_pairing_error_message" msgid="2852744547246910349">"Beim Pairing mit <xliff:g id="DEVICE_NAME">%1$s</xliff:g> ist ein Problem aufgetreten."</string>
@@ -311,7 +314,7 @@
     <string name="bluetooth_preference_scan_title" msgid="2277464653118896016">"Scan nach Geräten"</string>
     <string name="bluetooth_device_context_connect" msgid="3997659895003244941">"Verbinden"</string>
     <string name="bluetooth_device_context_disconnect" msgid="8220072022970148683">"Verbindung trennen"</string>
-    <string name="bluetooth_device_context_pair_connect" msgid="7611522504813927727">"Paaren und verbinden"</string>
+    <string name="bluetooth_device_context_pair_connect" msgid="7611522504813927727">"Kopplung durchführen und verbinden"</string>
     <string name="bluetooth_device_context_unpair" msgid="662992425948536144">"Pairing aufheben"</string>
     <string name="bluetooth_device_context_disconnect_unpair" msgid="7644014238070043798">"Verbindung trennen und Pairing aufheben"</string>
     <string name="bluetooth_device_context_connect_advanced" msgid="2643129703569788771">"Optionen..."</string>
@@ -521,6 +524,7 @@
     <string name="storage_settings_summary" product="default" msgid="9176693537325988610">"SD-Karte entnehmen, verfügbaren Speicher anzeigen"</string>
     <string name="status_number" msgid="5123197324870153205">"Meine Telefonnummer"</string>
     <string name="status_min_number" msgid="3519504522179420597">"MIN"</string>
+    <string name="status_msid_number" msgid="909010114445780530">"MSID"</string>
     <string name="status_prl_version" msgid="8499039751817386529">"PRL-Version"</string>
     <string name="status_meid_number" msgid="1751442889111731088">"MEID"</string>
     <string name="status_network_type" msgid="3279383550222116235">"Art des Mobilfunknetzes"</string>
@@ -717,7 +721,7 @@
     <string name="lock_example_message" msgid="1838650097090632706">"Verbinden Sie mindestens vier Punkte."\n" "\n"Wählen Sie “Weiter”, um ein eigenes Muster zu zeichnen."</string>
     <string name="manageapplications_settings_title" msgid="5712405848153426706">"Anwendungen verwalten"</string>
     <string name="manageapplications_settings_summary" msgid="6097117021500651232">"Installierte Anwendungen verwalten und entfernen"</string>
-    <string name="applications_settings" msgid="3736173521008476946">"Anwendungen"</string>
+    <string name="applications_settings" msgid="3736173521008476946">"Apps"</string>
     <string name="applications_settings_summary" msgid="2714215108369119717">"Anwendungen verwalten, Tastenkombinationen für Schnellstart"</string>
     <string name="applications_settings_header" msgid="6018266337275422250">"Anwendungen"</string>
     <string name="install_applications" msgid="4872012136210802181">"Unbekannte Herkunft"</string>
@@ -733,7 +737,7 @@
     <string name="controls_label" msgid="7611113077086853799">"Steuerung"</string>
     <string name="force_stop" msgid="7435006169872876756">"Stoppen erzwingen"</string>
     <string name="total_size_label" msgid="1048676419552557254">"Insgesamt"</string>
-    <string name="application_size_label" msgid="5055196275624686382">"Anwendung"</string>
+    <string name="application_size_label" msgid="5055196275624686382">"App"</string>
     <string name="data_size_label" msgid="8679376373625710107">"Daten"</string>
     <string name="uninstall_text" msgid="3644892466144802466">"Deinstallieren"</string>
     <string name="disable_text" msgid="6544054052049395202">"Deaktivieren"</string>
@@ -797,7 +801,7 @@
     <string name="storageuse_settings_title" msgid="5657014373502630403">"Speichernutzung"</string>
     <string name="storageuse_settings_summary" msgid="2556057379120846792">"Von Anwendungen verwendeten Speicher anzeigen"</string>
     <string name="runningservices_settings_title" msgid="8097287939865165213">"Aktive Dienste"</string>
-    <string name="runningservices_settings_summary" msgid="854608995821032748">"Derzeit ausgeführte Dienste anzeigen und steuern"</string>
+    <string name="runningservices_settings_summary" msgid="854608995821032748">"Zurzeit ausgeführte Dienste anzeigen und steuern"</string>
     <string name="service_restarting" msgid="2242747937372354306">"Neustart wird durchgeführt."</string>
     <string name="cached" msgid="1059590879740175019">"Hintergrundprozess im Cache"</string>
     <string name="no_running_services" msgid="2059536495597645347">"Nichts wird ausgeführt."</string>
@@ -822,7 +826,7 @@
     <string name="service_stop_description" msgid="3261798282116866961">"Dieser Dienst wurde von seiner Anwendung gestartet. Wird er beendet, kann die Anwendung eventuell nicht mehr ausgeführt werden."</string>
     <string name="heavy_weight_stop_description" msgid="6855241582643136019">"Diese Anwendung kann nicht sicher beendet werden. Beim Beenden könnten aktuelle Daten verloren gehen."</string>
     <string name="background_process_stop_description" msgid="1728354083304746737">"Hierbei handelt es sich um einen alten Anwendungsprozess, der zur Erzielung einer besseren Geschwindigkeit für den Fall, dass er benötigt wird, beibehalten wird. Normalerweise gibt es keinen Grund, warum er beendet werden sollte."</string>
-    <string name="service_manage_description" msgid="7050092269951613102">"<xliff:g id="CLIENT_NAME">%1$s</xliff:g>: wird derzeit verwendet. Berühren Sie zum Steuern die Einstellungen."</string>
+    <string name="service_manage_description" msgid="7050092269951613102">"<xliff:g id="CLIENT_NAME">%1$s</xliff:g>: wird zurzeit verwendet. Berühren Sie zum Steuern die Einstellungen."</string>
     <string name="main_running_process_description" msgid="929204645380391397">"Hauptprozess, der verwendet wird."</string>
     <string name="process_service_in_use_description" msgid="8993335064403217080">"Dienst <xliff:g id="COMP_NAME">%1$s</xliff:g> wird verwendet."</string>
     <string name="process_provider_in_use_description" msgid="5586603325677678940">"Anbieter <xliff:g id="COMP_NAME">%1$s</xliff:g> wird verwendet."</string>
@@ -865,7 +869,7 @@
     <string name="quick_launch_clear_dialog_message" msgid="3921015601470260722">"Die Verknüpfung für <xliff:g id="SHORTCUT_LETTER">%1$s</xliff:g> (<xliff:g id="APPLICATION_NAME">%2$s</xliff:g>) wird gelöscht."</string>
     <string name="quick_launch_clear_ok_button" msgid="2634568926597586716">"OK"</string>
     <string name="quick_launch_clear_cancel_button" msgid="1892854652197747064">"Abbrechen"</string>
-    <string name="quick_launch_display_mode_applications" msgid="3748789806447639039">"Anwendungen"</string>
+    <string name="quick_launch_display_mode_applications" msgid="3748789806447639039">"Apps"</string>
     <string name="quick_launch_display_mode_shortcuts" msgid="4177934019174169042">"Tastenkombinationen"</string>
     <string name="input_methods_settings_title" msgid="6800066636850553887">"Texteingabe"</string>
     <string name="input_methods_settings_summary" msgid="7571173442946675205">"Optionen für Texteingabe verwalten"</string>
@@ -892,7 +896,7 @@
     <string name="usage_stats_label" msgid="5890846333487083609">"Nutzungsstatistik"</string>
     <string name="testing_usage_stats" msgid="7823048598893937339">"Nutzungsstatistik"</string>
     <string name="display_order_text" msgid="8592776965827565271">"Sortieren nach:"</string>
-    <string name="app_name_label" msgid="2000949925256858308">"Anwendung"</string>
+    <string name="app_name_label" msgid="2000949925256858308">"App"</string>
     <string name="launch_count_label" msgid="4019444833263957024">"Anzahl"</string>
     <string name="usage_time_label" msgid="295954901452833058">"Nutzungszeit"</string>
     <string name="accessibility_settings" msgid="3975902491934816215">"Eingabehilfen"</string>
