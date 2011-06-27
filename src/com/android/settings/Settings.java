@@ -81,7 +81,7 @@ public class Settings extends PreferenceActivity implements ButtonBarHandler {
         super.onCreate(savedInstanceState);
         mInLocalHeaderSwitch = false;
 
-        if (isMultiPane()) {
+        if (!onIsHidingHeaders() && onIsMultiPane()) {
             highlightHeader();
             // Force the title so that it doesn't get overridden by a direct launch of
             // a specific settings screen.
@@ -193,7 +193,7 @@ public class Settings extends PreferenceActivity implements ButtonBarHandler {
 
         // If it is not launched from history, then reset to top-level
         if ((intent.getFlags() & Intent.FLAG_ACTIVITY_LAUNCHED_FROM_HISTORY) == 0
-                && mFirstHeader != null && isMultiPane()) {
+                && mFirstHeader != null && !onIsHidingHeaders() && onIsMultiPane()) {
             switchToHeaderLocal(mFirstHeader);
         }
     }
@@ -211,7 +211,9 @@ public class Settings extends PreferenceActivity implements ButtonBarHandler {
     public Intent getIntent() {
         Intent superIntent = super.getIntent();
         String startingFragment = getStartingFragmentClass(superIntent);
-        if (startingFragment != null && !isMultiPane()) {
+        // This is called from super.onCreate, isMultiPane() is not yet reliable
+        // Do not use onIsHidingHeaders either, which relies itself on this method
+        if (startingFragment != null && !onIsMultiPane()) {
             Intent modIntent = new Intent(superIntent);
             modIntent.putExtra(EXTRA_SHOW_FRAGMENT, startingFragment);
             Bundle args = superIntent.getExtras();
