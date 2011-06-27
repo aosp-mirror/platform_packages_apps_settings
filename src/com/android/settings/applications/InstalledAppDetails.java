@@ -282,7 +282,7 @@ public class InstalledAppDetails extends Fragment
                         intent.setPackage(mAppEntry.info.packageName);
                         List<ResolveInfo> homes = mPm.queryIntentActivities(intent, 0);
                         if ((homes != null && homes.size() > 0) ||
-                                (mPackageInfo != null &&
+                                (mPackageInfo != null && mPackageInfo.signatures != null &&
                                         sys.signatures[0].equals(mPackageInfo.signatures[0]))) {
                             // Disable button for core system applications.
                             mUninstallButton.setText(R.string.disable_text);
