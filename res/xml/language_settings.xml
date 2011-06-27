@@ -32,6 +32,35 @@
 
     </PreferenceCategory>
 
+    <PreferenceCategory android:key="keyboard_settings_category"
+            android:title="@string/keyboard_settings_category">
+        <PreferenceScreen android:key="current_input_method"
+                android:title="@string/current_input_method" />
+    </PreferenceCategory>
+    <PreferenceCategory
+            android:key="hard_keyboard"
+            android:title="@string/builtin_keyboard_settings_title"
+            android:persistent="false">
+        <CheckBoxPreference
+                android:key="auto_replace"
+                android:title="@string/auto_replace"
+                android:summaryOn="@string/auto_replace_summary"
+                android:summaryOff="@string/auto_replace_summary"
+                android:persistent="false"/>
+        <CheckBoxPreference
+                android:key="auto_caps"
+                android:title="@string/auto_caps"
+                android:summaryOn="@string/auto_caps_summary"
+                android:summaryOff="@string/auto_caps_summary"
+                android:persistent="false"/>
+        <CheckBoxPreference
+                android:key="auto_punctuate"
+                android:title="@string/auto_punctuate"
+                android:summaryOn="@string/auto_punctuate_summary"
+                android:summaryOff="@string/auto_punctuate_summary"
+                android:persistent="false"/>
+    </PreferenceCategory>
+
     <PreferenceCategory android:key="voice_input_category"
             android:title="@string/voice_input_category" >
 
@@ -52,24 +81,6 @@
         <PreferenceScreen android:key="tts_settings"
                 android:fragment="com.android.settings.TextToSpeechSettings"
                 android:title="@string/tts_settings_title" />
-    </PreferenceCategory>
-
-    <PreferenceCategory android:key="keyboard_settings_category"
-            android:title="@string/keyboard_settings_category">
-        <PreferenceScreen android:key="current_input_method"
-                android:title="@string/current_input_method" />
-
-        <ListPreference android:key="input_method_selector"
-                android:title="@string/input_method_selector"
-                android:persistent="true"
-                android:entryValues="@array/input_method_selector_values"
-                android:entries="@array/input_method_selector_titles"
-                android:defaultValue="@string/input_method_selector_visibility_default_value"/>
-
-        <PreferenceScreen android:key="configure_input_method"
-                android:title="@string/configure_input_method">
-                <intent android:action="android.settings.INPUT_METHOD_SETTINGS"/>
-        </PreferenceScreen>
     </PreferenceCategory>
 
     <PreferenceCategory android:key="pointer_settings_category"
