@@ -612,5 +612,39 @@
         <item>Use HDCP checking for DRM content only</item>
         <item>Always use HDCP checking</item>
     </string-array>
-</resources>
 
+    <!-- Match this with the constants in VpnProfile. --> <skip />
+    <!-- Short names for each VPN type, not really translatable. [CHAR LIMIT=20] -->
+    <string-array name="vpn_types" translatable="false">
+        <item>PPTP</item>
+        <item>L2TP/IPSec PSK</item>
+        <item>L2TP/IPSec RSA</item>
+        <item>IPSec Xauth PSK</item>
+        <item>IPSec Xauth RSA</item>
+        <item>IPSec Hybrid RSA</item>
+    </string-array>
+
+    <!-- Match this with the constants in VpnProfile. --> <skip />
+    <!-- Longer descriptions for each VPN type. [CHAR LIMIT=100] -->
+    <string-array name="vpn_types_long">
+        <item>PPTP VPN</item>
+        <item>L2TP/IPSec VPN with pre-shared keys</item>
+        <item>L2TP/IPSec VPN with certificates</item>
+        <item>IPSec VPN with pre-shared keys and Xauth authentication</item>
+        <item>IPSec VPN with certificates and Xauth authentication</item>
+        <item>IPSec VPN with certificates and hybrid authentication</item>
+    </string-array>
+
+    <!-- Match this with the constants in VpnProfile. --> <skip />
+    <!-- Status for a VPN network. [CHAR LIMIT=100] -->
+    <string-array name="vpn_states">
+        <!-- Status message when VPN is connecting. -->
+        <item>Connecting\u2026</item>
+        <!-- Status message when VPN is connected. -->
+        <item>Connected</item>
+        <!-- Status message when VPN is disconnected. -->
+        <item>Disconnected</item>
+        <!-- Status message when VPN failed to connect. -->
+        <item>Failed</item>
+    </string-array>
+</resources>
