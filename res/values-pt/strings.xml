@@ -110,7 +110,7 @@
     <string name="bluetooth_pairing" msgid="1426882272690346242">"Pareando…"</string>
     <string name="bluetooth_paired" msgid="1247541089000057726">"Pareado, mas não conectado"</string>
     <string name="bluetooth_device" msgid="6873461446424952003">"viva-voz/fone de ouvido"</string>
-    <string name="progress_scanning" msgid="3760897655335759141">"Verificando"</string>
+    <string name="progress_scanning" msgid="3760897655335759141">"Procurando"</string>
     <string name="bluetooth_notif_ticker" msgid="4726721390078512173">"Solicitação de pareamento Bluetooth"</string>
     <string name="bluetooth_notif_title" msgid="2485175521845371514">"Solicitação de pareamento"</string>
     <string name="bluetooth_notif_message" msgid="5381418499788668724">"Selecione para parear "</string>
@@ -122,6 +122,9 @@
     <string name="bluetooth_ask_enablement_and_discovery" msgid="7220210326619399542">"Um aplicativo no seu telefone está solicitando permissão para ativar o Bluetooth e tornar o seu telefone detectável por outros dispositivos por <xliff:g id="TIMEOUT">%1$d</xliff:g> segundos. Deseja fazer isso?"</string>
     <string name="bluetooth_ask_enablement_and_lasting_discovery" msgid="7471195931669103553">"Um aplicativo em seu telefone está solicitando permissão para ativar o Bluetooth e tornar o seu telefone detectável por outros dispositivos. Deseja fazer isso?"</string>
     <string name="bluetooth_turning_on" msgid="3107102168379705771">"Ativando Bluetooth…"</string>
+    <string name="bluetooth_connection_permission_request" msgid="4747918249032890077">"Solicitação de conexão Bluetooth"</string>
+    <string name="bluetooth_connection_notif_message" msgid="1833221950512058309">"Toque para conectar-se ao \"<xliff:g id="DEVICE_NAME">%1$s</xliff:g>\""</string>
+    <string name="bluetooth_connection_dialog_text" msgid="8455427559949998023">"Deseja conectar-se ao \"<xliff:g id="DEVICE_NAME">%1$s</xliff:g>\"?"</string>
     <string name="date_and_time" msgid="4114084177056654663">"Configurações de data e hora"</string>
     <string name="date_time_12_hour_sample" msgid="3259617262618020574">"1:00 pm"</string>
     <string name="date_time_24_hour_sample" msgid="8916857570746212357">"13:00"</string>
@@ -411,7 +414,7 @@
     <string name="wifi_tether_settings_subtext" msgid="8064755682383367008">"Configurar e gerenciar ponto de acesso Wi-Fi portátil"</string>
     <string name="wifi_tether_settings_title" msgid="3749063216348284432">"Configurações do ponto de acesso Wi-Fi portátil"</string>
     <string name="wifi_tether_configure_ap_text" msgid="3474995108398156258">"Configurar ponto de acesso Wi-Fi"</string>
-    <string name="wifi_tether_configure_subtext" msgid="1927454307836232128">"ponto de acesso Wi-Fi portátil <xliff:g id="NETWORK_SSID">%1$s</xliff:g> <xliff:g id="NETWORK_SECURITY">%2$s</xliff:g>"</string>
+    <string name="wifi_tether_configure_subtext" msgid="1927454307836232128">"Ponto de acesso Wi-Fi portátil <xliff:g id="NETWORK_SSID">%1$s</xliff:g> <xliff:g id="NETWORK_SECURITY">%2$s</xliff:g>"</string>
     <string name="wifi_tether_configure_ssid_default" msgid="8467525402622138547">"Ponto de acesso Android"</string>
     <string name="sound_settings_title" msgid="8735891486683305886">"Som"</string>
     <string name="display_settings_title" msgid="1708697328627382561">"Tela"</string>
@@ -447,8 +450,8 @@
     <string name="sound_effects_enable_summary_on" msgid="6154141289879491329">"Reproduzir som ao fazer uma seleção de tela"</string>
     <string name="sound_effects_enable_summary_off" msgid="3447739581759560125">"Reproduzir som ao fazer uma seleção de tela"</string>
     <string name="lock_sounds_enable_title" msgid="1575990840389107141">"Sons de bloqueio de tela"</string>
-    <string name="lock_sounds_enable_summary_on" msgid="145741024028391473">"Reproduzir sons ao bloquear e desbloquear a tela."</string>
-    <string name="lock_sounds_enable_summary_off" msgid="8481243116223542804">"Reproduzir sons ao bloquear e desbloquear a tela."</string>
+    <string name="lock_sounds_enable_summary_on" msgid="145741024028391473">"Reproduzir sons ao bloquear e desbloquear a tela"</string>
+    <string name="lock_sounds_enable_summary_off" msgid="8481243116223542804">"Reproduzir sons ao bloquear e desbloquear a tela"</string>
     <string name="haptic_feedback_enable_title" msgid="6311736559245411290">"Retorno com vibração"</string>
     <string name="haptic_feedback_enable_summary_on" msgid="1875779656524793053">"Vibrar ao pressionar teclas e em algumas interações com a interface"</string>
     <string name="haptic_feedback_enable_summary_off" msgid="7287885436963105314">"Vibrar ao pressionar teclas e em algumas interações com a interface de usuário"</string>
@@ -521,6 +524,7 @@
     <string name="storage_settings_summary" product="default" msgid="9176693537325988610">"Desmontar o cartão SD, visualizar armazenamento disponível"</string>
     <string name="status_number" msgid="5123197324870153205">"Meu número de telefone"</string>
     <string name="status_min_number" msgid="3519504522179420597">"MIN"</string>
+    <string name="status_msid_number" msgid="909010114445780530">"MSID"</string>
     <string name="status_prl_version" msgid="8499039751817386529">"Versão PRL"</string>
     <string name="status_meid_number" msgid="1751442889111731088">"MEID"</string>
     <string name="status_network_type" msgid="3279383550222116235">"Tipo de rede móvel"</string>
@@ -984,13 +988,13 @@
     <string name="recognizer_title" msgid="3231385184559054457">"Reconhecedor de voz"</string>
     <string name="recognizer_settings_title" msgid="6038598099039717232">"Config. do reconhecedor de voz"</string>
     <string name="recognizer_settings_summary" msgid="4472287934134546902">"Configurações para \'<xliff:g id="RECOGNIZER_NAME">%s</xliff:g>\'"</string>
-    <string name="tts_settings" msgid="8186971894801348327">"Configurações da Conversão de texto em voz"</string>
-    <string name="tts_settings_title" msgid="4182348653053000933">"Configurações da Conversão de texto em voz"</string>
+    <string name="tts_settings" msgid="8186971894801348327">"Configurações da conversão de texto em voz"</string>
+    <string name="tts_settings_title" msgid="4182348653053000933">"Configurações da conversão de texto em voz"</string>
     <string name="use_default_tts_settings_title" msgid="1577063839539732930">"Usar minhas config."</string>
     <string name="use_default_tts_settings_summary" msgid="4253502106159206276">"As conf. padrão abaixo substituem as conf. do aplicativo"</string>
     <string name="tts_default_settings_section" msgid="5787915620218907443">"Configurações padrão"</string>
     <string name="tts_default_synth_title" msgid="29467896463371992">"Mecanismo padrão"</string>
-    <string name="tts_default_synth_summary" msgid="6482936537135251690">"Define o mecanismo de síntese de fala a ser usado para texto falado."</string>
+    <string name="tts_default_synth_summary" msgid="6482936537135251690">"Define o mecanismo de síntese de fala a ser usado para texto falado"</string>
     <string name="tts_default_rate_title" msgid="6030550998379310088">"Taxa de fala"</string>
     <string name="tts_default_rate_summary" msgid="4061815292287182801">"Velocidade em que o texto é falado"</string>
     <string name="tts_default_pitch_title" msgid="6135942113172488671">"Frequência do som"</string>
