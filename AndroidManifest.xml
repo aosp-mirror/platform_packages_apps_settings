@@ -125,10 +125,6 @@
                 android:value="com.android.settings.wifi.WifiSettings" />
             <meta-data android:name="com.android.settings.TOP_LEVEL_HEADER_ID"
                 android:resource="@id/wireless_settings" />
-            <meta-data android:name="com.android.settings.PARENT_FRAGMENT_TITLE"
-                android:resource="@string/wireless_networks_settings_title" />
-            <meta-data android:name="com.android.settings.PARENT_FRAGMENT_CLASS"
-                android:value="com.android.settings.Settings$WirelessSettingsActivity" />
         </activity>
 
         <activity android:name=".wifi.WifiPickerActivity"
@@ -233,10 +229,6 @@
                 android:value="com.android.settings.bluetooth.BluetoothSettings" />
             <meta-data android:name="com.android.settings.TOP_LEVEL_HEADER_ID"
                 android:resource="@id/wireless_settings" />
-            <meta-data android:name="com.android.settings.PARENT_FRAGMENT_TITLE"
-                android:resource="@string/wireless_networks_settings_title" />
-            <meta-data android:name="com.android.settings.PARENT_FRAGMENT_CLASS"
-                android:value="com.android.settings.Settings$WirelessSettingsActivity" />
         </activity>
 
         <activity-alias android:name=".bluetooth.AdvancedBluetoothSettings"
@@ -873,10 +865,6 @@
                 android:value="com.android.settings.DevelopmentSettings" />
             <meta-data android:name="com.android.settings.TOP_LEVEL_HEADER_ID"
                 android:resource="@id/application_settings" />
-            <meta-data android:name="com.android.settings.PARENT_FRAGMENT_TITLE"
-                android:resource="@string/applications_settings_header" />
-            <meta-data android:name="com.android.settings.PARENT_FRAGMENT_CLASS"
-                android:value="com.android.settings.Settings$ApplicationSettingsActivity" />
         </activity>
 
         <activity-alias android:name="DevelopmentSettings"
@@ -894,10 +882,6 @@
                 android:value="com.android.settings.DevelopmentSettings" />
             <meta-data android:name="com.android.settings.TOP_LEVEL_HEADER_ID"
                 android:resource="@id/application_settings" />
-            <meta-data android:name="com.android.settings.PARENT_FRAGMENT_TITLE"
-                android:resource="@string/applications_settings_header" />
-            <meta-data android:name="com.android.settings.PARENT_FRAGMENT_CLASS"
-                android:value="com.android.settings.Settings$ApplicationSettingsActivity" />
         </activity-alias>
 
 

@@ -253,11 +253,16 @@ public class WifiSettings extends SettingsPreferenceFragment
         if (!mInXlSetupWizard) {
             final boolean wifiIsEnabled = mWifiManager.isWifiEnabled();
             menu.add(Menu.NONE, MENU_ID_SCAN, 0, R.string.wifi_menu_scan)
-                    .setIcon(R.drawable.ic_menu_scan_network).setEnabled(wifiIsEnabled);
+                    //.setIcon(R.drawable.ic_menu_scan_network)
+                    .setEnabled(wifiIsEnabled)
+                    .setShowAsAction(MenuItem.SHOW_AS_ACTION_IF_ROOM);
             menu.add(Menu.NONE, MENU_ID_ADD_NETWORK, 0, R.string.wifi_add_network)
-                    .setIcon(android.R.drawable.ic_menu_add).setEnabled(wifiIsEnabled);
+                    //.setIcon(android.R.drawable.ic_menu_add)
+                    .setEnabled(wifiIsEnabled)
+                    .setShowAsAction(MenuItem.SHOW_AS_ACTION_IF_ROOM);
             menu.add(Menu.NONE, MENU_ID_ADVANCED, 0, R.string.wifi_menu_advanced)
-                    .setIcon(android.R.drawable.ic_menu_manage);
+                    //.setIcon(android.R.drawable.ic_menu_manage)
+                    .setShowAsAction(MenuItem.SHOW_AS_ACTION_IF_ROOM);
         }
         super.onCreateOptionsMenu(menu, inflater);
     }

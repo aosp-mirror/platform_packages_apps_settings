@@ -76,12 +76,13 @@ public class Settings extends PreferenceActivity implements ButtonBarHandler {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        setTheme(android.R.style.Theme_Holo_SplitActionBarWhenNarrow);
         getMetaData();
         mInLocalHeaderSwitch = true;
         super.onCreate(savedInstanceState);
         mInLocalHeaderSwitch = false;
 
-        if (isMultiPane()) {
+        if (!onIsHidingHeaders() && onIsMultiPane()) {
             highlightHeader();
             // Force the title so that it doesn't get overridden by a direct launch of
             // a specific settings screen.
@@ -107,6 +108,10 @@ public class Settings extends PreferenceActivity implements ButtonBarHandler {
                 }
             });
         }
+
+        // TODO Add support for android.R.id.home in all Setting's onOptionsItemSelected
+        // getActionBar().setDisplayOptions(ActionBar.DISPLAY_HOME_AS_UP,
+        // ActionBar.DISPLAY_HOME_AS_UP);
     }
 
     @Override
@@ -193,7 +198,7 @@ public class Settings extends PreferenceActivity implements ButtonBarHandler {
 
         // If it is not launched from history, then reset to top-level
         if ((intent.getFlags() & Intent.FLAG_ACTIVITY_LAUNCHED_FROM_HISTORY) == 0
-                && mFirstHeader != null && isMultiPane()) {
+                && mFirstHeader != null && !onIsHidingHeaders() && onIsMultiPane()) {
             switchToHeaderLocal(mFirstHeader);
         }
     }
