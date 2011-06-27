@@ -482,8 +482,10 @@ public class InstalledAppDetails extends Fragment
         ActivityManager am = (ActivityManager)
                 getActivity().getSystemService(Context.ACTIVITY_SERVICE);
         int compatMode = am.getPackageScreenCompatMode(packageName);
-        if (compatMode == ActivityManager.COMPAT_MODE_DISABLED
-                || compatMode == ActivityManager.COMPAT_MODE_ENABLED) {
+        // For now these are always off; this is the old UI model which we
+        // are no longer using.
+        if (false && (compatMode == ActivityManager.COMPAT_MODE_DISABLED
+                || compatMode == ActivityManager.COMPAT_MODE_ENABLED)) {
             mScreenCompatSection.setVisibility(View.VISIBLE);
             mAskCompatibilityCB.setChecked(am.getPackageAskScreenCompat(packageName));
             mAskCompatibilityCB.setOnCheckedChangeListener(this);
