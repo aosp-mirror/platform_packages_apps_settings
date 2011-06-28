@@ -40,9 +40,8 @@ import com.android.settings.R;
 public final class BluetoothSettings extends DeviceListPreferenceFragment {
     private static final String TAG = "BluetoothSettings";
 
-    private static final int MENU_ID_MAKE_DISCOVERABLE = Menu.FIRST;
-    private static final int MENU_ID_SCAN = Menu.FIRST + 1;
-    private static final int MENU_ID_ADVANCED = Menu.FIRST + 2;
+    private static final int MENU_ID_SCAN = Menu.FIRST;
+    private static final int MENU_ID_ADVANCED = Menu.FIRST + 1;
 
     private BluetoothEnabler mBluetoothEnabler;
 
@@ -80,8 +79,6 @@ public final class BluetoothSettings extends DeviceListPreferenceFragment {
             activity.getActionBar().setSubtitle(mLocalAdapter.getName());
         }
 
-        // TODO activity.setTheme(android.R.style.Theme_Holo_SplitActionBarWhenNarrow);
-
         setHasOptionsMenu(true);
     }
 
@@ -104,23 +101,22 @@ public final class BluetoothSettings extends DeviceListPreferenceFragment {
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         boolean bluetoothIsEnabled = mLocalAdapter.getBluetoothState() == BluetoothAdapter.STATE_ON;
-        menu.add(Menu.NONE, MENU_ID_MAKE_DISCOVERABLE, 0, R.string.bluetooth_visibility)
-                .setEnabled(bluetoothIsEnabled);
         menu.add(Menu.NONE, MENU_ID_SCAN, 0, R.string.bluetooth_preference_find_nearby_title)
-                .setIcon(R.drawable.ic_menu_scan_network).setEnabled(bluetoothIsEnabled);
+                //.setIcon(R.drawable.ic_menu_scan_network)
+                .setEnabled(bluetoothIsEnabled)
+                .setShowAsAction(MenuItem.SHOW_AS_ACTION_IF_ROOM);
         menu.add(Menu.NONE, MENU_ID_ADVANCED, 0, R.string.bluetooth_menu_advanced)
-                .setIcon(android.R.drawable.ic_menu_manage);
+                //.setIcon(android.R.drawable.ic_menu_manage)
+                .setShowAsAction(MenuItem.SHOW_AS_ACTION_IF_ROOM);
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
-            case MENU_ID_MAKE_DISCOVERABLE:
                 // TODO
 //                if (mLocalAdapter.getBluetoothState() == BluetoothAdapter.STATE_ON) {
 //                    onAddNetworkPressed();
 //                }
-                return true;
             case MENU_ID_SCAN:
                 if (mLocalAdapter.getBluetoothState() == BluetoothAdapter.STATE_ON) {
                     mLocalAdapter.startScanning(true);

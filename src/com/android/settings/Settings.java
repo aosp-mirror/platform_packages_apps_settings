@@ -76,6 +76,7 @@ public class Settings extends PreferenceActivity implements ButtonBarHandler {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        setTheme(android.R.style.Theme_Holo_SplitActionBarWhenNarrow);
         getMetaData();
         mInLocalHeaderSwitch = true;
         super.onCreate(savedInstanceState);
@@ -107,6 +108,10 @@ public class Settings extends PreferenceActivity implements ButtonBarHandler {
                 }
             });
         }
+
+        // TODO Add support for android.R.id.home in all Setting's onOptionsItemSelected
+        // getActionBar().setDisplayOptions(ActionBar.DISPLAY_HOME_AS_UP,
+        // ActionBar.DISPLAY_HOME_AS_UP);
     }
 
     @Override
