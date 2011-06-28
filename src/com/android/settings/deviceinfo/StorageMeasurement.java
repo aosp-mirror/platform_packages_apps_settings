@@ -88,6 +88,7 @@ public class StorageMeasurement {
 
     private static Map<StorageVolume, StorageMeasurement> sInstances =
         new ConcurrentHashMap<StorageVolume, StorageMeasurement>();
+    private static StorageMeasurement sInternalInstance;
 
     private volatile WeakReference<MeasurementReceiver> mReceiver;
 
@@ -100,6 +101,7 @@ public class StorageMeasurement {
 
     final private StorageVolume mStorageVolume;
     final private boolean mIsPrimary;
+    final private boolean mIsInternal;
 
     List<FileInfo> mFileInfoForMisc;
 
@@ -110,7 +112,8 @@ public class StorageMeasurement {
 
     private StorageMeasurement(Context context, StorageVolume storageVolume, boolean isPrimary) {
         mStorageVolume = storageVolume;
-        mIsPrimary = isPrimary;
+        mIsInternal = storageVolume == null;
+        mIsPrimary = !mIsInternal && isPrimary;
 
         // Start the thread that will measure the disk usage.
         final HandlerThread handlerThread = new HandlerThread("MemoryMeasurement");
@@ -126,6 +129,13 @@ public class StorageMeasurement {
      */
     public static StorageMeasurement getInstance(Context context, StorageVolume storageVolume,
             boolean isPrimary) {
+        if (storageVolume == null) {
+            if (sInternalInstance == null) {
+                sInternalInstance =
+                    new StorageMeasurement(context.getApplicationContext(), storageVolume, isPrimary);
+            }
+            return sInternalInstance;
+        }
         if (sInstances.containsKey(storageVolume)) {
             return sInstances.get(storageVolume);
         } else {
@@ -317,9 +327,18 @@ public class StorageMeasurement {
                 }
 
                 if (succeeded) {
-                    mAppsSizeForThisStatsObserver += stats.codeSize + stats.dataSize +
-                    stats.externalCacheSize + stats.externalDataSize +
-                    stats.externalMediaSize + stats.externalObbSize;
+                    if (mIsInternal) {
+                        mAppsSizeForThisStatsObserver += stats.codeSize + stats.dataSize;
+                    } else if (!Environment.isExternalStorageEmulated()) {
+                        mAppsSizeForThisStatsObserver += stats.externalObbSize +
+                                stats.externalCodeSize + stats.externalDataSize +
+                                stats.externalCacheSize + stats.externalMediaSize;
+                    } else {
+                        mAppsSizeForThisStatsObserver += stats.codeSize + stats.dataSize +
+                                stats.externalCodeSize + stats.externalDataSize +
+                                stats.externalCacheSize + stats.externalMediaSize +
+                                stats.externalObbSize;
+                    }
                 }
 
                 synchronized (mAppsList) {
@@ -349,7 +368,8 @@ public class StorageMeasurement {
         }
 
         private void measureApproximateStorage() {
-            final StatFs stat = new StatFs(mStorageVolume.getPath());
+            final StatFs stat = new StatFs(mStorageVolume != null
+                    ? mStorageVolume.getPath() : Environment.getDataDirectory().getPath());
             final long blockSize = stat.getBlockSize();
             final long totalBlocks = stat.getBlockCount();
             final long availableBlocks = stat.getAvailableBlocks();
@@ -434,7 +454,7 @@ public class StorageMeasurement {
                 return;
             }
             final List<ApplicationInfo> apps;
-            if (mIsPrimary) {
+            if (mIsPrimary || mIsInternal) {
                 apps = pm.getInstalledApplications(PackageManager.GET_UNINSTALLED_PACKAGES |
                         PackageManager.GET_DISABLED_COMPONENTS);
             } else {

@@ -162,12 +162,13 @@ public class StorageVolumePreferenceCategory extends PreferenceCategory implemen
         mResources = resources;
         mStorageVolume = storageVolume;
         mStorageManager = storageManager;
-        setTitle(storageVolume.getDescription());
+        setTitle(storageVolume != null ? storageVolume.getDescription()
+                : resources.getText(R.string.internal_storage));
         mMeasurement = StorageMeasurement.getInstance(context, storageVolume, isPrimary);
         mMeasurement.setReceiver(this);
 
         // Cannot format emulated storage
-        mAllowFormat = !mStorageVolume.isEmulated();
+        mAllowFormat = mStorageVolume != null && !mStorageVolume.isEmulated();
         // For now we are disabling reformatting secondary external storage
         // until some interoperability problems with MTP are fixed
         if (!isPrimary) mAllowFormat = false;
@@ -240,7 +241,9 @@ public class StorageVolumePreferenceCategory extends PreferenceCategory implemen
     private void updatePreferencesFromState() {
         resetPreferences();
 
-        String state = mStorageManager.getVolumeState(mStorageVolume.getPath());
+        String state = mStorageVolume != null
+                ? mStorageManager.getVolumeState(mStorageVolume.getPath())
+                : Environment.MEDIA_MOUNTED;
 
         String readOnly = "";
         if (Environment.MEDIA_MOUNTED_READ_ONLY.equals(state)) {
@@ -255,7 +258,8 @@ public class StorageVolumePreferenceCategory extends PreferenceCategory implemen
             removePreference(mFormatPreference);
         }
 
-        if (!mStorageVolume.isRemovable() && !Environment.MEDIA_UNMOUNTED.equals(state)) {
+        if ((mStorageVolume == null || !mStorageVolume.isRemovable())
+                && !Environment.MEDIA_UNMOUNTED.equals(state)) {
             // This device has built-in storage that is not removable.
             // There is no reason for the user to unmount it.
             removePreference(mMountTogglePreference);
