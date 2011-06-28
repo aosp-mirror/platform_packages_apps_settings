@@ -211,7 +211,9 @@ public class Settings extends PreferenceActivity implements ButtonBarHandler {
     public Intent getIntent() {
         Intent superIntent = super.getIntent();
         String startingFragment = getStartingFragmentClass(superIntent);
-        if (startingFragment != null && !isMultiPane()) {
+        // This is called from super.onCreate, isMultiPane() is not yet reliable
+        // Do not use onIsHidingHeaders either, which relies itself on this method
+        if (startingFragment != null && !onIsMultiPane()) {
             Intent modIntent = new Intent(superIntent);
             modIntent.putExtra(EXTRA_SHOW_FRAGMENT, startingFragment);
             Bundle args = superIntent.getExtras();
