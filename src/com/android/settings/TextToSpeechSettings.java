@@ -26,15 +26,12 @@ import static android.provider.Settings.Secure.TTS_USE_DEFAULTS;
 import android.app.AlertDialog;
 import android.content.ActivityNotFoundException;
 import android.content.ContentResolver;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.preference.ListPreference;
 import android.preference.Preference;
 import android.preference.Preference.OnPreferenceClickListener;
-import android.preference.PreferenceGroup;
 import android.provider.Settings;
 import android.provider.Settings.SettingNotFoundException;
 import android.speech.tts.TextToSpeech;
@@ -695,13 +692,16 @@ public class TextToSpeechSettings extends SettingsPreferenceFragment implements
         mTts = new TextToSpeech(getActivity().getApplicationContext(), this, engine);
         mEnableDemo = false;
         mVoicesMissing = false;
-        updateWidgetState();
-        checkVoiceData();
 
-        // Finally, persist this value to settings.
+        // Persist this value to settings and update the UI before we check
+        // voice data because if the TTS class connected without any exception, "engine"
+        // will be the default engine irrespective of whether the voice check
+        // passes or not.
         Settings.Secure.putString(getContentResolver(), TTS_DEFAULT_SYNTH, engine);
-        // .. and update the UI.
         mDefaultSynthPref.setValue(engine);
+        updateWidgetState();
+
+        checkVoiceData();
 
         Log.v(TAG, "The default synth is now: " + engine);
     }
