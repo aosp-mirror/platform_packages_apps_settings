@@ -43,6 +43,7 @@ public class AdvancedSettings extends SettingsPreferenceFragment
     private static final String KEY_FREQUENCY_BAND = "frequency_band";
     private static final String KEY_NOTIFY_OPEN_NETWORKS = "notify_open_networks";
     private static final String KEY_SLEEP_POLICY = "sleep_policy";
+    private static final String KEY_ENABLE_WIFI_WATCHDOG = "wifi_enable_watchdog_service";
 
     private WifiManager mWifiManager;
 
@@ -71,6 +72,13 @@ public class AdvancedSettings extends SettingsPreferenceFragment
         notifyOpenNetworks.setChecked(Secure.getInt(getContentResolver(),
                 Secure.WIFI_NETWORKS_AVAILABLE_NOTIFICATION_ON, 0) == 1);
         notifyOpenNetworks.setEnabled(mWifiManager.isWifiEnabled());
+
+        CheckBoxPreference watchdogEnabled =
+                (CheckBoxPreference) findPreference(KEY_ENABLE_WIFI_WATCHDOG);
+        watchdogEnabled.setChecked(Secure.getInt(getContentResolver(),
+                Secure.WIFI_WATCHDOG_ON, 1) == 1);
+
+        watchdogEnabled.setEnabled(mWifiManager.isWifiEnabled());
 
         ListPreference frequencyPref = (ListPreference) findPreference(KEY_FREQUENCY_BAND);
 
@@ -111,12 +119,17 @@ public class AdvancedSettings extends SettingsPreferenceFragment
             Secure.putInt(getContentResolver(),
                     Secure.WIFI_NETWORKS_AVAILABLE_NOTIFICATION_ON,
                     ((CheckBoxPreference) preference).isChecked() ? 1 : 0);
+        } else if (KEY_ENABLE_WIFI_WATCHDOG.equals(key)) {
+            Secure.putInt(getContentResolver(),
+                    Secure.WIFI_WATCHDOG_ON,
+                    ((CheckBoxPreference) preference).isChecked() ? 1 : 0);
         } else {
             return super.onPreferenceTreeClick(screen, preference);
         }
         return true;
     }
 
+    @Override
     public boolean onPreferenceChange(Preference preference, Object newValue) {
         String key = preference.getKey();
 

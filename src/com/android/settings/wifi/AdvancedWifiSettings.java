@@ -76,6 +76,7 @@ public class AdvancedWifiSettings extends SettingsPreferenceFragment
         }
     }
 
+    @Override
     public boolean onPreferenceChange(Preference preference, Object newValue) {
         String key = preference.getKey();
         if (key == null) return true;
