@@ -23,7 +23,6 @@ import android.view.View;
 public class ProgressCategory extends ProgressCategoryBase {
 
     private boolean mProgress = false;
-    private View oldView = null;
 
     public ProgressCategory(Context context, AttributeSet attrs) {
         super(context, attrs);
@@ -39,13 +38,6 @@ public class ProgressCategory extends ProgressCategoryBase {
         final int visibility = mProgress ? View.VISIBLE : View.INVISIBLE;
         textView.setVisibility(visibility);
         progressBar.setVisibility(visibility);
-
-        if (oldView != null) {
-            oldView.findViewById(R.id.scanning_progress).setVisibility(View.GONE);
-            oldView.findViewById(R.id.scanning_text).setVisibility(View.GONE);
-            oldView.setVisibility(View.GONE);
-        }
-        oldView = view;
     }
 
     @Override

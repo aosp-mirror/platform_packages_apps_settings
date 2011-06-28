@@ -62,7 +62,7 @@ public abstract class DeviceListPreferenceFragment extends
         mFilter = BluetoothDeviceFilter.ALL_FILTER;
     }
 
-    DeviceListPreferenceFragment(BluetoothDeviceFilter.Filter filter) {
+    final void setFilter(BluetoothDeviceFilter.Filter filter) {
         mFilter = filter;
     }
 
@@ -84,14 +84,10 @@ public abstract class DeviceListPreferenceFragment extends
         addPreferencesForActivity();
 
         mDeviceListGroup = (PreferenceCategory) findPreference(KEY_BT_DEVICE_LIST);
-        if (mDeviceListGroup == null) {
-            // If null, device preferences are added directly to the root of the preference screen
-            mDeviceListGroup = getPreferenceScreen();
-            mDeviceListGroup.setOrderingAsAdded(false);
-        }
-        if (mDeviceListGroup == null) {
-            Log.e(TAG, "Could not find device list preference object!");
-        }
+    }
+
+    void setDeviceListGroup(PreferenceGroup preferenceGroup) {
+        mDeviceListGroup = preferenceGroup;
     }
 
     /** Add preferences from the subclass. */
@@ -121,7 +117,7 @@ public abstract class DeviceListPreferenceFragment extends
         mDeviceListGroup.removeAll();
     }
 
-    void addDevices() {
+    void addCachedDevices() {
         Collection<CachedBluetoothDevice> cachedDevices =
                 mLocalManager.getCachedDeviceManager().getCachedDevicesCopy();
         for (CachedBluetoothDevice cachedDevice : cachedDevices) {
@@ -159,7 +155,7 @@ public abstract class DeviceListPreferenceFragment extends
             return;
         }
 
-        // No update while list shows state message
+        // Prevent updates while the list shows one of the state messages
         if (mLocalAdapter.getBluetoothState() != BluetoothAdapter.STATE_ON) return;
 
         if (mFilter.matches(cachedDevice.getDevice())) {
@@ -199,7 +195,6 @@ public abstract class DeviceListPreferenceFragment extends
         if (mDeviceListGroup instanceof ProgressCategory) {
             ((ProgressCategory) mDeviceListGroup).setProgress(start);
         }
-        // else TODO Add a spinner at the end of the list to show in progress state
     }
 
     public void onBluetoothStateChanged(int bluetoothState) {

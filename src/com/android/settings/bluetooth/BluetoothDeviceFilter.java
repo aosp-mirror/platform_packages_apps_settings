@@ -42,6 +42,9 @@ final class BluetoothDeviceFilter {
     /** Bonded devices only filter (referenced directly). */
     static final Filter BONDED_DEVICE_FILTER = new BondedDeviceFilter();
 
+    /** Unbonded devices only filter (referenced directly). */
+    static final Filter UNBONDED_DEVICE_FILTER = new UnbondedDeviceFilter();
+
     /** Table of singleton filter objects. */
     private static final Filter[] FILTERS = {
             ALL_FILTER,             // FILTER_TYPE_ALL
@@ -82,6 +85,13 @@ final class BluetoothDeviceFilter {
     private static final class BondedDeviceFilter implements Filter {
         public boolean matches(BluetoothDevice device) {
             return device.getBondState() == BluetoothDevice.BOND_BONDED;
+        }
+    }
+
+    /** Filter that matches only unbonded devices. */
+    private static final class UnbondedDeviceFilter implements Filter {
+        public boolean matches(BluetoothDevice device) {
+            return device.getBondState() != BluetoothDevice.BOND_BONDED;
         }
     }
 
