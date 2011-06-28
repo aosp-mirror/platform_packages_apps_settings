@@ -42,17 +42,6 @@
         android:title="@string/data_usage_summary_title"
         android:icon="@drawable/ic_settings_data_usage" />
 
-    <!-- Call settings - this is in the phone process -->
-    <header
-        android:id="@+id/call_settings"
-        android:icon="@drawable/ic_settings_call"
-        android:title="@string/call_settings_title">
-        <intent
-            android:action="android.intent.action.MAIN"
-            android:targetPackage="com.android.phone"
-            android:targetClass="com.android.phone.CallFeaturesSetting" />
-    </header>
-
     <!-- Operator hook -->
     <header
         android:fragment="com.android.settings.WirelessSettings"
