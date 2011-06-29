@@ -49,8 +49,6 @@ public final class BluetoothDevicePreference extends Preference implements
 
     private final CachedBluetoothDevice mCachedDevice;
 
-    private ImageView mDeviceSettings;
-
     private OnClickListener mOnSettingsClickListener;
 
     private AlertDialog mDisconnectDialog;
@@ -121,13 +119,13 @@ public final class BluetoothDevicePreference extends Preference implements
         btClass.setImageResource(getBtClassDrawable());
         btClass.setAlpha(isEnabled() ? 255 : sDimAlpha);
         btClass.setVisibility(View.VISIBLE);
-        mDeviceSettings = (ImageView) view.findViewById(R.id.deviceDetails);
+        ImageView deviceDetails = (ImageView) view.findViewById(R.id.deviceDetails);
         if (mOnSettingsClickListener != null) {
-            mDeviceSettings.setOnClickListener(this);
-            mDeviceSettings.setTag(mCachedDevice);
-            mDeviceSettings.setAlpha(isEnabled() ? 255 : sDimAlpha);
+            deviceDetails.setOnClickListener(this);
+            deviceDetails.setTag(mCachedDevice);
+            deviceDetails.setAlpha(isEnabled() ? 255 : sDimAlpha);
         } else { // Hide the settings icon and divider
-            mDeviceSettings.setVisibility(View.GONE);
+            deviceDetails.setVisibility(View.GONE);
             View divider = view.findViewById(R.id.divider);
             if (divider != null) {
                 divider.setVisibility(View.GONE);
@@ -152,13 +150,13 @@ public final class BluetoothDevicePreference extends Preference implements
     }
 
     public void onClick(View v) {
-        if (v == mDeviceSettings) {
-            if (mOnSettingsClickListener != null) {
-                mOnSettingsClickListener.onClick(v);
-            }
+        // Should never be null by construction
+        if (mOnSettingsClickListener != null) {
+            mOnSettingsClickListener.onClick(v);
         }
     }
 
+    @Override
     public boolean equals(Object o) {
         if ((o == null) || !(o instanceof BluetoothDevicePreference)) {
             return false;
@@ -167,6 +165,7 @@ public final class BluetoothDevicePreference extends Preference implements
                 ((BluetoothDevicePreference) o).mCachedDevice);
     }
 
+    @Override
     public int hashCode() {
         return mCachedDevice.hashCode();
     }
@@ -174,8 +173,8 @@ public final class BluetoothDevicePreference extends Preference implements
     @Override
     public int compareTo(Preference another) {
         if (!(another instanceof BluetoothDevicePreference)) {
-            // Put other preference types above us
-            return 1;
+            // Rely on default sort
+            return super.compareTo(another);
         }
 
         return mCachedDevice

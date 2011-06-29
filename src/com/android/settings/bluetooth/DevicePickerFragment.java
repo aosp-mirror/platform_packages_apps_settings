@@ -55,7 +55,7 @@ public final class DevicePickerFragment extends DeviceListPreferenceFragment {
     @Override
     public void onResume() {
         super.onResume();
-        addDevices();
+        addCachedDevices();
         mLocalAdapter.startScanning(true);
     }
 
