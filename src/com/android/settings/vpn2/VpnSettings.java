@@ -20,9 +20,11 @@ import com.android.settings.R;
 
 import android.content.Context;
 import android.content.DialogInterface;
+import android.net.IConnectivityManager;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.os.ServiceManager;
 import android.preference.Preference;
 import android.preference.PreferenceGroup;
 import android.security.Credentials;
@@ -57,8 +59,11 @@ public class VpnSettings extends SettingsPreferenceFragment implements
 
     private HashMap<String, VpnPreference> mPreferences;
     private VpnDialog mDialog;
+
+    private Handler mUpdater;
+
+    // The key of the profile for the current ContextMenu.
     private String mSelectedKey;
-    private Handler mHandler;
 
     @Override
     public void onCreate(Bundle savedState) {
@@ -145,10 +150,10 @@ public class VpnSettings extends SettingsPreferenceFragment implements
         }
 
         // Start monitoring.
-        if (mHandler == null) {
-            mHandler = new Handler(this);
+        if (mUpdater == null) {
+            mUpdater = new Handler(this);
         }
-        mHandler.sendEmptyMessage(0);
+        mUpdater.sendEmptyMessage(0);
 
         // Register for context menu. Hmmm, getListView() is hidden?
         registerForContextMenu(getListView());
@@ -194,7 +199,7 @@ public class VpnSettings extends SettingsPreferenceFragment implements
 
             // If we are not editing, connect!
             if (!mDialog.isEditing()) {
-                connect(profile.key);
+                connect(profile);
             }
         }
     }
@@ -274,19 +279,74 @@ public class VpnSettings extends SettingsPreferenceFragment implements
 
     @Override
     public boolean handleMessage(Message message) {
-        mHandler.removeMessages(0);
+        mUpdater.removeMessages(0);
 
         if (isResumed()) {
 
 
 
 
-            mHandler.sendEmptyMessageDelayed(0, 1000);
+            mUpdater.sendEmptyMessageDelayed(0, 1000);
         }
         return true;
     }
 
-    private void connect(String key) {
+    private static IConnectivityManager getService() {
+        return IConnectivityManager.Stub.asInterface(
+                ServiceManager.getService(Context.CONNECTIVITY_SERVICE));
+    }
+
+    private void connect(VpnProfile profile) {
+        String[] racoon = null;
+        switch (profile.type) {
+            case VpnProfile.TYPE_L2TP_IPSEC_PSK:
+                racoon = new String[] {
+                    profile.server, "1701", profile.ipsecSecret,
+                };
+                break;
+            case VpnProfile.TYPE_L2TP_IPSEC_RSA:
+                racoon = new String[] {
+                    profile.server, "1701",
+                    Credentials.USER_PRIVATE_KEY + profile.ipsecUserCert,
+                    Credentials.USER_CERTIFICATE + profile.ipsecUserCert,
+                    Credentials.CA_CERTIFICATE + profile.ipsecCaCert,
+                };
+                break;
+            case VpnProfile.TYPE_IPSEC_XAUTH_PSK:
+                break;
+            case VpnProfile.TYPE_IPSEC_XAUTH_RSA:
+                break;
+            case VpnProfile.TYPE_IPSEC_HYBRID_RSA:
+                break;
+        }
+
+        String[] mtpd = null;
+        switch (profile.type) {
+            case VpnProfile.TYPE_PPTP:
+                mtpd = new String[] {
+                    "pptp", profile.server, "1723",
+                    "name", profile.username, "password", profile.password,
+                    "linkname", "vpn", "refuse-eap", "nodefaultroute",
+                    "usepeerdns", "idle", "1800", "mtu", "1400", "mru", "1400",
+                    (profile.mppe ? "+mppe" : "nomppe"),
+                };
+                break;
+            case VpnProfile.TYPE_L2TP_IPSEC_PSK:
+            case VpnProfile.TYPE_L2TP_IPSEC_RSA:
+                mtpd = new String[] {
+                    "l2tp", profile.server, "1701", profile.l2tpSecret,
+                    "name", profile.username, "password", profile.password,
+                    "linkname", "vpn", "refuse-eap", "nodefaultroute",
+                    "usepeerdns", "idle", "1800", "mtu", "1400", "mru", "1400",
+                };
+                break;
+        }
+
+        try {
+//            getService().doLegacyVpn(racoon, mtpd);
+        } catch (Exception e) {
+            Log.e(TAG, "connect", e);
+        }
     }
 
     private void disconnect(String key) {
@@ -331,7 +391,7 @@ public class VpnSettings extends SettingsPreferenceFragment implements
 
         @Override
         public int compareTo(Preference preference) {
-            int result = 1;
+            int result = -1;
             if (preference instanceof VpnPreference) {
                 VpnPreference another = (VpnPreference) preference;
 
