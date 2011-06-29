@@ -36,15 +36,15 @@ import android.widget.Spinner;
 import android.widget.TextView;
 
 class VpnDialog extends AlertDialog implements TextWatcher, OnItemSelectedListener {
-    private static final String DUMMY = "\r\r\r\r";
+    private static final String DUMMY = "\r";
 
     private static String getDummy(String secret) {
         return secret.isEmpty() ? "" : DUMMY;
     }
 
-    private static String getSecret(TextView dummy) {
-        String secret = dummy.getText().toString();
-        return DUMMY.equals(secret) ? "" : secret;
+    private static String getSecret(String oldSecret, TextView view) {
+        String newSecret = view.getText().toString();
+        return DUMMY.equals(newSecret) ? oldSecret : newSecret;
     }
 
     private final KeyStore mKeyStore = KeyStore.getInstance();
@@ -116,7 +116,7 @@ class VpnDialog extends AlertDialog implements TextWatcher, OnItemSelectedListen
         mIpsecSecret.setText(getDummy(mProfile.ipsecSecret));
         loadCertificates(mIpsecUserCert, Credentials.USER_CERTIFICATE,
                 0, mProfile.ipsecUserCert);
-        loadCertificates(mIpsecUserCert, Credentials.CA_CERTIFICATE,
+        loadCertificates(mIpsecCaCert, Credentials.CA_CERTIFICATE,
                 R.string.vpn_no_ca_cert, mProfile.ipsecCaCert);
         mSaveLogin.setChecked(mProfile.saveLogin);
 
@@ -186,7 +186,7 @@ class VpnDialog extends AlertDialog implements TextWatcher, OnItemSelectedListen
         if (parent == mType) {
             changeType(position);
         }
-        getButton(DialogInterface.BUTTON_POSITIVE).setEnabled(validate(false));
+        getButton(DialogInterface.BUTTON_POSITIVE).setEnabled(validate(mEditing));
     }
 
     @Override
@@ -252,24 +252,24 @@ class VpnDialog extends AlertDialog implements TextWatcher, OnItemSelectedListen
     private void loadCertificates(Spinner spinner, String prefix, int firstId, String selected) {
         Context context = getContext();
         String first = (firstId == 0) ? "" : context.getString(firstId);
-        String[] certs = mKeyStore.saw(prefix);
+        String[] certificates = mKeyStore.saw(prefix);
 
-        if (certs == null || certs.length == 0) {
-            certs = new String[] {first};
+        if (certificates == null || certificates.length == 0) {
+            certificates = new String[] {first};
         } else {
-            String[] array = new String[certs.length + 1];
+            String[] array = new String[certificates.length + 1];
             array[0] = first;
-            System.arraycopy(certs, 0, array, 1, certs.length);
-            certs = array;
+            System.arraycopy(certificates, 0, array, 1, certificates.length);
+            certificates = array;
         }
 
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(
-                context, android.R.layout.simple_spinner_item, certs);
+                context, android.R.layout.simple_spinner_item, certificates);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner.setAdapter(adapter);
 
-        for (int i = 1; i < certs.length; ++i) {
-            if (certs[i].equals(selected)) {
+        for (int i = 1; i < certificates.length; ++i) {
+            if (certificates[i].equals(selected)) {
                 spinner.setSelection(i);
                 break;
             }
@@ -287,7 +287,7 @@ class VpnDialog extends AlertDialog implements TextWatcher, OnItemSelectedListen
         profile.type = mType.getSelectedItemPosition();
         profile.server = mServer.getText().toString().trim();
         profile.username = mUsername.getText().toString();
-        profile.password = getSecret(mPassword);
+        profile.password = getSecret(mProfile.password, mPassword);
         profile.domains = mDomains.getText().toString().trim();
         profile.routes = mRoutes.getText().toString().trim();
 
@@ -298,14 +298,14 @@ class VpnDialog extends AlertDialog implements TextWatcher, OnItemSelectedListen
                 break;
 
             case VpnProfile.TYPE_L2TP_IPSEC_PSK:
-                profile.l2tpSecret = getSecret(mL2tpSecret);
+                profile.l2tpSecret = getSecret(mProfile.l2tpSecret, mL2tpSecret);
                 // fall through
             case VpnProfile.TYPE_IPSEC_XAUTH_PSK:
-                profile.ipsecSecret = getSecret(mIpsecSecret);
+                profile.ipsecSecret = getSecret(mProfile.ipsecSecret, mIpsecSecret);
                 break;
 
             case VpnProfile.TYPE_L2TP_IPSEC_RSA:
-                profile.l2tpSecret = getSecret(mL2tpSecret);
+                profile.l2tpSecret = getSecret(mProfile.l2tpSecret, mL2tpSecret);
                 // fall through
             case VpnProfile.TYPE_IPSEC_XAUTH_RSA:
                 if (mIpsecCaCert.getSelectedItemPosition() != 0) {
