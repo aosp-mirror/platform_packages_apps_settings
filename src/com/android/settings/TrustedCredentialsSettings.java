@@ -46,9 +46,9 @@ import java.util.List;
 import java.util.Set;
 import org.apache.harmony.xnet.provider.jsse.TrustedCertificateStore;
 
-public class TrustedCredentials extends Fragment {
+public class TrustedCredentialsSettings extends Fragment {
 
-    private static final String TAG = "TrustedCredentials";
+    private static final String TAG = "TrustedCredentialsSettings";
 
     private enum Tab {
         SYSTEM("system",
