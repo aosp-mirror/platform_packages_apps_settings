@@ -880,6 +880,46 @@
                 android:resource="@id/application_settings" />
         </activity-alias>
 
+        <activity android:name="Settings$UsbSettingsActivity"
+                android:theme="@android:style/Theme.Holo"
+                android:label="@string/storage_title_usb"
+                android:clearTaskOnLaunch="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <action android:name="android.settings.STORAGE_USB_SETTINGS" />
+                <action android:name="com.android.settings.STORAGE_USB_SETTINGS" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+            <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
+                android:value="com.android.settings.deviceinfo.UsbSettings" />
+            <meta-data android:name="com.android.settings.TOP_LEVEL_HEADER_ID"
+                android:resource="@id/storage_settings" />
+            <meta-data android:name="com.android.settings.PARENT_FRAGMENT_TITLE"
+                android:resource="@string/storage_settings_title" />
+            <meta-data android:name="com.android.settings.PARENT_FRAGMENT_CLASS"
+                android:value="com.android.settings.Settings$StorageSettingsActivity" />
+        </activity>
+
+        <activity-alias android:name="UsbSettings"
+                  android:clearTaskOnLaunch="true"
+                  android:exported="true"
+                  android:label="@string/storage_title_usb"
+                  android:targetActivity="Settings$DevelopmentSettingsActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <action android:name="android.settings.STORAGE_USB_SETTINGS" />
+                <action android:name="com.android.settings.STORAGE_USB_SETTINGS" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+            <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
+                android:value="com.android.settings.deviceinfo.UsbSettings" />
+            <meta-data android:name="com.android.settings.TOP_LEVEL_HEADER_ID"
+                android:resource="@id/storage_settings" />
+            <meta-data android:name="com.android.settings.PARENT_FRAGMENT_TITLE"
+                android:resource="@string/storage_settings_title" />
+            <meta-data android:name="com.android.settings.PARENT_FRAGMENT_CLASS"
+                android:value="com.android.settings.Settings$StorageSettingsActivity" />
+        </activity-alias>
 
         <!-- Bluetooth stuff -->
 

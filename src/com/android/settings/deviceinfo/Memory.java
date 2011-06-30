@@ -34,8 +34,12 @@ import android.os.storage.StorageEventListener;
 import android.os.storage.StorageManager;
 import android.os.storage.StorageVolume;
 import android.preference.Preference;
+import android.preference.PreferenceActivity;
 import android.preference.PreferenceScreen;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.widget.Toast;
 
 import com.android.settings.R;
@@ -46,6 +50,8 @@ public class Memory extends SettingsPreferenceFragment {
 
     private static final int DLG_CONFIRM_UNMOUNT = 1;
     private static final int DLG_ERROR_UNMOUNT = 2;
+
+    private static final int MENU_ID_USB = Menu.FIRST;
 
     private Resources mResources;
 
@@ -88,6 +94,9 @@ public class Memory extends SettingsPreferenceFragment {
         }
 
         StorageVolume[] storageVolumes = mStorageManager.getVolumeList();
+        // mass storage is enabled if primary volume supports it
+        boolean massStorageEnabled = (storageVolumes.length > 0
+                && storageVolumes[0].allowMassStorage());
         int length = storageVolumes.length;
         mStorageVolumePreferenceCategories = new StorageVolumePreferenceCategory[length];
         for (int i = 0; i < length; i++) {
@@ -99,6 +108,9 @@ public class Memory extends SettingsPreferenceFragment {
             getPreferenceScreen().addPreference(storagePreferenceCategory);
             storagePreferenceCategory.init();
         }
+
+        // only show options menu if we are not using the legacy USB mass storage support
+        setHasOptionsMenu(!massStorageEnabled);
     }
 
     @Override
@@ -151,6 +163,31 @@ public class Memory extends SettingsPreferenceFragment {
             mStorageManager.unregisterListener(mStorageListener);
         }
         super.onDestroy();
+    }
+
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        menu.add(Menu.NONE, MENU_ID_USB, 0, R.string.storage_menu_usb)
+                //.setIcon(com.android.internal.R.drawable.stat_sys_data_usb)
+                .setShowAsAction(MenuItem.SHOW_AS_ACTION_IF_ROOM);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case MENU_ID_USB:
+                if (getActivity() instanceof PreferenceActivity) {
+                    ((PreferenceActivity) getActivity()).startPreferencePanel(
+                            UsbSettings.class.getCanonicalName(),
+                            null,
+                            R.string.storage_title_usb, null,
+                            this, 0);
+                } else {
+                    startFragment(this, UsbSettings.class.getCanonicalName(), -1, null);
+                }
+                return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 
     private synchronized IMountService getMountService() {
