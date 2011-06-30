@@ -324,6 +324,28 @@
         <item>TTLS</item>
     </string-array>
 
+   <!-- Wi-Fi WPS setup for p2p connections.  -->
+   <!-- Note that adding/removing/moving the items will need wifi settings code change. -->
+    <string-array name="wifi_p2p_wps_setup">
+        <!-- Push button based configuration involves pushing a button on two connecting devices [CHAR LIMIT=30]-->
+        <item>Push button</item>
+        <!-- This involves entering a pin obtained from a peer device [CHAR LIMIT=30] -->
+        <item>Pin from peer device</item>
+        <!-- This involves generating a pin from this device [CHAR LIMIT=20] -->
+        <item>Pin from this device</item>
+    </string-array>
+
+    <!-- Match this with the order of WifiP2pDevice.Status -->
+    <!-- Wi-Fi p2p settings device status message -->
+    <string-array name="wifi_p2p_status">
+        <item>Connected</item>
+        <item>Invited</item>
+        <item>Failed</item>
+        <item>Available</item>
+        <item>Out of range</item>
+   </string-array>
+
+
     <!-- Bluetooth Settings -->
 
     <!-- Discoverable mode timeout options -->

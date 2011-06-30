@@ -45,6 +45,12 @@
         android:summary="@string/zeroclick_settings_summary" >
     </PreferenceScreen>
 
+    <PreferenceScreen
+        android:fragment="com.android.settings.WifiP2pSettings"
+        android:key="wifi_p2p_settings"
+        android:title="@string/wifi_p2p_settings_title"
+        android:summary="@string/wifi_p2p_settings_summary">
+    </PreferenceScreen>
 
     <PreferenceScreen
         android:key="mobile_network_settings"

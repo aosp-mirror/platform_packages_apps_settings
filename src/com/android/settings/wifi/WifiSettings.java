@@ -683,8 +683,8 @@ public class WifiSettings extends SettingsPreferenceFragment
         int networkSetup = configController.chosenNetworkSetupMethod();
         switch(networkSetup) {
             case WifiConfigController.WPS_PBC:
-            case WifiConfigController.WPS_PIN_FROM_ACCESS_POINT:
-            case WifiConfigController.WPS_PIN_FROM_DEVICE:
+            case WifiConfigController.WPS_DISPLAY:
+            case WifiConfigController.WPS_KEYPAD:
                 mWifiManager.startWps(configController.getWpsConfig());
                 break;
             case WifiConfigController.MANUAL:

@@ -90,8 +90,8 @@ public class WifiConfigController implements TextWatcher,
     /* These values come from "wifi_network_setup" resource array */
     public static final int MANUAL = 0;
     public static final int WPS_PBC = 1;
-    public static final int WPS_PIN_FROM_ACCESS_POINT = 2;
-    public static final int WPS_PIN_FROM_DEVICE = 3;
+    public static final int WPS_KEYPAD = 2;
+    public static final int WPS_DISPLAY = 3;
 
     /* These values come from "wifi_proxy_settings" resource array */
     public static final int PROXY_NONE = 0;
@@ -473,11 +473,11 @@ public class WifiConfigController implements TextWatcher,
             case WPS_PBC:
                 config.setup = Setup.PBC;
                 break;
-            case WPS_PIN_FROM_ACCESS_POINT:
-                config.setup = Setup.PIN_FROM_ACCESS_POINT;
+            case WPS_KEYPAD:
+                config.setup = Setup.KEYPAD;
                 break;
-            case WPS_PIN_FROM_DEVICE:
-                config.setup = Setup.PIN_FROM_DEVICE;
+            case WPS_DISPLAY:
+                config.setup = Setup.DISPLAY;
                 break;
             default:
                 config.setup = Setup.INVALID;
@@ -559,14 +559,14 @@ public class WifiConfigController implements TextWatcher,
         int pos = mNetworkSetupSpinner.getSelectedItemPosition();
 
         /* Show pin text input if needed */
-        if (pos == WPS_PIN_FROM_ACCESS_POINT) {
+        if (pos == WPS_DISPLAY) {
             mView.findViewById(R.id.wps_fields).setVisibility(View.VISIBLE);
         } else {
             mView.findViewById(R.id.wps_fields).setVisibility(View.GONE);
         }
 
         /* show/hide manual security fields appropriately */
-        if ((pos == WPS_PIN_FROM_ACCESS_POINT) || (pos == WPS_PIN_FROM_DEVICE)
+        if ((pos == WPS_DISPLAY) || (pos == WPS_KEYPAD)
                 || (pos == WPS_PBC)) {
             mView.findViewById(R.id.security_fields).setVisibility(View.GONE);
         } else {
