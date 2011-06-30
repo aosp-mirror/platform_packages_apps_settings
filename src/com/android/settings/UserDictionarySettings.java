@@ -46,7 +46,6 @@ import android.widget.TextView;
 
 import com.android.settings.SettingsPreferenceFragment.SettingsDialogFragment;
 
-import java.util.Arrays;
 import java.util.Locale;
 
 public class UserDictionarySettings extends ListFragment implements DialogCreatable {
@@ -100,7 +99,7 @@ public class UserDictionarySettings extends ListFragment implements DialogCreata
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
             Bundle savedInstanceState) {
-        mView = inflater.inflate(R.layout.list_content_with_empty_view, container, false);
+        mView = inflater.inflate(R.layout.custom_preference_list_fragment, container, false);
         return mView;
     }
 
