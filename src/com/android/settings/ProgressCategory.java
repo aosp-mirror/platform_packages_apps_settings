@@ -17,12 +17,15 @@
 package com.android.settings;
 
 import android.content.Context;
+import android.preference.Preference;
 import android.util.AttributeSet;
 import android.view.View;
+import android.widget.TextView;
 
 public class ProgressCategory extends ProgressCategoryBase {
 
     private boolean mProgress = false;
+    private Preference mNoDeviceFoundPreference;
 
     public ProgressCategory(Context context, AttributeSet attrs) {
         super(context, attrs);
@@ -32,12 +35,27 @@ public class ProgressCategory extends ProgressCategoryBase {
     @Override
     public void onBindView(View view) {
         super.onBindView(view);
-        final View textView = view.findViewById(R.id.scanning_text);
+        final TextView textView = (TextView) view.findViewById(R.id.scanning_text);
         final View progressBar = view.findViewById(R.id.scanning_progress);
 
-        final int visibility = mProgress ? View.VISIBLE : View.INVISIBLE;
-        textView.setVisibility(visibility);
-        progressBar.setVisibility(visibility);
+        textView.setText(mProgress ? R.string.progress_scanning : R.string.progress_tap_to_pair);
+        boolean noDeviceFound = getPreferenceCount() == 0;
+        textView.setVisibility(noDeviceFound ? View.INVISIBLE : View.VISIBLE);
+        progressBar.setVisibility(mProgress ? View.VISIBLE : View.INVISIBLE);
+
+        if (mProgress) {
+            if (mNoDeviceFoundPreference != null) {
+                removePreference(mNoDeviceFoundPreference);
+            }
+        } else {
+            if (noDeviceFound) {
+                if (mNoDeviceFoundPreference == null) {
+                    mNoDeviceFoundPreference = new Preference(getContext());
+                    mNoDeviceFoundPreference.setSummary(R.string.bluetooth_no_devices_found);
+                }
+                addPreference(mNoDeviceFoundPreference);
+            }
+        }
     }
 
     @Override

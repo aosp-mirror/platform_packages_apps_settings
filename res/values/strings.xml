@@ -237,7 +237,11 @@
     <!--Bluetooth settings screen, summary text under individual Bluetooth devices that are hands free or a headset -->
     <string name="bluetooth_device">handsfree/headset</string>
     <!--Bluetooth settings screen, text that appears in heading bar when scanning for devices -->
-    <string name="progress_scanning">Scanning</string>
+    <string name="progress_scanning">Searching</string>
+    <!--Bluetooth settings screen, text that appears in heading bar when scanning for devices is finished, indicating that user can tap on a device to pair with it [CHAR LIMIT=20]-->
+    <string name="progress_tap_to_pair">Tap to pair</string>
+    <!--Bluetooth settings screen, text that appears when scanning for devices is finished and no nearby bluetooth device was found [CHAR LIMIT=40]-->
+    <string name="bluetooth_no_devices_found">No Bluetooth devices were found nearby.</string>
     <!-- Notification ticker text (shown in the status bar) when a Bluetooth device wants to pair with us -->
     <string name="bluetooth_notif_ticker">Bluetooth pairing request</string>
     <!-- Notification title when a Bluetooth device wants to pair with us -->
@@ -936,8 +940,10 @@
 
     <!-- Bluetooth settings: The title of the preference (list item) that initiates a scan for devices -->
     <string name="bluetooth_preference_scan_title">Scan for devices</string>
-    <!-- Bluetooth settings: The title of the action button that initiates a scan for nearby devices [CHAR LIMIT=20] -->
-    <string name="bluetooth_scan_nearby_devices">Scan</string>
+    <!-- Bluetooth settings: The title of the action button that initiates a search for nearby devices [CHAR LIMIT=20] -->
+    <string name="bluetooth_search_for_devices">Search for devices</string>
+    <!-- Bluetooth settings: The title of the action button while a search for nearby devices is in progress [CHAR LIMIT=20] -->
+    <string name="bluetooth_searching_for_devices">Searching\u2026</string>
     <!-- Bluetooth settings: The sub heading for device settings. [CHAR LIMIT=30] -->
     <string name="bluetooth_preference_device_settings">Device settings</string>
     <!-- Bluetooth settings: The sub heading for paired devices. [CHAR LIMIT=30] -->

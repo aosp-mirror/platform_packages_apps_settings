@@ -101,9 +101,12 @@ public final class BluetoothSettings extends DeviceListPreferenceFragment {
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         boolean bluetoothIsEnabled = mLocalAdapter.getBluetoothState() == BluetoothAdapter.STATE_ON;
-        menu.add(Menu.NONE, MENU_ID_SCAN, 0, R.string.bluetooth_scan_nearby_devices)
+        boolean isDiscovering = mLocalAdapter.isDiscovering();
+        int textId = isDiscovering ? R.string.bluetooth_searching_for_devices :
+            R.string.bluetooth_search_for_devices;
+        menu.add(Menu.NONE, MENU_ID_SCAN, 0, textId)
                 //.setIcon(R.drawable.ic_menu_scan_network)
-                .setEnabled(bluetoothIsEnabled && !mLocalAdapter.isDiscovering())
+                .setEnabled(bluetoothIsEnabled && !isDiscovering)
                 .setShowAsAction(MenuItem.SHOW_AS_ACTION_IF_ROOM);
         menu.add(Menu.NONE, MENU_ID_ADVANCED, 0, R.string.bluetooth_menu_advanced)
                 //.setIcon(android.R.drawable.ic_menu_manage)
@@ -218,7 +221,7 @@ public final class BluetoothSettings extends DeviceListPreferenceFragment {
     @Override
     public void onScanningStateChanged(boolean started) {
         super.onScanningStateChanged(started);
-        // Update 'Scan' option enabled state
+        // Update options' enabled state
         getActivity().invalidateOptionsMenu();
     }
 
