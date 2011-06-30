@@ -5,14 +5,11 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
-import android.content.pm.ActivityInfo;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.IPackageStatsObserver;
 import android.content.pm.PackageManager;
 import android.content.pm.PackageStats;
 import android.content.pm.PackageManager.NameNotFoundException;
-import android.content.res.Configuration;
-import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Handler;
@@ -74,7 +71,8 @@ public class ApplicationsState {
         long cacheSize;
         long codeSize;
         long dataSize;
-        long externalSize;
+        long externalCodeSize;
+        long externalDataSize;
     }
     
     public static class AppEntry extends SizeInfo {
@@ -97,6 +95,8 @@ public class ApplicationsState {
         ApplicationInfo info;
         Drawable icon;
         String sizeStr;
+        String internalSizeStr;
+        String externalSizeStr;
         boolean sizeStale;
         long sizeLoadStart;
 
@@ -660,8 +660,8 @@ public class ApplicationsState {
 
     private long getTotalExternalSize(PackageStats ps) {
         if (ps != null) {
-            return ps.externalDataSize + ps.externalMediaSize + ps.externalCacheSize
-                    + ps.externalObbSize;
+            return ps.externalCodeSize + ps.externalDataSize
+                    + ps.externalMediaSize + ps.externalObbSize;
         }
         return SIZE_INVALID;
     }
@@ -693,19 +693,27 @@ public class ApplicationsState {
                         synchronized (entry) {
                             entry.sizeStale = false;
                             entry.sizeLoadStart = 0;
-                            long externalSize = getTotalExternalSize(stats);
-                            long newSize = externalSize + getTotalInternalSize(stats);
+                            long externalCodeSize = stats.externalCodeSize
+                                    + stats.externalObbSize;
+                            long externalDataSize = stats.externalDataSize
+                                    + stats.externalMediaSize + stats.externalCacheSize;
+                            long newSize = externalCodeSize + externalDataSize
+                                    + getTotalInternalSize(stats);
                             if (entry.size != newSize ||
                                     entry.cacheSize != stats.cacheSize ||
                                     entry.codeSize != stats.codeSize ||
                                     entry.dataSize != stats.dataSize ||
-                                    entry.externalSize != externalSize) {
+                                    entry.externalCodeSize != externalCodeSize ||
+                                    entry.externalDataSize != externalDataSize) {
                                 entry.size = newSize;
                                 entry.cacheSize = stats.cacheSize;
                                 entry.codeSize = stats.codeSize;
                                 entry.dataSize = stats.dataSize;
-                                entry.externalSize = externalSize;
+                                entry.externalCodeSize = externalCodeSize;
+                                entry.externalDataSize = externalDataSize;
                                 entry.sizeStr = getSizeStr(entry.size);
+                                entry.internalSizeStr = getSizeStr(getTotalInternalSize(stats));
+                                entry.externalSizeStr = getSizeStr(getTotalExternalSize(stats));
                                 if (DEBUG) Log.i(TAG, "Set size of " + entry.label + " " + entry
                                         + ": " + entry.sizeStr);
                                 sizeChanged = true;

@@ -60,6 +60,7 @@ public class Memory extends SettingsPreferenceFragment {
 
     private StorageManager mStorageManager = null;
 
+    private StorageVolumePreferenceCategory mInternalStorageVolumePreferenceCategory;
     private StorageVolumePreferenceCategory[] mStorageVolumePreferenceCategories;
 
     @Override
@@ -74,6 +75,17 @@ public class Memory extends SettingsPreferenceFragment {
         addPreferencesFromResource(R.xml.device_info_memory);
 
         mResources = getResources();
+
+        if (!Environment.isExternalStorageEmulated()) {
+            // External storage is separate from internal storage; need to
+            // show internal storage as a separate item.
+            StorageVolumePreferenceCategory storagePreferenceCategory =
+                new StorageVolumePreferenceCategory(getActivity(), mResources, null,
+                        mStorageManager, true);
+            mInternalStorageVolumePreferenceCategory = storagePreferenceCategory;
+            getPreferenceScreen().addPreference(storagePreferenceCategory);
+            storagePreferenceCategory.init();
+        }
 
         StorageVolume[] storageVolumes = mStorageManager.getVolumeList();
         int length = storageVolumes.length;
@@ -97,6 +109,7 @@ public class Memory extends SettingsPreferenceFragment {
         intentFilter.addDataScheme("file");
         getActivity().registerReceiver(mMediaScannerReceiver, intentFilter);
 
+        mInternalStorageVolumePreferenceCategory.onResume();
         for (int i = 0; i < mStorageVolumePreferenceCategories.length; i++) {
             mStorageVolumePreferenceCategories[i].onResume();
         }
@@ -122,6 +135,7 @@ public class Memory extends SettingsPreferenceFragment {
     public void onPause() {
         super.onPause();
         getActivity().unregisterReceiver(mMediaScannerReceiver);
+        mInternalStorageVolumePreferenceCategory.onPause();
         for (int i = 0; i < mStorageVolumePreferenceCategories.length; i++) {
             mStorageVolumePreferenceCategories[i].onPause();
         }

@@ -121,6 +121,10 @@ public class ManageApplications extends Fragment implements
     // constant value that can be used to check return code from sub activity.
     private static final int INSTALLED_APP_DETAILS = 1;
 
+    public static final int SIZE_TOTAL = 0;
+    public static final int SIZE_INTERNAL = 1;
+    public static final int SIZE_EXTERNAL = 2;
+
     // sort order that can be changed through the menu can be sorted alphabetically
     // or size(descending)
     private static final int MENU_OPTIONS_BASE = 0;
@@ -208,11 +212,21 @@ public class ManageApplications extends Fragment implements
         TextView disabled;
         CheckBox checkBox;
         
-        void updateSizeText(ManageApplications ma) {
+        void updateSizeText(ManageApplications ma, int whichSize) {
             if (DEBUG) Log.i(TAG, "updateSizeText of " + entry.label + " " + entry
                     + ": " + entry.sizeStr);
             if (entry.sizeStr != null) {
-                appSize.setText(entry.sizeStr);
+                switch (whichSize) {
+                    case SIZE_INTERNAL:
+                        appSize.setText(entry.internalSizeStr);
+                        break;
+                    case SIZE_EXTERNAL:
+                        appSize.setText(entry.externalSizeStr);
+                        break;
+                    default:
+                        appSize.setText(entry.sizeStr);
+                        break;
+                }
             } else if (entry.size == ApplicationsState.SIZE_INVALID) {
                 appSize.setText(ma.mInvalidSizeStr);
             }
@@ -237,6 +251,7 @@ public class ManageApplications extends Fragment implements
         private boolean mResumed;
         private int mLastFilterMode=-1, mLastSortMode=-1;
         private boolean mWaitingForData;
+        private int mWhichSize = SIZE_TOTAL;
         CharSequence mCurFilterPrefix;
 
         private Filter mFilter = new Filter() {
@@ -296,12 +311,21 @@ public class ManageApplications extends Fragment implements
             if (DEBUG) Log.i(TAG, "Rebuilding app list...");
             ApplicationsState.AppFilter filterObj;
             Comparator<AppEntry> comparatorObj;
+            boolean emulated = Environment.isExternalStorageEmulated();
+            if (emulated) {
+                mWhichSize = SIZE_TOTAL;
+            } else {
+                mWhichSize = SIZE_INTERNAL;
+            }
             switch (mLastFilterMode) {
                 case FILTER_APPS_THIRD_PARTY:
                     filterObj = ApplicationsState.THIRD_PARTY_FILTER;
                     break;
                 case FILTER_APPS_SDCARD:
                     filterObj = ApplicationsState.ON_SD_CARD_FILTER;
+                    if (!emulated) {
+                        mWhichSize = SIZE_EXTERNAL;
+                    }
                     break;
                 default:
                     filterObj = null;
@@ -399,7 +423,7 @@ public class ManageApplications extends Fragment implements
                 AppViewHolder holder = (AppViewHolder)mActive.get(i).getTag();
                 if (holder.entry.info.packageName.equals(packageName)) {
                     synchronized (holder.entry) {
-                        holder.updateSizeText(ManageApplications.this);
+                        holder.updateSizeText(ManageApplications.this, mWhichSize);
                     }
                     if (holder.entry.info.packageName.equals(mCurrentPkgName)
                             && mLastSortMode == SORT_ORDER_SIZE) {
@@ -478,7 +502,7 @@ public class ManageApplications extends Fragment implements
                 if (entry.icon != null) {
                     holder.appIcon.setImageDrawable(entry.icon);
                 }
-                holder.updateSizeText(ManageApplications.this);
+                holder.updateSizeText(ManageApplications.this, mWhichSize);
                 if (InstalledAppDetails.SUPPORT_DISABLE_APPS) {
                     holder.disabled.setVisibility(entry.info.enabled ? View.GONE : View.VISIBLE);
                 } else {
@@ -777,6 +801,11 @@ public class ManageApplications extends Fragment implements
             } catch (IllegalArgumentException e) {
                 // use the old value of mFreeMem
             }
+            final int N = mApplicationsAdapter.getCount();
+            for (int i=0; i<N; i++) {
+                ApplicationsState.AppEntry ae = mApplicationsAdapter.getAppEntry(i);
+                appStorage += ae.externalCodeSize + ae.externalDataSize;
+            }
         } else {
             if (!mLastShowedInternalStorage) {
                 mLastShowedInternalStorage = true;
@@ -790,10 +819,14 @@ public class ManageApplications extends Fragment implements
                     mDataFileStats.getBlockSize();
             } catch (IllegalArgumentException e) {
             }
+            final boolean emulatedStorage = Environment.isExternalStorageEmulated();
             final int N = mApplicationsAdapter.getCount();
             for (int i=0; i<N; i++) {
                 ApplicationsState.AppEntry ae = mApplicationsAdapter.getAppEntry(i);
                 appStorage += ae.codeSize + ae.dataSize;
+                if (emulatedStorage) {
+                    appStorage += ae.externalCodeSize + ae.externalDataSize;
+                }
             }
             freeStorage += mApplicationsState.sumCacheSizes();
         }
