@@ -109,7 +109,9 @@ public class Memory extends SettingsPreferenceFragment {
         intentFilter.addDataScheme("file");
         getActivity().registerReceiver(mMediaScannerReceiver, intentFilter);
 
-        mInternalStorageVolumePreferenceCategory.onResume();
+        if (mInternalStorageVolumePreferenceCategory != null) {
+            mInternalStorageVolumePreferenceCategory.onResume();
+        }
         for (int i = 0; i < mStorageVolumePreferenceCategories.length; i++) {
             mStorageVolumePreferenceCategories[i].onResume();
         }
@@ -135,7 +137,9 @@ public class Memory extends SettingsPreferenceFragment {
     public void onPause() {
         super.onPause();
         getActivity().unregisterReceiver(mMediaScannerReceiver);
-        mInternalStorageVolumePreferenceCategory.onPause();
+        if (mInternalStorageVolumePreferenceCategory != null) {
+            mInternalStorageVolumePreferenceCategory.onPause();
+        }
         for (int i = 0; i < mStorageVolumePreferenceCategories.length; i++) {
             mStorageVolumePreferenceCategories[i].onPause();
         }
