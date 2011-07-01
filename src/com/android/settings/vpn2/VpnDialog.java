@@ -60,7 +60,7 @@ class VpnDialog extends AlertDialog implements TextWatcher, OnItemSelectedListen
     private TextView mServer;
     private TextView mUsername;
     private TextView mPassword;
-    private TextView mDomains;
+    private TextView mSearchDomains;
     private TextView mRoutes;
     private CheckBox mMppe;
     private TextView mL2tpSecret;
@@ -92,7 +92,7 @@ class VpnDialog extends AlertDialog implements TextWatcher, OnItemSelectedListen
         mServer = (TextView) mView.findViewById(R.id.server);
         mUsername = (TextView) mView.findViewById(R.id.username);
         mPassword = (TextView) mView.findViewById(R.id.password);
-        mDomains = (TextView) mView.findViewById(R.id.domains);
+        mSearchDomains = (TextView) mView.findViewById(R.id.search_domains);
         mRoutes = (TextView) mView.findViewById(R.id.routes);
         mMppe = (CheckBox) mView.findViewById(R.id.mppe);
         mL2tpSecret = (TextView) mView.findViewById(R.id.l2tp_secret);
@@ -108,7 +108,7 @@ class VpnDialog extends AlertDialog implements TextWatcher, OnItemSelectedListen
         mServer.setText(mProfile.server);
         mUsername.setText(mProfile.username);
         mPassword.setText(getDummy(mProfile.password));
-        mDomains.setText(mProfile.domains);
+        mSearchDomains.setText(mProfile.searchDomains);
         mRoutes.setText(mProfile.routes);
         mMppe.setChecked(mProfile.mppe);
         mL2tpSecret.setText(getDummy(mProfile.l2tpSecret));
@@ -288,7 +288,7 @@ class VpnDialog extends AlertDialog implements TextWatcher, OnItemSelectedListen
         profile.server = mServer.getText().toString().trim();
         profile.username = mUsername.getText().toString();
         profile.password = getSecret(mProfile.password, mPassword);
-        profile.domains = mDomains.getText().toString().trim();
+        profile.searchDomains = mSearchDomains.getText().toString().trim();
         profile.routes = mRoutes.getText().toString().trim();
 
         // Then, save type-specific fields.
