@@ -157,6 +157,18 @@
             </intent-filter>
         </activity-alias>
 
+        <activity-alias android:name=".wifi.AdvancedSettings"
+                android:label="@string/wifi_advanced_settings_label"
+                android:targetActivity="Settings"
+                >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <action android:name="android.settings.WIFI_IP_SETTINGS" />
+                <category android:name="android.intent.category.VOICE_LAUNCH" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity-alias>
+
         <activity android:name=".wifi.WifiInfo"
                 android:theme="@android:style/Theme.Holo.DialogWhenLarge">
             <intent-filter>
@@ -237,7 +249,7 @@
                 >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-                <action android:name="android.settings.BLUETOOTH_ADVANCED_SETTINGS" />
+                <action android:name="android.settings.ADVANCED_BLUETOOTH_SETTINGS" />
                 <category android:name="android.intent.category.VOICE_LAUNCH" />
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
