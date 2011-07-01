@@ -33,6 +33,7 @@
             android:orientation="vertical"
             android:padding="5dip">
 
+            <!-- Top: instructions -->
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -40,25 +41,26 @@
                 android:text="@string/lock_title"
                 android:paddingBottom="10dip"
                 style="?android:attr/textAppearanceLarge"
+                android:visibility="visible"
             />
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceMedium"
-                android:textSize="18sp"
                 android:text="@string/lock_intro_message"
             />
+
+            <!-- bottom: lock pattern -->
+            <com.android.internal.widget.LockPatternView android:id="@+id/lockPattern"
+                 android:layout_width="200dip"
+                 android:layout_height="200dip"
+                 android:layout_marginTop="10dip"
+                 android:layout_gravity="left"/>
 
         </LinearLayout>
 
     </ScrollView>
-
-    <!-- bottom: lock pattern. Note the size is match_parent in both axis since requested aspect
-         is square and the pattern view will choose the smaller of the two. -->
-    <com.android.internal.widget.LockPatternView android:id="@+id/lockPattern"
-         android:layout_width="match_parent"
-         android:layout_height="match_parent"/>
 
     <LinearLayout
         style="@style/SecurityPreferenceButtonContainer"
