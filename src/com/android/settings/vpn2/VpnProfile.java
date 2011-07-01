@@ -42,14 +42,15 @@ class VpnProfile implements Cloneable {
     String server = "";         // 2
     String username = "";       // 3
     String password = "";       // 4
-    String domains = "";        // 5
-    String routes = "";         // 6
-    boolean mppe = false;       // 7
-    String l2tpSecret = "";     // 8
-    String ipsecIdentifier = "";// 9
-    String ipsecSecret = "";    // 10
-    String ipsecUserCert = "";  // 11
-    String ipsecCaCert = "";    // 12
+    String dnsServers = "";     // 5
+    String searchDomains = "";  // 6
+    String routes = "";         // 7
+    boolean mppe = false;       // 8
+    String l2tpSecret = "";     // 9
+    String ipsecIdentifier = "";// 10
+    String ipsecSecret = "";    // 11
+    String ipsecUserCert = "";  // 12
+    String ipsecCaCert = "";    // 13
 
     // Helper fields.
     boolean saveLogin = false;
@@ -65,8 +66,8 @@ class VpnProfile implements Cloneable {
             }
 
             String[] values = new String(value, Charsets.UTF_8).split("\0", -1);
-            // Currently it always has 13 fields.
-            if (values.length < 13) {
+            // Currently it always has 14 fields.
+            if (values.length < 14) {
                 return null;
             }
 
@@ -79,14 +80,15 @@ class VpnProfile implements Cloneable {
             profile.server = values[2];
             profile.username = values[3];
             profile.password = values[4];
-            profile.domains = values[5];
-            profile.routes = values[6];
-            profile.mppe = Boolean.valueOf(values[7]);
-            profile.l2tpSecret = values[8];
-            profile.ipsecIdentifier = values[9];
-            profile.ipsecSecret = values[10];
-            profile.ipsecUserCert = values[11];
-            profile.ipsecCaCert = values[12];
+            profile.dnsServers = values[5];
+            profile.searchDomains = values[6];
+            profile.routes = values[7];
+            profile.mppe = Boolean.valueOf(values[8]);
+            profile.l2tpSecret = values[9];
+            profile.ipsecIdentifier = values[10];
+            profile.ipsecSecret = values[11];
+            profile.ipsecUserCert = values[12];
+            profile.ipsecCaCert = values[13];
 
             profile.saveLogin = !profile.username.isEmpty() || !profile.password.isEmpty();
             return profile;
@@ -102,7 +104,8 @@ class VpnProfile implements Cloneable {
         builder.append('\0').append(server);
         builder.append('\0').append(saveLogin ? username : "");
         builder.append('\0').append(saveLogin ? password : "");
-        builder.append('\0').append(domains);
+        builder.append('\0').append(dnsServers);
+        builder.append('\0').append(searchDomains);
         builder.append('\0').append(routes);
         builder.append('\0').append(mppe);
         builder.append('\0').append(l2tpSecret);
