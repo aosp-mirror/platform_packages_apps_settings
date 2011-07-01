@@ -20,8 +20,12 @@ import android.content.Context;
 import android.net.wifi.WifiInfo;
 import android.net.wifi.WifiManager;
 import android.os.Bundle;
+import android.preference.CheckBoxPreference;
 import android.preference.ListPreference;
 import android.preference.Preference;
+import android.preference.PreferenceScreen;
+import android.provider.Settings;
+import android.provider.Settings.Secure;
 import android.text.TextUtils;
 import android.util.Log;
 import android.widget.Toast;
@@ -37,6 +41,9 @@ public class AdvancedWifiSettings extends SettingsPreferenceFragment
     private static final String KEY_MAC_ADDRESS = "mac_address";
     private static final String KEY_CURRENT_IP_ADDRESS = "current_ip_address";
     private static final String KEY_FREQUENCY_BAND = "frequency_band";
+    private static final String KEY_NOTIFY_OPEN_NETWORKS = "notify_open_networks";
+    private static final String KEY_SLEEP_POLICY = "sleep_policy";
+    private static final String KEY_ENABLE_WIFI_WATCHDOG = "wifi_enable_watchdog_service";
 
     private WifiManager mWifiManager;
 
@@ -60,32 +67,88 @@ public class AdvancedWifiSettings extends SettingsPreferenceFragment
     }
 
     private void initPreferences() {
+        CheckBoxPreference notifyOpenNetworks =
+            (CheckBoxPreference) findPreference(KEY_NOTIFY_OPEN_NETWORKS);
+        notifyOpenNetworks.setChecked(Secure.getInt(getContentResolver(),
+                Secure.WIFI_NETWORKS_AVAILABLE_NOTIFICATION_ON, 0) == 1);
+        notifyOpenNetworks.setEnabled(mWifiManager.isWifiEnabled());
 
-        ListPreference pref = (ListPreference) findPreference(KEY_FREQUENCY_BAND);
+        CheckBoxPreference watchdogEnabled =
+            (CheckBoxPreference) findPreference(KEY_ENABLE_WIFI_WATCHDOG);
+        watchdogEnabled.setChecked(Secure.getInt(getContentResolver(),
+                Secure.WIFI_WATCHDOG_ON, 1) == 1);
+
+        watchdogEnabled.setEnabled(mWifiManager.isWifiEnabled());
+
+        ListPreference frequencyPref = (ListPreference) findPreference(KEY_FREQUENCY_BAND);
 
         if (mWifiManager.isDualBandSupported()) {
-            pref.setOnPreferenceChangeListener(this);
+            frequencyPref.setOnPreferenceChangeListener(this);
             int value = mWifiManager.getFrequencyBand();
             if (value != -1) {
-                pref.setValue(String.valueOf(value));
+                frequencyPref.setValue(String.valueOf(value));
             } else {
                 Log.e(TAG, "Failed to fetch frequency band");
             }
         } else {
-            getPreferenceScreen().removePreference(pref);
+            if (frequencyPref != null) {
+                // null if it has already been removed before resume
+                getPreferenceScreen().removePreference(frequencyPref);
+            }
         }
+
+        ListPreference sleepPolicyPref = (ListPreference) findPreference(KEY_SLEEP_POLICY);
+        if (sleepPolicyPref != null) {
+            if (Utils.isWifiOnly()) {
+                sleepPolicyPref.setEntries(R.array.wifi_sleep_policy_entries_wifi_only);
+                sleepPolicyPref.setSummary(R.string.wifi_setting_sleep_policy_summary_wifi_only);
+            }
+            sleepPolicyPref.setOnPreferenceChangeListener(this);
+            int value = Settings.System.getInt(getContentResolver(),
+                    Settings.System.WIFI_SLEEP_POLICY,
+                    Settings.System.WIFI_SLEEP_POLICY_NEVER);
+            sleepPolicyPref.setValue(String.valueOf(value));
+        }
+    }
+
+    @Override
+    public boolean onPreferenceTreeClick(PreferenceScreen screen, Preference preference) {
+        String key = preference.getKey();
+
+        if (KEY_NOTIFY_OPEN_NETWORKS.equals(key)) {
+            Secure.putInt(getContentResolver(),
+                    Secure.WIFI_NETWORKS_AVAILABLE_NOTIFICATION_ON,
+                    ((CheckBoxPreference) preference).isChecked() ? 1 : 0);
+        } else if (KEY_ENABLE_WIFI_WATCHDOG.equals(key)) {
+            Secure.putInt(getContentResolver(),
+                    Secure.WIFI_WATCHDOG_ON,
+                    ((CheckBoxPreference) preference).isChecked() ? 1 : 0);
+        } else {
+            return super.onPreferenceTreeClick(screen, preference);
+        }
+        return true;
     }
 
     @Override
     public boolean onPreferenceChange(Preference preference, Object newValue) {
         String key = preference.getKey();
-        if (key == null) return true;
 
-        if (key.equals(KEY_FREQUENCY_BAND)) {
+        if (KEY_FREQUENCY_BAND.equals(key)) {
             try {
                 mWifiManager.setFrequencyBand(Integer.parseInt(((String) newValue)), true);
             } catch (NumberFormatException e) {
                 Toast.makeText(getActivity(), R.string.wifi_setting_frequency_band_error,
+                        Toast.LENGTH_SHORT).show();
+                return false;
+            }
+        }
+
+        if (KEY_SLEEP_POLICY.equals(key)) {
+            try {
+                Settings.System.putInt(getContentResolver(),
+                        Settings.System.WIFI_SLEEP_POLICY, Integer.parseInt(((String) newValue)));
+            } catch (NumberFormatException e) {
+                Toast.makeText(getActivity(), R.string.wifi_setting_sleep_policy_error,
                         Toast.LENGTH_SHORT).show();
                 return false;
             }
