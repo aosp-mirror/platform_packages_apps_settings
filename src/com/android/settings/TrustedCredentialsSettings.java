@@ -309,7 +309,7 @@ public class TrustedCredentialsSettings extends Fragment {
     }
 
     private void showCertDialog(final CertHolder certHolder) {
-        View view = View.inflate(getActivity(), R.layout.trusted_credential_details, null);
+        View view = certHolder.mSslCert.inflateCertificateView(getActivity());
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         builder.setTitle(com.android.internal.R.string.ssl_certificate);
         builder.setView(view);
@@ -320,10 +320,12 @@ public class TrustedCredentialsSettings extends Fragment {
         });
         final Dialog certDialog = builder.create();
 
-        FrameLayout details = (FrameLayout) view.findViewById(R.id.cert_details);
-        details.addView(certHolder.mSslCert.inflateCertificateView(getActivity()));
-
-        Button removeButton = (Button) view.findViewById(R.id.cert_remove_button);
+        ViewGroup body = (ViewGroup) view.findViewById(com.android.internal.R.id.body);
+        LayoutInflater inflater = LayoutInflater.from(getActivity());
+        Button removeButton = (Button) inflater.inflate(R.layout.trusted_credential_details,
+                                                        body,
+                                                        false);
+        body.addView(removeButton);
         removeButton.setText(certHolder.mTab.getButtonLabel(certHolder));
         removeButton.setOnClickListener(new View.OnClickListener() {
             @Override public void onClick(View v) {
