@@ -3410,6 +3410,48 @@ found in the list of installed applications.</string>
     <!-- HDCP checking dialog title, used for debug purposes only. [CHAR LIMIT=25] -->
     <string name="hdcp_checking_dialog_title">Set HDCP checking behavior</string>
 
+    <!-- Preference category for user interface debugging development settings. [CHAR LIMIT=25] -->
+    <string name="debug_ui_category">User interface</string>
+
+    <!-- UI debug setting: always enable strict mode? [CHAR LIMIT=25] -->
+    <string name="strict_mode">Strict mode enabled</string>
+    <!-- UI debug setting: show strict mode summary [CHAR LIMIT=50] -->
+    <string name="strict_mode_summary">Flash screen when apps do long operations
+            on main thread</string>
+
+    <!-- UI debug setting: show pointer location? [CHAR LIMIT=25] -->
+    <string name="pointer_location">Pointer location</string>
+    <!-- UI debug setting: show pointer location summary [CHAR LIMIT=50] -->
+    <string name="pointer_location_summary">Screen overlay showing current touch data</string>
+
+    <!-- UI debug setting: show where screen updates happen? [CHAR LIMIT=25] -->
+    <string name="show_screen_updates">Show screen updates</string>
+    <!-- UI debug setting: show screen updates summary [CHAR LIMIT=50] -->
+    <string name="show_screen_updates_summary">Flash areas of screen when they update</string>
+
+    <!-- UI debug setting: show how CPU is being used? [CHAR LIMIT=25] -->
+    <string name="show_cpu_usage">Show CPU usage</string>
+    <!-- UI debug setting: show cpu usage summary [CHAR LIMIT=50] -->
+    <string name="show_cpu_usage_summary">Screen overlay showing current CPU usage</string>
+
+    <!-- UI debug setting: scaling factor for window animations [CHAR LIMIT=25] -->
+    <string name="window_animation_scale_title">Window animation scale</string>
+
+    <!-- UI debug setting: scaling factor for transition animations [CHAR LIMIT=25] -->
+    <string name="transition_animation_scale_title">Transition animation scale</string>
+
+    <!-- Preference category for application debugging development settings. [CHAR LIMIT=25] -->
+    <string name="debug_applications_category">Applications</string>
+
+    <!-- UI debug setting: immediately destroy activities? [CHAR LIMIT=25] -->
+    <string name="immediately_destroy_activities">Immediately destroy activities</string>
+    <!-- UI debug setting: immediately destroy activities summary [CHAR LIMIT=50] -->
+    <string name="immediately_destroy_activities_summary">Destroy every activity as soon as
+            the user leaves it</string>
+
+    <!-- UI debug setting: limit number of running application processes [CHAR LIMIT=25] -->
+    <string name="app_process_limit_title">Application process limit</string>
+
     <!-- Activity title for network data usage summary. [CHAR LIMIT=25] -->
     <string name="data_usage_summary_title">Data usage</string>
     <!-- Title for option to pick visible time range from a list available usage periods. [CHAR LIMIT=25] -->

@@ -16,13 +16,20 @@
 
 package com.android.settings;
 
+import android.app.ActivityManagerNative;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.ContentResolver;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.BatteryManager;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.IBinder;
+import android.os.Parcel;
+import android.os.RemoteException;
+import android.os.ServiceManager;
+import android.os.StrictMode;
 import android.os.SystemProperties;
 import android.preference.CheckBoxPreference;
 import android.preference.ListPreference;
@@ -31,6 +38,8 @@ import android.preference.PreferenceFragment;
 import android.preference.PreferenceScreen;
 import android.preference.Preference.OnPreferenceChangeListener;
 import android.provider.Settings;
+import android.text.TextUtils;
+import android.view.IWindowManager;
 
 /*
  * Displays preferences for application developers.
@@ -45,9 +54,32 @@ public class DevelopmentSettings extends PreferenceFragment
     private static final String HDCP_CHECKING_KEY = "hdcp_checking";
     private static final String HDCP_CHECKING_PROPERTY = "persist.sys.hdcp_checking";
 
+    private static final String STRICT_MODE_KEY = "strict_mode";
+    private static final String POINTER_LOCATION_KEY = "pointer_location";
+    private static final String SHOW_SCREEN_UPDATES_KEY = "show_screen_updates";
+    private static final String SHOW_CPU_USAGE_KEY = "show_cpu_usage";
+    private static final String WINDOW_ANIMATION_SCALE_KEY = "window_animation_scale";
+    private static final String TRANSITION_ANIMATION_SCALE_KEY = "transition_animation_scale";
+
+    private static final String IMMEDIATELY_DESTROY_ACTIVITIES_KEY
+            = "immediately_destroy_activities";
+    private static final String APP_PROCESS_LIMIT_KEY = "app_process_limit";
+
+    private IWindowManager mWindowManager;
+
     private CheckBoxPreference mEnableAdb;
     private CheckBoxPreference mKeepScreenOn;
     private CheckBoxPreference mAllowMockLocation;
+
+    private CheckBoxPreference mStrictMode;
+    private CheckBoxPreference mPointerLocation;
+    private CheckBoxPreference mShowScreenUpdates;
+    private CheckBoxPreference mShowCpuUsage;
+    private ListPreference mWindowAnimationScale;
+    private ListPreference mTransitionAnimationScale;
+
+    private CheckBoxPreference mImmediatelyDestroyActivities;
+    private ListPreference mAppProcessLimit;
 
     // To track whether Yes was clicked in the adb warning dialog
     private boolean mOkClicked;
@@ -58,11 +90,24 @@ public class DevelopmentSettings extends PreferenceFragment
     public void onCreate(Bundle icicle) {
         super.onCreate(icicle);
 
+        mWindowManager = IWindowManager.Stub.asInterface(ServiceManager.getService("window"));
+
         addPreferencesFromResource(R.xml.development_prefs);
 
         mEnableAdb = (CheckBoxPreference) findPreference(ENABLE_ADB);
         mKeepScreenOn = (CheckBoxPreference) findPreference(KEEP_SCREEN_ON);
         mAllowMockLocation = (CheckBoxPreference) findPreference(ALLOW_MOCK_LOCATION);
+
+        mStrictMode = (CheckBoxPreference) findPreference(STRICT_MODE_KEY);
+        mPointerLocation = (CheckBoxPreference) findPreference(POINTER_LOCATION_KEY);
+        mShowScreenUpdates = (CheckBoxPreference) findPreference(SHOW_SCREEN_UPDATES_KEY);
+        mShowCpuUsage = (CheckBoxPreference) findPreference(SHOW_CPU_USAGE_KEY);
+        mWindowAnimationScale = (ListPreference) findPreference(WINDOW_ANIMATION_SCALE_KEY);
+        mTransitionAnimationScale = (ListPreference) findPreference(TRANSITION_ANIMATION_SCALE_KEY);
+
+        mImmediatelyDestroyActivities = (CheckBoxPreference) findPreference(
+                IMMEDIATELY_DESTROY_ACTIVITIES_KEY);
+        mAppProcessLimit = (ListPreference) findPreference(APP_PROCESS_LIMIT_KEY);
 
         removeHdcpOptionsForProduction();
     }
@@ -89,6 +134,13 @@ public class DevelopmentSettings extends PreferenceFragment
         mAllowMockLocation.setChecked(Settings.Secure.getInt(cr,
                 Settings.Secure.ALLOW_MOCK_LOCATION, 0) != 0);
         updateHdcpValues();
+        updateStrictModeVisualOptions();
+        updatePointerLocationOptions();
+        updateFlingerOptions();
+        updateCpuUsageOptions();
+        updateAnimationScaleOptions();
+        updateImmediatelyDestroyActivitiesOptions();
+        updateAppProcessLimitOptions();
     }
 
     private void updateHdcpValues() {
@@ -107,6 +159,165 @@ public class DevelopmentSettings extends PreferenceFragment
             hdcpChecking.setValue(values[index]);
             hdcpChecking.setSummary(summaries[index]);
             hdcpChecking.setOnPreferenceChangeListener(this);
+        }
+    }
+
+    // Returns the current state of the system property that controls
+    // strictmode flashes.  One of:
+    //    0: not explicitly set one way or another
+    //    1: on
+    //    2: off
+    private int currentStrictModeActiveIndex() {
+        if (TextUtils.isEmpty(SystemProperties.get(StrictMode.VISUAL_PROPERTY))) {
+            return 0;
+        }
+        boolean enabled = SystemProperties.getBoolean(StrictMode.VISUAL_PROPERTY, false);
+        return enabled ? 1 : 2;
+    }
+
+    private void writeStrictModeVisualOptions() {
+        try {
+            mWindowManager.setStrictModeVisualIndicatorPreference(mStrictMode.isChecked()
+                    ? "1" : "");
+        } catch (RemoteException e) {
+        }
+    }
+
+    private void updateStrictModeVisualOptions() {
+        mStrictMode.setChecked(currentStrictModeActiveIndex() == 1);
+    }
+
+    private void writePointerLocationOptions() {
+        Settings.System.putInt(getActivity().getContentResolver(),
+                Settings.System.POINTER_LOCATION, mPointerLocation.isChecked() ? 1 : 0);
+    }
+
+    private void updatePointerLocationOptions() {
+        mPointerLocation.setChecked(Settings.System.getInt(getActivity().getContentResolver(),
+                Settings.System.POINTER_LOCATION, 0) != 0);
+    }
+
+    private void updateFlingerOptions() {
+        // magic communication with surface flinger.
+        try {
+            IBinder flinger = ServiceManager.getService("SurfaceFlinger");
+            if (flinger != null) {
+                Parcel data = Parcel.obtain();
+                Parcel reply = Parcel.obtain();
+                data.writeInterfaceToken("android.ui.ISurfaceComposer");
+                flinger.transact(1010, data, reply, 0);
+                @SuppressWarnings("unused")
+                int showCpu = reply.readInt();
+                @SuppressWarnings("unused")
+                int enableGL = reply.readInt();
+                int showUpdates = reply.readInt();
+                mShowScreenUpdates.setChecked(showUpdates != 0);
+                @SuppressWarnings("unused")
+                int showBackground = reply.readInt();
+                reply.recycle();
+                data.recycle();
+            }
+        } catch (RemoteException ex) {
+        }
+    }
+
+    private void writeFlingerOptions() {
+        try {
+            IBinder flinger = ServiceManager.getService("SurfaceFlinger");
+            if (flinger != null) {
+                Parcel data = Parcel.obtain();
+                data.writeInterfaceToken("android.ui.ISurfaceComposer");
+                data.writeInt(mShowScreenUpdates.isChecked() ? 1 : 0);
+                flinger.transact(1002, data, null, 0);
+                data.recycle();
+
+                updateFlingerOptions();
+            }
+        } catch (RemoteException ex) {
+        }
+    }
+
+    private void updateCpuUsageOptions() {
+        mShowCpuUsage.setChecked(Settings.System.getInt(getActivity().getContentResolver(),
+                Settings.System.SHOW_PROCESSES, 0) != 0);
+    }
+
+    private void writeCpuUsageOptions() {
+        boolean value = mShowCpuUsage.isChecked();
+        Settings.System.putInt(getActivity().getContentResolver(),
+                Settings.System.SHOW_PROCESSES, value ? 1 : 0);
+        Intent service = (new Intent())
+                .setClassName("android", "com.android.server.LoadAverageService");
+        if (value) {
+            getActivity().startService(service);
+        } else {
+            getActivity().stopService(service);
+        }
+    }
+
+    private void writeImmediatelyDestroyActivitiesOptions() {
+        try {
+            ActivityManagerNative.getDefault().setAlwaysFinish(
+                    mImmediatelyDestroyActivities.isChecked());
+        } catch (RemoteException ex) {
+        }
+    }
+
+    private void updateImmediatelyDestroyActivitiesOptions() {
+        mImmediatelyDestroyActivities.setChecked(Settings.System.getInt(
+            getActivity().getContentResolver(), Settings.System.ALWAYS_FINISH_ACTIVITIES, 0) != 0);
+    }
+
+    private void updateAnimationScaleValue(int which, ListPreference pref) {
+        try {
+            float scale = mWindowManager.getAnimationScale(which);
+            CharSequence[] values = pref.getEntryValues();
+            for (int i=0; i<values.length; i++) {
+                float val = Float.parseFloat(values[i].toString());
+                if (scale <= val) {
+                    pref.setValueIndex(i);
+                    return;
+                }
+            }
+            pref.setValueIndex(values.length-1);
+        } catch (RemoteException e) {
+        }
+    }
+
+    private void updateAnimationScaleOptions() {
+        updateAnimationScaleValue(0, mWindowAnimationScale);
+        updateAnimationScaleValue(1, mTransitionAnimationScale);
+    }
+
+    private void writeAnimationScaleOption(int which, ListPreference pref) {
+        try {
+            float scale = Float.parseFloat(pref.getValue().toString());
+            mWindowManager.setAnimationScale(which, scale);
+        } catch (RemoteException e) {
+        }
+    }
+
+    private void updateAppProcessLimitOptions() {
+        try {
+            int limit = ActivityManagerNative.getDefault().getProcessLimit();
+            CharSequence[] values = mAppProcessLimit.getEntryValues();
+            for (int i=0; i<values.length; i++) {
+                int val = Integer.parseInt(values[i].toString());
+                if (val >= limit) {
+                    mAppProcessLimit.setValueIndex(i);
+                    return;
+                }
+            }
+            mAppProcessLimit.setValueIndex(0);
+        } catch (RemoteException e) {
+        }
+    }
+
+    private void writeAppProcessLimitOptions() {
+        try {
+            int limit = Integer.parseInt(mAppProcessLimit.getValue().toString());
+            ActivityManagerNative.getDefault().setProcessLimit(limit);
+        } catch (RemoteException e) {
         }
     }
 
@@ -142,6 +353,22 @@ public class DevelopmentSettings extends PreferenceFragment
             Settings.Secure.putInt(getActivity().getContentResolver(),
                     Settings.Secure.ALLOW_MOCK_LOCATION,
                     mAllowMockLocation.isChecked() ? 1 : 0);
+        } else if (preference == mStrictMode) {
+            writeStrictModeVisualOptions();
+        } else if (preference == mPointerLocation) {
+            writePointerLocationOptions();
+        } else if (preference == mShowScreenUpdates) {
+            writeFlingerOptions();
+        } else if (preference == mShowCpuUsage) {
+            writeCpuUsageOptions();
+        } else if (preference == mWindowAnimationScale) {
+            writeAnimationScaleOption(0, mWindowAnimationScale);
+        } else if (preference == mTransitionAnimationScale) {
+            writeAnimationScaleOption(1, mTransitionAnimationScale);
+        } else if (preference == mImmediatelyDestroyActivities) {
+            writeImmediatelyDestroyActivitiesOptions();
+        } else if (preference == mAppProcessLimit) {
+            writeAppProcessLimitOptions();
         }
 
         return false;
