@@ -38,4 +38,61 @@
         android:dialogTitle="@string/hdcp_checking_dialog_title"
         android:entries="@array/hdcp_checking_titles"
         android:entryValues="@array/hdcp_checking_values" />
+
+    <PreferenceCategory android:key="debug_ui_category"
+            android:title="@string/debug_ui_category">
+
+        <CheckBoxPreference
+            android:key="strict_mode"
+            android:title="@string/strict_mode"
+            android:summary="@string/strict_mode_summary"/>
+
+        <CheckBoxPreference
+            android:key="pointer_location"
+            android:title="@string/pointer_location"
+            android:summary="@string/pointer_location_summary"/>
+
+        <CheckBoxPreference
+            android:key="show_screen_updates"
+            android:title="@string/show_screen_updates"
+            android:summary="@string/show_screen_updates_summary"/>
+
+        <CheckBoxPreference
+            android:key="show_cpu_usage"
+            android:title="@string/show_cpu_usage"
+            android:summary="@string/show_cpu_usage_summary"/>
+
+        <ListPreference
+            android:key="window_animation_scale"
+            android:title="@string/window_animation_scale_title"
+            android:persistent="false"
+            android:entries="@array/window_animation_scale_entries"
+            android:entryValues="@array/window_animation_scale_values" />
+
+        <ListPreference
+            android:key="transition_animation_scale"
+            android:title="@string/transition_animation_scale_title"
+            android:persistent="false"
+            android:entries="@array/transition_animation_scale_entries"
+            android:entryValues="@array/transition_animation_scale_values" />
+
+    </PreferenceCategory>
+
+    <PreferenceCategory android:key="debug_applications_category"
+            android:title="@string/debug_applications_category">
+
+        <CheckBoxPreference
+            android:key="immediately_destroy_activities"
+            android:title="@string/immediately_destroy_activities"
+            android:summary="@string/immediately_destroy_activities_summary"/>
+
+        <ListPreference
+            android:key="app_process_limit"
+            android:title="@string/app_process_limit_title"
+            android:persistent="false"
+            android:entries="@array/app_process_limit_entries"
+            android:entryValues="@array/app_process_limit_values" />
+
+    </PreferenceCategory>
+
 </PreferenceScreen>
