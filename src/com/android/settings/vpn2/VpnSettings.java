@@ -37,8 +37,10 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView.AdapterContextMenuInfo;
 
+import com.android.internal.net.VpnConfig;
 import com.android.settings.SettingsPreferenceFragment;
 
+import java.util.Arrays;
 import java.util.HashMap;
 
 public class VpnSettings extends SettingsPreferenceFragment implements
@@ -328,7 +330,7 @@ public class VpnSettings extends SettingsPreferenceFragment implements
                     "name", profile.username, "password", profile.password,
                     "linkname", "vpn", "refuse-eap", "nodefaultroute",
                     "usepeerdns", "idle", "1800", "mtu", "1400", "mru", "1400",
-                    (profile.mppe ? "+mppe" : "nomppe"),
+                    "ipparam", profile.routes, (profile.mppe ? "+mppe" : "nomppe"),
                 };
                 break;
             case VpnProfile.TYPE_L2TP_IPSEC_PSK:
@@ -338,12 +340,20 @@ public class VpnSettings extends SettingsPreferenceFragment implements
                     "name", profile.username, "password", profile.password,
                     "linkname", "vpn", "refuse-eap", "nodefaultroute",
                     "usepeerdns", "idle", "1800", "mtu", "1400", "mru", "1400",
+                    "ipparam", profile.routes,
                 };
                 break;
         }
 
+        VpnConfig config = new VpnConfig();
+        config.sessionName = profile.name;
+        config.routes = profile.routes;
+        if (!profile.searchDomains.isEmpty()) {
+            config.searchDomains = Arrays.asList(profile.searchDomains.split(" "));
+        }
+
         try {
-//            getService().doLegacyVpn(racoon, mtpd);
+            getService().doLegacyVpn(config, racoon, mtpd);
         } catch (Exception e) {
             Log.e(TAG, "connect", e);
         }
