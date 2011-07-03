@@ -301,7 +301,7 @@
 
         <activity android:name="Settings$VpnSettingsActivity"
                 android:theme="@android:style/Theme.Holo"
-                android:label="@string/vpn_settings_activity_title"
+                android:label="@string/vpn_settings_title"
                 android:clearTaskOnLaunch="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -311,7 +311,7 @@
                 <category android:name="com.android.settings.SHORTCUT" />
             </intent-filter>
             <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
-                android:value="com.android.settings.vpn.VpnSettings" />
+                android:value="com.android.settings.vpn2.VpnSettings" />
             <meta-data android:name="com.android.settings.TOP_LEVEL_HEADER_ID"
                 android:resource="@id/wireless_settings" />
             <meta-data android:name="com.android.settings.PARENT_FRAGMENT_TITLE"

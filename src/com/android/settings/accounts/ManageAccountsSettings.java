@@ -19,7 +19,6 @@ package com.android.settings.accounts;
 import com.android.settings.AccountPreference;
 import com.android.settings.DialogCreatable;
 import com.android.settings.R;
-import com.android.settings.vpn.VpnTypeSelection;
 import com.google.android.collect.Maps;
 
 import android.accounts.Account;
