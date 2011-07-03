@@ -218,10 +218,10 @@ class VpnDialog extends AlertDialog implements TextWatcher, OnItemSelectedListen
                 mView.findViewById(R.id.l2tp).setVisibility(View.VISIBLE);
                 // fall through
             case VpnProfile.TYPE_IPSEC_XAUTH_RSA:
-                mView.findViewById(R.id.ipsec_ca).setVisibility(View.VISIBLE);
+                mView.findViewById(R.id.ipsec_user).setVisibility(View.VISIBLE);
                 // fall through
             case VpnProfile.TYPE_IPSEC_HYBRID_RSA:
-                mView.findViewById(R.id.ipsec_user).setVisibility(View.VISIBLE);
+                mView.findViewById(R.id.ipsec_ca).setVisibility(View.VISIBLE);
                 break;
         }
     }
@@ -243,7 +243,6 @@ class VpnDialog extends AlertDialog implements TextWatcher, OnItemSelectedListen
 
             case VpnProfile.TYPE_L2TP_IPSEC_RSA:
             case VpnProfile.TYPE_IPSEC_XAUTH_RSA:
-            case VpnProfile.TYPE_IPSEC_HYBRID_RSA:
                 return mIpsecUserCert.getSelectedItemPosition() != 0;
         }
         return false;
@@ -308,13 +307,13 @@ class VpnDialog extends AlertDialog implements TextWatcher, OnItemSelectedListen
                 profile.l2tpSecret = getSecret(mProfile.l2tpSecret, mL2tpSecret);
                 // fall through
             case VpnProfile.TYPE_IPSEC_XAUTH_RSA:
-                if (mIpsecCaCert.getSelectedItemPosition() != 0) {
-                    profile.ipsecCaCert = (String) mIpsecCaCert.getSelectedItem();
+                if (mIpsecUserCert.getSelectedItemPosition() != 0) {
+                    profile.ipsecUserCert = (String) mIpsecUserCert.getSelectedItem();
                 }
                 // fall through
             case VpnProfile.TYPE_IPSEC_HYBRID_RSA:
-                if (mIpsecUserCert.getSelectedItemPosition() != 0) {
-                    profile.ipsecUserCert = (String) mIpsecUserCert.getSelectedItem();
+                if (mIpsecCaCert.getSelectedItemPosition() != 0) {
+                    profile.ipsecCaCert = (String) mIpsecCaCert.getSelectedItem();
                 }
                 break;
         }
