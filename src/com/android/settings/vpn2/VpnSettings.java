@@ -346,7 +346,7 @@ public class VpnSettings extends SettingsPreferenceFragment implements
         }
 
         VpnConfig config = new VpnConfig();
-        config.sessionName = profile.name;
+        config.session = profile.name;
         config.routes = profile.routes;
         if (!profile.searchDomains.isEmpty()) {
             config.searchDomains = Arrays.asList(profile.searchDomains.split(" "));
