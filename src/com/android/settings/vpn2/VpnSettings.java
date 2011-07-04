@@ -37,6 +37,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView.AdapterContextMenuInfo;
 
+import com.android.internal.net.LegacyVpnInfo;
 import com.android.internal.net.VpnConfig;
 import com.android.settings.SettingsPreferenceFragment;
 
@@ -49,13 +50,8 @@ public class VpnSettings extends SettingsPreferenceFragment implements
 
     private static final String TAG = "VpnSettings";
 
-    // Match these constants with R.array.vpn_states.
-    private static final int STATE_NONE = -1;
-    private static final int STATE_CONNECTING = 0;
-    private static final int STATE_CONNECTED = 1;
-    private static final int STATE_DISCONNECTED = 2;
-    private static final int STATE_FAILED = 3;
-
+    private final IConnectivityManager mService = IConnectivityManager.Stub
+            .asInterface(ServiceManager.getService(Context.CONNECTIVITY_SERVICE));
     private final KeyStore mKeyStore = KeyStore.getInstance();
     private boolean mUnlocking = false;
 
@@ -63,6 +59,7 @@ public class VpnSettings extends SettingsPreferenceFragment implements
     private VpnDialog mDialog;
 
     private Handler mUpdater;
+    private LegacyVpnInfo mInfo;
 
     // The key of the profile for the current ContextMenu.
     private String mSelectedKey;
@@ -263,8 +260,17 @@ public class VpnSettings extends SettingsPreferenceFragment implements
         }
 
         if (preference instanceof VpnPreference) {
-            mDialog = new VpnDialog(getActivity(), this,
-                    ((VpnPreference) preference).getProfile(), false);
+            VpnProfile profile = ((VpnPreference) preference).getProfile();
+            if (mInfo != null && profile.key.equals(mInfo.key) &&
+                    mInfo.state == LegacyVpnInfo.STATE_CONNECTED) {
+                try {
+                    mInfo.intent.send();
+                    return true;
+                } catch (Exception e) {
+                    // ignore
+                }
+            }
+            mDialog = new VpnDialog(getActivity(), this, profile, false);
         } else {
             // Generate a new key. Here we just use the current time.
             long millis = System.currentTimeMillis();
@@ -284,18 +290,28 @@ public class VpnSettings extends SettingsPreferenceFragment implements
         mUpdater.removeMessages(0);
 
         if (isResumed()) {
-
-
-
-
+            try {
+                LegacyVpnInfo info = mService.getLegacyVpnInfo();
+                if (mInfo != null) {
+                    VpnPreference preference = mPreferences.get(mInfo.key);
+                    if (preference != null) {
+                        preference.update(-1);
+                    }
+                    mInfo = null;
+                }
+                if (info != null) {
+                    VpnPreference preference = mPreferences.get(info.key);
+                    if (preference != null) {
+                        preference.update(info.state);
+                        mInfo = info;
+                    }
+                }
+            } catch (Exception e) {
+                // ignore
+            }
             mUpdater.sendEmptyMessageDelayed(0, 1000);
         }
         return true;
-    }
-
-    private static IConnectivityManager getService() {
-        return IConnectivityManager.Stub.asInterface(
-                ServiceManager.getService(Context.CONNECTIVITY_SERVICE));
     }
 
     private void connect(VpnProfile profile) {
@@ -346,6 +362,7 @@ public class VpnSettings extends SettingsPreferenceFragment implements
         }
 
         VpnConfig config = new VpnConfig();
+        config.packagz = profile.key;
         config.session = profile.name;
         config.routes = profile.routes;
         if (!profile.searchDomains.isEmpty()) {
@@ -353,23 +370,30 @@ public class VpnSettings extends SettingsPreferenceFragment implements
         }
 
         try {
-            getService().doLegacyVpn(config, racoon, mtpd);
+            mService.startLegacyVpn(config, racoon, mtpd);
         } catch (Exception e) {
             Log.e(TAG, "connect", e);
         }
     }
 
     private void disconnect(String key) {
+        if (mInfo != null && key.equals(mInfo.key)) {
+            try {
+                mService.prepareVpn(VpnConfig.LEGACY_VPN, VpnConfig.LEGACY_VPN);
+            } catch (Exception e) {
+                // ignore
+            }
+        }
     }
-
 
     private class VpnPreference extends Preference {
         private VpnProfile mProfile;
-        private int mState = STATE_NONE;
+        private int mState = -1;
 
         VpnPreference(Context context, VpnProfile profile) {
             super(context);
             setPersistent(false);
+            setOrder(0);
             setOnPreferenceClickListener(VpnSettings.this);
 
             mProfile = profile;
@@ -385,18 +409,23 @@ public class VpnSettings extends SettingsPreferenceFragment implements
             update();
         }
 
+        void update(int state) {
+            mState = state;
+            update();
+        }
+
         void update() {
-            if (mState != STATE_NONE) {
-                String[] states = getContext().getResources()
-                        .getStringArray(R.array.vpn_states);
-                setSummary(states[mState]);
-            } else {
+            if (mState < 0) {
                 String[] types = getContext().getResources()
                         .getStringArray(R.array.vpn_types_long);
                 setSummary(types[mProfile.type]);
+            } else {
+                String[] states = getContext().getResources()
+                        .getStringArray(R.array.vpn_states);
+                setSummary(states[mState]);
             }
             setTitle(mProfile.name);
-            notifyChanged();
+            notifyHierarchyChanged();
         }
 
         @Override
@@ -404,7 +433,6 @@ public class VpnSettings extends SettingsPreferenceFragment implements
             int result = -1;
             if (preference instanceof VpnPreference) {
                 VpnPreference another = (VpnPreference) preference;
-
                 if ((result = another.mState - mState) == 0 &&
                         (result = mProfile.name.compareTo(another.mProfile.name)) == 0 &&
                         (result = mProfile.type - another.mProfile.type) == 0) {
