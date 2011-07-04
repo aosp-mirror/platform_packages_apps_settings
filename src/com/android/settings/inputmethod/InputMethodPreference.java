@@ -69,20 +69,8 @@ public class InputMethodPreference extends CheckBoxPreference
         mImi = imi;
         updateSummary();
         mIsSystemIme = InputMethodAndSubtypeUtil.isSystemIme(imi);
-        final int subtypeCount = imi.getSubtypeCount();
-        boolean onlyAux = true;
-        if (subtypeCount == 0) {
-            onlyAux = false;
-        } else {
-            for (int i = 0; i < subtypeCount; ++i) {
-                final InputMethodSubtype subtype = imi.getSubtypeAt(i);
-                if (!subtype.isAuxiliary()) {
-                    onlyAux = false;
-                    break;
-                }
-            }
-        }
-        if (imiCount <= 1 || (mIsSystemIme && !onlyAux)) {
+        final boolean isAuxIme = InputMethodAndSubtypeUtil.isAuxiliaryIme(imi);
+        if (imiCount <= 1 || (mIsSystemIme && !isAuxIme)) {
             setEnabled(false);
         }
     }

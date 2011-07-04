@@ -169,9 +169,10 @@ public class InputMethodAndSubtypeUtil {
             final boolean isImeChecked = (pref instanceof CheckBoxPreference) ?
                     ((CheckBoxPreference) pref).isChecked()
                             : enabledIMEAndSubtypesMap.containsKey(imiId);
-            boolean isCurrentInputMethod = imiId.equals(currentInputMethodId);
-            boolean systemIme = isSystemIme(imi);
-            if (((onlyOneIME || systemIme) && !hasHardKeyboard) || isImeChecked) {
+            final boolean isCurrentInputMethod = imiId.equals(currentInputMethodId);
+            final boolean auxIme = isAuxiliaryIme(imi);
+            final boolean systemIme = isSystemIme(imi);
+            if (((onlyOneIME || (systemIme && !auxIme)) && !hasHardKeyboard) || isImeChecked) {
                 if (!enabledIMEAndSubtypesMap.containsKey(imiId)) {
                     // imiId has just been enabled
                     enabledIMEAndSubtypesMap.put(imiId, new HashSet<String>());
@@ -276,7 +277,7 @@ public class InputMethodAndSubtypeUtil {
             List<InputMethodInfo> inputMethodInfos,
             final Map<String, List<Preference>> inputMethodPrefsMap) {
         HashMap<String, HashSet<String>> enabledSubtypes =
-            getEnabledInputMethodsAndSubtypeList(resolver);
+                getEnabledInputMethodsAndSubtypeList(resolver);
 
         for (InputMethodInfo imi : inputMethodInfos) {
             final String imiId = imi.getId();
@@ -341,5 +342,20 @@ public class InputMethodAndSubtypeUtil {
     public static boolean isSystemIme(InputMethodInfo property) {
         return (property.getServiceInfo().applicationInfo.flags
                 & ApplicationInfo.FLAG_SYSTEM) != 0;
+    }
+
+    public static boolean isAuxiliaryIme(InputMethodInfo imi) {
+        final int subtypeCount = imi.getSubtypeCount();
+        if (subtypeCount == 0) {
+            return false;
+        } else {
+            for (int i = 0; i < subtypeCount; ++i) {
+                final InputMethodSubtype subtype = imi.getSubtypeAt(i);
+                if (!subtype.isAuxiliary()) {
+                    return false;
+                }
+            }
+        }
+        return true;
     }
 }
