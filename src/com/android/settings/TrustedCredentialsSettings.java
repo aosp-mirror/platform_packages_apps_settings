@@ -191,14 +191,18 @@ public class TrustedCredentialsSettings extends Fragment {
                 LayoutInflater inflater = LayoutInflater.from(getActivity());
                 view = inflater.inflate(R.layout.trusted_credential, parent, false);
                 holder = new ViewHolder();
-                holder.mSubjectView = (TextView)view.findViewById(R.id.trusted_credential_subject);
+                holder.mSubjectPrimaryView = (TextView)
+                        view.findViewById(R.id.trusted_credential_subject_primary);
+                holder.mSubjectSecondaryView = (TextView)
+                        view.findViewById(R.id.trusted_credential_subject_secondary);
                 holder.mCheckBox = (CheckBox) view.findViewById(R.id.trusted_credential_status);
                 view.setTag(holder);
             } else {
                 holder = (ViewHolder) view.getTag();
             }
             CertHolder certHolder = mCertHolders.get(position);
-            holder.mSubjectView.setText(certHolder.mSubject);
+            holder.mSubjectPrimaryView.setText(certHolder.mSubjectPrimary);
+            holder.mSubjectSecondaryView.setText(certHolder.mSubjectSecondary);
             if (mTab.mCheckbox) {
                 holder.mCheckBox.setChecked(!certHolder.mDeleted);
                 holder.mCheckBox.setVisibility(View.VISIBLE);
@@ -245,7 +249,8 @@ public class TrustedCredentialsSettings extends Fragment {
         private final X509Certificate mX509Cert;
 
         private final SslCertificate mSslCert;
-        private final String mSubject;
+        private final String mSubjectPrimary;
+        private final String mSubjectSecondary;
         private boolean mDeleted;
 
         private CertHolder(TrustedCertificateStore store,
@@ -264,32 +269,34 @@ public class TrustedCredentialsSettings extends Fragment {
             String cn = mSslCert.getIssuedTo().getCName();
             String o = mSslCert.getIssuedTo().getOName();
             String ou = mSslCert.getIssuedTo().getUName();
-            StringBuilder sb = new StringBuilder();
-            if (!cn.isEmpty()) {
-                sb.append("CN=" + cn);
-            }
+            // if we have a O, use O as primary subject, secondary prefer CN over OU
+            // if we don't have an O, use CN as primary, empty secondary
+            // if we don't have O or CN, use DName as primary, empty secondary
             if (!o.isEmpty()) {
-                if (sb.length() != 0) {
-                    sb.append(", ");
+                if (!cn.isEmpty()) {
+                    mSubjectPrimary = o;
+                    mSubjectSecondary = cn;
+                } else {
+                    mSubjectPrimary = o;
+                    mSubjectSecondary = ou;
                 }
-                sb.append("O=" + o);
-            }
-            if (!ou.isEmpty()) {
-                if (sb.length() != 0) {
-                    sb.append(", ");
-                }
-                sb.append("OU=" + ou);
-            }
-            if (sb.length() != 0) {
-                mSubject = sb.toString();
             } else {
-                mSubject = mSslCert.getIssuedTo().getDName();
+                if (!cn.isEmpty()) {
+                    mSubjectPrimary = cn;
+                    mSubjectSecondary = "";
+                } else {
+                    mSubjectPrimary = mSslCert.getIssuedTo().getDName();
+                    mSubjectSecondary = "";
+                }
             }
-
             mDeleted = mTab.deleted(mStore, mAlias);
         }
         @Override public int compareTo(CertHolder o) {
-            return this.mSubject.compareTo(o.mSubject);
+            int primary = this.mSubjectPrimary.compareToIgnoreCase(o.mSubjectPrimary);
+            if (primary != 0) {
+                return primary;
+            }
+            return this.mSubjectSecondary.compareToIgnoreCase(o.mSubjectSecondary);
         }
         @Override public boolean equals(Object o) {
             if (!(o instanceof CertHolder)) {
@@ -304,7 +311,8 @@ public class TrustedCredentialsSettings extends Fragment {
     }
 
     private static class ViewHolder {
-        private TextView mSubjectView;
+        private TextView mSubjectPrimaryView;
+        private TextView mSubjectSecondaryView;
         private CheckBox mCheckBox;
     }
 
